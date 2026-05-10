@@ -22,7 +22,6 @@ Usage:
 """
 
 import argparse
-import json
 import math
 import os
 import sys
@@ -31,52 +30,63 @@ import time
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
 
+import newton
 import numpy as np
 import warp as wp
-import newton
+from newton.ik import IKObjectiveJointLimit, IKObjectivePosition, IKObjectiveRotation, IKSolver
 from newton.solvers import SolverVBD
-from newton.ik import IKSolver, IKObjectivePosition, IKObjectiveRotation, IKObjectiveJointLimit
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_DIR)
 sys.path.insert(0, os.path.join(_SCRIPT_DIR, "..", "configs"))
 sys.path.insert(0, os.path.join(_SCRIPT_DIR, "..", "envs"))
 
-from test_newton_clip_routing import (
-    build_fk_model,
-    add_kinematic_arm,
-    add_cable_rod,
-    update_kinematic_bodies,
-    FRANKA_NUM_JOINTS,
-    EE_BODY_OFFSET,
-    GRAVITY,
-)
-
-from task_config import (
-    TABLE_HEIGHT, APPROACH_Z, GRASP_Z,
-    GRASP_X, WIDE_LEFT_Y, WIDE_RIGHT_Y, CLIP1_Y, GRIP_HALF_SPAN,
-    CABLE_SEGMENTS, CABLE_SEG_LEN, CABLE_RADIUS,
-    CLIP_BASE_HEIGHT,
-    FINGER_OPEN_POS, FINGER_HALF_OPEN_POS,
-    SETTLE_STEPS,
-    NJMAX, SIM_SUBSTEPS,
-    CLIP1_X, CLIP1_Z,
-    EE_TO_FINGERTIP,
-    T_DIST, T_DIST_APPROACH, T_ALIGN, K_GRASP,
-)
 from cable_orientation_utils import compute_cable_tangent, compute_hand_quat_for_cable
+from task_config import (
+    APPROACH_Z,
+    CABLE_RADIUS,
+    CABLE_SEG_LEN,
+    CABLE_SEGMENTS,
+    CLIP1_X,
+    CLIP1_Y,
+    CLIP1_Z,
+    CLIP_BASE_HEIGHT,
+    EE_TO_FINGERTIP,
+    FINGER_OPEN_POS,
+    GRASP_X,
+    GRASP_Z,
+    GRIP_HALF_SPAN,
+    K_GRASP,
+    NJMAX,
+    SIM_SUBSTEPS,
+    T_ALIGN,
+    T_DIST,
+    T_DIST_APPROACH,
+    TABLE_HEIGHT,
+    WIDE_LEFT_Y,
+    WIDE_RIGHT_Y,
+)
+from test_newton_clip_routing import (
+    EE_BODY_OFFSET,
+    FRANKA_NUM_JOINTS,
+    GRAVITY,
+    add_cable_rod,
+    add_kinematic_arm,
+    build_fk_model,
+    update_kinematic_bodies,
+)
 
 # v5 obs utilities (from env)
 sys.path.insert(0, os.path.join(_SCRIPT_DIR, "..", "envs"))
 from newton_approach_cable_env import (
-    _normalize_quat_w_positive,
-    _temporal_quat_consistency,
-    _compute_clamp_pos,
-    _quat_rotate_vec,
     _axis_angle_to_quat_xyzw,
-    _quat_multiply_xyzw,
+    _compute_clamp_pos,
     _compute_ori_error_axis_angle,
+    _normalize_quat_w_positive,
     _quat_distance,
+    _quat_multiply_xyzw,
+    _quat_rotate_vec,
+    _temporal_quat_consistency,
 )
 
 
@@ -97,6 +107,7 @@ def _quat_to_axis_angle(quat_xyzw):
     angle = 2.0 * math.atan2(sin_half, float(q[3]))
     return (axis * angle).astype(np.float32)
 
+
 # Physics constants (match env)
 DT = 1.0 / 480.0
 VBD_ITERATIONS = 20
@@ -105,14 +116,14 @@ IK_STEP_SIZE = 1.0
 ROBOT_BODY_COUNT = 2 * FRANKA_NUM_JOINTS  # 18
 
 # v5 action scaling (match NewtonApproachCableEnv exactly)
-POS_ACTION_SCALE = 0.015   # 15mm — must match env POS_ACTION_SCALE
+POS_ACTION_SCALE = 0.015  # 15mm — must match env POS_ACTION_SCALE
 ROT_ACTION_SCALE = 0.05
-FINE_THRESHOLD = 0.050     # 50mm: adaptive scale kicks in below this
-MIN_POS_SCALE = 0.0005     # 0.5mm: minimum adaptive scale
+FINE_THRESHOLD = 0.050  # 50mm: adaptive scale kicks in below this
+MIN_POS_SCALE = 0.0005  # 0.5mm: minimum adaptive scale
 
 # Env-matched constants (SSOT: NewtonApproachCableEnv class attributes)
 PHYSICS_STEPS_PER_RL = 10  # env :332
-GRIP_SEG_WINDOW = 5        # env :336 — ±5 segment tolerance
+GRIP_SEG_WINDOW = 5  # env :336 — ±5 segment tolerance
 
 # Clip C1 pose (constant for ApproachCable obs)
 CLIP1_POS = np.array([CLIP1_X, CLIP1_Y, CLIP1_Z], dtype=np.float32)
@@ -129,8 +140,8 @@ _cos_pi8 = math.cos(math.pi / 8)
 _sin_pi8 = math.sin(math.pi / 8)
 
 # Grasp trajectory parameters
-STEPS_PER_CM = 20       # differs from task_config (demo-specific: RL action rate)
-MAX_MOVE_STEPS = 1600   # differs from task_config (demo-specific: safety limit)
+STEPS_PER_CM = 20  # differs from task_config (demo-specific: RL action rate)
+MAX_MOVE_STEPS = 1600  # differs from task_config (demo-specific: safety limit)
 FINGER_INTERP_STEPS = 240
 
 # P1.5 precision refine: iterative proportional IK after descend. Bridges the
@@ -139,13 +150,12 @@ FINGER_INTERP_STEPS = 240
 # fine-alignment skill the Clamp env expects. Each rl_step = one 12D action at
 # the DAPG record boundary; target is regenerated every step from the current
 # clamp-to-cable error (proportional control, clipped to PRECISION_SCALE).
-PRECISION_MAX_STEPS = 20   # RL steps budget (each = PHYSICS_STEPS_PER_RL)
-PRECISION_GAIN = 0.6       # Proportional gain on clamp-to-nearest-cable error
-PRECISION_SCALE = 0.003    # Per-step EE sub-target delta clamp [m] (3mm)
+PRECISION_MAX_STEPS = 20  # RL steps budget (each = PHYSICS_STEPS_PER_RL)
+PRECISION_GAIN = 0.6  # Proportional gain on clamp-to-nearest-cable error
+PRECISION_SCALE = 0.003  # Per-step EE sub-target delta clamp [m] (3mm)
 
 
-def solve_ik(fk_model, fk_state, target_left, target_right, device,
-             rot_left=None, rot_right=None, rot_weight=0.5):
+def solve_ik(fk_model, fk_state, target_left, target_right, device, rot_left=None, rot_right=None, rot_weight=0.5):
     """Solve IK for both arms with cable-adaptive rotation.
 
     Args:
@@ -167,16 +177,33 @@ def solve_ik(fk_model, fk_state, target_left, target_right, device,
         rot_right = default_rot
 
     objectives = [
-        IKObjectivePosition(link_index=left_ee, link_offset=wp.vec3(0, 0, 0),
-                            target_positions=wp.array([target_left], dtype=wp.vec3, device=device), weight=1.0),
-        IKObjectivePosition(link_index=right_ee, link_offset=wp.vec3(0, 0, 0),
-                            target_positions=wp.array([target_right], dtype=wp.vec3, device=device), weight=1.0),
-        IKObjectiveRotation(link_index=left_ee, link_offset_rotation=wp.quat_identity(),
-                            target_rotations=wp.array([rot_left], dtype=wp.vec4, device=device), weight=rot_weight),
-        IKObjectiveRotation(link_index=right_ee, link_offset_rotation=wp.quat_identity(),
-                            target_rotations=wp.array([rot_right], dtype=wp.vec4, device=device), weight=rot_weight),
-        IKObjectiveJointLimit(joint_limit_lower=fk_model.joint_limit_lower,
-                              joint_limit_upper=fk_model.joint_limit_upper, weight=10.0),
+        IKObjectivePosition(
+            link_index=left_ee,
+            link_offset=wp.vec3(0, 0, 0),
+            target_positions=wp.array([target_left], dtype=wp.vec3, device=device),
+            weight=1.0,
+        ),
+        IKObjectivePosition(
+            link_index=right_ee,
+            link_offset=wp.vec3(0, 0, 0),
+            target_positions=wp.array([target_right], dtype=wp.vec3, device=device),
+            weight=1.0,
+        ),
+        IKObjectiveRotation(
+            link_index=left_ee,
+            link_offset_rotation=wp.quat_identity(),
+            target_rotations=wp.array([rot_left], dtype=wp.vec4, device=device),
+            weight=rot_weight,
+        ),
+        IKObjectiveRotation(
+            link_index=right_ee,
+            link_offset_rotation=wp.quat_identity(),
+            target_rotations=wp.array([rot_right], dtype=wp.vec4, device=device),
+            weight=rot_weight,
+        ),
+        IKObjectiveJointLimit(
+            joint_limit_lower=fk_model.joint_limit_lower, joint_limit_upper=fk_model.joint_limit_upper, weight=10.0
+        ),
     ]
     ik_solver = IKSolver(fk_model, n_problems=1, objectives=objectives)
     fk_jq = fk_state.joint_q.numpy()
@@ -186,10 +213,18 @@ def solve_ik(fk_model, fk_state, target_left, target_right, device,
     return jq_out.numpy()[0]
 
 
-def compute_obs(state, fk_jq, cable_bodies, target_seg_indices_r,
-                target_seg_indices_l=None, *,
-                prev_clamp_r_quat, prev_clamp_l_quat,
-                prev_seg_r_quat, prev_seg_l_quat):
+def compute_obs(
+    state,
+    fk_jq,
+    cable_bodies,
+    target_seg_indices_r,
+    target_seg_indices_l=None,
+    *,
+    prev_clamp_r_quat,
+    prev_clamp_l_quat,
+    prev_seg_r_quat,
+    prev_seg_l_quat,
+):
     """Compute 42D observation matching NewtonApproachCableEnv v5 format (biarm).
 
     Mirrors env._compute_obs_batch (newton_approach_cable_env.py L1339-1368):
@@ -252,21 +287,15 @@ def compute_obs(state, fk_jq, cable_bodies, target_seg_indices_r,
     # Right arm: nearest cable point + target quat with temporal consistency.
     # MUST apply temporal BEFORE seg_quat alias (env L1358-1360 stores the
     # consistency-adjusted value and then aliases as seg_quat).
-    seg_pos, seg_tangent, _ = _find_nearest_cable_point_demo(
-        cable_pos, clamp_r_pos, target_seg_indices_r)
-    grasp_target_quat = _normalize_quat_w_positive(
-        compute_hand_quat_for_cable(seg_tangent))
-    grasp_target_quat = _temporal_quat_consistency(
-        grasp_target_quat, prev_seg_r_quat)
+    seg_pos, seg_tangent, _ = _find_nearest_cable_point_demo(cable_pos, clamp_r_pos, target_seg_indices_r)
+    grasp_target_quat = _normalize_quat_w_positive(compute_hand_quat_for_cable(seg_tangent))
+    grasp_target_quat = _temporal_quat_consistency(grasp_target_quat, prev_seg_r_quat)
     seg_quat = grasp_target_quat  # obs[19:23] - post-temporal value
 
     # Left arm: independent nearest cable point + target quat
-    seg_pos_l, seg_tangent_l, _ = _find_nearest_cable_point_demo(
-        cable_pos, clamp_l_pos, target_seg_indices_l)
-    grasp_target_quat_l = _normalize_quat_w_positive(
-        compute_hand_quat_for_cable(seg_tangent_l))
-    grasp_target_quat_l = _temporal_quat_consistency(
-        grasp_target_quat_l, prev_seg_l_quat)
+    seg_pos_l, seg_tangent_l, _ = _find_nearest_cable_point_demo(cable_pos, clamp_l_pos, target_seg_indices_l)
+    grasp_target_quat_l = _normalize_quat_w_positive(compute_hand_quat_for_cable(seg_tangent_l))
+    grasp_target_quat_l = _temporal_quat_consistency(grasp_target_quat_l, prev_seg_l_quat)
 
     # Right arm error signals - computed AFTER all 4 quats are post-temporal
     # so obs[3:7]/[11:15]/[19:23] quat channels stay sign-continuous across
@@ -279,30 +308,29 @@ def compute_obs(state, fk_jq, cable_bodies, target_seg_indices_r,
     ori_error_aa_l = _compute_ori_error_axis_angle(clamp_l_quat, grasp_target_quat_l)
     pos_error_l = clamp_l_pos - seg_pos_l  # [3]
 
-    obs = np.array([
-        *clamp_r_pos,                      # [0:3]
-        *clamp_r_quat,                     # [3:7]  post-temporal
-        r_finger_opening,                  # [7]
-        *clamp_l_pos,                      # [8:11]
-        *clamp_l_quat,                     # [11:15] post-temporal
-        l_finger_opening,                  # [15]
-        *seg_pos,                          # [16:19]
-        *seg_quat,                         # [19:23] post-temporal
-        *CLIP1_POS,                        # [23:26]
-        *CLIP1_QUAT_XYZW,                  # [26:30]
-        *ori_error_aa,                     # [30:33] uses post-temporal quats
-        *pos_error,                        # [33:36]
-        *ori_error_aa_l,                   # [36:39] uses post-temporal quats
-        *pos_error_l,                      # [39:42]
-    ], dtype=np.float32)
+    obs = np.array(
+        [
+            *clamp_r_pos,  # [0:3]
+            *clamp_r_quat,  # [3:7]  post-temporal
+            r_finger_opening,  # [7]
+            *clamp_l_pos,  # [8:11]
+            *clamp_l_quat,  # [11:15] post-temporal
+            l_finger_opening,  # [15]
+            *seg_pos,  # [16:19]
+            *seg_quat,  # [19:23] post-temporal
+            *CLIP1_POS,  # [23:26]
+            *CLIP1_QUAT_XYZW,  # [26:30]
+            *ori_error_aa,  # [30:33] uses post-temporal quats
+            *pos_error,  # [33:36]
+            *ori_error_aa_l,  # [36:39] uses post-temporal quats
+            *pos_error_l,  # [39:42]
+        ],
+        dtype=np.float32,
+    )
 
     # .copy() mirrors env L1341/1344/1359/1368 to prevent caller-held prev
     # state from aliasing compute_obs's locals.
-    return (obs,
-            clamp_r_quat.copy(),
-            clamp_l_quat.copy(),
-            grasp_target_quat.copy(),
-            grasp_target_quat_l.copy())
+    return (obs, clamp_r_quat.copy(), clamp_l_quat.copy(), grasp_target_quat.copy(), grasp_target_quat_l.copy())
 
 
 def _find_nearest_cable_point_demo(cable_pos, hand_pos, search_indices):
@@ -313,7 +341,7 @@ def _find_nearest_cable_point_demo(cable_pos, hand_pos, search_indices):
     point, tangent, and distance.
     """
     n_cable = len(cable_pos)
-    best_dist_sq = float('inf')
+    best_dist_sq = float("inf")
     best_pos = cable_pos[search_indices[0]]
     best_tangent = np.array([0.0, 1.0, 0.0], dtype=np.float32)
 
@@ -351,8 +379,9 @@ def _adaptive_pos_scale(clamp_pos, cable_pos, search_indices):
     return max(MIN_POS_SCALE, POS_ACTION_SCALE * min(1.0, dist / FINE_THRESHOLD))
 
 
-def compute_action(ee_delta_r, rot_delta_r, ee_delta_l, rot_delta_l,
-                   r_pos_scale=POS_ACTION_SCALE, l_pos_scale=POS_ACTION_SCALE):
+def compute_action(
+    ee_delta_r, rot_delta_r, ee_delta_l, rot_delta_l, r_pos_scale=POS_ACTION_SCALE, l_pos_scale=POS_ACTION_SCALE
+):
     """Compute 12D action matching NewtonApproachCableEnv v5 format (normalized).
 
     Args:
@@ -363,20 +392,23 @@ def compute_action(ee_delta_r, rot_delta_r, ee_delta_l, rot_delta_l,
         r_pos_scale: Position action scale for right arm [m].
         l_pos_scale: Position action scale for left arm [m].
     """
-    return np.array([
-        ee_delta_r[0] / r_pos_scale,
-        ee_delta_r[1] / r_pos_scale,
-        ee_delta_r[2] / r_pos_scale,
-        rot_delta_r[0] / ROT_ACTION_SCALE,
-        rot_delta_r[1] / ROT_ACTION_SCALE,
-        rot_delta_r[2] / ROT_ACTION_SCALE,
-        ee_delta_l[0] / l_pos_scale,
-        ee_delta_l[1] / l_pos_scale,
-        ee_delta_l[2] / l_pos_scale,
-        rot_delta_l[0] / ROT_ACTION_SCALE,
-        rot_delta_l[1] / ROT_ACTION_SCALE,
-        rot_delta_l[2] / ROT_ACTION_SCALE,
-    ], dtype=np.float32)
+    return np.array(
+        [
+            ee_delta_r[0] / r_pos_scale,
+            ee_delta_r[1] / r_pos_scale,
+            ee_delta_r[2] / r_pos_scale,
+            rot_delta_r[0] / ROT_ACTION_SCALE,
+            rot_delta_r[1] / ROT_ACTION_SCALE,
+            rot_delta_r[2] / ROT_ACTION_SCALE,
+            ee_delta_l[0] / l_pos_scale,
+            ee_delta_l[1] / l_pos_scale,
+            ee_delta_l[2] / l_pos_scale,
+            rot_delta_l[0] / ROT_ACTION_SCALE,
+            rot_delta_l[1] / ROT_ACTION_SCALE,
+            rot_delta_l[2] / ROT_ACTION_SCALE,
+        ],
+        dtype=np.float32,
+    )
 
 
 def query_cable_y(state, cable_bodies, target_x):
@@ -395,10 +427,8 @@ def build_physics_scene(fk_model, fk_state, device):
     """Build VBD scene: cable + kinematic arms + table (no clips needed for grasp)."""
     proto = newton.ModelBuilder()
 
-    left_info = add_kinematic_arm(proto, fk_model, fk_state,
-                                  arm_body_offset=0, label_prefix="left")
-    right_info = add_kinematic_arm(proto, fk_model, fk_state,
-                                   arm_body_offset=FRANKA_NUM_JOINTS, label_prefix="right")
+    left_info = add_kinematic_arm(proto, fk_model, fk_state, arm_body_offset=0, label_prefix="left")
+    right_info = add_kinematic_arm(proto, fk_model, fk_state, arm_body_offset=FRANKA_NUM_JOINTS, label_prefix="right")
     left_body_start, left_shape_start, left_shape_end, left_fv = left_info
     right_body_start, right_shape_start, right_shape_end, right_fv = right_info
     all_finger_visual = set(left_fv + right_fv)
@@ -410,9 +440,7 @@ def build_physics_scene(fk_model, fk_state, device):
     ]:
         for si in range(arm_ss, arm_se):
             local = proto.shape_body[si] - arm_bs
-            if local < 7:
-                proto.shape_flags[si] = 1
-            elif si in all_finger_visual:
+            if local < 7 or si in all_finger_visual:
                 proto.shape_flags[si] = 1
             elif local in (7, 8):
                 proto.shape_flags[si] = 0x6
@@ -447,8 +475,7 @@ def build_physics_scene(fk_model, fk_state, device):
     table_cfg.mu = 1.0
     table_cfg.gap = 0.002
     table_xform = wp.transform((0.35, 0.0, TABLE_HEIGHT - 0.005), wp.quat_identity())
-    scene.add_shape_box(body=-1, hx=0.50, hy=0.40, hz=0.005,
-                        xform=table_xform, cfg=table_cfg)
+    scene.add_shape_box(body=-1, hx=0.50, hy=0.40, hz=0.005, xform=table_xform, cfg=table_cfg)
 
     scene.replicate(proto, world_count=1)
     scene.color()
@@ -513,8 +540,7 @@ def reset_state(model, state, solver, init_body_q, init_body_qd, device):
     return state
 
 
-def _balanced_return(obs_list, act_list, success, final_dist_mm,
-                     precision_ok=False):
+def _balanced_return(obs_list, act_list, success, final_dist_mm, precision_ok=False):
     """Drop trailing orphan obs so len(obs)==len(act) at abort.
     At record boundary we append obs before act (act requires ee_r_before),
     so a NaN mid-window can leave obs ahead by 1.
@@ -535,13 +561,25 @@ def _balanced_return(obs_list, act_list, success, final_dist_mm,
     return obs_list, act_list, success, final_dist_mm, precision_ok
 
 
-def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
-                             cable_bodies, grip_y_right, device,
-                             record_every=PHYSICS_STEPS_PER_RL,
-                             grip_y_left=None, target_seg_indices_r=None,
-                             target_seg_indices_l=None,
-                             right_seg_index=None, left_seg_index=None,
-                             start_from_p0=False, demo_substeps=4):
+def execute_approach_episode(  # noqa: C901 -- pre-existing complexity; refactor deferred to a separate task
+    model,
+    state,
+    solver,
+    contacts,
+    fk_model,
+    fk_state,
+    cable_bodies,
+    grip_y_right,
+    device,
+    record_every=PHYSICS_STEPS_PER_RL,
+    grip_y_left=None,
+    target_seg_indices_r=None,
+    target_seg_indices_l=None,
+    right_seg_index=None,
+    left_seg_index=None,
+    start_from_p0=False,
+    demo_substeps=4,
+):
     """Execute one approach episode, recording obs/action pairs.
 
     Approach trajectory: approach → descend → hold (fingers OPEN).
@@ -572,7 +610,7 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
     act_list = []
     sustain_counter = 0
     ever_succeeded = False
-    final_dist_mm = float('inf')
+    final_dist_mm = float("inf")
     ran_precision = False
     precision_succeeded = False
 
@@ -605,19 +643,16 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
     # approach → descend → hold (fingers OPEN throughout)
     phases = [
         # P0: approach — both arms at approach height
-        ([GRASP_X, grip_y_right, APPROACH_Z], [GRASP_X, grip_y_left, APPROACH_Z],
-         finger_open, "approach"),
+        ([GRASP_X, grip_y_right, APPROACH_Z], [GRASP_X, grip_y_left, APPROACH_Z], finger_open, "approach"),
         # P1: descend — both arms to grasp height
-        ([GRASP_X, grip_y_right, GRASP_Z], [GRASP_X, grip_y_left, GRASP_Z],
-         finger_open, "descend"),
+        ([GRASP_X, grip_y_right, GRASP_Z], [GRASP_X, grip_y_left, GRASP_Z], finger_open, "descend"),
         # P1.5: precision refine — iterative proportional IK toward cable
         # surface (dynamic target, recomputed per RL step). Bridges
         # T_DIST_APPROACH=12mm → T_DIST=2mm so BC demos include the
         # fine-alignment skill that downstream Clamp env expects.
         (None, None, finger_open, "precision"),
         # P2: hold — maintain position with fingers OPEN (AC env contract)
-        ([GRASP_X, grip_y_right, GRASP_Z], [GRASP_X, grip_y_left, GRASP_Z],
-         finger_open, "hold"),
+        ([GRASP_X, grip_y_right, GRASP_Z], [GRASP_X, grip_y_left, GRASP_Z], finger_open, "hold"),
     ]
 
     if start_from_p0:
@@ -660,8 +695,9 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
             delta_l_quat = _quat_multiply_xyzw(ee_l_now[3:7], q_l_inv)
             delta_l_rot = _quat_to_axis_angle(delta_l_quat)
 
-            return compute_action(delta_r_pos, delta_r_rot, delta_l_pos, delta_l_rot,
-                                  r_pos_scale=r_scale, l_pos_scale=l_scale)
+            return compute_action(
+                delta_r_pos, delta_r_rot, delta_l_pos, delta_l_rot, r_pos_scale=r_scale, l_pos_scale=l_scale
+            )
 
         if desc == "precision":
             # === P1.5: precision refine via iterative proportional IK ===
@@ -691,8 +727,7 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
             for rl_step in range(PRECISION_MAX_STEPS):
                 # (1) Action for PREVIOUS window (uses OLD ee_r_before / scales)
                 if ee_r_before is not None:
-                    act_list.append(_compute_cumulative_action(
-                        state, r_scale_before, l_scale_before))
+                    act_list.append(_compute_cumulative_action(state, r_scale_before, l_scale_before))
 
                 # (2) Read state + tsi hysteresis update (BEFORE compute_obs)
                 wp.synchronize()
@@ -701,33 +736,38 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
 
                 clamp_r_pos = _compute_clamp_pos(
                     bq_before[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][:3],
-                    bq_before[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][3:7])
-                new_center_r = int(np.argmin(
-                    np.linalg.norm(cable_pos_now - clamp_r_pos, axis=1)))
+                    bq_before[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][3:7],
+                )
+                new_center_r = int(np.argmin(np.linalg.norm(cable_pos_now - clamp_r_pos, axis=1)))
                 prev_center_r = (
                     target_seg_indices_r[GRIP_SEG_WINDOW]
                     if len(target_seg_indices_r) > GRIP_SEG_WINDOW
-                    else target_seg_indices_r[0])
+                    else target_seg_indices_r[0]
+                )
                 if abs(new_center_r - prev_center_r) > 1:
-                    target_seg_indices_r = list(np.clip(
-                        np.arange(new_center_r - GRIP_SEG_WINDOW,
-                                  new_center_r + GRIP_SEG_WINDOW + 1),
-                        0, len(cable_pos_now) - 1).astype(int))
+                    target_seg_indices_r = list(
+                        np.clip(
+                            np.arange(new_center_r - GRIP_SEG_WINDOW, new_center_r + GRIP_SEG_WINDOW + 1),
+                            0,
+                            len(cable_pos_now) - 1,
+                        ).astype(int)
+                    )
 
-                clamp_l_pos = _compute_clamp_pos(
-                    bq_before[EE_BODY_OFFSET][:3],
-                    bq_before[EE_BODY_OFFSET][3:7])
-                new_center_l = int(np.argmin(
-                    np.linalg.norm(cable_pos_now - clamp_l_pos, axis=1)))
+                clamp_l_pos = _compute_clamp_pos(bq_before[EE_BODY_OFFSET][:3], bq_before[EE_BODY_OFFSET][3:7])
+                new_center_l = int(np.argmin(np.linalg.norm(cable_pos_now - clamp_l_pos, axis=1)))
                 prev_center_l = (
                     target_seg_indices_l[GRIP_SEG_WINDOW]
                     if len(target_seg_indices_l) > GRIP_SEG_WINDOW
-                    else target_seg_indices_l[0])
+                    else target_seg_indices_l[0]
+                )
                 if abs(new_center_l - prev_center_l) > 1:
-                    target_seg_indices_l = list(np.clip(
-                        np.arange(new_center_l - GRIP_SEG_WINDOW,
-                                  new_center_l + GRIP_SEG_WINDOW + 1),
-                        0, len(cable_pos_now) - 1).astype(int))
+                    target_seg_indices_l = list(
+                        np.clip(
+                            np.arange(new_center_l - GRIP_SEG_WINDOW, new_center_l + GRIP_SEG_WINDOW + 1),
+                            0,
+                            len(cable_pos_now) - 1,
+                        ).astype(int)
+                    )
 
                 # (3) Compute obs + append. P7: guard against NaN leaking
                 # into BC training data — upstream NaN checks cover cable
@@ -735,20 +775,23 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                 # state and error metrics where a silent NaN would later
                 # cause BC loss to diverge with no obvious source.
                 fk_jq_now = fk_state.joint_q.numpy()
-                obs, prev_clamp_r_quat, prev_clamp_l_quat, \
-                    prev_seg_r_quat, prev_seg_l_quat = compute_obs(
-                        state, fk_jq_now, cable_bodies,
-                        target_seg_indices_r, target_seg_indices_l,
-                        prev_clamp_r_quat=prev_clamp_r_quat,
-                        prev_clamp_l_quat=prev_clamp_l_quat,
-                        prev_seg_r_quat=prev_seg_r_quat,
-                        prev_seg_l_quat=prev_seg_l_quat)
+                obs, prev_clamp_r_quat, prev_clamp_l_quat, prev_seg_r_quat, prev_seg_l_quat = compute_obs(
+                    state,
+                    fk_jq_now,
+                    cable_bodies,
+                    target_seg_indices_r,
+                    target_seg_indices_l,
+                    prev_clamp_r_quat=prev_clamp_r_quat,
+                    prev_clamp_l_quat=prev_clamp_l_quat,
+                    prev_seg_r_quat=prev_seg_r_quat,
+                    prev_seg_l_quat=prev_seg_l_quat,
+                )
                 # Source-level NaN guard — all 5 arrays checked, not redundant:
                 # obs channels [3:7]/[11:15]/[19:23] mirror prev_clamp_r/l and
                 # prev_seg_r directly, but prev_seg_l only reaches obs[36:39]
-                # via _compute_ori_error_axis_angle, which may sanitize NaN to
-                # 0 in degenerate branches. Source-level checks prevent a
-                # NaN-poisoned prev from surviving into the next rl_step.
+                # via _compute_ori_error_axis_angle, which propagates NaN
+                # (not sanitized). Source-level checks prevent a NaN-poisoned
+                # prev from surviving into the next rl_step.
                 # Sequential checks log which array tripped for diagnostics.
                 nan_source = None
                 if np.any(~np.isfinite(obs)):
@@ -762,34 +805,31 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                 elif np.any(~np.isfinite(prev_seg_l_quat)):
                     nan_source = "prev_seg_l_quat"
                 if nan_source is not None:
-                    print(f"  [precision] compute_obs NaN in {nan_source} "
-                          f"at rl_step {rl_step} — aborting")
-                    return _balanced_return(obs_list, act_list, False,
-                                            float('inf'),
-                                            precision_ok=precision_succeeded or not ran_precision)
+                    print(f"  [precision] compute_obs NaN in {nan_source} at rl_step {rl_step} — aborting")
+                    return _balanced_return(
+                        obs_list, act_list, False, float("inf"), precision_ok=precision_succeeded or not ran_precision
+                    )
                 obs_list.append(obs)
 
                 # (4) Capture EE state + adaptive scale for NEXT window
                 ee_r_before = bq_before[FRANKA_NUM_JOINTS + EE_BODY_OFFSET].copy()
                 ee_l_before = bq_before[EE_BODY_OFFSET].copy()
-                r_scale_before = _adaptive_pos_scale(
-                    clamp_r_pos, cable_pos_now, target_seg_indices_r)
-                l_scale_before = _adaptive_pos_scale(
-                    clamp_l_pos, cable_pos_now, target_seg_indices_l)
+                r_scale_before = _adaptive_pos_scale(clamp_r_pos, cable_pos_now, target_seg_indices_r)
+                l_scale_before = _adaptive_pos_scale(clamp_l_pos, cable_pos_now, target_seg_indices_l)
 
                 # (5) Sustain check at T_DIST (2mm — Clamp env threshold)
                 seg_pos_r, tan_r, dist_pos_r = _find_nearest_cable_point_demo(
-                    cable_pos_now, clamp_r_pos, target_seg_indices_r)
+                    cable_pos_now, clamp_r_pos, target_seg_indices_r
+                )
                 seg_pos_l, tan_l, dist_pos_l = _find_nearest_cable_point_demo(
-                    cable_pos_now, clamp_l_pos, target_seg_indices_l)
+                    cable_pos_now, clamp_l_pos, target_seg_indices_l
+                )
                 # P9/P10: canonicalize target quats with w>=0 so iter-to-iter
                 # sign flips from compute_hand_quat_for_cable cannot masquerade
                 # as a rotation jump (q and -q represent the same rotation but
                 # dot(q,q')<0 can flip dist_ori classification / IK residual).
-                target_quat_r = _normalize_quat_w_positive(
-                    compute_hand_quat_for_cable(tan_r))
-                target_quat_l = _normalize_quat_w_positive(
-                    compute_hand_quat_for_cable(tan_l))
+                target_quat_r = _normalize_quat_w_positive(compute_hand_quat_for_cable(tan_r))
+                target_quat_l = _normalize_quat_w_positive(compute_hand_quat_for_cable(tan_l))
                 ee_quat_r = bq_before[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][3:7]
                 ee_quat_l = bq_before[EE_BODY_OFFSET][3:7]
                 dist_ori_r = _quat_distance(ee_quat_r, target_quat_r)
@@ -805,8 +845,7 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                 # AC env contract (env :1554-1562) uses T_DIST_APPROACH=12mm;
                 # track that separately so the outer sustain/success flags
                 # reflect the AC definition (precision is a bonus refinement).
-                if (max(dist_pos_r, dist_pos_l) < T_DIST_APPROACH
-                        and max(dist_ori_r, dist_ori_l) < T_ALIGN):
+                if max(dist_pos_r, dist_pos_l) < T_DIST_APPROACH and max(dist_ori_r, dist_ori_l) < T_ALIGN:
                     sustain_counter += 1
                 else:
                     sustain_counter = 0
@@ -826,8 +865,7 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                     # (matches the for/else path which captures real
                     # physics delta across a full substep window).
                     act_list.append(np.zeros(12, dtype=np.float32))
-                    print(f"  [precision] Sustained T_DIST at rl_step "
-                          f"{rl_step}, dist={final_dist_mm:.2f}mm")
+                    print(f"  [precision] Sustained T_DIST at rl_step {rl_step}, dist={final_dist_mm:.2f}mm")
                     break
 
                 # (6) Proportional sub-target at the clamp (fingertip), then
@@ -861,30 +899,38 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                 # oscillation in ori error.
                 rot_r_xyzw = target_quat_r
                 rot_l_xyzw = target_quat_l
-                fingertip_offset = np.array(
-                    [0.0, 0.0, EE_TO_FINGERTIP], dtype=np.float32)
+                fingertip_offset = np.array([0.0, 0.0, EE_TO_FINGERTIP], dtype=np.float32)
                 ee_offset_r = _quat_rotate_vec(rot_r_xyzw, fingertip_offset)
                 ee_offset_l = _quat_rotate_vec(rot_l_xyzw, fingertip_offset)
                 target_r_sub = tuple((target_clamp_r - ee_offset_r).tolist())
                 target_l_sub = tuple((target_clamp_l - ee_offset_l).tolist())
 
-                rot_r_sub = wp.vec4(float(rot_r_xyzw[0]), float(rot_r_xyzw[1]),
-                                    float(rot_r_xyzw[2]), float(rot_r_xyzw[3]))
-                rot_l_sub = wp.vec4(float(rot_l_xyzw[0]), float(rot_l_xyzw[1]),
-                                    float(rot_l_xyzw[2]), float(rot_l_xyzw[3]))
+                rot_r_sub = wp.vec4(
+                    float(rot_r_xyzw[0]), float(rot_r_xyzw[1]), float(rot_r_xyzw[2]), float(rot_r_xyzw[3])
+                )
+                rot_l_sub = wp.vec4(
+                    float(rot_l_xyzw[0]), float(rot_l_xyzw[1]), float(rot_l_xyzw[2]), float(rot_l_xyzw[3])
+                )
 
                 # (8) Solve IK for sub-target. C1: rot_weight=1.0 so the
                 # back-out cancellation above holds — at weight=0.5 the
                 # 100-iter residual can exceed 0.5° which translates to
                 # >2mm fingertip drift through the 0.22m EE→fingertip arm.
                 jq_sub_target = solve_ik(
-                    fk_model, fk_state, target_l_sub, target_r_sub, device,
-                    rot_left=rot_l_sub, rot_right=rot_r_sub, rot_weight=1.0)
+                    fk_model,
+                    fk_state,
+                    target_l_sub,
+                    target_r_sub,
+                    device,
+                    rot_left=rot_l_sub,
+                    rot_right=rot_r_sub,
+                    rot_weight=1.0,
+                )
                 if np.any(~np.isfinite(jq_sub_target)):
                     print(f"  [precision] IK NaN at rl_step {rl_step} — aborting")
-                    return _balanced_return(obs_list, act_list, False,
-                                            float('inf'),
-                                            precision_ok=precision_succeeded or not ran_precision)
+                    return _balanced_return(
+                        obs_list, act_list, False, float("inf"), precision_ok=precision_succeeded or not ran_precision
+                    )
                 jq_sub_target[7] = FINGER_OPEN_POS
                 jq_sub_target[8] = FINGER_OPEN_POS
                 jq_sub_target[FRANKA_NUM_JOINTS + 7] = FINGER_OPEN_POS
@@ -897,8 +943,7 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                 # through fk_state (non-destructive — we restore
                 # jq_sub_start afterwards for the interpolation below).
                 fk_state.joint_q.assign(jq_sub_target)
-                newton.eval_fk(fk_model, fk_state.joint_q,
-                               fk_state.joint_qd, fk_state)
+                newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
                 bq_ik = fk_state.body_q.numpy()
                 # F2: pos residual (EE-space) before the existing rot residual.
                 # Reads from the SAME bq_ik that the rot path uses - single FK
@@ -906,13 +951,10 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                 # target_l_sub are EE targets (target_clamp - ee_offset).
                 ik_pos_r = bq_ik[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][:3]
                 ik_pos_l = bq_ik[EE_BODY_OFFSET][:3]
-                ik_pos_res_r = float(np.linalg.norm(
-                    ik_pos_r - np.asarray(target_r_sub, dtype=np.float32)))
-                ik_pos_res_l = float(np.linalg.norm(
-                    ik_pos_l - np.asarray(target_l_sub, dtype=np.float32)))
+                ik_pos_res_r = float(np.linalg.norm(ik_pos_r - np.asarray(target_r_sub, dtype=np.float32)))
+                ik_pos_res_l = float(np.linalg.norm(ik_pos_l - np.asarray(target_l_sub, dtype=np.float32)))
                 ik_pos_res_max = max(ik_pos_res_r, ik_pos_res_l)
-                ik_pos_res_max_observed = max(
-                    ik_pos_res_max_observed, ik_pos_res_max)
+                ik_pos_res_max_observed = max(ik_pos_res_max_observed, ik_pos_res_max)
                 # Existing rot residual path (unchanged):
                 ik_quat_r = bq_ik[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][3:7]
                 ik_quat_l = bq_ik[EE_BODY_OFFSET][3:7]
@@ -933,10 +975,8 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                 # chord 2·sin(θ/2)·r is the correct geometric bound and
                 # numerically identical (~1e-6 diff) at the 0.009 rad regime
                 # the precision loop typically operates in.
-                drift_r = (2.0 * math.sin(ik_res_r / 2.0) * EE_TO_FINGERTIP
-                           + ik_pos_res_r)
-                drift_l = (2.0 * math.sin(ik_res_l / 2.0) * EE_TO_FINGERTIP
-                           + ik_pos_res_l)
+                drift_r = 2.0 * math.sin(ik_res_r / 2.0) * EE_TO_FINGERTIP + ik_pos_res_r
+                drift_l = 2.0 * math.sin(ik_res_l / 2.0) * EE_TO_FINGERTIP + ik_pos_res_l
                 drift_max = max(drift_r, drift_l)
                 # Threshold 1.8mm = T_DIST * 0.9 - early-warning headroom
                 # below T_DIST=2mm. Honest note: this is an upper bound on
@@ -945,20 +985,21 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                 # trigger when pos_res and rot-induced displacement cancel
                 # at the fingertip (false positive acceptable for diagnostic).
                 if drift_max > T_DIST * 0.9:
-                    print(f"  [precision] rl_step {rl_step}: IK residual "
-                          f"rot R={math.degrees(ik_res_r):.2f}° "
-                          f"L={math.degrees(ik_res_l):.2f}° "
-                          f"pos_ee R={ik_pos_res_r*1000:.2f}mm "
-                          f"L={ik_pos_res_l*1000:.2f}mm "
-                          f"(per-arm drift "
-                          f"R={drift_r*1000:.2f}mm L={drift_l*1000:.2f}mm, "
-                          f"max={drift_max*1000:.2f}mm / "
-                          f"T_DIST={T_DIST*1000:.0f}mm)")
+                    print(
+                        f"  [precision] rl_step {rl_step}: IK residual "
+                        f"rot R={math.degrees(ik_res_r):.2f}° "
+                        f"L={math.degrees(ik_res_l):.2f}° "
+                        f"pos_ee R={ik_pos_res_r * 1000:.2f}mm "
+                        f"L={ik_pos_res_l * 1000:.2f}mm "
+                        f"(per-arm drift "
+                        f"R={drift_r * 1000:.2f}mm L={drift_l * 1000:.2f}mm, "
+                        f"max={drift_max * 1000:.2f}mm / "
+                        f"T_DIST={T_DIST * 1000:.0f}mm)"
+                    )
                 # Restore fk_state to pre-IK joint_q for the interpolation
                 # loop below — sub=0 expects fk_state == jq_sub_start.
                 fk_state.joint_q.assign(jq_sub_start)
-                newton.eval_fk(fk_model, fk_state.joint_q,
-                               fk_state.joint_qd, fk_state)
+                newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
 
                 # (9) Execute PHYSICS_STEPS_PER_RL physics steps, linear interp
                 nan_abort = False
@@ -966,12 +1007,9 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                     t_interp = (sub + 1) / PHYSICS_STEPS_PER_RL
                     jq_interp = jq_sub_start.copy()
                     for d in range(coord_count):
-                        jq_interp[d] = (
-                            jq_sub_start[d]
-                            + (jq_sub_target[d] - jq_sub_start[d]) * t_interp)
+                        jq_interp[d] = jq_sub_start[d] + (jq_sub_target[d] - jq_sub_start[d]) * t_interp
                     fk_state.joint_q.assign(jq_interp)
-                    newton.eval_fk(fk_model, fk_state.joint_q,
-                                   fk_state.joint_qd, fk_state)
+                    newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
                     for _ in range(demo_substeps):
                         update_kinematic_bodies(state, fk_state, ROBOT_BODY_COUNT)
                         state.clear_forces()
@@ -980,31 +1018,31 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                         state, state_buf = state_buf, state
                     bq_check = state.body_q.numpy()
                     if np.any(~np.isfinite(bq_check[ROBOT_BODY_COUNT:])):
-                        print(f"  [precision] Cable NaN at rl_step {rl_step}, "
-                              f"sub {sub}")
+                        print(f"  [precision] Cable NaN at rl_step {rl_step}, sub {sub}")
                         nan_abort = True
                         break
                 if nan_abort:
-                    return _balanced_return(obs_list, act_list, False,
-                                            float('inf'),
-                                            precision_ok=precision_succeeded or not ran_precision)
+                    return _balanced_return(
+                        obs_list, act_list, False, float("inf"), precision_ok=precision_succeeded or not ran_precision
+                    )
             else:
                 # Loop completed without early exit — append final action
                 if ee_r_before is not None:
-                    act_list.append(_compute_cumulative_action(
-                        state, r_scale_before, l_scale_before))
+                    act_list.append(_compute_cumulative_action(state, r_scale_before, l_scale_before))
 
             # P11: disambiguate the exit reason so rl_step+1 is not
             # conflated between "sustain hit" and "budget exhausted".
             # NaN aborts return early and never reach this print.
             exit_reason = "sustain" if precision_succeeded else "timeout"
-            print(f"  [precision] Done: exit={exit_reason}, "
-                  f"rl_steps={rl_step + 1}, "
-                  f"final_dist={final_dist_mm:.2f}mm, "
-                  f"sustain={precision_sustain}/{K_GRASP}, "
-                  f"ik_res_max={math.degrees(ik_res_max_observed):.2f}°, "
-                  f"ik_pos_res_ee_max={ik_pos_res_max_observed*1000:.2f}mm, "
-                  f"succeeded={precision_succeeded}")
+            print(
+                f"  [precision] Done: exit={exit_reason}, "
+                f"rl_steps={rl_step + 1}, "
+                f"final_dist={final_dist_mm:.2f}mm, "
+                f"sustain={precision_sustain}/{K_GRASP}, "
+                f"ik_res_max={math.degrees(ik_res_max_observed):.2f}°, "
+                f"ik_pos_res_ee_max={ik_pos_res_max_observed * 1000:.2f}mm, "
+                f"succeeded={precision_succeeded}"
+            )
             continue
 
         # Number of steps: max of both arm distances (target-driven phases)
@@ -1039,38 +1077,31 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
             # tangent when the nearest projection lands mid-segment.
             cable_pos = bq[cable_bodies, :3]
             clamp_r_pos_phase = _compute_clamp_pos(
-                bq[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][:3],
-                bq[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][3:7])
-            clamp_l_pos_phase = _compute_clamp_pos(
-                bq[EE_BODY_OFFSET][:3],
-                bq[EE_BODY_OFFSET][3:7])
+                bq[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][:3], bq[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][3:7]
+            )
+            clamp_l_pos_phase = _compute_clamp_pos(bq[EE_BODY_OFFSET][:3], bq[EE_BODY_OFFSET][3:7])
             if right_seg_index is not None:
-                _, tangent_r, _ = _find_nearest_cable_point_demo(
-                    cable_pos, clamp_r_pos_phase, target_seg_indices_r)
-                rot_r_xyzw = _normalize_quat_w_positive(
-                    compute_hand_quat_for_cable(tangent_r))
-                rot_r = wp.vec4(float(rot_r_xyzw[0]), float(rot_r_xyzw[1]),
-                                float(rot_r_xyzw[2]), float(rot_r_xyzw[3]))
+                _, tangent_r, _ = _find_nearest_cable_point_demo(cable_pos, clamp_r_pos_phase, target_seg_indices_r)
+                rot_r_xyzw = _normalize_quat_w_positive(compute_hand_quat_for_cable(tangent_r))
+                rot_r = wp.vec4(float(rot_r_xyzw[0]), float(rot_r_xyzw[1]), float(rot_r_xyzw[2]), float(rot_r_xyzw[3]))
             else:
                 rot_r = None
             if left_seg_index is not None:
-                _, tangent_l, _ = _find_nearest_cable_point_demo(
-                    cable_pos, clamp_l_pos_phase, target_seg_indices_l)
-                rot_l_xyzw = _normalize_quat_w_positive(
-                    compute_hand_quat_for_cable(tangent_l))
-                rot_l = wp.vec4(float(rot_l_xyzw[0]), float(rot_l_xyzw[1]),
-                                float(rot_l_xyzw[2]), float(rot_l_xyzw[3]))
+                _, tangent_l, _ = _find_nearest_cable_point_demo(cable_pos, clamp_l_pos_phase, target_seg_indices_l)
+                rot_l_xyzw = _normalize_quat_w_positive(compute_hand_quat_for_cable(tangent_l))
+                rot_l = wp.vec4(float(rot_l_xyzw[0]), float(rot_l_xyzw[1]), float(rot_l_xyzw[2]), float(rot_l_xyzw[3]))
             else:
                 rot_l = None
 
             # Solve IK with cable-adaptive rotation
-            jq_target = solve_ik(fk_model, fk_state, tuple(target_l), tuple(target_r), device,
-                                 rot_left=rot_l, rot_right=rot_r)
+            jq_target = solve_ik(
+                fk_model, fk_state, tuple(target_l), tuple(target_r), device, rot_left=rot_l, rot_right=rot_r
+            )
             if np.any(~np.isfinite(jq_target)):
                 print(f"  [{desc}] IK NaN — aborting episode")
                 return _balanced_return(
-                    obs_list, act_list, False, float('inf'),
-                    precision_ok=precision_succeeded or not ran_precision)
+                    obs_list, act_list, False, float("inf"), precision_ok=precision_succeeded or not ran_precision
+                )
 
             # Set finger targets
             jq_target[7] = target_finger_r  # left: same as right (dual clamp)
@@ -1102,36 +1133,54 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
 
                 clamp_r_pos = _compute_clamp_pos(
                     bq_before[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][:3],
-                    bq_before[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][3:7])
+                    bq_before[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][3:7],
+                )
                 new_center_r = int(np.argmin(np.linalg.norm(cable_pos_now - clamp_r_pos, axis=1)))
-                prev_center_r = target_seg_indices_r[GRIP_SEG_WINDOW] if len(target_seg_indices_r) > GRIP_SEG_WINDOW else target_seg_indices_r[0]
+                prev_center_r = (
+                    target_seg_indices_r[GRIP_SEG_WINDOW]
+                    if len(target_seg_indices_r) > GRIP_SEG_WINDOW
+                    else target_seg_indices_r[0]
+                )
                 if abs(new_center_r - prev_center_r) > 1:
-                    target_seg_indices_r = list(np.clip(
-                        np.arange(new_center_r - GRIP_SEG_WINDOW, new_center_r + GRIP_SEG_WINDOW + 1),
-                        0, len(cable_pos_now) - 1).astype(int))
+                    target_seg_indices_r = list(
+                        np.clip(
+                            np.arange(new_center_r - GRIP_SEG_WINDOW, new_center_r + GRIP_SEG_WINDOW + 1),
+                            0,
+                            len(cable_pos_now) - 1,
+                        ).astype(int)
+                    )
 
-                clamp_l_pos = _compute_clamp_pos(
-                    bq_before[EE_BODY_OFFSET][:3],
-                    bq_before[EE_BODY_OFFSET][3:7])
+                clamp_l_pos = _compute_clamp_pos(bq_before[EE_BODY_OFFSET][:3], bq_before[EE_BODY_OFFSET][3:7])
                 new_center_l = int(np.argmin(np.linalg.norm(cable_pos_now - clamp_l_pos, axis=1)))
-                prev_center_l = target_seg_indices_l[GRIP_SEG_WINDOW] if len(target_seg_indices_l) > GRIP_SEG_WINDOW else target_seg_indices_l[0]
+                prev_center_l = (
+                    target_seg_indices_l[GRIP_SEG_WINDOW]
+                    if len(target_seg_indices_l) > GRIP_SEG_WINDOW
+                    else target_seg_indices_l[0]
+                )
                 if abs(new_center_l - prev_center_l) > 1:
-                    target_seg_indices_l = list(np.clip(
-                        np.arange(new_center_l - GRIP_SEG_WINDOW, new_center_l + GRIP_SEG_WINDOW + 1),
-                        0, len(cable_pos_now) - 1).astype(int))
+                    target_seg_indices_l = list(
+                        np.clip(
+                            np.arange(new_center_l - GRIP_SEG_WINDOW, new_center_l + GRIP_SEG_WINDOW + 1),
+                            0,
+                            len(cable_pos_now) - 1,
+                        ).astype(int)
+                    )
 
                 # (3) Compute obs with fresh tsi. P7: NaN-guard mirrors
                 # the precision-phase check so a numeric blow-up in FK or
                 # error metrics cannot poison BC training silently.
                 fk_jq_now = fk_state.joint_q.numpy()
-                obs, prev_clamp_r_quat, prev_clamp_l_quat, \
-                    prev_seg_r_quat, prev_seg_l_quat = compute_obs(
-                        state, fk_jq_now, cable_bodies,
-                        target_seg_indices_r, target_seg_indices_l,
-                        prev_clamp_r_quat=prev_clamp_r_quat,
-                        prev_clamp_l_quat=prev_clamp_l_quat,
-                        prev_seg_r_quat=prev_seg_r_quat,
-                        prev_seg_l_quat=prev_seg_l_quat)
+                obs, prev_clamp_r_quat, prev_clamp_l_quat, prev_seg_r_quat, prev_seg_l_quat = compute_obs(
+                    state,
+                    fk_jq_now,
+                    cable_bodies,
+                    target_seg_indices_r,
+                    target_seg_indices_l,
+                    prev_clamp_r_quat=prev_clamp_r_quat,
+                    prev_clamp_l_quat=prev_clamp_l_quat,
+                    prev_seg_r_quat=prev_seg_r_quat,
+                    prev_seg_l_quat=prev_seg_l_quat,
+                )
                 # Source-level NaN guard (see precision-phase rationale).
                 # On pre-precision NaN (ran_precision=False), precision_ok
                 # evaluates to True because "precision did not run" is not a
@@ -1152,11 +1201,10 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                 elif np.any(~np.isfinite(prev_seg_l_quat)):
                     nan_source = "prev_seg_l_quat"
                 if nan_source is not None:
-                    print(f"  [{desc}] compute_obs NaN in {nan_source} "
-                          f"at step {step} — aborting")
+                    print(f"  [{desc}] compute_obs NaN in {nan_source} at step {step} — aborting")
                     return _balanced_return(
-                        obs_list, act_list, False, float('inf'),
-                        precision_ok=precision_succeeded or not ran_precision)
+                        obs_list, act_list, False, float("inf"), precision_ok=precision_succeeded or not ran_precision
+                    )
                 obs_list.append(obs)
 
                 # (4) Capture EE state and adaptive scale for NEXT window
@@ -1171,12 +1219,14 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
                 # canonicalize target quats with w>=0 to match the
                 # precision-phase sustain check and prevent sign-flip
                 # jitter from spuriously zeroing sustain_counter.
-                seg_pos_r, tan_r, dist_pos_r = _find_nearest_cable_point_demo(cable_pos_now, clamp_r_pos, target_seg_indices_r)
-                seg_pos_l, tan_l, dist_pos_l = _find_nearest_cable_point_demo(cable_pos_now, clamp_l_pos, target_seg_indices_l)
-                target_quat_r = _normalize_quat_w_positive(
-                    compute_hand_quat_for_cable(tan_r))
-                target_quat_l = _normalize_quat_w_positive(
-                    compute_hand_quat_for_cable(tan_l))
+                seg_pos_r, tan_r, dist_pos_r = _find_nearest_cable_point_demo(
+                    cable_pos_now, clamp_r_pos, target_seg_indices_r
+                )
+                seg_pos_l, tan_l, dist_pos_l = _find_nearest_cable_point_demo(
+                    cable_pos_now, clamp_l_pos, target_seg_indices_l
+                )
+                target_quat_r = _normalize_quat_w_positive(compute_hand_quat_for_cable(tan_r))
+                target_quat_l = _normalize_quat_w_positive(compute_hand_quat_for_cable(tan_l))
                 ee_quat_r = bq_before[FRANKA_NUM_JOINTS + EE_BODY_OFFSET][3:7]
                 ee_quat_l = bq_before[EE_BODY_OFFSET][3:7]
                 dist_ori_r = _quat_distance(ee_quat_r, target_quat_r)
@@ -1214,8 +1264,8 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
             if np.any(~np.isfinite(bq_check[ROBOT_BODY_COUNT:])):
                 print(f"  [{desc}] Cable NaN at step {step}")
                 return _balanced_return(
-                    obs_list, act_list, False, float('inf'),
-                    precision_ok=precision_succeeded or not ran_precision)
+                    obs_list, act_list, False, float("inf"), precision_ok=precision_succeeded or not ran_precision
+                )
 
         # Final action for last window
         if ee_r_before is not None:
@@ -1224,42 +1274,57 @@ def execute_approach_episode(model, state, solver, contacts, fk_model, fk_state,
         print(f"  [{desc}] Done: {n_steps} steps")
 
     precision_ok = precision_succeeded or not ran_precision
-    print(f"  [result] ever_succeeded={ever_succeeded}, "
-          f"final_dist_mm={final_dist_mm:.1f}mm, "
-          f"precision_ok={precision_ok} (ran={ran_precision}, "
-          f"succeeded={precision_succeeded})")
+    print(
+        f"  [result] ever_succeeded={ever_succeeded}, "
+        f"final_dist_mm={final_dist_mm:.1f}mm, "
+        f"precision_ok={precision_ok} (ran={ran_precision}, "
+        f"succeeded={precision_succeeded})"
+    )
     return obs_list, act_list, ever_succeeded, final_dist_mm, precision_ok
 
 
 def main():
     parser = argparse.ArgumentParser(description="Collect ApproachCable demos (multi-episode, cable-adaptive)")
     parser.add_argument("--num-episodes", type=int, default=20)
-    parser.add_argument("--cable-noise-y", type=float, default=0.005,
-                        help="Cable start Y randomization [m]")
-    parser.add_argument("--output", type=str,
-                        default="thread_isaac_lab/data/bc_demos/approach_cable_demos_v6.npz")
+    parser.add_argument("--cable-noise-y", type=float, default=0.005, help="Cable start Y randomization [m]")
+    parser.add_argument("--output", type=str, default="thread_isaac_lab/data/bc_demos/approach_cable_demos_v6.npz")
     parser.add_argument("--device", type=str, default="cuda:0")
-    parser.add_argument("--record-every", type=int, default=10,
-                        help="Record obs/action every N physics steps (must match "
-                             "NewtonApproachCableEnv.PHYSICS_STEPS_PER_RL for correct DAPG actions)")
-    parser.add_argument("--start-from-p0", action="store_true",
-                        help="Start from P0 (env reset state, fingertip ~10mm above cable) "
-                             "instead of home. Produces shorter demos with env-matched obs range.")
-    parser.add_argument("--demo-substeps", type=int, default=4,
-                        help="Physics substeps during demo recording (default: 4, "
-                             "matching RL_SIM_SUBSTEPS in training env). "
-                             "Settle/init phases always use SIM_SUBSTEPS=10.")
-    parser.add_argument("--warmup-steps", type=int, default=100,
-                        help="IK interpolation steps for warmup perturbation (0=disable)")
-    parser.add_argument("--warmup-pos-sigma", type=float, default=0.015,
-                        help="EE position perturbation sigma [m] (default: 15mm)")
-    parser.add_argument("--warmup-rot-sigma", type=float, default=0.15,
-                        help="EE rotation perturbation sigma [rad] (default: ~8.6 deg)")
+    parser.add_argument(
+        "--record-every",
+        type=int,
+        default=10,
+        help="Record obs/action every N physics steps (must match "
+        "NewtonApproachCableEnv.PHYSICS_STEPS_PER_RL for correct DAPG actions)",
+    )
+    parser.add_argument(
+        "--start-from-p0",
+        action="store_true",
+        help="Start from P0 (env reset state, fingertip ~10mm above cable) "
+        "instead of home. Produces shorter demos with env-matched obs range.",
+    )
+    parser.add_argument(
+        "--demo-substeps",
+        type=int,
+        default=4,
+        help="Physics substeps during demo recording (default: 4, "
+        "matching RL_SIM_SUBSTEPS in training env). "
+        "Settle/init phases always use SIM_SUBSTEPS=10.",
+    )
+    parser.add_argument(
+        "--warmup-steps", type=int, default=100, help="IK interpolation steps for warmup perturbation (0=disable)"
+    )
+    parser.add_argument(
+        "--warmup-pos-sigma", type=float, default=0.015, help="EE position perturbation sigma [m] (default: 15mm)"
+    )
+    parser.add_argument(
+        "--warmup-rot-sigma", type=float, default=0.15, help="EE rotation perturbation sigma [rad] (default: ~8.6 deg)"
+    )
     args = parser.parse_args()
 
     device = args.device
     os.environ["NEWTON_DEVICE"] = device
     import test_newton_clip_routing as _tncr
+
     _tncr.DEVICE = device
 
     # F-6: os.path.dirname("foo.npz") == "" → makedirs("") raises
@@ -1271,15 +1336,17 @@ def main():
         os.makedirs(out_dir, exist_ok=True)
 
     print(f"[Demo] Episodes: {args.num_episodes}")
-    print(f"[Demo] Cable noise Y: ±{args.cable_noise_y*1000:.1f}mm")
+    print(f"[Demo] Cable noise Y: ±{args.cable_noise_y * 1000:.1f}mm")
     print(f"[Demo] Start from: {'P0 (env reset state)' if args.start_from_p0 else 'home'}")
     print(f"[Demo] Demo substeps: {args.demo_substeps} (settle/init: {SIM_SUBSTEPS})")
     print(f"[Demo] Output: {args.output}")
     print(f"[Demo] Device: {device}")
     if args.warmup_steps > 0:
-        print(f"[Demo] Warmup: {args.warmup_steps} steps "
-              f"(pos_σ={args.warmup_pos_sigma*1000:.1f}mm, "
-              f"rot_σ={args.warmup_rot_sigma*180/math.pi:.1f}°)")
+        print(
+            f"[Demo] Warmup: {args.warmup_steps} steps "
+            f"(pos_σ={args.warmup_pos_sigma * 1000:.1f}mm, "
+            f"rot_σ={args.warmup_rot_sigma * 180 / math.pi:.1f}°)"
+        )
 
     # Build FK model
     print("[Demo] Building FK model...")
@@ -1299,8 +1366,7 @@ def main():
 
     # Build scene
     print("[Demo] Building physics scene...")
-    model, state, solver, contacts, cable_bodies = build_physics_scene(
-        fk_model, fk_state, device)
+    model, state, solver, contacts, cable_bodies = build_physics_scene(fk_model, fk_state, device)
 
     # Initial settle (baseline)
     print("[Demo] Initial cable settle (2s)...")
@@ -1308,12 +1374,12 @@ def main():
 
     # If --start-from-p0: move arms from home to P0 (env reset position), then re-settle
     if args.start_from_p0:
-        p0_ee_z = TABLE_HEIGHT + CLIP_BASE_HEIGHT + CABLE_RADIUS + 0.010 + EE_TO_FINGERTIP  # 1.039m (matches env _setup_p0_precondition)
+        p0_ee_z = (
+            TABLE_HEIGHT + CLIP_BASE_HEIGHT + CABLE_RADIUS + 0.010 + EE_TO_FINGERTIP
+        )  # 1.039m (matches env _setup_p0_precondition)
         print(f"[Demo] Moving to P0 (EE Z={p0_ee_z:.3f}m, fingertip ~10mm above cable top)...")
 
-        jq_p0 = solve_ik(fk_model, fk_state,
-                          (GRASP_X, WIDE_LEFT_Y, p0_ee_z),
-                          (GRASP_X, WIDE_RIGHT_Y, p0_ee_z), device)
+        jq_p0 = solve_ik(fk_model, fk_state, (GRASP_X, WIDE_LEFT_Y, p0_ee_z), (GRASP_X, WIDE_RIGHT_Y, p0_ee_z), device)
         jq_p0[7] = FINGER_OPEN_POS
         jq_p0[8] = FINGER_OPEN_POS
         jq_p0[FRANKA_NUM_JOINTS + 7] = FINGER_OPEN_POS
@@ -1363,8 +1429,8 @@ def main():
     t0 = time.perf_counter()
 
     for ep in range(args.num_episodes):
-        print(f"\n{'='*50}")
-        print(f"[Demo] Episode {ep+1}/{args.num_episodes}")
+        print(f"\n{'=' * 50}")
+        print(f"[Demo] Episode {ep + 1}/{args.num_episodes}")
 
         # Reset state
         state = reset_state(model, state, solver, init_body_q, init_body_qd, device)
@@ -1380,7 +1446,7 @@ def main():
                 bq[bi, 1] += noise_y
             state.body_q.assign(bq)
             solver.body_q_prev.assign(bq)
-            print(f"  Cable Y noise: {noise_y*1000:+.1f}mm")
+            print(f"  Cable Y noise: {noise_y * 1000:+.1f}mm")
 
         # Re-settle with noise
         state = settle_cable(model, state, solver, contacts, fk_state, device, duration=1.0)
@@ -1399,12 +1465,12 @@ def main():
         right_seg = int(np.argmin(np.linalg.norm(cable_pos - right_grip_pt, axis=1)))
         left_seg = int(np.argmin(np.linalg.norm(cable_pos - left_grip_pt, axis=1)))
         n_cable = len(cable_bodies)
-        tsi_r = list(np.clip(
-            np.arange(right_seg - GRIP_SEG_WINDOW, right_seg + GRIP_SEG_WINDOW + 1),
-            0, n_cable - 1).astype(int))
-        tsi_l = list(np.clip(
-            np.arange(left_seg - GRIP_SEG_WINDOW, left_seg + GRIP_SEG_WINDOW + 1),
-            0, n_cable - 1).astype(int))
+        tsi_r = list(
+            np.clip(np.arange(right_seg - GRIP_SEG_WINDOW, right_seg + GRIP_SEG_WINDOW + 1), 0, n_cable - 1).astype(int)
+        )
+        tsi_l = list(
+            np.clip(np.arange(left_seg - GRIP_SEG_WINDOW, left_seg + GRIP_SEG_WINDOW + 1), 0, n_cable - 1).astype(int)
+        )
         print(f"  Target seg R={right_seg} (indices {tsi_r}), L={left_seg} (indices {tsi_l})")
 
         # Warmup: perturb arm positions + rotations before recording
@@ -1434,14 +1500,13 @@ def main():
             perturb_quat_l = _axis_angle_to_quat_xyzw(rot_perturb_l)
             wu_quat_r = _quat_multiply_xyzw(perturb_quat_r, base_quat_r)
             wu_quat_l = _quat_multiply_xyzw(perturb_quat_l, base_quat_l)
-            rot_r_wp = wp.vec4(float(wu_quat_r[0]), float(wu_quat_r[1]),
-                               float(wu_quat_r[2]), float(wu_quat_r[3]))
-            rot_l_wp = wp.vec4(float(wu_quat_l[0]), float(wu_quat_l[1]),
-                               float(wu_quat_l[2]), float(wu_quat_l[3]))
+            rot_r_wp = wp.vec4(float(wu_quat_r[0]), float(wu_quat_r[1]), float(wu_quat_r[2]), float(wu_quat_r[3]))
+            rot_l_wp = wp.vec4(float(wu_quat_l[0]), float(wu_quat_l[1]), float(wu_quat_l[2]), float(wu_quat_l[3]))
 
             # IK solve for perturbed targets
-            jq_wu = solve_ik(fk_model, fk_state, target_l_wu, target_r_wu, device,
-                             rot_left=rot_l_wp, rot_right=rot_r_wp)
+            jq_wu = solve_ik(
+                fk_model, fk_state, target_l_wu, target_r_wu, device, rot_left=rot_l_wp, rot_right=rot_r_wp
+            )
             if np.all(np.isfinite(jq_wu)):
                 # Keep current finger state
                 fk_jq_cur = fk_state.joint_q.numpy()
@@ -1469,19 +1534,31 @@ def main():
                         solver.step(state, state_buf_wu, control_wu, contacts, DT / SIM_SUBSTEPS)
                         state, state_buf_wu = state_buf_wu, state
 
-                print(f"  Warmup: pos_offset R={np.linalg.norm(offset_r)*1000:.1f}mm "
-                      f"L={np.linalg.norm(offset_l)*1000:.1f}mm, "
-                      f"rot_offset R={np.linalg.norm(rot_perturb_r)*180/math.pi:.1f}° "
-                      f"L={np.linalg.norm(rot_perturb_l)*180/math.pi:.1f}°")
+                print(
+                    f"  Warmup: pos_offset R={np.linalg.norm(offset_r) * 1000:.1f}mm "
+                    f"L={np.linalg.norm(offset_l) * 1000:.1f}mm, "
+                    f"rot_offset R={np.linalg.norm(rot_perturb_r) * 180 / math.pi:.1f}° "
+                    f"L={np.linalg.norm(rot_perturb_l) * 180 / math.pi:.1f}°"
+                )
             else:
-                print(f"  Warmup: IK NaN, skipping perturbation")
+                print("  Warmup: IK NaN, skipping perturbation")
 
         obs, act, success, final_dist_mm, precision_ok = execute_approach_episode(
-            model, state, solver, contacts, fk_model, fk_state,
-            cable_bodies, grip_y_left=grip_y_l, grip_y_right=grip_y_r,
-            device=device, record_every=args.record_every,
-            target_seg_indices_r=tsi_r, target_seg_indices_l=tsi_l,
-            right_seg_index=right_seg, left_seg_index=left_seg,
+            model,
+            state,
+            solver,
+            contacts,
+            fk_model,
+            fk_state,
+            cable_bodies,
+            grip_y_left=grip_y_l,
+            grip_y_right=grip_y_r,
+            device=device,
+            record_every=args.record_every,
+            target_seg_indices_r=tsi_r,
+            target_seg_indices_l=tsi_l,
+            right_seg_index=right_seg,
+            left_seg_index=left_seg,
             start_from_p0=args.start_from_p0,
             demo_substeps=args.demo_substeps,
         )
@@ -1498,15 +1575,16 @@ def main():
             all_act.extend(act)
             episode_lengths.append(ep_len)
             success_count += 1
-            print(f"  [KEPT] {ep_len} transitions "
-                  f"(final_dist={final_dist_mm:.1f}mm)")
+            print(f"  [KEPT] {ep_len} transitions (final_dist={final_dist_mm:.1f}mm)")
         else:
-            print(f"  [DROPPED] success={success}, "
-                  f"precision_ok={precision_ok}, "
-                  f"transitions={ep_len}, dist={final_dist_mm:.1f}mm")
+            print(
+                f"  [DROPPED] success={success}, "
+                f"precision_ok={precision_ok}, "
+                f"transitions={ep_len}, dist={final_dist_mm:.1f}mm"
+            )
 
     elapsed = time.perf_counter() - t0
-    print(f"\n{'='*50}")
+    print(f"\n{'=' * 50}")
     print(f"[Demo] Complete in {elapsed:.1f}s")
     print(f"[Demo] Success: {success_count}/{args.num_episodes}")
     print(f"[Demo] Total transitions: {len(all_obs)}")
@@ -1517,8 +1595,7 @@ def main():
         ep_len_arr = np.array(episode_lengths, dtype=np.int32)
         np.savez(args.output, obs=obs_arr, actions=act_arr, episode_lengths=ep_len_arr)
         print(f"[Demo] Saved: {args.output}")
-        print(f"  obs: {obs_arr.shape}, actions: {act_arr.shape}, "
-              f"episodes: {ep_len_arr.shape[0]}")
+        print(f"  obs: {obs_arr.shape}, actions: {act_arr.shape}, episodes: {ep_len_arr.shape[0]}")
     else:
         print("[Demo] No successful episodes — no output saved")
 
