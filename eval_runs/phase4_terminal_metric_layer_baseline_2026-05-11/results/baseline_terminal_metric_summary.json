@@ -1,0 +1,363 @@
+{
+  "scope": "Phase 4 #1 AR terminal metric baseline accumulation",
+  "causal_claim": "none",
+  "checkpoint": "/home/rlrk/IsaacLab/logs/rl_ar_alpha4b_grid1v3_seed0/model_best.pt",
+  "device": "cuda:0",
+  "world_count": 256,
+  "episodes_requested": 20,
+  "episodes_completed": 20,
+  "max_steps": 200,
+  "elapsed_s": 3821.3497722148895,
+  "required_metric_keys_present": true,
+  "missing_metric_keys": [],
+  "canonical_k": 5,
+  "canonical_k_parity_pass": true,
+  "canonical_k_parity_mismatch_count": 0,
+  "canonical_k_parity_checked_samples": 1017856,
+  "first_completion_count": 5120,
+  "first_completion_successes": 972,
+  "first_completion_success_rate": 0.18984375,
+  "terminal_entered_count": 1817,
+  "terminal_entered_rate": 0.3548828125,
+  "terminal_hold_len_max": 5,
+  "terminal_hold_len_mean": 0.94921875,
+  "terminal_hold_len_median": 0.0,
+  "first_completion_break_reason_counts": {
+    "explosion": 1612,
+    "cable_drop": 2539,
+    "unspecified": 560,
+    "clamp_loss": 386,
+    "timeout": 23
+  },
+  "component_true_counts": {
+    "right_clamp": 972,
+    "left_hold": 1941,
+    "cable_not_dropped": 2114
+  },
+  "component_true_rates": {
+    "right_clamp": 0.18984375,
+    "left_hold": 0.3791015625,
+    "cable_not_dropped": 0.412890625
+  },
+  "episode_summaries": [
+    {
+      "episode": 0,
+      "completions": 256,
+      "successes": 30,
+      "success_rate": 0.1171875,
+      "break_reason_counts": {
+        "explosion": 105,
+        "cable_drop": 122,
+        "unspecified": 15,
+        "clamp_loss": 13,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 1,
+      "completions": 256,
+      "successes": 50,
+      "success_rate": 0.1953125,
+      "break_reason_counts": {
+        "explosion": 78,
+        "cable_drop": 127,
+        "unspecified": 33,
+        "clamp_loss": 17,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 2,
+      "completions": 256,
+      "successes": 35,
+      "success_rate": 0.13671875,
+      "break_reason_counts": {
+        "explosion": 81,
+        "cable_drop": 139,
+        "unspecified": 23,
+        "clamp_loss": 12,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 3,
+      "completions": 256,
+      "successes": 51,
+      "success_rate": 0.19921875,
+      "break_reason_counts": {
+        "explosion": 76,
+        "cable_drop": 129,
+        "unspecified": 33,
+        "clamp_loss": 17,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 4,
+      "completions": 256,
+      "successes": 58,
+      "success_rate": 0.2265625,
+      "break_reason_counts": {
+        "explosion": 81,
+        "cable_drop": 118,
+        "unspecified": 34,
+        "clamp_loss": 23
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 176,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 5,
+      "completions": 256,
+      "successes": 57,
+      "success_rate": 0.22265625,
+      "break_reason_counts": {
+        "explosion": 72,
+        "cable_drop": 128,
+        "unspecified": 31,
+        "clamp_loss": 24,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 6,
+      "completions": 256,
+      "successes": 48,
+      "success_rate": 0.1875,
+      "break_reason_counts": {
+        "explosion": 71,
+        "cable_drop": 141,
+        "unspecified": 22,
+        "clamp_loss": 21,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 7,
+      "completions": 256,
+      "successes": 49,
+      "success_rate": 0.19140625,
+      "break_reason_counts": {
+        "explosion": 81,
+        "cable_drop": 125,
+        "unspecified": 28,
+        "clamp_loss": 21,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 8,
+      "completions": 256,
+      "successes": 51,
+      "success_rate": 0.19921875,
+      "break_reason_counts": {
+        "explosion": 75,
+        "cable_drop": 129,
+        "unspecified": 24,
+        "clamp_loss": 26,
+        "timeout": 2
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 9,
+      "completions": 256,
+      "successes": 46,
+      "success_rate": 0.1796875,
+      "break_reason_counts": {
+        "explosion": 88,
+        "cable_drop": 125,
+        "unspecified": 29,
+        "clamp_loss": 13,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 10,
+      "completions": 256,
+      "successes": 56,
+      "success_rate": 0.21875,
+      "break_reason_counts": {
+        "explosion": 67,
+        "cable_drop": 132,
+        "unspecified": 31,
+        "clamp_loss": 24,
+        "timeout": 2
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 11,
+      "completions": 256,
+      "successes": 56,
+      "success_rate": 0.21875,
+      "break_reason_counts": {
+        "explosion": 77,
+        "cable_drop": 123,
+        "unspecified": 34,
+        "clamp_loss": 20,
+        "timeout": 2
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 12,
+      "completions": 256,
+      "successes": 57,
+      "success_rate": 0.22265625,
+      "break_reason_counts": {
+        "explosion": 73,
+        "cable_drop": 126,
+        "unspecified": 36,
+        "clamp_loss": 20,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 13,
+      "completions": 256,
+      "successes": 51,
+      "success_rate": 0.19921875,
+      "break_reason_counts": {
+        "explosion": 78,
+        "cable_drop": 128,
+        "clamp_loss": 24,
+        "unspecified": 25,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 14,
+      "completions": 256,
+      "successes": 53,
+      "success_rate": 0.20703125,
+      "break_reason_counts": {
+        "explosion": 78,
+        "cable_drop": 125,
+        "unspecified": 25,
+        "clamp_loss": 27,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 15,
+      "completions": 256,
+      "successes": 46,
+      "success_rate": 0.1796875,
+      "break_reason_counts": {
+        "explosion": 87,
+        "cable_drop": 122,
+        "clamp_loss": 17,
+        "unspecified": 28,
+        "timeout": 2
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 16,
+      "completions": 256,
+      "successes": 40,
+      "success_rate": 0.15625,
+      "break_reason_counts": {
+        "explosion": 90,
+        "cable_drop": 125,
+        "unspecified": 29,
+        "clamp_loss": 11,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 17,
+      "completions": 256,
+      "successes": 49,
+      "success_rate": 0.19140625,
+      "break_reason_counts": {
+        "explosion": 88,
+        "cable_drop": 118,
+        "unspecified": 24,
+        "clamp_loss": 25,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 18,
+      "completions": 256,
+      "successes": 50,
+      "success_rate": 0.1953125,
+      "break_reason_counts": {
+        "explosion": 83,
+        "cable_drop": 123,
+        "unspecified": 35,
+        "clamp_loss": 14,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    },
+    {
+      "episode": 19,
+      "completions": 256,
+      "successes": 39,
+      "success_rate": 0.15234375,
+      "break_reason_counts": {
+        "explosion": 83,
+        "cable_drop": 134,
+        "unspecified": 21,
+        "clamp_loss": 17,
+        "timeout": 1
+      },
+      "max_terminal_hold_len": 5,
+      "step_count": 200,
+      "completed_all_worlds": true
+    }
+  ]
+}

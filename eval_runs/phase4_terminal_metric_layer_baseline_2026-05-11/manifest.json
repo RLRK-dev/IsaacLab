@@ -1,0 +1,57 @@
+{
+  "schema": "phase4_terminal_metric_baseline_manifest.v1",
+  "created_at_jst": "2026-05-11T15:45:00+09:00",
+  "scope": "Phase 4 #1 AR terminal metric baseline accumulation",
+  "causal_claim": "none",
+  "run_conditions": {
+    "checkpoint": "/home/rlrk/IsaacLab/logs/rl_ar_alpha4b_grid1v3_seed0/model_best.pt",
+    "device": "cuda:0",
+    "world_count": 256,
+    "episodes": 20,
+    "max_steps": 200,
+    "first_completion_count": 5120
+  },
+  "summary": {
+    "canonical_k_parity_pass": true,
+    "canonical_k_parity_checked_samples": 1017856,
+    "first_completion_successes": 972,
+    "first_completion_success_rate": 0.18984375,
+    "terminal_entered_count": 1817,
+    "terminal_entered_rate": 0.3548828125,
+    "first_completion_break_reason_counts": {
+      "cable_drop": 2539,
+      "clamp_loss": 386,
+      "explosion": 1612,
+      "timeout": 23,
+      "unspecified": 560
+    }
+  },
+  "current_canonical": {
+    "baseline_runner": "results/run_terminal_metric_baseline.py",
+    "baseline_summary": "results/baseline_terminal_metric_summary.json",
+    "baseline_samples": "results/baseline_terminal_metric_samples.json"
+  },
+  "entries": [
+    {
+      "path": "results/run_terminal_metric_baseline.py",
+      "class": "B",
+      "size_bytes": 10360,
+      "sha256": "c4fc7e3c22ac1491b22ea92d40be863d18716563f407dd4348d77a259d7946cd",
+      "track_recommendation": "TRACK"
+    },
+    {
+      "path": "results/baseline_terminal_metric_summary.json",
+      "class": "A",
+      "size_bytes": 8772,
+      "sha256": "437e26e672dd6b2012353718634fc208907b88c7dd630ce35763ebfd07ce7dca",
+      "track_recommendation": "TRACK"
+    },
+    {
+      "path": "results/baseline_terminal_metric_samples.json",
+      "class": "A",
+      "size_bytes": 36777,
+      "sha256": "d55311893304dee14caad8de59de65d974db6d14dbccb586ff08d8153f27322d",
+      "track_recommendation": "TRACK"
+    }
+  ]
+}
