@@ -28,6 +28,7 @@
 #   - Plan-mode dialog ("Create a plan? shift + tab use Plan mode esc dismiss"):
 #     Esc + double-Enter recovery.
 #   - Up to DISPATCH_TO_PANE_MAX_RECOVERY (default 3) attempts per phase.
+#     Set DISPATCH_TO_PANE_MAX_RECOVERY=0 to disable automatic recovery.
 #
 # Usage:
 #   dispatch_to_pane PANE_ID PAYLOAD [ACK_MARKER] [TIMEOUT_SEC] [--prewarm | --no-prewarm] [--warmup-timeout N]
@@ -70,7 +71,7 @@
 #   DISPATCH_TO_PANE_CHUNK             — positive integer chunk size (default 1000)
 #   DISPATCH_TO_PANE_SLEEP_S           — non-negative inter-Enter sleep seconds (default 1)
 #   DISPATCH_TO_PANE_VERIFY_S          — non-negative initial verify sleep seconds (default 5)
-#   DISPATCH_TO_PANE_MAX_RECOVERY      — non-negative max recovery attempts per phase (default 3)
+#   DISPATCH_TO_PANE_MAX_RECOVERY      — non-negative max recovery attempts per phase (default 3; 0 disables recovery)
 #   DISPATCH_TO_PANE_PREWARM           — 0 (off, default) or 1 (on); overridden by flags
 #   DISPATCH_TO_PANE_WARMUP_TIMEOUT_S  — warmup-phase ACK wait seconds (default 360)
 #
