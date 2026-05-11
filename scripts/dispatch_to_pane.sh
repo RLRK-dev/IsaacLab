@@ -238,12 +238,30 @@ capture_state() {
   tmux capture-pane -p -t "$PANE_ID" -S - 2>/dev/null | tail -n 30
 }
 
+ack_marker_line_present() {
+  local marker="$1"
+  [[ -z "$marker" ]] && return 1
+  awk -v marker="$marker" '
+    /^•[[:space:]]+/ {
+      pos = index($0, marker)
+      if (pos > 0) {
+        after = substr($0, pos + length(marker), 1)
+        if (after == "" || after ~ /[[:space:]]/) {
+          found = 1
+          exit
+        }
+      }
+    }
+    END { exit found ? 0 : 1 }
+  '
+}
+
 ack_present_in_full() {
   local marker="$1"
   [[ -z "$marker" ]] && return 1
   tmux capture-pane -p -t "$PANE_ID" -S - 2>/dev/null \
     | tail -n 250 \
-    | grep -Eq "^•[[:space:]]+.*${marker}([[:space:]]|$)"
+    | ack_marker_line_present "$marker"
 }
 
 apply_recovery_double_enter() {
@@ -315,7 +333,7 @@ do_prewarm() {
   sleep "$INITIAL_VERIFY_SLEEP"
   local state
   state="$(capture_state)"
-  if echo "$state" | grep -Eq "^•[[:space:]]+.*${warmup_marker}([[:space:]]|$)"; then
+  if echo "$state" | ack_marker_line_present "$warmup_marker"; then
     first_attempt="YES"
   elif echo "$state" | grep -q "^• Working\|◦ Working"; then
     first_attempt="YES_WORKING"
@@ -399,7 +417,7 @@ recovery_count=0
 plan_dialog="false"
 first_attempt="unknown"
 
-if [[ -n "$ACK_MARKER" ]] && echo "$state" | grep -Eq "^•[[:space:]]+.*${ACK_MARKER}([[:space:]]|$)"; then
+if [[ -n "$ACK_MARKER" ]] && echo "$state" | ack_marker_line_present "$ACK_MARKER"; then
   first_attempt="YES"
 elif echo "$state" | grep -q "^• Working\|◦ Working"; then
   first_attempt="YES_WORKING"
