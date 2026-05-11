@@ -1,6 +1,16 @@
 Changelog
 ---------
 
+4.5.23 (2026-05-11)
+~~~~~~~~~~~~~~~~~~~
+
+Fixed
+^^^^^
+
+* Fixed app and render preset path resolution to use the tracked
+  ``apps`` directory after the legacy ``apps/isaacsim_5`` files were removed.
+
+
 4.5.22 (2026-03-16)
 ~~~~~~~~~~~~~~~~~~~
 
