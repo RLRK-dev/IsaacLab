@@ -377,14 +377,18 @@ do_prewarm() {
   elif echo "$state" | grep -q "Create a plan?"; then
     first_attempt="NO"
     plan_dialog="true"
-    recovery_method="esc_plan_dismiss"
-    apply_recovery_esc_plan_dismiss
-    recovery_count=$((recovery_count + 1))
+    if (( recovery_count < MAX_RECOVERY )); then
+      recovery_method="esc_plan_dismiss"
+      apply_recovery_esc_plan_dismiss
+      recovery_count=$((recovery_count + 1))
+    fi
   else
     first_attempt="NO"
-    recovery_method="double_enter"
-    apply_recovery_double_enter
-    recovery_count=$((recovery_count + 1))
+    if (( recovery_count < MAX_RECOVERY )); then
+      recovery_method="double_enter"
+      apply_recovery_double_enter
+      recovery_count=$((recovery_count + 1))
+    fi
   fi
 
   # Phase 0c: warmup ACK wait
@@ -461,14 +465,18 @@ elif echo "$state" | grep -q "^• Working\|◦ Working"; then
 elif echo "$state" | grep -q "Create a plan?"; then
   first_attempt="NO"
   plan_dialog="true"
-  recovery_method="esc_plan_dismiss"
-  apply_recovery_esc_plan_dismiss
-  recovery_count=$((recovery_count + 1))
+  if (( recovery_count < MAX_RECOVERY )); then
+    recovery_method="esc_plan_dismiss"
+    apply_recovery_esc_plan_dismiss
+    recovery_count=$((recovery_count + 1))
+  fi
 else
   first_attempt="NO"
-  recovery_method="double_enter"
-  apply_recovery_double_enter
-  recovery_count=$((recovery_count + 1))
+  if (( recovery_count < MAX_RECOVERY )); then
+    recovery_method="double_enter"
+    apply_recovery_double_enter
+    recovery_count=$((recovery_count + 1))
+  fi
 fi
 
 # === Phase 3: ACK wait OR submission-only verification (main) ===
