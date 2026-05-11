@@ -473,19 +473,39 @@ fi
 
 # === Phase 3: ACK wait OR submission-only verification (main) ===
 if [[ -z "$ACK_MARKER" ]]; then
-  # Track Q §4.2 polish: re-capture after recovery, only OK if Working visible.
+  # Track Q §4.2 polish: only OK if Working is visible. Keep recovering until
+  # submission is observed or MAX_RECOVERY is exhausted; never fall through to
+  # exit 0 without a visible submission signal.
   if [[ "$first_attempt" == "YES" || "$first_attempt" == "YES_WORKING" ]]; then
     finalize "UNKNOWN" 0
   fi
-  sleep "$SLEEP_BETWEEN_ENTERS"
-  s_post="$(capture_state)"
-  if echo "$s_post" | grep -q "^• Working\|◦ Working"; then
-    finalize "UNKNOWN" 0
-  fi
-  if (( recovery_count >= MAX_RECOVERY )); then
-    finalize "UNKNOWN" 3
-  fi
-  finalize "UNKNOWN" 0
+  while true; do
+    sleep "$INITIAL_VERIFY_SLEEP"
+    s_post="$(capture_state)"
+    if echo "$s_post" | grep -q "^• Working\|◦ Working"; then
+      finalize "UNKNOWN" 0
+    fi
+    if (( recovery_count >= MAX_RECOVERY )); then
+      finalize "UNKNOWN" 3
+    fi
+    if echo "$s_post" | grep -q "Create a plan?"; then
+      plan_dialog="true"
+      if [[ "$recovery_method" == "none" ]]; then
+        recovery_method="esc_plan_dismiss"
+      else
+        recovery_method="${recovery_method}_extra"
+      fi
+      apply_recovery_esc_plan_dismiss
+    else
+      if [[ "$recovery_method" == "none" ]]; then
+        recovery_method="double_enter"
+      else
+        recovery_method="${recovery_method}_extra"
+      fi
+      apply_recovery_double_enter
+    fi
+    recovery_count=$((recovery_count + 1))
+  done
 fi
 
 deadline=$((SECONDS + TIMEOUT_SEC))
