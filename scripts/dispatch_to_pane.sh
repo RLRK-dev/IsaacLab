@@ -67,12 +67,12 @@
 #                 Codex registers the user turn (Track AA failure mode).
 #
 # Environment overrides:
-#   DISPATCH_TO_PANE_CHUNK             — chunk size for literal send (default 1000)
-#   DISPATCH_TO_PANE_SLEEP_S           — inter-Enter sleep (default 1)
-#   DISPATCH_TO_PANE_VERIFY_S          — initial post-dispatch sleep (default 5)
-#   DISPATCH_TO_PANE_MAX_RECOVERY      — max recovery attempts per phase (default 3)
+#   DISPATCH_TO_PANE_CHUNK             — positive integer chunk size (default 1000)
+#   DISPATCH_TO_PANE_SLEEP_S           — non-negative inter-Enter sleep seconds (default 1)
+#   DISPATCH_TO_PANE_VERIFY_S          — non-negative initial verify sleep seconds (default 5)
+#   DISPATCH_TO_PANE_MAX_RECOVERY      — non-negative max recovery attempts per phase (default 3)
 #   DISPATCH_TO_PANE_PREWARM           — 0 (off, default) or 1 (on); overridden by flags
-#   DISPATCH_TO_PANE_WARMUP_TIMEOUT_S  — warmup-phase ACK wait (default 360)
+#   DISPATCH_TO_PANE_WARMUP_TIMEOUT_S  — warmup-phase ACK wait seconds (default 360)
 #
 # Exit codes:
 #   0  — visible ACK received within TIMEOUT_SEC (or no ACK_MARKER, submission OK)
@@ -188,8 +188,30 @@ validate_non_negative_int() {
   fi
 }
 
+validate_positive_int() {
+  local name="$1"
+  local value="$2"
+  if ! [[ "$value" =~ ^[0-9]+$ ]] || (( 10#$value <= 0 )); then
+    printf 'dispatch_to_pane: %s must be a positive integer (got: %s)\n' "$name" "$value" >&2
+    exit 2
+  fi
+}
+
+validate_non_negative_number() {
+  local name="$1"
+  local value="$2"
+  if ! [[ "$value" =~ ^([0-9]+([.][0-9]+)?|[.][0-9]+)$ ]]; then
+    printf 'dispatch_to_pane: %s must be a non-negative number (got: %s)\n' "$name" "$value" >&2
+    exit 2
+  fi
+}
+
 # Validate TIMEOUT_SEC (positional or default) BEFORE arithmetic.
 validate_non_negative_int "TIMEOUT_SEC (positional / default)" "$TIMEOUT_SEC"
+validate_positive_int "DISPATCH_TO_PANE_CHUNK" "$CHUNK_SIZE"
+validate_non_negative_number "DISPATCH_TO_PANE_SLEEP_S" "$SLEEP_BETWEEN_ENTERS"
+validate_non_negative_number "DISPATCH_TO_PANE_VERIFY_S" "$INITIAL_VERIFY_SLEEP"
+validate_non_negative_int "DISPATCH_TO_PANE_MAX_RECOVERY" "$MAX_RECOVERY"
 
 # Pre-warm precedence ladder
 if [[ "$PREWARM_FLAG" == "0" || "$PREWARM_FLAG" == "1" ]]; then
@@ -197,7 +219,11 @@ if [[ "$PREWARM_FLAG" == "0" || "$PREWARM_FLAG" == "1" ]]; then
 else
   case "${DISPATCH_TO_PANE_PREWARM:-0}" in
     0|1) PREWARM_ENABLED="${DISPATCH_TO_PANE_PREWARM:-0}" ;;
-    *)   PREWARM_ENABLED="0" ;;  # malformed env -> safe default
+    *)
+      printf 'dispatch_to_pane: DISPATCH_TO_PANE_PREWARM must be 0 or 1 (got: %s)\n' \
+        "${DISPATCH_TO_PANE_PREWARM}" >&2
+      exit 2
+      ;;
   esac
 fi
 
