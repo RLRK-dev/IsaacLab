@@ -206,12 +206,22 @@ validate_non_negative_number() {
   fi
 }
 
+normalize_non_negative_int() {
+  printf '%d' "$((10#$1))"
+}
+
 # Validate TIMEOUT_SEC (positional or default) BEFORE arithmetic.
 validate_non_negative_int "TIMEOUT_SEC (positional / default)" "$TIMEOUT_SEC"
 validate_positive_int "DISPATCH_TO_PANE_CHUNK" "$CHUNK_SIZE"
 validate_non_negative_number "DISPATCH_TO_PANE_SLEEP_S" "$SLEEP_BETWEEN_ENTERS"
 validate_non_negative_number "DISPATCH_TO_PANE_VERIFY_S" "$INITIAL_VERIFY_SLEEP"
 validate_non_negative_int "DISPATCH_TO_PANE_MAX_RECOVERY" "$MAX_RECOVERY"
+
+# Bash arithmetic treats leading-zero integers as octal. Normalize validated
+# integer inputs to base-10 before any arithmetic context sees them.
+TIMEOUT_SEC="$(normalize_non_negative_int "$TIMEOUT_SEC")"
+CHUNK_SIZE="$(normalize_non_negative_int "$CHUNK_SIZE")"
+MAX_RECOVERY="$(normalize_non_negative_int "$MAX_RECOVERY")"
 
 # Pre-warm precedence ladder
 if [[ "$PREWARM_FLAG" == "0" || "$PREWARM_FLAG" == "1" ]]; then
@@ -236,6 +246,7 @@ fi
 # Validate WARMUP_TIMEOUT_SEC (flag overrides already validated by parser;
 # this catches the env-supplied path that bypasses the parser).
 validate_non_negative_int "DISPATCH_TO_PANE_WARMUP_TIMEOUT_S / --warmup-timeout" "$WARMUP_TIMEOUT_SEC"
+WARMUP_TIMEOUT_SEC="$(normalize_non_negative_int "$WARMUP_TIMEOUT_SEC")"
 
 [[ -z "$PANE_ID" ]] && { printf 'dispatch_to_pane: missing tmux pane id\n' >&2; exit 2; }
 
