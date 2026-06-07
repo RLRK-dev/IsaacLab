@@ -51,7 +51,7 @@ _config_dir = os.environ.get(
 )
 sys.path.insert(0, _config_dir)
 from task_config import (  # noqa: E402
-    FRANKA_NUM_JOINTS, EE_BODY_OFFSET,
+    FRANKA_NUM_JOINTS, EE_BODY_OFFSET, BODIES_PER_ARM, N_ARM_BODIES,
     TABLE_HEIGHT, ROBOT_LEFT_BASE, ROBOT_RIGHT_BASE,
     EE_TO_FINGERTIP, APPROACH_Z, GRASP_Z, LIFT_Z, PUSH_Z,
     SIM_SUBSTEPS, NJMAX,
@@ -83,6 +83,72 @@ FRANKA_URDF = os.path.normpath(os.path.join(
     "..", "..", "source", "extensions", "isaaclab_tasks_thread", "data", "robots",
     "panda_independent_fingers.urdf",
 ))
+
+# UR5e + Robotiq 2f85 (Option-E substrate, S1 assets) — S2a FK/scene source.
+_UR5E_ASSET = os.path.normpath(os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..", "assets", "ur5e_robotiq",
+))
+UR5E_XML = os.path.join(_UR5E_ASSET, "ur5e", "ur5e.xml")
+ROBOTIQ_XML = os.path.join(_UR5E_ASSET, "robotiq_2f85", "2f85.xml")
+# UR5e wrist_3 attachment_site (ur5e.xml) — Robotiq base mounts here. MuJoCo quat (w, x, y, z).
+UR5E_ATTACH_POS = (0.0, 0.1, 0.0)
+UR5E_ATTACH_QUAT_MJCF_WXYZ = (-1.0, 1.0, 0.0, 0.0)
+
+
+def mjcf_wxyz_to_wp(w, x, y, z):
+    """Convert a MuJoCo quat (w, x, y, z) to a normalized warp ``wp.quat`` (x, y, z, w)."""
+    n = float(np.linalg.norm([w, x, y, z]))
+    return wp.quat(x / n, y / n, z / n, w / n)
+
+
+def _geo_type_name(t):
+    """Map a Newton shape geo-type int to its name (e.g. ``CAPSULE`` / ``CYLINDER`` / ``SPHERE``)."""
+    gt = getattr(newton, "GeoType", None) or getattr(newton, "GeometryType", None)
+    if gt is not None:
+        try:
+            return gt(int(t)).name
+        except Exception:
+            return str(int(t))
+    return str(int(t))
+
+
+def add_ur5e_robotiq(builder, base_xform):
+    """Assemble one UR5e arm + Robotiq 2f85 gripper into ``builder`` at ``base_xform``.
+
+    UR5e is fixed-based at ``base_xform``; the Robotiq gripper attaches via a fixed base
+    joint to the UR5e ``wrist_3`` body at the ``attachment_site`` frame (``parent_body`` +
+    ``floating=False`` = the documented Newton hierarchical-composition path). ``collapse_
+    fixed_joints=True`` / ``parse_meshes=False`` reproduce the S1-derived production index
+    space (14 bodies == 14 joints per arm, ``wrist_3`` = EE local index 5). Returns the
+    ``wrist_3`` body index (absolute, in ``builder``).
+    """
+    b0 = len(builder.body_mass)
+    builder.add_mjcf(
+        UR5E_XML,
+        xform=base_xform,
+        floating=False,
+        collapse_fixed_joints=True,
+        enable_self_collisions=False,
+        parse_meshes=False,
+    )
+    body_key = list(getattr(builder, "body_label", None) or getattr(builder, "body_key", None) or [])
+    n_now = len(builder.body_mass)
+    wrist3 = next(
+        (i for i in range(b0, n_now) if i < len(body_key) and "wrist_3" in str(body_key[i])),
+        b0 + EE_BODY_OFFSET,
+    )
+    builder.add_mjcf(
+        ROBOTIQ_XML,
+        parent_body=wrist3,
+        floating=False,
+        xform=wp.transform(wp.vec3(*UR5E_ATTACH_POS), mjcf_wxyz_to_wp(*UR5E_ATTACH_QUAT_MJCF_WXYZ)),
+        collapse_fixed_joints=True,
+        enable_self_collisions=False,
+        parse_meshes=False,
+    )
+    return wrist3
+
+
 # Body indices in the model (per arm, relative to arm's first body)
 # Body 6 = panda_hand (flange), Body 7/8 = finger links
 
@@ -515,23 +581,8 @@ def set_scene_colors(recorder, scene_info):
 # ---------------------------------------------------------------------------
 # Scene builder
 # ---------------------------------------------------------------------------
-def _load_finger_mesh():
-    """Load finger collision mesh via trimesh and create newton.Mesh.
-
-    Returns newton.Mesh for the finger (convex hull of finger_v_groove_60deg.stl).
-    Cached after first call.
-    """
-    if not hasattr(_load_finger_mesh, "_cache"):
-        stl_path = os.path.join(
-            os.path.dirname(FRANKA_URDF),
-            "franka_description", "meshes", "collision", "finger_v_groove_60deg.stl",
-        )
-        tm = trimesh.load(stl_path)
-        verts = np.array(tm.vertices, dtype=np.float32)
-        faces = np.array(tm.faces, dtype=np.int32).flatten()
-        _load_finger_mesh._cache = newton.Mesh(verts, faces)
-        print(f"  [MESH] Loaded finger mesh: {len(tm.vertices)} verts, {len(tm.faces)} faces")
-    return _load_finger_mesh._cache
+# _load_finger_mesh() removed (Option-E S2a): Franka V-groove finger collision mesh,
+# dead in this file (no live caller; the de-Franka scene builds no Franka finger geometry).
 
 
 def _load_arm_meshes():
@@ -610,23 +661,25 @@ def _load_arm_meshes():
 
 
 def add_kinematic_arm(builder, fk_model, fk_state, arm_body_offset, label_prefix="arm"):
-    """Add a Franka arm as kinematic bodies to the physics builder.
+    """Add one UR5e+Robotiq arm as kinematic bodies to the physics builder (Option-E S2a).
 
-    Loads URDF link collision meshes for arm bodies (0-6) visual rendering.
-    Finger bodies (7, 8) get actual mesh shapes for collision.
-
-    No REVOLUTE/PRISMATIC joints are created (VBD doesn't support them).
-    Positions are updated each step from FK model body_q.
+    Creates BODIES_PER_ARM (14) kinematic bodies (no joints — VBD supports none); their
+    positions are updated each step from the FK model body_q. Arm bodies 0-5 carry the UR5e
+    collision primitives REPLICATED from the swapped fk_model, set VISIBLE-only (the kinematic
+    arm has no collision role; matches the de-Franka scene). Gripper bodies 6-13 are bare —
+    the faithful Robotiq pad collision is built once, correctly, at S5 (the 4-bar cannot be
+    posed closed by FK/VBD; closing needs the MuJoCo solver). De-Franka: no Franka claw boxes,
+    no Franka DAE meshes, no fallback capsule.
 
     Args:
-        fk_model: FK model with URDF joints (for body transform reference).
+        fk_model: swapped UR5e+Robotiq FK model (dual-arm) — source of body poses and the
+            arm collision primitives to replicate.
         fk_state: FK state with body_q computed via eval_fk.
-        arm_body_offset: body index offset in FK model (0 for left, 9 for right).
+        arm_body_offset: body index offset in the dual FK model (0 for left, JOINTS_PER_ARM for right).
         label_prefix: "left" or "right" for body labels.
 
-    Returns (body_start, shape_start, shape_end, finger_visual_indices).
-    finger_visual_indices: shape indices of finger visual DAE meshes (to exclude
-    from approximate_meshes and set VISIBLE only in contact filtering).
+    Returns (body_start, shape_start, shape_end, finger_visual_indices). finger_visual_indices
+    is always [] (no Franka finger DAE in the UR5e substrate; kept for the 4-tuple contract).
     """
     body_start = len(builder.body_mass)
     shape_start = builder.shape_count
@@ -634,141 +687,69 @@ def add_kinematic_arm(builder, fk_model, fk_state, arm_body_offset, label_prefix
 
     fk_body_q = fk_state.body_q.numpy()
 
-    # Finger collision uses BOX primitive (no V-groove MESH needed)
-    finger_cfg = newton.ModelBuilder.ShapeConfig()
-    finger_cfg.ke = CABLE_CONTACT_KE
-    finger_cfg.kd = CABLE_CONTACT_KD
-    finger_cfg.mu = CABLE_CONTACT_MU
-    finger_cfg.is_hydroelastic = False
-    finger_cfg.gap = 0.001     # 1mm (+ cable gap 2mm = 3mm contact distance)
-    finger_cfg.density = 0.0   # density=0: mass comes from add_link, not shape
-
-    arm_meshes = _load_arm_meshes()
-
-    # Arm body visual-only shape config (no collision contribution)
+    # Arm-shape visual config (no collision contribution; flags forced VISIBLE below).
     arm_cfg = newton.ModelBuilder.ShapeConfig()
     arm_cfg.density = 0.0
     arm_cfg.gap = 0.0
 
-    for local_body in range(FRANKA_NUM_JOINTS):
-        fk_bi = arm_body_offset + local_body
-        bq = fk_body_q[fk_bi]
+    # 1. Kinematic bodies (one per robot body, posed from FK; inv_mass zeroed after finalize).
+    scene_body_ids = []
+    for local_body in range(BODIES_PER_ARM):
+        bq = fk_body_q[arm_body_offset + local_body]
         # body_q format: [x, y, z, qx, qy, qz, qw]
-        pos = wp.vec3(float(bq[0]), float(bq[1]), float(bq[2]))
-        quat = wp.quat(float(bq[3]), float(bq[4]), float(bq[5]), float(bq[6]))
-        xform = wp.transform(pos, quat)
-
+        xform = wp.transform(
+            wp.vec3(float(bq[0]), float(bq[1]), float(bq[2])),
+            wp.quat(float(bq[3]), float(bq[4]), float(bq[5]), float(bq[6])),
+        )
         body_id = builder.add_link(
             xform=xform,
-            mass=100.0,          # Heavy kinematic body (inv_mass zeroed after finalize)
+            mass=100.0,
             is_kinematic=True,
             label=f"{label_prefix}_body{local_body}",
         )
+        scene_body_ids.append(body_id)
 
-        if local_body in (7, 8):
-            # Finger body: BOX collision (wall + upper/lower claw) + visual DAE mesh
-            # BOX primitives preserve concave scoop shape for cable lift via normal force.
-            # (CONVEX_MESH convex hull destroys the claw concavity → cannot lift cable.)
-            # Right finger (body 8) is rotated 180° around Z in URDF
-            if local_body == 8:
-                mesh_rot = wp.quat_from_axis_angle(wp.vec3(0.0, 0.0, 1.0), np.pi)
-                mesh_xf = wp.transform(wp.vec3(0.0, 0.0, 0.0), mesh_rot)
-            else:
-                mesh_xf = wp.transform_identity()
-
-            # Wall dimensions from finger mesh bounding box
-            fb = arm_meshes["finger_bounds"]
-            fb_min, fb_max = fb["min"], fb["max"]
-            wall_hx = float(fb_max[0] - fb_min[0]) / 2
-            wall_hy = float(fb_max[1] - fb_min[1]) / 2
-            wall_hz = float(fb_max[2] - fb_min[2]) / 2
-            wall_cx = float(fb_max[0] + fb_min[0]) / 2
-            wall_cy = float(fb_max[1] + fb_min[1]) / 2
-            wall_cz = float(fb_max[2] + fb_min[2]) / 2
-
-            # Claw parameters — must be thick enough for reliable VBD BOX-capsule contact.
-            # Previous 0.5mm claw was 0.25mm outside cable surface → near-zero contact force.
-            # 5mm thickness creates solid shelf under cable; 6mm protrusion > cable radius (4mm).
-            claw_protrusion = 0.006    # 6mm inward from wall inner face (> cable radius)
-            claw_thickness = 0.005     # 5mm Z extension past wall (10× previous)
-            claw_hx = wall_hx          # same width as wall
-            claw_hy = claw_protrusion / 2   # 1.5mm half-extent
-            claw_hz = claw_thickness / 2    # 0.25mm half-extent
-
-            # Claw Y: extends inward from wall's Y-min face (inner face ≈ Y=0)
-            claw_cy = (wall_cy - wall_hy) - claw_hy
-
-            # Wall (main finger body)
-            wall_local = wp.transform(
-                wp.vec3(wall_cx, wall_cy, wall_cz), wp.quat_identity())
-            builder.add_shape_box(
-                body=body_id,
-                xform=wp.transform_multiply(mesh_xf, wall_local),
-                hx=wall_hx, hy=wall_hy, hz=wall_hz,
-                cfg=finger_cfg,
-            )
-            # Lower claw (at finger tip = Z-max, slides under cable for lift)
-            lower_cz = wall_cz + wall_hz + claw_hz
-            lower_local = wp.transform(
-                wp.vec3(wall_cx, claw_cy, lower_cz), wp.quat_identity())
-            builder.add_shape_box(
-                body=body_id,
-                xform=wp.transform_multiply(mesh_xf, lower_local),
-                hx=claw_hx, hy=claw_hy, hz=claw_hz,
-                cfg=finger_cfg,
-            )
-            # Upper claw (at finger base = Z-min, containment)
-            upper_cz = wall_cz - wall_hz - claw_hz
-            upper_local = wp.transform(
-                wp.vec3(wall_cx, claw_cy, upper_cz), wp.quat_identity())
-            builder.add_shape_box(
-                body=body_id,
-                xform=wp.transform_multiply(mesh_xf, upper_local),
-                hx=claw_hx, hy=claw_hy, hz=claw_hz,
-                cfg=finger_cfg,
-            )
-
-            # Visual shape (finger.dae — unchanged)
-            if local_body in arm_meshes:
-                for mesh in arm_meshes[local_body]:
-                    vis_idx = builder.add_shape_mesh(
-                        body=body_id,
-                        mesh=mesh,
-                        xform=mesh_xf,
-                        cfg=arm_cfg,
-                    )
-                    finger_visual_indices.append(vis_idx)
-        elif local_body in arm_meshes:
-            # Arm/hand body: visual DAE mesh
-            for i, mesh in enumerate(arm_meshes[local_body]):
-                if local_body == 6 and i == 1:
-                    # hand.dae: apply collapsed fixed-joint offset (link7→link8→hand)
-                    shape_xf = wp.transform(
-                        wp.vec3(0.0, 0.0, HAND_OFFSET_Z),
-                        wp.quat_from_axis_angle(wp.vec3(0.0, 0.0, 1.0), HAND_OFFSET_RZ),
-                    )
-                else:
-                    shape_xf = wp.transform_identity()
-                builder.add_shape_mesh(
-                    body=body_id,
-                    mesh=mesh,
-                    xform=shape_xf,
-                    cfg=arm_cfg,
-                )
+    # 2. Replicate the UR5e arm collision primitives (fk bodies [arm_body_offset .. +N_ARM_BODIES))
+    #    onto the kinematic arm bodies as VISIBLE-only (Delta-H2). Gripper bodies 6-13 stay BARE
+    #    (Delta-H4: faithful Robotiq pad geometry deferred to S5). Per-arm remap (Delta-MED): select
+    #    THIS arm's fk shapes (offset 0 / JOINTS_PER_ARM) and remap fk body -> scene-local index.
+    fk_shape_body = fk_model.shape_body.numpy()
+    fk_shape_type = fk_model.shape_type.numpy()
+    fk_shape_scale = fk_model.shape_scale.numpy()
+    fk_shape_xform = fk_model.shape_transform.numpy()
+    fk_shape_flags = fk_model.shape_flags.numpy()
+    n_arm_shapes = 0
+    for si in range(len(fk_shape_body)):
+        local = int(fk_shape_body[si]) - arm_body_offset
+        if local < 0 or local >= N_ARM_BODIES:
+            continue  # only UR5e arm bodies 0..5 of THIS arm (gripper bare; other arm skipped)
+        if int(fk_shape_flags[si]) == 8:
+            continue  # skip non-load-bearing MJCF site markers (as_site spheres)
+        gname = _geo_type_name(int(fk_shape_type[si]))
+        scl = fk_shape_scale[si]
+        xf = fk_shape_xform[si]
+        local_xf = wp.transform(
+            wp.vec3(float(xf[0]), float(xf[1]), float(xf[2])),
+            wp.quat(float(xf[3]), float(xf[4]), float(xf[5]), float(xf[6])),
+        )
+        sb = scene_body_ids[local]
+        if gname == "CAPSULE":
+            sid = builder.add_shape_capsule(
+                body=sb, xform=local_xf, radius=float(scl[0]), half_height=float(scl[1]), cfg=arm_cfg)
+        elif gname == "CYLINDER":
+            sid = builder.add_shape_cylinder(
+                body=sb, xform=local_xf, radius=float(scl[0]), half_height=float(scl[1]), cfg=arm_cfg)
+        elif gname == "SPHERE":
+            sid = builder.add_shape_sphere(body=sb, xform=local_xf, radius=float(scl[0]), cfg=arm_cfg)
         else:
-            # Fallback: capsule if mesh not found
-            builder.add_shape_capsule(
-                body=body_id,
-                radius=0.04,
-                half_height=0.05,
-                cfg=arm_cfg,
-            )
+            continue  # unknown primitive — skip (visual-only; no collision role in S2)
+        builder.shape_flags[sid] = 1  # VISIBLE only (strip COLLIDE — arm has no collision role)
+        n_arm_shapes += 1
 
     shape_end = builder.shape_count
-    n_bodies = FRANKA_NUM_JOINTS
-    print(f"  [ARM-{label_prefix}] {n_bodies} kinematic bodies, "
-          f"shapes=[{shape_start}:{shape_end}], "
-          f"finger visual DAE: {len(finger_visual_indices)} shapes")
+    print(f"  [ARM-{label_prefix}] {BODIES_PER_ARM} kinematic bodies (UR5e+Robotiq), "
+          f"arm visual primitives={n_arm_shapes} (VISIBLE-only), gripper bare (pads=S5), "
+          f"shapes=[{shape_start}:{shape_end}]")
 
     return body_start, shape_start, shape_end, finger_visual_indices
 
@@ -1037,8 +1018,8 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None):
 def build_fk_model(device=None):
     """Build robot-only model for FK body position computation and IK solving.
 
-    Uses URDF joints (REVOLUTE, PRISMATIC) for FK/IK.  Body indices map 1:1
-    to physics model (left arm 0-8, right arm 9-17).  No cable, no collision.
+    Uses the UR5e+Robotiq MJCF joints (REVOLUTE/FIXED) for FK/IK.  Body indices
+    map 1:1 to the physics model (left arm 0-13, right arm 14-27).  No cable.
 
     The FK model is separate from the VBD physics model:
     - FK model: URDF joints → IK solving + FK body transform computation
@@ -1056,20 +1037,10 @@ def build_fk_model(device=None):
     urdf_cfg.density = 0.0
     builder.default_shape_cfg = urdf_cfg
 
-    builder.add_urdf(
-        FRANKA_URDF,
-        xform=wp.transform(ROBOT_LEFT_BASE, wp.quat_identity()),
-        floating=False,
-        enable_self_collisions=False,
-        collapse_fixed_joints=True,
-    )
-    builder.add_urdf(
-        FRANKA_URDF,
-        xform=wp.transform(ROBOT_RIGHT_BASE, wp.quat_identity()),
-        floating=False,
-        enable_self_collisions=False,
-        collapse_fixed_joints=True,
-    )
+    # Option-E substrate (S2a, C-a): UR5e + Robotiq 2f85 per arm via the S1 assembly
+    # (collapse=True, parse_meshes=False = the derived 14-body/arm production index space).
+    add_ur5e_robotiq(builder, wp.transform(ROBOT_LEFT_BASE, wp.quat_identity()))
+    add_ur5e_robotiq(builder, wp.transform(ROBOT_RIGHT_BASE, wp.quat_identity()))
 
     model = builder.finalize(device=device, requires_grad=True)
     print(f"  [FK] Robot-only model: bodies={model.body_count}, "

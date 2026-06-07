@@ -183,6 +183,7 @@ _config_dir = os.path.join(_env_dir, "..", "configs")
 if _config_dir not in sys.path:
     sys.path.insert(0, _config_dir)
 from task_config import (
+    BODIES_PER_ARM,
     CLIP1_X,
     CLIP1_Y,
     CLIP1_Z,
@@ -950,11 +951,11 @@ class NewtonAerialRegraspEnv(VecEnv):
             dtype=np.float32,
         )
         right_finger0_pos = np.asarray(
-            body_q[int(world_body_start) + FRANKA_NUM_JOINTS + LEFT_FINGER_LOCAL[0]][:3],
+            body_q[int(world_body_start) + BODIES_PER_ARM + LEFT_FINGER_LOCAL[0]][:3],
             dtype=np.float32,
         )
         right_finger1_pos = np.asarray(
-            body_q[int(world_body_start) + FRANKA_NUM_JOINTS + LEFT_FINGER_LOCAL[1]][:3],
+            body_q[int(world_body_start) + BODIES_PER_ARM + LEFT_FINGER_LOCAL[1]][:3],
             dtype=np.float32,
         )
         left_finger0_fk_error = 0.0
@@ -965,8 +966,8 @@ class NewtonAerialRegraspEnv(VecEnv):
             fk_body_q_world = np.asarray(fk_body_q_world, dtype=np.float32)
             left_finger0_fk_pos = fk_body_q_world[LEFT_FINGER_LOCAL[0]][:3]
             left_finger1_fk_pos = fk_body_q_world[LEFT_FINGER_LOCAL[1]][:3]
-            right_finger0_fk_pos = fk_body_q_world[FRANKA_NUM_JOINTS + LEFT_FINGER_LOCAL[0]][:3]
-            right_finger1_fk_pos = fk_body_q_world[FRANKA_NUM_JOINTS + LEFT_FINGER_LOCAL[1]][:3]
+            right_finger0_fk_pos = fk_body_q_world[BODIES_PER_ARM + LEFT_FINGER_LOCAL[0]][:3]
+            right_finger1_fk_pos = fk_body_q_world[BODIES_PER_ARM + LEFT_FINGER_LOCAL[1]][:3]
             left_finger0_fk_error = float(np.linalg.norm(left_finger0_pos - left_finger0_fk_pos))
             left_finger1_fk_error = float(np.linalg.norm(left_finger1_pos - left_finger1_fk_pos))
             right_finger0_fk_error = float(np.linalg.norm(right_finger0_pos - right_finger0_fk_pos))

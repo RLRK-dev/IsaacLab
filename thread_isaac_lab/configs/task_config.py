@@ -21,20 +21,31 @@ TABLE_HEIGHT = 0.80
 ROBOT_LEFT_BASE = (0.0, -0.35, TABLE_HEIGHT)
 ROBOT_RIGHT_BASE = (0.0, 0.35, TABLE_HEIGHT)
 
-# === Robot DOF SSOT (Step-0 consolidation, 2026-06-07) ===
-# Robot-agnostic names = the SSOT. Backward-compat aliases keep all current call-sites valid.
-# VALUES = current Franka (behavior-preserving). The robot-swap (UR5e+Robotiq: ARM_DOF 7->6, GRIPPER_DOF 2->8,
-# ROBOT_NUM_JOINTS 9->14, EE_BODY_IDX, GRIPPER_DRIVER_IDX) is a SEPARATE later gated step that edits ONLY this block.
-ARM_DOF = 7                          # arm joints (Franka)
-GRIPPER_DOF = 2                      # gripper joints (Franka 2 fingers)
-ROBOT_NUM_JOINTS = ARM_DOF + GRIPPER_DOF          # 9
-EE_BODY_IDX = 6                      # EE body local index (panda_hand)
-GRIPPER_JOINT_IDX = [7, 8]          # gripper/finger body local indices (per arm)
-ROBOT_BODIES_PER_ARM = ROBOT_NUM_JOINTS           # 9
-# Backward-compat aliases (existing names; remove in a later cosmetic pass, NOT now):
-FRANKA_NUM_JOINTS = ROBOT_NUM_JOINTS              # 9
-EE_BODY_OFFSET = EE_BODY_IDX                       # 6
-FINGER_LOCAL = GRIPPER_JOINT_IDX                  # [7, 8]
+# === Robot DOF SSOT (S2 substrate swap: Franka 9DOF VBD -> UR5e+Robotiq 14DOF, 2026-06-08) ===
+# DERIVED on disk (eval_runs/troot_optE_s2_index_space_derivation_*, collapse=True). Newton-DOF SSOT ONLY
+# (the PhysX dual_arm_cfg_*/legacy scripts keep their own Franka constants -- see S2 design C8).
+ARM_DOF = 6                          # UR5e arm joints (revolute)
+GRIPPER_DOF = 8                      # Robotiq 2f85 kinematic joints (4-bar x2)
+ROBOT_NUM_JOINTS = ARM_DOF + GRIPPER_DOF          # 14
+EE_BODY_IDX = 5                      # wrist_3_link body local index
+ROBOT_BODIES_PER_ARM = ROBOT_NUM_JOINTS           # 14 (bodies==joints, collapse=True; probe-confirmed)
+
+# --- index-SPACE split (carry-forward #1: three joint roles diverge for UR5e+Robotiq) ---
+GRIPPER_DRIVER_JOINT_IDX = [6, 10]                # JOINT space: ACTUATED driver joints (control / open-set)
+GRIPPER_JOINT_RANGE = list(range(ARM_DOF, ROBOT_NUM_JOINTS))   # JOINT space: ALL 8 gripper joints [6..13]
+#                                                   (exclude-gripper-from-arm-IK / finger_mask / pin sets)
+GRIPPER_PAD_BODY_IDX = [9, 13]                    # BODY space: pad-carrying followers (contact-filter LOGIC;
+#                                                   pad GEOMETRY itself deferred to S5)
+N_ARM_BODIES = ARM_DOF                            # 6 (contact-filter: arm bodies 0..5)
+
+# --- stride split (joint-stride vs body-stride; both =14 today, behavior-preserving) ---
+JOINTS_PER_ARM = ROBOT_NUM_JOINTS                 # 14: per-arm stride for joint_q arrays
+BODIES_PER_ARM = ROBOT_BODIES_PER_ARM             # 14: per-arm stride for body_q arrays
+
+# Backward-compat aliases (re-pointed to the CORRECT space):
+FRANKA_NUM_JOINTS = ROBOT_NUM_JOINTS              # 14 (legacy stride; migrate sites to JOINTS_PER_ARM/BODIES_PER_ARM)
+EE_BODY_OFFSET = EE_BODY_IDX                       # 5
+FINGER_LOCAL = GRIPPER_PAD_BODY_IDX               # [9,13]  (BODY-space finger-pos reads)
 
 # =============================================================================
 # Initial Joint Angles (Phase 1 hover)

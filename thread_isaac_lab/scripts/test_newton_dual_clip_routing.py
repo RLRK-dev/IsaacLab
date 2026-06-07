@@ -320,6 +320,9 @@ def _load_arm_meshes():
     return _load_arm_meshes._cache
 
 
+# OPTION-E S2a (2026-06-08): Franka-legacy DUP (standalone test_newton_dual_clip_routing, imported by nobody;
+# only its own __main__ runs it), NOT UR5e-swapped. Live path = test_newton_clip_routing.add_kinematic_arm;
+# do NOT run this script post-substrate-swap (FRANKA_NUM_JOINTS now 14 over a Franka 9-body build).
 def add_kinematic_arm(builder, fk_model, fk_state, arm_body_offset, label_prefix="arm"):
     body_start = len(builder.body_mass)
     shape_start = builder.shape_count

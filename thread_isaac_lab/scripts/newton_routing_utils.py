@@ -745,6 +745,10 @@ def add_clip_visual(builder, cx, cy, cz):
     return clip_shape_indices
 
 
+# OPTION-E S2a (2026-06-08): Franka-legacy SELF-CONTAINED build path, NOT UR5e-swapped + UNREACHABLE
+# (no importer/caller; live RL/orchestrator scene path = newton_skill_env_base.build_multiworld_scene,
+# which uses test_newton_clip_routing.add_kinematic_arm). Left unmodified; do NOT run post-substrate-swap
+# without porting to UR5e+Robotiq (its add_kinematic_arm range(FRANKA_NUM_JOINTS=14) would over-run a Franka build).
 def build_scene(device, clip_positions, fk_model, fk_state,
                 use_cable=True, cable_segments=20, cable_seg_len=0.015,
                 gravity=-9.81, table_half=(0.40, 0.45, 0.005)):
