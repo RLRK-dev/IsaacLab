@@ -1,0 +1,14 @@
+# Option-E S1 (2026-06-07): the 7 UR5e VISUAL meshes below exceed the pre-commit
+# check-added-large-files 2MB limit. They are render-only (collision = capsule
+# primitives in ur5e.xml; the FK/IK model builds with parse_meshes=False) -> NOT
+# needed for S1-S7. Deferred to S8 render-setup -- track via git-lfs or a render-fetch
+# step. Source preserved in:
+#   /data/IsaacLab/troot_p3_ur5e_robotiq_asset_fetch_parse_20260606/menagerie/
+#     universal_robots_ur5e/universal_robots_ur5e/assets/
+ur5e/assets/upperarm_3.obj
+ur5e/assets/upperarm_2.obj
+ur5e/assets/shoulder_0.obj
+ur5e/assets/shoulder_2.obj
+ur5e/assets/wrist1_1.obj
+ur5e/assets/wrist2_1.obj
+ur5e/assets/wrist2_2.obj
