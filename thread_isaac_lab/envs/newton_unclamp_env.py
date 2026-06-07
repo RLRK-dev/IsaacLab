@@ -104,6 +104,7 @@ from task_config import (
     FINGER_STEP_SIZE,
     GRASP_X,
     GRASP_Z,
+    GRIPPER_PAD_BODY_IDX,
     GRIP_HALF_SPAN,
     GROOVE_BODIES_MIN,
     GROOVE_CENTER_Z,
@@ -328,16 +329,16 @@ class NewtonUnclampEnv(VecEnv):
         right_body_start, right_shape_start, right_shape_end, right_fv = right_info
         all_finger_visual = set(left_fv + right_fv)
 
-        # Contact filtering: arm bodies 0-6 VISIBLE only, finger 7-8 COLLIDE
+        # Contact filtering: non-pad bodies VISIBLE only, pad followers (GRIPPER_PAD_BODY_IDX) COLLIDE
         for arm_ss, arm_se, arm_bs in [
             (left_shape_start, left_shape_end, left_body_start),
             (right_shape_start, right_shape_end, right_body_start),
         ]:
             for si in range(arm_ss, arm_se):
                 local = proto.shape_body[si] - arm_bs
-                if local < 7 or si in all_finger_visual:
+                if local not in GRIPPER_PAD_BODY_IDX or si in all_finger_visual:
                     proto.shape_flags[si] = 1
-                elif local in (7, 8):
+                elif local in GRIPPER_PAD_BODY_IDX:
                     proto.shape_flags[si] = 0x6
 
         # Cable (Cosserat Rod)
@@ -362,7 +363,7 @@ class NewtonUnclampEnv(VecEnv):
             ]:
                 for arm_si in range(arm_ss, arm_se):
                     local = proto.shape_body[arm_si] - arm_bs
-                    if local < 7:
+                    if local not in GRIPPER_PAD_BODY_IDX:
                         proto.add_shape_collision_filter_pair(cable_si, arm_si)
 
         self._bodies_per_world = proto.body_count
@@ -445,7 +446,7 @@ class NewtonUnclampEnv(VecEnv):
                     local = bi - ws
                     local_l = local - 0
                     local_r = local - ROBOT_BODIES_PER_ARM
-                    if local_l in (7, 8) or local_r in (7, 8):
+                    if local_l in GRIPPER_PAD_BODY_IDX or local_r in GRIPPER_PAD_BODY_IDX:
                         if model_stypes[si] == 7:  # BOX = collision
                             model_sflags[si] = 0x6
                         elif model_stypes[si] == 8:  # MESH = visual
