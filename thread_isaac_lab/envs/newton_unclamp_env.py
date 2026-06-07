@@ -99,6 +99,7 @@ from task_config import (
     CLIP1_Z,
     CLIP_BASE_HEIGHT,
     FINGER_HALF_OPEN_POS,
+    FINGER_LOCAL,
     FINGER_OPEN_POS,
     FINGER_STEP_SIZE,
     GRASP_X,
@@ -129,7 +130,6 @@ _sin_pi8 = math.sin(math.pi / 8)
 GROOVE_CHECK_RADIUS = CABLE_SEG_LEN + CABLE_RADIUS  # 19mm
 
 # Dynamic finger spring parameters (aligned with other envs)
-FINGER_LOCAL = [7, 8]
 FINGER_SPRING_KE = 10000.0
 FINGER_SPRING_KD = 500.0
 FINGER_DYNAMIC_INV_MASS = 20.0

@@ -18,10 +18,9 @@ import numpy as np
 import torch
 import warp as wp
 from scipy.spatial.transform import Rotation as _ScipyRotation
+from task_config import EE_BODY_OFFSET, FRANKA_NUM_JOINTS
 
 # Franka body layout (Newton collapsed joints)
-EE_BODY_OFFSET = 6
-FRANKA_NUM_JOINTS = 9
 
 # Verified camera offsets in body 6 (link7) frame
 # Source: test_newton_clip_routing.py:125-126

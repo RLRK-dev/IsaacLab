@@ -21,6 +21,21 @@ TABLE_HEIGHT = 0.80
 ROBOT_LEFT_BASE = (0.0, -0.35, TABLE_HEIGHT)
 ROBOT_RIGHT_BASE = (0.0, 0.35, TABLE_HEIGHT)
 
+# === Robot DOF SSOT (Step-0 consolidation, 2026-06-07) ===
+# Robot-agnostic names = the SSOT. Backward-compat aliases keep all current call-sites valid.
+# VALUES = current Franka (behavior-preserving). The robot-swap (UR5e+Robotiq: ARM_DOF 7->6, GRIPPER_DOF 2->8,
+# ROBOT_NUM_JOINTS 9->14, EE_BODY_IDX, GRIPPER_DRIVER_IDX) is a SEPARATE later gated step that edits ONLY this block.
+ARM_DOF = 7                          # arm joints (Franka)
+GRIPPER_DOF = 2                      # gripper joints (Franka 2 fingers)
+ROBOT_NUM_JOINTS = ARM_DOF + GRIPPER_DOF          # 9
+EE_BODY_IDX = 6                      # EE body local index (panda_hand)
+GRIPPER_JOINT_IDX = [7, 8]          # gripper/finger body local indices (per arm)
+ROBOT_BODIES_PER_ARM = ROBOT_NUM_JOINTS           # 9
+# Backward-compat aliases (existing names; remove in a later cosmetic pass, NOT now):
+FRANKA_NUM_JOINTS = ROBOT_NUM_JOINTS              # 9
+EE_BODY_OFFSET = EE_BODY_IDX                       # 6
+FINGER_LOCAL = GRIPPER_JOINT_IDX                  # [7, 8]
+
 # =============================================================================
 # Initial Joint Angles (Phase 1 hover)
 # =============================================================================

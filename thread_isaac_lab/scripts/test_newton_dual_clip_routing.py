@@ -48,6 +48,7 @@ _config_dir = os.environ.get(
 )
 sys.path.insert(0, _config_dir)
 from task_config import (  # noqa: E402
+    FRANKA_NUM_JOINTS, EE_BODY_OFFSET,
     TABLE_HEIGHT, ROBOT_LEFT_BASE, ROBOT_RIGHT_BASE,
     APPROACH_Z, GRASP_Z, LIFT_Z, PUSH_Z,
     SIM_SUBSTEPS, NJMAX,
@@ -104,8 +105,6 @@ FRANKA_URDF = os.path.normpath(os.path.join(
     "..", "..", "source", "extensions", "isaaclab_tasks_thread", "data", "robots",
     "panda_independent_fingers.urdf",
 ))
-FRANKA_NUM_JOINTS = 9
-EE_BODY_OFFSET = 6
 
 # IK
 IK_ITERATIONS = 100

@@ -100,7 +100,6 @@ from newton_skill_env_base import (
 )
 
 # Dynamic finger spring parameters (aligned with ApproachCable/AerialRegrasp)
-FINGER_LOCAL = [7, 8]
 FINGER_SPRING_KE = 10000.0
 FINGER_SPRING_KD = 500.0
 FINGER_DYNAMIC_INV_MASS = 20.0
@@ -123,6 +122,7 @@ from task_config import (
     CLIP1_Z,
     EE_TO_FINGERTIP,
     FINGER_CLOSE_POS,
+    FINGER_LOCAL,
     FINGER_OPEN_POS,
     FINGER_STEP_SIZE,
     GRASP_X,

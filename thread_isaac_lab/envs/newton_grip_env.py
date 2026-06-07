@@ -80,7 +80,6 @@ from newton_skill_env_base import (
 )
 
 # Dynamic finger spring parameters (aligned with GC/AR/Clamp/Unclamp)
-FINGER_LOCAL = [7, 8]
 FINGER_SPRING_KE = 10000.0
 FINGER_SPRING_KD = 500.0
 FINGER_DYNAMIC_INV_MASS = 20.0
@@ -107,6 +106,7 @@ from task_config import (
     EE_Z_SAFETY_UPPER,
     FINGER_CLOSE_POS,
     FINGER_HALF_OPEN_POS,
+    FINGER_LOCAL,
     FINGER_OPEN_POS,
     FINGER_STEP_SIZE,
     GRASP_X,

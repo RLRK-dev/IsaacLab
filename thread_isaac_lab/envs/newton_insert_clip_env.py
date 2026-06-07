@@ -95,6 +95,7 @@ from task_config import (
     CLIP_BASE_HEIGHT,
     EE_TO_FINGERTIP,
     FINGER_CLOSE_POS,
+    FINGER_LOCAL,
     GRASP_X,
     GRIP_HALF_SPAN,
     GROOVE_BODIES_MIN,
@@ -105,6 +106,7 @@ from task_config import (
     LIFT_Z,
     NJMAX,
     PUSH_Z,
+    ROBOT_BODIES_PER_ARM,
     SIM_SUBSTEPS,
     T_DIST_APPROACH,
     T_GROOVE,
@@ -121,7 +123,6 @@ VBD_ITERATIONS = 20
 IK_ITERATIONS_INIT = 100
 IK_ITERATIONS_RL = 30
 IK_STEP_SIZE = 1.0
-ROBOT_BODIES_PER_ARM = FRANKA_NUM_JOINTS  # 9
 ROBOT_BODY_COUNT = 2 * ROBOT_BODIES_PER_ARM  # 18
 
 # IK rotation targets: hand down
@@ -132,7 +133,6 @@ _sin_pi8 = math.sin(math.pi / 8)
 GROOVE_CHECK_RADIUS = CABLE_SEG_LEN + CABLE_RADIUS  # 19mm (must exceed segment spacing 15mm)
 
 # Dynamic finger spring parameters (aligned with AerialRegrasp Mode 2)
-FINGER_LOCAL = [7, 8]  # Finger body local indices (per arm)
 FINGER_SPRING_KE = 10000.0  # Position spring stiffness [N/m]
 FINGER_SPRING_KD = 500.0  # Velocity damping [N·s/m]
 FINGER_DYNAMIC_INV_MASS = 20.0  # 1/0.05kg
