@@ -1444,6 +1444,7 @@ def build_multiworld_scene(
 
     # World index arrays
     bws = model.body_world_start.numpy()
+    jws = model.joint_world_start.numpy()  # joint-world-start (joint axis; per-world joint_q slicing)
 
     # Zero inv_mass for robot bodies (kinematic) -- VBD ONLY. The MuJoCo articulated arm keeps its
     # REAL masses: zeroing => infinite mass + inertia => degenerate joint-space M(q); the STEP-1 probe
@@ -1505,6 +1506,7 @@ def build_multiworld_scene(
         "control": control,
         "contacts": contacts,
         "bws": bws,
+        "jws": jws,
         "cable_bodies": cable_bodies,
         "cable_bodies_per_world": cable_bodies_per_world,
         "cable_body_offset": cable_body_offset,
@@ -1525,6 +1527,26 @@ def broadcast_fk_to_all_worlds(fk_state, state_0, bws, world_count):
         start = bws[w]
         phys_bq[start : start + ROBOT_BODY_COUNT] = fk_bq
     state_0.body_q.assign(phys_bq)
+
+
+def broadcast_jointq_to_all_worlds(fk_state, state_0, jws, world_count):
+    """Copy FK joint coords to all worlds' robot joints (MuJoCo articulated kinematic re-pose).
+
+    The joint-space analog of :func:`broadcast_fk_to_all_worlds`: writes ``fk_state.joint_q`` into
+    each world's robot joint slice ``[jws[w] : jws[w] + 2*JOINTS_PER_ARM]`` (28) and zeros the
+    matching ``joint_qd`` -- the per-step OVERWRITE re-pose the STEP-1 probe validated (every step,
+    not a single set). Used under ``SOLVER_BACKEND == "mujoco"`` (MuJoCo poses bodies from joint_q).
+    """
+    n = 2 * JOINTS_PER_ARM
+    fk_jq = fk_state.joint_q.numpy()[:n]
+    phys_jq = state_0.joint_q.numpy()
+    phys_jqd = state_0.joint_qd.numpy()
+    for w in range(world_count):
+        start = jws[w]
+        phys_jq[start : start + n] = fk_jq
+        phys_jqd[start : start + n] = 0.0
+    state_0.joint_q.assign(phys_jq)
+    state_0.joint_qd.assign(phys_jqd)
 
 
 def physics_step(model, solver, state_0, state_1, control, contacts, substeps=None, sim_dt=None):
@@ -1571,7 +1593,10 @@ def ik_move_all_worlds(
 
         fk_state.joint_q.assign(jq_interp)
         newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
-        broadcast_fk_to_all_worlds(fk_state, state_0, scene["bws"], world_count)
+        if SOLVER_BACKEND == "mujoco":
+            broadcast_jointq_to_all_worlds(fk_state, state_0, scene["jws"], world_count)
+        else:
+            broadcast_fk_to_all_worlds(fk_state, state_0, scene["bws"], world_count)
         state_0, state_1 = physics_step(
             scene["model"],
             scene["solver"],
@@ -1601,7 +1626,10 @@ def hold_position(fk_state, scene, world_count, n_frames):
     """Hold current position for n_frames physics frames."""
     state_0, state_1 = scene["state_0"], scene["state_1"]
     for _ in range(n_frames):
-        broadcast_fk_to_all_worlds(fk_state, state_0, scene["bws"], world_count)
+        if SOLVER_BACKEND == "mujoco":
+            broadcast_jointq_to_all_worlds(fk_state, state_0, scene["jws"], world_count)
+        else:
+            broadcast_fk_to_all_worlds(fk_state, state_0, scene["bws"], world_count)
         state_0, state_1 = physics_step(
             scene["model"],
             scene["solver"],
