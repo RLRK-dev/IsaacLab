@@ -12,13 +12,12 @@ future refactor will replace those with imports from here.
 Reference: thread-vault/06-Knowledge/LL-SkillEnvConsistency.md
 """
 
-from dataclasses import dataclass
-from pathlib import Path
-from xml.etree import ElementTree as ET
-
 import math
 import os
 import sys
+from dataclasses import dataclass
+from pathlib import Path
+from xml.etree import ElementTree as ET
 
 import newton
 import numpy as np
@@ -32,18 +31,21 @@ if _config_dir not in sys.path:
     sys.path.insert(0, _config_dir)
 
 from task_config import (
-    CABLE_RADIUS,
-    CABLE_SEG_LEN,
-    CABLE_SEGMENTS,
     CABLE_CONTACT_KD,
     CABLE_CONTACT_KE,
     CABLE_CONTACT_MU,
+    CABLE_RADIUS,
+    CABLE_SEG_LEN,
+    CABLE_SEGMENTS,
     CLIP1_X,
     CLIP1_Y,
     CLIP_BASE_HEIGHT,
     EE_TO_FINGERTIP,
     GRASP_X,
+    GRIPPER_DRIVER_JOINT_IDX,
+    GRIPPER_JOINT_RANGE,
     GRIPPER_PAD_BODY_IDX,
+    JOINTS_PER_ARM,
     MAX_MOVE_STEPS,
     NJMAX,
     ROBOT_BODIES_PER_ARM,
@@ -939,15 +941,15 @@ def extract_clamp_pose(
 def make_arm_joint_mask(coord_count):
     """Create boolean mask: True for arm joints, False for finger joints.
 
-    Finger indices: 7, 8 (left arm) and FRANKA_NUM_JOINTS+7, FRANKA_NUM_JOINTS+8 (right arm).
+    Gripper joints: GRIPPER_JOINT_RANGE (left arm) and JOINTS_PER_ARM + GRIPPER_JOINT_RANGE (right arm).
     """
     mask = np.ones(coord_count, dtype=bool)
-    for fc in (7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8):
+    for fc in (*GRIPPER_JOINT_RANGE, *(JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE)):
         mask[fc] = False
     return mask
 
 
-FINGER_JOINT_INDICES = (7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8)
+FINGER_JOINT_INDICES = tuple(GRIPPER_JOINT_RANGE) + tuple(JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE)
 
 
 # =============================================================================
@@ -1144,10 +1146,10 @@ def build_fk_and_init(left_finger_pos, right_finger_pos, device=None):
     fk_jq = fk_state.joint_q.numpy()
     fk_tp = fk_model.joint_target_pos.numpy()
     fk_jq[:] = fk_tp[:]
-    fk_jq[7] = left_finger_pos
-    fk_jq[8] = left_finger_pos
-    fk_jq[FRANKA_NUM_JOINTS + 7] = right_finger_pos
-    fk_jq[FRANKA_NUM_JOINTS + 8] = right_finger_pos
+    fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] = left_finger_pos
+    fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]] = left_finger_pos
+    fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = right_finger_pos
+    fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = right_finger_pos
     fk_state.joint_q.assign(fk_jq)
     newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
 

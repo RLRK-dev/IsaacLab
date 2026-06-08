@@ -71,7 +71,10 @@ from task_config import (
     GRASP_TERMINAL_STEPS,
     GRASP_X,
     GRASP_Z,
+    GRIPPER_DRIVER_JOINT_IDX,
+    GRIPPER_JOINT_RANGE,
     GRIPPER_PAD_BODY_IDX,
+    JOINTS_PER_ARM,
     K_GRASP,
     LIFT_Z,
     NJMAX,
@@ -338,10 +341,10 @@ class NewtonApproachCableEnv(VecEnv):
         fk_tp = self._fk_model.joint_target_pos.numpy()
         fk_jq[:] = fk_tp[:]
         # Both arms: OPEN (dual clamp design)
-        fk_jq[7] = FINGER_OPEN_POS
-        fk_jq[8] = FINGER_OPEN_POS
-        fk_jq[FRANKA_NUM_JOINTS + 7] = FINGER_OPEN_POS
-        fk_jq[FRANKA_NUM_JOINTS + 8] = FINGER_OPEN_POS
+        fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+        fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
+        fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+        fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
         self._fk_state.joint_q.assign(fk_jq)
         newton.eval_fk(self._fk_model, self._fk_state.joint_q, self._fk_state.joint_qd, self._fk_state)
 
@@ -832,7 +835,7 @@ class NewtonApproachCableEnv(VecEnv):
             return False
 
         jq_start = self._fk_state.joint_q.numpy().copy()
-        finger_coords = {7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8}
+        finger_coords = set(GRIPPER_JOINT_RANGE) | {JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE}
         n_coords = self._fk_model.joint_coord_count
 
         err_l = 0.0
@@ -1250,8 +1253,11 @@ class NewtonApproachCableEnv(VecEnv):
 
             # Finger openings (raw, no scaling)
             fk_jq = self._per_world_fk_jq[w]
-            r_finger_opening = fk_jq[FRANKA_NUM_JOINTS + 7] + fk_jq[FRANKA_NUM_JOINTS + 8]
-            l_finger_opening = fk_jq[7] + fk_jq[8]
+            r_finger_opening = (
+                fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]]
+                + fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]]
+            )
+            l_finger_opening = fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] + fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]]
 
             # Target cable point: interpolated nearest on piecewise-linear cable
             cable_bq = bq[self._cable_bodies[w]]  # [n_cable, 7]
@@ -1427,8 +1433,11 @@ class NewtonApproachCableEnv(VecEnv):
 
             # Finger opening
             fk_jq = self._per_world_fk_jq[w]
-            finger_opening = fk_jq[FRANKA_NUM_JOINTS + 7] + fk_jq[FRANKA_NUM_JOINTS + 8]
-            l_finger_opening = fk_jq[7] + fk_jq[8]
+            finger_opening = (
+                fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]]
+                + fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]]
+            )
+            l_finger_opening = fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] + fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]]
 
             # ---- Reward: pose_match (v37) — non-negative shift, 3-scale hybrid ----
             if self.REWARD_MODE == "multiplicative":
@@ -1690,7 +1699,7 @@ class NewtonApproachCableEnv(VecEnv):
 
         fk_coord_count = self._fk_model.joint_coord_count
         finger_mask = np.ones(fk_coord_count, dtype=bool)
-        for fc in (7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8):
+        for fc in (*GRIPPER_JOINT_RANGE, *(JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE)):
             finger_mask[fc] = False
 
         # --- Compute per-world EE position + rotation targets ---
@@ -1739,10 +1748,10 @@ class NewtonApproachCableEnv(VecEnv):
             per_w_dist_ori_l[w] = dist_ori_l
 
             # Finger targets: both arms always OPEN
-            jq_starts[w, FRANKA_NUM_JOINTS + 7] = FINGER_OPEN_POS
-            jq_starts[w, FRANKA_NUM_JOINTS + 8] = FINGER_OPEN_POS
-            jq_starts[w, 7] = FINGER_OPEN_POS
-            jq_starts[w, 8] = FINGER_OPEN_POS
+            jq_starts[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+            jq_starts[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
+            jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+            jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
 
         # Ori-gated approach: suppress pos delta when near cable but ori not ready.
         # C2 narrowing (2026-04-11): removed L arm unconditional 0.3x damping.
@@ -1804,10 +1813,14 @@ class NewtonApproachCableEnv(VecEnv):
 
         # Preserve finger positions in jq_targets
         for w in range(N):
-            jq_targets[w, FRANKA_NUM_JOINTS + 7] = jq_starts[w, FRANKA_NUM_JOINTS + 7]
-            jq_targets[w, FRANKA_NUM_JOINTS + 8] = jq_starts[w, FRANKA_NUM_JOINTS + 8]
-            jq_targets[w, 7] = jq_starts[w, 7]
-            jq_targets[w, 8] = jq_starts[w, 8]
+            jq_targets[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = jq_starts[
+                w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]
+            ]
+            jq_targets[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = jq_starts[
+                w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]
+            ]
+            jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[0]] = jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[0]]
+            jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[1]] = jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[1]]
 
         # Interpolate FK + physics stepping
         for step in range(self.PHYSICS_STEPS_PER_RL):
@@ -1819,7 +1832,7 @@ class NewtonApproachCableEnv(VecEnv):
             )
 
             # Finger interpolation from old to new
-            for fc in (7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8):
+            for fc in (*GRIPPER_JOINT_RANGE, *(JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE)):
                 jq_interp_all[:, fc] = (
                     self._per_world_fk_jq[:N, fc] + (jq_targets[:, fc] - self._per_world_fk_jq[:N, fc]) * t
                 )

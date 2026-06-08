@@ -97,12 +97,15 @@ from task_config import (
     FINGER_CLOSE_POS,
     FINGER_LOCAL,
     GRASP_X,
-    GRIPPER_PAD_BODY_IDX,
     GRIP_HALF_SPAN,
+    GRIPPER_DRIVER_JOINT_IDX,
+    GRIPPER_JOINT_RANGE,
+    GRIPPER_PAD_BODY_IDX,
     GROOVE_BODIES_MIN,
     GROOVE_CENTER_Z,
     INSERT_TERMINAL_STEPS,
     INSERT_TERMINAL_STEPS_INSERT,
+    JOINTS_PER_ARM,
     K_INSERT,
     LIFT_Z,
     NJMAX,
@@ -366,10 +369,10 @@ class NewtonInsertClipEnv(VecEnv):
         fk_jq = self._fk_state.joint_q.numpy()
         fk_tp = self._fk_model.joint_target_pos.numpy()
         fk_jq[:] = fk_tp[:]
-        fk_jq[7] = FINGER_CLOSE_POS
-        fk_jq[8] = FINGER_CLOSE_POS
-        fk_jq[FRANKA_NUM_JOINTS + 7] = FINGER_CLOSE_POS
-        fk_jq[FRANKA_NUM_JOINTS + 8] = FINGER_CLOSE_POS
+        fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_CLOSE_POS
+        fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_CLOSE_POS
+        fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_CLOSE_POS
+        fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_CLOSE_POS
         self._fk_state.joint_q.assign(fk_jq)
         newton.eval_fk(self._fk_model, self._fk_state.joint_q, self._fk_state.joint_qd, self._fk_state)
 
@@ -588,10 +591,10 @@ class NewtonInsertClipEnv(VecEnv):
             raise RuntimeError("[InsertClipEnv] IK failed for insert precondition")
 
         # Keep fingers CLOSED in the IK solution
-        jq_target[7] = FINGER_CLOSE_POS
-        jq_target[8] = FINGER_CLOSE_POS
-        jq_target[FRANKA_NUM_JOINTS + 7] = FINGER_CLOSE_POS
-        jq_target[FRANKA_NUM_JOINTS + 8] = FINGER_CLOSE_POS
+        jq_target[GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_CLOSE_POS
+        jq_target[GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_CLOSE_POS
+        jq_target[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_CLOSE_POS
+        jq_target[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_CLOSE_POS
 
         # Apply IK solution to FK
         self._fk_state.joint_q.assign(jq_target)
@@ -1445,7 +1448,7 @@ class NewtonInsertClipEnv(VecEnv):
 
         fk_coord_count = self._fk_model.joint_coord_count
         finger_mask = np.ones(fk_coord_count, dtype=bool)
-        for fc in (7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8):
+        for fc in (*GRIPPER_JOINT_RANGE, *(JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE)):
             finger_mask[fc] = False
 
         targets_left = np.zeros((N, 3))
@@ -1456,10 +1459,10 @@ class NewtonInsertClipEnv(VecEnv):
 
         # Fingers always CLOSED
         for w in range(N):
-            jq_starts[w, 7] = FINGER_CLOSE_POS
-            jq_starts[w, 8] = FINGER_CLOSE_POS
-            jq_starts[w, FRANKA_NUM_JOINTS + 7] = FINGER_CLOSE_POS
-            jq_starts[w, FRANKA_NUM_JOINTS + 8] = FINGER_CLOSE_POS
+            jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_CLOSE_POS
+            jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_CLOSE_POS
+            jq_starts[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_CLOSE_POS
+            jq_starts[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_CLOSE_POS
 
         for w in range(N):
             # Right EE: tracked target + delta
@@ -1513,10 +1516,10 @@ class NewtonInsertClipEnv(VecEnv):
 
         # Preserve finger positions (always CLOSED)
         for w in range(N):
-            jq_targets[w, 7] = FINGER_CLOSE_POS
-            jq_targets[w, 8] = FINGER_CLOSE_POS
-            jq_targets[w, FRANKA_NUM_JOINTS + 7] = FINGER_CLOSE_POS
-            jq_targets[w, FRANKA_NUM_JOINTS + 8] = FINGER_CLOSE_POS
+            jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_CLOSE_POS
+            jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_CLOSE_POS
+            jq_targets[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_CLOSE_POS
+            jq_targets[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_CLOSE_POS
 
         # FK interpolation + physics stepping (10 steps, matching ApproachCable)
         for step in range(self.PHYSICS_STEPS_PER_RL):
@@ -1528,7 +1531,7 @@ class NewtonInsertClipEnv(VecEnv):
                 jq_starts[:, finger_mask] + (jq_targets[:, finger_mask] - jq_starts[:, finger_mask]) * t
             )
             # Fingers stay CLOSED (no transition)
-            for fc in (7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8):
+            for fc in (*GRIPPER_JOINT_RANGE, *(JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE)):
                 jq_interp_all[:, fc] = FINGER_CLOSE_POS
 
             # Batched FK eval

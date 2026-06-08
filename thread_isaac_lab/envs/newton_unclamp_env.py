@@ -104,10 +104,13 @@ from task_config import (
     FINGER_STEP_SIZE,
     GRASP_X,
     GRASP_Z,
-    GRIPPER_PAD_BODY_IDX,
     GRIP_HALF_SPAN,
+    GRIPPER_DRIVER_JOINT_IDX,
+    GRIPPER_JOINT_RANGE,
+    GRIPPER_PAD_BODY_IDX,
     GROOVE_BODIES_MIN,
     GROOVE_CENTER_Z,
+    JOINTS_PER_ARM,
     K_UNCLAMP,
     LIFT_Z,
     NJMAX,
@@ -295,10 +298,10 @@ class NewtonUnclampEnv(VecEnv):
         fk_tp = self._fk_model.joint_target_pos.numpy()
         fk_jq[:] = fk_tp[:]
         # Left: HALF_OPEN (precondition), Right: OPEN (passive)
-        fk_jq[7] = FINGER_HALF_OPEN_POS
-        fk_jq[8] = FINGER_HALF_OPEN_POS
-        fk_jq[FRANKA_NUM_JOINTS + 7] = FINGER_OPEN_POS
-        fk_jq[FRANKA_NUM_JOINTS + 8] = FINGER_OPEN_POS
+        fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_HALF_OPEN_POS
+        fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_HALF_OPEN_POS
+        fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+        fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
         self._fk_state.joint_q.assign(fk_jq)
         newton.eval_fk(self._fk_model, self._fk_state.joint_q, self._fk_state.joint_qd, self._fk_state)
 
@@ -492,10 +495,10 @@ class NewtonUnclampEnv(VecEnv):
             raise RuntimeError("[UnclampEnv] IK failed for unclamp precondition")
 
         # Finger positions: L=HALF_OPEN, R=OPEN
-        jq_target[7] = FINGER_HALF_OPEN_POS
-        jq_target[8] = FINGER_HALF_OPEN_POS
-        jq_target[FRANKA_NUM_JOINTS + 7] = FINGER_OPEN_POS
-        jq_target[FRANKA_NUM_JOINTS + 8] = FINGER_OPEN_POS
+        jq_target[GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_HALF_OPEN_POS
+        jq_target[GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_HALF_OPEN_POS
+        jq_target[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+        jq_target[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
 
         # Apply to FK
         self._fk_state.joint_q.assign(jq_target)
@@ -904,7 +907,7 @@ class NewtonUnclampEnv(VecEnv):
 
         fk_coord_count = self._fk_model.joint_coord_count
         finger_mask = np.ones(fk_coord_count, dtype=bool)
-        for fc in (7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8):
+        for fc in (*GRIPPER_JOINT_RANGE, *(JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE)):
             finger_mask[fc] = False
 
         jq_starts = np.array(self._per_world_fk_jq[:N])
@@ -916,11 +919,11 @@ class NewtonUnclampEnv(VecEnv):
             self._finger_target_left[w] = new_target
 
             # Left finger target
-            jq_starts[w, 7] = new_target
-            jq_starts[w, 8] = new_target
+            jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[0]] = new_target
+            jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[1]] = new_target
             # Right finger: always OPEN (constant)
-            jq_starts[w, FRANKA_NUM_JOINTS + 7] = FINGER_OPEN_POS
-            jq_starts[w, FRANKA_NUM_JOINTS + 8] = FINGER_OPEN_POS
+            jq_starts[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+            jq_starts[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
 
         # --- Compute EE position targets ---
         targets_left = np.zeros((N, 3))
@@ -957,10 +960,10 @@ class NewtonUnclampEnv(VecEnv):
 
         # Preserve finger positions in IK output
         for w in range(N):
-            jq_targets[w, 7] = jq_starts[w, 7]
-            jq_targets[w, 8] = jq_starts[w, 8]
-            jq_targets[w, FRANKA_NUM_JOINTS + 7] = FINGER_OPEN_POS
-            jq_targets[w, FRANKA_NUM_JOINTS + 8] = FINGER_OPEN_POS
+            jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[0]] = jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[0]]
+            jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[1]] = jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[1]]
+            jq_targets[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+            jq_targets[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
 
         # FK interpolation + physics stepping
         for step in range(self.PHYSICS_STEPS_PER_RL):
@@ -972,7 +975,7 @@ class NewtonUnclampEnv(VecEnv):
                 jq_starts[:, finger_mask] + (jq_targets[:, finger_mask] - jq_starts[:, finger_mask]) * t
             )
             # Finger interpolation
-            for fc in (7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8):
+            for fc in (*GRIPPER_JOINT_RANGE, *(JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE)):
                 jq_interp_all[:, fc] = (
                     self._per_world_fk_jq[:N, fc] + (jq_targets[:, fc] - self._per_world_fk_jq[:N, fc]) * t
                 )
@@ -1054,8 +1057,11 @@ class NewtonUnclampEnv(VecEnv):
 
             # Finger openings
             fk_jq = self._per_world_fk_jq[w]
-            r_finger_opening = fk_jq[FRANKA_NUM_JOINTS + 7] + fk_jq[FRANKA_NUM_JOINTS + 8]
-            l_finger_opening = fk_jq[7] + fk_jq[8]
+            r_finger_opening = (
+                fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]]
+                + fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]]
+            )
+            l_finger_opening = fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] + fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]]
 
             # Cable target segment (near groove)
             cable_pos = bq[self._cable_bodies[w], :3]
@@ -1127,7 +1133,7 @@ class NewtonUnclampEnv(VecEnv):
 
             # Finger opening (sum of j7+j8)
             fk_jq = self._per_world_fk_jq[w]
-            finger_opening = fk_jq[7] + fk_jq[8]
+            finger_opening = fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] + fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]]
 
             # --- Scores ---
             # Finger progress: 0 at HALF_OPEN_SUM, 1 at FULL_OPEN_SUM

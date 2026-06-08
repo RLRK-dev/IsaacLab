@@ -102,8 +102,7 @@ from newton_skill_env_base import (
     temporal_quat_consistency,
 )
 
-# Left finger body indices (local within one arm: body 7=finger_left, body 8=finger_right)
-LEFT_FINGER_LOCAL = [7, 8]
+# Finger pad-follower body indices (local within one arm); FINGER_LOCAL = [9, 13] imported from task_config SSOT
 # Dynamic finger spring parameters (Mode 2 from test_grip_modes.py)
 FINGER_SPRING_KE = 10000.0  # Position spring stiffness [N/m]
 FINGER_SPRING_KD = 500.0  # Velocity damping [N·s/m]
@@ -189,7 +188,10 @@ from task_config import (
     CLIP1_Z,
     EE_TO_FINGERTIP,
     FINGER_CLOSE_POS,
+    FINGER_LOCAL,
     FINGER_OPEN_POS,
+    GRIPPER_DRIVER_JOINT_IDX,
+    JOINTS_PER_ARM,
     K_GRASP,
     LIFT_Z,
     SIM_SUBSTEPS,
@@ -443,7 +445,7 @@ class NewtonAerialRegraspEnv(VecEnv):
         self._d0_contact_force_over_limit = np.zeros(world_count, dtype=np.bool_)
         self._d0_impedance_command_force_norm = np.zeros(world_count, dtype=np.float32)
         self._d0_impedance_command_force_norm_per_finger = np.zeros(
-            (world_count, len(LEFT_FINGER_LOCAL)),
+            (world_count, len(FINGER_LOCAL)),
             dtype=np.float32,
         )
         # === END D0 telemetry-only source draft ===
@@ -943,19 +945,19 @@ class NewtonAerialRegraspEnv(VecEnv):
             return float(np.linalg.norm(point - closest)), t
 
         left_finger0_pos = np.asarray(
-            body_q[int(world_body_start) + LEFT_FINGER_LOCAL[0]][:3],
+            body_q[int(world_body_start) + FINGER_LOCAL[0]][:3],
             dtype=np.float32,
         )
         left_finger1_pos = np.asarray(
-            body_q[int(world_body_start) + LEFT_FINGER_LOCAL[1]][:3],
+            body_q[int(world_body_start) + FINGER_LOCAL[1]][:3],
             dtype=np.float32,
         )
         right_finger0_pos = np.asarray(
-            body_q[int(world_body_start) + BODIES_PER_ARM + LEFT_FINGER_LOCAL[0]][:3],
+            body_q[int(world_body_start) + BODIES_PER_ARM + FINGER_LOCAL[0]][:3],
             dtype=np.float32,
         )
         right_finger1_pos = np.asarray(
-            body_q[int(world_body_start) + BODIES_PER_ARM + LEFT_FINGER_LOCAL[1]][:3],
+            body_q[int(world_body_start) + BODIES_PER_ARM + FINGER_LOCAL[1]][:3],
             dtype=np.float32,
         )
         left_finger0_fk_error = 0.0
@@ -964,10 +966,10 @@ class NewtonAerialRegraspEnv(VecEnv):
         right_finger1_fk_error = 0.0
         if fk_body_q_world is not None:
             fk_body_q_world = np.asarray(fk_body_q_world, dtype=np.float32)
-            left_finger0_fk_pos = fk_body_q_world[LEFT_FINGER_LOCAL[0]][:3]
-            left_finger1_fk_pos = fk_body_q_world[LEFT_FINGER_LOCAL[1]][:3]
-            right_finger0_fk_pos = fk_body_q_world[BODIES_PER_ARM + LEFT_FINGER_LOCAL[0]][:3]
-            right_finger1_fk_pos = fk_body_q_world[BODIES_PER_ARM + LEFT_FINGER_LOCAL[1]][:3]
+            left_finger0_fk_pos = fk_body_q_world[FINGER_LOCAL[0]][:3]
+            left_finger1_fk_pos = fk_body_q_world[FINGER_LOCAL[1]][:3]
+            right_finger0_fk_pos = fk_body_q_world[BODIES_PER_ARM + FINGER_LOCAL[0]][:3]
+            right_finger1_fk_pos = fk_body_q_world[BODIES_PER_ARM + FINGER_LOCAL[1]][:3]
             left_finger0_fk_error = float(np.linalg.norm(left_finger0_pos - left_finger0_fk_pos))
             left_finger1_fk_error = float(np.linalg.norm(left_finger1_pos - left_finger1_fk_pos))
             right_finger0_fk_error = float(np.linalg.norm(right_finger0_pos - right_finger0_fk_pos))
@@ -1052,11 +1054,11 @@ class NewtonAerialRegraspEnv(VecEnv):
         }
         for prefix, body_idx in (
             ("left_ee", int(world_body_start) + EE_BODY_OFFSET),
-            ("left_finger0", int(world_body_start) + LEFT_FINGER_LOCAL[0]),
-            ("left_finger1", int(world_body_start) + LEFT_FINGER_LOCAL[1]),
+            ("left_finger0", int(world_body_start) + FINGER_LOCAL[0]),
+            ("left_finger1", int(world_body_start) + FINGER_LOCAL[1]),
             ("right_ee", int(world_body_start) + FRANKA_NUM_JOINTS + EE_BODY_OFFSET),
-            ("right_finger0", int(world_body_start) + FRANKA_NUM_JOINTS + LEFT_FINGER_LOCAL[0]),
-            ("right_finger1", int(world_body_start) + FRANKA_NUM_JOINTS + LEFT_FINGER_LOCAL[1]),
+            ("right_finger0", int(world_body_start) + FRANKA_NUM_JOINTS + FINGER_LOCAL[0]),
+            ("right_finger1", int(world_body_start) + FRANKA_NUM_JOINTS + FINGER_LOCAL[1]),
         ):
             q = np.asarray(body_q[body_idx], dtype=np.float32)
             qd = np.asarray(body_qd[body_idx], dtype=np.float32)
@@ -1512,7 +1514,7 @@ class NewtonAerialRegraspEnv(VecEnv):
         self._left_finger_physics_ids = []
         for w in range(self._world_count):
             ws = self._bws[w]
-            for lf in LEFT_FINGER_LOCAL:
+            for lf in FINGER_LOCAL:
                 bi = ws + lf
                 inv_mass[bi] = FINGER_DYNAMIC_INV_MASS
                 inv_inertia[bi] = np.full(3, FINGER_DYNAMIC_INV_INERTIA, dtype=np.float32)
@@ -1643,7 +1645,7 @@ class NewtonAerialRegraspEnv(VecEnv):
     def _left_finger_ids_for_world(self, world_idx: int) -> list[int]:
         """Return physics body ids for the left finger bodies in one world."""
         ws = self._bws[int(world_idx)]
-        return [int(ws + lf) for lf in LEFT_FINGER_LOCAL]
+        return [int(ws + lf) for lf in FINGER_LOCAL]
 
     def _assign_left_finger_inverse_mass(self):
         """Push cached left-finger inverse-mass arrays to the Newton model."""
@@ -1681,7 +1683,7 @@ class NewtonAerialRegraspEnv(VecEnv):
             self._kinematic_release_right_clamp[w] = False
             self._kinematic_release_left_hold[w] = False
             self._kinematic_release_cable_not_dropped[w] = False
-            for lf, bi in zip(LEFT_FINGER_LOCAL, self._left_finger_ids_for_world(w)):
+            for lf, bi in zip(FINGER_LOCAL, self._left_finger_ids_for_world(w)):
                 self._left_finger_inv_mass[bi] = KINEMATIC_INV_MASS
                 self._left_finger_inv_inertia[bi] = np.full(3, KINEMATIC_INV_INERTIA, dtype=np.float32)
                 if fk_batch_bq is not None:
@@ -1838,7 +1840,7 @@ class NewtonAerialRegraspEnv(VecEnv):
         bqd = self._state_0.body_qd.numpy()
         prev = self._solver.body_q_prev.numpy()
         for w in np.where(self._kinematic_support_active[:n_worlds])[0]:
-            for lf, bi in zip(LEFT_FINGER_LOCAL, self._left_finger_ids_for_world(int(w))):
+            for lf, bi in zip(FINGER_LOCAL, self._left_finger_ids_for_world(int(w))):
                 if fk_batch_bq is not None:
                     bq[bi] = fk_batch_bq[int(w), lf]
                 bqd[bi] = 0.0
@@ -2016,8 +2018,11 @@ class NewtonAerialRegraspEnv(VecEnv):
 
             # Finger openings
             fk_jq = self._per_world_fk_jq[w]
-            r_finger_opening = fk_jq[FRANKA_NUM_JOINTS + 7] + fk_jq[FRANKA_NUM_JOINTS + 8]
-            l_finger_opening = fk_jq[7] + fk_jq[8]
+            r_finger_opening = (
+                fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]]
+                + fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]]
+            )
+            l_finger_opening = fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] + fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]]
 
             # Target cable point: interpolated nearest on piecewise-linear cable
             cable_bq = bq[self._cable_bodies[w]]
@@ -2265,8 +2270,11 @@ class NewtonAerialRegraspEnv(VecEnv):
 
             # Finger opening
             fk_jq = self._per_world_fk_jq[w]
-            finger_opening = fk_jq[FRANKA_NUM_JOINTS + 7] + fk_jq[FRANKA_NUM_JOINTS + 8]
-            l_finger_opening = fk_jq[7] + fk_jq[8]
+            finger_opening = (
+                fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]]
+                + fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]]
+            )
+            l_finger_opening = fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] + fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]]
 
             # Cable drop check: L-exclusive segments only (v38 fix).
             # R arm hasn't grasped cable yet — R-target contact causes transient sag
@@ -3048,10 +3056,10 @@ class NewtonAerialRegraspEnv(VecEnv):
             per_w_dist_ori_r[w] = quat_distance(clamp_r_quat_norm, self._ema_seg_quat_r[w])
 
             # Finger targets: R always OPEN, L always CLOSED
-            jq_starts[w, FRANKA_NUM_JOINTS + 7] = FINGER_OPEN_POS
-            jq_starts[w, FRANKA_NUM_JOINTS + 8] = FINGER_OPEN_POS
-            jq_starts[w, 7] = FINGER_CLOSE_POS
-            jq_starts[w, 8] = FINGER_CLOSE_POS
+            jq_starts[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+            jq_starts[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
+            jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_CLOSE_POS
+            jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_CLOSE_POS
 
         # Ori-gated approach: suppress pos delta when near cable but ori not ready
         for w in range(N):
@@ -3164,7 +3172,7 @@ class NewtonAerialRegraspEnv(VecEnv):
             force_scale = None
             if self._d0_control_enabled:
                 force_scale = self._d0_control_force_scale_for_world(w)
-            for finger_idx, lf in enumerate(LEFT_FINGER_LOCAL):
+            for finger_idx, lf in enumerate(FINGER_LOCAL):
                 bi = ws + lf
                 pos = body_q[bi][:3]
                 vel = body_qd[bi][3:6]  # linear velocity

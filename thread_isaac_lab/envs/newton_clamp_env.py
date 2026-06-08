@@ -127,6 +127,9 @@ from task_config import (
     FINGER_STEP_SIZE,
     GRASP_X,
     GRASP_Z,
+    GRIPPER_DRIVER_JOINT_IDX,
+    GRIPPER_JOINT_RANGE,
+    JOINTS_PER_ARM,
     K_CLAMP,
     LIFT_Z,
     SETTLE_STEPS,
@@ -300,10 +303,10 @@ class NewtonClampEnv(VecEnv):
         jq_solved = solve_ik_single(self._fk_model, self._fk_state, target_l, target_r, self.device)
 
         # Preserve finger OPEN
-        jq_solved[7] = FINGER_OPEN_POS
-        jq_solved[8] = FINGER_OPEN_POS
-        jq_solved[FRANKA_NUM_JOINTS + 7] = FINGER_OPEN_POS
-        jq_solved[FRANKA_NUM_JOINTS + 8] = FINGER_OPEN_POS
+        jq_solved[GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+        jq_solved[GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
+        jq_solved[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+        jq_solved[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
 
         self._fk_state.joint_q.assign(jq_solved)
         newton.eval_fk(self._fk_model, self._fk_state.joint_q, self._fk_state.joint_qd, self._fk_state)
@@ -699,8 +702,11 @@ class NewtonClampEnv(VecEnv):
 
             # Finger openings
             fk_jq = self._per_world_fk_jq[w]
-            r_finger_opening = fk_jq[FRANKA_NUM_JOINTS + 7] + fk_jq[FRANKA_NUM_JOINTS + 8]
-            l_finger_opening = fk_jq[7] + fk_jq[8]
+            r_finger_opening = (
+                fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]]
+                + fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]]
+            )
+            l_finger_opening = fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] + fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]]
 
             # Target cable segment (interpolated nearest)
             cable_bq = bq[self._cable_bodies[w]]
@@ -838,8 +844,11 @@ class NewtonClampEnv(VecEnv):
 
             # Finger openings
             fk_jq = self._per_world_fk_jq[w]
-            finger_r = fk_jq[FRANKA_NUM_JOINTS + 7] + fk_jq[FRANKA_NUM_JOINTS + 8]
-            finger_l = fk_jq[7] + fk_jq[8]
+            finger_r = (
+                fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]]
+                + fk_jq[JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]]
+            )
+            finger_l = fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] + fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]]
 
             # ---- Reward: multiplicative (grip × clamp_quality) ----
             # Per-arm grip score: 0 when open, ~1 when closed
@@ -988,7 +997,7 @@ class NewtonClampEnv(VecEnv):
 
         fk_coord_count = self._fk_model.joint_coord_count
         finger_mask = np.ones(fk_coord_count, dtype=bool)
-        for fc in (7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8):
+        for fc in (*GRIPPER_JOINT_RANGE, *(JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE)):
             finger_mask[fc] = False
 
         # --- Compute EE targets + finger targets ---
@@ -1029,15 +1038,17 @@ class NewtonClampEnv(VecEnv):
 
             # Finger position targets (RL-controlled: incremental position command)
             # Negate: +1 cmd = close = decrease joint position (CLOSE_POS < OPEN_POS)
-            r_finger_new = jq_starts[w, FRANKA_NUM_JOINTS + 7] - r_finger_cmd[w] * self.FINGER_CMD_SCALE
+            r_finger_new = (
+                jq_starts[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] - r_finger_cmd[w] * self.FINGER_CMD_SCALE
+            )
             r_finger_new = np.clip(r_finger_new, FINGER_CLOSE_POS, FINGER_OPEN_POS)
-            jq_starts[w, FRANKA_NUM_JOINTS + 7] = r_finger_new
-            jq_starts[w, FRANKA_NUM_JOINTS + 8] = r_finger_new
+            jq_starts[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = r_finger_new
+            jq_starts[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = r_finger_new
 
-            l_finger_new = jq_starts[w, 7] - l_finger_cmd[w] * self.FINGER_CMD_SCALE
+            l_finger_new = jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[0]] - l_finger_cmd[w] * self.FINGER_CMD_SCALE
             l_finger_new = np.clip(l_finger_new, FINGER_CLOSE_POS, FINGER_OPEN_POS)
-            jq_starts[w, 7] = l_finger_new
-            jq_starts[w, 8] = l_finger_new
+            jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[0]] = l_finger_new
+            jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[1]] = l_finger_new
 
         # Set IK rotation targets
         self._ik_obj_rot_left.set_target_rotations(wp.array(rot_targets_left, dtype=wp.vec4, device=self.device))
@@ -1053,10 +1064,14 @@ class NewtonClampEnv(VecEnv):
 
         # Preserve finger positions in IK output
         for w in range(N):
-            jq_targets[w, FRANKA_NUM_JOINTS + 7] = jq_starts[w, FRANKA_NUM_JOINTS + 7]
-            jq_targets[w, FRANKA_NUM_JOINTS + 8] = jq_starts[w, FRANKA_NUM_JOINTS + 8]
-            jq_targets[w, 7] = jq_starts[w, 7]
-            jq_targets[w, 8] = jq_starts[w, 8]
+            jq_targets[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]] = jq_starts[
+                w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0]
+            ]
+            jq_targets[w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]] = jq_starts[
+                w, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]
+            ]
+            jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[0]] = jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[0]]
+            jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[1]] = jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[1]]
 
         # Interpolate FK + physics stepping
         old_fk_jq = np.array(self._per_world_fk_jq[:N])
@@ -1069,7 +1084,7 @@ class NewtonClampEnv(VecEnv):
                 old_fk_jq[:, finger_mask] + (jq_targets[:, finger_mask] - old_fk_jq[:, finger_mask]) * t
             )
             # Finger joints: interpolate from old to new
-            for fc in (7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8):
+            for fc in (*GRIPPER_JOINT_RANGE, *(JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE)):
                 jq_interp[:, fc] = old_fk_jq[:, fc] + (jq_targets[:, fc] - old_fk_jq[:, fc]) * t
 
             # Batched FK
