@@ -90,6 +90,10 @@ _UR5E_ASSET = os.path.normpath(os.path.join(
 ))
 UR5E_XML = os.path.join(_UR5E_ASSET, "ur5e", "ur5e.xml")
 ROBOTIQ_XML = os.path.join(_UR5E_ASSET, "robotiq_2f85", "2f85.xml")
+# Path-A (Option-E Opt-1): 2f85 with the <tendon> node removed so the combined add_mjcf build
+# constructs under SolverMuJoCo (the WITH-tendon build OOBs _init_tendons). Byte-copy of 2f85.xml
+# minus <tendon>; <equality> is dropped at parse via skip_equality_constraints. Faithful 4-bar = S5.
+ROBOTIQ_STRIPPED_XML = os.path.join(_UR5E_ASSET, "robotiq_2f85", "2f85_tendon_stripped.xml")
 # UR5e wrist_3 attachment_site (ur5e.xml) — Robotiq base mounts here. MuJoCo quat (w, x, y, z).
 UR5E_ATTACH_POS = (0.0, 0.1, 0.0)
 UR5E_ATTACH_QUAT_MJCF_WXYZ = (-1.0, 1.0, 0.0, 0.0)
@@ -112,7 +116,7 @@ def _geo_type_name(t):
     return str(int(t))
 
 
-def add_ur5e_robotiq(builder, base_xform):
+def add_ur5e_robotiq(builder, base_xform, robotiq_xml=ROBOTIQ_XML, skip_equality_constraints=False):
     """Assemble one UR5e arm + Robotiq 2f85 gripper into ``builder`` at ``base_xform``.
 
     UR5e is fixed-based at ``base_xform``; the Robotiq gripper attaches via a fixed base
@@ -121,6 +125,10 @@ def add_ur5e_robotiq(builder, base_xform):
     fixed_joints=True`` / ``parse_meshes=False`` reproduce the S1-derived production index
     space (14 bodies == 14 joints per arm, ``wrist_3`` = EE local index 5). Returns the
     ``wrist_3`` body index (absolute, in ``builder``).
+
+    ``robotiq_xml`` selects the gripper MJCF (default the full 2f85; Path-A passes the tendon-stripped
+    variant); ``skip_equality_constraints`` is forwarded to :meth:`add_mjcf` to drop the 4-bar
+    ``<equality>`` at parse (the stripped Path-A build that constructs under SolverMuJoCo).
     """
     b0 = len(builder.body_mass)
     builder.add_mjcf(
@@ -138,13 +146,14 @@ def add_ur5e_robotiq(builder, base_xform):
         b0 + EE_BODY_OFFSET,
     )
     builder.add_mjcf(
-        ROBOTIQ_XML,
+        robotiq_xml,
         parent_body=wrist3,
         floating=False,
         xform=wp.transform(wp.vec3(*UR5E_ATTACH_POS), mjcf_wxyz_to_wp(*UR5E_ATTACH_QUAT_MJCF_WXYZ)),
         collapse_fixed_joints=True,
         enable_self_collisions=False,
         parse_meshes=False,
+        skip_equality_constraints=skip_equality_constraints,
     )
     return wrist3
 

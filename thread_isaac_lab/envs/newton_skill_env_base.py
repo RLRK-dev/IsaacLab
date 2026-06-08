@@ -65,8 +65,12 @@ from test_newton_clip_routing import (
     EE_BODY_OFFSET,
     FRANKA_NUM_JOINTS,
     GRAVITY,
+    ROBOT_LEFT_BASE,
+    ROBOT_RIGHT_BASE,
+    ROBOTIQ_STRIPPED_XML,
     add_cable_rod,
     add_kinematic_arm,
+    add_ur5e_robotiq,
     build_fk_model,
 )
 
@@ -1274,58 +1278,80 @@ def build_multiworld_scene(
 
     proto = newton.ModelBuilder()
 
-    # Robot arms (kinematic bodies)
-    left_info = add_kinematic_arm(
-        proto,
-        fk_model,
-        fk_state,
-        arm_body_offset=0,
-        label_prefix="left",
-    )
-    right_info = add_kinematic_arm(
-        proto,
-        fk_model,
-        fk_state,
-        arm_body_offset=FRANKA_NUM_JOINTS,
-        label_prefix="right",
-    )
-    left_body_start, left_shape_start, left_shape_end, left_fv = left_info
-    right_body_start, right_shape_start, right_shape_end, right_fv = right_info
-    all_finger_visual = set(left_fv + right_fv)
+    # Robot arms: VBD = jointless kinematic bodies (FK body_q); MuJoCo = articulated UR5e+Robotiq.
+    if SOLVER_BACKEND == "mujoco":
+        # Option-E Opt-1 (SC2a, D-Opt1-1): articulated UR5e+Robotiq per arm via the probe-validated
+        # add_mjcf recipe (Robotiq <tendon> stripped so SolverMuJoCo constructs). disable_contacts=True
+        # (SC1 make_solver) makes the VISIBLE/PAD collision-flag pass moot -> skipped (R5 cycle-2; arm
+        # VISIBLE-only, gripper bare). Cable (CABLE joints, MuJoCo-incompatible solver_mujoco.py:112) is
+        # skipped here -> rigid-link REVOLUTE rebuild = S4. joint_q kinematic re-pose driving = SC2b.
+        add_ur5e_robotiq(
+            proto,
+            wp.transform(ROBOT_LEFT_BASE, wp.quat_identity()),
+            robotiq_xml=ROBOTIQ_STRIPPED_XML,
+            skip_equality_constraints=True,
+        )
+        add_ur5e_robotiq(
+            proto,
+            wp.transform(ROBOT_RIGHT_BASE, wp.quat_identity()),
+            robotiq_xml=ROBOTIQ_STRIPPED_XML,
+            skip_equality_constraints=True,
+        )
+        cable_bodies_proto, cable_joints_proto = [], []
+        cable_bodies_per_world = 0
+        cable_body_offset = 0
+    else:
+        left_info = add_kinematic_arm(
+            proto,
+            fk_model,
+            fk_state,
+            arm_body_offset=0,
+            label_prefix="left",
+        )
+        right_info = add_kinematic_arm(
+            proto,
+            fk_model,
+            fk_state,
+            arm_body_offset=FRANKA_NUM_JOINTS,
+            label_prefix="right",
+        )
+        left_body_start, left_shape_start, left_shape_end, left_fv = left_info
+        right_body_start, right_shape_start, right_shape_end, right_fv = right_info
+        all_finger_visual = set(left_fv + right_fv)
 
-    # Contact filtering: non-pad bodies -> VISIBLE only, pad followers (GRIPPER_PAD_BODY_IDX) -> COLLIDE
-    for arm_ss, arm_se, arm_bs in [
-        (left_shape_start, left_shape_end, left_body_start),
-        (right_shape_start, right_shape_end, right_body_start),
-    ]:
-        for si in range(arm_ss, arm_se):
-            local = proto.shape_body[si] - arm_bs
-            if local not in GRIPPER_PAD_BODY_IDX or si in all_finger_visual:
-                proto.shape_flags[si] = 1  # VISIBLE only
-            elif local in GRIPPER_PAD_BODY_IDX:
-                proto.shape_flags[si] = 0x6  # COLLIDE_SHAPES | COLLIDE_PARTICLES
-
-    # Cable (Cosserat Rod)
-    cable_shape_start_idx = proto.shape_count
-    cable_bodies_proto, cable_joints_proto = add_cable_rod(
-        proto,
-        start_pos=cable_start_pos,
-        direction=(0, 1, 0),
-    )
-    cable_shape_end_idx = proto.shape_count
-    cable_bodies_per_world = len(cable_bodies_proto)
-    cable_body_offset = cable_bodies_proto[0]
-
-    # Cable-arm filter pairs (arm bodies 0-6 don't collide with cable)
-    for cable_si in range(cable_shape_start_idx, cable_shape_end_idx):
+        # Contact filtering: non-pad bodies -> VISIBLE only, pad followers (GRIPPER_PAD_BODY_IDX) -> COLLIDE
         for arm_ss, arm_se, arm_bs in [
             (left_shape_start, left_shape_end, left_body_start),
             (right_shape_start, right_shape_end, right_body_start),
         ]:
-            for arm_si in range(arm_ss, arm_se):
-                local = proto.shape_body[arm_si] - arm_bs
-                if local not in GRIPPER_PAD_BODY_IDX:
-                    proto.add_shape_collision_filter_pair(cable_si, arm_si)
+            for si in range(arm_ss, arm_se):
+                local = proto.shape_body[si] - arm_bs
+                if local not in GRIPPER_PAD_BODY_IDX or si in all_finger_visual:
+                    proto.shape_flags[si] = 1  # VISIBLE only
+                elif local in GRIPPER_PAD_BODY_IDX:
+                    proto.shape_flags[si] = 0x6  # COLLIDE_SHAPES | COLLIDE_PARTICLES
+
+        # Cable (Cosserat Rod)
+        cable_shape_start_idx = proto.shape_count
+        cable_bodies_proto, cable_joints_proto = add_cable_rod(
+            proto,
+            start_pos=cable_start_pos,
+            direction=(0, 1, 0),
+        )
+        cable_shape_end_idx = proto.shape_count
+        cable_bodies_per_world = len(cable_bodies_proto)
+        cable_body_offset = cable_bodies_proto[0]
+
+        # Cable-arm filter pairs (arm bodies 0-6 don't collide with cable)
+        for cable_si in range(cable_shape_start_idx, cable_shape_end_idx):
+            for arm_ss, arm_se, arm_bs in [
+                (left_shape_start, left_shape_end, left_body_start),
+                (right_shape_start, right_shape_end, right_body_start),
+            ]:
+                for arm_si in range(arm_ss, arm_se):
+                    local = proto.shape_body[arm_si] - arm_bs
+                    if local not in GRIPPER_PAD_BODY_IDX:
+                        proto.add_shape_collision_filter_pair(cable_si, arm_si)
 
     bodies_per_world = proto.body_count
 
@@ -1419,16 +1445,19 @@ def build_multiworld_scene(
     # World index arrays
     bws = model.body_world_start.numpy()
 
-    # Zero inv_mass for robot bodies (kinematic)
-    inv_mass = model.body_inv_mass.numpy()
-    inv_inertia = model.body_inv_inertia.numpy()
-    for w in range(world_count):
-        start = bws[w]
-        for bi in range(ROBOT_BODY_COUNT):
-            inv_mass[start + bi] = 0.0
-            inv_inertia[start + bi] = np.zeros(3, dtype=np.float32)
-    model.body_inv_mass = wp.array(inv_mass, dtype=model.body_inv_mass.dtype, device=device)
-    model.body_inv_inertia = wp.array(inv_inertia, dtype=model.body_inv_inertia.dtype, device=device)
+    # Zero inv_mass for robot bodies (kinematic) -- VBD ONLY. The MuJoCo articulated arm keeps its
+    # REAL masses: zeroing => infinite mass + inertia => degenerate joint-space M(q); the STEP-1 probe
+    # validated the REAL-mass arm + per-step re-pose (track_err 0.030 rad), not a massless build (§28).
+    if SOLVER_BACKEND != "mujoco":
+        inv_mass = model.body_inv_mass.numpy()
+        inv_inertia = model.body_inv_inertia.numpy()
+        for w in range(world_count):
+            start = bws[w]
+            for bi in range(ROBOT_BODY_COUNT):
+                inv_mass[start + bi] = 0.0
+                inv_inertia[start + bi] = np.zeros(3, dtype=np.float32)
+        model.body_inv_mass = wp.array(inv_mass, dtype=model.body_inv_mass.dtype, device=device)
+        model.body_inv_inertia = wp.array(inv_inertia, dtype=model.body_inv_inertia.dtype, device=device)
 
     # Post-finalize: pad-follower BOX->collision / MESH->visual (no-op in S2: gripper bare; faithful pads built at S5)
     model_sflags = model.shape_flags.numpy()
