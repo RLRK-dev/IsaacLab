@@ -50,7 +50,6 @@ import torch
 import warp as wp
 from newton._src.sim.ik.ik_common import eval_fk_batched
 from newton.ik import IKObjectiveJointLimit, IKObjectivePosition, IKObjectiveRotation, IKSolver
-from newton.solvers import SolverVBD
 from rsl_rl.env import VecEnv
 
 # Import scene building functions from test_newton_clip_routing
@@ -72,6 +71,7 @@ from newton_skill_env_base import (
     compute_clamp_pos,
     compute_ori_error_axis_angle,
     find_nearest_cable_point,
+    make_solver,
     normalize_quat_w_positive,
     quat_distance,
     temporal_quat_consistency,
@@ -123,7 +123,6 @@ from task_config import (
 )
 
 # Constants (env-specific, not in base)
-VBD_ITERATIONS = 20
 IK_ITERATIONS_INIT = 100
 
 # IK rotation targets: hand down
@@ -457,8 +456,8 @@ class NewtonUnclampEnv(VecEnv):
                     break
         self._model.shape_flags = wp.array(model_sflags, dtype=self._model.shape_flags.dtype, device=self.device)
 
-        # VBD solver
-        self._solver = SolverVBD(self._model, iterations=VBD_ITERATIONS)
+        # solver via the SOLVER_BACKEND factory (default "vbd" => byte-identical to the prior SolverVBD)
+        self._solver = make_solver(self._model)
         self._model.rigid_contact_max = NJMAX
 
         # Physics states

@@ -23,7 +23,7 @@ import newton
 import numpy as np
 import warp as wp
 from newton.ik import IKObjectiveJointLimit, IKObjectivePosition, IKObjectiveRotation, IKSolver
-from newton.solvers import SolverVBD
+from newton.solvers import SolverMuJoCo, SolverVBD
 
 # Ensure configs/ is importable
 _config_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "configs")
@@ -50,7 +50,9 @@ from task_config import (
     NJMAX,
     ROBOT_BODIES_PER_ARM,
     SIM_SUBSTEPS,
+    SOLVER_BACKEND,
     TABLE_HEIGHT,
+    USE_MUJOCO_CPU,
 )
 
 # Ensure scripts/ is importable (for build_fk_model, add_kinematic_arm, add_cable_rod)
@@ -1204,6 +1206,38 @@ def solve_ik_single(fk_model, fk_state, target_left, target_right, device):
 
 
 # =============================================================================
+# Solver Factory (Option-E SOLVER_BACKEND SSOT)
+# =============================================================================
+
+
+def make_solver(model, backend=SOLVER_BACKEND, use_mujoco_cpu=USE_MUJOCO_CPU):
+    """Construct the physics solver for ``model`` per the ``SOLVER_BACKEND`` SSOT.
+
+    Args:
+        model: the finalized Newton model the solver steps.
+        backend: ``"vbd"`` (default) or ``"mujoco"`` -- selects :class:`SolverVBD`
+            vs :class:`SolverMuJoCo`. Defaults to ``task_config.SOLVER_BACKEND``.
+        use_mujoco_cpu: run MuJoCo on CPU (Opt-1/S4-S7 smoke); ``False`` = GPU (S8).
+            Only consulted by the ``"mujoco"`` backend.
+
+    Returns:
+        The constructed solver. With the default ``"vbd"`` backend this is
+        byte-identical to ``SolverVBD(model, iterations=VBD_ITERATIONS)``.
+    """
+    if backend == "mujoco":
+        return SolverMuJoCo(
+            model,
+            use_mujoco_cpu=use_mujoco_cpu,
+            separate_worlds=(model.world_count > 1),
+            update_data_interval=1,
+            disable_contacts=True,
+            solver="newton",
+            integrator="implicitfast",
+        )
+    return SolverVBD(model, iterations=VBD_ITERATIONS)
+
+
+# =============================================================================
 # Scene Building
 # =============================================================================
 
@@ -1418,8 +1452,8 @@ def build_multiworld_scene(
                 break
     model.shape_flags = wp.array(model_sflags, dtype=model.shape_flags.dtype, device=device)
 
-    # VBD solver
-    solver = SolverVBD(model, iterations=VBD_ITERATIONS)
+    # solver via the SOLVER_BACKEND factory (default "vbd" => byte-identical to the prior SolverVBD)
+    solver = make_solver(model)
     model.rigid_contact_max = NJMAX
 
     # Physics states

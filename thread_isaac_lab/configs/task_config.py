@@ -101,6 +101,11 @@ SIM_SUBSTEPS = 10  # Featherstone substeps per physics frame (cloth_franka/panda
 DISABLE_CONTACTS = False  # Must be False for rod cable: capsule-table + capsule-finger contact (selective filtering keeps arm bodies 0-6 filtered)
 NJMAX = 64000  # Max constraint rows (w=512: ~63 contacts/world × 512 = 32256, headroom to 64k)
 
+# Option-E solver backend SSOT (D-Opt1-3). Default "vbd" through Opt-1 for VBD A/B control;
+# "mujoco" is the Option-E target (hosts the Robotiq 4-bar that VBD drops); flip deferred post-S7.
+SOLVER_BACKEND = "vbd"  # "vbd" | "mujoco"
+USE_MUJOCO_CPU = True  # Opt-1/S4-S7 = CPU smoke; GPU (use_mujoco_cpu=False) = S8
+
 # Legacy MuJoCo parameters (kept for backward compatibility, not used by Featherstone)
 MUJOCO_ITERATIONS = 8
 MUJOCO_LS_ITERATIONS = 4

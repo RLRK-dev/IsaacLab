@@ -28,7 +28,6 @@ import torch
 import warp as wp
 from newton._src.sim.ik.ik_common import eval_fk_batched
 from newton.ik import IKObjectiveJointLimit, IKObjectivePosition, IKObjectiveRotation, IKSolver
-from newton.solvers import SolverVBD
 from rsl_rl.env import VecEnv
 
 _env_dir = os.path.dirname(os.path.abspath(__file__))
@@ -93,7 +92,6 @@ DT = 1.0 / 480.0
 SIM_DT = DT / SIM_SUBSTEPS  # Cable settling dt (full precision)
 RL_SIM_SUBSTEPS = 4  # Reduced substeps for RL speed
 RL_SIM_DT = DT / RL_SIM_SUBSTEPS  # RL stepping dt
-VBD_ITERATIONS = 20
 IK_ITERATIONS_INIT = 100  # Full iterations for P0 precondition
 IK_ITERATIONS_RL = 30  # Warm-started for RL small deltas
 IK_STEP_SIZE = 1.0
@@ -114,6 +112,7 @@ from newton_skill_env_base import (
     compute_ori_error_axis_angle,
     extract_clamp_pose,
     find_nearest_cable_point,
+    make_solver,
     normalize_quat_w_positive,
     quat_distance,
     quat_multiply_xyzw,
@@ -533,8 +532,8 @@ class NewtonApproachCableEnv(VecEnv):
                     break
         self._model.shape_flags = wp.array(model_sflags, dtype=self._model.shape_flags.dtype, device=self.device)
 
-        # VBD solver
-        self._solver = SolverVBD(self._model, iterations=VBD_ITERATIONS)
+        # solver via the SOLVER_BACKEND factory (default "vbd" => byte-identical to the prior SolverVBD)
+        self._solver = make_solver(self._model)
         self._model.rigid_contact_max = NJMAX
 
         # Physics state + contacts
