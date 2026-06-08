@@ -98,6 +98,7 @@ def main():
         raise RuntimeError("[BuildUC] IK failed (NaN)")
 
     # Preserve finger positions
+    # Franka-legacy finger indices, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
     jq_solved[7] = FINGER_HALF_OPEN_POS
     jq_solved[8] = FINGER_HALF_OPEN_POS
     jq_solved[FRANKA_NUM_JOINTS + 7] = FINGER_OPEN_POS

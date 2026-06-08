@@ -340,6 +340,7 @@ def build_ar_precondition(world_count, device, force_rebuild=False):
     if np.any(np.isnan(jq_solved)):
         raise RuntimeError("[AR-PRE] IK pre-solve returned NaN")
 
+    # Franka-legacy finger indices, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
     finger_indices = {7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8}
     for d in range(fk_model.joint_coord_count):
         if d not in finger_indices:

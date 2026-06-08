@@ -90,6 +90,7 @@ def main():
 
     fk_coord_count = env._fk_model.joint_coord_count
     finger_mask = np.ones(fk_coord_count, dtype=bool)
+    # Franka-legacy finger indices, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
     for fc in (7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8):
         finger_mask[fc] = False
 

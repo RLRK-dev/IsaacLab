@@ -278,6 +278,7 @@ def compute_obs(
     clamp_l_quat = _temporal_quat_consistency(clamp_l_quat, prev_clamp_l_quat)
 
     # Finger openings
+    # Franka-legacy finger indices, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
     r_finger_opening = fk_jq[FRANKA_NUM_JOINTS + 7] + fk_jq[FRANKA_NUM_JOINTS + 8]
     l_finger_opening = fk_jq[7] + fk_jq[8]
 

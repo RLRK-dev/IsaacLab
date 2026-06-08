@@ -175,6 +175,7 @@ def add_kinematic_arm(builder, fk_state, arm_body_offset, label_prefix, mcfg):
             xform=xform, mass=100.0, is_kinematic=True,
             label=f"{label_prefix}_body{local_body}",
         )
+        # Franka-legacy finger indices, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
         if local_body in (7, 8):
             mesh_xf = wp.transform_identity()
             if local_body == 8:

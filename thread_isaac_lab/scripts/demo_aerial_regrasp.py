@@ -354,6 +354,7 @@ def main():
     # Step 14: Right arm CLAMPs — both hands hold cable
     # =========================================================================
     print("\n=== Step 14: Right Arm CLAMP ===")
+    # Franka-legacy finger indices, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
     right_j7 = FRANKA_NUM_JOINTS + 7
     right_j8 = FRANKA_NUM_JOINTS + 8
     close_fingers_with_video(fk_model, fk_state, scene, world_count,

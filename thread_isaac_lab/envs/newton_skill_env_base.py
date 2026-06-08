@@ -1396,7 +1396,7 @@ def build_multiworld_scene(
     model.body_inv_mass = wp.array(inv_mass, dtype=model.body_inv_mass.dtype, device=device)
     model.body_inv_inertia = wp.array(inv_inertia, dtype=model.body_inv_inertia.dtype, device=device)
 
-    # Post-finalize: shape flags for finger BOX collision / MESH visual
+    # Post-finalize: pad-follower BOX->collision / MESH->visual (no-op in S2: gripper bare; faithful pads built at S5)
     model_sflags = model.shape_flags.numpy()
     model_stypes = model.shape_type.numpy()
     model_sbodies = model.shape_body.numpy()

@@ -152,8 +152,10 @@ def add_ur5e_robotiq(builder, base_xform):
 # Body indices in the model (per arm, relative to arm's first body)
 # Body 6 = panda_hand (flange), Body 7/8 = finger links
 
+# VESTIGIAL post-de-Franka (S2): HAND_OFFSET_Z/RZ are unused after the Franka claw/hand
+# construction was removed in S2a (grep-confirmed: no remaining references). UR5e EE = wrist_3
+# (body 5), no hand-offset. Safe to remove; kept flagged (S2c). [Franka-legacy]
 # Collapsed fixed-joint offsets (link7 → link8 → hand)
-# body 6 = link7 frame, hand.dae needs this offset to render correctly
 HAND_OFFSET_Z = 0.107              # link7 → link8 (panda_joint8 xyz)
 HAND_OFFSET_RZ = -0.785398163397   # link8 → hand (panda_hand_joint rpy)
 
@@ -551,6 +553,7 @@ def set_scene_colors(recorder, scene_info):
             continue  # world-attached (table, clip) — handled below
         if body_idx >= robot_body_count:
             continue  # cable body
+        # Franka-legacy finger filter; build_scene is script/smoke, not the RL path (S2); see S2_DEFERRED_OBLIGATIONS.md
         local_body = body_idx % FRANKA_NUM_JOINTS
         if local_body in (7, 8):
             shape_colors[s_idx] = COLOR_FINGER

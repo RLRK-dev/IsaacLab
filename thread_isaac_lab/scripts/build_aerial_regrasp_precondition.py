@@ -169,6 +169,7 @@ def validate_precondition(scene, fk_state, world_count):
 
     # FK state check
     fk_jq = fk_state.joint_q.numpy()
+    # Franka-legacy finger indices, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
     left_finger = fk_jq[7] + fk_jq[8]
     right_finger = fk_jq[FRANKA_NUM_JOINTS + 7] + fk_jq[FRANKA_NUM_JOINTS + 8]
     print(f"  FK fingers: left={left_finger:.4f} (CLOSED={2*FINGER_CLOSE_POS:.4f}), "

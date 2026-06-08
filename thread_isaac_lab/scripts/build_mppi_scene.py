@@ -116,6 +116,7 @@ def build_proto(fk_model, fk_state, device):
             proto.shape_flags[si] = 1  # VISIBLE only
         elif si in finger_vis_set:
             proto.shape_flags[si] = 1  # VISIBLE only
+        # Franka-legacy finger indices, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
         elif local in (7, 8):
             proto.shape_flags[si] = 0x6  # COLLIDE | BROADPHASE
 

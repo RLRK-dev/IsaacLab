@@ -208,6 +208,7 @@ def _configure_arm_shapes(proto, arm_bs, arm_ss, arm_se, fv):
             proto.shape_flags[si] = 1
         elif si in fv_set:
             proto.shape_flags[si] = 1
+        # Franka-legacy finger indices, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
         elif local in (7, 8):
             proto.shape_flags[si] = 0x6
 

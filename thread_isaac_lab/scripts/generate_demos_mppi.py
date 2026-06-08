@@ -218,6 +218,7 @@ def build_mppi_scene(fk_model, fk_state, K, device):
             proto.shape_flags[si] = 1
         elif si in fv_set:
             proto.shape_flags[si] = 1
+        # Franka-legacy finger indices, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
         elif local in (7, 8):
             proto.shape_flags[si] = 0x6
 

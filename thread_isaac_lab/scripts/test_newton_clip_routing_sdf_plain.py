@@ -73,6 +73,7 @@ GRAVITY = -9.81
 # Clip position — from task_config SSOT
 from task_config import CLIP1_X, CLIP1_Y, CLIP1_Z
 
+# Franka-legacy finger indices/URDF, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
 # Franka
 FRANKA_URDF = os.path.normpath(os.path.join(
     os.path.dirname(os.path.abspath(__file__)),

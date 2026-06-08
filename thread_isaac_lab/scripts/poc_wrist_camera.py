@@ -60,6 +60,8 @@ def get_wrist_camera_transforms(env, world_idx=0):
     bq = env._state_0.body_q.numpy()
     bws = env._bws[world_idx]
 
+    # Franka-legacy standalone (NOT the UR5e substrate of S2): local 9-DOF / EE-body-6
+    # layout for this Franka PoC; do not confuse with the task_config UR5e SSOT.
     # panda_hand body indices (left arm added first → body 0-8, right arm → body 9-17)
     EE_BODY_OFFSET = 6
     FRANKA_NUM_JOINTS = 9

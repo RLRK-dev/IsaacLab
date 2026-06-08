@@ -20,9 +20,9 @@ import warp as wp
 from scipy.spatial.transform import Rotation as _ScipyRotation
 from task_config import EE_BODY_OFFSET, FRANKA_NUM_JOINTS
 
-# Franka body layout (Newton collapsed joints)
+# Robot body layout (UR5e+Robotiq, Newton collapsed joints)
 
-# Verified camera offsets in body 6 (link7) frame
+# Camera offsets verified for FRANKA body 6 (link7) frame; UR5e wrist_3 (EE body 5) re-verify at camera/S6
 # Source: test_newton_clip_routing.py:125-126
 DEFAULT_LOCAL_POS = np.array([0.05, 0.05, 0.10])
 DEFAULT_LOCAL_TARGET = np.array([0.0, 0.0, 0.17])
@@ -51,7 +51,7 @@ def _look_at_quat(pos, target):
 class WristCameraManager:
     """Manages SensorTiledCamera for Newton RL envs.
 
-    Creates 2 wrist cameras (L/R) attached to panda_hand bodies,
+    Creates 2 wrist cameras (L/R) attached to the wrist-EE (wrist_3) bodies,
     renders RGB-D each step, and exposes results as torch tensors.
     """
 

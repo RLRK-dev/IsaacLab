@@ -64,6 +64,8 @@ GRASP_KE = 1000.0
 GRASP_KD = 50.0
 GRASP_RADIUS = 0.03
 
+# Franka-legacy standalone (NOT the UR5e substrate of S2): this Phase-7 Franka test
+# keeps its own 9-DOF / EE-body-6 layout; do not confuse with the task_config UR5e SSOT.
 FRANKA_NUM_REVOLUTE = 7
 FRANKA_NUM_PRISMATIC = 2
 FRANKA_NUM_JOINTS = 9

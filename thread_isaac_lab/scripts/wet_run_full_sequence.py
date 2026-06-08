@@ -119,6 +119,7 @@ def move_to_waypoint(model, state, solver, contacts, fk_model, fk_state,
 
     # Finger interpolation
     fk_jq_start = fk_state.joint_q.numpy().copy()
+    # Franka-legacy finger indices, NOT UR5e-swapped (S2); port for UR5e (see S2_DEFERRED_OBLIGATIONS.md)
     finger_start_l = fk_jq_start[7]
     finger_start_r = fk_jq_start[FRANKA_NUM_JOINTS + 7]
     finger_change = (abs(finger_l - finger_start_l) > 0.001 or

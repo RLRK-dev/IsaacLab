@@ -75,12 +75,12 @@ RIGHT_ARM_INIT_JOINTS = [
 # =============================================================================
 # End-Effector Geometry
 # =============================================================================
-EE_TO_FINGERTIP = 0.220  # panda_hand (body 6) to finger mesh TIP [m] (URDF: 0.107+0.0584+0.0545=0.2199)
+EE_TO_FINGERTIP = 0.220  # FRANKA panda_hand->fingertip [m]; UR5e EE_TO_PINCH~=0.256, re-derive S6
 
 # =============================================================================
 # Height Parameters (Code A: tune these to fix table penetration)
 #
-# IK target = panda_hand (body 6). Finger tips are EE_TO_FINGERTIP (220mm) below.
+# IK target = wrist_3 (EE body 5). Finger tips are EE_TO_FINGERTIP (220mm, Franka value; re-derive S6) below.
 # Finger tip Z ≈ param_value - 0.220.
 # Table surface at TABLE_HEIGHT (0.80m).
 # Cable rests on clip base plate: center at TABLE_HEIGHT + CLIP_BASE_HEIGHT + CABLE_RADIUS.
