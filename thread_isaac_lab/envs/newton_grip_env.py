@@ -404,7 +404,8 @@ class NewtonGripEnv(VecEnv):
             ws = self._bws[w]
             phys_bq[ws : ws + ROBOT_BODY_COUNT] = fk_bq
         self._state_0.body_q.assign(phys_bq)
-        self._solver.body_q_prev.assign(phys_bq)
+        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
+            self._solver.body_q_prev.assign(phys_bq)
 
         for _ in range(SETTLE_STEPS):
             self._physics_step_all()
@@ -468,7 +469,8 @@ class NewtonGripEnv(VecEnv):
             for bi in self._cable_bodies[w]:
                 bqd[bi, :] = 0.0
         self._state_0.body_qd.assign(bqd)
-        self._solver.body_q_prev.assign(bq)
+        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
+            self._solver.body_q_prev.assign(bq)
 
         # Reset Dahl friction
         if hasattr(self._solver, "enable_dahl_friction") and self._solver.enable_dahl_friction:
@@ -509,7 +511,8 @@ class NewtonGripEnv(VecEnv):
                         _bqd[bi, :] = 0.0  # zero all velocities
                 self._state_0.body_q.assign(_bq)
                 self._state_0.body_qd.assign(_bqd)
-                self._solver.body_q_prev.assign(_bq)
+                if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
+                    self._solver.body_q_prev.assign(_bq)
             if settle_i % 20 == 0:
                 _dbg_bq = self._state_0.body_q.numpy()
                 _dbg_z = np.mean(_dbg_bq[self._cable_bodies[0], 2])
@@ -525,7 +528,8 @@ class NewtonGripEnv(VecEnv):
             for bi in self._cable_bodies[w]:
                 bqd_post[bi, :] = 0.0
         self._state_0.body_qd.assign(bqd_post)
-        self._solver.body_q_prev.assign(bq_post)
+        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
+            self._solver.body_q_prev.assign(bq_post)
 
         cable_z_w0 = np.mean(bq_post[self._cable_bodies[0], 2])
         print(
@@ -618,7 +622,8 @@ class NewtonGripEnv(VecEnv):
 
         self._state_0.body_q.assign(self._settled_body_q)
         self._state_0.body_qd.assign(self._settled_body_qd)
-        self._solver.body_q_prev.assign(self._settled_body_q)
+        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
+            self._solver.body_q_prev.assign(self._settled_body_q)
 
         if hasattr(self._solver, "enable_dahl_friction") and self._solver.enable_dahl_friction:
             if self._solver.joint_C_fric is not None:

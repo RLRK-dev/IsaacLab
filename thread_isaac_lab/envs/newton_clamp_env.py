@@ -318,7 +318,8 @@ class NewtonClampEnv(VecEnv):
             ws = self._bws[w]
             phys_bq[ws : ws + ROBOT_BODY_COUNT] = fk_bq
         self._state_0.body_q.assign(phys_bq)
-        self._solver.body_q_prev.assign(phys_bq)
+        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
+            self._solver.body_q_prev.assign(phys_bq)
 
         # Additional settling with arms in place
         for _ in range(SETTLE_STEPS):
@@ -405,7 +406,8 @@ class NewtonClampEnv(VecEnv):
         # Restore physics state
         self._state_0.body_q.assign(self._settled_body_q)
         self._state_0.body_qd.assign(self._settled_body_qd)
-        self._solver.body_q_prev.assign(self._settled_body_q)
+        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
+            self._solver.body_q_prev.assign(self._settled_body_q)
 
         # Reset Dahl friction
         if hasattr(self._solver, "enable_dahl_friction") and self._solver.enable_dahl_friction:

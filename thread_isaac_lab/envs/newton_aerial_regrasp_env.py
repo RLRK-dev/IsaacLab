@@ -1550,7 +1550,8 @@ class NewtonAerialRegraspEnv(VecEnv):
         self._state_0.body_q.assign(phys_bq)
 
         # Restore VBD solver prev state (prevents velocity explosion)
-        self._solver.body_q_prev.assign(self._settled_body_q)
+        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
+            self._solver.body_q_prev.assign(self._settled_body_q)
 
         # Reset Dahl friction state
         if hasattr(self._solver, "enable_dahl_friction") and self._solver.enable_dahl_friction:
