@@ -104,6 +104,10 @@ NJMAX = 64000  # Max constraint rows (w=512: ~63 contacts/world × 512 = 32256, 
 # Option-E solver backend SSOT (D-Opt1-3). Default "vbd" through Opt-1 for VBD A/B control;
 # "mujoco" is the Option-E target (hosts the Robotiq 4-bar that VBD drops); flip deferred post-S7.
 SOLVER_BACKEND = "vbd"  # "vbd" | "mujoco"
+# FLIP-BLOCK (SC3): changing this default to "mujoco" is BLOCKED until (1) the SC3 standalone body_q_prev
+# guards land, (2) the S4 mujoco reset-path (the 17 .numpy read-modify-write sites + joint_q seeding)
+# lands, AND (3) the section-5.6 body_q_prev audit passes. The --solver-backend CLI smoke overrides
+# locally (script-only, --solver-backend mujoco) without flipping this SSOT default.
 USE_MUJOCO_CPU = True  # Opt-1/S4-S7 = CPU smoke; GPU (use_mujoco_cpu=False) = S8
 
 # Legacy MuJoCo parameters (kept for backward compatibility, not used by Featherstone)

@@ -1092,7 +1092,9 @@ def assign_world_states_to_sim(
     """
     state_0.body_q.assign(bq)
     state_0.body_qd.assign(bqd)
-    solver.body_q_prev.assign(prev)
+    # SC3 flip-prep: SolverMuJoCo has no body_q_prev (VBD-only); hasattr-skip is VBD-byte-identical.
+    if hasattr(solver, "body_q_prev") and solver.body_q_prev is not None:
+        solver.body_q_prev.assign(prev)
 
 
 def reset_dahl_friction_for_envs(
