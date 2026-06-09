@@ -51,8 +51,8 @@ _config_dir = os.environ.get(
 )
 sys.path.insert(0, _config_dir)
 from task_config import (  # noqa: E402
-    FRANKA_NUM_JOINTS, EE_BODY_OFFSET, BODIES_PER_ARM, N_ARM_BODIES,
-    TABLE_HEIGHT, ROBOT_LEFT_BASE, ROBOT_RIGHT_BASE,
+    FRANKA_NUM_JOINTS, EE_BODY_OFFSET, BODIES_PER_ARM, JOINTS_PER_ARM, N_ARM_BODIES,
+    TABLE_HEIGHT, ROBOT_LEFT_BASE, ROBOT_RIGHT_BASE, SOLVER_BACKEND,
     EE_TO_FINGERTIP, APPROACH_Z, GRASP_Z, LIFT_Z, PUSH_Z,
     SIM_SUBSTEPS, NJMAX,
     CABLE_SEGMENTS, CABLE_SEG_LEN, CABLE_RADIUS,
@@ -814,12 +814,19 @@ def add_cable_rod(builder, start_pos, direction=(0, 1, 0)):
     return body_ids, joint_ids
 
 
-def build_scene(use_cable=True, fk_model=None, fk_state=None):
+def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vbd"):
     """Build the full Newton scene for VBD Rod architecture.
 
     Kinematic robot bodies (positions from FK model, no joints).
     Cable: add_rod() Cosserat rod (CABLE joints, VBD-native).
     Table: BOX primitive. model.collide() for contacts.
+
+    ``solver_backend`` (Option-E Opt-1, D-Opt1-1): ``"vbd"`` (default) = the jointless
+    ``add_kinematic_arm`` build EXACTLY as before (byte-identical A/B control); ``"mujoco"`` =
+    the articulated UR5e+Robotiq ``add_mjcf`` build (Robotiq ``<tendon>`` stripped) the STEP-1
+    probe validated, with REAL arm masses (inv_mass NOT zeroed) and the cable/flag passes skipped.
+    Uses the LOCAL ``solver_backend`` (not the task_config constant) so the guards can't diverge
+    from the build (§28 #1).
     """
     builder = newton.ModelBuilder(gravity=GRAVITY)
     floor_shape_idx = builder.add_ground_plane()
@@ -857,42 +864,63 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None):
         clip_shape_indices.append(idx)
     print(f"  [SCENE] Clip V-groove at ({cx}, {cy}, {cz}), 5 parts")
 
-    # Left arm (kinematic bodies, no joints)
-    left_body_start, left_shape_start, left_shape_end, left_fv = add_kinematic_arm(
-        builder, fk_model, fk_state, arm_body_offset=0, label_prefix="left")
+    # Robot arms: VBD = jointless kinematic bodies (FK body_q); MuJoCo = articulated UR5e+Robotiq.
+    if solver_backend == "mujoco":
+        # Option-E Opt-1 (SC2b-part2, D-Opt1-1): articulated UR5e+Robotiq per arm via the probe-
+        # validated add_mjcf recipe (Robotiq <tendon> stripped so SolverMuJoCo constructs; the
+        # _init_tendons OOB is avoided). disable_contacts=True (make_solver) makes the kinematic-arm
+        # VISIBLE/finger collision-flag pass moot -> skipped (arm VISIBLE-only, gripper bare). Cable
+        # (CABLE joints, MuJoCo-incompatible solver_mujoco.py:112) runs only under use_cable (the
+        # mujoco smoke passes --no-cable); the rigid-link REVOLUTE cable rebuild = S4.
+        add_ur5e_robotiq(
+            builder, wp.transform(ROBOT_LEFT_BASE, wp.quat_identity()),
+            robotiq_xml=ROBOTIQ_STRIPPED_XML, skip_equality_constraints=True)
+        add_ur5e_robotiq(
+            builder, wp.transform(ROBOT_RIGHT_BASE, wp.quat_identity()),
+            robotiq_xml=ROBOTIQ_STRIPPED_XML, skip_equality_constraints=True)
+        # body-range scene keys (§28 #4): left=0, right=BODIES_PER_ARM(14) -> robot_body_count=28.
+        left_body_start, right_body_start = 0, BODIES_PER_ARM
+        # shape ranges + finger-visual set are unused under mujoco (disable_contacts; the standalone
+        # joint_q smoke returns before the contact-material diag / settle / episode loop).
+        left_shape_start = left_shape_end = right_shape_start = right_shape_end = 0
+        all_finger_visual = set()
+    else:
+        # Left arm (kinematic bodies, no joints)
+        left_body_start, left_shape_start, left_shape_end, left_fv = add_kinematic_arm(
+            builder, fk_model, fk_state, arm_body_offset=0, label_prefix="left")
 
-    # Right arm (kinematic bodies, no joints)
-    right_body_start, right_shape_start, right_shape_end, right_fv = add_kinematic_arm(
-        builder, fk_model, fk_state, arm_body_offset=FRANKA_NUM_JOINTS, label_prefix="right")
+        # Right arm (kinematic bodies, no joints)
+        right_body_start, right_shape_start, right_shape_end, right_fv = add_kinematic_arm(
+            builder, fk_model, fk_state, arm_body_offset=FRANKA_NUM_JOINTS, label_prefix="right")
 
-    # All finger visual DAE shape indices (to exclude from approximate_meshes)
-    all_finger_visual = set(left_fv + right_fv)
+        # All finger visual DAE shape indices (to exclude from approximate_meshes)
+        all_finger_visual = set(left_fv + right_fv)
 
-    # Contact filtering for arm bodies
-    ground_planes = [floor_shape_idx, table_idx]
-    filter_count = 0
-    for arm_label, shape_start, shape_end, body_start in [
-        ("left", left_shape_start, left_shape_end, left_body_start),
-        ("right", right_shape_start, right_shape_end, right_body_start),
-    ]:
-        for si in range(shape_start, shape_end):
-            body_idx = builder.shape_body[si]
-            local_body = body_idx - body_start
-            # Arm bodies (0-6): visual only, no collision
-            if local_body < 7:
-                builder.shape_flags[si] = 1  # VISIBLE only (remove COLLIDE)
-                filter_count += 1
-            # Finger visual DAE shapes: VISIBLE only (same as arm shapes)
-            elif si in all_finger_visual:
-                builder.shape_flags[si] = 1  # VISIBLE only
-                filter_count += 1
-            elif local_body in (7, 8):
-                # Finger collision shapes: COLLIDE + BROADPHASE, NOT visible
-                # Visual rendering comes from finger.dae DAE meshes
-                builder.shape_flags[si] = 0x6  # COLLIDE | BROADPHASE (no VISIBLE)
-                filter_count += 1
-    print(f"  [SCENE] Contact filtering: {filter_count} arm+finger-visual shapes flagged, "
-          f"finger collision → COLLIDE only (not visible)")
+        # Contact filtering for arm bodies
+        ground_planes = [floor_shape_idx, table_idx]
+        filter_count = 0
+        for arm_label, shape_start, shape_end, body_start in [
+            ("left", left_shape_start, left_shape_end, left_body_start),
+            ("right", right_shape_start, right_shape_end, right_body_start),
+        ]:
+            for si in range(shape_start, shape_end):
+                body_idx = builder.shape_body[si]
+                local_body = body_idx - body_start
+                # Arm bodies (0-6): visual only, no collision
+                if local_body < 7:
+                    builder.shape_flags[si] = 1  # VISIBLE only (remove COLLIDE)
+                    filter_count += 1
+                # Finger visual DAE shapes: VISIBLE only (same as arm shapes)
+                elif si in all_finger_visual:
+                    builder.shape_flags[si] = 1  # VISIBLE only
+                    filter_count += 1
+                elif local_body in (7, 8):
+                    # Finger collision shapes: COLLIDE + BROADPHASE, NOT visible
+                    # Visual rendering comes from finger.dae DAE meshes
+                    builder.shape_flags[si] = 0x6  # COLLIDE | BROADPHASE (no VISIBLE)
+                    filter_count += 1
+        print(f"  [SCENE] Contact filtering: {filter_count} arm+finger-visual shapes flagged, "
+              f"finger collision → COLLIDE only (not visible)")
 
     # Cable (Cosserat Rod via add_rod — CAPSULE shapes + CABLE joints, VBD-native)
     cable_bodies = []
@@ -946,68 +974,76 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None):
     # Post-finalize: set shape flags for finger bodies
     # BOX collision shapes = COLLIDE | BROADPHASE (not visible — DAE renders instead)
     # MESH visual shapes = VISIBLE only (no collision)
-    model_shape_flags = model.shape_flags.numpy()
-    model_shape_types = model.shape_type.numpy()
-    model_shape_bodies = model.shape_body.numpy()
-    hidden_count = 0
-    for si in range(len(model_shape_types)):
-        bi = model_shape_bodies[si]
-        if bi < 0:
-            continue
-        local_l = bi - left_body_start
-        local_r = bi - right_body_start
-        if local_l in (7, 8) or local_r in (7, 8):
-            if model_shape_types[si] == 7:  # BOX = collision only
-                model_shape_flags[si] = 0x6  # COLLIDE | BROADPHASE, no VISIBLE
-                hidden_count += 1
-            elif model_shape_types[si] == 8:  # MESH = visual only (finger.dae)
-                model_shape_flags[si] = 0x1  # VISIBLE only
-    model.shape_flags = wp.array(model_shape_flags, dtype=model.shape_flags.dtype, device=DEVICE)
-    print(f"  [SCENE] Post-finalize: {hidden_count} finger BOX → hidden (model flags)")
+    # (VBD only -- §28 #2: the mujoco articulated arm + disable_contacts has no kinematic-arm finger pass.)
+    if solver_backend != "mujoco":
+        model_shape_flags = model.shape_flags.numpy()
+        model_shape_types = model.shape_type.numpy()
+        model_shape_bodies = model.shape_body.numpy()
+        hidden_count = 0
+        for si in range(len(model_shape_types)):
+            bi = model_shape_bodies[si]
+            if bi < 0:
+                continue
+            local_l = bi - left_body_start
+            local_r = bi - right_body_start
+            if local_l in (7, 8) or local_r in (7, 8):
+                if model_shape_types[si] == 7:  # BOX = collision only
+                    model_shape_flags[si] = 0x6  # COLLIDE | BROADPHASE, no VISIBLE
+                    hidden_count += 1
+                elif model_shape_types[si] == 8:  # MESH = visual only (finger.dae)
+                    model_shape_flags[si] = 0x1  # VISIBLE only
+        model.shape_flags = wp.array(model_shape_flags, dtype=model.shape_flags.dtype, device=DEVICE)
+        print(f"  [SCENE] Post-finalize: {hidden_count} finger BOX → hidden (model flags)")
 
     # Zero inv_mass/inv_inertia for kinematic robot bodies so VBD doesn't move them
-    inv_mass = model.body_inv_mass.numpy()
-    inv_inertia = model.body_inv_inertia.numpy()
-    for bi in range(robot_body_count):
-        inv_mass[bi] = 0.0
-        inv_inertia[bi] = np.zeros(3, dtype=np.float32)
-    model.body_inv_mass = wp.array(inv_mass, dtype=model.body_inv_mass.dtype, device=DEVICE)
-    model.body_inv_inertia = wp.array(inv_inertia, dtype=model.body_inv_inertia.dtype, device=DEVICE)
-    print(f"  [SCENE] Kinematic bodies: inv_mass=0 for bodies 0-{robot_body_count-1}")
+    # VBD ONLY (§28 #1, the critical guard): the MuJoCo articulated arm keeps its REAL masses --
+    # zeroing => infinite mass+inertia => degenerate joint-space M(q); the STEP-1 probe validated the
+    # REAL-mass arm + per-step re-pose. Uses the LOCAL solver_backend, NOT the task_config constant.
+    if solver_backend != "mujoco":
+        inv_mass = model.body_inv_mass.numpy()
+        inv_inertia = model.body_inv_inertia.numpy()
+        for bi in range(robot_body_count):
+            inv_mass[bi] = 0.0
+            inv_inertia[bi] = np.zeros(3, dtype=np.float32)
+        model.body_inv_mass = wp.array(inv_mass, dtype=model.body_inv_mass.dtype, device=DEVICE)
+        model.body_inv_inertia = wp.array(inv_inertia, dtype=model.body_inv_inertia.dtype, device=DEVICE)
+        print(f"  [SCENE] Kinematic bodies: inv_mass=0 for bodies 0-{robot_body_count-1}")
 
     print(f"  [SCENE] Model: bodies={model.body_count}, joints={model.joint_count}, "
           f"articulations={model.articulation_count}, "
           f"joint_coords={model.joint_coord_count}, joint_dofs={model.joint_dof_count}")
 
     # Shape diagnostics
-    shape_types = model.shape_type.numpy()
-    shape_bodies = model.shape_body.numpy()
-    shape_flags = model.shape_flags.numpy()
-    shape_collision_group = model.shape_collision_group.numpy()
-    TYPE_NAMES = {0: "NONE", 1: "PLANE", 2: "HFIELD", 3: "SPHERE", 4: "CAPSULE",
-                  5: "ELLIPSOID", 6: "CYLINDER", 7: "BOX", 8: "MESH", 9: "CONE", 10: "CONVEX_MESH"}
-    COLLIDE_SHAPES = newton.ShapeFlags.COLLIDE_SHAPES
-    for arm_label, body_start_v in [("Left", left_body_start), ("Right", right_body_start)]:
-        for local_body in [7, 8]:
-            bi = body_start_v + local_body
-            shapes_for_body = [si for si in range(len(shape_bodies)) if shape_bodies[si] == bi]
-            for si in shapes_for_body:
-                st = shape_types[si]
-                name = TYPE_NAMES.get(st, f"UNKNOWN({st})")
-                flags = shape_flags[si]
-                cgroup = shape_collision_group[si]
-                has_collide = bool(flags & COLLIDE_SHAPES)
-                print(f"  [SHAPE] {arm_label} body{local_body} shape#{si}: type={name}, "
-                      f"flags={flags:#x}(COLLIDE={has_collide}), cgroup={cgroup}")
-            if arm_label == "Left":
-                break
-    if cable_bodies:
-        si0 = [si for si in range(len(shape_bodies)) if shape_bodies[si] == cable_bodies[0]]
-        if si0:
-            si = si0[0]
-            print(f"  [SHAPE] Cable body0 shape#{si}: type={TYPE_NAMES.get(shape_types[si],'?')}, "
-                  f"flags={shape_flags[si]:#x}(COLLIDE={bool(shape_flags[si] & COLLIDE_SHAPES)}), "
-                  f"cgroup={shape_collision_group[si]}")
+    # (VBD only -- §28 #3: indexes the kinematic-arm finger bodies [7,8]; N/A to the mujoco articulated arm.)
+    if solver_backend != "mujoco":
+        shape_types = model.shape_type.numpy()
+        shape_bodies = model.shape_body.numpy()
+        shape_flags = model.shape_flags.numpy()
+        shape_collision_group = model.shape_collision_group.numpy()
+        TYPE_NAMES = {0: "NONE", 1: "PLANE", 2: "HFIELD", 3: "SPHERE", 4: "CAPSULE",
+                      5: "ELLIPSOID", 6: "CYLINDER", 7: "BOX", 8: "MESH", 9: "CONE", 10: "CONVEX_MESH"}
+        COLLIDE_SHAPES = newton.ShapeFlags.COLLIDE_SHAPES
+        for arm_label, body_start_v in [("Left", left_body_start), ("Right", right_body_start)]:
+            for local_body in [7, 8]:
+                bi = body_start_v + local_body
+                shapes_for_body = [si for si in range(len(shape_bodies)) if shape_bodies[si] == bi]
+                for si in shapes_for_body:
+                    st = shape_types[si]
+                    name = TYPE_NAMES.get(st, f"UNKNOWN({st})")
+                    flags = shape_flags[si]
+                    cgroup = shape_collision_group[si]
+                    has_collide = bool(flags & COLLIDE_SHAPES)
+                    print(f"  [SHAPE] {arm_label} body{local_body} shape#{si}: type={name}, "
+                          f"flags={flags:#x}(COLLIDE={has_collide}), cgroup={cgroup}")
+                if arm_label == "Left":
+                    break
+        if cable_bodies:
+            si0 = [si for si in range(len(shape_bodies)) if shape_bodies[si] == cable_bodies[0]]
+            if si0:
+                si = si0[0]
+                print(f"  [SHAPE] Cable body0 shape#{si}: type={TYPE_NAMES.get(shape_types[si],'?')}, "
+                      f"flags={shape_flags[si]:#x}(COLLIDE={bool(shape_flags[si] & COLLIDE_SHAPES)}), "
+                      f"cgroup={shape_collision_group[si]}")
 
     scene_info = {
         "model": model,
@@ -1023,6 +1059,7 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None):
         "robot_body_count": robot_body_count,
         "table_shape_idx": table_idx,
         "clip_shape_indices": clip_shape_indices,
+        "solver_backend": solver_backend,
     }
     return scene_info
 
@@ -1102,14 +1139,29 @@ def physics_step(model, state, solver, contacts, scene_info):
     fk_state = scene_info["fk_state"]
     robot_body_count = scene_info["robot_body_count"]
     vbd_control = scene_info["vbd_control"]
+    solver_backend = scene_info.get("solver_backend", "vbd")
 
     for i in range(SIM_SUBSTEPS):
-        # Ensure kinematic bodies reflect current FK positions
-        update_kinematic_bodies(state_0, fk_state, robot_body_count)
+        if solver_backend == "mujoco":
+            # MuJoCo articulated kinematic re-pose (D-Opt1-2): per-substep OVERWRITE joint_q=FK +
+            # zero joint_qd (the STEP-1 probe-validated driving; MuJoCo poses bodies from joint_q).
+            # disable_contacts=True -> no model.collide (contacts None), mirroring the base mujoco branch.
+            n = 2 * JOINTS_PER_ARM
+            phys_jq = state_0.joint_q.numpy()
+            phys_jqd = state_0.joint_qd.numpy()
+            phys_jq[:n] = fk_state.joint_q.numpy()[:n]
+            phys_jqd[:n] = 0.0
+            state_0.joint_q.assign(phys_jq)
+            state_0.joint_qd.assign(phys_jqd)
+            state_0.clear_forces()
+            solver.step(state_0, state_1, vbd_control, None, SIM_DT)
+        else:
+            # Ensure kinematic bodies reflect current FK positions
+            update_kinematic_bodies(state_0, fk_state, robot_body_count)
 
-        state_0.clear_forces()
-        model.collide(state_0, contacts)
-        solver.step(state_0, state_1, vbd_control, contacts, SIM_DT)
+            state_0.clear_forces()
+            model.collide(state_0, contacts)
+            solver.step(state_0, state_1, vbd_control, contacts, SIM_DT)
 
         state_0, state_1 = state_1, state_0
 
@@ -1971,6 +2023,50 @@ def run_episode(model, state, scene_info, solver, contacts, episode_idx):
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+def _run_mujoco_tracking_smoke(model, solver, contacts, scene_info, fk_state, n_frames=60):
+    """K2 false-green gate (Option-E Opt-1 SC2b-part2): per-step joint_q kinematic re-pose tracking.
+
+    Drives the articulated UR5e arms via :func:`physics_step` (mujoco branch: OVERWRITE joint_q=FK +
+    zero joint_qd every substep) for ``n_frames`` frames, then asserts the ARM joints track the FK
+    target: ``max|joint_q[arm] - fk_target[arm]| < 0.05`` rad, all-finite, qvel bounded (<100 rad/s),
+    and no AttributeError on the SolverMuJoCo step path. Prints a ``[MUJOCO_SMOKE]`` metrics + verdict
+    line and ``sys.exit``s (0 = PASS, 2 = FAIL) so the exit code is the empirical gate.
+    """
+    n = 2 * JOINTS_PER_ARM
+    fk_target = fk_state.joint_q.numpy()[:n].copy()
+    # arm joints only (per-arm [0:N_ARM_BODIES] of each JOINTS_PER_ARM-joint arm; gripper held at 0)
+    arm_idx = list(range(0, N_ARM_BODIES)) + list(range(JOINTS_PER_ARM, JOINTS_PER_ARM + N_ARM_BODIES))
+    state = model.state()
+    attribute_error = None
+    qvel_max = 0.0
+    finite = True
+    try:
+        for _ in range(n_frames):
+            state = physics_step(model, state, solver, contacts, scene_info)
+            jqd = state.joint_qd.numpy()
+            if not (np.all(np.isfinite(jqd)) and np.all(np.isfinite(state.joint_q.numpy()))):
+                finite = False
+                break
+            qvel_max = max(qvel_max, float(np.max(np.abs(jqd))))
+    except AttributeError as e:
+        attribute_error = f"{type(e).__name__}: {e}"
+
+    if attribute_error is None and finite:
+        jq_end = state.joint_q.numpy()[:n]
+        arm_track_err = float(np.max(np.abs(jq_end[arm_idx] - fk_target[arm_idx])))
+    else:
+        arm_track_err = float("inf")
+    qvel_bounded = bool(qvel_max < 100.0)
+    tracking_ok = bool(attribute_error is None and finite and arm_track_err < 0.05 and qvel_bounded)
+
+    print(f"  [MUJOCO_SMOKE] n_frames={n_frames} arm_track_err={arm_track_err:.6f} (<0.05) "
+          f"finite={finite} qvel_max={qvel_max:.6f} (bounded<100={qvel_bounded}) "
+          f"attribute_error={attribute_error}")
+    print(f"  [MUJOCO_SMOKE] tracking_ok={tracking_ok} "
+          f"({'PASS -- K2 false-green fixed' if tracking_ok else 'FAIL'})")
+    sys.exit(0 if tracking_ok else 2)
+
+
 def main():
     global _physics_state_buffer
     parser = argparse.ArgumentParser(description="Newton clip routing test")
@@ -1980,9 +2076,12 @@ def main():
     parser.add_argument("--record-video", action="store_true", help="Record video (ViewerGL headless)")
     parser.add_argument("--no-video", action="store_true", help="Disable video even when HARNESS_RECORD_VIDEO=1")
     parser.add_argument("--seed", type=int, default=None, help="Random seed (enables per-episode perturbation)")
+    parser.add_argument("--solver-backend", type=str, default=SOLVER_BACKEND, choices=["vbd", "mujoco"],
+                        help="Physics solver (Option-E Opt-1): vbd (default) | mujoco (articulated-arm smoke)")
     args = parser.parse_args()
 
     use_cable = not args.no_cable
+    solver_backend = args.solver_backend
     # Harness mode: HARNESS_RECORD_VIDEO=1 enables video by default
     if not args.no_video and os.environ.get("HARNESS_RECORD_VIDEO", "") == "1":
         args.record_video = True
@@ -2031,7 +2130,8 @@ def main():
 
     # Build physics scene (VBD cable + kinematic robot bodies positioned from FK)
     print("[BUILD] Building physics scene...")
-    scene_info = build_scene(use_cable=use_cable, fk_model=fk_model, fk_state=fk_state)
+    scene_info = build_scene(use_cable=use_cable, fk_model=fk_model, fk_state=fk_state,
+                             solver_backend=solver_backend)
     model = scene_info["model"]
     cable_bodies = scene_info.get("cable_bodies", [])
 
@@ -2051,9 +2151,22 @@ def main():
     contacts = model.contacts()
     print(f"  [COLLISION] model.collide() (BOX-CAPSULE, rigid_contact_max={NJMAX})")
 
-    # Create VBD solver
-    solver = SolverVBD(model, iterations=VBD_ITERATIONS)
-    print(f"  [SOLVER] VBD created (iterations={VBD_ITERATIONS})")
+    # Create solver via the Option-E factory (SC1 make_solver; lazy import avoids the base<->script
+    # circular import). Default "vbd" => byte-identical to SolverVBD(model, iterations=VBD_ITERATIONS).
+    _envs_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "envs")
+    if _envs_dir not in sys.path:
+        sys.path.insert(0, _envs_dir)
+    from newton_skill_env_base import make_solver  # noqa: E402  (lazy: avoid circular import at load)
+    solver = make_solver(model, backend=solver_backend)
+    print(f"  [SOLVER] {solver_backend} solver created via make_solver")
+
+    # Option-E Opt-1 SC2b-part2 -- K2 false-green GATE (the standalone joint_q tracking smoke): under
+    # --solver-backend mujoco, drive the articulated arm per-step (joint_q=FK + zero qd) for N>=60
+    # frames + assert it tracks (arm ||joint_q - target|| < 0.05 + finite + qvel bounded + no
+    # AttributeError). The full VBD cable episode below is NOT ported to mujoco (S4-S7); exit after.
+    if solver_backend == "mujoco":
+        _run_mujoco_tracking_smoke(model, solver, contacts, scene_info, fk_state, n_frames=60)
+        return  # _run_mujoco_tracking_smoke sys.exit()s; this return is a safety net
 
     # Contact material properties (set in build_scene ShapeConfig, verify here)
     shape_ke = model.shape_material_ke.numpy()
@@ -2201,7 +2314,9 @@ def main():
 
             # Reset VBD solver internal state (body_q_prev stores previous-step transforms;
             # stale values from previous episode cause huge velocity deltas → cable explosion)
-            solver.body_q_prev.assign(settled_body_q)
+            # P5: hasattr-guard (mujoco SolverMuJoCo has no body_q_prev; matches the guards below).
+            if hasattr(solver, 'body_q_prev') and solver.body_q_prev is not None:
+                solver.body_q_prev.assign(settled_body_q)
             if hasattr(solver, 'particle_q_prev') and solver.particle_q_prev is not None:
                 solver.particle_q_prev.zero_()
             # Dahl friction state (if enabled)
