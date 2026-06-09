@@ -628,7 +628,8 @@ class NewtonInsertClipEnv(VecEnv):
         self._state_0.body_qd.assign(bqd)
 
         # Sync VBD prev state
-        self._solver.body_q_prev.assign(bq)
+        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
+            self._solver.body_q_prev.assign(bq)
 
         # Step 3: VBD settle (cable-finger contact stabilization)
         print("[InsertClipEnv] VBD settling (100 frames)...")
@@ -1013,7 +1014,8 @@ class NewtonInsertClipEnv(VecEnv):
         for w in range(self._world_count):
             self._per_world_fk_jq[w] = self._settled_fk_jq.copy()
         self._broadcast_fk_to_all_worlds()
-        self._solver.body_q_prev.assign(self._settled_body_q)
+        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
+            self._solver.body_q_prev.assign(self._settled_body_q)
         if hasattr(self._solver, "enable_dahl_friction") and self._solver.enable_dahl_friction:
             if self._solver.joint_C_fric is not None:
                 self._solver.joint_C_fric.zero_()

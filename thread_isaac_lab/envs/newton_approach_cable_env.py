@@ -1069,7 +1069,8 @@ class NewtonApproachCableEnv(VecEnv):
         self._broadcast_fk_to_all_worlds()
 
         # Restore VBD solver prev state
-        self._solver.body_q_prev.assign(self._settled_body_q)
+        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
+            self._solver.body_q_prev.assign(self._settled_body_q)
 
         # Reset Dahl friction if enabled
         if hasattr(self._solver, "enable_dahl_friction") and self._solver.enable_dahl_friction:
