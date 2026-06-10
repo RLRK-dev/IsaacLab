@@ -108,6 +108,10 @@ SOLVER_BACKEND = "vbd"  # "vbd" | "mujoco"
 # guards land, (2) the S4 mujoco reset-path (the 17 .numpy read-modify-write sites + joint_q seeding)
 # lands, AND (3) the section-5.6 body_q_prev audit passes. The --solver-backend CLI smoke overrides
 # locally (script-only, --solver-backend mujoco) without flipping this SSOT default.
+# FLIP-CHECKLIST addition (S4b): the 3 own-solver envs (approach/insert/unclamp) build their OWN
+# solver via make_solver() WITHOUT enable_cable_contacts — on a future flip their cable would
+# silently build with contacts DISABLED. They are mujoco-DE-SCOPED (cycle-3 §9.1, no mujoco arm
+# branch); wire enable_cable_contacts when (and only when) their mujoco port lands.
 USE_MUJOCO_CPU = True  # Opt-1/S4-S7 = CPU smoke; GPU (use_mujoco_cpu=False) = S8
 
 # Legacy MuJoCo parameters (kept for backward compatibility, not used by Featherstone)
@@ -141,6 +145,16 @@ CABLE_STRETCH_DAMPING = 0.0# Stretch damping [N·s]
 CABLE_CONTACT_KE = 2500.0# Contact stiffness (ShapeConfig default=2500; was 100 — 25x too low)
 CABLE_CONTACT_KD = 100.0# Contact damping (ShapeConfig default=100; was 10)
 CABLE_CONTACT_MU = 1.0# Friction coefficient (high for grip traction)
+
+# SolverMuJoCo-path contact stiffness (S4a, empirically decided 2026-06-10; %3-PV-PASS_SCOPED).
+# Newton maps ShapeConfig ke/kd -> MuJoCo solref via convert_solref (kernels.py:185):
+# solref = (2/kd, (kd/2)*sqrt(1/ke)). The VBD-era CABLE_CONTACT_KE/KD above map to EXACTLY the
+# MuJoCo default (0.02, 1.0) = mass-scaled soft contact (~3.1 mm rest compression on the r=4 mm
+# cable); these values invert to solref=(0.005, 1.0) (tau = 24x SIM_DT >= the 2*dt stability
+# floor, zeta=1) -> 0.1 mm rest compression (S4a smoke-verified). Used by the mujoco branch ONLY
+# (cable capsules + table); the VBD path keeps CABLE_CONTACT_* (A/B byte-identity).
+MUJOCO_CONTACT_KE = 40000.0
+MUJOCO_CONTACT_KD = 400.0
 
 # =============================================================================
 # Clip Layout (5-clip, Y equal spacing + X staggered 千鳥)

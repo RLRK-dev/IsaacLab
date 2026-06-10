@@ -55,6 +55,7 @@ from task_config import (  # noqa: E402
     TABLE_HEIGHT, ROBOT_LEFT_BASE, ROBOT_RIGHT_BASE, SOLVER_BACKEND,
     EE_TO_FINGERTIP, APPROACH_Z, GRASP_Z, LIFT_Z, PUSH_Z,
     SIM_SUBSTEPS, NJMAX,
+    MUJOCO_CONTACT_KE, MUJOCO_CONTACT_KD,
     CABLE_SEGMENTS, CABLE_SEG_LEN, CABLE_RADIUS,
     CABLE_BEND_STIFFNESS, CABLE_BEND_DAMPING,
     CABLE_STRETCH_STIFFNESS, CABLE_STRETCH_DAMPING,
@@ -814,15 +815,8 @@ def add_cable_rod(builder, start_pos, direction=(0, 1, 0)):
     return body_ids, joint_ids
 
 
-# D-S4a-3 (S4a, MuJoCo path): contact stiffness for the SolverMuJoCo scene. Newton DOES map
-# ShapeConfig ke/kd to MuJoCo solref via convert_solref (kernels.py:185): solref =
-# (2/kd, (kd/2)*sqrt(1/ke)) — but THREAD's VBD-era cable ke=2500/kd=100 maps to EXACTLY the
-# MuJoCo DEFAULT (0.02, 1.0) = mass-scaled soft contact, rest compression ≈ g·τ² ≈ 3.9 mm
-# (probe run-3 observed 3.1 mm on the r=4 mm cable). Inverting for solref=(0.005, 1.0)
-# (τ = 24×SIM_DT ≥ the 2×dt stability floor, ζ=1): kd = 2/τ = 400, ke = (kd/2)² = 40000.
-# MuJoCo-branch-only — the VBD path keeps the task_config values (A/B byte-identity).
-MUJOCO_CONTACT_KE = 40000.0
-MUJOCO_CONTACT_KD = 400.0
+# D-S4a-3 (S4a, MuJoCo path): MUJOCO_CONTACT_KE/KD now live in task_config (SSOT relocation,
+# human-Rs-approved 2026-06-10; provenance + the convert_solref derivation are documented there).
 # Cable bend spring (S4a probe-decided contract, S4_CYCLE4_DESIGN.md §C2): k = EI/L = 66.67
 # N·m/rad DIRECT (Newton 1.2 #6) + the LOAD-BEARING real damping (B1) + straight rest.
 CABLE_MUJOCO_BEND_K = CABLE_BEND_STIFFNESS / CABLE_SEG_LEN  # 1.0/0.015 = 66.67
