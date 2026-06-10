@@ -65,11 +65,14 @@ from test_newton_clip_routing import (
     EE_BODY_OFFSET,
     FRANKA_NUM_JOINTS,
     GRAVITY,
+    MUJOCO_CONTACT_KD,
+    MUJOCO_CONTACT_KE,
     ROBOT_LEFT_BASE,
     ROBOT_RIGHT_BASE,
     ROBOTIQ_STRIPPED_XML,
     add_cable_rod,
     add_kinematic_arm,
+    add_revolute_cable,
     add_ur5e_robotiq,
     build_fk_model,
 )
@@ -87,6 +90,10 @@ IK_ITERATIONS_INIT = 100
 IK_ITERATIONS_RL = 30
 IK_STEP_SIZE = 1.0
 ROBOT_BODY_COUNT = 2 * ROBOT_BODIES_PER_ARM  # 18
+# S4a (D-S4a-3): MuJoCo contact buffer when cable contacts are enabled. Sized from the probe's
+# measured naconmax (settled-flat 40-seg cable ↔ table = 80; curled gravity-off = 0) with ample
+# headroom; an undersized MuJoCo nconmax silently drops contacts, so keep ≫ measured.
+MUJOCO_NCONMAX = 1024
 
 
 @dataclass(frozen=True)
@@ -1216,7 +1223,7 @@ def solve_ik_single(fk_model, fk_state, target_left, target_right, device):
 # =============================================================================
 
 
-def make_solver(model, backend=SOLVER_BACKEND, use_mujoco_cpu=USE_MUJOCO_CPU):
+def make_solver(model, backend=SOLVER_BACKEND, use_mujoco_cpu=USE_MUJOCO_CPU, enable_cable_contacts=False):
     """Construct the physics solver for ``model`` per the ``SOLVER_BACKEND`` SSOT.
 
     Args:
@@ -1225,12 +1232,27 @@ def make_solver(model, backend=SOLVER_BACKEND, use_mujoco_cpu=USE_MUJOCO_CPU):
             vs :class:`SolverMuJoCo`. Defaults to ``task_config.SOLVER_BACKEND``.
         use_mujoco_cpu: run MuJoCo on CPU (Opt-1/S4-S7 smoke); ``False`` = GPU (S8).
             Only consulted by the ``"mujoco"`` backend.
+        enable_cable_contacts: S4a (D-S4a-3) -- ``True`` enables MuJoCo contacts
+            (``disable_contacts=False``) with ``nconmax=MUJOCO_NCONMAX`` for the
+            rigid-link cable scene. Default ``False`` keeps the Opt-1 contact-free
+            arm smoke EXACTLY as before; the ``"vbd"`` branch never reads it.
 
     Returns:
         The constructed solver. With the default ``"vbd"`` backend this is
         byte-identical to ``SolverVBD(model, iterations=VBD_ITERATIONS)``.
     """
     if backend == "mujoco":
+        if enable_cable_contacts:
+            return SolverMuJoCo(
+                model,
+                use_mujoco_cpu=use_mujoco_cpu,
+                separate_worlds=(model.world_count > 1),
+                update_data_interval=1,
+                disable_contacts=False,
+                nconmax=MUJOCO_NCONMAX,
+                solver="newton",
+                integrator="implicitfast",
+            )
         return SolverMuJoCo(
             model,
             use_mujoco_cpu=use_mujoco_cpu,
@@ -1283,10 +1305,12 @@ def build_multiworld_scene(
     # Robot arms: VBD = jointless kinematic bodies (FK body_q); MuJoCo = articulated UR5e+Robotiq.
     if SOLVER_BACKEND == "mujoco":
         # Option-E Opt-1 (SC2a, D-Opt1-1): articulated UR5e+Robotiq per arm via the probe-validated
-        # add_mjcf recipe (Robotiq <tendon> stripped so SolverMuJoCo constructs). disable_contacts=True
-        # (SC1 make_solver) makes the VISIBLE/PAD collision-flag pass moot -> skipped (R5 cycle-2; arm
-        # VISIBLE-only, gripper bare). Cable (CABLE joints, MuJoCo-incompatible solver_mujoco.py:112) is
-        # skipped here -> rigid-link REVOLUTE rebuild = S4. joint_q kinematic re-pose driving = SC2b.
+        # add_mjcf recipe (Robotiq <tendon> stripped so SolverMuJoCo constructs). S4a (D-S4a-4):
+        # the cable is the rigid-link REVOLUTE chain (CABLE joints are MuJoCo-rejected,
+        # solver_mujoco.py:292); contacts enabled via make_solver(enable_cable_contacts=True), so
+        # the A-1 VISIBLE-only pass below is LOAD-BEARING (cycle-2 CRITICAL: without it the whole
+        # arm collision set goes live). joint_q kinematic re-pose driving = SC2b.
+        mj_left_ss = proto.shape_count
         add_ur5e_robotiq(
             proto,
             wp.transform(ROBOT_LEFT_BASE, wp.quat_identity()),
@@ -1299,9 +1323,31 @@ def build_multiworld_scene(
             robotiq_xml=ROBOTIQ_STRIPPED_XML,
             skip_equality_constraints=True,
         )
-        cable_bodies_proto, cable_joints_proto = [], []
-        cable_bodies_per_world = 0
-        cable_body_offset = 0
+        mj_arm_se = proto.shape_count
+        # A-1 VISIBLE-only pass (probe-proven, F4c): clear COLLIDE on non-pad arm shapes (→ MuJoCo
+        # contype=conaffinity=0); KEEP COLLIDE on the gripper PAD geoms (cable grasp).
+        _labels = list(getattr(proto, "shape_label", []) or [])
+        for si in range(mj_left_ss, mj_arm_se):
+            lbl = str(_labels[si]) if si < len(_labels) else ""
+            if "pad" not in lbl.lower():
+                proto.shape_flags[si] = int(newton.ShapeFlags.VISIBLE)
+
+        # Cable: rigid-link REVOLUTE chain AFTER both arms (D-S4a-1/4; registers the MuJoCo custom
+        # JOINT_DOF attrs + issues the FREE root + segment joints consecutively).
+        cable_bodies_proto, cable_joints_proto, _cable_sr = add_revolute_cable(
+            proto,
+            start_pos=cable_start_pos,
+            direction=(0, 1, 0),
+        )
+        cable_bodies_per_world = len(cable_bodies_proto)
+        cable_body_offset = cable_bodies_proto[0]
+
+        # Cable ↔ non-pad-arm filter pairs (explicit, label-based; pads keep cable contacts).
+        for cable_si in range(_cable_sr[0], _cable_sr[1]):
+            for arm_si in range(mj_left_ss, mj_arm_se):
+                lbl = str(_labels[arm_si]) if arm_si < len(_labels) else ""
+                if "pad" not in lbl.lower():
+                    proto.add_shape_collision_filter_pair(cable_si, arm_si)
     else:
         left_info = add_kinematic_arm(
             proto,
@@ -1365,8 +1411,14 @@ def build_multiworld_scene(
 
     # Table
     table_cfg = newton.ModelBuilder.ShapeConfig()
-    table_cfg.ke = 500.0
-    table_cfg.kd = 100.0
+    if SOLVER_BACKEND == "mujoco":
+        # D-S4a-3: ke/kd → solref=(2/kd, (kd/2)√(1/ke)); MuJoCo mixes BOTH geoms' solref per
+        # contact, so the table is stiffened alongside the cable (≤~mm rest compression).
+        table_cfg.ke = MUJOCO_CONTACT_KE
+        table_cfg.kd = MUJOCO_CONTACT_KD
+    else:
+        table_cfg.ke = 500.0
+        table_cfg.kd = 100.0
     table_cfg.mu = 1.0
     table_cfg.gap = 0.002
     table_xform = wp.transform((0.3, -0.05, TABLE_HEIGHT - 0.005), wp.quat_identity())
@@ -1448,6 +1500,14 @@ def build_multiworld_scene(
     bws = model.body_world_start.numpy()
     jws = model.joint_world_start.numpy()  # joint-world-start (joint axis; per-world joint_q slicing)
 
+    # D-S4a-4 joint-layout assert (mujoco): per-world joints = arm 28 + cable FREE+REVOLUTE —
+    # guards the arm joint_q slice (broadcast_jointq_to_all_worlds writes [jws[w]:jws[w]+28]).
+    if SOLVER_BACKEND == "mujoco":
+        expected = 2 * JOINTS_PER_ARM + len(cable_joints_proto)
+        for w in range(world_count):
+            assert jws[w + 1] - jws[w] == expected, (
+                f"mujoco joint layout drift (world {w}): {jws[w + 1] - jws[w]} != {expected}")
+
     # Zero inv_mass for robot bodies (kinematic) -- VBD ONLY. The MuJoCo articulated arm keeps its
     # REAL masses: zeroing => infinite mass + inertia => degenerate joint-space M(q); the STEP-1 probe
     # validated the REAL-mass arm + per-step re-pose (track_err 0.030 rad), not a massless build (§28).
@@ -1484,8 +1544,11 @@ def build_multiworld_scene(
                 break
     model.shape_flags = wp.array(model_sflags, dtype=model.shape_flags.dtype, device=device)
 
-    # solver via the SOLVER_BACKEND factory (default "vbd" => byte-identical to the prior SolverVBD)
-    solver = make_solver(model)
+    # solver via the SOLVER_BACKEND factory (default "vbd" => byte-identical to the prior SolverVBD).
+    # S4a: under mujoco the cable is present -> contacts enabled (D-S4a-3); vbd ignores the kwarg.
+    solver = make_solver(model, enable_cable_contacts=(SOLVER_BACKEND == "mujoco"))
+    # Both ceilings (D-S4a-3): rigid_contact_max NOT auto-raised (undersized raises ValueError,
+    # solver_mujoco.py:3981) -> max(NJMAX, curled naconmax=80 measured) = NJMAX; nconmax set in make_solver.
     model.rigid_contact_max = NJMAX
 
     # Physics states

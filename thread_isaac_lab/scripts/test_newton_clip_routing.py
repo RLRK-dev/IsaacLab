@@ -37,7 +37,7 @@ import numpy as np
 import trimesh
 import warp as wp
 import newton
-from newton.solvers import SolverVBD
+from newton.solvers import SolverMuJoCo, SolverVBD
 from newton.ik import IKSolver, IKObjectivePosition, IKObjectiveRotation, IKObjectiveJointLimit
 from newton.viewer import ViewerGL
 # SensorRaycast removed: OpenGL(ViewerGL) + CUDA(Raycast) context conflict causes hang.
@@ -814,6 +814,102 @@ def add_cable_rod(builder, start_pos, direction=(0, 1, 0)):
     return body_ids, joint_ids
 
 
+# D-S4a-3 (S4a, MuJoCo path): contact stiffness for the SolverMuJoCo scene. Newton DOES map
+# ShapeConfig ke/kd to MuJoCo solref via convert_solref (kernels.py:185): solref =
+# (2/kd, (kd/2)*sqrt(1/ke)) — but THREAD's VBD-era cable ke=2500/kd=100 maps to EXACTLY the
+# MuJoCo DEFAULT (0.02, 1.0) = mass-scaled soft contact, rest compression ≈ g·τ² ≈ 3.9 mm
+# (probe run-3 observed 3.1 mm on the r=4 mm cable). Inverting for solref=(0.005, 1.0)
+# (τ = 24×SIM_DT ≥ the 2×dt stability floor, ζ=1): kd = 2/τ = 400, ke = (kd/2)² = 40000.
+# MuJoCo-branch-only — the VBD path keeps the task_config values (A/B byte-identity).
+MUJOCO_CONTACT_KE = 40000.0
+MUJOCO_CONTACT_KD = 400.0
+# Cable bend spring (S4a probe-decided contract, S4_CYCLE4_DESIGN.md §C2): k = EI/L = 66.67
+# N·m/rad DIRECT (Newton 1.2 #6) + the LOAD-BEARING real damping (B1) + straight rest.
+CABLE_MUJOCO_BEND_K = CABLE_BEND_STIFFNESS / CABLE_SEG_LEN  # 1.0/0.015 = 66.67
+
+
+def add_revolute_cable(builder, start_pos, direction=(0, 1, 0)):
+    """Add cable as a rigid-link REVOLUTE capsule chain (SolverMuJoCo path, S4a D-S4a-1).
+
+    MuJoCo rejects CABLE joints (solver_mujoco.py:292), so the mujoco branch rebuilds the cable
+    as ``add_link`` capsule bodies (the ``add_rod`` layout: body at the start node, capsule
+    spanning +Z, COM at the midpoint) chained by REVOLUTE joints with the probe-decided passive
+    bend spring set via NAMESPACED MuJoCo custom attributes (S4_CYCLE4_DESIGN.md §C2 contract:
+    k=66.67 N·m/rad, damping=CABLE_BEND_DAMPING — load-bearing, springref=0). The root is a
+    FREE joint (both cable ends free; the MuJoCo requirement that every body has an incoming
+    joint). ``SolverMuJoCo.register_custom_attributes`` is called here BEFORE the cable joints
+    (builder.py:1327 raises otherwise); the FREE root + all segment joints are issued
+    CONSECUTIVELY so the articulation joint-id range stays contiguous (builder.py:2160).
+
+    Returns (body_indices, joint_indices, shape_range) — joint_indices[0] is the FREE root;
+    shape_range is the half-open capsule shape index range for contact-filter loops.
+    """
+    n_points = CABLE_SEGMENTS + 1
+    dir_np = np.array(direction, dtype=np.float64)
+    dir_np = dir_np / np.linalg.norm(dir_np)
+    positions = [np.array(start_pos) + dir_np * (i * CABLE_SEG_LEN) for i in range(n_points)]
+
+    # Capsule local +Z must align with the segment direction (the add_rod layout convention).
+    z_axis = np.array([0.0, 0.0, 1.0])
+    cross = np.cross(z_axis, dir_np)
+    cn = float(np.linalg.norm(cross))
+    if cn < 1e-12:
+        seg_q = wp.quat_identity() if dir_np[2] > 0 else wp.quat_from_axis_angle(wp.vec3(1.0, 0.0, 0.0), float(np.pi))
+    else:
+        angle = float(np.arccos(np.clip(np.dot(z_axis, dir_np), -1.0, 1.0)))
+        axis = cross / cn
+        seg_q = wp.quat_from_axis_angle(wp.vec3(*axis), angle)
+
+    # MuJoCo-tuned contact (D-S4a-3): ke/kd → solref=(0.005, 1.0); mu/gap/density as the VBD cable.
+    cable_cfg = newton.ModelBuilder.ShapeConfig()
+    cable_cfg.ke = MUJOCO_CONTACT_KE
+    cable_cfg.kd = MUJOCO_CONTACT_KD
+    cable_cfg.mu = CABLE_CONTACT_MU
+    cable_cfg.is_hydroelastic = False
+    cable_cfg.gap = 0.002
+    cable_cfg.density = 1100.0  # rubber cable (matches add_cable_rod)
+
+    # The passive-spring fields are MuJoCo-solver custom JOINT_DOF attributes — register FIRST.
+    SolverMuJoCo.register_custom_attributes(builder)
+
+    half = CABLE_SEG_LEN / 2.0
+    shape_start = builder.shape_count
+    body_ids = []
+    for e in range(CABLE_SEGMENTS):
+        b = builder.add_link(xform=wp.transform(wp.vec3(*positions[e]), seg_q), com=wp.vec3(0.0, 0.0, half))
+        builder.add_shape_capsule(
+            b, xform=wp.transform(wp.vec3(0.0, 0.0, half), wp.quat_identity()),
+            radius=CABLE_RADIUS, half_height=half, cfg=cable_cfg,
+        )
+        body_ids.append(b)
+    shape_end = builder.shape_count
+
+    # FREE root + segment REVOLUTE joints, CONSECUTIVE (contiguous ids for add_articulation).
+    free_jid = builder.add_joint_free(child=body_ids[0], parent=-1)
+    joint_ids = [free_jid]
+    for e in range(1, CABLE_SEGMENTS):
+        joint_ids.append(builder.add_joint_revolute(
+            parent=body_ids[e - 1], child=body_ids[e],
+            parent_xform=wp.transform(wp.vec3(0.0, 0.0, CABLE_SEG_LEN), wp.quat_identity()),
+            child_xform=wp.transform(wp.vec3(0.0, 0.0, 0.0), wp.quat_identity()),
+            axis=wp.vec3(1.0, 0.0, 0.0),  # local-X bend axis ⟂ cable → vertical sag plane
+            collision_filter_parent=True,  # EXPLICIT (builder.py:3898; adjacent segments don't collide)
+            custom_attributes={
+                "mujoco:dof_passive_stiffness": CABLE_MUJOCO_BEND_K,
+                "mujoco:dof_passive_damping": CABLE_BEND_DAMPING,
+                "mujoco:dof_springref": 0.0,
+            },
+        ))
+    builder.add_articulation(joint_ids)
+
+    seg_mass = cable_cfg.density * np.pi * CABLE_RADIUS**2 * CABLE_SEG_LEN
+    print(f"  [CABLE] add_revolute_cable: {len(body_ids)} bodies, {len(joint_ids)} joints "
+          f"(FREE+REVOLUTE), k={CABLE_MUJOCO_BEND_K:.2f} N·m/rad, damping={CABLE_BEND_DAMPING}, "
+          f"springref=0, solref=({2.0/MUJOCO_CONTACT_KD:.3f},1.0), seg_mass={seg_mass*1000:.1f}g")
+
+    return body_ids, joint_ids, (shape_start, shape_end)
+
+
 def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vbd"):
     """Build the full Newton scene for VBD Rod architecture.
 
@@ -834,8 +930,15 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
     # Table: BOX primitive
     table_half = (0.35, 0.35, 0.005)
     table_cfg = newton.ModelBuilder.ShapeConfig()
-    table_cfg.ke = 500.0
-    table_cfg.kd = 100.0
+    if solver_backend == "mujoco":
+        # D-S4a-3: ke/kd → solref=(2/kd, (kd/2)√(1/ke)); the VBD-era 500/100 maps to the soft
+        # MuJoCo default-ish (0.02, ζ≈2.2). MuJoCo mixes BOTH geoms' solref per contact, so the
+        # table must be stiffened alongside the cable for the ≤~mm rest compression.
+        table_cfg.ke = MUJOCO_CONTACT_KE
+        table_cfg.kd = MUJOCO_CONTACT_KD
+    else:
+        table_cfg.ke = 500.0
+        table_cfg.kd = 100.0
     table_cfg.mu = 1.0
     table_cfg.gap = 0.002
     table_xform = wp.transform((0.3, -0.05, TABLE_HEIGHT - table_half[2]), wp.quat_identity())
@@ -868,21 +971,35 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
     if solver_backend == "mujoco":
         # Option-E Opt-1 (SC2b-part2, D-Opt1-1): articulated UR5e+Robotiq per arm via the probe-
         # validated add_mjcf recipe (Robotiq <tendon> stripped so SolverMuJoCo constructs; the
-        # _init_tendons OOB is avoided). disable_contacts=True (make_solver) makes the kinematic-arm
-        # VISIBLE/finger collision-flag pass moot -> skipped (arm VISIBLE-only, gripper bare). Cable
-        # (CABLE joints, MuJoCo-incompatible solver_mujoco.py:112) runs only under use_cable (the
-        # mujoco smoke passes --no-cable); the rigid-link REVOLUTE cable rebuild = S4.
+        # _init_tendons OOB is avoided). S4a (D-S4a-3): contacts are now ENABLED for the cable, so
+        # the A-1 VISIBLE-only pass below is LOAD-BEARING — without it the whole UR5e+Robotiq
+        # collision set goes live and the fixed-arm-over-table explodes (cycle-2 CRITICAL).
+        left_shape_start = builder.shape_count
         add_ur5e_robotiq(
             builder, wp.transform(ROBOT_LEFT_BASE, wp.quat_identity()),
             robotiq_xml=ROBOTIQ_STRIPPED_XML, skip_equality_constraints=True)
+        left_shape_end = builder.shape_count
+        right_shape_start = left_shape_end
         add_ur5e_robotiq(
             builder, wp.transform(ROBOT_RIGHT_BASE, wp.quat_identity()),
             robotiq_xml=ROBOTIQ_STRIPPED_XML, skip_equality_constraints=True)
+        right_shape_end = builder.shape_count
         # body-range scene keys (§28 #4): left=0, right=BODIES_PER_ARM(14) -> robot_body_count=28.
         left_body_start, right_body_start = 0, BODIES_PER_ARM
-        # shape ranges + finger-visual set are unused under mujoco (disable_contacts; the standalone
-        # joint_q smoke returns before the contact-material diag / settle / episode loop).
-        left_shape_start = left_shape_end = right_shape_start = right_shape_end = 0
+        # A-1 VISIBLE-only pass (probe-proven, F4c): clear COLLIDE on every NON-PAD arm shape
+        # (→ MuJoCo contype=conaffinity=0, solver_mujoco.py:4758-4762); KEEP COLLIDE on the gripper
+        # PAD geoms (label-matched right/left_pad1/2 ← pad_box1/2 — needed for cable grasp, S5).
+        _labels = list(getattr(builder, "shape_label", []) or [])
+        pads_kept = arm_cleared = 0
+        for si in range(left_shape_start, right_shape_end):
+            lbl = str(_labels[si]) if si < len(_labels) else ""
+            if "pad" in lbl.lower():
+                pads_kept += 1
+            else:
+                builder.shape_flags[si] = int(newton.ShapeFlags.VISIBLE)
+                arm_cleared += 1
+        print(f"  [SCENE] A-1 VISIBLE-only pass (mujoco): {arm_cleared} arm shapes COLLIDE-cleared, "
+              f"{pads_kept} pad shapes kept")
         all_finger_visual = set()
     else:
         # Left arm (kinematic bodies, no joints)
@@ -922,7 +1039,8 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
         print(f"  [SCENE] Contact filtering: {filter_count} arm+finger-visual shapes flagged, "
               f"finger collision → COLLIDE only (not visible)")
 
-    # Cable (Cosserat Rod via add_rod — CAPSULE shapes + CABLE joints, VBD-native)
+    # Cable: VBD = Cosserat rod (add_rod, CABLE joints); MuJoCo = rigid-link REVOLUTE chain
+    # (S4a D-S4a-4 — CABLE joints are MuJoCo-rejected, solver_mujoco.py:292).
     cable_bodies = []
     cable_joints = []
     if use_cable:
@@ -930,8 +1048,13 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
         cable_half_len = CABLE_SEGMENTS * CABLE_SEG_LEN / 2
         cable_y_start = CLIP1_Y - cable_half_len
         cable_start = (GRASP_X, cable_y_start, TABLE_HEIGHT + CABLE_RADIUS)
-        cable_bodies, cable_joints = add_cable_rod(builder, start_pos=cable_start, direction=(0, 1, 0))
-        cable_shape_end = builder.shape_count
+        if solver_backend == "mujoco":
+            cable_bodies, cable_joints, _cable_sr = add_revolute_cable(
+                builder, start_pos=cable_start, direction=(0, 1, 0))
+            cable_shape_start, cable_shape_end = _cable_sr
+        else:
+            cable_bodies, cable_joints = add_cable_rod(builder, start_pos=cable_start, direction=(0, 1, 0))
+            cable_shape_end = builder.shape_count
         cable_y_end = cable_start[1] + CABLE_SEGMENTS * CABLE_SEG_LEN
         print(f"  [SCENE] Cable: {len(cable_bodies)} bodies, {len(cable_joints)} joints, "
               f"Y=[{cable_y_start:.3f}, {cable_y_end:.3f}], Z={cable_start[2]:.4f}")
@@ -940,26 +1063,42 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
         for si in range(cable_shape_start, cable_shape_end):
             builder.add_shape_collision_filter_pair(si, floor_shape_idx)
 
-        # Filter cable vs arm bodies 0-6 (only finger bodies 7-8 contact cable)
         cable_arm_filters = 0
-        for cable_si in range(cable_shape_start, cable_shape_end):
-            for arm_label, arm_shape_start, arm_shape_end, arm_body_start in [
-                ("left", left_shape_start, left_shape_end, left_body_start),
-                ("right", right_shape_start, right_shape_end, right_body_start),
-            ]:
-                for arm_si in range(arm_shape_start, arm_shape_end):
-                    body_idx = builder.shape_body[arm_si]
-                    local_body = body_idx - arm_body_start
-                    if local_body < 7:
+        if solver_backend == "mujoco":
+            # D-S4a-3: cable ↔ non-pad-arm filter pairs, EXPLICIT (label-based; pads excluded so
+            # cable↔pad contact is kept). The A-1 pass already cleared COLLIDE on these shapes —
+            # the pairs are belt-and-suspenders + audit-greppable parity with the VBD loop below.
+            _labels = list(getattr(builder, "shape_label", []) or [])
+            for cable_si in range(cable_shape_start, cable_shape_end):
+                for arm_si in range(left_shape_start, right_shape_end):
+                    lbl = str(_labels[arm_si]) if arm_si < len(_labels) else ""
+                    if "pad" not in lbl.lower():
                         builder.add_shape_collision_filter_pair(cable_si, arm_si)
                         cable_arm_filters += 1
-        print(f"  [SCENE] Cable contact filters: "
-              f"{cable_shape_end - cable_shape_start} cable-floor, "
-              f"{cable_arm_filters} cable-arm (fingers keep cable contacts)")
+            print(f"  [SCENE] Cable contact filters (mujoco): "
+                  f"{cable_shape_end - cable_shape_start} cable-floor, "
+                  f"{cable_arm_filters} cable-(non-pad-arm) (pads keep cable contacts)")
+        else:
+            # Filter cable vs arm bodies 0-6 (only finger bodies 7-8 contact cable)
+            for cable_si in range(cable_shape_start, cable_shape_end):
+                for arm_label, arm_shape_start, arm_shape_end, arm_body_start in [
+                    ("left", left_shape_start, left_shape_end, left_body_start),
+                    ("right", right_shape_start, right_shape_end, right_body_start),
+                ]:
+                    for arm_si in range(arm_shape_start, arm_shape_end):
+                        body_idx = builder.shape_body[arm_si]
+                        local_body = body_idx - arm_body_start
+                        if local_body < 7:
+                            builder.add_shape_collision_filter_pair(cable_si, arm_si)
+                            cable_arm_filters += 1
+            print(f"  [SCENE] Cable contact filters: "
+                  f"{cable_shape_end - cable_shape_start} cable-floor, "
+                  f"{cable_arm_filters} cable-arm (fingers keep cable contacts)")
     else:
         print(f"  [SCENE] Cable: DISABLED (--no-cable)")
 
-    robot_body_count = right_body_start + FRANKA_NUM_JOINTS  # 18 robot bodies
+    # A-3 backend-conditional from the LIVE right_body_start: VBD kinematic = 18, mujoco articulated = 28.
+    robot_body_count = right_body_start + FRANKA_NUM_JOINTS
 
     # Finger collision is now BOX primitives (no approximate_meshes needed)
     print(f"  [SHAPES] Finger collision: BOX×3 per finger (wall+claws), "
@@ -1012,6 +1151,14 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
     print(f"  [SCENE] Model: bodies={model.body_count}, joints={model.joint_count}, "
           f"articulations={model.articulation_count}, "
           f"joint_coords={model.joint_coord_count}, joint_dofs={model.joint_dof_count}")
+
+    # D-S4a-4 joint-layout assert (mujoco): arm joints [0:28] + cable FREE+REVOLUTE — guards the
+    # arm joint_q slice (physics_step overwrites [:2*JOINTS_PER_ARM]) against layout drift.
+    if solver_backend == "mujoco" and use_cable:
+        expected = 2 * JOINTS_PER_ARM + len(cable_joints)
+        assert model.joint_count == expected, (
+            f"mujoco joint layout drift: joint_count={model.joint_count} != "
+            f"2*JOINTS_PER_ARM + cable joints = {expected}")
 
     # Shape diagnostics
     # (VBD only -- §28 #3: indexes the kinematic-arm finger bodies [7,8]; N/A to the mujoco articulated arm.)
@@ -2067,6 +2214,176 @@ def _run_mujoco_tracking_smoke(model, solver, contacts, scene_info, fk_state, n_
     sys.exit(0 if tracking_ok else 2)
 
 
+def _cable_max_curl(body_q_np, cable_bodies):
+    """Max inter-segment tangent angle [rad] (solver-agnostic curl metric, probe-validated)."""
+    tangs = []
+    for b in cable_bodies:
+        qx, qy, qz, qw = (float(x) for x in body_q_np[b][3:7])
+        t = wp.quat_rotate(wp.quat(qx, qy, qz, qw), wp.vec3(0.0, 0.0, 1.0))
+        tangs.append(np.array([t[0], t[1], t[2]]))
+    ang = 0.0
+    for i in range(len(tangs) - 1):
+        d = float(np.clip(np.dot(tangs[i], tangs[i + 1]), -1.0, 1.0))
+        ang = max(ang, float(np.arccos(d)))
+    return ang
+
+
+def _run_mujoco_cable_settle_smoke(model, solver, contacts, scene_info, fk_state,
+                                   n_frames=600, restore_frames=2400, output_dir=None):
+    """S4a cable-settle smoke (D-S4a-5; B2/B3 validation posture inherited from the run-3 probe).
+
+    Phase 1 — SETTLE (gravity ON): genuine free-fall (the straight cable is released 15 mm above
+    its table rest via the FREE-root pz coord, ONCE, before the loop) driven through
+    :func:`physics_step` (the mujoco branch overwrites ONLY the arm joint_q [:28] — the cable FREE
+    root is NEVER snapped, the run-3 harness-bug lesson). Asserts: ``solver.mjw_model.
+    jnt_stiffness`` carries the cable spring on every segment joint; no NaN; ``badqacc==0``
+    (B2 BINDING — MuJoCo autoreset is DISABLED so an instability must fail loud, never be
+    silently clamped to a plausible pose); COM-Z ∈ [0.804±tol]; surface no-penetration
+    ``min(body_z−CABLE_RADIUS) ≥ TABLE_HEIGHT−1.5 mm`` (the D-S4a-3 solref tuning is what makes
+    this floor reachable — the VBD-era ke/kd map to the soft MuJoCo default ≈3 mm compression);
+    FREE-root XY/rot drift bounded; arm still tracks (<0.05 rad). NO gravity-sag bend assert (F2).
+
+    Phase 2 — RESTORE (B3, gravity OFF in-place via ``mj_model.opt.gravity``): from a fresh state,
+    a uniform ~0.08 rad/segment curl is set ONCE; the passive spring must decay the curl
+    k-dependently toward straight (springref=0). Window ``restore_frames`` ≥ 2400 production
+    frames; PASS = ring-down envelope-end < 0.5×curl_start OBSERVED in-window (no extrapolation)
+    + ``badqacc==0`` + finite. The FULL per-frame curl trajectory (no downsampling) is written to
+    ``{output_dir}/s4a_restore_traj.json``.
+
+    Emits ``[MUJOCO_CABLE_SMOKE]`` metric lines and ``sys.exit``\\ s (0 = PASS, 2 = FAIL).
+    """
+    import mujoco  # lazy: the CPU-path mj_model/mj_data handles; vbd runs never import it
+
+    # B2 FAIL-LOUD posture (probe-inherited): disable autoreset; badqacc==0 is BINDING below.
+    solver.mj_model.opt.disableflags |= int(mujoco.mjtDisableBit.mjDSBL_AUTORESET)
+
+    def _badqacc():
+        return int(solver.mj_data.warning[mujoco.mjtWarning.mjWARN_BADQACC].number)
+
+    def _ncon():
+        try:
+            return int(solver.mj_data.ncon)  # CPU path; mjw_data.nacon is NOT synced on CPU
+        except Exception:
+            return -1
+
+    cable_bodies = scene_info["cable_bodies"]
+    cable_joints = scene_info["cable_joints"]
+    free_jid = cable_joints[0]
+    n_seg_joints = len(cable_joints) - 1
+    cidx = np.array(cable_bodies, dtype=int)
+    n = 2 * JOINTS_PER_ARM
+    fk_target = fk_state.joint_q.numpy()[:n].copy()
+    arm_idx = list(range(0, N_ARM_BODIES)) + list(range(JOINTS_PER_ARM, JOINTS_PER_ARM + N_ARM_BODIES))
+
+    # F1 + %3 binding 3: the passive spring is SET (solver mujoco-warp model; Newton Model lacks it).
+    jk = solver.mjw_model.jnt_stiffness.numpy()
+    cable_k_count = int(np.sum(np.abs(jk - CABLE_MUJOCO_BEND_K) < 0.1))
+    jnt_stiffness_ok = bool(cable_k_count == n_seg_joints)
+
+    # --- Phase 1: SETTLE (genuine fall: lift the FREE-root pz ONCE, then hands-off the cable) ---
+    jqs = model.joint_q_start.numpy()
+    state = model.state()
+    jq = state.joint_q.numpy()
+    jq[int(jqs[free_jid]) + 2] += 0.015
+    state.joint_q.assign(jq)
+    newton.eval_fk(model, state.joint_q, state.joint_qd, state)
+    bq0 = state.body_q.numpy()
+    root0_xy = bq0[cable_bodies[0]][:2].copy()
+    root0_quat = bq0[cable_bodies[0]][3:7].copy()
+    drop_com_z = float(bq0[cidx][:, 2].mean())
+
+    finite = True
+    ncon_max = 0
+    for _ in range(n_frames):
+        state = physics_step(model, state, solver, contacts, scene_info)
+        ncon_max = max(ncon_max, _ncon())
+        if not np.all(np.isfinite(state.body_q.numpy())):
+            finite = False
+            break
+    badqacc_settle = _badqacc()
+
+    bqf = state.body_q.numpy()
+    bqdf = state.body_qd.numpy()
+    cz = bqf[cidx][:, 2]
+    com_z = float(cz.mean())
+    surf_min = float((cz - CABLE_RADIUS).min())
+    cable_qvel = float(np.max(np.abs(bqdf[cidx]))) if finite else float("inf")
+    drift_xy = float(np.linalg.norm(bqf[cable_bodies[0]][:2] - root0_xy))
+    dq = bqf[cable_bodies[0]][3:7]
+    drift_rot = float(2.0 * np.arccos(min(1.0, abs(float(np.dot(dq, root0_quat))))))
+    jq_end = state.joint_q.numpy()[:n]
+    arm_track_err = float(np.max(np.abs(jq_end[arm_idx] - fk_target[arm_idx]))) if finite else float("inf")
+
+    settle_ok = bool(
+        finite and jnt_stiffness_ok
+        and badqacc_settle == 0
+        and abs(com_z - (TABLE_HEIGHT + CABLE_RADIUS)) <= 0.02
+        and surf_min >= TABLE_HEIGHT - 0.0015
+        and cable_qvel < 5.0
+        and drift_xy <= 0.05 and drift_rot <= 0.30
+        and arm_track_err < 0.05
+    )
+    print(f"  [MUJOCO_CABLE_SMOKE] settle: n_frames={n_frames} drop_com_z={drop_com_z:.4f} "
+          f"com_z={com_z:.4f} (0.804±0.02) surf_min={surf_min:.4f} (>={TABLE_HEIGHT - 0.0015:.4f}) "
+          f"qvel={cable_qvel:.4f} drift_xy={drift_xy:.4f} drift_rot={drift_rot:.4f} "
+          f"arm_track={arm_track_err:.4f} ncon_max={ncon_max} badqacc={badqacc_settle} "
+          f"jnt_k({CABLE_MUJOCO_BEND_K:.2f})x{cable_k_count}/{n_seg_joints} finite={finite} "
+          f"settle_ok={settle_ok}")
+
+    # --- Phase 2: RESTORE (B3) — gravity OFF, fresh state, one-time curl IC, spring rings down ---
+    solver.mj_model.opt.gravity[:] = 0.0
+    bq_before_restore = _badqacc()
+    state_r = model.state()
+    jq = state_r.joint_q.numpy()
+    seg_q0 = int(jqs[free_jid]) + 7  # segment coords start after the FREE root's 7 position coords
+    curl0 = 0.08
+    jq[seg_q0:] = curl0
+    state_r.joint_q.assign(jq)
+    newton.eval_fk(model, state_r.joint_q, state_r.joint_qd, state_r)
+    curl_start = _cable_max_curl(state_r.body_q.numpy(), cable_bodies)
+
+    traj = [curl_start]
+    finite_r = True
+    ncon_restore = 0
+    for _ in range(restore_frames):
+        state_r = physics_step(model, state_r, solver, contacts, scene_info)
+        bq = state_r.body_q.numpy()
+        if not np.all(np.isfinite(bq)):
+            finite_r = False
+            break
+        traj.append(_cable_max_curl(bq, cable_bodies))
+        ncon_restore = max(ncon_restore, _ncon())
+    badqacc_restore = _badqacc() - bq_before_restore
+
+    env_block = 60
+    tarr = np.array(traj)
+    n_blocks = max(1, len(tarr) // env_block)
+    envelope = [float(np.max(tarr[b * env_block:(b + 1) * env_block])) for b in range(n_blocks)]
+    env_end = envelope[-1]
+    restore_ok = bool(
+        finite_r and badqacc_restore == 0
+        and len(envelope) >= 2
+        and env_end < 0.5 * curl_start  # B3: halving OBSERVED in-window, not extrapolated
+    )
+    if output_dir is not None:
+        traj_path = os.path.join(output_dir, "s4a_restore_traj.json")
+        with open(traj_path, "w") as f:
+            json.dump({"curl_start": curl_start, "restore_frames": restore_frames,
+                       "curl_traj_per_frame": [float(t) for t in traj],
+                       "envelope_block60": envelope, "badqacc_restore": badqacc_restore,
+                       "finite": finite_r}, f)
+    else:
+        traj_path = "(not written: no output_dir)"
+    print(f"  [MUJOCO_CABLE_SMOKE] restore: frames={restore_frames} curl_start={curl_start:.4f} "
+          f"env_end={env_end:.5f} (<{0.5 * curl_start:.4f} observed) badqacc={badqacc_restore} "
+          f"ncon={ncon_restore} (gravity-off => ~0) finite={finite_r} restore_ok={restore_ok} "
+          f"traj={traj_path}")
+
+    cable_ok = bool(settle_ok and restore_ok)
+    print(f"  [MUJOCO_CABLE_SMOKE] cable_ok={cable_ok} ({'PASS' if cable_ok else 'FAIL'})")
+    sys.exit(0 if cable_ok else 2)
+
+
 def main():
     global _physics_state_buffer
     parser = argparse.ArgumentParser(description="Newton clip routing test")
@@ -2157,16 +2474,20 @@ def main():
     if _envs_dir not in sys.path:
         sys.path.insert(0, _envs_dir)
     from newton_skill_env_base import make_solver  # noqa: E402  (lazy: avoid circular import at load)
-    solver = make_solver(model, backend=solver_backend)
+    solver = make_solver(model, backend=solver_backend,
+                         enable_cable_contacts=(solver_backend == "mujoco" and use_cable))
     print(f"  [SOLVER] {solver_backend} solver created via make_solver")
 
-    # Option-E Opt-1 SC2b-part2 -- K2 false-green GATE (the standalone joint_q tracking smoke): under
-    # --solver-backend mujoco, drive the articulated arm per-step (joint_q=FK + zero qd) for N>=60
-    # frames + assert it tracks (arm ||joint_q - target|| < 0.05 + finite + qvel bounded + no
-    # AttributeError). The full VBD cable episode below is NOT ported to mujoco (S4-S7); exit after.
+    # Option-E mujoco smokes (the standalone gates; the full VBD episode below is NOT ported, S5-S7):
+    # --no-cable -> the Opt-1 SC2b-part2 joint_q tracking smoke (K2 false-green gate, unchanged);
+    # with cable -> the S4a cable-settle + curl-restore smoke (D-S4a-5, B2/B3 posture). Both exit.
     if solver_backend == "mujoco":
-        _run_mujoco_tracking_smoke(model, solver, contacts, scene_info, fk_state, n_frames=60)
-        return  # _run_mujoco_tracking_smoke sys.exit()s; this return is a safety net
+        if use_cable:
+            _run_mujoco_cable_settle_smoke(model, solver, contacts, scene_info, fk_state,
+                                           output_dir=args.output_dir)
+        else:
+            _run_mujoco_tracking_smoke(model, solver, contacts, scene_info, fk_state, n_frames=60)
+        return  # both smokes sys.exit(); this return is a safety net
 
     # Contact material properties (set in build_scene ShapeConfig, verify here)
     shape_ke = model.shape_material_ke.numpy()
