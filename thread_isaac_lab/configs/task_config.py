@@ -75,7 +75,8 @@ RIGHT_ARM_INIT_JOINTS = [
 # =============================================================================
 # End-Effector Geometry
 # =============================================================================
-EE_TO_FINGERTIP = 0.220  # FRANKA panda_hand->fingertip [m]; UR5e EE_TO_PINCH~=0.256, re-derive S6
+EE_TO_FINGERTIP = 0.220  # FRANKA panda_hand->fingertip [m]; UR5e measured pins =
+# EE_TO_PINCH_CLOSED / EE_TO_PINCH_TIP_CLOSED (Robotiq Grasp SSOT section below; S5 P1)
 
 # =============================================================================
 # Height Parameters (Code A: tune these to fix table penetration)
@@ -134,6 +135,10 @@ FINGER_ARMATURE = 0.5  # panda_hydro reference: 0.5 (stabilizes finger dynamics)
 CABLE_SEGMENTS = 40  # 40 segments × 15mm = 600mm (5-clip span 300mm + 150mm margin each end)
 CABLE_SEG_LEN = 0.015
 CABLE_RADIUS = 0.004
+# Cable mass MODEL-TRUTH = 44.97 g (~45.0 g): capsule volume × ρ=1100 → 1.1243 g/seg × 40
+# [measured: s5_p1_probe_rev7_result.json gates.cable_mass.measured_kg = 0.04497085511684418].
+# The earlier "0.8 g/seg → 32 g" figure was a cylinder-only print formula (end caps ignored,
+# −36%) — RETIRED. Service load = m·g = 0.44 N (axial bars of the G3 class derive from THIS mass).
 
 # Cosserat Rod (add_rod) — capsule chain with cable joints
 CABLE_BEND_STIFFNESS = 1.0# EI [N·m²] L3 stiffness calibration variant 1.0 (was 0.1)
@@ -155,6 +160,34 @@ CABLE_CONTACT_MU = 1.0# Friction coefficient (high for grip traction)
 # (cable capsules + table); the VBD path keeps CABLE_CONTACT_* (A/B byte-identity).
 MUJOCO_CONTACT_KE = 40000.0
 MUJOCO_CONTACT_KD = 400.0
+
+# --- S5 P1 contact families (mujoco branch ONLY; VBD path byte-unchanged) ---------------------
+# Runtime-poke-validated through the P1.3 rev7/rev8 full-chain runs + the B-2/calib benches.
+# Readbacks: s5_p1_probe_rev8_result.json phases."P1.3-rev8".gates.payload_readback (poke source
+# s5_p1_probe_rev7.py:98-107). Consumers wire on the mujoco-branch port (S5b); the SOLVER_BACKEND
+# default stays "vbd" (FLIP-BLOCK above unchanged).
+MUJOCO_CONTACT_CONDIM = 6  # cable + table(static) + pads (readback condim_readback all [6]).
+# condim=3 has NO rolling rows -> the capsule cable escapes by log-rolling (-80.6 mm class,
+# s5_b2_raw_discriminator G2); friction-adjacent knobs (impratio/solref/noslip) are INERT until
+# rolling rows exist (G3 grid). LL: thread-vault/06-Knowledge/LL-Condim-Rolling-Mechanism.md
+MUJOCO_CABLE_TABLE_FRICTION = (1.0, 0.005, 0.005)  # (slide, torsion[m], roll[m]) — applied to
+# BOTH cable capsules and table/static geoms (rev7.py:98-100; readback cable_friction_after).
+# roll/torsion 0.005 = SIMPLICITY+MARGIN choice (RULE-A): lowest-passing was 0.002 (s5_b2_sweep2
+# W2 family); 0.005 adds margin at no measured cost.
+MUJOCO_PAD_ROLL_FRICTION = 0.005  # pads keep shipped slide/torsion (0.7|0.6, 0.005 — 2f85.xml);
+# roll set EXPLICITLY (readback pad_friction.after = [0.7, 0.005, 0.005]). NEVER rely on
+# default/inherited mu_roll: inherited-roll + condim 6 reproduced a NaN (pinch bench P2).
+MUJOCO_PAD_SOLREF = (-65789.0, -2105.3)  # ACTIVE pad<->cable solref: R6-bx4 TRUE-overdamp
+# NEGATIVE form (-k, -b) = the (0.004, 1)-equivalent stiffness with damping x4 [ADOPTED
+# human-Rs 2026-06-10 23:33 (A)+R6; bench: s5_calib_bench3r_result.json cells.R6_F00.solref_form;
+# creep 134.9->60.4 um/f, collapse 0 at 0-2.2 N, clearance p-p 15x down]. CHAIN validation =
+# the S5b first run (bench-validated only; the rev8 chain ran R4).
+# FALLBACK (rev8-chain-validated): R4 positive form (0.002, 1.0) [readback pad_solref.after].
+# DO-NOT-USE: positive solref with dampratio>1 (k ~ 1/zeta^2 softening -> ghost-contact regime;
+# thread-vault/06-Knowledge/LL-GhostContact-DoNotUse.md).
+MUJOCO_OPT_CONE = 1  # mjCONE_ELLIPTIC (readback opt.cone=1) — production DECIDE (P1.1).
+MUJOCO_OPT_IMPRATIO = 10.0  # readback opt.impratio=10.0. The stripped 2f85 xml ships
+# <option cone="elliptic" impratio="10"/>; these two constants pin that decision as SSOT.
 
 # =============================================================================
 # Clip Layout (5-clip, Y equal spacing + X staggered 千鳥)
@@ -220,6 +253,45 @@ FINGER_HALF_OPEN_POS = 0.006  # 6mm — guide hand しごき position (cable sli
 FINGER_CLOSE_POS = 0.002  # 2mm gripping (gap=4mm < cable 8mm → 2mm/side compression)
 FINGER_CLOSE_STEPS = 500  # One-shot target + effort_limit=20N cap. PD converges within 500 steps
 FINGER_STEP_SIZE = 0.001  # 1mm per RL step — §12.4 finger action granularity
+
+# =============================================================================
+# Robotiq 2f85 Grasp SSOT (S5 P1 close, D-S5-2 — mujoco branch ONLY)
+# =============================================================================
+# Measured/validated on the P1.3 rev7/rev8 full-chain runs (UR5e+Robotiq, neq=8 equality build,
+# grasp DOWN-pose). POSE-DEPENDENT CALIBRATION: the gap(driver-angle) curve settles gravity-
+# dependently (same q -> gap differs by ~8 mm class between home/air and down-pose, rev3);
+# the anchors below are DOWN-pose/neq8 values — ANY re-orientation (S6+ routing) RE-OPENS this
+# calibration. The Franka FINGER_* block above stays for the VBD/legacy path.
+GRIPPER_DRIVER_OPEN_RAD = 0.0  # driver open target [rad]; measured open gap 85.394 mm
+# [s5_p1_probe_rev7_result.json phases."P1.2".gates.open_gap_mm = 85.39388778394712]
+GRIPPER_DRIVER_CLOSE_RAD = 0.7407  # = q(free-air 4.0 mm) on the in-pose (e)-curve
+# [rev8 close_target_pinned: "measured(rev7 e-curve)+derived(interp @4.0mm)"; in-run NAMED-1
+# gate verified the fresh-curve q(4.0mm) vs 0.7407 within 1%]. The close is CONTACT/FORCE-
+# limited (official 2f85 semantics): pads stop on the cable surface and squeeze under the
+# effort cap — NOT a position-reached target.
+# (e)-curve anchors (DOWN-pose, neq8; gate-verified rev7/rev8 within 1%):
+GRIPPER_ECURVE_Q6MM_RAD = 0.7239  # q(6.0 mm) [rev7 "(e) q(6.0mm) verification" PASS]
+GRIPPER_ECURVE_Q5MM_RAD = 0.7323  # q(5.0 mm) [rev7 pinned target, gate-verified]
+GRIPPER_ECURVE_Q4MM_RAD = 0.7407  # q(4.0 mm) [rev8 NAMED-1, gate-verified]
+# (The AIR-pose 8 mm anchor 0.7071682989734179 [rev8 phases."P1.2".close_target_rad] is a
+# DIFFERENT calibration family — do not mix with the down-pose anchors.)
+GRIPPER_SERVO_TARGET_KE = 66.7  # driver position-servo stiffness, as run
+GRIPPER_SERVO_TARGET_KD = 2.0  # [rev7+rev8 phases."P1.2".servo = {66.7, 2.0, 2.5}]
+GRIPPER_DRIVER_EFFORT_LIMIT_NM = 2.5  # ~= official 5 N tendon force x coef 0.5 — restores the
+# force cap the tendon strip removed (D-S5-2); the one-frame post-clamp |qfrc_actuator| <= 2.5
+# gate held on rev7/rev8.
+# EE->pinch geometry (CLOSED pose, measured; the re-pinned neq8 A1 reference, rev8 a1_measured):
+EE_TO_PINCH_CLOSED = 0.2548428289592266  # wrist_3 -> pinch_mid drop [m] (drop_closed_m)
+EE_TO_PINCH_TIP_CLOSED = 0.27376849624506094  # wrist_3 -> pad TIP drop [m] (tip_drop_m; pads
+# extend 18.75 mm distal of pinch_mid). EE_TO_FINGERTIP above (0.220) is the Franka/legacy
+# value — UR5e+Robotiq consumers use THESE.
+# Grip-force datum (CONFIG-LABELED, %3 delta; in-grip sampling rule: N_total averaged over the
+# both-pad-contact window ONLY, onset -> last-contact — e.g. the rev7 window [248,538], n=255):
+GRIP_FORCE_DATUM_R4_BENCH_N = 47.3  # R4 (0.002,1) @ q=0.7407, PINCH-harness hold, F=0
+# [s5_calib_bench3r_result.json cells.R4_F00.n_mean; the leg-ii II0 rev8-replica concurs]
+GRIP_FORCE_DATUM_R6_BENCH_N = 37.1  # R6-bx4 @ q=0.7407, same harness [cells.R6_F00.n_mean].
+# FULL-CHAIN datum so far: 37.485 N at q=0.7323/R4 [rev7 b_i_grip_force_in_grip.N_total_mean]
+# — RE-MEASURE at the S5b first-run chain validation before gating on either bench number.
 
 # =============================================================================
 # Motion Control
