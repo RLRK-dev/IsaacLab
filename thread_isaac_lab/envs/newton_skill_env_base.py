@@ -974,7 +974,7 @@ def restore_world_body_state(
     *,
     bq: np.ndarray,
     bqd: np.ndarray,
-    prev: np.ndarray,
+    prev: np.ndarray | None,
     settled_body_q: np.ndarray,
     settled_body_qd: np.ndarray,
     w: int,
@@ -989,7 +989,7 @@ def restore_world_body_state(
     Performs three slice copies for world index ``w``:
     - ``bq[start:end] <- settled_body_q[start:end]``
     - ``bqd[start:end] <- settled_body_qd[start:end]``
-    - ``prev[start:end] <- settled_body_q[start:end]``
+    - ``prev[start:end] <- settled_body_q[start:end]`` (skipped when ``prev`` is None)
 
     Where ``start, end = bws[w], bws[w + 1]``.
 
@@ -999,7 +999,10 @@ def restore_world_body_state(
         bqd: Live ``state_0.body_qd`` numpy view, shape ``[total_bodies, 6]``
             (vel: lin [m/s] + ang [rad/s]). Mutated in place.
         prev: Live ``solver.body_q_prev`` numpy view, shape
-            ``[total_bodies, 7]``. Mutated in place.
+            ``[total_bodies, 7]``, mutated in place — or ``None`` on the
+            SolverMuJoCo path (S4b: no ``body_q_prev`` buffer exists; the
+            reset is carried by joint_q seeding instead, so the prev
+            maintenance is correctly skipped).
         settled_body_q: Cached settled state ``body_q``, shape
             ``[total_bodies, 7]``, taken from a prior P0 settle.
         settled_body_qd: Cached settled state ``body_qd``, shape
@@ -1023,7 +1026,70 @@ def restore_world_body_state(
     start, end = bws[w], bws[w + 1]
     bq[start:end] = settled_body_q[start:end]
     bqd[start:end] = settled_body_qd[start:end]
-    prev[start:end] = settled_body_q[start:end]
+    if prev is not None:
+        prev[start:end] = settled_body_q[start:end]
+
+
+def derive_cable_joint_q_from_tangents(body_q_np: np.ndarray, cable_bodies: list[int]) -> tuple[list[float], list[float]]:
+    """Derive the rigid-link cable joint coordinates from segment poses (S4b reset-path, C-1 PRIMARY).
+
+    The settled cable's ``state.joint_q`` is reconstructed from the live ``body_q`` alone — NO
+    cross-script cache state (the C-1 decision; a settle-time joint_q cache stays optional/secondary).
+    The FREE root takes body[0]'s pose verbatim (7 coords [m + unit quat]); each REVOLUTE segment
+    angle is the SIGNED angle between consecutive segment tangents (quat-rotated local +Z) about the
+    joint's bend axis (the parent segment's local +X in world).
+
+    The X-axis chain cannot represent out-of-plane (non-bend-axis) tangent components, so the
+    derive→FK roundtrip carries a metric floor ~1e-3 (rad / m-scale) on a contact-settled cable —
+    callers assert reconstruction at that tolerance, not exactness.
+
+    Returns:
+        (root7, seg_angles): the FREE-root 7 coords and the per-segment-joint angles [rad].
+    """
+    b0 = body_q_np[cable_bodies[0]]
+    root7 = [float(x) for x in b0[:7]]
+    seg_angles: list[float] = []
+    for i in range(1, len(cable_bodies)):
+        qp = [float(x) for x in body_q_np[cable_bodies[i - 1]][3:7]]
+        qc = [float(x) for x in body_q_np[cable_bodies[i]][3:7]]
+        tp = wp.quat_rotate(wp.quat(*qp), wp.vec3(0.0, 0.0, 1.0))
+        tc = wp.quat_rotate(wp.quat(*qc), wp.vec3(0.0, 0.0, 1.0))
+        ax = wp.quat_rotate(wp.quat(*qp), wp.vec3(1.0, 0.0, 0.0))
+        tpn = np.array([tp[0], tp[1], tp[2]])
+        tcn = np.array([tc[0], tc[1], tc[2]])
+        axn = np.array([ax[0], ax[1], ax[2]])
+        s = float(np.dot(np.cross(tpn, tcn), axn))
+        c = float(np.dot(tpn, tcn))
+        seg_angles.append(float(np.arctan2(s, c)))
+    return root7, seg_angles
+
+
+def seed_cable_joint_state(state, model, cable_joints: list[int], root7: list[float],
+                           seg_angles: list[float], *, dr_xy: tuple[float, float] = (0.0, 0.0)) -> None:
+    """Seed ``state.joint_q``/``joint_qd`` for the rigid-link cable at reset (S4b, mujoco path).
+
+    Writes the FREE-root 7 coords — with the cable-XY-DR offset ``dr_xy`` added to the root x/y
+    translation DOFs (the S4b DR seam) — plus the derived segment angles, zeros the cable
+    ``joint_qd`` slice (post-settle rest), and runs ``eval_fk`` so ``body_q`` is consistent before
+    the next physics step. The ARM joint slice is untouched (the per-step arm overwrite owns it).
+    This replaces the VBD ``body_q_prev`` reset maintenance on the mujoco path (MuJoCo derives
+    velocity from qvel, not a previous-position buffer).
+    """
+    jqs = model.joint_q_start.numpy()
+    jqds = model.joint_qd_start.numpy()
+    free_jid = cable_joints[0]
+    q0 = int(jqs[free_jid])
+    qd0 = int(jqds[free_jid])
+    jq = state.joint_q.numpy()
+    jqd = state.joint_qd.numpy()
+    jq[q0:q0 + 7] = root7
+    jq[q0] += dr_xy[0]
+    jq[q0 + 1] += dr_xy[1]
+    jq[q0 + 7:q0 + 7 + len(seg_angles)] = seg_angles
+    jqd[qd0:qd0 + 6 + len(seg_angles)] = 0.0
+    state.joint_q.assign(jq)
+    state.joint_qd.assign(jqd)
+    newton.eval_fk(model, state.joint_q, state.joint_qd, state)
 
 
 def restore_ee_targets_per_world(
@@ -1548,7 +1614,9 @@ def build_multiworld_scene(
     # S4a: under mujoco the cable is present -> contacts enabled (D-S4a-3); vbd ignores the kwarg.
     solver = make_solver(model, enable_cable_contacts=(SOLVER_BACKEND == "mujoco"))
     # Both ceilings (D-S4a-3): rigid_contact_max NOT auto-raised (undersized raises ValueError,
-    # solver_mujoco.py:3981) -> max(NJMAX, curled naconmax=80 measured) = NJMAX; nconmax set in make_solver.
+    # solver_mujoco.py:3981) -> max(NJMAX, measured naconmax) = NJMAX. Probe-measured naconmax:
+    # SETTLED-flat cable<->table = 80; the curled gravity-off config = 0 (S4b fix: the prior
+    # comment misattributed the 80 to "curled"). MuJoCo's own nconmax is set in make_solver.
     model.rigid_contact_max = NJMAX
 
     # Physics states

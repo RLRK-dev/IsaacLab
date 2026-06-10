@@ -2229,26 +2229,39 @@ def _cable_max_curl(body_q_np, cable_bodies):
 
 
 def _run_mujoco_cable_settle_smoke(model, solver, contacts, scene_info, fk_state,
-                                   n_frames=600, restore_frames=2400, output_dir=None):
-    """S4a cable-settle smoke (D-S4a-5; B2/B3 validation posture inherited from the run-3 probe).
+                                   n_frames=600, restore_frames=2400, reset_frames=300,
+                                   output_dir=None):
+    """S4a/S4b cable smoke (D-S4a-5 + the S4b reset-path; B2/B3 posture from the run-3 probe).
 
     Phase 1 — SETTLE (gravity ON): genuine free-fall (the straight cable is released 15 mm above
     its table rest via the FREE-root pz coord, ONCE, before the loop) driven through
     :func:`physics_step` (the mujoco branch overwrites ONLY the arm joint_q [:28] — the cable FREE
     root is NEVER snapped, the run-3 harness-bug lesson). Asserts: ``solver.mjw_model.
-    jnt_stiffness`` carries the cable spring on every segment joint; no NaN; ``badqacc==0``
+    jnt_stiffness`` AND ``dof_damping`` carry the cable spring+damping on every segment joint
+    (the damping is load-bearing, B1 — symmetric runtime assert); no NaN; ``badqacc==0``
     (B2 BINDING — MuJoCo autoreset is DISABLED so an instability must fail loud, never be
-    silently clamped to a plausible pose); COM-Z ∈ [0.804±tol]; surface no-penetration
-    ``min(body_z−CABLE_RADIUS) ≥ TABLE_HEIGHT−1.5 mm`` (the D-S4a-3 solref tuning is what makes
-    this floor reachable — the VBD-era ke/kd map to the soft MuJoCo default ≈3 mm compression);
-    FREE-root XY/rot drift bounded; arm still tracks (<0.05 rad). NO gravity-sag bend assert (F2).
+    silently clamped to a plausible pose); the fall PROVABLY happened (``com_z ≤ drop_com_z −
+    10 mm`` and ``surf_min ≤ TABLE_HEIGHT + 1 mm`` — closes the never-fell loophole); COM-Z ∈
+    [0.804±tol]; surface no-penetration ``min(body_z−CABLE_RADIUS) ≥ TABLE_HEIGHT−1.5 mm`` (the
+    D-S4a-3 solref tuning is what makes this floor reachable); FREE-root XY/rot drift bounded;
+    arm still tracks (<0.05 rad). NO gravity-sag bend assert (F2).
 
-    Phase 2 — RESTORE (B3, gravity OFF in-place via ``mj_model.opt.gravity``): from a fresh state,
-    a uniform ~0.08 rad/segment curl is set ONCE; the passive spring must decay the curl
-    k-dependently toward straight (springref=0). Window ``restore_frames`` ≥ 2400 production
-    frames; PASS = ring-down envelope-end < 0.5×curl_start OBSERVED in-window (no extrapolation)
-    + ``badqacc==0`` + finite. The FULL per-frame curl trajectory (no downsampling) is written to
+    Phase 2 — RESTORE (B3, gravity OFF in-place via ``mj_model.opt.gravity``; restored for
+    Phase 3): from a fresh state, a uniform ~0.08 rad/segment curl is set ONCE; the passive
+    spring must decay the curl toward straight (springref=0). Window ``restore_frames`` ≥ 2400
+    production frames; PASS = ring-down envelope-end < 0.5×curl_start OBSERVED in-window (no
+    extrapolation) + ``badqacc==0`` + finite. Note: margin-proximity cable↔table contacts persist
+    at g=0 (the curled chain presses into the contact margin), adding friction dissipation — the
+    decay-to-STRAIGHT itself is spring-driven (probe N2 + contact-free restore established the
+    spring independently). The FULL per-frame curl trajectory (no downsampling) is written to
     ``{output_dir}/s4a_restore_traj.json``.
+
+    Phase 3 — RESET≥1× (S4b, gravity restored): the settled cable's joint_q is DERIVED from the
+    Phase-1 segment TANGENTS (C-1 primary — no cross-script cache), re-seeded into a fresh state
+    with a cable-XY-DR root offset, FK'd, and re-settled; asserts the derivation reproduces the
+    settled geometry within the C-1 metric floor (~mm), the re-settled state matches the Phase-1
+    bounds (COM-Z/surface/qvel), the DR offset persisted (root XY ≈ settled+DR), and
+    ``badqacc==0`` (B2 inherited in EVERY phase).
 
     Emits ``[MUJOCO_CABLE_SMOKE]`` metric lines and ``sys.exit``\\ s (0 = PASS, 2 = FAIL).
     """
@@ -2279,6 +2292,13 @@ def _run_mujoco_cable_settle_smoke(model, solver, contacts, scene_info, fk_state
     jk = solver.mjw_model.jnt_stiffness.numpy()
     cable_k_count = int(np.sum(np.abs(jk - CABLE_MUJOCO_BEND_K) < 0.1))
     jnt_stiffness_ok = bool(cable_k_count == n_seg_joints)
+    # B1 symmetric runtime assert (S4b hardening c): the LOAD-BEARING damping is SET too —
+    # jnt_stiffness≠0 does NOT catch a damping omission (the run-2 instability class). The cable
+    # is built LAST, so its segment DOFs are the trailing n_seg_joints entries of dof_damping.
+    dd = solver.mjw_model.dof_damping.numpy().flatten()
+    cable_dd = dd[-n_seg_joints:]
+    cable_d_count = int(np.sum(np.abs(cable_dd - CABLE_BEND_DAMPING) < 1e-6))
+    dof_damping_ok = bool(cable_d_count == n_seg_joints)
 
     # --- Phase 1: SETTLE (genuine fall: lift the FREE-root pz ONCE, then hands-off the cable) ---
     jqs = model.joint_q_start.numpy()
@@ -2314,9 +2334,13 @@ def _run_mujoco_cable_settle_smoke(model, solver, contacts, scene_info, fk_state
     jq_end = state.joint_q.numpy()[:n]
     arm_track_err = float(np.max(np.abs(jq_end[arm_idx] - fk_target[arm_idx]))) if finite else float("inf")
 
+    # S4b hardening (a): the fall PROVABLY happened — closes the loophole where a never-falling
+    # cable (e.g. an accidental re-pose) could sit inside the COM-Z band without ever settling.
+    fell_ok = bool(com_z <= drop_com_z - 0.010 and surf_min <= TABLE_HEIGHT + 0.001)
     settle_ok = bool(
-        finite and jnt_stiffness_ok
+        finite and jnt_stiffness_ok and dof_damping_ok
         and badqacc_settle == 0
+        and fell_ok
         and abs(com_z - (TABLE_HEIGHT + CABLE_RADIUS)) <= 0.02
         and surf_min >= TABLE_HEIGHT - 0.0015
         and cable_qvel < 5.0
@@ -2325,12 +2349,14 @@ def _run_mujoco_cable_settle_smoke(model, solver, contacts, scene_info, fk_state
     )
     print(f"  [MUJOCO_CABLE_SMOKE] settle: n_frames={n_frames} drop_com_z={drop_com_z:.4f} "
           f"com_z={com_z:.4f} (0.804±0.02) surf_min={surf_min:.4f} (>={TABLE_HEIGHT - 0.0015:.4f}) "
-          f"qvel={cable_qvel:.4f} drift_xy={drift_xy:.4f} drift_rot={drift_rot:.4f} "
+          f"fell={fell_ok} qvel={cable_qvel:.4f} drift_xy={drift_xy:.4f} drift_rot={drift_rot:.4f} "
           f"arm_track={arm_track_err:.4f} ncon_max={ncon_max} badqacc={badqacc_settle} "
-          f"jnt_k({CABLE_MUJOCO_BEND_K:.2f})x{cable_k_count}/{n_seg_joints} finite={finite} "
+          f"jnt_k({CABLE_MUJOCO_BEND_K:.2f})x{cable_k_count}/{n_seg_joints} "
+          f"dof_d({CABLE_BEND_DAMPING})x{cable_d_count}/{n_seg_joints} finite={finite} "
           f"settle_ok={settle_ok}")
 
     # --- Phase 2: RESTORE (B3) — gravity OFF, fresh state, one-time curl IC, spring rings down ---
+    gravity0 = solver.mj_model.opt.gravity.copy()  # (b) restored for Phase 3 / after the smoke
     solver.mj_model.opt.gravity[:] = 0.0
     bq_before_restore = _badqacc()
     state_r = model.state()
@@ -2376,10 +2402,56 @@ def _run_mujoco_cable_settle_smoke(model, solver, contacts, scene_info, fk_state
         traj_path = "(not written: no output_dir)"
     print(f"  [MUJOCO_CABLE_SMOKE] restore: frames={restore_frames} curl_start={curl_start:.4f} "
           f"env_end={env_end:.5f} (<{0.5 * curl_start:.4f} observed) badqacc={badqacc_restore} "
-          f"ncon={ncon_restore} (gravity-off => ~0) finite={finite_r} restore_ok={restore_ok} "
-          f"traj={traj_path}")
+          f"ncon={ncon_restore} (margin-proximity contacts persist at g=0; decay is spring-driven) "
+          f"finite={finite_r} restore_ok={restore_ok} traj={traj_path}")
 
-    cable_ok = bool(settle_ok and restore_ok)
+    # --- Phase 3 (S4b): reset≥1× — derive joint_q from the SETTLED tangents, re-seed (+XY-DR),
+    # re-settle, and assert the re-settled state matches Phase 1. Gravity restored (b). ---
+    solver.mj_model.opt.gravity[:] = gravity0
+    from newton_skill_env_base import (  # noqa: E402  (lazy; envs/ on sys.path since make_solver)
+        derive_cable_joint_q_from_tangents,
+        seed_cable_joint_state,
+    )
+    root7, seg_angles = derive_cable_joint_q_from_tangents(bqf, cable_bodies)
+    dr_xy = (0.010, -0.010)  # cable-XY-DR seam exercised deterministically
+    state_rs = model.state()
+    seed_cable_joint_state(state_rs, model, cable_joints, root7, seg_angles, dr_xy=dr_xy)
+    # C-1 derivation fidelity: FK(seeded joint_q) − DR must reproduce the settled geometry (~mm
+    # floor — the X-axis chain can't represent out-of-plane tangent components).
+    bq_seed = state_rs.body_q.numpy()
+    recon = bq_seed[cidx][:, :3] - np.array([dr_xy[0], dr_xy[1], 0.0])
+    derive_err = float(np.max(np.linalg.norm(recon - bqf[cidx][:, :3], axis=1)))
+
+    bq_before_reset = _badqacc()
+    finite_rs = True
+    for _ in range(reset_frames):
+        state_rs = physics_step(model, state_rs, solver, contacts, scene_info)
+        if not np.all(np.isfinite(state_rs.body_q.numpy())):
+            finite_rs = False
+            break
+    badqacc_reset = _badqacc() - bq_before_reset
+
+    bqr = state_rs.body_q.numpy()
+    czr = bqr[cidx][:, 2]
+    com_z_r = float(czr.mean())
+    surf_min_r = float((czr - CABLE_RADIUS).min())
+    qvel_r = float(np.max(np.abs(state_rs.body_qd.numpy()[cidx]))) if finite_rs else float("inf")
+    xy_target = root0_xy + np.array(dr_xy)
+    xy_err = float(np.linalg.norm(bqr[cable_bodies[0]][:2] - xy_target))
+    reset_ok = bool(
+        finite_rs and badqacc_reset == 0
+        and derive_err <= 0.005
+        and abs(com_z_r - (TABLE_HEIGHT + CABLE_RADIUS)) <= 0.02
+        and surf_min_r >= TABLE_HEIGHT - 0.0015
+        and qvel_r < 5.0
+        and xy_err <= 0.05
+    )
+    print(f"  [MUJOCO_CABLE_SMOKE] reset: frames={reset_frames} derive_err={derive_err:.5f} "
+          f"(<=0.005, C-1 floor) dr_xy={dr_xy} xy_err={xy_err:.4f} com_z={com_z_r:.4f} "
+          f"surf_min={surf_min_r:.4f} qvel={qvel_r:.4f} badqacc={badqacc_reset} "
+          f"finite={finite_rs} reset_ok={reset_ok}")
+
+    cable_ok = bool(settle_ok and restore_ok and reset_ok)
     print(f"  [MUJOCO_CABLE_SMOKE] cable_ok={cable_ok} ({'PASS' if cable_ok else 'FAIL'})")
     sys.exit(0 if cable_ok else 2)
 

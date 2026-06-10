@@ -852,14 +852,17 @@ class NewtonGripEnv(VecEnv):
             return
         bq = self._state_0.body_q.numpy()
         bqd = self._state_0.body_qd.numpy()
-        prev = self._solver.body_q_prev.numpy()
+        # S4b: SolverMuJoCo has no body_q_prev (VBD-only prev-position buffer); on that path the
+        # reset is carried by joint_q seeding, so the prev maintenance is skipped (None-tolerant).
+        prev = self._solver.body_q_prev.numpy() if hasattr(self._solver, "body_q_prev") else None
 
         for w in env_ids:
             w = int(w)
             start, end = self._bws[w], self._bws[w + 1]
             bq[start:end] = self._settled_body_q[start:end]
             bqd[start:end] = self._settled_body_qd[start:end]
-            prev[start:end] = self._settled_body_q[start:end]
+            if prev is not None:
+                prev[start:end] = self._settled_body_q[start:end]
 
             self._per_world_fk_jq[w] = self._settled_fk_jq.copy()
             self._step_bonus_given_r[w] = False
@@ -905,7 +908,8 @@ class NewtonGripEnv(VecEnv):
 
         self._state_0.body_q.assign(bq)
         self._state_0.body_qd.assign(bqd)
-        self._solver.body_q_prev.assign(prev)
+        if prev is not None:
+            self._solver.body_q_prev.assign(prev)
 
         # Reset Dahl friction
         if hasattr(self._solver, "enable_dahl_friction") and self._solver.enable_dahl_friction:

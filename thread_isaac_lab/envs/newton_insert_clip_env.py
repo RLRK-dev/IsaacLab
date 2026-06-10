@@ -1046,7 +1046,9 @@ class NewtonInsertClipEnv(VecEnv):
             return
         bq = self._state_0.body_q.numpy()
         bqd = self._state_0.body_qd.numpy()
-        prev = self._solver.body_q_prev.numpy()
+        # S4b: SolverMuJoCo has no body_q_prev (VBD-only prev-position buffer); on that path the
+        # reset is carried by joint_q seeding, so the prev maintenance is skipped (None-tolerant).
+        prev = self._solver.body_q_prev.numpy() if hasattr(self._solver, "body_q_prev") else None
 
         for w in env_ids:
             w = int(w)

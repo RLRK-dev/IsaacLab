@@ -1666,11 +1666,13 @@ class NewtonAerialRegraspEnv(VecEnv):
         env_ids = [int(w) for w in env_ids]
         if not env_ids:
             return
-        owns_state = bq is None or bqd is None or prev is None
+        # S4b: prev=None is a VALID state on the SolverMuJoCo path (no body_q_prev buffer), so
+        # ownership is decided by bq/bqd alone — callers pass prev=None under mujoco.
+        owns_state = bq is None or bqd is None
         if owns_state:
             bq = self._state_0.body_q.numpy()
             bqd = self._state_0.body_qd.numpy()
-            prev = self._solver.body_q_prev.numpy()
+            prev = self._solver.body_q_prev.numpy() if hasattr(self._solver, "body_q_prev") else None
 
         for w in env_ids:
             self._kinematic_support_active[w] = True
@@ -1690,13 +1692,15 @@ class NewtonAerialRegraspEnv(VecEnv):
                 if fk_batch_bq is not None:
                     bq[bi] = fk_batch_bq[w, lf]
                 bqd[bi] = 0.0
-                prev[bi] = bq[bi]
+                if prev is not None:
+                    prev[bi] = bq[bi]
 
         self._assign_left_finger_inverse_mass()
         if owns_state:
             self._state_0.body_q.assign(bq)
             self._state_0.body_qd.assign(bqd)
-            self._solver.body_q_prev.assign(prev)
+            if prev is not None:
+                self._solver.body_q_prev.assign(prev)
 
     def _release_kinematic_left_finger_support_for_world(
         self,
@@ -1740,11 +1744,13 @@ class NewtonAerialRegraspEnv(VecEnv):
 
         bq = self._state_0.body_q.numpy()
         bqd = self._state_0.body_qd.numpy()
-        prev = self._solver.body_q_prev.numpy()
+        # S4b: SolverMuJoCo has no body_q_prev — skip the VBD prev-buffer maintenance there.
+        prev = self._solver.body_q_prev.numpy() if hasattr(self._solver, "body_q_prev") else None
         bqd[ids] = 0.0
-        prev[ids] = bq[ids]
         self._state_0.body_qd.assign(bqd)
-        self._solver.body_q_prev.assign(prev)
+        if prev is not None:
+            prev[ids] = bq[ids]
+            self._solver.body_q_prev.assign(prev)
 
     def _release_kinematic_left_finger_support(self, env_ids, *, reason: str):
         """Release active worlds using the current episode step as metadata."""
@@ -1839,16 +1845,19 @@ class NewtonAerialRegraspEnv(VecEnv):
         n_worlds = self._world_count if n_worlds is None else int(n_worlds)
         bq = self._state_0.body_q.numpy()
         bqd = self._state_0.body_qd.numpy()
-        prev = self._solver.body_q_prev.numpy()
+        # S4b: SolverMuJoCo has no body_q_prev — skip the VBD prev-buffer maintenance there.
+        prev = self._solver.body_q_prev.numpy() if hasattr(self._solver, "body_q_prev") else None
         for w in np.where(self._kinematic_support_active[:n_worlds])[0]:
             for lf, bi in zip(FINGER_LOCAL, self._left_finger_ids_for_world(int(w))):
                 if fk_batch_bq is not None:
                     bq[bi] = fk_batch_bq[int(w), lf]
                 bqd[bi] = 0.0
-                prev[bi] = bq[bi]
+                if prev is not None:
+                    prev[bi] = bq[bi]
         self._state_0.body_q.assign(bq)
         self._state_0.body_qd.assign(bqd)
-        self._solver.body_q_prev.assign(prev)
+        if prev is not None:
+            self._solver.body_q_prev.assign(prev)
 
     def kinematic_left_finger_support_state(self) -> dict:
         """Return copied read-only state for the kinematic support predicate."""
@@ -1903,7 +1912,9 @@ class NewtonAerialRegraspEnv(VecEnv):
 
         bq = self._state_0.body_q.numpy()
         bqd = self._state_0.body_qd.numpy()
-        prev = self._solver.body_q_prev.numpy()
+        # S4b: SolverMuJoCo has no body_q_prev (VBD-only prev-position buffer); on that path the
+        # reset is carried by joint_q seeding, so the prev maintenance is skipped (None-tolerant).
+        prev = self._solver.body_q_prev.numpy() if hasattr(self._solver, "body_q_prev") else None
 
         for w in env_ids:
             w = int(w)
@@ -3212,9 +3223,11 @@ class NewtonAerialRegraspEnv(VecEnv):
             self._state_0.body_qd.assign(bqd)
             # L3 fix: also update body_q_prev to prevent VBD velocity explosion
             # VBD computes velocity from (body_q - body_q_prev) / dt
-            prev = self._solver.body_q_prev.numpy()
-            prev[fix_mask] = self._settled_body_q[fix_mask]
-            self._solver.body_q_prev.assign(prev)
+            # (S4b: SolverMuJoCo has no body_q_prev — the buffer + its failure mode are VBD-only.)
+            if hasattr(self._solver, "body_q_prev"):
+                prev = self._solver.body_q_prev.numpy()
+                prev[fix_mask] = self._settled_body_q[fix_mask]
+                self._solver.body_q_prev.assign(prev)
 
     def _physics_step_all(self, substeps=None, sim_dt=None, fk_batch_bq=None, n_worlds=None):
         """One physics frame for all worlds.
