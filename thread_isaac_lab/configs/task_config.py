@@ -140,7 +140,7 @@ CABLE_RADIUS = 0.004
 # The earlier "0.8 g/seg → 32 g" figure was a cylinder-only print formula (end caps ignored,
 # −36%) — RETIRED. Service load = m·g = 0.44 N (axial bars of the G3 class derive from THIS mass).
 
-# Cosserat Rod (add_rod) — capsule chain with cable joints
+# add_rod cable — rigid-capsule chain with CABLE joints (rigid-link REVOLUTE on SolverMuJoCo; NOT Cosserat — see log.md:6042)
 CABLE_BEND_STIFFNESS = 1.0# EI [N·m²] L3 stiffness calibration variant 1.0 (was 0.1)
 CABLE_BEND_DAMPING = 0.01# Bend damping [N·m·s]
 CABLE_STRETCH_STIFFNESS = 1.0e6  # EA [N] axial stiffness (high enough to prevent stretching)

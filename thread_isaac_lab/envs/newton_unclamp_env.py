@@ -343,7 +343,7 @@ class NewtonUnclampEnv(VecEnv):
                 elif local in GRIPPER_PAD_BODY_IDX:
                     proto.shape_flags[si] = 0x6
 
-        # Cable (Cosserat Rod)
+        # Cable (add_rod: rigid-capsule CABLE-joint chain / rigid-link REVOLUTE on SolverMuJoCo; NOT Cosserat)
         cable_half_len = CABLE_SEGMENTS * CABLE_SEG_LEN / 2
         cable_y_start = CLIP1_Y - cable_half_len
         cable_start = (GRASP_X, cable_y_start, TABLE_HEIGHT + CLIP_BASE_HEIGHT + CABLE_RADIUS)

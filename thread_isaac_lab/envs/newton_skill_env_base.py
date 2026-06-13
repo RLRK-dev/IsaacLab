@@ -1445,7 +1445,7 @@ def build_multiworld_scene(
                 elif local in GRIPPER_PAD_BODY_IDX:
                     proto.shape_flags[si] = 0x6  # COLLIDE_SHAPES | COLLIDE_PARTICLES
 
-        # Cable (Cosserat Rod)
+        # Cable (add_rod: rigid-capsule CABLE-joint chain / rigid-link REVOLUTE on SolverMuJoCo; NOT Cosserat)
         cable_shape_start_idx = proto.shape_count
         cable_bodies_proto, cable_joints_proto = add_cable_rod(
             proto,
