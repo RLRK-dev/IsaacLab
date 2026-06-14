@@ -285,6 +285,18 @@ EE_TO_PINCH_CLOSED = 0.2548428289592266  # wrist_3 -> pinch_mid drop [m] (drop_c
 EE_TO_PINCH_TIP_CLOSED = 0.27376849624506094  # wrist_3 -> pad TIP drop [m] (tip_drop_m; pads
 # extend 18.75 mm distal of pinch_mid). EE_TO_FINGERTIP above (0.220) is the Franka/legacy
 # value — UR5e+Robotiq consumers use THESE.
+EE_TO_PINCH_OPEN = 0.2092  # wrist_3 -> pinch_mid drop [m], OPEN gripper (S6, probe_wrist3_frame
+# wrist3_to_pinch_open_m). Regime-correct OPEN offset for aligning the open pinch to a cable. SSOT for
+# DOWNSTREAM consumers (S2-impl/S3, which have a cable); NOT consumed by the S6 infra smoke (no cable,
+# descends by closed-tip table-clearance) -- defined-for-downstream, not dead (post-debate CC4/CC5/NHA).
+# S6 scripted-close 8-vector (gripper-local JOINT order [6..13] == [right_driver, right_coupler,
+# right_spring_link, right_follower, left_driver, left_coupler, left_spring_link, left_follower];
+# probe_hover_seed VERIFIED this order on disk). LOOP-CONSISTENT, driver PINNED at
+# GRIPPER_DRIVER_CLOSE_RAD=0.7407 in the standalone full-2f85 (equality 4-bar), probe_closed_config_v2.
+# Used by the S6 mujoco IK-motion smoke's scripted-kinematic close (NO grip-force claim; the faithful
+# actuated close is deferred — production stripped build has no actuator/equality, R-S6.6).
+GRIPPER_CLOSE_QPOS = [0.7407, 7.2e-05, 0.728815, -0.699558,
+                      0.7407, 7.2e-05, 0.728815, -0.699558]
 # Grip-force datum (CONFIG-LABELED, %3 delta; in-grip sampling rule: N_total averaged over the
 # both-pad-contact window ONLY, onset -> last-contact — e.g. the rev7 window [248,538], n=255):
 GRIP_FORCE_DATUM_R4_BENCH_N = 47.3  # R4 (0.002,1) @ q=0.7407, PINCH-harness hold, F=0

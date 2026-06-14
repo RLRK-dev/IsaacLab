@@ -62,6 +62,7 @@ from task_config import (  # noqa: E402
     CABLE_CONTACT_KE, CABLE_CONTACT_KD, CABLE_CONTACT_MU,
     GRASP_X, CLIP_X, CLIP_GROOVE_INNER_RADIUS, P3_X_OFFSET, WIDE_LEFT_Y, WIDE_RIGHT_Y,
     FINGER_OPEN_POS, FINGER_CLOSE_POS, FINGER_CLOSE_STEPS,
+    GRIPPER_JOINT_RANGE, GRIPPER_PAD_BODY_IDX, GRIPPER_CLOSE_QPOS, ARM_DOF, EE_TO_PINCH_TIP_CLOSED,
     STEPS_PER_CM, MAX_MOVE_STEPS, SETTLE_STEPS,
     GROOVE_BODIES_MIN,
 )
@@ -1321,8 +1322,8 @@ def solve_ik_dual(scene_info, target_left, target_right):
     fk_state = scene_info["fk_state"]
 
     # EE body indices in FK model (body 6 = panda_hand for each arm)
-    left_ee_body = EE_BODY_OFFSET                       # 6
-    right_ee_body = FRANKA_NUM_JOINTS + EE_BODY_OFFSET   # 15
+    left_ee_body = EE_BODY_OFFSET                       # 5 (UR5e wrist_3; S2a aliased EE_BODY_OFFSET=EE_BODY_IDX=5)
+    right_ee_body = FRANKA_NUM_JOINTS + EE_BODY_OFFSET   # 19 (FRANKA_NUM_JOINTS aliased to ROBOT_NUM_JOINTS=14)
 
     target_l = np.array([target_left], dtype=np.float32)
     target_r = np.array([target_right], dtype=np.float32)
@@ -1340,16 +1341,17 @@ def solve_ik_dual(scene_info, target_left, target_right):
         weight=1.0,
     )
 
-    # Rotation objectives: hand pointing down, fingers perpendicular to cable (Y-axis)
-    # Cable runs along world Y. Finger joints are prismatic along hand Y-axis in URDF.
-    # BUT: collapse_fixed_joints=True merges panda_hand_joint (rpy=0,0,-π/4) into body6.
-    # Finger axis in body6 frame = Rz(-π/4)×(0,1,0) = (√2/2, √2/2, 0), NOT (0,1,0).
-    # To map finger axis → world X (⊥ cable) AND body6 Z → world -Z (down):
-    # 180° around axis (cos(π/8), sin(π/8), 0) = (cos22.5°, sin22.5°, 0)
-    # Verification: R×(√2/2,√2/2,0)=(1,0,0)✓, R×(0,0,1)=(0,0,-1)✓
-    _cos_pi8 = _math.cos(_math.pi / 8)  # cos(22.5°) ≈ 0.9239
-    _sin_pi8 = _math.sin(_math.pi / 8)  # sin(22.5°) ≈ 0.3827
-    target_rot = wp.array([wp.vec4(_cos_pi8, _sin_pi8, 0.0, 0.0)], dtype=wp.vec4, device=DEVICE)
+    # Rotation objectives: gripper pointing DOWN, fingers PERPENDICULAR to cable (world Y).
+    # S6 retarget (UR5e+2F-85, NOT Franka): target = wrist_3 (body 5/19) world orientation
+    # q = Rx(-90°), xyzw = (-√2/2, 0, 0, √2/2). Maps wrist_3 local +Y (approach) → world -Z (down)
+    # and local X (finger-sep) → world ±X (⊥ cable Y). VALIDATED on the UR5e FK model: probe_ik_verify
+    # (right arm down_dot=1.0/perp_|x|=1.0/z_leak=0) + probe_smoke_geom (BOTH arms down_dot=1.0/perp=1.0).
+    # Convention seam: warp wp.vec4/IKObjectiveRotation = xyzw (newton ik_objectives.py:618,
+    # target=wp.quat(vec[0..3]), w=vec[3]); the wrist_3 MuJoCo attachment_site is wxyz.
+    # (The prior Franka π/8 quat was built for the collapsed panda_hand_joint frame → mis-orients the
+    # UR5e wrist_3 = the S5 P1.3 horizontal-gripper failure; the S6 smoke now asserts this DOWN/⊥ TRIAD.)
+    target_rot = wp.array([wp.vec4(-0.7071067811865476, 0.0, 0.0, 0.7071067811865476)],
+                          dtype=wp.vec4, device=DEVICE)
     rot_l = IKObjectiveRotation(
         link_index=left_ee_body,
         link_offset_rotation=wp.quat_identity(),
@@ -1449,8 +1451,12 @@ def ik_move_both(model, state, scene_info, solver, contacts,
     jq_start = fk_state.joint_q.numpy().copy()
     jq_end = jq_target.copy()
 
-    # Finger coord indices to exclude from IK interpolation (each arm has 9 1-DOF joints)
-    finger_coords = {7, 8, FRANKA_NUM_JOINTS + 7, FRANKA_NUM_JOINTS + 8}
+    # Gripper coord indices to EXCLUDE from arm-IK interpolation (hold the gripper through arm moves).
+    # S6: exclude ALL 8 gripper joints/arm via SSOT GRIPPER_JOINT_RANGE ([6..13]; right arm +JOINTS_PER_ARM
+    # = [20..27]). The old {7,8,21,22} (Franka 2-finger) left 6/8 gripper joints/arm in the interpolation.
+    # (IK leaves gripper joints ~unchanged — zero Jacobian on the arm-EE/collision objectives — so this is
+    # SSOT-correctness + defense: it guarantees a scripted close is held through the post-close LIFT.)
+    finger_coords = set(GRIPPER_JOINT_RANGE) | {JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE}
 
     for step in range(n_steps):
         t = min((step + 1) / n_steps, 1.0)
@@ -1653,7 +1659,14 @@ def _check_contacts(solver, contacts, model, scene_info, label, state=None):
 
 
 def do_p1_grasp(model, state, scene_info, solver, contacts):
-    """P1: Wide-stance approach + descend + grasp."""
+    """P1: Wide-stance approach + descend + grasp.
+
+    ⚠ S6 RESIDUAL-FRANKA (flag-only, debate M7): this legacy VBD episode (do_p1_grasp/p2/p3/p4) is
+    DEFAULT-reachable (SOLVER_BACKEND="vbd") but still Franka-indexed for the gripper (the close ramps
+    {+7,+8}, not GRIPPER_JOINT_RANGE -> closes 0 pads on the UR5e 2f85). PRE-EXISTING-broken-for-UR5e
+    (NOT introduced by S6); S6 only corrects the SHARED solve_ik_dual/ik_move_both IK. Full VBD-episode
+    retarget = a separate flagged legacy task. The S6 deliverable is the mujoco IK-motion smoke.
+    """
     print(f"\n  {'='*50}")
     print(f"  [P1] Wide-Stance Approach + Grasp")
     print(f"  {'='*50}")
@@ -2164,6 +2177,156 @@ def run_episode(model, state, scene_info, solver, contacts, episode_idx):
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+def _run_mujoco_ik_motion_smoke(model, solver, contacts, scene_info, fk_state, output_dir=None):
+    """S6 dual-arm IK-motion INFRA smoke (env-gate S6_IK_MOTION_SMOKE=1) — the S6 deliverable.
+
+    Drives the articulated UR5e+Robotiq mujoco scene through a minimal dual-arm IK episode
+    (seed -> IK HOVER -> IK APPROACH -> IK DESCEND -> scripted-kinematic CLOSE -> IK LIFT) and gates on
+    MECHANICAL asserts only. INFRASTRUCTURE: it proves the swapped env runs an IK-driven episode with
+    the gripper correctly oriented + closed -- it makes NO grasp/retention/grip-force claim (no cable;
+    the mujoco branch runs contacts=None so the close is a KINEMATIC pose, not a force grasp; the
+    faithful actuated close is deferred, R-S6.6). Mirrors _run_mujoco_tracking_smoke's exit gate:
+    sys.exit(0 = PASS, 2 = FAIL). All geometry/seeds are probe-derived (probe_smoke_geom/probe_seq_diag).
+    """
+    fk_model = scene_info["fk_model"]
+    lb = scene_info["left_body_start"]
+    rb = scene_info["right_body_start"]
+    w3_l, w3_r = lb + EE_BODY_OFFSET, rb + EE_BODY_OFFSET
+
+    # Table-clearing co-pose geometry (debate M1: OPEN-Z descend drove the CLOSED tip 55.6mm INTO the
+    # table; probe_smoke_geom). Targets are wrist_3 world Z (no cable in this infra smoke).
+    z_grasp = TABLE_HEIGHT + EE_TO_PINCH_TIP_CLOSED + 0.02   # descend: CLOSED tip clears the table (+20mm)
+    z_approach = z_grasp + 0.05
+    z_hover = z_grasp + 0.15
+    x_wp, y_wp = 0.30, 0.20
+
+    def tgt(z):
+        return (x_wp, -y_wp, z), (x_wp, y_wp, z)            # (left, right) wrist_3 targets
+
+    # UR5e 6-DOF hover seeds (probe_seq_diag: SEQUENTIAL-verified — hover->approach->descend->lift all
+    # converge <5mm). An earlier static seed (probe_smoke_geom) put wrist_2 at +-pi/2, an IK branch where
+    # the converged APPROACH config TRAPS the LM for DESCEND (zero progress, ruled out as collision/
+    # joint-limit/iterations by probe_seq_diag); this seed sets wrist_2=+-2.0 (0.43 rad off the +-pi/2 trap)
+    # -> the converged trajectory then stays ~pi from +-pi/2 (probe_seq_diag sing_margin_rad=3.142, post-debate fix).
+    seed_l = [3.194257, -1.979768, 1.6, -1.853054, 2.0, -1.518132]
+    seed_r = [-0.052664, -1.161825, -1.6, -1.288538, -2.0, -1.62346]
+
+    # Self-contained init: arm = hover seed, gripper = open (0). (debate M6: the shared main-init is
+    # flag-only; this smoke does NOT rely on it.)
+    fk_jq = fk_state.joint_q.numpy()
+    fk_jq[0:ARM_DOF] = seed_l
+    fk_jq[JOINTS_PER_ARM:JOINTS_PER_ARM + ARM_DOF] = seed_r
+    for j in GRIPPER_JOINT_RANGE:
+        fk_jq[j] = 0.0
+        fk_jq[JOINTS_PER_ARM + j] = 0.0
+    fk_state.joint_q.assign(fk_jq)
+    newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
+
+    state = model.state()
+    for _ in range(10):   # pose the mujoco scene from the hover seed (kinematic re-pose)
+        state = physics_step(model, state, solver, contacts, scene_info)
+
+    keyframes = {}
+
+    def _triad(bq, w3):
+        q = bq[w3][3:7]
+        qq = wp.quat(float(q[0]), float(q[1]), float(q[2]), float(q[3]))
+        ap = wp.quat_rotate(qq, wp.vec3(0.0, 1.0, 0.0))   # local +Y (approach) -> world
+        sp = wp.quat_rotate(qq, wp.vec3(1.0, 0.0, 0.0))   # local X (finger-sep) -> world
+        return float(-ap[2]), float(abs(sp[0]))           # down_dot(-Z), perp_|x|
+
+    def _snap(name, bq):
+        dl, pl = _triad(bq, w3_l)
+        dr, pr = _triad(bq, w3_r)
+        keyframes[name] = {
+            "wrist3_L": [round(float(v), 4) for v in bq[w3_l][:3]],
+            "wrist3_R": [round(float(v), 4) for v in bq[w3_r][:3]],
+            "down_dot_L": round(dl, 4), "perp_L": round(pl, 4),
+            "down_dot_R": round(dr, 4), "perp_R": round(pr, 4),
+        }
+
+    _snap("seed", state.body_q.numpy())   # raw IK seed pose (pre-IK initial guess; NOT a target/down-pose)
+
+    # IK moves (speed_factor 0.2 -> ~1mm/step, fast on 0-GPU; DiffIK-safe). converge_mm gates each move.
+    # First HOVER move turns the raw seed into a converged, gripper-down hover pose.
+    ok = {}
+    state, ok["hover"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                      *tgt(z_hover), label="S6-HOVER", converge_mm=5.0, speed_factor=0.2)
+    _snap("hover", state.body_q.numpy())
+    state, ok["approach"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                         *tgt(z_approach), label="S6-APPROACH", converge_mm=5.0, speed_factor=0.2)
+    _snap("approach", state.body_q.numpy())
+    state, ok["descend"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                        *tgt(z_grasp), label="S6-DESCEND", converge_mm=5.0, speed_factor=0.2)
+    bq_preclose = state.body_q.numpy().copy()
+    _snap("descend_open", bq_preclose)
+
+    # Scripted-kinematic CLOSE: ramp gripper [6..13]/[20..27] -> GRIPPER_CLOSE_QPOS (loop-consistent,
+    # probe_closed_config_v2). n_close is a kinematic interpolation count (NOT the PD FINGER_CLOSE_STEPS;
+    # contacts=None on the mujoco branch -> this is geometric posing, no force convergence).
+    gstart = fk_state.joint_q.numpy().copy()
+    n_close = 60
+    for step in range(n_close):
+        t = (step + 1) / n_close
+        fk_jq = fk_state.joint_q.numpy()
+        for k, j in enumerate(GRIPPER_JOINT_RANGE):
+            fk_jq[j] = gstart[j] + (GRIPPER_CLOSE_QPOS[k] - gstart[j]) * t
+            jr = JOINTS_PER_ARM + j
+            fk_jq[jr] = gstart[jr] + (GRIPPER_CLOSE_QPOS[k] - gstart[jr]) * t
+        fk_state.joint_q.assign(fk_jq)
+        newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
+        state = physics_step(model, state, solver, contacts, scene_info)
+    bq_closed = state.body_q.numpy().copy()
+    _snap("closed", bq_closed)
+
+    # IK LIFT (finger_coords excludes the gripper -> the scripted close is held through the lift).
+    state, ok["lift"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                     *tgt(z_hover), label="S6-LIFT", converge_mm=5.0, speed_factor=0.2)
+    bq_lift = state.body_q.numpy()
+    _snap("lift", bq_lift)
+
+    # --- ASSERTS (mechanical only; no grasp/force claim) ---
+    moves_ok = bool(ok.get("hover") and ok.get("approach") and ok.get("descend") and ok.get("lift"))
+    dd_l, pp_l = _triad(bq_lift, w3_l)
+    dd_r, pp_r = _triad(bq_lift, w3_r)
+    # triad_ok = the ANTI-HORIZONTAL-gripper gate (S5 P1.3 prior failure; debate H2). 0.99 rejects >~8deg
+    # off-vertical (down_dot) and >~8deg off-world-X (perp; perp>0.99 also bounds finger-sep leak off cable-Y
+    # to <0.14). It is an anti-horizontal gate, NOT a fine-orientation gate (post-debate CC4/CC5 M: ~8deg slack
+    # at 0.99 documented; this smoke's full-quat IK objective lands at ~1.000, far inside it).
+    triad_ok = bool(dd_l > 0.99 and dd_r > 0.99 and pp_l > 0.99 and pp_r > 0.99)
+    pad_bodies = [lb + b for b in GRIPPER_PAD_BODY_IDX] + [rb + b for b in GRIPPER_PAD_BODY_IDX]
+    # MIN (not max) over all 4 pad bodies -> a one-sided/partial close (one arm's pads not moving) FAILS the
+    # gate (post-debate CC2/CC4 M: max would pass a half-closed gripper). production disp ~41mm/pad
+    # (probe_smoke_geom); 20mm = conservative floor (debate M3).
+    pad_disp = min(float(np.linalg.norm(bq_closed[p][:3] - bq_preclose[p][:3])) for p in pad_bodies) * 1000.0
+    pad_ok = bool(pad_disp > 20.0)
+    jq = state.joint_q.numpy()
+    jqd = state.joint_qd.numpy()
+    finite = bool(np.all(np.isfinite(jq)) and np.all(np.isfinite(bq_lift)))
+    qvel_max = float(np.max(np.abs(jqd)))
+    qvel_ok = bool(qvel_max < 100.0)
+    smoke_ok = bool(moves_ok and triad_ok and pad_ok and finite and qvel_ok)
+
+    if output_dir:
+        try:
+            os.makedirs(output_dir, exist_ok=True)
+            with open(os.path.join(output_dir, "s6_ik_motion_smoke.json"), "w") as f:
+                json.dump({"smoke_ok": smoke_ok, "moves_ok": moves_ok, "triad_ok": triad_ok,
+                           "pad_disp_mm": round(pad_disp, 2), "pad_ok": pad_ok, "finite": finite,
+                           "qvel_max": round(qvel_max, 4), "keyframes": keyframes}, f, indent=2)
+            print(f"  [S6_IK_SMOKE] keyframe trajectory -> {os.path.join(output_dir, 's6_ik_motion_smoke.json')}")
+        except Exception as e:  # noqa: BLE001 (diagnostic dump must not fail the gate)
+            print(f"  [S6_IK_SMOKE] (keyframe dump skipped: {e})")
+
+    print(f"  [S6_IK_SMOKE] moves_ok={moves_ok} (hover={ok.get('hover')},approach={ok.get('approach')},"
+          f"descend={ok.get('descend')},lift={ok.get('lift')}) triad_ok={triad_ok} (L down={dd_l:.3f}/perp={pp_l:.3f}, "
+          f"R down={dd_r:.3f}/perp={pp_r:.3f}) pad_disp={pad_disp:.1f}mm (>20={pad_ok}) "
+          f"finite={finite} qvel_max={qvel_max:.3f} (<100={qvel_ok})")
+    print(f"  [S6_IK_SMOKE] smoke_ok={smoke_ok} "
+          f"({'PASS -- S6 dual-arm IK episode runs (hover->approach->descend->close->lift)' if smoke_ok else 'FAIL'})")
+    sys.exit(0 if smoke_ok else 2)
+
+
 def _run_mujoco_tracking_smoke(model, solver, contacts, scene_info, fk_state, n_frames=60):
     """K2 false-green gate (Option-E Opt-1 SC2b-part2): per-step joint_q kinematic re-pose tracking.
 
@@ -2503,7 +2666,12 @@ def main():
     fk_jq = fk_state.joint_q.numpy()
     fk_tp = fk_model.joint_target_pos.numpy()
     fk_jq[:] = fk_tp[:]
-    # Open fingers
+    # Open fingers.
+    # ⚠ S6 RESIDUAL-FRANKA (flag-only, debate M6): {+7,+8}=FINGER_OPEN_POS is the Franka 2-finger open
+    # applied to 2f85 joints 7,8 (=right_coupler/right_spring_link). This shared init runs for BOTH
+    # backends, but the mujoco IK-motion smoke (_run_mujoco_ik_motion_smoke) self-inits the gripper open
+    # via GRIPPER_JOINT_RANGE; this site is effective only on the VBD/legacy path. Full VBD-episode
+    # retarget = a separate flagged legacy task (out of S6-min scope; see S6_5CC_DEBATE_DECIDE.md M7).
     for arm_offset in [0, FRANKA_NUM_JOINTS]:
         fk_jq[arm_offset + 7] = FINGER_OPEN_POS
         fk_jq[arm_offset + 8] = FINGER_OPEN_POS
@@ -2551,6 +2719,11 @@ def main():
         if use_cable:
             _run_mujoco_cable_settle_smoke(model, solver, contacts, scene_info, fk_state,
                                            output_dir=args.output_dir)
+        elif os.environ.get("S6_IK_MOTION_SMOKE") == "1":
+            # S6 dual-arm IK-motion infra smoke (env-gated; the default --no-cable mujoco path keeps the
+            # K2 tracking gate below UNCHANGED). sys.exit(0/2). (debate A3/H3; no new CLI arg, debate alt#5)
+            _run_mujoco_ik_motion_smoke(model, solver, contacts, scene_info, fk_state,
+                                        output_dir=args.output_dir)
         else:
             _run_mujoco_tracking_smoke(model, solver, contacts, scene_info, fk_state, n_frames=60)
         return  # both smokes sys.exit(); this return is a safety net
@@ -2718,6 +2891,8 @@ def main():
             _physics_state_buffer = None
 
             # Reset FK state (robot joints with open fingers)
+            # ⚠ S6 RESIDUAL-FRANKA (flag-only, debate M6, twin of the init site): Franka {+7,+8} open on
+            # 2f85 joints; VBD-path only. Separate legacy-retarget task (out of S6-min scope).
             fk_jq_reset = settled_fk_jq.copy()
             for arm_offset in [0, FRANKA_NUM_JOINTS]:
                 fk_jq_reset[arm_offset + 7] = FINGER_OPEN_POS
