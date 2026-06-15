@@ -95,6 +95,16 @@
             <body name="right_pad" pos="0 -0.0189 0.01352">
               <geom class="pad_box1" name="right_pad1"/>
               <geom class="pad_box2" name="right_pad2"/>
+              <!-- S1 form-closure cage graft (G0c-G0i proven; additive BOX geoms, no new body). Names
+                   contain "pad" so the suite-wide contact filter (test_newton_clip_routing.py:991/1070)
+                   keeps COLLIDE + cable contact. down-out + vertical = enclosed (mu0-banked form-closure
+                   margin 3.412 mm @ elevated seat E*~1.175 mm); axial / roll / up-escape = carried (real-HW).
+                   Extends the distal tip ~1.62 mm (f1lo) -> EE_TO_PINCH_TIP_CLOSED stale, R-S6.1 re-derive
+                   pending. friction 0.7 = production realism (mu0 is the conservative banked floor). -->
+              <geom name="right_pad_f1up" type="box" mass="0" size="0.011 0.001454701 0.000839872" pos="0 -0.0066 0.034720257" quat="0.5 -0.8660254038 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.85 0.25 0.25 1"/>
+              <geom name="right_pad_f1lo" type="box" mass="0" size="0.011 0.001454701 0.0002" pos="0 -0.007154145 0.037759808" quat="0.5 0.8660254038 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.85 0.25 0.25 1"/>
+              <geom name="right_pad_f1ext" type="box" mass="0" size="0.011 0.004 0.0007" pos="0 -0.0026 0.0382" quat="1 0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.85 0.25 0.25 1"/>
+              <geom name="right_pad_lip" type="box" mass="0" size="0.011 0.0021 0.00025" pos="0 -0.0081 0.03805" quat="1 0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.20 0.75 0.95 1"/>
               <inertial mass="0.0035" pos="0 -0.0025 0.0185" quat="0.707107 0 0 0.707107"
                 diaginertia="4.73958e-07 3.64583e-07 1.23958e-07"/>
               <geom class="visual" mesh="pad"/>
@@ -134,6 +144,11 @@
             <body name="left_pad" pos="0 -0.0189 0.01352">
               <geom class="pad_box1" name="left_pad1"/>
               <geom class="pad_box2" name="left_pad2"/>
+              <!-- S1 form-closure cage graft (mirror of right_pad; see right_pad comment). -->
+              <geom name="left_pad_f1up" type="box" mass="0" size="0.011 0.001454701 0.000839872" pos="0 -0.0066 0.034720257" quat="0.5 -0.8660254038 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.85 0.25 0.25 1"/>
+              <geom name="left_pad_f1lo" type="box" mass="0" size="0.011 0.001454701 0.0002" pos="0 -0.007154145 0.037759808" quat="0.5 0.8660254038 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.85 0.25 0.25 1"/>
+              <geom name="left_pad_f1ext" type="box" mass="0" size="0.011 0.004 0.0007" pos="0 -0.0026 0.0382" quat="1 0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.85 0.25 0.25 1"/>
+              <geom name="left_pad_lip" type="box" mass="0" size="0.011 0.0021 0.00025" pos="0 -0.0081 0.03805" quat="1 0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.20 0.75 0.95 1"/>
               <inertial mass="0.0035" pos="0 -0.0025 0.0185" quat="1 0 0 1"
                 diaginertia="4.73958e-07 3.64583e-07 1.23958e-07"/>
               <geom class="visual" mesh="pad"/>
@@ -148,6 +163,10 @@
   </worldbody>
 
   <contact>
+    <!-- S1: prevent cage lip-lip self-collision jam at the scripted close (the cage lips protrude
+         inward ~3.6 mm past the pad face -> opposing lips overlap at GRIPPER_CLOSE_QPOS). Cable-cage
+         contact is UNAFFECTED (the cable is a separate body). pre-check empirically verified lip_lip 4->0. -->
+    <exclude body1="right_pad" body2="left_pad"/>
     <exclude body1="base" body2="left_driver"/>
     <exclude body1="base" body2="right_driver"/>
     <exclude body1="base" body2="left_spring_link"/>
