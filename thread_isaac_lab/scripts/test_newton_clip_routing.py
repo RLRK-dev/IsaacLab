@@ -1313,8 +1313,15 @@ def physics_step(model, state, solver, contacts, scene_info):
 # ---------------------------------------------------------------------------
 # IK helpers
 # ---------------------------------------------------------------------------
-def solve_ik_dual(scene_info, target_left, target_right):
+def solve_ik_dual(scene_info, target_left, target_right, warmstart_jq=None):
     """Solve IK for both arms using the FK model.
+
+    Args:
+        warmstart_jq: optional full joint-config vector used as the LM solver's initial guess
+            (R-S6.2 C2). Default ``None`` uses the current ``fk_state.joint_q`` (byte-identical to
+            the prior behavior). Decouples the IK initial guess from the interpolation start so a
+            move can re-seed from a known-good config (e.g. the converged hover) instead of a
+            post-close LM-stuck point (RS6_1_FINDINGS §2.2).
 
     Returns (fk_joint_q, cost) — the FK model joint positions with IK solution.
     """
@@ -1380,8 +1387,11 @@ def solve_ik_dual(scene_info, target_left, target_right):
     ik_solver = IKSolver(fk_model, n_problems=1,
                          objectives=[obj_l, obj_r, rot_l, rot_r, *collision_objs, obj_joint_limits])
 
-    # Current FK joint positions as initial guess
+    # Initial guess for the LM solver: the warm-start config if provided (R-S6.2 C2, decoupled from
+    # the interpolation start), else the current FK joint positions (byte-identical default).
     fk_jq = fk_state.joint_q.numpy().copy()
+    if warmstart_jq is not None:
+        fk_jq = np.asarray(warmstart_jq, dtype=fk_jq.dtype).reshape(-1).copy()
     jq_in = wp.array(fk_jq.reshape(1, -1), dtype=float, device=DEVICE)
     jq_out = wp.zeros((1, fk_model.joint_coord_count), dtype=float, device=DEVICE)
 
@@ -1409,7 +1419,8 @@ def get_ee_positions(state, scene_info):
 def ik_move_both(model, state, scene_info, solver, contacts,
                  target_left, target_right, label="MOVE",
                  converge_mm=5.0,
-                 speed_factor=1.0):
+                 speed_factor=1.0,
+                 warmstart_jq=None):
     """Move both EEs to target positions using IK + VBD stepping.
 
     Strategy: Solve IK ONCE for the final target, then interpolate FK joint
@@ -1439,8 +1450,8 @@ def ik_move_both(model, state, scene_info, solver, contacts,
     tgt_l = np.array(target_left, dtype=np.float32)
     tgt_r = np.array(target_right, dtype=np.float32)
 
-    # Solve IK once for final target
-    jq_target, ik_cost = solve_ik_dual(scene_info, tuple(tgt_l), tuple(tgt_r))
+    # Solve IK once for final target (R-S6.2 C2: optional warm-start seed, default = current FK config)
+    jq_target, ik_cost = solve_ik_dual(scene_info, tuple(tgt_l), tuple(tgt_r), warmstart_jq=warmstart_jq)
     if np.any(np.isnan(jq_target)):
         print(f"  [{label}] IK NaN!")
         return state, False
@@ -2253,6 +2264,7 @@ def _run_mujoco_ik_motion_smoke(model, solver, contacts, scene_info, fk_state, o
     state, ok["hover"] = ik_move_both(model, state, scene_info, solver, contacts,
                                       *tgt(z_hover), label="S6-HOVER", converge_mm=5.0, speed_factor=0.2)
     _snap("hover", state.body_q.numpy())
+    hover_fk_jq = fk_state.joint_q.numpy().copy()   # R-S6.2 C3: robust warm-start source for the post-close LIFT
     state, ok["approach"] = ik_move_both(model, state, scene_info, solver, contacts,
                                          *tgt(z_approach), label="S6-APPROACH", converge_mm=5.0, speed_factor=0.2)
     _snap("approach", state.body_q.numpy())
@@ -2280,8 +2292,15 @@ def _run_mujoco_ik_motion_smoke(model, solver, contacts, scene_info, fk_state, o
     _snap("closed", bq_closed)
 
     # IK LIFT (finger_coords excludes the gripper -> the scripted close is held through the lift).
+    # R-S6.2 C3/M1: re-seed the LIFT IK from the converged HOVER arm config (NOT the post-close config,
+    # which is a 150mm LM-stuck point at the landed EE value; RS6_1_FINDINGS §2.2). Keep the closed
+    # gripper sub-vector (arm-IK has zero Jacobian on gripper coords); overwrite ONLY the arm coords.
+    lift_warmstart = fk_state.joint_q.numpy().copy()
+    lift_warmstart[0:ARM_DOF] = hover_fk_jq[0:ARM_DOF]
+    lift_warmstart[JOINTS_PER_ARM:JOINTS_PER_ARM + ARM_DOF] = hover_fk_jq[JOINTS_PER_ARM:JOINTS_PER_ARM + ARM_DOF]
     state, ok["lift"] = ik_move_both(model, state, scene_info, solver, contacts,
-                                     *tgt(z_hover), label="S6-LIFT", converge_mm=5.0, speed_factor=0.2)
+                                     *tgt(z_hover), label="S6-LIFT", converge_mm=5.0, speed_factor=0.2,
+                                     warmstart_jq=lift_warmstart)
     bq_lift = state.body_q.numpy()
     _snap("lift", bq_lift)
 
@@ -2305,7 +2324,12 @@ def _run_mujoco_ik_motion_smoke(model, solver, contacts, scene_info, fk_state, o
     finite = bool(np.all(np.isfinite(jq)) and np.all(np.isfinite(bq_lift)))
     qvel_max = float(np.max(np.abs(jqd)))
     qvel_ok = bool(qvel_max < 100.0)
-    smoke_ok = bool(moves_ok and triad_ok and pad_ok and finite and qvel_ok)
+    # R-S6.2 C3: the LIFT must converge at a ROBUST wrist_2 margin (>=3.0 rad from the ±π/2 singularity),
+    # not a fragile margin-0 seed (RS6_1_FINDINGS §2.3; the landed EE value would otherwise only converge
+    # via margin-0 seeds). jq tracks the FK config on the mujoco branch (per-step joint_q overwrite).
+    w2_margin = float(min(abs(abs(jq[4]) - np.pi / 2), abs(abs(jq[JOINTS_PER_ARM + 4]) - np.pi / 2)))
+    margin_ok = bool(w2_margin >= 3.0)
+    smoke_ok = bool(moves_ok and triad_ok and pad_ok and finite and qvel_ok and margin_ok)
 
     if output_dir:
         try:
@@ -2313,7 +2337,8 @@ def _run_mujoco_ik_motion_smoke(model, solver, contacts, scene_info, fk_state, o
             with open(os.path.join(output_dir, "s6_ik_motion_smoke.json"), "w") as f:
                 json.dump({"smoke_ok": smoke_ok, "moves_ok": moves_ok, "triad_ok": triad_ok,
                            "pad_disp_mm": round(pad_disp, 2), "pad_ok": pad_ok, "finite": finite,
-                           "qvel_max": round(qvel_max, 4), "keyframes": keyframes}, f, indent=2)
+                           "qvel_max": round(qvel_max, 4), "w2_margin_rad": round(w2_margin, 3),
+                           "margin_ok": margin_ok, "keyframes": keyframes}, f, indent=2)
             print(f"  [S6_IK_SMOKE] keyframe trajectory -> {os.path.join(output_dir, 's6_ik_motion_smoke.json')}")
         except Exception as e:  # noqa: BLE001 (diagnostic dump must not fail the gate)
             print(f"  [S6_IK_SMOKE] (keyframe dump skipped: {e})")
@@ -2321,10 +2346,173 @@ def _run_mujoco_ik_motion_smoke(model, solver, contacts, scene_info, fk_state, o
     print(f"  [S6_IK_SMOKE] moves_ok={moves_ok} (hover={ok.get('hover')},approach={ok.get('approach')},"
           f"descend={ok.get('descend')},lift={ok.get('lift')}) triad_ok={triad_ok} (L down={dd_l:.3f}/perp={pp_l:.3f}, "
           f"R down={dd_r:.3f}/perp={pp_r:.3f}) pad_disp={pad_disp:.1f}mm (>20={pad_ok}) "
-          f"finite={finite} qvel_max={qvel_max:.3f} (<100={qvel_ok})")
+          f"finite={finite} qvel_max={qvel_max:.3f} (<100={qvel_ok}) w2_margin={w2_margin:.3f} (>=3.0={margin_ok})")
     print(f"  [S6_IK_SMOKE] smoke_ok={smoke_ok} "
           f"({'PASS -- S6 dual-arm IK episode runs (hover->approach->descend->close->lift)' if smoke_ok else 'FAIL'})")
     sys.exit(0 if smoke_ok else 2)
+
+
+def _run_mujoco_episode(model, solver, contacts, scene_info, fk_state, output_dir=None):
+    """C4 (R-S6.2): dual-arm episode-level stepping loop on the mujoco backend (env-gate S6_EPISODE=1).
+
+    A SYMMETRIC 3-stage INFRA skeleton (elevate -> scripted-close -> release), structural-inspiration-only
+    from GD-S2A §1 -- NOT the asymmetric A-holder/B-retention choreography (deferred R-S7.1). Both arms
+    execute the SAME motion to mirror targets. Extends _run_mujoco_ik_motion_smoke from a single grasp to
+    an episode loop (default N_EP=1; env S6_EPISODE_N) with a release stage, the C3 hover-warmstart LIFT
+    fix, an episode INFRA result dict, and MECHANICAL gates only -- NO grip-force/retention/success verdict
+    (R3; contacts=None on the mujoco branch -> the close/open are KINEMATIC poses, not force grasps).
+
+    R1 (asset-identity, verified 2026-06-16): z_grasp uses EE_TO_PINCH_TIP_CLOSED measured (R-S6.1) on
+    ROBOTIQ_STRIPPED_XML = the CAGED asset the mujoco physics build loads (test:975/980). The FK/IK model
+    loads the un-caged 2f85.xml, but the S1 cage is geom-only (no new body/joint) so wrist_3 kinematics --
+    hence the IK -- are identical; the caged tip (only in physics) drops EE_TO_PINCH_TIP_CLOSED below
+    wrist_3, so landing wrist_3 at z_grasp clears the caged tip TABLE+20mm. The per-episode r1_ok gate
+    asserts the descend reached z_grasp. Mirrors the smoke's exit gate (sys.exit 0=PASS, 2=FAIL). All
+    geometry/seeds probe-derived (probe_c4_episode_convergence). Convergence H1-validated at the C1 value.
+    """
+    fk_model = scene_info["fk_model"]
+    lb = scene_info["left_body_start"]
+    rb = scene_info["right_body_start"]
+    w3_l, w3_r = lb + EE_BODY_OFFSET, rb + EE_BODY_OFFSET
+
+    n_ep = int(os.environ.get("S6_EPISODE_N", "1"))   # episode count (default 1 for the regression smoke)
+
+    z_grasp = TABLE_HEIGHT + EE_TO_PINCH_TIP_CLOSED + 0.02   # CLOSED caged tip clears the table (+20mm)
+    z_approach = z_grasp + 0.05
+    z_hover = z_grasp + 0.15
+    x_wp, y_wp = 0.30, 0.20
+
+    def tgt(z):
+        return (x_wp, -y_wp, z), (x_wp, y_wp, z)            # (left, right) wrist_3 targets
+
+    seed_l = [3.194257, -1.979768, 1.6, -1.853054, 2.0, -1.518132]    # robust seed (probe_seq_diag margin 3.142)
+    seed_r = [-0.052664, -1.161825, -1.6, -1.288538, -2.0, -1.62346]
+
+    def _triad(bq, w3):
+        q = bq[w3][3:7]
+        qq = wp.quat(float(q[0]), float(q[1]), float(q[2]), float(q[3]))
+        ap = wp.quat_rotate(qq, wp.vec3(0.0, 1.0, 0.0))   # local +Y (approach) -> world
+        sp = wp.quat_rotate(qq, wp.vec3(1.0, 0.0, 0.0))   # local X (finger-sep) -> world
+        return float(-ap[2]), float(abs(sp[0]))           # down_dot(-Z), perp_|x|
+
+    def _snap(keyframes, name, bq):
+        dl, pl = _triad(bq, w3_l)
+        dr, pr = _triad(bq, w3_r)
+        keyframes[name] = {"wrist3_L": [round(float(v), 4) for v in bq[w3_l][:3]],
+                           "wrist3_R": [round(float(v), 4) for v in bq[w3_r][:3]],
+                           "down_dot_L": round(dl, 4), "perp_L": round(pl, 4),
+                           "down_dot_R": round(dr, 4), "perp_R": round(pr, 4)}
+
+    def _ramp_gripper(cur_state, target_qpos):   # scripted-kinematic close/open (NO IK; contacts=None -> geometric pose)
+        gstart = fk_state.joint_q.numpy().copy()
+        for step in range(60):
+            t = (step + 1) / 60
+            fk_jq = fk_state.joint_q.numpy()
+            for k, j in enumerate(GRIPPER_JOINT_RANGE):
+                fk_jq[j] = gstart[j] + (target_qpos[k] - gstart[j]) * t
+                jr = JOINTS_PER_ARM + j
+                fk_jq[jr] = gstart[jr] + (target_qpos[k] - gstart[jr]) * t
+            fk_state.joint_q.assign(fk_jq)
+            newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
+            cur_state = physics_step(model, cur_state, solver, contacts, scene_info)   # step each increment (smoke :2278)
+        return cur_state
+
+    pad_bodies = [lb + b for b in GRIPPER_PAD_BODY_IDX] + [rb + b for b in GRIPPER_PAD_BODY_IDX]
+    open_qpos = [0.0] * len(GRIPPER_JOINT_RANGE)
+
+    # Self-contained init: arm = hover seed, gripper = open (0).
+    fk_jq = fk_state.joint_q.numpy()
+    fk_jq[0:ARM_DOF] = seed_l
+    fk_jq[JOINTS_PER_ARM:JOINTS_PER_ARM + ARM_DOF] = seed_r
+    for j in GRIPPER_JOINT_RANGE:
+        fk_jq[j] = 0.0
+        fk_jq[JOINTS_PER_ARM + j] = 0.0
+    fk_state.joint_q.assign(fk_jq)
+    newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
+
+    state = model.state()
+    for _ in range(10):   # pose the mujoco scene from the hover seed
+        state = physics_step(model, state, solver, contacts, scene_info)
+
+    episodes = []
+    all_ok = True
+
+    for ep in range(n_ep):
+        ok = {}
+        keyframes = {}
+
+        # --- STAGE 1: ELEVATE (hover -> approach -> descend; the next episode re-seeds from post-release) ---
+        state, ok["hover"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                          *tgt(z_hover), label=f"S6EP{ep}-HOVER", converge_mm=5.0, speed_factor=0.2)
+        _snap(keyframes, "hover", state.body_q.numpy())
+        hover_fk_jq = fk_state.joint_q.numpy().copy()   # C3 warm-start source for the post-close LIFT
+        state, ok["approach"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                             *tgt(z_approach), label=f"S6EP{ep}-APPROACH", converge_mm=5.0, speed_factor=0.2)
+        _snap(keyframes, "approach", state.body_q.numpy())
+        state, ok["descend"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                            *tgt(z_grasp), label=f"S6EP{ep}-DESCEND", converge_mm=5.0, speed_factor=0.2)
+        bq_preclose = state.body_q.numpy().copy()
+        _snap(keyframes, "descend_open", bq_preclose)
+        # R1: descend landed wrist_3 at z_grasp -> the caged physics tip clears TABLE+20mm (asset-verified).
+        wrist_z_err_mm = max(abs(float(bq_preclose[w3_l][2]) - z_grasp),
+                             abs(float(bq_preclose[w3_r][2]) - z_grasp)) * 1000.0
+        r1_ok = bool(wrist_z_err_mm < 5.0)
+
+        # --- STAGE 2: CLOSE (scripted-kinematic, no IK) ---
+        state = _ramp_gripper(state, GRIPPER_CLOSE_QPOS)
+        bq_closed = state.body_q.numpy().copy()
+        _snap(keyframes, "closed", bq_closed)
+
+        # --- STAGE 3: RELEASE (LIFT holding closed via C3/M1 hover-arm warmstart, then scripted OPEN) ---
+        lift_warmstart = fk_state.joint_q.numpy().copy()
+        lift_warmstart[0:ARM_DOF] = hover_fk_jq[0:ARM_DOF]
+        lift_warmstart[JOINTS_PER_ARM:JOINTS_PER_ARM + ARM_DOF] = hover_fk_jq[JOINTS_PER_ARM:JOINTS_PER_ARM + ARM_DOF]
+        state, ok["lift"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                         *tgt(z_hover), label=f"S6EP{ep}-LIFT", converge_mm=5.0, speed_factor=0.2,
+                                         warmstart_jq=lift_warmstart)
+        bq_lift = state.body_q.numpy().copy()
+        _snap(keyframes, "lift", bq_lift)
+        state = _ramp_gripper(state, open_qpos)   # release (kinematic open)
+        _snap(keyframes, "released", state.body_q.numpy())
+
+        # --- MECHANICAL GATES (no success/retention field, H2; same class as the smoke asserts) ---
+        moves_ok = bool(ok.get("hover") and ok.get("approach") and ok.get("descend") and ok.get("lift"))
+        dd_l, pp_l = _triad(bq_lift, w3_l)
+        dd_r, pp_r = _triad(bq_lift, w3_r)
+        triad_ok = bool(dd_l > 0.99 and dd_r > 0.99 and pp_l > 0.99 and pp_r > 0.99)
+        pad_disp = min(float(np.linalg.norm(bq_closed[p][:3] - bq_preclose[p][:3])) for p in pad_bodies) * 1000.0
+        pad_ok = bool(pad_disp > 20.0)
+        jq = state.joint_q.numpy()
+        jqd = state.joint_qd.numpy()
+        finite = bool(np.all(np.isfinite(jq)) and np.all(np.isfinite(bq_lift)))
+        qvel_ok = bool(float(np.max(np.abs(jqd))) < 100.0)
+        w2_margin = float(min(abs(abs(jq[4]) - np.pi / 2), abs(abs(jq[JOINTS_PER_ARM + 4]) - np.pi / 2)))
+        margin_ok = bool(w2_margin >= 3.0)
+        kf_nondegen = bool(abs(keyframes["hover"]["wrist3_L"][2] - keyframes["descend_open"]["wrist3_L"][2]) > 0.01)
+        episode_ok = bool(moves_ok and triad_ok and pad_ok and finite and qvel_ok and margin_ok and r1_ok and kf_nondegen)
+        all_ok = all_ok and episode_ok
+        episodes.append({"ep": ep, "episode_ok": episode_ok, "moves_ok": moves_ok, "triad_ok": triad_ok,
+                         "pad_disp_mm": round(pad_disp, 2), "pad_ok": pad_ok, "finite": finite, "qvel_ok": qvel_ok,
+                         "w2_margin_rad": round(w2_margin, 3), "margin_ok": margin_ok,
+                         "wrist_z_err_mm": round(wrist_z_err_mm, 3), "r1_ok": r1_ok, "kf_nondegen": kf_nondegen,
+                         "keyframes": keyframes})
+        print(f"  [S6_EPISODE] ep{ep}: episode_ok={episode_ok} moves={moves_ok} triad={triad_ok} "
+              f"pad_disp={pad_disp:.1f}mm(>20={pad_ok}) margin={w2_margin:.3f}(>=3={margin_ok}) "
+              f"wrist_z_err={wrist_z_err_mm:.2f}mm(<5={r1_ok}) finite={finite} qvel_ok={qvel_ok}")
+
+    if output_dir:
+        try:
+            os.makedirs(output_dir, exist_ok=True)
+            with open(os.path.join(output_dir, "s6_episode.json"), "w") as f:
+                json.dump({"all_ok": all_ok, "n_ep": n_ep, "z_grasp": round(z_grasp, 6),
+                           "z_hover": round(z_hover, 6), "episodes": episodes}, f, indent=2)
+            print(f"  [S6_EPISODE] result -> {os.path.join(output_dir, 's6_episode.json')}")
+        except Exception as e:  # noqa: BLE001 (diagnostic dump must not fail the gate)
+            print(f"  [S6_EPISODE] (result dump skipped: {e})")
+
+    print(f"  [S6_EPISODE] all_ok={all_ok} over {n_ep} episode(s) "
+          f"({'PASS -- mujoco episode loop (elevate->close->release) runs' if all_ok else 'FAIL'})")
+    sys.exit(0 if all_ok else 2)
 
 
 def _run_mujoco_tracking_smoke(model, solver, contacts, scene_info, fk_state, n_frames=60):
@@ -2724,6 +2912,12 @@ def main():
             # K2 tracking gate below UNCHANGED). sys.exit(0/2). (debate A3/H3; no new CLI arg, debate alt#5)
             _run_mujoco_ik_motion_smoke(model, solver, contacts, scene_info, fk_state,
                                         output_dir=args.output_dir)
+        elif os.environ.get("S6_EPISODE") == "1":
+            # C4 (R-S6.2): dual-arm episode loop (elevate->close->release) on the mujoco backend. Placed
+            # AFTER the S6_IK_MOTION_SMOKE elif (deterministic precedence if both set) and BEFORE the K2
+            # default else, so K2 + S6-smoke dispatch stay UNCHANGED. sys.exit(0/2). --no-cable infra.
+            _run_mujoco_episode(model, solver, contacts, scene_info, fk_state,
+                                output_dir=args.output_dir)
         else:
             _run_mujoco_tracking_smoke(model, solver, contacts, scene_info, fk_state, n_frames=60)
         return  # both smokes sys.exit(); this return is a safety net
