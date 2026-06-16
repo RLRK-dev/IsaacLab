@@ -65,6 +65,10 @@ from task_config import (  # noqa: E402
     GRIPPER_JOINT_RANGE, GRIPPER_PAD_BODY_IDX, GRIPPER_CLOSE_QPOS, ARM_DOF, EE_TO_PINCH_TIP_CLOSED,
     STEPS_PER_CM, MAX_MOVE_STEPS, SETTLE_STEPS,
     GROOVE_BODIES_MIN,
+    # R-S6.6 (S6_GRASP actuated grasp, env-gated): gripper POSITION-driver + S5 contact-family SSOT.
+    GRIPPER_DRIVER_JOINT_IDX, GRIPPER_DRIVER_OPEN_RAD, GRIPPER_DRIVER_CLOSE_RAD,
+    GRIPPER_SERVO_TARGET_KE, GRIPPER_SERVO_TARGET_KD, GRIPPER_DRIVER_EFFORT_LIMIT_NM,
+    MUJOCO_CONTACT_CONDIM, MUJOCO_PAD_ROLL_FRICTION, MUJOCO_PAD_SOLREF,
 )
 
 # ---------------------------------------------------------------------------
@@ -905,7 +909,7 @@ def add_revolute_cable(builder, start_pos, direction=(0, 1, 0)):
     return body_ids, joint_ids, (shape_start, shape_end)
 
 
-def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vbd"):
+def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vbd", grasp_actuation=False):
     """Build the full Newton scene for VBD Rod architecture.
 
     Kinematic robot bodies (positions from FK model, no joints).
@@ -918,6 +922,12 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
     probe validated, with REAL arm masses (inv_mass NOT zeroed) and the cable/flag passes skipped.
     Uses the LOCAL ``solver_backend`` (not the task_config constant) so the guards can't diverge
     from the build (§28 #1).
+
+    ``grasp_actuation`` (R-S6.6 CHANGE 2/3, S6_GRASP env-gate): default ``False`` keeps the build
+    byte-identical; ``True`` (mujoco only) additively wires the gripper POSITION drivers + restores
+    the 4-bar connect equalities + the build-time S5 contact families (condim=6 / rolling friction)
+    so the gripper can dynamically GRASP the cable (the negative PAD_SOLREF is poked post-make_solver
+    by :func:`_wire_s6_grasp_solref`).
     """
     builder = newton.ModelBuilder(gravity=GRAVITY)
     floor_shape_idx = builder.add_ground_plane()
@@ -962,8 +972,16 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
         clip_shape_indices.append(idx)
     print(f"  [SCENE] Clip V-groove at ({cx}, {cy}, {cz}), 5 parts")
 
+    # R-S6.6: pad collision-shape indices (populated in the mujoco A-1 pass; [] on the VBD path).
+    pad_shape_idx = []
+
     # Robot arms: VBD = jointless kinematic bodies (FK body_q); MuJoCo = articulated UR5e+Robotiq.
     if solver_backend == "mujoco":
+        if grasp_actuation:
+            # R-S6.6: warm-register the SHAPE custom attrs (mujoco:condim) before finalize so put_model
+            # bakes condim into BOTH mj_model and mjw_model (add_revolute_cable also calls this; the
+            # call is idempotent and covers the pad shapes added below).
+            SolverMuJoCo.register_custom_attributes(builder)
         # Option-E Opt-1 (SC2b-part2, D-Opt1-1): articulated UR5e+Robotiq per arm via the probe-
         # validated add_mjcf recipe (Robotiq <tendon> stripped so SolverMuJoCo constructs; the
         # _init_tendons OOB is avoided). S4a (D-S4a-3): contacts are now ENABLED for the cable, so
@@ -990,6 +1008,7 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
             lbl = str(_labels[si]) if si < len(_labels) else ""
             if "pad" in lbl.lower():
                 pads_kept += 1
+                pad_shape_idx.append(si)   # R-S6.6: keep pad shape idx for the build-time condim hook
             else:
                 builder.shape_flags[si] = int(newton.ShapeFlags.VISIBLE)
                 arm_cleared += 1
@@ -1038,6 +1057,7 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
     # (S4a D-S4a-4 — CABLE joints are MuJoCo-rejected, solver_mujoco.py:292).
     cable_bodies = []
     cable_joints = []
+    cable_shape_start = cable_shape_end = None   # R-S6.6: defined for the grasp-actuation condim hook
     if use_cable:
         cable_shape_start = builder.shape_count
         cable_half_len = CABLE_SEGMENTS * CABLE_SEG_LEN / 2
@@ -1099,6 +1119,61 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
     print(f"  [SHAPES] Finger collision: BOX×3 per finger (wall+claws), "
           f"{len(all_finger_visual)} finger visual DAE preserved")
 
+    # --- R-S6.6 CHANGE 2/3: S6_GRASP actuation + 4-bar equalities + build-time S5 families (gated) ---
+    # All behind grasp_actuation (default False -> byte-identical). Reuses the validated shipped wiring
+    # (r_s66_full_topo_inspect / r_s66_stage_d_probe; AGENTS.md reuse gate). SSOT-derived indices (I9).
+    grasp_driver_joints = []
+    grasp_connects = []
+    if solver_backend == "mujoco" and grasp_actuation:
+        # POSITION drivers on [6,10,20,24] = GRIPPER_DRIVER_JOINT_IDX + right arm (+JOINTS_PER_ARM).
+        grasp_driver_joints = list(GRIPPER_DRIVER_JOINT_IDX) + [
+            j + JOINTS_PER_ARM for j in GRIPPER_DRIVER_JOINT_IDX]
+        assert grasp_driver_joints == [6, 10, 20, 24], f"S6_GRASP driver index drift: {grasp_driver_joints}"
+        for dof in grasp_driver_joints:
+            builder.joint_target_mode[dof] = int(newton.JointTargetMode.POSITION)
+            builder.joint_target_ke[dof] = GRIPPER_SERVO_TARGET_KE
+            builder.joint_target_kd[dof] = GRIPPER_SERVO_TARGET_KD
+            builder.joint_effort_limit[dof] = GRIPPER_DRIVER_EFFORT_LIMIT_NM
+            builder.joint_target_pos[dof] = GRIPPER_DRIVER_OPEN_RAD   # start OPEN; runner schedules CLOSE
+        # Restore the 4 gripper 4-bar connect equalities (follower<->coupler), derived BY LABEL for both
+        # arms (the shipped XML <connect> loaded with skip_equality_constraints=True). neq==4.
+        _blabel = [str(x) for x in (getattr(builder, "body_label", None) or getattr(builder, "body_key", []))]
+
+        def _bodies_ending(suffix, lo, hi):
+            return [i for i in range(lo, hi) if _blabel[i].endswith(suffix)]
+
+        for (lo, hi) in [(0, BODIES_PER_ARM), (BODIES_PER_ARM, 2 * BODIES_PER_ARM)]:
+            for side in ("right", "left"):
+                fb = _bodies_ending(f"{side}_follower", lo, hi)
+                cb = _bodies_ending(f"{side}_coupler", lo, hi)
+                if fb and cb:
+                    grasp_connects.append((fb[0], cb[0]))
+        for (fb, cbb) in grasp_connects:
+            builder.add_equality_constraint_connect(
+                body1=fb, body2=cbb, anchor=wp.vec3(0.0, 0.0, 0.0),
+                label=f"fourbar_{fb}_{cbb}", enabled=True)
+        # Build-time S5 contact families: condim=6 (mujoco:condim SHAPE custom attr) on pad+cable shapes
+        # + rolling friction (shape_material_mu_rolling) on pads -> baked into BOTH mj_model AND mjw_model
+        # at put_model (the post-construct mj_model poke is GPU-inert, STAGE D). The negative PAD_SOLREF
+        # has no build-time path -> poked post-make_solver (_wire_s6_grasp_solref).
+        _condim_attr = builder.custom_attributes.get("mujoco:condim")
+        assert _condim_attr is not None, "S6_GRASP: mujoco:condim custom attribute not registered"
+        if _condim_attr.values is None:
+            _condim_attr.values = {}
+        _condim_shapes = list(pad_shape_idx)
+        if cable_shape_start is not None:
+            _condim_shapes += list(range(cable_shape_start, cable_shape_end))
+        for si in _condim_shapes:
+            _condim_attr.values[si] = int(MUJOCO_CONTACT_CONDIM)
+        for si in pad_shape_idx:
+            if si < len(builder.shape_material_mu_rolling):
+                builder.shape_material_mu_rolling[si] = float(MUJOCO_PAD_ROLL_FRICTION)
+        print(f"  [S6_GRASP] actuation wired: drivers={grasp_driver_joints} "
+              f"servo(ke={GRIPPER_SERVO_TARGET_KE},kd={GRIPPER_SERVO_TARGET_KD},"
+              f"eff={GRIPPER_DRIVER_EFFORT_LIMIT_NM}) connects={grasp_connects} condim6 on "
+              f"{len(_condim_shapes)} shapes ({len(pad_shape_idx)} pad + cable) "
+              f"rolling={MUJOCO_PAD_ROLL_FRICTION}")
+
     # Color shapes for collision group assignment
     builder.color()
 
@@ -1155,6 +1230,17 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
             f"mujoco joint layout drift: joint_count={model.joint_count} != "
             f"2*JOINTS_PER_ARM + cable joints = {expected}")
 
+    # R-S6.6 CHANGE 2 (I11): in-builder asserts -- the 4 gripper 4-bar connect equalities all register
+    # on the production topology (no rig cable-pins) and the cable<->non-pad filter pairs were built (M1).
+    if solver_backend == "mujoco" and grasp_actuation:
+        _neq = int(getattr(model, "equality_constraint_count", 0) or 0)
+        assert _neq == 4, f"S6_GRASP: 4-bar equalities did not all register: neq={_neq} (want 4)"
+        assert len(grasp_connects) == 4, f"S6_GRASP: expected 4 connect pairs, got {len(grasp_connects)}"
+        if use_cable:
+            assert cable_arm_filters > 0, "S6_GRASP: cable<->non-pad-arm filter pairs missing (M1)"
+        print(f"  [S6_GRASP] in-builder asserts OK: neq={_neq}==4, connects={len(grasp_connects)}, "
+              f"cable<->non-pad filters intact")
+
     # Shape diagnostics
     # (VBD only -- §28 #3: indexes the kinematic-arm finger bodies [7,8]; N/A to the mujoco articulated arm.)
     if solver_backend != "mujoco":
@@ -1202,6 +1288,9 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
         "table_shape_idx": table_idx,
         "clip_shape_indices": clip_shape_indices,
         "solver_backend": solver_backend,
+        "grasp_actuation": grasp_actuation,
+        "pad_shape_idx": pad_shape_idx,
+        "driver_joints": grasp_driver_joints,
     }
     return scene_info
 
@@ -1258,6 +1347,14 @@ def update_kinematic_bodies(physics_state, fk_state, robot_body_count):
 # ---------------------------------------------------------------------------
 _physics_state_buffer = None   # Pre-allocated double-buffer state (created on first call)
 
+# R-S6.6 CHANGE 1: arm-only FK-overwrite index set for the gripper_dynamic path. SSOT-derived from
+# GRIPPER_JOINT_RANGE (M2 -- == the test:1470 finger_coords set {6-13,20-27}); the complement
+# {0-5,14-19} is the arm coords overwritten each substep while the POSITION-actuated gripper stays
+# dynamic. Computed once at import; unused unless a runner sets scene_info["gripper_dynamic"]=True
+# (default False keeps the 5 legacy mujoco consumers byte-identical).
+_GRIPPER_COORDS_BOTH = set(GRIPPER_JOINT_RANGE) | {JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE}
+_ARM_OVERWRITE_IDX = [i for i in range(2 * JOINTS_PER_ARM) if i not in _GRIPPER_COORDS_BOTH]
+
 
 def physics_step(model, state, solver, contacts, scene_info):
     """VBD physics step with kinematic body override (double-buffer pattern).
@@ -1282,6 +1379,7 @@ def physics_step(model, state, solver, contacts, scene_info):
     robot_body_count = scene_info["robot_body_count"]
     vbd_control = scene_info["vbd_control"]
     solver_backend = scene_info.get("solver_backend", "vbd")
+    gripper_dynamic = scene_info.get("gripper_dynamic", False)  # R-S6.6 CHANGE 1 (default False = legacy)
 
     for i in range(SIM_SUBSTEPS):
         if solver_backend == "mujoco":
@@ -1291,8 +1389,15 @@ def physics_step(model, state, solver, contacts, scene_info):
             n = 2 * JOINTS_PER_ARM
             phys_jq = state_0.joint_q.numpy()
             phys_jqd = state_0.joint_qd.numpy()
-            phys_jq[:n] = fk_state.joint_q.numpy()[:n]
-            phys_jqd[:n] = 0.0
+            if gripper_dynamic:
+                # R-S6.6 CHANGE 1: the gripper is a POSITION actuator (S6_GRASP) -> overwrite ONLY the
+                # arm coords ({0-5,14-19}); leave the gripper coords ({6-13,20-27}) DYNAMIC so the servo
+                # drives them via control.joint_target_pos. _ARM_OVERWRITE_IDX is SSOT-derived (M2).
+                phys_jq[_ARM_OVERWRITE_IDX] = fk_state.joint_q.numpy()[_ARM_OVERWRITE_IDX]
+                phys_jqd[_ARM_OVERWRITE_IDX] = 0.0
+            else:
+                phys_jq[:n] = fk_state.joint_q.numpy()[:n]
+                phys_jqd[:n] = 0.0
             state_0.joint_q.assign(phys_jq)
             state_0.joint_qd.assign(phys_jqd)
             state_0.clear_forces()
@@ -2352,6 +2457,247 @@ def _run_mujoco_ik_motion_smoke(model, solver, contacts, scene_info, fk_state, o
     sys.exit(0 if smoke_ok else 2)
 
 
+def _set_gripper_target(control, driver_joints, target_rad):
+    """R-S6.6: schedule the gripper POSITION-servo target by writing ``control.joint_target_pos`` on the
+    driver dofs (the array SolverMuJoCo reads each step, solver_mujoco.py:362/:3606 -- NOT model-level,
+    so a runtime change takes effect). ``model.control()`` seeds it from the build-time OPEN target."""
+    tp = control.joint_target_pos.numpy()
+    for d in driver_joints:
+        tp[d] = float(target_rad)
+    control.joint_target_pos.assign(tp)
+
+
+def _wire_s6_grasp_solref(solver, scene_info):
+    """R-S6.6 CHANGE 3 (post-make_solver): poke the negative ``MUJOCO_PAD_SOLREF`` into BOTH ``mj_model``
+    AND ``mjw_model.geom_solref`` -- the only route, since the negative solref has no build-time path and
+    the ``mj_model``-only poke is GPU-inert (STAGE D). Then run the I11 readback asserts that the SHIPPED
+    wiring reached the GPU-read ``mjw`` arrays: condim==6 on mj AND mjw (pad+cable), solref==PAD_SOLREF on
+    mjw, geom_priority==1 (shipped, H4 -- NOT poked to 0), rolling friction on mj. Reuses the validated
+    ``r_s66_stage_d_solref_derisk`` method (AGENTS.md reuse gate). Returns a readback dict; fail-loud.
+
+    solref is NOTIFY-FRAGILE: ``_update_geom_properties`` (``solver_mujoco.py:6653`` def <- :3471 call <-
+    :3470 SHAPE_PROPERTIES <- :3444 ``notify_model_changed``) re-derives ``geom_solref`` from ke/kd on any
+    SHAPE notify. Durable here ONLY because production issues no post-construct SHAPE notify; R-S7.1
+    (DR / rebuild) must re-poke + re-assert.
+    """
+    import mujoco
+    m = solver.mj_model
+    mjw = getattr(solver, "mjw_model", None)
+    GEOM_CAPSULE = int(mujoco.mjtGeom.mjGEOM_CAPSULE)
+
+    def _mjw_row(field, g):
+        arr = getattr(mjw, field).numpy()
+        if arr.ndim == 1:            # (ngeom,)  e.g. geom_condim
+            return arr[g]
+        if arr.shape[0] == 1:        # (1, ngeom[, k])  leading world axis
+            return arr[0][g]
+        return arr[g]                # (ngeom, k)  e.g. geom_solref
+
+    pad_geoms, cable_geoms = [], []
+    for g in range(m.ngeom):
+        gname = (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or "").lower()
+        bid = int(m.geom_bodyid[g])
+        bname = (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, bid) or "").lower()
+        if "pad" in (gname + bname):
+            pad_geoms.append(g)
+        elif int(m.geom_type[g]) == GEOM_CAPSULE:
+            cable_geoms.append(g)
+    assert pad_geoms, "S6_GRASP: no pad geoms located in mj_model"
+
+    # Poke the negative PAD_SOLREF into BOTH mj_model and mjw_model (the GPU-read array).
+    pad_solref = np.array(MUJOCO_PAD_SOLREF, dtype=m.geom_solref.dtype)
+    for g in pad_geoms:
+        m.geom_solref[g] = pad_solref
+    mjw_solref_rb = None
+    if mjw is not None:
+        arr = mjw.geom_solref.numpy()
+        val = np.array(MUJOCO_PAD_SOLREF, dtype=arr.dtype)
+        if arr.ndim == 3 and arr.shape[0] == 1:
+            for g in pad_geoms:
+                arr[0, g, :] = val
+        else:
+            for g in pad_geoms:
+                arr[g, :] = val
+        mjw.geom_solref.assign(arr)
+        mjw_solref_rb = [float(x) for x in np.asarray(_mjw_row("geom_solref", pad_geoms[0])).ravel()[:2]]
+
+    # I11 readbacks + fail-loud asserts.
+    want = int(MUJOCO_CONTACT_CONDIM)
+    mj_pad_condim = int(m.geom_condim[pad_geoms[0]])
+    mj_cable_condim = int(m.geom_condim[cable_geoms[0]]) if cable_geoms else None
+    mjw_pad_condim = int(np.asarray(_mjw_row("geom_condim", pad_geoms[0])).ravel()[0]) if mjw is not None else None
+    mjw_cable_condim = (int(np.asarray(_mjw_row("geom_condim", cable_geoms[0])).ravel()[0])
+                        if (cable_geoms and mjw is not None) else None)
+    mj_priority = int(m.geom_priority[pad_geoms[0]]) if hasattr(m, "geom_priority") else None
+    mj_roll = float(m.geom_friction[pad_geoms[0]][2])
+
+    assert mj_pad_condim == want, f"S6_GRASP: mj pad condim={mj_pad_condim}!={want}"
+    if mj_cable_condim is not None:
+        assert mj_cable_condim == want, f"S6_GRASP: mj cable condim={mj_cable_condim}!={want}"
+    if mjw is not None:
+        assert mjw_pad_condim == want, f"S6_GRASP: mjw pad condim={mjw_pad_condim}!={want} (GPU-inert!)"
+        if mjw_cable_condim is not None:
+            assert mjw_cable_condim == want, f"S6_GRASP: mjw cable condim={mjw_cable_condim}!={want}"
+        assert (mjw_solref_rb is not None
+                and abs(mjw_solref_rb[0] - MUJOCO_PAD_SOLREF[0]) < 1e-3
+                and abs(mjw_solref_rb[1] - MUJOCO_PAD_SOLREF[1]) < 1e-3), \
+            f"S6_GRASP: mjw solref={mjw_solref_rb}!={list(MUJOCO_PAD_SOLREF)} (GPU-inert!)"
+    assert mj_priority == 1, f"S6_GRASP: pad geom_priority={mj_priority}!=1 (H4: keep shipped, don't poke 0)"
+    assert abs(mj_roll - float(MUJOCO_PAD_ROLL_FRICTION)) < 1e-6, \
+        f"S6_GRASP: pad rolling friction={mj_roll}!={MUJOCO_PAD_ROLL_FRICTION}"
+
+    rb = {"pad_geoms": len(pad_geoms), "cable_geoms": len(cable_geoms),
+          "mj_pad_condim": mj_pad_condim, "mjw_pad_condim": mjw_pad_condim,
+          "mj_cable_condim": mj_cable_condim, "mjw_cable_condim": mjw_cable_condim,
+          "mjw_solref": mjw_solref_rb, "mj_priority": mj_priority, "mj_roll": mj_roll}
+    print(f"  [S6_GRASP] solref poked + I11 asserts OK: pad_geoms={len(pad_geoms)} "
+          f"condim mj_pad={mj_pad_condim}/mjw_pad={mjw_pad_condim} mj_cable={mj_cable_condim}/"
+          f"mjw_cable={mjw_cable_condim} solref_mjw={mjw_solref_rb} priority={mj_priority} roll={mj_roll}")
+    return rb
+
+
+def _run_mujoco_grasp_episode(model, solver, contacts, scene_info, fk_state, output_dir=None):
+    """R-S6.6 (env-gate S6_GRASP=1): ACTUATED dual-arm grasp episode on the mujoco backend.
+
+    The S6_GRASP path runs the gripper as a POSITION-actuated DYNAMIC joint (not a kinematic pose):
+    physics_step excludes the gripper coords from the FK-overwrite (``gripper_dynamic=True``) for EVERY
+    phase ("全エピソード dynamic"), the 4-bar connect equalities + servo drivers are wired in build_scene,
+    the build-time S5 contact families (condim=6 + rolling) + the post-make_solver PAD_SOLREF poke are
+    applied, and the close is driven by scheduling ``control.joint_target_pos`` OPEN(approach/descend) ->
+    CLOSE(grasp/hold/lift) -- this REPLACES the scripted ``_ramp_gripper`` on THIS path only (H3; the 5
+    legacy consumers keep ``gripper_dynamic=False`` = kinematic).
+
+    CONSERVATISM / SCOPE (CPU 0-GPU): this runner BANKS the MECHANISM only -- the actuated channel drives
+    the gripper, the wiring reaches the mjw GPU arrays (:func:`_wire_s6_grasp_solref` I11 asserts), and the
+    production topology steps FINITE with bounded qvel. The literal table-cable grip MAGNITUDE, contact
+    ENGAGEMENT against the descended cable, and retention-through-lift are NON-conservative on CPU and are
+    DEFERRED to the in-chain GPU HARD gate (R-S7.1): grip force vs like-for-like 47.3N (task_config:303 is
+    a fixed-harness reaction, compare in-grip per :300-302), mujoco-core #3328 tangential creep
+    (LL-Newton:696-702), GPU contact-buffer adequacy, mujoco_warp<->MuJoCo-C parity, solref durability
+    under CUDA capture. Emits ``[S6_GRASP]`` metric lines and ``sys.exit``\\ s (0 = PASS, 2 = FAIL).
+    """
+    assert scene_info.get("grasp_actuation"), "S6_GRASP runner needs build_scene(grasp_actuation=True)"
+    assert scene_info.get("cable_bodies"), "S6_GRASP runner needs a cable (run WITHOUT --no-cable)"
+    fk_model = scene_info["fk_model"]
+    control = scene_info["vbd_control"]
+    driver_joints = scene_info["driver_joints"]
+
+    # Whole-episode dynamic gripper: physics_step excludes the gripper coords for EVERY phase. Start OPEN.
+    scene_info["gripper_dynamic"] = True
+    _set_gripper_target(control, driver_joints, GRIPPER_DRIVER_OPEN_RAD)
+
+    def _ncon():
+        try:
+            return int(solver.mj_data.ncon)
+        except Exception:
+            return -1
+
+    # Reuse the probe-derived geometry/seeds of _run_mujoco_ik_motion_smoke (proven to converge). NOTE the
+    # close here is FREE-AIR, NOT a cable grasp: the arm descends to the cable X-line (X=GRASP_X=0.30) but
+    # z_grasp keeps the CLOSED pinch-tip +20mm ABOVE the table (the OPEN pads higher still, clear of the
+    # cable at z~0.804), AND the LEFT target Y=-0.20 is OFF the cable Y span ([-0.15,0.45]). Evidence: the
+    # driver reaches its free-air target (NO cable-loaded stall) and cable_z stays ~0.804 unchanged. Only
+    # the actuated-channel MECHANISM (driver travel) is banked; contact ENGAGEMENT (lands-on-cable,
+    # OPEN-vs-CLOSED tip-drop, lateral capture) is GPU-deferred to R-S7.1. z/Y/seeds are intentionally NOT
+    # tuned for engagement (that is the GPU gate's job).
+    z_grasp = TABLE_HEIGHT + EE_TO_PINCH_TIP_CLOSED + 0.02   # CLOSED tip clears the table +20mm (free-air)
+    z_approach = z_grasp + 0.05
+    z_hover = z_grasp + 0.15
+    x_wp, y_wp = 0.30, 0.20
+
+    def tgt(z):
+        return (x_wp, -y_wp, z), (x_wp, y_wp, z)
+
+    seed_l = [3.194257, -1.979768, 1.6, -1.853054, 2.0, -1.518132]
+    seed_r = [-0.052664, -1.161825, -1.6, -1.288538, -2.0, -1.62346]
+
+    fk_jq = fk_state.joint_q.numpy()
+    fk_jq[0:ARM_DOF] = seed_l
+    fk_jq[JOINTS_PER_ARM:JOINTS_PER_ARM + ARM_DOF] = seed_r
+    for j in GRIPPER_JOINT_RANGE:
+        fk_jq[j] = 0.0
+        fk_jq[JOINTS_PER_ARM + j] = 0.0
+    fk_state.joint_q.assign(fk_jq)
+    newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
+
+    state = model.state()
+    for _ in range(10):   # settle the posed scene (gripper held OPEN by the servo)
+        state = physics_step(model, state, solver, contacts, scene_info)
+    drv_open = [float(state.joint_q.numpy()[d]) for d in driver_joints]
+
+    ok = {}
+    state, ok["hover"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                      *tgt(z_hover), label="GRASP-HOVER", converge_mm=5.0, speed_factor=0.2)
+    hover_fk_jq = fk_state.joint_q.numpy().copy()
+    state, ok["approach"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                         *tgt(z_approach), label="GRASP-APPROACH", converge_mm=5.0, speed_factor=0.2)
+    state, ok["descend"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                        *tgt(z_grasp), label="GRASP-DESCEND", converge_mm=5.0, speed_factor=0.2)
+
+    # ACTUATED CLOSE (replaces the scripted _ramp_gripper, H3): schedule the driver target -> CLOSE and let
+    # the POSITION servo + 4-bar equality drive the DYNAMIC gripper shut. This is a FREE-AIR close (see the
+    # geometry note above) -- it banks the actuated-channel MECHANISM, NOT a grip on the cable.
+    _set_gripper_target(control, driver_joints, GRIPPER_DRIVER_CLOSE_RAD)
+    ncon_close = 0
+    for _ in range(120):
+        state = physics_step(model, state, solver, contacts, scene_info)
+        ncon_close = max(ncon_close, _ncon())
+    drv_closed = [float(state.joint_q.numpy()[d]) for d in driver_joints]
+
+    # IK LIFT with the gripper held CLOSE (dynamic; target stays CLOSE). Re-seed the arm IK from the
+    # converged HOVER config (R-S6.2 C3/M1); arm-IK has zero Jacobian on the gripper coords.
+    lift_warmstart = fk_state.joint_q.numpy().copy()
+    lift_warmstart[0:ARM_DOF] = hover_fk_jq[0:ARM_DOF]
+    lift_warmstart[JOINTS_PER_ARM:JOINTS_PER_ARM + ARM_DOF] = hover_fk_jq[JOINTS_PER_ARM:JOINTS_PER_ARM + ARM_DOF]
+    state, ok["lift"] = ik_move_both(model, state, scene_info, solver, contacts,
+                                     *tgt(z_hover), label="GRASP-LIFT", converge_mm=5.0, speed_factor=0.2,
+                                     warmstart_jq=lift_warmstart)
+
+    # --- ASSERTS: MECHANISM (banked, CPU) only; grip magnitude + retention DEFERRED to GPU (R-S7.1) ---
+    jq = state.joint_q.numpy()
+    jqd = state.joint_qd.numpy()
+    finite = bool(np.all(np.isfinite(jq)) and np.all(np.isfinite(state.body_q.numpy())))
+    qvel_max = float(np.max(np.abs(jqd))) if finite else float("inf")
+    qvel_ok = bool(finite and qvel_max < 100.0)
+    moves_ok = bool(ok.get("hover") and ok.get("approach") and ok.get("descend") and ok.get("lift"))
+    # actuation MECHANISM: every driver moved from ~OPEN(0) toward CLOSE under the servo (the dynamic
+    # channel works). NOT a grip-force / grasp-success claim (GPU-deferred).
+    close_travel = min((drv_closed[k] - drv_open[k]) for k in range(len(driver_joints))) if finite else 0.0
+    actuated_ok = bool(finite and close_travel > 0.05)
+    smoke_ok = bool(finite and qvel_ok and moves_ok and actuated_ok)
+
+    if output_dir:
+        try:
+            os.makedirs(output_dir, exist_ok=True)
+            with open(os.path.join(output_dir, "s6_grasp_episode.json"), "w") as f:
+                json.dump({"smoke_ok": smoke_ok, "finite": finite, "qvel_max": round(qvel_max, 4),
+                           "qvel_ok": qvel_ok, "moves_ok": moves_ok, "actuated_ok": actuated_ok,
+                           "driver_open": [round(v, 4) for v in drv_open],
+                           "driver_closed": [round(v, 4) for v in drv_closed],
+                           "close_travel_rad": round(close_travel, 4),
+                           "close_target_rad": float(GRIPPER_DRIVER_CLOSE_RAD),
+                           "ncon_close_max": ncon_close,
+                           "ncon_close_note": "topology contacts (e.g. cable<->table), NOT cable-grip; "
+                                              "free-air close, engagement GPU-deferred (R-S7.1)",
+                           "scope": "MECHANISM banked (CPU); grip magnitude + retention GPU-deferred (R-S7.1)"},
+                          f, indent=2)
+            print(f"  [S6_GRASP] metrics -> {os.path.join(output_dir, 's6_grasp_episode.json')}")
+        except Exception as e:  # noqa: BLE001 (diagnostic dump must not fail the gate)
+            print(f"  [S6_GRASP] (metrics dump skipped: {e})")
+
+    print(f"  [S6_GRASP] moves_ok={moves_ok} (hover={ok.get('hover')},approach={ok.get('approach')},"
+          f"descend={ok.get('descend')},lift={ok.get('lift')}) finite={finite} qvel_max={qvel_max:.3f} "
+          f"(<100={qvel_ok})")
+    print(f"  [S6_GRASP] driver open={['%.3f'%v for v in drv_open]} -> closed={['%.3f'%v for v in drv_closed]} "
+          f"(target {GRIPPER_DRIVER_CLOSE_RAD}) close_travel={close_travel:.4f}rad actuated_ok={actuated_ok} "
+          f"ncon_close_max={ncon_close} (topology contacts, NOT cable-grip; free-air close, engagement GPU-deferred)")
+    print(f"  [S6_GRASP] smoke_ok={smoke_ok} "
+          f"({'PASS -- actuated dynamic gripper drives the close; MECHANISM banked (CPU)' if smoke_ok else 'FAIL'}). "
+          f"SCOPE: grip MAGNITUDE + contact engagement + retention-through-lift are NON-conservative on CPU -> "
+          f"DEFERRED to the in-chain GPU HARD gate (R-S7.1).")
+    sys.exit(0 if smoke_ok else 2)
+
+
 def _run_mujoco_episode(model, solver, contacts, scene_info, fk_state, output_dir=None):
     """C4 (R-S6.2): dual-arm episode-level stepping loop on the mujoco backend (env-gate S6_EPISODE=1).
 
@@ -2868,9 +3214,12 @@ def main():
     print(f"  [FK] Initial joint_q set from URDF home config, fingers open={FINGER_OPEN_POS*1000:.1f}mm")
 
     # Build physics scene (VBD cable + kinematic robot bodies positioned from FK)
+    # R-S6.6 CHANGE 4 (env-gate): S6_GRASP=1 (mujoco only) wires the actuated-grasp path additively;
+    # OFF leaves the whole build + the 5 legacy consumers byte-identical.
+    s6_grasp = (solver_backend == "mujoco" and os.environ.get("S6_GRASP") == "1")
     print("[BUILD] Building physics scene...")
     scene_info = build_scene(use_cable=use_cable, fk_model=fk_model, fk_state=fk_state,
-                             solver_backend=solver_backend)
+                             solver_backend=solver_backend, grasp_actuation=s6_grasp)
     model = scene_info["model"]
     cable_bodies = scene_info.get("cable_bodies", [])
 
@@ -2900,11 +3249,21 @@ def main():
                          enable_cable_contacts=(solver_backend == "mujoco" and use_cable))
     print(f"  [SOLVER] {solver_backend} solver created via make_solver")
 
+    # R-S6.6 CHANGE 3: poke the negative PAD_SOLREF into mj+mjw + run the I11 readback asserts (the
+    # negative solref has no build-time path; the mj-only poke is GPU-inert). S6_GRASP-gated.
+    if s6_grasp:
+        _wire_s6_grasp_solref(solver, scene_info)
+
     # Option-E mujoco smokes (the standalone gates; the full VBD episode below is NOT ported, S5-S7):
     # --no-cable -> the Opt-1 SC2b-part2 joint_q tracking smoke (K2 false-green gate, unchanged);
     # with cable -> the S4a cable-settle + curl-restore smoke (D-S4a-5, B2/B3 posture). Both exit.
     if solver_backend == "mujoco":
-        if use_cable:
+        if s6_grasp:
+            # R-S6.6: actuated dynamic-gripper grasp episode (env-gate S6_GRASP=1, needs cable). Placed
+            # FIRST so OFF dispatch (the 4 existing branches) stays byte-identical. sys.exit(0/2).
+            _run_mujoco_grasp_episode(model, solver, contacts, scene_info, fk_state,
+                                      output_dir=args.output_dir)
+        elif use_cable:
             _run_mujoco_cable_settle_smoke(model, solver, contacts, scene_info, fk_state,
                                            output_dir=args.output_dir)
         elif os.environ.get("S6_IK_MOTION_SMOKE") == "1":
