@@ -81,7 +81,7 @@ GRAVITY = -9.81
 VBD_ITERATIONS = 20           # VBD constraint solver iterations per substep
 
 # Clip position — from task_config SSOT
-from task_config import CLIP1_X, CLIP1_Y, CLIP1_Z
+from task_config import CLIP1_X, CLIP1_Y, CLIP1_Z, CLIP_POSITIONS
 
 # Franka
 FRANKA_URDF = os.path.normpath(os.path.join(
@@ -580,7 +580,8 @@ def set_scene_colors(recorder, scene_info):
     # Table (world-attached, explicit index from build_scene)
     table_idx = scene_info.get("table_shape_idx")
     if table_idx is not None:
-        shape_colors[table_idx] = COLOR_TABLE
+        for ti in table_idx:                 # table_shape_idx is a LIST (1 box = solid; 2 = WIDE-VOID slot)
+            shape_colors[ti] = COLOR_TABLE
 
     # Clip V-groove parts (world-attached, explicit indices)
     for clip_idx in scene_info.get("clip_shape_indices", []):
@@ -909,7 +910,8 @@ def add_revolute_cable(builder, start_pos, direction=(0, 1, 0)):
     return body_ids, joint_ids, (shape_start, shape_end)
 
 
-def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vbd", grasp_actuation=False):
+def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vbd", grasp_actuation=False,
+                grasp_y=None):
     """Build the full Newton scene for VBD Rod architecture.
 
     Kinematic robot bodies (positions from FK model, no joints).
@@ -946,14 +948,53 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
         table_cfg.kd = 100.0
     table_cfg.mu = 1.0
     table_cfg.gap = 0.002
-    table_xform = wp.transform((0.3, -0.05, TABLE_HEIGHT - table_half[2]), wp.quat_identity())
-    table_idx = builder.add_shape_box(
-        body=-1,
-        hx=table_half[0], hy=table_half[1], hz=table_half[2],
-        xform=table_xform,
-        cfg=table_cfg,
-    )
-    print(f"  [SCENE] Table at z={TABLE_HEIGHT} (BOX primitive)")
+    table_cx, table_cy, table_cz = 0.3, -0.05, TABLE_HEIGHT - table_half[2]
+    table_xform = wp.transform((table_cx, table_cy, table_cz), wp.quat_identity())
+    # `table_idx` is ALWAYS a LIST of shape indices (1 box = solid; 2 boxes = WIDE-VOID slot). The 3
+    # consumers (color :scene_info reader, ground_planes filter [VBD branch], scene_info store) handle a list.
+    if grasp_actuation:
+        # R-S7.1 (A) STEP 2: the grasp+lift needs a WIDE table VOID so the gripper's lower flanks reach UNDER
+        # the cable. Split the table into 2 boxes with a slot under the grasps; the cable SPANS the void,
+        # supported by table on BOTH Y-sides (no droop). Void Y = the WIDE grasps ± 16mm. Proven:
+        # FAITHFUL_SLOT_15 48mm RIGHT-arm lift (D14 2-box). The void is CARVED from the real table extent
+        # (Y_CEIL = table edge +0.30 for the CENTERED cable; D14's 0.50 was the old overhang-era extension).
+        y_floor, y_ceil = table_cy - table_half[1], table_cy + table_half[1]   # [-0.40, +0.30]
+        # void Y bracket: default (grasp_y=None) = the EXACT C1 expression (byte-identical -> preserves the
+        # BANKED single-arm RIGHT C1 lift); grasp_y given (e.g. 0 = symmetric centered, R-S7.1 B) re-centers
+        # the void on grasp_y with the SAME half-width (= GRIP_HALF_SPAN + 16mm).
+        if grasp_y is None:
+            slot_lo, slot_hi = WIDE_LEFT_Y - 0.016, WIDE_RIGHT_Y + 0.016        # [0.09, 0.21] under the C1 grasps
+        else:
+            void_half = (WIDE_RIGHT_Y - WIDE_LEFT_Y) / 2.0 + 0.016              # GRIP_HALF_SPAN + 16mm margin
+            slot_lo, slot_hi = grasp_y - void_half, grasp_y + void_half
+        cyl, hyl = (y_floor + slot_lo) / 2.0, (slot_lo - y_floor) / 2.0
+        cyh, hyh = (slot_hi + y_ceil) / 2.0, (y_ceil - slot_hi) / 2.0
+        # R-S7.1 (human 2026-06-20): localize the slot to the gripper X-extent, NOT the full table width.
+        # Measured open-descend gripper footprint into the slot = X[0.249,0.351] (101mm) about GRASP_X=0.30.
+        # Keep the void only at X[slot_x_lo, slot_x_hi] (±66mm = 51mm half-extent + 15mm clearance) and FILL the
+        # void elsewhere with 2 more boxes (cable at X=0.30 still bridges the void Y-range; the gripper still
+        # descends with 15mm/side X clearance). table_idx stays a LIST (now 4) -> the 3 consumers are list-safe.
+        x_floor, x_ceil = table_cx - table_half[0], table_cx + table_half[0]   # [-0.05, 0.65]
+        slot_x_lo, slot_x_hi = table_cx - 0.066, table_cx + 0.066              # [0.234, 0.366]
+        cyv, hyv = (slot_lo + slot_hi) / 2.0, (slot_hi - slot_lo) / 2.0        # void Y center/half
+        cxc, hxc = (x_floor + slot_x_lo) / 2.0, (slot_x_lo - x_floor) / 2.0    # -X void fill
+        cxd, hxd = (slot_x_hi + x_ceil) / 2.0, (x_ceil - slot_x_hi) / 2.0      # +X void fill
+        table_idx = [
+            builder.add_shape_box(body=-1, hx=table_half[0], hy=hyl, hz=table_half[2],
+                                  xform=wp.transform((table_cx, cyl, table_cz), wp.quat_identity()), cfg=table_cfg),
+            builder.add_shape_box(body=-1, hx=table_half[0], hy=hyh, hz=table_half[2],
+                                  xform=wp.transform((table_cx, cyh, table_cz), wp.quat_identity()), cfg=table_cfg),
+            builder.add_shape_box(body=-1, hx=hxc, hy=hyv, hz=table_half[2],
+                                  xform=wp.transform((cxc, cyv, table_cz), wp.quat_identity()), cfg=table_cfg),
+            builder.add_shape_box(body=-1, hx=hxd, hy=hyv, hz=table_half[2],
+                                  xform=wp.transform((cxd, cyv, table_cz), wp.quat_identity()), cfg=table_cfg),
+        ]
+        print(f"  [SCENE] Table → 4 boxes (S6_GRASP slot localized to gripper X, grasp_y={'C1-default' if grasp_y is None else grasp_y}): "
+              f"-Y[{y_floor:.2f},{slot_lo:.3f}] +Y[{slot_hi:.3f},{y_ceil:.2f}] VOID Y[{slot_lo:.3f},{slot_hi:.3f}] X[{slot_x_lo:.3f},{slot_x_hi:.3f}]")
+    else:
+        table_idx = [builder.add_shape_box(body=-1, hx=table_half[0], hy=table_half[1], hz=table_half[2],
+                                           xform=table_xform, cfg=table_cfg)]
+        print(f"  [SCENE] Table at z={TABLE_HEIGHT} (BOX primitive, solid)")
 
     # Clip V-groove (visual-only)
     cx, cy, cz = CLIP1_X, CLIP1_Y, CLIP1_Z
@@ -1028,7 +1069,7 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
         all_finger_visual = set(left_fv + right_fv)
 
         # Contact filtering for arm bodies
-        ground_planes = [floor_shape_idx, table_idx]
+        ground_planes = [floor_shape_idx, *table_idx]   # table_idx is a LIST (1 solid box / 2 slot boxes)
         filter_count = 0
         for arm_label, shape_start, shape_end, body_start in [
             ("left", left_shape_start, left_shape_end, left_body_start),
@@ -1061,7 +1102,11 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
     if use_cable:
         cable_shape_start = builder.shape_count
         cable_half_len = CABLE_SEGMENTS * CABLE_SEG_LEN / 2
-        cable_y_start = CLIP1_Y - cable_half_len
+        # Center the cable on the CLIP-ARRAY center (midpoint of the first and last clips), NOT CLIP1_Y (the
+        # +Y-most clip) — otherwise the cable Y[-0.15, +0.45] overhangs the table +Y edge (+0.30) by 150mm.
+        # Array center = (C1.y + C5.y)/2 = 0.0 → cable Y[-0.30, +0.30], within table Y[-0.40, +0.30].
+        clip_y_center = (CLIP_POSITIONS[0][1] + CLIP_POSITIONS[-1][1]) / 2
+        cable_y_start = clip_y_center - cable_half_len
         cable_start = (GRASP_X, cable_y_start, TABLE_HEIGHT + CABLE_RADIUS)
         if solver_backend == "mujoco":
             cable_bodies, cable_joints, _cable_sr = add_revolute_cable(
@@ -1124,6 +1169,7 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
     # (r_s66_full_topo_inspect / r_s66_stage_d_probe; AGENTS.md reuse gate). SSOT-derived indices (I9).
     grasp_driver_joints = []
     grasp_connects = []
+    grasp_mirrors = []
     if solver_backend == "mujoco" and grasp_actuation:
         # POSITION drivers on [6,10,20,24] = GRIPPER_DRIVER_JOINT_IDX + right arm (+JOINTS_PER_ARM).
         grasp_driver_joints = list(GRIPPER_DRIVER_JOINT_IDX) + [
@@ -1152,6 +1198,31 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
             builder.add_equality_constraint_connect(
                 body1=fb, body2=cbb, anchor=wp.vec3(0.0, 0.0, 0.0),
                 label=f"fourbar_{fb}_{cbb}", enabled=True)
+        # FAITHFUL coupling: restore the L-R FOLLOWER MIRROR equality per gripper (right_follower_joint =
+        # left_follower_joint, polycoef [0,1,0,0,0]) — the tendon-stripped XML DROPPED the <joint> symmetric
+        # coupling, letting the two fingers close asymmetrically (the _11 flop). MUST couple the FOLLOWERS,
+        # NOT the drivers: the 4-bar is BISTABLE, so a driver mirror alone leaves each follower free to pick
+        # its branch (verified: driver mirror -> follower_R=-0.71 vs follower_L=+0.87 sign-flip flop). The
+        # follower mirror forces BOTH followers onto the same branch -> symmetric (proven FAITHFUL_SLOT_15).
+        # Resolved BY LABEL (NOT a hardcoded idx 23/27) + cross-checked vs the SSOT driver indices (follower =
+        # driver+3 in the per-finger driver/coupler/spring_link/follower order). With the stiffened 4-bar
+        # connects (_wire_s6_grasp_solref) this gives symmetric 1-DOF closure. neq 4 -> 6 (the 2 mirror eqs
+        # are joint equalities, NOT connect pairs -> NOT in grasp_connects).
+        _jlabel = [str(x) for x in (getattr(builder, "joint_label", None) or [])]
+
+        def _joints_ending(suffix, lo, hi):
+            return [i for i in range(lo, hi) if _jlabel[i].endswith(suffix)]
+
+        for (lo, hi) in [(0, JOINTS_PER_ARM), (JOINTS_PER_ARM, 2 * JOINTS_PER_ARM)]:
+            rf = _joints_ending("right_follower_joint", lo, hi)
+            lf = _joints_ending("left_follower_joint", lo, hi)
+            assert rf and lf, f"S6_GRASP: follower-mirror joints unresolved by label in [{lo},{hi}): rf={rf} lf={lf}"
+            builder.add_equality_constraint_joint(
+                joint1=rf[0], joint2=lf[0], polycoef=[0.0, 1.0, 0.0, 0.0, 0.0],
+                label=f"follower_mirror_{rf[0]}_{lf[0]}", enabled=True)
+            grasp_mirrors.append((rf[0], lf[0]))
+        assert sorted(j for p in grasp_mirrors for j in p) == sorted(d + 3 for d in grasp_driver_joints), \
+            f"S6_GRASP: follower-mirror by-label {grasp_mirrors} != SSOT followers {[d+3 for d in grasp_driver_joints]}"
         # Build-time S5 contact families: condim=6 (mujoco:condim SHAPE custom attr) on pad+cable shapes
         # + rolling friction (shape_material_mu_rolling) on pads -> baked into BOTH mj_model AND mjw_model
         # at put_model (the post-construct mj_model poke is GPU-inert, STAGE D). The negative PAD_SOLREF
@@ -1230,16 +1301,18 @@ def build_scene(use_cable=True, fk_model=None, fk_state=None, solver_backend="vb
             f"mujoco joint layout drift: joint_count={model.joint_count} != "
             f"2*JOINTS_PER_ARM + cable joints = {expected}")
 
-    # R-S6.6 CHANGE 2 (I11): in-builder asserts -- the 4 gripper 4-bar connect equalities all register
-    # on the production topology (no rig cable-pins) and the cable<->non-pad filter pairs were built (M1).
+    # R-S6.6 CHANGE 2 (I11) + R-S7.1 faithful: in-builder asserts -- the 4 gripper 4-bar connect equalities
+    # + the 2 L-R follower-mirror equalities all register (neq=6) on the production topology (no rig cable-pins)
+    # and the cable<->non-pad filter pairs were built (M1).
     if solver_backend == "mujoco" and grasp_actuation:
         _neq = int(getattr(model, "equality_constraint_count", 0) or 0)
-        assert _neq == 4, f"S6_GRASP: 4-bar equalities did not all register: neq={_neq} (want 4)"
+        assert _neq == 6, f"S6_GRASP: 4-bar connects + follower mirrors did not all register: neq={_neq} (want 6 = 4 connect + 2 follower-mirror)"
         assert len(grasp_connects) == 4, f"S6_GRASP: expected 4 connect pairs, got {len(grasp_connects)}"
+        assert len(grasp_mirrors) == 2, f"S6_GRASP: expected 2 follower-mirror eqs, got {len(grasp_mirrors)}"
         if use_cable:
             assert cable_arm_filters > 0, "S6_GRASP: cable<->non-pad-arm filter pairs missing (M1)"
-        print(f"  [S6_GRASP] in-builder asserts OK: neq={_neq}==4, connects={len(grasp_connects)}, "
-              f"cable<->non-pad filters intact")
+        print(f"  [S6_GRASP] in-builder asserts OK: neq={_neq}==6 ({len(grasp_connects)} connect + "
+              f"{len(grasp_mirrors)} follower-mirror), cable<->non-pad filters intact")
 
     # Shape diagnostics
     # (VBD only -- §28 #3: indexes the kinematic-arm finger bodies [7,8]; N/A to the mujoco articulated arm.)
@@ -2546,13 +2619,27 @@ def _wire_s6_grasp_solref(solver, scene_info):
     assert abs(mj_roll - float(MUJOCO_PAD_ROLL_FRICTION)) < 1e-6, \
         f"S6_GRASP: pad rolling friction={mj_roll}!={MUJOCO_PAD_ROLL_FRICTION}"
 
+    # R-S7.1 FAITHFUL 4-bar: stiffen the 4 CONNECT equalities (the soft default eq_solref [0.02,1] lets the
+    # 4-bar LOOP flop -- _11 follower +0.76->-0.71 for ~const driver). Rigid loop closure = the real metal
+    # 4-bar (post-compile mj_model edit, persistent; eq arrays are NOT re-derived by the notify-fragile
+    # geom-solref path). mjw/GPU re-poke deferred to R-S6.6 (the proven faithful config is CPU/mj_model).
+    _n_stiff = 0
+    for i in range(int(m.neq)):
+        if int(m.eq_type[i]) == int(mujoco.mjtEq.mjEQ_CONNECT):
+            m.eq_solref[i] = [0.001, 1.0]
+            m.eq_solimp[i] = [0.99, 0.9995, 0.0001, 0.5, 2.0]
+            _n_stiff += 1
+    assert _n_stiff == 4, f"S6_GRASP: expected 4 CONNECT eqs to stiffen, got {_n_stiff} (neq={int(m.neq)})"
+
     rb = {"pad_geoms": len(pad_geoms), "cable_geoms": len(cable_geoms),
           "mj_pad_condim": mj_pad_condim, "mjw_pad_condim": mjw_pad_condim,
           "mj_cable_condim": mj_cable_condim, "mjw_cable_condim": mjw_cable_condim,
-          "mjw_solref": mjw_solref_rb, "mj_priority": mj_priority, "mj_roll": mj_roll}
+          "mjw_solref": mjw_solref_rb, "mj_priority": mj_priority, "mj_roll": mj_roll,
+          "connects_stiffened": _n_stiff}
     print(f"  [S6_GRASP] solref poked + I11 asserts OK: pad_geoms={len(pad_geoms)} "
           f"condim mj_pad={mj_pad_condim}/mjw_pad={mjw_pad_condim} mj_cable={mj_cable_condim}/"
-          f"mjw_cable={mjw_cable_condim} solref_mjw={mjw_solref_rb} priority={mj_priority} roll={mj_roll}")
+          f"mjw_cable={mjw_cable_condim} solref_mjw={mjw_solref_rb} priority={mj_priority} roll={mj_roll} "
+          f"connects_stiffened={_n_stiff}(eq_solref->[0.001,1])")
     return rb
 
 
@@ -2595,8 +2682,9 @@ def _run_mujoco_grasp_episode(model, solver, contacts, scene_info, fk_state, out
     # Reuse the probe-derived geometry/seeds of _run_mujoco_ik_motion_smoke (proven to converge). NOTE the
     # close here is FREE-AIR, NOT a cable grasp: the arm descends to the cable X-line (X=GRASP_X=0.30) but
     # z_grasp keeps the CLOSED pinch-tip +20mm ABOVE the table (the OPEN pads higher still, clear of the
-    # cable at z~0.804), AND the LEFT target Y=-0.20 is OFF the cable Y span ([-0.15,0.45]). Evidence: the
-    # driver reaches its free-air target (NO cable-loaded stall) and cable_z stays ~0.804 unchanged. Only
+    # cable at z~0.804); free-air rests on this Z clearance. (The LEFT target Y=-0.20 is now ON the cable —
+    # within Y span [-0.30,+0.30] after the 2026-06-20 array-centering, no longer off-cable in Y, still clear
+    # in Z.) Evidence: the driver reaches its free-air target (NO cable-loaded stall), cable_z stays ~0.804. Only
     # the actuated-channel MECHANISM (driver travel) is banked; contact ENGAGEMENT (lands-on-cable,
     # OPEN-vs-CLOSED tip-drop, lateral capture) is GPU-deferred to R-S7.1. z/Y/seeds are intentionally NOT
     # tuned for engagement (that is the GPU gate's job).
