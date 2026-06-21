@@ -14,6 +14,7 @@ close the ◇'s open bottom = the verified lift-fail root). Built on a SCRATCH a
 UNTOUCHED.
 
 ## ⚠ CONSISTENCY CAVEATS (records-must-match-fact — read FIRST)
+- **⛔ 2026-06-21 (human decision): the ◇ V-groove is DISCARDED as a design reference** — NOT retained, NOT locked (this SUPERSEDES the "retained as up-cap/drag reference" framing elsewhere in this doc). Active finger = コ. ⚠ records-ahead-of-code: the committed asset `2f85_tendon_stripped.xml` (`7afa84b463`) still physically contains the ◇ + コ is unwired scratch → ◇→コ asset swap = deferred L3. Reflected on-disk: RS71-SSOT §0 INVARIANT 4 + §5/§6, LEDGER:50/51, Gripper-VGroove status:5 (SOMA:80/87 + this doc's deeper body = deferred reconcile). (5体 [VERIFY] gated this: bare "DISCARDED" over-claims vs the running ◇ → recorded as "discard DECIDED, asset swap pending".)
 - **This REMOVES the V-groove** (which the prior banked spec called 100% mandatory). **✅ コ is now BANKED
   2026-06-21 (Rs source-GO) — V-groove SUPERSEDED→コ across the authoritative specs** (LEDGER:50/51, RS71-SSOT
   §5/§6/LOCK, SOMA:80/87, Gripper-VGroove banner+:18/:22; applied by %9 per the human's explicit authorization,

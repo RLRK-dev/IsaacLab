@@ -2,7 +2,7 @@
 title: Gripper V-Groove Design (R-S7.1) — DECIDED / FIXED
 created: '2026-06-19'
 owner: human-Rs (design decision); RS-TECH-LEAD (%5) records
-status: ACTIVE (🟢) — human-DECIDED 2026-06-19, 100% MANDATORY
+status: ⛔ DISCARDED as a design reference (human 2026-06-21) — active finger = コ (06-Knowledge/GD-KoShape-Finger.md); the V-groove ◇ is NO LONGER a retained/locked reference. ⚠ records-ahead-of-code: committed asset 2f85_tendon_stripped.xml (7afa84b463) still physically contains the ◇ + コ is unwired scratch → ◇→コ asset swap = deferred L3. This doc = HISTORICAL record only (◇ geometry table preserved for the deferred swap + GD-S2A lineage). [prior: 🔁 SUPERSEDED→コ 2026-06-20 (◇-retained-reference); earlier ACTIVE 🟢 2026-06-19 100% MANDATORY]
 status_ledger: 07-Design/00-DESIGN-STATUS-LEDGER.md
 authoritative: true
 tags: [design, gripper, v-groove, R-S7.1, FIXED]
@@ -10,8 +10,53 @@ tags: [design, gripper, v-groove, R-S7.1, FIXED]
 
 # Gripper V-Groove Design (R-S7.1) — DECIDED / FIXED
 
-**FIXED DECISION (human-Rs directive, repeated + final, 2026-06-19): the gripper finger is V-GROOVE-shaped. 100% mandatory.**
-This is a locked design decision, not a proposal. Do NOT re-litigate (flat / V-cage / "is V-groove needed" were already settled).
+> ## ⚠ SUPERSEDED 2026-06-20 — THE FINGER SHAPE IS NOW コ (read FIRST)
+> **Human decision 2026-06-20:** the gripper finger is **コ-shape (C-bracket)**, which **REMOVES this V-groove ◇ as the active finger shape.** The コ design + the demonstrated building blocks (grasp / lift ~45mm / mid-air re-grasp / place) are recorded in **`06-Knowledge/GD-KoShape-Finger.md`**. This V-groove doc is **retained only as reference** (its up-cap / horizontal-drag geometry is still cited for clip-insertion).
+> **Status:** コ = the ACTIVE finger, **BANKED 2026-06-21 (Rs source-GO)** as a CPU-verified building-block (penetration/retention/grip-down clamp 0.69, %2 cross-PV CONVERGENT; 2026-06-17 5体 crush CRITICAL retired); **GPU R-S6.6 + full-route/snag retention + R2/R3 §運用14 = PRODUCTION-pending** (same caveat as banked-(A)). The V-groove body below is **SUPERSEDED** — its ◇ geometry is retained only as the up-cap/drag reference (still human-LOCKED). Do NOT treat the V-groove body as the active finger shape.
+> **Provenance:** added 2026-06-21 (%9 RS-TECH-LEAD) under the human GO + standing directive 「確定事項は設計書に即反映・vault内で整合性を常に保て」. Corrects the prior **stale-spec divergence** — each コ building-block was 「vaultに記録」'd, but those records went only to the `GD-KoShape` working doc (06-Knowledge = the only dir CC may write) while THIS authoritative spec (07-Design = human-only) kept reading "V-groove FIXED" (the same stale-spec trap as the 2026-06-21 V-vs-コ confusion).
+
+**FIXED DECISION (human-Rs directive, repeated + final, 2026-06-19): the gripper finger is V-GROOVE-shaped. 100% mandatory.** ⚠ **SUPERSEDED→コ, banked 2026-06-21 (Rs source-GO) — see the top banner. This V-GROOVE mandate is now HISTORICAL; the ACTIVE finger is コ (`06-Knowledge/GD-KoShape-Finger.md`); the ◇ geometry survives only as the up-cap/drag reference.**
+This was a locked design decision (now superseded→コ). Do NOT re-litigate the OLD flat/V-cage debate (settled); the V-groove→コ supersede is the human's 2026-06-20 decision, banked 2026-06-21.
+
+## 🔒 LOCKED FINGER SPEC — SINGLE SSOT (human-FROZEN 2026-06-19; do NOT change)
+**Human directive 2026-06-19: 「この図の仕様が確定事項である。ここから変更させないこと」** — the finger spec is FROZEN to the figure below. ⚠ **SUPERSEDED→コ banked 2026-06-21 (see top banner): the ACTIVE-finger SSOT is now `06-Knowledge/GD-KoShape-Finger.md`; THIS doc = the ◇ up-cap/drag GEOMETRY reference (the ◇ geometry remains human-LOCKED — no change without source-GO).** (Pre-supersede this doc was the single SSOT for the gripper finger; all panes conformed.)
+
+**Authoritative cross-section:** `eval_runs/troot_optE_rs71_kinematic_retention_20260616/R_S71_DIAMOND_LOCKED_SPEC.png` (= %2's `r_s71_diamond_pv_centered.png`, PV on the REAL committed ◇ — `R_S71_DIAMOND_PV_02_VERDICT.md:4`). Complete DIAMOND ◇: green `vgu` (upper) cap the cable top + blue `vgl` (lower) cradle the lower sides DOWN to the table (z=0.800); cable Ø8 centered (~z0.806, cradled ~2mm); S1 cage (purple) flanks laterally on the outer sides.
+
+### 1. ◇ V-groove geometry — LOCKED (asset `2f85_tendon_stripped.xml`, committed `7afa84b463`; these values ARE the locked record)
+4 collidable box geoms (contype8 / condim6), full size 15(along cable)×10×1mm, +1mm tangent clearance to Ø8:
+
+| geom | size | pos | quat |
+|---|---|---|---|
+| right_pad_vgu (upper) | 0.0075 0.00500 0.0005 | 0 -0.0056 0.0362 | 0.0522 0.9986 0 0 |
+| right_pad_vgl (lower) | 0.0075 0.00458 0.0005 | 0 -0.0002 0.0402 | 0.7431 0.6692 0 0 |
+| left_pad_vgu (upper)  | 0.0075 0.00500 0.0005 | 0 -0.0087 0.0407 | 0 0 0.0482 0.9988 |
+| left_pad_vgl (lower)  | 0.0075 0.00458 0.0005 | 0 -0.0033 0.0448 | 0 0 0.7404 0.6722 |
+
+The two pads (right ">" + left "<") close at half-clamp into the 4-wall ◇ enclosing the cable's full circumference.
+
+### 2. S1 form-closure cage — committed `65c056f63a`
+`f1up / f1lo / f1ext / lip` per pad (lateral flanks; assists centering — %2 cross-PV: cage-dominant for static centering).
+
+### 3. Clamp params (numeric SSOT = `task_config.py`)
+- `GRIP_HALF_SPAN` 0.044 (arm-to-arm 88mm; `WIDE_LEFT_Y` 0.106 / `WIDE_RIGHT_Y` 0.194) [:235/:262-263]
+- `FINGER_OPEN_POS` 0.04 / `FINGER_HALF_OPEN_POS` 0.006 / `FINGER_CLOSE_POS` 0.002 [:268-271]
+- `GRIPPER_DRIVER_CLOSE_RAD` 0.7407 (full-clamp = INSERTION) [:285]
+- `GRIPPER_DRIVER_HALF_OPEN_RAD` ≈ 0.667 (half-clamp = ◇ form / GUIDANCE) — **PROPOSED, NOT yet landed**
+- `GROOVE_CENTER_Z` 0.809 / `EE_TO_PINCH_CLOSED` 0.25484 / `EE_TO_PINCH_TIP_CLOSED` 0.27517 [:226/:302-303]
+
+### 4. Faithful 1-DOF coupling — REQUIRED for grip (NOT yet landed; `R_S71_FAITHFUL_SLOT_15`)
+The asset's tendon/equality 4-bar is stripped → rebuilt in code, which FLOPS without these (R_S71_CLAMP_JOINTTRACE_11). For a real rigid 1-DOF grip:
+- STIFFEN the 4 connect equalities: `solref` → [0.001, 1] + `solimp` rigid.
+- RESTORE the L-R follower MIRROR eq (j23=j27, j9=j13, polycoef [0,1,0,0,0]) = the asset's dropped `<joint>` coupling.
+- → `neq` 4 → 6 (the `test_newton_clip_routing.py:1237` neq==4 guard must be updated 4→6 at landing).
+
+### 5. Roles (SSOT = `SOMA.md:80`) — **full-clamp = clip INSERTION / half-clamp = next-clip GUIDANCE.**
+
+### 6. Pipeline context (`SOMA.md:31`) — Grasp → **Lift 50mm** → Route → Hook = **AERIAL** (on-table guide collides with table-mounted clips). Grasp+lift needs a **TABLE-SPACE slot** under the cable so the lower walls reach under (`R_S71_TABLE_SPACE_14` / `R_S71_FAITHFUL_SLOT_15`; multi-box table build = separate land).
+
+**LOCK: §1-2 geometry + the figure are FROZEN. §3-4 are the required clamp/coupling. No pane changes the ◇ without human source-GO.**
+
 
 ## Spec
 - A **V-groove (∨ pocket / channel)** on the gripper pad faces.
@@ -63,7 +108,9 @@ untouched (`GRIP_HALF_SPAN` 0.044 / `CABLE_BEND_STIFFNESS` 0.005 / `FINGER_*`).
 ◇" and "cable rests on the table" are geometrically incompatible by ~2mm (audit analytic bracket [tangent 1.66 ↔
 +1mm-clear 3.07]mm). The human accepted the cradle (the prior no-lift ≤0.6mm rule is overridden for this ◇).
 
-**Verified 2026-06-19 (CPU, half clamp = load-bearing) — 3 independent angles:**
+**⚠ CONTRADICTED 2026-06-20 (records-must-match-fact; %9 RS-TECH-LEAD records; do NOT re-adopt the "half-clamp ◇ = load-bearing" claim below for the aerial LIFT):** the ◇ FORMS (encloses, no lift) XOR LIFTS (◇-below, doesn't enclose) — mutually exclusive via the OPEN BOTTOM; depth AND clamp tuning are EXHAUSTED (`RS71-System-Spec-SSOT.md:37` §3 + `r_s71_depth_sweep_cablerise_38` + `r_s71_depth_clamp_sweep_39` [HALF≈FULL at every depth], %2-verified). The full-clamp "symmetric lift" was an EMPTY-gripper artifact + the V-groove was NOT clamping the cable (mid-finger flat pinch, human-verified video `r_s71_arm_physfinger.mp4`). The "carry 0.90" below is HORIZONTAL drag-retention + up-cap ONLY — NOT the aerial vertical lift. RESOLUTION = the OPEN FORM-vs-LIFT design fork (escalated to human, `RS71-System-Spec-SSOT.md:37`); the ◇ geometry stays human-LOCKED pending that call. [2026-06-20 17:56 JST]
+
+**Verified 2026-06-19 (CPU, half clamp = load-bearing) — 3 independent angles [⚠ SUPERSEDED for the LIFT claim — see the CONTRADICTED caveat above; valid only for up-cap + horizontal drag-retention]:**
 - **%5 §運用14 (shape):** the complete ◇ FORMS — all 4 walls, top vertex caps, bottom at table, tangent (render
   `~/Downloads/r_s71_diamond_real.png`, DIAMOND_FORMS=True / no_crush=True).
 - **%3 static-geometry audit (PASS):** 4 walls tangent surf_clear ≥0 (RU+1.17 / RL+0.03 / LU+1.22 / LL+0.02 mm),
