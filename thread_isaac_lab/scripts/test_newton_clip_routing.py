@@ -97,9 +97,11 @@ _UR5E_ASSET = os.path.normpath(os.path.join(
 UR5E_XML = os.path.join(_UR5E_ASSET, "ur5e", "ur5e.xml")
 ROBOTIQ_XML = os.path.join(_UR5E_ASSET, "robotiq_2f85", "2f85.xml")
 # Path-A (Option-E Opt-1): 2f85 with the <tendon> node removed so the combined add_mjcf build
-# constructs under SolverMuJoCo (the WITH-tendon build OOBs _init_tendons). Byte-copy of 2f85.xml
-# minus <tendon>; <equality> is dropped at parse via skip_equality_constraints. Faithful 4-bar = S5.
-ROBOTIQ_STRIPPED_XML = os.path.join(_UR5E_ASSET, "robotiq_2f85", "2f85_tendon_stripped.xml")
+# constructs under SolverMuJoCo (the WITH-tendon build OOBs _init_tendons). <equality> is dropped at
+# parse via skip_equality_constraints. Faithful 4-bar = S5. V-groove -> ko-shape swap (R-S7.1, Rs
+# override 2026-06-23): now the ko-shape (C-bracket) finger asset; the diamond V-groove is DISCARDED
+# (LEDGER:50/51, INVARIANT 4).
+ROBOTIQ_STRIPPED_XML = os.path.join(_UR5E_ASSET, "robotiq_2f85", "2f85_koshape.xml")
 # UR5e wrist_3 attachment_site (ur5e.xml) — Robotiq base mounts here. MuJoCo quat (w, x, y, z).
 UR5E_ATTACH_POS = (0.0, 0.1, 0.0)
 UR5E_ATTACH_QUAT_MJCF_WXYZ = (-1.0, 1.0, 0.0, 0.0)
@@ -2796,11 +2798,11 @@ def _run_mujoco_episode(model, solver, contacts, scene_info, fk_state, output_di
     fix, an episode INFRA result dict, and MECHANICAL gates only -- NO grip-force/retention/success verdict
     (R3; contacts=None on the mujoco branch -> the close/open are KINEMATIC poses, not force grasps).
 
-    R1 (asset-identity, verified 2026-06-16): z_grasp uses EE_TO_PINCH_TIP_CLOSED measured (R-S6.1) on
-    ROBOTIQ_STRIPPED_XML = the CAGED asset the mujoco physics build loads (test:975/980). The FK/IK model
-    loads the un-caged 2f85.xml, but the S1 cage is geom-only (no new body/joint) so wrist_3 kinematics --
-    hence the IK -- are identical; the caged tip (only in physics) drops EE_TO_PINCH_TIP_CLOSED below
-    wrist_3, so landing wrist_3 at z_grasp clears the caged tip TABLE+20mm. The per-episode r1_ok gate
+    R1 (asset-identity; V-groove -> ko-shape swap R-S7.1 2026-06-23): z_grasp uses EE_TO_PINCH_TIP_CLOSED on
+    ROBOTIQ_STRIPPED_XML = the ko-shape claw asset the mujoco physics build loads (test:975/980). The FK/IK model
+    loads the un-clawed 2f85.xml, but the ko claw is geom-only (no new body/joint) so wrist_3 kinematics --
+    hence the IK -- are identical; the ko f1ext claw tip (only in physics) drops EE_TO_PINCH_TIP_CLOSED below
+    wrist_3, so landing wrist_3 at z_grasp clears the claw tip TABLE+20mm. The per-episode r1_ok gate
     asserts the descend reached z_grasp. Mirrors the smoke's exit gate (sys.exit 0=PASS, 2=FAIL). All
     geometry/seeds probe-derived (probe_c4_episode_convergence). Convergence H1-validated at the C1 value.
     """
@@ -2811,7 +2813,7 @@ def _run_mujoco_episode(model, solver, contacts, scene_info, fk_state, output_di
 
     n_ep = int(os.environ.get("S6_EPISODE_N", "1"))   # episode count (default 1 for the regression smoke)
 
-    z_grasp = TABLE_HEIGHT + EE_TO_PINCH_TIP_CLOSED + 0.02   # CLOSED caged tip clears the table (+20mm)
+    z_grasp = TABLE_HEIGHT + EE_TO_PINCH_TIP_CLOSED + 0.02   # CLOSED ko claw tip clears the table (+20mm)
     z_approach = z_grasp + 0.05
     z_hover = z_grasp + 0.15
     x_wp, y_wp = 0.30, 0.20

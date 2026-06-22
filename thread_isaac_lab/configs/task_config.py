@@ -282,10 +282,11 @@ GRIPPER_DRIVER_EFFORT_LIMIT_NM = 2.5  # ~= official 5 N tendon force x coef 0.5 
 # gate held on rev7/rev8.
 # EE->pinch geometry (CLOSED pose, measured; the re-pinned neq8 A1 reference, rev8 a1_measured):
 EE_TO_PINCH_CLOSED = 0.2548428289592266  # wrist_3 -> pinch_mid drop [m] (drop_closed_m)
-EE_TO_PINCH_TIP_CLOSED = 0.27516789724506097  # wrist_3 -> pad TIP drop [m] (tip_drop_m; pads
-# extend 20.32 mm distal of pinch_mid; R-S6.1/R-S6.2 cage-tip re-derivation +1.3994mm, corrects the
-# stale 18.6mm closed-tip table clearance to the designed 20mm). EE_TO_FINGERTIP above (0.220) is the Franka/legacy
-# value — UR5e+Robotiq consumers use THESE.
+EE_TO_PINCH_TIP_CLOSED = 0.27574726696  # wrist_3 -> pad TIP drop [m] (tip_drop_m; ko-shape f1ext
+# claw tip, re-derived 2026-06-22 = +0.58mm vs the prior V-groove value 0.27516789724506097; pads extend
+# ~20.90 mm distal of pinch_mid; keeps the designed 20mm closed-tip table clearance). Artifact:
+# eval_runs/troot_optE_rs71_koshape_ee_tip_rederive_20260622/. EE_TO_FINGERTIP above (0.220) is Franka/legacy;
+# UR5e+Robotiq consumers use THESE.
 EE_TO_PINCH_OPEN = 0.2092  # wrist_3 -> pinch_mid drop [m], OPEN gripper (S6, probe_wrist3_frame
 # wrist3_to_pinch_open_m). Regime-correct OPEN offset for aligning the open pinch to a cable. SSOT for
 # DOWNSTREAM consumers (S2-impl/S3, which have a cable); NOT consumed by the S6 infra smoke (no cable,
