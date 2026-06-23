@@ -100,6 +100,122 @@
 <body>
 
 <h1>THREAD Logical Decomposition (NEST Tree)</h1>
+<style>
+  #av-overview { margin:14px 0 8px; }
+  #av-overview .av-intro { color:#cbd5e1; font-size:13.5px; background:#0f172a; border:1px solid #334155; border-left:4px solid #f59e0b; border-radius:8px; padding:11px 14px; margin-bottom:12px; }
+  #av-overview .av-intro b { color:#fde68a; }
+  #av-overview h3.av-h { color:#7dd3fc; font-size:13px; letter-spacing:.04em; margin:18px 0 6px; }
+  #av-overview iframe.av-frame { width:100%; border:1px solid #334155; border-radius:10px; background:#0f172a; display:block; }
+  #av-overview .av-ptr { font-size:12px; color:#94a3b8; margin-top:8px; }
+  #av-overview .av-ptr a { color:#7dd3fc; }
+</style>
+<section id="av-overview">
+  <div class="av-intro">
+    <b>§1 Visual Tree — 高抽象度 human overview（2ビュー）.</b> 人間が大まかに把握する用。NEST tree を構造的に簡易化（234 node → 主要軸 + live-spine; legacy は畳み）。<b>正規の詳細ビュー（全 234 node・依存・状態）= jsx tracker</b>。本2ビューは <code>nest-snapshot.json</code> から生成（<code>gen_simplified_tree.py</code> / <code>gen_gantt.py</code>, SSOT 連動）。旧・詳細ビュー + 全履歴は下の「▶ 旧詳細 + 履歴」に保存（collapse-not-delete）。
+  </div>
+  <h3 class="av-h">① 構造ビュー — 簡易化 NEST tree（何が・どの状態か）</h3>
+  <iframe class="av-frame" loading="eager" srcdoc="<!DOCTYPE html>
+<html lang=&quot;ja&quot;><head><meta charset=&quot;utf-8&quot;>
+<title>THREAD — 簡易化 NEST tree (§1 Visual Tree overview)</title>
+<style>
+  body{margin:0;padding:26px 30px;background:#0f172a;color:#e2e8f0;font-family:-apple-system,&quot;Hiragino Kaku Gothic ProN&quot;,&quot;Noto Sans CJK JP&quot;,sans-serif;}
+  h1{font-size:18px;margin:0 0 3px;}
+  .sub{color:#94a3b8;font-size:13px;margin:0 0 18px;}
+  .legend{font-size:12px;color:#94a3b8;margin-bottom:16px;}
+  .tree{background:#1e293b;border:1px solid #334155;border-radius:10px;padding:18px 20px;
+    font-family:&quot;SF Mono&quot;,Menlo,Consolas,monospace;font-size:13.5px;line-height:2.0;white-space:pre;overflow-x:auto;}
+  .root{font-weight:700;color:#fde68a;font-size:14.5px;}
+  .goal{color:#94a3b8;font-weight:400;font-size:12.5px;}
+  .conn{color:#475569;}
+  .lbl{color:#e2e8f0;font-weight:600;}
+  .note{color:#94a3b8;font-weight:400;font-size:12px;}
+  .b{display:inline-block;min-width:74px;text-align:center;padding:0 7px;border-radius:9px;font-size:11px;font-weight:700;color:#0b1220;}
+  .done{background:#22c55e;} .active{background:#f59e0b;} .pend{background:#64748b;color:#e2e8f0;}
+  .arch{background:#475569;color:#cbd5e1;} .disc{background:#ef4444;color:#fff;}
+  .star{background:#7c2d12;color:#fed7aa;border:1px solid #f59e0b;border-radius:6px;padding:0 6px;font-weight:700;font-size:11px;}
+  .now{margin-top:16px;background:#172554;border:1px solid #1e40af;border-radius:10px;padding:11px 14px;font-size:13px;}
+  .now b{color:#93c5fd;}
+  .foot{margin-top:16px;font-size:11.5px;color:#94a3b8;border-top:1px solid #334155;padding-top:9px;}
+  .foot a{color:#7dd3fc;}
+</style></head><body>
+  <h1>THREAD — 簡易化 NEST tree（人間が大まかに把握する用）</h1>
+  <p class=&quot;sub&quot;>フル tree（234 node）を構造的に簡易化：P0-KILL プログラム軸 + live-spine を展開、legacy 185 node を1 node に畳む。</p>
+  <div class=&quot;legend&quot;><span class=&quot;b done&quot;>✅ 完了</span> <span class=&quot;b active&quot;>🔶 進行中</span> <span class=&quot;b pend&quot;>⏸ 未着手</span> <span class=&quot;b arch&quot;>📦 archived</span> <span class=&quot;star&quot;>★ いまここ</span></div>
+  <div class=&quot;tree&quot;><span class=&quot;root&quot;>🌳 T-ROOT — 5-clip cable routing を vision で物理忠実に動かす  <span class=&quot;goal&quot;>(L0 = 100% 定性的)</span></span>
+<span class=&quot;conn&quot;>├─</span> <span class=&quot;b done&quot;>✅ 完了</span> <span class=&quot;lbl&quot;>R0 計測基盤</span>  <span class=&quot;note&quot;>— f(1.0)=0.72 を計測</span>
+<span class=&quot;conn&quot;>├─</span> <span class=&quot;b done&quot;>✅ 完了</span> <span class=&quot;lbl&quot;>R1 製品述語</span>  <span class=&quot;note&quot;>— 成功条件を確定</span>
+<span class=&quot;conn&quot;>├─</span> <span class=&quot;b active&quot;>🔶 進行中</span> <span class=&quot;lbl&quot;>#1 L1.X 基盤の物理忠実性</span>  <span class=&quot;note&quot;>— 基盤の現実味=達成 / GPU・本物検証が残</span>
+<span class=&quot;conn&quot;>│&amp;nbsp;&amp;nbsp; ├─</span> <span class=&quot;b done&quot;>✅ 完了</span> <span class=&quot;lbl&quot;>Option-E 基盤 (env7 物理エンジン)</span>
+<span class=&quot;conn&quot;>│&amp;nbsp;&amp;nbsp; ├─</span> <span class=&quot;b active&quot;>🔶 進行中</span> <span class=&quot;lbl&quot;>R-S6.6 GPU 安定化</span>  <span class=&quot;note&quot;>— NaN 修正済 / 量産検証残</span>
+<span class=&quot;conn&quot;>│&amp;nbsp;&amp;nbsp; └─</span> <span class=&quot;b active&quot;>🔶 進行中</span> <span class=&quot;lbl&quot;>R-S7.1 把持グリッパ = コ型</span>  <span class=&quot;note&quot;>— CPU 成立 / 量産残</span>
+<span class=&quot;conn&quot;>├─</span> <span class=&quot;b active&quot;>🔶 進行中</span> <span class=&quot;lbl&quot;>Forward Capability  実タスク能力</span>  <span class=&quot;note&quot;>— 掴む→運ぶ→挿す→保持 を CPU で成立  ← 現フロンティア</span>
+<span class=&quot;conn&quot;>│&amp;nbsp;&amp;nbsp; ├─</span> <span class=&quot;b done&quot;>✅ 完了</span> <span class=&quot;lbl&quot;>単clip route/hook</span>  <span class=&quot;note&quot;>— できた</span>
+<span class=&quot;conn&quot;>│&amp;nbsp;&amp;nbsp; ├─</span> <span class=&quot;b active&quot;>🔶 進行中</span> <span class=&quot;lbl&quot;>off-center grasp (傾き解消)</span> <span class=&quot;star&quot;>★ いまここ</span>  <span class=&quot;note&quot;>— いま着手</span>
+<span class=&quot;conn&quot;>│&amp;nbsp;&amp;nbsp; ├─</span> <span class=&quot;b pend&quot;>⏸ 未着手</span> <span class=&quot;lbl&quot;>multi-clip 連続 (C1→C5)</span>
+<span class=&quot;conn&quot;>│&amp;nbsp;&amp;nbsp; ├─</span> <span class=&quot;b pend&quot;>⏸ 未着手</span> <span class=&quot;lbl&quot;>知覚 (カメラで位置推定)</span>
+<span class=&quot;conn&quot;>│&amp;nbsp;&amp;nbsp; └─</span> <span class=&quot;b active&quot;>🔶 進行中</span> <span class=&quot;lbl&quot;>retention-model (ピン vs 物理衝突)</span>  <span class=&quot;note&quot;>— 全体を止める blocker / Rs判断</span>
+<span class=&quot;conn&quot;>├─</span> <span class=&quot;b pend&quot;>⏸ 未着手</span> <span class=&quot;lbl&quot;>L1.C 制御・学習 (DAPG + DA-MPPI = 学習の核)</span>  <span class=&quot;note&quot;>— pipeline: DA-MPPI計画→専門家demo→DAPG(BC warmstart α0.5 + PPO)+DR(domain rand)+Residual-PPO modulator(heuristic失敗時)。env6 skill: AC49%/IC39%/AR92%*(quarantine)/GC0%/Unclamp=scripted。env7 L1.Cは前提4トラック(grasp/GPU/RL-scope/env7基盤)未達でgated</span>
+<span class=&quot;conn&quot;>│&amp;nbsp;&amp;nbsp; └─</span> <span class=&quot;b active&quot;>🔶 進行中</span> <span class=&quot;lbl&quot;>DA-MPPI (dual-arm planner / 専門家demo生成)</span>  <span class=&quot;note&quot;>— env6 M3 done S3=100% / env7 re-gen (gated)</span>
+<span class=&quot;conn&quot;>├─</span> <span class=&quot;b active&quot;>🔶 進行中</span> <span class=&quot;lbl&quot;>#2 述語再定義</span>  <span class=&quot;note&quot;>— L0 95→100 を定性的に再解釈</span>
+<span class=&quot;conn&quot;>├─</span> <span class=&quot;b pend&quot;>⏸ deferred</span> <span class=&quot;lbl&quot;>#3 R2 アーキ再設計</span>  <span class=&quot;note&quot;>— 今は保留(条件付き)</span>
+<span class=&quot;conn&quot;>└─</span> <span class=&quot;b arch&quot;>📦 archived</span> <span class=&quot;lbl&quot;>Legacy decomposition (pre-P0-KILL)</span>  <span class=&quot;note&quot;>— 185 node — 折りたたみ / 詳細は tracker</span></div>
+  <div class=&quot;now&quot;><b>今ここ：</b> 基盤(物理忠実性)は固まり、いまは <b>Forward Capability の off-center grasp</b>（off-center で掴むとケーブルが傾く問題）を解消中。通れば 5クリップ連続へ。</div>
+  <div class=&quot;foot&quot;>構造的に簡易化した <b>NEST tree</b>。フル詳細（234 node・依存・状態）= jsx tracker（正規ビュー）: <a href=&quot;http://localhost:8765/index.html&quot;>http://localhost:8765/index.html</a><br>本図は <code>nest-snapshot.json</code> から生成（re-runnable, SSOT 連動）。生成元: <code>gen_simplified_tree.py</code>.</div>
+</body></html>" onload="this.style.height=(this.contentWindow.document.documentElement.scrollHeight+4)+'px'"></iframe>
+  <h3 class="av-h">② 順序ビュー — 実行順序 Gantt（どの順で進むか・並行・gating）</h3>
+  <iframe class="av-frame" loading="eager" srcdoc="<!DOCTYPE html><html lang=&quot;ja&quot;><head><meta charset=&quot;utf-8&quot;>
+<title>THREAD — 実行順序 (Gantt-like)</title><style>
+  body{margin:0;padding:24px 28px;background:#0f172a;color:#e2e8f0;font-family:-apple-system,&quot;Hiragino Kaku Gothic ProN&quot;,&quot;Noto Sans CJK JP&quot;,sans-serif;}
+  h1{font-size:18px;margin:0 0 3px;} .sub{color:#94a3b8;font-size:12.5px;margin:0 0 14px;}
+  .legend{font-size:12px;color:#cbd5e1;margin-bottom:14px;} .lg{margin-right:14px;} .lg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:4px;vertical-align:-1px;}
+  .chart{position:relative;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:34px 18px 14px 150px;}
+  .axis{position:absolute;top:8px;left:150px;right:18px;height:22px;}
+  .tick{position:absolute;transform:translateX(-2px);font-size:10.5px;color:#94a3b8;border-left:1px solid #334155;padding-left:4px;height:100%;}
+  .row{position:relative;height:30px;display:flex;align-items:center;margin:3px 0;}
+  .lanehdr{font-size:11px;letter-spacing:.06em;color:#7dd3fc;text-transform:uppercase;margin:12px 0 2px -132px;font-weight:700;}
+  .track{position:relative;height:24px;flex:0 0 calc(100% - 250px);width:calc(100% - 250px);background:linear-gradient(90deg,#0f172a 0,#0f172a 100%);border-radius:4px;}
+  .bar{position:absolute;top:0;height:24px;border-radius:5px;display:flex;align-items:center;padding:0 8px;box-shadow:0 1px 3px rgba(0,0,0,.4);}
+  .blbl{font-size:10.5px;font-weight:700;color:#0b1220;white-space:nowrap;overflow:visible;}
+  .bar.pend .blbl,.bar.gated .blbl,.bar.blocker .blbl{text-shadow:0 1px 2px rgba(0,0,0,.6);}
+  .bar.done{background:#22c55e;} .bar.active{background:#f59e0b;} .bar.pend{background:#64748b;}
+  .bar.pend .blbl{color:#e2e8f0;} .bar.gated{background:#7c3aed;} .bar.gated .blbl{color:#ede9fe;}
+  .bar.blocker{background:repeating-linear-gradient(45deg,#ef4444,#ef4444 6px,#b91c1c 6px,#b91c1c 12px);} .bar.blocker .blbl{color:#fff;}
+  .note{font-size:10.5px;color:#94a3b8;margin-left:10px;white-space:nowrap;}
+  .nowline{position:absolute;top:30px;bottom:10px;left:calc(150px + (100% - 168px) * 0.55);width:2px;background:#fb7185;z-index:5;}
+  .nowlbl{position:absolute;top:10px;left:calc(150px + (100% - 168px) * 0.55 - 14px);color:#fb7185;font-size:11px;font-weight:700;z-index:6;}
+  .foot{margin-top:14px;font-size:11px;color:#94a3b8;border-top:1px solid #334155;padding-top:9px;} .foot a{color:#7dd3fc;}
+</style></head><body>
+  <h1>THREAD — 実行順序 (Gantt-like) / どの順で進むか</h1>
+  <p class=&quot;sub&quot;>X軸=実行順序(暦でなく論理順)。bar位置=NEST依存(precedent/blocker)から。縦線=今ここ。並行bar=同時進行。</p>
+  <div class=&quot;legend&quot;><span class=&quot;lg&quot;><i style=&quot;background:#22c55e&quot;></i>完了</span><span class=&quot;lg&quot;><i style=&quot;background:#f59e0b&quot;></i>進行中</span><span class=&quot;lg&quot;><i style=&quot;background:#64748b&quot;></i>未着手</span><span class=&quot;lg&quot;><i style=&quot;background:#7c3aed&quot;></i>gated(前提待ち)</span><span class=&quot;lg&quot;><i style=&quot;background:#ef4444&quot;></i>blocker</span><span class=&quot;lg&quot; style=&quot;color:#fb7185;font-weight:700;&quot;>▎今ここ</span></div>
+  <div class=&quot;chart&quot;>
+    <div class=&quot;axis&quot;><div class=&quot;tick&quot; style=&quot;left:0.00%&quot;>①基盤計測</div><div class=&quot;tick&quot; style=&quot;left:20.00%&quot;>②基盤物理</div><div class=&quot;tick&quot; style=&quot;left:30.00%&quot;>③基盤仕上げ</div><div class=&quot;tick&quot; style=&quot;left:40.00%&quot;>④単clip</div><div class=&quot;tick&quot; style=&quot;left:50.00%&quot;>⑤off-center</div><div class=&quot;tick&quot; style=&quot;left:60.00%&quot;>⑥multi-clip</div><div class=&quot;tick&quot; style=&quot;left:70.00%&quot;>⑦学習RL</div><div class=&quot;tick&quot; style=&quot;left:90.00%&quot;>⑧将来</div></div>
+    <div class=&quot;nowlbl&quot;>今 ▼</div><div class=&quot;nowline&quot;></div>
+    <div class=&quot;lanehdr&quot;>基盤</div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar done&quot; style=&quot;left:0.00%;width:20.00%;&quot;><span class=&quot;blbl&quot;>R0/R1 計測・述語</span></div></div></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar done&quot; style=&quot;left:20.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>Option-E 基盤</span></div></div><span class=&quot;note&quot;>← R1 / env7物理</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar active&quot; style=&quot;left:30.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>R-S7.1 把持(コ型)</span></div></div><span class=&quot;note&quot;>← Option-E</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar active&quot; style=&quot;left:30.00%;width:35.00%;&quot;><span class=&quot;blbl&quot;>R-S6.6 GPU安定化</span></div></div><span class=&quot;note&quot;>← Option-E / RLに必要</span></div>
+<div class=&quot;lanehdr&quot;>能力</div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar done&quot; style=&quot;left:40.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>単clip route/hook</span></div></div><span class=&quot;note&quot;>← R-S7.1</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar active&quot; style=&quot;left:50.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>★ off-center grasp</span></div></div><span class=&quot;note&quot;>← 単clip ◀ 今ここ / 傾き解消</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar blocker&quot; style=&quot;left:50.00%;width:20.00%;&quot;><span class=&quot;blbl&quot;>retention (ピン/衝突)</span></div></div><span class=&quot;note&quot;>off-center/multi-clipを塞ぐ・Rs判断</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar pend&quot; style=&quot;left:60.00%;width:15.00%;&quot;><span class=&quot;blbl&quot;>multi-clip (C1→C5)</span></div></div><span class=&quot;note&quot;>← off-center + retention解決</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar pend&quot; style=&quot;left:60.00%;width:20.00%;&quot;><span class=&quot;blbl&quot;>知覚 (位置推定)</span></div></div><span class=&quot;note&quot;>並行・gated</span></div>
+<div class=&quot;lanehdr&quot;>学習</div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar gated&quot; style=&quot;left:70.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>DA-MPPI demo生成</span></div></div><span class=&quot;note&quot;>env6完了 / env7再生成</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar gated&quot; style=&quot;left:80.00%;width:17.00%;&quot;><span class=&quot;blbl&quot;>DAPG RL (4skill)</span></div></div><span class=&quot;note&quot;>← 前提4トラック(grasp/GPU/RL-scope/env7基盤)+DR+Residual</span></div>
+<div class=&quot;lanehdr&quot;>将来/Rs</div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar active&quot; style=&quot;left:7.00%;width:90.00%;&quot;><span class=&quot;blbl&quot;>#2 述語再定義</span></div></div><span class=&quot;note&quot;>並行 Rs 軸 / 95→100定性</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar pend&quot; style=&quot;left:92.00%;width:8.00%;&quot;><span class=&quot;blbl&quot;>#3 R2 アーキ再設計</span></div></div><span class=&quot;note&quot;>deferred (条件付)</span></div>
+  </div>
+  <div class=&quot;foot&quot;>順序は <code>nest-snapshot.json</code> の precedent/blocker 依存に接地(<code>gen_gantt.py</code>)。構造ビュー=簡易NEST tree、詳細=jsx tracker <a href=&quot;http://localhost:8765/index.html&quot;>localhost:8765</a>。<br><b>クリティカルパス:</b> Option-E → R-S7.1把持 → 単clip → ★off-center → multi-clip → (gated)学習RL。R-S6.6 GPU は並行で RL の前提。retention は blocker。</div>
+</body></html>" onload="this.style.height=(this.contentWindow.document.documentElement.scrollHeight+4)+'px'"></iframe>
+  <div class="av-ptr">詳細（全 node・依存・展開操作）= <b>NEST jsx tracker</b>: <a href="nest-tracker/index.html">docs/nest-tracker/index.html</a>（要 local server: <code>python -m http.server --directory docs/nest-tracker</code>）。legacy/全履歴 = 下の &lt;details&gt; + git + <code>project-tree-manifest.md</code>。</div>
+</section>
+<details class="meta" style="margin:16px 0;">
+<summary style="cursor:pointer;color:#94a3b8;font-size:13px;">▶ 旧・詳細ビュー + 全履歴（archived; 上の2ビューが現行の §1 Visual Tree、正規詳細は jsx tracker）</summary>
+
 
 <div class="meta">
   <strong>Root Goal (T-ROOT):</strong> Isaac Lab / SIM で 5-clip cable routing を vision-based で動作させ、最終/ultimate target として <strong>100%</strong> 成功率へ改善する（Rs 2026-06-23 で 95%→100%; 数値記載だが現時点では<strong>定性的目標</strong>として解釈 = 完全動作を目指す aspirational target、literal 統計成功率の測定対象ではない）。現在の bar は rough/imperfect でも SIM で基本動作させること。real-world / physical Franka × 2 deploy は current project scope ではない。REAL2SIM / sim-to-real は future consideration のみ。<br>
@@ -2452,5 +2568,7 @@ echo -ne "\033]0;T-AR-Alpha4b-CC\007"
 
 <p class="footnote"><strong>updated 2026-06-15 ~19:49 JST for the WHOLE-PROJECT ADVERSARIAL REVIEW (4-dim red-team, Opus-run, follows G82):</strong> Fable 5 = US-gov-blocked (再開未定) → human chose Opus-now over indefinite wait; 4 independent Opus agents (blind to coordinator context; D3 run with an explicit anti-bias caveat since Opus shares THREAD's pro-gating priors) red-teamed <strong>goal-alignment / technical-architecture / verification-methodology / SSOT-integrity</strong>, each CC §運用28-reconciled against disk (caught real agent errors — incl. a D4 finding that itself trusted a stale record instead of disk-verifying, the very sin it audited — corrected before relay). <strong>VERDICT: all 4 theses PARTIALLY HOLD</strong> — real substantive debts in every dimension, but every absolute framing ("fundamentally unfit / quietly masked / can't trust / net-negative") is OVERSTATED with a strong steelman &rarr; the project is <strong>"UNPROVEN + carrying many cleanup/foundation debts", NOT broken</strong>; the hard pivots were largely forced by measured reality. <strong>Most-important cross-cut (&alpha; &mdash; foundation goal-reality gap):</strong> the 2026-06-05 rescope RAISED the bar (no kinematic / spring-follow / teleport) but TODAY grasp is still scripted-kinematic (tendon-stripped 2F-85) and <strong>no physically-valid routing has EVER been demonstrated</strong> (the one 2026-03-14 route success used now-banned Fix1 kinematic transport; old "92.2%" = spring-follow, <code>PRODUCT_GO=false</code>) &rarr; the rigor bar the project set is not yet met by the current implementation. Other confirmed top findings: friction can't hold the cable in-sim (#3328) &rarr; drove the &#29226;/hook saga; the GPU cable-table contact regression is real + root-cause UNKNOWN (S8); cable downgraded 2-DOF&rarr;1-DOF (forced by MuJoCo CABLE-joint rejection); the freshness-audit guard FALSE-PASSes on stale surfaces (4 fixed phrases, never checks git HEAD); process:[CHANGE] ratio ~38:1 with a 353-entry C8/C9 auth spiral &mdash; BUT ~3 cheap rules (drafter&ne;reviewer / zero-claim-true-positive / pre-check-on-foundation) carry ~all the real yield. <strong>Remediation = 4 tiers (records-hygiene / methodology-pruning / deep-substrate / strategic), each a SEPARATE L3+DEFINE+human-approval task &mdash; NONE started</strong> (read-only review, zero source mutation). Full artifacts: <code>eval_runs/troot_fable_thread_wide_review_20260615/CONSOLIDATED_REVIEW_SUMMARY_20260615.md</code> (+ D1-D4 per-dim reports; the Fable-version FIRE_SPEC stays queued for a re-run when Fable is restored &mdash; D3 is the weakest orthogonality). This HTML = local navigation view, not SSOT. (G83)</p>
 
+
+</details>
 </body>
 </html>
