@@ -171,7 +171,7 @@
   .chart{position:relative;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:34px 18px 14px 150px;}
   .axis{position:absolute;top:8px;left:150px;right:18px;height:22px;}
   .tick{position:absolute;transform:translateX(-2px);font-size:10.5px;color:#94a3b8;border-left:1px solid #334155;padding-left:4px;height:100%;}
-  .row{position:relative;height:30px;display:flex;align-items:center;margin:3px 0;}
+  .row{position:relative;min-height:30px;display:flex;align-items:center;margin:3px 0;}
   .lanehdr{font-size:11px;letter-spacing:.06em;color:#7dd3fc;text-transform:uppercase;margin:12px 0 2px -132px;font-weight:700;}
   .track{position:relative;height:24px;flex:0 0 calc(100% - 250px);width:calc(100% - 250px);background:linear-gradient(90deg,#0f172a 0,#0f172a 100%);border-radius:4px;}
   .bar{position:absolute;top:0;height:24px;border-radius:5px;display:flex;align-items:center;padding:0 8px;box-shadow:0 1px 3px rgba(0,0,0,.4);}
@@ -180,9 +180,9 @@
   .bar.done{background:#22c55e;} .bar.active{background:#f59e0b;} .bar.pend{background:#64748b;}
   .bar.pend .blbl{color:#e2e8f0;} .bar.gated{background:#7c3aed;} .bar.gated .blbl{color:#ede9fe;}
   .bar.blocker{background:repeating-linear-gradient(45deg,#ef4444,#ef4444 6px,#b91c1c 6px,#b91c1c 12px);} .bar.blocker .blbl{color:#fff;}
-  .note{font-size:10.5px;color:#94a3b8;margin-left:10px;white-space:nowrap;}
-  .nowline{position:absolute;top:30px;bottom:10px;left:calc(150px + (100% - 168px) * 0.55);width:2px;background:#fb7185;z-index:5;}
-  .nowlbl{position:absolute;top:10px;left:calc(150px + (100% - 168px) * 0.55 - 14px);color:#fb7185;font-size:11px;font-weight:700;z-index:6;}
+  .note{font-size:10.5px;color:#94a3b8;margin-left:10px;white-space:normal;line-height:1.25;max-width:240px;}
+  .nowline{position:absolute;top:30px;bottom:10px;left:calc(150px + (100% - 168px) * 0.62);width:2px;background:#fb7185;z-index:5;}
+  .nowlbl{position:absolute;top:10px;left:calc(150px + (100% - 168px) * 0.62 - 14px);color:#fb7185;font-size:11px;font-weight:700;z-index:6;}
   .foot{margin-top:14px;font-size:11px;color:#94a3b8;border-top:1px solid #334155;padding-top:9px;} .foot a{color:#7dd3fc;}
 </style></head><body>
   <h1>THREAD — 実行順序 (Gantt-like) / どの順で進むか</h1>
@@ -194,22 +194,23 @@
     <div class=&quot;lanehdr&quot;>基盤</div>
 <div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar done&quot; style=&quot;left:0.00%;width:20.00%;&quot;><span class=&quot;blbl&quot;>R0/R1 計測・述語</span></div></div></div>
 <div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar done&quot; style=&quot;left:20.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>Option-E 基盤</span></div></div><span class=&quot;note&quot;>← R1 / env7物理</span></div>
-<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar active&quot; style=&quot;left:30.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>R-S7.1 把持(コ型)</span></div></div><span class=&quot;note&quot;>← Option-E</span></div>
-<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar active&quot; style=&quot;left:30.00%;width:35.00%;&quot;><span class=&quot;blbl&quot;>R-S6.6 GPU安定化</span></div></div><span class=&quot;note&quot;>← Option-E / RLに必要</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar active&quot; style=&quot;left:20.00%;width:50.00%;&quot;><span class=&quot;blbl&quot;>L1X 基盤realism(cable/solver)</span></div></div><span class=&quot;note&quot;>並行・基盤忠実(cable_drop)・FCの前提だがfoundationはphase3充足済→refinement並行(soft-precedent)</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar done&quot; style=&quot;left:30.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>R-S7.1 把持(コ型)</span></div></div><span class=&quot;note&quot;>← Option-E / コ CPU building-block banked</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar active&quot; style=&quot;left:30.00%;width:35.00%;&quot;><span class=&quot;blbl&quot;>R-S6.6 GPU安定化</span></div></div><span class=&quot;note&quot;>← Option-E / RLに必要 ◀ 今ここ N=30 held-rate</span></div>
 <div class=&quot;lanehdr&quot;>能力</div>
 <div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar done&quot; style=&quot;left:40.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>単clip route/hook</span></div></div><span class=&quot;note&quot;>← R-S7.1</span></div>
-<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar active&quot; style=&quot;left:50.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>★ off-center grasp</span></div></div><span class=&quot;note&quot;>← 単clip ◀ 今ここ / 傾き解消</span></div>
-<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar blocker&quot; style=&quot;left:50.00%;width:20.00%;&quot;><span class=&quot;blbl&quot;>retention (ピン/衝突)</span></div></div><span class=&quot;note&quot;>off-center/multi-clipを塞ぐ・Rs判断</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar done&quot; style=&quot;left:50.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>off-center grasp</span></div></div><span class=&quot;note&quot;>← 単clip / 傾き=非問題・機能OK (decision B 6/24)</span></div>
 <div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar pend&quot; style=&quot;left:60.00%;width:15.00%;&quot;><span class=&quot;blbl&quot;>multi-clip (C1→C5)</span></div></div><span class=&quot;note&quot;>← off-center + retention解決</span></div>
-<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar pend&quot; style=&quot;left:60.00%;width:20.00%;&quot;><span class=&quot;blbl&quot;>知覚 (位置推定)</span></div></div><span class=&quot;note&quot;>並行・gated</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar pend&quot; style=&quot;left:30.00%;width:50.00%;&quot;><span class=&quot;blbl&quot;>知覚 Perception(位置推定)</span></div></div><span class=&quot;note&quot;>並行・独立(依存なし)・いつでも開始可</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar blocker&quot; style=&quot;left:30.00%;width:40.00%;&quot;><span class=&quot;blbl&quot;>retention (ピン/衝突)</span></div></div><span class=&quot;note&quot;>並行・独立(Rs-scope)・pin採用決定済/実装ゲート待ち</span></div>
 <div class=&quot;lanehdr&quot;>学習</div>
-<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar gated&quot; style=&quot;left:70.00%;width:10.00%;&quot;><span class=&quot;blbl&quot;>DA-MPPI demo生成</span></div></div><span class=&quot;note&quot;>env6完了 / env7再生成</span></div>
+<div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar active&quot; style=&quot;left:25.00%;width:45.00%;&quot;><span class=&quot;blbl&quot;>DA-MPPI demo生成</span></div></div><span class=&quot;note&quot;>並行・Option-E(済)依存のみ・env7再生成・DAPGをseed</span></div>
 <div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar gated&quot; style=&quot;left:80.00%;width:17.00%;&quot;><span class=&quot;blbl&quot;>DAPG RL (4skill)</span></div></div><span class=&quot;note&quot;>← 前提4トラック(grasp/GPU/RL-scope/env7基盤)+DR+Residual</span></div>
 <div class=&quot;lanehdr&quot;>将来/Rs</div>
 <div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar active&quot; style=&quot;left:7.00%;width:90.00%;&quot;><span class=&quot;blbl&quot;>#2 述語再定義</span></div></div><span class=&quot;note&quot;>並行 Rs 軸 / 95→100定性</span></div>
 <div class=&quot;row&quot;><div class=&quot;track&quot;><div class=&quot;bar pend&quot; style=&quot;left:92.00%;width:8.00%;&quot;><span class=&quot;blbl&quot;>#3 R2 アーキ再設計</span></div></div><span class=&quot;note&quot;>deferred (条件付)</span></div>
   </div>
-  <div class=&quot;foot&quot;>順序は <code>nest-snapshot.json</code> の precedent/blocker 依存に接地(<code>gen_gantt.py</code>)。構造ビュー=簡易NEST tree、詳細=jsx tracker <a href=&quot;http://localhost:8765/index.html&quot;>localhost:8765</a>。<br><b>クリティカルパス:</b> Option-E → R-S7.1把持 → 単clip → ★off-center → multi-clip → (gated)学習RL。R-S6.6 GPU は並行で RL の前提。retention は blocker。</div>
+  <div class=&quot;foot&quot;>順序は <code>nest-snapshot.json</code> の precedent/blocker 依存に接地(<code>gen_gantt.py</code>)。構造ビュー=簡易NEST tree、詳細=jsx tracker <a href=&quot;http://localhost:8765/index.html&quot;>localhost:8765</a>。<br><b>クリティカルパス:</b> Option-E → R-S7.1把持 → 単clip → off-center(完了) → ◀今ここ R-S6.6 GPU held-rate → multi-clip → (gated)学習RL。R-S6.6 GPU は RL の前提。retention は blocker(pin採用決定済)。<br><b>並行トラック(依存なし・本線と同時進行):</b> L1X基盤realism / 知覚Perception / DA-MPPI demo / retention(Rs-scope) / #2述語再定義 / R-S6.6 GPU。本線=grasp pipeline(単clip→off-center→multi-clip)は直列。</div>
 </body></html>" onload="this.style.height=(this.contentWindow.document.documentElement.scrollHeight+4)+'px'"></iframe>
   <div class="av-ptr">詳細（全 node・依存・展開操作）= <b>NEST jsx tracker</b>: <a href="nest-tracker/index.html">docs/nest-tracker/index.html</a>（要 local server: <code>python -m http.server --directory docs/nest-tracker</code>）。legacy/全履歴 = 下の &lt;details&gt; + git + <code>project-tree-manifest.md</code>。</div>
 </section>
