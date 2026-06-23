@@ -1148,6 +1148,16 @@
   <div class="legend-item"><span class="badge b-new">RECENT</span> 起票履歴</div>
 </div>
 
+<details class="meta" style="margin:8px 0;"><summary style="cursor:pointer;color:#94a3b8;">▶ Operational Roster (pane roles — NOT a task; separated from the §1 goal tree 2026-06-23 per Rs)</summary>
+<div class="meta">
+  <strong>⚠ pane-IDs VOLATILE</strong> — reset on reboot + roles drift; re-derive LIVE each session (ROLE NAMES are the durable key, NOT the IDs). Snapshot 2026-06-23: <strong>RS-TECH-LEAD=%9 / OPS-SUP=%2 / COORD=%4 / COORD2=%8</strong>.<br>
+  <strong>RS-TECH-LEAD</strong> — Rs代行 + Tech Lead; technical direction, scoped approvals, bounded directives to executors, evidence interpretation. Directs/authorizes only — does NOT self-execute gated mutations/launches (route to COORD/COORD2 or HOLD).<br>
+  <strong>COORD</strong> — primary executor; preflight / implementation / run / artifact reporting; holds on scope gaps. No independent production GO.<br>
+  <strong>OPS-SUPERVISOR</strong> — operational reviewer + independent PV; facilitation, monitoring, Vault/SSOT consistency, V7/V9/V10 guard review, risk flags; advisory-blocking (Tier-A INCOMPLETE blocks pre-execution). No launch/mutation/authorize authority; on drafter==reviewer, spawn an on-demand independent reviewer.<br>
+  <strong>COORD2</strong> — support executor / design lane when assigned; executor-failover when COORD unavailable (authorize≠execute preserved). No autonomous GPU/source work, no independent production GO.
+</div>
+</details>
+
 <h2>§1 Visual Tree (CSS、no-JS)</h2>
 
 <div class="tree-container">
@@ -1156,24 +1166,7 @@
     <span class="tnode n-root">T-ROOT</span>
     <span class="tnode-info">L0: 5-clip cable routing vision-based <strong>100%</strong> (Rs 2026-06-23 で 95%→100%; 数値記載だが現時点では<strong>定性的目標</strong>=完全動作を目指す aspirational target、literal 統計 SR の測定対象ではない; = the P0-KILL #2 predicate-redefinition). The OLD literal 95% was <strong>infeasible-as-scoped (P0 KILL 2026-05-19)</strong>. Active program (P0-KILL priority order): Legacy(CLOSED) → R0(done) → R1(done) → <strong>L1.X Substrate-Realism (#1 ✅ RESOLVED 2026-06-23)</strong> → Predicate-Redef(#2, Rs) → R2 Architecture(#3, deferred; ex-Track-A SUPERSEDED). The L1.A-H proof tree below is the LEGACY (pre-P0-KILL) architecture decomposition, retained as a structural/historical map; the current operative axis is L1.X Substrate-Realism (recorded onto this §1 map 2026-06-23).</span>
     <ul>
-      <li>
-        <span class="tnode n-coord">T-ROOT-RS-TECH-LEAD</span>
-        <span class="tnode-info"><strong>⚠ pane-IDs are VOLATILE</strong> (reset on reboot + roles drift — re-derive LIVE each session; the ROLE NAMES are the durable map key, NOT the IDs. As of 2026-06-23: RS-TECH-LEAD=%9 / OPS-SUP=%2 / COORD=%4 / COORD2=%8.) [legacy id:] pane %7 / formerly T-ROOT-CODEX-RELAY; Rs代行 + Tech Lead; owns technical direction, scoped approvals, bounded directives to executors, no-repeat disposition, and evidence interpretation. Canonical tag <code>T_ROOT_RS_TL</code>; old CODEX-RELAY name is legacy alias only. No product / physical-grasp / sim2real-success / T-ROOT-95 claim without explicit evidence gate. <strong>Separation of duties (2026-05-30):</strong> directs/authorizes only — must <strong>NOT self-execute</strong> gated mutations or GPU/sim/collector launches; gated execution routes to %4 (primary) or %5 (failover); if neither executor is available, <strong>HOLD</strong> rather than self-execute. %3 post-verifies every gated step.</span>
-        <ul>
-          <li>
-            <span class="tnode n-coord">T-ROOT-COORD</span>
-            <span class="tnode-info">pane %4 / <strong>primary executor</strong> / execution coordinator; receives bounded directives from T-ROOT-RS-TECH-LEAD, performs preflight / implementation / run / artifact reporting, and must hold on scope gaps. On %4 unavailability, gated execution fails over to %5 (COORD2), <strong>not</strong> to %7 (2026-05-30). Operations node only; no independent production GO or product-readiness claim.</span>
-          </li>
-          <li>
-            <span class="tnode n-coord">T-ROOT-OPS-SUPERVISOR</span>
-            <span class="tnode-info">pane %3 / Scrum Master and operational reviewer; facilitation, monitoring, pane roster, Vault/SSOT consistency, V7/V9/V10 guard review, and risk flags only. <strong>Advisory + blocking-gate role (clarified 2026-05-30):</strong> default posture passive; Tier-A pre-execution review is <strong>advisory-blocking</strong> — a Tier-A <code>INCOMPLETE</code> blocks progress before execution (Tier-B async flag / Tier-C no intervention), per <code>feedback_supervisor_relay_intervention_timing_2026-05-24</code>. Can block, but has <strong>no launch / mutation / authorize authority</strong> and no independent production GO; not Rs代行, not Tech Lead, no primary execution. <strong>On-demand independent verification (2026-05-30):</strong> on a high-stakes gate (GPU launch / protected mutation) where the author and the independent checker would be the same node (drafter==reviewer — e.g. %3 drafting a package, given %7 self-execute is prohibited), an <strong>independent reviewer is spawned on demand</strong> (fresh-context CC via the CC-Debate / Code-C pattern) rather than self-reviewing; no standing node added.</span>
-          </li>
-          <li>
-            <span class="tnode n-coord">T-ROOT-COORD2</span>
-            <span class="tnode-info">pane %5 / support executor / design lane when explicitly assigned by T-ROOT-RS-TECH-LEAD; <strong>designated executor-failover (2026-05-30):</strong> when %4 (COORD) is unavailable, gated execution routes here (not to %7), preserving authorize≠execute. May prepare bounded 0-GPU or implementation packets under directive. No autonomous GPU/source work, no owner inference, no independent production GO.</span>
-          </li>
-        </ul>
-      </li>
+      <!-- Operational roster (pane roles) MOVED OUT of the goal tree 2026-06-23 (Rs directive「役割分担を切り離して別の場所に」) → see the "Operational Roster" details section above the §1 Visual Tree heading. -->
       <li>
         <span class="tnode n-empirical n-shipped">R0 Measurement Foundation</span>
         <span class="tnode-info">COMPLETE: f(1.0)=0.7227 (185/256 retry-resistant, Wilson CI [0.665,0.774], large_unchanged); candidate retry-resistant ceiling 1−f=0.277 ≪ 0.95 → P0 KILL reinforced. (docs/troot_r0_phase0a_substrate_audit_2026-05-19.md; eval_runs/r0_phase0b_pi3_cable_drop_20260520/)</span>
