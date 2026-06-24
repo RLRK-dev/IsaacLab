@@ -14,7 +14,15 @@ close the ◇'s open bottom = the verified lift-fail root). Built on a SCRATCH a
 UNTOUCHED.
 
 ## ⚠ CONSISTENCY CAVEATS (records-must-match-fact — read FIRST)
+- **✅ 2026-06-23 — ◇→コ ASSET SWAP LANDED (supersedes the "records-ahead-of-code / swap deferred" + "(2a) swap DEFERRED" claims below).** Verified on-disk 2026-06-24: commit `85315bbec6` "Swap gripper finger asset from V-groove to ko-shape (R-S7.1)" added `2f85_koshape.xml` + updated `task_config.py` + `test_newton_clip_routing.py`. `ROBOTIQ_STRIPPED_XML` now → `2f85_koshape.xml` (`test:160`), and the RL substrate (`newton_skill_env_base.py:72/:1383/:1389`) imports that SAME symbol → **both the CPU grasp path AND the RL substrate now load コ** — the (2a) "shared-symbol arms the substrate" concern is MOOT (it landed, intentionally). The "committed asset still `2f85_tendon_stripped.xml` (◇)" wording below is STALE (pre-swap, 06-22). CPU build-safe (RS71-SSOT §0#4: R1/R2/S6_GRASP/S8/RL-base all PASS); GPU R-S6.6-on-コ = separate, see §0#4.
 - **⛔ 2026-06-21 (human decision): the ◇ V-groove is DISCARDED as a design reference** — NOT retained, NOT locked (this SUPERSEDES the "retained as up-cap/drag reference" framing elsewhere in this doc). Active finger = コ. ⚠ records-ahead-of-code: the committed asset `2f85_tendon_stripped.xml` (`7afa84b463`) still physically contains the ◇ + コ is unwired scratch → ◇→コ asset swap = deferred L3. Reflected on-disk: RS71-SSOT §0 INVARIANT 4 + §5/§6, LEDGER:50/51, Gripper-VGroove status:5 + banner, SOMA:80/87 (reconciled 2026-06-22). Still deferred: this doc's deeper findings narrative + the docs/logical_decomposition.html view (broadly stale → separate refresh) + the committed-asset ◇→コ swap (L3 GPU build). (5体 [VERIFY] gated this: bare "DISCARDED" over-claims vs the running ◇ → recorded as "discard DECIDED, asset swap pending".)
+- **(2a) asset-swap status — 2026-06-22: ◇→コ swap DEFERRED to #3/2b** (5体 NHA HOLD + Rs). The EE value is
+  RE-DERIVED + validated (`EE_TO_PINCH_TIP_CLOSED(コ)=0.27574726696`, +0.58mm vs ◇; artifact
+  `eval_runs/troot_optE_rs71_koshape_ee_tip_rederive_20260622/`) and the asset `2f85_koshape.xml` is
+  comment-cleaned (geoms byte-identical to the human-validated scratch), BUT the `test:102` + `task_config:303`
+  landing is DEFERRED: `test:102` (ROBOTIQ_STRIPPED_XML) is a SHARED symbol that arms the RL substrate
+  (`newton_skill_env_base.py:72`, 8→4 grasp-contact geoms) before GPU R-S6.6, and landing now unblocks no
+  executable work (item-3 human+GPU gated). Resume package: `R_S71_2A_SWAP_DEFERRED_2026-06-22.md`.
 - **This REMOVES the V-groove** (which the prior banked spec called 100% mandatory). **✅ コ is now BANKED
   2026-06-21 (Rs source-GO) — V-groove SUPERSEDED→コ across the authoritative specs** (LEDGER:50/51, RS71-SSOT
   §5/§6/LOCK, SOMA:80/87, Gripper-VGroove banner+:18/:22; applied by %9 per the human's explicit authorization,
@@ -94,8 +102,9 @@ Per pad, ONLY two geoms (S1 cage f1up/f1lo/lip + V-groove vgu/vgl REMOVED):
     the 2F-85 ≤235N envelope, non-blocker) → grip-DOWN tuning recommended (also shrinks penetration + GPU-NaN risk).
   - **STILL UNVERIFIED (hard gate):** GPU (R-S6.6, env7 mjw non-det NaN, `SOMA.md:83`) — penetration MAGNITUDE
     (1.39 > 1.1mm ref by 1.26×) + grip force are **NON-conservative ×3** (CPU vs GPU); GPU verify + grip-tune
-    before PRODUCTION. **FULL-clamp** (NOT the step-table half-clamp ◇, `RS71-System-Spec-SSOT.md:50`). The コ
-    remains **UN-BANKED** vs the FROZEN V-groove (formal bank = Rs source-GO). Verdict: コ grasp does NOT fail the
+    before PRODUCTION. **FULL-clamp** (NOT the step-table half-clamp ◇, `RS71-System-Spec-SSOT.md:50`). The コ is
+    now **BANKED** 2026-06-21 (Rs source-GO) as a CPU building-block (PRODUCTION-pending = the GPU
+    hard-gate above); the V-groove ◇ is SUPERSEDED→コ / DISCARDED as a design reference (no longer FROZEN). Verdict: コ grasp does NOT fail the
     CPU contact-physics banking gates as a building block; same caveat structure as banked-(A).
 - **(SUPERSEDED) earlier "LIFT NOT achieved":** the `r_s71_koshape_depth_47.py` depth-sweep used a SINGLE-move
   lift + non-centered depth → found cable-in-gap ⊻ lift; the refined recipe above (centered + −3mm + GRADUAL
