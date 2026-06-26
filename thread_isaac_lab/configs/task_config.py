@@ -24,28 +24,28 @@ ROBOT_RIGHT_BASE = (0.0, 0.35, TABLE_HEIGHT)
 # === Robot DOF SSOT (S2 substrate swap: Franka 9DOF VBD -> UR5e+Robotiq 14DOF, 2026-06-08) ===
 # DERIVED on disk (eval_runs/troot_optE_s2_index_space_derivation_*, collapse=True). Newton-DOF SSOT ONLY
 # (the PhysX dual_arm_cfg_*/legacy scripts keep their own Franka constants -- see S2 design C8).
-ARM_DOF = 6                          # UR5e arm joints (revolute)
-GRIPPER_DOF = 8                      # Robotiq 2f85 kinematic joints (4-bar x2)
-ROBOT_NUM_JOINTS = ARM_DOF + GRIPPER_DOF          # 14
-EE_BODY_IDX = 5                      # wrist_3_link body local index
-ROBOT_BODIES_PER_ARM = ROBOT_NUM_JOINTS           # 14 (bodies==joints, collapse=True; probe-confirmed)
+ARM_DOF = 6  # UR5e arm joints (revolute)
+GRIPPER_DOF = 8  # Robotiq 2f85 kinematic joints (4-bar x2)
+ROBOT_NUM_JOINTS = ARM_DOF + GRIPPER_DOF  # 14
+EE_BODY_IDX = 5  # wrist_3_link body local index
+ROBOT_BODIES_PER_ARM = ROBOT_NUM_JOINTS  # 14 (bodies==joints, collapse=True; probe-confirmed)
 
 # --- index-SPACE split (carry-forward #1: three joint roles diverge for UR5e+Robotiq) ---
-GRIPPER_DRIVER_JOINT_IDX = [6, 10]                # JOINT space: ACTUATED driver joints (control / open-set)
-GRIPPER_JOINT_RANGE = list(range(ARM_DOF, ROBOT_NUM_JOINTS))   # JOINT space: ALL 8 gripper joints [6..13]
+GRIPPER_DRIVER_JOINT_IDX = [6, 10]  # JOINT space: ACTUATED driver joints (control / open-set)
+GRIPPER_JOINT_RANGE = list(range(ARM_DOF, ROBOT_NUM_JOINTS))  # JOINT space: ALL 8 gripper joints [6..13]
 #                                                   (exclude-gripper-from-arm-IK / finger_mask / pin sets)
-GRIPPER_PAD_BODY_IDX = [9, 13]                    # BODY space: pad-carrying followers (contact-filter LOGIC;
+GRIPPER_PAD_BODY_IDX = [9, 13]  # BODY space: pad-carrying followers (contact-filter LOGIC;
 #                                                   pad GEOMETRY itself deferred to S5)
-N_ARM_BODIES = ARM_DOF                            # 6 (contact-filter: arm bodies 0..5)
+N_ARM_BODIES = ARM_DOF  # 6 (contact-filter: arm bodies 0..5)
 
 # --- stride split (joint-stride vs body-stride; both =14 today, behavior-preserving) ---
-JOINTS_PER_ARM = ROBOT_NUM_JOINTS                 # 14: per-arm stride for joint_q arrays
-BODIES_PER_ARM = ROBOT_BODIES_PER_ARM             # 14: per-arm stride for body_q arrays
+JOINTS_PER_ARM = ROBOT_NUM_JOINTS  # 14: per-arm stride for joint_q arrays
+BODIES_PER_ARM = ROBOT_BODIES_PER_ARM  # 14: per-arm stride for body_q arrays
 
 # Backward-compat aliases (re-pointed to the CORRECT space):
-FRANKA_NUM_JOINTS = ROBOT_NUM_JOINTS              # 14 (legacy stride; migrate sites to JOINTS_PER_ARM/BODIES_PER_ARM)
-EE_BODY_OFFSET = EE_BODY_IDX                       # 5
-FINGER_LOCAL = GRIPPER_PAD_BODY_IDX               # [9,13]  (BODY-space finger-pos reads)
+FRANKA_NUM_JOINTS = ROBOT_NUM_JOINTS  # 14 (legacy stride; migrate sites to JOINTS_PER_ARM/BODIES_PER_ARM)
+EE_BODY_OFFSET = EE_BODY_IDX  # 5
+FINGER_LOCAL = GRIPPER_PAD_BODY_IDX  # [9,13]  (BODY-space finger-pos reads)
 
 # =============================================================================
 # Initial Joint Angles (Phase 1 hover)
@@ -141,15 +141,22 @@ CABLE_RADIUS = 0.004
 # −36%) — RETIRED. Service load = m·g = 0.44 N (axial bars of the G3 class derive from THIS mass).
 
 # add_rod cable — rigid-capsule chain with CABLE joints (rigid-link REVOLUTE on SolverMuJoCo; NOT Cosserat — see log.md:6042)
-CABLE_BEND_STIFFNESS = 1.0# EI [N·m²] L3 stiffness calibration variant 1.0 (was 0.1)
-CABLE_BEND_DAMPING = 0.01# Bend damping [N·m·s]
+CABLE_BEND_STIFFNESS = 0.005  # EI [N·m²] — power-cable-floppy (human VISUAL pick 2026-06-19, %3 AUDIT-PASS
+# R_S71_CABLE_DRAPE_AUDIT_03.md). Was 1.0 (EI 1.0 → joint K 66.67 = rigid rod = the "rod-like" complaint) / orig 0.1.
+# CABLE_BEND_STIFFNESS = EI here (build:809 add_rod, :827 CABLE_MUJOCO_BEND_K = EI/CABLE_SEG_LEN), NOT a joint
+# stiffness; active mujoco add_revolute_cable joint K = 0.005/0.015 = 0.333 N·m/rad. Inside the realistic Ø8 EI
+# window 1e-3..5e-2 (Cable-Bending-Stiffness-EI-8mm.md); 45mm drape / 200mm overhang. Picked VISUALLY from the
+# drape render (the sim drape IS the acceptance criterion; the "sim under-droops" rationale was retracted — audit
+# F-B). The estimators/cable_state_cosserat.py:47 _NOMINAL_BEND_EI mirror is a SEPARATE env6/RL Cosserat-estimator
+# weight, intentionally NOT synced here (pre-existing 0.1 drift; that track's own decision — audit F-A).
+CABLE_BEND_DAMPING = 0.01  # Bend damping [N·m·s]
 CABLE_STRETCH_STIFFNESS = 1.0e6  # EA [N] axial stiffness (high enough to prevent stretching)
-CABLE_STRETCH_DAMPING = 0.0# Stretch damping [N·s]
+CABLE_STRETCH_DAMPING = 0.0  # Stretch damping [N·s]
 
 # Cable contact parameters (MuJoCo rigid body penalty contact for capsules)
-CABLE_CONTACT_KE = 2500.0# Contact stiffness (ShapeConfig default=2500; was 100 — 25x too low)
-CABLE_CONTACT_KD = 100.0# Contact damping (ShapeConfig default=100; was 10)
-CABLE_CONTACT_MU = 1.0# Friction coefficient (high for grip traction)
+CABLE_CONTACT_KE = 2500.0  # Contact stiffness (ShapeConfig default=2500; was 100 — 25x too low)
+CABLE_CONTACT_KD = 100.0  # Contact damping (ShapeConfig default=100; was 10)
+CABLE_CONTACT_MU = 1.0  # Friction coefficient (high for grip traction)
 
 # SolverMuJoCo-path contact stiffness (S4a, empirically decided 2026-06-10; %3-PV-PASS_SCOPED).
 # Newton maps ShapeConfig ke/kd -> MuJoCo solref via convert_solref (kernels.py:185):
@@ -225,7 +232,18 @@ GRASP_X = 0.30  # Cable initial X position
 CLIP_X = CLIP_X_ODD  # Clip1 X position (backward compat)
 CLIP_GROOVE_INNER_RADIUS = 0.006  # 6mm — groove inner radius (from create_clip.py GROOVE_INNER_D/2)
 P3_X_OFFSET = 0.012  # Small +X overshoot past clip for groove alignment
-GRIP_HALF_SPAN = 0.060  # Each arm's EE offset from clip center in Y [m] (arm-to-arm span = 120mm)
+GRIP_HALF_SPAN = 0.044  # Each arm's EE offset from clip center in Y [m] (commanded arm-to-arm span = 88mm).
+# History: 0.060 -> 0.028 (human source-GO 2026-06-19, max clip-insertion pressure) -> RELAXED to 0.044
+# (reach-flag resolution, r_s71_reach_resolve_04 + r_s71_reach_minconv_04). The dual-arm collision-avoidance
+# IK objective (newton_routing_utils: EE-EE safety spheres 0.035+0.035=70mm, +10mm margin, COLLISION_WEIGHT=5.0)
+# FLOORS the achieved arm separation at ~80.5mm, so 0.028 (56mm) was UNREACHABLE in production: ik_move_both
+# left 12.3mm error at every phase -> converged=False -> moves_ok FAILS. Cause = the collision objective BY
+# DESIGN, NOT under-convergence (ik_move_both = ONE solve_ik_dual @ IK_ITERATIONS=100) and NOT kinematic reach
+# (collision-OFF hits 0.028 exactly, cost 0). 0.044 = min-converging span with a 3mm margin under the 5mm
+# moves_ok gate (shortfall 2.2mm; achieved sep 92.4mm); 0.040 is the gate-edge floor (4.2mm, fragile C2-C5/DR).
+# ⚠ ROOT-CAUSE lever to reach the full 0.028 (max pressure): reduce the conservative COLLISION_SPHERE_RADII
+# (real collidable pads clear at 34mm @28mm, r_s71_gripspan_verify_04) — an IK change in newton_routing_utils.py,
+# NOT this file (separate GO). COUPLING: cable hold-span = the achieved sep (~92mm), not the commanded 88mm.
 
 # =============================================================================
 # Cable XY Domain Randomization (2026-04-25 Option C' ALT-MIN)
@@ -236,13 +254,19 @@ GRIP_HALF_SPAN = 0.060  # Each arm's EE offset from clip center in Y [m] (arm-to
 # Disabled by default (backward-compat with existing eval/train scripts).
 # Scope: AC skill BC demo-collection variance augmentation (Phase 1 工程内 fix),
 #   NOT sim-to-real DR per SOMA L38 distinction (deployment 時は cable fixed 動作).
+#   ⚠ SUPERSEDED 2026-06-24 (Rs directive「位置姿勢はランダムに対応する必要あり」): deployment MUST handle
+#   RANDOM cable position/pose → the "deploy = cable fixed (position/pose)" premise above no longer holds. This
+#   DR is now ALSO a deployment-robustness requirement, not demo-only. ⚠ records-ahead-of-code: decision MADE,
+#   impl PENDING (DR still opt-in/OFF by default below; the deploy range + policy-retrain wiring = Rs to spec,
+#   NOT auto-set here — value unchanged). (Cable SHAPE-from-bending = a SEPARATE axis → Stage B/C.)
+#   ref: log.md 2026-06-24; SOMA "L38" line-ref now stale/unlocatable (flagged to Rs).
 # Reference: vault log.md 2026-04-25 01:25 rs Option B explicit approval entry.
 CABLE_XY_DR_AMPLITUDE = (0.020, 0.020)  # (|dx_max|, |dy_max|) m — ±20mm X × ±20mm Y
 
 # Derived: grip Y centered on C1 (for single-clip scripts).
 # Multi-clip routing should use clip_y ± GRIP_HALF_SPAN directly.
-WIDE_LEFT_Y = CLIP_POSITIONS[0][1] - GRIP_HALF_SPAN  # C1: +0.150 - 0.060 = +0.090
-WIDE_RIGHT_Y = CLIP_POSITIONS[0][1] + GRIP_HALF_SPAN  # C1: +0.150 + 0.060 = +0.210
+WIDE_LEFT_Y = CLIP_POSITIONS[0][1] - GRIP_HALF_SPAN  # C1: +0.150 - 0.044 = +0.106
+WIDE_RIGHT_Y = CLIP_POSITIONS[0][1] + GRIP_HALF_SPAN  # C1: +0.150 + 0.044 = +0.194
 
 # =============================================================================
 # Finger Control
@@ -275,6 +299,18 @@ GRIPPER_ECURVE_Q5MM_RAD = 0.7323  # q(5.0 mm) [rev7 pinned target, gate-verified
 GRIPPER_ECURVE_Q4MM_RAD = 0.7407  # q(4.0 mm) [rev8 NAMED-1, gate-verified]
 # (The AIR-pose 8 mm anchor 0.7071682989734179 [rev8 phases."P1.2".close_target_rad] is a
 # DIFFERENT calibration family — do not mix with the down-pose anchors.)
+# --- HALF clamp (grasp/lift/route GUIDANCE) for the コ finger (step-table HALF: SOMA.md:80
+# full=clip-insertion / half=guidance; Gripper-VGroove-Design.md:106). Human-CONFIRMED 0.69
+# (2026-06-21 「0.69で確定」), supersedes the earlier PROPOSED 0.667. %2 cross-PV
+# (eval_runs/troot_optE_rs71_kinematic_retention_20260616/R_S71_KO_GRIP_DOWN_{SWEEP_75,RETENTION_CROSSPV_76}):
+# CPU 66.6N CLOSED/arm (vs 153N CLOSED at full CLOSE_RAD), penetration 0.898mm CLOSED, retention HOLDS
+# (slip 0.7mm, firmer than the step-table-exact 0.667). 0.69 = human grip-MARGIN pick (0.667 has lower
+# force 9.9N / pen 0.392mm but margin-light/intermittent) — a robustness trade, NOT a physics optimum.
+# ⚠ CPU-only, NON-conservative x3 for GPU; GPU R-S6.6 + full-131mm-route/snag-retention PENDING before
+# production (route verified 80 of 131mm only). ⚠ SSOT-ONLY: no committed consumer yet — the committed S6
+# grasp (_run_mujoco_grasp_episode) is FREE-AIR (keeps CLOSE_RAD); the cable grasp lives in eval_runs
+# probes that import this. FULL=insertion (CLOSE_RAD 0.7407) / HALF=guidance (this).
+GRIPPER_DRIVER_HALF_OPEN_RAD = 0.69
 GRIPPER_SERVO_TARGET_KE = 66.7  # driver position-servo stiffness, as run
 GRIPPER_SERVO_TARGET_KD = 2.0  # [rev7+rev8 phases."P1.2".servo = {66.7, 2.0, 2.5}]
 GRIPPER_DRIVER_EFFORT_LIMIT_NM = 2.5  # ~= official 5 N tendon force x coef 0.5 — restores the
@@ -282,13 +318,15 @@ GRIPPER_DRIVER_EFFORT_LIMIT_NM = 2.5  # ~= official 5 N tendon force x coef 0.5 
 # gate held on rev7/rev8.
 # EE->pinch geometry (CLOSED pose, measured; the re-pinned neq8 A1 reference, rev8 a1_measured):
 EE_TO_PINCH_CLOSED = 0.2548428289592266  # wrist_3 -> pinch_mid drop [m] (drop_closed_m)
-EE_TO_PINCH_TIP_CLOSED = 0.27574726696  # wrist_3 -> pad TIP drop [m] (tip_drop_m; ko-shape f1ext
-# claw tip, re-derived 2026-06-22 = +0.58mm vs the prior V-groove value 0.27516789724506097; pads extend
-# ~20.90 mm distal of pinch_mid; keeps the designed 20mm closed-tip table clearance). Artifact:
-# eval_runs/troot_optE_rs71_koshape_ee_tip_rederive_20260622/. EE_TO_FINGERTIP above (0.220) is Franka/legacy;
-# UR5e+Robotiq consumers use THESE.
-EE_TO_PINCH_OPEN = 0.2092  # wrist_3 -> pinch_mid drop [m], OPEN gripper (S6, probe_wrist3_frame
-# wrist3_to_pinch_open_m). Regime-correct OPEN offset for aligning the open pinch to a cable. SSOT for
+EE_TO_PINCH_TIP_CLOSED = 0.27574726696  # wrist_3 -> pad TIP drop [m] (tip_drop_m; コ f1ext claw tip,
+# re-derived 2026-06-22 = +0.58mm vs the prior ◇ value 0.27516789724506097; pads extend ~20.90 mm distal
+# of pinch_mid; keeps the designed 20mm closed-tip table clearance). Artifact:
+# eval_runs/troot_optE_rs71_koshape_ee_tip_rederive_20260622/. EE_TO_FINGERTIP above (0.220) is the Franka/legacy
+# value — UR5e+Robotiq consumers use THESE.
+EE_TO_PINCH_OPEN = 0.26092  # wrist_3 -> pinch_mid drop [m], OPEN gripper. koshape f1ext bottom-claw
+# cradle re-derive 2026-06-26 (Rs DC2); supersedes the ◇/S6-era 0.2092 body-origin value (probe_wrist3_frame
+# wrist3_to_pinch_open_m, measured on the UN-CLAWED 2f85 FK model -> undershot the koshape f1ext claw by
+# 51.7mm -> P0 claw penetration); refs gate_a_koshape_REDERIVE.py + %2 cross-confirm log:6684. SSOT for
 # DOWNSTREAM consumers (S2-impl/S3, which have a cable); NOT consumed by the S6 infra smoke (no cable,
 # descends by closed-tip table-clearance) -- defined-for-downstream, not dead (post-debate CC4/CC5/NHA).
 # S6 scripted-close 8-vector (gripper-local JOINT order [6..13] == [right_driver, right_coupler,
@@ -297,8 +335,7 @@ EE_TO_PINCH_OPEN = 0.2092  # wrist_3 -> pinch_mid drop [m], OPEN gripper (S6, pr
 # GRIPPER_DRIVER_CLOSE_RAD=0.7407 in the standalone full-2f85 (equality 4-bar), probe_closed_config_v2.
 # Used by the S6 mujoco IK-motion smoke's scripted-kinematic close (NO grip-force claim; the faithful
 # actuated close is deferred — production stripped build has no actuator/equality, R-S6.6).
-GRIPPER_CLOSE_QPOS = [0.7407, 7.2e-05, 0.728815, -0.699558,
-                      0.7407, 7.2e-05, 0.728815, -0.699558]
+GRIPPER_CLOSE_QPOS = [0.7407, 7.2e-05, 0.728815, -0.699558, 0.7407, 7.2e-05, 0.728815, -0.699558]
 # Grip-force datum (CONFIG-LABELED, %3 delta; in-grip sampling rule: N_total averaged over the
 # both-pad-contact window ONLY, onset -> last-contact — e.g. the rev7 window [248,538], n=255):
 GRIP_FORCE_DATUM_R4_BENCH_N = 47.3  # R4 (0.002,1) @ q=0.7407, PINCH-harness hold, F=0
