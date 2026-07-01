@@ -115,6 +115,9 @@ Per pad, ONLY two geoms (S1 cage f1up/f1lo/lip + V-groove vgu/vgl REMOVED):
   truth and supplied the −3mm fix.**
 
 ## Mid-air clamp / re-grasp (TILT-FOLLOW) — human-CONFIRMED 2026-06-21
+
+> ⚠ **SCOPE — tilt-follow is FLOATING-cable-specific; it does NOT transfer to a TAUT (both-ends-held) re-grasp (Rs-confirmed 2026-07-01, §運用10 reconciliation).** In the C1→C2 routing re-grasp the cable is held TAUT at both ends (L hold + C1 pin) → a **SQUARE-ON** claw (`Rx(-90°)`, no tilt) CAPTURES it, and applying the tilt (either sign) rotates the claw opening OFF the taut cable → R MISSES (0N). Empirical (3-run `C2_TILT_SIGN` sweep, %0 GT-verified 2026-07-01): sign0 square-on grips 104.5N / reach 0.9mm / seats; sign±1 miss 0N; θ=-23.58° = ~2× **outside** the banked +8.6-12° floating envelope. → the harness default for the **C2 routing re-grasp is now `C2_TILT_SIGN=0` (square-on)** (`test_newton_clip_routing.py:4347`); the tilt machinery + override are KEPT for future FLOATING cases. **Use tilt-follow ONLY for the floating/aerial re-grasp described below; use SQUARE-ON for taut-suspended routing re-grasps.** [LEDGER row 2026-07-01; [[feedback-no-new-work-on-ledger-discarded-design]]]
+
 **Goal (human 2026-06-21 「一方でケーブルを持ち上げているところに、もう一方でその空中に浮いている状態のケーブルをクランプ」):**
 while RIGHT anchors the cable ALOFT, LEFT unclamps then RE-grasps the FLOATING (mid-air) cable = dual-arm
 2nd-point re-grasp / hand-over.
@@ -132,6 +135,23 @@ while RIGHT anchors the cable ALOFT, LEFT unclamps then RE-grasps the FLOATING (
   default Rx(−90°) (anchor). → on re-lift, **cable@LEFT rises +20mm = the +20mm LEFT-EE move** (carried) —
   human-CONFIRMED via video (`~/Downloads/r_s71_midair_clamp64.mp4`). Script `r_s71_midair_clamp_64.py` (v2,
   sign +1). **This is the CONFIRMED mid-air re-grasp recipe (human-DECIDED 確定 2026-06-21).**
+- **✅ Stage D — tilt-follow N>1 sweep DONE 2026-06-25 (%2 §運用28 cross-PV CONCUR).** The N=1 recipe above was
+  lifted to N≥30 across the catenary IC (z_lift = RIGHT-anchor height → tilt θ; `stage_d_tiltfollow_sweep.py`, env7
+  CPU, reuses the `_64` tilt-follow monkeypatch + committed コ asset, NO L3 / NO kinematic trick / production
+  UNCHANGED). At the REPRESENTABLE spec-50mm lift (z_lift=0.05, tilt **8.6°**) the tilt-follow re-grasp **HELD 5/5**
+  (rise 20.1mm) = N=1→**N=5**; **SLIPS beyond ~9-11°** (z_lift≥0.07: rise 4.1mm@10.9° / 3.9@13.9° / 0@≥17°). %2
+  `mj_geomDistance` INDEPENDENTLY confirms: HELD(8.6°)=real grip (f1ext bottom-claw −3.97mm form-closure),
+  SLIP(10.9°)=empty claws 44mm above (+30mm gap = full release). **⚠ VERDICT SCOPED (do NOT over-claim):** the
+  mid-air re-grasp is **MARGINALLY-bound** (HELD@8.6° / SLIP@10.9° = tight ~2° margin) and only z_lift was swept —
+  the un-swept representable tilt drivers (re-grasp Y-position toward the −Y free end / pose-random / >50mm lift)
+  mean the margin is NON-conservative ⇒ **HOLDS the narrow spec-50mm CENTERED re-grasp (8.6°, N=5), SLIPS beyond
+  ~9-11°, worst-representable-tilt UNSWEPT — NOT "tilt-follow solves the mid-air re-grasp."** Conservatism (GROVE
+  §2.2): SLIP@≥10.9°=conservative (mj_geomDistance +30mm gap = bankable real limit); HELD@8.6°=non-conservative ×2
+  (RAD_FULL over-squeeze + un-swept worst-tilt). **Robust-bank pending** a re-grasp-Y-position sweep at the spec
+  50mm lift (%2 follow-up; ⚠ a non-88mm-span re-grasp = DUAL-ARM 88mm **INVARIANT #2** Rs design Q — STOP/Rs).
+  CAVEAT-A: validates the TILT-misgrasp recovery MECHANISM at N>1, NOT the recovery SR-gap closure (substrate
+  cable_drop relocates). Artifacts: `eval_runs/troot_clamp_cable_state_space_20260624/stage_d_tiltfollow_sweep.py`
+  + `_{full,diag}_result.json` + `stage_d_pen_crosspv_opssup.*` (%2); `log.md` 2026-06-25 15:26.
 - **❌ claw-gap widening REJECTED (human lever 「爪の間隔を数mm広げる」, tested 10→14mm
   `2f85_koshape_scratch_wide.xml` / `r_s71_midair_clamp_65.py`):** widening HURT the hold — cable rise dropped
   +20mm → **+6mm (slip)** (the 8mm cable rattles in the wider 14mm mouth; capture easier but retention looser).
