@@ -942,3 +942,8 @@ newton **#3127** (tendon stale-refs; 待) / **#3128** (xfrc-inert; maintainer �
 GROVE v3 (docs/grove_methodology_2026-06-05.html) + GROVE_CORE_SPEC.md v1.0 + 5CC 強化 (GROVE_5CC_DECIDE_2026-06-10.md)。⏸ rs-gated CLAUDE.md landing。
 ## 正本ポインタ
 一次記録 = thread-vault/log.md (2026-06-10 12:52〜06-11 04:48 が本 spine の全イベント) + eval_runs/troot_optE_s5_grasp_0gpu_20260610/ + eval_runs/troot_optE_s5b_lift_0gpu_20260611/。本 manifest はビュー(遅延整合可)。旧 L1-lane 詳細は上の凍結部参照。CLAUDE.md NEST 節の「project-tree-manifest.md 現状未配置」は STALE — 修正は rs 指示時 (CLAUDE.md 編集権限)。
+
+## UPDATE 2026-07-02 (%12 RS-TECH-LEAD) — node 追記: T-ROOT-optE-route-dapg-C1C2 (off-map 是正)
+- 新 node **T-ROOT-optE-route-dapg-C1C2** (IN_PROGRESS, parent=`T-L1C-PerSkill-RL`, state.md = `thread-vault/T-ROOT-optE-route-dapg-C1C2/state.md`)。Rs 承認: 2026-07-01 23:28 (arch A + P1) / 2026-07-02 (Q3-first reframe +「3 go」)。⚠ 本 node は 07-01 承認後 未記録のまま P1 実行 (off-map) → 計画ファイル監査 P0-③ で本記録により是正。
+- 要旨: DAPG unit = **経路全体 C1→C2** (Rs 2026-07-01 22:00)。P1 feasibility PASS (non-cons) → P2 reward設計 pre-check BLOCK (%9 CONCUR; whole-route env/demos ABSENT) → P3 demo-recorder build 中 (L3) / **DQ1 UNIT選択 = Rs-PENDING**。demo seed = commit `bcb7393ec8` (LEDGER row43 WORKING)。
+- 一次記録 = log.md 2026-07-01〜 + `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/` (scoping / P2設計⛔ / cross-PV / P3 spec v2.2 / canonical_run_records)。本 block は pointer-only (narrative は log.md; 巨大行禁止)。
