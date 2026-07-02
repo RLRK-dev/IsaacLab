@@ -252,6 +252,18 @@ def parse_frontmatter_tracked(text: str):
             return None, "none"
 
 
+def _load_skiplist() -> set:
+    """Load nest_skiplist.txt (relpaths of non-node state.md files). Registered => INFO not HARD."""
+    p = MANIFEST.parent / "nest_skiplist.txt"
+    out = set()
+    if p.exists():
+        for line in p.read_text(encoding="utf-8").splitlines():
+            entry = line.split("#", 1)[0].strip()
+            if entry:
+                out.add(entry)
+    return out
+
+
 def collect_state_nodes():
     """Scan */state.md + _archive/**/state.md for the manifest §2 view (strict SSOT).
 
@@ -261,6 +273,7 @@ def collect_state_nodes():
       HARD = no node_id (skipped) / duplicate node_id.
     """
     rows, manual, seen = [], [], {}
+    skip = _load_skiplist()
     files = sorted(VAULT_ROOT.glob("*/state.md")) + sorted(VAULT_ROOT.glob("_archive/**/state.md"))
     for sm in files:
         rel = str(sm.relative_to(VAULT_ROOT))
@@ -269,7 +282,10 @@ def collect_state_nodes():
         if method == "regex":
             manual.append(("SOFT", rel, "YAML parse failed -> regex fallback"))
         if not isinstance(fm, dict) or not fm.get("node_id"):
-            manual.append(("HARD", rel, "no frontmatter / no node_id -> skipped"))
+            if rel in skip:
+                manual.append(("INFO", rel, "no node_id; in nest_skiplist.txt (intentional non-node)"))
+            else:
+                manual.append(("HARD", rel, "no frontmatter / no node_id -> skipped (add to nest_skiplist.txt if intentional)"))
             continue
         nid = str(fm.get("node_id")).strip()
         if nid in seen:
@@ -304,48 +320,75 @@ def _atomic_write(path, text: str) -> None:
             os.unlink(tmp)
 
 
+def _build_manifest_region():
+    """Build the §2 GEN region string from state.md. Returns (region, rows, manual). Pure; no write."""
+    rows, manual = collect_state_nodes()
+    noncanon = sorted({r["status"] for r in rows
+                       if r["status"] not in VALID_STATES and r["status"] not in ("PENDING", "(missing)")})
+    out = [GEN_BEGIN, ""]
+    out.append(f"_{len(rows)} nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 "
+               "(SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。"
+               "全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_")
+    out += ["", "| node_id | status | parent |", "|---|---|---|"]
+    for r in rows:
+        tag = " *(archived)*" if r["archived"] else ""
+        out.append(f"| `{_md_cell(r['id'])}`{tag} | {_md_cell(r['status'])} | `{_md_cell(r['parent'])}` |")
+    if noncanon:
+        out += ["", f"_legend — 非正準 status (raw, coercion なし): {', '.join(noncanon)}. "
+                    "正準 = IN_PROGRESS / COMPLETE / DISCARDED / ARCHIVED (+ PENDING)._"]
+    out += ["", GEN_END]
+    return "\n".join(out), rows, manual
+
+
+def _report_manual(rows, manual, action) -> int:
+    hard = [m for m in manual if m[0] == "HARD"]
+    soft = [m for m in manual if m[0] == "SOFT"]
+    info = [m for m in manual if m[0] == "INFO"]
+    print(f"{action}: {len(rows)} nodes -> {MANIFEST.relative_to(REPO)}", file=sys.stderr)
+    if manual:
+        print(f"MANUAL-REVIEW ({len(hard)} HARD / {len(soft)} SOFT / {len(info)} INFO) — SOFT/INFO 非空は正常 "
+              "(raw+legend / skiplist で対処, state.md 一括改変禁止):", file=sys.stderr)
+        for sev, path, reason in manual:
+            print(f"  [{sev}] {path}: {reason}", file=sys.stderr)
+    return 1 if hard else (2 if soft else 0)
+
+
 def emit_manifest_section() -> int:
     """Regenerate manifest §2 GEN region (TERSE id|status|parent) from state.md. Strict SSOT emit.
 
-    Exit codes: 0 clean / 2 soft review items (regex-fallback or non-canonical status; emit is usable) /
-    1 hard error (node skipped / duplicate id / GEN markers missing).
+    Exit: 0 clean / 2 soft review items (regex-fallback or non-canonical status; emit usable) /
+    1 hard error (unregistered no-node_id skip / duplicate id / GEN markers missing).
     """
     lockpath = MANIFEST.parent / ".manifest_gen.lock"
     with open(lockpath, "w") as lock:
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX)  # Tier 3 flock over read-compute-write
-        rows, manual = collect_state_nodes()
-        noncanon = sorted({r["status"] for r in rows
-                           if r["status"] not in VALID_STATES and r["status"] not in ("PENDING", "(missing)")})
-        out = [GEN_BEGIN, ""]
-        out.append(f"_{len(rows)} nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 "
-                   "(SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。"
-                   "全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_")
-        out += ["", "| node_id | status | parent |", "|---|---|---|"]
-        for r in rows:
-            tag = " *(archived)*" if r["archived"] else ""
-            out.append(f"| `{_md_cell(r['id'])}`{tag} | {_md_cell(r['status'])} | `{_md_cell(r['parent'])}` |")
-        if noncanon:
-            out += ["", f"_legend — 非正準 status (raw, coercion なし): {', '.join(noncanon)}. "
-                        "正準 = IN_PROGRESS / COMPLETE / DISCARDED / ARCHIVED (+ PENDING)._"]
-        out += ["", GEN_END]
-        region = "\n".join(out)
-
+        region, rows, manual = _build_manifest_region()
         text = MANIFEST.read_text(encoding="utf-8")
         if GEN_BEGIN not in text or GEN_END not in text:
             print(f"ERROR: GEN:NEST markers not found in {MANIFEST.relative_to(REPO)}", file=sys.stderr)
             return 1
         new_text = text[:text.index(GEN_BEGIN)] + region + text[text.index(GEN_END) + len(GEN_END):]
         _atomic_write(MANIFEST, new_text)
+    return _report_manual(rows, manual, "Emitted §2")
 
-    hard = [m for m in manual if m[0] == "HARD"]
-    soft = [m for m in manual if m[0] == "SOFT"]
-    print(f"Emitted §2: {len(rows)} nodes -> {MANIFEST.relative_to(REPO)}", file=sys.stderr)
-    if manual:
-        print(f"MANUAL-REVIEW ({len(hard)} HARD / {len(soft)} SOFT) — 非空は正常 "
-              "(raw+legend で対処, state.md 一括改変禁止):", file=sys.stderr)
-        for sev, path, reason in manual:
-            print(f"  [{sev}] {path}: {reason}", file=sys.stderr)
-    return 1 if hard else (2 if soft else 0)
+
+def check_manifest_section() -> int:
+    """C3 helper: compare the current manifest §2 GEN region to the generator recompute. No write.
+
+    Exit: 0 = in sync / 1 = drift or GEN markers missing.
+    """
+    region, rows, _manual = _build_manifest_region()
+    text = MANIFEST.read_text(encoding="utf-8")
+    if GEN_BEGIN not in text or GEN_END not in text:
+        print(f"C3 DRIFT: GEN:NEST markers not found in {MANIFEST.relative_to(REPO)}", file=sys.stderr)
+        return 1
+    current = text[text.index(GEN_BEGIN):text.index(GEN_END) + len(GEN_END)]
+    if current == region:
+        print(f"C3 OK: manifest §2 GEN region in sync ({len(rows)} nodes)", file=sys.stderr)
+        return 0
+    print("C3 DRIFT: manifest §2 GEN region != generator recompute "
+          "(fix: build_nest_snapshot.py --emit-manifest-section)", file=sys.stderr)
+    return 1
 
 
 def emit_map_index() -> int:
@@ -453,11 +496,15 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="NEST snapshot / manifest §2 generator")
     ap.add_argument("--emit-manifest-section", action="store_true",
                     help="regenerate manifest §2 GEN region from state.md (TERSE id|status|parent, strict SSOT)")
+    ap.add_argument("--check-manifest-section", action="store_true",
+                    help="C3: check manifest §2 GEN region == generator recompute (no write; exit 1 on drift)")
     ap.add_argument("--emit-map-index", action="store_true",
-                    help="(reserved) regenerate a map node-index GEN region")
+                    help="(reserved/dropped) map node-index GEN region — see design §10; map keeps a static pointer")
     args = ap.parse_args()
     if args.emit_manifest_section:
         sys.exit(emit_manifest_section())
+    if args.check_manifest_section:
+        sys.exit(check_manifest_section())
     if args.emit_map_index:
         sys.exit(emit_map_index())
     sys.exit(main())

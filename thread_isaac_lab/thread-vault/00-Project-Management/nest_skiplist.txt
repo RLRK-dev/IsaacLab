@@ -1,0 +1,6 @@
+# NEST skiplist — state.md-like files under thread-vault that are NOT NEST nodes.
+# Consumed by scripts/build_nest_snapshot.py (--emit-manifest-section / --check-manifest-section).
+# Format: <relpath-from-vault-root>  # reason
+# Registered here => INFO (excluded from §2, no exit pollution).
+# An UNREGISTERED no-node_id state.md => HARD (exit=1) to surface new data issues (alert-fatigue guard, cf. C4 suppression).
+10-SSOT-Integrity-43STEP/state.md  # pre-NEST (2026-04-19) type:task-state file, not a NEST node (%12 confirmed 2026-07-02 M2/CP-C)
