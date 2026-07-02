@@ -1,0 +1,7 @@
+# C4 uncommitted-age suppressions (layer 7 / check_planning_consistency.sh).
+# Core planning files that legitimately sit with uncommitted changes (e.g. an Rs-pending diff).
+# Format: <relpath-from-repo-root>  # reason
+# Design note (§3層B C4): WARN fires when this list GROWS beyond registered entries; a registered file's
+# uncommitted diff is suppressed. Keep this list small and reviewed — it is the escape hatch, not a dumping ground.
+# (empty: no core planning file currently carries an intentional long-lived uncommitted diff.
+#  index.md is expected to be tracked in M4; until then its C4 WARN is honest.)

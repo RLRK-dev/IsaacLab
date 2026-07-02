@@ -1,0 +1,9 @@
+# C2 dangling-ref allowlist (layer 7 / check_planning_consistency.sh).
+# Node-id (or sha) tokens intentionally referenced by planning surfaces but NOT in the live NEST node set.
+# Format: <token>  # reason
+# These 3 are the true dangling nodes from the 2026-07-02 planning audit (§9 D6): historical refs whose
+# state.md is absent (confirmed 2026-07-02); registering them here keeps C2 quiet without record-polluting
+# reverse-stub state.md files.
+T-ROOT-optE-rebase-env7            # historical ref (state.md absent, 2026-07-02 audit); also cited in CLAUDE.md
+T-ROOT-optE-S3-gpu-smoke-parity    # historical ref (state.md absent, 2026-07-02 audit)
+T-ROOT-optE-R-S6                   # historical ref (state.md absent, 2026-07-02 audit)
