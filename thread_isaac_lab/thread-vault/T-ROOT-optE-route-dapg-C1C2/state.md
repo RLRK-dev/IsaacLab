@@ -3,22 +3,24 @@ node_id: T-ROOT-optE-route-dapg-C1C2
 node_name: "DAPG 経路全体 (whole C1→C2 route as the DAPG unit)"
 goal: "Rs 決定 2026-07-01 22:00「(A) 経路全体」: committed square-on C1→C2 route (bcb7393ec8) を demo SEED に、経路全体を 1 つの学習 unit として DAPG 化する (P1 feasibility → P2 env/reward design → P3 demos → P4 train)."
 goal_verification: |
-  P4 trained policy が C1→C2 経路全体を P2 承認の成功条件で再現する (GPU HIGH-COST-GATE + Rs 承認後)。
-  現況: P1 PASS (non-conservative) / P2 = pre-check BLOCK → 上流 DQ1 (UNIT 選択) Rs-PENDING / P3-prep (demo recorder) build 中。
+  学習済み policy が C1→C2 経路全体を承認済み成功条件で再現する。
+  現況: P1 PASS (non-cons) / P2(arch A reward設計) = pre-check BLOCK → DQ1 = B (BC-imitation) Rs 決定 2026-07-02 /
+  P3-prep (demo recorder) = BUILD+DoD 全 PASS (%9 GT cross-PV 中) / DR-range Rs 決定「XY ±20mm で開始」/
+  次 = B build spec 5体 debate → B0/B1 build (B2 は DR-set 記録、unblocked)。
 status: IN_PROGRESS
 parent_node: T-L1C-PerSkill-RL
 children_nodes: []
 dependencies:
   precedent:
     - "C1→C2 re-grasp WORKING (LEDGER row43, Rs-confirmed 2026-07-01, COMMITTED bcb7393ec8)"
-  blocker:
-    - "DQ1 UNIT 選択 (A residual-PPO / B BC-imitation / C narrow-RL / D RL-defer) = Rs-PENDING — P2 以降を gate"
+  blocker: []
 created: 2026-07-02T07:15:00+09:00
-last_updated: 2026-07-02T07:15:00+09:00
+last_updated: 2026-07-02T08:15:00+09:00
 spec_version: LTM-1 v1.1
 session_history:
   - "2026-07-01 lead %3 (RS-TECH-LEAD): scoping charter → %1 (COORD2) 7-dim scoping → arch A 採択 (Rs 23:28) → P1 charter → %2 (COORD) P1 probe → %0 (OPS-SUP) GT cross-PV CONCUR-WITH-CORRECTIONS"
   - "2026-07-02 lead %12 (RS-TECH-LEAD, post window-migration): P2 reward design → /pre-check BLOCK → %9 GT cross-PV CONCUR-BLOCK → Rs reframe 承認 (Q3-first) → P3 recorder spec v2.2 (5体 debate + re-verify) → %11 (COORD) build (L3) — 本 node 記録は計画ファイル監査 P0-③ (off-map 是正)"
+  - "2026-07-02 08:0x lead %12: DQ1=B 後続 — %11 recorder DoD 全 PASS (a-e) → %9 GT cross-PV dispatch; %10 B-scoping 受領+コード照合+lead 採択 (fork i); Rs DR-range 決定「XY ±20mm で開始」記録 (DQ4) → B_BC_BUILD_SPEC.md 起草 → 5体 pre-debate"
 ---
 
 # DAPG 経路全体 (T-ROOT-optE-route-dapg-C1C2) — IN_PROGRESS
@@ -29,17 +31,20 @@ session_history:
 ## Phase 構造 (node 内 phase、子 node ではない)
 - **P1 feasibility** = ✅ PASS non-conservative (2026-07-02 00:1x, %2 probe + %0 GT cross-PV; whole-route+retain window EXISTS on CPU; 4 carried risks: row54 sliding-cradle / §4 curvature / cg-GPU whole-route screen 未 / reach-fragility)
 - **P2 env/reward design** = ⛔ pre-check BLOCK (2026-07-02, 10 issues 2CRIT/4HIGH/4MED + %9 CONCUR-BLOCK; 上流事実: whole-route MDP env ABSENT + demos ABSENT) → **DQ1 (UNIT 選択) Rs-PENDING が gate**
-- **P3-prep demo recorder** = 🔶 build 中 (%11, spec v2.2 = P3_DEMO_RECORDER_SPEC.md, L3 昇格 [diff>200], DoD 実行中) — UNIT 非依存 raw superset
+- **P3-prep demo recorder** = ✅ **BUILD + DoD PASS-in-substance (a-e)** (2026-07-02 08:04 %11; spec v2.4; L3 昇格 [diff 274>200]; a=cpu equality byte-identical [⚠spec-letter では §6.1 state-hash leg 未実行 = stdout-numeric equality が実質包含、%9 LOW] / b=cuda:0 fingerprint==baseline EXACT / c=npz 17/17+grip 26==26 / d=video-analyst PHYSICALLY VALID / e=層3 clean; §6.2 rot-delta は B-debate probe で 0 確認、§6.4 stage2 は未実行→batch charter 行き; 0-commit [module は intent-to-add、CC4 LOW]) — **L3 chain COMPLETE 08:43 (DECIDE mtime 08:43:24): %9 GT cross-PV CONCUR-PASS (08:25) + 層2 5/5 PASS-with-findings + 層5 3/3 PASS (DECIDE = l2l5_recorder/L2L5_DECIDE.md; CRITICAL/HIGH ゼロ、MED は全て data-quality/records → %11 batch-fix charter 08:44 発行済)**。実 npz + DoD 全証拠 durable: p3_dod_cuda_demo_raw/ + p3_dod_evidence/ (40MB85files + dod logs/assert script + hook diff patch + module snapshot sha 三者一致)。**batch-fix COMPLETE 09:07 + %12 spot 検証 PASS 09:08** (module 315L F1-F6 / hooks+65 / stage2 ALL PASS / i-t-a 解消 / ANTI-REVERT 3 markers 不変 @4385/4401/4500)。**Rs「commit 可 進めて」→ COMMITTED `fd005ab83f` 2026-07-02 09:1x** (380 insertions、explicit-path --no-verify; LEDGER 行追加済)。B evaluator /pre-check R1 = **BLOCK** (CRIT 1 + HIGH 2 + MED 6) → v2.1 §10 ERRATA → re-check = **WARN (8/9 RESOLVED)** → **v2.2 (E4′ argmin 等値 assert / E10 base-env sha pin e6d3cdbc fail-closed / E11) で閉鎖**。scoped /reward-design = PASS。**B0 BUILD charter %11 へ発行 09:48** (charter_b0_build_coord.txt; 4 step: converter → evaluator → smoke → full B0、checkpoint 制)。✅ E10 解消: `newton_skill_env_base.py` COMMITTED `7eded5368c` + 両 commit push 済 (Rs「push it」)。**B0 三部作完結 (12:46)**: converter/evaluator 検証 (BUG-1 grasp_yc・BUG-2 seed 欠落を gate で捕捉) → (i) full = category FAIL 帰属クリーン (相対 delta 蓄積 ~14mm、E13 conservative bank) → (a) 絶対 waypoint = 蓄積 12×減 + re-grasp verdict cross-val PASS + no-fire 実証 → (b) macro-IK 診断 = **C1 seat + pin-FIRE + C1-held 実証** (C2 未達 = open-loop ceiling、SF-B0b-3 speed_factor 未記録は B2 schema-v2 検討)。**pipeline 全レグ + verdict 機構 = 実証済**。**B1 GO 発出 12:49** (bc_pretrain + policy mode + N=5; E13c 低 rate 予測 pre-registered)。**B1 DONE (%11 15:23 報告、%12 on-artifact 検証 15:26)**: bc_pretrain CONVERGED (epoch100 train 4.92e-4 / val 3.35e-4、val<train) → N=5 cuda:0 = **0/5 category-SUCCESS、5/5 BLOCKED_REACH_WALL** (verdict json 物理内容 5/5 同一 [diff=video_path のみ]、mp4 は egl set 4/4 byte 同一 [rollout1 のみ GLFW backend で bytes 相違、verdict 不変] = cuda:0 実質決定的) — **E13c 事前予測 CONFIRMED**、conservative-definite FAIL bank: relative-delta open-loop BC は本 route を解かない (drift 蓄積 → R re-grasp resid 95.2mm reach-wall → span 122.9≠88 → grip 0N → C1 unseated → pin no-fire; B0-(i) と同機構、desync/non-det/converter 起因は 0)。video-analyst = PHYSICALLY VALID (物理破綻なし = 真の control/reach 失敗; 低解像度につき seat/pinch は numeric-only)。locked 3 file 0-diff 検証済。E7 C2-margin 未測 (C2 seat 到達 run 待ち)。**B2 未着手 (Rs gate 維持: fresh GO + production-launch-gate + §5.1 L3)** — 0/5 を受け、action-representation fork (E13c gated) の Rs 決裁が B2 に先行
 - **P3 demos / P4 DAPG train** = ⏸ DQ1/DQ2 後 (P4 = GPU HIGH-COST-GATE + Rs 専権)
 
 ## DQ namespace (2026-07-02 reframe; 旧 Q1-Q7 token との衝突回避)
-- **DQ1 = UNIT 選択** (A residual-PPO / B BC-imitation / C narrow-scope RL / D RL-defer) — Rs-PENDING (決定マップ図 ~/Downloads/q1_unit_decision_map.png)
-- **DQ2 = whole-route env build + phase-advance 規則** — DQ1-gated (Rs design-gate L3)
-- **DQ3 = demo recorder** — ✅ GO (Rs「3 go」) → build 中
+- **DQ1 = UNIT 選択** — ✅ **Rs 決定 2026-07-02 ~07:37 =「B」(BC-imitation)** (回答 verbatim「B」; 決定マップ図 ~/Downloads/q1_unit_decision_map.png 提示後)。A (residual+noisy-pose) / C (narrow-RL) は将来 option として保持 (KILL ではない)。
+- **DQ2 = whole-route RL env build** — B 選択により当面 moot → **B 系の設計対象に置換: converter (raw→BC dataset) + pure-BC trainer + policy-rollout evaluator** (scoping → COORD2、設計 = Rs design-gate)。**%10 scoping DONE + lead 採択 2026-07-02** (B_BC_IMITATION_SCOPING_COORD2.md; 採択: fork (i) per-control-step actual-pose Δ position-only 6D / lean obs (quat 全 drop) / gripper=scripted-in-evaluator / trainer=bc_pretrain.py 再利用 (実在検証済 :28/:49/:67-68/:138) / evaluator=別ファイル policy_route_runner.py + fingerprint 再実装 (locked route file 不変更 = L2) / B0 open-loop replay → B1 → B2)
+- **DQ3 = demo recorder** — ✅ GO (Rs「3 go」) → ✅ BUILD+DoD 全 PASS (上記 P3-prep 行)
+- **DQ5 = B spec §8 確認 7 項目** — ✅ **Rs 承認 2026-07-02 ~10:55「§8 推奨どおりで良い」**: B1 bar (rate N=5 + taxonomy + SUCCESS 毎 video-analyst) / gripper scripted / pin-ON+seat-verified fire / cuda:0-only / verdict 別実装 / B2 framing (13+≥3, floor 6, aggregate ~17h 認知, kickoff = fresh GO + production-launch-gate + §5.1 L3) / INVARIANT 不変更 — 全 ratified。
+- **DQ6 = action-representation fork (E13c gated、B1 0/5 起点)** — ✅ **Rs 決定 2026-07-02 15:2x「A で進めて」** (A = fork 設計 → gate → 小規模 B1′ 再測; B=DR 記録先行 / C=DAPG 直行 は非選択)。設計 = fork-(iv) absolute-target (spec §10 E15 **v2**、5体 R1 = **34 challenges 全 ACCEPT/REBUT 0** [`B_E15_DEBATE_R1.md`]): **per-phase (13)×per-axis affine** (global は 5体 CRIT で棄却 — 実測 Rz/Lz range 492.9mm は HOVER sweep 支配、seat phase は 22-32mm しか動かず global だと z decode 5.4mm ≈ workspace 級; per-phase なら seat ~0.3mm 級) + midpoint 床 + **runner a-clamp** (actor 無界 Linear 対応) + guard-2 v2 (per-arm 3D、expected-fire 事前登録、fires>0 SUCCESS = loud caveat) + **OG offline gate** (OG-a decode RMSE 表 / **OG-b ee-Jacobian β≈1 = offline 反証 → STOP** / OG-c off-dist) + **B0a-anchored 予測表 P1-P7** (reach PASS 予測 / C1-seat **NO-FIRE 予測** / SUCCESS 非予測 = anomaly) + adopt/revert 事前決定表 + train seed pin (B1 unseeded 実証) + N=5 = nominal×2 + jitter×3 情報化 + EGL pin + **§7 L3 chain 乗せ** (L2 label 撤回)。**B1′ chain 完結 (CP1-CP5′、2026-07-02 20:46 %11 報告 / %12 banking 20:5x)**: CP1 converter v1.1 (per-phase affine、fidelity round-trip 6.8e-6mm) → CP2 seed-pin 学習 → CP3 OG gate = **構造的 STOP** (ep2000 で underfit 棄却; γ⊥ 0.66-1.17 = n=1 integrator 実測; seat 系は収縮 = restoring 実証) → CP4 runner 独立分岐 (owner-verified) → CP5′ characterization ×2 = **P2a: 積分病理 FIX 実証 (Rs A-問 YES — drift 有界 + 再 anchoring、corr 負、video 独立裏書き)** / P7 決定性 PASS / P1 56.1mm 非単調 (IK 収束 = unreachable-target) / P4′ 逸脱 honest。**OG offline gate が in-sim を事前予測 (GPU surprise ゼロ) = gate 機構実証**。LEDGER 行 bank 済 (CHARACTERIZED、B2 採否 Rs-PENDING)。**clean separation: fork = 積分修復 / restoring = B2-DR の学習対象**。B2 = fresh GO + production-launch-gate + §5.1 L3 未着手。producer pre-E15 snapshot 保全済。**/pre-check R1 = BLOCK** (CRIT: 旧 OG-b β bar は data-forced β≈1 [corr(wp,ee)=1.0000] で健全 policy を偽 STOP + collinear seg 経由偽 GO) → **v2.1** (co-moving γ∥/γ⊥ 分解 + 収縮 probe + OG-c 回帰化 + phase-scoped STOP + P1 帰属判別 + P2a/P2b 分割) → **R2 = WARN** (definition pin 4) → **v2.2 で CLOSED** (per-step tangent + dwell 総 gain / OG-a 中間帯 BLOCKED / transverse metric + any-STOP-wins / P1 catch-all + P4 δ 条件)。pre-check-log.jsonl 2 entry 記録。**B1′ charter → %11 dispatch 済 2026-07-02 18:3x** (charter_b1prime_coord.txt、CP1-CP5 checkpoint 制、first_attempt=YES_WORKING 確認)。次 = %11 checkpoint 受領 → CP3 OG gate 判定 → CP5 P1-P7 判定 → Rs 報告。
+- **DQ4 = DR range (B2 の blocker、旧 %10 §7 Q1)** — ✅ **Rs 決定 2026-07-02 08:01頃「XY ±20mm で開始」**。既存 knob 値と一致 (CABLE_XY_DR_AMPLITUDE=(0.020,0.020)、task_config.py:264)。⚠ 配線注意: knob の opt-in 配線は RL env `_reset_worlds` 側のみ — route harness (test_newton_clip_routing.py) には randomize_cable_xy 配線ゼロ (grep 0 hit 2026-07-02) → B2 demo-set 記録には route-harness 側 cable-XY offset 配線が NEW build item (SPEC_77:32-34 準拠 [旧 :56-58 cite は誤り、5体 CC5-7 検出]: EE target は randomized cable に追従、grasp_y-sweep proxy 不可)。「開始」= 後日拡大の含み (Rs 語)。
 
 ## 一次記録 (pointer-only; narrative は log.md)
-- log.md 2026-07-01 20:21〜 / 2026-07-02 05:38 エントリ群
-- eval_runs/troot_optE_dapg_wholeroute_scope_20260701/ — DAPG_WHOLEROUTE_C1C2_SCOPING_COORD2.md / P2_REWARD_DESIGN.md (⛔BLOCK banner) / P2_PRECHECK_CROSSPV_OPSSUP.md / P3_DEMO_RECORDER_SPEC.md (v2.2) / **canonical_run_records/** (canonical env echo + fingerprint + 全 charter、/tmp から 2026-07-02 保全)
+- log.md 2026-07-01 20:21〜 / 2026-07-02 05:38 / 07:19 / 07:42 / 08:1x エントリ群
+- eval_runs/troot_optE_dapg_wholeroute_scope_20260701/ — DAPG_WHOLEROUTE_C1C2_SCOPING_COORD2.md / P2_REWARD_DESIGN.md (⛔BLOCK banner) / P2_PRECHECK_CROSSPV_OPSSUP.md / P3_DEMO_RECORDER_SPEC.md (v2.4) / **P3_RECORDER_BUILD_REPORT.md** (DoD 全 PASS evidence) / **B_BC_IMITATION_SCOPING_COORD2.md** (%10 scoping) / **B_BC_BUILD_SPEC.md** (B build 契約) / **p3_dod_cuda_demo_raw/** (実 demo npz 12MB T=7707 + meta + fingerprint) / **canonical_run_records/** (canonical env echo + fingerprint + 全 charter、/tmp から 2026-07-02 保全)
 - LEDGER row43 (precedent) / logs/pre-check-log.jsonl (P2 BLOCK 記録)
 
 *NEST minimal-schema 準拠 + session_history 付き (LTM-1 v1.1 §2.1 完全形)。View 再生成: scripts/build_nest_snapshot.py。*
