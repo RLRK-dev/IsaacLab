@@ -1748,6 +1748,13 @@ _physics_state_buffer = None  # Pre-allocated double-buffer state (created on fi
 _GRIPPER_COORDS_BOTH = set(GRIPPER_JOINT_RANGE) | {JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE}
 _ARM_OVERWRITE_IDX = [i for i in range(2 * JOINTS_PER_ARM) if i not in _GRIPPER_COORDS_BOTH]
 
+# Whole-route demo RECORDER (P3, env-gated DEMO_RECORD=1). None = default-off = byte-identical; the route
+# fn (below) constructs a RouteDemoRecorder under the gate and the read-only hooks below tap it when set.
+_demo_rec = None
+# Line numbers of the 3 "⛔ ANTI-REVERT (Rs-LOCKED 2026-07-01)" markers in THIS file, pinned into the demo meta
+# for quick auditability. Keep in sync with the markers; as_run_sha256 of this file also cryptographically pins them.
+_ANTI_REVERT_MARKER_LINES = [4385, 4401, 4500]
+
 
 def physics_step(model, state, solver, contacts, scene_info):
     """VBD physics step with kinematic body override (double-buffer pattern).
@@ -1805,6 +1812,8 @@ def physics_step(model, state, solver, contacts, scene_info):
 
         state_0, state_1 = state_1, state_0
 
+    if _demo_rec is not None:  # P3 recorder: sample the post-step frame (read-only, COPY-on-sample; spec §2.1)
+        _demo_rec.sample(state_0, scene_info)
     return state_0
 
 
@@ -1938,6 +1947,8 @@ def ik_move_both(
 
     Returns (final_state, success).
     """
+    if _demo_rec is not None:  # P3 recorder: last-COMMANDED EE target positions (spec §2.3, positions only)
+        _demo_rec.note_targets(target_left, target_right)
     cable_bodies = scene_info.get("cable_bodies", [])
     fk_model = scene_info["fk_model"]
     fk_state = scene_info["fk_state"]
@@ -2980,6 +2991,8 @@ def _set_gripper_target(control, driver_joints, target_rad):
     for d in driver_joints:
         tp[d] = float(target_rad)
     control.joint_target_pos.assign(tp)
+    if _demo_rec is not None:  # P3 recorder: gripper CHOKEPOINT -> per-arm servo command (spec §2.2)
+        _demo_rec.note_grip(driver_joints, target_rad)
 
 
 # _wire_s6_grasp_solref RELOCATED to newton_skill_env_base.py (2026-06-28, L3 base-infra) + generalized
@@ -3321,7 +3334,7 @@ def _run_mujoco_grasp_engage_episode(model, solver, contacts, scene_info, fk_sta
             ax.imshow(im)
             ax.axis("off")
             ax.set_title(nm, fontsize=7.5, color="0.3")
-        fig.suptitle(f"M-Grasp-engage-1 §運用14 (CPU) — z_grasp 1.0668 cradle + 12-substep gradual lift — {phase}",
+        fig.suptitle(f"M-Grasp-engage-1 §運用14 ({DEVICE}) — z_grasp 1.0668 cradle + 12-substep gradual lift — {phase}",
                      fontsize=9.0)
         fig.subplots_adjust(left=0.01, right=0.99, top=0.86, bottom=0.01, wspace=0.02)
         fig.savefig(os.path.join(_frames_dir, f"f{_fidx[0]:05d}.png"), dpi=98)
@@ -3514,6 +3527,30 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
     cable_bodies = scene_info["cable_bodies"]
     scene_info["gripper_dynamic"] = True
     _set_gripper_target(control, driver_joints, GRIPPER_DRIVER_OPEN_RAD)
+
+    global _demo_rec
+    if os.environ.get("DEMO_RECORD", "0") == "1":  # P3 whole-route demo RECORDER (env-gated, read-only; spec §2)
+        from route_demo_recorder import RouteDemoRecorder
+
+        _demo_rec = RouteDemoRecorder(
+            scene_info, EE_BODY_OFFSET, driver_joints[:2], driver_joints[2:],  # per-arm drivers, SSOT :1461
+            os.environ.get("DEMO_OUT", "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/demo_raw"),
+            {"dt": DT, "sim_dt": SIM_DT, "sim_substeps": SIM_SUBSTEPS, "device": DEVICE,
+             "solver_backend": scene_info.get("solver_backend"),
+             # F2: physics-model joint_label (74=2*JPA+cable), not fk_model.joint_key (28, wrong obj)
+             "joint_names": list(getattr(scene_info["model"], "joint_label", []) or []),
+             "joint_names_source": "physics_model.joint_label",
+             "arm_q_layout": {"l_arm": [0, JOINTS_PER_ARM], "r_arm": [JOINTS_PER_ARM, 2 * JOINTS_PER_ARM],
+                              "cable": [2 * JOINTS_PER_ARM, None]},
+             # env-resolved (no hardcode); mirrors the route's own resolution (c1 :3543-3544 / c2 :3591-3592)
+             "resolved_clip_c1_xy": [float(os.environ.get("CLIP_X", "0.40")), float(os.environ.get("CLIP_Y", "0.0"))],
+             "resolved_clip_c2_xy": [float(os.environ.get("CLIP2_X", str(CLIP_POSITIONS[1][0]))),
+                                     float(os.environ.get("CLIP2_Y", str(CLIP_POSITIONS[1][1])))],
+             "anti_revert_marker_lines": _ANTI_REVERT_MARKER_LINES})
+
+    def _ph(name):  # P3 recorder: label the native route section (forward, at each block start; spec §2.6)
+        if _demo_rec is not None:
+            _demo_rec.set_phase(name)
 
     GHS = (WIDE_RIGHT_Y - WIDE_LEFT_Y) / 2.0  # 0.044 = 88mm span INVARIANT#2
     z_grasp = 1.0668  # banked WR cradle (M-Grasp-engage-1 validated)
@@ -3788,9 +3825,9 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
                                     bbox=dict(boxstyle="round,pad=0.12", fc="black", ec=_ccol, alpha=0.6))
                 except Exception:  # noqa: BLE001
                     pass
-        _supt = (f"C1->C2 §運用14 (CPU) — seat C1 (full-clamp) -> L HALF-unclamp -> guide toward C2 — {phase}"
+        _supt = (f"C1->C2 §運用14 ({DEVICE}) — seat C1 (full-clamp) -> L HALF-unclamp -> guide toward C2 — {phase}"
                  if _ROUTE_C2 else
-                 f"M-Route §運用14 (CPU) — centred grasp+lift + DIAGONAL transport "
+                 f"M-Route §運用14 ({DEVICE}) — centred grasp+lift + DIAGONAL transport "
                  f"GX0.30,Y0 -> clip({x_clip:.2f},{y_clip:+.2f}) + drop-in seat@809 — {phase}")
         fig.suptitle(_supt, fontsize=8.5)
         fig.subplots_adjust(left=0.01, right=0.99, top=0.86, bottom=0.01, wspace=0.02)
@@ -3835,10 +3872,12 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
         return (x, yc - GHS, z), (x, yc + GHS, z)
 
     # --- GRASP + LIFT (reuse the validated M-Grasp-engage-1 orchestration) ---
+    _ph("GRASP_HOVER")
     ok = {}
     state, ok["hover"] = ik_move_both(model, state, scene_info, solver, contacts, *tgt(x_grasp, z_high),
                                       label="ROUTE-HOVER", converge_mm=8.0, speed_factor=0.2, warmstart_jq=fk_jq)
     _cap("HOVER")
+    _ph("GRASP_DESCEND")
     ok["descend"] = True
     for k in range(1, 9):
         zk = z_high + (z_grasp - z_high) * k / 8
@@ -3847,6 +3886,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
         ok["descend"] = ok["descend"] and bool(okk)
         _cap(f"DESCEND {k}/8")
     # 2-PHASE cage90 close (validated capture-then-gentle)
+    _ph("GRASP_CLOSE")
     CAGE_FRAC = 0.9
     cage_rad = GRIPPER_DRIVER_OPEN_RAD + (GRIPPER_DRIVER_CLOSE_RAD - GRIPPER_DRIVER_OPEN_RAD) * CAGE_FRAC
     _set_gripper_target(control, driver_joints, cage_rad)
@@ -3868,6 +3908,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
     # (cable migrates UP in the cage) is NOT compensated -> the drop-in faithfully TESTS %9's integration
     # concern (does the loosened post-route cable still seat at 809, or rest high on the clip top ~834?).
     ee_off = float(get_ee_positions(state, scene_info)[1][2]) - _seg_z_mm(GRASP_YC) / 1e3
+    _ph("LIFT")
     ok["lift"] = True
     for k in range(1, LIFT_SUBSTEPS + 1):
         zl = z_grasp + LIFT_M * k / LIFT_SUBSTEPS
@@ -3901,6 +3942,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
     # (centred M-Route-1) yck stays GRASP_YC so this is byte-equivalent to the prior X-only route. INVARIANT#1:
     # both arms move (different MIRRORED joint-motions -- LEFT stretches, RIGHT folds -- neither parked);
     # INVARIANT#2: span fixed at 2*GHS, bases untouched. The y_clip drag is the off-centre TEST (5-CC reach wall).
+    _ph("ROUTE_C1")
     ok["route"] = True
     for k in range(1, N_ROUTE + 1):
         xk = x_grasp + (x_clip - x_grasp) * k / N_ROUTE
@@ -4031,6 +4073,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
             return (float(np.min([mjd.geom_xpos[g][2] for g in claw_set])) * 1e3) if claw_set else 9e9
 
         # (2) FULL-CLAMP SEAT: lower both arms (still CLOSED) so the gripped cable centre -> GROOVE_CENTER_Z+float.
+        _ph("C1_SEAT")
         seat_ee_z = GROOVE_CENTER_Z + _clip_float_z + ee_off   # CLIP_FLOAT_Z: descend to the FLOATED groove (consistency)
         ok["c2_seat_descend"] = True
         for k in range(1, 9):
@@ -4060,6 +4103,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
               f"cable<->C2={c2_dist_atseat:+.3f}mm (<=0=touching)")
         _cap("C1 SEATED (full-clamp, pre half-unclamp)")
 
+        _ph("C1_PIN")
         # PERCLIP_PIN (b)-pin ACTIVATION on the VERIFIED C1 seat (%3 charter 2026-07-01) -- the headline freeze-scope
         # probe. Toggle the pre-allocated per-clip connect eq (seat_body <-> world@seat) ACTIVE now (mid-episode
         # eq_active; pre-seat activation forbidden per restore-gate log:6814 C2 -> gated on the verified seat above).
@@ -4088,6 +4132,8 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
             mjm.eq_data[_pin_eqid, 0:3] = [0.0, 0.0, 0.0]     # anchor in seat-body frame = its origin
             mjm.eq_data[_pin_eqid, 3:6] = _seat_world         # anchor in world frame = current seat pos (~clip groove)
             mjd.eq_active[_pin_eqid] = 1
+            if _demo_rec is not None:  # P3 recorder: eq-pin AFTER activation (spec §2.5)
+                _demo_rec.note_pin(_pin_eqid, seat_body)
             for _ in range(40):
                 state = physics_step(model, state, solver, contacts, scene_info)
             _z_c1_after_pin = _zc1()
@@ -4097,6 +4143,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
                   f"(does the pin hold the seat? body29/28.. freedom measured over the guide below)")
             _cap(f"PERCLIP_PIN ON seat idx{seat_body}: z_c1={_z_c1_after_pin:.1f}mm")
 
+        _ph("L_HALF_UNCLAMP")
         # (3) L HALF-UNCLAMP: ramp L CLOSE->HALF (R stays CLOSED = the +Y anchor). MEASURE is_cradle through the
         # loosening -> the cable must NOT fall out of the L claw (else the guide starts from a dropped cable=artifact).
         HALF = GRIPPER_DRIVER_HALF_OPEN_RAD   # 0.69
@@ -4128,6 +4175,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
         # as a +Y anchor = a DEVIATION from the 43-step. ⭐ CRITICAL DE-RISK: the 43-step releases R here ASSUMING C1
         # stays seated by the clip; the open-top clip has zero up-retention -> if C1 ESCAPES when R lets go, the full
         # 43-step is BLOCKED on clip-retention (Rs design call). Measure z_c1 before vs after R-release. Gated SEAT_TOPDOWN.
+        _ph("R_UNCLAMP_RISE")
         _route43_mode = os.environ.get("SEAT_TOPDOWN", "0") == "1"
         if _route43_mode:
             _zc1_preR = _zc1()
@@ -4154,6 +4202,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
                 print(f"  [C2-RRISE] R risen {_Rz0:.3f}->{_Rz1:.3f} (+45mm; R free after pin holds C1, no longer anchors descended)")
                 _cap("R rise +45mm (corrected-route)")
 
+        _ph("GUIDE_C2")
         # (4) GUIDE (しごき) L toward C2; R HOLDS at +Y (anchor above C1). cable slides through the L half-clamp.
         _pl0, _pr0 = get_ee_positions(state, scene_info)
         R_hold = (float(_pr0[0]), float(_pr0[1]), float(_pr0[2]))   # R frozen at its achieved +Y anchor pose
@@ -4180,6 +4229,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
         # (Rs video: 「クリップ下降点からそのまま横にスライド...フィンガがC2に衝突」). +45mm clears the floated wall
         # top 0.850 (bottom claw ~0.864 > 0.850 = 14mm margin). DEFAULT off (gate w/ the seat fix) -> byte-identical
         # low slide. Lead-implemented per the banked 43-step SSOT (authority layer; Rs directed 「43step表を確認」).
+        _ph("GUIDE_PRELIFT")  # P3 label: step-10 lift as its own phase (future re-records; CC2-C1)
         _route43 = os.environ.get("SEAT_TOPDOWN", "0") == "1"
         _trav_z = (L_z0 + 0.045) if _route43 else L_z0   # 43-step lift delta (insert 1.025 -> traverse 1.07)
         if _route43:
@@ -4345,6 +4395,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
             print(f"  [C2-REGRASP-R] span-preserving: R target=({_cR[0]:.3f},{_cR[1]:+.3f},{_cR[2]:.3f}) "
                   f"(HOLD Y={_R_ty:+.3f}=+GHS, X follows bow) vs OLD-FIXED X={c2x:.3f} [dX {(_cRx - c2x) * 1e3:+.0f}mm] "
                   f"| picked body idx{_kR} Y{_cbq[_kR, 1]:+.3f} (dY from lane {_picked_dy_mm:+.0f}mm) | target Y-span={_span_y_mm:.1f}mm (88, INVARIANT#2)")
+            _ph("C2_REGRASP")
             # --- TILT-FOLLOW monkeypatch (byte-faithful copy of the banked _64, GD-KoShape:157-160; R=re-grasp arm) ---
             _BASE_RX = -_math.pi / 2      # default Rx(-90deg) = gripper down (test:1851)
             # ⛔ ANTI-REVERT (Rs-LOCKED 2026-07-01「先祖返りしないように」): square-on DEFAULT (C2_TILT_SIGN=0). The banked
@@ -4399,6 +4450,8 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
             _ROT["L"] = _rot_quat_rx(_BASE_RX)                           # L = anchor/holder = default down
             _ik_orig = globals()["solve_ik_dual"]
             globals()["solve_ik_dual"] = _solve_ik_dual_rot   # ik_move_both resolves solve_ik_dual as a module global
+            if _demo_rec is not None:  # P3 recorder: effective-rotation register at C2 monkeypatch INSTALL (spec §2.4)
+                _demo_rec.note_ik_rot(_ROT["L"].numpy()[0], _ROT["R"].numpy()[0], 1)
             print(f"  [C2-REGRASP-TILT] cable local pitch theta={_math.degrees(_theta_R):+.1f}deg at R lane Y={_R_ty:+.3f} "
                   f"-> R EE Rx({_math.degrees(_BASE_RX + _TILT_SIGN * _theta_R):+.1f}deg); L default (anchor) "
                   f"[banked _64 tilt-follow; a square-on claw MISSES the tilted cable, GD-KoShape:126-134]")
@@ -4477,6 +4530,9 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
                 "l_grip_N": round(float(_NLg), 2), "r_grip_N": round(float(_NRg), 2),
                 "l_grips": _L_grips, "r_grips": _R_grips, "regrasp_verdict": _regrasp_verdict, "regrasp_ok": _regrasp_ok}
             globals()["solve_ik_dual"] = _ik_orig   # RESTORE default square-on (tilt blast radius = the R re-grasp only)
+            if _demo_rec is not None:  # P3 recorder: rotation register RESTORE to default Rx(-90) (spec §2.4)
+                _demo_rec.note_ik_rot(None, None, 0)
+            _ph("C2_TRANSPORT")  # P3 label: lateral carry to C2 as its own phase (future re-records; CC2-C1)
             # 2) TRANSPORT: carry R's gripped cable segment laterally to the C2 +Y seat point (L already at the -Y seat).
             #    The gripped cable comes WITH the hand -> the cable centre (between L & R) arrives over the C2 groove.
             _carR = (c2x, c2y + _GHS, _z_above_d)
@@ -4499,6 +4555,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
                 _c2_regrasp_rec["transport_still_gripped_L_N"] = round(float(_NLt), 2)
                 _c2_regrasp_rec["transport_still_gripped_R_N"] = round(float(_NRt), 2)
             _cap("C2 transport: R grip carried to C2 +Y seat point")
+            _ph("C2_DUAL_SEAT")
             # 3) both descend (CLOSED) from above -> clamp-push the cable into the C2 groove (top-down, NOT the lateral slide that drove the claw into the wall)
             for kk in range(1, 13):
                 _zk = _z_above_d + (_seat_z_d - _z_above_d) * kk / 12
@@ -4515,6 +4572,7 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
                 print(f"  [C2-DUAL-SEAT] k={kk}/12 z={_zk:.3f} Lgrip<->C2={_lgc2:+.3f} Rgrip<->C2={_rgc2:+.3f}mm "
                       f"| claw<->C2 CONTACT-N: L={_NLc2:.2f} R={_NRc2:.2f} | cable<->C2={_cabc2:+.3f}mm")
                 _cap(f"C2 dual-seat {kk}/12 Lgrip<->C2={_lgc2:+.2f}")
+            _ph("C2_SETTLE")
             # 4) RELEASE both grippers + settle -> genuine NOTCH SETTLE vs claw-held / pop-out (%0 seat-capture concern, charter metric #3;
             #    the C2 clip is open-top w/ zero up-retention -> if the cable pops out on release it was claw-HELD, not settled)
             _cab_c2_held = _min_dist_mm(cable_geoms, _clip2g)
@@ -4709,6 +4767,8 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
                 print(f"  [C2-PIN] freeze-scope metrics -> {os.path.join(output_dir, 'route_c2_pin.json')}")
             except Exception as _e:  # noqa: BLE001
                 print(f"  [C2-PIN] (json dump skipped: {_e})")
+        if _demo_rec is not None:  # P3 recorder: finalize with the run verdict BEFORE the mid-fn sys.exit (spec §2.7)
+            _demo_rec.finalize(verdict=_c2_regrasp_rec)
         sys.exit(0 if (finite and qvel_ok) else 2)
 
     # --- M-Hook-1 (PART 2): CONTINUOUS drop-in onto the REAL collidable clip (banked r_s71_clip_dropin_72) ---
@@ -5884,6 +5944,8 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
           f"attempted={hook_attempted}) "
           f"({'PASS -- grasp+lift+DIAGONAL transport+two-claw retention+drop-in seat@809 (CPU)' if milestone_ok else 'FAIL/STOP'}). "
           f"SCOPE: NON-conservative x3 vs GPU; {_clip_tag}; C2/C4 near-centre + multi-clip = LATER.")
+    if _demo_rec is not None:  # P3 recorder: finalize before the fn-tail sys.exit too (M-Hook path; spec §2.7)
+        _demo_rec.finalize(verdict={"milestone_ok": bool(milestone_ok)})
     sys.exit(0 if milestone_ok else 2)
 
 
