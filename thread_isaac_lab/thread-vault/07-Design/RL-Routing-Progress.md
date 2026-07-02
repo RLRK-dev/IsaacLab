@@ -9,6 +9,8 @@ tags:
 ---
 
 
+> ⚠ **FROZEN (2026-07-02, Rs 承認 D4)**: 本 file は ≤2026-05-28 の歴史記録 (env6-VBD 系譜 = DISCARDED、LEDGER §FAILED item 2/3)。以後更新しない。現 RL track (DAPG whole-route, mujoco-コ) の進捗 → 00-DESIGN-STATUS-LEDGER.md + 地図 docs/logical_decomposition.html + eval_runs (LEDGER 該当行経由)。
+
 # RL Routing Progress
 
 > 実行計画 (RL-Routing-Design.md Section 1.1) の進捗記録。
