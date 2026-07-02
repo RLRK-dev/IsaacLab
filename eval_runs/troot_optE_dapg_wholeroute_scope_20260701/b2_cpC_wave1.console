@@ -1,0 +1,24 @@
+=== CP-C WAVE-1 launch (4 concurrent, GPU-0) 02:15:05 ===
+DONE p20_p20 (off=0.020,0.020) exit=0
+DONE m20_0 (off=-0.020,0) exit=0
+DONE m20_m20 (off=-0.020,-0.020) exit=0
+DONE p10_0 (off=0.010,0) exit=0
+=== WAVE-1 ALL DONE 02:20:01 ===
+############ WAVE-1 PER-OFFSET RESULTS ############
+--- p10_0 ---
+  [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+310.00mm (nominal GRASP_X=+300mm, delta=+10.00mm)
+  regrasp_ok= True verdict= SUCCESS_DUAL_LOADED_AT_88 c2_seated_honest= True finite= True qvel_ok= True
+  demo npz: PRESENT (12M)
+--- m20_0 ---
+  [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+280.00mm (nominal GRASP_X=+300mm, delta=-20.00mm)
+  regrasp_ok= True verdict= SUCCESS_DUAL_LOADED_AT_88 c2_seated_honest= True finite= True qvel_ok= True
+  demo npz: PRESENT (12M)
+--- p20_p20 ---
+  [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+320.00mm (nominal GRASP_X=+300mm, delta=+20.00mm)
+  regrasp_ok= True verdict= SUCCESS_DUAL_LOADED_AT_88 c2_seated_honest= False finite= True qvel_ok= True
+  demo npz: PRESENT (12M)
+--- m20_m20 ---
+  [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+280.00mm (nominal GRASP_X=+300mm, delta=-20.00mm)
+  regrasp_ok= True verdict= SUCCESS_R_GRIP_L_CAGE_AT_88 c2_seated_honest= True finite= True qvel_ok= True
+  demo npz: PRESENT (12M)
+############ DONE WAVE-1 ############

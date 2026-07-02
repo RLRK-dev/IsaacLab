@@ -1,0 +1,37 @@
+=== BATCH @i=0  GPU-0 procs before: 0  02:27:04 ===
+DONE m20_p20 (off=-0.020,0.020) exit=0
+DONE p20_m20 (off=0.020,-0.020) exit=0
+DONE z0_0 (off=0,0) exit=0
+DONE p20_0 (off=0.020,0) exit=0
+!!! NEW-MECH ABORT: p20_0 !!!
+!!! NEW-MECH ABORT: p20_m20 !!!
+!!! NEW-MECH ABORT: m20_p20 !!!
+!!! NEW-MECH ABORT: z0_0 !!!
+=== ABORT (new mechanism) — stopping remaining batches ===
+=== WAVES 2-5 DONE (abort=1) 02:32:03 ===
+############ WAVES 2-5 PER-OFFSET ############
+--- p20_0 (off=0.020,0) ---
+  [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+320.00mm (nominal GRASP_X=+300mm, delta=+20.00mm)
+  regrasp_ok= True verdict= SUCCESS_DUAL_LOADED_AT_88 c2_seated_honest= True finite= True qvel= True
+  npz: PRESENT (12M)
+--- p20_m20 (off=0.020,-0.020) ---
+  [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+320.00mm (nominal GRASP_X=+300mm, delta=+20.00mm)
+  regrasp_ok= True verdict= SUCCESS_R_GRIP_L_CAGE_AT_88 c2_seated_honest= True finite= True qvel= True
+  npz: PRESENT (12M)
+--- m20_p20 (off=-0.020,0.020) ---
+  [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+280.00mm (nominal GRASP_X=+300mm, delta=-20.00mm)
+  regrasp_ok= True verdict= SUCCESS_DUAL_LOADED_AT_88 c2_seated_honest= True finite= True qvel= True
+  npz: PRESENT (12M)
+--- z0_0 (off=0,0) ---
+  regrasp_ok= True verdict= SUCCESS_R_GRIP_L_CAGE_AT_88 c2_seated_honest= True finite= True qvel= True
+  npz: PRESENT (12M)
+--- z0_p20 (off=0,0.020): NOT RUN (aborted-before) ---
+--- z0_m20 (off=0,-0.020): NOT RUN (aborted-before) ---
+--- m10_0 (off=-0.010,0): NOT RUN (aborted-before) ---
+--- z0_p10 (off=0,0.010): NOT RUN (aborted-before) ---
+--- z0_m10 (off=0,-0.010): NOT RUN (aborted-before) ---
+--- p8_p8 (off=0.008,0.008): NOT RUN (aborted-before) ---
+--- p8_m8 (off=0.008,-0.008): NOT RUN (aborted-before) ---
+--- m8_p8 (off=-0.008,0.008): NOT RUN (aborted-before) ---
+--- m8_m8 (off=-0.008,-0.008): NOT RUN (aborted-before) ---
+############ DONE ############

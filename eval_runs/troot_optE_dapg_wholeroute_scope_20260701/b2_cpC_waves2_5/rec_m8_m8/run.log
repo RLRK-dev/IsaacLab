@@ -1,0 +1,1213 @@
+[NEWTON_CLIP_ROUTING] Device=cuda:0
+[NEWTON_CLIP_ROUTING] Newton: 1.2.1, Warp: 1.13.0
+[NEWTON_CLIP_ROUTING] DT=0.002083s (480Hz)
+[NEWTON_CLIP_ROUTING] URDF: /home/rlrk/IsaacLab/source/extensions/isaaclab_tasks_thread/data/robots/panda_independent_fingers.urdf
+[NEWTON_CLIP_ROUTING] Architecture: VBD (Cosserat Rod cable + kinematic robot bodies)
+[NEWTON_CLIP_ROUTING] Substeps: 10, SIM_DT=0.000208s
+[NEWTON_CLIP_ROUTING] VBD iterations: 20
+[NEWTON_CLIP_ROUTING] IK: Newton IKSolver (LM) on FK model
+[NEWTON_CLIP_ROUTING] Cable: ON
+[NEWTON_CLIP_ROUTING] Coordinates (body6 Z / fingertip Z):
+  EE_TO_FINGERTIP: 220mm
+  Approach: body6=1.120 fingertip=0.900
+  Grasp:    body6=1.025 fingertip=0.805
+  Lift:     body6=1.120 fingertip=0.900
+  Push:     body6=1.025 fingertip=0.805
+  Table:    0.800
+  L_Y=0.106, R_Y=0.194
+  Clip1: (0.35, 0.15, 0.8)
+
+[BUILD] Building FK model (robot-only, for IK + body transforms)...
+Warp 1.13.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.0
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA RTX A6000" (47 GiB, sm_86, mempool enabled)
+   Kernel cache:
+     /home/rlrk/.cache/warp/1.13.0
+Module validate_and_correct_inertia_kernel_524fb5ef 524fb5e load on device 'cuda:0' took 0.58 ms  (cached)
+  [FK] Robot-only model: bodies=28, joints=28, joint_coords=28, joint_dofs=28
+Module newton._src.sim.articulation 9875313 load on device 'cuda:0' took 4.86 ms  (cached)
+  [FK] Initial joint_q set from URDF home config, fingers open=40.0mm
+[BUILD] Building physics scene...
+  [SCENE] Table → 4 boxes (S6_GRASP slot localized to gripper X, grasp_y=0.15): -Y[-0.40,0.090] +Y[0.210,0.30] VOID Y[0.090,0.210] X[0.234,0.366]
+  [SCENE] Clip V-groove at (0.35, 0.15, 0.8200000000000001) [CLIP_FLOAT_Z=20.0mm above CLIP1_Z 0.8], 5 parts, collide=True
+  [SCENE] SPACER under C1 at (0.35, 0.15, 0.8100) h=20.0mm top=0.8200(=clip-floor cz 0.8200) footprint hx0.020/hy0.015 (claw-span +-0.044 clear -> 29mm margin)
+  [SCENE] Clip2 V-groove at (0.4, 0.075, 0.8200000000000001), 5 parts, collide=True (over-SOLID: X=0.4 > grasp-void X-ceiling 0.366 -> NO under-cable void at C2)
+  [SCENE] SPACER under C2 at (0.4, 0.075, 0.8100) h=20.0mm top=0.8200
+  [SCENE] A-1 VISIBLE-only pass (mujoco): 22 arm shapes COLLIDE-cleared, 16 pad shapes kept
+  [CABLE] add_revolute_cable: 40 bodies, 40 joints (FREE+REVOLUTE), k=0.33 N·m/rad, damping=0.01, springref=0, solref=(0.005,1.0), seg_mass=0.8g
+  [SCENE] Cable: 40 bodies, 40 joints, Y=[-0.300, 0.292], Z=0.8040
+  [PERCLIP_PIN] pre-allocated 40 DISABLED connect-to-world eqs (one per cable body); the route block activates the ONE matching the runtime C1 seat body (position-match, mid-episode)
+  [SCENE] Cable contact filters (mujoco): 40 cable-floor, 880 cable-(non-pad-arm) (pads keep cable contacts)
+  [SHAPES] Finger collision: BOX×3 per finger (wall+claws), 0 finger visual DAE preserved
+  [S6_GRASP] actuation wired: drivers=[6, 10, 20, 24] servo(ke=66.7,kd=2.0,eff=2.5) connects=[(9, 7), (13, 11), (23, 21), (27, 25)] condim6 on 56 shapes (16 pad + cable) rolling=0.005
+Module newton._src.sim.graph_coloring 95273ab load on device 'cpu' took 1.01 ms  (cached)
+  [SCENE] Model: bodies=68, joints=68, articulations=3, joint_coords=74, joint_dofs=73
+  [S6_GRASP] in-builder asserts OK: neq=46==46 (4 connect + 2 follower-mirror), cable<->non-pad filters intact
+  [COLLISION] model.collide() (BOX-CAPSULE, rigid_contact_max=64000)
+Module newton._src.solvers.mujoco.kernels f5ae6c7 load on device 'cuda:0' took 58.08 ms  (cached)
+  [SOLVER] mujoco solver created via make_solver
+  [S6_GRASP] solref poked + I11 asserts OK: pad_geoms=16 condim mj_pad=6/mjw_pad=6 mj_cable=6/mjw_cable=6 solref_mjw=[-65789.0, -2105.300048828125] priority=1 roll=0.004999999888241291 connects_stiffened=44(eq_solref->[0.001,1])
+  [S6_ROUTE] caveat-a: settled-cable-centre GRASP_YC=+149.50mm (grasp_at=+150mm arms +-44mm = 88 span)
+  [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+292.00mm (nominal GRASP_X=+300mm, delta=-8.00mm)
+  [ROUTE-HOVER] Moving: L=(0.267,-0.202,1.560) → (0.292,0.105,1.167)
+  [ROUTE-HOVER] Moving: R=(0.267,0.202,1.560) → (0.292,0.193,1.167)
+  [ROUTE-HOVER] dist=499.5mm, steps=499
+Module newton._src.sim.ik.ik_solver d9f8ff8 load on device 'cuda:0' took 1.11 ms  (cached)
+Module newton._src.sim.ik.ik_common ec7ac17 load on device 'cuda:0' took 1.64 ms  (cached)
+Module newton._src.sim.ik.ik_objectives 2ab3ea8 load on device 'cuda:0' took 0.99 ms  (cached)
+Module newton_routing_utils 73f39c0 load on device 'cuda:0' took 0.60 ms  (cached)
+Module newton._src.sim.ik.ik_lm_optimizer d941fd7 load on device 'cuda:0' took 1.40 ms  (cached)
+Module _lm_solve_tiled_28_46_1b403ab1 aa2f85e load on device 'cuda:0' took 184.37 ms  (cached)
+  [ROUTE-HOVER] IK solved: cost=3.40e-05
+  [ROUTE-HOVER] step 0/499: err L=498.7mm R=393.1mm cable_z=[0.8039,0.8040] nan=False
+  [ROUTE-HOVER] step 99/499: err L=418.0mm R=316.3mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-HOVER] step 198/499: err L=325.8mm R=238.3mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-HOVER] step 297/499: err L=224.4mm R=159.6mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-HOVER] step 396/499: err L=116.4mm R=80.7mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-HOVER] step 495/499: err L=4.8mm R=3.2mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-HOVER] Final: err L=2.2mm R=2.2mm converged=True (thresh=8.0mm)
+  [ROUTE-DESCEND1/8] Moving: L=(0.292,0.103,1.167) → (0.292,0.105,1.154)
+  [ROUTE-DESCEND1/8] Moving: R=(0.292,0.196,1.167) → (0.292,0.193,1.154)
+  [ROUTE-DESCEND1/8] dist=12.7mm, steps=50
+  [ROUTE-DESCEND1/8] IK solved: cost=3.40e-05
+  [ROUTE-DESCEND1/8] step 0/50: err L=12.4mm R=12.4mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND1/8] step 10/50: err L=10.0mm R=10.0mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND1/8] step 20/50: err L=7.6mm R=7.6mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND1/8] step 30/50: err L=5.2mm R=5.2mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND1/8] step 40/50: err L=3.1mm R=3.1mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND1/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [ROUTE-DESCEND2/8] Moving: L=(0.292,0.103,1.154) → (0.292,0.105,1.142)
+  [ROUTE-DESCEND2/8] Moving: R=(0.292,0.196,1.154) → (0.292,0.193,1.142)
+  [ROUTE-DESCEND2/8] dist=12.7mm, steps=50
+  [ROUTE-DESCEND2/8] IK solved: cost=3.40e-05
+  [ROUTE-DESCEND2/8] step 0/50: err L=12.4mm R=12.5mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND2/8] step 10/50: err L=10.0mm R=10.0mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND2/8] step 20/50: err L=7.6mm R=7.6mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND2/8] step 30/50: err L=5.2mm R=5.2mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND2/8] step 40/50: err L=3.1mm R=3.1mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND2/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [ROUTE-DESCEND3/8] Moving: L=(0.292,0.103,1.142) → (0.292,0.105,1.129)
+  [ROUTE-DESCEND3/8] Moving: R=(0.292,0.196,1.142) → (0.292,0.193,1.129)
+  [ROUTE-DESCEND3/8] dist=12.7mm, steps=50
+  [ROUTE-DESCEND3/8] IK solved: cost=3.40e-05
+  [ROUTE-DESCEND3/8] step 0/50: err L=12.4mm R=12.5mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND3/8] step 10/50: err L=10.0mm R=10.0mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND3/8] step 20/50: err L=7.6mm R=7.6mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND3/8] step 30/50: err L=5.2mm R=5.2mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND3/8] step 40/50: err L=3.1mm R=3.1mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND3/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [ROUTE-DESCEND4/8] Moving: L=(0.292,0.103,1.129) → (0.292,0.105,1.117)
+  [ROUTE-DESCEND4/8] Moving: R=(0.292,0.196,1.129) → (0.292,0.193,1.117)
+  [ROUTE-DESCEND4/8] dist=12.7mm, steps=50
+  [ROUTE-DESCEND4/8] IK solved: cost=3.40e-05
+  [ROUTE-DESCEND4/8] step 0/50: err L=12.4mm R=12.4mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND4/8] step 10/50: err L=10.0mm R=10.0mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND4/8] step 20/50: err L=7.6mm R=7.6mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND4/8] step 30/50: err L=5.2mm R=5.2mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND4/8] step 40/50: err L=3.1mm R=3.1mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND4/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [ROUTE-DESCEND5/8] Moving: L=(0.292,0.103,1.117) → (0.292,0.105,1.104)
+  [ROUTE-DESCEND5/8] Moving: R=(0.292,0.196,1.117) → (0.292,0.193,1.104)
+  [ROUTE-DESCEND5/8] dist=12.7mm, steps=50
+  [ROUTE-DESCEND5/8] IK solved: cost=3.40e-05
+  [ROUTE-DESCEND5/8] step 0/50: err L=12.4mm R=12.4mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND5/8] step 10/50: err L=10.0mm R=10.0mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND5/8] step 20/50: err L=7.6mm R=7.5mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND5/8] step 30/50: err L=5.2mm R=5.2mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND5/8] step 40/50: err L=3.1mm R=3.1mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND5/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [ROUTE-DESCEND6/8] Moving: L=(0.292,0.103,1.104) → (0.292,0.105,1.092)
+  [ROUTE-DESCEND6/8] Moving: R=(0.292,0.196,1.104) → (0.292,0.193,1.092)
+  [ROUTE-DESCEND6/8] dist=12.7mm, steps=50
+  [ROUTE-DESCEND6/8] IK solved: cost=3.40e-05
+  [ROUTE-DESCEND6/8] step 0/50: err L=12.4mm R=12.4mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND6/8] step 10/50: err L=10.0mm R=10.0mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND6/8] step 20/50: err L=7.6mm R=7.5mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND6/8] step 30/50: err L=5.2mm R=5.2mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND6/8] step 40/50: err L=3.1mm R=3.1mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND6/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [ROUTE-DESCEND7/8] Moving: L=(0.292,0.103,1.092) → (0.292,0.105,1.079)
+  [ROUTE-DESCEND7/8] Moving: R=(0.292,0.196,1.092) → (0.292,0.193,1.079)
+  [ROUTE-DESCEND7/8] dist=12.7mm, steps=50
+  [ROUTE-DESCEND7/8] IK solved: cost=3.40e-05
+  [ROUTE-DESCEND7/8] step 0/50: err L=12.4mm R=12.4mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND7/8] step 10/50: err L=10.0mm R=10.0mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND7/8] step 20/50: err L=7.6mm R=7.5mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND7/8] step 30/50: err L=5.2mm R=5.2mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND7/8] step 40/50: err L=3.1mm R=3.1mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND7/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [ROUTE-DESCEND8/8] Moving: L=(0.292,0.103,1.079) → (0.292,0.105,1.067)
+  [ROUTE-DESCEND8/8] Moving: R=(0.292,0.196,1.079) → (0.292,0.193,1.067)
+  [ROUTE-DESCEND8/8] dist=12.7mm, steps=50
+  [ROUTE-DESCEND8/8] IK solved: cost=3.40e-05
+  [ROUTE-DESCEND8/8] step 0/50: err L=12.4mm R=12.4mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND8/8] step 10/50: err L=10.0mm R=10.0mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND8/8] step 20/50: err L=7.6mm R=7.6mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND8/8] step 30/50: err L=5.2mm R=5.2mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND8/8] step 40/50: err L=3.1mm R=3.1mm cable_z=[0.8038,0.8040] nan=False
+  [ROUTE-DESCEND8/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [ROUTE-LIFT1/12] Moving: L=(0.292,0.103,1.067) → (0.292,0.105,1.071)
+  [ROUTE-LIFT1/12] Moving: R=(0.292,0.196,1.067) → (0.292,0.193,1.071)
+  [ROUTE-LIFT1/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT1/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT1/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.7989,0.8041] nan=False
+  [ROUTE-LIFT1/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.7989,0.8044] nan=False
+  [ROUTE-LIFT1/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.7992,0.8050] nan=False
+  [ROUTE-LIFT1/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.7999,0.8054] nan=False
+  [ROUTE-LIFT1/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8007,0.8053] nan=False
+  [ROUTE-LIFT1/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [ROUTE-LIFT2/12] Moving: L=(0.292,0.103,1.071) → (0.292,0.105,1.075)
+  [ROUTE-LIFT2/12] Moving: R=(0.292,0.196,1.071) → (0.292,0.193,1.075)
+  [ROUTE-LIFT2/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT2/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT2/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.8016,0.8050] nan=False
+  [ROUTE-LIFT2/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.8024,0.8048] nan=False
+  [ROUTE-LIFT2/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.8031,0.8047] nan=False
+  [ROUTE-LIFT2/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.8039,0.8047] nan=False
+  [ROUTE-LIFT2/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8049] nan=False
+  [ROUTE-LIFT2/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [ROUTE-LIFT3/12] Moving: L=(0.292,0.103,1.075) → (0.292,0.105,1.079)
+  [ROUTE-LIFT3/12] Moving: R=(0.292,0.196,1.075) → (0.292,0.193,1.079)
+  [ROUTE-LIFT3/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT3/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT3/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.8040,0.8051] nan=False
+  [ROUTE-LIFT3/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.8040,0.8054] nan=False
+  [ROUTE-LIFT3/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8057] nan=False
+  [ROUTE-LIFT3/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8060] nan=False
+  [ROUTE-LIFT3/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8064] nan=False
+  [ROUTE-LIFT3/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [ROUTE-LIFT4/12] Moving: L=(0.292,0.103,1.079) → (0.292,0.105,1.083)
+  [ROUTE-LIFT4/12] Moving: R=(0.292,0.196,1.079) → (0.292,0.193,1.083)
+  [ROUTE-LIFT4/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT4/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT4/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.8040,0.8069] nan=False
+  [ROUTE-LIFT4/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.8040,0.8073] nan=False
+  [ROUTE-LIFT4/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8078] nan=False
+  [ROUTE-LIFT4/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8083] nan=False
+  [ROUTE-LIFT4/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8090] nan=False
+  [ROUTE-LIFT4/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [ROUTE-LIFT5/12] Moving: L=(0.292,0.103,1.083) → (0.292,0.105,1.088)
+  [ROUTE-LIFT5/12] Moving: R=(0.292,0.196,1.083) → (0.292,0.193,1.088)
+  [ROUTE-LIFT5/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT5/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT5/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.8040,0.8095] nan=False
+  [ROUTE-LIFT5/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.8040,0.8100] nan=False
+  [ROUTE-LIFT5/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8106] nan=False
+  [ROUTE-LIFT5/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8111] nan=False
+  [ROUTE-LIFT5/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8117] nan=False
+  [ROUTE-LIFT5/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [ROUTE-LIFT6/12] Moving: L=(0.292,0.103,1.088) → (0.292,0.105,1.092)
+  [ROUTE-LIFT6/12] Moving: R=(0.292,0.196,1.088) → (0.292,0.193,1.092)
+  [ROUTE-LIFT6/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT6/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT6/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.8040,0.8122] nan=False
+  [ROUTE-LIFT6/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.8040,0.8127] nan=False
+  [ROUTE-LIFT6/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8132] nan=False
+  [ROUTE-LIFT6/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8137] nan=False
+  [ROUTE-LIFT6/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8142] nan=False
+  [ROUTE-LIFT6/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [ROUTE-LIFT7/12] Moving: L=(0.292,0.103,1.092) → (0.292,0.105,1.096)
+  [ROUTE-LIFT7/12] Moving: R=(0.292,0.196,1.092) → (0.292,0.193,1.096)
+  [ROUTE-LIFT7/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT7/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT7/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.8040,0.8147] nan=False
+  [ROUTE-LIFT7/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.8040,0.8151] nan=False
+  [ROUTE-LIFT7/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8156] nan=False
+  [ROUTE-LIFT7/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8161] nan=False
+  [ROUTE-LIFT7/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8166] nan=False
+  [ROUTE-LIFT7/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [ROUTE-LIFT8/12] Moving: L=(0.292,0.103,1.096) → (0.292,0.105,1.100)
+  [ROUTE-LIFT8/12] Moving: R=(0.292,0.196,1.096) → (0.292,0.193,1.100)
+  [ROUTE-LIFT8/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT8/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT8/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.8040,0.8171] nan=False
+  [ROUTE-LIFT8/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.8040,0.8176] nan=False
+  [ROUTE-LIFT8/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8181] nan=False
+  [ROUTE-LIFT8/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8186] nan=False
+  [ROUTE-LIFT8/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8192] nan=False
+  [ROUTE-LIFT8/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [ROUTE-LIFT9/12] Moving: L=(0.292,0.103,1.100) → (0.292,0.105,1.104)
+  [ROUTE-LIFT9/12] Moving: R=(0.292,0.196,1.100) → (0.292,0.193,1.104)
+  [ROUTE-LIFT9/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT9/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT9/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.8040,0.8197] nan=False
+  [ROUTE-LIFT9/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.8040,0.8202] nan=False
+  [ROUTE-LIFT9/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8207] nan=False
+  [ROUTE-LIFT9/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8212] nan=False
+  [ROUTE-LIFT9/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8216] nan=False
+  [ROUTE-LIFT9/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [ROUTE-LIFT10/12] Moving: L=(0.292,0.103,1.104) → (0.292,0.105,1.108)
+  [ROUTE-LIFT10/12] Moving: R=(0.292,0.196,1.104) → (0.292,0.193,1.108)
+  [ROUTE-LIFT10/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT10/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT10/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.8040,0.8221] nan=False
+  [ROUTE-LIFT10/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.8040,0.8227] nan=False
+  [ROUTE-LIFT10/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8232] nan=False
+  [ROUTE-LIFT10/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8237] nan=False
+  [ROUTE-LIFT10/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8242] nan=False
+  [ROUTE-LIFT10/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [ROUTE-LIFT11/12] Moving: L=(0.292,0.103,1.108) → (0.292,0.105,1.113)
+  [ROUTE-LIFT11/12] Moving: R=(0.292,0.196,1.108) → (0.292,0.193,1.113)
+  [ROUTE-LIFT11/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT11/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT11/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.8040,0.8248] nan=False
+  [ROUTE-LIFT11/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.8040,0.8253] nan=False
+  [ROUTE-LIFT11/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8259] nan=False
+  [ROUTE-LIFT11/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8265] nan=False
+  [ROUTE-LIFT11/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8271] nan=False
+  [ROUTE-LIFT11/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [ROUTE-LIFT12/12] Moving: L=(0.292,0.103,1.113) → (0.292,0.105,1.117)
+  [ROUTE-LIFT12/12] Moving: R=(0.292,0.196,1.113) → (0.292,0.193,1.117)
+  [ROUTE-LIFT12/12] dist=4.7mm, steps=50
+  [ROUTE-LIFT12/12] IK solved: cost=3.40e-05
+  [ROUTE-LIFT12/12] step 0/50: err L=4.6mm R=4.6mm cable_z=[0.8040,0.8276] nan=False
+  [ROUTE-LIFT12/12] step 10/50: err L=3.9mm R=3.9mm cable_z=[0.8040,0.8282] nan=False
+  [ROUTE-LIFT12/12] step 20/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8288] nan=False
+  [ROUTE-LIFT12/12] step 30/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8296] nan=False
+  [ROUTE-LIFT12/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8307] nan=False
+  [ROUTE-LIFT12/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [S6_ROUTE] wp=START(lift)  x=0.292 L[f1/f2=-0.65/+2.60 sum=9.9 lat=7.9 held=True] R[f1/f2=+0.04/+1.89 sum=9.9 lat=7.8 held=True] cable_z=832mm
+  [ROUTE1/6] Moving: L=(0.292,0.103,1.117) → (0.302,0.106,1.117)
+  [ROUTE1/6] Moving: R=(0.292,0.196,1.117) → (0.302,0.194,1.117)
+  [ROUTE1/6] dist=9.9mm, steps=50
+  [ROUTE1/6] IK solved: cost=3.40e-05
+  [ROUTE1/6] step 0/50: err L=9.7mm R=9.7mm cable_z=[0.8040,0.8319] nan=False
+  [ROUTE1/6] step 10/50: err L=7.9mm R=7.8mm cable_z=[0.8040,0.8328] nan=False
+  [ROUTE1/6] step 20/50: err L=6.0mm R=6.0mm cable_z=[0.8040,0.8330] nan=False
+  [ROUTE1/6] step 30/50: err L=4.3mm R=4.3mm cable_z=[0.8040,0.8325] nan=False
+  [ROUTE1/6] step 40/50: err L=2.8mm R=2.8mm cable_z=[0.8040,0.8316] nan=False
+  [ROUTE1/6] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [S6_ROUTE] wp=ROUTE1/6     x=0.302 L[f1/f2=+0.00/+1.01 sum=9.0 lat=7.8 held=True] R[f1/f2=+2.06/-0.12 sum=9.9 lat=7.7 held=True] cable_z=831mm
+  [ROUTE2/6] Moving: L=(0.302,0.103,1.117) → (0.311,0.106,1.117)
+  [ROUTE2/6] Moving: R=(0.302,0.196,1.117) → (0.311,0.194,1.117)
+  [ROUTE2/6] dist=9.9mm, steps=50
+  [ROUTE2/6] IK solved: cost=3.40e-05
+  [ROUTE2/6] step 0/50: err L=9.7mm R=9.7mm cable_z=[0.8040,0.8307] nan=False
+  [ROUTE2/6] step 10/50: err L=7.9mm R=7.8mm cable_z=[0.8040,0.8301] nan=False
+  [ROUTE2/6] step 20/50: err L=6.0mm R=6.0mm cable_z=[0.8040,0.8301] nan=False
+  [ROUTE2/6] step 30/50: err L=4.3mm R=4.3mm cable_z=[0.8040,0.8302] nan=False
+  [ROUTE2/6] step 40/50: err L=2.8mm R=2.8mm cable_z=[0.8040,0.8303] nan=False
+  [ROUTE2/6] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [S6_ROUTE] wp=ROUTE2/6     x=0.311 L[f1/f2=+0.01/+0.72 sum=8.7 lat=7.8 held=True] R[f1/f2=+2.15/-0.22 sum=9.9 lat=7.7 held=True] cable_z=830mm
+  [ROUTE3/6] Moving: L=(0.311,0.103,1.117) → (0.321,0.106,1.117)
+  [ROUTE3/6] Moving: R=(0.311,0.196,1.117) → (0.321,0.194,1.117)
+  [ROUTE3/6] dist=9.9mm, steps=50
+  [ROUTE3/6] IK solved: cost=3.40e-05
+  [ROUTE3/6] step 0/50: err L=9.7mm R=9.7mm cable_z=[0.8040,0.8304] nan=False
+  [ROUTE3/6] step 10/50: err L=7.9mm R=7.8mm cable_z=[0.8040,0.8305] nan=False
+  [ROUTE3/6] step 20/50: err L=6.0mm R=6.0mm cable_z=[0.8040,0.8305] nan=False
+  [ROUTE3/6] step 30/50: err L=4.3mm R=4.3mm cable_z=[0.8041,0.8305] nan=False
+  [ROUTE3/6] step 40/50: err L=2.8mm R=2.8mm cable_z=[0.8040,0.8305] nan=False
+  [ROUTE3/6] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [S6_ROUTE] wp=ROUTE3/6     x=0.321 L[f1/f2=+0.02/+0.62 sum=8.6 lat=7.8 held=True] R[f1/f2=+2.02/-0.09 sum=9.9 lat=7.7 held=True] cable_z=831mm
+  [ROUTE4/6] Moving: L=(0.321,0.104,1.117) → (0.331,0.106,1.117)
+  [ROUTE4/6] Moving: R=(0.321,0.196,1.117) → (0.331,0.194,1.117)
+  [ROUTE4/6] dist=9.9mm, steps=50
+  [ROUTE4/6] IK solved: cost=3.40e-05
+  [ROUTE4/6] step 0/50: err L=9.7mm R=9.7mm cable_z=[0.8040,0.8305] nan=False
+  [ROUTE4/6] step 10/50: err L=7.9mm R=7.8mm cable_z=[0.8040,0.8305] nan=False
+  [ROUTE4/6] step 20/50: err L=6.0mm R=6.0mm cable_z=[0.8040,0.8306] nan=False
+  [ROUTE4/6] step 30/50: err L=4.3mm R=4.3mm cable_z=[0.8039,0.8306] nan=False
+  [ROUTE4/6] step 40/50: err L=2.8mm R=2.8mm cable_z=[0.8040,0.8306] nan=False
+  [ROUTE4/6] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [S6_ROUTE] wp=ROUTE4/6     x=0.331 L[f1/f2=-0.01/+0.60 sum=8.6 lat=7.8 held=True] R[f1/f2=+2.02/-0.07 sum=9.9 lat=7.7 held=True] cable_z=831mm
+  [ROUTE5/6] Moving: L=(0.331,0.104,1.117) → (0.340,0.106,1.117)
+  [ROUTE5/6] Moving: R=(0.331,0.196,1.117) → (0.340,0.194,1.117)
+  [ROUTE5/6] dist=9.9mm, steps=50
+  [ROUTE5/6] IK solved: cost=3.40e-05
+  [ROUTE5/6] step 0/50: err L=9.7mm R=9.7mm cable_z=[0.8040,0.8307] nan=False
+  [ROUTE5/6] step 10/50: err L=7.9mm R=7.8mm cable_z=[0.8040,0.8307] nan=False
+  [ROUTE5/6] step 20/50: err L=6.0mm R=6.0mm cable_z=[0.8040,0.8308] nan=False
+  [ROUTE5/6] step 30/50: err L=4.3mm R=4.3mm cable_z=[0.8040,0.8309] nan=False
+  [ROUTE5/6] step 40/50: err L=2.8mm R=2.8mm cable_z=[0.8040,0.8311] nan=False
+  [ROUTE5/6] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [S6_ROUTE] wp=ROUTE5/6     x=0.340 L[f1/f2=+0.04/+0.71 sum=8.8 lat=10.8 held=False] R[f1/f2=+1.37/-0.34 sum=9.0 lat=10.1 held=False] cable_z=831mm
+  [ROUTE6/6] Moving: L=(0.340,0.104,1.117) → (0.350,0.106,1.117)
+  [ROUTE6/6] Moving: R=(0.340,0.196,1.117) → (0.350,0.194,1.117)
+  [ROUTE6/6] dist=9.9mm, steps=50
+  [ROUTE6/6] IK solved: cost=3.40e-05
+  [ROUTE6/6] step 0/50: err L=9.7mm R=9.7mm cable_z=[0.8040,0.8314] nan=False
+  [ROUTE6/6] step 10/50: err L=7.9mm R=7.8mm cable_z=[0.8040,0.8317] nan=False
+  [ROUTE6/6] step 20/50: err L=6.0mm R=6.0mm cable_z=[0.8039,0.8320] nan=False
+  [ROUTE6/6] step 30/50: err L=4.3mm R=4.3mm cable_z=[0.8040,0.8322] nan=False
+  [ROUTE6/6] step 40/50: err L=2.8mm R=2.8mm cable_z=[0.8040,0.8324] nan=False
+  [ROUTE6/6] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [S6_ROUTE] wp=ROUTE6/6     x=0.350 L[f1/f2=+0.41/+1.14 sum=9.6 lat=5.7 held=True] R[f1/f2=+2.10/-0.30 sum=9.8 lat=6.2 held=True] cable_z=833mm
+  [S6_ROUTE] endpoint per-arm reach: residual L=2.21mm R=2.21mm | lateral L=0.454m R=0.154m -> L STRETCHES (near-reach, fragile), the other FOLDS -- asymmetric diagonal drag to clip Y=+0.150, both arms moving (INVARIANT#1)
+  [S6_ROUTE] wp=END(hold)    x=0.350 L[f1/f2=-0.55/+0.33 sum=7.8 lat=11.0 held=False] R[f1/f2=-0.12/-0.11 sum=7.8 lat=10.8 held=False] cable_z=831mm
+  [C2-FLOAT] CLIP_FLOAT_Z=20.0mm (TABLE stays 800) | (i) clip floor geom zmin C1=810.0 C2=810.0mm (expect 822.5) | (ii) cable SEAT target=829.0mm (=809+float) | (iii) EE descent target=1096.4mm (=seat+ee_off 267.4) | GAP(cable-table)=29.0mm | LOW_WALL_TOP=840mm
+  [C2] geoms: C1=6 C2=6 table=4 | C1@(0.350,+0.150)over-void  C2@(0.400,+0.075)over-SOLID (X 0.4 vs void-ceil 0.366; Y +0.075 vs void [0.090,0.210])
+  [C2-SEAT1/8] Moving: L=(0.350,0.104,1.117) → (0.350,0.106,1.114)
+  [C2-SEAT1/8] Moving: R=(0.350,0.196,1.117) → (0.350,0.194,1.114)
+  [C2-SEAT1/8] dist=3.4mm, steps=50
+  [C2-SEAT1/8] IK solved: cost=3.40e-05
+  [C2-SEAT1/8] step 0/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8305] nan=False
+  [C2-SEAT1/8] step 10/50: err L=3.0mm R=3.0mm cable_z=[0.8041,0.8301] nan=False
+  [C2-SEAT1/8] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8039,0.8301] nan=False
+  [C2-SEAT1/8] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8040,0.8305] nan=False
+  [C2-SEAT1/8] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8306] nan=False
+  [C2-SEAT1/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-SEAT2/8] Moving: L=(0.350,0.104,1.114) → (0.350,0.106,1.112)
+  [C2-SEAT2/8] Moving: R=(0.350,0.196,1.114) → (0.350,0.194,1.112)
+  [C2-SEAT2/8] dist=3.4mm, steps=50
+  [C2-SEAT2/8] IK solved: cost=3.40e-05
+  [C2-SEAT2/8] step 0/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8307] nan=False
+  [C2-SEAT2/8] step 10/50: err L=3.0mm R=3.0mm cable_z=[0.8040,0.8308] nan=False
+  [C2-SEAT2/8] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8307] nan=False
+  [C2-SEAT2/8] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8039,0.8305] nan=False
+  [C2-SEAT2/8] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8302] nan=False
+  [C2-SEAT2/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-SEAT3/8] Moving: L=(0.350,0.104,1.112) → (0.350,0.106,1.109)
+  [C2-SEAT3/8] Moving: R=(0.350,0.196,1.112) → (0.350,0.194,1.109)
+  [C2-SEAT3/8] dist=3.4mm, steps=50
+  [C2-SEAT3/8] IK solved: cost=3.40e-05
+  [C2-SEAT3/8] step 0/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8297] nan=False
+  [C2-SEAT3/8] step 10/50: err L=3.0mm R=3.0mm cable_z=[0.8040,0.8291] nan=False
+  [C2-SEAT3/8] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8039,0.8285] nan=False
+  [C2-SEAT3/8] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8039,0.8280] nan=False
+  [C2-SEAT3/8] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8039,0.8276] nan=False
+  [C2-SEAT3/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-SEAT4/8] Moving: L=(0.350,0.104,1.109) → (0.350,0.106,1.107)
+  [C2-SEAT4/8] Moving: R=(0.350,0.196,1.109) → (0.350,0.194,1.107)
+  [C2-SEAT4/8] dist=3.4mm, steps=50
+  [C2-SEAT4/8] IK solved: cost=3.40e-05
+  [C2-SEAT4/8] step 0/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8273] nan=False
+  [C2-SEAT4/8] step 10/50: err L=3.0mm R=3.0mm cable_z=[0.8041,0.8272] nan=False
+  [C2-SEAT4/8] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8270] nan=False
+  [C2-SEAT4/8] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8040,0.8267] nan=False
+  [C2-SEAT4/8] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8263] nan=False
+  [C2-SEAT4/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-SEAT5/8] Moving: L=(0.350,0.104,1.107) → (0.350,0.106,1.104)
+  [C2-SEAT5/8] Moving: R=(0.350,0.196,1.107) → (0.350,0.194,1.104)
+  [C2-SEAT5/8] dist=3.4mm, steps=50
+  [C2-SEAT5/8] IK solved: cost=3.40e-05
+  [C2-SEAT5/8] step 0/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8259] nan=False
+  [C2-SEAT5/8] step 10/50: err L=3.0mm R=3.0mm cable_z=[0.8040,0.8255] nan=False
+  [C2-SEAT5/8] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8251] nan=False
+  [C2-SEAT5/8] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8040,0.8247] nan=False
+  [C2-SEAT5/8] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8243] nan=False
+  [C2-SEAT5/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-SEAT6/8] Moving: L=(0.350,0.104,1.104) → (0.350,0.106,1.102)
+  [C2-SEAT6/8] Moving: R=(0.350,0.196,1.104) → (0.350,0.194,1.102)
+  [C2-SEAT6/8] dist=3.4mm, steps=50
+  [C2-SEAT6/8] IK solved: cost=3.40e-05
+  [C2-SEAT6/8] step 0/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8240] nan=False
+  [C2-SEAT6/8] step 10/50: err L=3.0mm R=3.0mm cable_z=[0.8041,0.8237] nan=False
+  [C2-SEAT6/8] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8234] nan=False
+  [C2-SEAT6/8] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8041,0.8231] nan=False
+  [C2-SEAT6/8] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8041,0.8228] nan=False
+  [C2-SEAT6/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-SEAT7/8] Moving: L=(0.350,0.104,1.102) → (0.350,0.106,1.099)
+  [C2-SEAT7/8] Moving: R=(0.350,0.196,1.102) → (0.350,0.194,1.099)
+  [C2-SEAT7/8] dist=3.4mm, steps=50
+  [C2-SEAT7/8] IK solved: cost=3.40e-05
+  [C2-SEAT7/8] step 0/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8225] nan=False
+  [C2-SEAT7/8] step 10/50: err L=3.0mm R=3.0mm cable_z=[0.8040,0.8222] nan=False
+  [C2-SEAT7/8] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8219] nan=False
+  [C2-SEAT7/8] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8040,0.8216] nan=False
+  [C2-SEAT7/8] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8213] nan=False
+  [C2-SEAT7/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-SEAT8/8] Moving: L=(0.350,0.104,1.099) → (0.350,0.106,1.096)
+  [C2-SEAT8/8] Moving: R=(0.350,0.196,1.099) → (0.350,0.194,1.096)
+  [C2-SEAT8/8] dist=3.4mm, steps=50
+  [C2-SEAT8/8] IK solved: cost=3.40e-05
+  [C2-SEAT8/8] step 0/50: err L=3.3mm R=3.3mm cable_z=[0.8040,0.8210] nan=False
+  [C2-SEAT8/8] step 10/50: err L=3.0mm R=3.0mm cable_z=[0.8040,0.8207] nan=False
+  [C2-SEAT8/8] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8040,0.8204] nan=False
+  [C2-SEAT8/8] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8040,0.8200] nan=False
+  [C2-SEAT8/8] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8040,0.8197] nan=False
+  [C2-SEAT8/8] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2] C1 FULL-CLAMP seat: seat_body=idx56(Y+0.155) z_seat=829.7mm (groove 809 / low-wall 840) cable<->C1=+0.487mm cable<->C2=+26.017mm (<=0=touching)
+  [PERCLIP_PIN] ACTIVATED eq#28 on the EXACT runtime seat body idx56 (position-match 0.000mm) @world[np.float64(0.3503), np.float64(0.1554), np.float64(0.8297)]; z_c1 829.7->829.7mm; eq_active=1 (does the pin hold the seat? body29/28.. freedom measured over the guide below)
+  [C2-HALF] L drv=0.7407 claw<->cable gap=+0.400mm NORMAL=0.00N is_cradle=False z_c1=829.7mm
+  [C2-HALF] L drv=0.7282 claw<->cable gap=+0.434mm NORMAL=0.00N is_cradle=False z_c1=829.7mm
+  [C2-HALF] L drv=0.7157 claw<->cable gap=+0.399mm NORMAL=0.00N is_cradle=False z_c1=829.7mm
+  [C2-HALF] L drv=0.7032 claw<->cable gap=-0.001mm NORMAL=0.61N is_cradle=True z_c1=829.7mm
+  [C2-HALF] L drv=0.6907 claw<->cable gap=+0.000mm NORMAL=0.00N is_cradle=False z_c1=829.7mm
+  [C2] AFTER half-unclamp (L drv=0.69): claw<->cable gap=+0.003mm NORMAL=0.00N eff_mu=None is_cradle=False z_c1=829.7mm (cable still held in L half-clamp?)
+  [C2-43-RUNCLAMP] R released (step8): z_c1 829.7->829.7mm (low-wall 840); C1_held_without_R=True (⭐ if False = open-top clip does NOT retain C1 w/o R = 43-step BLOCKED on clip-retention)
+  [C2-RRISE1/8] Moving: L=(0.350,0.104,1.096) → (0.350,0.104,1.096)
+  [C2-RRISE1/8] Moving: R=(0.350,0.196,1.096) → (0.350,0.196,1.102)
+  [C2-RRISE1/8] dist=5.6mm, steps=50
+  [C2-RRISE1/8] IK solved: cost=1.79e-05
+  [C2-RRISE1/8] step 0/50: err L=0.0mm R=5.5mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE1/8] step 10/50: err L=0.3mm R=4.4mm cable_z=[0.8034,0.8147] nan=False
+  [C2-RRISE1/8] step 20/50: err L=0.6mm R=3.3mm cable_z=[0.8015,0.8144] nan=False
+  [C2-RRISE1/8] step 30/50: err L=0.8mm R=2.2mm cable_z=[0.8014,0.8144] nan=False
+  [C2-RRISE1/8] step 40/50: err L=1.1mm R=1.5mm cable_z=[0.8024,0.8145] nan=False
+  [C2-RRISE1/8] Final: err L=1.3mm R=1.3mm converged=True (thresh=2.5mm)
+  [C2-RRISE2/8] Moving: L=(0.350,0.102,1.096) → (0.350,0.104,1.096)
+  [C2-RRISE2/8] Moving: R=(0.350,0.198,1.102) → (0.350,0.196,1.108)
+  [C2-RRISE2/8] dist=5.7mm, steps=50
+  [C2-RRISE2/8] IK solved: cost=1.66e-05
+  [C2-RRISE2/8] step 0/50: err L=1.3mm R=5.6mm cable_z=[0.8040,0.8150] nan=False
+  [C2-RRISE2/8] step 10/50: err L=1.3mm R=4.5mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE2/8] step 20/50: err L=1.3mm R=3.4mm cable_z=[0.8040,0.8154] nan=False
+  [C2-RRISE2/8] step 30/50: err L=1.3mm R=2.4mm cable_z=[0.8040,0.8154] nan=False
+  [C2-RRISE2/8] step 40/50: err L=1.3mm R=1.5mm cable_z=[0.8040,0.8154] nan=False
+  [C2-RRISE2/8] Final: err L=1.3mm R=1.3mm converged=True (thresh=2.5mm)
+  [C2-RRISE3/8] Moving: L=(0.350,0.103,1.096) → (0.350,0.104,1.096)
+  [C2-RRISE3/8] Moving: R=(0.350,0.197,1.108) → (0.350,0.196,1.113)
+  [C2-RRISE3/8] dist=5.6mm, steps=50
+  [C2-RRISE3/8] IK solved: cost=1.46e-05
+  [C2-RRISE3/8] step 0/50: err L=1.3mm R=5.5mm cable_z=[0.8040,0.8153] nan=False
+  [C2-RRISE3/8] step 10/50: err L=1.2mm R=4.4mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE3/8] step 20/50: err L=1.2mm R=3.3mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE3/8] step 30/50: err L=1.2mm R=2.3mm cable_z=[0.8040,0.8151] nan=False
+  [C2-RRISE3/8] step 40/50: err L=1.2mm R=1.4mm cable_z=[0.8040,0.8151] nan=False
+  [C2-RRISE3/8] Final: err L=1.1mm R=1.1mm converged=True (thresh=2.5mm)
+  [C2-RRISE4/8] Moving: L=(0.350,0.103,1.096) → (0.350,0.104,1.096)
+  [C2-RRISE4/8] Moving: R=(0.350,0.197,1.114) → (0.350,0.196,1.119)
+  [C2-RRISE4/8] dist=5.5mm, steps=50
+  [C2-RRISE4/8] IK solved: cost=1.21e-05
+  [C2-RRISE4/8] step 0/50: err L=1.1mm R=5.4mm cable_z=[0.8040,0.8151] nan=False
+  [C2-RRISE4/8] step 10/50: err L=1.1mm R=4.3mm cable_z=[0.8040,0.8151] nan=False
+  [C2-RRISE4/8] step 20/50: err L=1.1mm R=3.2mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE4/8] step 30/50: err L=1.0mm R=2.2mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE4/8] step 40/50: err L=1.0mm R=1.3mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE4/8] Final: err L=1.0mm R=1.0mm converged=True (thresh=2.5mm)
+  [C2-RRISE5/8] Moving: L=(0.350,0.103,1.096) → (0.350,0.104,1.096)
+  [C2-RRISE5/8] Moving: R=(0.350,0.197,1.119) → (0.350,0.196,1.125)
+  [C2-RRISE5/8] dist=5.5mm, steps=50
+  [C2-RRISE5/8] IK solved: cost=9.52e-06
+  [C2-RRISE5/8] step 0/50: err L=1.0mm R=5.4mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE5/8] step 10/50: err L=0.9mm R=4.3mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE5/8] step 20/50: err L=0.9mm R=3.2mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE5/8] step 30/50: err L=0.9mm R=2.1mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE5/8] step 40/50: err L=0.8mm R=1.1mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE5/8] Final: err L=0.8mm R=0.8mm converged=True (thresh=2.5mm)
+  [C2-RRISE6/8] Moving: L=(0.350,0.103,1.096) → (0.350,0.104,1.096)
+  [C2-RRISE6/8] Moving: R=(0.350,0.197,1.125) → (0.350,0.196,1.130)
+  [C2-RRISE6/8] dist=5.4mm, steps=50
+  [C2-RRISE6/8] IK solved: cost=7.04e-06
+  [C2-RRISE6/8] step 0/50: err L=0.8mm R=5.3mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE6/8] step 10/50: err L=0.7mm R=4.2mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE6/8] step 20/50: err L=0.7mm R=3.1mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE6/8] step 30/50: err L=0.7mm R=2.0mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE6/8] step 40/50: err L=0.6mm R=1.0mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE6/8] Final: err L=0.6mm R=0.6mm converged=True (thresh=2.5mm)
+  [C2-RRISE7/8] Moving: L=(0.350,0.103,1.096) → (0.350,0.104,1.096)
+  [C2-RRISE7/8] Moving: R=(0.350,0.197,1.130) → (0.350,0.196,1.136)
+  [C2-RRISE7/8] dist=5.4mm, steps=50
+  [C2-RRISE7/8] IK solved: cost=4.89e-06
+  [C2-RRISE7/8] step 0/50: err L=0.6mm R=5.3mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE7/8] step 10/50: err L=0.6mm R=4.2mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE7/8] step 20/50: err L=0.5mm R=3.1mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE7/8] step 30/50: err L=0.5mm R=2.0mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE7/8] step 40/50: err L=0.5mm R=0.9mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE7/8] Final: err L=0.4mm R=0.4mm converged=True (thresh=2.5mm)
+  [C2-RRISE8/8] Moving: L=(0.350,0.103,1.096) → (0.350,0.104,1.096)
+  [C2-RRISE8/8] Moving: R=(0.350,0.197,1.136) → (0.350,0.196,1.141)
+  [C2-RRISE8/8] dist=5.5mm, steps=50
+  [C2-RRISE8/8] IK solved: cost=3.20e-06
+  [C2-RRISE8/8] step 0/50: err L=0.4mm R=5.4mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE8/8] step 10/50: err L=0.4mm R=4.2mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE8/8] step 20/50: err L=0.4mm R=3.1mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE8/8] step 30/50: err L=0.3mm R=2.0mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE8/8] step 40/50: err L=0.3mm R=0.9mm cable_z=[0.8040,0.8152] nan=False
+  [C2-RRISE8/8] Final: err L=0.3mm R=0.3mm converged=True (thresh=2.5mm)
+  [C2-RRISE] R risen 1.096->1.141 (+45mm; R free after pin holds C1, no longer anchors descended)
+  [C2] R ANCHOR held @(0.350,+0.196,1.142) [+Y above C1 +0.150]; L guide (0.350,+0.104,1.096) -> C2 (0.400,+0.075), z held at cradle level
+  [C2-PRELIFT1/8] Moving: L=(0.350,0.104,1.096) → (0.350,0.104,1.102)
+  [C2-PRELIFT1/8] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-PRELIFT1/8] dist=5.6mm, steps=50
+  [C2-PRELIFT1/8] IK solved: cost=4.40e-06
+  [C2-PRELIFT1/8] step 0/50: err L=5.5mm R=0.0mm cable_z=[0.8040,0.8152] nan=False
+  [C2-PRELIFT1/8] step 10/50: err L=4.4mm R=0.1mm cable_z=[0.8040,0.8154] nan=False
+  [C2-PRELIFT1/8] step 20/50: err L=3.3mm R=0.2mm cable_z=[0.8040,0.8157] nan=False
+  [C2-PRELIFT1/8] step 30/50: err L=2.2mm R=0.2mm cable_z=[0.8040,0.8159] nan=False
+  [C2-PRELIFT1/8] step 40/50: err L=1.2mm R=0.3mm cable_z=[0.8016,0.8160] nan=False
+  [C2-PRELIFT1/8] Final: err L=0.4mm R=0.4mm converged=True (thresh=2.5mm)
+  [C2-PRELIFT2/8] Moving: L=(0.350,0.103,1.102) → (0.350,0.104,1.108)
+  [C2-PRELIFT2/8] Moving: R=(0.350,0.197,1.142) → (0.350,0.196,1.142)
+  [C2-PRELIFT2/8] dist=5.8mm, steps=50
+  [C2-PRELIFT2/8] IK solved: cost=6.35e-06
+  [C2-PRELIFT2/8] step 0/50: err L=5.7mm R=0.4mm cable_z=[0.8003,0.8168] nan=False
+  [C2-PRELIFT2/8] step 10/50: err L=4.6mm R=0.4mm cable_z=[0.8004,0.8171] nan=False
+  [C2-PRELIFT2/8] step 20/50: err L=3.5mm R=0.5mm cable_z=[0.8005,0.8175] nan=False
+  [C2-PRELIFT2/8] step 30/50: err L=2.4mm R=0.5mm cable_z=[0.8005,0.8183] nan=False
+  [C2-PRELIFT2/8] step 40/50: err L=1.3mm R=0.5mm cable_z=[0.8006,0.8192] nan=False
+  [C2-PRELIFT2/8] Final: err L=0.6mm R=0.6mm converged=True (thresh=2.5mm)
+  [C2-PRELIFT3/8] Moving: L=(0.350,0.103,1.107) → (0.350,0.104,1.113)
+  [C2-PRELIFT3/8] Moving: R=(0.350,0.197,1.142) → (0.350,0.196,1.142)
+  [C2-PRELIFT3/8] dist=5.8mm, steps=50
+  [C2-PRELIFT3/8] IK solved: cost=8.63e-06
+  [C2-PRELIFT3/8] step 0/50: err L=5.7mm R=0.6mm cable_z=[0.8006,0.8217] nan=False
+  [C2-PRELIFT3/8] step 10/50: err L=4.6mm R=0.6mm cable_z=[0.8007,0.8226] nan=False
+  [C2-PRELIFT3/8] step 20/50: err L=3.5mm R=0.6mm cable_z=[0.8008,0.8234] nan=False
+  [C2-PRELIFT3/8] step 30/50: err L=2.4mm R=0.7mm cable_z=[0.8008,0.8240] nan=False
+  [C2-PRELIFT3/8] step 40/50: err L=1.4mm R=0.7mm cable_z=[0.8009,0.8243] nan=False
+  [C2-PRELIFT3/8] Final: err L=0.7mm R=0.7mm converged=True (thresh=2.5mm)
+  [C2-PRELIFT4/8] Moving: L=(0.350,0.103,1.113) → (0.350,0.104,1.119)
+  [C2-PRELIFT4/8] Moving: R=(0.350,0.197,1.142) → (0.350,0.196,1.142)
+  [C2-PRELIFT4/8] dist=5.9mm, steps=50
+  [C2-PRELIFT4/8] IK solved: cost=1.10e-05
+  [C2-PRELIFT4/8] step 0/50: err L=5.8mm R=0.7mm cable_z=[0.8010,0.8240] nan=False
+  [C2-PRELIFT4/8] step 10/50: err L=4.7mm R=0.8mm cable_z=[0.8011,0.8236] nan=False
+  [C2-PRELIFT4/8] step 20/50: err L=3.6mm R=0.8mm cable_z=[0.8012,0.8235] nan=False
+  [C2-PRELIFT4/8] step 30/50: err L=2.5mm R=0.8mm cable_z=[0.8013,0.8235] nan=False
+  [C2-PRELIFT4/8] step 40/50: err L=1.5mm R=0.9mm cable_z=[0.8014,0.8235] nan=False
+  [C2-PRELIFT4/8] Final: err L=0.9mm R=0.9mm converged=True (thresh=2.5mm)
+  [C2-PRELIFT5/8] Moving: L=(0.350,0.103,1.119) → (0.350,0.104,1.124)
+  [C2-PRELIFT5/8] Moving: R=(0.350,0.197,1.142) → (0.350,0.196,1.142)
+  [C2-PRELIFT5/8] dist=5.9mm, steps=50
+  [C2-PRELIFT5/8] IK solved: cost=1.33e-05
+  [C2-PRELIFT5/8] step 0/50: err L=5.8mm R=0.9mm cable_z=[0.8015,0.8248] nan=False
+  [C2-PRELIFT5/8] step 10/50: err L=4.7mm R=0.9mm cable_z=[0.8014,0.8262] nan=False
+  [C2-PRELIFT5/8] step 20/50: err L=3.6mm R=1.0mm cable_z=[0.8015,0.8275] nan=False
+  [C2-PRELIFT5/8] step 30/50: err L=2.5mm R=1.0mm cable_z=[0.8017,0.8284] nan=False
+  [C2-PRELIFT5/8] step 40/50: err L=1.6mm R=1.0mm cable_z=[0.8017,0.8292] nan=False
+  [C2-PRELIFT5/8] Final: err L=1.1mm R=1.1mm converged=True (thresh=2.5mm)
+  [C2-PRELIFT6/8] Moving: L=(0.350,0.102,1.124) → (0.350,0.104,1.130)
+  [C2-PRELIFT6/8] Moving: R=(0.350,0.198,1.142) → (0.350,0.196,1.142)
+  [C2-PRELIFT6/8] dist=5.9mm, steps=50
+  [C2-PRELIFT6/8] IK solved: cost=1.52e-05
+  [C2-PRELIFT6/8] step 0/50: err L=5.8mm R=1.1mm cable_z=[0.8019,0.8294] nan=False
+  [C2-PRELIFT6/8] step 10/50: err L=4.7mm R=1.1mm cable_z=[0.8019,0.8293] nan=False
+  [C2-PRELIFT6/8] step 20/50: err L=3.6mm R=1.1mm cable_z=[0.8020,0.8297] nan=False
+  [C2-PRELIFT6/8] step 30/50: err L=2.6mm R=1.1mm cable_z=[0.8021,0.8303] nan=False
+  [C2-PRELIFT6/8] step 40/50: err L=1.6mm R=1.2mm cable_z=[0.8021,0.8312] nan=False
+  [C2-PRELIFT6/8] Final: err L=1.2mm R=1.2mm converged=True (thresh=2.5mm)
+  [C2-PRELIFT7/8] Moving: L=(0.350,0.102,1.130) → (0.350,0.104,1.136)
+  [C2-PRELIFT7/8] Moving: R=(0.350,0.198,1.142) → (0.350,0.196,1.142)
+  [C2-PRELIFT7/8] dist=5.9mm, steps=50
+  [C2-PRELIFT7/8] IK solved: cost=1.65e-05
+  [C2-PRELIFT7/8] step 0/50: err L=5.8mm R=1.2mm cable_z=[0.8023,0.8318] nan=False
+  [C2-PRELIFT7/8] step 10/50: err L=4.7mm R=1.2mm cable_z=[0.8023,0.8318] nan=False
+  [C2-PRELIFT7/8] step 20/50: err L=3.6mm R=1.2mm cable_z=[0.8024,0.8322] nan=False
+  [C2-PRELIFT7/8] step 30/50: err L=2.6mm R=1.2mm cable_z=[0.8024,0.8328] nan=False
+  [C2-PRELIFT7/8] step 40/50: err L=1.7mm R=1.2mm cable_z=[0.8024,0.8336] nan=False
+  [C2-PRELIFT7/8] Final: err L=1.3mm R=1.3mm converged=True (thresh=2.5mm)
+  [C2-PRELIFT8/8] Moving: L=(0.350,0.102,1.136) → (0.350,0.104,1.141)
+  [C2-PRELIFT8/8] Moving: R=(0.350,0.198,1.142) → (0.350,0.196,1.142)
+  [C2-PRELIFT8/8] dist=5.8mm, steps=50
+  [C2-PRELIFT8/8] IK solved: cost=1.70e-05
+  [C2-PRELIFT8/8] step 0/50: err L=5.7mm R=1.3mm cable_z=[0.8025,0.8344] nan=False
+  [C2-PRELIFT8/8] step 10/50: err L=4.6mm R=1.3mm cable_z=[0.8026,0.8345] nan=False
+  [C2-PRELIFT8/8] step 20/50: err L=3.5mm R=1.3mm cable_z=[0.8026,0.8350] nan=False
+  [C2-PRELIFT8/8] step 30/50: err L=2.5mm R=1.3mm cable_z=[0.8027,0.8357] nan=False
+  [C2-PRELIFT8/8] step 40/50: err L=1.6mm R=1.3mm cable_z=[0.8027,0.8365] nan=False
+  [C2-PRELIFT8/8] Final: err L=1.3mm R=1.3mm converged=True (thresh=2.5mm)
+  [C2-PRELIFT] L lifted 1.096->1.141 (43-step step10 +45mm) before the high しごき traverse
+  [C2-GUIDE1/8] Moving: L=(0.350,0.102,1.141) → (0.356,0.100,1.141)
+  [C2-GUIDE1/8] Moving: R=(0.350,0.198,1.142) → (0.350,0.196,1.142)
+  [C2-GUIDE1/8] dist=6.7mm, steps=50
+  [C2-GUIDE1/8] IK solved: cost=9.33e-06
+  [C2-GUIDE1/8] step 0/50: err L=6.5mm R=1.3mm cable_z=[0.8028,0.8367] nan=False
+  [C2-GUIDE1/8] step 10/50: err L=5.1mm R=1.2mm cable_z=[0.8026,0.8360] nan=False
+  [C2-GUIDE1/8] step 20/50: err L=3.7mm R=1.1mm cable_z=[0.8025,0.8353] nan=False
+  [C2-GUIDE1/8] step 30/50: err L=2.4mm R=1.0mm cable_z=[0.8025,0.8349] nan=False
+  [C2-GUIDE1/8] step 40/50: err L=1.1mm R=0.9mm cable_z=[0.8025,0.8349] nan=False
+  [C2-GUIDE1/8] Final: err L=0.8mm R=0.8mm converged=True (thresh=3.0mm)
+  [C2-GUIDE] k=1/8 Lx=0.356 Ly=+0.100 | slip_xy=1.960(DRAG) slip_y=-3.153 cradle=True(gap-0.73/N49.6) | bottomclaw<->table=+50.00mm N=0.0 zmin=867.0 JAM=False | C1 z=829.7(IN) cable<->C1=-2.52 cable<->C2=+33.49 | Lgrip<->C2=+18.99 Rpad<->C1=+42.62 | HH-armlink=+28.45mm(6, 6) (sphere, <0=overlap)
+  [C2-GUIDE2/8] Moving: L=(0.356,0.099,1.141) → (0.363,0.096,1.141)
+  [C2-GUIDE2/8] Moving: R=(0.350,0.197,1.142) → (0.350,0.196,1.142)
+  [C2-GUIDE2/8] dist=6.8mm, steps=50
+  [C2-GUIDE2/8] IK solved: cost=4.55e-06
+  [C2-GUIDE2/8] step 0/50: err L=6.7mm R=0.8mm cable_z=[0.8024,0.8355] nan=False
+  [C2-GUIDE2/8] step 10/50: err L=5.3mm R=0.7mm cable_z=[0.8024,0.8353] nan=False
+  [C2-GUIDE2/8] step 20/50: err L=3.9mm R=0.6mm cable_z=[0.8024,0.8353] nan=False
+  [C2-GUIDE2/8] step 30/50: err L=2.5mm R=0.6mm cable_z=[0.8024,0.8354] nan=False
+  [C2-GUIDE2/8] step 40/50: err L=1.1mm R=0.5mm cable_z=[0.8024,0.8356] nan=False
+  [C2-GUIDE2/8] Final: err L=0.4mm R=0.4mm converged=True (thresh=3.0mm)
+  [C2-GUIDE] k=2/8 Lx=0.363 Ly=+0.096 | slip_xy=1.113(DRAG) slip_y=-1.765 cradle=False(gap-0.82/N64.6) | bottomclaw<->table=+50.00mm N=0.0 zmin=867.0 JAM=False | C1 z=829.7(IN) cable<->C1=-2.45 cable<->C2=+28.49 | Lgrip<->C2=+16.19 Rpad<->C1=+42.40 | HH-armlink=+31.77mm(6, 6) (sphere, <0=overlap)
+  [C2-GUIDE3/8] Moving: L=(0.363,0.096,1.141) → (0.369,0.093,1.141)
+  [C2-GUIDE3/8] Moving: R=(0.350,0.197,1.142) → (0.350,0.196,1.142)
+  [C2-GUIDE3/8] dist=7.0mm, steps=50
+  [C2-GUIDE3/8] IK solved: cost=1.99e-06
+  [C2-GUIDE3/8] step 0/50: err L=6.8mm R=0.4mm cable_z=[0.8024,0.8355] nan=False
+  [C2-GUIDE3/8] step 10/50: err L=5.4mm R=0.4mm cable_z=[0.8023,0.8354] nan=False
+  [C2-GUIDE3/8] step 20/50: err L=4.0mm R=0.3mm cable_z=[0.8023,0.8355] nan=False
+  [C2-GUIDE3/8] step 30/50: err L=2.6mm R=0.3mm cable_z=[0.8022,0.8355] nan=False
+  [C2-GUIDE3/8] step 40/50: err L=1.2mm R=0.2mm cable_z=[0.8022,0.8354] nan=False
+  [C2-GUIDE3/8] Final: err L=0.2mm R=0.2mm converged=True (thresh=3.0mm)
+  [C2-GUIDE] k=3/8 Lx=0.369 Ly=+0.093 | slip_xy=0.842(DRAG) slip_y=-1.217 cradle=True(gap-0.51/N20.7) | bottomclaw<->table=+50.00mm N=0.0 zmin=867.0 JAM=False | C1 z=829.7(IN) cable<->C1=-2.26 cable<->C2=+23.01 | Lgrip<->C2=+15.53 Rpad<->C1=+42.28 | HH-armlink=+35.75mm(6, 6) (sphere, <0=overlap)
+  [C2-GUIDE4/8] Moving: L=(0.369,0.093,1.141) → (0.375,0.089,1.141)
+  [C2-GUIDE4/8] Moving: R=(0.350,0.197,1.142) → (0.350,0.196,1.142)
+  [C2-GUIDE4/8] dist=7.1mm, steps=50
+  [C2-GUIDE4/8] IK solved: cost=7.95e-07
+  [C2-GUIDE4/8] step 0/50: err L=6.9mm R=0.2mm cable_z=[0.8023,0.8352] nan=False
+  [C2-GUIDE4/8] step 10/50: err L=5.5mm R=0.2mm cable_z=[0.8022,0.8353] nan=False
+  [C2-GUIDE4/8] step 20/50: err L=4.1mm R=0.1mm cable_z=[0.8023,0.8356] nan=False
+  [C2-GUIDE4/8] step 30/50: err L=2.7mm R=0.1mm cable_z=[0.8023,0.8360] nan=False
+  [C2-GUIDE4/8] step 40/50: err L=1.2mm R=0.1mm cable_z=[0.8023,0.8363] nan=False
+  [C2-GUIDE4/8] Final: err L=0.1mm R=0.1mm converged=True (thresh=3.0mm)
+  [C2-GUIDE] k=4/8 Lx=0.375 Ly=+0.089 | slip_xy=0.668(DRAG) slip_y=-0.857 cradle=True(gap-0.56/N17.8) | bottomclaw<->table=+50.00mm N=0.0 zmin=867.0 JAM=False | C1 z=829.7(IN) cable<->C1=-2.43 cable<->C2=+20.59 | Lgrip<->C2=+15.64 Rpad<->C1=+42.23 | HH-armlink=+40.26mm(6, 6) (sphere, <0=overlap)
+  [C2-GUIDE5/8] Moving: L=(0.375,0.089,1.141) → (0.381,0.086,1.141)
+  [C2-GUIDE5/8] Moving: R=(0.350,0.197,1.142) → (0.350,0.196,1.142)
+  [C2-GUIDE5/8] dist=7.1mm, steps=50
+  [C2-GUIDE5/8] IK solved: cost=2.97e-07
+  [C2-GUIDE5/8] step 0/50: err L=7.0mm R=0.1mm cable_z=[0.8024,0.8369] nan=False
+  [C2-GUIDE5/8] step 10/50: err L=5.6mm R=0.1mm cable_z=[0.8024,0.8367] nan=False
+  [C2-GUIDE5/8] step 20/50: err L=4.1mm R=0.1mm cable_z=[0.8024,0.8367] nan=False
+  [C2-GUIDE5/8] step 30/50: err L=2.7mm R=0.1mm cable_z=[0.8024,0.8368] nan=False
+  [C2-GUIDE5/8] step 40/50: err L=1.3mm R=0.0mm cable_z=[0.8024,0.8370] nan=False
+  [C2-GUIDE5/8] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-GUIDE] k=5/8 Lx=0.381 Ly=+0.086 | slip_xy=0.580(PARTIAL) slip_y=-0.651 cradle=True(gap-0.52/N12.3) | bottomclaw<->table=+50.00mm N=0.0 zmin=867.0 JAM=False | C1 z=829.7(IN) cable<->C1=-3.72 cable<->C2=+19.67 | Lgrip<->C2=+15.90 Rpad<->C1=+42.21 | HH-armlink=+45.17mm(6, 6) (sphere, <0=overlap)
+  [C2-GUIDE6/8] Moving: L=(0.381,0.086,1.141) → (0.388,0.082,1.141)
+  [C2-GUIDE6/8] Moving: R=(0.350,0.197,1.142) → (0.350,0.196,1.142)
+  [C2-GUIDE6/8] dist=7.2mm, steps=50
+  [C2-GUIDE6/8] IK solved: cost=1.05e-07
+  [C2-GUIDE6/8] step 0/50: err L=7.0mm R=0.0mm cable_z=[0.8025,0.8371] nan=False
+  [C2-GUIDE6/8] step 10/50: err L=5.6mm R=0.0mm cable_z=[0.8025,0.8369] nan=False
+  [C2-GUIDE6/8] step 20/50: err L=4.2mm R=0.0mm cable_z=[0.8025,0.8370] nan=False
+  [C2-GUIDE6/8] step 30/50: err L=2.7mm R=0.0mm cable_z=[0.8025,0.8371] nan=False
+  [C2-GUIDE6/8] step 40/50: err L=1.3mm R=0.0mm cable_z=[0.8025,0.8371] nan=False
+  [C2-GUIDE6/8] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-GUIDE] k=6/8 Lx=0.388 Ly=+0.082 | slip_xy=0.528(PARTIAL) slip_y=-0.538 cradle=True(gap-0.56/N18.3) | bottomclaw<->table=+50.00mm N=0.0 zmin=867.0 JAM=False | C1 z=829.7(IN) cable<->C1=-4.59 cable<->C2=+17.95 | Lgrip<->C2=+16.03 Rpad<->C1=+42.20 | HH-armlink=+50.36mm(6, 6) (sphere, <0=overlap)
+  [C2-GUIDE7/8] Moving: L=(0.388,0.082,1.141) → (0.394,0.079,1.141)
+  [C2-GUIDE7/8] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-GUIDE7/8] dist=7.2mm, steps=50
+  [C2-GUIDE7/8] IK solved: cost=3.56e-08
+  [C2-GUIDE7/8] step 0/50: err L=7.0mm R=0.0mm cable_z=[0.8026,0.8366] nan=False
+  [C2-GUIDE7/8] step 10/50: err L=5.6mm R=0.0mm cable_z=[0.8026,0.8365] nan=False
+  [C2-GUIDE7/8] step 20/50: err L=4.2mm R=0.0mm cable_z=[0.8026,0.8365] nan=False
+  [C2-GUIDE7/8] step 30/50: err L=2.7mm R=0.0mm cable_z=[0.8026,0.8366] nan=False
+  [C2-GUIDE7/8] step 40/50: err L=1.3mm R=0.0mm cable_z=[0.8025,0.8368] nan=False
+  [C2-GUIDE7/8] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-GUIDE] k=7/8 Lx=0.394 Ly=+0.079 | slip_xy=0.492(PARTIAL) slip_y=-0.472 cradle=True(gap-0.13/N8.1) | bottomclaw<->table=+50.00mm N=0.0 zmin=867.0 JAM=False | C1 z=829.7(IN) cable<->C1=-3.93 cable<->C2=+16.35 | Lgrip<->C2=+0.00 Rpad<->C1=+42.20 | HH-armlink=+55.78mm(6, 6) (sphere, <0=overlap)
+  [C2-GUIDE8/8] Moving: L=(0.394,0.079,1.141) → (0.400,0.075,1.141)
+  [C2-GUIDE8/8] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-GUIDE8/8] dist=7.2mm, steps=50
+  [C2-GUIDE8/8] IK solved: cost=1.17e-08
+  [C2-GUIDE8/8] step 0/50: err L=7.0mm R=0.0mm cable_z=[0.8025,0.8372] nan=False
+  [C2-GUIDE8/8] step 10/50: err L=5.6mm R=0.0mm cable_z=[0.8024,0.8372] nan=False
+  [C2-GUIDE8/8] step 20/50: err L=4.2mm R=0.0mm cable_z=[0.8023,0.8375] nan=False
+  [C2-GUIDE8/8] step 30/50: err L=2.7mm R=0.0mm cable_z=[0.8023,0.8380] nan=False
+  [C2-GUIDE8/8] step 40/50: err L=1.3mm R=0.0mm cable_z=[0.8024,0.8383] nan=False
+  [C2-GUIDE8/8] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-GUIDE] k=8/8 Lx=0.400 Ly=+0.075 | slip_xy=0.445(PARTIAL) slip_y=-0.395 cradle=True(gap-0.56/N15.0) | bottomclaw<->table=+50.00mm N=0.0 zmin=867.0 JAM=False | C1 z=829.7(IN) cable<->C1=-3.95 cable<->C2=+14.34 | Lgrip<->C2=+0.00 Rpad<->C1=+42.20 | HH-armlink=+61.37mm(6, 6) (sphere, <0=overlap)
+  [FREEZE-SCOPE] pin=ON seat_k=28 seat_disp=0.03mm nbr=[20.2, 8.76, 5.64, 10.85] max=83.4mm n_moved(>2.0)=39/40 -> SEAT_ONLY_FROZEN(b-viable) | C1 z=829.7(IN low-wall 840) cable<->C2=+14.34mm
+  [C2-LMOVE1/10] Moving: L=(0.400,0.075,1.141) → (0.400,0.071,1.140)
+  [C2-LMOVE1/10] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-LMOVE1/10] dist=4.6mm, steps=50
+  [C2-LMOVE1/10] IK solved: cost=5.15e-09
+  [C2-LMOVE1/10] step 0/50: err L=4.5mm R=0.0mm cable_z=[0.8019,0.8377] nan=False
+  [C2-LMOVE1/10] step 10/50: err L=3.6mm R=0.0mm cable_z=[0.8019,0.8375] nan=False
+  [C2-LMOVE1/10] step 20/50: err L=2.6mm R=0.0mm cable_z=[0.8019,0.8373] nan=False
+  [C2-LMOVE1/10] step 30/50: err L=1.7mm R=0.0mm cable_z=[0.8020,0.8373] nan=False
+  [C2-LMOVE1/10] step 40/50: err L=0.8mm R=0.0mm cable_z=[0.8019,0.8373] nan=False
+  [C2-LMOVE1/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-LMOVE2/10] Moving: L=(0.400,0.071,1.140) → (0.400,0.066,1.139)
+  [C2-LMOVE2/10] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-LMOVE2/10] dist=4.6mm, steps=50
+  [C2-LMOVE2/10] IK solved: cost=2.26e-09
+  [C2-LMOVE2/10] step 0/50: err L=4.5mm R=0.0mm cable_z=[0.8020,0.8373] nan=False
+  [C2-LMOVE2/10] step 10/50: err L=3.6mm R=0.0mm cable_z=[0.8020,0.8372] nan=False
+  [C2-LMOVE2/10] step 20/50: err L=2.6mm R=0.0mm cable_z=[0.8018,0.8374] nan=False
+  [C2-LMOVE2/10] step 30/50: err L=1.7mm R=0.0mm cable_z=[0.8017,0.8375] nan=False
+  [C2-LMOVE2/10] step 40/50: err L=0.8mm R=0.0mm cable_z=[0.8017,0.8375] nan=False
+  [C2-LMOVE2/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-LMOVE3/10] Moving: L=(0.400,0.066,1.139) → (0.400,0.062,1.138)
+  [C2-LMOVE3/10] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-LMOVE3/10] dist=4.6mm, steps=50
+  [C2-LMOVE3/10] IK solved: cost=9.89e-10
+  [C2-LMOVE3/10] step 0/50: err L=4.5mm R=0.0mm cable_z=[0.8016,0.8375] nan=False
+  [C2-LMOVE3/10] step 10/50: err L=3.6mm R=0.0mm cable_z=[0.8016,0.8374] nan=False
+  [C2-LMOVE3/10] step 20/50: err L=2.6mm R=0.0mm cable_z=[0.8015,0.8375] nan=False
+  [C2-LMOVE3/10] step 30/50: err L=1.7mm R=0.0mm cable_z=[0.8015,0.8377] nan=False
+  [C2-LMOVE3/10] step 40/50: err L=0.8mm R=0.0mm cable_z=[0.8015,0.8378] nan=False
+  [C2-LMOVE3/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-LMOVE4/10] Moving: L=(0.400,0.062,1.138) → (0.400,0.057,1.137)
+  [C2-LMOVE4/10] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-LMOVE4/10] dist=4.6mm, steps=50
+  [C2-LMOVE4/10] IK solved: cost=4.30e-10
+  [C2-LMOVE4/10] step 0/50: err L=4.5mm R=0.0mm cable_z=[0.8015,0.8383] nan=False
+  [C2-LMOVE4/10] step 10/50: err L=3.6mm R=0.0mm cable_z=[0.8015,0.8385] nan=False
+  [C2-LMOVE4/10] step 20/50: err L=2.6mm R=0.0mm cable_z=[0.8014,0.8390] nan=False
+  [C2-LMOVE4/10] step 30/50: err L=1.7mm R=0.0mm cable_z=[0.8014,0.8395] nan=False
+  [C2-LMOVE4/10] step 40/50: err L=0.8mm R=0.0mm cable_z=[0.8014,0.8399] nan=False
+  [C2-LMOVE4/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-LMOVE5/10] Moving: L=(0.400,0.057,1.137) → (0.400,0.053,1.135)
+  [C2-LMOVE5/10] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-LMOVE5/10] dist=4.6mm, steps=50
+  [C2-LMOVE5/10] IK solved: cost=1.86e-10
+  [C2-LMOVE5/10] step 0/50: err L=4.5mm R=0.0mm cable_z=[0.8013,0.8408] nan=False
+  [C2-LMOVE5/10] step 10/50: err L=3.6mm R=0.0mm cable_z=[0.8014,0.8410] nan=False
+  [C2-LMOVE5/10] step 20/50: err L=2.6mm R=0.0mm cable_z=[0.8014,0.8414] nan=False
+  [C2-LMOVE5/10] step 30/50: err L=1.7mm R=0.0mm cable_z=[0.8014,0.8417] nan=False
+  [C2-LMOVE5/10] step 40/50: err L=0.8mm R=0.0mm cable_z=[0.8014,0.8418] nan=False
+  [C2-LMOVE5/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-LMOVE6/10] Moving: L=(0.400,0.053,1.135) → (0.400,0.049,1.134)
+  [C2-LMOVE6/10] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-LMOVE6/10] dist=4.6mm, steps=50
+  [C2-LMOVE6/10] IK solved: cost=8.02e-11
+  [C2-LMOVE6/10] step 0/50: err L=4.5mm R=0.0mm cable_z=[0.8013,0.8418] nan=False
+  [C2-LMOVE6/10] step 10/50: err L=3.6mm R=0.0mm cable_z=[0.8015,0.8416] nan=False
+  [C2-LMOVE6/10] step 20/50: err L=2.6mm R=0.0mm cable_z=[0.8016,0.8414] nan=False
+  [C2-LMOVE6/10] step 30/50: err L=1.7mm R=0.0mm cable_z=[0.8017,0.8412] nan=False
+  [C2-LMOVE6/10] step 40/50: err L=0.8mm R=0.0mm cable_z=[0.8019,0.8411] nan=False
+  [C2-LMOVE6/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-LMOVE7/10] Moving: L=(0.400,0.049,1.134) → (0.400,0.044,1.133)
+  [C2-LMOVE7/10] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-LMOVE7/10] dist=4.6mm, steps=50
+  [C2-LMOVE7/10] IK solved: cost=3.45e-11
+  [C2-LMOVE7/10] step 0/50: err L=4.5mm R=0.0mm cable_z=[0.8024,0.8410] nan=False
+  [C2-LMOVE7/10] step 10/50: err L=3.6mm R=0.0mm cable_z=[0.8027,0.8408] nan=False
+  [C2-LMOVE7/10] step 20/50: err L=2.6mm R=0.0mm cable_z=[0.8028,0.8409] nan=False
+  [C2-LMOVE7/10] step 30/50: err L=1.7mm R=0.0mm cable_z=[0.8030,0.8411] nan=False
+  [C2-LMOVE7/10] step 40/50: err L=0.8mm R=0.0mm cable_z=[0.8033,0.8413] nan=False
+  [C2-LMOVE7/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-LMOVE8/10] Moving: L=(0.400,0.044,1.133) → (0.400,0.040,1.132)
+  [C2-LMOVE8/10] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-LMOVE8/10] dist=4.6mm, steps=50
+  [C2-LMOVE8/10] IK solved: cost=1.50e-11
+  [C2-LMOVE8/10] step 0/50: err L=4.5mm R=0.0mm cable_z=[0.8039,0.8421] nan=False
+  [C2-LMOVE8/10] step 10/50: err L=3.6mm R=0.0mm cable_z=[0.8041,0.8425] nan=False
+  [C2-LMOVE8/10] step 20/50: err L=2.6mm R=0.0mm cable_z=[0.8043,0.8429] nan=False
+  [C2-LMOVE8/10] step 30/50: err L=1.7mm R=0.0mm cable_z=[0.8045,0.8433] nan=False
+  [C2-LMOVE8/10] step 40/50: err L=0.8mm R=0.0mm cable_z=[0.8051,0.8435] nan=False
+  [C2-LMOVE8/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-LMOVE9/10] Moving: L=(0.400,0.040,1.132) → (0.400,0.035,1.131)
+  [C2-LMOVE9/10] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-LMOVE9/10] dist=4.6mm, steps=50
+  [C2-LMOVE9/10] IK solved: cost=6.50e-12
+  [C2-LMOVE9/10] step 0/50: err L=4.5mm R=0.0mm cable_z=[0.8055,0.8439] nan=False
+  [C2-LMOVE9/10] step 10/50: err L=3.6mm R=0.0mm cable_z=[0.8054,0.8439] nan=False
+  [C2-LMOVE9/10] step 20/50: err L=2.6mm R=0.0mm cable_z=[0.8055,0.8438] nan=False
+  [C2-LMOVE9/10] step 30/50: err L=1.7mm R=0.0mm cable_z=[0.8055,0.8436] nan=False
+  [C2-LMOVE9/10] step 40/50: err L=0.8mm R=0.0mm cable_z=[0.8057,0.8432] nan=False
+  [C2-LMOVE9/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-LMOVE10/10] Moving: L=(0.400,0.035,1.131) → (0.400,0.031,1.129)
+  [C2-LMOVE10/10] Moving: R=(0.350,0.196,1.142) → (0.350,0.196,1.142)
+  [C2-LMOVE10/10] dist=4.6mm, steps=50
+  [C2-LMOVE10/10] IK solved: cost=2.85e-12
+  [C2-LMOVE10/10] step 0/50: err L=4.5mm R=0.0mm cable_z=[0.8057,0.8422] nan=False
+  [C2-LMOVE10/10] step 10/50: err L=3.6mm R=0.0mm cable_z=[0.8058,0.8416] nan=False
+  [C2-LMOVE10/10] step 20/50: err L=2.6mm R=0.0mm cable_z=[0.8057,0.8409] nan=False
+  [C2-LMOVE10/10] step 30/50: err L=1.7mm R=0.0mm cable_z=[0.8058,0.8400] nan=False
+  [C2-LMOVE10/10] step 40/50: err L=0.8mm R=0.0mm cable_z=[0.8060,0.8390] nan=False
+  [C2-LMOVE10/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-REGRASP-L] L moved to -Y grip (0.400,+0.031) + full-clamp: claw<->cable L=5.36N (L holds -> the +Y cable span is suspended for R to re-grasp)
+  [C2-REGRASP-R] span-preserving: R target=(0.366,+0.119,0.840) (HOLD Y=+0.119=+GHS, X follows bow) vs OLD-FIXED X=0.400 [dX -34mm] | picked body idx25 Y+0.115 (dY from lane -4mm) | target Y-span=88.0mm (88, INVARIANT#2)
+  [C2-REGRASP-TILT] cable local pitch theta=-20.8deg at R lane Y=+0.119 -> R EE Rx(-90.0deg); L default (anchor) [banked _64 tilt-follow; a square-on claw MISSES the tilted cable, GD-KoShape:126-134]
+  [C2-RHOVER1/10] Moving: L=(0.400,0.031,1.129) → (0.400,0.031,1.129)
+  [C2-RHOVER1/10] Moving: R=(0.350,0.196,1.142) → (0.352,0.189,1.140)
+  [C2-RHOVER1/10] dist=8.0mm, steps=50
+  [C2-RHOVER1/10] IK solved: cost=1.70e-11
+  [C2-RHOVER1/10] step 0/50: err L=0.0mm R=7.8mm cable_z=[0.8041,0.8347] nan=False
+  [C2-RHOVER1/10] step 10/50: err L=0.0mm R=6.2mm cable_z=[0.8037,0.8340] nan=False
+  [C2-RHOVER1/10] step 20/50: err L=0.0mm R=4.7mm cable_z=[0.8034,0.8335] nan=False
+  [C2-RHOVER1/10] step 30/50: err L=0.0mm R=3.1mm cable_z=[0.8032,0.8331] nan=False
+  [C2-RHOVER1/10] step 40/50: err L=0.0mm R=1.5mm cable_z=[0.8031,0.8331] nan=False
+  [C2-RHOVER1/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-RHOVER2/10] Moving: L=(0.400,0.031,1.129) → (0.400,0.031,1.129)
+  [C2-RHOVER2/10] Moving: R=(0.352,0.189,1.140) → (0.353,0.181,1.139)
+  [C2-RHOVER2/10] dist=8.0mm, steps=50
+  [C2-RHOVER2/10] IK solved: cost=6.70e-11
+  [C2-RHOVER2/10] step 0/50: err L=0.0mm R=7.8mm cable_z=[0.8030,0.8333] nan=False
+  [C2-RHOVER2/10] step 10/50: err L=0.0mm R=6.3mm cable_z=[0.8029,0.8335] nan=False
+  [C2-RHOVER2/10] step 20/50: err L=0.0mm R=4.7mm cable_z=[0.8029,0.8337] nan=False
+  [C2-RHOVER2/10] step 30/50: err L=0.0mm R=3.1mm cable_z=[0.8028,0.8339] nan=False
+  [C2-RHOVER2/10] step 40/50: err L=0.0mm R=1.5mm cable_z=[0.8028,0.8342] nan=False
+  [C2-RHOVER2/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-RHOVER3/10] Moving: L=(0.400,0.031,1.129) → (0.400,0.031,1.129)
+  [C2-RHOVER3/10] Moving: R=(0.353,0.181,1.139) → (0.355,0.173,1.138)
+  [C2-RHOVER3/10] dist=8.0mm, steps=50
+  [C2-RHOVER3/10] IK solved: cost=3.12e-10
+  [C2-RHOVER3/10] step 0/50: err L=0.0mm R=7.8mm cable_z=[0.8027,0.8347] nan=False
+  [C2-RHOVER3/10] step 10/50: err L=0.0mm R=6.3mm cable_z=[0.8027,0.8349] nan=False
+  [C2-RHOVER3/10] step 20/50: err L=0.0mm R=4.7mm cable_z=[0.8027,0.8351] nan=False
+  [C2-RHOVER3/10] step 30/50: err L=0.0mm R=3.1mm cable_z=[0.8027,0.8353] nan=False
+  [C2-RHOVER3/10] step 40/50: err L=0.0mm R=1.5mm cable_z=[0.8027,0.8355] nan=False
+  [C2-RHOVER3/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-RHOVER4/10] Moving: L=(0.400,0.031,1.129) → (0.400,0.031,1.129)
+  [C2-RHOVER4/10] Moving: R=(0.355,0.173,1.138) → (0.356,0.165,1.137)
+  [C2-RHOVER4/10] dist=8.0mm, steps=50
+  [C2-RHOVER4/10] IK solved: cost=1.51e-09
+  [C2-RHOVER4/10] step 0/50: err L=0.0mm R=7.8mm cable_z=[0.8027,0.8356] nan=False
+  [C2-RHOVER4/10] step 10/50: err L=0.0mm R=6.3mm cable_z=[0.8027,0.8357] nan=False
+  [C2-RHOVER4/10] step 20/50: err L=0.0mm R=4.7mm cable_z=[0.8027,0.8357] nan=False
+  [C2-RHOVER4/10] step 30/50: err L=0.0mm R=3.1mm cable_z=[0.8027,0.8356] nan=False
+  [C2-RHOVER4/10] step 40/50: err L=0.0mm R=1.5mm cable_z=[0.8028,0.8356] nan=False
+  [C2-RHOVER4/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-RHOVER5/10] Moving: L=(0.400,0.031,1.129) → (0.400,0.031,1.129)
+  [C2-RHOVER5/10] Moving: R=(0.356,0.165,1.137) → (0.358,0.158,1.135)
+  [C2-RHOVER5/10] dist=8.0mm, steps=50
+  [C2-RHOVER5/10] IK solved: cost=7.29e-09
+  [C2-RHOVER5/10] step 0/50: err L=0.0mm R=7.8mm cable_z=[0.8028,0.8355] nan=False
+  [C2-RHOVER5/10] step 10/50: err L=0.0mm R=6.3mm cable_z=[0.8028,0.8354] nan=False
+  [C2-RHOVER5/10] step 20/50: err L=0.0mm R=4.7mm cable_z=[0.8028,0.8353] nan=False
+  [C2-RHOVER5/10] step 30/50: err L=0.0mm R=3.1mm cable_z=[0.8028,0.8353] nan=False
+  [C2-RHOVER5/10] step 40/50: err L=0.0mm R=1.5mm cable_z=[0.8028,0.8352] nan=False
+  [C2-RHOVER5/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-RHOVER6/10] Moving: L=(0.400,0.031,1.129) → (0.400,0.031,1.129)
+  [C2-RHOVER6/10] Moving: R=(0.358,0.158,1.135) → (0.359,0.150,1.134)
+  [C2-RHOVER6/10] dist=8.0mm, steps=50
+  [C2-RHOVER6/10] IK solved: cost=3.52e-08
+  [C2-RHOVER6/10] step 0/50: err L=0.0mm R=7.8mm cable_z=[0.8028,0.8351] nan=False
+  [C2-RHOVER6/10] step 10/50: err L=0.0mm R=6.3mm cable_z=[0.8028,0.8351] nan=False
+  [C2-RHOVER6/10] step 20/50: err L=0.0mm R=4.7mm cable_z=[0.8028,0.8350] nan=False
+  [C2-RHOVER6/10] step 30/50: err L=0.0mm R=3.1mm cable_z=[0.8028,0.8350] nan=False
+  [C2-RHOVER6/10] step 40/50: err L=0.0mm R=1.5mm cable_z=[0.8027,0.8350] nan=False
+  [C2-RHOVER6/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-RHOVER7/10] Moving: L=(0.400,0.031,1.129) → (0.400,0.031,1.129)
+  [C2-RHOVER7/10] Moving: R=(0.359,0.150,1.134) → (0.361,0.142,1.133)
+  [C2-RHOVER7/10] dist=8.0mm, steps=50
+  [C2-RHOVER7/10] IK solved: cost=1.69e-07
+  [C2-RHOVER7/10] step 0/50: err L=0.0mm R=7.8mm cable_z=[0.8027,0.8350] nan=False
+  [C2-RHOVER7/10] step 10/50: err L=0.0mm R=6.3mm cable_z=[0.8027,0.8350] nan=False
+  [C2-RHOVER7/10] step 20/50: err L=0.0mm R=4.7mm cable_z=[0.8027,0.8350] nan=False
+  [C2-RHOVER7/10] step 30/50: err L=0.0mm R=3.1mm cable_z=[0.8027,0.8351] nan=False
+  [C2-RHOVER7/10] step 40/50: err L=0.0mm R=1.5mm cable_z=[0.8027,0.8351] nan=False
+  [C2-RHOVER7/10] Final: err L=0.0mm R=0.0mm converged=True (thresh=3.0mm)
+  [C2-RHOVER8/10] Moving: L=(0.400,0.031,1.129) → (0.400,0.031,1.129)
+  [C2-RHOVER8/10] Moving: R=(0.361,0.142,1.133) → (0.362,0.134,1.132)
+  [C2-RHOVER8/10] dist=8.0mm, steps=50
+  [C2-RHOVER8/10] IK solved: cost=7.92e-07
+  [C2-RHOVER8/10] step 0/50: err L=0.0mm R=7.9mm cable_z=[0.8027,0.8351] nan=False
+  [C2-RHOVER8/10] step 10/50: err L=0.0mm R=6.3mm cable_z=[0.8027,0.8351] nan=False
+  [C2-RHOVER8/10] step 20/50: err L=0.0mm R=4.7mm cable_z=[0.8027,0.8352] nan=False
+  [C2-RHOVER8/10] step 30/50: err L=0.1mm R=3.1mm cable_z=[0.8027,0.8352] nan=False
+  [C2-RHOVER8/10] step 40/50: err L=0.1mm R=1.5mm cable_z=[0.8027,0.8352] nan=False
+  [C2-RHOVER8/10] Final: err L=0.1mm R=0.1mm converged=True (thresh=3.0mm)
+  [C2-RHOVER9/10] Moving: L=(0.400,0.031,1.129) → (0.400,0.031,1.129)
+  [C2-RHOVER9/10] Moving: R=(0.362,0.135,1.132) → (0.364,0.127,1.131)
+  [C2-RHOVER9/10] dist=8.1mm, steps=50
+  [C2-RHOVER9/10] IK solved: cost=3.51e-06
+  [C2-RHOVER9/10] step 0/50: err L=0.1mm R=7.9mm cable_z=[0.8027,0.8352] nan=False
+  [C2-RHOVER9/10] step 10/50: err L=0.1mm R=6.4mm cable_z=[0.8027,0.8352] nan=False
+  [C2-RHOVER9/10] step 20/50: err L=0.2mm R=4.8mm cable_z=[0.8027,0.8352] nan=False
+  [C2-RHOVER9/10] step 30/50: err L=0.2mm R=3.3mm cable_z=[0.8027,0.8351] nan=False
+  [C2-RHOVER9/10] step 40/50: err L=0.3mm R=1.7mm cable_z=[0.8027,0.8351] nan=False
+  [C2-RHOVER9/10] Final: err L=0.3mm R=0.3mm converged=True (thresh=3.0mm)
+  [C2-RHOVER10/10] Moving: L=(0.400,0.031,1.129) → (0.400,0.031,1.129)
+  [C2-RHOVER10/10] Moving: R=(0.364,0.127,1.131) → (0.366,0.119,1.129)
+  [C2-RHOVER10/10] dist=8.3mm, steps=50
+  [C2-RHOVER10/10] IK solved: cost=1.34e-05
+  [C2-RHOVER10/10] step 0/50: err L=0.3mm R=8.2mm cable_z=[0.8027,0.8351] nan=False
+  [C2-RHOVER10/10] step 10/50: err L=0.5mm R=6.7mm cable_z=[0.8027,0.8352] nan=False
+  [C2-RHOVER10/10] step 20/50: err L=0.6mm R=5.3mm cable_z=[0.8028,0.8352] nan=False
+  [C2-RHOVER10/10] step 30/50: err L=0.8mm R=3.8mm cable_z=[0.8028,0.8353] nan=False
+  [C2-RHOVER10/10] step 40/50: err L=0.9mm R=2.4mm cable_z=[0.8029,0.8353] nan=False
+  [C2-RHOVER10/10] Final: err L=1.1mm R=1.1mm converged=True (thresh=3.0mm)
+  [C2-REGRASP-REACH] R achieved XY=(0.365,+0.120) vs tgt =(0.366,+0.119) resid=1.1mm (LEDGER R-reach wall: >20mm = R can't reach the 88mm lane = BLOCKED_FOR_USER)
+  [C2-RDESCEND1/8] Moving: L=(0.400,0.030,1.129) → (0.400,0.031,1.129)
+  [C2-RDESCEND1/8] Moving: R=(0.365,0.120,1.129) → (0.366,0.119,1.127)
+  [C2-RDESCEND1/8] dist=3.0mm, steps=50
+  [C2-RDESCEND1/8] IK solved: cost=1.33e-05
+  [C2-RDESCEND1/8] step 0/50: err L=1.1mm R=3.0mm cable_z=[0.8029,0.8354] nan=False
+  [C2-RDESCEND1/8] step 10/50: err L=1.1mm R=2.4mm cable_z=[0.8030,0.8355] nan=False
+  [C2-RDESCEND1/8] step 20/50: err L=1.1mm R=1.9mm cable_z=[0.8030,0.8355] nan=False
+  [C2-RDESCEND1/8] step 30/50: err L=1.1mm R=1.5mm cable_z=[0.8030,0.8356] nan=False
+  [C2-RDESCEND1/8] step 40/50: err L=1.1mm R=1.2mm cable_z=[0.8029,0.8356] nan=False
+  [C2-RDESCEND1/8] Final: err L=1.1mm R=1.1mm converged=True (thresh=2.5mm)
+  [C2-RDESCEND2/8] Moving: L=(0.400,0.030,1.129) → (0.400,0.031,1.129)
+  [C2-RDESCEND2/8] Moving: R=(0.365,0.120,1.127) → (0.366,0.119,1.124)
+  [C2-RDESCEND2/8] dist=3.0mm, steps=50
+  [C2-RDESCEND2/8] IK solved: cost=1.31e-05
+  [C2-RDESCEND2/8] step 0/50: err L=1.1mm R=2.9mm cable_z=[0.8029,0.8357] nan=False
+  [C2-RDESCEND2/8] step 10/50: err L=1.0mm R=2.4mm cable_z=[0.8029,0.8357] nan=False
+  [C2-RDESCEND2/8] step 20/50: err L=1.0mm R=1.9mm cable_z=[0.8029,0.8357] nan=False
+  [C2-RDESCEND2/8] step 30/50: err L=1.0mm R=1.5mm cable_z=[0.8029,0.8357] nan=False
+  [C2-RDESCEND2/8] step 40/50: err L=1.0mm R=1.1mm cable_z=[0.8029,0.8356] nan=False
+  [C2-RDESCEND2/8] Final: err L=1.0mm R=1.0mm converged=True (thresh=2.5mm)
+  [C2-RDESCEND3/8] Moving: L=(0.400,0.030,1.129) → (0.400,0.031,1.129)
+  [C2-RDESCEND3/8] Moving: R=(0.365,0.120,1.124) → (0.366,0.119,1.121)
+  [C2-RDESCEND3/8] dist=2.9mm, steps=50
+  [C2-RDESCEND3/8] IK solved: cost=1.26e-05
+  [C2-RDESCEND3/8] step 0/50: err L=1.0mm R=2.9mm cable_z=[0.8029,0.8356] nan=False
+  [C2-RDESCEND3/8] step 10/50: err L=1.0mm R=2.4mm cable_z=[0.8029,0.8355] nan=False
+  [C2-RDESCEND3/8] step 20/50: err L=1.0mm R=1.9mm cable_z=[0.8029,0.8355] nan=False
+  [C2-RDESCEND3/8] step 30/50: err L=1.0mm R=1.4mm cable_z=[0.8029,0.8355] nan=False
+  [C2-RDESCEND3/8] step 40/50: err L=1.0mm R=1.1mm cable_z=[0.8029,0.8354] nan=False
+  [C2-RDESCEND3/8] Final: err L=1.0mm R=1.0mm converged=True (thresh=2.5mm)
+  [C2-RDESCEND4/8] Moving: L=(0.400,0.030,1.130) → (0.400,0.031,1.129)
+  [C2-RDESCEND4/8] Moving: R=(0.365,0.120,1.121) → (0.366,0.119,1.118)
+  [C2-RDESCEND4/8] dist=2.9mm, steps=50
+  [C2-RDESCEND4/8] IK solved: cost=1.21e-05
+  [C2-RDESCEND4/8] step 0/50: err L=1.0mm R=2.9mm cable_z=[0.8029,0.8354] nan=False
+  [C2-RDESCEND4/8] step 10/50: err L=1.0mm R=2.3mm cable_z=[0.8029,0.8354] nan=False
+  [C2-RDESCEND4/8] step 20/50: err L=1.0mm R=1.8mm cable_z=[0.8029,0.8354] nan=False
+  [C2-RDESCEND4/8] step 30/50: err L=1.0mm R=1.4mm cable_z=[0.8029,0.8354] nan=False
+  [C2-RDESCEND4/8] step 40/50: err L=1.0mm R=1.0mm cable_z=[0.8029,0.8354] nan=False
+  [C2-RDESCEND4/8] Final: err L=1.0mm R=1.0mm converged=True (thresh=2.5mm)
+  [C2-RDESCEND5/8] Moving: L=(0.400,0.030,1.130) → (0.400,0.031,1.129)
+  [C2-RDESCEND5/8] Moving: R=(0.365,0.120,1.118) → (0.366,0.119,1.115)
+  [C2-RDESCEND5/8] dist=2.9mm, steps=50
+  [C2-RDESCEND5/8] IK solved: cost=1.14e-05
+  [C2-RDESCEND5/8] step 0/50: err L=1.0mm R=2.8mm cable_z=[0.8029,0.8355] nan=False
+  [C2-RDESCEND5/8] step 10/50: err L=1.0mm R=2.3mm cable_z=[0.8029,0.8355] nan=False
+  [C2-RDESCEND5/8] step 20/50: err L=0.9mm R=1.8mm cable_z=[0.8029,0.8355] nan=False
+  [C2-RDESCEND5/8] step 30/50: err L=0.9mm R=1.3mm cable_z=[0.8029,0.8355] nan=False
+  [C2-RDESCEND5/8] step 40/50: err L=0.9mm R=1.0mm cable_z=[0.8029,0.8355] nan=False
+  [C2-RDESCEND5/8] Final: err L=0.9mm R=0.9mm converged=True (thresh=2.5mm)
+  [C2-RDESCEND6/8] Moving: L=(0.400,0.030,1.130) → (0.400,0.031,1.129)
+  [C2-RDESCEND6/8] Moving: R=(0.365,0.120,1.115) → (0.366,0.119,1.113)
+  [C2-RDESCEND6/8] dist=2.8mm, steps=50
+  [C2-RDESCEND6/8] IK solved: cost=1.06e-05
+  [C2-RDESCEND6/8] step 0/50: err L=0.9mm R=2.8mm cable_z=[0.8028,0.8355] nan=False
+  [C2-RDESCEND6/8] step 10/50: err L=0.9mm R=2.2mm cable_z=[0.8028,0.8355] nan=False
+  [C2-RDESCEND6/8] step 20/50: err L=0.9mm R=1.7mm cable_z=[0.8028,0.8355] nan=False
+  [C2-RDESCEND6/8] step 30/50: err L=0.9mm R=1.3mm cable_z=[0.8028,0.8355] nan=False
+  [C2-RDESCEND6/8] step 40/50: err L=0.9mm R=0.9mm cable_z=[0.8028,0.8355] nan=False
+  [C2-RDESCEND6/8] Final: err L=0.9mm R=0.9mm converged=True (thresh=2.5mm)
+  [C2-RDESCEND7/8] Moving: L=(0.400,0.030,1.130) → (0.400,0.031,1.129)
+  [C2-RDESCEND7/8] Moving: R=(0.365,0.120,1.112) → (0.366,0.119,1.110)
+  [C2-RDESCEND7/8] dist=2.8mm, steps=50
+  [C2-RDESCEND7/8] IK solved: cost=9.67e-06
+  [C2-RDESCEND7/8] step 0/50: err L=0.9mm R=2.7mm cable_z=[0.8028,0.8354] nan=False
+  [C2-RDESCEND7/8] step 10/50: err L=0.8mm R=2.2mm cable_z=[0.8028,0.8354] nan=False
+  [C2-RDESCEND7/8] step 20/50: err L=0.8mm R=1.7mm cable_z=[0.8028,0.8354] nan=False
+  [C2-RDESCEND7/8] step 30/50: err L=0.8mm R=1.2mm cable_z=[0.8028,0.8354] nan=False
+  [C2-RDESCEND7/8] step 40/50: err L=0.8mm R=0.9mm cable_z=[0.8028,0.8354] nan=False
+  [C2-RDESCEND7/8] Final: err L=0.8mm R=0.8mm converged=True (thresh=2.5mm)
+  [C2-RDESCEND8/8] Moving: L=(0.400,0.030,1.130) → (0.400,0.031,1.129)
+  [C2-RDESCEND8/8] Moving: R=(0.365,0.120,1.110) → (0.366,0.119,1.107)
+  [C2-RDESCEND8/8] dist=2.8mm, steps=50
+  [C2-RDESCEND8/8] IK solved: cost=8.73e-06
+  [C2-RDESCEND8/8] step 0/50: err L=0.8mm R=2.7mm cable_z=[0.8028,0.8354] nan=False
+  [C2-RDESCEND8/8] step 10/50: err L=0.8mm R=2.2mm cable_z=[0.8028,0.8354] nan=False
+  [C2-RDESCEND8/8] step 20/50: err L=0.8mm R=1.6mm cable_z=[0.8028,0.8354] nan=False
+  [C2-RDESCEND8/8] step 30/50: err L=0.8mm R=1.2mm cable_z=[0.8028,0.8354] nan=False
+  [C2-RDESCEND8/8] step 40/50: err L=0.7mm R=0.8mm cable_z=[0.8028,0.8354] nan=False
+  [C2-RDESCEND8/8] Final: err L=0.7mm R=0.7mm converged=True (thresh=2.5mm)
+  [C2-REGRASP-GRIP] claw<->cable NORMAL: L=3.94N(grips=True) R=115.41N(n=6,grips=True) | R-reach=1.1mm at_88=True | achieved 3D span=98.6mm (Y-sep tgt 88) => VERDICT=SUCCESS_DUAL_LOADED_AT_88 regrasp_ok=True
+  [C2-REGRASP-GATE] charter core = R grips the ACTUAL cable @88mm lane (regrasp_ok=True). labels: SUCCESS_DUAL_LOADED (R+L force) / SUCCESS_R_GRIP_L_CAGE (R force, L 0-normal cage=retain per video) / R_MISS_AT_88 (R reached but air) / BLOCKED_REACH_WALL. INVARIANT#2 Y-span held; L-load-share + 3D-chord excess = Rs Q. => SUCCESS_DUAL_LOADED_AT_88
+  [C2-TRANSPORT1/10] Moving: L=(0.400,0.030,1.130) → (0.400,0.031,1.129)
+  [C2-TRANSPORT1/10] Moving: R=(0.365,0.120,1.107) → (0.369,0.120,1.109)
+  [C2-TRANSPORT1/10] dist=4.1mm, steps=50
+  [C2-TRANSPORT1/10] IK solved: cost=1.03e-05
+  [C2-TRANSPORT1/10] step 0/50: err L=0.7mm R=4.1mm cable_z=[0.8030,0.8351] nan=False
+  [C2-TRANSPORT1/10] step 10/50: err L=0.8mm R=3.3mm cable_z=[0.8023,0.8349] nan=False
+  [C2-TRANSPORT1/10] step 20/50: err L=0.8mm R=2.6mm cable_z=[0.8018,0.8349] nan=False
+  [C2-TRANSPORT1/10] step 30/50: err L=0.8mm R=1.8mm cable_z=[0.8019,0.8348] nan=False
+  [C2-TRANSPORT1/10] step 40/50: err L=0.8mm R=1.2mm cable_z=[0.8019,0.8348] nan=False
+  [C2-TRANSPORT1/10] Final: err L=0.8mm R=0.8mm converged=True (thresh=3.0mm)
+  [C2-TRANSPORT2/10] Moving: L=(0.400,0.030,1.130) → (0.400,0.031,1.129)
+  [C2-TRANSPORT2/10] Moving: R=(0.369,0.120,1.109) → (0.372,0.120,1.111)
+  [C2-TRANSPORT2/10] dist=4.5mm, steps=50
+  [C2-TRANSPORT2/10] IK solved: cost=1.33e-05
+  [C2-TRANSPORT2/10] step 0/50: err L=0.9mm R=4.5mm cable_z=[0.8020,0.8346] nan=False
+  [C2-TRANSPORT2/10] step 10/50: err L=0.9mm R=3.7mm cable_z=[0.8020,0.8342] nan=False
+  [C2-TRANSPORT2/10] step 20/50: err L=0.9mm R=2.9mm cable_z=[0.8021,0.8341] nan=False
+  [C2-TRANSPORT2/10] step 30/50: err L=1.0mm R=2.1mm cable_z=[0.8022,0.8340] nan=False
+  [C2-TRANSPORT2/10] step 40/50: err L=1.0mm R=1.5mm cable_z=[0.8022,0.8338] nan=False
+  [C2-TRANSPORT2/10] Final: err L=1.1mm R=1.1mm converged=True (thresh=3.0mm)
+  [C2-TRANSPORT3/10] Moving: L=(0.400,0.030,1.130) → (0.400,0.031,1.129)
+  [C2-TRANSPORT3/10] Moving: R=(0.372,0.121,1.111) → (0.376,0.119,1.114)
+  [C2-TRANSPORT3/10] dist=4.6mm, steps=50
+  [C2-TRANSPORT3/10] IK solved: cost=1.66e-05
+  [C2-TRANSPORT3/10] step 0/50: err L=1.1mm R=4.5mm cable_z=[0.8023,0.8333] nan=False
+  [C2-TRANSPORT3/10] step 10/50: err L=1.1mm R=3.8mm cable_z=[0.8024,0.8330] nan=False
+  [C2-TRANSPORT3/10] step 20/50: err L=1.1mm R=3.0mm cable_z=[0.8024,0.8327] nan=False
+  [C2-TRANSPORT3/10] step 30/50: err L=1.2mm R=2.3mm cable_z=[0.8024,0.8325] nan=False
+  [C2-TRANSPORT3/10] step 40/50: err L=1.2mm R=1.6mm cable_z=[0.8024,0.8325] nan=False
+  [C2-TRANSPORT3/10] Final: err L=1.3mm R=1.3mm converged=True (thresh=3.0mm)
+  [C2-TRANSPORT4/10] Moving: L=(0.400,0.030,1.130) → (0.400,0.031,1.129)
+  [C2-TRANSPORT4/10] Moving: R=(0.375,0.121,1.113) → (0.379,0.119,1.116)
+  [C2-TRANSPORT4/10] dist=4.7mm, steps=50
+  [C2-TRANSPORT4/10] IK solved: cost=2.01e-05
+  [C2-TRANSPORT4/10] step 0/50: err L=1.3mm R=4.6mm cable_z=[0.8026,0.8326] nan=False
+  [C2-TRANSPORT4/10] step 10/50: err L=1.3mm R=3.8mm cable_z=[0.8026,0.8327] nan=False
+  [C2-TRANSPORT4/10] step 20/50: err L=1.3mm R=3.1mm cable_z=[0.8026,0.8329] nan=False
+  [C2-TRANSPORT4/10] step 30/50: err L=1.4mm R=2.4mm cable_z=[0.8026,0.8330] nan=False
+  [C2-TRANSPORT4/10] step 40/50: err L=1.4mm R=1.8mm cable_z=[0.8026,0.8331] nan=False
+  [C2-TRANSPORT4/10] Final: err L=1.5mm R=1.5mm converged=True (thresh=3.0mm)
+  [C2-TRANSPORT5/10] Moving: L=(0.400,0.030,1.130) → (0.400,0.031,1.129)
+  [C2-TRANSPORT5/10] Moving: R=(0.379,0.121,1.116) → (0.383,0.119,1.118)
+  [C2-TRANSPORT5/10] dist=4.8mm, steps=50
+  [C2-TRANSPORT5/10] IK solved: cost=2.35e-05
+  [C2-TRANSPORT5/10] step 0/50: err L=1.5mm R=4.7mm cable_z=[0.8027,0.8330] nan=False
+  [C2-TRANSPORT5/10] step 10/50: err L=1.5mm R=3.9mm cable_z=[0.8027,0.8330] nan=False
+  [C2-TRANSPORT5/10] step 20/50: err L=1.6mm R=3.2mm cable_z=[0.8027,0.8331] nan=False
+  [C2-TRANSPORT5/10] step 30/50: err L=1.6mm R=2.5mm cable_z=[0.8027,0.8331] nan=False
+  [C2-TRANSPORT5/10] step 40/50: err L=1.6mm R=2.0mm cable_z=[0.8027,0.8332] nan=False
+  [C2-TRANSPORT5/10] Final: err L=1.7mm R=1.7mm converged=True (thresh=3.0mm)
+  [C2-TRANSPORT6/10] Moving: L=(0.400,0.029,1.130) → (0.400,0.031,1.129)
+  [C2-TRANSPORT6/10] Moving: R=(0.382,0.121,1.118) → (0.386,0.119,1.120)
+  [C2-TRANSPORT6/10] dist=4.8mm, steps=50
+  [C2-TRANSPORT6/10] IK solved: cost=2.67e-05
+  [C2-TRANSPORT6/10] step 0/50: err L=1.7mm R=4.7mm cable_z=[0.8028,0.8336] nan=False
+  [C2-TRANSPORT6/10] step 10/50: err L=1.7mm R=4.0mm cable_z=[0.8027,0.8341] nan=False
+  [C2-TRANSPORT6/10] step 20/50: err L=1.7mm R=3.3mm cable_z=[0.8027,0.8344] nan=False
+  [C2-TRANSPORT6/10] step 30/50: err L=1.8mm R=2.6mm cable_z=[0.8026,0.8347] nan=False
+  [C2-TRANSPORT6/10] step 40/50: err L=1.8mm R=2.1mm cable_z=[0.8026,0.8350] nan=False
+  [C2-TRANSPORT6/10] Final: err L=1.8mm R=1.8mm converged=True (thresh=3.0mm)
+  [C2-TRANSPORT7/10] Moving: L=(0.400,0.029,1.130) → (0.400,0.031,1.129)
+  [C2-TRANSPORT7/10] Moving: R=(0.386,0.121,1.120) → (0.390,0.119,1.123)
+  [C2-TRANSPORT7/10] dist=4.9mm, steps=50
+  [C2-TRANSPORT7/10] IK solved: cost=2.96e-05
+  [C2-TRANSPORT7/10] step 0/50: err L=1.8mm R=4.8mm cable_z=[0.8025,0.8357] nan=False
+  [C2-TRANSPORT7/10] step 10/50: err L=1.9mm R=4.0mm cable_z=[0.8024,0.8360] nan=False
+  [C2-TRANSPORT7/10] step 20/50: err L=1.9mm R=3.3mm cable_z=[0.8024,0.8363] nan=False
+  [C2-TRANSPORT7/10] step 30/50: err L=1.9mm R=2.7mm cable_z=[0.8024,0.8364] nan=False
+  [C2-TRANSPORT7/10] step 40/50: err L=2.0mm R=2.2mm cable_z=[0.8024,0.8365] nan=False
+  [C2-TRANSPORT7/10] Final: err L=2.0mm R=2.0mm converged=True (thresh=3.0mm)
+  [C2-TRANSPORT8/10] Moving: L=(0.400,0.029,1.130) → (0.400,0.031,1.129)
+  [C2-TRANSPORT8/10] Moving: R=(0.389,0.121,1.122) → (0.393,0.119,1.125)
+  [C2-TRANSPORT8/10] dist=4.9mm, steps=50
+  [C2-TRANSPORT8/10] IK solved: cost=3.18e-05
+  [C2-TRANSPORT8/10] step 0/50: err L=2.0mm R=4.8mm cable_z=[0.8024,0.8365] nan=False
+  [C2-TRANSPORT8/10] step 10/50: err L=2.0mm R=4.0mm cable_z=[0.8024,0.8366] nan=False
+  [C2-TRANSPORT8/10] step 20/50: err L=2.0mm R=3.3mm cable_z=[0.8025,0.8367] nan=False
+  [C2-TRANSPORT8/10] step 30/50: err L=2.1mm R=2.7mm cable_z=[0.8025,0.8369] nan=False
+  [C2-TRANSPORT8/10] step 40/50: err L=2.1mm R=2.3mm cable_z=[0.8025,0.8373] nan=False
+  [C2-TRANSPORT8/10] Final: err L=2.1mm R=2.1mm converged=True (thresh=3.0mm)
+  [C2-TRANSPORT9/10] Moving: L=(0.400,0.029,1.130) → (0.400,0.031,1.129)
+  [C2-TRANSPORT9/10] Moving: R=(0.393,0.121,1.125) → (0.397,0.119,1.127)
+  [C2-TRANSPORT9/10] dist=4.8mm, steps=50
+  [C2-TRANSPORT9/10] IK solved: cost=3.33e-05
+  [C2-TRANSPORT9/10] step 0/50: err L=2.1mm R=4.8mm cable_z=[0.8025,0.8383] nan=False
+  [C2-TRANSPORT9/10] step 10/50: err L=2.1mm R=4.0mm cable_z=[0.8025,0.8388] nan=False
+  [C2-TRANSPORT9/10] step 20/50: err L=2.1mm R=3.3mm cable_z=[0.8025,0.8393] nan=False
+  [C2-TRANSPORT9/10] step 30/50: err L=2.1mm R=2.8mm cable_z=[0.8025,0.8397] nan=False
+  [C2-TRANSPORT9/10] step 40/50: err L=2.2mm R=2.3mm cable_z=[0.8026,0.8400] nan=False
+  [C2-TRANSPORT9/10] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [C2-TRANSPORT10/10] Moving: L=(0.400,0.029,1.129) → (0.400,0.031,1.129)
+  [C2-TRANSPORT10/10] Moving: R=(0.396,0.121,1.127) → (0.400,0.119,1.129)
+  [C2-TRANSPORT10/10] dist=4.8mm, steps=50
+  [C2-TRANSPORT10/10] IK solved: cost=3.40e-05
+  [C2-TRANSPORT10/10] step 0/50: err L=2.2mm R=4.7mm cable_z=[0.8025,0.8404] nan=False
+  [C2-TRANSPORT10/10] step 10/50: err L=2.2mm R=4.0mm cable_z=[0.8025,0.8405] nan=False
+  [C2-TRANSPORT10/10] step 20/50: err L=2.2mm R=3.3mm cable_z=[0.8025,0.8404] nan=False
+  [C2-TRANSPORT10/10] step 30/50: err L=2.2mm R=2.7mm cable_z=[0.8025,0.8404] nan=False
+  [C2-TRANSPORT10/10] step 40/50: err L=2.2mm R=2.3mm cable_z=[0.8024,0.8403] nan=False
+  [C2-TRANSPORT10/10] Final: err L=2.2mm R=2.2mm converged=True (thresh=3.0mm)
+  [C2-TRANSPORT] R carried its grip to C2 +Y; near-c2y cable body X=0.400 (c2x=0.400, dX=-0mm) | still gripped: L=0.0N R=0.0N
+  [C2-DUAL-SEAT1/12] Moving: L=(0.400,0.029,1.129) → (0.400,0.031,1.127)
+  [C2-DUAL-SEAT1/12] Moving: R=(0.400,0.121,1.129) → (0.400,0.119,1.127)
+  [C2-DUAL-SEAT1/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT1/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT1/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8024,0.8403] nan=False
+  [C2-DUAL-SEAT1/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8023,0.8403] nan=False
+  [C2-DUAL-SEAT1/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8022,0.8405] nan=False
+  [C2-DUAL-SEAT1/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8022,0.8407] nan=False
+  [C2-DUAL-SEAT1/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8024,0.8408] nan=False
+  [C2-DUAL-SEAT1/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=1/12 z=1.127 Lgrip<->C2=+20.632 Rgrip<->C2=+20.637mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+10.160mm
+  [C2-DUAL-SEAT2/12] Moving: L=(0.400,0.029,1.127) → (0.400,0.031,1.124)
+  [C2-DUAL-SEAT2/12] Moving: R=(0.400,0.121,1.127) → (0.400,0.119,1.124)
+  [C2-DUAL-SEAT2/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT2/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT2/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8028,0.8410] nan=False
+  [C2-DUAL-SEAT2/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8028,0.8410] nan=False
+  [C2-DUAL-SEAT2/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8028,0.8409] nan=False
+  [C2-DUAL-SEAT2/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8028,0.8408] nan=False
+  [C2-DUAL-SEAT2/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8028,0.8406] nan=False
+  [C2-DUAL-SEAT2/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=2/12 z=1.124 Lgrip<->C2=+20.607 Rgrip<->C2=+20.609mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+8.018mm
+  [C2-DUAL-SEAT3/12] Moving: L=(0.400,0.029,1.124) → (0.400,0.031,1.121)
+  [C2-DUAL-SEAT3/12] Moving: R=(0.400,0.121,1.124) → (0.400,0.119,1.121)
+  [C2-DUAL-SEAT3/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT3/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT3/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8029,0.8400] nan=False
+  [C2-DUAL-SEAT3/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8029,0.8399] nan=False
+  [C2-DUAL-SEAT3/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8029,0.8397] nan=False
+  [C2-DUAL-SEAT3/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8029,0.8395] nan=False
+  [C2-DUAL-SEAT3/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8029,0.8393] nan=False
+  [C2-DUAL-SEAT3/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=3/12 z=1.121 Lgrip<->C2=+20.606 Rgrip<->C2=+20.608mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+6.570mm
+  [C2-DUAL-SEAT4/12] Moving: L=(0.400,0.029,1.121) → (0.400,0.031,1.118)
+  [C2-DUAL-SEAT4/12] Moving: R=(0.400,0.121,1.121) → (0.400,0.119,1.118)
+  [C2-DUAL-SEAT4/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT4/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT4/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8030,0.8390] nan=False
+  [C2-DUAL-SEAT4/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8030,0.8389] nan=False
+  [C2-DUAL-SEAT4/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8030,0.8388] nan=False
+  [C2-DUAL-SEAT4/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8030,0.8386] nan=False
+  [C2-DUAL-SEAT4/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8031,0.8384] nan=False
+  [C2-DUAL-SEAT4/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=4/12 z=1.118 Lgrip<->C2=+20.606 Rgrip<->C2=+20.608mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+6.594mm
+  [C2-DUAL-SEAT5/12] Moving: L=(0.400,0.029,1.118) → (0.400,0.031,1.116)
+  [C2-DUAL-SEAT5/12] Moving: R=(0.400,0.121,1.118) → (0.400,0.119,1.116)
+  [C2-DUAL-SEAT5/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT5/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT5/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8032,0.8380] nan=False
+  [C2-DUAL-SEAT5/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8032,0.8378] nan=False
+  [C2-DUAL-SEAT5/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8032,0.8376] nan=False
+  [C2-DUAL-SEAT5/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8033,0.8374] nan=False
+  [C2-DUAL-SEAT5/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8034,0.8371] nan=False
+  [C2-DUAL-SEAT5/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=5/12 z=1.116 Lgrip<->C2=+20.606 Rgrip<->C2=+20.608mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+6.625mm
+  [C2-DUAL-SEAT6/12] Moving: L=(0.400,0.029,1.116) → (0.400,0.031,1.113)
+  [C2-DUAL-SEAT6/12] Moving: R=(0.400,0.121,1.116) → (0.400,0.119,1.113)
+  [C2-DUAL-SEAT6/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT6/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT6/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8036,0.8365] nan=False
+  [C2-DUAL-SEAT6/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8036,0.8363] nan=False
+  [C2-DUAL-SEAT6/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8037,0.8361] nan=False
+  [C2-DUAL-SEAT6/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8038,0.8358] nan=False
+  [C2-DUAL-SEAT6/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8039,0.8356] nan=False
+  [C2-DUAL-SEAT6/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=6/12 z=1.113 Lgrip<->C2=+20.591 Rgrip<->C2=+20.593mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+5.414mm
+  [C2-DUAL-SEAT7/12] Moving: L=(0.400,0.029,1.113) → (0.400,0.031,1.110)
+  [C2-DUAL-SEAT7/12] Moving: R=(0.400,0.121,1.113) → (0.400,0.119,1.110)
+  [C2-DUAL-SEAT7/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT7/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT7/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8042,0.8351] nan=False
+  [C2-DUAL-SEAT7/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8043,0.8350] nan=False
+  [C2-DUAL-SEAT7/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8045,0.8349] nan=False
+  [C2-DUAL-SEAT7/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8047,0.8347] nan=False
+  [C2-DUAL-SEAT7/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8049,0.8344] nan=False
+  [C2-DUAL-SEAT7/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=7/12 z=1.110 Lgrip<->C2=+20.588 Rgrip<->C2=+20.590mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+3.836mm
+  [C2-DUAL-SEAT8/12] Moving: L=(0.400,0.029,1.110) → (0.400,0.031,1.107)
+  [C2-DUAL-SEAT8/12] Moving: R=(0.400,0.121,1.110) → (0.400,0.119,1.107)
+  [C2-DUAL-SEAT8/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT8/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT8/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8053,0.8340] nan=False
+  [C2-DUAL-SEAT8/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8055,0.8339] nan=False
+  [C2-DUAL-SEAT8/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8058,0.8337] nan=False
+  [C2-DUAL-SEAT8/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8063,0.8335] nan=False
+  [C2-DUAL-SEAT8/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8070,0.8333] nan=False
+  [C2-DUAL-SEAT8/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=8/12 z=1.107 Lgrip<->C2=+20.588 Rgrip<->C2=+20.590mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+3.009mm
+  [C2-DUAL-SEAT9/12] Moving: L=(0.400,0.029,1.107) → (0.400,0.031,1.105)
+  [C2-DUAL-SEAT9/12] Moving: R=(0.400,0.121,1.107) → (0.400,0.119,1.105)
+  [C2-DUAL-SEAT9/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT9/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT9/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8085,0.8330] nan=False
+  [C2-DUAL-SEAT9/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8090,0.8329] nan=False
+  [C2-DUAL-SEAT9/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8098,0.8328] nan=False
+  [C2-DUAL-SEAT9/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8107,0.8326] nan=False
+  [C2-DUAL-SEAT9/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8116,0.8324] nan=False
+  [C2-DUAL-SEAT9/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=9/12 z=1.105 Lgrip<->C2=+20.588 Rgrip<->C2=+20.590mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+2.911mm
+  [C2-DUAL-SEAT10/12] Moving: L=(0.400,0.029,1.105) → (0.400,0.031,1.102)
+  [C2-DUAL-SEAT10/12] Moving: R=(0.400,0.121,1.105) → (0.400,0.119,1.102)
+  [C2-DUAL-SEAT10/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT10/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT10/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8133,0.8321] nan=False
+  [C2-DUAL-SEAT10/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8139,0.8320] nan=False
+  [C2-DUAL-SEAT10/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8147,0.8319] nan=False
+  [C2-DUAL-SEAT10/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8157,0.8317] nan=False
+  [C2-DUAL-SEAT10/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8167,0.8315] nan=False
+  [C2-DUAL-SEAT10/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=10/12 z=1.102 Lgrip<->C2=+20.588 Rgrip<->C2=+20.590mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+2.912mm
+  [C2-DUAL-SEAT11/12] Moving: L=(0.400,0.029,1.102) → (0.400,0.031,1.099)
+  [C2-DUAL-SEAT11/12] Moving: R=(0.400,0.121,1.102) → (0.400,0.119,1.099)
+  [C2-DUAL-SEAT11/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT11/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT11/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8186,0.8312] nan=False
+  [C2-DUAL-SEAT11/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8192,0.8311] nan=False
+  [C2-DUAL-SEAT11/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8200,0.8310] nan=False
+  [C2-DUAL-SEAT11/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8210,0.8308] nan=False
+  [C2-DUAL-SEAT11/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8221,0.8306] nan=False
+  [C2-DUAL-SEAT11/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=11/12 z=1.099 Lgrip<->C2=+20.589 Rgrip<->C2=+20.590mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+2.912mm
+  [C2-DUAL-SEAT12/12] Moving: L=(0.400,0.029,1.099) → (0.400,0.031,1.096)
+  [C2-DUAL-SEAT12/12] Moving: R=(0.400,0.121,1.099) → (0.400,0.119,1.096)
+  [C2-DUAL-SEAT12/12] dist=3.5mm, steps=50
+  [C2-DUAL-SEAT12/12] IK solved: cost=3.40e-05
+  [C2-DUAL-SEAT12/12] step 0/50: err L=3.5mm R=3.5mm cable_z=[0.8240,0.8303] nan=False
+  [C2-DUAL-SEAT12/12] step 10/50: err L=3.1mm R=3.1mm cable_z=[0.8246,0.8302] nan=False
+  [C2-DUAL-SEAT12/12] step 20/50: err L=2.7mm R=2.7mm cable_z=[0.8255,0.8301] nan=False
+  [C2-DUAL-SEAT12/12] step 30/50: err L=2.4mm R=2.4mm cable_z=[0.8265,0.8299] nan=False
+  [C2-DUAL-SEAT12/12] step 40/50: err L=2.3mm R=2.3mm cable_z=[0.8275,0.8297] nan=False
+  [C2-DUAL-SEAT12/12] Final: err L=2.2mm R=2.2mm converged=True (thresh=2.5mm)
+  [C2-DUAL-SEAT] k=12/12 z=1.096 Lgrip<->C2=+20.589 Rgrip<->C2=+20.591mm | claw<->C2 CONTACT-N: L=0.00 R=0.00 | cable<->C2=+0.676mm
+  [C2-DUAL-SETTLE] after RELEASE both grippers (+90 steps): cable<->C2 +0.676(claw-held)->-0.320mm(released) | near-C2 cable z=829.2 vs groove 829.0 => SETTLED_IN_NOTCH=True (%0 seat-capture: True=genuine settle held by the groove / False=was claw-HELD, popped from the open-top clip)
+  [C2-DUAL] dual-finger clamp-push complete (top-down; claw-C2 penetration + contact-force + release-settle logged above)
+  [C2-CLAW-FORCE] L-claw<->C2 pen=+26.468mm N=0.00 | R-claw<->C2 pen=+25.437mm N=0.00 (N>0 + pen<0 = soft over-penetration; N=0 + pen>=0 = no claw-clip contact)
+  [C2-SPACER-SPLIT] cable<->C2-clip-WALLS=-0.320mm cable<->C2-SPACER=+4.791mm (n_walls=5 n_spacer=1; c2_seated used MIN=-0.320. WALLS>>0 + SPACER~0 => 'seated' is SPACER-CONTACT not groove = FALSE seat)
+  [C2-SEAT-HONEST] cable<->C2-WALLS(spacer-excluded)=-0.320mm (<=0.5 needed) | near-C2 cable z=829.2mm vs groove 829.0 (|d|<=3 needed -> in_groove=True) => c2_seated_HONEST=True (vs naive c2_seated=True which counts wall/spacer contact)
+  [C2] C2 SEAT ATTEMPT: cable<->C2=-0.320mm seated=True bottomclaw<->table=+50.00mm N=0.0 | C1 final z=829.7mm cable<->C1=-2.663mm | FLAG-D Lgrip<->C2=+26.468mm (<0=penetration)
+  [C2-FINGERCLIP] min over guide: Rpad<->C1=+42.200mm Lgrip<->C2=+0.000mm (<0=finger-clip penetration) | min HAND-HAND arm-link clearance=+28.449mm (sphere model, IK avoidance ON; <0=overlap; uncapped)
+  [C2-VERDICT] half_unclamp_cradle=False | GUIDE max|slip_xy|=1.960 (mean +0.829) -> DRAG | all_cradle=False cradle_break@X=0.3625 | C1_ret_all=True z_c1 829.7->829.7mm cable<->C1 +0.49->-2.66mm
+  [C2-VERDICT] C2 reach: cable<->C2 +26.02->-0.32mm seated=True | TABLE-JAM (claw vs SOLID, NOT cable-drag): any_jam=False jam_onset@X=None (void X-ceil 0.366; C2 X=0.4) | finite=True qvel_ok=True
+  [C2-VERDICT] slide_through=False -> FAILS, MIXED conservatism: (a) DRAG + (b) C2-unreached are NON-conservative @CPU-rigid (rigid cable + pad-pinned claw mu~0.70 OVERSTATE drag/unreach; a flexible/lower-mu/GPU cable may slide+reach better -> confirm before banking the 'しごき' negative); (c) the C2-over-solid bottom-claw ride-up/cradle-break (void X-ceiling 0.366 < C2 X 0.40) is CONSERVATIVE geometry = transfers
+  [C2-PIN] freeze-scope metrics -> /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_cpC_waves2_5/rec_m8_m8/route_c2_pin.json
+  [DEMO_REC] wrote /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_cpC_waves2_5/rec_m8_m8/route_demo_raw.npz (T=7706 frames, 15 phases, 26 grip events)
