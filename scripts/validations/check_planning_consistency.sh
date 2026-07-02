@@ -3,9 +3,10 @@
 # (planning-surface consolidation, node T-ROOT-Planning-Surfaces-Consolidation-20260702, M3).
 #
 #   C1 staleness (WARN)       : a planning surface's last_updated lags log.md newest heading by >48h
-#   C2 dangling refs (WARN)   : backtick `T-...` node-id refs not in the NEST node set (minus allowlist).
-#                               WARN-first (day-1) by design; promote to FAIL after a 0-FP dry run.
-#                               (sha-token leg is assessed in the dry-run FP report, not live day-1.)
+#   C2 dangling refs          : node-id leg = FAIL (backtick `T-...` not in NEST node set, minus allowlist;
+#                               0-FP verified 2026-07-02 via dry-run FP report, %12-approved promotion).
+#                               SOMA node-id refs = permanent WARN (04-Specs = Rs-only). sha-token leg =
+#                               deferred WARN/unwired (62% FP; needs commit/backtick context-anchor filter).
 #   C3 GEN drift (FAIL)       : manifest §2 GEN region != build_nest_snapshot.py --check-manifest-section
 #   C4 uncommitted-age (WARN) : a core planning file has uncommitted changes AND last commit >24h ago
 #                               (commit-age, not mtime), minus planning_pending_rs.txt suppressions
@@ -80,8 +81,8 @@ if [ -f "$SNAPSHOT" ] && [ -x "$PY" ]; then
     comm -23 "$TMP/cands" "$TMP/nodeset" | comm -23 - "$TMP/allow" > "$TMP/dangling"
     while IFS= read -r nid; do
         [ -n "$nid" ] || continue
-        echo "  [WARN] C2 dangling node-id ref: \`$nid\` not in NEST node set (nor allowlist)"
-        WARN_COUNT=$((WARN_COUNT + 1))
+        echo "  [FAIL] C2 dangling node-id ref: \`$nid\` not in NEST node set (nor allowlist)"
+        FAIL_COUNT=$((FAIL_COUNT + 1))
     done < "$TMP/dangling"
     soma_n=$(grep -oE '`T-[A-Za-z0-9_.-]+`' "$SOMA" 2>/dev/null | tr -d '`' | sort -u | comm -23 - "$TMP/nodeset" | comm -23 - "$TMP/allow" | grep -c .)
     soma_n=$(printf '%s' "${soma_n:-0}" | tr -dc '0-9'); soma_n=${soma_n:-0}
@@ -89,7 +90,7 @@ if [ -f "$SNAPSHOT" ] && [ -x "$PY" ]; then
         echo "  [WARN] C2 SOMA has ${soma_n} dangling node-id ref(s) — permanent WARN (04-Specs = Rs 専権)"
         WARN_COUNT=$((WARN_COUNT + 1))
     fi
-    echo "  [INFO] C2 = WARN-first (day-1); sha-token leg + FAIL-promotion via dry-run FP report (M3 deliverable)"
+    echo "  [INFO] C2 node-id leg = FAIL (0-FP verified 2026-07-02, %12-approved); SOMA node-id = permanent WARN; sha-token leg = deferred WARN/unwired (62% FP)"
 else
     echo "  [WARN] C2 skipped: nest-snapshot.json or python missing"
     WARN_COUNT=$((WARN_COUNT + 1))
