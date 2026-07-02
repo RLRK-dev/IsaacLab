@@ -1,0 +1,18 @@
+{
+  "ckpt_sha256": "e10ec5eb79073abec3f3848dcc4117197885eafca5de67a819145803fbcf6b74",
+  "dataset_sha256": "b3472e8ca06be481907339603342c60d3a80faef65622f0d0f89919ff66fbb9a",
+  "action_repr": "abs",
+  "obs_dim": 27,
+  "seed": 0,
+  "epochs": 2000,
+  "batch_size": 256,
+  "lr": 0.001,
+  "device": "cuda:0",
+  "elapsed_s": 90.1,
+  "final_train_loss": 0.0006375698492384752,
+  "final_val_loss": 0.0005473892609649277,
+  "final_val_loss_note": "internal random-row PROXY (train_bc); see whole_demo_val_loss for spec \u00a73.1 holdout",
+  "whole_demo_val_loss": 0.0006589902332052588,
+  "val_dataset": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_dataset_v2/bc_dataset_abs_val.npz",
+  "val_dataset_sha256": "0ed5149ce60bb2b25292c923d325f890dd3dad635cbebfdbc1ab52f526639cc2"
+}

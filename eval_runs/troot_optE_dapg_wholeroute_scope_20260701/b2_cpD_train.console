@@ -1,0 +1,17 @@
+=== CP-D launch 03:50:45 GPU-1 procs before: 0 ===
+BC exit=0
+NULL exit=0
+=== CP-D DONE 03:52:18 ===
+############ BC ############
+[BC] Loaded 6930 transitions from /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_dataset_v2/bc_dataset_abs.npz
+[BC] Train: 6237, Val: 693, Batch: 256
+[bc_train_route] repr=abs obs_dim=27 seed=0 epochs=2000 final train_loss=0.000638 val_loss(proxy,random-row)=0.000547 whole_demo_val_loss(§3.1 authoritative)=0.000659 elapsed=90s -> /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_cpD/bc/policy_abs_b2_e2000.pt
+############ NULL ############
+[BC] Loaded 6930 transitions from /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_cpD/null_dataset.npz
+[BC] Train: 6237, Val: 693, Batch: 256
+[bc_train_route] repr=abs obs_dim=27 seed=0 epochs=2000 final train_loss=0.000149 val_loss(proxy,random-row)=0.000128 whole_demo_val_loss(§3.1 authoritative)=0.011979 elapsed=91s -> /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_cpD/null/policy_abs_null_e2000.pt
+############ artifacts ############
+-rw-rw-r-- 1 rlrk rlrk 199935 Jul  3 03:52 /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_cpD/bc/loss_curve.json
+-rw-rw-r-- 1 rlrk rlrk 169824 Jul  3 03:52 /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_cpD/bc/policy_abs_b2_e2000.pt
+-rw-rw-r-- 1 rlrk rlrk 201474 Jul  3 03:52 /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_cpD/null/loss_curve.json
+-rw-rw-r-- 1 rlrk rlrk 169862 Jul  3 03:52 /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_cpD/null/policy_abs_null_e2000.pt
