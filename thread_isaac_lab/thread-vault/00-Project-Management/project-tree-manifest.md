@@ -945,5 +945,6 @@ GROVE v3 (docs/grove_methodology_2026-06-05.html) + GROVE_CORE_SPEC.md v1.0 + 5C
 
 ## UPDATE 2026-07-02 (%12 RS-TECH-LEAD) — node 追記: T-ROOT-optE-route-dapg-C1C2 (off-map 是正)
 - 新 node **T-ROOT-optE-route-dapg-C1C2** (IN_PROGRESS, parent=`T-L1C-PerSkill-RL`, state.md = `thread-vault/T-ROOT-optE-route-dapg-C1C2/state.md`)。Rs 承認: 2026-07-01 23:28 (arch A + P1) / 2026-07-02 (Q3-first reframe +「3 go」)。⚠ 本 node は 07-01 承認後 未記録のまま P1 実行 (off-map) → 計画ファイル監査 P0-③ で本記録により是正。
-- 要旨: DAPG unit = **経路全体 C1→C2** (Rs 2026-07-01 22:00)。P1 feasibility PASS (non-cons) → P2 reward設計 pre-check BLOCK (%9 CONCUR; whole-route env/demos ABSENT) → P3 demo-recorder build 中 (L3) / **DQ1 UNIT選択 = Rs-PENDING**。demo seed = commit `bcb7393ec8` (LEDGER row43 WORKING)。
-- 一次記録 = log.md 2026-07-01〜 + `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/` (scoping / P2設計⛔ / cross-PV / P3 spec v2.2 / canonical_run_records)。本 block は pointer-only (narrative は log.md; 巨大行禁止)。
+- 要旨: DAPG unit = **経路全体 C1→C2** (Rs 2026-07-01 22:00)。P1 feasibility PASS (non-cons) → P2 reward設計 pre-check BLOCK (%9 CONCUR; whole-route env/demos ABSENT) → P3 demo-recorder build 中 (L3) / **DQ1 = B (BC-imitation) Rs 決定 2026-07-02 ~07:37** (verbatim「B」; A/C = 将来 option 保持)。demo seed = commit `bcb7393ec8` (LEDGER row43 WORKING)。
+- ⚠ device-fragility (2026-07-02 %11 発見): canonical route は **cuda:0 特異** (cpu-IK では R-reach knife-edge が BLOCKED に flip) → demo/評価は device 一致必須 + reach-margin が一級の robustness gap (P1 risk④ を強化)。
+- 一次記録 = log.md 2026-07-01〜 + `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/` (scoping / P2設計⛔[PARKED, DQ1=B] / cross-PV / P3 spec v2.4 / canonical_run_records / B_BC_IMITATION_SCOPING_COORD2.md 予定)。本 block は pointer-only (narrative は log.md; 巨大行禁止)。
