@@ -42,19 +42,28 @@ from task_config import (
     CLIP_BASE_HEIGHT,
     EE_TO_FINGERTIP,
     GRASP_X,
+    GRIPPER_DRIVER_EFFORT_LIMIT_NM,
     GRIPPER_DRIVER_JOINT_IDX,
+    GRIPPER_DRIVER_OPEN_RAD,
     GRIPPER_JOINT_RANGE,
     GRIPPER_PAD_BODY_IDX,
+    GRIPPER_SERVO_TARGET_KD,
+    GRIPPER_SERVO_TARGET_KE,
     JOINTS_PER_ARM,
     MAX_MOVE_STEPS,
+    MUJOCO_CONTACT_CONDIM,
     MUJOCO_CONTACT_KD,
     MUJOCO_CONTACT_KE,
+    MUJOCO_PAD_ROLL_FRICTION,
+    MUJOCO_PAD_SOLREF,
     NJMAX,
     ROBOT_BODIES_PER_ARM,
     SIM_SUBSTEPS,
     SOLVER_BACKEND,
     TABLE_HEIGHT,
     USE_MUJOCO_CPU,
+    WIDE_LEFT_Y,
+    WIDE_RIGHT_Y,
 )
 
 # Ensure scripts/ is importable (for build_fk_model, add_kinematic_arm, add_cable_rod)
@@ -1331,13 +1340,155 @@ def make_solver(model, backend=SOLVER_BACKEND, use_mujoco_cpu=USE_MUJOCO_CPU, en
     return SolverVBD(model, iterations=VBD_ITERATIONS)
 
 
+def _wire_s6_grasp_solref(solver, scene_info=None):
+    """Post-``make_solver`` S6_GRASP wiring: poke the negative ``MUJOCO_PAD_SOLREF`` into BOTH ``mj_model``
+    AND ``mjw_model.geom_solref`` (the GPU/step-read array), then stiffen the gripper 4-bar CONNECT
+    equalities + run the I11 readback asserts. Relocated from ``test_newton_clip_routing.py`` to base +
+    GENERALIZED for multi-world: ``build_multiworld_scene(grasp_actuation=True)`` calls this after
+    ``make_solver`` (``world_count`` worlds); ``build_scene`` calls it single-world (byte-identical here).
+
+    Multi-world structure (empirically verified, ``log.md`` 2026-06-28): ``solver.mj_model`` is a SINGLE
+    1-world host template (``nbody``/``ngeom``/``neq`` invariant across ``world_count``) while
+    ``solver.mjw_model`` carries the leading world axis (``geom_solref`` shape ``(world_count, ngeom, 2)``;
+    ``geom_condim`` shape ``(ngeom,)`` shared, no world axis). Hence the mjw ``geom_solref`` poke writes ALL
+    worlds (``arr[:, g, :]``) while the eq-stiffen on the single-template ``mj_model`` finds the per-template
+    4 CONNECT eqs (``_n_stiff == 4`` regardless of ``world_count`` -- the ``6*world_count`` scaling is on the
+    NEWTON ``model.equality_constraint_count``, asserted build-side). mjw eq re-poke is DEFERRED (the proven
+    faithful config is CPU/``mj_model``; GPU/cg eq re-poke is a separate later gap).
+
+    solref is NOTIFY-FRAGILE (``_update_geom_properties`` re-derives ``geom_solref`` from ke/kd on any SHAPE
+    notify); durable here only because production issues no post-construct SHAPE notify.
+    """
+    import mujoco
+
+    m = solver.mj_model
+    mjw = getattr(solver, "mjw_model", None)
+    GEOM_CAPSULE = int(mujoco.mjtGeom.mjGEOM_CAPSULE)
+
+    def _mjw_row(field, g):
+        arr = getattr(mjw, field).numpy()
+        if arr.ndim == 1:  # (ngeom,)  e.g. geom_condim (shared across worlds)
+            return arr[g]
+        if arr.ndim == 3:  # (world_count, ngeom, k)  leading world axis -> world 0 (representative)
+            return arr[0][g]
+        return arr[g]  # (ngeom, k)  e.g. geom_solref without a world axis
+
+    pad_geoms, cable_geoms = [], []
+    for g in range(m.ngeom):
+        gname = (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or "").lower()
+        bid = int(m.geom_bodyid[g])
+        bname = (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, bid) or "").lower()
+        if "pad" in (gname + bname):
+            pad_geoms.append(g)
+        elif int(m.geom_type[g]) == GEOM_CAPSULE:
+            cable_geoms.append(g)
+    assert pad_geoms, "S6_GRASP: no pad geoms located in mj_model"
+
+    # Poke the negative PAD_SOLREF into BOTH mj_model AND mjw_model (the GPU/step-read array, ALL worlds).
+    pad_solref = np.array(MUJOCO_PAD_SOLREF, dtype=m.geom_solref.dtype)
+    for g in pad_geoms:
+        m.geom_solref[g] = pad_solref
+    mjw_solref_rb = None
+    if mjw is not None:
+        arr = mjw.geom_solref.numpy()
+        val = np.array(MUJOCO_PAD_SOLREF, dtype=arr.dtype)
+        if arr.ndim == 3:  # (world_count, ngeom, 2) -> write ALL worlds (covers world_count in {1, N})
+            for g in pad_geoms:
+                arr[:, g, :] = val
+        else:  # (ngeom, 2)
+            for g in pad_geoms:
+                arr[g, :] = val
+        mjw.geom_solref.assign(arr)
+        mjw_solref_rb = [float(x) for x in np.asarray(_mjw_row("geom_solref", pad_geoms[0])).ravel()[:2]]
+
+    # I11 readbacks + fail-loud asserts.
+    want = int(MUJOCO_CONTACT_CONDIM)
+    mj_pad_condim = int(m.geom_condim[pad_geoms[0]])
+    mj_cable_condim = int(m.geom_condim[cable_geoms[0]]) if cable_geoms else None
+    mjw_pad_condim = int(np.asarray(_mjw_row("geom_condim", pad_geoms[0])).ravel()[0]) if mjw is not None else None
+    mjw_cable_condim = (
+        int(np.asarray(_mjw_row("geom_condim", cable_geoms[0])).ravel()[0])
+        if (cable_geoms and mjw is not None)
+        else None
+    )
+    mj_priority = int(m.geom_priority[pad_geoms[0]]) if hasattr(m, "geom_priority") else None
+    mj_roll = float(m.geom_friction[pad_geoms[0]][2])
+
+    assert mj_pad_condim == want, f"S6_GRASP: mj pad condim={mj_pad_condim}!={want}"
+    if mj_cable_condim is not None:
+        assert mj_cable_condim == want, f"S6_GRASP: mj cable condim={mj_cable_condim}!={want}"
+    if mjw is not None:
+        assert mjw_pad_condim == want, f"S6_GRASP: mjw pad condim={mjw_pad_condim}!={want} (GPU-inert!)"
+        if mjw_cable_condim is not None:
+            assert mjw_cable_condim == want, f"S6_GRASP: mjw cable condim={mjw_cable_condim}!={want}"
+        assert (
+            mjw_solref_rb is not None
+            and abs(mjw_solref_rb[0] - MUJOCO_PAD_SOLREF[0]) < 1e-3
+            and abs(mjw_solref_rb[1] - MUJOCO_PAD_SOLREF[1]) < 1e-3
+        ), f"S6_GRASP: mjw solref={mjw_solref_rb}!={list(MUJOCO_PAD_SOLREF)} (GPU-inert!)"
+    assert mj_priority == 1, f"S6_GRASP: pad geom_priority={mj_priority}!=1 (H4: keep shipped, don't poke 0)"
+    assert abs(mj_roll - float(MUJOCO_PAD_ROLL_FRICTION)) < 1e-6, (
+        f"S6_GRASP: pad rolling friction={mj_roll}!={MUJOCO_PAD_ROLL_FRICTION}"
+    )
+
+    # FAITHFUL 4-bar: stiffen the gripper CONNECT equalities (soft default eq_solref lets the 4-bar LOOP
+    # flop). mj_model is the SINGLE-world template -> 4 CONNECT eqs regardless of world_count (the per-world
+    # replication lives on the NEWTON model / mjw; mjw eq re-poke deferred -- CPU/mj_model is the proven
+    # faithful config). The negative geom_solref poke above is what reaches the GPU step per-world.
+    _n_stiff = 0
+    _n_stiff_enabled = 0
+    for i in range(int(m.neq)):
+        if int(m.eq_type[i]) == int(mujoco.mjtEq.mjEQ_CONNECT):
+            m.eq_solref[i] = [0.001, 1.0]
+            m.eq_solimp[i] = [0.99, 0.9995, 0.0001, 0.5, 2.0]
+            _n_stiff += 1
+            if int(m.eq_active0[i]) == 1:
+                _n_stiff_enabled += 1
+    # The PERCLIP_PIN test harness (test_newton_clip_routing.py) may pre-allocate one DISABLED connect PER cable body
+    # (e.g. 40 -- the per-clip clip-retention pin candidates; exactly one is activated mid-episode on the verified
+    # seat). They are stiffened here too (so the activated one is rigid) but the 4-bar invariant asserts on the
+    # ENABLED count -> 4. Default/build_multiworld has no disabled connect, so _n_stiff_enabled == _n_stiff == 4
+    # (backward-identical, regardless of how many disabled connects exist).
+    assert _n_stiff_enabled == 4, (
+        f"S6_GRASP: expected 4 ENABLED CONNECT 4-bar eqs to stiffen, got {_n_stiff_enabled} "
+        f"(neq={int(m.neq)}, total connect stiffened={_n_stiff})"
+    )
+
+    rb = {
+        "pad_geoms": len(pad_geoms),
+        "cable_geoms": len(cable_geoms),
+        "mj_pad_condim": mj_pad_condim,
+        "mjw_pad_condim": mjw_pad_condim,
+        "mj_cable_condim": mj_cable_condim,
+        "mjw_cable_condim": mjw_cable_condim,
+        "mjw_solref": mjw_solref_rb,
+        "mj_priority": mj_priority,
+        "mj_roll": mj_roll,
+        "connects_stiffened": _n_stiff,
+    }
+    print(
+        f"  [S6_GRASP] solref poked + I11 asserts OK: pad_geoms={len(pad_geoms)} "
+        f"condim mj_pad={mj_pad_condim}/mjw_pad={mjw_pad_condim} mj_cable={mj_cable_condim}/"
+        f"mjw_cable={mjw_cable_condim} solref_mjw={mjw_solref_rb} priority={mj_priority} roll={mj_roll} "
+        f"connects_stiffened={_n_stiff}(eq_solref->[0.001,1])"
+    )
+    return rb
+
+
 # =============================================================================
 # Scene Building
 # =============================================================================
 
 
 def build_multiworld_scene(
-    fk_model, fk_state, world_count, device, cable_start_pos=None, add_support_clips=True, add_target_clip=False
+    fk_model,
+    fk_state,
+    world_count,
+    device,
+    cable_start_pos=None,
+    add_support_clips=True,
+    add_target_clip=False,
+    grasp_actuation=False,
 ):
     """Build multi-world physics scene with kinematic arms + cable.
 
@@ -1352,9 +1503,12 @@ def build_multiworld_scene(
             If False, omit them (InsertIntoClip, AerialRegrasp).
         add_target_clip: If True, add clip C1 V-groove geometry at (CLIP1_X, CLIP1_Y).
             Used by Grip (Clamp/Unclamp) and InsertIntoClip envs.
-
-    Returns:
-        dict with model, solver, states, body indices, etc.
+        grasp_actuation: ``mujoco`` backend only. If True, wire the DYNAMIC dual-arm gripper (the
+            AerialRegrasp L-hold precondition): L+R POSITION servo on the driver joints, the koshape
+            4-bar CONNECT + L-R follower-mirror equalities (by label), and the S5 contact families
+            (condim=6 + pad rolling friction). Mirrors the proven ``build_scene(grasp_actuation=True)``
+            (``test_newton_clip_routing.py``) and calls :func:`_wire_s6_grasp_solref` after ``make_solver``.
+            Default ``False`` keeps the build byte-identical (ApproachCable / Grip NON-breaking).
     """
     # Default cable position: on table
     if cable_start_pos is None:
@@ -1376,6 +1530,10 @@ def build_multiworld_scene(
         # solver_mujoco.py:292); contacts enabled via make_solver(enable_cable_contacts=True), so
         # the A-1 VISIBLE-only pass below is LOAD-BEARING (cycle-2 CRITICAL: without it the whole
         # arm collision set goes live). joint_q kinematic re-pose driving = SC2b.
+        if grasp_actuation:
+            # warm-register the SHAPE custom attrs (mujoco:condim) BEFORE finalize so put_model bakes
+            # condim into BOTH mj_model and mjw_model (mirror build_scene test:1169-1173; idempotent).
+            SolverMuJoCo.register_custom_attributes(proto)
         mj_left_ss = proto.shape_count
         add_ur5e_robotiq(
             proto,
@@ -1393,10 +1551,13 @@ def build_multiworld_scene(
         # A-1 VISIBLE-only pass (probe-proven, F4c): clear COLLIDE on non-pad arm shapes (→ MuJoCo
         # contype=conaffinity=0); KEEP COLLIDE on the gripper PAD geoms (cable grasp).
         _labels = list(getattr(proto, "shape_label", []) or [])
+        pad_shape_idx = []  # gripper PAD collision shapes (S6_GRASP condim/rolling targets; [] if no grasp)
         for si in range(mj_left_ss, mj_arm_se):
             lbl = str(_labels[si]) if si < len(_labels) else ""
             if "pad" not in lbl.lower():
                 proto.shape_flags[si] = int(newton.ShapeFlags.VISIBLE)
+            else:
+                pad_shape_idx.append(si)
 
         # Cable: rigid-link REVOLUTE chain AFTER both arms (D-S4a-1/4; registers the MuJoCo custom
         # JOINT_DOF attrs + issues the FREE root + segment joints consecutively).
@@ -1414,6 +1575,87 @@ def build_multiworld_scene(
                 lbl = str(_labels[arm_si]) if arm_si < len(_labels) else ""
                 if "pad" not in lbl.lower():
                     proto.add_shape_collision_filter_pair(cable_si, arm_si)
+
+        # --- S6_GRASP actuation + 4-bar equalities + S5 contact families (gated; mirrors the proven
+        # build_scene grasp_actuation, test:1336-1421). default False -> skipped -> AC/Grip byte-identical.
+        # Wired on the proto BEFORE replicate so every world inherits the servo + eqs + condim. ---
+        if grasp_actuation:
+            # POSITION drivers on [6,10,20,24] = GRIPPER_DRIVER_JOINT_IDX + right arm (+JOINTS_PER_ARM).
+            grasp_driver_joints = list(GRIPPER_DRIVER_JOINT_IDX) + [
+                j + JOINTS_PER_ARM for j in GRIPPER_DRIVER_JOINT_IDX
+            ]
+            assert grasp_driver_joints == [6, 10, 20, 24], f"S6_GRASP driver index drift: {grasp_driver_joints}"
+            for dof in grasp_driver_joints:
+                proto.joint_target_mode[dof] = int(newton.JointTargetMode.POSITION)
+                proto.joint_target_ke[dof] = GRIPPER_SERVO_TARGET_KE
+                proto.joint_target_kd[dof] = GRIPPER_SERVO_TARGET_KD
+                proto.joint_effort_limit[dof] = GRIPPER_DRIVER_EFFORT_LIMIT_NM
+                proto.joint_target_pos[dof] = GRIPPER_DRIVER_OPEN_RAD  # start OPEN; runner schedules CLOSE
+            # Restore the 4 gripper 4-bar connect equalities (follower<->coupler), BY LABEL for both arms
+            # (the shipped XML <connect> loaded with skip_equality_constraints=True). 4 connects / proto.
+            _blabel = [str(x) for x in (getattr(proto, "body_label", None) or getattr(proto, "body_key", []))]
+
+            def _bodies_ending(suffix, lo, hi):
+                return [i for i in range(lo, hi) if _blabel[i].endswith(suffix)]
+
+            grasp_connects = []
+            for lo, hi in [(0, ROBOT_BODIES_PER_ARM), (ROBOT_BODIES_PER_ARM, 2 * ROBOT_BODIES_PER_ARM)]:
+                for side in ("right", "left"):
+                    fb = _bodies_ending(f"{side}_follower", lo, hi)
+                    cb = _bodies_ending(f"{side}_coupler", lo, hi)
+                    if fb and cb:
+                        grasp_connects.append((fb[0], cb[0]))
+            for fb, cbb in grasp_connects:
+                proto.add_equality_constraint_connect(
+                    body1=fb, body2=cbb, anchor=wp.vec3(0.0, 0.0, 0.0), label=f"fourbar_{fb}_{cbb}", enabled=True
+                )
+            # FAITHFUL L-R FOLLOWER MIRROR per gripper (right_follower_joint = left_follower_joint,
+            # polycoef [0,1,0,0,0]); the tendon-stripped XML dropped the symmetric coupling -> couple the
+            # FOLLOWERS (the 4-bar is bistable; a driver mirror leaves each follower free to flip branch).
+            _jlabel = [str(x) for x in (getattr(proto, "joint_label", None) or [])]
+
+            def _joints_ending(suffix, lo, hi):
+                return [i for i in range(lo, hi) if _jlabel[i].endswith(suffix)]
+
+            grasp_mirrors = []
+            for lo, hi in [(0, JOINTS_PER_ARM), (JOINTS_PER_ARM, 2 * JOINTS_PER_ARM)]:
+                rf = _joints_ending("right_follower_joint", lo, hi)
+                lf = _joints_ending("left_follower_joint", lo, hi)
+                assert rf and lf, (
+                    f"S6_GRASP: follower-mirror joints unresolved by label in [{lo},{hi}): rf={rf} lf={lf}"
+                )
+                proto.add_equality_constraint_joint(
+                    joint1=rf[0],
+                    joint2=lf[0],
+                    polycoef=[0.0, 1.0, 0.0, 0.0, 0.0],
+                    label=f"follower_mirror_{rf[0]}_{lf[0]}",
+                    enabled=True,
+                )
+                grasp_mirrors.append((rf[0], lf[0]))
+            assert sorted(j for p in grasp_mirrors for j in p) == sorted(d + 3 for d in grasp_driver_joints), (
+                f"S6_GRASP: follower-mirror by-label {grasp_mirrors} != "
+                f"SSOT followers {[d + 3 for d in grasp_driver_joints]}"
+            )
+            # Build-time S5 contact families: condim=6 on pad+cable shapes + rolling friction on pads ->
+            # baked into BOTH mj_model AND mjw_model at put_model (the negative PAD_SOLREF has no build-time
+            # path -> poked post-make_solver by _wire_s6_grasp_solref).
+            _condim_attr = proto.custom_attributes.get("mujoco:condim")
+            assert _condim_attr is not None, "S6_GRASP: mujoco:condim custom attribute not registered"
+            if _condim_attr.values is None:
+                _condim_attr.values = {}
+            _condim_shapes = list(pad_shape_idx) + list(range(_cable_sr[0], _cable_sr[1]))
+            for si in _condim_shapes:
+                _condim_attr.values[si] = int(MUJOCO_CONTACT_CONDIM)
+            for si in pad_shape_idx:
+                if si < len(proto.shape_material_mu_rolling):
+                    proto.shape_material_mu_rolling[si] = float(MUJOCO_PAD_ROLL_FRICTION)
+            print(
+                f"  [S6_GRASP] actuation wired (multiworld proto): drivers={grasp_driver_joints} "
+                f"servo(ke={GRIPPER_SERVO_TARGET_KE},kd={GRIPPER_SERVO_TARGET_KD},"
+                f"eff={GRIPPER_DRIVER_EFFORT_LIMIT_NM}) "
+                f"connects={grasp_connects} mirrors={grasp_mirrors} condim6 on {len(_condim_shapes)} shapes "
+                f"({len(pad_shape_idx)} pad + cable) rolling={MUJOCO_PAD_ROLL_FRICTION}"
+            )
     else:
         left_info = add_kinematic_arm(
             proto,
@@ -1487,15 +1729,51 @@ def build_multiworld_scene(
         table_cfg.kd = 100.0
     table_cfg.mu = 1.0
     table_cfg.gap = 0.002
-    table_xform = wp.transform((0.3, -0.05, TABLE_HEIGHT - 0.005), wp.quat_identity())
-    scene.add_shape_box(
-        body=-1,
-        hx=0.35,
-        hy=0.35,
-        hz=0.005,
-        xform=table_xform,
-        cfg=table_cfg,
-    )
+    table_cx, table_cy, table_cz = 0.3, -0.05, TABLE_HEIGHT - 0.005
+    table_half = (0.35, 0.35, 0.005)
+    if SOLVER_BACKEND == "mujoco" and grasp_actuation:
+        # S6_GRASP table VOID (mirrors the PROVEN build_scene grasp_actuation slot, test:1055-1119, grasp_y
+        # =None case; probe 9/9). The gripper's lower flank (f1ext) must reach UNDER the table-resting cable
+        # to cage it; a SOLID table blocks f1ext at table_top → no hook → no hold. Split into 2 Y-boxes (the
+        # slot at the WIDE grasps ±16mm) + 2 X-fill boxes (void ONLY under the gripper footprint); the cable
+        # SPANS the void, supported on BOTH Y-sides (no droop). Default grasp_actuation=False keeps the single
+        # solid box (AC/Grip byte-identical).
+        y_floor, y_ceil = table_cy - table_half[1], table_cy + table_half[1]  # [-0.40, +0.30]
+        slot_lo, slot_hi = WIDE_LEFT_Y - 0.016, WIDE_RIGHT_Y + 0.016  # [0.090, 0.210] under the L+R grasps
+        cyl, hyl = (y_floor + slot_lo) / 2.0, (slot_lo - y_floor) / 2.0
+        cyh, hyh = (slot_hi + y_ceil) / 2.0, (y_ceil - slot_hi) / 2.0
+        x_floor, x_ceil = table_cx - table_half[0], table_cx + table_half[0]  # [-0.05, 0.65]
+        slot_x_lo, slot_x_hi = table_cx - 0.066, table_cx + 0.066  # [0.234, 0.366] gripper footprint ±15mm
+        cyv, hyv = (slot_lo + slot_hi) / 2.0, (slot_hi - slot_lo) / 2.0
+        cxc, hxc = (x_floor + slot_x_lo) / 2.0, (slot_x_lo - x_floor) / 2.0  # -X void fill
+        cxd, hxd = (slot_x_hi + x_ceil) / 2.0, (x_ceil - slot_x_hi) / 2.0  # +X void fill
+        for _hx, _hy, _cx, _cy in [
+            (table_half[0], hyl, table_cx, cyl),  # -Y solid table
+            (table_half[0], hyh, table_cx, cyh),  # +Y solid table
+            (hxc, hyv, cxc, cyv),  # -X void fill (inside the slot Y, X < footprint)
+            (hxd, hyv, cxd, cyv),  # +X void fill (inside the slot Y, X > footprint)
+        ]:
+            scene.add_shape_box(
+                body=-1,
+                hx=_hx,
+                hy=_hy,
+                hz=table_half[2],
+                xform=wp.transform((_cx, _cy, table_cz), wp.quat_identity()),
+                cfg=table_cfg,
+            )
+        print(
+            f"  [SCENE] Table → 4 boxes (S6_GRASP void): VOID Y[{slot_lo:.3f},{slot_hi:.3f}] "
+            f"X[{slot_x_lo:.3f},{slot_x_hi:.3f}] (gripper f1ext reaches under the cable)"
+        )
+    else:
+        scene.add_shape_box(
+            body=-1,
+            hx=table_half[0],
+            hy=table_half[1],
+            hz=table_half[2],
+            xform=wp.transform((table_cx, table_cy, table_cz), wp.quat_identity()),
+            cfg=table_cfg,
+        )
 
     # Support clips (optional — ApproachCable only)
     if add_support_clips:
@@ -1618,6 +1896,16 @@ def build_multiworld_scene(
     # SETTLED-flat cable<->table = 80; the curled gravity-off config = 0 (S4b fix: the prior
     # comment misattributed the 80 to "curled"). MuJoCo's own nconmax is set in make_solver.
     model.rigid_contact_max = NJMAX
+
+    # S6_GRASP (grasp_actuation=True): in-builder registration check (mirrors build_scene test:1485-1491,
+    # ×world_count) then the post-make_solver poke. 6 eqs/world (4 CONNECT + 2 follower-mirror), replicated.
+    # _wire pokes the negative PAD_SOLREF into mjw (ALL worlds) + stiffens the mj_model-template 4-bar.
+    if SOLVER_BACKEND == "mujoco" and grasp_actuation:
+        _neq = int(getattr(model, "equality_constraint_count", 0) or 0)
+        assert _neq == 6 * world_count, (
+            f"S6_GRASP: 4-bar+mirror eqs did not all register/replicate: neq={_neq} != 6*world_count={6 * world_count}"
+        )
+        _wire_s6_grasp_solref(solver)
 
     # Physics states
     state_0 = model.state()
