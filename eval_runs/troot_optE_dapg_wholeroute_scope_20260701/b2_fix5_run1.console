@@ -1,0 +1,9 @@
+=== CP-⑤b RUN-1 (fix-⑤ harness, CABLE_XY_OFFSET UNSET, EGL) ===
+RUN1 EXIT=0
+############ RUN-1 sha bar ############
+baseline=e01ac1fad2ff415538a53c9786a9ed6060cb189b99a4ab6fc5fdda619717df6a
+run-1   =e01ac1fad2ff415538a53c9786a9ed6060cb189b99a4ab6fc5fdda619717df6a
+RUN1_VERDICT=BYTE_IDENTICAL_PASS
+############ RUN-1 regrasp verdict ############
+regrasp_ok= True verdict= None
+############ DONE RUN-1 ############

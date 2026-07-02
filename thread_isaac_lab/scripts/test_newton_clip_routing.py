@@ -1755,7 +1755,7 @@ _ARM_OVERWRITE_IDX = [i for i in range(2 * JOINTS_PER_ARM) if i not in _GRIPPER_
 _demo_rec = None
 # Line numbers of the 3 "⛔ ANTI-REVERT (Rs-LOCKED 2026-07-01)" markers in THIS file, pinned into the demo meta
 # for quick auditability. Keep in sync with the markers; as_run_sha256 of this file also cryptographically pins them.
-_ANTI_REVERT_MARKER_LINES = [4385, 4401, 4500]
+_ANTI_REVERT_MARKER_LINES = [4401, 4417, 4516]
 
 
 def physics_step(model, state, solver, contacts, scene_info):
@@ -3866,6 +3866,18 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
     GRASP_YC = float(np.mean(_near)) if _near.size else _grasp_at
     print(f"  [S6_ROUTE] caveat-a: settled-cable-centre GRASP_YC={GRASP_YC * 1e3:+.2f}mm "
           f"(grasp_at={_grasp_at * 1e3:+.0f}mm arms +-{GHS * 1e3:.0f}mm = 88 span)")
+
+    # fix-5 (Rs A / Opt-1, 2026-07-03): X analog of caveat-a -- re-centre x_grasp on the SETTLED cable X,
+    # offset-gated (dx != 0 only; scene_info :1668 collapses None/(0,0) -> (0,0) so None / (0,dy) / nominal
+    # keep the constant-X banked trajectory = byte-identical BY CONSTRUCTION). Cable || Y -> region X approx
+    # const -> mean well-defined. Fixes b2_cpA_reach_screen_finding.md (canonical route had ZERO cable-X
+    # follow; the legacy do_p1_grasp grasp_dy is inert on this path).
+    if scene_info.get("cable_xy_offset", (0.0, 0.0))[0] != 0.0:
+        _cx_near = state.body_q.numpy()[cable_bodies, 0][np.abs(_cy_all - _grasp_at) < 0.10]  # same mask as caveat-a
+        if _cx_near.size:
+            x_grasp = float(np.mean(_cx_near))
+        print(f"  [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp={x_grasp * 1e3:+.2f}mm "
+              f"(nominal GRASP_X={GRASP_X * 1e3:+.0f}mm, delta={(x_grasp - GRASP_X) * 1e3:+.2f}mm)")
 
     def tgt(x, z):
         return (x, GRASP_YC - GHS, z), (x, GRASP_YC + GHS, z)

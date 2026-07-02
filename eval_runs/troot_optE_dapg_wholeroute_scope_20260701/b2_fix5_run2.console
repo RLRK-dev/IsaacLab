@@ -1,0 +1,12 @@
+=== CP-⑤b RUN-2 (fix-⑤ harness, CABLE_XY_OFFSET=0.020,0 [dx=+20mm], EGL) ===
+RUN2 EXIT=0
+video -> ~/Downloads/route_fix5_dx+20.mp4
+############ RUN-2 X-follow echo (expect delta ~+20mm) ############
+  [S6_ROUTE] caveat-a: settled-cable-centre GRASP_YC=+150.00mm (grasp_at=+150mm arms +-44mm = 88 span)
+  [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+320.00mm (nominal GRASP_X=+300mm, delta=+20.00mm)
+############ RUN-2 grasp/regrasp verdict ############
+  [C2-REGRASP-GRIP] claw<->cable NORMAL: L=15.96N(grips=True) R=101.25N(n=7,grips=True) | R-reach=1.0mm at_88=True | achieved 3D span=99.5mm (Y-sep tgt 88) => VERDICT=SUCCESS_DUAL_LOADED_AT_88 regrasp_ok=True
+  [C2-REGRASP-GATE] charter core = R grips the ACTUAL cable @88mm lane (regrasp_ok=True). labels: SUCCESS_DUAL_LOADED (R+L force) / SUCCESS_R_GRIP_L_CAGE (R force, L 0-normal cage=retain per video) / R_MISS_AT_88 (R reached but air) / BLOCKED_REACH_WALL. INVARIANT#2 Y-span held; L-load-share + 3D-chord excess = Rs Q. => SUCCESS_DUAL_LOADED_AT_88
+regrasp_ok= True verdict= None
+x_grasp=  milestone_ok= None
+############ DONE RUN-2 ############
