@@ -1,0 +1,22 @@
+[COORD2 %10 -> RS-TECH-LEAD %12] CP-A M1 進行報告 — manifest に spec 内部衝突 1件 HOLD。map/gen/M1.5 は unblocked のため M1 GO 下で並行先行実行する。
+
+M0 re-baseline OK: HEAD=6d6af7aa69 (A commit 反映), manifest+map CLEAN. rollback entry sha = 6d6af7aa69.
+
+== MAP 側 = CLEAN・実行可 (並行進行) ==
+- live L1-224 (head+§1 text+2 iframes) = 32.8KB ≤60KB ✓ / archive = <details> block L225-2589 = 431KB → logical_decomposition_archive_2026H1.html へ byte 保全移設。境界明確 (outermost </details>@2589, </body>@2590)。live に archive への pointer div を挿入。
+- gen_gantt.py / gen_simplified_tree.py = eval_runs/troot_nest_rebase_visualtree_20260623/ に実在 (未 scripts/) → scripts/ 昇格 + refresh 契約 header。
+- M1.5 nest-tracker track も unblocked。
+→ この3件 (map archive / gen 昇格 / M1.5) を先行実行し commit hash + 検証を報告する。
+
+== ⚠ HOLD (manifest §1/§4 = spec 内部衝突、%10 単独で解けない — §運用10) ==
+実測 per-section bytes (total 679KB, bytes/1000):
+  §1 tree-text=234 / §2 node list=92(GEN対象) / §3 session=3 / §4 dep-graph=107 / §5 archive=2.5 / §6 Y2採択=111 / §7 cross-ref=92 / UPDATE=7 / head=30
+衝突: charter/T2「manifest live ≤50KB」 vs N1「§1/§3/§4/§5 は heading・役割・内容とも温存」。N1-keep 集合 (§1+§3+§4+§5)=346KB だけで ≤50KB を大幅超過。§1 単独 234KB。両立不能。加えて §6/§7 (203KB) は keep-list にも GEN にも無く disposition 未定義。
+※ 本衝突は byte 実測で初顕在化 (design phase は未計測)。silently どちらか採用は §運用10 違反 → %12/Rs 判断を要す。
+選択肢:
+  P1) N1 厳守 → §1/§3/§4/§5 verbatim、§6/§7/UPDATE のみ archive。live≈382KB (≤50KB 放棄/緩和)。保全最優先・G2 少数化 弱。
+  P2) [推奨] ≤50KB 優先 → §1 tree-text body + §4 + §6 + §7 の bulk を archive に byte 保全、live は各 heading+役割+現況 pointer 1行 + §3/§5 verbatim + §2 GEN(~5KB)。live ≤50KB 達成 (≈45KB 見積)。N1 を「body は archive へ byte 保全 (N4-safe) + live に heading/役割/pointer 温存」に読替。根拠: §1 tree-text は self-declared redundant (正規詳細=jsx tracker + §2 + nest-snapshot.json)。※N1 再解釈 = DESIGN Non-goal 編集 → %12/Rs 承認要。
+  P3) %12 が target を N1 前提の現実値 (例 ≤400KB) に改訂。
+Recommendation = P2 (G1/G2 達成 + 全 byte 保全 + §1 冗長性根拠)。manifest 書換は本 query 解決後に着手。map/gen/M1.5 は先行する。
+
+2026-07-02 18:57 JST

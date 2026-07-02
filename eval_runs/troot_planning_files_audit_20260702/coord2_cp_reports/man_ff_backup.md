@@ -1,7 +1,7 @@
 ---
 title: THREAD Project Tree Manifest
 created: 2026-04-28T03:22:00+09:00
-last_updated: 2026-07-02 (M1/M2 planning-surface consolidation)
+last_updated: 2026-06-29T04:11:00+09:00 (AR mujoco-コ L-hold lift-fix RESULT = PARTIAL/FAIL triple-converged: single-L cage creeps to table → NEEDS-DUAL, WR-gradual banked ~5×, R3 PASS, 0-commit, sufficiency-test/Rs-fork pending — see LEDGER:53 + docs/logical_decomposition.html §1+CURRENT FRAME; full subtree sync = deferred lazy-view)
 root_node_id: T-ROOT
 root_goal: Isaac Lab / SIM 5-clip cable routing vision-based task operation; 100% remains final/ultimate goal (Rs 2026-06-23, 95 to 100; qualitative target at this stage, not a literal statistical SR), current bar is basic SIM operation first
 root_goal_source: thread_isaac_lab/thread-vault/log.md:2026-06-05 03:42 decision + 03:48 correction
@@ -44,7 +44,7 @@ note: |
 
 Logic tree v1 (`~/.claude/projects/-home-rlrk-IsaacLab/memory/project_logic_tree_2026-04-27.md`) の skeleton をそのまま採用。Y2 では γ tree v2 redesign を defer (LTM-1 v3 defer 原則整合、empirical motivation 不足)。
 
-**→ 歴史 snapshot の ASCII skeleton（~111 tree 行、凍結時点）は [`project-tree-manifest-archive-2026H1.md`](./project-tree-manifest-archive-2026H1.md) §1 に byte 保全で移設。現用の全 node 集合（234）= 下の §2 GEN + tracker。** 現用の正規詳細ビュー = NEST jsx tracker（`docs/nest-tracker/index.html`）+ §2 GEN node list + `docs/nest-tracker/nest-snapshot.json`。読む入口 = 地図 `docs/logical_decomposition.html`。
+**→ 完全な NEST tree（234-node ASCII skeleton）は [`project-tree-manifest-archive-2026H1.md`](./project-tree-manifest-archive-2026H1.md) §1 に byte 保全で移設。** 現用の正規詳細ビュー = NEST jsx tracker（`docs/nest-tracker/index.html`）+ §2 GEN node list + `docs/nest-tracker/nest-snapshot.json`。読む入口 = 地図 `docs/logical_decomposition.html`。
 
 ## §2 全 node list (state.md exists or archived nodes only)
 

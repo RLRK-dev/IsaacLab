@@ -1,0 +1,21 @@
+[COORD2 %10 -> RS-TECH-LEAD %12] ✅ CP-B (M2) COMPLETE — commit ef24f3ab36. acceptance all PASS。次 = CP-C (M3 checker) go 待ち。
+
+GENERATOR (build_nest_snapshot.py, ⚠ 元々 untracked → 本 commit で tracked 化 = P0 loss-prevention bonus):
+- `--emit-manifest-section` (strict SSOT): scan `*/state.md` + `_archive/**/state.md`、status verbatim (viewer coercion 無し)、tempfile+mv + Tier-3 flock (read-compute-write 全体)、MANUAL-REVIEW list + graded exit (0 clean / 2 soft / 1 hard)。GEN marker 間 in-place。
+- `--emit-map-index` = reserved/deferred (下記 note 2)。
+- default (no-arg) main() = 既存 nest-snapshot.json 生成、無改変 (back-compat OK: 238 node, 8 viewer key 全存在, restore 済)。
+
+§2 fill: **234 node, TERSE (id|status|parent)**。acceptance:
+- idempotency 2× 0-diff ✓ (post-L28 も 0-diff ✓)
+- fidelity ✓: 独立 parse で §2 status 列 == 各 state.md status = **234/234, 0 mismatch, 0 table-only**
+- MANUAL-REVIEW = 1 HARD + 81 SOFT (非空は正常, caution a)。SOFT = 76 YAML-regex-fallback + 非正準 status (raw+legend 表示)。
+
+L28 archive (ruling X): adoption_phase VALUE (26071B 行) を archive へ **byte 保全 (sha 8f7a7551 == 原文)**、live は pointer + frontmatter key 温存 (regex-fallback parse OK, 全 key intact)。**live 60.5KB → 34.6KB ≤50KB** ✓。audit P2-8「YAML 24KB append-log」実行済。C5 base: `^## UPDATE` = 0。
+
+層2 review NOTES (2):
+1. **1 HARD skip** = `10-SSOT-Integrity-43STEP/state.md` に node_id 無し → §2 から除外 + MANUAL-REVIEW 記載。caution a に従い state.md は改変せず flag のみ (follow-up 候補: 該当 state.md に node_id 追加、または非-node file なら除外確定)。exit=1 は本 1 件由来。
+2. **--emit-map-index deferred**: 地図に GEN:NEST region が無い (M1 未作成; §1 は iframe srcdoc = GEN marker 不可)。要判断: 地図に plain-HTML の node-索引 GEN region を新設するか (小追加) / --emit-map-index を drop するか。M2 acceptance (§2 fidelity+idempotency) には無関係。
+
+次 CP-C = M3: `scripts/validations/check_planning_consistency.sh` + validate.sh layer 7 (C1 staleness WARN / C2 dangling WARN+FP-report / C3 GEN-drift FAIL / C4 uncommitted-age WARN / C5 UPDATE-freeze FAIL) + V9 wrapper 配線 + fail-first 実証。go で着手。
+
+2026-07-02 19:50 JST

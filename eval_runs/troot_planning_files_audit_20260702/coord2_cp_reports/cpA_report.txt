@@ -1,0 +1,21 @@
+[COORD2 %10 -> RS-TECH-LEAD %12] ✅ CP-A COMPLETE (M0+M1+M1.5). 3 commits, 検証 all PASS. 次 = CP-B (M2 生成器) — go 待ち。
+
+COMMITS (rollback entry = your A-commit 6d6af7aa69):
+- M1.5   bd38b26bbd  Track docs/nest-tracker (3 files; rollback net before M2)
+- M1-map c4e330a3c4  map split: live 33.7KB + archive + gen 昇格
+- M1-man c8ac8030ca  manifest split: live 38.2KB + archive
+
+VERIFICATION (N4 byte-preservation, 全 PASS):
+- MAP: live 33717B ≤60KB ✓ | 再結合 sha==original(1a2a2270) ✓ | archived <details> region sha==original(5922c081) ✓ | chrome --headless --dump-dom exit-0 (live+archive) ✓ | html.parser OK 両方 ✓ | <!-- last_updated:2026-07-02 --> stamp 追加 ✓
+- MANIFEST: live 38173B ≤50KB ✓ | 再結合 sha==original(a2b86d58) ✓ | 6 bodies(§1/§2/§4/§6/§7/UPDATE) archived byte-exact (interior-grep 1/1/1/1/1/2) ✓ | banner(UPDATE-block禁止+LTM-1 v1.2)追加 ✓ | §2=GEN placeholder ✓ | §3/§5 verbatim ✓
+- gen_simplified_tree.py / gen_gantt.py → scripts/ 昇格 + refresh-contract header + py_compile OK ✓
+- collision-gate: 各書込前 sha==entry PASS / porcelain 全 CP-A surface clean ✓
+
+層2 review 用 NOTES (3 residuals):
+1. manifest head L28 = 24KB `adoption_phase:` inline append-log を「keep head」仕様どおり温存 (≤50KB は 38KB で達成済 = archiving 不要だった)。audit P2-8「YAML 24KB append-log」の残件のみ別途 follow-up 候補 (要すれば value のみ archive+pointer 化 / frontmatter key は温存)。判断ください。
+2. map baked srcdoc footer(L166)の "SSOT 連動" = tree iframe footer で TREE は真に SSOT-derived (かつ "re-runnable" 明記) につき accurate として温存。虚偽だった COMBINED-view caption(L114) は修正済 → Gantt TASKS/NOW を「手保守 curated(SSOT 自動連動ではない)」へ正直化 (gen_gantt.py L7 NOW / L11 TASKS = hand-coded 確認)。
+3. §2 GEN region = placeholder(`GEN:NEST:BEGIN/END`+M2 note)。M2 で build_nest_snapshot.py --emit-manifest-section が per-node state.md から fill 予定。C3 checker(M3)は M2 fill 後に有効化。
+
+次 CP-B = M2: build_nest_snapshot.py に --emit-manifest-section / --emit-map-index + strict mode + 忠実性契約 §3 層A(a)-(e)。go で着手 (or CP-A review 先行なら指示ください)。
+
+2026-07-02 19:27 JST

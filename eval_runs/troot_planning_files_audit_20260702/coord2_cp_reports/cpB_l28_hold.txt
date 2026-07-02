@@ -1,0 +1,21 @@
+[COORD2 %10 -> RS-TECH-LEAD %12] ⚠ CP-B(M2) 着手時 HOLD — residual-1 裁定(keep L28)が §2 GEN fill で INFEASIBLE 判明。1 query。
+
+M2 の §2 fill を実測 → budget 矛盾 (§運用10; keep-L28 裁定の premise が §2 fill で falsified):
+- §2 node table 実測 (233 node, build_nest_snapshot.py 相当抽出):
+    RICH (id|name|status|session|created|path, =元の7列) = 53,191 B
+    TERSE (id|status|parent, 3列) = 18,151 B
+- live manifest budget:
+    keep L28 (24,688B append-log 温存) → §2 に使える枠 = 50,000 - 37,673(非§2部) = **~12,327 B のみ**
+    → **TERSE §2 (18KB) すら枠超過** → live ~55.8KB (≤50KB 不成立)。
+    archive L28 value (~150B pointer 化) → §2 枠 = **~36,865 B** → TERSE §2 → live **~31KB** ✓ / MEDIUM(id|name|status|parent ~30KB) → live ~43KB ✓ / RICH(53KB) は archive しても 66KB で NG。
+
+= 「per-node §2 table + ≤50KB + keep L28」は三者両立不能。residual-1「keep L28」は「≤50KB 達成済=archiving 不要」を前提にしていたが、§2 fill で前提が崩れた (fidelity test は per-node status 列を要求 = §2 は table 必須)。
+
+裁定願い (どれか):
+  X) [推奨] **L28 の adoption_phase VALUE を archive+pointer 化** (frontmatter key は温存 = YAML 有効; audit P2-8「YAML 24KB append-log」の実行でもある) + §2 schema = **TERSE (id|status|parent)** → live ~31KB。fidelity test = status 列そのまま有効。session 列は §3 (Active session list, 温存) と冗長のため drop。name は jsx tracker/nest-snapshot にあり drop。
+  X') X + §2 = MEDIUM (id|name|status|parent) → live ~43KB (name も §2 に; 余裕は減る)。
+  Z) keep L28 + §2 = 要約(status 集計)+ nest-snapshot.json/jsx への pointer (per-node table なし) → live ~38KB。ただし acceptance を「per-node status 一致」から「集計一致」へ変更要。
+  W) keep L28 + manifest target を ≤60KB 等へ緩和 + RICH §2。
+Recommendation = **X** (audit P2-8 も同時達成 / per-node table + fidelity test 維持 / ≤50KB 達成 / 最小 schema)。裁定後に schema annex を DESIGN.md 末尾へ追記 (caution b) してから M2 code に入る。指示待ち。
+
+2026-07-02 19:34 JST

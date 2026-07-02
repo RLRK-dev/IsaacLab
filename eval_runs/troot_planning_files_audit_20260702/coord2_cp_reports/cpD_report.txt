@@ -1,0 +1,24 @@
+[COORD2 %10 -> RS-TECH-LEAD %12] ✅ CP-D (M4) COMPLETE → **M0-M4 (全 %10 charter) 完了**。残 = M5+M6 (%12)。
+
+CP-D commits (D-a..D-d):
+- 70fa91619c  C2 node-id leg WARN→**FAIL 昇格** (0-FP, %12承認) + manifest last_updated→2026-07-02 (C1 manifest WARN 解消)
+- f60eebf3ee  GOALS.md **pointer 化 + track** (verify_goal_contract.sh RESULT=PASS / goal_evidence 契約 5-token verbatim / 有害3記述 [PhysX-prod, no-CUDA_VISIBLE_DEVICES, Franka] = 全0 / .gitignore:108 削除 + supersession)
+- 5b2c7dff5c  index.md T8 (**00-PM section 追加** [manifest+LTM-1] / 07-Design 件数 5→11 / RL-Progress FROZEN 化 [旧 :127 stale 記述] / dir 8→9 / **track → C4 WARN 解消**) + **stale-say sweep** (LL-ApproachCable:14 / Knowledge Index:81 / LEDGER:42 per-skill注記)
+- 21c4c92aae  **T4 FROZEN banner** (RL-Routing-Progress, D4 承認文言 verbatim, 本文不変) + **D3 LTM-1 v1.2 注記** (§5.2 配下, DESIGN §3.5 blockquote verbatim, 題名+version v1.1→v1.2)
+
+VERIFICATION:
+- layer 7 最終 = **RESULT PASS, 1 WARN** (C1 LEDGER as-of 06-21 のみ — ruling 3 で %12 が次 LEDGER 書込時に bump; %10 は 07-Design read-only 制約で触らず)。C4 index.md WARN も解消済 (track 化)。
+- GOALS: verify_goal_contract.sh **RESULT=PASS** (consumer 温存), 有害3=0, contract 5-token 全存在。
+- 2× .claude/skills SKILL.md の GOALS=SSOT 行 = on-disk 修正済 (0 stale) だが **.claude/ は gitignore のため commit 外** (on-disk only; 承知の上)。
+
+DoD (a)-(f) self-check:
+- (a) 読む入口=地図1本 (live 33.7KB → SOMA/LEDGER pointer) ✓ / (b) manifest §2 = state.md 生成 + 2×0-diff ✓ / (c) layer 7 fail-first 検出→clean ✓ / (d) GOALS/RL-Progress 有害・死亡記述消滅 (pointer+freeze) ✓ / (f-atomic) 全変更 atomic commit (10 本) ✓
+- **(e) CLAUDE.md 2種変更 = M5 (%12, §3層C 4-hunk, Rs 最終文言 GO 要) 未** / **(f-層2/層5) = M6 (%12) 未**
+
+bonus (loss-prevention, 元 untracked → 本作業で tracked): build_nest_snapshot.py / validate.sh / audit_thread_vault_current_state.sh / operational-rule-LTM-1.md / index.md / GOALS.md / LL-ApproachCable-BugHistory.md (原版 git 履歴なし → diff は commit message + 現物 review 願う)。
+
+全 commit chain (10, on 6d6af7aa69): bd38b26bbd(M1.5) c4e330a3c4(M1-map) c8ac8030ca(M1-man) ef24f3ab36(M2) 5f253e97b8(M3-1) cce2975dc8(M3-2) 70fa91619c(M4-1) f60eebf3ee(M4-2) 5b2c7dff5c(M4-3) 21c4c92aae(M4-4)。
+
+→ %12 へ handoff: M5 (CLAUDE.md 4-hunk landing, Rs 最終文言 GO 後) + M6 (validate.sh 全 layer + 層2 post-debate + 層5 + DoD 照合)。C2 dry-run FP report + M2 schema annex は eval_runs に納品済。%10 は READ-ONLY 待機、追加 dispatch 受領可。
+
+2026-07-02 20:24 JST

@@ -1,0 +1,27 @@
+[COORD2 %10 -> RS-TECH-LEAD %12] ACK + GROUNDING + M0 RESULT + HOLD (1 query, manifest collision)
+
+== ACK ==
+Planning-Surfaces-Consolidation M0-M4 charter RECEIVED (fresh ctx post-compact). self-ID $TMUX_PANE=%10 (not display-message).
+
+== GROUNDING (BINDING 2 doc 読了 + upstream + node) ==
+- DESIGN v2 (148L): §2 T1-T9 / §3 3層 (A gen-contract strict-mode / B check_planning_consistency.sh=validate.sh layer7 C1-C5 / C CLAUDE.md 4-hunk) / §4 M0-M6 + 並行書込 protocol / §9 D1-D9. DECIDE=PASS-with-revisions.
+- DEBATE_R1 (42L): 33 challenges 全 ACCEPT/PARTIAL (REBUT 0). 4 CRIT 反映確認: theme1 (LTM-1 direct-write 禁止衝突→§3.5 v1.2 note) / theme2 (T4=Rs-gate) / theme3 (生成器 76/233 fallback+6 status coercion→strict verbatim passthrough + 忠実性 test(c)) / theme4 (並行append消失→collision gate). NHA=CHANGE_JUSTIFIED_WITH_REDUCTIONS.
+- upstream AUDIT §3 F1-F7 (現在真を1 surfaceで読めない=動機). node DoD(a)-(f), IN_PROGRESS, parent T-ROOT, P0 3件 COMMITTED.
+- Rs 承認取込: D1 実装GO / D3 LTM-1 v1.2 note (§3.5 blockquote verbatim, v1.1->v1.2) / D4 T4 freeze banner (07-Design 例外, 本charter=承認記録). 触らない: M5(CLAUDE.md 4 hunks)+D5(権限matrix)=%12 / D9 deferred / 04-Specs・02-Workflow・CLAUDE.md・prohibited.md=read-only / 07-Design=T4 banner+LEDGER:42 注記のみ.
+- L3 確認. /rule-check stage1 (実 diff)=私(%10), 層2 post-debate+層5=%12, DESIGN-GATE=N/A (reward/env/成功条件に無関係).
+
+== M0 (entry sha = 2c070442ef91a4c339692db9e6dac83bbd7867c1) ==
+- 地図 logical_decomposition.html (453KB) = CLEAN ✓ / LEDGER (52KB) = CLEAN ✓
+- index.md = ?? untracked (expected, M4/T8) / GOALS.md = gitignored (expected, M4/T3) / nest-tracker/ = ?? (M1.5)
+- ⚠ manifest (663KB) = ` M` 外来 uncommitted diff → M0 gate 発動.
+
+== HOLD (manifest collision, 1 query) ==
+manifest の uncommitted diff = +4 行 単一 hunk (tail L949-952): `## UPDATE 2026-07-02 (%12 RS-TECH-LEAD)` = 本タスク node の manifest 登録 block. mtime 14:02:49 = DESIGN §4 protocol-pt2 / DEBATE theme4 が cite した「%12 自身の 14:02 uncommitted block」実体. 他の diff は無し (diff --stat = 1 file, 4 insertions).
+論点: (i) これは C5 / banner / hunk-1 が禁止する `## UPDATE` block そのもの (=removed 対象 anti-pattern) かつ (ii) node は既に state.md に登録済 → manifest block は重複記録. M1 は narrative UPDATE 群を byte 保全で archive へ移設するので本 block も archive 行きにできる (N4 no-deletion 満たす) が、未 commit の %12 delta を私の commit に取り込む形になる (protocol「porcelain empty-or-own」非充足).
+判断が要る (M0 gate=HOLD / protocol-pt2=abort+re-merge の両睨み + %12 の content につき %12 専決):
+  A) [推奨] %12 が本 block を先に commit → 私は M1 で narrative->archive に byte 保全移設。baseline が index に入り clean、C5 freeze 値も archive 後に正しく確定。
+  B) %12 が「M1 archive 移設に含めてよい」と明示承認 → 私が本 block を archive file へ byte 保全 + live manifest から除去 (私の 1 commit に %12 delta を内包)。
+  C) discard (非推奨、N4 抵触; archive 経由のみ許容)。
+Recommendation = A. なお M1 は 地図/manifest 両方を quiet-window (%11 B1 landing 後) + %9/%11 hold-notice 下で行う設計 → 本 query 解決まで CP-A の書換 (地図含む) 全体を着手保留 (地図 CLEAN だが M1 verification は両者 bundle のため分割せず一括実行したい)。指示を待って M1 実行。
+
+2026-07-02 18:50 JST

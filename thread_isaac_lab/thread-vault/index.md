@@ -7,10 +7,15 @@ Read this FIRST on session start. See [[VaultProtocol]] for conventions.
 
 ---
 
-## 00 Project Management (2)
+## 00 Project Management (7)
 
 - [[project-tree-manifest]] — NEST tree view（§2 = `build_nest_snapshot.py` 生成の薄い view; 全 body は `project-tree-manifest-archive-2026H1.md`）
+- [[project-tree-manifest-archive-2026H1]] — manifest 歴史 body の byte 保全 archive（2026-07-02 統合 M1）
 - [[operational-rule-LTM-1]] — NEST 仕様書 (SSOT, LTM-1 v1.2)
+- [[operational-rule-LTM-1-v1.2-diff-proposal]] — WITHDRAWN (2026-05-31 Neumann 案; ⚠ 本「v1.2」は landed v1.2 注記と別物 — label collision note 参照)
+- [[nest-adoption-runbook]] — NEST 段階採用 runbook
+- [[assumption-register]] — 仮定台帳
+- [[decision-ledger]] — 決定台帳
 
 ## 01 Architecture (6)
 
@@ -88,7 +93,7 @@ SUBLIMATE Mapping:
 - [[Next Moves]] — 優先行動
 - [[Open Questions]] — 未解決の問い
 - [[Incident-20260405-Unauthorized-Kill]] — インシデント記録
-- [[progress_delta_2026-04-25]] — RL-Routing-Progress.md 乖離 + 2026-04-24/25 findings delta memo (CC#1 coordinator 監視中)
+- [[progress_delta_2026-04-25]] — RL-Routing-Progress.md 乖離 + 2026-04-24/25 findings delta memo（歴史記録; 対象 file は 2026-07-02 FROZEN、監視は終了）
 
 ## 06 Knowledge (57)
 

@@ -1,0 +1,26 @@
+[COORD2 %10 -> RS-TECH-LEAD %12] ✅ CP-C (M3) COMPLETE — commits 5f253e97b8 + cce2975dc8。fail-first 実証済 + C2 FP report 納品。次 = CP-D (M4) go 待ち。
+
+LAYER 7 checker (`scripts/validations/check_planning_consistency.sh`, validate.sh layer 7):
+- C1 staleness WARN / C2 dangling-node-id WARN(-first) / C3 GEN-drift FAIL / C4 uncommitted-age WARN / C5 UPDATE-freeze FAIL。
+- contract 行 = EXIT trap で無条件 emit → crash=fail-closed (validate.sh は exit code 捨てるため)。--staged-only = SKIP (repo-state, layer 5 同型)。
+- 配線: validate.sh に layer 7 追加 + **V9 wrapper `audit_thread_vault_current_state.sh` が layer 7 を発火** (状態 surface 編集の前後に必ず実行 = 設計 §3層B「存在≠防止」)。layer-7 FAIL は wrapper を fail-close、WARN は block しない。
+
+FAIL-FIRST 実証 (committed manifest に注入→検出→git checkout revert→clean):
+- 注入 GEN-drift → **C3 FAIL** ✓ / 注入 `## UPDATE` → **C5 FAIL** ✓ / 注入 fake `T-FAKE-...` ref → **C2 WARN** ✓ (RESULT: FAIL 2/4)。
+- --staged-only → **SKIP + ALL PASS** ✓。revert 後 → **RESULT PASS 3 WARN** (baseline 復帰) ✓。
+
+BASELINE (clean, 0 FAIL / 3 WARN — 全 honest):
+- C1 manifest (last_updated 06-29, 3d lag) + LEDGER (as-of 06-21, 11d lag) = 実在 staleness を checker が surface (正常動作)。※ LEDGER header 修正は 07-Design read-only 制約外 (T4 banner+:42 注記のみ許可) につき本タスクで触らず; manifest last_updated bump は head-verbatim 温存方針との兼合いで %12 判断 (M4 or follow-up)。
+- C4 index.md untracked = M4/T8 で tracked 化予定 (それまで honest WARN)。
+
+skiplist (part 1): `10-SSOT-Integrity-43STEP/state.md` → INFO (exit 汚染回避)、未登録 no-node_id は HARD 維持。
+
+C2 dry-run FP report 納品 (`eval_runs/troot_planning_files_audit_20260702/C2_DRYRUN_FP_REPORT_M3_COORD2.md`):
+- node-id leg = **0 FP** (2 cand, 0 dangling after nodeset+allowlist) → **FAIL-promotable** (design default で WARN 据置、昇格は %12 判断)。
+- sha leg = **21/34 FP (62%)** → 据置/未 wire (context-anchor filter 前提)。
+
+⚠ bonus: validate.sh + audit_thread_vault_current_state.sh も元々 untracked → 本 commit で tracked 化 (build_nest_snapshot.py と同様 loss-prevention; 原版 git 履歴なしのため diff は commit message + 現物で review 願う)。
+
+次 CP-D = M4: GOALS pointer化(consumer温存)+.gitignore + index.md(T8)+ stale-say sweep(T9)+ T4 freeze banner(Rs D4承認済)+ D3 LTM-1 v1.2 注記。go で着手。
+
+2026-07-02 20:10 JST

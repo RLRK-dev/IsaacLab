@@ -1,0 +1,15 @@
+[COORD2 %10 -> RS-TECH-LEAD %12] ACK — Planning-Surfaces-Consolidation M0-M4 charter RECEIVED (post-compact, fresh ctx). self-ID $TMUX_PANE=%10 confirmed (not display-message).
+
+GROUNDING (BINDING 2 doc 読了 + upstream + node):
+- DESIGN v2 (PLANNING_CONSOLIDATION_DESIGN.md, 148L): §2 T1-T9 processing, §3 3層 (A gen-contract / B check_planning_consistency.sh layer7 / C CLAUDE.md write-rule), §4 M0-M6 + 並行書込 protocol, §9 D1-D9. DECIDE = PASS-with-revisions.
+- DEBATE_R1 (42L): 33 challenges 全 ACCEPT/PARTIAL (REBUT 0), 22 theme, NHA=CHANGE_JUSTIFIED_WITH_REDUCTIONS. 4 CRIT (theme1 LTM-1 direct-write衝突→v1.2 note / theme2 T4=Rs-gate / theme3 生成器 lossy 76-233 fallback→strict-mode 忠実性契約 / theme4 並行append消失→collision gate) 全て v2 反映を確認.
+- upstream AUDIT §3 F1-F7: 「現在真を1 surfaceで読める場所が無い」= 本タスク動機. node state.md DoD(a)-(f), status IN_PROGRESS, parent T-ROOT, P0 3件COMMITTED(12ee5cd2a1/e05efab04a/8a3c265ad7).
+- Rs 承認取込: D1 実装GO / D3 LTM-1 v1.2 note (§3.5 blockquote verbatim, frontmatter/題名 v1.1->v1.2) / D4 T4 freeze banner (07-Design 例外書込, 本charter=承認記録). 触らない: M5(CLAUDE.md 4 hunks)+D5(権限matrix)=%12側 / handoff.md redirect=D9 deferred / 04-Specs・02-Workflow・CLAUDE.md・prohibited.md=read-only / 07-Design=T4 banner+LEDGER:42注記のみ.
+
+L-TRIAGE: L3 確認. 実 diff に /rule-check stage1 は私(%10)が実行, 層2 post-debate/層5 は %12. DESIGN-GATE=N/A (reward/env/成功条件に無関係の planning-surface hygiene).
+
+CP-A 着手宣言 (=M0+M1+M1.5):
+- M0 (read-only entry gate): 対象5 surface porcelain 確認 + entry sha 記録 → 外来 diff あれば HOLD.
+- M1: 地図(≤~60KB)/manifest(≤50KB) archive 分離 + footer/banner/stamp + gen_*.py scripts/昇格. 着手前に %9/%11 へ hold-notice (%12 pre-ACK済). 並行書込 protocol (re-read + porcelain empty-or-own + tail sha256, mismatch=abort+re-merge) 遵守.
+- M1.5: git add docs/nest-tracker/ + commit (M2 より先).
+CP ごとに commit hash + 検証出力を checkpoint 報告. 判断に迷えば HOLD → %12. 想定 3-5h (GPU 0).
