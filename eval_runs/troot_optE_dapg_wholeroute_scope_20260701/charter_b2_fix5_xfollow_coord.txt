@@ -1,0 +1,53 @@
+# FIX-⑤ CHARTER: canonical-route X-follow (%12 → %11) — STAGED, NOT ACTIVE
+# Activation: ONLY on %12 dispatch confirming Rs ⑤ GO (Opt-1). Until then: HOLD.
+# Drafted 2026-07-03 01:2x during Rs-wait. Node: T-ROOT-optE-route-dapg-C1C2.
+# Finding being fixed: b2_cpA_reach_screen_finding.md (CP-A structural BLOCK, commit 5cdcf511c9).
+
+## 1. Contract (what to build — X analog of caveat-a, offset-gated)
+Target: `_run_mujoco_grasp_route` in test_newton_clip_routing.py (Rs-LOCKED; edit authorized
+by Rs ⑤ GO only, scope = THIS contract, nothing else).
+
+- FIRE CONDITION: `scene_info.get("cable_xy_offset", (0.0, 0.0))[0] != 0.0` (dx != 0 only).
+  Note (:1668): scene_info collapses BOTH None and explicit (0,0) to (0.0, 0.0) — so unset,
+  (0,0), and (0,dy) ALL take the current constant-X path = the proven canonical behavior.
+  This is intentional: byte-identity of the None path is preserved BY CONSTRUCTION and the
+  nominal x2 + Y-only demos stay exactly on the banked trajectory.
+- MEASUREMENT: post-settle, adjacent to the caveat-a block (test:3862-3866), same grasp-region
+  mask (|Y - grasp_at| < 0.10 over cable_bodies), axis 0:
+  mean of state.body_q.numpy()[cable_bodies, 0] within the mask -> reassign x_grasp.
+  Cable ∥ Y so region X ≈ constant; mean is well-defined.
+- ORDERING: reassignment must precede ALL physics consumers (:3881 hover onward, :3919 lift,
+  :3943 sample, :3952 route waypoints). Echo at :5902 reads x_grasp at echo time -> reports the
+  followed value automatically; verify this in your report.
+- KNOWN STALE CONSUMER (accepted, do NOT fix): :3715 camera midpoint `_mx` (record_video only,
+  computed pre-settle) -> framing shift <= 20mm at dx=±20 = harmless. Document in report.
+- ECHO: print a caveat-a-X line ([S6_ROUTE] style): nominal GRASP_X, measured X, delta mm.
+- NOTHING ELSE: no other route changes, no marker-adjacent edits, no og/spec edits.
+
+## 2. Gates (mandatory, before %12 review)
+- /geometric-design output ATTACHED (position-derivation change = forced gate): cross-section
+  コ claw vs cable at dx = 0/±8/±10/±20 (with/without follow), LATERAL_MAX_MM=9.0 margin table,
+  settle-ε sensitivity, 5-step causal chain (offset -> settle -> measure -> re-center -> grasp).
+- Diff review readiness: additive-only, dx=0 path byte-identical BY INSPECTION (the fire
+  condition guards every new line).
+
+## 3. Proof runs (cuda:0; authorized by the same Rs ⑤ GO; MUJOCO_GL=egl + unset DISPLAY)
+- RUN-1 None-path byte-identity re-proof: canonical run, CABLE_XY_OFFSET UNSET ->
+  route_c2_pin.json sha256 MUST equal
+  e01ac1fad2ff415538a53c9786a9ed6060cb189b99a4ab6fc5fdda619717df6a and SUCCESS reproduced.
+  Mismatch = STOP + report (do not debug inline).
+- RUN-2 dx=+20 confirm (wire-then-validate physical datapoint): CABLE_XY_OFFSET="0.020,0".
+  Pre-registered expectations: measured-X echo ≈ +20mm re-center; PASS bar = grasp-capture +
+  lift HOLD (existing gates); full-route SUCCESS = expected-but-informative (seat outcome per
+  spec §3.4 classification). Grasp fail => STOP + report plainly (falsification output).
+  §運用14 video leg on RUN-2 via skill-path (video-analyst; claw-zoom at grasp; slip-onset).
+- CP-A' re-screen: update the structural feasibility table -> expected 13+4 all feasible (>=6
+  floor cleared). Table goes in the report doc.
+
+## 4. Discipline
+- 0-commit until %12 縮退 review (report CP-⑤a = impl + geometric-design; CP-⑤b = RUN-1/RUN-2 +
+  CP-A' table; then HOLD for review -> commit decision -> CP-B resume decision).
+- Timestamps: run `date` in the SAME turn as message composition (your CP-A ACK was stamped
+  01:14 while citing commit 5cdcf511c9 created ~01:17 — stale early-turn stamp; re-fetch at
+  write time per records-must-match-fact).
+- Artifacts under eval_runs/troot_optE_dapg_wholeroute_scope_20260701/ (b2_fix5_* prefix).
