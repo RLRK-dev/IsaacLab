@@ -25,7 +25,7 @@ program_status: |
   Historical COMPLETE statuses are NOT product/launch GO.
 spec_version: LTM-1 v1.1
 runbook_version: nest-adoption-runbook v1.1
-adoption_phase: NEST first formal manifest deployment (T-ROOT-COORD#s2 セッション、Y2 採択経) + T-Meta-Multi-Pane-Orchestration-Patterns init (2026-05-04T14:00、L0 Rs proxy approve T-ROOT-COORD#s11 ~14:00 JST、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion 全 tier 適用、V2 design Axis 4 + Gap D + V4 proposal の operational deepening、4-wave evolution canonical + L0-Coordinator role 6 主役 + 12 anti-patterns catalog) + (legacy below) + T-Empirical (L1.D capability axis umbrella) 起票 (2026-04-28T14:25、Option A 採択経 7-CC Pre-Debate verdict、CHANGE_JUSTIFIED_PARTIAL_minimal) + T-IC-Phase-A-P3 init (2026-04-29、Rs Option A boot resume) + close (2026-05-04T01:10、★A ABORT Phase 2 NO-GO + P4 pivot 採択経) + T-IC-P4-Cable-Seg-Cost-Lower init (2026-05-04T02:35、L0 Rs proxy approve T-ROOT-COORD#s11 ~02:30 JST、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion (a)+(b)+(c) 全 tier 適用) + T-Vision-Pose-MVP0 init (2026-05-04T02:55、L0 Rs proxy approve T-ROOT-COORD#s11 ~02:45 JST、Path A MVP-0 milestone child、Phase A1 prep complete + Phase A2+ pending SAM2 install Rs explicit permission) + T-Vision-DR-Impl-Phase0-PrepDesign init (2026-05-04T03:10、L0 Rs proxy approve T-ROOT-COORD#s11 ~03:10 JST、Vision-DR Tier 0 prep design phase、5 envs/dr/ skeleton + vision_dr_config.py SSOT skeleton + LL-Vision-DR-Impl-8DimMap.md 8-dim taxonomy impl map design memo 起票、body=NotImplementedError、TOUCH FORBIDDEN env/task_config/04-Specs 全遵守、impl trigger 前倒し boilerplate elimination 4-6h 圧縮見込み) + T-Vision-Fusion-Impl-Phase-0-Skeleton init (2026-05-04T03:11、L0 Rs proxy approve T-ROOT-COORD#s11 ~03:10 JST、Late Fusion + ObsAssembler skeleton design phase、4 new .py files NotImplementedError stubs + benchmark spec md + 4-cascade impl trigger 列挙、design memo Rs review pending precedent) + T-Skill-GC-PostKA7-PROPOSE-Prep init (2026-05-04T03:50、L0 Rs proxy approve T-ROOT-COORD#s11 ~03:50 JST、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion (a)+(b)+(c) 全 tier 適用、KA7 verdict 待ち期間 structural prep + AC apply transfer hooks integration、3-case PROPOSE skeleton (≥30% PASS Sub-option B/C escalate / 5-30% PARTIAL α.4-type reward shaping / <5% FAIL WM Cascade L1.E.2 escalate close) + 4 lessons (Empirical Mechanism Verification / Diagnostic-First / 5-CC NHA HOLD valid / Launch Instruction mtime check reapply) Grip-CLAMP context apply directive + Path Y #9 Grip apply candidate documented、design phase only TOUCH FORBIDDEN env/config files、precedent T-Skill-AC-Cross-Skill-Apply-Transfer-Design ~30 min 先行 wall の cross-skill anchor reuse pattern 経) + T-Meta umbrella + T-Meta-Path-Y-Precedent-Index 起票 (2026-05-04T03:55、L0 Rs proxy approve T-ROOT-COORD#s11 ~03:50 JST、Path Y precedent 9件 canonical taxonomy + 6 framework expansion proposals (3 primary + 3 secondary) generation task、cross-cutting meta capability axis 新規追加、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion 全 tier 適用) + T-Vision-L1A-Master-Integration-Design init (2026-05-04T05:00、L0 Rs proxy approve T-ROOT-COORD#s11 ~05:00 JST、T-Vision umbrella 4 leaves + 8 impl phase children cross-cutting integration view design phase 5th child、design memo `LL-Vision-L1A-Master-Integration.md` ~600-800 行起票、impl execution roadmap P0-P5 ~125-145h GPU + ~13h dataset + cuda:1/cuda:2 split + Mermaid dependency graph + CPM critical path P0 → M1 → M2 → M3 → M4 = ~114h sequential dominant + 10-row cross-leaf risk consolidation + GPU budget aggregate + 10-row cross-leaf OQ consolidation、impl spawn-ready 5-CC Pre-Debate L3 input artifact + Rs §3.1 #4 起動承認 reference designed、TOUCH FORBIDDEN 完全遵守) + T-Vision-Fusion-Impl-Phase-2-Benchmark-Design init (2026-05-04T14:00、L0 Rs proxy approve T-ROOT-COORD#s11 ~14:00 JST、T-Vision-Fusion umbrella 3rd child Phase 0+1 benchmark deepening + extension design phase only、design memo `LL-Vision-Fusion-Phase2-Benchmark.md` ~778 lines 起票、4-leaf granular metric formula explicit pin G-V11/V12/V13 + downstream env hook benchmark protocol 新規 add G-V14/V15 + 16-gate cascade consolidation G-V0~V15 + impl-ready 5 test files spec ~1500 LoC impl phase + risk register R-P2-1〜R-P2-10、Phase 0 + Phase 1 + Phase 2 で benchmark spec triple coverage、impl spawn-ready 5-CC Pre-Debate L3 input artifact triple coverage、TOUCH FORBIDDEN env / config / 04-Specs / Phase 0 stub body / Phase 1 design memo / 4 leaves design memo + state.md / 8 impl phase children state.md 全遵守) + T-Vision-Pose-MVP0-Impl-PhaseA1-Restart init (2026-05-04T15:00、L0 Rs proxy approve T-ROOT-COORD#s11 ~14:50 JST、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion (a)+(b)+(c) 全 tier 適用、Path A Phase A1 retroactive child node 補完起票、prior PhaseA1-CC ~02:55 で deposit 漏れだった child state.md / vault knowledge memo / memory entry 3 件 gap を formal NEST node + vault memo + memory entry で補完、6-deliverable scheme: state.md + `06-Knowledge/LL-Vision-Pose-PhaseA1-Restart-InstallPathSummary.md` ~210 lines (SAM2 install path 3 candidate trade-off Candidate A HuggingFace transformers default 推奨 / Candidate B facebookresearch sam2 PyPI fallback / Candidate C local clone alt + Charuco install path re-confirm cv2 4.13.0 既 ready + skeleton inventory sam2_segmenter.py 260 + pnp_pose_solver.py 509 + pose_estimator_core_v2.py 317 design memo §3/§4 cross-ref status + Rs permission request consolidated chat directive Phase A2 trigger 用) + parent T-Vision-Pose-MVP0/state.md cascade + Tier 2 deposit `_edit_requests/00018-T-Vision-Pose-MVP0-Impl-PhaseA1-Restart-init.md` + 本 manifest update + memory entry、Phase A2 (実 SAM2 install execute Rs explicit permission 必須) trigger ready 化、TOUCH FORBIDDEN strict 完全遵守 doc-only `git diff --name-only` 0 code file) + T-Vision-Fusion-Impl-Phase-3-Optimization-Design init (2026-05-04T14:50、L0 Rs proxy approve T-ROOT-COORD#s11 ~14:50 JST、T-Vision-Fusion umbrella 4th child Phase 0+1+2 architecture optimization deepening + extension design phase only、design memo `LL-Vision-Fusion-Phase3-Optimization.md` ~1015 lines 起票、4-axis architecture optimization: variant taxonomy 5 catalog (A pure concat baseline 採択 + post-MVP-3 candidate B concat+MLP / C 1-head cross-attention / D conf-gated / E hybrid LayerNorm) + latency budget refinement 11-row + memory footprint 6-row + variant benchmark plan、risk register R-O1~R-O10 (1 CRITICAL + 2 HIGH + 3 MEDIUM + 4 LOW)、parent §1.4 alternatives REJECTED status preserve (Cross-Attention/End-to-End CNN/Direct Concat REJECTED 不変、Variant C catalog のみ MVP-4+ promotion 起動時 Rs explicit REJECTED revisit dispositional approval gate)、Phase 0 + Phase 1 + Phase 2 + Phase 3 で architecture spec quadruple coverage、impl spawn-ready 5-CC Pre-Debate L3 input artifact quadruple coverage、variant promotion (B/C/D/E) は MVP-4+ trigger 別 task `CC-L1A-MVP4-VariantExploration-Impl` 起票候補、TOUCH FORBIDDEN env / task_config / 04-Specs / types.py / Phase 0 stub body / Phase 1 design memo / Phase 2 design memo / 4 leaves design memo + state.md / 8 impl phase children state.md 全遵守) + T-Meta-Cross-Pane-Coordination-Patterns init (2026-05-04T14:50、L0 Rs proxy approve T-ROOT-COORD#s11 ~14:50 JST、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion 全 tier 適用、Wk:60% HARD stop 拡張 directive、T-Meta umbrella 4th child cross-pane (BETWEEN-pane) coordination patterns + cross-pane anti-patterns canonical taxonomy、sister Multi-Pane-Orchestration-Patterns WITHIN-pane scope の BETWEEN-pane orthogonal counterpart (重複 < 20% cumulative verified §10 orthogonality table 経)、5 axis canonical (parent-child NEST cascade + sibling sync (Tier 2 deposit numbering safe-adoption rename + manifest cumulative merge atomic Python write race-tolerant) + handoff signal propagation per-session signal file naming + L0-mediator bidirectional routing + cross-pane dependency synchronization) + Pattern A-Y catalog + 12 anti-patterns CAP-1〜CAP-12 catalog + severity matrix BLOCK 4 / WARN 5 / OBSERVE 3 + known-incident attribution chronology + LTM-1 v1.2 candidate output CV1-CV4 framework expansion proposals + safe-adoption rename self-application empirical demonstration (00018 5-sister coexist → 00019 escalate)、TOUCH FORBIDDEN strict 完全遵守 (CLAUDE.md / prohibited.md / LTM-1 v1.1 / env / config files 全 unchanged)) + T-Vision-Fusion-Impl-Phase-1-Baseline-Design init (2026-05-04T19:30、L0 Rs proxy approve T-ROOT-COORD#s11 ~19:30 JST、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion 全 tier 適用、Wk:70% HARD stop、T-Vision-Fusion umbrella 5th child Phase 1 baseline design memo backward-fill = Phase 0 (skeleton) + Phase-1-Architecture (dynamic behavior orthogonal axis) + Phase 2 (vision-side accuracy) + Phase 3 (variant taxonomy + latency + memory) は全 post-Fusion 前提で確立されたが vision-off / no-fusion baseline measurement reference が gap として残存、本 leaf で backward-fill design phase only、design memo `LL-Vision-Fusion-Phase1-Baseline.md` ~700 lines 起票、4-axis backward-fill: (1) No-fusion architecture spec = Variant Z1 (45D no-vision baseline、existing per-skill trained policy 直引き、Phase 0 skeleton .py modules complete bypass) + Variant Z2 (50D zero-init bit-identical baseline、`migrate_first_layer_45_to_50` script 経 CC4 v3.2 §3 Appendix E.5 zero-init invariant 経 bit-identical to Z1 by construction、Variant A pure concat passthrough predecessor reference)、(2) Baseline metric definition = per-skill (5 skills) per-mode (det/stoch) per-seed (5 seeds) SR + bootstrap CI 95% (resample 1000) + per-clip-index SR distribution (5-clip routing 1-clip ablation) + Z1 vs Z2 bit-identical smoke gate (~50 min pre-execution、SR delta < 0.5pp tolerance)、(3) Phase 2/3 differential + integration = 5-axis design integration completeness matrix + Phase 2 §8 5-skill ablation matrix C-1 baseline cell upstream prerequisite + Phase 3 §2 Variant A baseline starting point pin + AC fine-tune (P4) value_loss baseline reference、(4) Eval protocol + per-skill matrix = ~2500 ep total + wall ~12-15h GPU sequential per-skill stratified、risk register 7 row R-B1~R-B7 (1 CRITICAL R-B1 bit-identical gate failure + 2 HIGH ckpt regression + seed-fragile + 2 MEDIUM per-clip + wall budget + 2 LOW)、Phase-1-Architecture-Design とは orthogonal axis sister parallel (本 baseline = no-fusion measurement axis、Phase-1-Arch = post-Fusion dynamic behavior axis、scope 重複なし)、5-axis design integration completeness 達成、impl spawn-ready 5-CC Pre-Debate L3 input artifact quintuple coverage (旧 quadruple → 新 quintuple) Phase 0 + Phase-1-Arch + Phase 1 Baseline + Phase 2 + Phase 3、actual baseline measurement execution は別 task `CC-L1A-Phase-5-4-Baseline-Measurement` で fold-in (本 design pickup 経の subsequent CC session)、Tier 2 deposit `_edit_requests/00020-T-Vision-Fusion-Impl-Phase-1-Baseline-Design-init.md` (00019 5-sister coexist 経 next-free 00020 single deposit per T-Meta-Cross-Pane-Coordination-Patterns §3 Pattern E race-aware safe-adoption rename precedent 内)、TOUCH FORBIDDEN strict 完全遵守 doc-only `git diff --name-only` 0 件 in-scope outside allowed touch list (env / task_config / 04-Specs / types.py / Phase 0 stub body / Phase-1-Arch design memo / Phase 2 design memo / Phase 3 design memo / 4 leaves design memo + state.md / 9 impl phase children state.md 全 unchanged)) + T-Vision-Pose-MVP0-Impl-PhaseA2-Design init (2026-05-04T19:50、L0 Rs proxy approve T-ROOT-COORD#s11 ~14:50 JST、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion (a)+(b)+(c) 全 tier 適用、Wk 70% HARD stop、Path A MVP-0 Phase A2 design phase 8-deliverable scheme: state.md ~228 行 + a2_design.md ~543 行 §0-§10 (PhaseA1-Restart inheritance + SAM2 install execution plan Candidate A HuggingFace primary 7-step procedure + Candidate B/C fallback decision tree + recovery paths HF rate limit / SAM2_BUILD_CUDA fail / network outage + 4-test smoke acceptance T1-T4 + Sam2Segmenter.forward NotImplementedError 解消 plan ~30-50 LoC + PnpClipPoseSolver.establish_correspondence Phase A2.5 separate sub-task plan ~50-100 LoC + risk register R-A2-1〜R-A2-12 CRITICAL 2 / HIGH 4 / MEDIUM 3 / LOW 3 + GPU sequencing cuda:2 priority CPU fallback + Phase A3 readiness gate 7 prerequisite checklist + Rs permission request consolidated chat directive + 6 OQs OQ-A2D-1〜OQ-A2D-6) + parent T-Vision-Pose-MVP0 cascade + grandparent T-Vision-Pose cascade + Tier 2 deposit `_edit_requests/00020` (9-sister coexist multi-pane race observed per CAP-1 / Pattern E boundary case > 5-threshold、accept-boundary disposition、deposit content unchanged) + 本 manifest update + memory entry + summary report、PhaseA1-Restart (00018 deposit 2026-05-04T15:00) logical successor design phase、Phase A2 actual install execute 別 child node `T-Vision-Pose-MVP0-Impl-PhaseA2-SAM2-Install` 起票候補 trigger ready 化、TOUCH FORBIDDEN strict 完全遵守 doc-only `git diff --name-only` 0 code file、external download 不要) + T-Vision-CableState-Impl-Phase-4-Validation-Execute-Spec init (2026-05-04T19:40、L0 Rs proxy approve T-ROOT-COORD#s11 ~19:40 JST、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion (a)+(b)+(c) 全 tier 適用、Wk 70% HARD stop、T-Vision-CableState 配下 6th child Phase 4 Validation execute spec — executable runbook layer design phase only、Phase 4 Validation Design memo (~1515 行、§3-§11 の WHAT/HOW spec) を WHEN/WHERE layer に finalize、~948 行 execute spec memo + ~237 行 state.md doc-only + 0 GPU + ~1-2h wall、test script structure 11 test file taxonomy + pytest marker 6-tier scheme (cpu/gpu/scripted/random/e2e/regression) + dataset 3 generation CLI + SHA-256 freeze + manifest file + acceptance gate runner CLI + PASS/FAIL exit code matrix 4 codes + failure attribution invocation + GT comparison wrapper + R6 boundary preservation test + per-Phase regression matrix Phase 1-4 cumulative + cross-Phase consistency check + AST audit signature + auto-runner single-command + 6 sub-command (generate/run/report/regress/clean/ablate) + chain pattern + timestamped output dir + CI/CD hooks、Phase 7 起票 spec source として boilerplate elimination 累積 ~5-8h 圧縮見込み (Phase 4 Validation Design 単独より ~2-3h 追加圧縮)、Tier 2 deposit `_edit_requests/00021-T-Vision-CableState-Impl-Phase-4-Validation-Execute-Spec-init.md` (00019 5-sister + 00020 8-sister mass-spawn 経 safe-adoption rename 00021 採用 per cross-pane-coordination-patterns §3 Pattern E、empirical violation evidence + self-application canonical mitigation rule demonstration)、TOUCH FORBIDDEN strict 完全遵守 doc-only `git diff --name-only` 0 code file in-scope (env / task_config / 04-Specs / types / vision_pipeline / wrist_camera_manager / cable_state*.py / Phase 1+2 既存 test files / Phase 4 Validation Design memo / 新規 .py file (tests/q5_validation, scripts/run_q5_*.py) / 新規 dataset file (data/q5_eval_dataset/) 全 unchanged)、Sibling structural pattern 6th structural sibling = Phase 4 Validation Design ↔ 本 Execute Spec paired layer = T-WM-G2-Implementation-Sequence-Design ↔ Master-Roadmap operational deepening pair precedent と同 pattern) + T-CLAMP-R-Train-Phase-2-Smoke-Execute-Spec init (2026-05-04T19:40、L0 Rs proxy approve T-ROOT-COORD#s11 sub-agent、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion (a)+(b)+(c) 全 tier 適用、Wk:70% HARD stop upgrade per Rs directive (Phase 2 Smoke-Plan Wk 60% から 10pp 拡大)、T-Skill-CR umbrella 6th child Smoke-Plan §2-§7 design intent の operational layer concretization (smoke 起動前 pre-flight checklist + runbook + 3-stage acceptance schema) design phase only、design memo `T-CLAMP-R-Train-Phase-2-Smoke-Execute-Spec/execute_spec.md` ~732 行 §0-§9 起票、CUDA_VISIBLE_DEVICES=2 + world-count 64 (alt 32/16 OOM fallback) + iter-count 50 max + episode breakdown ~6400 trial samples/iter (64 worlds × ~100 ep eval window) + total ~320,000 samples for 50 iter + output dir convention `logs/clamp_r_train_smoke_seed42_<YYYYMMDD_HHMMSS>/{stdout.log, model_best.pt, model_NN.pt, train_summary.json, tensorboard/, env_config_snapshot.json}` 完全階層 + post-eval `eval_runs/...det_<timestamp>/` + RUN_METRICS canonical `data/test_clamp_r_train_smoke_seed42_<run_id>/RUN_METRICS.json` + forensic `_forensic.pt` suffix prohibited.md L40 整合 + runtime ETA per-iter ~1-2 min train + total wall ~50-100 min train + ~30 min eval (T1 PASS only) = ~80-130 min total on cuda:2 + stop trigger wrapper script polling protocol (T1 saturation 5-window threshold check + kill -TERM PID + snapshot save / T2 plateau 10-window / T3 catastrophic 7 sub-tier T3a-g hybrid existing surr_rollback_count + smoke wrapper polling) + decision priority order T3 > T1 > T2 > T4 + decision matrix per iter range + fall-back trigger flow (T1 PASS 5-step path post-train det eval + variant adopt + multi-seed promotion separate child node 起票 / T2 plateau 4-step path Path A NULL acceptance NHA HOLD ★ + Path B Reward redesign + Path C Demo redesign + Path D B5 redesign + Path E Architecture rethink / T3 catastrophic 4-step path Path A Reward tighten + Path B Demo expand + Path C Initial state narrow + Path D NULL acceptance / RESULT_INCONCLUSIVE 4-step path / Path Y precedent #9 CLAMP-R apply protocol with NHA HOLD ★ vs PASS path 比較 framework) + RUN_METRICS aggregation v2 schema (18-field JSON + aggregation procedure 7 step + skill-agnostic generic refactor DEFER + multi-seed deferred separate child node) + 3-stage acceptance gate (G1.1-G1.8 pre-launch 8-criteria + G2.1-G2.7 post-train 7-criteria + G3.1-G3.6 post-eval 6-criteria + G7.4 G1-G10 self-check)、parent T-Skill-CR/state.md cumulative concurrent merge race-tolerant 6-children append-only [PROPOSE-Prep, Phase-1-PROPOSE, Phase-2-Smoke-Plan, Phase-3-Future-Roadmap-Draft, Sub-Tree-Audit-Initial-Design, Phase-2-Smoke-Execute-Spec] + Tier 2 deposit `_edit_requests/00021-T-CLAMP-R-Train-Phase-2-Smoke-Execute-Spec-init.md` (00020 8-entry congestion 経で 00021 escalate adopt per Cross-Pane-Coordination patterns memo §3 Pattern E "5-entry coexist accept boundary case beyond 5-threshold" canonical mitigation rule 適用、sister T-Vision-CableState-Impl-Phase-4-Validation-Execute-Spec init 同 turn 19:40 で 00021 multi-coexist co-spawn observed Pattern E race-aware) + memory entry、actual smoke run = subsequent CC session で execute as Phase E.4 sub-step、本 Execute-Spec が pre-flight checklist として function、concurrent 19:30/19:40 sibling Phase-3-Future-Roadmap-Draft (post-verdict branched roadmap) + Sub-Tree-Audit-Initial-Design (umbrella meta-level review) と orthogonal axis differentiation: Execute-Spec=execution operational depth / Phase-3=post-verdict branched roadmap / Sub-Tree-Audit=umbrella meta-level review 重複 < 30% verified、CR 軸内 5-stage cascade complete (PROPOSE-Prep design rationale → Phase-1-PROPOSE launch-ready → Phase-2-Smoke-Plan smoke probe spec → Phase-2-Smoke-Execute-Spec operational layer → Phase-3-Future-Roadmap-Draft post-verdict roadmap) + 1 umbrella audit (Sub-Tree-Audit-Initial-Design)、AR 軸 5-stage と structural sibling pattern (orthogonal axis: CLAMP-R=execution depth / AR=launch readiness + verdict aggregation depth)、Sibling structural pattern paired layer = Smoke-Plan ↔ Execute-Spec operational deepening pair precedent と T-Vision-CableState-Phase-4-Validation Design ↔ Execute-Spec same-turn co-spawn と structural sibling、TOUCH FORBIDDEN strict 完全遵守 doc-only `git diff --name-only` 0 code file (newton_grip_env.py / task_config.py / mpc_config_*.py / step_table.py / routing_orchestrator.py / train_grip.py / generate_demos_mppi_m3_grip.py 全 unchanged)) + T-Meta-Cross-Pane-Coordination-Patterns-AP-13-Update init (2026-05-05T00:25、L0 Rs proxy approve T-ROOT-COORD#s11、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion 全 tier 適用、Wk:80% HARD stop directive、parent T-Meta-Cross-Pane-Coordination-Patterns canonical anti-patterns catalog の追記 update、AP-13 candidate「child init 経 multi-pane race condition」pattern formalize (WITHIN-pane scope、sister Multi-Pane AP catalog cumulative add candidate) + 既存 CAP-1〜CAP-12 severity matrix v1 → v2 update (CAP-1 BLOCK→WARN 確定降格 + CAP-12 BLOCK→WARN 確定降格 + CAP-2 WARN→OBSERVE 降格 candidate + 他 9 件維持) + 新 CAP-13 deposit numbering convergence pattern 追加 (BETWEEN-pane scope、CAP-1 race condition trigger view と orthogonal axis differentiation = convergence accumulation view) + known-incident attribution chronology wave-7 extension (wave-7-A 9-coexist mass-spawn Pattern E 5-threshold +4 violation magnitude + wave-7-B 3-coexist + wave-7-C 1+1 dissipation + wave-8 本 task 5-coexist self-application empirical demonstration)、TOUCH FORBIDDEN strict 完全遵守 (env / task_config.py / CLAUDE.md / prohibited.md / LTM-1 v1.1 / parent canonical anti-patterns memo + patterns memo / sister Multi-Pane deliverable / sibling PY-Update deliverable 全 unchanged、新 update file `ap13_update.md` 494 行 + state.md 238 行 + Tier 2 deposit 00026 別配置のみ touch、actual integration は Rs explicit decision で別 task `T-Meta-Cross-Pane-Coordination-Patterns-Severity-Matrix-V2-Formal-Integration` 起票候補 / sister Multi-Pane AP catalog cumulative add は `T-Meta-Multi-Pane-Orchestration-Patterns-AP-13-Update` 起票候補)、Tier 2 deposit `_edit_requests/00026-T-Meta-Cross-Pane-Coordination-Patterns-AP-13-Update-init.md` (00024 3-sister + 00025 2-sister coexist observed = 累積 5-sister Pattern E 5-threshold exact boundary case violation 経 safe-adoption rename canonical mitigation rule self-application empirical demonstration、本 task 自身が CAP-13 deposit numbering convergence (本 task で formalize する spec) self-application empirical demonstration の continued instance、wave-7-A 9-coexist mass-spawn 後 dissipation pattern と structural sibling)) + T-Meta-Cross-Pane-Coordination-Patterns-Wave-7-Retrospective-Update init (2026-05-05T05:30、L0 Rs proxy approve T-ROOT-COORD#s11、`feedback_autonomous_full_authority_2026-05-03` 3-step expansion 全 tier 適用、Wk:90% HARD stop directive、external なし design phase only、parent T-Meta-Cross-Pane-Coordination-Patterns 2nd child + grandparent T-Meta umbrella 7th child、wave-7 dispatch+completion empirical observation 経で CAP-14 candidate「post-/clear race-collision」+ CAP-15 candidate「double-Enter retry pattern observed wave-6/7」formalize + 既存 CAP-1〜CAP-13 severity matrix v2 → v3 update (CAP-13 BLOCK→WARN 確定降格 + CAP-14 WARN initial + CAP-15 OBSERVE initial = 15-entry catalog 累計 BLOCK 2 / WARN 9 / OBSERVE 4) + wave-7 dispatch+completion full chronology (wave-7-A 9-coexist 19:30 mass-spawn + wave-7-B/C/D dissipation + wave-8 cascade 00:00-01:00 cumulative 15 sister CCs + post-wave-7 calm window 4.5h gap) + new pattern proposal P1-P4 (P1 wave-aware reservation alternative spec / P2 send-keys quirks formal taxonomy / P3 /clear-PostHook signal protocol / P4 deposit numbering coordinator daemon design)、Naming reconciliation note: Rs directive original CAP-13/CAP-14 candidate naming は AP-13-Update CAP-13 numbering precedence と conflict、本 task で renumber to CAP-14/CAP-15 per first-issuance order rule、Rs review で confirm 受領想定、Tier 2 deposit `_edit_requests/00031-T-Meta-Cross-Pane-Coordination-Patterns-Wave-7-Retrospective-Update-init.md` (本 task boot ~05:30 → 00029 既 2-sister coexist + 00030 既 1-sister coexist detect 経 safe-adoption rename to 00031 per Pattern E + CAP-1 + CAP-13 + CAP-14 mitigation rule cumulative apply、本 task 自身が CAP-13 deposit numbering convergence + CAP-14 post-/clear race-collision spec self-application empirical demonstration の 4th cumulative instance、wave-9 boundary transition 2+1 sister coexist 観測)、TOUCH FORBIDDEN strict 完全遵守 (env / task_config.py / CLAUDE.md / prohibited.md / LTM-1 v1.1 / parent canonical anti-patterns memo + patterns memo / sibling AP-13-Update memo / sister Multi-Pane deliverable / sibling PY-Update deliverable 全 unchanged、新 wave7_retrospective.md 512 行 + state.md ~250 行 + Tier 2 deposit 00031 別配置のみ touch)) + T-Vision-Pose-MVP0-PhaseB-Trial-Neumann-Application init (2026-05-05T05:30、L0 Rs proxy approve T-ROOT-COORD#s11、Neumann Trial Node #1 instance per KN-Method-Neumann-on-NEST.md trial spec 採用条件 a) progress、Wk 90% HARD stop、Path A MVP-0 Phase B Trial Neumann Application 6-deliverable scheme: state.md ~610 行 dual frontmatter (Neumann N0-N8 全 sub-field populated + LTM-1 v1.1 12-field) + impl.md ~1038 行 §0-§7 (Summary + N0-N8 self-check inline + PhaseA2-Skeleton inheritance + Phase B scope + 5-file specification with body fill estimate + 部分 code skeleton + Integration test specification + Production-ready criteria 7 axis G-1〜G-7 + Risk register R-PB-1〜R-PB-12 + Cross-references + 7 OQs + Neumann trial 完了 self-check) + Tier 2 _edit_requests/00031 (00026-00028 sequential + 00029 5-sister Pattern E exact boundary case + 00030 1-sister 経 CAP-1 Pattern E safe-adoption rename next-free 採用) + parent T-Vision-Pose-MVP0 cascade + 本 manifest update + memory entry + summary report、PhaseA2-Skeleton paired layer pair extension (INTERFACE-CONTRACT → PRODUCTION-READY-SPEC)、adjacent sibling T-Vision-Pose-MVP0-PhaseB-Actual-Impl-Production-Code (concurrent pane 5 min 先行) と orthogonal axis sibling pair、TOUCH FORBIDDEN strict 完全遵守 doc-only、KN §採用条件 a) progress instance #1 = trial node 3件以上経 v1.2 改訂検討 trigger 起点)
+adoption_phase: "archived to project-tree-manifest-archive-2026H1.md (section adoption_phase); 24KB inline append-log moved 2026-07-02 (M2, audit P2-8); frontmatter key retained"
 note: |
   本 manifest は NEST first-adopter trigger (nest-adoption-runbook §1) の Y2 採択時 deployment 経で起票。
   Logic tree v1 + master list v2 を tree skeleton として採用 (Y2 = KA2 partial、γ tree v2 redesign defer)。
@@ -49,7 +49,248 @@ Logic tree v1 (`~/.claude/projects/-home-rlrk-IsaacLab/memory/project_logic_tree
 ## §2 全 node list (state.md exists or archived nodes only)
 
 <!-- GEN:NEST:BEGIN (build_nest_snapshot.py; 手書き禁止) -->
-_⏳ M2 で `build_nest_snapshot.py --emit-manifest-section` により per-node `state.md` 群から再生成予定。旧 node table（stale, 2026-06-23 世代）は `project-tree-manifest-archive-2026H1.md` §2 に byte 保全で移設。_
+
+_234 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
+
+| node_id | status | parent |
+|---|---|---|
+| `T-AC-RewardRedesign-Phase1` | COMPLETE | `T-Skill-AC` |
+| `T-AR-Alpha4b` | IN_PROGRESS | `T-Skill-AR` |
+| `T-CLAMP-R-Phase-3-Future-Roadmap-Draft` | IN_PROGRESS | `T-Skill-CR` |
+| `T-CLAMP-R-Train-PROPOSE-Prep` | IN_PROGRESS | `T-Skill-CR` |
+| `T-CLAMP-R-Train-Phase-1-PROPOSE` | IN_PROGRESS | `T-Skill-CR` |
+| `T-CLAMP-R-Train-Phase-2-Smoke-Actual-Runner` | IN_PROGRESS | `T-Skill-CR` |
+| `T-CLAMP-R-Train-Phase-2-Smoke-Execute-Spec` | IN_PROGRESS | `T-Skill-CR` |
+| `T-CLAMP-R-Train-Phase-2-Smoke-Plan` | IN_PROGRESS | `T-Skill-CR` |
+| `T-CLAMP-R-Train-Phase-2-Smoke-Run-Readiness-Check` | IN_PROGRESS | `T-Skill-CR` |
+| `T-Coord-NEST-Audit-Wave-2` | IN_PROGRESS | `T-ROOT-COORD` |
+| `T-Coord-NEST-Snapshot-Manifest-Final-Consolidation-Wave-6` | IN_PROGRESS | `T-ROOT-COORD` |
+| `T-Coord-NEST-Snapshot-Manifest-Final-Wave-7-Consolidation` | IN_PROGRESS | `T-ROOT-COORD` |
+| `T-Coord-Wave-6-Cross-Skill-Consistency-Audit` | IN_PROGRESS | `T-ROOT-COORD` |
+| `T-Coord-Wave-7-Cross-Skill-Consistency-Audit` | IN_PROGRESS | `T-ROOT-COORD` |
+| `T-DA-MPPI` | IN_PROGRESS | `T-L1C-PerSkill-RL` |
+| `T-Empirical` | IN_PROGRESS | `T-ROOT` |
+| `T-FC-MultiClip` | PENDING | `T-Forward-Capability` |
+| `T-FC-OffCenter-Grasp` | COMPLETE | `T-Forward-Capability` |
+| `T-FC-Perception` | PENDING | `T-Forward-Capability` |
+| `T-FC-SingleClip` | COMPLETE | `T-Forward-Capability` |
+| `T-Forward-Capability` | IN_PROGRESS | `T-ROOT` |
+| `T-GC-KA7-Noise-Sweep` | IN_PROGRESS | `T-Skill-GC` |
+| `T-IC-P4-Cable-Seg-Cost-Lower` | IN_PROGRESS | `T-Skill-IC` |
+| `T-IC-P4-Phase-2-Smoke-Plan` | IN_PROGRESS | `T-IC-P4-Cable-Seg-Cost-Lower` |
+| `T-IC-Phase-A-P3` | COMPLETE | `T-Skill-IC` |
+| `T-L1-B` | IN_PROGRESS | `T-ROOT` |
+| `T-L1-F` | PENDING | `T-ROOT` |
+| `T-L1-F-1` | PENDING | `T-L1-F` |
+| `T-L1-F-2` | PENDING | `T-L1-F` |
+| `T-L1-F-3` | PENDING | `T-L1-F` |
+| `T-L1-F-4` | PENDING | `T-L1-F` |
+| `T-L1-F-5` | PENDING | `T-L1-F` |
+| `T-L1-F-6` | PENDING | `T-L1-F` |
+| `T-L1-F-7` | PENDING | `T-L1-F` |
+| `T-L1-G` | PENDING | `T-ROOT` |
+| `T-L1-G-1` | PENDING | `T-L1-G` |
+| `T-L1-G-2` | PENDING | `T-L1-G` |
+| `T-L1-G-3` | PENDING | `T-L1-G` |
+| `T-L1-G-4` | PENDING | `T-L1-G` |
+| `T-L1-G-5` | PENDING | `T-L1-G` |
+| `T-L1-G-6` | PENDING | `T-L1-G` |
+| `T-L1-G-7` | PENDING | `T-L1-G` |
+| `T-L1-H` | IN_PROGRESS | `T-ROOT` |
+| `T-L1-H-H0` | IN_PROGRESS | `T-L1-H` |
+| `T-L1-H-H1` | PENDING | `T-L1-H` |
+| `T-L1-H-H2` | IN_PROGRESS | `T-L1-H` |
+| `T-L1-H-H2-SIM-Foundation-AppLauncher-Preflight-20260605` | COMPLETE | `T-L1-H-H2` |
+| `T-L1-H-H2-SIM-Foundation-Scene-Bringup-20260605` | COMPLETE | `T-L1-H-H2` |
+| `T-L1-H-H3` | PENDING | `T-L1-H` |
+| `T-L1-H-H4` | PENDING | `T-L1-H` |
+| `T-L1-H-H5` | PENDING | `T-L1-H` |
+| `T-L1-H-H6` | PENDING | `T-L1-H` |
+| `T-L1-H-H7` | PENDING | `T-L1-H` |
+| `T-L1C-PerSkill-RL` | IN_PROGRESS | `T-ROOT` |
+| `T-L1X-Substrate-Realism` | IN_PROGRESS | `T-ROOT` |
+| `T-Meta` | IN_PROGRESS | `T-ROOT` |
+| `T-Meta-Claude-Codex-Development-Methodology` | IN_PROGRESS | `T-Meta` |
+| `T-Meta-Cross-Pane-Coordination-Patterns` | IN_PROGRESS | `T-Meta` |
+| `T-Meta-Cross-Pane-Coordination-Patterns-AP-13-Update` | IN_PROGRESS | `T-Meta-Cross-Pane-Coordination-Patterns` |
+| `T-Meta-Cross-Pane-Coordination-Patterns-Wave-7-Retrospective-Update` | IN_PROGRESS | `T-Meta-Cross-Pane-Coordination-Patterns` |
+| `T-Meta-Multi-Pane-Orchestration-Patterns` | IN_PROGRESS | `T-Meta` |
+| `T-Meta-Operational-Framework-V2-Design` | IN_PROGRESS | `T-Meta` |
+| `T-Meta-Path-Y-Precedent-Index` | IN_PROGRESS | `T-Meta` |
+| `T-Meta-Path-Y-Precedent-Index-2026-05-04-Update` | IN_PROGRESS | `T-Meta-Path-Y-Precedent-Index` |
+| `T-Option-E` | COMPLETE | `T-L1X-Substrate-Realism` |
+| `T-Predicate-Redefinition` | IN_PROGRESS | `T-ROOT` |
+| `T-ROOT-COORD` | IN_PROGRESS | `T-ROOT` |
+| `T-ROOT-COORD2-AC-IC-GC-Audit-2026-05-13` | IN_PROGRESS | `T-ROOT-Pivot-Chain-Architecture-Review` |
+| `T-ROOT-Cable-Physics-Calibration-Packet-Design-2026-05-13` | IN_PROGRESS | `T-ROOT-Pivot-Chain-Architecture-Review` |
+| `T-ROOT-Chain-Architecture-Pivot-Design-Packet-2026-05-13` | IN_PROGRESS | `T-ROOT-Pivot-Chain-Architecture-Review` |
+| `T-ROOT-Chain-Context-Math-Diagnostic-2026-05-13` | COMPLETE | `T-ROOT-Pivot-Chain-Architecture-Review` |
+| `T-ROOT-D0-AC-PreCheck-Review-2026-05-13` | COMPLETE | `T-ROOT-Pivot-D0-AC-Pre-Check-Packet-2026-05-13` |
+| `T-ROOT-D0-AC-Revision-MicroDesign-2026-05-13` | COMPLETE | `T-ROOT-Pivot-D0-AC-Pre-Check-Packet-2026-05-13` |
+| `T-ROOT-D0-AC-Warmup-MicroDesign-2026-05-13` | COMPLETE | `T-ROOT-D0-AC-Revision-MicroDesign-2026-05-13` |
+| `T-ROOT-D0-Close-D1-ResetForensics-2026-05-13` | COMPLETE | `T-ROOT-Pivot-Chain-Architecture-Review` |
+| `T-ROOT-D1-LoRA-S1-Design-2026-05-13` | COMPLETE | `T-ROOT-D1-LoRA-Snapshot-2026-05-13` |
+| `T-ROOT-D1-LoRA-S1-Finger-Threshold-Design-2026-05-13` | COMPLETE | `T-ROOT-D1-LoRA-S1-Parity-Review-2026-05-13` |
+| `T-ROOT-D1-LoRA-S1-Gate-Review-2026-05-13` | COMPLETE | `T-ROOT-D1-LoRA-S1-Design-2026-05-13` |
+| `T-ROOT-D1-LoRA-S1-Heuristic-Saturation-Review-2026-05-13` | COMPLETE | `T-ROOT-D1-LoRA-S1-Phase2-Design-2026-05-13` |
+| `T-ROOT-D1-LoRA-S1-Parity-Review-2026-05-13` | COMPLETE | `T-ROOT-D1-LoRA-S1-Revision-2026-05-13` |
+| `T-ROOT-D1-LoRA-S1-Phase2-Design-2026-05-13` | COMPLETE | `T-ROOT-D1-LoRA-S1-Finger-Threshold-Design-2026-05-13` |
+| `T-ROOT-D1-LoRA-S1-Phase2a-Design-2026-05-13` | COMPLETE | `T-ROOT-D1-LoRA-S1-Phase2-Design-2026-05-13` |
+| `T-ROOT-D1-LoRA-S1-Revision-2026-05-13` | COMPLETE | `T-ROOT-D1-LoRA-S1-Gate-Review-2026-05-13` |
+| `T-ROOT-D1-LoRA-S1-S3-PPO-Design-2026-05-13` | COMPLETE | `T-ROOT-D1-LoRA-S1-Phase2a-Design-2026-05-13` |
+| `T-ROOT-D1-LoRA-Snapshot-2026-05-13` | COMPLETE | `T-ROOT-D0-Close-D1-ResetForensics-2026-05-13` |
+| `T-ROOT-Legacy-Architecture` | ARCHIVED | `T-ROOT` |
+| `T-ROOT-Phase2-V2-Provenance-Repair-Design-2026-05-13` | COMPLETE | `T-ROOT-Cable-Physics-Calibration-Packet-Design-2026-05-13` |
+| `T-ROOT-Pivot-Chain-Architecture-Review` | COMPLETE | `T-ROOT` |
+| `T-ROOT-Pivot-D0-AC-Pre-Check-Packet-2026-05-13` | COMPLETE | `T-ROOT-Pivot-D0-AC-Scripted-Base-Design-2026-05-13` |
+| `T-ROOT-Pivot-D0-AC-Scripted-Base-Design-2026-05-13` | COMPLETE | `T-ROOT-Chain-Architecture-Pivot-Design-Packet-2026-05-13` |
+| `T-ROOT-Planning-Surfaces-Consolidation-20260702` | IN_PROGRESS | `T-ROOT` |
+| `T-ROOT-R0-Measurement-Foundation` | COMPLETE | `T-ROOT` |
+| `T-ROOT-R1-Product-Predicate-Decision` | COMPLETE | `T-ROOT` |
+| `T-ROOT-R2-A-Track-A-S1B-5FCF-Default-Off-Checker-Syntax-Guardfix-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-5FCF-Default-Off-Runtime-Parity-Gate-Package-20260531` | DISCARDED | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-5FCF-Telemetry-Collection-Exact-Command-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-CLI-Schema-Gap-Review-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-Exact-Source-Diff-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-Exact-Spec-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-Post-Release-Hold-Redirection-Design-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-Redesign-Exact-Source-Diff-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-Redesign-Exact-Spec-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-Redesign-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-Reward-Design-Precheck-Gate-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-V2-Redesign-Exact-Source-Diff-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-V2-Redesign-Exact-Spec-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-V2-Redesign-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-V2-Reward-Design-Precheck-Gate-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-V21-Hold-Strategic-Reassessment-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D1-V21-Reward-Design-Precheck-Gate-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-D245-Default-Off-Runtime-Parity-Gate-Package-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Host-NVIDIA-Stability-Attestation-V1-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Host-NVIDIA-Stability-Root-Cause-Package-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-OptionB-Source-Alignment-Exact-Diff-Package-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-OptionB-Source-Alignment-Exact-Diff-Resealed-Package-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-OptionB-Source-Apply-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Post-Release-Retention-Architecture-Reassessment-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Provenance-Dtype-Exact-Diff-Package-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Provenance-Dtype-Source-Apply-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Retained-Zero-Video-Verification-Exact-Source-Diff-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Retained-Zero-Video-Verification-Exact-Spec-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Telemetry` | IN_PROGRESS | `T-ROOT-R2-Architecture-Redesign` |
+| `T-ROOT-R2-A-Track-A-S1B-Telemetry-Diagnostic-Artifact-Analysis-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Telemetry-Diagnostic-Comparative-Analysis-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Telemetry-Exact-Command-Package-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Telemetry-GPU-Query-Guardfix-Package-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-A-Track-A-S1B-Telemetry-Rebased-Exact-Command-Package-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
+| `T-ROOT-R2-Architecture-Redesign` | IN_PROGRESS | `T-ROOT` |
+| `T-ROOT-optE-route-dapg-C1C2` | IN_PROGRESS | `T-L1C-PerSkill-RL` |
+| `T-RS6-6` | IN_PROGRESS | `T-L1X-Substrate-Realism` |
+| `T-RS7-1` | IN_PROGRESS | `T-L1X-Substrate-Realism` |
+| `T-Retention-Model` | IN_PROGRESS | `T-Forward-Capability` |
+| `T-Skill` | IN_PROGRESS | `T-ROOT` |
+| `T-Skill-AC` | IN_PROGRESS | `T-Skill` |
+| `T-Skill-AC-Cross-Skill-Apply-Transfer-Design` | IN_PROGRESS | `T-Skill-AC` |
+| `T-Skill-AR` | IN_PROGRESS | `T-Skill` |
+| `T-Skill-AR-Architecture-Redesign-Control-Authority-Terminal-Hold` | COMPLETE | `T-Skill-AR-Architecture-Redesign-Design` |
+| `T-Skill-AR-Architecture-Redesign-Design` | COMPLETE | `T-Skill-AR` |
+| `T-Skill-AR-Architecture-Redesign-Terminal-Stability` | COMPLETE | `T-Skill-AR-Architecture-Redesign-Design` |
+| `T-Skill-AR-Architecture-Redesign-World-Distribution-Heterogeneity` | COMPLETE | `T-Skill-AR-Architecture-Redesign-Design` |
+| `T-Skill-AR-Dispatcher-v2-Fix-A-Apply` | COMPLETE | `T-Skill-AR` |
+| `T-Skill-AR-Dispatcher-v2-Fix-A-Spec` | IN_PROGRESS | `T-Skill-AR` |
+| `T-Skill-AR-Master-Verdict-6of6-Aggregate-Final-Apply` | COMPLETE | `T-Skill-AR` |
+| `T-Skill-AR-Master-Verdict-Aggregation-Design` | IN_PROGRESS | `T-Skill-AR` |
+| `T-Skill-AR-Master-Verdict-Aggregator-v2-Actual-Impl` | COMPLETE | `T-Skill-AR` |
+| `T-Skill-AR-Pair3-Completion-Monitor-Master-Verdict-6of6-Plan` | IN_PROGRESS | `T-Skill-AR` |
+| `T-Skill-AR-Phase-4-2-Attribution-Bridge` | COMPLETE | `T-Skill-AR-Architecture-Redesign-Design` |
+| `T-Skill-AR-Phase-4-3-H1-Terminal-Stability-Bridge` | COMPLETE | `T-Skill-AR-Architecture-Redesign-Terminal-Stability` |
+| `T-Skill-AR-Phase-4-Terminal-Metric-Layer-Baseline` | COMPLETE | `T-Skill-AR` |
+| `T-Skill-AR-Phase-5-A6-A2-Design-Re-Entry` | COMPLETE | `T-Skill-AR-Architecture-Redesign-Design` |
+| `T-Skill-AR-Phase-5-A6-Implementation-Packet` | COMPLETE | `T-Skill-AR-Architecture-Redesign-Design` |
+| `T-Skill-AR-Phase-5-RightArm-R1R3-Narrowing-Design` | COMPLETE | `T-Skill-AR-Architecture-Redesign-Design` |
+| `T-Skill-AR-Phase-Alpha4c-PROPOSE-Final` | IN_PROGRESS | `T-Skill-AR` |
+| `T-Skill-AR-Phase-Alpha4c-PROPOSE-Final-5-CC-Pre-Debate-L3-Launch-Readiness-Final` | COMPLETE | `T-Skill-AR` |
+| `T-Skill-AR-Phase-Alpha4c-PROPOSE-Final-Launch-Readiness-Checklist` | IN_PROGRESS | `T-Skill-AR` |
+| `T-Skill-AR-Phase-Alpha4c-PROPOSE-Prep` | IN_PROGRESS | `T-Skill-AR` |
+| `T-Skill-AR-Phase-Alpha4c-Pre-Debate-Prep` | IN_PROGRESS | `T-Skill-AR` |
+| `T-Skill-AR-Phase-Alpha4c-Smoke-Plan` | IN_PROGRESS | `T-Skill-AR` |
+| `T-Skill-CR` | IN_PROGRESS | `T-Skill` |
+| `T-Skill-CR-B5-Semantic-Design` | COMPLETE | `T-Skill-CR` |
+| `T-Skill-CR-Phase-2-Detailed-Design` | IN_PROGRESS | `T-Skill-CR` |
+| `T-Skill-CR-Phase-3-Design-Draft` | IN_PROGRESS | `T-Skill-CR` |
+| `T-Skill-CR-Sub-Tree-Audit-Initial-Design` | IN_PROGRESS | `T-Skill-CR` |
+| `T-Skill-GC` | IN_PROGRESS | `T-Skill` |
+| `T-Skill-GC-EvalGap` | COMPLETE | `T-Skill-GC` |
+| `T-Skill-GC-PostKA7-PROPOSE-Prep` | IN_PROGRESS | `T-Skill-GC` |
+| `T-Skill-IC` | IN_PROGRESS | `T-Skill` |
+| `T-Skill-IC-P4-Phase1-Sweep-Actual-Run-Readiness-Check` | COMPLETE | `T-Skill-IC` |
+| `T-Skill-IC-P4-Phase1-Sweep-Run-Trial-Neumann-Application` | ARCHIVED | `T-Skill-IC` |
+| `T-Skill-IC-P4-Phase1-Sweep-Wrapper-Actual-Impl` | IN_PROGRESS | `T-Skill-IC` |
+| `T-Skill-IC-P4-Phase1-Sweep-Wrapper-Impl-Spec` | IN_PROGRESS | `T-Skill-IC` |
+| `T-Skill-IC-P4-Phase2-Smoke-Wrapper-Actual-Impl` | COMPLETE | `T-Skill-IC` |
+| `T-Skill-IC-P4-Phase2-Smoke-Wrapper-Impl-Spec` | IN_PROGRESS | `T-Skill-IC` |
+| `T-Skill-IC-P5-Cost-Redesign-Design` | IN_PROGRESS | `T-Skill-IC` |
+| `T-VBD-AC` *(archived)* | ARCHIVED | `—` |
+| `T-Vision` | IN_PROGRESS | `T-ROOT` |
+| `T-Vision-CableState` | IN_PROGRESS (design APPROVED 2026-05-03 + impl Phase 1 COMPLETE 2026-05-04T03:50 + impl Phase 2 design 2026-05-04T03:55 + impl Phase 3 integration design 2026-05-04T05:05 + impl Phase 4 validation design spawn 2026-05-04T14:05 + master closure design spawn 2026-05-04T14:50 T-ROOT-COORD#s11、impl phased decomposition 採択経 Q1+Q2 = T-Vision-CableState-Impl-Phase-1、Phase 2 design (Stage C/D/E skeleton + impl-design memo) = T-Vision-CableState-Impl-Phase-2-Design、Phase 3 = Stages A-E end-to-end integration design + Q5 benchmark protocol initial = T-Vision-CableState-Impl-Phase-3-Integration-Design、Phase 4 = validation methodology + benchmark protocol final = T-Vision-CableState-Impl-Phase-4-Validation-Design、Master Closure = 4-phase design master closure synthesis + Phase 5/6/7 impl spawn-readiness assessment = T-Vision-CableState-Master-Closure-Design (cross-Phase synthesis 軸 + impl spawn forward-looking 軸、orthogonal vs Phase 3 horizontal cross-stage / Phase 4 vertical cross-criteria)、Phase 5 train + Phase 6 impl + Phase 7 benchmark execution は後続子 node 候補 — Phase 番号 renumber 2-shift 経 (Phase 3 で旧 Phase 3=Stage C train → 新 Phase 4 に 1-shift 済、本 Phase 4 = Validation Design 占有 経で更に 1-shift: 旧 Phase 4-6 → 新 Phase 5-7)、Phase 3 が Integration Design + Phase 4 が Validation Design を占有 + Master Closure が cross-Phase synthesis を占有 (Phase 番号 占有せず)) | `T-Vision` |
+| `T-Vision-CableState-Impl-Phase-1` | COMPLETE | `T-Vision-CableState` |
+| `T-Vision-CableState-Impl-Phase-2-Design` | IN_PROGRESS | `T-Vision-CableState` |
+| `T-Vision-CableState-Impl-Phase-3-Integration-Design` | IN_PROGRESS | `T-Vision-CableState` |
+| `T-Vision-CableState-Impl-Phase-4-Validation-Actual-Test-Runner` | IN_PROGRESS | `T-Vision-CableState` |
+| `T-Vision-CableState-Impl-Phase-4-Validation-Dataset-Prep-Spec` | IN_PROGRESS | `T-Vision-CableState` |
+| `T-Vision-CableState-Impl-Phase-4-Validation-Design` | IN_PROGRESS | `T-Vision-CableState` |
+| `T-Vision-CableState-Impl-Phase-4-Validation-Execute-Spec` | IN_PROGRESS | `T-Vision-CableState` |
+| `T-Vision-CableState-Master-Closure-Design` | IN_PROGRESS | `T-Vision-CableState` |
+| `T-Vision-DR` | approved (design phase 2026-05-03 Rs batch approve T-ROOT-COORD#s11) — NEST canonical lifecycle PENDING (impl trigger 待ち per §1 dependencies、T-Vision-Pose Stage 1-2 + T-Vision-CableState Stage A-E ready 後 IN_PROGRESS 遷移) | `T-Vision` |
+| `T-Vision-DR-Impl-Phase0-PrepDesign` | IN_PROGRESS | `T-Vision-DR` |
+| `T-Vision-DR-Impl-Phase1-D6-Background-Design` | IN_PROGRESS | `T-Vision-DR` |
+| `T-Vision-Fusion` | IN_PROGRESS | `T-Vision` |
+| `T-Vision-Fusion-Impl-Phase-0-Skeleton` | IN_PROGRESS | `T-Vision-Fusion` |
+| `T-Vision-Fusion-Impl-Phase-1-Architecture-Design` | IN_PROGRESS | `T-Vision-Fusion` |
+| `T-Vision-Fusion-Impl-Phase-1-Baseline-Actual-Impl-Integration` | IN_PROGRESS | `T-Vision-Fusion` |
+| `T-Vision-Fusion-Impl-Phase-1-Baseline-Actual-Impl-Skeleton` | IN_PROGRESS | `T-Vision-Fusion` |
+| `T-Vision-Fusion-Impl-Phase-1-Baseline-Design` | IN_PROGRESS | `T-Vision-Fusion` |
+| `T-Vision-Fusion-Impl-Phase-2-Benchmark-Design` | IN_PROGRESS | `T-Vision-Fusion` |
+| `T-Vision-Fusion-Impl-Phase-3-Optimization-Design` | IN_PROGRESS | `T-Vision-Fusion` |
+| `T-Vision-L1A-Master-Integration-Design` | IN_PROGRESS | `T-Vision` |
+| `T-Vision-Pose` | APPROVED_FOR_IMPL | `T-Vision` |
+| `T-Vision-Pose-MVP0` | IN_PROGRESS | `T-Vision-Pose` |
+| `T-Vision-Pose-MVP0-Impl-PhaseA1-Restart` | IN_PROGRESS | `T-Vision-Pose-MVP0` |
+| `T-Vision-Pose-MVP0-Impl-PhaseA2-Actual-Impl-Skeleton` | IN_PROGRESS | `T-Vision-Pose-MVP0` |
+| `T-Vision-Pose-MVP0-Impl-PhaseA2-Design` | IN_PROGRESS | `T-Vision-Pose-MVP0` |
+| `T-Vision-Pose-MVP0-Impl-PhaseB` | IN_PROGRESS | `T-Vision-Pose` |
+| `T-Vision-Pose-MVP0-Impl-PhaseB1-Eval-Resume-Plan` | IN_PROGRESS | `T-Vision-Pose` |
+| `T-Vision-Pose-MVP0-PhaseB-Actual-Impl-Production-Code` | IN_PROGRESS | `T-Vision-Pose-MVP0` |
+| `T-Vision-Pose-MVP0-PhaseB-Trial-Neumann-Application` | ARCHIVED | `T-Vision-Pose-MVP0` |
+| `T-WM` | IN_PROGRESS | `T-ROOT` |
+| `T-WM-G1` | IN_PROGRESS | `T-WM` |
+| `T-WM-G2` | IN_PROGRESS | `T-WM` |
+| `T-WM-G2-4-Task-Chain-Spawn-Execution-Gate-Verify` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-4-Task-Chain-Spawn-Launch-Final-Readiness` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A0` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A1-Setup` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A1-Train-Run` | COMPLETE | `T-WM-G2-P1-Layer1-Spawn-Coord` |
+| `T-WM-G2-A1-Train-Run-Qwen-Variant` | COMPLETE | `T-WM-G2-P1-Layer1-Spawn-Coord` |
+| `T-WM-G2-A2-PromptAdapter` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A3-Build-Run` | COMPLETE_WITH_LIMITATION | `T-WM-G2-P1-Layer1-Spawn-Coord` |
+| `T-WM-G2-A3-Build-Run-Qwen-Variant` | COMPLETE_WITH_LIMITATION | `T-WM-G2-P1-Layer1-Spawn-Coord` |
+| `T-WM-G2-A3-TensorRTLLM-Design` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A4-Pipeline-Integration-Design` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A5-Eval-Methodology-Design` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A6-Bench-Run` | PENDING | `T-WM-G2-P1-Layer1-Spawn-Coord` |
+| `T-WM-G2-A6-Risk-Register-Expansion` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A6-Risk-Register-N4-N8-Trial-Neumann-Application` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A7-Hook-Run` | PENDING | `T-WM-G2-P1-Layer1-Spawn-Coord` |
+| `T-WM-G2-A8-Integration-Test-Design` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A9-PreDeploy-ClusterG-Audit-Hook-Actual-Script` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A9-PreDeploy-ClusterG-Audit-Hook-Spec` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A9-Production-Deploy-Design` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-A9-Production-Deploy-PRECHECK-Gate-Spec` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-Implementation-Sequence-Design` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-Master-Roadmap-Design` | COMPLETE | `T-WM-G2` |
+| `T-WM-G2-P1-Layer1-Spawn-Coord` | COMPLETE_WITH_LIMITATION | `T-WM-G2` |
+| `T-WM-G2-Spawn-Readiness-Final-Consolidation` | COMPLETE | `T-WM-G2` |
+
+_legend — 非正準 status (raw, coercion なし): APPROVED_FOR_IMPL, COMPLETE_WITH_LIMITATION, IN_PROGRESS (design APPROVED 2026-05-03 + impl Phase 1 COMPLETE 2026-05-04T03:50 + impl Phase 2 design 2026-05-04T03:55 + impl Phase 3 integration design 2026-05-04T05:05 + impl Phase 4 validation design spawn 2026-05-04T14:05 + master closure design spawn 2026-05-04T14:50 T-ROOT-COORD#s11、impl phased decomposition 採択経 Q1+Q2 = T-Vision-CableState-Impl-Phase-1、Phase 2 design (Stage C/D/E skeleton + impl-design memo) = T-Vision-CableState-Impl-Phase-2-Design、Phase 3 = Stages A-E end-to-end integration design + Q5 benchmark protocol initial = T-Vision-CableState-Impl-Phase-3-Integration-Design、Phase 4 = validation methodology + benchmark protocol final = T-Vision-CableState-Impl-Phase-4-Validation-Design、Master Closure = 4-phase design master closure synthesis + Phase 5/6/7 impl spawn-readiness assessment = T-Vision-CableState-Master-Closure-Design (cross-Phase synthesis 軸 + impl spawn forward-looking 軸、orthogonal vs Phase 3 horizontal cross-stage / Phase 4 vertical cross-criteria)、Phase 5 train + Phase 6 impl + Phase 7 benchmark execution は後続子 node 候補 — Phase 番号 renumber 2-shift 経 (Phase 3 で旧 Phase 3=Stage C train → 新 Phase 4 に 1-shift 済、本 Phase 4 = Validation Design 占有 経で更に 1-shift: 旧 Phase 4-6 → 新 Phase 5-7)、Phase 3 が Integration Design + Phase 4 が Validation Design を占有 + Master Closure が cross-Phase synthesis を占有 (Phase 番号 占有せず)), approved (design phase 2026-05-03 Rs batch approve T-ROOT-COORD#s11) — NEST canonical lifecycle PENDING (impl trigger 待ち per §1 dependencies、T-Vision-Pose Stage 1-2 + T-Vision-CableState Stage A-E ready 後 IN_PROGRESS 遷移). 正準 = IN_PROGRESS / COMPLETE / DISCARDED / ARCHIVED (+ PENDING)._
+
 <!-- GEN:NEST:END -->
 
 ## §3 Active session list (並行 CC 干渉防止用、Tier 2 parent-mediated queue 経由 update)
