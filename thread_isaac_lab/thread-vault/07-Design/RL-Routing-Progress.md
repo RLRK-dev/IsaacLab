@@ -14,7 +14,7 @@ tags:
 # RL Routing Progress
 
 > 実行計画 (RL-Routing-Design.md Section 1.1) の進捗記録。
-> CCはPhase/Step完了時にこのファイルを更新する。
+> CCはPhase/Step完了時にこのファイルを更新する。（歴史記述 — 2026-07-02 FROZEN 以後は更新しない。上の banner 参照。Rs A7 承認）
 
 ---
 

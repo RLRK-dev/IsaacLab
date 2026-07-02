@@ -531,7 +531,7 @@ T-ROOT (5-clip vision 95%)
 ## §5 archive list (DISCARDED + ARCHIVED + COMPLETE、依存解決用 status snapshot 保持)
 ```
 
-**注 (v1.1):** §3 active session list の更新は §5.2 Tier 2 (parent-mediated queue) で実施、CC 直接 manifest write 禁止。
+**注 (v1.1):** §3 active session list の更新は §5.2 Tier 2 (parent-mediated queue) で実施、CC 直接 manifest write 禁止。**（v1.2 部分改定 — §2 GEN 領域は生成器経由のみ可、§5.2 直後の v1.2 注記参照。2026-07-02 Rs A3 承認）**
 
 ---
 
@@ -608,7 +608,7 @@ T-ROOT (5-clip vision 95%)
 | P11 (一部) | parallel session bound | empirical bound 観測後に追加 |
 | P14 | 「次 milestone」task DEFINE 内定義 | task ごとに自然に定まる、明文化は v3 |
 | P15 | 1-2 ヶ月期限の deadline / extension | empirical extension trigger 観測後 |
-| P17 | CC 自身が manifest update | §5.2 Tier 2 で reconciliation 経由、direct write は永久禁止 |
+| P17 | CC 自身が manifest update | §5.2 Tier 2 で reconciliation 経由、direct write は永久禁止 **（v1.2 注記 [§5.2 配下] により部分改定: §2 GEN 領域のみ生成器経由の CC 再生成可。2026-07-02 Rs A3 承認）** |
 | P18 | root 変更 5 step 詳細 | §8.1 で batch protocol 概略のみ採用、5 step 詳細は v3 |
 | P19 | anti-pattern detection 起動 block | §8.2 で検出責任 split、enforcement script は v3 |
 | P21 | rule 改訂時の v1/v2 mixed handling | §9 で 14 day handoff mandatory + read-optional のみ採用、詳細 backward compat policy は v3 |

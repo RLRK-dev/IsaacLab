@@ -144,7 +144,7 @@ _234 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-ROOT-Pivot-Chain-Architecture-Review` | COMPLETE | `T-ROOT` |
 | `T-ROOT-Pivot-D0-AC-Pre-Check-Packet-2026-05-13` | COMPLETE | `T-ROOT-Pivot-D0-AC-Scripted-Base-Design-2026-05-13` |
 | `T-ROOT-Pivot-D0-AC-Scripted-Base-Design-2026-05-13` | COMPLETE | `T-ROOT-Chain-Architecture-Pivot-Design-Packet-2026-05-13` |
-| `T-ROOT-Planning-Surfaces-Consolidation-20260702` | IN_PROGRESS | `T-ROOT` |
+| `T-ROOT-Planning-Surfaces-Consolidation-20260702` | COMPLETE | `T-ROOT` |
 | `T-ROOT-R0-Measurement-Foundation` | COMPLETE | `T-ROOT` |
 | `T-ROOT-R1-Product-Predicate-Decision` | COMPLETE | `T-ROOT` |
 | `T-ROOT-R2-A-Track-A-S1B-5FCF-Default-Off-Checker-Syntax-Guardfix-Package-20260601` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
