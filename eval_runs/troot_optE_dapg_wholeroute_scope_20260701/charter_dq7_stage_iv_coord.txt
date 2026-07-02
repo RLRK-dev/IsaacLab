@@ -1,0 +1,74 @@
+# [CHARTER %12→%11] DQ7 stage (iv) — restoring-augmented BC (denoising) 0-GPU pathfinder
+# Issued: 2026-07-03 05:5x JST (%12 RS-TECH-LEAD)。Node: T-ROOT-optE-route-dapg-C1C2 / DQ7。
+# 着手時に first_attempt=YES_WORKING を宣言してから開始せよ。
+
+## 0. Provenance (自ら read せよ — この charter の narrative を ground truth にしない)
+- B2 = OG STOP banked (4e7cbc70c7) → Rs「A」05:00 = B2 CLOSE + DQ7 起票 → **Rs 委任 05:3x「T-ROOT-OPS-SUPERVISORと相談して決めて良い」→ D-1〜D-5 確定 (%12 position + %9 CONCUR×8/CHALLENGE 0)**
+- 接地必読 (順): eval_runs/troot_optE_dapg_wholeroute_scope_20260701/ の
+  1) DQ7_OFFPATH_SCOPING_COORD2.md §1/§3/§4.2-(iv)/§5 (options + m1-m4 の定義元)
+  2) DQ7_CONSULT_PCT9_VERDICT.md (決定 + 拘束条件 1〜3)
+  3) b2_cpE_og/bc/og_gate.json (baseline 数値の一次計器) + b2_cpD_report.md
+  + node state.md DQ7 行 (決定の bank 先)
+- 語法: demo set = 「9 train-fit + 2 whole-demo-val + 3 held-out-hull」(%9 §運用28 調停) を使用
+
+## 1. Goal (この stage が答える問い)
+synthetic restoring supervision (co-move manifold 上の obs 摂動 + label 保存/co-move) で、
+B2 で STOP した restoring 系 OG metric が動くか? = capacity/data-format の 0-GPU pathfinder。
+- Outcome A → (ii) perturb-and-recover (物理収録 本命) へ前進 (別 charter、%12 発行)
+- Outcome B → 構造的所見 = 追加 spend なしで %12 へ報告 (Rs escalate は %12)
+- ⚠ (iv) 単独 GO は bankable でない (teach-to-the-test 循環、doc §4.2-(iv) m1-m4)。
+  本 stage の産物 = 「情報」であって「GO bank」ではない。
+
+## 2. Scope / touch-points (これ以外触るな)
+- thread_isaac_lab/scripts/route_demo_to_bc.py: augmentation branch 追加 (**default-off**)。
+  既存経路の挙動不変を回帰で証明: augmentation 無効時の出力 npz が既存 v2 出力と一致
+  (encode round(6) 一致 or byte 一致 — b2 heldout npz 生成時の証明形式を再利用)
+- thread_isaac_lab/scripts/og_offline_gate.py: **§3.3 判定 logic は不変**。判定計器 = committed
+  gate を UNCHANGED で使う。追加が必要なら additive CLI + default-off + 既存出力回帰のみ
+- thread_isaac_lab/scripts/bc_train_route.py: 変更なし想定。必要最小の additive CLI のみ可
+- 学習 = GPU-1 (Blackwell、CUDA_VISIBLE_DEVICES 明示)、~90s/run 級。train seed pin (B2 規約)
+- cuda:0 は使わない (本 stage に収録なし)。locked files (test_newton_clip_routing.py / spec) = 不触
+- **0-commit**: 納品 → %12 縮退 review → commit 判断は %12
+- §運用14 video leg = **N/A を loud 宣言**: 本 stage は offline data 変換 + 学習 + offline gate のみで
+  motion-bearing sim なし。sim を走らせる事情が生じたら STOP → %12
+
+## 3. PRE-REGISTRATION (%9 拘束条件1 — 数値は %12 固定済、train 前変更禁止)
+Baseline (b2_cpE_og/bc/og_gate.json + b2_cpD_report.md):
+  movable γ⊥ = {0} 2.497 / {1} 1.257 / {2} 1.041 / {3} 1.055
+  C2_REGRASP ee-only 0.973・pair seg-follow 0.282 / null_beat bar +0.15 / BC whole-demo val 0.000659
+- VALIDITY precondition (A/B 判定の前提。未達なら判定に進まず magnitude/rate を下げ再試行、最大 3 回で STOP→%12):
+  (v1) augmented BC の whole-demo val ≤ 0.001318 (= 2× baseline; on-path fit 破壊の検出)
+  (v2) OG-a decode RMSE = baseline 比 劣化 ≤10%
+- **Outcome A (全て充足で A)**:
+  (a) movable γ⊥ 4 cell 全て ≤ baseline の 50%: {0} ≤1.249 / {1} ≤0.629 / {2} ≤0.521 / {3} ≤0.528
+  (b) C2_REGRASP ee-only ≤ 0.487 (= 0.973 の 50%)
+  (c) augmented-null beat ≥ +0.15 (m2: replicate-null protocol + 同一 augmentation で学習した null に
+      対する beat — 「diversity でなく augmentation が効いた」の帰属。beat の計算式は B2 §3.3 の
+      null-beat 機構を再利用し、mini-spec で式を明記)
+- **Outcome B**: (a)-(c) いずれか未達 → STOP。追加 spend なし。%12 へ報告のみ
+- INFORMATIVE (非判定、必ず報告): pair seg-follow の移動 (0.282 → ?; seg-co-move leg の直接対象、
+  不動なら (ii) の Rs loud-notify に載せる) / D_heldout 方向 vs D_train 方向の per-cell 内訳 /
+  decoupled middles / carried {GUIDE_C2} / OG full table
+- 判定計器 = committed og_offline_gate.py §3.3 full table UNCHANGED (γ⊥ = SV worst-case が方向
+  worst を内包)。gate 側に held-out 方向の separate gating は導入しない (m1 は train sampler 側の制約)
+
+## 4. 実装自由度と checkpoint 制 (CP 毎に %12 へ pane 報告 + 日時 stamp)
+- **CP-(iv)-1 mini-spec (≤1 page、実装前 → %12 review 後に build 開始)**:
+  - augmentation sampler = og_b の co-move model 再利用 (_holder_axes、co_seg = p>=grasp_close;
+    pre-close phases = free dims): ee-leg (非 holder EE 摂動、seg 固定、label 保存) +
+    seg-leg (holder EE + seg joint 摂動、label co-move) の 2 leg (doc §4.2-(iv))
+  - m1: D_train / D_heldout 方向 split の定義 + magnitude 分布 (probe 族 2-10mm 整合、tail は提案) +
+    augmentation 率
+  - m2: augmented-null の学習 protocol (replicate-null と同 arch/seed 規約 + 同 augmentation) + beat 式
+  - 予測表 (B0a precedent): 各 metric の predicted 方向を build 前に記す
+- CP-(iv)-2 build (+回帰証明) → CP-(iv)-3 train ×2 (augmented BC + augmented-null、GPU-1) +
+  OG offline → CP-(iv)-4 §3 に基づく A/B 判定 + 報告 file = dq7_iv_pathfinder_report.md
+- 推定 wall ~1-2h。失敗 3 回 = ハードストップ → %12
+
+## 5. Gates (本 charter は免除しない — %9 O-1 明記事項)
+- 着手時 /rule-check stage1 (L-TRIAGE) 自走 + 結果報告。[RULE-CHECK] stage2 → build 前
+- prior-art V10 = %10/%9 が 2 回走破済 (E15 `B_BC_BUILD_SPEC.md:158` delta ①-④ 成立、
+  doc §2 + verdict §0)。再走で self-referential hit (DQ7 doc / LEDGER / state.md) が出るのは本 task の
+  provenance であり blocker でない — delta 記録済を cite して続行してよい
+
+— %12 RS-TECH-LEAD 2026-07-03 05:5x JST (Rs 委任下確定決定の執行)

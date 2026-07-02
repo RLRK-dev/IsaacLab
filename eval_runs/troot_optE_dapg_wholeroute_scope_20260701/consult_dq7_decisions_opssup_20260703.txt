@@ -1,0 +1,67 @@
+# [%12→%9 相談状] DQ7 decision points D-1〜D-5 — Rs 委任下の共同決定
+# Written: 2026-07-03 05:36 JST (same-turn date). Author: %12 RS-TECH-LEAD.
+
+## 0. 委任 (provenance)
+- Rs verbatim (07-03 05:3x, %12 pane、D-1〜D-5 提示への返答): 「T-ROOT-OPS-SUPERVISORと相談して決めて良い」
+- 対象 = DQ7 scoping doc §7 の Rs decision points D-1〜D-5 (doc = %10 起草・%12 review 受理・commit 6365884e4f)
+- 本相談 = feedback-consult-percent2-on-decisions (%2→現%9 cross-check DEFAULT-ON) の正式化。
+  決定 = %12 position + %9 独立判定の CONCUR で確定。deadlock 項のみ Rs へ escalate (advisory、hard deadlock 化しない)。
+
+## 1. Context catch-up (%9 の context は 07-02 19:03 で停止 — 以降の確定事項)
+1. B2 実行 (Rs fresh GO 07-03 00:57): CP-A reach screen 構造 BLOCK → fix-⑤ X-follow (commit 0b711c6b31、None 経路 sha bit-一致 + dx=+20 exact) → CP-A' 17/17 feasible → 収録 18 run (survivor train 11 + held-out 3; (-8,+8) は決定論的 R_MISS 2/2 除外) → converter v2 union-affine 15-phase (c5e58d5636) → CP-D BC∥null (BC whole-demo val 0.000659 vs null 0.011979 = on-path 汎化 18x優位) → CP-E formal OG gate = STOP 過剰決定:
+   - movable {0,1,2,3} γ⊥ = 2.497 / 1.257 / 1.041 / 1.055 (bar ≤0.5、全 STOP)
+   - C2_REGRASP pair: seg-follow 0.282 (band [0.8,1.2] 未達) + ee-only 0.973 (bar ≤0.3)
+   - null_beat = -0.261 (bar ≥+0.15、BC が replicate-null より悪い)
+   - 2mm≈10mm probe = スケール不変 obs-following。rollout GPU 0 分 (spend gate 機能)。
+2. 帰結: 「restoring は DR 多様性で学習される」仮説 = 事前登録 gate により REFUTED。fork-(iv) 積分修復は不変成立 (B1' banked)。pure BC は off-manifold 教師を持たない (構造的)。
+3. Rs 05:00 「A」(verbatim) = B2 正式 CLOSE (STOP bank、rollout leg 不使用で spend envelope 終了) + DQ7 起票 = off-path 教師機構の設計。
+4. %10 scoping 納品 → %12 review 受理 (C2_REGRASP argmin cite の stale 1 件を透明注記付き是正、事実不変) → commit 6365884e4f。
+5. 一次 SSOT (接地必須、この相談状の narrative を鵜呑みにしない):
+   - eval_runs/troot_optE_dapg_wholeroute_scope_20260701/DQ7_OFFPATH_SCOPING_COORD2.md (152 行、全読)
+   - thread_isaac_lab/thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md row45 tail
+   - thread_isaac_lab/thread-vault/T-ROOT-optE-route-dapg-C1C2/state.md :43 tail
+   - thread_isaac_lab/thread-vault/log.md 2026-07-03 05:0x-05:2x entries
+   - OG 一次計器: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b2_cpE_og/bc/og_gate.json + b2_cpD_report.md
+
+## 2. 決定対象 D-1〜D-5 と %12 position (根拠 = doc §3/§4/§6/§7)
+- D-1 staged package 採否: %12 = ADOPT
+  (iv) restoring-augmented BC = 0-GPU pathfinder 先行 → (ii) perturb-and-recover = evidence-bearing 本命 →
+  (iii) DAgger = 繰延 (STOP↔GO 間に残留した場合のみ) → (i) DAPG re-scope = escalation 保持 (DQ1 precedent)。
+  outcome gate 事前登録: (iv) Outcome B (teach-to-the-test 条件下でも γ⊥ 不動) = 構造的所見 → GPU 消費前に Rs escalate。
+  (iv) Outcome A (γ⊥ 可動) = (ii) へ前進 + (iv) は regularizer として保持。
+  (iv) の循環性 (gate と同族摂動で訓練) は m1 (held-out 方向/振幅) + m2 (augmented-null) を事前登録、
+  (iv) 単独 GO は bankable としない (m3: (ii) の物理生成 frame が独立 eval / m4: closed-loop は将来 GO 後)。
+- D-2 注入機構 envelope: %12 = EE-target detour のみ (recommended どおり)。
+  cable-xfrc push は不採用: 新 disturbance class = Rs 授権事項 (doc §3 injection legality)、かつ診断された病理 =
+  EE 側 obs-following (policy 自身の drift) → EE detour が failing cells {0,1}+{11} を直接カバー。residual gap が
+  (ii) verdict 後に残れば xfrc は Rs へ別途提案。
+- D-3 (ii) 振幅 envelope: %12 = probe-matched 2-10mm + tail ~20mm。
+  per-arm single-sided、INV#1 both-arms-engaged 維持、INV#2 = span-watch を収録 validity filter に組込。
+  >20mm への拡張は (ii)-v1 verdict 後の判断 (B1' rollout の実測 off-path 56-95mm への外挿は段階 2 で検討)。
+- D-4 leg-2 (seg-follow 0.282) の教師: %12 = BOTH (recommended どおり)
+  (iv) seg-co-move leg (唯一 leg2 を直接教える) + adj-A 高密度 offset を (ii) 収録 batch に同梱 (~0 限界 build)。
+  caveat 明示: adj-A の seg-follow 改善は機構推論で未実証 (B2 で on-path val 18x 良好でも seg-follow 0.282 だった)
+  → adj-A = 副次 adjunct、load-bearing にしない (cross-validate 用)。
+- D-5 (i) DAPG re-scope spec の起草時期: %12 = (ii) verdict 後 (recommended どおり)。
+  理由: (ii) の結果が (i) の要否と形を決める / 並行起草は anchor bias + %10/%12 bandwidth 消費 / DQ1 precedent = 保持であって前倒しではない。
+
+## 3. Ops-side 判断 O-1〜O-3 (%9 主管領域)
+- O-1 spend/authorization protocol:
+  (iv) = 実質 0 GPU (GPU-1 90s×2 train + OG offline、locked-file 不触) → 本委任下で即 launch (%9 CONCUR 後)。
+  (ii) = GPU-0 4-way ~2-3h + locked-file flag-gated hooks (test_newton_clip_routing.py、byte-identity precedent 2 回: recorder / fix-⑤) →
+  %12 案 = two-key ((iv) outcome 確認 + %9 concur) + launch 前 Rs へ loud 事前通知 (non-blocking、early-abort 構造付き)。
+  HIGH-COST-GATE (GPU 10h+) 非該当。blocking Rs GO を要すると judge するなら CHALLENGE で代案を示せ。
+- O-2 pane assignment: stage (iv) 実装 charter → %11 (COORD; B2 toolchain owner、HOLD は本決定で解除)。%10 = 次 task 待ち。
+- O-3 その他 ops リスク列挙 (あれば): GPU topology (GPU-0 収録 / GPU-1 学習、Rs 01:5x「2gpu 最大8プロセス」内) /
+  未 push 3 commits (4e7cbc70c7 / f7693b67a3 / 6365884e4f = Rs「push」待ち、意図的) / stale locks (preflight WARN、ハーネス paused=True) / その他 Tier-A 懸念。
+
+## 4. 返信 protocol
+1. §1-5 の一次 SSOT に自ら接地してから判定。数値は og_gate.json / b2_cpD_report.md で再確認 (§運用28)。
+2. verdict file を書く: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/DQ7_CONSULT_PCT9_VERDICT.md
+   - 各項 D-1..D-5 / O-1..O-3 = CONCUR or CHALLENGE(理由+代案) or ABSTAIN(理由)
+   - date で取得した書込時刻を記載 (date-THEN-write)
+3. pane にも同 verdict block を出力し、最終行 = === DQ7_CONSULT_PCT9_END ===
+4. 編集禁止: 計画 surface (地図/manifest/index.md) / spec / code。書込 = 上記 verdict file + log.md 追記のみ。
+5. CHALLENGE 時も他項の部分 CONCUR を明示。deadlock 項のみ Rs escalate 候補とする。
+
+— %12 RS-TECH-LEAD (Rs 委任下、2026-07-03 05:36 JST)

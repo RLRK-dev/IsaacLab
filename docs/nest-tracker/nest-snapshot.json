@@ -1424,13 +1424,19 @@
     },
     {
       "id": "T-ROOT-Planning-Surfaces-Consolidation-20260702",
-      "goal": "Rs 承認 2026-07-02 13:58「①②承認 少数化+整合機構の設計起案を進めて」: 計画 surface ~10 個を 4 コア (SOMA / RS71 / LEDGER / 地図) + node DB + journal に集約し、整合を 3 層 (生成 / 機械 checker / 書込 rule) で担保する。監査 = eval_runs/troot_planning_files_audit_20260702/PLANNING_AUDIT_REPORT.md の P1-6/P1-7/P2-8/P2-9/P2-10/P2-11 + 運用ルール提案の再パッケージ。",
+      "goal": "計画 surface ~10 個を 4 コア (SOMA / RS71 / LEDGER / 地図) + node DB + journal に集約し、整合を 3 層 (生成 / 機械 checker / 書込 rule) で担保する。",
       "means": "DoD: (a) 読む入口 = 地図 1 本 (live ≤~60KB) から SOMA/LEDGER へ到達可能、\n(b) manifest §2 が state.md 群から再生成され 2 回実行 0-diff (idempotent)、\n(c) validate.sh 新 layer が既知 dangling (SOMA:82「LEDGER row 53」型) を fail-first で検出後 clean、\n(d) GOALS.md / RL-Routing-Progress の有害・死亡記述が消滅 (freeze banner + pointer 化)、\n(e) CLAUDE.md 2 種変更 (§運用4 計画 surface 追加 + ポインタ差替) が Rs 承認文言どおり landing、\n(f) 全変更 atomic commit + 層2 post-debate + 層5 PASS。\n",
-      "status": "IN_PROGRESS",
+      "status": "COMPLETE",
       "dependencies": [],
       "parent": "T-ROOT",
       "children": [],
-      "session_history": []
+      "session_history": [
+        {
+          "session_id": "T-ROOT-Planning-Surfaces-Consolidation-20260702#s1",
+          "summary": "lead %12: 起票 → design v1 → 5体 pre-debate → v2 → Rs D1-D5 承認 → M0-M4 実装 (%10 委任, 11 commits) → M5 CLAUDE.md 4 hunks + D5 rows → M6 8-agent 検証 + findings 修正 landed → 完了報告 → Rs A1-A8 全 ACK (23:2x) → A3/A7 landing → COMPLETE",
+          "ts": "2026-07-02"
+        }
+      ]
     },
     {
       "id": "T-ROOT-R0-Measurement-Foundation",
