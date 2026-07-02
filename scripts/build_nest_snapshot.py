@@ -375,15 +375,25 @@ def emit_manifest_section() -> int:
 def check_manifest_section() -> int:
     """C3 helper: compare the current manifest §2 GEN region to the generator recompute. No write.
 
-    Exit: 0 = in sync / 1 = drift or GEN markers missing.
+    Exit: 0 = in sync (SOFT review items allowed) / 1 = drift, GEN markers missing, or HARD data
+    issue (unregistered no-node_id file / duplicate node_id). HARD grading mirrors emit so the
+    automatic V9→layer-7 path cannot stay green while emit would refuse (M6 CC3-1 fix): checker
+    and emitter previously skipped identically, silently dropping e.g. a duplicated node's row.
     """
-    region, rows, _manual = _build_manifest_region()
+    region, rows, manual = _build_manifest_region()
+    hard = [m for m in manual if m[0] == "HARD"]
     text = MANIFEST.read_text(encoding="utf-8")
     if GEN_BEGIN not in text or GEN_END not in text:
         print(f"C3 DRIFT: GEN:NEST markers not found in {MANIFEST.relative_to(REPO)}", file=sys.stderr)
         return 1
     current = text[text.index(GEN_BEGIN):text.index(GEN_END) + len(GEN_END)]
     if current == region:
+        if hard:
+            print(f"C3-DATA: manifest §2 in sync but {len(hard)} HARD data issue(s) "
+                  "(same grading as emit; fix the state.md data):", file=sys.stderr)
+            for sev, path, reason in hard:
+                print(f"  [{sev}] {path}: {reason}", file=sys.stderr)
+            return 1
         print(f"C3 OK: manifest §2 GEN region in sync ({len(rows)} nodes)", file=sys.stderr)
         return 0
     print("C3 DRIFT: manifest §2 GEN region != generator recompute "

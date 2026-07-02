@@ -13,8 +13,9 @@
 #   C5 UPDATE-freeze (FAIL)   : manifest '^## UPDATE' count > frozen baseline (0) — append-log ban
 #
 # validate.sh layer contract: emits human lines + LAYER7_FAIL=/LAYER7_WARN= at end.
-# The contract lines are emitted from an EXIT trap so a crash cannot fail-open to PASS
-# (validate.sh discards the exit code and reads only the contract lines).
+# Contract lines are emitted from an EXIT trap guarded by a COMPLETED sentinel: a mid-run crash
+# (set -u abort etc.) emits a C0 crash-FAIL instead of fail-opening to LAYER7_FAIL=0 — the trap
+# alone could NOT deliver fail-closed because FAIL_COUNT=0 is initialized before it (M6 CC3-2 fix).
 set -uo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
@@ -37,14 +38,16 @@ UNCOMMITTED_DAYS="${PLANNING_UNCOMMITTED_DAYS:-1}" # C4: 24h
 
 FAIL_COUNT=0
 WARN_COUNT=0
+COMPLETED=0
 NOW=$(date +%s)
 TMP=""
-trap '[ -n "${TMP:-}" ] && rm -rf "$TMP"; echo "LAYER7_FAIL=${FAIL_COUNT:-1}"; echo "LAYER7_WARN=${WARN_COUNT:-0}"' EXIT
+trap '[ -n "${TMP:-}" ] && rm -rf "$TMP"; if [ "${COMPLETED:-0}" != 1 ]; then echo "  [FAIL] C0 layer 7 crashed mid-run (incomplete execution)"; FAIL_COUNT=$((${FAIL_COUNT:-0} + 1)); fi; echo "LAYER7_FAIL=${FAIL_COUNT:-1}"; echo "LAYER7_WARN=${WARN_COUNT:-0}"' EXIT
 
 echo "=== Layer 7: Planning-surface consistency (M3) ==="
 
 if [ "$STAGED_ONLY" = "true" ]; then
     echo "  [SKIP] repo-state check (not staged-file scoped; cf. layer 5)"
+    COMPLETED=1
     exit 0
 fi
 
@@ -66,14 +69,19 @@ if [ -n "$log_newest" ]; then
     }
     _c1 manifest "$(grep -m1 '^last_updated:' "$MANIFEST" 2>/dev/null | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' | head -1)"
     _c1 map "$(grep -m1 'last_updated:' "$MAP" 2>/dev/null | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' | head -1)"
-    _c1 LEDGER "$(grep -m1 -iE 'as of|last[_ ]updated' "$LEDGER" 2>/dev/null | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' | head -1)"
+    _c1 LEDGER "$(grep -m1 -E '^## Ledger \(as of' "$LEDGER" 2>/dev/null | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' | head -1)"
 else
     echo "  [INFO] C1 skipped: no '^## 2026-' heading in log.md"
 fi
 
 # ---------------- C2 dangling node-id refs (WARN-first) ----------------
 if [ -f "$SNAPSHOT" ] && [ -x "$PY" ]; then
-    "$PY" -c "import json;[print(n['id']) for n in json.load(open('$SNAPSHOT'))['nodes']]" 2>/dev/null | sort -u > "$TMP/nodeset"
+    # membership = snapshot ids ∪ manifest §2 GEN-region ids (C3-guarded, machine-generated).
+    # The union closes two false-FAIL vectors (M6 CC3-3 / NHA-R3): archived nodes are in §2 but
+    # not in the default snapshot scan, and a new node reaches §2 via --emit-manifest-section
+    # before anyone reruns the default snapshot build.
+    { "$PY" -c "import json;[print(n['id']) for n in json.load(open('$SNAPSHOT'))['nodes']]" 2>/dev/null; \
+      sed -n '/GEN:NEST:BEGIN/,/GEN:NEST:END/p' "$MANIFEST" 2>/dev/null | grep -oE 'T-[A-Za-z0-9_.-]+'; } | sort -u > "$TMP/nodeset"
     if [ -f "$ALLOWLIST" ]; then grep -vE '^\s*#' "$ALLOWLIST" | grep -oE 'T-[A-Za-z0-9_.-]+' | sort -u > "$TMP/allow"; else : > "$TMP/allow"; fi
     # candidate backtick node-ids from surfaces, EXCLUDING the manifest GEN region (self-consistent)
     { sed '/GEN:NEST:BEGIN/,/GEN:NEST:END/d' "$MANIFEST" 2>/dev/null; cat "$MAP" "$LEDGER" "$INDEX" 2>/dev/null; } \
@@ -81,7 +89,8 @@ if [ -f "$SNAPSHOT" ] && [ -x "$PY" ]; then
     comm -23 "$TMP/cands" "$TMP/nodeset" | comm -23 - "$TMP/allow" > "$TMP/dangling"
     while IFS= read -r nid; do
         [ -n "$nid" ] || continue
-        echo "  [FAIL] C2 dangling node-id ref: \`$nid\` not in NEST node set (nor allowlist)"
+        echo "  [FAIL] C2 dangling node-id ref: \`$nid\` not in NEST node set (snapshot ∪ manifest §2; nor allowlist)"
+        echo "         (new node? run: env_isaaclab/bin/python scripts/build_nest_snapshot.py  # refresh snapshot + then --emit-manifest-section)"
         FAIL_COUNT=$((FAIL_COUNT + 1))
     done < "$TMP/dangling"
     soma_n=$(grep -oE '`T-[A-Za-z0-9_.-]+`' "$SOMA" 2>/dev/null | tr -d '`' | sort -u | comm -23 - "$TMP/nodeset" | comm -23 - "$TMP/allow" | grep -c .)
@@ -90,18 +99,35 @@ if [ -f "$SNAPSHOT" ] && [ -x "$PY" ]; then
         echo "  [WARN] C2 SOMA has ${soma_n} dangling node-id ref(s) — permanent WARN (04-Specs = Rs 専権)"
         WARN_COUNT=$((WARN_COUNT + 1))
     fi
-    echo "  [INFO] C2 node-id leg = FAIL (0-FP verified 2026-07-02, %12-approved); SOMA node-id = permanent WARN; sha-token leg = deferred WARN/unwired (62% FP)"
+    echo "  [INFO] C2 node-id leg = FAIL (0-FP verified 2026-07-02, %12-approved; membership = snapshot ∪ §2 GEN); SOMA node-id = permanent WARN; sha-token leg = deferred WARN/unwired (design-specified anchor extractor UNevaluated — owner %12, see design doc)"
 else
     echo "  [WARN] C2 skipped: nest-snapshot.json or python missing"
     WARN_COUNT=$((WARN_COUNT + 1))
 fi
 
+# ---------------- C2b LEDGER row-N prose refs (WARN) ----------------
+# Project convention: 'LEDGER row N' = LEDGER file LINE number (fragile on insertion above N).
+# WARN when N is beyond EOF or line N is not a table row ('|...') — the DoD (c) exemplar class
+# (SOMA:82「LEDGER row 53」型), which the node-id leg structurally cannot see (M6 CC4-3 fix).
+ledger_total=$(wc -l < "$LEDGER" 2>/dev/null || echo 0)
+{ sed '/GEN:NEST:BEGIN/,/GEN:NEST:END/d' "$MANIFEST" 2>/dev/null; cat "$MAP" "$INDEX" "$SOMA" "$LEDGER" 2>/dev/null; } \
+    | grep -oE 'LEDGER row [0-9]+' | grep -oE '[0-9]+$' | sort -un > "$TMP/rowrefs"
+while IFS= read -r rn; do
+    [ -n "$rn" ] || continue
+    tline=$(sed -n "${rn}p" "$LEDGER" 2>/dev/null)
+    if [ "$rn" -gt "${ledger_total:-0}" ] || [ "${tline#|}" = "$tline" ]; then
+        echo "  [WARN] C2b 'LEDGER row $rn' ref does not resolve to a LEDGER table line (file has ${ledger_total} lines)"
+        WARN_COUNT=$((WARN_COUNT + 1))
+    fi
+done < "$TMP/rowrefs"
+
 # ---------------- C3 GEN drift (FAIL) ----------------
 if [ -x "$PY" ] && [ -f "$GEN" ]; then
-    if "$PY" "$GEN" --check-manifest-section >/dev/null 2>&1; then
+    if "$PY" "$GEN" --check-manifest-section > "$TMP/c3out" 2>&1; then
         echo "  [PASS] C3 manifest §2 GEN region in sync with generator"
     else
-        echo "  [FAIL] C3 GEN drift: manifest §2 != generator (fix: build_nest_snapshot.py --emit-manifest-section)"
+        echo "  [FAIL] C3 GEN drift or HARD data issue (drift fix: --emit-manifest-section / C3-DATA: fix state.md data)"
+        sed -n '1,4p' "$TMP/c3out" | sed 's/^/         /'
         FAIL_COUNT=$((FAIL_COUNT + 1))
     fi
 else
@@ -140,4 +166,5 @@ fi
 if [ "$FAIL_COUNT" -eq 0 ] && [ "$WARN_COUNT" -eq 0 ]; then
     echo "  [PASS] planning surfaces consistent (C1-C5 clean)"
 fi
+COMPLETED=1
 exit 0
