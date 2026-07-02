@@ -131,7 +131,11 @@ def og_b(
                     "gamma_perp_max": round(float(np.max([r[2] for r in meas])), 3),
                 }
             else:
-                agg[phases13[p]] = {"n": len(rows), "n_measurable": 0, "note": "all clamp-active -> unmeasurable"}
+                agg[phases13[p]] = {
+                    "n": len(rows),
+                    "n_measurable": 0,
+                    "note": ("no control step -> vacuous phase" if len(rows) == 0 else "all clamp-active -> unmeasurable"),
+                }
         results[f"{int(scale * 1000)}mm"] = agg
     return results
 
@@ -328,9 +332,15 @@ def main():
     err_mm = (tgt_pred - wp_true) * 1000.0  # [770,6]
 
     # --- OG-a per-phase x per-axis table + phase-scoped verdict ---
-    table, stops, middles = [], [], []
+    table, stops, middles, vacuous_phases = [], [], [], []
     for p in range(n_phases):
         idx = np.where(ph == p)[0]
+        if idx.size == 0:
+            # empty phase: the 15-schema GUIDE_C2 (idx9) is never entered by the CP-C route -> its one-hot dim is
+            # always 0, no control step carries it. Vacuous -> no OG-a cell to score. The §3.3 combine below is
+            # UNTOUCHED: an absent phase contributes no STOP/MIDDLE, so it cannot change the verdict. Record it.
+            vacuous_phases.append(PHASES[p])
+            continue
         rmse = np.sqrt((err_mm[idx] ** 2).mean(axis=0))
         p95 = np.percentile(np.abs(err_mm[idx]), 95, axis=0)
         for ax in range(6):
@@ -504,6 +514,8 @@ def main():
         },
     }
     os.makedirs(args.out_dir, exist_ok=True)
+    if vacuous_phases:  # emit ONLY when non-empty -> 13-phase output is byte-identical (no such phases there)
+        out["vacuous_phases"] = vacuous_phases  # 15-schema phases never entered (e.g. GUIDE_C2 idx9); verdict-neutral
     with open(os.path.join(args.out_dir, "og_gate.json"), "w") as fh:
         json.dump(out, fh, indent=2)
 
