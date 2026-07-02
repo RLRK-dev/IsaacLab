@@ -95,3 +95,32 @@ tests/
 /env_isaaclab/
 /data/
 /thread_isaac_lab/data/
+/thread_isaac_lab/checkpoints/
+
+# Local operator/session state and generated outputs.
+# Keep these on disk as local working state, but do not let them dominate
+# provenance review. Do not ignore docs/, eval_runs/, source/, harness/, or
+# thread_isaac_lab/ wholesale; those paths contain mixed evidence and code.
+/.claude/
+/.vscode/CURRENT_GOAL.md
+/CLAUDE.md.thread_backup
+/CURRENT_GOAL.md
+# /GOALS.md un-ignored 2026-07-02 (M4, node T-ROOT-Planning-Surfaces-Consolidation): now a tracked pointer.
+# Supersedes the :100-103 local-state rationale for THIS file + the repo_root_cleanup_inventory_2026-05-26 classification.
+/HARNESS_STATE.md
+/INIT_CODE_*.md
+/INIT_REVIEW.md
+/TASK_*.md
+/humanoid_recording.bin
+/imgui.ini
+/judge_*.sh
+
+/analysis/
+/auto_stop_reports/
+/checkpoints/
+/chroma/
+/home/
+/logs/
+/models/
+/poc_redball_*/
+/results/
