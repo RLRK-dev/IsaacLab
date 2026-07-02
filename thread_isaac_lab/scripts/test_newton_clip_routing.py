@@ -1029,7 +1029,7 @@ def add_revolute_cable(builder, start_pos, direction=(0, 1, 0)):
 
 
 def build_scene(
-    use_cable=True, fk_model=None, fk_state=None, solver_backend="vbd", grasp_actuation=False, grasp_y=None
+    use_cable=True, fk_model=None, fk_state=None, solver_backend="vbd", grasp_actuation=False, grasp_y=None, cable_xy_offset=None
 ):
     """Build the full Newton scene for VBD Rod architecture.
 
@@ -1362,7 +1362,8 @@ def build_scene(
         # Array center = (C1.y + C5.y)/2 = 0.0 → cable Y[-0.30, +0.30], within table Y[-0.40, +0.30].
         clip_y_center = (CLIP_POSITIONS[0][1] + CLIP_POSITIONS[-1][1]) / 2
         cable_y_start = clip_y_center - cable_half_len
-        cable_start = (GRASP_X, cable_y_start, TABLE_HEIGHT + CABLE_RADIUS)
+        _cxo = cable_xy_offset or (0.0, 0.0)  # ③ (B2 §2.2/§5.1): per-run rigid cable-XY offset; None -> (0,0) = byte-identical
+        cable_start = (GRASP_X + _cxo[0], cable_y_start + _cxo[1], TABLE_HEIGHT + CABLE_RADIUS)
         if solver_backend == "mujoco":
             cable_bodies, cable_joints, _cable_sr = add_revolute_cable(
                 builder, start_pos=cable_start, direction=(0, 1, 0)
@@ -1664,6 +1665,7 @@ def build_scene(
 
     scene_info = {
         "model": model,
+        "cable_xy_offset": tuple(cable_xy_offset) if cable_xy_offset else (0.0, 0.0),  # ③ Y-follow source (0,0 = legacy)
         "left_body_start": left_body_start,
         "left_shape_start": left_shape_start,
         "left_shape_end": left_shape_end,
@@ -2209,6 +2211,7 @@ def do_p1_grasp(model, state, scene_info, solver, contacts):
     cable_bodies = scene_info.get("cable_bodies", [])
     has_cable = len(cable_bodies) > 0
     grasp_x = scene_info.get("settled_grasp_x", GRASP_X)
+    grasp_dy = scene_info.get("cable_xy_offset", (0.0, 0.0))[1]  # ③ Y-follow (0.0 when unset = byte-identical)
     fk_model = scene_info["fk_model"]
     fk_state = scene_info["fk_state"]
 
@@ -2223,8 +2226,8 @@ def do_p1_grasp(model, state, scene_info, solver, contacts):
         scene_info,
         solver,
         contacts,
-        target_left=(grasp_x, WIDE_LEFT_Y, APPROACH_Z),
-        target_right=(grasp_x, WIDE_RIGHT_Y, APPROACH_Z),
+        target_left=(grasp_x, WIDE_LEFT_Y + grasp_dy, APPROACH_Z),
+        target_right=(grasp_x, WIDE_RIGHT_Y + grasp_dy, APPROACH_Z),
         label="P1-APPROACH",
         converge_mm=10.0,
     )
@@ -2243,8 +2246,8 @@ def do_p1_grasp(model, state, scene_info, solver, contacts):
         scene_info,
         solver,
         contacts,
-        target_left=(grasp_x, WIDE_LEFT_Y, GRASP_Z),
-        target_right=(grasp_x, WIDE_RIGHT_Y, GRASP_Z),
+        target_left=(grasp_x, WIDE_LEFT_Y + grasp_dy, GRASP_Z),
+        target_right=(grasp_x, WIDE_RIGHT_Y + grasp_dy, GRASP_Z),
         label="P1-DESCEND",
         converge_mm=5.0,
     )
@@ -2474,6 +2477,7 @@ def do_p2_lift(model, state, scene_info, solver, contacts):
     cable_bodies = scene_info.get("cable_bodies", [])
     has_cable = len(cable_bodies) > 0
     grasp_x = scene_info.get("settled_grasp_x", GRASP_X)
+    grasp_dy = scene_info.get("cable_xy_offset", (0.0, 0.0))[1]  # ③ Y-follow (0.0 when unset = byte-identical)
 
     # Record cable Z before lift
     cable_z_before = 0.0
@@ -2490,8 +2494,8 @@ def do_p2_lift(model, state, scene_info, solver, contacts):
         scene_info,
         solver,
         contacts,
-        target_left=(grasp_x, WIDE_LEFT_Y, LIFT_Z),
-        target_right=(grasp_x, WIDE_RIGHT_Y, LIFT_Z),
+        target_left=(grasp_x, WIDE_LEFT_Y + grasp_dy, LIFT_Z),
+        target_right=(grasp_x, WIDE_RIGHT_Y + grasp_dy, LIFT_Z),
         label="P2-LIFT",
     )
 
@@ -6583,6 +6587,11 @@ def main():
         solver_backend=solver_backend,
         grasp_actuation=s6_grasp or s6_grasp_engage or s6_grasp_route,
         grasp_y=(float(os.environ.get("S6_ENGAGE_YC", "0.0")) if (s6_grasp_engage or s6_grasp_route) else None),
+        cable_xy_offset=(  # ③ B2 per-run rigid cable-XY offset via env "dx,dy" [m]; unset -> None = legacy
+            tuple(float(v) for v in os.environ["CABLE_XY_OFFSET"].split(","))
+            if os.environ.get("CABLE_XY_OFFSET")
+            else None
+        ),
     )
     model = scene_info["model"]
     cable_bodies = scene_info.get("cable_bodies", [])
