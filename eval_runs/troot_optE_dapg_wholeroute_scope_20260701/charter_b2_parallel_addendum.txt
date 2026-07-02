@@ -1,0 +1,50 @@
+# B2 PARALLELIZATION ADDENDUM (%12 → %11) — Rs directive 2026-07-03 01:5x
+# Rs verbatim: 「2gpuで最大8プロセス起動できる。gpuの有効活用して」
+# Scope: throughput authorization. Does NOT override the verdict-device pin (below).
+# Applies to: charter_b2_execution_coord.txt CP-C/CP-D/CP-E + charter_b2_fix5_xfollow_coord.txt.
+
+## 0. GPU ground truth (nvidia-smi, 2026-07-03 01:5x — CLAUDE.md table label is STALE)
+- index 0 = RTX A6000 48GB  = the canonical/verdict device ("cuda:0" everywhere in spec).
+- index 1 = RTX PRO 4000 Blackwell 24GB = aux device. CLAUDE.md calls this "cuda:2" (stale label
+  from an older topology); ACTUAL index = 1. Use CUDA_VISIBLE_DEVICES=1 + relative cuda:0 inside.
+- Cap: max 4 processes PER GPU (CLAUDE.md), total 8. Check nvidia-smi --query-compute-apps before
+  each wave launch.
+
+## 1. Device policy (UNCHANGED, loud)
+- ALL demo/verdict-bearing PHYSICS runs (recordings 13+4, CP-A' probes, CP-E rollouts, any
+  §運用14 video re-run) = GPU index 0 ONLY. Reason: banked device-fragility
+  (project-canonical-route-device-fragile: cpu vs cuda:0 flips SUCCESS↔BLOCKED at the reach wall)
+  + spec v3.1 cuda:0 pin + frozen-demo-set device consistency. Rs's directive is read as
+  throughput authorization, NOT a device-pin override (if Rs wants recordings on GPU-1, that is
+  an explicit separate override).
+- GPU index 1 = device-agnostic work: BC training + replicate-null training (CP-D pair).
+  BOTH trainings on the SAME device (internal comparability of the null pair); record device +
+  torch version in training meta.
+- GPU-1 preflight (once, before CP-D): env7 python -c torch check that Blackwell (sm_12x) kernels
+  are supported; failure -> report, fall back to sequential trainings on GPU-0 AFTER recordings.
+
+## 2. Allocation per phase
+- CP-⑤b (if any legs remain): RUN legs may run concurrently, 2 slots GPU-0.
+- CP-C recordings (the big win): **waves of 4 concurrent on GPU-0** (per-GPU cap).
+  17 recordings (13 train + 4 held-out) ≈ 5 waves. Est: serial ~11.4h → ~1/4.
+  - Wave 1 MUST contain recording #1 = half-edge (+10,0). EARLY-ABORT semantics move to WAVE
+    granularity: adjudicate wave-1 results BEFORE launching wave 2. This is a LOUD spec deviation
+    (spec said #1 first ALONE); justification: CP-⑤b RUN-2 (dx=+20 = 2x magnitude) already
+    screened the follow mechanism. Worst-case waste = 3 recordings. Record the deviation in the
+    recording report.
+  - Per-run isolation: unique output dirs + unique npz/meta paths; CUDA_VISIBLE_DEVICES=0;
+    MUJOCO_GL=egl + unset DISPLAY; no shared tmp files (check the route script's fixed-path
+    outputs — e.g. frames dir / route json paths — COLLIDE if two runs share output_dir; give
+    each run its own --output_dir. If any OTHER fixed shared path exists in the script, stagger
+    or report instead of patching the locked file).
+  - Per-offset FAIL = taxonomy log per spec (not a wave abort); wave-1 SYSTEMIC fail (grasp-miss
+    pattern) = STOP all.
+- CP-D: BC train ∥ replicate-null train on GPU-1 (2 slots), after convert. Seed pin per spec.
+- CP-E (only if OG=GO): held-out rollouts 4-way on GPU-0.
+- video-analyst / frame extraction = CPU (no GPU slot).
+
+## 3. Discipline (unchanged)
+Checkpoint reports at wave boundaries (CP-C: wave-1 verdict, then per-wave one-liners OK).
+0-commit until %12 review points. Timestamps same-turn date. Peak concurrency here = 4 (GPU-0)
++ 2 (GPU-1) = 6; phases are serial so 8-simultaneous never arises — this is the honest max that
+respects the verdict-device pin.
