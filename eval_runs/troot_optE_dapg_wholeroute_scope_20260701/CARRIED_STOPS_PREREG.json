@@ -1,0 +1,26 @@
+{
+  "_doc": "Pre-registered carried-STOP set for B2 (§3.4). Declared NOW on the v31-on-n=1 baseline to avoid hindsight risk (declaring at B2 adjudication = the same NEW-1 pathology). Source = b1p_og_e2000_v31regression/og_gate.json.",
+  "prereg_date": "2026-07-03",
+  "source_baseline": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/b1p_og_e2000_v31regression/og_gate.json",
+  "rule": "§3.4 phase-class: a DECOUPLED-phase STOP = carried = exempt-if-persist in B2 (DR structurally cannot move it; the rollout's seat-verified pin confirms actual funneling). MOVABLE {0-3} + C2_REGRASP (b)-pair = NOT-exempt (these are what DR must fix; persistence in B2 = a REAL STOP that blocks). OG-a decode STOPs classify by the SAME phase-class of their phase.",
+  "carried_exempt": ["GUIDE_C2"],
+  "carried_exempt_detail": [
+    {"phase": "GUIDE_C2", "class": "decoupled", "leg": "OG-b gamma_perp", "n1_value": 1.015, "note": "funnels to fixed C2; DR cannot move it -> exempt-if-persist"}
+  ],
+  "not_exempt": {
+    "og_a_decode_stops": [
+      {"cell": "GRASP_HOVER/Lz", "class": "movable", "n1_p95_mm": 23.028},
+      {"cell": "GRASP_DESCEND/Rz", "class": "movable", "n1_p95_mm": 5.137},
+      {"cell": "GRASP_DESCEND/Lz", "class": "movable", "n1_p95_mm": 7.515}
+    ],
+    "og_b_gamma_perp_stops": [
+      {"phase": "GRASP_HOVER", "class": "movable", "n1_gamma_perp": 5.279},
+      {"phase": "GRASP_DESCEND", "class": "movable", "n1_gamma_perp": 1.499},
+      {"phase": "LIFT", "class": "movable", "n1_gamma_perp": 0.968}
+    ],
+    "og_b_cable_pair_stop": [
+      {"phase": "C2_REGRASP", "class": "cable", "n1_seg_following_gain": 0.096, "n1_ee_only_gain": 0.929}
+    ]
+  },
+  "b2_usage": "og_offline_gate.py --carried-stops GUIDE_C2  (only DECOUPLED-phase names are honored by the gate; movable/cable STOPs can NEVER be carried by construction)."
+}
