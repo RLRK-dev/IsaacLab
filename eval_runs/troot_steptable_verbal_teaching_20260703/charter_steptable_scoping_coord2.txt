@@ -1,0 +1,62 @@
+# STEP-TABLE VERBAL-TEACHING SCOPING CHARTER (%12 → %10 COORD2)
+# Node: T-ROOT-StepTable-Verbal-Teaching-20260703 (NEW; record-before-execute done, state.md committed)
+# Rs approval: 2026-07-03 07:0x verbatim「動いて。」quoting %12's offer (step 表を教示言語そのものにする).
+# SCOPING ONLY — no implementation, no GPU, no locked-file edits, 0-commit deliverable.
+# INDEPENDENT of DQ7 (which %11 is running); do not touch DQ7 artifacts.
+
+## 0. The Rs intent (ground truth — read these first, cite in ACK)
+- memory project-rs-goal-efficient-verbal-teaching-2026-07-03: the TARGET is the SCRIPTED motion
+  authoring loop (Rs correction 05:1x「学習ではなく、その前のはなし」— route_fix5_dx+20.mp4's
+  motion = zero-learning scripted behavior, authored via words→charter→code).
+- memory feedback-step-table-structure-drives-guide-generation: Rs principle
+  「43step表からはずれるな」/ step-table structure drives generation.
+- Case study (the measured baseline to beat): fix-⑤ = ONE new behavior (cable-X follow) cost
+  Rs 2 messages + ~1.5h through the current loop (design→charter→hand-code→byte-identity→video).
+  Chain evidence: LEDGER row45 tail + log.md 07-03 01:2x-02:1x entries.
+
+## 1. The design question
+Make the step table the PRIMARY teaching language for scripted route motion: Rs edits rows in
+Japanese (phase / 動作 / 対象 / 条件 / 振幅等) → machinery regenerates or re-parameterizes the
+route → unchanged rows PROVE byte-identity, changed rows pass per-row gates (video leg / OG /
+existing verdict machinery) → landed. Deliverable = options + recommendation (方式決定 = Rs 専権).
+
+## 2. Scoping questions (answer ALL; add what you find)
+S-1 **Step-table SSOT today:** locate the authoritative 43-step table (vault path), its current
+    format, and its DRIFT vs the implemented route (`_run_mujoco_grasp_route`, test:3503-).
+    Map table-row ↔ code-block correspondence (the 15 recorder phases are the coarse version).
+S-2 **Row schema:** what a row must carry to be generative: phase id / motion primitive
+    (ik_move_both, servo, settle, grip event, pin event) / target SOURCE (constant, cable-derived
+    [caveat-a/fix-⑤/argmin], clip-derived) / gate condition / amplitudes / INVARIANT bindings
+    (88mm span, dual-arm, DiffIK-only). Ground each element in the ACTUAL code (cite lines).
+S-3 **Architecture options (compare at least these 3):**
+    (a) TABLE→PARAMS: route code stays hand-written; the table drives a validated parameter layer
+        (task_config-like). Cheapest; limited to parameterizable changes.
+    (b) TABLE→CODEGEN: rows generate phase blocks (template per motion primitive); route file
+        becomes generated artifact + frozen sections. Powerful; locked-file/anti-revert governance
+        must be redesigned (what does Rs-LOCK mean for generated code?).
+    (c) TABLE→INTERPRETER: a route engine executes the table at runtime; code = engine + primitive
+        library. Cleanest teaching loop; biggest build + re-verification of ALL banked behavior.
+    For each: expressiveness (could it have expressed fix-⑤? the pin event? C2 argmin re-target?),
+    migration cost, verification story (byte-identity semantics per option), governance/L-triage of
+    a "table edit", failure modes (silent semantic drift between table and physics).
+S-4 **Verification harness:** per-row gates — which existing machinery is reusable as-is
+    (byte-identity sha pattern [2× proven], §運用14 video legs, OG offline gate, CP-C validity
+    filters)? What is NEW (row-diff → affected-phase mapping → targeted gate selection)?
+S-5 **Language surface:** what Japanese row-edit vocabulary is needed (verbs/objects/conditions)?
+    Where does ambiguity go (a row parser must fail-loud, never guess — cite the project's
+    fail-closed precedents)?
+S-6 **Governance:** INVARIANTS §0 enforcement at generation time (a table edit that violates
+    dual-arm/span/DiffIK must be REJECTED at parse, not discovered in sim); interplay with
+    prohibited.md (no kinematic trick — the pin exception is row-representable?); L-triage of
+    table edits (proposal: table row edit = the L of its blast radius, computed from S-1 map).
+S-7 **Cost/benefit:** projected cost of a fix-⑤-class change under each option vs the measured
+    ~1.5h baseline; break-even (how many future motion changes justify the build).
+Gates: prior-art (scripts/check_thread_vault_prior_art.sh --fail-on-blocker step-table dsl codegen
+interpreter authoring) + reuse-first + external prior-art quick pass (behavior trees / task DSLs /
+robot skill languages — /web-research OPTIONAL, only if it changes the recommendation).
+
+## 3. Discipline
+Deliverable: eval_runs/troot_steptable_verbal_teaching_20260703/STEPTABLE_SCOPING_COORD2.md
+(0-commit; %12 commits at review). Options + labeled recommendation; decision = Rs.
+Timestamps same-turn date. Report to %12. If the DQ7 workstream needs %10 mid-task, %12 will
+arbitrate priority — do not self-preempt.
