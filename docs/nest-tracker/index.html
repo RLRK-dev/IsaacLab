@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>NEST Tracker — THREAD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="THREAD NEST Tree progress viewer (Node-bound Execution Session Tree)">
+<script src="https://cdn.tailwindcss.com"></script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1",
+    "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.395.0?external=react"
+  }
+}
+</script>
+<script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+<style>
+  body { margin: 0; }
+  #boot-msg { padding: 24px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #555; }
+  .boot-spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #d6d3d1; border-top-color: #44403c; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #boot-error { padding: 24px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #b91c1c; background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; margin: 24px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="boot-msg">
+    <span class="boot-spinner"></span>NEST Tracker を起動中… (Babel transform + JSX load)
+  </div>
+</div>
+
+<!-- window.storage shim (IndexedDB-backed, D3 compliance: no localStorage/sessionStorage) -->
+<script>
+(function() {
+  const DB_NAME = 'nest-tracker-storage';
+  const STORE = 'kv';
+  let dbPromise = null;
+  function getDB() {
+    if (dbPromise) return dbPromise;
+    dbPromise = new Promise((resolve, reject) => {
+      const req = indexedDB.open(DB_NAME, 1);
+      req.onupgradeneeded = (e) => e.target.result.createObjectStore(STORE);
+      req.onsuccess = (e) => resolve(e.target.result);
+      req.onerror = (e) => reject(e.target.error);
+    });
+    return dbPromise;
+  }
+  function txGet(key) {
+    return getDB().then(db => new Promise((resolve, reject) => {
+      const t = db.transaction(STORE, 'readonly');
+      const r = t.objectStore(STORE).get(key);
+      r.onsuccess = () => resolve(r.result === undefined ? null : { value: r.result });
+      r.onerror = (e) => reject(e.target.error);
+    }));
+  }
+  function txSet(key, value) {
+    return getDB().then(db => new Promise((resolve, reject) => {
+      const t = db.transaction(STORE, 'readwrite');
+      const r = t.objectStore(STORE).put(value, key);
+      r.onsuccess = () => resolve();
+      r.onerror = (e) => reject(e.target.error);
+    }));
+  }
+  function txDel(key) {
+    return getDB().then(db => new Promise((resolve, reject) => {
+      const t = db.transaction(STORE, 'readwrite');
+      const r = t.objectStore(STORE).delete(key);
+      r.onsuccess = () => resolve();
+      r.onerror = (e) => reject(e.target.error);
+    }));
+  }
+  window.storage = {
+    get: txGet,
+    set: txSet,
+    delete: txDel,
+  };
+})();
+</script>
+
+<!-- Bootstrap: fetch JSX → Babel transform → blob URL → dynamic import -->
+<script type="module">
+  const appEl = document.getElementById('app');
+  function bootError(msg, detail) {
+    appEl.innerHTML = `<div id="boot-error"><strong>NEST Tracker 起動失敗</strong><br>${msg}<br><br><pre style="white-space:pre-wrap;font-size:12px;">${detail || ''}</pre></div>`;
+  }
+
+  // Wait for Babel standalone (may load after this module starts)
+  async function waitForBabel(timeoutMs = 5000) {
+    const start = Date.now();
+    while (!window.Babel) {
+      if (Date.now() - start > timeoutMs) throw new Error('Babel standalone failed to load');
+      await new Promise(r => setTimeout(r, 50));
+    }
+  }
+
+  try {
+    await waitForBabel();
+
+    // Fetch JSX source (cache-bust so edits to nest-tracker.jsx always load fresh, matching the snapshot fetch)
+    const jsxResp = await fetch('./nest-tracker.jsx?_=' + Date.now());
+    if (!jsxResp.ok) throw new Error(`fetch ./nest-tracker.jsx failed: ${jsxResp.status}`);
+    const jsxSource = await jsxResp.text();
+
+    // Babel transform JSX → JS (preserve imports as ES modules; importmap handles resolution)
+    const result = window.Babel.transform(jsxSource, {
+      presets: [['react', { runtime: 'classic' }]],
+      sourceType: 'module',
+    });
+    const compiled = result.code;
+
+    // Wrap as Blob → dynamic import (browser resolves react/lucide-react via importmap)
+    const blob = new Blob([compiled], { type: 'text/javascript' });
+    const moduleUrl = URL.createObjectURL(blob);
+    const mod = await import(moduleUrl);
+    URL.revokeObjectURL(moduleUrl);
+
+    const App = mod.default;
+    if (!App) throw new Error('nest-tracker.jsx default export missing');
+
+    // Mount
+    const React = await import('react');
+    const { createRoot } = await import('react-dom/client');
+    appEl.innerHTML = '';
+    createRoot(appEl).render(React.createElement(App));
+  } catch (e) {
+    console.error('NEST Tracker boot error:', e);
+    bootError(String(e.message || e), (e.stack || '').split('\n').slice(0, 8).join('\n'));
+  }
+</script>
+</body>
+</html>
