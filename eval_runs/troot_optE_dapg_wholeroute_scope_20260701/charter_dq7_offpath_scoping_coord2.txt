@@ -1,0 +1,59 @@
+# DQ7 SCOPING CHARTER (%12 → %10 COORD2, self-contained — your pane is a fresh session)
+# Written 2026-07-03 05:0x by %12 (RS-TECH-LEAD). Rs approved option A (verbatim「A」05:00):
+# bank the B2 STOP + open DQ7 = design scoping for an OFF-PATH supervision mechanism.
+# You are COORD2 (%10): scoping/audit role. SCOPING ONLY — no implementation, no GPU runs.
+
+## 0. Ground yourself (read + cite file:line in your ACK; do NOT trust this narrative alone)
+- thread_isaac_lab/thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md row45 tail (B2 chain 経緯 + STOP)
+- thread_isaac_lab/thread-vault/T-ROOT-optE-route-dapg-C1C2/state.md (DQ namespace; DQ7 = this task)
+- eval_runs/troot_optE_dapg_wholeroute_scope_20260701/:
+  B2_KICKOFF_SPEC.md §3.2-3.4 (γ⊥ metrics + verdict machinery) /
+  b2_cpE_og/bc/og_gate.json (STOP verbatim: movable γ⊥ 2.497/1.257/1.041/1.055, pair 0.282+0.973,
+  null_beat −0.261; 2mm≈10mm = scale-invariant obs-following) /
+  b2_cpD_report.md (BC on-path val 18× null 優位) /
+  P2_REWARD_DESIGN.md (⛔BLOCK banner — READ THIS: it constrains option (i) below)
+- RS71-System-Spec-SSOT.md §0 INVARIANTS (dual-arm / DiffIK / コ LOCK / no-kinematic-trick)
+
+## 1. The design question (DQ7)
+B2 proved: pure BC on 11 diverse demos generalizes ON-path (18× val) but learns NO off-path
+restoring (γ⊥≈1-2.5 = follows the perturbed observation instead of pulling back; structural —
+BC never sees off-manifold states). fork-(iv) integrator repair STANDS. Question: **what
+mechanism supplies off-path supervision** so the policy restores toward the demonstrated
+manifold? Deliverable = options analysis + recommendation for Rs (design decision = Rs 専権).
+
+## 2. Option space to scope (add others you find; do not silently drop any of these)
+(i)   DAPG RL leg (the node's original P4): BC init + RL fine-tune. ⚠ Known blocker: P2 reward
+      design hit pre-check BLOCK (that BLOCK is WHY DQ1 chose B/BC) — scope what would have to
+      change (reward on route-progress? seat predicates as sparse terms?) and whether the BLOCK
+      reasons are addressable or structural.
+(ii)  Perturb-and-recover scripted recordings: inject small cable/EE perturbations mid-route and
+      let the SCRIPTED route re-derive targets (caveat-a Y / fix-⑤ X re-centering + per-phase
+      target derivation) to recover → record off-path→on-path transitions → BC on augmented set.
+      Scope: where injection is physically safe (which phases), what the recorder needs, whether
+      the scripted controller actually restores (it re-derives targets from cable state at
+      specific points only — map WHICH phases have state-derived targets vs frozen waypoints).
+(iii) DAgger-style: query the scripted target-derivation as an expert AT policy-visited states
+      (needs policy rollouts to visit states = GPU; scope the loop cost + how the expert answers
+      off-path queries at frozen-waypoint phases).
+(iv)  Restoring-augmented BC loss: train-time obs-noise with label preservation (denoising BC)
+      — teaches contraction toward demo actions under perturbed obs at ZERO recording cost.
+      Scope: which obs dims to perturb (cable seg? EE?), magnitude vs the OG probe scale
+      (2-10mm), and the risk that label-preservation teaches "ignore obs" (null-like memorization
+      — the CP-D null shows where that road ends; how would we detect it? → the existing OG gate
+      γ⊥ + null-beat machinery re-runs offline at zero GPU = the natural falsifier).
+For EACH option: mechanism → what it teaches (predicted effect on γ⊥ / pair / beat), THREAD
+condition fit (dual-arm, cable, mujoco-コ, env7, device fragility, INVARIANTS §0), cost (build
+h + GPU h), risks, spec/locked-file touch-points, and what the OG gate would measure.
+
+## 3. Mandatory gates before writing
+- Prior-art: scripts/check_thread_vault_prior_art.sh --fail-on-blocker dagger offpath restoring
+  perturb bc-augment (+ variants you judge) — blocker hit ⇒ STOP + report delta.
+- Reuse-first: check vault 06-Knowledge + existing scripts for anything reusable (OG gate
+  machinery is reusable as the falsifier for ALL options — say so explicitly with paths).
+
+## 4. Discipline
+Deliverable doc: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/DQ7_OFFPATH_SCOPING_COORD2.md
+(0-commit; %12 commits at review). No implementation, no GPU, no locked-file edits. Timestamps
+from same-turn date. Report to %12 with grounding cites + the options table + your recommendation
+(clearly labeled as recommendation, not decision). If anything contradicts this charter on disk,
+STOP + report (§運用10).
