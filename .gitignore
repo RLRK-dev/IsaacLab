@@ -124,3 +124,5 @@ tests/
 /models/
 /poc_redball_*/
 /results/
+# NEST manifest generator flock artifact (build_nest_snapshot.py)
+thread_isaac_lab/thread-vault/00-Project-Management/.manifest_gen.lock

@@ -1,0 +1,146 @@
+# .validateignore - Files excluded from validate.sh full runs
+# These are legacy/archived files not actively used.
+# Pre-commit (--staged-only) still checks any staged changes to these files.
+#
+# Format: glob patterns relative to thread_isaac_lab/
+# Lines starting with # are comments.
+
+# ─── Legacy config variants (superseded by task_config.py SSOT) ───
+configs/task_config_optionB.py
+configs/task_config_optionC.py
+configs/task_config_optionD.py
+configs/dual_arm_v7.py
+configs/dual_arm_v8.py
+configs/dual_arm_msa_config.py
+
+# ─── Legacy env variants (superseded by dual_arm_cfg.py) ───
+envs/dual_arm_cfg_opt_a.py
+envs/dual_arm_cfg_opt_b.py
+envs/dual_arm_cfg_opt_c.py
+envs/dual_arm_flex_env_cfg.py
+envs/hook_hanging_env.py
+
+# ─── Archived collect_demo variants ───
+scripts/collect_demo_data_v48a.py
+scripts/collect_demo_data_v48b.py
+scripts/collect_demo_data_v50a.py
+scripts/collect_demo_data_v50b.py
+scripts/collect_demo_data_v51a.py
+scripts/collect_demo_data_v51b.py
+scripts/collect_demo_data_v52a.py
+scripts/collect_demo_data_v52b.py
+scripts/collect_demo_data_v54a.py
+scripts/collect_demo_data_v54b.py
+scripts/collect_demo_data_diag.py
+scripts/collect_demo_data_interp_fix.py
+scripts/collect_demo_data_left_only.py
+scripts/collect_demo_data_right_only.py
+scripts/collect_demo_data_slow_hook.py
+scripts/collect_goal_images_opt_a.py
+scripts/collect_goal_images_opt_b.py
+scripts/collect_goal_images_opt_c.py
+scripts/collect_goal_images_backup_diffik.py
+scripts/collect_with_claude_api.py
+scripts/collect_with_claude_direct.py
+scripts/collect_dual_arm_camera_data.py
+scripts/collect_flex_cable_data.py
+
+# ─── Legacy test/debug scripts ───
+scripts/test_d6_base_z_1265.py
+scripts/test_d6_grasp.py
+scripts/test_d6_simple.py
+scripts/test_diffik_corrected.py
+scripts/test_diffik_detailed_log.py
+scripts/test_diffik_visualized.py
+scripts/test_distance_lock.py
+scripts/test_dual_arm_camera.py
+scripts/test_dual_arm_spawn.py
+scripts/test_friction5_lift.py
+scripts/test_grasp_geometry.py
+scripts/test_lift_10cm.py
+scripts/test_lift_diagnostic.py
+scripts/test_orientation_lock.py
+scripts/test_phase2_hold.py
+scripts/test_phase5_6_hook_placement.py
+scripts/test_single_arm_grasp.py
+scripts/test_tight_grip_incremental.py
+scripts/test_workspace_3d.py
+scripts/test_cable_quick.py
+scripts/test_cable_stability.py
+scripts/test_arm_reachability.py
+
+# ─── Legacy optimization/utility scripts ───
+scripts/comprehensive_optimization.py
+scripts/comprehensive_optimization_8var.py
+scripts/comprehensive_optimization_analytical.py
+scripts/comprehensive_optimization_collision.py
+scripts/calculate_gripper_orientation.py
+scripts/analyze_reachability.py
+scripts/ik_reachability_analysis.py
+scripts/find_ready_pose.py
+scripts/find_ready_pose_simple.py
+scripts/solve_ik_for_ready_pose.py
+scripts/consult_claude.py
+scripts/create_cable_cradle.py
+scripts/create_grid_texture.py
+scripts/visualize_cable_cradle.py
+scripts/visualize_goal_states.py
+scripts/visualize_initial_state.py
+scripts/debug_camera_quaternions.py
+scripts/diagnose_cable_nan.py
+scripts/check_cable_orientation.py
+scripts/check_heights_simple.py
+scripts/check_workspace.py
+scripts/check_workspace_heights.py
+scripts/check_camera_images.py
+scripts/capture_cradle_image.py
+scripts/patch_rmpflow.py
+scripts/poc_dual_arm_vectorized.py
+scripts/dual_arm_ik_utils.py
+scripts/apply_table_texture.py
+scripts/run_mpc_control.py
+scripts/monitor_training.py
+scripts/status_logger.py
+scripts/evaluate_world_model.py
+scripts/view_cameras.py
+scripts/debug_camera_view.py
+
+# ─── Legacy shell scripts ───
+scripts/run_option_B.sh
+scripts/run_option_C.sh
+scripts/run_option_D.sh
+scripts/run_sequential_options.sh
+scripts/run_v57_single_cycle.sh
+scripts/run_with_watchdog.sh
+scripts/run_and_collect.sh
+scripts/run_wm_training_pipeline.sh
+scripts/train_all_msa_skills.sh
+run.sh
+
+# ─── Legacy training scripts ───
+scripts/train_dual_arm.py
+scripts/train_dual_arm_v10.py
+scripts/train_dual_arm_wm_4cam.py
+scripts/train_4cam_wm.py
+scripts/train_base_policy.py
+scripts/train_dual_arm_msa.py
+scripts/train_skill_adapter.py
+scripts/train_skill_adapter_v2.py
+train.py
+train_standalone_backup.py
+
+# ─── Legacy task/training modules ───
+tasks/hook_hanging/dual_arm_camera_env_cfg.py
+training/dual_arm_skill_rewards.py
+training/goal_conditioned_rewards.py
+test_phase3_to_4_diffik.py
+utils/d6_grasp_manager.py
+utils/training_debugger.py
+
+# ─── Legacy asset builders ───
+assets/flexible_cable.py
+assets/hook_l_shape.py
+
+# ─── Legacy model modules ───
+models/goal_conditioned_adapter.py
+models/skill_adapter_with_prediction.py
