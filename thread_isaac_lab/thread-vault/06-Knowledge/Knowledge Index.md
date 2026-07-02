@@ -78,7 +78,7 @@ DifferentialIKController と軌道計画。
 強化学習パイプライン関連。**設計は `thread-vault/07-Design/RL-Routing-Design.md` に統合済み。**
 
 - **07-Design/RL-Routing-Design.md** — 統合設計書 (工程・スキル・DAPG・DR・成功条件・報酬・obs)
-- **07-Design/RL-Routing-Progress.md** — 進捗記録
+- **07-Design/RL-Routing-Progress.md** — 進捗記録（⚠ ≤2026-05-28 FROZEN; 現進捗 → 00-DESIGN-STATUS-LEDGER + 地図）
 - [[LL-Terminology]] — THREAD 用語集 (routing, DAPG, dry-run/wet-run)
 - [[LL-DualArm-RewardStructure]] — dual-arm 報酬構造設計
 - [[LL-RewardDeadlock]] — 報酬デッドロックパターン (penalty dominance等)
