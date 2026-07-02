@@ -906,6 +906,171 @@ def _read_spec_list(path):
     return specs
 
 
+# ============================================================================
+# DQ7 stage (iv) restoring-augmented BC (denoising) sampler — ADDITIVE, default-off.
+# Reads a committed B2 abs dataset and emits synthetic off-manifold (obs', a') rows
+# per dq7_iv_mini_spec.md v1.1 (%12-approved 2026-07-03, DQ7_IV_MINISPEC_DEBATE_DECIDE.md
+# U1-U11). NO edit to convert()/convert_b2() -> the committed B2 path is byte-untouched
+# (regression = re-run normal convert, sha match). Gated on --b2-augment only.
+# ============================================================================
+AUG_GATED_PHASES = (0, 1, 2, 3, 11)  # DR-movable {0-3} + cable-anchored C2_REGRASP {11} (og:33-34)
+AUG_AXIS_COS = 0.906  # 25deg: reject a D_train direction within 25deg of any probe axis (anti-teach-to-the-test)
+AUG_BOX_MAX = 0.95  # union-box guard: reject a re-encoded label with any |a'| > this (frozen-hull, no re-fit)
+AUG_MAG_BINS_MM = (2.0, 5.0, 8.0, 12.0, 21.0)  # accept/reject reporting bins (U3/U7)
+# per-leg definition: perturb obs dims, optional co-move dims (seg-leg), label rule, tangent-proj (preserved legs).
+AUG_LEGS = (
+    # name, phases, perturb_dims, comove_dims, label, tangent_proj, mag_key
+    ("ee_hover_descend", (0, 1), (0, 1, 2, 3, 4, 5), (), "preserve", True, "ee_wide"),
+    ("ee_close_lift", (2, 3), (3, 4, 5), (), "preserve", True, "ee_narrow"),  # non-holder L dims
+    ("ee_regrasp_R", (11,), (0, 1, 2), (), "preserve", True, "ee_wide"),  # acting-R dims, pre-contact
+    ("seg_regrasp", (11,), (6, 7, 8), (3, 4, 5), "faithful_c2", False, "seg"),  # seg + holder-L co-move (og:252)
+)
+# retry ladder (dq7_iv_mini_spec.md v1.1 §2): step -> (K, {mag_key: (lo_mm, hi_mm)})
+AUG_LADDER = {
+    1: (2, {"ee_wide": (2.0, 20.0), "ee_narrow": (2.0, 8.0), "seg": (2.0, 10.0)}),
+    2: (1, {"ee_wide": (2.0, 10.0), "ee_narrow": (2.0, 6.0), "seg": (2.0, 6.0)}),
+    3: (1, {"ee_wide": (2.0, 5.0), "ee_narrow": (2.0, 5.0), "seg": (2.0, 5.0)}),
+}
+
+
+def _aug_sample_dir(rng, n_dims, tangent, tangent_proj):
+    """Sample a unit D_train direction in an n_dims subspace with tangent-orthogonal projection (preserved legs)
+    and 25deg-axis rejection (all legs). Returns the unit vector, or None if rejected after the try budget.
+
+    tangent = the local path tangent restricted to the leg dims (og_b dwp construction), or None. When
+    tangent_proj is True and |tangent|>0 the sampled direction is projected orthogonal to it (a tangent-aligned
+    perturbation moves ALONG the demo path, where the label-preserved assumption is false) then renormalized.
+    The 25deg guard (max_k |d.e_k| <= AUG_AXIS_COS) keeps training OFF the axis-aligned probe family the OG gate
+    measures on (anti-teach-to-the-test); D_heldout = {+-e_k} is never trained.
+    """
+    tan_hat = None
+    if tangent_proj and tangent is not None:
+        tn = float(np.linalg.norm(tangent))
+        if tn > 1e-9:
+            tan_hat = np.asarray(tangent, np.float64) / tn
+    for _ in range(64):  # try budget; exhaustion -> None (counted as axis_reject by the caller)
+        d = rng.standard_normal(n_dims)
+        nd = float(np.linalg.norm(d))
+        if nd < 1e-12:
+            continue
+        d /= nd
+        if tan_hat is not None:
+            d = d - float(d @ tan_hat) * tan_hat
+            nd = float(np.linalg.norm(d))
+            if nd < 1e-6:  # sampled ~parallel to the tangent -> resample
+                continue
+            d /= nd
+        if float(np.max(np.abs(d))) <= AUG_AXIS_COS:  # off every probe axis by >=25deg
+            return d
+    return None
+
+
+def augment_b2(in_npz, out_dir, ladder_step=1, seed=0):
+    """Emit the restoring-augmented dataset (dq7_iv_mini_spec.md v1.1). ADDITIVE; convert_b2 untouched.
+
+    Reads ``in_npz`` (a committed abs dataset with obs/actions/meta.abs_affine -- the BC train set OR the
+    replicate-null set for the augmented-null, both sharing the union affine), generates per-leg synthetic
+    off-manifold rows (ee-legs = obs perturbed + label PRESERVED; seg-leg = seg+holder-L obs co-moved + faithful
+    per-axis label: R_x,R_z co-move / R_y,L preserved -- U4, test:4404/:4405/:4377), applies the 25deg-axis +
+    union-box guards, and writes ``{out_dir}/bc_dataset_abs_aug.npz`` (+ ``_aug_meta.json``) = clean rows ++
+    accepted aug rows. Returns a dict with per-(leg x magnitude-bin) accept/reject counts for the report (U3/U5/U7).
+    """
+    step_K, mag_tab = AUG_LADDER[int(ladder_step)]
+    src_npz = in_npz
+    z = np.load(src_npz, allow_pickle=True)
+    obs_clean = z["obs"].astype(np.float32)
+    a_clean = z["actions"].astype(np.float32)
+    base_meta = json.loads(str(z["meta"]))
+    affine = np.asarray(base_meta["abs_affine"], np.float64)
+    n_phases = affine.shape[0]
+    PHASES = tuple(base_meta["phase_names"])
+    ph = np.argmax(obs_clean[:, 12 : 12 + n_phases], axis=1).astype(int)
+    wp = _abs_decode(a_clean.astype(np.float64), ph, affine)  # [T,6] true next-waypoint targets (round-trip exact)
+    dwp = np.zeros_like(wp)  # local path tangent (og_b construction): wp[t+1]-wp[t]
+    dwp[:-1] = wp[1:] - wp[:-1]
+    dwp[-1] = dwp[-2]
+    rng = np.random.RandomState(int(seed))
+
+    def _bin(m_mm):
+        return int(np.clip(np.searchsorted(AUG_MAG_BINS_MM, m_mm, side="right") - 1, 0, len(AUG_MAG_BINS_MM) - 2))
+
+    aug_obs, aug_a = [], []
+    counts = {}  # leg -> {"accept":[per-bin], "axis_reject":n, "box_reject":n, "n_src_rows":n, "K":step_K}
+    for name, phases, pdims, cdims, label, tproj, mag_key in AUG_LEGS:
+        lo_mm, hi_mm = mag_tab[mag_key]
+        rows = np.where(np.isin(ph, phases))[0]
+        c = counts[name] = {
+            "accept_per_bin": [0] * (len(AUG_MAG_BINS_MM) - 1),
+            "axis_reject": 0,
+            "box_reject": 0,
+            "n_src_rows": int(rows.size),
+            "K": step_K,
+            "mag_mm": [lo_mm, hi_mm],
+            "bins_mm": list(AUG_MAG_BINS_MM),
+        }
+        for t in rows:
+            for _ in range(step_K):
+                m_m = float(np.exp(rng.uniform(np.log(lo_mm), np.log(hi_mm)))) / 1000.0  # log-U magnitude [m]
+                tangent = dwp[t, list(pdims)] if tproj else None
+                d = _aug_sample_dir(rng, len(pdims), tangent, tproj)
+                if d is None:
+                    c["axis_reject"] += 1
+                    continue
+                o2 = obs_clean[t].copy()
+                o2[list(pdims)] += (d * m_m).astype(np.float32)  # perturb the leg's obs dims
+                if cdims:  # seg-leg: holder-L co-moves with the seg (og pair-probe obs pattern :252)
+                    o2[list(cdims)] += (d * m_m).astype(np.float32)
+                if label == "preserve":
+                    a2 = a_clean[t].copy()  # label unchanged -> |a2|<=|a_clean|<0.95, never box-rejected
+                else:  # faithful_c2 (U4): R_x,R_z co-move with the seg d_x,d_z; R_y and L[3:6] PRESERVED
+                    wp2 = wp[t].copy()
+                    wp2[0] += d[0] * m_m  # R_x follows cable X (test:4404 _cRx)
+                    wp2[2] += d[2] * m_m  # R_z follows cable Z (test:4404 _cRz); R_y(1)+L(3:6) held (:4405/:4377)
+                    a2 = _abs_encode(wp2[None, :], ph[t : t + 1], affine)[0]
+                    if float(np.max(np.abs(a2))) > AUG_BOX_MAX:  # union-box guard (frozen hull)
+                        c["box_reject"] += 1
+                        continue
+                aug_obs.append(o2)
+                aug_a.append(a2.astype(np.float32))
+                c["accept_per_bin"][_bin(m_m * 1000.0)] += 1
+
+    aug_obs = np.asarray(aug_obs, np.float32) if aug_obs else np.zeros((0, obs_clean.shape[1]), np.float32)
+    aug_a = np.asarray(aug_a, np.float32) if aug_a else np.zeros((0, a_clean.shape[1]), np.float32)
+    obs_out = np.concatenate([obs_clean, aug_obs], axis=0)
+    a_out = np.concatenate([a_clean, aug_a], axis=0)
+    n_accept = int(aug_obs.shape[0])
+
+    aug_meta = dict(base_meta)  # copy base (schema, affine, phase_names, clip xy, seated_seg, ...) + truthful overrides
+    aug_meta.update(
+        {
+            "schema": base_meta.get("schema", "") + "_aug",
+            "dataset_kind": "dq7_iv_restoring_augmented",
+            "n_rows_clean": int(obs_clean.shape[0]),
+            "n_rows_aug": n_accept,
+            "obs_aug_shape": list(obs_out.shape),
+            "aug_cfg": {
+                "V1": False,
+                "ladder_step": int(ladder_step),
+                "K": step_K,
+                "per_leg_magnitude_ranges_mm": {name: list(mag_tab[mk]) for (name, _, _, _, _, _, mk) in AUG_LEGS},
+                "rejection": {"axis_cos": AUG_AXIS_COS, "deg": 25, "tangent_projection": True, "box_max_abs_a": AUG_BOX_MAX},
+                "sampler_seed": int(seed),
+                "source_npz_sha256": _sha256_file(src_npz),
+                "converter_git_note": "route_demo_to_bc.py augment_b2 (dq7_iv_mini_spec v1.1)",
+                "per_leg_bin_counts": counts,
+            },
+        }
+    )
+    os.makedirs(out_dir, exist_ok=True)
+    npz_out = os.path.join(out_dir, "bc_dataset_abs_aug.npz")
+    tmp = npz_out + ".tmp.npz"
+    np.savez(tmp, obs=obs_out, actions=a_out, meta=json.dumps(aug_meta))
+    os.replace(tmp, npz_out)
+    with open(os.path.join(out_dir, "bc_dataset_abs_aug_meta.json"), "w") as fh:
+        json.dump(aug_meta, fh, indent=2)
+    return {"n_clean": int(obs_clean.shape[0]), "n_aug": n_accept, "counts": counts, "out": npz_out, "meta": aug_meta}
+
+
 def main():
     ap = argparse.ArgumentParser(description="route_demo_raw.npz -> bc_dataset.npz + schedule.json (B spec §2)")
     ap.add_argument("--npz", help="single-demo mode: route_demo_raw.npz")
@@ -916,8 +1081,31 @@ def main():
     ap.add_argument("--b2-multi", action="store_true", help="B2 (§1.3/§1.4): multi-demo UNION-affine schema-v2 build")
     ap.add_argument("--train-list", help="B2: file of lines npz_path,meta_path (train demos)")
     ap.add_argument("--heldout-list", help="B2: file of lines npz_path,meta_path (held-out demos)")
-    ap.add_argument("--seed", type=int, default=0, help="B2 val-split RNG seed (default 0)")
+    ap.add_argument("--seed", type=int, default=0, help="B2 val-split / augment sampler RNG seed (default 0)")
+    ap.add_argument(
+        "--b2-augment",
+        action="store_true",
+        help="DQ7 (iv): emit restoring-augmented dataset from --aug-in-dir (default-off; convert path untouched)",
+    )
+    ap.add_argument("--aug-in-dir", help="DQ7 (iv): dir holding bc_dataset_abs.npz to augment (BC train set)")
+    ap.add_argument("--aug-in-npz", help="DQ7 (iv): explicit npz path to augment (e.g. the replicate-null set)")
+    ap.add_argument("--aug-ladder-step", type=int, default=1, choices=[1, 2, 3], help="DQ7 (iv) retry ladder step")
     a = ap.parse_args()
+
+    if a.b2_augment:  # DQ7 stage (iv) restoring-augmented dataset (additive; convert_b2 untouched)
+        assert a.aug_in_dir or a.aug_in_npz, "--b2-augment requires --aug-in-dir or --aug-in-npz"
+        in_npz = a.aug_in_npz or os.path.join(a.aug_in_dir, "bc_dataset_abs.npz")
+        r = augment_b2(in_npz, a.out_dir, a.aug_ladder_step, a.seed)
+        print(
+            f"[route_demo_to_bc] DQ7-(iv) wrote {r['out']} = {r['n_clean']} clean + {r['n_aug']} aug rows "
+            f"(ladder step {a.aug_ladder_step}, seed {a.seed}) -> {a.out_dir}"
+        )
+        for name, c in r["counts"].items():
+            print(
+                f"  leg {name:16s} src_rows={c['n_src_rows']:4d} K={c['K']} accept/bin={c['accept_per_bin']} "
+                f"axis_reject={c['axis_reject']} box_reject={c['box_reject']}"
+            )
+        return
 
     if a.b2_multi:  # B2 multi-demo UNION-affine mode
         assert a.train_list and a.heldout_list, "--b2-multi requires --train-list and --heldout-list"

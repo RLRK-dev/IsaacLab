@@ -946,6 +946,7 @@
         "T-ROOT-R0-Measurement-Foundation",
         "T-ROOT-R1-Product-Predicate-Decision",
         "T-ROOT-R2-Architecture-Redesign",
+        "T-ROOT-StepTable-Verbal-Teaching-20260703",
         "T-Skill",
         "T-Vision",
         "T-WM"
@@ -2118,6 +2119,16 @@
       "children": [
         "T-ROOT-R2-A-Track-A-S1B-Telemetry"
       ],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-StepTable-Verbal-Teaching-20260703",
+      "goal": "Rs 意向 (2026-07-03 05:1x「今後、効率的に言葉で教示できるようにしたい」対象 = scripted 動作) を、Rs 原則「43step 表から外れるな」の延長で実装可能にする: step 表の行 (phase・動作・対象・条件) を日本語で編集 → route code 生成/パラメータ化 → byte-identity (不変行) + 動画/OG gate (変更行) で検証する motion authoring loop の設計。",
+      "means": "Phase S (scoping): options 表 + 推奨が Rs に提示され、方式 (パラメータ駆動 / code-gen / interpreter) が Rs 決定される。\n最終 (実装 phase、別途 Rs GO): fix-⑤ 級の新動作 1 つが「表の行編集 → 生成 → gate PASS」だけで landing し、\n従来 loop (言葉→charter→手書き code ~1.5h) より往復数が実測で減る。\n",
+      "status": "IN_PROGRESS",
+      "dependencies": [],
+      "parent": "T-ROOT",
+      "children": [],
       "session_history": []
     },
     {
