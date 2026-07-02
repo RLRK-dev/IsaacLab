@@ -948,3 +948,7 @@ GROVE v3 (docs/grove_methodology_2026-06-05.html) + GROVE_CORE_SPEC.md v1.0 + 5C
 - 要旨: DAPG unit = **経路全体 C1→C2** (Rs 2026-07-01 22:00)。P1 feasibility PASS (non-cons) → P2 reward設計 pre-check BLOCK (%9 CONCUR; whole-route env/demos ABSENT) → P3 demo-recorder build 中 (L3) / **DQ1 = B (BC-imitation) Rs 決定 2026-07-02 ~07:37** (verbatim「B」; A/C = 将来 option 保持)。demo seed = commit `bcb7393ec8` (LEDGER row43 WORKING)。
 - ⚠ device-fragility (2026-07-02 %11 発見): canonical route は **cuda:0 特異** (cpu-IK では R-reach knife-edge が BLOCKED に flip) → demo/評価は device 一致必須 + reach-margin が一級の robustness gap (P1 risk④ を強化)。
 - 一次記録 = log.md 2026-07-01〜 + `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/` (scoping / P2設計⛔[PARKED, DQ1=B] / cross-PV / P3 spec v2.4 / canonical_run_records / B_BC_IMITATION_SCOPING_COORD2.md 予定)。本 block は pointer-only (narrative は log.md; 巨大行禁止)。
+
+## UPDATE 2026-07-02 (%12 RS-TECH-LEAD) — node 追記: T-ROOT-Planning-Surfaces-Consolidation-20260702
+- 新 node **T-ROOT-Planning-Surfaces-Consolidation-20260702** (IN_PROGRESS, parent=`T-ROOT`, state.md = `thread-vault/T-ROOT-Planning-Surfaces-Consolidation-20260702/state.md`)。Rs 承認 2026-07-02 13:58「①②承認 少数化+整合機構の設計起案を進めて」。record-before-execute 遵守 (起票が設計着手と同一ターン)。
+- 要旨: 計画 surface ~10 → 4 コア (SOMA/RS71/LEDGER/地図) + node DB + journal。整合 = 3 層 (生成 / validate.sh 新 layer 7 checker / §運用4 書込 rule 拡張)。設計 doc = `eval_runs/troot_planning_files_audit_20260702/PLANNING_CONSOLIDATION_DESIGN.md` (L3、5体 pre-debate 実施)。本 manifest は M2 完了後 §2 が state.md 群から再生成される view になる予定。
