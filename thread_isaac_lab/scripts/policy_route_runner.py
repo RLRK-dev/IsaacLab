@@ -58,6 +58,57 @@ def _sha256(path: str) -> str:
     return h.hexdigest()
 
 
+def _parse_rec_offset(path_str: str):
+    """Parse the ``rec_<x>_<y>`` grasp start-offset [mm] from a path (dir or file) for the Opt-i' guard.
+
+    Mirrors the ``route_demo_to_bc._offset_from_npz_path`` (:498-505) token rule byte-for-byte:
+    ``z0``/``0``/``z`` -> 0, ``p<N>`` -> +N, ``m<N>`` -> -N (the CP-C offsets are integer mm, e.g.
+    ``rec_p8_p8`` -> (8, 8), ``rec_m20_0`` -> (-20, 0), ``rec_z0_m10`` -> (0, -10)). Walks the path's own
+    basename then its parents and returns the CLOSEST ``rec_<x>_<y>`` component as an ``(dx_mm, dy_mm)`` int
+    tuple; a trailing suffix (e.g. ``rec_m8_p8_rerun``) is tolerated (x/y = the two tokens right after ``rec``,
+    a deliberate ``>=3`` relaxation of the converter's strict ``==3`` so rerun dirs still resolve). Returns
+    ``None`` when NO ``rec_``-prefixed component exists (nominal dir -> the caller SKIPs the assert, per brief).
+    A ``rec_``-prefixed component with a MALFORMED token is fail-loud (``SystemExit``).
+    """
+
+    def _tok(t):  # byte-identical to route_demo_to_bc._offset_from_npz_path::_tok
+        if t in ("z0", "0", "z"):
+            return 0
+        if t and t[0] == "p" and t[1:].isdigit():
+            return int(t[1:])
+        if t and t[0] == "m" and t[1:].isdigit():
+            return -int(t[1:])
+        raise SystemExit(f"Opt-i' STOP: bad rec_ offset token {t!r} in path {path_str!r}")
+
+    p = Path(os.path.abspath(path_str))
+    for name in (p.name, *(par.name for par in p.parents)):
+        parts = name.split("_")
+        if len(parts) >= 3 and parts[0] == "rec":
+            return (_tok(parts[1]), _tok(parts[2]))
+    return None
+
+
+def _opt_i_prime_check(schedule_source_offset, rollout_offset):
+    """TASK B (Opt-i') guard: the schedule-source offset MUST equal the rollout's target offset (rounded mm).
+
+    %12 empirically REFUTED frame-invariance (18 demos -> 6 raw phase_id signatures / 3 at +-1 control-step), so a
+    shared/wrong-offset schedule misfires grip/pin by <=1 control step. Compares as rounded-mm tuples; a mismatch is
+    a **loud SystemExit** so the rollout stops before consuming GPU time. Returns a status string:
+    ``"ok"`` (offsets match), ``"skip_no_source"`` (source offset unknown -> nominal dir; caller warns + skips, per
+    brief item 2), or ``"inert"`` (no ``--rollout-offset`` given -> guard off for 13-phase / B0 / B0b back-compat).
+    """
+    if rollout_offset is None:
+        return "inert"
+    if schedule_source_offset is None:
+        return "skip_no_source"
+    if tuple(schedule_source_offset) != tuple(rollout_offset):
+        raise SystemExit(
+            f"Opt-i' STOP: schedule from offset {tuple(schedule_source_offset)} != rollout offset "
+            f"{tuple(rollout_offset)} -- each rollout must use its OWN demo's schedule"
+        )
+    return "ok"
+
+
 def _set_env_gates(env_gates: dict, device: str) -> dict:
     """§4.1-1 / E9: write env-gates BEFORE importing the route module.
 
@@ -123,9 +174,13 @@ def _live_seg_pos(phase_idx, cable_pos, ee_r, ee_l, grip_l_closed, seated_body_r
     return cable_pos[int(np.argmin(np.linalg.norm(cable_pos[:, :2] - np.asarray(c2_xy), axis=1)))]
 
 
-def _build_obs(ee_r, ee_l, seg_pos, next_clip, phase_idx) -> np.ndarray:
-    """§2.3 obs [25]: R EE(0:3) + L EE(3:6) + seg(6:9) + next-clip(9:12) + phase one-hot 13(12:25)."""
-    obs = np.zeros(25, dtype=np.float32)
+def _build_obs(ee_r, ee_l, seg_pos, next_clip, phase_idx, n_phases=13) -> np.ndarray:
+    """§2.3 obs [12+n_phases]: R EE(0:3) + L EE(3:6) + seg(6:9) + next-clip(9:12) + phase one-hot n_phases(12:).
+
+    ``n_phases`` defaults to 13 -> obs[25] (13-phase back-compat, byte-identical to the frozen v1 path);
+    the B2 15-phase abs schema -> obs[27]. ``phase_idx`` (0..n_phases-1) indexes the one-hot at ``12+phase_idx``.
+    """
+    obs = np.zeros(12 + n_phases, dtype=np.float32)
     obs[0:3] = ee_r
     obs[3:6] = ee_l
     obs[6:9] = seg_pos
@@ -262,13 +317,50 @@ def _run(args, out_dir) -> dict:  # noqa: C901 (linear 8-step preamble + single 
     rmeta = json.loads(Path(args.raw_meta).read_text())
     data = np.load(ds / "bc_dataset.npz")
     actions = data["actions"]  # [770,6] R-then-L achieved-delta / scale
-    conv_obs = data["obs"]  # [770,25] converter obs -- SF-1/6 obs-parity reference (B1-前 gate)
+    conv_obs = data["obs"]  # [n_ctrl, obs_dim] converter obs -- SF-1/6 obs-parity reference (B1-前 gate)
     scale = float(cmeta["pos_action_scale"])
     cadence = int(cmeta["cadence_physics_steps_per_rl"])
     assert cadence == PHYS_PER_CTRL, f"cadence {cadence} != {PHYS_PER_CTRL}"
     n_ctrl = actions.shape[0]
     k = min(args.max_control_steps, n_ctrl) if args.max_control_steps else n_ctrl
     smoke = k < n_ctrl
+
+    # ---- schema detection (④ OG-gate pattern): n_phases/obs_dim from bc_dataset_abs_meta if present, else 13.
+    # A 13-phase dataset-dir has NO abs_meta -> n_phases=13 -> obs[25], byte-identical to the frozen v1 path.
+    # The B2 15-phase abs schema ships bc_dataset_abs_meta.json (abs_affine.shape[0]=15) -> obs[27]. ----
+    _abs_meta_path = ds / "bc_dataset_abs_meta.json"
+    if _abs_meta_path.exists():
+        _schema_meta = json.loads(_abs_meta_path.read_text())
+        n_phases = int(np.asarray(_schema_meta["abs_affine"]).shape[0])  # SAME source the OG gate uses (④)
+    else:
+        n_phases = 13
+    obs_dim = 12 + n_phases
+    print(f"[runner] SCHEMA={n_phases}-phase (obs {obs_dim}D)")
+
+    # ---- Opt-i' (TASK B, %12 correction): frame-invariance was REFUTED (18 demos -> 6 raw phase_id signatures /
+    # 3 at +-1 control-step), so a SHARED schedule misfires grip/pin by <=1 control step on some offsets. Each
+    # rollout MUST use ITS OWN offset's demo schedule. Guard: the schedule-source offset (parsed from the
+    # rec_<x>_<y> path of --dataset-dir, falling back to --raw-meta, then a source_offset meta field) MUST equal
+    # the rollout's target offset (--rollout-offset). Fires BEFORE the scene build so a wrong-offset schedule
+    # stops with zero GPU work. Absent --rollout-offset the guard is inert (13-phase/B0/B0b back-compat). ----
+    schedule_source_offset = _parse_rec_offset(args.dataset_dir) or _parse_rec_offset(args.raw_meta)
+    if schedule_source_offset is None:
+        _src_field = cmeta.get("source_offset") or rmeta.get("source_offset")
+        if _src_field is not None:
+            schedule_source_offset = (round(float(_src_field[0])), round(float(_src_field[1])))
+    rollout_offset = None
+    if args.rollout_offset is not None:
+        _ro = [x.strip() for x in str(args.rollout_offset).split(",")]
+        assert len(_ro) == 2, f"--rollout-offset must be 'dx,dy' (mm); got {args.rollout_offset!r}"
+        rollout_offset = (round(float(_ro[0])), round(float(_ro[1])))
+    _opt_status = _opt_i_prime_check(schedule_source_offset, rollout_offset)  # loud SystemExit on offset mismatch
+    if _opt_status == "ok":
+        print(f"[runner] Opt-i' OK: schedule-source {tuple(schedule_source_offset)} == rollout {tuple(rollout_offset)}")
+    elif _opt_status == "skip_no_source":
+        print(
+            f"[runner] Opt-i' WARN: no rec_<x>_<y> in --dataset-dir/--raw-meta path and no source_offset field -- "
+            f"SKIPPING the schedule==rollout assert (nominal dir; rollout offset {tuple(rollout_offset)})"
+        )
 
     # ---- §4.1-1 env-gates BEFORE import (E9: skip null, force DEMO_RECORD=0) ----
     env_gates = rmeta.get("env_gates", cmeta.get("env_gates", {}))
@@ -324,7 +416,7 @@ def _run(args, out_dir) -> dict:  # noqa: C901 (linear 8-step preamble + single 
         import torch
         from bc_pretrain import build_actor_critic
 
-        policy = build_actor_critic(25, 6, (128, 128), device)  # §3: obs 25D / act 6D / (128,128)
+        policy = build_actor_critic(obs_dim, 6, (128, 128), device)  # §3: obs obs_dim (25/27) / act 6D / (128,128)
         policy.load_state_dict(torch.load(args.policy, map_location=device)["model_state_dict"])  # save fmt :143
         policy.eval()
         policy_sha, torch_mod = _sha256(args.policy), torch
@@ -335,8 +427,10 @@ def _run(args, out_dir) -> dict:  # noqa: C901 (linear 8-step preamble + single 
             assert abs_meta.get("action_repr") == "abs", (
                 f"E15 STOP: bc_dataset_abs_meta.action_repr={abs_meta.get('action_repr')!r} != 'abs' (fail-closed)"
             )
-            abs_affine = np.asarray(abs_meta["abs_affine"], np.float64)  # [13,6,2] per-phase per-axis [lo,hi] [m]
-            assert abs_affine.shape == (13, 6, 2), f"E15 STOP: abs_affine shape {abs_affine.shape} != (13,6,2)"
+            abs_affine = np.asarray(abs_meta["abs_affine"], np.float64)  # [n_phases,6,2] per-phase per-axis [lo,hi] [m]
+            assert abs_affine.shape == (n_phases, 6, 2), (  # schema-aware: accepts 13 or 15 (validates the 6x2 axes)
+                f"E15 STOP: abs_affine shape {abs_affine.shape} != ({n_phases}, 6, 2)"
+            )
             abs_decode_fn, abs_axis_names = _abs_decode, list(ABS_AXIS_NAMES)
             dataset_abs_sha = _sha256(str(ds / "bc_dataset_abs.npz"))
             sidecar_path = Path(args.policy).with_name(Path(args.policy).stem + "_sidecar.json")
@@ -491,10 +585,14 @@ def _run(args, out_dir) -> dict:  # noqa: C901 (linear 8-step preamble + single 
         "policy_path": args.policy,
         "policy_sha256": policy_sha,
         "policy_absolute": bool(args.policy_absolute),  # E15 item-6
-        "abs_affine": abs_affine,  # E15 item-6: [13,6,2] per-phase per-axis [lo,hi], or None
+        "abs_affine": abs_affine,  # E15 item-6: [n_phases,6,2] per-phase per-axis [lo,hi], or None
         "_abs_decode": abs_decode_fn,  # E15: route_demo_to_bc._abs_decode (threaded like solve_ik_dual), or None
         "abs_axis_names": abs_axis_names,  # E15: ["Rx".."Lz"] for the per-axis clamp verdict, or None
         "dataset_abs_sha256": dataset_abs_sha,  # E15 item-12: sha of bc_dataset_abs.npz when abs, else None
+        "n_phases": n_phases,  # TASK A: schema (13 back-compat / 15 B2) -> obs one-hot width + affine phase count
+        "obs_dim": obs_dim,  # TASK A: 12 + n_phases (25 / 27)
+        "rollout_offset": rollout_offset,  # TASK B (Opt-i'): the offset THIS rollout targets, or None
+        "schedule_source_offset": schedule_source_offset,  # TASK B (Opt-i'): offset parsed from the rec_ path, or None
     }
     # §4.7/E8 offscreen video leg (behind --record-video; frames captured in-loop, mp4 stitched post-hoc).
     ctx["_renderer"] = mujoco.Renderer(mjm, height=480, width=640) if args.record_video else None
@@ -585,7 +683,7 @@ def _control_loop(
             ctx["c2_xy"],
         )
         next_clip = np.array([*(ctx["c1_xy"] if phase_idx <= 6 else ctx["c2_xy"]), ctx["z_top"]], dtype=np.float32)
-        obs_vec = _build_obs(ee_r, ee_l, seg, next_clip, phase_idx)
+        obs_vec = _build_obs(ee_r, ee_l, seg, next_clip, phase_idx, ctx["n_phases"])  # TASK A: schema-aware width
         obs_series.append(obs_vec)
         # §4.2-2/3 action -> EE targets (R=0:3, L=3:6)
         if ctx.get("policy") is not None:  # B1 (§3): DETERMINISTIC actor-mean on the LIVE obs (obs IS consumed now)
@@ -878,7 +976,7 @@ def _finalize_verdict(
     }
 
     # SF-1/6 (%12-APPROVED as B1-前 measurement): obs-parity vs the converter obs + raw obs_series dump.
-    runner_obs = np.asarray(obs_series, dtype=np.float32) if obs_series else np.zeros((0, 25), np.float32)
+    runner_obs = np.asarray(obs_series, dtype=np.float32) if obs_series else np.zeros((0, ctx["obs_dim"]), np.float32)
     np.save(Path(out_dir) / "obs_series.npy", runner_obs)  # raw runner obs for audit
     if smoke or runner_obs.shape[0] != conv_obs.shape[0]:
         obs_parity = {
@@ -953,6 +1051,14 @@ def _finalize_verdict(
         "seat_state_at_pin_fire": seat_state,
         "shas_seen": shas_seen,
         "env_gates_written": gates_written,
+        "schema": {"n_phases": ctx.get("n_phases"), "obs_dim": ctx.get("obs_dim")},  # TASK A: detected obs schema
+        "opt_i_prime": {  # TASK B: per-offset schedule guard provenance (frame-invariance REFUTED)
+            "rollout_offset": list(ctx["rollout_offset"]) if ctx.get("rollout_offset") is not None else None,
+            "schedule_source_offset": (
+                list(ctx["schedule_source_offset"]) if ctx.get("schedule_source_offset") is not None else None
+            ),
+            "assert_active": ctx.get("rollout_offset") is not None and ctx.get("schedule_source_offset") is not None,
+        },
         "regrasp": regrasp_rec,
         "c2_settle": {
             "cable_c2_released_mm": round(cab_c2_mm, 3),
@@ -1047,6 +1153,14 @@ def main():
         "--policy-absolute",
         action="store_true",
         help="E15: decode policy action as an absolute per-phase-affine target (not relative delta)",
+    )
+    parser.add_argument(
+        "--rollout-offset",
+        default=None,
+        help="Opt-i' (TASK B): 'dx,dy' in MILLIMETRES -- the grasp start-offset THIS rollout targets. Asserted "
+        "== the schedule-source offset parsed from the --dataset-dir (else --raw-meta) rec_<x>_<y> path "
+        "(frame-invariance REFUTED: each rollout MUST use its OWN demo's schedule; mismatch = loud SystemExit). "
+        "Omit to leave the guard inert (13-phase / B0 / B0b back-compat).",
     )
     args = parser.parse_args()
 

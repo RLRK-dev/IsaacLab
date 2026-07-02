@@ -1,0 +1,44 @@
+# CP-E RESUME CHARTER (%12 → %11, self-contained — prior session context LOST, disk survives)
+# Written 2026-07-03 04:3x by %12 (RS-TECH-LEAD) after the %11 pane reset (Opus→Fable5, ctx 0%).
+# You are COORD (%11) on node T-ROOT-optE-route-dapg-C1C2, B2 pipeline, checkpoint CP-E.
+
+## 0. Ground yourself (read, cite file:line in your ACK)
+- eval_runs/troot_optE_dapg_wholeroute_scope_20260701/B2_KICKOFF_SPEC.md (FINAL v3.1; §3.3 verdict
+  table / §3.4 phase classes / §5 chain) + B_BC_BUILD_SPEC.md §5.3.
+- charter_b2_execution_coord.txt + charter_b2_parallel_addendum.txt (device pins, discipline)
+- b2_runner_v2_design.md (committed d47ad4dfc5) = the APPROVED runner-v2 contract, including the
+  %12 correction: Opt-i′ = PER-OFFSET schedule (frame-invariance was REFUTED by measurement: 18
+  demos → 6 physics-res / 3 control-res signatures, ±1 step) + runtime assert schedule-source
+  offset == rollout offset.
+- Status so far (all committed): fix-⑤ X-follow 0b711c6b31 / demo set 11+3 frozen 456a983588 /
+  converter v2 + dataset c5e58d5636 / CP-D BC+null trained e95ecded8d (BC whole-demo val 0.000659
+  vs null 0.011979) / og empty-phase graceful d47ad4dfc5.
+
+## 1. What survives on disk from your prior session (verify, do not re-create)
+- UNCOMMITTED diff on thread_isaac_lab/scripts/policy_route_runner.py (+124/−10, 10 hunks) =
+  runner v2 implemented by your prior session's subagent. It is UNVERIFIED. Your first task:
+  verify it against the committed design doc per your prior session's own checklist:
+  (a) py_compile (env7), (b) obs 27D / affine (15,6,2) assert wiring, (c) obs-parity — _live_seg_pos
+  pinned−28 convention unchanged (:117 area), (d) Opt-i′ per-offset schedule + loud assert present
+  (NOT single-schedule), (e) 13-phase back-compat, (f) full diff read line-by-line (§運用16).
+  Report findings honestly — if the subagent's diff deviates from the design, report; do NOT
+  silently fix beyond mechanical corrections (flag anything non-trivial to %12).
+- b2_cpE_og/null/og_gate.json (51KB) = null-policy og output, GUIDE_C2 vacuous handled. Prior
+  session reported: null overall STOP, worst movable γ⊥ = 2.236 (GRASP_HOVER). Re-derive these two
+  numbers from the json yourself and confirm/correct in your report (do not trust the narrative).
+
+## 2. Then: formal OG gate (the B2 verdict computation — offline, no rollout)
+- Inputs: BC policy b2_cpD/bc/policy_abs_b2_e2000.pt (sha e10ec5eb…) + dataset b2_dataset_v2/ +
+  null og (above) via --null-og + --carried-stops GUIDE_C2 (pass per prereg even though vacuous
+  on v2 data — vacuity is recorded, prereg unchanged) + held-out OG-b′ leg per spec §3.2.
+- Output: report the §3.3 3-priority verdict VERBATIM + og_gate.json path + the beat computation
+  (null worst-demo γ⊥ − BC worst-demo γ⊥ ≥ 0.15 absolute) + movable{0-3} γ⊥ values +
+  C2_REGRASP (b)-pair values. NO reinterpretation of bands; decoupled middles = informative.
+- ⛔ NO rollouts, NO further edits to og_offline_gate.py / route file / spec. Verdict adjudication
+  + Rs report = %12 (pre-declared Rs decision point).
+
+## 3. Discipline (unchanged from prior charters)
+0-commit (%12 commits at review). Timestamps from same-turn date. Reports to %12 end with JST
+stamp. GPU: og gate = offline (cpu/either GPU fine, tiny); any later rollouts = GPU-0 only
+(verdict-device pin). If anything on disk contradicts this charter, STOP and report the
+contradiction (§運用10).

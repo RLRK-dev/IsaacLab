@@ -1,0 +1,81 @@
+Actor MLP: Sequential(
+  (0): Linear(in_features=27, out_features=128, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=128, out_features=128, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=128, out_features=6, bias=True)
+)
+Critic MLP: Sequential(
+  (0): Linear(in_features=27, out_features=128, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=128, out_features=128, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=128, out_features=1, bias=True)
+)
+=== OG-a decode-mm RMSE (verdict-critical phases) ===
+phase           axis    n   rmse_mm    p95_mm   bar_mm  verdict
+C1_SEAT         Rx    414     0.178     0.264     5.00  GO
+C1_SEAT         Ry    414     0.346     0.454     5.00  GO
+C1_SEAT         Rz    414     0.547     0.886     1.00  GO
+C1_SEAT         Lx    414     0.161     0.273     5.00  GO
+C1_SEAT         Ly    414     0.233     0.320     5.00  GO
+C1_SEAT         Lz    414     0.886     1.204     1.00  GO
+C1_PIN          Rx     36     0.432     0.454     5.00  GO
+C1_PIN          Ry     36     0.825     0.969     5.00  GO
+C1_PIN          Rz     36     0.772     1.371     1.00  GO
+C1_PIN          Lx     36     0.316     0.397     5.00  GO
+C1_PIN          Ly     36     0.122     0.184     5.00  GO
+C1_PIN          Lz     36     0.989     1.775     1.00  GO
+C2_REGRASP      Rx   1063     0.203     0.378     5.00  GO
+C2_REGRASP      Ry   1063     0.524     1.039     5.00  GO
+C2_REGRASP      Rz   1063     0.876     1.316     1.00  GO
+C2_REGRASP      Lx   1063     0.114     0.188     5.00  GO
+C2_REGRASP      Ly   1063     0.261     0.391     5.00  GO
+C2_REGRASP      Lz   1063     0.532     0.960     1.00  GO
+C2_DUAL_SEAT    Rx    730     0.151     0.185     5.00  GO
+C2_DUAL_SEAT    Ry    730     0.274     0.343     5.00  GO
+C2_DUAL_SEAT    Rz    730     0.611     1.027     1.00  GO
+C2_DUAL_SEAT    Lx    730     0.136     0.169     5.00  GO
+C2_DUAL_SEAT    Ly    730     0.211     0.240     5.00  GO
+C2_DUAL_SEAT    Lz    730     0.982     1.416     1.00  GO
+C2_SETTLE       Rx     72     0.068     0.083     5.00  GO
+C2_SETTLE       Ry     72     0.163     0.287     5.00  GO
+C2_SETTLE       Rz     72     0.708     1.019     1.00  GO
+C2_SETTLE       Lx     72     0.197     0.236     5.00  GO
+C2_SETTLE       Ly     72     0.056     0.097     5.00  GO
+C2_SETTLE       Lz     72     0.785     1.052     1.00  GO
+
+per-axis clamp counts (off-manifold): {'Rx': 0, 'Ry': 0, 'Rz': 0, 'Lx': 0, 'Ly': 0, 'Lz': 0}
+guard-2 expected fires: R=0 (max 9.23mm) / L=47 (max 18.77mm)
+boundary max|da|: 1.6744
+
+=== OG-a verdict: GO ===  (STOP cells=0, MIDDLE cells=0)
+
+=== OG-b anchor-class gate (2mm; movable=GO-gating γ⊥ / cable=(b)-pair / decoupled=informative) ===
+  GRASP_HOVER    [movable ] gamma_perp=2.497 -> STOP
+  GRASP_DESCEND  [movable ] gamma_perp=1.257 -> STOP
+  GRASP_CLOSE    [movable ] gamma_perp=1.041 -> STOP
+  LIFT           [movable ] gamma_perp=1.055 -> STOP
+  ROUTE_C1       [decoupled] gamma_perp=0.841 -> MIDDLE
+  C1_SEAT        [decoupled] gamma_perp=0.859 -> MIDDLE
+  C1_PIN         [decoupled] gamma_perp=0.36 -> GO
+  L_HALF_UNCLAMP [decoupled] gamma_perp=0.469 -> GO
+  R_UNCLAMP_RISE [decoupled] gamma_perp=0.599 -> MIDDLE
+  GUIDE_C2       [decoupled] gamma_perp=None -> unmeasurable
+  GUIDE_PRELIFT  [decoupled] gamma_perp=0.996 -> STOP
+  C2_REGRASP     [cable   ] seg_follow=0.282 ee_only=0.973 -> STOP (pair=STOP)
+  C2_TRANSPORT   [decoupled] gamma_perp=0.989 -> STOP
+  C2_DUAL_SEAT   [decoupled] gamma_perp=0.787 -> MIDDLE
+  C2_SETTLE      [decoupled] gamma_perp=0.502 -> MIDDLE
+  verdict-table GO conditions: {'oga_no_stop': True, 'movable_all_GO': False, 'cable_pair_PASS': False, 'null_beat_ge_margin': False} | null_beat=-0.261 (>= 0.15?)
+
+=== OG-b' contraction (verdict-critical + residual; contracts within 5 iters?) ===
+  C1_SEAT        [transverse ] start=4.512mm -> final_mean=1.597mm (max 1.948) contracted=True
+  C1_PIN         [fixed_point] start=5.0mm -> final_mean=1.472mm (max 1.479) contracted=True
+  C2_REGRASP     [fixed_point] start=5.0mm -> final_mean=5.525mm (max 8.4) contracted=False
+  C2_DUAL_SEAT   [transverse ] start=4.512mm -> final_mean=1.136mm (max 1.337) contracted=True
+  C2_SETTLE      [fixed_point] start=5.0mm -> final_mean=1.895mm (max 1.909) contracted=True
+
+=== OG-c empirical gain (b0a real closed-loop): {'note': 'skipped (no --b0a-obs)'} ===
+
+=== CP3 COMBINED OVERALL: STOP ===  (OG-a=GO, OG-b=STOP)
