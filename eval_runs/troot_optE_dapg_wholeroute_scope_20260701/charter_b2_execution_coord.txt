@@ -1,0 +1,49 @@
+# B2 EXECUTION CHARTER (%12 → %11, 2026-07-03 00:57 JST)
+# Authority chain COMPLETE: production-launch-gate = GO_CANDIDATE_ONLY (e60aed8c06)
+#   + Rs fresh GO 2026-07-03 00:57 (verbatim「Go」) — §8-6b satisfied.
+# Governing spec: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/B2_KICKOFF_SPEC.md (FINAL v3.1, committed df2c774d36)
+# Node: T-ROOT-optE-route-dapg-C1C2
+
+## 0. Your ③④ review result (you were HOLDing on this)
+- 縮退 review = PASS. wiring 9 hunks additive / Rs-LOCKED markers untouched / both-EE same dy = INVARIANT #2
+  preserved / None-path float identity. og combine = §3.3 3-priority exact / null-missing => GO impossible
+  (fail-closed). Baseline sha e01ac1fa… %12 independently recomputed = bit-match with your proof.
+- Commits (pushed to fork): 942ce85f1c (toolchain 4 scripts first-track + wiring) /
+  df2c774d36 (FINAL spec v3.1 + CARRIED_STOPS_PREREG {GUIDE_C2} + OG_V31_REGRESSION_COMPARE + B3_WIRING_REPORT) /
+  e60aed8c06 (gate GO_CANDIDATE records).
+
+## 1. Scope (= spec v3.1 §5 pre-registered chain, checkpoint-gated; cuda:0; ~15-16h)
+CP-A  pre-C1 reach screen (0.3-0.5h): MUST consume the real target-derivation code path
+      (CABLE_XY_OFFSET env var -> grasp_dy wiring), NOT a standalone recomputation.
+      Report: per-offset feasibility + floor count. Spec floor: >=6 feasible offsets required,
+      else BLOCK and report (no improvisation).
+CP-B  recording #1 = half-edge (+10, 0) FIRST, with grasp-close fail early-abort.
+      This is wire-then-validate leg 2 (pre-registered falsification of offset!=0 grasp follow).
+      If grasp-close fails => STOP immediately, report raw evidence. Do NOT tune and retry.
+CP-C  remaining recordings: 13 training offsets + 4 held-out (±8,±8 closed-hull), whole-demo
+      holdout split per spec. Per-recording: SUCCESS/FAIL + termination reason logged.
+CP-D  convert (per-phase affine, union/aggregate abs-affine frozen in meta) -> BC train + replicate-null
+      train (train seed pin per spec).
+CP-E  OG offline gate: og_offline_gate.py with --carried-stops GUIDE_C2 (+ --null-og). Adjudicate
+      STRICTLY per §3.3 3-priority table (1: any non-carried STOP => STOP; 2: GO iff movable{0-3}
+      all γ⊥<=0.5 AND C2_REGRASP (b)-pair [seg-follow in 0.8-1.2 AND ee-only<=0.3] AND null beat >=0.15;
+      3: else BLOCKED_FOR_USER). Report verdict verbatim + og_gate.json path. Decoupled middles = exempt
+      (informative). NO reinterpretation of bands.
+CP-F  held-out rollouts ONLY if CP-E = GO. Then §運用14 video legs via skill-path
+      (video-analyst; claw-zoom on grasp/retention; slip-onset check). MUJOCO_GL=egl + unset DISPLAY
+      for all offscreen renders (X11 BadWindow hazard). Videos -> ~/Downloads copy for Rs.
+
+## 2. Hard constraints
+- NO edits to test_newton_clip_routing.py / og_offline_gate.py / B2_KICKOFF_SPEC.md during the run
+  (locked-file discipline; a needed change = STOP + report to %12).
+- cuda:0 only. Check nvidia-smi --query-compute-apps before launch; CUDA_VISIBLE_DEVICES set explicitly.
+- Every CP: report to %12 before proceeding (checkpoint-gated). Early-abort verdicts (CP-A floor<6,
+  CP-B grasp fail) are SUCCESS states for the falsification design — report them plainly, not as failures
+  to be fixed inline.
+- Timestamps: same-turn date only. No self-verdict on grasp quality from numbers alone — video legs +
+  human ground truth per standing memory.
+- All artifacts under eval_runs/troot_optE_dapg_wholeroute_scope_20260701/ (b2_* prefix), 0-commit until
+  %12 review at CP milestones.
+
+## 3. First action
+ACK this charter + grounding cites (spec v3.1 §3.3/§3.4/§5 + CARRIED_STOPS_PREREG) -> launch CP-A.
