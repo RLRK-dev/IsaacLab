@@ -44,8 +44,9 @@
 ## 4. batch 構成 (D-4 adj-A 同梱)
 - injection 収録 ~24 本: offset は CP-C survivor 格子から (R_MISS 族 (−8,+8) 除外継承)、各 2-4 injections。
 - **adj-A 高密度 8 本** (injection なし、5mm-grid 例 (±5,0),(0,±5),(±5,∓5)…): **事前に CP-A′ 型 reach screen (fix-⑤ 済 code path) を通過した offset のみ**。leg-2 (seg-follow) 用、非 load-bearing。
-- wave 粒度 (条件3-c): **wave-1 = 4 本** ({0,1} injected ×2 / {11} injected ×1 / adj-A ×1) → validity + span-watch +
-  **§運用14 video legs (skill-path 必須: /video-analyzer or video-analyst — injection→dwell→解除→復元の視認 + 把持 phase は claw-zoom で slip/drop 検査)** → %12 loud wave gate → 残 batch 4-way。
+- wave 粒度 (条件3-c): **wave-1 = 4 本** (v2-resolved 2026-07-03 13:37: {0}=GRASP_HOVER は single-call 非 injectable [_PJ_ELIGIBLE 外+assert] ゆえ **{1} DESCEND inj×2** [d1a IC(0,0)/d1b IC(0,+10mm)] + **{11} C2_REGRASP-R inj×1** [c11 IC(0,0)] + **adj-A inj なし×1** [IC(+10,0)]; **1 収録=1 isolated injection** [directional-γ⊥ の phase 帰属に必要; line45「各 2-4 injections」は pre-v2 full-batch 記述、full-batch の phase 混在は wave gate 後に別途] ; 全 offset CP-C survivor) → validity + span-watch +
+  **§運用14 video legs (skill-path 必須: /video-analyzer or video-analyst — injection→解除→recovery の視認 [dwell は v2 廃止] + 把持 phase は claw-zoom で slip/drop 検査)** → %12 loud wave gate → 残 batch 4-way。
+- **wave-1 validity scope = (b) 決定 2026-07-03 13:37 (%12)**: per-recording quality (2 window 有効 + recovery + p2r convert clean + span-watch + video) **に加えて** preliminary 統制 BC train (GPU-1: clean-only 同 survivor vs clean+4p2r) + **wave-1 directional-γ⊥ @ {1},{11}** (v2 §H pre-register; delta = clean+p2r − clean-only)。判定則 (asymmetric、weak-signal 対応): γ⊥ ↓ (弱でも) → full batch 進行 / γ⊥ ↑ (anti-restoring=mask/label 誤り) → **abort** / static → %12+%9 判断。caveat: 4 収録は **directional/sanity** であって absolute-bar でない (絶対 verdict = CP-(ii)-5 band=γ + null_beat + full table)。理由: (a) 単独は機構核心失敗 (γ⊥ 不動) を full-batch spend 後まで検出できず abort gate の意義喪失。span-watch: {1}/{11} pre-contact/単腕ゆえ dual-hold span 主対象外 (%9 N1 免除)=informative、大 span 変位は loud 記録。
 - 全収録 cuda:0 / MUJOCO_GL=egl + DISPLAY unset / GPU-0 4-way ≤4 proc / seed・offset を meta 記録。
 
 ## 5. 変換・学習
