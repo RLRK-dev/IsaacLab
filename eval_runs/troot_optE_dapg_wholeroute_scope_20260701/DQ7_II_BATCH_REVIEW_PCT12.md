@@ -42,13 +42,19 @@
 
 The {11} C2_REGRASP kick-and-recover does not teach the intended signal. **Sharper framing than "the kick is broken":** the banked B2 evidence shows the {11} gap is a **cable-FOLLOWING/tracking deficiency** (CP-E OG pair seg-follow **0.282** ≪ band [0.8,1.2]; og_bprime closed-loop contraction **diverges** 5.0→5.525mm), while kick-and-recover teaches off-path **RESTORING to a path** — these may be **MISMATCHED**. Grounded in memory `reference-og-gate-moving-target-gamma-perp-wrong-sign`: the {11} RHOVER target is cable-anchored + MOVING (`_fr`→`_hovR`), so its correct behavior is following (paired seg∈[0.8,1.2] ∧ ee-only≤0.3), NOT γ⊥≤0.5 restoring.
 
-**OPTIONS for Rs (I do NOT method-swap unilaterally — FOUNDATIONAL-INVARIANT discipline):**
-- **B (null-hypothesis, resolve FIRST):** Is the {11} gap a *following* gap or a *restoring* gap? If following → the kick-restoring-teacher is the wrong tool; correct-following is already the band=γ target → **drop the {11} kick**. If a real off-path restoring gap exists → redesign (A).
-- **A (recommended redesign IF gap is real):** HOLD-recover instead of moving-target kick — inject during a FIXED-target sub-phase of C2_REGRASP so the recovery label is clean. Does NOT touch release-margin/`regrasp_ok`.
-- **C (NOT recommended, Rs-only):** relax release-margin for more recovery room → touches **LOCKED `regrasp_ok`** (reach+grip verdict) = design-gate = Rs専権. I do not propose it.
-- **D (alternative):** inject at a different {11} sub-phase (RDESCEND/pre-approach) where geometry ≠ the moving-target RHOVER.
+**%12+%9 CONCUR** (%9 §運用28 independent re-extract: d_ee +0.003387/n56, **+0.003313/n1053 high-power**, +0.004484/10mm — no sign-flip; doc `DQ7_II_11_MECHANISM_CROSSPV_PCT9.md`). %9 sharpens the framing: the "mechanism does not teach ee-restoring at {11}" is a **data-confirmed FACT**; the *reason* (following≠restoring) is a **leading HYPOTHESIS** → OPTION B *tests* it (not proven). %9 rejects the alternatives: probe-blind (positive control {1} healthy) / metric-unreachable (**NO** — a good following policy CAN reach the {11} pair band ⇒ metric healthy, a MECHANISM mismatch, distinct from a §7-band or {2,3} un-injectability issue) / hook-bug (regrasp_ok=True + video clean).
 
-**Recommendation:** Rs resolve **B** first (following vs restoring gap). If restoring, adopt **A**. C is off-limits absent Rs's invariant call.
+**OPTIONS for Rs (generative-design; I do NOT method-swap — FOUNDATIONAL-INVARIANT discipline):**
+- **B (FIRST-GATE — must precede A/C/D, which all assume a teachable restoring gap):** two checks:
+  - **B0 obs-sufficiency (§運用21, %9-added):** is the {11} following-target IN the obs? FACT (%12 grep): the {11}/C2_REGRASP obs seg_pos = **argmin-to-C2** segment (`_seg_rule` route_demo_to_bc.py:128, recomputed per-frame from cable_xyz) — so NOT trivially blind (a C2-region segment IS present). OPEN: is argmin-to-C2 the *correct* following-target for the re-grasp approach, or does the R arm need a target the obs doesn't isolate? If obs-insufficient → the fix is an **obs change, NOT a teacher redesign** (no teacher fixes an unobservable target; consistent with B2 diversity ALSO failing to move seg 0.282).
+  - **B1 following-vs-restoring:** if obs is sufficient, is the gap *following* (→ correct-following is already the band=γ target, **drop the {11} kick**) or *restoring* (→ A)?
+- **A (redesign IF a teachable restoring gap survives B):** HOLD-recover at a FIXED-target {11} sub-phase (not the moving `_fr`→`_hovR`) → clean restoring label. Does NOT touch release-margin/`regrasp_ok`.
+- **C (Rs-only, last resort):** relax release-margin → touches **LOCKED `regrasp_ok`** (reach+grip verdict) + breaks the v2 §D guard = design-gate = Rs専権. Not proposed.
+- **D (alternative):** inject at a different {11} sub-phase (RDESCEND/pre-approach).
+
+**Recommendation (%12+%9):** Rs run **B first** (B0 obs-sufficiency THEN B1 following-vs-restoring). A/C/D only if a teachable restoring gap survives B. C is off-limits absent Rs's invariant call.
+
+**%9 notes (integrated):** (1) frame CP-(ii)-5 as "**{1} achieved + {11} pending-redesign**", NOT a full-GO attempt ({11}-excluded ⇒ the batch never reaches injectable-only full GO; bankable = {1} restoring at scale). (2) **adjA (on-path dense diversity = a following-type teacher) is a cheap probe for B0/B1** — if adjA moves seg-follow → dense following works; if not → reinforces the obs-blindness reading. (3) {11} ≠ gate-reachability (distinct from the un-injectable {2,3}/{0}).
 
 ---
 
