@@ -3,7 +3,7 @@
 **Author:** RS-TECH-LEAD (%12). **Written:** 2026-07-03 23:20 JST (same-turn `date`).
 **Object:** the capacity pre-test build (`dq7_capacity_pretest/`, %11 2026-07-03 23:10) vs SPEC `dq7_capacity_pretest_mini_spec.md` (`9a4140a8aa`).
 **Design cross-PV:** `DQ7_CAPACITY_CROSSPV_PCT9.md` (%9, CONCUR-with-refinements — all adopted: Var(δ) criterion / primary={0,1} / [A]dwell / degenerate ×4).
-**Status:** %12 verdict = **PASS** (§運用28 independent re-extraction below). %9 RESULT-concur dispatched → joint verdict → Rs. 0-commit build / rollout PROHIBITED / band=γ unchanged / INVARIANTS untouched (offline, no sim).
+**Status:** **JOINT VERDICT = PASS (%12+%9 CONCUR).** %12 §運用28 (below) + %9 §運用28 independent re-extraction (`DQ7_CAPACITY_RESULT_CONCUR_PCT9.md` — incl. iso_*.npz raw recompute + policy direct-load co_seg-free reproduction, NOT reusing %12's probe; val≪Var(δ) 1546× / γ⊥{0,1} GO / degenerate ×4 clear; 2 §運用28 discrepancies resolved [seg.Y std = eval-vs-train set diff / co_seg-free magnitude = top-svd vs per-axis agg, both ≪0.5 same conclusion]). **Rs 2026-07-03 23:3x「推奨で良い」= D-1..D-5 approved + 「GPUを最大限に有効活用」= 8-proc/2-GPU rollout parallelism** → DAgger build track launched (L3, rollout-free first; rollout leg separately HIGH-COST-GATE'd). ⚠ **og_gate.json `overall_verdict:STOP` = route-gate logic (all-movable-GO required), NOT the capacity verdict** (%9 flag — do not relay "capacity STOP"; capacity = {0,1}+val+og_a = PASS). 0-commit build / rollout PROHIBITED (build stage) / band=γ unchanged / INVARIANTS untouched (offline, no sim).
 
 ---
 
@@ -47,7 +47,7 @@ og_offline_gate.py `:97-108`: for `p ≥ grasp_close(2)` the γ⊥ probe **co-mo
 
 ## §5. Next (Rs decision, escalated on %9 result-concur)
 
-capacity PASS routes DQ7 to the **DAgger 5 decision points** (`DQ7_III_DAGGER_SCOPING_COORD2.md` §D, %12+%9 CONCUR): D-1 run DAgger [now capacity-supported] vs skip-to-RL / D-2 batched-GO+§9-abort-cap / D-3 §9 thresholds / D-4 β-mixing + feasibility-filter / D-5 (i)-RL re-decide-at-abort. rollout leg remains HIGH-COST-GATE + fresh Rs GO.
+capacity PASS routes DQ7 to the **DAgger 5 decision points** (`DQ7_III_DAGGER_SCOPING_COORD2.md` §D, %12+%9 CONCUR). **Rs 2026-07-03 23:3x approved all: D-1 run DAgger / D-2 m5×k3-5 truncated-{0-3} batched-GO+§9-abort-cap / D-3 §9 thresholds (K_min=3, γ⊥>0.7 ∧ 10×-collapse → (i)) / D-4 β-mixing + feasibility-filter / D-5 (i)-RL re-decide-at-abort.** + **8-proc/2-GPU rollout parallelism** (m rollouts split across 2 GPUs → iteration rollout wall-clock ~5-8× lower; ⚠ verify both-GPU route-physics parity first — `project-canonical-route-device-fragile`). → **DAgger build track (L3, scoping §8): %10 drafts machinery build spec (D-1..D-5 + feasibility-filter + 8-proc rollout design) → %12 review → 5体 pre-debate → %11 build (rollout-free first).** The **rollout leg remains a separate HIGH-COST-GATE (`/production-launch-gate`) + fresh Rs GO** — the 8-proc parallelized plan is presented at that gate (much lower wall-clock = GO input).
 
 ---
 *RS-TECH-LEAD %12 — 2026-07-03 23:20 JST. %9 RESULT-concur pending → this becomes the %12+%9 joint verdict. 0-commit build / rollout PROHIBITED / no push (Rs-pending).*
