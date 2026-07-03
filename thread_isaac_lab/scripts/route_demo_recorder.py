@@ -119,6 +119,9 @@ class RouteDemoRecorder:
         self._grip = np.zeros(2, dtype=np.float32)  # [L, R] last-commanded servo rad
         self._pin_on, self._pin_body, self._pin_eqid = 0, -1, -1
         self._cur_phase, self._phase_names, self._phase_map = -1, [], {}
+        # DQ7 stage-(ii) kick-and-recover: injection windows recorded into the META only (NOT the npz arrays ->
+        # a None-path run [no mark_injection call] leaves _injection_windows=[] and the npz byte-identical).
+        self._injection_windows, self._inj_open = [], None
         self._n_grip_events, self._n_grip_unmatched = 0, 0
         self._armed, self._done, self._disarm_reason = True, False, None
         self._buf = {k: [] for k in (*_STACK_KEYS, *(name for name, _ in _INT_KEYS))}
@@ -142,6 +145,10 @@ class RouteDemoRecorder:
     # --- sparse register notes (all one-shot self-disarm guarded) -------------
     @_guarded
     def set_phase(self, name):  # current native route section [str], stamped onto subsequent frames
+        if self._inj_open is not None:  # DQ7 (ii): a still-open injection window closes at the phase boundary (defensive)
+            self._inj_open["end_frame"] = len(self._buf["phase_id"])
+            self._injection_windows.append(self._inj_open)
+            self._inj_open = None
         if name not in self._phase_map:
             self._phase_map[name] = len(self._phase_names)
             self._phase_names.append(str(name))
@@ -182,6 +189,36 @@ class RouteDemoRecorder:
     @_guarded
     def note_pin(self, eqid, body_idx):  # eq-pin AFTER activation, stamped onto subsequent frames
         self._pin_on, self._pin_eqid, self._pin_body = 1, int(eqid), int(body_idx)
+
+    @_guarded
+    def mark_injection(self, phase=None, arm=None, offset_m=None, kick_calls=None, seed=None, event="start"):
+        """DQ7 stage-(ii) kick-and-recover: stamp an injection window into the META (NOT the npz arrays).
+
+        ``event="start"`` opens a window at the current frame (the first KICKED frame, commanded target = script
+        + offset); ``event="end"`` closes it at the current frame (the first RELEASED/recovery frame, commanded =
+        script). The offline converter DROPs the frames in ``[start_frame, end_frame)`` (the anti-restoring kick)
+        and KEEPs the rest (mini-spec v2 §F; %9 C1 command-key: KEEP/DROP is keyed on window membership, NOT the
+        achieved ee_pos, because a recovery frame's achieved is legitimately off-path). Recorded frames are the
+        ``route_demo_raw`` ``frame_idx``; per-frame arrays are untouched so a None-path run stays byte-identical.
+        """
+        f = len(self._buf["phase_id"])  # current frame index (== route_demo_raw frame_idx)
+        if event == "start":
+            if self._inj_open is not None:  # defensive: a prior window never closed -> close it at this frame
+                self._inj_open["end_frame"] = f
+                self._injection_windows.append(self._inj_open)
+            self._inj_open = {
+                "phase": str(phase),
+                "arm": str(arm),
+                "offset_mm": [round(float(o) * 1e3, 4) for o in (offset_m or ())],
+                "start_frame": int(f),
+                "end_frame": None,
+                "kick_calls": int(kick_calls) if kick_calls is not None else None,
+                "seed": seed,
+            }
+        elif event == "end" and self._inj_open is not None:
+            self._inj_open["end_frame"] = int(f)
+            self._injection_windows.append(self._inj_open)
+            self._inj_open = None
 
     # --- per-frame sample (guarded + ATOMIC append: F3 torn-frame defense) ----
     @_guarded
@@ -279,7 +316,12 @@ class RouteDemoRecorder:
             "S6_ENGAGE_YC",
             "NEWTON_DEVICE",
             "CUDA_VISIBLE_DEVICES",
+            "CABLE_XY_OFFSET",  # W0: IC cable-XY offset [m, "dx,dy"] -> META-authoritative for the converter (_offset_from_meta); meta-only, npz byte-identical
         )
+        if self._inj_open is not None:  # DQ7 (ii): close a window still open at finalize (defensive, to frame t)
+            self._inj_open["end_frame"] = int(t)
+            self._injection_windows.append(self._inj_open)
+            self._inj_open = None
         prov, prov_now = self._prov0, self._capture_provenance()  # F5: pinned-at-construct vs end-of-run
         changed = sorted(k for k, v in prov["as_run_sha256"].items() if prov_now["as_run_sha256"].get(k) != v)
         meta = dict(self._meta)  # construct-hook fields (resolved_clip_c1/c2, joint_names, markers) flow through
@@ -298,6 +340,7 @@ class RouteDemoRecorder:
                 "changed_during_run": changed,  # F5: sources whose sha256 moved between construct and finalize
                 "env_gates": {k: os.environ.get(k) for k in env_keys},
                 "phase_names": self._phase_names,
+                "injection_windows": self._injection_windows,  # DQ7 (ii): kick windows [start_frame,end_frame) (meta-only; [] on None-path)
                 "n_grip_events": self._n_grip_events,
                 "n_grip_unmatched": self._n_grip_unmatched,  # F1
                 "driver_joints_l": sorted(self._l_drv),

@@ -317,6 +317,39 @@ def _compute_demo(npz_path, meta_path, strict_e4=True):
     }
 
 
+def _mask_injection(dm):
+    """DQ7 stage-(ii) kick-and-recover mask (mini-spec v2 §F; %9 C1 command-keyed).
+
+    DROP the control-frames whose obs frame (``step_f``) OR action-target frame (``next_f``) lies in an injection KICK
+    window (``meta['injection_windows']`` ``[start_frame, end_frame)`` = the frames whose COMMANDED target carried the
+    offset = the anti-restoring outbound); KEEP the rest (post-release recovery = the restoring teacher). KEEP/DROP is
+    keyed on window MEMBERSHIP (== commanded-offset==0), NOT the achieved ee_pos -- a recovery frame's achieved is
+    legitimately off-path (script+offset -> script transit); an achieved-keyed drop would delete the restoring teacher
+    = a FALSE Outcome-B (%9 C1). No-op when ``injection_windows`` is empty (clean demos -> the SAME dict is returned ->
+    byte-identity). The union affine is later built over the masked ``wp`` so the {1}/{11} per-phase box EXPANDS to fit
+    the kept recovery excursions with ``amax<=0.95`` by margin (%9 C2, expand-not-clip, automatic in _build_abs_affine).
+    """
+    wins = dm["meta"].get("injection_windows") or []
+    if not wins:
+        return dm  # clean demo: untouched -> byte-identity of the normal b2 build
+    step_f, next_f, tc0 = dm["step_f"], dm["next_f"], dm["tc"]
+    kick = np.zeros(int(dm["T"]), dtype=bool)  # per-physics-frame kick flag
+    for w in wins:
+        kick[int(w["start_frame"]):int(w["end_frame"])] = True
+    keep = ~(kick[step_f] | kick[next_f])  # drop a control-frame if its obs OR its action-target frame is a kick frame
+    # %9 C1 command-key self-consistency: no KEPT control-frame touches a kick window (offset==0 by construction)
+    assert not (kick[step_f[keep]].any() or kick[next_f[keep]].any()), "p2r mask STOP: a kept row still touches a kick window"
+    for k in ("obs", "wp", "ph", "step_f", "next_f", "seg_idx", "seg_pos", "next_clip"):
+        dm[k] = dm[k][keep]
+    dm["tc"] = int(keep.sum())
+    dm["n_p2r_dropped"], dm["n_injection_windows"] = int((~keep).sum()), len(wins)
+    print(
+        f"[route_demo_to_bc] p2r mask: {len(wins)} kick window(s) -> dropped {dm['n_p2r_dropped']}/{tc0} outbound/kick "
+        f"control-frames, kept {dm['tc']} (recovery+normal; command-keyed on injection_windows, %9 C1)"
+    )
+    return dm
+
+
 def convert(npz_path, meta_path, out_dir, action_repr="delta"):
     dm = _compute_demo(npz_path, meta_path)  # E3 schema gate + shared obs/wp/ph (13 v1 / 15 v2)
     d, meta = dm["d"], dm["meta"]
@@ -476,24 +509,30 @@ def convert(npz_path, meta_path, out_dir, action_repr="delta"):
 
 
 # --- B2 (§1.3/§1.4): multi-demo UNION-affine schema-v2 build ---
-# The CP-C XY start-offset is NOT stored in the recorder meta (verified: no offset key/env_gate); its
-# ONLY source is the survivor-list path encoding (dir basename ``rec_<x>_<y>``). Hull-vertex vs interior
-# sets are the brief §Survivor-set constants (used to pick the whole-demo val split from the interior).
+# CP-C XY start-offset resolution is META-AUTHORITATIVE (W0, Option B, ``_offset_from_meta``): the recorder
+# writes ``env_gates.CABLE_XY_OFFSET`` (a ``"dx,dy"`` METERS string) -> (x, y) mm for any recording,
+# independent of the dir name. When that key is absent/empty the legacy dir-basename ``rec_<x>_<y>`` encoding
+# is used (preserves the exact offsets -- hence byte-identity -- of the pre-existing rec_<x>_<y> demos); an
+# arbitrarily-named legacy recording with no meta offset (e.g. ``rec_d1a`` at IC(0,0)) resolves to (0, 0).
+# The dir basename (NOT the offset) is the unique per-recording identity, so two same-IC recordings never
+# collide on a forced ``rec_0_0`` name. Hull-vertex vs interior sets are the brief §Survivor-set constants
+# (used to pick the whole-demo val split from the interior).
 B2_HULL_VERTEX_OFFSETS = frozenset({(20, 0), (-20, 0), (0, 20), (20, -20), (-20, 20), (-20, -20)})
 B2_INTERIOR_OFFSETS = frozenset({(0, 0), (10, 0), (-10, 0), (0, 10), (0, -10)})
 B2_VERDICT_CRITICAL_PHASES = ("C1_SEAT", "C1_PIN", "C2_REGRASP", "C2_DUAL_SEAT", "C2_SETTLE")
 
 
 def _offset_from_npz_path(npz_path):
-    """Derive the CP-C XY start-offset (x, y) from the demo dir basename ``rec_<x>_<y>`` (fail-loud).
+    """Legacy dir-name parser: CP-C XY offset (x, y) mm from basename ``rec_<x>_<y>``; ``None`` if non-conforming.
 
-    Token rule: ``z0``/``0`` -> 0, ``p<N>`` -> +N, ``m<N>`` -> -N. A non-conforming dir name => STOP
-    (never silently misclassify a demo -> wrong hull/val disposition).
+    Token rule: ``z0``/``0``/``z`` -> 0, ``p<N>`` -> +N, ``m<N>`` -> -N. Returns ``None`` (non-fatal, W0) when
+    the basename is not ``rec_<x>_<y>`` so an arbitrarily-named recording (e.g. ``rec_d1a``) no longer STOPs the
+    build; :func:`_offset_from_meta` is the authoritative resolver that falls back through this to (0, 0).
     """
     base = os.path.basename(os.path.dirname(os.path.abspath(npz_path)))
     parts = base.split("_")
     if len(parts) != 3 or parts[0] != "rec":
-        raise SystemExit(f"B2 STOP: cannot parse offset from dir {base!r} (expected rec_<x>_<y>)")
+        return None
 
     def _tok(t):
         if t in ("z0", "0", "z"):
@@ -502,9 +541,33 @@ def _offset_from_npz_path(npz_path):
             return int(t[1:])
         if t and t[0] == "m" and t[1:].isdigit():
             return -int(t[1:])
-        raise SystemExit(f"B2 STOP: bad offset token {t!r} in dir {base!r}")
+        return None
 
-    return (_tok(parts[1]), _tok(parts[2]))
+    x, y = _tok(parts[1]), _tok(parts[2])
+    return None if (x is None or y is None) else (x, y)
+
+
+def _offset_from_meta(npz_path, meta):
+    """Resolve the CP-C XY start-offset (x, y) mm, META-authoritative (W0, Option B; dir-name-independent).
+
+    Priority: (1) ``meta['env_gates']['CABLE_XY_OFFSET']`` -- a ``"dx,dy"`` METERS string -> (x, y) mm, the
+    authoritative source the recorder writes for any recording regardless of dir name; (2) the legacy dir
+    basename ``rec_<x>_<y>`` (:func:`_offset_from_npz_path`) when that key is absent/empty, preserving the exact
+    offsets (hence byte-identity) of the pre-existing rec_<x>_<y> demos; (3) (0, 0) for an arbitrarily-named
+    legacy recording with no meta offset (e.g. ``rec_d1a`` / ``rec_c11`` at IC(0,0)). The per-recording IDENTITY
+    used for audit ``dir`` / dict keys is the dir basename, never this offset -- so two same-IC recordings (both
+    (0, 0)) stay distinct instead of colliding on a single forced ``rec_0_0`` name.
+
+    Args:
+        npz_path: path to the demo ``route_demo_raw.npz`` (its dir basename is the legacy-offset / identity source).
+        meta: the already-parsed ``route_demo_raw_meta.json`` dict (holds ``env_gates.CABLE_XY_OFFSET`` if present).
+    """
+    raw = (meta.get("env_gates") or {}).get("CABLE_XY_OFFSET")
+    if raw is not None and str(raw).strip():
+        dx, dy = (float(v) for v in str(raw).split(","))
+        return (int(round(dx * 1000.0)), int(round(dy * 1000.0)))
+    dirn = _offset_from_npz_path(npz_path)
+    return dirn if dirn is not None else (0, 0)
 
 
 def convert_b2(train_specs, heldout_specs, out_dir, seed=0):
@@ -524,8 +587,10 @@ def convert_b2(train_specs, heldout_specs, out_dir, seed=0):
     # strict_e4=False: the E4' argmin cross-check is a SEATING-QUALITY gate, not the structural offset (=28,
     # constant). A few CURATED survivors are poorly seated at the pin frame (argmin != pinned-28); they proceed
     # with the structural pinned seg (recorded loudly in seat_quality_audit) rather than crashing the union build.
-    train = [_compute_demo(npz, meta, strict_e4=False) for (npz, meta) in train_specs]
-    held = [_compute_demo(npz, meta, strict_e4=False) for (npz, meta) in heldout_specs]
+    # DQ7 (ii): _mask_injection is a no-op for clean demos (injection_windows=[]) -> byte-identity of the normal b2
+    # build; for injected recordings it DROPs the kick frames (command-keyed, %9 C1) BEFORE the union affine (%9 C2).
+    train = [_mask_injection(_compute_demo(npz, meta, strict_e4=False)) for (npz, meta) in train_specs]
+    held = [_mask_injection(_compute_demo(npz, meta, strict_e4=False)) for (npz, meta) in heldout_specs]
     assert train, "B2 STOP: empty train_specs"
     n_phases, PHASES = train[0]["n_phases"], train[0]["PHASES"]
     for demo in train + held:
@@ -535,8 +600,10 @@ def convert_b2(train_specs, heldout_specs, out_dir, seed=0):
         f"{len(train)} train + {len(held)} held-out demos, seed={seed}"
     )
 
-    train_off = [_offset_from_npz_path(s[0]) for s in train_specs]
-    held_off = [_offset_from_npz_path(s[0]) for s in heldout_specs]
+    # W0: offset is META-authoritative (env_gates.CABLE_XY_OFFSET), reusing the meta already loaded into each
+    # demo dict; dir-basename rec_<x>_<y> is the legacy fallback (byte-identical for the pre-existing demos).
+    train_off = [_offset_from_meta(train_specs[i][0], train[i]["meta"]) for i in range(len(train))]
+    held_off = [_offset_from_meta(heldout_specs[i][0], held[i]["meta"]) for i in range(len(held))]
 
     # --- E4' seating-quality audit (structural offset is 28; argmin mismatch => poorly-seated demo) ---
     seat_quality_audit = []

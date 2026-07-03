@@ -1755,7 +1755,7 @@ _ARM_OVERWRITE_IDX = [i for i in range(2 * JOINTS_PER_ARM) if i not in _GRIPPER_
 _demo_rec = None
 # Line numbers of the 3 "⛔ ANTI-REVERT (Rs-LOCKED 2026-07-01)" markers in THIS file, pinned into the demo meta
 # for quick auditability. Keep in sync with the markers; as_run_sha256 of this file also cryptographically pins them.
-_ANTI_REVERT_MARKER_LINES = [4401, 4417, 4516]
+_ANTI_REVERT_MARKER_LINES = [4477, 4493, 4593]  # DQ7 (ii) re-sync (grep of the ⛔ANTI-REVERT text, not arithmetic; markers byte-untouched)
 
 
 def physics_step(model, state, solver, contacts, scene_info):
@@ -3500,6 +3500,72 @@ def _run_mujoco_grasp_engage_episode(model, solver, contacts, scene_info, fk_sta
     sys.exit(0 if engage_ok else 2)
 
 
+# --- DQ7 stage-(ii) perturb-and-recover: kick-and-recover injection (flag-gated PERTURB_INJECT, default-off) -------
+# A scheduled EE-target detour is applied to ONE arm for kick_calls ik_move_both call(s) (the "kick"), then RELEASED;
+# the script's subsequent same-phase loop calls restore the achieved EE toward the script path (the recovery). The
+# offline converter DROPs the kick frames (anti-restoring) and KEEPs the recovery (restoring teacher). Eligible v1
+# phases: GRASP_DESCEND {1}, C2_REGRASP {11} (loop phases with in-phase recovery). PERTURB_INJECT unset -> off ->
+# _inject_detour is a LITERAL passthrough (byte-identity). Spec: dq7_ii_mini_spec_v2.md §A/§B; %9 C1/C2; Rs GO 12:11.
+_PJ_ELIGIBLE = ("GRASP_DESCEND", "C2_REGRASP")
+_PJ_RELEASE_MARGIN = {"C2_REGRASP": 2}  # {11}: force offset=0 for the final N RHOVER calls -> reach-check/regrasp_ok clean (U5)
+
+
+def _pj_load_schedule(path):
+    """Load the PERTURB_INJECT schedule [dict] or return None (off). Asserts every injection phase is eligible (v2 §B)."""
+    if not path:
+        return None
+    import json
+    with open(path) as fh:
+        raw = json.load(fh)
+    injs = raw.get("injections", [])
+    for e in injs:
+        assert e["phase"] in _PJ_ELIGIBLE, (
+            f"PERTURB_INJECT STOP: phase {e['phase']!r} not in eligible {_PJ_ELIGIBLE} "
+            f"(SKIP-phase injection forbidden -- mini-spec v2 §B _ph-eligibility assert)"
+        )
+    return {"by_key": {(e["phase"], int(e["kick_call_idx"])): e for e in injs}, "open": None, "seed": raw.get("seed")}
+
+
+def _pj_step(sched, rec, phase, call_idx, loop_len, tgl, tgr):
+    """Stateful kick-and-recover target wrap (v2 §A/§B): offsets ONE arm during the kick, passes through otherwise.
+
+    Opens a window at the scheduled (phase, kick_call_idx) (``rec.mark_injection`` start), holds it for kick_calls
+    calls, then closes it (``rec.mark_injection`` end) so the recorded ``[start_frame, end_frame)`` marks the kick.
+    The regrasp_ok release-margin guard (U5) refuses a kick that would still be open within the phase's
+    verdict-critical tail. NEVER offsets both arms (INVARIANT#1). Called ONLY when ``sched`` is not None (the
+    None-path literal passthrough is handled by the caller ``_inject_detour``).
+    """
+    op = sched.get("open")
+    if op is not None and call_idx >= op["end_call"]:  # release -> recovery begins
+        if rec is not None:
+            rec.mark_injection(event="end")
+        sched["open"] = op = None
+    if op is None:  # maybe start a new kick here
+        e = sched["by_key"].get((phase, call_idx))
+        if e is not None:
+            kc = int(e["kick_calls"])
+            if call_idx + kc <= loop_len - _PJ_RELEASE_MARGIN.get(phase, 0):
+                sched["open"] = op = {
+                    "phase": phase, "arm": e["arm"], "offset_m": list(e["offset_m"]), "end_call": call_idx + kc
+                }
+                if rec is not None:
+                    rec.mark_injection(
+                        phase=phase, arm=e["arm"], offset_m=e["offset_m"], kick_calls=kc, seed=e.get("seed"),
+                        event="start",
+                    )
+            else:
+                print(
+                    f"  [PERTURB_INJECT] SKIP {phase} kick@call{call_idx} (+{kc}) breaches release-margin of "
+                    f"loop_len {loop_len} -> passthrough (regrasp_ok guard)"
+                )
+    if op is not None and op["phase"] == phase and call_idx < op["end_call"]:  # within the kick -> offset ONE arm
+        o = op["offset_m"]
+        if op["arm"] == "R":
+            return tgl, (tgr[0] + o[0], tgr[1] + o[1], tgr[2] + o[2])
+        return (tgl[0] + o[0], tgl[1] + o[1], tgl[2] + o[2]), tgr
+    return tgl, tgr
+
+
 def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, output_dir=None, record_video=False):
     """M-Route-1 / M-Route-2 C1 (env-gate S6_GRASP_ROUTE=1): the BANKED centred grasp+lift (M-Grasp-engage-1) +
     AERIAL TRANSPORT (GX 0.30 -> CLIP_X, both arms together) + a CONTINUOUS two-claw cage + drop-in seat@809.
@@ -3555,6 +3621,15 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
     def _ph(name):  # P3 recorder: label the native route section (forward, at each block start; spec §2.6)
         if _demo_rec is not None:
             _demo_rec.set_phase(name)
+
+    # DQ7 (ii): load the injection schedule ONCE (None when PERTURB_INJECT is unset -> hook = literal passthrough).
+    _pj_sched = _pj_load_schedule(os.environ.get("PERTURB_INJECT", ""))
+
+    def _inject_detour(phase_name, call_idx, loop_len, tgl, tgr):
+        """kick-and-recover hook wrapping an ik_move_both target arg (v2 §B). None-path = LITERAL passthrough."""
+        if _pj_sched is None:
+            return tgl, tgr  # U11/C1 byte-identity: returns the EXACT target tuples unchanged (pure-Python, no round-trip)
+        return _pj_step(_pj_sched, _demo_rec, phase_name, call_idx, loop_len, tgl, tgr)
 
     GHS = (WIDE_RIGHT_Y - WIDE_LEFT_Y) / 2.0  # 0.044 = 88mm span INVARIANT#2
     z_grasp = 1.0668  # banked WR cradle (M-Grasp-engage-1 validated)
@@ -3897,7 +3972,8 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
     ok["descend"] = True
     for k in range(1, 9):
         zk = z_high + (z_grasp - z_high) * k / 8
-        state, okk = ik_move_both(model, state, scene_info, solver, contacts, *tgt(x_grasp, zk),
+        _dl, _dr = _inject_detour("GRASP_DESCEND", k, 8, *tgt(x_grasp, zk))  # DQ7 (ii): kick-and-recover (None-path passthrough)
+        state, okk = ik_move_both(model, state, scene_info, solver, contacts, _dl, _dr,
                                   label=f"ROUTE-DESCEND{k}/8", converge_mm=2.5, speed_factor=0.25)
         ok["descend"] = ok["descend"] and bool(okk)
         _cap(f"DESCEND {k}/8")
@@ -4478,7 +4554,8 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
             _hovR = (_cR[0], _cR[1], _z_above_d)
             for kk in range(1, 11):
                 _fr = tuple(float(_prr[i]) + (_hovR[i] - float(_prr[i])) * kk / 10 for i in range(3))
-                state, _ = ik_move_both(model, state, scene_info, solver, contacts, _La, _fr,
+                _La2, _fr2 = _inject_detour("C2_REGRASP", kk, 10, _La, _fr)  # DQ7 (ii): R-arm kick-and-recover (None-path passthrough; release-margin guards regrasp_ok)
+                state, _ = ik_move_both(model, state, scene_info, solver, contacts, _La2, _fr2,
                                         label=f"C2-RHOVER{kk}/10", converge_mm=3.0, speed_factor=0.22)
                 for _ in range(10):
                     state = physics_step(model, state, solver, contacts, scene_info)
