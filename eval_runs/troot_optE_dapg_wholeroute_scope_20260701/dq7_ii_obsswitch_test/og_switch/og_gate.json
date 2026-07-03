@@ -1,0 +1,3217 @@
+{
+  "og_pass": "OG-a+b+bprime+c",
+  "overall_verdict": "STOP",
+  "oga_verdict": "GO",
+  "ogb_verdict": "STOP",
+  "overall_note": "STOP/BLOCKED -> no GPU (HOLD, spec:154). \u00a73.3 3-priority verdict table (v3.1): non-carried STOP -> STOP / GO iff movable-all-GO & cable-pair-PASS & null-beat>=margin / else BLOCKED; decoupled middles EXEMPT. OG-b'/c = closed-loop characterization.",
+  "verdict_table": {
+    "go_conditions": {
+      "oga_no_stop": true,
+      "movable_all_GO": false,
+      "cable_pair_PASS": false,
+      "null_beat_ge_margin": false
+    },
+    "null_beat": null,
+    "null_beat_margin": 0.15,
+    "dr_worst_metric": 1.877,
+    "null_worst_metric": null,
+    "carried_stops": [
+      "GUIDE_C2"
+    ]
+  },
+  "n_stop_cells": 0,
+  "n_middle_cells": 6,
+  "residual_phases": [
+    "C1_PIN",
+    "C1_SEAT",
+    "C2_DUAL_SEAT",
+    "C2_REGRASP"
+  ],
+  "ogb_anchor_gate": {
+    "GRASP_HOVER": {
+      "class": "movable",
+      "gate": "STOP",
+      "gamma_perp_mean": 1.877
+    },
+    "GRASP_DESCEND": {
+      "class": "movable",
+      "gate": "STOP",
+      "gamma_perp_mean": 1.027
+    },
+    "GRASP_CLOSE": {
+      "class": "movable",
+      "gate": "STOP",
+      "gamma_perp_mean": 1.038
+    },
+    "LIFT": {
+      "class": "movable",
+      "gate": "STOP",
+      "gamma_perp_mean": 1.015
+    },
+    "ROUTE_C1": {
+      "class": "decoupled",
+      "gate": "MIDDLE",
+      "gamma_perp_mean": 0.853
+    },
+    "C1_SEAT": {
+      "class": "decoupled",
+      "gate": "MIDDLE",
+      "gamma_perp_mean": 0.835
+    },
+    "C1_PIN": {
+      "class": "decoupled",
+      "gate": "GO",
+      "gamma_perp_mean": 0.235
+    },
+    "L_HALF_UNCLAMP": {
+      "class": "decoupled",
+      "gate": "MIDDLE",
+      "gamma_perp_mean": 0.509
+    },
+    "R_UNCLAMP_RISE": {
+      "class": "decoupled",
+      "gate": "MIDDLE",
+      "gamma_perp_mean": 0.628
+    },
+    "GUIDE_C2": {
+      "class": "decoupled",
+      "gate": "unmeasurable",
+      "gamma_perp_mean": null
+    },
+    "GUIDE_PRELIFT": {
+      "class": "decoupled",
+      "gate": "STOP",
+      "gamma_perp_mean": 1.049
+    },
+    "C2_REGRASP": {
+      "class": "cable",
+      "gate": "STOP",
+      "pair": {
+        "seg_following_gain": 0.24,
+        "ee_only_gain": 0.958,
+        "verdict": "STOP",
+        "n_steps": 2482,
+        "bands": {
+          "seg_PASS": [
+            0.8,
+            1.2
+          ],
+          "ee_PASS_le": 0.3,
+          "ee_STOP_ge": 0.9
+        }
+      }
+    },
+    "C2_TRANSPORT": {
+      "class": "decoupled",
+      "gate": "STOP",
+      "gamma_perp_mean": 0.985
+    },
+    "C2_DUAL_SEAT": {
+      "class": "decoupled",
+      "gate": "MIDDLE",
+      "gamma_perp_mean": 0.709
+    },
+    "C2_SETTLE": {
+      "class": "decoupled",
+      "gate": "GO",
+      "gamma_perp_mean": 0.392
+    }
+  },
+  "og_b": {
+    "2mm": {
+      "GRASP_HOVER": {
+        "n": 1083,
+        "n_measurable": 1083,
+        "dwell": false,
+        "gamma_par_mean": 1.023,
+        "gamma_perp_mean": 1.877,
+        "gamma_perp_max": 2.194
+      },
+      "GRASP_DESCEND": {
+        "n": 769,
+        "n_measurable": 769,
+        "dwell": false,
+        "gamma_par_mean": 0.997,
+        "gamma_perp_mean": 1.027,
+        "gamma_perp_max": 1.06
+      },
+      "GRASP_CLOSE": {
+        "n": 449,
+        "n_measurable": 449,
+        "dwell": true,
+        "gamma_par_mean": 0.969,
+        "gamma_perp_mean": 1.038,
+        "gamma_perp_max": 1.042
+      },
+      "LIFT": {
+        "n": 1260,
+        "n_measurable": 1260,
+        "dwell": false,
+        "gamma_par_mean": 0.997,
+        "gamma_perp_mean": 1.015,
+        "gamma_perp_max": 1.023
+      },
+      "ROUTE_C1": {
+        "n": 756,
+        "n_measurable": 756,
+        "dwell": false,
+        "gamma_par_mean": 0.931,
+        "gamma_perp_mean": 0.853,
+        "gamma_perp_max": 0.963
+      },
+      "C1_SEAT": {
+        "n": 966,
+        "n_measurable": 966,
+        "dwell": false,
+        "gamma_par_mean": 0.975,
+        "gamma_perp_mean": 0.835,
+        "gamma_perp_max": 0.992
+      },
+      "C1_PIN": {
+        "n": 84,
+        "n_measurable": 84,
+        "dwell": true,
+        "gamma_par_mean": 0.235,
+        "gamma_perp_mean": 0.235,
+        "gamma_perp_max": 0.236
+      },
+      "L_HALF_UNCLAMP": {
+        "n": 231,
+        "n_measurable": 231,
+        "dwell": true,
+        "gamma_par_mean": 0.509,
+        "gamma_perp_mean": 0.509,
+        "gamma_perp_max": 0.51
+      },
+      "R_UNCLAMP_RISE": {
+        "n": 1092,
+        "n_measurable": 1092,
+        "dwell": true,
+        "gamma_par_mean": 0.978,
+        "gamma_perp_mean": 0.628,
+        "gamma_perp_max": 1.033
+      },
+      "GUIDE_C2": {
+        "n": 0,
+        "n_measurable": 0,
+        "note": "no control step -> vacuous phase"
+      },
+      "GUIDE_PRELIFT": {
+        "n": 3751,
+        "n_measurable": 3751,
+        "dwell": false,
+        "gamma_par_mean": 0.992,
+        "gamma_perp_mean": 1.049,
+        "gamma_perp_max": 1.202
+      },
+      "C2_REGRASP": {
+        "n": 2482,
+        "n_measurable": 2482,
+        "dwell": false,
+        "gamma_par_mean": 1.013,
+        "gamma_perp_mean": 1.072,
+        "gamma_perp_max": 1.128
+      },
+      "C2_TRANSPORT": {
+        "n": 1302,
+        "n_measurable": 1302,
+        "dwell": false,
+        "gamma_par_mean": 0.996,
+        "gamma_perp_mean": 0.985,
+        "gamma_perp_max": 1.029
+      },
+      "C2_DUAL_SEAT": {
+        "n": 1705,
+        "n_measurable": 1689,
+        "dwell": false,
+        "gamma_par_mean": 1.001,
+        "gamma_perp_mean": 0.709,
+        "gamma_perp_max": 1.055
+      },
+      "C2_SETTLE": {
+        "n": 168,
+        "n_measurable": 168,
+        "dwell": true,
+        "gamma_par_mean": 0.393,
+        "gamma_perp_mean": 0.392,
+        "gamma_perp_max": 0.398
+      }
+    },
+    "10mm": {
+      "GRASP_HOVER": {
+        "n": 1083,
+        "n_measurable": 1083,
+        "dwell": false,
+        "gamma_par_mean": 1.023,
+        "gamma_perp_mean": 1.877,
+        "gamma_perp_max": 2.194
+      },
+      "GRASP_DESCEND": {
+        "n": 769,
+        "n_measurable": 381,
+        "dwell": false,
+        "gamma_par_mean": 0.994,
+        "gamma_perp_mean": 1.027,
+        "gamma_perp_max": 1.05
+      },
+      "GRASP_CLOSE": {
+        "n": 449,
+        "n_measurable": 235,
+        "dwell": true,
+        "gamma_par_mean": 0.97,
+        "gamma_perp_mean": 1.04,
+        "gamma_perp_max": 1.041
+      },
+      "LIFT": {
+        "n": 1260,
+        "n_measurable": 552,
+        "dwell": false,
+        "gamma_par_mean": 0.996,
+        "gamma_perp_mean": 1.013,
+        "gamma_perp_max": 1.015
+      },
+      "ROUTE_C1": {
+        "n": 756,
+        "n_measurable": 588,
+        "dwell": false,
+        "gamma_par_mean": 0.978,
+        "gamma_perp_mean": 0.826,
+        "gamma_perp_max": 0.867
+      },
+      "C1_SEAT": {
+        "n": 966,
+        "n_measurable": 603,
+        "dwell": false,
+        "gamma_par_mean": 0.972,
+        "gamma_perp_mean": 0.807,
+        "gamma_perp_max": 0.811
+      },
+      "C1_PIN": {
+        "n": 84,
+        "n_measurable": 84,
+        "dwell": true,
+        "gamma_par_mean": 0.235,
+        "gamma_perp_mean": 0.235,
+        "gamma_perp_max": 0.236
+      },
+      "L_HALF_UNCLAMP": {
+        "n": 231,
+        "n_measurable": 231,
+        "dwell": true,
+        "gamma_par_mean": 0.509,
+        "gamma_perp_mean": 0.509,
+        "gamma_perp_max": 0.511
+      },
+      "R_UNCLAMP_RISE": {
+        "n": 1092,
+        "n_measurable": 840,
+        "dwell": true,
+        "gamma_par_mean": 1.0,
+        "gamma_perp_mean": 0.596,
+        "gamma_perp_max": 0.598
+      },
+      "GUIDE_C2": {
+        "n": 0,
+        "n_measurable": 0,
+        "note": "no control step -> vacuous phase"
+      },
+      "GUIDE_PRELIFT": {
+        "n": 3751,
+        "n_measurable": 2,
+        "dwell": false,
+        "gamma_par_mean": 0.912,
+        "gamma_perp_mean": 1.033,
+        "gamma_perp_max": 1.033
+      },
+      "C2_REGRASP": {
+        "n": 2482,
+        "n_measurable": 854,
+        "dwell": false,
+        "gamma_par_mean": 0.989,
+        "gamma_perp_mean": 1.039,
+        "gamma_perp_max": 1.118
+      },
+      "C2_TRANSPORT": {
+        "n": 1302,
+        "n_measurable": 977,
+        "dwell": false,
+        "gamma_par_mean": 1.001,
+        "gamma_perp_mean": 0.984,
+        "gamma_perp_max": 1.024
+      },
+      "C2_DUAL_SEAT": {
+        "n": 1705,
+        "n_measurable": 1363,
+        "dwell": false,
+        "gamma_par_mean": 0.997,
+        "gamma_perp_mean": 0.698,
+        "gamma_perp_max": 1.041
+      },
+      "C2_SETTLE": {
+        "n": 168,
+        "n_measurable": 168,
+        "dwell": true,
+        "gamma_par_mean": 0.393,
+        "gamma_perp_mean": 0.392,
+        "gamma_perp_max": 0.398
+      }
+    }
+  },
+  "og_bprime": {
+    "C1_SEAT": {
+      "metric": "transverse",
+      "start_dist_mm": 4.512,
+      "final_dist_mm_mean": 0.57,
+      "final_dist_mm_max": 0.699,
+      "contracted": true,
+      "iter_mm_mean": [
+        4.512,
+        2.392,
+        1.368,
+        0.901,
+        0.682,
+        0.57
+      ]
+    },
+    "C1_PIN": {
+      "metric": "fixed_point",
+      "start_dist_mm": 5.0,
+      "final_dist_mm_mean": 1.355,
+      "final_dist_mm_max": 1.356,
+      "contracted": true,
+      "iter_mm_mean": [
+        5.0,
+        1.481,
+        1.343,
+        1.352,
+        1.354,
+        1.355
+      ]
+    },
+    "C2_REGRASP": {
+      "metric": "transverse",
+      "start_dist_mm": 5.0,
+      "final_dist_mm_mean": 3.527,
+      "final_dist_mm_max": 5.973,
+      "contracted": false,
+      "iter_mm_mean": [
+        5.0,
+        2.988,
+        2.987,
+        3.297,
+        3.463,
+        3.527
+      ]
+    },
+    "C2_DUAL_SEAT": {
+      "metric": "transverse",
+      "start_dist_mm": 4.512,
+      "final_dist_mm_mean": 0.612,
+      "final_dist_mm_max": 0.692,
+      "contracted": true,
+      "iter_mm_mean": [
+        4.512,
+        2.149,
+        1.127,
+        0.755,
+        0.643,
+        0.612
+      ]
+    },
+    "C2_SETTLE": {
+      "metric": "fixed_point",
+      "start_dist_mm": 5.0,
+      "final_dist_mm_mean": 2.747,
+      "final_dist_mm_max": 2.78,
+      "contracted": true,
+      "iter_mm_mean": [
+        5.0,
+        2.252,
+        2.406,
+        2.619,
+        2.711,
+        2.747
+      ]
+    }
+  },
+  "og_c": {
+    "note": "skipped (no --b0a-obs)"
+  },
+  "stops": [],
+  "middles": [
+    {
+      "phase": "C1_SEAT",
+      "axis": "Rz",
+      "n": 966,
+      "rmse_mm": 1.617,
+      "p95_mm": 1.852,
+      "box_mm": 30.0,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    },
+    {
+      "phase": "C1_SEAT",
+      "axis": "Lz",
+      "n": 966,
+      "rmse_mm": 2.024,
+      "p95_mm": 2.261,
+      "box_mm": 30.0,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    },
+    {
+      "phase": "C1_PIN",
+      "axis": "Lz",
+      "n": 84,
+      "rmse_mm": 1.007,
+      "p95_mm": 1.445,
+      "box_mm": 30.0,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    },
+    {
+      "phase": "C2_REGRASP",
+      "axis": "Lz",
+      "n": 2482,
+      "rmse_mm": 1.277,
+      "p95_mm": 1.755,
+      "box_mm": 30.0,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    },
+    {
+      "phase": "C2_DUAL_SEAT",
+      "axis": "Rz",
+      "n": 1705,
+      "rmse_mm": 1.17,
+      "p95_mm": 1.593,
+      "box_mm": 41.48,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    },
+    {
+      "phase": "C2_DUAL_SEAT",
+      "axis": "Lz",
+      "n": 1705,
+      "rmse_mm": 1.608,
+      "p95_mm": 2.05,
+      "box_mm": 41.48,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    }
+  ],
+  "per_axis_clamp_counts": {
+    "Rx": 0,
+    "Ry": 0,
+    "Rz": 0,
+    "Lx": 0,
+    "Ly": 0,
+    "Lz": 0
+  },
+  "boundary_jumps": [
+    {
+      "at_step": 51,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6534
+    },
+    {
+      "at_step": 91,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8657
+    },
+    {
+      "at_step": 112,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8577
+    },
+    {
+      "at_step": 172,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.81
+    },
+    {
+      "at_step": 208,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8745
+    },
+    {
+      "at_step": 254,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.8282
+    },
+    {
+      "at_step": 258,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0373
+    },
+    {
+      "at_step": 269,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.808
+    },
+    {
+      "at_step": 321,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8522
+    },
+    {
+      "at_step": 500,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8816
+    },
+    {
+      "at_step": 618,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.8
+    },
+    {
+      "at_step": 680,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8428
+    },
+    {
+      "at_step": 761,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8754
+    },
+    {
+      "at_step": 769,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8787
+    },
+    {
+      "at_step": 820,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6643
+    },
+    {
+      "at_step": 860,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8286
+    },
+    {
+      "at_step": 882,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8452
+    },
+    {
+      "at_step": 942,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8033
+    },
+    {
+      "at_step": 978,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8718
+    },
+    {
+      "at_step": 1024,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.8377
+    },
+    {
+      "at_step": 1028,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0289
+    },
+    {
+      "at_step": 1039,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8021
+    },
+    {
+      "at_step": 1091,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8296
+    },
+    {
+      "at_step": 1269,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8793
+    },
+    {
+      "at_step": 1387,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.8121
+    },
+    {
+      "at_step": 1449,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8452
+    },
+    {
+      "at_step": 1531,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8758
+    },
+    {
+      "at_step": 1539,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8733
+    },
+    {
+      "at_step": 1591,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6397
+    },
+    {
+      "at_step": 1631,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8512
+    },
+    {
+      "at_step": 1652,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8627
+    },
+    {
+      "at_step": 1712,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8064
+    },
+    {
+      "at_step": 1748,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8652
+    },
+    {
+      "at_step": 1794,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7816
+    },
+    {
+      "at_step": 1798,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0397
+    },
+    {
+      "at_step": 1809,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8042
+    },
+    {
+      "at_step": 1861,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8409
+    },
+    {
+      "at_step": 2040,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8741
+    },
+    {
+      "at_step": 2158,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.758
+    },
+    {
+      "at_step": 2220,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8454
+    },
+    {
+      "at_step": 2301,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8129
+    },
+    {
+      "at_step": 2309,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.816
+    },
+    {
+      "at_step": 2361,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.65
+    },
+    {
+      "at_step": 2401,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8542
+    },
+    {
+      "at_step": 2422,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.866
+    },
+    {
+      "at_step": 2482,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.804
+    },
+    {
+      "at_step": 2518,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8744
+    },
+    {
+      "at_step": 2564,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7279
+    },
+    {
+      "at_step": 2568,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0774
+    },
+    {
+      "at_step": 2579,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8034
+    },
+    {
+      "at_step": 2631,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8404
+    },
+    {
+      "at_step": 2810,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8773
+    },
+    {
+      "at_step": 2928,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.7999
+    },
+    {
+      "at_step": 2990,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.843
+    },
+    {
+      "at_step": 3071,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8256
+    },
+    {
+      "at_step": 3079,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8279
+    },
+    {
+      "at_step": 3131,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6379
+    },
+    {
+      "at_step": 3171,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8601
+    },
+    {
+      "at_step": 3192,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8583
+    },
+    {
+      "at_step": 3252,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8049
+    },
+    {
+      "at_step": 3288,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8663
+    },
+    {
+      "at_step": 3334,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7438
+    },
+    {
+      "at_step": 3338,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0655
+    },
+    {
+      "at_step": 3349,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8069
+    },
+    {
+      "at_step": 3401,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8385
+    },
+    {
+      "at_step": 3580,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8745
+    },
+    {
+      "at_step": 3698,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.7663
+    },
+    {
+      "at_step": 3760,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8438
+    },
+    {
+      "at_step": 3841,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8109
+    },
+    {
+      "at_step": 3849,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8271
+    },
+    {
+      "at_step": 3900,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6587
+    },
+    {
+      "at_step": 3940,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8235
+    },
+    {
+      "at_step": 3962,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8515
+    },
+    {
+      "at_step": 4022,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8015
+    },
+    {
+      "at_step": 4058,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.874
+    },
+    {
+      "at_step": 4104,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7239
+    },
+    {
+      "at_step": 4108,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0803
+    },
+    {
+      "at_step": 4119,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8048
+    },
+    {
+      "at_step": 4171,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8366
+    },
+    {
+      "at_step": 4349,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8771
+    },
+    {
+      "at_step": 4468,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.8007
+    },
+    {
+      "at_step": 4530,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8468
+    },
+    {
+      "at_step": 4611,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8237
+    },
+    {
+      "at_step": 4619,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8248
+    },
+    {
+      "at_step": 4670,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6631
+    },
+    {
+      "at_step": 4710,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8262
+    },
+    {
+      "at_step": 4732,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8455
+    },
+    {
+      "at_step": 4792,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8055
+    },
+    {
+      "at_step": 4828,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8708
+    },
+    {
+      "at_step": 4874,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.8376
+    },
+    {
+      "at_step": 4878,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0296
+    },
+    {
+      "at_step": 4889,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8028
+    },
+    {
+      "at_step": 4941,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8393
+    },
+    {
+      "at_step": 5119,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8786
+    },
+    {
+      "at_step": 5237,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.813
+    },
+    {
+      "at_step": 5299,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8386
+    },
+    {
+      "at_step": 5381,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8697
+    },
+    {
+      "at_step": 5389,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.871
+    },
+    {
+      "at_step": 5441,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6452
+    },
+    {
+      "at_step": 5481,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8586
+    },
+    {
+      "at_step": 5502,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8559
+    },
+    {
+      "at_step": 5562,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8041
+    },
+    {
+      "at_step": 5598,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8738
+    },
+    {
+      "at_step": 5644,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7283
+    },
+    {
+      "at_step": 5648,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0793
+    },
+    {
+      "at_step": 5659,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8056
+    },
+    {
+      "at_step": 5711,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8358
+    },
+    {
+      "at_step": 5890,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8773
+    },
+    {
+      "at_step": 6008,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.7985
+    },
+    {
+      "at_step": 6070,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8467
+    },
+    {
+      "at_step": 6151,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8262
+    },
+    {
+      "at_step": 6159,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8235
+    },
+    {
+      "at_step": 6211,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6397
+    },
+    {
+      "at_step": 6251,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8512
+    },
+    {
+      "at_step": 6272,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8627
+    },
+    {
+      "at_step": 6332,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8058
+    },
+    {
+      "at_step": 6368,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8661
+    },
+    {
+      "at_step": 6414,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7702
+    },
+    {
+      "at_step": 6418,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0488
+    },
+    {
+      "at_step": 6429,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8046
+    },
+    {
+      "at_step": 6481,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8417
+    },
+    {
+      "at_step": 6660,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.875
+    },
+    {
+      "at_step": 6778,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.7553
+    },
+    {
+      "at_step": 6840,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.847
+    },
+    {
+      "at_step": 6921,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8151
+    },
+    {
+      "at_step": 6929,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8273
+    },
+    {
+      "at_step": 6981,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6379
+    },
+    {
+      "at_step": 7015,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8601
+    },
+    {
+      "at_step": 7036,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8583
+    },
+    {
+      "at_step": 7096,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8048
+    },
+    {
+      "at_step": 7132,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8663
+    },
+    {
+      "at_step": 7178,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7435
+    },
+    {
+      "at_step": 7182,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0656
+    },
+    {
+      "at_step": 7193,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8069
+    },
+    {
+      "at_step": 7245,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8385
+    },
+    {
+      "at_step": 7424,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8745
+    },
+    {
+      "at_step": 7542,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.7663
+    },
+    {
+      "at_step": 7604,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8438
+    },
+    {
+      "at_step": 7685,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8107
+    },
+    {
+      "at_step": 7693,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8208
+    },
+    {
+      "at_step": 7745,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6397
+    },
+    {
+      "at_step": 7779,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8512
+    },
+    {
+      "at_step": 7800,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8627
+    },
+    {
+      "at_step": 7860,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8065
+    },
+    {
+      "at_step": 7896,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8651
+    },
+    {
+      "at_step": 7942,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7796
+    },
+    {
+      "at_step": 7946,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0403
+    },
+    {
+      "at_step": 7957,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8041
+    },
+    {
+      "at_step": 8009,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8405
+    },
+    {
+      "at_step": 8188,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8741
+    },
+    {
+      "at_step": 8306,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.758
+    },
+    {
+      "at_step": 8368,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8454
+    },
+    {
+      "at_step": 8449,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8118
+    },
+    {
+      "at_step": 8457,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8221
+    },
+    {
+      "at_step": 8509,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6452
+    },
+    {
+      "at_step": 8543,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8586
+    },
+    {
+      "at_step": 8564,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8561
+    },
+    {
+      "at_step": 8624,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8041
+    },
+    {
+      "at_step": 8660,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8738
+    },
+    {
+      "at_step": 8706,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7317
+    },
+    {
+      "at_step": 8710,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0779
+    },
+    {
+      "at_step": 8721,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8056
+    },
+    {
+      "at_step": 8773,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8358
+    },
+    {
+      "at_step": 8952,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8774
+    },
+    {
+      "at_step": 9070,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.7986
+    },
+    {
+      "at_step": 9132,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8467
+    },
+    {
+      "at_step": 9213,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8279
+    },
+    {
+      "at_step": 9221,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8294
+    },
+    {
+      "at_step": 9272,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6587
+    },
+    {
+      "at_step": 9306,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8235
+    },
+    {
+      "at_step": 9328,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8515
+    },
+    {
+      "at_step": 9388,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8015
+    },
+    {
+      "at_step": 9424,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8741
+    },
+    {
+      "at_step": 9470,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7246
+    },
+    {
+      "at_step": 9474,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0799
+    },
+    {
+      "at_step": 9485,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8047
+    },
+    {
+      "at_step": 9537,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8365
+    },
+    {
+      "at_step": 9715,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8771
+    },
+    {
+      "at_step": 9834,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.8008
+    },
+    {
+      "at_step": 9896,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8467
+    },
+    {
+      "at_step": 9977,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8241
+    },
+    {
+      "at_step": 9985,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8193
+    },
+    {
+      "at_step": 10037,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6534
+    },
+    {
+      "at_step": 10071,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8657
+    },
+    {
+      "at_step": 10092,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8577
+    },
+    {
+      "at_step": 10152,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8099
+    },
+    {
+      "at_step": 10188,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8745
+    },
+    {
+      "at_step": 10234,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.8277
+    },
+    {
+      "at_step": 10238,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0375
+    },
+    {
+      "at_step": 10249,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.808
+    },
+    {
+      "at_step": 10301,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8522
+    },
+    {
+      "at_step": 10480,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8816
+    },
+    {
+      "at_step": 10598,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.8
+    },
+    {
+      "at_step": 10660,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8428
+    },
+    {
+      "at_step": 10741,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8752
+    },
+    {
+      "at_step": 10749,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8743
+    },
+    {
+      "at_step": 10799,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.4486
+    },
+    {
+      "at_step": 10834,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8221
+    },
+    {
+      "at_step": 10856,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8504
+    },
+    {
+      "at_step": 10916,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8082
+    },
+    {
+      "at_step": 10952,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8736
+    },
+    {
+      "at_step": 10998,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.8239
+    },
+    {
+      "at_step": 11002,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0411
+    },
+    {
+      "at_step": 11013,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8096
+    },
+    {
+      "at_step": 11065,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8499
+    },
+    {
+      "at_step": 11243,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8814
+    },
+    {
+      "at_step": 11362,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.7979
+    },
+    {
+      "at_step": 11424,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8407
+    },
+    {
+      "at_step": 11505,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8739
+    },
+    {
+      "at_step": 11513,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8712
+    },
+    {
+      "at_step": 11565,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6397
+    },
+    {
+      "at_step": 11599,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8512
+    },
+    {
+      "at_step": 11620,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8626
+    },
+    {
+      "at_step": 11680,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8057
+    },
+    {
+      "at_step": 11716,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8661
+    },
+    {
+      "at_step": 11762,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7641
+    },
+    {
+      "at_step": 11766,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0512
+    },
+    {
+      "at_step": 11777,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8044
+    },
+    {
+      "at_step": 11829,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8407
+    },
+    {
+      "at_step": 12008,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8761
+    },
+    {
+      "at_step": 12126,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.7696
+    },
+    {
+      "at_step": 12188,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8458
+    },
+    {
+      "at_step": 12269,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8122
+    },
+    {
+      "at_step": 12277,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8159
+    },
+    {
+      "at_step": 12329,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.65
+    },
+    {
+      "at_step": 12363,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8542
+    },
+    {
+      "at_step": 12384,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8658
+    },
+    {
+      "at_step": 12444,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8039
+    },
+    {
+      "at_step": 12480,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8745
+    },
+    {
+      "at_step": 12526,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.7246
+    },
+    {
+      "at_step": 12530,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0787
+    },
+    {
+      "at_step": 12541,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8034
+    },
+    {
+      "at_step": 12593,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8398
+    },
+    {
+      "at_step": 12772,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8772
+    },
+    {
+      "at_step": 12890,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.7999
+    },
+    {
+      "at_step": 12952,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8431
+    },
+    {
+      "at_step": 13033,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8239
+    },
+    {
+      "at_step": 13041,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8207
+    },
+    {
+      "at_step": 13093,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6508
+    },
+    {
+      "at_step": 13127,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8641
+    },
+    {
+      "at_step": 13148,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8558
+    },
+    {
+      "at_step": 13208,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8072
+    },
+    {
+      "at_step": 13244,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8744
+    },
+    {
+      "at_step": 13290,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.8242
+    },
+    {
+      "at_step": 13294,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0392
+    },
+    {
+      "at_step": 13305,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8081
+    },
+    {
+      "at_step": 13357,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8518
+    },
+    {
+      "at_step": 13536,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8814
+    },
+    {
+      "at_step": 13654,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.7998
+    },
+    {
+      "at_step": 13716,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8424
+    },
+    {
+      "at_step": 13797,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8735
+    },
+    {
+      "at_step": 13805,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8728
+    },
+    {
+      "at_step": 13856,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6633
+    },
+    {
+      "at_step": 13890,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8221
+    },
+    {
+      "at_step": 13912,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8504
+    },
+    {
+      "at_step": 13972,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8082
+    },
+    {
+      "at_step": 14008,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8735
+    },
+    {
+      "at_step": 14054,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.8237
+    },
+    {
+      "at_step": 14058,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0413
+    },
+    {
+      "at_step": 14069,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8098
+    },
+    {
+      "at_step": 14121,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8499
+    },
+    {
+      "at_step": 14299,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8814
+    },
+    {
+      "at_step": 14418,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.7975
+    },
+    {
+      "at_step": 14480,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8407
+    },
+    {
+      "at_step": 14561,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8737
+    },
+    {
+      "at_step": 14569,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8772
+    },
+    {
+      "at_step": 14620,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6643
+    },
+    {
+      "at_step": 14654,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8286
+    },
+    {
+      "at_step": 14676,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8452
+    },
+    {
+      "at_step": 14736,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8031
+    },
+    {
+      "at_step": 14772,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8718
+    },
+    {
+      "at_step": 14818,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.8371
+    },
+    {
+      "at_step": 14822,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0277
+    },
+    {
+      "at_step": 14833,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8022
+    },
+    {
+      "at_step": 14885,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8324
+    },
+    {
+      "at_step": 15063,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.8795
+    },
+    {
+      "at_step": 15181,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.8126
+    },
+    {
+      "at_step": 15243,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8455
+    },
+    {
+      "at_step": 15325,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8761
+    },
+    {
+      "at_step": 15333,
+      "from": "C2_SETTLE",
+      "to": "GRASP_HOVER",
+      "max_da": 0.8776
+    },
+    {
+      "at_step": 15384,
+      "from": "GRASP_HOVER",
+      "to": "GRASP_DESCEND",
+      "max_da": 1.6631
+    },
+    {
+      "at_step": 15418,
+      "from": "GRASP_DESCEND",
+      "to": "GRASP_CLOSE",
+      "max_da": 0.8262
+    },
+    {
+      "at_step": 15440,
+      "from": "GRASP_CLOSE",
+      "to": "LIFT",
+      "max_da": 0.8455
+    },
+    {
+      "at_step": 15500,
+      "from": "LIFT",
+      "to": "ROUTE_C1",
+      "max_da": 0.8055
+    },
+    {
+      "at_step": 15536,
+      "from": "ROUTE_C1",
+      "to": "C1_SEAT",
+      "max_da": 0.8708
+    },
+    {
+      "at_step": 15582,
+      "from": "C1_SEAT",
+      "to": "C1_PIN",
+      "max_da": 0.8322
+    },
+    {
+      "at_step": 15586,
+      "from": "C1_PIN",
+      "to": "L_HALF_UNCLAMP",
+      "max_da": 0.0283
+    },
+    {
+      "at_step": 15597,
+      "from": "L_HALF_UNCLAMP",
+      "to": "R_UNCLAMP_RISE",
+      "max_da": 0.8023
+    },
+    {
+      "at_step": 15649,
+      "from": "R_UNCLAMP_RISE",
+      "to": "GUIDE_PRELIFT",
+      "max_da": 0.8351
+    },
+    {
+      "at_step": 15827,
+      "from": "GUIDE_PRELIFT",
+      "to": "C2_REGRASP",
+      "max_da": 0.879
+    },
+    {
+      "at_step": 15945,
+      "from": "C2_REGRASP",
+      "to": "C2_TRANSPORT",
+      "max_da": 0.8153
+    },
+    {
+      "at_step": 16007,
+      "from": "C2_TRANSPORT",
+      "to": "C2_DUAL_SEAT",
+      "max_da": 0.8456
+    },
+    {
+      "at_step": 16089,
+      "from": "C2_DUAL_SEAT",
+      "to": "C2_SETTLE",
+      "max_da": 0.8749
+    }
+  ],
+  "guard2_expected_fires": {
+    "R_count": 0,
+    "L_count": 4,
+    "R_max_mm": 12.16,
+    "L_max_mm": 15.89
+  },
+  "table": [
+    {
+      "phase": "GRASP_HOVER",
+      "axis": "Rx",
+      "n": 1083,
+      "rmse_mm": 0.574,
+      "p95_mm": 0.975,
+      "box_mm": 92.42,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_HOVER",
+      "axis": "Ry",
+      "n": 1083,
+      "rmse_mm": 0.599,
+      "p95_mm": 1.259,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_HOVER",
+      "axis": "Rz",
+      "n": 1083,
+      "rmse_mm": 1.878,
+      "p95_mm": 3.595,
+      "box_mm": 473.67,
+      "bar_mm": 11.842,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_HOVER",
+      "axis": "Lx",
+      "n": 1083,
+      "rmse_mm": 1.003,
+      "p95_mm": 1.643,
+      "box_mm": 125.82,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_HOVER",
+      "axis": "Ly",
+      "n": 1083,
+      "rmse_mm": 1.072,
+      "p95_mm": 1.99,
+      "box_mm": 372.22,
+      "bar_mm": 9.306,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_HOVER",
+      "axis": "Lz",
+      "n": 1083,
+      "rmse_mm": 3.009,
+      "p95_mm": 4.532,
+      "box_mm": 473.87,
+      "bar_mm": 11.847,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_DESCEND",
+      "axis": "Rx",
+      "n": 769,
+      "rmse_mm": 0.33,
+      "p95_mm": 0.344,
+      "box_mm": 52.71,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_DESCEND",
+      "axis": "Ry",
+      "n": 769,
+      "rmse_mm": 0.219,
+      "p95_mm": 0.21,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_DESCEND",
+      "axis": "Rz",
+      "n": 769,
+      "rmse_mm": 0.504,
+      "p95_mm": 0.732,
+      "box_mm": 116.68,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_DESCEND",
+      "axis": "Lx",
+      "n": 769,
+      "rmse_mm": 0.352,
+      "p95_mm": 0.297,
+      "box_mm": 48.36,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_DESCEND",
+      "axis": "Ly",
+      "n": 769,
+      "rmse_mm": 0.221,
+      "p95_mm": 0.238,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_DESCEND",
+      "axis": "Lz",
+      "n": 769,
+      "rmse_mm": 1.219,
+      "p95_mm": 1.49,
+      "box_mm": 116.69,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_CLOSE",
+      "axis": "Rx",
+      "n": 449,
+      "rmse_mm": 0.386,
+      "p95_mm": 0.47,
+      "box_mm": 48.01,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_CLOSE",
+      "axis": "Ry",
+      "n": 449,
+      "rmse_mm": 0.227,
+      "p95_mm": 0.294,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_CLOSE",
+      "axis": "Rz",
+      "n": 449,
+      "rmse_mm": 0.14,
+      "p95_mm": 0.105,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_CLOSE",
+      "axis": "Lx",
+      "n": 449,
+      "rmse_mm": 0.163,
+      "p95_mm": 0.245,
+      "box_mm": 48.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_CLOSE",
+      "axis": "Ly",
+      "n": 449,
+      "rmse_mm": 0.306,
+      "p95_mm": 0.419,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GRASP_CLOSE",
+      "axis": "Lz",
+      "n": 449,
+      "rmse_mm": 0.251,
+      "p95_mm": 0.272,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "LIFT",
+      "axis": "Rx",
+      "n": 1260,
+      "rmse_mm": 0.149,
+      "p95_mm": 0.105,
+      "box_mm": 48.72,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "LIFT",
+      "axis": "Ry",
+      "n": 1260,
+      "rmse_mm": 0.13,
+      "p95_mm": 0.252,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "LIFT",
+      "axis": "Rz",
+      "n": 1260,
+      "rmse_mm": 0.963,
+      "p95_mm": 1.211,
+      "box_mm": 58.64,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "LIFT",
+      "axis": "Lx",
+      "n": 1260,
+      "rmse_mm": 0.469,
+      "p95_mm": 0.525,
+      "box_mm": 48.72,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "LIFT",
+      "axis": "Ly",
+      "n": 1260,
+      "rmse_mm": 0.215,
+      "p95_mm": 0.31,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "LIFT",
+      "axis": "Lz",
+      "n": 1260,
+      "rmse_mm": 1.641,
+      "p95_mm": 1.908,
+      "box_mm": 58.61,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "ROUTE_C1",
+      "axis": "Rx",
+      "n": 756,
+      "rmse_mm": 0.843,
+      "p95_mm": 1.451,
+      "box_mm": 79.81,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "ROUTE_C1",
+      "axis": "Ry",
+      "n": 756,
+      "rmse_mm": 0.315,
+      "p95_mm": 0.482,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "ROUTE_C1",
+      "axis": "Rz",
+      "n": 756,
+      "rmse_mm": 0.226,
+      "p95_mm": 0.276,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "ROUTE_C1",
+      "axis": "Lx",
+      "n": 756,
+      "rmse_mm": 0.561,
+      "p95_mm": 0.932,
+      "box_mm": 79.81,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "ROUTE_C1",
+      "axis": "Ly",
+      "n": 756,
+      "rmse_mm": 0.272,
+      "p95_mm": 0.481,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "ROUTE_C1",
+      "axis": "Lz",
+      "n": 756,
+      "rmse_mm": 0.34,
+      "p95_mm": 0.41,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C1_SEAT",
+      "axis": "Rx",
+      "n": 966,
+      "rmse_mm": 0.114,
+      "p95_mm": 0.142,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C1_SEAT",
+      "axis": "Ry",
+      "n": 966,
+      "rmse_mm": 0.031,
+      "p95_mm": 0.078,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C1_SEAT",
+      "axis": "Rz",
+      "n": 966,
+      "rmse_mm": 1.617,
+      "p95_mm": 1.852,
+      "box_mm": 30.0,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    },
+    {
+      "phase": "C1_SEAT",
+      "axis": "Lx",
+      "n": 966,
+      "rmse_mm": 0.061,
+      "p95_mm": 0.076,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C1_SEAT",
+      "axis": "Ly",
+      "n": 966,
+      "rmse_mm": 0.024,
+      "p95_mm": 0.045,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C1_SEAT",
+      "axis": "Lz",
+      "n": 966,
+      "rmse_mm": 2.024,
+      "p95_mm": 2.261,
+      "box_mm": 30.0,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    },
+    {
+      "phase": "C1_PIN",
+      "axis": "Rx",
+      "n": 84,
+      "rmse_mm": 0.33,
+      "p95_mm": 0.344,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C1_PIN",
+      "axis": "Ry",
+      "n": 84,
+      "rmse_mm": 0.047,
+      "p95_mm": 0.065,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C1_PIN",
+      "axis": "Rz",
+      "n": 84,
+      "rmse_mm": 0.704,
+      "p95_mm": 0.927,
+      "box_mm": 30.0,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C1_PIN",
+      "axis": "Lx",
+      "n": 84,
+      "rmse_mm": 0.289,
+      "p95_mm": 0.36,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C1_PIN",
+      "axis": "Ly",
+      "n": 84,
+      "rmse_mm": 0.17,
+      "p95_mm": 0.188,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C1_PIN",
+      "axis": "Lz",
+      "n": 84,
+      "rmse_mm": 1.007,
+      "p95_mm": 1.445,
+      "box_mm": 30.0,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    },
+    {
+      "phase": "L_HALF_UNCLAMP",
+      "axis": "Rx",
+      "n": 231,
+      "rmse_mm": 0.199,
+      "p95_mm": 0.215,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "L_HALF_UNCLAMP",
+      "axis": "Ry",
+      "n": 231,
+      "rmse_mm": 0.19,
+      "p95_mm": 0.224,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "L_HALF_UNCLAMP",
+      "axis": "Rz",
+      "n": 231,
+      "rmse_mm": 0.509,
+      "p95_mm": 0.715,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "L_HALF_UNCLAMP",
+      "axis": "Lx",
+      "n": 231,
+      "rmse_mm": 0.089,
+      "p95_mm": 0.177,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "L_HALF_UNCLAMP",
+      "axis": "Ly",
+      "n": 231,
+      "rmse_mm": 0.049,
+      "p95_mm": 0.066,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "L_HALF_UNCLAMP",
+      "axis": "Lz",
+      "n": 231,
+      "rmse_mm": 0.536,
+      "p95_mm": 0.804,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "R_UNCLAMP_RISE",
+      "axis": "Rx",
+      "n": 1092,
+      "rmse_mm": 0.147,
+      "p95_mm": 0.182,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "R_UNCLAMP_RISE",
+      "axis": "Ry",
+      "n": 1092,
+      "rmse_mm": 0.251,
+      "p95_mm": 0.657,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "R_UNCLAMP_RISE",
+      "axis": "Rz",
+      "n": 1092,
+      "rmse_mm": 0.991,
+      "p95_mm": 1.353,
+      "box_mm": 57.25,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "R_UNCLAMP_RISE",
+      "axis": "Lx",
+      "n": 1092,
+      "rmse_mm": 0.056,
+      "p95_mm": 0.073,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "R_UNCLAMP_RISE",
+      "axis": "Ly",
+      "n": 1092,
+      "rmse_mm": 0.199,
+      "p95_mm": 0.604,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "R_UNCLAMP_RISE",
+      "axis": "Lz",
+      "n": 1092,
+      "rmse_mm": 0.524,
+      "p95_mm": 0.772,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GUIDE_PRELIFT",
+      "axis": "Rx",
+      "n": 3751,
+      "rmse_mm": 0.075,
+      "p95_mm": 0.123,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GUIDE_PRELIFT",
+      "axis": "Ry",
+      "n": 3751,
+      "rmse_mm": 0.176,
+      "p95_mm": 0.245,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GUIDE_PRELIFT",
+      "axis": "Rz",
+      "n": 3751,
+      "rmse_mm": 0.614,
+      "p95_mm": 0.95,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GUIDE_PRELIFT",
+      "axis": "Lx",
+      "n": 3751,
+      "rmse_mm": 0.413,
+      "p95_mm": 0.894,
+      "box_mm": 60.01,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GUIDE_PRELIFT",
+      "axis": "Ly",
+      "n": 3751,
+      "rmse_mm": 0.294,
+      "p95_mm": 0.608,
+      "box_mm": 86.92,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "GUIDE_PRELIFT",
+      "axis": "Lz",
+      "n": 3751,
+      "rmse_mm": 1.634,
+      "p95_mm": 2.094,
+      "box_mm": 54.95,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_REGRASP",
+      "axis": "Rx",
+      "n": 2482,
+      "rmse_mm": 0.153,
+      "p95_mm": 0.321,
+      "box_mm": 40.48,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_REGRASP",
+      "axis": "Ry",
+      "n": 2482,
+      "rmse_mm": 0.448,
+      "p95_mm": 1.045,
+      "box_mm": 92.89,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_REGRASP",
+      "axis": "Rz",
+      "n": 2482,
+      "rmse_mm": 0.739,
+      "p95_mm": 1.026,
+      "box_mm": 49.6,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_REGRASP",
+      "axis": "Lx",
+      "n": 2482,
+      "rmse_mm": 0.085,
+      "p95_mm": 0.13,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_REGRASP",
+      "axis": "Ly",
+      "n": 2482,
+      "rmse_mm": 0.184,
+      "p95_mm": 0.251,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_REGRASP",
+      "axis": "Lz",
+      "n": 2482,
+      "rmse_mm": 1.277,
+      "p95_mm": 1.755,
+      "box_mm": 30.0,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    },
+    {
+      "phase": "C2_TRANSPORT",
+      "axis": "Rx",
+      "n": 1302,
+      "rmse_mm": 0.625,
+      "p95_mm": 0.944,
+      "box_mm": 75.42,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_TRANSPORT",
+      "axis": "Ry",
+      "n": 1302,
+      "rmse_mm": 0.123,
+      "p95_mm": 0.291,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_TRANSPORT",
+      "axis": "Rz",
+      "n": 1302,
+      "rmse_mm": 1.056,
+      "p95_mm": 1.35,
+      "box_mm": 47.92,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_TRANSPORT",
+      "axis": "Lx",
+      "n": 1302,
+      "rmse_mm": 0.2,
+      "p95_mm": 0.295,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_TRANSPORT",
+      "axis": "Ly",
+      "n": 1302,
+      "rmse_mm": 0.054,
+      "p95_mm": 0.117,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_TRANSPORT",
+      "axis": "Lz",
+      "n": 1302,
+      "rmse_mm": 1.351,
+      "p95_mm": 1.929,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": false,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_DUAL_SEAT",
+      "axis": "Rx",
+      "n": 1705,
+      "rmse_mm": 0.105,
+      "p95_mm": 0.125,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_DUAL_SEAT",
+      "axis": "Ry",
+      "n": 1705,
+      "rmse_mm": 0.122,
+      "p95_mm": 0.139,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_DUAL_SEAT",
+      "axis": "Rz",
+      "n": 1705,
+      "rmse_mm": 1.17,
+      "p95_mm": 1.593,
+      "box_mm": 41.48,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    },
+    {
+      "phase": "C2_DUAL_SEAT",
+      "axis": "Lx",
+      "n": 1705,
+      "rmse_mm": 0.101,
+      "p95_mm": 0.132,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_DUAL_SEAT",
+      "axis": "Ly",
+      "n": 1705,
+      "rmse_mm": 0.011,
+      "p95_mm": 0.022,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_DUAL_SEAT",
+      "axis": "Lz",
+      "n": 1705,
+      "rmse_mm": 1.608,
+      "p95_mm": 2.05,
+      "box_mm": 41.48,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "MIDDLE"
+    },
+    {
+      "phase": "C2_SETTLE",
+      "axis": "Rx",
+      "n": 168,
+      "rmse_mm": 0.289,
+      "p95_mm": 0.299,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_SETTLE",
+      "axis": "Ry",
+      "n": 168,
+      "rmse_mm": 0.251,
+      "p95_mm": 0.312,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_SETTLE",
+      "axis": "Rz",
+      "n": 168,
+      "rmse_mm": 0.774,
+      "p95_mm": 1.163,
+      "box_mm": 30.0,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_SETTLE",
+      "axis": "Lx",
+      "n": 168,
+      "rmse_mm": 0.018,
+      "p95_mm": 0.034,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_SETTLE",
+      "axis": "Ly",
+      "n": 168,
+      "rmse_mm": 0.035,
+      "p95_mm": 0.051,
+      "box_mm": 30.0,
+      "bar_mm": 5.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    },
+    {
+      "phase": "C2_SETTLE",
+      "axis": "Lz",
+      "n": 168,
+      "rmse_mm": 0.849,
+      "p95_mm": 1.294,
+      "box_mm": 30.0,
+      "bar_mm": 1.0,
+      "verdict_critical": true,
+      "cell_verdict": "GO"
+    }
+  ],
+  "provenance": {
+    "dataset_abs": "bc_dataset_abs.npz",
+    "policy": "policy_abs.pt",
+    "action_repr": "abs"
+  },
+  "vacuous_phases": [
+    "GUIDE_C2"
+  ]
+}
