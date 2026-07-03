@@ -1,0 +1,85 @@
+# [CHARTER %12→%11] DQ7 stage (ii) — perturb-and-recover 物理収録 (evidence-bearing leg)
+# Issued: 2026-07-03 08:4x JST (%12 RS-TECH-LEAD)。Node: T-ROOT-optE-route-dapg-C1C2 / DQ7。
+# 発効条件: %9 concur (残 two-key) — concur 前は CP-(ii)-0 の設計作業のみ着手可 (0-GPU、locked 不触)。
+
+## 0. Provenance / 授権 (自ら read)
+- Rs「A」05:00 (DQ7 起票) → D-1..D-5 確定 (%12+%9 CONCUR×8) → (iv) pathfinder = Outcome B banked de61f74c7c
+  → **Rs「推奨で良い」08:3x (%11 pane verbatim、%12 一次確認) = Option A 採択 = (ii) 前進承認**。
+- two-key 裁定 (%12、log 08:4x): (iv)-A key = 事前登録 escalation 経路経由の Rs 直接承認で置換。**残 key = %9 concur (本 charter の具体面)**。
+- 接地必読: DQ7_OFFPATH_SCOPING_COORD2.md §3 (injection map + Fact A/B + label 構造 :81) / §4.2-(ii) /
+  DQ7_CONSULT_PCT9_VERDICT.md 条件2 (:87)・条件3 (:61)・追加1 (meta 審査) / dq7_iv_pathfinder_report.md §4-§5
+  ((ii) への pre-flag 2 件) / DQ7_IV_MINISPEC_DEBATE_DECIDE.md U4 (band 問題)・U7 (meta 契約)。
+
+## 1. Goal
+物理生成の off-path→復元データで restoring 教師を供給し、**B2 §3.3 の実 GO gate** を目指す (pathfinder でなく bankable leg)。
+(iv) との判別軸: obs 整合性は物理が無償供給 — (iv) Outcome B の敗因 (合成 obs の model-consistency) を構造的に回避。
+⚠ (iv) が pre-flag した 2 点を本 charter は一級で扱う: (a) on-path budget tension (§6 v1-analog) (b) band 再較正 (§7、Rs 決定項)。
+
+## 2. 収録機構 (doc §4.2-(ii) + D-2/D-3 決定)
+- **EE-target detour のみ** (D-2; xfrc 不採用)。flag-gated **PERTURB_INJECT** (default-off、None/off 経路 = byte-identity)。
+- 機構: SAFE phase 中に EE 目標へ detour offset を加算 → **hold-at-offset dwell (off-path obs 蓄積、初期値 20 制御 frame、CP-(ii)-0 で [10,40] 内確定)** → 解除 → script の絶対 target servo が復元 → recorder が全 frame 捕捉。
+- per-arm single-sided / 1 phase-instance 1 injection まで / 1 収録あたり injection 2-4 回 (validity 保全)。
+- 方向: random 3D、ただし DESCEND {1} は Z成分 ≤0 禁止 (table 衝突回避)、pre-seat は XY のみ。CP-(ii)-0 で数値確定。
+- **recorder meta に injection windows を記録** (start/end frame、phase、arm、offset vector、dwell) — %9 追加1 の
+  records-vs-fact 審査対象: 「将来 config で嘘をつく meta にならないか」を CP-(ii)-1 review で明示検査。
+
+## 3. injection map + 振幅表 (%9 条件2 充足 — phase 別数値、変更は %9 再 concur 要)
+| 15-idx | phase | 可否 | 振幅 (log-U mm) | 根拠 |
+|---|---|---|---|---|
+| 0 GRASP_HOVER | pre-contact | ✅ primary | **[2,20]** | 条件2: 20mm tail = pre-contact 限定。worst cell 2.497 の直接教師 |
+| 1 GRASP_DESCEND | pre-contact | ✅ primary | **[2,20]** (Z≤0 成分禁止) | 同上 (1.257) |
+| 2 GRASP_CLOSE | close servo | ⛔ skip | — | doc §3 map |
+| 3 LIFT | 把持中・choreography 敏感 | ⛔ **skip (v1)** | — | WR retention (RS71:26) drop risk r3; 条件2 の ≤10 リスト外; {3} は generalization-only のまま (coverage 正直記載) |
+| 4 ROUTE_C1 | 把持 transport | ✅ small | **[2,8]** | held ≤10 (条件2)、(iv) lattice-margin 論理を継承 |
+| 5 C1_SEAT | verdict-critical | ⚠ pre-seat のみ | **[2,5]** | tiny |
+| 6 C1_PIN / 7 L_HALF_UNCLAMP / 8 R_UNCLAMP_RISE | event/gripper 遷移 | ⛔ skip | — | doc §3 map |
+| 9 GUIDE_C2 / 10 GUIDE_PRELIFT | post-pin (C1 anchored) | ✅ small | **[2,8]** | held ≤10 |
+| 11 C2_REGRASP | R pre-contact | ✅ primary (R-arm) | **[2,20]** | 条件2: {11}-R = pre-contact; ee-only 0.973 の直接教師 |
+| 12 C2_TRANSPORT | 把持 transport | ✅ small | **[2,8]** | held ≤10 |
+| 13 C2_DUAL_SEAT | verdict-critical | ⚠ pre-seat のみ | **[2,5]** | tiny |
+| 14 C2_SETTLE | verdict window | ⛔ skip | — | 判定汚染回避 |
+- INV#1 (両腕 engaged) / INV#2 (88mm span): span-watch を収録 validity filter に (dual-hold 中の detour 後 span 逸脱 >5mm = 該当収録 invalid-mark、loud 計数)。
+
+## 4. batch 構成 (D-4 adj-A 同梱)
+- injection 収録 ~24 本: offset は CP-C survivor 格子から (R_MISS 族 (−8,+8) 除外継承)、各 2-4 injections。
+- **adj-A 高密度 8 本** (injection なし、5mm-grid 例 (±5,0),(0,±5),(±5,∓5)…): **事前に CP-A′ 型 reach screen (fix-⑤ 済 code path) を通過した offset のみ**。leg-2 (seg-follow) 用、非 load-bearing。
+- wave 粒度 (条件3-c): **wave-1 = 4 本** ({0,1} injected ×2 / {11} injected ×1 / adj-A ×1) → validity + span-watch +
+  **§運用14 video legs (skill-path 必須: /video-analyzer or video-analyst — injection→dwell→解除→復元の視認 + 把持 phase は claw-zoom で slip/drop 検査)** → %12 loud wave gate → 残 batch 4-way。
+- 全収録 cuda:0 / MUJOCO_GL=egl + DISPLAY unset / GPU-0 4-way ≤4 proc / seed・offset を meta 記録。
+
+## 5. 変換・学習
+- converter: **outbound-mask branch** (additive default-off、doc §3:81 — detour 往路 frame = anti-restoring label ゆえ drop、
+  復元 frame = keep [label = 正規 next-waypoint = 自動的に restoring 教師])。dwell frame の扱い = keep (off-path obs + 正規 label)。
+  回帰: 通常 convert 再走 sha 一致 (b3472e8c/0ed5149c) + py_compile。dataset = **b2_dataset_v2_p2r/bc_dataset_abs_p2r.npz**
+  (U7 契約: 別名 + `_p2r` schema tag + truthful meta [n_clean/n_p2r/injection 統計 per-(phase×bin)])。
+- 学習: BC (clean+p2r) + replicate-null (同 protocol + 同 p2r 相当? → **null = CP-D replicate-null そのまま** [physical 収録は複製不能ゆえ
+  augmented-null 概念は非適用 — beat は「diverse+p2r vs single-path」の事前登録どおり]; CP-(ii)-0 で beat 解釈 1 行明記)。GPU-1、seed pin。
+
+## 6. 事前登録 verdict (変更 = Rs のみ)
+- **validity v1-analog: BC (clean+p2r) whole-demo val ≤ 0.001318 (= 2× clean baseline)** + per-phase val 内訳 (informative)。
+  未達 ladder (2 段、事前登録): ① injections/収録 を 2-4→1-2 に削減 + 転換 mask 拡大 → ② dwell 半減 + held phase 振幅半減 → 未達 = STOP→%12→Rs。
+- **本 gate = B2 §3.3 FULL table (実 GO bar)**: movable {0-3} γ⊥ ≤0.5 / C2_REGRASP pair (band = §7 の Rs 決定に従う) + ee-only ≤0.3 /
+  null_beat ≥ +0.15 / carried {GUIDE_C2}。og = committed instrument (§7 の γ 選択時のみ additive 変更 + 回帰)。
+- tie rule (U8 継承): bar ±0.02 cell = 同 seed 再学習 1 回、flip = 不利側。
+- **GO → rollout は自動でない: Rs へ loud notify → 別途 Rs rollout GO** (standing 禁止不変)。STOP → bank + Rs escalate。
+- conservatism 明示義務 (§運用15): OG GO = closed-loop に non-conservative (rollout が bank 条件) を verdict に明記。
+
+## 7. ⛔ band 再較正 = Rs 決定項 (OG gate 実行前に必須、%12 が Rs へ提示済)
+faithful expert の pair seg-follow = per-axis (X:1, Y:0 [88mm HOLD], Z:1) → 3軸 mean ≈ 0.667 < band-lo 0.8 (U4、コード裏取り済)。
+選択肢: **α** 現行 [0.8,1.2] 維持 (faithful でも STOP し得る = known-miscalibration を許容) / **β** mean 基準の再較正帯 (例 [0.5,0.85]) /
+**γ (%12 推奨)** per-axis 化: X,Z gain ∈ [0.7,1.3] AND Y gain ≤ 0.3 AND ee-only ≤ 0.3 (力学に忠実; og に additive 実装 + 回帰 + 旧 mean 併記)。
+**Rs 決定が届くまで CP-(ii)-5 (OG gate) は実行しない** (収録・学習までは band 非依存で進行可)。
+
+## 8. chain / gates
+CP-(ii)-0: %11 = hook + injection mini-spec (≤2p: hook 挿入点 [markers 不触]、dwell/方向数値、meta field 表、expected-fire 表、
+  §3 表の再掲 + 逸脱ゼロ宣言) → **%12 review → 5体 pre-debate (L3: Rs-LOCKED test_newton_clip_routing.py 編集 — path-match 自動昇格、
+  降格なし) → %9 concur (残 key) → Rs loud notify (条件3: GPU-h 見積 [~3-5h]・device pins・(iv) 数値要約・wave 粒度 early-abort・中断手順)**
+CP-(ii)-1: build (hooks flag-gated + converter mask + meta) + **None-path byte-identity (canonical sha e01ac1fa… 再証明 1 run cuda:0)** +
+  縮退 review (%12; consumer-reach 明示 = run-the-consumer 教訓)
+CP-(ii)-2: wave-1 (4 本) + video legs + validity → %12 wave gate (loud)
+CP-(ii)-3: 残 batch (~28 本、4-way ~1.5-2h) → CP-(ii)-4: convert + 学習 + v1-analog → CP-(ii)-5: OG §3.3 (band = Rs 決定済) → §6
+- L-TRIAGE 自走 + rule-check stage2 (build 前)。prior-art V10 = DQ7 系 2 走破 + delta 記録済を cite 可 (新規 keyword: injection/detour/dwell で 1 回自走)。
+- 失敗 3 回 / wave での drop 検出 / 予算超過 = ハードストップ → %12。0-commit、commit 判断 = %12。
+- 推定: build+proof ~1-2h wall / 収録 ~2h GPU-0 / 学習+og ~30min。露出は wave 粒度で自己制限。
+
+— %12 RS-TECH-LEAD 2026-07-03 08:4x JST (Rs Option-A 承認の執行; 発効 = %9 concur 後)
