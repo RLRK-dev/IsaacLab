@@ -3957,15 +3957,23 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
     if _dy_off_mm != 0.0 and os.environ.get("W0E_F1B", "1") == "1":
         _dphase = _dy_off_mm % 15.0  # Python floor-mod (B1 operand; -10 -> 5)
         _dygr = None
-        if 2.5 <= _dphase <= 6.5:            # B1 phase-periodic band -> retreat phase to 7.5 (cross-period correct)
-            _dygr = _dphase - 7.5
+        _f1b_mode = None
+        # W0-e F-1b'' 150mm band re-derivation (mapping B, Rs "進めて" 2026-07-06, two-key agree): ADOPT snap-DOWN only.
+        # phi in (0,7.5] -> Delta = -phi (snap grasp dy to the nearest LOWER 15-lattice node). phi>7.5 (snap-UP) NOT
+        # adopted -> falls through to the committed B1/B2 bands (== 81-run behavior on phi10 cols, known fail annotated).
+        # snap-down REPLACES B1 [2.5,6.5] (its 7.5 target is counterproductive at 150mm, PREREG-confirmed; snap-down's
+        # if is FIRST -> precedence). production flag W0E_F1B_SNAPDOWN. offset-gated (dy!=0) -> C-0 (0,0) byte-id UNTOUCHED.
+        if os.environ.get("W0E_F1B_SNAPDOWN", "0") == "1" and 0.0 < _dphase <= 7.5:
+            _dygr = -_dphase; _f1b_mode = "SNAPDOWN(phi->0)"
+        elif 2.5 <= _dphase <= 6.5:          # B1 phase-periodic band -> retreat phase to 7.5 (cross-period correct)
+            _dygr = _dphase - 7.5; _f1b_mode = "B1-retreat"
         elif 10.5 <= _dy_off_mm <= 13.5:     # B2 absolute one-sided band (positive dy) -> retreat to dy 10.0
-            _dygr = _dy_off_mm - 10.0
+            _dygr = _dy_off_mm - 10.0; _f1b_mode = "B2-retreat"
         if _dygr is not None:
             _dygr = float(np.clip(_dygr, -7.5, 7.5))  # |Delta_y| <= 7.5mm (H2; observed max 5.0)
             GRASP_YC += _dygr * 1e-3
-            print(f"  [W0E-F1B] Y-phase retreat: dy={_dy_off_mm:+.2f}mm phase={_dphase:.2f} -> "
-                  f"Dy_grasp={_dygr:+.2f}mm (GRASP_YC -> {GRASP_YC * 1e3:+.2f}mm); SIM-ONLY node-lattice artifact")
+            print(f"  [W0E-F1B] {_f1b_mode}: dy={_dy_off_mm:+.2f}mm phi={_dphase:.2f} Delta={_dygr:+.2f}mm "
+                  f"GRASP_YC={GRASP_YC * 1e3:+.2f}mm; SIM-ONLY node-lattice artifact")
 
     # fix-5 (Rs A / Opt-1, 2026-07-03): X analog of caveat-a -- re-centre x_grasp on the SETTLED cable X,
     # offset-gated (dx != 0 only; scene_info :1668 collapses None/(0,0) -> (0,0) so None / (0,dy) / nominal
