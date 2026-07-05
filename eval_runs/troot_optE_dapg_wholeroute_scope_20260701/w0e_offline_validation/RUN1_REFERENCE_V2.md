@@ -9,3 +9,8 @@
 - **v2 変更理由 (いずれも Rs 直接指示 = 基準動作自体の口頭修正)**: ①C1-C2 間隔 ×2 (07-01 lever 再適用、C2 着座 FIX) ②搬送高さ +30mm (cable bottom 857 > clip 上面 850、かすり解消 + offset C1 の垂直進入で escape 解消)。
 - **構造保証**: 全 4 smoke cell が Rs 宣言基準動作 (`p2r_c11_route.mp4` = LEDGER MOTION STANDARD 行) に対し leg-diff **SAME-STRUCTURE** (追加/欠落 leg 0、座標 delta のみ 47-53 本) — `w0e_video_tools/route_leg_diff.py` (%12 実行 2026-07-06 01:3x)。
 - RUN-1 受入 (81 再走前の nominal 照合) = 対象 build の nominal npz sha が本 v2 値と一致 (%12 が raw file から独立再計算、引用値を鵜呑みにしない)。meta 側 head_sha/git_diff_sha256 の build 差は期待どおり — 比較対象は npz のみ。
+
+## 追記 (2026-07-06 01:4x)
+
+- **%9 COUNTERSIGN 成立** (01:40、直読 + 私鍵 sha256sum EXACT) → 三鍵完成 (p3 %11 / %9 / %12)。
+- **flank producer field = 不追加 決定** (%12 提案 + %9 CONCUR、loud 記録): 再 grid の C1 flank leg は両 parser (recount_strict_v2.py / p9_recount_strict_v2.py) の npz fallback — 同一凍結定義 (|y−0.15|≤10mm・final frame・max z) の独立実装、旧 grid 40/81 相互較正済 — で走る。**受入条件: 再 grid 読みで両 parser が [FLANK-FALLBACK] を loud 表示すること。** note: field-vs-npz 較正 leg は消滅 (drift 源 = locked file の将来編集のみ、file locked + 定義 pin で実害なし)。
