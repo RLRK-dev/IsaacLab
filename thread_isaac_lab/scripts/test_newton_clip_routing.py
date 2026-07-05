@@ -3634,7 +3634,12 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
     GHS = (WIDE_RIGHT_Y - WIDE_LEFT_Y) / 2.0  # 0.044 = 88mm span INVARIANT#2
     z_grasp = 1.0668  # banked WR cradle (M-Grasp-engage-1 validated)
     z_high = z_grasp + 0.10
-    LIFT_M, LIFT_SUBSTEPS = 0.05, 12
+    # W0-e transport-clearance raise (Rs 2026-07-05「c1 搬送で高さ不足→clip 上面かする」, /geometric-design gate):
+    # 0.05->0.08 (+30mm) so the transported cable centre clears the clip high-wall top (850mm @float20) + cable r4 +
+    # margin5 = >=859mm (measured baseline 831mm scraped). GLOBAL (nominal too = Rs baseline correction -> new sha).
+    # Also lands the C1_SEAT-else descent START above the clip -> the existing v1 X-comp descent seats VERTICALLY (no
+    # wall-ride) = the v2 physics re-expressed in COORDINATES, no new legs (step-table-faithful). env-overridable to tune.
+    LIFT_M, LIFT_SUBSTEPS = float(os.environ.get("W0E_LIFT_M", "0.08")), 12
     z_lift = z_grasp + LIFT_M  # aerial transport height (lift end)
     x_grasp = GRASP_X  # 0.30
     x_clip = float(os.environ.get("CLIP_X", "0.40"))  # banked void-cleared target (NOT C3 0.35 on the void)
@@ -3942,6 +3947,26 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
     print(f"  [S6_ROUTE] caveat-a: settled-cable-centre GRASP_YC={GRASP_YC * 1e3:+.2f}mm "
           f"(grasp_at={_grasp_at * 1e3:+.0f}mm arms +-{GHS * 1e3:.0f}mm = 88 span)")
 
+    # W0-e F-1b (Y-phase retreat, spec v0.9 + %12 (A)-injection 2026-07-05): shift the grasp centre GRASP_YC by
+    # a common-mode Δy so the WHOLE route forms the buckle at the TARGET phase (== S6_ENGAGE_YC grasp-Y knob class;
+    # the C1_SEAT descent target stays FULLY nominal). B1 = phase-periodic (floor_mod(dy,15)->7.5), B2 = absolute
+    # one-sided ([10.5,13.5]->10.0). offset-gated (dy!=0) + W0E_F1B flag -> (0,0) BYTE-IDENTICAL (no shift/print).
+    # config-derived operand (NO node-state read; bright-line 4). SIM-ONLY: node-lattice artifact (real cable has
+    # no node phase) -- excluded from the real playbook. provenance: cuda:0 + build sha (PREREG U).
+    _dy_off_mm = float(scene_info.get("cable_xy_offset", (0.0, 0.0))[1]) * 1e3
+    if _dy_off_mm != 0.0 and os.environ.get("W0E_F1B", "1") == "1":
+        _dphase = _dy_off_mm % 15.0  # Python floor-mod (B1 operand; -10 -> 5)
+        _dygr = None
+        if 2.5 <= _dphase <= 6.5:            # B1 phase-periodic band -> retreat phase to 7.5 (cross-period correct)
+            _dygr = _dphase - 7.5
+        elif 10.5 <= _dy_off_mm <= 13.5:     # B2 absolute one-sided band (positive dy) -> retreat to dy 10.0
+            _dygr = _dy_off_mm - 10.0
+        if _dygr is not None:
+            _dygr = float(np.clip(_dygr, -7.5, 7.5))  # |Delta_y| <= 7.5mm (H2; observed max 5.0)
+            GRASP_YC += _dygr * 1e-3
+            print(f"  [W0E-F1B] Y-phase retreat: dy={_dy_off_mm:+.2f}mm phase={_dphase:.2f} -> "
+                  f"Dy_grasp={_dygr:+.2f}mm (GRASP_YC -> {GRASP_YC * 1e3:+.2f}mm); SIM-ONLY node-lattice artifact")
+
     # fix-5 (Rs A / Opt-1, 2026-07-03): X analog of caveat-a -- re-centre x_grasp on the SETTLED cable X,
     # offset-gated (dx != 0 only; scene_info :1668 collapses None/(0,0) -> (0,0) so None / (0,dy) / nominal
     # keep the constant-X banked trajectory = byte-identical BY CONSTRUCTION). Cable || Y -> region X approx
@@ -3961,6 +3986,18 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
         # M-Route-2 C1: diagonal target with a MOVING grasp centre yc (interp GRASP_YC -> y_clip); the 88mm span is
         # preserved (yc +- GHS = INVARIANT#2). For y_clip=0 (centred M-Route-1) tgt2(x, GRASP_YC, z) == tgt(x, z).
         return (x, yc - GHS, z), (x, yc + GHS, z)
+
+    def _w0e_guarded_cx(y_ref, x_ref):
+        # W0-e common guarded crossing-X selector (spec v0.9 cluster A): mean cable-body X within the Y window
+        # |y-y_ref|<=7.5mm AND the X plausibility window |x-x_ref|<=30mm (offline-validated: n=1, 0 tail-hijack
+        # on all 81 cells, validate_measurands.py:54-57). Returns (mean_x_m, n_nodes); (None, 0) if the window is
+        # empty (plausibility reject). Reads the LIVE `state` by closure (same pattern as _zc1).
+        wp.synchronize()
+        _P = state.body_q.numpy()[cable_bodies]
+        _m = (np.abs(_P[:, 1] - y_ref) <= 0.0075) & (np.abs(_P[:, 0] - x_ref) <= 0.030)
+        if not _m.any():
+            return None, 0
+        return float(_P[_m, 0].mean()), int(_m.sum())
 
     # --- GRASP + LIFT (reuse the validated M-Grasp-engage-1 orchestration) ---
     _ph("GRASP_HOVER")
@@ -4167,14 +4204,113 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
         # (2) FULL-CLAMP SEAT: lower both arms (still CLOSED) so the gripped cable centre -> GROOVE_CENTER_Z+float.
         _ph("C1_SEAT")
         seat_ee_z = GROOVE_CENTER_Z + _clip_float_z + ee_off   # CLIP_FLOAT_Z: descend to the FLOATED groove (consistency)
+        # W0-e F-1a (C1-seat X-follow, spec v0.9; offset-gated + W0E_F1A). Measure guarded crossing dx at ROUTE_C1
+        # end (settled, pre-seat; no physics_step since the aerial hold) -> common-mode compensate the C1_SEAT
+        # descent x via tgt2's shared x arg (scalar clamp BEFORE fan-out). k=4 residual re-measure (30-step settle)
+        # uses the (ii) MINUS/nominal form comp<-clamp(comp-(crossing-x_clip),+-22) (%12 2026-07-05; nominal-ref
+        # self-cancels). plausibility: initial reject -> comp 0 (no-comp, monotone-safe) / k=4 reject -> comp
+        # MAINTAINED + loud (mid-descent comp drop = +-16-22mm arm jump = non-monotone). (0,0) BYTE-IDENTICAL
+        # (comp=0.0 -> x_clip+0.0==x_clip, prints gated). CLAMP22 provenance: cuda:0 + build sha (PREREG U).
+        _f1a_on = (float(scene_info.get("cable_xy_offset", (0.0, 0.0))[0]) != 0.0
+                   or float(scene_info.get("cable_xy_offset", (0.0, 0.0))[1]) != 0.0) and os.environ.get("W0E_F1A", "1") == "1"
+        # W0-e F-1a v2 (%12 §運用10 v2, clearance-lift): the g=0.5-only smoke showed the cable RIDES the wall-top
+        # during a low-height X-shift -> LIFT clear of the wall, shift + settled re-measure at height (contact-free =
+        # unbiased), then descend VERTICALLY. coeff c-i (%12): comp = -(1-lam)*bow, lam=0.5 (retention 0.552/0.506).
+        # W0E_F1A_V2=0 falls back to the flat comp-descent (study). offset-gated + W0E_F1A -> (0,0) BYTE-IDENTICAL
+        # (else-branch, comp=0.0 -> tgt2(x_clip,..)). prints gated. provenance: cuda:0 + build sha (PREREG U).
+        _f1a_comp = 0.0
+        _lam = float(os.environ.get("W0E_F1A_LAMBDA", "0.5"))
+        _f1a_v2 = _f1a_on and os.environ.get("W0E_F1A_V2", "1") == "1"
+        _dx0 = None
+        if _f1a_on:
+            _cx0, _n0 = _w0e_guarded_cx(y_clip, x_clip)
+            if _cx0 is None or abs(_cx0 - x_clip) > 0.030:
+                print(f"  [W0E-F1A] initial guarded measure REJECT (n={_n0}) -> comp=0 + no lift (nominal fallback)")
+                _f1a_v2 = False
+            else:
+                _dx0 = _cx0 - x_clip
+                _f1a_comp = float(np.clip(-(1.0 - _lam) * _dx0, -0.022, 0.022))  # comp1 (also the flat comp if V2 off)
+                _cby0 = state.body_q.numpy()[cable_bodies, 1]
+                _nny = float(_cby0[int(np.argmin(np.abs(_cby0 - y_clip)))] - y_clip) * 1e3
+                print(f"  [W0E-F1A] guarded dx={_dx0 * 1e3:+.2f}mm (n={_n0}) lam={_lam} -> comp1={_f1a_comp * 1e3:+.2f}mm; "
+                      f"pre-seat nearest-node Dy={_nny:+.2f}mm")
         ok["c2_seat_descend"] = True
-        for k in range(1, 9):
-            zk = z_lift + (seat_ee_z - z_lift) * k / 8
-            state, okk = ik_move_both(model, state, scene_info, solver, contacts, *tgt2(x_clip, y_clip, zk),
-                                      label=f"C2-SEAT{k}/8", converge_mm=2.5, speed_factor=0.25)
-            ok["c2_seat_descend"] = ok["c2_seat_descend"] and bool(okk)
-            if k % 2 == 0:
-                _cap(f"C1 full-clamp seat {k}/8")
+        if _f1a_v2 and _dx0 is not None:
+            _pl0, _ = get_ee_positions(state, scene_info)
+            _z0 = float(_pl0[2])
+            _zhi = _z0 + 0.015
+            for kk in range(1, 3):  # (2) clearance lift +15mm at x_clip (2 leg) -> cable clears the wall-top
+                _lz = _z0 + (_zhi - _z0) * kk / 2
+                state, _ = ik_move_both(model, state, scene_info, solver, contacts, *tgt2(x_clip, y_clip, _lz),
+                                        label=f"C1v2-LIFT{kk}/2", converge_mm=2.5, speed_factor=0.22)
+            for _ in range(30):
+                state = physics_step(model, state, solver, contacts, scene_info)
+            _plL, _ = get_ee_positions(state, scene_info)  # (log 3) lift-pose IK residual
+            _lresid = float(np.linalg.norm(np.array(_plL) - np.array((x_clip, y_clip - GHS, _zhi)))) * 1e3
+            print(f"  [W0E-F1A-v2] clearance lift +15mm -> EE z={float(_plL[2]) * 1e3:.1f}mm, lift IK resid={_lresid:.2f}mm")
+            for kk in range(1, 4):  # (3) high X-shift to x_clip+comp1 at height (3 leg)
+                _xk = x_clip + _f1a_comp * kk / 3
+                state, _ = ik_move_both(model, state, scene_info, solver, contacts, *tgt2(_xk, y_clip, _zhi),
+                                        label=f"C1v2-SHIFT{kk}/3", converge_mm=2.5, speed_factor=0.22)
+            for _ in range(30):  # (4) settle -> clean contact-free re-measure at height
+                state = physics_step(model, state, solver, contacts, scene_info)
+            _arm_x = x_clip + _f1a_comp
+            _cxh, _nh = _w0e_guarded_cx(y_clip, _arm_x)
+            _b1 = None
+            if _cxh is None or abs(_cxh - _arm_x) > 0.030:
+                print(f"  [W0E-F1A-v2] high re-measure REJECT (n={_nh}) -> comp1 MAINTAINED {_f1a_comp * 1e3:+.2f}mm + FLAG")
+            else:
+                _b1 = _cxh - _arm_x  # (c-i) arm-relative bow at height (contact-free)
+                _comp_final = float(np.clip(-(1.0 - _lam) * _b1, -0.022, 0.022))
+                print(f"  [W0E-F1A-v2] high b1={_b1 * 1e3:+.2f}mm (crossing_h={_cxh:.4f} arm={_arm_x:.4f}) -> "
+                      f"comp_final={_comp_final * 1e3:+.2f}mm")
+                state, _ = ik_move_both(model, state, scene_info, solver, contacts, *tgt2(x_clip + _comp_final, y_clip, _zhi),
+                                        label="C1v2-TRIM", converge_mm=2.5, speed_factor=0.22)  # (5) 1-leg trim
+                _f1a_comp = _comp_final
+            for k in range(1, 9):  # (6) vertical descent 8 leg (X fixed, no mid-descent re-measure)
+                zk = _zhi + (seat_ee_z - _zhi) * k / 8
+                # deep-seat discriminator (%12 2026-07-05, offset-gated flag): SLOW the last 3 leg to test whether the
+                # -1.6mm pin-frozen deep-seat is descent-dynamics (z->829 given settle time) or static equilibrium
+                # (stays). ik_move_both:1960 n_steps=max(int(dist*100*STEPS_PER_CM*sf),50): STEPS_PER_CM=50 + leg
+                # dist~5mm -> sf MUST be >1 to clear the 50-step floor (sf<1 = no-op = the INVALID byte-identical
+                # smoke bgm2). %12: sf=8 -> ~208 steps (4.16x) = a real settle window (MAX_MOVE_STEPS=3000 headroom).
+                # validity gate (else re-INVALID): :1971 print shows steps>50 on these legs + slowseat npz sha != fast f2 cell.
+                _sf = 8.0 if (k >= 6 and os.environ.get("W0E_F1A_SLOWSEAT", "0") == "1") else 0.25
+                state, okk = ik_move_both(model, state, scene_info, solver, contacts, *tgt2(x_clip + _f1a_comp, y_clip, zk),
+                                          label=f"C2-SEAT{k}/8", converge_mm=2.5, speed_factor=_sf)
+                ok["c2_seat_descend"] = ok["c2_seat_descend"] and bool(okk)
+                wp.synchronize()  # (log 1) during-descent crossing z-x trace (wall-contact-free mouth entry)
+                _Pz = state.body_q.numpy()[cable_bodies]
+                _mz = np.abs(_Pz[:, 1] - y_clip) <= 0.0075
+                if _mz.any():
+                    _iz = np.where(_mz)[0]
+                    _ci = int(_iz[np.argmin(np.abs(_Pz[_iz, 0] - (x_clip + _f1a_comp)))])
+                    print(f"  [W0E-F1A-v2] descend k={k}/8 crossing x={_Pz[_ci, 0]:.4f} z={_Pz[_ci, 2] * 1e3:.1f}mm")
+                if k % 2 == 0:
+                    _cap(f"C1 v2-seat {k}/8")
+            for _ in range(30):  # (log 2) per-cell retention: b_final/b1
+                state = physics_step(model, state, solver, contacts, scene_info)
+            _cxf, _ = _w0e_guarded_cx(y_clip, x_clip + _f1a_comp)
+            if _cxf is not None and _b1 is not None and abs(_b1) > 1e-6:
+                _bfin = _cxf - (x_clip + _f1a_comp)
+                print(f"  [W0E-F1A-v2] retention b_final/b1 = {(_bfin / _b1):.3f} (b_final={_bfin * 1e3:+.2f}mm, "
+                      f"b1={_b1 * 1e3:+.2f}mm); crossing_final={_cxf:.4f}")
+        else:
+            for k in range(1, 9):  # v1 flat descent (V2 off / reject fallback; nominal comp=0.0 -> nominal path, NEW baseline post-LIFT_M raise)
+                zk = z_lift + (seat_ee_z - z_lift) * k / 8   # z_lift raised (W0E_LIFT_M 0.08) -> descent STARTS above the clip -> vertical entry
+                state, okk = ik_move_both(model, state, scene_info, solver, contacts, *tgt2(x_clip + _f1a_comp, y_clip, zk),
+                                          label=f"C2-SEAT{k}/8", converge_mm=2.5, speed_factor=0.25)
+                ok["c2_seat_descend"] = ok["c2_seat_descend"] and bool(okk)
+                if _f1a_on:   # (log 1) offset C1_SEAT z-x crossing trace (%12 2026-07-05: prove wall-contact-free VERTICAL entry from the raised clearance z; logging-only, offset-gated)
+                    wp.synchronize()
+                    _Pv1 = state.body_q.numpy()[cable_bodies]
+                    _mv1 = np.abs(_Pv1[:, 1] - y_clip) <= 0.0075
+                    if _mv1.any():
+                        _iv1 = np.where(_mv1)[0]
+                        _cv1 = int(_iv1[np.argmin(np.abs(_Pv1[_iv1, 0] - (x_clip + _f1a_comp)))])
+                        print(f"  [W0E-F1A-v1] descend k={k}/8 crossing x={_Pv1[_cv1, 0]:.4f} z={_Pv1[_cv1, 2] * 1e3:.1f}mm")
+                if k % 2 == 0:
+                    _cap(f"C1 full-clamp seat {k}/8")
         for _ in range(60):
             state = physics_step(model, state, solver, contacts, scene_info)
         wp.synchronize()
@@ -4204,11 +4340,20 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
         _perclip_on = os.environ.get("PERCLIP_PIN", "0") == "1"
         _fs_on = _perclip_on or os.environ.get("FREEZE_SCOPE", "0") == "1"
         _pin_eqid, _z_c1_after_pin = None, None
+        # W0-e producer field (%9 pin-excluded floor bar / %12 pin-frame-onward, 2026-07-05): _seat_geom_mj = the
+        # mujoco cable geom co-located with the pinned seat body -> EXCLUDED from the POST-pin cable<->C1 min-dist
+        # (the free-neighbor "床" bar; pre-pin uses ALL geoms so the un-pinned body's penetration is NOT masked).
+        # _c1_np_min/_c2_pen_min = per-clip episode-min penetration (mm, <0=penetration) = the planned producer field.
+        _seat_geom_mj, _c1_np_min, _c2_pen_min = None, 9e9, 9e9
         if _perclip_on:
             assert scene_info.get("perclip_pin_n", 0) > 0, "PERCLIP_PIN=1 but build_scene pre-allocated no eqs"
             wp.synchronize()
             mujoco.mj_forward(mjm, mjd)   # refresh mjd.xpos so the seat-body position-match is current
             _seat_world = state.body_q.numpy()[seat_body, :3].astype(float).copy()
+            # W0-e: the mujoco cable geom co-located with the pinned seat body (world-pos match, no Newton<->mjc index
+            # assumption -- same primitive as the eq match below) -> excluded from the POST-pin free-neighbor floor bar.
+            _seat_geom_mj = (min(cable_geoms, key=lambda g: float(np.linalg.norm(np.asarray(mjd.geom_xpos[g]) - _seat_world)))
+                             if cable_geoms else None)
             # Activate the pre-allocated DISABLED connect-to-world eq whose body1 IS the runtime seat body, found by
             # WORLD-POSITION match (no Newton<->mjc index assumptions): mjd.xpos[eq_obj1id] == the seat body's pos.
             _best, _bestd = None, 9e9
@@ -4321,6 +4466,18 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
         # (Rs video: 「クリップ下降点からそのまま横にスライド...フィンガがC2に衝突」). +45mm clears the floated wall
         # top 0.850 (bottom claw ~0.864 > 0.850 = 14mm margin). DEFAULT off (gate w/ the seat fix) -> byte-identical
         # low slide. Lead-implemented per the banked 43-step SSOT (authority layer; Rs directed 「43step表を確認」).
+        # W0-e F-2 (GUIDE cable-line follow, spec v0.9 + %12 4-Q 2026-07-05): the L guide (しごき) follows the
+        # cable's ACTUAL X at the look-ahead Y so the cable stays in the throat (RC-2 fix). Q1 = PLUS (lx tracks
+        # cable), Q3 = rate-limited (a) c(k)=c(k-1)+clamp(dev-c(k-1),±8) then clamp(±cap), Q4 = update ONLY while
+        # cradled (seed L_is_cradle) + FREEZE c on cradle loss (no 0-reset = jerk-safe). offset-gated + W0E_F2 ->
+        # (0,0) BYTE-IDENTICAL (c=0). cap = W0E_F2_CAP_MM = 7mm (%12-confirmed conservative: pad X-half 11 - cable
+        # r 4; geom-uncertainty logged, RUN-2 revisits via XML throat if guide authority is short). measures LIVE cable.
+        _f2_on = (float(scene_info.get("cable_xy_offset", (0.0, 0.0))[0]) != 0.0
+                  or float(scene_info.get("cable_xy_offset", (0.0, 0.0))[1]) != 0.0) and os.environ.get("W0E_F2", "1") == "1"
+        _f2_cap = float(os.environ.get("W0E_F2_CAP_MM", "7.0")) * 1e-3
+        _f2_c = 0.0
+        _f2_prev_cradle = bool(L_is_cradle)
+        _f2_frozen = False
         _ph("GUIDE_PRELIFT")  # P3 label: step-10 lift as its own phase (future re-records; CC2-C1)
         _route43 = os.environ.get("SEAT_TOPDOWN", "0") == "1"
         _trav_z = (L_z0 + 0.045) if _route43 else L_z0   # 43-step lift delta (insert 1.025 -> traverse 1.07)
@@ -4328,7 +4485,12 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
             _npre = 8
             for kk in range(1, _npre + 1):
                 _lz = L_z0 + (_trav_z - L_z0) * kk / _npre
-                state, _ = ik_move_both(model, state, scene_info, solver, contacts, (L_x0, L_y0, _lz), R_hold,
+                if _f2_on and _f2_prev_cradle and not _f2_frozen:  # F-2 follow during the lift (measure at L_y0)
+                    _cxg, _ng = _w0e_guarded_cx(L_y0, L_x0)
+                    if _cxg is not None and abs(_cxg - L_x0) <= 0.030:
+                        _f2_c = _f2_c + float(np.clip((_cxg - L_x0) - _f2_c, -0.008, 0.008))
+                        _f2_c = float(np.clip(_f2_c, -_f2_cap, _f2_cap))
+                state, _ = ik_move_both(model, state, scene_info, solver, contacts, (L_x0 + _f2_c, L_y0, _lz), R_hold,
                                         label=f"C2-PRELIFT{kk}/{_npre}", converge_mm=2.5, speed_factor=0.22)
                 for _ in range(12):
                     state = physics_step(model, state, solver, contacts, scene_info)
@@ -4336,6 +4498,14 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
         for k in range(1, N_GUIDE + 1):
             lx = L_x0 + (c2x - L_x0) * k / N_GUIDE
             ly = L_y0 + (c2y - L_y0) * k / N_GUIDE
+            if _f2_on and _f2_prev_cradle and not _f2_frozen:  # F-2: follow the cable X at the look-ahead Y (ly)
+                _cxg, _ng = _w0e_guarded_cx(ly, lx)
+                if _cxg is not None and abs(_cxg - lx) <= 0.030:
+                    _dev = _cxg - lx  # Q1 PLUS: deviation of the cable from the nominal straight line
+                    _f2_c = _f2_c + float(np.clip(_dev - _f2_c, -0.008, 0.008))  # Q3 (a) rate-limited follow
+                    _f2_c = float(np.clip(_f2_c, -_f2_cap, _f2_cap))  # Q2 cap (throat half - cable r)
+                    print(f"  [W0E-F2] guide{k} Y={ly:+.3f} dev={_dev * 1e3:+.2f}mm -> c={_f2_c * 1e3:+.2f}mm (cap{_f2_cap * 1e3:.0f})")
+            lx = lx + _f2_c  # Q1 apply (a frozen c still applies)
             state, _ = ik_move_both(model, state, scene_info, solver, contacts, (lx, ly, _trav_z), R_hold,
                                     label=f"C2-GUIDE{k}/{N_GUIDE}", converge_mm=3.0, speed_factor=0.25)
             for _ in range(30):
@@ -4352,10 +4522,17 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
             _N, _pk, _n, _mu = _claw_cable_load(f1L0 + f2L0)
             _gap = _min_dist_mm(f1L0 + f2L0, cable_geoms)
             is_cradle = bool(-2.0 <= _gap <= 2.5 and 0.1 < _N < 60.0)
+            if _f2_on and not _f2_frozen and not is_cradle:  # Q4: cradle lost -> FREEZE c at last value, stop updates
+                _f2_frozen = True
+                print(f"  [W0E-F2] cradle lost @guide{k} -> c FROZEN {_f2_c * 1e3:+.2f}mm (no re-capture, no 0-reset)")
+            _f2_prev_cradle = is_cradle
             tabN, _tabn = _claw_table_load(f1L0)      # BOTTOM claw vs SOLID table = the geometry JAM
             tab_d = _min_dist_mm(f1L0, _tabg)
             f1z = _f1_zmin_mm(f1L0)
             zc1, c1d, c2d = _zc1(), _min_dist_mm(cable_geoms, _clip1g), _min_dist_mm(cable_geoms, _clip2g)
+            _c1np = (_min_dist_mm([g for g in cable_geoms if g != _seat_geom_mj], _clip1g)  # %9 pin-excluded free-neighbor 床 bar (post-pin)
+                     if _seat_geom_mj is not None else c1d)
+            _c1_np_min = min(_c1_np_min, _c1np); _c2_pen_min = min(_c2_pen_min, c2d)  # W0-e per-clip episode-min penetration (producer)
             lgrip_c2 = _min_dist_mm(f1L0 + f2L0, _clip2g)   # FLAG-D: L-gripper claws <-> C2 clip (penetration PV; <0=overlap)
             lr_sep, _lr_pair = _hh_clear_mm()  # item1 HAND-HAND at ARM-LINK level (sphere model, matches IK avoid; uncapped)
             rpad_c1 = _min_dist_mm(f1R0 + f2R0, _clip1g)     # item4 FINGER-CLIP: R-anchor pad <-> C1 clip (<0=penetration)
@@ -4649,11 +4826,33 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
                 _c2_regrasp_rec["transport_still_gripped_R_N"] = round(float(_NRt), 2)
             _cap("C2 transport: R grip carried to C2 +Y seat point")
             _ph("C2_DUAL_SEAT")
+            # W0-e F-3 (C2 X-follow, %12 2026-07-05, offset-gated + W0E_F3): C2_DUAL_SEAT is already TOP-DOWN (no
+            # wall-ride) so a single _c2x_comp on BOTH L/R descent tuples suffices (the v2 crossing-comp insight; no
+            # clearance-lift). (a) MEASURE at the post-transport sync via _w0e_guarded_cx (self-syncs, NO new physics
+            # step) + plausibility (NOT bare argmin-Y). comp=clamp(-(1-lam)*(cx-c2x),+-22), lam=0.5 (F-1a coeff).
+            # (b) log crossing z: z<=840 (wall-height) => PREMISE-FAIL loud (reconsider a lift variant). (0,0)/no-flag
+            # -> comp=0.0 -> c2x+0.0==c2x = BYTE-IDENTICAL (gated off on nominal). provenance: cuda:0 + build sha.
+            _c2x_comp = 0.0
+            _f3_on = (float(scene_info.get("cable_xy_offset", (0.0, 0.0))[0]) != 0.0
+                      or float(scene_info.get("cable_xy_offset", (0.0, 0.0))[1]) != 0.0) and os.environ.get("W0E_F3", "1") == "1"
+            if _f3_on:
+                _cxc2, _nc2 = _w0e_guarded_cx(c2y, c2x)            # (a) guarded selector + plausibility (self-syncs)
+                _cb_f3 = state.body_q.numpy()[cable_bodies]        # already synced by the call above (no new step)
+                _mzc2 = np.abs(_cb_f3[:, 1] - c2y) <= 0.0075
+                _zc2 = float(_cb_f3[_mzc2, 2].mean()) * 1e3 if _mzc2.any() else float("nan")
+                if _cxc2 is None or abs(_cxc2 - c2x) > 0.030:
+                    print(f"  [W0E-F3] guarded c2 crossing REJECT (n={_nc2}) -> _c2x_comp=0 (nominal fallback) + FLAG")
+                else:
+                    _lam3 = float(os.environ.get("W0E_F1A_LAMBDA", "0.5"))
+                    _c2x_comp = float(np.clip(-(1.0 - _lam3) * (_cxc2 - c2x), -0.022, 0.022))
+                    _pf3 = " ⚠PREMISE-FAIL(z<=840 wall-height -> reconsider lift)" if (_zc2 == _zc2 and _zc2 <= 840.0) else ""
+                    print(f"  [W0E-F3] guarded c2 dx={(_cxc2 - c2x) * 1e3:+.2f}mm (n={_nc2}) lam={_lam3} -> "
+                          f"_c2x_comp={_c2x_comp * 1e3:+.2f}mm; crossing z={_zc2:.1f}mm{_pf3}")
             # 3) both descend (CLOSED) from above -> clamp-push the cable into the C2 groove (top-down, NOT the lateral slide that drove the claw into the wall)
             for kk in range(1, 13):
                 _zk = _z_above_d + (_seat_z_d - _z_above_d) * kk / 12
                 state, _ = ik_move_both(model, state, scene_info, solver, contacts,
-                                        (c2x, c2y - _GHS, _zk), (c2x, c2y + _GHS, _zk),
+                                        (c2x + _c2x_comp, c2y - _GHS, _zk), (c2x + _c2x_comp, c2y + _GHS, _zk),
                                         label=f"C2-DUAL-SEAT{kk}/12", converge_mm=2.5, speed_factor=0.20)
                 for _ in range(18):
                     state = physics_step(model, state, solver, contacts, scene_info)
@@ -4665,6 +4864,14 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
                 print(f"  [C2-DUAL-SEAT] k={kk}/12 z={_zk:.3f} Lgrip<->C2={_lgc2:+.3f} Rgrip<->C2={_rgc2:+.3f}mm "
                       f"| claw<->C2 CONTACT-N: L={_NLc2:.2f} R={_NRc2:.2f} | cable<->C2={_cabc2:+.3f}mm")
                 _cap(f"C2 dual-seat {kk}/12 Lgrip<->C2={_lgc2:+.2f}")
+                if _f3_on:   # (c) F-3 during-descent crossing z-x trace (%12 (log 1) form; offset-gated -> nominal unaffected)
+                    wp.synchronize()
+                    _Pf3 = state.body_q.numpy()[cable_bodies]
+                    _mf3 = np.abs(_Pf3[:, 1] - c2y) <= 0.0075
+                    if _mf3.any():
+                        _if3 = np.where(_mf3)[0]
+                        _cif3 = int(_if3[np.argmin(np.abs(_Pf3[_if3, 0] - (c2x + _c2x_comp)))])
+                        print(f"  [W0E-F3] dual-seat k={kk}/12 crossing x={_Pf3[_cif3, 0]:.4f} z={_Pf3[_cif3, 2] * 1e3:.1f}mm")
             _ph("C2_SETTLE")
             # 4) RELEASE both grippers + settle -> genuine NOTCH SETTLE vs claw-held / pop-out (%0 seat-capture concern, charter metric #3;
             #    the C2 clip is open-top w/ zero up-retention -> if the cable pops out on release it was claw-HELD, not settled)
@@ -4758,9 +4965,15 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
               f"near-C2 cable z={cable_z_at_c2:.1f}mm vs groove {_groove_c2_mm:.1f} (|d|<=3 needed -> in_groove={c2_in_groove}) "
               f"=> c2_seated_HONEST={c2_seated_honest} (vs naive c2_seated={c2_seated} which counts wall/spacer contact)")
         zc1_final, c1_final_dist = _zc1(), _min_dist_mm(cable_geoms, _clip1g)
+        # W0-e producer (%12 addendum 2026-07-05): FINAL settled-frame pin-excluded free-node cable<->C1 min = the ①/②
+        # classifier input (%9 pre-read pin); _c1_np_min (episode-min over guide+final) = the separate validity diagnostic.
+        _c1np_final = (_min_dist_mm([g for g in cable_geoms if g != _seat_geom_mj], _clip1g)
+                       if _seat_geom_mj is not None else c1_final_dist)
+        _c1_np_min = min(_c1_np_min, _c1np_final); _c2_pen_min = min(_c2_pen_min, c2_seat_dist)
         print(f"  [C2] C2 SEAT ATTEMPT: cable<->C2={c2_seat_dist:+.3f}mm seated={c2_seated} "
               f"bottomclaw<->table={c2_tab_d:+.2f}mm N={c2_tabN:.1f} | C1 final z={zc1_final:.1f}mm "
-              f"cable<->C1={c1_final_dist:+.3f}mm | FLAG-D Lgrip<->C2={c2_lgrip_dist:+.3f}mm (<0=penetration)")
+              f"cable<->C1={c1_final_dist:+.3f}mm (nonpin_final={_c1np_final:+.3f}mm classifier; epmin={_c1_np_min:+.3f}) "
+              f"| FLAG-D Lgrip<->C2={c2_lgrip_dist:+.3f}mm (<0=penetration)")
         _cap(f"C2 seat attempt END: cable<->C2={c2_seat_dist:+.2f}mm seated={c2_seated}")
 
         # --- VERDICT (honest; the probe expects the negative per prior findings) ---
@@ -4794,6 +5007,8 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
                     "half_unclamp_transition": _trans, "L_cradle_after_halfunclamp": L_is_cradle,
                     "z_c1_seated_mm": round(z_c1_seated, 1), "z_c1_final_mm": round(zc1_final, 1),
                     "cable_c1_seat_dist_mm": round(c1_seat_dist, 3), "cable_c1_final_dist_mm": round(c1_final_dist, 3),
+                    "cable_c1_nonpin_final_mm": round(_c1np_final, 3),   # %12 ①/② classifier input (final settled, pin-excluded free-node 床 bar)
+                    "cable_c1_nonpin_epmin_mm": round(_c1_np_min, 3), "cable_c2_pen_epmin_mm": round(_c2_pen_min, 3),  # episode-min penetration diagnostic
                     "cable_c2_seat_dist_mm": round(c2_seat_dist, 3), "c2_seated": c2_seated,
                     "guide_legs": guide_legs, "max_abs_slip_xy": round(max_slip, 3),
                     "mean_slip_xy": round(mean_slip, 3), "any_drag": any_drag, "all_cradle_during_guide": all_cradle,
