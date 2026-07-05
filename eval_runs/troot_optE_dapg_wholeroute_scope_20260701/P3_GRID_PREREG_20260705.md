@@ -12,6 +12,7 @@
 - **per-offset unique** 計数。決定論的 re-run = 1 offset。
 - SR 分母 = **winnable-support cells** (draw-class 除外を両枝同一適用)。**≥95% 枝の certify には n_winnable ≥ 59 が必要** (rule-of-3: (0.95)^n ≤ 0.05 → n ≥ 58.4; %9 独立再計算一致)。81 − 予想 draw 数点 > 59 ✓。Wilson 95% CI を併記。
 - evidence-gate 閾値 (spec §2 既 pin): SR ≥95% → M-C bites → α-DR = (a) 摂動注入 or (b) obs-noise 必須 / ≤80% → (d) position-DR + c2-sized で開始可 / 中間 → Rs 判断。
+- **AMENDMENT A1 (2026-07-05 11:21 JST, pre-data — 77/81 cell 未実施時点で追記; two-key = %12 提案 11:19 + %9 CO-SIGN 11:20):** SR **numerator** pin — **PRIMARY = strict (verdict=SUCCESS* ∧ c2_seated_honest=True)** / SECONDARY (diagnostic) = SUCCESS any-seat。根拠 = task product-predicate は seat を含む (spec §2 G6 / T_SEAT; producer 定義 = test_newton_clip_routing.py:4756 c2_wall_dist≤0.5 ∧ c2_in_groove) — predicate 由来の導出であり grid data の覗き見でない (materiality 参照 = PRIOR data CP-C のみ: any-seat 16/17 vs strict 14/17)。**rider 1 (%9):** any-seat∧¬strict class (= delivery-ok/seat-miss) を **per-cell 明示報告** — この class は seat-margin 学習信号カテゴリ + c1 corner-miss forensics の seat 側入力で、aggregate のみだと消える。runner 出力は verdict/seated 別列で既に適合 (runner 変更なし、読み方の pin)。
 
 ## 3. Draw-class 分類 = 2 段手続き
 1. task-level FAIL cell 抽出 → per-cell forensics (miss magnitude / 幾何: bow-chord vs span 窓 / R_MISS vs seat-miss 分類)。
