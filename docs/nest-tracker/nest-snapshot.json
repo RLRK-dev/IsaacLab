@@ -2134,7 +2134,7 @@
     {
       "id": "T-ROOT-optE-route-dapg-C1C2",
       "goal": "Rs 決定 2026-07-01 22:00「(A) 経路全体」: committed square-on C1→C2 route (bcb7393ec8) を demo SEED に、経路全体を 1 つの学習 unit として DAPG 化する (P1 feasibility → P2 env/reward design → P3 demos → P4 train).",
-      "means": "学習済み policy が C1→C2 経路全体を承認済み成功条件で再現する。\n現況: P1 PASS (non-cons) / P2(arch A reward設計) = pre-check BLOCK → DQ1 = B (BC-imitation) Rs 決定 2026-07-02 /\nP3-prep (demo recorder) = BUILD+DoD 全 PASS (%9 GT cross-PV 中) / DR-range Rs 決定「XY ±20mm で開始」/\n次 = B build spec 5体 debate → B0/B1 build (B2 は DR-set 記録、unblocked)。\n",
+      "means": "学習済み policy が C1→C2 経路全体を承認済み成功条件で再現する。\n現況 (2026-07-05 09:10): P1 PASS (non-cons) / DQ1=B → B0-B2 完走 (B1 0/5 FAIL bank / B2 OG STOP) / DQ7 = (iv) Outcome-B・(ii) plateau STOP・obs-switch REFUTED・capacity PASS・DAgger β=0 budget-test = monotone-DIVERGENCE (A-vs-B OPEN) /\nBC+RL 開発全体像・開発計画 LADDER v2 v1.1 BANKED (07-05、5体 debate 済、LEDGER 行参照) + 次選択 = %12+%9 JOINT-DECIDED (Rs 標準権限 08:5x) /\n次 = W0-b mini-test 再開 (fire-前 gate 完走、%11 build-prep 中) ∥ W0-c P2 design-gate 審議 (%12 起草・%9 cross-PV READY)。D-C un-park・§4.3 閾値・OG band = Rs-PENDING。\n",
       "status": "IN_PROGRESS",
       "dependencies": [],
       "parent": "T-L1C-PerSkill-RL",
