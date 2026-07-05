@@ -51,3 +51,9 @@
 - **検証済**: H-lattice Δ 算術 6/6 整合 (floor_mod 込み再計算 EXACT) / crossZ bar 840 = cluster 空白帯の物理境界で妥当 / D>A>B>C 優先順・C-0 gate・predicate 節 = 標準形適合。
 - **修正 1 (interpretation-restricting、未 mapping outcome の封鎖)**: **A′** = D なし ∧ (iii) 6/6 PASS だが (ii) HIGH が 6/6 でない → **採択 (A と同処置) + anomaly 行「crossZ 機構モデル不完全 — C2 が LOW crossing でも治った cell を列挙」**。目的変数は C2 healing であり crossZ は機構 probe — 治癒を機構モデルの都合で棄却しない。ただし機構理解の gap として joint 再分析 item に登録 (re-grid 前に closure 不要、annotate-not-reclassify)。
 - 本 countersign をもって **SEALED** — 以後の変更は不可、%11 実行 → sealed 読み → 交換 → 機械適用。
+
+## SEALED v2 (2026-07-06 05:0x — %9 完全性再点検 2 件、%12 confirm; read-side のみ、probe 実行に非干渉)
+
+- **R (refute) 追加**: D なし ∧ (iii) 0/6 PASS → **H-lattice 棄却 + Rs 報告** (採択なし、joint 再分析)。全 (ii) LOW = clean 棄却 / (ii) HIGH 混在 = C flag 併記。
+- **B ∧ C 優先解釈の明文化**: (iii) 1-5/6 で (ii) HIGH ∧ (iii) FAIL ≥2 が併存する場合 — **B の部分採択は維持** (治癒列の empirical heal は機構モデル非依存、A′ 哲学) + **C は全体停止でなく「crossZ 機構 gap」item として joint 再分析に登録**。C 単独での全体停止 = 部分採択が 1 列も無い場合のみ。
+- 以上 2 件で outcome 空間は全列挙済 (D / A / A′ / B[+C-item] / R[+C-flag] / C-stop / C-0 INVALID / validity INVALID)。**SEALED v2 確定。**
