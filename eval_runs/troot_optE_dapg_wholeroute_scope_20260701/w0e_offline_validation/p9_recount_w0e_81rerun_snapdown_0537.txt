@@ -1,0 +1,168 @@
+# %9 OPS-SUP round-2 sealed read record (fixed pre-exchange-close) — 2026-07-06 07:54 JST
+# parser: p9_recount_strict_v2.py v2.1 sha 170de62e91b05f63a4c3d7b18eda4de24180845223beccff68c6d3632995dfca
+
+## Gate 1+2 (ROUND2_VALIDITY_GATES.md)
+== Gate 1 (C-0 sha vs RUN1_REFERENCE_V2) ==
+  x0_y0 new sha = 5f1c3f9238f45057011cfad1d010ac43000cb179b76b61d0461733a9075416cf
+  PASS EXACT
+
+== Gate 2 (54-cell byte-identity vs w0e_81rerun_0211) ==
+  non-phi5 cells = 54 (expect 54)  bit-MATCH = 54
+  PASS — all non-phi5 bit-identical (structural expectation holds)
+
+== phi5 columns (expect DIFFER = F-1b'' fired) ==
+  phi5 cells = 27 (expect 27)  DIFFER = 27
+
+## v2.1 recount
+== %9 strict_v2 recount (root=w0e_81rerun_snapdown_0537) ==
+runs=81 unique=81 dup_collapsed=0  [FLANK-FALLBACK npz x81]
+STRICT_v2: 58/81 = 0.7160  Wilson95 [0.6098, 0.8027]
+ANY-SEAT: 77/81 = 0.9506  Wilson95 [0.8798, 0.9806]
+C1-final-retained: 81/81 = 1.0000  Wilson95 [0.9547, 1.0000]
+-- non-strict_v2 cells (leg breakdown) --
+    (-10.0, -20.0)  c2_honest=F
+     (-10.0, -5.0)  c2_honest=F
+     (-10.0, 10.0)  verdict=R_MISS_AT_88 ∧ c2_honest=F
+     (-5.0, -20.0)  c2_honest=F
+      (-5.0, -5.0)  c2_honest=F
+      (-5.0, 10.0)  c2_honest=F
+      (0.0, -20.0)  c2_honest=F
+       (0.0, -5.0)  c2_honest=F
+       (0.0, 10.0)  c2_honest=F
+      (5.0, -20.0)  c2_honest=F
+       (5.0, -5.0)  c2_honest=F
+       (5.0, 10.0)  c2_honest=F
+     (10.0, -20.0)  c2_honest=F
+      (10.0, -5.0)  c2_honest=F
+      (10.0, 10.0)  c2_honest=F
+     (15.0, -20.0)  c2_honest=F
+      (15.0, -5.0)  verdict=R_MISS_AT_88 ∧ c2_honest=F
+      (15.0, 10.0)  c2_honest=F
+      (15.0, 15.0)  c2_honest=F
+     (20.0, -20.0)  verdict=R_MISS_AT_88 ∧ c2_honest=F
+      (20.0, -5.0)  verdict=R_MISS_AT_88 ∧ c2_honest=F
+      (20.0, 10.0)  c2_honest=F
+      (20.0, 15.0)  c2_honest=F
+-- lane-cross diag (v2.1 additive: R-lane crossing seg vs pin at R-close; descriptive only) --
+    (-20.0, -20.0)    s2  seg=26 pin=34 dist=8 crossX=0.381 crossZ=847.9mm
+    (-20.0, -15.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=846.9mm
+    (-20.0, -10.0)    s2  seg=20 pin=28 dist=8 crossX=0.378 crossZ=847.1mm
+     (-20.0, -5.0)    s2  seg=25 pin=33 dist=8 crossX=0.381 crossZ=847.8mm
+      (-20.0, 0.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=846.9mm
+      (-20.0, 5.0)    s2  seg=19 pin=27 dist=8 crossX=0.378 crossZ=847.0mm
+     (-20.0, 10.0)    s2  seg=24 pin=32 dist=8 crossX=0.381 crossZ=847.8mm
+     (-20.0, 15.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=846.9mm
+     (-20.0, 20.0)    s2  seg=18 pin=26 dist=8 crossX=0.378 crossZ=847.0mm
+    (-15.0, -20.0)    s2  seg=26 pin=34 dist=8 crossX=0.381 crossZ=848.0mm
+    (-15.0, -15.0)    s2  seg=20 pin=28 dist=8 crossX=0.382 crossZ=847.6mm
+    (-15.0, -10.0)    s2  seg=20 pin=27 dist=7 crossX=0.379 crossZ=847.7mm
+     (-15.0, -5.0)    s2  seg=25 pin=33 dist=8 crossX=0.381 crossZ=847.8mm
+      (-15.0, 0.0)    s2  seg=19 pin=27 dist=8 crossX=0.382 crossZ=847.5mm
+      (-15.0, 5.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=848.5mm
+     (-15.0, 10.0)    s2  seg=24 pin=32 dist=8 crossX=0.381 crossZ=847.8mm
+     (-15.0, 15.0)    s2  seg=18 pin=26 dist=8 crossX=0.382 crossZ=847.5mm
+     (-15.0, 20.0)    s2  seg=18 pin=25 dist=7 crossX=0.379 crossZ=847.6mm
+    (-10.0, -20.0) other  seg=26 pin=34 dist=8 crossX=0.366 crossZ=825.6mm
+    (-10.0, -15.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=846.8mm
+    (-10.0, -10.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=848.4mm
+     (-10.0, -5.0) other  seg=25 pin=33 dist=8 crossX=0.37 crossZ=849.6mm
+      (-10.0, 0.0)    s2  seg=19 pin=27 dist=8 crossX=0.382 crossZ=847.5mm
+      (-10.0, 5.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=848.4mm
+     (-10.0, 10.0)  MISS  seg=24 pin=32 dist=8 crossX=0.369 crossZ=829.8mm
+     (-10.0, 15.0)    s2  seg=18 pin=26 dist=8 crossX=0.382 crossZ=847.5mm
+     (-10.0, 20.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=848.4mm
+     (-5.0, -20.0) other  seg=26 pin=34 dist=8 crossX=0.367 crossZ=830.0mm
+     (-5.0, -15.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=846.8mm
+     (-5.0, -10.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=848.4mm
+      (-5.0, -5.0) other  seg=25 pin=33 dist=8 crossX=0.367 crossZ=830.5mm
+       (-5.0, 0.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=846.8mm
+       (-5.0, 5.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=848.4mm
+      (-5.0, 10.0) other  seg=24 pin=32 dist=8 crossX=0.367 crossZ=830.5mm
+      (-5.0, 15.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=846.8mm
+      (-5.0, 20.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=848.4mm
+      (0.0, -20.0) other  seg=26 pin=34 dist=8 crossX=0.369 crossZ=830.6mm
+      (0.0, -15.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=846.8mm
+      (0.0, -10.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=848.4mm
+       (0.0, -5.0) other  seg=25 pin=33 dist=8 crossX=0.368 crossZ=830.9mm
+        (0.0, 0.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=846.8mm
+        (0.0, 5.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=848.4mm
+       (0.0, 10.0) other  seg=24 pin=32 dist=8 crossX=0.367 crossZ=830.7mm
+       (0.0, 15.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=846.9mm
+       (0.0, 20.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=848.4mm
+      (5.0, -20.0) other  seg=26 pin=34 dist=8 crossX=0.369 crossZ=831.3mm
+      (5.0, -15.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=846.8mm
+      (5.0, -10.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=848.4mm
+       (5.0, -5.0) other  seg=25 pin=33 dist=8 crossX=0.368 crossZ=830.9mm
+        (5.0, 0.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=846.8mm
+        (5.0, 5.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=848.3mm
+       (5.0, 10.0) other  seg=24 pin=32 dist=8 crossX=0.366 crossZ=830.6mm
+       (5.0, 15.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=846.8mm
+       (5.0, 20.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=848.3mm
+     (10.0, -20.0) other  seg=26 pin=34 dist=8 crossX=0.368 crossZ=830.4mm
+     (10.0, -15.0)    s2  seg=21 pin=29 dist=8 crossX=0.382 crossZ=847.7mm
+     (10.0, -10.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=848.3mm
+      (10.0, -5.0) other  seg=25 pin=33 dist=8 crossX=0.367 crossZ=830.4mm
+       (10.0, 0.0)    s2  seg=20 pin=28 dist=8 crossX=0.382 crossZ=847.6mm
+       (10.0, 5.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=848.3mm
+      (10.0, 10.0) other  seg=24 pin=32 dist=8 crossX=0.321 crossZ=822.8mm
+      (10.0, 15.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=847.0mm
+      (10.0, 20.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=848.3mm
+     (15.0, -20.0) other  seg=26 pin=34 dist=8 crossX=0.367 crossZ=830.2mm
+     (15.0, -15.0)    s2  seg=21 pin=29 dist=8 crossX=0.382 crossZ=847.6mm
+     (15.0, -10.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=848.4mm
+      (15.0, -5.0)  MISS  seg=25 pin=33 dist=8 crossX=0.321 crossZ=823.0mm
+       (15.0, 0.0)    s2  seg=20 pin=28 dist=8 crossX=0.382 crossZ=847.6mm
+       (15.0, 5.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=848.3mm
+      (15.0, 10.0) other  seg=24 pin=32 dist=8 crossX=0.331 crossZ=829.8mm
+      (15.0, 15.0) other  seg=19 pin=27 dist=8 crossX=0.382 crossZ=847.7mm
+      (15.0, 20.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=848.3mm
+     (20.0, -20.0)  MISS  seg=26 pin=34 dist=8 crossX=0.315 crossZ=828.3mm
+     (20.0, -15.0)    s2  seg=21 pin=28 dist=7 crossX=0.38 crossZ=847.1mm
+     (20.0, -10.0)    s2  seg=20 pin=28 dist=8 crossX=0.38 crossZ=848.3mm
+      (20.0, -5.0)  MISS  seg=25 pin=33 dist=8 crossX=0.329 crossZ=829.4mm
+       (20.0, 0.0)    s2  seg=20 pin=27 dist=7 crossX=0.38 crossZ=847.1mm
+       (20.0, 5.0)    s2  seg=19 pin=27 dist=8 crossX=0.38 crossZ=848.3mm
+      (20.0, 10.0) other  seg=24 pin=32 dist=8 crossX=0.321 crossZ=828.8mm
+      (20.0, 15.0) other  seg=19 pin=27 dist=8 crossX=0.382 crossZ=847.6mm
+      (20.0, 20.0)    s2  seg=18 pin=26 dist=8 crossX=0.38 crossZ=848.3mm
+  summary: R_MISS n=4 |dist| min/med/max = 8/8/8  |  non-MISS n=77 |dist| min/med/max = 7/8/8
+
+## phi5 paired 27 + probe reproduction
+== phi5 paired 27 (old -> new): off | old s2/verdict/crossZ | new s2/verdict/crossZ ==
+   (-20.0, -10.0)  P->P  old[SUCCESS_DUAL_LOADED_AT_8 cz=847.2]  new[SUCCESS_DUAL_LOADED_AT_8 cz=847.1]
+     (-20.0, 5.0)  P->P  old[SUCCESS_DUAL_LOADED_AT_8 cz=847.1]  new[SUCCESS_DUAL_LOADED_AT_8 cz=847.0]
+    (-20.0, 20.0)  F->P  old[R_MISS_AT_88             cz=847.0]  new[SUCCESS_DUAL_LOADED_AT_8 cz=847.0]
+   (-15.0, -10.0)  P->P  old[SUCCESS_DUAL_LOADED_AT_8 cz=847.1]  new[SUCCESS_DUAL_LOADED_AT_8 cz=847.7]
+     (-15.0, 5.0)  P->P  old[SUCCESS_DUAL_LOADED_AT_8 cz=847.0]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.5]
+    (-15.0, 20.0)  P->P  old[SUCCESS_DUAL_LOADED_AT_8 cz=846.9]  new[SUCCESS_DUAL_LOADED_AT_8 cz=847.6]
+   (-10.0, -10.0)  P->P  old[SUCCESS_DUAL_LOADED_AT_8 cz=846.9]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.4]
+     (-10.0, 5.0)  F->P  old[R_MISS_AT_88             cz=825.8]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.4]
+    (-10.0, 20.0)  P->P  old[SUCCESS_R_GRIP_L_CAGE_AT cz=825.6]  new[SUCCESS_R_GRIP_L_CAGE_AT cz=848.4]
+    (-5.0, -10.0)  P->P  old[SUCCESS_DUAL_LOADED_AT_8 cz=846.8]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.4]
+      (-5.0, 5.0)  F->P  old[R_MISS_AT_88             cz=825.7]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.4]
+     (-5.0, 20.0)  P->P  old[SUCCESS_R_GRIP_L_CAGE_AT cz=825.9]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.4]
+     (0.0, -10.0)  F->P  old[SUCCESS_R_GRIP_L_CAGE_AT cz=825.5]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.4]
+       (0.0, 5.0)  F->P  old[R_MISS_AT_88             cz=825.6]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.4]
+      (0.0, 20.0)  F->P  old[R_MISS_AT_88             cz=825.8]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.4]
+     (5.0, -10.0)  P->P  old[SUCCESS_R_GRIP_L_CAGE_AT cz=825.4]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.4]
+       (5.0, 5.0)  F->P  old[SUCCESS_R_GRIP_L_CAGE_AT cz=825.5]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.3]
+      (5.0, 20.0)  F->P  old[R_MISS_AT_88             cz=825.7]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.3]
+    (10.0, -10.0)  P->P  old[SUCCESS_DUAL_LOADED_AT_8 cz=846.7]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.3]
+      (10.0, 5.0)  F->P  old[R_MISS_AT_88             cz=825.4]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.3]
+     (10.0, 20.0)  F->P  old[SUCCESS_R_GRIP_L_CAGE_AT cz=825.6]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.3]
+    (15.0, -10.0)  F->P  old[SUCCESS_R_GRIP_L_CAGE_AT cz=825.3]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.4]
+      (15.0, 5.0)  F->P  old[R_MISS_AT_88             cz=825.5]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.3]
+     (15.0, 20.0)  F->P  old[SUCCESS_R_GRIP_L_CAGE_AT cz=825.7]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.3]
+    (20.0, -10.0)  F->P  old[R_MISS_AT_88             cz=823.7]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.3]
+      (20.0, 5.0)  P->P  old[SUCCESS_R_GRIP_L_CAGE_AT cz=825.5]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.3]
+     (20.0, 20.0)  F->P  old[SUCCESS_R_GRIP_L_CAGE_AT cz=825.6]  new[SUCCESS_DUAL_LOADED_AT_8 cz=848.3]
+-- transitions --
+  F->P: 15  [(-20.0, 20.0), (-10.0, 5.0), (-5.0, 5.0), (0.0, -10.0), (0.0, 5.0), (0.0, 20.0), (5.0, 5.0), (5.0, 20.0), (10.0, 5.0), (10.0, 20.0), (15.0, -10.0), (15.0, 5.0), (15.0, 20.0), (20.0, -10.0), (20.0, 20.0)]
+  P->P: 12
+  P->F: 0  []
+  F->F: 0
+
+== probe reproduction (0511 phi5 probes vs round-2 same cells) ==
+  0511_P1_x0_yp5 vs cell_x0_y5: sha MATCH  round2 s2=True verdict=SUCCESS_DUAL_LOADED_AT_88 cz=848.4
+  0511_P4_x0_ym10 vs cell_x0_y-10: sha MATCH  round2 s2=True verdict=SUCCESS_DUAL_LOADED_AT_88 cz=848.4
+  0511_P5_x0_yp20 vs cell_x0_y20: sha MATCH  round2 s2=True verdict=SUCCESS_DUAL_LOADED_AT_88 cz=848.4
