@@ -1,0 +1,32 @@
+== %12 leg-1 independent key (dy-arc Stage-A, PREREG a779066643) — 2026-07-06 09:0x JST ==
+
+Implementation: own code (not %9's script), PREREG definitions: lane = CLIP2_Y+GHS = 0.044;
+close frame = last R grip_cmd transition inside phase-11 window (+1); entry = first phase-11
+frame; crossing = cable polyline y-plane crossing picked by |x - R_EE_x| min; pin = pin_body-28;
+arc = path integral pin->crossing point (frac seg); chord = |xyz_pin - cross|.
+
+HONEST NOTE (definitions reconciliation, not data disagreement): my first implementation used
+(a) first R-close after phase-11 entry -> collapsed to entry frame (grip_cmd rest value 0.0),
+(b) crossing = 3D nearest node to R-EE. Both were my definition errors vs the PREREG text;
+corrected to the pre-registered definitions above, then all 27 cells match %9's table EXACT.
+
+RESULT (27 phi10-column cells, w0e_81rerun_snapdown_0537):
+- O1: slack in [0.0, 0.5]mm ALL cells (taut) -> NOT SEPARATED; validity arc>=chord 27/27;
+  n_cross 1/1 all cells. Matches %9 leg1_out.txt cell-by-cell (0.1mm granularity).
+- O2: czE<840 in 19/27; czE~czC 25/27; anomalies (-10,+10) czE845.5->czC829.8 and
+  (-10,-5) czC849.6 honest-F confirmed.
+- O3 (independent grep of 0511_P2/P3/P6 run.logs): settle GRASP_YC=+152.50mm and
+  [W0E-F1B] Delta=+5.00 -> GRASP_YC=+157.50mm IDENTICAL across all three probes
+  (X differs only by the dx offset itself). H-feed discriminating column = no difference.
+
+2x2 application CONCUR: H-slack fails O1 (no separation, all taut); H-feed fails O3
+(identical feed); H-capture null (no arc<chord, no multi-cross) -> no hypothesis with
+>=2 sole-support discriminating columns -> IDENTIFICATION NOT ACHIEVED -> W1 RETREAT
+fires mechanically. O4 non-activation CONCUR (would discriminate among refuted hypotheses).
+
+Positive constraints (annotation, not reclassification): crossing height is BINARY
+(HIGH ~847.8-848.0 = draped over C1 clip top vs LOW ~829-831 = cable rest height
+825+4mm floor-rest), decided at phase-11 ENTRY (pre-grasp) in 25/27 cells, with
+pin->crossing taut in BOTH groups => geometry is fixed at settle/drag time,
+feed-independent and slack-independent. H-drape = post-hoc hypothesis; would
+require a NEW sealed PREREG round (zero-GPU leg feasible on existing 81 npz).

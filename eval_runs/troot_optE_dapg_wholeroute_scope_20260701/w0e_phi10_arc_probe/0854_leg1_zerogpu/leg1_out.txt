@@ -1,0 +1,68 @@
+== %9 dy-arc leg-1 (zero-GPU) — script sha 138ee186bddca80f523d42cb1071b7f64d8242d2a78f4d4951ec934d4b15ff2f (pin-1) ==
+phi10-column cells = 27 (expect 27)
+
+-- O1/O2 per cell (grp = expected class by dx boundary) --
+            off  grp verdict                    pin seg nX(c/e)    arc  chord  slack vld    czC    czE
+ (-20.0, -20.0) HIGH SUCCESS_DUAL_LOADED_AT_88   34  26 1/1    115.7  115.6    0.1   T  847.9  847.9
+ (-15.0, -20.0) HIGH SUCCESS_DUAL_LOADED_AT_88   34  26 1/1    115.5  115.4    0.1   T  848.0  848.0
+ (-10.0, -20.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  34  26 1/1    110.8  110.8    0.1   T  825.6  826.0
+  (-5.0, -20.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  34  26 1/1    110.9  110.9    0.1   T  830.0  829.7
+   (0.0, -20.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  34  26 1/1    111.0  111.0    0.0   T  830.6  830.1
+   (5.0, -20.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  34  26 1/1    110.9  110.9    0.0   T  831.3  832.4
+  (10.0, -20.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  34  26 1/1    110.5  110.4    0.1   T  830.4  830.1
+  (15.0, -20.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  34  26 1/1    110.2  110.1    0.1   T  830.2  830.0
+  (20.0, -20.0)  LOW R_MISS_AT_88                34  26 1/1    114.5  114.3    0.1   T  828.3  828.2
+  (-20.0, -5.0) HIGH SUCCESS_DUAL_LOADED_AT_88   33  25 1/1    115.8  115.7    0.1   T  847.8  847.9
+  (-15.0, -5.0) HIGH SUCCESS_DUAL_LOADED_AT_88   33  25 1/1    115.5  115.4    0.1   T  847.8  847.9
+  (-10.0, -5.0)  LOW SUCCESS_DUAL_LOADED_AT_88   33  25 1/1    113.4  113.3    0.0   T  849.6  847.7
+   (-5.0, -5.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  33  25 1/1    110.9  110.8    0.0   T  830.5  829.9
+    (0.0, -5.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  33  25 1/1    111.0  111.0    0.1   T  830.9  830.3
+    (5.0, -5.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  33  25 1/1    110.7  110.7    0.1   T  830.9  830.3
+   (10.0, -5.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  33  25 1/1    110.5  110.4    0.1   T  830.4  830.1
+   (15.0, -5.0)  LOW R_MISS_AT_88                33  25 1/1    113.4  112.9    0.5   T  823.0  826.7
+   (20.0, -5.0)  LOW R_MISS_AT_88                33  25 1/1    111.0  110.8    0.2   T  829.4  829.0
+  (-20.0, 10.0) HIGH SUCCESS_DUAL_LOADED_AT_88   32  24 1/1    115.8  115.7    0.1   T  847.8  847.9
+  (-15.0, 10.0) HIGH SUCCESS_DUAL_LOADED_AT_88   32  24 1/1    115.5  115.4    0.1   T  847.8  847.8
+  (-10.0, 10.0)  LOW R_MISS_AT_88                32  24 1/1    111.2  111.2    0.0   T  829.8  845.5
+   (-5.0, 10.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  32  24 1/1    111.1  111.0    0.1   T  830.5  830.2
+    (0.0, 10.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  32  24 1/1    110.9  110.8    0.1   T  830.7  830.3
+    (5.0, 10.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  32  24 1/1    110.7  110.6    0.1   T  830.6  830.3
+   (10.0, 10.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  32  24 1/1    113.5  113.2    0.2   T  822.8  824.1
+   (15.0, 10.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  32  24 1/1    111.1  110.9    0.2   T  829.8  829.4
+   (20.0, 10.0)  LOW SUCCESS_R_GRIP_L_CAGE_AT_8  32  24 1/1    113.0  112.8    0.2   T  828.8  828.7
+
+-- O1 separation (slack mm) --
+HIGH (dx<=-15, n=6): [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+LOW  (dx>=-10, n=21): [0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.2, 0.5]
+NOT SEPARATED (overlap) — H-slack fit fails on O1
+
+-- O2: crossZ at ph11-entry < 840.0 in 19/27 cells with entry crossing --
+
+== O3 as-executed (band probes) ==
+P-2' (0511_P2_x0_ym5): L_ee entry=[0.4, -0.044, 1.1297] close=[0.4, -0.044, 1.1297]
+    [S6_ROUTE] caveat-a: settled-cable-centre GRASP_YC=+152.50mm (grasp_at=+150mm arms +-44mm = 88 span)
+    [W0E-F1B] LATTICE-snap(phi->0/15): dy=-5.00mm phi=10.00 Delta=+5.00mm GRASP_YC=+157.50mm; SIM-ONLY node-lattice artifact
+    [C2-DUAL-SETTLE] after RELEASE both grippers (+90 steps): cable<->C2 +29.773(claw-held)->+29.143mm(released) | near-C2 cable z=824.5 vs groove 829.0 => SETTLED_IN_NOTCH=False (%0 seat-capture: True=genuine settle held by the groove / False=was claw-HELD, popped from the open-top clip)
+    [C2-DUAL] dual-finger clamp-push complete (top-down; claw-C2 penetration + contact-force + release-settle logged above)
+    [S6_ROUTE] caveat-a: settled-cable-centre GRASP_YC=+152.50mm (grasp_at=+150mm arms +-44mm = 88 span)
+    [W0E-F1B] LATTICE-snap(phi->0/15): dy=-5.00mm phi=10.00 Delta=+5.00mm GRASP_YC=+157.50mm; SIM-ONLY node-lattice artifact
+    [C2-DUAL-SETTLE] after RELEASE both grippers (+90 steps): cable<->C2 +29.773(claw-held)->+29.143mm(released) | near-C2 cable z=824.5 vs groove 829.0 => SETTLED_IN_NOTCH=False (%0 seat-capture: True=genuine settle held by the groove / False=was claw-HELD, popped from the open-top clip)
+    [C2-DUAL] dual-finger clamp-push complete (top-down; claw-C2 penetration + contact-force + release-settle logged above)
+P-3' (0511_P3_x5_yp10): L_ee entry=[0.4, -0.044, 1.1295] close=[0.4, -0.044, 1.1295]
+    [S6_ROUTE] caveat-a: settled-cable-centre GRASP_YC=+152.50mm (grasp_at=+150mm arms +-44mm = 88 span)
+    [W0E-F1B] LATTICE-snap(phi->0/15): dy=+10.00mm phi=10.00 Delta=+5.00mm GRASP_YC=+157.50mm; SIM-ONLY node-lattice artifact
+    [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+305.00mm (nominal GRASP_X=+300mm, delta=+5.00mm)
+    [C2-DUAL-SETTLE] after RELEASE both grippers (+90 steps): cable<->C2 -1.162(claw-held)->-0.360mm(released) | near-C2 cable z=870.5 vs groove 829.0 => SETTLED_IN_NOTCH=False (%0 seat-capture: True=genuine settle held by the groove / False=was claw-HELD, popped from the open-top clip)
+    [C2-DUAL] dual-finger clamp-push complete (top-down; claw-C2 penetration + contact-force + release-settle logged above)
+    [S6_ROUTE] caveat-a: settled-cable-centre GRASP_YC=+152.50mm (grasp_at=+150mm arms +-44mm = 88 span)
+    [W0E-F1B] LATTICE-snap(phi->0/15): dy=+10.00mm phi=10.00 Delta=+5.00mm GRASP_YC=+157.50mm; SIM-ONLY node-lattice artifact
+    [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+305.00mm (nominal GRASP_X=+300mm, delta=+5.00mm)
+P-6' (0511_P6_x20_ym20): L_ee entry=[0.4, -0.044, 1.1295] close=[0.4004, -0.0454, 1.1298]
+    [S6_ROUTE] caveat-a: settled-cable-centre GRASP_YC=+152.50mm (grasp_at=+150mm arms +-44mm = 88 span)
+    [W0E-F1B] LATTICE-snap(phi->0/15): dy=-20.00mm phi=10.00 Delta=+5.00mm GRASP_YC=+157.50mm; SIM-ONLY node-lattice artifact
+    [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+320.00mm (nominal GRASP_X=+300mm, delta=+20.00mm)
+    [C2-DUAL-SETTLE] after RELEASE both grippers (+90 steps): cable<->C2 +0.769(claw-held)->-0.241mm(released) | near-C2 cable z=829.2 vs groove 829.0 => SETTLED_IN_NOTCH=True (%0 seat-capture: True=genuine settle held by the groove / False=was claw-HELD, popped from the open-top clip)
+    [C2-DUAL] dual-finger clamp-push complete (top-down; claw-C2 penetration + contact-force + release-settle logged above)
+    [S6_ROUTE] caveat-a: settled-cable-centre GRASP_YC=+152.50mm (grasp_at=+150mm arms +-44mm = 88 span)
+    [W0E-F1B] LATTICE-snap(phi->0/15): dy=-20.00mm phi=10.00 Delta=+5.00mm GRASP_YC=+157.50mm; SIM-ONLY node-lattice artifact
+    [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp=+320.00mm (nominal GRASP_X=+300mm, delta=+20.00mm)
