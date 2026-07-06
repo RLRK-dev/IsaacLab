@@ -3,7 +3,7 @@
 **node:** `T-ROOT-optE-route-dapg-C1C2-P2-routeexec` (state.md 済, IN_PROGRESS, 1:1 bind %11/w2:p3) · **L:** L3 (charter §3 自動昇格 confirmed, §1 で再導出 concur)
 **charter-giver:** %12 RS-TECH-LEAD (w2:p4) · **task-start SHA:** `f0bd54992c` (5体 [VERIFY] git diff 起点)
 **status:** PAPER-ONLY / 0-build / 0-commit-of-code (本 doc = charter INPUT、[DESIGN-GATE]+5体 [VERIFY] への提出物)
-**rev:** v1.1 (%12 checkpoint 00:32 fold: fn-range 訂正 3692-7475 / **canonical 抽出 scope 3692-5765** [%12 CONCUR、当方 §運用10 catch] / per-closure 3-way 分類 / namesake 全列挙 / state-bank = 6 coarse G)
+**rev:** v1.1 (%12 checkpoint 00:32: fn-range 3692-7475 / canonical 抽出 3692-5765 [§運用10 catch] / 27-closure 3-way / namesake / 6 coarse G) → **v1.2 (%12 design-gate BLOCK disposition 01:22 `dfe5dd0920`: /pre-check 2 CRIT fold — DoD 2-layer 分離 [Layer A 抽出忠実 primary verdict+trajectory / Layer B substrate-transfer 実測] + gripper-servo env-core drive-loop 拡張 [Q2] + HIGH4 no-global-mutation + MED5 INIT_XY_NOISE=0 + MED6 reset_to_phase per-world)**
 
 ---
 
@@ -63,54 +63,73 @@
 | phase-k qpos/qvel snapshot | ✅ **新規** (monolith に無) | `reset_to_phase(k)` (**6 coarse G**, §5) |
 | **measurement closures 15個**: `_min_dist_mm`:3837 / `_cage`:3895 / `_seg_z_mm`:3928 / `_zc1`:4662 / `_claw_cable_load`:4431 / `_claw_table_load`:4448 / `_claw_c2_load`:4461 / `_sample`:4299 / `_arm_split`:3937 / `_cable_z`:3924 / `_hh_clear_mm`:4421 / `_f1_zmin_mm`:4476 / `_cage_pair`:3882 / `_clip_geoms`:3845 / `_table_geoms`:3872 | ❌ **residual** | harness/env 残置 (predicate = env-core owns) |
 | video `_cap`:4045 / `_world_to_pixel`:4024 + recorder `_ph`(label)/`_gn`:3802 + DR `_inject_detour`:3768 (None-passthrough) | ❌ **residual** | route engine 責務外 |
-| `ik_move_both`:1958 / `_set_gripper_target` / `get_ee_positions` / `solve_ik_dual` (module-level) | ❌ **import 再利用** (不触) | 既存 module 参照 |
+| `ik_move_both`:1958 / `_set_gripper_target` / `get_ee_positions` / `solve_ik_dual` (module-level) | ⚠ **v1.2: import 再利用 or 抽出 (HIGH4)** | globals monkeypatch (:5214) ゆえ **不触 file mutate 禁止** → C2 rotated-IK には自前 solver 要 (ik_move_both 抽出 or explicit solver pass、5体 精査) |
 | predicate (`c2_seated_honest`:5580 wall-excluded / `c1_final`:5586) | ❌ **env-core owns** (G6 strict_v2 mirror v1.5f) | reference oracle 側で byte-repro 照合 |
 | **`_b` closures 24個 (≥5766)**: `_close_b`:6501 / `_halfclamp_b`:6511 (しごき) / `_feed_claw_cable_load_N`:6548 / `_gap_mm_from_drv`:6469 / `_span_sag_mm`:6589 / `_do_step_b`:6480 等 + DH-F1-R-DESCEND:6168 + STEP13_REGRASP/CLIP_DELTAH block | ⛔ **dead-under-canonical** | reference-oracle-only (抽出せず、loud 記録; %12 finding(3) の closure は dead 側) |
 
-**closure 会計 (§運用28、%12「25」と当方「27」reconcile):** canonical ≤5765 = **27 closures** (exact grep `awk '/^ +def /' 3692-5765`)。うち **抽出 = 7** (target/IK) / **residual = 20** = measurement 15 + video 2 (`_world_to_pixel`/`_cap`) + recorder/naming 2 (`_ph`/`_gn`) + DR-passthrough 1 (`_inject_detour`) = 15+2+2+1 = 20 (7+20 = 27 ✓)。%12「25」との差 2 = pure-render `_world_to_pixel`:4024 + `_cap`:4045 (route-closure でないゆえ %12 非計上と解す — 分類は両者 RESIDUAL で不変)。dead ≥5766 = **24** (%12 一致)。⇒ **抽出対象 = 27 closure 中 7 のみ + inline orchestration** = LOC は canonical span より遥かに小。
+**closure 会計 (§運用28、%12「25」と当方「27」reconcile):** canonical ≤5765 = **27 closures** (exact grep `awk '/^ +def /' 3692-5765`)。うち **抽出 = 7** (target/IK) / **residual = 20** = measurement 15 + video 2 (`_world_to_pixel`/`_cap`) + recorder/naming 2 (`_ph`/`_gn`) + DR-passthrough 1 (`_inject_detour`) = 15+2+2+1 = 20 (7+20 = 27 ✓)。%12「25」との差 2 = **underscore-less `tgt`:4197 + `tgt2`:4200** (%12 grep `def _` が underscore 無 closure を取りこぼし = %12 own 00:47; 当方 grep `def ` は全 27 捕捉)。両者は EXTRACT 側 (target constructor)、分類は 7-extract に既計上で不変。dead ≥5766 = **24** (%12 一致)。⇒ **抽出対象 = 27 closure 中 7 のみ + inline orchestration** = LOC は canonical span より遥かに小。
 
 **新規/変更 file (core module ≤800L、byte-repro test 分離):**
 | file | 内容 | 行 (見込) | reuse |
 |---|---|---|---|
 | **新規** `thread_isaac_lab/envs/route_executor.py` | `class RouteExecutor(rc.RouteInterfaceV1)` = step_target/reset_to_phase(6 coarse G)/grip scheduler/recorded-replay mode。**抽出 = 7 closure (target/IK) + inline orchestration**; ik_move_both/geom は import 再利用 | ~400-650 | canonical route-logic 抽出 (7/27 closure + inline) |
 | **変更** `route_env_config.py` | C2 groove block (ROUTE_C2_XY / ROUTE_C2_GROOVE_Z) — 既存 ROUTE_* block (`a6cbc148ab`) に追加、meta verbatim+provenance | ~40-60 | env-core ROUTE_* pattern |
-| **変更** `newton_route_env.py` | `self._route` = `NominalRouteStub` → `RouteExecutor` 差し替え (interface 不変、`:309`/`:1101`/`:1120`) + reset_to_phase 実配線 | ~40-80 | interface 既定 (RouteInterfaceV1) |
+| **変更** `newton_route_env.py` | (a) `self._route` = `NominalRouteStub` → `RouteExecutor` 差し替え (interface 不変、`:309`/`:1101`/`:1120`) + reset_to_phase per-world 実配線 (b) **⚠ v1.2 gripper-servo drive-loop 拡張 (Q2, pre-check CRIT2)**: `_apply_actions_batch` の FINGER_OPEN 強制 (:695-696/:738-739) 撤去 + `grip_2`/schedule 駆動の dynamic servo close 配線 (Layer B live grip enabler) | ~40-80 + **~60-120 (servo)** | interface 既定 + AC/monolith servo pattern |
 | **変更** scene builder (`newton_skill_env_base` C2 add) | C2 target clip 建設 (env-core=C1 only, skill_base:1826 pattern) | ~50-100 | C1 pattern mirror |
 | **新規 (test)** `thread_isaac_lab/scripts/test_routeexec_byte_repro.py` | byte-repro regression harness (§4): locked oracle ↔ RouteExecutor 81-grid strict_v2 EXACT | ~150-250 | w0e_81rerun harness + test_route_geometry_sync pattern |
 
-**⚠ LOC 見込 (core module ~400-650 + 変更 ~130-240 + test ~150-250 ≈ 680-1140 total):** canonical 2073L の大半 (20/27 closure) が harness-residual ゆえ抽出 core は縮小 (spec §7:102 の「300-800 touched」と整合)。**core module (route_executor.py) を ≤800 に収め、byte-repro harness は test file に分離**して L3 chain 単位を保つ。超過時は %12 checkpoint で split 要否判断 (env-core precedent: 1329L を単一 L3 chain で承認)。
+**⚠ LOC 見込 v1.2 (core ~400-650 + 変更 ~130-240 + **gripper-servo ~60-120** + test ~150-250 ≈ 740-1260 total):** canonical 2073L の大半 (20/27 closure) が harness-residual ゆえ抽出 core は縮小 (spec §7:102 「300-800 touched」整合)。**core module (route_executor.py) を ≤800 に収め、byte-repro harness は test file に分離**。超過時は %12 checkpoint で split 判断 (env-core precedent 1329L)。
+
+**⚠ Q2 env-core ownership (%12 disposition 01:22):** gripper-servo drive-loop 拡張は **env-core が deferred した carry#4 (実 grip)/⑨b/⑥ の staged discharge ゆえ route-executor scope 内** (%12 authorize、route-executor design-gate + 5体 が cover)。**env-core node は COMPLETE 維持** + %12 が env-core spec に drive-loop 拡張を annotate = **re-open 不要**。route-executor が env-core drive-loop へ servo を delivers。
 
 ---
 
 ## §3. DoD (charter §1 = node state.md:6-15、byte-repro = 全項前提)
 
-| # | 項目 | bar / 判定 | env-core からの引き上げ |
-|---|---|---|---|
-| ① | **byte-repro (PRIMARY)** | 抽出 route で canonical 81-grid → strict_v2 **58/81 EXACT** (per-cell、cuda:0 canonical、FON_V1 pin) | ⑨a′ recorded-state proxy 25/81 → **live 58/81** |
-| ② | **⑦ handover-fidelity** | `reset_to_phase(k)` 復元 state の qpos/qvel L∞ ≤ **1mm / 1mm·s⁻¹** (env-core stub は no-op :1120) | 実 state-bank 実装 |
-| ③ | **⑨b online-numerator** | residual≡0 × 81 live → 58/81 (live earned-clock + contact + physics; recorded-replay で代替不可) | env-core LOUD-CARRY discharge |
-| ④ | **⑥ 6-phase full-fire live** | 実 grip で cable carried → G2-G6 live fire (env-core = fingers-open geometric-proxy) | premise-correction discharge |
-| ⑤ | **58/81 wall/spacer exact predicate** | mjModel geom introspection: center-dist≤3.5mm proxy → **wall-dist≤0.5mm spacer-excluded** (`c2_seated_honest`:~5580 と一致) | env-core 25/81 proxy の構造 discharge |
-| ⑥ | **C2-seating 動画 gate** | 実 C2 groove scene で C2 着座を §運用14 CC frame-check + video-analyst + Rs verdict (Rs 約束済) | env-core = C2 honest-defer |
-| ⑦ | **CABLE_XY_OFFSET per-cell wiring** | 実 route が per-cell offset を消費 (DR/⑨b 前提; env-core = INIT_XY_NOISE のみ) | offset cell 実配線 |
-| ⑧ | **⑬ enabler のみ** | recorded-target-replay stub upgrade + **C1-escape non-vacuous cell ≥1 供給** (pre-snapdown 36/81-escape grid)。**⑬-VERDICT (residual≠0→G6==strict_v2) = D-2 trainer 段 defer** | enabler owns、VERDICT defer |
+**⚠ v1.2 = 2-layer 分離 (%12 disposition 01:22 `dfe5dd0920`、pre-check CRIT1/2 fold): DoD① substrate 混同 (env-core 経由 58/81) を撤回。**
+
+#### Layer A — 抽出忠実 (PRIMARY, env-core 非依存, conservative-definite = 真の先祖返り guard)
+| # | 項目 | bar / 判定 |
+|---|---|---|
+| **A① byte-repro (PRIMARY)** | RouteExecutor.step_target を **monolith substrate (SIM_SUBSTEPS=10 + ik_move_both + 実 grip) 経由**で canonical 81-grid → **(i) trajectory byte-identity** (ee_tgt_pos_l/r + joint_q, float-exact vs oracle recorded) **∧ (ii) verdict strict_v2 58/81 EXACT** (cuda:0, FON_V1)。**env-core 非経由ゆえ抽出のみ isolate** = pre-check CRIT1 解消。verdict+trajectory 両照合 = **HIGH3 fold** (verdict 単独では sub-threshold drift が demo 汚染)。 |
+| **A② ⑦ handover-fidelity** | `reset_to_phase(k)` 復元 state の qpos/qvel L∞ ≤ 1mm/1mm·s⁻¹ (**per-world k**, MED6 fold; env-core :1120 no-op 実配線) |
+| **A⑤ wall/spacer exact predicate** | mjModel geom introspection: wall-dist≤0.5mm spacer-excluded (`c2_seated_honest`:5580 一致、substrate 非依存) |
+| **A⑧ ⑬ enabler のみ** | recorded-target-replay + C1-escape non-vacuous cell ≥1 (pre-snapdown 36/81); **⑬-VERDICT = D-2 trainer defer** |
+
+#### Layer B — substrate-transfer (env-core substrate + 実 grip, 非保守, bar=実測 [58/81 仮定禁止])
+| # | 項目 | bar / 判定 |
+|---|---|---|
+| **B③ ⑨b online-numerator** | env-core substrate (**4-substep 維持** + gripper servo dynamic close = §2 drive-loop 拡張) residual≡0 × 81 live → **strict_v2 実測** (58/81 と**仮定禁止**、%12 Q3)。58/81 からの divergence = substrate-transfer **finding** (residual-RL が recover すべき量)。**substep 4→10 決定 = Rs-level post-data** (fidelity vs RL throughput、今は 4 維持で empirically-gate) |
+| **B④ ⑥ full-fire live** | env-core + dynamic gripper servo (実 grip) → G2-G6 live fire。bar=実測 |
+| **B⑥ C2-seating 動画 gate** | 実 C2 groove scene で C2 着座 §運用14 CC frame-check + video-analyst + Rs verdict (Rs 約束済) |
+| **B⑦ CABLE_XY_OFFSET wiring** | 実 route が per-cell offset 消費 (DR/⑨b 前提) |
 
 **分子完全性 (§運用29):** 分子 conjoin = **strict_v2 (C1-retention leg ∧ C2-seat leg 両方)**。cover しない leg = **trainer 段 policy 学習成果** (本 node scope 外、明示)。SR claim を route-executor で出さない (SOMA:717、over-claim 禁止)。
+
+**⚠ conservatism 方向 (GROVE v1.1、2-layer):** Layer A (verdict+trajectory byte-identity) = 抽出忠実性について **conservative-definite** (先祖返り guard)。Layer B (substrate-transfer) = **非保守、bar=実測** = 58/81 からの divergence 自体が finding (%12 Q3)。**substrate-transfer risk は P2 residual-RL 前提に material** → %12 が Rs へ loud 提起 (magnitude = Layer B 実測、substep 決定 = data 後)。
 
 ---
 
 ## §4. byte-repro regression harness 設計 (D-1=C の一次 guard、先祖返り防止)
 
-**目的:** faithful 抽出の挙動 delta ゼロを機械証明。二重 SSOT (locked oracle + 新 module) の drift を byte-repro が捕捉。
+**⚠ v1.2 (pre-check CRIT1 fold):** 旧 §4 の「module leg = env-core 経由」は **別 substrate (RL_SIM_SUBSTEPS=4 + fingers-open) ゆえ抽出忠実性を isolate 不能** → 撤回。byte-repro を **Layer A (抽出忠実、monolith substrate 経由) の一次 guard** に再定義。
 
-**手順:**
-1. **reference leg (locked, 不触):** `_run_mujoco_grasp_route`:3692 を canonical 81-grid (w0e_81rerun_snapdown harness) × cuda:0 × W0E_F1B_SNAPDOWN=1 で走らせ、per-cell strict_v2 verdict = **golden 58/81** (banked provenance `w0e_81rerun_snapdown_0537`)。
-2. **module leg (新):** `RouteExecutor` を env-core (residual≡0 online) 経由で同一 81-grid × 同一 device/pin で走らせ、per-cell strict_v2。
-3. **assert:** 両 leg の per-cell verdict が **81/81 EXACT 一致** (58 PASS + 23 FAIL の cell 集合が完全一致)。**≥1 cell でも不一致 = 抽出 infidelity = build FAIL (先祖返り、fix-first)**。
-4. **namesake guard:** reference は production `_run_mujoco_grasp_route`:3692 のみ (legacy `_run_mujoco_grasp_episode`:3036 / `_grasp_engage_episode`:3230 と混同禁止、[[reference-test-newton-legacy-vs-production-route-namesake-functions]])。
-5. **device pin:** byte-repro 判定 = **cuda:0 canonical のみ** (route device-fragile、[[project-canonical-route-device-fragile-cpu-vs-cuda]]; cpu = read-only proof、判定に使わない)。
+#### Layer A harness — 抽出忠実 (env-core 非経由、conservative-definite)
+**目的:** 抽出 delta ゼロを機械証明 (env-core substrate から isolate)。
+1. **reference leg (locked, 不触):** `_run_mujoco_grasp_route`:3692 を canonical 81-grid (w0e_81rerun_snapdown harness) × cuda:0 × FON_V1 で走らせ、per-cell **golden = (a) strict_v2 verdict 58/81 + (b) per-step recorded targets `ee_tgt_pos_l/r` + `joint_q`** (banked provenance `w0e_81rerun_snapdown_0537`)。
+2. **module leg (新):** `RouteExecutor.step_target` 系列を **monolith 自身の substrate (SIM_SUBSTEPS=10 + ik_move_both + dynamic grip servo) 経由**で同一 81-grid × 同一 device/pin で走らせる (**env-core 非経由**)。
+3. **assert (2 段、HIGH3 fold):** **(i) trajectory byte-identity** = per-step `ee_tgt_pos_l/r` + `joint_q` が oracle と float-exact 一致 (L∞=0、sub-threshold drift も捕捉) **∧ (ii) verdict** = strict_v2 81/81 EXACT 一致。**≥1 でも不一致 = 抽出 infidelity = build FAIL (先祖返り、fix-first)**。
+4. **namesake guard:** reference は production `_run_mujoco_grasp_route`:3692 のみ (全列挙: `do_p1_grasp`:2227 / `run_episode`:2746 / `_run_mujoco_grasp_episode`:3036 / `_run_mujoco_grasp_engage_episode`:3230 / `_run_mujoco_episode`:7478 と混同禁止)。
+5. **determinism pin (MED5 fold):** `INIT_XY_NOISE=0` (byte-repro run contract、unseeded np.random :591 の非決定を除去) + cuda:0 canonical のみ (device-fragile) + N≥3 再走で GPU#562 verdict 安定性 (init-noise と分離済ゆえ純 GPU 非決定)。
+6. **HIGH4 fold (no-global-mutation):** 新 module は `test_newton_clip_routing` の module global (`globals()["solve_ik_dual"]`) を **runtime mutate しない** (不触 file 契約)。C2 re-grasp の rotated IK = **自前 solver 化** (ik_move_both も抽出 or step_target が explicit solver を pass) — 5体 [VERIFY] で copy-vs-extract 精査。
 
-**conservatism 方向 (GROVE v1.1):** byte-repro EXACT-match は**問うている量 (抽出忠実性) について確定的** — 一致すれば挙動同一 (conservative)、不一致は確定的 infidelity。GPU#562 非決定性が残余 risk → **N 回 (≥3) 再走で per-cell verdict 安定性**も確認 (verdict が非決定的に揺れる cell は別途 flag)。
+#### Layer B setup — substrate-transfer (env-core substrate、非保守、bar=実測)
+**目的:** env-core substrate (4-substep + gripper servo) での route の live 挙動を **実測** (先祖返り guard でなく transfer 特性測定)。
+1. env-core + §2 gripper-servo drive-loop 拡張で residual≡0 × 81-grid live → strict_v2 実測。
+2. **58/81 と仮定せず**、Layer A golden との divergence を per-cell 記録 = substrate-transfer finding (residual-RL が recover すべき量、%12 Q3)。
+3. substep 4→10 は**変更せず 4 維持**で measure (magnitude で substep 決定 = Rs-level post-data)。
+
+**conservatism 方向 (GROVE v1.1):** Layer A = 抽出忠実性について **conservative-definite** (verdict+trajectory byte-identity)。Layer B = **非保守** (substrate-transfer divergence 自体が finding、over-claim 禁止)。
 
 ---
 
@@ -134,6 +153,8 @@ class RouteExecutor(rc.RouteInterfaceV1):
 ```
 
 **state-bank 実装 (spec §2-F2 (b) precomputed phase-k、%12 CONCUR = 6 coarse G):** monolith を各 coarse G 境界 (6 点: G1 grasp/G2 lift-transport/G3 C1-seat/G4 unclamp-guide/G5 C2-transport/G6 C2-seat) まで実行 → qpos/qvel snapshot を bank → `reset_to_phase(k)` で復元。⚠ **Newton 全 world 一斉 step 制約**と両立する唯一の AC-reset-pattern 互換案 (spec:29 (b))。DR は bank cell に量子化 (文書化、spec pin ③)。prefix 物理 overhead (G5−ε ≈ 7000 frames) は throughput smoke に計上。`reset_to_phase(k)` の k 公開 semantics = coarse G; 内部で `_ph` 15-label に沿った fine bank が faithful/安価なら実装可だが expose は coarse G (5体 [VERIFY] 対象、over-provision 回避)。
+
+**⚠ MED6 fold (data-flow spec, pre-check):** (a) **per-world k**: curriculum start-mix {P0,G1..G5−ε} は per-world k 要 → `reset_to_phase` は per-world 配列 k を受け、`self._state_0` の per-world qpos/qvel へ banked 配列を注入 (env-core :611-626 の per-world restore path と compose; global-k 単一値でなく)。(b) **DoD② L∞ ref 明示**: handover-fidelity L∞≤1mm/1mm·s⁻¹ の基準 = **round-trip** (bank→restore→re-measure、同一 cell の初期条件との一致; DR は banked cell に量子化ゆえ cross-cell でなく round-trip で判定)。(c) **self.state SSOT**: closure→method 変換で `self.state` は monolith の全 `state` rebind を mirror (miss = stale live state 読み → target shift; Layer A trajectory byte-identity が捕捉)。
 
 **grip schedule single-source (CC5-2):** is_dual_grip window + arm-role (reaching=full σ / gripping=σ-cap) は **base grip-schedule から導出** (env 再導出 phase→window table 禁止 = env-core NEW-D と同一 deterministic source、boundary mislabel→drop 防止)。
 
@@ -173,7 +194,9 @@ class RouteExecutor(rc.RouteInterfaceV1):
 2. **state-bank 粒度 = ✅ RESOLVED (6 coarse G、%12 CONCUR 00:32):** `reset_to_phase(k)` の k = coarse G semantics (spec:29 curriculum start-mix 消費者に一致、15-fine は消費者無=YAGNI over-provision)。内部 fine bank は faithful/安価なら実装可だが expose は coarse G。5体 [VERIFY] で残置。
 3. **byte-repro tolerance:** strict_v2 verdict は boolean per-cell ゆえ EXACT-match が自然。ただし GPU#562 非決定で verdict-flip する境界 cell の扱い (§4 手順5) = **N≥3 再走で安定 cell のみ golden、非安定 cell は flag+carry**。bar 緩めでなく非決定性の honest 会計。
 4. **C2 groove scene の 3mm proxy 非保守 (charter §8):** 剛体 clip 非保守 carry を C2 でも承継 (spec §8)。実機前に再訪 (over-claim 禁止)。
-5. **recorded-target-replay の horizon cadence:** monolith 7709 frame → env horizon 900 の resample (env-core :192 で既配線、cadence 整合を byte-repro で確認)。
+5. **recorded-target-replay の horizon cadence:** monolith 7709 frame → env horizon 900 の resample (env-core :192 で既配線、cadence 整合を Layer A trajectory 照合で確認)。
+6. **✅ RESOLVED — substep alignment (Layer B, %12→Rs, v1.2):** env-core `RL_SIM_SUBSTEPS=4` vs oracle `SIM_SUBSTEPS=10` の乖離 = **Layer B で 4 維持のまま実測** (変更せず empirically-gate)。substep 4→10 変更 (fidelity↑ vs RL throughput↓) の**決定 = Rs-level post-data** (magnitude 判明後)。substrate-transfer divergence 自体が P2 residual-RL 前提に material → **%12 が Rs へ loud 提起**。
+7. **gripper-servo 忠実性 (Layer B, 5体):** env-core drive-loop の dynamic servo close cadence を monolith (cage 30 + 12×12 ramp + 40 settle @10-substep) から env-core (10-frame/4-substep) へ再表現 = contact onset shift 可 (Layer B 実測範囲、Layer A は monolith substrate ゆえ非該当)。
 
 ---
 
@@ -185,7 +208,10 @@ class RouteExecutor(rc.RouteInterfaceV1):
 - **state-bank fidelity (⑦):** qvel は live state から取得 (recorder に qvel 無、spec:29)。L∞≤1mm/1mm·s⁻¹ を DoD② で機械証明。
 - **oracle/OG/trainer は本 node 非該当:** SR/学習成果 claim を route-executor では出さない (SOMA:717、trainer/campaign 段、over-claim 禁止)。
 - **⑬-VERDICT defer (D-2):** route-executor は ⑬ enabler のみ。residual≠0 VERDICT は trainer 段実 policy (合成摂動の representativeness risk 回避、Rs 23:5x)。
+- **⚠ substrate-transfer risk (v1.2, pre-check CRIT1/2):** env-core substrate (4-substep + gripper-servo) の live route は oracle (monolith 10-substep + dynamic grip) と divergence 可 = **Layer B 実測** (非保守、**58/81 仮定禁止**)。**P2 residual-RL 前提に material** → %12 が Rs へ loud 提起、substep 決定 = data 後。Layer A (monolith substrate) が抽出忠実性を conservative-definite に guard するため、substrate gap は抽出 infidelity と分離済。
+- **⚠ no-global-mutation (v1.2, HIGH4):** 新 module は locked file の module global (`globals()["solve_ik_dual"]`:5214 monkeypatch) を **runtime mutate 禁止** (不触 file 契約)。C2 rotated-IK = 自前 solver (ik_move_both 抽出 or explicit solver pass、5体 精査)。canonical tilt=0 で masked ゆえ non-canonical (C2_TILT_SIGN=1) smoke で wiring 実証。
+- **⚠ env-core drive-loop 拡張 (v1.2, Q2):** gripper-servo 配線は env-core (%12-owned) の MDP drive-loop 改変 = route-executor が delivers (env-core COMPLETE 維持 + %12 spec annotate、re-open 不要)。route-executor design-gate + 5体 が cover。
 
 ---
 
-*%11 COORD (w2:p3) 起草 2026-07-07 / rev v1.1 (%12 checkpoint 00:32 fold: fn-range + canonical 抽出 3692-5765 + per-closure 3-way + namesake + state-bank 6-coarse-G)。PAPER-ONLY / INVARIANTS 不触 / locked runner 不触 / task_config 不触。byte-repro = 全 DoD 前提。→ %12 re-checkpoint 提出。*
+*%11 COORD (w2:p3) 起草 2026-07-07 / rev v1.1 (%12 checkpoint 00:32) / **rev v1.2 (%12 design-gate BLOCK disposition 01:22: /pre-check 2 CRIT fold — 2-layer DoD [Layer A 抽出忠実 primary / Layer B substrate-transfer 実測] + gripper-servo drive-loop 拡張 + HIGH4/MED5/MED6)**。PAPER-ONLY / INVARIANTS 不触 / locked runner 不触 (global mutate 禁止) / task_config 不触。**Layer A (verdict+trajectory byte-identity) = 先祖返り guard、Layer B = substrate-transfer 実測 (非保守)**。→ re-pre-check → %12 re-checkpoint 提出。*
