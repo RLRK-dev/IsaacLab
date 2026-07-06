@@ -1,0 +1,144 @@
+== %9 H-drape leg-1 (zero-GPU) — script sha c395d2c03769bd660dce9d1340343ec92f947ba8d7f805eae9622b7e32f4f8c2 (pin-1) ==
+[GEOM pin-2] CLIP1_Z=TABLE_HEIGHT(0.8) TABLE_HEIGHT=0.80 CLIP_FLOAT_Z(meta)=0.02 -> cz=0.820
+[GEOM pin-2] footprint hw_x=0.02 hw_y=0.015 (clip_parts :1164-1170) | tops: floor=0.825 lowW=0.840 highW=0.850 | rest(+r0.004): floor=829.0 lowW=844.0 highW=854.0mm
+[AUTH pin-3] F-1a-class scale = |comp|<=22.0mm (runner :4262, class-borrow only; C2-drape Stage-B needs NEW site authority)
+
+cells=81 (expect 81)
+
+-- O-A/O-B/O-C per cell (phi10 marked *) --
+           off   φ verdict                  s2    crX    crZ HI          nearC2(x,y,z) fp  fpZmax settleZ
+(-20.0, -20.0)   * SUCCESS_DUAL_LOADED_AT_8 T 0.3801  847.9 H (0.3931,-0.0028,856.8) Y2   856.8   829.2
+(-15.0, -20.0)   * SUCCESS_DUAL_LOADED_AT_8 T 0.3801  848.0 H  (0.393,-0.0031,856.8) Y2   856.8   829.2
+(-10.0, -20.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3666  826.0 L  (0.3727,0.0054,823.1) .0    None   824.2
+ (-5.0, -20.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3683  829.7 L  (0.3782,0.0064,829.4) .1   829.1   906.7
+  (0.0, -20.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3699  830.1 L  (0.3791,0.0063,829.6) .1   829.2   905.9
+  (5.0, -20.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3696  832.4 L  (0.3787,0.0062,833.2) .1   833.3   906.5
+ (10.0, -20.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3685  830.1 L   (0.3786,0.006,829.6) .1   829.2   907.1
+ (15.0, -20.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3679  830.0 L  (0.3783,0.0058,829.6) .1   829.2   908.0
+ (20.0, -20.0)   * R_MISS_AT_88             .  0.317  828.2 L (0.2942,-0.0015,826.6) .0    None   892.2
+(-20.0, -15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3797  848.0 H  (0.3905,0.0047,854.9) Y2   856.9   829.8
+(-15.0, -15.0)     SUCCESS_R_GRIP_L_CAGE_AT T 0.3802  848.1 H (0.3933,-0.0053,856.2) Y2   856.2   831.0
+(-10.0, -15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3799  848.1 H (0.3933,-0.0064,856.3) Y2   856.3   830.5
+ (-5.0, -15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3792  847.9 H  (0.3906,0.0033,855.1) Y2   857.1   830.0
+  (0.0, -15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3793  847.9 H  (0.3905,0.0042,855.0) Y2   857.0   829.8
+  (5.0, -15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3792  847.9 H  (0.3906,0.0032,855.1) Y2   857.1   830.5
+ (10.0, -15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3804  848.2 H  (0.3922,0.0003,855.6) Y3   857.5   831.1
+ (15.0, -15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3804  848.2 H (0.3923,-0.0002,855.7) Y3   857.4   831.3
+ (20.0, -15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3791  847.9 H  (0.3913,0.0009,855.5) Y2   857.3   831.0
+(-20.0, -10.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3789  848.5 H  (0.3898,0.0052,855.7) Y2   858.1   829.6
+(-15.0, -10.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3786  848.2 H  (0.3909,0.0008,856.3) Y2   858.6   829.3
+(-10.0, -10.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3796  848.6 H (0.3925,-0.0019,857.1) Y2   857.1   829.4
+ (-5.0, -10.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3795  848.5 H (0.3925,-0.0028,857.1) Y2   857.1   829.4
+  (0.0, -10.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3795  848.5 H (0.3925,-0.0034,857.0) Y2   857.0   829.4
+  (5.0, -10.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3795  848.5 H (0.3926,-0.0039,856.9) Y2   856.9   829.5
+ (10.0, -10.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3795  848.5 H (0.3926,-0.0041,856.9) Y2   856.9   829.5
+ (15.0, -10.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3794  848.5 H (0.3927,-0.0049,857.1) Y2   857.1   829.3
+ (20.0, -10.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3793  848.5 H (0.3927,-0.0053,857.2) Y2   857.2   829.2
+ (-20.0, -5.0)   * SUCCESS_DUAL_LOADED_AT_8 T 0.3801  847.9 H (0.3929,-0.0028,856.7) Y2   856.7   829.1
+ (-15.0, -5.0)   * SUCCESS_DUAL_LOADED_AT_8 T 0.3801  847.9 H (0.3929,-0.0031,856.6) Y2   856.6   829.1
+ (-10.0, -5.0)   * SUCCESS_DUAL_LOADED_AT_8 . 0.3699  847.7 H (0.3861,-0.0049,852.8) Y1   852.8   835.1
+  (-5.0, -5.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3677  829.9 L  (0.3767,0.0061,829.5) .1   829.2   891.9
+   (0.0, -5.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3691  830.3 L  (0.3788,0.0064,829.8) .1   829.4   894.2
+   (5.0, -5.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3685  830.3 L  (0.3783,0.0062,829.7) .1   829.3   895.1
+  (10.0, -5.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3676  830.1 L  (0.3781,0.0061,829.6) .1   829.3   894.7
+  (15.0, -5.0)   * R_MISS_AT_88             . 0.3284  826.7 L (0.3117,-0.0068,822.9) .0    None   818.6
+  (20.0, -5.0)   * R_MISS_AT_88             . 0.3266  829.0 L (0.3044,-0.0043,827.8) .0    None   882.2
+  (-20.0, 0.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3797  848.0 H  (0.3906,0.0046,854.9) Y2   856.9   829.6
+  (-15.0, 0.0)     SUCCESS_R_GRIP_L_CAGE_AT T 0.3803  848.1 H (0.3933,-0.0052,856.1) Y2   856.1   831.3
+  (-10.0, 0.0)     SUCCESS_R_GRIP_L_CAGE_AT T 0.3802  848.1 H (0.3933,-0.0054,856.1) Y2   856.1   831.3
+   (-5.0, 0.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3793  847.9 H  (0.3906,0.0033,855.1) Y2   857.0   830.2
+    (0.0, 0.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3793  847.9 H  (0.3905,0.0039,855.0) Y2   857.0   830.0
+    (5.0, 0.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3792  847.9 H  (0.3906,0.0032,855.1) Y2   857.0   830.3
+   (10.0, 0.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3804  848.2 H  (0.3922,0.0002,855.6) Y3   857.4   831.5
+   (15.0, 0.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3804  848.2 H    (0.3923,-0.0,855.6) Y3   857.4   831.7
+   (20.0, 0.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3791  847.9 H  (0.3913,0.0009,855.5) Y2   857.3   830.6
+  (-20.0, 5.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3788  848.4 H  (0.3897,0.0049,855.7) Y2   858.1   829.4
+  (-15.0, 5.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3798  848.4 H  (0.3923,0.0001,856.4) Y3   858.8   829.4
+  (-10.0, 5.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3796  848.6 H (0.3927,-0.0019,857.1) Y2   857.1   829.4
+   (-5.0, 5.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3795  848.5 H (0.3925,-0.0032,857.0) Y2   857.0   829.3
+    (0.0, 5.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3795  848.5 H (0.3926,-0.0035,857.0) Y2   857.0   829.4
+    (5.0, 5.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3795  848.5 H  (0.3926,-0.004,856.9) Y2   856.9   829.4
+   (10.0, 5.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3795  848.5 H (0.3926,-0.0042,857.0) Y2   857.0   829.4
+   (15.0, 5.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3794  848.5 H (0.3927,-0.0051,857.1) Y2   857.1   829.3
+   (20.0, 5.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3794  848.5 H (0.3928,-0.0053,857.2) Y2   857.2   829.2
+ (-20.0, 10.0)   * SUCCESS_DUAL_LOADED_AT_8 T   0.38  847.9 H (0.3928,-0.0028,856.6) Y2   856.6   829.5
+ (-15.0, 10.0)   * SUCCESS_DUAL_LOADED_AT_8 T 0.3799  847.8 H (0.3927,-0.0032,856.6) Y2   856.6   829.2
+ (-10.0, 10.0)   * R_MISS_AT_88             . 0.3653  845.5 H   (0.3732,0.007,849.2) .0    None   829.0
+  (-5.0, 10.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3678  830.2 L   (0.378,0.0066,829.8) .1   829.4   880.9
+   (0.0, 10.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3681  830.3 L  (0.3782,0.0064,829.9) .1   829.5   881.1
+   (5.0, 10.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3675  830.3 L  (0.3779,0.0063,830.0) .1   829.6   882.8
+  (10.0, 10.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3238  824.1 L (0.3076,-0.0053,818.5) .0    None   828.3
+  (15.0, 10.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3286  829.4 L (0.3073,-0.0048,828.2) .0    None   880.5
+  (20.0, 10.0)   * SUCCESS_R_GRIP_L_CAGE_AT . 0.3234  828.7 L (0.3022,-0.0039,827.0) .0    None   876.1
+ (-20.0, 15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3797  848.0 H  (0.3906,0.0046,854.9) Y2   856.9   829.7
+ (-15.0, 15.0)     SUCCESS_R_GRIP_L_CAGE_AT T 0.3803  848.1 H (0.3933,-0.0053,856.1) Y2   856.1   831.7
+ (-10.0, 15.0)     SUCCESS_R_GRIP_L_CAGE_AT T 0.3802  848.2 H (0.3933,-0.0053,856.1) Y2   856.1   831.7
+  (-5.0, 15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3793  847.9 H  (0.3906,0.0035,855.0) Y2   857.0   830.5
+   (0.0, 15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3794  847.9 H  (0.3905,0.0045,854.9) Y2   856.9   830.4
+   (5.0, 15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3793  847.9 H   (0.3905,0.004,855.0) Y2   857.0   830.4
+  (10.0, 15.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3792  847.9 H    (0.391,0.002,855.3) Y2   857.1   830.5
+  (15.0, 15.0)     SUCCESS_DUAL_LOADED_AT_8 . 0.3804  848.2 H (0.3924,-0.0006,855.6) Y2   855.6   832.3
+  (20.0, 15.0)     SUCCESS_DUAL_LOADED_AT_8 . 0.3805  848.2 H  (0.3923,0.0004,855.6) Y3   857.4   832.1
+ (-20.0, 20.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3788  848.4 H  (0.3898,0.0048,855.7) Y2   858.1   829.3
+ (-15.0, 20.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3787  848.3 H  (0.3908,0.0013,856.2) Y2   858.5   829.1
+ (-10.0, 20.0)     SUCCESS_R_GRIP_L_CAGE_AT T 0.3797  848.5 H (0.3926,-0.0018,856.9) Y2   856.9   829.4
+  (-5.0, 20.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3796  848.5 H  (0.3927,-0.003,857.1) Y2   857.1   829.2
+   (0.0, 20.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3796  848.5 H (0.3926,-0.0035,857.0) Y2   857.0   829.4
+   (5.0, 20.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3795  848.5 H  (0.3926,-0.004,856.9) Y2   856.9   829.4
+  (10.0, 20.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3795  848.5 H (0.3927,-0.0044,857.0) Y2   857.0   829.4
+  (15.0, 20.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3794  848.5 H (0.3927,-0.0051,857.1) Y2   857.1   829.2
+  (20.0, 20.0)     SUCCESS_DUAL_LOADED_AT_8 T 0.3794  848.5 H (0.3928,-0.0053,857.2) Y2   857.2   829.1
+
+-- O-C rest-surface --
+HIGH n=62 crossZ [845.5,848.6] mean 848.2 | lowW-rest 844.0 highW-rest 854.0
+LOW  n=19 crossZ [824.1,832.4] mean 829.3 | floor-rest 829.0
+
+-- O-B/R3: HIGH cells with a footprint node at/above low-wall-top: 61/62 (R3 refute if ~0 = height NOT from resting ON clip) --
+
+-- O-E e1 continuity (crossX vs dx, per dy column; monotone? jump?) --
+  dy=  -20: crossX [0.38, 0.38, 0.367, 0.368, 0.37, 0.37, 0.368, 0.368, 0.317]  mono=False maxjump=0.051
+  dy=  -15: crossX [0.38, 0.38, 0.38, 0.379, 0.379, 0.379, 0.38, 0.38, 0.379]  mono=False maxjump=0.001
+  dy=  -10: crossX [0.379, 0.379, 0.38, 0.38, 0.38, 0.38, 0.38, 0.379, 0.379]  mono=False maxjump=0.001
+  dy=   -5: crossX [0.38, 0.38, 0.37, 0.368, 0.369, 0.368, 0.368, 0.328, 0.327]  mono=False maxjump=0.039
+  dy=   +0: crossX [0.38, 0.38, 0.38, 0.379, 0.379, 0.379, 0.38, 0.38, 0.379]  mono=False maxjump=0.001
+  dy=   +5: crossX [0.379, 0.38, 0.38, 0.38, 0.38, 0.38, 0.38, 0.379, 0.379]  mono=False maxjump=0.001
+  dy=  +10: crossX [0.38, 0.38, 0.365, 0.368, 0.368, 0.367, 0.324, 0.329, 0.323]  mono=False maxjump=0.044
+  dy=  +15: crossX [0.38, 0.38, 0.38, 0.379, 0.379, 0.379, 0.379, 0.38, 0.381]  mono=False maxjump=0.001
+  dy=  +20: crossX [0.379, 0.379, 0.38, 0.38, 0.38, 0.38, 0.38, 0.379, 0.379]  mono=True maxjump=0.001
+
+-- O-E e2 consistency (x*=0.36760000000000004) --
+  x* = midpoint(HIGH-min 0.3653, LOW-max 0.3699) = 0.3676
+  consistency violations (crossX>=x* XOR HIGH): 11/81 -> R1 REFUTE
+    (-10.0, 10.0) crossX=0.3653 crossZ=845.5 HI=True
+    (-5.0, -20.0) crossX=0.3683 crossZ=829.7 HI=False
+    (-5.0, -5.0) crossX=0.3677 crossZ=829.9 HI=False
+    (-5.0, 10.0) crossX=0.3678 crossZ=830.2 HI=False
+    (0.0, -20.0) crossX=0.3699 crossZ=830.1 HI=False
+    (0.0, -5.0) crossX=0.3691 crossZ=830.3 HI=False
+    (0.0, 10.0) crossX=0.3681 crossZ=830.3 HI=False
+    (10.0, -20.0) crossX=0.3685 crossZ=830.1 HI=False
+    (15.0, -20.0) crossX=0.3679 crossZ=830.0 HI=False
+    (5.0, -20.0) crossX=0.3696 crossZ=832.4 HI=False
+    (5.0, -5.0) crossX=0.3685 crossZ=830.3 HI=False
+
+-- O-E e3 reachability (LOW-fail cells: Delta=x*-crossX vs authority) --
+  LOW-fail n=19 | within 22.0mm: 13 | over: 6
+    WITHIN (-10.0, -20.0) crossX=0.3666 Delta=+1.0mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN  (-5.0, -20.0) crossX=0.3683 Delta=-0.7mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN   (-5.0, -5.0) crossX=0.3677 Delta=-0.1mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN   (-5.0, 10.0) crossX=0.3678 Delta=-0.2mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN   (0.0, -20.0) crossX=0.3699 Delta=-2.3mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN    (0.0, -5.0) crossX=0.3691 Delta=-1.5mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN    (0.0, 10.0) crossX=0.3681 Delta=-0.5mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN   (5.0, -20.0) crossX=0.3696 Delta=-2.0mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN    (5.0, -5.0) crossX=0.3685 Delta=-0.9mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN    (5.0, 10.0) crossX=0.3675 Delta=+0.1mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN  (10.0, -20.0) crossX=0.3685 Delta=-0.9mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN   (10.0, -5.0) crossX=0.3676 Delta=+0.0mm verdict=SUCCESS_R_GRIP_L_CAG
+    WITHIN  (15.0, -20.0) crossX=0.3679 Delta=-0.3mm verdict=SUCCESS_R_GRIP_L_CAG
+      OVER   (10.0, 10.0) crossX=0.3238 Delta=+43.8mm verdict=SUCCESS_R_GRIP_L_CAG
+      OVER   (15.0, -5.0) crossX=0.3284 Delta=+39.2mm verdict=R_MISS_AT_88
+      OVER   (15.0, 10.0) crossX=0.3286 Delta=+39.0mm verdict=SUCCESS_R_GRIP_L_CAG
+      OVER  (20.0, -20.0) crossX=0.317 Delta=+50.6mm verdict=R_MISS_AT_88
+      OVER   (20.0, -5.0) crossX=0.3266 Delta=+41.0mm verdict=R_MISS_AT_88
+      OVER   (20.0, 10.0) crossX=0.3234 Delta=+44.2mm verdict=SUCCESS_R_GRIP_L_CAG

@@ -1,0 +1,138 @@
+== %12 H-drape leg sealed key (PREREG bdbf3071c1) — fixed 2026-07-06 09:45 JST ==
+impl: own code, frozen defs (lane=CLIP2_Y+GHS; ph11-entry frame; crossing pick = min|x - R_EE_x|; x* = HIGH-min/LOW-max midpoint procedure as frozen).
+
+dx dy crossX_mm crossZ_mm strict
+-10 -10 379.6 848.6 True
+-10 -15 379.9 848.1 True
+-10 -20 366.6 826.0 False
+-10 -5 369.9 847.7 False
+-10 0 380.2 848.1 True
+-10 10 365.3 845.5 False
+-10 15 380.2 848.2 True
+-10 20 379.7 848.5 True
+-10 5 379.6 848.6 True
+-15 -10 378.6 848.2 True
+-15 -15 380.2 848.1 True
+-15 -20 380.1 848.0 True
+-15 -5 380.1 847.9 True
+-15 0 380.3 848.1 True
+-15 10 379.9 847.8 True
+-15 15 380.3 848.1 True
+-15 20 378.7 848.3 True
+-15 5 379.8 848.4 True
+-20 -10 378.9 848.5 True
+-20 -15 379.7 848.0 True
+-20 -20 380.1 847.9 True
+-20 -5 380.1 847.9 True
+-20 0 379.7 848.0 True
+-20 10 380.0 847.9 True
+-20 15 379.7 848.0 True
+-20 20 378.8 848.4 True
+-20 5 378.8 848.4 True
+-5 -10 379.5 848.5 True
+-5 -15 379.2 847.9 True
+-5 -20 368.3 829.7 False
+-5 -5 367.7 829.9 False
+-5 0 379.3 847.9 True
+-5 10 367.8 830.2 False
+-5 15 379.3 847.9 True
+-5 20 379.6 848.5 True
+-5 5 379.5 848.5 True
+0 -10 379.5 848.5 True
+0 -15 379.3 847.9 True
+0 -20 369.9 830.1 False
+0 -5 369.1 830.3 False
+0 0 379.3 847.9 True
+0 10 368.1 830.3 False
+0 15 379.4 847.9 True
+0 20 379.6 848.5 True
+0 5 379.5 848.5 True
+10 -10 379.5 848.5 True
+10 -15 380.4 848.2 True
+10 -20 368.5 830.1 False
+10 -5 367.6 830.1 False
+10 0 380.4 848.2 True
+10 10 323.8 824.1 False
+10 15 379.2 847.9 True
+10 20 379.5 848.5 True
+10 5 379.5 848.5 True
+15 -10 379.4 848.5 True
+15 -15 380.4 848.2 True
+15 -20 367.9 830.0 False
+15 -5 328.4 826.7 False
+15 0 380.4 848.2 True
+15 10 328.6 829.4 False
+15 15 380.4 848.2 False
+15 20 379.4 848.5 True
+15 5 379.4 848.5 True
+20 -10 379.3 848.5 True
+20 -15 379.1 847.9 True
+20 -20 317.0 828.2 False
+20 -5 326.6 829.0 False
+20 0 379.1 847.9 True
+20 10 323.4 828.7 False
+20 15 380.5 848.2 False
+20 20 379.4 848.5 True
+20 5 379.4 848.5 True
+5 -10 379.5 848.5 True
+5 -15 379.2 847.9 True
+5 -20 369.6 832.4 False
+5 -5 368.5 830.3 False
+5 0 379.2 847.9 True
+5 10 367.5 830.3 False
+5 15 379.3 847.9 True
+5 20 379.5 848.5 True
+5 5 379.5 848.5 True
+n with crossing @entry: 81 /81
+HIGH n= 62 crossX range 365.3 380.5 crossZ 845.5 848.6
+LOW  n= 19 crossX range 317.0 369.9 crossZ 824.1 832.4
+x* (HIGH-min/LOW-max midpoint, mm): 367.6
+e2 consistency violations: 11 [(-10, 10, 365.3, 845.5), (-5, -20, 368.3, 829.7), (-5, -5, 367.7, 829.9), (-5, 10, 367.8, 830.2), (0, -20, 369.9, 830.1), (0, -5, 369.1, 830.3), (0, 10, 368.1, 830.3), (10, -20, 368.5, 830.1)]
+e1 crossX by column (dy: dx=-20..20):
+  dy=-20: 380 380 367 368 370 370 368 368 317
+  dy=-15: 380 380 380 379 379 379 380 380 379
+  dy=-10: 379 379 380 380 380 380 380 379 379
+  dy=-5: 380 380 370 368 369 368 368 328 327
+  dy=+0: 380 380 380 379 379 379 380 380 379
+  dy=+5: 379 380 380 380 380 380 380 379 379
+  dy=+10: 380 380 365 368 368 368 324 329 323
+  dy=+15: 380 380 380 379 379 379 379 380 380
+  dy=+20: 379 379 380 380 380 380 380 379 379
+e3 margin (LOW & strict-fail): dx dy crossX delta_to_xstar
+  -10 -20 366.6 +1.0
+  -5 -20 368.3 -0.7
+  -5 -5 367.7 -0.1
+  -5 +10 367.8 -0.2
+  +0 -20 369.9 -2.3
+  +0 -5 369.1 -1.5
+  +0 +10 368.1 -0.5
+  +5 -20 369.6 -2.0
+  +5 -5 368.5 -0.9
+  +5 +10 367.5 +0.1
+  +10 -20 368.5 -0.9
+  +10 -5 367.6 +0.0
+  +10 +10 323.8 +43.8
+  +15 -20 367.9 -0.3
+  +15 -5 328.4 +39.2
+  +15 +10 328.6 +39.0
+  +20 -20 317.0 +50.6
+  +20 -5 326.6 +41.0
+  +20 +10 323.4 +44.2
+
+== %12 mechanical notes (pre-exchange, annotate-not-reclassify) ==
+N1: e2/R1 fires MECHANICALLY: 11 violations. Driver = single cell (-10,+10) crossX 365.3 czE 845.5
+    = the Stage-A-annotated mid-drop anomaly (czE 845.5 -> czC 829.8); it drags HIGH-min down to 365.3,
+    pulling x* to 367.6 below 12 honest-F LOW cells (367.5-369.9). EXCLUDING that one annotated cell:
+    HIGH-min 379.2 / LOW-max 369.9 -> x*(alt) 374.6 -> e2 consistency HOLDS 80/80. Frozen procedure did
+    not pre-specify anomaly handling -> mechanical outcome = R1-fired; annotated alternative = clean
+    separation. Joint read must decide disposition (not silently reclassify).
+N2: e1 continuity = JUMPS: crossX regimes are discrete: ~379-380.5 (HIGH, all phi0/phi5 + dx<=-15 phi10),
+    ~365-370 (honest-F LOW), ~317-329 (R_MISS LOW). Transitions dx=-15->-10 (380->368, ~12mm) and at
+    R_MISS onset (~368->~325, ~43mm) are jumps, not smooth in dx.
+N3: e3 = SPLIT: honest-F Delta(alt x*) ~ +5..+9mm (within 22mm class authority) / R_MISS Delta ~ +46..+58mm
+    (exceeds). With frozen x*: honest-F Delta ~ -2.3..+1.0 (crossing already AT threshold yet LOW).
+N4: PASS controls: all 54 phi0/phi5 cells crossX 379-380.5 / crossZ 845.5-848.6 HIGH uniform. n=81/81
+    crossings found at entry.
+Direction note: N1(alt) supports two-regime consistency; N2 jump structure leans SETTLE-BASIN
+(coordinate lever cannot smoothly steer crossing_x through the regime gap); N3 honest-F small margins
+lean COORDINATE for that subset ONLY IF within-regime steering is real. Verdict = joint read per 2x2.
