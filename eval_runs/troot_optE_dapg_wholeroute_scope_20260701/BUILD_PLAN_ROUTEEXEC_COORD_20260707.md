@@ -3,6 +3,7 @@
 **node:** `T-ROOT-optE-route-dapg-C1C2-P2-routeexec` (state.md 済, IN_PROGRESS, 1:1 bind %11/w2:p3) · **L:** L3 (charter §3 自動昇格 confirmed, §1 で再導出 concur)
 **charter-giver:** %12 RS-TECH-LEAD (w2:p4) · **task-start SHA:** `f0bd54992c` (5体 [VERIFY] git diff 起点)
 **status:** PAPER-ONLY / 0-build / 0-commit-of-code (本 doc = charter INPUT、[DESIGN-GATE]+5体 [VERIFY] への提出物)
+**rev:** v1.1 (%12 checkpoint 00:32 fold: fn-range 訂正 3692-7475 / **canonical 抽出 scope 3692-5765** [%12 CONCUR、当方 §運用10 catch] / per-closure 3-way 分類 / namesake 全列挙 / state-bank = 6 coarse G)
 
 ---
 
@@ -16,13 +17,14 @@
 | banked spec | `P2_ROUTE_ENV_SPEC_INPUT_W0C` v1.5h §2-F2(line29) / §5(77) / §7:102 | state-bank fork (b) precomputed phase-k / oracle=別stage / route-executor 抽出 = 300-800 touched |
 | env-core build plan | `BUILD_PLAN_ENVCORE_COORD_20260706.md` §6(40-50 stub 契約 v1) / §12(143 CC5-2) | reset_to_phase / step_target→(target_6d,phase_id,grip_cmd) / per-arm grip 2-vec / is_dual_grip boolean / recorded-target-replay |
 | 8 blocking carry | env-core `state.md:62-71` (COMPLETE 節) | route-executor が discharge する 8 項の正式列挙 |
-| locked runner 実体 | `test_newton_clip_routing.py:3692` `_run_mujoco_grasp_route` (fn 3692-6167, 2476L) | ⛔ ANTI-REVERT Rs-LOCKED (marker :5128/:5148/:5290) = 0.716 MOTION STANDARD source = **reference oracle (不触)** |
+| locked runner 実体 | `test_newton_clip_routing.py:3692` `_run_mujoco_grasp_route` (**fn body 3692-7475 ~3784L**; 次 top-level def `_run_mujoco_episode`:7478 で確定) | ⛔ ANTI-REVERT Rs-LOCKED (marker :5128/:5148/:5290) = 0.716 MOTION STANDARD source = **reference oracle (不触)** |
+| **canonical 抽出域** | `_run_mujoco_grasp_route` 内 **3692-5765** (`if _ROUTE_C2 and _clip_collidable:`:4375 → `sys.exit`:5765) | 0.716 byte-repro を決める唯一の path (route_c2_pin.json dump:5758 / demo finalize:5763 ≤5765)。**5766-7477 = dead-under-canonical** (下記 §2) |
 | 抽出先 interface | `newton_route_env.py:178` `NominalRouteStub(rc.RouteInterfaceV1)` + `:309`/`:1101`/`:1120` | env-core が既に呼ぶ stub = route-executor が実装で差し替える integration point |
 | shared IK helper | `test_newton_clip_routing.py:1958` `def ik_move_both` | route の move primitive = **共有 module-level helper** (monolith 内部でない、再利用可) |
 | goal 上位 | `SOMA.md:37` (100% qualitative) / `:717` (L2 「No T-ROOT 95% claim」) | route-executor は route engine、**SR/学習成果 claim を出さない** (trainer/campaign) |
 | provenance | `w0e_81rerun_snapdown_0537/` (cell_x*_y*) + `route_demo_recorder.py` | FON_V1 (W0E_F1B_SNAPDOWN=1) 0.716 canonical recorded targets / recorded-target-replay source |
 
-**grounding 由来宣言:** 上記は全て **session 内で cat/grep 実読** (handoff narrative / memory を ground truth にしていない、§運用4)。locked runner は fn 全域 (3692-6167) を構造 grep + 主要 phase/predicate 区間を実読。
+**grounding 由来宣言:** 上記は全て **session 内で cat/grep 実読** (handoff narrative / memory を ground truth にしていない、§運用4)。locked runner は fn 全域 (3692-7475) を構造 grep + **top-level 分岐 reachability を canonical env-gate で検証** (w0e_81rerun_snapdown_runner.sh 実読) + canonical 抽出域 (3692-5765) の phase/predicate 区間を実読。
 
 ---
 
@@ -45,32 +47,38 @@
 
 ## §2. scope (抽出アーキテクチャ + component/LOC) — 新規 module + byte-repro guard
 
-**D-1=C 帰結 (Rs 23:5x):** locked `_run_mujoco_grasp_route` (reference oracle) **不触**、route ロジックを新 `route_executor` module (production engine) へ faithful 抽出。両者の **byte-repro regression (cuda:0 canonical strict_v2 58/81 EXACT) = 全 DoD 前提 + 先祖返り guard**。
+**D-1=C 帰結 (Rs 23:5x):** locked `_run_mujoco_grasp_route` (reference oracle) **不触**、canonical route ロジックを新 `route_executor` module (production engine) へ faithful 抽出。両者の **byte-repro regression (cuda:0 canonical strict_v2 58/81 EXACT) = 全 DoD 前提 + 先祖返り guard**。
+
+**⚠ 抽出 scope = canonical path のみ (3692-5765、%12 CONCUR 00:32 `16574fa4bb`):** fn body は 3692-7475 だが、canonical 0.716 gate (`S13_ROUTE_C2=1` + `CLIP_COLLISION=1`; `STEP13_REGRASP`/`CLIP_DELTAH`/`S6_HOOK` OFF) 下では `if _ROUTE_C2 and _clip_collidable:`:4375 block が **`sys.exit`:5765 で終端** (fn-body exit は 5765 単一; 4375-5765 の他 return は全て nested closure 内)。⇒ **5766-7477 (`DO_HOOK`:5775 [= `(S6_HOOK==1) and not _ROUTE_C2` = False] / `STEP13_REGRASP` block:5921 / `CLIP_DELTAH` block:6080 + `_b` closures) は canonical 下で全 dead = reference-oracle-only variant** (抽出/byte-repro scope 外)。byte-repro (strict_v2 58/81) は完全に ≤5765 で決定 (route_c2_pin.json dump:5758 / demo finalize:5763)。将来 C2 re-grasp variant が要れば locked oracle (full fn 保持) を参照。**これは under-scope 修正でなく over-scope 回避** — 抽出は clean で小さい (dead ~1712L を抽出しない)。
 
 **SSOT 規律 pin (env-core §1 継承):** 新 config param = 新規 route-executor 専用のみ。`task_config.py` / `route_env_config.py` の既存値は **import 参照のみ・複製禁止**。**locked runner 不触 / task_config.py 不触。**
 
-**抽出単位 (charter §5):** 2476L monolith → per-step **`step_target(t)`** (target-computation) + phase-k **`reset_to_phase(k)`** (state-bank driver)。monolith の内訳を **抽出する / harness に残す**で分離:
+**抽出単位 (charter §5):** canonical 2073L (3692-5765) → per-step **`step_target(t)`** (target-computation) + phase-k **`reset_to_phase(k)`** (state-bank driver)。canonical 内訳を **抽出 / harness残置 / dead** で 3 分類 (silent drop 禁止):
 
-| monolith 部位 (test_newton_clip_routing.py) | 抽出? | 行き先 |
+| canonical 部位 (≤5765) | 分類 | 行き先 |
 |---|---|---|
-| 15 phase 選択 (`_ph` :4218-5451: GRASP_HOVER→…→C2_SETTLE) + 各 phase の per-step target 計算 (tgt/tgt2/`_w0e_guarded_cx`:4198-, seat k/8 補間 :4526-, ANTI-REVERT argmin/square-on/regrasp :5128/:5148/:5290) | ✅ **抽出** | `RouteExecutor.step_target(t)` の phase 別 target generator |
-| grip schedule (2-phase cage90 close :4255-, L_HALF_UNCLAMP/R_UNCLAMP :4735-, C2_REGRASP :5145-) + is_dual_grip window | ✅ **抽出** | `RouteExecutor` grip scheduler (base-script single-source, CC5-2) |
-| phase-k qpos/qvel snapshot (state-bank) | ✅ **新規** (monolith に無、resumable 化) | `RouteExecutor.reset_to_phase(k)` |
-| C2 groove scene (`_clip2_geoms`:3860, add_target_clip C2) | ✅ **抽出** (env-core=C1 only) | route_env_config C2 block + skill_base scene builder |
-| `ik_move_both`:1958 (共有 IK helper) / geom helpers (`_clip_geoms`/`_cage`/`_seg_z_mm`) | ❌ **import 再利用** (不触) | 既存 module-level 参照 |
-| predicate 計算 (`c2_seated_honest`:~5580 wall-excluded / `c1_final`:~5586) | ❌ **env-core が既に owns** (G6 strict_v2 mirror, spec v1.5f) | reference oracle 側で byte-repro 照合に使用 |
-| §運用14 render / RouteDemoRecorder / metrics/logging | ❌ **harness に残す** | route engine の責務外 |
+| phase state machine (`_ph`:3761→C2_SETTLE:5451 の 15 label = 遷移構造) + inline per-step target (seat k/8 補間 + ANTI-REVERT argmin/square-on/regrasp :5128/:5148/:5290) | ✅ **抽出** | `step_target(t)` phase 別 generator |
+| **target/IK closures 7個**: `tgt`:4197 / `tgt2`:4200 / `_w0e_guarded_cx`:4205 (F-1a comp) / `_rot_quat_rx`:5156 / `_cable_local_pitch`:5161 / `_solve_ik_dual_rot`:5171 (square-on C2) / `_clip2_geoms`:3859 (C2 scene) | ✅ **抽出** | `RouteExecutor` method 化 (fn-local closure → `self` に state 保持で method 化 = closure import 不可の解、%12 finding(3) 反映) |
+| grip schedule (2-phase close / L_HALF_UNCLAMP:4735 / C2_REGRASP:5145) + is_dual window | ✅ **抽出** | grip scheduler (base single-source, CC5-2) |
+| phase-k qpos/qvel snapshot | ✅ **新規** (monolith に無) | `reset_to_phase(k)` (**6 coarse G**, §5) |
+| **measurement closures 15個**: `_min_dist_mm`:3837 / `_cage`:3895 / `_seg_z_mm`:3928 / `_zc1`:4662 / `_claw_cable_load`:4431 / `_claw_table_load`:4448 / `_claw_c2_load`:4461 / `_sample`:4299 / `_arm_split`:3937 / `_cable_z`:3924 / `_hh_clear_mm`:4421 / `_f1_zmin_mm`:4476 / `_cage_pair`:3882 / `_clip_geoms`:3845 / `_table_geoms`:3872 | ❌ **residual** | harness/env 残置 (predicate = env-core owns) |
+| video `_cap`:4045 / `_world_to_pixel`:4024 + recorder `_ph`(label)/`_gn`:3802 + DR `_inject_detour`:3768 (None-passthrough) | ❌ **residual** | route engine 責務外 |
+| `ik_move_both`:1958 / `_set_gripper_target` / `get_ee_positions` / `solve_ik_dual` (module-level) | ❌ **import 再利用** (不触) | 既存 module 参照 |
+| predicate (`c2_seated_honest`:5580 wall-excluded / `c1_final`:5586) | ❌ **env-core owns** (G6 strict_v2 mirror v1.5f) | reference oracle 側で byte-repro 照合 |
+| **`_b` closures 24個 (≥5766)**: `_close_b`:6501 / `_halfclamp_b`:6511 (しごき) / `_feed_claw_cable_load_N`:6548 / `_gap_mm_from_drv`:6469 / `_span_sag_mm`:6589 / `_do_step_b`:6480 等 + DH-F1-R-DESCEND:6168 + STEP13_REGRASP/CLIP_DELTAH block | ⛔ **dead-under-canonical** | reference-oracle-only (抽出せず、loud 記録; %12 finding(3) の closure は dead 側) |
 
-**新規/変更 file (見込 ≤~800L core + test 別 file):**
+**closure 会計 (§運用28、%12「25」と当方「27」reconcile):** canonical ≤5765 = **27 closures** (exact grep `awk '/^ +def /' 3692-5765`)。うち **抽出 = 7** (target/IK) / **residual = 20** = measurement 15 + video 2 (`_world_to_pixel`/`_cap`) + recorder/naming 2 (`_ph`/`_gn`) + DR-passthrough 1 (`_inject_detour`) = 15+2+2+1 = 20 (7+20 = 27 ✓)。%12「25」との差 2 = pure-render `_world_to_pixel`:4024 + `_cap`:4045 (route-closure でないゆえ %12 非計上と解す — 分類は両者 RESIDUAL で不変)。dead ≥5766 = **24** (%12 一致)。⇒ **抽出対象 = 27 closure 中 7 のみ + inline orchestration** = LOC は canonical span より遥かに小。
+
+**新規/変更 file (core module ≤800L、byte-repro test 分離):**
 | file | 内容 | 行 (見込) | reuse |
 |---|---|---|---|
-| **新規** `thread_isaac_lab/envs/route_executor.py` | `class RouteExecutor(rc.RouteInterfaceV1)` = step_target/reset_to_phase/grip scheduler/recorded-replay mode。ik_move_both + geom helper は import 再利用 | ~500-700 | monolith route ロジック faithful 抽出 |
+| **新規** `thread_isaac_lab/envs/route_executor.py` | `class RouteExecutor(rc.RouteInterfaceV1)` = step_target/reset_to_phase(6 coarse G)/grip scheduler/recorded-replay mode。**抽出 = 7 closure (target/IK) + inline orchestration**; ik_move_both/geom は import 再利用 | ~400-650 | canonical route-logic 抽出 (7/27 closure + inline) |
 | **変更** `route_env_config.py` | C2 groove block (ROUTE_C2_XY / ROUTE_C2_GROOVE_Z) — 既存 ROUTE_* block (`a6cbc148ab`) に追加、meta verbatim+provenance | ~40-60 | env-core ROUTE_* pattern |
 | **変更** `newton_route_env.py` | `self._route` = `NominalRouteStub` → `RouteExecutor` 差し替え (interface 不変、`:309`/`:1101`/`:1120`) + reset_to_phase 実配線 | ~40-80 | interface 既定 (RouteInterfaceV1) |
 | **変更** scene builder (`newton_skill_env_base` C2 add) | C2 target clip 建設 (env-core=C1 only, skill_base:1826 pattern) | ~50-100 | C1 pattern mirror |
 | **新規 (test)** `thread_isaac_lab/scripts/test_routeexec_byte_repro.py` | byte-repro regression harness (§4): locked oracle ↔ RouteExecutor 81-grid strict_v2 EXACT | ~150-250 | w0e_81rerun harness + test_route_geometry_sync pattern |
 
-**⚠ LOC 見込 (core module ~500-700 + 変更 ~130-240 + test ~150-250 ≈ 780-1190 total):** env-core (1329L) 同様 ≤800 guideline を超え得る。**core module (route_executor.py) を ≤800 に収め、byte-repro harness は test file に分離**して L3 chain 単位を保つ。超過時は %12 checkpoint で split 要否判断 (env-core precedent: 1329L を単一 L3 chain で承認)。
+**⚠ LOC 見込 (core module ~400-650 + 変更 ~130-240 + test ~150-250 ≈ 680-1140 total):** canonical 2073L の大半 (20/27 closure) が harness-residual ゆえ抽出 core は縮小 (spec §7:102 の「300-800 touched」と整合)。**core module (route_executor.py) を ≤800 に収め、byte-repro harness は test file に分離**して L3 chain 単位を保つ。超過時は %12 checkpoint で split 要否判断 (env-core precedent: 1329L を単一 L3 chain で承認)。
 
 ---
 
@@ -113,7 +121,7 @@ env-core `NominalRouteStub`:178 が実装する契約を `RouteExecutor` が実�
 ```
 class RouteExecutor(rc.RouteInterfaceV1):
     reset_to_phase(k) -> None
-        # 実 state-bank: phase k (15 _ph 境界 or 6 coarse G) の precomputed qpos/qvel を world state へ復元
+        # 実 state-bank: phase k = 6 coarse G (%12 CONCUR 00:32: reset_to_phase(k) の k = coarse G semantics; spec:29 curriculum start-mix {P0,G1..G5-eps} 消費者に一致、15-fine は消費者無=YAGNI) の precomputed qpos/qvel を復元
         # env-core :1120 は no-op stub → 実配線。⑦ handover-fidelity (L∞≤1mm/1mm·s⁻¹) の source
     step_target(t) -> (target_6d, phase_id, grip_2, is_dual)
         # target_6d = 実 route の per-step base 絶対 target (fork-(iv) 6D abs, 非累積)
@@ -125,7 +133,7 @@ class RouteExecutor(rc.RouteInterfaceV1):
     #   = ⑬ enabler + ⑥/⑩ whole-route DoD 用 (CC5-2 iii、env-core :192 recorded_targets 既配線)
 ```
 
-**state-bank 実装 (spec §2-F2 (b) precomputed phase-k):** monolith を各 `_ph` 境界まで実行 → qpos/qvel snapshot を bank → `reset_to_phase(k)` で復元。⚠ **Newton 全 world 一斉 step 制約**と両立する唯一の AC-reset-pattern 互換案 (spec:29 (b))。DR は bank cell に量子化 (文書化、spec pin ③)。prefix 物理 overhead (G5−ε ≈ 7000 frames) は throughput smoke に計上。
+**state-bank 実装 (spec §2-F2 (b) precomputed phase-k、%12 CONCUR = 6 coarse G):** monolith を各 coarse G 境界 (6 点: G1 grasp/G2 lift-transport/G3 C1-seat/G4 unclamp-guide/G5 C2-transport/G6 C2-seat) まで実行 → qpos/qvel snapshot を bank → `reset_to_phase(k)` で復元。⚠ **Newton 全 world 一斉 step 制約**と両立する唯一の AC-reset-pattern 互換案 (spec:29 (b))。DR は bank cell に量子化 (文書化、spec pin ③)。prefix 物理 overhead (G5−ε ≈ 7000 frames) は throughput smoke に計上。`reset_to_phase(k)` の k 公開 semantics = coarse G; 内部で `_ph` 15-label に沿った fine bank が faithful/安価なら実装可だが expose は coarse G (5体 [VERIFY] 対象、over-provision 回避)。
 
 **grip schedule single-source (CC5-2):** is_dual_grip window + arm-role (reaching=full σ / gripping=σ-cap) は **base grip-schedule から導出** (env 再導出 phase→window table 禁止 = env-core NEW-D と同一 deterministic source、boundary mislabel→drop 防止)。
 
@@ -161,8 +169,8 @@ class RouteExecutor(rc.RouteInterfaceV1):
 
 ## §8. open items / design questions (checkpoint + 5体 [VERIFY] 対象)
 
-1. **抽出粒度 (copy vs reuse-helper):** 推奨 = **reuse-helper** (ik_move_both/geom helper は import 再利用、orchestration + inline target 計算のみ抽出) で二重 SSOT を最小化。ただし inline target 計算 (W0-e guarded_cx / seat k/8 / ANTI-REVERT) は copy 不可避 → byte-repro が drift guard。**5体で granularity 妥当性を精査。**
-2. **state-bank 粒度:** 15 fine phase (`_ph`) vs 6 coarse G phase。env-core stub は `reset_to_phase(k)` の k semantics 未固定 → **推奨 = 15 fine (curriculum start-mix {P0,G1..G5−ε} を細粒度で供給可)**。%12 判断。
+1. **抽出粒度 (per-closure map、%12 checkpoint で確定):** module-level helper (ik_move_both/geom) の reuse-import = **%12 承認**。fn-local closure は import 不可 → **§2 の 27-closure per-closure 分類が granularity の実体** (抽出 7 [target/IK] / residual 20 / dead-≥5766 24)。抽出 7 closure は `RouteExecutor` の method 化 (self に fn-local state を保持) = closure→method 変換が抽出の core 難度。inline target (W0-e guarded_cx / seat k/8 / ANTI-REVERT) は copy 不可避 → byte-repro が drift guard。**5体で per-closure 分類 + method 化の忠実性を精査。**
+2. **state-bank 粒度 = ✅ RESOLVED (6 coarse G、%12 CONCUR 00:32):** `reset_to_phase(k)` の k = coarse G semantics (spec:29 curriculum start-mix 消費者に一致、15-fine は消費者無=YAGNI over-provision)。内部 fine bank は faithful/安価なら実装可だが expose は coarse G。5体 [VERIFY] で残置。
 3. **byte-repro tolerance:** strict_v2 verdict は boolean per-cell ゆえ EXACT-match が自然。ただし GPU#562 非決定で verdict-flip する境界 cell の扱い (§4 手順5) = **N≥3 再走で安定 cell のみ golden、非安定 cell は flag+carry**。bar 緩めでなく非決定性の honest 会計。
 4. **C2 groove scene の 3mm proxy 非保守 (charter §8):** 剛体 clip 非保守 carry を C2 でも承継 (spec §8)。実機前に再訪 (over-claim 禁止)。
 5. **recorded-target-replay の horizon cadence:** monolith 7709 frame → env horizon 900 の resample (env-core :192 で既配線、cadence 整合を byte-repro で確認)。
@@ -173,11 +181,11 @@ class RouteExecutor(rc.RouteInterfaceV1):
 
 - **Rs-LOCKED file 関与 = 最大 risk (先祖返り class):** byte-repro regression = 一次 guard。抽出中に「挙動を変える」判断が出たら **STOP → BLOCKED_FOR_USER (Rs)** (§1 high-care)。
 - **byte-repro の device 依存:** cuda:0 canonical のみで判定 (cpu = read-only proof、[[project-canonical-route-device-fragile-cpu-vs-cuda]])。
-- **namesake hazard:** production `_run_mujoco_grasp_route`:3692 を cite、legacy 同名関数 (:3036/:3230) と混同しない (C 案で特に重要)。
+- **namesake hazard (%12 訂正、全列挙 guard):** production `_run_mujoco_grasp_route`:3692 のみ cite。混同禁止の全 legacy 列挙 = `do_p1_grasp`:2227 / `run_episode`:2746 / `_run_mujoco_grasp_episode`:3036 / **`_run_mujoco_grasp_engage_episode`:3230** (旧 doc の `_grasp_engage_episode` は `_run_mujoco_` prefix 欠 = 訂正) / `_run_mujoco_episode`:7478。byte-repro harness は :3692 を明示 cite (C 案で二重 SSOT ゆえ特に重要、[[reference-test-newton-legacy-vs-production-route-namesake-functions]])。
 - **state-bank fidelity (⑦):** qvel は live state から取得 (recorder に qvel 無、spec:29)。L∞≤1mm/1mm·s⁻¹ を DoD② で機械証明。
 - **oracle/OG/trainer は本 node 非該当:** SR/学習成果 claim を route-executor では出さない (SOMA:717、trainer/campaign 段、over-claim 禁止)。
 - **⑬-VERDICT defer (D-2):** route-executor は ⑬ enabler のみ。residual≠0 VERDICT は trainer 段実 policy (合成摂動の representativeness risk 回避、Rs 23:5x)。
 
 ---
 
-*%11 COORD (w2:p3) 起草 2026-07-07。PAPER-ONLY / INVARIANTS 不触 / locked runner 不触 / task_config 不触。byte-repro = 全 DoD 前提。→ %12 checkpoint 提出。*
+*%11 COORD (w2:p3) 起草 2026-07-07 / rev v1.1 (%12 checkpoint 00:32 fold: fn-range + canonical 抽出 3692-5765 + per-closure 3-way + namesake + state-bank 6-coarse-G)。PAPER-ONLY / INVARIANTS 不触 / locked runner 不触 / task_config 不触。byte-repro = 全 DoD 前提。→ %12 re-checkpoint 提出。*
