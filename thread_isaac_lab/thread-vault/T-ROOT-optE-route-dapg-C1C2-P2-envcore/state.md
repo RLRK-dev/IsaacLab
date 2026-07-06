@@ -1,10 +1,10 @@
 ---
 node_id: T-ROOT-optE-route-dapg-C1C2-P2-envcore
 node_name: "P2 whole-route env-core (RL env class 骨格)"
-goal: "spec v1.5 §4 に基づく whole-route C1→C2 RL env-core を build する — obs 57D / action α-6D residual (非累積 Δ) / reward sparse-primary predicate (G1-G6 latched-monotonic) / termination (horizon 900 + terminates) / common-mode guards。staged build chain の第 1 component (env-core → route-executor → oracle → OG → trainer)。"
+goal: "spec v1.5 §4 に基づく whole-route C1→C2 RL env-core を build する — obs 60D (v1.5a) / action α-6D residual (非累積 Δ, DOF = (b′) phase-conditional structural projection v1.5b) / reward sparse-primary predicate (G1-G6 latched-monotonic) / termination (horizon 900 + terminates) / guards ((b′) span projection: dual-grip hard-project + 再把持窓 per-arm)。staged build chain の第 1 component (env-core → route-executor → oracle → OG → trainer)。"
 goal_verification: |
   env-core smoke DoD 8 項 PASS (spec v1.5 §4): ①throughput ≥9.7 実効 fps ②device parity (per-phase predicate-fire + 終端 verdict 一致, cuda:0-only pin は FAIL 分岐) ③cg-GPU whole-route screen (全 phase finite + nacon engage + no nefc overflow) ④horizon 実測 max-of-81 (P3 piggyback) ⑤Δ=const drift-zero (=0.0 EXACT) ⑥predicate unit-test @cuda:0 (6 phase 全 fire + no-re-fire + guards-quiet) ⑦handover-fidelity (route-executor 接続後、qpos/qvel L∞) ⑧corner-miss 分布 (P3 grid 供給済)。
-  現況 (2026-07-06 10:35): [DEFINE] = Rs packet §8-3 staged charter 授権 + %12 charter (10:27)。§運用4 grounding DONE (spec v1.5 + packet v1.1)。[L-TRIAGE] = L3 HIGH (%12 APPROVE 10:33)。build 計画 起草中 → %12 checkpoint (code 前) → 5体 [VERIFY] → build。code 未着手 (0-commit, locked runner 不触)。
+  現況 (2026-07-06 13:33): (b′)+N2-N6 fold DONE → /reward-design PASS ((b′) delta = 全 G reachable, projection algebra sound) → **[DESIGN-GATE] /pre-check 3走目 = BLOCK (1 CRIT + 4 HIGH + 3 MED; ⭐core (b′) algebra は verifier が健全確認)**。CRIT ISSUE-1 = dual-grip window が G3 C1-seat [両腕把持] を gap で落とし INV#2 未enforce → **FOLD** (window = base-script both-grip schedule G3-inclusive; spec:75 guards f1 も同 gap → %12 escalate)。impl fold (ISSUE-1/3/4/6/7/8a) = DONE (build plan §9)。**design-level escalate → %12+Rs: ISSUE-2 (6D log-prob PPO 会計 vs 「α-6D 契約不変」) / ISSUE-5 (transit reach obs-completeness = 60D obs 決定) / ISSUE-8b (transit per-arm asymmetric)**。次 = %12 disposition → /pre-check 4走目 → PASS → checkpoint。code 未着手 (0-commit, locked runner 不触)。
 status: IN_PROGRESS
 parent_node: T-ROOT-optE-route-dapg-C1C2
 children_nodes: []
@@ -14,15 +14,24 @@ dependencies:
     - "P2 spec v1.5 + artifacts v1.3 + packet v1.1 = Rs W0-a′ 一括承認 (state.md b7d7857dfc, 2026-07-06 10:1x)"
   blocker: []
 created: 2026-07-06T10:35:32+09:00
-last_updated: 2026-07-06T10:35:32+09:00
+last_updated: 2026-07-06T13:33:00+09:00
 spec_version: LTM-1 v1.1
 session_history:
   - "2026-07-06 10:27 lead %12 (RS-TECH-LEAD, w2:p4): P2 env-core build charter (Rs W0-a′ packet v1.1 一括承認 b7d7857dfc, staged charter 授権) → %11 (COORD, w2:p3) §運用4 grounding (spec v1.5 118L + packet v1.1 98L) + [TASK]/[L-TRIAGE]=L3 HIGH → %12 APPROVE (10:33, 子 node 作成承認 = Rs packet §8-3 + [DEFINE]) → %11 本 state.md 作成 (1:1 binding = %11 session) → build 計画 起草へ。p6 に direct ping (parent children_nodes + manifest 反映)。"
+  - "2026-07-06 10:5x-13:06 [DESIGN-GATE] iterate: /reward-design PASS + /pre-check 1走目 BLOCK (10-issue) → C1 fact-find (crossing-x ABSENT 決定的) → Rs obs 60D (v1.5a, 11:20 bb9e3666be) → 2走目 RE-RUN (9/10 CLOSED) → N1 CRITICAL (FOUNDATIONAL span #2, common-mode-preserves-span 論理無効) → BLOCKED_FOR_USER → %12 推奨 (b′) → **Rs「推奨で」= (b′) 確定 (spec v1.5b, 13:01 189c7c5bf9)**。BLOCKED 解除。N2-N6 %12 fold 承認。次 = (b′)+N2-N6 fold → /pre-check 3走目 → checkpoint。"
+  - "2026-07-06 13:06-13:33 (b′)+N2-N6 fold + /reward-design PASS ((b′) delta = 全 G reachable, projection algebra sound) → /pre-check 3走目 = **BLOCK** (1 CRIT ISSUE-1 window-gaps-G3-C1-seat + 4 HIGH [ISSUE-2 PPO会計 / 3 DoD⑩ achieved-span / 4 DoD⑨ port-vs-online / 5 transit-reach obs] + 3 MED; ⭐core (b′) algebra CONFIRMED sound by verifier)。impl fold (ISSUE-1/3/4/6/7/8a) DONE (build plan §9)。design-level ISSUE-2/5/8b = %12+Rs escalate。%12 報告 → disposition → 4走目 待ち。"
 ---
 
 # P2 whole-route env-core (T-ROOT-optE-route-dapg-C1C2-P2-envcore) — IN_PROGRESS
 
 **Rs 承認履歴:** 2026-07-06 10:1x「W0-a′ packet v1.1 一括承認」(spec v1.5 + artifacts v1.3 を P2 設計基底採択 + §8 staged build charter 発行授権、state.md b7d7857dfc)。本 node = staged charter 第 1 component (env-core)。
+
+RESOLVED (2026-07-06 13:01 Rs「推奨で」= (b′) 確定, spec v1.5b amendment commit 189c7c5bf9; BLOCKED_FOR_USER 解除 = Rs GO 済): env-core action DOF = **(b′) phase-conditional structural projection**。INVARIANT#2 (88mm span) は「適用場所で構造 enforce」。α-6D residual 契約維持。
+**Rs 決定 (b′) 詳細 (spec v1.5b:123 忠実):**
+  - dual-grip phase (span-guard 窓 {G1-G2}∪{G4-G6}): Δ を common-mode 部分空間へ **hard-project** (INV#2 span = 構造 enforcement, 検知でなく)。
+  - 非 dual-grip 再把持窓 (phase 10-11): per-arm 許容 (span task 非 invariant ~160mm + N6 0.9mm reach fragility の補正が要る場所)。
+  - differential-drift regression = DoD 追加 (N1↔N6 同 window 整合)。
+[build 進行可 (Rs GO)。次 = (b′) fold + N2-N6 fold → /reward-design + /pre-check 3走目 → PASS → 正式 %12 checkpoint → 5体 [VERIFY] → build。action-path 実装は checkpoint+5体 PASS 後。]
 
 ## goal / means / status
 - **goal (検証可能):** 上 frontmatter goal_verification の smoke DoD 8 項 PASS で env-core を verified とする。
@@ -30,7 +39,7 @@ session_history:
 - **status:** IN_PROGRESS (build 計画 起草段, code 未着手)。
 
 ## 決定済み前提 (packet v1.1 / charter, LOCKED)
-α-6D residual (position-only, HIGH5 moot) / obs 57D (v2.1) / horizon 900 / Q7 draw = DR-support 除外 (EMPTY provisional) / Q3 = reach-terminate + wrist-proxy / T3 bar = ≥70% ∧ baseline 0.716 band 超え / cuda:0 canonical / FON_V1 (W0E_F1B_SNAPDOWN=1) env pin 承継 / 分子 = strict_v2 predicate-complete 承継。
+α-6D residual (position-only, HIGH5 moot; action DOF = (b′) phase-conditional structural projection, spec v1.5b) / obs 60D (v1.5a; 57D + [57]crossing-x dev + [58:60]axis-resolved seat) / horizon 900 / Q7 draw = DR-support 除外 (EMPTY provisional) / Q3 = reach-terminate + wrist-proxy / T3 bar = ≥70% ∧ baseline 0.716 band 超え / cuda:0 canonical / FON_V1 (W0E_F1B_SNAPDOWN=1) env pin 承継 / 分子 = strict_v2 predicate-complete 承継。
 
 ## gates (L3, §運用2)
 [DESIGN-GATE 直交] /reward-design 4 成果物 (artifacts v1.3 を具体 plan に再 discharge, M-A lesson) + /pre-check → [VERIFY] 5体 CC Debate (code 前, %12 checkpoint 後) → [RULE-CHECK] → [CHANGE] build → [層3 機械] → [層5 多視点 幾何/物理/SSOT] → [層2 事後 debate]。
