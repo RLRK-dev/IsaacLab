@@ -96,3 +96,6 @@ design-gate chain 完走実績 (5体 ×2 + pre-check 3-entry + %9 台帳) = v1.0
 
 ---
 *v1.0: 07-05 14:37 %9 content PV PASS → 15:0x ERRATUM/HELD (J-9)。v1.1: 07-06 10:2x %12 起草 (W0-e close 反映: 公式 0.716 / 失敗構造 supersede / horizon+span 新 geometry 再検証 / DC-1 DECIDED 化 + DC-1s3 分離 / T3 baseline 更新 / Q7 draw 候補具体化 / DQ1 banking 義務 surface) — %9 cross-PV = CONCUR-WITH-CORRECTIONS 10:10 (台帳 `W0APRIME_PACKET_V1_1_CROSSPV_PCT9.md`)、corrections 1-5 全反映 10:1x → **v1.1 final、Rs 提示可**。*
+
+---
+**AMENDMENT (2026-07-06 11:2x):** Q8 obs = 57D → **60D** (Rs「推奨で」、env-core pre-check C1 起点、spec v1.5a 参照)。他決定は不変。

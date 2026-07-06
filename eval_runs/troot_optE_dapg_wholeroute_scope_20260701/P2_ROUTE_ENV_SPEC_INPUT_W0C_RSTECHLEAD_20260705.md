@@ -116,3 +116,6 @@ base perfect-state targeting = 実機非保守 / retention row56 NEEDS-DUAL = FU
 4. Rs 承認後にのみ build (L3 chain + 層5 + cross-PV)。
 
 *%12 — 2026-07-05。PAPER-ONLY。INVARIANTS 不触。*
+
+---
+**AMENDMENT (v1.5a, 2026-07-06 11:2x, Rs「推奨で」):** obs v2.1 contract = **60D** に改訂 — 57D + `[57]` near-clip crossing-x deviation (H-drape 変数) + `[58:60]` axis-resolved seat (z-gap / lateral)。既存 [0:57) index 無傷。根拠 = env-core pre-check C1 (corner 定義変数の obs 不在、[0:42] 全数列挙で確定) + §運用21。explosion velocity dim = 不追加 (Q11① justified-absent 既決)。decision-of-record = node state.md 11:2x。
