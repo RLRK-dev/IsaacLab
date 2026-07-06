@@ -35,6 +35,7 @@ import numpy as np
 from configs.task_config import (
     GRIP_HALF_SPAN,
     GRIPPER_DRIVER_JOINT_IDX,
+    GRIPPER_DRIVER_OPEN_RAD,
     GRIPPER_JOINT_RANGE,
     JOINTS_PER_ARM,
 )
@@ -182,3 +183,61 @@ def set_gripper_target(joint_target_pos, dofs, target_rad):
     for d in dofs:
         joint_target_pos[d] = float(target_rad)
     return joint_target_pos
+
+
+def build_perworld_index_maps(arm_q_start, arm_qd_start):
+    """Build per-world arm-only re-pose maps + driver DOFs + gripper restore set (§13.1/§13.4; AR:421-433).
+
+    The cable FREE root makes the per-world ``joint_q`` start differ from the ``joint_qd`` start for
+    world >= 1, so the arm (q-indexed) re-pose and the driver (qd-indexed) targets are threaded
+    separately. The gripper RESTORE index set is derived from the SAME ``_GRIPPER_COORDS_LOCAL`` as the
+    write-site EXCLUSION (§13.0-2 / G7): the arm and gripper sets are complements over each world's
+    ``_N_ARM_JOINTS`` span, so no coordinate can be excluded-from-writes yet not restored-at-reset.
+
+    Args:
+        arm_q_start: Per-world arm ``joint_q`` start indices, list[int] of length ``n_world``.
+        arm_qd_start: Per-world arm ``joint_qd`` start indices, list[int] of length ``n_world``.
+
+    Returns:
+        A dict with ``arm_ow_q_idx``/``arm_ow_qd_idx`` (destination indices for the arm-only re-pose),
+        ``arm_ow_src`` (source into a per-world arm row = ``_ARM_OVERWRITE_LOCAL`` tiled), ``l_driver_dofs``/
+        ``r_driver_dofs``/``all_driver_dofs`` (per-world qd driver indices), and ``gripper_restore_q_idx``
+        (the all-16 gripper ``joint_q`` coords per world, for the banked reset restore).
+    """
+    n_world = len(arm_q_start)
+    grip_local = sorted(_GRIPPER_COORDS_LOCAL)
+    return {
+        "arm_ow_q_idx": np.array(
+            [arm_q_start[w] + li for w in range(n_world) for li in _ARM_OVERWRITE_LOCAL], dtype=np.int64
+        ),
+        "arm_ow_qd_idx": np.array(
+            [arm_qd_start[w] + li for w in range(n_world) for li in _ARM_OVERWRITE_LOCAL], dtype=np.int64
+        ),
+        "arm_ow_src": np.array(_ARM_OVERWRITE_LOCAL * n_world, dtype=np.int64),
+        "l_driver_dofs": [[arm_qd_start[w] + d for d in _L_DRIVER_LOCAL] for w in range(n_world)],
+        "r_driver_dofs": [[arm_qd_start[w] + d for d in _R_DRIVER_LOCAL] for w in range(n_world)],
+        "all_driver_dofs": [arm_qd_start[w] + d for w in range(n_world) for d in _L_DRIVER_LOCAL + _R_DRIVER_LOCAL],
+        "gripper_restore_q_idx": np.array(
+            [arm_q_start[w] + gc for w in range(n_world) for gc in grip_local], dtype=np.int64
+        ),
+    }
+
+
+def servo_seed_assert(joint_target_pos, all_driver_dofs):
+    """Fail-loud servo-seed check: every driver DOF carries the build-time OPEN target (§13; AR:435-441).
+
+    A wrong per-world qd offset would silently drive the wrong DOF, so the gripper never closes; this
+    catches it at build time instead of as a hard-to-localize byte-repro miss.
+
+    Args:
+        joint_target_pos: The servo target array [rad] read from the built control.
+        all_driver_dofs: Flat per-world driver DOF indices (from :func:`build_perworld_index_maps`).
+
+    Raises:
+        AssertionError: If any driver DOF's target is not the build-time ``GRIPPER_DRIVER_OPEN_RAD``.
+    """
+    for d in all_driver_dofs:
+        assert abs(float(joint_target_pos[d]) - GRIPPER_DRIVER_OPEN_RAD) < 1e-6, (
+            f"servo-seed: driver DOF {d} target={joint_target_pos[d]} != OPEN {GRIPPER_DRIVER_OPEN_RAD} "
+            f"(per-world qd offset wrong)"
+        )
