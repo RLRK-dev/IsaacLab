@@ -32,6 +32,7 @@ servo-seed assert, and ``_set_gripper_target``. The AR-specific LEFT-arm freeze
 """
 
 import numpy as np
+import route_env_config as rc
 from configs.task_config import (
     GRIP_HALF_SPAN,
     GRIPPER_DRIVER_JOINT_IDX,
@@ -220,6 +221,9 @@ def build_perworld_index_maps(arm_q_start, arm_qd_start):
         "gripper_restore_q_idx": np.array(
             [arm_q_start[w] + gc for w in range(n_world) for gc in grip_local], dtype=np.int64
         ),
+        "gripper_restore_qd_idx": np.array(
+            [arm_qd_start[w] + gc for w in range(n_world) for gc in grip_local], dtype=np.int64
+        ),
     }
 
 
@@ -241,3 +245,95 @@ def servo_seed_assert(joint_target_pos, all_driver_dofs):
             f"servo-seed: driver DOF {d} target={joint_target_pos[d]} != OPEN {GRIPPER_DRIVER_OPEN_RAD} "
             f"(per-world qd offset wrong)"
         )
+
+
+def apply_banked_restore(phys_jq, phys_jqd, joint_target_pos, maps, banked):
+    """Restore a banked phase-k state at reset: arm + ALL-16 gripper joint_q/qd + banked grip target (§13.3/§13.4).
+
+    The reset-side counterpart to the write-site exclusion. The gripper coords restored here are the SAME
+    ``_GRIPPER_COORDS_LOCAL`` set excluded from the per-step writes (both index maps come from
+    :func:`build_perworld_index_maps`), so a gripped phase-k restores a CLOSED gripper -- NOT a blanket-OPEN,
+    which would release the banked cable and fail the A2 handover-fidelity DoD (§13.3 F5, supersedes item7).
+
+    Args:
+        phys_jq: Physics joint positions [m or rad], mutated in place.
+        phys_jqd: Physics joint velocities [m/s or rad/s], mutated in place.
+        joint_target_pos: Servo target array [rad], mutated in place.
+        maps: The dict from :func:`build_perworld_index_maps`.
+        banked: Dict with ``arm_q``/``arm_qd`` (world-major over ``_ARM_OVERWRITE_LOCAL``), ``gripper_q``/
+            ``gripper_qd`` (world-major over ``_GRIPPER_COORDS_LOCAL``), and ``grip_target`` (per driver DOF,
+            world-major) -- the banked phase-k grip command (OPEN for phase-0, banked-CLOSED for G3-G6).
+
+    Returns:
+        The mutated ``(phys_jq, phys_jqd, joint_target_pos)`` tuple.
+    """
+    phys_jq[maps["arm_ow_q_idx"]] = banked["arm_q"]
+    phys_jqd[maps["arm_ow_qd_idx"]] = banked["arm_qd"]
+    phys_jq[maps["gripper_restore_q_idx"]] = banked["gripper_q"]  # G7: all 16 gripper coords (drivers + followers)
+    phys_jqd[maps["gripper_restore_qd_idx"]] = banked["gripper_qd"]
+    for i, d in enumerate(maps["all_driver_dofs"]):
+        joint_target_pos[d] = float(banked["grip_target"][i])  # F5 banked grip target (NOT blanket-OPEN)
+    return phys_jq, phys_jqd, joint_target_pos
+
+
+class RouteExecutor(rc.RouteInterfaceV1):
+    """Real route-executor: faithful C1->C2 route engine replacing ``NominalRouteStub`` (§13; charter D-1=C).
+
+    Implements the :class:`route_env_config.RouteInterfaceV1` contract. The gripper is driven by the
+    model-level POSITION servo (``grasp_actuation=True``); every per-step kinematic joint write excludes the
+    gripper coords (:func:`apply_arm_only_write_broadcast` / :func:`apply_arm_only_write_perworld`) and each
+    reset restores them from the banked state (:func:`apply_banked_restore`) -- both co-derived from
+    ``_GRIPPER_COORDS_LOCAL`` (§13.0-2 G7), so no coordinate is excluded-from-writes yet not restored.
+
+    ``reset_to_phase`` keeps the SCALAR ``k`` contract (per-world curriculum start-mix is deferred to the
+    trainer, §13.2 F14/F15). ``step_target`` is the env-facing per-step facade; the self-driving byte-repro
+    path (``run_route``) and the real per-step targets are added by the route-orchestration extraction
+    (subsequent build chunks; faithful copy of the locked ``_run_mujoco_grasp_route``:3692).
+    """
+
+    def __init__(self, arm_q_start, arm_qd_start, horizon, state_0=None, control=None, state_bank=None):
+        """Wire the per-world index maps + optional physics handles.
+
+        Args:
+            arm_q_start: Per-world arm ``joint_q`` start indices (env-computed; cable FREE-root => q != qd).
+            arm_qd_start: Per-world arm ``joint_qd`` start indices.
+            horizon: Episode horizon [steps].
+            state_0: The Newton physics state to re-pose at reset (None for pure-index construction/tests).
+            control: The Newton control whose ``joint_target_pos`` carries the servo targets (None => skip seed).
+            state_bank: Optional ``{k: banked_dict}`` phase-k state bank (empty => reset is env-authoritative).
+        """
+        self._maps = build_perworld_index_maps(arm_q_start, arm_qd_start)
+        self._horizon = int(horizon)
+        self._state_0 = state_0
+        self._control = control
+        self._state_bank = dict(state_bank) if state_bank else {}
+        self._requested_phase = 0
+        if control is not None:
+            servo_seed_assert(control.joint_target_pos.numpy(), self._maps["all_driver_dofs"])
+
+    def reset_to_phase(self, k: int) -> None:
+        """Fork all worlds to phase ``k``'s banked state (SCALAR ``k``; §13.2/§13.3/§13.4).
+
+        Restores the banked arm + all-16 gripper ``joint_q``/``joint_qd`` + the banked grip target
+        (banked-CLOSED for a gripped phase, NOT a blanket-OPEN). Phase-0 / no bank => no-op (the env-core
+        reset is authoritative), matching the stub. Per-world different-``k`` is deferred to the trainer.
+        """
+        self._requested_phase = int(k)
+        banked = self._state_bank.get(int(k))
+        if banked is None or self._state_0 is None:
+            return  # phase-0 / no bank / index-only construction: the env-core reset stands
+        phys_jq = self._state_0.joint_q.numpy()
+        phys_jqd = self._state_0.joint_qd.numpy()
+        jtp = self._control.joint_target_pos.numpy()
+        apply_banked_restore(phys_jq, phys_jqd, jtp, self._maps, banked)
+        self._state_0.joint_q.assign(phys_jq)
+        self._state_0.joint_qd.assign(phys_jqd)
+        self._control.joint_target_pos.assign(jtp)
+
+    def step_target(self, t: int) -> tuple:
+        """Return the per-step route packet ``(target_6d, phase_id, grip_2, is_dual)`` for RL step ``t``.
+
+        The real per-step targets come from the extracted route orchestration (faithful copy of the locked
+        ``_run_mujoco_grasp_route``:3692) -- added by the route-orchestration build chunks. Not yet wired.
+        """
+        raise NotImplementedError("step_target route orchestration is the next build chunk (§13.7)")
