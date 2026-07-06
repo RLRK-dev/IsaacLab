@@ -117,6 +117,23 @@ C2_WALL_SEAT_TOL_MM = 0.5  # groove-wall seat distance (runner :4971, <= 0.5 mm)
 HOLD_SPAN_TOL_M = 0.008
 
 # =====================================================================================================
+# C1->C2 route-scope GEOMETRY block (%12 systematic pin 2026-07-06). Values = canonical route env_gates
+# VERBATIM (route_demo_raw_meta.json env_gates / resolved_clip_*_xy + route_c2_pin.json). The whole-route
+# (C1->C2) work uses these route env-gate OVERRIDES, NOT the task_config 5-clip-array defaults. task_config
+# stays UNTOUCHED (SSOT). The env-core mirrors these for BOTH (a) the seat/groove PREDICATE constant
+# (ROUTE_GROOVE_Z) AND (b) the built C1 clip SCENE geometry (clip z += ROUTE_CLIP_FLOAT_Z) -- else a live
+# episode drifts from the route (%12 flag: a built C1 20mm low breaks c1_retained's 840 bar / G3 seat vs
+# scene). The sync-guard DoD asserts these == a canonical meta (drift tripwire). Reconciliation with the
+# task_config 5-clip defaults is parked for Rs batch review.
+# =====================================================================================================
+ROUTE_C1_XY = (0.35, 0.150)  # [m] meta CLIP_X/CLIP_Y = resolved_clip_c1_xy (== task_config CLIP_POSITIONS[0]; no drift)
+ROUTE_C2_XY = (0.40, 0.000)  # [m] meta CLIP2_X/CLIP2_Y = resolved_clip_c2_xy (Rs 07-05; != task_config (0.40, 0.075))
+ROUTE_CLIP_FLOAT_Z = 0.020  # [m] meta CLIP_FLOAT_Z: routing clips float 20mm above the table (SPACER-supported)
+# Route seat/groove z = task_config base groove + float (== route_c2_pin.json groove_z_mm 829). Used by the
+# seat/groove predicate (_seat_metrics) AND the built clip z; the two MUST agree (%12 build+predicate flag).
+ROUTE_GROOVE_Z = task_config.GROOVE_CENTER_Z + ROUTE_CLIP_FLOAT_Z  # 0.809 + 0.020 = 0.829
+
+# =====================================================================================================
 # Route-executor interface contract v1 (build plan sec 6 + sec 12 CC5-2; PINNED)
 # =====================================================================================================
 ROUTE_MODE_NOMINAL = "nominal"  # stub: fixed nominal per-step target (env-core skeleton smoke)
@@ -178,6 +195,10 @@ _ROUTE_OWNED_PARAM_NAMES = {
     "C2_SETTLE_Z_TOL_MM",
     "C2_WALL_SEAT_TOL_MM",
     "HOLD_SPAN_TOL_M",
+    "ROUTE_C1_XY",
+    "ROUTE_C2_XY",
+    "ROUTE_CLIP_FLOAT_Z",
+    "ROUTE_GROOVE_Z",
 }
 _COLLIDING = {n for n in _ROUTE_OWNED_PARAM_NAMES if hasattr(task_config, n)}
 assert not _COLLIDING, (

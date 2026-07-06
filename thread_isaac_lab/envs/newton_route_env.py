@@ -134,7 +134,6 @@ from task_config import (  # noqa: E402
     FINGER_OPEN_POS,
     GRIP_HALF_SPAN,
     GRIPPER_DRIVER_JOINT_IDX,
-    GROOVE_CENTER_Z,
     JOINTS_PER_ARM,
     MAX_MOVE_STEPS,
     ROBOT_BODIES_PER_ARM,
@@ -163,7 +162,7 @@ _AC_IK_ITERATIONS_P0 = 400  # P0 dual-arm solve needs the generous local count (
 
 # C1 / C2 clip context (C1C2 whole-route scope).
 _C1_XY = np.array([CLIP_POSITIONS[0][0], CLIP_POSITIONS[0][1]], dtype=np.float32)  # (0.35, +0.150)
-_C2_XY = np.array([CLIP_POSITIONS[1][0], CLIP_POSITIONS[1][1]], dtype=np.float32)  # (0.40, +0.075)
+_C2_XY = np.array([rc.ROUTE_C2_XY[0], rc.ROUTE_C2_XY[1]], dtype=np.float32)  # route-scope C2 = rc.ROUTE_C2_XY
 _GHS = float(GRIP_HALF_SPAN)  # 0.044: R lane = c2y + GHS (recount p9_recount_strict_v2.py:47)
 
 
@@ -343,6 +342,7 @@ class NewtonRouteEnv(VecEnv):
             self.device,
             add_support_clips=True,
             add_target_clip=True,  # C1 V-groove present (routing/seating scenario, cf Grip clamp mode)
+            target_clip_float_z=rc.ROUTE_CLIP_FLOAT_Z,  # C1 clip float +20mm (route env-gate; %12 build+predicate flag)
         )
         self._model = scene["model"]
         self._solver = scene["solver"]
@@ -785,7 +785,7 @@ class NewtonRouteEnv(VecEnv):
         """
         near = int(np.argmin(np.abs(cable_pos[:, 1] - clip_xy[1])))
         p = cable_pos[near]
-        z_gap = float(p[2] - GROOVE_CENTER_Z)
+        z_gap = float(p[2] - rc.ROUTE_GROOVE_Z)  # route groove z (809 + CLIP_FLOAT 20mm = 829), NOT base 809
         lateral = float(np.linalg.norm(p[:2] - clip_xy))
         seat_dist = float(np.sqrt(lateral * lateral + z_gap * z_gap))
         return seat_dist, z_gap, lateral

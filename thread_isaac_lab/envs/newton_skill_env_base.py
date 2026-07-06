@@ -1481,7 +1481,7 @@ def _wire_s6_grasp_solref(solver, scene_info=None):
 # =============================================================================
 
 
-def build_multiworld_scene(
+def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity; minimal additive float param)
     fk_model,
     fk_state,
     world_count,
@@ -1490,6 +1490,7 @@ def build_multiworld_scene(
     add_support_clips=True,
     add_target_clip=False,
     grasp_actuation=False,
+    target_clip_float_z=0.0,
 ):
     """Build multi-world physics scene with kinematic arms + cable.
 
@@ -1510,6 +1511,8 @@ def build_multiworld_scene(
             (condim=6 + pad rolling friction). Mirrors the proven ``build_scene(grasp_actuation=True)``
             (``test_newton_clip_routing.py``) and calls :func:`_wire_s6_grasp_solref` after ``make_solver``.
             Default ``False`` keeps the build byte-identical (ApproachCable / Grip NON-breaking).
+        target_clip_float_z: Height [m] to float the C1 target clip above the table (route
+            ``CLIP_FLOAT_Z`` env-gate override). Default ``0.0`` = table-level, non-breaking.
     """
     # Default cable position: on table
     if cable_start_pos is None:
@@ -1823,7 +1826,7 @@ def build_multiworld_scene(
         ]
         for dx, dy, dz, hx, hy, hz in clip_parts:
             xf = wp.transform(
-                (CLIP1_X + dx, CLIP1_Y + dy, TABLE_HEIGHT + dz),
+                (CLIP1_X + dx, CLIP1_Y + dy, TABLE_HEIGHT + dz + target_clip_float_z),
                 wp.quat_identity(),
             )
             idx = scene.add_shape_box(
