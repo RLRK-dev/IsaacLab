@@ -154,5 +154,13 @@ RV: **CH1(a/b)/CH2/CH3/CH4/CH5 全 CLOSED** (G6 strict_v2 mirror + obs 62D gradi
 - **NEW-3 LOW (stale H3)**: line 58 supersession pointer 追加済。
 - **NEW-4 LOW (c2_seated_honest obs §運用21)**: build 時 [49]/[58:60] ⊇ c2_seated_honest 入力 (in_groove + settle) 確認要 (C1-retention と同様の obs-completeness; 不足なら obs escalate) + どの c2_seated_honest (held vs post-release-settle) が route_c2_metrics.c2_seated_honest [recount:108] に一致か pin。
 - **NEW-5 LOW (G3/G5 raw dist)**: seat predicate は raw per-clip sim distance read (scripted-gated obs [49] 非依存) — boundary step で G3 が C2-dist read するのを防止。
-### 順序 (v8, 現行)
-Rs-independent fold + obs 62D fold DONE (8e78ea7c1b/1fa2771818) → RV=WARN → **当方 fold (NEW-1 build/NEW-2/NEW-3 済, NEW-4/5 build-time pin) DONE** + ⚠**NEW-1 spec line 68 citation = %12 訂正要** → %12 verify (RV WARN close 確認) → PASS → [RULE-CHECK] Tier0-3 → [CHANGE] build。
+### 順序 (v8)
+Rs-independent fold + obs 62D fold DONE (8e78ea7c1b/1fa2771818) → RV=WARN → 当方 fold DONE + NEW-1 spec %12 訂正 (v1.5h 両鍵) → %12 RV close verify=PASS → [RULE-CHECK] Tier0-3 ALL PASS → [CHANGE] build。
+
+## 13. [CHANGE] build + ambiguity resolution (%12 18:41)
+**build 実装 (subagent, 2 file, 確定 spec)**: route_env_config.py (185L) + newton_route_env.py (1133L)。static-verify PASS (ruff / obs 62D contiguous 0..61 / foundational faithful: time_outs purity, G6 strict_v2 mirror, (b′) schedule-ALONE common-mode as-executed, α-6D non-accumulating, [16:19] lane, [49] base-pin, [53:55] telemetry-not-gate)。ASCII-only 化済 (validate.sh CHECK 4 = Python 内 Japanese/非ASCII 禁止 Layer2)。
+**flagged-ambiguity 2 件 = %12 resolution**:
+- **(a) obs [60:61] = SI meters** (0.840 threshold, 他 dim 単位一貫 AGENTS.md SI 原則)。strict_v2 mirror = **predicate 等価** (z<0.840m == 840mm) であって格納単位でない。mm 混在は normalization 前 scale 不整合を作るのみ。→ 実装 = meters, route_env_config に 840mm↔0.840m 対応 comment, predicate 閾値 0.840。(subagent 初版 mm は訂正)。
+- **(b) DoD⑨a = env は「凍結定義の live 幾何 self-compute」が正** (producer field read 不可 — live RL episode に producer field 無, reward 自前計算必須)。⑨a 構図: reference = recorded grid two-key verdict (producer 由来) / 被検 = env の live 幾何 code に recorded state 通した per-cell verdict → **乖離は env 側を凍結定義 (flank |y−0.15|≤0.010m max-z / 0.840 bar / honest=groove-membership+settle) へ修正** (tolerance 緩め = Gate-FAIL 規律違反)。env の geometric proxy は「live 幾何」方向が正、ただし凍結定義に EXACT 一致要。
+### 順序 (v9, 現行)
+ASCII-fix DONE + (a)(b) fix を同 subagent pass に fold 中 → 完了 verify (非ASCII=0/ruff/meters landed/frozen-def) → **explicit-path re-commit** (--all-files noise 非混入) → **fresh-context verify pass (%12 承認)**: smoke DoD (①②③⑤⑥⑨a⑩⑪ env-core dischargeable, cuda:0) + 層5 (幾何/物理/SSOT 3 視点, fresh subagent 群) → **最終 verify = %12** → node COMPLETE。
