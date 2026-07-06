@@ -48,7 +48,7 @@ RESOLVED (2026-07-06 13:01 Rs「推奨で」= (b′) 確定, spec v1.5b amendmen
 ## goal / means / status
 - **goal (検証可能):** 上 frontmatter goal_verification の smoke DoD 8 項 PASS で env-core を verified とする。
 - **means (leaf action):** 新規 env class ファイル群 (≤800 行 diff, 個別 L3 chain) を build。obs 57D / α-6D residual 非累積 (`Δ=const→drift=0` regression) / reward sparse-primary G1-G6 predicate (latched-monotonic, fire-once, never-revoked; phase one-hot=argmax(earned)) / termination (horizon 900, terminates=explosion/drop/span逸脱/reach-fail, time_outs=timeout純度のみ) / guards (action-path per-arm clamp 禁止=common-mode only [INV#2 as-executed 保護] / span 監視 dual-grip phase のみ {G1-G2窓}∪{G4-G6窓} informative-tier / mujoco-assert)。phase-clock の state-bank 機構は route-executor component (次段) と接続 — env-core は interface/stub。
-- **status:** IN_PROGRESS (build 計画 起草段, code 未着手)。
+- **status:** COMPLETE (2026-07-06 23:15、frontmatter と一致。起草段の旧記述「IN_PROGRESS (build 計画 起草段, code 未着手)」を %12 が 23:1x stale-body fix。obs は v1.5g で 62D に改訂済 [下 means 節の 57D 記述は起草時点値]、詳細 = session_history 最終 entry)。
 
 ## 決定済み前提 (packet v1.1 / charter, LOCKED)
 α-6D residual (position-only, HIGH5 moot; action DOF = (b′) phase-conditional structural projection, spec v1.5b) / obs 60D (v1.5a; 57D + [57]crossing-x dev + [58:60]axis-resolved seat) / horizon 900 / Q7 draw = DR-support 除外 (EMPTY provisional) / Q3 = reach-terminate + wrist-proxy / T3 bar = ≥70% ∧ baseline 0.716 band 超え / cuda:0 canonical / FON_V1 (W0E_F1B_SNAPDOWN=1) env pin 承継 / 分子 = strict_v2 predicate-complete 承継。
