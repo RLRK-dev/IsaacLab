@@ -4,7 +4,7 @@ node_name: "P2 whole-route env-core (RL env class 骨格)"
 goal: "spec v1.5 §4 に基づく whole-route C1→C2 RL env-core を build する — obs 60D (v1.5a) / action α-6D residual (非累積 Δ, DOF = (b′) phase-conditional structural projection v1.5b) / reward sparse-primary predicate (G1-G6 latched-monotonic) / termination (horizon 900 + terminates) / guards ((b′) span projection: dual-grip hard-project + 再把持窓 per-arm)。staged build chain の第 1 component (env-core → route-executor → oracle → OG → trainer)。"
 goal_verification: |
   env-core smoke DoD 8 項 PASS (spec v1.5 §4): ①throughput ≥9.7 実効 fps ②device parity (per-phase predicate-fire + 終端 verdict 一致, cuda:0-only pin は FAIL 分岐) ③cg-GPU whole-route screen (全 phase finite + nacon engage + no nefc overflow) ④horizon 実測 max-of-81 (P3 piggyback) ⑤Δ=const drift-zero (=0.0 EXACT) ⑥predicate unit-test @cuda:0 (6 phase 全 fire + no-re-fire + guards-quiet) ⑦handover-fidelity (route-executor 接続後、qpos/qvel L∞) ⑧corner-miss 分布 (P3 grid 供給済)。
-  現況 (2026-07-06 17:46): obs 62D fold DONE → **targeted RV (CC2 継続) = WARN → PASS 直前**。RV: **CH1(a/b G6 mirror+62D gradient)/CH2/CH3/CH4/CH5 全 CLOSED** (CRIT-fix logic 正しく適用, substantively build-ready, index-shift SAFE, ordered×latched×argmax 整合)。残 2 MED (NEW-1 citation misattribution [recount:24-26 = window 定数, 840 threshold = :107 / flank = :39-44] / NEW-2 DoD⑬ vacuity [snapdown C1=81/81 で盲点 verification 層再出 → 非空 guard 要]) + 3 LOW → **当方 fold DONE** (NEW-1 build reward row / NEW-2 非空 guard [pre-snapdown 36/81-escape source] / NEW-3 H3 supersede / NEW-4/5 build-time pin)。⚠**NEW-1 spec line 68 citation も同 misattribution = %12 訂正要** (引用先確認 hard-rule, 両 authoritative doc)。次 = %12 spec citation 訂正 + RV WARN close verify → PASS → [RULE-CHECK] → build 着手。code 未着手 (0-commit, locked runner 不触)。tally=scratchpad/verify_5tai_tally.md。
+  現況 (2026-07-06 18:00): ✅ **%12 RV close verify = PASS → design-gate(5走) + 5体 [VERIFY] + RV = 全 close**。NEW-1 spec citation %12 訂正済 (v1.5h, 両鍵 co-cite: p9_recount:107/%12 recount:63-64 [LOW_WALL_TOP=840]), 当方 build plan reward row も両鍵 co-cite。✅ **[RULE-CHECK] Tier 0-3 = ALL PASS** (Newton-not-PhysX 混同なし / timeouts purity / kinematic-trick なし / task_config import-only / 2 new files 承認)。**[CHANGE] build 着手**: newton_route_env.py + route_env_config.py の実装を subagent (fresh context, build plan §1-§12 = 確定 spec) に委任 (base env = mujoco-コ AC 継承 reuse anchor), 完了後 当方 verify (層3 機械 ./isaaclab.sh -f + 層5 幾何/物理/SSOT + build plan §1 照合 = step-gate)。次 = build 完了 → 層3/層5 verify → smoke DoD → %12 verify → node COMPLETE 判定。locked runner 不触, task_config 不触。
 status: IN_PROGRESS
 parent_node: T-ROOT-optE-route-dapg-C1C2
 children_nodes: []
@@ -14,7 +14,7 @@ dependencies:
     - "P2 spec v1.5 + artifacts v1.3 + packet v1.1 = Rs W0-a′ 一括承認 (state.md b7d7857dfc, 2026-07-06 10:1x)"
   blocker: []
 created: 2026-07-06T10:35:32+09:00
-last_updated: 2026-07-06T17:46:00+09:00
+last_updated: 2026-07-06T18:00:00+09:00
 spec_version: LTM-1 v1.1
 session_history:
   - "2026-07-06 10:27 lead %12 (RS-TECH-LEAD, w2:p4): P2 env-core build charter (Rs W0-a′ packet v1.1 一括承認 b7d7857dfc, staged charter 授権) → %11 (COORD, w2:p3) §運用4 grounding (spec v1.5 118L + packet v1.1 98L) + [TASK]/[L-TRIAGE]=L3 HIGH → %12 APPROVE (10:33, 子 node 作成承認 = Rs packet §8-3 + [DEFINE]) → %11 本 state.md 作成 (1:1 binding = %11 session) → build 計画 起草へ。p6 に direct ping (parent children_nodes + manifest 反映)。"
