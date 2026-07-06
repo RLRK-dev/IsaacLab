@@ -18,7 +18,7 @@
 ## §1. [DEFINE]
 
 - **goal (検証可能):** env-core (MDP skeleton、obs 62D / α-6D residual / G1-G6 predicate) が stub interface で受けている **route** を、locked `_run_mujoco_grasp_route` (0.716 canonical) を source とする**実 route engine** に置換する。成功 = env-core node の 8 blocking LOUD-CARRY のうち route-executor 段で構造的に discharge 可能な項を close + **canonical byte-repro** (0.716 baseline が抽出後も byte-identical 再現)。
-- **means (leaf action):** stub 契約 v1 (§5) を満たす route module を build。core = (a) `reset_to_phase(k)` = precomputed phase-k state-bank (spec §2-F2 (b)) / (b) `step_target(t)` = 実 route の per-step base 絶対 target + phase_id + grip_cmd / (c) recorded-target-replay mode (CC5-2 iii) / (d) 実 C2 groove scene 建設 + 実 grip force。**byte-repro regression = 全 DoD の前提 guard。** locked runner への関与方式 = **§6 D-1 (Rs 決定)**。
+- **means (leaf action):** stub 契約 v1 (§5) を満たす**新 `route_executor` module** を build (D-1=C: locked runner 不触・faithful 抽出)。core = (a) `reset_to_phase(k)` = precomputed phase-k state-bank (spec §2-F2 (b)) / (b) `step_target(t)` = 実 route の per-step base 絶対 target + phase_id + grip_cmd / (c) recorded-target-replay mode (CC5-2 iii) / (d) 実 C2 groove scene 建設 + 実 grip force。**byte-repro regression (locked reference ↔ 新 module、cuda:0 canonical 58/81 EXACT) = 全 DoD の前提 guard + 先祖返り guard。**
 - **success (DoD 提案、§運用29 predicate-completeness):** ①**byte-repro**: 抽出 route で canonical 81-grid → strict_v2 **58/81 EXACT** (env-core ⑨a′ の recorded-state 25/81 proxy を live で 58/81 に引き上げ) ②**⑦ handover-fidelity**: reset_to_phase(k) の qpos/qvel L∞ ≤ 提案 1mm / 1mm/s ③**⑨b online-numerator**: residual≡0 × 81 live → 58/81 (live earned-clock + contact + physics) ④**⑥ 6-phase full-fire live** (実 grip で cable carried) ⑤**58/81 wall/spacer exact predicate** (mjModel geom introspection、center-dist≤3.5mm proxy → wall-dist≤0.5mm spacer-excluded) ⑥**C2-seating 動画 gate** (Rs 約束済、実 C2 groove scene) ⑦**CABLE_XY_OFFSET per-cell wiring** ⑧**⑬ enabler** (recorded-target-replay + C1-escape non-vacuous cell 供給)。**分子 conjoin = strict_v2 (C1-retention + C2-seat 両 leg)。cover しない leg = trainer 段 (policy 学習成果) は本 node scope 外。**
 
 ## §2. [TASK] — node proposal (§3.1 子 node 作成 gate)
@@ -65,24 +65,24 @@ route.step_target(t) -> (target_6d,  # 実 route の per-step base 絶対 target
 # byte-repro regression: 抽出 route が 0.716 canonical を byte-identical 再現 (先祖返り guard、[[feedback-port-task-faithful-to-intent-not-deleted-impl]])
 ```
 
-## §6. ⭐ Rs 決定項
+## §6. ⭐ Rs 決定項 — ⭐DECIDED 2026-07-06 23:5x
 
-### D-1 (核心): locked runner 関与方式 — Rs-LOCKED code への touch 可否
-`_run_mujoco_grasp_route` (⛔ ANTI-REVERT Rs-LOCKED、0.716 source) を stub 契約に載せる 3 案:
+### D-1 (核心): locked runner 関与方式 = ⭐**C 採択 (Rs 決定 23:5x)**
+`_run_mujoco_grasp_route` (⛔ ANTI-REVERT Rs-LOCKED、0.716 source) の関与方式 = **C: faithful 抽出 → 新 route_executor module + byte-repro guard**。
 
 | 案 | locked file | live route (⑨b) | drift risk | 評 |
 |---|---|---|---|---|
 | **A** wrapper/recorded-replay + state-bank | 不触 (最安全) | ✗ open-loop replay のみ (⑨b live 不能) | なし | carry 一部が deferred のまま残る |
 | **B** in-place refactor → importable/resumable | **編集** (lock 例外要) | ✓ 完全 | なし (単一 SSOT) | 最クリーンだが Rs-LOCKED 編集 = Rs 承認必須 |
-| **C** faithful 抽出 → 新 module + byte-repro guard | 不触 (lock 尊重) | ✓ | 中 (二重 SSOT、byte-repro で緩和) | lock 尊重 + live 両立、drift を byte-repro が捕捉 |
+| **⭐C (採択)** faithful 抽出 → 新 module + byte-repro guard | **不触 (lock 尊重)** | ✓ | 中 (二重 SSOT、byte-repro で緩和) | lock 尊重 + live 両立、drift を byte-repro が捕捉 |
 
-**%12 推奨 = C** (lock を尊重しつつ live route 両立、byte-repro regression が先祖返りを機械捕捉; locked runner = reference oracle / route module = production engine の SSOT 分離)。ただし **B (単一 SSOT) が Rs 方針なら lock 編集を承認いただければ最短**。**A は ⑨b live-numerator を discharge できず carry が残る**ため単独 non-recommend。**決定 = Rs 専権** (Rs-LOCKED code 関与ゆえ)。
+**帰結 (C 採択):** `_run_mujoco_grasp_route` (locked) は**不触の reference oracle** として残り、route ロジックを新 `route_executor` module へ faithful 抽出 = production engine。**両者の byte-repro regression (canonical 81-grid strict_v2 58/81 EXACT) が SSOT 束縛 = 先祖返り guard** ([[feedback-port-task-faithful-to-intent-not-deleted-impl]] + [[reference-test-newton-legacy-vs-production-route-namesake-functions]] namesake hazard 警戒)。抽出単位 = 2476L monolith を per-step target-computation (step_target) + phase-k state-bank driver (reset_to_phase) に分解。**byte-repro 判定 = cuda:0 canonical のみ** ([[project-canonical-route-device-fragile-cpu-vs-cuda]])。
 
-### D-2: ⑬ adversarial-numerator の VERDICT 実行 stage
-recorded-target-replay + C1-escape cell 供給 = route-executor。residual≠0 rollout の実行 = (a) route-executor で合成摂動 / (b) trainer で実 policy。**推奨 = enabler を route-executor で用意、VERDICT は trainer stage に defer** (実 policy が自然な非空 source)。
+### D-2: ⑬ VERDICT 実行 stage = ⭐**trainer 段で実 policy (Rs 決定 23:5x)**
+route-executor は **enabler のみ** (recorded-target-replay stub upgrade + C1-escape non-vacuous cell 供給)。residual≠0 rollout の VERDICT (env G6 == strict_v2) は **trainer 段の実 policy に defer** (実 policy = 自然な非空 source、合成摂動の representativeness risk 回避)。route-executor DoD からは ⑬-VERDICT を除外、⑬-enabler のみ owns。
 
 ## §7. gate chain plan (env-core precedent、各 ≤~800 行 L3)
-[DEFINE ✓ (本 doc)] → **D-1/D-2 Rs 決定** → build plan 起草 (%11) → [DESIGN-GATE] (`/reward-design` は route/predicate 不変ゆえ軽 / `/geometric-design` C2 scene / `/pre-check`) → %12 checkpoint → [VERIFY] 5体 → [RULE-CHECK] → build → smoke (byte-repro + ⑦ + ⑨b) → 層5 + 事後 debate → **C2-seating 動画 gate (Rs)** → node COMPLETE。
+[DEFINE ✓ (本 doc)] → **D-1=C / D-2=trainer ✓ (Rs 23:5x)** → node 作成 (§3.1) → build plan 起草 (%11 再 bind) → [DESIGN-GATE] (`/reward-design` は route/predicate 不変ゆえ軽 / `/geometric-design` C2 groove scene / `/pre-check`) → %12 checkpoint → [VERIFY] 5体 → [RULE-CHECK] → build (新 route_executor module + byte-repro regression) → smoke (byte-repro 58/81 + ⑦ + ⑨b) → 層5 + 事後 debate → **C2-seating 動画 gate (Rs)** → node COMPLETE。
 
 ## §8. risks / conservatism carries
 - **Rs-LOCKED file 関与** = 最大 risk (先祖返り class)。byte-repro regression = 一次 guard、D-1 が touch surface を決める。
