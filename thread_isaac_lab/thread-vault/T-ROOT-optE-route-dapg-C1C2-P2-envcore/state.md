@@ -4,7 +4,7 @@ node_name: "P2 whole-route env-core (RL env class 骨格)"
 goal: "spec v1.5 §4 に基づく whole-route C1→C2 RL env-core を build する — obs 60D (v1.5a) / action α-6D residual (非累積 Δ, DOF = (b′) phase-conditional structural projection v1.5b) / reward sparse-primary predicate (G1-G6 latched-monotonic) / termination (horizon 900 + terminates) / guards ((b′) span projection: dual-grip hard-project + 再把持窓 per-arm)。staged build chain の第 1 component (env-core → route-executor → oracle → OG → trainer)。"
 goal_verification: |
   env-core smoke DoD 8 項 PASS (spec v1.5 §4): ①throughput ≥9.7 実効 fps ②device parity (per-phase predicate-fire + 終端 verdict 一致, cuda:0-only pin は FAIL 分岐) ③cg-GPU whole-route screen (全 phase finite + nacon engage + no nefc overflow) ④horizon 実測 max-of-81 (P3 piggyback) ⑤Δ=const drift-zero (=0.0 EXACT) ⑥predicate unit-test @cuda:0 (6 phase 全 fire + no-re-fire + guards-quiet) ⑦handover-fidelity (route-executor 接続後、qpos/qvel L∞) ⑧corner-miss 分布 (P3 grid 供給済)。
-  現況 (2026-07-06 14:16): /pre-check 5走目 = **WARN (near-PASS)** — verifier 明言「spec line 67/68 close + NEW-G/H carry → PASS build-ready」。**NEW-A/B/C/D + ISSUE-5 全 CLOSED, design-CRITICAL・HIGH 残無**。残 = NEW-E が 100% でない = **spec 残 2 line** (§運用28 確認: line 67 reward の旧 terminate 括弧が line 69 と矛盾 / line 68 success の「span-guard 全 phase」= line 75 警告の deadlock-echo) = **%12 2-min reconcile 要請** (当方 build plan は §運用28 で clean 確認)。**NEW-G (window boundary = release-COMPLETE, contact fail-safe 延長 = NEW-A 整合) + NEW-H (evidence-gated obs-regime carry) = 当方 fold DONE (§11)**。次 = %12 spec 67/68 close → 当方 on-disk 照合 → conditional-PASS 充足 → 正式 checkpoint (下書き済) → 5体 [VERIFY]。full 6走目 不要 (verifier が 2-line close pre-clear)。code 未着手 (0-commit, locked runner 不触)。
+  現況 (2026-07-06 14:21): ✅ **[DESIGN-GATE] = PASS**。%12 spec v1.5e (5a01164793) が line 67/68 を correctly reconcile (§運用28 on-disk 照合済: line 67 terminate=informative, line 68 span-guard=dual-grip scope, grep clean) → verifier conditional-PASS 3 条件 [67 close + 68 close + NEW-G/H carry] **全充足**。/reward-design PASS + /pre-check PASS (5走目収束; design-CRITICAL・HIGH 残無; 全 disposition CLOSED = 10-issue + N1-N6 + ISSUE-1〜8 + NEW-A〜H)。**正式 %12 checkpoint 提出済 (code-前, design summary + grounding + 5体精査点)**。次 = %12 checkpoint 承認 → 5体 [VERIFY] → [RULE-CHECK] → [CHANGE] build。code 未着手 (0-commit, locked runner 不触)。
 status: IN_PROGRESS
 parent_node: T-ROOT-optE-route-dapg-C1C2
 children_nodes: []
@@ -14,7 +14,7 @@ dependencies:
     - "P2 spec v1.5 + artifacts v1.3 + packet v1.1 = Rs W0-a′ 一括承認 (state.md b7d7857dfc, 2026-07-06 10:1x)"
   blocker: []
 created: 2026-07-06T10:35:32+09:00
-last_updated: 2026-07-06T14:16:00+09:00
+last_updated: 2026-07-06T14:21:00+09:00
 spec_version: LTM-1 v1.1
 session_history:
   - "2026-07-06 10:27 lead %12 (RS-TECH-LEAD, w2:p4): P2 env-core build charter (Rs W0-a′ packet v1.1 一括承認 b7d7857dfc, staged charter 授権) → %11 (COORD, w2:p3) §運用4 grounding (spec v1.5 118L + packet v1.1 98L) + [TASK]/[L-TRIAGE]=L3 HIGH → %12 APPROVE (10:33, 子 node 作成承認 = Rs packet §8-3 + [DEFINE]) → %11 本 state.md 作成 (1:1 binding = %11 session) → build 計画 起草へ。p6 に direct ping (parent children_nodes + manifest 反映)。"
@@ -23,6 +23,7 @@ session_history:
   - "2026-07-06 13:42-13:43 %12 design-level disposition (spec v1.5c da9d94b849, Rs ask 不要): ISSUE-2 pushforward-log-prob (当方推奨採用) / ISSUE-5 [16:19] semantics pin = 新 obs なし + conditioning DoD⑪ (evidence-gated +3D fallback) / ISSUE-8b asymmetric transit 採用 / ISSUE-1 spec:75 grip-schedule 窓訂正。全 fold DONE (§9)。GO → /pre-check 4走目 (全込) 実行。"
   - "2026-07-06 13:43-13:58 /pre-check 4走目 (fix 検証) = **WARN** (7 disposition RESOLVED, design-CRIT 残無; 2 HIGH: NEW-A ISSUE-1 gate ∧both-contact fail-OPEN → gate=grip-schedule ALONE fold + spec amendment① 訂正要 / NEW-E spec §4 body stale [line 75 window/69 termination/74 DoD] = %12 reconcile 要; 3 MED NEW-B entropy / NEW-C flag=operator / NEW-D arm-role + ISSUE-5 FP32→normalization reframe)。当方 fold DONE (§10)。%12 に spec 2 点要請 → 5走目 → checkpoint。"
   - "2026-07-06 14:05-14:16 %12 spec v1.5d (bfeedea7d8, gate schedule-ALONE + §4 line 69/74/75 reconcile) → /pre-check 5走目 = **WARN (near-PASS)**: NEW-A/B/C/D/ISSUE-5 全 CLOSED, design-CRIT・HIGH 残無。WARN driver = NEW-E 残 2 spec line (67 reward terminate 括弧 / 68 success 全-phase deadlock-echo, §運用28 確認 spec 側のみ) + NEW-G(window=release-COMPLETE fold)/NEW-H(evidence-gated carry)。verifier: line 67/68 close + NEW-G/H carry → PASS build-ready。%12 に 67/68 要請 → on-disk 照合 → checkpoint。"
+  - "2026-07-06 14:20-14:21 %12 spec v1.5e (5a01164793) line 67/68 correct reconcile (§運用28 on-disk clean 照合) → verifier conditional-PASS 3 条件 全充足 → ✅ **[DESIGN-GATE] = PASS** (/reward-design + /pre-check, 5走目収束, 全 disposition CLOSED, design-CRIT・HIGH 残無)。正式 %12 checkpoint 提出 (code-前, design summary + grounding v1.5e + 5体精査点)。次 = %12 承認 → 5体 [VERIFY]。"
 ---
 
 # P2 whole-route env-core (T-ROOT-optE-route-dapg-C1C2-P2-envcore) — IN_PROGRESS
