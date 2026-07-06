@@ -80,7 +80,7 @@ Byte-identity obstacles (debate-verified):
 |---|---|---|
 | `primitive` | the verb | `ik_move_both` (`:1929`) \| `cage_close` (`:4017-4034`) \| `settle` \| `grip`/`unclamp` \| `pin` (clip-retention only, §4.3) |
 | `target_l/r` **+ `target_source`** | constant vs derived, per arm | `constant` (`x_grasp=GRASP_X:3644`) \| `cable-derived` (caveat-a Y `:3946`, fix-⑤ X `:3970-3978`, argmin) \| `clip-derived` |
-| `orientation` (per-arm) | square-on vs tilt-follow | `_ROT["L"/"R"]` (`:4718-4719`) |
+| `orientation` (per-arm) | square-on vs tilt-follow. **⚠ C2_REGRASP-arm `inv_binding` = square-on (`C2_TILT_SIGN=0`), Rs-LOCKED** (Rs Q5 2026-07-06 `b7d7857dfc`): tilt-follow is floating-cable-specific & does NOT transfer to the taut C1→C2 route (tilt → "R misses 0N"); a teaching that sets the C2_REGRASP arm to tilt-follow → `BLOCKED_FOR_USER` | `_ROT["L"/"R"]` (`:4718-4719`); **C2_REGRASP lock = `:4678-4681` ANTI-REVERT (`C2_TILT_SIGN` default 0)** |
 | `gripper_l/r` | per-arm finger cmd | `GRIPPER_DRIVER_OPEN/CLOSE_RAD` (`task_config.py:289,291`) |
 | `gate` | success/advance condition | reach window / `_at_88` / seat-verified pin |
 | **`emits_legs`** (NEW, debate finding 3) | the row's DECLARED leg-label list + count | binds the 1:N primitive→leg mapping (§4.4) |

@@ -9,7 +9,7 @@ goal_verification: |
   次 = W0-b mini-test 再開 (fire-前 gate 完走、%11 build-prep 中) ∥ W0-c P2 design-gate 審議 (%12 起草・%9 cross-PV READY)。D-C un-park・§4.3 閾値・OG band = Rs-PENDING。
 status: IN_PROGRESS
 parent_node: T-L1C-PerSkill-RL
-children_nodes: []
+children_nodes: [T-ROOT-optE-route-dapg-C1C2-P2-envcore]
 dependencies:
   precedent:
     - "C1→C2 re-grasp WORKING (LEDGER row43, Rs-confirmed 2026-07-01, COMMITTED bcb7393ec8)"
