@@ -104,3 +104,81 @@ def compute_c2_regrasp_target(cbq: np.ndarray, c2y: float) -> tuple[tuple[float,
     bow_x, bow_z = float(cbq[k_r, 0]), float(cbq[k_r, 2])  # (a2) FOLLOW actual cable X (bow) + Z, NOT fixed c2x
     picked_dy_mm = float(cbq[k_r, 1] - r_ty) * 1e3  # G9: how far the picked body's Y is from the lane
     return (bow_x, r_ty, bow_z), k_r, picked_dy_mm
+
+
+# =============================================================================
+# §13.1 (F10 / G1) -- AR-reuse arm-only write-site machinery (3 patterns).
+# Every kinematic joint_q/joint_qd write during the dynamic-gripper window MUST route
+# through one of these, so the gripper coords ``_GRIPPER_COORDS_LOCAL`` are left to the
+# POSITION servo (never re-pinned). The index arrays (``arm_ow_q_idx`` etc.) are built
+# once per world in ``RouteExecutor.__init__`` from ``_ARM_OVERWRITE_LOCAL`` and the
+# per-world coord starts (cable FREE root => q-start != qd-start for world>=1).
+# Verbatim reuse of newton_aerial_regrasp_mujoco_env.py:472-489 / :1575-1576, EXCEPT the
+# AR LEFT-arm freeze (AR:1570, aerial-hold-only) is NOT reused -- route is dual-arm (§13.2 G3).
+# =============================================================================
+def apply_arm_only_write_broadcast(phys_jq, phys_jqd, fk_jq_1world, arm_ow_q_idx, arm_ow_qd_idx, arm_ow_src):
+    """Broadcast ONE FK arm pose to all worlds, excluding gripper coords (§13.1 :387; AR:472-478).
+
+    Used by the setup/hold path (``_broadcast_arm_jointq``): a single-world ``fk_jq`` is
+    written to every world's arm coords via ``arm_ow_src`` (= ``_ARM_OVERWRITE_LOCAL`` tiled
+    per world). The gripper coords ``_GRIPPER_COORDS_LOCAL`` are never indexed, so the servo
+    keeps driving them. ``phys_jq``/``phys_jqd`` are host copies (``.numpy()``); the caller
+    ``.assign()``s them back.
+
+    Args:
+        phys_jq: Physics joint positions [m or rad], shape ``[total_q]``, mutated in place.
+        phys_jqd: Physics joint velocities [m/s or rad/s], shape ``[total_qd]``, mutated in place.
+        fk_jq_1world: One world's FK arm joint positions [m or rad], shape ``[_N_ARM_JOINTS]``.
+        arm_ow_q_idx: Destination q indices for arm coords across all worlds, int array.
+        arm_ow_qd_idx: Destination qd indices for arm coords across all worlds, int array.
+        arm_ow_src: Source indices into ``fk_jq_1world`` (``_ARM_OVERWRITE_LOCAL`` tiled), int array.
+
+    Returns:
+        The mutated ``(phys_jq, phys_jqd)`` tuple.
+    """
+    phys_jq[arm_ow_q_idx] = fk_jq_1world[arm_ow_src]
+    phys_jqd[arm_ow_qd_idx] = 0.0
+    return phys_jq, phys_jqd
+
+
+def apply_arm_only_write_perworld(phys_jq, phys_jqd, jq_interp, arm_ow_q_idx, arm_ow_qd_idx):
+    """Write per-world arm targets, excluding gripper coords (§13.1 :738 RL-drive; AR:1575-1576).
+
+    Used by the per-step drive path (``_apply_actions_batch``): ``jq_interp`` holds a distinct
+    arm pose per world, so the arm coords are taken as ``jq_interp[:, _ARM_OVERWRITE_LOCAL]``
+    (world-major, aligned with ``arm_ow_q_idx``). The gripper coords are never indexed. NO
+    LEFT-arm freeze (route is dual-arm, both arms IK-tracked; §13.2 G3).
+
+    Args:
+        phys_jq: Physics joint positions [m or rad], shape ``[total_q]``, mutated in place.
+        phys_jqd: Physics joint velocities [m/s or rad/s], shape ``[total_qd]``, mutated in place.
+        jq_interp: Per-world interpolated arm targets [m or rad], shape ``[n_world, _N_ARM_JOINTS]``.
+        arm_ow_q_idx: Destination q indices for arm coords across all worlds, int array.
+        arm_ow_qd_idx: Destination qd indices for arm coords across all worlds, int array.
+
+    Returns:
+        The mutated ``(phys_jq, phys_jqd)`` tuple.
+    """
+    phys_jq[arm_ow_q_idx] = jq_interp[:, _ARM_OVERWRITE_LOCAL].reshape(-1)
+    phys_jqd[arm_ow_qd_idx] = 0.0
+    return phys_jq, phys_jqd
+
+
+def set_gripper_target(joint_target_pos, dofs, target_rad):
+    """Schedule the gripper POSITION-servo target on ``dofs`` (§13.1 grip cadence; AR:480-489).
+
+    ``dofs`` are qd-indexed driver DOFs (per-world ``_arm_qd_start[w] + [6,10,20,24]``). The
+    array is read by SolverMuJoCo each step, so a runtime change takes effect. This is the
+    SOLE writer of ``joint_target_pos`` for the gripper (§13.6 G12 single-writer).
+
+    Args:
+        joint_target_pos: Servo target array [rad], mutated in place.
+        dofs: Driver DOF indices to set, iterable of int.
+        target_rad: The commanded driver target [rad].
+
+    Returns:
+        The mutated ``joint_target_pos``.
+    """
+    for d in dofs:
+        joint_target_pos[d] = float(target_rad)
+    return joint_target_pos
