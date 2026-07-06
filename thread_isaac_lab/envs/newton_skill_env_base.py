@@ -136,10 +136,7 @@ class S1BFrankaFingerAdapterSpec:
 
 
 S1B_FRANKA_FINGER_ADAPTER_SPEC = S1BFrankaFingerAdapterSpec(
-    urdf_rel_path=(
-        "source/extensions/isaaclab_tasks_thread/data/robots/"
-        "panda_independent_fingers.urdf"
-    ),
+    urdf_rel_path=("source/extensions/isaaclab_tasks_thread/data/robots/panda_independent_fingers.urdf"),
     official_usd_name="panda_instanceable.usd",
     hand_link_name="panda_hand",
     finger_joint_names=("panda_finger_joint1", "panda_finger_joint2"),
@@ -325,9 +322,7 @@ def validate_s1b_franka_finger_adapter_spec(
         and spec.official_damping_n_s_per_m == 100.0
     )
     result["a2_runtime_matches_official_baseline"] = bool(runtime_semantics_pass)
-    result["twenty_n_source_fact_and_200n_runtime_semantics_lockstep"] = bool(
-        all_pass and runtime_semantics_pass
-    )
+    result["twenty_n_source_fact_and_200n_runtime_semantics_lockstep"] = bool(all_pass and runtime_semantics_pass)
     result["unit_d_label_handoff_ready"] = bool(all_pass)
     result["status"] = "PASS" if all_pass and runtime_semantics_pass else "FAIL_FINGER_MAPPING"
     return result
@@ -375,9 +370,11 @@ def validate_s1b_franka_finger_a2_command_path_spec(
         and "cuda1_requested" in spec.fail_closed_conditions
         and "spring_follow_or_kinematic_pin_counted_as_success" in spec.fail_closed_conditions
     )
-    status = "PASS" if all(
-        (dual_hand_scope_pass, runtime_lockstep_pass, default_off_pass, command_surface_pass)
-    ) else "FAIL_A2_COMMAND_PATH_SPEC"
+    status = (
+        "PASS"
+        if all((dual_hand_scope_pass, runtime_lockstep_pass, default_off_pass, command_surface_pass))
+        else "FAIL_A2_COMMAND_PATH_SPEC"
+    )
     return {
         "status": status,
         "source_apply_ready": False,
@@ -492,15 +489,9 @@ def resolve_s1b_axis1_diagnostic_baseline_contact_values() -> dict[str, object]:
         "shape_config_default_kd": float(shape_cfg.kd),
         "shape_config_default_mu": float(shape_cfg.mu),
     }
-    values["effective_vbd_ke"] = 0.5 * (
-        values["soft_contact_ke"] + values["shape_material_ke"]
-    )
-    values["effective_vbd_kd"] = 0.5 * (
-        values["soft_contact_kd"] + values["shape_material_kd"]
-    )
-    values["effective_vbd_mu"] = math.sqrt(
-        values["soft_contact_mu"] * values["shape_material_mu"]
-    )
+    values["effective_vbd_ke"] = 0.5 * (values["soft_contact_ke"] + values["shape_material_ke"])
+    values["effective_vbd_kd"] = 0.5 * (values["soft_contact_kd"] + values["shape_material_kd"])
+    values["effective_vbd_mu"] = math.sqrt(values["soft_contact_mu"] * values["shape_material_mu"])
     expected = {
         "soft_contact_ke": spec.soft_contact_ke,
         "soft_contact_kd": spec.soft_contact_kd,
@@ -721,6 +712,7 @@ def add_s1b_axis1_faithful_finger_prismatic_joint(
         actuator_mode=newton.JointTargetMode.POSITION_VELOCITY,
         label=label,
     )
+
 
 # IK rotation targets: hand down, fingers perpendicular to cable Y-axis.
 # Newton IK wp.vec4 uses (x, y, z, w) convention — same as wp.quat.
@@ -1039,7 +1031,9 @@ def restore_world_body_state(
         prev[start:end] = settled_body_q[start:end]
 
 
-def derive_cable_joint_q_from_tangents(body_q_np: np.ndarray, cable_bodies: list[int]) -> tuple[list[float], list[float]]:
+def derive_cable_joint_q_from_tangents(
+    body_q_np: np.ndarray, cable_bodies: list[int]
+) -> tuple[list[float], list[float]]:
     """Derive the rigid-link cable joint coordinates from segment poses (S4b reset-path, C-1 PRIMARY).
 
     The settled cable's ``state.joint_q`` is reconstructed from the live ``body_q`` alone — NO
@@ -1073,8 +1067,15 @@ def derive_cable_joint_q_from_tangents(body_q_np: np.ndarray, cable_bodies: list
     return root7, seg_angles
 
 
-def seed_cable_joint_state(state, model, cable_joints: list[int], root7: list[float],
-                           seg_angles: list[float], *, dr_xy: tuple[float, float] = (0.0, 0.0)) -> None:
+def seed_cable_joint_state(
+    state,
+    model,
+    cable_joints: list[int],
+    root7: list[float],
+    seg_angles: list[float],
+    *,
+    dr_xy: tuple[float, float] = (0.0, 0.0),
+) -> None:
     """Seed ``state.joint_q``/``joint_qd`` for the rigid-link cable at reset (S4b, mujoco path).
 
     Writes the FREE-root 7 coords — with the cable-XY-DR offset ``dr_xy`` added to the root x/y
@@ -1091,11 +1092,11 @@ def seed_cable_joint_state(state, model, cable_joints: list[int], root7: list[fl
     qd0 = int(jqds[free_jid])
     jq = state.joint_q.numpy()
     jqd = state.joint_qd.numpy()
-    jq[q0:q0 + 7] = root7
+    jq[q0 : q0 + 7] = root7
     jq[q0] += dr_xy[0]
     jq[q0 + 1] += dr_xy[1]
-    jq[q0 + 7:q0 + 7 + len(seg_angles)] = seg_angles
-    jqd[qd0:qd0 + 6 + len(seg_angles)] = 0.0
+    jq[q0 + 7 : q0 + 7 + len(seg_angles)] = seg_angles
+    jqd[qd0 : qd0 + 6 + len(seg_angles)] = 0.0
     state.joint_q.assign(jq)
     state.joint_qd.assign(jqd)
     newton.eval_fk(model, state.joint_q, state.joint_qd, state)
@@ -1850,7 +1851,8 @@ def build_multiworld_scene(
         expected = 2 * JOINTS_PER_ARM + len(cable_joints_proto)
         for w in range(world_count):
             assert jws[w + 1] - jws[w] == expected, (
-                f"mujoco joint layout drift (world {w}): {jws[w + 1] - jws[w]} != {expected}")
+                f"mujoco joint layout drift (world {w}): {jws[w + 1] - jws[w]} != {expected}"
+            )
 
     # Zero inv_mass for robot bodies (kinematic) -- VBD ONLY. The MuJoCo articulated arm keeps its
     # REAL masses: zeroing => infinite mass + inertia => degenerate joint-space M(q); the STEP-1 probe
