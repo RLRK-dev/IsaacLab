@@ -40,7 +40,7 @@
 ## 6. route interface stub 契約 v1 (#2 詳細, route-executor charter で確定)
 ```
 # env-core が期待する route-executor API (stub 実装, v1):
-route.reset_to_phase(k: int | Tensor) -> None  # ⭐contract v1.1 (item⑨,%12 05:38): k widened scalar(all-world) OR per-world tensor; default all-worlds-phase-0 = 現 reset_to_phase(0) byte-neutral。state-bank fork: world を phase k の precomputed state に設定 (spec §2-F2 (b))
+route.reset_to_phase(k: int) -> None          # ⭐contract v1 SCALAR 維持 (item⑨ widening REVERTED, 5体 round3 F14+F15, %12 07:23 / Rs option A): per-world state 復元 = 内部 (scalar k, per-world slice); per-world k ARGUMENT + curriculum done-path = trainer D-2 defer。state-bank fork: world を phase k の precomputed state に設定 (spec §2-F2 (b))
 route.step_target(t) -> (target_6d,      # per-step base 絶対 target (6D abs, fork-(iv), 非累積の base)
                          phase_id,        # 現 phase (G1-G6 clock, base-owned)
                          grip_cmd)        # scripted 2-phase servo close/open predicate (action に gripper 次元なし)
@@ -48,7 +48,7 @@ route.step_target(t) -> (target_6d,      # per-step base 絶対 target (6D abs, 
 # stub 段階: route は fixed nominal target を返す (env-core skeleton smoke 用) → route-executor 接続で実 route
 ```
 
-**⭐contract v1→v1.1 bump (route-executor item⑨、%12 05:38 route-executor v1.6 checkpoint ACCEPT、§運用4 confirmed-decision reflect):** `reset_to_phase` の k 署名を **backward-compatible に widen** (scalar=all-world broadcast [現挙動] OR per-world tensor)。env-core `newton_route_env.py:1120` `reset_to_phase(0)` は **byte-neutral** (all-worlds-phase-0 default = 現挙動と等価、caller 非破壊)。per-world 能力は route-executor が enabler wiring として供給 (curriculum start-mix VALUES は D-2/trainer 段)。env-core COMPLETE 保全 = route-executor B⑨a′ regression が flag-off/stub path で env-core ⑨a′ 25/81 + ⑩ + ⑪ EXACT 再現を gate item 化 (built-model geom + numeric)。詳細 = route-executor build plan §10.2-item⑨ / §5。
+**⭐contract v1→v1.1 bump = REVERTED、v1 SCALAR 維持 (route-executor 5体 round3 F14+F15、%12 rulings 07:23 / Rs option A、§運用4 confirmed-decision reflect):** `reset_to_phase(k: int)` は **SCALAR 維持** (旧 v1→v1.1 widening は撤回)。理由: k:int|Tensor widening = COMPLETE env-core の**公開API境界変更 (§0 L3)** ゆえ、per-world 能力を **trainer node D-2** (per-world curriculum start-mix が実際必要な場所) へ defer し、本 node では contract 不変とする。per-world state 復元は scalar k + per-world state slice で内部処理。∴ 本 node で公開API境界変更なし (CC4 F15 governance 懸念 dissolve)。B⑨a′ は **flag-flip byte-identity guard** として維持 (contract-change guard 部分は不要化)。詳細 = route-executor build plan §12.2。
 
 ## 7. post-BLOCK disposition (/pre-check BLOCK 10-issue, %12 判断 11:10 反映)
 ### design-level (Rs premise)
