@@ -110,7 +110,7 @@
 | **B④ ⑥ full-fire live** | env-core + dynamic gripper servo (実 grip) → G2-G6 live fire。bar=実測 |
 | **B⑥ C2-seating 動画 gate** | 実 C2 groove scene で C2 着座 §運用14 CC frame-check + video-analyst + Rs verdict (Rs 約束済) |
 | **B⑦ CABLE_XY_OFFSET wiring** | 実 route が per-cell offset 消費 (DR/⑨b 前提) |
-| **B⑨a′ env-core 非回帰 (v1.4, 5体 CC5-CH1, ⭐Rs=A)** | 3 箇所 cross-node 編集 (servo/C2-clip/route-swap) 全 default-off での **legacy-config {C1-only + stub + servo-off + C2-off} が env-core ⑨a′ per-cell EXACT 25/81 を byte-identical 再現** = COMPLETE 保全 (servo だけでなく 3 箇所全 default-off を検証; env 25/81==offline==ceiling の frozen 値)。**flag-on の C2-scene run は「Layer-B re-BASELINE (new predicate, non-conservative)」**(「⑨a′ preserved」呼称禁止 = partial-truth 回避) |
+| **B⑨a′ env-core 非回帰 (v1.4, 5体 CC5-CH1, ⭐Rs=A)** | 3 箇所 cross-node 編集 (servo/C2-clip/route-swap) 全 default-off での **legacy-config {C1-only + stub + servo-off + C2-off} が env-core ⑨a′ per-cell EXACT 25/81 を byte-identical 再現** = COMPLETE 保全 (servo だけでなく 3 箇所全 default-off を検証; env 25/81==offline==ceiling の frozen 値)。**flag-on の C2-scene run は「Layer-B re-BASELINE (new predicate, non-conservative)」**(「⑨a′ preserved」呼称禁止 = partial-truth 回避)。**⭐v1.6 item⑨ 要件2 追加 (%12 05:38): B⑨a′ scope に「reset_to_phase contract 変更 (widened `k: int\|torch.Tensor` 署名 + all-zeros default)」を明示追加 → flag-off/stub path で env-core ⑨a′ 25/81 + ⑩ + ⑪ が COMPLETE を EXACT 再現を gate item 化 (built-model geom + numeric 両方) = contract 変更が env-core COMPLETE を regress しない HARD guard** |
 
 **分子完全性 (§運用29):** 分子 conjoin = **strict_v2 (C1-retention leg ∧ C2-seat leg 両方)**。cover しない leg = **trainer 段 policy 学習成果** (本 node scope 外、明示)。SR claim を route-executor で出さない (SOMA:717、over-claim 禁止)。
 
@@ -148,7 +148,7 @@ env-core `NominalRouteStub`:178 が実装する契約を `RouteExecutor` が実�
 
 ```
 class RouteExecutor(rc.RouteInterfaceV1):
-    reset_to_phase(k) -> None
+    reset_to_phase(k: int | torch.Tensor) -> None   # ⭐v1.6 item⑨ (%12 05:38 要件1): widened 署名 = scalar(all-world broadcast) OR per-world tensor; default all-worlds-phase-0 = 現 reset_to_phase(0) byte-neutral (env-core :1120 caller 非破壊、scalar 拒否せず)
         # 実 state-bank: phase k = 6 coarse G (%12 CONCUR 00:32: reset_to_phase(k) の k = coarse G semantics; spec:29 curriculum start-mix {P0,G1..G5-eps} 消費者に一致、15-fine は消費者無=YAGNI) の precomputed qpos/qvel を復元
         # env-core :1120 は no-op stub → 実配線。⑦ handover-fidelity (L∞≤1mm/1mm·s⁻¹) の source
     step_target(t) -> (target_6d, phase_id, grip_2, is_dual)
@@ -254,7 +254,7 @@ class RouteExecutor(rc.RouteInterfaceV1):
 | ⑥ | reset_to_phase は reset(k=0) のみ呼、auto-reset done-path (:1135-1136) が phase-k 未呼 → curriculum start-mix が training loop で dead | auto-reset done-path にも per-world phase-k 配線 (reset_to_phase を done-path 経由でも呼、per-world k carry)。⚠ curriculum 前提は D-2=trainer 段ゆえ本 node は **enabler wiring のみ (⑬)** |
 | ⑦ | servo grip-command (`control.joint_target_pos` drivers) が reset されず cross-episode leak | reset_to_phase で drivers [6,10,20,24] を `GRIPPER_DRIVER_OPEN_RAD` に reset (§5 復元 list 追加)。⚠ flag-flip 後 leak 対象 = actuator target のみ |
 | ⑧ | monkeypatch (:5214 install / :5343 restore) に exception-safe restore 無 → long-lived module で state leak | **try/finally で restore 保証** (route_executor globals に対して、§2 IK-stack manifest) |
-| ⑨ | reset_to_phase 署名 scalar→per-world = `RouteInterfaceV1` contract 変更 (stub も touch) | §5 stub 契約 v1 に per-world k 署名反映 (env-core stub interface 更新)。⚠ env-core interface 変更ゆえ **%12 checkpoint 対象** |
+| ⑨ | reset_to_phase 署名 scalar→per-world = `RouteInterfaceV1` contract 変更 (stub も touch) | **✅ %12 checkpoint 05:38 ACCEPT + 3 要件** (blast radius = env-core `newton_route_env.py:1120` reset_to_phase(0) の 1 caller + no-op stub のみ = contained): **要件1 (backward-compat 署名)** = `reset_to_phase(k)` を widen `k: int \| torch.Tensor` (scalar=all-world broadcast OR per-world tensor 受理、scalar 拒否せず = env-core reset() path 非破壊、`route_env_config.py:158`) / **要件2 (byte-identical default guard, HARD 非交渉)** = enabler wiring (:1120/:1135 per-world k) は **all-worlds-phase-0 = 現 reset_to_phase(0) 挙動に default**、B⑨a′ regression scope に「contract 変更 (widened 署名 + all-zeros default)」を明示追加し env-core ⑨a′ 25/81 + ⑩ + ⑪ (flag-off/stub path) EXACT 再現を **gate item 化** (built-model geom + numeric 両方) / **要件3 (curriculum defer)** = 本 node は enabler wiring のみ (per-world 能力 + all-zeros default)、start-mix VALUES 供給 = D-2/trainer (item⑥ 整合)。**note: contract v1→v1.1 minor bump を env-core build plan §6 stub 契約 note に記録** (§運用4 confirmed-decision reflect、backward-compat) |
 | ⑩ | C2-clip blast-radius は grep でなく built-model assert 要 | B⑨a′/MED9 の C2-clip default-off byte-unchanged 検証を **built-model geom introspection assert** (mjModel geom count/pos) に格上げ (grep は補助) |
 
 ### §10.3 build sequencing — Layer A front-load (%12 05:23 推奨)
