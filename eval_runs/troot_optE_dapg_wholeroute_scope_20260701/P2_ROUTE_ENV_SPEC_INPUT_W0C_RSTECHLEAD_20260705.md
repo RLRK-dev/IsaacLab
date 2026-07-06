@@ -119,3 +119,5 @@ base perfect-state targeting = 実機非保守 / retention row56 NEEDS-DUAL = FU
 
 ---
 **AMENDMENT (v1.5a, 2026-07-06 11:2x, Rs「推奨で」):** obs v2.1 contract = **60D** に改訂 — 57D + `[57]` near-clip crossing-x deviation (H-drape 変数) + `[58:60]` axis-resolved seat (z-gap / lateral)。既存 [0:57) index 無傷。根拠 = env-core pre-check C1 (corner 定義変数の obs 不在、[0:42] 全数列挙で確定) + §運用21。explosion velocity dim = 不追加 (Q11① justified-absent 既決)。decision-of-record = node state.md 11:2x。
+
+**AMENDMENT (v1.5b, 2026-07-06 11:4x, Rs「推奨で」):** guards の「common-mode scaling が span を保つ」(§4) は 6D per-arm action に対し論理的に不成立 (env-core pre-check N1 CRITICAL) → **(b′) phase-conditional structural projection に置換**: dual-grip phase = Δ を common-mode 部分空間へ hard-project (INV#2 span = 構造 enforcement) / 非 dual-grip 再把持窓 = per-arm 許容 (span 非 invariant 区間) + differential-drift regression = DoD。α-6D 契約不変。decision-of-record = node state.md 11:4x。
