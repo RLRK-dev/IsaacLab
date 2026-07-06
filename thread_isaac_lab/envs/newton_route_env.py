@@ -1,0 +1,1143 @@
+# Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+"""env7 whole-route env-core -- C1->C2 DAPG (Newton 1.2.1 SolverMuJoCo, UR5ex2 + Robotiq koshape).
+
+STAGED COMPONENT 1 of 5 (env-core -> route-executor -> oracle -> OG -> trainer). This module owns the
+observation/action/reward/termination MDP surface for the whole-route policy. The phase clock and the
+per-step ABSOLUTE base target are owned by the route-executor (``_run_mujoco_grasp_route``, a locked-
+runner monolith) -- the env-core receives them through :class:`route_env_config.RouteInterfaceV1`,
+which is a STUB here (fixed nominal target) and wires to the real route-executor at the next stage.
+
+Substrate REUSE (not a copy of ApproachCable logic): the scene (UR5e+Robotiq koshape arms + cable +
+SolverMuJoCo + cable contacts), per-arm ``IKSolver``, ``broadcast``-style joint_q kinematic re-pose
+driving, and the reset/settle/P0 scaffolding are reused from ``newton_skill_env_base`` /
+``newton_approach_cable_mujoco_env`` (the same active-mujoco patterns). The obs [0:42] base block is
+mirrored; the route-specific parts (obs [42:62], the alpha-6D residual + (b') projection, and the
+G1-G6 latched reward) are new.
+
+Obs (62D, per world) -- index map is the SSOT in :mod:`route_env_config` (``OBS_*``):
+    [0:42]  base proprio (mirror of newton_approach_cable_mujoco_env [0:42]).
+            [16:19] REDEFINED = lane-matched regrasp target (CC2-CH5), NOT argmin find_nearest.
+    [42:48] phase one-hot(6, base-scripted phase_id)     [48]    held cable z [m]
+    [49]    seated-seg distance [m] (phase-active clip)   [50]    within-phase progress [0,1]
+    [51:53] next-clip xy [m]                              [53:55] per-arm contact flag (R,L) telemetry
+    [55:57] per-arm IK residual [m] (R,L)                 [57]    crossing-x deviation [m]
+    [58:60] axis-resolved seat ([58] z-gap [m], [59] lateral [m])
+    [60:62] C1-retention ([60] z_c1 [m], [61] flank-max [m]) -- c1_retained_final live inputs (v1.5g)
+
+Action (6D, per world): alpha-6D = 2x3D position-only residual, NON-accumulating.
+    [0:3] R EE residual XYZ [m], [3:6] L EE residual XYZ [m]. Delta = per-step OFFSET added to the
+    route base ABSOLUTE target (NOT integrated). (b') phase-conditional projection: dual-grip window
+    (base grip-schedule ALONE) -> hard-project to the common-mode subspace ((d_R,d_L)->(m,m), m=mean)
+    so the span differential is 0 by construction; non-dual-grip transit -> asymmetric per-arm
+    (reaching arm full, gripping arm sigma-capped). The as-executed residual + projection mode are
+    exposed in ``extras["info"]`` (CC4-CH1/NEW-C, trainer pushforward -- boolean is not sufficient).
+
+Reward: sparse-primary G1-G6, latched-monotonic / fire-once / never-revoked / ORDERED (G_k fires only
+    if G_{k-1} latched). +5 each G1-G5, +200 G6, -0.01/step, -10 terminate. G6 SUCCESS = strict_v2
+    full mirror: c2_seated_honest (groove+settle, NOT raw d<3mm) sustained K_ROUTE_SEAT and
+    c1_retained_final (z_c1<0.840 and flank<0.840 [m], obs [60]/[61]) and not dropped and span-guard.
+
+Termination: horizon 900 + explosion (physics-fault invalid, PPO-mask flag) + drop (-10). span-violation
+    and reach-fail are INFORMATIVE-ONLY (never terminate). ``time_outs`` = timeout(900) ONLY
+    (prohibited.md value_loss-105x history; explosionandtimeout -> time_outs=False precedence).
+
+[!] KNOWN-GAPS / VALIDATION-STATUS (records-must-match-fact; do NOT over-claim) [!]
+- STAGED-COMPONENT-1 skeleton, ROUTE-VIA-STUB, CPU-SMOKE-ONLY intended. NO training / NO GPU here.
+- The route is a STUB (fixed nominal target): full whole-route physics (C1/C2 groove seating, the real
+  phase clock, per-step targets) connects at the route-executor stage. With the stub the G1-G6
+  predicates will not all fire -- the env-core provides the predicate MACHINERY, not a live route.
+- LOUD-CARRY (route-executor / trainer stages; build plan sec 2 / sec 12 CC5-3): DoD 7 handover-fidelity,
+  9b online-numerator, 12 projection-accounting, 13 adversarial-numerator, the invalid-episode PPO mask
+  wiring (stock RSL-RL has no mask field), the phase-conditioned sigma, and ``reset_to_phase`` state-
+  bank fork are DEFERRED-BUT-TRACKED. Producer-grade seat metrics (wall/spacer split, frozen seat-body
+  pin) are route-executor refinements; the env-core uses geometric cable-vs-clip proxies from cable
+  body positions (raw per-clip sim distance, NEW-5) and documents the proxy at each site.
+- Per-world contact obs [53:55] is a geometric PROXY (nearest-cable proximity and grip-schedule close);
+  the batched per-world claw<->cable normal-force contact is a route-executor extraction (sec 7 LOUD-CARRY).
+
+Usage:
+    source ~/env_isaaclab7/bin/activate
+    # SOLVER_BACKEND is forced to "mujoco" by this module (see import block below).
+"""
+
+import os
+import sys
+import time
+from collections import deque
+
+import newton
+import numpy as np
+import torch
+import warp as wp
+from newton.ik import IKObjectiveJointLimit, IKObjectivePosition, IKObjectiveRotation, IKSolver
+from newton.solvers import SolverMuJoCo
+from rsl_rl.env import VecEnv
+
+# --- sys.path: envs/, scripts/, configs/ (same precedent the active mujoco envs use) --------------
+_env_dir = os.path.dirname(os.path.abspath(__file__))
+if _env_dir not in sys.path:
+    sys.path.insert(0, _env_dir)
+_script_dir = os.path.join(_env_dir, "..", "scripts")
+if _script_dir not in sys.path:
+    sys.path.insert(0, _script_dir)
+_config_dir = os.path.join(_env_dir, "..", "configs")
+if _config_dir not in sys.path:
+    sys.path.insert(0, _config_dir)
+
+# [*][*] SOLVER-BACKEND FLIP -- MUST happen BEFORE newton_skill_env_base is imported (same as the active
+# mujoco envs). build_multiworld_scene + make_solver's frozen default bind SOLVER_BACKEND at base
+# import; setting it here first makes both consistent (mujoco arms + SolverMuJoCo + cable contacts).
+import task_config  # noqa: E402
+
+task_config.SOLVER_BACKEND = "mujoco"
+
+import newton_skill_env_base as _nseb  # noqa: E402
+import test_newton_clip_routing as _tncr  # noqa: E402  (DEVICE override, same as the active envs)
+
+_nseb.SOLVER_BACKEND = "mujoco"  # defensive: cover the case where base was already imported
+
+import route_env_config as rc  # noqa: E402  (obs map + new route params + route interface contract)
+from cable_orientation_utils import compute_hand_quat_for_cable  # noqa: E402
+from newton_skill_env_base import (  # noqa: E402
+    DT,
+    EE_BODY_OFFSET,
+    IK_ITERATIONS_RL,
+    IK_STEP_SIZE,
+    RL_SIM_DT,
+    RL_SIM_SUBSTEPS,
+    SIM_DT,
+    assign_world_states_to_sim,
+    build_fk_and_init,
+    build_multiworld_scene,
+    compute_ori_error_axis_angle,
+    derive_cable_joint_q_from_tangents,
+    find_nearest_cable_point,
+    normalize_quat_w_positive,
+    quat_rotate_vec,
+    reset_dahl_friction_for_envs,
+    restore_world_body_state,
+    seed_cable_joint_state,
+    temporal_quat_consistency,
+)
+from task_config import (  # noqa: E402
+    CABLE_RADIUS,
+    CLIP1_X,
+    CLIP1_Y,
+    CLIP_BASE_HEIGHT,
+    CLIP_POSITIONS,
+    EE_TO_PINCH_OPEN,
+    EE_Z_SAFETY_UPPER,
+    FINGER_OPEN_POS,
+    GRIP_HALF_SPAN,
+    GRIPPER_DRIVER_JOINT_IDX,
+    GROOVE_CENTER_Z,
+    JOINTS_PER_ARM,
+    MAX_MOVE_STEPS,
+    ROBOT_BODIES_PER_ARM,
+    SETTLE_STEPS,
+    SIM_SUBSTEPS,
+    T_GROOVE,
+    TABLE_HEIGHT,
+    WIDE_LEFT_Y,
+    WIDE_RIGHT_Y,
+)
+
+# Per-arm strides (UR5e+Robotiq collapse=True: bodies == joints == 14).
+_RIGHT_ARM_BODY_OFFSET = ROBOT_BODIES_PER_ARM  # 14
+_LEFT_EE_BODY = EE_BODY_OFFSET  # 5: UR5e wrist_3 (left arm)
+_RIGHT_EE_BODY = _RIGHT_ARM_BODY_OFFSET + EE_BODY_OFFSET  # 19: UR5e wrist_3 (right arm)
+_N_ARM_JOINTS = 2 * JOINTS_PER_ARM  # 28: both arms' joint_q span within a world (cable joints follow)
+
+# koshape wrist-down IK rotation target (Rx(-90) xyzw) -- NOT Franka pi/8 (S5 horizontal-gripper bug).
+# alpha-6D is position-only, so this rotation target is HELD (no rot residual accumulation).
+KO_ROT_TARGET_XYZW = (-0.7071067811865476, 0.0, 0.0, 0.7071067811865476)
+KO_BASE_HAND_DOWN_QUAT = np.array([-0.7071067811865476, 0.0, 0.0, 0.7071067811865476], dtype=np.float32)
+
+# EE-Z action-clamp FLOOR (koshape): fingertip reaches the cable centerline at the floor.
+EE_Z_FLOOR_KO = TABLE_HEIGHT + CLIP_BASE_HEIGHT + CABLE_RADIUS + EE_TO_PINCH_OPEN  # ~= 1.06992
+_AC_IK_ITERATIONS_P0 = 400  # P0 dual-arm solve needs the generous local count (88mm span convergence).
+
+# C1 / C2 clip context (C1C2 whole-route scope).
+_C1_XY = np.array([CLIP_POSITIONS[0][0], CLIP_POSITIONS[0][1]], dtype=np.float32)  # (0.35, +0.150)
+_C2_XY = np.array([CLIP_POSITIONS[1][0], CLIP_POSITIONS[1][1]], dtype=np.float32)  # (0.40, +0.075)
+_GHS = float(GRIP_HALF_SPAN)  # 0.044: R lane = c2y + GHS (recount p9_recount_strict_v2.py:47)
+
+
+def clamp_pos_ko(ee_pos, ee_quat_xyzw):
+    """DC2: koshape OPEN fingertip/clamp point (wrist_3 local +Y == world -Z at the Rx(-90) pose).
+
+    Local koshape helper (per blast-radius; the shared ``compute_clamp_pos`` stays Franka-faithful).
+    """
+    offset_local = np.array([0.0, +EE_TO_PINCH_OPEN, 0.0], dtype=np.float32)
+    return ee_pos + quat_rotate_vec(ee_quat_xyzw, offset_local)
+
+
+class NominalRouteStub(rc.RouteInterfaceV1):
+    """STUB route-executor (env-core skeleton smoke). Returns a FIXED nominal target + a deterministic
+    placeholder phase clock so the env machinery is exercisable. The real per-step targets and phase
+    clock connect at the route-executor stage; this class only satisfies the v1 contract.
+
+    ``is_dual_grip_window`` is single-sourced HERE (CC5-2): the env must NOT re-derive a phase->window
+    table. A ``recorded_replay`` mode replays externally-supplied per-step targets for the whole-route
+    DoDs (3/6/10/9a/13); with no recording it degrades to the nominal schedule.
+    """
+
+    def __init__(self, target_r, target_l, horizon, mode=rc.ROUTE_MODE_NOMINAL, recorded_targets=None):
+        self._nominal_6d = np.concatenate([np.asarray(target_r, np.float32), np.asarray(target_l, np.float32)])
+        self._horizon = int(horizon)
+        self._mode = mode
+        self._recorded = np.asarray(recorded_targets, np.float32) if recorded_targets is not None else None
+        self._requested_phase = 0
+
+    def reset_to_phase(self, k):
+        # STUB: record only. Real = precomputed phase-k state-bank fork (route-executor, LOUD-CARRY).
+        self._requested_phase = int(k)
+
+    def _phase_at(self, t):
+        # Placeholder 6-phase clock (equal split of the horizon). Route-executor owns the real clock.
+        frac = min(max(t / max(self._horizon, 1), 0.0), 0.999999)
+        phase_id = int(frac * rc.N_ROUTE_PHASES)
+        within = (frac * rc.N_ROUTE_PHASES) - phase_id
+        return phase_id, float(within)
+
+    def _dual_and_grip(self, phase_id, within):
+        # Single-source (b') gate. Dual for G1-G3 (0,1,2) and G4(post re-cage)-G6 (4,5); the G4 regrasp
+        # transit (phase 3) is single-grip until the re-cage latches at within>=0.5 (CC3-CH2). Grip: R
+        # re-grasps (reaching=open) while L holds (gripping=close) during the transit; else both close.
+        if phase_id == 3 and within < 0.5:
+            return False, (0.0, 1.0)  # transit: R open (reaching), L close (gripping)
+        return True, (1.0, 1.0)  # dual-grip: both close
+
+    def step_target(self, t):
+        if self._mode == rc.ROUTE_MODE_RECORDED_REPLAY and self._recorded is not None:
+            idx = min(int(t), len(self._recorded) - 1)
+            target_6d = self._recorded[idx].astype(np.float32)
+        else:
+            target_6d = self._nominal_6d.copy()
+        phase_id, within = self._phase_at(t)
+        is_dual, grip_2 = self._dual_and_grip(phase_id, within)
+        return target_6d, phase_id, np.array(grip_2, dtype=np.float32), bool(is_dual)
+
+
+class NewtonRouteEnv(VecEnv):
+    """RSL-RL VecEnv: whole-route (C1->C2) env-core on the env7 mujoco-ko substrate (UR5ex2 + koshape).
+
+    N physical worlds -> N RL environments (one dual-arm agent per world, 6D position-only residual).
+    Arms are kinematically re-posed via IK -> joint_q (SC2b, the Newton mujoco substrate norm); the
+    cable + contacts are the dynamic part. Newton steps all worlds at once.
+    """
+
+    # --- Action: alpha-6D residual (position-only, NON-accumulating) ----------------------------------
+    POS_RESIDUAL_SCALE = 0.015  # [m] 15mm per-step residual (raw action in [-1,1] scaled to meters)
+    DELTA_BOUND_M = 0.020  # [m] env-core Delta-bound clamp per arm (CC3-CH1). TODO: derive from P3 corner-miss.
+    GRIPPING_ARM_SIGMA_CAP_M = 0.002  # [m] transit gripping-arm residual cap (drop-prevention; artifacts sigma<=~2mm)
+    PHYSICS_STEPS_PER_RL = 10
+
+    # --- Termination / drop / guard thresholds -------------------------------------------------------
+    MAX_EPISODE_STEPS = rc.ROUTE_TERMINAL_STEPS  # 900
+    EXPLOSION_DIST_THRESH = 1.0  # [m] EE<->cable divergence -> physics-fault invalid episode
+    LIFT_RISE_MIN_M = 0.040  # [m] G2: held_cable_z - z_rest(P0) >= +40mm (artifacts G2)
+    DROP_LIFT_MARGIN_M = 0.010  # [m] held cable within this of rest during a held phase -> dropped
+    DROP_CONTACT_LOSS_DEBOUNCE = 8  # sustained gripping-arm contact-loss steps -> dropped (CC3-CH3 debounce)
+    DROP_LATERAL_DEV_MAX_M = 0.060  # [m] crossing-x lateral escape -> lateral-escape-drape drop
+    CONTACT_PROXIMITY_M = 0.012  # [m] geometric contact-flag proxy (nearest-cable < this and grip-close)
+    REGRASP_REACH_TOL_M = 0.020  # [m] G4 _at_88 proxy (runner _reach_R_mm <= 20mm)
+
+    # --- IK / init ----------------------------------------------------------------------------------
+    INIT_XY_NOISE = 0.005  # +/-5mm initial EE target randomization (tracked target only on mujoco)
+
+    def __init__(self, world_count=4, device="cuda:0", cfg=None):
+        self.num_envs = world_count
+        self.num_actions = 6  # alpha-6D = 2x3D position-only residual
+        self._total_env_steps = 0
+        self.max_episode_length = self.MAX_EPISODE_STEPS
+        self.device = device
+        self.cfg = cfg or {}
+        self._world_count = world_count
+
+        self.episode_length_buf = torch.zeros(world_count, dtype=torch.long, device=device)
+        self._target_seg_indices_r = None
+        self._target_seg_indices_l = None
+        self._episode_count = 0
+        self._episode_success_buf = deque(maxlen=200)
+        self._last_success_rate = 0.0
+
+        # Per-world EE targets (tracked for IK warm-start / P0; the RESIDUAL contract is non-accumulating).
+        self._ee_target_right = np.zeros((world_count, 3), dtype=np.float32)
+        self._ee_target_left = np.zeros((world_count, 3), dtype=np.float32)
+
+        # Temporal quat consistency (avoid w~=0 sign flip in obs quats).
+        _id4 = np.array([0, 0, 0, 1], dtype=np.float32)
+        self._prev_clamp_r_quat = np.tile(_id4, (world_count, 1))
+        self._prev_clamp_l_quat = np.tile(_id4, (world_count, 1))
+        self._prev_seg_r_quat = np.tile(_id4, (world_count, 1))
+        self._prev_seg_l_quat = np.tile(_id4, (world_count, 1))
+
+        # --- Reward latch state (G1-G6: latched-monotonic, fire-once, never-revoked, ORDERED) ---
+        self._g_latched = np.zeros((world_count, 6), dtype=bool)
+        self._g6_sustain = np.zeros(world_count, dtype=np.int32)  # c2 groove+settle sustain counter (K_ROUTE_SEAT)
+        self._contact_loss_count = np.zeros(world_count, dtype=np.int32)  # gripping-arm contact-loss debounce
+
+        # --- (b') action-path telemetry (exposed in extras["info"] for trainer pushforward, NEW-C) ---
+        self._last_executed_residual = np.zeros((world_count, 6), dtype=np.float32)  # as-executed a' (post-projection)
+        self._last_projection_mode = np.zeros(world_count, dtype=np.int32)  # 0=common-mode (dual), 1=transit-asym
+        self._last_ik_resid = np.zeros((world_count, 2), dtype=np.float32)  # (R, L) IK residual [m] -> obs [55:57]
+        self._route_phase_id = np.zeros(world_count, dtype=np.int32)  # base-scripted phase_id (route stub)
+        self._route_within = np.zeros(world_count, dtype=np.float32)
+        self._route_grip = np.zeros((world_count, 2), dtype=np.float32)  # (R, L) scripted grip (0=open,1=close)
+        self._route_is_dual = np.ones(world_count, dtype=bool)
+        self._phase_entry_step = np.zeros(world_count, dtype=np.int64)  # for env-side within-phase progress
+        self._prev_phase_id = np.full(world_count, -1, dtype=np.int32)
+
+        os.environ["NEWTON_DEVICE"] = device
+        _tncr.DEVICE = device
+
+        print(f"[NewtonRouteEnv] Initializing: {world_count} worlds on {device} (backend=mujoco)")
+        t0 = time.perf_counter()
+
+        self._build_model()
+        self._settle_cable()
+        self._setup_p0_precondition()
+        self._save_precondition_state()
+        self._init_batched_ik_solver()
+
+        # Route interface = STUB (fixed nominal target = the settled P0 EE targets). The real route-
+        # executor connects next stage; is_dual_grip_window is single-sourced by the stub (CC5-2).
+        self._route = NominalRouteStub(self._settled_ee_r_pos, self._settled_ee_l_pos, self.MAX_EPISODE_STEPS)
+
+        # M-E guard: SolverMuJoCo backend assert (VBD-residue regression guard).
+        assert isinstance(self._solver, SolverMuJoCo), (
+            f"route env-core requires SolverMuJoCo (mujoco-ko substrate); got {type(self._solver).__name__}"
+        )
+        print(
+            f"[NewtonRouteEnv] Ready in {time.perf_counter() - t0:.1f}s. "
+            f"obs={self.num_obs}, act={self.num_actions}, worlds={world_count}"
+        )
+
+    # =====================================================================================================
+    # Model construction / physics (reuse the mujoco base scene + joint_q re-pose driving)
+    # =====================================================================================================
+
+    def _build_model(self):
+        """Build FK model + reuse the mujoco multi-world scene (UR5e+Robotiq koshape + cable + contacts).
+
+        Reuse of the base pattern (build plan sec 1 'AC/AR base 2109 pattern'): support clips + C1 target
+        groove present. The full multi-clip (C2 groove) route scene connects at the route-executor stage;
+        env-core seat predicates read geometric cable-vs-clip distance from cable body positions.
+        """
+        print("[NewtonRouteEnv] Building FK model...")
+        self._fk_model, self._fk_state, fk_jq = build_fk_and_init(
+            left_finger_pos=FINGER_OPEN_POS, right_finger_pos=FINGER_OPEN_POS, device=self.device
+        )
+        self._per_world_fk_jq = np.tile(fk_jq, (self._world_count, 1))
+
+        print(f"[NewtonRouteEnv] Building scene ({self._world_count} worlds, backend=mujoco)...")
+        scene = build_multiworld_scene(
+            self._fk_model,
+            self._fk_state,
+            self._world_count,
+            self.device,
+            add_support_clips=True,
+            add_target_clip=True,  # C1 V-groove present (routing/seating scenario, cf Grip clamp mode)
+        )
+        self._model = scene["model"]
+        self._solver = scene["solver"]
+        self._state_0 = scene["state_0"]
+        self._state_1 = scene["state_1"]
+        self._control = scene["control"]
+        self._contacts = scene["contacts"]
+        self._bws = scene["bws"]
+        self._jws = scene["jws"]
+        self._cable_bodies = scene["cable_bodies"]
+        self._cable_bodies_per_world = scene["cable_bodies_per_world"]
+
+        # sec 23: derive the authoritative per-world ARM coord starts (q and qd separately) -- the cable FREE
+        # root adds 6 extra coords/world, so a joint-index slice is wrong for world>=1.
+        _jqs = self._model.joint_q_start.numpy()
+        _jqds = self._model.joint_qd_start.numpy()
+        _jws_joint = self._model.joint_world_start.numpy()
+        self._arm_q_start = [int(_jqs[_jws_joint[w]]) for w in range(self._world_count)]
+        self._arm_qd_start = [int(_jqds[_jws_joint[w]]) for w in range(self._world_count)]
+        print(
+            f"[NewtonRouteEnv] Model: {self._model.body_count} bodies, "
+            f"{self._model.joint_count} joints, solver={type(self._solver).__name__}"
+        )
+
+    def _physics_step_all(self, substeps=None, sim_dt=None):
+        """One physics frame for all worlds (clear_forces -> collide -> solver.step -> swap)."""
+        n_sub = substeps if substeps is not None else SIM_SUBSTEPS
+        dt = sim_dt if sim_dt is not None else SIM_DT
+        for _ in range(n_sub):
+            self._state_0.clear_forces()
+            self._model.collide(self._state_0, self._contacts)
+            self._solver.step(self._state_0, self._state_1, self._control, self._contacts, dt)
+            self._state_0, self._state_1 = self._state_1, self._state_0
+
+    def _broadcast_arm_jointq(self):
+        """Re-pose both arms' joint_q (SC2b) at the COORD-correct per-world offset (sec 23 fix)."""
+        n = _N_ARM_JOINTS
+        fk_jq = self._fk_state.joint_q.numpy()[:n]
+        phys_jq = self._state_0.joint_q.numpy()
+        phys_jqd = self._state_0.joint_qd.numpy()
+        for w in range(self._world_count):
+            phys_jq[self._arm_q_start[w] : self._arm_q_start[w] + n] = fk_jq
+            phys_jqd[self._arm_qd_start[w] : self._arm_qd_start[w] + n] = 0.0
+        self._state_0.joint_q.assign(phys_jq)
+        self._state_0.joint_qd.assign(phys_jqd)
+
+    def _settle_cable(self):
+        """Settle the cable (~2s sim time) while holding both arms at the FK home via joint_q re-pose."""
+        print("[NewtonRouteEnv] Settling cable (~2s, arm held via joint_q re-pose)...")
+        for _ in range(int(2.0 / DT)):
+            self._broadcast_arm_jointq()
+            self._physics_step_all()
+        wp.synchronize()
+        bq = self._state_0.body_q.numpy()
+        self._settled_grasp_x = float(np.mean(bq[self._cable_bodies[0], 0]))
+        # z_rest(P0): mean settled cable z (world 0) -- the G2 lift baseline.
+        self._cable_z_rest = float(np.mean(bq[self._cable_bodies[0], 2]))
+        print(f"[NewtonRouteEnv] Cable settled: mean_x={self._settled_grasp_x:.4f} z_rest={self._cable_z_rest:.4f}")
+
+    # =====================================================================================================
+    # P0 precondition (lift-point: arms wide @ 88mm span above the cable) -- reuse of the AC scaffolding
+    # =====================================================================================================
+
+    def _setup_p0_precondition(self):
+        """Move both arms to the NON-degenerate lift-point P0 (wide 88mm span, wrist ~100mm above table)."""
+        print("[NewtonRouteEnv] Setting up P0 precondition (lift-point)...")
+        grasp_x = self._settled_grasp_x
+        p0_ee_z = TABLE_HEIGHT + 0.100 + EE_TO_PINCH_OPEN  # 1.16092 (wrist)
+        self._ik_move_all_worlds(
+            (grasp_x, WIDE_LEFT_Y, p0_ee_z), (grasp_x, WIDE_RIGHT_Y, p0_ee_z), label="P0-UPRISE", converge_mm=2.0
+        )
+        self._hold_all_worlds(SETTLE_STEPS)
+        print("[NewtonRouteEnv] P0 complete -- lift-point reached")
+
+    def _solve_ik_single_ko(self, target_left, target_right):
+        """Solve dual-arm IK (P0 init) with the DC1 koshape rotation target, PER-ARM (88mm span err=0)."""
+        target_rot = wp.array([wp.vec4(*KO_ROT_TARGET_XYZW)], dtype=wp.vec4, device=self.device)
+        fk_jq = self._fk_state.joint_q.numpy()
+        jq_combined = fk_jq.copy()
+        for ee_body, tgt, jslice in (
+            (_LEFT_EE_BODY, target_left, slice(0, JOINTS_PER_ARM)),
+            (_RIGHT_EE_BODY, target_right, slice(JOINTS_PER_ARM, 2 * JOINTS_PER_ARM)),
+        ):
+            objectives = [
+                IKObjectivePosition(
+                    link_index=ee_body,
+                    link_offset=wp.vec3(0, 0, 0),
+                    target_positions=wp.array([tgt], dtype=wp.vec3, device=self.device),
+                    weight=1.0,
+                ),
+                IKObjectiveRotation(
+                    link_index=ee_body, link_offset_rotation=wp.quat_identity(), target_rotations=target_rot, weight=0.5
+                ),
+                IKObjectiveJointLimit(
+                    joint_limit_lower=self._fk_model.joint_limit_lower,
+                    joint_limit_upper=self._fk_model.joint_limit_upper,
+                    weight=10.0,
+                ),
+            ]
+            ik_solver = IKSolver(self._fk_model, n_problems=1, objectives=objectives)
+            jq_in = wp.array(fk_jq.reshape(1, -1), dtype=float, device=self.device)
+            jq_out = wp.zeros((1, self._fk_model.joint_coord_count), dtype=float, device=self.device)
+            ik_solver.step(jq_in, jq_out, iterations=_AC_IK_ITERATIONS_P0, step_size=IK_STEP_SIZE)
+            jq_combined[jslice] = jq_out.numpy()[0][jslice]
+        return jq_combined
+
+    def _ik_move_all_worlds(self, target_left, target_right, label="MOVE", converge_mm=5.0):
+        """Move both arms to target -- all worlds share the IK solution; mujoco joint_q re-pose driving."""
+        jq_target = self._solve_ik_single_ko(target_left, target_right)
+        if np.any(np.isnan(jq_target)):
+            print(f"  [{label}] IK FAILED (NaN)")
+            return False
+        jq_start = self._fk_state.joint_q.numpy().copy()
+        step = 0
+        for step in range(MAX_MOVE_STEPS):
+            t = min((step + 1) / MAX_MOVE_STEPS, 1.0)
+            jq_interp = jq_start + (jq_target - jq_start) * t
+            # Hold driver fingers at the start (OPEN): the EE pos/rot IK objectives have zero Jacobian on
+            # the gripper 4-bar, so let them not drift under the joint-limit objective (faithful to AC).
+            for base in (0, JOINTS_PER_ARM):
+                jq_interp[base + GRIPPER_DRIVER_JOINT_IDX[0]] = jq_start[base + GRIPPER_DRIVER_JOINT_IDX[0]]
+                jq_interp[base + GRIPPER_DRIVER_JOINT_IDX[1]] = jq_start[base + GRIPPER_DRIVER_JOINT_IDX[1]]
+            self._fk_state.joint_q.assign(jq_interp)
+            newton.eval_fk(self._fk_model, self._fk_state.joint_q, self._fk_state.joint_qd, self._fk_state)
+            self._broadcast_arm_jointq()
+            self._physics_step_all()
+            if (step + 1) % 10 == 0:
+                wp.synchronize()
+                bq = self._state_0.body_q.numpy()
+                ws0 = self._bws[0]
+                err_l = np.linalg.norm(bq[ws0 + _LEFT_EE_BODY][:3] - np.array(target_left)) * 1000
+                err_r = np.linalg.norm(bq[ws0 + _RIGHT_EE_BODY][:3] - np.array(target_right)) * 1000
+                if max(err_l, err_r) < converge_mm:
+                    break
+        print(f"  [{label}] Done: steps={step + 1}")
+        return True
+
+    def _hold_all_worlds(self, n_frames):
+        for _ in range(n_frames):
+            self._broadcast_arm_jointq()
+            self._physics_step_all()
+
+    def _save_precondition_state(self):
+        """Cache the P0-complete settled state for episode reset + the nominal EE targets (route stub)."""
+        wp.synchronize()
+        self._settled_body_q = self._state_0.body_q.numpy().copy()
+        self._settled_body_qd = self._state_0.body_qd.numpy().copy()
+        self._settled_fk_jq = self._fk_state.joint_q.numpy().copy()
+        for w in range(self._world_count):
+            self._per_world_fk_jq[w] = self._settled_fk_jq.copy()
+        self._target_seg_indices_r, self._target_seg_indices_l = self._compute_target_seg_indices(self._settled_body_q)
+        fk_bq = self._fk_state.body_q.numpy()
+        self._settled_ee_r_pos = fk_bq[_RIGHT_EE_BODY][:3].copy()
+        self._settled_ee_r_quat = fk_bq[_RIGHT_EE_BODY][3:7].copy()
+        self._settled_ee_l_pos = fk_bq[_LEFT_EE_BODY][:3].copy()
+        self._settled_ee_l_quat = fk_bq[_LEFT_EE_BODY][3:7].copy()
+        for w in range(self._world_count):
+            self._ee_target_right[w] = self._settled_ee_r_pos.copy()
+            self._ee_target_left[w] = self._settled_ee_l_pos.copy()
+        print(f"[NewtonRouteEnv] P0 saved: EE_R={self._settled_ee_r_pos}, EE_L={self._settled_ee_l_pos}")
+
+    def _init_batched_ik_solver(self):
+        """Cached IKSolver(n_problems=world_count) with the KO rot target (held; action is position-only)."""
+        N = self._world_count
+        rot_quat = wp.vec4(*KO_ROT_TARGET_XYZW)
+        self._ik_obj_pos_left = IKObjectivePosition(
+            link_index=_LEFT_EE_BODY, link_offset=wp.vec3(0, 0, 0),
+            target_positions=wp.zeros(N, dtype=wp.vec3, device=self.device), weight=1.0,
+        )
+        self._ik_obj_pos_right = IKObjectivePosition(
+            link_index=_RIGHT_EE_BODY, link_offset=wp.vec3(0, 0, 0),
+            target_positions=wp.zeros(N, dtype=wp.vec3, device=self.device), weight=1.0,
+        )
+        self._ik_obj_rot_left = IKObjectiveRotation(
+            link_index=_LEFT_EE_BODY, link_offset_rotation=wp.quat_identity(),
+            target_rotations=wp.array([rot_quat] * N, dtype=wp.vec4, device=self.device), weight=0.5,
+        )
+        self._ik_obj_rot_right = IKObjectiveRotation(
+            link_index=_RIGHT_EE_BODY, link_offset_rotation=wp.quat_identity(),
+            target_rotations=wp.array([rot_quat] * N, dtype=wp.vec4, device=self.device), weight=0.5,
+        )
+        self._ik_obj_jlimit = IKObjectiveJointLimit(
+            joint_limit_lower=self._fk_model.joint_limit_lower, joint_limit_upper=self._fk_model.joint_limit_upper,
+            weight=10.0,
+        )
+        self._ik_solver_batch = IKSolver(
+            self._fk_model, n_problems=N,
+            objectives=[self._ik_obj_pos_left, self._ik_obj_pos_right, self._ik_obj_rot_left,
+                        self._ik_obj_rot_right, self._ik_obj_jlimit],
+        )
+        coord_count = self._fk_model.joint_coord_count
+        self._ik_jq_in = wp.zeros((N, coord_count), dtype=float, device=self.device)
+        self._ik_jq_out = wp.zeros((N, coord_count), dtype=float, device=self.device)
+        print(f"[NewtonRouteEnv] Batched IK solver: n_problems={N}, joint_coords={coord_count}")
+
+    def _solve_ik_batch(self, targets_left_np, targets_right_np, jq_starts_np):
+        """Solve IK for all worlds in one batched, warm-started call. Returns [N, coord_count] numpy."""
+        self._ik_obj_pos_left.set_target_positions(wp.array(targets_left_np, dtype=wp.vec3, device=self.device))
+        self._ik_obj_pos_right.set_target_positions(wp.array(targets_right_np, dtype=wp.vec3, device=self.device))
+        self._ik_jq_in.assign(jq_starts_np)
+        self._ik_solver_batch.step(self._ik_jq_in, self._ik_jq_out, iterations=IK_ITERATIONS_RL, step_size=IK_STEP_SIZE)
+        return self._ik_jq_out.numpy()
+
+    def _compute_target_seg_indices(self, bq):
+        """Per-arm target cable seg indices (+/-window, MID-SPLIT so arms can't share a seg)."""
+        n_cable = self._cable_bodies_per_world
+        win = 5
+        n_seg = 2 * win + 1
+        result_r = np.zeros((self._world_count, n_seg), dtype=np.int32)
+        result_l = np.zeros((self._world_count, n_seg), dtype=np.int32)
+        mid = n_cable // 2
+        for w in range(self._world_count):
+            ws = self._bws[w]
+            cable_pos = bq[self._cable_bodies[w], :3]
+            right_idx = ws + _RIGHT_EE_BODY
+            right_tip = clamp_pos_ko(bq[right_idx][:3], bq[right_idx][3:7])
+            right_seg = mid + int(np.argmin(np.linalg.norm(cable_pos[mid:n_cable] - right_tip, axis=1)))
+            result_r[w] = np.clip(np.arange(right_seg - win, right_seg + win + 1), 0, n_cable - 1)
+            left_idx = ws + _LEFT_EE_BODY
+            left_tip = clamp_pos_ko(bq[left_idx][:3], bq[left_idx][3:7])
+            left_seg = int(np.argmin(np.linalg.norm(cable_pos[0 : mid + 1] - left_tip, axis=1)))
+            result_l[w] = np.clip(np.arange(left_seg - win, left_seg + win + 1), 0, n_cable - 1)
+        return result_r, result_l
+
+    # =====================================================================================================
+    # Reset (mujoco: body_q restore + AUTHORITATIVE joint_q seeding of arm + cable)
+    # =====================================================================================================
+
+    def _reset_worlds(self, env_ids):
+        """Reset specified worlds to the P0 settled state; clear reward-latch / route / debounce state."""
+        if len(env_ids) == 0:
+            return
+        bq = self._state_0.body_q.numpy()
+        bqd = self._state_0.body_qd.numpy()
+        prev = self._solver.body_q_prev.numpy() if hasattr(self._solver, "body_q_prev") else None
+        for w in env_ids:
+            w = int(w)
+            restore_world_body_state(
+                bq=bq, bqd=bqd, prev=prev, settled_body_q=self._settled_body_q,
+                settled_body_qd=self._settled_body_qd, w=w, bws=self._bws,
+            )
+            self._per_world_fk_jq[w] = self._settled_fk_jq.copy()
+            self._ee_target_right[w] = self._settled_ee_r_pos.copy()
+            self._ee_target_left[w] = self._settled_ee_l_pos.copy()
+            if self.INIT_XY_NOISE > 0:
+                self._ee_target_right[w][:2] += np.random.uniform(-self.INIT_XY_NOISE, self.INIT_XY_NOISE, size=2)
+                self._ee_target_left[w][:2] += np.random.uniform(-self.INIT_XY_NOISE, self.INIT_XY_NOISE, size=2)
+            _id4 = np.array([0, 0, 0, 1], dtype=np.float32)
+            self._prev_clamp_r_quat[w] = _id4.copy()
+            self._prev_clamp_l_quat[w] = _id4.copy()
+            self._prev_seg_r_quat[w] = _id4.copy()
+            self._prev_seg_l_quat[w] = _id4.copy()
+            # reward-latch / sustain / debounce / route state
+            self._g_latched[w] = False
+            self._g6_sustain[w] = 0
+            self._contact_loss_count[w] = 0
+            self._last_executed_residual[w] = 0.0
+            self._last_projection_mode[w] = 0
+            self._last_ik_resid[w] = 0.0
+            self._phase_entry_step[w] = 0
+            self._prev_phase_id[w] = -1
+            self.episode_length_buf[w] = 0
+
+        assign_world_states_to_sim(self._state_0, self._solver, bq, bqd, prev)
+
+        # AUTHORITATIVE re-pose (mujoco): seed arm joint_q = settled + cable joint_q from settled tangents.
+        phys_jq = self._state_0.joint_q.numpy()
+        phys_jqd = self._state_0.joint_qd.numpy()
+        for w in env_ids:
+            w = int(w)
+            jq0, jqd0 = self._arm_q_start[w], self._arm_qd_start[w]
+            phys_jq[jq0 : jq0 + _N_ARM_JOINTS] = self._settled_fk_jq[:_N_ARM_JOINTS]
+            phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
+        self._state_0.joint_q.assign(phys_jq)
+        self._state_0.joint_qd.assign(phys_jqd)
+        for w in env_ids:
+            w = int(w)
+            cable_joints_w = list(
+                range(self._jws[w] + _N_ARM_JOINTS, self._jws[w] + _N_ARM_JOINTS + self._cable_bodies_per_world)
+            )
+            root7, seg_angles = derive_cable_joint_q_from_tangents(self._settled_body_q, self._cable_bodies[w])
+            seed_cable_joint_state(self._state_0, self._model, cable_joints_w, root7, seg_angles, dr_xy=(0.0, 0.0))
+
+        new_r, new_l = self._compute_target_seg_indices(self._state_0.body_q.numpy())
+        for w in env_ids:
+            w = int(w)
+            self._target_seg_indices_r[w] = new_r[w]
+            self._target_seg_indices_l[w] = new_l[w]
+        reset_dahl_friction_for_envs(self._solver, self._jws, env_ids)
+        self._episode_count += len(env_ids)
+
+    # =====================================================================================================
+    # Action: alpha-6D residual (NON-accumulating) + (b') phase-conditional projection
+    # =====================================================================================================
+
+    def _sigma_cap(self, delta):
+        """Clamp a per-arm residual vector's norm to GRIPPING_ARM_SIGMA_CAP_M (transit drop-prevention)."""
+        n = float(np.linalg.norm(delta))
+        if n > self.GRIPPING_ARM_SIGMA_CAP_M and n > 1e-9:
+            return delta * (self.GRIPPING_ARM_SIGMA_CAP_M / n)
+        return delta
+
+    def _delta_bound(self, delta):
+        """Clamp a per-arm residual vector's norm to DELTA_BOUND_M (env-core Delta-bound, CC3-CH1)."""
+        n = float(np.linalg.norm(delta))
+        if n > self.DELTA_BOUND_M and n > 1e-9:
+            return delta * (self.DELTA_BOUND_M / n)
+        return delta
+
+    def _project_residual(self, delta_r, delta_l, is_dual, grip_r, grip_l):
+        """(b') phase-conditional structural projection of the AS-EXECUTED residual.
+
+        dual-grip window (base grip-schedule ALONE) -> hard-project to the common-mode subspace
+        ((d_R,d_L)->(m,m), m=(d_R+d_L)/2): the differential is 0 by construction so the span is
+        structurally invariant (enforcement, not detection). non-dual-grip transit -> asymmetric
+        per-arm: reaching arm (grip open) full, gripping arm (grip close) sigma-capped. arm-role is
+        derived from the base grip-schedule (NEW-D single deterministic source, boundary-consistent).
+
+        Returns:
+            (residual_r [3], residual_l [3], mode int) -- mode 0 = common-mode, 1 = transit-asym.
+        """
+        dr = self._delta_bound(delta_r)
+        dl = self._delta_bound(delta_l)
+        if is_dual:
+            m = 0.5 * (dr + dl)
+            return m.copy(), m.copy(), 0
+        out_r = self._sigma_cap(dr) if grip_r >= 0.5 else dr
+        out_l = self._sigma_cap(dl) if grip_l >= 0.5 else dl
+        return out_r, out_l, 1
+
+    def _apply_actions_batch(self, actions, route_targets):
+        """Apply the 6D residual to the route ABSOLUTE base target (NON-accumulating) via batched IK.
+
+        actions [N, 6]: [0:3] R residual, [3:6] L residual (position-only). route_targets [N, 6]: the
+        route's per-step ABSOLUTE base target [R_xyz, L_xyz]. commanded = base + projected-residual --
+        the base target is absolute each step (NOT integrated), so Delta=const -> drift=0 by construction
+        (the AC accumulating delta at newton_approach_cable_mujoco_env.py:40 is NOT reused).
+        """
+        N = self._world_count
+        actions_np = actions.cpu().numpy()
+        r_delta = actions_np[:, 0:3] * self.POS_RESIDUAL_SCALE
+        l_delta = actions_np[:, 3:6] * self.POS_RESIDUAL_SCALE
+
+        targets_left = np.zeros((N, 3), dtype=np.float32)
+        targets_right = np.zeros((N, 3), dtype=np.float32)
+        jq_starts = np.array(self._per_world_fk_jq[:N])
+        # Fingers held OPEN in the IK warm-start (grip is a scripted servo predicate, not an action dim).
+        for w in range(N):
+            for base in (0, JOINTS_PER_ARM):
+                jq_starts[w, base + GRIPPER_DRIVER_JOINT_IDX[0]] = FINGER_OPEN_POS
+                jq_starts[w, base + GRIPPER_DRIVER_JOINT_IDX[1]] = FINGER_OPEN_POS
+
+        for w in range(N):
+            proj_r, proj_l, mode = self._project_residual(
+                r_delta[w], l_delta[w], self._route_is_dual[w], self._route_grip[w, 0], self._route_grip[w, 1]
+            )
+            base_r = route_targets[w, 0:3]
+            base_l = route_targets[w, 3:6]
+            # NON-accumulating: commanded = absolute base + projected residual (no += integration).
+            target_r = base_r + proj_r
+            target_l = base_l + proj_l
+            # Substrate Z safety floor/ceiling ONLY (koshape floor; not an accumulation anchor).
+            target_r[2] = np.clip(target_r[2], EE_Z_FLOOR_KO, EE_Z_SAFETY_UPPER)
+            target_l[2] = np.clip(target_l[2], EE_Z_FLOOR_KO, EE_Z_SAFETY_UPPER)
+            targets_right[w] = target_r
+            targets_left[w] = target_l
+            self._ee_target_right[w] = target_r.copy()
+            self._ee_target_left[w] = target_l.copy()
+            # as-executed a' (post-projection) + mode -> exposed in extras["info"] (NEW-C).
+            self._last_executed_residual[w, 0:3] = proj_r
+            self._last_executed_residual[w, 3:6] = proj_l
+            self._last_projection_mode[w] = mode
+
+        jq_targets = self._solve_ik_batch(targets_left, targets_right, jq_starts)
+        nan_mask = np.any(np.isnan(jq_targets), axis=1)
+        if np.any(nan_mask):
+            jq_targets[nan_mask] = jq_starts[nan_mask]
+        # Preserve OPEN fingers in the IK output.
+        for w in range(N):
+            for base in (0, JOINTS_PER_ARM):
+                jq_targets[w, base + GRIPPER_DRIVER_JOINT_IDX[0]] = jq_starts[w, base + GRIPPER_DRIVER_JOINT_IDX[0]]
+                jq_targets[w, base + GRIPPER_DRIVER_JOINT_IDX[1]] = jq_starts[w, base + GRIPPER_DRIVER_JOINT_IDX[1]]
+
+        # DRIVE: interpolate arm joint_q start->target and OVERWRITE each world's joint_q slice per frame.
+        old_fk_jq = np.array(self._per_world_fk_jq[:N])
+        for step in range(self.PHYSICS_STEPS_PER_RL):
+            t = min((step + 1) / self.PHYSICS_STEPS_PER_RL, 1.0)
+            jq_interp = old_fk_jq + (jq_targets - old_fk_jq) * t
+            phys_jq = self._state_0.joint_q.numpy()
+            phys_jqd = self._state_0.joint_qd.numpy()
+            for w in range(N):
+                jq0, jqd0 = self._arm_q_start[w], self._arm_qd_start[w]
+                phys_jq[jq0 : jq0 + _N_ARM_JOINTS] = jq_interp[w, :_N_ARM_JOINTS]
+                phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
+            self._state_0.joint_q.assign(phys_jq)
+            self._state_0.joint_qd.assign(phys_jqd)
+            self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
+        for w in range(N):
+            self._per_world_fk_jq[w] = jq_targets[w].copy()
+
+        # IK residual per arm ([55:57]): achieved EE vs commanded target.
+        wp.synchronize()
+        bq = self._state_0.body_q.numpy()
+        for w in range(N):
+            ws = self._bws[w]
+            self._last_ik_resid[w, 0] = float(np.linalg.norm(bq[ws + _RIGHT_EE_BODY][:3] - targets_right[w]))
+            self._last_ik_resid[w, 1] = float(np.linalg.norm(bq[ws + _LEFT_EE_BODY][:3] - targets_left[w]))
+
+    # =====================================================================================================
+    # Live geometric helpers (raw per-clip sim distance, NEW-5; cable-position proxies)
+    # =====================================================================================================
+
+    def _active_clip_xy(self, phase_id):
+        """Phase-active clip XY (base-scripted phase_id pin, CC2-CH4). C1 through G4-start, then C2."""
+        return _C1_XY if phase_id < 3 else _C2_XY
+
+    def _c1_retention_m(self, cable_pos):
+        """(z_c1 [m], flank_max [m]) for one world -- the c1_retained_final live inputs (obs [60]/[61]).
+
+        SELF-COMPUTED from LIVE sim geometry (the producer fields do not exist in a live episode; the
+        reward must self-compute -- DoD-9a validates this live-geometry verdict against the frozen
+        two-key reference and any divergence is fixed here to the frozen def, never by loosening tol).
+        z_c1 = z of the cable body nearest C1 in Y (live-geometry analog of the producer's frozen
+        seat-body z, runner _zc1 :4331). flank_max = max cable z over |y - C1Y| <= C1_FLANK_WINDOW_M
+        (0.010 m) -- the EXACT frozen def (recount flank_from_npz p9_recount_strict_v2.py:39-44); NaN if
+        the window is empty, matching the frozen NaN -> c1_final=False (via the predicate flank==flank).
+        Stored in SI meters (obs-dim unit consistency); the 0.840 m threshold == the recount 840 mm.
+        """
+        near_c1 = int(np.argmin(np.abs(cable_pos[:, 1] - CLIP1_Y)))
+        z_c1_m = float(cable_pos[near_c1, 2])
+        m = np.abs(cable_pos[:, 1] - CLIP1_Y) <= rc.C1_FLANK_WINDOW_M
+        flank_m = float(cable_pos[m, 2].max()) if m.any() else float("nan")
+        return z_c1_m, flank_m
+
+    def _seat_metrics(self, cable_pos, clip_xy):
+        """(seat_dist [m], z_gap [m], lateral [m]) of the nearest-in-Y cable body vs a clip groove.
+
+        Raw per-clip sim distance (NEW-5), NOT the scripted-gated obs [49]. z_gap = cable_z - groove_z;
+        lateral = XY distance of the nearest-in-Y cable body from the clip center.
+        """
+        near = int(np.argmin(np.abs(cable_pos[:, 1] - clip_xy[1])))
+        p = cable_pos[near]
+        z_gap = float(p[2] - GROOVE_CENTER_Z)
+        lateral = float(np.linalg.norm(p[:2] - clip_xy))
+        seat_dist = float(np.sqrt(lateral * lateral + z_gap * z_gap))
+        return seat_dist, z_gap, lateral
+
+    def _c2_seated_honest(self, cable_pos):
+        """C2 groove-membership + settle (NOT raw d<3mm alone -- CC2-CH2). Geometric proxy of the runner
+        producer test_newton_clip_routing.py:4970-4971 (wall/spacer split is a route-executor refinement).
+        """
+        seat_dist, z_gap, _ = self._seat_metrics(cable_pos, _C2_XY)
+        in_groove = abs(z_gap * 1e3) <= rc.C2_SETTLE_Z_TOL_MM
+        wall_ok = (seat_dist * 1e3) <= (rc.C2_WALL_SEAT_TOL_MM + T_GROOVE * 1e3)  # groove-inner tolerance
+        return bool(wall_ok and in_groove)
+
+    def _crossing_x_dev(self, cable_pos):
+        """H-drape crossing-x deviation [m]: cable x where it crosses y=C1Y, minus CLIP1_X (proxy)."""
+        ys = cable_pos[:, 1]
+        # nearest-in-Y interpolation of x at y = CLIP1_Y
+        i = int(np.argmin(np.abs(ys - CLIP1_Y)))
+        return float(cable_pos[i, 0] - CLIP1_X)
+
+    def _lane_matched_target(self, cable_pos, phase_id, r_clamp_pos, search_idx):
+        """[16:19] redefine (CC2-CH5): in the regrasp window, the reaching-arm's lane-matched grip target
+        = the cable point nearest the R lane (y = C2Y + GHS), NOT argmin find_nearest. Else = the R-arm
+        nearest cable seg (base semantics), searched within this world's window ``search_idx``.
+        """
+        if phase_id == 3:  # G4 regrasp window
+            r_lane_y = float(_C2_XY[1]) + _GHS
+            i = int(np.argmin(np.abs(cable_pos[:, 1] - r_lane_y)))
+            return cable_pos[i, :3].astype(np.float32)
+        seg_pos, _, _ = find_nearest_cable_point(cable_pos, r_clamp_pos, search_idx)
+        return seg_pos.astype(np.float32)
+
+    # =====================================================================================================
+    # Observation (62D)
+    # =====================================================================================================
+
+    def _compute_obs_batch(self):
+        """Compute observations for all worlds. Returns [N, 62] tensor (index map = route_env_config)."""
+        wp.synchronize()
+        bq = self._state_0.body_q.numpy()
+        obs_np = np.zeros((self._world_count, rc.OBS_DIM), dtype=np.float32)
+
+        for w in range(self._world_count):
+            ws = self._bws[w]
+            ph = int(self._route_phase_id[w])
+
+            # ---- base [0:42] (mirror of the AC base obs block) ----
+            ee_r_idx = ws + _RIGHT_EE_BODY
+            clamp_r_pos = clamp_pos_ko(bq[ee_r_idx][:3], bq[ee_r_idx][3:7])
+            clamp_r_quat = temporal_quat_consistency(
+                normalize_quat_w_positive(bq[ee_r_idx][3:7]), self._prev_clamp_r_quat[w]
+            )
+            self._prev_clamp_r_quat[w] = clamp_r_quat.copy()
+            ee_l_idx = ws + _LEFT_EE_BODY
+            clamp_l_pos = clamp_pos_ko(bq[ee_l_idx][:3], bq[ee_l_idx][3:7])
+            clamp_l_quat = temporal_quat_consistency(
+                normalize_quat_w_positive(bq[ee_l_idx][3:7]), self._prev_clamp_l_quat[w]
+            )
+            self._prev_clamp_l_quat[w] = clamp_l_quat.copy()
+
+            fk_jq = self._per_world_fk_jq[w]
+            _rd0, _rd1 = JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0], JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]
+            r_finger = fk_jq[_rd0] + fk_jq[_rd1]
+            l_finger = fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] + fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]]
+
+            cable_pos = bq[self._cable_bodies[w], :3]
+            seg_pos, seg_tangent, _ = find_nearest_cable_point(cable_pos, clamp_r_pos, self._target_seg_indices_r[w])
+            seg_quat = temporal_quat_consistency(
+                normalize_quat_w_positive(compute_hand_quat_for_cable(seg_tangent, base_quat=KO_BASE_HAND_DOWN_QUAT)),
+                self._prev_seg_r_quat[w],
+            )
+            self._prev_seg_r_quat[w] = seg_quat.copy()
+            seg_pos_l, seg_tangent_l, _ = find_nearest_cable_point(
+                cable_pos, clamp_l_pos, self._target_seg_indices_l[w]
+            )
+            grasp_quat_l = temporal_quat_consistency(
+                normalize_quat_w_positive(compute_hand_quat_for_cable(seg_tangent_l, base_quat=KO_BASE_HAND_DOWN_QUAT)),
+                self._prev_seg_l_quat[w],
+            )
+            self._prev_seg_l_quat[w] = grasp_quat_l.copy()
+
+            # [16:19] REDEFINED = lane-matched regrasp target (CC2-CH5).
+            lane_seg = self._lane_matched_target(cable_pos, ph, clamp_r_pos, self._target_seg_indices_r[w])
+            ori_error_aa = compute_ori_error_axis_angle(clamp_r_quat, seg_quat)
+            ori_error_aa_l = compute_ori_error_axis_angle(clamp_l_quat, grasp_quat_l)
+
+            obs_np[w, 0:3] = clamp_r_pos
+            obs_np[w, 3:7] = clamp_r_quat
+            obs_np[w, 7] = r_finger
+            obs_np[w, 8:11] = clamp_l_pos
+            obs_np[w, 11:15] = clamp_l_quat
+            obs_np[w, 15] = l_finger
+            obs_np[w, 16:19] = lane_seg  # CC2-CH5 lane-matched regrasp target
+            obs_np[w, 19:23] = seg_quat
+            obs_np[w, 23:26] = np.array([_C1_XY[0], _C1_XY[1], TABLE_HEIGHT], dtype=np.float32)
+            obs_np[w, 26:30] = np.array([0.0, 0.0, 0.0, 1.0], dtype=np.float32)
+            obs_np[w, 30:33] = ori_error_aa
+            obs_np[w, 33:36] = clamp_r_pos - lane_seg  # pos-err vs the (redefined) target seg
+            obs_np[w, 36:39] = ori_error_aa_l
+            obs_np[w, 39:42] = clamp_l_pos - seg_pos_l
+
+            # ---- route-specific [42:62] ----
+            # [42:48] phase one-hot (argmax = base-scripted phase_id).
+            if 0 <= ph < rc.N_ROUTE_PHASES:
+                obs_np[w, 42 + ph] = 1.0
+            # [48] held cable z: cable body nearest the R/L clamp midpoint.
+            mid_xy = 0.5 * (clamp_r_pos[:2] + clamp_l_pos[:2])
+            held_i = int(np.argmin(np.linalg.norm(cable_pos[:, :2] - mid_xy, axis=1)))
+            obs_np[w, rc.OBS_HELD_CABLE_Z] = float(cable_pos[held_i, 2])
+            # [49] seated-seg distance (phase-active clip, base-scripted phase_id pin).
+            active_xy = self._active_clip_xy(ph)
+            seat_dist, z_gap, lateral = self._seat_metrics(cable_pos, active_xy)
+            obs_np[w, rc.OBS_SEATED_SEG_D] = seat_dist
+            # [50] within-phase progress.
+            obs_np[w, rc.OBS_WITHIN_PHASE] = float(self._route_within[w])
+            # [51:53] next-clip xy (C2 for the C1->C2 route; per-phase next-clip map = N-clip forward-compat).
+            obs_np[w, 51:53] = _C2_XY
+            # [53:55] per-arm contact flag (geometric proxy: nearest-cable proximity and grip-close).
+            r_near = float(np.min(np.linalg.norm(cable_pos - clamp_r_pos, axis=1)))
+            l_near = float(np.min(np.linalg.norm(cable_pos - clamp_l_pos, axis=1)))
+            obs_np[w, rc.OBS_R_CONTACT] = float(r_near < self.CONTACT_PROXIMITY_M and self._route_grip[w, 0] >= 0.5)
+            obs_np[w, rc.OBS_L_CONTACT] = float(l_near < self.CONTACT_PROXIMITY_M and self._route_grip[w, 1] >= 0.5)
+            # [55:57] per-arm IK residual (from the last action apply).
+            obs_np[w, rc.OBS_R_IK_RESID] = self._last_ik_resid[w, 0]
+            obs_np[w, rc.OBS_L_IK_RESID] = self._last_ik_resid[w, 1]
+            # [57] crossing-x deviation.
+            obs_np[w, rc.OBS_CROSSING_X_DEV] = self._crossing_x_dev(cable_pos)
+            # [58:60] axis-resolved seat (z-gap, lateral) of the phase-active clip.
+            obs_np[w, rc.OBS_SEAT_ZGAP] = z_gap
+            obs_np[w, rc.OBS_SEAT_LATERAL] = lateral
+            # [60:62] C1-retention live inputs [mm].
+            z_c1_m, flank_m = self._c1_retention_m(cable_pos)
+            obs_np[w, rc.OBS_C1_REGION_Z] = z_c1_m
+            obs_np[w, rc.OBS_C1_FLANK_MAX_Z] = flank_m
+
+        np.nan_to_num(obs_np, copy=False, nan=0.0)
+        return torch.from_numpy(obs_np).to(device=self.device)
+
+    # =====================================================================================================
+    # Reward / done (sparse-primary G1-G6, latched-monotonic, ORDERED gating)
+    # =====================================================================================================
+
+    def _compute_rewards_dones_batch(self):
+        """G1-G6 latched reward + termination. Returns (rewards, dones, extras)."""
+        wp.synchronize()
+        bq = self._state_0.body_q.numpy()
+        N = self._world_count
+        rewards = np.zeros(N, dtype=np.float32)
+        dones = np.zeros(N, dtype=np.int64)
+        timeouts = np.zeros(N, dtype=np.int64)
+        successes = np.zeros(N, dtype=np.float32)
+        invalids = np.zeros(N, dtype=np.bool_)  # explosion -> PPO batch mask (LOUD-CARRY: stock RSL-RL has no field)
+        drops = np.zeros(N, dtype=np.bool_)
+
+        for w in range(N):
+            ws = self._bws[w]
+            ph = int(self._route_phase_id[w])
+            clamp_r = clamp_pos_ko(bq[ws + _RIGHT_EE_BODY][:3], bq[ws + _RIGHT_EE_BODY][3:7])
+            clamp_l = clamp_pos_ko(bq[ws + _LEFT_EE_BODY][:3], bq[ws + _LEFT_EE_BODY][3:7])
+            cable_pos = bq[self._cable_bodies[w], :3]
+
+            # --- live quantities ---
+            r_near = float(np.min(np.linalg.norm(cable_pos - clamp_r, axis=1)))
+            l_near = float(np.min(np.linalg.norm(cable_pos - clamp_l, axis=1)))
+            grip_r, grip_l = self._route_grip[w, 0], self._route_grip[w, 1]
+            contact_r = r_near < self.CONTACT_PROXIMITY_M and grip_r >= 0.5
+            contact_l = l_near < self.CONTACT_PROXIMITY_M and grip_l >= 0.5
+            span = float(np.linalg.norm(clamp_r[:2] - clamp_l[:2]))  # Y-plane EE-EE separation
+            mid_xy = 0.5 * (clamp_r[:2] + clamp_l[:2])
+            held_i = int(np.argmin(np.linalg.norm(cable_pos[:, :2] - mid_xy, axis=1)))
+            held_z = float(cable_pos[held_i, 2])
+            c1_seat, _, _ = self._seat_metrics(cable_pos, _C1_XY)
+            c2_seat, _, _ = self._seat_metrics(cable_pos, _C2_XY)
+            z_c1_m, flank_m = self._c1_retention_m(cable_pos)
+            # frozen def (recount:107): z_c1 < 0.840 and flank==flank (NaN guard) and flank < 0.840, in [m].
+            c1_retained = (
+                z_c1_m < rc.C1_RETAINED_LOW_WALL_TOP_M
+                and flank_m == flank_m
+                and flank_m < rc.C1_RETAINED_LOW_WALL_TOP_M
+            )
+            c2_honest = self._c2_seated_honest(cable_pos)
+            lane_seg = self._lane_matched_target(cable_pos, ph, clamp_r, self._target_seg_indices_r[w])
+            r_reach = float(np.linalg.norm(clamp_r - lane_seg))  # R reach to lane-matched target (G4 _at_88 proxy)
+
+            # --- explosion (physics-fault invalid) ---
+            explosion = (r_near > self.EXPLOSION_DIST_THRESH or l_near > self.EXPLOSION_DIST_THRESH
+                         or np.isnan(r_near) or np.isnan(l_near))
+
+            # --- drop (-10; held-z floor / debounced contact-loss / lateral escape). Only meaningful AFTER
+            # grasp (G1 cage latched) -- before grasp there is nothing to drop. span/reach = INFORMATIVE. ---
+            grip_active = grip_r >= 0.5 or grip_l >= 0.5
+            grasped = bool(self._g_latched[w, 0])
+            if grasped and grip_active and not (contact_r or contact_l):
+                self._contact_loss_count[w] += 1
+            else:
+                self._contact_loss_count[w] = 0
+            lateral_dev = abs(self._crossing_x_dev(cable_pos))
+            dropped = bool(
+                grasped
+                and (
+                    (self._g_latched[w, 1] and held_z < self._cable_z_rest + self.DROP_LIFT_MARGIN_M)
+                    or (self._contact_loss_count[w] >= self.DROP_CONTACT_LOSS_DEBOUNCE)
+                    or (lateral_dev > self.DROP_LATERAL_DEV_MAX_M)
+                )
+            )
+
+            # --- span guard: dual-grip phase ONLY, INFORMATIVE tier (no terminate) ---
+            span_ok = True
+            if self._route_is_dual[w]:
+                span_ok = abs(span - rc.HOLD_SPAN_ACHIEVED) <= rc.HOLD_SPAN_TOL_M  # informative-only
+
+            # --- raw predicates p1..p6 (ORDERED latch applied below) ---
+            p1 = (grip_r >= 0.5 and grip_l >= 0.5) and (contact_r and contact_l) and (
+                abs(span - rc.HOLD_SPAN_ACHIEVED) <= rc.HOLD_SPAN_TOL_M
+            )
+            p2 = (held_z - self._cable_z_rest) >= self.LIFT_RISE_MIN_M
+            p3 = (c1_seat < T_GROOVE) and (ph >= 2)  # C1-seat and pin-fired proxy (phase reached G3)
+            p4 = (r_reach <= self.REGRASP_REACH_TOL_M) and contact_r  # _at_88 and _R_grips proxy (in-scene lane)
+            p5 = c2_seat < T_GROOVE
+            preds = [p1, p2, p3, p4, p5]
+
+            # --- ordered, latched, fire-once phase bonuses (G1..G5) ---
+            r_phase = 0.0
+            for k in range(5):
+                if self._g_latched[w, k]:
+                    continue
+                if k > 0 and not self._g_latched[w, k - 1]:
+                    break  # ORDERED: G_k fires only if G_{k-1} latched
+                if preds[k]:
+                    self._g_latched[w, k] = True
+                    r_phase += rc.G_PHASE_BONUS
+                else:
+                    break
+
+            # --- G6 SUCCESS = strict_v2 full mirror (requires G5 latched; sustained K_ROUTE_SEAT) ---
+            success = False
+            if self._g_latched[w, 4]:
+                g6_live = c2_honest and c1_retained and (not dropped) and span_ok
+                self._g6_sustain[w] = self._g6_sustain[w] + 1 if g6_live else 0
+                if self._g6_sustain[w] >= rc.K_ROUTE_SEAT and not self._g_latched[w, 5]:
+                    self._g_latched[w, 5] = True
+                    success = True
+
+            # --- reward assembly (explosion/drop override to -10; else time + phase (+200 on success)) ---
+            if explosion or dropped:
+                r = rc.TERM_PENALTY
+            else:
+                r = rc.TIME_PENALTY + r_phase + (rc.G6_TASK_BONUS if success else 0.0)
+
+            timeout = self.episode_length_buf[w].item() >= self.max_episode_length
+            done = success or timeout or explosion or dropped
+            rewards[w] = r
+            dones[w] = int(done)
+            # [!] TIMEOUTS PURITY (prohibited.md value_loss-105x history): timeout ONLY, with the
+            # explosionandtimeout -> time_outs=False precedence (CC4-CH4).
+            timeouts[w] = int(timeout and not success and not explosion and not dropped)
+            successes[w] = float(success)
+            invalids[w] = bool(explosion)
+            drops[w] = bool(dropped)
+            if done:
+                self._episode_success_buf.append(float(success))
+
+        if len(self._episode_success_buf) > 0:
+            self._last_success_rate = float(np.mean(self._episode_success_buf))
+
+        extras = {
+            "observations": {},
+            "time_outs": torch.tensor(timeouts, dtype=torch.long, device=self.device),
+            # LOUD-CARRY: trainer wires invalid_mask (explosion) into the PPO batch mask (no stock field).
+            "invalid_mask": torch.tensor(invalids, dtype=torch.bool, device=self.device),
+            # (b') pushforward info (NEW-C): as-executed residual a' + projection mode (0=common,1=transit).
+            "info": {
+                "executed_residual": torch.tensor(
+                    self._last_executed_residual, dtype=torch.float32, device=self.device
+                ),
+                "projection_mode": torch.tensor(self._last_projection_mode, dtype=torch.long, device=self.device),
+                "phase_id": torch.tensor(self._route_phase_id, dtype=torch.long, device=self.device),
+                "is_dual_grip": torch.tensor(self._route_is_dual, dtype=torch.bool, device=self.device),
+            },
+            "log": {
+                "/episode/success": float(np.mean(successes)),
+                "/metrics/episode_success_rate": self._last_success_rate,
+                "/metrics/explosion_count": int(np.sum(invalids)),
+                "/metrics/drop_count": int(np.sum(drops)),
+                "/metrics/g_latched_mean": float(np.mean(self._g_latched.sum(axis=1))),
+                "/reward/r_total": float(np.mean(rewards)),
+            },
+        }
+        return (
+            torch.tensor(rewards, dtype=torch.float32, device=self.device),
+            torch.tensor(dones, dtype=torch.long, device=self.device),
+            extras,
+        )
+
+    # =====================================================================================================
+    # RSL-RL VecEnv interface
+    # =====================================================================================================
+
+    @property
+    def num_obs(self):
+        return rc.OBS_DIM  # 62
+
+    def _pull_route(self):
+        """Query the route interface for all worlds (per-step ABSOLUTE base target + phase + grip + dual
+        gate). within-phase progress [50] is derived env-side from phase-entry tracking (route-agnostic:
+        the 4-tuple contract does not carry it), normalized by a nominal equal-split phase length.
+        """
+        N = self._world_count
+        route_targets = np.zeros((N, 6), dtype=np.float32)
+        nominal_phase_len = max(self.MAX_EPISODE_STEPS / rc.N_ROUTE_PHASES, 1.0)
+        for w in range(N):
+            t = int(self.episode_length_buf[w].item())
+            target_6d, phase_id, grip_2, is_dual = self._route.step_target(t)
+            route_targets[w] = target_6d
+            if phase_id != int(self._prev_phase_id[w]):
+                self._phase_entry_step[w] = t
+                self._prev_phase_id[w] = phase_id
+            self._route_phase_id[w] = phase_id
+            self._route_within[w] = float(np.clip((t - self._phase_entry_step[w]) / nominal_phase_len, 0.0, 1.0))
+            self._route_grip[w] = grip_2
+            self._route_is_dual[w] = is_dual
+        return route_targets
+
+    def get_observations(self) -> tuple[torch.Tensor, dict]:
+        obs = self._compute_obs_batch()
+        obs = torch.nan_to_num(obs, nan=0.0, posinf=1e6, neginf=-1e6)
+        return obs, {"observations": {}}
+
+    def reset(self) -> tuple[torch.Tensor, dict]:
+        self._reset_worlds(list(range(self._world_count)))
+        self.episode_length_buf[:] = 0
+        self._route.reset_to_phase(0)  # STUB: no-op record (real = state-bank fork, LOUD-CARRY)
+        self._pull_route()
+        return self.get_observations()
+
+    def step(self, actions: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, dict]:
+        actions = torch.nan_to_num(actions, nan=0.0, posinf=0.0, neginf=0.0).clamp(-1.0, 1.0)
+        route_targets = self._pull_route()  # base ABSOLUTE targets + phase/grip/dual for THIS step
+        self._apply_actions_batch(actions, route_targets)
+        self.episode_length_buf += 1
+        self._total_env_steps += self._world_count
+
+        rewards, dones, extras = self._compute_rewards_dones_batch()
+        rewards = torch.nan_to_num(rewards, nan=-10.0, posinf=0.0, neginf=-10.0)
+
+        done_ids = dones.nonzero(as_tuple=False).squeeze(-1)
+        if len(done_ids) > 0:
+            self._reset_worlds(done_ids.cpu().tolist())
+
+        obs = self._compute_obs_batch()
+        obs = torch.nan_to_num(obs, nan=0.0, posinf=1e6, neginf=-1e6)
+        return obs, rewards, dones, extras
+
+    def close(self):
+        pass
