@@ -61,7 +61,7 @@
 | Q4 HIGH4 | success の seat-ori 節 | 含める / 外す | **外す** (G7 解決まで; α-12D 選択時のみ再検討 live — DC-1s3 連動) |
 | Q5 horizon | RL horizon | 900 | **900 確定 — 新 geometry で再検証済** (round-2 実測 max 771 < 810、§2) |
 | Q6 OG band | band α/β/γ | provisional / 再較正 | **provisional 明記のまま採用 → OG port+再検証後に再 pin = 1 決定に統合** |
-| Q7 draw 方針 | 不可勝 cell の扱い | truncate-無-penalty / **DR-support 除外 + 文書化** | **DR-support 除外**。cell list = **EMPTY (provisional) を維持、ただし v1.1 で候補具体化: R_MISS 型 φ10 6 cell (drape-gap +39〜51mm) は Δ bound が cover しなければ draw 会計へ復帰** — 判定は P4 pre-reg の Δ bound discharge 時に機械適用 (§2)。honest-F 13 cell は winnable 扱い (basin-gap ~5-9mm = 発見対象) |
+| Q7 draw 方針 | 不可勝 cell の扱い | truncate-無-penalty / **DR-support 除外 + 文書化** | **DR-support 除外**。cell list = **EMPTY (provisional) を維持、ただし v1.1 で候補具体化: R_MISS 型 φ10 6 cell (drape-gap +39〜51mm) は Δ bound が cover しなければ draw 会計へ復帰** — 判定は P4 pre-reg の Δ bound discharge 時に機械適用 (§2)。honest-F 13 cell は winnable 扱い (crossing-x gap: x* まで ~0-3mm / basin 帯まで ~9-14mm = 発見対象、§2 基準併記) |
 | Q8 obs v2.1 | 53D / 57D | — | **57D** ([53:55] contact + [55:57] IK-resid、§運用21 整合) |
 | Q9 counting | SR 計数規則 | — | **confirm のみ: strict_v2 predicate-complete 分子 (C1 保持 ∧ C2 honest 着座) を P2 でも PRIMARY に承継** (J-9 教訓、§運用29) |
 | Q10 span tier | span-guard window | informative 既定 / hard | **informative 既定を維持** — window = 92.42mm 定数 (新 geometry 再検証済、§2) で pin |
