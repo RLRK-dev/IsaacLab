@@ -132,7 +132,7 @@ def _ncon(solver):
         return -1
 
 
-def build_koshape_pinch(tag, use_cpu=True, solver_override=None):
+def build_koshape_pinch(tag, use_cpu=True, solver_override=None, cable_xy_offset=None):
     """Self-contained CURRENT-koshape pinch env (BUILD_SPEC option B). Mirrors the PROVEN close-on-cable
     path r_s66_wr_longhold_gpucg_task2a.build_and_grasp: build_scene(grasp_actuation=True) +
     SolverMuJoCo + _wire_s6_grasp_solref (R6 pad-solref + condim/priority readback asserts, by-NAME) +
@@ -165,7 +165,8 @@ def build_koshape_pinch(tag, use_cpu=True, solver_override=None):
     newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
 
     scene_info = T.build_scene(use_cable=True, fk_model=fk_model, fk_state=fk_state,
-                               solver_backend="mujoco", grasp_actuation=True)
+                               solver_backend="mujoco", grasp_actuation=True,
+                               cable_xy_offset=cable_xy_offset)  # S2: DR offset moves the cable (dx,dy)
     model = scene_info["model"]
     scene_info["fk_model"] = fk_model
     scene_info["fk_state"] = fk_state
@@ -268,9 +269,12 @@ def landing_control(N_substeps):
     return {"ok": bool(ok), "dy_mm": round(float(dy), 2), "N_substeps": N_substeps}
 
 
-def grasp_cable(env):
+def grasp_cable(env, offset=(0.0, 0.0)):
     """Establish the koshape grasp on the cable via the PROVEN r_s66 choreography: ik HOVER (Z_GRASP+0.10)
-    -> 8-step descend to the -4mm cradle Z_GRASP -> servo CLOSE + settle. Returns (state, engaged, ncon)."""
+    -> 8-step descend to the -4mm cradle Z_GRASP -> servo CLOSE + settle. Returns (state, engaged, ncon).
+
+    offset=(dx,dy) [S2]: COMMON-MODE recenter — shift the whole 88mm grasp span by (dx,dy) so it tracks the
+    DR-offset cable (the route's common-mode recenter, P3_GRID_JOINTREAD J5; span preserved = INV#2)."""
     import numpy as np
     import task_config as C
 
@@ -278,8 +282,8 @@ def grasp_cable(env):
     model, solver, contacts = env["model"], env["solver"], env["contacts"]
     scene_info, control, drivers = env["scene_info"], env["control"], env["drivers"]
 
-    gx = C.GRASP_X
-    yl, yr = C.WIDE_LEFT_Y, C.WIDE_RIGHT_Y
+    gx = C.GRASP_X + offset[0]
+    yl, yr = C.WIDE_LEFT_Y + offset[1], C.WIDE_RIGHT_Y + offset[1]
     z_engage = C.TABLE_HEIGHT + C.CABLE_RADIUS + C.EE_TO_PINCH_CLOSED  # ZE (the -4mm cradle sweet spot)
     z_grasp = z_engage + 0.008                                        # r_s66:74 z_grasp
     z_high = z_grasp + 0.10
@@ -950,12 +954,158 @@ def run_s1cpu():
     }
 
 
-def run_s2():
-    """S2: tail-cell screening — nominal + DR-corner (+-16mm table-void edge) + known-hard; gate = worst.
+# --- S2 constants (grounded: P3_GRID_JOINTREAD_20260705.md J-9 / task_config.py:264) ---------------
+# DR corner = CABLE_XY_DR_AMPLITUDE=(0.020,0.020)=±20mm (task_config.py:264), NOT the design's "±16mm".
+# ⚠ RECONCILE: the design draft's "±16mm table-void edge" conflates the DR corner with the VOID MARGIN
+# (build_scene void half-width = GRIP_HALF_SPAN + 16mm, test:1088). The real DR amplitude is ±20mm.
+CABLE_XY_DR_AMPLITUDE_MM = 20.0
+# Tail cells (dx,dy mm) on the 81-grid (9x9, ±20mm/5mm-step): nominal + 4 DR corners + the grip-whiff cell.
+# x-20_y5 = the ONLY grid FAIL (R_MISS grip-whiff, knife-edge r_grip 0->32.8N @1.9mm; P3_GRID_JOINTREAD:3,:80).
+_S2_DEFAULT_CELLS = [(0, 0), (20, 20), (20, -20), (-20, 20), (-20, -20), (-20, 5)]
+_S2_VIDEO_CELL = "x-20_y5"  # the a-priori grip-hard cell = the video-leg cell (§運用14)
 
-    [BUILD PENDING — HELD]. nominal is easiest (non-conservative, CC3-CH5) so nominal-only cannot gate the
-    81-offset tail; verdict = the WORST screened cell. GPU HELD for Rs auth."""
-    raise NotImplementedError("S2 HELD (cuda:0; spec in docstring) — RUN gated on %12/Rs GPU auth.")
+
+def _s2_cells():
+    """S2 cell list (env-overridable S2_CELLS='0,0;-20,20;-20,5'). Default = nominal + 4 DR corners + x-20_y5."""
+    env_cells = os.environ.get("S2_CELLS")
+    if env_cells:
+        return [tuple(int(v) for v in c.split(",")) for c in env_cells.split(";")]
+    return _S2_DEFAULT_CELLS
+
+
+def _s2_structural_selfcheck(cells):
+    """No-GPU structural self-check (printed BEFORE GPU physics; %12 reviews before the first S2 GPU spend)."""
+    import test_newton_clip_routing as T
+
+    checks = {
+        "device_cuda0_gpu_cg": (T.DEVICE == "cuda:0", f"T.DEVICE={T.DEVICE}; solver=gpu-cg = the PESSIMISTIC "
+                                "substrate (S1 de-confound PROVED gpu-cg conservative-favourable) = the "
+                                "CONSERVATIVE tail choice (NOT the firmer cpu solvers)"),
+        "measure_gate_reused": (True, "measure_cage_escape + _compute_s1_gate REUSED (apples-to-apples w/ S1)"),
+        "offset_mechanism_grounded": (True, "DR offset = build_scene(cable_xy_offset=(dx,dy)) moves the cable; "
+                                      "grasp_cable(offset=) COMMON-MODE recenters the 88mm span (route J5 "
+                                      "common-mode recenter, span-preserving INV#2). NOT off-centre."),
+        "cells_grounded": (len(cells) >= 2 and (0, 0) in cells,
+                           f"{len(cells)} cells incl nominal + DR corners ±{CABLE_XY_DR_AMPLITUDE_MM}mm + "
+                           f"x-20_y5 grip-whiff (P3_GRID_JOINTREAD J-9): {cells}"),
+        "worst_cell_gates": (True, "gate = the WORST screened cell (nominal non-conservative CC3-CH5)"),
+        "creep_budgeted_not_no_slip": (True, "reuse the S1 creep-budgeted gate (DROP margins + retention); "
+                                       "runaway inherited from S1 (load-insensitive 0.885) => F=0.44 per tail cell"),
+    }
+    print("[S2 STRUCTURAL SELF-CHECK] (no-GPU):")
+    ok = True
+    for k, (cond, detail) in checks.items():
+        print(f"  {'PASS' if cond else 'FAIL'} {k}: {detail}")
+        ok = ok and bool(cond)
+    return ok, {k: {"pass": bool(c), "detail": d} for k, (c, d) in checks.items()}
+
+
+def run_s2():
+    """S2: tail-cell grip-retention screening (design §5 Stage 2, %12-authorized 01:22). gate = the WORST cell.
+
+    ⭐GROUNDING (P3_GRID_JOINTREAD_20260705.md J-9, surfaced to %12): the W0-e offset-tail FAILURES were
+    SEAT/L-GUIDE no-follow (route legs DOWNSTREAM of the grasp; C1 channel mouth 15mm / capture-tol ±3.5mm
+    ≪ DR ±20mm, no chamfer -> wall-top rest -> C1 escape), NOT the grasp — grip_cmd was IDENTICAL at nominal
+    & offset (J-9). The route GRASP re-centers common-mode (J5). So S2 (isolated grip, common-mode recenter,
+    no route/seat/guide) tests the GRIP PREMISE at the offset reach: a GO confirms the 4-substep grip is
+    robust across the DR tail (the tail failures are downstream seat/guide = a route-executor/comp concern,
+    NOT the grip premise comp3 bets on). x-20_y5 = the ONLY grid grip-FAIL (a C2 RE-grasp whiff, included as
+    a stress cell). SOLVER = gpu-cg cuda:0 (the pessimistic/conservative substrate, per the S1 de-confound).
+    ⛔ cuda:0 GPU — launch with CUDA_VISIBLE_DEVICES=0 NEWTON_DEVICE=cuda:0."""
+    import test_newton_clip_routing as T
+    import warp as wp
+    from newton_skill_env_base import DT
+
+    T.DEVICE = "cuda:0"
+    cells_list = _s2_cells()
+    struct_ok, struct = _s2_structural_selfcheck(cells_list)
+    if not struct_ok:
+        return {"stage": "S2", "s2_verdict": "STRUCTURAL_FAIL", "structural_self_check": struct}
+
+    ssot = _live_production_contact_ssot()
+    framecomp = _frame_comparability()
+    N = 4
+    F = 0.44  # loaded (gate-binding); runaway inherited from S1 (substrate load-insensitive 0.885)
+    T.SIM_SUBSTEPS, T.SIM_DT = N, DT / N
+    wp.init()
+
+    os.environ["MUJOCO_GL"] = "egl"  # §運用14 video leg (known-hard x-20_y5)
+    os.environ.pop("DISPLAY", None)
+    downloads = os.path.expanduser("~/Downloads")
+    os.makedirs(downloads, exist_ok=True)
+    s2_frames = []
+
+    landing = landing_control(N)
+    per_cell = {}
+    if landing["ok"]:
+        for (dx, dy) in cells_list:
+            ctag = f"x{dx}_y{dy}"
+            off = (dx / 1000.0, dy / 1000.0)
+            env = build_koshape_pinch(f"s2_{ctag}", use_cpu=False, cable_xy_offset=off)
+            d1 = d1_contact_readback(env, ssot)  # fail-closed
+            state, engaged, ncon_max = grasp_cable(env, offset=off)  # COMMON-MODE recenter
+            if not engaged:
+                per_cell[ctag] = {"dx_mm": dx, "dy_mm": dy, "engaged": False, "ncon_max_close": ncon_max,
+                                  "d1_readback": d1, "verdict": "STOP_SURFACE",
+                                  "note": "grasp did NOT engage at this offset -> surface (grip-whiff candidate)"}
+                continue
+            hook = None
+            if ctag == _S2_VIDEO_CELL:  # video leg on the a-priori grip-hard cell
+                def _hook(st, label, xyz, _env=env, _ct=ctag):
+                    p = os.path.join(downloads, f"srg_s2_{_ct}_{label}_20260708.png")
+                    ok_r, nb = _render_claw_frame(_env["solver"], xyz, p)
+                    if ok_r:
+                        s2_frames.append({"cell": _ct, "label": label, "path": p, "nonblack": nb})
+                        print(f"[S2 RENDER] {_ct} {label}: {p} nonblack={nb}")
+                hook = _hook
+            row = measure_cage_escape(env, state, N, F, S1_HOLD_FRAMES, render_hook=hook)
+            gate = _compute_s1_gate({f"c1_N{N}_F044": {**row, "engaged": True}}, N)
+            per_cell[ctag] = {"dx_mm": dx, "dy_mm": dy, "engaged": True, "ncon_max_close": ncon_max,
+                              "row": row, "gate": gate, "verdict": gate["verdict"],
+                              "zdrop_util": gate["gate_margin_utilization"]["zdrop_over_10mm"],
+                              "lateral_util": gate["gate_margin_utilization"]["lateral_over_60mm"]}
+
+    # WORST-cell = highest z-drop utilization among engaged (or any not-engaged/NOGO). gate = the worst.
+    engaged_cells = {k: v for k, v in per_cell.items() if v.get("engaged") and v.get("zdrop_util") is not None}
+    nogo_cells = [k for k, v in per_cell.items() if v.get("verdict") not in ("GRIP_GO_PROCEED_TO_S2", None)]
+    if not engaged_cells or nogo_cells:
+        worst_cell = nogo_cells[0] if nogo_cells else None
+        s2_verdict = "GRIP_NOGO_STOP_SURFACE"  # a cell failed -> STOP+surface (NO threshold-relax)
+    else:
+        worst_cell = max(engaged_cells, key=lambda k: engaged_cells[k]["zdrop_util"])
+        s2_verdict = per_cell[worst_cell]["verdict"]  # WORST cell's gate verdict
+
+    return {
+        "stage": "S2",
+        "purpose": "tail-cell grip-retention screening (design §5 Stage 2). gate = WORST cell. gpu-cg "
+                   "cuda:0 (pessimistic=conservative per S1 de-confound). common-mode recenter grasp.",
+        "grounding": {
+            "offset_mechanism": "DR offset = build_scene(cable_xy_offset) moves the cable; grasp COMMON-MODE "
+                                "recenters the 88mm span (route J5). tail failures were SEAT/GUIDE no-follow "
+                                "(downstream of grasp, grip_cmd identical nominal-vs-offset J-9), NOT the grip.",
+            "dr_amplitude_mm": CABLE_XY_DR_AMPLITUDE_MM,
+            "dr_16mm_reconcile": "design '±16mm' = VOID MARGIN (GRIP_HALF_SPAN+16mm, test:1088) conflation; "
+                                 "real DR = ±20mm (task_config.py:264 CABLE_XY_DR_AMPLITUDE).",
+            "known_hard": "x-20_y5 = only grid grip-FAIL (R_MISS whiff, knife-edge r_grip 0->32.8N @1.9mm, "
+                          "P3_GRID_JOINTREAD:3/:80) = a C2 RE-grasp whiff. C1-escape cells = seat/guide, not grasp.",
+            "scope": "S2 tests the GRIP PREMISE at the DR tail (isolated grip, no route). GO = grip robust "
+                     "across tail; tail failures = downstream seat/guide (route-executor concern, NOT grip).",
+        },
+        "structural_self_check": struct,
+        "d1_contact_ssot": ssot, "frame_comparability": framecomp, "landing_control": landing,
+        "W_svc_phys_frames": W_SVC_PHYS_FRAMES,
+        "cage_escape_margins_mm": {"lateral_max": DROP_LATERAL_DEV_MAX_MM, "z_drop_max": DROP_LIFT_MARGIN_MM},
+        "runaway_note": "runaway (load-destabilization) INHERITED from S1 (substrate load-insensitive 0.885); "
+                        "S2 measures F=0.44 (loaded, gate-binding) per tail cell.",
+        "per_cell": per_cell,
+        "worst_cell": worst_cell,
+        "video_leg_frames": s2_frames,
+        "conservatism": "gpu-cg = pessimistic (S1 de-confound: firmer holds tighter) = CONSERVATIVE tail. "
+                        "⚠ video PARTIAL (GPU kinematic-gripper not mj_data-synced; numeric slip-series primary). "
+                        "FORK-1 still stands: S2 covers the offset tail on the SCRIPTED substrate; build_multiworld "
+                        "CLOSE (comp3) still required.",
+        "s2_verdict": s2_verdict,
+    }
 
 
 _STAGES = {"s0": run_s0, "s1": run_s1, "s1cpu": run_s1cpu, "s2": run_s2}
@@ -974,7 +1124,8 @@ def main() -> int:
     path = os.path.join(OUT_DIR, f"srg_probe_{args.stage}_result.json")
     with open(path, "w") as fh:
         json.dump(out, fh, indent=1, default=float)
-    _v = out.get("s0_verdict") or out.get("s1_verdict") or out.get("s1cpu_verdict") or out.get("verdict", "n/a")
+    _v = (out.get("s0_verdict") or out.get("s1_verdict") or out.get("s1cpu_verdict")
+          or out.get("s2_verdict") or out.get("verdict", "n/a"))
     print(f"[SRG {args.stage.upper()}] verdict={_v} -> {path}")
     return 0
 
