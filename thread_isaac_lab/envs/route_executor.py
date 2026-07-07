@@ -31,6 +31,7 @@ servo-seed assert, and ``_set_gripper_target``. The AR-specific LEFT-arm freeze
 (§13.2 G3; both arms IK-tracked, adapted from the locked monolith choreography).
 """
 
+import math as _math
 import os
 
 import newton
@@ -643,6 +644,74 @@ def ik_move_both(
     print(f"  [{label}] Final: err L={err_l:.1f}mm R={err_r:.1f}mm converged={converged} (thresh={converge_mm}mm)")
 
     return state, converged
+
+
+# =============================================================================
+# §13 / item-1 -- C2 re-grasp per-arm-rotation IK closures, re-plumbed to module level.
+# In the monolith these are route-LOCAL closures (test:5156/5161/5171) capturing route state
+# (``state``/``cable_bodies``/``_ROT``); verbatim copy is impossible (item-1). They are re-plumbed
+# to explicit params (closure-var -> arg), BEHAVIOR-PRESERVING: no change beyond the arg-ification
+# (proven by the ast semantic-equiv check, which reverses only the re-plumb). The route body (A4+)
+# builds ``_ROT`` and injects the rotated solver into ``ik_move_both`` via
+# ``ik_solve_fn=functools.partial(_solve_ik_dual_rot, rot=_ROT)`` (F11, no monkeypatch of a global).
+# =============================================================================
+def _rot_quat_rx(angle):  # X-rotation target in solve_ik_dual's XYZW convention (w LAST)
+    return wp.array([wp.vec4(_math.sin(angle / 2), 0.0, 0.0, _math.cos(angle / 2))], dtype=wp.vec4, device=DEVICE)
+
+
+def _cable_local_pitch(y_t, state, cable_bodies):
+    # cable local Y-Z pitch theta [rad] at lane y_t (tangent of adjacent segments).
+    # (re-plumb A3/item-1: ``state``/``cable_bodies`` were route-local closures -> explicit params.)
+    wp.synchronize()
+    cbs = state.body_q.numpy()[cable_bodies]
+    cbs = cbs[np.argsort(cbs[:, 1])]
+    ys = cbs[:, 1]
+    j = int(np.argmin(np.abs(ys - y_t)))
+    a, b = max(j - 1, 0), min(j + 1, len(ys) - 1)
+    dY, dZ = float(ys[b] - ys[a]), float(cbs[b, 2] - cbs[a, 2])
+    return _math.atan2(dZ, dY) if abs(dY) > 1e-9 else 0.0
+
+
+def _solve_ik_dual_rot(scene_info_, target_left, target_right, warmstart_jq=None, rot=None):
+    # Faithful copy of solve_ik_dual (test:1814) but with PER-ARM rotation targets _ROT['L']/_ROT['R'].
+    # (re-plumb A3/item-1: the ``_ROT`` closure -> explicit ``rot`` param; C2 passes rot=_ROT via partial.)
+    fk_model_ = scene_info_["fk_model"]
+    fk_state_ = scene_info_["fk_state"]
+    le, re = EE_BODY_OFFSET, FRANKA_NUM_JOINTS + EE_BODY_OFFSET
+    ol = IKObjectivePosition(
+        link_index=le,
+        link_offset=wp.vec3(0.0, 0.0, 0.0),
+        target_positions=wp.array(np.array([target_left], dtype=np.float32), dtype=wp.vec3, device=DEVICE),
+        weight=1.0,
+    )
+    orr = IKObjectivePosition(
+        link_index=re,
+        link_offset=wp.vec3(0.0, 0.0, 0.0),
+        target_positions=wp.array(np.array([target_right], dtype=np.float32), dtype=wp.vec3, device=DEVICE),
+        weight=1.0,
+    )
+    rl = IKObjectiveRotation(
+        link_index=le, link_offset_rotation=wp.quat_identity(), target_rotations=rot["L"], weight=0.5
+    )
+    rr = IKObjectiveRotation(
+        link_index=re, link_offset_rotation=wp.quat_identity(), target_rotations=rot["R"], weight=0.5
+    )
+    jl = IKObjectiveJointLimit(
+        joint_limit_lower=fk_model_.joint_limit_lower,
+        joint_limit_upper=fk_model_.joint_limit_upper,
+        weight=10.0,
+    )
+    from newton_routing_utils import _build_collision_objectives
+
+    cobjs = _build_collision_objectives() if os.environ.get("COLLISION_AVOIDANCE", "1") != "0" else []
+    iks = IKSolver(fk_model_, n_problems=1, objectives=[ol, orr, rl, rr, *cobjs, jl])
+    fj = fk_state_.joint_q.numpy().copy()
+    if warmstart_jq is not None:
+        fj = np.asarray(warmstart_jq, dtype=fj.dtype).reshape(-1).copy()
+    qin = wp.array(fj.reshape(1, -1), dtype=float, device=DEVICE)
+    qout = wp.zeros((1, fk_model_.joint_coord_count), dtype=float, device=DEVICE)
+    iks.step(qin, qout, iterations=IK_ITERATIONS, step_size=IK_STEP_SIZE)
+    return qout.numpy()[0], float(iks.costs.numpy()[0])
 
 
 class RouteExecutor(rc.RouteInterfaceV1):
