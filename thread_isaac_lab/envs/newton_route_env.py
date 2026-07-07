@@ -304,9 +304,14 @@ class NewtonRouteEnv(VecEnv):
         self._save_precondition_state()
         self._init_batched_ik_solver()
 
-        # Route interface = STUB (fixed nominal target = the settled P0 EE targets). The real route-
-        # executor connects next stage; is_dual_grip_window is single-sourced by the stub (CC5-2).
-        self._route = NominalRouteStub(self._settled_ee_r_pos, self._settled_ee_l_pos, self.MAX_EPISODE_STEPS)
+        # Route interface: STUB by default (env-core byte-preserve) or the real RouteExecutor when the
+        # cfg flag selects it (comp2 env-wiring). is_dual_grip_window is single-sourced by whichever
+        # implementation is active (CC5-2). flag-OFF keeps the env-core 25/81 byte-identity (gate-iii);
+        # flag-ON replays the recorded_replay route + supplies the phase-k state-bank for reset_to_phase.
+        if self.cfg.get("route_executor_impl", "stub") == "route_executor":
+            self._route = self._build_route_executor()
+        else:
+            self._route = NominalRouteStub(self._settled_ee_r_pos, self._settled_ee_l_pos, self.MAX_EPISODE_STEPS)
 
         # M-E guard: SolverMuJoCo backend assert (VBD-residue regression guard).
         assert isinstance(self._solver, SolverMuJoCo), (
@@ -315,6 +320,54 @@ class NewtonRouteEnv(VecEnv):
         print(
             f"[NewtonRouteEnv] Ready in {time.perf_counter() - t0:.1f}s. "
             f"obs={self.num_obs}, act={self.num_actions}, worlds={world_count}"
+        )
+
+    def _build_route_executor(self):
+        """Construct the real RouteExecutor from a recorded_replay npz (comp2 env-wiring; flag-ON path).
+
+        Loaded ONLY when ``cfg["route_executor_impl"] == "route_executor"`` so the default (stub) path keeps
+        the env-core byte-identity (gate-iii). The ONE-cell recording drives ``step_target`` (recorded_replay)
+        AND seeds the phase-k state-bank for ``reset_to_phase`` (built from the recorded phase-boundary
+        arm_q/grip; qvel=0 is data-forced -- see :func:`route_executor.build_state_bank_from_recording`).
+        Requires ``cfg["route_recording_npz"]`` (a ``route_demo_raw.npz`` from the canonical 81-grid).
+
+        Note (Stage-A scope): the flag-ON env is not rolled out in Stage-A (the env-core reset calls
+        ``reset_to_phase(0)`` = no-op, and gate-iii runs flag-OFF); a live flag-ON run + the cable-fork
+        re-seed for ``reset_to_phase(k>=1)`` (build plan sec 8 (B)) belong to the Stage-B / trainer stage.
+        """
+        # thread_isaac_lab/ (parent of configs) on the path so route_executor's `from configs.task_config` resolves.
+        _til = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        if _til not in sys.path:
+            sys.path.insert(0, _til)
+        import route_executor as rex
+
+        npz_path = self.cfg.get("route_recording_npz")
+        if not npz_path:
+            raise ValueError(
+                "route_executor_impl='route_executor' requires cfg['route_recording_npz'] "
+                "(a canonical route_demo_raw.npz)"
+            )
+        z = np.load(npz_path, allow_pickle=True)
+        recording = {
+            "ee_pos_r": z["ee_pos_r"],
+            "ee_pos_l": z["ee_pos_l"],
+            "grip_cmd": z["grip_cmd"],
+            "phase_id": z["phase_id"],
+            "arm_q": z["arm_q"],  # full physics joint_q/frame (arm[0:28] + cable[28:74]); the state_bank source
+        }
+        state_bank = rex.build_state_bank_from_recording(recording, self._world_count, arm_off=0)
+        print(
+            f"[NewtonRouteEnv] route_executor ON: recording={npz_path} "
+            f"(frames={recording['arm_q'].shape[0]}, state_bank phases={sorted(state_bank)})"
+        )
+        return rex.RouteExecutor(
+            self._arm_q_start,
+            self._arm_qd_start,
+            self.MAX_EPISODE_STEPS,
+            state_0=self._state_0,
+            control=self._control,
+            state_bank=state_bank,
+            recording=recording,
         )
 
     # =====================================================================================================
