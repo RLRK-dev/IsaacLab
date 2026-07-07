@@ -31,8 +31,10 @@ servo-seed assert, and ``_set_gripper_target``. The AR-specific LEFT-arm freeze
 (§13.2 G3; both arms IK-tracked, adapted from the locked monolith choreography).
 """
 
+import json
 import math as _math
 import os
+import sys
 
 import mujoco
 import newton
@@ -2053,7 +2055,905 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
         _f2_c = 0.0
         _f2_prev_cradle = bool(L_is_cradle)
         _f2_frozen = False
-    raise NotImplementedError("route body continues: C2 re-grasp + seat + verdict = A4d (build plan v1.8 section 13.7)")
+        _ph("GUIDE_PRELIFT")  # P3 label: step-10 lift as its own phase (future re-records; CC2-C1)
+        _route43 = os.environ.get("SEAT_TOPDOWN", "0") == "1"
+        _trav_z = (L_z0 + 0.045) if _route43 else L_z0  # 43-step lift delta (insert 1.025 -> traverse 1.07)
+        if _route43:
+            _npre = 8
+            for kk in range(1, _npre + 1):
+                _lz = L_z0 + (_trav_z - L_z0) * kk / _npre
+                if _f2_on and _f2_prev_cradle and not _f2_frozen:  # F-2 follow during the lift (measure at L_y0)
+                    _cxg, _ng = _w0e_guarded_cx(L_y0, L_x0)
+                    if _cxg is not None and abs(_cxg - L_x0) <= 0.030:
+                        _f2_c = _f2_c + float(np.clip((_cxg - L_x0) - _f2_c, -0.008, 0.008))
+                        _f2_c = float(np.clip(_f2_c, -_f2_cap, _f2_cap))
+                state, _ = ik_move_both(
+                    model,
+                    state,
+                    scene_info,
+                    solver,
+                    contacts,
+                    (L_x0 + _f2_c, L_y0, _lz),
+                    R_hold,
+                    label=f"C2-PRELIFT{kk}/{_npre}",
+                    converge_mm=2.5,
+                    speed_factor=0.22,
+                )
+                for _ in range(12):
+                    state = physics_step(model, state, solver, contacts, scene_info)
+            print(
+                f"  [C2-PRELIFT] L lifted {L_z0:.3f}->{_trav_z:.3f} (43-step step10 +45mm) before the high しごき traverse"
+            )
+        for k in range(1, N_GUIDE + 1):
+            lx = L_x0 + (c2x - L_x0) * k / N_GUIDE
+            ly = L_y0 + (c2y - L_y0) * k / N_GUIDE
+            if _f2_on and _f2_prev_cradle and not _f2_frozen:  # F-2: follow the cable X at the look-ahead Y (ly)
+                _cxg, _ng = _w0e_guarded_cx(ly, lx)
+                if _cxg is not None and abs(_cxg - lx) <= 0.030:
+                    _dev = _cxg - lx  # Q1 PLUS: deviation of the cable from the nominal straight line
+                    _f2_c = _f2_c + float(np.clip(_dev - _f2_c, -0.008, 0.008))  # Q3 (a) rate-limited follow
+                    _f2_c = float(np.clip(_f2_c, -_f2_cap, _f2_cap))  # Q2 cap (throat half - cable r)
+                    print(
+                        f"  [W0E-F2] guide{k} Y={ly:+.3f} dev={_dev * 1e3:+.2f}mm -> c={_f2_c * 1e3:+.2f}mm (cap{_f2_cap * 1e3:.0f})"
+                    )
+            lx = lx + _f2_c  # Q1 apply (a frozen c still applies)
+            state, _ = ik_move_both(
+                model,
+                state,
+                scene_info,
+                solver,
+                contacts,
+                (lx, ly, _trav_z),
+                R_hold,
+                label=f"C2-GUIDE{k}/{N_GUIDE}",
+                converge_mm=3.0,
+                speed_factor=0.25,
+            )
+            for _ in range(30):
+                state = physics_step(model, state, solver, contacts, scene_info)
+            _plk, _ = get_ee_positions(state, scene_info)
+            ee_xy = np.array([float(_plk[0]), float(_plk[1])])
+            wp.synchronize()
+            gb_xy = state.body_q.numpy()[guide_body, :2]
+            ee_disp = float(np.linalg.norm(ee_xy - ee_xy0))
+            cab_disp = float(np.linalg.norm(gb_xy - gb_xy0))
+            slip_xy = (cab_disp / ee_disp) if ee_disp > 1e-6 else 0.0
+            ee_dy, cab_dy = float(ee_xy0[1] - ee_xy[1]), float(gb_xy0[1] - gb_xy[1])
+            slip_y = (cab_dy / ee_dy) if abs(ee_dy) > 1e-6 else 0.0
+            _N, _pk, _n, _mu = _claw_cable_load(f1L0 + f2L0)
+            _gap = _min_dist_mm(f1L0 + f2L0, cable_geoms)
+            is_cradle = bool(-2.0 <= _gap <= 2.5 and 0.1 < _N < 60.0)
+            if _f2_on and not _f2_frozen and not is_cradle:  # Q4: cradle lost -> FREEZE c at last value, stop updates
+                _f2_frozen = True
+                print(f"  [W0E-F2] cradle lost @guide{k} -> c FROZEN {_f2_c * 1e3:+.2f}mm (no re-capture, no 0-reset)")
+            _f2_prev_cradle = is_cradle
+            tabN, _tabn = _claw_table_load(f1L0)  # BOTTOM claw vs SOLID table = the geometry JAM
+            tab_d = _min_dist_mm(f1L0, _tabg)
+            f1z = _f1_zmin_mm(f1L0)
+            zc1, c1d, c2d = _zc1(), _min_dist_mm(cable_geoms, _clip1g), _min_dist_mm(cable_geoms, _clip2g)
+            _c1np = (
+                _min_dist_mm(
+                    [g for g in cable_geoms if g != _seat_geom_mj], _clip1g
+                )  # %9 pin-excluded free-neighbor 床 bar (post-pin)
+                if _seat_geom_mj is not None
+                else c1d
+            )
+            _c1_np_min = min(_c1_np_min, _c1np)
+            _c2_pen_min = min(_c2_pen_min, c2d)  # W0-e per-clip episode-min penetration (producer)
+            lgrip_c2 = _min_dist_mm(
+                f1L0 + f2L0, _clip2g
+            )  # FLAG-D: L-gripper claws <-> C2 clip (penetration PV; <0=overlap)
+            lr_sep, _lr_pair = (
+                _hh_clear_mm()
+            )  # item1 HAND-HAND at ARM-LINK level (sphere model, matches IK avoid; uncapped)
+            rpad_c1 = _min_dist_mm(f1R0 + f2R0, _clip1g)  # item4 FINGER-CLIP: R-anchor pad <-> C1 clip (<0=penetration)
+            ret_low = bool(zc1 < LOW_WALL_TOP)
+            jam = bool(tab_d <= 0.2 or tabN > 0.5)
+            if (not is_cradle) and cradle_break_x is None:
+                cradle_break_x = round(lx, 4)
+            if jam and jam_onset_x is None:
+                jam_onset_x = round(lx, 4)
+            smode = "SLIDE" if slip_xy < 0.35 else ("DRAG" if slip_xy > 0.65 else "PARTIAL")
+            guide_legs.append(
+                {
+                    "k": k,
+                    "L_ee_x": round(lx, 4),
+                    "L_ee_y": round(ly, 4),
+                    "ee_disp_mm": round(ee_disp * 1e3, 2),
+                    "cable_disp_mm": round(cab_disp * 1e3, 2),
+                    "slip_xy": round(slip_xy, 3),
+                    "slip_y": round(slip_y, 3),
+                    "slide_mode": smode,
+                    "is_cradle": is_cradle,
+                    "claw_cable_gap_mm": round(_gap, 3),
+                    "claw_cable_N": round(_N, 2),
+                    "bottom_claw_table_dist_mm": round(tab_d, 3),
+                    "bottom_claw_table_N": round(tabN, 2),
+                    "bottom_claw_zmin_mm": round(f1z, 1),
+                    "JAM": jam,
+                    "z_c1_mm": round(zc1, 1),
+                    "c1_retained_lowwall": ret_low,
+                    "cable_c1_dist_mm": round(c1d, 3),
+                    "cable_c2_dist_mm": round(c2d, 3),
+                    "lgrip_c2_dist_mm": round(lgrip_c2, 3),
+                    "lr_gripper_sep_mm": round(lr_sep, 3),
+                    "rpad_c1_dist_mm": round(rpad_c1, 3),
+                }
+            )
+            print(
+                f"  [C2-GUIDE] k={k}/{N_GUIDE} Lx={lx:.3f} Ly={ly:+.3f} | slip_xy={slip_xy:.3f}({smode}) "
+                f"slip_y={slip_y:+.3f} cradle={is_cradle}(gap{_gap:+.2f}/N{_N:.1f}) | bottomclaw<->table={tab_d:+.2f}mm "
+                f"N={tabN:.1f} zmin={f1z:.1f} JAM={jam} | C1 z={zc1:.1f}({'IN' if ret_low else 'OUT'}) "
+                f"cable<->C1={c1d:+.2f} cable<->C2={c2d:+.2f} | Lgrip<->C2={lgrip_c2:+.2f} "
+                f"Rpad<->C1={rpad_c1:+.2f} | HH-armlink={lr_sep:+.2f}mm{_lr_pair} (sphere, <0=overlap)"
+            )
+            _cap(
+                f"GUIDE {k}/{N_GUIDE} Lx={lx:.3f}: slip={slip_xy:.2f}({smode}) cradle={is_cradle} JAM={jam} "
+                f"C1{'IN' if ret_low else 'OUT'}"
+            )
+
+        # FREEZE-SCOPE compute (%3 charter headline) -- the (a)/(b) discriminator + C1-retention + route-reach summary.
+        if _fs_on:
+            wp.synchronize()
+            _fs_p1 = state.body_q.numpy()[cable_bodies, :3].astype(float).copy()
+            _fs_disp = (np.linalg.norm(_fs_p1 - _fs_p0, axis=1) * 1e3).astype(float)  # mm per cable body over guide
+            _seat_arr = np.asarray(cable_bodies)
+            _seat_kk = (
+                int(np.where(_seat_arr == seat_body)[0][0])
+                if seat_body in _seat_arr
+                else int(np.argmin(np.abs(state.body_q.numpy()[cable_bodies, 1] - y_clip)))
+            )
+            _MOVE_THR = 2.0
+            _n_moved = int(np.sum(_fs_disp > _MOVE_THR))
+            _seat_disp = float(_fs_disp[_seat_kk])
+            _nbr_k = [k for k in (_seat_kk - 2, _seat_kk - 1, _seat_kk + 1, _seat_kk + 2) if 0 <= k < len(_fs_disp)]
+            _nbr_disp = [round(float(_fs_disp[k]), 2) for k in _nbr_k]
+            _max_disp = float(np.max(_fs_disp))
+            if not _perclip_on:
+                _scope = "CONTROL_NO_PIN(seat free)"
+            elif _seat_disp >= _MOVE_THR:
+                _scope = "SEAT_MOVED(pin-not-holding)"
+            elif _n_moved == 0:
+                _scope = "ALL_FROZEN(a-degenerate)"
+            elif _n_moved >= 3:
+                _scope = "SEAT_ONLY_FROZEN(b-viable)"
+            else:
+                _scope = "PARTIAL"
+            _zc1_final = _zc1()
+            _c1_ret_final = bool(_zc1_final < LOW_WALL_TOP)
+            _c2_reach_final = _min_dist_mm(cable_geoms, _clip2g)
+            print(
+                f"  [FREEZE-SCOPE] pin={'ON' if _perclip_on else 'OFF(control)'} seat_k={_seat_kk} "
+                f"seat_disp={_seat_disp:.2f}mm nbr={_nbr_disp} max={_max_disp:.1f}mm "
+                f"n_moved(>{_MOVE_THR})={_n_moved}/{len(_fs_disp)} -> {_scope} | C1 z={_zc1_final:.1f}"
+                f"({'IN' if _c1_ret_final else 'OUT'} low-wall {LOW_WALL_TOP:.0f}) cable<->C2={_c2_reach_final:+.2f}mm"
+            )
+            _freeze_scope_rec = {
+                "pin_active": _perclip_on,
+                "pin_eqid": _pin_eqid,
+                "pin_body": (int(seat_body) if _perclip_on else None),
+                "seat_k": _seat_kk,
+                "seat_disp_mm": round(_seat_disp, 2),
+                "neighbor_disp_mm": _nbr_disp,
+                "max_disp_mm": round(_max_disp, 1),
+                "n_moved_gt2mm": _n_moved,
+                "n_cable_bodies": len(_fs_disp),
+                "verdict": _scope,
+                "z_c1_seated_mm": round(float(z_c1_seated), 1),
+                "z_c1_after_pin_mm": (round(float(_z_c1_after_pin), 1) if _z_c1_after_pin is not None else None),
+                "z_c1_final_mm": round(float(_zc1_final), 1),
+                "c1_retained_lowwall": _c1_ret_final,
+                "low_wall_top_mm": round(float(LOW_WALL_TOP), 1),
+                "cable_c2_final_mm": round(float(_c2_reach_final), 2),
+                "per_body_disp_mm": [round(float(d), 2) for d in _fs_disp],
+                "guide_legs": guide_legs,
+            }
+
+        # (5) C2 SEAT ATTEMPT: lower L to push the cable into C2's groove. Over SOLID -> expect the bottom claw to
+        # hit the table before the cable seats; MEASURE cable<->C2 + the table jam (do NOT add a void).
+        _plg, _ = get_ee_positions(state, scene_info)
+        # SEAT_TOPDOWN (penetration fix, human-Rs 2026-06-30 「クリップの壁面にフィンガ、ケーブルが貫通している」):
+        # the default C2-PUSH descends the (half-open) gripper to the groove AT the clip (x,y) -> the claws + the
+        # dragged cable are forced INTO the clip-wall envelope (a kinematic position-drive can't be stopped by
+        # contact). SEAT_TOPDOWN=1 replaces it with a proper open-top insertion: LIFT the cable above the clip wall
+        # tops, position over the groove X-centre, then OPEN the gripper (release) so the cable settles into the
+        # open-top channel by gravity -- the gripper claws STAY above the wall tops, so neither finger nor cable is
+        # forced into the walls (a drag-mis-delivered cable simply MISSES = physically valid, vs forced penetration).
+        # DEFAULT 0 -> byte-identical old C2-PUSH. Lead-implemented (authority layer holds Rs's actual directive).
+        _seat_topdown = os.environ.get("SEAT_TOPDOWN", "0") == "1"
+        _c2_dualseat = (
+            (os.environ.get("C2_DUALSEAT", "0") == "1") and _seat_topdown
+        )  # Rs corrected-route 2026-07-01: R-rejoin + dual-finger clamp-push (replaces the L-single top-down slide)
+        if _c2_dualseat:
+            _GHS = (
+                WIDE_RIGHT_Y - WIDE_LEFT_Y
+            ) / 2.0  # 0.044 = 88mm two-EE span (INVARIANT#2; tgt2 yc-+GHS: L=-GHS, R=+GHS)
+            _wall_top_d = CLIP1_Z + _clip_float_z + 0.030
+            _z_above_d = _wall_top_d + 0.012 + ee_off  # hold above the C2 wall tops before the top-down descent
+            _seat_z_d = (
+                GROOVE_CENTER_Z + _clip_float_z + ee_off
+            )  # push the gripped cable centre to the FLOATED C2 groove
+            # 1) RE-GRASP the ACTUAL cable (Rs guide-data charter fix). The OLD code moved both arms to the FIXED
+            #    (c2x, c2y+-GHS) then CLOSED -> R closed at (c2x, c2y+GHS)=(0.40,0.119) but the cable BOWS to X~0.37
+            #    there (between L's grip & the C1 pin) => R gripped EMPTY SPACE (Rs: "R is NOT re-grasping"). FIX:
+            #    query the REAL cable body per side + target the EE to the actual world-XYZ. KEEP L holding (the +Y
+            #    span stays SUSPENDED between L & the C1 pin -> R re-grasps it in the AIR, no drop onto the solid table).
+            # 1a) L (still holding the cable in half-clamp) moves to the -Y grip side + full-clamp. Cable stays held.
+            _pld, _prd = get_ee_positions(state, scene_info)
+            _La = (c2x, c2y - _GHS, _z_above_d)
+            for kk in range(1, 11):
+                _fl = tuple(float(_pld[i]) + (_La[i] - float(_pld[i])) * kk / 10 for i in range(3))
+                state, _ = ik_move_both(
+                    model,
+                    state,
+                    scene_info,
+                    solver,
+                    contacts,
+                    _fl,
+                    R_hold,
+                    label=f"C2-LMOVE{kk}/10",
+                    converge_mm=3.0,
+                    speed_factor=0.22,
+                )
+                for _ in range(12):
+                    state = physics_step(model, state, solver, contacts, scene_info)
+            _set_gripper_target(control, L_drv, GRIPPER_DRIVER_CLOSE_RAD)  # L half->full clamp (already on the cable)
+            for _ in range(30):
+                state = physics_step(model, state, solver, contacts, scene_info)
+            _NLg1, _, _, _ = _claw_cable_load(f1L0 + f2L0)
+            print(
+                f"  [C2-REGRASP-L] L moved to -Y grip ({c2x:.3f},{c2y - _GHS:+.3f}) + full-clamp: claw<->cable L={_NLg1:.2f}N "
+                f"(L holds -> the +Y cable span is suspended for R to re-grasp)"
+            )
+            _cap(f"C2 L -Y grip full-clamp: L={_NLg1:.1f}N")
+            # 1b) R RE-GRASP the ACTUAL cable at the +Y side, with the BANKED TILT-FOLLOW recipe + SPAN-PRESERVING
+            #     targeting (%3 refinements from GD-KoShape-Finger.md §Mid-air re-grasp, human-CONFIRMED 2026-06-21):
+            #     - SPAN-PRESERVING (INVARIANT#2): HOLD R's target Y = c2y+GHS (88mm vs L at c2y-GHS); correct ONLY X
+            #       to the ACTUAL cable X at that Y (follow the bow). Fixes 'R grips air' WITHOUT touching the span.
+            #     - TILT-FOLLOW (banked Finding 2 :126-134): the suspended cable is locally TILTED; a square-on claw
+            #       MISSES. Measure theta = cable local Y-Z pitch at R's lane; set R EE = Rx(-90+theta) so the claws
+            #       ALIGN with the tilt. Faithful COPY of the _64 monkeypatch (GD-KoShape:157-160); R=re-grasp arm
+            #       mirrors the banked L; production solve_ik_dual UNCHANGED (runtime monkeypatch, restored after).
+            wp.synchronize()
+            _cbq = state.body_q.numpy()[cable_bodies]
+            # ⛔ ANTI-REVERT (Rs-LOCKED 2026-07-01「先祖返りしないように」): R targets the ACTUAL cable X (the bow) via argmin
+            #    over cable_bodies, NOT a fixed c2x. A FIXED geometric target = the air-grip "R not re-grasping" bug (Rs
+            #    2026-07-01). Do NOT revert to a fixed geometric target. Y is HELD at c2y+GHS = 88mm INVARIANT#2 (span-preserving).
+            _kR = int(
+                np.argmin(np.abs(_cbq[:, 1] - (c2y + _GHS)))
+            )  # cable body nearest R's +Y grip lane (for the bow X/Z)
+            _R_ty = c2y + _GHS  # HOLD Y = 88mm span (span-preserving, INVARIANT#2)
+            _cRx, _cRz = float(_cbq[_kR, 0]), float(_cbq[_kR, 2])  # follow the ACTUAL cable X (bow) + Z at that lane
+            _span_y_mm = float(abs(_R_ty - (c2y - _GHS))) * 1e3  # target Y-separation = 88mm by construction
+            _picked_dy_mm = float(_cbq[_kR, 1] - _R_ty) * 1e3  # how far the picked body's Y is from the 88mm lane
+            _cR = (_cRx, _R_ty, _cRz)
+            _zgrip_R = _cRz + ee_off
+            print(
+                f"  [C2-REGRASP-R] span-preserving: R target=({_cR[0]:.3f},{_cR[1]:+.3f},{_cR[2]:.3f}) "
+                f"(HOLD Y={_R_ty:+.3f}=+GHS, X follows bow) vs OLD-FIXED X={c2x:.3f} [dX {(_cRx - c2x) * 1e3:+.0f}mm] "
+                f"| picked body idx{_kR} Y{_cbq[_kR, 1]:+.3f} (dY from lane {_picked_dy_mm:+.0f}mm) | target Y-span={_span_y_mm:.1f}mm (88, INVARIANT#2)"
+            )
+            _ph("C2_REGRASP")
+            # --- TILT-FOLLOW monkeypatch (byte-faithful copy of the banked _64, GD-KoShape:157-160; R=re-grasp arm) ---
+            _BASE_RX = -_math.pi / 2  # default Rx(-90deg) = gripper down (test:1851)
+            # ⛔ ANTI-REVERT (Rs-LOCKED 2026-07-01「先祖返りしないように」): square-on DEFAULT (C2_TILT_SIGN=0). The banked
+            #    tilt-follow is FLOATING-cable-specific (GD-KoShape:117) & does NOT transfer to this TAUT route (tilt -> R
+            #    misses 0N). Do NOT revert the default to 1. The override + tilt machinery are KEPT for future floating cases.
+            _TILT_SIGN = float(
+                os.environ.get("C2_TILT_SIGN", "0")
+            )  # DEFAULT 0 = SQUARE-ON (Rs-approved 2026-07-01「これでやってみて」: the banked tilt-follow is FLOATING-cable-specific & does NOT transfer to this TAUT C1->C2 route, §運用10). Override kept for future floating cases: 1 (banked tilt) / -1 (flip)
+            _ROT = {}
+
+            def _rot_quat_rx(angle):  # X-rotation target in solve_ik_dual's XYZW convention (w LAST)
+                return wp.array(
+                    [wp.vec4(_math.sin(angle / 2), 0.0, 0.0, _math.cos(angle / 2))], dtype=wp.vec4, device=DEVICE
+                )
+
+            def _cable_local_pitch(y_t):  # cable local Y-Z pitch theta [rad] at lane y_t (tangent of adjacent segments)
+                wp.synchronize()
+                cbs = state.body_q.numpy()[cable_bodies]
+                cbs = cbs[np.argsort(cbs[:, 1])]
+                ys = cbs[:, 1]
+                j = int(np.argmin(np.abs(ys - y_t)))
+                a, b = max(j - 1, 0), min(j + 1, len(ys) - 1)
+                dY, dZ = float(ys[b] - ys[a]), float(cbs[b, 2] - cbs[a, 2])
+                return _math.atan2(dZ, dY) if abs(dY) > 1e-9 else 0.0
+
+            def _solve_ik_dual_rot(scene_info_, target_left, target_right, warmstart_jq=None):
+                # Faithful copy of solve_ik_dual (test:1814) but with PER-ARM rotation targets _ROT['L']/_ROT['R'].
+                fk_model_ = scene_info_["fk_model"]
+                fk_state_ = scene_info_["fk_state"]
+                le, re = EE_BODY_OFFSET, FRANKA_NUM_JOINTS + EE_BODY_OFFSET
+                ol = IKObjectivePosition(
+                    link_index=le,
+                    link_offset=wp.vec3(0.0, 0.0, 0.0),
+                    target_positions=wp.array(np.array([target_left], dtype=np.float32), dtype=wp.vec3, device=DEVICE),
+                    weight=1.0,
+                )
+                orr = IKObjectivePosition(
+                    link_index=re,
+                    link_offset=wp.vec3(0.0, 0.0, 0.0),
+                    target_positions=wp.array(np.array([target_right], dtype=np.float32), dtype=wp.vec3, device=DEVICE),
+                    weight=1.0,
+                )
+                rl = IKObjectiveRotation(
+                    link_index=le, link_offset_rotation=wp.quat_identity(), target_rotations=_ROT["L"], weight=0.5
+                )
+                rr = IKObjectiveRotation(
+                    link_index=re, link_offset_rotation=wp.quat_identity(), target_rotations=_ROT["R"], weight=0.5
+                )
+                jl = IKObjectiveJointLimit(
+                    joint_limit_lower=fk_model_.joint_limit_lower,
+                    joint_limit_upper=fk_model_.joint_limit_upper,
+                    weight=10.0,
+                )
+                from newton_routing_utils import _build_collision_objectives
+
+                cobjs = _build_collision_objectives() if os.environ.get("COLLISION_AVOIDANCE", "1") != "0" else []
+                iks = IKSolver(fk_model_, n_problems=1, objectives=[ol, orr, rl, rr, *cobjs, jl])
+                fj = fk_state_.joint_q.numpy().copy()
+                if warmstart_jq is not None:
+                    fj = np.asarray(warmstart_jq, dtype=fj.dtype).reshape(-1).copy()
+                qin = wp.array(fj.reshape(1, -1), dtype=float, device=DEVICE)
+                qout = wp.zeros((1, fk_model_.joint_coord_count), dtype=float, device=DEVICE)
+                iks.step(qin, qout, iterations=IK_ITERATIONS, step_size=IK_STEP_SIZE)
+                return qout.numpy()[0], float(iks.costs.numpy()[0])
+
+            _theta_R = _cable_local_pitch(_R_ty)  # cable local pitch at R's grip lane (measured at THIS route's geom)
+            _ROT["R"] = _rot_quat_rx(_BASE_RX + _TILT_SIGN * _theta_R)  # R = re-grasp arm = TILT-FOLLOW
+            _ROT["L"] = _rot_quat_rx(_BASE_RX)  # L = anchor/holder = default down
+            _ik_orig = globals()["solve_ik_dual"]
+            globals()["solve_ik_dual"] = _solve_ik_dual_rot  # ik_move_both resolves solve_ik_dual as a module global
+            if _demo_rec is not None:  # P3 recorder: effective-rotation register at C2 monkeypatch INSTALL (spec §2.4)
+                _demo_rec.note_ik_rot(_ROT["L"].numpy()[0], _ROT["R"].numpy()[0], 1)
+            print(
+                f"  [C2-REGRASP-TILT] cable local pitch theta={_math.degrees(_theta_R):+.1f}deg at R lane Y={_R_ty:+.3f} "
+                f"-> R EE Rx({_math.degrees(_BASE_RX + _TILT_SIGN * _theta_R):+.1f}deg); L default (anchor) "
+                f"[banked _64 tilt-follow; a square-on claw MISSES the tilted cable, GD-KoShape:126-134]"
+            )
+            _set_gripper_target(control, R_drv, GRIPPER_DRIVER_OPEN_RAD)  # R open before descending onto the cable
+            for _ in range(15):
+                state = physics_step(model, state, solver, contacts, scene_info)
+            _prr = get_ee_positions(state, scene_info)[1]
+            _hovR = (_cR[0], _cR[1], _z_above_d)
+            for kk in range(1, 11):
+                _fr = tuple(float(_prr[i]) + (_hovR[i] - float(_prr[i])) * kk / 10 for i in range(3))
+                _La2, _fr2 = _inject_detour(
+                    "C2_REGRASP", kk, 10, _La, _fr
+                )  # DQ7 (ii): R-arm kick-and-recover (None-path passthrough; release-margin guards regrasp_ok)
+                state, _ = ik_move_both(
+                    model,
+                    state,
+                    scene_info,
+                    solver,
+                    contacts,
+                    _La2,
+                    _fr2,
+                    label=f"C2-RHOVER{kk}/10",
+                    converge_mm=3.0,
+                    speed_factor=0.22,
+                )
+                for _ in range(10):
+                    state = physics_step(model, state, solver, contacts, scene_info)
+            # R-REACH check (LEDGER R-reach wall crux): achieved R XY vs the span-preserving target (Y=c2y+GHS)
+            _paR = get_ee_positions(state, scene_info)[1]
+            _reach_R_mm = float(np.hypot(_hovR[0] - float(_paR[0]), _hovR[1] - float(_paR[1]))) * 1e3
+            print(
+                f"  [C2-REGRASP-REACH] R achieved XY=({float(_paR[0]):.3f},{float(_paR[1]):+.3f}) vs tgt "
+                f"=({_hovR[0]:.3f},{_hovR[1]:+.3f}) resid={_reach_R_mm:.1f}mm "
+                f"(LEDGER R-reach wall: >20mm = R can't reach the 88mm lane = BLOCKED_FOR_USER)"
+            )
+            _desR = (_cR[0], _cR[1], _zgrip_R)
+            for kk in range(1, 9):
+                _fr = tuple(float(_hovR[i]) + (_desR[i] - float(_hovR[i])) * kk / 8 for i in range(3))
+                state, _ = ik_move_both(
+                    model,
+                    state,
+                    scene_info,
+                    solver,
+                    contacts,
+                    _La,
+                    _fr,
+                    label=f"C2-RDESCEND{kk}/8",
+                    converge_mm=2.5,
+                    speed_factor=0.20,
+                )
+                for _ in range(12):
+                    state = physics_step(model, state, solver, contacts, scene_info)
+            _cap("C2 R re-grasp: descended onto ACTUAL cable (tilt-follow)")
+            _cage_d = GRIPPER_DRIVER_OPEN_RAD + (GRIPPER_DRIVER_CLOSE_RAD - GRIPPER_DRIVER_OPEN_RAD) * 0.9
+            _set_gripper_target(control, R_drv, _cage_d)  # 2-phase cage close (capture-then-gentle, mirrors C1)
+            for _ in range(30):
+                state = physics_step(model, state, solver, contacts, scene_info)
+            _set_gripper_target(control, R_drv, GRIPPER_DRIVER_CLOSE_RAD)
+            for _ in range(40):
+                state = physics_step(model, state, solver, contacts, scene_info)
+            # VERIFY grip: claw<->cable NORMAL force NONZERO for BOTH L AND R (old failure = R grips air = N_R~0).
+            # Judge caveat (GD-KoShape:161): per-arm CAPTURE false-negatives when tilted -> the RELIABLE signal is the
+            # claw<->cable NORMAL force (+ cable-tracks-EE) + the §運用14/human video, NOT the b<c<t capture window.
+            _NLg, _, _nL, _ = _claw_cable_load(f1L0 + f2L0)
+            _NRg, _pkR, _nR, _muR = _claw_cable_load(f1R0 + f2R0)
+            _paL2, _paR2 = get_ee_positions(state, scene_info)
+            _span_3d_mm = float(np.linalg.norm(np.array(_paL2) - np.array(_paR2))) * 1e3  # achieved L<->R 3D EE span
+            _L_grips = bool(_NLg > 0.1)
+            _R_grips = bool(_NRg > 0.1)
+            _at_88 = bool(_reach_R_mm <= 20.0)
+            # ⛔ ANTI-REVERT (Rs-LOCKED 2026-07-01「先祖返りしないように」): regrasp_ok = (_at_88 AND _R_grips) = the charter
+            #    core (R genuinely grips the ACTUAL cable @88mm). Do NOT revert to the both-hands-force gate (the
+            #    "BLOCKED_INVARIANT2" misnomer, %0 records-vs-fact 2026-07-01): L=0N is a valid 0-normal CAGE, not a miss.
+            # RE-GRASP VERDICT (re-spec per %0 GT cross-PV 2026-07-01, records-vs-fact): the charter's core = does R
+            # genuinely GRIP the ACTUAL cable at the 88mm lane (not air)? The OLD gate required BOTH L AND R force >0.1N
+            # -> it MISLABELED the R-grip + L-0-normal-cage case as "MISS" (R did NOT miss; L is an unloaded cage that
+            # RETAINS the cable, video + GD-KoShape:161 "per-arm force misleads"). Split R-reach / R-grip / L-load state.
+            if not _at_88:
+                _regrasp_verdict = "BLOCKED_REACH_WALL"  # R cannot reach the 88mm lane (LEDGER reach wall)
+            elif not _R_grips:
+                _regrasp_verdict = (
+                    "R_MISS_AT_88"  # R reached the lane but gripped AIR (e.g. tilted claws off the taut cable)
+                )
+            elif _L_grips:
+                _regrasp_verdict = "SUCCESS_DUAL_LOADED_AT_88"  # R + L BOTH load-bearing at the 88mm span
+            else:
+                _regrasp_verdict = "SUCCESS_R_GRIP_L_CAGE_AT_88"  # R grips @88mm; L = 0-normal-load cage (verify RETAIN via video, GD-KoShape:161)
+            _regrasp_ok = bool(
+                _at_88 and _R_grips
+            )  # charter core: R genuinely grips the ACTUAL cable @88mm (L-load-share = a separate Rs Q)
+            print(
+                f"  [C2-REGRASP-GRIP] claw<->cable NORMAL: L={_NLg:.2f}N(grips={_L_grips}) R={_NRg:.2f}N(n={_nR},grips={_R_grips}) "
+                f"| R-reach={_reach_R_mm:.1f}mm at_88={_at_88} | achieved 3D span={_span_3d_mm:.1f}mm (Y-sep tgt 88) "
+                f"=> VERDICT={_regrasp_verdict} regrasp_ok={_regrasp_ok}"
+            )
+            print(
+                f"  [C2-REGRASP-GATE] charter core = R grips the ACTUAL cable @88mm lane (regrasp_ok={_regrasp_ok}). "
+                f"labels: SUCCESS_DUAL_LOADED (R+L force) / SUCCESS_R_GRIP_L_CAGE (R force, L 0-normal cage=retain per video) / "
+                f"R_MISS_AT_88 (R reached but air) / BLOCKED_REACH_WALL. INVARIANT#2 Y-span held; L-load-share + 3D-chord excess = Rs Q. => {_regrasp_verdict}"
+            )
+            _cap(
+                f"C2 R re-grasp: {_regrasp_verdict} (L={_NLg:.1f} R={_NRg:.1f}N theta={_math.degrees(_theta_R):+.0f}deg)"
+            )
+            _c2_regrasp_rec = {
+                "r_target_x": round(_cRx, 3),
+                "r_target_y": round(_R_ty, 3),
+                "r_target_z": round(_cRz, 3),
+                "r_old_fixed_x": round(float(c2x), 3),
+                "r_x_offset_from_fixed_mm": round((_cRx - c2x) * 1e3, 1),
+                "picked_body_dy_from_lane_mm": round(_picked_dy_mm, 1),
+                "target_y_span_mm": round(_span_y_mm, 1),
+                "achieved_3d_span_mm": round(_span_3d_mm, 1),
+                "tilt_theta_deg": round(_math.degrees(_theta_R), 2),
+                "tilt_sign": _TILT_SIGN,
+                "r_reach_resid_mm": round(_reach_R_mm, 1),
+                "reached_88mm_lane": _at_88,
+                "l_grip_N": round(float(_NLg), 2),
+                "r_grip_N": round(float(_NRg), 2),
+                "l_grips": _L_grips,
+                "r_grips": _R_grips,
+                "regrasp_verdict": _regrasp_verdict,
+                "regrasp_ok": _regrasp_ok,
+            }
+            globals()["solve_ik_dual"] = _ik_orig  # RESTORE default square-on (tilt blast radius = the R re-grasp only)
+            if _demo_rec is not None:  # P3 recorder: rotation register RESTORE to default Rx(-90) (spec §2.4)
+                _demo_rec.note_ik_rot(None, None, 0)
+            _ph("C2_TRANSPORT")  # P3 label: lateral carry to C2 as its own phase (future re-records; CC2-C1)
+            # 2) TRANSPORT: carry R's gripped cable segment laterally to the C2 +Y seat point (L already at the -Y seat).
+            #    The gripped cable comes WITH the hand -> the cable centre (between L & R) arrives over the C2 groove.
+            _carR = (c2x, c2y + _GHS, _z_above_d)
+            _prc = get_ee_positions(state, scene_info)[1]
+            for kk in range(1, 11):
+                _fr = tuple(float(_prc[i]) + (_carR[i] - float(_prc[i])) * kk / 10 for i in range(3))
+                state, _ = ik_move_both(
+                    model,
+                    state,
+                    scene_info,
+                    solver,
+                    contacts,
+                    _La,
+                    _fr,
+                    label=f"C2-TRANSPORT{kk}/10",
+                    converge_mm=3.0,
+                    speed_factor=0.20,
+                )
+                for _ in range(12):
+                    state = physics_step(model, state, solver, contacts, scene_info)
+            wp.synchronize()
+            _cb_t = state.body_q.numpy()[cable_bodies]
+            _nk_t = int(np.argmin(np.abs(_cb_t[:, 1] - c2y)))
+            _NLt, _, _, _ = _claw_cable_load(f1L0 + f2L0)
+            _NRt, _, _, _ = _claw_cable_load(f1R0 + f2R0)
+            print(
+                f"  [C2-TRANSPORT] R carried its grip to C2 +Y; near-c2y cable body X={_cb_t[_nk_t, 0]:.3f} (c2x={c2x:.3f}, "
+                f"dX={(float(_cb_t[_nk_t, 0]) - c2x) * 1e3:+.0f}mm) | still gripped: L={_NLt:.1f}N R={_NRt:.1f}N"
+            )
+            if _c2_regrasp_rec is not None:
+                _c2_regrasp_rec["transport_near_c2_dx_mm"] = round((float(_cb_t[_nk_t, 0]) - c2x) * 1e3, 1)
+                _c2_regrasp_rec["transport_still_gripped_L_N"] = round(float(_NLt), 2)
+                _c2_regrasp_rec["transport_still_gripped_R_N"] = round(float(_NRt), 2)
+            _cap("C2 transport: R grip carried to C2 +Y seat point")
+            _ph("C2_DUAL_SEAT")
+            # W0-e F-3 (C2 X-follow, %12 2026-07-05, offset-gated + W0E_F3): C2_DUAL_SEAT is already TOP-DOWN (no
+            # wall-ride) so a single _c2x_comp on BOTH L/R descent tuples suffices (the v2 crossing-comp insight; no
+            # clearance-lift). (a) MEASURE at the post-transport sync via _w0e_guarded_cx (self-syncs, NO new physics
+            # step) + plausibility (NOT bare argmin-Y). comp=clamp(-(1-lam)*(cx-c2x),+-22), lam=0.5 (F-1a coeff).
+            # (b) log crossing z: z<=840 (wall-height) => PREMISE-FAIL loud (reconsider a lift variant). (0,0)/no-flag
+            # -> comp=0.0 -> c2x+0.0==c2x = BYTE-IDENTICAL (gated off on nominal). provenance: cuda:0 + build sha.
+            _c2x_comp = 0.0
+            _f3_on = (
+                float(scene_info.get("cable_xy_offset", (0.0, 0.0))[0]) != 0.0
+                or float(scene_info.get("cable_xy_offset", (0.0, 0.0))[1]) != 0.0
+            ) and os.environ.get("W0E_F3", "1") == "1"
+            if _f3_on:
+                _cxc2, _nc2 = _w0e_guarded_cx(c2y, c2x)  # (a) guarded selector + plausibility (self-syncs)
+                _cb_f3 = state.body_q.numpy()[cable_bodies]  # already synced by the call above (no new step)
+                _mzc2 = np.abs(_cb_f3[:, 1] - c2y) <= 0.0075
+                _zc2 = float(_cb_f3[_mzc2, 2].mean()) * 1e3 if _mzc2.any() else float("nan")
+                if _cxc2 is None or abs(_cxc2 - c2x) > 0.030:
+                    print(f"  [W0E-F3] guarded c2 crossing REJECT (n={_nc2}) -> _c2x_comp=0 (nominal fallback) + FLAG")
+                else:
+                    _lam3 = float(os.environ.get("W0E_F1A_LAMBDA", "0.5"))
+                    _c2x_comp = float(np.clip(-(1.0 - _lam3) * (_cxc2 - c2x), -0.022, 0.022))
+                    _pf3 = (
+                        " ⚠PREMISE-FAIL(z<=840 wall-height -> reconsider lift)"
+                        if (_zc2 == _zc2 and _zc2 <= 840.0)
+                        else ""
+                    )
+                    print(
+                        f"  [W0E-F3] guarded c2 dx={(_cxc2 - c2x) * 1e3:+.2f}mm (n={_nc2}) lam={_lam3} -> "
+                        f"_c2x_comp={_c2x_comp * 1e3:+.2f}mm; crossing z={_zc2:.1f}mm{_pf3}"
+                    )
+            # 3) both descend (CLOSED) from above -> clamp-push the cable into the C2 groove (top-down, NOT the lateral slide that drove the claw into the wall)
+            for kk in range(1, 13):
+                _zk = _z_above_d + (_seat_z_d - _z_above_d) * kk / 12
+                state, _ = ik_move_both(
+                    model,
+                    state,
+                    scene_info,
+                    solver,
+                    contacts,
+                    (c2x + _c2x_comp, c2y - _GHS, _zk),
+                    (c2x + _c2x_comp, c2y + _GHS, _zk),
+                    label=f"C2-DUAL-SEAT{kk}/12",
+                    converge_mm=2.5,
+                    speed_factor=0.20,
+                )
+                for _ in range(18):
+                    state = physics_step(model, state, solver, contacts, scene_info)
+                _lgc2 = _min_dist_mm(f1L0 + f2L0, _clip2g)
+                _rgc2 = _min_dist_mm(f1R0 + f2R0, _clip2g)
+                _NLc2, _ = _claw_c2_load(f1L0 + f2L0)
+                _NRc2, _ = _claw_c2_load(f1R0 + f2R0)
+                _cabc2 = _min_dist_mm(cable_geoms, _clip2g)
+                print(
+                    f"  [C2-DUAL-SEAT] k={kk}/12 z={_zk:.3f} Lgrip<->C2={_lgc2:+.3f} Rgrip<->C2={_rgc2:+.3f}mm "
+                    f"| claw<->C2 CONTACT-N: L={_NLc2:.2f} R={_NRc2:.2f} | cable<->C2={_cabc2:+.3f}mm"
+                )
+                _cap(f"C2 dual-seat {kk}/12 Lgrip<->C2={_lgc2:+.2f}")
+                if (
+                    _f3_on
+                ):  # (c) F-3 during-descent crossing z-x trace (%12 (log 1) form; offset-gated -> nominal unaffected)
+                    wp.synchronize()
+                    _Pf3 = state.body_q.numpy()[cable_bodies]
+                    _mf3 = np.abs(_Pf3[:, 1] - c2y) <= 0.0075
+                    if _mf3.any():
+                        _if3 = np.where(_mf3)[0]
+                        _cif3 = int(_if3[np.argmin(np.abs(_Pf3[_if3, 0] - (c2x + _c2x_comp)))])
+                        print(
+                            f"  [W0E-F3] dual-seat k={kk}/12 crossing x={_Pf3[_cif3, 0]:.4f} z={_Pf3[_cif3, 2] * 1e3:.1f}mm"
+                        )
+            _ph("C2_SETTLE")
+            # 4) RELEASE both grippers + settle -> genuine NOTCH SETTLE vs claw-held / pop-out (%0 seat-capture concern, charter metric #3;
+            #    the C2 clip is open-top w/ zero up-retention -> if the cable pops out on release it was claw-HELD, not settled)
+            _cab_c2_held = _min_dist_mm(cable_geoms, _clip2g)
+            for _drv in (L_drv, R_drv):
+                _set_gripper_target(control, _drv, GRIPPER_DRIVER_OPEN_RAD)
+            for _ in range(90):
+                state = physics_step(model, state, solver, contacts, scene_info)
+            _cab_c2_rel = _min_dist_mm(cable_geoms, _clip2g)
+            wp.synchronize()
+            _nk_c2 = int(np.argmin(np.abs(state.body_q.numpy()[cable_bodies, 1] - c2y)))
+            _z_c2_rel = float(state.body_q.numpy()[cable_bodies][_nk_c2][2]) * 1e3
+            _c2_settled = bool(_cab_c2_rel <= 0.5 and abs(_z_c2_rel - (GROOVE_CENTER_Z + _clip_float_z) * 1e3) <= 3.0)
+            _c2_settle_rec = {
+                "cable_c2_held_mm": round(_cab_c2_held, 3),
+                "cable_c2_released_mm": round(_cab_c2_rel, 3),
+                "near_c2_cable_z_released_mm": round(_z_c2_rel, 1),
+                "groove_z_mm": round((GROOVE_CENTER_Z + _clip_float_z) * 1e3, 1),
+                "settled_in_notch": _c2_settled,
+            }
+            print(
+                f"  [C2-DUAL-SETTLE] after RELEASE both grippers (+90 steps): cable<->C2 {_cab_c2_held:+.3f}(claw-held)->{_cab_c2_rel:+.3f}mm(released) "
+                f"| near-C2 cable z={_z_c2_rel:.1f} vs groove {(GROOVE_CENTER_Z + _clip_float_z) * 1e3:.1f} => SETTLED_IN_NOTCH={_c2_settled} "
+                f"(%0 seat-capture: True=genuine settle held by the groove / False=was claw-HELD, popped from the open-top clip)"
+            )
+            _cap(f"C2 dual-settle: settled={_c2_settled} cable<->C2_released={_cab_c2_rel:+.2f}")
+            print(
+                "  [C2-DUAL] dual-finger clamp-push complete (top-down; claw-C2 penetration + contact-force + release-settle logged above)"
+            )
+        elif _seat_topdown:
+            _wall_top = CLIP1_Z + _clip_float_z + 0.030  # clip_parts[3/4] dz0.025+hz0.005 = V-groove wall top
+            _z_above_ee = _wall_top + 0.012 + ee_off  # hold the cable ~12mm above the wall tops (+ EE offset)
+            _nlift = 14
+            for k in range(1, _nlift + 1):
+                _tx = float(_plg[0]) + (c2x - float(_plg[0])) * k / _nlift
+                _ty = float(_plg[1]) + (c2y - float(_plg[1])) * k / _nlift
+                _tz = float(_plg[2]) + (_z_above_ee - float(_plg[2])) * k / _nlift
+                state, _ = ik_move_both(
+                    model,
+                    state,
+                    scene_info,
+                    solver,
+                    contacts,
+                    (_tx, _ty, _tz),
+                    R_hold,
+                    label=f"C2-LIFT{k}/{_nlift}",
+                    converge_mm=2.5,
+                    speed_factor=0.22,
+                )
+                for _ in range(15):
+                    state = physics_step(model, state, solver, contacts, scene_info)
+                _lgc2 = _min_dist_mm(f1L0 + f2L0, _clip2g)
+                _lrsep, _ = _hh_clear_mm()
+                print(
+                    f"  [C2-LIFT] k={k}/{_nlift} EE->({_tx:.3f},{_ty:+.3f},{_tz:.3f}) Lgrip<->C2={_lgc2:+.3f}mm "
+                    f"HH-armlink={_lrsep:+.2f}mm (claws ABOVE walls; Lgrip>=0 = no penetration)"
+                )
+                _cap(f"C2 lift-above-walls {k}/{_nlift}")
+            _set_gripper_target(
+                control, L_drv, GRIPPER_DRIVER_OPEN_RAD
+            )  # release -> cable settles into open-top channel
+            for _ in range(60):
+                state = physics_step(model, state, solver, contacts, scene_info)
+            _lgc2_rel = _min_dist_mm(f1L0 + f2L0, _clip2g)
+            print(
+                f"  [C2-RELEASE] gripper OPEN -> cable settles into groove (or MISSES if drag mis-delivered); "
+                f"Lgrip<->C2={_lgc2_rel:+.3f}mm (claws stayed above walls = no wall penetration)"
+            )
+            _cap("C2 release-settle (open-top insertion)")
+        else:
+            c2_seat_ee_z = GROOVE_CENTER_Z + _clip_float_z + ee_off  # CLIP_FLOAT_Z: descend to the FLOATED C2 groove
+            for k in range(1, 7):
+                zk = float(_plg[2]) + (c2_seat_ee_z - float(_plg[2])) * k / 6
+                state, _ = ik_move_both(
+                    model,
+                    state,
+                    scene_info,
+                    solver,
+                    contacts,
+                    (float(_plg[0]), float(_plg[1]), zk),
+                    R_hold,
+                    label=f"C2-PUSH{k}/6",
+                    converge_mm=2.5,
+                    speed_factor=0.22,
+                )
+                for _ in range(20):
+                    state = physics_step(model, state, solver, contacts, scene_info)
+                _lgc2 = _min_dist_mm(f1L0 + f2L0, _clip2g)  # FLAG-D per-frame L-gripper claws <-> C2 (penetration PV)
+                _lrsep, _ = _hh_clear_mm()  # item1 hand-hand ARM-LINK clearance (sphere, matches IK avoid; uncapped)
+                print(
+                    f"  [C2-PUSH] k={k}/6 Lgrip<->C2={_lgc2:+.3f}mm cable<->C2={_min_dist_mm(cable_geoms, _clip2g):+.3f}mm "
+                    f"HH-armlink={_lrsep:+.2f}mm (<0=penetration)"
+                )
+                _cap(f"C2 seat attempt {k}/6")
+        c2_seat_dist = _min_dist_mm(cable_geoms, _clip2g)
+        c2_tabN, _ = _claw_table_load(f1L0)
+        c2_tab_d = _min_dist_mm(f1L0, _tabg)
+        c2_lgrip_dist = _min_dist_mm(f1L0 + f2L0, _clip2g)  # FLAG-D final L-gripper <-> C2 (penetration PV)
+        c2_lclaw_c2_N, _ = _claw_c2_load(
+            f1L0 + f2L0
+        )  # Rs corrected-route metric: L-claw <-> C2 CONTACT FORCE (soft over-pen reaction)
+        c2_rclaw_c2_N, _ = _claw_c2_load(f1R0 + f2R0)  # R-claw <-> C2 contact force (dual-finger)
+        c2_rgrip_dist = _min_dist_mm(f1R0 + f2R0, _clip2g)  # R-gripper claws <-> C2 (penetration PV, dual-finger)
+        print(
+            f"  [C2-CLAW-FORCE] L-claw<->C2 pen={c2_lgrip_dist:+.3f}mm N={c2_lclaw_c2_N:.2f} | "
+            f"R-claw<->C2 pen={c2_rgrip_dist:+.3f}mm N={c2_rclaw_c2_N:.2f} (N>0 + pen<0 = soft over-penetration; N=0 + pen>=0 = no claw-clip contact)"
+        )
+        c2_seated = bool(c2_seat_dist <= 0.5)
+        # SPACER-CONTAMINATION SPLIT: _clip2g (BOX near c2 XY, no size gate) INCLUDES the spacer box (z-center ~0.81)
+        # when SPACER=1 -> cable<->C2 = MIN(cable<->clip-walls, cable<->spacer). Split by z: clip floor = CLIP1_Z+float.
+        # If WALLS>>0 but the MIN is ~0/neg, the "seated" is SPACER-CONTACT (cable touches the riser), NOT in-groove.
+        _floor_z = CLIP1_Z + _clip_float_z
+        _c2_wall_g = [g for g in _clip2g if float(mjd.geom_xpos[g][2]) >= (_floor_z - 0.001)]  # clip V-groove boxes
+        _c2_sp_g = [g for g in _clip2g if float(mjd.geom_xpos[g][2]) < (_floor_z - 0.001)]  # spacer riser (z~0.81)
+        c2_wall_dist = _min_dist_mm(cable_geoms, _c2_wall_g) if _c2_wall_g else 9e9
+        c2_sp_dist = _min_dist_mm(cable_geoms, _c2_sp_g) if _c2_sp_g else 9e9
+        print(
+            f"  [C2-SPACER-SPLIT] cable<->C2-clip-WALLS={c2_wall_dist:+.3f}mm cable<->C2-SPACER={c2_sp_dist:+.3f}mm "
+            f"(n_walls={len(_c2_wall_g)} n_spacer={len(_c2_sp_g)}; c2_seated used MIN={c2_seat_dist:+.3f}. "
+            f"WALLS>>0 + SPACER~0 => 'seated' is SPACER-CONTACT not groove = FALSE seat)"
+        )
+        # item2 HONEST C2-SEAT verdict (fixes the false positive): (a) use the SPACER-EXCLUDED clip-wall distance,
+        # (b) REQUIRE the near-C2 cable centre be at the floated GROOVE z (829+float), not the wall base / low z.
+        wp.synchronize()
+        _cb2 = state.body_q.numpy()[cable_bodies]
+        _near_c2 = int(np.argmin(np.abs(_cb2[:, 1] - c2y)))  # cable body nearest C2 in Y
+        cable_z_at_c2 = float(_cb2[_near_c2, 2]) * 1e3
+        _groove_c2_mm = (GROOVE_CENTER_Z + _clip_float_z) * 1e3
+        c2_in_groove = bool(abs(cable_z_at_c2 - _groove_c2_mm) <= 3.0)
+        c2_seated_honest = bool(c2_wall_dist <= 0.5 and c2_in_groove)
+        print(
+            f"  [C2-SEAT-HONEST] cable<->C2-WALLS(spacer-excluded)={c2_wall_dist:+.3f}mm (<=0.5 needed) | "
+            f"near-C2 cable z={cable_z_at_c2:.1f}mm vs groove {_groove_c2_mm:.1f} (|d|<=3 needed -> in_groove={c2_in_groove}) "
+            f"=> c2_seated_HONEST={c2_seated_honest} (vs naive c2_seated={c2_seated} which counts wall/spacer contact)"
+        )
+        zc1_final, c1_final_dist = _zc1(), _min_dist_mm(cable_geoms, _clip1g)
+        # W0-e producer (%12 addendum 2026-07-05): FINAL settled-frame pin-excluded free-node cable<->C1 min = the ①/②
+        # classifier input (%9 pre-read pin); _c1_np_min (episode-min over guide+final) = the separate validity diagnostic.
+        _c1np_final = (
+            _min_dist_mm([g for g in cable_geoms if g != _seat_geom_mj], _clip1g)
+            if _seat_geom_mj is not None
+            else c1_final_dist
+        )
+        _c1_np_min = min(_c1_np_min, _c1np_final)
+        _c2_pen_min = min(_c2_pen_min, c2_seat_dist)
+        print(
+            f"  [C2] C2 SEAT ATTEMPT: cable<->C2={c2_seat_dist:+.3f}mm seated={c2_seated} "
+            f"bottomclaw<->table={c2_tab_d:+.2f}mm N={c2_tabN:.1f} | C1 final z={zc1_final:.1f}mm "
+            f"cable<->C1={c1_final_dist:+.3f}mm (nonpin_final={_c1np_final:+.3f}mm classifier; epmin={_c1_np_min:+.3f}) "
+            f"| FLAG-D Lgrip<->C2={c2_lgrip_dist:+.3f}mm (<0=penetration)"
+        )
+        _cap(f"C2 seat attempt END: cable<->C2={c2_seat_dist:+.2f}mm seated={c2_seated}")
+
+        # --- VERDICT (honest; the probe expects the negative per prior findings) ---
+        wp.synchronize()
+        _jq, _jqd = state.joint_q.numpy(), state.joint_qd.numpy()
+        finite = bool(np.all(np.isfinite(_jq)) and np.all(np.isfinite(state.body_q.numpy())))
+        qvel_ok = bool(finite and float(np.max(np.abs(_jqd))) < 100.0)
+        _slips = [r["slip_xy"] for r in guide_legs]
+        max_slip = max(_slips) if _slips else 9.9
+        mean_slip = float(np.mean(_slips)) if _slips else 9.9
+        any_drag = bool(max_slip > 0.5)
+        all_cradle = bool(all(r["is_cradle"] for r in guide_legs)) if guide_legs else False
+        all_c1_ret = bool(all(r["c1_retained_lowwall"] for r in guide_legs)) if guide_legs else False
+        any_jam = bool(any(r["JAM"] for r in guide_legs)) or bool(c2_tab_d <= 0.2 or c2_tabN > 0.5)
+        slide_through = bool(max_slip < 0.35 and all_cradle and all_c1_ret and not any_jam and finite)
+        # item1/4 SPACER-config summary (min over the guide; <0 = penetration). lr MIN = closest HAND-HAND approach at
+        # ARM-LINK level (sphere model = the SAME quantity the active IK COLLISION_AVOIDANCE minimises). rpad_c1/lgrip_c2
+        # = finger-clip (pad<->clip). NOTE arm geoms are visible-only in sim -> arm-link sphere clearance is the real
+        # IK-avoidance metric, but a sim-clear value is still NON-conservative for the true real-robot wrist envelope.
+        _gl = guide_legs or []
+        _min_lr = min((r.get("lr_gripper_sep_mm", 9e9) for r in _gl), default=9e9)
+        _min_rpad_c1 = min((r.get("rpad_c1_dist_mm", 9e9) for r in _gl), default=9e9)
+        _min_lgrip_c2 = min((r.get("lgrip_c2_dist_mm", 9e9) for r in _gl), default=9e9)
+        print(
+            f"  [C2-FINGERCLIP] min over guide: Rpad<->C1={_min_rpad_c1:+.3f}mm Lgrip<->C2={_min_lgrip_c2:+.3f}mm "
+            f"(<0=finger-clip penetration) | min HAND-HAND arm-link clearance={_min_lr:+.3f}mm "
+            f"(sphere model, IK avoidance {'ON' if _hh_avoid_on else 'OFF'}; <0=overlap; uncapped)"
+        )
+        rc2.update(
+            {
+                "min_handhand_armlink_mm": round(_min_lr, 3),
+                "hh_avoidance_on": _hh_avoid_on,
+                "min_rpad_c1_mm": round(_min_rpad_c1, 3),
+                "min_lgrip_c2_mm": round(_min_lgrip_c2, 3),
+                "c2_wall_dist_spacer_excluded_mm": round(c2_wall_dist, 3),
+                "cable_z_at_c2_mm": round(cable_z_at_c2, 1),
+                "c2_seated_honest": c2_seated_honest,
+                "c2_seated_naive": c2_seated,
+                "half_unclamp_transition": _trans,
+                "L_cradle_after_halfunclamp": L_is_cradle,
+                "z_c1_seated_mm": round(z_c1_seated, 1),
+                "z_c1_final_mm": round(zc1_final, 1),
+                "cable_c1_seat_dist_mm": round(c1_seat_dist, 3),
+                "cable_c1_final_dist_mm": round(c1_final_dist, 3),
+                "cable_c1_nonpin_final_mm": round(
+                    _c1np_final, 3
+                ),  # %12 ①/② classifier input (final settled, pin-excluded free-node 床 bar)
+                "cable_c1_nonpin_epmin_mm": round(_c1_np_min, 3),
+                "cable_c2_pen_epmin_mm": round(_c2_pen_min, 3),  # episode-min penetration diagnostic
+                "cable_c2_seat_dist_mm": round(c2_seat_dist, 3),
+                "c2_seated": c2_seated,
+                "guide_legs": guide_legs,
+                "max_abs_slip_xy": round(max_slip, 3),
+                "mean_slip_xy": round(mean_slip, 3),
+                "any_drag": any_drag,
+                "all_cradle_during_guide": all_cradle,
+                "all_c1_retained_lowwall": all_c1_ret,
+                "any_table_jam": any_jam,
+                "cradle_break_x": cradle_break_x,
+                "jam_onset_x": jam_onset_x,
+                "c2_lclaw_c2_contact_N": round(c2_lclaw_c2_N, 2),
+                "c2_rclaw_c2_contact_N": round(c2_rclaw_c2_N, 2),
+                "c2_lgrip_c2_pen_mm": round(c2_lgrip_dist, 3),
+                "c2_rgrip_c2_pen_mm": round(c2_rgrip_dist, 3),
+                "c2_dualseat_on": bool(os.environ.get("C2_DUALSEAT", "0") == "1"),
+                "c2_regrasp_verdict": (_c2_regrasp_rec or {}).get("regrasp_verdict"),
+                "c2_regrasp_r_reach_resid_mm": (_c2_regrasp_rec or {}).get("r_reach_resid_mm"),
+                "c2_regrasp_l_grip_N": (_c2_regrasp_rec or {}).get("l_grip_N"),
+                "c2_regrasp_r_grip_N": (_c2_regrasp_rec or {}).get("r_grip_N"),
+                "c2_regrasp_ok": (_c2_regrasp_rec or {}).get("regrasp_ok"),
+                "c2_regrasp_target_y_span_mm": (_c2_regrasp_rec or {}).get("target_y_span_mm"),
+                "c2_regrasp_tilt_theta_deg": (_c2_regrasp_rec or {}).get("tilt_theta_deg"),
+                "slide_through": slide_through,
+                "finite": finite,
+                "qvel_ok": qvel_ok,
+            }
+        )
+        _cons = (
+            "SLIDE-THROUGH @CPU-rigid+claw-mu~0.70 -> CONSERVATIVE for 'しごき works' (a flexible/lower-mu real "
+            "cable slides MORE) = bankable yes"
+            if slide_through
+            else "FAILS, MIXED conservatism: (a) DRAG + (b) C2-unreached are NON-conservative @CPU-rigid (rigid cable "
+            "+ pad-pinned claw mu~0.70 OVERSTATE drag/unreach; a flexible/lower-mu/GPU cable may slide+reach "
+            "better -> confirm before banking the 'しごき' negative); (c) the C2-over-solid bottom-claw "
+            "ride-up/cradle-break (void X-ceiling 0.366 < C2 X 0.40) is CONSERVATIVE geometry = transfers"
+        )
+        print(
+            f"  [C2-VERDICT] half_unclamp_cradle={L_is_cradle} | GUIDE max|slip_xy|={max_slip:.3f} "
+            f"(mean {mean_slip:+.3f}) -> {'SLIDE' if max_slip < 0.35 else ('DRAG' if max_slip > 0.65 else 'PARTIAL')} "
+            f"| all_cradle={all_cradle} cradle_break@X={cradle_break_x} | C1_ret_all={all_c1_ret} "
+            f"z_c1 {z_c1_seated:.1f}->{zc1_final:.1f}mm cable<->C1 {c1_seat_dist:+.2f}->{c1_final_dist:+.2f}mm"
+        )
+        print(
+            f"  [C2-VERDICT] C2 reach: cable<->C2 {c2_dist_atseat:+.2f}->{c2_seat_dist:+.2f}mm seated={c2_seated} "
+            f"| TABLE-JAM (claw vs SOLID, NOT cable-drag): any_jam={any_jam} jam_onset@X={jam_onset_x} "
+            f"(void X-ceil 0.366; C2 X={c2x}) | finite={finite} qvel_ok={qvel_ok}"
+        )
+        print(f"  [C2-VERDICT] slide_through={slide_through} -> {_cons}")
+
+        # §運用14 video: the FULL sequence (grasp->carry->seat C1->half-unclamp->guide->C2 attempt) + a summary PNG.
+        if record_video:
+            _out_mp4 = os.path.join(output_dir or ".", "route_c1_to_c2.mp4")
+            _subp.run(
+                [
+                    "ffmpeg",
+                    "-loglevel",
+                    "error",
+                    "-y",
+                    "-framerate",
+                    "1.5",
+                    "-i",
+                    os.path.join(_frames_dir, "f%05d.png"),
+                    "-vf",
+                    "scale=trunc(iw/2)*2:trunc(ih/2)*2",
+                    "-pix_fmt",
+                    "yuv420p",
+                    _out_mp4,
+                ],
+                check=False,
+            )
+            _frames = sorted(_glob.glob(os.path.join(_frames_dir, "f*.png")))
+            _png = os.path.join(output_dir or ".", "route_c1_to_c2.png")
+            if _frames:
+                _shutil.copy(_frames[-1], _png)
+            for _src, _dst in ((_out_mp4, "route_c1_to_c2.mp4"), (_png, "route_c1_to_c2.png")):
+                try:
+                    _shutil.copy(_src, os.path.expanduser(f"~/Downloads/{_dst}"))
+                except Exception:  # noqa: BLE001
+                    pass
+            print(
+                f"  [C2] §運用14 video -> {_out_mp4} (+ ~/Downloads/route_c1_to_c2.mp4); "
+                f"PNG -> {_png} (+ ~/Downloads/route_c1_to_c2.png) [{len(_frames)} frames]"
+            )
+        # PERCLIP_PIN (b)-pin freeze-scope + route summary -> JSON. The route block exits HERE (before the
+        # fn-level metrics dump at the end of _run_mujoco_grasp_route is reached), so persist the headline metrics
+        # for %0 cross-PV. Only when the freeze-scope was measured (_fs_on); default route writes nothing extra.
+        if output_dir and _fs_on:
+            try:
+                os.makedirs(output_dir, exist_ok=True)
+                with open(os.path.join(output_dir, "route_c2_pin.json"), "w") as _jf:
+                    json.dump(
+                        {
+                            "route_c2_freeze_scope": _freeze_scope_rec,
+                            "route_c2_regrasp": _c2_regrasp_rec,  # Rs guide-data charter: R re-grasp (R-reach + R-grip-nonzero, %0 cross-PV)
+                            "route_c2_settle": _c2_settle_rec,  # C2_DUALSEAT release-and-settle (%0 seat-capture, charter metric #3)
+                            "route_c2_metrics": rc2,  # %3 integrated-route charter: full 5-metric dict for A/B + %0 cross-PV
+                            "x_clip": float(x_clip),
+                            "y_clip": float(y_clip),
+                            "c2x": float(c2x),
+                            "c2y": float(c2y),
+                            "clip_float_z_mm": round(float(_clip_float_z) * 1e3, 1),
+                            "spacer_on": bool(os.environ.get("SPACER", "0") == "1" and _clip_float_z > 0.0),
+                            "finite": bool(finite),
+                            "qvel_ok": bool(qvel_ok),
+                        },
+                        _jf,
+                        indent=2,
+                    )
+                print(f"  [C2-PIN] freeze-scope metrics -> {os.path.join(output_dir, 'route_c2_pin.json')}")
+            except Exception as _e:  # noqa: BLE001
+                print(f"  [C2-PIN] (json dump skipped: {_e})")
+        if _demo_rec is not None:  # P3 recorder: finalize with the run verdict BEFORE the mid-fn sys.exit (spec §2.7)
+            _demo_rec.finalize(verdict=_c2_regrasp_rec)
+        sys.exit(0 if (finite and qvel_ok) else 2)
 
 
 class RouteExecutor(rc.RouteInterfaceV1):

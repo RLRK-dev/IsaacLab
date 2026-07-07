@@ -50,10 +50,11 @@ ignore = [
 # route_executor.py is a byte-faithful extraction of the Rs-LOCKED route monolith
 # (test_newton_clip_routing.py::_run_mujoco_grasp_route). E501 (verbatim long lines, cf. the AR env
 # file) and C901 (the route function's inherent complexity) cannot be reformatted without breaking the
-# byte-fidelity that a byte-repro regression guards. F401 (a body-local import used only in a
-# later chunk) and F841 (a local assigned in one chunk, first used in a later one) are both transient
-# while run_route is built incrementally; they clear when the function is complete.
-"thread_isaac_lab/envs/route_executor.py" = ["C901", "E501", "F401", "F841"]
+# byte-fidelity that a byte-repro regression guards. SIM105 (a verbatim try/except/pass) is likewise
+# inherent. F401 (a body-local import used only in a later chunk) and F841 (a local assigned in one
+# chunk, first used in a later one) are transient while run_route is built incrementally; they clear
+# when the function is complete (remove them then, keeping only the inherent C901/E501/SIM105).
+"thread_isaac_lab/envs/route_executor.py" = ["C901", "E501", "F401", "F841", "SIM105"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 30
