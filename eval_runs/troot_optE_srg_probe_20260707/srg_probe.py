@@ -174,10 +174,15 @@ def build_koshape_pinch(tag, use_cpu=True):
     contacts = model.contacts()
     cable_bodies = scene_info.get("cable_bodies", [])
 
-    # SolverMuJoCo: use_mujoco_cpu=use_cpu (S0 CPU / S1 cuda:0-cg); single world => separate_worlds False.
+    # SolverMuJoCo: use_mujoco_cpu=use_cpu (S0 CPU / S1 cuda:0); single world => separate_worlds False.
+    # ⚠ GPU solver = "cg" (r_s66 #1415 fix: the "newton" solver NaNs at close on GPU, proven 0/30; cg is
+    # the r_s66-proven GPU-cg koshape path %12 verified). CPU (S0) keeps "newton" (stable, r_s66 CPU precedent).
+    # cg CAVEAT (r_s66:26): cg contacts may be SOFTER (under-converge) => a cg-GPU GO is NON-conservative
+    # (CPU/real firmer) — carried into the verdict conservatism.
+    _mjsolver = "newton" if use_cpu else "cg"
     solver = SolverMuJoCo(model, use_mujoco_cpu=use_cpu, separate_worlds=(model.world_count > 1),
                           update_data_interval=1, disable_contacts=False, nconmax=MUJOCO_NCONMAX,
-                          njmax=NJMAX_SOLVER, solver="newton", integrator="implicitfast")
+                          njmax=NJMAX_SOLVER, solver=_mjsolver, integrator="implicitfast")
     # R6 pad-solref poke + I11 readback asserts (condim==6/priority==1/roll; by-NAME pad filter). On CPU
     # mjw is absent (mj_model poked+asserted); on GPU (S1) mjw is present and _wire_s6 pokes+asserts BOTH.
     wire_rb = T._wire_s6_grasp_solref(solver, scene_info)
@@ -299,11 +304,12 @@ def grasp_cable(env):
     ncon_max = 0
     for _ in range(CLOSE_STEPS):
         state = T.physics_step(model, state, solver, contacts, scene_info)
-        ncon_max = max(ncon_max, _ncon(solver))
+        ncon_max = max(ncon_max, _ncon_any(solver))  # GPU: mjw_data.nacon (mj_data.ncon is 0 on GPU)
     bqn = state.body_q.numpy()
     finite = bool(np.all(np.isfinite(bqn)))
-    engaged = bool(_ncon(solver) > 0 and finite)
-    print(f"  [GRASP {env['tag']}] z_grasp={z_grasp:.4f} ncon_close={_ncon(solver)} "
+    ncon_close = _ncon_any(solver)
+    engaged = bool(ncon_close > 0 and finite)
+    print(f"  [GRASP {env['tag']}] z_grasp={z_grasp:.4f} ncon_close={ncon_close} "
           f"ncon_max={ncon_max} finite={finite} engaged={engaged}")
     return state, engaged, ncon_max
 
@@ -484,9 +490,15 @@ S1_GRACE_FRAMES = 200            # close/force transient before the per-axis rat
 
 
 def _ncon_any(solver):
-    """Contact count, GPU (mjw_data.nacon) or CPU (mj_data.ncon) — r_s66 pattern."""
+    """Contact count, GPU (mjw_data.nacon) or CPU (mj_data.ncon) — r_s66 _nacon pattern. On GPU nacon may
+    be a warp array (read via .numpy()); mj_data.ncon is 0 on GPU (stale host template) so try mjw first."""
     try:
-        v = int(getattr(solver, "mjw_data").nacon)
+        na = solver.mjw_data.nacon
+        try:
+            v = int(na)
+        except Exception:
+            import numpy as np
+            v = int(np.asarray(na.numpy()).ravel()[0])
         if v > 0:
             return v
     except Exception:
@@ -494,12 +506,42 @@ def _ncon_any(solver):
     return _ncon(solver)
 
 
-def measure_cage_escape(env, state, N_substeps, F_axial, hold_frames):
+def _render_claw_frame(solver, lookat, path, h=720, w=960):
+    """§運用14 video leg: render a claw-zoom of the CURRENT held-state to path. The GPU state is synced to
+    mj_data every step (SolverMuJoCo update_data_interval=1), so mj_forward(mj_model, mj_data) gives the
+    live geom_xpos. Robust: ANY failure -> (False, 0.0), never blocks the measurement (the numeric per-axis
+    slip-series is the primary evidence; %12 accepts numeric + best frame if GPU render sync is fiddly)."""
+    try:
+        import mujoco
+        from PIL import Image
+
+        m, d = solver.mj_model, solver.mj_data
+        mujoco.mj_forward(m, d)
+        m.vis.global_.offwidth = w
+        m.vis.global_.offheight = h
+        renderer = mujoco.Renderer(m, height=h, width=w)
+        cam = mujoco.MjvCamera()
+        cam.lookat[:] = [float(v) for v in lookat]
+        cam.distance, cam.azimuth, cam.elevation = 0.10, 40.0, -25.0
+        renderer.update_scene(d, camera=cam)
+        img = renderer.render()
+        renderer.close()
+        nonblack = float((img.sum(axis=2) > 15).mean())
+        Image.fromarray(img).save(path)
+        return True, round(nonblack, 3)
+    except Exception as exc:  # noqa: BLE001
+        print(f"[S1 RENDER] FAILED ({type(exc).__name__}: {str(exc)[:120]}) -> skip (numeric slip-series primary)")
+        return False, 0.0
+
+
+def measure_cage_escape(env, state, N_substeps, F_axial, hold_frames, render_hook=None):
     """S1 PER-AXIS cage-escape hold on the held C1 grasp (design §13). Kinematic-arm hold (gripper DYNAMIC)
     with per-substep axial body_f (F, +y) + readback assert; track the grasped C1 seg X (lateral = world-X
     route axis = コ-mouth escape = GATE) / Y (axial = benign slide, report) / Z (vertical drop = GATE) +
     the C1-flank-window min-z (retention predicate) + contact count (debounce). Returns per-axis rates
-    (mm/f via polyfit over post-grace hold), slip-time-series, contact-loss debounce, end-of-hold retention."""
+    (mm/f via polyfit over post-grace hold), slip-time-series, contact-loss debounce, end-of-hold retention.
+
+    render_hook(state, frame_label) is called at {start-of-window, mid, end} for the §運用14 video leg."""
     import numpy as np
 
     T = env["T"]
@@ -514,6 +556,8 @@ def measure_cage_escape(env, state, N_substeps, F_axial, hold_frames):
     import task_config as C
 
     gx, yc = C.GRASP_X, C.CLIP1_Y  # C1 grasp centre (x, C1Y)
+    _cap = {("start", S1_GRACE_FRAMES), ("mid", hold_frames // 2), ("end", hold_frames - 1)}
+    _cap_at = {fr: lbl for lbl, fr in _cap}
 
     s1 = model.state()
     bq0 = _badqacc(solver)
@@ -567,6 +611,8 @@ def measure_cage_escape(env, state, N_substeps, F_axial, hold_frames):
         ncon_series.append(nc)
         contact_loss_run = contact_loss_run + 1 if nc <= 0 else 0
         contact_loss_max = max(contact_loss_max, contact_loss_run)
+        if render_hook is not None and f in _cap_at:
+            render_hook(state, _cap_at[f], (x, y, z))  # §運用14 video leg: start/mid/end GPU held-states
 
     g = S1_GRACE_FRAMES
     xa, ya, za = np.array(xs[g:]), np.array(ys[g:]), np.array(zs[g:])
@@ -651,6 +697,13 @@ def run_s1():
     T.SIM_SUBSTEPS, T.SIM_DT = N, DT / N
     wp.init()
 
+    # §運用14 video leg (INLINE, %12 23:14): render start/mid/end claw-zoom of the LOADED F=0.44 hold.
+    os.environ["MUJOCO_GL"] = "egl"  # headless offscreen (memory: egl + no DISPLAY)
+    os.environ.pop("DISPLAY", None)
+    downloads = os.path.expanduser("~/Downloads")
+    os.makedirs(downloads, exist_ok=True)
+    s1_frames = []
+
     landing = landing_control(N)
     cells = {}
     if landing["ok"]:
@@ -663,7 +716,16 @@ def run_s1():
                 cells[tag] = {"tag": tag, "F_axial_N": F, "engaged": False, "ncon_max_close": ncon_max,
                               "d1_readback": d1, "note": "C1 grasp did NOT engage -> surface"}
                 continue
-            row = measure_cage_escape(env, state, N, F, S1_HOLD_FRAMES)
+            hook = None
+            if F == 0.44:  # video leg on the LOADED cell (the gate-binding cell)
+                def _hook(st, label, xyz, _env=env):
+                    p = os.path.join(downloads, f"srg_s1_c1_F044_{label}_20260707.png")
+                    ok_r, nb = _render_claw_frame(_env["solver"], xyz, p)
+                    if ok_r:
+                        s1_frames.append({"label": label, "path": p, "nonblack": nb})
+                        print(f"[S1 RENDER] {label}: {p} nonblack={nb}")
+                hook = _hook
+            row = measure_cage_escape(env, state, N, F, S1_HOLD_FRAMES, render_hook=hook)
             row.update({"tag": tag, "engaged": True, "ncon_max_close": ncon_max, "d1_readback": d1})
             cells[tag] = row
 
@@ -705,6 +767,13 @@ def run_s1():
     else:
         verdict = "GRIP_NOGO_STOP_SURFACE"  # creep-budget exceeded -> STOP+surface, NO threshold-relax
 
+    # FORK-3 (%12 23:14): z-drop(10mm)+contact-loss+retention are the TIGHT signals; 60mm-lateral is the
+    # GROSS catch. Flag a GO that leans on the LOOSE lateral gate (no silent loose-gate PASS).
+    lat_util = (lat_svc / DROP_LATERAL_DEV_MAX_MM) if lat_svc is not None else None
+    z_util = (zdrop_svc / DROP_LIFT_MARGIN_MM) if zdrop_svc is not None else None
+    loose_gate_flag = bool(verdict == "GRIP_GO_PROCEED_TO_S2" and lat_util is not None
+                           and z_util is not None and lat_util > 0.5 and lat_util >= z_util)
+
     return {
         "stage": "S1",
         "substrate": "scripted-route build_scene(grasp_actuation) koshape コ, cuda:0-cg (route device-fragile); "
@@ -728,8 +797,29 @@ def run_s1():
         "gate_checks": {"lateral_ok": bool(lateral_ok), "zdrop_ok": bool(zdrop_ok),
                         "runaway_ok": bool(runaway_ok), "retention_ok": bool(retention_ok),
                         "contact_not_lost": bool(not contact_lost)},
+        "gate_margin_utilization": {
+            "lateral_over_60mm": round(lat_util, 3) if lat_util is not None else None,
+            "zdrop_over_10mm": round(z_util, 3) if z_util is not None else None},
+        "fork3_loose_gate_flag": loose_gate_flag,
+        "fork3_loose_gate_note": ("⚠ GO leans on the LOOSE 60mm-lateral catch (lateral util > 0.5 and >= "
+                                  "z-drop util) — NOT a silent loose-gate PASS; the TIGHT z/contact/retention "
+                                  "signals are the meaningful ones (%12 FORK-3)." if loose_gate_flag
+                                  else "binding gate is a TIGHT signal (z-drop/contact/retention) or NOGO"),
         "conservatism": "per-axis: axial-y benign (report); lateral-x + z-drop = the cage-escape GATE. "
-                        "isolated scripted-route grasp non-conservative vs full-route drag (S2 tail).",
+                        "⚠ GPU solver = cg (r_s66 #1415: newton NaNs at close on GPU) — cg matrix-free "
+                        "contacts are SOFTER/artifact-prone (r_s66:26): a cg-HOLD is favourable-DIRECTION "
+                        "(CPU/real likely firmer) but SCREENING-tier NON-RIGOROUS -> r_s66 mandates a CPU-cg "
+                        "de-confound before transfer; direction not asserted as a hard bound (GROVE 2.2). "
+                        "z-drop extrapolation (linear rate x 9000) is CONSERVATIVE-pessimistic (the 1800f "
+                        "series plateaus ~2mm, not linear). SCOPE (%12 FORK-1): nominal-static scripted-route "
+                        "grasp = necessary-NOT-sufficient; build_multiworld CLOSE (comp3) + full-route DRAG "
+                        "(S2) NOT established.",
+        "fork1_scope_caveat": "%12 CARRY (GROVE 2.2): S1 validates grip CONTACT-retention on the PROVEN-close "
+                              "SCRIPTED build_scene substrate = the NOMINAL-STATIC leg. It does NOT establish "
+                              "(a) the RL-env build_multiworld CLOSE-kinematics (= comp3's required validation) "
+                              "nor (b) full-route DRAG/offset (= S2, mandatory). S1-GO = necessary-NOT-sufficient "
+                              "for the RL env.",
+        "video_leg_frames": s1_frames,
         "s1_verdict": verdict,
     }
 

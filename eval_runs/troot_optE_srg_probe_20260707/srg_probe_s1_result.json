@@ -1,0 +1,219 @@
+{
+ "stage": "S1",
+ "substrate": "scripted-route build_scene(grasp_actuation) koshape \u30b3, cuda:0-cg (route device-fragile); C1 grasp = run_route M-Grasp-engage-1 recipe (z_grasp=1.0668)",
+ "structural_self_check": {
+  "device_cuda0_only": {
+   "pass": true,
+   "detail": "T.DEVICE=cuda:0 (route device-fragile: cuda:0 ONLY)"
+  },
+  "real_route_grasp_recipe": {
+   "pass": true,
+   "detail": "z_grasp=1.0668 cradle + close = run_route M-Grasp-engage-1 (route_executor.py:1087 identical); build_scene(grasp_actuation) = scripted-route substrate (r_s66-proven GPU koshape)"
+  },
+  "per_axis_measure_present": {
+   "pass": true,
+   "detail": "measure_cage_escape tracks X(lateral=gate)/Y(axial=benign)/Z(drop=gate)"
+  },
+  "creep_budgeted_not_no_slip": {
+   "pass": true,
+   "detail": "gate = rate x W_svc vs DROP margins + runaway<=1.2 + retention; NO no-slip criterion (banked-UNREACHABLE, LL-G3-Vacuity)"
+  },
+  "w_svc_cited": {
+   "pass": true,
+   "detail": "W_svc=9000 = 900(ROUTE_TERMINAL_STEPS) x 10(PHYSICS_STEPS_PER_RL)"
+  },
+  "margins_from_env_ssot": {
+   "pass": true,
+   "detail": "lat<=60.0mm z<=10.0mm debounce=8 (newton_route_env SSOT)"
+  }
+ },
+ "d1_contact_ssot": {
+  "pad_solref": [
+   -65789.0,
+   -2105.3
+  ],
+  "condim": 6,
+  "impratio": 10.0
+ },
+ "frame_comparability": {
+  "DT": 0.0020833333333333333,
+  "frame_dt_10sub": 0.0020833333333333333,
+  "frame_dt_4sub": 0.0020833333333333333,
+  "SIM_SUBSTEPS": 10,
+  "RL_SIM_SUBSTEPS": 4
+ },
+ "landing_control": {
+  "ok": true,
+  "dy_mm": 25.83,
+  "N_substeps": 4
+ },
+ "W_svc_phys_frames": 9000,
+ "W_svc_provenance": "900 ROUTE_TERMINAL_STEPS x 10 PHYSICS_STEPS_PER_RL (conservative full-horizon; under-LOAD subset smaller, surfaced)",
+ "cells": {
+  "c1_N4_F00": {
+   "F_axial_N": 0.0,
+   "N_substeps": 4,
+   "hold_frames": 1800,
+   "rate_lateral_x_mm_per_f": 0.00019,
+   "rate_axial_y_mm_per_f": 0.00193,
+   "rate_zdrop_mm_per_f": 0.00087,
+   "lateral_x_total_mm": 0.298,
+   "axial_y_total_mm": 3.683,
+   "z_total_mm": -1.756,
+   "slip_series_lateral_x_mm": [
+    0.0,
+    0.129,
+    0.572,
+    0.517,
+    0.329,
+    -0.112,
+    -0.246,
+    -0.265,
+    -0.294,
+    0.254,
+    0.295
+   ],
+   "slip_series_zdrop_mm": [
+    0.0,
+    0.755,
+    1.1,
+    1.435,
+    1.77,
+    2.412,
+    2.349,
+    2.191,
+    2.114,
+    1.794,
+    1.771
+   ],
+   "grasp_seg_z_end_m": 0.8004,
+   "c1_flank_min_z_end_m": 0.8003,
+   "ncon_mean": 36.1,
+   "contact_loss_max_run": 0,
+   "collapse": 0,
+   "badqacc": 0,
+   "landing_readback_ok": true,
+   "finite": true,
+   "tag": "c1_N4_F00",
+   "engaged": true,
+   "ncon_max_close": 64,
+   "d1_readback": {
+    "n_pad_box_geoms": 16,
+    "pad_solref": [
+     -65789.0,
+     -2105.3
+    ],
+    "pad_condim": 6,
+    "impratio": 10.0
+   }
+  },
+  "c1_N4_F044": {
+   "F_axial_N": 0.44,
+   "N_substeps": 4,
+   "hold_frames": 1800,
+   "rate_lateral_x_mm_per_f": 0.00017,
+   "rate_axial_y_mm_per_f": 0.00044,
+   "rate_zdrop_mm_per_f": 0.00077,
+   "lateral_x_total_mm": 0.38,
+   "axial_y_total_mm": -11.268,
+   "z_total_mm": -1.71,
+   "slip_series_lateral_x_mm": [
+    0.0,
+    0.257,
+    0.607,
+    0.488,
+    0.215,
+    -0.176,
+    -0.204,
+    -0.278,
+    -0.225,
+    0.295,
+    0.299
+   ],
+   "slip_series_zdrop_mm": [
+    0.0,
+    0.722,
+    0.975,
+    1.363,
+    1.793,
+    2.351,
+    2.147,
+    2.053,
+    1.914,
+    1.623,
+    1.629
+   ],
+   "grasp_seg_z_end_m": 0.8003,
+   "c1_flank_min_z_end_m": 0.8003,
+   "ncon_mean": 35.4,
+   "contact_loss_max_run": 0,
+   "collapse": 0,
+   "badqacc": 0,
+   "landing_readback_ok": true,
+   "finite": true,
+   "tag": "c1_N4_F044",
+   "engaged": true,
+   "ncon_max_close": 64,
+   "d1_readback": {
+    "n_pad_box_geoms": 16,
+    "pad_solref": [
+     -65789.0,
+     -2105.3
+    ],
+    "pad_condim": 6,
+    "impratio": 10.0
+   }
+  }
+ },
+ "per_axis_over_W_svc_loaded": {
+  "lateral_x_mm": 1.53,
+  "z_drop_mm": 6.93,
+  "axial_y_mm_benign": 3.96
+ },
+ "cage_escape_margins_mm": {
+  "lateral_max": 60.0,
+  "z_drop_max": 10.0
+ },
+ "runaway_ratio_loaded_over_unloaded": {
+  "lateral": 0.895,
+  "z_drop": 0.885,
+  "cap": 1.2
+ },
+ "gate_checks": {
+  "lateral_ok": true,
+  "zdrop_ok": true,
+  "runaway_ok": true,
+  "retention_ok": true,
+  "contact_not_lost": true
+ },
+ "gate_margin_utilization": {
+  "lateral_over_60mm": 0.026,
+  "zdrop_over_10mm": 0.693
+ },
+ "fork3_loose_gate_flag": false,
+ "fork3_loose_gate_note": "binding gate is a TIGHT signal (z-drop/contact/retention) or NOGO",
+ "conservatism": "per-axis: axial-y benign (report); lateral-x + z-drop = the cage-escape GATE. isolated scripted-route grasp non-conservative vs full-route drag (S2 tail). \u26a0 GPU solver = cg (r_s66 #1415: newton NaNs at close on GPU) \u2014 cg contacts may be SOFTER (under-converge) => a cg-GPU GO is NON-conservative (CPU/real firmer), needs high-fidelity/real confirm before transfer (GROVE 2.2).",
+ "fork1_scope_caveat": "%12 CARRY (GROVE 2.2): S1 validates grip CONTACT-retention on the PROVEN-close SCRIPTED build_scene substrate = the NOMINAL-STATIC leg. It does NOT establish (a) the RL-env build_multiworld CLOSE-kinematics (= comp3's required validation) nor (b) full-route DRAG/offset (= S2, mandatory). S1-GO = necessary-NOT-sufficient for the RL env.",
+ "video_leg_frames": [
+  {
+   "label": "start",
+   "path": "/home/rlrk/Downloads/srg_s1_c1_F044_start_20260707.png",
+   "nonblack": 0.883
+  },
+  {
+   "label": "mid",
+   "path": "/home/rlrk/Downloads/srg_s1_c1_F044_mid_20260707.png",
+   "nonblack": 0.886
+  },
+  {
+   "label": "end",
+   "path": "/home/rlrk/Downloads/srg_s1_c1_F044_end_20260707.png",
+   "nonblack": 0.888
+  }
+ ],
+ "s1_verdict": "GRIP_GO_PROCEED_TO_S2",
+ "elapsed_s": 715.1,
+ "timestamp": "2026-07-07 23:46:59 JST",
+ "cuda_visible_devices": "0",
+ "newton_device": "cuda:0"
+}
