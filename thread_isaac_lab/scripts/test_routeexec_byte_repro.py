@@ -298,14 +298,27 @@ def orchestrate(args: argparse.Namespace) -> int:
         return 3
 
     # driver-mechanism self-check: reference leg (unpatched) via THIS harness must reproduce golden.
+    # HARD GATE (%12 directive): if the ref leg does NOT byte-reproduce the banked golden, the driver
+    # mechanism (import-mode vs script-mode: __name__ setup / :929 assert / DEVICE env / sys.path
+    # top-level side-effects) is broken -> the mod leg comparison is untrustworthy -> STOP, fix the
+    # driver, do not proceed. This gate makes "ref self-check MUST PASS first" structural.
     if args.ref_subset:
         rtags = [t for t in tags if t[0] in set(args.ref_subset.split(","))]
         _run_grid("ref", rtags, out_root, args.nproc)
+        selfcheck_fail = []
         for t, _dx, _dy in rtags:
             got = sha256_file(out_root / "ref" / f"cell_{t}" / "route_demo_raw.npz")
             gold = sha256_file(GOLDEN_DIR / f"cell_{t}" / "route_demo_raw.npz")
-            tag = "PASS" if got == gold else "FAIL"
-            print(f"[SELF-CHECK] ref-leg {t}: harness {'==' if got == gold else '!='} golden -> {tag}")
+            ok = got is not None and got == gold
+            print(f"[SELF-CHECK] ref-leg {t}: harness {'==' if ok else '!='} golden -> {'PASS' if ok else 'FAIL'}")
+            if not ok:
+                selfcheck_fail.append(t)
+        if selfcheck_fail and not args.allow_selfcheck_fail:
+            print(
+                f"!! ABORT: ref-leg self-check FAIL {selfcheck_fail} -> driver mechanism broken "
+                f"(import-mode != script-mode). Fix the driver before the mod leg. (--allow-selfcheck-fail to override)"
+            )
+            return 4
 
     if args.compare_only:
         codes = {t: 0 for (t, _dx, _dy) in tags}
@@ -378,6 +391,11 @@ def main() -> None:
     )
     ap.add_argument("--compare-only", action="store_true", help="orchestrator: skip module run, only compare existing")
     ap.add_argument("--allow-bad-golden", action="store_true", help="orchestrator: proceed despite provenance FAIL")
+    ap.add_argument(
+        "--allow-selfcheck-fail",
+        action="store_true",
+        help="orchestrator: proceed to mod leg despite ref-leg self-check FAIL (debug only)",
+    )
     args = ap.parse_args()
 
     if args.worker:
