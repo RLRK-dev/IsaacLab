@@ -132,7 +132,7 @@ def _ncon(solver):
         return -1
 
 
-def build_koshape_pinch(tag, use_cpu=True):
+def build_koshape_pinch(tag, use_cpu=True, solver_override=None):
     """Self-contained CURRENT-koshape pinch env (BUILD_SPEC option B). Mirrors the PROVEN close-on-cable
     path r_s66_wr_longhold_gpucg_task2a.build_and_grasp: build_scene(grasp_actuation=True) +
     SolverMuJoCo + _wire_s6_grasp_solref (R6 pad-solref + condim/priority readback asserts, by-NAME) +
@@ -179,7 +179,7 @@ def build_koshape_pinch(tag, use_cpu=True):
     # the r_s66-proven GPU-cg koshape path %12 verified). CPU (S0) keeps "newton" (stable, r_s66 CPU precedent).
     # cg CAVEAT (r_s66:26): cg contacts may be SOFTER (under-converge) => a cg-GPU GO is NON-conservative
     # (CPU/real firmer) — carried into the verdict conservatism.
-    _mjsolver = "newton" if use_cpu else "cg"
+    _mjsolver = solver_override or ("newton" if use_cpu else "cg")
     solver = SolverMuJoCo(model, use_mujoco_cpu=use_cpu, separate_worlds=(model.world_count > 1),
                           update_data_interval=1, disable_contacts=False, nconmax=MUJOCO_NCONMAX,
                           njmax=NJMAX_SOLVER, solver=_mjsolver, integrator="implicitfast")
@@ -672,6 +672,80 @@ def _s1_structural_selfcheck():
     return ok, {k: {"pass": bool(c), "detail": d} for k, (c, d) in checks.items()}
 
 
+def _compute_s1_gate(cells, N):
+    """Creep-budget gate on the LOADED F=0.44 cell (extrapolated to W_svc) — SHARED by the GPU-cg run_s1
+    and the CPU de-confound run_s1cpu so the cross-check is apples-to-apples (identical gate math)."""
+    unloaded = cells.get(f"c1_N{N}_F00", {})
+    loaded = cells.get(f"c1_N{N}_F044", {})
+
+    def _extrap(r):
+        return r * W_SVC_PHYS_FRAMES if r is not None else None
+
+    lat_svc = _extrap(loaded.get("rate_lateral_x_mm_per_f")) if loaded.get("engaged") else None
+    zdrop_svc = _extrap(loaded.get("rate_zdrop_mm_per_f")) if loaded.get("engaged") else None
+    axial_svc = _extrap(loaded.get("rate_axial_y_mm_per_f")) if loaded.get("engaged") else None
+
+    _RF = 1e-4  # negligible per-axis rate floor [mm/f] (=0.1um/f): below this an axis is effectively stable
+
+    def _ratio(a, b):
+        if a is None or b is None:
+            return None
+        if a <= _RF and b <= _RF:
+            return 1.0  # BOTH negligible => no load-destabilization (perfect hold; runaway ratio moot, NOT Inf)
+        if b <= _RF:
+            return float("inf")  # unloaded ~0 but loaded significant = a REAL load-induced runaway
+        return a / b
+
+    runaway_lat = _ratio(loaded.get("rate_lateral_x_mm_per_f"), unloaded.get("rate_lateral_x_mm_per_f"))
+    runaway_z = _ratio(loaded.get("rate_zdrop_mm_per_f"), unloaded.get("rate_zdrop_mm_per_f"))
+
+    breakdown = any(c.get("abort") or c.get("collapse", 0) > 0 or c.get("badqacc", 0) > 0
+                    for c in cells.values())
+    not_engaged = any(c.get("engaged") is False for c in cells.values())
+    contact_lost = loaded.get("contact_loss_max_run", 0) >= DROP_CONTACT_LOSS_DEBOUNCE
+    retention_ok = (loaded.get("engaged")
+                    and loaded.get("grasp_seg_z_end_m", 9.0) < C1_RETAINED_LOW_WALL_TOP_M
+                    and loaded.get("c1_flank_min_z_end_m", 9.0) < C1_RETAINED_LOW_WALL_TOP_M)
+    lateral_ok = lat_svc is not None and lat_svc <= DROP_LATERAL_DEV_MAX_MM
+    zdrop_ok = zdrop_svc is not None and zdrop_svc <= DROP_LIFT_MARGIN_MM
+    runaway_ok = (runaway_lat is None or runaway_lat <= RUNAWAY_RATIO_CAP) and \
+                 (runaway_z is None or runaway_z <= RUNAWAY_RATIO_CAP)
+
+    if not_engaged or breakdown or lat_svc is None:
+        verdict = "STOP_SURFACE"
+    elif lateral_ok and zdrop_ok and runaway_ok and retention_ok and not contact_lost:
+        verdict = "GRIP_GO_PROCEED_TO_S2"
+    else:
+        verdict = "GRIP_NOGO_STOP_SURFACE"  # creep-budget exceeded -> STOP+surface, NO threshold-relax
+
+    lat_util = (lat_svc / DROP_LATERAL_DEV_MAX_MM) if lat_svc is not None else None
+    z_util = (zdrop_svc / DROP_LIFT_MARGIN_MM) if zdrop_svc is not None else None
+    loose_gate_flag = bool(verdict == "GRIP_GO_PROCEED_TO_S2" and lat_util is not None
+                           and z_util is not None and lat_util > 0.5 and lat_util >= z_util)
+    return {
+        "per_axis_over_W_svc_loaded": {
+            "lateral_x_mm": round(lat_svc, 2) if lat_svc is not None else None,
+            "z_drop_mm": round(zdrop_svc, 2) if zdrop_svc is not None else None,
+            "axial_y_mm_benign": round(axial_svc, 2) if axial_svc is not None else None},
+        "runaway_ratio_loaded_over_unloaded": {
+            "lateral": round(runaway_lat, 3) if isinstance(runaway_lat, float) else runaway_lat,
+            "z_drop": round(runaway_z, 3) if isinstance(runaway_z, float) else runaway_z,
+            "cap": RUNAWAY_RATIO_CAP},
+        "gate_checks": {"lateral_ok": bool(lateral_ok), "zdrop_ok": bool(zdrop_ok),
+                        "runaway_ok": bool(runaway_ok), "retention_ok": bool(retention_ok),
+                        "contact_not_lost": bool(not contact_lost)},
+        "gate_margin_utilization": {
+            "lateral_over_60mm": round(lat_util, 3) if lat_util is not None else None,
+            "zdrop_over_10mm": round(z_util, 3) if z_util is not None else None},
+        "fork3_loose_gate_flag": loose_gate_flag,
+        "fork3_loose_gate_note": ("⚠ GO leans on the LOOSE 60mm-lateral catch — NOT a silent loose-gate "
+                                  "PASS; the TIGHT z/contact/retention signals are the meaningful ones "
+                                  "(%12 FORK-3)." if loose_gate_flag
+                                  else "binding gate is a TIGHT signal (z-drop/contact/retention) or NOGO"),
+        "verdict": verdict,
+    }
+
+
 def run_s1():
     """S1: DIRECT z/lateral cage-escape go/no-go on the REAL route C1 grasp (creep-budgeted over W_svc).
 
@@ -729,51 +803,7 @@ def run_s1():
             row.update({"tag": tag, "engaged": True, "ncon_max_close": ncon_max, "d1_readback": d1})
             cells[tag] = row
 
-    unloaded = cells.get(f"c1_N{N}_F00", {})
-    loaded = cells.get(f"c1_N{N}_F044", {})
-
-    # creep-budget gate on the LOADED cell (conservative), extrapolated to W_svc.
-    def _extrap(rate_mm_per_f):
-        return rate_mm_per_f * W_SVC_PHYS_FRAMES if rate_mm_per_f is not None else None
-
-    lat_svc = _extrap(loaded.get("rate_lateral_x_mm_per_f")) if loaded.get("engaged") else None
-    zdrop_svc = _extrap(loaded.get("rate_zdrop_mm_per_f")) if loaded.get("engaged") else None
-    axial_svc = _extrap(loaded.get("rate_axial_y_mm_per_f")) if loaded.get("engaged") else None
-
-    # runaway ratio (loaded / unloaded) on the GATE axes (lateral + z).
-    def _ratio(a, b):
-        return (a / b) if (a and b and b > 1e-9) else (None if (a is None or b is None) else float("inf"))
-
-    runaway_lat = _ratio(loaded.get("rate_lateral_x_mm_per_f"), unloaded.get("rate_lateral_x_mm_per_f"))
-    runaway_z = _ratio(loaded.get("rate_zdrop_mm_per_f"), unloaded.get("rate_zdrop_mm_per_f"))
-
-    breakdown = any(c.get("abort") or c.get("collapse", 0) > 0 or c.get("badqacc", 0) > 0
-                    for c in cells.values())
-    not_engaged = any(c.get("engaged") is False for c in cells.values())
-    contact_lost = loaded.get("contact_loss_max_run", 0) >= DROP_CONTACT_LOSS_DEBOUNCE
-    # end-of-hold C1 retention predicate (z_c1 < 0.840 AND flank-max < 0.840).
-    retention_ok = (loaded.get("engaged")
-                    and loaded.get("grasp_seg_z_end_m", 9.0) < C1_RETAINED_LOW_WALL_TOP_M
-                    and loaded.get("c1_flank_min_z_end_m", 9.0) < C1_RETAINED_LOW_WALL_TOP_M)
-    lateral_ok = lat_svc is not None and lat_svc <= DROP_LATERAL_DEV_MAX_MM
-    zdrop_ok = zdrop_svc is not None and zdrop_svc <= DROP_LIFT_MARGIN_MM
-    runaway_ok = (runaway_lat is None or runaway_lat <= RUNAWAY_RATIO_CAP) and \
-                 (runaway_z is None or runaway_z <= RUNAWAY_RATIO_CAP)
-
-    if not_engaged or breakdown or lat_svc is None:
-        verdict = "STOP_SURFACE"
-    elif lateral_ok and zdrop_ok and runaway_ok and retention_ok and not contact_lost:
-        verdict = "GRIP_GO_PROCEED_TO_S2"
-    else:
-        verdict = "GRIP_NOGO_STOP_SURFACE"  # creep-budget exceeded -> STOP+surface, NO threshold-relax
-
-    # FORK-3 (%12 23:14): z-drop(10mm)+contact-loss+retention are the TIGHT signals; 60mm-lateral is the
-    # GROSS catch. Flag a GO that leans on the LOOSE lateral gate (no silent loose-gate PASS).
-    lat_util = (lat_svc / DROP_LATERAL_DEV_MAX_MM) if lat_svc is not None else None
-    z_util = (zdrop_svc / DROP_LIFT_MARGIN_MM) if zdrop_svc is not None else None
-    loose_gate_flag = bool(verdict == "GRIP_GO_PROCEED_TO_S2" and lat_util is not None
-                           and z_util is not None and lat_util > 0.5 and lat_util >= z_util)
-
+    gate = _compute_s1_gate(cells, N)
     return {
         "stage": "S1",
         "substrate": "scripted-route build_scene(grasp_actuation) koshape コ, cuda:0-cg (route device-fragile); "
@@ -784,27 +814,13 @@ def run_s1():
         "W_svc_provenance": "900 ROUTE_TERMINAL_STEPS x 10 PHYSICS_STEPS_PER_RL (conservative full-horizon; "
                             "under-LOAD subset smaller, surfaced)",
         "cells": cells,
-        "per_axis_over_W_svc_loaded": {
-            "lateral_x_mm": round(lat_svc, 2) if lat_svc is not None else None,
-            "z_drop_mm": round(zdrop_svc, 2) if zdrop_svc is not None else None,
-            "axial_y_mm_benign": round(axial_svc, 2) if axial_svc is not None else None,
-        },
+        "per_axis_over_W_svc_loaded": gate["per_axis_over_W_svc_loaded"],
         "cage_escape_margins_mm": {"lateral_max": DROP_LATERAL_DEV_MAX_MM, "z_drop_max": DROP_LIFT_MARGIN_MM},
-        "runaway_ratio_loaded_over_unloaded": {
-            "lateral": round(runaway_lat, 3) if isinstance(runaway_lat, float) else runaway_lat,
-            "z_drop": round(runaway_z, 3) if isinstance(runaway_z, float) else runaway_z,
-            "cap": RUNAWAY_RATIO_CAP},
-        "gate_checks": {"lateral_ok": bool(lateral_ok), "zdrop_ok": bool(zdrop_ok),
-                        "runaway_ok": bool(runaway_ok), "retention_ok": bool(retention_ok),
-                        "contact_not_lost": bool(not contact_lost)},
-        "gate_margin_utilization": {
-            "lateral_over_60mm": round(lat_util, 3) if lat_util is not None else None,
-            "zdrop_over_10mm": round(z_util, 3) if z_util is not None else None},
-        "fork3_loose_gate_flag": loose_gate_flag,
-        "fork3_loose_gate_note": ("⚠ GO leans on the LOOSE 60mm-lateral catch (lateral util > 0.5 and >= "
-                                  "z-drop util) — NOT a silent loose-gate PASS; the TIGHT z/contact/retention "
-                                  "signals are the meaningful ones (%12 FORK-3)." if loose_gate_flag
-                                  else "binding gate is a TIGHT signal (z-drop/contact/retention) or NOGO"),
+        "runaway_ratio_loaded_over_unloaded": gate["runaway_ratio_loaded_over_unloaded"],
+        "gate_checks": gate["gate_checks"],
+        "gate_margin_utilization": gate["gate_margin_utilization"],
+        "fork3_loose_gate_flag": gate["fork3_loose_gate_flag"],
+        "fork3_loose_gate_note": gate["fork3_loose_gate_note"],
         "conservatism": "per-axis: axial-y benign (report); lateral-x + z-drop = the cage-escape GATE. "
                         "⚠ GPU solver = cg (r_s66 #1415: newton NaNs at close on GPU) — cg matrix-free "
                         "contacts are SOFTER/artifact-prone (r_s66:26): a cg-HOLD is favourable-DIRECTION "
@@ -820,7 +836,117 @@ def run_s1():
                               "nor (b) full-route DRAG/offset (= S2, mandatory). S1-GO = necessary-NOT-sufficient "
                               "for the RL env.",
         "video_leg_frames": s1_frames,
-        "s1_verdict": verdict,
+        "s1_verdict": gate["verdict"],
+    }
+
+
+def _s1_cpu_variant(vname, solver_override, ssot, N):
+    """One CPU S1 variant: {F=0, F=0.44} cage-escape on CPU (use_cpu=True) + shared gate. No render
+    (CPU + the GPU-only render limitation is moot). Returns {cells, gate} or {error}."""
+    cells = {}
+    for F in (0.0, 0.44):
+        tag = f"c1_N{N}_F{str(F).replace('.', '')}"
+        env = build_koshape_pinch(f"{vname}_{tag}", use_cpu=True, solver_override=solver_override)
+        d1 = d1_contact_readback(env, ssot)  # fail-closed
+        state, engaged, ncon_max = grasp_cable(env)
+        if not engaged:
+            cells[tag] = {"tag": tag, "F_axial_N": F, "engaged": False, "ncon_max_close": ncon_max,
+                          "d1_readback": d1, "note": "grasp not engaged"}
+            continue
+        row = measure_cage_escape(env, state, N, F, S1_HOLD_FRAMES)
+        row.update({"tag": tag, "engaged": True, "ncon_max_close": ncon_max, "d1_readback": d1})
+        cells[tag] = row
+    return {"cells": cells, "gate": _compute_s1_gate(cells, N)}
+
+
+def run_s1cpu():
+    """S1 CPU DE-CONFOUND (%12 00:02, NO-GPU): resolve the cg-conservatism DIRECTION empirically. Run the
+    SAME per-axis cage-escape (measure_cage_escape + _compute_s1_gate) on the FIRMER CPU-newton solver
+    (the S0-proven stable koshape grip) [PRIMARY] + secondary CPU-cg (device-robustness de-confound), and
+    COMPARE vs the GPU-cg S1. CPU-newton corroborates (holds, gates pass) -> cg-GO direction-ROBUST -> S1
+    firm. CPU contradicts (escape/gate-fail) -> soft-cg ARTIFACT -> STOP+surface (NO threshold-relax).
+    Isolated grip (S0 proved CPU runs) -> no route device-fragility. Run CPU: CUDA_VISIBLE_DEVICES=''."""
+    import json as _json
+
+    import test_newton_clip_routing as T
+    import warp as wp
+    from newton_skill_env_base import DT
+
+    T.DEVICE = "cpu"
+    ssot = _live_production_contact_ssot()
+    framecomp = _frame_comparability()
+    N = 4
+    T.SIM_SUBSTEPS, T.SIM_DT = N, DT / N
+    wp.init()
+
+    landing = landing_control(N)
+    results = {}
+    if landing["ok"]:
+        for vname, solver_override in (("cpu_newton", None), ("cpu_cg", "cg")):
+            try:
+                results[vname] = _s1_cpu_variant(vname, solver_override, ssot, N)
+            except Exception as exc:  # noqa: BLE001 (secondary robustness; primary newton = S0-proven)
+                results[vname] = {"error": f"{type(exc).__name__}: {str(exc)[:200]}"}
+                print(f"[S1CPU] variant {vname} FAILED: {exc}")
+
+    gpu = None
+    gpu_path = os.path.join(OUT_DIR, "srg_probe_s1_result.json")
+    if os.path.exists(gpu_path):
+        with open(gpu_path) as _fh:
+            gpu = _json.load(_fh)
+    gpu_verdict = gpu.get("s1_verdict") if gpu else None
+
+    prim = results.get("cpu_newton", {}).get("gate", {})
+    prim_verdict = prim.get("verdict")
+
+    if prim_verdict == "GRIP_GO_PROCEED_TO_S2" and gpu_verdict == "GRIP_GO_PROCEED_TO_S2":
+        direction = "DIRECTION_ROBUST"
+        direction_note = ("CPU-newton (FIRMER solver, S0-proven) CORROBORATES the GPU-cg GO: both hold + all "
+                          "gates pass -> the cg-GPU GRIP_GO is direction-ROBUST (the firmer solver agrees), "
+                          "cg-softness was NOT masking a slip. S1 firm (still nominal-static per FORK-1).")
+        deconfound_verdict = "S1_GRIP_GO_DIRECTION_CONFIRMED"
+    elif prim_verdict in ("GRIP_NOGO_STOP_SURFACE", "STOP_SURFACE"):
+        direction = "CONTRADICTS"
+        direction_note = ("CPU-newton (FIRMER solver) CONTRADICTS the GPU-cg GO (escape/gate-fail on the "
+                          "firmer solver) -> the GPU-cg GRIP_GO was a soft-cg ARTIFACT -> STOP+surface "
+                          "(NO threshold-relax; substep 4->N = Rs-level).")
+        deconfound_verdict = "S1_GRIP_NOGO_CG_ARTIFACT_STOP"
+    else:
+        direction = "INDETERMINATE"
+        direction_note = f"CPU-newton verdict={prim_verdict} vs GPU-cg={gpu_verdict} — inspect the table."
+        deconfound_verdict = "INDETERMINATE_STOP_SURFACE"
+
+    def _row(v):
+        g, c = v.get("gate"), v.get("cells", {})
+        if v.get("error"):
+            return {"error": v["error"]}
+        loaded = c.get(f"c1_N{N}_F044", {})
+        return {"verdict": g.get("verdict"), "per_axis_over_W_svc": g.get("per_axis_over_W_svc_loaded"),
+                "gate_checks": g.get("gate_checks"), "runaway": g.get("runaway_ratio_loaded_over_unloaded"),
+                "loaded_ncon_mean": loaded.get("ncon_mean"),
+                "loaded_contact_loss_max_run": loaded.get("contact_loss_max_run"),
+                "loaded_z_end_m": loaded.get("grasp_seg_z_end_m"),
+                "loaded_collapse": loaded.get("collapse"), "loaded_badqacc": loaded.get("badqacc")}
+
+    table = {
+        "gpu_cg": {"verdict": gpu_verdict,
+                   "per_axis_over_W_svc": gpu.get("per_axis_over_W_svc_loaded") if gpu else None,
+                   "gate_checks": gpu.get("gate_checks") if gpu else None,
+                   "runaway": gpu.get("runaway_ratio_loaded_over_unloaded") if gpu else None},
+        "cpu_newton_PRIMARY": _row(results.get("cpu_newton", {})),
+        "cpu_cg_secondary": _row(results.get("cpu_cg", {})),
+    }
+    return {
+        "stage": "S1CPU_DECONFOUND",
+        "purpose": "resolve the cg-conservatism DIRECTION empirically (%12 00:02): firmer CPU-newton "
+                   "cross-check of the GPU-cg GRIP_GO (no-GPU, isolated grip = no route device-fragility).",
+        "d1_contact_ssot": ssot, "frame_comparability": framecomp, "landing_control": landing,
+        "W_svc_phys_frames": W_SVC_PHYS_FRAMES,
+        "cpu_vs_gpu_table": table,
+        "direction": direction,
+        "direction_note": direction_note,
+        "detail": results,
+        "s1cpu_verdict": deconfound_verdict,
     }
 
 
@@ -832,7 +958,7 @@ def run_s2():
     raise NotImplementedError("S2 HELD (cuda:0; spec in docstring) — RUN gated on %12/Rs GPU auth.")
 
 
-_STAGES = {"s0": run_s0, "s1": run_s1, "s2": run_s2}
+_STAGES = {"s0": run_s0, "s1": run_s1, "s1cpu": run_s1cpu, "s2": run_s2}
 
 
 def main() -> int:
@@ -848,7 +974,7 @@ def main() -> int:
     path = os.path.join(OUT_DIR, f"srg_probe_{args.stage}_result.json")
     with open(path, "w") as fh:
         json.dump(out, fh, indent=1, default=float)
-    _v = out.get("s0_verdict") or out.get("s1_verdict") or out.get("verdict", "n/a")
+    _v = out.get("s0_verdict") or out.get("s1_verdict") or out.get("s1cpu_verdict") or out.get("verdict", "n/a")
     print(f"[SRG {args.stage.upper()}] verdict={_v} -> {path}")
     return 0
 
