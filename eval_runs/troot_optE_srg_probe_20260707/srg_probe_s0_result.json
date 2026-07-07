@@ -1,0 +1,141 @@
+{
+ "stage": "S0",
+ "substrate": "current koshape (\u30b3) single-claw 2f85_koshape.xml (16-pad, by-NAME); CPU, isolated pinch",
+ "d1_contact_ssot": {
+  "pad_solref": [
+   -65789.0,
+   -2105.3
+  ],
+  "condim": 6,
+  "impratio": 10.0
+ },
+ "frame_comparability": {
+  "DT": 0.0020833333333333333,
+  "frame_dt_10sub": 0.0020833333333333333,
+  "frame_dt_4sub": 0.0020833333333333333,
+  "SIM_SUBSTEPS": 10,
+  "RL_SIM_SUBSTEPS": 4
+ },
+ "landing_control": {
+  "N4": {
+   "ok": true,
+   "dy_mm": 25.83,
+   "N_substeps": 4
+  },
+  "N10": {
+   "ok": true,
+   "dy_mm": 25.79,
+   "N_substeps": 10
+  }
+ },
+ "cells": {
+  "koshape_N4_F00": {
+   "F_axial_N": 0.0,
+   "N_substeps": 4,
+   "creep_um_per_f": 1.29,
+   "com_y_total_mm": -0.555,
+   "ncon_mean": 25.7,
+   "collapse": 0,
+   "badqacc": 0,
+   "landing_readback_ok": true,
+   "finite": true,
+   "tag": "koshape_N4_F00",
+   "engaged": true,
+   "ncon_max_close": 60,
+   "d1_readback": {
+    "n_pad_box_geoms": 16,
+    "pad_solref": [
+     -65789.0,
+     -2105.3
+    ],
+    "pad_condim": 6,
+    "impratio": 10.0
+   }
+  },
+  "koshape_N4_F044": {
+   "F_axial_N": 0.44,
+   "N_substeps": 4,
+   "creep_um_per_f": 1.18,
+   "com_y_total_mm": -0.524,
+   "ncon_mean": 25.7,
+   "collapse": 0,
+   "badqacc": 0,
+   "landing_readback_ok": true,
+   "finite": true,
+   "tag": "koshape_N4_F044",
+   "engaged": true,
+   "ncon_max_close": 60,
+   "d1_readback": {
+    "n_pad_box_geoms": 16,
+    "pad_solref": [
+     -65789.0,
+     -2105.3
+    ],
+    "pad_condim": 6,
+    "impratio": 10.0
+   }
+  },
+  "koshape_N10_F00": {
+   "F_axial_N": 0.0,
+   "N_substeps": 10,
+   "creep_um_per_f": 3.25,
+   "com_y_total_mm": -1.323,
+   "ncon_mean": 24.7,
+   "collapse": 0,
+   "badqacc": 0,
+   "landing_readback_ok": true,
+   "finite": true,
+   "tag": "koshape_N10_F00",
+   "engaged": true,
+   "ncon_max_close": 68,
+   "d1_readback": {
+    "n_pad_box_geoms": 16,
+    "pad_solref": [
+     -65789.0,
+     -2105.3
+    ],
+    "pad_condim": 6,
+    "impratio": 10.0
+   }
+  },
+  "koshape_N10_F044": {
+   "F_axial_N": 0.44,
+   "N_substeps": 10,
+   "creep_um_per_f": 2.94,
+   "com_y_total_mm": -1.244,
+   "ncon_mean": 24.8,
+   "collapse": 0,
+   "badqacc": 0,
+   "landing_readback_ok": true,
+   "finite": true,
+   "tag": "koshape_N10_F044",
+   "engaged": true,
+   "ncon_max_close": 68,
+   "d1_readback": {
+    "n_pad_box_geoms": 16,
+    "pad_solref": [
+     -65789.0,
+     -2105.3
+    ],
+    "pad_condim": 6,
+    "impratio": 10.0
+   }
+  }
+ },
+ "koshape_4sub_floor_um_per_f": 1.29,
+ "koshape_10sub_floor_um_per_f": 3.25,
+ "k_screen_clean_koshape4_over_koshape10": 0.397,
+ "k_regime_screen": 3.5,
+ "substep_ratio": 2.5,
+ "vgroove_10sub_bank_um_per_f": 60.4,
+ "vgroove_xref_factor_koshape4_over_vgroove10": 0.021,
+ "vgroove_xref_caveat": "CROSS-REF ONLY: differs by GRIPPER (V-groove vs koshape) AND substep; the CLEAN substep screen is koshape4/koshape10",
+ "qualitative_breakdown": false,
+ "not_engaged": false,
+ "regime_change_vs_K": false,
+ "s0_verdict": "PROCEED_TO_S1",
+ "elapsed_s": 82.5,
+ "timestamp": "2026-07-07 22:18:23 JST",
+ "cuda_visible_devices": "",
+ "newton_device": "cpu"
+}
