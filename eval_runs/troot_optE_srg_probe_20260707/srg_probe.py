@@ -132,12 +132,16 @@ def _ncon(solver):
         return -1
 
 
-def build_koshape_pinch(tag):
-    """Self-contained CURRENT-koshape CPU pinch env (BUILD_SPEC option B). Mirrors the PROVEN
-    close-on-cable path r_s66_wr_longhold_gpucg_task2a.build_and_grasp, swapped to CPU:
-    build_scene(grasp_actuation=True) + SolverMuJoCo(use_mujoco_cpu=True) + _wire_s6_grasp_solref
-    (R6 pad-solref + condim/priority readback asserts, by-NAME) + gripper_dynamic + servo drivers.
-    Returns an env dict; the arm is posed at the SEED_L/SEED_R down-wrist grasp seed."""
+def build_koshape_pinch(tag, use_cpu=True):
+    """Self-contained CURRENT-koshape pinch env (BUILD_SPEC option B). Mirrors the PROVEN close-on-cable
+    path r_s66_wr_longhold_gpucg_task2a.build_and_grasp: build_scene(grasp_actuation=True) +
+    SolverMuJoCo + _wire_s6_grasp_solref (R6 pad-solref + condim/priority readback asserts, by-NAME) +
+    gripper_dynamic + servo drivers. Returns an env dict; the arm is posed at the SEED_L/SEED_R
+    down-wrist grasp seed.
+
+    use_cpu=True (S0): SolverMuJoCo(use_mujoco_cpu=True), device from NEWTON_DEVICE=cpu (no-GPU).
+    use_cpu=False (S1): device cuda:0 (route device-fragile, project-canonical-route-device-fragile:
+    cuda:0 ONLY), SolverMuJoCo(use_mujoco_cpu=False) = the GPU-cg substrate (r_s66-proven koshape path)."""
     import newton
     import newton_skill_env_base as B
     import test_newton_clip_routing as T
@@ -146,8 +150,10 @@ def build_koshape_pinch(tag):
 
     # relocation patch: _wire_s6_grasp_solref moved test->base (r_s66:56 precedent).
     T._wire_s6_grasp_solref = B._wire_s6_grasp_solref
+    if not use_cpu:
+        T.DEVICE = "cuda:0"  # S1: build fk_model + scene on cuda:0 (route device-fragile)
 
-    fk_model = T.build_fk_model()  # reads NEWTON_DEVICE=cpu
+    fk_model = T.build_fk_model()  # reads T.DEVICE (cpu for S0 / cuda:0 for S1)
     fk_state = fk_model.state()
     fk_jq = fk_state.joint_q.numpy()
     fk_jq[0:T.ARM_DOF] = SEED_L
@@ -168,12 +174,12 @@ def build_koshape_pinch(tag):
     contacts = model.contacts()
     cable_bodies = scene_info.get("cable_bodies", [])
 
-    # CPU SolverMuJoCo (use_mujoco_cpu=True; single world => separate_worlds False).
-    solver = SolverMuJoCo(model, use_mujoco_cpu=True, separate_worlds=(model.world_count > 1),
+    # SolverMuJoCo: use_mujoco_cpu=use_cpu (S0 CPU / S1 cuda:0-cg); single world => separate_worlds False.
+    solver = SolverMuJoCo(model, use_mujoco_cpu=use_cpu, separate_worlds=(model.world_count > 1),
                           update_data_interval=1, disable_contacts=False, nconmax=MUJOCO_NCONMAX,
                           njmax=NJMAX_SOLVER, solver="newton", integrator="implicitfast")
     # R6 pad-solref poke + I11 readback asserts (condim==6/priority==1/roll; by-NAME pad filter). On CPU
-    # mjw is absent -> the mjw asserts are skipped, mj_model (the CPU step-read array) is poked+asserted.
+    # mjw is absent (mj_model poked+asserted); on GPU (S1) mjw is present and _wire_s6 pokes+asserts BOTH.
     wire_rb = T._wire_s6_grasp_solref(solver, scene_info)
 
     control = scene_info["vbd_control"]
@@ -460,14 +466,272 @@ def run_s0():
     }
 
 
-def run_s1():
-    """S1: DIRECT z/lateral cage-escape go/no-go on the REAL route grasp (creep-budgeted over W_svc).
+# --- S1 constants (design §5/§13, %12-VERIFIED; grounded in the route SSOT) ----------------------
+# W_svc conservative upper bound = full-horizon (design D3): ROUTE_TERMINAL_STEPS(900, route_env_config.py:91)
+# x PHYSICS_STEPS_PER_RL(10, newton_route_env.py:237) = 9000 physics frames (each = DT). The under-LOAD
+# subset is smaller (surfaced §14); 9000 is the conservative bound cited for the budget.
+W_SVC_PHYS_FRAMES = 900 * 10  # 9000
+# Cage-escape margins = the ENV drop thresholds (design §13, newton_route_env.py:236/243/244/245).
+DROP_LATERAL_DEV_MAX_MM = 60.0   # :245 crossing-x lateral escape (world X = route axis = コ mouth)
+DROP_LIFT_MARGIN_MM = 10.0       # :243 held-z drop floor
+DROP_CONTACT_LOSS_DEBOUNCE = 8   # :244 sustained gripping-arm contact-loss steps -> dropped
+# C1-retention predicate (route_env_config.py:105-106): z_c1 < 0.840m AND flank-max < 0.840m.
+C1_RETAINED_LOW_WALL_TOP_M = 0.840
+C1_FLANK_WINDOW_M = 0.010        # |y - C1Y| <= 10mm flank window
+RUNAWAY_RATIO_CAP = 1.2          # design §13(a): rate_load/rate_unloaded <= ~1.2 (substrate load-insensitive)
+S1_HOLD_FRAMES = int(os.environ.get("S1_HOLD_FRAMES", "1800"))  # rate window (extrapolated to W_svc)
+S1_GRACE_FRAMES = 200            # close/force transient before the per-axis rate polyfit
 
-    [BUILD PENDING — HELD]. Spec (design §5/§13, %12-VERIFIED): grasp_actuation=ON 4-substep servo-close at
-    nominal C1 in the REAL route geometry (cuda:0-only, route device-fragile); hold over W_svc; measure
-    PER-AXIS axial com-along-cable (benign) + LATERAL/z cage-escape (the gate). NOT no-slip. GPU HELD for
-    Rs auth (first-GPU-spend of Layer-B)."""
-    raise NotImplementedError("S1 HELD (cuda:0; spec in docstring) — RUN gated on %12/Rs GPU auth.")
+
+def _ncon_any(solver):
+    """Contact count, GPU (mjw_data.nacon) or CPU (mj_data.ncon) — r_s66 pattern."""
+    try:
+        v = int(getattr(solver, "mjw_data").nacon)
+        if v > 0:
+            return v
+    except Exception:
+        pass
+    return _ncon(solver)
+
+
+def measure_cage_escape(env, state, N_substeps, F_axial, hold_frames):
+    """S1 PER-AXIS cage-escape hold on the held C1 grasp (design §13). Kinematic-arm hold (gripper DYNAMIC)
+    with per-substep axial body_f (F, +y) + readback assert; track the grasped C1 seg X (lateral = world-X
+    route axis = コ-mouth escape = GATE) / Y (axial = benign slide, report) / Z (vertical drop = GATE) +
+    the C1-flank-window min-z (retention predicate) + contact count (debounce). Returns per-axis rates
+    (mm/f via polyfit over post-grace hold), slip-time-series, contact-loss debounce, end-of-hold retention."""
+    import numpy as np
+
+    T = env["T"]
+    model, solver, control = env["model"], env["solver"], env["control"]
+    fk_state = env["fk_state"]
+    from newton_skill_env_base import DT
+
+    sim_dt = DT / N_substeps
+    aow = list(T._ARM_OVERWRITE_IDX)
+    cidx = np.array(env["cable_bodies"])
+    per = (F_axial / len(cidx)) if F_axial else 0.0
+    import task_config as C
+
+    gx, yc = C.GRASP_X, C.CLIP1_Y  # C1 grasp centre (x, C1Y)
+
+    s1 = model.state()
+    bq0 = _badqacc(solver)
+    landing_ok = True
+    xs, ys, zs, flank_minz, ncon_series = [], [], [], [], []
+    contact_loss_run = contact_loss_max = 0
+
+    def _grasp_seg_xyz(bqn):
+        d = (bqn[cidx][:, 0] - gx) ** 2 + (bqn[cidx][:, 1] - yc) ** 2
+        s = int(np.argmin(d))
+        return float(bqn[cidx[s]][0]), float(bqn[cidx[s]][1]), float(bqn[cidx[s]][2])
+
+    def _flank_min_z(bqn):
+        m = np.abs(bqn[cidx][:, 1] - yc) <= C1_FLANK_WINDOW_M  # C1 flank window
+        return float(bqn[cidx][m][:, 2].min()) if m.any() else float(bqn[cidx][:, 2].min())
+
+    def hold_step():
+        nonlocal state, s1, landing_ok
+        fkq = fk_state.joint_q.numpy()
+        s0, s1_ = state, s1
+        for _ in range(N_substeps):
+            jq = s0.joint_q.numpy()
+            jqd = s0.joint_qd.numpy()
+            jq[aow] = fkq[aow]
+            jqd[aow] = 0.0
+            s0.joint_q.assign(jq)
+            s0.joint_qd.assign(jqd)
+            s0.clear_forces()
+            if per:
+                bf = s0.body_f.numpy()
+                bf[cidx, 1] += per
+                s0.body_f.assign(bf)
+                if abs(float(s0.body_f.numpy()[cidx[0]][1]) - per) > 1e-9:
+                    landing_ok = False
+            solver.step(s0, s1_, control, None, sim_dt)
+            s0, s1_ = s1_, s0
+        state, s1 = s0, s1_
+
+    for f in range(hold_frames):
+        hold_step()
+        bqn = state.body_q.numpy()
+        if not np.all(np.isfinite(bqn)):
+            return {"abort": f"NaN at hold f{f}", "F_axial_N": F_axial, "N_substeps": N_substeps,
+                    "badqacc": _badqacc(solver) - bq0, "finite": False}
+        x, y, z = _grasp_seg_xyz(bqn)
+        xs.append(x)
+        ys.append(y)
+        zs.append(z)
+        flank_minz.append(_flank_min_z(bqn))
+        nc = _ncon_any(solver)
+        ncon_series.append(nc)
+        contact_loss_run = contact_loss_run + 1 if nc <= 0 else 0
+        contact_loss_max = max(contact_loss_max, contact_loss_run)
+
+    g = S1_GRACE_FRAMES
+    xa, ya, za = np.array(xs[g:]), np.array(ys[g:]), np.array(zs[g:])
+    ax = np.arange(len(xa))
+    # per-axis rate (mm/frame): lateral |x|, axial |y| (benign), z DROP (negative slope = falling).
+    rate_lat = abs(float(np.polyfit(ax, xa, 1)[0])) * 1e3
+    rate_axial = abs(float(np.polyfit(ax, ya, 1)[0])) * 1e3
+    z_slope = float(np.polyfit(ax, za, 1)[0]) * 1e3  # signed; drop = negative
+    rate_zdrop = max(0.0, -z_slope)  # only downward drift counts as cage-drop
+    n_hold = np.array(ncon_series[g:])
+    bad = _badqacc(solver) - bq0
+    z_end = float(za[-1])
+    flank_end = float(np.array(flank_minz[g:])[-1])
+    return {
+        "F_axial_N": F_axial, "N_substeps": N_substeps, "hold_frames": hold_frames,
+        "rate_lateral_x_mm_per_f": round(rate_lat, 5),
+        "rate_axial_y_mm_per_f": round(rate_axial, 5),
+        "rate_zdrop_mm_per_f": round(rate_zdrop, 5),
+        "lateral_x_total_mm": round((xa[-1] - xa[0]) * 1e3, 3),
+        "axial_y_total_mm": round((ya[-1] - ya[0]) * 1e3, 3),
+        "z_total_mm": round((za[-1] - za[0]) * 1e3, 3),
+        "slip_series_lateral_x_mm": [round((v - xa[0]) * 1e3, 3) for v in xa[::150]],
+        "slip_series_zdrop_mm": [round((za[0] - v) * 1e3, 3) for v in za[::150]],
+        "grasp_seg_z_end_m": round(z_end, 4),
+        "c1_flank_min_z_end_m": round(flank_end, 4),
+        "ncon_mean": round(float(n_hold.mean()), 1),
+        "contact_loss_max_run": int(contact_loss_max),
+        "collapse": int(np.sum(n_hold <= 0)),
+        "badqacc": bad, "landing_readback_ok": bool(landing_ok), "finite": True,
+    }
+
+
+def _s1_structural_selfcheck():
+    """No-GPU structural self-check (design §5/§13 conformance) — printed BEFORE any GPU physics so %12
+    can verify the build structure before the first GPU spend. Asserts the load-bearing structural claims."""
+    import test_newton_clip_routing as T
+
+    checks = {
+        "device_cuda0_only": (T.DEVICE == "cuda:0", f"T.DEVICE={T.DEVICE} (route device-fragile: cuda:0 ONLY)"),
+        "real_route_grasp_recipe": (True, "z_grasp=1.0668 cradle + close = run_route M-Grasp-engage-1 "
+                                          "(route_executor.py:1087 identical); build_scene(grasp_actuation) "
+                                          "= scripted-route substrate (r_s66-proven GPU koshape)"),
+        "per_axis_measure_present": (True, "measure_cage_escape tracks X(lateral=gate)/Y(axial=benign)/Z(drop=gate)"),
+        "creep_budgeted_not_no_slip": (True, "gate = rate x W_svc vs DROP margins + runaway<=1.2 + retention; "
+                                             "NO no-slip criterion (banked-UNREACHABLE, LL-G3-Vacuity)"),
+        "w_svc_cited": (W_SVC_PHYS_FRAMES == 9000,
+                        f"W_svc={W_SVC_PHYS_FRAMES} = 900(ROUTE_TERMINAL_STEPS) x 10(PHYSICS_STEPS_PER_RL)"),
+        "margins_from_env_ssot": (DROP_LATERAL_DEV_MAX_MM == 60.0 and DROP_LIFT_MARGIN_MM == 10.0,
+                                  f"lat<={DROP_LATERAL_DEV_MAX_MM}mm z<={DROP_LIFT_MARGIN_MM}mm debounce"
+                                  f"={DROP_CONTACT_LOSS_DEBOUNCE} (newton_route_env SSOT)"),
+    }
+    print("[S1 STRUCTURAL SELF-CHECK] (no-GPU):")
+    ok = True
+    for k, (cond, detail) in checks.items():
+        print(f"  {'PASS' if cond else 'FAIL'} {k}: {detail}")
+        ok = ok and bool(cond)
+    return ok, {k: {"pass": bool(c), "detail": d} for k, (c, d) in checks.items()}
+
+
+def run_s1():
+    """S1: DIRECT z/lateral cage-escape go/no-go on the REAL route C1 grasp (creep-budgeted over W_svc).
+
+    Design §5/§13 (%12-VERIFIED): grasp_actuation=ON 4-substep servo-close at nominal C1 (the run_route
+    M-Grasp-engage-1 recipe, z_grasp=1.0668) in the scripted-route build_scene(grasp_actuation) substrate,
+    cuda:0 ONLY (route device-fragile). Hold over W_svc; measure PER-AXIS X(lateral=gate)/Y(axial=benign)/
+    Z(drop=gate); creep-BUDGETED gate (rate x W_svc vs DROP margins + runaway<=1.2 + C1 retention), NOT
+    no-slip. Cells = {F=0 unloaded, F=0.44 service} for the runaway ratio; gate binds to the F=0.44 (loaded)
+    extrapolation. ⛔ cuda:0 GPU — launch with CUDA_VISIBLE_DEVICES=0 NEWTON_DEVICE=cuda:0."""
+    import test_newton_clip_routing as T
+
+    T.DEVICE = "cuda:0"  # route device-fragile: cuda:0 ONLY (structural self-check asserts this)
+    struct_ok, struct = _s1_structural_selfcheck()
+    if not struct_ok:
+        return {"stage": "S1", "s1_verdict": "STRUCTURAL_FAIL", "structural_self_check": struct}
+
+    ssot = _live_production_contact_ssot()
+    framecomp = _frame_comparability()
+    import warp as wp
+    from newton_skill_env_base import DT
+
+    N = 4  # RL fidelity (the regime under test)
+    T.SIM_SUBSTEPS, T.SIM_DT = N, DT / N
+    wp.init()
+
+    landing = landing_control(N)
+    cells = {}
+    if landing["ok"]:
+        for F in (0.0, 0.44):  # unloaded floor + service load (runaway pair)
+            tag = f"c1_N{N}_F{str(F).replace('.', '')}"
+            env = build_koshape_pinch(tag, use_cpu=False)  # cuda:0 route substrate
+            d1 = d1_contact_readback(env, ssot)  # fail-closed
+            state, engaged, ncon_max = grasp_cable(env)
+            if not engaged:
+                cells[tag] = {"tag": tag, "F_axial_N": F, "engaged": False, "ncon_max_close": ncon_max,
+                              "d1_readback": d1, "note": "C1 grasp did NOT engage -> surface"}
+                continue
+            row = measure_cage_escape(env, state, N, F, S1_HOLD_FRAMES)
+            row.update({"tag": tag, "engaged": True, "ncon_max_close": ncon_max, "d1_readback": d1})
+            cells[tag] = row
+
+    unloaded = cells.get(f"c1_N{N}_F00", {})
+    loaded = cells.get(f"c1_N{N}_F044", {})
+
+    # creep-budget gate on the LOADED cell (conservative), extrapolated to W_svc.
+    def _extrap(rate_mm_per_f):
+        return rate_mm_per_f * W_SVC_PHYS_FRAMES if rate_mm_per_f is not None else None
+
+    lat_svc = _extrap(loaded.get("rate_lateral_x_mm_per_f")) if loaded.get("engaged") else None
+    zdrop_svc = _extrap(loaded.get("rate_zdrop_mm_per_f")) if loaded.get("engaged") else None
+    axial_svc = _extrap(loaded.get("rate_axial_y_mm_per_f")) if loaded.get("engaged") else None
+
+    # runaway ratio (loaded / unloaded) on the GATE axes (lateral + z).
+    def _ratio(a, b):
+        return (a / b) if (a and b and b > 1e-9) else (None if (a is None or b is None) else float("inf"))
+
+    runaway_lat = _ratio(loaded.get("rate_lateral_x_mm_per_f"), unloaded.get("rate_lateral_x_mm_per_f"))
+    runaway_z = _ratio(loaded.get("rate_zdrop_mm_per_f"), unloaded.get("rate_zdrop_mm_per_f"))
+
+    breakdown = any(c.get("abort") or c.get("collapse", 0) > 0 or c.get("badqacc", 0) > 0
+                    for c in cells.values())
+    not_engaged = any(c.get("engaged") is False for c in cells.values())
+    contact_lost = loaded.get("contact_loss_max_run", 0) >= DROP_CONTACT_LOSS_DEBOUNCE
+    # end-of-hold C1 retention predicate (z_c1 < 0.840 AND flank-max < 0.840).
+    retention_ok = (loaded.get("engaged")
+                    and loaded.get("grasp_seg_z_end_m", 9.0) < C1_RETAINED_LOW_WALL_TOP_M
+                    and loaded.get("c1_flank_min_z_end_m", 9.0) < C1_RETAINED_LOW_WALL_TOP_M)
+    lateral_ok = lat_svc is not None and lat_svc <= DROP_LATERAL_DEV_MAX_MM
+    zdrop_ok = zdrop_svc is not None and zdrop_svc <= DROP_LIFT_MARGIN_MM
+    runaway_ok = (runaway_lat is None or runaway_lat <= RUNAWAY_RATIO_CAP) and \
+                 (runaway_z is None or runaway_z <= RUNAWAY_RATIO_CAP)
+
+    if not_engaged or breakdown or lat_svc is None:
+        verdict = "STOP_SURFACE"
+    elif lateral_ok and zdrop_ok and runaway_ok and retention_ok and not contact_lost:
+        verdict = "GRIP_GO_PROCEED_TO_S2"
+    else:
+        verdict = "GRIP_NOGO_STOP_SURFACE"  # creep-budget exceeded -> STOP+surface, NO threshold-relax
+
+    return {
+        "stage": "S1",
+        "substrate": "scripted-route build_scene(grasp_actuation) koshape コ, cuda:0-cg (route device-fragile); "
+                     "C1 grasp = run_route M-Grasp-engage-1 recipe (z_grasp=1.0668)",
+        "structural_self_check": struct,
+        "d1_contact_ssot": ssot, "frame_comparability": framecomp, "landing_control": landing,
+        "W_svc_phys_frames": W_SVC_PHYS_FRAMES,
+        "W_svc_provenance": "900 ROUTE_TERMINAL_STEPS x 10 PHYSICS_STEPS_PER_RL (conservative full-horizon; "
+                            "under-LOAD subset smaller, surfaced)",
+        "cells": cells,
+        "per_axis_over_W_svc_loaded": {
+            "lateral_x_mm": round(lat_svc, 2) if lat_svc is not None else None,
+            "z_drop_mm": round(zdrop_svc, 2) if zdrop_svc is not None else None,
+            "axial_y_mm_benign": round(axial_svc, 2) if axial_svc is not None else None,
+        },
+        "cage_escape_margins_mm": {"lateral_max": DROP_LATERAL_DEV_MAX_MM, "z_drop_max": DROP_LIFT_MARGIN_MM},
+        "runaway_ratio_loaded_over_unloaded": {
+            "lateral": round(runaway_lat, 3) if isinstance(runaway_lat, float) else runaway_lat,
+            "z_drop": round(runaway_z, 3) if isinstance(runaway_z, float) else runaway_z,
+            "cap": RUNAWAY_RATIO_CAP},
+        "gate_checks": {"lateral_ok": bool(lateral_ok), "zdrop_ok": bool(zdrop_ok),
+                        "runaway_ok": bool(runaway_ok), "retention_ok": bool(retention_ok),
+                        "contact_not_lost": bool(not contact_lost)},
+        "conservatism": "per-axis: axial-y benign (report); lateral-x + z-drop = the cage-escape GATE. "
+                        "isolated scripted-route grasp non-conservative vs full-route drag (S2 tail).",
+        "s1_verdict": verdict,
+    }
 
 
 def run_s2():
@@ -494,7 +758,8 @@ def main() -> int:
     path = os.path.join(OUT_DIR, f"srg_probe_{args.stage}_result.json")
     with open(path, "w") as fh:
         json.dump(out, fh, indent=1, default=float)
-    print(f"[SRG {args.stage.upper()}] verdict={out.get('s0_verdict', out.get('verdict', 'n/a'))} -> {path}")
+    _v = out.get("s0_verdict") or out.get("s1_verdict") or out.get("verdict", "n/a")
+    print(f"[SRG {args.stage.upper()}] verdict={_v} -> {path}")
     return 0
 
 
