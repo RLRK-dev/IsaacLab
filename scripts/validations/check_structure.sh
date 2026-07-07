@@ -33,6 +33,14 @@ check_japanese_text() {
             2>/dev/null | apply_ignore > "$tmpfiles" || true
     fi
 
+    # CHECK4 narrow exemption (Rs-approved 2026-07-07): route_executor.py = byte-faithful extraction of
+    # monolith _run_mujoco_grasp_route (grandfathered source w/ Rs-authored + Rs-LOCKED ANTI-REVERT verbatim
+    # comments). Exempt from CHECK4 (no-JP) ONLY; CHECK5/6 + all other layers still apply.
+    # (Robust form: { grep || true; } so an all-removed result -- route_executor the only staged .py --
+    # yields an empty file and always mv's, instead of grep's exit-1 skipping the mv under set -e pipefail.)
+    { grep -v 'envs/route_executor\.py$' "$tmpfiles" || true; } > "$tmpfiles.keep"
+    mv "$tmpfiles.keep" "$tmpfiles"
+
     if [ ! -s "$tmpfiles" ]; then
         echo "  [PASS] No Python files to check"
         rm -f "$tmpfiles"
