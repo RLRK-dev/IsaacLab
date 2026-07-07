@@ -1,140 +1,101 @@
 # BUILD PLAN — route-executor Layer B (env-integration) — %11 COORD (w2:p3)
 
 **node:** T-ROOT-optE-route-dapg-C1C2-P2-routeexec (IN_PROGRESS) — charter %12, D-1=C.
-**rev:** v0.1 DRAFT (P2, 2026-07-07 15:0x). ⚠ **PLANNING artifact only — NO build/GPU (Rs/%12 HOLD).** draft → %12 design-gate + 5体 [VERIFY] (L3) → PASS で %12 が build 授権.
-**precedent:** Layer-A byte-repro COMPLETE (81/81 byte-id, commit 50f877c7f5) — run_route faithful extraction PROVEN. This plan wires the extracted engine into the env substrate (Layer B = substrate-transfer, non-conservative, bar = measured).
+**rev:** **v0.2** (2026-07-07 15:3x, folds 5体 [VERIFY] DECIDE=REVISE, verdict `LAYERB_5TAI_VERIFY_VERDICT_RSTECHLEAD_20260707.md`). v0.1 = a51825bd28. ⚠ **PLANNING artifact only — NO build/GPU (Rs/%12 HOLD).** → focused re-gate (delta-only, architecture verified) → PASS → **minimal Stage-A** build 授権.
+**precedent:** Layer-A byte-repro COMPLETE (81/81 byte-id, 50f877c7f5) — run_route faithful extraction PROVEN.
 
 ---
 
-## §0. Grounding (anchor set, §運用4 hard gate — read + cite)
-| source | ref | use |
+## §D. v0.2 DELTA summary (for focused re-gate — 7 accepted revision items)
+All 5体 = NEEDS-REVISION unanimous, no REBUT (code-verified). Architecture SOUND (D-1=C preserved / grasp_actuation gating byte-clean / strict_v2 no-J-9 / C2 geom X=0.40-solid / cadence-10 sim-time-consistent). Deltas:
+1. **[§2/§5] Re-scope Stage-A → MINIMAL {comp1,comp2}** (CC6): comp1 step_target recorded_replay-ONLY (**live CUT/deferred-trainer**, Q1) + comp2 env-wiring + state_bank. Discharges ⑦(a) restore-fidelity (no-GPU) + ⑬-precursor. **comp3-8 DEFER → Stage-B, behind a MINIMAL SRG probe FIRST.** No 4-substep premise bet in Stage-A.
+2. **[§6] BAKE step_target packet spec** (CC2, load-bearing): phase_id/grip_2/is_dual from **RECORDED arrays** (verified: phase_id 15 vals [-1,0..8,10..14]→[0,6) map; grip_cmd radians 0-0.7407→{0,1}); **81 single-cell** + `__init__` recording-carry + INIT_XY_NOISE=0; **R-first [R,L] assembly + unit assert** (recorder _STACK_KEYS is [L,R], consumer R-first). ⚠ **ee_pos-vs-ee_tgt = ESCALATED** (touches fork-(iv), §6).
+3. **[§3] RESTORE DoD⑤ / carry#1** (wall/spacer EXACT seat-predicate, CC5-CH1, silently dropped in v0.1) + discharge §運用29 leg table. ⑨b strict_v2 uses **EXACT predicate** (wall-dist≤0.5mm spacer-excluded, NOT 3.5mm center proxy → else Layer-A offline 58/81 divergence misread as substrate divergence).
+4. **[§7] REVISE SRG** (CC3-CH1 CRITICAL, before Stage-B): **creep-BUDGETED** criterion (no-slip is banked-UNREACHABLE, intrinsic creep 60.4µm/f, 2× false-PASS) + **4-substep creep re-measure FIRST** + tail-cell screening + levers {noslip_iterations 110×/impratio/solver-iters/friction} (substep 4→N LAST, Rs-level) + per-axis conservatism + observable-bound no-silent-cap.
+5. **[§5/§10] comp4 write-site FLAG-GATE required** (CC4-C1, else twice-recurring gripper-overwrite defect) + **§9 tripwire 2-leg semantic fix** (CC4-C2, current reverse-F11-on-monolith = tautology) + **B⑨a′ = full-arm_q sha incl gripper** + ⑩ geom assert (CC4-C4).
+6. **[§3/§8] Split ⑦** → ⑦(a) restore-L∞ no-GPU **Stage-A** / ⑦(b) 1-step-after-reset grasp_actuation=ON **Stage-B** (CC6; v0.1 "⑦ Stage-A verifiable" was half-true). Stage-A gate-i = STATIC diff not GPU (CC5-CH4).
+7. **[§12] Open-Q RESOLVED**: Q1=recorded_replay-only / Q2=C2 pre-resolved (over-solid additive flag-gated) / Q3=state_bank phase-k from recording phase_id per-frame / Q4=creep-budgeted / Q5=reuse+pin 81 recordings now.
+
+---
+
+## §0. Grounding (anchor set, §運用4) — LEDGER route-executor row (Layer-A PASS 2b7c4d6b23) / node state.md 14:20 / charter §4+§5 / Layer-A plan §5+§10.1+§13.1 / env-core 8-carry / fresh-cat newton_route_env.py + route_env_config.py + route_executor.py(:2972) + route_demo_recorder.py + 5体 verdict.
+
+## §1. [TASK]/[L-TRIAGE] = L3 (%12 §運用28 verified) — newton_route_env.py core + {env/newton/ik/reset} keywords + >200L/≥3 files; grasp_actuation invariant-PRESERVING (proven model-servo, NOT kinematic-pin) → high-care L3, NOT immediate-STOP.
+
+## §2. Scope — RE-SCOPED to staged minimal (CC6)
+**BUILT (do NOT rebuild):** run_route (byte-repro 81/81) / AR-reuse write-site machinery unit-PASS / G4/G5 asserts / physics+IK substrate / _GRIPPER_COORDS_LOCAL SSOT / RouteExecutor.__init__(:2987) + reset_to_phase(:3007) / route_env_config RouteInterfaceV1 + C2 constants + recorded_replay mode / env-core COMPLETE (consumes interface: _apply_actions_batch:676 base+residual NON-accumulating).
+
+| # | component | stage | file | new LOC | notes |
+|---|---|---|---|---|---|
+| **1** | **step_target facade (recorded_replay-ONLY)** | **A** | route_executor.py :3026 | ~50-110 | THE crux gap; packet spec §6; live CUT |
+| **2** | **env-wiring (RouteExecutor replace stub:309 flag-gated) + state_bank build** | **A** | newton_route_env.py | ~50-110 | ⑦(a) + ⑬-precursor; flag `route_executor_impl` default stub |
+| 3 | grasp_actuation flag-flip (:338 default False→flag) | B | newton_route_env.py | ~10-25 | §10.1; grip activation, bundle w/ SRG |
+| 4 | 3-pattern write-site **FLAG-GATED** (:387/:738/:617) | B | newton_route_env.py | ~30-70 | CC4-C1: flag-OFF = byte-exact 28-wide write; flag-ON = gripper-excluded + banked-restore |
+| 5 | real C2 groove scene (additive flag-gated, over-solid) | B | newton_route_env.py | ~20-60 | Q2 pre-resolved; /geometric-design |
+| 6 | §9 static drift tripwire unstub (2-leg) | B | test_routeexec_byte_repro.py:265 | ~50-90 | §10; keep stub non-blocking until leg-(b) specified |
+| 7 | **SRG minimal probe FIRST → creep-budgeted measure** | B | scripts/ | ~90-170 | §7; HARD decision-gate BEFORE comp3/4/5 |
+| 8 | DoD Layer-B validation (⑨b/⑥/⑦(b)/C2-seating video) | B | env run + video | — | after SRG PASS |
+
+**Stage-A LOC (comp1+2, no-GPU):** ~100-220 touched. Stage-B = SRG-gated.
+
+## §3. DoD (Layer-B; §運用29 leg table RESTORED — CC5-CH2)
+**§運用29 leg table (分子 conjoin vs diagnostic):**
+| leg | in strict_v2 分子? | source |
 |---|---|---|
-| LEDGER | 00-DESIGN-STATUS-LEDGER.md route-executor row (Layer-A PASS marker 2b7c4d6b23) | 成否 SSOT |
-| node state.md | 14:20 NEXT + goal_verification DoD | Layer-B scope + DoD |
-| charter | ROUTE_EXECUTOR_CHARTER_SCOPING_RSTECHLEAD_20260706.md §4 (8-carry) + §5 (stub 契約 v1) | owns/defer + contract |
-| Layer-A build plan | BUILD_PLAN_ROUTEEXEC_COORD_20260707.md §5 (execution model) + §10.1 (grasp_actuation) + §13.1 (3-pattern write-site) | Layer-B design basis |
-| env-core 8-carry | env-core node state.md:64-71 | hand-off carry |
-| fresh-cat (§運用16) | newton_route_env.py / route_env_config.py / route_executor.py (RouteExecutor:2972) | integration target |
+| 把持 (grasp) | transitive (via C1-retention + C2-seat require held cable) | Stage-B live |
+| C1-retention | ✅ conjoined (z_c1<840 ∧ flank<840) | ⑨b predicate |
+| C2-seat | ✅ conjoined (**EXACT wall-dist≤0.5mm spacer-excluded** ∧ groove-z≤3mm) | ⑤ predicate |
+| crossing/lane | diagnostic only (not conjoined) | lane-cross diag |
+trainer policy 学習成果 = out of node scope (over-claim 禁止).
+
+- **⑦(a) restore-fidelity** (Stage-A, no-GPU): reset_to_phase(k) restored qpos/qvel L∞ ≤ 1mm/1mm/s vs recorded phase-k + static (no rollout). **⑦(b)** (Stage-B): 1-step-after-reset divergence (grasp_actuation=ON).
+- **⑤ wall/spacer EXACT seat-predicate** (RESTORED, CC5-CH1): mjModel geom introspection, wall-dist≤0.5mm spacer-excluded. ⑨b uses THIS (not 3.5mm center proxy).
+- **⑨b online-numerator** (Stage-B): residual≡0 × 81 live (4-substep + servo) → strict_v2 実測 w/ EXACT predicate (58/81 仮定禁止; divergence = finding).
+- **⑥ full-fire live** / **実grip** (SRG-gated) / **C2-seating 動画** (§運用14 video) / **⑬ enabler** (recorded_replay; VERDICT trainer-defer). All Stage-B.
+⚠ conservatism: Layer-B = substrate-transfer, non-conservative, bar=measured.
+
+## §4. Design constraints (%12 mandatory + verdict) — plan-binding
+1. step_target SINGLE-SOURCE with run_route (recorded_replay = run_route's recorded output, byte-consistent; **live CUT** so no 2nd computation, Q1). 2. flag-OFF = env-core byte-identity (comp2/3/4/5 all flag-gated; B⑨a′ full-arm_q sha guards). 3. SRG measure-first HARD gate (§7). 4. stage separation (§5). 5. design-gate skills by content (§11). 6. PLANNING only.
+
+## §5. Stage-separated gate chain (re-scoped)
+### Stage A — minimal no-GPU {comp1,comp2}
+gate: **focused re-gate (delta-only)** → %12 授権 → BUILD {1,2} → **STATIC verify (gate-i, NOT GPU, CC5-CH4)**: (i) ⑦(a) restore-L∞ ≤1mm/1mm/s (unit, no rollout) (ii) recorded_replay step_target == run_route recording byte-consistent (unit) (iii) **flag-OFF byte-identity**: legacy-config == env-core 25/81 EXACT re-regression + **B⑨a′ = full-arm_q sha incl gripper** (CC4-C4). Stage-A env-core NON-perturbing (all flag-gated default-off) → no GPU training, full PLG 不要.
+### Stage B — SRG-gated (comp3-8)
+gate: Stage-A GREEN → **MINIMAL SRG probe FIRST** (cheapest C1-grasp+hold go/no-go, single nominal) → creep-budgeted SRG measure (§7) → if PASS: comp3/4/5 build (grasp_actuation ON + flag-gated write-site + C2 scene) + live DoD (⑨b 81-single-cell / ⑥ / ⑦(b) / C2-seating video) → HIGH-COST → **/production-launch-gate**. SRG FAIL → STOP + surface decision point (NO threshold-relax).
+
+## §6. step_target packet spec (BAKED — CC2 component-1 build spec)
+- **recorded_replay-ONLY** (live CUT, Q1): replay run_route recording per RL step. **81 single-cell** (interface carries no world-index → 81 sequential single-cell replays for ⑨b; `__init__` extended to carry per-cell recorded_targets; INIT_XY_NOISE=0 for pure replay — CC2-CH3).
+- **target_6d**: ⚠ **ESCALATED design fork (CC2-CH1, touches fork-(iv))** — recorded `ee_tgt_pos` = piecewise-constant leg GOAL (replaying at cadence-10 → RL SNAP ~1 step vs monolith RAMP 50-500 frames = ~323mm mid-leg divergence). Option (a) replay `ee_tgt` (keeps fork-(iv) absolute-base semantics; ⑨b confounds substrate + snap-vs-ramp) / (b) replay `ee_pos` achieved-path (isolates substrate; **changes base-target from the fork-(iv) trainer contract**). **→ %12/design-gate + Rs (fork-(iv) is banked, DQ6 CLOSED). NOT COORD-decided.**
+- **phase_id** (CC2-CH2, verified 15 vals): map recorded phase_id [-1,0..8,10..14] → [0,6) N_ROUTE_PHASES (spec the 15→6 map from the monolith route sub-phase semantics; NOT the stub equal-split clock — that desyncs 100s-steps → cable drop).
+- **grip_2** (verified radians 0-0.7407): threshold recorded grip_cmd radians → {0,1} (open/closed; e.g. ≥ GRIPPER_DRIVER_HALF_OPEN_RAD). **is_dual** from grip_2/phase (single-source, not re-derived).
+- **R-first [R,L] assembly + unit assert** (CC2-CH5, verified _STACK_KEYS [L,R]): explicit [R,L] concat, assert vs a known cell (arms-not-swapped).
+- **n_frames** per-cell 7706-7710 not const (CC4/CC2-CH4): read per-cell, no hardcode; pad-to-horizon holds grippers → assert G6-latch BEFORE pad.
+
+## §7. SRG (revised, Stage-B, CC3) — creep-budgeted HARD decision-gate
+- **MINIMAL probe FIRST**: cheapest C1-grasp+hold go/no-go (single nominal, grasp_actuation=ON 4-substep) before comp3/4/5.
+- **creep-BUDGETED criterion** (CC3-CH1, no-slip UNREACHABLE): grip = form-closure CAGE (cage≠hold); intrinsic creep 60.4µm/f @F=0 (10-substep). **re-measure creep floor at 4-substep as FIRST substep** (10-substep bank doesn't transfer). criterion = rate-under-load ≤~1.2 OR service-exposure window (not absolute no-slip).
+- **tail screening** (CC3-CH2): nominal + DR-corner (±16mm table-void edge) + known-hard; gate = worst-screened.
+- **levers** (CC3-CH3, ranked cheap→campaign): {noslip_iterations (110× banked-BEST), impratio (∝1/impratio), solver iters, pad friction/solref} → substep 4→N LAST (Rs-level, campaign-affecting).
+- **per-axis conservatism** (CC3-CH5): substep=conservative-w-caveat / offset=non-conservative / creep-floor=unknown-until-measured.
+- **observable-bound no-silent-cap** (CC3-CH4): bind to creep metric + tail cells + quantified slip-time-series (single nominal video+human-GT insufficient). human-GT verdict.
+
+## §8. state_bank + ⑦ (CC6 split)
+- comp2 builds `_state_bank[k]` = phase-k banked {arm+all-16-gripper qpos/qvel, grip_target} from the recording (Q3: recording carries phase_id per-frame → phase-k boundary = first frame at mapped phase k). RouteExecutor.reset_to_phase(:3007) restores via apply_banked_restore (BUILT).
+- **⑦(a)** (Stage-A no-GPU): restored qpos/qvel L∞ ≤ 1mm/1mm/s (static unit). **⑦(b)** (Stage-B): 1-step-after-reset divergence (grasp_actuation=ON, live). SCALAR k (per-world curriculum → trainer, §13.2).
+
+## §9. C2 groove scene (comp5, Stage-B) — Q2 pre-resolved (CC5-SOUND): C2=even clip X=0.40 on SOLID floor (NO void), additive flag-gated build → env-core byte-preserve when off. /geometric-design at Stage-B design-gate.
+
+## §10. §9 static drift tripwire (comp6, Stage-B, 2-leg — CC4-C2)
+current test_routeexec_byte_repro.py:265 = stub (non-blocking, KEEP until leg-(b) specified). 2 legs: **(a)** raw sha256(test:3692-5765)==_ROUTE_MONOLITH_GOLDEN_SHA256 = monolith-EDIT tripwire (catches locked-file drift, NOT run_route). **(b)** run_route-DRIFT = ast-semantic-equiv reversing ONLY the F11 delta (mirror §12.4) = the actual先祖返り guard. leg-(a) alone (v0.1) = tautology.
+
+## §11. design-gate skills (by content)
+- Stage-A {1,2}: no reward/geom/force change (facade + wiring + state_bank; predicate 不変) → design-gate LIGHT; **/reward-design for the RESTORED ⑤ EXACT predicate + §運用29 leg table** (success-condition surface). confirm at re-gate.
+- Stage-B: /force-design (grip servo 4-substep + SRG) + /geometric-design (C2 scene) at Stage-B design-gate.
+
+## §12. Open-Q RESOLVED (item 7) + 1 ESCALATED
+Q1=recorded_replay-only (live deferred-trainer) / Q2=C2 pre-resolved / Q3=state_bank phase-k from recording phase_id per-frame / Q4=creep-budgeted / Q5=reuse+pin 81 Layer-A recordings now. **⚠ ESCALATED (NEW, §6): ee_pos-vs-ee_tgt target source for ⑨b — touches banked fork-(iv) trainer-base → %12/design-gate + Rs decision (NOT COORD).**
+
+## §13. Risks — substrate-transfer material (SRG §7 gate, substep→Rs post-data) / grip 4-substep premise (SRG probe first) / step_target divergence (recorded_replay single-source + ee_pos/ee_tgt escalated) / flag-OFF byte-preserve (B⑨a′ full-arm_q sha incl gripper, CC4-C4) / ramp-vs-snap trajectory divergence (⑨b, tied to §6 escalation).
 
 ---
-
-## §1. [TASK] / [L-TRIAGE] = L3 (%12 verified §運用28)
-- newton_route_env.py CORE edit + keywords {env/newton/ik/solver/phase/reset/grasp_actuation} + >200L / ≥3 files → L3.
-- **invariant-PRESERVING** (§0 不変前提 DUAL-ARM / 88mm / DiffIK / コ gripper / no-kinematic-trick 不変更): grasp_actuation=True activates the PROVEN model-level POSITION servo (§10.1, %12-verified) — NOT a kinematic pin, NOT a control-method change. → high-care L3, NOT immediate-STOP.
-
----
-
-## §2. Scope — components 1-8 (built vs new)
-**BUILT (Layer-A + foundation, do NOT rebuild):** run_route (byte-repro 81/81 PASS) / AR-reuse write-site machinery (apply_arm_only_write_broadcast/perworld, set_gripper_target, build_perworld_index_maps, servo_seed_assert, apply_banked_restore) unit-PASS / G4/G5 asserts / physics+IK substrate / _GRIPPER_COORDS_LOCAL SSOT / RouteExecutor.__init__(:2987) + reset_to_phase(:3007 banked-restore) / route_env_config RouteInterfaceV1 + C2 constants + recorded_replay mode / env-core COMPLETE (env consumes the interface: _pull_route:1091 → _apply_actions_batch:676 NON-accumulating base+residual + _route_grip/_route_is_dual).
-
-| # | component | file | new LOC (est) | notes |
-|---|---|---|---|---|
-| 1 | **step_target facade** (SINGLE-SOURCE, §6) | route_executor.py (:3026 impl) | ~60-140 | THE crux gap (NotImplementedError). recorded_replay primary + live design-question |
-| 2 | **RouteExecutor env-wiring** (replace NominalRouteStub:309, flag-gated) + state_bank build | newton_route_env.py | ~40-90 | flag = `route_executor_impl` default stub (byte-preserve) |
-| 3 | **grasp_actuation flag-flip** (:338 default False → flag) | newton_route_env.py | ~10-25 | §10.1; OFF = env-core byte-identity (constraint 2) |
-| 4 | **3-pattern write-site** (:387 broadcast / :738 per-world / :617 banked-restore) use AR machinery | newton_route_env.py | ~30-70 | §13.1; gripper coords excluded per-step, banked-restore at reset |
-| 5 | **real C2 groove scene** (physical C2 clip build; constants exist) | newton_route_env.py / route_env_config.py | ~20-60 | §9; env-core built C2 = geometric-proxy → route needs physical (design-question) |
-| 6 | **§9 static drift tripwire unstub** (no-GPU) | test_routeexec_byte_repro.py:265 | ~40-80 | golden-hash vs monolith slice test:3692-5765 F11-reverse; layer-3 mechanical |
-| 7 | **SRG measure-first leg** (4-substep grip efficacy, GPU-gated HARD decision-gate) | scripts/ (measure harness) | ~80-150 | §7; Stage-B gate BEFORE grip commit |
-| 8 | **DoD Layer-B validation** (⑨b/⑥/実grip/C2-seating video) | env run + video | — | Stage-B, GPU |
-
-**LOC est (core, Stage-A no-GPU):** ~150-450 touched. **Stage-B = validation runs (no new engine LOC beyond measure harness).**
-
----
-
-## §3. DoD (Layer-B, charter §1 mapping; §運用29 predicate-completeness)
-分子 conjoin = **strict_v2 (C1-retention leg ∧ C2-seat leg)**. trainer policy 学習成果 = out of node scope.
-- **⑦ handover-fidelity** (reset_to_phase state-bank): qpos/qvel L∞ ≤ 1mm / 1mm/s (mechanism BUILT :3007; needs state_bank + 1-step-after-reset divergence test). **Stage-A verifiable (no live rollout).**
-- **⑨b online-numerator**: residual≡0 × 81 live (env 4-substep + servo grip) → strict_v2 実測 (58/81 と**仮定禁止**, %12 Q3; substrate-transfer divergence = finding). **Stage-B GPU.**
-- **⑥ 6-phase full-fire live** (実 grip で cable carried): all 6 phases fire, cable retained whole-route. **Stage-B GPU + video.**
-- **実 grip** (real grip force at 4-substep servo): SRG measure-first (§7) is the gate. **Stage-B GPU.**
-- **C2-seating 動画 gate** (Rs 約束, 実 C2 groove scene): §運用14 video leg. **Stage-B GPU + video.**
-- **⑬ enabler** (recorded-target-replay + C1-escape non-vacuous cell): recorded_replay path (§6). VERDICT = trainer defer.
-
-⚠ **conservatism (GROVE v1.1):** Layer-B = substrate-transfer, **non-conservative, bar = measured** (58/81 is the Layer-A byte-golden, NOT a Layer-B target). divergence itself is the finding.
-
----
-
-## §4. ⭐ Design constraints (%12 mandatory, 2026-07-07 15:03 — plan-binding)
-1. **step_target SINGLE-SOURCE with run_route** (divergent reimpl 禁止). recorded_replay + live BOTH byte-consistent with the proven route = crux 設計不変式 (a 2nd drifting route computation = 先祖返り risk). See §6.
-2. **grasp_actuation flag-flip OFF = env-core byte-identity 完全保存** (flag-gated, default path 不触). Verified by B⑨a′ re-regression (legacy-config == env-core 25/81 EXACT).
-3. **SRG measure-first = HARD decision-gate** (§7): 4-substep grip 効力 PASS してから grip approach commit. 不足 → **surface as decision point, silent 進行禁止, 閾値緩和で誤魔化さない** (§運用 gate-FAIL fix-first).
-4. **stage separation** (§5): no-GPU build (byte/static-verifiable) vs GPU-gated validation. separate gate chains.
-5. **design-gate skills by content** (§11): /force-design (servo/grip) + /geometric-design (C2 groove scene) + /reward-design (if ⑨b/success-def touched). compound → all.
-6. **PLANNING artifact only** — no build until gate PASS + %12 授権.
-
----
-
-## §5. ⭐ Stage-separated gate chain
-### Stage A — no-GPU build (byte/static-verifiable, env-core non-perturbing)
-components 1-6 (step_target facade + env-wiring flag-gated + grasp_actuation flag-flip default-off + 3-pattern write-site + C2 scene flag-gated + §9 tripwire unstub).
-- gate: [DEFINE done] → **design-gate** (§11 skills) → **5体 [VERIFY] (L3)** → %12 授権 → **BUILD** → **static/byte verify**: (i) flag-OFF byte-identity (env-core 25/81 EXACT re-regression, B⑨a′) (ii) §9 static tripwire PASS (golden-hash == slice) (iii) recorded_replay step_target == run_route recording byte-consistent (unit).
-- ⚠ Stage-A is env-core NON-perturbing (all flag-gated default-off) → low-risk, no GPU training. full production-launch-gate 不要 (Layer-A precedent).
-
-### Stage B — GPU-gated validation (substrate-transfer, non-conservative)
-components 7-8 (SRG measure-first + live DoD ⑥/実grip/⑨b/C2-seating video).
-- gate: Stage-A GREEN → **SRG measure-first sub-gate (§7, HARD decision-gate)** → if PASS: live DoD runs (⑨b 81-live / ⑥ full-fire / C2-seating video) → if any run is HIGH-COST (GPU ≥10h or production-scale) → **/production-launch-gate** (§運用2 HIGH-COST-GATE).
-- ⚠ SRG measure-first FAIL → STOP, surface decision point (grip approach re-design, NOT threshold-relax). Rs-level if grip infeasible at 4-substep.
-
----
-
-## §6. step_target facade design (SINGLE-SOURCE, constraint 1)
-- **PRIMARY = recorded_replay**: replay run_route's recorded per-step ee_tgt (route_demo_raw.npz `ee_tgt_pos_l/r`, frame→RL-step via cadence 10; 7707 frames → 771 steps, pad to horizon 900). **Single-source by construction** (targets ARE run_route's output; byte-consistent). Powers ⑨b (residual≡0 = pure replay) + ⑬ enabler.
-- **per-cell offset**: each of 81 DR offsets has its own run_route recording (Layer-A grid already produced them). recorded_replay indexes the per-cell recording.
-- **live (design-question, surface to 5体)**: on-the-fly re-derivation (no pre-recording) risks divergent reimpl (constraint 1 violation). **PROPOSAL: defer live to a shared target-computation extracted from run_route (NOT reimpl), OR keep recorded_replay-only for this node** (⑨b needs only replay). 5体 to rule on whether live is in-scope or deferred.
-- packet: (target_6d [R_xyz,L_xyz abs, fork-(iv) non-累積], phase_id [base G1-G6 clock], grip_2 [per-arm], is_dual). env consumes at _apply_actions_batch:676 (already wired).
-
----
-
-## §7. SRG measure-first (HARD decision-gate, constraint 3)
-- **premise risk**: grasp_actuation=True servo is proven at SIM_SUBSTEPS=10 (monolith); env = RL_SIM_SUBSTEPS=4 (2.5× coarser). 10-substep grip efficacy ≠ 4-substep guaranteed (stiff cable contact + PD close dynamics).
-- **measure**: run the env grip-close (grasp_actuation=True, 4-substep) on a nominal cell, measure grip efficacy (cable retained through the route? grip force? throat closure? slip-onset over time). video leg (§運用14, claw-zoom + throat_frac time-series, [[feedback-video-detect-intra-finger-cable-slip]]).
-- **decision-gate (HARD)**: grip efficacy PASS (cable carried whole-route, no slip) → commit the grip approach → proceed to live DoD. **FAIL → STOP, surface as decision point** (candidate fixes: substep 4→N [Rs-level, campaign-affecting], PD gain re-design [/force-design], contact stiffness). NO threshold-relaxation, NO silent progress.
-- conservatism direction: measure on the env substrate = the REAL bar (non-conservative measurement). grip verdict = human-GT ([[feedback-grasp-verdict-numeric-and-video-analyst-both-unreliable-human-ground-truth]]).
-
----
-
-## §8. state_bank + reset_to_phase (⑦, mechanism BUILT)
-- RouteExecutor.reset_to_phase(:3007) restores banked arm + all-16 gripper joint_q/qd + banked grip target (apply_banked_restore) from `_state_bank[k]`. **NEW = build the state_bank** = phase-k banked states (qpos/qvel + grip target) extracted from a run_route recording at phase boundaries.
-- ⑦ DoD: reset_to_phase(k) qpos/qvel L∞ ≤ 1mm/1mm/s vs the recorded phase-k state + 1-step-after-reset divergence test (5体 CRIT4 precedent). **Stage-A verifiable (no live rollout).**
-- SCALAR k (per-world curriculum start-mix deferred to trainer, §13.2 F14/F15).
-
----
-
-## §9. real C2 groove scene (component 5)
-- constants exist (route_env_config: ROUTE_C2_XY=(0.40,0.000) / ROUTE_GROOVE_Z=0.829 / C2 tolerances). env-core built C2 as geometric-proxy (docstring :50 "route is STUB").
-- NEW = physical C2 clip build (byte-repro grid used S13_ROUTE_C2=1 + CLIP2=1 in build_scene → real C2). **design-question (5体)**: does build_multiworld_scene need C2-clip flags, and is env-core byte-preserved when off? /geometric-design (C2 groove scene, table-void×clip parity).
-
----
-
-## §10. §9 static drift tripwire unstub (component 6, no-GPU)
-- current: test_routeexec_byte_repro.py:265 static_drift_tripwire() = stub (TODO :277).
-- unstub: compute sha256 of the monolith slice test_newton_clip_routing.py:3692-5765, reverse the C2-F11 delta (monkeypatch install/ik_solve_fn), compare to run_route's `_ROUTE_MONOLITH_GOLDEN_SHA256` (5a47dacf..). layer-3 mechanical (no-GPU, deterministic, test_route_geometry_sync.py pattern). Catches route_executor drift from the locked monolith cheaply (before the GPU grid).
-
----
-
-## §11. design-gate skills (constraint 5, by content)
-- **/force-design**: grip servo (grasp_actuation PD close) + 4-substep contact dynamics (SRG). REQUIRED.
-- **/geometric-design**: real C2 groove scene (C2 clip build, table-void×clip parity). REQUIRED.
-- **/reward-design**: ONLY if ⑨b success-def / predicate touched (route/predicate 不変 expected → likely skip; confirm at design-gate). 
-- compound → load all applicable.
-
----
-
-## §12. Open design questions (5体 / design-gate 対象)
-1. step_target live mode: in-scope (shared target-computation extraction) or recorded_replay-only for this node? (§6)
-2. C2 groove scene: build_multiworld_scene C2-clip flag + env-core byte-preserve? (§9)
-3. state_bank source: run_route recording phase-boundary extraction — which frames = phase-k boundaries? (§8)
-4. SRG threshold: what grip-efficacy criterion = PASS (cable-carried whole-route + no slip; human-GT)? (§7)
-5. recorded_replay per-cell: 81 recordings (955MB) reuse vs on-demand re-record? (§6)
-
----
-
-## §13. Risks / conservatism carries
-- **substrate-transfer risk (material, %12→Rs surfaced)**: env 4-substep + servo ≠ monolith 10-substep. Layer-B = measured, non-conservative. SRG measure-first (§7) is the gate; substep decision = Rs-level post-data.
-- **grip at 4-substep = premise risk** (§7 SRG). silent-cap 禁止.
-- **step_target divergence = 先祖返り risk** (constraint 1); recorded_replay single-source mitigates.
-- **flag-off byte-preserve** (constraint 2): B⑨a′ re-regression guards.
-
----
-*%11 COORD (w2:p3) draft v0.1 2026-07-07 15:0x. PLANNING only. → %12 design-gate + 5体 [VERIFY] (L3) → build 授権.*
+*%11 COORD (w2:p3) v0.2 2026-07-07 15:3x (folds 5体 DECIDE=REVISE, all 7 items). PLANNING only. → %12 focused re-gate (delta-only) → PASS → minimal Stage-A {1,2} build 授権. ee_pos/ee_tgt fork ESCALATED.*
