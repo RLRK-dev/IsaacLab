@@ -1,0 +1,1946 @@
+[
+  {
+    "cell": "cell_x-20_y-20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-20_y-15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-20_y-10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-20_y-5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-20_y0",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-20_y5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-20_y10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-20_y15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-20_y20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-15_y-20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-15_y-15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-15_y-10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-15_y-5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-15_y0",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-15_y5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-15_y10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-15_y15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-15_y20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-10_y-20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x-10_y-15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-10_y-10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-10_y-5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x-10_y0",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-10_y5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-10_y10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "R_MISS_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "R_MISS_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x-10_y15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-10_y20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-5_y-20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x-5_y-15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-5_y-10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-5_y-5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x-5_y0",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-5_y5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-5_y10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x-5_y15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x-5_y20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x0_y-20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x0_y-15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x0_y-10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x0_y-5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x0_y0",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x0_y5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x0_y10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x0_y15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x0_y20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x5_y-20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x5_y-15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x5_y-10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x5_y-5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x5_y0",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x5_y5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x5_y10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x5_y15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x5_y20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x10_y-20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x10_y-15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x10_y-10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x10_y-5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x10_y0",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x10_y5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x10_y10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x10_y15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x10_y20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x15_y-20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x15_y-15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x15_y-10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x15_y-5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "R_MISS_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "R_MISS_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x15_y0",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x15_y5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x15_y10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x15_y15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x15_y20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x20_y-20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "R_MISS_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "R_MISS_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x20_y-15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x20_y-10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x20_y-5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "R_MISS_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "R_MISS_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x20_y0",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x20_y5",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  },
+  {
+    "cell": "cell_x20_y10",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_R_GRIP_L_CAGE_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x20_y15",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": false,
+      "c1f": true,
+      "c2h": false
+    }
+  },
+  {
+    "cell": "cell_x20_y20",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  }
+]
