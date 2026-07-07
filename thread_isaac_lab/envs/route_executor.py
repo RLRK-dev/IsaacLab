@@ -33,17 +33,23 @@ servo-seed assert, and ``_set_gripper_target``. The AR-specific LEFT-arm freeze
 
 import os
 
+import newton
 import numpy as np
 import route_env_config as rc
+import warp as wp
 from configs.task_config import (
     EE_BODY_OFFSET,
+    FRANKA_NUM_JOINTS,
     GRIP_HALF_SPAN,
     GRIPPER_DRIVER_JOINT_IDX,
     GRIPPER_DRIVER_OPEN_RAD,
     GRIPPER_JOINT_RANGE,
     JOINTS_PER_ARM,
+    MAX_MOVE_STEPS,
     SIM_SUBSTEPS,
+    STEPS_PER_CM,
 )
+from newton.ik import IKObjectiveJointLimit, IKObjectivePosition, IKObjectiveRotation, IKSolver
 
 # =============================================================================
 # §13.0-2 / §13.4 / §13.7 (G7) -- SINGLE SSOT for the gripper coordinate set.
@@ -299,6 +305,8 @@ def apply_banked_restore(phys_jq, phys_jqd, joint_target_pos, maps, banked):
 DEVICE = os.environ.get("NEWTON_DEVICE", "cuda:0")  # test:122 (byte-repro pins NEWTON_DEVICE=cuda:0)
 DT = 1.0 / 480.0  # test:123 frame dt (outer step)
 SIM_DT = DT / SIM_SUBSTEPS  # test:124 solver dt (inner substep)
+IK_ITERATIONS = 100  # test:237 Levenberg-Marquardt iterations per solve_ik_dual call
+IK_STEP_SIZE = 1.0  # test:238 LM step size
 
 # Pre-allocated double-buffer physics state, created on the first ``physics_step`` call (test:1768).
 _physics_state_buffer = None
@@ -390,6 +398,251 @@ def physics_step(model, state, solver, contacts, scene_info):
     if _demo_rec is not None:  # P3 recorder: sample the post-step frame (read-only, deferred chunk)
         _demo_rec.sample(state_0, scene_info)
     return state_0
+
+
+def solve_ik_dual(scene_info, target_left, target_right, warmstart_jq=None):
+    """Solve IK for both arms using the FK model (verbatim; test:1854).
+
+    Args:
+        warmstart_jq: optional full joint-config vector used as the LM solver's initial guess
+            (R-S6.2 C2). Default ``None`` uses the current ``fk_state.joint_q`` (byte-identical to
+            the prior behavior). Decouples the IK initial guess from the interpolation start so a
+            move can re-seed from a known-good config (e.g. the converged hover) instead of a
+            post-close LM-stuck point (RS6_1_FINDINGS §2.2).
+
+    Returns (fk_joint_q, cost) — the FK model joint positions with IK solution.
+    """
+    fk_model = scene_info["fk_model"]
+    fk_state = scene_info["fk_state"]
+
+    # EE body indices in FK model (body 6 = panda_hand for each arm)
+    left_ee_body = EE_BODY_OFFSET  # 5 (UR5e wrist_3; S2a aliased EE_BODY_OFFSET=EE_BODY_IDX=5)
+    right_ee_body = FRANKA_NUM_JOINTS + EE_BODY_OFFSET  # 19 (FRANKA_NUM_JOINTS aliased to ROBOT_NUM_JOINTS=14)
+
+    target_l = np.array([target_left], dtype=np.float32)
+    target_r = np.array([target_right], dtype=np.float32)
+
+    obj_l = IKObjectivePosition(
+        link_index=left_ee_body,
+        link_offset=wp.vec3(0.0, 0.0, 0.0),
+        target_positions=wp.array(target_l, dtype=wp.vec3, device=DEVICE),
+        weight=1.0,
+    )
+    obj_r = IKObjectivePosition(
+        link_index=right_ee_body,
+        link_offset=wp.vec3(0.0, 0.0, 0.0),
+        target_positions=wp.array(target_r, dtype=wp.vec3, device=DEVICE),
+        weight=1.0,
+    )
+
+    # Rotation objectives: gripper pointing DOWN, fingers PERPENDICULAR to cable (world Y).
+    # S6 retarget (UR5e+2F-85, NOT Franka): target = wrist_3 (body 5/19) world orientation
+    # q = Rx(-90°), xyzw = (-√2/2, 0, 0, √2/2). Maps wrist_3 local +Y (approach) → world -Z (down)
+    # and local X (finger-sep) → world ±X (⊥ cable Y). VALIDATED on the UR5e FK model: probe_ik_verify
+    # (right arm down_dot=1.0/perp_|x|=1.0/z_leak=0) + probe_smoke_geom (BOTH arms down_dot=1.0/perp=1.0).
+    # Convention seam: warp wp.vec4/IKObjectiveRotation = xyzw (newton ik_objectives.py:618,
+    # target=wp.quat(vec[0..3]), w=vec[3]); the wrist_3 MuJoCo attachment_site is wxyz.
+    # (The prior Franka π/8 quat was built for the collapsed panda_hand_joint frame → mis-orients the
+    # UR5e wrist_3 = the S5 P1.3 horizontal-gripper failure; the S6 smoke now asserts this DOWN/⊥ TRIAD.)
+    target_rot = wp.array([wp.vec4(-0.7071067811865476, 0.0, 0.0, 0.7071067811865476)], dtype=wp.vec4, device=DEVICE)
+    rot_l = IKObjectiveRotation(
+        link_index=left_ee_body,
+        link_offset_rotation=wp.quat_identity(),
+        target_rotations=target_rot,
+        weight=0.5,
+    )
+    rot_r = IKObjectiveRotation(
+        link_index=right_ee_body,
+        link_offset_rotation=wp.quat_identity(),
+        target_rotations=target_rot,
+        weight=0.5,
+    )
+
+    # Joint limit objective: keeps IK solutions within URDF limits
+    obj_joint_limits = IKObjectiveJointLimit(
+        joint_limit_lower=fk_model.joint_limit_lower,
+        joint_limit_upper=fk_model.joint_limit_upper,
+        weight=10.0,
+    )
+
+    # Dual-arm collision avoidance objectives
+    from newton_routing_utils import _build_collision_objectives
+
+    _use_collision = os.environ.get("COLLISION_AVOIDANCE", "1") != "0"
+    collision_objs = _build_collision_objectives() if _use_collision else []
+
+    ik_solver = IKSolver(
+        fk_model, n_problems=1, objectives=[obj_l, obj_r, rot_l, rot_r, *collision_objs, obj_joint_limits]
+    )
+
+    # Initial guess for the LM solver: the warm-start config if provided (R-S6.2 C2, decoupled from
+    # the interpolation start), else the current FK joint positions (byte-identical default).
+    fk_jq = fk_state.joint_q.numpy().copy()
+    if warmstart_jq is not None:
+        fk_jq = np.asarray(warmstart_jq, dtype=fk_jq.dtype).reshape(-1).copy()
+    jq_in = wp.array(fk_jq.reshape(1, -1), dtype=float, device=DEVICE)
+    jq_out = wp.zeros((1, fk_model.joint_coord_count), dtype=float, device=DEVICE)
+
+    ik_solver.step(jq_in, jq_out, iterations=IK_ITERATIONS, step_size=IK_STEP_SIZE)
+
+    cost = ik_solver.costs.numpy()[0]
+    result = jq_out.numpy()[0]
+
+    return result, cost
+
+
+def ik_move_both(
+    model,
+    state,
+    scene_info,
+    solver,
+    contacts,
+    target_left,
+    target_right,
+    label="MOVE",
+    converge_mm=5.0,
+    speed_factor=1.0,
+    warmstart_jq=None,
+    ik_solve_fn=None,
+):
+    """Move both EEs to target positions using IK + VBD stepping (test:1958; F11 explicit ik-solve-fn).
+
+    Strategy: Solve IK ONCE for the final target, then interpolate FK joint
+    positions over physics steps. Kinematic bodies follow FK instantly.
+
+    Args:
+        speed_factor: multiplier for step count (>1 = slower motion).
+        ik_solve_fn: the dual-arm IK solve function (F11 §12.6). ``None`` => the module
+            :func:`solve_ik_dual` (byte-identical to the monolith default). The C2 re-grasp passes the
+            per-arm-rotation ``_solve_ik_dual_rot`` (same signature) here instead of monkeypatching the
+            module global (no-global-mutation, HIGH4), reproducing the windowed monkeypatch byte-identically.
+
+    Returns (final_state, success).
+    """
+    if _demo_rec is not None:  # P3 recorder: last-COMMANDED EE target positions (spec §2.3, positions only)
+        _demo_rec.note_targets(target_left, target_right)
+    _ik_solve = ik_solve_fn if ik_solve_fn is not None else solve_ik_dual  # F11: injected solver or default
+    cable_bodies = scene_info.get("cable_bodies", [])
+    fk_model = scene_info["fk_model"]
+    fk_state = scene_info["fk_state"]
+
+    pos_l, pos_r = get_ee_positions(state, scene_info)
+    dist = max(np.linalg.norm(np.array(target_left) - pos_l), np.linalg.norm(np.array(target_right) - pos_r))
+    n_steps = max(int(dist * 100 * STEPS_PER_CM * speed_factor), 50)
+    n_steps = min(n_steps, MAX_MOVE_STEPS)
+
+    print(
+        f"  [{label}] Moving: L=({pos_l[0]:.3f},{pos_l[1]:.3f},{pos_l[2]:.3f}) "
+        f"→ ({target_left[0]:.3f},{target_left[1]:.3f},{target_left[2]:.3f})"
+    )
+    print(
+        f"  [{label}] Moving: R=({pos_r[0]:.3f},{pos_r[1]:.3f},{pos_r[2]:.3f}) "
+        f"→ ({target_right[0]:.3f},{target_right[1]:.3f},{target_right[2]:.3f})"
+    )
+    print(f"  [{label}] dist={dist * 1000:.1f}mm, steps={n_steps}")
+
+    tgt_l = np.array(target_left, dtype=np.float32)
+    tgt_r = np.array(target_right, dtype=np.float32)
+
+    # Solve IK once for final target (R-S6.2 C2: optional warm-start seed, default = current FK config)
+    jq_target, ik_cost = _ik_solve(scene_info, tuple(tgt_l), tuple(tgt_r), warmstart_jq=warmstart_jq)
+    if np.any(np.isnan(jq_target)):
+        print(f"  [{label}] IK NaN!")
+        return state, False
+    print(f"  [{label}] IK solved: cost={ik_cost:.2e}")
+
+    # FK joint interpolation: arm joints only (j0-j6), preserve finger joints (j7-j8)
+    fk_coord_count = fk_model.joint_coord_count
+    jq_start = fk_state.joint_q.numpy().copy()
+    jq_end = jq_target.copy()
+
+    # Gripper coord indices to EXCLUDE from arm-IK interpolation (hold the gripper through arm moves).
+    # S6: exclude ALL 8 gripper joints/arm via SSOT GRIPPER_JOINT_RANGE ([6..13]; right arm +JOINTS_PER_ARM
+    # = [20..27]). The old {7,8,21,22} (Franka 2-finger) left 6/8 gripper joints/arm in the interpolation.
+    # (IK leaves gripper joints ~unchanged — zero Jacobian on the arm-EE/collision objectives — so this is
+    # SSOT-correctness + defense: it guarantees a scripted close is held through the post-close LIFT.)
+    finger_coords = set(GRIPPER_JOINT_RANGE) | {JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE}
+
+    for step in range(n_steps):
+        t = min((step + 1) / n_steps, 1.0)
+
+        # Interpolate arm joints, preserve finger positions
+        jq_interp = jq_start.copy()
+        for d in range(fk_coord_count):
+            if d not in finger_coords:
+                jq_interp[d] = jq_start[d] + (jq_end[d] - jq_start[d]) * t
+
+        # Update FK state → body transforms
+        fk_state.joint_q.assign(jq_interp)
+        newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
+
+        # VBD step (kinematic bodies updated from FK inside physics_step)
+        state = physics_step(model, state, solver, contacts, scene_info)
+
+        # Video frame capture
+        recorder = scene_info.get("recorder")
+        if recorder:
+            recorder.capture(state)
+
+        # Check cable NaN
+        if cable_bodies:
+            bq = state.body_q.numpy()
+            if np.any(np.isnan(bq[cable_bodies])):
+                print(f"  [{label}] Cable NaN at step {step}!")
+                return state, False
+
+        # Log progress
+        if step % max(n_steps // 5, 1) == 0:
+            cur_l, cur_r = get_ee_positions(state, scene_info)
+            err_l = np.linalg.norm(cur_l - tgt_l) * 1000
+            err_r = np.linalg.norm(cur_r - tgt_r) * 1000
+            cable_str = ""
+            if cable_bodies:
+                bq = state.body_q.numpy()
+                cz = bq[cable_bodies, 2]
+                cz_nan = np.any(np.isnan(cz))
+                cable_str = f" cable_z=[{np.nanmin(cz):.4f},{np.nanmean(cz):.4f}] nan={cz_nan}"
+            # Extended diagnostics during lift phases
+            diag_str = ""
+            if label.startswith("P2") and cable_bodies:
+                fk_jq = fk_state.joint_q.numpy()
+                fj = [fk_jq[7], fk_jq[8], fk_jq[FRANKA_NUM_JOINTS + 7], fk_jq[FRANKA_NUM_JOINTS + 8]]
+                diag_str += f" fingers=[{fj[0] * 1000:.1f},{fj[1] * 1000:.1f},{fj[2] * 1000:.1f},{fj[3] * 1000:.1f}]mm"
+                # Contact diagnostics
+                model.collide(state, contacts)
+                wp.synchronize()
+                nc = contacts.rigid_contact_count.numpy()[0]
+                if nc > 0:
+                    s0 = contacts.rigid_contact_shape0.numpy()[:nc]
+                    s1 = contacts.rigid_contact_shape1.numpy()[:nc]
+                    sb = model.shape_body.numpy()
+                    lb = scene_info["left_body_start"]
+                    rb = scene_info["right_body_start"]
+                    fset = {lb + 7, lb + 8, rb + 7, rb + 8}
+                    cset = set(cable_bodies)
+                    fc_cnt = sum(
+                        1
+                        for ci in range(nc)
+                        if (sb[s0[ci]] in fset or sb[s1[ci]] in fset) and (sb[s0[ci]] in cset or sb[s1[ci]] in cset)
+                    )
+                    co_cnt = sum(
+                        1
+                        for ci in range(nc)
+                        if (sb[s0[ci]] in cset or sb[s1[ci]] in cset) and not (sb[s0[ci]] in fset or sb[s1[ci]] in fset)
+                    )
+                    diag_str += f" contacts={nc}(fc={fc_cnt},co={co_cnt})"
+                else:
+                    diag_str += " contacts=0"
+            print(f"  [{label}] step {step}/{n_steps}: err L={err_l:.1f}mm R={err_r:.1f}mm{cable_str}{diag_str}")
+
+    # Final error
+    pos_l, pos_r = get_ee_positions(state, scene_info)
+    err_l = np.linalg.norm(pos_l - tgt_l) * 1000
+    err_r = np.linalg.norm(pos_r - tgt_r) * 1000
+    converged = err_l < converge_mm and err_r < converge_mm
+    print(f"  [{label}] Final: err L={err_l:.1f}mm R={err_r:.1f}mm converged={converged} (thresh={converge_mm}mm)")
+
+    return state, converged
 
 
 class RouteExecutor(rc.RouteInterfaceV1):
