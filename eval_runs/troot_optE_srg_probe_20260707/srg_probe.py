@@ -959,10 +959,13 @@ def run_s1cpu():
 # ⚠ RECONCILE: the design draft's "±16mm table-void edge" conflates the DR corner with the VOID MARGIN
 # (build_scene void half-width = GRIP_HALF_SPAN + 16mm, test:1088). The real DR amplitude is ±20mm.
 CABLE_XY_DR_AMPLITUDE_MM = 20.0
-# Tail cells (dx,dy mm) on the 81-grid (9x9, ±20mm/5mm-step): nominal + 4 DR corners + the grip-whiff cell.
-# x-20_y5 = the ONLY grid FAIL (R_MISS grip-whiff, knife-edge r_grip 0->32.8N @1.9mm; P3_GRID_JOINTREAD:3,:80).
-_S2_DEFAULT_CELLS = [(0, 0), (20, 20), (20, -20), (-20, 20), (-20, -20), (-20, 5)]
-_S2_VIDEO_CELL = "x-20_y5"  # the a-priori grip-hard cell = the video-leg cell (§運用14)
+# Tail cells (dx,dy mm) on the 81-grid (9x9, ±20mm/5mm-step): nominal + 4 DR corners (%12 01:45 ruling:
+# DROPPED x-20_y5 — it's a C2 RE-grasp whiff [different grasp+failure-mode], TRACKED for comp5/C2 not S2).
+# ⚠ void-parity (c): at ±20 ONE claw sits ~4mm past the fixed void edge (over SOLID table) — route-REAL
+# (build_scene==build_multiworld void, both fixed ±16mm) + NO artifact (badqacc=0, no claw<->table contact,
+# grip engages). ±16mm = the void-cradle max (both claws in void); ±20mm = full DR (one claw over table).
+_S2_DEFAULT_CELLS = [(0, 0), (20, 20), (20, -20), (-20, 20), (-20, -20)]
+_S2_VIDEO_CELL = "x20_y20"  # the +Y-over-table marginal corner (a-priori worst-retention); video-leg (§運用14)
 
 
 def _s2_cells():
@@ -986,8 +989,8 @@ def _s2_structural_selfcheck(cells):
                                       "grasp_cable(offset=) COMMON-MODE recenters the 88mm span (route J5 "
                                       "common-mode recenter, span-preserving INV#2). NOT off-centre."),
         "cells_grounded": (len(cells) >= 2 and (0, 0) in cells,
-                           f"{len(cells)} cells incl nominal + DR corners ±{CABLE_XY_DR_AMPLITUDE_MM}mm + "
-                           f"x-20_y5 grip-whiff (P3_GRID_JOINTREAD J-9): {cells}"),
+                           f"{len(cells)} cells = nominal + DR corners ±{CABLE_XY_DR_AMPLITUDE_MM}mm "
+                           f"(%12 01:45: x-20_y5 DROPPED = C2 re-grasp whiff, tracked comp5/C2): {cells}"),
         "worst_cell_gates": (True, "gate = the WORST screened cell (nominal non-conservative CC3-CH5)"),
         "creep_budgeted_not_no_slip": (True, "reuse the S1 creep-budgeted gate (DROP margins + retention); "
                                        "runaway inherited from S1 (load-insensitive 0.885) => F=0.44 per tail cell"),
@@ -1086,8 +1089,15 @@ def run_s2():
             "dr_amplitude_mm": CABLE_XY_DR_AMPLITUDE_MM,
             "dr_16mm_reconcile": "design '±16mm' = VOID MARGIN (GRIP_HALF_SPAN+16mm, test:1088) conflation; "
                                  "real DR = ±20mm (task_config.py:264 CABLE_XY_DR_AMPLITUDE).",
-            "known_hard": "x-20_y5 = only grid grip-FAIL (R_MISS whiff, knife-edge r_grip 0->32.8N @1.9mm, "
-                          "P3_GRID_JOINTREAD:3/:80) = a C2 RE-grasp whiff. C1-escape cells = seat/guide, not grasp.",
+            "known_hard": "x-20_y5 (only grid grip-FAIL, r_grip 0->32.8N @1.9mm, P3_GRID_JOINTREAD:3/:80) = a "
+                          "C2 RE-grasp whiff -> DROPPED from S2 (%12 01:45), TRACKED for comp5/C2. C1-escape "
+                          "cells = seat/guide downstream, not grasp.",
+            "void_parity_c": "at ±20 ONE claw ~4mm past the FIXED void edge (over solid table): (a) build_scene "
+                             "void = fixed nominal [0.090,0.210] (grasp_y None, cable_xy_offset moves cable only); "
+                             "(b) build_multiworld void = SAME fixed [0.090,0.210] (base:1746) = PARITY, "
+                             "corner-over-table is route-REAL NOT artifact; (c) NO artifact (badqacc=0, no "
+                             "claw/pad<->table contact, grip engages ncon>0). ±16mm = void-cradle max (both "
+                             "claws in void); ±20mm = full DR (one claw over table). %12 to confirm ±20 vs ±16.",
             "scope": "S2 tests the GRIP PREMISE at the DR tail (isolated grip, no route). GO = grip robust "
                      "across tail; tail failures = downstream seat/guide (route-executor concern, NOT grip).",
         },
