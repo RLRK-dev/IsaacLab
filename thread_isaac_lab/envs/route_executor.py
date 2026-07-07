@@ -40,16 +40,26 @@ import numpy as np
 import route_env_config as rc
 import warp as wp
 from configs.task_config import (
+    ARM_DOF,
+    CABLE_RADIUS,
+    CLIP1_Z,
+    CLIP_POSITIONS,
     EE_BODY_OFFSET,
     FRANKA_NUM_JOINTS,
+    GRASP_X,
     GRIP_HALF_SPAN,
+    GRIPPER_DRIVER_CLOSE_RAD,
     GRIPPER_DRIVER_JOINT_IDX,
     GRIPPER_DRIVER_OPEN_RAD,
     GRIPPER_JOINT_RANGE,
     JOINTS_PER_ARM,
     MAX_MOVE_STEPS,
+    ROBOT_LEFT_BASE,
+    ROBOT_RIGHT_BASE,
     SIM_SUBSTEPS,
     STEPS_PER_CM,
+    WIDE_LEFT_Y,
+    WIDE_RIGHT_Y,
 )
 from newton.ik import IKObjectiveJointLimit, IKObjectivePosition, IKObjectiveRotation, IKSolver
 
@@ -310,6 +320,10 @@ SIM_DT = DT / SIM_SUBSTEPS  # test:124 solver dt (inner substep)
 IK_ITERATIONS = 100  # test:237 Levenberg-Marquardt iterations per solve_ik_dual call
 IK_STEP_SIZE = 1.0  # test:238 LM step size
 _BOX = int(mujoco.mjtGeom.mjGEOM_BOX)  # test:3800 (route-local const promoted; mjGEOM_BOX enum, for _clip2_geoms)
+# Recorder-meta (test:1783): the ANTI-REVERT marker lines pinned into the P3 demo meta. Read ONLY in the
+# DEMO_RECORD block (dead for Layer A byte-repro). Copied faithfully; when the recorder is wired (Layer B),
+# update to route_executor's OWN ANTI-REVERT marker lines (placed verbatim + banner in A4d).
+_ANTI_REVERT_MARKER_LINES = [4477, 4493, 4593]
 
 # Pre-allocated double-buffer physics state, created on the first ``physics_step`` call (test:1768).
 _physics_state_buffer = None
@@ -762,6 +776,777 @@ def _clip2_geoms(mjm, mjd, c2x, c2y):
         and abs(float(mjd.geom_xpos[g][0]) - c2x) < 0.03
         and abs(float(mjd.geom_xpos[g][1]) - c2y) < 0.03
     ]
+
+
+# =============================================================================
+# Module helpers copied for run_route (Layer A). _set_gripper_target (test:3019) is the CONTROL-level
+# gripper cadence (control.joint_target_pos read-set-assign) used by run_route -- DISTINCT from the
+# array-level set_gripper_target above (env-drive :738 / Layer B path); both legitimate, do not conflate.
+# The DQ7 _pj_* subsystem (test:3622-3690) is present-but-dead for Layer A byte-repro: PERTURB_INJECT
+# unset => _pj_load_schedule('') returns None => _inject_detour is a literal passthrough; kept faithful.
+# =============================================================================
+_PJ_ELIGIBLE = ("GRASP_DESCEND", "C2_REGRASP")
+
+
+_PJ_RELEASE_MARGIN = {"C2_REGRASP": 2}
+
+
+def _pj_load_schedule(path):
+    """Load the PERTURB_INJECT schedule [dict] or return None (off). Asserts every injection phase is eligible (v2 §B)."""
+    if not path:
+        return None
+    import json
+
+    with open(path) as fh:
+        raw = json.load(fh)
+    injs = raw.get("injections", [])
+    for e in injs:
+        assert e["phase"] in _PJ_ELIGIBLE, (
+            f"PERTURB_INJECT STOP: phase {e['phase']!r} not in eligible {_PJ_ELIGIBLE} "
+            f"(SKIP-phase injection forbidden -- mini-spec v2 §B _ph-eligibility assert)"
+        )
+    return {"by_key": {(e["phase"], int(e["kick_call_idx"])): e for e in injs}, "open": None, "seed": raw.get("seed")}
+
+
+def _pj_step(sched, rec, phase, call_idx, loop_len, tgl, tgr):
+    """Stateful kick-and-recover target wrap (v2 §A/§B): offsets ONE arm during the kick, passes through otherwise.
+
+    Opens a window at the scheduled (phase, kick_call_idx) (``rec.mark_injection`` start), holds it for kick_calls
+    calls, then closes it (``rec.mark_injection`` end) so the recorded ``[start_frame, end_frame)`` marks the kick.
+    The regrasp_ok release-margin guard (U5) refuses a kick that would still be open within the phase's
+    verdict-critical tail. NEVER offsets both arms (INVARIANT#1). Called ONLY when ``sched`` is not None (the
+    None-path literal passthrough is handled by the caller ``_inject_detour``).
+    """
+    op = sched.get("open")
+    if op is not None and call_idx >= op["end_call"]:  # release -> recovery begins
+        if rec is not None:
+            rec.mark_injection(event="end")
+        sched["open"] = op = None
+    if op is None:  # maybe start a new kick here
+        e = sched["by_key"].get((phase, call_idx))
+        if e is not None:
+            kc = int(e["kick_calls"])
+            if call_idx + kc <= loop_len - _PJ_RELEASE_MARGIN.get(phase, 0):
+                sched["open"] = op = {
+                    "phase": phase,
+                    "arm": e["arm"],
+                    "offset_m": list(e["offset_m"]),
+                    "end_call": call_idx + kc,
+                }
+                if rec is not None:
+                    rec.mark_injection(
+                        phase=phase,
+                        arm=e["arm"],
+                        offset_m=e["offset_m"],
+                        kick_calls=kc,
+                        seed=e.get("seed"),
+                        event="start",
+                    )
+            else:
+                print(
+                    f"  [PERTURB_INJECT] SKIP {phase} kick@call{call_idx} (+{kc}) breaches release-margin of "
+                    f"loop_len {loop_len} -> passthrough (regrasp_ok guard)"
+                )
+    if op is not None and op["phase"] == phase and call_idx < op["end_call"]:  # within the kick -> offset ONE arm
+        o = op["offset_m"]
+        if op["arm"] == "R":
+            return tgl, (tgr[0] + o[0], tgr[1] + o[1], tgr[2] + o[2])
+        return (tgl[0] + o[0], tgl[1] + o[1], tgl[2] + o[2]), tgr
+    return tgl, tgr
+
+
+def _set_gripper_target(control, driver_joints, target_rad):
+    """R-S6.6: schedule the gripper POSITION-servo target by writing ``control.joint_target_pos`` on the
+    driver dofs (the array SolverMuJoCo reads each step, solver_mujoco.py:362/:3606 -- NOT model-level,
+    so a runtime change takes effect). ``model.control()`` seeds it from the build-time OPEN target."""
+    tp = control.joint_target_pos.numpy()
+    for d in driver_joints:
+        tp[d] = float(target_rad)
+    control.joint_target_pos.assign(tp)
+    if _demo_rec is not None:  # P3 recorder: gripper CHOKEPOINT -> per-arm servo command (spec §2.2)
+        _demo_rec.note_grip(driver_joints, target_rad)
+
+
+# =============================================================================
+# section 13.7 run_route -- Layer A self-driving byte-repro subject. SCRIPTED verbatim extraction of the
+# Rs-LOCKED _run_mujoco_grasp_route (test:3692) with ONLY localized transforms (signature rename here;
+# C2 F11 in A4d). All inner closures are kept INNER-verbatim (max byte-fidelity, verbatim call sites);
+# the module-level extract-7 shadow-serve the Layer B step_target facade and are held byte-identical to
+# these inner copies by the section-12.4/item-1 ast semantic-equiv drift tripwire (standing gate).
+# Built incrementally A4b/c/d; the NotImplementedError tail = the next chunk boundary.
+# =============================================================================
+def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, record_video=False):
+    """M-Route-1 / M-Route-2 C1 (env-gate S6_GRASP_ROUTE=1): the BANKED centred grasp+lift (M-Grasp-engage-1) +
+    AERIAL TRANSPORT (GX 0.30 -> CLIP_X, both arms together) + a CONTINUOUS two-claw cage + drop-in seat@809.
+    CLIP_Y=0 = M-Route-1 (centred, X-only). CLIP_Y!=0 = M-Route-2 (DIAGONAL drag to an OFF-CENTRE clip, e.g. C1
+    (0.35,+0.150) CLIP_X=0.35 CLIP_Y=0.150): the route loop interpolates BOTH x and the grasp-centre yck while
+    holding the 88mm span (yck+-GHS) -> the LEFT arm STRETCHES (lateral ~0.456 near-reach) / the RIGHT FOLDS
+    (~0.156) = the asymmetric diagonal drag (INVARIANT#1-compliant: both arms move, neither parked). The seat
+    refs follow the gripped seg to y_clip; the cable<->clip mj_geomDistance AT seat = the real-seat proof.
+
+    FAITHFUL-TO-INTENT of the banked CPU r_s71_clip_dropin_72 (the ROUTE step :226-231: symmetric X move both
+    arms at z_lift); NOT a port of the legacy VBD do_p3_move/do_p4_push (先祖返り-fenced). REUSES ik_move_both /
+    the 2-phase コ close / the WR lift. The DROP-IN/seat (809) = M-Hook-1, a SEPARATE next milestone -- NOT here.
+    INVARIANTS untouched: 88mm span (Y=+-GHS), dual-arm both arms route together, DiffIK (ik_move_both), コ.
+
+    PRE-STEP caveat-a (%9 MANDATORY): centre the grasp on the SETTLED cable Y so BOTH arms contact symmetrically
+    (the 0.74mm off-centre cable gave L-deep/R-12um-hairgap; the drag load-tests the marginal RIGHT harder).
+    CONTINUOUS gate (%2 owns M2ii): at EVERY route waypoint, BOTH arms' f1ext must be UNDER the cable
+    (mj_geomDistance fromto = dz-VERTICAL, not lateral=beside) AND within the cage; + nodrop (sag<=10mm through
+    the WHOLE route); + caveat-d drag (the draping far-ends must not pull the span out / snag). CPU; grip-magnitude
+    + penetration NON-conservative x3 vs GPU. Emits [S6_ROUTE] + sys.exit (0 PASS / 2 FAIL).
+    """
+    import mujoco  # lazy: CPU mj_model/mj_data
+
+    assert scene_info.get("grasp_actuation"), "S6_GRASP_ROUTE needs build_scene(grasp_actuation=True)"
+    assert scene_info.get("cable_bodies"), "S6_GRASP_ROUTE needs a cable (run WITHOUT --no-cable)"
+    fk_model = scene_info["fk_model"]
+    control = scene_info["vbd_control"]
+    driver_joints = scene_info["driver_joints"]
+    cable_bodies = scene_info["cable_bodies"]
+    scene_info["gripper_dynamic"] = True
+    _set_gripper_target(control, driver_joints, GRIPPER_DRIVER_OPEN_RAD)
+
+    global _demo_rec
+    if os.environ.get("DEMO_RECORD", "0") == "1":  # P3 whole-route demo RECORDER (env-gated, read-only; spec §2)
+        from route_demo_recorder import RouteDemoRecorder
+
+        _demo_rec = RouteDemoRecorder(
+            scene_info,
+            EE_BODY_OFFSET,
+            driver_joints[:2],
+            driver_joints[2:],  # per-arm drivers, SSOT :1461
+            os.environ.get("DEMO_OUT", "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/demo_raw"),
+            {
+                "dt": DT,
+                "sim_dt": SIM_DT,
+                "sim_substeps": SIM_SUBSTEPS,
+                "device": DEVICE,
+                "solver_backend": scene_info.get("solver_backend"),
+                # F2: physics-model joint_label (74=2*JPA+cable), not fk_model.joint_key (28, wrong obj)
+                "joint_names": list(getattr(scene_info["model"], "joint_label", []) or []),
+                "joint_names_source": "physics_model.joint_label",
+                "arm_q_layout": {
+                    "l_arm": [0, JOINTS_PER_ARM],
+                    "r_arm": [JOINTS_PER_ARM, 2 * JOINTS_PER_ARM],
+                    "cable": [2 * JOINTS_PER_ARM, None],
+                },
+                # env-resolved (no hardcode); mirrors the route's own resolution (c1 :3543-3544 / c2 :3591-3592)
+                "resolved_clip_c1_xy": [
+                    float(os.environ.get("CLIP_X", "0.40")),
+                    float(os.environ.get("CLIP_Y", "0.0")),
+                ],
+                "resolved_clip_c2_xy": [
+                    float(os.environ.get("CLIP2_X", str(CLIP_POSITIONS[1][0]))),
+                    float(os.environ.get("CLIP2_Y", str(CLIP_POSITIONS[1][1]))),
+                ],
+                "anti_revert_marker_lines": _ANTI_REVERT_MARKER_LINES,
+            },
+        )
+
+    def _ph(name):  # P3 recorder: label the native route section (forward, at each block start; spec §2.6)
+        if _demo_rec is not None:
+            _demo_rec.set_phase(name)
+
+    # DQ7 (ii): load the injection schedule ONCE (None when PERTURB_INJECT is unset -> hook = literal passthrough).
+    _pj_sched = _pj_load_schedule(os.environ.get("PERTURB_INJECT", ""))
+
+    def _inject_detour(phase_name, call_idx, loop_len, tgl, tgr):
+        """kick-and-recover hook wrapping an ik_move_both target arg (v2 §B). None-path = LITERAL passthrough."""
+        if _pj_sched is None:
+            return (
+                tgl,
+                tgr,
+            )  # U11/C1 byte-identity: returns the EXACT target tuples unchanged (pure-Python, no round-trip)
+        return _pj_step(_pj_sched, _demo_rec, phase_name, call_idx, loop_len, tgl, tgr)
+
+    GHS = (WIDE_RIGHT_Y - WIDE_LEFT_Y) / 2.0  # 0.044 = 88mm span INVARIANT#2
+    z_grasp = 1.0668  # banked WR cradle (M-Grasp-engage-1 validated)
+    z_high = z_grasp + 0.10
+    # W0-e transport-clearance raise (Rs 2026-07-05「c1 搬送で高さ不足→clip 上面かする」, /geometric-design gate):
+    # 0.05->0.08 (+30mm) so the transported cable centre clears the clip high-wall top (850mm @float20) + cable r4 +
+    # margin5 = >=859mm (measured baseline 831mm scraped). GLOBAL (nominal too = Rs baseline correction -> new sha).
+    # Also lands the C1_SEAT-else descent START above the clip -> the existing v1 X-comp descent seats VERTICALLY (no
+    # wall-ride) = the v2 physics re-expressed in COORDINATES, no new legs (step-table-faithful). env-overridable to tune.
+    LIFT_M, LIFT_SUBSTEPS = float(os.environ.get("W0E_LIFT_M", "0.08")), 12
+    z_lift = z_grasp + LIFT_M  # aerial transport height (lift end)
+    x_grasp = GRASP_X  # 0.30
+    x_clip = float(os.environ.get("CLIP_X", "0.40"))  # banked void-cleared target (NOT C3 0.35 on the void)
+    y_clip = float(os.environ.get("CLIP_Y", "0.0"))  # M-Route-2: off-centre clip Y (C1=+0.150); 0.0 = centred M-Route-1
+    N_ROUTE = 6  # banked r_s71:228 symmetric X waypoints
+    GRASP_YC = 0.0  # nominal; caveat-a re-centres on the settled cable below
+
+    mjm, mjd = getattr(solver, "mj_model", None), getattr(solver, "mj_data", None)
+    assert mjm is not None and mjd is not None, "S6_GRASP_ROUTE needs CPU mj_model/mj_data"
+    _freeze_scope_rec = None  # PERCLIP_PIN (b)-pin freeze-scope record (%3 charter); persisted into metrics below
+    _c2_settle_rec = None  # C2_DUALSEAT release-and-settle record (%0 seat-capture concern, charter metric #3)
+    _c2_regrasp_rec = (
+        None  # C2_DUALSEAT R re-grasp record (Rs guide-data charter: R-reach + R-grip-nonzero, %0 cross-PV)
+    )
+    _BOX, _CAP = int(mujoco.mjtGeom.mjGEOM_BOX), int(mujoco.mjtGeom.mjGEOM_CAPSULE)
+
+    def _gn(gi):
+        return (mujoco.mj_id2name(mjm, mujoco.mjtObj.mjOBJ_GEOM, int(gi)) or "").lower()
+
+    pad_geoms = [
+        g for g in range(mjm.ngeom) if int(mjm.geom_type[g]) == _BOX and ("pad1" in _gn(g) or "pad2" in _gn(g))
+    ]
+    f1_geoms = [g for g in range(mjm.ngeom) if int(mjm.geom_type[g]) == _BOX and "f1ext" in _gn(g)]  # BOTTOM claw
+    f2_geoms = [g for g in range(mjm.ngeom) if int(mjm.geom_type[g]) == _BOX and "f2ext" in _gn(g)]  # TOP claw
+    cable_geoms = [g for g in range(mjm.ngeom) if int(mjm.geom_type[g]) == _CAP]
+
+    # PART 1 GATE-FIX (%2 log:6738 two-claw cage): retention = the cable is SANDWICHED between the two claws
+    # (f1ext bottom + f2ext top, mouth ~10mm, Ø8 cable -> ~2mm play; GD-KoShape-Finger.md:51-58) AND laterally
+    # within the claw footprint. The OLD f1ext-only gate false-FAILed "cable risen to the TOP claw under drag"
+    # (f1_gap grows but f2 holds it = still caged). New PASS = |f1_gap + Ø8 + f2_gap - mouth| <= tol  AND
+    # |cable_x - claw_x| < claw half-extent. Real escape is LATERAL (out the open コ mouth, world X = route axis).
+    CABLE_DIAM_MM = 2.0 * CABLE_RADIUS * 1e3  # 8.0
+    MOUTH_MM = 10.0  # f1ext<->f2ext inner gap (GD-KoShape-Finger.md:58)
+    SAND_TOL_MM = 3.0  # cable "between claws" if f1+Ø8+f2 in [7,13]mm (snug rests-on-bottom sum=10; drag-to-top sum=10)
+    LATERAL_MAX_MM = 9.0  # claw half-extent in the closing axis (pad-local half_y 0.009; GD-KoShape-Finger.md:51-54)
+    # PART 2 M-Hook-1 (banked r_s71_clip_dropin_72): drop-in onto the REAL collidable clip at (CLIP_X, CLIP_Y).
+    REL_CABLE_Z = float(os.environ.get("REL_CABLE_Z", "0.820"))  # banked depth: lower the claw to the wall top
+    # CLIP_FLOAT_Z (human-Rs FLOAT-the-clips probe, 0-commit): the SAME h read in build_scene (clip boxes). Here it
+    # floats the cable SEAT target (GROOVE_CENTER_Z+h), the gripper DESCENT target (seat_ee_z/c2_seat_ee_z = seat+ee_off),
+    # and the retention wall criterion (LOW_WALL_TOP = CLIP1_Z+h+0.020). TABLE_HEIGHT STAYS 0.80 (the table is what the
+    # float clears). DEFAULT 0.0 -> byte-identical. NOTE: GRASP_Z/PUSH_Z (task_config) are the LEGACY P1-P4 path, NOT
+    # used by route_c1_c2 -> the route descent target is GROOVE_CENTER_Z+ee_off (dynamic), floated below.
+    _clip_float_z = float(os.environ.get("CLIP_FLOAT_Z", "0.0"))
+    _ROUTE_C2 = os.environ.get("S13_ROUTE_C2", "0") == "1"  # %3 Rs C1->C2 routing directive (half-unclamp + guide)
+    DO_HOOK = (os.environ.get("S6_HOOK", "1") == "1") and not _ROUTE_C2  # C1->C2 supplies its own clamped seat
+    _clip_collidable = os.environ.get("CLIP_COLLISION", "0") == "1"
+    # C2 (Rs directive): canonical CLIP_POSITIONS[1]=(0.40,+0.075); overridable for sweeps. Used by _clip2_geoms
+    # (the cable<->C2 reach proof) and the §運用14 C2 label/camera. Built only when CLIP2=1 (build_scene).
+    c2x = float(os.environ.get("CLIP2_X", str(CLIP_POSITIONS[1][0])))
+    c2y = float(os.environ.get("CLIP2_Y", str(CLIP_POSITIONS[1][1])))
+
+    def _min_dist_mm(setA, setB):
+        mujoco.mj_forward(mjm, mjd)
+        d = 1e9
+        for a in setA:
+            for b in setB:
+                d = min(d, mujoco.mj_geomDistance(mjm, mjd, a, b, 0.05, np.zeros(6)))
+        return d * 1000.0
+
+    def _clip_geoms():
+        # %9 ADD (real-seat proof): the clip's collision BOXes for the cable<->clip mj_geomDistance AT seat (vs an
+        # ee_off-stale FALSE-seat; M-Hook-1 gave -0.053mm). The 5 clip parts are small worldbody (bodyid 0) BOXes
+        # clustered at (x_clip, y_clip); the table (also worldbody) is centred far in Y -> excluded by the XY gate.
+        mujoco.mj_forward(mjm, mjd)
+        return [
+            g
+            for g in range(mjm.ngeom)
+            if int(mjm.geom_type[g]) == _BOX
+            and int(mjm.geom_bodyid[g]) == 0
+            and abs(float(mjd.geom_xpos[g][0]) - x_clip) < 0.03
+            and abs(float(mjd.geom_xpos[g][1]) - y_clip) < 0.03
+        ]
+
+    def _clip2_geoms():
+        # C2 (Rs C1->C2 routing): the SECOND clip's collision BOXes near (c2x, c2y) for the cable<->C2 mj_geomDistance
+        # reach/seat proof. Same worldbody-BOX-near-XY filter as _clip_geoms but centred on C2 (C1 excluded: dx>=50mm).
+        mujoco.mj_forward(mjm, mjd)
+        return [
+            g
+            for g in range(mjm.ngeom)
+            if int(mjm.geom_type[g]) == _BOX
+            and int(mjm.geom_bodyid[g]) == 0
+            and abs(float(mjd.geom_xpos[g][0]) - c2x) < 0.03
+            and abs(float(mjd.geom_xpos[g][1]) - c2y) < 0.03
+        ]
+
+    def _table_geoms():
+        # the LARGE worldbody BOXes = the table (1 solid box, or the 4 grasp-slot boxes). Small clip BOXes (<=25mm)
+        # are excluded by the size gate -> separates a "claw vs SOLID table JAM" from a "claw vs cable/clip" contact
+        # (OPS-SUP cross-PV flag 2: the C2-over-solid jam is geometry, NOT the cable-physics drag).
+        return [
+            g
+            for g in range(mjm.ngeom)
+            if int(mjm.geom_type[g]) == _BOX and int(mjm.geom_bodyid[g]) == 0 and float(np.max(mjm.geom_size[g])) > 0.05
+        ]
+
+    def _cage_pair(arm_geoms):
+        # closest (claw <-> cable) pair for this arm's claw-set: (dist_mm, fromto6, claw_gid, cable_gid).
+        # fromto = [claw_pt(3), cable_pt(3)]; gap = cable_pt - claw_pt.
+        mujoco.mj_forward(mjm, mjd)
+        best_d, best_ft, best_claw, best_cab = 1e9, None, -1, -1
+        for a in arm_geoms:
+            for b in cable_geoms:
+                ft = np.zeros(6)
+                d = mujoco.mj_geomDistance(mjm, mjd, a, b, 0.06, ft)
+                if d < best_d:
+                    best_d, best_ft, best_claw, best_cab = d, ft.copy(), a, b
+        return best_d * 1000.0, best_ft, best_claw, best_cab
+
+    def _cage(f1set, f2set):
+        # %2 two-claw cage (PART 1 GATE-FIX): the cable is HELD iff (a) it is SANDWICHED between the bottom
+        # (f1ext) and top (f2ext) claws -- |f1_gap + Ø8 + f2_gap - mouth| <= tol -- AND (b) laterally within the
+        # claw footprint -- |cable_x - claw_x| < claw half-extent (the open コ mouth faces world X = the route axis).
+        d1, ft1, claw1, cab1 = _cage_pair(f1set)  # bottom claw
+        d2, _ft2, _c2, _b2 = _cage_pair(f2set)  # top claw
+        sand_sum = d1 + CABLE_DIAM_MM + d2
+        sandwiched = bool(abs(sand_sum - MOUTH_MM) <= SAND_TOL_MM)
+        vert1 = False  # f1ext fromto mostly-vertical = the bottom claw UNDER the cable (form-closure direction)
+        if ft1 is not None:
+            g = ft1[3:6] - ft1[0:3]
+            gn = float(np.linalg.norm(g)) + 1e-9
+            vert1 = bool(abs(g[2]) / gn > 0.6)
+        lateral_mm = 9e9
+        if claw1 >= 0 and cab1 >= 0:
+            lateral_mm = abs(float(mjd.geom_xpos[cab1][0] - mjd.geom_xpos[claw1][0])) * 1e3
+        lateral_ok = bool(lateral_mm < LATERAL_MAX_MM)
+        held = bool(sandwiched and lateral_ok)
+        return {
+            "f1": round(d1, 3),
+            "f2": round(d2, 3),
+            "sand": round(sand_sum, 2),
+            "sandwiched": sandwiched,
+            "f1_vert": vert1,
+            "lat": round(lateral_mm, 2),
+            "lat_ok": lateral_ok,
+            "held": held,
+        }
+
+    def _cable_z():
+        wp.synchronize()
+        return float(np.mean(state.body_q.numpy()[cable_bodies, 2]))
+
+    def _seg_z_mm(y_ref):
+        # gripped-segment z [mm]: the cable bodies WITHIN the grasp span (|Y - y_ref| <= GHS) -- the held middle
+        # that travels to the clip + seats. NOT the whole-cable mean (the 600mm rod's far ends dilute it = the
+        # M-Grasp-engage artifact). Seated z~=809 (GROOVE_CENTER_Z); resting on the clip top ~834.
+        wp.synchronize()
+        bq = state.body_q.numpy()[cable_bodies]
+        m = np.abs(bq[:, 1] - y_ref) <= GHS
+        return float(np.mean(bq[m, 2]) if np.any(m) else np.mean(bq[:, 2])) * 1e3
+
+    def _arm_split():
+        # split BOTH claw-sets into (f1_L, f1_R, f2_L, f2_R) by world-Y about the grasp centre.
+        mujoco.mj_forward(mjm, mjd)
+        gy = mjd.geom_xpos[:, 1]
+        return (
+            [g for g in f1_geoms if gy[g] < GRASP_YC],
+            [g for g in f1_geoms if gy[g] >= GRASP_YC],
+            [g for g in f2_geoms if gy[g] < GRASP_YC],
+            [g for g in f2_geoms if gy[g] >= GRASP_YC],
+        )
+
+    # --- §運用14 GL-free render (mujoco.Renderer + matplotlib, like M-Grasp-engage-1) ---
+    _renderer = None
+    _frames_dir = os.path.join(output_dir or ".", "_route_frames")
+    _fidx = [0]
+    _cams = []
+    if record_video:
+        import matplotlib
+
+        matplotlib.use("Agg")
+        os.makedirs(_frames_dir, exist_ok=True)
+        for _old in os.listdir(_frames_dir):
+            if _old.endswith(".png"):
+                os.remove(os.path.join(_frames_dir, _old))
+        _renderer = mujoco.Renderer(mjm, height=480, width=640)
+        mjm.vis.headlight.ambient[:] = [0.5, 0.5, 0.5]
+        mjm.vis.headlight.diffuse[:] = [0.85, 0.85, 0.85]
+        _mx = 0.5 * (x_grasp + x_clip)
+        _my = 0.5 * (0.0 + y_clip)  # diagonal-route midpoint Y (grasp centre 0 -> off-centre clip y_clip)
+        _camspec = [
+            ([_mx, _my, 0.85], 90.0, -6.0, 0.46, "side X-Z: aerial diagonal transport, cable held?"),
+            ([x_clip, y_clip, 0.83], 0.0, -14.0, 0.24, "front Y-Z @clip: steep slot-descent into the groove?"),
+            ([_mx, _my, 0.86], 235.0, -22.0, 0.50, "oblique diagonal"),
+        ]
+        if os.environ.get("CLIP_DELTAH", "0") == "1" or os.environ.get("S13_TAIL_HOLD", "0") == "1":
+            # %3 video-confirm probe (2026-06-30): add overhead + a tight FRONT zoom on body30<->clip (the delta-h
+            # escape / B tail-hold retention) + a tight zoom on the adjacent-below region (claw <-> clip Y-edge =
+            # the re-grasper claw). Shared by CLIP_DELTAH and the S13_TAIL_HOLD (direction-B) retention probe.
+            _camspec += [
+                ([x_clip, y_clip, 0.81], 90.0, -82.0, 0.30, "overhead: seat + claws (top-down)"),
+                ([x_clip, y_clip, 0.815], 0.0, -10.0, 0.085, "ZOOM front: body30 in the OPEN-TOP groove (escape?)"),
+                ([x_clip, y_clip - 0.013, 0.808], 28.0, -8.0, 0.11, "ZOOM: adjacent-below claw <-> clip Y-edge"),
+            ]
+        if os.environ.get("S13_FEED", "0") == "1":
+            # しごき slide-through (option-1 CORRECTED): CLAW-LOCAL zoom on the FEED hand. (a) FRONT Y-Z spanning
+            # the seat AND the feed lane -> the cable runs left-right (Y); SLIDE = the cable stays put while the
+            # finger moves; DRAG = the cable moves with the finger. (b) SIDE X-Z tight on the feed claw -> the
+            # cradle wrap. The seat (clip groove) is kept in (a) throughout.
+            _camspec += [
+                (
+                    [x_clip, y_clip - 0.020, 0.812],
+                    0.0,
+                    -10.0,
+                    0.17,
+                    "ZOOM front Y-Z: seat + FEED hand (cable SLIDE vs DRAG)",
+                ),
+                ([x_clip, y_clip - 0.040, 0.810], 90.0, -10.0, 0.11, "ZOOM side X-Z: FEED claw cradles cable"),
+            ]
+        if _ROUTE_C2:
+            # %3 Rs C1->C2 routing: (a) OVERHEAD over both clips + the cable path, (b) a FRONT Y-Z spanning the C1
+            # seat and the L guide toward C2, (c) a CLAW-LOCAL zoom on the L half-clamp (slide vs drag), (d) an
+            # oblique of both arms. lookat = the C1<->C2 midpoint so both clips stay in frame.
+            _midx, _midy = 0.5 * (x_clip + c2x), 0.5 * (y_clip + c2y)
+            _camspec += [
+                ([_midx, _midy, 0.81], 90.0, -80.0, 0.42, "OVERHEAD: C1+C2 + cable path (both clips)"),
+                ([_midx, _midy, 0.83], 0.0, -12.0, 0.36, "front Y-Z: C1 seat + L half-clamp GUIDE toward C2"),
+                ([x_clip, y_clip - 0.030, 0.812], 35.0, -8.0, 0.13, "ZOOM L claw: half-clamp + cable SLIDE vs DRAG"),
+                ([_midx, _midy, 0.85], 235.0, -22.0, 0.46, "oblique: both arms, C1->C2 route"),
+            ]
+            # §運用14 clip coloring for the mj render: C1 green / C2 cyan (geom_rgba is render-only, no physics).
+            for _cg in _clip_geoms():
+                mjm.geom_rgba[_cg] = [0.20, 0.80, 0.35, 1.0]
+            for _cg in _clip2_geoms():
+                mjm.geom_rgba[_cg] = [0.10, 0.70, 0.92, 1.0]
+        for _la, _az, _el, _d, _t in _camspec:
+            _c = mujoco.MjvCamera()
+            _c.type = mujoco.mjtCamera.mjCAMERA_FREE
+            _c.lookat[:] = _la
+            _c.distance, _c.azimuth, _c.elevation = _d, _az, _el
+            _cams.append((_t, _c))
+
+    # L/R EE label overlay (Rs frame-clarity 2026-06-30): R = +Y-side arm (anchor/holder, ROBOT_RIGHT_BASE Y=+0.35),
+    # L = -Y-side arm (mover/しごき, ROBOT_LEFT_BASE Y=-0.35). get_ee_positions returns (left, right).
+    _LABEL_LR = bool(record_video and (os.environ.get("S13_FEED", "0") == "1" or _ROUTE_C2))
+    _LABEL_CLIPS = bool(record_video and _ROUTE_C2)  # draw C1/C2 clip labels for the routing video
+    _fovy = float(mjm.vis.global_.fovy) if (record_video and mjm is not None) else 45.0
+
+    def _world_to_pixel(p, cam, W=640, H=480):  # project a world pt to image px for a FREE MjvCamera
+        azr, elr = np.radians(cam.azimuth), np.radians(cam.elevation)
+        fwd = np.array([np.cos(elr) * np.cos(azr), np.cos(elr) * np.sin(azr), np.sin(elr)])  # camera -> lookat
+        eye = np.array(cam.lookat, dtype=float) - cam.distance * fwd
+        right = np.cross(fwd, np.array([0.0, 0.0, 1.0]))
+        rn = float(np.linalg.norm(right))
+        if rn < 1e-9:
+            return None
+        right /= rn
+        up = np.cross(right, fwd)
+        rel = np.array(p, dtype=float) - eye
+        zc = float(np.dot(rel, fwd))
+        if zc <= 1e-6:
+            return None
+        f = (H / 2.0) / np.tan(np.radians(_fovy) / 2.0)
+        px = W / 2.0 + f * float(np.dot(rel, right)) / zc
+        py = H / 2.0 - f * float(np.dot(rel, up)) / zc
+        if -25 <= px <= W + 25 and -25 <= py <= H + 25:
+            return float(px), float(py)
+        return None
+
+    def _cap(phase):
+        if _renderer is None:
+            return
+        import matplotlib.pyplot as plt
+
+        mujoco.mj_forward(mjm, mjd)
+        imgs = []
+        for _nm, _c in _cams:
+            _renderer.update_scene(mjd, camera=_c)
+            _im = _renderer.render().astype(np.float32) * 1.3
+            imgs.append(np.clip(_im, 0, 255).astype(np.uint8))
+        _ncw = len(imgs)
+        fig, axes = plt.subplots(1, _ncw, figsize=(15, 4.6) if _ncw <= 3 else (5.0 * _ncw, 4.6))
+        for ax, im, (nm, _c2) in zip(axes, imgs, _cams):
+            ax.imshow(im)
+            ax.axis("off")
+            ax.set_title(nm, fontsize=7.5, color="0.3")
+            if _LABEL_LR:
+                try:
+                    _pl_ee, _pr_ee = get_ee_positions(state, scene_info)
+                    # label at CLAW level (EE - ~0.24m in Z = the pinch/claw the zoom cameras frame), NOT the EE
+                    # body (~0.25m higher -> off the tight zoom frames). X,Y still identify L(-Y) vs R(+Y).
+                    _pl = (float(_pl_ee[0]), float(_pl_ee[1]), float(_pl_ee[2]) - 0.24)
+                    _pr = (float(_pr_ee[0]), float(_pr_ee[1]), float(_pr_ee[2]) - 0.24)
+                    for _pp, _lab, _col in ((_pl, "L", "#19e64b"), (_pr, "R", "#ff2bd6")):
+                        _pxy = _world_to_pixel(_pp, _c2)
+                        if _pxy is not None:
+                            ax.text(
+                                _pxy[0],
+                                _pxy[1],
+                                _lab,
+                                color=_col,
+                                fontsize=11,
+                                fontweight="bold",
+                                ha="center",
+                                va="center",
+                                clip_on=True,
+                                bbox=dict(boxstyle="round,pad=0.12", fc="black", ec=_col, alpha=0.55),
+                            )
+                except Exception:  # noqa: BLE001
+                    pass
+            if _LABEL_CLIPS:
+                try:
+                    for _cp, _clab, _ccol in (
+                        ((x_clip, y_clip, CLIP1_Z + _clip_float_z + 0.026), "C1", "#27e060"),
+                        ((c2x, c2y, CLIP1_Z + _clip_float_z + 0.026), "C2", "#19c8ee"),
+                    ):
+                        _cpxy = _world_to_pixel(_cp, _c2)
+                        if _cpxy is not None:
+                            ax.text(
+                                _cpxy[0],
+                                _cpxy[1],
+                                _clab,
+                                color=_ccol,
+                                fontsize=10,
+                                fontweight="bold",
+                                ha="center",
+                                va="center",
+                                clip_on=True,
+                                bbox=dict(boxstyle="round,pad=0.12", fc="black", ec=_ccol, alpha=0.6),
+                            )
+                except Exception:  # noqa: BLE001
+                    pass
+        _supt = (
+            f"C1->C2 §運用14 ({DEVICE}) — seat C1 (full-clamp) -> L HALF-unclamp -> guide toward C2 — {phase}"
+            if _ROUTE_C2
+            else f"M-Route §運用14 ({DEVICE}) — centred grasp+lift + DIAGONAL transport "
+            f"GX0.30,Y0 -> clip({x_clip:.2f},{y_clip:+.2f}) + drop-in seat@809 — {phase}"
+        )
+        fig.suptitle(_supt, fontsize=8.5)
+        fig.subplots_adjust(left=0.01, right=0.99, top=0.86, bottom=0.01, wspace=0.02)
+        fig.savefig(os.path.join(_frames_dir, f"f{_fidx[0]:05d}.png"), dpi=98)
+        plt.close(fig)
+        _fidx[0] += 1
+
+    # seeds + settle
+    seed_l = [3.194257, -1.979768, 1.6, -1.853054, 2.0, -1.518132]
+    seed_r = [-0.052664, -1.161825, -1.6, -1.288538, -2.0, -1.62346]
+    fk_jq = fk_state.joint_q.numpy()
+    fk_jq[0:ARM_DOF] = seed_l
+    fk_jq[JOINTS_PER_ARM : JOINTS_PER_ARM + ARM_DOF] = seed_r
+    for j in GRIPPER_JOINT_RANGE:
+        fk_jq[j] = 0.0
+        fk_jq[JOINTS_PER_ARM + j] = 0.0
+    fk_state.joint_q.assign(fk_jq)
+    newton.eval_fk(fk_model, fk_state.joint_q, fk_state.joint_qd, fk_state)
+    state = model.state()
+    for _ in range(10):
+        state = physics_step(model, state, solver, contacts, scene_info)
+
+    # PRE-STEP caveat-a: re-centre GRASP_YC on the SETTLED cable Y (the cable bodies within the grasp region),
+    # preserving the 88mm span (arms = GRASP_YC +- GHS). Symmetrises the L/R f1ext for the drag.
+    # %3 over-void test (Rs (b) routing-port auth, 2026-06-29): re-centre the grasp on S6_ENGAGE_YC (= the
+    # void+clip Y) so grasp+void+clip CO-LOCATE at C1-over-void (the banked grasp_y=None strategy-ii config,
+    # build:1066). DEFAULT S6_ENGAGE_YC=0 -> _grasp_at=0 -> |Y-0|<0.10 = the array centre = BYTE-IDENTICAL.
+    _grasp_at = float(os.environ.get("S6_ENGAGE_YC", "0.0"))
+    wp.synchronize()
+    _cy_all = state.body_q.numpy()[cable_bodies, 1]
+    _near = _cy_all[np.abs(_cy_all - _grasp_at) < 0.10]  # grasp-region cable bodies (|Y - grasp_at|<100mm)
+    GRASP_YC = float(np.mean(_near)) if _near.size else _grasp_at
+    print(
+        f"  [S6_ROUTE] caveat-a: settled-cable-centre GRASP_YC={GRASP_YC * 1e3:+.2f}mm "
+        f"(grasp_at={_grasp_at * 1e3:+.0f}mm arms +-{GHS * 1e3:.0f}mm = 88 span)"
+    )
+
+    # W0-e F-1b (Y-phase retreat, spec v0.9 + %12 (A)-injection 2026-07-05): shift the grasp centre GRASP_YC by
+    # a common-mode Δy so the WHOLE route forms the buckle at the TARGET phase (== S6_ENGAGE_YC grasp-Y knob class;
+    # the C1_SEAT descent target stays FULLY nominal). B1 = phase-periodic (floor_mod(dy,15)->7.5), B2 = absolute
+    # one-sided ([10.5,13.5]->10.0). offset-gated (dy!=0) + W0E_F1B flag -> (0,0) BYTE-IDENTICAL (no shift/print).
+    # config-derived operand (NO node-state read; bright-line 4). SIM-ONLY: node-lattice artifact (real cable has
+    # no node phase) -- excluded from the real playbook. provenance: cuda:0 + build sha (PREREG U).
+    _dy_off_mm = float(scene_info.get("cable_xy_offset", (0.0, 0.0))[1]) * 1e3
+    if _dy_off_mm != 0.0 and os.environ.get("W0E_F1B", "1") == "1":
+        _dphase = _dy_off_mm % 15.0  # Python floor-mod (B1 operand; -10 -> 5)
+        _dygr = None
+        _f1b_mode = None
+        # W0-e F-1b'' 150mm band re-derivation (mapping B, Rs "進めて" 2026-07-06, two-key agree): ADOPT snap-DOWN only.
+        # phi in (0,7.5] -> Delta = -phi (snap grasp dy to the nearest LOWER 15-lattice node). phi>7.5 (snap-UP) NOT
+        # adopted -> falls through to the committed B1/B2 bands (== 81-run behavior on phi10 cols, known fail annotated).
+        # snap-down REPLACES B1 [2.5,6.5] (its 7.5 target is counterproductive at 150mm, PREREG-confirmed; snap-down's
+        # if is FIRST -> precedence). production flag W0E_F1B_SNAPDOWN. offset-gated (dy!=0) -> C-0 (0,0) byte-id UNTOUCHED.
+        if os.environ.get("W0E_F1B_SNAPDOWN", "0") == "1" and 0.0 < _dphase <= 7.5:
+            _dygr = -_dphase
+            _f1b_mode = "SNAPDOWN(phi->0)"
+        elif 2.5 <= _dphase <= 6.5:  # B1 phase-periodic band -> retreat phase to 7.5 (cross-period correct)
+            _dygr = _dphase - 7.5
+            _f1b_mode = "B1-retreat"
+        elif 10.5 <= _dy_off_mm <= 13.5:  # B2 absolute one-sided band (positive dy) -> retreat to dy 10.0
+            _dygr = _dy_off_mm - 10.0
+            _f1b_mode = "B2-retreat"
+        if _dygr is not None:
+            _dygr = float(np.clip(_dygr, -7.5, 7.5))  # |Delta_y| <= 7.5mm (H2; observed max 5.0)
+            GRASP_YC += _dygr * 1e-3
+            print(
+                f"  [W0E-F1B] {_f1b_mode}: dy={_dy_off_mm:+.2f}mm phi={_dphase:.2f} Delta={_dygr:+.2f}mm "
+                f"GRASP_YC={GRASP_YC * 1e3:+.2f}mm; SIM-ONLY node-lattice artifact"
+            )
+
+    # fix-5 (Rs A / Opt-1, 2026-07-03): X analog of caveat-a -- re-centre x_grasp on the SETTLED cable X,
+    # offset-gated (dx != 0 only; scene_info :1668 collapses None/(0,0) -> (0,0) so None / (0,dy) / nominal
+    # keep the constant-X banked trajectory = byte-identical BY CONSTRUCTION). Cable || Y -> region X approx
+    # const -> mean well-defined. Fixes b2_cpA_reach_screen_finding.md (canonical route had ZERO cable-X
+    # follow; the legacy do_p1_grasp grasp_dy is inert on this path).
+    if scene_info.get("cable_xy_offset", (0.0, 0.0))[0] != 0.0:
+        _cx_near = state.body_q.numpy()[cable_bodies, 0][np.abs(_cy_all - _grasp_at) < 0.10]  # same mask as caveat-a
+        if _cx_near.size:
+            x_grasp = float(np.mean(_cx_near))
+        print(
+            f"  [S6_ROUTE] caveat-a-X: settled-cable-X x_grasp={x_grasp * 1e3:+.2f}mm "
+            f"(nominal GRASP_X={GRASP_X * 1e3:+.0f}mm, delta={(x_grasp - GRASP_X) * 1e3:+.2f}mm)"
+        )
+
+    def tgt(x, z):
+        return (x, GRASP_YC - GHS, z), (x, GRASP_YC + GHS, z)
+
+    def tgt2(x, yc, z):
+        # M-Route-2 C1: diagonal target with a MOVING grasp centre yc (interp GRASP_YC -> y_clip); the 88mm span is
+        # preserved (yc +- GHS = INVARIANT#2). For y_clip=0 (centred M-Route-1) tgt2(x, GRASP_YC, z) == tgt(x, z).
+        return (x, yc - GHS, z), (x, yc + GHS, z)
+
+    def _w0e_guarded_cx(y_ref, x_ref):
+        # W0-e common guarded crossing-X selector (spec v0.9 cluster A): mean cable-body X within the Y window
+        # |y-y_ref|<=7.5mm AND the X plausibility window |x-x_ref|<=30mm (offline-validated: n=1, 0 tail-hijack
+        # on all 81 cells, validate_measurands.py:54-57). Returns (mean_x_m, n_nodes); (None, 0) if the window is
+        # empty (plausibility reject). Reads the LIVE `state` by closure (same pattern as _zc1).
+        wp.synchronize()
+        _P = state.body_q.numpy()[cable_bodies]
+        _m = (np.abs(_P[:, 1] - y_ref) <= 0.0075) & (np.abs(_P[:, 0] - x_ref) <= 0.030)
+        if not _m.any():
+            return None, 0
+        return float(_P[_m, 0].mean()), int(_m.sum())
+
+    # --- GRASP + LIFT (reuse the validated M-Grasp-engage-1 orchestration) ---
+    _ph("GRASP_HOVER")
+    ok = {}
+    state, ok["hover"] = ik_move_both(
+        model,
+        state,
+        scene_info,
+        solver,
+        contacts,
+        *tgt(x_grasp, z_high),
+        label="ROUTE-HOVER",
+        converge_mm=8.0,
+        speed_factor=0.2,
+        warmstart_jq=fk_jq,
+    )
+    _cap("HOVER")
+    _ph("GRASP_DESCEND")
+    ok["descend"] = True
+    for k in range(1, 9):
+        zk = z_high + (z_grasp - z_high) * k / 8
+        _dl, _dr = _inject_detour(
+            "GRASP_DESCEND", k, 8, *tgt(x_grasp, zk)
+        )  # DQ7 (ii): kick-and-recover (None-path passthrough)
+        state, okk = ik_move_both(
+            model,
+            state,
+            scene_info,
+            solver,
+            contacts,
+            _dl,
+            _dr,
+            label=f"ROUTE-DESCEND{k}/8",
+            converge_mm=2.5,
+            speed_factor=0.25,
+        )
+        ok["descend"] = ok["descend"] and bool(okk)
+        _cap(f"DESCEND {k}/8")
+    # 2-PHASE cage90 close (validated capture-then-gentle)
+    _ph("GRASP_CLOSE")
+    CAGE_FRAC = 0.9
+    cage_rad = GRIPPER_DRIVER_OPEN_RAD + (GRIPPER_DRIVER_CLOSE_RAD - GRIPPER_DRIVER_OPEN_RAD) * CAGE_FRAC
+    _set_gripper_target(control, driver_joints, cage_rad)
+    for _ in range(30):
+        state = physics_step(model, state, solver, contacts, scene_info)
+    _cap("CAGE 90%")
+    for ck in range(1, 13):
+        ctgt = cage_rad + (GRIPPER_DRIVER_CLOSE_RAD - cage_rad) * ck / 12
+        _set_gripper_target(control, driver_joints, ctgt)
+        for _ in range(12):
+            state = physics_step(model, state, solver, contacts, scene_info)
+        if ck % 3 == 0:
+            _cap(f"CLAMP {ck}/12")
+    for _ in range(40):
+        state = physics_step(model, state, solver, contacts, scene_info)
+    _cap("CLOSED")
+    # M-Hook-1: capture the EE->gripped-cable z offset at close (BEFORE the route), the banked
+    # r_s71_clip_dropin_72:216-218 convention. NOT re-measured after the route, so the drag-loosening
+    # (cable migrates UP in the cage) is NOT compensated -> the drop-in faithfully TESTS %9's integration
+    # concern (does the loosened post-route cable still seat at 809, or rest high on the clip top ~834?).
+    ee_off = float(get_ee_positions(state, scene_info)[1][2]) - _seg_z_mm(GRASP_YC) / 1e3
+    _ph("LIFT")
+    ok["lift"] = True
+    for k in range(1, LIFT_SUBSTEPS + 1):
+        zl = z_grasp + LIFT_M * k / LIFT_SUBSTEPS
+        state, okk = ik_move_both(
+            model,
+            state,
+            scene_info,
+            solver,
+            contacts,
+            *tgt(x_grasp, zl),
+            label=f"ROUTE-LIFT{k}/{LIFT_SUBSTEPS}",
+            converge_mm=3.0,
+            speed_factor=0.3,
+        )
+        ok["lift"] = ok["lift"] and bool(okk)
+        _cap(f"LIFT {k}/{LIFT_SUBSTEPS}")
+
+    # --- CONTINUOUS RETENTION GATE (PART 1 GATE-FIX: %2 two-claw cage log:6738) sampled at EVERY waypoint ---
+    f1_L, f1_R, f2_L, f2_R = _arm_split()
+    wps = []  # per-waypoint dicts
+
+    def _sample(label, xcur):
+        cgL = _cage(f1_L, f2_L)
+        cgR = _cage(f1_R, f2_R)
+        cz = _cable_z() * 1e3
+        okL, okR = cgL["held"], cgR["held"]  # %2 cage: SANDWICHED between both claws AND lateral within footprint
+        rec = {"wp": label, "x": round(xcur, 3), "L": cgL, "R": cgR, "okL": okL, "okR": okR, "cable_z_mm": round(cz, 1)}
+        wps.append(rec)
+        print(
+            f"  [S6_ROUTE] wp={label:12s} x={xcur:.3f} "
+            f"L[f1/f2={cgL['f1']:+.2f}/{cgL['f2']:+.2f} sum={cgL['sand']:.1f} lat={cgL['lat']:.1f} held={okL}] "
+            f"R[f1/f2={cgR['f1']:+.2f}/{cgR['f2']:+.2f} sum={cgR['sand']:.1f} lat={cgR['lat']:.1f} held={okR}] "
+            f"cable_z={cz:.0f}mm"
+        )
+        return rec
+
+    cable_z_start = _cable_z() * 1e3
+    _sample("START(lift)", x_grasp)
+    # ROUTE: M-Route-2 C1 DIAGONAL drag -- both arms together from (GX, GRASP_YC) to (x_clip, y_clip) at z_lift,
+    # interpolating BOTH xk AND the grasp-centre yck while preserving the 88mm span (yck +- GHS). For y_clip=0
+    # (centred M-Route-1) yck stays GRASP_YC so this is byte-equivalent to the prior X-only route. INVARIANT#1:
+    # both arms move (different MIRRORED joint-motions -- LEFT stretches, RIGHT folds -- neither parked);
+    # INVARIANT#2: span fixed at 2*GHS, bases untouched. The y_clip drag is the off-centre TEST (5-CC reach wall).
+    _ph("ROUTE_C1")
+    ok["route"] = True
+    for k in range(1, N_ROUTE + 1):
+        xk = x_grasp + (x_clip - x_grasp) * k / N_ROUTE
+        yck = GRASP_YC + (y_clip - GRASP_YC) * k / N_ROUTE
+        state, okk = ik_move_both(
+            model,
+            state,
+            scene_info,
+            solver,
+            contacts,
+            *tgt2(xk, yck, z_lift),
+            label=f"ROUTE{k}/{N_ROUTE}",
+            converge_mm=3.0,
+            speed_factor=0.3,
+        )
+        ok["route"] = ok["route"] and bool(okk)
+        _sample(f"ROUTE{k}/{N_ROUTE}", xk)
+        _cap(f"ROUTE {k}/{N_ROUTE} (X={xk:.3f} Y={yck:+.3f})")
+    # per-arm reach residual at the C1 endpoint: under-cable realization of the MARGINAL 2.21mm aerial probe
+    # (log:6750) + the asymmetric-drag WATCH. resid = ||EE - commanded target||; lateral = |EE_y - base_y| (the
+    # LEFT arm stretches to ~0.456 = near reach, the RIGHT folds to ~0.156 = the asymmetry). A blown residual =
+    # the marginal reach became a WALL under cable -> the route gate (ok["route"]) catches it -> STOP->%9.
+    _pl, _pr = get_ee_positions(state, scene_info)
+    _tl, _tr = tgt2(x_clip, y_clip, z_lift)
+    resid_l_mm = float(np.linalg.norm(np.array(_pl) - np.array(_tl))) * 1e3
+    resid_r_mm = float(np.linalg.norm(np.array(_pr) - np.array(_tr))) * 1e3
+    lat_l_m = abs(float(_pl[1]) - ROBOT_LEFT_BASE[1])
+    lat_r_m = abs(float(_pr[1]) - ROBOT_RIGHT_BASE[1])
+    # the STRETCH arm = the larger-lateral (near-reach, fragile) one -- DERIVED from the data, not hardcoded: for a
+    # +Y clip (C1) the LEFT stretches; for a -Y clip (C5) the RIGHT stretches (the mirror). The OTHER arm FOLDS.
+    stretch_arm = "L" if lat_l_m > lat_r_m else "R"
+    print(
+        f"  [S6_ROUTE] endpoint per-arm reach: residual L={resid_l_mm:.2f}mm R={resid_r_mm:.2f}mm | "
+        f"lateral L={lat_l_m:.3f}m R={lat_r_m:.3f}m -> {stretch_arm} STRETCHES (near-reach, fragile), the other "
+        f"FOLDS -- asymmetric diagonal drag to clip Y={y_clip:+.3f}, both arms moving (INVARIANT#1)"
+    )
+    # hold at the clip (aerial, pre-hook) + final sample
+    for _ in range(60):
+        state = physics_step(model, state, solver, contacts, scene_info)
+    _sample("END(hold)", x_clip)
+    _cap("END (aerial @ clipX, pre-hook=M-Hook-1)")
+    raise NotImplementedError("route body continues: ROUTE C1->C2 guide = A4c (build plan v1.8 section 13.7)")
 
 
 class RouteExecutor(rc.RouteInterfaceV1):
