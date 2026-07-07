@@ -31,14 +31,18 @@ servo-seed assert, and ``_set_gripper_target``. The AR-specific LEFT-arm freeze
 (§13.2 G3; both arms IK-tracked, adapted from the locked monolith choreography).
 """
 
+import os
+
 import numpy as np
 import route_env_config as rc
 from configs.task_config import (
+    EE_BODY_OFFSET,
     GRIP_HALF_SPAN,
     GRIPPER_DRIVER_JOINT_IDX,
     GRIPPER_DRIVER_OPEN_RAD,
     GRIPPER_JOINT_RANGE,
     JOINTS_PER_ARM,
+    SIM_SUBSTEPS,
 )
 
 # =============================================================================
@@ -274,6 +278,118 @@ def apply_banked_restore(phys_jq, phys_jqd, joint_target_pos, maps, banked):
     for i, d in enumerate(maps["all_driver_dofs"]):
         joint_target_pos[d] = float(banked["grip_target"][i])  # F5 banked grip target (NOT blanket-OPEN)
     return phys_jq, phys_jqd, joint_target_pos
+
+
+# =============================================================================
+# §13.7 -- Layer A single-world motion/IK substrate (self-contained verbatim copy).
+# These module-level primitives are the substrate that the self-driving byte-repro path
+# (``run_route``, subsequent chunk) calls. They are COPIED, not imported: importing
+# ``test_newton_clip_routing.py`` would run its top-level (sys.path inserts, the ``DEVICE``
+# env read, the :929 cable-stiffness assert) and couple to its mutable module globals.
+# Copy faithfulness is guarded empirically by the 81-grid byte-repro (Layer A) plus the
+# static two-copy drift tripwire on the IK stack (added with :func:`solve_ik_dual` / A2).
+#
+# Constant sourcing: SSOT-shared values (``SIM_SUBSTEPS``/``EE_BODY_OFFSET`` here;
+# ``STEPS_PER_CM``/``MAX_MOVE_STEPS``/``FRANKA_NUM_JOINTS`` in A2) are imported from
+# ``configs.task_config`` -- the SAME SSOT the monolith imports (test:59) -- so byte-identical
+# by construction with no drift. Test-local physics constants (``DT``/``SIM_DT``; ``IK_*``/
+# ``DEVICE`` in A2) are mirrored below with their source line; a value drift surfaces as a
+# byte-repro miss (§13.0-3).
+# =============================================================================
+DEVICE = os.environ.get("NEWTON_DEVICE", "cuda:0")  # test:122 (byte-repro pins NEWTON_DEVICE=cuda:0)
+DT = 1.0 / 480.0  # test:123 frame dt (outer step)
+SIM_DT = DT / SIM_SUBSTEPS  # test:124 solver dt (inner substep)
+
+# Pre-allocated double-buffer physics state, created on the first ``physics_step`` call (test:1768).
+_physics_state_buffer = None
+# Whole-route P3 DAgger demo recorder. None = default-off = byte-identical; the recorder is orthogonal
+# to Layer A byte-identity (reference and candidate both run with it None), so it is deferred (test:1780).
+_demo_rec = None
+
+
+def update_kinematic_bodies(physics_state, fk_state, robot_body_count):
+    """Copy robot body transforms from FK state to physics state (verbatim; test:1752).
+
+    FK model body indices map 1:1 to physics model body indices (both start at 0). Called each
+    substep to ensure kinematic bodies reflect current FK positions before contact detection.
+    """
+    fk_bq = fk_state.body_q.numpy()
+    phys_bq = physics_state.body_q.numpy()
+    phys_bq[:robot_body_count] = fk_bq[:robot_body_count]
+    physics_state.body_q.assign(phys_bq)
+
+
+def get_ee_positions(state, scene_info):
+    """Get current EE positions for both arms (verbatim; test:1945)."""
+    body_q = state.body_q.numpy()
+    left_ee = scene_info["left_body_start"] + EE_BODY_OFFSET
+    right_ee = scene_info["right_body_start"] + EE_BODY_OFFSET
+    pos_l = body_q[left_ee][:3]
+    pos_r = body_q[right_ee][:3]
+    return pos_l, pos_r
+
+
+def physics_step(model, state, solver, contacts, scene_info):
+    """VBD physics step with kinematic body override (double-buffer pattern; test:1790).
+
+    1. Update kinematic robot bodies from FK state each substep
+    2. model.collide() for contact detection (BOX-CAPSULE finger-cable)
+    3. VBD solver step -- cable CABLE joint dynamics only (kinematic bodies inv_mass=0)
+    4. Double-buffer swap
+
+    Substeps: ``SIM_SUBSTEPS`` per frame. External interface: 1 call = ``DT`` time advancement.
+    Returns state with updated body_q (cable from VBD, robot from FK). The ``gripper_dynamic`` branch
+    (:1827) overwrites ONLY the arm coords via ``_ARM_OVERWRITE_LOCAL`` -- the SAME G7 SSOT set used by
+    the env-path exclusion (§13.0-2); the source name ``_ARM_OVERWRITE_IDX`` (test:1776) is unified here
+    to it (identical value {0-5,14-19}, numeric behaviour byte-identical).
+    """
+    global _physics_state_buffer
+    if _physics_state_buffer is None:
+        _physics_state_buffer = model.state()
+
+    state_0 = state
+    state_1 = _physics_state_buffer
+
+    fk_state = scene_info["fk_state"]
+    robot_body_count = scene_info["robot_body_count"]
+    vbd_control = scene_info["vbd_control"]
+    solver_backend = scene_info.get("solver_backend", "vbd")
+    gripper_dynamic = scene_info.get("gripper_dynamic", False)  # R-S6.6 (default False = legacy byte-identical)
+
+    for i in range(SIM_SUBSTEPS):
+        if solver_backend == "mujoco":
+            # MuJoCo articulated kinematic re-pose (D-Opt1-2): per-substep OVERWRITE joint_q=FK + zero
+            # joint_qd (STEP-1 probe-validated; MuJoCo poses bodies from joint_q). disable_contacts=True
+            # -> no model.collide (contacts None), mirroring the base mujoco branch.
+            n = 2 * JOINTS_PER_ARM
+            phys_jq = state_0.joint_q.numpy()
+            phys_jqd = state_0.joint_qd.numpy()
+            if gripper_dynamic:
+                # The gripper is a POSITION actuator (S6_GRASP) -> overwrite ONLY the arm coords
+                # ({0-5,14-19}); leave the gripper coords ({6-13,20-27}) DYNAMIC so the servo drives
+                # them via control.joint_target_pos. _ARM_OVERWRITE_LOCAL is the G7 SSOT (§13.0-2).
+                phys_jq[_ARM_OVERWRITE_LOCAL] = fk_state.joint_q.numpy()[_ARM_OVERWRITE_LOCAL]
+                phys_jqd[_ARM_OVERWRITE_LOCAL] = 0.0
+            else:
+                phys_jq[:n] = fk_state.joint_q.numpy()[:n]
+                phys_jqd[:n] = 0.0
+            state_0.joint_q.assign(phys_jq)
+            state_0.joint_qd.assign(phys_jqd)
+            state_0.clear_forces()
+            solver.step(state_0, state_1, vbd_control, None, SIM_DT)
+        else:
+            # Ensure kinematic bodies reflect current FK positions
+            update_kinematic_bodies(state_0, fk_state, robot_body_count)
+
+            state_0.clear_forces()
+            model.collide(state_0, contacts)
+            solver.step(state_0, state_1, vbd_control, contacts, SIM_DT)
+
+        state_0, state_1 = state_1, state_0
+
+    if _demo_rec is not None:  # P3 recorder: sample the post-step frame (read-only, deferred chunk)
+        _demo_rec.sample(state_0, scene_info)
+    return state_0
 
 
 class RouteExecutor(rc.RouteInterfaceV1):
