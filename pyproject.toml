@@ -51,10 +51,11 @@ ignore = [
 # (test_newton_clip_routing.py::_run_mujoco_grasp_route). E501 (verbatim long lines, cf. the AR env
 # file) and C901 (the route function's inherent complexity) cannot be reformatted without breaking the
 # byte-fidelity that a byte-repro regression guards. SIM105 (a verbatim try/except/pass) is likewise
-# inherent. F401 (a body-local import used only in a later chunk) and F841 (a local assigned in one
-# chunk, first used in a later one) are transient while run_route is built incrementally; they clear
-# when the function is complete (remove them then, keeping only the inherent C901/E501/SIM105).
-"thread_isaac_lab/envs/route_executor.py" = ["C901", "E501", "F401", "F841", "SIM105"]
+# inherent, as is F841: run_route copies the S6_GRASP_ROUTE path (test:3692-5765) verbatim including
+# shared setup locals (e.g. pad_geoms, REL_CABLE_Z) whose only consumers live in the dead M-Hook-1
+# path (test:5766-7475) that is deliberately excluded, so they read as unused. (The transient F401 --
+# a body-local import first used later in the incremental build -- cleared once the function completed.)
+"thread_isaac_lab/envs/route_executor.py" = ["C901", "E501", "F841", "SIM105"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 30

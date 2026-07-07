@@ -874,12 +874,26 @@ def _set_gripper_target(control, driver_joints, target_rad):
 
 # =============================================================================
 # section 13.7 run_route -- Layer A self-driving byte-repro subject. SCRIPTED verbatim extraction of the
-# Rs-LOCKED _run_mujoco_grasp_route (test:3692) with ONLY localized transforms (signature rename here;
-# C2 F11 in A4d). All inner closures are kept INNER-verbatim (max byte-fidelity, verbatim call sites);
-# the module-level extract-7 shadow-serve the Layer B step_target facade and are held byte-identical to
-# these inner copies by the section-12.4/item-1 ast semantic-equiv drift tripwire (standing gate).
-# Built incrementally A4b/c/d; the NotImplementedError tail = the next chunk boundary.
+# Rs-LOCKED _run_mujoco_grasp_route (test:3692-5765, the S6_GRASP_ROUTE path ending at test:5765 sys.exit;
+# the monolith fn continues to test:7475 with dead env-gated paths, excluded). All inner closures are kept
+# INNER-verbatim (max byte-fidelity, verbatim call sites); the module-level extract-7 shadow-serve the
+# Layer B step_target facade and are held byte-identical by the section-12.4 ast drift tripwire.
+#
+# The ONLY non-verbatim change is the C2 F11 (A4d-2): the two C2 re-grasp ik_move_both calls take
+# ik_solve_fn=_solve_ik_dual_rot explicitly instead of the monolith's runtime monkeypatch of the module
+# solve_ik_dual global (no-global-mutation; the monkeypatch exception-window is thereby eliminated).
+#
+# ANTI-REVERT / Rs-LOCKED -- do NOT edit any line of run_route without Rs. It mirrors the FOUNDATIONAL
+# ANTI-REVERT markers test:5128 (R targets the ACTUAL cable X via argmin, NOT a fixed target = the
+# air-grip bug), test:5148 (square-on default C2_TILT_SIGN=0; the banked tilt is floating-cable-specific),
+# and test:5290 (regrasp_ok = _at_88 AND _R_grips, NOT the both-hands-force gate). Drift is caught by the
+# byte-repro harness plus a static byte-for-byte tripwire against the golden hash below (F11 delta reversed).
 # =============================================================================
+_ROUTE_MONOLITH_GOLDEN_SHA256 = (
+    "5a47dacfd010e0beccc044c5bf820e27dcd9f1937f08ab59e704e21099eb8410"  # sha256(test:3692-5765)
+)
+
+
 def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, record_video=False):
     """M-Route-1 / M-Route-2 C1 (env-gate S6_GRASP_ROUTE=1): the BANKED centred grasp+lift (M-Grasp-engage-1) +
     AERIAL TRANSPORT (GX 0.30 -> CLIP_X, both arms together) + a CONTINUOUS two-claw cage + drop-in seat@809.
@@ -2402,8 +2416,6 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
             _theta_R = _cable_local_pitch(_R_ty)  # cable local pitch at R's grip lane (measured at THIS route's geom)
             _ROT["R"] = _rot_quat_rx(_BASE_RX + _TILT_SIGN * _theta_R)  # R = re-grasp arm = TILT-FOLLOW
             _ROT["L"] = _rot_quat_rx(_BASE_RX)  # L = anchor/holder = default down
-            _ik_orig = globals()["solve_ik_dual"]
-            globals()["solve_ik_dual"] = _solve_ik_dual_rot  # ik_move_both resolves solve_ik_dual as a module global
             if _demo_rec is not None:  # P3 recorder: effective-rotation register at C2 monkeypatch INSTALL (spec §2.4)
                 _demo_rec.note_ik_rot(_ROT["L"].numpy()[0], _ROT["R"].numpy()[0], 1)
             print(
@@ -2432,6 +2444,7 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
                     label=f"C2-RHOVER{kk}/10",
                     converge_mm=3.0,
                     speed_factor=0.22,
+                    ik_solve_fn=_solve_ik_dual_rot,
                 )
                 for _ in range(10):
                     state = physics_step(model, state, solver, contacts, scene_info)
@@ -2457,6 +2470,7 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
                     label=f"C2-RDESCEND{kk}/8",
                     converge_mm=2.5,
                     speed_factor=0.20,
+                    ik_solve_fn=_solve_ik_dual_rot,
                 )
                 for _ in range(12):
                     state = physics_step(model, state, solver, contacts, scene_info)
@@ -2531,7 +2545,6 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
                 "regrasp_verdict": _regrasp_verdict,
                 "regrasp_ok": _regrasp_ok,
             }
-            globals()["solve_ik_dual"] = _ik_orig  # RESTORE default square-on (tilt blast radius = the R re-grasp only)
             if _demo_rec is not None:  # P3 recorder: rotation register RESTORE to default Rx(-90) (spec §2.4)
                 _demo_rec.note_ik_rot(None, None, 0)
             _ph("C2_TRANSPORT")  # P3 label: lateral carry to C2 as its own phase (future re-records; CC2-C1)
