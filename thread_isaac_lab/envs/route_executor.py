@@ -336,6 +336,77 @@ def apply_banked_restore(phys_jq, phys_jqd, joint_target_pos, maps, banked):
     return phys_jq, phys_jqd, joint_target_pos
 
 
+def build_state_bank_from_recording(recording, n_world, arm_off=0, phases=(1, 2, 3, 4, 5)):
+    """Build the phase-k state bank ``{k: banked}`` from a ONE-cell recording (comp2 §8; Q3, %12 16:04).
+
+    For each requested G-phase ``k``, the banked state is the recorded physics snapshot at the phase-``k``
+    BOUNDARY -- the first frame whose recorded 15-phase ``phase_id`` maps to ``k`` via
+    :data:`_RECORDED_PHASE_TO_G`. The returned per-``k`` dict matches the :func:`apply_banked_restore`
+    contract EXACTLY: ``arm_q``/``arm_qd`` (world-major over ``_ARM_OVERWRITE_LOCAL``), ``gripper_q``/
+    ``gripper_qd`` (world-major over sorted ``_GRIPPER_COORDS_LOCAL``), ``grip_target`` (per driver DOF,
+    world-major, order ``[L, L, R, R]`` per world). Every world forks to the SAME scalar-``k`` state
+    (per-world curriculum start-mix is deferred to the trainer, §13.2), so the one snapshot is tiled.
+
+    Phase-0 (``k=0``, G1) is intentionally OMITTED: :meth:`RouteExecutor.reset_to_phase` treats a missing
+    bank as a no-op and lets the env-core reset stand (matches the stub + the ``reset()`` contract).
+
+    qvel note (comp2 design decision, %12-surfaced -- the plan said "qpos/qvel from recording" but the
+    recording carries NO ``joint_qd``, only ``arm_q`` positions): banked velocities are ZERO. This is EXACT
+    for the arm -- the mujoco-ko substrate zeroes arm ``joint_qd`` every step in the kinematic re-pose
+    (:meth:`NewtonRouteEnv._broadcast_arm_jointq` / :func:`apply_arm_only_write_perworld`). The gripper is
+    POSITION-servo-driven and its boundary ``joint_qd`` is unrecorded -> banked 0 (a momentarily still
+    gripper the servo re-accelerates; benign for a curriculum fork start, re-validated live at Stage-B ⑦(b)).
+    ``grip_target`` = the recorded ``grip_cmd`` (COMMANDED driver target [rad], cols ``[L, R]``), which is
+    DISTINCT from the servo-lagged ACTUAL gripper ``joint_q`` restored from ``arm_q`` (verified: at a gripped
+    frame ``grip_cmd``=0.7407 while the driver ``joint_q``~0.71).
+
+    Args:
+        recording: A mapping with ``arm_q`` [frames, W] (the full physics ``joint_q`` per frame; the arm
+            occupies ``[arm_off, arm_off + _N_ARM_JOINTS)`` [rad]), ``grip_cmd`` [frames, 2] (cols [L, R]
+            [rad]), ``phase_id`` [frames] (the recorded 15-phase clock).
+        n_world: Number of worlds the env forks (banked arrays are tiled world-major over this).
+        arm_off: The arm's start offset within the recorded ``arm_q`` row (single-world recording => 0).
+        phases: The G-phase keys in ``[1, N_ROUTE_PHASES)`` to bank (default G2..G6; k=0 = env reset).
+
+    Returns:
+        ``{k: banked}`` for each requested ``k`` that has a boundary frame in the recording (a phase absent
+        from the recording is skipped, so ``reset_to_phase(k)`` falls back to the env reset for it).
+    """
+    arm_q = np.asarray(recording["arm_q"], dtype=np.float32)
+    grip = np.asarray(recording["grip_cmd"], dtype=np.float32)
+    phase = np.asarray(recording["phase_id"]).astype(np.int64)
+    n_frames = arm_q.shape[0]
+    if not (grip.shape[0] == phase.shape[0] == n_frames):
+        raise ValueError("recording arm_q/grip_cmd/phase_id have inconsistent frame counts")
+    if arm_q.ndim != 2 or arm_q.shape[1] < arm_off + _N_ARM_JOINTS:
+        raise ValueError(f"recording arm_q must be [frames, >={arm_off + _N_ARM_JOINTS}]; got {arm_q.shape}")
+    if grip.shape[1:] != (2,):
+        raise ValueError("recording grip_cmd must be [frames, 2] (cols [L, R])")
+    # phase-map TOTAL coverage (mirror _prepare_recording): every recorded phase_id maps to exactly one G.
+    uncovered = {int(p) for p in np.unique(phase)} - set(_RECORDED_PHASE_TO_G)
+    if uncovered:
+        raise ValueError(f"recorded phase_id {sorted(uncovered)} not in _RECORDED_PHASE_TO_G")
+    g_of_frame = np.array([_RECORDED_PHASE_TO_G[int(p)] for p in phase], dtype=np.int64)
+    arm_local = list(_ARM_OVERWRITE_LOCAL)  # {0-5,14-19} (12)
+    grip_local = sorted(_GRIPPER_COORDS_LOCAL)  # {6-13,20-27} (16)
+    bank = {}
+    for k in phases:
+        hits = np.nonzero(g_of_frame == int(k))[0]
+        if hits.size == 0:
+            continue  # phase absent in this recording -> reset_to_phase(k) falls back to the env reset
+        bf = int(hits[0])  # phase-k boundary = FIRST frame mapped to k
+        arm_span = arm_q[bf, arm_off : arm_off + _N_ARM_JOINTS]  # 28-wide two-arm joint_q snapshot
+        g_l, g_r = float(grip[bf, 0]), float(grip[bf, 1])  # [L, R] commanded driver targets [rad]
+        bank[int(k)] = {
+            "arm_q": np.tile(arm_span[arm_local], n_world).astype(np.float32),
+            "arm_qd": np.zeros(n_world * len(arm_local), dtype=np.float32),
+            "gripper_q": np.tile(arm_span[grip_local], n_world).astype(np.float32),
+            "gripper_qd": np.zeros(n_world * len(grip_local), dtype=np.float32),
+            "grip_target": np.tile(np.array([g_l, g_l, g_r, g_r], dtype=np.float32), n_world),
+        }
+    return bank
+
+
 # =============================================================================
 # §13.7 -- Layer A single-world motion/IK substrate (self-contained verbatim copy).
 # These module-level primitives are the substrate that the self-driving byte-repro path
