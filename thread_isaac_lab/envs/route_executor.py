@@ -80,6 +80,39 @@ _N_ARM_JOINTS = 2 * JOINTS_PER_ARM  # 28 (per-arm 14 = arm{0-5} + gripper{6-13},
 _GRIPPER_COORDS_LOCAL = set(GRIPPER_JOINT_RANGE) | {JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE}  # {6-13,20-27}
 _ARM_OVERWRITE_LOCAL = [i for i in range(_N_ARM_JOINTS) if i not in _GRIPPER_COORDS_LOCAL]  # {0-5,14-19}
 _L_DRIVER_LOCAL = list(GRIPPER_DRIVER_JOINT_IDX)  # [6, 10] driver DOFs within the LEFT arm
+
+# --- comp1 recorded_replay: cadence + 15->6 phase map (Layer-B step_target; %12 ruling 2026-07-07 16:04) ---
+# Cadence is SINGLE-SOURCE with the banked BC/trainer base (route_demo_to_bc.py:34-35 / :255-258): the
+# per-step target = ee_pos at the NEXT control frame (fork-(iv) base == achieved-path waypoint, %12 15:44 +
+# route_demo_to_bc.py:13/:287; ee_tgt_pos = macro-leg segmentation ONLY, :854). cf = arange(0, LAST+1, cad).
+_REC_CADENCE = 10  # == PHYSICS_STEPS_PER_RL (route_demo_to_bc.py:34 / newton_route_env.py:237)
+_REC_LAST_CTRL_FRAME = 7700  # route_demo_to_bc.py:35 (last control frame; 6-frame zero-motion tail dropped)
+# Recorded 15-phase (PHASES15, route_demo_to_bc.py:58) phase_id -> 6-phase G-clock (N_ROUTE_PHASES=6,
+# route_env_config:46). %12 RULING 2026-07-07 16:04 = the single-source (no prior spec; grep=0). Grounded in
+# the phase names + the consumer boundaries (newton_route_env _active_clip_xy phase<3=C1 / _dual_and_grip
+# phase==3=G4-transit / phase>=4=C2). ⚠ CC5-2: phase does NOT drive grip/is_dual (route_env_config:152-153);
+# phase drives ONLY clip-selection + obs-onehot + state_bank keying.
+_RECORDED_PHASE_TO_G = {
+    -1: 0,  # pre-start -> G1
+    0: 0,
+    1: 0,
+    2: 0,  # GRASP_HOVER/DESCEND/CLOSE -> G1 (grasp)
+    3: 1,  # LIFT -> G2
+    4: 2,
+    5: 2,
+    6: 2,  # ROUTE_C1/C1_SEAT/C1_PIN -> G3 (C1 route+seat)
+    7: 3,
+    8: 3,
+    9: 3,
+    10: 3,
+    11: 3,  # L_HALF_UNCLAMP/R_UNCLAMP_RISE/GUIDE_C2/GUIDE_PRELIFT/C2_REGRASP -> G4 (regrasp transit; ends at recage-latch C2_REGRASP)
+    12: 4,  # C2_TRANSPORT -> G5 (first C2-dual)
+    13: 5,
+    14: 5,  # C2_DUAL_SEAT/C2_SETTLE -> G6 (C2 seat+settle)
+}
+# grip threshold: recorded grip_cmd radians -> gripping {0,1}. HALF_OPEN (0.69) is the L_HALF_UNCLAMP hold
+# point (still gripping the cable), so >=HALF_OPEN == gripping; below == reaching/open. This reproduces the
+# transit semantics (L half-unclamp holds=1, R re-grasp opens=0) WITHOUT a phase table (CC5-2).
 _R_DRIVER_LOCAL = [JOINTS_PER_ARM + j for j in GRIPPER_DRIVER_JOINT_IDX]  # [20, 24] driver DOFs (RIGHT arm)
 
 # §13.5 (G4/G5) invariant numeric constants.
@@ -2969,6 +3002,54 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
         sys.exit(0 if (finite and qvel_ok) else 2)
 
 
+# grip close-threshold = HALF_OPEN (the L_HALF_UNCLAMP hold point >= gripping / below = reaching), stored as
+# float32 to match the recorded grip_cmd dtype exactly (else the recorded half-open falls just below 0.69).
+_GRIP_CLOSE_THR = np.float32(GRIPPER_DRIVER_HALF_OPEN_RAD)
+
+
+def _prepare_recording(recording):
+    """Validate a ONE-cell recorded_replay source + precompute the cadence frames (comp1; %12 16:04).
+
+    Args:
+        recording: A mapping with ``ee_pos_r``/``ee_pos_l`` [frames, 3], ``grip_cmd`` [frames, 2] (cols
+            [L, R]), ``phase_id`` [frames]. 81 single-cell (the interface carries no world index, CC2-CH3).
+
+    Returns:
+        A dict with the validated arrays + int ``step_f``/``next_f`` (770 steps) precomputed single-source
+        with ``route_demo_to_bc.py``:255-258.
+    """
+    req = ("ee_pos_r", "ee_pos_l", "grip_cmd", "phase_id")
+    missing = [k for k in req if k not in recording]
+    if missing:
+        raise ValueError(f"recording missing {missing}; need {req}")
+    ee_r = np.asarray(recording["ee_pos_r"], dtype=np.float32)
+    ee_l = np.asarray(recording["ee_pos_l"], dtype=np.float32)
+    grip = np.asarray(recording["grip_cmd"], dtype=np.float32)
+    phase = np.asarray(recording["phase_id"]).astype(np.int64)
+    n_frames = ee_r.shape[0]
+    if not (ee_l.shape[0] == grip.shape[0] == phase.shape[0] == n_frames):
+        raise ValueError("recording arrays have inconsistent frame counts")
+    if n_frames < _REC_LAST_CTRL_FRAME + 1:
+        raise ValueError(f"recording has {n_frames} frames; need >= {_REC_LAST_CTRL_FRAME + 1}")
+    if ee_r.shape[1:] != (3,) or ee_l.shape[1:] != (3,) or grip.shape[1:] != (2,):
+        raise ValueError("ee_pos must be [frames, 3] and grip_cmd [frames, 2]")
+    # cadence single-source (route_demo_to_bc.py:255-258): cf = 0,cad,..,LAST; action = delta step_f -> next_f.
+    cf = np.arange(0, _REC_LAST_CTRL_FRAME + 1, _REC_CADENCE)
+    step_f, next_f = cf[:-1], cf[1:]
+    # phase-map TOTAL coverage (%12: every recorded phase_id maps to exactly one [0, 6)).
+    uncovered = {int(p) for p in np.unique(phase)} - set(_RECORDED_PHASE_TO_G)
+    if uncovered:
+        raise ValueError(f"recorded phase_id {sorted(uncovered)} not in _RECORDED_PHASE_TO_G")
+    return {
+        "ee_pos_r": ee_r,
+        "ee_pos_l": ee_l,
+        "grip_cmd": grip,
+        "phase_id": phase,
+        "step_f": step_f,
+        "next_f": next_f,
+    }
+
+
 class RouteExecutor(rc.RouteInterfaceV1):
     """Real route-executor: faithful C1->C2 route engine replacing ``NominalRouteStub`` (§13; charter D-1=C).
 
@@ -2984,8 +3065,8 @@ class RouteExecutor(rc.RouteInterfaceV1):
     (subsequent build chunks; faithful copy of the locked ``_run_mujoco_grasp_route``:3692).
     """
 
-    def __init__(self, arm_q_start, arm_qd_start, horizon, state_0=None, control=None, state_bank=None):
-        """Wire the per-world index maps + optional physics handles.
+    def __init__(self, arm_q_start, arm_qd_start, horizon, state_0=None, control=None, state_bank=None, recording=None):
+        """Wire the per-world index maps + optional physics handles + the recorded_replay source.
 
         Args:
             arm_q_start: Per-world arm ``joint_q`` start indices (env-computed; cable FREE-root => q != qd).
@@ -2994,6 +3075,10 @@ class RouteExecutor(rc.RouteInterfaceV1):
             state_0: The Newton physics state to re-pose at reset (None for pure-index construction/tests).
             control: The Newton control whose ``joint_target_pos`` carries the servo targets (None => skip seed).
             state_bank: Optional ``{k: banked_dict}`` phase-k state bank (empty => reset is env-authoritative).
+            recording: Optional ONE-cell recorded_replay source (:meth:`step_target`) -- a mapping with
+                ``ee_pos_r``/``ee_pos_l`` [frames, 3], ``grip_cmd`` [frames, 2] (cols [L, R]), ``phase_id``
+                [frames]. 81 single-cell (interface carries no world index, CC2-CH3). None => step_target
+                raises (pure-index construction).
         """
         self._maps = build_perworld_index_maps(arm_q_start, arm_qd_start)
         self._horizon = int(horizon)
@@ -3003,6 +3088,7 @@ class RouteExecutor(rc.RouteInterfaceV1):
         self._requested_phase = 0
         if control is not None:
             servo_seed_assert(control.joint_target_pos.numpy(), self._maps["all_driver_dofs"])
+        self._recording = _prepare_recording(recording) if recording is not None else None
 
     def reset_to_phase(self, k: int) -> None:
         """Fork all worlds to phase ``k``'s banked state (SCALAR ``k``; §13.2/§13.3/§13.4).
@@ -3026,7 +3112,34 @@ class RouteExecutor(rc.RouteInterfaceV1):
     def step_target(self, t: int) -> tuple:
         """Return the per-step route packet ``(target_6d, phase_id, grip_2, is_dual)`` for RL step ``t``.
 
-        The real per-step targets come from the extracted route orchestration (faithful copy of the locked
-        ``_run_mujoco_grasp_route``:3692) -- added by the route-orchestration build chunks. Not yet wired.
+        recorded_replay (Layer-B, %12 15:44/16:04): the per-step base target = the recorded ``ee_pos`` at the
+        NEXT control frame (fork-(iv) base == achieved-path waypoint, single-source with
+        ``route_demo_to_bc.py``:255-287). ``grip_2``/``is_dual`` come from the recorded ``grip_cmd`` (CC5-2:
+        NEVER phase-derived). ``phase_id`` = the recorded 15-phase mapped to the 6-phase G-clock
+        (:data:`_RECORDED_PHASE_TO_G`) and drives ONLY clip-selection + obs-onehot + state_bank keying. Past
+        the recording => hold the last waypoint (grippers latched).
+
+        Returns:
+            ``(target_6d [R_xyz, L_xyz] float32, phase_id int in [0, 6), grip_2 [R, L] {0,1} float32,
+            is_dual bool)``.
         """
-        raise NotImplementedError("step_target route orchestration is the next build chunk (§13.7)")
+        rec = self._recording
+        if rec is None:
+            raise NotImplementedError("recorded_replay needs recording= (pure-index construction has none)")
+        n_steps = len(rec["next_f"])  # 770 (= len(cf) - 1)
+        tt = min(max(int(t), 0), n_steps - 1)  # pad-to-horizon: hold the last waypoint
+        tgt_f = int(rec["next_f"][tt])  # cf[t+1] = next-waypoint frame (target)
+        pg_f = int(rec["step_f"][tt])  # cf[t]   = current frame (phase + grip)
+        # target_6d = ee_pos [R, L] -- ⚠ recorder _STACK_KEYS stacks [L, R]; consumer reads R-first (CC2-CH5).
+        target_6d = np.concatenate([rec["ee_pos_r"][tgt_f], rec["ee_pos_l"][tgt_f]]).astype(np.float32)
+        # grip_2 [R, L] {0,1} -- ⚠ recorded grip_cmd cols are [L, R] (route_demo_to_bc.py:13, OPPOSITE of the
+        # action layout). gripping := grip_cmd >= HALF_OPEN (the L_HALF_UNCLAMP hold point). CC5-2: from grip.
+        gc = rec["grip_cmd"][pg_f]  # [L, R]
+        # ⚠ float32-consistent compare: the recorded half-open == float32(HALF_OPEN)=0.6899999976; a float64
+        # compare (float(gc)>=0.69) wrongly EXCLUDES it, dropping the L_HALF_UNCLAMP hold (must be grip=1).
+        grip_r = 1.0 if gc[1] >= _GRIP_CLOSE_THR else 0.0
+        grip_l = 1.0 if gc[0] >= _GRIP_CLOSE_THR else 0.0
+        grip_2 = np.array([grip_r, grip_l], dtype=np.float32)  # [R, L]
+        is_dual = bool(grip_r > 0.0 and grip_l > 0.0)  # both arms gripping (CC5-2: NOT from phase)
+        phase_id = _RECORDED_PHASE_TO_G[int(rec["phase_id"][pg_f])]  # 15 -> 6 (%12 ruling; total-coverage)
+        return target_6d, phase_id, grip_2, is_dual
