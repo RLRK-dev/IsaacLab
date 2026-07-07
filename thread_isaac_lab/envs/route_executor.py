@@ -34,6 +34,7 @@ servo-seed assert, and ``_set_gripper_target``. The AR-specific LEFT-arm freeze
 import math as _math
 import os
 
+import mujoco
 import newton
 import numpy as np
 import route_env_config as rc
@@ -308,6 +309,7 @@ DT = 1.0 / 480.0  # test:123 frame dt (outer step)
 SIM_DT = DT / SIM_SUBSTEPS  # test:124 solver dt (inner substep)
 IK_ITERATIONS = 100  # test:237 Levenberg-Marquardt iterations per solve_ik_dual call
 IK_STEP_SIZE = 1.0  # test:238 LM step size
+_BOX = int(mujoco.mjtGeom.mjGEOM_BOX)  # test:3800 (route-local const promoted; mjGEOM_BOX enum, for _clip2_geoms)
 
 # Pre-allocated double-buffer physics state, created on the first ``physics_step`` call (test:1768).
 _physics_state_buffer = None
@@ -712,6 +714,54 @@ def _solve_ik_dual_rot(scene_info_, target_left, target_right, warmstart_jq=None
     qout = wp.zeros((1, fk_model_.joint_coord_count), dtype=float, device=DEVICE)
     iks.step(qin, qout, iterations=IK_ITERATIONS, step_size=IK_STEP_SIZE)
     return qout.numpy()[0], float(iks.costs.numpy()[0])
+
+
+# =============================================================================
+# §13 / charter extract-7 -- the remaining 4 target/scene closures, re-plumbed to module level
+# (A4a; test tgt:4197 / tgt2:4200 / _w0e_guarded_cx:4205 / _clip2_geoms:3859). Same item-1 discipline
+# as the A3 IK closures: closure-var -> explicit param, BEHAVIOR-PRESERVING (ast semantic-equiv reverses
+# only the arg-ification). These are shared between the Layer A self-driving ``run_route`` (A4b+) and the
+# Layer B ``step_target`` facade (the per-step target/seat computation). ``GHS`` (=GRIP_HALF_SPAN=0.044,
+# 88mm span INVARIANT#2) and ``GRASP_YC`` (settled grasp centre) are the route-local closure vars.
+# =============================================================================
+def tgt(x, z, grasp_yc, ghs):
+    return (x, grasp_yc - ghs, z), (x, grasp_yc + ghs, z)
+
+
+def tgt2(x, yc, z, ghs):
+    # M-Route-2 C1: diagonal target with a MOVING grasp centre yc (interp GRASP_YC -> y_clip); the 88mm span is
+    # preserved (yc +- GHS = INVARIANT#2). For y_clip=0 (centred M-Route-1) tgt2(x, GRASP_YC, z) == tgt(x, z).
+    return (x, yc - ghs, z), (x, yc + ghs, z)
+
+
+def _w0e_guarded_cx(y_ref, x_ref, state, cable_bodies):
+    # W0-e common guarded crossing-X selector (spec v0.9 cluster A): mean cable-body X within the Y window
+    # |y-y_ref|<=7.5mm AND the X plausibility window |x-x_ref|<=30mm (offline-validated: n=1, 0 tail-hijack
+    # on all 81 cells, validate_measurands.py:54-57). Returns (mean_x_m, n_nodes); (None, 0) if the window is
+    # empty (plausibility reject). Reads the LIVE `state` by closure (same pattern as _zc1).
+    # (re-plumb A4a/item-1: ``state``/``cable_bodies`` were route-local closures -> explicit params.)
+    wp.synchronize()
+    _P = state.body_q.numpy()[cable_bodies]
+    _m = (np.abs(_P[:, 1] - y_ref) <= 0.0075) & (np.abs(_P[:, 0] - x_ref) <= 0.030)
+    if not _m.any():
+        return None, 0
+    return float(_P[_m, 0].mean()), int(_m.sum())
+
+
+def _clip2_geoms(mjm, mjd, c2x, c2y):
+    # C2 (Rs C1->C2 routing): the SECOND clip's collision BOXes near (c2x, c2y) for the cable<->C2 mj_geomDistance
+    # reach/seat proof. Same worldbody-BOX-near-XY filter as _clip_geoms but centred on C2 (C1 excluded: dx>=50mm).
+    # (re-plumb A4a/item-1: ``mjm``/``mjd``/``c2x``/``c2y`` were route-local closures -> explicit params; ``mujoco``/
+    # ``_BOX`` resolve to the module import/const, same value as the route-local test:3800.)
+    mujoco.mj_forward(mjm, mjd)
+    return [
+        g
+        for g in range(mjm.ngeom)
+        if int(mjm.geom_type[g]) == _BOX
+        and int(mjm.geom_bodyid[g]) == 0
+        and abs(float(mjd.geom_xpos[g][0]) - c2x) < 0.03
+        and abs(float(mjd.geom_xpos[g][1]) - c2y) < 0.03
+    ]
 
 
 class RouteExecutor(rc.RouteInterfaceV1):
