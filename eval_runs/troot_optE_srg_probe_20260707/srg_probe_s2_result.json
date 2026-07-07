@@ -1,0 +1,493 @@
+{
+ "stage": "S2",
+ "purpose": "tail-cell grip-retention screening (design \u00a75 Stage 2). gate = WORST cell. gpu-cg cuda:0 (pessimistic=conservative per S1 de-confound). common-mode recenter grasp.",
+ "grounding": {
+  "offset_mechanism": "DR offset = build_scene(cable_xy_offset) moves the cable; grasp COMMON-MODE recenters the 88mm span (route J5). tail failures were SEAT/GUIDE no-follow (downstream of grasp, grip_cmd identical nominal-vs-offset J-9), NOT the grip.",
+  "dr_amplitude_mm": 20.0,
+  "dr_16mm_reconcile": "design '\u00b116mm' = VOID MARGIN (GRIP_HALF_SPAN+16mm, test:1088) conflation; real DR = \u00b120mm (task_config.py:264 CABLE_XY_DR_AMPLITUDE).",
+  "known_hard": "x-20_y5 (only grid grip-FAIL, r_grip 0->32.8N @1.9mm, P3_GRID_JOINTREAD:3/:80) = a C2 RE-grasp whiff -> DROPPED from S2 (%12 01:45), TRACKED for comp5/C2. C1-escape cells = seat/guide downstream, not grasp.",
+  "void_parity_c": "gate PASS (%12 02:00 CONFIRM): (a) build_scene void = fixed nominal [0.090,0.210] (grasp_y None; cable_xy_offset moves cable only); (b) build_multiworld void = SAME fixed [0.090,0.210] (base:1746) = PARITY -> \u00b120-over-table route-REAL NOT artifact; (c) NO artifact (badqacc=0, no claw/pad<->table contact, grip engages). \u2b50corners = (dx=\u00b120 full-X-DR, dy=\u00b116 VOID-CRADLE-MAX): dy=\u00b116 = BOTH claws cradled = CLEAN + CONSERVATIVE pure-grip test (harder than dy=\u00b120 = TABLE-assisted+CPU-confirmed). dy=\u00b120 table-edge retention = DOWNSTREAM seat concern (J-9 class), tracked comp.",
+  "scope": "S2 tests the GRIP PREMISE at the DR tail (isolated grip, no route). GO = grip robust across tail; tail failures = downstream seat/guide (route-executor concern, NOT grip)."
+ },
+ "structural_self_check": {
+  "device_cuda0_gpu_cg": {
+   "pass": true,
+   "detail": "T.DEVICE=cuda:0; solver=gpu-cg = the PESSIMISTIC substrate (S1 de-confound PROVED gpu-cg conservative-favourable) = the CONSERVATIVE tail choice (NOT the firmer cpu solvers)"
+  },
+  "measure_gate_reused": {
+   "pass": true,
+   "detail": "measure_cage_escape + _compute_s1_gate REUSED (apples-to-apples w/ S1)"
+  },
+  "offset_mechanism_grounded": {
+   "pass": true,
+   "detail": "DR offset = build_scene(cable_xy_offset=(dx,dy)) moves the cable; grasp_cable(offset=) COMMON-MODE recenters the 88mm span (route J5 common-mode recenter, span-preserving INV#2). NOT off-centre."
+  },
+  "cells_grounded": {
+   "pass": true,
+   "detail": "5 cells = nominal + DR corners \u00b120.0mm (%12 01:45: x-20_y5 DROPPED = C2 re-grasp whiff, tracked comp5/C2): [(0, 0), (20, 16), (20, -16), (-20, 16), (-20, -16)]"
+  },
+  "worst_cell_gates": {
+   "pass": true,
+   "detail": "gate = the WORST screened cell (nominal non-conservative CC3-CH5)"
+  },
+  "creep_budgeted_not_no_slip": {
+   "pass": true,
+   "detail": "reuse the S1 creep-budgeted gate (DROP margins + retention); runaway inherited from S1 (load-insensitive 0.885) => F=0.44 per tail cell"
+  }
+ },
+ "d1_contact_ssot": {
+  "pad_solref": [
+   -65789.0,
+   -2105.3
+  ],
+  "condim": 6,
+  "impratio": 10.0
+ },
+ "frame_comparability": {
+  "DT": 0.0020833333333333333,
+  "frame_dt_10sub": 0.0020833333333333333,
+  "frame_dt_4sub": 0.0020833333333333333,
+  "SIM_SUBSTEPS": 10,
+  "RL_SIM_SUBSTEPS": 4
+ },
+ "landing_control": {
+  "ok": true,
+  "dy_mm": 25.83,
+  "N_substeps": 4
+ },
+ "W_svc_phys_frames": 9000,
+ "cage_escape_margins_mm": {
+  "lateral_max": 60.0,
+  "z_drop_max": 10.0
+ },
+ "runaway_note": "runaway (load-destabilization) INHERITED from S1 (substrate load-insensitive 0.885); S2 measures F=0.44 (loaded, gate-binding) per tail cell.",
+ "per_cell": {
+  "x0_y0": {
+   "dx_mm": 0,
+   "dy_mm": 0,
+   "engaged": true,
+   "ncon_max_close": 62,
+   "row": {
+    "F_axial_N": 0.44,
+    "N_substeps": 4,
+    "hold_frames": 1800,
+    "rate_lateral_x_mm_per_f": 0.00018,
+    "rate_axial_y_mm_per_f": 0.00199,
+    "rate_zdrop_mm_per_f": 0.00082,
+    "lateral_x_total_mm": 0.313,
+    "axial_y_total_mm": 3.828,
+    "z_total_mm": -1.698,
+    "slip_series_lateral_x_mm": [
+     0.0,
+     0.182,
+     0.592,
+     0.492,
+     0.287,
+     -0.118,
+     -0.19,
+     -0.257,
+     -0.236,
+     0.281,
+     0.309
+    ],
+    "slip_series_zdrop_mm": [
+     0.0,
+     0.756,
+     1.051,
+     1.429,
+     1.788,
+     2.371,
+     2.237,
+     2.137,
+     2.014,
+     1.716,
+     1.713
+    ],
+    "grasp_seg_z_end_m": 0.8004,
+    "c1_flank_min_z_end_m": 0.8003,
+    "ncon_mean": 35.5,
+    "contact_loss_max_run": 0,
+    "collapse": 0,
+    "badqacc": 0,
+    "landing_readback_ok": true,
+    "finite": true
+   },
+   "gate": {
+    "per_axis_over_W_svc_loaded": {
+     "lateral_x_mm": 1.62,
+     "z_drop_mm": 7.38,
+     "axial_y_mm_benign": 17.91
+    },
+    "runaway_ratio_loaded_over_unloaded": {
+     "lateral": null,
+     "z_drop": null,
+     "cap": 1.2
+    },
+    "gate_checks": {
+     "lateral_ok": true,
+     "zdrop_ok": true,
+     "runaway_ok": true,
+     "retention_ok": true,
+     "contact_not_lost": true
+    },
+    "gate_margin_utilization": {
+     "lateral_over_60mm": 0.027,
+     "zdrop_over_10mm": 0.738
+    },
+    "fork3_loose_gate_flag": false,
+    "fork3_loose_gate_note": "binding gate is a TIGHT signal (z-drop/contact/retention) or NOGO",
+    "verdict": "GRIP_GO_PROCEED_TO_S2"
+   },
+   "verdict": "GRIP_GO_PROCEED_TO_S2",
+   "zdrop_util": 0.738,
+   "lateral_util": 0.027
+  },
+  "x20_y16": {
+   "dx_mm": 20,
+   "dy_mm": 16,
+   "engaged": true,
+   "ncon_max_close": 60,
+   "row": {
+    "F_axial_N": 0.44,
+    "N_substeps": 4,
+    "hold_frames": 1800,
+    "rate_lateral_x_mm_per_f": 0.00021,
+    "rate_axial_y_mm_per_f": 0.00094,
+    "rate_zdrop_mm_per_f": 0.0,
+    "lateral_x_total_mm": -0.425,
+    "axial_y_total_mm": -1.513,
+    "z_total_mm": -0.034,
+    "slip_series_lateral_x_mm": [
+     0.0,
+     -0.131,
+     -0.208,
+     -0.276,
+     -0.315,
+     -0.355,
+     -0.372,
+     -0.398,
+     -0.411,
+     -0.408,
+     -0.407
+    ],
+    "slip_series_zdrop_mm": [
+     0.0,
+     0.015,
+     0.026,
+     0.019,
+     0.005,
+     0.005,
+     0.007,
+     0.011,
+     0.017,
+     0.013,
+     0.021
+    ],
+    "grasp_seg_z_end_m": 0.7984,
+    "c1_flank_min_z_end_m": 0.7984,
+    "ncon_mean": 23.8,
+    "contact_loss_max_run": 0,
+    "collapse": 0,
+    "badqacc": 0,
+    "landing_readback_ok": true,
+    "finite": true
+   },
+   "gate": {
+    "per_axis_over_W_svc_loaded": {
+     "lateral_x_mm": 1.89,
+     "z_drop_mm": 0.0,
+     "axial_y_mm_benign": 8.46
+    },
+    "runaway_ratio_loaded_over_unloaded": {
+     "lateral": null,
+     "z_drop": null,
+     "cap": 1.2
+    },
+    "gate_checks": {
+     "lateral_ok": true,
+     "zdrop_ok": true,
+     "runaway_ok": true,
+     "retention_ok": true,
+     "contact_not_lost": true
+    },
+    "gate_margin_utilization": {
+     "lateral_over_60mm": 0.032,
+     "zdrop_over_10mm": 0.0
+    },
+    "fork3_loose_gate_flag": false,
+    "fork3_loose_gate_note": "binding gate is a TIGHT signal (z-drop/contact/retention) or NOGO",
+    "verdict": "GRIP_GO_PROCEED_TO_S2"
+   },
+   "verdict": "GRIP_GO_PROCEED_TO_S2",
+   "zdrop_util": 0.0,
+   "lateral_util": 0.032
+  },
+  "x20_y-16": {
+   "dx_mm": 20,
+   "dy_mm": -16,
+   "engaged": true,
+   "ncon_max_close": 64,
+   "row": {
+    "F_axial_N": 0.44,
+    "N_substeps": 4,
+    "hold_frames": 1800,
+    "rate_lateral_x_mm_per_f": 0.00017,
+    "rate_axial_y_mm_per_f": 0.00012,
+    "rate_zdrop_mm_per_f": 0.0,
+    "lateral_x_total_mm": 0.003,
+    "axial_y_total_mm": -9.109,
+    "z_total_mm": 5.005,
+    "slip_series_lateral_x_mm": [
+     0.0,
+     0.1,
+     0.245,
+     0.337,
+     0.156,
+     0.138,
+     0.115,
+     -0.014,
+     -0.06,
+     0.026,
+     -0.072
+    ],
+    "slip_series_zdrop_mm": [
+     0.0,
+     0.178,
+     -0.815,
+     -1.462,
+     -6.798,
+     -6.269,
+     -5.214,
+     -8.605,
+     -6.297,
+     -4.584,
+     -8.028
+    ],
+    "grasp_seg_z_end_m": 0.8184,
+    "c1_flank_min_z_end_m": 0.8184,
+    "ncon_mean": 18.6,
+    "contact_loss_max_run": 0,
+    "collapse": 0,
+    "badqacc": 0,
+    "landing_readback_ok": true,
+    "finite": true
+   },
+   "gate": {
+    "per_axis_over_W_svc_loaded": {
+     "lateral_x_mm": 1.53,
+     "z_drop_mm": 0.0,
+     "axial_y_mm_benign": 1.08
+    },
+    "runaway_ratio_loaded_over_unloaded": {
+     "lateral": null,
+     "z_drop": null,
+     "cap": 1.2
+    },
+    "gate_checks": {
+     "lateral_ok": true,
+     "zdrop_ok": true,
+     "runaway_ok": true,
+     "retention_ok": true,
+     "contact_not_lost": true
+    },
+    "gate_margin_utilization": {
+     "lateral_over_60mm": 0.026,
+     "zdrop_over_10mm": 0.0
+    },
+    "fork3_loose_gate_flag": false,
+    "fork3_loose_gate_note": "binding gate is a TIGHT signal (z-drop/contact/retention) or NOGO",
+    "verdict": "GRIP_GO_PROCEED_TO_S2"
+   },
+   "verdict": "GRIP_GO_PROCEED_TO_S2",
+   "zdrop_util": 0.0,
+   "lateral_util": 0.026
+  },
+  "x-20_y16": {
+   "dx_mm": -20,
+   "dy_mm": 16,
+   "engaged": true,
+   "ncon_max_close": 60,
+   "row": {
+    "F_axial_N": 0.44,
+    "N_substeps": 4,
+    "hold_frames": 1800,
+    "rate_lateral_x_mm_per_f": 0.00016,
+    "rate_axial_y_mm_per_f": 0.00082,
+    "rate_zdrop_mm_per_f": 2e-05,
+    "lateral_x_total_mm": -0.29,
+    "axial_y_total_mm": -1.329,
+    "z_total_mm": -0.015,
+    "slip_series_lateral_x_mm": [
+     0.0,
+     -0.077,
+     -0.149,
+     -0.192,
+     -0.226,
+     -0.248,
+     -0.252,
+     -0.278,
+     -0.277,
+     -0.286,
+     -0.307
+    ],
+    "slip_series_zdrop_mm": [
+     0.0,
+     -0.015,
+     -0.007,
+     -0.008,
+     0.004,
+     0.001,
+     0.0,
+     -0.001,
+     0.008,
+     0.019,
+     0.014
+    ],
+    "grasp_seg_z_end_m": 0.7984,
+    "c1_flank_min_z_end_m": 0.7984,
+    "ncon_mean": 24.2,
+    "contact_loss_max_run": 0,
+    "collapse": 0,
+    "badqacc": 0,
+    "landing_readback_ok": true,
+    "finite": true
+   },
+   "gate": {
+    "per_axis_over_W_svc_loaded": {
+     "lateral_x_mm": 1.44,
+     "z_drop_mm": 0.18,
+     "axial_y_mm_benign": 7.38
+    },
+    "runaway_ratio_loaded_over_unloaded": {
+     "lateral": null,
+     "z_drop": null,
+     "cap": 1.2
+    },
+    "gate_checks": {
+     "lateral_ok": true,
+     "zdrop_ok": true,
+     "runaway_ok": true,
+     "retention_ok": true,
+     "contact_not_lost": true
+    },
+    "gate_margin_utilization": {
+     "lateral_over_60mm": 0.024,
+     "zdrop_over_10mm": 0.018
+    },
+    "fork3_loose_gate_flag": false,
+    "fork3_loose_gate_note": "binding gate is a TIGHT signal (z-drop/contact/retention) or NOGO",
+    "verdict": "GRIP_GO_PROCEED_TO_S2"
+   },
+   "verdict": "GRIP_GO_PROCEED_TO_S2",
+   "zdrop_util": 0.018,
+   "lateral_util": 0.024
+  },
+  "x-20_y-16": {
+   "dx_mm": -20,
+   "dy_mm": -16,
+   "engaged": true,
+   "ncon_max_close": 62,
+   "row": {
+    "F_axial_N": 0.44,
+    "N_substeps": 4,
+    "hold_frames": 1800,
+    "rate_lateral_x_mm_per_f": 0.00021,
+    "rate_axial_y_mm_per_f": 0.00035,
+    "rate_zdrop_mm_per_f": 0.0,
+    "lateral_x_total_mm": -0.116,
+    "axial_y_total_mm": 6.255,
+    "z_total_mm": 9.513,
+    "slip_series_lateral_x_mm": [
+     0.0,
+     0.041,
+     0.203,
+     0.385,
+     0.168,
+     -0.022,
+     -0.039,
+     -0.0,
+     -0.156,
+     -0.093,
+     -0.104
+    ],
+    "slip_series_zdrop_mm": [
+     0.0,
+     -3.477,
+     -4.613,
+     -5.668,
+     -6.099,
+     -10.599,
+     -9.01,
+     -7.59,
+     -11.113,
+     -8.902,
+     -7.561
+    ],
+    "grasp_seg_z_end_m": 0.8203,
+    "c1_flank_min_z_end_m": 0.8203,
+    "ncon_mean": 18.4,
+    "contact_loss_max_run": 1,
+    "collapse": 0,
+    "badqacc": 0,
+    "landing_readback_ok": true,
+    "finite": true
+   },
+   "gate": {
+    "per_axis_over_W_svc_loaded": {
+     "lateral_x_mm": 1.89,
+     "z_drop_mm": 0.0,
+     "axial_y_mm_benign": 3.15
+    },
+    "runaway_ratio_loaded_over_unloaded": {
+     "lateral": null,
+     "z_drop": null,
+     "cap": 1.2
+    },
+    "gate_checks": {
+     "lateral_ok": true,
+     "zdrop_ok": true,
+     "runaway_ok": true,
+     "retention_ok": true,
+     "contact_not_lost": true
+    },
+    "gate_margin_utilization": {
+     "lateral_over_60mm": 0.032,
+     "zdrop_over_10mm": 0.0
+    },
+    "fork3_loose_gate_flag": false,
+    "fork3_loose_gate_note": "binding gate is a TIGHT signal (z-drop/contact/retention) or NOGO",
+    "verdict": "GRIP_GO_PROCEED_TO_S2"
+   },
+   "verdict": "GRIP_GO_PROCEED_TO_S2",
+   "zdrop_util": 0.0,
+   "lateral_util": 0.032
+  }
+ },
+ "worst_cell": "x0_y0",
+ "video_leg_frames": [
+  {
+   "cell": "x20_y16",
+   "label": "start",
+   "path": "/home/rlrk/Downloads/srg_s2_x20_y16_start_20260708.png",
+   "nonblack": 0.889
+  },
+  {
+   "cell": "x20_y16",
+   "label": "mid",
+   "path": "/home/rlrk/Downloads/srg_s2_x20_y16_mid_20260708.png",
+   "nonblack": 0.889
+  },
+  {
+   "cell": "x20_y16",
+   "label": "end",
+   "path": "/home/rlrk/Downloads/srg_s2_x20_y16_end_20260708.png",
+   "nonblack": 0.889
+  }
+ ],
+ "conservatism": "gpu-cg = pessimistic (S1 de-confound: firmer holds tighter) = CONSERVATIVE tail. \u26a0 video PARTIAL (GPU kinematic-gripper not mj_data-synced; numeric slip-series primary). FORK-1 still stands: S2 covers the offset tail on the SCRIPTED substrate; build_multiworld CLOSE (comp3) still required.",
+ "s2_verdict": "GRIP_GO_PROCEED_TO_S2",
+ "elapsed_s": 1821.5,
+ "timestamp": "2026-07-08 02:34:33 JST",
+ "cuda_visible_devices": "0",
+ "newton_device": "cuda:0"
+}
