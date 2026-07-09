@@ -36,9 +36,10 @@ FORK-1 = does the gripper CLOSE+CAGE+HOLD the cable in **the route env as-coded*
 | worlds | 1 | **1 effective (single_world_template; worlds≥1 FROZEN as-coded)** | multi-world NOT covered (R3 Rs-escalate) |
 | arm drive | scripted grasp_cable | `_apply_actions_batch` kinematic write (:791, arm-only flag-ON) | env-drive NEW |
 | grip drive | single jump (srg_probe:307) | **recorded grip_cmd staircase EXACT replay** (R2) | schedule fidelity NEW |
-| substep | 4 | RL_SIM_SUBSTEPS=4 | MATCHED |
+| env-replay substep | 4 (SRG cage-escape ran 4) | RL_SIM_SUBSTEPS=4 | MATCHED (grip HOLD @4 = SRG-validated) |
+| ⚠ recording-gen substep | — | run_route generated the ee_pos+grip staircase at **SIM_SUBSTEPS=10** (route_executor physics_step; task_config:101) | **NOT matched — /pre-check ISSUE 1**: a 10-substep-recorded schedule replayed at 4-substep contact solve; **direction UNKNOWN** (grip close is contact/force-limited) → G1 caveat, NOT folded into the favourable prior (aligns w/ known substep 4→N Rs-level carry, build plan §7) |
 | void geom | [0.090,0.210] | [0.090,0.210] (base:1738) | PARITY (SRG void-gate) |
-⇒ the genuinely-unproven delta = env-drive path + recorded-staircase grip + reset semantics; the substrate itself (cpu-newton) is the SRG-de-confound FIRMER one = favorable. **"cuda:0-cg MATCHED" (v1) was FALSE.**
+⇒ the genuinely-unproven delta = env-drive path + recorded-staircase grip (10→4 substep transfer) + reset semantics; the substrate SOLVER (cpu-newton) is the SRG-de-confound FIRMER one = favorable, **but the 10→4 recording-replay substep delta is a separate axis, direction unknown (ISSUE 1)**. **"cuda:0-cg MATCHED" (v1) was FALSE.**
 
 ## §3. %9 grasp_actuation gap = STAGED-GAP (UNCHANGED — %12 [VERIFY] PASS v1)
 build_multiworld_scene signature accepts `grasp_actuation=False` (base:1492); :391 un-passed = intentional env-core byte-preserve default (CC4-SOUND byte-clean-by-construction). 5 evidences + test:3715 CONSISTENT (Stage-A recorded_replay=live-CUT ⇒ OFF legit / Stage-B comp3 ON ⇒ satisfies test:3715). comp3 ADDS the kwarg flag-gated. **NOT a wiring-omission.**
@@ -95,8 +96,11 @@ condim6 (:1537) / POSITION servo drivers [6,10,20,24] (:1586, ke=66.7/kd=2.0/eff
 - ⛔ **STOP citing dod9a_prime 25/81 as write-site coverage** — it is predicate-only (loads recorded cable states; never exercises write-sites; a write-site bug passes it unchanged). The monolith sha harness regresses the EXTRACTION path, not env write-sites.
 - **env-side runtime golden (B⑨a′-class full joint_q sha incl gripper, fixed seed, K steps + ≥1 done-reset) = a GPU-cost leg** (route warp = cuda:0) bundled into the Rs G1 surface — NOT a no-GPU leg.
 
-## §13. G-scope — R4
-- **G1 (comp3) = nominal-cell close+cage+hold** on the R3 substrate (cpu-newton, world-0). creep-budgeted (SRG method). video skill-path (/verify-run or /video-analyzer + video-analyst) + human-GT (CC5-CH10). GPU-cost → /production-launch-gate + Rs surface.
+## §13. G-scope — R4 (+ /pre-check ISSUE 2/3 folds)
+- **G1 (comp3) = nominal-cell close+cage+hold** on the R3 substrate (cpu-newton). creep-budgeted (SRG method). video skill-path (/verify-run or /video-analyzer + video-analyst) + human-GT (CC5-CH10). GPU-cost → /production-launch-gate + Rs surface.
+- ⚠ **/pre-check ISSUE 2 — PIN `world_count=1`** (env default `__init__ world_count=4` :252; worlds≥1 FROZEN would contaminate any batch metric). "world-0/nominal" ≡ a SINGLE-world build, NOT world-index-0 of a 4-world batch. Apply to G1 run spec AND the L2 CPU probe.
+- ⚠ **/pre-check ISSUE 3 — close-frame contact zoom** (§運用14): the env IK-interpolates arm joint_q LINEARLY over 10 frames (:786) while the grip staircase fires per-physics-frame → the close can act on a not-yet-arrived (joint-linear) arm pose ≠ the recorded nonlinear IK descent (close-on-transient risk). G1 video MUST zoom the pad↔cable contact AT the close frame, not only end-of-episode hold.
+- ⚠ **/pre-check ISSUE 1 caveat carried:** G1 verdict states the 10→4 recording-replay substep delta (direction unknown) alongside the multi-world-NOT-covered / GPU-cg-NOT-covered caveats.
 - **comp3b (registered follow-on, descoped):** tail-cells (needs DoD⑦ cable-offset wiring — env has `dr_xy=(0.0,0.0)` hardcoded :680, CC4-CH3) + k≥1 fork divergence G2 (needs ⑦(b) cable re-seed CODE — CC5-CH5). ⚠ **⑦(b) MUST carried loud** (build plan §8-B): build_state_bank cable_xyz capture + env-level seed_cable_joint_state offset-aware.
 
 ## §14. Process chain — R7 (supersedes v1 §11 first hops)
@@ -116,6 +120,18 @@ fold → **CC1 focused re-gate** → **/pre-check (bundle diff) + scoped /reward
 
 ## §17. Risks
 substrate-transfer (env-drive path; G1 measures; but cpu-newton = SRG-firmer favorable) / worlds≥1-frozen (Rs campaign item, NOT comp3) / grip-staircase fidelity (EXACT replay; L4 unit) / reset semantics (AR-precedent; L1/L4) / device-robust grip write (.assign() + readback) / obs flag-ON source (R6; L4).
+
+## §18. Prior-art / no-repeat disposition (R7, VaultProtocol V10 — gate (1) run 2026-07-10)
+`check_thread_vault_prior_art.sh --fail-on-blocker grasp_actuation gripper overwrite inert-grip write-site servo` = findings=30, blockers=30. **Classified — NO genuine do-not-repeat path violated; concrete delta recorded:**
+- 18/30 = **this node's own earlier build plan** (BUILD_PLAN_ROUTEEXEC_COORD_20260707) — self-reference, not a foreign failed path.
+- 7/30 = **AR grasp_actuation PROVEN precedent** (AR_BUILD_RESULT: `build_multiworld_scene(grasp_actuation=True)` wired + fail-loud assert + world-0 servo closes 0.0018→0.7424; VOID_CROSSPV 4/4 PASS) = the mechanism comp3 REUSES (supportive, not a repeat).
+- B0_BUILD_REPORT: "servo on `vbd_control` — **never a fresh control**" = exactly the device-robust `.assign()` pattern R2/CC3-CH5 mandates (supportive).
+- **S-2 (CRITICAL keystone):** friction-only grasp CANNOT hold the 45g cable in-sim (all-FAIL static hold) → drove the 爪/form-closure pivot. ⇒ **plan RESPECTS it** (koshape form-closure CAGE, SRG cage-hold confirmed — NOT friction-only).
+- **D2 S-4 (MED, FLAGGED):** scripted-kinematic finger close (joint_q overwrite) brushes SOMA no-kinematic-trick. ⇒ ⭐**plan DIRECTLY GUARDS it** — comp3 uses the POSITION servo (grasp_actuation restores the actuated 4-bar); comp4 EXCLUDES the gripper from the 28-wide joint_q write so the finger closes by PHYSICAL PD, NOT kinematic overwrite.
+- **CONCRETE DELTA (VaultProtocol V10):** plan v2 uses the proven AR actuated POSITION-servo form-closure (gripper excluded from the kinematic write), avoiding BOTH friction-only-hold (S-2 FAIL) and scripted-kinematic-close (S-4 SOMA-brush). ⇒ proceed authorized to gates (2)/(3); **BUILD itself remains %12's auth** (not taken here).
+
+## §19. /pre-check disposition (gate (2), run 2026-07-10) = PASS
+skeptical sub-agent (read code end-to-end, not plan-on-faith) = **VERDICT PASS** (0 critical / 0 high / 2 medium / 1 low). **All R1-R8 VERIFIED SOUND** (none insufficient). CONFIRMED (non-issues): write-site completeness = exactly 3 gripper joint_q sites (:440/:670/:791), NO missed 4th per-step site (`assign_world_states_to_sim` writes body only; `seed_cable_joint_state` cable only) → inert-grip defect CLOSED; grip writer genuinely new + `_set_gripper_target` device-robust + `_REC_CADENCE=10==PHYSICS_STEPS_PER_RL` cf[t]+i 1:1; reset re-seed→OPEN + `_settled_fk_jq` patch close the cross-episode leak; no-kinematic-trick RESPECTED; zero drift (grasp_actuation gates pre-exist in base; env only passes kwarg :391). **3 folds (pre-build, non-blocking):** ISSUE 1 (MED) 10→4 recording-replay substep delta = §2 caveat, direction unknown / ISSUE 2 (MED) pin world_count=1 = §13 / ISSUE 3 (LOW) close-frame contact zoom = §13. None block the no-GPU legs; G1 stays behind /production-launch-gate + Rs.
 
 ---
 *%11 COORD (w2:p3) v2 2026-07-10. Folds 5体 DECIDE=REVISE (c80a546f6c), all R1-R8 + accepted findings, no REBUT. K3 substrate CC1-confirmed + §運用28 re-verified by me. PLANNING only. → %12 focused re-gate → /pre-check + scoped /reward-design + prior-art → RULE-CHECK → build no-GPU. GPU G1 + worlds≥1 escalation = Rs surface.*
