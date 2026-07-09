@@ -256,6 +256,19 @@ class NewtonRouteEnv(VecEnv):
         self.max_episode_length = self.MAX_EPISODE_STEPS
         self.device = device
         self.cfg = cfg or {}
+        # comp3 (Stage-B): grasp_actuation flag. Default OFF = env-core byte-preserve (solid table, gripper
+        # kinematically pinned OPEN). ON = build the DYNAMIC POSITION-servo gripper + table VOID and let the
+        # recorded grip_cmd schedule close it. Bool-type asserted (K5/R8: cfg.get truthiness hazard). ON
+        # REQUIRES the RouteExecutor route (the grip-cmd writer) -- else the servo is built with no schedule
+        # = silent inert grip; fail loud (K5).
+        _ga = self.cfg.get("grasp_actuation", False)
+        assert isinstance(_ga, bool), f"cfg['grasp_actuation'] must be a bool, got {type(_ga).__name__}"
+        self._grasp_actuation = _ga
+        if self._grasp_actuation and self.cfg.get("route_executor_impl", "stub") != "route_executor":
+            raise ValueError(
+                "grasp_actuation=True requires cfg['route_executor_impl']=='route_executor' "
+                "(the recorded grip_cmd schedule drives the servo; a stub route leaves the servo inert)"
+            )
         self._world_count = world_count
 
         self.episode_length_buf = torch.zeros(world_count, dtype=torch.long, device=device)
@@ -396,6 +409,7 @@ class NewtonRouteEnv(VecEnv):
             add_support_clips=True,
             add_target_clip=True,  # C1 V-groove present (routing/seating scenario, cf Grip clamp mode)
             target_clip_float_z=rc.ROUTE_CLIP_FLOAT_Z,  # C1 clip float +20mm (route env-gate; %12 build+predicate flag)
+            grasp_actuation=self._grasp_actuation,  # comp3: OFF (default)=byte-id solid table; ON=VOID+servo
         )
         self._model = scene["model"]
         self._solver = scene["solver"]
@@ -415,6 +429,19 @@ class NewtonRouteEnv(VecEnv):
         _jws_joint = self._model.joint_world_start.numpy()
         self._arm_q_start = [int(_jqs[_jws_joint[w]]) for w in range(self._world_count)]
         self._arm_qd_start = [int(_jqds[_jws_joint[w]]) for w in range(self._world_count)]
+        # comp3 (flag-ON only): env-owned per-world arm-only write index maps (single-source with
+        # route_executor via build_perworld_index_maps). Built here because _broadcast_arm_jointq runs
+        # BEFORE the RouteExecutor exists (K5/R8). flag-OFF builds nothing -> byte-preserve.
+        self._arm_ow_maps = None
+        self._rex = None  # route_executor module handle (arm-only write fns); flag-ON only
+        if self._grasp_actuation:
+            _til = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            if _til not in sys.path:
+                sys.path.insert(0, _til)
+            import route_executor as _rex_maps
+
+            self._rex = _rex_maps
+            self._arm_ow_maps = _rex_maps.build_perworld_index_maps(self._arm_q_start, self._arm_qd_start)
         print(
             f"[NewtonRouteEnv] Model: {self._model.body_count} bodies, "
             f"{self._model.joint_count} joints, solver={type(self._solver).__name__}"
@@ -436,9 +463,16 @@ class NewtonRouteEnv(VecEnv):
         fk_jq = self._fk_state.joint_q.numpy()[:n]
         phys_jq = self._state_0.joint_q.numpy()
         phys_jqd = self._state_0.joint_qd.numpy()
-        for w in range(self._world_count):
-            phys_jq[self._arm_q_start[w] : self._arm_q_start[w] + n] = fk_jq
-            phys_jqd[self._arm_qd_start[w] : self._arm_qd_start[w] + n] = 0.0
+        if self._grasp_actuation:
+            # comp3: arm-only re-pose; gripper coords {6-13,20-27} left DYNAMIC (POSITION servo drives them).
+            self._rex.apply_arm_only_write_broadcast(
+                phys_jq, phys_jqd, fk_jq,
+                self._arm_ow_maps["arm_ow_q_idx"], self._arm_ow_maps["arm_ow_qd_idx"], self._arm_ow_maps["arm_ow_src"],
+            )
+        else:
+            for w in range(self._world_count):
+                phys_jq[self._arm_q_start[w] : self._arm_q_start[w] + n] = fk_jq
+                phys_jqd[self._arm_qd_start[w] : self._arm_qd_start[w] + n] = 0.0
         self._state_0.joint_q.assign(phys_jq)
         self._state_0.joint_qd.assign(phys_jqd)
 
@@ -786,10 +820,18 @@ class NewtonRouteEnv(VecEnv):
             jq_interp = old_fk_jq + (jq_targets - old_fk_jq) * t
             phys_jq = self._state_0.joint_q.numpy()
             phys_jqd = self._state_0.joint_qd.numpy()
-            for w in range(N):
-                jq0, jqd0 = self._arm_q_start[w], self._arm_qd_start[w]
-                phys_jq[jq0 : jq0 + _N_ARM_JOINTS] = jq_interp[w, :_N_ARM_JOINTS]
-                phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
+            if self._grasp_actuation:
+                # comp3: arm-only per-world drive; gripper coords {6-13,20-27} left DYNAMIC (servo-driven;
+                # the recorded grip_cmd staircase writes control.joint_target_pos separately -- R2/chunk 2).
+                self._rex.apply_arm_only_write_perworld(
+                    phys_jq, phys_jqd, jq_interp,
+                    self._arm_ow_maps["arm_ow_q_idx"], self._arm_ow_maps["arm_ow_qd_idx"],
+                )
+            else:
+                for w in range(N):
+                    jq0, jqd0 = self._arm_q_start[w], self._arm_qd_start[w]
+                    phys_jq[jq0 : jq0 + _N_ARM_JOINTS] = jq_interp[w, :_N_ARM_JOINTS]
+                    phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
             self._state_0.joint_q.assign(phys_jq)
             self._state_0.joint_qd.assign(phys_jqd)
             self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
