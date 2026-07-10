@@ -13,7 +13,7 @@ goal_verification: |
   ⑦ CABLE_XY_OFFSET per-cell wiring
   ⑧ ⑬ enabler のみ (recorded-target-replay stub upgrade + C1-escape non-vacuous cell 供給; ⑬-VERDICT は D-2=trainer 段 defer)
   分子 conjoin = strict_v2 (C1-retention + C2-seat 両 leg)。trainer 段の policy 学習成果は本 node scope 外。
-  現況 (2026-07-10 11:59, PLAN-KEEPER 反映): ⭐**comp3+comp4 build 3 chunk 完了** (`af9c8f2eae` flag-OFF foundation / `f089fde5f1` reset re-seed + grip staircase / `1ef5376f81` servo readback + obs R6 + L2 void probe) + **層2/層5 post-verify = PASS-WITH-FOLDS** (`eb007d3efc`) + **folds 1-9 + P0 scene 視覚レグ discharge** (`909b065b3f`)。⭐**Rs 裁定 4件 (2026-07-10 11:4x)**: G1 承認 / シーン=A 録画整合 / worlds≥1 凍結=別タスク (COORD2 charter 済) / locked worktree churn=revert 済。⏳**現況 = G1 prework (scene-align config) COORD 実行中**。前提済 = SRG probe COMPLETE 2026-07-08 (grip premise ROBUST、J-9 confirm、`d9542b4981`) + minimal Stage-A COMPLETE (2026-07-07)。詳細 = session_history 09:00-11:50 %12 統合 entry (`e20bc11c2f`)。node IN_PROGRESS 維持 (comp5-8 remain; C2-whiff=comp5 / table-edge retention CARRY)。
+  現況 (2026-07-10 19:08, PLAN-KEEPER 反映): ⭐**comp3 G1 診断アーク完了 (16:14、bank `7d79cdbce2`)** — G1 run-1 (初 live 把持) = NUMERIC_NOGO → 根因 = EE_Z_FLOOR_KO clip (env-core 潜在欠陥) → **lane-aware floor fix** (`65b5b9dd21`) + tight 5体 PASS-WITH-FOLDS (`a35cb359a0`) + folds (`203f91594b`) + 確認計測 PASS (爪 park bias +3.07→−0.04mm) → G1 retry = cage 成立・axial pay 残 → sub10 診断 = ISSUE-1 MATERIAL・R 支配 → ⭐**arm_q 直接駆動 = 初の両腕保持成功** (`c2045a9a1a`) = **診断 grid 完成** (G1 の env 物理基盤は把持+lift 可能と実証)。⏳**次 = production 駆動経路 設計ゲート (Rs ok、COORD decision-packet 化 実行中)**。前提済 = comp3+comp4 build 3 chunk + Rs 裁定 4件 (11:4x) + SRG probe COMPLETE 2026-07-08 + minimal Stage-A COMPLETE (2026-07-07)。詳細 = session_history 07-10 12:14〜16:14 の 5 entry (%12 bank)。node IN_PROGRESS 維持 (comp5-8 remain; C2-whiff=comp5 / table-edge retention CARRY)。
 status: IN_PROGRESS
 parent_node: T-ROOT-optE-route-dapg-C1C2
 children_nodes: []
@@ -24,7 +24,7 @@ dependencies:
     - "D-1=C (新 module 抽出+byte-repro) / D-2=trainer (⑬ VERDICT defer) = Rs 決定 2026-07-06 23:5x"
   blocker: []
 created: 2026-07-06T23:58:00+09:00
-last_updated: 2026-07-10T11:59:00+09:00
+last_updated: 2026-07-10T19:08:00+09:00
 spec_version: LTM-1 v1.1
 session_history:
   - "2026-07-10 15:58-16:14 %11+%12 ⭐⭐**arm_q 直接駆動 probe = 初の両腕保持成功 → 診断 grid 完成 (G1 の env 物理基盤は把持+lift 可能と実証; 残 = production 駆動経路の設計判断)** — probe (`c2045a9a1a`, production 4-sub、apply_arm_only_write_perworld を probe-level monkeypatch して録画 arm_q を毎 physics frame 駆動、env 無編集): **両腕 lift PASS 初** (rise L+74.5/R+77.1mm ≥40)、lateral 0.03/0.05mm、z_drop end 5.3/1.6mm、axial +16.0/+16.1mm **左右対称 = 沈着 (pay-through でない)**、contact streak 0、完走 t=172。NUMERIC_NOGO は線形外挿 leg のみ (rate×9000f 高読み、end 値 margin 内 = SRG 既知 conservative パターン)。video-analyst: slip event なし・**爪間スパン taut (retry の U-loop 消滅)**・両爪 carry 完走; 注記 = 本 analyst は両爪 base-seat 読み (sub10 analyst の R=throat 読みと用語/判読差 — コ型は foot-bar carry が意図構造の可能性、**Rs 動画判定で確定**)。三者整合。**⇒ 診断 grid 完成: ①floor clip = FIXED (65b5b9dd21) ②ISSUE-1 substep 接触転移 = MATERIAL・R 支配 (sub10: chord+10sub で R 回復) ③ISSUE-3 駆動 chord (env IK + 10-frame 線形補間) = CONFIRMED・L 支配 (本走: per-frame+4sub で両腕回復)**。per-frame 駆動は substep より広く効く (両腕 vs R のみ)。production 方策 options (設計ゲート要): A per-frame base+IK (IK ×10 cost) / B substep 10 (物理 2.5×、R 軸のみ実証) / C 併用 / D hybrid (scripted phase = feedforward + residual = chord)。**次 = Rs 総括 surface** (grid + options + 併走 campaign 項目 [worlds≥1 D-i..iv / substep 4→N / AC env 床監査])。動画 comp3_g1armqdirect_* → Downloads + Rs。単一 cell scope。"
