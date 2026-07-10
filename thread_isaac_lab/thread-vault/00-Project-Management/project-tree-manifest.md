@@ -50,7 +50,7 @@ Logic tree v1 (`~/.claude/projects/-home-rlrk-IsaacLab/memory/project_logic_tree
 
 <!-- GEN:NEST:BEGIN (build_nest_snapshot.py; 手書き禁止) -->
 
-_239 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
+_240 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
 
 | node_id | status | parent |
 |---|---|---|
@@ -140,6 +140,7 @@ _239 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-ROOT-D1-LoRA-S1-S3-PPO-Design-2026-05-13` | COMPLETE | `T-ROOT-D1-LoRA-S1-Phase2a-Design-2026-05-13` |
 | `T-ROOT-D1-LoRA-Snapshot-2026-05-13` | COMPLETE | `T-ROOT-D0-Close-D1-ResetForensics-2026-05-13` |
 | `T-ROOT-Legacy-Architecture` | ARCHIVED | `T-ROOT` |
+| `T-ROOT-Paper-BCRL-JA-20260710` | IN_PROGRESS | `T-ROOT` |
 | `T-ROOT-Phase2-V2-Provenance-Repair-Design-2026-05-13` | COMPLETE | `T-ROOT-Cable-Physics-Calibration-Packet-Design-2026-05-13` |
 | `T-ROOT-Pivot-Chain-Architecture-Review` | COMPLETE | `T-ROOT` |
 | `T-ROOT-Pivot-D0-AC-Pre-Check-Packet-2026-05-13` | COMPLETE | `T-ROOT-Pivot-D0-AC-Scripted-Base-Design-2026-05-13` |
