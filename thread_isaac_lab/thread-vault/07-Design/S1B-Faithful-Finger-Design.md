@@ -22,6 +22,8 @@ status: FAILED_ABANDONED_SUPERSEDED_BY_SIM_FOUNDATION_APPLAUNCHER_ROUTE
 > SIM-foundation route after `%3` verified the launcher surface. Do not use this document as a runtime plan or as
 > evidence that the Newton faithful-finger route remains active.
 
+> **⚠ Scoped 復活禁止 (renewal batch A, 2026-07-11 — LEDGER `00-DESIGN-STATUS-LEDGER.md:65-74` verbatim scope; NOT a blanket ban):** the following are closed/blocked **on the env6 Newton substrate** — do NOT re-attempt: (a) VBD-prismatic retry, (b) Kamino single-solver, (c) dual-solver-external apply, (d) rebuilding the faithful prismatic finger on this substrate. **Root cause:** no single env6 Newton solver hosts both a PRISMATIC finger joint and the CABLE-jointed `add_rod` cable (CABLE = VBD-only `solvers.py:212-218`; VBD rejects PRISMATIC `solver_vbd.py:617-621`; Kamino/Featherstone reject CABLE `solver_kamino.py:800-804`; Featherstone+VBD-external = silent-invalid). **⚠ Scope limit (do NOT over-block):** cable retention is **not** infeasible in Newton — a clamp+lift+hold *was* achieved historically (AR 92.2%, spring-follow, = *quarantined diagnostic* not product proof); and the requirements / reward-design analysis is **PORTABLE to the mujoco rebuild** (LEDGER `:86-87`). Only the *faithful-prismatic Newton rebuild* is walled. SSOT = LEDGER `:65-74`.
+
 > **Authorship / ownership:** This document was originally a **consolidation authored by `%3`
 > (T-ROOT-OPS-SUPERVISOR)** of design content that was Rs-decided and reviewed on 2026-06-03/04. It is now a
 > failure-avoidance record governed by `00-DESIGN-STATUS-LEDGER.md`.
