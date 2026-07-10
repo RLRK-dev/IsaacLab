@@ -1,6 +1,7 @@
 # 07-Design 構造刷新 RENEWAL_PLAN(step 0-1 packet)
 
-**Status: v0.2-DRAFT**(5体 L3 debate FAIL→fold 完了; group A-E)— chain: 本 packet → ~~5体 debate~~(済、`RENEWAL_L3_DEBATE_DECIDE.md`)→ **targeted re-verify** → %12 verify → **Rs 承認(§9)** → batch 執行。
+**Status: v0.3 — ✅ Rs DESIGN-APPROVED + batch 0 build-authorized**(2026-07-11 01:1x、%12 relay; DESIGN 承認 anchor = packet sha `55554b68…` @`f19a80d34f`)。§9 の 7 決定 = **CC1 総合推奨どおり全確定**(§11 反映)。**執行 layer = §11**(§1-§10 = v0.2 分析基盤、不変)。chain 済: v0.1 → 5体 debate FAIL → v0.2 fold(group A-E)→ %12 verify PASS → Rs 承認。
+- **v0.2 chain(履歴):** 本 packet → ~~5体 debate~~(`RENEWAL_L3_DEBATE_DECIDE.md`)→ %12 verify → Rs 承認(§9)→ batch 執行。
 **Charter:** Rs 裁定 2026-07-11 00:30(%12 relay 00:35、bank = routeexec node): 対象 = 07-Design 主要 doc 群 / 深さ = **構造から刷新 — canonical 値(43-step 表・全数値・決定記録・sha anchor)不変保証付き** / executor = p5(設計基盤 surface)。**L-TRIAGE = L3**(RL-Routing-*.md path match + 複数 file)。
 **Guardrails(charter + %12 00:38 + debate fold):** ①刷新 = 構造/編集のみ — 工程・設計値の変更は v-next governance へ(不混合。**例外 = batch 0 の VGroove ' M' adjudicate のみ、§2-2 で個別 Rs 承認**)②RL-Routing-Progress = FROZEN 原文 verbatim 保存(banner 以外の内容 edit 禁止)③PoseEstimation consolidate は **non-FAILED/non-DISCARDED(ACTIVE または PARKED)系譜のみ**(CC4-C7 修正; 復活禁止 gate)④FAILED/DISCARDED doc の内容復活禁止は **substrate/scope-limited**(blanket でなく LEDGER の scoped list verbatim、CC4-C8 修正)。
 Author: p5 VT-DESIGN。v0.1 Drafted 2026-07-11 00:4x、**v0.2 folded 00:55 JST**。**Node: T-ROOT-DesignDoc-Renewal-20260711**(登録 `eac3d11b73`、IN_PROGRESS、assignee = p5)。
@@ -187,7 +188,42 @@ citing file を **{LIVE-update / BANKED-immutable / OUT-OF-SCOPE-report-only} ×
 
 **CC1 総合推奨:** 4a + batch A(scoped)即時 / 4b = revert(A)/ B-minimal / **C-defer** / Mech-Specs = 軽量 / :42 批准は Rs 任意 / GD-KoShape は charter 外のまま(別 charter 化を提案可)。
 
+## §11 Rs 決定反映 + 執行 detail(v0.3、承認 path)
+
+### §11.1 Rs 7 決定(2026-07-11 01:1x、%12 relay; verbatim「7項目確定」+「4 承認」)
+
+| § | 項目 | Rs 決定 | 執行 |
+|---|---|---|---|
+| 9-1 | batch C timing | **C-defer** | 工程表 v2 fold 着地まで HOLD(§11.4)|
+| 9-2 | batch B | **B-minimal** | v3.2 head banner + patch-stack 2 class(§11.3)|
+| 9-3 | Mech-Specs 深さ | **軽量**(banner + 区画化のみ、full skeleton 不適用)| batch C 内だが C-defer に従属 → HOLD |
+| 9-4a | tracked 化 6 | **承認** | ✅ 済(commit `995bdefafc`、full-sha 6/6 EXACT)|
+| 9-4b | VGroove ' M' | **A(revert)** | broadcast 先行 → revert(§11.2)。origin-unknown のまま(Rs 心当り言及なし)|
+| 9-5 | :42 MIXED 批准 | **行使なし** | 未批准のまま。banner = (Rs-confirm) 未批准 draft と明記 |
+| 9-6 | GD-KoShape scope | **charter 外** | 07-Design のみ(別 charter 化は将来提案可)|
+| 9-7 | LEDGER EXCLUDE | 確認 | 構造刷新から除外、cite/status write-back のみ(§3.4)|
+
+「4 承認」= **batch 0 の build 授権**(2 段授権 第 2 段 初回)。batch A/B/C の build-auth = 各着手前に Rs へ別途 1 行。
+
+### §11.2 batch 0(build-authorized、執行中)
+- **§2-1 tracked 化 6 = ✅ 済**(`995bdefafc`; 執行時 full-sha 再検証 6/6 pin EXACT、%12 verify PASS 01:21 = tracked 11/11)。
+- **§2-2 VGroove ' M' = A(revert)**: 全 pane claim broadcast(p1/p2/p3/p6、申告期限 **2026-07-11 02:00 JST**、応答先 p5、hunk pointer = §2-2、p3 sweep 中は急ぎ不要)→ **期限無申告なら anomaly 記録 + `git checkout --` revert** → batch 0 完了報告(%12 が Rs へ batch A 授権 1 行)。値 0.69 は batch A の VGroove ARCHIVE banner に **pointer 化保存**(§11.3、reference-over-copy)。
+
+### §11.3 batch A(archive-label 3、B-minimal 込; **build-auth 待ち = 未着手**)
+- **RL-Routing-Progress.md**: FROZEN banner 確認のみ(verbatim、guardrail ②)。
+- **S1B-Faithful-Finger-Design.md**: FAILED banner + **scoped 復活禁止**(LEDGER :65-74 の閉鎖 path verbatim 引用; 「cable retention は Newton で infeasible ではない」:73-74 / reward-design mujoco portable :86-87 は潰さない)。
+- **Gripper-VGroove-Design.md**: DISCARDED banner + **dated staleness pointer**(既 banner の「swap deferred」は :57 COMMITTED `85315bbec6` 06-23 に対し stale)+ **' M' 値の pointer 化**(「current HALF_OPEN_RAD = task_config.py:313 = 0.69; LEDGER:57/:58」)。
+- **batch B(B-minimal、A と同 gate)**: v3.2 head banner(CURRENT HEAD PARKED/unvalidated + composite 読解契約 v3+v3.1+v3.2)/ v3・v3.1 = 部分 supersede banner(未掲載 section normative 継続)/ v1・v2 = whole-superseded archive banner。**内容再合成なし**(消費者ゼロ = L1.A 未着手)。
+- gate(A/B 共通): banner-only diff(banner 以外 diff==0)+ **層5 SSOT lens**(3+file 直交)+ %12 verify。
+
+### §11.4 batch C(C-defer、HOLD)
+- **HELD until 工程表 CANONICAL_MOTION_TABLE_V1 の v2 fold 着地。** trigger = v2 発効(L3 + 5体 + Rs 承認 + LEDGER 行、CANONICAL §6 統合方針)。
+- 着地時: **v2 の §2 領域編集 + 構造刷新を単一 pass** で実施(cite map 1 回 / invariance 1 回 / 工程表 re-anchor 1 回)。§5 全層 + cite map(§6)+ CP1/CP2 + 層5 + %12 verify + post 層2 + per-doc commit + 各着手前 Rs build-auth(§7)。
+- Mech-Specs(軽量、§11.1-9-3)も本 defer に同乗(単一 pass 内で banner + 区画化)。
+- **監視:** VN-1/VN-2 は FLAT 深さ sweep(COORD 実行中)+ slot reframe の統合検討待ち(CANONICAL v1.0a-r2 §6.2)。sweep→統合→v2 提案→v2 発効 が batch C の解除条件。
+
 ## §10 Changelog
 
 - v0.1-DRAFT(00:4x): 初版。inventory・LEDGER 照合・cite 実数・invariance 案・batch 設計。
+- **v0.3(01:2x): Rs DESIGN 承認 + batch 0 build 授権 反映。** §11 追加(7 決定表 + batch 0 済/VGroove revert plan + batch A/B-minimal banner spec + batch C-defer trigger)。status → Rs DESIGN-APPROVED。§1-§10 = v0.2 分析基盤で不変。
 - **v0.2-DRAFT(00:55): 5体 L3 debate(CRITICAL 3 + HIGH 12+)全 fold。** A=invariance 再設計(block-hash + partition-aware + hex/verbatim class + allowed-additions + 起草前 commit freeze + U+2212 + prose leg + anchor-semantics + P-full 実行不能)/ B=cite(regex SET + 3 列 ledger + § canonicalization + map currency + CANONICAL consumer 明記 + task_config:357 分離)/ C=disposition(Rs-confirm + snapshot banner + patch-stack 2 class + ' M' 分割 + hunk 掲載 + S1B scoped + VGroove staleness + guardrail 文言 + 2 段授権)/ D=process(層5 A/B + post 層2 + sha 再検証 + CP1/CP2 + 参照化削除)/ E=§9 再構築(C-defer/C-light + B-minimal + D-1 位置訂正 + GD-KoShape 質問)。次 = targeted re-verify → %12 verify → Rs packet。
