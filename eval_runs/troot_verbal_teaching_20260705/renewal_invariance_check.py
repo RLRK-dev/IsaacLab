@@ -290,11 +290,17 @@ def layer2_multiset(pre: str, post: str, cfg: dict, pre_spans, post_spans, fails
         fails.append(f"L2 hex anchor added (not in allowed-additions): {dict(hx_added)}")
 
     # 5-2b: presence of canonical values in the post ACTIVE partition.
+    # Token-boundary match (not bare substring): a canonical value must appear
+    # as a standalone numeric token, so demoting e.g. "1.12" to HISTORICAL is
+    # NOT masked by a superstring like "1.125" lingering in ACTIVE (verified
+    # adversarial case ADV-2). Leading (?<![\d.]) rejects a preceding digit/dot
+    # (11.12), trailing (?![\d]) rejects a following digit (1.125) while still
+    # allowing a trailing period/space (value at end of sentence).
     active, _hist = split_partition(post_rem, cfg.get("partition_marker"))
     active_norm = normalize_digits_minus(active, endash_range=endash)
     for cv in cfg.get("canonical_values", []):
         val = normalize_digits_minus(str(cv["value"]), endash_range=endash)
-        if val not in active_norm:
+        if not re.search(r"(?<![\d.])" + re.escape(val) + r"(?![\d])", active_norm):
             fails.append(f"L2 presence: canonical value '{cv['id']}'={cv['value']} absent from post ACTIVE partition")
 
 
@@ -468,9 +474,43 @@ def _mk_post(**edits):
     return lines
 
 
+def _judge(name: str, should_fail: bool, needle: str | None, fails: list[str]) -> bool:
+    """Print and score one self-test case; return True if it behaved."""
+    got = bool(fails)
+    verdict, ok = "PASS", True
+    if got != should_fail:
+        verdict, ok = "MISBEHAVE", False
+    elif should_fail and needle and not any(needle in f for f in fails):
+        verdict, ok = f"WRONG-LAYER(want {needle})", False
+    print(f"  self-test {name:24s} expect={'FAIL' if should_fail else 'PASS':4s} -> {verdict}"
+          + (f"  {fails}" if got else ""))
+    return ok
+
+
+# ADV-2 (hardening fix, p1 mechanical-leg): demote a canonical value while a
+# numeric *superstring* stays in ACTIVE, with the demoted line moved intact, so
+# L1 / L2-number / L3 all pass and only the token-boundary presence check can
+# catch it. Before the fix this false-PASSed (substring match); it must FAIL now.
+_ADV2_PRE = (
+    "# Doc\nintro line value 1.12 here\ntolerance 1.125 stays active\n"
+    "<<CANON-START>>\nSTEP 1 z=1.07\nSTEP 2 z=1.05\n<<CANON-END>>\n"
+    "prose survives\n## HISTORICAL\nold note deadbeefcafe0001\n"
+)
+_ADV2_POST = (
+    "# Doc\ntolerance 1.125 stays active\n"
+    "<<CANON-START>>\nSTEP 1 z=1.07\nSTEP 2 z=1.05\n<<CANON-END>>\n"
+    "prose survives\n## HISTORICAL\nold note deadbeefcafe0001\nintro line value 1.12 here\n"
+)
+
+
 def self_test() -> int:
-    """Run synthetic fixtures; assert each failure/allowed mode behaves."""
-    cases = [
+    """Run synthetic fixtures; assert each failure / allowed mode behaves.
+
+    Covers the four layers, the ADV-2 superstring-demotion evasion (the
+    token-boundary presence hardening), and L4 / json-invariant coverage.
+    """
+    ok = True
+    shared = [
         ("swap", True, "L2 number"),
         ("block_edit", True, "L1 block"),
         ("delete", True, "L3 prose"),
@@ -480,18 +520,24 @@ def self_test() -> int:
         ("cite_shift", False, None),
         ("allowed_add", False, None),
     ]
-    ok = True
-    for name, should_fail, needle in cases:
+    for name, should_fail, needle in shared:
         post = _mk_post(**{name: True})
-        fails = run_check(json.loads(json.dumps(_SELF_CFG)), _SELF_PRE, post)
-        got_fail = bool(fails)
-        verdict = "PASS"
-        if got_fail != should_fail:
-            verdict, ok = "MISBEHAVE", False
-        elif should_fail and needle and not any(needle in f for f in fails):
-            verdict, ok = f"WRONG-LAYER(want {needle})", False
-        print(f"  self-test {name:12s} expect={'FAIL' if should_fail else 'PASS':4s} -> {verdict}"
-              + (f"  {fails}" if got_fail else ""))
+        ok = _judge(name, should_fail, needle, run_check(json.loads(json.dumps(_SELF_CFG)), _SELF_PRE, post)) and ok
+
+    # ADV-2 superstring demotion -> must be caught by token-boundary presence.
+    ok = _judge("adv2_superstring_demote", True, "L2 presence",
+                run_check(json.loads(json.dumps(_SELF_CFG)), _ADV2_PRE, _ADV2_POST)) and ok
+
+    # L4 coverage: unchanged doc but a wrong expected row count -> only L4 fires.
+    cfg_l4 = json.loads(json.dumps(_SELF_CFG))
+    cfg_l4["anchor_checks"][0]["expect"] = 99
+    ok = _judge("l4_rowcount", True, "L4", run_check(cfg_l4, _SELF_PRE, _SELF_PRE)) and ok
+
+    # json-invariant coverage: pinned json path missing -> json-invariant fires.
+    cfg_json = json.loads(json.dumps(_SELF_CFG))
+    cfg_json["json_sha_invariant"] = {"path": "/nonexistent/renewal_nope.json", "sha256": "00" * 32}
+    ok = _judge("json_missing", True, "json-invariant", run_check(cfg_json, _SELF_PRE, _SELF_PRE)) and ok
+
     print(f"[self-test] {'ALL OK' if ok else 'FAILURES PRESENT'}")
     return 0 if ok else 1
 
