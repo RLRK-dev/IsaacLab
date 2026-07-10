@@ -141,7 +141,7 @@ _242 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-ROOT-D1-LoRA-Snapshot-2026-05-13` | COMPLETE | `T-ROOT-D0-Close-D1-ResetForensics-2026-05-13` |
 | `T-ROOT-DesignDoc-Renewal-20260711` | IN_PROGRESS | `T-ROOT` |
 | `T-ROOT-Legacy-Architecture` | ARCHIVED | `T-ROOT` |
-| `T-ROOT-Paper-BCRL-JA-20260710` | IN_PROGRESS | `T-ROOT` |
+| `T-ROOT-Paper-BCRL-JA-20260710` | COMPLETE | `T-ROOT` |
 | `T-ROOT-Phase2-V2-Provenance-Repair-Design-2026-05-13` | COMPLETE | `T-ROOT-Cable-Physics-Calibration-Packet-Design-2026-05-13` |
 | `T-ROOT-Pivot-Chain-Architecture-Review` | COMPLETE | `T-ROOT` |
 | `T-ROOT-Pivot-D0-AC-Pre-Check-Packet-2026-05-13` | COMPLETE | `T-ROOT-Pivot-D0-AC-Scripted-Base-Design-2026-05-13` |

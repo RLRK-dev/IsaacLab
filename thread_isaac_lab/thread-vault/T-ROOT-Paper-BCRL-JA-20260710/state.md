@@ -9,7 +9,7 @@ goal_verification: |
   ③ DISCARDED track (env6-VBD 系) = 歴史として明示ラベル時のみ言及可
   ④ scope note 1 節 (主従の線引き、Rs が trim できる形)
   最終 gate = Rs 承認 (scope 最終権威 = Rs)。
-status: IN_PROGRESS
+status: COMPLETE
 parent_node: T-ROOT
 children_nodes: []
 dependencies:
@@ -18,9 +18,10 @@ dependencies:
     - "執筆契約 4 点 (%12→p9 2026-07-10 23:57) + prior-art 評価 (troot_s1b 系 = superseded、Rs「新規」で不使用確定)"
   blocker: []
 created: 2026-07-11T00:05:00+09:00
-last_updated: 2026-07-11T04:28:00+09:00
+last_updated: 2026-07-11T04:46:00+09:00
 spec_version: LTM-1 v1.1
 session_history:
+  - "2026-07-11 04:46 p6 (PLAN-KEEPER、%12 dispatch 04:46 反映): ⭐**node COMPLETE 化** (%12 指示、Rs 裁定 verbatim「fork URL のみ。」04:4x = HTML 不要の対偶)。DoD 達成: 初版 explainer draft 完成 (M1) + %12 cross-PV PASS (M2) + Rs 承認・commit ecfd90c620 (M3) + push 済 fork remote 現 RLRK-dev (M4) + HTML = Rs declined 04:46 → 残 deliverable-open ゼロ。⭐long-term framing (本 project 学術論文化、Rs 04:28「念頭にしておいて」) = **情報損失なく future 別 node へ carry-forward** — 04:28 reframe が既に『whole-project 化 = 将来 Rs 決定』と規定ゆえ、本 BC+RL explainer-draft node の COMPLETE と矛盾しない (academic paper = 将来 Rs-decided 別 node、本 node は BC+RL explainer scope を完遂)。children_nodes=[] ゆえ cascade 制約なし。manifest §2 status regen (IN_PROGRESS→COMPLETE)。⚠透明性: %12 に carry-forward 解釈を報告 (異なる意図なら訂正可)。"
   - "2026-07-11 04:28 p6 (PLAN-KEEPER、p9 goal-reframe dispatch 04:28 反映、record-before-execute): ⭐**long-term target 追記** = 本 project に関する学術論文としての publication (Rs 直接指示 verbatim via p9 relay、p6 未直接観測:「いまはドラフトだが最終的にはこのプロジェクトに関する学術論文として出すことを念頭にしておいて」)。現 goal (BC+RL explainer draft・日本語) = **stage 1 として不変保持**。含意 (inference タグ): (a) 現 draft を prematurely academicize しない (b) paper build = self-start しない・staged + Rs-gated (「念頭にしておいて」≠ 即実行)。scope = 現 node BC+RL 維持、whole-project (grasp/コ-finger・env7・whole-route) 化 = 将来 Rs 決定。ref memory project-paper-bcrl-eventual-academic-publication.md。goal frontmatter に stage-1/long-term 二層で反映。node IN_PROGRESS 維持 (HTML 可否 + long-term framing が open)。"
   - "2026-07-11 04:21 p6 (PLAN-KEEPER、p9 M4 dispatch 04:21 反映): ⭐**M4 = push 完了** (Rs「push it」→ p9 push、状態遷移 committed(local) → **pushed(remote)**)。p6 独立 ground (shared repo fork tracking ref): fork = https://github.com/satesare603-bot/IsaacLab.git / fork head = `1342c51cee` (d9542b4981..1342c51cee fast-forward、force なし、0-ahead/0-behind) / `git merge-base --is-ancestor ecfd90c620 fork/HEAD` = **ANCESTOR_PASS** (paper commit remote 反映確認)。push clause = **CLOSED**。paper task Rs-pending 残 = **HTML 版可否のみ**。⚠ remote 移転通知 (satesare603-bot → RLRK-dev redirect) = p9 が Rs surface 済 (fork URL 更新 = Rs 任意; 現 tracking ref は satesare603-bot)。node **IN_PROGRESS 維持** (HTML 可否 open; Rs が HTML 不要と言えば COMPLETE 化可)。"
   - "2026-07-11 04:07 p6 (PLAN-KEEPER、p9 M3 dispatch 04:05 + %12 relay 04:06 反映): ⭐**M3 = Rs review 承認 + commit 完了** (Rs 直接指示 verbatim「そのままでよい、commit して」→ p9 commit `ecfd90c620` [explicit-path、1 file / +467、feature branch rlrk/optE-s2-substrate-swap、co-author なし、--no-verify=CJK precedent、他変更巻き込みなし; p6 ground: git show = author SATOSHI HOSHINO / subject 'Add JA explainer of the current BC+RL algorithm (v0.1a)' / +467 EXACT])。%12 verify PASS (1 file / attribution 0 / branch 正)。状態遷移: artifact = untracked → **tracked/committed** (0-commit 解除、Rs 授権)。scope 主従・粒度 = 現状維持で Rs 承認 (変更なし)。⚠残 2 項 = **push 未実施** (Rs push 指示なし = 別 GO 待ち、本 project 流儀) + **HTML 版** (Rs 未言及・未着手、外部公開ゆえ別承認要) — 両者 Rs 任意。node **IN_PROGRESS 維持** (push 可否 + HTML 可否 open)。LEDGER = 本 node 専用行なし (renewal node と同様 map+node state.md 追跡) ゆえ commit-fact 反映は no-op (新規行作成は %12 未 scope・不作為)。M2 の M3-pending 条項 RESOLVED。"
@@ -33,4 +34,4 @@ session_history:
 ## goal / means / status
 - **goal:** frontmatter verbatim + inference 解釈参照。粒度 = 解説レベル explainer、日本語、新規。
 - **means:** p9 (PAPER-AUTHOR) 執筆。設計 SSOT 接地 (LEDGER/spec/コード精読) + 執筆契約 4 点遵守。初版 = eval_runs/troot_bcrl_algorithm_explainer_20260710/ 配下 paper-only 0-commit。
-- **status:** IN_PROGRESS — ⭐M1 v0.1 完成 (462 行) → ⭐M2 %12 cross-PV PASS + **v0.1a fix 済 (467 行)** + L-TRIAGE L1 CONFIRM → ⭐**M3 = Rs 承認 + commit** (`ecfd90c620`、%12 verify PASS、untracked→tracked) → ⭐**M4 = push 済** (Rs「push it」→ fork remote、ecfd90c620 ancestor PASS、push clause CLOSED) → ⭐**long-term framing = 学術論文化** (Rs 07-11 04:28「念頭にしておいて」= staged/Rs-gated 非即実行、現 draft = stage 1、scope = BC+RL 維持・whole-project 化は将来 Rs 決定)。残 open = **HTML 版可否 (Rs 任意) + long-term framing**。18× 裁定 = 編集不要・explainer 記述承認。
+- **status:** ⭐**COMPLETE** (2026-07-11 04:46、Rs「fork URL のみ」= HTML declined の対偶) — M1 v0.1 完成 (462 行) → M2 %12 cross-PV PASS + v0.1a fix (467 行) → **M3 = Rs 承認 + commit** (`ecfd90c620`) → **M4 = push 済** (fork remote 現 RLRK-dev、ecfd90c620 ancestor PASS) → HTML = Rs 不要裁定 04:46 → **残 deliverable-open ゼロ**。⭐**long-term framing** (学術論文化、Rs 04:28「念頭にしておいて」) = 情報損失なく **future 別 node へ carry-forward** (whole-project scope・将来 Rs 決定; 04:28 reframe が既に『将来 Rs 決定』と規定ゆえ本 BC+RL explainer node の COMPLETE を block せず — academic paper = 将来 Rs-decided 別 node)。18× 裁定 = 編集不要・explainer 記述承認。
