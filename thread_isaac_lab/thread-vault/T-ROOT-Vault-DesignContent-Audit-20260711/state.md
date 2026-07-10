@@ -21,6 +21,7 @@ created: 2026-07-11T04:24:00+09:00
 last_updated: 2026-07-11T04:25:00+09:00
 spec_version: LTM-1 v1.1
 session_history:
+  - "2026-07-11 04:38 Rs ⭐⭐**最適化 package = 承認 (AskUserQuestion「package 承認 (推奨)」採択、%12 bank) = policy/design 承認 (2 段の第 1 段)** — 承認内容: **PR-1** (untracked 51 本に LEDGER 追跡 + doc_class frontmatter tag、ファイル移動なし = cite 破壊ゼロ) / **PR-4** (superseded lineage ~23 本 [DQ7/B-BC/W0-e packet 系] に banner + SUPERSEDED 行) / **PR-3** (reference-over-copy spot-audit = follow-on task 化) / **PR-2** (工程表の 07-Design 昇格 = 後日個別提案) / **⛔mass file-move = 非採用確定**。監査 verify = %12 PASS (sha fe9bb92b、spot-check 3/3、repo-wide 値散在は in-scope 値より大の verify 注記付き)。執行 = renewal 同型 2 段: 本承認 = policy、**各執行 batch (V1=PR-1 / V2=PR-4) は執行計画起草 → %12 verify → Rs 1 行授権 → 執行**。執行設計上の注意 (%12): LEDGER 行は per-file 51 行でなく **lineage 粒度 (~10-13 行 + member file 列挙)** を推奨 — 生きた SSOT の肥大防止。executor = %10。"
   - "2026-07-11 04:25 p6 (PLAN-KEEPER、%12 dispatch 04:24 反映): node 登録 (%12 登録案、verbatim 照合の上で)。起動承認 = Rs 直接指示 (NEST §3.1、一次記録 = %12 session)。assignee = %10 (COORD2、監査 charter 受領・[DEFINE] 着手予定)。⚠除外境界 = 07-Design 内部 (renewal node owns、二重 scope 禁止) を goal_verification に明記。次 = %10 [DEFINE] ping。provenance 正直記載: Rs verbatim は %12 relay 経由、p6 は Rs→%12 raw を未直接観測 (paper node と同型の honesty)。node IN_PROGRESS 維持。"
 ---
 
