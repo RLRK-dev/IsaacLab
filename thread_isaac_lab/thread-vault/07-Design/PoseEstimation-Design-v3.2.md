@@ -19,6 +19,8 @@ tags:
 
 # Pose Estimation Design v3.2 — Minimum patch
 
+> **⚠ CURRENT HEAD — renewal batch B, 2026-07-11 (banner-only; content edit-frozen):** this is the **PARKED head** of the pose-estimation design stock (`00-DESIGN-STATUS-LEDGER.md:50` = ⏸ **PARKED (head)**, minimum patch over v3.1). **UNVALIDATED** — vision (L1.A) is **not started**; gated (P0-KILL). **Composite-reading contract (verbatim, frontmatter `status:` + §1.1):** *"open v3 + v3.1 + v3.2 together. v3.2 supersedes v3.1 for listed sections only"* + *"v3 remains parent"* — v3.2 supersedes v3.1 **only for the sections listed in §1.2**; all other sections defer to v3.1, and **v3 remains the parent base**. Lineage: v1→v2→v3→v3.1→**v3.2 (head)**. LEDGER pointers: v3.2 `:50` / v3.1 `:51` / v3 `:52` / v2 `:53` / v1 `:54`. Status SSOT = `00-DESIGN-STATUS-LEDGER.md`.
+
 ## 1. Patch scope
 
 ### 1.1 Parent documents

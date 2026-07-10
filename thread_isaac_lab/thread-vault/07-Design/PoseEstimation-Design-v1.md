@@ -27,6 +27,8 @@ related:
 
 # Pose Estimation Design v1 — obs[16:29] Replacement via Wrist Camera RGB-D + Joint State
 
+> **⚠ WHOLE-SUPERSEDED (archive) — renewal batch B, 2026-07-11 (banner-only; content edit-frozen):** this is the **original** design; **superseded in whole** by v2 (`00-DESIGN-STATUS-LEDGER.md:54` = 🔁 **SUPERSEDED** → v2; frontmatter `superseded_by: v2`). It is **not** part of the current head stock (head = v3.2 over v3.1 over v3). Retained as historical record only. Current head: `[[PoseEstimation-Design-v3.2]]` (`:50`, PARKED/unvalidated). Status SSOT = `00-DESIGN-STATUS-LEDGER.md`.
+
 > **Status:** Proposal / 承認待ち。本 doc は研究 + design のみ。実装は承認後別 session で起票 (instruction `/tmp/cc_pose_estimation_instruction.md` §Scope 準拠)。
 > **Scope reassurance:** 本 design は **sim-only Phase 5 継続中の準備 design**。実機検証・env 改変・訓練実行は本 session 対象外。
 

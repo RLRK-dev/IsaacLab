@@ -22,6 +22,8 @@ tags:
 
 # Pose Estimation Design v3
 
+> **⚠ PARTIAL SUPERSEDE (parent base) — renewal batch B, 2026-07-11 (banner-only; content edit-frozen):** this is the **parent base** of the pose-estimation head stock (`00-DESIGN-STATUS-LEDGER.md:52` = 🔁 **SUPERSEDED** → v3.1, v3.2). It is superseded **only where v3.1/v3.2 patch it**; per v3.2 frontmatter *"v3 remains parent"*, unpatched sections remain **normative** as the base of the composite head. Read as part of the head stack — **open v3 + v3.1 + v3.2 together** (v3.2 §1.1). Current head: `[[PoseEstimation-Design-v3.2]]` (`:50`, PARKED/unvalidated). Status SSOT = `00-DESIGN-STATUS-LEDGER.md`.
+
 ## 0. Executive decision
 
 ### 0.1 Recommendation (revised from v2)

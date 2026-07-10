@@ -18,6 +18,8 @@ tags:
 
 # Pose Estimation Design v3.1 — Patch to v3
 
+> **⚠ PARTIAL SUPERSEDE — renewal batch B, 2026-07-11 (banner-only; content edit-frozen):** this patch is **superseded by v3.2 only for the sections listed in v3.2 §1.2** (`00-DESIGN-STATUS-LEDGER.md:51` = 🔁 **SUPERSEDED** → v3.2). This is **not** a whole-document archive: sections **not** listed in v3.2 §1.2 remain **normative** as a constituent of the composite head. Read as part of the head stack — **open v3 + v3.1 + v3.2 together** (v3.2 §1.1). Current head: `[[PoseEstimation-Design-v3.2]]` (`:50`, PARKED/unvalidated). Status SSOT = `00-DESIGN-STATUS-LEDGER.md`.
+
 ## 1. Patch scope
 
 ### 1.1 Parent doc

@@ -18,6 +18,8 @@ tags:
 
 # Pose Estimation Design v2
 
+> **⚠ WHOLE-SUPERSEDED (archive) — renewal batch B, 2026-07-11 (banner-only; content edit-frozen):** this document is **superseded in whole** by v3 (`00-DESIGN-STATUS-LEDGER.md:53` = 🔁 **SUPERSEDED** → v3). It is **not** part of the current head stock (head = v3.2 over v3.1 over v3). Retained as historical record only. Current head: `[[PoseEstimation-Design-v3.2]]` (`:50`, PARKED/unvalidated). Status SSOT = `00-DESIGN-STATUS-LEDGER.md`.
+
 ## 0. Executive decision
 
 ### Recommendation
