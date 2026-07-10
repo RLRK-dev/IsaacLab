@@ -13,7 +13,7 @@ goal_verification: |
   ⑦ CABLE_XY_OFFSET per-cell wiring
   ⑧ ⑬ enabler のみ (recorded-target-replay stub upgrade + C1-escape non-vacuous cell 供給; ⑬-VERDICT は D-2=trainer 段 defer)
   分子 conjoin = strict_v2 (C1-retention + C2-seat 両 leg)。trainer 段の policy 学習成果は本 node scope 外。
-  現況 (2026-07-11 01:20, PLAN-KEEPER 反映): ⭐**slot-redesign probe arc 進行中** (comp3 scripted 駆動 = D ρ=0 CLOSED 23:28 `c5770ab5aa` は既達)。Rs 設計指示 4件 (slot 中央支持 / z_grasp 浅く / 摩擦固定 / 動作工程確定) + 統合 study (SLOT_REDESIGN) → **falsification probe (Rs GO 00:15) = 完走・INCONCLUSIVE (artifact: 爪 assembly slot 縁接触 30-45°傾斜、4 analyst 一致)** → ⚠**根因『slot 過小』説 = REFUTED・COORD 自己撤回** (footprint 実測 `44aacb92a5`: 22mm=pad-only・全軸 clear、条件 gate が 'slot 拡幅' 誤方向を GPU 前に阻止) → **(b) 拡幅再走 中止** → ⭐**新仮説 (未解決) = 中央支持が scoop-cage 把持機構を阻害する接触動力学** (Rs 観察#3 符合)。⭐**改訂 options 裁定 (Rs 01:06) = (3) FLAT scene 深さ sweep 採択** (%11 実行準備中、launch ping→~30min + instrumentation rider) / (2) 支持 vs scoop 設計再考 = p5/VT intake / (1) supported instrumented HOLD。交絡独立成果 = ①中央支持 曲げ除去 実証 (29.7°→1.4-3.0°) ②footprint 実測済 → slot は障害でない。⏳**PENDING Rs = parity fork F-A vs F-B** (probe GO は解決済)。前提済 = comp3+comp4 build + G1 診断 grid 完成 (16:14) + SRG COMPLETE + Stage-A COMPLETE。詳細 = session_history 07-10 19:2x〜07-11 01:1x entry 群 (%12/COORD bank)。node IN_PROGRESS 維持 (comp5-8 remain; C2-whiff=comp5 / table-edge retention CARRY)。
+  現況 (2026-07-11 02:35, PLAN-KEEPER 反映): ⭐**slot-redesign probe arc = 終結** (fork ④ = F-A 確定 CLOSED 02:2x `8dcf266314`、現行基準維持・再録画なし)。単軸 matrix closed = 機構同定: slot 過小説 REFUTED (footprint `44aacb92a5` = 22mm=pad-only・全軸 clear、条件 gate が 'slot 拡幅' 誤方向を GPU 前阻止) / 深さ単独不足 (flat sweep `5227d9e916` = 4-cell NUMERIC_NOGO) / 両腕 COUPLED via 共有 cable (per-arm `73c246f812` = prereg coupling-harmless REFUTED、『手前だけ修正』= 非独立 lever、L fail 予言的中); Rs#3 左右差 = flat 対称 → 旧 slot 接触 artifact。⭐L 解 = feedforward window のみ、trainer = (E or B) + D-b 窓 確定。comp3 scripted 駆動 = D ρ=0 CLOSED (23:28) は既達。⚠**残仮説 (未解決) = 中央支持が scoop-cage 把持を阻害する接触動力学** (支持 vs scoop 設計再考 = p5/VT intake)。point data (Rs#6) = STEP 表統合済 (工程表 v1.0a-r3 `f8d301cb86`)。⏳Rs 待ち = batch A 授権 / batch C 着手時期 (C-defer 消滅) / 論文 M3。前提済 = comp3+comp4 build + G1 診断 grid 完成 + SRG + Stage-A。詳細 = LEDGER 07-11 02:2x marker + session_history (%12/COORD bank)。node IN_PROGRESS 維持 (comp5-8 remain; C2-whiff=comp5 / table-edge retention CARRY)。
 status: IN_PROGRESS
 parent_node: T-ROOT-optE-route-dapg-C1C2
 children_nodes: []
@@ -24,7 +24,7 @@ dependencies:
     - "D-1=C (新 module 抽出+byte-repro) / D-2=trainer (⑬ VERDICT defer) = Rs 決定 2026-07-06 23:5x"
   blocker: []
 created: 2026-07-06T23:58:00+09:00
-last_updated: 2026-07-11T01:20:00+09:00
+last_updated: 2026-07-11T02:35:00+09:00
 spec_version: LTM-1 v1.1
 session_history:
   - "2026-07-11 02:2x Rs ⭐⭐**裁定: parity fork ④ = F-A (現行基準維持) 確定 (AskUserQuestion「F-A: 現行基準維持 (推奨)」採択、%12 bank) = fork ④ CLOSED** — 再録画なし。MOTION STANDARD (p2r_c11 系譜 + RUN1_REFERENCE_V2) 不変。scripted 検証段 = D ρ=0 で完結済 (変更なし)。**trainer = (E or B) + D-b feedforward 窓で確定** (組成選択 = trainer 設計ゲートの Rs 判断材料、不変)。cascade: (a) VN-1 (中央支持) = 設計 study track 継続 (paper、支持 vs scoop tension 解消まで) — validated 設計成立時に F-B 再検討 (b) VN-2 (深さ) = HELD/informative close (uniform +3 = R 最良実測形として STEP 表脚注に記録済、採用せず) (c) **工程表 v2 (工程実変更) = 当面なし → renewal batch C の C-defer 前提が消滅 = C 着手時期の再裁定が可能** (Rs へ surface 済)。comp3 残 DoD (⑨b/⑥/C2-seating 動画/comp3b/comp5-8) の消化計画 = 次 arc。"
