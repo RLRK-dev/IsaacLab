@@ -1,0 +1,390 @@
+{
+ "verdict_context": "Rs human-GT (G1 final): L finger clamped BELOW the cable -> missed the cage. This back-check quantifies the RECORDING geometry + the interp-lag proxy from existing artifacts.",
+ "close_window_table": [
+  {
+   "t": 90,
+   "frame": 900,
+   "L_claw_z_rec": 0.80812,
+   "L_cable_z": 0.80394,
+   "dL_rec_mm": 4.18,
+   "R_claw_z_rec": 0.80811,
+   "R_cable_z": 0.80394,
+   "dR_rec_mm": 4.17
+  },
+  {
+   "t": 91,
+   "frame": 910,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80394,
+   "dL_rec_mm": 1.94,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80394,
+   "dR_rec_mm": 1.94
+  },
+  {
+   "t": 92,
+   "frame": 920,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80394,
+   "dL_rec_mm": 1.94,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80394,
+   "dR_rec_mm": 1.94
+  },
+  {
+   "t": 93,
+   "frame": 930,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80394,
+   "dL_rec_mm": 1.94,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80394,
+   "dR_rec_mm": 1.94
+  },
+  {
+   "t": 94,
+   "frame": 940,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80394,
+   "dL_rec_mm": 1.94,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80394,
+   "dR_rec_mm": 1.94
+  },
+  {
+   "t": 95,
+   "frame": 950,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80376,
+   "dL_rec_mm": 2.12,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80398,
+   "dR_rec_mm": 1.9
+  },
+  {
+   "t": 96,
+   "frame": 960,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80319,
+   "dL_rec_mm": 2.69,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80364,
+   "dR_rec_mm": 2.25
+  },
+  {
+   "t": 97,
+   "frame": 970,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.8043,
+   "dL_rec_mm": 1.58,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80377,
+   "dR_rec_mm": 2.12
+  },
+  {
+   "t": 98,
+   "frame": 980,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80358,
+   "dL_rec_mm": 2.3,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80242,
+   "dR_rec_mm": 3.47
+  },
+  {
+   "t": 99,
+   "frame": 990,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80315,
+   "dL_rec_mm": 2.73,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80167,
+   "dR_rec_mm": 4.21
+  },
+  {
+   "t": 100,
+   "frame": 1000,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80229,
+   "dL_rec_mm": 3.59,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80152,
+   "dR_rec_mm": 4.37
+  },
+  {
+   "t": 101,
+   "frame": 1010,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80184,
+   "dL_rec_mm": 4.04,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.8015,
+   "dR_rec_mm": 4.38
+  },
+  {
+   "t": 102,
+   "frame": 1020,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80174,
+   "dL_rec_mm": 4.14,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80168,
+   "dR_rec_mm": 4.21
+  },
+  {
+   "t": 103,
+   "frame": 1030,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80178,
+   "dL_rec_mm": 4.1,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80201,
+   "dR_rec_mm": 3.88
+  },
+  {
+   "t": 104,
+   "frame": 1040,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80184,
+   "dL_rec_mm": 4.04,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80236,
+   "dR_rec_mm": 3.52
+  },
+  {
+   "t": 105,
+   "frame": 1050,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80185,
+   "dL_rec_mm": 4.03,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80262,
+   "dR_rec_mm": 3.27
+  },
+  {
+   "t": 106,
+   "frame": 1060,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80181,
+   "dL_rec_mm": 4.07,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80275,
+   "dR_rec_mm": 3.14
+  },
+  {
+   "t": 107,
+   "frame": 1070,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80173,
+   "dL_rec_mm": 4.15,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80281,
+   "dR_rec_mm": 3.07
+  },
+  {
+   "t": 108,
+   "frame": 1080,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80168,
+   "dL_rec_mm": 4.2,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80281,
+   "dR_rec_mm": 3.07
+  },
+  {
+   "t": 109,
+   "frame": 1090,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80163,
+   "dL_rec_mm": 4.25,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.8028,
+   "dR_rec_mm": 3.09
+  },
+  {
+   "t": 110,
+   "frame": 1100,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80157,
+   "dL_rec_mm": 4.31,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80276,
+   "dR_rec_mm": 3.12
+  },
+  {
+   "t": 111,
+   "frame": 1110,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.8015,
+   "dL_rec_mm": 4.38,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80271,
+   "dR_rec_mm": 3.18
+  },
+  {
+   "t": 112,
+   "frame": 1120,
+   "L_claw_z_rec": 0.80588,
+   "L_cable_z": 0.80142,
+   "dL_rec_mm": 4.47,
+   "R_claw_z_rec": 0.80588,
+   "R_cable_z": 0.80263,
+   "dR_rec_mm": 3.25
+  },
+  {
+   "t": 113,
+   "frame": 1130,
+   "L_claw_z_rec": 0.80681,
+   "L_cable_z": 0.80137,
+   "dL_rec_mm": 5.44,
+   "R_claw_z_rec": 0.80681,
+   "R_cable_z": 0.80286,
+   "dR_rec_mm": 3.95
+  },
+  {
+   "t": 114,
+   "frame": 1140,
+   "L_claw_z_rec": 0.80814,
+   "L_cable_z": 0.80122,
+   "dL_rec_mm": 6.92,
+   "R_claw_z_rec": 0.80814,
+   "R_cable_z": 0.80327,
+   "dR_rec_mm": 4.87
+  }
+ ],
+ "interp_lag_proxy": [
+  {
+   "t": 90,
+   "L_interp_lag_worst_mm": 0.22,
+   "R_interp_lag_worst_mm": 0.22
+  },
+  {
+   "t": 91,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 92,
+   "L_interp_lag_worst_mm": -0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 93,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 94,
+   "L_interp_lag_worst_mm": -0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 95,
+   "L_interp_lag_worst_mm": -0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 96,
+   "L_interp_lag_worst_mm": -0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 97,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": -0.0
+  },
+  {
+   "t": 98,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": -0.0
+  },
+  {
+   "t": 99,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": -0.0
+  },
+  {
+   "t": 100,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": -0.0
+  },
+  {
+   "t": 101,
+   "L_interp_lag_worst_mm": -0.0,
+   "R_interp_lag_worst_mm": -0.0
+  },
+  {
+   "t": 102,
+   "L_interp_lag_worst_mm": -0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 103,
+   "L_interp_lag_worst_mm": -0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 104,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 105,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 106,
+   "L_interp_lag_worst_mm": -0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 107,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": -0.0
+  },
+  {
+   "t": 108,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": -0.0
+  },
+  {
+   "t": 109,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": -0.0
+  },
+  {
+   "t": 110,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 111,
+   "L_interp_lag_worst_mm": -0.0,
+   "R_interp_lag_worst_mm": 0.0
+  },
+  {
+   "t": 112,
+   "L_interp_lag_worst_mm": 0.28,
+   "R_interp_lag_worst_mm": 0.28
+  },
+  {
+   "t": 113,
+   "L_interp_lag_worst_mm": 0.0,
+   "R_interp_lag_worst_mm": 0.0
+  }
+ ],
+ "env_actual_data_gap": {
+  "missing": [
+   "per-frame achieved arm_q (or claw pose via clamp_pos_ko) during the G1 run",
+   "per-frame ik_resid (env computed _last_ik_resid but the runner did not save it)",
+   "latch offsets off_l/off_r (used for the slip series but not persisted)"
+  ],
+  "available_env_anchors": [
+   "driver-q minima per step (L stall 0.70-0.71 vs R 0.739)",
+   "post-latch RELATIVE slips + held_z (L held seg sank to 0.782)",
+   "render frames (visual; basis of the Rs human-GT)"
+  ],
+  "note": "env claw z during close is NOT reconstructable from saved artifacts without a re-run; the arm trajectory is arm-kinematic (cable-independent) so an arm_q-direct diagnosis run can capture it exactly (GPU ~6min, cuda:0, needs GO). INIT_XY_NOISE only perturbs the reset _ee_target (unused by the replay drive path) -> the diagnosis run reproduces the G1 arm path modulo device-numerics."
+ }
+}
