@@ -1,0 +1,148 @@
+{
+ "leg_CAM": {
+  "ctx": {
+   "cam_pos": [
+    0.1531,
+    0.9329,
+    0.5422
+   ],
+   "L_arm_Y0106": {
+    "screen_x": -0.001,
+    "screen_y": -0.046,
+    "depth": 0.8818
+   },
+   "R_arm_Y0194": {
+    "screen_x": -0.021,
+    "screen_y": -0.011,
+    "depth": 0.7955
+   },
+   "cable_tail": {
+    "screen_x": 0.055,
+    "screen_y": -0.142,
+    "depth": 1.2544
+   },
+   "NEAR_arm_\u624b\u524d": "R",
+   "FAR_arm_\u5965": "L",
+   "L_screen_side": "right",
+   "R_screen_side": "left",
+   "tail_validation": "screen (right,down) -- analysts saw the tail at lower-left; match => convention trusted"
+  },
+  "zoom": {
+   "cam_pos": [
+    0.2217,
+    0.2855,
+    0.7727
+   ],
+   "L_arm_Y0106": {
+    "screen_x": 0.117,
+    "screen_y": -0.043,
+    "depth": 0.1994
+   },
+   "R_arm_Y0194": {
+    "screen_x": -0.193,
+    "screen_y": 0.069,
+    "depth": 0.1205
+   },
+   "cable_tail": {
+    "screen_x": 0.415,
+    "screen_y": -0.153,
+    "depth": 0.5409
+   },
+   "NEAR_arm_\u624b\u524d": "R",
+   "FAR_arm_\u5965": "L",
+   "L_screen_side": "right",
+   "R_screen_side": "left",
+   "tail_validation": "screen (right,down) -- analysts saw the tail at lower-left; match => convention trusted"
+  }
+ },
+ "leg_ENG": {
+  "dz0": {
+   "latch_t": 96,
+   "l_drv_q_at_latch": 0.6511,
+   "r_drv_q_at_latch": 0.6526,
+   "L_rise_m": -0.0397,
+   "R_rise_m": 0.0161,
+   "L_z_drop_end_mm": 88.701,
+   "R_z_drop_end_mm": 33.37,
+   "note": "rise/z_drop are OUTCOME proxies; a positive rise can be a HOOK not a clamp (%12 rise!=clamp) -- crop the near-arm throat for the true clamp verdict (Rs human-GT)"
+  },
+  "dz3": {
+   "latch_t": 98,
+   "l_drv_q_at_latch": 0.6054,
+   "r_drv_q_at_latch": 0.6244,
+   "L_rise_m": -0.007,
+   "R_rise_m": 0.0765,
+   "L_z_drop_end_mm": 84.913,
+   "R_z_drop_end_mm": 0.0,
+   "note": "rise/z_drop are OUTCOME proxies; a positive rise can be a HOOK not a clamp (%12 rise!=clamp) -- crop the near-arm throat for the true clamp verdict (Rs human-GT)"
+  },
+  "dz4": {
+   "latch_t": 101,
+   "l_drv_q_at_latch": 0.6324,
+   "r_drv_q_at_latch": 0.6473,
+   "L_rise_m": -0.0064,
+   "R_rise_m": 0.0282,
+   "L_z_drop_end_mm": 27.685,
+   "R_z_drop_end_mm": 0.0,
+   "note": "rise/z_drop are OUTCOME proxies; a positive rise can be a HOOK not a clamp (%12 rise!=clamp) -- crop the near-arm throat for the true clamp verdict (Rs human-GT)"
+  },
+  "dz5": {
+   "latch_t": 97,
+   "l_drv_q_at_latch": 0.6007,
+   "r_drv_q_at_latch": 0.6256,
+   "L_rise_m": 0.0,
+   "R_rise_m": 0.0,
+   "L_z_drop_end_mm": 8.963,
+   "R_z_drop_end_mm": 5.699,
+   "note": "rise/z_drop are OUTCOME proxies; a positive rise can be a HOOK not a clamp (%12 rise!=clamp) -- crop the near-arm throat for the true clamp verdict (Rs human-GT)"
+  }
+ },
+ "leg_SEE": {
+  "dz0": {
+   "close_onset_t": 96,
+   "cable_z_lane_L": 0.80403,
+   "cable_z_lane_R": 0.80447,
+   "lane_dz_L_minus_R_mm": -0.44,
+   "claw_z_L": 0.80583,
+   "claw_z_R": 0.80583
+  },
+  "dz3": {
+   "close_onset_t": 98,
+   "cable_z_lane_L": 0.79565,
+   "cable_z_lane_R": 0.79844,
+   "lane_dz_L_minus_R_mm": -2.79,
+   "claw_z_L": 0.80885,
+   "claw_z_R": 0.80884
+  },
+  "dz4": {
+   "close_onset_t": 101,
+   "cable_z_lane_L": 0.79579,
+   "cable_z_lane_R": 0.78913,
+   "lane_dz_L_minus_R_mm": 6.66,
+   "claw_z_L": 0.80982,
+   "claw_z_R": 0.80984
+  },
+  "dz5": {
+   "close_onset_t": 97,
+   "cable_z_lane_L": 0.79614,
+   "cable_z_lane_R": 0.79809,
+   "lane_dz_L_minus_R_mm": -1.95,
+   "claw_z_L": 0.81084,
+   "claw_z_R": 0.81084
+  }
+ },
+ "RESOLVED_mapping_and_verdict": {
+  "camera_map_DECISIVE": "both cameras agree (depth is sign-robust): NEAR/\u624b\u524d = R arm (lane Y 0.194), FAR/\u5965 = L arm (lane Y 0.106). Tail-validation fixed the screen-x sign (tail lands lower-left as all analysts saw once +screen_x=left) -> L = screen-LEFT, R = screen-RIGHT.",
+  "my_error_owned": "my video-analysts labelled the far-L claw 'foreground' (depth wrong); they got the screen L/R and the hold/fail RIGHT. I propagated the foreground/background mislabel, which risked confusing the \u624b\u524d/\u5965 discussion. Corrected + tail-validated here.",
+  "rs4_is_CONSISTENT_not_contradictory": "Rs #4 '\u624b\u524d clamps, \u5965 was-working-now-cannot' == the numerics once mapped: \u624b\u524d=R holds, \u5965=L fails. No contradiction in the hold/fail pattern -- the apparent conflict was purely my mapping/labeling error.",
+  "clamp_quality_confirms_rs (rise!=clamp resolved via z_drop)": {
+   "R_near_\u624b\u524d": "z_drop end: dz0 33.4mm (was dropping) -> dz3 0.0 -> dz4 0.0 = REAL CLAMP (steady hold, not a hook); R IMPROVED with shallower park == Rs '\u624b\u524d became able to clamp'",
+   "L_far_\u5965": "z_drop end: dz0 88.7 / dz3 84.9 / dz4 27.7mm = drops a lot ALWAYS = fails throughout == Rs '\u5965 cannot'"
+  },
+  "seesaw_verdict": {
+   "lane_cable_z_asymmetry_REAL": "L-R lane cable z @close FLIPS sign with dz: dz0 -0.44 / dz3 -2.79 (R higher) / dz4 +6.66 (L higher) / dz5 -1.95mm -- the claws are symmetric (<=0.05mm) but the CABLE sits at per-arm-asymmetric heights that shift with dz (the seesaw SUBSTRATE %12 hypothesized is REAL: uniform +dz meets an asymmetric cable-height field).",
+   "winner_flip_NOT_observed": "but the OUTCOME winner does NOT flip: R(near) is the better arm in every cell (z_drop 0 at dz3/4), L(far) never holds. Both arms' z_drop IMPROVE with dz (0->4); they do not trade off. So: seesaw substrate present, clean winner-flip seesaw NOT seen -- rather 'R clamps + improves / L fails throughout' at all depths."
+  },
+  "synthesis": "the \u5965(L)-fails / \u624b\u524d(R)-holds pattern is the SAME L-fails/R-holds established across the arc, now correctly mapped. ik_chord cannot hold the FAR (L) arm at ANY depth; only FEEDFORWARD (D rho=0, f8b1ff6b4c) rescues it. Depth improves both arms but never rescues L. Per-arm DIFFERENTIAL depth is a design lever (proposal only, rule 24) since the lane-z asymmetry is real -- but even a differential would face the drive-path L failure. Final grasp verdict = Rs human-GT (R-near clamp crop delivered)."
+ }
+}
