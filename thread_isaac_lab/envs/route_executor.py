@@ -87,6 +87,10 @@ _L_DRIVER_LOCAL = list(GRIPPER_DRIVER_JOINT_IDX)  # [6, 10] driver DOFs within t
 # route_demo_to_bc.py:13/:287; ee_tgt_pos = macro-leg segmentation ONLY, :854). cf = arange(0, LAST+1, cad).
 _REC_CADENCE = 10  # == PHYSICS_STEPS_PER_RL (route_demo_to_bc.py:34 / newton_route_env.py:237)
 _REC_LAST_CTRL_FRAME = 7700  # route_demo_to_bc.py:35 (last control frame; 6-frame zero-motion tail dropped)
+# G-F2 (fold 7): the NOMINAL x0_y0 golden recording sha (RUN1_REFERENCE_V2, w0e_81rerun_snapdown_runner.sh:17
+# / test_routeexec_byte_repro.py). grasp_actuation=True replays the recorded grip staircase, whose timing is
+# nominal-cell-specific -- the env asserts the recording's provenance against this before going live.
+RUN1_REFERENCE_V2_SHA256 = "5f1c3f9238f45057011cfad1d010ac43000cb179b76b61d0461733a9075416cf"
 # Recorded 15-phase (PHASES15, route_demo_to_bc.py:58) phase_id -> 6-phase G-clock (N_ROUTE_PHASES=6,
 # route_env_config:46). %12 RULING 2026-07-07 16:04 = the single-source (no prior spec; grep=0). Grounded in
 # the phase names + the consumer boundaries (newton_route_env _active_clip_xy phase<3=C1 / _dual_and_grip
@@ -3236,7 +3240,11 @@ class RouteExecutor(rc.RouteInterfaceV1):
         ``route_demo_to_bc.py``:255-287). ``grip_2``/``is_dual`` come from the recorded ``grip_cmd`` (CC5-2:
         NEVER phase-derived). ``phase_id`` = the recorded 15-phase mapped to the 6-phase G-clock
         (:data:`_RECORDED_PHASE_TO_G`) and drives ONLY clip-selection + obs-onehot + state_bank keying. Past
-        the recording => hold the last waypoint (grippers latched).
+        the recording => hold the last waypoint with the RECORDED tail grip = both grippers RELEASED->OPEN
+        (P-F4 correction: the canonical recording releases both hands at ~frame 7617 = step ~762; the prior
+        "grippers latched" wording contradicted it). ⚠ LOUD (trainer-stage surface): the ~139 horizon-tail
+        steps (release ~762 -> MAX_EPISODE_STEPS 900) therefore run gripper-OPEN holding the last waypoint --
+        the cable is UNHELD there; tail-step reward/termination semantics belong to the trainer stage.
 
         Returns:
             ``(target_6d [R_xyz, L_xyz] float32, phase_id int in [0, 6), grip_2 [R, L] {0,1} float32,
@@ -3274,7 +3282,8 @@ class RouteExecutor(rc.RouteInterfaceV1):
         (route_demo_to_bc.py:13 footgun -- OPPOSITE the action layout): col 0 -> LEFT driver dofs, col 1 ->
         RIGHT driver dofs. The servo target is written via a SINGLE read -> mutate (:func:`set_gripper_target`,
         the §13.6 G12 SOLE per-step gripper writer) -> ``.assign()`` cycle (CC3-CH5: a ``.numpy()`` host copy
-        never reaches the solver unless assigned back), with a one-time device-readback assert (R8).
+        never reaches the solver unless assigned back), with a one-time device-readback assert (R8) ARMED at
+        the first CLOSE onset (P-F2: arming on the first call would compare all-OPEN == zero-init, vacuous).
 
         Args:
             route_steps: Per-world RL route step ``t_w``, sequence of int length ``n_world``.
@@ -3283,18 +3292,28 @@ class RouteExecutor(rc.RouteInterfaceV1):
         rec = self._recording
         if rec is None:
             raise NotImplementedError("apply_recorded_grip needs recording= (pure-index construction has none)")
+        assert 0 <= int(sub_i) < _REC_CADENCE, f"sub_i={sub_i} out of [0, {_REC_CADENCE}) (P-F3 bounds)"
         step_f = rec["step_f"]
         grip = rec["grip_cmd"]  # [frames, 2], cols [L, R]
         n_steps = len(step_f)
         n_frames = grip.shape[0]
         jtp = self._control.joint_target_pos.numpy()  # host copy (CC3-CH5)
+        wrote_nonopen = False
         for w, t in enumerate(route_steps):
             tt = min(max(int(t), 0), n_steps - 1)  # pad-to-horizon: hold the last waypoint (mirror step_target)
             f = min(int(step_f[tt]) + int(sub_i), n_frames - 1)
             set_gripper_target(jtp, self._maps["l_driver_dofs"][w], float(grip[f, 0]))  # [L] -> LEFT drivers
             set_gripper_target(jtp, self._maps["r_driver_dofs"][w], float(grip[f, 1]))  # [R] -> RIGHT drivers
+            if (
+                abs(float(grip[f, 0]) - GRIPPER_DRIVER_OPEN_RAD) > 1e-9
+                or abs(float(grip[f, 1]) - GRIPPER_DRIVER_OPEN_RAD) > 1e-9
+            ):
+                wrote_nonopen = True
         self._control.joint_target_pos.assign(jtp)
-        if not self._grip_rb_checked:  # one-time device-readback: confirm the .assign() reached the solver
+        # one-time device-readback (R8), ARMED at the first CLOSE onset -- arming on the first call would
+        # read all-OPEN targets == the warp zero-init default and stay forever-vacuous, the exact K6
+        # pattern (P-F2, 層2/5 fold 4). A non-OPEN write is distinguishable from zero-init => discriminating.
+        if not self._grip_rb_checked and wrote_nonopen:
             rb = self._control.joint_target_pos.numpy()
             for w, t in enumerate(route_steps):
                 tt = min(max(int(t), 0), n_steps - 1)

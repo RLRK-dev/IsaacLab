@@ -405,6 +405,63 @@ def test_servo_readback_discriminating():
     print("  [servo-readback] PASS: wired ok; unwired RAISES (discriminating); blanket-wired RAISES (neg ctrl)")
 
 
+_GOLDEN_NPZ = (
+    _TIL_DIR.parent
+    / "eval_runs"
+    / "troot_optE_dapg_wholeroute_scope_20260701"
+    / "w0e_81rerun_snapdown_0537"
+    / "cell_x0_y0"
+    / "route_demo_raw.npz"
+)
+
+
+def test_golden_transit_columns():
+    """G-F6 (fold 8d): the transit-window mapping asserted against the REAL golden npz columns (not only
+    the synthetic recording -- closes the self-referentiality of the L4 transit test)."""
+    if not _GOLDEN_NPZ.exists():
+        raise AssertionError(f"golden npz missing: {_GOLDEN_NPZ}")
+    z = np.load(_GOLDEN_NPZ)
+    rec = {k: z[k] for k in ("ee_pos_r", "ee_pos_l", "grip_cmd", "phase_id")}
+    control = _MockControl(_TOTAL, GRIPPER_DRIVER_OPEN_RAD)
+    ex = rex.RouteExecutor(_ARM_Q_START, _ARM_QD_START, 900, state_0=None, control=control, recording=rec)
+    g = z["grip_cmd"]
+    # first REAL transit frame: L == float32(0.69) hold while R == 0.0 (L_HALF_UNCLAMP window).
+    m = (g[:, 0] == np.float32(GRIPPER_DRIVER_HALF_OPEN_RAD)) & (g[:, 1] == 0.0)
+    idx = np.argwhere(m).ravel()
+    assert len(idx) > 0, "golden recording has no [L=0.69, R=0.0] transit frame -- premise broken"
+    f = int(idx[0])
+    t, sub_i = f // rex._REC_CADENCE, f % rex._REC_CADENCE
+    ex.apply_recorded_grip([t, t], sub_i)
+    jtp = control.joint_target_pos.numpy()
+    maps = ex._maps
+    for w in range(2):
+        for d in maps["l_driver_dofs"][w]:
+            assert abs(jtp[d] - GRIPPER_DRIVER_HALF_OPEN_RAD) < 1e-6, f"golden transit: L driver {d} != 0.69"
+        for d in maps["r_driver_dofs"][w]:
+            assert abs(jtp[d] - GRIPPER_DRIVER_OPEN_RAD) < 1e-6, f"golden transit: R driver {d} != 0.0"
+    print(f"  [golden-transit] PASS: REAL golden frame {f} (t={t},sub={sub_i}) maps [L=0.69, R=0.0] per-arm")
+
+
+def test_readback_arming():
+    """P-F2 (fold 4): the one-time grip readback arms at the first CLOSE onset, NOT at an all-OPEN call
+    (all-OPEN == warp zero-init default -> a vacuous arm would never discriminate, K6)."""
+    f_close = 7 * rex._REC_CADENCE  # frame 70: CLOSE both
+    ex, _ = _build_executor(grip_frames={f_close: (GRIPPER_DRIVER_CLOSE_RAD, GRIPPER_DRIVER_CLOSE_RAD)})
+    ex.apply_recorded_grip([0, 0], 0)  # frame 0 = all-OPEN -> must NOT arm
+    assert not ex._grip_rb_checked, "readback armed on an all-OPEN call (vacuous, K6/P-F2 regression)"
+    ex.apply_recorded_grip([7, 7], 0)  # frame 70 = CLOSE -> arms + verifies
+    assert ex._grip_rb_checked, "readback did not arm at the first CLOSE onset"
+    # P-F3: sub_i bounds fail loud.
+    try:
+        ex.apply_recorded_grip([0, 0], rex._REC_CADENCE)
+        raise AssertionError("sub_i == _REC_CADENCE did NOT raise (P-F3 bounds)")
+    except AssertionError as e:
+        if "did NOT raise" in str(e):
+            raise
+        assert "sub_i" in str(e)
+    print("  [readback-arming] PASS: no arm at all-OPEN; arms at first CLOSE; sub_i bounds fail loud")
+
+
 if __name__ == "__main__":
     print("[L1 write-pattern unit] comp3 write-site flag-gate (no-GPU, CPU)")
     test_broadcast()
@@ -418,7 +475,10 @@ if __name__ == "__main__":
     print("[L4 chunk-3 unit] comp3 chunk 3 (R6 obs source + R8 discriminating servo readback)")
     test_physics_finger_obs()
     test_servo_readback_discriminating()
+    print("[L4 fold unit] comp3 layer-2/5 folds (golden columns G-F6 + readback arming P-F2/P-F3)")
+    test_golden_transit_columns()
+    test_readback_arming()
     print(
         "ALL PASS (L1 broadcast+perworld+guard; L4 grip-transit+reset-reseed+settled-patch+forbid-fork"
-        "+finger-obs+servo-readback)"
+        "+finger-obs+servo-readback+golden-transit+readback-arming)"
     )

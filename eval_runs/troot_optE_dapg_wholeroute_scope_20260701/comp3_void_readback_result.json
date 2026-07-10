@@ -18,18 +18,49 @@
   },
   "D_no_pad_static_artifact": {
    "pass": true,
-   "detail": "settled P0 contacts: ncon=23, pad<->static=0 (exp 0: claws hover clear), cable<->static=23 (exp >0 non-vacuity; clip-supported route scene), cable<->bare-table=0 (informative; 0 is physical: cable rides the support clips)"
+   "detail": "settled P0 contacts: ncon=23, pad<->static=0 (exp 0: claws hover clear), cable<->static=23 (exp >0 non-vacuity; clip-supported route scene), cable<->bare-table=0 (informative; 0 is physical: cable rides the support clips), other<->static=0 (exp 0: only the cable may touch statics at P0)"
   },
   "E_solref_pin": {
    "pass": true,
    "detail": "mj pad solref=[-65789.0, -2105.3] == PAD_SOLREF (-65789.0, -2105.3) (AUTHORITATIVE, R3); mjw=[-65789.0, -2105.300048828125] (RECORDED-INERT, CC3-CH7); mj neq=6; PIN: 4-bar eq stiffen is mj_model-template-only, mjw eq re-poke DEFERRED (base _wire doc) -- comp3 FORBIDS an mjw eq re-poke"
+  },
+  "G_p0_cable_parity_MEASURE": {
+   "pass": true,
+   "detail": "PARITY(2mm)=False [EXPECTED False: clip-suspended env vs table-resting recording]; max|dz|=5.0mm mean dz=4.6mm max|dy|=150.0mm (dy seg0/mid/last = 150.0/150.0/150.0mm); env z-mean=0.8086 vs gold z-mean=0.8040 -> Rs surface material (G-F1b A/B)"
+  },
+  "F_n2_perworld_grip_routing": {
+   "pass": true,
+   "detail": "write-side routing (w0 CLOSE/w1 OPEN) -> True; after 120 held frames w0 drivers q=[0.742, 0.745, 0.746, 0.741] (exp >0.3: stepped world closes) vs w1 q=[0.0, 0.0, 0.0, 0.0] (exp ~0 OPEN) -> True. INVERSE (w1 CLOSE) MEASURED: routed=True, w1 q after 60f=[0.0, 0.0, 0.0, 0.0] -> frozen=True (K3 worlds>=1-frozen EMPIRICAL at grip level; Rs escalation material)"
   }
  },
  "verdict": "PASS",
+ "p0_cable_parity": {
+  "parity_2mm": false,
+  "max_abs_dz_mm": 5.004465579986572,
+  "mean_dz_mm": 4.558269679546356,
+  "max_abs_dy_mm": 150.0074565410614,
+  "env_z_mean": 0.8085515022277832,
+  "gold_z_mean": 0.8039932325482368,
+  "n_seg": 40,
+  "dy_seg0_mm": 150.0074565410614,
+  "dy_mid_mm": 149.9943481758237,
+  "dy_last_mm": 149.98045563697815
+ },
+ "worlds_ge1_freeze_empirical": {
+  "w1_close_target_routed": true,
+  "w1_driver_q_after_60_frames": [
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "w1_frozen": true,
+  "note": "K3/R3 banked worlds>=1-frozen CONFIRMED at grip level: w1 CLOSE target routed correctly (write side) but w1 physics never steps on the as-coded CPU path -> Rs escalation material"
+ },
  "meta": {
-  "world_count": 1,
+  "world_count": "1 (legs A-E, G) + 2 (leg F)",
   "device": "cpu (CUDA_VISIBLE_DEVICES='')",
   "golden_npz": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz",
-  "scope": "build+readback ONLY (no rollout; G1 GPU behind /production-launch-gate + Rs)"
+  "scope": "build+readback+grip-routing ONLY (no route rollout; G1 GPU behind PLG + Rs)"
  }
 }

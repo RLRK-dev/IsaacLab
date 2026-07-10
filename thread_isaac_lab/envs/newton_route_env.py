@@ -442,11 +442,29 @@ class NewtonRouteEnv(VecEnv):
             sys.path.insert(0, _til)
         import route_executor as rex
 
+        # P-F3 (fold 5): the grip staircase lookup cf[t]+sub_i is 1:1 with the drive loop ONLY if the
+        # recording cadence equals the env's physics-frames-per-RL-step -- cross-assert the two SSOTs.
+        assert rex._REC_CADENCE == self.PHYSICS_STEPS_PER_RL, (
+            f"cadence mismatch: route_executor._REC_CADENCE={rex._REC_CADENCE} != "
+            f"PHYSICS_STEPS_PER_RL={self.PHYSICS_STEPS_PER_RL} (grip frame lookup would de-sync)"
+        )
         npz_path = self.cfg.get("route_recording_npz")
         if not npz_path:
             raise ValueError(
                 "route_executor_impl='route_executor' requires cfg['route_recording_npz'] "
                 "(a canonical route_demo_raw.npz)"
+            )
+        if self._grasp_actuation:
+            # G-F2 (fold 7): the replayed grip staircase timing is NOMINAL-cell-specific; a non-nominal
+            # recording would close on a cable the schedule never saw. Pin the provenance (sha256) to the
+            # banked nominal golden until DoD-7 cell-geometry compatibility lands.
+            import hashlib
+
+            with open(npz_path, "rb") as _fh:
+                got = hashlib.sha256(_fh.read()).hexdigest()
+            assert got == rex.RUN1_REFERENCE_V2_SHA256, (
+                f"grasp_actuation=True requires the NOMINAL golden recording (RUN1_REFERENCE_V2): "
+                f"sha256({npz_path})={got} != {rex.RUN1_REFERENCE_V2_SHA256}"
             )
         z = np.load(npz_path, allow_pickle=True)
         recording = {

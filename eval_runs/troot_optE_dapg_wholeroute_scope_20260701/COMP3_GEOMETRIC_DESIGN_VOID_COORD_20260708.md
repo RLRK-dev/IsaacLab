@@ -7,7 +7,7 @@
 ---
 
 ## Step 0. Interrogate-the-mechanism (BOUNDED, one pass)
-1. **Is the void necessary?** YES — the koshape f1ext UNDER-claw must reach BELOW the table-resting cable (Z=0.809) to cage it (form-closure); a SOLID table blocks f1ext at the table-top plane (0.800) → no hook → no hold (base:1743). The void is the load-bearing mechanism, not decoration.
+1. **Is the void necessary?** YES — the koshape f1ext UNDER-claw must reach BELOW the table-resting cable (Z=0.804 = TABLE_HEIGHT 0.800 + CABLE_RADIUS 0.004; recording-measured 0.8040. ⚠層2/5 fold-8a 訂正: 旧 0.809 は GROOVE_CENTER_Z = clip-SEATED 値との混同) to cage it (form-closure); a SOLID table blocks f1ext at the table-top plane (0.800) → no hook → no hold (base:1743). The void is the load-bearing mechanism, not decoration.
 2. **Cheaper salvage?** NO — the cable rests on the table; grasping-from-below intrinsically needs the table removed under the footprint. Alternatives (grasp-from-above, lift-then-grasp) are different tasks, out of the 0.716 MOTION STANDARD route.
 3. **Downstream the real risk?** The grasp itself = SRG-PROVEN robust; the residual risk = the env-drive TRANSFER (build_scene→build_multiworld, G1 GPU), NOT the geometry. ⇒ commit the void geometry (proven); flag G1 as the live-transfer check.
 **BOUND kept:** one pass, no rev-chain, no sim launched.
@@ -30,7 +30,7 @@
 ## Step 2. 制約 (H = hard, S = soft)
 **Hard (violation-forbidden):**
 - **H1 non-penetration:** f1ext claw descends BELOW table-top (0.800) to hook under the cable → MUST be over the VOID (no solid box), else penetrates a solid table box. Grasps L=0.106/R=0.194 ∈ void-Y[0.090,0.210] ✅ and GRASP_X=0.30 ∈ void-X[0.234,0.366] ✅ → both claws over void → reach under cable WITHOUT penetration. **The void makes it non-penetrating BY CONSTRUCTION** (not a DISABLE_CONTACTS workaround).
-- **H2 cable in cage:** cable Z=0.809 within the f1ext form-closure cage (claw brackets cable). SRG S1/S2 confirmed cage HOLDS (cage-escape lateral/z within DROP margins).
+- **H2 cable in cage:** cable Z=0.804 (table-resting grasp premise; fold-8a 訂正 — 0.809 は seated 値) within the f1ext form-closure cage (claw brackets cable). SRG S1/S2 confirmed cage HOLDS (cage-escape lateral/z within DROP margins).
 - **H3 cable span-support:** cable SPANS the void, supported on BOTH Y-sides (solid table at Y<0.090 and Y>0.210) → no droop (base:1743). ✅
 - **H4 flag-OFF byte-preserve:** grasp_actuation=False → single solid box (env-core byte-identity). ✅ by construction (comp3 plan §5).
 **Soft:**
@@ -42,7 +42,7 @@
 Z[mm]
  830 ─   wrist_3 (both arms) ── claw drop 275.8mm ──┐
         L-claw(Y106)      R-claw(Y194)              │
- 809 ─      │ ═══════ cable (Z809, r4) ═══════ │    ← H2 cable center
+ 804 ─      │ ═══════ cable (Z804, r4) ═══════ │    ← H2 cable center (table-resting; fold-8a)
  800 ─▓▓▓▓▓▓┤                              ├▓▓▓▓▓▓▓  ← TABLE top (solid)
       solid │        VOID (no box)         │ solid
  795 ─▓▓▓▓▓▓┤  Y[90..210], X[234..366]     ├▓▓▓▓▓▓▓  ← table box bottom
@@ -51,7 +51,7 @@ Z[mm]
         solid│ L-grasp    R-grasp │solid
       ← ±16mm void-cradle → | ← DR ±20 → one claw over table edge (SRG S2: GRIP_GO)
 ```
-- H1 ✅ (claws over void, no solid-box penetration) / H2 ✅ (cable Z809 in cage) / H3 ✅ (span supported both Y-sides) / H4 ✅ (flag-OFF solid box).
+- H1 ✅ (claws over void, no solid-box penetration) / H2 ✅ (cable Z804 in cage) / H3 ✅ (span supported both Y-sides) / H4 ✅ (flag-OFF solid box).
 
 ## Step 4. トレード (flag state — the only design fork; H-satisfying rows only)
 | option | grasp_actuation | table under footprint | f1ext reach | H1 | H2 | H4 byte | verdict |
@@ -63,7 +63,7 @@ No H❌ rows (the void is the proven non-penetrating design; the solid-box alter
 ## Step 5. 物理妥当性 + 5a 感度 + 5c 因果 + 5d 軸保持
 **5 reality-check:** the void mirrors build_scene(grasp_actuation=True) (probe 9/9, test:1055-1119); SRG void-parity gate confirmed build_multiworld void == build_scene void == FIXED [0.090,0.210], CPU readback NO artifact (badqacc0, no claw↔table contact, grip engages). ⇒ real-substrate-valid.
 **5a sensitivity (DR ±20mm, the live variation):** void FIXED [0.090,0.210]; DR shifts CABLE not void. ±16mm = void-cradle-max (both claws in void); ±20mm = one claw over table edge (+4mm past void). **SRG S2 measured this** (4 corners ±20/±16) = GRIP_GO all, WORST=nominal (offset RELIEVES sag). H1 stays ✅ (the claw over the table edge is at the void boundary; SRG readback no artifact). ✅
-**5c causality trace (grasp_actuation ON → 5 steps):** flag-ON build → f1ext over void → servo close (recorded ramp) → 4-bar cages cable Z809 → cable spans supported void (no droop) → route drag (downstream). No irreversible/adversarial state in the grasp (SRG S0/S1/S2). Downstream seat/guide = J-9 (route-exec/comp, NOT grasp). ✅
+**5c causality trace (grasp_actuation ON → 5 steps):** flag-ON build → f1ext over void → servo close (recorded ramp) → 4-bar cages cable Z804 → cable spans supported void (no droop) → route drag (downstream). No irreversible/adversarial state in the grasp (SRG S0/S1/S2). Downstream seat/guide = J-9 (route-exec/comp, NOT grasp). ✅
 **5d axis-resolved retention (μ0 form-closure, SRG-grounded):**
 | cable DOF | enclosed / carried | SRG evidence |
 |---|---|---|
@@ -83,6 +83,7 @@ SRG's creep-budgeted criterion already handles the "cage≠hold" caveat (form-cl
 - Sensitivity (DR ±20mm) SRG-measured = GRIP_GO, worst=nominal (offset relieves).
 - Axis-retention μ0-grounded via SRG (vertical/lateral/roll enclosed; axial carried benign).
 - **Residual:** the void is validated in build_scene (SRG) + parity to build_multiworld formula; the flag-ON actualization in the RL-env built model = **L2 no-GPU readback (structural leg)** + live grip = G1 GPU-deferred.
+- **⚠ G-F1 cross-ref (層2/5 fold 8a 追記):** the Z=0.804 table-resting grasp premise above is the RECORDING's scene (no support clips). The env flag-ON scene as-coded has `add_support_clips=True` → P0 cable is CLIP-SUSPENDED (probe leg G measures the delta; cable↔bare-table contacts = 0). G1 cannot run against the recorded schedule until the support-clip adjudication (Rs G-F1b: A=clips-OFF for G1 / B=re-baseline) lands.
 
 ---
 *%11 COORD (w2:p3) 2026-07-10. /geometric-design comp3 void. No-GPU paper. PASS (re-confirmation). Pairs with COMP3_FORCE_DESIGN (servo). → both PASS → %12 5体 [VERIFY].*
