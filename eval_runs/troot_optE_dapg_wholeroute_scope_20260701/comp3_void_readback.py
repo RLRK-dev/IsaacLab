@@ -24,6 +24,9 @@ Legs:
   (G) P0 cable-parity MEASUREMENT vs the golden pre-grasp frame (G-F1a, fold 3): quantifies the
       support-clip topology difference (clip-suspended env vs table-resting recording) for the Rs
       G-F1b A/B adjudication. Measurement leg -- PARITY=False is the EXPECTED current state.
+  (G2) G1-prework DoD (Rs 裁定 A): the g1_scene_align build (support clips OFF + cable start Y
+      re-seeded to the recording frame-0 value) settles to the recording's table-resting pre-grasp
+      cable within 2 mm per segment (GATED) + exactly the 4 REST clips' statics removed.
   (F) N=2 flag-ON per-world grip ctrl routing at RUNTIME (P-F1, fold 2): write-side per-world routing
       (stride detector) + WORLD-0 (the stepped template world) closes physically while world-1 targets
       stay OPEN; the inverse write then MEASURES the world-1 freeze (K3 worlds>=1-frozen, banked) at the
@@ -280,6 +283,49 @@ def main():
         f"{result['p0_cable_parity']['gold_z_mean']:.4f} -> Rs surface material (G-F1b A/B)",
     )
 
+    # ---- (G2) G1-prework DoD: ALIGNED build parity vs the recording (Rs 裁定 A; GATED). ----
+    # g1_scene_align = support clips OFF + cable start Y re-seeded to the recording's frame-0 value.
+    # DoD: the aligned settled P0 cable matches the recording pre-grasp per-segment within 2 mm.
+    print("[G2] building flag-ON + g1_scene_align env (world_count=1, cpu) ...")
+    env_al = nre.NewtonRouteEnv(
+        world_count=1,
+        device="cpu",
+        cfg={
+            "grasp_actuation": True,
+            "route_executor_impl": "route_executor",
+            "route_recording_npz": str(GOLDEN_NPZ),
+            "g1_scene_align": True,
+        },
+    )
+    bq_al = env_al._state_0.body_q.numpy()
+    al_xyz = np.asarray(bq_al[env_al._cable_bodies[0], :3], dtype=float)
+    dz2 = al_xyz[:n_seg, 2] - gold_xyz[:n_seg, 2]
+    dy2 = al_xyz[:n_seg, 1] - gold_xyz[:n_seg, 1]
+    aligned = bool(np.max(np.abs(dz2)) < 0.002 and np.max(np.abs(dy2)) < 0.002)
+
+    # support clips absent: the flag-ON build had 4 REST clips x 5 static boxes = 20 more non-table statics.
+    def _nontable_static_boxes(mm):
+        total = 0
+        for g in range(mm.ngeom):
+            if int(mm.geom_type[g]) == int(mujoco.mjtGeom.mjGEOM_BOX) and int(mm.geom_bodyid[g]) == 0:
+                total += 1
+        return total
+
+    delta_statics = _nontable_static_boxes(m) - _nontable_static_boxes(env_al._solver.mj_model)
+    result["p0_cable_parity_aligned"] = {
+        "aligned_2mm": aligned,
+        "max_abs_dz_mm": float(np.max(np.abs(dz2)) * 1e3),
+        "max_abs_dy_mm": float(np.max(np.abs(dy2)) * 1e3),
+        "support_clip_static_boxes_removed": int(delta_statics),
+    }
+    leg(
+        "G2_p0_cable_parity_ALIGNED",
+        aligned and delta_statics == 20,
+        f"ALIGNED(2mm)={aligned}: max|dz|={result['p0_cable_parity_aligned']['max_abs_dz_mm']:.2f}mm "
+        f"max|dy|={result['p0_cable_parity_aligned']['max_abs_dy_mm']:.2f}mm (exp <2mm both; prework DoD); "
+        f"support-clip statics removed={delta_statics} (exp 20 = 4 REST clips x 5 boxes; C1/C2 stay)",
+    )
+
     # ---- (F) N=2 flag-ON per-world grip ctrl routing, RUNTIME (P-F1, fold 2). ----
     # world_count=1 structurally hides q/qd stride errors. Substrate truth (K3/R3, banked): on the as-coded
     # CPU path only the single-world TEMPLATE (= world-0) is physics-stepped; worlds>=1 are FROZEN. So the
@@ -341,7 +387,7 @@ def main():
     all_ok = all(v["pass"] for v in result["legs"].values())
     result["verdict"] = "PASS" if all_ok else "FAIL"
     result["meta"] = {
-        "world_count": "1 (legs A-E, G) + 2 (leg F)",
+        "world_count": "1 (legs A-E, G, G2) + 2 (leg F)",
         "device": "cpu (CUDA_VISIBLE_DEVICES='')",
         "golden_npz": str(GOLDEN_NPZ),
         "scope": "build+readback+grip-routing ONLY (no route rollout; G1 GPU behind PLG + Rs)",

@@ -357,6 +357,16 @@ class NewtonRouteEnv(VecEnv):
                 "grasp_actuation=True requires cfg['route_executor_impl']=='route_executor' "
                 "(the recorded grip_cmd schedule drives the servo; a stub route leaves the servo inert)"
             )
+        # comp3 G1 prework (Rs adjudication A, 2026-07-10): align the flag-ON scene to the RECORDING's scene so the
+        # replayed grip schedule meets the cable where the recording put it (G-F1): (a) NO support clips
+        # (the recording scene has none -> table-resting, not clip-suspended) + (b) cable start Y shifted to
+        # the recording's cable_y_start (base hardwires CLIP1_Y - half; the recording used -0.30). Default
+        # False = current behavior byte-preserve. G1-scene concept -> requires grasp_actuation.
+        _al = self.cfg.get("g1_scene_align", False)
+        assert isinstance(_al, bool), f"cfg['g1_scene_align'] must be a bool, got {type(_al).__name__}"
+        self._g1_scene_align = _al
+        if self._g1_scene_align and not self._grasp_actuation:
+            raise ValueError("g1_scene_align=True requires grasp_actuation=True (it is a G1 flag-ON scene config)")
         self._world_count = world_count
 
         self.episode_length_buf = torch.zeros(world_count, dtype=torch.long, device=device)
@@ -400,6 +410,10 @@ class NewtonRouteEnv(VecEnv):
         t0 = time.perf_counter()
 
         self._build_model()
+        if self._g1_scene_align:
+            # comp3 G1 prework (Rs adjudication A): re-seed the built (straight) cable to the recording's start Y
+            # BEFORE settling, so the settle converges to the recording's table-resting pre-grasp state.
+            self._align_cable_to_recording_start()
         self._settle_cable()
         self._setup_p0_precondition()
         self._save_precondition_state()
@@ -513,7 +527,7 @@ class NewtonRouteEnv(VecEnv):
             self._fk_state,
             self._world_count,
             self.device,
-            add_support_clips=True,
+            add_support_clips=not self._g1_scene_align,  # G1 align (Rs adj. A): recording scene has NO clips
             add_target_clip=True,  # C1 V-groove present (routing/seating scenario, cf Grip clamp mode)
             target_clip_float_z=rc.ROUTE_CLIP_FLOAT_Z,  # C1 clip float +20mm (route env-gate; %12 build+predicate flag)
             grasp_actuation=self._grasp_actuation,  # comp3: OFF (default)=byte-id solid table; ON=VOID+servo
@@ -562,6 +576,33 @@ class NewtonRouteEnv(VecEnv):
             f"[NewtonRouteEnv] Model: {self._model.body_count} bodies, "
             f"{self._model.joint_count} joints, solver={type(self._solver).__name__}"
         )
+
+    def _align_cable_to_recording_start(self):
+        """comp3 G1 prework (Rs adjudication A, G-F1): shift the built cable to the RECORDING's start Y, pre-settle.
+
+        The base builder hardwires ``cable_y_start = CLIP1_Y - half`` (-0.15) even when ``cable_start_pos``
+        is passed (base is zero-drift for comp3), while the recording scene starts the cable at -0.30
+        (probe leg-G measured the delta as a UNIFORM 150 mm dy). Re-seed via the SANCTIONED reset-init
+        machinery (:func:`seed_cable_joint_state`, episode-init exception) with the delta DERIVED from the
+        recording npz (frame-0 seg-0 y) vs the as-built root y -- no hardcoded constants. Runs BEFORE
+        ``_settle_cable``; the settle then converges to the recording's table-resting pre-grasp state
+        (no support clips under ``g1_scene_align``).
+        """
+        npz_path = self.cfg.get("route_recording_npz")
+        assert npz_path, "g1_scene_align requires cfg['route_recording_npz'] (the recording defines the target Y)"
+        rec_y0 = float(np.load(npz_path)["cable_xyz"][0][0][1])  # recording frame-0 seg-0 y (-0.30)
+        phys_jq = self._state_0.joint_q.numpy()
+        n_angles = self._cable_bodies_per_world - 1
+        for w in range(self._world_count):
+            cq0 = self._arm_q_start[w] + _N_ARM_JOINTS  # cable FREE-root joint_q start (root7 + seg angles)
+            root7 = phys_jq[cq0 : cq0 + 7].copy()
+            root7[1] = rec_y0
+            seg_angles = phys_jq[cq0 + 7 : cq0 + 7 + n_angles].copy()
+            cable_joints_w = list(
+                range(self._jws[w] + _N_ARM_JOINTS, self._jws[w] + _N_ARM_JOINTS + self._cable_bodies_per_world)
+            )
+            seed_cable_joint_state(self._state_0, self._model, cable_joints_w, root7, seg_angles, dr_xy=(0.0, 0.0))
+        print(f"[NewtonRouteEnv] G1 scene-align: cable start y -> {rec_y0} (recording frame-0; support clips OFF)")
 
     def _physics_step_all(self, substeps=None, sim_dt=None):
         """One physics frame for all worlds (clear_forces -> collide -> solver.step -> swap)."""

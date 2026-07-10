@@ -162,7 +162,24 @@ def test_guard():
         if "did NOT raise" in str(e):
             raise
         assert "bool" in str(e), f"unexpected AssertionError text: {e}"
-    print("  [guard] PASS: grasp_actuation=True+stub -> ValueError; non-bool -> AssertionError (pre-build)")
+    # G1 prework: g1_scene_align without grasp_actuation -> ValueError (G1 flag-ON scene concept).
+    try:
+        nre.NewtonRouteEnv(world_count=1, cfg={"g1_scene_align": True})
+        raise AssertionError("guard did NOT raise for g1_scene_align without grasp_actuation")
+    except ValueError as e:
+        assert "grasp_actuation" in str(e), f"unexpected ValueError text: {e}"
+    # non-bool g1_scene_align -> AssertionError (same truthiness hazard).
+    try:
+        nre.NewtonRouteEnv(
+            world_count=1,
+            cfg={"grasp_actuation": True, "route_executor_impl": "route_executor", "g1_scene_align": 1},
+        )
+        raise AssertionError("guard did NOT raise for non-bool g1_scene_align")
+    except AssertionError as e:
+        if "did NOT raise" in str(e):
+            raise
+        assert "bool" in str(e), f"unexpected AssertionError text: {e}"
+    print("  [guard] PASS: flag-matrix + align guards fire loud pre-build (ValueError/AssertionError)")
 
 
 # =====================================================================================================
