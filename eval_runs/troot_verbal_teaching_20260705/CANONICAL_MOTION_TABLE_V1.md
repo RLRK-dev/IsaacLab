@@ -1,7 +1,7 @@
 # Canonical 動作工程表 v1 — 43-step 基準 restate + 現行 route mapping
 
 **Status: v1.0a — ✅ Rs-APPROVED(2026-07-11 00:15 verbatim「1 承認」、%12 bank `2b818b6f2f`)— 設計基盤 surface として発効(§5.6 governance 有効)。**
-chain 完走: %10 author-review CONCUR(fold 済)→ %12 verify PASS(6 leg)→ Rs 承認。世代 chain: `bd1d9979f6`(v1.0 review 世代)→ `7f5d2716a9`(v1.0a fold)→ 本 status 反映 commit(**確定版 sha256 = e37dda42c35728e1…**、全文 sha は commit message 参照)。
+chain 完走: %10 author-review CONCUR(fold 済)→ %12 verify PASS(6 leg)→ Rs 承認。世代 chain: `bd1d9979f6`(v1.0 review 世代)→ `7f5d2716a9`(v1.0a fold)→ 本 status 反映 commit。**確定版 sha256 = 承認反映 commit の commit message に記録**(doc 内への自己 sha 埋込は self-reference で原理的に不成立のため、version⇄sha 束縛(P-3)の記録先は commit message / 台帳側とする)。
 **⚠ 未決 2 件(承認 scope 外、変更禁止のまま保持):** D-1(§2)= **Rs 未裁定**(v3 注記の扱い変更禁止、裁定待ち継続)/ P-1・P-3 charter 化 = **未決**(組込保留)。
 **Role note(Rs 2026-07-10 23:5x、%12 経由):** VT-DESIGN = **設計基盤(design-foundation)pane に昇格**。本 doc = 昇格第 1 成果物 = 設計 canonical surface(§5.6 governance 参照)。
 **Gate(%12 裁定 2026-07-10 23:27):** L2。**v1 = 5体 waive(loud 記録)** — 理由: v1 は banked 済み内容(43-step 表 = Rs 確定 2026-03-28 + MOTION STANDARD)の restate+mapping で新規設計判断を含まず、最終 gate = Rs 承認 flow 自体。代償 = %10 author-review を %12 verify 前に挿入。**⚠ v2(工程の実変更 = slot/z_grasp/摩擦の fold)= L3 相当 + 5体必須**(本 doc §6 参照)。
