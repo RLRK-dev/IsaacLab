@@ -14,7 +14,7 @@ children_nodes: []
 dependencies:
   precedent:
     - "Rs 裁定 3 点 2026-07-11 00:30 (bank = routeexec node `1fb2ce4aae`; 一次 = %12 session AskUserQuestion 回答、選択肢 label verbatim)"
-    - "先行執行 2 件: RL-Routing-Design.md tracked 化 (3760 行 snapshot eaf05513、p6 独立確認 = git ls-files 1) / D-1 訂正注記 :2710 (p5 `fa8166cfcd`、表 v1.0a-r1、表 sha 26934095 = p6 独立照合 EXACT)"
+    - "先行執行 2 件: RL-Routing-Design.md tracked 化 (commit `59badc4b7a`、3760 行、内容 sha256 = eaf05513 [%12 明確化 00:39: file 内容 hash であり commit hash でない]、p6 独立確認 = git ls-files 1) / D-1 訂正注記 :2710 (p5 `fa8166cfcd`、表 v1.0a-r1、表 sha 26934095 = p6 独立照合 EXACT)"
     - "VT 工程表 v1.0a Rs-APPROVED 発効 (設計基盤 surface、p5) — 刷新は同 surface 運用の延長"
   blocker: []
 created: 2026-07-11T00:37:00+09:00
