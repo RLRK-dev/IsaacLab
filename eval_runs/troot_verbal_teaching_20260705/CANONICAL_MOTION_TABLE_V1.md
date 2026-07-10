@@ -138,6 +138,7 @@ Author: VT-DESIGN(w2:p5)。Drafted: 2026-07-10 23:32 JST。Node: T-ROOT-Verbal-T
 3. 機械 SSOT(full_43step.json)と人間可読表(RL-Routing-Design.md §2)は**同一 version で同時更新**(§2 の D-1〜D-3 のような drift の再発防止)。07-Design 編集は Rs-専権につき、更新執行は Rs 授権 flow で行う。
 4. 現行版 = **v2(json header `full_43step.json:2-4`)+ v3/v4 注記**(`:2701-2716`)。⚠ v3 の json 反映が部分的(§2 D-1)— 現行版の正確な同定は %12/Rs 裁定後に確定。
 5. **v-next(工程の実変更)= L3 + 5体必須 + Rs 承認**(%12 gate 裁定 2026-07-10 23:27)。
+6. **post-approval 追補の sub-revision 規約(採用 2026-07-11 00:2x、%12 提案・p5 判断):** Rs 承認後の editorial 追補(工程内容を変えない fold・注記)には **sub-revision label(v1.0a-r1, -r2, …)を付し、status 行に「Rs 承認世代 sha = どれか」を一意に保つ**。LEDGER 側は二層 sha(承認世代 / 現行)で記録(p6 伝達済)。本規約は次回追補から適用(今回分は changelog + commit message で追跡可能)。
 
 ### §5.6 設計基盤 governance(Rs role 昇格 2026-07-10 23:5x)
 
