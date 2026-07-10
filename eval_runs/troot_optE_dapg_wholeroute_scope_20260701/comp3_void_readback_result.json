@@ -1,0 +1,35 @@
+{
+ "legs": {
+  "A_flagoff_readback_raises": {
+   "pass": true,
+   "detail": "flag-OFF build readback raised=True (servo-readback: driver dof 6 mode=0 != POSITION (1))"
+  },
+  "A2_flagoff_table_solid": {
+   "pass": true,
+   "detail": "flag-OFF static table boxes = 1 (exp 1)"
+  },
+  "B_flagon_build_and_readback": {
+   "pass": true,
+   "detail": "flag-ON build complete; servo readback PASS (mj nu=16)"
+  },
+  "C_void_parity": {
+   "pass": true,
+   "detail": "table boxes=4 (exp 4); Y void=(0.09000000357627869, 0.20999999344348907) (exp [0.090,0.210]); X window=(0.23400000482797623, 0.3660000115633011) (exp [0.234,0.366])"
+  },
+  "D_no_pad_static_artifact": {
+   "pass": true,
+   "detail": "settled P0 contacts: ncon=23, pad<->static=0 (exp 0: claws hover clear), cable<->static=23 (exp >0 non-vacuity; clip-supported route scene), cable<->bare-table=0 (informative; 0 is physical: cable rides the support clips)"
+  },
+  "E_solref_pin": {
+   "pass": true,
+   "detail": "mj pad solref=[-65789.0, -2105.3] == PAD_SOLREF (-65789.0, -2105.3) (AUTHORITATIVE, R3); mjw=[-65789.0, -2105.300048828125] (RECORDED-INERT, CC3-CH7); mj neq=6; PIN: 4-bar eq stiffen is mj_model-template-only, mjw eq re-poke DEFERRED (base _wire doc) -- comp3 FORBIDS an mjw eq re-poke"
+  }
+ },
+ "verdict": "PASS",
+ "meta": {
+  "world_count": 1,
+  "device": "cpu (CUDA_VISIBLE_DEVICES='')",
+  "golden_npz": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz",
+  "scope": "build+readback ONLY (no rollout; G1 GPU behind /production-launch-gate + Rs)"
+ }
+}

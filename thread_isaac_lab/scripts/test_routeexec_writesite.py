@@ -45,8 +45,12 @@ for _p in (str(_TIL_DIR), str(_ENVS_DIR)):
 import route_executor as rex  # noqa: E402
 from configs.task_config import (  # noqa: E402
     GRIPPER_DRIVER_CLOSE_RAD,
+    GRIPPER_DRIVER_EFFORT_LIMIT_NM,
     GRIPPER_DRIVER_HALF_OPEN_RAD,
+    GRIPPER_DRIVER_JOINT_IDX,
     GRIPPER_DRIVER_OPEN_RAD,
+    GRIPPER_SERVO_TARGET_KD,
+    GRIPPER_SERVO_TARGET_KE,
     JOINTS_PER_ARM,
 )
 
@@ -299,6 +303,108 @@ def test_forbid_banked_fork():
     print("  [forbid-fork] PASS: forbid=True raises for k>=1 (comp3b); k=0 ok; default keeps k>=1 capability")
 
 
+# =====================================================================================================
+# L4 chunk-3 unit (R6 obs source + R8 discriminating servo readback). Pure CPU/no-GPU: the Newton model
+# and the mj_model are mocked; the REAL-build positive/negative demonstration is the L2 probe
+# (eval_runs/.../comp3_void_readback.py, flag-OFF build must FAIL the readback / flag-ON must PASS).
+# =====================================================================================================
+
+
+def test_physics_finger_obs():
+    """R6: flag-ON obs[7]/[15] source = PHYSICS joint_q (NOT the FK-side OPEN-pinned sum)."""
+    import newton_route_env as nre
+
+    aq0 = _ARM_Q_START[1]  # world-1 (offset base; catches a hardcoded world-0 read)
+    phys_jq = np.zeros(_TOTAL, dtype=np.float64)
+    l0, l1 = GRIPPER_DRIVER_JOINT_IDX[0], GRIPPER_DRIVER_JOINT_IDX[1]
+    r0, r1 = JOINTS_PER_ARM + l0, JOINTS_PER_ARM + l1
+    phys_jq[aq0 + l0], phys_jq[aq0 + l1] = 0.31, 0.02  # L drivers (physics, mid-close)
+    phys_jq[aq0 + r0], phys_jq[aq0 + r1] = 0.62, 0.04  # R drivers (physics, distinct)
+    r_f, l_f = nre.physics_finger_obs(phys_jq, aq0)
+    assert abs(r_f - 0.66) < 1e-9, f"r_finger {r_f} != physics driver sum 0.66"
+    assert abs(l_f - 0.33) < 1e-9, f"l_finger {l_f} != physics driver sum 0.33"
+    # source discrimination: the FK-side sum (OPEN-pinned = 0.0) differs -> a FK-sourced obs would be 0.
+    assert r_f != 0.0 and l_f != 0.0, "physics source indistinguishable from the FK OPEN pin"
+    print("  [finger-obs] PASS: obs[7]/[15] flag-ON source = physics joint_q per-world driver sum")
+
+
+def _mock_models(wired, blanket=False):
+    """Build (newton-model, mj_model) mocks: wired=True mirrors the base servo mutation; False = flag-OFF."""
+    import newton_route_env as nre
+
+    pos_mode = int(nre.newton.JointTargetMode.POSITION)
+    maps = rex.build_perworld_index_maps(_ARM_Q_START, _ARM_QD_START)
+    jtm = np.zeros(_TOTAL, dtype=np.int32)
+    ke = np.zeros(_TOTAL, dtype=np.float32)
+    kd = np.zeros(_TOTAL, dtype=np.float32)
+    eff = np.full(_TOTAL, 1e6, dtype=np.float32)
+    if wired:
+        for d in maps["all_driver_dofs"]:
+            jtm[d] = pos_mode
+            ke[d] = GRIPPER_SERVO_TARGET_KE
+            kd[d] = GRIPPER_SERVO_TARGET_KD
+            eff[d] = GRIPPER_DRIVER_EFFORT_LIMIT_NM
+    if blanket:  # blanket-wired defect: a 4-bar FOLLOWER also carries the servo
+        f = _ARM_QD_START[0] + GRIPPER_DRIVER_JOINT_IDX[0] + 1
+        jtm[f] = pos_mode
+        ke[f] = GRIPPER_SERVO_TARGET_KE
+
+    class _M:
+        joint_target_mode = _MockWarpArray(jtm)
+        joint_target_ke = _MockWarpArray(ke)
+        joint_target_kd = _MockWarpArray(kd)
+        joint_effort_limit = _MockWarpArray(eff)
+
+    n_act = 4 if wired else 0
+
+    class _MJ:
+        nu = n_act
+        actuator_gainprm = np.zeros((n_act, 10))
+        actuator_biasprm = np.zeros((n_act, 10))
+        actuator_trnid = np.zeros((n_act, 2), dtype=np.int32)
+        jnt_actfrcrange = np.zeros((8, 2))
+
+    for a in range(n_act):  # solver_mujoco POSITION-mode convention (hinge: effort cap = JOINT actfrcrange)
+        _MJ.actuator_gainprm[a, 0] = GRIPPER_SERVO_TARGET_KE
+        _MJ.actuator_biasprm[a, 1] = -GRIPPER_SERVO_TARGET_KE
+        _MJ.actuator_biasprm[a, 2] = -GRIPPER_SERVO_TARGET_KD
+        _MJ.actuator_trnid[a, 0] = a  # target joint id
+        _MJ.jnt_actfrcrange[a] = (-GRIPPER_DRIVER_EFFORT_LIMIT_NM, GRIPPER_DRIVER_EFFORT_LIMIT_NM)
+    return _M, _MJ, maps
+
+
+def test_servo_readback_discriminating():
+    """R8/K6: the readback PASSES a wired build, RAISES on unwired (flag-OFF) + on a blanket-wired defect."""
+    import newton_route_env as nre
+
+    negative = [
+        _ARM_QD_START[w] + off
+        for w in range(2)
+        for off in (0, GRIPPER_DRIVER_JOINT_IDX[0] + 1, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0] + 1)
+    ]
+    # (a) wired build -> PASS.
+    m, mj, maps = _mock_models(wired=True)
+    nre.servo_readback_assert(m, mj, maps["all_driver_dofs"], negative)
+    # (b) UNWIRED (flag-OFF-like) build -> must RAISE (this is the discriminating property K6 demanded).
+    m0, mj0, _ = _mock_models(wired=False)
+    try:
+        nre.servo_readback_assert(m0, mj0, maps["all_driver_dofs"], negative)
+        raise AssertionError("servo_readback_assert PASSED an unwired build (vacuous, K6 regression)")
+    except AssertionError as e:
+        if "vacuous" in str(e):
+            raise
+    # (c) blanket-wired defect (a follower carries the servo) -> negative control must RAISE.
+    mb, mjb, _ = _mock_models(wired=True, blanket=True)
+    try:
+        nre.servo_readback_assert(mb, mjb, maps["all_driver_dofs"], negative)
+        raise AssertionError("negative control MISSED a blanket-wired follower")
+    except AssertionError as e:
+        if "MISSED" in str(e):
+            raise
+        assert "NEGATIVE CONTROL" in str(e), f"unexpected failure leg: {e}"
+    print("  [servo-readback] PASS: wired ok; unwired RAISES (discriminating); blanket-wired RAISES (neg ctrl)")
+
+
 if __name__ == "__main__":
     print("[L1 write-pattern unit] comp3 write-site flag-gate (no-GPU, CPU)")
     test_broadcast()
@@ -309,4 +415,10 @@ if __name__ == "__main__":
     test_reset_reseed_open()
     test_settled_fk_gripper_patch()
     test_forbid_banked_fork()
-    print("ALL PASS (L1 broadcast+perworld+guard; L4 grip-transit+reset-reseed+settled-patch+forbid-fork)")
+    print("[L4 chunk-3 unit] comp3 chunk 3 (R6 obs source + R8 discriminating servo readback)")
+    test_physics_finger_obs()
+    test_servo_readback_discriminating()
+    print(
+        "ALL PASS (L1 broadcast+perworld+guard; L4 grip-transit+reset-reseed+settled-patch+forbid-fork"
+        "+finger-obs+servo-readback)"
+    )

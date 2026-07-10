@@ -133,7 +133,10 @@ from task_config import (  # noqa: E402
     EE_Z_SAFETY_UPPER,
     FINGER_OPEN_POS,
     GRIP_HALF_SPAN,
+    GRIPPER_DRIVER_EFFORT_LIMIT_NM,
     GRIPPER_DRIVER_JOINT_IDX,
+    GRIPPER_SERVO_TARGET_KD,
+    GRIPPER_SERVO_TARGET_KE,
     JOINTS_PER_ARM,
     MAX_MOVE_STEPS,
     ROBOT_BODIES_PER_ARM,
@@ -220,6 +223,91 @@ class NominalRouteStub(rc.RouteInterfaceV1):
         phase_id, within = self._phase_at(t)
         is_dual, grip_2 = self._dual_and_grip(phase_id, within)
         return target_6d, phase_id, np.array(grip_2, dtype=np.float32), bool(is_dual)
+
+
+def servo_readback_assert(model, mj_model, all_driver_dofs, negative_dofs):
+    """comp3 (R8): DISCRIMINATING servo readback on the built model -- fails loud on an UNWIRED build.
+
+    Replaces the vacuous OPEN-seed assert as the discriminating leg (K6: OPEN_RAD == 0.0 == zero-init, so a
+    seed assert passes on unwired builds). Three legs:
+
+    (1) Newton-model driver leg: every driver DOF carries ``joint_target_mode == POSITION`` +
+        ``joint_target_ke/kd/effort_limit`` == the task_config servo SSOT (66.7/2.0/2.5).
+    (2) NEGATIVE CONTROL: every ``negative_dofs`` entry (non-driver: arm / 4-bar follower) carries NO servo
+        ke -- ``not (mode == POSITION and ke == KE)``. A blanket-wired build fails here.
+    (3) mj_model leg (authoritative per R3, CPU substrate): the actuators with ``gainprm[0] == KE`` number
+        exactly 4 (the single-world template's [6,10,20,24] drivers), each carries the POSITION convention
+        ``biasprm[1] == -KE, biasprm[2] == -KD``, and each TARGET JOINT carries the effort cap as
+        ``jnt_actfrcrange == (-EFF, +EFF)`` (solver_mujoco.py maps ``joint_effort_limit`` to the JOINT-level
+        ``actfrcrange`` for hinge dofs -- NOT the actuator ``forcerange``, which the hinge branch never
+        sets). A flag-OFF build has 0 such actuators -> raises.
+
+    Args:
+        model: The built Newton model (``joint_target_mode/ke/kd``, ``joint_effort_limit`` read).
+        mj_model: The solver's single-world-template MuJoCo host model (``nu``, ``actuator_*`` read).
+        all_driver_dofs: Flat per-world driver DOF indices (``build_perworld_index_maps``).
+        negative_dofs: Non-driver DOF indices for the negative control, iterable of int.
+
+    Raises:
+        AssertionError: On any unwired / mis-wired driver, a servo-carrying non-driver, or a wrong
+            mj actuator population.
+    """
+    jtm = model.joint_target_mode.numpy()
+    ke = model.joint_target_ke.numpy()
+    kd = model.joint_target_kd.numpy()
+    eff = model.joint_effort_limit.numpy()
+    pos_mode = int(newton.JointTargetMode.POSITION)
+    tol = 1e-3
+    for d in all_driver_dofs:
+        assert int(jtm[d]) == pos_mode, f"servo-readback: driver dof {d} mode={jtm[d]} != POSITION ({pos_mode})"
+        assert abs(float(ke[d]) - GRIPPER_SERVO_TARGET_KE) < tol, f"driver dof {d} ke={ke[d]}"
+        assert abs(float(kd[d]) - GRIPPER_SERVO_TARGET_KD) < tol, f"driver dof {d} kd={kd[d]}"
+        assert abs(float(eff[d]) - GRIPPER_DRIVER_EFFORT_LIMIT_NM) < tol, f"driver dof {d} effort={eff[d]}"
+    for d in negative_dofs:
+        carries_servo = int(jtm[d]) == pos_mode and abs(float(ke[d]) - GRIPPER_SERVO_TARGET_KE) < tol
+        assert not carries_servo, f"servo-readback NEGATIVE CONTROL: non-driver dof {d} carries the servo ke"
+    gain = np.asarray(mj_model.actuator_gainprm)
+    bias = np.asarray(mj_model.actuator_biasprm)
+    trnid = np.asarray(mj_model.actuator_trnid)
+    jfrange = np.asarray(mj_model.jnt_actfrcrange)
+    servo_acts = [a for a in range(int(mj_model.nu)) if abs(float(gain[a, 0]) - GRIPPER_SERVO_TARGET_KE) < tol]
+    assert len(servo_acts) == 4, (
+        f"servo-readback: mj_model servo actuators (gainprm[0]=={GRIPPER_SERVO_TARGET_KE}) = {len(servo_acts)} != 4 "
+        f"(template drivers [6,10,20,24]; nu={int(mj_model.nu)}) -- unwired or mis-replicated build"
+    )
+    for a in servo_acts:
+        assert abs(float(bias[a, 1]) + GRIPPER_SERVO_TARGET_KE) < tol, f"mj actuator {a} biasprm[1]={bias[a, 1]}"
+        assert abs(float(bias[a, 2]) + GRIPPER_SERVO_TARGET_KD) < tol, f"mj actuator {a} biasprm[2]={bias[a, 2]}"
+        j = int(trnid[a, 0])  # target joint: the effort cap lives at the JOINT level (jnt_actfrcrange)
+        assert abs(float(jfrange[j, 0]) + GRIPPER_DRIVER_EFFORT_LIMIT_NM) < tol, (
+            f"mj actuator {a} target joint {j} jnt_actfrcrange lo={jfrange[j, 0]}"
+        )
+        assert abs(float(jfrange[j, 1]) - GRIPPER_DRIVER_EFFORT_LIMIT_NM) < tol, (
+            f"mj actuator {a} target joint {j} jnt_actfrcrange hi={jfrange[j, 1]}"
+        )
+
+
+def physics_finger_obs(phys_jq, arm_q_start_w):
+    """comp3 (R6): flag-ON obs[7]/[15] source = PHYSICS joint_q driver readback for one world.
+
+    The FK-side sum (``fk_jq[...]``, flag-OFF source) pins the fingers OPEN, so it would LIE under the live
+    servo (K7). Same formula (sum of the two driver angles per arm), sourced from the physics ``joint_q``
+    at this world's driver coords (q-local == qd-local within the arm span; the cable FREE root only shifts
+    the per-world base offset).
+
+    Args:
+        phys_jq: The full physics ``joint_q`` host array [rad].
+        arm_q_start_w: This world's arm ``joint_q`` start index.
+
+    Returns:
+        ``(r_finger, l_finger)`` driver-angle sums [rad], floats.
+    """
+    rd0, rd1 = JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0], JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]
+    r_finger = float(phys_jq[arm_q_start_w + rd0]) + float(phys_jq[arm_q_start_w + rd1])
+    l_finger = float(phys_jq[arm_q_start_w + GRIPPER_DRIVER_JOINT_IDX[0]]) + float(
+        phys_jq[arm_q_start_w + GRIPPER_DRIVER_JOINT_IDX[1]]
+    )
+    return r_finger, l_finger
 
 
 class NewtonRouteEnv(VecEnv):
@@ -443,6 +531,15 @@ class NewtonRouteEnv(VecEnv):
 
             self._rex = _rex_maps
             self._arm_ow_maps = _rex_maps.build_perworld_index_maps(self._arm_q_start, self._arm_qd_start)
+            # comp3 (R8/K6): DISCRIMINATING servo readback on the built model (drivers POSITION + ke/kd/eff
+            # SSOT + negative control + mj_model actuator population). Fails loud on an unwired build; the
+            # RouteExecutor's OPEN-seed assert stays as the SECONDARY leg.
+            _neg = [
+                self._arm_qd_start[w] + off
+                for w in range(self._world_count)
+                for off in (0, GRIPPER_DRIVER_JOINT_IDX[0] + 1, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0] + 1)
+            ]  # arm j0 + one 4-bar follower per arm (non-driver gripper coords)
+            servo_readback_assert(self._model, self._solver.mj_model, self._arm_ow_maps["all_driver_dofs"], _neg)
         print(
             f"[NewtonRouteEnv] Model: {self._model.body_count} bodies, "
             f"{self._model.joint_count} joints, solver={type(self._solver).__name__}"
@@ -971,6 +1068,9 @@ class NewtonRouteEnv(VecEnv):
         """Compute observations for all worlds. Returns [N, 62] tensor (index map = route_env_config)."""
         wp.synchronize()
         bq = self._state_0.body_q.numpy()
+        # comp3 (R6): flag-ON obs[7]/[15] read the PHYSICS joint_q (servo-driven fingers); the FK-side sum
+        # pins fingers OPEN and would lie under the live servo (K7). flag-OFF stays FK-side (byte-preserve).
+        phys_jq_obs = self._state_0.joint_q.numpy() if self._grasp_actuation else None
         obs_np = np.zeros((self._world_count, rc.OBS_DIM), dtype=np.float32)
 
         for w in range(self._world_count):
@@ -991,10 +1091,14 @@ class NewtonRouteEnv(VecEnv):
             )
             self._prev_clamp_l_quat[w] = clamp_l_quat.copy()
 
-            fk_jq = self._per_world_fk_jq[w]
-            _rd0, _rd1 = JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0], JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]
-            r_finger = fk_jq[_rd0] + fk_jq[_rd1]
-            l_finger = fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] + fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]]
+            if self._grasp_actuation:
+                # comp3 (R6): physics joint_q driver readback (per-world) -- the live-servo truth.
+                r_finger, l_finger = physics_finger_obs(phys_jq_obs, self._arm_q_start[w])
+            else:
+                fk_jq = self._per_world_fk_jq[w]
+                _rd0, _rd1 = JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0], JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[1]
+                r_finger = fk_jq[_rd0] + fk_jq[_rd1]
+                l_finger = fk_jq[GRIPPER_DRIVER_JOINT_IDX[0]] + fk_jq[GRIPPER_DRIVER_JOINT_IDX[1]]
 
             cable_pos = bq[self._cable_bodies[w], :3]
             seg_pos, seg_tangent, _ = find_nearest_cable_point(cable_pos, clamp_r_pos, self._target_seg_indices_r[w])
