@@ -50,7 +50,7 @@ Logic tree v1 (`~/.claude/projects/-home-rlrk-IsaacLab/memory/project_logic_tree
 
 <!-- GEN:NEST:BEGIN (build_nest_snapshot.py; 手書き禁止) -->
 
-_242 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
+_243 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
 
 | node_id | status | parent |
 |---|---|---|
@@ -185,7 +185,8 @@ _242 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-ROOT-R2-A-Track-A-S1B-Telemetry-Rebased-Exact-Command-Package-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
 | `T-ROOT-R2-Architecture-Redesign` | IN_PROGRESS | `T-ROOT` |
 | `T-ROOT-StepTable-Verbal-Teaching-20260703` | ARCHIVED | `T-ROOT` |
-| `T-ROOT-Vault-DesignContent-Audit-20260711` | IN_PROGRESS | `T-ROOT` |
+| `T-ROOT-Vault-DesignContent-Audit-20260711` | COMPLETE | `T-ROOT` |
+| `T-ROOT-VaultRefCopy-SpotAudit-20260711` | PENDING | `T-ROOT` |
 | `T-ROOT-Verbal-Teaching-20260705` | DESIGN+STAGING-APPROVED (St2 spec v0.4 Rs-approved 2026-07-06 10:27 b7d7857dfc: 設計承認 + Q2=B [St2 absorbs St1b, single arc + 2-checkpoint] + Q5=閉鎖 [DESIGN_V1 §3.1 に C2_TILT_SIGN=0 orientation-lock 追加 執行済]; BUILD = deferred+Rs-gated [single arc → Rs build-auth → L3 + byte-id re-proof, genuine new-source trigger]; φ10-collision resolved 09:57 \| ← BUILD-AUTHORIZED paper先行 08:3x eba71929b3 \| ← DESIGN-APPROVED 03:2x b17b473a15) | `T-ROOT` |
 | `T-ROOT-optE-route-dapg-C1C2` | IN_PROGRESS | `T-L1C-PerSkill-RL` |
 | `T-ROOT-optE-route-dapg-C1C2-P2-envcore` | COMPLETE | `T-ROOT-optE-route-dapg-C1C2` |
