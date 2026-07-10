@@ -9,7 +9,7 @@ goal_verification: |
   ③ 最適化 = per-item Rs 承認 gate (設計内容改変は Rs 専権、一括改変禁止)
   ⚠除外 = **07-Design 内部 doc 群 (renewal node T-ROOT-DesignDoc-Renewal-20260711 が owns、二重 scope 禁止)**
   最終 gate = per-item Rs 承認。
-status: IN_PROGRESS
+status: COMPLETE
 parent_node: T-ROOT
 children_nodes: []
 dependencies:
@@ -18,9 +18,10 @@ dependencies:
     - "%12 監査 charter → %10 (COORD2) 発行済 (2026-07-11 04:2x)"
   blocker: []
 created: 2026-07-11T04:24:00+09:00
-last_updated: 2026-07-11T06:07:36+09:00
+last_updated: 2026-07-11T06:17:06+09:00
 spec_version: LTM-1 v1.1
 session_history:
+  - "2026-07-11 06:15-06:17 %10+%12 ⭐⭐**batch V2 執行 COMPLETE + %12 verify PASS → node CLOSURE (vault 最適化 全 batch 完了)** — commit 3fa1186a3b: SUPERSEDED banner 19/22 file (per-file +1/-0、総計 +19/-0 = body 完全不変)。%12 独立 verify 5 leg PASS: ①numstat 数値限定再集計 19/+19/-0 EXACT ②member 照合 = VL1(6)+VL2(6)+VL3(3)+VL4(3)+VL5(1)=19 = VL1-VL5 member 総和 22 − 除外 3 と EXACT 一致 ③banner 19 行 全て LEDGER VL{n} pointer + live 値 copy 禁止句あり、emoji = LEDGER 行 status mirror EXACT (VL1⛔/VL2⛔/VL3📖/VL4🔁/VL5📖) ④除外 3 = numstat 0 件 (commit message 内の除外開示のみ) + on-disk banner 不在 grep 0 ⑤配置 spot 3/3 = frontmatter 直後・title 前。**status → COMPLETE**。残余 disposition (本 node DoD 外、follow-on): (a) pre-existing-M 3 file = origin 明確化後に tag+banner (b) PR-3 reference-over-copy spot-audit = follow-on node 登録 (Rs package 承認済の task 化、登録 = p6 依頼・PENDING 起票) (c) PR-2 工程表 07-Design 昇格 = 後日個別提案。"
   - "2026-07-11 06:07 Rs ⭐**batch V2 build 授権 (verbatim「承認」— 文脈 = V1 完了報告 + V2 pre-flag 19/22 提示後の唯一 pending 決定 = V2 授権 [inference]、%12 bank)** — 2 段の第 2 段 (V2 = PR-4): SUPERSEDED banner 追加 19/22 file (VL1-VL5 lineage、doc 冒頭 add-only)。**除外 3 = pre-existing 未 commit M file (DQ7_DAGGER_BUILD_SPEC_V2_MINIMAL / dq7_ii_mini_spec / P2_REWARD_DESIGN) は VGroove-precedent で保留維持** (origin 明確化後に tag/banner、別途)。executor = %10 (V1-same sequence 事前宣言済: ①' 存在照合 + banner add-only + banner-only-diff gate + explicit-path [dir-glob 厳禁] + 層3 body-invariance + commit)。V2 PASS + %12 verify で vault 最適化 全 batch 完了 → node closure へ。"
   - "2026-07-11 05:16-05:21 %10+%12 ⭐⭐**batch V1 執行 COMPLETE + %12 verify PASS** (66ec7c6651) — LEDGER 122→143 (VL1-VL12 sub-section + :114 Rs-auth C 拡張注記、既存 07-Design 行 0 削除、del=1 は :114 注記のみ = add-only 実証) + doc_class tag 47/50 (reference 19 / design-surface 28) + 14 file first-track (06-K vision 13 + DQ7 1)。**除外 3 = pre-existing 未 commit M (DQ7_DAGGER_BUILD_SPEC_V2_MINIMAL / dq7_ii_mini_spec / P2_REWARD_DESIGN、session 開始 snapshot と %12 照合 CONFIRM) → VGroove-precedent で保留** (origin 明確化後に tag/banner)。shared-tree hazard (dir-wide numstat が他 pane dirt 273 file を巻込) = explicit-path 切替で回避。pin = commit message 記録。**V2 pre-flag: 対象 22 のうち同 3 file 除外 → committable 19/22** (%12 CONCUR) — Rs 授権待ち。"
   - "2026-07-11 04:59-05:0x %10+Rs ⭐**V1 執行中 blocker (LEDGER self-scope) → Rs 裁定 = 「拡張 (最小形、推奨)」= C 案採択** — %10 が ② 直前 fresh-read (§運用16) で捕捉: LEDGER:114「scoped to 07-Design documents」+ :120 = 自己 scope が 07-Design 専用 → V1 の 12 行 (eval_runs/06-K) は charter 超え、:114 編集 = Rs 専権で V1 授権が明示 cover せず (plan v1.1 も %12 verify も未検出 — execution-time fresh-read の価値実証)。**Rs 裁定 (AskUserQuestion 05:0x): 最小形拡張 = 『Vault design-doc tracking (V1)』scoped sub-section 追加 + :114 に 1 行拡張注記、既存 07-Design 行 = 不触、単一 SSOT 維持** — 本裁定が :114 charter 編集の Rs 明示授権。①' PASS 済 (50 target EXACT / 0 missing / pin 生成済)、②③ = pin から再開。"
@@ -32,4 +33,4 @@ session_history:
 ## goal / means / status
 - **goal:** frontmatter verbatim (via %12 relay) + inference 解釈参照。監査 → disposition map → per-item Rs 承認最適化。
 - **means:** %10 (COORD2) が監査実施。%12 charter に基づき survey → disposition map → 最適化提案 (per-item Rs 承認 gate)。設計内容改変は Rs 専権。
-- **status:** IN_PROGRESS — node 登録済 (監査 charter 発行・%10 [DEFINE] ping 待ち)。除外 = 07-Design 内部 (renewal 二重 scope 禁止)。
+- **status:** COMPLETE (2026-07-11 06:17) — 監査 → disposition package (Rs 承認) → V1 (LEDGER 追跡 + doc_class tag、66ec7c6651) → V2 (SUPERSEDED banner 19/22、3fa1186a3b) 全 batch 完了 + %12 verify PASS。残余 = follow-on (pre-existing-M 3 file / PR-3 spot-audit node / PR-2 個別提案)、session_history 先頭 entry 参照。
