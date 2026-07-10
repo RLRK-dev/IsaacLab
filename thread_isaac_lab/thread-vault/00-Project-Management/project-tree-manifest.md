@@ -50,7 +50,7 @@ Logic tree v1 (`~/.claude/projects/-home-rlrk-IsaacLab/memory/project_logic_tree
 
 <!-- GEN:NEST:BEGIN (build_nest_snapshot.py; 手書き禁止) -->
 
-_238 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
+_239 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
 
 | node_id | status | parent |
 |---|---|---|
@@ -193,6 +193,7 @@ _238 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-Skill` | IN_PROGRESS | `T-ROOT` |
 | `T-Skill-AC` | IN_PROGRESS | `T-Skill` |
 | `T-Skill-AC-Cross-Skill-Apply-Transfer-Design` | IN_PROGRESS | `T-Skill-AC` |
+| `T-Skill-AC-EEZ-Floor-Audit` | PENDING | `T-Skill-AC` |
 | `T-Skill-AR` | IN_PROGRESS | `T-Skill` |
 | `T-Skill-AR-Architecture-Redesign-Control-Authority-Terminal-Hold` | COMPLETE | `T-Skill-AR-Architecture-Redesign-Design` |
 | `T-Skill-AR-Architecture-Redesign-Design` | COMPLETE | `T-Skill-AR` |
