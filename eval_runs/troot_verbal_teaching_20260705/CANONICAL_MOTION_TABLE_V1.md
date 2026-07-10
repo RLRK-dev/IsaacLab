@@ -1,6 +1,6 @@
 # Canonical 動作工程表 v1 — 43-step 基準 restate + 現行 route mapping
 
-**Status: v1.0 — READY FOR %10 AUTHOR-REVIEW** — paper only(0-commit)。chain: %10 author-review → sha ping → %12 verify → **Rs 承認**。
+**Status: v1.0a — %10 author-review CONCUR(w/1 MED + 2 LOW、全 fold 済)→ READY FOR %12 VERIFY** — chain: ~~%10 author-review~~ → %12 verify → **Rs 承認**。review 世代 = commit `bd1d9979f6`(sha256 245fe334…)、本 fold 世代 = 追い commit で pin。
 **Role note(Rs 2026-07-10 23:5x、%12 経由):** VT-DESIGN = **設計基盤(design-foundation)pane に昇格**。本 doc = 昇格第 1 成果物 = 設計 canonical surface(§5.6 governance 参照)。
 **Gate(%12 裁定 2026-07-10 23:27):** L2。**v1 = 5体 waive(loud 記録)** — 理由: v1 は banked 済み内容(43-step 表 = Rs 確定 2026-03-28 + MOTION STANDARD)の restate+mapping で新規設計判断を含まず、最終 gate = Rs 承認 flow 自体。代償 = %10 author-review を %12 verify 前に挿入。**⚠ v2(工程の実変更 = slot/z_grasp/摩擦の fold)= L3 相当 + 5体必須**(本 doc §6 参照)。
 Author: VT-DESIGN(w2:p5)。Drafted: 2026-07-10 23:32 JST。Node: T-ROOT-Verbal-Teaching-20260705。
@@ -88,7 +88,7 @@ Author: VT-DESIGN(w2:p5)。Drafted: 2026-07-10 23:32 JST。Node: T-ROOT-Verbal-T
 
 | 現行 phase(TNC:line) | 43-STEP | gripper 状態遷移(as-executed) | 現行 pinned 値(source) | note |
 |---|---|---|---|---|
-| pre-setup: seeds+settle+座標導出(:3923-3999) | **1**(初期位置) | both OPEN 0.0(:3600) | seeds :3923-3924 / **caveat-a** GRASP_YC=mean(cable Y) :3942-3946 / **F-1b+snap-down** :3957-3974 / **fix-⑤** x_grasp :3985-3988 | **M-7**: 座標補正 = 実測 cable 由来(表は固定値)。coordinate-only = MOTION STANDARD 適合(LEDGER:44「fixes = coordinate-only on existing legs」) |
+| pre-setup: seeds+settle+座標導出(:3923-3999) | **1**(初期位置) | both OPEN 0.0(:3599) | seeds :3923-3924 / **caveat-a** GRASP_YC=mean(cable Y) :3942-3946 / **F-1b+snap-down** :3957-3974 / **fix-⑤** x_grasp :3985-3988 | **M-7**: 座標補正 = 実測 cable 由来(表は固定値)。coordinate-only = MOTION STANDARD 適合(LEDGER:44「fixes = coordinate-only on existing legs」) |
 | GRASP_HOVER(:4011) | **2**(ケーブル上空へ) | both OPEN | z_high=1.1668(:3636) | M-6(z 世代差) |
 | GRASP_DESCEND(:4016)8 legs | **3**(ケーブルへ下降) | both OPEN | **z_grasp=1.0668**(:3635 code literal「banked WR cradle」) | M-6: 表 1.025 の意味対応(下記) |
 | GRASP_CLOSE(:4026) | **4**(ケーブル把持) | both OPEN→cage 0.66663(CAGE_FRAC 0.9 :4027)→**FULL 0.7407** | CLOSE=0.7407(TC:291) | 2 段 close = full-clamp 状態への sub-procedure(状態遷移は表どおり) |
@@ -98,12 +98,13 @@ Author: VT-DESIGN(w2:p5)。Drafted: 2026-07-10 23:32 JST。Node: T-ROOT-Verbal-T
 | C1_PIN(:4342) | **9**(C1がcable固定) | 不変 | PERCLIP_PIN eq_active=1(:4379)、40 settle(:4385-4386) | **M-1 順序 swap**: production = 固定(9)→半保持(8)。pin = clip-retention kinematic の唯一許可例外([[feedback-clip-retention-kinematic-trick-authorized]]) |
 | L_HALF_UNCLAMP(:4391) | **8**(L 半アンクランプ分) | **L FULL 0.7407→HALF 0.69**(ramp 0.0125 刻み :4396-4409) | HALF=GRIPPER_DRIVER_HALF_OPEN_RAD(TC:313) | half-clamp = 滑り誘導状態へ(cradle 判定 :4402,4414) |
 | R_UNCLAMP_RISE(:4423) | **8**(R アンクランプ分)+ **10** の R 分 | **R FULL→OPEN 0.0**(:4427; code cite「43-step step8」:4418-4422) | rise +45mm 8 legs(:4439-4446) | **M-2**: rise は per-arm 逐次(表 = 両手同時) |
-| GUIDE_PRELIFT+GUIDE(:4489, :4507-4521) | **10** の L 分 + **11**(C2上空へ) | L **HALF 0.69 のまま(しごき = 滑り誘導の実体)**、R OPEN 凍結(R_hold :4452-4453) | code cite「json steps 10-11」:4470-4476; _trav_z=+45mm(:4491); N_GUIDE=8(:4462); F-2 X-follow rate±8mm/cap 7mm(:4483-4485,4513-4516) | M-2: R は同行しない |
-| pre-regrasp L(:4625-4647)10 legs | **12**(左クランプ) | **L HALF→FULL 0.7407**(:4645) | _z_above_d(:4629)、c2y−GHS lane | 表どおり |
-| C2_REGRASP(:4675) | **13**(右がケーブル再把持へ)+ **14**(両手クランプ) | R OPEN→cage 0.66663(:4761)→**FULL 0.7407**(:4765) | **square-on C2_TILT_SIGN=0**(:4683、Rs-LOCKED ANTI-REVERT :4678-4681); _at_88 gate ≤20mm(:4750-4755); span-preserving c2y+GHS(:4664-4668) | **M-5**: 表 STEP 13 の R 位置 = クリップ間中点(dry-run 固定 :1282)→ 現行 = 実 cable +Y lane(§6.3 divergence「再把持Y」:2692 の現行解、Rs-LOCKED square-on) |
+| GUIDE_C2(:4450)= setup | (10-11 準備) | 状態不変(R_hold 凍結 :4452-4453) | N_GUIDE=8(:4462); F-2 X-follow gate(:4483-4485) | `_ph` label 行(準備のみ、arm 移動なし)— conformance 期待列に含める |
+| GUIDE_PRELIFT(:4489)= L prelift 8 legs + **guide traverse 8 legs(:4507-4521)** | **10** の L 分 + **11**(C2上空へ) | L **HALF 0.69 のまま(しごき = 滑り誘導の実体)**、R OPEN 凍結 | code cite「json steps 10-11」:4470-4476; _trav_z=+45mm(:4491); F-2 rate±8mm/cap 7mm(:4513-4516) | M-2: R は同行しない。**⚠ traverse は `_ph` 上 GUIDE_PRELIFT 配下で走る**(GUIDE_PRELIFT〜C2_REGRASP 間に別 label なし — grep 検証済) |
+| pre-regrasp L(:4625-4647)10 legs | **12**(左クランプ) | **L HALF→FULL 0.7407**(:4645) | _z_above_d(:4629)、c2y−GHS lane | 表どおり。**`_ph` label なし(recorder 上 GUIDE_PRELIFT 配下)** — P-1 期待列生成時の注意点 |
+| C2_REGRASP(:4675) | **13**(右がケーブル再把持へ)+ **14**(両手クランプ) | R OPEN→cage 0.66663(:4761)→**FULL 0.7407**(:4765) | **square-on C2_TILT_SIGN=0**(:4681、Rs-LOCKED ANTI-REVERT :4678-4681); _at_88 gate ≤20mm(:4750-4755); span-preserving c2y+GHS(:4664-4668) | **M-5**: 表 STEP 13 の R 位置 = クリップ間中点(dry-run 固定 :1282)→ 現行 = 実 cable +Y lane(§6.3 divergence「再把持Y」:2692 の現行解、Rs-LOCKED square-on) |
 | C2_TRANSPORT(:4813)10 legs | **14** 内 sub-motion | both FULL | (c2x, c2y+GHS, _z_above_d)(:4817-4823) | **M-3**: 表に独立 STEP なし(表は再把持位置=最終 lane 前提; 現行は実 cable 把持→lane 位置合わせ) |
 | C2_DUAL_SEAT(:4836)12 legs | **15**(C2へ押し込み) | both FULL | _seat_z_d(:4630); **F-3 = FON_V1 で OFF**(:4845) | top-down 両手 seat(C2_DUALSEAT=1) |
-| C2_SETTLE(:4883)90 steps | **16**(C2固定)+ **17**(解放)相当 | **both FULL→OPEN 0.0**(:4886-4888) | _c2_settled = C2≤0.5mm ∧ groove±3mm(:4897) | **M-4 scope 終端**: 表 STEP 17 = L半保持(C3 継続用)→ 現行 = 両手全開(C1→C2 終端)。C2 に pin なし(pin は C1 のみ — 抽出で C2_PIN 非検出、%10 review で要確認) |
+| C2_SETTLE(:4883)90 steps | **16**(C2固定)+ **17**(解放)相当 | **both FULL→OPEN 0.0**(:4886-4888) | _c2_settled = C2≤0.5mm ∧ groove±3mm(:4897) | **M-4 scope 終端**: 表 STEP 17 = L半保持(C3 継続用)→ 現行 = 両手全開(C1→C2 終端)。**C2 に pin なし = %10 code 反証確認済 CONFIRMED**(eq_active 書込 = 全 runner で :4379 の 1 箇所のみ; `route_c2_pin.json` :5075-5084 = metrics dump のみで eq 不触 = 命名 trap; LEDGER row43 Rs 決定 (c) C2 positive-retention DEFERRED と整合) |
 | verdict+exit(:4951-5088) | (**18** = 未実行) | — | c2_seated_honest(:4971)、exit(:5088) | M-4: STEP 18「C2から上昇」= scope 外 |
 
 ### §3.2 z 意味対応(M-6)と遷移機構
@@ -186,4 +187,5 @@ Author: VT-DESIGN(w2:p5)。Drafted: 2026-07-10 23:32 JST。Node: T-ROOT-Verbal-T
 ## §8 Changelog
 
 - v1.0-DRAFT(2026-07-10 23:32 JST): §0-§2, §5-§6 起草。§3/§4 = runner 抽出待ち。
-- v1.0(2026-07-10 23:4x JST): §3 mapping(17 行 + M-1〜M-7)+ §4 ぶれ防止(4 装置 + gap 3 + 提案 P-1〜P-3)fold。§5.6 設計基盤 governance(Rs role 昇格 23:5x)+ §6 VN-4 + §6.2 intake 台帳追加。§2 D-1/D-2 に task_config 証拠追記。READY FOR %10 AUTHOR-REVIEW。
+- v1.0(2026-07-10 23:4x JST): §3 mapping(17 行 + M-1〜M-7)+ §4 ぶれ防止(4 装置 + gap 3 + 提案 P-1〜P-3)fold。§5.6 設計基盤 governance(Rs role 昇格 23:5x)+ §6 VN-4 + §6.2 intake 台帳追加。§2 D-1/D-2 に task_config 証拠追記。READY FOR %10 AUTHOR-REVIEW。commit `bd1d9979f6`(review 世代 pin、sha256 245fe334…)。
+- v1.0a(2026-07-10 23:5x JST): **%10 author-review = CONCUR w/1 MED + 2 LOW(23:48、sha EXACT 照合)fold。** MED: §3.1 の `_ph` label 系列を実系列に一致化 — GUIDE_C2(:4450 setup)行を独立化 + guide traverse は GUIDE_PRELIFT 配下(:4489〜:4675 間に別 label なしを grep 再検証)+ pre-regrasp L に「label なし(GUIDE_PRELIFT 配下)」注記(P-1 conformance 期待列の false-FAIL/PASS 防止)。LOW: seed cite :3600→**:3599** / C2_TILT_SIGN :4683→**:4681**(両方 grep 再検証済、§運用28)。C2-pin なし = %10 反証確認 CONFIRMED を M-4 行に反映(命名 trap 注記 + LEDGER row43 整合)。%12 verify READY。
