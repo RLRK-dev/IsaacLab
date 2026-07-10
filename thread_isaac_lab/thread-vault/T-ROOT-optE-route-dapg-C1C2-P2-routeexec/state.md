@@ -13,7 +13,7 @@ goal_verification: |
   ⑦ CABLE_XY_OFFSET per-cell wiring
   ⑧ ⑬ enabler のみ (recorded-target-replay stub upgrade + C1-escape non-vacuous cell 供給; ⑬-VERDICT は D-2=trainer 段 defer)
   分子 conjoin = strict_v2 (C1-retention + C2-seat 両 leg)。trainer 段の policy 学習成果は本 node scope 外。
-  現況 (2026-07-10 23:37, PLAN-KEEPER 反映): ⭐⭐**D ρ=0 正式実装 + 受入完了 (23:28、`cdac6b6972` + `f8b1ff6b4c`、bank `c5770ab5aa`) = comp3 scripted 検証段の駆動 CLOSED** (armqdirect 同等 0.05mm・両爪 IN-THROAT・byte-repro 無傷)。経緯 = drive-path decision packet (`f2003c42d9`) → **Rs 裁定 4件 (19:2x)**: scripted 検証段 = D ρ=0 採用 / A-probe GO / worlds≥1 = dual-track 採用 / AC env 床監査 = 別タスク登録 (→ node `T-Skill-AC-EEZ-Floor-Audit` PENDING 登録済 `9ec7be33da`) → A-probe (`16943a8f58`) = A/C 除外 (L killer = env IK 解そのもの) → E-probe (`3a0d2b9aff`) = R 回復・L fail ⇒ trainer 収束 = (E or B) + D-b 窓。⭐**Rs 設計指示 4件**: slot 中央支持 / z_grasp 3-5mm 浅く / 摩擦固定 / 動作工程確定 (VT-DESIGN charter、基準 = 43-step 表 RL-Routing-Design.md §2 + full_43step.json) + 統一曲げ仮説 = study 強支持 (29.7° vs 2.6°)。統合 study 完成 (SLOT_REDESIGN_STUDY、2-slot 成立 + falsification probe 事前登録 ~30min)。⏳**PENDING Rs 決定 2件 = probe GO / parity fork F-A vs F-B**。前提済 = G1 診断 grid 完成 (16:14) + comp3+comp4 build + Rs 裁定 4件 (11:4x) + SRG COMPLETE + Stage-A COMPLETE。詳細 = session_history 07-10 19:2x〜23:28 entry 群 (%12 bank)。node IN_PROGRESS 維持 (comp5-8 remain; C2-whiff=comp5 / table-edge retention CARRY)。
+  現況 (2026-07-11 01:20, PLAN-KEEPER 反映): ⭐**slot-redesign probe arc 進行中** (comp3 scripted 駆動 = D ρ=0 CLOSED 23:28 `c5770ab5aa` は既達)。Rs 設計指示 4件 (slot 中央支持 / z_grasp 浅く / 摩擦固定 / 動作工程確定) + 統合 study (SLOT_REDESIGN) → **falsification probe (Rs GO 00:15) = 完走・INCONCLUSIVE (artifact: 爪 assembly slot 縁接触 30-45°傾斜、4 analyst 一致)** → ⚠**根因『slot 過小』説 = REFUTED・COORD 自己撤回** (footprint 実測 `44aacb92a5`: 22mm=pad-only・全軸 clear、条件 gate が 'slot 拡幅' 誤方向を GPU 前に阻止) → **(b) 拡幅再走 中止** → ⭐**新仮説 (未解決) = 中央支持が scoop-cage 把持機構を阻害する接触動力学** (Rs 観察#3 符合)。⭐**改訂 options 裁定 (Rs 01:06) = (3) FLAT scene 深さ sweep 採択** (%11 実行準備中、launch ping→~30min + instrumentation rider) / (2) 支持 vs scoop 設計再考 = p5/VT intake / (1) supported instrumented HOLD。交絡独立成果 = ①中央支持 曲げ除去 実証 (29.7°→1.4-3.0°) ②footprint 実測済 → slot は障害でない。⏳**PENDING Rs = parity fork F-A vs F-B** (probe GO は解決済)。前提済 = comp3+comp4 build + G1 診断 grid 完成 (16:14) + SRG COMPLETE + Stage-A COMPLETE。詳細 = session_history 07-10 19:2x〜07-11 01:1x entry 群 (%12/COORD bank)。node IN_PROGRESS 維持 (comp5-8 remain; C2-whiff=comp5 / table-edge retention CARRY)。
 status: IN_PROGRESS
 parent_node: T-ROOT-optE-route-dapg-C1C2
 children_nodes: []
@@ -24,7 +24,7 @@ dependencies:
     - "D-1=C (新 module 抽出+byte-repro) / D-2=trainer (⑬ VERDICT defer) = Rs 決定 2026-07-06 23:5x"
   blocker: []
 created: 2026-07-06T23:58:00+09:00
-last_updated: 2026-07-11T00:15:00+09:00
+last_updated: 2026-07-11T01:20:00+09:00
 spec_version: LTM-1 v1.1
 session_history:
   - "2026-07-11 01:06 Rs ⭐**裁定 (AskUserQuestion): 次の一手 =「FLAT scene で深さ sweep (推奨)」採択** — (3) FLAT (現行 production) scene で z_grasp sweep {+0,+3,+4,+5}mm 再走 ~30min GPU (深さ軸を支持軸から分離、いずれかで L 保持成立なら『z_grasp 修正だけで解決』の芽 = 最大簡素化) + 並行で (2) 中央支持 vs scoop-cage 両立性の設計再考 = VT-DESIGN intake (paper、無料)。(1) instrumented supported 再走 = HOLD (支持概念の再考が先)。執行 = %11 (instrumentation rider: finger pose + cable z + per-arm Δz 時系列を flat sweep にも保存 — 観察 #3 の per-arm 非対称 loop を閉じる)。"
