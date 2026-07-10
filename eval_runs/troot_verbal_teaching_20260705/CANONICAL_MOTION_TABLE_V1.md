@@ -1,8 +1,8 @@
 # Canonical 動作工程表 v1 — 43-step 基準 restate + 現行 route mapping
 
-**Status: v1.0a — ✅ Rs-APPROVED(2026-07-11 00:15 verbatim「1 承認」、%12 bank `2b818b6f2f`)— 設計基盤 surface として発効(§5.6 governance 有効)。**
+**Status: v1.0a-r1 — ✅ Rs-APPROVED(2026-07-11 00:15 verbatim「1 承認」、%12 bank `2b818b6f2f`; 承認世代 sha256 = `eb126d42…` @`764431035c`)+ post-approval 追補 r1(D-1 裁定執行、§5 規約 6 初適用)— 設計基盤 surface として発効(§5.6 governance 有効)。**
 chain 完走: %10 author-review CONCUR(fold 済)→ %12 verify PASS(6 leg)→ Rs 承認。世代 chain: `bd1d9979f6`(v1.0 review 世代)→ `7f5d2716a9`(v1.0a fold)→ 本 status 反映 commit。**確定版 sha256 = 承認反映 commit の commit message に記録**(doc 内への自己 sha 埋込は self-reference で原理的に不成立のため、version⇄sha 束縛(P-3)の記録先は commit message / 台帳側とする)。
-**⚠ 未決 2 件(承認 scope 外、変更禁止のまま保持):** D-1(§2)= **Rs 未裁定**(v3 注記の扱い変更禁止、裁定待ち継続)/ P-1・P-3 charter 化 = **未決**(組込保留)。
+**未決の現況:** D-1 = ✅ **裁定済**(Rs 承認 00:29、§2 参照)/ P-1・P-3 charter 化 = **未決**(組込保留、継続)。
 **Role note(Rs 2026-07-10 23:5x、%12 経由):** VT-DESIGN = **設計基盤(design-foundation)pane に昇格**。本 doc = 昇格第 1 成果物 = 設計 canonical surface(§5.6 governance 参照)。
 **Gate(%12 裁定 2026-07-10 23:27):** L2。**v1 = 5体 waive(loud 記録)** — 理由: v1 は banked 済み内容(43-step 表 = Rs 確定 2026-03-28 + MOTION STANDARD)の restate+mapping で新規設計判断を含まず、最終 gate = Rs 承認 flow 自体。代償 = %10 author-review を %12 verify 前に挿入。**⚠ v2(工程の実変更 = slot/z_grasp/摩擦の fold)= L3 相当 + 5体必須**(本 doc §6 参照)。
 Author: VT-DESIGN(w2:p5)。Drafted: 2026-07-10 23:32 JST。Node: T-ROOT-Verbal-Teaching-20260705。
@@ -75,7 +75,7 @@ Author: VT-DESIGN(w2:p5)。Drafted: 2026-07-10 23:32 JST。Node: T-ROOT-Verbal-T
 
 | ID | 内容 | doc 側 | json 側 | 備考 |
 |---|---|---|---|---|
-| D-1 | Phase A grasp X | v3 注記 `:2702`「X=0.30→0.15(REST_CLIPS 一致)」 | STEP 2-5 x=**0.30**(z は v3 値 1.05 を反映) | **task_config.py:231 `GRASP_X=0.30` が json と整合** → 現行 = 0.30 で一貫、**v3 注記側が stale(後日 revert 済の可能性)**。裁定 = %12/Rs |
+| D-1 | Phase A grasp X | v3 注記 `:2702`「X=0.30→0.15(REST_CLIPS 一致)」 | STEP 2-5 x=**0.30**(z は v3 値 1.05 を反映) | ✅ **裁定済(Rs 承認 2026-07-11 00:29、bank `cb4a416067`)**: 現行 = X=0.30 で確定、v3 注記側 = revert 済 stale。**訂正注記を RL-Routing-Design.md v3 注記直後に Rs 授権で追記済**(§5 規約 3 flow; file untracked につき provenance = 前後 sha を VT node bank に記録) |
 | D-2 | 初期把持 Y span | §2.1 表 `:1378` C1: L+0.120/R+0.180(±30mm) | STEP 2-5 y=0.09/0.21(±60mm) | **3 世代値**: §2.1=±30mm / json=±60mm / **現行 runtime=±44mm(88mm span = INVARIANT #2、`GRIP_HALF_SPAN=0.044 :235`、`WIDE_LEFT_Y/RIGHT_Y=+0.106/+0.194 :268-269`)**。§6.3 既知 divergence `:2690` と同根。現行実効値は task_config が正 |
 | D-3 | 下降点 z | 用語表 `:1236` z=1.02 | 下降/押込 z=**1.025** | 5mm 差。json が現行 SSOT |
 | D-4 | §6.3 既知 divergence 残存 | 再把持Y = 中点固定 vs nearest query `:2692` / guide手選択 L固定 vs テスト選択 `:2693` | — | dry↔wet 世代の未解消項目、v1 では記録のみ |
@@ -191,6 +191,7 @@ Author: VT-DESIGN(w2:p5)。Drafted: 2026-07-10 23:32 JST。Node: T-ROOT-Verbal-T
 
 - v1.0-DRAFT(2026-07-10 23:32 JST): §0-§2, §5-§6 起草。§3/§4 = runner 抽出待ち。
 - v1.0(2026-07-10 23:4x JST): §3 mapping(17 行 + M-1〜M-7)+ §4 ぶれ防止(4 装置 + gap 3 + 提案 P-1〜P-3)fold。§5.6 設計基盤 governance(Rs role 昇格 23:5x)+ §6 VN-4 + §6.2 intake 台帳追加。§2 D-1/D-2 に task_config 証拠追記。READY FOR %10 AUTHOR-REVIEW。commit `bd1d9979f6`(review 世代 pin、sha256 245fe334…)。
+- **v1.0a-r1**(2026-07-11 00:3x JST): **D-1 = Rs 裁定「承認」執行**(00:29、bank `cb4a416067`)— RL-Routing-Design.md v3 注記直後に訂正注記を Rs 授権追記(現行 X=0.30 確定 / Z=1.05 有効 / 裁定記録 = 本 doc §2 D-1)。provenance(file untracked): 編集前 sha `02bbedcfef0b143f…`(%12 独立取得と EXACT)/ 編集後 sha = VT node bank + commit message に記録。§2 D-1 行 = 裁定済化。**sub-revision label 初適用(§5 規約 6)**。
 - P-3 規約化 fold(2026-07-11 00:2x JST): %12 執行 verify PASS(00:20)+ directive fold — P-3 に「version⇄sha 束縛は doc 外(commit message / LEDGER 行)に置く」を規約として明文化(self-referential sha 教訓)。FYI 受領: RL-Routing-Design.md = git untracked 判明、tracked 化は %12 が Rs 提起中(§5 版管理規約に関係 — 着地待ち)。
 - v1.0a Rs-APPROVED 反映(2026-07-11 00:17 JST): **Rs 承認(00:15「1 承認」、%12 bank `2b818b6f2f`)→ status 確定化 + 設計基盤 surface 発効。** D-1 = 未裁定のまま §2 現状維持(Rs 指示②)/ P-1・P-3 charter = 未決・組込保留(同③)/ VN-0 probe = **Rs GO 着地、COORD 実行中**(結果は §6 解釈 grid 経由で v2 fold 入力)。%12 verify = PASS 6 leg(23:55、非重複独立検証)。
 - v1.0a(2026-07-10 23:5x JST): **%10 author-review = CONCUR w/1 MED + 2 LOW(23:48、sha EXACT 照合)fold。** MED: §3.1 の `_ph` label 系列を実系列に一致化 — GUIDE_C2(:4450 setup)行を独立化 + guide traverse は GUIDE_PRELIFT 配下(:4489〜:4675 間に別 label なしを grep 再検証)+ pre-regrasp L に「label なし(GUIDE_PRELIFT 配下)」注記(P-1 conformance 期待列の false-FAIL/PASS 防止)。LOW: seed cite :3600→**:3599** / C2_TILT_SIGN :4683→**:4681**(両方 grep 再検証済、§運用28)。C2-pin なし = %10 反証確認 CONFIRMED を M-4 行に反映(命名 trap 注記 + LEDGER row43 整合)。%12 verify READY。
