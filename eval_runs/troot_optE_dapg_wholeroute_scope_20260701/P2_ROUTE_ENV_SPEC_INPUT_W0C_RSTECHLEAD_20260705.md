@@ -1,6 +1,7 @@
 ---
 doc_class: reference
 ---
+> 🔁 SUPERSEDED-in-substance (as-of 2026-07-11, COORD2 vault-audit) — tracking SSOT = LEDGER VL4 (`00-DESIGN-STATUS-LEDGER.md`). optE-P2-envspec-reward: env-core COMPLETE (LEDGER row47), spec = banked basis. Do not copy live values — pointer task_config.py / successor docs.
 
 # P2 whole-route env — DESIGN-GATE SPEC-INPUT (W0-c) — 両枝並記
 

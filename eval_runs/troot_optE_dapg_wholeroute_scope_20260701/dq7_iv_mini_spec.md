@@ -1,6 +1,7 @@
 ---
 doc_class: reference
 ---
+> ⛔ SUPERSEDED / HISTORICAL (as-of 2026-07-11, COORD2 vault-audit) — tracking SSOT = LEDGER VL1 (`00-DESIGN-STATUS-LEDGER.md`). optE-DQ7-offpath: R1 CLOSED (LEDGER row47), historical. Do not copy live values — pointer task_config.py / successor docs.
 
 # DQ7 stage (iv) mini-spec v1.1 — restoring-augmented BC (denoising) 0-GPU pathfinder
 

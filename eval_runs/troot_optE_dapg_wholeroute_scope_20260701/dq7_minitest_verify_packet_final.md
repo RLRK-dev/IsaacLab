@@ -1,6 +1,7 @@
 ---
 doc_class: reference
 ---
+> ⛔ SUPERSEDED / HISTORICAL (as-of 2026-07-11, COORD2 vault-audit) — tracking SSOT = LEDGER VL1 (`00-DESIGN-STATUS-LEDGER.md`). optE-DQ7-offpath: R1 CLOSED (LEDGER row47), historical. Do not copy live values — pointer task_config.py / successor docs.
 
 > **Archived by %11 (COORD) at R1 close — Rs decision (B), 2026-07-05 10:17 JST.** DQ7 mini-test terminated at 0 GPU per 5体 [VERIFY] = FAIL (2 CRITICAL: span-break [per-arm guard-2] + state-blind-expert confound; + high-INCONCLUSIVE/validity). Content below unchanged from the scratchpad working copy.
 

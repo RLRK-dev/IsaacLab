@@ -1,6 +1,7 @@
 ---
 doc_class: reference
 ---
+> 📖 REFERENCE / HISTORICAL (as-of 2026-07-11, COORD2 vault-audit) — tracking SSOT = LEDGER VL5 (`00-DESIGN-STATUS-LEDGER.md`). optE-DAPG-scoping: original scoping, arch-decision superseded. Do not copy live values — pointer task_config.py / successor docs.
 
 # DAPG WHOLE-ROUTE (C1→C2) — Port/Build Scoping (proposal for %3 / Rs review)
 

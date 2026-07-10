@@ -1,6 +1,7 @@
 ---
 doc_class: reference
 ---
+> 📖 REFERENCE / HISTORICAL (as-of 2026-07-11, COORD2 vault-audit) — tracking SSOT = LEDGER VL3 (`00-DESIGN-STATUS-LEDGER.md`). optE-W0packet: W0-e CLOSED (LEDGER row47), decision-of-record historical. Do not copy live values — pointer task_config.py / successor docs.
 
 # 幾何設計: W0-e seat/guide offset-follow (F-1a / F-1b / F-2 / F-3) — /geometric-design 6-step
 

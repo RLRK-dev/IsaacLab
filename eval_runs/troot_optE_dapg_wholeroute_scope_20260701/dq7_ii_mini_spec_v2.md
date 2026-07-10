@@ -1,6 +1,7 @@
 ---
 doc_class: reference
 ---
+> ⛔ SUPERSEDED / HISTORICAL (as-of 2026-07-11, COORD2 vault-audit) — tracking SSOT = LEDGER VL1 (`00-DESIGN-STATUS-LEDGER.md`). optE-DQ7-offpath: R1 CLOSED (LEDGER row47), historical. Do not copy live values — pointer task_config.py / successor docs.
 
 # DQ7 stage (ii) mini-spec **v2** — kick-and-recover injection hooks (CP-(ii)-0, post-debate re-architecture)
 

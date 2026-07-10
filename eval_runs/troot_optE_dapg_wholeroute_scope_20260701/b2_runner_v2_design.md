@@ -1,6 +1,7 @@
 ---
 doc_class: reference
 ---
+> ⛔ SUPERSEDED / HISTORICAL (as-of 2026-07-11, COORD2 vault-audit) — tracking SSOT = LEDGER VL2 (`00-DESIGN-STATUS-LEDGER.md`). optE-B-BC-imitation: superseded by ladder-v2 / env-core. Do not copy live values — pointer task_config.py / successor docs.
 
 # (a) policy_route_runner.py v2 — DESIGN PROPOSAL (CP-E prerequisite; NOT implemented)
 

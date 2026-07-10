@@ -1,6 +1,7 @@
 ---
 doc_class: reference
 ---
+> ⛔ SUPERSEDED / HISTORICAL (as-of 2026-07-11, COORD2 vault-audit) — tracking SSOT = LEDGER VL1 (`00-DESIGN-STATUS-LEDGER.md`). optE-DQ7-offpath: R1 CLOSED (LEDGER row47), historical. Do not copy live values — pointer task_config.py / successor docs.
 
 # DQ7 — off-path 教師機構の設計 scoping (options + recommendation)
 
