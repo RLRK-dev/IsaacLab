@@ -1,0 +1,105 @@
+{
+ "gripper_subtree_bodies": {
+  "L": [
+   "robotiq_2f85_worldbody_base_mount_base_left_spring_link_left_follower",
+   "robotiq_2f85_worldbody_base_mount_base_right_spring_link_right_follower"
+  ],
+  "R": [
+   "robotiq_2f85_worldbody_base_mount_base_left_spring_link_left_follower_2",
+   "robotiq_2f85_worldbody_base_mount_base_right_spring_link_right_follower_2"
+  ]
+ },
+ "leg_F": {
+  "window": "t=60..114 (frames x3 sub-samples; flat-scene CLEAN scoop poses from the confirmation capture)",
+  "slots": {
+   "L": {
+    "below_table_y_envelope": [
+     0.09302,
+     0.1151
+    ],
+    "below_table_width_mm": 22.1,
+    "full_assembly_y_envelope": [
+     0.09302,
+     0.11514
+    ],
+    "full_assembly_width_mm": 22.1,
+    "proposed_slot_y": [
+     0.09002,
+     0.1206
+    ],
+    "proposed_slot_width_mm": 30.6
+   },
+   "R": {
+    "below_table_y_envelope": [
+     0.185,
+     0.20716
+    ],
+    "below_table_width_mm": 22.2,
+    "full_assembly_y_envelope": [
+     0.18496,
+     0.20716
+    ],
+    "full_assembly_width_mm": 22.2,
+    "proposed_slot_y": [
+     0.182,
+     0.21266
+    ],
+    "proposed_slot_width_mm": 30.7
+   }
+  },
+  "central_support_width_mm": 61.4,
+  "central_support_at_DR20_mm": 21.4,
+  "sag_anchor": "probe evidence: <=29mm spans -> bend 1.4-3.0 deg (sag removal holds); support must exceed 0 with spans kept <= ~40mm",
+  "gate_b_feasibility": {
+   "nominal": true,
+   "at_DR20": true,
+   "verdict": "FEASIBLE",
+   "SUPERSEDED_BY": "CORRECTION_retraction (slots not the obstruction)"
+  }
+ },
+ "leg_Z": {},
+ "leg_Z2": {
+  "camera_to_arm_mapping": "zoom camera: foreground-left = L arm (lane Y~0.106, nearer the camera; consistent across all analyst reports) -> Rs 'near finger too high' = L claw",
+  "commanded_park_dz_LR_mm": 0.01,
+  "flat_scene_achieved_EE_dz_LR_mm": {
+   "mean": -0.012,
+   "max_abs": 0.037,
+   "source": "confirmation capture ee_l/ee_r (ik_chord drive, park window f900-1140)"
+  },
+  "architecture_bound": "the arm drive is a KINEMATIC joint_q overwrite with NO contact feedback (IK solved on the FK model; warm-start chain contact-independent) -> the commanded/achieved EE path is SCENE-INDEPENDENT: slot-cell EE z asymmetry == flat-scene bound (<=0.06mm). Any >=1mm claw-height asymmetry observed in the slot cells is therefore FINGER-LINKAGE DEFLECTION, not drive.",
+  "per_cell_video_asymmetry": {
+   "dz0": "both claws tilted 30-45deg through lift (roughly symmetric splay)",
+   "dz3": "L claw 40-45deg hard tilt, L cage EMPTY (strongest 'L high' signature)",
+   "dz4": "L tilt confined to the close window f82-118; upright lift (lightest)",
+   "dz5": "both deflected on raised strips; no capture"
+  },
+  "discriminator_2x2_verdict": {
+   "B_drive_asymmetry": "EXCLUDED at <=0.06mm (commanded Dz 0.01mm + flat achieved bound + scene-independence of the kinematic arm drive)",
+   "A_edge_ride_up": "CONFIRMED as the mechanism of the observed claw-height asymmetry (finger-linkage deflection on slot edges; dz3 L-empty-cage signature matches Rs 'near/L finger too high'). NOTE: dz4's close-window tilt shows even the lightest cell had edge interaction -- 'clean-entry cell' did not exist in this sweep, but (B) is excluded by architecture+measurement, not by the dz4 cell alone.",
+   "rs_observed_cell": "inference: dz0 (the delivered crop) and/or dz3 (strongest signature); tagged inference -- per-cell claw-z persistence is added to the (b) re-run spec"
+  },
+  "feedforward_leg3_note": "under (A) the drive is not implicated; flat feedforward runs (armqdirect/dff) showed symmetric carry (video) + symmetric numerics -- consistent",
+  "data_gaps_loud": [
+   "slot-probe runner persisted NO per-frame claw/finger poses (deflected pinch z per cell unrecoverable; video metrology px/mm is below the 2mm question scale -- numeric-primary rule applied via the architecture bound instead)",
+   "(b) re-run spec addition: persist per-step claw z (clamp_pos_ko L/R) + lane cable z"
+  ],
+  "scene_coupling_note": "flat scene: close PUSHES the cable down (-6mm measured) so a deep park still meets it; supported scene: the cable cannot yield -> optimum z shifts DOWN (consistent with Rs #2 'too low' on FLAT and Rs #3 'too high' on SUPPORTED -- scene difference resolves the apparent direction conflict).",
+  "sweep_redesign_proposal": "re-run sweep near 'rigid pinch-cable gap ~0': dz in {-3,-2,-1,0} or {-2,-1,0,+1} mm (rigid gap at dz0 = +1.9mm; supported cable cannot yield) -- proposal only, final = %12/Rs with the (b) gate + the (A)-fixed slot re-dimensioning from leg F."
+ },
+ "CORRECTION_retraction": {
+  "what_i_retract": "My earlier confound root-cause reported to %12 (00:4x) -- 'slot too narrow for the FULL finger assembly; the pad-only 22mm footprint excluded wider crossbar/base links + scoop dynamic pose' -- is REFUTED by this direct measurement. There is NO wider assembly.",
+  "measurement": {
+   "full_assembly_below_table_Y_width_mm": "L 22.1 / R 22.2 (== pad-only 22mm; the wrist subtree is ONLY the two follower/pad bodies -- pad1/pad2/f1ext/f2ext; there is no wider crossbar geom)",
+   "Y_width_vs_driver_angle": "the PRIMARY measure (full ach_q gripper coords over the real close window t60-114) = 22mm below-table for both arms. The finger CLOSING is an X-motion (fingers move toward each other in X); the pad Y-extent is set by the pad's own 18mm Y-width and is ~invariant to the follower rotation (axis ~along Y). CAVEAT: the SLOT-scene flopped-follower pose is NOT in the flat capture, so a definitive flop-Y-width bound needs the instrumented re-run -- but a flop is a rotation about the ~Y follower axis, which does not plausibly widen Y beyond the pad width.",
+   "X_envelope": "L [0.244,0.356] / R [0.245,0.356] -- clears the slot X-window [0.234,0.366] by +10mm each side",
+   "Y_clearance_to_central_solid": "L +6.9mm / R +4.0mm (below-table portion vs solid Y[0.122,0.181])",
+   "Z_reach": "f1ext reaches 9.1mm below the table top INTO the slot (scoops under the cable) -- as intended"
+  },
+  "corrected_finding": "Along the CLEAN-CLOSE trajectory (flat-scene capture), the full finger assembly CLEARS the 2-slot scene in X, Y, and Z with 4-10mm margin everywhere. The 29mm slots were NOT the obstruction. The video-observed 30-45deg finger tilt/splay is therefore NOT a geometric strike along the intended path -- it is a CONTACT-DYNAMICS divergence: in the supported scene the compliant 4-bar fingers deviate from the clean close (flop/splay). Whether a flopped finger then grazes a slot edge is a downstream consequence, not the initiating cause.",
+  "why_this_matters": "The (b) re-run as specified (widen slots per leg-F re-dimensioning, then rerun) would NOT fix the confound -- the slots already fit. This is the (a) gate working: it caught a wrong design direction (slot widening) before spending GPU on a re-run that could not have resolved the bend-rescue question. The gate verdict is NOT '(b)-feasible' -- it is 'the premise for (b) is refuted'.",
+  "most_likely_actual_mechanism_UNRESOLVED": "The central support that removes the cable sag ALSO makes the cable UNYIELDING (rests on solid at 0.804, cannot be pushed down). The flat-scene koshape grasp RELIES on the closing fingers pushing the cable DOWN ~6mm and hooking it from below (f1ext scoop); an unyielding cable may disrupt that scoop-and-cage, flopping the compliant 4-bar. This is a HYPOTHESIS (design-level, ties to Rs #3 'finger too high, dropping the cable'): central support may be geometrically fine yet mechanically incompatible with the scoop-cage grasp. NOT confirmable from static geometry or the flat capture -- needs an INSTRUMENTED re-run (persist per-frame claw z + finger/follower pose + cable z + contact) to observe the finger contact behavior directly.",
+  "leg_F_verdict_supersede": "the earlier gate_b_feasibility='FEASIBLE' answered the WRONG question (can 30mm slots + support coexist with DR20). Superseded: slots need no widening; the confound is not slot-width. Central-support geometry itself remains buildable (59mm nominal / 21mm at DR20).",
+  "leg_Z2_A_verdict_supersede": "(B) drive-asymmetry EXCLUSION STANDS (kinematic scene-independent drive, commanded dz 0.01mm, achieved <=0.037mm). But (A) 'edge-ride-up on UNDERSIZED slot' is REFUTED (slots not undersized). The observed per-arm claw asymmetry is therefore NEITHER drive NOR slot-narrowness -> it is compliant-finger CONTACT DYNAMICS (possibly per-arm asymmetric via 4-bar bistability) in the supported scene, OR partial video over-read. Resolvable only by the instrumented re-run.",
+  "revised_recommendation_rule24": "Do NOT launch the (b) re-run as 'widen slots + rerun' (premise refuted). Options for Rs: (1) INSTRUMENTED diagnostic re-run of the 2-slot scene (persist finger pose + cable z + contact) to characterize the contact divergence -- answers WHY the fingers flop under support; (2) reconsider whether central support is compatible with the scoop-cage grasp at all (the sag-removal benefit vs the scoop-disruption cost) -- this may reframe the whole slot concept; (3) the Rs #3 height insight (deeper park so the pinch meets the unyielding cable) can be tested CHEAPLY on the FLAT scene first (dz sweep, no slot rebuild) to isolate the height axis from the support axis."
+ }
+}
