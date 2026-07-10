@@ -381,6 +381,7 @@ class NewtonRouteEnv(VecEnv):
             control=self._control,
             state_bank=state_bank,
             recording=recording,
+            forbid_banked_fork=self._grasp_actuation,  # comp3 (R1): k>=1 banked fork needs DoD-7(b) (comp3b)
         )
 
     # =====================================================================================================
@@ -466,8 +467,12 @@ class NewtonRouteEnv(VecEnv):
         if self._grasp_actuation:
             # comp3: arm-only re-pose; gripper coords {6-13,20-27} left DYNAMIC (POSITION servo drives them).
             self._rex.apply_arm_only_write_broadcast(
-                phys_jq, phys_jqd, fk_jq,
-                self._arm_ow_maps["arm_ow_q_idx"], self._arm_ow_maps["arm_ow_qd_idx"], self._arm_ow_maps["arm_ow_src"],
+                phys_jq,
+                phys_jqd,
+                fk_jq,
+                self._arm_ow_maps["arm_ow_q_idx"],
+                self._arm_ow_maps["arm_ow_qd_idx"],
+                self._arm_ow_maps["arm_ow_src"],
             )
         else:
             for w in range(self._world_count):
@@ -578,6 +583,13 @@ class NewtonRouteEnv(VecEnv):
         self._settled_body_q = self._state_0.body_q.numpy().copy()
         self._settled_body_qd = self._state_0.body_qd.numpy().copy()
         self._settled_fk_jq = self._fk_state.joint_q.numpy().copy()
+        if self._grasp_actuation:
+            # comp3 (R1d/CC4-CH5): the FK gripper coords are FINGER_OPEN_POS FOLLOWER constants -> seeding
+            # them at reset risks a 4-bar branch-flip under the POSITION servo. Patch them to world-0's
+            # post-settle PHYSICS gripper config (route step-0 = OPEN both arms) so the 28-wide reset-init
+            # (and the per-world FK cache below) seed a consistent physics-branch gripper. self._rex (the
+            # route_executor module) is set flag-ON in _build_model, which runs before this.
+            self._rex.patch_settled_fk_gripper(self._settled_fk_jq, self._state_0.joint_q.numpy(), self._arm_q_start[0])
         for w in range(self._world_count):
             self._per_world_fk_jq[w] = self._settled_fk_jq.copy()
         self._target_seg_indices_r, self._target_seg_indices_l = self._compute_target_seg_indices(self._settled_body_q)
@@ -596,29 +608,44 @@ class NewtonRouteEnv(VecEnv):
         N = self._world_count
         rot_quat = wp.vec4(*KO_ROT_TARGET_XYZW)
         self._ik_obj_pos_left = IKObjectivePosition(
-            link_index=_LEFT_EE_BODY, link_offset=wp.vec3(0, 0, 0),
-            target_positions=wp.zeros(N, dtype=wp.vec3, device=self.device), weight=1.0,
+            link_index=_LEFT_EE_BODY,
+            link_offset=wp.vec3(0, 0, 0),
+            target_positions=wp.zeros(N, dtype=wp.vec3, device=self.device),
+            weight=1.0,
         )
         self._ik_obj_pos_right = IKObjectivePosition(
-            link_index=_RIGHT_EE_BODY, link_offset=wp.vec3(0, 0, 0),
-            target_positions=wp.zeros(N, dtype=wp.vec3, device=self.device), weight=1.0,
+            link_index=_RIGHT_EE_BODY,
+            link_offset=wp.vec3(0, 0, 0),
+            target_positions=wp.zeros(N, dtype=wp.vec3, device=self.device),
+            weight=1.0,
         )
         self._ik_obj_rot_left = IKObjectiveRotation(
-            link_index=_LEFT_EE_BODY, link_offset_rotation=wp.quat_identity(),
-            target_rotations=wp.array([rot_quat] * N, dtype=wp.vec4, device=self.device), weight=0.5,
+            link_index=_LEFT_EE_BODY,
+            link_offset_rotation=wp.quat_identity(),
+            target_rotations=wp.array([rot_quat] * N, dtype=wp.vec4, device=self.device),
+            weight=0.5,
         )
         self._ik_obj_rot_right = IKObjectiveRotation(
-            link_index=_RIGHT_EE_BODY, link_offset_rotation=wp.quat_identity(),
-            target_rotations=wp.array([rot_quat] * N, dtype=wp.vec4, device=self.device), weight=0.5,
+            link_index=_RIGHT_EE_BODY,
+            link_offset_rotation=wp.quat_identity(),
+            target_rotations=wp.array([rot_quat] * N, dtype=wp.vec4, device=self.device),
+            weight=0.5,
         )
         self._ik_obj_jlimit = IKObjectiveJointLimit(
-            joint_limit_lower=self._fk_model.joint_limit_lower, joint_limit_upper=self._fk_model.joint_limit_upper,
+            joint_limit_lower=self._fk_model.joint_limit_lower,
+            joint_limit_upper=self._fk_model.joint_limit_upper,
             weight=10.0,
         )
         self._ik_solver_batch = IKSolver(
-            self._fk_model, n_problems=N,
-            objectives=[self._ik_obj_pos_left, self._ik_obj_pos_right, self._ik_obj_rot_left,
-                        self._ik_obj_rot_right, self._ik_obj_jlimit],
+            self._fk_model,
+            n_problems=N,
+            objectives=[
+                self._ik_obj_pos_left,
+                self._ik_obj_pos_right,
+                self._ik_obj_rot_left,
+                self._ik_obj_rot_right,
+                self._ik_obj_jlimit,
+            ],
         )
         coord_count = self._fk_model.joint_coord_count
         self._ik_jq_in = wp.zeros((N, coord_count), dtype=float, device=self.device)
@@ -668,8 +695,13 @@ class NewtonRouteEnv(VecEnv):
         for w in env_ids:
             w = int(w)
             restore_world_body_state(
-                bq=bq, bqd=bqd, prev=prev, settled_body_q=self._settled_body_q,
-                settled_body_qd=self._settled_body_qd, w=w, bws=self._bws,
+                bq=bq,
+                bqd=bqd,
+                prev=prev,
+                settled_body_q=self._settled_body_q,
+                settled_body_qd=self._settled_body_qd,
+                w=w,
+                bws=self._bws,
             )
             self._per_world_fk_jq[w] = self._settled_fk_jq.copy()
             self._ee_target_right[w] = self._settled_ee_r_pos.copy()
@@ -705,6 +737,11 @@ class NewtonRouteEnv(VecEnv):
             phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
         self._state_0.joint_q.assign(phys_jq)
         self._state_0.joint_qd.assign(phys_jqd)
+        if self._grasp_actuation:
+            # comp3 (R1a): the 28-wide reset-init above re-poses the gripper joint_q (patched OPEN branch)
+            # + zeroes qd, but the servo TARGET still carries the episode-end CLOSED command -> re-seed it to
+            # OPEN (route step-0) for the reset worlds only (per-world subset; K1c) so episode >= 2 starts OPEN.
+            self._route.reseed_grip_open(env_ids)
         for w in env_ids:
             w = int(w)
             cable_joints_w = list(
@@ -815,6 +852,11 @@ class NewtonRouteEnv(VecEnv):
 
         # DRIVE: interpolate arm joint_q start->target and OVERWRITE each world's joint_q slice per frame.
         old_fk_jq = np.array(self._per_world_fk_jq[:N])
+        if self._grasp_actuation:
+            # comp3 (R2): per-world route step for the recorded grip staircase lookup cf[t_w]+sub_i. This is
+            # read HERE (before the per-frame loop) because episode_length_buf is not incremented until after
+            # _apply_actions_batch returns, so it holds THIS step's t_w == the value _pull_route used.
+            route_steps = [int(self.episode_length_buf[w].item()) for w in range(N)]
         for step in range(self.PHYSICS_STEPS_PER_RL):
             t = min((step + 1) / self.PHYSICS_STEPS_PER_RL, 1.0)
             jq_interp = old_fk_jq + (jq_targets - old_fk_jq) * t
@@ -824,8 +866,11 @@ class NewtonRouteEnv(VecEnv):
                 # comp3: arm-only per-world drive; gripper coords {6-13,20-27} left DYNAMIC (servo-driven;
                 # the recorded grip_cmd staircase writes control.joint_target_pos separately -- R2/chunk 2).
                 self._rex.apply_arm_only_write_perworld(
-                    phys_jq, phys_jqd, jq_interp,
-                    self._arm_ow_maps["arm_ow_q_idx"], self._arm_ow_maps["arm_ow_qd_idx"],
+                    phys_jq,
+                    phys_jqd,
+                    jq_interp,
+                    self._arm_ow_maps["arm_ow_q_idx"],
+                    self._arm_ow_maps["arm_ow_qd_idx"],
                 )
             else:
                 for w in range(N):
@@ -834,6 +879,11 @@ class NewtonRouteEnv(VecEnv):
                     phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
             self._state_0.joint_q.assign(phys_jq)
             self._state_0.joint_qd.assign(phys_jqd)
+            if self._grasp_actuation:
+                # comp3 (R2): drive the gripper POSITION-servo from the recorded grip_cmd staircase for THIS
+                # physics sub-frame, AFTER the arm joint_q assign and BEFORE the solver step (so the servo
+                # target is in place). Writes control.joint_target_pos ONLY (gripper joint_q is servo-DYNAMIC).
+                self._route.apply_recorded_grip(route_steps, step)
             self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
         for w in range(N):
             self._per_world_fk_jq[w] = jq_targets[w].copy()
@@ -1066,8 +1116,12 @@ class NewtonRouteEnv(VecEnv):
             r_reach = float(np.linalg.norm(clamp_r - lane_seg))  # R reach to lane-matched target (G4 _at_88 proxy)
 
             # --- explosion (physics-fault invalid) ---
-            explosion = (r_near > self.EXPLOSION_DIST_THRESH or l_near > self.EXPLOSION_DIST_THRESH
-                         or np.isnan(r_near) or np.isnan(l_near))
+            explosion = (
+                r_near > self.EXPLOSION_DIST_THRESH
+                or l_near > self.EXPLOSION_DIST_THRESH
+                or np.isnan(r_near)
+                or np.isnan(l_near)
+            )
 
             # --- drop (-10; held-z floor / debounced contact-loss / lateral escape). Only meaningful AFTER
             # grasp (G1 cage latched) -- before grasp there is nothing to drop. span/reach = INFORMATIVE. ---
@@ -1093,8 +1147,10 @@ class NewtonRouteEnv(VecEnv):
                 span_ok = abs(span - rc.HOLD_SPAN_ACHIEVED) <= rc.HOLD_SPAN_TOL_M  # informative-only
 
             # --- raw predicates p1..p6 (ORDERED latch applied below) ---
-            p1 = (grip_r >= 0.5 and grip_l >= 0.5) and (contact_r and contact_l) and (
-                abs(span - rc.HOLD_SPAN_ACHIEVED) <= rc.HOLD_SPAN_TOL_M
+            p1 = (
+                (grip_r >= 0.5 and grip_l >= 0.5)
+                and (contact_r and contact_l)
+                and (abs(span - rc.HOLD_SPAN_ACHIEVED) <= rc.HOLD_SPAN_TOL_M)
             )
             p2 = (held_z - self._cable_z_rest) >= self.LIFT_RISE_MIN_M
             p3 = (c1_seat < T_GROOVE) and (ph >= 2)  # C1-seat and pin-fired proxy (phase reached G3)

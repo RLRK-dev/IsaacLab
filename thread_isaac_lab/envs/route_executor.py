@@ -336,6 +336,29 @@ def apply_banked_restore(phys_jq, phys_jqd, joint_target_pos, maps, banked):
     return phys_jq, phys_jqd, joint_target_pos
 
 
+def patch_settled_fk_gripper(settled_fk_jq, phys_jq, arm_q_start0):
+    """Overwrite the FK-constant gripper coords in the reset-init source with world-0 PHYSICS coords (CC4-CH5).
+
+    The env-core reset re-poses arms + gripper from ``settled_fk_jq`` (a 28-wide FK arm row). The gripper
+    coords there are the ``FINGER_OPEN_POS`` FOLLOWER constants, NOT a servo-settled config -- seeding them
+    at reset risks a 4-bar follower BRANCH-FLIP under the POSITION servo. Mirror of the AR:866-872 patch:
+    replace the gripper coords ``_GRIPPER_COORDS_LOCAL`` ({6-13, 20-27}) with world-0's POST-SETTLE physics
+    gripper config (route step-0 = OPEN both arms, dual-arm ADAPT of the AR L-close mirror) so the 28-wide
+    reset-init seeds a consistent physics-branch gripper. ``comp3`` flag-ON only; arm coords are untouched.
+
+    Args:
+        settled_fk_jq: The 28-wide FK arm row [rad] used as the reset-init source, mutated in place.
+        phys_jq: The full physics ``joint_q`` array [rad] (world-0's post-settle gripper is read from it).
+        arm_q_start0: World-0's arm ``joint_q`` start index into ``phys_jq``.
+
+    Returns:
+        The mutated ``settled_fk_jq``.
+    """
+    for gc in sorted(_GRIPPER_COORDS_LOCAL):
+        settled_fk_jq[gc] = phys_jq[arm_q_start0 + gc]
+    return settled_fk_jq
+
+
 def build_state_bank_from_recording(recording, n_world, arm_off=0, phases=(1, 2, 3, 4, 5)):
     """Build the phase-k state bank ``{k: banked}`` from a ONE-cell recording (comp2 §8; Q3, %12 16:04).
 
@@ -3136,7 +3159,17 @@ class RouteExecutor(rc.RouteInterfaceV1):
     (subsequent build chunks; faithful copy of the locked ``_run_mujoco_grasp_route``:3692).
     """
 
-    def __init__(self, arm_q_start, arm_qd_start, horizon, state_0=None, control=None, state_bank=None, recording=None):
+    def __init__(
+        self,
+        arm_q_start,
+        arm_qd_start,
+        horizon,
+        state_0=None,
+        control=None,
+        state_bank=None,
+        recording=None,
+        forbid_banked_fork=False,
+    ):
         """Wire the per-world index maps + optional physics handles + the recorded_replay source.
 
         Args:
@@ -3150,6 +3183,9 @@ class RouteExecutor(rc.RouteInterfaceV1):
                 ``ee_pos_r``/``ee_pos_l`` [frames, 3], ``grip_cmd`` [frames, 2] (cols [L, R]), ``phase_id``
                 [frames]. 81 single-cell (interface carries no world index, CC2-CH3). None => step_target
                 raises (pure-index construction).
+            forbid_banked_fork: comp3 (R1) hard-guard. When True, :meth:`reset_to_phase` raises for
+                ``k >= 1`` (the banked phase-k fork needs the DoD-7(b) cable re-seed = comp3b; comp3 scope is
+                G1 nominal k=0). Default False keeps the general banked-restore capability (state-bank unit).
         """
         self._maps = build_perworld_index_maps(arm_q_start, arm_qd_start)
         self._horizon = int(horizon)
@@ -3157,6 +3193,8 @@ class RouteExecutor(rc.RouteInterfaceV1):
         self._control = control
         self._state_bank = dict(state_bank) if state_bank else {}
         self._requested_phase = 0
+        self._forbid_banked_fork = bool(forbid_banked_fork)
+        self._grip_rb_checked = False  # one-time device-readback assert flag (CC3-CH5/R8) for apply_recorded_grip
         if control is not None:
             servo_seed_assert(control.joint_target_pos.numpy(), self._maps["all_driver_dofs"])
         self._recording = _prepare_recording(recording) if recording is not None else None
@@ -3167,7 +3205,17 @@ class RouteExecutor(rc.RouteInterfaceV1):
         Restores the banked arm + all-16 gripper ``joint_q``/``joint_qd`` + the banked grip target
         (banked-CLOSED for a gripped phase, NOT a blanket-OPEN). Phase-0 / no bank => no-op (the env-core
         reset is authoritative), matching the stub. Per-world different-``k`` is deferred to the trainer.
+
+        Raises:
+            NotImplementedError: If ``k >= 1`` and this executor was built with ``forbid_banked_fork=True``
+                (comp3 R1 hard-guard: the banked phase-k fork needs the DoD-7(b) cable re-seed = comp3b).
         """
+        if int(k) >= 1 and self._forbid_banked_fork:
+            raise NotImplementedError(
+                f"reset_to_phase(k={int(k)}) is comp3b: the banked phase-k fork restores a gripped arm/gripper "
+                "but NOT the cable to phase k (DoD-7(b) cable re-seed is unwired) -> mismatched state. comp3 "
+                "scope = G1 nominal (k=0). Built with forbid_banked_fork=True until the cable-fork re-seed lands."
+            )
         self._requested_phase = int(k)
         banked = self._state_bank.get(int(k))
         if banked is None or self._state_0 is None:
@@ -3214,3 +3262,70 @@ class RouteExecutor(rc.RouteInterfaceV1):
         is_dual = bool(grip_r > 0.0 and grip_l > 0.0)  # both arms gripping (CC5-2: NOT from phase)
         phase_id = _RECORDED_PHASE_TO_G[int(rec["phase_id"][pg_f])]  # 15 -> 6 (%12 ruling; total-coverage)
         return target_6d, phase_id, grip_2, is_dual
+
+    def apply_recorded_grip(self, route_steps, sub_i):
+        """comp3 (R2): write the recorded ``grip_cmd`` staircase (RAW radians) for physics sub-frame ``sub_i``.
+
+        The gripper is NOT a policy action -- it replays the recorded per-PHYSICS-frame schedule EXACTLY
+        (engineered jumps + staircase incl 0.667 cage90 / 0.69 L_HALF_UNCLAMP hold; NO thresholding /
+        smoothing / re-ramp). For each world at route step ``t_w = route_steps[w]`` the physics frame is
+        ``cf[t_w] + sub_i`` (``cf[t] = step_f[t]``; ``_REC_CADENCE == PHYSICS_STEPS_PER_RL`` => cf[t]+i is
+        1:1 with the env drive-loop sub-frame, CC3-CH9). The recorded ``grip_cmd`` columns are ``[L, R]``
+        (route_demo_to_bc.py:13 footgun -- OPPOSITE the action layout): col 0 -> LEFT driver dofs, col 1 ->
+        RIGHT driver dofs. The servo target is written via a SINGLE read -> mutate (:func:`set_gripper_target`,
+        the §13.6 G12 SOLE per-step gripper writer) -> ``.assign()`` cycle (CC3-CH5: a ``.numpy()`` host copy
+        never reaches the solver unless assigned back), with a one-time device-readback assert (R8).
+
+        Args:
+            route_steps: Per-world RL route step ``t_w``, sequence of int length ``n_world``.
+            sub_i: The physics sub-frame index within the RL step, int in ``[0, _REC_CADENCE)``.
+        """
+        rec = self._recording
+        if rec is None:
+            raise NotImplementedError("apply_recorded_grip needs recording= (pure-index construction has none)")
+        step_f = rec["step_f"]
+        grip = rec["grip_cmd"]  # [frames, 2], cols [L, R]
+        n_steps = len(step_f)
+        n_frames = grip.shape[0]
+        jtp = self._control.joint_target_pos.numpy()  # host copy (CC3-CH5)
+        for w, t in enumerate(route_steps):
+            tt = min(max(int(t), 0), n_steps - 1)  # pad-to-horizon: hold the last waypoint (mirror step_target)
+            f = min(int(step_f[tt]) + int(sub_i), n_frames - 1)
+            set_gripper_target(jtp, self._maps["l_driver_dofs"][w], float(grip[f, 0]))  # [L] -> LEFT drivers
+            set_gripper_target(jtp, self._maps["r_driver_dofs"][w], float(grip[f, 1]))  # [R] -> RIGHT drivers
+        self._control.joint_target_pos.assign(jtp)
+        if not self._grip_rb_checked:  # one-time device-readback: confirm the .assign() reached the solver
+            rb = self._control.joint_target_pos.numpy()
+            for w, t in enumerate(route_steps):
+                tt = min(max(int(t), 0), n_steps - 1)
+                f = min(int(step_f[tt]) + int(sub_i), n_frames - 1)
+                for d in self._maps["l_driver_dofs"][w]:
+                    assert abs(float(rb[d]) - float(grip[f, 0])) < 1e-6, f"grip .assign() did not reach dof {d}"
+                for d in self._maps["r_driver_dofs"][w]:
+                    assert abs(float(rb[d]) - float(grip[f, 1])) < 1e-6, f"grip .assign() did not reach dof {d}"
+            self._grip_rb_checked = True
+
+    def reseed_grip_open(self, env_ids):
+        """comp3 (R1): reset-time re-seed the gripper POSITION-servo target to OPEN both arms for ``env_ids``.
+
+        The env-core k=0 reset re-poses arm + gripper ``joint_q`` (28-wide) and zeroes ``joint_qd``, but the
+        servo TARGET would otherwise carry the episode-end CLOSED command -> the gripper re-closes on step 1
+        (cross-episode leak). Re-seed the driver targets to ``GRIPPER_DRIVER_OPEN_RAD`` = route step-0 grip
+        (both OPEN; dual-arm ADAPT of the AR:1095-1104 mirror, NOT AR's L-close/R-open) via a SINGLE read ->
+        mutate -> ``.assign()`` (device-robust CC3-CH5) with a device-readback assert (R8). Per-world SUBSET
+        (``env_ids``), not an all-world clobber (K1c); the sole RESET-time servo writer alongside
+        :func:`apply_banked_restore`.
+
+        Args:
+            env_ids: The world indices being reset, iterable of int.
+        """
+        jtp = self._control.joint_target_pos.numpy()  # host copy (CC3-CH5)
+        for w in env_ids:
+            w = int(w)
+            set_gripper_target(jtp, self._maps["l_driver_dofs"][w], GRIPPER_DRIVER_OPEN_RAD)
+            set_gripper_target(jtp, self._maps["r_driver_dofs"][w], GRIPPER_DRIVER_OPEN_RAD)
+        self._control.joint_target_pos.assign(jtp)
+        rb = self._control.joint_target_pos.numpy()  # device-readback: confirm OPEN reached the solver
+        for w in env_ids:
+            for d in self._maps["l_driver_dofs"][int(w)] + self._maps["r_driver_dofs"][int(w)]:
+                assert abs(float(rb[d]) - GRIPPER_DRIVER_OPEN_RAD) < 1e-6, f"reseed OPEN did not reach dof {d}"

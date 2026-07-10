@@ -3,7 +3,11 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-"""No-GPU CPU WRITE-PATTERN unit for the comp3 write-site flag-gate (L1, plan v2 §12/R5).
+"""No-GPU CPU WRITE-PATTERN unit for the comp3 write-site flag-gate (L1) + grip-drive/reset-reseed wiring (L4).
+
+L1 (chunk 1, plan v2 §12/R5): the arm-only write-site flag-gate. L4 (chunk 2, plan v2 §6/§10, R1/R2): the
+recorded grip_cmd staircase per-arm mapping + the reset servo re-seed to OPEN + the settled-fk gripper patch
++ the forbid-banked-fork guard. All CPU/no-GPU (a warp array is mocked).
 
 Unlike the predicate-only dod9a_prime check, this test ACTUALLY EXERCISES the write-site: it runs the
 arm-only write functions the flag-ON branch calls (``apply_arm_only_write_broadcast`` /
@@ -39,7 +43,12 @@ for _p in (str(_TIL_DIR), str(_ENVS_DIR)):
         sys.path.insert(0, _p)
 
 import route_executor as rex  # noqa: E402
-from configs.task_config import JOINTS_PER_ARM  # noqa: E402
+from configs.task_config import (  # noqa: E402
+    GRIPPER_DRIVER_CLOSE_RAD,
+    GRIPPER_DRIVER_HALF_OPEN_RAD,
+    GRIPPER_DRIVER_OPEN_RAD,
+    JOINTS_PER_ARM,
+)
 
 _N_ARM = 2 * JOINTS_PER_ARM  # 28
 _GRIPPER_LOCAL = sorted(rex._GRIPPER_COORDS_LOCAL)  # {6-13, 20-27}
@@ -83,7 +92,7 @@ def test_broadcast():
         b = arm_q_start[w]
         bd = arm_qd_start[w]
         for li in _ARM_LOCAL:  # arm coords: flag-ON must equal flag-OFF (byte-identical arm write)
-            assert jq_on[b + li] == jq_off[b + li], f"arm q mismatch w{w} li{li}: {jq_on[b+li]} vs {jq_off[b+li]}"
+            assert jq_on[b + li] == jq_off[b + li], f"arm q mismatch w{w} li{li}: {jq_on[b + li]} vs {jq_off[b + li]}"
             assert jqd_on[bd + li] == jqd_off[bd + li] == 0.0, f"arm qd mismatch w{w} local{li}"
         for li in _GRIPPER_LOCAL:  # gripper coords: flag-ON UNTOUCHED (sentinel), flag-OFF WRITTEN
             assert jq_on[b + li] == SENT, f"flag-ON gripper q was written w{w} local{li} (should be servo-held)"
@@ -152,9 +161,152 @@ def test_guard():
     print("  [guard] PASS: grasp_actuation=True+stub -> ValueError; non-bool -> AssertionError (pre-build)")
 
 
+# =====================================================================================================
+# L4 grip-drive / reset-reseed wiring unit (chunk 2: R1 reset + R2 grip staircase). Pure CPU/no-GPU: a
+# warp array is mocked (``.numpy()`` returns a HOST COPY, ``.assign()`` writes back -- so a forgotten
+# assign is caught, per CC3-CH5), and the RouteExecutor grip methods are exercised against a synthetic
+# recording. Layout matches the L1 tests (2 worlds, cable FREE-root q/qd gap).
+# =====================================================================================================
+
+_ARM_Q_START = [0, 100]
+_ARM_QD_START = [0, 96]
+_TOTAL = 200
+
+
+class _MockWarpArray:
+    """A warp-array stand-in: ``.numpy()`` returns a HOST COPY (CC3-CH5), ``.assign()`` stores a copy."""
+
+    def __init__(self, arr):
+        self._arr = np.asarray(arr, dtype=np.float32).copy()
+
+    def numpy(self):
+        return self._arr.copy()
+
+    def assign(self, arr):
+        self._arr = np.asarray(arr, dtype=np.float32).copy()
+
+
+class _MockControl:
+    def __init__(self, n, fill):
+        self.joint_target_pos = _MockWarpArray(np.full(n, fill, dtype=np.float32))
+
+
+def _build_executor(grip_frames=None, forbid_banked_fork=False):
+    """Build a RouteExecutor over a synthetic 7701-frame recording + a mock control seeded OPEN."""
+    n_frames = rex._REC_LAST_CTRL_FRAME + 1
+    grip = np.zeros((n_frames, 2), dtype=np.float32)  # cols [L, R]
+    for f, (gl, gr) in (grip_frames or {}).items():
+        grip[f] = (gl, gr)
+    recording = {
+        "ee_pos_r": np.zeros((n_frames, 3), dtype=np.float32),
+        "ee_pos_l": np.zeros((n_frames, 3), dtype=np.float32),
+        "grip_cmd": grip,
+        "phase_id": np.zeros(n_frames, dtype=np.int64),  # 0 is a valid _RECORDED_PHASE_TO_G key
+    }
+    control = _MockControl(_TOTAL, GRIPPER_DRIVER_OPEN_RAD)  # build-seeded OPEN (servo_seed_assert passes)
+    ex = rex.RouteExecutor(
+        _ARM_Q_START,
+        _ARM_QD_START,
+        900,
+        state_0=None,
+        control=control,
+        state_bank=None,
+        recording=recording,
+        forbid_banked_fork=forbid_banked_fork,
+    )
+    return ex, control
+
+
+def test_grip_transit_window():
+    """R2: the recorded grip_cmd [L,R] staircase maps to per-arm drivers EXACTLY, per physics sub-frame."""
+    # cf = arange(0, 7701, 10); step_f[t] = cf[t]. Frame for RL step t, sub-frame i = cf[t] + i.
+    # transit window (L_HALF_UNCLAMP): L target == 0.69 (HALF_OPEN hold) while R == 0.0 (OPEN, re-grasps).
+    f_transit = 5 * rex._REC_CADENCE + 3  # cf[5]=50, sub_i=3 -> 53
+    f_distinct = 6 * rex._REC_CADENCE + 0  # cf[6]=60, sub_i=0 -> 60
+    ex, control = _build_executor(
+        grip_frames={
+            f_transit: (GRIPPER_DRIVER_HALF_OPEN_RAD, GRIPPER_DRIVER_OPEN_RAD),  # [L=0.69, R=0.0]
+            f_distinct: (0.31, 0.62),  # distinct L!=R to prove the [L,R]->per-arm mapping is not swapped
+        }
+    )
+    maps = ex._maps
+
+    # (a) transit window: L drivers -> 0.69, R drivers -> 0.0 (both worlds).
+    ex.apply_recorded_grip([5, 5], 3)
+    jtp = control.joint_target_pos.numpy()
+    for w in range(2):
+        for d in maps["l_driver_dofs"][w]:
+            assert abs(jtp[d] - GRIPPER_DRIVER_HALF_OPEN_RAD) < 1e-6, f"L driver {d} != 0.69 (transit hold)"
+        for d in maps["r_driver_dofs"][w]:
+            assert abs(jtp[d] - GRIPPER_DRIVER_OPEN_RAD) < 1e-6, f"R driver {d} != 0.0 (re-grasp OPEN)"
+
+    # (b) [L,R] mapping (not swapped): L col -> l_driver_dofs (0.31), R col -> r_driver_dofs (0.62).
+    ex.apply_recorded_grip([6, 6], 0)
+    jtp = control.joint_target_pos.numpy()
+    for w in range(2):
+        for d in maps["l_driver_dofs"][w]:
+            assert abs(jtp[d] - 0.31) < 1e-6, f"L driver {d} got R value -> [L,R] mapping SWAPPED"
+        for d in maps["r_driver_dofs"][w]:
+            assert abs(jtp[d] - 0.62) < 1e-6, f"R driver {d} got L value -> [L,R] mapping SWAPPED"
+    print("  [grip-transit] PASS: [L=0.69, R=0.0] transit window + non-swapped [L,R]->per-arm mapping")
+
+
+def test_reset_reseed_open():
+    """R1a: reset re-seeds every driver's servo target to OPEN (episode >= 2 starts OPEN, not CLOSED)."""
+    ex, control = _build_executor()
+    # simulate an episode ending with the grippers CLOSED (servo target latched at CLOSE).
+    control.joint_target_pos.assign(np.full(_TOTAL, GRIPPER_DRIVER_CLOSE_RAD, dtype=np.float32))
+    ex.reseed_grip_open([0, 1])
+    jtp = control.joint_target_pos.numpy()
+    driver = set(rex.build_perworld_index_maps(_ARM_Q_START, _ARM_QD_START)["all_driver_dofs"])
+    for d in driver:  # every driver dof re-seeded OPEN
+        assert abs(jtp[d] - GRIPPER_DRIVER_OPEN_RAD) < 1e-6, f"driver {d} not re-seeded OPEN (still {jtp[d]})"
+    # a NON-driver gripper qd (follower, e.g. 8/108) + an arm dof (0) stay at the pre-reset CLOSE value.
+    for d in (0, 8, 108):
+        assert d not in driver
+        assert abs(jtp[d] - GRIPPER_DRIVER_CLOSE_RAD) < 1e-6, f"non-driver {d} was clobbered by reseed"
+    print("  [reset-reseed] PASS: after CLOSE-latch, reset re-seeds all drivers OPEN; non-drivers untouched")
+
+
+def test_settled_fk_gripper_patch():
+    """R1d/CC4-CH5: the reset-init source's gripper coords are overwritten from world-0 physics; arm intact."""
+    settled = np.arange(1000.0, 1000.0 + _N_ARM, dtype=np.float64)  # 28-wide FK arm row (distinct values)
+    orig = settled.copy()
+    phys_jq = np.full(_TOTAL, -1.0, dtype=np.float64)
+    aq0 = _ARM_Q_START[0]
+    for gc in _GRIPPER_LOCAL:
+        phys_jq[aq0 + gc] = 500.0 + gc  # world-0 post-settle gripper config (distinct)
+    rex.patch_settled_fk_gripper(settled, phys_jq, aq0)
+    for gc in _GRIPPER_LOCAL:  # gripper coords now = world-0 physics
+        assert settled[gc] == 500.0 + gc, f"gripper coord {gc} not patched from physics"
+    for al in _ARM_LOCAL:  # arm coords untouched
+        assert settled[al] == orig[al], f"arm coord {al} was modified by the gripper patch"
+    print("  [settled-patch] PASS: gripper coords <- world-0 physics; arm coords untouched")
+
+
+def test_forbid_banked_fork():
+    """R1: forbid_banked_fork=True -> reset_to_phase(k>=1) raises; k=0 no-op; default False keeps capability."""
+    ex_f, _ = _build_executor(forbid_banked_fork=True)
+    ex_f.reset_to_phase(0)  # k=0 -> no-op (env-core reset authoritative), must NOT raise
+    try:
+        ex_f.reset_to_phase(1)
+        raise AssertionError("reset_to_phase(1) did NOT raise under forbid_banked_fork=True")
+    except NotImplementedError as e:
+        assert "comp3b" in str(e), f"unexpected NotImplementedError text: {e}"
+    # default (False): k>=1 is allowed to proceed (no bank -> no-op), NOT guarded (state-bank unit path).
+    ex_ok, _ = _build_executor(forbid_banked_fork=False)
+    ex_ok.reset_to_phase(1)  # no bank + state_0 None -> no-op; must NOT raise
+    print("  [forbid-fork] PASS: forbid=True raises for k>=1 (comp3b); k=0 ok; default keeps k>=1 capability")
+
+
 if __name__ == "__main__":
     print("[L1 write-pattern unit] comp3 write-site flag-gate (no-GPU, CPU)")
     test_broadcast()
     test_perworld()
     test_guard()
-    print("ALL PASS (broadcast + perworld + guard) -- flag-ON diff == gripper-coord set exactly; guard fires loud")
+    print("[L4 grip-drive / reset-reseed unit] comp3 chunk 2 (R1 reset + R2 grip staircase)")
+    test_grip_transit_window()
+    test_reset_reseed_open()
+    test_settled_fk_gripper_patch()
+    test_forbid_banked_fork()
+    print("ALL PASS (L1 broadcast+perworld+guard; L4 grip-transit+reset-reseed+settled-patch+forbid-fork)")
