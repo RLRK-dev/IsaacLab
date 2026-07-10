@@ -43,7 +43,7 @@ Author: p5 VT-DESIGN。v0.1 Drafted 2026-07-11 00:4x、**v0.2 folded 00:55 JST**
 
 ### §2-1 tracked 化 6 file(§9-4a、機械執行)
 **tracked 化 6 file**(PoseEstimation v1/v2/v3/v3.1/v3.2 + S1B)。順序論理 = consolidation/archive-label 前に tracked 化して原本を git provenance に固定(⑥ RL-Routing-Design と同型)。
-- **編集前 sha256(2026-07-11 00:3x 実測; CC5-C3 で %12 が review 時に full-hash 再計算 = 全一致確認済):** v1 `49c8c52fb0…` / v2 `42aeaf03c1…` / v3 `a7913e9fab…` / v3.1 `623ee87571…` / v3.2 `6719200e7d…` / S1B `93822028d2…`(full 64-hex は batch 0 commit message に記録)。
+- **編集前 sha256(p5 実測 2026-07-11 00:3x; %12 verify 01:0x に full-hash 6/6 再計算 EXACT 確認):** v1 `49c8c52fb0…` / v2 `42aeaf03c1…` / v3 `a7913e9fab…` / v3.1 `623ee87571…` / v3.2 `6719200e7d…` / S1B `93822028d2…`(full 64-hex は batch 0 commit message に記録)。
 - **執行時 re-verify 契約(CC5-C3、新規):** 承認〜執行の間に SHARED-LIVE vault で他 pane 編集が起き得る(D-1 flow が同夜 00:31 に RL-Routing-Design を実編集した実績)→ **batch 0 執行の同一ターンに full-sha 再計算 → 上記 pin と照合 → mismatch なら STOP + re-inventory + Rs へ delta 報告**(一括承認は変更後 byte に carry しない)。full 64-hex を commit message に記録(§5 P-3 out-of-doc 束縛)。
 
 ### §2-2 VGroove ' M'(1 行 uncommitted)の adjudicate(§9-4b、Rs 個別判断)
