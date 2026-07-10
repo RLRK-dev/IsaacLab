@@ -58,7 +58,9 @@ import newton_route_env as nre  # noqa: E402
 import torch  # noqa: E402
 
 GOLDEN_NPZ = _EVAL_DIR / "w0e_81rerun_snapdown_0537" / "cell_x0_y0" / "route_demo_raw.npz"
-OUT_JSON = _EVAL_DIR / "comp3_g1_grasplift_result.json"
+# retry naming (lane-floor fix chain): run-1 artifacts (comp3_g1_grasplift_result.json + its mp4s) are the
+# banked FAIL evidence (Rs human-GT) -- the retry writes distinct names instead of clobbering them.
+OUT_JSON = _EVAL_DIR / "comp3_g1retry_grasplift_result.json"
 FRAMES_DIR = _EVAL_DIR / "comp3_g1_frames"
 VIDEO_DIR = _EVAL_DIR / "comp3_g1_videos"
 DOWNLOADS = Path.home() / "Downloads"
@@ -284,9 +286,10 @@ def main():
     VIDEO_DIR.mkdir(exist_ok=True)
     vids = []
     for tag in ("ctx", "zoom"):
-        name = {"ctx": "comp3_g1_grasplift_context_20260710.mp4", "zoom": "comp3_g1_grasplift_clawzoom_20260710.mp4"}[
-            tag
-        ]
+        name = {
+            "ctx": "comp3_g1retry_grasplift_context_20260710.mp4",
+            "zoom": "comp3_g1retry_grasplift_clawzoom_20260710.mp4",
+        }[tag]
         out = VIDEO_DIR / name
         cmd = [
             "ffmpeg",
