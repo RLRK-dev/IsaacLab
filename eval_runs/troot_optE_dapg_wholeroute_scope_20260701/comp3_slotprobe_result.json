@@ -6468,5 +6468,19 @@
     ]
    }
   ]
+ },
+ "final_grid_verdict": {
+  "verdict": "INCONCLUSIVE (artifact-confounded) -- %12 CONCUR 00:43",
+  "per_cell_confound": {
+   "dz0": "NOGO / HEAVY confound: both claws tilted 30-45deg THROUGH the lift (edge-driven, onset f84-88); loose tilted V-cage; axial pay-through observed",
+   "dz3": "NOGO / HEAVY confound: L claw 40-45deg tilt, L cage EMPTY at end (R-only hold); pay-through toward the near tail",
+   "dz4": "NOGO / LIGHTEST confound: slots entered, crotch cage, upright lift (tilt confined to close f82-118) -- still axial -104mm; close-window tilt effect on cage quality not excludable",
+   "dz5": "NOGO / HEAVY confound: fingers never entered the slots (struck raised strips); NO capture at all"
+  },
+  "confound_mechanism": "finger ASSEMBLY (crossbar/base links, wider than the pad-only 22mm footprint) strikes the slot edges / central solid during the close scoop (25-45deg dynamic tilt) -> compliant fingers deflected; 2 analysts flag SUSPECTED prong-edge interpenetration at peak tilt. Root cause = the slot width was sized from the pad-only STATIC footprint (proxy-representativeness design error, rule-2 proxy gate; same class as the 2026-06-21 proxy-tilt incident -- caught in-run by the video legs).",
+  "outcome_1_banked": "central support REMOVES the pre-clamp cable sag/bend (scene statics, directly measured: close-window bend peak 29.7deg [no support] -> 1.4-3.0deg [with support], all 4 cells). SCOPE: this is a pre-clamp statics result ONLY -- whether bend removal rescues pay-through under a PROPER clamp is UNANSWERED (that is the INCONCLUSIVE content). Do NOT read this as a rescue proof, and do NOT read the probe failure as 'central support failed' -- what failed was the slot WIDTH design, not the support concept.",
+  "outcome_2_banked": "NEW measurement requirement: slot width design must use the FULL lower finger-assembly dynamic footprint (crossbar/base links included + max Y envelope over the scoop pose sweep), NOT the pad-only static footprint. Measurable on CPU (leg-C-style built-model readback extended over the close-window joint_q poses from existing captures; no GPU).",
+  "recell_proposal_rule24": "(a) CPU full-assembly dynamic-footprint readback -> re-dimension slots (b) 4-cell rerun ~30min GPU. Rs decision material (with the F-A/F-B fork context).",
+  "edge_contact_crop_video": "comp3_slotprobe_dz0_edgecontact_crop_20260711.mp4 (Rs human-GT aid)"
  }
 }
