@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # env-spec 5体 [VERIFY] — DECIDE 記録 (CC1 = %12、2026-07-05 10:4x-11:1x)
 
 **対象:** P2_ROUTE_ENV_SPEC_INPUT v1.4 + P2_REWARD_ARTIFACTS v1.2。**panel:** CC2 (RL 機構) / CC3 (THREAD 物理・env) / CC4 (cost・実行可能性) / CC5 (governance) / CC6 (NHA)。gate 前提 = pre-check chain (BLOCK 10:04 → WARN 再走 10:36 → fixes+spot-diff PASS 10:45、jsonl 3 entries) + %9 cross-PV 台帳 (`P2_W0C_CROSSPV_PCT9.md`)。

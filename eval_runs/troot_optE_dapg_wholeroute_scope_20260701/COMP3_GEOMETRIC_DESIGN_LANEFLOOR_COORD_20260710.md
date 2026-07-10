@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # /geometric-design: lane-aware EE-Z floor (EE_Z_FLOOR_KO) — G1 root-cause fix, Rs 案B
 
 - Date: 2026-07-10 (COORD; fix chunk dispatch %12 13:40, Rs approval 13:4x = 案B lane-dependent floor)

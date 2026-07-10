@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # /geometric-design — comp3 flag-ON build_multiworld table-VOID re-confirmation (Stage-B design-gate) — %11 COORD
 
 **node:** T-ROOT-optE-route-dapg-C1C2-P2-routeexec — comp3 (grasp_actuation flag-flip) Stage-B design-gate.

@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # P2 部品② route-executor — BUILD 計画 (COORD %11 起草, %12 checkpoint 用) — 2026-07-07
 
 **node:** `T-ROOT-optE-route-dapg-C1C2-P2-routeexec` (state.md 済, IN_PROGRESS, 1:1 bind %11/w2:p3) · **L:** L3 (charter §3 自動昇格 confirmed, §1 で再導出 concur)

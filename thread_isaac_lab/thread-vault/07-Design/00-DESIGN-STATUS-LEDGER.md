@@ -111,7 +111,28 @@ labels, not design decisions.
 
 > **Cross-ledger:** route/evidence-level success/failure (Newton solver routes, spring-follow diagnostic, decisions)
 > is tracked separately in `eval_runs/troot_s1b_l1fgh_real_world_resource_scope_escalation_package_0gpu_20260605/success_failure_quarantine_ledger.json`.
-> This ledger is scoped to **07-Design documents**; the two are complementary.
+> This ledger is scoped to **07-Design documents**; the two are complementary. **(Extended 2026-07-11, Rs-auth C):** design-doc lifecycle tracking is also extended **vault-wide** (eval_runs + 06-Knowledge design lineages) in the "Vault design-doc tracking (V1)" section below — single SSOT; the 07-Design rows above are **unchanged**.
+
+## Vault design-doc tracking (V1) — eval_runs + 06-Knowledge design lineages
+
+**Added 2026-07-11 (Rs-authorized batch V1, option C).** Provenance: audit `VAULT_DESIGN_SCATTER_AUDIT_COORD2_20260711.md` (%12 verify PASS) + exec plan `EXEC_PLAN_V1V2_COORD2_20260711.md` v1.1 (Rs auth 04:55). Lineage granularity (member-file enumerated); **status = proposed (Rs-confirm)**. Member docs carry a `doc_class` frontmatter tag. Purpose: make the 50 previously-untracked eval_runs/06-Knowledge design docs lifecycle-visible without relocation (audit PR-1).
+
+| # | lineage | proposed status (Rs-confirm) | doc_class | member files (N) |
+|---|---|---|---|---|
+| VL1 | optE-DQ7-offpath | ⛔ SUPERSEDED — R1 CLOSE (row47), historical | reference | DQ7_DAGGER_BUILD_SPEC_COORD2, DQ7_DAGGER_BUILD_SPEC_V2_MINIMAL_COORD2, DQ7_OFFPATH_SCOPING_COORD2, dq7_capacity_pretest_mini_spec, dq7_ii_mini_spec, dq7_ii_mini_spec_v2, dq7_iv_mini_spec, dq7_minitest_verify_packet_final (8) |
+| VL2 | optE-B-BC-imitation | ⛔ SUPERSEDED — ladder-v2/envcore superseded | reference | B0_BUILD_REPORT, B2_KICKOFF_SPEC, B_BC_BUILD_SPEC_DEBATE_R1, B_BC_IMITATION_SCOPING_COORD2, b2_fix5_geometric_design, b2_runner_v2_design (6) |
+| VL3 | optE-W0packet | 📖 REFERENCE — W0-e CLOSED (row47), decision-of-record | reference | RS_W0E_PACKET_V1_1, W0APRIME_PACKET_V1_1_CROSSPV_PCT9, W0E_GEOMETRIC_DESIGN_20260705 (3) |
+| VL4 | optE-P2-envspec-reward | 🔁 SUPERSEDED-in-substance — env-core COMPLETE (row47) | reference | P2_ENVSPEC_5TAI_DECIDE_20260705, P2_REWARD_ARTIFACTS_W0C_DRAFT_20260705, P2_REWARD_DESIGN, P2_ROUTE_ENV_SPEC_INPUT_W0C_RSTECHLEAD_20260705 (4) |
+| VL5 | optE-DAPG-scoping | 📖 REFERENCE — original scoping, arch-decision superseded | reference | DAPG_WHOLEROUTE_C1C2_SCOPING_COORD2 (1) |
+| VL6 | optE-P3-recorder | 🟢 SUPPORTING — recorder WORKING (row44) spec/report | design-surface | P3_DEMO_RECORDER_SPEC, P3_RECORDER_BUILD_REPORT (2) |
+| VL7 | optE-COMP3-routeexec | 🟢 ACTIVE — route-exec node in-progress | design-surface | COMP3_DRIVEPATH_DECISION_PACKET_COORD_20260710, COMP3_FORCE_DESIGN_SERVO_COORD_20260708, COMP3_GEOMETRIC_DESIGN_LANEFLOOR_COORD_20260710, COMP3_GEOMETRIC_DESIGN_VOID_COORD_20260708, COMP3_PLAN_ROUTEEXEC_GRASPACT_COORD_20260708, COMP3_REWARD_DESIGN_FLAGON_COORD_20260708 (6) |
+| VL8 | optE-routeexec-buildplan | 🟢 ACTIVE — route-exec build in-progress | design-surface | BUILD_PLAN_ENVCORE_COORD_20260706, BUILD_PLAN_ROUTEEXEC_COORD_20260707, BUILD_PLAN_ROUTEEXEC_LAYERB_COORD_20260707 (3) |
+| VL9 | optE-slot-probe | 🟢 ACTIVE — live probe design (07-08/07-10) | design-surface | SLOT_REDESIGN_STUDY_COORD_20260710, SRG_PROBE_DESIGN_DRAFT_COORD_20260707 (2) |
+| VL10 | VT-St2 | 🟢 ACTIVE — VT node in-progress | design-surface | ST2_BUILD_SPEC, ST2_RS_APPROVAL_PACKET (2) |
+| VL11 | 06K-Vision-pipeline | ⏸ PARKED — vision L1.A not started / P0-KILL as-scoped | design-surface | LL-Vision-CableState-Design, LL-Vision-CableState-Phase2-Impl-Design, LL-Vision-CableState-Phase3-Integration-Design, LL-Vision-CableState-Phase4-Validation-Design, LL-Vision-DR-Design, LL-Vision-DR-Tier1-D6-Design, LL-Vision-Fusion-Design, LL-Vision-Pose-Design (8) |
+| VL12 | 06K-L1-adapter-orchestration | ⏸ PARKED — L1 design (RL-Routing MIXED per-skill) | design-surface | LL-BaseAdapter-Design, LL-Cascade-C-Nemotron-Design, LL-Cascade-C-Qwen-Design, LL-L1-B-Routing-Design, LL-Orchestration-Design (5) |
+
+*(50 member docs across 12 lineages; per-file provenance in the member column. `RENEWAL_PLAN_07DESIGN.md` excluded — renewal-charter-owned. V2 = supersession banners on VL1/VL2/VL3/VL4/VL5 = separate Rs auth.)*
 
 ## Maintenance
 

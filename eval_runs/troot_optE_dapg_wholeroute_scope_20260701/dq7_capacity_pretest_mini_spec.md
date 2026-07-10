@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # DQ7 capacity pre-test — representation-capacity screen (rollout-free, ~0 GPU)
 
 **Author:** RS-TECH-LEAD (%12). **Written:** 2026-07-03 22:45 JST (same-turn `date`).

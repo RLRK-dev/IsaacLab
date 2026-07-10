@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # DQ7 stage (ii) mini-spec **v2** — kick-and-recover injection hooks (CP-(ii)-0, post-debate re-architecture)
 
 **COORD %11 · 2026-07-03 09:55 JST (same-turn date) · 0-commit, 0-GPU, locked-UNTOUCHED (design only).**

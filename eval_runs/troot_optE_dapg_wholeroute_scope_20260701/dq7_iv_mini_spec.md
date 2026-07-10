@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # DQ7 stage (iv) mini-spec v1.1 — restoring-augmented BC (denoising) 0-GPU pathfinder
 
 **COORD %11. v1.0 = 2026-07-03 06:07 JST · v1.1 = 2026-07-03 06:5x JST (same-turn date).** CP-(iv)-1 deliverable per `charter_dq7_stage_iv_coord.txt` §4. 0-commit; build starts only after %12 conformance check PASS → stage2 rule-check. **A/B boundary numbers = charter §3 verbatim, UNCHANGED (not restated-modified here).**

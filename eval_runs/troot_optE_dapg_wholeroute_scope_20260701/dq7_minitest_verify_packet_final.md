@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 > **Archived by %11 (COORD) at R1 close — Rs decision (B), 2026-07-05 10:17 JST.** DQ7 mini-test terminated at 0 GPU per 5体 [VERIFY] = FAIL (2 CRITICAL: span-break [per-arm guard-2] + state-blind-expert confound; + high-INCONCLUSIVE/validity). Content below unchanged from the scratchpad working copy.
 
 # [VERIFY] packet — DQ7 mini-test β-mix + multi-offset (COORD %11 PROPOSE for 5体 debate)

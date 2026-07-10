@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # Rs packet v1.1 — W0-e 訂正後 grid 成績 (81 再走、two-key 確定)
 
 **From:** %12 RS-TECH-LEAD + %9 OPS-SUP (two-key) + %11 COORD (実行)。**Date:** 2026-07-06 04:3x。

@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # /reward-design (SCOPED) — comp3 flag-ON delta: predicate reachability under live grip + R6 obs table — %11 COORD
 
 **node:** T-ROOT-optE-route-dapg-C1C2-P2-routeexec — comp3 Stage-B design-gate, gate (3).

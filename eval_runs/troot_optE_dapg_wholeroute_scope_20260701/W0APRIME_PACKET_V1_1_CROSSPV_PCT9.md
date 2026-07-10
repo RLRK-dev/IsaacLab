@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # W0-a′ packet v1.1 — %9 OPS-SUP cross-PV 台帳 (2026-07-06 10:2x)
 
 **対象:** `RS_W0APRIME_PACKET_20260705.md` v1.1 (10:2x %12 起草、uncommitted working-tree)。

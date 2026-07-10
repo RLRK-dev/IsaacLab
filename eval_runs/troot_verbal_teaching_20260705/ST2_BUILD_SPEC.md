@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # St2 Build Spec — Derived-Source Row Schema (Verbal-Teaching, design paper)
 
 **Node:** T-ROOT-Verbal-Teaching-20260705. **Stage:** St2 (schema enrichment + fix-⑤-as-row). **Status:** **v0.4 — ✅ Rs-APPROVED** (design + Q2=B [absorb] + Q5 [orientation-lock executed], 2026-07-06 `b7d7857dfc`) — **paper only (0-commit); BUILD deferred + Rs-gated.** **Builds on:** `DESIGN_V1.md` v1.4 §3.3/§4 (Rs 承認 `b17b473a15`). **Authorized:** Rs「VT St2 着手可」2026-07-06 08:3x (`eba71929b3`); paper 先行 = 即時 GO, runner edit = deferred (§5).

@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # 幾何設計: W0-e seat/guide offset-follow (F-1a / F-1b / F-2 / F-3) — /geometric-design 6-step
 
 対象 = EE target **計算式** の変更 (task_config 定数変更なし)。spec = `W0E_SEAT_GUIDE_OFFSETFOLLOW_SPEC_20260705.md` **v0.6** (5体反映版; 本 doc の v0.6 追補は各所に [v0.6] 注記)。

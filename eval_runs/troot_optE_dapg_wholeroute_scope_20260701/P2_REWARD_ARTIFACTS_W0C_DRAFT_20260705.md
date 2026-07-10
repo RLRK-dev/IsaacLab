@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # P2 sparse-primary reward — /reward-design 4 成果物 (W0-c DRAFT **v1.3** = v1.2 + env-spec 5体 fix [G4 再定義 / latch 明文 / α 探索構造 / spec v1.5 連動]、assumption-labeled)
 
 **Author:** %12. **v1.0** 09:5x → **pre-check = BLOCK (10 issues、`logs/pre-check-log.jsonl` 2026-07-05T10:04)** → **v1.1 10:1x 全 issue 反映**。**Status:** DRAFT — CPU-smoke 実測 + P3 grid で re-discharge するまで最終 PASS を主張しない。決定 = Rs。

@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # B2 KICKOFF SPEC — DR multi-demo BC for the whole C1→C2 route (schema v2 + fork-(iv))
 
 **STATUS: FINAL (design-only; pre-check + re-check CLOSED 2026-07-02).** This document creates NO code, runs NO sim, uses NO GPU, edits NO locked file, commits nothing. It is the **INPUT** to the gate chain:

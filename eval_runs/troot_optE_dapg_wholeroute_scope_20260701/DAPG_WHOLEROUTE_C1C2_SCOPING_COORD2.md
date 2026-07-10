@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # DAPG WHOLE-ROUTE (C1→C2) — Port/Build Scoping (proposal for %3 / Rs review)
 
 **Author:** COORD2 (%1, scoping/audit). **Date:** 2026-07-01 22:07 JST. **HEAD** `bcb7393ec8`, env7 mujoco-コ.

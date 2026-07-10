@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # SLOT redesign + z_grasp + bend-hypothesis study (Rs 設計指示 3 件統合、paper only)
 
 - Date: 2026-07-10 (COORD)。実装なし (§運用24; 着手は L3 必至、Rs 決定後の別ゲート)。

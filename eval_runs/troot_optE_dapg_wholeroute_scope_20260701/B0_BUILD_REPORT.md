@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # B0 BUILD REPORT (COORD %11) — converter + evaluator + open-loop replay (DQ1=B)
 
 **Charter:** `charter_b0_build_coord.txt` (RS-TECH-LEAD %12). **Binding:** `B_BC_BUILD_SPEC.md v2.2` (§10 ERRATA E1-E11 + E4'/E10/E11 override). **env7 python.** New files 0-commit; route file IMPORT-ONLY.

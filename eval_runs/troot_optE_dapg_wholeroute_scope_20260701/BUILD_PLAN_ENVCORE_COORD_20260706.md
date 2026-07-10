@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # P2 env-core — BUILD 計画 (COORD %11 起草, %12 checkpoint 用) — 2026-07-06
 
 **node:** `T-ROOT-optE-route-dapg-C1C2-P2-envcore` (state.md 済, 1:1 bind %11/w2:p3) · **L:** L3 (%12 APPROVE 10:33)

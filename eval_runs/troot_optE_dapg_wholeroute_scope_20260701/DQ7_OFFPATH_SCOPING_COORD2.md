@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # DQ7 — off-path 教師機構の設計 scoping (options + recommendation)
 
 **Author:** COORD2 (%10, scoping/audit). **Written:** 2026-07-03 05:12 JST (same-turn `date`).

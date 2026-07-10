@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # BUILD PLAN — route-executor Layer B (env-integration) — %11 COORD (w2:p3)
 
 **node:** T-ROOT-optE-route-dapg-C1C2-P2-routeexec (IN_PROGRESS) — charter %12, D-1=C.

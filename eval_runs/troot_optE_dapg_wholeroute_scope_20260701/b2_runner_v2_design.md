@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # (a) policy_route_runner.py v2 — DESIGN PROPOSAL (CP-E prerequisite; NOT implemented)
 
 For CP-E held-out rollouts on the 15-phase B2 abs policy. `policy_route_runner.py` is NON-locked. **2026-07-03.** Design only — implement + %12 review before CP-E.

@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # COMP3 drive-path decision packet — production 駆動経路 A/B/C/D (Rs 決定用)
 
 - Date: 2026-07-10 (COORD; %12 design-gate dispatch 19:07、Rs 総括受理 16:2x 後)

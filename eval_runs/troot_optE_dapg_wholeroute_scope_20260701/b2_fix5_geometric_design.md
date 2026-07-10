@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # FIX-⑤ /geometric-design output — X-follow re-center of x_grasp (forced gate)
 
 Position-derivation change: re-center `x_grasp` on the measured settled cable X (X analog of caveat-a Y) in `_run_mujoco_grasp_route`, **offset-gated (dx≠0 only)**. Charter `charter_b2_fix5_xfollow_coord.txt` (Rs ⑤=A GO). **2026-07-03.** 0-commit.

@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # P3-prep — Whole-route demo RECORDER spec **v2.4** (ROUTE_DEMO_RAW_v1)
 
 **Author:** RS-TECH-LEAD (%12). **Date:** 2026-07-02. **HEAD** `bcb7393ec8`, env7 mujoco-コ (env_isaaclab7).

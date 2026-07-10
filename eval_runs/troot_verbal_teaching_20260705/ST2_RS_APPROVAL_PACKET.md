@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # Rs 承認 packet — St2 Derived-Source Row Schema (design paper)
 
 **For:** Rs (via %12; presented alongside W0-a′ v1.1). **From:** VT-DESIGN (w2:p5). **Date:** 2026-07-06. **Status:** L3 chain COMPLETE → **v0.3a PASS** (%12 verify 10:04).

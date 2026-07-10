@@ -1,3 +1,7 @@
+---
+doc_class: design-surface
+---
+
 # P3 Demo RECORDER — BUILD REPORT (COORD %11)
 
 **Charter:** RS-TECH-LEAD (%12) → COORD (%11), Rs「3 go」. **Spec:** `P3_DEMO_RECORDER_SPEC.md` v2.1→v2.4 (env corrected). **HEAD** `bcb7393ec8` at charter; now `8a3c265ad7` (another pane's planning commit 07:18 — **route code + configs 0-diff vs bcb7393ec8**, DoD unaffected).

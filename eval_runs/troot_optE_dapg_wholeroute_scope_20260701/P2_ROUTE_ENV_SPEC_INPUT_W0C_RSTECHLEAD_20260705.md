@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # P2 whole-route env — DESIGN-GATE SPEC-INPUT (W0-c) — 両枝並記
 
 **Author:** RS-TECH-LEAD (%12). **Date:** 2026-07-05 09:2x JST → **v1.1 09:3x (%9 9-lens cross-PV = CONCUR-W-CORRECTIONS 09:28、8 修正 [E-1/E-2/D-1/H-1 + 精緻化 4] 全反映; %9 diff 再確認 = 8/8 PASS・9-lens 全 PASS 09:43)** → **v1.2 09:5x (/reward-design 4 成果物 DRAFT 発行に伴う 2 訂正: §運用22 算術 225 + β curriculum 必須)** → **v1.3 10:1x (pre-check = BLOCK 10 issues [`logs/pre-check-log.jsonl` 10:04] 全反映、artifacts v1.1 連動)** → **v1.4 10:2x (%9 cross-PV CONCUR-W-1-CORRECTION 10:19 反映: c3 oracle 役割 re 帰属 [drift-recovery 教師 / c2-sized 局所 RL = primary / 超過 = draw 会計] + obs v2.1 冒頭整合 — pre-check 再走: 10:36 WARN → fixes → spot-diff PASS、`logs/pre-check-log.jsonl` 3 entries)** → **v1.5 11:0x (env-spec 5体 [CC2 FAIL→fix / CC3・CC4・CC5 PASS-w-fixes / NHA sequencing-HOLD] 全 ACCEPT 反映 + %9 f1/f2 + common-mode 原則昇格 + P3-grid 前倒し JOINT [PREREG banked])**. **Charter:** JOINT-DECIDED [2] (banking `231639c0d1`、Rs 標準権限 08:5x)。

@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # B_BC_BUILD_SPEC 5体 pre-debate R1 — adjudication record (CC親 = RS-TECH-LEAD %12)
 
 Date: 2026-07-02. Object: B_BC_BUILD_SPEC.md **v1** → decisions folded into **v2**.

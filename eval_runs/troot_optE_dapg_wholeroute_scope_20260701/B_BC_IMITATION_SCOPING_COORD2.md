@@ -1,3 +1,7 @@
+---
+doc_class: reference
+---
+
 # B (BC-imitation) pipeline — SCOPING for the committed C1→C2 route
 
 **Author:** COORD2 (%10, scoping/audit). **Date:** 2026-07-02. **HEAD** `bcb7393ec8`, env7 mujoco-コ (`env_isaaclab7`).
