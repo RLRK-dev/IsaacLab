@@ -1,0 +1,69 @@
+{
+ "leg_T_timing": {
+  "substrate_loud": "CPU probe substrate (both numerator and denominator on CPU) -- RATIO evidence; production = warp/IK on cuda:0 + mujoco-CPU stepping; ~1min GPU micro-probe available on request (not run: no-GPU dispatch)",
+  "t_ik_solve_ms": 120.49,
+  "t_frame_4sub_ms": 4.62,
+  "t_frame_10sub_ms": 10.25,
+  "ik_share_of_current_step": 0.723,
+  "throughput_models": {
+   "current (1xIK + 10xf4)": {
+    "t_step_ms": 166.67,
+    "steps_per_s": 6.0
+   },
+   "A per-frame IK (10xIK + 10xf4)": {
+    "t_step_ms": 1251.06,
+    "steps_per_s": 0.8
+   },
+   "B sub10 (1xIK + 10xf10)": {
+    "t_step_ms": 223.03,
+    "steps_per_s": 4.48
+   },
+   "C A+B (10xIK + 10xf10)": {
+    "t_step_ms": 1307.42,
+    "steps_per_s": 0.76
+   },
+   "D rho=0 feedforward-only (10xf4, no IK)": {
+    "t_step_ms": 46.18,
+    "steps_per_s": 21.66
+   },
+   "D rho=0.25 (A-style residual steps)": {
+    "t_step_ms": 347.4,
+    "steps_per_s": 2.88
+   }
+  },
+  "relative_to_current": {
+   "current (1xIK + 10xf4)": 1.0,
+   "A per-frame IK (10xIK + 10xf4)": 0.13,
+   "B sub10 (1xIK + 10xf10)": 0.75,
+   "C A+B (10xIK + 10xf10)": 0.13,
+   "D rho=0 feedforward-only (10xf4, no IK)": 3.61,
+   "D rho=0.25 (A-style residual steps)": 0.48
+  }
+ },
+ "leg_Q_ik_config_delta": {
+  "meaning": "EE orientation angle [deg] between the IK-DRIVEN post-fix capture (position-matched, z bias -0.04mm) and FK(recorded arm_q). close_park = static IK equilibrium delta; descend_motion = dynamic delta incl the 10-frame joint-interp chord. This is the residual IK-path-attributable delta that option A (per-frame targets, same batched-IK config) may RETAIN and that the arm_q-direct bypass removed.",
+  "claw_arm_note": "clamp point sits 260.92mm below the EE -- 1 deg of EE tilt displaces the claw tip by ~4.6mm laterally (EE_TO_PINCH_OPEN * sin(1deg))",
+  "descend_motion_t60_89": {
+   "L_deg": {
+    "mean": 0.081,
+    "max": 0.089
+   },
+   "R_deg": {
+    "mean": 0.09,
+    "max": 0.097
+   },
+   "claw_tip_max_mm": 0.44
+  },
+  "close_park_t90_111": {
+   "L_deg": {
+    "mean": 0.076,
+    "max": 0.089
+   },
+   "R_deg": {
+    "mean": 0.081,
+    "max": 0.094
+   },
+   "claw_tip_max_mm": 0.43
+  }
+ }
+}
