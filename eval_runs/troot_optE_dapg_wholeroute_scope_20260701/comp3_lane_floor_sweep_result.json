@@ -1,0 +1,150 @@
+{
+ "floors": {
+  "old_clip_base": 1.06992,
+  "lane": 1.06492,
+  "c1_island_float_aware": 1.08992
+ },
+ "lane_box": {
+  "x": [
+   0.23399999999999999,
+   0.366
+  ],
+  "y": [
+   0.09,
+   0.21000000000000002
+  ]
+ },
+ "c1_island_box": {
+  "x": [
+   0.33,
+   0.37
+  ],
+  "y": [
+   0.135,
+   0.165
+  ]
+ },
+ "cells": 81,
+ "columns": {
+  "achieved": {
+   "arrays": [
+    "ee_pos_l",
+    "ee_pos_r"
+   ],
+   "label": "recorded ACHIEVED path == env clamp input (fork-(iv) waypoints)",
+   "sweeps": 162,
+   "frame_counts": [
+    7706,
+    7707,
+    7708,
+    7709,
+    7710
+   ],
+   "below_old_counts": [
+    250
+   ],
+   "below_old_windows": [
+    [
+     896,
+     1145
+    ],
+    [
+     897,
+     1146
+    ],
+    [
+     898,
+     1147
+    ],
+    [
+     899,
+     1148
+    ],
+    [
+     900,
+     1149
+    ]
+   ],
+   "below_new_total": 0,
+   "min_margin_new_mm": 1.878,
+   "park_z_range": [
+    1.0668,
+    1.06681
+   ]
+  },
+  "target": {
+   "arrays": [
+    "ee_tgt_pos_l",
+    "ee_tgt_pos_r"
+   ],
+   "label": "recording RUNNER commanded targets (flag-OFF change extends into descend)",
+   "sweeps": 162,
+   "frame_counts": [
+    7706,
+    7707,
+    7708,
+    7709,
+    7710
+   ],
+   "below_old_counts": [
+    264
+   ],
+   "below_old_windows": [
+    [
+     859,
+     1122
+    ],
+    [
+     860,
+     1123
+    ],
+    [
+     861,
+     1124
+    ],
+    [
+     862,
+     1125
+    ],
+    [
+     863,
+     1126
+    ]
+   ],
+   "below_new_total": 0,
+   "min_margin_new_mm": 1.88,
+   "park_z_range": [
+    1.0668,
+    1.0668
+   ]
+  }
+ },
+ "replay_neutrality": {
+  "violations": 0,
+  "pass": true,
+  "meaning": "0 => every below-old-floor replay frame has BOTH arms in-lane and outside the C1 island -> mode-0 shared max floor == lane floor and the island carve-out never touches replay"
+ },
+ "lane_edge_clearance_below_old_mm": {
+  "L": {
+   "x_lo": 46.0,
+   "x_hi": 46.0,
+   "y_lo": 13.8,
+   "y_hi": 103.7
+  },
+  "R": {
+   "x_lo": 46.0,
+   "x_hi": 45.9,
+   "y_lo": 106.2,
+   "y_hi": 11.3
+  }
+ },
+ "c1_island": {
+  "min_recorded_z_in_footprint": 1.13408,
+  "island_floor": 1.08992,
+  "gap_above_island_floor_mm": 44.2
+ },
+ "boundary_crossings": {
+  "min_z_at_any_crossing": 1.13221,
+  "above_old_floor_mm": 62.3
+ }
+}

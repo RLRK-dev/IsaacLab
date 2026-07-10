@@ -8,6 +8,8 @@
 ## DECIDE = **PASS-WITH-FOLDS**
 
 - **Build itself = SOUND.** No CRITICAL code defect in any view. flag-OFF default path = **PRESERVED (AST-strip proof: flag-ON 分岐除去後、全共有関数が pre-bundle base と AST 一致)**。R1-R8 全て on-disk 実装確認 (SSOT view fidelity table)。banked 面 (env-core / Layer-A byte-repro / locked monolith / golden npz) いずれも本 bundle からの侵害なし。
+
+> **2026-07-10 supersession (5tai verdict a35cb359a0 / fix 65b5b9dd21 + folds):** the flag-OFF byte-identity/byte-preserve claim is SUPERSEDED at the EE-Z floor clip site (newton_route_env.py, _apply_actions_batch target z clamp) — the lane-aware floor (Rs adjudication B) is an env-core latent-defect fix common to BOTH flags: flag-OFF close-window + descend targets change by <=3.12mm (achieved-col window start {896..900}, target-col from {859..863}). All other flag-OFF surfaces remain byte-preserved.
 - **BUT: G1 (flag-ON live rollout) は現定義のまま実行不可** — 幾何 HIGH (G-F1) が G1 の前提を崩す（下記）。fold 群 + Rs 裁定を経てから G1 surface。
 - 両中断 pass の priority lead は今回決着: 「import alias 除去」= REFUTED (誤読)、「q/qd index 空間」= NO DEFECT (maps は qd-space で正しい、newton API 直読で確認)。
 

@@ -60,3 +60,5 @@ No ❌ FAIL, no ⬜ undecided. ⚠ carried build-time requirement: §運用16 fr
 
 ---
 *%11 COORD (w2:p3) 2026-07-10. /rule-check stage2, planned change = comp3+comp4 plan v2. ALL PASS. → %12 sha ping (conditional build pre-auth).*
+
+> **2026-07-10 supersession (5tai verdict a35cb359a0 / fix 65b5b9dd21 + folds):** the flag-OFF (lines 22/38/53) byte-identity/byte-preserve claim is SUPERSEDED at the EE-Z floor clip site (newton_route_env.py, _apply_actions_batch target z clamp) — the lane-aware floor (Rs adjudication B) is an env-core latent-defect fix common to BOTH flags: flag-OFF close-window + descend targets change by <=3.12mm (achieved-col window start {896..900}, target-col from {859..863}). All other flag-OFF surfaces remain byte-preserved.

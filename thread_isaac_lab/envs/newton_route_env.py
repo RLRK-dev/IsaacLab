@@ -166,17 +166,42 @@ EE_Z_FLOOR_KO = TABLE_HEIGHT + CLIP_BASE_HEIGHT + CABLE_RADIUS + EE_TO_PINCH_OPE
 # centerline -- the clip-base term drops. The recorded grasp-park ee z (1.06680, both arms) sits 3.12mm
 # below the clip-base floor and was clipped across the whole close window (every grid cell), pushing the
 # close 3mm high -> cable under the throat (comp3_g1_armq_diag root_cause_floor_clip). Lane bounds mirror
-# the void builder literals (newton_skill_env_base.py:1746,1750; runtime void parity = probe leg C).
+# the void builder literals (newton_skill_env_base.py:1746,1750; runtime void parity = probe leg C +
+# build-time lane_void_parity_assert). This intentionally CHANGES the flag-OFF drive path too (the clip
+# site has no flag branch) -- Rs-approved env-core latent-defect fix superseding the chunk-1 flag-OFF
+# byte-preserve claim at this site (65b5b9dd21 + 5tai verdict COMP3_LANEFLOOR_5TAI a35cb359a0).
 EE_Z_FLOOR_KO_LANE = TABLE_HEIGHT + CABLE_RADIUS + EE_TO_PINCH_OPEN  # ~= 1.06492 (pinch @ cable center)
 _LANE_Y_LO, _LANE_Y_HI = WIDE_LEFT_Y - 0.016, WIDE_RIGHT_Y + 0.016  # [0.090, 0.210] void Y slot
 _LANE_X_LO, _LANE_X_HI = 0.3 - 0.066, 0.3 + 0.066  # [0.234, 0.366] void X window (base table_cx=0.3)
+# C1 routing-clip island (R-B, 5tai CC4-F1): C1 (0.35, 0.15) + spacer sits INSIDE the lane box and floats
+# ROUTE_CLIP_FLOAT_Z above the table -- there the seated-cable centerline rides the FLOATING clip, so the
+# floor is the clip-base floor RAISED by the float (~1.08992; degenerates to the table-mount clip-base
+# value automatically if the float returns to 0). Island footprint per 5tai verdict R-B (C1 +-20/15mm).
+_C1_ISLAND_X_LO, _C1_ISLAND_X_HI = 0.330, 0.370
+_C1_ISLAND_Y_LO, _C1_ISLAND_Y_HI = 0.135, 0.165
+EE_Z_FLOOR_KO_C1_ISLAND = EE_Z_FLOOR_KO + rc.ROUTE_CLIP_FLOAT_Z  # ~= 1.08992 (float-aware)
 
 
 def ee_z_floor_ko(x: float, y: float) -> float:
-    """Lane-aware EE-Z floor [m]: void-footprint lane -> table-level cable centerline; else clip-base."""
+    """Lane-aware EE-Z floor [m]: C1 island -> float-aware clip floor; void lane -> table-level cable
+    centerline; else clip-base floor."""
+    if _C1_ISLAND_X_LO <= x <= _C1_ISLAND_X_HI and _C1_ISLAND_Y_LO <= y <= _C1_ISLAND_Y_HI:
+        return EE_Z_FLOOR_KO_C1_ISLAND
     if _LANE_X_LO <= x <= _LANE_X_HI and _LANE_Y_LO <= y <= _LANE_Y_HI:
         return EE_Z_FLOOR_KO_LANE
     return EE_Z_FLOOR_KO
+
+
+def ee_z_floor_ko_pair(rx: float, ry: float, lx: float, ly: float, common_mode: bool) -> tuple:
+    """Per-arm floors for one world's (R, L) targets. R-A (5tai CC3-M2): in common-mode (dual, the b'
+    projection asserts the z-span invariant) BOTH arms clip at the SHARED max floor, so a lane-edge
+    excursion lifts both arms together (span-preserving, conservative); transit keeps per-arm floors.
+    Replay-neutral: the replay's below-old-floor frames are in-lane on BOTH arms in every cell
+    (comp3_lane_floor_sweep artifact)."""
+    fr, fl = ee_z_floor_ko(rx, ry), ee_z_floor_ko(lx, ly)
+    if common_mode:
+        fr = fl = max(fr, fl)
+    return fr, fl
 
 
 _AC_IK_ITERATIONS_P0 = 400  # P0 dual-arm solve needs the generous local count (88mm span convergence).
@@ -303,6 +328,45 @@ def servo_readback_assert(model, mj_model, all_driver_dofs, negative_dofs):
         assert abs(float(jfrange[j, 1]) - GRIPPER_DRIVER_EFFORT_LIMIT_NM) < tol, (
             f"mj actuator {a} target joint {j} jnt_actfrcrange hi={jfrange[j, 1]}"
         )
+
+
+def lane_void_parity_assert(mj_model):
+    """R-C (5tai CC2-INFO2/CC6-cond2): flag-ON build-time parity of the lane-floor bounds vs the AS-BUILT
+    table void (leg-C style readback). The lane constants mirror the void builder literals; a future void
+    change without a floor update would silently mis-place the floor -- this fails the BUILD loud instead.
+
+    Identifies the 4 static table boxes (bodyid 0, hz==table_half[2]==0.005, z-center==TABLE_HEIGHT-0.005),
+    derives the as-built void slot from their edges (Y solids: full-X boxes; X fills: the rest), and
+    asserts it equals the lane box within 1e-6 (float32 geometry tolerance, probe leg C).
+    """
+    tol = 1e-6
+    boxes = []
+    for g in range(int(mj_model.ngeom)):
+        if int(mj_model.geom_bodyid[g]) == 0 and abs(float(mj_model.geom_size[g][2]) - 0.005) < tol:
+            if abs(float(mj_model.geom_pos[g][2]) - (TABLE_HEIGHT - 0.005)) < tol:
+                boxes.append(
+                    (
+                        float(mj_model.geom_size[g][0]),
+                        float(mj_model.geom_size[g][1]),
+                        float(mj_model.geom_pos[g][0]),
+                        float(mj_model.geom_pos[g][1]),
+                    )
+                )
+    assert len(boxes) == 4, f"lane-void parity: table boxes = {len(boxes)} (exp 4 flag-ON void)"
+    y_solids = sorted([b for b in boxes if b[0] > 0.3], key=lambda b: b[3])  # full-X halves (0.35)
+    x_fills = sorted([b for b in boxes if b[0] <= 0.3], key=lambda b: b[2])
+    assert len(y_solids) == 2 and len(x_fills) == 2, f"lane-void parity: box split {len(y_solids)}/{len(x_fills)}"
+    built_y_lo = y_solids[0][3] + y_solids[0][1]  # -Y solid top edge
+    built_y_hi = y_solids[1][3] - y_solids[1][1]  # +Y solid bottom edge
+    built_x_lo = x_fills[0][2] + x_fills[0][0]  # -X fill right edge
+    built_x_hi = x_fills[1][2] - x_fills[1][0]  # +X fill left edge
+    for name, built, lane in (
+        ("y_lo", built_y_lo, _LANE_Y_LO),
+        ("y_hi", built_y_hi, _LANE_Y_HI),
+        ("x_lo", built_x_lo, _LANE_X_LO),
+        ("x_hi", built_x_hi, _LANE_X_HI),
+    ):
+        assert abs(built - lane) < tol, f"lane-void parity: {name} as-built {built:.6f} != lane {lane:.6f}"
 
 
 def physics_finger_obs(phys_jq, arm_q_start_w):
@@ -590,6 +654,8 @@ class NewtonRouteEnv(VecEnv):
                 for off in (0, GRIPPER_DRIVER_JOINT_IDX[0] + 1, JOINTS_PER_ARM + GRIPPER_DRIVER_JOINT_IDX[0] + 1)
             ]  # arm j0 + one 4-bar follower per arm (non-driver gripper coords)
             servo_readback_assert(self._model, self._solver.mj_model, self._arm_ow_maps["all_driver_dofs"], _neg)
+            # R-C: fail-loud lane-floor vs as-built void parity (drift guard for future void changes).
+            lane_void_parity_assert(self._solver.mj_model)
         print(
             f"[NewtonRouteEnv] Model: {self._model.body_count} bodies, "
             f"{self._model.joint_count} joints, solver={type(self._solver).__name__}"
@@ -1003,8 +1069,10 @@ class NewtonRouteEnv(VecEnv):
             target_r = base_r + proj_r
             target_l = base_l + proj_l
             # Substrate Z safety floor/ceiling ONLY (koshape lane-aware floor; not an accumulation anchor).
-            target_r[2] = np.clip(target_r[2], ee_z_floor_ko(target_r[0], target_r[1]), EE_Z_SAFETY_UPPER)
-            target_l[2] = np.clip(target_l[2], ee_z_floor_ko(target_l[0], target_l[1]), EE_Z_SAFETY_UPPER)
+            # mode 0 (common-mode dual) -> shared max floor for both arms (R-A span preservation).
+            floor_r, floor_l = ee_z_floor_ko_pair(target_r[0], target_r[1], target_l[0], target_l[1], mode == 0)
+            target_r[2] = np.clip(target_r[2], floor_r, EE_Z_SAFETY_UPPER)
+            target_l[2] = np.clip(target_l[2], floor_l, EE_Z_SAFETY_UPPER)
             targets_right[w] = target_r
             targets_left[w] = target_l
             self._ee_target_right[w] = target_r.copy()

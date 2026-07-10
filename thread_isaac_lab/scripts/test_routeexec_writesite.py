@@ -480,15 +480,22 @@ def test_readback_arming():
 
 
 def test_lane_floor():
-    """Lane-aware EE-Z floor (G1 root-cause fix, Rs adjudication B): in/out-lane + edge values + the
-    recorded grasp-park target must NOT bind the lane floor (and DID bind the old clip-base floor)."""
+    """Lane-aware EE-Z floor (G1 root-cause fix, Rs adjudication B + 5tai folds R-A/R-B): in/out-lane +
+    edge values + C1-island carve-out + shared-floor pair semantics + the recorded grasp-park target must
+    NOT bind the lane floor (and DID bind the old clip-base floor)."""
     import newton_route_env as nre
+    import route_env_config as rc_mod
 
     f_lane, f_old = float(nre.EE_Z_FLOOR_KO_LANE), float(nre.EE_Z_FLOOR_KO)
+    f_island = float(nre.EE_Z_FLOOR_KO_C1_ISLAND)
     assert abs(f_lane - 1.06492) < 1e-5, f_lane
     assert abs(f_old - 1.06992) < 1e-5, f_old
     assert abs((f_old - f_lane) - 0.005) < 1e-9, "step must equal CLIP_BASE_HEIGHT"
-    # lane bounds pinned to the banked void footprint (probe leg C pins the REAL built model to the same).
+    # R-B: island floor is FLOAT-AWARE (formula, not a pinned literal): degenerates to f_old at float 0.
+    assert abs(f_island - (f_old + rc_mod.ROUTE_CLIP_FLOAT_Z)) < 1e-9, "island floor must track the float"
+    assert abs(f_island - 1.08992) < 1e-5, f_island  # current float 0.020
+    # lane bounds pinned to the banked void footprint (probe leg C + build-time lane_void_parity_assert
+    # pin the REAL built model to the same).
     assert abs(nre._LANE_Y_LO - 0.090) < 1e-9 and abs(nre._LANE_Y_HI - 0.210) < 1e-9
     assert abs(nre._LANE_X_LO - 0.234) < 1e-9 and abs(nre._LANE_X_HI - 0.366) < 1e-9
     # in-lane (park XY), out-lane, and inclusive edges.
@@ -496,17 +503,40 @@ def test_lane_floor():
     assert nre.ee_z_floor_ko(0.300, 0.250) == f_old and nre.ee_z_floor_ko(0.100, 0.106) == f_old
     assert nre.ee_z_floor_ko(0.234, 0.090) == f_lane and nre.ee_z_floor_ko(0.366, 0.210) == f_lane
     assert nre.ee_z_floor_ko(0.2339, 0.106) == f_old and nre.ee_z_floor_ko(0.300, 0.2101) == f_old
-    # recorded grasp-park (REAL golden npz): in-lane, above the lane floor, below the OLD floor (the bind
-    # this fix removes -- documents the defect so a floor regression fails loud here).
+    # R-B: C1 island (inside the lane box) takes PRECEDENCE over the lane floor; inclusive edges.
+    assert nre.ee_z_floor_ko(0.350, 0.150) == f_island, "C1 center must get the island floor"
+    assert nre.ee_z_floor_ko(0.330, 0.135) == f_island and nre.ee_z_floor_ko(0.370, 0.165) == f_island
+    assert nre.ee_z_floor_ko(0.3299, 0.150) == f_lane and nre.ee_z_floor_ko(0.350, 0.1651) == f_lane
+    # R-A: pair semantics -- common-mode shares the MAX floor (z-span preserved: floor_r == floor_l
+    # always); transit stays per-arm.
+    assert nre.ee_z_floor_ko_pair(0.300, 0.194, 0.300, 0.106, True) == (f_lane, f_lane)
+    assert nre.ee_z_floor_ko_pair(0.300, 0.250, 0.300, 0.106, True) == (f_old, f_old)  # one out -> both up
+    assert nre.ee_z_floor_ko_pair(0.350, 0.150, 0.300, 0.106, True) == (f_island, f_island)
+    assert nre.ee_z_floor_ko_pair(0.300, 0.250, 0.300, 0.106, False) == (f_old, f_lane)  # transit per-arm
+    for rxy, lxy in (((0.300, 0.194), (0.300, 0.106)), ((0.366, 0.210), (0.234, 0.090))):
+        fr, fl = nre.ee_z_floor_ko_pair(rxy[0], rxy[1], lxy[0], lxy[1], True)
+        assert fr == fl, "common-mode must return z-equal floors (span invariant)"
+    # recorded low-z frames (REAL golden npz): every below-old-floor frame must be in-lane on BOTH arms
+    # and OUTSIDE the island -> shared max floor == lane floor == replay-neutral (R-A/R-B data assert;
+    # the 81-cell version lives in comp3_lane_floor_sweep). Park frame also documents the old bind.
     if not _GOLDEN_NPZ.exists():
         raise AssertionError(f"golden npz missing: {_GOLDEN_NPZ}")
     z = np.load(_GOLDEN_NPZ)
+    pl = np.asarray(z["ee_pos_l"], dtype=np.float64)
+    pr = np.asarray(z["ee_pos_r"], dtype=np.float64)
+    below = (pl[:, 2] < f_old) | (pr[:, 2] < f_old)
+    assert below.sum() > 0, "golden must document the old-floor bind window"
+    for f in np.nonzero(below)[0]:
+        frf, flf = nre.ee_z_floor_ko_pair(pr[f, 0], pr[f, 1], pl[f, 0], pl[f, 1], True)
+        assert frf == f_lane and flf == f_lane, f"replay-neutrality broken at frame {f}: shared floor != lane"
     for key in ("ee_pos_l", "ee_pos_r"):
         park = np.asarray(z[key], dtype=np.float64)[1000]  # mid close-window park frame
-        assert nre.ee_z_floor_ko(float(park[0]), float(park[1])) == f_lane, f"{key} park not in-lane: {park}"
         assert park[2] > f_lane + 1e-4, f"{key} park z {park[2]:.5f} binds the LANE floor"
         assert park[2] < f_old, f"{key} park z {park[2]:.5f} no longer documents the old-floor bind"
-    print("  [lane-floor] PASS: values+edges pinned; recorded park in-lane, clears lane floor, documents old bind")
+    print(
+        "  [lane-floor] PASS: values+edges+island(float-aware)+pair(shared-max/z-equal) pinned; "
+        "replay low-z frames all lane-floored (neutral); park documents old bind"
+    )
 
 
 if __name__ == "__main__":

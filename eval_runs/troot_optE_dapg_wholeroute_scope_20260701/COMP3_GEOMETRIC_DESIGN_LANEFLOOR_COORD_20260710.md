@@ -141,3 +141,37 @@ retention itself is judged by G1 retry (video + Rs human-GT), not by this fix.
 `newton_route_env.py` only (~10 lines): module constant `EE_Z_FLOOR_KO_LANE` + lane bounds + module fn
 `ee_z_floor_ko(x, y)`; `:988-989` switch to per-target lookup. L4 unit: in/out-lane + edge values +
 recorded-park non-bind (REAL golden npz) + old-floor bind documentation assert.
+
+## Corrections + folds (5tai verdict a35cb359a0, 2026-07-10 — supersedes the numbers above where noted)
+
+Machine source for ALL corrected numbers: `comp3_lane_floor_sweep.py` + `comp3_lane_floor_sweep_result.json`
+(rerunnable artifact adopted from CC5's independent repro, extended per fold; floors imported AS-CODED
+from the env).
+
+- **Column relabel (CC3-L3):** the sweep above used the `ee_pos` (ACHIEVED) columns — correct as the ENV
+  clamp input (step_target's base = achieved-path waypoint, fork-(iv)), but the doc did not label it. The
+  recording npz also carries `ee_tgt_pos` (the RECORDING RUNNER's commanded targets): below-old-floor =
+  **264 frames** per sweep, windows starting {859..863} — i.e. the flag-OFF behavior change also covers
+  ~37 descend frames BEFORE the achieved window, not just the close window.
+- **Per-cell variation (CC5-L5; §運用30):** achieved below-old windows start {896..900} (not the fixed
+  f897-1146 above — that was cell x0_y0); recording lengths are {7706..7710} frames (not 7707); min
+  margin vs the new floor across cells = **+1.878mm** (not +1.88); counts stay exactly 250 (achieved) /
+  264 (target) in every sweep.
+- **Lane-edge clearance envelope (CC4-F2 — replaces the single-cell "≥13.8mm (Y), ≥65.9mm (X)" above):**
+  across all 81 cells at below-old-floor frames: X clearance ~**46.0mm**, Y clearance L/y_lo **13.8mm**
+  but **R/y_hi = 11.3mm** — BELOW the 15mm per-step residual bound, breaking the "residual cannot reach
+  the boundary" assumption (CC3-M1) off-cell. Basis for R-A.
+- **R-A (adopted, CC3-M2):** mode-0 (common-mode dual) clips BOTH arms at the SHARED `max(floor_R,
+  floor_L)` (`ee_z_floor_ko_pair`) — a lane-edge excursion lifts both arms together (z-span preserving,
+  conservative); mode-1 transit stays per-arm. Replay-neutral: machine check `replay_neutrality.violations
+  = 0` (every below-old-floor frame has BOTH arms in-lane).
+- **R-B (adopted, CC4-F1):** C1 (0.35, 0.15) + spacer island sits INSIDE the lane box; carve-out floor =
+  `EE_Z_FLOOR_KO + rc.ROUTE_CLIP_FLOAT_Z` = **1.08992 (float-aware** — degenerates to the clip-base value
+  if the float returns to 0; NOT the old floor, which was a dead boundary under the +20mm float).
+  Footprint X[0.330,0.370]×Y[0.135,0.165]. Replay-neutral: min recorded z in the footprint = 1.13408 =
+  +44.2mm above the island floor.
+- **R-C (adopted, CC2-INFO2/CC6-cond2):** flag-ON build-time `lane_void_parity_assert` — derives the
+  as-built void slot from the 4 real table boxes (leg-C identifier) and fails the build loud if it
+  diverges from the lane constants (void-change drift guard).
+- **Boundary crossing minimum:** 1.13221 (both-endpoint definition; the 1.13224 above was one-endpoint) —
+  conclusion unchanged (+62.3mm above the old floor; the 5mm step never bites on the replay path).

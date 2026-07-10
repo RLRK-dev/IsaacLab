@@ -20,6 +20,8 @@
 
 **CC6 NHA = CHANGE_JUSTIFIED** (No-Action fails: DoD live legs undischargeable with fingers pinned OPEN). Conditions 1-7 ADOPTED; **route_executor.py edit ⇒ re-run byte-repro ref-leg self-check** before claiming banked 81/81 stands; ZERO drift into task_config.py / newton_skill_env_base.py / locked test file (substrate finding does NOT authorize touching make_solver — R3). §16.
 
+> **2026-07-10 supersession (5tai verdict a35cb359a0 / fix 65b5b9dd21 + folds):** the flag-OFF byte-identity/byte-preserve claim is SUPERSEDED at the EE-Z floor clip site (newton_route_env.py, _apply_actions_batch target z clamp) — the lane-aware floor (Rs adjudication B) is an env-core latent-defect fix common to BOTH flags: flag-OFF close-window + descend targets change by <=3.12mm (achieved-col window start {896..900}, target-col from {859..863}). All other flag-OFF surfaces remain byte-preserved.
+
 ---
 
 ## §0. Grounding (anchor set, §運用4) — read + cited (v1 §0 + verdict)
@@ -46,6 +48,8 @@ build_multiworld_scene signature accepts `grasp_actuation=False` (base:1492); :3
 
 ## §4. comp3 mechanism = grasp_actuation flag-flip (newton_route_env.py:391)
 cfg flag `cfg["grasp_actuation"]` (bool, default False); pass to build_multiworld_scene :391. flag-OFF = env-core byte-identity; flag-ON = 4 base mutations (§8). **R8 guard: `grasp_actuation=True ⇒ route_executor_impl=="route_executor"` fail-loud (K5: True+stub = servo with no grip writer = silent inert-grip).**
+
+> **2026-07-10 supersession (5tai verdict a35cb359a0 / fix 65b5b9dd21 + folds):** the flag-OFF byte-identity/byte-preserve claim is SUPERSEDED at the EE-Z floor clip site (newton_route_env.py, _apply_actions_batch target z clamp) — the lane-aware floor (Rs adjudication B) is an env-core latent-defect fix common to BOTH flags: flag-OFF close-window + descend targets change by <=3.12mm (achieved-col window start {896..900}, target-col from {859..863}). All other flag-OFF surfaces remain byte-preserved.
 
 ## §5. Write-site flag-gate — R1-CORRECTED (3 sites, DISTINCT semantics)
 CC4-C1 invariant (flag-OFF = 28-wide gripper-pinned byte-exact) STANDS. But the 3 sites are NOT uniform (v1 error — R1):
