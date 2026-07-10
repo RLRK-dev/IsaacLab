@@ -162,6 +162,13 @@ def main():
             print(f"[G1] STOP before t={t}: next phase = G3 (C1-seat onward EXCLUDED per G-F3)")
             break
         _, _, dones, _ = env.step(zero)
+        if bool(dones[0]):
+            # done-step fix: env.step() resets done worlds BEFORE returning, so any state read past this
+            # point is POST-RESET contamination (the t=132 row in the first G1 run) -- record the
+            # termination loud and DROP the row (the pre-reset state is not recoverable here).
+            done_early = t
+            print(f"[G1] EARLY DONE at t={t} (drop/explosion/termination) -- row DROPPED (post-reset state)")
+            break
         import warp as wp
 
         wp.synchronize()
@@ -206,10 +213,6 @@ def main():
         Image.fromarray(ctx).save(FRAMES_DIR / f"ctx_{t:04d}.png")
         Image.fromarray(zoom).save(FRAMES_DIR / f"zoom_{t:04d}.png")
 
-        if bool(dones[0]):
-            done_early = t
-            print(f"[G1] EARLY DONE at t={t} (drop/explosion/termination) -- run ABORTED, recorded loud")
-            break
         if t % 40 == 0:
             print(f"[G1] t={t} phase={phase_peek} drv L={min(l_q):.3f} R={min(r_q):.3f} pad-cable={ncon_pc}")
         t += 1
