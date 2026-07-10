@@ -32,6 +32,10 @@ import sys
 from pathlib import Path
 
 _EVAL = Path(__file__).resolve().parent
+_TIL = _EVAL.parent.parent / "thread_isaac_lab"
+for _p in (str(_TIL), str(_TIL / "envs")):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 OUT_JSON = _EVAL / "comp3_point_data_ledger_v1.json"
 OUT_MD = _EVAL / "comp3_point_data_ledger_v1.md"
 
@@ -309,7 +313,8 @@ def main():
     ]
     for r in rows_zdrop:
         step_md.append(
-            f"| z_drop_end [mm] | {r['cell']} | {r['scene']} | {r['L_z_drop_mm']} | {r['R_z_drop_mm']} | {r['provenance']} |"
+            f"| z_drop_end [mm] | {r['cell']} | {r['scene']} | {r['L_z_drop_mm']} | {r['R_z_drop_mm']} |"
+            f" {r['provenance']} |"
         )
     for r in rows_rise:
         step_md.append(
@@ -318,7 +323,7 @@ def main():
     # route-step (STEP 6-17) context: the comp3 G1 arc executed STEP 2-5 ONLY (runner stops before the
     # route, phase>=2). STEP 6-17 z is NOT comp3-measured; supply the RECORDING-nominal EE z per G-phase
     # (golden w0e_81rerun_snapdown, mujoco-コ 0.716 official) so p5 can map to the route steps.
-    import newton_route_env as _nre_unused  # noqa: F401  (path already set by extractor)
+    import numpy as np
     import route_executor as rex
 
     gz = np.load(_EVAL / "w0e_81rerun_snapdown_0537" / "cell_x0_y0" / "route_demo_raw.npz")

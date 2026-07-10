@@ -51,6 +51,19 @@ Primary: per-arm claw z @close = SYMMETRIC <=0.05mm (claws descend equally; the 
 | rise [mm] | dz+5 | FLAT | 0.0 | 0.0 | 5227d9e916 (verdict 00e191e4ba) FLAT ik_chord |
 | rise [mm] | R+3/L+0 | FLAT | -29.2 | 34.4 | 73c246f812 FLAT ik_chord R+3/L+0 |
 
+## STEP 6-17 (route) -- NOT comp3-measured (G1 arc = STEP 2-5 only). RECORDING-nominal EE z per G-phase, golden w0e_81rerun_snapdown (mujoco-コ, 0.716 official). p5 maps G-phase -> route steps.
+| G-phase | R_EE_z [min,max] | L_EE_z [min,max] | provenance |
+|---|---|---|---|
+| G0 | [1.0668,1.5597] | [1.0668,1.5597] | golden w0e_81rerun_snapdown (recording-nominal, NOT comp3-run) |
+| G1 | [1.0669,1.1468] | [1.0669,1.1468] | golden w0e_81rerun_snapdown (recording-nominal, NOT comp3-run) |
+| G2 | [1.0940,1.1468] | [1.0940,1.1468] | golden w0e_81rerun_snapdown (recording-nominal, NOT comp3-run) |
+| G3 | [1.0940,1.1393] | [1.0937,1.1389] | golden w0e_81rerun_snapdown (recording-nominal, NOT comp3-run) |
+| G4 | [1.1122,1.1270] | [1.1270,1.1272] | golden w0e_81rerun_snapdown (recording-nominal, NOT comp3-run) |
+| G5 | [1.0940,1.1269] | [1.0940,1.1269] | golden w0e_81rerun_snapdown (recording-nominal, NOT comp3-run) |
+
+## STEP 3 park depth CORRECTION status (Rs #5 手前R +3~4mm)
+- R-only +3~4mm is NOT a confirmed value -- '検証中' resolved to: the per-arm confirmation cell (R+3/L+0, 73c246f812) found the arms are CABLE-COUPLED (R z_drop 15.9mm vs uniform-dz3 R 0.0mm; video: R hold MARGINAL, sharp bend, not a clean clamp). So R-only depth does NOT recover R's uniform-depth quality -- do NOT record R+3~4mm as a confirmed park correction. HELD.
+
 ## Load-bearing reads for p5 §1.2
 - ik_chord holds the NEAR(R/手前) arm (z_drop 0 at uniform dz3) but NEVER the FAR(L/奥) arm at any depth; only FEEDFORWARD (D rho=0, f8b1ff6b4c) holds L. STEP4/5 are the failing legs on ik_chord.
 - per-arm depth is CABLE-COUPLED (R+3/L+0 -> R z_drop 15.9mm vs uniform-dz3 R 0.0mm): R-only depth does NOT recover R's uniform-depth quality. VN-2 R-only-+3..4mm is NOT a clean independent lever.
