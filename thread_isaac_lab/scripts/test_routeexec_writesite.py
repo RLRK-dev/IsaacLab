@@ -179,7 +179,30 @@ def test_guard():
         if "did NOT raise" in str(e):
             raise
         assert "bool" in str(e), f"unexpected AssertionError text: {e}"
-    print("  [guard] PASS: flag-matrix + align guards fire loud pre-build (ValueError/AssertionError)")
+    # D rho=0: invalid route_drive_mode value -> AssertionError.
+    try:
+        nre.NewtonRouteEnv(world_count=1, cfg={"route_drive_mode": "chord"})
+        raise AssertionError("guard did NOT raise for invalid route_drive_mode")
+    except AssertionError as e:
+        if "did NOT raise" in str(e):
+            raise
+        assert "route_drive_mode" in str(e), f"unexpected AssertionError text: {e}"
+    # D rho=0: feedforward without the live-grip stack -> ValueError (K5 pattern).
+    try:
+        nre.NewtonRouteEnv(world_count=1, cfg={"route_drive_mode": "feedforward"})
+        raise AssertionError("guard did NOT raise for feedforward without grasp_actuation")
+    except ValueError as e:
+        assert "grasp_actuation" in str(e), f"unexpected ValueError text: {e}"
+    # D rho=0: feedforward without a recording npz -> ValueError (arm_q source).
+    try:
+        nre.NewtonRouteEnv(
+            world_count=1,
+            cfg={"route_drive_mode": "feedforward", "grasp_actuation": True, "route_executor_impl": "route_executor"},
+        )
+        raise AssertionError("guard did NOT raise for feedforward without recording npz")
+    except ValueError as e:
+        assert "route_recording_npz" in str(e), f"unexpected ValueError text: {e}"
+    print("  [guard] PASS: flag-matrix + align + drive-mode guards fire loud pre-build (ValueError/AssertionError)")
 
 
 # =====================================================================================================
@@ -212,7 +235,7 @@ class _MockControl:
         self.joint_target_pos = _MockWarpArray(np.full(n, fill, dtype=np.float32))
 
 
-def _build_executor(grip_frames=None, forbid_banked_fork=False):
+def _build_executor(grip_frames=None, forbid_banked_fork=False, arm_q=None):
     """Build a RouteExecutor over a synthetic 7701-frame recording + a mock control seeded OPEN."""
     n_frames = rex._REC_LAST_CTRL_FRAME + 1
     grip = np.zeros((n_frames, 2), dtype=np.float32)  # cols [L, R]
@@ -224,6 +247,8 @@ def _build_executor(grip_frames=None, forbid_banked_fork=False):
         "grip_cmd": grip,
         "phase_id": np.zeros(n_frames, dtype=np.int64),  # 0 is a valid _RECORDED_PHASE_TO_G key
     }
+    if arm_q is not None:
+        recording["arm_q"] = arm_q  # OPTIONAL key (D rho=0 feedforward source)
     control = _MockControl(_TOTAL, GRIPPER_DRIVER_OPEN_RAD)  # build-seeded OPEN (servo_seed_assert passes)
     ex = rex.RouteExecutor(
         _ARM_Q_START,
@@ -539,6 +564,77 @@ def test_lane_floor():
     )
 
 
+class _MockState:
+    """A physics-state stand-in for the feedforward writer (joint_q/joint_qd, host-copy semantics)."""
+
+    def __init__(self, n, fill):
+        self.joint_q = _MockWarpArray(np.full(n, fill, dtype=np.float32))
+        self.joint_qd = _MockWarpArray(np.full(n, fill, dtype=np.float32))
+
+
+def test_recorded_arm_ff():
+    """D rho=0: apply_recorded_arm_ff writes the recorded arm_q row (cf[t]+sub_i, grip-consistent index)
+    into ARM cols {0-5,14-19} ONLY (verbatim), zeroes arm qd, leaves gripper cols untouched; guards loud."""
+    SENT = -777.0
+    n_frames = rex._REC_LAST_CTRL_FRAME + 1
+    arm_q = np.zeros((n_frames, _N_ARM), dtype=np.float32)
+    f_probe = 7 * rex._REC_CADENCE + 4  # cf[7]=70, sub_i=4 -> frame 74 (same convention as the grip)
+    arm_q[f_probe] = np.arange(100.0, 100.0 + _N_ARM, dtype=np.float32)  # distinct verbatim row
+    ex, _ = _build_executor(arm_q=arm_q)
+    maps = rex.build_perworld_index_maps(_ARM_Q_START, _ARM_QD_START)
+    state = _MockState(_TOTAL, SENT)
+    rows = ex.apply_recorded_arm_ff([7, 7], 4, state, maps["arm_ow_q_idx"], maps["arm_ow_qd_idx"])
+    jq, jqd = state.joint_q.numpy(), state.joint_qd.numpy()
+    for w in range(2):
+        b, bd = _ARM_Q_START[w], _ARM_QD_START[w]
+        for li in _ARM_LOCAL:
+            assert jq[b + li] == arm_q[f_probe, li], f"ff arm q != recording verbatim w{w} local{li}"
+            assert jqd[bd + li] == 0.0, f"ff arm qd not zeroed w{w} local{li}"
+        for li in _GRIPPER_LOCAL:
+            assert jq[b + li] == SENT, f"ff wrote gripper q w{w} local{li} (must stay servo-DYNAMIC)"
+            assert jqd[bd + li] == SENT, f"ff wrote gripper qd w{w} local{li}"
+    assert rows.shape == (2, _N_ARM) and np.allclose(rows, arm_q[f_probe][None, :]), "returned rows != recording"
+    # pad-to-horizon: t beyond the recording holds the LAST waypoint frame (mirror step_target).
+    state2 = _MockState(_TOTAL, SENT)
+    ex.apply_recorded_arm_ff([10**6, 10**6], rex._REC_CADENCE - 1, state2, maps["arm_ow_q_idx"], maps["arm_ow_qd_idx"])
+    # guards fail loud: sub_i bounds + missing arm_q.
+    try:
+        ex.apply_recorded_arm_ff([0, 0], rex._REC_CADENCE, state, maps["arm_ow_q_idx"], maps["arm_ow_qd_idx"])
+        raise AssertionError("sub_i == _REC_CADENCE did NOT raise")
+    except AssertionError as e:
+        if "did NOT raise" in str(e):
+            raise
+        assert "sub_i" in str(e)
+    ex_no_arm, _ = _build_executor()
+    try:
+        ex_no_arm.apply_recorded_arm_ff([0, 0], 0, state, maps["arm_ow_q_idx"], maps["arm_ow_qd_idx"])
+        raise AssertionError("missing arm_q did NOT raise")
+    except AssertionError as e:
+        if "did NOT raise" in str(e):
+            raise
+        assert "arm_q" in str(e)
+    print(
+        "  [recorded-arm-ff] PASS: verbatim recording row -> arm cols only; qd zeroed; gripper untouched; guards loud"
+    )
+
+
+def test_recorded_arm_ff_golden():
+    """D rho=0 (REAL npz): the ff row at a real frame == the golden arm_q row verbatim (:28)."""
+    if not _GOLDEN_NPZ.exists():
+        raise AssertionError(f"golden npz missing: {_GOLDEN_NPZ}")
+    z = np.load(_GOLDEN_NPZ)
+    # slice to the synthetic helper's frame count (the validator requires arm_q == ee_pos frames; the
+    # REAL env path passes the full npz where both are 7707 -- here ee_pos is the 7701-frame synthetic).
+    ex, _ = _build_executor(arm_q=np.asarray(z["arm_q"], dtype=np.float32)[: rex._REC_LAST_CTRL_FRAME + 1])
+    maps = rex.build_perworld_index_maps(_ARM_Q_START, _ARM_QD_START)
+    state = _MockState(_TOTAL, -777.0)
+    t, sub = 100, 0  # close-window park frame 1000
+    rows = ex.apply_recorded_arm_ff([t, t], sub, state, maps["arm_ow_q_idx"], maps["arm_ow_qd_idx"])
+    exp = np.asarray(z["arm_q"], dtype=np.float32)[t * rex._REC_CADENCE + sub, :_N_ARM]
+    assert np.array_equal(rows[0], exp), "golden ff row != npz arm_q verbatim"
+    print("  [recorded-arm-ff-golden] PASS: REAL golden frame 1000 row verbatim (float32-exact)")
+
+
 if __name__ == "__main__":
     print("[L1 write-pattern unit] comp3 write-site flag-gate (no-GPU, CPU)")
     test_broadcast()
@@ -557,7 +653,10 @@ if __name__ == "__main__":
     test_readback_arming()
     print("[L4 lane-floor unit] G1 root-cause fix (lane-aware EE-Z floor, Rs adjudication B)")
     test_lane_floor()
+    print("[L4 feedforward unit] D rho=0 scripted drive (apply_recorded_arm_ff, Rs adjudication (1))")
+    test_recorded_arm_ff()
+    test_recorded_arm_ff_golden()
     print(
         "ALL PASS (L1 broadcast+perworld+guard; L4 grip-transit+reset-reseed+settled-patch+forbid-fork"
-        "+finger-obs+servo-readback+golden-transit+readback-arming+lane-floor)"
+        "+finger-obs+servo-readback+golden-transit+readback-arming+lane-floor+recorded-arm-ff[x2])"
     )

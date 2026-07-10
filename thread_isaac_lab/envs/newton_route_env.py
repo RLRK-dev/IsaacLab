@@ -449,6 +449,29 @@ class NewtonRouteEnv(VecEnv):
         self._g1_scene_align = _al
         if self._g1_scene_align and not self._grasp_actuation:
             raise ValueError("g1_scene_align=True requires grasp_actuation=True (it is a G1 flag-ON scene config)")
+        # D rho=0 (Rs adjudication (1) 2026-07-10): route drive mode. 'ik_chord' (default) = the current
+        # step-level batched IK + 10-frame joint chord (byte-preserve); 'feedforward' = the recording's
+        # arm_q replayed per physics frame (the armqdirect-proven mechanism promoted to a drive mode;
+        # SCRIPTED-VERIFICATION-STAGE only -- the trainer-stage D-b window design is a SEPARATE gate).
+        # feedforward REQUIRES the live-grip stack (K5 pattern): the servo grip schedule is the only
+        # gripper writer in this mode, and the recording supplies the arm path (arm_q asserted at first use).
+        _dm = self.cfg.get("route_drive_mode", "ik_chord")
+        assert _dm in ("ik_chord", "feedforward"), (
+            f"cfg['route_drive_mode'] must be 'ik_chord' | 'feedforward', got {_dm!r}"
+        )
+        self._route_drive_ff = _dm == "feedforward"
+        if self._route_drive_ff:
+            if not self._grasp_actuation:
+                raise ValueError(
+                    "route_drive_mode='feedforward' requires grasp_actuation=True (live-grip scripted stage)"
+                )
+            if self.cfg.get("route_executor_impl", "stub") != "route_executor":
+                raise ValueError(
+                    "route_drive_mode='feedforward' requires cfg['route_executor_impl']=='route_executor' "
+                    "(the RouteExecutor owns the recorded arm_q feedforward writer)"
+                )
+            if not self.cfg.get("route_recording_npz"):
+                raise ValueError("route_drive_mode='feedforward' requires cfg['route_recording_npz'] (arm_q source)")
         self._world_count = world_count
 
         self.episode_length_buf = torch.zeros(world_count, dtype=torch.long, device=device)
@@ -1082,53 +1105,80 @@ class NewtonRouteEnv(VecEnv):
             self._last_executed_residual[w, 3:6] = proj_l
             self._last_projection_mode[w] = mode
 
-        jq_targets = self._solve_ik_batch(targets_left, targets_right, jq_starts)
-        nan_mask = np.any(np.isnan(jq_targets), axis=1)
-        if np.any(nan_mask):
-            jq_targets[nan_mask] = jq_starts[nan_mask]
-        # Preserve OPEN fingers in the IK output.
-        for w in range(N):
-            for base in (0, JOINTS_PER_ARM):
-                jq_targets[w, base + GRIPPER_DRIVER_JOINT_IDX[0]] = jq_starts[w, base + GRIPPER_DRIVER_JOINT_IDX[0]]
-                jq_targets[w, base + GRIPPER_DRIVER_JOINT_IDX[1]] = jq_starts[w, base + GRIPPER_DRIVER_JOINT_IDX[1]]
-
-        # DRIVE: interpolate arm joint_q start->target and OVERWRITE each world's joint_q slice per frame.
-        old_fk_jq = np.array(self._per_world_fk_jq[:N])
-        if self._grasp_actuation:
-            # comp3 (R2): per-world route step for the recorded grip staircase lookup cf[t_w]+sub_i. This is
-            # read HERE (before the per-frame loop) because episode_length_buf is not incremented until after
-            # _apply_actions_batch returns, so it holds THIS step's t_w == the value _pull_route used.
+        if self._route_drive_ff:
+            # D rho=0 feedforward drive (Rs adjudication (1); SCRIPTED-VERIFICATION stage -- trainer D-b
+            # window design is a SEPARATE gate): the arms replay the RECORDED arm_q per physics frame
+            # (armqdirect-proven mechanism, c2045a9a1a) -- the step-level IK solve + 10-frame joint chord
+            # are SKIPPED entirely (the decision-packet sec4 3.61x saving). The residual/target bookkeeping
+            # above is kept (obs/extras contract; the projected residual is NOT driven in this mode).
+            # reset/broadcast paths are untouched (feedforward lives in this drive loop only).
             route_steps = [int(self.episode_length_buf[w].item()) for w in range(N)]
-        for step in range(self.PHYSICS_STEPS_PER_RL):
-            t = min((step + 1) / self.PHYSICS_STEPS_PER_RL, 1.0)
-            jq_interp = old_fk_jq + (jq_targets - old_fk_jq) * t
-            phys_jq = self._state_0.joint_q.numpy()
-            phys_jqd = self._state_0.joint_qd.numpy()
-            if self._grasp_actuation:
-                # comp3: arm-only per-world drive; gripper coords {6-13,20-27} left DYNAMIC (servo-driven;
-                # the recorded grip_cmd staircase writes control.joint_target_pos separately -- R2/chunk 2).
-                self._rex.apply_arm_only_write_perworld(
-                    phys_jq,
-                    phys_jqd,
-                    jq_interp,
+            jq_ff = None
+            for step in range(self.PHYSICS_STEPS_PER_RL):
+                jq_ff = self._route.apply_recorded_arm_ff(
+                    route_steps,
+                    step,
+                    self._state_0,
                     self._arm_ow_maps["arm_ow_q_idx"],
                     self._arm_ow_maps["arm_ow_qd_idx"],
                 )
-            else:
-                for w in range(N):
-                    jq0, jqd0 = self._arm_q_start[w], self._arm_qd_start[w]
-                    phys_jq[jq0 : jq0 + _N_ARM_JOINTS] = jq_interp[w, :_N_ARM_JOINTS]
-                    phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
-            self._state_0.joint_q.assign(phys_jq)
-            self._state_0.joint_qd.assign(phys_jqd)
-            if self._grasp_actuation:
-                # comp3 (R2): drive the gripper POSITION-servo from the recorded grip_cmd staircase for THIS
-                # physics sub-frame, AFTER the arm joint_q assign and BEFORE the solver step (so the servo
-                # target is in place). Writes control.joint_target_pos ONLY (gripper joint_q is servo-DYNAMIC).
                 self._route.apply_recorded_grip(route_steps, step)
-            self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
-        for w in range(N):
-            self._per_world_fk_jq[w] = jq_targets[w].copy()
+                self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
+            # FK-side warm-start/obs source: arm cols <- the final feedforward row; gripper cols keep
+            # their pinned-OPEN values (production fk_jq semantic; flag-ON obs[7]/[15] read physics).
+            for w in range(N):
+                row = self._per_world_fk_jq[w].copy()
+                for li in self._rex._ARM_OVERWRITE_LOCAL:
+                    row[li] = jq_ff[w][li]
+                self._per_world_fk_jq[w] = row
+        else:
+            jq_targets = self._solve_ik_batch(targets_left, targets_right, jq_starts)
+            nan_mask = np.any(np.isnan(jq_targets), axis=1)
+            if np.any(nan_mask):
+                jq_targets[nan_mask] = jq_starts[nan_mask]
+            # Preserve OPEN fingers in the IK output.
+            for w in range(N):
+                for base in (0, JOINTS_PER_ARM):
+                    jq_targets[w, base + GRIPPER_DRIVER_JOINT_IDX[0]] = jq_starts[w, base + GRIPPER_DRIVER_JOINT_IDX[0]]
+                    jq_targets[w, base + GRIPPER_DRIVER_JOINT_IDX[1]] = jq_starts[w, base + GRIPPER_DRIVER_JOINT_IDX[1]]
+
+            # DRIVE: interpolate arm joint_q start->target and OVERWRITE each world's joint_q slice per frame.
+            old_fk_jq = np.array(self._per_world_fk_jq[:N])
+            if self._grasp_actuation:
+                # comp3 (R2): per-world route step for the recorded grip staircase lookup cf[t_w]+sub_i. This is
+                # read HERE (before the per-frame loop) because episode_length_buf is not incremented until after
+                # _apply_actions_batch returns, so it holds THIS step's t_w == the value _pull_route used.
+                route_steps = [int(self.episode_length_buf[w].item()) for w in range(N)]
+            for step in range(self.PHYSICS_STEPS_PER_RL):
+                t = min((step + 1) / self.PHYSICS_STEPS_PER_RL, 1.0)
+                jq_interp = old_fk_jq + (jq_targets - old_fk_jq) * t
+                phys_jq = self._state_0.joint_q.numpy()
+                phys_jqd = self._state_0.joint_qd.numpy()
+                if self._grasp_actuation:
+                    # comp3: arm-only per-world drive; gripper coords {6-13,20-27} left DYNAMIC (servo-driven;
+                    # the recorded grip_cmd staircase writes control.joint_target_pos separately -- R2/chunk 2).
+                    self._rex.apply_arm_only_write_perworld(
+                        phys_jq,
+                        phys_jqd,
+                        jq_interp,
+                        self._arm_ow_maps["arm_ow_q_idx"],
+                        self._arm_ow_maps["arm_ow_qd_idx"],
+                    )
+                else:
+                    for w in range(N):
+                        jq0, jqd0 = self._arm_q_start[w], self._arm_qd_start[w]
+                        phys_jq[jq0 : jq0 + _N_ARM_JOINTS] = jq_interp[w, :_N_ARM_JOINTS]
+                        phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
+                self._state_0.joint_q.assign(phys_jq)
+                self._state_0.joint_qd.assign(phys_jqd)
+                if self._grasp_actuation:
+                    # comp3 (R2): drive the gripper POSITION-servo from the recorded grip_cmd staircase for THIS
+                    # physics sub-frame, AFTER the arm joint_q assign and BEFORE the solver step (so the servo
+                    # target is in place). Writes control.joint_target_pos ONLY (gripper joint_q is servo-DYNAMIC).
+                    self._route.apply_recorded_grip(route_steps, step)
+                self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
+            for w in range(N):
+                self._per_world_fk_jq[w] = jq_targets[w].copy()
 
         # IK residual per arm ([55:57]): achieved EE vs commanded target.
         wp.synchronize()

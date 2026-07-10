@@ -3124,6 +3124,15 @@ def _prepare_recording(recording):
     ee_l = np.asarray(recording["ee_pos_l"], dtype=np.float32)
     grip = np.asarray(recording["grip_cmd"], dtype=np.float32)
     phase = np.asarray(recording["phase_id"]).astype(np.int64)
+    # OPTIONAL arm_q (D rho=0 feedforward drive source; validated when present, required only by
+    # apply_recorded_arm_ff -- pure ik_chord / grip-only recordings stay valid without it).
+    arm_q = None
+    if "arm_q" in recording:
+        arm_q = np.asarray(recording["arm_q"], dtype=np.float32)
+        if arm_q.ndim != 2 or arm_q.shape[1] < _N_ARM_JOINTS:
+            raise ValueError(f"recording arm_q must be [frames, >={_N_ARM_JOINTS}], got {arm_q.shape}")
+        if arm_q.shape[0] != ee_r.shape[0]:
+            raise ValueError("recording arm_q frame count inconsistent with ee_pos")
     n_frames = ee_r.shape[0]
     if not (ee_l.shape[0] == grip.shape[0] == phase.shape[0] == n_frames):
         raise ValueError("recording arrays have inconsistent frame counts")
@@ -3145,6 +3154,7 @@ def _prepare_recording(recording):
         "phase_id": phase,
         "step_f": step_f,
         "next_f": next_f,
+        "arm_q": arm_q,
     }
 
 
@@ -3323,6 +3333,57 @@ class RouteExecutor(rc.RouteInterfaceV1):
                 for d in self._maps["r_driver_dofs"][w]:
                     assert abs(float(rb[d]) - float(grip[f, 1])) < 1e-6, f"grip .assign() did not reach dof {d}"
             self._grip_rb_checked = True
+
+    def apply_recorded_arm_ff(self, route_steps, sub_i, state, arm_ow_q_idx, arm_ow_qd_idx):
+        """D rho=0 feedforward: write the RECORDED ``arm_q`` row for physics sub-frame ``sub_i``.
+
+        SCRIPTED-VERIFICATION-STAGE drive (Rs adjudication (1) 2026-07-10; the trainer-stage D-b window
+        design is a SEPARATE gate). Replaces the step-level IK solve + 10-frame joint chord with the
+        recording's own per-frame arm path -- the armqdirect-proven mechanism (comp3_g1armqdirect,
+        c2045a9a1a) promoted to a first-class drive mode. For each world at route step ``t_w`` the
+        physics frame is ``cf[t_w] + sub_i`` -- the SAME index convention as :meth:`apply_recorded_grip`
+        (grip-consistent; the armqdirect probe used ``+1``, a <=1-frame / <=1.14mm delta bounded by the
+        per-frame move budget). Only the ARM coords {0-5, 14-19} are written (via
+        :func:`apply_arm_only_write_perworld`, the sec13.1 arm-only writer); the gripper coords stay
+        servo-DYNAMIC. Single read -> mutate -> ``.assign()`` cycle on BOTH ``joint_q`` and ``joint_qd``
+        (arm qd zeroed by the writer, matching the ik_chord drive). ``state`` is passed PER CALL because
+        the env swaps ``_state_0``/``_state_1`` every physics substep -- a constructor-held reference
+        would go stale (why this signature carries more than ``apply_recorded_grip``'s).
+
+        Args:
+            route_steps: Per-world RL route step ``t_w``, sequence of int length ``n_world``.
+            sub_i: The physics sub-frame index within the RL step, int in ``[0, _REC_CADENCE)``.
+            state: The CURRENT physics state (``joint_q``/``joint_qd`` read + assigned).
+            arm_ow_q_idx: Destination q indices for arm coords across all worlds (env-owned maps).
+            arm_ow_qd_idx: Destination qd indices for arm coords across all worlds (env-owned maps).
+
+        Returns:
+            The ``[n_world, _N_ARM_JOINTS]`` feedforward rows written (arm cols consumed; the env uses
+            the final row to refresh its FK-side ``_per_world_fk_jq``).
+        """
+        rec = self._recording
+        if rec is None:
+            raise NotImplementedError("apply_recorded_arm_ff needs recording= (pure-index construction has none)")
+        assert rec.get("arm_q") is not None, (
+            "feedforward drive needs a recording with arm_q (this recording carries none -- "
+            "re-record or use route_drive_mode='ik_chord')"
+        )
+        assert 0 <= int(sub_i) < _REC_CADENCE, f"sub_i={sub_i} out of [0, {_REC_CADENCE}) (P-F3 bounds)"
+        step_f = rec["step_f"]
+        arm_q = rec["arm_q"]  # [frames, >=28] float32
+        n_steps = len(step_f)
+        n_frames = arm_q.shape[0]
+        jq_ff = np.zeros((len(route_steps), _N_ARM_JOINTS), dtype=np.float64)
+        for w, t in enumerate(route_steps):
+            tt = min(max(int(t), 0), n_steps - 1)  # pad-to-horizon: hold the last waypoint (mirror step_target)
+            f = min(int(step_f[tt]) + int(sub_i), n_frames - 1)
+            jq_ff[w] = arm_q[f, :_N_ARM_JOINTS]
+        phys_jq = state.joint_q.numpy()  # host copy (CC3-CH5)
+        phys_jqd = state.joint_qd.numpy()
+        apply_arm_only_write_perworld(phys_jq, phys_jqd, jq_ff, arm_ow_q_idx, arm_ow_qd_idx)
+        state.joint_q.assign(phys_jq)
+        state.joint_qd.assign(phys_jqd)
+        return jq_ff
 
     def reseed_grip_open(self, env_ids):
         """comp3 (R1): reset-time re-seed the gripper POSITION-servo target to OPEN both arms for ``env_ids``.
