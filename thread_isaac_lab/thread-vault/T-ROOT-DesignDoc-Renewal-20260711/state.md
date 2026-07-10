@@ -21,6 +21,7 @@ created: 2026-07-11T00:37:00+09:00
 last_updated: 2026-07-11T00:37:00+09:00
 spec_version: LTM-1 v1.1
 session_history:
+  - "2026-07-11 01:17 Rs ⭐⭐**RENEWAL_PLAN v0.2 = DESIGN 承認 + batch 0 build 授権 (verbatim「7項目確定」+「4　承認」、%12 bank)** — 解釈 (inference、%12 が Rs へ明示済・訂正可): 「7項目確定」= §9 の 7 決定項目を CC1 総合推奨どおり確定 = **1: batch C = C-defer (工程表 v2 fold と単一 pass) / 2: B-minimal / 3: Mech-Specs 軽量 / 4a: tracked 化 6 file 承認 / 4b: VGroove ' M' = A (revert + anomaly 記録 + banner pointer; Rs は origin 心当かりに言及なし → origin-unknown のまま A) / 5: :42 MIXED 批准 = 行使なし (未批准のまま) / 6: GD-KoShape = charter 外のまま / 7: LEDGER EXCLUDE 確認**。「4　承認」= **step-0 (batch 0) の build 授権** (2 段授権 第 2 段の初回)。DESIGN 承認 anchor = packet sha256 55554b683c85... (LOW fix 後世代、%12 01:04 on-disk 照合)。batch A の build 授権 = 別途 1 行 (batch 0 完了報告時に Rs へ)。執行 = p5 (batch 0: §2-1 full-sha 再検証 契約 + §2-2 A 案 revert + broadcast 先行)。"
   - "2026-07-11 00:37 p6 (PLAN-KEEPER, w2:p6): node 登録 (%12 NEST 案 00:36、bank 1fb2ce4aae の裁定 verbatim と照合済 = 一致)。assignee = p5 (VT-DESIGN、設計基盤 surface)。charter = %12 00:35 dispatch 済 (step 0 = 残 6 file tracked 化提案 → RENEWAL_PLAN packet → 5体 → %12 verify → Rs 承認 → per-doc 執行)。現況 = p5 見積り中。L3 (07-Design path match)。除外推奨 = LEDGER (生きた SSOT)。"
 ---
 
