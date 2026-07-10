@@ -129,7 +129,7 @@ Author: VT-DESIGN(w2:p5)。Drafted: 2026-07-10 23:32 JST。Node: T-ROOT-Verbal-T
 |---|---|---|
 | P-1 | **表 conformance check の機械化**: 実行 log の `_ph` 系列 + gripper 状態列を §3.1 mapping の期待列と照合(新 leg / 順序逸脱 / 状態逸脱 → loud FAIL) | 既存 `route_leg_diff.py`(LEDGER:44)の一般化 — 新規発明でなく実績 tool の拡張 |
 | P-2 | **駆動一本化 = DESIGN_V1 St1a**(launch-wrapper が表 nominal → env params を export、runner は env 読み) | **既承認 staged plan**(DESIGN_V1:108、evidence-gated)— 新提案ではなく適用点の明記 |
-| P-3 | **版管理連動**: 各表 version に byte-id anchor(基準 npz sha)を再宣言する列を持たせ、version⇄sha を 1:1 束縛 | §5 規約 + RUN1_REFERENCE_V2 供給系 |
+| P-3 | **版管理連動**: 各表 version に byte-id anchor(基準 npz sha)を再宣言し、version⇄sha を 1:1 束縛。**束縛の記録先は doc 外(commit message / LEDGER 行 / 外部台帳)に置く — 自 doc への自己 sha 埋込は構造的に不可能**(埋込前 hash が入る; 実証 2026-07-11、`764431035c` で規約化。他 file の sha 埋込は可 = RUN1_REFERENCE_V2 型) | §5 規約 + RUN1_REFERENCE_V2 供給系 + %12 fold 指示 00:20 |
 
 ## §5 版管理規約(Rs charter、前 charter 継承)
 
@@ -190,5 +190,6 @@ Author: VT-DESIGN(w2:p5)。Drafted: 2026-07-10 23:32 JST。Node: T-ROOT-Verbal-T
 
 - v1.0-DRAFT(2026-07-10 23:32 JST): §0-§2, §5-§6 起草。§3/§4 = runner 抽出待ち。
 - v1.0(2026-07-10 23:4x JST): §3 mapping(17 行 + M-1〜M-7)+ §4 ぶれ防止(4 装置 + gap 3 + 提案 P-1〜P-3)fold。§5.6 設計基盤 governance(Rs role 昇格 23:5x)+ §6 VN-4 + §6.2 intake 台帳追加。§2 D-1/D-2 に task_config 証拠追記。READY FOR %10 AUTHOR-REVIEW。commit `bd1d9979f6`(review 世代 pin、sha256 245fe334…)。
+- P-3 規約化 fold(2026-07-11 00:2x JST): %12 執行 verify PASS(00:20)+ directive fold — P-3 に「version⇄sha 束縛は doc 外(commit message / LEDGER 行)に置く」を規約として明文化(self-referential sha 教訓)。FYI 受領: RL-Routing-Design.md = git untracked 判明、tracked 化は %12 が Rs 提起中(§5 版管理規約に関係 — 着地待ち)。
 - v1.0a Rs-APPROVED 反映(2026-07-11 00:17 JST): **Rs 承認(00:15「1 承認」、%12 bank `2b818b6f2f`)→ status 確定化 + 設計基盤 surface 発効。** D-1 = 未裁定のまま §2 現状維持(Rs 指示②)/ P-1・P-3 charter = 未決・組込保留(同③)/ VN-0 probe = **Rs GO 着地、COORD 実行中**(結果は §6 解釈 grid 経由で v2 fold 入力)。%12 verify = PASS 6 leg(23:55、非重複独立検証)。
 - v1.0a(2026-07-10 23:5x JST): **%10 author-review = CONCUR w/1 MED + 2 LOW(23:48、sha EXACT 照合)fold。** MED: §3.1 の `_ph` label 系列を実系列に一致化 — GUIDE_C2(:4450 setup)行を独立化 + guide traverse は GUIDE_PRELIFT 配下(:4489〜:4675 間に別 label なしを grep 再検証)+ pre-regrasp L に「label なし(GUIDE_PRELIFT 配下)」注記(P-1 conformance 期待列の false-FAIL/PASS 防止)。LOW: seed cite :3600→**:3599** / C2_TILT_SIGN :4683→**:4681**(両方 grep 再検証済、§運用28)。C2-pin なし = %10 反証確認 CONFIRMED を M-4 行に反映(命名 trap 注記 + LEDGER row43 整合)。%12 verify READY。
