@@ -8841,5 +8841,23 @@
    }
   }
  ],
- "grid_interpretation_prereg": "any cell BOTH-arm hold -> depth-only rescue seed (z_grasp fix alone; F-B fork could simplify to z-only) / all fail -> depth axis alone insufficient (support/ mechanism-side redesign material). PER CELL, no cross-cell generalization (rule 30)."
+ "grid_interpretation_prereg": "any cell BOTH-arm hold -> depth-only rescue seed (z_grasp fix alone; F-B fork could simplify to z-only) / all fail -> depth axis alone insufficient (support/ mechanism-side redesign material). PER CELL, no cross-cell generalization (rule 30).",
+ "video_confirmed_final_verdict": {
+  "three_way_check": "numeric + video (dz3/dz4 judged cells) + baseline == CONSISTENT, no contradictions",
+  "dz3_video": "R = clean THROAT capture, holds firmly to f172, no pay-through (== numeric R +76.5mm); L = shallow BASE seat (not throat, consistent with +3mm shallow), left length pays out to the table, drape-over-base not a clamp (== numeric L -7.0mm, improved vs dz0 but still fail). Physically valid.",
+  "dz4_video": "R = throat cage, taut lift, holds (== numeric R +28mm); L = base cage, stays LOW, pays through, never carried (== numeric L -6.4mm). Physically valid, no drop event / explosion / teleport.",
+  "per_cell_grid_verdict_rule30": {
+   "dz0": "NUMERIC_NOGO -- L pay-through -39.7mm; == retry baseline (fidelity gate PASS)",
+   "dz3": "NUMERIC_NOGO -- L base-seat pays out -7.0mm (improved), R throat-holds +76.5mm",
+   "dz4": "NUMERIC_NOGO -- L base -6.4mm (best L), R holds +28mm, early done t=128",
+   "dz5": "NUMERIC_NOGO -- too shallow, no capture (L/R rise 0, bend collapses to ~3deg)"
+  },
+  "grid_conclusion": "ALL 4 cells NOGO; NO cell achieves both-arm hold. Depth IMPROVES the L seat (pay-through -39.7 -> -6.4mm as park shallows to dz4) but never achieves a throat cage / hold on L; dz5 overshoots into capture-failure. => the pre-registered 'depth axis ALONE insufficient' branch (support/mechanism-side redesign material). PER CELL, no cross-cell generalization (rule 30).",
+  "ancillary_confirmed": {
+   "rs3_claw_z_symmetry": "per-arm claw z SYMMETRIC <=0.05mm on the flat scene (dz0 L=R=0.80583 exact) -> Rs #3's L/R height asymmetry was a SLOT-scene contact artifact, absent on flat; reconfirms leg-Z2 (B) drive-asymmetry exclusion",
+   "bend_leg_rider1": "flat bend 37-60deg (dz0-4) vs supported slot 1.4-11deg -> central support removes the pre-clamp bend, depth does not (dz5 collapse = capture failure not bend fix)"
+  },
+  "synthesis_across_probes": "the comp3 L-hold solution is FEEDFORWARD drive (D rho=0, accepted f8b1ff6b4c). Every single-axis intervention has now been tested and found INSUFFICIENT ALONE for L: substep-10 (sub10, R-only) / IK-config alignment (E-probe, R-only) / central support (slot, confounded) / grasp DEPTH (this z-sweep, improves-not-solves). Only the exact recorded arm path (feedforward) rescues L. This z-sweep is the depth-axis negative that closes that matrix.",
+  "final_verdict_authority": "Rs human-GT on the videos (numeric never a standalone PASS); dz3 L-claw crop delivered for the human read."
+ }
 }
