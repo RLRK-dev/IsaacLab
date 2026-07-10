@@ -254,8 +254,113 @@ def main():
         )
     )
     OUT_MD.write_text("\n".join(md))
-    print("\n".join(md))
-    print(f"-> {OUT_JSON}\n-> {OUT_MD}")
+
+    # ---- Rs #6 FORMAT CORRECTION (%12 02:12): STEP-keyed r3 fragment for the p5 §1.2 unified table.
+    # canonical 43-step map (data/waypoints/full_43step.json, phase A initial pick = the comp3 grasp arc):
+    #   STEP 2 Above cable / STEP 3 Descend to cable (park z) / STEP 4 Clamp cable (grasp) / STEP 5 Lift cable.
+    def _row(cells_rows, keyfn):
+        return "; ".join(keyfn(r) for r in cells_rows)
+
+    park = rows_park
+    step_md = [
+        "# comp3 grasp point-data -- STEP-keyed r3 (Rs #6 fmt; for p5 §1.2 unified-table integration)",
+        "",
+        f"> {ledger['mapping_note']}",
+        "> Canonical 43-step map (full_43step.json, phase-A initial pick): STEP2 Above / STEP3 Descend(park z) /"
+        " STEP4 Clamp(grasp) / STEP5 Lift. Machine-extracted; per-row provenance. r3 = this integration round.",
+        "",
+        "## STEP 3 -- Descend to cable (per-arm PARK z, commanded) [m]",
+        "| condition | R_pinch_z (手前) | L_pinch_z (奥) | R_EE_z | L_EE_z | provenance |",
+        "|---|---|---|---|---|---|",
+    ]
+    for r in park:
+        step_md.append(
+            f"| {r['condition']} | {r['R_park_pinch_z']} | {r['L_park_pinch_z']} | {r['R_park_EE_z']} |"
+            f" {r['L_park_EE_z']} | {r['provenance']} |"
+        )
+    step_md += [
+        "",
+        "## STEP 4 -- Clamp cable (grasp; close-window measurements)",
+        "Primary: per-arm claw z @close = SYMMETRIC <=0.05mm (claws descend equally; the L/R height diff Rs"
+        " saw on the slot videos was a slot-contact artifact, absent on flat).",
+        "",
+        "| footnote | cell | scene | L | R | provenance |",
+        "|---|---|---|---|---|---|",
+    ]
+    for r in rows_claw:
+        step_md.append(
+            f"| claw_z@close [m] | {r['cell']} | {r['scene']} | {r['claw_z_L']} | {r['claw_z_R']} | {r['provenance']} |"
+        )
+    for r in rows_lane:
+        step_md.append(
+            f"| lane_cable_z L-R [mm] | {r['cell']} | {r['scene']} | {r['cable_z_lane_L']} | {r['cable_z_lane_R']}"
+            f" (L-R={r['lane_LmR_mm']}) | {r['provenance']} |"
+        )
+    for r in rows_bend:
+        step_md.append(
+            f"| bend_peak [deg] | {r['cell']} | {r['scene']} | {r['bend_peak_L_deg']} | {r['bend_peak_R_deg']} |"
+            f" {r['provenance']} |"
+        )
+    step_md += [
+        "",
+        "## STEP 5 -- Lift cable (retention; z_drop is the clamp-quality proxy, rise is hook-capable)",
+        "| footnote | cell | scene | L | R | provenance |",
+        "|---|---|---|---|---|---|",
+    ]
+    for r in rows_zdrop:
+        step_md.append(
+            f"| z_drop_end [mm] | {r['cell']} | {r['scene']} | {r['L_z_drop_mm']} | {r['R_z_drop_mm']} | {r['provenance']} |"
+        )
+    for r in rows_rise:
+        step_md.append(
+            f"| rise [mm] | {r['cell']} | {r['scene']} | {r['rise_L_mm']} | {r['rise_R_mm']} | {r['provenance']} |"
+        )
+    # route-step (STEP 6-17) context: the comp3 G1 arc executed STEP 2-5 ONLY (runner stops before the
+    # route, phase>=2). STEP 6-17 z is NOT comp3-measured; supply the RECORDING-nominal EE z per G-phase
+    # (golden w0e_81rerun_snapdown, mujoco-コ 0.716 official) so p5 can map to the route steps.
+    import newton_route_env as _nre_unused  # noqa: F401  (path already set by extractor)
+    import route_executor as rex
+
+    gz = np.load(_EVAL / "w0e_81rerun_snapdown_0537" / "cell_x0_y0" / "route_demo_raw.npz")
+    phid = np.asarray(gz["phase_id"])
+    eer, eel = np.asarray(gz["ee_pos_r"], float), np.asarray(gz["ee_pos_l"], float)
+    p2g = rex._RECORDED_PHASE_TO_G
+    step_md += [
+        "",
+        "## STEP 6-17 (route) -- NOT comp3-measured (G1 arc = STEP 2-5 only). RECORDING-nominal EE z per"
+        " G-phase, golden w0e_81rerun_snapdown (mujoco-コ, 0.716 official). p5 maps G-phase -> route steps.",
+        "| G-phase | R_EE_z [min,max] | L_EE_z [min,max] | provenance |",
+        "|---|---|---|---|",
+    ]
+    for g in range(6):
+        fr = np.array([i for i in range(len(phid)) if p2g.get(int(phid[i]), -1) == g])
+        if len(fr) == 0:
+            continue
+        zr, zl = eer[fr, 2], eel[fr, 2]
+        step_md.append(
+            f"| G{g} | [{zr.min():.4f},{zr.max():.4f}] | [{zl.min():.4f},{zl.max():.4f}] |"
+            " golden w0e_81rerun_snapdown (recording-nominal, NOT comp3-run) |"
+        )
+    step_md += [
+        "",
+        "## STEP 3 park depth CORRECTION status (Rs #5 手前R +3~4mm)",
+        "- R-only +3~4mm is NOT a confirmed value -- '検証中' resolved to: the per-arm confirmation cell"
+        " (R+3/L+0, 73c246f812) found the arms are CABLE-COUPLED (R z_drop 15.9mm vs uniform-dz3 R 0.0mm;"
+        " video: R hold MARGINAL, sharp bend, not a clean clamp). So R-only depth does NOT recover R's"
+        " uniform-depth quality -- do NOT record R+3~4mm as a confirmed park correction. HELD.",
+        "",
+        "## Load-bearing reads for p5 §1.2",
+        "- ik_chord holds the NEAR(R/手前) arm (z_drop 0 at uniform dz3) but NEVER the FAR(L/奥) arm at any"
+        " depth; only FEEDFORWARD (D rho=0, f8b1ff6b4c) holds L. STEP4/5 are the failing legs on ik_chord.",
+        "- per-arm depth is CABLE-COUPLED (R+3/L+0 -> R z_drop 15.9mm vs uniform-dz3 R 0.0mm): R-only depth"
+        " does NOT recover R's uniform-depth quality. VN-2 R-only-+3..4mm is NOT a clean independent lever.",
+        "- seesaw substrate real (lane cable z L-R flips sign with dz) but the outcome winner (R) does not flip.",
+    ]
+    out_step = _EVAL / "comp3_point_data_STEPkeyed_r3.md"
+    out_step.write_text("\n".join(step_md))
+
+    print("\n".join(step_md))
+    print(f"-> {OUT_JSON}\n-> {OUT_MD}\n-> {out_step}")
     return 0
 
 
