@@ -479,6 +479,36 @@ def test_readback_arming():
     print("  [readback-arming] PASS: no arm at all-OPEN; arms at first CLOSE; sub_i bounds fail loud")
 
 
+def test_lane_floor():
+    """Lane-aware EE-Z floor (G1 root-cause fix, Rs adjudication B): in/out-lane + edge values + the
+    recorded grasp-park target must NOT bind the lane floor (and DID bind the old clip-base floor)."""
+    import newton_route_env as nre
+
+    f_lane, f_old = float(nre.EE_Z_FLOOR_KO_LANE), float(nre.EE_Z_FLOOR_KO)
+    assert abs(f_lane - 1.06492) < 1e-5, f_lane
+    assert abs(f_old - 1.06992) < 1e-5, f_old
+    assert abs((f_old - f_lane) - 0.005) < 1e-9, "step must equal CLIP_BASE_HEIGHT"
+    # lane bounds pinned to the banked void footprint (probe leg C pins the REAL built model to the same).
+    assert abs(nre._LANE_Y_LO - 0.090) < 1e-9 and abs(nre._LANE_Y_HI - 0.210) < 1e-9
+    assert abs(nre._LANE_X_LO - 0.234) < 1e-9 and abs(nre._LANE_X_HI - 0.366) < 1e-9
+    # in-lane (park XY), out-lane, and inclusive edges.
+    assert nre.ee_z_floor_ko(0.300, 0.106) == f_lane and nre.ee_z_floor_ko(0.300, 0.194) == f_lane
+    assert nre.ee_z_floor_ko(0.300, 0.250) == f_old and nre.ee_z_floor_ko(0.100, 0.106) == f_old
+    assert nre.ee_z_floor_ko(0.234, 0.090) == f_lane and nre.ee_z_floor_ko(0.366, 0.210) == f_lane
+    assert nre.ee_z_floor_ko(0.2339, 0.106) == f_old and nre.ee_z_floor_ko(0.300, 0.2101) == f_old
+    # recorded grasp-park (REAL golden npz): in-lane, above the lane floor, below the OLD floor (the bind
+    # this fix removes -- documents the defect so a floor regression fails loud here).
+    if not _GOLDEN_NPZ.exists():
+        raise AssertionError(f"golden npz missing: {_GOLDEN_NPZ}")
+    z = np.load(_GOLDEN_NPZ)
+    for key in ("ee_pos_l", "ee_pos_r"):
+        park = np.asarray(z[key], dtype=np.float64)[1000]  # mid close-window park frame
+        assert nre.ee_z_floor_ko(float(park[0]), float(park[1])) == f_lane, f"{key} park not in-lane: {park}"
+        assert park[2] > f_lane + 1e-4, f"{key} park z {park[2]:.5f} binds the LANE floor"
+        assert park[2] < f_old, f"{key} park z {park[2]:.5f} no longer documents the old-floor bind"
+    print("  [lane-floor] PASS: values+edges pinned; recorded park in-lane, clears lane floor, documents old bind")
+
+
 if __name__ == "__main__":
     print("[L1 write-pattern unit] comp3 write-site flag-gate (no-GPU, CPU)")
     test_broadcast()
@@ -495,7 +525,9 @@ if __name__ == "__main__":
     print("[L4 fold unit] comp3 layer-2/5 folds (golden columns G-F6 + readback arming P-F2/P-F3)")
     test_golden_transit_columns()
     test_readback_arming()
+    print("[L4 lane-floor unit] G1 root-cause fix (lane-aware EE-Z floor, Rs adjudication B)")
+    test_lane_floor()
     print(
         "ALL PASS (L1 broadcast+perworld+guard; L4 grip-transit+reset-reseed+settled-patch+forbid-fork"
-        "+finger-obs+servo-readback+golden-transit+readback-arming)"
+        "+finger-obs+servo-readback+golden-transit+readback-arming+lane-floor)"
     )

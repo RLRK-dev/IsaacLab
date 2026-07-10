@@ -161,6 +161,24 @@ KO_BASE_HAND_DOWN_QUAT = np.array([-0.7071067811865476, 0.0, 0.0, 0.707106781186
 
 # EE-Z action-clamp FLOOR (koshape): fingertip reaches the cable centerline at the floor.
 EE_Z_FLOOR_KO = TABLE_HEIGHT + CLIP_BASE_HEIGHT + CABLE_RADIUS + EE_TO_PINCH_OPEN  # ~= 1.06992
+# Lane-aware floor (G1 root-cause fix, Rs adjudication B 2026-07-10): inside the S6_GRASP void footprint
+# the cable rests at TABLE level (no clip base below), so the pinch must reach the TABLE-level cable
+# centerline -- the clip-base term drops. The recorded grasp-park ee z (1.06680, both arms) sits 3.12mm
+# below the clip-base floor and was clipped across the whole close window (every grid cell), pushing the
+# close 3mm high -> cable under the throat (comp3_g1_armq_diag root_cause_floor_clip). Lane bounds mirror
+# the void builder literals (newton_skill_env_base.py:1746,1750; runtime void parity = probe leg C).
+EE_Z_FLOOR_KO_LANE = TABLE_HEIGHT + CABLE_RADIUS + EE_TO_PINCH_OPEN  # ~= 1.06492 (pinch @ cable center)
+_LANE_Y_LO, _LANE_Y_HI = WIDE_LEFT_Y - 0.016, WIDE_RIGHT_Y + 0.016  # [0.090, 0.210] void Y slot
+_LANE_X_LO, _LANE_X_HI = 0.3 - 0.066, 0.3 + 0.066  # [0.234, 0.366] void X window (base table_cx=0.3)
+
+
+def ee_z_floor_ko(x: float, y: float) -> float:
+    """Lane-aware EE-Z floor [m]: void-footprint lane -> table-level cable centerline; else clip-base."""
+    if _LANE_X_LO <= x <= _LANE_X_HI and _LANE_Y_LO <= y <= _LANE_Y_HI:
+        return EE_Z_FLOOR_KO_LANE
+    return EE_Z_FLOOR_KO
+
+
 _AC_IK_ITERATIONS_P0 = 400  # P0 dual-arm solve needs the generous local count (88mm span convergence).
 
 # C1 / C2 clip context (C1C2 whole-route scope).
@@ -984,9 +1002,9 @@ class NewtonRouteEnv(VecEnv):
             # NON-accumulating: commanded = absolute base + projected residual (no += integration).
             target_r = base_r + proj_r
             target_l = base_l + proj_l
-            # Substrate Z safety floor/ceiling ONLY (koshape floor; not an accumulation anchor).
-            target_r[2] = np.clip(target_r[2], EE_Z_FLOOR_KO, EE_Z_SAFETY_UPPER)
-            target_l[2] = np.clip(target_l[2], EE_Z_FLOOR_KO, EE_Z_SAFETY_UPPER)
+            # Substrate Z safety floor/ceiling ONLY (koshape lane-aware floor; not an accumulation anchor).
+            target_r[2] = np.clip(target_r[2], ee_z_floor_ko(target_r[0], target_r[1]), EE_Z_SAFETY_UPPER)
+            target_l[2] = np.clip(target_l[2], ee_z_floor_ko(target_l[0], target_l[1]), EE_Z_SAFETY_UPPER)
             targets_right[w] = target_r
             targets_left[w] = target_l
             self._ee_target_right[w] = target_r.copy()
