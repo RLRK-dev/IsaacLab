@@ -1,0 +1,394 @@
+{
+ "claw_geoms_as_built": {
+  "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad1_25#g14": {
+   "size_half": [
+    0.010999999940395355,
+    0.004000000189989805,
+    0.00937500037252903
+   ],
+   "world_pos": [
+    0.2533,
+    0.10626,
+    0.90999
+   ],
+   "world_half_extent_xyz": [
+    0.00401,
+    0.011,
+    0.00938
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad1_44#g22": {
+   "size_half": [
+    0.010999999940395355,
+    0.004000000189989805,
+    0.00937500037252903
+   ],
+   "world_pos": [
+    0.25358,
+    0.19378,
+    0.91001
+   ],
+   "world_half_extent_xyz": [
+    0.00401,
+    0.011,
+    0.00938
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad2_26#g15": {
+   "size_half": [
+    0.010999999940395355,
+    0.004000000189989805,
+    0.00937500037252903
+   ],
+   "world_pos": [
+    0.25332,
+    0.10627,
+    0.92874
+   ],
+   "world_half_extent_xyz": [
+    0.00401,
+    0.011,
+    0.00938
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad2_45#g23": {
+   "size_half": [
+    0.010999999940395355,
+    0.004000000189989805,
+    0.00937500037252903
+   ],
+   "world_pos": [
+    0.25357,
+    0.19378,
+    0.92876
+   ],
+   "world_half_extent_xyz": [
+    0.00401,
+    0.011,
+    0.00938
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad_f1ext_27#g16": {
+   "size_half": [
+    0.010999999940395355,
+    0.008999999612569809,
+    0.0012000000569969416
+   ],
+   "world_pos": [
+    0.2533,
+    0.10626,
+    0.89991
+   ],
+   "world_half_extent_xyz": [
+    0.009,
+    0.011,
+    0.00121
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad_f1ext_46#g24": {
+   "size_half": [
+    0.010999999940395355,
+    0.008999999612569809,
+    0.0012000000569969416
+   ],
+   "world_pos": [
+    0.25358,
+    0.19378,
+    0.89993
+   ],
+   "world_half_extent_xyz": [
+    0.00901,
+    0.011,
+    0.0012
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad_f2ext_28#g17": {
+   "size_half": [
+    0.010999999940395355,
+    0.008999999612569809,
+    0.0012000000569969416
+   ],
+   "world_pos": [
+    0.25331,
+    0.10626,
+    0.91231
+   ],
+   "world_half_extent_xyz": [
+    0.009,
+    0.011,
+    0.00121
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad_f2ext_47#g25": {
+   "size_half": [
+    0.010999999940395355,
+    0.008999999612569809,
+    0.0012000000569969416
+   ],
+   "world_pos": [
+    0.25358,
+    0.19378,
+    0.91233
+   ],
+   "world_half_extent_xyz": [
+    0.00901,
+    0.011,
+    0.0012
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad1_21#g10": {
+   "size_half": [
+    0.010999999940395355,
+    0.004000000189989805,
+    0.00937500037252903
+   ],
+   "world_pos": [
+    0.34651,
+    0.10624,
+    0.90999
+   ],
+   "world_half_extent_xyz": [
+    0.00401,
+    0.011,
+    0.00938
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad1_40#g18": {
+   "size_half": [
+    0.010999999940395355,
+    0.004000000189989805,
+    0.00937500037252903
+   ],
+   "world_pos": [
+    0.34679,
+    0.19382,
+    0.90997
+   ],
+   "world_half_extent_xyz": [
+    0.00401,
+    0.011,
+    0.00938
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad2_22#g11": {
+   "size_half": [
+    0.010999999940395355,
+    0.004000000189989805,
+    0.00937500037252903
+   ],
+   "world_pos": [
+    0.34652,
+    0.10624,
+    0.92874
+   ],
+   "world_half_extent_xyz": [
+    0.00401,
+    0.011,
+    0.00938
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad2_41#g19": {
+   "size_half": [
+    0.010999999940395355,
+    0.004000000189989805,
+    0.00937500037252903
+   ],
+   "world_pos": [
+    0.34677,
+    0.19382,
+    0.92872
+   ],
+   "world_half_extent_xyz": [
+    0.00401,
+    0.011,
+    0.00938
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad_f1ext_23#g12": {
+   "size_half": [
+    0.010999999940395355,
+    0.008999999612569809,
+    0.0012000000569969416
+   ],
+   "world_pos": [
+    0.34651,
+    0.10624,
+    0.89992
+   ],
+   "world_half_extent_xyz": [
+    0.009,
+    0.011,
+    0.00121
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad_f1ext_42#g20": {
+   "size_half": [
+    0.010999999940395355,
+    0.008999999612569809,
+    0.0012000000569969416
+   ],
+   "world_pos": [
+    0.34679,
+    0.19382,
+    0.89989
+   ],
+   "world_half_extent_xyz": [
+    0.00901,
+    0.011,
+    0.00121
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad_f2ext_24#g13": {
+   "size_half": [
+    0.010999999940395355,
+    0.008999999612569809,
+    0.0012000000569969416
+   ],
+   "world_pos": [
+    0.34651,
+    0.10624,
+    0.91232
+   ],
+   "world_half_extent_xyz": [
+    0.009,
+    0.011,
+    0.00121
+   ]
+  },
+  "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad_f2ext_43#g21": {
+   "size_half": [
+    0.010999999940395355,
+    0.008999999612569809,
+    0.0012000000569969416
+   ],
+   "world_pos": [
+    0.34679,
+    0.19382,
+    0.91229
+   ],
+   "world_half_extent_xyz": [
+    0.00901,
+    0.011,
+    0.00121
+   ]
+  }
+ },
+ "y_footprint_mm": {
+  "L": {
+   "y_extent": [
+    0.09523,
+    0.11727
+   ],
+   "width_mm": 22.04,
+   "x_extent": [
+    0.24429,
+    0.35551
+   ]
+  },
+  "R": {
+   "y_extent": [
+    0.18278,
+    0.20483
+   ],
+   "width_mm": 22.05,
+   "x_extent": [
+    0.24457,
+    0.3558
+   ]
+  }
+ },
+ "throat_z_structure": {
+  "L": {
+   "offsets_from_ee": {
+    "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad1_25": {
+     "z_top_off_ee": -0.24155,
+     "z_bot_off_ee": -0.26031
+    },
+    "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad2_26": {
+     "z_top_off_ee": -0.2228,
+     "z_bot_off_ee": -0.24156
+    },
+    "f1ext": {
+     "z_top_off_ee": -0.2598,
+     "z_bot_off_ee": -0.26221
+    },
+    "f2ext": {
+     "z_top_off_ee": -0.2474,
+     "z_bot_off_ee": -0.24981
+    },
+    "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad1_21": {
+     "z_top_off_ee": -0.24155,
+     "z_bot_off_ee": -0.26031
+    },
+    "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad2_22": {
+     "z_top_off_ee": -0.2228,
+     "z_bot_off_ee": -0.24156
+    }
+   },
+   "ko_gap_mm": 9.99
+  },
+  "R": {
+   "offsets_from_ee": {
+    "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad1_44": {
+     "z_top_off_ee": -0.24153,
+     "z_bot_off_ee": -0.26029
+    },
+    "robotiq_2f85/worldbody/base_mount/base/left_spring_link/left_follower/left_pad/left_pad2_45": {
+     "z_top_off_ee": -0.22278,
+     "z_bot_off_ee": -0.24154
+    },
+    "f1ext": {
+     "z_top_off_ee": -0.25982,
+     "z_bot_off_ee": -0.26223
+    },
+    "f2ext": {
+     "z_top_off_ee": -0.24742,
+     "z_bot_off_ee": -0.24983
+    },
+    "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad1_40": {
+     "z_top_off_ee": -0.24157,
+     "z_bot_off_ee": -0.26033
+    },
+    "robotiq_2f85/worldbody/base_mount/base/right_spring_link/right_follower/right_pad/right_pad2_41": {
+     "z_top_off_ee": -0.22282,
+     "z_bot_off_ee": -0.24158
+    }
+   },
+   "ko_gap_mm": 9.99
+  }
+ },
+ "z_grasp_variants": [
+  {
+   "dz_mm": 0,
+   "park_ee_z": 1.0668,
+   "f1ext_plate_top_z": 0.807,
+   "f2ext_plate_bot_z": 0.81699,
+   "cable_above_f1ext_mm": -3.0,
+   "cable_below_f2ext_mm": 12.99
+  },
+  {
+   "dz_mm": 3,
+   "park_ee_z": 1.0698,
+   "f1ext_plate_top_z": 0.81,
+   "f2ext_plate_bot_z": 0.81999,
+   "cable_above_f1ext_mm": -6.0,
+   "cable_below_f2ext_mm": 15.99
+  },
+  {
+   "dz_mm": 4,
+   "park_ee_z": 1.0708,
+   "f1ext_plate_top_z": 0.811,
+   "f2ext_plate_bot_z": 0.82099,
+   "cable_above_f1ext_mm": -7.0,
+   "cable_below_f2ext_mm": 16.99
+  },
+  {
+   "dz_mm": 5,
+   "park_ee_z": 1.0718,
+   "f1ext_plate_top_z": 0.812,
+   "f2ext_plate_bot_z": 0.82199,
+   "cable_above_f1ext_mm": -8.0,
+   "cable_below_f2ext_mm": 17.99
+  }
+ ]
+}
