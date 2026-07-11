@@ -1,6 +1,6 @@
 # Canonical 動作工程表 v1 — 43-step 基準 restate + 現行 route mapping
 
-**Status: v1.0a-r5 — ✅ Rs-APPROVED(2026-07-11 00:15 verbatim「1 承認」、%12 bank `2b818b6f2f`; 承認世代 sha256 = `eb126d42…` @`764431035c`)+ 追補 r1(D-1 裁定執行)+ r2(§6 VN-1 reframe intake)+ 追補 r3(§1.2a 現行実測値統合、Rs 指示 #6、canonical json 値・工程 不変)+ 追補 r4(§6.2 clip-state predicate annotation intake、Rs teaching 2026-07-12、intake-logged only・enactment Rs-gated・canonical 値/工程 不変)+ 追補 r5(§1.4 anchor annotation layer draft、Rs 委任 anchor-alignment・p4⇄p5 joint decision、annotation-only・canonical INVARIANT、**p4 verify 待ち**)— 設計基盤 surface 発効。**
+**Status: v1.0a-r5 — ✅ Rs-APPROVED(2026-07-11 00:15 verbatim「1 承認」、%12 bank `2b818b6f2f`; 承認世代 sha256 = `eb126d42…` @`764431035c`)+ 追補 r1(D-1 裁定執行)+ r2(§6 VN-1 reframe intake)+ 追補 r3(§1.2a 現行実測値統合、Rs 指示 #6、canonical json 値・工程 不変)+ 追補 r4(§6.2 clip-state predicate annotation intake、Rs teaching 2026-07-12、intake-logged only・enactment Rs-gated・canonical 値/工程 不変)+ 追補 r5(§1.4 anchor annotation layer、Rs 委任 anchor-alignment・p4⇄p5 joint decision、annotation-only・canonical INVARIANT、**✅ p4 verify PASS + #4 discharge-with-adjacent fold → 発効**)— 設計基盤 surface 発効。**
 chain 完走: %10 author-review CONCUR(fold 済)→ %12 verify PASS(6 leg)→ Rs 承認。世代 chain: `bd1d9979f6`(v1.0 review 世代)→ `7f5d2716a9`(v1.0a fold)→ 本 status 反映 commit。**確定版 sha256 = 承認反映 commit の commit message に記録**(doc 内への自己 sha 埋込は self-reference で原理的に不成立のため、version⇄sha 束縛(P-3)の記録先は commit message / 台帳側とする)。
 **未決の現況:** D-1 = ✅ **裁定済**(Rs 承認 00:29、§2 参照)/ P-1・P-3 charter 化 = **未決**(組込保留、継続)。
 **Role note(Rs 2026-07-10 23:5x、%12 経由):** VT-DESIGN = **設計基盤(design-foundation)pane に昇格**。本 doc = 昇格第 1 成果物 = 設計 canonical surface(§5.6 governance 参照)。
@@ -102,7 +102,9 @@ canonical json 値(§1.2)とは別の**実測記録**。**canonical 原本(RL-Ro
 - **#1 secured-predicate(実体・反代理):** その段の clip-state を構成する実物理状態。proxy(z 高さ/閾値/近接)では満たせないよう定義。
 - **#2 prerequisite-anchor:** 本段到達に今も保持必須の下位アンカー(累積クリップ状態を明示化)。
 - **#3 legs ∧ conjunction / coverage-gap[p4-supply]:** 分子の全 leg + conjoin する leg + 現 instrumentation が cover しない gap(measurement 側 = **p4 供給**、DoD⑥ 教訓)。
-- **#4 verification-class:** **CLASS-R** = 把持/固定/着座/再把持/retention-critical → **Rs 動画 必須**(数値単独 不十分、point3)/ **CLASS-N** = 純 kinematic transit → authoritative joint-pose field で確保(実体、proxy でない)、動画不要。
+- **#4 verification-class:** **CLASS-R** = numeric-blind 物理妥当性述語(capture / retention / slip / 貫通)を持つ段 → **Rs 動画 必須**(数値単独 不十分、point3)/ **CLASS-N** = 純 kinematic transit → authoritative joint-pose field で確保(実体、proxy でない)、動画不要。
+  - **⭐判定原則(p4 verify refine 2026-07-12):** **CLASS-R iff (numeric-blind 物理妥当性: capture/retention/slip/貫通) AND (隣接アンカーの weight-test で未 cover)。**
+  - **⭐discharge-with-adjacent:** 隣接アンカーの Rs動画1本が **連続した1物理イベント**(例 把持+持上げ、押込+固定)を丸ごと cover する時、その動画で当該 step の R も **同時充足**(別動画不要)= rigor 保持 + Rs動画数 inflation 回避。表記 = 「R(discharge-with N)」。
 
 **clip→groove body/Y(§2.1 `:1376-1382`):** C1=30/+0.150 · C2=25/+0.075 · C3=20/0.000 · C4=15/-0.075 · C5=10/-0.150。**grasp(A):** L26/R34。**再把持 seg(L固定/R):** C2=21/29 · C3=16/24 · C4=11/19 · C5=6/14。
 
@@ -113,16 +115,16 @@ canonical json 値(§1.2)とは別の**実測記録**。**canonical 原本(RL-Ro
 | 2 | ケーブル上空へ | — | 両 EE = 上昇点(ケーブル) 上空、非接触 | 1 | {ee_above_cable} / — | N |
 | 3 | ケーブルへ下降 | — | 両 EE = 下降点(ケーブル) z=1.02、L→26/R→34、pre-clamp 非把持 | 2 | {ee_at_grasp_pose} / — | N |
 | 4 | 初期把持 | — | **fingers 0.002 clamped、cable body L26/R34 が pad 間に把持(form-closure+摩擦)— 空 close でない** | 3 | {l_grip26 ∧ r_grip34} / gap: finger-width proxy ≠ in-pad cable 有無・slip | **R** |
-| 5 | 持ち上げ | — | cable を 上昇点(ケーブル) z=1.05 へ、把持 RETAINED(落下せず) | **4(grasp 保持)** | {grasp_retained_lift} / gap: z ≠ intra-finger slip | **R** ⚠p4-refine(4 が R なら lift=N か) |
+| 5 | 持ち上げ | — | cable を 上昇点(ケーブル) z=1.05 へ、把持 RETAINED(落下せず) | **4(grasp 保持)** | {grasp_retained_lift} / gap: z ≠ intra-finger slip | **R**(discharge-with 4: 把持+持上げ=1動画; lift=grasp 重力下初 retention test、slip/drop numeric-blind) |
 
 #### Phase B / C1(STEP 6-10)C1 ルーティング
 | STEP | 動作 | clip-state | #1 | #2 | #3 / gap[p4] | #4 |
 |---|---|---|---|---|---|---|
 | 6 | C1上空へ搬送 | — | cable を C1(Y+0.150)上空へ、両把持 retained | 5 | {grasp_retained_transport} / gap: pose+width ≠ slip | N ⚠retention |
-| 7 | C1へ押し込み | — | body30 を C1 groove 域へ押込(下降点 z=1.02)、両 clamp | 6 | {body30_pushed_C1} / gap: EE-z/pos ≠ lateral-in-groove | **R** ⚠borderline |
-| 8 | 誘導ハンド半保持 | (C1=30 engaging) | R unclamp、L 半clamp 0.006(slip-guide)、C1 が body30 保持開始 | 7 | {c1_engaging ∧ l_half} / gap[p4] | **R** ⚠borderline |
+| 7 | C1へ押し込み | — | body30 を C1 groove 域へ押込(下降点 z=1.02)、両 clamp | 6 | {body30_pushed_C1} / gap: EE-z/pos ≠ lateral-in-groove | **R**(discharge-with 9: seating 動画1本が push+固定 cover; push=着座attempt+claw-clip 貫通/squish、純transit でない) |
+| 8 | 誘導ハンド半保持 | (C1=30 engaging) | R unclamp、L 半clamp 0.006(slip-guide)、C1 が body30 保持開始 | 7 | {c1_engaging ∧ l_half} / gap[p4] | **R**(discharge-with 9: grip→半開放=slip/escape=FORK-1 intra-finger-slip 瞬間; 9 動画が release-settle span で充足) |
 | 9 | C1がcable固定 | **C1クランプ→C1** | **body30 が C1 groove 壁内に側方 seated & 保持(Y+0.150)、C1 独立保持 — z<840 でない** | 5 grasp(clip 下位なし、C1 初) | {c1_seated}(単一) / gap: c1_retained_lowwall(z) ≠ lateral seating(⭐DoD⑥) | **R**(A_C1) |
-| 10 | C1から上昇 | C1 | 両 EE 上昇点(C1) z=1.07、C1 が body30 STILL 保持 | **9(A_C1)** | {c1_retained} / gap: z | **R** ⚠p4(9 が cover なら N) |
+| 10 | C1から上昇 | C1 | 両 EE 上昇点(C1) z=1.07、C1 が body30 STILL 保持 | **9(A_C1)** | {c1_retained} / gap: z | **R**(dischargeable-with 9: 9 の weight-test が post-release settle[手off で C1 保持]を span→10=N-effective、否なら R; rise=handover-drop=FORK-1 risk) |
 
 #### Phase C+D / C2(STEP 11-18)C2 ルーティング — **block template**(C3-C5 は下記 substitution)
 | STEP | 動作 | clip-state | #1 | #2 | #3 / gap[p4] | #4 |
@@ -131,7 +133,7 @@ canonical json 値(§1.2)とは別の**実測記録**。**canonical 原本(RL-Ro
 | 12 | 左クランプ | C1=30 | L full-clamp(0.002)body21 で cable 固定 | 11 | {l_fix21}(regrasp 準備) / gap: width≠in-pad | **R** |
 | 13 | 右がケーブル再把持へ | C1=30 | R→body29 へ移動(regrasp 途上)、未把持 | 12 | {r_moving_29} / gap: pose | N |
 | 14 | 両手クランプ | C1=30 | L21+R29 both clamp = 再把持完了 | 13 | {l_fix21 ∧ r_fix29}(regrasp) / gap: width≠in-pad slip | **R** |
-| 15 | C2へ押し込み | C1=30 | body25 を C2 groove 域へ押込、両 clamp | 14 | {body25_pushed_C2} / gap: EE ≠ lateral | **R** ⚠borderline |
+| 15 | C2へ押し込み | C1=30 | body25 を C2 groove 域へ押込、両 clamp | 14 | {body25_pushed_C2} / gap: EE ≠ lateral | **R**(discharge-with 16: push=着座attempt) |
 | 16 | C2固定 | **C1,C2** | **body25 が C2 groove 側方 seated(Y+0.075)AND body30 が C1 STILL seated** | **9(A_C1 STILL)** + 15 | {c1_retained ∧ c2_seated}(両必須) / gap: c2 proxy(span/tilt)+c1 proxy(z)双方 lateral-in-groove 未 cover | **R**(A_C2) |
 | 17 | 解放 | C1=30,C2=25 | R unclamp、L 半hold、C1・C2 clip 保持 | **16(C2)+9(C1)** | {c1_retained ∧ c2_retained} / gap | N ⚠prereq C1,C2 |
 | 18 | 上昇 | C1=30,C2=25 | 両 EE 上昇点(C2) z=1.07、C1,C2 STILL 保持 | 16,9 | {c1_retained ∧ c2_retained} / gap: z | N |
@@ -148,7 +150,7 @@ canonical json 値(§1.2)とは別の**実測記録**。**canonical 原本(RL-Ro
   - **STEP 24(A_C3):** body20 が C3 groove 側方 seated(Y0.000)AND C1,C2 STILL retained。prereq={9,16 STILL}。#3={c1∧c2∧c3_seated} / gap[p4]。**R**。
   - **STEP 32(A_C4):** body15 が C4 seated(Y-0.075)AND C1-C3 retained。prereq={9,16,24 STILL}。#3={c1∧c2∧c3∧c4_seated} / gap[p4]。**R**。
   - **STEP 40(A_C5):** body10 が C5 seated(Y-0.150)AND C1-C4 retained。prereq={9,16,24,32 STILL}。#3={c1..c5_seated 全 conjoin} / gap[p4]。**R**。
-- 各 block: L固定(20/28/36)・両手clamp(22/30/38)= regrasp = **R**、押込(23/31/39)= **R** ⚠borderline、上空/移動/解放/上昇 = **N**。
+- 各 block: L固定(20/28/36)・両手clamp(22/30/38)= regrasp = **R**、押込(23/31/39)= **R**(discharge-with 各固定 24/32/40)、上空/移動/解放/上昇 = **N**。
 
 #### Phase E(STEP 43)完了
 | STEP | 動作 | clip-state | #1 | #2 | #3 / gap[p4] | #4 |
@@ -292,7 +294,7 @@ canonical json 値(§1.2)とは別の**実測記録**。**canonical 原本(RL-Ro
 
 ## §8 Changelog
 
-- **v1.0a-r5**(2026-07-12 07:2x JST): **§1.4 anchor annotation layer draft**(Rs 委任 anchor-alignment、p4⇄p5 joint decision `shared/ANCHOR_STEPTABLE_ALIGNMENT_p4p5_20260712.md`)。⚓ アンカー式検証(CLAUDE.md :51-60)の position-driver として 43-step を明示 anchor 化: 各 step に #1 secured-predicate(実体・反代理)/ #2 prereq-anchor / #3 legs∧ + coverage-gap[p4 供給] / #4 CLASS-R(Rs動画)or CLASS-N。fixation/seating anchor(9/16/24/32/40)= CLASS-R(⭐DoD⑥ cell 2037_x-20_y-15 で全 numeric pass but Rs-GT=OFF = 側方 capture を測る numeric ゼロ、contact≠capture 実証 → Rs動画のみ GT)。r4 intake(§6.2 clip-state predicate annotation)を要素#1 に包摂。**canonical 値(§1.2)・43 工程・クリップ状態列 = INVARIANT**(注記のみ、+66/-1[Status 行のみ])。**p4 verify 待ち**(#4 borderline[push7/half-release8]refine + INVARIANT 照合)。§5 規約 6 sub-revision。
+- **v1.0a-r5**(2026-07-12 07:2x JST): **§1.4 anchor annotation layer draft**(Rs 委任 anchor-alignment、p4⇄p5 joint decision `shared/ANCHOR_STEPTABLE_ALIGNMENT_p4p5_20260712.md`)。⚓ アンカー式検証(CLAUDE.md :51-60)の position-driver として 43-step を明示 anchor 化: 各 step に #1 secured-predicate(実体・反代理)/ #2 prereq-anchor / #3 legs∧ + coverage-gap[p4 供給] / #4 CLASS-R(Rs動画)or CLASS-N。fixation/seating anchor(9/16/24/32/40)= CLASS-R(⭐DoD⑥ cell 2037_x-20_y-15 で全 numeric pass but Rs-GT=OFF = 側方 capture を測る numeric ゼロ、contact≠capture 実証 → Rs動画のみ GT)。r4 intake(§6.2 clip-state predicate annotation)を要素#1 に包摂。**canonical 値(§1.2)・43 工程・クリップ状態列 = INVARIANT**(注記のみ、canonical removal=0、唯一の削除 = r4→r5 Status 行)。**✅ p4 verify PASS**(2026-07-12 07:40; INVARIANT 独立 HOLDS [git show 直読 + p6 二重]、sha `5eda29d9c3afdcda` EXACT、#1 反proxy/#2 prereq/#3 line-ref fold 全 OK)+ **#4 borderline fold**(push/half-release/lift/rise = 全 CLASS-R + **discharge-with-adjacent** 機構 [隣接アンカー動画1本が連続1物理イベント cover = R inflation 回避]、判定原則 = R iff numeric-blind 物理妥当性 AND 隣接 weight-test 未cover)。**r5 発効**。§5 規約 6 sub-revision。
 - v1.0-DRAFT(2026-07-10 23:32 JST): §0-§2, §5-§6 起草。§3/§4 = runner 抽出待ち。
 - v1.0(2026-07-10 23:4x JST): §3 mapping(17 行 + M-1〜M-7)+ §4 ぶれ防止(4 装置 + gap 3 + 提案 P-1〜P-3)fold。§5.6 設計基盤 governance(Rs role 昇格 23:5x)+ §6 VN-4 + §6.2 intake 台帳追加。§2 D-1/D-2 に task_config 証拠追記。READY FOR %10 AUTHOR-REVIEW。commit `bd1d9979f6`(review 世代 pin、sha256 245fe334…)。
 - **v1.0a-r3**(2026-07-11 02:2x JST): **§1.2a 現行実測値統合(Rs 指示 #6「ポイントデータをステップ表にまとめて」)。** Rs は当初「別台帳」→ 02:1x「ステップ表にまとめて」に訂正、§1.2 隣接の per-STEP 実測節に統合。供給 = %11 `comp3_point_data_STEPkeyed_r3.md`(`e84f1b1976`、per-row provenance)。STEP2-5=comp3 実測(park z 1.0668 / claw z 0.80583 対称 / lift 1.1468 + z_drop/lane/bend 脚注)/ STEP6-17=録画 nominal(NOT comp3、G-phase flag)/ STEP18-43=実測なし明示。⚠**手前R+3mm=HELD**(cable-coupling 発見、clean lever でない)→ VN-2 に intake、**R-only 深さ修正 非採用方向**。§5 規約 7(実測 point データ同-turn 統合、恒久 rule)追加。arm 帰属 = camera-verified 手前R/奥L(`dfbe7fca0b`)。**canonical json 値(§1.2)・工程・承認済 disposition は不変**(実測列 = block-hash 対象外 measured-log)。§5 規約 6 sub-revision。**同 r3 に fork④ 裁定 fold(Rs 02:26=F-A 確定=現行基準維持):** VN-2=HELD/informative CLOSE(R-only 深さ 非採用確定)/ VN-1=study track 継続(F-B は validated 時)/ **工程表 v2=当面なし**(§6 統合方針・VN-1/VN-2 更新)。
