@@ -1,0 +1,35 @@
+{
+ "cell": "x0_y0",
+ "drive": "feedforward (D rho=0)",
+ "route_c2_scene": true,
+ "steps_run": 499,
+ "early_done": 499,
+ "n_phases": 6,
+ "max_phase_reached": 3,
+ "full_fire": false,
+ "molecule (strict_v2)": {
+  "conjoined": "c1_retained_final AND c2_seated_honest",
+  "c1_retention": {
+   "z_c1_end_mm": 824.023,
+   "flank_end_mm": 824.023,
+   "pass": true
+  },
+  "c2_seat": {
+   "sustained_run": 0,
+   "pass": false
+  },
+  "strict_v2": false
+ },
+ "diagnostic_not_conjoined": [
+  "81-cell numerator (=\u2468b)",
+  "lane-crossing",
+  "per-arm grasp quality",
+  "span"
+ ],
+ "numeric_verdict": "NUMERIC_NOGO",
+ "videos": {
+  "ctx": "/home/rlrk/Downloads/comp5_c2seat_fullfire_ctx.mp4",
+  "c2zoom": "/home/rlrk/Downloads/comp5_c2seat_fullfire_c2zoom.mp4"
+ },
+ "note": "numeric is NEVER a standalone PASS; Rs human-GT on the C2-seating video is final"
+}
