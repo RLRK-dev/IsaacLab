@@ -1,6 +1,6 @@
-# THREAD における BC+RL アルゴリズム解説（現況版 v0.1c）
+# THREAD における BC+RL アルゴリズム解説（現況版 v0.1d）
 
-**著者:** PAPER-AUTHOR (w2:p9)　**日付:** 2026-07-11 13:5x JST（v0.1 = 07-10 23:58 / v0.1a = 00:1x / v0.1b = 13:3x）　**HEAD:** `6e48d0a439`（初版時。v0.1b で `4de1b0b200` にて全引用を再検証 — 引用コード 5 本は両 HEAD 間で無変更）
+**著者:** PAPER-AUTHOR (w2:p9)　**日付:** 2026-07-11 13:5x JST（v0.1 = 07-10 23:58 / v0.1a = 00:1x / v0.1b = 13:3x / v0.1c = 13:49）　**HEAD:** `6e48d0a439`（初版時。v0.1b で `4de1b0b200` にて全引用を再検証 — 引用コード 5 本は両 HEAD 間で無変更）
 **検証:** RS-TECH-LEAD (%12) 技術 cross-PV = **PASS**（2026-07-11 00:10、blocking なし。LOW 1 件 = §4.6(b) の cite `:16`→`:17` を v0.1a で修正済）
 **種別:** 解説文書（コード変更なし / 新規設計判断なし。初版は paper-only で作成 → Rs 授権で commit `ecfd90c620` + push 済）
 **[L-TRIAGE]** 新規ファイル作成 = L2 の質的トリガに該当。ただし本文書は `eval_runs/` 内の解説文書で、コード・config・挙動 surface はゼロ、設計判断を一切行わない（既に確定した事実の再記述のみ）。→ **final_L = L1**（p9 自己申告 → **RS-TECH-LEAD が CONFIRM、2026-07-11 00:10**）。gate = 本文書に対する %12 技術 cross-PV（PASS、2026-07-11 00:10）＋ Rs 最終 review。前例: `BCRL_DEVPLAN_LADDER_V2_RSTECHLEAD_20260705.md:7`（同種の降格申告、ただし当該 doc は設計提案のため L2）。
@@ -294,7 +294,7 @@ sim 上で実際にひと蹴り入れ、その後の**復帰フレームだけ**
 
 C2 再把持フェーズで、obs が渡す節点は「クリップ中心に最も近い節点」(`_seg_rule:128`) だが、右手が実際に狙うのは「把持レーン（C2 中心 ± 44mm）に最も近い節点」である。約 44mm ずれた**別の節点**を見ていた。→ obs を実際の狙いに合わせて切り替えて再学習。
 
-→ **REFUTED**。seg 0.249 → 0.24（実質不変）、ee_only 0.973 → 0.958（依然 STOP）。値の直接出所 = obs-switch テストの 2 判定ファイル: baseline `dq7_ii_obsswitch_test/og_baseline_rerun/og_gate.json:90-91` → switched `dq7_ii_obsswitch_test/og_switch/og_gate.json:90-91`（文脈は LEDGER `:46`）。基準値 0.249 は経路 3〔stage-(ii)〕の batch 学習後 policy の再測であり（`dq7_ii_cp3_batch/og/og_gate.json` の C2_REGRASP pair と byte 一致で確認）、§5.8 の 0.282（B2 時点 policy）とは別 run である。
+→ **REFUTED**。seg 0.249 → 0.24（実質不変）、ee_only 0.973 → 0.958（依然 STOP）。値の直接出所 = obs-switch テストの 2 判定ファイル: baseline `dq7_ii_obsswitch_test/og_baseline_rerun/og_gate.json:90-91` → switched `dq7_ii_obsswitch_test/og_switch/og_gate.json:90-91`（文脈は LEDGER `:46`）。基準値 0.249 は経路 3〔stage-(ii)〕の batch 学習後 policy の再測であり（`dq7_ii_cp3_batch/og/og_gate.json` と C2_REGRASP pair 値 seg 0.249 / ee 0.973 が一致することで同一 policy と確認 — 全ファイル byte 一致ではなく当該 pair 値の一致。両 og_gate.json は null_beat 欄で相違する）、§5.8 の 0.282（B2 時点 policy）とは別 run である。
 
 ### 6.5 4 経路の収束 — 何が確定したか
 
@@ -473,5 +473,6 @@ R0 の delta モードが破綻した機構（§4.3）が residual channel の�
 *v0.1 初版 — PAPER-AUTHOR (w2:p9), 2026-07-10 23:58 JST.*
 *v0.1a — 2026-07-11 00:1x JST. %12 cross-PV PASS 反映（§4.6(b) cite `:16`→`:17` / null 構成差の cite 明示 / devplan:24 は訂正対象でない旨を明記 / L-TRIAGE L1 = CONFIRM 反映）。*
 *v0.1b — 2026-07-11 13:3x JST（Rs「論文をチェックし、修正すべき点があれば修正」）. 全引用を HEAD `4de1b0b200` で機械再検証。修正: ① spec / artifacts への行番号引用 12 箇所を +5 更新（2026-07-11 vault 監査で両 doc 先頭に 5 行 banner 挿入のため。LEDGER 行 43/45/46/47 は不変・引用コード 5 本は commit 無変更・og_gate.json 引用 8 値は commit 版と一致を確認）② §6.5 capacity pre-test に cite 追加 ③ §4.5 に既定エポック（100）と実測 policy（2000）の区別注記 ④ §8.4 に spec/artifacts の SUPERSEDED-in-substance banner 付与（07-11 監査）の注記。加えて独立校閲（fresh-eye subagent、算術全検算一致・markdown 破損なし）の指摘 11 件を反映: R4 の scope 表ラベル訂正（探索・未確定）/ B1 span 122.9 の基準明示（指令 88）/ §5.5 γ⊥「符号」→大小解釈の反転に精密化 / §5.8 読み方の接続詞論理修正 / §6.1 に §5.8 と同一 run である旨の注記（R0/B2 の同定）/ §6.4 基準値 0.249 の出所明示（経路 3 batch 後 policy）/ 罰:正比の向き明示 + 「+10」= 終端失敗罰の脚注 / stage-(iv) と fork-(iv) の番号衝突を表記分離 / §1.2 に LEDGER `:43` cite 追加（§13 との整合）/ 端到端→エンドツーエンド / header の 0-commit 表記を commit 済の現状に更新。*
-*v0.1c — 2026-07-11 13:5x JST（%12 v0.1b verify = PASS の締め note 反映）. §6.4 の値 0.249/0.24 に直接 file:line cite を追加（LEDGER `:46` は文脈のみで値を載せないため）: baseline `dq7_ii_obsswitch_test/og_baseline_rerun/og_gate.json:90-91` / switched `dq7_ii_obsswitch_test/og_switch/og_gate.json:90-91`。「経路3 batch policy」ラベルは `dq7_ii_cp3_batch/og/og_gate.json` との byte 一致で検証。⚠ %12 の候補 cite `b2_cpE_iv/og_aug_bc_s3:180-181` は §運用28 で不採用 — 当該行は `gamma_perp_mean:0.249`（偶然一致した別メトリクス）で、C2_REGRASP seg gain ではなかった。*
+*v0.1c — 2026-07-11 13:5x JST（%12 v0.1b verify = PASS の締め note 反映）. §6.4 の値 0.249/0.24 に直接 file:line cite を追加（LEDGER `:46` は文脈のみで値を載せないため）: baseline `dq7_ii_obsswitch_test/og_baseline_rerun/og_gate.json:90-91` / switched `dq7_ii_obsswitch_test/og_switch/og_gate.json:90-91`。「経路3 batch policy」ラベルは `dq7_ii_cp3_batch/og/og_gate.json` との C2_REGRASP seg/ee 値の一致（metric-equivalence）で検証。⚠ %12 の候補 cite `b2_cpE_iv/og_aug_bc_s3:180-181` は §運用28 で不採用 — 当該行は `gamma_perp_mean:0.249`（偶然一致した別メトリクス）で、C2_REGRASP seg gain ではなかった。*
+*v0.1d — 2026-07-11 13:5x JST（%12 §運用28 reconcile 反映）. §6.4 / footer の「byte 一致」表現を **metric-equivalence（C2_REGRASP seg/ee 値の一致）** に精密化。自己照合で確認: 両 og_gate.json は全ファイル sha256 が相違（null_beat 欄 None vs 0.492）→「byte 一致」は overclaim だった。同一 policy の根拠は C2_REGRASP pair 値（seg 0.249 / ee 0.973）の一致であり、label 結論は不変。（相互 §運用28: 私が %12 の cite を、%12 が私の overclaim を捕捉。）*
 *設計判断ゼロ（既存の確定事実の再記述のみ）。scope の最終権威 = Rs。*
