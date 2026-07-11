@@ -4,7 +4,7 @@ node: T-ROOT-optE-route-dapg-C1C2-P2-routeexec
 component: comp5 (real C2 groove scene)
 author: "%11 COORD (w2:p3)"
 date: 2026-07-11
-rev: v2 (folds 5体 [VERIFY] DECIDE=REVISE 2257734eea + %12 boundary-steer 13:11 — 9 findings + PORT boundary)
+rev: v2.1 (v2 folds + §4 CC3-CH5 factual correction per %12 re-verify 13:25 = PASS-CONDITIONAL — claw-vs-C2 ≠ cable-vs-C2, config STANDS)
 gate: DESIGN-GATE (/geometric-design + /reward-design) — for targeted re-verify (CC1=%12)
 ---
 
@@ -74,18 +74,24 @@ proven C2 contact-config VALUES (constants by reference). **Zero new mechanism; 
   = ROUTE_GROOVE_Z (0mm error). Contact when collidable = MUJOCO_CONTACT_KE 40000/KD 400/gap.002 (shared-ref).
 - **H4 contact-config = CONFIRMED collidable** (recording uniform CLIP_COLLISION=1 across 81/81 cells, §0). comp5
   C2 collidable=True (record-matched), NOT phantom, NOT assumed. Record-time parity (replay must match recording).
-- **CC3-CH5 reconcile (§運用28, surface-not-override):** CC3-CH5 cited a NON-collidable 25.3mm-penetration@0.0N
-  cell. That is physically INCONSISTENT with collidable KE40000 (which resists ~900N at 25mm) → CC3-CH5 measured a
-  DIFFERENT (probe) recording, NOT the canonical w0e_81rerun_snapdown (uniformly collidable 81/81). **Flagged for
-  %12 cross-check** — comp5 matches the CANONICAL DoD⑥/env-core recording (collidable). If %12's canonical differs,
-  re-match.
+- **CC3-CH5 reconcile (§運用28, %12 cross-check 13:25-26 — my v2 inference was WRONG, corrected):** the 25.3mm@0.0N
+  IS present in the CANONICAL w0e_81rerun_snapdown (cells x0_y15 / x10_y-10 / x-15_y-15: `c2_lgrip_c2_pen_mm=25.289`
+  at `c2_lclaw_c2_contact_N=0.0`), NOT a different probe. My v2 "physically inconsistent → non-canonical" claim was
+  ERRONEOUS. That 25mm@0.0N is a **claw-vs-C2 metric** (c2_lclaw/c2_lgrip), DISTINCT from cable-vs-C2: the L-claw is
+  at 0.0N because it passes over / does not contact the C2 wall at settle (expected). The SAME cell has
+  `c2_seated_honest=true` + `cable_c2_held_mm=-1.738` → the CABLE collides with + seats in C2 (both axes coexist).
+  So C2 IS cable-collidable in the canonical, and comp5's ke40000/0x6/spacer (= CLIP2 build test:1228-1244)
+  correctly reproduces canonical behavior → **config STANDS, no change**. My error root-cause: I verified the
+  env_gates INPUT (CLIP_COLLISION=1) but inferred a collidability contradiction from a claw-vs-C2 OUTPUT metric
+  without checking its identity (claw-vs-C2 ≠ cable-vs-C2).
 - **M2 spacer:** recording SPACER=1 → comp5 includes the spacer 6th box (matched, MUJOCO_CONTACT_KE/KD). ⑤ EXACT
   predicate is spacer-EXCLUDED (5 groove walls only) → spacer is seat-measurement-independent.
 - No collision: C2@X0.40 vs support-clips@GRASP_X0.30, C1@0.35/Y0.150 — clear.
 
 ## §5. /reward-design (updated) — C2-seat reachability
 - **M1: phantom 58/81 RETRACTED as gate basis** (was single-world byte-repro PRODUCER rate, not MW real-collidable-C2
-  seat). Predicate FORMULA unchanged. Seat reachability = **RE-MEASURE with real collidable C2 in MW env post-build**.
+  seat). Predicate FORMULA unchanged. Seat reachability = **RE-MEASURE with real collidable C2 in MW env post-build,
+  using cable-vs-C2** (claw-vs-C2 0.0N is normal — the claw does not contact C2 at settle; §4 CC3-CH5).
 - **Conservatism (GROVE §2.2):** collidable KE40000 = soft contact (not rigid form-closure) — realistic route parity.
   If the MW route seats collidable C2 → transfers (conservative-favourable vs a phantom pass); if it FAILS to seat
   collidable → definite finding. Direction: **conservative-relative-to-phantom** on the seat axis; absolute seat
@@ -123,7 +129,7 @@ UNTOUCHED → NHA-cond5 byte-repro not triggered; flag-OFF env byte-identity is 
 retarget — REJECT success-cond change) / v1's C1-soft-mirror — REJECT (H4 wrong contact) / **os.environ-sourcing
 port — REJECT (boundary-steer: CC6 desync re-injection)**. Chosen = HYBRID (C1 structure + C2 contact values).
 **Carry:** ⑤ EXACT spacer-excluded predicate (⑨b); ⑥ single-vs-MW (⑥ gate); x-20_y5 C2 whiff (⑨b tail);
-C2-Y 0.000/0.075 Rs batch reconcile (parked); CC3-CH5 recording cross-check (%12).
+C2-Y 0.000/0.075 Rs batch reconcile (parked); CC3-CH5 = RESOLVED (claw-vs-C2 metric ≠ cable-vs-C2; cable seats collidable; config stands — %12 13:25).
 
 ## §8. Verification plan (L2 expanded) — post-re-verify → RULE-CHECK → build
 - Flag-OFF byte-identity: env-core recorded-state re-regression EXACT (build_multiworld_scene w/o C2) — re-verify (d).
