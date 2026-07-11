@@ -4,130 +4,143 @@ node: T-ROOT-optE-route-dapg-C1C2-P2-routeexec
 component: comp5 (real C2 groove scene)
 author: "%11 COORD (w2:p3)"
 date: 2026-07-11
-gate: DESIGN-GATE (/geometric-design + /reward-design) — pre-5体-[VERIFY]
+rev: v2 (folds 5体 [VERIFY] DECIDE=REVISE 2257734eea + %12 boundary-steer 13:11 — 9 findings + PORT boundary)
+gate: DESIGN-GATE (/geometric-design + /reward-design) — for targeted re-verify (CC1=%12)
 ---
 
-# comp5 — real C2 groove scene: DESIGN-GATE (geometric + reward)
+# comp5 — real C2 groove scene: DESIGN-GATE v2 (geometric + reward)
 
-**Charter:** comp3 remaining DoD (Rs GO 06:29, node `994b2923c2`). comp5 = shared prerequisite for
-⑥ full-fire / ⑨b numerator / C2-seating video (%12 CONCUR+ratify 06:45 `a72b697c6b`: charter-internal
-dependency, NOT new scope — DoD⑥ "実 C2 groove scene" requires it).
+**Charter:** comp3 remaining DoD (Rs GO 06:29). comp5 = %12 CONCUR+ratify 06:45 `a72b697c6b`. v1
+(`32dd2a93ad`) → **REVISE** (mechanism approved-in-principle, build HOLD; 5体 `2257734eea`) + %12 CC1
+boundary-steer 13:11 (PORT idiom boundary + record-time collision confirm). This v2 folds all of it.
 
 ## §0. Grounding (anchor set, §運用4)
-- LEDGER route-executor row VL7 🟢 ACTIVE (`00-DESIGN-STATUS-LEDGER.md:128`).
-- node `goal_verification:5-16` fresh-read (§運用16): DoD⑥ "C2-seating 動画 gate (実 C2 groove scene)";
-  ⑤ EXACT wall/spacer predicate; ⑨b strict_v2 C2-seat leg conjoin (§運用29).
-- Layer-B plan v0.2.2 §2 row 5 + §9: "real C2 groove scene (additive flag-gated, over-solid), Stage-B,
-  /geometric-design"; Q2 pre-resolved = C2 even clip X=0.40 SOLID floor (no void).
-- Reuse template: `newton_skill_env_base.py:1814-1840` (C1 `add_target_clip` block).
-- C2-seat predicate: `newton_route_env.py:1230-1237` (`_c2_seated_honest`).
-- Constants: `route_env_config.py:130` ROUTE_C2_XY=(0.40,0.000) / `:131` ROUTE_CLIP_FLOAT_Z=0.020 /
-  `:134` ROUTE_GROOVE_Z=0.829 / `:113` C2_SETTLE_Z_TOL_MM=3.0 / `:114` C2_WALL_SEAT_TOL_MM=0.5;
-  `task_config.py:20` TABLE_HEIGHT=0.80 / `:91` CLIP_BASE_HEIGHT=0.005 / `:137` CABLE_RADIUS=0.004 /
-  `:226` GROOVE_CENTER_Z=0.809 / `:368` T_GROOVE=0.003.
+- LEDGER route-executor VL7 🟢 ACTIVE. node `goal_verification:5-16` (fresh-read). 5体 DECIDE `2257734eea`.
+- **Existing single-world C2 (CLIP2) mechanism** (%12 §運用28 reconcile): `test_newton_clip_routing.py:1214-1247`
+  (locked build) + `route_executor.py:901/1195` `_clip2_geoms` + `:1170-71` CLIP2_X/Y + `:1167` CLIP_COLLISION.
+  Constants: `task_config.py:168` MUJOCO_CONTACT_KE=40000 / `:169` KD=400; `route_env_config.py:130`
+  ROUTE_C2_XY=(0.40,0.000) / `:131` FLOAT 0.020 / `:134` ROUTE_GROOVE_Z=0.829.
+- **⭐record-time C2 config CONFIRMED (H4/M1):** canonical env-core replay recording `w0e_81rerun_snapdown_0537`
+  env_gates, **uniform across ALL 81 cells**: `CLIP2=1`, `CLIP_COLLISION=1`, `CLIP2_Y=0.000`, `SPACER=1`,
+  `S13_ROUTE_C2=1` (verified `route_demo_raw_meta.json`). C2 IS collidable @ y=0.000 w/ spacer — not assumed.
 
-## §1. [TASK] / [L-TRIAGE] = L3
-Env scene/geometry change (`newton_route_env.py` core + `newton_skill_env_base.py` scene builder) +
-env keyword. L3. Invariant-PRESERVING (additive geometry, flag-gated default-off; no arm/gripper/span/
-control change → §0 FOUNDATIONAL INVARIANT untouched, high-care L3 NOT immediate-STOP). 5体 [VERIFY]
-= %12 as CC1 (06:45).
+## §0.5. v2 CHANGELOG (9 findings + boundary-steer folded)
+- **H1** rationale CORRECTED: comp5 serves **DoD⑥ C2-seating VIDEO + multi-world (MW) env-core route seating**,
+  NOT ⑤/⑨b. ⑤/⑨b are SINGLE-WORLD (`route_c2_pin.json` ← `_run_mujoco_grasp_route`, already have CLIP2).
+  **S2 (base-first-for-⑤) RETRACTED.**
+- **H2** prior-art gate RUN (§9 CLEAR) + existing-C2 correspondence table (§3) + mirror-vs-port = **PORT (hybrid)**.
+- **H3** build↔replay c2y assert + MW replay uses CLIP2_Y=0.000 (recording CONFIRMED 0.000) + 0.000/0.075 split (§6).
+- **H4** contact-config CONFIRMED (not assumed): recording uniform CLIP_COLLISION=1 → collidable, MUJOCO_CONTACT_KE/KD
+  (shared-ref, NOT C1's 2500), SPACER 6th geom; **param-idiom boundary** (no os.environ port, §3/§7); conservatism (§5).
+- **M1** phantom/producer 58/81 RETRACTED as seat gate basis → re-measure real collidable C2 post-build (§5).
+- **M2** spacer resolved: recording SPACER=1 → comp5 includes spacer 6th geom (matched); ⑤ spacer-EXCLUDED (§4).
+- **M3** `route_c2_scene` = env-core-build-ONLY (docstring, §7).
+- **L1** reference existing clip_parts + MUJOCO_CONTACT_KE/KD constants (no 3rd literal paste, §3/§7).
+- **L2** §8 assert expansion.
+- **⭐%12 boundary-steer 13:11 (CC6 idiom-regression guard):** PORT = HYBRID — keep C1-block STRUCTURE
+  (param-idiom + ROUTE_C2_XY single-source + pre-replicate placement); inherit ONLY the C2 contact-config VALUES
+  (constants by reference). **DO NOT port `os.environ.get(CLIP2_Y/CLIP2/CLIP_COLLISION)` into the MW builder**
+  (would re-inject the CC6-warned 0.075 desync). Collidability = a comp5 param decision matched to record (§4/§7).
 
-## §2. /geometric-design (6-step)
+## §1. [TASK]/[L-TRIAGE] = L3
+MW env scene change (`newton_route_env.py` + `newton_skill_env_base.py`). Invariant-PRESERVING (additive
+flag-gated default-off; PORTS proven contact values into the existing param-idiom → **zero new mechanism**,
+re-verify (c)). 5体 = %12 CC1.
 
-### Step 0 — Interrogate (bounded, one pass)
-Necessary? YES — DoD⑥ + ⑨b C2-seat leg (⑤ EXACT predicate does mjModel geom introspection → requires
-physical C2 clip). Reuse? the C1 `add_target_clip` block IS the template (C2 = parametric mirror; no new
-geometry class). Downstream risk? additive + flag-gated → OFF=byte-preserve; no rev-chain.
+## §2. Rationale (H1) — scene ownership
+| consumer | world | C2 source | needs comp5? |
+|---|---|---|---|
+| ⑤ EXACT predicate | single | `route_executor._clip2_geoms` on locked CLIP2 | **NO** (exists) |
+| ⑨b (81 single-cell) | single | `route_c2_pin.json` ← `_run_mujoco_grasp_route` | **NO** (exists) |
+| **DoD⑥ C2-seating VIDEO** | MW env-core | `NewtonRouteEnv` MW build (`_c2_seated_honest:1234` reads `_C2_XY`) | **YES** |
+| **⑥ MW env-core route seating** | MW env-core | same MW build | **YES** (⑥ single-vs-MW = ⑥-gate carry) |
 
-### Step 1 — Measure (actual values)
-| Quantity | Value | Source |
+## §3. Existing C2 mechanism — correspondence + PORT boundary (H2, L1, boundary-steer)
+| element | existing single-world | comp5 MW (HYBRID) |
 |---|---|---|
-| TABLE_HEIGHT | 0.800 | task_config.py:20 |
-| CLIP_BASE_HEIGHT | 0.005 | task_config.py:91 |
-| CABLE_RADIUS | 0.004 | task_config.py:137 |
-| GROOVE_CENTER_Z (base) | 0.809 | task_config.py:226 |
-| ROUTE_CLIP_FLOAT_Z | 0.020 | route_env_config.py:131 (routing clips, SPACER-supported) |
-| ROUTE_GROOVE_Z (target) | 0.829 | route_env_config.py:134 |
-| ROUTE_C1_XY | (0.35, 0.150) | route_env_config.py:129 |
-| ROUTE_C2_XY | (0.40, 0.000) | route_env_config.py:130 (Rs 07-05) |
-| C1 clip_parts (template) | base(hx.020,hy.015,hz.0025) + 2 walls(±.009,hx.0015,hz.0075) + 2 lips(±.013,hx.002,hz.005) | newton_skill_env_base.py:1820-1826 |
+| build gate | `os.environ CLIP2=="1"` (`test:1220`) | **param** `add_c2_clip` (idiom = add_target_clip); NO os.environ |
+| geometry | 5 `clip_parts` (=C1) `test:1233` | **reference the same clip_parts** (L1) |
+| position | `CLIP2_X/Y` env (default 0.075) `test:1222-23` | **`ROUTE_C2_XY` param single-source (0.000)**; NO os.environ CLIP2_Y |
+| float | `CLIP1_Z+float` `test:1224` | `TABLE_H+dz+ROUTE_CLIP_FLOAT_Z` (param) |
+| contact (if collide) | `ke=MUJOCO_CONTACT_KE/kd=KD/gap.002` `test:1228-32` | **same constants by shared-ref** (H4) |
+| collidability | `os.environ CLIP_COLLISION` | **comp5 param = matched to record (=collidable)**; NO os.environ |
+| spacer | `os.environ SPACER` 6th box `test:1244` | **param, matched to record (SPACER=1)** |
+**mirror-vs-port = PORT (hybrid):** C1-block STRUCTURE (param-idiom, ROUTE_C2_XY sourcing, pre-replicate) +
+proven C2 contact-config VALUES (constants by reference). **Zero new mechanism; zero env-gate-sourcing port**
+→ no CC6 desync re-injection (re-verify (c)).
 
-Derived C2 z-spans (float base 0.820): base 0.820-0.825 / walls 0.825-0.840 / lips 0.840-0.850;
-groove opening ≈ 0.829 (= ROUTE_GROOVE_Z); groove inner width 15mm (walls inner faces ±0.0075) vs
-cable ⌀8mm → fits.
+## §4. /geometric-design (updated)
+- Step1: 5 clip_parts (C1-identical, referenced) at `ROUTE_C2_XY=(0.40,0.000)` + float +20mm → groove @829
+  = ROUTE_GROOVE_Z (0mm error). Contact when collidable = MUJOCO_CONTACT_KE 40000/KD 400/gap.002 (shared-ref).
+- **H4 contact-config = CONFIRMED collidable** (recording uniform CLIP_COLLISION=1 across 81/81 cells, §0). comp5
+  C2 collidable=True (record-matched), NOT phantom, NOT assumed. Record-time parity (replay must match recording).
+- **CC3-CH5 reconcile (§運用28, surface-not-override):** CC3-CH5 cited a NON-collidable 25.3mm-penetration@0.0N
+  cell. That is physically INCONSISTENT with collidable KE40000 (which resists ~900N at 25mm) → CC3-CH5 measured a
+  DIFFERENT (probe) recording, NOT the canonical w0e_81rerun_snapdown (uniformly collidable 81/81). **Flagged for
+  %12 cross-check** — comp5 matches the CANONICAL DoD⑥/env-core recording (collidable). If %12's canonical differs,
+  re-match.
+- **M2 spacer:** recording SPACER=1 → comp5 includes the spacer 6th box (matched, MUJOCO_CONTACT_KE/KD). ⑤ EXACT
+  predicate is spacer-EXCLUDED (5 groove walls only) → spacer is seat-measurement-independent.
+- No collision: C2@X0.40 vs support-clips@GRASP_X0.30, C1@0.35/Y0.150 — clear.
 
-### Step 2 — Constraints
-- Hard: H1 groove z = ROUTE_GROOVE_Z 0.829 (predicate satisfiable); H2 flag-OFF byte-identity
-  (env-core preserved); H3 no collision (C2@X0.40 vs support-clips@GRASP_X0.30, vs C1@0.35/Y0.150 —
-  clear); H4 additive-only (no removal/edit of existing geom).
-- Soft: S1 mirror C1 exactly (minimal LOC, reuse); S2 C2 clip_parts base-first order so the ⑤ EXACT
-  spacer-excluded predicate can identify/exclude the base plate (⑨b-gate downstream).
+## §5. /reward-design (updated) — C2-seat reachability
+- **M1: phantom 58/81 RETRACTED as gate basis** (was single-world byte-repro PRODUCER rate, not MW real-collidable-C2
+  seat). Predicate FORMULA unchanged. Seat reachability = **RE-MEASURE with real collidable C2 in MW env post-build**.
+- **Conservatism (GROVE §2.2):** collidable KE40000 = soft contact (not rigid form-closure) — realistic route parity.
+  If the MW route seats collidable C2 → transfers (conservative-favourable vs a phantom pass); if it FAILS to seat
+  collidable → definite finding. Direction: **conservative-relative-to-phantom** on the seat axis; absolute seat
+  quality UNKNOWN until the post-build re-measure (no phantom substitution).
+- **GATE: PASS (design-reachability)** — predicate satisfiable @829 (0mm) + formula-unchanged + collidable-matched;
+  numeric seat deferred to real-C2 re-measure (M1).
 
-### Step 3 — Cross-section (C2 mirrors C1, mm)
-```
-Z[mm]   C1 (X0.35,Y0.150)            C2 comp5 (X0.40,Y0.000) [additive mirror]
- 850   ┌lip┐     ┌lip┐               ┌lip┐     ┌lip┐         lips  840-850
- 840   ├──┤groove├──┤                ├──┤groove├──┤          walls 825-840
- 829 ··│wl│═⌀8═│wl│················· │wl│═⌀8═│wl│·········   ROUTE_GROOVE_Z 829 (seat)
- 825   └──┴────┴──┘                  └──┴────┴──┘
- 820   ▓▓ base plate ▓▓              ▓▓ base plate ▓▓         base  820-825
- 800 ──░ +20mm float ░───────────────░ +20mm float ░───────  TABLE 0.800
-```
+## §6. C2-Y split + build↔replay assert (H3)
+- **Split (documented):** single-world locked route DEFAULT CLIP2_Y=+0.075 (`CLIP_POSITIONS[1]`); MW env-core +
+  the canonical recording use **0.000** (recording env_gates CLIP2_Y=0.000 uniform 81/81; `route_env_config.py:130`
+  ROUTE_C2_XY[1]=0.000 "!= task_config (0.40,0.075)"). 0.075 LIVE for other tracks, "parked for Rs" (`:127`).
+- **comp5 (MW) uses 0.000** (matches `_c2_seated_honest`'s `_C2_XY` AND the recording). 
+- **Assert (build↔replay, §8):** `abs(recording_meta_env_gates_CLIP2_Y − ROUTE_C2_XY[1]) < 1e-6` (fail-loud; the
+  recording meta's `env_gates.CLIP2_Y` = 0.000 confirmed).
 
-### Step 4 — Trade study (flag-gating + float)
-| Option | float | flag | groove z | H1 | H2 byte | verdict |
-|---|---|---|---|---|---|---|
-| **A ★ dedicated `add_c2_clip` param + `route_c2_scene` cfg flag + mirror C1 (+20mm)** | +20mm | new, default False | 0.829 | ✅ | ✅ OFF=byte-id | **RECOMMEND** |
-| B bundle into `grasp_actuation` | +20mm | reuse grasp flag | 0.829 | ✅ | ❌ changes grasp_actuation scene (⑨a′ 81/81 was C1-only) | reject |
-| C solid-floor no float + retarget predicate→809 | 0 | new | 0.809 | needs predicate edit (success-cond change) | ✅ | reject (breaks routing-clip convention + changes success predicate) |
+## §7. PROPOSE v2 (for targeted re-verify, CC1=%12)
+**Change plan (Option A, additive flag-gated, HYBRID port — param-idiom + C2 contact values):**
+1. `newton_skill_env_base.py` `build_multiworld_scene`: add `add_c2_clip=False` param. When True, add the C2
+   V-groove by **reusing the existing add_target_clip `clip_parts`** (L1) at
+   `(ROUTE_C2_XY[0]+dx, ROUTE_C2_XY[1]+dy, TABLE_HEIGHT+dz+ROUTE_CLIP_FLOAT_Z)` — **all param/rc-sourced, NO
+   os.environ**. Contact = **MUJOCO_CONTACT_KE/KD + gap 0.002 constants by reference** (collidable, matched to
+   record); shape_flags 0x6; + spacer 6th box (SPACER matched). NO `os.environ.get(CLIP2_Y/CLIP2/CLIP_COLLISION)`.
+2. `newton_route_env.py` `_build_model`: pass `add_c2_clip=self._route_c2_scene`; parse `route_c2_scene` cfg flag
+   (default False). **Docstring: env-core-build-ONLY (M3)**, not on ⑤/⑨b single-world path. + build↔replay c2y
+   assert (H3, §6).
+3. Flag-OFF → byte-identical to current env-core. No route_executor.py edit.
+**Rationale:** DoD⑥ real C2 groove video + MW env-core route seating (H1); PORT proven CLIP2 contact values into
+the MW param-idiom, zero new mechanism + zero env-gate desync (H2, boundary-steer); collidable matched to record
+(H4, confirmed uniform 81/81); c2y=0.000 MW + assert (H3).
+**Files:** `newton_skill_env_base.py`, `newton_route_env.py` (+ C2-geom assert test). `route_executor.py`
+UNTOUCHED → NHA-cond5 byte-repro not triggered; flag-OFF env byte-identity is the guard.
+**Core SSOT refs:** `test_newton_clip_routing.py:1214-1247`, `route_executor.py:901/1165-71/1195`,
+`route_env_config.py:127/130-134`, `task_config.py:168-169`, recording `w0e_81rerun_snapdown_0537` env_gates.
+**KNOWN_ALTERNATIVES:** B (bundle grasp_actuation — REJECT byte-risk) / C (solid-floor no-float + predicate
+retarget — REJECT success-cond change) / v1's C1-soft-mirror — REJECT (H4 wrong contact) / **os.environ-sourcing
+port — REJECT (boundary-steer: CC6 desync re-injection)**. Chosen = HYBRID (C1 structure + C2 contact values).
+**Carry:** ⑤ EXACT spacer-excluded predicate (⑨b); ⑥ single-vs-MW (⑥ gate); x-20_y5 C2 whiff (⑨b tail);
+C2-Y 0.000/0.075 Rs batch reconcile (parked); CC3-CH5 recording cross-check (%12).
 
-### Step 5 — Reality-check / sensitivity / causality
-- 5a sensitivity: predicate band ±3mm around 829; float +20mm lands groove EXACTLY at 829 (0mm error) → robust.
-- 5b parameter-dependency: no new success threshold; ⑤ EXACT predicate (⑨b) needs to identify C2 groove-wall
-  geoms (spacer/base excluded) → S2. Scene-config (`add_support_clips`/`g1_scene_align`) for live DoD runs =
-  ⑥-gate concern, orthogonal to additive C2.
-- 5c causal chain: C2 clip present → cable routed to C2 → descends → walls capture → predicate fires (⑤).
-  Absent → phantom groove, seat leg invalid. Causally necessary. No adverse 5-step loop (static additive geom).
-- Carried risk (SRG line 26): C2 re-grasp whiff at cell x-20_y5 (r_grip 0→32.8N@1.9mm) = downstream re-grasp/
-  seat concern, NOT a scene-build defect → flag for ⑨b tail-cell diagnostics.
+## §8. Verification plan (L2 expanded) — post-re-verify → RULE-CHECK → build
+- Flag-OFF byte-identity: env-core recorded-state re-regression EXACT (build_multiworld_scene w/o C2) — re-verify (d).
+- Flag-ON asserts (L2): (i) mjModel finds 5+1(spacer) C2 geoms; (ii) built C2 XY == _C2_XY (ROUTE_C2_XY, 0.000);
+  (iii) collidable shape_flags match; (iv) arm/cable joint-index invariant (additive geom no layout shift);
+  (v) build↔replay c2y assert (H3).
+- M1 real-C2 seat re-measure (post-build, MW env, collidable) replaces the retracted phantom 58/81.
+- 層3 (ruff) + 層5 (L3) + 層2 (L3 post, %12). build/GPU HOLD until re-verify PASS + RULE-CHECK.
 
-## §3. /reward-design (4 artifacts) — C2-seat reachability
-Context: scripted D ρ=0 feedforward (NO policy learning at this node → deadlock/saturation patterns N/A);
-the question = existing success predicate becomes achievable + formula-unchanged.
+## §9. Prior-art gate output (H2, re-verify (b))
+`check_thread_vault_prior_art.sh --fail-on-blocker "comp5 C2 scene" "CLIP2 build" "C2 seating video"` →
+**EXIT 0, 0 blocker lines** (`scratchpad/pa_comp5_v2.txt`). Supplementary single-word run = 6 hits, ALL
+self-referential node `state.md` current-work/plan entries (Rs GO / order-correction / fork-④ / SRG / Stage-A
+carry); zero past-failure verdict → **CLEAR**.
 
-**A1 Reachability:** in_groove (|cable_z−0.829|≤3mm) + wall_ok (seat_dist≤3.5mm) both reachable at the
-recorded C2-seat end-state (z_gap≈0, lateral≈0) for the 58/81 seating cells. No dead zone.
-**A2 Causal DAG:** feedforward → EE to C2 → descend → [GATE C2 groove@829 present] —YES(comp5)→ capture →
-seat TRUE; —NO(current)→ invalid. No deadlock.
-**A3 Ground-truth:** P0 (z0.804, z_gap−25mm) FALSE ✓ / Mid (z0.840, z_gap+11mm) FALSE ✓ / Success (z~0.829,
-z_gap≈0) TRUE ✓ reachable.
-**A4 Episode trace:** G0→G5 recorded motion seats cable in groove; byte-repro confirms 58/81 seat → dynamics reach.
-**GATE: PASS.** Predicate FORMULA unchanged (comp5 additive geometry only); C2 clip Z = float +20mm (groove@829).
-
-## §4. PROPOSE (for 5体 [VERIFY], %12 = CC1)
-**Change plan (Option A, additive flag-gated):**
-1. `newton_skill_env_base.py` `build_multiworld_scene`: add param `add_c2_clip=False`. When True, add 5
-   clip_parts (mirror the `add_target_clip` block, base-first order) at
-   `(ROUTE_C2_XY[0]+dx, ROUTE_C2_XY[1]+dy, TABLE_HEIGHT+dz+ROUTE_CLIP_FLOAT_Z)`, shape_flags=0x6. ~20-30 LOC.
-2. `newton_route_env.py` `_build_model`: pass `add_c2_clip=self._route_c2_scene`; parse `route_c2_scene`
-   cfg flag (default False). ~5-10 LOC.
-3. Flag-OFF (`route_c2_scene=False`) → `build_multiworld_scene` called without C2 → byte-identical to
-   current env-core (25/81 EXACT re-regression guard).
-**Rationale:** DoD⑥ real C2 groove; ⑨b C2-seat leg needs physical geom; plan §9; mirror C1 (reuse); float
-+20mm → groove@829 matches predicate (0mm error); additive flag-gated → byte-preserve.
-**Files:** `newton_skill_env_base.py`, `newton_route_env.py` (+ a C2-geom-present assert test; does NOT touch
-`route_executor.py` → byte-repro self-check not NHA-cond5-triggered, but flag-OFF env byte-identity is the guard).
-**Core SSOT refs:** `route_env_config.py:130-134`, `task_config.py:20/91/137/226/368`,
-`newton_skill_env_base.py:1814-1840` (C1 template), `newton_route_env.py:1230-1237` (predicate), plan §9,
-node `goal_verification`.
-**KNOWN_ALTERNATIVES:** Option B (bundle grasp_actuation — REJECT: byte-identity risk on grasp scene) /
-Option C (solid-floor no-float + predicate retarget — REJECT: changes success predicate, breaks routing-clip
-convention). Option A chosen (dedicated flag + C1-mirror float).
-**NOT in scope (carry):** ⑤ EXACT spacer-excluded wall-dist predicate build (⑨b gate); support-clips/
-g1_scene_align live-scene config (⑥ gate); C2 re-grasp whiff cell (⑨b tail diagnostics).
-
-## §5. Verification plan (post-5体-PASS → RULE-CHECK → build)
-- Flag-OFF byte-identity: env-core recorded-state re-regression EXACT (build_multiworld_scene w/o C2 unchanged).
-- Flag-ON C2 geom-present assert: mjModel introspection finds the 5 C2 clip geoms at ROUTE_C2_XY + groove@829.
-- 層3 mechanical (ruff/ruff-format + write-site test) + 層5 (L3, geom/physics/SSOT) + 層2 (L3 post, %12).
-- build/GPU HOLD until 5体 [VERIFY] PASS + RULE-CHECK (per %12 12:30).
+## §10. Re-verify map (%12 scope (a)-(d))
+- (a) 9 findings + boundary-steer: H1 §2, H2 §3/§9, H3 §6/§8, H4 §0/§4/§5, M1 §5, M2 §4, M3 §7, L1 §3/§7, L2 §8, boundary §0.5/§3/§7. ✅
+- (b) prior-art no blocker: §9. ✅
+- (c) zero new mechanism + zero env-gate-port: §3 (HYBRID, param-idiom, contact-constants-by-ref). ✅
+- (d) flag-OFF byte-identity structural: §7.3 + §8. ✅
