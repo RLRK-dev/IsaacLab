@@ -1491,6 +1491,8 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
     add_target_clip=False,
     grasp_actuation=False,
     target_clip_float_z=0.0,
+    add_c2_clip=False,
+    c2_xy=None,
 ):
     """Build multi-world physics scene with kinematic arms + cable.
 
@@ -1505,6 +1507,12 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
             If False, omit them (InsertIntoClip, AerialRegrasp).
         add_target_clip: If True, add clip C1 V-groove geometry at (CLIP1_X, CLIP1_Y).
             Used by Grip (Clamp/Unclamp) and InsertIntoClip envs.
+        add_c2_clip: If True, add a second collidable C2 V-groove clip at :paramref:`c2_xy` (route-executor
+            comp5: multi-world env-core route seating + C2-seating video). Ports the proven single-world CLIP2
+            contact config (:data:`MUJOCO_CONTACT_KE` [Pa], :data:`MUJOCO_CONTACT_KD` [Pa·s/m]). Default False
+            keeps the build byte-identical.
+        c2_xy: C2 clip center (x, y) [m], param-sourced by the caller (the route env passes
+            :data:`route_env_config.ROUTE_C2_XY`). Required when :paramref:`add_c2_clip` is True.
         grasp_actuation: ``mujoco`` backend only. If True, wire the DYNAMIC dual-arm gripper (the
             AerialRegrasp L-hold precondition): L+R POSITION servo on the driver joints, the koshape
             4-bar CONNECT + L-R follower-mirror equalities (by label), and the S5 contact families
@@ -1810,6 +1818,16 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
                 )
                 scene.shape_flags[idx] = 0x6
 
+    # V-groove clip geometry (5 boxes: base + 2 lower walls + 2 lips), shared by C1 (add_target_clip) and
+    # C2 (add_c2_clip). Defined once to avoid a 3rd literal copy (route-executor comp5 L1).
+    _v_groove_clip_parts = [
+        (0, 0, 0.0025, 0.020, 0.015, 0.0025),  # base plate
+        (-0.009, 0, 0.0125, 0.0015, 0.015, 0.0075),  # left lower wall
+        (+0.009, 0, 0.0125, 0.0015, 0.015, 0.0075),  # right lower wall
+        (-0.013, 0, 0.025, 0.002, 0.015, 0.005),  # left lip
+        (+0.013, 0, 0.025, 0.002, 0.015, 0.005),  # right lip
+    ]
+
     # Target clip at C1 (V-groove geometry for Grip/InsertIntoClip envs)
     if add_target_clip:
         clip_cfg = newton.ModelBuilder.ShapeConfig()
@@ -1817,14 +1835,7 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
         clip_cfg.kd = 100.0
         clip_cfg.mu = 1.0
         clip_cfg.gap = 0.001
-        clip_parts = [
-            (0, 0, 0.0025, 0.020, 0.015, 0.0025),  # base plate
-            (-0.009, 0, 0.0125, 0.0015, 0.015, 0.0075),  # left lower wall
-            (+0.009, 0, 0.0125, 0.0015, 0.015, 0.0075),  # right lower wall
-            (-0.013, 0, 0.025, 0.002, 0.015, 0.005),  # left lip
-            (+0.013, 0, 0.025, 0.002, 0.015, 0.005),  # right lip
-        ]
-        for dx, dy, dz, hx, hy, hz in clip_parts:
+        for dx, dy, dz, hx, hy, hz in _v_groove_clip_parts:
             xf = wp.transform(
                 (CLIP1_X + dx, CLIP1_Y + dy, TABLE_HEIGHT + dz + target_clip_float_z),
                 wp.quat_identity(),
@@ -1838,6 +1849,35 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
                 cfg=clip_cfg,
             )
             scene.shape_flags[idx] = 0x6  # COLLIDE | BROADPHASE
+
+    # Second clip C2 (route-executor comp5): the real C2 V-groove for multi-world env-core route seating +
+    # DoD6 C2-seating video. PORTS the proven single-world CLIP2 build (test_newton_clip_routing.py:1214-1247):
+    # the same 5 V-groove parts + a spacer, collidable MUJOCO_CONTACT_KE/KD (record-matched, NOT C1's soft
+    # 2500), floated by target_clip_float_z; c2_xy is param-sourced by the caller (rc.ROUTE_C2_XY -- NO
+    # os.environ). Additive: add_c2_clip default False -> byte-identical for AC/Grip/IC/env-core.
+    if add_c2_clip:
+        c2x, c2y = float(c2_xy[0]), float(c2_xy[1])
+        c2_cfg = newton.ModelBuilder.ShapeConfig()
+        c2_cfg.ke = MUJOCO_CONTACT_KE
+        c2_cfg.kd = MUJOCO_CONTACT_KD
+        c2_cfg.mu = 1.0
+        c2_cfg.gap = 0.002
+        for dx, dy, dz, hx, hy, hz in _v_groove_clip_parts:
+            xf = wp.transform((c2x + dx, c2y + dy, TABLE_HEIGHT + dz + target_clip_float_z), wp.quat_identity())
+            idx = scene.add_shape_box(body=-1, xform=xf, hx=hx, hy=hy, hz=hz, cfg=c2_cfg)
+            scene.shape_flags[idx] = 0x6  # COLLIDE | BROADPHASE
+        # Spacer under C2 (record parity: recording SPACER=1) -- a 6th box filling the float gap. The C2-seat
+        # EXACT predicate is spacer-EXCLUDED (5 groove walls only), so it is seat-measurement-independent.
+        _c2_sp_cfg = newton.ModelBuilder.ShapeConfig()
+        _c2_sp_cfg.ke = MUJOCO_CONTACT_KE
+        _c2_sp_cfg.kd = MUJOCO_CONTACT_KD
+        _c2_sp_cfg.mu = 1.0
+        _c2_sp_cfg.gap = 0.002
+        _c2_sp_xf = wp.transform((c2x, c2y, TABLE_HEIGHT + target_clip_float_z / 2.0), wp.quat_identity())
+        _c2_sp_idx = scene.add_shape_box(
+            body=-1, xform=_c2_sp_xf, hx=0.020, hy=0.015, hz=max(target_clip_float_z / 2.0, 1e-4), cfg=_c2_sp_cfg
+        )
+        scene.shape_flags[_c2_sp_idx] = 0x6  # COLLIDE | BROADPHASE
 
     # Replicate
     scene.replicate(proto, world_count=world_count)

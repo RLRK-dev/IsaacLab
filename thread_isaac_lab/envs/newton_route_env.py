@@ -449,6 +449,12 @@ class NewtonRouteEnv(VecEnv):
         self._g1_scene_align = _al
         if self._g1_scene_align and not self._grasp_actuation:
             raise ValueError("g1_scene_align=True requires grasp_actuation=True (it is a G1 flag-ON scene config)")
+        # comp5 (route-executor): route_c2_scene wires the real C2 V-groove into the MW env-core scene for
+        # DoD6 C2-seating video + MW route seating (env-core-build-ONLY; NOT the single-world 5/9b path).
+        # Default False = byte-identical (build_multiworld_scene add_c2_clip omitted).
+        _rc2 = self.cfg.get("route_c2_scene", False)
+        assert isinstance(_rc2, bool), f"cfg['route_c2_scene'] must be a bool, got {type(_rc2).__name__}"
+        self._route_c2_scene = _rc2
         # D rho=0 (Rs adjudication (1) 2026-07-10): route drive mode. 'ik_chord' (default) = the current
         # step-level batched IK + 10-frame joint chord (byte-preserve); 'feedforward' = the recording's
         # arm_q replayed per physics frame (the armqdirect-proven mechanism promoted to a drive mode;
@@ -626,6 +632,22 @@ class NewtonRouteEnv(VecEnv):
         )
         self._per_world_fk_jq = np.tile(fk_jq, (self._world_count, 1))
 
+        if self._route_c2_scene:
+            # comp5 H3: build<->replay c2y guard. The MW C2 is built at rc.ROUTE_C2_XY[1]; a replayed recording
+            # MUST match (else the cable seats vs a phantom-Y C2). Assert vs the recording sidecar meta
+            # env_gates.CLIP2_Y (route_demo_raw.npz -> route_demo_raw_meta.json). Fail-loud.
+            _npz_c2 = self.cfg.get("route_recording_npz")
+            _meta_c2 = str(_npz_c2).replace("route_demo_raw.npz", "route_demo_raw_meta.json") if _npz_c2 else ""
+            if _meta_c2 and os.path.exists(_meta_c2):
+                import json as _json_c2
+
+                with open(_meta_c2) as _fh_c2:
+                    _gates_c2 = _json_c2.load(_fh_c2).get("env_gates", {})
+                _rec_c2y = float(_gates_c2.get("CLIP2_Y", rc.ROUTE_C2_XY[1]))
+                assert abs(_rec_c2y - float(rc.ROUTE_C2_XY[1])) < 1e-6, (
+                    f"comp5 C2 build<->replay c2y mismatch: recording CLIP2_Y={_rec_c2y} != "
+                    f"ROUTE_C2_XY[1]={rc.ROUTE_C2_XY[1]}"
+                )
         print(f"[NewtonRouteEnv] Building scene ({self._world_count} worlds, backend=mujoco)...")
         scene = build_multiworld_scene(
             self._fk_model,
@@ -636,6 +658,8 @@ class NewtonRouteEnv(VecEnv):
             add_target_clip=True,  # C1 V-groove present (routing/seating scenario, cf Grip clamp mode)
             target_clip_float_z=rc.ROUTE_CLIP_FLOAT_Z,  # C1 clip float +20mm (route env-gate; %12 build+predicate flag)
             grasp_actuation=self._grasp_actuation,  # comp3: OFF (default)=byte-id solid table; ON=VOID+servo
+            add_c2_clip=self._route_c2_scene,  # comp5: real C2 V-groove (MW env-core route seating + DoD6 video)
+            c2_xy=rc.ROUTE_C2_XY,  # param-idiom single-source (0.000); NO os.environ CLIP2_Y
         )
         self._model = scene["model"]
         self._solver = scene["solver"]

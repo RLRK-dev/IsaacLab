@@ -1,0 +1,44 @@
+{
+ "ngeom_off": 66,
+ "ngeom_on": 72,
+ "delta_geoms": 6,
+ "c2_geoms_off": 0,
+ "c2_geoms_on": 6,
+ "c2_on_z_sorted": [
+  0.81,
+  0.8225,
+  0.8325,
+  0.8325,
+  0.845,
+  0.845
+ ],
+ "c2_on_all_collidable": true,
+ "c1_geoms_off": 5,
+ "c1_geoms_on": 5,
+ "c1_off_z_sorted": [
+  0.8225,
+  0.8325,
+  0.8325,
+  0.845,
+  0.845
+ ],
+ "njnt_off": 68,
+ "njnt_on": 68,
+ "jnt_qposadr_invariant": true,
+ "route_groove_z": 0.829,
+ "c2_xy": [
+  0.4,
+  0.0
+ ],
+ "checks": {
+  "flagOFF_no_C2_geoms": true,
+  "flagON_C2_6_geoms (5 clip + 1 spacer)": true,
+  "delta_is_plus6": true,
+  "C1_hoist_byte_preserve (5 geoms both)": true,
+  "C1_z_unchanged_by_hoist": true,
+  "C2_collidable": true,
+  "arm_cable_joint_index_invariant": true,
+  "C2_groove_walls_span_829": true
+ },
+ "ALL_PASS": true
+}
