@@ -1,6 +1,6 @@
 # Canonical 動作工程表 v1 — 43-step 基準 restate + 現行 route mapping
 
-**Status: v1.0a-r3 — ✅ Rs-APPROVED(2026-07-11 00:15 verbatim「1 承認」、%12 bank `2b818b6f2f`; 承認世代 sha256 = `eb126d42…` @`764431035c`)+ 追補 r1(D-1 裁定執行)+ r2(§6 VN-1 reframe intake)+ 追補 r3(§1.2a 現行実測値統合、Rs 指示 #6、canonical json 値・工程 不変)— 設計基盤 surface 発効。**
+**Status: v1.0a-r4 — ✅ Rs-APPROVED(2026-07-11 00:15 verbatim「1 承認」、%12 bank `2b818b6f2f`; 承認世代 sha256 = `eb126d42…` @`764431035c`)+ 追補 r1(D-1 裁定執行)+ r2(§6 VN-1 reframe intake)+ 追補 r3(§1.2a 現行実測値統合、Rs 指示 #6、canonical json 値・工程 不変)+ 追補 r4(§6.2 clip-state predicate annotation intake、Rs teaching 2026-07-12、intake-logged only・enactment Rs-gated・canonical 値/工程 不変)— 設計基盤 surface 発効。**
 chain 完走: %10 author-review CONCUR(fold 済)→ %12 verify PASS(6 leg)→ Rs 承認。世代 chain: `bd1d9979f6`(v1.0 review 世代)→ `7f5d2716a9`(v1.0a fold)→ 本 status 反映 commit。**確定版 sha256 = 承認反映 commit の commit message に記録**(doc 内への自己 sha 埋込は self-reference で原理的に不成立のため、version⇄sha 束縛(P-3)の記録先は commit message / 台帳側とする)。
 **未決の現況:** D-1 = ✅ **裁定済**(Rs 承認 00:29、§2 参照)/ P-1・P-3 charter 化 = **未決**(組込保留、継続)。
 **Role note(Rs 2026-07-10 23:5x、%12 経由):** VT-DESIGN = **設計基盤(design-foundation)pane に昇格**。本 doc = 昇格第 1 成果物 = 設計 canonical surface(§5.6 governance 参照)。
@@ -190,6 +190,7 @@ canonical json 値(§1.2)とは別の**実測記録**。**canonical 原本(RL-Ro
 | `COMP3_DRIVEPATH_DECISION_PACKET_COORD_20260710.md` | drive-mode 系 canonical 事実(D ρ=0 採用、分岐点近傍、options 比較) | **§0-§3 直読済** → VN-4 に fold 済 |
 | Rs 指示 4 件(state.md:30-34) | slot / z_grasp / 摩擦固定 / 工程表 charter | VN-1〜VN-3 + 本 doc 自体 |
 | slot probe 帰結(intake 2026-07-11 01:10、%12 §5.6 flow; COORD `c1a9d66523` INCONCLUSIVE + `44aacb92a5` footprint 実測)| slot-too-narrow REFUTED → 新仮説 = 中央支持 vs scoop-cage 阻害の tension(未解決)| **VN-1 reframe に登録**(v-next 台帳、作業 = Rs 決定後)|
+| **clip-state predicate annotation**(Rs teaching 2026-07-12、%12 grounding request 経由; §運用29 mechanism)| 各 step の **クリップ状態 column を verification predicate として明示注記**(例: C1-fix = STEP9 `C1クランプ` `:1301` / C2-seat = STEP16 `C1,C2` `:1314`; required-clips-held per step)。目的 = pane が step 表を driver に true position を把握し、前段 conjunct 未確認のまま後段 step(例 C2-seat)を主張する §運用29 violation を機械防止。動機 = %12 が C1-off(cable off C1)で C2-seat 誤主張。| **intake-logged only、enactment = Rs-gated**(%12 が Rs へ surface 中)。予想 = 既存 クリップ状態 column の明示化ゆえ **canonical 値・工程 不変の add-only 注記**(sub-revision 相当の見込み、但し v-next 格の要否は Rs 判断)|
 
 **統合方針:** VN-1/VN-2 は probe(study §5)の解釈 grid で fold 内容が確定 → **表 v2 は probe 結果後に単一提案として統合**(F-B 採用なら slot+z_grasp 同時 = MOTION STANDARD 再基準化 + 再録画; F-A なら scene 変更のみで表の座標行は不変)。S0/S1/S2 の選択 = **Rs 専権**(study §6)。VN-3(摩擦固定)は friction budget 実測 leg の結果待ち。VN-4 は VN-1/2 の採否と相互依存(D-b 窓の要否)。**v2 発効 = L3 + 5体 + Rs 承認 + LEDGER 行**(§5)。
 **⭐intake 更新(2026-07-11 01:10):** slot probe が VN-1 root-cause(slot-too-narrow)を REFUTE → **VN-1 は「中央支持 vs scoop-cage 阻害」tension の未解決設計問題に reframe**。**正順(Rs 裁定 01:06)= FLAT scene 深さ sweep 先行**(COORD 実行中、= VN-2 の fold 材料)→ sweep 結果と slot reframe を **併せて統合検討**。∴ VN-1/VN-2 は now 相互結合(深さ軸が両者を跨ぐ)。COORD は表形式整形の協力可(%12 23:38)。
