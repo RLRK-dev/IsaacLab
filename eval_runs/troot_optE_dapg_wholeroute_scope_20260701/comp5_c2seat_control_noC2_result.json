@@ -1,0 +1,15 @@
+{
+ "control": "route_c2_scene=False (NO C2 clip)",
+ "cell": "x0_y0",
+ "drive": "feedforward (D rho=0)",
+ "steps_run": 499,
+ "early_done": 499,
+ "n_phases": 6,
+ "max_phase_reached": 3,
+ "full_fire": false,
+ "grip_loss_first_zero_pad_t": 397,
+ "grip_loss_phase": 3,
+ "pad_cable_max": 45,
+ "z_c1_end_mm": 824.023,
+ "interpretation": "If early-done/phase-3-stall matches the route_c2_scene=True run -> C2-clip exonerated (FORK-1). If full-fire completes here -> C2-clip presence implicated."
+}
