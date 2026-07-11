@@ -1,8 +1,8 @@
-# THREAD における BC+RL アルゴリズム解説（現況版 v0.1a）
+# THREAD における BC+RL アルゴリズム解説（現況版 v0.1b）
 
-**著者:** PAPER-AUTHOR (w2:p9)　**日付:** 2026-07-11 00:1x JST（v0.1 = 07-10 23:58）　**HEAD:** `6e48d0a439`
+**著者:** PAPER-AUTHOR (w2:p9)　**日付:** 2026-07-11 13:3x JST（v0.1 = 07-10 23:58 / v0.1a = 07-11 00:1x）　**HEAD:** `6e48d0a439`（初版時。v0.1b で `4de1b0b200` にて全引用を再検証 — 引用コード 5 本は両 HEAD 間で無変更）
 **検証:** RS-TECH-LEAD (%12) 技術 cross-PV = **PASS**（2026-07-11 00:10、blocking なし。LOW 1 件 = §4.6(b) の cite `:16`→`:17` を v0.1a で修正済）
-**種別:** 解説文書（paper-only / 0-commit / コード変更なし / 新規設計判断なし）
+**種別:** 解説文書（コード変更なし / 新規設計判断なし。初版は paper-only で作成 → Rs 授権で commit `ecfd90c620` + push 済）
 **[L-TRIAGE]** 新規ファイル作成 = L2 の質的トリガに該当。ただし本文書は `eval_runs/` 内の解説文書で、コード・config・挙動 surface はゼロ、設計判断を一切行わない（既に確定した事実の再記述のみ）。→ **final_L = L1**（p9 自己申告 → **RS-TECH-LEAD が CONFIRM、2026-07-11 00:10**）。gate = 本文書に対する %12 技術 cross-PV（PASS、2026-07-11 00:10）＋ Rs 最終 review。前例: `BCRL_DEVPLAN_LADDER_V2_RSTECHLEAD_20260705.md:7`（同種の降格申告、ただし当該 doc は設計提案のため L2）。
 
 ---
@@ -14,7 +14,7 @@ Rs 指示は「**いま**ここで使用されている BC+RL のアルゴリズ
 | 区分 | 対象 | 本文書での扱い |
 |---|---|---|
 | **主（実装済・実測あり）** | R0 pure BC / OG offline gate / R1 off-path 教師 4 経路 / closed-loop runner | 現在形で記述。全記述に `file:line` または一次 JSON の根拠を付す |
-| **従（Rs 承認済・未 build）** | R2 α residual / R3 RLPD / R4 | 「**設計として承認済、コード未実装**」と明記。**現在形で動作を記述しない** |
+| **従（Rs 承認済・未 build）** | R2 α residual / R3 RLPD（R4 は承認済設計ではなく**探索ラベル・未確定**、§9） | 「**設計として承認済、コード未実装**」と明記。**現在形で動作を記述しない** |
 | **除外** | env6-VBD 系トラック | LEDGER で DISCARDED。歴史的言及のみ、現行アルゴリズムとして扱わない |
 
 **「未 build」を明示する理由（本 project の規律）:** 記録がコードに先行する場合、その機構が runtime で ACTIVE か否かを区別しないと「見かけ上あるが物理的に未接続」の主張になる（GROVE rule 12 = ABSENT-IN-CODE）。本文書はこの区別を段階ラベルで担保する。
@@ -34,7 +34,7 @@ Rs 指示は「**いま**ここで使用されている BC+RL のアルゴリズ
 
 ### 1.2 出発点 — 「動く scripted route」が既にある
 
-学習の前に、**人手で書かれた scripted route（frozen script base）が既に動いている**。これが本 project の BC+RL 設計を他の一般的な設定と決定的に分ける。
+学習の前に、**人手で書かれた scripted route（frozen script base）が既に動いている**（その土台 = C1→C2 再把持の WORKING 実証、LEDGER `:43`）。これが本 project の BC+RL 設計を他の一般的な設定と決定的に分ける。
 
 - 公式成功率 **strict_v2 = 58/81 = 0.716**、Wilson95 信頼区間 [0.610, 0.803]（`RS_W0APRIME_PACKET_20260705.md:34`）
 - 分子の定義（§運用29 準拠、predicate-complete）= 「C1 を保持し続けている ∧ C2 に正直に着座した ∧ SUCCESS 判定」
@@ -133,7 +133,7 @@ a = 2·(wp − lo) / (hi − lo) − 1        (route_demo_to_bc.py:180-183)
 |a| ≤ 0.95 を assert (:487)
 ```
 
-**なぜ切り替えたか（重要）:** delta 表現では、実行時に `目標 = 現在位置 + a·scale` として **差分を積分していく**。BC の微小な予測誤差がステップごとに蓄積し、開ループ 5 本すべてが reach wall に達した（把持スパンが 88mm から 122.9mm へ崩れ、把持力 0N）。これは「conservative-definite な失敗」として bank されている（devplan `:25`）。
+**なぜ切り替えたか（重要）:** delta 表現では、実行時に `目標 = 現在位置 + a·scale` として **差分を積分していく**。BC の微小な予測誤差がステップごとに蓄積し、開ループ 5 本すべてが reach wall に達した（両手間スパンが**指令 88mm に対し実測 122.9mm** まで崩れ、把持力 0N。88 は指令値 — §8.4 の 88/92.4 注記参照）。これは「conservative-definite な失敗」として bank されている（devplan `:25`）。
 
 絶対目標表現は各ステップで **絶対 anchor に再固定される**ため、この積分病理が構造的に起きない。実測でも、開ループ誤差が一度 433mm に跳ねた後に 9–16mm へ再収束する（re-anchoring）ことが確認され、Rs が正式採用した（LEDGER `:46`、DQ6 CLOSED）。
 
@@ -168,6 +168,8 @@ obs `[6:9]` に入れる節点はフェーズ依存で切り替わる（`route_d
 | 乱数固定 | seed（既定 0）で torch / numpy / random / cuda を固定 | `bc_train_route.py:59-63` |
 
 「ランダム行分割の val は同一デモの隣接フレームが両側に入りうるため楽観的になる」という認識から、**別デモ丸ごとの holdout を authoritative に置く**という設計になっている点は、この実装の良い性質である。
+
+> **注（既定値と実測値の区別）:** 表のエポック 100 はツールの既定値。§4.6・§5.8 で実測された policy は **2000 エポック**で学習されたものである（`b2_cpD_report.md:8` の学習表、および `og_gate.json` の provenance `policy_abs_b2_e2000.pt`）。
 
 ### 4.6 R0 の結果 — 「デモを写す力はある。軌道から外れると無力」
 
@@ -222,7 +224,7 @@ BC policy を実際に sim で転がす（rollout）と GPU 時間が高くつ�
 
 ### 5.5 pair metric — 「標的が動く」フェーズ用
 
-C2 再把持フェーズでは、右手が狙う対象（ケーブル）が、左手が持っているせいで**動く**。この状況で単一の γ⊥ は符号の意味を失う。そこで 2 つのゲインに分解する（`:34,240-283`）。
+C2 再把持フェーズでは、右手が狙う対象（ケーブル）が、左手が持っているせいで**動く**。この状況では単一の γ⊥ で合否の向きが定まらない — 固定 anchor のフェーズでは「追従ゲイン ≈ 1」が悪（ずれの追認）だが、動く標的では「追従 ≈ 1」がむしろ正解になり、大小の解釈が反転するからである（γ⊥ 自体は最大特異値なので常に非負）。そこで 2 つのゲインに分解する（`:34,240-283`）。
 
 | 指標 | 定義 | 望ましい値 |
 |---|---|---|
@@ -260,7 +262,7 @@ C2 再把持フェーズでは、右手が狙う対象（ケーブル）が、�
 | C2_REGRASP 収縮 | 5.0mm → **5.525mm** | 縮む | 発散 |
 | **総合** | | | **STOP** |
 
-**読み方:** γ⊥ ≈ 1.0〜2.5 は「押された分をそのまま追認する」を意味し、pair の `ee_only 0.973 / seg 0.282` は「**自分のずれは直さないのに、ケーブルの動きには追従しない**」= 完全に逆である。そして null_beat が負 ＝ **入力を無視する degenerate policy に負けている**。
+**読み方:** γ⊥ ≈ 1.0〜2.5 は「押された分をそのまま追認する」を意味し、pair の `ee_only 0.973 / seg 0.282` は「**自分のずれはそのまま追認し（直さず）、かつケーブルの動きには追従しない**」を意味する — 望ましい姿（自分のずれは直す ≈0 / ケーブルには追従 ≈1）と**両方とも逆**である。そして null_beat が負 ＝ **入力を無視する degenerate policy に負けている**。
 
 結論は 1 行で言える：**この BC は、観測から状態を読んで行動を選んでいるのではなく、自分の直前の EE 位置と行動の相関を写している（copycat）。**
 
@@ -274,7 +276,11 @@ C2 再把持フェーズでは、右手が狙う対象（ケーブル）が、�
 
 ±20mm のオフセット録画を増やして学習。→ 形式的 OG gate は **STOP 過剰決定**（movable γ⊥ すべて > 0.5、null_beat −0.261）。仮説「復元能力 = データ多様性の不足」は **REFUTED**（LEDGER `:46`）。
 
-### 6.2 経路 2 — (iv): 合成摂動でデータ拡張
+> （注）この測定は §5.8 と**同一 run** である。§4〜§5 で「R0 の実測」として示した `b2_cpE_og/bc/og_gate.json` は、まさにこの ±20mm 多様デモで学習した B2 policy の判定であり、「多様性を入れた上でなお STOP」がこの経路の結論になる。
+
+### 6.2 経路 2 — stage-(iv): 合成摂動でデータ拡張
+
+> （番号の注意）この「(iv)」は off-path 教師の段階名 **DQ7 stage-(iv)** であり、§4.3 の action 表現 **fork-(iv)** とは別物。番号の重複は原資料由来のため、本文書では前者を stage-(iv) と表記する。
 
 デモ状態を人工的にずらし、「正しい戻り行動」をラベルとして合成（`route_demo_to_bc.py:1044-1152`、既定 OFF）。→ 妥当性判定 3/3 未達。しかも**摂動を小さくすると悪化する**という、拡張幅の調整では消えない構造的緊張が出た。conservative-definite な STOP として bank（LEDGER `:46`）。
 
@@ -288,18 +294,18 @@ sim 上で実際にひと蹴り入れ、その後の**復帰フレームだけ**
 
 C2 再把持フェーズで、obs が渡す節点は「クリップ中心に最も近い節点」(`_seg_rule:128`) だが、右手が実際に狙うのは「把持レーン（C2 中心 ± 44mm）に最も近い節点」である。約 44mm ずれた**別の節点**を見ていた。→ obs を実際の狙いに合わせて切り替えて再学習。
 
-→ **REFUTED**。seg 0.249 → 0.24（実質不変）、ee_only 0.973 → 0.958（依然 STOP）（LEDGER `:46`）。
+→ **REFUTED**。seg 0.249 → 0.24（実質不変）、ee_only 0.973 → 0.958（依然 STOP）（LEDGER `:46`。基準値 0.249 は経路 3 の batch 学習後 policy の値 — §5.8 の 0.282 は B2 時点の policy で別 run）。
 
 ### 6.5 4 経路の収束 — 何が確定したか
 
 | 経路 | 仮説 | 結果 |
 |---|---|---|
 | B2 | データ多様性の不足 | REFUTED |
-| (iv) | 合成摂動で教えられる | STOP（構造的緊張） |
+| stage-(iv) | 合成摂動で教えられる | STOP（構造的緊張） |
 | (ii) | 物理摂動で教えられる | 機構は効くが plateau ~1.05 |
 | obs-switch | 観測対象の取り違え | REFUTED |
 
-さらに **capacity pre-test は PASS**（ネットワーク容量の問題ではない）。
+さらに **capacity pre-test は PASS** — plateau の原因はネットワーク容量（表現の attractor）ではなく、データ相関＝copycat にある（devplan `:27`、commits `825b986390`/`94c0c4620e`）。
 
 > **確定した結論:** 純粋な BC は、off-path からの復元（restoring）を合格水準まで教えられない。原因はデータ量でも容量でも観測対象でもなく、**BC の目的関数そのもの**（デモ分布上の教師付き回帰）にある。
 
@@ -333,40 +339,42 @@ C2 再把持フェーズで、obs が渡す節点は「クリップ中心に最�
 
 ### 8.2 Δ 非累積契約（最重要の hard 要件）
 
-R0 の delta モードが破綻した機構（§4.3）が residual channel の中で再現しないよう、**Δ は base の絶対目標への per-step offset であり、積分してはならない**。`Δ = 一定 → drift = 0` の回帰テストを env の DoD に含めることが義務づけられている（`P2_ROUTE_ENV_SPEC_INPUT_W0C_RSTECHLEAD_20260705.md:30`）。
+R0 の delta モードが破綻した機構（§4.3）が residual channel の中で再現しないよう、**Δ は base の絶対目標への per-step offset であり、積分してはならない**。`Δ = 一定 → drift = 0` の回帰テストを env の DoD に含めることが義務づけられている（`P2_ROUTE_ENV_SPEC_INPUT_W0C_RSTECHLEAD_20260705.md:35`）。
 
 ### 8.3 α の必須機構 3 点
 
-「完全状態が観測できる sim で、位置 DR だけを与えたら residual の最適解は 0 になってしまう」という批判（M-C）に対し、次の 3 点が必須要素として設計に組み込まれている（`P2_ROUTE_ENV_SPEC_INPUT_W0C_RSTECHLEAD_20260705.md:32`、packet `:45`）。
+「完全状態が観測できる sim で、位置 DR だけを与えたら residual の最適解は 0 になってしまう」という批判（M-C）に対し、次の 3 点が必須要素として設計に組み込まれている（`P2_ROUTE_ENV_SPEC_INPUT_W0C_RSTECHLEAD_20260705.md:37`、packet `:45`）。
 
 1. **oracle による drift-recovery relabel** — base 近傍から逸脱したときの復帰教師（ただし oracle は script 忠実であり、base 自体が失敗する corner の修正は教えられない、と限界が明記されている）
 2. **構造化 common-mode 探索による局所 RL 発見** — 腕ごとに独立なノイズを乗せると把持スパンが壊れて即終了するため、**両腕共通成分（common-mode）主体**にノイズを構造化する。発見確率 `p_hit` を事前計算して discharge 条件に加える
 3. **発見不能領域の draw 会計** — 幾何的に勝てない cell（bow-chord 112mm > スパン窓）は「引き分け」として扱い、DR の台から除外して limitation として文書化する
 
-補足として、**恒久原則 0**：双腕の対量に作用する全機構（探索ノイズ / クランプ / rate-limit / relabel / obs-DR）は **common-mode と differential に分解して設計し、differential 成分は正当化なしに導入しない**（`:63`）。これは同型の事故が 3 件収束した結果として昇格した原則である。
+補足として、**恒久原則 0**：双腕の対量に作用する全機構（探索ノイズ / クランプ / rate-limit / relabel / obs-DR）は **common-mode と differential に分解して設計し、differential 成分は正当化なしに導入しない**（spec `:68`）。これは同型の事故が 3 件収束した結果として昇格した原則である。
 
 ### 8.4 env の契約（承認値）
 
 | 項目 | 値 | 根拠 |
 |---|---|---|
-| 観測 | **62 次元**（57D → 60D → 62D と 2 度改訂。`[60]` C1 域 cable-z、`[61]` C1 flank 最大 z を追加） | `P2_ROUTE_ENV_SPEC_INPUT_W0C_RSTECHLEAD_20260705.md:133`（Rs、v1.5g） |
+| 観測 | **62 次元**（57D → 60D → 62D と 2 度改訂。`[60]` C1 域 cable-z、`[61]` C1 flank 最大 z を追加） | `P2_ROUTE_ENV_SPEC_INPUT_W0C_RSTECHLEAD_20260705.md:138`（Rs、v1.5g） |
 | 行動 | **6 次元 position-only residual**（回転次元は近似不活性のため除外を推奨、DC-1s3） | packet `:47` |
-| グリッパ | 行動次元に**含めない**（scripted 2 段サーボの predicate） | spec `:51` |
+| グリッパ | 行動次元に**含めない**（scripted 2 段サーボの predicate） | spec `:56` |
 | horizon | **900 RL step**（canonical 実測 max 771 に ×1.17 の余裕） | packet `:62` |
-| 報酬 | **sparse 主体** — フェーズ完了 predicate G1–G6 + 終端 SUCCESS + 時間罰 −0.01/step | spec `:67` |
-| 成功条件 | **strict_v2 の完全 mirror**（C2 正直着座を K=10 持続 ∧ C1 保持 ∧ 非落下 ∧ 順序 gating ∧ スパン guard） | spec `:68` |
-| 終了 | success ∨ timeout(900) ∨ explosion ∨ drop。`time_outs` は **timeout のみ**（value bootstrapping 汚染の禁止） | spec `:69` |
+| 報酬 | **sparse 主体** — フェーズ完了 predicate G1–G6 + 終端 SUCCESS + 時間罰 −0.01/step | spec `:72` |
+| 成功条件 | **strict_v2 の完全 mirror**（C2 正直着座を K=10 持続 ∧ C1 保持 ∧ 非落下 ∧ 順序 gating ∧ スパン guard） | spec `:73` |
+| 終了 | success ∨ timeout(900) ∨ explosion ∨ drop。`time_outs` は **timeout のみ**（value bootstrapping 汚染の禁止） | spec `:74` |
 
-**報酬の健全性検算（§運用22）:** 正の予算 = 5×5（G1–G5）+ 200（G6）= 225、罰の最悪累積 = 0.01×900 + 10 = 19 → 比 1:11.8（`spec:67`）。dense な距離整形は初期不採用（過去の hover デッドロックの教訓）。
+**報酬の健全性検算（§運用22）:** 正の予算 = 5×5（G1–G5）+ 200（G6）= 225、罰の最悪累積 = 0.01×900 + 10 = 19 → **罰:正 ≈ 1:11.8**（危険水準は罰:正 > 5:1。`spec:72`）。式中の「+10」は drop 等の**終端失敗罰**の項（artifacts の ground-truth 表 `:28` に「即 drop = −11.00（時間罰込み）」等として現れる）。dense な距離整形は初期不採用（過去の hover デッドロックの教訓）。
 
-**フェーズ predicate（G1–G6）:** G1 cage（フィンガ閉 ∧ 接触 ∧ スパン 92.4mm）→ G2 lift（静置時からの持ち上げ +40mm）→ G3 C1 着座（<3mm ∧ ピン発火）→ G4 再把持成立 → G5 C2 着座（<3mm）→ G6 SUCCESS（G5 を 10 step 持続）。latch 済みで一度だけ発火し、取り消されない（`P2_REWARD_ARTIFACTS_W0C_DRAFT_20260705.md:10`）。
+**フェーズ predicate（G1–G6）:** G1 cage（フィンガ閉 ∧ 接触 ∧ スパン 92.4mm）→ G2 lift（静置時からの持ち上げ +40mm）→ G3 C1 着座（<3mm ∧ ピン発火）→ G4 再把持成立 → G5 C2 着座（<3mm）→ G6 SUCCESS（G5 を 10 step 持続）。latch 済みで一度だけ発火し、取り消されない（`P2_REWARD_ARTIFACTS_W0C_DRAFT_20260705.md:15`）。
 
-> **⚠ 88mm と 92.4mm の区別（混同注意）:** 不変前提 #2 の「88mm」は**指令値**（`GRIP_HALF_SPAN 0.044` × 2）である。一方 G1 と span guard が見るのは**実測の achieved coupling スパン = 92.4mm**（81 cell × dual-grip フェーズで [92.38, 92.42]、packet `:39`）。設計初期に窓を 88±5mm で置いたのは**中心の誤り**であり、実測 92.4 に対して余裕が 0.6mm しかなく DR 下で G1 が永久に発火しない episode を生む、と訂正されている（`P2_REWARD_ARTIFACTS_W0C_DRAFT_20260705.md:10`）。指令値と実測値を取り違えないこと。
+> **⚠ 88mm と 92.4mm の区別（混同注意）:** 不変前提 #2 の「88mm」は**指令値**（`GRIP_HALF_SPAN 0.044` × 2）である。一方 G1 と span guard が見るのは**実測の achieved coupling スパン = 92.4mm**（81 cell × dual-grip フェーズで [92.38, 92.42]、packet `:39`）。設計初期に窓を 88±5mm で置いたのは**中心の誤り**であり、実測 92.4 に対して余裕が 0.6mm しかなく DR 下で G1 が永久に発火しない episode を生む、と訂正されている（`P2_REWARD_ARTIFACTS_W0C_DRAFT_20260705.md:15`）。指令値と実測値を取り違えないこと。
+
+> **（引用時点の注記）** 本節で引用した spec / artifacts の両 doc には、env-core の build 完了を受けて 2026-07-11 の vault 監査で「SUPERSEDED-in-substance」banner が付与された（値の live SSOT は `task_config.py` と env code に移行）。本表は **Rs 承認時の設計値**としてこれらを引用しており、行番号は banner 挿入後の現行版に合わせてある。
 
 ### 8.5 未解決の設計論点
 
 - **phase-clock（CRIT1）**: base が時間で進む間に Δ がケーブル状態を変えると同期が壊れる。逸脱が閾値を超えたら base を止めて oracle に問い直す案 (b) が推奨だが、Rs 決定待ち（packet `:58`）
-- **OG gate の移植**: 現在の OG の検証実績は「27 次元 obs / 6 次元絶対目標」契約の上でのもの。契約が変われば**検証状態はリセットされる**。さらに composite（base + Δ）では Δ→0 のとき γ⊥ ≈ 0 となり、**壊れた residual を GO と誤判定する縮退**が起きる。移植と再検証が完了するまで OG を abort 規則に使わないことが明記されている（devplan `:117-121`、spec `:90`）
+- **OG gate の移植**: 現在の OG の検証実績は「27 次元 obs / 6 次元絶対目標」契約の上でのもの。契約が変われば**検証状態はリセットされる**。さらに composite（base + Δ）では Δ→0 のとき γ⊥ ≈ 0 となり、**壊れた residual を GO と誤判定する縮退**が起きる。移植と再検証が完了するまで OG を abort 規則に使わないことが明記されている（devplan `:117-121`、spec `:95`）
 
 ---
 
@@ -396,7 +404,7 @@ R0 の delta モードが破綻した機構（§4.3）が residual channel の�
 | 凍結 base + 小 head + 参照 anchor | **RL Token** (arXiv:2604.23073) | 実ケーブル精密作業（zip-tie / Ethernet / charger）での 2026 年の直接証拠。R3 構造の同型 |
 | 長 horizon の advantage 条件付け | RECAP / π*0.6 (arXiv:2511.14759) | R4 の発想源。5B VLA 前提のため数値は借りない |
 
-**成立性の確認（Gap 判定）:** 「demo で補強した **RL** で、**双腕**の**クリップ経路全体**を端到端」に相当する公開事例は **ゼロ**（2026-07 時点、上記探索範囲）。最も近いのは単腕・RL なしの階層 IL によるケーブル routing（IEEE T-RO 2024）と、stage 局所 RL の RL Token である（KN `:89`）。
+**成立性の確認（Gap 判定）:** 「demo で補強した **RL** で、**双腕**の**クリップ経路全体**をエンドツーエンドで」に相当する公開事例は **ゼロ**（2026-07 時点、上記探索範囲）。最も近いのは単腕・RL なしの階層 IL によるケーブル routing（IEEE T-RO 2024）と、stage 局所 RL の RL Token である（KN `:89`）。
 
 **保守性の注記:** 上記実機系の結果は THREAD sim への直接転移を保証しない。algorithm class の成立性の証拠としては **non-conservative**（現実 → sim 方向の壁: 接触モデル差、horizon 長）である（KN `:115`）。
 
@@ -464,4 +472,5 @@ R0 の delta モードが破綻した機構（§4.3）が residual channel の�
 
 *v0.1 初版 — PAPER-AUTHOR (w2:p9), 2026-07-10 23:58 JST.*
 *v0.1a — 2026-07-11 00:1x JST. %12 cross-PV PASS 反映（§4.6(b) cite `:16`→`:17` / null 構成差の cite 明示 / devplan:24 は訂正対象でない旨を明記 / L-TRIAGE L1 = CONFIRM 反映）。*
-*paper-only / 0-commit. 設計判断ゼロ（既存の確定事実の再記述のみ）。scope の最終権威 = Rs。*
+*v0.1b — 2026-07-11 13:3x JST（Rs「論文をチェックし、修正すべき点があれば修正」）. 全引用を HEAD `4de1b0b200` で機械再検証。修正: ① spec / artifacts への行番号引用 12 箇所を +5 更新（2026-07-11 vault 監査で両 doc 先頭に 5 行 banner 挿入のため。LEDGER 行 43/45/46/47 は不変・引用コード 5 本は commit 無変更・og_gate.json 引用 8 値は commit 版と一致を確認）② §6.5 capacity pre-test に cite 追加 ③ §4.5 に既定エポック（100）と実測 policy（2000）の区別注記 ④ §8.4 に spec/artifacts の SUPERSEDED-in-substance banner 付与（07-11 監査）の注記。加えて独立校閲（fresh-eye subagent、算術全検算一致・markdown 破損なし）の指摘 11 件を反映: R4 の scope 表ラベル訂正（探索・未確定）/ B1 span 122.9 の基準明示（指令 88）/ §5.5 γ⊥「符号」→大小解釈の反転に精密化 / §5.8 読み方の接続詞論理修正 / §6.1 に §5.8 と同一 run である旨の注記（R0/B2 の同定）/ §6.4 基準値 0.249 の出所明示（経路 3 batch 後 policy）/ 罰:正比の向き明示 + 「+10」= 終端失敗罰の脚注 / stage-(iv) と fork-(iv) の番号衝突を表記分離 / §1.2 に LEDGER `:43` cite 追加（§13 との整合）/ 端到端→エンドツーエンド / header の 0-commit 表記を commit 済の現状に更新。*
+*設計判断ゼロ（既存の確定事実の再記述のみ）。scope の最終権威 = Rs。*
