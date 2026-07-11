@@ -1,6 +1,6 @@
-# THREAD における BC+RL アルゴリズム解説（現況版 v0.1d）
+# THREAD における BC+RL アルゴリズム解説（現況版 v0.1e）
 
-**著者:** PAPER-AUTHOR (w2:p9)　**日付:** 2026-07-11 13:5x JST（v0.1 = 07-10 23:58 / v0.1a = 00:1x / v0.1b = 13:3x / v0.1c = 13:49）　**HEAD:** `6e48d0a439`（初版時。v0.1b で `4de1b0b200` にて全引用を再検証 — 引用コード 5 本は両 HEAD 間で無変更）
+**著者:** PAPER-AUTHOR (w2:p9)　**日付:** 2026-07-11 14:1x JST（v0.1=07-10 23:58 / a=00:1x / b=13:3x / c=13:49 / d=13:5x）　**HEAD:** `6e48d0a439`（初版時。v0.1b で `4de1b0b200` にて全引用を再検証 — 引用コード 5 本は両 HEAD 間で無変更）
 **検証:** RS-TECH-LEAD (%12) 技術 cross-PV = **PASS**（2026-07-11 00:10、blocking なし。LOW 1 件 = §4.6(b) の cite `:16`→`:17` を v0.1a で修正済）
 **種別:** 解説文書（コード変更なし / 新規設計判断なし。初版は paper-only で作成 → Rs 授権で commit `ecfd90c620` + push 済）
 **[L-TRIAGE]** 新規ファイル作成 = L2 の質的トリガに該当。ただし本文書は `eval_runs/` 内の解説文書で、コード・config・挙動 surface はゼロ、設計判断を一切行わない（既に確定した事実の再記述のみ）。→ **final_L = L1**（p9 自己申告 → **RS-TECH-LEAD が CONFIRM、2026-07-11 00:10**）。gate = 本文書に対する %12 技術 cross-PV（PASS、2026-07-11 00:10）＋ Rs 最終 review。前例: `BCRL_DEVPLAN_LADDER_V2_RSTECHLEAD_20260705.md:7`（同種の降格申告、ただし当該 doc は設計提案のため L2）。
@@ -89,11 +89,26 @@ base を script → BC → （将来）vision/VLA と差し替えても同じ原
 
 段の定義は `BCRL_DEVPLAN_LADDER_V2_RSTECHLEAD_20260705.md:128-159`。R2/R3 の承認は Rs W0-a′ 一括承認（LEDGER `:47`、commit `b7d7857dfc`）。
 
+### 3.1 アルゴリズム名（明示）
+
+「BC+RL」の中身を具体名で固定する。**現在形で動いている学習アルゴリズムは BC のみ**で、RL は設計段階（未 build）である点に注意。
+
+| 役割 | アルゴリズム名（具体） | 状態 | 根拠 |
+|---|---|---|---|
+| **BC** | **素の行動クローニング（vanilla Behavior Cloning, BC）** = 観測→行動の **MSE（L2）回帰**。決定論的 MLP policy（RSL-RL `ActorCritic` の actor 平均出力）を教師付き回帰で学習。GAIL / diffusion policy / implicit BC / GMM policy では**ない** | ✅ 実装・稼働 | `bc_pretrain.py:96`（`nn.MSELoss`）, `:107`（actor 平均） |
+| **RL（既存 infra）** | **DAPG = PPO（on-policy, RSL-RL `OnPolicyRunner`）+ BC 補助損失**（重み α を線形 anneal） | コードに存在。ただし**旧 per-skill 学習器（AC/AR/Grip 等）用であり、whole-route task には未接続**（route RL env が ABSENT） | `train_common.py:7`（doc string「DAPG (PPO + BC auxiliary loss)」）, `:126`（`class_name:"PPO"`）, `:177,195`（RSL-RL `OnPolicyRunner`） |
+| **RL（R2、α 採択）** | **PPO ベースの residual-on-frozen-script**（ResiP 系譜、per-step 非累積 Δ）+ 交互 aux imitation | ⏸ 設計承認済・未 build | devplan `:141-142`, packet `:45` |
+| **RL（R3 既定）** | **RLPD**（**SAC** + デモ/オンライン 50:50 対称 replay + critic LayerNorm + アンサンブル + 高 UTD）+ **IBRL** 型 凍結 policy 提案 | ⏸ 設計承認済・未 build（SAC/replay/ensemble infra は repo に**ゼロ**） | devplan `:150-153`, packet `:50` |
+
+**一言:** いま「動いている」学習器は **素の MSE-BC** だけ。RL は名前まで確定しているが（**PPO 系 residual → RLPD/SAC + IBRL**）、whole-route task 上では未 build。なお「DAPG」は canonical には BC 正則化 on-policy PG（重みを decay→0）だが、本 project の既存実装は α が 0.5 床で止まり decay→0 ではない（命名注意 — §10 の文献対応表も参照）。
+
 ---
 
 # 第 I 部 ── 実装済みのアルゴリズム
 
-## 4. R0: pure BC（行動クローニング）
+## 4. R0: pure BC（行動クローニング = MSE 回帰）
+
+> **アルゴリズム名:** 素の行動クローニング（vanilla Behavior Cloning）。決定論的 MLP policy に対する **観測→行動の MSE 回帰**であり、分布マッチング系（GAIL 等）や生成系（diffusion policy）ではない。詳細は §4.5、名称一覧は §3.1。
 
 ### 4.1 データの作り方
 
@@ -333,6 +348,8 @@ C2 再把持フェーズで、obs が渡す節点は「クリップ中心に最�
 
 ## 8. R2: α = residual-on-frozen-script（承認済・未 build）
 
+> **アルゴリズム名:** 凍結した scripted route を base とした **residual RL**（ResiP 系譜）。学習器は **on-policy PPO（RSL-RL）+ BC 補助損失（DAPG 型）** を residual 形で用いる。既存の `train_common.py`（DAPG=PPO+BC 補助）が基盤だが、whole-route task 用には未接続・未 build。名称一覧は §3.1。
+
 ### 8.1 何をする設計か
 
 凍結した scripted route を base とし、学習 policy はその**絶対目標に対する 1 ステップぶんのオフセット Δ** だけを出力する（`RS_W0APRIME_PACKET_20260705.md:45`、DC-1 = α 採択、Rs 2026-07-06 08:3x）。
@@ -378,7 +395,7 @@ R0 の delta モードが破綻した機構（§4.3）が residual channel の�
 
 ---
 
-## 9. R3 / R4（承認済・未 build、および探索）
+## 9. R3 / R4（R3 = RLPD/SAC + IBRL 提案、承認済・未 build / R4 = 探索）
 
 **R3 既定 = RLPD**（DC-2、packet `:50`）: SAC + 「各バッチの 50% をデモ、50% をオンライン replay から取る対称サンプリング」+ critic の LayerNorm + アンサンブル + 高 UTD。**offline 事前学習を行わない**のが設計点であり、そのため Cal-QL / WSRL は条件付き部品に留まる。
 
@@ -475,4 +492,5 @@ R0 の delta モードが破綻した機構（§4.3）が residual channel の�
 *v0.1b — 2026-07-11 13:3x JST（Rs「論文をチェックし、修正すべき点があれば修正」）. 全引用を HEAD `4de1b0b200` で機械再検証。修正: ① spec / artifacts への行番号引用 12 箇所を +5 更新（2026-07-11 vault 監査で両 doc 先頭に 5 行 banner 挿入のため。LEDGER 行 43/45/46/47 は不変・引用コード 5 本は commit 無変更・og_gate.json 引用 8 値は commit 版と一致を確認）② §6.5 capacity pre-test に cite 追加 ③ §4.5 に既定エポック（100）と実測 policy（2000）の区別注記 ④ §8.4 に spec/artifacts の SUPERSEDED-in-substance banner 付与（07-11 監査）の注記。加えて独立校閲（fresh-eye subagent、算術全検算一致・markdown 破損なし）の指摘 11 件を反映: R4 の scope 表ラベル訂正（探索・未確定）/ B1 span 122.9 の基準明示（指令 88）/ §5.5 γ⊥「符号」→大小解釈の反転に精密化 / §5.8 読み方の接続詞論理修正 / §6.1 に §5.8 と同一 run である旨の注記（R0/B2 の同定）/ §6.4 基準値 0.249 の出所明示（経路 3 batch 後 policy）/ 罰:正比の向き明示 + 「+10」= 終端失敗罰の脚注 / stage-(iv) と fork-(iv) の番号衝突を表記分離 / §1.2 に LEDGER `:43` cite 追加（§13 との整合）/ 端到端→エンドツーエンド / header の 0-commit 表記を commit 済の現状に更新。*
 *v0.1c — 2026-07-11 13:5x JST（%12 v0.1b verify = PASS の締め note 反映）. §6.4 の値 0.249/0.24 に直接 file:line cite を追加（LEDGER `:46` は文脈のみで値を載せないため）: baseline `dq7_ii_obsswitch_test/og_baseline_rerun/og_gate.json:90-91` / switched `dq7_ii_obsswitch_test/og_switch/og_gate.json:90-91`。「経路3 batch policy」ラベルは `dq7_ii_cp3_batch/og/og_gate.json` との C2_REGRASP seg/ee 値の一致（metric-equivalence）で検証。⚠ %12 の候補 cite `b2_cpE_iv/og_aug_bc_s3:180-181` は §運用28 で不採用 — 当該行は `gamma_perp_mean:0.249`（偶然一致した別メトリクス）で、C2_REGRASP seg gain ではなかった。*
 *v0.1d — 2026-07-11 13:5x JST（%12 §運用28 reconcile 反映）. §6.4 / footer の「byte 一致」表現を **metric-equivalence（C2_REGRASP seg/ee 値の一致）** に精密化。自己照合で確認: 両 og_gate.json は全ファイル sha256 が相違（null_beat 欄 None vs 0.492）→「byte 一致」は overclaim だった。同一 policy の根拠は C2_REGRASP pair 値（seg 0.249 / ee 0.973）の一致であり、label 結論は不変。（相互 §運用28: 私が %12 の cite を、%12 が私の overclaim を捕捉。）*
-*設計判断ゼロ（既存の確定事実の再記述のみ）。scope の最終権威 = Rs。*
+*v0.1e — 2026-07-11 14:1x JST（Rs「BC のアルゴリズム名、RL のアルゴリズム名を明確に」）. §3.1「アルゴリズム名（明示）」を新設し、§4/§8/§9 見出しに名称注記を追加。コードで確定した名称: BC = 素の MSE 回帰 BC（`bc_pretrain.py:96,107`）/ RL 既存 infra = DAPG=PPO(on-policy, RSL-RL OnPolicyRunner)+BC 補助（`train_common.py:7,126,177,195`）/ R2 = PPO 系 residual（ResiP）/ R3 = RLPD（SAC）+IBRL（未 build、`devplan:150`）。全 cite on-disk 検証済。設計判断ゼロ（既存事実の再記述のみ）。*
+*scope の最終権威 = Rs。*
