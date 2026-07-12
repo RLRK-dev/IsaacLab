@@ -185,7 +185,7 @@ conformance v2.2 (本 doc) → %12 verify **PASS** (23:48) + %9 verify **PASS-WI
 ## §6. post-build leg 結果 (v2.3 追記 00:3x → v2.4 %10 audit fold 01:2x — 全 leg PASS)
 <!-- 節番号は v2.4 で §7↔§6 を入替 (%10 F-2b: 物理順序と番号の昇順一致) -->
 
-**v2.4 追補 (%10 F-1、%12 裁定 = B2 内):** (a) resume 意味論 unit = `test_hold_resume_semantics` (writesite) + div ±1-chunk 判別 assert (step_target) — **両 suite 再走 PASS** (b) R5g stub×flag ValueError unit = test_guard 追補 — PASS (c) **leg9** tail 抑制 3 述語 (A 抑制/B S5/C flag-OFF)。F-2: header 版数 / 節順 / R1g pin file (`leg_grep_contract_v2_blast.txt` 生成) / R5g 型表記 = 全訂正。**leg8 経緯 note:** 初回 run = LEG2 comparator の throughput-key filter 漏れ + leg8 verdict の live-crossing 定式で FAIL=1 (`run_legs_stdout.txt` に保存) → comparator 修正 + C1 定式化 → 再走 PASS (`leg8_stdout.txt`)。run_legs.sh の `tail` 表示 bug は `-n` 化済 (unit 実行自体は当初から exit-gated)。
+**v2.4 追補 (%10 F-1、%12 裁定 = B2 内):** (a) resume 意味論 unit = `test_hold_resume_semantics` (writesite) + div ±1-chunk 判別 assert (step_target) — **両 suite 再走 PASS** (b) R5g stub×flag ValueError unit = test_guard 追補 — PASS (c) **leg9** tail 抑制 3 述語 (A 抑制/B S5/C flag-OFF)。F-2: header 版数 / 節順 / R1g pin file (`leg_grep_contract_v2_blast.txt` 生成) / R5g 型表記 = 全訂正。**leg8 経緯 note:** 初回 run = LEG2 comparator の throughput-key filter 漏れ + leg8 verdict の live-crossing 定式で FAIL=1 (`run_legs_stdout.txt` に保存) → comparator 修正 + C1 定式化 → 再走 PASS (`leg8_stdout.txt`)。run_legs.sh の `tail` 表示 error は**未修正の環境依存 quirk** (%10 訂正 01:3x: `-n` 形式は a2f544662b 時点で既に入っており追補で無変更、`-n` でも再現し得る) — **表示のみ・gating 無影響** (unit 実行行は各自 exit-gated)、権威 pin = per-suite stdout .txt。
 
 | leg | 結果 | 実測 |
 |---|---|---|
