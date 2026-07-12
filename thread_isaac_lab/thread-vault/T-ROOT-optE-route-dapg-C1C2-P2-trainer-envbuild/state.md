@@ -18,15 +18,16 @@ dependencies:
     - "P2-envcore COMPLETE (基底 build f6ee1443f5→HEAD 1640L) / P2-routeexec COMPLETE-with-carry-forward (抽出 twin run_route:1028 byte-repro 81/81)"
   blocker: []
 created: 2026-07-12T13:51:00+09:00
-last_updated: 2026-07-12T14:10:00+09:00
+last_updated: 2026-07-12T15:10:00+09:00
 spec_version: LTM-1 v1.2
 session_history:
+  - "2026-07-12 15:10 %11 (COORD, w2:p3) ⭐**B0 COMPLETE (全 4 項 discharge)** — B0-1 c1pin 3-file dead-branch c70ba1b849 (branch deadbranch/c1pin-refuted-20260712、DO NOT BUILD ON + refutation evidence) → revert a6b7ab6007 (net-zero + tree clean verify、%12 独立検証 PASS) / B0-2 consumer③ = ff-replay のみ縮退 記録 / B0-3 og format revert (完了済 14:0x) / B0-4 flag-OFF baseline pin **ca33d1e1a0** = 29-cell union 全 golden-match (2 層: 毎chunk 5 [x0_y0+DR4隅] / gate-iii 25 [dod9a_prime offline-mirror 導出、count=25 EXACT]; run1 5/5 byte-id + ref self-check PASS / run2 24/24 byte-id + strict mod==golden; %12 条件 a=導出 script+membership sha を manifest 記録 / b=B7 set-equality assert 埋込)。⚠finding: x0_y0 ∉ gate-iii 25-set (env exact-split 述語の不成立側 = 25-vs-58 gap 実体) → union pin で被覆 (%12 ACCEPT)。⭐副次: post-revert route_executor の golden byte 再現 = B0-1 regression 証拠兼務。次 = B1 route_t 骨格 [L-TRIAGE] (charter §4 template)。"
   - "2026-07-12 14:10 %12 (RS-TECH-LEAD, w2:p4) ⭐charter v0.2 BANKED — p1 verify 14:04 = PASS-WITH-CORRECTIONS (転記忠実性 全数照合 PASS / MED 2 fold: W-1 = §6 multi-cell 行に提示者 %12 + W1 完了報告 1-line Rs confirm / W-2 = B2 hold 両 leg を cuda:0 pin に訂正 [f343±1 bar は device 固有、CPU discharge = false-verdict risk]) → blocker 解消、**B1+ 解禁**。ERRATUM-1 (907a526df7) = B0-1 revert scope 3 files (%11 catch: newton_skill_env_base.py +28/-2 omit、%12 on-disk 裏取り: comment の FORK-1 root cause 主張 = REFUTED 済 false + spec 参照ゼロ)。B0-3 完了 (%11、og = revert 択 loud: pre-existing :32 Japanese-text が commit BLOCK → B6 行に carry 註記)。副次: pB tree-wide -f 由来 format dirt 多数 (B0 scope 外、報告のみ、chunk は explicit-path commit ゆえ非干渉)。"
   - "2026-07-12 13:51 %12 (RS-TECH-LEAD, w2:p4) ⭐node 作成 (trainer charter §1 lazy-spawn 授権 + Rs W0-a W1 着手承認 + 本 turn Rs directive「W1 build charter」)。charter v0.1 DRAFT 起草 (W1_ENVBUILD_CHARTER_RSTECHLEAD_20260712.md: B0-B7 chunk 分割 / per-chunk L3 gate template / 担当 %11 build・%10 audit・%12+%9 verify [devplan §7:192] / Rs 後決項 carry 表 / 衛生規則 M12)。prior-art V7 = PASS disposition (hits = 認可設計系譜の自己参照のみ)。on-disk 前提実測: c1pin +23/+70 残 dirty (B0-1 revert 対象) / run_route:1028 実在。1:1 binding = %11 (COORD) builder session (charter 受領時)。次: p1 verify dispatch → PASS 後 %11 B1+ 解禁 (B0 は即時可)。"
 ---
 
 # T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild — working notes
 
-- 現況 (13:51): charter v0.1 DRAFT / p1 verify PENDING / B0 即時着手可 (%11)。
+- 現況 (15:10): charter v0.2 BANKED / **B0 COMPLETE** (B0-4 pin ca33d1e1a0、29-cell union) / 次 = B1 route_t 骨格 L3 chain (%11 build 中)。
 - Anchors (§運用4): LEDGER row49/50 → charter (本 node) → spec v0.8.1 (設計 SSOT) → W0A_PACKET (数値 decision-of-record) → devplan §7:192 (担当)。
 - 数値基盤 = Rs W0-a 採択値 (HOLD 15/12/24placeholder、Δ-bound 0.020、DR±20 OFF 既定、mix 集合のみ)。smoke 再導出条項付きの値はその条項が governs。
