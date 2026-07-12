@@ -15,7 +15,7 @@
 | Anchor | Cite | 使用 fact |
 |---|---|---|
 | Stage-A DoD 列挙 | charter §3 Stage-A row | 設計対象 8 項の正典列挙 |
-| P4 Δ-bound discharge | charter §7 **+ ERRATUM 2026-07-12 (単位) + %9 再検証 script v2 sha a2ad75955d (supersedes fdcacf98、margin 10.78×、FEASIBLE 不変)** | per-step drift \|inc\| mean 0.27 / p95 1.08 / max 1.86 — **単位は mm/RL-step (charter 原文の mm/frame は mislabel、ISSUE-A)**; 結論方向は不変 (保守側誤り) |
+| P4 Δ-bound discharge | charter §7 **+ ERRATUM 2026-07-12 (単位) + %9 再検証 script v3 sha b55bc43d07 (supersedes a2ad75955d → fdcacf98; ERRATUM-2/-3 fold 済 [窓明示 + F1A_PRECEDENT_SCALE_MM 改名]; margin 10.78×、FEASIBLE 不変。経験的一致: 58mm 交差 frame == pad-drop frame == f397 → [0..397] 窓 = gripped 補正 regime そのもの)** | per-step drift \|inc\| mean 0.27 / p95 1.08 / max 1.86 — **単位は mm/RL-step (charter 原文の mm/frame は mislabel、ISSUE-A)**; 結論方向は不変 (保守側誤り) |
 | decimation 確定 | `newton_route_env.py:407` ≡ `route_executor.py:88` (cross-assert `:578`) | d=10 固定 → §2 pin 可能 |
 | 既存 Δ clamp / σ-cap | `newton_route_env.py:405-406` | DELTA_BOUND_M=0.020 / GRIPPING_ARM_SIGMA_CAP_M=0.002 |
 | route interface | `route_env_config.py:143-180` | v1 契約 (scalar-k、per-world 無し — §4.1 で v2 拡張) |
@@ -28,7 +28,7 @@
 | CABLE_XY_OFFSET 現 reader | `test_newton_clip_routing.py:8113` (os.environ) + `route_demo_recorder.py:321` (meta 権威) | env-level wiring 不在 (§6.1) |
 | base-DR-SR 82.4% | v1.5h §2 学習対象行 | **⚠ mechanism-non-transferable (pre-check MED-12): locked-runner live-recompute 経路の実測であり、recorded-staircase + stored-recenter の oracle 経路には転送不能 — 参考値に降格。oracle 経路の DR 到達性は §8 smoke leg で実測** |
 | env-core 実装済 inventory | `route_env_config.py:45-67` + `newton_route_env.py:1082-1102` + env-core DoD⑤ (f6ee1443f5 (初回 build) → HEAD (lane-floor fix 等 3 commits 込み、1640L)) | §1 境界 |
-| **grounding 基準 tree (v0.8 5体-fold H4)** | git HEAD `fb9000b476` + dirty deltas: newton_route_env.py +23L (route_c1_pin、gated-OFF、FORK-1 fix 仮説 = REFUTED disposition-pending) / route_executor.py +70L (同 arc) / og_offline_gate.py (format-only) | spec の行番号 cite は dirty tree 基準。c1pin diff の disposition (bank or revert) = build 前提条件: revert なら consumer ③ は ff replay のみに縮退 / keep なら per-world 化 (route_steps[0] 単一 world 読み + global _c1_pin_done latch + mjm.eq_data 共有 = multi-world 汚染 3 点) の再設計が必須 |
+| **grounding 基準 tree (v0.8 5体-fold H4)** | git HEAD `fb9000b476` + dirty deltas: newton_route_env.py +23L (route_c1_pin、gated-OFF、FORK-1 fix 仮説 = REFUTED disposition-pending) / route_executor.py +70L (同 arc) / og_offline_gate.py (format-only)。⟦13:1x 更新⟧ cablediag 生成元 (_DIAG 拡張 +122/-4) + 一次 npz + c1pin/sub10 evidence = **banked 311f18cb9b** (%11 が runner owner として bank、authorship = 当方 FORK-1 arc、C6 解消) — envs/ の c1pin code diff (+23/+70) は残 dirty で disposition (bank or revert) = build 前提条件のまま有効 | spec の行番号 cite は dirty tree 基準。c1pin diff の disposition (bank or revert) = build 前提条件: revert なら consumer ③ は ff replay のみに縮退 / keep なら per-world 化 (route_steps[0] 単一 world 読み + global _c1_pin_done latch + mjm.eq_data 共有 = multi-world 汚染 3 点) の再設計が必須 |
 
 ## §1. Scope 境界 — env-core 済み vs Stage-A delta (silent-drop なし)
 
