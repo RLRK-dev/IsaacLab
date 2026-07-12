@@ -27,6 +27,6 @@ session_history:
 
 # T-ROOT-optE-route-dapg-C1C2-P2-trainer — working notes
 
-- 現況: DEFINE banked (09:34)。次 = Stage-A (P2 env) design-gate 起草。campaign は Rs W0-a 閾値確定まで GO 不可。
+- 現況 (13:29): Stage-A COMPLETE + Rs W0-a「A」一括承認 (blocker RESOLVED、OG band のみ実測待ち)。次 = W1 env build charter 起草。campaign は HIGH-COST + production-launch + fresh Rs GO 背後 (不変)。
 - carry-forward 台帳 (from routeexec、charter §6 が正): ②⑦(b) curriculum-reset 機構 / ③⑨b live 分子 / ④閉ループ full-fire criterion / ⑥ C2-seating video (Rs-GT REJECTED cell-2037 → RL-deferred、Stage C) / ⑦ env-level DR wiring / ⑧ C1-escape cell + ⑬-VERDICT。
 - P4 Δ-bound 結果 (Stage-A §6-9 input、ERRATUM 反映): 実測 drift max ~1.9 mm/RL-step ≪ DELTA_BOUND 0.020 (Stage-A spec §2 pin 済、旧「×decimation / mm/frame」は charter ERRATUM で撤回)。expressibility CLEARED (α-6D decision は不触)。
