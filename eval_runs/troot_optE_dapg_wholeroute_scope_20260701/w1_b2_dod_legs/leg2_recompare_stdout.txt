@@ -1,0 +1,2 @@
+[LEG2-recompare] full-dict-diff minus variant: PASS diffs={}
+[LEG2-recompare] excluded variant-key diffs (throughput class, documented): {'throughput_rl_sps': (4.6, 4.94), 'throughput_env_fps': (18.41, 19.76), 'dod1_throughput': ('18.41 env-fps (bar 9.7)', '19.76 env-fps (bar 9.7)')}

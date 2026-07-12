@@ -1,0 +1,16 @@
+{
+ "what": "W1-B2 leg7 (R3k/CC6-F3): world-sliced HOLD clear through the REAL done-reset path",
+ "dones": [
+  false,
+  true
+ ],
+ "w0_counters_after": [
+  7,
+  3,
+  2
+ ],
+ "w1_fire_count_after": 0,
+ "w0_intact": true,
+ "w1_cleared": true,
+ "PASS": true
+}

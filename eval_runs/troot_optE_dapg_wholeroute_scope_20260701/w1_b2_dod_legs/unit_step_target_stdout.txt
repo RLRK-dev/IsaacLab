@@ -1,0 +1,16 @@
+==============================================================================
+route-executor units: gate-ii byte-consistency + W1-B2 HOLD/oracle (contract v2)
+==============================================================================
+[route_demo_to_bc] SCHEMA=15-phase (obs 27D)
+[GATE-II] step_target vs canonical wp (route_demo_to_bc._compute_demo REUSE): n_steps=770 target_Linf=0.000e+00 -> BYTE-EXACT
+[GATE-II] pad-to-horizon (t>=770 holds last wp): OK; phase-clock span p0=0->plast=5: OK
+  [B2 contract-v2] PASS: required keys + shape/range/dtype validation
+  [B2 div_grip] PASS: formula/seg-follow/purity/recenter/boundary pair (n=770)
+[HOLD] world 0 t=10: hold_count exceeded MAX_HOLD_STEPS=24 (informative only, spec sec 4.2 -- no terminate)
+[HOLD] world 0 t=10: NON-FINITE div_grip (nan) -> HOLD (fail-closed, spec L1)
+  [B2 hold-machine] PASS: fire/resume/K/equality/chatter/MAX_HOLD/non-finite/arming/tail
+  [B2 clear-isolation] PASS: world-sliced clear; neighbor state byte-intact
+  [B2 query] PASS: MARCH==step_target / HOLD chunk-end @t97 / mask {0:G1, 11:G4} (frames {0: 10, 11: 5000}) / release_step=762
+------------------------------------------------------------------------------
+gate-ii step_target == run_route recording (== BC/trainer base): PASS
+W1-B2 units: PASS

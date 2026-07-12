@@ -462,6 +462,15 @@ class NewtonRouteEnv(VecEnv):
         _rtc = self.cfg.get("route_t_clock", False)
         assert isinstance(_rtc, bool), f"cfg['route_t_clock'] must be a bool, got {type(_rtc).__name__}"
         self._route_t_clock = _rtc
+        # W1-B2 (conformance R5g, keyed on IMPL TYPE not recording presence -- a stub with recorded_targets
+        # would otherwise pass a presence check and late-fail at the first flag-ON query): the HOLD
+        # divergence machinery needs the RouteExecutor's recorded cable ground truth; a stub run under the
+        # flag would silently never HOLD (fail-OPEN).
+        if self._route_t_clock and self.cfg.get("route_executor_impl", "stub") != "route_executor":
+            raise ValueError(
+                "route_t_clock=True requires cfg['route_executor_impl']=='route_executor' "
+                "(HOLD needs the recorded cable_xyz/held_seg_l ground truth; stub = silent no-HOLD)"
+            )
         # D rho=0 (Rs adjudication (1) 2026-07-10): route drive mode. 'ik_chord' (default) = the current
         # step-level batched IK + 10-frame joint chord (byte-preserve); 'feedforward' = the recording's
         # arm_q replayed per physics frame (the armqdirect-proven mechanism promoted to a drive mode;
@@ -527,6 +536,10 @@ class NewtonRouteEnv(VecEnv):
         self._route_is_dual = np.ones(world_count, dtype=bool)
         self._phase_entry_step = np.zeros(world_count, dtype=np.int64)  # for env-side within-phase progress
         self._prev_phase_id = np.full(world_count, -1, dtype=np.int32)
+        # --- W1-B2 HOLD wiring (flag-gated; inert numpy state under route_t_clock=False) ---
+        self._hold_mask_np = np.zeros(world_count, dtype=bool)  # frozen set as of the LAST sync update
+        self._suppressed_drop_count = np.zeros(world_count, dtype=np.int64)  # tail (iv) events (B5 export)
+        self._route_release_step = None  # recording-derived scheduled-release boundary (set with the executor)
 
         os.environ["NEWTON_DEVICE"] = device
         _tncr.DEVICE = device
@@ -550,6 +563,10 @@ class NewtonRouteEnv(VecEnv):
         # flag-ON replays the recorded_replay route + supplies the phase-k state-bank for reset_to_phase.
         if self.cfg.get("route_executor_impl", "stub") == "route_executor":
             self._route = self._build_route_executor()
+            # W1-B2 sec 9 tail (iv): scheduled-release boundary, recording-derived (never hardcoded;
+            # None = the recording has no scheduled release -> suppression inert).
+            _rls = self._route._recording["release_step"]
+            self._route_release_step = int(_rls) if _rls is not None else None
         else:
             self._route = NominalRouteStub(self._settled_ee_r_pos, self._settled_ee_l_pos, self.MAX_EPISODE_STEPS)
 
@@ -612,6 +629,9 @@ class NewtonRouteEnv(VecEnv):
             "grip_cmd": z["grip_cmd"],
             "phase_id": z["phase_id"],
             "arm_q": z["arm_q"],  # full physics joint_q/frame (arm[0:28] + cable[28:74]); the state_bank source
+            # W1-B2 recording contract v2 (spec sec 4.2 N9): the div_grip ground truth, now REQUIRED keys.
+            "cable_xyz": z["cable_xyz"],
+            "held_seg_l": z["held_seg_l"],
         }
         state_bank = rex.build_state_bank_from_recording(recording, self._world_count, arm_off=0)
         print(
@@ -1026,6 +1046,12 @@ class NewtonRouteEnv(VecEnv):
             self._prev_phase_id[w] = -1
             self.episode_length_buf[w] = 0
             self.route_t[w] = 0  # W1-B1 mirror (per-world reset site; fork init bank_boundary[k] = B3)
+            # W1-B2 (conformance R3k): per-world HOLD clear through the executor's world-sliced API --
+            # never a blanket clear (a neighbor's done-reset must leave OTHER held worlds byte-intact).
+            self._suppressed_drop_count[w] = 0
+            if self._route_t_clock:
+                self._route.clear_sync_state([int(w)])
+                self._hold_mask_np[int(w)] = False
 
         assign_world_states_to_sim(self._state_0, self._solver, bq, bqd, prev)
 
@@ -1152,6 +1178,9 @@ class NewtonRouteEnv(VecEnv):
             # above is kept (obs/extras contract; the projected residual is NOT driven in this mode).
             # reset/broadcast paths are untouched (feedforward lives in this drive loop only).
             route_steps = [int(self.route_t[w].item()) for w in range(N)]  # W1-B1: route clock (consumer 3)
+            # W1-B2 (spec sec 4.2 N3): held worlds clamp the replay frame to the frozen chunk END --
+            # re-walking the chunk's staircase every held step would saw-tooth the servo/arm.
+            hm = self._hold_mask_np if self._route_t_clock else None
             jq_ff = None
             for step in range(self.PHYSICS_STEPS_PER_RL):
                 jq_ff = self._route.apply_recorded_arm_ff(
@@ -1160,8 +1189,9 @@ class NewtonRouteEnv(VecEnv):
                     self._state_0,
                     self._arm_ow_maps["arm_ow_q_idx"],
                     self._arm_ow_maps["arm_ow_qd_idx"],
+                    hold_mask=hm,
                 )
-                self._route.apply_recorded_grip(route_steps, step)
+                self._route.apply_recorded_grip(route_steps, step, hold_mask=hm)
                 self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
             # FK-side warm-start/obs source: arm cols <- the final feedforward row; gripper cols keep
             # their pinned-OPEN values (production fk_jq semantic; flag-ON obs[7]/[15] read physics).
@@ -1214,7 +1244,9 @@ class NewtonRouteEnv(VecEnv):
                     # comp3 (R2): drive the gripper POSITION-servo from the recorded grip_cmd staircase for THIS
                     # physics sub-frame, AFTER the arm joint_q assign and BEFORE the solver step (so the servo
                     # target is in place). Writes control.joint_target_pos ONLY (gripper joint_q is servo-DYNAMIC).
-                    self._route.apply_recorded_grip(route_steps, step)
+                    self._route.apply_recorded_grip(
+                        route_steps, step, hold_mask=self._hold_mask_np if self._route_t_clock else None
+                    )
                 self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
             for w in range(N):
                 self._per_world_fk_jq[w] = jq_targets[w].copy()
@@ -1478,6 +1510,18 @@ class NewtonRouteEnv(VecEnv):
                     or (lateral_dev > self.DROP_LATERAL_DEV_MAX_M)
                 )
             )
+            # W1-B2 sec 9 tail (iv) (charter ERRATUM-3): past the SCHEDULED release the cable is let go on
+            # purpose -- a "drop" there is a category error whose -10 inverts the incentive (fail-slow -7.6
+            # < fail-fast -3.99: the longer you route, the worse). Suppress POST-release ONLY (pre-release
+            # drop semantics byte-identical = S5 preserved, %9 condition); flag-gated (OFF = legacy).
+            if (
+                dropped
+                and self._route_t_clock
+                and self._route_release_step is not None
+                and int(self.route_t[w].item()) >= self._route_release_step
+            ):
+                dropped = False
+                self._suppressed_drop_count[w] += 1
 
             # --- span guard: dual-grip phase ONLY, INFORMATIVE tier (no terminate) ---
             span_ok = True
@@ -1587,7 +1631,15 @@ class NewtonRouteEnv(VecEnv):
         nominal_phase_len = max(self.MAX_EPISODE_STEPS / rc.N_ROUTE_PHASES, 1.0)
         for w in range(N):
             t = int(self.route_t[w].item())  # W1-B1: route clock (consumer 1); == episode clock while mirrored
-            target_6d, phase_id, grip_2, is_dual = self._route.step_target(t)
+            if self._route_t_clock:
+                # W1-B2: the oracle query (READ-ONLY -- fire/resume live in the post-physics update_sync,
+                # conformance R3m/R5d). Under MARCH the packet is value-identical to step_target; under
+                # HOLD the grip-derived fields evaluate at the frozen chunk-END frame (sec 4.2 N3).
+                target_6d, phase_id, grip_2, is_dual, _validity, _sync = self._route.query(
+                    int(self.episode_length_buf[w].item()), w, {"route_t": t}
+                )
+            else:
+                target_6d, phase_id, grip_2, is_dual = self._route.step_target(t)
             route_targets[w] = target_6d
             if phase_id != int(self._prev_phase_id[w]):
                 self._phase_entry_step[w] = t
@@ -1597,6 +1649,19 @@ class NewtonRouteEnv(VecEnv):
             self._route_grip[w] = grip_2
             self._route_is_dual[w] = is_dual
         return route_targets
+
+    def _update_route_sync(self):
+        """W1-B2: post-physics HOLD sync update (the conformance R3m evaluation point).
+
+        Reads the post-physics cable state (``_apply_actions_batch`` ends with ``wp.synchronize()``) and
+        the G1 latch as of the PREVIOUS reward pass (a 1-step arming lag with no bar sensitivity: latch
+        ~t100 vs onset t343), and delegates the fire/resume decision to the oracle's single sync-mutation
+        site. Returns the per-world hold mask the increment site applies.
+        """
+        bq = self._state_0.body_q.numpy()
+        views = [bq[self._cable_bodies[w], :3] for w in range(self._world_count)]
+        route_ts = [int(self.route_t[w].item()) for w in range(self._world_count)]
+        return self._route.update_sync(route_ts, views, self._g_latched[:, 0])
 
     def get_observations(self) -> tuple[torch.Tensor, dict]:
         obs = self._compute_obs_batch()
@@ -1616,10 +1681,17 @@ class NewtonRouteEnv(VecEnv):
         route_targets = self._pull_route()  # base ABSOLUTE targets + phase/grip/dual for THIS step
         self._apply_actions_batch(actions, route_targets)
         self.episode_length_buf += 1
-        # W1-B1 mirror increment: route_t advances with the episode clock. B2 attaches the HOLD freeze
-        # mask HERE (frozen worlds skip the increment); the episode clock above ALWAYS advances (spec
-        # sec 4.1: time-penalty / horizon / timeout stay episode-clock-owned).
-        self.route_t += 1
+        # W1-B1 mirror increment / W1-B2 HOLD freeze mask (conformance R3m/R4a): under the flag the sync
+        # decision runs HERE -- post-physics (wp.synchronize'd inside _apply_actions_batch), PRE-increment,
+        # at the PRE-increment route_t: the chunk just driven, whose chunk-END comparison frame is exactly
+        # where the env state now sits (spec sec 4.2 N4 alignment; a top-of-step evaluation would compare
+        # the WRONG chunk). Held worlds skip the increment (= freeze; next step re-holds the chunk end);
+        # the episode clock above ALWAYS advances (spec sec 4.1: time-penalty / horizon / timeout).
+        if self._route_t_clock:
+            self._hold_mask_np = self._update_route_sync()
+            self.route_t += torch.from_numpy((~self._hold_mask_np).astype(np.int64)).to(self.route_t.device)
+        else:
+            self.route_t += 1
         self._total_env_steps += self._world_count
 
         rewards, dones, extras = self._compute_rewards_dones_batch()

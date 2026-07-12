@@ -96,6 +96,12 @@ RUN1_REFERENCE_V2_SHA256 = "5f1c3f9238f45057011cfad1d010ac43000cb179b76b61d04617
 # the phase names + the consumer boundaries (newton_route_env _active_clip_xy phase<3=C1 / _dual_and_grip
 # phase==3=G4-transit / phase>=4=C2). ⚠ CC5-2: phase does NOT drive grip/is_dual (route_env_config:152-153);
 # phase drives ONLY clip-selection + obs-onehot + state_bank keying.
+# W1-B2 (spec v0.8.1 sec 4.3 validity mask; %12 23:29 ruling): recorded phases where the base target is
+# CABLE-STATE-DERIVED -- (1) 0 = grasp-entry (the once, pre-hover XY derivation immediately governs the
+# grasp-entry targets; producer caveat-a Y re-center + fix-5 X-follow, PRE-STEP) (2) 11 = C2_REGRASP
+# (argmin re-target). All other recorded phases replay frozen waypoints (state-blind, DQ7 sec 3 Fact A/B).
+_CABLE_EVENT_PHASES = (0, 11)
+
 _RECORDED_PHASE_TO_G = {
     -1: 0,  # pre-start -> G1
     0: 0,
@@ -3120,7 +3126,9 @@ def _prepare_recording(recording):
         A dict with the validated arrays + int ``step_f``/``next_f`` (770 steps) precomputed single-source
         with ``route_demo_to_bc.py``:255-258.
     """
-    req = ("ee_pos_r", "ee_pos_l", "grip_cmd", "phase_id")
+    # W1-B2 recording contract v2 (Stage-A spec v0.8.1 sec 4.2 N9): cable_xyz + held_seg_l are REQUIRED --
+    # they are the div_grip ground truth (the HOLD divergence metric has no other source).
+    req = ("ee_pos_r", "ee_pos_l", "grip_cmd", "phase_id", "cable_xyz", "held_seg_l")
     missing = [k for k in req if k not in recording]
     if missing:
         raise ValueError(f"recording missing {missing}; need {req}")
@@ -3128,6 +3136,9 @@ def _prepare_recording(recording):
     ee_l = np.asarray(recording["ee_pos_l"], dtype=np.float32)
     grip = np.asarray(recording["grip_cmd"], dtype=np.float32)
     phase = np.asarray(recording["phase_id"]).astype(np.int64)
+    cable = np.asarray(recording["cable_xyz"], dtype=np.float32)
+    # dtype-normalize like phase_id above (golden carries int16; the seg lookup must be index-stable).
+    held = np.asarray(recording["held_seg_l"]).astype(np.int64)
     # OPTIONAL arm_q (D rho=0 feedforward drive source; validated when present, required only by
     # apply_recorded_arm_ff -- pure ik_chord / grip-only recordings stay valid without it).
     arm_q = None
@@ -3140,10 +3151,18 @@ def _prepare_recording(recording):
     n_frames = ee_r.shape[0]
     if not (ee_l.shape[0] == grip.shape[0] == phase.shape[0] == n_frames):
         raise ValueError("recording arrays have inconsistent frame counts")
+    if cable.shape[0] != n_frames or held.shape[0] != n_frames:
+        raise ValueError("recording cable_xyz/held_seg_l frame counts inconsistent with ee_pos (contract v2)")
     if n_frames < _REC_LAST_CTRL_FRAME + 1:
         raise ValueError(f"recording has {n_frames} frames; need >= {_REC_LAST_CTRL_FRAME + 1}")
     if ee_r.shape[1:] != (3,) or ee_l.shape[1:] != (3,) or grip.shape[1:] != (2,):
         raise ValueError("ee_pos must be [frames, 3] and grip_cmd [frames, 2]")
+    if cable.ndim != 3 or cable.shape[2] != 3:
+        raise ValueError(f"cable_xyz must be [frames, segs, 3], got {cable.shape}")
+    if held.min() < 0 or held.max() >= cable.shape[1]:
+        raise ValueError(
+            f"held_seg_l out of [0, {cable.shape[1]}) (div_grip seg-lookup safety): [{held.min()}, {held.max()}]"
+        )
     # cadence single-source (route_demo_to_bc.py:255-258): cf = 0,cad,..,LAST; action = delta step_f -> next_f.
     cf = np.arange(0, _REC_LAST_CTRL_FRAME + 1, _REC_CADENCE)
     step_f, next_f = cf[:-1], cf[1:]
@@ -3151,14 +3170,43 @@ def _prepare_recording(recording):
     uncovered = {int(p) for p in np.unique(phase)} - set(_RECORDED_PHASE_TO_G)
     if uncovered:
         raise ValueError(f"recorded phase_id {sorted(uncovered)} not in _RECORDED_PHASE_TO_G")
+    # W1-B2 sec 9 tail (iv) (charter ERRATUM-3): the scheduled-release boundary, DERIVED from the recorded
+    # grip schedule (never hardcoded). release_frame = first frame of the terminal both-open run; the
+    # boundary step is the first t whose chunk starts at/after it (canonical: frame ~7617 -> step ~762).
+    # A recording that never closes a gripper HAS no scheduled release -> None (tail (iv) inert; grip-less
+    # synthetic/ik_chord recordings stay valid per the contract note above).
+    closed_any = (grip[:, 0] >= _GRIP_CLOSE_THR) | (grip[:, 1] >= _GRIP_CLOSE_THR)
+    if bool(closed_any.any()):
+        release_frame = int(np.nonzero(closed_any)[0].max()) + 1
+        release_step = int(np.searchsorted(step_f, release_frame, side="left"))
+    else:
+        release_step = None
+    # W1-B2 validity mask (spec sec 4.3; %12 2026-07-12 23:29 ruling: MECHANICAL derivation, no label
+    # guess). The two cable-state-derived events (DQ7_OFFPATH_SCOPING_COORD2.md:64-66) live at recorded
+    # phases _CABLE_EVENT_PHASES; their first-frame indices are the detection source (pinned by unit) and
+    # the G attribution follows _RECORDED_PHASE_TO_G. Every other G is a frozen-waypoint (state-blind)
+    # phase. The mask DESCRIBES this recording: an event phase absent from the recording is factually
+    # not-cable-derived here (stays False) -- the canonical-golden presence of BOTH events is pinned by unit.
+    validity_mask_g = np.zeros(rc.N_ROUTE_PHASES, dtype=bool)
+    mask_event_frames = {}
+    for p in _CABLE_EVENT_PHASES:
+        hits = np.nonzero(phase == p)[0]
+        if hits.size > 0:
+            mask_event_frames[int(p)] = int(hits[0])
+            validity_mask_g[_RECORDED_PHASE_TO_G[int(p)]] = True
     return {
         "ee_pos_r": ee_r,
         "ee_pos_l": ee_l,
         "grip_cmd": grip,
         "phase_id": phase,
+        "cable_xyz": cable,
+        "held_seg_l": held,
         "step_f": step_f,
         "next_f": next_f,
         "arm_q": arm_q,
+        "release_step": release_step,
+        "validity_mask_g": validity_mask_g,
+        "mask_event_frames": mask_event_frames,
     }
 
 
@@ -3216,6 +3264,25 @@ class RouteExecutor(rc.RouteInterfaceV1):
         if control is not None:
             servo_seed_assert(control.joint_target_pos.numpy(), self._maps["all_driver_dofs"])
         self._recording = _prepare_recording(recording) if recording is not None else None
+        # --- W1-B2 HOLD sync state (Stage-A spec v0.8.1 sec 4.2) ------------------------------------------
+        # Oracle-owned decision state; the ENV owns route_t (sec 4.1 single-source) and enacts the freeze at
+        # its increment site from the mask update_sync returns. recenter is the div common-mode term: B2 =
+        # identity zeros, B4 wires the per-world stored settle re-center (spec sec 6.1 M1). Per-episode
+        # counters are cleared ONLY through clear_sync_state(world_ids) -- world_ids is MANDATORY because a
+        # blanket clear on one world's done-reset would silently flip OTHER held worlds to MARCH (the exact
+        # FORK-1 march-into-grip-loss HOLD exists to prevent).
+        self._n_world = int(len(arm_q_start))
+        self._recenter = np.zeros((self._n_world, 3), dtype=np.float64)
+        self._sync_hold = np.zeros(self._n_world, dtype=bool)
+        self._hold_count = np.zeros(self._n_world, dtype=np.int64)
+        self._inband_count = np.zeros(self._n_world, dtype=np.int64)
+        self._steps_since_resume = np.full(self._n_world, -1, dtype=np.int64)  # -1 = no resume yet
+        self._div_last = np.full(self._n_world, np.nan, dtype=np.float64)
+        self._hold_fire_count = np.zeros(self._n_world, dtype=np.int64)
+        self._resume_count = np.zeros(self._n_world, dtype=np.int64)
+        self._chatter_count = np.zeros(self._n_world, dtype=np.int64)
+        self._nonfinite_div_count = np.zeros(self._n_world, dtype=np.int64)
+        self._max_hold_event_count = np.zeros(self._n_world, dtype=np.int64)
 
     def reset_to_phase(self, k: int, world_ids: list[int] | None = None) -> None:
         """Fork to phase ``k``'s banked state (interface v2, W1-B1: per-world ``world_ids``).
@@ -3325,7 +3392,172 @@ class RouteExecutor(rc.RouteInterfaceV1):
         phase_id = _RECORDED_PHASE_TO_G[int(rec["phase_id"][pg_f])]  # 15 -> 6 (%12 ruling; total-coverage)
         return target_6d, phase_id, grip_2, is_dual
 
-    def apply_recorded_grip(self, route_steps, sub_i):
+    def div_grip_mm(self, route_t: int, cable_pos, world_id: int) -> float | None:
+        """PURE divergence metric (W1-B2, spec v0.8.1 sec 4.2): live cable vs recording at ``route_t``.
+
+        ``div_grip = ||cable[s] - rec_cable[s, f] - recenter(w)|| * 1000`` [mm] with s = the RECORDED held
+        segment ``held_seg_l[f]`` (follows the intra-finger pay-through slide; NOT a fixed seg) and f = the
+        chunk-END comparison frame ``min(cf[route_t] + cadence-1, F-1)`` (env state after an RL step sits at
+        the chunk end). No side effects -- callable outside the step loop (B3 restore-fidelity DoD).
+
+        Args:
+            route_t: env-owned route-clock step.
+            cable_pos: live per-segment cable positions [segs, 3] [m] for this world.
+            world_id: world index (selects the recenter row; B2 recenter = zeros).
+
+        Returns:
+            The divergence [mm] (may be NaN/Inf if inputs are corrupt -- the CALLER's explicit non-finite
+            branch handles that, spec L1), or None past the recording end (tail: metric undefined, HOLD
+            disabled -- also keeps the step index in range, the flag-ON step~770 crash class).
+        """
+        rec = self._recording
+        if rec is None:
+            raise NotImplementedError("div_grip_mm needs recording= (pure-index construction has none)")
+        step_f = rec["step_f"]
+        if not (0 <= int(route_t) < len(step_f)):  # tail (or pre-reset garbage): no div defined
+            return None
+        f = min(int(step_f[int(route_t)]) + (_REC_CADENCE - 1), rec["cable_xyz"].shape[0] - 1)
+        s = int(rec["held_seg_l"][f])
+        d = np.asarray(cable_pos, dtype=np.float64)[s] - rec["cable_xyz"][f, s].astype(np.float64)
+        d = d - self._recenter[int(world_id)]
+        return float(np.linalg.norm(d) * 1000.0)
+
+    def update_sync(self, route_steps, cable_views, g1_latched):
+        """Post-physics HOLD decision update (W1-B2, spec v0.8.1 sec 4.2) -- the ONE sync-mutation site.
+
+        Called by the env AFTER the physics sub-frames of an RL step and BEFORE the route_t increment, at
+        the PRE-increment route_t (the chunk just driven; its chunk-end comparison frame is exactly what
+        the env state now sits at -- spec sec 4.2 N4 alignment; evaluating at the top of step() instead
+        would compare against the wrong chunk, conformance R3m). The env applies the returned mask at its
+        increment site (held worlds skip the increment = freeze).
+
+        State machine per world (armed = G1-latched only, spec H7):
+          MARCH -> HOLD: div > HOLD_THRESH_MM (strict), or div non-finite (explicit branch -- a bare
+            comparison is False for NaN = silent MARCH fail-OPEN, spec L1).
+          HOLD -> MARCH: div <= HOLD_RESUME_MM, or HOLD_RESUME_K consecutive in-band (<= thresh) steps.
+          Tail (route_t past the recording): div undefined -> never held.
+          hold_count crossing MAX_HOLD_STEPS emits ONE informative loud event per hold spell (no terminate).
+
+        Args:
+            route_steps: per-world PRE-increment route_t, sequence of int length n_world.
+            cable_views: per-world live cable positions [segs, 3] [m] (post-physics, synchronized).
+            g1_latched: per-world bool -- the env's G1 cage latch (arming gate; pre-grasp div = telemetry).
+
+        Returns:
+            hold_mask: np.ndarray [n_world] bool -- True = frozen this step (skip the route_t increment).
+        """
+        thr, res_mm, res_k = rc.HOLD_THRESH_MM, rc.HOLD_RESUME_MM, rc.HOLD_RESUME_K
+        for w in range(self._n_world):
+            t = int(route_steps[w])
+            div = self.div_grip_mm(t, cable_views[w], w)
+            self._div_last[w] = np.nan if div is None else float(div)
+            if self._steps_since_resume[w] >= 0:
+                self._steps_since_resume[w] += 1
+            if div is None:  # tail: HOLD disabled (spec sec 4.2; charter ERRATUM-3 (iii))
+                self._sync_hold[w] = False
+                continue
+            if not bool(g1_latched[w]):  # not armed: telemetry only (spec H7 -- no pre-grasp dead episodes)
+                self._sync_hold[w] = False
+                continue
+            finite = bool(np.isfinite(div))
+            if not finite:  # EXPLICIT non-finite branch (spec L1): treat as exceed + loud
+                self._nonfinite_div_count[w] += 1
+                print(f"[HOLD] world {w} t={t}: NON-FINITE div_grip ({div}) -> HOLD (fail-closed, spec L1)")
+            if self._sync_hold[w]:
+                resumed = False
+                if finite and div <= res_mm:
+                    resumed = True
+                elif finite and div <= thr:
+                    self._inband_count[w] += 1
+                    resumed = self._inband_count[w] >= res_k
+                else:
+                    self._inband_count[w] = 0
+                if resumed:
+                    self._sync_hold[w] = False
+                    self._resume_count[w] += 1
+                    self._steps_since_resume[w] = 0
+                    self._inband_count[w] = 0
+                    self._hold_count[w] = 0
+                else:
+                    self._hold_count[w] += 1
+                    if self._hold_count[w] == int(rc.MAX_HOLD_STEPS) + 1:
+                        self._max_hold_event_count[w] += 1
+                        print(
+                            f"[HOLD] world {w} t={t}: hold_count exceeded MAX_HOLD_STEPS="
+                            f"{rc.MAX_HOLD_STEPS} (informative only, spec sec 4.2 -- no terminate)"
+                        )
+            else:
+                if (not finite) or div > thr:
+                    self._sync_hold[w] = True
+                    self._hold_count[w] = 1
+                    self._inband_count[w] = 0
+                    self._hold_fire_count[w] += 1
+                    if 0 <= self._steps_since_resume[w] <= res_k:
+                        self._chatter_count[w] += 1  # re-fire hard on the heels of a resume = limit cycle
+        return self._sync_hold.copy()
+
+    def clear_sync_state(self, world_ids) -> None:
+        """Per-world HOLD state + per-episode counter clear (W1-B2; env done-reset consumer).
+
+        Args:
+            world_ids: worlds to clear -- MANDATORY (no None = all-worlds default): a blanket clear on one
+                world's done-reset would silently flip other held worlds to MARCH (conformance R3k).
+        """
+        for w in world_ids:
+            w = int(w)
+            self._sync_hold[w] = False
+            self._hold_count[w] = 0
+            self._inband_count[w] = 0
+            self._steps_since_resume[w] = -1
+            self._div_last[w] = np.nan
+            self._hold_fire_count[w] = 0
+            self._resume_count[w] = 0
+            self._chatter_count[w] = 0
+            self._nonfinite_div_count[w] = 0
+            self._max_hold_event_count[w] = 0
+
+    def query(self, t_episode: int, world_id: int, live_state_view: dict) -> tuple:
+        """Oracle query (W1-B2, spec v0.8.1 sec 4.3): READ-ONLY 6-tuple packet.
+
+        No state mutation here (fire/resume live in :meth:`update_sync` -- the sole sync writer, at the
+        post-physics site). Under HOLD every grip-derived field (grip_2 / is_dual) re-evaluates at the
+        frozen chunk-END frame f_end = min(cf[t]+cadence-1, F-1) -- the same single frame the held servo
+        staircase is clamped to (sec 4.2 N3; %12 A2 ruling: one frame convention for all grip fields).
+
+        Args:
+            t_episode: episode-clock step (bookkeeping; the packet is computed at route_t).
+            world_id: world index.
+            live_state_view: env view; required key ``route_t`` (the env-owned clock, sec 4.1).
+
+        Returns:
+            ``(target_6d, phase_id, grip_2, is_dual, validity_mask, sync_state)`` per
+            :meth:`route_env_config.RouteInterfaceV1.query`.
+        """
+        rec = self._recording
+        if rec is None:
+            raise NotImplementedError("query needs recording= (pure-index construction has none)")
+        w = int(world_id)
+        t = int(live_state_view["route_t"])
+        target_6d, phase_id, grip_2, is_dual = self.step_target(t)
+        if bool(self._sync_hold[w]):
+            step_f = rec["step_f"]
+            tt = min(max(t, 0), len(step_f) - 1)
+            f_end = min(int(step_f[tt]) + (_REC_CADENCE - 1), rec["grip_cmd"].shape[0] - 1)
+            gc = rec["grip_cmd"][f_end]  # [L, R] (recorder column footgun -- mirror step_target)
+            grip_r = 1.0 if gc[1] >= _GRIP_CLOSE_THR else 0.0
+            grip_l = 1.0 if gc[0] >= _GRIP_CLOSE_THR else 0.0
+            grip_2 = np.array([grip_r, grip_l], dtype=np.float32)
+            is_dual = bool(grip_r > 0.0 and grip_l > 0.0)
+        validity = np.float32(1.0 if rec["validity_mask_g"][int(phase_id)] else 0.0)
+        sync_state = {
+            "mode": "HOLD" if bool(self._sync_hold[w]) else "MARCH",
+            "hold_count": int(self._hold_count[w]),
+            "div_grip": float(self._div_last[w]),
+            "route_t": t,
+        }
+        return target_6d, phase_id, grip_2, is_dual, validity, sync_state
+
+    def apply_recorded_grip(self, route_steps, sub_i, hold_mask=None):
         """comp3 (R2): write the recorded ``grip_cmd`` staircase (RAW radians) for physics sub-frame ``sub_i``.
 
         The gripper is NOT a policy action -- it replays the recorded per-PHYSICS-frame schedule EXACTLY
@@ -3342,6 +3574,9 @@ class RouteExecutor(rc.RouteInterfaceV1):
         Args:
             route_steps: Per-world RL route step ``t_w``, sequence of int length ``n_world``.
             sub_i: The physics sub-frame index within the RL step, int in ``[0, _REC_CADENCE)``.
+            hold_mask: Optional per-world bool (W1-B2, spec sec 4.2 N3). A HELD world's frame index is
+                clamped to the chunk END (``cf[t]+cadence-1`` constant) -- re-walking the frozen chunk's
+                staircase every held step would saw-tooth the servo. ``None`` (default) = v1-identical.
         """
         rec = self._recording
         if rec is None:
@@ -3355,7 +3590,8 @@ class RouteExecutor(rc.RouteInterfaceV1):
         wrote_nonopen = False
         for w, t in enumerate(route_steps):
             tt = min(max(int(t), 0), n_steps - 1)  # pad-to-horizon: hold the last waypoint (mirror step_target)
-            f = min(int(step_f[tt]) + int(sub_i), n_frames - 1)
+            si = (_REC_CADENCE - 1) if (hold_mask is not None and bool(hold_mask[w])) else int(sub_i)
+            f = min(int(step_f[tt]) + si, n_frames - 1)
             set_gripper_target(jtp, self._maps["l_driver_dofs"][w], float(grip[f, 0]))  # [L] -> LEFT drivers
             set_gripper_target(jtp, self._maps["r_driver_dofs"][w], float(grip[f, 1]))  # [R] -> RIGHT drivers
             if (
@@ -3371,14 +3607,17 @@ class RouteExecutor(rc.RouteInterfaceV1):
             rb = self._control.joint_target_pos.numpy()
             for w, t in enumerate(route_steps):
                 tt = min(max(int(t), 0), n_steps - 1)
-                f = min(int(step_f[tt]) + int(sub_i), n_frames - 1)
+                # W1-B2: IDENTICAL hold clamp as the write loop above -- a write-only clamp would compare
+                # the held world's chunk-end write against the un-clamped frame here and false-trip (CC3-4).
+                si = (_REC_CADENCE - 1) if (hold_mask is not None and bool(hold_mask[w])) else int(sub_i)
+                f = min(int(step_f[tt]) + si, n_frames - 1)
                 for d in self._maps["l_driver_dofs"][w]:
                     assert abs(float(rb[d]) - float(grip[f, 0])) < 1e-6, f"grip .assign() did not reach dof {d}"
                 for d in self._maps["r_driver_dofs"][w]:
                     assert abs(float(rb[d]) - float(grip[f, 1])) < 1e-6, f"grip .assign() did not reach dof {d}"
             self._grip_rb_checked = True
 
-    def apply_recorded_arm_ff(self, route_steps, sub_i, state, arm_ow_q_idx, arm_ow_qd_idx):
+    def apply_recorded_arm_ff(self, route_steps, sub_i, state, arm_ow_q_idx, arm_ow_qd_idx, hold_mask=None):
         """D rho=0 feedforward: write the RECORDED ``arm_q`` row for physics sub-frame ``sub_i``.
 
         SCRIPTED-VERIFICATION-STAGE drive (Rs adjudication (1) 2026-07-10; the trainer-stage D-b window
@@ -3400,6 +3639,8 @@ class RouteExecutor(rc.RouteInterfaceV1):
             state: The CURRENT physics state (``joint_q``/``joint_qd`` read + assigned).
             arm_ow_q_idx: Destination q indices for arm coords across all worlds (env-owned maps).
             arm_ow_qd_idx: Destination qd indices for arm coords across all worlds (env-owned maps).
+            hold_mask: Optional per-world bool (W1-B2): a HELD world's frame clamps to the chunk END --
+                the same convention as :meth:`apply_recorded_grip` (grip-consistent). ``None`` = v1.
 
         Returns:
             The ``[n_world, _N_ARM_JOINTS]`` feedforward rows written (arm cols consumed; the env uses
@@ -3420,7 +3661,8 @@ class RouteExecutor(rc.RouteInterfaceV1):
         jq_ff = np.zeros((len(route_steps), _N_ARM_JOINTS), dtype=np.float64)
         for w, t in enumerate(route_steps):
             tt = min(max(int(t), 0), n_steps - 1)  # pad-to-horizon: hold the last waypoint (mirror step_target)
-            f = min(int(step_f[tt]) + int(sub_i), n_frames - 1)
+            si = (_REC_CADENCE - 1) if (hold_mask is not None and bool(hold_mask[w])) else int(sub_i)
+            f = min(int(step_f[tt]) + si, n_frames - 1)
             jq_ff[w] = arm_q[f, :_N_ARM_JOINTS]
         phys_jq = state.joint_q.numpy()  # host copy (CC3-CH5)
         phys_jqd = state.joint_qd.numpy()

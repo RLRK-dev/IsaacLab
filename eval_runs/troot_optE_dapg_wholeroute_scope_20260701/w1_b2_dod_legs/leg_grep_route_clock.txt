@@ -1,0 +1,36 @@
+# W1-B2 route-clock single-source grep leg (one-off, pinned; supersedes the B1 pin for the post-B2 tree).
+# Command: grep -n episode_length_buf thread_isaac_lab/envs/newton_route_env.py
+# COMMENT-line hits are excluded by pattern: lines whose content after the line number starts with '#'
+# (fail-closed: anything not on the allowed CODE list below AND not a comment = FAIL).
+#
+# Allowed CODE sites (episode-clock OWNED uses -- alloc/reset/increment/timeout):
+#   :499  alloc
+#   :1047 per-world reset
+#   :1571 timeout predicate (episode-clock owned, spec sec 4.1)
+#   :1673 global reset
+#   :1683 increment (route_t mirror/mask sits on the SEPARATE route_t statement below it)
+#
+# B2 DOCUMENTED EXCEPTION (new, one site):
+#   :1639 _pull_route -> query(t_episode=..., ...): the spec sec 4.3 query SIGNATURE carries t_episode as
+#         a bookkeeping/telemetry parameter. It is NOT a route-position consumer: the packet is computed
+#         at live_state_view["route_t"] exclusively (route_executor.query reads only route_t for indexing;
+#         grep "t_episode" in route_executor.py -- it is never used to index the route). The single-source
+#         rule's intent (no route consumer derives route position from the episode clock) is preserved.
+#
+# Consumer regions (_pull_route target/grip/phase indexing / drive loop / done-reset) have ZERO
+# route-position-indexing hits. route_executor.py / route_env_config.py: 0 hits (measured below).
+#
+# Measured 2026-07-13 00:15 JST (post-B2 build). t_episode in route_executor.py: signature+docstring only
+# (grep -n t_episode -> :3519 def / :3528 doc; never an index).
+459:        # freeze / B3 fork init). False (default) = route_t mirrors episode_length_buf exactly (increment/
+499:        self.episode_length_buf = torch.zeros(world_count, dtype=torch.long, device=device)
+502:        # obs[50] phase-entry) read route_t, NEVER episode_length_buf. Under route_t_clock=False (default)
+503:        # route_t is incremented/zeroed at the SAME sites as episode_length_buf (mirror -> value-identical
+1047:            self.episode_length_buf[w] = 0
+1571:            timeout = self.episode_length_buf[w].item() >= self.max_episode_length
+1639:                    int(self.episode_length_buf[w].item()), w, {"route_t": t}
+1673:        self.episode_length_buf[:] = 0
+1683:        self.episode_length_buf += 1
+--- executor/config (expect 0) ---
+thread_isaac_lab/envs/route_executor.py:0
+thread_isaac_lab/envs/route_env_config.py:0

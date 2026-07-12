@@ -246,6 +246,9 @@ def _build_executor(grip_frames=None, forbid_banked_fork=False, arm_q=None):
         "ee_pos_l": np.zeros((n_frames, 3), dtype=np.float32),
         "grip_cmd": grip,
         "phase_id": np.zeros(n_frames, dtype=np.int64),  # 0 is a valid _RECORDED_PHASE_TO_G key
+        # W1-B2 contract v2: cable_xyz + held_seg_l are REQUIRED keys now (spec sec 4.2 N9).
+        "cable_xyz": np.zeros((n_frames, 40, 3), dtype=np.float32),
+        "held_seg_l": np.zeros(n_frames, dtype=np.int64),
     }
     if arm_q is not None:
         recording["arm_q"] = arm_q  # OPTIONAL key (D rho=0 feedforward source)
@@ -295,6 +298,51 @@ def test_grip_transit_window():
         for d in maps["r_driver_dofs"][w]:
             assert abs(jtp[d] - 0.62) < 1e-6, f"R driver {d} got L value -> [L,R] mapping SWAPPED"
     print("  [grip-transit] PASS: [L=0.69, R=0.0] transit window + non-swapped [L,R]->per-arm mapping")
+
+
+def test_grip_hold_clamp():
+    """W1-B2 R4c (spec sec 4.2 N3 + CC3-4 dual-site): a HELD world's staircase frame clamps to the chunk
+    END (cf[t]+cadence-1) at BOTH the write site AND the readback-assert site; None = v1-identical."""
+    cad = rex._REC_CADENCE
+    # chunk 5: distinct values at sub-frame 3 (53) vs chunk end (59). Chunk-end values are NON-OPEN so the
+    # one-time readback assert ARMS on this very call -- if the readback recomputed the frame WITHOUT the
+    # clamp (the CC3-4 crack), it would compare the chunk-end write against frame 53's values and throw.
+    ex, control = _build_executor(
+        grip_frames={
+            5 * cad + 3: (0.11, 0.22),  # cf[5]+3 = 53 (what an UN-held world reads at sub_i=3)
+            5 * cad + (cad - 1): (GRIPPER_DRIVER_HALF_OPEN_RAD, 0.667),  # cf[5]+9 = 59 (chunk end)
+        }
+    )
+    maps = ex._maps
+    ex.apply_recorded_grip([5, 5], 3, hold_mask=[True, False])  # w0 HELD, w1 marching
+    jtp = control.joint_target_pos.numpy()
+    for d in maps["l_driver_dofs"][0]:
+        assert abs(jtp[d] - GRIPPER_DRIVER_HALF_OPEN_RAD) < 1e-6, f"held w0 L driver {d} != chunk-end value"
+    for d in maps["r_driver_dofs"][0]:
+        assert abs(jtp[d] - 0.667) < 1e-6, f"held w0 R driver {d} != chunk-end value"
+    for d in maps["l_driver_dofs"][1]:
+        assert abs(jtp[d] - 0.11) < 1e-6, f"marching w1 L driver {d} != sub_i frame value"
+    for d in maps["r_driver_dofs"][1]:
+        assert abs(jtp[d] - 0.22) < 1e-6, f"marching w1 R driver {d} != sub_i frame value"
+    assert ex._grip_rb_checked, "readback assert did not arm (non-open chunk-end write should arm it)"
+    # ff twin (R4d): the recorded arm_q feedforward clamps with the SAME convention.
+    n_frames = rex._REC_LAST_CTRL_FRAME + 1
+    arm_q = np.zeros((n_frames, rex._N_ARM_JOINTS), dtype=np.float32)
+    arm_q[5 * cad + 3, 0] = 1.0
+    arm_q[5 * cad + (cad - 1), 0] = 2.0
+    ex2, _ = _build_executor(arm_q=arm_q)
+
+    class _S:
+        joint_q = _MockWarpArray(np.zeros(_TOTAL, dtype=np.float64))
+        joint_qd = _MockWarpArray(np.zeros(_TOTAL, dtype=np.float64))
+
+    maps2 = ex2._maps
+    jq_ff = ex2.apply_recorded_arm_ff(
+        [5, 5], 3, _S(), maps2["arm_ow_q_idx"], maps2["arm_ow_qd_idx"], hold_mask=[True, False]
+    )
+    assert jq_ff[0][0] == 2.0, f"held w0 ff row != chunk-end arm_q: {jq_ff[0][0]}"
+    assert jq_ff[1][0] == 1.0, f"marching w1 ff row != sub_i arm_q: {jq_ff[1][0]}"
+    print("  [B2 hold-clamp] PASS: held world -> chunk-end frame at write+readback sites; ff twin; v1 None-path")
 
 
 def test_reset_reseed_open():
@@ -463,7 +511,7 @@ def test_golden_transit_columns():
     if not _GOLDEN_NPZ.exists():
         raise AssertionError(f"golden npz missing: {_GOLDEN_NPZ}")
     z = np.load(_GOLDEN_NPZ)
-    rec = {k: z[k] for k in ("ee_pos_r", "ee_pos_l", "grip_cmd", "phase_id")}
+    rec = {k: z[k] for k in ("ee_pos_r", "ee_pos_l", "grip_cmd", "phase_id", "cable_xyz", "held_seg_l")}
     control = _MockControl(_TOTAL, GRIPPER_DRIVER_OPEN_RAD)
     ex = rex.RouteExecutor(_ARM_Q_START, _ARM_QD_START, 900, state_0=None, control=control, recording=rec)
     g = z["grip_cmd"]
@@ -642,6 +690,7 @@ if __name__ == "__main__":
     test_guard()
     print("[L4 grip-drive / reset-reseed unit] comp3 chunk 2 (R1 reset + R2 grip staircase)")
     test_grip_transit_window()
+    test_grip_hold_clamp()
     test_reset_reseed_open()
     test_settled_fk_gripper_patch()
     test_forbid_banked_fork()

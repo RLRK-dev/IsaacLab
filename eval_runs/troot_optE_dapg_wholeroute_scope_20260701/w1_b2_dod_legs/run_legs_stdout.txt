@@ -1,0 +1,24 @@
+===== LEG 1: 9a-prime rerun (env build + predicate EXACT vs banked) =====
+[LEG1] 9a' full-dict-diff vs banked (minus variant keys): PASS diffs={}
+===== LEG 2: DoD5 drift-zero + DoD10 span-proj rerun (c2indep) vs banked =====
+[LEG2] DoD5/10 full-dict-diff vs banked (minus variant keys): FAIL diffs={'throughput_rl_sps': (4.55, 4.94), 'dod1_throughput': ('18.22 env-fps (bar 9.7)', '19.76 env-fps (bar 9.7)')}
+Traceback (most recent call last):
+  File "<stdin>", line 9, in <module>
+AssertionError
+===== LEG 3: DoD6 rerun vs banked =====
+[LEG3] DoD6 vs banked: PASS (dict-identical)
+===== LEG 4: cablediag env-trajectory byte-anchor (gate-6 runner rerun, all trainer flags OFF) =====
+[LEG4] cablediag npz EXACT vs banked 311f18cb9b: PASS bad_keys=[]
+===== LEG 5: producer 5-cell byte-repro vs pinned baseline (route_executor.py diff leg) =====
+  npz sha256 EXACT (byte-id) : 5/5
+===== LEG 6: CPU unit suites (stdout pinned at run time, %12 minor-1 carry) =====
+tail: option used in invalid context -- 2
+===== LEG 7: HOLD reset isolation (env done-reset path, 2-world) =====
+[leg7] dones=[False, True] w0_intact=True w1_cleared=True
+[leg7] PASS -> /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b2_dod_legs/leg7_hold_reset_isolation.json
+===== LEG 8: HOLD calibration (quiet + fires; flag ON, 499 steps) =====
+[leg8] g1_latch_t=98 fires=[342] shadow_cross=None (bar (342, 344)) aligned_first_fire=342 attribution=None dones=[] quiet_max=10.407
+[leg8] crossing detail: []
+[leg8] FAIL -> /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b2_dod_legs/leg8_hold_calibration.json
+===== SUMMARY =====
+W1_B2_LEGS_FAIL=1

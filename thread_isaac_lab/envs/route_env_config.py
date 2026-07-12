@@ -85,6 +85,16 @@ COMMANDED_SPAN = 2.0 * task_config.GRIP_HALF_SPAN  # [m] 0.088 commanded (struct
 # defined here (not aliased) because task_config.py is untouched and the route horizon differs.
 K_ROUTE_SEAT = 10  # RL steps the C2 groove+settle predicate must hold for G6 (cf task_config.K_INSERT)
 
+# --- W1-B2 HOLD calibration constants (Stage-A spec v0.8.1 sec 4.2; numbers = Rs W0-a adoption) --------
+# All four are PROVISIONAL: derived from the single comp5 residual==0 trace (n=1). Re-derivation clauses:
+# HOLD_THRESH / HOLD_RESUME come with the spec sec 8 per-cell/per-seed safe-side legs (B7); MAX_HOLD_STEPS
+# is PROVISIONAL-UNMEASURED (spec sec 4.2 MED-6) -- re-derived from the B7 bounded-delta-injection probe,
+# final numbers = Rs. Units: mm on the div_grip metric (spec sec 4.2), steps = RL steps.
+HOLD_THRESH_MM = 15.0  # div_grip > thresh (strict) fires HOLD; healthy-domain max 10.56mm, ramp hits 15 at t343
+HOLD_RESUME_MM = 12.0  # resume when div <= 12 (thresh - 3mm hysteresis > 2.84mm handover sawtooth)
+HOLD_RESUME_K = 3  # ... OR K consecutive in-band (<= HOLD_THRESH_MM) steps (chatter/limit-cycle guard)
+MAX_HOLD_STEPS = 24  # informative-only event above this hold_count; NO terminate (spec sec 4.2)
+
 # whole-route horizon. Split from task_config.GRASP_TERMINAL_STEPS(200)/INSERT_TERMINAL_STEPS(200):
 # C1->C2 is ~771 RL steps (canonical T=7707 frames / cadence 10) -> 900 (x1.17 margin, MED7). Defined
 # here (not in task_config) to keep task_config.py untouched; DoD4 re-measures the horizon under DR.
@@ -181,6 +191,33 @@ class RouteInterfaceV1:
         """
         raise NotImplementedError
 
+    def query(self, t_episode: int, world_id: int, live_state_view: dict) -> tuple:
+        """Oracle query (interface v2, W1-B2; Stage-A spec v0.8.1 sec 4.3): the trainer-facing packet.
+
+        Read-only: the ONLY side effect anywhere in the oracle is the sync_state update, and that happens
+        in the separate post-physics update (not here) -- query never advances a clock, never fires or
+        resumes HOLD, never writes physics/control state.
+
+        Args:
+            t_episode: episode-clock step (telemetry; the packet is computed at the env-owned route_t
+                carried in ``live_state_view`` -- the route clock is single-source, spec sec 4.1).
+            world_id: world index.
+            live_state_view: env-supplied per-world view; required keys ``route_t`` (int). (Cable state /
+                G1-latch flow through the post-physics sync update, not through query.)
+
+        Returns:
+            A 6-tuple ``(target_6d, phase_id, per_arm_grip_2vec, is_dual_grip_window, validity_mask,
+            sync_state)``:
+              target_6d / phase_id / per_arm_grip_2vec / is_dual_grip_window: as :meth:`step_target`;
+                under HOLD the grip-derived fields evaluate at the frozen chunk END frame (sec 4.2 N3).
+              validity_mask: per-phase state-blind mask [float32 scalar for the CURRENT phase] -- 1.0
+                where the base target is cable-state-derived, 0.0 for frozen-waypoint phases; consumed
+                trainer-side only (weighting), never changes env behavior.
+              sync_state: dict ``{"mode": "MARCH"|"HOLD", "hold_count": int, "div_grip": float [mm],
+                "route_t": int}``.
+        """
+        raise NotImplementedError
+
 
 # =====================================================================================================
 # SSOT discipline guard: route-owned param names must NOT shadow task_config SSOT names (import-time)
@@ -202,6 +239,10 @@ _ROUTE_OWNED_PARAM_NAMES = {
     "ROUTE_C2_XY",
     "ROUTE_CLIP_FLOAT_Z",
     "ROUTE_GROOVE_Z",
+    "HOLD_THRESH_MM",
+    "HOLD_RESUME_MM",
+    "HOLD_RESUME_K",
+    "MAX_HOLD_STEPS",
 }
 _COLLIDING = {n for n in _ROUTE_OWNED_PARAM_NAMES if hasattr(task_config, n)}
 assert not _COLLIDING, (
