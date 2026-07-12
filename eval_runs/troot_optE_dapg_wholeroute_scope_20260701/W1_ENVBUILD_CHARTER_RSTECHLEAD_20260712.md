@@ -20,7 +20,7 @@
 
 | # | 項 | 内容 | 根拠 |
 |---|---|---|---|
-| B0-1 | **c1pin dirty diff = REVERT** | `newton_route_env.py` +23 行 / `route_executor.py` +70 行 (FORK-1 fix 仮説 = REFUTED arc) を revert。執行 = **%11 (diff owner、他 pane 未 commit の silent 破棄禁止則に適合)** | spec §0-H4 (disposition = build 前提条件) + %11 推奨「dead-branch→revert」+ %12 CONCUR (COORD handoff 07-12)。on-disk 実測 13:4x: 両 diff 残 dirty 確認済 |
+| B0-1 | **c1pin dirty diff = REVERT (3 files)** | `newton_route_env.py` +23 行 / `route_executor.py` +70 行 / **`newton_skill_env_base.py` +28/-2 行 (perclip_pin 事前確保 — v0.1 の 2-file 列挙は omission、ERRATUM-1)** (FORK-1 fix 仮説 = REFUTED arc) を revert。dead-branch commit → revert の順で全保存。執行 = **%11 (diff owner、他 pane 未 commit の silent 破棄禁止則に適合)** | spec §0-H4 (disposition = build 前提条件) + %11 推奨「dead-branch→revert」+ %12 CONCUR (COORD handoff 07-12 + 3rd file は %11 catch 14:02 → %12 on-disk 裏取り 14:0x: +28/-2 実在 / comment「FORK-1 root cause」主張 = REFUTED 済で false / spec v0.8.1 に skill_env_base 参照ゼロ = build 依存なし) |
 | B0-2 | B0-1 帰結の記録 | revert により consumer ③ (ff replay / c1-pin onset) は **ff replay のみに縮退** — §5 pin event telemetry は縮退後 wiring (spec §5 M4 の条件節どおり) | spec §0-H4 / §5 M4 |
 | B0-3 | og_offline_gate.py format-only diff | disposition = %11 判断 (commit or revert、trivial)。B6 着手前に clean にする | spec §0-H4 (format-only 確認済) |
 | B0-4 | **baseline sha pin** | B0-1/3 完了後、byte-repro ref-subset (`test_routeexec_byte_repro.py`) を再走 → 以後の全 flag-OFF byte-preserve leg の **pinned baseline sha** とする | spec §8 flag-OFF 行 (pinned baseline sha 要求) |
@@ -77,7 +77,7 @@
 ## §8. Provenance / 検証記録
 
 - prior-art guard (本 charter 起草時、13:4x): BLOCKER hits = 全て認可 Stage-A 設計系譜の自己参照 (spec v0.8.1 §13 表 / STAGEA_CROSSPV 両台帳 / stageA node state.md) — **失敗経路の再走なし → PASS disposition** (stageA node 10:31 entry と同型: 認可設計の自己 hit)。
-- on-disk 実測 (13:4x): c1pin diff +23/+70 残 dirty / og_offline_gate.py dirty / `run_route` = route_executor.py:1028 実在 / 抽出 twin byte-repro 81/81 = spec §6.2 cite (`50f877c7f5`)。
+- on-disk 実測 (13:4x): c1pin diff +23/+70 残 dirty / og_offline_gate.py dirty / `run_route` = route_executor.py:1028 実在 / 抽出 twin byte-repro 81/81 = spec §6.2 cite (`50f877c7f5`)。**ERRATUM-1 (14:0x、%11 catch):** 13:4x 実測は spec §0-H4 の 2-file 列挙を query したため `newton_skill_env_base.py` +28/-2 (同 c1pin arc) を omit — B0-1 を 3 files に訂正 (spec §0-H4 の dirty deltas 列挙も同 omission を含む、records 注記)。
 - 本 charter = 転記 + staging のみ、新規設計判断なし。verify leg = p1 (OPS-SUP) 独立検分 (trainer-DEFINE precedent) — 結果は本 doc の Status 行と node state.md に反映。
 
 *%12 — 2026-07-12 13:51 JST。PAPER-ONLY (本 doc 自体は build しない)。INVARIANTS / task_config.py / Rs-LOCKED files 不触。*
