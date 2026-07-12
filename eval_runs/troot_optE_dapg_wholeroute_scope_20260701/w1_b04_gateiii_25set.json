@@ -1,0 +1,44 @@
+{
+ "gateiii_25set": [
+  "x-10_y-10",
+  "x-10_y20",
+  "x-10_y5",
+  "x-15_y-10",
+  "x-15_y-20",
+  "x-15_y-5",
+  "x-15_y10",
+  "x-15_y20",
+  "x-15_y5",
+  "x-20_y-20",
+  "x-20_y-5",
+  "x-20_y10",
+  "x-5_y-10",
+  "x-5_y20",
+  "x-5_y5",
+  "x0_y-10",
+  "x0_y20",
+  "x0_y5",
+  "x10_y-15",
+  "x10_y0",
+  "x10_y15",
+  "x15_y-15",
+  "x15_y0",
+  "x20_y-15",
+  "x20_y0"
+ ],
+ "count": 25,
+ "derivation": "offline mirror of dod9a_prime.py (per-cell EXACT 81/81 proven; env==offline==25)",
+ "predicate_constants": {
+  "ROUTE_C2_XY": [
+   0.4,
+   0.0
+  ],
+  "ROUTE_GROOVE_Z": 0.8290000000000001,
+  "C2_SETTLE_Z_TOL_MM": 3.0,
+  "C2_WALL_SEAT_TOL_MM": 0.5,
+  "C1_FLANK_WINDOW_M": 0.01,
+  "C1_RETAINED_LOW_WALL_TOP_M": 0.84,
+  "C1Y": 0.15
+ },
+ "b7_dod_condition": "B7 gate-iii leg: re-derive from the then-current predicate and assert SET-EQUALITY (not count) vs this pinned membership; mismatch = loud STOP (%12 condition b, 14:26)"
+}

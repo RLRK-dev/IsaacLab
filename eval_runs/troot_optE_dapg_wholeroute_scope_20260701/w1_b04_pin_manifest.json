@@ -1,0 +1,173 @@
+{
+ "what": "W1 pinned flag-OFF byte-preserve baseline (charter B0-4, pre-B1 anchor)",
+ "layers": {
+  "per_chunk_5": [
+   "x0_y0",
+   "x-20_y-20",
+   "x-20_y20",
+   "x20_y-20",
+   "x20_y20"
+  ],
+  "gateiii_25": [
+   "x-10_y-10",
+   "x-10_y20",
+   "x-10_y5",
+   "x-15_y-10",
+   "x-15_y-20",
+   "x-15_y-5",
+   "x-15_y10",
+   "x-15_y20",
+   "x-15_y5",
+   "x-20_y-20",
+   "x-20_y-5",
+   "x-20_y10",
+   "x-5_y-10",
+   "x-5_y20",
+   "x-5_y5",
+   "x0_y-10",
+   "x0_y20",
+   "x0_y5",
+   "x10_y-15",
+   "x10_y0",
+   "x10_y15",
+   "x15_y-15",
+   "x15_y0",
+   "x20_y-15",
+   "x20_y0"
+  ],
+  "union_count": 29
+ },
+ "cells": {
+  "x-10_y-10": {
+   "npz_sha256": "f348c90e8cf6e4387c6c4e759edb8839692a583bbab08522f8ba83e1ba89847e",
+   "golden_match": true
+  },
+  "x-10_y20": {
+   "npz_sha256": "016a02d3da471552b1f25d17ade00f3bac387fd41bfad5d34ab0f549189891b2",
+   "golden_match": true
+  },
+  "x-10_y5": {
+   "npz_sha256": "bd1edf1150c7ff38ef8be19134d41e17cb94c2265bf42fabdd9f550c7110ab57",
+   "golden_match": true
+  },
+  "x-15_y-10": {
+   "npz_sha256": "ea704345851f993fb6eb2684ee800a824d43d363d4755ad530c0a4fa6946f069",
+   "golden_match": true
+  },
+  "x-15_y-20": {
+   "npz_sha256": "4926d32c31bb6b32023eb9136d0ece27a466254afaf6de46fbaa810ea1583877",
+   "golden_match": true
+  },
+  "x-15_y-5": {
+   "npz_sha256": "642dfe5fc65f7c8847c213b49a6ae83f5e4e0dbe414ff4a515435f0366ea7b03",
+   "golden_match": true
+  },
+  "x-15_y10": {
+   "npz_sha256": "5fc975584e657de50edd6baa7de2fbc60342f9cc1194a157d82b3b24bd456556",
+   "golden_match": true
+  },
+  "x-15_y20": {
+   "npz_sha256": "efbd71295f22d7a7d25b56ae172dbd8b395e5377af02e913344a9bd2cc9c06ed",
+   "golden_match": true
+  },
+  "x-15_y5": {
+   "npz_sha256": "4d4bab40a986b80d17604393ecfaae77dd95109d7653a9a369b6f6a3f2232e22",
+   "golden_match": true
+  },
+  "x-20_y-20": {
+   "npz_sha256": "1c5ee8fe6c793e6e317b4c06045022fb84041313fff36360dab8f223e1f10e36",
+   "golden_match": true
+  },
+  "x-20_y-5": {
+   "npz_sha256": "2fd9c219d3a7426a1a56de8160faf72633a7fc13e80fb49915185f8cd5ed426e",
+   "golden_match": true
+  },
+  "x-20_y10": {
+   "npz_sha256": "eb563371824b4b55167f4aa305d83bdbd595e06a4729d92a8d4f3e0db72c7576",
+   "golden_match": true
+  },
+  "x-20_y20": {
+   "npz_sha256": "47c0e3eb4a962c7e4264aaecc06bf82bbf74caff9c5602bb0b8d3645b94c15b2",
+   "golden_match": true
+  },
+  "x-5_y-10": {
+   "npz_sha256": "57aac20240be09f467bd061be8d9873d3470b58489156fecb54966e89497064e",
+   "golden_match": true
+  },
+  "x-5_y20": {
+   "npz_sha256": "4c22d8545f32e3c0e949cd3dd49a676c2419c97608afb3c6136fd5dae9a1f902",
+   "golden_match": true
+  },
+  "x-5_y5": {
+   "npz_sha256": "8891a801ad3e0ca4e9cd123b4ddd7c77d1babe1b287bee1b4576bc85d51cc377",
+   "golden_match": true
+  },
+  "x0_y-10": {
+   "npz_sha256": "9e1fde19a3f5dd7cefafef59e906815fedb5a020a3d0f5807af6738d84cb52d8",
+   "golden_match": true
+  },
+  "x0_y0": {
+   "npz_sha256": "5f1c3f9238f45057011cfad1d010ac43000cb179b76b61d0461733a9075416cf",
+   "golden_match": true
+  },
+  "x0_y20": {
+   "npz_sha256": "099b8e1a6be9e6b3307213ecbe3407a78978368b53d2363f267fe963e5f1e54a",
+   "golden_match": true
+  },
+  "x0_y5": {
+   "npz_sha256": "50763f65779247a8251a6166cc51ba0c42b126632b4db600920cdf63f2317423",
+   "golden_match": true
+  },
+  "x10_y-15": {
+   "npz_sha256": "3b74fd4cccbfe55098a2fadeb69e26789789631c3ba7e6de3f3e2c178e1b7d03",
+   "golden_match": true
+  },
+  "x10_y0": {
+   "npz_sha256": "a17af72782ba00032d2f54887d1e5c8e0159ae53d89302ec02aec03fe995e12d",
+   "golden_match": true
+  },
+  "x10_y15": {
+   "npz_sha256": "7082203c67e271c37bc675a63649f781ea261c43b5b6191fc4c5a7002b86248b",
+   "golden_match": true
+  },
+  "x15_y-15": {
+   "npz_sha256": "9bf5c4071ac6c221c75e193d9b939d94c8fdafdbbe868a3e05c6f94ec172a936",
+   "golden_match": true
+  },
+  "x15_y0": {
+   "npz_sha256": "712cbc37f52d7a89cf4731714d9039fa521817d87f55dac23fd37c104f8e3e85",
+   "golden_match": true
+  },
+  "x20_y-15": {
+   "npz_sha256": "fff05d014ddbeca7f86ba4d5cf8f3a462628df8a3c4c4581d1cc517f674065f4",
+   "golden_match": true
+  },
+  "x20_y-20": {
+   "npz_sha256": "72d4f9ef3028f5442a9f8bd823b498650f5a9cbbdbf2563d2282bc48a3aff73e",
+   "golden_match": true
+  },
+  "x20_y0": {
+   "npz_sha256": "49d0d2d650e8c60d7dd4b7fc1b1bb17a30b9c22ae1bb96638c2492d55597f03a",
+   "golden_match": true
+  },
+  "x20_y20": {
+   "npz_sha256": "93c076b34b0ed73a83aebbf82a5988e65afe0aae0170358cb84bd9c3dbf5c50b",
+   "golden_match": true
+  }
+ },
+ "all_golden_match": true,
+ "fails": [],
+ "provenance": {
+  "head_at_pin": "9c5a7a5b6cae20ae7cacdf5ceba92dd12536fd49",
+  "route_executor_py_sha256": "3b320e8ae88027a47d5eeb285c14cf5b735d96b743a10feefbf47d6e90cc6475",
+  "derive_script_sha256": "fbaf36615f8b53f7e2f738daaf969283dc0cd69c45ff43149613a3565fe0553f",
+  "membership_json_sha256": "9a5cf27ae20ff403f0ea551c3b3e336f2a0f2a94f6ec250af09786ef5a81ca58",
+  "golden_dir": "w0e_81rerun_snapdown_0537",
+  "runs": [
+   "w1_b04_baseline_run.log (5-cell + ref self-check x0_y0)",
+   "w1_b04_baseline_run2.log (24-cell)"
+  ]
+ },
+ "b7_condition_b": "B7 gate-iii leg re-derives the 25-set from the then-current predicate and asserts SET-EQUALITY vs layers.gateiii_25; mismatch = loud STOP",
+ "usage": "per-chunk flag-OFF leg: rerun byte-repro on per_chunk_5, compare npz sha256 to cells[tag].npz_sha256 (== golden). B7 final leg: same over gateiii_25 + the condition-b set-equality assert."
+}
