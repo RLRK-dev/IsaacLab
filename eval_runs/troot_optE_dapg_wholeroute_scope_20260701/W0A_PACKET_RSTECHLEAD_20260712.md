@@ -82,4 +82,13 @@ draw 方針 (DR-support 除外推奨) / Q7 arm-arm collision / HIGH4 ori 節な�
 
 いずれの場合も **node COMPLETE 宣言は本 review の結果と同時に行います** (数値 harden 前に COMPLETE にしない — 5体 NHA 条件)。
 
+---
+
+## 決定記録 (decision-of-record)
+
+**Rs verbatim「A」(2026-07-12 13:29 JST) = 一括承認**: §1 全 7 項 confirm + §2 提案値採択 (smoke 再導出条項付きの値はその条項ごと有効)。
+- D-A (1-1) は「どちらでも可 (等価)」の disposition のまま承認 → **運用 default = close 宣言 (A-vs-B OPEN を log に残す)**。再開希望が生じた場合は別 node で (この解釈は %12 判断・autonomy grant 内、veto 可)。
+- 帰結: **W1 (env build) 着手可**。campaign は不変で HIGH-COST + production-launch + fresh Rs GO 背後。
+- pending leg: p1 assembly 検分 (提示と並行) — CORRECTIONS が出た場合は該当項のみ Rs へ loud に再提示。
+
 *%12 — 2026-07-12。本 packet = 転記 + 提案のみ、新規設計判断なし。INVARIANTS/task_config 不触。*
