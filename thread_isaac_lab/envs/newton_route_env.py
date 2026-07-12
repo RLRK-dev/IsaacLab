@@ -455,12 +455,6 @@ class NewtonRouteEnv(VecEnv):
         _rc2 = self.cfg.get("route_c2_scene", False)
         assert isinstance(_rc2, bool), f"cfg['route_c2_scene'] must be a bool, got {type(_rc2).__name__}"
         self._route_c2_scene = _rc2
-        # C1 PERCLIP_PIN (FORK-1 fix 2026-07-12): activate the AUTHORIZED C1 clip-retention pin during the
-        # feedforward replay (the single-world producer has it; the multi-world env-core was MISSING it, so the
-        # C1-seated cable was un-anchored -> dropped at the R-release C1->C2 handover). Gated: default off =
-        # byte-preserve; ROUTE_C1_PIN=1 (or cfg['route_c1_pin']) pre-allocates the pin + activates it at the
-        # recorded C1-seat onset frame. world_count=1 CPU verification path (multi-world / GPU-cg mjw deferred).
-        self._route_c1_pin = bool(self.cfg.get("route_c1_pin", False)) or os.environ.get("ROUTE_C1_PIN", "0") == "1"
         # D rho=0 (Rs adjudication (1) 2026-07-10): route drive mode. 'ik_chord' (default) = the current
         # step-level batched IK + 10-frame joint chord (byte-preserve); 'feedforward' = the recording's
         # arm_q replayed per physics frame (the armqdirect-proven mechanism promoted to a drive mode;
@@ -598,14 +592,6 @@ class NewtonRouteEnv(VecEnv):
                 f"sha256({npz_path})={got} != {rex.RUN1_REFERENCE_V2_SHA256}"
             )
         z = np.load(npz_path, allow_pickle=True)
-        # C1 PERCLIP_PIN onset (FORK-1 fix): the first frame the recording pinned the C1 seat (pin_active). The
-        # feedforward drive activates the env-core pin at this frame. None when the flag is off / key absent.
-        _pin_onset = None
-        if self._route_c1_pin and "pin_active" in z:
-            _pa = np.asarray(z["pin_active"]).ravel()
-            _nz = np.nonzero(_pa != 0)[0]
-            _pin_onset = int(_nz[0]) if len(_nz) else None
-            print(f"[NewtonRouteEnv] C1 PERCLIP_PIN gated ON: recorded pin onset frame = {_pin_onset}")
         recording = {
             "ee_pos_r": z["ee_pos_r"],
             "ee_pos_l": z["ee_pos_l"],
@@ -627,7 +613,6 @@ class NewtonRouteEnv(VecEnv):
             state_bank=state_bank,
             recording=recording,
             forbid_banked_fork=self._grasp_actuation,  # comp3 (R1): k>=1 banked fork needs DoD-7(b) (comp3b)
-            c1_pin_onset_frame=_pin_onset,  # FORK-1 fix: activate the C1 pin at the recorded C1-seat onset frame
         )
 
     # =====================================================================================================
@@ -675,7 +660,6 @@ class NewtonRouteEnv(VecEnv):
             grasp_actuation=self._grasp_actuation,  # comp3: OFF (default)=byte-id solid table; ON=VOID+servo
             add_c2_clip=self._route_c2_scene,  # comp5: real C2 V-groove (MW env-core route seating + DoD6 video)
             c2_xy=rc.ROUTE_C2_XY,  # param-idiom single-source (0.000); NO os.environ CLIP2_Y
-            perclip_pin=self._route_c1_pin,  # FORK-1 fix: pre-allocate the C1 clip-retention pin per cable body (gated)
         )
         self._model = scene["model"]
         self._solver = scene["solver"]
@@ -1164,13 +1148,6 @@ class NewtonRouteEnv(VecEnv):
                 )
                 self._route.apply_recorded_grip(route_steps, step)
                 self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
-                if self._route_c1_pin:
-                    # FORK-1 fix: activate the AUTHORIZED C1 clip-retention pin at the recorded C1-seat onset
-                    # frame (one-time latch inside), so the C1-seated cable is anchored through the C1->C2
-                    # handover (the producer does this; the env-core was missing it). _state_0 is post-step here.
-                    self._route.maybe_activate_c1_pin(
-                        route_steps, step, self._solver, self._cable_bodies, CLIP1_Y, self._state_0
-                    )
             # FK-side warm-start/obs source: arm cols <- the final feedforward row; gripper cols keep
             # their pinned-OPEN values (production fk_jq semantic; flag-ON obs[7]/[15] read physics).
             for w in range(N):

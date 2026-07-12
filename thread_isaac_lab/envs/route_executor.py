@@ -3183,7 +3183,6 @@ class RouteExecutor(rc.RouteInterfaceV1):
         state_bank=None,
         recording=None,
         forbid_banked_fork=False,
-        c1_pin_onset_frame=None,
     ):
         """Wire the per-world index maps + optional physics handles + the recorded_replay source.
 
@@ -3213,13 +3212,6 @@ class RouteExecutor(rc.RouteInterfaceV1):
         if control is not None:
             servo_seed_assert(control.joint_target_pos.numpy(), self._maps["all_driver_dofs"])
         self._recording = _prepare_recording(recording) if recording is not None else None
-        # C1 PERCLIP_PIN (env-core clip retention, FORK-1 fix 2026-07-12): the recorded pin-onset frame + a
-        # one-time latch. When the feedforward replay reaches this frame, the drive calls
-        # :meth:`maybe_activate_c1_pin` to activate the pre-allocated AUTHORIZED C1 pin (the single-world
-        # producer has it; the multi-world env-core was MISSING it -> the C1-seated cable was un-anchored, so
-        # the light L-hold dropped it at the R-release handover). None => disabled (byte-preserve).
-        self._c1_pin_onset_frame = int(c1_pin_onset_frame) if c1_pin_onset_frame is not None else None
-        self._c1_pin_done = False
 
     def reset_to_phase(self, k: int) -> None:
         """Fork all worlds to phase ``k``'s banked state (SCALAR ``k``; §13.2/§13.3/§13.4).
@@ -3392,68 +3384,6 @@ class RouteExecutor(rc.RouteInterfaceV1):
         state.joint_q.assign(phys_jq)
         state.joint_qd.assign(phys_jqd)
         return jq_ff
-
-    def maybe_activate_c1_pin(self, route_steps, sub_i, solver, cable_bodies_per_world, y_clip, state):
-        """Activate the pre-allocated C1 PERCLIP_PIN once the replay reaches the recording's pin-onset frame.
-
-        The producer (``test_newton_clip_routing.py`` 1992-2057) activates the AUTHORIZED clip-retention pin at
-        the C1 seat (before the L-half-unclamp / C1->C2 handover); the recording carries ``pin_active`` from
-        that frame. The multi-world env-core was MISSING this activation (FORK-1 root cause): the C1-seated
-        cable is not anchored, so the light L-hold drops it at the R-release handover. Mirrors the producer's
-        seat-detect (cable body nearest ``y_clip`` in Y) + world-position eq-match + activate, on the env's own
-        SolverMuJoCo ``mj_data`` (world_count=1 CPU substrate). One-time latch. No-op if no onset frame /
-        already done. Multi-world (world_count>1) / GPU-cg ``mjw`` activation is a deferred extension.
-
-        Args:
-            route_steps: Per-world RL route step ``t_w`` (world 0 used for the frame lookup).
-            sub_i: Physics sub-frame index in ``[0, _REC_CADENCE)``.
-            solver: The env's SolverMuJoCo (exposes ``mj_model`` / ``mj_data``).
-            cable_bodies_per_world: Per-world cable body index lists (``env._cable_bodies``).
-            y_clip: C1 clip Y [m]; the seated cable body is the one nearest this Y.
-            state: The CURRENT physics state (``body_q`` read for the seat world position).
-        """
-        if self._c1_pin_done or self._c1_pin_onset_frame is None or self._recording is None:
-            return
-        step_f = self._recording["step_f"]
-        n_steps = len(step_f)
-        tt = min(max(int(route_steps[0]), 0), n_steps - 1)
-        f = int(step_f[tt]) + int(sub_i)
-        if f < self._c1_pin_onset_frame:
-            return
-        mjm = getattr(solver, "mj_model", None)
-        mjd = getattr(solver, "mj_data", None)
-        self._c1_pin_done = True  # latch: one attempt at the onset frame (regardless of outcome)
-        if mjm is None or mjd is None:
-            return
-        bq = state.body_q.numpy()
-        _cb = np.asarray(cable_bodies_per_world[0], dtype=int)
-        _seat_k = int(np.argmin(np.abs(bq[_cb, 1] - float(y_clip))))
-        seat_body = int(_cb[_seat_k])
-        _seat_world = bq[seat_body, :3].astype(float).copy()
-        mujoco.mj_forward(mjm, mjd)
-        _best, _bestd = None, 9e9
-        for i in range(int(mjm.neq)):
-            if (
-                int(mjm.eq_type[i]) == int(mujoco.mjtEq.mjEQ_CONNECT)
-                and int(mjm.eq_obj2id[i]) == 0
-                and int(mjm.eq_active0[i]) == 0
-            ):
-                _d = float(np.linalg.norm(np.asarray(mjd.xpos[int(mjm.eq_obj1id[i])]) - _seat_world))
-                if _d < _bestd:
-                    _bestd, _best = _d, i
-        if _best is None or _bestd >= 5e-3:
-            print(
-                f"  [PERCLIP_PIN] env-core: no pre-allocated disabled connect matched seat body idx{seat_body} "
-                f"(best {_bestd * 1e3:.2f}mm @frame{f}) -- NOT activated"
-            )
-            return
-        mjm.eq_data[_best, 0:3] = [0.0, 0.0, 0.0]
-        mjm.eq_data[_best, 3:6] = _seat_world
-        mjd.eq_active[_best] = 1
-        print(
-            f"  [PERCLIP_PIN] env-core ACTIVATED eq#{_best} @frame{f} on seat body idx{seat_body} "
-            f"(Y{bq[seat_body, 1]:+.3f}, pos-match {_bestd * 1e3:.3f}mm) @world{[round(v, 4) for v in _seat_world]}"
-        )
 
     def reseed_grip_open(self, env_ids):
         """comp3 (R1): reset-time re-seed the gripper POSITION-servo target to OPEN both arms for ``env_ids``.
