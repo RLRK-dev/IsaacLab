@@ -91,4 +91,11 @@ draw 方針 (DR-support 除外推奨) / Q7 arm-arm collision / HIGH4 ori 節な�
 - 帰結: **W1 (env build) 着手可**。campaign は不変で HIGH-COST + production-launch + fresh Rs GO 背後。
 - pending leg: p1 assembly 検分 (提示と並行) — CORRECTIONS が出た場合は該当項のみ Rs へ loud に再提示。
 
+### 検分結果の訂正 (p1 CONCUR-W-CORRECTIONS 13:32、台帳 §5.5)
+
+- **C-1 (HIGH、Rs へ loud 再提示済み):** §1-1 D-A は **07-05 に Rs 既決「(B)」= R1 CLOSE + A-vs-B は P2 state-feedback oracle 稼働後の named probe (M-AB) に pre-register 済み** (LEDGER row47 ⟦07-05 10:17 W0-b 終局⟧)。packet が open 選択として再提示したのは誤り — **1-1 = 既決の確認に訂正**。当初決定記録の「運用 default = close 宣言」解釈は撤回 (既決 (B) がそのまま governs)。**新規の open 項は probe 発火時期のみ** (oracle = Stage-A 成果物 → W1 build 後が自然、Rs 再提示参照)。
+- M-1: §2a curriculum mix 比率の「smoke 後再提示」は spec:145「比率 = Rs W0-a」からの **deferral** (n=1 で根拠となる比率提案が組めないため) — deferral として明記、smoke 後に単独項で Rs 提示。
+- M-2: §3-2 の claim ③ は spec v0.8 に未登録だった → **spec v0.8.1 で正式登録** + 反証帰属を訂正 (③ の discharge = §8 smoke でなく Stage-C 訓練時 HOLD-resume telemetry)。
+- C-2: 同梱 evidence 2 点 (p1 台帳 + script v3) が untracked だった → 本 commit で bank (authorship = p1、bank 執行 = %12 per precedent)。
+
 *%12 — 2026-07-12。本 packet = 転記 + 提案のみ、新規設計判断なし。INVARIANTS/task_config 不触。*
