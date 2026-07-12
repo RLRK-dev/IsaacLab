@@ -1,0 +1,16 @@
+{
+  "n_cells": 81,
+  "env_predicate_both_count": 25,
+  "offline_prediction_both_count": 25,
+  "per_cell_EXACT_match": 81,
+  "per_cell_total": 81,
+  "per_cell_EXACT_pass": true,
+  "mismatches": [],
+  "route_baseline_58_81": 58,
+  "rc_ROUTE_GROOVE_Z": 0.8290000000000001,
+  "rc_ROUTE_C2_XY": [
+    0.4,
+    0.0
+  ],
+  "note": "env count (partial numerator) vs route 58/81 gap = wall/spacer exact-split (route-executor LOUD-CARRY). per-cell EXACT = env predicate CODE faithful to offline logic (proxy modulo)."
+}

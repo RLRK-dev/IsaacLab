@@ -1,0 +1,578 @@
+{
+  "A_live_g_final": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "A_live_g_samples": [
+    [
+      0,
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      100,
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      300,
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      500,
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    [
+      770,
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  ],
+  "A_no_refire_monotonic": true,
+  "A_guards_quiet": {
+    "N_steps": 771,
+    "n_done": 641,
+    "drop_sum": 641,
+    "explosion_sum": 0,
+    "success_sum": 0,
+    "timeout_sum": 0,
+    "PASS_all_done_is_drop_proxy": true,
+    "PASS_no_explosion": true,
+    "PASS_no_false_success": true,
+    "PASS_no_false_timeout": true
+  },
+  "B_full_81cell": {
+    "n_cells": 81,
+    "n_firing": 25,
+    "false_at_C1_SEAT_ph5_of_all": 81,
+    "phase_gating_violations": 0,
+    "true_at_C2_SETTLE_ph14_of_firing": 25,
+    "PASS_no_gating_violation": true,
+    "PASS_firing_all_seat_at_ph14": true,
+    "note": "c2 phase-gating: FALSE at C1_SEAT for all cells (no premature seat), TRUE at C2_SETTLE for all firing cells. firing 25/81 vs route 58/81 = wall/spacer proxy carry (route-executor)."
+  },
+  "B_rows": [
+    {
+      "cell": "cell_x-10_y-10",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-10_y-15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-10_y-20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-10_y-5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-10_y0",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-10_y10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-10_y15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-10_y20",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-10_y5",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-15_y-10",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-15_y-15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-15_y-20",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-15_y-5",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-15_y0",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-15_y10",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-15_y15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-15_y20",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-15_y5",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-20_y-10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-20_y-15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-20_y-20",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-20_y-5",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-20_y0",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-20_y10",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-20_y15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-20_y20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-20_y5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-5_y-10",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-5_y-15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-5_y-20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-5_y-5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-5_y0",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-5_y10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-5_y15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x-5_y20",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x-5_y5",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x0_y-10",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x0_y-15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x0_y-20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x0_y-5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x0_y0",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x0_y10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x0_y15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x0_y20",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x0_y5",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x10_y-10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x10_y-15",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x10_y-20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x10_y-5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x10_y0",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x10_y10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x10_y15",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x10_y20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x10_y5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x15_y-10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x15_y-15",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x15_y-20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x15_y-5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x15_y0",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x15_y10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x15_y15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x15_y20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x15_y5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x20_y-10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x20_y-15",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x20_y-20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x20_y-5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x20_y0",
+      "firing_final": true,
+      "c2_at_ph5": false,
+      "c2_at_ph14": true
+    },
+    {
+      "cell": "cell_x20_y10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x20_y15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x20_y20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x20_y5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x5_y-10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x5_y-15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x5_y-20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x5_y-5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x5_y0",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x5_y10",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x5_y15",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x5_y20",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    },
+    {
+      "cell": "cell_x5_y5",
+      "firing_final": false,
+      "c2_at_ph5": false,
+      "c2_at_ph14": false
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "wc": 4,
+  "C2_XY": [
+    0.4000000059604645,
+    0.0
+  ],
+  "throughput_env_fps": 16.9,
+  "throughput_rl_sps": 4.23,
+  "finite_100steps": true,
+  "dod1_throughput": "16.9 env-fps (bar 9.7)",
+  "dod3_finite": true,
+  "dod5_residual_const": [
+    0.0075,
+    0.0075,
+    0.0075,
+    0.0075,
+    0.0075,
+    0.0075
+  ],
+  "dod5_drift_max_across_steps_m": 0.0,
+  "dod5_pass_nonaccumulating": true,
+  "dod10_is_dual_window": true,
+  "dod10_span_m": [
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744,
+    0.08744
+  ],
+  "dod10_span_range_mm": 0.0,
+  "dod10_commanded_span_mm": 88.0,
+  "dod10_exec_residual_after_asym": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "dod10_proj_mode": 0
+}

@@ -155,11 +155,14 @@ class RouteInterfaceV1:
     the both-arm contact obs [53:55] is telemetry, NOT a gate input (NEW-A fail-OPEN fix).
     """
 
-    def reset_to_phase(self, k: int) -> None:
-        """Fork the world to phase ``k``'s precomputed state-bank (spec sec 2-F2 (b)).
+    def reset_to_phase(self, k: int, world_ids: list[int] | None = None) -> None:
+        """Fork to phase ``k``'s precomputed state-bank (spec sec 2-F2 (b); interface v2, Stage-A §4.1 H6).
 
         Args:
             k: phase index in ``[0, N_ROUTE_PHASES)`` to fork to. Stub = no-op record.
+            world_ids: worlds to fork (v2, W1-B1). ``None`` = ALL worlds — byte-identical to the v1
+                scalar-``k`` contract (additive extension, not a breaking change). A list restores only
+                those worlds' banked tiles (per-world curriculum fork; consumer = the env done-reset).
         """
         raise NotImplementedError
 

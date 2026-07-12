@@ -3213,12 +3213,20 @@ class RouteExecutor(rc.RouteInterfaceV1):
             servo_seed_assert(control.joint_target_pos.numpy(), self._maps["all_driver_dofs"])
         self._recording = _prepare_recording(recording) if recording is not None else None
 
-    def reset_to_phase(self, k: int) -> None:
-        """Fork all worlds to phase ``k``'s banked state (SCALAR ``k``; §13.2/§13.3/§13.4).
+    def reset_to_phase(self, k: int, world_ids: list[int] | None = None) -> None:
+        """Fork to phase ``k``'s banked state (interface v2, W1-B1: per-world ``world_ids``).
 
         Restores the banked arm + all-16 gripper ``joint_q``/``joint_qd`` + the banked grip target
-        (banked-CLOSED for a gripped phase, NOT a blanket-OPEN). Phase-0 / no bank => no-op (the env-core
-        reset is authoritative), matching the stub. Per-world different-``k`` is deferred to the trainer.
+        (banked-CLOSED for a gripped phase, NOT a blanket-OPEN). ``world_ids=None`` = ALL worlds — the
+        v1-identical code path. A list restores ONLY those worlds' tiles: maps AND banked are co-sliced
+        with per-map block lengths (arm 12 / gripper 16 / driver 4) in ascending world order, so the
+        ``grip_target`` enumerate inside :func:`apply_banked_restore` is re-based within the subset
+        (conformance v2.1 R9 — a maps-only slice would silently read world-0's banked block).
+
+        ``k == 0`` is a STRUCTURAL no-op (env-authoritative reset; the bank NEVER holds k=0 — builder
+        omits it by design). The explicit early-return removes the implicit dependency on that invariant
+        (a B3-era k=0 bank entry would otherwise turn the env done-reset re-fork into a silent banked
+        restore; conformance v2.1 R13).
 
         Raises:
             NotImplementedError: If ``k >= 1`` and this executor was built with ``forbid_banked_fork=True``
@@ -3231,13 +3239,45 @@ class RouteExecutor(rc.RouteInterfaceV1):
                 "scope = G1 nominal (k=0). Built with forbid_banked_fork=True until the cable-fork re-seed lands."
             )
         self._requested_phase = int(k)
+        if int(k) == 0:
+            return  # k=0 = env-authoritative reset, NEVER banked (structural guard, v2.1 R13)
         banked = self._state_bank.get(int(k))
         if banked is None or self._state_0 is None:
-            return  # phase-0 / no bank / index-only construction: the env-core reset stands
+            return  # no bank / index-only construction: the env-core reset stands
+        if world_ids is None:
+            use_maps, use_banked = self._maps, banked
+        else:
+            ws = sorted(int(w) for w in world_ids)
+            n_arm = len(_ARM_OVERWRITE_LOCAL)  # 12 / world
+            n_grip = len(_GRIPPER_COORDS_LOCAL)  # 16 / world
+            n_drv = 4  # L,L,R,R driver DOFs / world (maps["all_driver_dofs"] block)
+
+            def _blk(arr, n):
+                a = np.asarray(arr)
+                assert all(0 <= w * n < a.shape[0] + 1 and (w + 1) * n <= a.shape[0] for w in ws), (
+                    f"world_ids {ws} out of range for a {a.shape[0]}-wide world-major array (block {n})"
+                )
+                return np.concatenate([a[w * n : (w + 1) * n] for w in ws])
+
+            # co-slice: SAME ws, SAME ascending order on both sides (v2.1 R9).
+            use_maps = {
+                "arm_ow_q_idx": _blk(self._maps["arm_ow_q_idx"], n_arm),
+                "arm_ow_qd_idx": _blk(self._maps["arm_ow_qd_idx"], n_arm),
+                "gripper_restore_q_idx": _blk(self._maps["gripper_restore_q_idx"], n_grip),
+                "gripper_restore_qd_idx": _blk(self._maps["gripper_restore_qd_idx"], n_grip),
+                "all_driver_dofs": [int(d) for d in _blk(self._maps["all_driver_dofs"], n_drv)],
+            }
+            use_banked = {
+                "arm_q": _blk(banked["arm_q"], n_arm),
+                "arm_qd": _blk(banked["arm_qd"], n_arm),
+                "gripper_q": _blk(banked["gripper_q"], n_grip),
+                "gripper_qd": _blk(banked["gripper_qd"], n_grip),
+                "grip_target": _blk(banked["grip_target"], n_drv),
+            }
         phys_jq = self._state_0.joint_q.numpy()
         phys_jqd = self._state_0.joint_qd.numpy()
         jtp = self._control.joint_target_pos.numpy()
-        apply_banked_restore(phys_jq, phys_jqd, jtp, self._maps, banked)
+        apply_banked_restore(phys_jq, phys_jqd, jtp, use_maps, use_banked)
         self._state_0.joint_q.assign(phys_jq)
         self._state_0.joint_qd.assign(phys_jqd)
         self._control.joint_target_pos.assign(jtp)

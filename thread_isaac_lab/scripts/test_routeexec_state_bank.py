@@ -173,14 +173,100 @@ def test_nominal():
     return _roundtrip_check(rec, n_world=4, arm_q_start=aqs, arm_qd_start=aqds, label="NOMINAL")
 
 
+def test_world_slice():
+    """W1-B1 interface v2: reset_to_phase(k, world_ids) restores ONLY those worlds (conformance v2.1 R12).
+
+    Discriminating construction (CC3-CH2 + %9 F-1): the bank is per-world-DISTINCT (hand-built, NOT the
+    tiled build_state_bank output) and W = {1, 3} is a non-prefix, world-0-excluding subset -- a buggy
+    slice that reads the FIRST |W| banked blocks (or world-0's block via an un-re-based enumerate) writes
+    values that DIFFER from the expected per-world blocks, so the asserts below can see it. Also pins the
+    k=0-never-banked invariant and the world_ids=None (v1-compatible all-worlds) path.
+    """
+    print("[WORLD-SLICE] per-world-distinct bank, W={1,3} (non-prefix, world-0 excluded) ...")
+    n_world = 4
+    aqs = [0, 35, 70, 105]
+    aqds = [0, 34, 68, 102]
+    total_q = aqs[-1] + _N_ARM + 2
+    total_qd = aqds[-1] + _N_ARM + 2
+    state = _MockState(total_q, total_qd)
+    control = _MockControl(total_qd)
+
+    # hand-built per-world-DISTINCT bank for k=3: world w's block = 1000*w + slot (unique everywhere).
+    n_arm_blk, n_grip_blk, n_drv_blk = len(_ARM_LOCAL), len(_GRIP_LOCAL), 4
+
+    def _dis(nblk):
+        return np.concatenate([1000.0 * w + np.arange(nblk, dtype=np.float32) for w in range(n_world)])
+
+    banked = {
+        "arm_q": _dis(n_arm_blk),
+        "arm_qd": _dis(n_arm_blk),
+        "gripper_q": _dis(n_grip_blk),
+        "gripper_qd": _dis(n_grip_blk),
+        "grip_target": _dis(n_drv_blk),
+    }
+    bank = {3: banked}
+    assert 0 not in bank, "k=0 must NEVER be banked (env-authoritative reset; v2.1 R12/R13 invariant)"
+    ex = rex.RouteExecutor(aqs, aqds, 900, state_0=state, control=control, state_bank=bank)
+
+    state.joint_q.assign(np.full(total_q, -99.0, dtype=np.float32))
+    state.joint_qd.assign(np.full(total_qd, -99.0, dtype=np.float32))
+    control.joint_target_pos.assign(np.full(total_qd, -99.0, dtype=np.float32))
+    ex.reset_to_phase(3, world_ids=[3, 1])  # unsorted on purpose: the impl must sort ascending
+    jq = state.joint_q.numpy()
+    jqd = state.joint_qd.numpy()
+    jtp = control.joint_target_pos.numpy()
+
+    maps = rex.build_perworld_index_maps(aqs, aqds)
+
+    def _mblk(key, w, n):
+        return np.asarray(maps[key])[w * n : (w + 1) * n]
+
+    ok = True
+    for w in range(n_world):
+        arm_q_i = _mblk("arm_ow_q_idx", w, n_arm_blk)
+        arm_qd_i = _mblk("arm_ow_qd_idx", w, n_arm_blk)
+        grip_q_i = _mblk("gripper_restore_q_idx", w, n_grip_blk)
+        grip_qd_i = _mblk("gripper_restore_qd_idx", w, n_grip_blk)
+        drv = _mblk("all_driver_dofs", w, n_drv_blk)
+        if w in (1, 3):
+            leg = (
+                np.array_equal(jq[arm_q_i], banked["arm_q"][w * n_arm_blk : (w + 1) * n_arm_blk])
+                and np.array_equal(jqd[arm_qd_i], banked["arm_qd"][w * n_arm_blk : (w + 1) * n_arm_blk])
+                and np.array_equal(jq[grip_q_i], banked["gripper_q"][w * n_grip_blk : (w + 1) * n_grip_blk])
+                and np.array_equal(jqd[grip_qd_i], banked["gripper_qd"][w * n_grip_blk : (w + 1) * n_grip_blk])
+                and np.array_equal(jtp[drv], banked["grip_target"][w * n_drv_blk : (w + 1) * n_drv_blk])
+            )
+            print(f"  [WORLD-SLICE] w={w} restored == OWN block (distinct values) -> {'PASS' if leg else 'FAIL'}")
+        else:
+            leg = (
+                np.all(jq[arm_q_i] == -99.0)
+                and np.all(jq[grip_q_i] == -99.0)
+                and np.all(jqd[arm_qd_i] == -99.0)
+                and np.all(jtp[drv] == -99.0)
+            )
+            print(f"  [WORLD-SLICE] w={w} sentinel untouched -> {'PASS' if leg else 'FAIL'}")
+        ok = ok and leg
+
+    # v1-compat: world_ids=None restores ALL worlds (the v1-identical path).
+    ex.reset_to_phase(3)
+    jq = state.joint_q.numpy()
+    v1_ok = all(
+        np.array_equal(jq[_mblk("arm_ow_q_idx", w, n_arm_blk)], banked["arm_q"][w * n_arm_blk : (w + 1) * n_arm_blk])
+        for w in range(n_world)
+    )
+    print(f"  [WORLD-SLICE] world_ids=None -> ALL worlds restored -> {'PASS' if v1_ok else 'FAIL'}")
+    return ok and v1_ok
+
+
 def main():
     print("=" * 78)
     print("route-executor state-bank ⑦(a) restore-fidelity STATIC unit test (comp2 Stage-A gate-i)")
     print("=" * 78)
     r_syn = test_synthetic()
     r_nom = test_nominal()
+    r_ws = test_world_slice()
     print("-" * 78)
-    results = {"synthetic": r_syn, "nominal": r_nom}
+    results = {"synthetic": r_syn, "nominal": r_nom, "world_slice": r_ws}
     hard = [v for v in results.values() if v is not None]
     verdict = all(hard)
     print(f"RESULTS: {results}")

@@ -238,8 +238,8 @@ class NominalRouteStub(rc.RouteInterfaceV1):
         self._recorded = np.asarray(recorded_targets, np.float32) if recorded_targets is not None else None
         self._requested_phase = 0
 
-    def reset_to_phase(self, k):
-        # STUB: record only. Real = precomputed phase-k state-bank fork (route-executor, LOUD-CARRY).
+    def reset_to_phase(self, k, world_ids=None):
+        # STUB: record only (v2 world_ids accepted for interface compat; no per-world state to fork).
         self._requested_phase = int(k)
 
     def _phase_at(self, t):
@@ -455,6 +455,13 @@ class NewtonRouteEnv(VecEnv):
         _rc2 = self.cfg.get("route_c2_scene", False)
         assert isinstance(_rc2, bool), f"cfg['route_c2_scene'] must be a bool, got {type(_rc2).__name__}"
         self._route_c2_scene = _rc2
+        # W1-B1 (Stage-A sec 4.1): route_t_clock gates the route-clock DIVERGENCE machinery only (B2 HOLD
+        # freeze / B3 fork init). False (default) = route_t mirrors episode_length_buf exactly (increment/
+        # reset at the same sites) -> flag-OFF behavior byte-preserved. B1 ships no divergence mechanism,
+        # so ON has no behavioral effect yet (skeleton; Layer-B re-BASELINE lands with B2).
+        _rtc = self.cfg.get("route_t_clock", False)
+        assert isinstance(_rtc, bool), f"cfg['route_t_clock'] must be a bool, got {type(_rtc).__name__}"
+        self._route_t_clock = _rtc
         # D rho=0 (Rs adjudication (1) 2026-07-10): route drive mode. 'ik_chord' (default) = the current
         # step-level batched IK + 10-frame joint chord (byte-preserve); 'feedforward' = the recording's
         # arm_q replayed per physics frame (the armqdirect-proven mechanism promoted to a drive mode;
@@ -481,6 +488,13 @@ class NewtonRouteEnv(VecEnv):
         self._world_count = world_count
 
         self.episode_length_buf = torch.zeros(world_count, dtype=torch.long, device=device)
+        # W1-B1 route_t (Stage-A spec v0.8.1 sec 4.1): the per-world ROUTE clock, separated from the episode
+        # clock above. Single-source rule: ALL route consumers (step_target / grip staircase / ff replay /
+        # obs[50] phase-entry) read route_t, NEVER episode_length_buf. Under route_t_clock=False (default)
+        # route_t is incremented/zeroed at the SAME sites as episode_length_buf (mirror -> value-identical
+        # -> downstream byte-invariant); the flag only arms the divergence machinery (B2 HOLD freeze /
+        # B3 bank-fork init), none of which exists in B1.
+        self.route_t = torch.zeros(world_count, dtype=torch.long, device=device)
         self._target_seg_indices_r = None
         self._target_seg_indices_l = None
         self._episode_count = 0
@@ -1011,6 +1025,7 @@ class NewtonRouteEnv(VecEnv):
             self._phase_entry_step[w] = 0
             self._prev_phase_id[w] = -1
             self.episode_length_buf[w] = 0
+            self.route_t[w] = 0  # W1-B1 mirror (per-world reset site; fork init bank_boundary[k] = B3)
 
         assign_world_states_to_sim(self._state_0, self._solver, bq, bqd, prev)
 
@@ -1136,7 +1151,7 @@ class NewtonRouteEnv(VecEnv):
             # are SKIPPED entirely (the decision-packet sec4 3.61x saving). The residual/target bookkeeping
             # above is kept (obs/extras contract; the projected residual is NOT driven in this mode).
             # reset/broadcast paths are untouched (feedforward lives in this drive loop only).
-            route_steps = [int(self.episode_length_buf[w].item()) for w in range(N)]
+            route_steps = [int(self.route_t[w].item()) for w in range(N)]  # W1-B1: route clock (consumer 3)
             jq_ff = None
             for step in range(self.PHYSICS_STEPS_PER_RL):
                 jq_ff = self._route.apply_recorded_arm_ff(
@@ -1170,9 +1185,9 @@ class NewtonRouteEnv(VecEnv):
             old_fk_jq = np.array(self._per_world_fk_jq[:N])
             if self._grasp_actuation:
                 # comp3 (R2): per-world route step for the recorded grip staircase lookup cf[t_w]+sub_i. This is
-                # read HERE (before the per-frame loop) because episode_length_buf is not incremented until after
+                # read HERE (before the per-frame loop) because route_t is not incremented until after
                 # _apply_actions_batch returns, so it holds THIS step's t_w == the value _pull_route used.
-                route_steps = [int(self.episode_length_buf[w].item()) for w in range(N)]
+                route_steps = [int(self.route_t[w].item()) for w in range(N)]  # W1-B1: route clock (consumer 2)
             for step in range(self.PHYSICS_STEPS_PER_RL):
                 t = min((step + 1) / self.PHYSICS_STEPS_PER_RL, 1.0)
                 jq_interp = old_fk_jq + (jq_targets - old_fk_jq) * t
@@ -1571,7 +1586,7 @@ class NewtonRouteEnv(VecEnv):
         route_targets = np.zeros((N, 6), dtype=np.float32)
         nominal_phase_len = max(self.MAX_EPISODE_STEPS / rc.N_ROUTE_PHASES, 1.0)
         for w in range(N):
-            t = int(self.episode_length_buf[w].item())
+            t = int(self.route_t[w].item())  # W1-B1: route clock (consumer 1); == episode clock while mirrored
             target_6d, phase_id, grip_2, is_dual = self._route.step_target(t)
             route_targets[w] = target_6d
             if phase_id != int(self._prev_phase_id[w]):
@@ -1591,6 +1606,7 @@ class NewtonRouteEnv(VecEnv):
     def reset(self) -> tuple[torch.Tensor, dict]:
         self._reset_worlds(list(range(self._world_count)))
         self.episode_length_buf[:] = 0
+        self.route_t[:] = 0  # W1-B1 mirror (global reset site)
         self._route.reset_to_phase(0)  # STUB: no-op record (real = state-bank fork, LOUD-CARRY)
         self._pull_route()
         return self.get_observations()
@@ -1600,6 +1616,10 @@ class NewtonRouteEnv(VecEnv):
         route_targets = self._pull_route()  # base ABSOLUTE targets + phase/grip/dual for THIS step
         self._apply_actions_batch(actions, route_targets)
         self.episode_length_buf += 1
+        # W1-B1 mirror increment: route_t advances with the episode clock. B2 attaches the HOLD freeze
+        # mask HERE (frozen worlds skip the increment); the episode clock above ALWAYS advances (spec
+        # sec 4.1: time-penalty / horizon / timeout stay episode-clock-owned).
+        self.route_t += 1
         self._total_env_steps += self._world_count
 
         rewards, dones, extras = self._compute_rewards_dones_batch()
@@ -1608,6 +1628,11 @@ class NewtonRouteEnv(VecEnv):
         done_ids = dones.nonzero(as_tuple=False).squeeze(-1)
         if len(done_ids) > 0:
             self._reset_worlds(done_ids.cpu().tolist())
+            # W1-B1 consumer 6 (Stage-A sec 4.1 H6): per-world re-fork on done-reset. k=0 = env-authoritative
+            # reset = structural no-op today (stub records only; RouteExecutor early-returns on k==0);
+            # the curriculum start-mix (k>0 per world) lands at B4. Placed AFTER _reset_worlds (restore-
+            # after-reseed order; reseed_grip_open runs inside _reset_worlds -- B4 ordering dependency).
+            self._route.reset_to_phase(0, world_ids=done_ids.cpu().tolist())
 
         obs = self._compute_obs_batch()
         obs = torch.nan_to_num(obs, nan=0.0, posinf=1e6, neginf=-1e6)
