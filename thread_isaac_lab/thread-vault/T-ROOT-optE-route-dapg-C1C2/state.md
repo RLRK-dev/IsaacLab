@@ -9,13 +9,13 @@ goal_verification: |
   次 = W0-b mini-test 再開 (fire-前 gate 完走、%11 build-prep 中) ∥ W0-c P2 design-gate 審議 (%12 起草・%9 cross-PV READY)。D-C un-park・§4.3 閾値・OG band = Rs-PENDING。
 status: IN_PROGRESS
 parent_node: T-L1C-PerSkill-RL
-children_nodes: [T-ROOT-optE-route-dapg-C1C2-P2-envcore, T-ROOT-optE-route-dapg-C1C2-P2-routeexec]
+children_nodes: [T-ROOT-optE-route-dapg-C1C2-P2-envcore, T-ROOT-optE-route-dapg-C1C2-P2-routeexec, T-ROOT-optE-route-dapg-C1C2-P2-trainer]
 dependencies:
   precedent:
     - "C1→C2 re-grasp WORKING (LEDGER row43, Rs-confirmed 2026-07-01, COMMITTED bcb7393ec8)"
   blocker: []
 created: 2026-07-02T07:15:00+09:00
-last_updated: 2026-07-05T09:10:00+09:00
+last_updated: 2026-07-12T09:44:00+09:00
 spec_version: LTM-1 v1.1
 session_history:
   - "2026-07-01 lead %3 (RS-TECH-LEAD): scoping charter → %1 (COORD2) 7-dim scoping → arch A 採択 (Rs 23:28) → P1 charter → %2 (COORD) P1 probe → %0 (OPS-SUP) GT cross-PV CONCUR-WITH-CORRECTIONS"
