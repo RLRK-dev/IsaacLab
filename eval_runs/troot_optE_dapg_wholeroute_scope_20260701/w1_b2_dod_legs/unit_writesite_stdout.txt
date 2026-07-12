@@ -5,6 +5,7 @@
 [L4 grip-drive / reset-reseed unit] comp3 chunk 2 (R1 reset + R2 grip staircase)
   [grip-transit] PASS: [L=0.69, R=0.0] transit window + non-swapped [L,R]->per-arm mapping
   [B2 hold-clamp] PASS: held world -> chunk-end frame at write+readback sites; ff twin; v1 None-path
+  [B2 resume-semantics] PASS: fire->freeze (chunk-end pin) -> resume -> next chunk from start
   [reset-reseed] PASS: after CLOSE-latch, reset re-seeds all drivers OPEN; non-drivers untouched
   [settled-patch] PASS: gripper coords <- world-0 physics; arm coords untouched
   [forbid-fork] PASS: forbid=True raises for k>=1 (comp3b); k=0 ok; default keeps k>=1 capability

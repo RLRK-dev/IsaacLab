@@ -1,6 +1,7 @@
 # W1 B2 Conformance Table — HOLD + oracle API (implementation-vs-spec fidelity)
 
-**Doc:** W1_B2_CONFORMANCE_COORD_20260712.md **v2.2** (v1 23:15 → 5体 fold v2 → %12 PASS + 裁定 fold v2.1 → %9 PASS-WITH-NOTES fold v2.2)
+**Doc:** W1_B2_CONFORMANCE_COORD_20260712.md **v2.4** (v1 23:15 → 5体 fold v2 → %12 裁定 fold v2.1 → %9 fold v2.2 → leg 結果 §6 v2.3 → **%10 audit F-1/F-2 追補 fold v2.4 [07-13 01:2x]**)
+**Post-verify/audit:** %12 PASS + C1 CONFIRM (01:0x) / %9 PASS + 4 点 as-built (00:58/01:04) / **%10 audit PASS-WITH-FINDINGS (01:10、F-1 MED = promised-unit ×3 → 本 v2.4 追補で全実装 [%12 裁定 = B2 内]、F-2 LOW 5 → 同梱)**。
 **%12 verify leg = PASS (23:48):** CC4-CRIT 訂正値の npz 独立再計算 = 全 EXACT。**ask B1 = CONFIRM → charter ERRATUM-3 (67d01d0c15、on-disk 照合済):** tail (iii)(iv) = B2 / (i)(ii) = B7。**ask B2 = CONFIRM:** fires bar = shadow 系列 t343±1。
 **%9 verify leg = PASS-WITH-NOTES (23:42):** 入口条件 R-1..R-4 全 EXACT (B1 loop 完全 CLOSE) / CC4-CRIT ground truth = %9 banked keys と独立 double-key EXACT / R3m×spec:86 CONCUR / tail (iv) incentive 検算成立。**B2-F1 (MED) = R3h unit fencepost → fold 済 (R3h)**。LOW 3 (div=15.0 等号 / mask event-frame 検出源 pin / N-2 staleness 導出) → fold 済 (R3c/R5c/R10c)。**build GO に %9 異議なし。**
 **Author:** %11 (COORD, w2:p3, builder leg) — 2026-07-12 (date-THEN-write)
@@ -68,7 +69,7 @@ B2 = ①recording contract v2 ②div_grip metric ③HOLD 状態機械 ④HOLD �
 | j | HOLD 判定 step-0 有効 (§4.1 :78) — fork semantics = B3 carry | — | B3 |
 | k | **reset 時 HOLD 状態 clear = 名前付き executor API (world_ids 必須引数) を `_reset_worlds` clear 域 (:1018-1028) から呼ぶ [CC6-F3]** — env は executor 所有の sync state を直接触れない; v1 互換の全 world clear 経路 (global reset :1610 のみ全 world) を per-world reset に流用しない。**neighbor 保全 unit: world A HOLD 中に world B done-reset → A の mode/hold_count/counters byte 不変** | executor 新 API + env :1018-1028 | unit: HOLD world timeout → 復帰 + **neighbor byte-intact** |
 | l | **IK 残差 (obs[55:57]) = informative telemetry のみ、clock 作用なし (spec :96 負条項) [CC2-1]** — div/sync/HOLD 判定 branch は IK residual field を読まない | — (実装しない) | grep: HOLD 判定経路に IK residual 参照ゼロ |
-| m | **div/HOLD 評価点の pin [CC6-F1 + CC5-3 独立収束]: `_apply_actions_batch` 後・synchronize barrier (:1223 系) 後・`route_t` increment **前**・**pre-increment route_t** で評価** (spec :86「env state は RL step 後 = 終端整合」)。step() 先頭の `_pull_route`/query は packet-read-only (fire/resume を再評価しない)。resume した step は chunk t+1 を駆動 — 凍結 chunk t の staircase を再走しない (N3) | newton_route_env.py step() :1617-1622 間 | unit: **合成 ramp で chunk-t vs t±1 比較を判別** + fire→freeze→resume trace (resume 後 staircase = t+1) |
+| m | **div/HOLD 評価点の pin [CC6-F1 + CC5-3 独立収束]: `_apply_actions_batch` 後・synchronize barrier (:1223 系) 後・`route_t` increment **前**・**pre-increment route_t** で評価** (spec :86「env state は RL step 後 = 終端整合」)。step() 先頭の `_pull_route`/query は packet-read-only (fire/resume を再評価しない)。resume した step は chunk t+1 を駆動 — 凍結 chunk t の staircase を再走しない (N3) | newton_route_env.py step() :1617-1622 間 | unit (**v2.4 追補済 [%10 F-1a]**): chunk-t vs t±1 判別 (div fixture の held 帰属で ±1 chunk 誤 index = 0.0≠4.0) + **resume 意味論 (test_hold_resume_semantics: fire→freeze [chunk-end pin]→resume→次 chunk を先頭から駆動、凍結 chunk 再走なし)** |
 
 ### R4 — HOLD 凍結面 (spec §4.2 :90 N3)
 | sub | 内容 | 実装 site | 証拠 leg |
@@ -90,7 +91,7 @@ B2 = ①recording contract v2 ②div_grip metric ③HOLD 状態機械 ④HOLD �
 | d | oracle 読み取り専用: 副作用 = sync_state 更新のみ (:111)。fire/resume の評価点は R3m が governs (query top-of-step = read-only) | 同 | grep: write API 呼出ゼロ |
 | e | mid-servo COMMANDED 規約承継 (:110) — **query() target_6d ≡ step_target 基盤の MARCH 等価 assert を unit 化 (既存 unit 承継だけでは新 surface に感度なし [CC2-4])** | — | unit: MARCH 等価 |
 | f | route clock 単一源: env 所有 route_t、view = {route_t, cable_pos, g1_latched}; oracle は sync 状態のみ所有 (CC3 実証: executor 内 clock ゼロ) | env + executor | grep |
-| g | stub disposition: **init assert は impl type key (`route_executor_impl == "route_executor"` 系、:481-487 precedent) — recording 存在 key だと stub+recorded_targets (:234-238) が late-fail [CC5-5]** (A4 %12 CONFIRM: fail-loud、fail-closed) | newton_route_env.py init | unit: stub+flag → AssertionError |
+| g | stub disposition: **init raise は impl type key (`route_executor_impl == "route_executor"` 系、:481-487 precedent) — recording 存在 key だと stub+recorded_targets (:234-238) が late-fail [CC5-5]** (A4 %12 CONFIRM: fail-loud、fail-closed)。**実装実体 = ValueError (:481-487 precedent 準拠; v2.2 の AssertionError 表記は誤 → 訂正 [%10 F-1b LOW])** | newton_route_env.py init | unit: stub+flag → ValueError (**test_guard 追補済 v2.4**) |
 | h | **query() は RouteInterfaceV1 の抽象 method として typed 6-tuple contract を durable に着地 (docstring だけの prose 契約は B5/Stage-C が再導出する [CC5-6])** | route_env_config.py:143-182 | grep + unit |
 
 ### R6 — obs 62D 不変 (spec §4.2 :91)
@@ -149,7 +150,7 @@ B2 = ①recording contract v2 ②div_grip metric ③HOLD 状態機械 ④HOLD �
 | sub | 内容 | 実装 site | 証拠 leg |
 |---|---|---|---|
 | a | (iii) HOLD 無効 = 終端域 div 計算 skip — R3h が実装 (charter ERRATUM-3 の (iii) 文言「終端域 div 計算 skip」と一致) | R3h | R3h unit |
-| b | **(iv) 予定 release (route_t ≥ release 境界) 後は drop terminal を無効化** — 根拠 (spec :192): 意図的 release 後の「drop」= category error、放置で fail-slow (−7.6) < fail-fast (−3.99) の逆転 incentive。無効化後は timeout close (+1.00 系) で S4 系 scenario 復元。**suppression scope = post-release のみ — pre-release の drop 述語は一切不変 (S5 保全) [%9 条件 fold]** | env `_compute_rewards_dones_batch` drop 述語 :1473-1480 | unit: post-release で drop 条件成立 → terminal なし + event 記録 / **pre-release drop → 従来 terminal (S5)** / flag OFF → 従来 terminal |
+| b | **(iv) 予定 release (route_t ≥ release 境界) 後は drop terminal を無効化** — 根拠 (spec :192): 意図的 release 後の「drop」= category error、放置で fail-slow (−7.6) < fail-fast (−3.99) の逆転 incentive。無効化後は timeout close (+1.00 系) で S4 系 scenario 復元。**suppression scope = post-release のみ — pre-release の drop 述語は一切不変 (S5 保全) [%9 条件 fold]** | env `_compute_rewards_dones_batch` drop 述語 :1473-1480 | **leg9 (v2.4 追補済 [%10 F-1c])**: A = post-release 成立 → 非 terminal + suppressed event / B = pre-release → 従来 −10 terminal (S5) / C = flag OFF → 従来 terminal — env 注入 unit (G1+G2 latch 注入、held-z 経路; contact-loss 注入は述語前 reset で不可と実測) |
 | c | release 境界 = 記録 grip schedule から導出 (両手 release ~frame 7617 ≈ step 762 [step_target docstring :3297-3298]; 最終 both-closed frame → chunk 境界切上げ、hardcode 禁止) — oracle 側で導出し env へ供給 | route_executor.py (導出) + env (消費) | unit: 導出値 pin |
 | d | suppressed-drop event 記録 (spec §5 :120 L2 — /metrics/drop_count の cross-version 比較歪み防止; B5 export の前提 field を B2 が生成) → R9a field に追加 | env field | unit b と同居 |
 | e | **flag gating: (iv) は `_route_t_clock` gate 下** (ON 時挙動 = Layer-B re-BASELINE R7g に含めて宣言; OFF = 従来 drop terminal 挙動 byte-identical — ERRATUM-2 legs が担保) | env | R7 legs |
@@ -181,7 +182,10 @@ CC2 spec 忠実 (~35 clause 全数照合、境界 4 件 = 正当) / CC3 コー�
 
 conformance v2.2 (本 doc) → %12 verify **PASS** (23:48) + %9 verify **PASS-WITH-NOTES** (23:42、fold 済) = **joint verify CLOSE、build GO** → **[RULE-CHECK] Tier0-3 (今ここ)** → build → DoD legs (R10+R13) → post-verify 3-leg → explicit-path atomic commit → p6 relay。
 
-## §7. post-build leg 結果 (v2.3 追記、2026-07-13 00:3x JST — 全 leg PASS)
+## §6. post-build leg 結果 (v2.3 追記 00:3x → v2.4 %10 audit fold 01:2x — 全 leg PASS)
+<!-- 節番号は v2.4 で §7↔§6 を入替 (%10 F-2b: 物理順序と番号の昇順一致) -->
+
+**v2.4 追補 (%10 F-1、%12 裁定 = B2 内):** (a) resume 意味論 unit = `test_hold_resume_semantics` (writesite) + div ±1-chunk 判別 assert (step_target) — **両 suite 再走 PASS** (b) R5g stub×flag ValueError unit = test_guard 追補 — PASS (c) **leg9** tail 抑制 3 述語 (A 抑制/B S5/C flag-OFF)。F-2: header 版数 / 節順 / R1g pin file (`leg_grep_contract_v2_blast.txt` 生成) / R5g 型表記 = 全訂正。**leg8 経緯 note:** 初回 run = LEG2 comparator の throughput-key filter 漏れ + leg8 verdict の live-crossing 定式で FAIL=1 (`run_legs_stdout.txt` に保存) → comparator 修正 + C1 定式化 → 再走 PASS (`leg8_stdout.txt`)。run_legs.sh の `tail` 表示 bug は `-n` 化済 (unit 実行自体は当初から exit-gated)。
 
 | leg | 結果 | 実測 |
 |---|---|---|
@@ -200,7 +204,7 @@ conformance v2.2 (本 doc) → %12 verify **PASS** (23:48) + %9 verify **PASS-WI
 - **⭐shadow bar の discharge 形 (ask C1) = %12 CONFIRM (2026-07-13 01:0x) + %9 CONFIRM 推奨 (00:58):** 正しい aligned HOLD (参照 6 frame 先行) は shadow 交差の ~1 step 前に発火して march を止めるため、**flag ON run では shadow の 15mm 交差は反実仮想** (live 交差を bar 化すると「HOLD が正しく働くほど FAIL」の自己反駁 bar — %12 論拠記録)。discharge 3 述語: (i) live shadow prefix ≡ **banked comp5 div_seg24 系列 EXACT (max diff 0.000000mm / 343 step)** = n=1 基準 ramp の同一性 (%9: 原 crossing bar より**厳密に強い** — 全 step 値 pin は交差 index を含意) (ii) **banked 系列の交差 = t343 ∈ bar** = ramp の index (iii) aligned 発火帰属 delta = **−1 step** (aligned は chunk 終端 = shadow の 10t+3 より 6 frame 先読みゆえ先行発火が正、系統予算 0.6-1.3 step 内)。**⭐副次 (%12): armed quiet max 10.407mm ≈ spec §6.2 L7 予測 10.41 (n=1) の独立確認 — restore-fidelity band の再計測値として governs (B3 が消費)。**
 - 凍結後 drift 系列 (claim ① / MAX_HOLD 再導出の参考 data) = JSON rows に全 pin。
 
-## §6. 5体 fold 対応表 (v1 → v2)
+## §7. 5体 fold 対応表 (v1 → v2)
 
 | finding | sev | fold 先 |
 |---|---|---|

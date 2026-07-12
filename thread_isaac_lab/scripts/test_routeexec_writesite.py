@@ -162,6 +162,13 @@ def test_guard():
         if "did NOT raise" in str(e):
             raise
         assert "bool" in str(e), f"unexpected AssertionError text: {e}"
+    # W1-B2 R5g (%10 audit F-1b): route_t_clock=True + stub impl -> ValueError BEFORE scene build
+    # (impl-TYPE-keyed, CC5-5: a recording-presence check would pass stub+recorded_targets and late-fail).
+    try:
+        nre.NewtonRouteEnv(world_count=1, cfg={"route_t_clock": True, "route_executor_impl": "stub"})
+        raise AssertionError("guard did NOT raise for route_t_clock=True + stub route")
+    except ValueError as e:
+        assert "route_t_clock" in str(e), f"unexpected ValueError text: {e}"
     # G1 prework: g1_scene_align without grasp_actuation -> ValueError (G1 flag-ON scene concept).
     try:
         nre.NewtonRouteEnv(world_count=1, cfg={"g1_scene_align": True})
@@ -343,6 +350,45 @@ def test_grip_hold_clamp():
     assert jq_ff[0][0] == 2.0, f"held w0 ff row != chunk-end arm_q: {jq_ff[0][0]}"
     assert jq_ff[1][0] == 1.0, f"marching w1 ff row != sub_i arm_q: {jq_ff[1][0]}"
     print("  [B2 hold-clamp] PASS: held world -> chunk-end frame at write+readback sites; ff twin; v1 None-path")
+
+
+def test_hold_resume_semantics():
+    """W1-B2 R3m resume half (%10 audit F-1a): after a resume the NEXT chunk (t+1) is driven from its own
+    start -- the frozen chunk's staircase is never re-walked (N3). Composes update_sync's mask with the
+    env increment miniature route_t += ~mask and the hold-clamped staircase."""
+    cad = rex._REC_CADENCE
+    ex, control = _build_executor(
+        grip_frames={
+            10 * cad: (0.11, 0.0),  # chunk 10 START
+            10 * cad + cad - 1: (0.22, 0.0),  # chunk 10 END (held worlds pin here)
+            11 * cad: (0.33, 0.0),  # chunk 11 START (what a resumed world must drive next)
+        }
+    )
+    maps = ex._maps
+    v_hi = np.zeros((40, 3))
+    v_hi[0, 0] = 0.020  # 20mm on seg 0 (synthetic rec cable is zeros) -> fire
+    v_lo = np.zeros((40, 3))
+    v_lo[0, 0] = 0.011  # 11mm -> <=12 resume
+    v_0 = np.zeros((40, 3))
+    t = np.array([10, 10])
+    m1 = ex.update_sync(list(t), [v_hi, v_0], [True, True])
+    assert m1.tolist() == [True, False], f"fire setup: {m1.tolist()}"
+    t = t + (~m1).astype(int)  # env increment miniature (R4a): held w0 stays 10, w1 -> 11
+    assert t.tolist() == [10, 11]
+    ex.apply_recorded_grip(list(t), 0, hold_mask=m1)  # held step: w0 pins chunk-10 END, w1 chunk-11 START
+    jtp = control.joint_target_pos.numpy()
+    assert all(abs(jtp[d] - 0.22) < 1e-6 for d in maps["l_driver_dofs"][0]), "held w0 must pin chunk-10 END"
+    assert all(abs(jtp[d] - 0.33) < 1e-6 for d in maps["l_driver_dofs"][1]), "marching w1 must drive chunk 11"
+    m2 = ex.update_sync(list(t), [v_lo, v_0], [True, True])
+    assert m2.tolist() == [False, False] and ex._resume_count[0] == 1, "11mm must resume w0"
+    t = t + (~m2).astype(int)  # resumed w0 -> 11
+    assert t.tolist() == [11, 12]
+    ex.apply_recorded_grip(list(t), 0, hold_mask=m2)
+    jtp = control.joint_target_pos.numpy()
+    assert all(abs(jtp[d] - 0.33) < 1e-6 for d in maps["l_driver_dofs"][0]), (
+        "resumed w0 must drive chunk 11 from its START (0.33) -- re-walking chunk 10 (0.11) = the N3 sawtooth"
+    )
+    print("  [B2 resume-semantics] PASS: fire->freeze (chunk-end pin) -> resume -> next chunk from start")
 
 
 def test_reset_reseed_open():
@@ -691,6 +737,7 @@ if __name__ == "__main__":
     print("[L4 grip-drive / reset-reseed unit] comp3 chunk 2 (R1 reset + R2 grip staircase)")
     test_grip_transit_window()
     test_grip_hold_clamp()
+    test_hold_resume_semantics()
     test_reset_reseed_open()
     test_settled_fk_gripper_patch()
     test_forbid_banked_fork()

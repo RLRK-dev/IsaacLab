@@ -1,0 +1,46 @@
+# W1-B2 R1g contract-v2 blast-radius grep pin (%10 audit F-2d). Measured 2026-07-13 01:18 JST.
+# Command: grep -rn 'RouteExecutor(' + '_prepare_recording(' over thread_isaac_lab/ + eval_runs callers.
+# Comment-line hits excluded (first non-space char = #). Verdict per site follows each hit.
+---- RouteExecutor construction sites:
+thread_isaac_lab/scripts/test_routeexec_step_target.py:60:    ex = rex.RouteExecutor([0], [0], 900, recording=rec)  # step_target only (control=None => no servo assert)
+thread_isaac_lab/scripts/test_routeexec_step_target.py:110:    return rex.RouteExecutor(starts, starts, 900, recording=rec)
+thread_isaac_lab/scripts/test_routeexec_step_target.py:263:    ex = rex.RouteExecutor([0], [0], 900, recording=rec)
+thread_isaac_lab/scripts/test_routeexec_state_bank.py:100:    ex = rex.RouteExecutor(arm_q_start, arm_qd_start, horizon, state_0=state, control=control, state_bank=bank)
+thread_isaac_lab/scripts/test_routeexec_state_bank.py:209:    ex = rex.RouteExecutor(aqs, aqds, 900, state_0=state, control=control, state_bank=bank)
+thread_isaac_lab/scripts/test_routeexec_writesite.py:263:    ex = rex.RouteExecutor(
+thread_isaac_lab/scripts/test_routeexec_writesite.py:562:    ex = rex.RouteExecutor(_ARM_Q_START, _ARM_QD_START, 900, state_0=None, control=control, recording=rec)
+thread_isaac_lab/envs/newton_route_env.py:641:        return rex.RouteExecutor(
+---- _prepare_recording callers:
+thread_isaac_lab/envs/route_executor.py:3118:def _prepare_recording(recording):
+thread_isaac_lab/envs/route_executor.py:3266:        self._recording = _prepare_recording(recording) if recording is not None else None
+thread_isaac_lab/scripts/test_routeexec_step_target.py:126:            rex._prepare_recording(bad)
+thread_isaac_lab/scripts/test_routeexec_step_target.py:133:        rex._prepare_recording(bad)
+thread_isaac_lab/scripts/test_routeexec_step_target.py:142:        rex._prepare_recording(bad)
+thread_isaac_lab/scripts/test_routeexec_step_target.py:149:        rex._prepare_recording(bad)
+thread_isaac_lab/scripts/test_routeexec_step_target.py:155:    prepared = rex._prepare_recording(ok)
+---- eval_runs flag-ON env callers (recording via env loader):
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_drivepath_cost_probe.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_p0_scene_render.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_g1_armq_diag.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_g1aprobe_grasplift.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_perarm_cell_grasplift.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_g1dff_grasplift.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_g1eprobe_grasplift.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp5_c2seat_fullfire.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b2_dod_legs/leg9_tail_drop_suppression.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_slotprobe_scene_readback.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_g1armqdirect_grasplift.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_slot_footprint_probe.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_void_readback.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_g1_grasplift.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_zsweep_grasplift.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b2_dod_legs/leg8_hold_calibration.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_slotprobe_grasplift.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp5_c2seat_control_noC2.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_slot_zgrasp_geom_probe.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b2_dod_legs/leg7_hold_reset_isolation.py
+eval_runs/troot_optE_dapg_wholeroute_scope_20260701/comp3_g1sub10_grasplift.py
+---- dispositions:
+# env :621 loader = v2 keys added (R1d). writesite :253/:479 + step_target :60 = fixtures updated (R1f).
+# state_bank :100/:209 = recording=None (pure-index; _prepare_recording NOT invoked) -> unaffected.
+# byte_repro / comp5 / leg7 / leg8 / leg9 = golden npz via env loader (golden HAS v2 keys, R1e) -> valid.

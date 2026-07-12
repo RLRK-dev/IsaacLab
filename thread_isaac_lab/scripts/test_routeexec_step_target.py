@@ -169,6 +169,15 @@ def test_div_grip_pure():
     assert abs(d - 4.0) < 1e-9, f"hand-computed div mismatch: {d} != 4.0"
     d = ex.div_grip_mm(7, _view(3.0, seg=6, axis=1), 0)
     assert abs(d - 3.0) < 1e-9, f"seg-follow div mismatch: {d} != 3.0"
+    # chunk-t vs t+-1 discrimination (%10 audit F-1a / CC5-3 companion): the comparison frame of t=5 is
+    # f59 ONLY -- neighbours' frames (f49/f69) map to segs with ZERO displacement, so an off-by-one chunk
+    # indexing yields 0.0 instead of 4.0 (the seg-follow fixture doubles as a +-1-chunk discriminator).
+    held[49] = 1  # t=4 chunk end -> seg 1 (no displacement in the view)
+    held[69] = 5  # t=6 chunk end -> seg 5 (no displacement)
+    ex_d = _mk_executor(_mk_recording(held=held))
+    assert abs(ex_d.div_grip_mm(5, _view(4.0, seg=3), 0) - 4.0) < 1e-9
+    assert abs(ex_d.div_grip_mm(4, _view(4.0, seg=3), 0)) < 1e-9, "t=4 must read f49/seg1 (0), not chunk 5"
+    assert abs(ex_d.div_grip_mm(6, _view(4.0, seg=3), 0)) < 1e-9, "t=6 must read f69/seg5 (0), not chunk 5"
     # purity: repeated calls mutate no sync state (R2h -- B3 restore check calls this outside the loop).
     before = ex._hold_count.copy()
     for _ in range(3):
