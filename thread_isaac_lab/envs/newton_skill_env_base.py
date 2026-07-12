@@ -1493,6 +1493,7 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
     target_clip_float_z=0.0,
     add_c2_clip=False,
     c2_xy=None,
+    perclip_pin=False,
 ):
     """Build multi-world physics scene with kinematic arms + cable.
 
@@ -1721,6 +1722,26 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
                     if local not in GRIPPER_PAD_BODY_IDX:
                         proto.add_shape_collision_filter_pair(cable_si, arm_si)
 
+    # PERCLIP_PIN (route env-core clip retention, gated -- mirror producer test_newton_clip_routing.py:1387-1398):
+    # pre-allocate ONE DISABLED connect-to-world eq PER cable body on the proto (replicated to every world). The
+    # route drive activates the ONE matching the runtime C1 seat body mid-episode (position-match). Default off
+    # keeps the build byte-identical (no disabled connect; _wire_s6_grasp_solref stiffens them but the 4-bar
+    # ENABLED-count assert stays 4 -- these are eq_active0=0). This is the AUTHORIZED clip-retention pin the
+    # single-world producer has and the multi-world env-core was MISSING (FORK-1 root cause, 2026-07-12).
+    if perclip_pin and SOLVER_BACKEND == "mujoco":
+        for _pb in cable_bodies_proto:
+            proto.add_equality_constraint_connect(
+                body1=int(_pb),
+                body2=-1,
+                anchor=wp.vec3(0.0, 0.0, 0.0),
+                label=f"perclip_pin_{int(_pb)}",
+                enabled=False,
+            )
+        print(
+            f"  [PERCLIP_PIN] pre-allocated {len(cable_bodies_proto)} DISABLED connect-to-world eqs/world "
+            f"(env-core C1 clip retention; route drive activates the seat body mid-episode)"
+        )
+
     bodies_per_world = proto.body_count
 
     # --- Scene: global entities + replicate ---
@@ -1947,8 +1968,13 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
     # _wire pokes the negative PAD_SOLREF into mjw (ALL worlds) + stiffens the mj_model-template 4-bar.
     if SOLVER_BACKEND == "mujoco" and grasp_actuation:
         _neq = int(getattr(model, "equality_constraint_count", 0) or 0)
-        assert _neq == 6 * world_count, (
-            f"S6_GRASP: 4-bar+mirror eqs did not all register/replicate: neq={_neq} != 6*world_count={6 * world_count}"
+        # +cable_bodies_per_world DISABLED connect-to-world PERCLIP_PIN eqs/world when perclip_pin (FORK-1 fix):
+        # eq_active0=0 => inert until the route drive activates the C1 seat body; _wire's ENABLED-count stays 4.
+        _perclip_eqs = cable_bodies_per_world if perclip_pin else 0
+        _want_neq = (6 + _perclip_eqs) * world_count
+        assert _neq == _want_neq, (
+            f"S6_GRASP: 4-bar+mirror(+{_perclip_eqs} perclip_pin) eqs did not all register/replicate: "
+            f"neq={_neq} != {_want_neq} ((6+{_perclip_eqs}) eqs/world x {world_count})"
         )
         _wire_s6_grasp_solref(solver)
 
