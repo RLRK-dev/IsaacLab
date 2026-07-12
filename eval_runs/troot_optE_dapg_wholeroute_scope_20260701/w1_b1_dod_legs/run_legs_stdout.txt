@@ -1,0 +1,14 @@
+===== LEG 1: 9a-prime rerun (env build + predicate EXACT vs banked) =====
+[LEG1] 9a' EXACT vs banked: PASS (new both=25/81, banked=25/81)
+===== LEG 2: DoD5 drift-zero + DoD10 span-proj rerun (c2indep) vs banked =====
+[LEG2] DoD5/10 keys compared=['finite_100steps', 'dod3_finite', 'dod5_drift_max_across_steps_m', 'dod10_span_m', 'dod10_span_range_mm', 'dod10_commanded_span_mm']
+[LEG2] PASS diffs={}
+===== LEG 3: DoD6 rerun vs banked =====
+[LEG3] DoD6 vs banked: PASS (dict-identical)
+===== LEG 4: cablediag env-trajectory byte-anchor (gate-6 runner rerun, all trainer flags OFF) =====
+[LEG4] cablediag npz EXACT vs banked 311f18cb9b: PASS bad_keys=[]
+===== LEG 5: producer 5-cell byte-repro vs pinned baseline (route_executor.py diff leg) =====
+  npz sha256 EXACT (byte-id) : 5/5
+===== SUMMARY =====
+W1_B1_LEGS_FAIL=0
+LEGS_EXIT=0
