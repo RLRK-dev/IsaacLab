@@ -1,0 +1,48 @@
+{
+ "config": "canonical drop (feedforward D rho=0, route_c2_scene=True, no sub10, no c1pin)",
+ "nsub": 4,
+ "frame0_div_mean_mm": 0.02,
+ "frame0_div_max_mm": 0.147,
+ "frame0_seg24_mm": 0.006,
+ "frame0_seg27_mm": 0.048,
+ "early_done": 499,
+ "per_phase": {
+  "0": {
+   "entry_t": 0,
+   "entry_div_mean_mm": 0.016,
+   "entry_div_max_mm": 0.106,
+   "phase_div_mean_mm": 0.845,
+   "phase_div_max_mm": 11.267,
+   "padL_entry": 0,
+   "padR_entry": 0
+  },
+  "1": {
+   "entry_t": 113,
+   "entry_div_mean_mm": 7.962,
+   "entry_div_max_mm": 10.566,
+   "phase_div_mean_mm": 6.772,
+   "phase_div_max_mm": 21.269,
+   "padL_entry": 6,
+   "padR_entry": 17
+  },
+  "2": {
+   "entry_t": 173,
+   "entry_div_mean_mm": 9.296,
+   "entry_div_max_mm": 20.148,
+   "phase_div_mean_mm": 8.423,
+   "phase_div_max_mm": 39.865,
+   "padL_entry": 12,
+   "padR_entry": 13
+  },
+  "3": {
+   "entry_t": 259,
+   "entry_div_mean_mm": 13.255,
+   "entry_div_max_mm": 41.882,
+   "phase_div_mean_mm": 59.22,
+   "phase_div_max_mm": 153.113,
+   "padL_entry": 16,
+   "padR_entry": 10
+  }
+ },
+ "signatures": "(a) drift = div GROWS monotonically from ~0 @frame0; (b) build-parity = NONZERO @frame0"
+}

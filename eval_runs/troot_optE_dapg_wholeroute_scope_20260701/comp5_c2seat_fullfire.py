@@ -50,13 +50,35 @@ os.environ.pop("DISPLAY", None)
 
 import mujoco  # noqa: E402
 import newton_route_env as nre  # noqa: E402
+import numpy as np  # noqa: E402
 import route_env_config as rc  # noqa: E402
 import torch  # noqa: E402
 import warp as wp  # noqa: E402
 
+# comp5 sub10 verification (Rs-approved 2026-07-12): raise the DRIVE-loop contact solve to the recording's
+# 10-substep fidelity so the grip holds through the lift (⑥ dropped at the RL default 4 -- the coarse 4-sub
+# contact solve loses the grip, prior diagnosis 763e0e2f48/state.md:64). PAIRED override RL_SIM_SUBSTEPS 4->10
+# AND RL_SIM_DT DT/4->DT/10 so each frame stays 10 x DT/10 == DT (substeps alone would integrate 2.5x DT per
+# frame and break the timeline). Monkeypatch the newton_route_env module globals (newton_route_env.py:1150 reads
+# them at drive-call time); production constants (newton_skill_env_base:95-96) are UNTOUCHED => the RL training
+# substrate is unchanged. Default OFF (env unset) = byte-preserve the original 4-sub ⑥; SUB10_VERIFY=1 activates
+# the override and suffixes all outputs "_sub10" so the original 4-sub evidence is preserved.
+_SUB10 = os.environ.get("SUB10_VERIFY", "0") == "1"
+if _SUB10:
+    nre.RL_SIM_SUBSTEPS = 10
+    nre.RL_SIM_DT = nre.DT / 10.0
+    assert abs(nre.RL_SIM_SUBSTEPS * nre.RL_SIM_DT - nre.DT) < 1e-12, "frame time must remain DT"
+    print(f"[SUB10] override active: RL_SIM_SUBSTEPS={nre.RL_SIM_SUBSTEPS} RL_SIM_DT={nre.RL_SIM_DT:.8f} (=DT/10)")
+_C1PIN = os.environ.get("ROUTE_C1_PIN", "0") == "1"  # FORK-1 fix: activate the env-core C1 clip-retention pin
+# CABLE_XYZ_DIAG (RS-TECH-LEAD GO 2026-07-12 03:35): dump env-core cable_xyz per RL step + compare to the recording
+# per-frame to separate (a) open-loop cable-drift (divergence GROWS from ~0 @frame-0) from (b) build-parity mismatch
+# (NONZERO divergence already @frame-0). READ-ONLY on env internals; default OFF = byte-preserve the drop run.
+_DIAG = os.environ.get("CABLE_XYZ_DIAG", "0") == "1"
+_SFX = ("_sub10" if _SUB10 else "") + ("_c1pin" if _C1PIN else "") + ("_cablediag" if _DIAG else "")
+
 GOLDEN_NPZ = _EVAL / "w0e_81rerun_snapdown_0537" / "cell_x0_y0" / "route_demo_raw.npz"
-OUT_JSON = _EVAL / "comp5_c2seat_fullfire_result.json"
-FRAMES_DIR = _EVAL / "comp5_c2seat_fullfire_frames"
+OUT_JSON = _EVAL / f"comp5_c2seat_fullfire{_SFX}_result.json"
+FRAMES_DIR = _EVAL / f"comp5_c2seat_fullfire{_SFX}_frames"
 DOWNLOADS = Path.home() / "Downloads"
 W, H = 960, 720
 FPS = 10
@@ -132,6 +154,42 @@ def main():
     n_phases = int(rc.N_ROUTE_PHASES)
     zero = torch.zeros((1, 6), dtype=torch.float32)
 
+    if _DIAG:
+        # env drives arm to recording frame step_f[t]+sub_i (step_f[t]=t*cad, route_executor.py:88/3322); the env
+        # cable AFTER RL step t reflects the last driven sub-frame t*cad+(nsub-1). Compare to the recording there.
+        _rec = np.load(str(GOLDEN_NPZ), allow_pickle=True)
+        _rec_cxyz = np.asarray(_rec["cable_xyz"])  # (F,40,3) recording ground-truth (segment order 0..39)
+        _cad, _nsub, _nrecf = 10, int(nre.RL_SIM_SUBSTEPS), _rec_cxyz.shape[0]
+        _bq0 = env._state_0.body_q.numpy()
+        _env_c0 = _bq0[cable_ids, :3]
+        _lpads, _rpads = set(), set()  # split pads L/R by pad-body world-Y (R hand ~0.194, L ~0.106 @P0; thr 0.15)
+        for _g in pads:
+            (_rpads if float(_bq0[int(m.geom_bodyid[_g]), 1]) > 0.15 else _lpads).add(_g)
+        _d0 = np.linalg.norm(_env_c0 - _rec_cxyz[0], axis=1) * 1e3  # per-seg mm, env-settled vs rec frame-0
+        print(
+            f"[DIAG] pads split by body-y: L={len(_lpads)} R={len(_rpads)} (total {len(pads)}); "
+            f"rec_frames={_nrecf} cadence={_cad} nsub={_nsub}"
+        )
+        print(
+            f"[DIAG] FRAME-0 div (env settled vs rec f0): mean={_d0.mean():.2f} max={_d0.max():.2f} "
+            f"seg24(Lheld)={_d0[24]:.2f} seg27(C1)={_d0[27]:.2f} mm  <-- signature-(b) probe"
+        )
+        _diag = {
+            "t": [],
+            "phase": [],
+            "recf": [],
+            "div_mean_mm": [],
+            "div_max_mm": [],
+            "div_seg24_mm": [],
+            "div_seg27_mm": [],
+            "pad_L": [],
+            "pad_R": [],
+            "env_cxyz": [],
+            "frame0_div_mean_mm": float(_d0.mean()),
+            "frame0_div_max_mm": float(_d0.max()),
+            "frame0_div_perseg_mm": _d0.tolist(),
+        }
+
     series = {"t": [], "phase": [], "z_c1_mm": [], "flank_mm": [], "c2_seated": [], "pad_cable": []}
     max_phase = -1
     early_done = None
@@ -151,6 +209,19 @@ def main():
         z_c1, flank = env._c1_retention_m(cable_pos)
         c2_seated = bool(env._c2_seated_honest(cable_pos))
         ncon = _pad_cable_contacts(d, pads, cables)
+        if _DIAG:
+            _recf = min(t * _cad + (_nsub - 1), _nrecf - 1)
+            _dv = np.linalg.norm(cable_pos - _rec_cxyz[_recf], axis=1) * 1e3  # per-seg mm (env vs rec @ driven frame)
+            _diag["t"].append(t)
+            _diag["phase"].append(int(phase_peek))
+            _diag["recf"].append(int(_recf))
+            _diag["div_mean_mm"].append(round(float(_dv.mean()), 3))
+            _diag["div_max_mm"].append(round(float(_dv.max()), 3))
+            _diag["div_seg24_mm"].append(round(float(_dv[24]), 3))
+            _diag["div_seg27_mm"].append(round(float(_dv[27]), 3))
+            _diag["pad_L"].append(int(_pad_cable_contacts(d, _lpads, cables)))
+            _diag["pad_R"].append(int(_pad_cable_contacts(d, _rpads, cables)))
+            _diag["env_cxyz"].append(cable_pos.copy())
         max_phase = max(max_phase, int(phase_peek))
         c2_seated_run = c2_seated_run + 1 if c2_seated else 0
 
@@ -177,6 +248,53 @@ def main():
             )
         t += 1
 
+    if _DIAG:
+        _env_arr = np.stack(_diag["env_cxyz"], axis=0) if _diag["t"] else np.zeros((0, 40, 3))
+        _diag_npz = _EVAL / f"comp5_c2seat_fullfire{_SFX}.npz"
+        np.savez_compressed(
+            _diag_npz,
+            env_cxyz=_env_arr,
+            t=np.array(_diag["t"]),
+            phase=np.array(_diag["phase"]),
+            recf=np.array(_diag["recf"]),
+            div_mean_mm=np.array(_diag["div_mean_mm"]),
+            div_max_mm=np.array(_diag["div_max_mm"]),
+            div_seg24_mm=np.array(_diag["div_seg24_mm"]),
+            div_seg27_mm=np.array(_diag["div_seg27_mm"]),
+            pad_L=np.array(_diag["pad_L"]),
+            pad_R=np.array(_diag["pad_R"]),
+            frame0_perseg_mm=np.array(_diag["frame0_div_perseg_mm"]),
+        )
+        _ph = np.array(_diag["phase"])
+        _dm = np.array(_diag["div_mean_mm"])
+        _dx = np.array(_diag["div_max_mm"])
+        _phase_summary = {}
+        for _p in sorted(set(_diag["phase"])):
+            _idx = np.where(_ph == _p)[0]
+            _phase_summary[str(int(_p))] = {
+                "entry_t": int(_diag["t"][_idx[0]]),
+                "entry_div_mean_mm": round(float(_dm[_idx[0]]), 3),
+                "entry_div_max_mm": round(float(_dx[_idx[0]]), 3),
+                "phase_div_mean_mm": round(float(_dm[_idx].mean()), 3),
+                "phase_div_max_mm": round(float(_dx[_idx].max()), 3),
+                "padL_entry": int(_diag["pad_L"][_idx[0]]),
+                "padR_entry": int(_diag["pad_R"][_idx[0]]),
+            }
+        _diag_json = {
+            "config": "canonical drop (feedforward D rho=0, route_c2_scene=True, no sub10, no c1pin)",
+            "nsub": _nsub,
+            "frame0_div_mean_mm": round(_diag["frame0_div_mean_mm"], 3),
+            "frame0_div_max_mm": round(_diag["frame0_div_max_mm"], 3),
+            "frame0_seg24_mm": round(float(_diag["frame0_div_perseg_mm"][24]), 3),
+            "frame0_seg27_mm": round(float(_diag["frame0_div_perseg_mm"][27]), 3),
+            "early_done": early_done,
+            "per_phase": _phase_summary,
+            "signatures": "(a) drift = div GROWS monotonically from ~0 @frame0; (b) build-parity = NONZERO @frame0",
+        }
+        (_EVAL / f"comp5_c2seat_fullfire{_SFX}.json").write_text(json.dumps(_diag_json, indent=1))
+        print("[DIAG] per-phase divergence summary:")
+        print(json.dumps(_diag_json, indent=1))
+
     # ---- verdict (numeric; NEVER a standalone PASS -- Rs human-GT on the video is final) ----
     z_c1_end = series["z_c1_mm"][-1] if series["z_c1_mm"] else None
     flank_end = series["flank_mm"][-1] if series["flank_mm"] else None
@@ -194,8 +312,8 @@ def main():
         verdict = "INCONCLUSIVE"
 
     vids = {
-        "ctx": _ffmpeg("ctx", "comp5_c2seat_fullfire_ctx.mp4"),
-        "c2zoom": _ffmpeg("c2zoom", "comp5_c2seat_fullfire_c2zoom.mp4"),
+        "ctx": _ffmpeg("ctx", f"comp5_c2seat_fullfire{_SFX}_ctx.mp4"),
+        "c2zoom": _ffmpeg("c2zoom", f"comp5_c2seat_fullfire{_SFX}_c2zoom.mp4"),
     }
 
     result = {

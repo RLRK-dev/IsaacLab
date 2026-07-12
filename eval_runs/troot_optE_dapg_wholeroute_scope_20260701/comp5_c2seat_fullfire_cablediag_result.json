@@ -28,8 +28,8 @@
  ],
  "numeric_verdict": "NUMERIC_NOGO",
  "videos": {
-  "ctx": "/home/rlrk/Downloads/comp5_c2seat_fullfire_ctx.mp4",
-  "c2zoom": "/home/rlrk/Downloads/comp5_c2seat_fullfire_c2zoom.mp4"
+  "ctx": "/home/rlrk/Downloads/comp5_c2seat_fullfire_cablediag_ctx.mp4",
+  "c2zoom": "/home/rlrk/Downloads/comp5_c2seat_fullfire_cablediag_c2zoom.mp4"
  },
  "note": "numeric is NEVER a standalone PASS; Rs human-GT on the C2-seating video is final"
 }
