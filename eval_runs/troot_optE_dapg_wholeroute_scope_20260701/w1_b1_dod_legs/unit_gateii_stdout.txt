@@ -1,0 +1,8 @@
+==============================================================================
+route-executor recorded_replay step_target gate-ii byte-consistency (comp2 Stage-A gate-ii)
+==============================================================================
+[route_demo_to_bc] SCHEMA=15-phase (obs 27D)
+[GATE-II] step_target vs canonical wp (route_demo_to_bc._compute_demo REUSE): n_steps=770 target_Linf=0.000e+00 -> BYTE-EXACT
+[GATE-II] pad-to-horizon (t>=770 holds last wp): OK; phase-clock span p0=0->plast=5: OK
+------------------------------------------------------------------------------
+gate-ii step_target == run_route recording (== BC/trainer base): PASS

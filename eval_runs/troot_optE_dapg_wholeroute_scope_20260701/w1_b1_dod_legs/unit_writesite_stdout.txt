@@ -1,0 +1,21 @@
+[L1 write-pattern unit] comp3 write-site flag-gate (no-GPU, CPU)
+  [broadcast] PASS: arm byte-id; gripper untouched flag-ON; diff==gripper set (32)
+  [perworld] PASS: per-world arm byte-id; gripper untouched; diff==gripper set (32)
+  [guard] PASS: flag-matrix + align + drive-mode guards fire loud pre-build (ValueError/AssertionError)
+[L4 grip-drive / reset-reseed unit] comp3 chunk 2 (R1 reset + R2 grip staircase)
+  [grip-transit] PASS: [L=0.69, R=0.0] transit window + non-swapped [L,R]->per-arm mapping
+  [reset-reseed] PASS: after CLOSE-latch, reset re-seeds all drivers OPEN; non-drivers untouched
+  [settled-patch] PASS: gripper coords <- world-0 physics; arm coords untouched
+  [forbid-fork] PASS: forbid=True raises for k>=1 (comp3b); k=0 ok; default keeps k>=1 capability
+[L4 chunk-3 unit] comp3 chunk 3 (R6 obs source + R8 discriminating servo readback)
+  [finger-obs] PASS: obs[7]/[15] flag-ON source = physics joint_q per-world driver sum
+  [servo-readback] PASS: wired ok; unwired RAISES (discriminating); blanket-wired RAISES (neg ctrl)
+[L4 fold unit] comp3 layer-2/5 folds (golden columns G-F6 + readback arming P-F2/P-F3)
+  [golden-transit] PASS: REAL golden frame 2694 (t=269,sub=4) maps [L=0.69, R=0.0] per-arm
+  [readback-arming] PASS: no arm at all-OPEN; arms at first CLOSE; sub_i bounds fail loud
+[L4 lane-floor unit] G1 root-cause fix (lane-aware EE-Z floor, Rs adjudication B)
+  [lane-floor] PASS: values+edges+island(float-aware)+pair(shared-max/z-equal) pinned; replay low-z frames all lane-floored (neutral); park documents old bind
+[L4 feedforward unit] D rho=0 scripted drive (apply_recorded_arm_ff, Rs adjudication (1))
+  [recorded-arm-ff] PASS: verbatim recording row -> arm cols only; qd zeroed; gripper untouched; guards loud
+  [recorded-arm-ff-golden] PASS: REAL golden frame 1000 row verbatim (float32-exact)
+ALL PASS (L1 broadcast+perworld+guard; L4 grip-transit+reset-reseed+settled-patch+forbid-fork+finger-obs+servo-readback+golden-transit+readback-arming+lane-floor+recorded-arm-ff[x2])

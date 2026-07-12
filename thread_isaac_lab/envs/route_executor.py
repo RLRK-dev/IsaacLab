@@ -399,6 +399,10 @@ def build_state_bank_from_recording(recording, n_world, arm_off=0, phases=(1, 2,
         ``{k: banked}`` for each requested ``k`` that has a boundary frame in the recording (a phase absent
         from the recording is skipped, so ``reset_to_phase(k)`` falls back to the env reset for it).
     """
+    assert 0 not in phases, (
+        "phase-0 must NEVER be banked (env-authoritative reset; reset_to_phase k==0 is a structural "
+        "no-op -- W1-B1 %9 R-3 double-guard)"
+    )
     arm_q = np.asarray(recording["arm_q"], dtype=np.float32)
     grip = np.asarray(recording["grip_cmd"], dtype=np.float32)
     phase = np.asarray(recording["phase_id"]).astype(np.int64)

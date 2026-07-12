@@ -1,0 +1,17 @@
+# R16 route-clock single-source grep leg (one-off, pinned per FINDING-2).
+# Command: grep -n episode_length_buf thread_isaac_lab/envs/newton_route_env.py
+# Allowed CODE sites (fail-closed): alloc/:490-area, per-world reset/:1027-area, global reset/:1608-area, increment/:1618-area, timeout/:1527-area.
+# COMMENT-line hits are excluded by pattern: lines whose first non-space char sequence after the line number starts with '#'.
+#   (B1 introduced 3 explanatory comment mentions at the alloc/flag blocks: they document the single-source rule itself.)
+# Consumer regions (_pull_route / drive loop / done-reset) must have ZERO hits of any kind.
+459:        # freeze / B3 fork init). False (default) = route_t mirrors episode_length_buf exactly (increment/
+490:        self.episode_length_buf = torch.zeros(world_count, dtype=torch.long, device=device)
+493:        # obs[50] phase-entry) read route_t, NEVER episode_length_buf. Under route_t_clock=False (default)
+494:        # route_t is incremented/zeroed at the SAME sites as episode_length_buf (mirror -> value-identical
+1027:            self.episode_length_buf[w] = 0
+1527:            timeout = self.episode_length_buf[w].item() >= self.max_episode_length
+1608:        self.episode_length_buf[:] = 0
+1618:        self.episode_length_buf += 1
+--- executor/config (expect 0) ---
+thread_isaac_lab/envs/route_env_config.py:0
+thread_isaac_lab/envs/route_executor.py:0

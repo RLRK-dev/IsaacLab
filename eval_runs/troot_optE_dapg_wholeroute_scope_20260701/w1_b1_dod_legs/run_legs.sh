@@ -9,7 +9,8 @@ PY=/home/rlrk/env_isaaclab7/bin/python
 FAIL=0
 
 echo "===== LEG 1: 9a-prime rerun (env build + predicate EXACT vs banked) ====="
-CUDA_VISIBLE_DEVICES=0 $PY $S/dod9a_prime.py "$OUT" > "$OUT/leg1_9aprime.log" 2>&1
+rm -f "$OUT/dod9a_prime.json"  # R-1: no stale-json false-PASS
+CUDA_VISIBLE_DEVICES=0 $PY $S/dod9a_prime.py "$OUT" > "$OUT/leg1_9aprime.log" 2>&1 || FAIL=1
 $PY - <<'EOF' || FAIL=1
 import json
 new = json.load(open("eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b1_dod_legs/dod9a_prime.json"))
@@ -22,7 +23,8 @@ assert same
 EOF
 
 echo "===== LEG 2: DoD5 drift-zero + DoD10 span-proj rerun (c2indep) vs banked ====="
-CUDA_VISIBLE_DEVICES=0 $PY $S/dod_c2indep.py "$OUT" > "$OUT/leg2_c2indep.log" 2>&1
+rm -f "$OUT/dod_c2indep.json"
+CUDA_VISIBLE_DEVICES=0 $PY $S/dod_c2indep.py "$OUT" > "$OUT/leg2_c2indep.log" 2>&1 || FAIL=1
 $PY - <<'EOF' || FAIL=1
 import json
 new = json.load(open("eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b1_dod_legs/dod_c2indep.json"))
@@ -35,7 +37,8 @@ assert not diffs
 EOF
 
 echo "===== LEG 3: DoD6 rerun vs banked ====="
-CUDA_VISIBLE_DEVICES=0 $PY $S/dod6.py "$OUT" > "$OUT/leg3_dod6.log" 2>&1
+rm -f "$OUT/dod6.json"
+CUDA_VISIBLE_DEVICES=0 $PY $S/dod6.py "$OUT" > "$OUT/leg3_dod6.log" 2>&1 || FAIL=1
 $PY - <<'EOF' || FAIL=1
 import json
 new = json.load(open("eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b1_dod_legs/dod6.json"))
@@ -49,7 +52,8 @@ assert same
 EOF
 
 echo "===== LEG 4: cablediag env-trajectory byte-anchor (gate-6 runner rerun, all trainer flags OFF) ====="
-CUDA_VISIBLE_DEVICES=0 MUJOCO_GL=egl CABLE_XYZ_DIAG=1 $PY $E/comp5_c2seat_fullfire.py > "$OUT/leg4_cablediag.log" 2>&1
+rm -f "$E/comp5_c2seat_fullfire_cablediag.npz"  # R-1: comparator must see THIS run
+CUDA_VISIBLE_DEVICES=0 MUJOCO_GL=egl CABLE_XYZ_DIAG=1 $PY $E/comp5_c2seat_fullfire.py > "$OUT/leg4_cablediag.log" 2>&1 || FAIL=1
 $PY - <<'EOF' || FAIL=1
 import json
 import numpy as np

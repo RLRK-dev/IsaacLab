@@ -242,6 +242,7 @@ def test_world_slice():
                 np.all(jq[arm_q_i] == -99.0)
                 and np.all(jq[grip_q_i] == -99.0)
                 and np.all(jqd[arm_qd_i] == -99.0)
+                and np.all(jqd[grip_qd_i] == -99.0)  # %9 R-2: gripper_qd untouched too
                 and np.all(jtp[drv] == -99.0)
             )
             print(f"  [WORLD-SLICE] w={w} sentinel untouched -> {'PASS' if leg else 'FAIL'}")

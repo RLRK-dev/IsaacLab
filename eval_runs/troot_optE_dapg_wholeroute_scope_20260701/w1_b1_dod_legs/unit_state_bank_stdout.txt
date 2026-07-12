@@ -1,0 +1,26 @@
+==============================================================================
+route-executor state-bank ⑦(a) restore-fidelity STATIC unit test (comp2 Stage-A gate-i)
+==============================================================================
+[SYNTHETIC] deterministic recording, 2-world cable-offset (q35/qd34) ...
+  [SYNTH] n_world=2 banked phases=[1, 2, 3, 4, 5]
+  [SYNTH] k=1 bf=10 qpos_Linf=0.000e+00 qvel_Linf=0.000e+00 grip_target=OK (gL=0.0100 gR=0.0200) -> PASS
+  [SYNTH] k=2 bf=20 qpos_Linf=0.000e+00 qvel_Linf=0.000e+00 grip_target=OK (gL=0.0200 gR=0.0400) -> PASS
+  [SYNTH] k=3 bf=30 qpos_Linf=0.000e+00 qvel_Linf=0.000e+00 grip_target=OK (gL=0.0300 gR=0.0600) -> PASS
+  [SYNTH] k=4 bf=40 qpos_Linf=0.000e+00 qvel_Linf=0.000e+00 grip_target=OK (gL=0.0400 gR=0.0800) -> PASS
+  [SYNTH] k=5 bf=50 qpos_Linf=0.000e+00 qvel_Linf=0.000e+00 grip_target=OK (gL=0.0500 gR=0.1000) -> PASS
+[NOMINAL] real cell_x0_y0 recording (/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz) ...
+  [NOMINAL] n_world=4 banked phases=[1, 2, 3, 4, 5]
+  [NOMINAL] k=1 bf=1124 qpos_Linf=0.000e+00 qvel_Linf=0.000e+00 grip_target=OK (gL=0.7407 gR=0.7407) -> PASS
+  [NOMINAL] k=2 bf=1724 qpos_Linf=0.000e+00 qvel_Linf=0.000e+00 grip_target=OK (gL=0.7407 gR=0.7407) -> PASS
+  [NOMINAL] k=3 bf=2584 qpos_Linf=0.000e+00 qvel_Linf=0.000e+00 grip_target=OK (gL=0.7407 gR=0.7407) -> PASS
+  [NOMINAL] k=4 bf=6181 qpos_Linf=0.000e+00 qvel_Linf=0.000e+00 grip_target=OK (gL=0.7407 gR=0.7407) -> PASS
+  [NOMINAL] k=5 bf=6801 qpos_Linf=0.000e+00 qvel_Linf=0.000e+00 grip_target=OK (gL=0.7407 gR=0.7407) -> PASS
+[WORLD-SLICE] per-world-distinct bank, W={1,3} (non-prefix, world-0 excluded) ...
+  [WORLD-SLICE] w=0 sentinel untouched -> PASS
+  [WORLD-SLICE] w=1 restored == OWN block (distinct values) -> PASS
+  [WORLD-SLICE] w=2 sentinel untouched -> PASS
+  [WORLD-SLICE] w=3 restored == OWN block (distinct values) -> PASS
+  [WORLD-SLICE] world_ids=None -> ALL worlds restored -> PASS
+------------------------------------------------------------------------------
+RESULTS: {'synthetic': True, 'nominal': True, 'world_slice': True}
+⑦(a) restore-fidelity: PASS (L-inf <= 1mm/1mm/s + grip_target exact)

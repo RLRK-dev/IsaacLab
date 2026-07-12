@@ -1,0 +1,118 @@
+{
+ "what": "W1-B1 leg6 (R-4/CC6): flag-OFF route_t == episode_length_buf through per-world done-reset",
+ "world_count": 2,
+ "mirror_equal_all_snapshots": true,
+ "per_world_done_branch_fired": true,
+ "world0_restarted_world1_continued": true,
+ "snapshots": [
+  {
+   "tag": "post-reset",
+   "route_t": [
+    0,
+    0
+   ],
+   "episode": [
+    0,
+    0
+   ],
+   "equal": true
+  },
+  {
+   "tag": "pre-inject step",
+   "route_t": [
+    1,
+    1
+   ],
+   "episode": [
+    1,
+    1
+   ],
+   "equal": true
+  },
+  {
+   "tag": "pre-inject step",
+   "route_t": [
+    2,
+    2
+   ],
+   "episode": [
+    2,
+    2
+   ],
+   "equal": true
+  },
+  {
+   "tag": "pre-inject step",
+   "route_t": [
+    3,
+    3
+   ],
+   "episode": [
+    3,
+    3
+   ],
+   "equal": true
+  },
+  {
+   "tag": "post-inject",
+   "route_t": [
+    899,
+    3
+   ],
+   "episode": [
+    899,
+    3
+   ],
+   "equal": true
+  },
+  {
+   "tag": "post-done-reset (world 0 reset via REAL step() branch + consumer-6)",
+   "route_t": [
+    0,
+    4
+   ],
+   "episode": [
+    0,
+    4
+   ],
+   "equal": true
+  },
+  {
+   "tag": "post-reset step",
+   "route_t": [
+    1,
+    5
+   ],
+   "episode": [
+    1,
+    5
+   ],
+   "equal": true
+  },
+  {
+   "tag": "post-reset step",
+   "route_t": [
+    2,
+    6
+   ],
+   "episode": [
+    2,
+    6
+   ],
+   "equal": true
+  },
+  {
+   "tag": "post-reset step",
+   "route_t": [
+    3,
+    7
+   ],
+   "episode": [
+    3,
+    7
+   ],
+   "equal": true
+  }
+ ],
+ "PASS": true
+}
