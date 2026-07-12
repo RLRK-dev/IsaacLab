@@ -69,3 +69,9 @@ Full DoD ①-⑧ enumeration (evidence-cited):
 - DEFINE = planning artifact on banked devplan; **no future gate pre-empted** (devplan §10). L3 design-gates fire at Stage-A. Campaigns = HIGH-COST + production-launch-gate + fresh Rs GO.
 - Banking (this turn): this charter + trainer node state.md + routeexec disposition entry (commit, explicit-path) → p6 relay for LEDGER (row47-adjacent trainer row + **D-C DQ1=B→A′ supersession note**) + map + manifest cascade.
 - Rs-専権 untouched: 07-Design/04-Specs, CLAUDE.md:288 pointer (flagged only), video human-GT.
+
+---
+
+## ERRATUM (2026-07-12 11:5x, %12 — Stage-A /pre-check 3走目 ISSUE-A、records-must-match-fact)
+
+§7 (i) の drift-rate 単位表記を訂正する: `diff(div_seg24_mm)` の元データ (pB cablediag npz) は **env.step 毎 (= RL step、10 physics frames 間隔) の sample** であり、|inc| mean 0.27 / p95 1.08 / max 1.86 の単位は **mm/RL-step** (原文の mm/frame は誤り)。従って「Δ-bound = per-step-rate × decimation」の × d は二重計上 — 正: 必要 per-RL-step 補正 ≈ 実測 max ~1.9 mm/RL-step ≪ DELTA_BOUND 20mm ≤ F-1a 22mm。**結論 (magnitude FEASIBLE) は不変で余裕は ~10× に拡大 (保守側誤り)**。expressibility (ii) は非影響。詳細 = `STAGEA_TRAINER_ENV_DESIGN_GATE_RSTECHLEAD_20260712.md` v0.5 §2 + §13。p1 (OPS-SUP、P4 discharge leg 実施者) へ通知済み。
