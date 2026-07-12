@@ -1,10 +1,10 @@
-# Stage-A /reward-design 4 成果物 (delta scope) — v3 (2026-07-12 11:4x JST)
+# Stage-A /reward-design 4 成果物 (delta scope) — v3.3 (2026-07-12 12:4x JST — 5体 [VERIFY] cycle-1 fold M2/M8)
 
-**v3 amendment (/pre-check 2走目 N1/N6 fold):** ① S4 (timeout+1.00) は spec v0.4 §9 tail (iv) [予定 release 後 drop 無効化] の下でのみ成立 — (iv) 不採用なら非 seated 枝は強制 release 後 drop −10 (≈−7.6) となり fail-slow<fail-fast 逆転が生じる (採用理由)。② from-P0 未訓練 (Δ≈0) episode は HOLD@t≈343 で stall → timeout が期待挙動 (nominal 自体が発散する基板事実、spec v0.4 §0/§4.2)。return ≈ G1-G3 latched 15 − 9 = +6 — S4 系と整合、deadlock でない。HOLD-resume rate = 学習進捗 telemetry。
+**v3 amendment (/pre-check 2走目 N1/N6 fold):** ① S4 (timeout+1.00) は spec v0.4 §9 tail (iv) [予定 release 後 drop 無効化] の下でのみ成立 — (iv) 不採用なら非 seated 枝は強制 release 後 drop −10 (≈−7.6) となり fail-slow<fail-fast 逆転が生じる (採用理由)。② 未訓練終端 = HOLD-stall→timeout OR creep→drop (−10) — どちらかは claim ① 測定で確定 (return ≈ +6 or ≈ −0.4) (v0.8 5体-fold M2 で timeout 単独期待を改訂; 残余 creep 0.169mm/step > 0 のため、spec v0.8 §2 claim ① 事前証拠)。HOLD-resume rate = 学習進捗 telemetry。
 
 **改版:** v1 10:4x (spec v0.2 対応) → **v2 11:1x — /pre-check 1走目 BLOCK の CRIT-3 により v1 Artifact 2/4 は substrate 上実現不能な trace (EE deviation 32mm は kinematic re-pose 下で不可能) と判明 → cable-metric HOLD (spec v0.3 §4.2) で再作成。v1 の GATE PASS は spec v0.2 に対するもので v0.3 に非適用 — 本 v2 が正。**
-**Scope:** reward 本体 G1-G6 = banked 不変。delta = HOLD (cable-metric) / curriculum (bank v2) / DR / export の到達可能性・会計検証。**spec = `STAGEA_TRAINER_ENV_DESIGN_GATE_RSTECHLEAD_20260712.md` v0.3。**
-**一次データ:** reward 定数 `route_env_config.py:86-100` / reward 実装 `newton_route_env.py:1422-1546` / p3 clock-conjunct `:1502` / 失敗 run 実測 `comp5_c2seat_fullfire_cablediag.npz` (band max 10.6mm / onset 15mm@f343 / onset→58mm = 54 frames)。
+**Scope:** reward 本体 G1-G6 = banked 不変。delta = HOLD (cable-metric) / curriculum (bank v2) / DR / export の到達可能性・会計検証。**spec = `STAGEA_TRAINER_ENV_DESIGN_GATE_RSTECHLEAD_20260712.md` v0.8 (v0.8 5体-fold M8)。**
+**一次データ:** reward 定数 `route_env_config.py:86-100` / reward 実装 `newton_route_env.py:1422-1546` / p3 clock-conjunct `:1502` / residual≡0 canonical run 実測 `comp5_c2seat_fullfire_cablediag.npz` (健全域 band max 10.56mm / onset 15mm@f343 / onset→58mm = 54 RL steps、単位 = mm/RL-step [spec v0.6 ISSUE-A])。
 
 ## Artifact 1: Reachability (delta、v2)
 
@@ -24,9 +24,9 @@ policy Δ (‖Δ‖≤20mm; transit 把持腕 σ-cap 2mm) → (b′)projection �
   → kinematic re-pose (EE 追従は構造的に完璧) → cable 物理 (drift は cable 側にのみ現れる = substrate 事実)
   → div_grip = ‖cable把持seg − 記録軌道(route_t)‖
        > 15mm --[GATE: HOLD]--> route_t 凍結 (base/grip/window/obs[50] 単一源凍結)、episode 時計は進む
-       │  凍結 = march (drift 駆動源) の除去 → 残余 drift = settle creep 級 (falsifiable: <2mm/RL-step)
-       │  → σ-cap 2mm/step でも policy 補正が勝つ → div_grip 縮小 → ≤15mm で再開
-       └ 実測裏付け: onset (15mm) → grip-loss 域 (58mm) = 54 frames = 5.4 RL steps の補正猶予 (n=1)
+       │  凍結 = march (drift 駆動源) の除去 → 残余 drift 縮小 (falsifiable ①: drift-under-HOLD < drift-with-march mean 0.58mm/RL-step、v0.5 再導出 bar)
+       │  → σ-cap 2mm/step でも policy 補正が勝つ → div_grip 縮小 → resume 条件 (≤12mm or K=3 連続 in-band、hysteresis v0.8 M5) で再開
+       └ 実測裏付け: onset (15mm) → grip-loss 域 (58mm) = 54 RL steps の補正猶予 (n=1、v3.1 単位訂正 [spec v0.5 ISSUE-A 連動])
   → p1..p6 述語 → G latch (ordered) → r_phase / G6
 ```
 
@@ -50,7 +50,7 @@ policy Δ (‖Δ‖≤20mm; transit 把持腕 σ-cap 2mm) → (b′)projection �
 ## Artifact 4: Episode trace (v2 — substrate 上実現可能な系列)
 
 ```
-Step 0: reset_to_phase(4, [w]) → bank v2 restore (arm/gripper q + cable body_q/qd)。restore DoD:
+Step 0: reset_to_phase(4, [w]) → bank v2 restore (arm/gripper q/qd + cable joint-space q/qd、spec §6.2 C2/M10)。restore DoD:
         div_grip ≤ 10.6mm 検証済み fork。route_t := bank_boundary[4]。G1-G3 pre-latch (no-bonus)。
         grip servo = banked grip_target seed。export: start_phase=4 / route_t / dr=(0,0) [bank は
         canonical cell 固定 — DR×curriculum 相互排他、spec §6.2-5]。
@@ -58,9 +58,11 @@ Step 1: Δ = +6mm (reaching arm、transit-asym)。EE 追従完璧 (kinematic)。
         物理応答。div_grip 5.2mm < 15 → MARCH。route_t += 1。p4 未 fire。r_paid = −0.01。
 Step 2: cable 接触遷移で div_grip 16.8mm > 15 → HOLD。route_t 凍結 (base/grip/window/obs[50])。
         export: sync=HOLD, hold_count=1, div_grip=16.8。episode 時計は進む。r_paid = −0.01。
-Step 3: base 凍結 = march 除去。policy Δ が cable を記録軌道側へ (把持腕 σ-cap 2mm/step 内)。
-        div_grip 13.9mm ≤ 15 → 再開。hold_count reset。r_paid = −0.01。
-Step 4: r_reach 4.8mm ≤ tol ∧ contact_r → p4 fire、G4 latch。r_paid = +4.99。export:
+Step 3-5: base 凍結 = march 除去。policy Δ が cable を記録軌道側へ (観測上限 ~1.4mm/step; EE→cable
+        gain <1 [slipping grip、CC4 実測: div 50mm まで pad 接触持続]) — div_grip 16.8 → 15.6 → 14.4
+        → 13.9 → 12.8 → 11.9 (5-6 step) ≤ 12 (hysteresis bar) → 再開 (v0.8 M2/M5: 1-step 回復を multi-step 訂正 + resume = hysteresis 条件)。
+        hold_count reset。r_paid = −0.01/step。
+Step 6: r_reach 4.8mm ≤ tol ∧ contact_r → p4 fire、G4 latch。r_paid = +4.99。export:
         G4 = fired (pre_latched と区別)、‖Δ‖/bound=0.3。以降 G5→G6 は canonical 経路上。
 ```
 
@@ -73,7 +75,7 @@ Ground-truth: PASS (v1 から不変、override 会計は export 分離で保全)
 Episode trace: PASS (全 step が substrate 上実現可能 — v1 trace の不備を訂正)
 
 GATE: PASS → /pre-check 2走目 (v0.3 fold 検証) へ
-falsifiable claims 登録 (spec §2/§4.2): ①drift-under-HOLD < 2mm/RL-step ②seat persists through HOLD
+falsifiable claims 登録 (spec §2/§4.2、v0.5 bar): ①drift-under-HOLD < drift-with-march (mean 0.58mm/RL-step) ②seat persists through HOLD
   — 反証 leg = §8 hold-fires probe / bank-G3 fork 摂動 leg。反証時 contingency = §9 (σ-cap 再導出 / mix・閾値再設計)
 ```
 

@@ -75,3 +75,11 @@ Full DoD ①-⑧ enumeration (evidence-cited):
 ## ERRATUM (2026-07-12 11:5x, %12 — Stage-A /pre-check 3走目 ISSUE-A、records-must-match-fact)
 
 §7 (i) の drift-rate 単位表記を訂正する: `diff(div_seg24_mm)` の元データ (pB cablediag npz) は **env.step 毎 (= RL step、10 physics frames 間隔) の sample** であり、|inc| mean 0.27 / p95 1.08 / max 1.86 の単位は **mm/RL-step** (原文の mm/frame は誤り)。従って「Δ-bound = per-step-rate × decimation」の × d は二重計上 — 正: 必要 per-RL-step 補正 ≈ 実測 max ~1.9 mm/RL-step ≪ DELTA_BOUND 20mm ≤ F-1a 22mm。**結論 (magnitude FEASIBLE) は不変で余裕は ~10× に拡大 (保守側誤り)**。expressibility (ii) は非影響。詳細 = `STAGEA_TRAINER_ENV_DESIGN_GATE_RSTECHLEAD_20260712.md` v0.5 §2 + §13。p1 (OPS-SUP、P4 discharge leg 実施者) へ通知済み。
+
+## ERRATUM-2 (2026-07-12 12:4x, %12 — 5体 CC4-C5)
+
+§7 (i) の統計 (0.27/1.08/1.86) は t0..397 (grip-loss まで) の truncated 窓で、窓宣言が欠落していた。全系列では 0.358/1.047/1.940 mm/RL-step。補正要件としての正しい窓 = gripped 補正 regime (pre-58mm) max 1.855; post-loss max 1.940 は bounding のみ。結論不変。
+
+## ERRATUM-3 (同時刻, %12 — 5体 CC2-B)
+
+§7 (i) の『F-1a ±22mm authority』は W0-e seat-guide C2-X 補償 clamp (W0E_5TAI_DECIDE_20260705.md:23、累積・単軸・locked-runner 内部) の precedent 転用であり『授権 envelope』ではない。conjunct (i) の成立は実測 headroom (max ~1.9 ≪ 20mm) で自立し、結論不変。Rs W0-a で Δ-bound 授権の正式確定を仰ぐ。p1 通知対象。
