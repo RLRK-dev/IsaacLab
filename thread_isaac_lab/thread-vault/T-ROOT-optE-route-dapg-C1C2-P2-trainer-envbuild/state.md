@@ -16,12 +16,12 @@ dependencies:
     - "Stage-A design-gate COMPLETE (spec v0.8.1 banked d17f8f9cd6/e8d53aae10、design chain 全 PASS)"
     - "Rs W0-a =「A」一括承認 2026-07-12 13:29 (W0A_PACKET_RSTECHLEAD_20260712.md:89 —「W1 (env build) 着手可」+ D-B trigger 充足)"
     - "P2-envcore COMPLETE (基底 build f6ee1443f5→HEAD 1640L) / P2-routeexec COMPLETE-with-carry-forward (抽出 twin run_route:1028 byte-repro 81/81)"
-  blocker:
-    - "charter p1 (OPS-SUP) verify = PENDING (trainer-DEFINE precedent)。B0 のみ verify 前着手可 (既 co-decide: c1pin revert %11 推奨 + %12 CONCUR)。B1+ 着手 = p1 PASS 後"
+  blocker: []
 created: 2026-07-12T13:51:00+09:00
-last_updated: 2026-07-12T13:51:00+09:00
+last_updated: 2026-07-12T14:10:00+09:00
 spec_version: LTM-1 v1.2
 session_history:
+  - "2026-07-12 14:10 %12 (RS-TECH-LEAD, w2:p4) ⭐charter v0.2 BANKED — p1 verify 14:04 = PASS-WITH-CORRECTIONS (転記忠実性 全数照合 PASS / MED 2 fold: W-1 = §6 multi-cell 行に提示者 %12 + W1 完了報告 1-line Rs confirm / W-2 = B2 hold 両 leg を cuda:0 pin に訂正 [f343±1 bar は device 固有、CPU discharge = false-verdict risk]) → blocker 解消、**B1+ 解禁**。ERRATUM-1 (907a526df7) = B0-1 revert scope 3 files (%11 catch: newton_skill_env_base.py +28/-2 omit、%12 on-disk 裏取り: comment の FORK-1 root cause 主張 = REFUTED 済 false + spec 参照ゼロ)。B0-3 完了 (%11、og = revert 択 loud: pre-existing :32 Japanese-text が commit BLOCK → B6 行に carry 註記)。副次: pB tree-wide -f 由来 format dirt 多数 (B0 scope 外、報告のみ、chunk は explicit-path commit ゆえ非干渉)。"
   - "2026-07-12 13:51 %12 (RS-TECH-LEAD, w2:p4) ⭐node 作成 (trainer charter §1 lazy-spawn 授権 + Rs W0-a W1 着手承認 + 本 turn Rs directive「W1 build charter」)。charter v0.1 DRAFT 起草 (W1_ENVBUILD_CHARTER_RSTECHLEAD_20260712.md: B0-B7 chunk 分割 / per-chunk L3 gate template / 担当 %11 build・%10 audit・%12+%9 verify [devplan §7:192] / Rs 後決項 carry 表 / 衛生規則 M12)。prior-art V7 = PASS disposition (hits = 認可設計系譜の自己参照のみ)。on-disk 前提実測: c1pin +23/+70 残 dirty (B0-1 revert 対象) / run_route:1028 実在。1:1 binding = %11 (COORD) builder session (charter 受領時)。次: p1 verify dispatch → PASS 後 %11 B1+ 解禁 (B0 は即時可)。"
 ---
 
