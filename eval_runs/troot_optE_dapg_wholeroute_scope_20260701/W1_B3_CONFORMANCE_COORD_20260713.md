@@ -300,6 +300,10 @@ B3 = ①capture (lock-safe) ②bank v2 builder ③供給 API ④**fork write-set
 
 **artifact = bank capture npz (B3a 出力 / B3b 入力)**
 
+⚠**npz は repo に入れない (B2 precedent と同じ)**: `bank_capture.npz` (5.8MB) と byte-repro の `route_demo_raw.npz` (12MB×6) は **再生成可能** (byte-repro が決定性を証明済) ゆえ commit しない。**provenance は sha256 で pin**:
+- `bank_capture.npz` **sha256 = `312dc6389807c0202f3de84accafd6c9b64436ffb29cf6726805f7cbf17af770`** (final code / final run、2026-07-14 04:0x)
+- 再生成 = `bash eval_runs/.../w1_b3a_dod_legs/run_legs.sh` の LEG2 (BANK_CAPTURE=1、cuda:0、~1 min)
+
 | key | dtype / shape | 意味 |
 |---|---|---|
 | `joint_q` | float32 [F, 74] | 全 frame の physics joint_q (arm 28 + cable 46) |
@@ -357,6 +361,22 @@ clip-pin は **INVARIANT #5 の唯一の認可例外** (`log.md:6534`)。**RL en
 **⭐影響範囲**: **B3a (producer capture + offline builder) は完全に無傷** — 本 chunk の artifact は producer の state を pin 込みで忠実に capture しており、その検証も完結している (legs 全 PASS)。**止まるのは B3b (env restore) の設計のみ。** (%9 も同判断)
 
 ⭐**meta (本 arc の新 sub-type、%9)**: C-α = 計器の感度 / C-β = mode の交絡 / E-4 = 較正の流用 / F-7.4 = 零は「対象が無い」か「計器が死んでいる」か区別不能 — そして **B3-α = 対象機構が *移植先に存在しない***。⇒ ⭐**移植の検証は donor (capture 忠実性) だけでなく recipient (受け皿の能力) を検査せよ。我々は capture を検証したが、restore に着地先があるかを誰も検証していなかった。**
+
+### §9.1 ⭐%12 の追加測定 (03:45) — 問題は「bank が載らない」より深い
+
+⭐⭐**(A) env は C1 を保持できない (実測)**。C1 着座 seg 27 の C1 からの距離:
+
+| | t=255 | … | t=396 |
+|---|---|---|---|
+| **記録 (pin あり)** | **4.16mm** | **4.16mm 一定** | **4.16mm** |
+| **env (pin なし)** | 1.08 | 5.76 → 14.14 → 25.80 → 41.20 | **52.87mm (単調離脱)** |
+
+⇒ **env は reference trajectory が依存する機構を欠いている。** これは「bank の restore 先が無い」より深い: **pin 無しでは C1 着座そのものが保たない**。RL success 述語は `c1_final` を conjunct に持つ ⇒ ⚠**pin 無しで task が達成可能かどうかも open**。
+
+⚠**(B) FORK-1 の根本原因が open に戻る (%12、断定はしない)**: **C1 離脱 runaway (t≈300-320) は grip divergence runaway (t≈337) に *先行* する**。かつ **c1pin「REFUTED」の evidence (`comp5_c2seat_fullfire_c1pin_result.json`) には「pin が実際に発火した」positive control が無い** (中身 = steps_run 342 / max_phase 3 / NUMERIC_NOGO のみ)。⇒ ⭐**spec F-7.4 の規律 (零・不在の測定は計器の死と区別できない ⇒ positive control を併走させよ) が、その規律を生んだ arc 自身の過去の REFUTED に適用される** ⇒ **当該 REFUTED は再検証を要する**。
+⛔ ただし **同時に「REFUTED を『env に pin 不要』の根拠に流用しない」も守る** (prohibited.md)。**どちらの方向にも断定せず、Rs 裁定に上げる。**
+
+⇒ **停止範囲 (%12 確定)**: **B3a = 影響なし (commit 可)** / **B3b = STOP (Rs 裁定まで着手しない)** / **B4-B7 も本件に依存**。BLOCKED_FOR_USER = `575069abe5`。
 
 ## §6. spec 却下済 代替の記録
 
