@@ -265,3 +265,32 @@ partial 3 件の解消: #3 → N1/N2/N4/N5 fold で完結 / #10 → N6 fold で�
 bank-start 正制御の per-k 差別化 (§8 H1) は comp3b NULL-analysis (re-seed は phase-3 INTRA drift を直せない) と整合 — bank fork は『開始状態供給』であり drift fix ではない、fix = 閉ループ policy (per charter §6 comp3b-retirement)。(v0.8 5体-fold H1)
 
 *%12 — 2026-07-12。PAPER-ONLY。INVARIANTS 不触 (DUAL-ARM / 88mm span / DiffIK-only / gripper LOCK / no-kinematic-trick)。task_config.py 不触。*
+
+---
+
+## §14. ERRATUM (2026-07-13 22:1x、%12 — B3 [CHECK] 実測由来、records-must-match-fact)
+
+本 spec は v0.8.1 で banked + Rs W0-a 承認済み。以下 2 件は **設計判断・数値の変更ではなく、記述の事実訂正** (B3 builder [CHECK] の on-disk 実測 + %12 独立検証)。**Rs 承認事項 (HOLD 15/12/24 / Δ-bound 0.020 / DR±20 OFF / mix 集合) は一切不変。**
+
+### ERRATUM-A (§0 anchor 行 N4 / §4.2 比較 frame — 本 spec の規則を CONFIRM、artifact の根本原因を pin)
+
+`comp5_c2seat_fullfire.py:162,213` の diag 比較 frame `10t+3` の由来 = **定数の誤同定**: `_cad, _nsub = 10, int(nre.RL_SIM_SUBSTEPS)` → `_recf = t*_cad + (_nsub − 1)`。`RL_SIM_SUBSTEPS = 4` (`newton_skill_env_base.py:95` = **solver 内 substep 数**) は `PHYSICS_STEPS_PER_RL = 10` (`newton_route_env.py:407` = **RL step あたり physics frame 数 = chunk cadence**) と別物であり、`_nsub−1 = 3` は chunk 終端 index (= `_cad−1 = 9`) の誤用。
+
+⇒ **本 spec §4.2 の `f(route_t) = cf[t]+9` (chunk 終端) が正であることの独立確認**。diag の 10t+3 = 6-frame stale artifact (§0 の「系統 staleness ≤1.07/1.31mm」記述は結果として正、機構がこれで確定)。B2 leg8 の aligned max 10.407mm < shadow max 10.558mm もこの 6-frame stale で説明される。**設計変更ゼロ (規則は既に正しかった)。**
+
+### ERRATUM-B (§6.2-3 M10 の hidden-state write-set clause = **本基板では VACUOUS**)
+
+M10 は restore-exact の write-set に **`body_q_prev` (solver double-buffer) + Dahl friction state** を含めることを要求していたが、**この 2 つは env7 (Newton 1.2.1 / SolverMuJoCo) 基板に存在しない**:
+- installed `newton/solvers/` grep = `body_q_prev` / `joint_C_fric` / `enable_dahl_friction` **0 hit** (Newton 1.2.1)。
+- THREAD 側で set しているのは **VBD 専用経路のみ** (`generate_demos_mppi.py:508,604` = `solver_vbd`) + test mock。route env の solver = `SolverMuJoCo` (`newton_skill_env_base.py:1322/1332`)。
+- 帰結: `newton_route_env.py:1015` の `prev` = **None**、`:1086` の `reset_dahl_friction_for_envs` = **no-op** (両方 `hasattr` guard)。
+- 原因 = env6-VBD 期の hidden state を基板検証せず本 spec に carry した %12 の誤り (prohibited.md「PhysX/Newton 環境規約の混同禁止」の同型 = **VBD 規約を mujoco 基板に適用**)。
+
+⇒ **B3 は body_q_prev / Dahl の capture・restore・reset を実装しない (非項目)。** ただし **hidden-state の懸念クラス自体は消えない** — 本基板の hidden state = **MuJoCo `mjData` 内部** (qacc_warmstart / efc contact warm-start cache 等) であり、qpos/qvel 復元はこれに盲目。**M10 の経験 leg (= 1-step post-restore 動力学 leg: bank+1 step の state を producer の同 frame と比較) は基板非依存ゆえ STANDS、かつ本 ERRATUM により hidden-state の *唯一の* guard に昇格する (bar = fidelity band 内)。** 名前付き属性の write-set では mjData を捕捉できなかったため、本訂正は検証を弱めず強める。
+
+### 併記 (B3 [CHECK] 実測、設計に影響する事実 — %12 独立確認済)
+
+- **記録は既に cable の joint_q を保持**: `route_demo_recorder.py:231` `jq = state.joint_q.numpy()` (PHYSICS joint vector) → `route_demo_raw.npz["arm_q"]` shape **(7707, 74)** = arm 28 + cable 46。⇒ bank v2 capture の真の delta = **joint_qd のみ** (FD 代替は M10 が却下済、再審しない)。
+- **restore-fidelity の比較 frame (%12 catch)**: fork state = producer frame `cf[t_k]−1` 終了時点 (chunk t_k 駆動直前) ゆえ、**restore 直後の div_grip は記録 frame `cf[t_k]−1` を参照する** (走行中 metric の `cf[t]+9` を流用しない)。誤用時は cable の実運動 10-frame 分が偽 divergence として混入 (実測: 境界 sample で 0.0–1.67mm、t=200 で 1.67mm)。規則は 1 本: **「state はそれが対応する記録 frame と比較する」**。
+
+*%12 — 2026-07-13。PAPER-ONLY。設計判断・Rs 承認数値の変更ゼロ。INVARIANTS 不触。*
