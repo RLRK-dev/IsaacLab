@@ -562,3 +562,17 @@ layout_hash assert (F-6) が同一 layout を保証するので、**今日は ba
 ⇒ **verify 側の確証バイアスは、独立な adversarial pass (「自分が欲しい結論を否定する証拠を先に探す」担当) を per-chunk で立てることでしか捕まらない。** 本 arc では %12 の class 狙い read と %10 の通し精読が交互にそれを果たした。**B3b 以降も 2 系統を維持する。**
 
 *%12 — 2026-07-14。F-8 は本 arc の締めくくり。Rs 上程の「assert が守る」主張は F-8.1 のとおり *当時は* 保証されていなかった — 訂正済 (修正 landed、ただし F-8.3 の identifiability 表で実証するまで「発火する」とは主張しない)。*
+
+### F-8.6 (追補 — artifact provenance の再 pin、%10 実測 → %12 裁定)
+
+**規則: artifact を生成した code を訂正 commit が触る場合、artifact は再生成して pin を張り直す — さもなくば artifact を明示的に retire する。**
+
+**実例 (B3a)**: bank_capture.npz の meta は `route_executor_sha256 = _self_sha256()` を埋め込む。訂正 commit の途中で **banked meta = d8a1a3c8… vs on-disk module = 37041dac… ⇒ MATCH False** (%10 実測) ⇒ **「final code == final run」アンカーが失効**。しかも A-2 (BANK_OUT) の fix は **capture 側 code** を触るので「builder 側だけだから artifact に影響しない」も成立しない。
+⇒ **stale pin は「pin 無し」より悪い — 偽の同一性を *主張する* から。** = **F-8 class (生きているように見えて死んでいる計器)**。かつ **B3a の artifact は B3b の入力**ゆえ、濁すと **もう存在しない code が作った bank の上に build する**ことになる。
+
+**⭐ さらに「再走」を positive control に格上げする (裁定)**: 再走後、**新旧 npz の *データ配列* が byte-identical (meta/sha のみ差分) であることを assert** せよ。
+- **一致** = 「guard/validation の訂正は、捕捉されるデータを一切変えていない」の **実証** (単なる「再走した」が「訂正が副作用を持たなかった証明」に格上げされる)。
+- **不一致** = **発見** (訂正が capture 挙動を変えた) → **STOP して調査**。
+⇒ **どちらに転んでも情報が出る leg** = 本 arc の規律 (「PASS する DoD」でなく「間違いを落とす DoD」) の適用。
+
+*%12 — 2026-07-14。%10 が commit 前の再走で 2 連続 in-flight 破綻を捕捉 (arity TypeError / import json 欠落 NameError) — 「commit 前に必ず再走」を B3b 以降も維持。*
