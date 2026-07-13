@@ -381,3 +381,12 @@ ERRATUM-B (Dahl/body_q_prev 不在 → 「capture 不能・経験 leg が唯一�
 ⇒ **規律: 訂正は「実際に検証した channel / domain」に scope を限定せよ。正しい訂正でも over-generalize すると隣接する正しい要件を消す。**
 
 *%12 — 2026-07-13。%9 C-β = 全面受諾。Rs 承認数値不変。INVARIANTS 不触。*
+
+### E-4 (追補 2026-07-13 22:5x、%9 B3-verify — **cross-mode bar transfer の禁止**)
+
+**10.407mm の健全域 band は B2 leg8 = FF mode の実測値である。** これを IK/residual rollout の leg に当てるのは **cross-mode bar transfer** であり、ERRATUM-A (10× index) / B2 CRIT と同じ class の誤り (**IK mode の baseline は未測定**)。
+⇒ **規律: div band を IK mode の leg で使うなら、先に IK-mode matched control (同 mode の nominal rollout) で band を実測してから。FF 由来の band を流用しない。**
+⇒ leg 分解の最終形: **L5a = FF mode** (cable / hidden-state の K-step growth + null-bank negative control をここに置く) / **L5b = IK mode** (arm-bank + 統合; div band を用いる場合は IK-mode matched control が precondition)。
+なお **`_per_world_fk_jq` 未設定の signature は 373-444mm 級**と巨大 (%9 実測) ゆえ、arm-bank leg に growth metric は不要 — **直接 assert (arm_q/qd == bank ∧ fk_jq 設定済) で十分**。
+
+*%12 — 2026-07-13。%9 double-key: golden G-phase Σ=7707 EXACT + 別系統 (B2 leg8 cablediag の phase 遷移 113/173/259 == 導出 t_1/t_2/t_3) で ceil 整列も確証。*
