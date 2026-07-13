@@ -20,6 +20,7 @@ echo "===== LEG 1: Rs-LOCK assert (run_route byte-identical vs HEAD) ====="
 $PY "$OUT/leg1_lock_assert.py" || FAIL=1
 
 echo "===== LEG 2: producer capture (BANK_CAPTURE=1 + DEMO_RECORD=1, x0_y0, cuda:0) ====="
+# keep the pre-fix capture: leg7 compares against it (%12 positive control). Never rm it.
 rm -f "$OUT/bank_capture.npz"
 BANK_CAPTURE=1 BANK_OUT="$OUT/bank_capture.npz" CUDA_VISIBLE_DEVICES=0 MUJOCO_GL=egl \
   $PY thread_isaac_lab/scripts/test_routeexec_byte_repro.py \
@@ -28,6 +29,9 @@ grep -E "npz sha256 EXACT|BANK-CAPTURE" "$OUT/leg2_capture.log" | head -5
 # read-only proof: the capture run's OWN recording must still be byte-identical to the golden
 grep -qE "npz sha256 EXACT \(byte-id\) : 1/1" "$OUT/leg2_capture.log" || FAIL=1
 [ -f "$OUT/bank_capture.npz" ] || { echo "[LEG2] capture npz MISSING"; FAIL=1; }
+
+echo "===== LEG 7: capture invariance (guard fixes must not change captured DATA) ====="
+$PY "$OUT/leg7_capture_invariance.py" || FAIL=1
 
 echo "===== LEG 3: qd substep-index readout + identifiability table ====="
 $PY "$OUT/leg3_qd_substep_readout.py" "$OUT/bank_capture.npz" || FAIL=1

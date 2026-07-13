@@ -23,7 +23,21 @@ route-executor state-bank: ⑦(a) restore-fidelity (comp2) + W1-B3a bank v2 buil
   [WORLD-SLICE] world_ids=None -> ALL worlds restored -> PASS
   [B3a bank-v2] PASS: boundaries {1: (1124, 113, 1129), 2: (1724, 173, 1729), 3: (2584, 259, 2589), 4: (6181, 619, 6189), 5: (6801, 681, 6809)} / cable q+qd carried / arm_qd exact-zero / pin banked
   [B3a bank-v2 guards] PASS: non-canonical sha / missing sha / zero-frame phase / frame skew / dead-mirror eq_active all raise
+  [B3a guard-identifiability]   (a) provenance ABSENT -> RAISE
+  [B3a guard-identifiability]   (b) provenance CORRUPT -> RAISE
+  [B3a guard-identifiability]   (b2) layout_hash ABSENT -> RAISE
+  [B3a guard-identifiability]   (c) DIFFERENT layout (B3-alpha) -> RAISE
+  [B3a guard-identifiability]   (c2) backend FLIP -> RAISE
+  [B3a guard-identifiability]   (d) matching layout -> PASS
+  [B3a guard-identifiability]   (d2) run that never pinned -> PASS (asserted, not inferred)
+  [B3a guard-identifiability]   (d3) witness field ABSENT -> RAISE (not silently 'no pin')
+  [B3a guard-identifiability]   (e) CONSTANT warmstart, no mechanism -> RAISE
+  [B3a guard-identifiability]   (e2) CONSTANT warmstart + declared mechanism -> PASS
+  [B3a guard-identifiability] PASS: every named guard FIRES; the legitimate cases pass and are distinguished
+[BANK-CAPTURE] ⚠ DISARMED at frame 0: RuntimeError: simulated solver fault
+[BANK-CAPTURE] ⚠ NOT WRITING (disarmed): RuntimeError: simulated solver fault
+  [B3a self-disarm] PASS: fault swallowed + disarmed LOUD + no truncated write (RuntimeError: simulated solver fault)
   [B3a null-control] PASS: real bank accepted AND null (cable_qd=0) bank rejected at all k=[1, 2, 3, 4, 5]
 ------------------------------------------------------------------------------
-RESULTS: {'synthetic': True, 'nominal': True, 'world_slice': True, 'bank_v2': True, 'null_control': True}
+RESULTS: {'synthetic': True, 'nominal': True, 'world_slice': True, 'bank_v2': True, 'guard_identifiability': True, 'self_disarm': True, 'null_control': True}
 ⑦(a) restore-fidelity + B3a bank v2: PASS

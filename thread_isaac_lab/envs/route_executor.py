@@ -407,10 +407,11 @@ def build_state_bank_from_recording(recording, n_world, arm_off=0, phases=(1, 2,
         ``{k: banked}`` for each requested ``k`` that has a boundary frame in the recording (a phase absent
         from the recording is skipped, so ``reset_to_phase(k)`` falls back to the env reset for it).
     """
-    assert 0 not in phases, (
-        "phase-0 must NEVER be banked (env-authoritative reset; reset_to_phase k==0 is a structural "
-        "no-op -- W1-B1 %9 R-3 double-guard)"
-    )
+    if 0 in phases:  # A-4: raise, not assert -- an invariant that `python -O` deletes is not an invariant
+        raise ValueError(
+            "phase-0 must NEVER be banked (env-authoritative reset; reset_to_phase k==0 is a structural "
+            "no-op -- W1-B1 %9 R-3 double-guard)"
+        )
     arm_q = np.asarray(recording["arm_q"], dtype=np.float32)
     grip = np.asarray(recording["grip_cmd"], dtype=np.float32)
     phase = np.asarray(recording["phase_id"]).astype(np.int64)
@@ -472,7 +473,8 @@ def bank_boundaries_from_recording(recording, phases=(1, 2, 3, 4, 5)):
             no-op on a missing bank -- lets a NON-canonical recording produce a degenerate bank whose
             fork restores nothing. Fail loud instead.
     """
-    assert 0 not in phases, "phase-0 must NEVER be banked (env-authoritative reset)"
+    if 0 in phases:  # A-4: raise, not assert -- an invariant that -O deletes is not an invariant
+        raise ValueError("phase-0 must NEVER be banked (env-authoritative reset)")
     phase = np.asarray(recording["phase_id"]).astype(np.int64)
     uncovered = {int(p) for p in np.unique(phase)} - set(_RECORDED_PHASE_TO_G)
     if uncovered:
@@ -530,23 +532,35 @@ def resolve_pin_eq_index(eq_identity, mjc_seat_body, eq_connect_type=None):
         mjc_seat_body: the pinned body as a MUJOCO body id.
         eq_connect_type: mjEQ_CONNECT's enum value; read from mujoco when omitted.
 
+    Every failure path RAISES. It previously returned ``None`` on an import failure, on "no such eq", and on an
+    ambiguous match -- delegating fail-loud to the caller by comment ("Either way the caller must fail loud").
+    That is a CONTRACT, not a MECHANISM: it holds only while every caller remembers. And since this resolver
+    guards the clip pin, a quiet ``None`` reads as "this run has no pin" -- the failure is indistinguishable from
+    the legitimate case (%9 S-1/S-2, 2026-07-14). Fail-loud is now the mechanism.
+
     Returns:
-        The eq index in THAT layout, or None when no single CONNECT eq binds that body to the world.
+        The eq index in THAT layout. Raises when it cannot be resolved unambiguously.
     """
     if eq_connect_type is None:
         try:
             import mujoco
 
             eq_connect_type = int(mujoco.mjtEq.mjEQ_CONNECT)
-        except Exception:  # noqa: BLE001
-            return None
+        except (ImportError, AttributeError) as e:  # narrow: a missing/moved enum must not read as "no pin"
+            raise ValueError(f"cannot read mjEQ_CONNECT from mujoco ({e}) -- refusing to resolve the pin eq") from e
+    if not eq_identity:
+        raise ValueError("empty eq_identity table -- the pin eq cannot be resolved (provenance is missing?)")
     hits = [
         i
-        for i, e in enumerate(eq_identity or [])
+        for i, e in enumerate(eq_identity)
         if int(e[0]) == int(eq_connect_type) and int(e[1]) == int(mjc_seat_body) and int(e[2]) == 0
     ]
     if len(hits) != 1:
-        return None  # 0 = absent in this layout; >1 = ambiguous. Either way the caller must fail loud.
+        raise ValueError(
+            f"pin eq for mjc body {mjc_seat_body} resolved to {len(hits)} candidates ({hits}), expected exactly 1. "
+            "0 = this layout has no such CONNECT-to-world eq (a different scene?); >1 = ambiguous. Either way "
+            "activating a guessed index would pin the WRONG constraint."
+        )
     return hits[0]
 
 
@@ -558,11 +572,28 @@ def _assert_pin_index_spaces(prov, pin_eqid, pin_seat_newton):
     carries the worldbody at 0. Rather than hardcode "+1", the offset is DERIVED from the producer's own eq table
     (the obj1 of the eq the producer actually activated) and then verified by round-tripping the resolver.
 
-    Returns the MuJoCo body id of the seat, or None when the run never pinned / has no provenance (unit fixtures).
+    "This run never pinned" (k=1,2) is legitimate and returns None. "A pin WAS recorded but provenance carries no
+    eq table" is NOT -- it means the layout/identity guard would be silently skipped, so it raises. Collapsing the
+    two into one quiet ``None`` is the fail-silent class this chunk exists to burn (%12 adversarial pass).
+
+    Returns the MuJoCo body id of the seat, or None when the run never pinned (or, for unit fixtures, when no
+    provenance exists AND no pin was recorded).
     """
-    eq_ident = ((prov or {}).get("layout") or {}).get("eq_identity") or []
-    if pin_eqid is None or pin_seat_newton is None or not eq_ident:
-        return None
+    if pin_eqid is None or pin_seat_newton is None:
+        return None  # asserted upstream: this run genuinely never pinned -- nothing to resolve
+    # NO `or {}` CHAIN HERE. That chain was the MECHANISM of the silent absorption (%9 S-3): it turned a missing
+    # provenance into an empty table, and an empty table into a quiet None that read as "no pin". Each level is
+    # now checked explicitly, and a pin that was recorded but cannot be grounded RAISES.
+    if prov is None:
+        return None  # synthetic unit fixture: no provenance at all (the real discharge is leg 6)
+    layout = prov.get("layout")
+    eq_ident = layout.get("eq_identity") if isinstance(layout, dict) else None
+    if not eq_ident:
+        raise ValueError(
+            f"the recording pins eq {pin_eqid} (body {pin_seat_newton}) but the capture's provenance carries no "
+            "eq_identity table -- the identity/layout guard would be SILENTLY skipped. Re-capture with a "
+            "route_executor that records provenance (see _mj_solver_provenance)."
+        )
     if not 0 <= pin_eqid < len(eq_ident):
         raise ValueError(f"recorded pin_eqid {pin_eqid} is outside the captured eq table (neq={len(eq_ident)})")
     mjc_seat = int(eq_ident[pin_eqid][1])
@@ -583,19 +614,76 @@ def _assert_pin_index_spaces(prov, pin_eqid, pin_seat_newton):
     return mjc_seat
 
 
-def _capture_provenance(capture):
-    """The capture's recorded substrate identity (``None`` for the synthetic unit fixtures, which have no meta).
+def assert_bank_matches_live(bank_prov, live_prov):
+    """B3b restore-side guard: a bank is restorable ONLY into the substrate + model layout it was captured on.
 
-    The restore side (B3b) asserts this against the LIVE env solver and refuses a mismatch -- see
-    :func:`_mj_solver_provenance` for why a bank is backend-local.
+    This is the F-6 mandate implemented as a MECHANISM (spec sec19 F-8.3). It must RAISE for:
+      (a) a bank with NO provenance          -- the guard cannot run, so it must not silently pass
+      (b) a bank with a HOLLOW provenance    -- ditto (layout_hash absent)
+      (c) a bank from a DIFFERENT layout     -- e.g. bank neq=46 (producer, 40 pin eqs + 6 structural) restored
+                                                into the RL env's neq=6. That is B3-alpha itself, and it is the
+                                                case %9 had claimed was "protected by a fail-loud assert" --
+                                                a claim that did NOT hold while provenance could go quietly None.
+    and PASS for a legitimate match. ``bank[k]["provenance"]`` supplies the first argument;
+    :func:`_mj_solver_provenance` on the live env solver supplies the second.
+    """
+    if not bank_prov or not bank_prov.get("layout_hash"):
+        raise ValueError(
+            "bank carries no layout_hash -- the backend/layout guard CANNOT RUN, so the restore is refused. "
+            "A guard that cannot fire must never read as a guard that passed (spec sec19 F-8)."
+        )
+    if not live_prov or not live_prov.get("layout_hash"):
+        raise ValueError("live solver provenance is missing -- refusing to restore a bank we cannot check against")
+    for key in ("use_mujoco_cpu", "solver_class", "newton_version", "mujoco_version"):
+        if bank_prov.get(key) != live_prov.get(key):
+            raise ValueError(
+                f"BACKEND MISMATCH on {key!r}: bank={bank_prov.get(key)!r} vs live={live_prov.get(key)!r}. "
+                "Warm start and constraint ordering are backend-local; this bank is not portable here."
+            )
+    if bank_prov["layout_hash"] != live_prov["layout_hash"]:
+        b_neq = (bank_prov.get("layout") or {}).get("neq")
+        l_neq = (live_prov.get("layout") or {}).get("neq")
+        raise ValueError(
+            f"LAYOUT MISMATCH: bank layout_hash={bank_prov['layout_hash'][:12]}... (neq={b_neq}) vs "
+            f"live={live_prov['layout_hash'][:12]}... (neq={l_neq}). The banked eq/constraint indices do not "
+            "address the same model. Restoring anyway would activate a DIFFERENT constraint -- physically wrong "
+            "state, silently. (This is B3-alpha: the producer carries per-body clip-pin eqs the RL env does not.)"
+        )
+
+
+def assert_bank_matches_solver(banked, solver, scene_info=None):
+    """Convenience wrapper: check a banked phase against the LIVE solver (see :func:`assert_bank_matches_live`)."""
+    assert_bank_matches_live(banked.get("provenance"), _mj_solver_provenance(solver, scene_info))
+
+
+def _capture_provenance(capture, required):
+    """The capture's recorded substrate identity. RAISES when it is required but missing or unparseable.
+
+    .. warning::
+       This used to swallow a parse failure into ``None`` -- and provenance carries the ``layout_hash``, which
+       IS the F-6 guard. A silent ``None`` therefore SILENTLY DISABLES the guard built to stop silent
+       corruption: the very fail-silent class this chunk exists to burn, surviving inside the guard's own entry
+       point (%12 adversarial pass, 2026-07-14). So a real capture must carry provenance or the build fails
+       loudly. ``required=False`` is only for the synthetic unit fixtures, which legitimately have no meta.
     """
     meta = capture["meta"] if "meta" in getattr(capture, "files", capture) else None
     if meta is None:
+        if required:
+            raise ValueError(
+                "capture carries no meta -- provenance (backend_id + layout_hash) is REQUIRED for a real bank. "
+                "Without it the restore cannot detect a backend flip or a scene-layout change (spec sec18 F-6)."
+            )
         return None
     try:
-        return json.loads(str(np.asarray(meta).item())).get("provenance")
-    except (ValueError, TypeError, AttributeError):
-        return None
+        prov = json.loads(str(np.asarray(meta).item())).get("provenance")
+    except (ValueError, TypeError, AttributeError) as e:
+        raise ValueError(f"capture meta is unparseable ({e}) -- refusing to build a bank with no provenance") from e
+    if required and not (prov or {}).get("layout_hash"):
+        raise ValueError(
+            "capture provenance carries no layout_hash -- the F-6 guard would be silently disabled. "
+            "Re-capture with a route_executor that records provenance (see _mj_solver_provenance)."
+        )
+    return prov
 
 
 def _assert_eq_active_live(eqa, recording, pin):
@@ -607,10 +695,20 @@ def _assert_eq_active_live(eqa, recording, pin):
     hidden state from a merely present one. Without it the bank silently restores "pin OFF" at every k whose
     boundary lies past the pin onset (measured: frames 2544+ => k=3,4,5), which is a FORK-1-class mismatch.
 
-    Skipped only when the recording never pinned (``pin_eqid`` all -1) -- then there is nothing to witness.
+    "This run never pinned" is a LEGITIMATE condition (k=1,2 sit before the pin onset) -- but it is ASSERTED,
+    not assumed: the early return below fires only after confirming ``pin_active`` really is all-zero. Collapsing
+    it with "the recording is missing its pin fields" into one silent ``None`` would let a broken contract pass
+    as a quiet no-op, which is the fail-silent class this chunk exists to burn (%12 adversarial pass).
     """
-    if pin is None or "pin_eqid" not in getattr(recording, "files", recording):
-        return None
+    fields = getattr(recording, "files", recording)
+    if pin is None or "pin_eqid" not in fields:
+        raise ValueError(
+            "recording carries no pin_active/pin_eqid witness -- the eq_active capture then has NOTHING "
+            "independent to check against, and a dead-mirror bank would pass silently (spec sec18 F-7.4). "
+            "The canonical recording has both fields; a recording without them is not bankable."
+        )
+    if not (pin > 0).any():
+        return None  # asserted: this run genuinely never pinned -> there is nothing to witness
     eqid_col = np.asarray(recording["pin_eqid"]).astype(np.int64).ravel()
     active = eqid_col[pin > 0]
     if active.size == 0:
@@ -714,7 +812,20 @@ def build_state_bank_v2_from_capture(
     bounds = bank_boundaries_from_recording(recording, phases=phases)
     pin = np.asarray(recording["pin_active"]).astype(np.int64) if "pin_active" in recording else None
     pin_eq_lag = _assert_eq_active_live(eqa, recording, pin)
-    prov = _capture_provenance(capture)
+    prov = _capture_provenance(capture, required=require_canonical)
+    # A-1 (%10 audit): the liveness gate covered eq_active but NOT warmstart. Today _mj_hidden_state selects a
+    # single buffer with no fallback, so both fields come from the same live source -- but that is an argument
+    # from the current code, not a check, and it evaporates the moment a field is added or the selection changes.
+    # A constant warm start is only admissible with a declared mechanism (mjDSBL_WARMSTART); otherwise the buffer
+    # is suspect. Same shape as leg 6's per-field gate, enforced where the bank is actually built.
+    if qws.size and not np.any(qws != qws[0]):
+        if not (prov or {}).get("warmstart_disabled_by_flag"):
+            raise ValueError(
+                f"qacc_warmstart is CONSTANT across all {qws.shape[0]} frames but mjDSBL_WARMSTART is not set -- "
+                "a live warm start varies (measured on the canonical run: 559764/562611 nonzero, absmax 1.1e6). "
+                "A constant one means the capture read a buffer the solver never steps (the dead-mirror defect). "
+                "Either the mechanism explains it (declare the flag) or the capture is wrong."
+            )
     # The pin's IDENTITY key (not its index): the restore re-resolves the eq from this in the env's own layout
     # (:func:`resolve_pin_eq_index`), and asserts the bank's layout_hash first. Index alone is layout-fragile.
     pin_seat = None
@@ -1015,6 +1126,22 @@ class BankCapture:
         out = {k: np.stack(v) for k, v in self._buf.items()}
         out["frame_idx"] = np.arange(self._n, dtype=np.int64)
         meta = dict(self._meta, frames=self._n, mj_backend=self._backend)
+        # A-2 (%10 audit): the byte-repro driver runs one SUBPROCESS PER CELL with a per-cell DEMO_OUT, but
+        # BANK_OUT is a single path -- so a multi-cell capture would have every cell write the SAME npz
+        # (last-writer-wins), and the file would still exist, so the leg's existence check would PASS on a
+        # silently wrong artifact. Harmless while only x0_y0 is captured; it fires the moment the multi-cell
+        # option is turned on. Refuse to overwrite a capture taken from a DIFFERENT cell.
+        if os.path.exists(self._out):
+            try:
+                prior = json.loads(str(np.asarray(np.load(self._out, allow_pickle=True)["meta"]).item()))
+            except Exception:  # noqa: BLE001  (an unreadable prior file is not evidence of a collision)
+                prior = None
+            if prior and prior.get("cell_env") and prior["cell_env"] != meta["cell_env"]:
+                raise RuntimeError(
+                    f"BANK_OUT collision: {self._out} already holds a capture from cell {prior['cell_env']}, "
+                    f"but this run is cell {meta['cell_env']}. A multi-cell capture needs a per-cell BANK_OUT -- "
+                    "overwriting would leave a silently wrong artifact that still passes the existence check."
+                )
         Path(self._out).parent.mkdir(parents=True, exist_ok=True)
         np.savez_compressed(self._out, meta=json.dumps(meta), **out)
         shapes = {k: tuple(v.shape) for k, v in out.items()}

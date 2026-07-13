@@ -108,9 +108,9 @@
   "n_frames": 7706,
   "torn_tail": false,
   "quat_convention": "xyzw (warp)",
-  "head_sha": "f677a1ec6988c5fe6f11dbeae96710c5f80a4551",
+  "head_sha": "7e131be9dd4e362f9d4a519d12931f1496db2145",
   "git_dirty": true,
-  "git_diff_sha256": "f71910700b0528c8ec67f3a42db99d4e9bc6816bd70cc7a8a2d53ee8615caf83",
+  "git_diff_sha256": "9940d4ce54b5faef1bf918820cea746be5809d9f6c4fcca50fdf60ca018f2516",
   "as_run_sha256": {
     "test_newton_clip_routing.py": "c90262067da05c4a9863f7a88d71c0be26c07985da2b2f1c87f7f273c19d5f38",
     "route_demo_recorder.py": "6eace0806cd9ccb65884d2c01b7cfb7ba9cb8b7ea7e7f34e04a4a2eefbda768e",

@@ -14,7 +14,7 @@
    "CLIP2_X": "0.40",
    "CLIP2_Y": "0.000"
   },
-  "route_executor_sha256": "d8a1a3c83813943cb3f8ed4e73442c774b0805b07da21275d95fca4826f13b33",
+  "route_executor_sha256": "449cee7dc2cc14e0715a3758168026c15245b15877f1adee33b6b2d86c169114",
   "provenance": {
    "solver_class": "SolverMuJoCo",
    "use_mujoco_cpu": true,

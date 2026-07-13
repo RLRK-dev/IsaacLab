@@ -29,6 +29,7 @@ Run: ``/home/rlrk/env_isaaclab7/bin/python thread_isaac_lab/scripts/test_routeex
 from __future__ import annotations
 
 import hashlib
+import json
 import sys
 from pathlib import Path
 
@@ -293,9 +294,44 @@ def _synthetic_capture(rec, live_eq=True):
     return {
         "joint_q": q,
         "joint_qd": qd,
-        "qacc_warmstart": np.zeros((f, nv), dtype=np.float32),
+        # varies over the run: a CONSTANT warm start is the dead-mirror signature (A-1 gate rejects it)
+        "qacc_warmstart": (qd * 100.0).astype(np.float32),
         "eq_active": eq,
+        "meta": _synthetic_meta(eqid, eq.shape[1]),
     }
+
+
+def _synthetic_meta(eqid, neq, layout_hash="synthetic-layout-hash", drop=None):
+    """A meta/provenance block for the fixture, mirroring the real capture's layout.
+
+    Until this existed the fixture had NO meta, so ``_capture_provenance`` returned None and
+    ``_assert_pin_index_spaces`` skipped -- i.e. the index-space round-trip assert was VACUOUS in the units and
+    only leg 6 (on the real capture) ever exercised it (%10 audit A-3). With provenance here, the unit actually
+    runs the guard, and the negative fixtures below can prove the guard FIRES (%9: a guard that never fires is
+    indistinguishable from a guard that cannot fire).
+
+    ``drop`` injects the negative cases: "meta" (no meta at all), "corrupt" (unparseable), "layout_hash" (present
+    but hollow -- the F-6 guard would be silently disabled).
+    """
+    # eq table mirroring the producer: one CONNECT-to-world per cable body, then the structural eqs.
+    # The pin eq's obj1 is the MuJoCo body id = newton id + 1 (worldbody at 0), so eq `eqid` -> mjc body eqid+29
+    # reproduces the measured pairing (eq 27 <-> mjc 56 <-> newton 55).
+    connect = int(getattr(__import__("mujoco").mjtEq, "mjEQ_CONNECT", 0))
+    eq_identity = [[connect, i + 29, 0] for i in range(neq - 6)] + [[connect, i, 1] for i in range(6)]
+    prov = {
+        "solver_class": "SolverMuJoCo",
+        "use_mujoco_cpu": True,
+        "newton_version": "synthetic",
+        "mujoco_version": "synthetic",
+        "warmstart_disabled_by_flag": False,
+        "layout": {"nq": 74, "nv": 73, "neq": neq, "eq_identity": eq_identity},
+        "layout_hash": layout_hash,
+    }
+    if drop == "layout_hash":
+        prov.pop("layout_hash")
+    if drop == "corrupt":
+        return "{not valid json"
+    return json.dumps({"frames": 0, "mj_backend": "mj_data", "provenance": prov})
 
 
 def test_bank_v2_builder():
@@ -381,12 +417,179 @@ def test_bank_v2_builder():
     return True
 
 
-def test_bank_v2_null_control():
-    """ERRATUM-C: the qd channel must have DISCRIMINATING power -- a null bank (cable_qd=0) must be rejected.
+def test_guard_identifiability():
+    """⭐ Do the GUARDS actually FIRE? (spec sec19 F-8.3 -- the arc's last lesson.)
 
-    The B3 v1 plan's bars passed a fully qd-zeroed bank (measured 3.4-44x margin), i.e. they could not tell
-    bank v2 from bank v1. This unit encodes the discrimination requirement itself: build a null bank and show
-    the FD consistency check (the only leg with an independent qd ground truth) rejects it.
+    We spent this chunk proving the DATA was live (leg 6's positive control). Nobody proved the GUARDS were
+    live. And they were not: provenance could go quietly None through a broad ``except``, an ``or {}`` chain and
+    three silent early-returns -- and provenance CARRIES the layout_hash, which IS the guard. So the assurance
+    "bank neq=46 vs env neq=6, therefore the layout assert BLOCKS" did not actually hold (%9 withdrew it).
+
+    ⭐ A guard that never fires is indistinguishable from a guard that CANNOT fire. This is leg 3's
+    identifiability method turned on the guards themselves: each named failure must RAISE, and the one
+    LEGITIMATE case must PASS -- and be distinguished from the failures rather than sharing their silence.
+    """
+    if not NOMINAL_NPZ.is_file():
+        print("  [B3a guard-identifiability] SKIP")
+        return None
+    z = np.load(NOMINAL_NPZ, allow_pickle=True)
+    rec = {k: z[k] for k in ("arm_q", "grip_cmd", "phase_id", "pin_active", "pin_eqid", "pinned_body")}
+    sha = hashlib.sha256(NOMINAL_NPZ.read_bytes()).hexdigest()
+    cap = _synthetic_capture(rec)
+    eqid = int(np.unique(np.asarray(rec["pin_eqid"]).ravel()[np.asarray(rec["pin_active"]).ravel() > 0])[0])
+    neq = cap["eq_active"].shape[1]
+
+    def _raises(fn, why):
+        try:
+            fn()
+        except (ValueError, AssertionError):
+            return True
+        raise AssertionError(f"GUARD DID NOT FIRE: {why}")
+
+    rows = []
+    # (a) provenance ABSENT -> the guard cannot run -> must RAISE (never silently pass)
+    _raises(
+        lambda: rex.build_state_bank_v2_from_capture(
+            {k: v for k, v in cap.items() if k != "meta"}, rec, 1, recording_sha256=sha
+        ),
+        "(a) bank with NO provenance",
+    )
+    rows.append("(a) provenance ABSENT -> RAISE")
+    # (b) provenance CORRUPT (unparseable meta) -> must RAISE
+    _raises(
+        lambda: rex.build_state_bank_v2_from_capture(
+            dict(cap, meta=_synthetic_meta(eqid, neq, drop="corrupt")), rec, 1, recording_sha256=sha
+        ),
+        "(b) bank with CORRUPT provenance",
+    )
+    rows.append("(b) provenance CORRUPT -> RAISE")
+    # (b2) provenance present but HOLLOW (no layout_hash) -> the F-6 guard would be silently disabled
+    _raises(
+        lambda: rex.build_state_bank_v2_from_capture(
+            dict(cap, meta=_synthetic_meta(eqid, neq, drop="layout_hash")), rec, 1, recording_sha256=sha
+        ),
+        "(b2) provenance with NO layout_hash",
+    )
+    rows.append("(b2) layout_hash ABSENT -> RAISE")
+    # (c) DIFFERENT LAYOUT -- this IS B3-alpha: a producer bank (neq=46) into the RL env (neq=6).
+    bank = rex.build_state_bank_v2_from_capture(cap, rec, 1, recording_sha256=sha)
+    env_like = {
+        "solver_class": "SolverMuJoCo",
+        "use_mujoco_cpu": True,
+        "newton_version": "synthetic",
+        "mujoco_version": "synthetic",
+        "layout": {"neq": 6},
+        "layout_hash": "a-different-layout",  # the RL env: 6 structural eqs, ZERO clip-pin candidates
+    }
+    _raises(
+        lambda: rex.assert_bank_matches_live(bank[3]["provenance"], env_like),
+        "(c) producer bank restored into a DIFFERENT layout (B3-alpha)",
+    )
+    rows.append("(c) DIFFERENT layout (B3-alpha) -> RAISE")
+    # (c2) backend flip must also fire
+    _raises(
+        lambda: rex.assert_bank_matches_live(bank[3]["provenance"], dict(env_like, use_mujoco_cpu=False)),
+        "(c2) backend flip",
+    )
+    rows.append("(c2) backend FLIP -> RAISE")
+    # (d) the LEGITIMATE case must PASS -- and be distinguished from (a)/(b) rather than sharing their silence.
+    rex.assert_bank_matches_live(bank[3]["provenance"], bank[3]["provenance"])
+    rows.append("(d) matching layout -> PASS")
+    # (d2) a run that genuinely never pinned is legitimate: ASSERTED (pin_active all-zero), not inferred.
+    no_pin = {
+        **rec,
+        "pin_active": np.zeros_like(np.asarray(rec["pin_active"])),
+        "pin_eqid": np.full_like(np.asarray(rec["pin_eqid"]), -1),
+    }
+    b2 = rex.build_state_bank_v2_from_capture(cap, no_pin, 1, recording_sha256=sha)
+    assert b2[3]["pin_active"] == 0 and b2[3]["pin_seat_body_mjc"] is None, "no-pin run must bank cleanly"
+    rows.append("(d2) run that never pinned -> PASS (asserted, not inferred)")
+    # (d3) but a recording MISSING the witness field is NOT "no pin" -- it must RAISE.
+    _raises(
+        lambda: rex.build_state_bank_v2_from_capture(
+            cap, {k: v for k, v in rec.items() if k != "pin_eqid"}, 1, recording_sha256=sha
+        ),
+        "(d3) recording missing the pin witness field",
+    )
+    rows.append("(d3) witness field ABSENT -> RAISE (not silently 'no pin')")
+    # (e) A-1: a CONSTANT warm start is the dead-mirror signature -- admissible ONLY with a declared mechanism.
+    _raises(
+        lambda: rex.build_state_bank_v2_from_capture(
+            dict(cap, qacc_warmstart=np.zeros_like(cap["qacc_warmstart"])), rec, 1, recording_sha256=sha
+        ),
+        "(e) CONSTANT warmstart with no declared mechanism (dead-mirror signature)",
+    )
+    rows.append("(e) CONSTANT warmstart, no mechanism -> RAISE")
+    # (e2) ... and PASSES when the mechanism IS declared (mjDSBL_WARMSTART set).
+    meta_ws_off = json.loads(_synthetic_meta(eqid, neq))
+    meta_ws_off["provenance"]["warmstart_disabled_by_flag"] = True
+    rex.build_state_bank_v2_from_capture(
+        dict(cap, qacc_warmstart=np.zeros_like(cap["qacc_warmstart"]), meta=json.dumps(meta_ws_off)),
+        rec,
+        1,
+        recording_sha256=sha,
+    )
+    rows.append("(e2) CONSTANT warmstart + declared mechanism -> PASS")
+    for r in rows:
+        print(f"  [B3a guard-identifiability]   {r}")
+    print(
+        "  [B3a guard-identifiability] PASS: every named guard FIRES; the legitimate cases pass and are distinguished"
+    )
+    return True
+
+
+def test_capture_self_disarm():
+    """R1d: a capture fault must DISARM the capture, never kill the producer run -- and must say so LOUDLY.
+
+    Closes the roster blank %10 flagged (F-5): the self-disarm was implemented but had zero tests, which is the
+    same "promised unit absent" class that recurred in B1 and B2. The producer is the Rs-LOCKED reference run;
+    a bug in the (optional, flag-gated) capture must not be able to take it down. Equally, a capture that
+    silently stopped sampling would hand the builder a truncated bank -- so the disarm has to be loud, and a
+    capture-only run has no recorder counter to cross-check against.
+    """
+    cap = rex.BankCapture("/dev/null/not-writable", {"solver_backend": "mujoco"})
+
+    class _Boom:
+        """A solver whose hidden-state read raises -- the fault we must survive."""
+
+        use_mujoco_cpu = True
+
+        @property
+        def mj_data(self):
+            raise RuntimeError("simulated solver fault")
+
+    # sample() must SWALLOW the fault (producer survives), disarm, and record the reason.
+    cap.sample(_MockState(74, 73), _Boom(), {"vbd_control": _MockControl(73)})
+    assert cap._disarmed is not None, "a capture fault must disarm, not propagate into the producer"
+    assert "simulated solver fault" in cap._disarmed, f"disarm reason must be recorded: {cap._disarmed}"
+    assert cap._n == 0, "no frame may be counted from a faulted sample"
+    # once disarmed it stays disarmed (one-shot) and never writes a truncated npz.
+    cap.sample(_MockState(74, 73), _Boom(), {"vbd_control": _MockControl(73)})
+    assert cap._n == 0, "disarm must be one-shot -- a disarmed capture must not resume sampling"
+    cap.finalize()  # must NOT raise, and must not write (the path is unwritable on purpose)
+    print(f"  [B3a self-disarm] PASS: fault swallowed + disarmed LOUD + no truncated write ({cap._disarmed})")
+    return True
+
+
+def test_bank_v2_null_control():
+    """SYNTHETIC sanity echo for ERRATUM-C -- NOT the real discharge. Read the caveat before trusting it.
+
+    .. warning::
+       **This unit is CIRCULAR and cannot fail** (%10 audit F-4, 2026-07-14). ``_synthetic_capture`` derives its
+       ``joint_qd`` as a central difference of the recording, and the check below then compares that bank against
+       *the same central difference* -- so the "good" error is identically 0 by construction and the null error is
+       trivially 1.0. It exercises NO real capture channel. Worse, the 20% FD bar it leans on is the very
+       instrument this chunk RETRACTED (DEFECT-2: with SIM_SUBSTEPS=10 a position difference yields a frame-mean
+       velocity, so the bar is out of band at k=2/3 on real data and is structurally blind to a 1-substep error).
+
+       **The real discharge of ERRATUM-C is leg 3's identifiability table**, which runs the substep-index readout
+       against the REAL capture and shows the null bank rejected as degenerate, alongside seven other wrong banks
+       (``w1_b3a_dod_legs/leg3_qd_substep_readout.py``). This unit is kept only as a cheap CPU-side wiring echo --
+       it proves the builder plumbs a zeroed cable_qd through without crashing, and nothing more.
+
+    Original intent (retained for provenance): the B3 v1 plan's bars passed a fully qd-zeroed bank (measured
+    3.4-44x margin), i.e. they could not tell bank v2 from bank v1, so the discrimination requirement had to be
+    encoded somewhere. It is -- in leg 3, on real data, not here.
     """
     if not NOMINAL_NPZ.is_file():
         print("  [B3a null-control] SKIP")
@@ -422,9 +625,19 @@ def main():
     r_nom = test_nominal()
     r_ws = test_world_slice()
     r_v2 = test_bank_v2_builder()
+    r_gi = test_guard_identifiability()
+    r_sd = test_capture_self_disarm()
     r_nc = test_bank_v2_null_control()
     print("-" * 78)
-    results = {"synthetic": r_syn, "nominal": r_nom, "world_slice": r_ws, "bank_v2": r_v2, "null_control": r_nc}
+    results = {
+        "synthetic": r_syn,
+        "nominal": r_nom,
+        "world_slice": r_ws,
+        "bank_v2": r_v2,
+        "guard_identifiability": r_gi,
+        "self_disarm": r_sd,
+        "null_control": r_nc,
+    }
     hard = [v for v in results.values() if v is not None]
     verdict = all(hard)
     print(f"RESULTS: {results}")

@@ -1,0 +1,64 @@
+{
+ "what": "W1-B3a leg7: the guard corrections must not have changed any CAPTURED DATA (%12 positive control)",
+ "prefix_npz": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b3a_dod_legs/bank_capture_prefix.npz",
+ "new_npz": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b3a_dod_legs/bank_capture.npz",
+ "arrays": [
+  {
+   "array": "joint_q",
+   "shape": [
+    7707,
+    74
+   ],
+   "byte_identical": true
+  },
+  {
+   "array": "joint_qd",
+   "shape": [
+    7707,
+    73
+   ],
+   "byte_identical": true
+  },
+  {
+   "array": "grip_target",
+   "shape": [
+    7707,
+    73
+   ],
+   "byte_identical": true
+  },
+  {
+   "array": "qacc_warmstart",
+   "shape": [
+    7707,
+    73
+   ],
+   "byte_identical": true
+  },
+  {
+   "array": "eq_active",
+   "shape": [
+    7707,
+    46
+   ],
+   "byte_identical": true
+  },
+  {
+   "array": "frame_idx",
+   "shape": [
+    7707
+   ],
+   "byte_identical": true
+  }
+ ],
+ "all_arrays_byte_identical": true,
+ "meta_sha_changed_as_expected": true,
+ "meta_stable_fields": {
+  "frames": true,
+  "mj_backend": true,
+  "cell_env": true,
+  "cadence": true,
+  "dt": true
+ },
+ "PASS": true
+}

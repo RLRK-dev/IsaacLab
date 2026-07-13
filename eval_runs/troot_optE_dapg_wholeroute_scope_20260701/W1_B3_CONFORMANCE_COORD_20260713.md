@@ -20,7 +20,7 @@
 > - ⭐**教訓 (当方)**: `feedback-narrative-signal-not-established-fact-verify-on-disk` は**他者の narrative だけでなく、自分自身の commit にも適用される**。**自分が commit した内容も、主張する前に on-disk で検証せよ。** — 皮肉なことに、本 chunk 全体が「計器が生きているか先に測れ」の arc でありながら、**自分の commit という計器を測っていなかった。**
 
 **5体 verdict (全員着弾):** CC2 REVISE (CRIT1 = **artifact 取り違え → REFUTED**、他 MED/LOW 有効) / CC3 **CRIT (Rs-LOCKED)** / CC4 CRIT×4 / CC5 CRIT×1 / CC6 CRIT×2。**CC1 DECIDE = 全 finding ACCEPT (CC2-1/2 は実測で REFUTE、ただし hazard class は採用)**。
-**%12 ERRATUM 群 (本 v2.1 の SSOT):** §14 ERRATUM-B (955ff0648f、Dahl/body_q_prev = 非項目) / **§15 ERRATUM-C (aae9f78722、bar 2 本分離 + null-bank negative control を DoD 化)** / **§16 ERRATUM-D (a07b03ed69、mjWarp Data 露出 → warmstart は capture/restore 可能; 1mm bar は FORK-1 致死 seed の 6.8-50× 緩 → cable channel 再較正 + K-step growth leg; eq_active disposition 必須)** + 明確化 D (FD = consistency check) / E (FF mode leg は arm bank を構造的に検証不能)。
+**%12 ERRATUM 群 (本 v2.1 の SSOT):** §14 ERRATUM-B (955ff0648f、Dahl/body_q_prev = 非項目) / **§15 ERRATUM-C (aae9f78722、bar 2 本分離 + null-bank negative control を DoD 化)** / **§16 ERRATUM-D (a07b03ed69) ⚠**buffer 同定は §18 ERRATUM-F で SUPERSEDED — live buffer は CPU `mj_data`、mjw_data は dead mirror (F13/§9)。結論「capture/restore 可能」は不変** (旧文: mjWarp Data 露出 → warmstart は capture/restore 可能; 1mm bar は FORK-1 致死 seed の 6.8-50× 緩 → cable channel 再較正 + K-step growth leg; eq_active disposition 必須)** + 明確化 D (FD = consistency check) / E (FF mode leg は arm bank を構造的に検証不能)。
 **%9 C-α (22:23):** hidden state は消えたのでなく**移動** (mjWarp Data) / bar は FORK-1 seed より緩い / 1-step → **K-step divergence-growth leg** へ昇格。
 
 ---
@@ -189,20 +189,79 @@ B3 = ①capture (lock-safe) ②bank v2 builder ③供給 API ④**fork write-set
 | envs/newton_route_env.py | `_fork_worlds_to_phase` + write-set 全数 + post-fork assert + bank v2 分岐 | ~110-150 |
 | envs/newton_skill_env_base.py | `seed_cable_joint_state` に `cable_qd` kwarg (additive、1 行 + doc) | ~10-15 |
 | envs/route_env_config.py | `get_cable_bank` を interface に宣言 (既定 None) | ~10 |
-| scripts/test_routeexec_state_bank.py | U1-U4 + FD validator | ~120-160 |
+| scripts/test_routeexec_state_bank.py | U1-U4 + ~~FD validator~~ (撤回) + **self-disarm unit** | ~120-160 |
 | scripts/test_routeexec_writesite.py | U5-U8 + guard 二腕化 | ~80-110 |
 | eval_runs/.../w1_b3_dod_legs/ | capture runner + L1/L2/L4/L5 + run_legs.sh | — |
 
 ⚠**見積 delta (%12 A2 条件)**: source ~500-655 (charter est 150-300)。**hard cap 800 内**。増分の主因 = 5体が要求した検証機構 (write-set 全数 / fork 入口 / post-fork assert / FD validator)。**実 diff が ~600 に迫れば分割を再提起**する → **分割実施済 (§7)**。
 
-⭐**B3a 実測 LOC (v3、build 完了時)**: `route_executor.py` **+570** / `test_routeexec_state_bank.py` **+163/−3** = **source 733 行 (hard cap 800 内、余裕 67)**。⚠**当初 est (~300-380) を大きく超えた**。増分の内訳は**全て検証機構** — DEFECT-1/-2 の fix と、%12 F-5/F-6 + %9 3-lens が要求した項: provenance (backend_id + layout_hash + eq_identity + eq_names) / `resolve_pin_eq_index` / `_assert_pin_index_spaces` (index-space round-trip) / `_assert_eq_active_live` (dead-mirror guard) / substep-readout leg + identifiability 表 / liveness leg。**機能面 (capture + builder) 自体は est 内**。B3b は別 chunk・別 cap。
+⭐**B3a 実測 LOC (v3、build 完了時)**: `route_executor.py` **+570** / `test_routeexec_state_bank.py` **+160/−3** (⚠v3 の +163 は誤記、%10 F-6 実測で訂正) = **source 730 行 (hard cap 800 内、余裕 70)**。⚠**当初 est (~300-380) を大きく超えた**。増分の内訳は**全て検証機構** — DEFECT-1/-2 の fix と、%12 F-5/F-6 + %9 3-lens が要求した項: provenance (backend_id + layout_hash + eq_identity + eq_names) / `resolve_pin_eq_index` / `_assert_pin_index_spaces` (index-space round-trip) / `_assert_eq_active_live` (dead-mirror guard) / substep-readout leg + identifiability 表 / liveness leg。**機能面 (capture + builder) 自体は est 内**。B3b は別 chunk・別 cap。
 
 ### R9 — LOUD + carries
 - **DR×curriculum 相互排他** (spec §6.2-5): bank = x0_y0 単一 cell ⇒ phase-k 開始は DR 被覆ゼロ。**機械 guard を R3f に置く** (宣言だけにしない)。
 - **Layer-B re-BASELINE** (spec §4.1 :77): bank v2 ON の挙動変更を Rs-visible に宣言。
 - **mjData warm-start (`qacc_warmstart`)** = 本基板の唯一の未 reset hidden state (CC3-4/CC6-7)。**既存 done-reset も同じ**ゆえ B3 新規 bug ではないが、**M10 の guard は L5 (1-step + 保持 probe) が唯一**と明記。
 - B4 へ: start-mix policy / recenter 実配線 / DR guard の解除条件。B5 へ: `_start_phase` の export。B7 へ: per-k 正制御 bar / bank-G3 摂動 leg / multi-cell option。
-- ⭐**B3b/B4 へ (v3 新規、spec F-7.3 に登録済)**: **幾何 anchor** — cross-layout bank の真の robust 形 (producer は :2352-2364 で **world 位置一致**で eq を探している)。今日は layout_hash assert が同一 layout を保証するので banked index で足りる。**未実装 = 意図的** (charter §7-4: 設計要否は %12 が B3b conformance で裁定)。
+- ⭐**B3b/B4 へ (v3 新規、spec F-7.3 に登録済)**: **幾何 anchor** — cross-layout bank の真の robust 形 (producer は :2352-2364 で **world 位置一致**で eq を探している)。**未実装 = 意図的** (charter §7-4: 設計要否は %12 が B3b conformance で裁定)。
+  ⛔~~今日は layout_hash assert が同一 layout を保証するので banked index で足りる~~ ⇒ ⚠**本前提は FALSE。§9 (B3-α) を読め**: env の neq=6 に対し bank の neq=46 ⇒ **layout は同一でなく、assert は「祝福」でなく「BLOCK」する。** (%10 F-2: 本行は **B3b/B4 が読む carries** ゆえ、撤回済の主張が素のまま残る最も危険な位置だった)
+
+---
+
+## §10. ⭐⭐⭐ F-8 — 「guard が発火することを、我々は一度も test していなかった」(spec §19、%9 発見 → %12 裁定)
+
+⭐**本 arc 最後の一枚。そして最も重い。**
+
+**%9 が自らの B3-α 保証を撤回しました。** 彼らは (そして私も conformance §9 で) こう書いていた: **「bank neq=46 vs env neq=6 ゆえ layout_hash assert は必ず発火し、physics 前に fail-loud で BLOCK する = assert が仕事をする」**。
+⚠**それは保証されていませんでした。** **`layout_hash` を運んでいるのは `provenance`** であり、その **provenance が無言で `None` になる経路が 5 本**あったからです ⇒ **比較対象が消える ⇒ assert は発火しない。**
+
+### §10.1 silent-path roster (%9 S-1〜S-5、全て HEAD 実読 → 本 commit で全滅)
+
+| # | site | 何を無言で潰していたか |
+|---|---|---|
+| **S-1** | `resolve_pin_eq_index` 冒頭 | mujoco import を **`except Exception` で丸呑み → return None** ⇒ enum が動いただけで resolver が無言で「pin 無し」を返す |
+| **S-2** | 同 `hits != 1` | return None。⚠**comment 自身が "Either way the caller must fail loud" と書きながら、fail-loud を caller 任せ**にしていた = **契約であって機構でない** (caller が増えれば破れる) |
+| **S-3** | `_assert_pin_index_spaces` | ⭐**3 連の `or` fallback (`(prov or {})` / `or {}` / `or []`)** が provenance 欠落を無言で吸い、`return None` が「pin 無し」と区別不能 |
+| **S-4** | `_capture_provenance` | **meta 欠落 → None / parse 失敗 → None / key 欠落 → None** の **3 経路が全部無言**。⚠**直上の docstring は「B3b の restore が これで mismatch を refuse する」と書いている** ⇒ **拒否機構そのものが、何かあれば None を返す関数の下流に在った** |
+| **S-5** | pin witness | **「`pin_eqid` 列が記録に無い」→ None** が **「never pinned」→ None** と同一視 (列欠落は「pin していない」ではなく「witness が無い」) |
+
+### §10.2 ⭐ 規律 (spec §19 F-8) — F-7.4 は guard 自身にも適用される
+
+> ⭐⭐ **一度も発火しない guard は、発火 *できない* guard と区別がつかない。**
+
+- leg6 = **データ**が live であることの positive control ✅
+- **guard が live であることの positive control = ゼロ** ❌ ← **一晩中 guard を建てながら、その guard が発火することを一度も試していなかった**
+
+### §10.3 ⭐ guard identifiability 表 (F-8.3、新設 unit `::test_guard_identifiability`)
+
+**leg3 で作った identifiability 8/8 の手法を、データでなく *guard* に当てる。** 実走結果 (全 PASS):
+
+| case | 期待 | 実測 |
+|---|---|---|
+| (a) provenance **欠落** の bank | RAISE | ✅ RAISE |
+| (b) provenance **破損** (parse 不能) | RAISE | ✅ RAISE |
+| (b2) **layout_hash 欠落** (guard が無言で無効化される) | RAISE | ✅ RAISE |
+| ⭐(c) **別 layout** の bank (**neq=46 → env neq=6 = B3-α そのもの**) | RAISE | ✅ RAISE |
+| (c2) **backend flip** | RAISE | ✅ RAISE |
+| (d) layout 一致 | PASS | ✅ PASS |
+| (d2) **pin 無し run** (k=1,2 = 正当) | PASS | ✅ PASS (**pin_active 全ゼロを assert してから**。推論された None にしない) |
+| (d3) **witness field 欠落** (「pin 無し」ではない) | RAISE | ✅ RAISE |
+| (e) **恒常 warmstart / 機構の宣言なし** (= dead-mirror signature) | RAISE | ✅ RAISE |
+| (e2) 恒常 warmstart + **機構を宣言** | PASS | ✅ PASS |
+
+⇒ **(a)(b)(d) が全部同じ無言 None を出していた状態から、「発火する guard」へ。** ⭐**B3-α の「fail-loud で守られている」保証は、これで初めて *保証*になりました。**
+
+### §10.4 実装 (本 commit)
+
+- `assert_bank_matches_live(bank_prov, live_prov)` **新設** = F-6 を**機構として**実装 (B3b の restore が呼ぶ)。backend_id 4 key + layout_hash の不一致で fail-loud。
+- `resolve_pin_eq_index`: broad except → **narrow + raise** / `hits != 1` → **raise** (契約でなく機構)。
+- `_assert_pin_index_spaces`: **`or` chain 撤去** (無言吸収の機構本体)、pin 記録済 ∧ eq_ident 空 → **raise**。
+- `_capture_provenance(capture, required)`: meta 欠落 / parse 失敗 / layout_hash 欠落 → **raise** (`required=False` は synthetic fixture のみ)。
+- `_assert_eq_active_live`: witness field 欠落 → **raise** / 「never pinned」は **pin_active 全ゼロを確認してから** return。
+- **A-1** (%10): builder に **warmstart liveness gate** (恒常 ∧ 機構未宣言 → raise)。
+- **A-2** (%10): **BANK_OUT 衝突 guard** — multi-cell capture は全 cell が同一 npz へ書き、**存在チェックは PASS するので silent wrong artifact になる** ⇒ 別 cell の capture を上書きしようとしたら raise。
+- **A-3** (%10): `_synthetic_capture` に **meta+provenance を持たせた** ⇒ **unit で初めて index-space round-trip assert が実際に走る** (従来 vacuous)。
+- **A-4** (%10): k0 不変量を `assert` → **`raise`** (`python -O` で消える不変量は不変量でない)。
+- **leg7 新設** (%12 F-8.7): ⭐**再走を positive control に格上げ** — 新旧 npz の **6 配列が byte-identical ∧ meta のみ差分**。⚠**npz は zip ゆえ file-sha は必ず変わる → array 単位で assert** (file-sha を使うと「計器が対象を測れない」class の再演)。
 
 ---
 
@@ -243,9 +302,9 @@ B3 = ①capture (lock-safe) ②bank v2 builder ③供給 API ④**fork write-set
 
 | id | 対象 | file::test |
 |---|---|---|
-| U1 | capture artifact (shape/meta/counter/disarm) | test_routeexec_state_bank.py::test_capture_artifact |
+| U1 | capture artifact (shape/meta/counter) | ⚠**test_capture_artifact は未実装** — shape/meta/counter は **leg3 の frame-alignment (L∞=0) + builder の width raise** が実質被覆 (%10 F-5)。⭐**disarm 部分は ::test_capture_self_disarm を新設して閉鎖** (%10 が「実装のみ・test ゼロ = 完全空白」と指摘した R1d を、B1/B2 で 2 度再発した promised-unit-absent class ゆえ実装した) |
 | U2 | bank v2 builder (整列・edge guard・k0・q EXACT・width/origin assert) | ::test_bank_v2_builder |
-| U3 | **FD qd validator** | ::test_bank_v2_qd_fd_validator |
+| ⛔U3 | ~~**FD qd validator**~~ | **DEFECT-2 で撤回済** (中心 FD + 20% bar = 構造的に不適)。代替 = **leg3 substep readout + identifiability 表** (実 capture 上)。~~::test_bank_v2_qd_fd_validator~~ は**約束を取り下げる** (%10 F-5: v3 の更新漏れ) |
 | U4 | restore-exact + per-world 配置 (joint_q_start 解決) | ::test_bank_v2_restore_world_slice |
 | U5 | **fork write-set 網羅** (`_reset_worlds` の per-world 書込を列挙 → 全て分類済) | test_routeexec_writesite.py::test_fork_write_set_coverage |
 | U6 | fork 入口の順序 + post-fork assert (7 項) | ::test_fork_entry_ordering |
@@ -312,14 +371,16 @@ B3 = ①capture (lock-safe) ②bank v2 builder ③供給 API ④**fork write-set
 **artifact = bank capture npz (B3a 出力 / B3b 入力)**
 
 ⚠**npz は repo に入れない (B2 precedent と同じ)**: `bank_capture.npz` (5.8MB) と byte-repro の `route_demo_raw.npz` (12MB×6) は **再生成可能** (byte-repro が決定性を証明済) ゆえ commit しない。**provenance は sha256 で pin**:
-- `bank_capture.npz` **sha256 = `312dc6389807c0202f3de84accafd6c9b64436ffb29cf6726805f7cbf17af770`** (final code / final run、2026-07-14 04:0x)
+- `bank_capture.npz` **sha256 = `07e4f682f396fc23455b0cf8b9b357131ca0c5587691c355c79bcea0dbdb64a1`** (**final code / final run 再確保後**、2026-07-14 05:0x。meta の `route_executor_sha256` = `449cee7d…` == on-disk module)
+  ⚠**旧 pin `312dc63898…` は pre-fix module (`d8a1a3c8…`) 由来 ⇒ 無効**。**stale pin は「無い」より悪い (偽の同一性を主張する)** ゆえ差替え。
+  ⭐**leg7 が「訂正は捕捉データを一切変えていない」を実証**: 新旧 npz の **6 配列すべて `np.array_equal` = True**、meta 差分は `route_executor_sha256` の 1 key のみ (frames/backend/cell_env/cadence/dt 不変)。⚠**npz は zip ゆえ file-sha は必ず変わる → array 単位で assert** (file-sha を使えば「計器が対象を測れない」class の再演)
 - 再生成 = `bash eval_runs/.../w1_b3a_dod_legs/run_legs.sh` の LEG2 (BANK_CAPTURE=1、cuda:0、~1 min)
 
 | key | dtype / shape | 意味 |
 |---|---|---|
 | `joint_q` | float32 [F, 74] | 全 frame の physics joint_q (arm 28 + cable 46) |
 | `joint_qd` | float32 [F, 73] | 全 frame の physics joint_qd (arm 28 + cable 45) |
-| `grip_target` | float32 [F, 4] | driver DOF の servo target ([L,L,R,R]) |
+| ⚠`grip_target` | **float32 [F, 73]** (❌ v2 の「[F, 4] driver DOF ([L,L,R,R])」は**誤り** — %10 F-3、実測 `(7707, 73)`) | ⚠**`vbd_control.joint_target_pos` の全 dof ベクトル**をそのまま dump したもの (route_executor.py:993-994)。⛔**`[:4]` で読むな — arm dof 0-3 を silent に読むことになる** (= 本 chunk が潰している index-space class そのもの)。driver は `_DRIVERS_LOCAL = [6, 10, 20, 24]` (L,L,R,R) で解決せよ。⚠**本 key は B3b の入力ではない (telemetry のみ)**: bank の `grip_target` は **記録の `grip_cmd` 由来** (builder :748) であって本 key を消費しない ⇒ **B3a は無傷**だが、seam 表の誤記は B3b に罠を仕掛けるので訂正 |
 | `phase_id` | int64 [F] | 記録 15-phase (G 分解は builder 側) |
 | `qacc_warmstart` | float32 [F, nv] | mjData warm-start (ERRATUM-D / B4=(a)) |
 | `eq_active` | int32 [F, neq] | 等式拘束 active flag (4-bar linkage + clip-pin、F11) |
@@ -388,6 +449,23 @@ clip-pin は **INVARIANT #5 の唯一の認可例外** (`log.md:6534`)。**RL en
 ⛔ ただし **同時に「REFUTED を『env に pin 不要』の根拠に流用しない」も守る** (prohibited.md)。**どちらの方向にも断定せず、Rs 裁定に上げる。**
 
 ⇒ **停止範囲 (%12 確定)**: **B3a = 影響なし (commit 可)** / **B3b = STOP (Rs 裁定まで着手しない)** / **B4-B7 も本件に依存**。BLOCKED_FOR_USER = `575069abe5`。
+
+### §9.3 ⭐ B3a artifact の disposition — 「artifact は valid / 用途は Rs 裁定に依存」(%12 04:45)
+
+⭐**層 3 (cable = 平面鎖ゆえ 5-clip 同時は配位空間の外、p5 発見・%12 検証) と B3a の妥当性は独立** (%12 CONFIRM):
+- 層 3 の主張は「**平面 cable は 3+ の千鳥 clip を同時に通せない**」。
+- **B3a の bank は既存 golden (= C1→C2 = *2-clip* route) の phase 分解**であり、**2 点は必ず 1 つの鉛直面に乗る** ⇒ **bank に入っている全 state は物理的に妥当な配位**。
+⇒ **B3a の capture 忠実性は層 3 の影響を受けない。**
+
+⚠**ただし artifact の *用途* は Rs 裁定に依存する (purpose dependency、%12 caveat)**:
+
+| Rs 裁定 | B3a artifact の扱い |
+|---|---|
+| **(C) 2-clip cap** | ✅ **B3a はそのまま有効** (再 capture 不要) |
+| **(A) substrate upgrade** (cable に曲げ DOF を与える等) | ⚠ **golden 自体を録り直す必要 ⇒ bank も再 capture** |
+| **(B) clip 配置変更** | ⚠ 同上 |
+
+⭐**そしてその時、本 chunk で建てた F-6 の `layout_hash` assert が正しく発火して「古い bank の silent 使用」を止める** (%12)。**建てた guard が、まさにその場面を守る形になる。** ⇒ 再 capture 手順 = `run_legs.sh` の LEG2 (BANK_CAPTURE=1、cuda:0、~1 min)。旧 bank の sha = `312dc6389807c020…`。
 
 ### §9.2 ⭐⭐ %9 の追走 (04:1x) — leg6 の index-space catch が「c1pin REFUTED」自体を開けた
 

@@ -3,6 +3,17 @@
 [leg1] PASS (Rs-LOCKED span untouched) -> /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b3a_dod_legs/leg1_lock_assert.json
 ===== LEG 2: producer capture (BANK_CAPTURE=1 + DEMO_RECORD=1, x0_y0, cuda:0) =====
   npz sha256 EXACT (byte-id) : 1/1
+===== LEG 7: capture invariance (guard fixes must not change captured DATA) =====
+[leg7] joint_q          (7707, 74)     byte-identical: True
+[leg7] joint_qd         (7707, 73)     byte-identical: True
+[leg7] grip_target      (7707, 73)     byte-identical: True
+[leg7] qacc_warmstart   (7707, 73)     byte-identical: True
+[leg7] eq_active        (7707, 46)     byte-identical: True
+[leg7] frame_idx        (7707,)        byte-identical: True
+[leg7] meta: route_executor_sha256 changed = True (d8a1a3c8 -> 449cee7d)
+[leg7] meta: frames/backend/cell_env/cadence/dt unchanged = True  {'frames': True, 'mj_backend': True, 'cell_env': True, 'cadence': True, 'dt': True}
+[leg7] PASS: every captured array is byte-identical; only the module sha moved => the corrections are guard/records-only and changed NO captured data
+[leg7] -> /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b3a_dod_legs/leg7_capture_invariance.json
 ===== LEG 3: qd substep-index readout + identifiability table =====
 [leg3] frame alignment  L_inf(capture.joint_q - recording.arm_q) = 0.000e+00  over 7707 frames
 [leg3] REAL cable_hinge  gain= 0.9809  substep m_hat= 9.81 (pred 10)  R2=0.9298  -> ACCEPT
@@ -33,7 +44,7 @@
 ===== LEG 4: CPU units (bank v2 builder + guards + null control) =====
   [B3a null-control] PASS: real bank accepted AND null (cable_qd=0) bank rejected at all k=[1, 2, 3, 4, 5]
 ------------------------------------------------------------------------------
-RESULTS: {'synthetic': True, 'nominal': True, 'world_slice': True, 'bank_v2': True, 'null_control': True}
+RESULTS: {'synthetic': True, 'nominal': True, 'world_slice': True, 'bank_v2': True, 'guard_identifiability': True, 'self_disarm': True, 'null_control': True}
 ⑦(a) restore-fidelity + B3a bank v2: PASS
 ===== LEG 5: producer 5-cell byte-repro (route_executor.py diff, surface conformance) =====
   npz sha256 EXACT (byte-id) : 5/5
