@@ -1,8 +1,8 @@
 # Canonical 動作工程表 v1 — 43-step 基準 restate + 現行 route mapping
 
-**Status: v1.0a-r5 — ✅ Rs-APPROVED(2026-07-11 00:15 verbatim「1 承認」、%12 bank `2b818b6f2f`; 承認世代 sha256 = `eb126d42…` @`764431035c`)+ 追補 r1(D-1 裁定執行)+ r2(§6 VN-1 reframe intake)+ 追補 r3(§1.2a 現行実測値統合、Rs 指示 #6、canonical json 値・工程 不変)+ 追補 r4(§6.2 clip-state predicate annotation intake、Rs teaching 2026-07-12、intake-logged only・enactment Rs-gated・canonical 値/工程 不変)+ 追補 r5(§1.4 anchor annotation layer、Rs 委任 anchor-alignment・p4⇄p5 joint decision、annotation-only・canonical INVARIANT、**✅ p4 verify PASS + #4 discharge-with-adjacent fold → 発効**)— 設計基盤 surface 発効。**
+**Status: v1.0a-r6 — ✅ Rs-APPROVED(2026-07-11 00:15 verbatim「1 承認」、%12 bank `2b818b6f2f`; 承認世代 sha256 = `eb126d42…` @`764431035c`)+ 追補 r1(D-1 裁定執行)+ r2(§6 VN-1 reframe intake)+ 追補 r3(§1.2a 現行実測値統合、Rs 指示 #6、canonical json 値・工程 不変)+ 追補 r4(§6.2 clip-state predicate annotation intake、Rs teaching 2026-07-12、intake-logged only・enactment Rs-gated・canonical 値/工程 不変)+ 追補 r5(§1.4 anchor annotation layer、Rs 委任 anchor-alignment・p4⇄p5 joint decision、annotation-only・canonical INVARIANT、**✅ p4 verify PASS + #4 discharge-with-adjacent fold → 発効**)+ **追補 r6(2026-07-14: §2 に D-5 = §2.1 clip↔groove body 対応の *幾何的不成立* を逸脱台帳登録 + §1.4 の同 restate 箇所に ERRATUM 掲示。annotation-only・canonical 値/工程/クリップ状態列 INVARIANT・⛔silent fix なし = faithful restate 維持、canonical 訂正は Rs 専権につき上程済)** — 設計基盤 surface 発効。**
 chain 完走: %10 author-review CONCUR(fold 済)→ %12 verify PASS(6 leg)→ Rs 承認。世代 chain: `bd1d9979f6`(v1.0 review 世代)→ `7f5d2716a9`(v1.0a fold)→ 本 status 反映 commit。**確定版 sha256 = 承認反映 commit の commit message に記録**(doc 内への自己 sha 埋込は self-reference で原理的に不成立のため、version⇄sha 束縛(P-3)の記録先は commit message / 台帳側とする)。
-**未決の現況:** D-1 = ✅ **裁定済**(Rs 承認 00:29、§2 参照)/ P-1・P-3 charter 化 = **未決**(組込保留、継続)。
+**未決の現況:** D-1 = ✅ **裁定済**(Rs 承認 00:29、§2 参照)/ **D-5 = ⛔ 未裁定**(§2.1 clip↔groove body の幾何的不成立、正 = ≥7 seg。**Rs 上程済・裁定待ち**、§2 参照)/ P-1・P-3 charter 化 = **未決**(組込保留、継続)。
 **Role note(Rs 2026-07-10 23:5x、%12 経由):** VT-DESIGN = **設計基盤(design-foundation)pane に昇格**。本 doc = 昇格第 1 成果物 = 設計 canonical surface(§5.6 governance 参照)。
 **Gate(%12 裁定 2026-07-10 23:27):** L2。**v1 = 5体 waive(loud 記録)** — 理由: v1 は banked 済み内容(43-step 表 = Rs 確定 2026-03-28 + MOTION STANDARD)の restate+mapping で新規設計判断を含まず、最終 gate = Rs 承認 flow 自体。代償 = %10 author-review を %12 verify 前に挿入。**⚠ v2(工程の実変更 = slot/z_grasp/摩擦の fold)= L3 相当 + 5体必須**(本 doc §6 参照)。
 Author: VT-DESIGN(w2:p5)。Drafted: 2026-07-10 23:32 JST。Node: T-ROOT-Verbal-Teaching-20260705。
@@ -107,6 +107,8 @@ canonical json 値(§1.2)とは別の**実測記録**。**canonical 原本(RL-Ro
   - **⭐discharge-with-adjacent:** 隣接アンカーの Rs動画1本が **連続した1物理イベント**(例 把持+持上げ、押込+固定)を丸ごと cover する時、その動画で当該 step の R も **同時充足**(別動画不要)= rigor 保持 + Rs動画数 inflation 回避。表記 = 「R(discharge-with N)」。
 
 **clip→groove body/Y(§2.1 `:1376-1382`):** C1=30/+0.150 · C2=25/+0.075 · C3=20/0.000 · C4=15/-0.075 · C5=10/-0.150。**grasp(A):** L26/R34。**再把持 seg(L固定/R):** C2=21/29 · C3=16/24 · C4=11/19 · C5=6/14。
+> ⛔ **ERRATUM(2026-07-14、§2 D-5 参照):直上の clip↔groove body 対応は banked §2.1 の faithful restate だが、幾何的に不成立。** 千鳥 hop の弦長 = √(50²+75²) = **90.14mm** に対し 5 seg = **75mm**、非伸長 cable は arc ≥ chord ゆえ届かない。**正 = ≥7 seg**(⚠6 seg = 90.0mm は **0.139mm 不足で不可**)。正値(幾何 witness `shared/GEOM_WITNESS_5CLIP_p5_20260714.py` 6/6 PASS 由来)= **C1:33 · C2:26 · C3:19 · C4:12 · C5:5**。
+> ⇒ **本行の seg 数・body 番号を接地に使わないこと。** canonical(§2.1)の訂正 = 07-Design = **Rs 専権**(上程済・裁定待ち)ゆえ、本表は **faithful restate を維持し silent fix しない**。
 
 #### Phase A(STEP 1-5)初期把持
 | STEP | 動作 | clip-state | #1 secured-predicate(実体) | #2 prereq | #3 legs∧ / gap[p4] | #4 |
@@ -179,6 +181,7 @@ canonical json 値(§1.2)とは別の**実測記録**。**canonical 原本(RL-Ro
 | D-2 | 初期把持 Y span | §2.1 表 `:1378` C1: L+0.120/R+0.180(±30mm) | STEP 2-5 y=0.09/0.21(±60mm) | **3 世代値**: §2.1=±30mm / json=±60mm / **現行 runtime=±44mm(88mm span = INVARIANT #2、`GRIP_HALF_SPAN=0.044 :235`、`WIDE_LEFT_Y/RIGHT_Y=+0.106/+0.194 :268-269`)**。§6.3 既知 divergence `:2690` と同根。現行実効値は task_config が正 |
 | D-3 | 下降点 z | 用語表 `:1236` z=1.02 | 下降/押込 z=**1.025** | 5mm 差。json が現行 SSOT |
 | D-4 | §6.3 既知 divergence 残存 | 再把持Y = 中点固定 vs nearest query `:2692` / guide手選択 L固定 vs テスト選択 `:2693` | — | dry↔wet 世代の未解消項目、v1 では記録のみ |
+| **D-5** | ⛔ **§2.1 clip↔groove body 対応が幾何的に不成立**(本表 §1.4 の restate も同汚染 → 同所に ERRATUM 掲示) | §2.1 表 `:1376-1382`: C1=30 / C2=25 / C3=20 / C4=15 / C5=10 = **5 seg 間隔(75mm)** | 千鳥 hop 弦長 = √(50²+75²) = **90.14mm**(`task_config.py:202-204` CLIP_X_ODD 0.35 / CLIP_X_EVEN 0.40 / CLIP_Y_SPACING 0.075)、`CABLE_SEG_LEN=0.015` `:136` | ⛔ **非伸長 cable は arc ≥ chord ⇒ 75mm < 90.14mm ⇒ 5 seg では hop を張れない。正 = ≥7 seg(105mm)**(⚠6 seg = 90.0mm は **0.139mm 不足で不可** = 剃刀の縁)。**origin** = config コメント「5-clip span 300mm」が **Y 投影のみ**を見ており(真の折線長 = 4×90.14 = **360.6mm**)**千鳥 50mm が計算から脱落**。検出 2026-07-14 p5 → **p6 が SSOT から自前導出で独立検算 → 全項一致**(script 再実行でなく)、p1 も独立確認。**正値**(幾何 witness `shared/GEOM_WITNESS_5CLIP_p5_20260714.py` 6/6 PASS)= **C1:33 · C2:26 · C3:19 · C4:12 · C5:5**。⇒ **本表は faithful restate を維持し silent fix しない**(canonical 訂正 = 07-Design = **Rs 専権**、上程済・裁定待ち)。§5 規約 3 flow。 |
 
 ## §3 現行 production route ↔ 43-step frame mapping
 
