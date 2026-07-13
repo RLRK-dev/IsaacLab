@@ -42,7 +42,10 @@ import task_config as tc  # noqa: E402
 # (eq i -> mjc body i+29), and mjc = newton + 1 (worldbody at 0). All three close on segment 27.
 SEAT_SEG = 27
 
-P1_BOUND_MM = 10.0  # bounded: a held seat stays well inside this (recording: 4.12-4.22mm)
+P1_BOUND_MM = 10.0  # X: bounded. A held cable sits ~0.5mm from the groove in X; a pin-less one walks to ~50mm.
+P1_Z_BOUND_MM = 10.0  # Z: the groove is OPEN-TOPPED -- an uncharged Z axis lets the cable float straight out.
+T0_ALIVE_BAND_MM = (30.0, 70.0)  # positive control: at t=0 the ungrasped cable lies ~50mm off. An instrument
+#                                  that does not SEE that is dead, and a dead instrument passes everything.
 P1_SLOPE_TOL_MM_PER_KSTEP = 1.0  # non-diverging: no sustained monotone escape (pin-less runs to 52.87mm)
 
 
@@ -108,25 +111,41 @@ def weld_hold_mm(cable_xyz: np.ndarray, onset: int, seg: int = SEAT_SEG) -> np.n
     return np.linalg.norm(a[:, int(seg), :] - a[int(onset), int(seg), :], axis=1) * 1e3
 
 
-def p1_verdict(d_mm: np.ndarray, onset: int) -> dict:
-    """Is the seat HELD? Bounded and non-diverging over the post-onset window (NOT 'equals 4.16mm')."""
-    post = np.asarray(d_mm, dtype=np.float64)[int(onset) :]
+def _axis_verdict(d_mm: np.ndarray, onset: int, bound: float) -> dict:
+    """Bounded and non-diverging on ONE axis, over the post-onset window."""
+    post = np.abs(np.asarray(d_mm, dtype=np.float64)[int(onset) :])
     if post.size < 2:
-        return {"held": False, "why": "post-onset window is empty"}
-    x = np.arange(post.size, dtype=np.float64)
-    slope = float(np.polyfit(x, post, 1)[0]) * 1000.0  # mm per 1000 frames
-    bounded = bool(post.max() <= P1_BOUND_MM)
-    non_div = bool(slope <= P1_SLOPE_TOL_MM_PER_KSTEP)
+        return {"ok": False, "why": "post-onset window is empty"}
+    slope = float(np.polyfit(np.arange(post.size, dtype=np.float64), post, 1)[0]) * 1000.0
+    bounded, non_div = bool(post.max() <= bound), bool(slope <= P1_SLOPE_TOL_MM_PER_KSTEP)
     return {
-        "held": bool(bounded and non_div),
+        "ok": bool(bounded and non_div),
         "max_mm": round(float(post.max()), 3),
         "median_mm": round(float(np.median(post)), 3),
         "final_mm": round(float(post[-1]), 3),
         "slope_mm_per_kframe": round(slope, 3),
         "bounded": bounded,
         "non_diverging": non_div,
-        "bars": {"bound_mm": P1_BOUND_MM, "slope_tol": P1_SLOPE_TOL_MM_PER_KSTEP},
+        "bound_mm": bound,
     }
+
+
+def p1_verdict(dx_mm: np.ndarray, zgap_mm: np.ndarray, onset: int) -> dict:
+    """Is the cable HELD in the groove? BOTH axes must hold -- X and Z.
+
+    ⚠ THE GROOVE IS AN OPEN-TOPPED CHANNEL, extruded along Y. So the cable has TWO ways out: across the walls
+    in X, or straight UP in Z. Barring |dx| alone would pass a cable that floated vertically out of the groove
+    with dx ~ 0 -- and that is not hypothetical: on the canonical golden there is a frame with |dx| = 1.19mm and
+    z_gap = +51mm, i.e. 5cm above the groove, which an X-only bar calls "seated". Charging only the axis you
+    happened to think of is precisely the error this whole arc keeps finding (a free axis hiding the critical
+    one); scoring X but not Z is its mirror image.
+
+    The bar is behavioural on each axis (bounded + non-diverging), never a value match -- 4.16mm came from the
+    producer's build and the env is a different build, which is the premise of FORK-1.
+    """
+    vx = _axis_verdict(dx_mm, onset, P1_BOUND_MM)
+    vz = _axis_verdict(zgap_mm, onset, P1_Z_BOUND_MM)
+    return {"held": bool(vx.get("ok") and vz.get("ok")), "x": vx, "z": vz}
 
 
 def articulation(cable_xyz: np.ndarray) -> dict:
@@ -163,3 +182,28 @@ def articulation(cable_xyz: np.ndarray) -> dict:
         "near_over_far": (round(float(near.mean() / far.mean()), 4) if far.size and far.mean() > 1e-12 else None),
         "note": "INPUT to the video judgment, not a verdict. A collapse here = the footprint of HIDING, not fixing.",
     }
+
+
+def weld_excluded_offset_mm(cable_xyz: np.ndarray, clip_y: float = 0.150, seg: int = SEAT_SEG):
+    """Groove offset with the WELDED segment removed -- the only honest way to ask "is the CABLE retained?".
+
+    The pin welds one segment to a world anchor, so that segment is held BY DEFINITION: scoring it proves the
+    weld exists, not that the cable stayed in the groove. Excluding it asks the question we actually care about.
+    """
+    a = np.asarray(cable_xyz, dtype=np.float64)
+    keep = np.delete(np.arange(a.shape[1]), int(seg))
+    return centerline_offset_mm(a[:, keep, :], clip_y)
+
+
+def instrument_alive(cable_xyz: np.ndarray, clip_y: float = 0.150) -> dict:
+    """POSITIVE CONTROL, run in-process with the scoring. A dead instrument passes everything.
+
+    At t=0 the cable lies on the table, ungrasped, ~50mm off the groove. Any instrument worth trusting must SEE
+    that. This is the check the env's own ``c1_retained`` fails: it reads only Z, so it calls that PASS. Running
+    it here, in the same process that scores the run, is the point -- a positive control that lives in a chat
+    message and not in the artifact is not a control at all (it cannot be re-run, and it cannot be sha-pinned).
+    """
+    dx, _ = centerline_offset_mm(cable_xyz, clip_y)
+    t0 = float(dx[0])
+    lo, hi = T0_ALIVE_BAND_MM
+    return {"t0_dx_mm": round(t0, 2), "band_mm": list(T0_ALIVE_BAND_MM), "alive": bool(lo <= t0 <= hi)}

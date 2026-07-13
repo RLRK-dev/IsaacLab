@@ -1,0 +1,82 @@
+{
+ "arm": "C",
+ "artifact_sha256_12": "5f1c3f9238f4",
+ "onset_frame": 2544,
+ "instrument_positive_control": {
+  "t0_dx_mm": 50.0,
+  "band_mm": [
+   30.0,
+   70.0
+  ],
+  "alive": true
+ },
+ "weld_hold": {
+  "ok": true,
+  "max_mm": 0.171,
+  "median_mm": 0.031,
+  "final_mm": 0.01,
+  "slope_mm_per_kframe": 0.002,
+  "bounded": true,
+  "non_diverging": true,
+  "bound_mm": 10.0
+ },
+ "cable_in_groove_ALL": {
+  "held": true,
+  "x": {
+   "ok": true,
+   "max_mm": 1.059,
+   "median_mm": 0.462,
+   "final_mm": 0.986,
+   "slope_mm_per_kframe": 0.088,
+   "bounded": true,
+   "non_diverging": true,
+   "bound_mm": 10.0
+  },
+  "z": {
+   "ok": true,
+   "max_mm": 0.685,
+   "median_mm": 0.415,
+   "final_mm": 0.208,
+   "slope_mm_per_kframe": 0.016,
+   "bounded": true,
+   "non_diverging": true,
+   "bound_mm": 10.0
+  }
+ },
+ "cable_in_groove_WELD_EXCLUDED": {
+  "held": true,
+  "x": {
+   "ok": true,
+   "max_mm": 1.121,
+   "median_mm": 0.408,
+   "final_mm": 0.539,
+   "slope_mm_per_kframe": 0.105,
+   "bounded": true,
+   "non_diverging": true,
+   "bound_mm": 10.0
+  },
+  "z": {
+   "ok": true,
+   "max_mm": 3.818,
+   "median_mm": 0.309,
+   "final_mm": 0.079,
+   "slope_mm_per_kframe": -0.22,
+   "bounded": true,
+   "non_diverging": true,
+   "bound_mm": 10.0
+  }
+ },
+ "articulation": {
+  "metric": "mean |d(joint angle)|/frame [rad] -- invariant to rigid motion of the whole cable",
+  "mean_articulation": 0.000123,
+  "near_seat": 0.000225,
+  "far_from_seat": 8.6e-05,
+  "near_over_far": 2.6241,
+  "note": "INPUT to the video judgment, not a verdict. A collapse here = the footprint of HIDING, not fixing."
+ },
+ "confounded_telemetry_node3d_mm": {
+  "median": 4.18,
+  "note": "the broken instrument, recorded beside the correct one so the divergence is evidence"
+ },
+ "verdict_note": "NUMERIC ONLY. A verdict that falsifies FORK-1 is NOT acted on before Rs's video human-GT: a weld overrides physics and can hide a failure by rigidifying the chain rather than fixing it."
+}
