@@ -590,3 +590,92 @@ F-8.6 で「再走して新旧 npz の data 配列 byte-identity を assert せ�
 ⇒ **一般則: 「同一性」を assert する時は、意味的な単位 (配列・field) で比較する。容器の hash は同一性の proxy にならない。**
 
 *%12 — 2026-07-14。%10 が裁定の自己破壊性と false-FAIL trap を同時に捕捉し、baseline を先回り保全。verify 側の 2 系統 (通し精読 + class 狙い) が、裁定側 (%12) の見落としを 2 回連続で捕まえた形。*
+
+---
+
+## §20. F-9 — ⛔ **着座計器が拘束の軸と一致していない** ⇒ 成功条件が demo 分布の 70% で到達不能 (2026-07-14 06:4x、%12 起票 / p1 独立 CONFIRM / **Rs 裁定要 — STOP**)
+
+### F-9.1 事実 (全て on-disk、file:line)
+
+**(1) 溝が拘束する軸は X と Z であって Y ではない。**
+`create_clip.py:68` — "extrude a 2D cross-section profile **along Y-axis (cable direction)**"、断面は **XZ 平面** (`:76`)、`:52` BASE_DEPTH = "30mm pedestal depth (**Y-axis, cable direction**)"。
+⇒ **Y = 押し出し軸 = 設計上ケーブルが滑ってよい自由軸 / X・Z = 断面 = 跨げば脱落する致命軸。**
+
+**(2) しかし計器は XY ノルムで測っている。**
+`newton_route_env.py:1299-1310` `_seat_metrics`:
+- `:1305` `near = argmin |cable_y - clip_y|` — **nearest-in-Y の node を 1 つ取る**
+- `:1308` `lateral = ||p[:2] - clip_xy||` — **XY ノルム (dx と dy を混ぜる)**
+- `:1309` `seat_dist = sqrt(lateral² + z_gap²)`
+⇒ **自由軸の残差 dy を「着座誤差」として課金している。** dy は物理的な着座の良し悪しと無関係。
+
+**(3) dy には node 離散化の床がある。**
+golden 実測 (`route_demo_raw.npz`, `cable_xyz` [7707, 40, 3] final frame、%12 実測): **median node Y-spacing = 14.64mm**。
+⇒ nearest-node の |dy| は **[0, 7.32mm] にほぼ一様**。**これが計器の分解能の床。**
+
+**(4) bar はその床の半分以下。**
+`:1549` `p3 = (c1_seat < T_GROOVE) and (ph >= 2)`、`T_GROOVE = 0.003` (`task_config.py:368`)。
+⇒ **bar 3.0mm < 量子化床 7.32mm** ⇒ **G3 の発火は「node がたまたま溝の Y 中心の 3mm 以内に落ちたか」の抽選。**
+**算術整合 (script 非依存の独立レグ)**: P(|dy| < 3mm) = 3 / 7.32 = **41% が上界** (dx・z_gap がさらに予算を食うので実際は下回る) ⇒ **観測 24/81 = 30% は量子化抽選仮説と機構的に整合。**
+
+**(5) ORDERED latch により、G3 の取りこぼしは +200 を殺す。**
+`:1556-1565` `if k > 0 and not self._g_latched[w, k-1]: break` (ORDERED) + `:1569` `if self._g_latched[w, 4]:` (G6 は G5 latch を要求)。
+⇒ **G3 未発火 ⇒ G4/G5/G6 到達不能** ⇒ **SHIPPED env は demo 分布の 57/81 (70%) で +200 を一度も出せない。**
+**実測 24/81 到達 = %12 と p1 の 2 者独立 recount で一致** (⚠ 同一 artifact 上の決定論的 recount ゆえ Δ=0 は構造上の必然 — **独立ノイズの一致ではない**。独立レグは上記 (4) の算術)。
+
+**(6) 同じ計器を C2 側も使う。**
+`:1312-1319` `_c2_seated_honest` → `wall_ok = seat_dist*1e3 <= C2_WALL_SEAT_TOL_MM (0.5) + T_GROOVE*1e3 (3.0)` = **3.5mm bar** に同じ `seat_dist` を適用 ⇒ **G5 と G6 の c2 連言も同じ量子化欠陥。**
+
+**(7) 対になる第 2 の欠陥: FAIL できない述語。**
+`:1490-1494` `c1_retained = (z_c1 < 0.840) and (flank == flank) and (flank < 0.840)` = **天井チェックのみ、X を読まない** ⇒ 溝から外れて机に落ちた cable も PASS ⇒ **81/81 no-op。**
+⚠ **訂正 (commit `32e6bde9ad` の記述は on-disk と不一致)**: 「retention is never re-checked at success time」は**誤り**。`:1570` `g6_live = c2_honest and c1_retained and (not dropped) and span_ok` ⇒ **成功時に再評価されている**。
+⇒ **欠陥は「評価場所」ではなく「述語の中身」。「成功時に再チェックを足す」fix は何も変えない。**
+
+### F-9.2 ⭐ 二重の病理 (同じ成功条件の連言に同居)
+
+| # | 述語 | file:line | 病理 |
+|---|------|-----------|------|
+| (a) | `c1_retained` | `:1490-1494` | ⛔ **FAIL できない述語** (天井のみ、81/81 no-op) |
+| (b) | `p3` (G3) / `p5` (G5) | `:1549` / `:1551` | ⛔ **PASS できない述語** (bar 3.0mm < 量子化床 7.32mm、70% の cell で不発) |
+| (c) | `_c2_seated_honest` | `:1312-1319` | ⛔ (b) と同じ計器・同じ欠陥 |
+
+⇒ **「常に PASS する述語は FAIL *できない* 述語と区別がつかない」(F-8 class) の対偶 = 「常に FAIL する述語も同じく無用」。本 env は両方を同時に踏んでいる。**
+
+### F-9.3 物理は無効化されない — 危険は遡及でなく**前向き**
+
+**公式 0.716 (58/81, `recount_w0e_81rerun_snapdown_0537.json`) は生存。** 58 SUCCESS 全部で C1 は最終フレームに**実際に溝の中**にある: 補間計器 (下記 F-9.4) で **across-groove |dx| med 0.94mm / max 1.94mm、3mm bar 超過 0/58**。producer 側の `cable_c1_seat_dist_mm` は `mj_geomDistance` の符号付き geom 間距離ゆえ lateral-sensitive で、50mm 横にずれた cable が −0.67mm を記録することはあり得ない。
+⇒ ⭐ **計器の欠陥は採点を無効にするが、物理を無効にしない。** scripted producer は穴を exploit しない。**RL は必ずする。** ⇒ **危険は「過去の 0.716 が嘘だった」ではなく「これから訓練する env の計器が壊れている」。**
+
+### F-9.4 campaign への含意 (= B3b STOP の根拠、⭐これが本 ERRATUM の stake)
+
+**70% の cell で +200 が到達不能** ⇒ **agent は成功信号を一度も受け取らない** ⇒ **SR は述語を測っていない** ⇒ campaign は「RL が効かない / task が難しすぎる」と**誤診**される。
+⇒ ⭐ **数週間の GPU を、壊れた計器の上で焼くことになる。SR は無意味であるどころか積極的に誤導的。**
+⇒ **B3b-B7 = STOP 継続。本件裁定まで trainer campaign の launch gate は開かない。**
+
+### F-9.5 提案する fix (⛔ **Rs 裁定要 — %12 は実装しない**)
+
+**⛔ 権限**: success condition の変更 = **直交 DESIGN-GATE** (CLAUDE.md §運用2、L0-L3 に関わらず常時必須) + **spec = Rs 専権**。⇒ **STOP → 本 ERRATUM → Rs 上程。CC は patch しない。**
+
+**(1) 計器を拘束の軸に合わせる (bar は緩めない)。**
+- ❌ **nearest-node の XY ノルム**をやめる。
+- ⚠ **「dy 項を落とすだけ」では不十分** (p1 案の方向は正しいが未完): nearest-node は溝中心から**最大 7.32mm ずれた Y** にいるため、そこで dx を測ると**湾曲した cable では別の Y での dx** を測ることになる。
+- ✅ **正しい計器 = cable 折れ線を `y = CLIP_Y` で補間し、致命軸 `|dx|` と `z_gap` で採点する。**
+- ✅ **bar 3.0mm は据置** (実測 |dx| max 1.94mm ⇒ 3mm は妥当)。⇒ **計器を直すのであって bar を緩めるのではない** = §運用15 の conservatism 方向を満たす。
+
+**(2) `c1_retained` に X の溝内条件を足す** (現状は天井のみ = FAIL できない)。
+
+**(3) ⛔ env 単独修正は不可 — DoD-9a parity 契約を破る。**
+欠陥は env への port ミスではなく**凍結 PREREG 定義**の側に在る (env docstring `:1287-1289` が自ら "the EXACT frozen def" と宣言、`:1313-1314` は "Geometric **proxy** of the runner producer" と自認)。
+⇒ **env だけ直すと offline recount (strict_v2) との parity が壊れる。**
+⇒ **env + offline (strict_v2) + PREREG 定義 の 3 点同時改訂が必要** = **spec 層 = Rs 専権。**
+
+**(4) 真の reuse**: producer は量子化フリーの `mj_geomDistance` を既に持っている。**env はそれを mirror せず、proxy を自作した。** ⇒ 修正の第一候補は「producer の測定量を env が使う」。
+
+### F-9.6 メタ教訓 (本 arc の型の反復)
+
+- ⭐ **拘束系をノルムで測るな — 自由軸が致命軸を隠す。** 拘束の軸を **built model から読み** (`create_clip.py:68`)、**軸ごとに分解**して報告する。rope/cable は **nearest-node でなく補間**。
+- ⭐ **正しい答えは、誤った答えの *すぐ隣に* 既に在った** (今夜 3 回): `_seat_metrics` は壊れた retention 述語の 4 行上 / offline は 81 cell 全てに `cable_c1_final_dist_mm` を保持 / producer は量子化フリーの wall 距離を持っている。⇒ **再利用せず、作り直した。**
+- ⭐ **verdict 文字列を script に hardcode するな** (p1 own): p1 の検証 script は「%12 の [R4] CONFIRMED」と**印字しながら**、自分が測った数値 (0% unreachable) と矛盾していた。**verdict は必ず測定値から導出する。** p1 は数値を読んだから捕まえた — 要約行を信じていれば、本 arc 最大の発見が偽の反証で潰されていた。
+- ⭐ **発見が劇的で、かつ自分の立場を強くする方向のときこそ手を止める** (%12 own): 私は同じ XY ノルムで測って「58 SUCCESS のうち 41/58 が bar 超過」= 0.716 を崩す劇的数字を出した。**artifact だった。**
+- ⇒ **双方向の adversarial pass が無ければ、p1 の偽反証と %12 の偽陽性は両方通っていた。**
+
+*%12 — 2026-07-14 06:4x。p1 独立 CONFIRM (24/81 完全一致、fix 方向 一致)。⛔ **本 ERRATUM は Rs 裁定待ち。B3b-B7 STOP 継続。実装は行わない。***
