@@ -505,6 +505,89 @@ def bank_boundaries_from_recording(recording, phases=(1, 2, 3, 4, 5)):
     return out
 
 
+def activate_c1_pin(solver, seat_body_newton, seat_world, match_tol_m=5e-3):
+    """(d2) Activate the C1 clip-retention pin on the eq bound to the runtime seat. EVERY failure RAISES.
+
+    This is the function whose 07-12 ancestor could not answer the question it was asked. That version had TWO
+    fail-silent paths, and it burned its "done" latch before either of them:
+
+        self._c1_pin_done = True   # "latch: one attempt at the onset frame (regardless of outcome)"
+        if mjm is None or mjd is None: return                    # (1) silently never fires, never retries
+        ...
+        if _best is None or _bestd >= 5e-3: print(...); return   # (2) prints, does not raise, latch already set
+
+    So a run in which the pin never fired was scored as a run in which the pin did not WORK -- and the artifact
+    it produced recorded no eq_active, no seat body, no match distance and no termination reason, with stdout
+    discarded. That is why "c1pin REFUTED" cannot be relied upon: it cannot distinguish "tried and failed" from
+    "never tried" (%10). Here, every failure path raises with the measured distance in the message, because that
+    distance may itself be the answer to why 07-12 never fired.
+
+    Resolution is by WORLD POSITION, exactly as the producer does it (:2352-2364) -- NOT by transplanting a body
+    index across models, which is the mistake B3-alpha just taught (the env's body numbering is its own).
+
+    Args:
+        solver: the env's SolverMuJoCo (CPU backend -> ``mj_model`` / ``mj_data`` are the live buffers).
+        seat_body_newton: the runtime C1 seat body, in the ENV's Newton body space.
+        seat_world: that body's world position [m], shape (3,) -- the match key.
+        match_tol_m: the producer's own gate. Exceeding it means we did NOT find the seat's eq.
+
+    Returns:
+        The witness dict -- persist it. A run that cannot show its pin fired proves nothing.
+    """
+    import mujoco
+
+    mjm, mjd = getattr(solver, "mj_model", None), getattr(solver, "mj_data", None)
+    if mjm is None or mjd is None:
+        raise RuntimeError(
+            f"PERCLIP_PIN: solver exposes no mj_model/mj_data (use_mujoco_cpu="
+            f"{getattr(solver, 'use_mujoco_cpu', None)}) -- the pin CANNOT be activated. The 07-12 ancestor "
+            "returned silently here and its run was then scored as 'the pin does not work'."
+        )
+    wp.synchronize()
+    mujoco.mj_forward(mjm, mjd)  # refresh mjd.xpos -- a stale pose is a candidate cause of the 07-12 miss
+    seat_world = np.asarray(seat_world, dtype=np.float64).reshape(3)
+
+    best, best_d = None, 9e9
+    for i in range(int(mjm.neq)):
+        if (
+            int(mjm.eq_type[i]) == int(mujoco.mjtEq.mjEQ_CONNECT)
+            and int(mjm.eq_obj2id[i]) == 0
+            and int(mjm.eq_active0[i]) == 0  # only the pre-allocated, initially-disabled pin candidates
+        ):
+            d = float(np.linalg.norm(np.asarray(mjd.xpos[int(mjm.eq_obj1id[i])]) - seat_world))
+            if d < best_d:
+                best_d, best = d, i
+    if best is None:
+        raise RuntimeError(
+            "PERCLIP_PIN: the model carries NO disabled connect-to-world eq -- the pin was never pre-allocated "
+            "(build_multiworld_scene(perclip_pin=True)?). This is B3-alpha: the mechanism is absent at the "
+            "destination, and a run without it cannot be read as evidence about the pin."
+        )
+    if best_d >= match_tol_m:
+        raise RuntimeError(
+            f"PERCLIP_PIN: nearest pre-allocated eq is {best_d * 1e3:.3f}mm from the runtime seat (body "
+            f"{seat_body_newton} @ {seat_world.round(4).tolist()}), over the {match_tol_m * 1e3:.1f}mm gate. "
+            "The 07-12 ancestor PRINTED this and returned -- so its run silently had no pin. The distance IS "
+            "the finding: a stale mjd.xpos (pose not synced from Newton) would look exactly like this."
+        )
+    mjm.eq_data[best, 0:3] = [0.0, 0.0, 0.0]  # anchor at the seat body's own origin
+    mjm.eq_data[best, 3:6] = seat_world  # anchor in world = the seat's current position
+    mjd.eq_active[best] = 1
+    if int(mjd.eq_active[best]) != 1:  # read back: the write must have taken
+        raise RuntimeError(f"PERCLIP_PIN: eq#{best} did not activate (eq_active readback != 1)")
+    witness = {
+        "activated": True,
+        "eq_id": int(best),
+        "eq_obj1_mjc_body": int(mjm.eq_obj1id[best]),
+        "seat_body_newton": int(seat_body_newton),
+        "position_match_mm": round(best_d * 1e3, 4),
+        "eq_active_readback": int(mjd.eq_active[best]),
+        "seat_world": [round(float(x), 5) for x in seat_world],
+    }
+    print(f"  [PERCLIP_PIN] ACTIVATED {witness}", flush=True)
+    return witness
+
+
 def resolve_pin_eq_index(eq_identity, mjc_seat_body, eq_connect_type=None):
     """Re-resolve the clip-pin equality by IDENTITY -- the CONNECT eq whose obj1 is the seat body, obj2 the world.
 

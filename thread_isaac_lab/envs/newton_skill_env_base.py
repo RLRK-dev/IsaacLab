@@ -1493,6 +1493,7 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
     target_clip_float_z=0.0,
     add_c2_clip=False,
     c2_xy=None,
+    perclip_pin=False,
 ):
     """Build multi-world physics scene with kinematic arms + cable.
 
@@ -1580,6 +1581,30 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
         )
         cable_bodies_per_world = len(cable_bodies_proto)
         cable_body_offset = cable_bodies_proto[0]
+
+        # (d2) PERCLIP_PIN -- pre-allocate ONE DISABLED connect-to-world eq PER cable body, mirroring the
+        # producer (test_newton_clip_routing.py:1405). The route drive activates exactly the one bound to the
+        # runtime C1 seat, mid-episode, by WORLD-POSITION match. Default OFF keeps the build byte-identical
+        # (an eq with enabled=False registers but never constrains; the 4-bar ENABLED-count assert stays 4).
+        #
+        # This is the mechanism the multi-world env-core was MISSING while the single-world producer had it --
+        # i.e. the env was built non-conformant to the banked spec, which NAMES the clip-retention pin as the
+        # routing mechanism (RS71 §4). Wiring it is compliance, not a new exception. But it is wired here ONLY
+        # to MEASURE (the (d2) question: does open-loop actually fail when the pin genuinely holds?) -- making
+        # it permanent is a premise-scope decision and belongs to Rs, not to this flag.
+        if perclip_pin:
+            for _pb in cable_bodies_proto:
+                proto.add_equality_constraint_connect(
+                    body1=int(_pb),
+                    body2=-1,  # world
+                    anchor=wp.vec3(0.0, 0.0, 0.0),
+                    label=f"perclip_pin_{int(_pb)}",
+                    enabled=False,
+                )
+            print(
+                f"  [PERCLIP_PIN] pre-allocated {len(cable_bodies_proto)} DISABLED connect-to-world eqs/world "
+                f"(inert until the route drive activates the C1 seat body)"
+            )
 
         # Cable ↔ non-pad-arm filter pairs (explicit, label-based; pads keep cable contacts).
         for cable_si in range(_cable_sr[0], _cable_sr[1]):
@@ -1947,7 +1972,18 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
     # _wire pokes the negative PAD_SOLREF into mjw (ALL worlds) + stiffens the mj_model-template 4-bar.
     if SOLVER_BACKEND == "mujoco" and grasp_actuation:
         _neq = int(getattr(model, "equality_constraint_count", 0) or 0)
-        assert _neq == 6 * world_count, (
+        # (d2): with perclip_pin the model also carries one DISABLED connect per cable body, per world. They are
+        # inert (enabled=False) but they MUST all have registered -- a short count means the pin the run depends
+        # on may not exist, and the activation would then silently find nothing. Fail loud here, not there.
+        if perclip_pin:
+            _want = (6 + cable_bodies_per_world) * world_count
+            if _neq != _want:
+                raise AssertionError(
+                    f"PERCLIP_PIN: eqs did not all register/replicate: neq={_neq} != "
+                    f"(6 + {cable_bodies_per_world}) * {world_count} = {_want}"
+                )
+            print(f"  [PERCLIP_PIN] neq={_neq} = (6 structural + {cable_bodies_per_world} pin) x {world_count} worlds")
+        assert perclip_pin or _neq == 6 * world_count, (
             f"S6_GRASP: 4-bar+mirror eqs did not all register/replicate: neq={_neq} != 6*world_count={6 * world_count}"
         )
         _wire_s6_grasp_solref(solver)

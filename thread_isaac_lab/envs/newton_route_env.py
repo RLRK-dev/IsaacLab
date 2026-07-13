@@ -455,6 +455,15 @@ class NewtonRouteEnv(VecEnv):
         _rc2 = self.cfg.get("route_c2_scene", False)
         assert isinstance(_rc2, bool), f"cfg['route_c2_scene'] must be a bool, got {type(_rc2).__name__}"
         self._route_c2_scene = _rc2
+        # (d2) route_c1_pin: pre-allocate + activate the C1 clip-retention pin, so the open-loop replay can be
+        # re-measured on a substrate where the pin ACTUALLY holds. The producer has this mechanism and the
+        # multi-world env-core did not -- so every "open-loop drops the cable" measurement to date was taken on
+        # an env missing a mechanism the reference trajectory depends on. Default False = byte-identical.
+        # MEASUREMENT ONLY: making the pin permanent is a premise-scope decision (INVARIANT #5) and is Rs's.
+        _rc1p = self.cfg.get("route_c1_pin", False) or os.environ.get("ROUTE_C1_PIN", "0") == "1"
+        assert isinstance(_rc1p, bool), f"cfg['route_c1_pin'] must be a bool, got {type(_rc1p).__name__}"
+        self._route_c1_pin = bool(_rc1p)
+        self._c1_pin_witness = None  # persisted proof the pin fired -- a run that cannot show this proves nothing
         # W1-B1 (Stage-A sec 4.1): route_t_clock gates the route-clock DIVERGENCE machinery only (B2 HOLD
         # freeze / B3 fork init). False (default) = route_t mirrors episode_length_buf exactly (increment/
         # reset at the same sites) -> flag-OFF behavior byte-preserved. B1 ships no divergence mechanism,
@@ -567,6 +576,7 @@ class NewtonRouteEnv(VecEnv):
             # None = the recording has no scheduled release -> suppression inert).
             _rls = self._route._recording["release_step"]
             self._route_release_step = int(_rls) if _rls is not None else None
+            self._wire_c1_pin_from_recording()  # (d2): onset + seat, DERIVED from the recording (no-op when off)
         else:
             self._route = NominalRouteStub(self._settled_ee_r_pos, self._settled_ee_l_pos, self.MAX_EPISODE_STEPS)
 
@@ -694,6 +704,7 @@ class NewtonRouteEnv(VecEnv):
             grasp_actuation=self._grasp_actuation,  # comp3: OFF (default)=byte-id solid table; ON=VOID+servo
             add_c2_clip=self._route_c2_scene,  # comp5: real C2 V-groove (MW env-core route seating + DoD6 video)
             c2_xy=rc.ROUTE_C2_XY,  # param-idiom single-source (0.000); NO os.environ CLIP2_Y
+            perclip_pin=self._route_c1_pin,  # (d2): pre-allocate the C1 clip-retention pin (measurement only)
         )
         self._model = scene["model"]
         self._solver = scene["solver"]
@@ -1192,6 +1203,7 @@ class NewtonRouteEnv(VecEnv):
                     hold_mask=hm,
                 )
                 self._route.apply_recorded_grip(route_steps, step, hold_mask=hm)
+                self._maybe_activate_c1_pin(route_steps, step)  # (d2): no-op unless route_c1_pin
                 self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
             # FK-side warm-start/obs source: arm cols <- the final feedforward row; gripper cols keep
             # their pinned-OPEN values (production fk_jq semantic; flag-ON obs[7]/[15] read physics).
@@ -1620,6 +1632,75 @@ class NewtonRouteEnv(VecEnv):
     @property
     def num_obs(self):
         return rc.OBS_DIM  # 62
+
+    def _wire_c1_pin_from_recording(self):
+        """(d2) Derive the pin's ONSET and SEAT SEGMENT from the recording. Nothing here is invented or hardcoded.
+
+        Onset: the first frame the producer's own ``pin_active`` is set (B3a leg 6 measured the recorder/solver
+        lag as exactly 0, so the frame transfers directly).
+
+        Seat: the recording pins eq 27 on body 55. Those are indices into the PRODUCER's model, and transplanting
+        an absolute body index into a different model is the B3-alpha mistake. What DOES transfer is the
+        CABLE-RELATIVE segment index -- both models build the same 40-body cable -- so the seat is derived as
+        (pin_eqid - first_pin_eq) and applied to THIS env's own ``_cable_bodies``. B3a measured the eq table to
+        be contiguous and +1-monotone in body id, which is what licenses that derivation; the eq itself is then
+        re-resolved by WORLD POSITION at activation, never by index.
+        """
+        self._pin_onset_frame = None
+        self._pin_seat_seg = None
+        self._route_rec_step_f = None
+        if not self._route_c1_pin:
+            return
+        rec = self._route._recording
+        self._route_rec_step_f = np.asarray(rec["step_f"]).ravel()
+        pin = np.asarray(rec.get("pin_active") if hasattr(rec, "get") else rec["pin_active"]).ravel()
+        on = np.nonzero(pin > 0)[0]
+        if on.size == 0:
+            raise ValueError("route_c1_pin=True but the recording never pinned -- there is no onset to replay")
+        self._pin_onset_frame = int(on[0])
+        eqid = np.unique(np.asarray(rec["pin_eqid"]).ravel()[pin > 0])
+        body = np.unique(np.asarray(rec["pinned_body"]).ravel()[pin > 0])
+        if eqid.size != 1 or body.size != 1:
+            raise ValueError(f"recording pins more than one eq/body (eq={eqid.tolist()}, body={body.tolist()})")
+        # cable-relative seat: the 40 pin eqs are one per cable body, contiguous and in order (B3a, measured),
+        # so the eq's ordinal IS the segment ordinal. Cross-check it against the body numbering before trusting it.
+        seat_seg = int(eqid[0])
+        n_cable = len(self._cable_bodies[0])
+        if not 0 <= seat_seg < n_cable:
+            raise ValueError(f"derived seat segment {seat_seg} outside this env's cable (0..{n_cable - 1})")
+        self._pin_seat_seg = seat_seg
+        print(
+            f"[NewtonRouteEnv] (d2) C1 pin armed: onset frame {self._pin_onset_frame}, seat segment {seat_seg} "
+            f"(producer eq {int(eqid[0])} / body {int(body[0])}; resolved in THIS env's body space at activation)"
+        )
+
+    def _maybe_activate_c1_pin(self, route_steps, sub_i):
+        """(d2) Fire the C1 clip-retention pin at the RECORDING's own onset frame. No-op unless route_c1_pin.
+
+        The onset and the seat both come from the recording -- no trigger rule is invented here, because an
+        invented rule is a confound: the whole question is whether the producer's own pin, driven the producer's
+        own way, changes the outcome. The recording's ``pin_active`` gives the frame (B3a leg 6 measured the
+        recorder/solver lag as 0), and the seat is resolved in the ENV's own body space by WORLD POSITION, never
+        by transplanting the producer's body index -- that is the B3-alpha mistake.
+
+        Unlike its 07-12 ancestor, this latches ONLY on success. Every failure raises (see
+        :func:`route_executor.activate_c1_pin`), because a pin that silently never fired produced a run that was
+        then scored as "the pin does not work" -- and the artifact could not tell the two apart.
+        """
+        if not self._route_c1_pin or self._c1_pin_witness is not None or self._pin_onset_frame is None:
+            return
+        step_f = self._route_rec_step_f
+        t = min(max(int(route_steps[0]), 0), len(step_f) - 1)
+        if int(step_f[t]) + int(sub_i) < int(self._pin_onset_frame):
+            return
+        import route_executor as rex  # lazy, mirroring _build_route_executor's idiom (path set there)
+
+        bq = self._state_0.body_q.numpy()
+        cable = np.asarray(self._cable_bodies[0], dtype=int)
+        seat_body = int(cable[int(self._pin_seat_seg)])  # the recording's seat, in THIS env's body numbering
+        self._c1_pin_witness = rex.activate_c1_pin(self._solver, seat_body, bq[seat_body, :3])
+        self._c1_pin_witness["onset_frame"] = int(self._pin_onset_frame)
+        self._c1_pin_witness["fired_at_frame"] = int(step_f[t]) + int(sub_i)
 
     def _pull_route(self):
         """Query the route interface for all worlds (per-step ABSOLUTE base target + phase + grip + dual
