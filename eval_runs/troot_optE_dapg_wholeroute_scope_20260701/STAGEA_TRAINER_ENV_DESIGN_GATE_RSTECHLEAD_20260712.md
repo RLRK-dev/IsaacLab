@@ -390,3 +390,20 @@ ERRATUM-B (Dahl/body_q_prev 不在 → 「capture 不能・経験 leg が唯一�
 なお **`_per_world_fk_jq` 未設定の signature は 373-444mm 級**と巨大 (%9 実測) ゆえ、arm-bank leg に growth metric は不要 — **直接 assert (arm_q/qd == bank ∧ fk_jq 設定済) で十分**。
 
 *%12 — 2026-07-13。%9 double-key: golden G-phase Σ=7707 EXACT + 別系統 (B2 leg8 cablediag の phase 遷移 113/173/259 == 導出 t_1/t_2/t_3) で ceil 整列も確証。*
+
+### E-5 (追補 2026-07-13 23:0x — %9 副次発見 2 件 + p6 所見。%12 実測 CONFIRM)
+
+**(1) guard の rationale を「最初に想定した trigger」に狭めるな (E-3 の対偶)。**
+%12 は minor(4) で capture frame を手計算し、ceil 整列 (N8/R2c) を適用せず **raw phase 境界 f_3−1 = 2583** を用いて誤った (正 = chunk 整列 **2589**、margin 45 frame = 4.5 RL step、%9 が捕捉)。
+⭐**この誤り class は builder の既存 guard R2d (`assert G(phase_id[capture_frame]) == k`) が build 時に落とす**: golden 実測で `phase_id[2583] = 6` / `phase_id[2589] = 7` (G3 = 15-phase 7) ⇒ **2583 で FAIL / 2589 で PASS**。
+⇒ **R2d の正当化を「f_k %% 10 == 0 の multi-cell edge」に限定せず「capture_frame instantiation guard 一般 (raw-boundary 誤り class を含む)」へ広げる。guard を弱めない。**
+
+**(2) k=3 の 45-frame margin は「薄い」のではなく「構造的」** (%9 の自己訂正、%12 実測 CONFIRM): `pin_active` の onset (frame 2544) は **phase_id 5→6 遷移と EXACT に一致** ⇒ **pin は phase schedule で発火する** (物理イベント依存でない) ⇒ DR / multi-cell では pin onset と capture_frame が **同一 schedule から co-move** する。⇒ R2k の pin 状態 assert は維持するが、**根拠は「fragile margin」ではなく「instantiation guard (上記 (1) と同族)」**と書く。
+
+**(3) ⭐本 arc の corrective 3 連続 (C-α / C-β / E-4) は全て同一 class = 「計器が対象を測れていない」** (p6 所見、%12 同意):
+- **C-α**: bar (1mm) が防ぐべき failure (FORK-1 致死 seed 0.147mm) より緩い = **感度不足**。
+- **C-β**: 測定 mode (IK) が信号 (0.147mm) を交絡 (IK 追従誤差 mm 級) = **SN 比の破綻**。
+- **E-4**: bar を別 mode (FF) から流用 = **較正の不整合**。
+⇒ **DoD 設計の規律: 「PASS する DoD」ではなく「間違った成果物を落とす DoD」を書け。** 全ての fidelity DoD に対し **(i) この bar が落とす『間違った bank / 壊れた leg』を具体的に述べよ (ii) negative control (null bank 等) で実際に落ちることを実証せよ (iii) bar の測定 mode と leg の駆動 mode が一致していることを示せ** — 3 点を conformance の必須列とする。
+
+*%12 — 2026-07-13。%9 副次 2 件 = 実測 CONFIRM (phase_id[2583]=6 / [2589]=7 / pin onset == phase 5→6 遷移 2544 EXACT)。*
