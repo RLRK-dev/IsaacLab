@@ -443,3 +443,24 @@ frame 級 FD が原理的に不適 (κ = |Δqd|/|qd| が k=2 で 0.92 / k=3 で 
 **leg6 (hidden-state liveness: captured `eq_active[27]` ≡ recording `pin_active` を per-frame EXACT 照合) = 今回の DEFECT-1 を必ず落とす negative control** ⇒ **必須化**。
 
 *%12 — 2026-07-13。DEFECT-1/-2 とも builder の runtime leg が捕捉 (bar 緩和ゼロ = fix-first 遵守)。B3a の未 commit 判断も正 (defect を bank しない)。Rs 承認数値不変。INVARIANTS 不触。*
+
+### F-5 (追補 2026-07-14 00:0x — %9 B3a 検分。**D-1 裁定を %9 の refinement で置換** + 戦略 risk 1 件)
+
+**(1) D-1 の bar を訂正 (%9、%12 受諾)**: 「warmstart が非ゼロか」は **再分類の bar として誤り (E-5 (i) 違反)**。問うべきは **「restore vs zero で軌道が FORK-1 seed scale (0.147mm) で変わるか」= L5a (FF) 上の A/B**。
+⭐**regret 非対称ゆえ (a) 据え置き**: bank して inert = nv floats の無駄 / **bank せず live = k=3/4/5 で silent な FORK-1-class mismatch**。**DEFECT-1 はその第 2 の失敗が実在かつ silent であることの実証**。warmstart は (Dahl/body_q_prev の *属性不在* と違い) **実在する live field** ゆえ zeros を bank しても無害。
+⇒ **(a) capture+restore を既定として維持。非 item 化は L5a の A/B が ≪0.147mm を示した時のみ。** 機構確認 (`mjDSBL_WARMSTART` flag) は *説明*として取るが、**再分類の bar は A/B が担う** (%12 の当初裁定 = 機構確認を bar にする、を撤回)。
+
+**(2) ⭐`eq_active` は D-1 の対象外 = 構造的要件 (経験問題でない)**: clip-pin (eqid 27 / body 55 / ON f2544-7706、%9+%12 golden 実測) は **INVARIANT #5 の唯一の認可例外**であり、**k=3/4/5 の fork 境界はまさに clip が cable を保持していなければならない所**。pin OFF の fork は「数値的に微妙」なのではなく **物理的に誤った state**。⇒ **warmstart の disposition に関わらず、eq_active/pin の capture+restore は必須。**
+
+**(3) D-2 = 今日 cross-backend transplant は不在、やるべきは 1 行** (%9): `USE_MUJOCO_CPU` は **global** で producer/env とも `make_solver` 経由 ⇒ (a)/(c) は既に構造的に成立。bank meta は既に `use_mujoco_cpu` を記録 (:726) ⇒ **restore で `bank.meta.use_mujoco_cpu == solver.use_mujoco_cpu` を assert (fail-loud)** — 将来の flip が silent corruption → loud failure に変わる。
+
+**(4) ⭐⭐ 戦略 risk (B3 より大 — trainer node / W0-a 級 risk register + Rs surface、%9 escalate、%12 CONCUR)**:
+`task_config.py:116` の comment は「GPU (`use_mujoco_cpu=False`) = S8」、dual-track にも Track-2 (GPU-mjwarp)。**campaign が GPU backend へ flip する場合、W1 の calibration stack は全て CPU 実測である**: FORK-1 特性 / 健全域 band 10.407 / HOLD 15・12 / ramp signature / 全 fidelity bar / **さらに 0.716 = Rs-DECLARED MOTION STANDARD と golden byte-repro (B0 pin ca33d1e1a0)**。
+**同一 backend 内の builder fork 0.15mm が致命だった系で、solver 実装ごと替える摂動は自明に大きい** ⇒ **flip すれば W1 検証 stack 全体が再検証対象**。⚠**campaign 時に発見してはならない。**
+⇒ **(i) `task_config.py` = Rs SSOT ゆえ flip は L3 + Rs 専権 (builder 判断で行わない) (ii) 本項を trainer node の risk register に登録 (iii) W1 完了報告で Rs に決定項として上程: 「campaign は CPU-MuJoCo か GPU-mjwarp か。GPU なら W1 calibration stack の再検証が必要」。** devplan の「device-parity (cuda:2 vs cuda:0)」は **warp device の parity であって backend parity ではない** — 別項として明示する。
+
+**(5) DEFECT-2 の pin (%9)**: 「scale 誤りは大域的ゆえ gripper が担う」の前提は **capture が単一 contiguous copy であること**。将来 group 別 slice になると group-local scale 誤りが素通り ⇒ **(i) 単一 copy を assert、or (ii) cable の g も telemetry 記録 (bias −1.9% からの *変化* が surface する)** を 1 行入れる。
+
+**(6) ⭐E-5 の適用範囲を拡張 (%9 提案、%12 採択)**: **E-5 の 3 必須列は DoD だけでなく verify claim 自体にも適用される。**「機構が存在する」は **grep / inspect では discharge できない — run で検証せよ**。%9 の C-α と %12 の ERRATUM-D は共に静的検証で buffer liveness を主張し、**両者とも誤った** (= 計器 [inspect] が対象 [liveness] を測れていない = 自分たちが指摘した 3 class と同型)。
+
+*%12 — 2026-07-14。%9 が自らの C-α sub-claim を own、%12 は D-1 裁定を %9 の refinement で置換。Rs 承認数値不変。*
