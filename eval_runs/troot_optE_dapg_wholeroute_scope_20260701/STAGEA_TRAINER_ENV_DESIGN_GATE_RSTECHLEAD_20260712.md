@@ -487,3 +487,35 @@ frame 級 FD が原理的に不適 (κ = |Δqd|/|qd| が k=2 で 0.92 / k=3 で 
 **leg6 の穴 3 件 (%9 → p3、build 中に塞ぐ)**: (i) index-space trap (`eqid=27` の hardcode) (ii) 部分修正の素通り (warmstart の buffer 誤選択でも leg6 は PASS する → **各 hidden field に「変動 > 0」の liveness gate** を課す) (iii) lag convention (記録 `pin_active` と solver `eq_active` に 1 frame lag があり得る → EXACT を課すと fix 後に false-FAIL → **実測して pin**)。
 
 *%12 — 2026-07-14。F-5 (3) の bool assert は本 F-6 が supersede。%9 の upgrade を実在確認の上 採択。*
+
+### F-7 (追補 2026-07-14 03:4x — B3a re-capture の実測。**warmstart は LIVE / index-space trap / 幾何 anchor carry**)
+
+#### F-7.1 ⭐warmstart は「非 item」どころか **massively LIVE** — 実害を寸前で回避
+
+**実測 (B3a re-capture、%12 独立検証済)**:
+- dead mirror (`mjw_data`): 非ゼロ **0 / 562611**  →  **live (`mj_data`): 非ゼロ 559764 / 562611、absmax 1.08e6**。
+- 機構: `mjDSBL_WARMSTART` = **512** / モデルの `disableflags` = **524288** (= `mjDSBL_MULTICCD` のみ) ⇒ **524288 & 512 = 0 ⇒ warmstart は無効化されていない = LIVE** (%12 が mujoco module で独立確認)。
+- ⇒ **「0/562611」は substrate の事実ではなく、死んだ buffer を読んだ計器の artifact だった。**
+
+⚠**もし当初の D-1 bar (「非ゼロか?」) で非 item に再分類していたら、absmax 1e6 の live hidden state を bank から落としていた** — **本 chunk が消そうとしている silent FORK-1-class defect を、自分の手で作るところだった。**
+**防いだのは 2 本の独立な guard**: (i) %12 の「symptom だけで再分類するな = 機構 (`mjDSBL_WARMSTART`) も確認せよ」(ERRATUM-B の教訓) — flag は ENABLED を示すので zeros と矛盾し、必ず調査に回った。(ii) %9 の **regret 非対称** (bank して inert = 無駄 / bank せず live = silent 致命) ⇒ **(a) 据え置き**。
+⇒ **B4 = (a) capture+restore は「保守的選択」ではなく実測上の必須事項に格上げ。** disposition (restore vs zero が軌道を動かすか) は F-5 (1) 通り **L5a の A/B** が答えるが、**bank から落とす選択肢は消滅した**。
+
+#### F-7.2 ⭐index-space trap: Newton body id ≠ MuJoCo body id (**+1**)
+
+記録の `pinned_body` = **Newton body id (55)** / model の `eq_obj1id` = **MuJoCo body id (56)** — **MuJoCo は worldbody を index 0 に置くため +1 ずれる**。
+⇒ 初版 resolver に Newton id を渡すと **eq 26 に着地** (正解 27) = **物理的に別の constraint を silent に pin する**。
+= **F6 (`_jws` の関節 ID vs 座標) に続く index-space 混同の第 2 目撃例**。⚠**罠を防ぐために書いた関数自身が罠を踏んだ**。
+**規則**: (i) **offset を hardcode しない** — producer 自身の eq 表から導出する (ii) **round-trip assert を必須**にする (identity → 元の eqid に戻ることを要求) (iii) bank は **newton / mjc 両 id + 実測 offset** を保持する。
+
+#### F-7.3 honest limit + carry (B3b/B4)
+
+layout_hash assert (F-6) が同一 layout を保証するので、**今日は banked index で足りる**。
+**cross-layout の真に robust な形 = 幾何 anchor** — producer 自身は `:2352-2364` で **world 位置一致**で eq を探している。**未実装 ⇒ B3b/B4 の carry として登録** (charter §7-4: builder は新設計を独断しない。設計要否は %12 が B3b conformance で裁定する)。
+
+#### F-7.4 メタ (5 度目): **計器そのものが第一の誤差源**
+
+本 arc で捕捉された誤りの大半は「対象」ではなく「計器」に在った: bar が failure より緩い (C-α) / 測定 mode が信号を交絡 (C-β) / bar を別 mode から流用 (E-4) / source inspection が liveness を測れない (F-2) / **死んだ buffer を読んだ測定が substrate の事実に見えた (本 F-7.1)**。
+⇒ **規律 (再掲・強化): 測定値を substrate の事実として扱う前に、「その計器は対象を測れているか」を先に discharge せよ。** 特に **ゼロ / 不在 / 変動なし** の測定は、**対象が無い**のか **計器が死んでいる**のかを区別できない — **必ず positive control (変動を示すはずの独立 witness) を併走させよ** (B3a leg6 = 記録 `pin_active` を独立 witness にした形が正解)。
+
+*%12 — 2026-07-14。F-7.1 の機構 (disableflags=524288 / WARMSTART bit=512 未設定) は %12 が mujoco module で独立確認。B4=(a) 確定。*
