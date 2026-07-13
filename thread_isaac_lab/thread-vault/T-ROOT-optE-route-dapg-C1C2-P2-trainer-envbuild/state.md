@@ -291,7 +291,10 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 | **(c)** | ⛔⭐ **そもそも「溝に *捕捉* されたか」を測れる numeric 計器が *存在しない*** — **07-12 に proven + banked**: `ANCHOR_STEPTABLE_ALIGNMENT_p4p5_20260712.md:108`「lateral groove-capture: **NO numeric coverage** (contact ≠ capture, **proven**); **Rs-video is the only ground-truth**」。**誰も読まず、3 名が計器を作り直しては positive control で殺した** (p1 の \|dx\| 計器は **Rs が目視で却下した cell 2037 を PASS させた**)。 | p1 発見 + p5 source + p6 negative control |
 
 ⭐⭐ **(a) と (b) は互いを隠していた**: **FAIL できない述語は警報を鳴らさず、PASS できない述語は「課題が難しい」に見える。どちらも沈黙する。**
-⭐⭐⭐ **動画による直接反証 (pC blind、全 167 frame 掃引、ghost 非依存)**: **no-pin run の全レンダ frame で C1 溝は空** (溝中心を投影した赤枠に背景が透ける)。**数値も一致**: `z_c1_end = 824.023mm` = **台座 820 + cable 半径 4** (着座なら 827)。⇔ **artifact は `c1_retention: pass = TRUE`。** ⇒ **壊れた述語が、動画・数値・source の三方向から反証された。**
+⭐⭐⭐ **動画による直接反証 (pC blind、ghost 非依存)** — ⚠ **pC 自己撤回により訂正済 (07:49)**:
+- ❌ **撤回**: 「no-pin run の全 frame で C1 溝は空 = cable は一度も入っていない」 — **pC が npz を自ら実読して反証。cable は step 253-259 / 273 に C1 溝域を *通過している* (seg#27、lat 1.08-1.85mm、z 827.5-827.9mm)。** ⭐ **pC の誤りの機構: 分母 (全 167 frame) は直したが *解像度* を壊した** (contact sheet の 1 コマが 152×120px で、8px の線を見落とした) ⇒ ⭐ **掃引は「分母」と「解像度」の *両方* が十分でなければ不在主張は成立しない。**
+- ✅ **核心は無傷 (むしろ情報量が増える)**: **cable は溝を *訪れた* が *留まらなかった*。** 述語の**評価点 (step 498) で cable は C1 から横 56.5mm / z=824.0mm** (= 台座 820 + cable 半径 4 = **台座に寝ている**。着座なら 827)。⇔ **`c1_retention: pass = TRUE`。** ⇒ ⭐ **述語は *自分の評価点で* 証明可能に誤っている。**
+- ⚠ **「捕捉されたか」は video でも numeric でも判定不能** (近接 ≠ 捕捉、gripper が同時に在る) ⇒ **Rs 動画 GT が唯一の GT、は不変 (= L1-(c))。**
 
 ### ⛔ Stake (これが上程の理由)
 
