@@ -294,3 +294,35 @@ M10 は restore-exact の write-set に **`body_q_prev` (solver double-buffer) +
 - **restore-fidelity の比較 frame (%12 catch)**: fork state = producer frame `cf[t_k]−1` 終了時点 (chunk t_k 駆動直前) ゆえ、**restore 直後の div_grip は記録 frame `cf[t_k]−1` を参照する** (走行中 metric の `cf[t]+9` を流用しない)。誤用時は cable の実運動 10-frame 分が偽 divergence として混入 (実測: 境界 sample で 0.0–1.67mm、t=200 で 1.67mm)。規則は 1 本: **「state はそれが対応する記録 frame と比較する」**。
 
 *%12 — 2026-07-13。PAPER-ONLY。設計判断・Rs 承認数値の変更ゼロ。INVARIANTS 不触。*
+
+## §15. ERRATUM-C / 明確化 D-E (2026-07-13 22:2x、%12 — B3 5体 CC4/CC5 の CRIT 由来、%12 on-disk 検証済)
+
+### ⭐ERRATUM-C (§6.2 restore fidelity DoD の bar = **domain 転用の誤り**、%12 own)
+
+**誤**: §6.2-1 / §8 の restore fidelity DoD 「restore 直後 div_grip ≤ 健全域 band (10.4-10.6mm)」。
+**事実 (B3 5体 CC4 実測)**: restore 域の期待誤差は **0.02-0.15mm** であり、**cable_qd を全ゼロにした bank (= bank v1 相当の null) でも 10.407mm bar を 3.4-44 倍の余裕で PASS する** ⇒ **本 DoD は bank v2 と v1 を区別できない = B3 chunk の存在理由 (cable 速度を含む fork state) が未検証のまま通る**。
+**原因**: 10.4mm は **HOLD arming の健全域 band** (open-loop replay 中の divergence 分布) であって *state 復元* の期待誤差ではない。spec §6.2 L7 が両者を同一視し、%12 が B2 CLOSE 申し送りで「10.407 = restore band governs」と伝播した (domain 転用)。
+
+**訂正 (bar を 2 本に分離 — §14 の規則『state はそれが対応する記録 frame と比較する』と整合)**:
+- **(α) restore-exactness bar = 本 DoD**: div_grip(復元 state vs 記録 frame `cf[t_k]−1`) ≤ **~0.5mm (提案、確定 = B3 実測)** + fork 後 1-chunk 走行時 ≤ **~1mm**。値は **null bank の失敗 signature (0.5-2mm 級) を確実に分離する**ことを条件とする。
+- **(β) no-immediate-HOLD sanity assert** (§6.2 原意の保全): 走行 metric (vs `cf[t_k]+9`) ≤ 10.407mm。**fidelity bar ではない。**
+- **⭐判別力要件 (新規・一般則)**: fidelity DoD は **null bank (cable_qd ≡ 0 / arm-only v1 bank) で必ず FAIL すること** を negative-control leg で実証する。「PASS する DoD」ではなく「間違った bank を落とす DoD」を要求する。
+
+### 明確化 D (FD による qd の *検算* は却下対象外)
+
+§6.2-1 が却下したのは **FD による qd の「構築」** (記録位置列の差分を qd の *source* にすること) であり、**capture した qd の「検算」ではない**。記録に速度が無い以上、capture した joint_qd には独立 ground truth が存在せず、wrong state buffer (`_state_0`/`_state_1` の substep swap) / permutation / transpose / scale の誤りが **全 leg を素通りする** (CC4)。
+⇒ **記録 joint_q の FD (dt=1/480 実測) を qd の consistency cross-check として採用する** (capture frame の |qd_fd| = 0.036-1.246 rad/s ≫ FD 打切り誤差 ⇒ 判別力あり)。**FD は ground truth ではない** ため bar は consistency (相関・相対誤差・符号・index 対応) であり exactness 証明ではない、と明記して用いる。
+
+### 明確化 E (leg の駆動 mode 要件 — false-verification class の再発防止)
+
+**feedforward (FF) mode の leg は arm 側の bank/restore を構造的に検証できない**: FF は毎 physics frame で arm を記録から上書きし `_per_world_fk_jq` も `jq_ff` から更新するため、arm bank の誤りが観測不能 (CC4)。B2 系 leg は全て FF ゆえ **arm bank を一度も検証していない**。
+⇒ **fork/restore の fidelity leg は trainer が実際に使う IK/residual mode で走らせる** (B1 CRIT「producer harness が env を実行しない」/ B2 CRIT「10x index 誤読」と同じ **false-verification class**)。B3+ の標準。
+
+### fork write-set の追加 (%12 on-disk 検証済 — 名前付き属性の欠落 2 件)
+
+- **`_per_world_fk_jq`** (`:667` alloc / `:915`・`:1027` = P0 settle 値に reset / `:1143`・`:1199` = IK 補間開始点 old_fk_jq + obs 源) — fork write-set に**必須**。欠落すると IK/residual mode で **arm が P0 へ引き戻される** (cable だけ mid-route)。
+- **`_target_seg_indices_{r,l}`** — refresh 自体は `:1081-1085` に存在するが、`_reset_worlds` 内で **P0-seeded cable (`:1079` seed_cable_joint_state ← `_settled_body_q`) の後・fork restore の前**に計算される。consumer #6 (`:1633`) の `reset_to_phase` は `_reset_worlds` の**後**に走るため、fork 後の seg 窓は **P0 由来のまま stale** → `p4`/G4 述語が誤 seg を測り **G4 が永久に latch しない** (CC4+CC5 独立収束)。⇒ **順序付き単一 fork entry point を env に建て、restore → seg 窓再計算 → `_per_world_fk_jq` 再設定 → route_t := bank_boundary[k] → G1..Gk latch pre-set の順**を強制する。
+- **`forbid_banked_fork`**: 「撤去」ではなく **再条件付け** — v2 bank 不在時は書込*前*に raise (現 code の missing-bank silent no-op は「P0 cable に arm だけ mid-route 復元」を生む)。
+- **cable restore は新関数を作らず既存 `seed_cable_joint_state` に `cable_qd=None` kwarg を追加** (AGENTS.md reuse gate + repo の静的監査 script が書込面を関数名で列挙するため、twin 新設は監査不可視になる)。
+
+*%12 — 2026-07-13。PAPER-ONLY。Rs 承認数値 (HOLD 15/12/24 / Δ 0.020 / DR±20 OFF / mix 集合) は不変。INVARIANTS 不触。*
