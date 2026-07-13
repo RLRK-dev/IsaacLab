@@ -1856,10 +1856,32 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
     # Target clip at C1 (V-groove geometry for Grip/InsertIntoClip envs)
     if add_target_clip:
         clip_cfg = newton.ModelBuilder.ShapeConfig()
-        clip_cfg.ke = 2500.0
-        clip_cfg.kd = 100.0
+        # (d2) arm D -- MEASUREMENT ONLY, flag-gated, default OFF (byte-preserve).
+        #
+        # The env's C1 clip is hardcoded 16x SOFTER than the producer's C1, which is what the canonical golden
+        # was recorded against: producer C1 uses MUJOCO_CONTACT_KE/KD = 40000/400 with gap 0.002
+        # (test_newton_clip_routing.py:1179-1185), and so does this env's C2 (:1886-1889) -- only C1 does not.
+        # The comment 18 lines below says so in as many words ("record-matched, NOT C1's soft 2500"): it was
+        # noticed, written down, and left. The cable's rest shape is straight (springref = 0), so it pushes
+        # outward against the groove wall -- and here the wall it pushes against is 16x softer than the one the
+        # reference was made against. That is a far simpler mechanism for the 52.87mm lateral escape than the
+        # "chaotic amplification" FORK-1 assumes, and arm D tests it for the cost of one run.
+        #
+        # ⚠ FORK-1's own refutation of the contact-param hypothesis rested on the SHARED CONSTANTS being
+        # identical. They are. But this clip does not USE them -- it hardcodes 2500. "The constant is the same"
+        # is not "the value in force is the same", which is the trap this whole arc keeps finding.
+        #
+        # ⛔ Making this permanent is a producer<->env parity change and belongs to Rs, not to a flag.
+        _c1_match = os.environ.get("ROUTE_C1_STIFF_MATCH", "0") == "1"
+        clip_cfg.ke = MUJOCO_CONTACT_KE if _c1_match else 2500.0
+        clip_cfg.kd = MUJOCO_CONTACT_KD if _c1_match else 100.0
         clip_cfg.mu = 1.0
-        clip_cfg.gap = 0.001
+        clip_cfg.gap = 0.002 if _c1_match else 0.001
+        if _c1_match:
+            print(
+                f"  [d2 arm D] C1 clip contact MATCHED to the producer: ke={clip_cfg.ke} kd={clip_cfg.kd} "
+                f"gap={clip_cfg.gap} (default build is ke=2500 kd=100 gap=0.001 = 16x softer)"
+            )
         for dx, dy, dz, hx, hy, hz in _v_groove_clip_parts:
             xf = wp.transform(
                 (CLIP1_X + dx, CLIP1_Y + dy, TABLE_HEIGHT + dz + target_clip_float_z),
