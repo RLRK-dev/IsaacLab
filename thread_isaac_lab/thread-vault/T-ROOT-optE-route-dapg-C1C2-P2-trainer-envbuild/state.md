@@ -274,6 +274,40 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 - **%10 C-2**: P1 の bar に **識別力の対** (同 leg で腕 A の同 metric が 52.87mm へ離脱することを示す = 追加コストゼロ)。
 - **%10 C-3 ⊥ %12 MED-2 (両方必要)**: **値の一致は不要** (4.16mm は producer build の値、env は別 build = FORK-1 の前提) ⇒ bar = **「有界かつ非発散 (≤10mm・単調増加でない)」** / **定義の一致は必須** (どの seg / どの clip 中心 / 3D か水平か / groove Z の読み元 = route 0.829)。
 
+---
+
+## ⛔⛔⛔ BLOCKED_FOR_USER #2 (2026-07-14 07:2x、実 %12 起票) — **成功条件が測れない。campaign を回せば壊れた計器の上で GPU を焼く**
+
+⚠ **本件は ghost が「Rs へ上程します」と書いたまま *誰も実行していなかった* もの。実 %12 が起票する。** (ghost 事故 = memory `reference-claude-pane-backgrounded-session-spawns-strays-2026-07-14`)
+
+**BLOCKED_FOR_USER: RL trainer の成功条件 (`G6 SUCCESS = strict_v2 = c1_retained_final AND c2_seated_honest`) は、3 重に壊れている。設計変更 = 直交 DESIGN-GATE (L3) + spec = Rs 専権ゆえ、%12 は fix を打てない。B3b-B7 は STOP 継続。**
+
+### Context (全て on-disk 実測、%12 独立検証済 — 詳細 = spec §20、commit `216e8c2985`)
+
+| # | 病理 | 根拠 |
+|---|---|---|
+| **(a)** | ⛔ **FAIL できない述語** — `c1_retained` (`newton_route_env.py:1479-1483`) = `z_c1 < 0.840 and flank < 0.840` = **天井チェックのみ、X 不参照** (`_c1_retention_m:1270-1286`)。凍結 recount 81 cell で **`c1_ok` = 81/81 = no-op**、**`strict_v2`(58) == `c2_seated_honest`(58) 厳密一致** ⇒ **C1 の連言は *タダ*。** | %12 code 実読 + p1 実測 |
+| **(b)** | ⛔ **PASS できない述語** — 溝は **Y 押し出し** (`create_clip.py:68`) ⇒ **Y = 自由軸**。だが G3 (`:1550`) は `_seat_metrics` の **XY ノルム**で採点 ⇒ **自由軸 dy を着座誤差として課金**。**node 間隔 14.64mm ⇒ \|dy\| 床 7.32mm > bar 3.0mm** ⇒ ⭐ **bar は分解能の 2.4 倍細かい = 抽選** ⇒ **G3 は 24/81 でしか発火せず、ORDERED latch が切れ G6(+200) が 70% の cell で到達不能。物理は 81/81 で着座している。** | %12 が正典 golden (`5f1c3f92…`) から再導出 + p1/p6 独立 CONFIRM |
+| **(c)** | ⛔⭐ **そもそも「溝に *捕捉* されたか」を測れる numeric 計器が *存在しない*** — **07-12 に proven + banked**: `ANCHOR_STEPTABLE_ALIGNMENT_p4p5_20260712.md:108`「lateral groove-capture: **NO numeric coverage** (contact ≠ capture, **proven**); **Rs-video is the only ground-truth**」。**誰も読まず、3 名が計器を作り直しては positive control で殺した** (p1 の \|dx\| 計器は **Rs が目視で却下した cell 2037 を PASS させた**)。 | p1 発見 + p5 source + p6 negative control |
+
+⭐⭐ **(a) と (b) は互いを隠していた**: **FAIL できない述語は警報を鳴らさず、PASS できない述語は「課題が難しい」に見える。どちらも沈黙する。**
+⭐⭐⭐ **動画による直接反証 (pC blind、全 167 frame 掃引、ghost 非依存)**: **no-pin run の全レンダ frame で C1 溝は空** (溝中心を投影した赤枠に背景が透ける)。**数値も一致**: `z_c1_end = 824.023mm` = **台座 820 + cable 半径 4** (着座なら 827)。⇔ **artifact は `c1_retention: pass = TRUE`。** ⇒ **壊れた述語が、動画・数値・source の三方向から反証された。**
+
+### ⛔ Stake (これが上程の理由)
+
+**campaign を回していれば、agent は demo 分布の 70% で成功信号を一度も受け取れず、「RL が効かない / 課題が難しすぎる」と *誤診* されるところだった。数週間の GPU が、壊れた計器の上で焼かれる。**
+
+### Options (全て Rs 専権 — %12 は推奨を付すが決定しない)
+
+- **(A)** ⭐ **計器を直してから B3b-B7 を再開** — fix = 折れ線を y=CLIP_Y で補間し **3 連言** (\|dx\| ≤ 3mm ∧ \|z − ROUTE_GROOVE_Z\| ≤ 3mm ∧ **wall-only 接触 ≤ 0.5mm**) で採点 / **`obs[49]` も同じ差替え** (policy の *観測* も ±7.5mm 汚染、%10 catch) / **bar は緩めない (3mm 据置)** = conservatism 方向 OK。⚠ **env 単独では打てない** — env docstring (`:1271-1280`) が「the EXACT frozen def」と自認、**DoD-9a が offline recount との parity を検証** ⇒ **env + offline(strict_v2) + PREREG の 3 点同時改訂 = spec 層。**
+- **(B)** **p5 に両壁 form-closure metric の設計を授権** — ⭐**受入条件が確定した: 「Rs 却下 cell `2037` を FAIL し、真の着座 cell を PASS する」(両方向 control)。** ⚠ **`c1_wall_dist_spacer_excluded_mm` は未 emit ⇒ producer 再走が要る。**
+- **(C)** **現状のまま campaign** — ⛔ **%12 は反対**。70% で成功信号ゼロ ⇒ 情報を生まず、誤診を生む。
+
+**%12 の推奨: (A) + (B) を並行。(C) は取らない。** ただし **決定は Rs。**
+
+### ⛔ 併せて未決 (ghost が上程を約束したまま消えた 2 件目)
+**pin (INVARIANT #5 の唯一の認可例外) を RL env へ *恒久* 配線してよいか** — B3-α (bank restore 先に retention 機構が無い)。**(d2) の最小配線は *測定* の授権であって *採択* ではない。** 依然 Rs 未裁定。
+
 ### ⚠ 本 §RESOLUTION の commit provenance (records-must-match-fact)
 
 **本節 (§RESOLUTION、%12 執筆) は `aa15596710`「B3a CLOSE: carry the "prove the guard RUNS on the live path" DoD to B3b」(%11 の commit) に含まれている** — 共有 tree 上で %12 の未 commit 編集を %11 の commit が巻き込んだため (commit message は本節に言及していない)。**内容は無傷** (%12 が `git show aa15596710` で実体照合)。⇒ **git log で「Rs 裁定 (d) 承認はいつ記録されたか」を追う者のために本行を置く。** ⭐**これは %12 が `575069abe5` で犯した sweep の鏡像** — 共有 tree での `git add` は explicit path + `git diff --cached --name-only` の事前確認が要る、を双方向で再確認 (memory `feedback-explicit-path-commit-git-diff-file-first-sweep-both-directions`)。history 改変はしない (共有 tree、%9/%12/%10 一致方針)。
