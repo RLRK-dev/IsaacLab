@@ -31,10 +31,12 @@ servo-seed assert, and ``_set_gripper_target``. The AR-specific LEFT-arm freeze
 (§13.2 G3; both arms IK-tracked, adapted from the locked monolith choreography).
 """
 
+import atexit
 import json
 import math as _math
 import os
 import sys
+from pathlib import Path
 
 import mujoco
 import newton
@@ -444,6 +446,334 @@ def build_state_bank_from_recording(recording, n_world, arm_off=0, phases=(1, 2,
     return bank
 
 
+def bank_boundaries_from_recording(recording, phases=(1, 2, 3, 4, 5)):
+    """Chunk-ALIGNED phase-k fork points (W1-B3a; spec v0.8.1 sec 6.2-1 N8).
+
+    For each G-phase ``k``: ``f_k`` = the first recorded frame mapped to ``k``; the fork must happen on an
+    RL-step (chunk) boundary, so ``bank_boundary_step t_k = ceil(f_k / cadence)`` (round UP -- forking
+    mid-chunk would desync the grip staircase by <= cadence-1 frames).
+
+    ``capture_frame = cf[t_k] - 1 = cadence * t_k - 1`` -- the state the env must hold at the INSTANT
+    chunk ``t_k`` begins. Derivation (analytically forced, not empirical): the recorder samples POST-step
+    (:func:`physics_step`), an RL step ``t`` drives frames ``cf[t] .. cf[t]+cadence-1``, and the running
+    divergence metric reads the chunk END ``cf[t]+cadence-1`` -- so "before chunk t_k" is the post-step
+    sample of frame ``cadence*t_k - 1``.
+
+    Args:
+        recording: mapping with ``phase_id`` [frames] (the recorded 15-phase clock).
+        phases: G-phase keys to locate (k=0 is NEVER banked -- env-authoritative reset).
+
+    Returns:
+        ``{k: {"f_k", "t_k", "capture_frame"}}`` for every requested k.
+
+    Raises:
+        ValueError: If a requested phase has NO frames in this recording. v1 skipped it silently
+            (``continue``), which -- combined with :meth:`RouteExecutor.reset_to_phase`'s silent
+            no-op on a missing bank -- lets a NON-canonical recording produce a degenerate bank whose
+            fork restores nothing. Fail loud instead.
+    """
+    assert 0 not in phases, "phase-0 must NEVER be banked (env-authoritative reset)"
+    phase = np.asarray(recording["phase_id"]).astype(np.int64)
+    uncovered = {int(p) for p in np.unique(phase)} - set(_RECORDED_PHASE_TO_G)
+    if uncovered:
+        raise ValueError(f"recorded phase_id {sorted(uncovered)} not in _RECORDED_PHASE_TO_G")
+    g_of_frame = np.array([_RECORDED_PHASE_TO_G[int(p)] for p in phase], dtype=np.int64)
+    n_frames = len(phase)
+    out = {}
+    for k in phases:
+        hits = np.nonzero(g_of_frame == int(k))[0]
+        if hits.size == 0:
+            raise ValueError(
+                f"G-phase {k} has ZERO frames in this recording -- it is not bankable. A recording that "
+                f"never reaches phase {k} (e.g. a non-canonical run) would otherwise yield a degenerate "
+                f"bank silently. G-phase frame counts: "
+                f"{ {kk: int((g_of_frame == kk).sum()) for kk in range(rc.N_ROUTE_PHASES)} }"
+            )
+        f_k = int(hits[0])
+        t_k = -(-f_k // _REC_CADENCE)  # ceil
+        cap = _REC_CADENCE * t_k - 1
+        if not (0 <= cap < n_frames):
+            raise ValueError(f"k={k}: capture_frame {cap} out of range [0, {n_frames})")
+        if int(g_of_frame[cap]) != int(k):
+            raise ValueError(
+                f"k={k}: capture_frame {cap} lies in G-phase {int(g_of_frame[cap])}, not {k} "
+                f"(f_k={f_k} is chunk-aligned, so the rounded-up boundary fell back into phase k-1)"
+            )
+        out[int(k)] = {"f_k": f_k, "t_k": t_k, "capture_frame": cap}
+    return out
+
+
+def resolve_pin_eq_index(eq_identity, mjc_seat_body, eq_connect_type=None):
+    """Re-resolve the clip-pin equality by IDENTITY -- the CONNECT eq whose obj1 is the seat body, obj2 the world.
+
+    This is the ROBUST form the restore must use (%9 / spec sec 18 F-6 (3)): the banked ``pin_eqid`` is an index
+    into the PRODUCER's model layout, and any scene variant that adds bodies/eqs (``add_c2_clip=True`` adds the
+    C2 clip bodies -- newton_skill_env_base.py:1494-1517; also multi-cell / comp3b / DR) shifts it. Activating a
+    shifted index would silently pin a DIFFERENT constraint, i.e. build a physically wrong state -- the same
+    index-space trap ERRATUM-F F6 caught in ``_jws`` (joint-id vs coord-id).
+
+    .. warning::
+       ``mjc_seat_body`` is a **MuJoCo** body id, NOT the recording's ``pinned_body`` (which is a **Newton** body
+       id). MuJoCo counts the worldbody at index 0, so the two spaces are off by one -- measured on the canonical
+       cell: newton 55 == mjc 56, and searching this table for 55 returns eq **26** instead of **27**, i.e. a
+       DIFFERENT constraint, silently. This trap bit the first version of this very function, which was written
+       to prevent it. Use ``bank[k]["pin_seat_body_mjc"]`` (:func:`_assert_pin_index_spaces` derives and asserts
+       it); never pass a Newton body id here.
+
+    The identity triple is what the producer itself matched on (:2352-2364: an mjEQ_CONNECT whose obj2id is the
+    world and whose obj1 body sits at the seat position), so resolving by it reproduces the producer's own choice
+    rather than re-deriving one. The ``layout_hash`` assert is the DETECTION floor (a changed layout is refused
+    loudly); this resolver is the robust form (the right constraint is still found). Both are required.
+
+    Args:
+        eq_identity: the provenance ``[[type, obj1id, obj2id], ...]`` table for the model being restored INTO.
+        mjc_seat_body: the pinned body as a MUJOCO body id.
+        eq_connect_type: mjEQ_CONNECT's enum value; read from mujoco when omitted.
+
+    Returns:
+        The eq index in THAT layout, or None when no single CONNECT eq binds that body to the world.
+    """
+    if eq_connect_type is None:
+        try:
+            import mujoco
+
+            eq_connect_type = int(mujoco.mjtEq.mjEQ_CONNECT)
+        except Exception:  # noqa: BLE001
+            return None
+    hits = [
+        i
+        for i, e in enumerate(eq_identity or [])
+        if int(e[0]) == int(eq_connect_type) and int(e[1]) == int(mjc_seat_body) and int(e[2]) == 0
+    ]
+    if len(hits) != 1:
+        return None  # 0 = absent in this layout; >1 = ambiguous. Either way the caller must fail loud.
+    return hits[0]
+
+
+def _assert_pin_index_spaces(prov, pin_eqid, pin_seat_newton):
+    """Reconcile the NEWTON and MUJOCO body-index spaces for the clip pin -- by assertion, never by assumption.
+
+    The recording witnesses the pin as (``pin_eqid``, ``pinned_body``), but those live in DIFFERENT index spaces:
+    ``pin_eqid`` indexes MuJoCo's eq table while ``pinned_body`` is a Newton body id, and MuJoCo's body list
+    carries the worldbody at 0. Rather than hardcode "+1", the offset is DERIVED from the producer's own eq table
+    (the obj1 of the eq the producer actually activated) and then verified by round-tripping the resolver.
+
+    Returns the MuJoCo body id of the seat, or None when the run never pinned / has no provenance (unit fixtures).
+    """
+    eq_ident = ((prov or {}).get("layout") or {}).get("eq_identity") or []
+    if pin_eqid is None or pin_seat_newton is None or not eq_ident:
+        return None
+    if not 0 <= pin_eqid < len(eq_ident):
+        raise ValueError(f"recorded pin_eqid {pin_eqid} is outside the captured eq table (neq={len(eq_ident)})")
+    mjc_seat = int(eq_ident[pin_eqid][1])
+    if int(eq_ident[pin_eqid][2]) != 0:
+        raise ValueError(f"eq {pin_eqid} is not a connect-to-WORLD (obj2id={eq_ident[pin_eqid][2]})")
+    back = resolve_pin_eq_index(eq_ident, mjc_seat)
+    if back != pin_eqid:
+        raise ValueError(
+            f"pin eq identity does not round-trip: eq {pin_eqid} binds mjc body {mjc_seat}, but resolving that "
+            f"body returns eq {back}. The eq table is ambiguous or the index spaces are mis-mapped."
+        )
+    off = mjc_seat - int(pin_seat_newton)
+    if off not in (0, 1):
+        raise ValueError(
+            f"newton body {pin_seat_newton} vs mjc body {mjc_seat} differ by {off} -- not a worldbody offset. "
+            "The two index spaces are not the simple +1 mapping this bank assumes; resolve geometrically."
+        )
+    return mjc_seat
+
+
+def _capture_provenance(capture):
+    """The capture's recorded substrate identity (``None`` for the synthetic unit fixtures, which have no meta).
+
+    The restore side (B3b) asserts this against the LIVE env solver and refuses a mismatch -- see
+    :func:`_mj_solver_provenance` for why a bank is backend-local.
+    """
+    meta = capture["meta"] if "meta" in getattr(capture, "files", capture) else None
+    if meta is None:
+        return None
+    try:
+        return json.loads(str(np.asarray(meta).item())).get("provenance")
+    except (ValueError, TypeError, AttributeError):
+        return None
+
+
+def _assert_eq_active_live(eqa, recording, pin):
+    """Reject a bank whose captured ``eq_active`` did not come from the buffer the solver integrates.
+
+    The recording carries an INDEPENDENT witness of the solver's equality state: ``pin_eqid`` (the clip-pin
+    constraint id, -1 while inactive) and ``pin_active``. A capture taken from the never-stepped mjWarp mirror
+    is frozen -- the pin column reads 0 for the whole run -- so this cross-check is what separates a live
+    hidden state from a merely present one. Without it the bank silently restores "pin OFF" at every k whose
+    boundary lies past the pin onset (measured: frames 2544+ => k=3,4,5), which is a FORK-1-class mismatch.
+
+    Skipped only when the recording never pinned (``pin_eqid`` all -1) -- then there is nothing to witness.
+    """
+    if pin is None or "pin_eqid" not in getattr(recording, "files", recording):
+        return None
+    eqid_col = np.asarray(recording["pin_eqid"]).astype(np.int64).ravel()
+    active = eqid_col[pin > 0]
+    if active.size == 0:
+        return None  # this run never pinned
+    eqids = np.unique(active)
+    if eqids.size != 1:
+        raise ValueError(f"recording pins more than one eq id ({eqids.tolist()}) -- unhandled")
+    eqid = int(eqids[0])
+    if eqa.ndim != 2 or not (0 <= eqid < eqa.shape[1]):
+        raise ValueError(f"captured eq_active {eqa.shape} cannot hold the recording's pin eq id {eqid}")
+    got, want = (eqa[:, eqid] != 0).astype(np.int64), (pin > 0).astype(np.int64)
+
+    def _latch_onset(v, name):
+        on = np.nonzero(v)[0]
+        if on.size == 0:
+            return None
+        a = int(on[0])
+        if not np.array_equal(v[a:], np.ones(v.size - a, dtype=v.dtype)):
+            raise ValueError(f"{name} is not a monotone latch (it turns back OFF) -- unhandled")
+        return a
+
+    a_cap, a_rec = _latch_onset(got, f"captured eq_active[:, {eqid}]"), _latch_onset(want, "recording pin_active")
+    if a_cap is None:
+        raise ValueError(
+            f"captured eq_active[:, {eqid}] NEVER turns on, but the recording's pin_active is ON in "
+            f"{int(want.sum())} frames. The capture read a buffer the solver never steps -- see "
+            "_mj_hidden_state: SolverMuJoCo keeps mj_data (live under USE_MUJOCO_CPU=True) AND a "
+            "never-stepped mjw_data mirror. Banking the mirror restores pin=OFF at every k past the pin onset."
+        )
+    # The recording marks the frame the SCRIPT activated the eq (:2367-2369); the capture reads what the SOLVER
+    # holds after the step. A +-1 frame convention offset is therefore possible (ERRATUM-A family), so the lag is
+    # MEASURED, never assumed -- demanding equality at lag 0 could false-FAIL a correct capture. A dead mirror
+    # has no onset at all, which is what the check above rejects. All five capture frames sit >=45 frames from
+    # the onset, so a +-1 lag cannot change any BANKED value; it only has to be pinned so a change surfaces.
+    lag = a_cap - a_rec
+    if abs(lag) > 1:
+        raise ValueError(
+            f"captured eq_active[:, {eqid}] latches at frame {a_cap} but the recording pins at {a_rec} "
+            f"(lag {lag}) -- not a step-convention offset; the capture and the recording disagree on WHEN."
+        )
+    return lag
+
+
+def build_state_bank_v2_from_capture(
+    capture, recording, n_world, phases=(1, 2, 3, 4, 5), recording_sha256=None, require_canonical=True
+):
+    """Build the CABLE-CARRYING phase-k bank v2 (W1-B3a; spec v0.8.1 sec 6.2-1).
+
+    v1 (:func:`build_state_bank_from_recording`) banks arm/gripper POSITIONS only, with zero velocities and
+    NO cable -- so ``reset_to_phase(k>=1)`` restored a mid-route arm onto a P0 cable. v2 adds, from the
+    producer capture: the cable joint ``q``/``qd``, the gripper ``qd``, and the MuJoCo hidden state
+    (``qacc_warmstart`` / ``eq_active``; spec sec 16 ERRATUM-D).
+
+    Deliberately KEPT from v1: banked ``arm_qd`` = ZERO. That is not a compromise -- the substrate zeroes
+    the arm ``joint_qd`` on every physics frame (kinematic re-pose), so a captured arm ``qd`` is a
+    one-substep integration residue the producer itself discards. The capture's genuine delta is the
+    GRIPPER (servo-dynamic) and the CABLE (free-flying).
+
+    The capture carries NO phase labels: boundaries come from the recording, and the banked-q-vs-recorded-q
+    EXACT check below then PROVES the two artifacts are frame-aligned instead of assuming it.
+
+    Args:
+        capture: mapping from the BankCapture npz (``joint_q`` [F, nq], ``joint_qd`` [F, nv],
+            ``qacc_warmstart`` [F, nv], ``eq_active`` [F, neq]).
+        recording: the canonical route_demo_raw recording (``arm_q``/``grip_cmd``/``phase_id``/``pin_active``).
+        n_world: worlds to tile the banked (world-invariant) arrays across.
+        phases: G-phase keys to bank.
+        recording_sha256: sha256 of the recording npz; asserted against RUN1_REFERENCE_V2 when
+            ``require_canonical`` (a non-canonical recording yields a degenerate bank -- measured).
+        require_canonical: set False only for synthetic unit fixtures.
+
+    Returns:
+        ``{k: banked}`` where banked has the v1 keys plus ``cable_q`` / ``cable_qd`` / ``qacc_warmstart`` /
+        ``eq_active`` / ``bank_boundary_step`` / ``capture_frame``.
+    """
+    if require_canonical:
+        if recording_sha256 is None:
+            raise ValueError("bank v2 needs the recording sha256 (provenance pin)")
+        if recording_sha256 != RUN1_REFERENCE_V2_SHA256:
+            raise ValueError(
+                f"bank v2 requires the CANONICAL recording (RUN1_REFERENCE_V2 {RUN1_REFERENCE_V2_SHA256}); "
+                f"got {recording_sha256}. A non-canonical run can lack whole G-phases (measured: one such "
+                "recording has ZERO G6 frames) and would produce a silently degenerate bank."
+            )
+    jq = np.asarray(capture["joint_q"], dtype=np.float32)
+    jqd = np.asarray(capture["joint_qd"], dtype=np.float32)
+    qws = np.asarray(capture["qacc_warmstart"], dtype=np.float32)
+    eqa = np.asarray(capture["eq_active"], dtype=np.int32)
+    arm_q_rec = np.asarray(recording["arm_q"], dtype=np.float32)
+    grip = np.asarray(recording["grip_cmd"], dtype=np.float32)
+    if jq.shape[0] != arm_q_rec.shape[0]:
+        raise ValueError(f"capture frames {jq.shape[0]} != recording frames {arm_q_rec.shape[0]}")
+    if jq.shape[1] != arm_q_rec.shape[1]:
+        raise ValueError(f"capture joint_q width {jq.shape[1]} != recording arm_q width {arm_q_rec.shape[1]}")
+    n_coord = jq.shape[1]
+    n_cable_coord = n_coord - _N_ARM_JOINTS  # free-root 7 + hinges
+    n_cable_body = n_cable_coord - 6  # 7 + (B-1) coords <=> B bodies  => B = n_cable_coord - 6
+    n_cable_qd = jqd.shape[1] - _N_ARM_JOINTS  # 6 + (B-1)
+    if n_cable_qd != n_cable_coord - 1:
+        raise ValueError(f"cable qd width {n_cable_qd} inconsistent with q width {n_cable_coord}")
+    bounds = bank_boundaries_from_recording(recording, phases=phases)
+    pin = np.asarray(recording["pin_active"]).astype(np.int64) if "pin_active" in recording else None
+    pin_eq_lag = _assert_eq_active_live(eqa, recording, pin)
+    prov = _capture_provenance(capture)
+    # The pin's IDENTITY key (not its index): the restore re-resolves the eq from this in the env's own layout
+    # (:func:`resolve_pin_eq_index`), and asserts the bank's layout_hash first. Index alone is layout-fragile.
+    pin_seat = None
+    if pin is not None and "pinned_body" in getattr(recording, "files", recording) and (pin > 0).any():
+        pin_seat = int(np.unique(np.asarray(recording["pinned_body"]).ravel()[pin > 0])[0])
+    pin_eqid = None
+    if pin is not None and "pin_eqid" in getattr(recording, "files", recording) and (pin > 0).any():
+        pin_eqid = int(np.unique(np.asarray(recording["pin_eqid"]).ravel()[pin > 0])[0])
+    pin_seat_mjc = _assert_pin_index_spaces(prov, pin_eqid, pin_seat)
+    arm_local = list(_ARM_OVERWRITE_LOCAL)
+    grip_local = sorted(_GRIPPER_COORDS_LOCAL)
+    bank = {}
+    for k, b in bounds.items():
+        cap_f = b["capture_frame"]
+        arm_span = jq[cap_f, :_N_ARM_JOINTS]
+        # frame-alignment PROOF: the capture and the recording are the same run, so world-0's joint_q at
+        # this frame must be byte-identical to the recording's arm_q row. A one-frame skew, a wrong state
+        # buffer, or a permuted layout all break this.
+        if not np.array_equal(jq[cap_f], arm_q_rec[cap_f]):
+            raise ValueError(
+                f"k={k}: capture joint_q[{cap_f}] != recording arm_q[{cap_f}] -- the capture is NOT "
+                "frame-aligned with the recording (skew / wrong buffer / permuted layout)"
+            )
+        g_l, g_r = float(grip[cap_f, 0]), float(grip[cap_f, 1])
+        bank[int(k)] = {
+            # --- v1 layout (unchanged; apply_banked_restore consumes these verbatim) ---
+            "arm_q": np.tile(arm_span[arm_local], n_world).astype(np.float32),
+            "arm_qd": np.zeros(n_world * len(arm_local), dtype=np.float32),  # EXACT: substrate zeroes arm qd
+            "gripper_q": np.tile(arm_span[grip_local], n_world).astype(np.float32),
+            "gripper_qd": np.tile(jqd[cap_f, :_N_ARM_JOINTS][grip_local], n_world).astype(np.float32),
+            "grip_target": np.tile(np.array([g_l, g_l, g_r, g_r], dtype=np.float32), n_world),
+            # --- v2 additions (world-invariant single-world blocks; the env applies them per world) ---
+            "cable_q": jq[cap_f, _N_ARM_JOINTS:].astype(np.float32),  # free-root 7 + hinge angles
+            "cable_qd": jqd[cap_f, _N_ARM_JOINTS:].astype(np.float32),  # free-root 6 + hinge rates
+            "qacc_warmstart": qws[cap_f].astype(np.float32),
+            "eq_active": eqa[cap_f].astype(np.int32),
+            "pin_active": int(pin[cap_f]) if pin is not None else None,
+            "bank_boundary_step": int(b["t_k"]),
+            "capture_frame": int(cap_f),
+            "n_cable_body": int(n_cable_body),
+            # D-2(a) + %9 lens iii: the substrate AND the model layout this bank was captured on. The restore
+            # asserts BOTH against the live env solver (backend_id + layout_hash) and re-resolves the clip pin
+            # by eq IDENTITY rather than raw index -- a same-backend/different-scene bank shifts eq indices
+            # underneath the restore and corrupts silently, which is likelier than a backend flip (spec sec 18).
+            "provenance": prov,
+            "pin_eq_lag": pin_eq_lag,  # measured, not assumed (recorder marks the SCRIPT frame; capture the SOLVER's)
+            "pin_eqid": pin_eqid,  # the PRODUCER-layout eq index -- valid only under a matching layout_hash
+            # TWO INDEX SPACES, and they are OFF BY ONE (measured; see _assert_pin_index_spaces). The recording's
+            # ``pinned_body`` is a NEWTON body id; ``eq_obj1id`` is a MUJOCO body id, and MuJoCo counts the
+            # worldbody at 0. Resolving the eq with the Newton id silently lands on the NEIGHBOURING constraint
+            # (measured: newton 55 -> mjc 56, and searching for 55 returns eq 26 instead of 27). Both ids are
+            # banked, with the offset asserted, so no consumer has to re-derive the mapping.
+            "pin_seat_body_newton": pin_seat,
+            "pin_seat_body_mjc": pin_seat_mjc,
+            "pin_body_index_offset": (None if (pin_seat is None or pin_seat_mjc is None) else pin_seat_mjc - pin_seat),
+        }
+    return bank
+
+
 # =============================================================================
 # §13.7 -- Layer A single-world motion/IK substrate (self-contained verbatim copy).
 # These module-level primitives are the substrate that the self-driving byte-repro path
@@ -476,6 +806,243 @@ _physics_state_buffer = None
 # Whole-route P3 DAgger demo recorder. None = default-off = byte-identical; the recorder is orthogonal
 # to Layer A byte-identity (reference and candidate both run with it None), so it is deferred (test:1780).
 _demo_rec = None
+
+# =====================================================================================================
+# W1-B3a: bank-capture (producer-side, env-gated, READ-ONLY) -- Stage-A spec v0.8.1 sec 6.2-1.
+#
+# ⚠ Rs-LOCK: ``run_route`` (:1038-3110; banner "do NOT edit any line of run_route without Rs" + the
+# ANTI-REVERT marker lines inside it) is NOT touched by this capture. The P3 demo recorder's ctor and
+# finalize live INSIDE run_route -- mirroring that pattern would have required editing a locked function.
+# Instead the capture lives ENTIRELY in ``physics_step`` (lock-free): a lazy env-var-gated init on the
+# first frame + an ``atexit`` finalize (run_route ends in sys.exit -> SystemExit -> atexit runs). The
+# producer trajectory is byte-preserved -- proved empirically by the leg (the capture run's own
+# route_demo_raw.npz sha256 == RUN1_REFERENCE_V2, EXACT).
+# =====================================================================================================
+_bank_cap = None
+_bank_cap_init_done = False
+
+
+def _as_np(a):
+    """numpy COPY of a warp array / ndarray / None (read-only: never alias a live solver buffer)."""
+    if a is None:
+        return None
+    return np.asarray(a.numpy() if hasattr(a, "numpy") else a).copy()
+
+
+def _mj_hidden_state(solver):
+    """(qacc_warmstart, eq_active, backend_name) from the buffer the solver ACTUALLY INTEGRATES.
+
+    ``SolverMuJoCo`` holds BOTH a CPU ``mj_data`` and a mjWarp ``mjw_data``, and ``mjw_data`` is built
+    unconditionally (solver_mujoco.py:5791) -- including on the CPU backend, where it is never stepped.
+    ``use_mujoco_cpu`` alone decides which one is live (solver_mujoco.py:3267-3273: CPU -> ``mj_step(mj_model,
+    mj_data)``). The route substrate runs the CPU backend (task_config.py:116 ``USE_MUJOCO_CPU=True``), so a
+    fixed mjw_data-first probe order reads a DEAD MIRROR. Measured on a full producer run against that mirror:
+    ``qacc_warmstart`` nonzero in 0/562611 entries and ``eq_active`` frozen across all 7707 frames, while the
+    recording's own witness has the clip pin (eqid 27, body 55) ON from frame 2544 -- so a bank built from it
+    restores "pin OFF" at k=3/4/5, i.e. exactly the FORK-1 class of silent state mismatch this chunk removes.
+    Selecting by ``use_mujoco_cpu`` (no fallback: a fallback would resurrect the same silent misread) is what
+    makes the hidden state real rather than merely present.
+
+    ``eq_active`` = the equality-constraint flags: 6 structural (4 CONNECT + 2 follower-mirror,
+    newton_skill_env_base.py:1946) plus the pre-allocated, initially-DISABLED per-body clip-pin CONNECTs, one
+    of which the producer activates at seat time (:2367). ``qacc_warmstart`` = the constraint-solver warm start
+    (spec sec 16 ERRATUM-D) -- whether it is genuinely nonzero on this backend is measured by leg 6, not assumed.
+    """
+    name = "mj_data" if getattr(solver, "use_mujoco_cpu", False) else "mjw_data"
+    d = getattr(solver, name, None)
+    if d is None:
+        return None, None, None
+    return _as_np(getattr(d, "qacc_warmstart", None)), _as_np(getattr(d, "eq_active", None)), name
+
+
+def _mj_solver_provenance(solver, scene_info=None):
+    """(backend_id, layout_hash, eq identity table) -- read at RUNTIME from the configured solver.
+
+    WHY NOT JUST A BACKEND FLAG (%9 lens iii, spec sec 18 F-5): **the hidden state is indexed by MODEL LAYOUT,
+    not by backend.** A bank restored into the SAME backend but a DIFFERENT scene (a no-C2 bank into a C2
+    build, a different cell, comp3b) has its eq/constraint indices shifted underneath it and corrupts
+    silently -- a likelier failure than a backend flip, and one a ``use_mujoco_cpu`` bool cannot see. So
+    provenance carries BOTH:
+
+    * ``backend_id``  -- ``use_mujoco_cpu`` + solver class + newton/mujoco versions (a version bump can change
+      constraint ordering and warm-start semantics).
+    * ``layout_hash`` -- nq/nv/neq/nbody/njnt + the full eq IDENTITY table + the scene flags. One loud assert at
+      restore then collapses the whole class: backend flip, scene change, version bump, index shift.
+
+    ``eq_identity`` [(type, obj1id, obj2id) per eq] is also what lets the restore RE-RESOLVE the clip pin by
+    IDENTITY instead of by raw index -- detection is the floor, name/identity resolution is the robust form
+    (%9). Raw-index hardcoding is the trap ERRATUM-F F6 already caught once (``_jws`` = joint-id vs coord-id).
+
+    Backend identity is decided ONLY by ``use_mujoco_cpu`` (solver_mujoco.py:3267-3273); ``mjDSBL_WARMSTART``
+    in ``disableflags`` is recorded as the EXPLANATION for a constant warm start -- never as a bar on whether
+    to bank it (spec sec 18 F-5 (1): that disposition is the L5a restore-vs-zero A/B, in B3b).
+
+    Read at RUNTIME, on the configured backend: source inspection cannot discharge liveness (ERRATUM-F sec 18 --
+    the dead-mirror misread that two independent source-level reviews missed).
+    """
+    import hashlib
+
+    import newton
+
+    mjm = getattr(solver, "mj_model", None)
+    flags = int(mjm.opt.disableflags) if mjm is not None else -1
+    try:
+        import mujoco
+
+        ws_bit = int(mujoco.mjtDisableBit.mjDSBL_WARMSTART)
+        mj_ver = str(mujoco.__version__)
+    except Exception:  # noqa: BLE001
+        ws_bit, mj_ver = 512, "?"
+    backend_id = {
+        "solver_class": type(solver).__name__,
+        "use_mujoco_cpu": bool(getattr(solver, "use_mujoco_cpu", False)),
+        "newton_version": str(getattr(newton, "__version__", "?")),
+        "mujoco_version": mj_ver,
+    }
+    eq_ident, layout = [], {}
+    if mjm is not None:
+        eq_ident = [[int(mjm.eq_type[i]), int(mjm.eq_obj1id[i]), int(mjm.eq_obj2id[i])] for i in range(int(mjm.neq))]
+        try:
+            import mujoco as _mj
+
+            eq_names = [_mj.mj_id2name(mjm, _mj.mjtObj.mjOBJ_EQUALITY, i) or "" for i in range(int(mjm.neq))]
+        except Exception:  # noqa: BLE001
+            eq_names = []
+        layout = {
+            "nq": int(mjm.nq),
+            "nv": int(mjm.nv),
+            "neq": int(mjm.neq),
+            "nbody": int(mjm.nbody),
+            "njnt": int(mjm.njnt),
+            # constraint-space caps: part of the layout because they change constraint ordering/limits
+            "njmax": int(getattr(solver, "njmax", -1) or -1),
+            "nconmax": int(getattr(solver, "nconmax", -1) or -1),
+            "eq_identity": eq_ident,  # (type, obj1id, obj2id) -- the layout-independent RESOLUTION key
+            "eq_names": eq_names,  # name->index map (empty strings for the unnamed pre-allocated pin eqs)
+            "scene_flags": {
+                k: scene_info.get(k) for k in ("solver_backend", "gripper_dynamic", "perclip_pin_n", "route_c2_scene")
+            }
+            if scene_info
+            else {},
+        }
+    return {
+        **backend_id,
+        "mj_disableflags": flags,
+        "mjDSBL_WARMSTART_bit": ws_bit,
+        "warmstart_disabled_by_flag": bool(flags >= 0 and (flags & ws_bit)),
+        "layout": layout,
+        "layout_hash": hashlib.sha256(json.dumps(layout, sort_keys=True).encode()).hexdigest(),
+    }
+
+
+class BankCapture:
+    """Per-frame producer-state dump for the phase-k bank v2 (spec sec 6.2-1).
+
+    Captures what the P3 demo recording structurally CANNOT carry: the physics ``joint_qd`` (the
+    recording's ``arm_q`` is already the full 74-wide ``joint_q``, so positions are covered) plus the
+    MuJoCo hidden state (``qacc_warmstart`` / ``eq_active``).
+
+    EVERY frame is dumped (~4.4 MB): the phase-boundary selection is an OFFLINE builder decision
+    (:func:`build_state_bank_v2_from_capture`), so a boundary-convention correction never costs a GPU
+    re-run. Phase labels are NOT captured -- the builder reads them from the recording, and the
+    banked-q-vs-recorded-q EXACT check then PROVES the two artifacts are frame-aligned rather than
+    assuming it.
+
+    Read-only: every stored array is copied out of the live buffers; no solver call is issued. The
+    per-method guard mirrors the recorder's one-shot self-disarm (a capture fault must never kill the
+    producer run) but disarms LOUDLY -- a capture-only run has no recorder counter to cross-check.
+    """
+
+    def __init__(self, out_path, scene_info):
+        self._out = str(out_path)
+        self._buf = {k: [] for k in ("joint_q", "joint_qd", "grip_target", "qacc_warmstart", "eq_active")}
+        self._n = 0
+        self._done = False
+        self._disarmed = None  # reason string once disarmed (LOUD)
+        self._backend = None
+        self._meta = {
+            "cadence": _REC_CADENCE,
+            "last_ctrl_frame": _REC_LAST_CTRL_FRAME,
+            "dt": DT,
+            "sim_substeps": SIM_SUBSTEPS,
+            "device": DEVICE,
+            "solver_backend": scene_info.get("solver_backend"),
+            "cell_env": {
+                k: os.environ.get(k, "") for k in ("CABLE_XY_OFFSET", "CLIP_X", "CLIP_Y", "CLIP2_X", "CLIP2_Y")
+            },
+            "route_executor_sha256": _self_sha256(),
+        }
+
+    def sample(self, state, solver, scene_info):
+        if self._disarmed is not None or self._done:
+            return
+        try:
+            qw, ea, backend = _mj_hidden_state(solver)
+            if self._n == 0:
+                self._backend = backend
+                self._meta["provenance"] = _mj_solver_provenance(solver, scene_info)
+                if backend is None:
+                    raise RuntimeError(
+                        f"solver.use_mujoco_cpu={getattr(solver, 'use_mujoco_cpu', None)} but the "
+                        "corresponding MuJoCo data buffer is absent -- the fork cannot restore "
+                        "qacc_warmstart/eq_active (spec sec 16 ERRATUM-D says they ARE exposed). "
+                        "Reading the OTHER buffer is not a fallback: it is never stepped (see _mj_hidden_state)."
+                    )
+            self._buf["joint_q"].append(np.asarray(state.joint_q.numpy(), dtype=np.float32).copy())
+            self._buf["joint_qd"].append(np.asarray(state.joint_qd.numpy(), dtype=np.float32).copy())
+            self._buf["grip_target"].append(
+                np.asarray(scene_info["vbd_control"].joint_target_pos.numpy(), dtype=np.float32).copy()
+            )
+            self._buf["qacc_warmstart"].append(np.asarray(qw, dtype=np.float32).ravel())
+            self._buf["eq_active"].append(
+                np.asarray(ea, dtype=np.int32).ravel() if ea is not None else np.zeros(0, np.int32)
+            )
+            self._n += 1
+        except Exception as e:  # one-shot self-disarm, LOUD (never kill the producer run)
+            self._disarmed = f"{type(e).__name__}: {e}"
+            print(f"[BANK-CAPTURE] ⚠ DISARMED at frame {self._n}: {self._disarmed}", flush=True)
+
+    def finalize(self):
+        if self._done:
+            return
+        self._done = True
+        if self._disarmed is not None:
+            print(f"[BANK-CAPTURE] ⚠ NOT WRITING (disarmed): {self._disarmed}", flush=True)
+            return
+        if self._n == 0:
+            print("[BANK-CAPTURE] ⚠ NOT WRITING (zero frames sampled)", flush=True)
+            return
+        out = {k: np.stack(v) for k, v in self._buf.items()}
+        out["frame_idx"] = np.arange(self._n, dtype=np.int64)
+        meta = dict(self._meta, frames=self._n, mj_backend=self._backend)
+        Path(self._out).parent.mkdir(parents=True, exist_ok=True)
+        np.savez_compressed(self._out, meta=json.dumps(meta), **out)
+        shapes = {k: tuple(v.shape) for k, v in out.items()}
+        print(f"[BANK-CAPTURE] wrote {self._out} frames={self._n} backend={self._backend} shapes={shapes}", flush=True)
+
+
+def _self_sha256():
+    """sha256 of this module's source (capture provenance; the builder pins it into the bank)."""
+    import hashlib
+
+    with open(os.path.abspath(__file__), "rb") as fh:
+        return hashlib.sha256(fh.read()).hexdigest()
+
+
+def _bank_capture_sample(state, solver, scene_info):
+    """W1-B3a hook (called ONLY from :func:`physics_step` -- run_route stays Rs-LOCK-clean)."""
+    global _bank_cap, _bank_cap_init_done
+    if not _bank_cap_init_done:
+        _bank_cap_init_done = True
+        if os.environ.get("BANK_CAPTURE", "0") == "1":
+            out = os.environ.get("BANK_OUT") or os.path.join(
+                os.environ.get("DEMO_OUT", "bank_capture"), "bank_capture.npz"
+            )
+            _bank_cap = BankCapture(out, scene_info)
+            atexit.register(_bank_cap.finalize)
+            print(f"[BANK-CAPTURE] armed -> {out}", flush=True)
+    if _bank_cap is not None:
+        _bank_cap.sample(state, solver, scene_info)
 
 
 def update_kinematic_bodies(physics_state, fk_state, robot_body_count):
@@ -560,6 +1127,9 @@ def physics_step(model, state, solver, contacts, scene_info):
 
     if _demo_rec is not None:  # P3 recorder: sample the post-step frame (read-only, deferred chunk)
         _demo_rec.sample(state_0, scene_info)
+    # W1-B3a bank capture: the SAME post-step frame (1:1 frame index with the recorder by construction).
+    # Lives here -- NOT in run_route (Rs-LOCKED) -- and is a literal no-op when BANK_CAPTURE is unset.
+    _bank_capture_sample(state_0, solver, scene_info)
     return state_0
 
 

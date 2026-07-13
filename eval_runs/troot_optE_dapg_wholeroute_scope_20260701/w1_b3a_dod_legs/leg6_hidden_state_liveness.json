@@ -1,0 +1,371 @@
+{
+ "what": "W1-B3a leg6: is the captured MuJoCo hidden state LIVE?",
+ "meta": {
+  "cadence": 10,
+  "last_ctrl_frame": 7700,
+  "dt": 0.0020833333333333333,
+  "sim_substeps": 10,
+  "device": "cuda:0",
+  "solver_backend": "mujoco",
+  "cell_env": {
+   "CABLE_XY_OFFSET": "0.0,0.0",
+   "CLIP_X": "0.35",
+   "CLIP_Y": "0.150",
+   "CLIP2_X": "0.40",
+   "CLIP2_Y": "0.000"
+  },
+  "route_executor_sha256": "d8a1a3c83813943cb3f8ed4e73442c774b0805b07da21275d95fca4826f13b33",
+  "provenance": {
+   "solver_class": "SolverMuJoCo",
+   "use_mujoco_cpu": true,
+   "newton_version": "1.2.1",
+   "mujoco_version": "3.8.1",
+   "mj_disableflags": 524288,
+   "mjDSBL_WARMSTART_bit": 512,
+   "warmstart_disabled_by_flag": false,
+   "layout": {
+    "nq": 74,
+    "nv": 73,
+    "neq": 46,
+    "nbody": 69,
+    "njnt": 68,
+    "njmax": -1,
+    "nconmax": -1,
+    "eq_identity": [
+     [
+      0,
+      29,
+      0
+     ],
+     [
+      0,
+      30,
+      0
+     ],
+     [
+      0,
+      31,
+      0
+     ],
+     [
+      0,
+      32,
+      0
+     ],
+     [
+      0,
+      33,
+      0
+     ],
+     [
+      0,
+      34,
+      0
+     ],
+     [
+      0,
+      35,
+      0
+     ],
+     [
+      0,
+      36,
+      0
+     ],
+     [
+      0,
+      37,
+      0
+     ],
+     [
+      0,
+      38,
+      0
+     ],
+     [
+      0,
+      39,
+      0
+     ],
+     [
+      0,
+      40,
+      0
+     ],
+     [
+      0,
+      41,
+      0
+     ],
+     [
+      0,
+      42,
+      0
+     ],
+     [
+      0,
+      43,
+      0
+     ],
+     [
+      0,
+      44,
+      0
+     ],
+     [
+      0,
+      45,
+      0
+     ],
+     [
+      0,
+      46,
+      0
+     ],
+     [
+      0,
+      47,
+      0
+     ],
+     [
+      0,
+      48,
+      0
+     ],
+     [
+      0,
+      49,
+      0
+     ],
+     [
+      0,
+      50,
+      0
+     ],
+     [
+      0,
+      51,
+      0
+     ],
+     [
+      0,
+      52,
+      0
+     ],
+     [
+      0,
+      53,
+      0
+     ],
+     [
+      0,
+      54,
+      0
+     ],
+     [
+      0,
+      55,
+      0
+     ],
+     [
+      0,
+      56,
+      0
+     ],
+     [
+      0,
+      57,
+      0
+     ],
+     [
+      0,
+      58,
+      0
+     ],
+     [
+      0,
+      59,
+      0
+     ],
+     [
+      0,
+      60,
+      0
+     ],
+     [
+      0,
+      61,
+      0
+     ],
+     [
+      0,
+      62,
+      0
+     ],
+     [
+      0,
+      63,
+      0
+     ],
+     [
+      0,
+      64,
+      0
+     ],
+     [
+      0,
+      65,
+      0
+     ],
+     [
+      0,
+      66,
+      0
+     ],
+     [
+      0,
+      67,
+      0
+     ],
+     [
+      0,
+      68,
+      0
+     ],
+     [
+      0,
+      10,
+      8
+     ],
+     [
+      0,
+      14,
+      12
+     ],
+     [
+      0,
+      24,
+      22
+     ],
+     [
+      0,
+      28,
+      26
+     ],
+     [
+      2,
+      9,
+      13
+     ],
+     [
+      2,
+      23,
+      27
+     ]
+    ],
+    "eq_names": [
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    "scene_flags": {
+     "solver_backend": "mujoco",
+     "gripper_dynamic": true,
+     "perclip_pin_n": 40,
+     "route_c2_scene": null
+    }
+   },
+   "layout_hash": "ecd82eb766a340061541135f5dc51325ceadc83f356c85b5434ececd81533e2b"
+  },
+  "frames": 7707,
+  "mj_backend": "mj_data"
+ },
+ "buffer_is_live": true,
+ "eq_active_matches_pin_witness": true,
+ "eq_pin_eqid": 27,
+ "eq_pin_lag_frames": 0,
+ "eq_identity": [
+  0,
+  56,
+  0
+ ],
+ "eq_seat_body_newton": 55,
+ "eq_seat_body_mjc": 56,
+ "eq_body_index_offset": 1,
+ "eq_index_identity_agree": true,
+ "eq_varying_columns": [
+  27
+ ],
+ "negative_control_rejected": true,
+ "field_liveness": {
+  "eq_active": {
+   "varies": true,
+   "live": true,
+   "why": "varies over the run"
+  },
+  "qacc_warmstart": {
+   "varies": true,
+   "live": true,
+   "why": "varies over the run"
+  }
+ },
+ "backend_id": {
+  "solver_class": "SolverMuJoCo",
+  "use_mujoco_cpu": true,
+  "newton_version": "1.2.1",
+  "mujoco_version": "3.8.1"
+ },
+ "layout_hash": "ecd82eb766a340061541135f5dc51325ceadc83f356c85b5434ececd81533e2b",
+ "warmstart": {
+  "nonzero": 559764,
+  "size": 562611,
+  "all_zero": false,
+  "disabled_by_flag": false,
+  "disableflags": 524288,
+  "verdict": "capture+restore STANDS (spec sec18 F-5 (1)); disposition deferred to the L5a restore-vs-zero A/B vs the 0.147mm FORK-1 seed scale [B3b]. live nonzero=559764/562611, disabled_by_flag=False"
+ },
+ "PASS": true
+}

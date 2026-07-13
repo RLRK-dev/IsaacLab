@@ -1,0 +1,123 @@
+{
+ "what": "W1-B3a leg3: is the captured joint_qd the solver's END-OF-FRAME velocity?",
+ "method": "LSQ bwd=a*qd[f-1]+b*qd[f] -> gain (scale/sign) / substep index (timing) / R2 (layout)",
+ "sim_substeps": 10,
+ "frame_alignment_Linf": 0.0,
+ "bars": {
+  "gain_tol_gripper": 0.005,
+  "substep_band": [
+   9.5,
+   10.5
+  ],
+  "r2_floor": {
+   "gripper": 0.9,
+   "cable_hinge": 0.5
+  }
+ },
+ "real": [
+  {
+   "channel": "cable_hinge",
+   "gain": 0.9809,
+   "m_hat": 9.81,
+   "r2": 0.9298,
+   "reject": []
+  },
+  {
+   "channel": "gripper",
+   "gain": 1.0003,
+   "m_hat": 9.89,
+   "r2": 0.9999,
+   "reject": []
+  }
+ ],
+ "identifiability": [
+  {
+   "bank": "REAL (the bank under test)",
+   "expect_accept": true,
+   "accepted": true,
+   "rejected_by": [],
+   "ok": true
+  },
+  {
+   "bank": "WRONG-SUBSTEP m=9 (1 early)",
+   "expect_accept": false,
+   "accepted": false,
+   "rejected_by": [
+    "substep",
+    "substep"
+   ],
+   "ok": true
+  },
+  {
+   "bank": "WRONG-SUBSTEP m=8 (2 early)",
+   "expect_accept": false,
+   "accepted": false,
+   "rejected_by": [
+    "substep",
+    "substep"
+   ],
+   "ok": true
+  },
+  {
+   "bank": "NULL bank (qd := 0)",
+   "expect_accept": false,
+   "accepted": false,
+   "rejected_by": [
+    "degenerate",
+    "degenerate"
+   ],
+   "ok": true
+  },
+  {
+   "bank": "SIGN-FLIP (qd := -qd)",
+   "expect_accept": false,
+   "accepted": false,
+   "rejected_by": [
+    "cable_gain_drift",
+    "gain"
+   ],
+   "ok": true
+  },
+  {
+   "bank": "SCALE x1.02",
+   "expect_accept": false,
+   "accepted": false,
+   "rejected_by": [
+    "gain"
+   ],
+   "ok": true
+  },
+  {
+   "bank": "SCALE x0.98 (opposite sign)",
+   "expect_accept": false,
+   "accepted": false,
+   "rejected_by": [
+    "gain"
+   ],
+   "ok": true
+  },
+  {
+   "bank": "PERMUTED coords",
+   "expect_accept": false,
+   "accepted": false,
+   "rejected_by": [
+    "cable_gain_drift",
+    "substep",
+    "R2"
+   ],
+   "ok": true
+  },
+  {
+   "bank": "FRAME-SHIFT (qd[f-1])",
+   "expect_accept": false,
+   "accepted": false,
+   "rejected_by": [
+    "cable_gain_drift",
+    "substep",
+    "substep"
+   ],
+   "ok": true
+  }
+ ],
+ "PASS": true
+}

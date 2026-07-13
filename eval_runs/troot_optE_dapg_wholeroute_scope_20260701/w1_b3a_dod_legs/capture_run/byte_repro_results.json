@@ -1,0 +1,26 @@
+[
+  {
+    "cell": "cell_x0_y0",
+    "mod_exists": true,
+    "gold_exists": true,
+    "sha_exact": true,
+    "ee_tgt_linf": 0.0,
+    "arm_q_linf": 0.0,
+    "grip_cmd_linf": 0.0,
+    "gold_grip_dynamic": true,
+    "status": "OK",
+    "exit": 0,
+    "mod_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    },
+    "gold_verdict": {
+      "verdict": "SUCCESS_DUAL_LOADED_AT_88",
+      "s2": true,
+      "c1f": true,
+      "c2h": true
+    }
+  }
+]

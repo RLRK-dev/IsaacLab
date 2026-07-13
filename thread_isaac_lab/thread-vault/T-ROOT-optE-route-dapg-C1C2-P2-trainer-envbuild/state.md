@@ -35,3 +35,43 @@ session_history:
 - 現況 (2026-07-13 01:28): B0 ✓ / B1 CLOSE ✓ / **B2 CLOSE ✓** (a2f544662b + 追補 eb17e51a7d、3-leg joint + C1 CONFIRM) / **現 = B3 (bank v2) [L-TRIAGE] (%11 build)** / B4-B7 残。
 - Anchors (§運用4): LEDGER row49/50 → charter (本 node) → spec v0.8.1 (設計 SSOT) → W0A_PACKET (数値 decision-of-record) → devplan §7:192 (担当)。
 - 数値基盤 = Rs W0-a 採択値 (HOLD 15/12/24placeholder、Δ-bound 0.020、DR±20 OFF 既定、mix 集合のみ)。smoke 再導出条項付きの値はその条項が governs。
+
+---
+
+## ⛔ BLOCKED_FOR_USER (2026-07-14 03:4x、%12 — B3-α / %9 escalate / FOUNDATIONAL INVARIANT #5 抵触)
+
+**BLOCKED_FOR_USER: RL env に clip-retention pin (INVARIANT #5 の唯一の認可例外) を配線してよいか。配線しない場合、bank v2 の k≥3 fork は実現不能であり、かつ RL task 自体の達成可能性が open になる。**
+
+### Context (全て on-disk 実測、%12 独立検証済)
+
+1. **producer は pin を持つ**: `test_newton_clip_routing.py:1405` = `PERCLIP_PIN=1` gate で 40 本の pin 候補 eq を pre-allocate。golden もこれで録画 (eq = 40 候補 + 6 構造 = 46、#27 が activate、`pin_active` = frame 2544-7706 ON)。
+2. **RL env は pin を持たない**: `build_multiworld_scene` の eq は構造 6 本のみ (`newton_skill_env_base.py:1621` 4-bar / `:1639` mirror)。pin 候補ゼロ。`:1448` の comment 自身が pin eq を *test harness* に帰属。`newton_route_env.py` の pin 参照 4 件は全て無関係 (phase-active clip XY の "pin" 用語)。c1pin 配線は B0-1 で revert 済 (tree clean)。
+3. ⭐**帰結 A (bank)**: bank の `eq_active[27]` に **restore 先が存在しない**。F-6 の layout_hash assert が発火し (bank 46 eq vs env 6 eq) restore 前に fail-loud で BLOCK する = guard は正しく仕事をする。**k=3/4/5 の fork state は現 env で実現不能** (その境界で cable は active constraint で C1 seat に保持されたまま腕が持ち替える。pin 無し env へ restore = 「座っているが保持されていない」)。
+4. ⭐⭐**帰結 B (task 自体、%12 新規測定)**: **env は C1 を保持できない**。C1 着座 seg 27 の C1 中心からの距離を実測:
+   - **記録 (pin あり)**: t=255→396 で **4.16mm 一定** (pin_active=1 で保持)。
+   - **env (pin なし)**: 同 window で **1.08 → 5.76 → 14.14 → 25.80 → 41.20 → 52.87mm** と単調に離脱。
+   ⇒ **env は reference trajectory が依存している機構を欠いている。** RL の success 述語は `c1_final` (C1 保持) を conjunct に持つため、**pin なしで task が達成可能かどうか自体が open**。
+5. ⚠**FORK-1 根本原因の再検討 (open question、断定しない)**: C1 離脱の runaway (t≈300-320) は grip divergence の runaway (t≈337) に **先行する**。かつ **c1pin の「REFUTED」判定の evidence (`comp5_c2seat_fullfire_c1pin_result.json`、banked 311f18cb9b) には pin が実際に発火したことを示す positive control が無い** (記録内容 = steps_run 342 / max_phase 3 / NUMERIC_NOGO のみ)。**spec F-7.4 の規律 (「効果なし」の測定は「機構が無関係」と「機構が発火しなかった」を区別できない) により、当該 REFUTED は再検証を要する。**
+   ⛔ **prohibited.md 遵守**: 「c1pin は FORK-1 fix として REFUTED」を「env に pin 不要」の verdict に流用しない (ある方針の FAIL を別方針の根拠にしない)。bank v2 は **別の正当な理由 (fork-state 実現可能性 + C1 保持)** で pin を要求しており、当時その問いは立てられていない。
+
+### なぜ Rs 専権か
+
+pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。**RL 訓練環境への配線は、認可例外の scope を「scripted producer」から「policy が学習する環境」へ拡張する = 前提 (premise) の変更**であり、design tradeoff ではない (CLAUDE.md §0: 即 L3 + STOP → BLOCKED_FOR_USER → build/probe 前に 5体検証)。policy が非物理的機構に依存して成功する可能性 = sim2real fidelity の一次問題。
+
+### Options
+
+- **(a) pin を RL env へ配線** (新理由 = fork-state 実現可能性 + C1 保持。Rs 承認 → 5体検証 → build)。帰結: bank v2 の k≥3 curriculum が可能に。⚠ policy が pin 依存で学習する sim2real caveat を明示 carry。
+- **(b) bank を k=1,2 に限定** (pin OFF 域のみ)。帰結: **G3-G5 curriculum を失う = bank v2 の主目的が消える**。かつ **帰結 B (task 達成可能性) は未解決のまま残る**。
+- **(c) curriculum re-scope + carry** (B3b を再設計)。同上。
+- **(d) ⭐先に FORK-1 の再検証** (c1pin REFUTED の positive-control 付き再走: pin が実際に発火し C1 を保持することを実証した上で divergence を測る)。**低コスト (cuda:0 数分)、かつ (a)-(c) の選択根拠そのものを与える。**
+
+### Recommendation (%12)
+
+**(d) → 結果に応じて (a) か (b)/(c)。** 理由: 帰結 B (task 達成可能性) と FORK-1 の根本原因は同じ実験で答えられ、W1 全体の前提に関わる。**現状の全 build (B3b 以降) は「env は pin 無しで route を完遂できる」という未検証の前提の上に立っている。**
+
+### 停止範囲
+
+- **B3a = 影響なし → commit 可** (producer 側 capture の忠実性は本件と独立)。
+- **B3b (env restore) = STOP** (裁定まで着手しない)。
+- B4-B7 = 本件裁定に依存 (curriculum / DR / smoke の前提)。
+

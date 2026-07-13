@@ -1,0 +1,81 @@
+{
+ "what": "W1-B3a leg3: FD qd consistency check (cable+gripper) + NULL-BANK negative control",
+ "scope_note": "FD is a CONSISTENCY check (buffer / ordering / sign / scale), NOT an exactness proof (spec clarification D). Arm coords are EXCLUDED: the substrate zeroes arm joint_qd every frame, so the captured arm qd is a one-substep residue -- which is why bank v2 keeps arm_qd=0.",
+ "dt_s": 0.0020833333333333333,
+ "rel_tol": 0.2,
+ "rows": [
+  {
+   "k": 1,
+   "capture_frame": 1129,
+   "cable_hinge_rel_err": 0.0719,
+   "gripper_rel_err": 0.0184,
+   "cable_fd_absmax_rad_s": 0.3899,
+   "cable_cap_absmax_rad_s": 0.3869
+  },
+  {
+   "k": 2,
+   "capture_frame": 1729,
+   "cable_hinge_rel_err": 0.9023,
+   "gripper_rel_err": 0.5229,
+   "cable_fd_absmax_rad_s": 0.1825,
+   "cable_cap_absmax_rad_s": 0.2616
+  },
+  {
+   "k": 3,
+   "capture_frame": 2589,
+   "cable_hinge_rel_err": 0.9022,
+   "gripper_rel_err": 0.6461,
+   "cable_fd_absmax_rad_s": 0.0361,
+   "cable_cap_absmax_rad_s": 0.0726
+  },
+  {
+   "k": 4,
+   "capture_frame": 6189,
+   "cable_hinge_rel_err": 0.0963,
+   "gripper_rel_err": 0.0219,
+   "cable_fd_absmax_rad_s": 1.2464,
+   "cable_cap_absmax_rad_s": 1.2615
+  },
+  {
+   "k": 5,
+   "capture_frame": 6809,
+   "cable_hinge_rel_err": 0.0952,
+   "gripper_rel_err": 0.0767,
+   "cable_fd_absmax_rad_s": 0.5743,
+   "cable_cap_absmax_rad_s": 0.6046
+  }
+ ],
+ "cable_ok": false,
+ "gripper_ok": false,
+ "null_bank_control": {
+  "rows": [
+   {
+    "k": 1,
+    "null_cable_rel_err": 1.0,
+    "detected": true
+   },
+   {
+    "k": 2,
+    "null_cable_rel_err": 1.0,
+    "detected": true
+   },
+   {
+    "k": 3,
+    "null_cable_rel_err": 1.0,
+    "detected": true
+   },
+   {
+    "k": 4,
+    "null_cable_rel_err": 1.0,
+    "detected": true
+   },
+   {
+    "k": 5,
+    "null_cable_rel_err": 1.0,
+    "detected": true
+   }
+  ],
+  "all_detected": true
+ },
+ "PASS": false
+}

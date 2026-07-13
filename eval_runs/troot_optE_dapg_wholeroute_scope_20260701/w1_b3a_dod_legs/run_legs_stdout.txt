@@ -1,0 +1,41 @@
+===== LEG 1: Rs-LOCK assert (run_route byte-identical vs HEAD) =====
+[leg1] run_route: BYTE-IDENTICAL vs HEAD (2080 lines)
+[leg1] PASS (Rs-LOCKED span untouched) -> /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b3a_dod_legs/leg1_lock_assert.json
+===== LEG 2: producer capture (BANK_CAPTURE=1 + DEMO_RECORD=1, x0_y0, cuda:0) =====
+  npz sha256 EXACT (byte-id) : 1/1
+===== LEG 3: qd substep-index readout + identifiability table =====
+[leg3] frame alignment  L_inf(capture.joint_q - recording.arm_q) = 0.000e+00  over 7707 frames
+[leg3] REAL cable_hinge  gain= 0.9809  substep m_hat= 9.81 (pred 10)  R2=0.9298  -> ACCEPT
+[leg3] REAL gripper      gain= 1.0003  substep m_hat= 9.89 (pred 10)  R2=0.9999  -> ACCEPT
+[leg3] identifiability: gain |g-1|<=0.005 (gripper) / substep m in (9.5, 10.5) / R2 >= {'gripper': 0.9, 'cable_hinge': 0.5}
+[leg3]   REAL (the bank under test)     -> accepted                               OK
+[leg3]   WRONG-SUBSTEP m=9 (1 early)    -> rejected by substep                    OK
+[leg3]   WRONG-SUBSTEP m=8 (2 early)    -> rejected by substep                    OK
+[leg3]   NULL bank (qd := 0)            -> rejected by degenerate                 OK
+[leg3]   SIGN-FLIP (qd := -qd)          -> rejected by cable_gain_drift,gain      OK
+[leg3]   SCALE x1.02                    -> rejected by gain                       OK
+[leg3]   SCALE x0.98 (opposite sign)    -> rejected by gain                       OK
+[leg3]   PERMUTED coords                -> rejected by R2,cable_gain_drift,substep OK
+[leg3]   FRAME-SHIFT (qd[f-1])          -> rejected by cable_gain_drift,substep   OK
+[leg3] PASS -> /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b3a_dod_legs/leg3_qd_substep_readout.json
+===== LEG 6: hidden-state liveness (eq_active vs the recording's pin witness; warmstart mechanism) =====
+[leg6] backend: use_mujoco_cpu=True -> the live buffer is mj_data; capture read mj_data -> OK
+[leg6] eq_active[:, 27] ON in 5163 frames; recording pin_active ON in 5163; MEASURED lag = 0 frame(s) -> live latch: True
+[leg6] eq_active columns that VARY over the run: [27]  (a dead mirror varies in NONE)
+[leg6] eq 27 identity (type, obj1, obj2) = [0, 56, 0]; seat body: newton=55 -> mjc=56 (worldbody offset 1); resolve_pin_eq_index(mjc) -> 27 -> identity round-trips: True
+[leg6] negative control (dead-mirror eq_active, pin frozen OFF) is REJECTED: True
+[leg6] qacc_warmstart (TELEMETRY, not a bar): nonzero 559764/562611  absmax=1.07755e+06
+[leg6] mechanism (EXPLANATION, not a bar): mj_disableflags=524288 & mjDSBL_WARMSTART(512) -> warmstart_disabled=False
+[leg6] warmstart disposition: capture+restore STANDS (spec sec18 F-5 (1)); disposition deferred to the L5a restore-vs-zero A/B vs the 0.147mm FORK-1 seed scale [B3b]. live nonzero=559764/562611, disabled_by_flag=False
+[leg6] field liveness  eq_active        -> LIVE (varies over the run)
+[leg6] field liveness  qacc_warmstart   -> LIVE (varies over the run)
+[leg6] PASS -> /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w1_b3a_dod_legs/leg6_hidden_state_liveness.json
+===== LEG 4: CPU units (bank v2 builder + guards + null control) =====
+  [B3a null-control] PASS: real bank accepted AND null (cable_qd=0) bank rejected at all k=[1, 2, 3, 4, 5]
+------------------------------------------------------------------------------
+RESULTS: {'synthetic': True, 'nominal': True, 'world_slice': True, 'bank_v2': True, 'null_control': True}
+⑦(a) restore-fidelity + B3a bank v2: PASS
+===== LEG 5: producer 5-cell byte-repro (route_executor.py diff, surface conformance) =====
+  npz sha256 EXACT (byte-id) : 5/5
+===== SUMMARY =====
+W1_B3A_LEGS_FAIL=0
