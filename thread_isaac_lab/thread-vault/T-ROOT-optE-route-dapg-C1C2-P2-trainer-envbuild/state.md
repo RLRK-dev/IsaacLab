@@ -75,3 +75,34 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 - **B3b (env restore) = STOP** (裁定まで着手しない)。
 - B4-B7 = 本件裁定に依存 (curriculum / DR / smoke の前提)。
 
+
+### ⭐ B3-α 追補 (2026-07-14 03:5x — VT-DESIGN (p5) corroboration。%12 が両引用を on-disk VERIFIED)
+
+**問題は「bank の restore 先が無い」より遥かに大きい。banked spec 自身が pin を routing の機構として名指ししている。**
+
+**FACT 1 (%12 verified — `RS71-System-Spec-SSOT.md` §4 CABLE、FIDELITY BOUNDARY、Rs DECISION B2 2026-06-25、Rs-accepted)**:
+> cable は **1-DOF/joint の PLANAR bender**、bend plane = **VERTICAL (sag)** → 動的に表現するのは **vertical SAG + position + free-root pose** のみで、**horizontal routing curvature は表現しない** (5-clip 千鳥の X-Y 曲率には第 2 の bend DOF が要る)。**「Horizontal routing through the staggered clips is therefore KINEMATIC (grasp-drag + the AUTHORIZED clip-retention pin)、NOT a dynamically-curved cable」**。これは **banked sim2real fidelity limitation (Rs-accepted、defect ではない)**。**Cable-SHAPE robustness は in-sim では vertical sag についてのみ trainable/validatable、horizontal routing curvature については不可。**
+
+⇒ **pin は「あれば便利」ではなく、banked spec が routed-hold の機構として指名している。** pin を持たない env は **routing task を表現できない** (cable model に水平曲率の DOF が無い)。
+
+**FACT 2 (p5 canonical 表 r5)**: STEP 9 (A_C1) = 「腕が離れても C1 が cable を独立保持」。**STEP 10 / 16 / 24 / 32 / 40 / 43 の全てが prereq に「9-STILL」を持つ** ⇒ **STEP 9 以降の全段が「clip が保持し続ける」機構に依存**。fork 境界だけの問題ではない。
+
+**FACT 3 (%12 verified — `newton_route_env.py:55-58` の env-core 自身の記述)**:
+> 「Producer-grade seat metrics (…**frozen seat-body pin**) are route-executor refinements; **the env-core uses geometric cable-vs-clip proxies** from cable body positions」
+
+⇒ **env-core は pin を持たないことを承知の上で、seat を「幾何 proxy」で *測る* 設計になっている。だが proxy は *測る* 手段であって *保持する* 機構ではない。** env は「cable が clip の近くにあるか」を測れるが、**そこに留める force を持たない**。
+
+### ⇒ Options の再評価 (p5 の主寄与、%12 CONCUR)
+
+- **(b) bank を k=1,2 に限定 / (c) curriculum re-scope は機構問題を回避しない — 先送りするだけ。** bank restore を諦めても、**policy 自身が STEP 9 以降を達成し、env がそれを保持できねばならない** (STEP 10-43 の全 prereq = 9-STILL)。pin-less env では RS71:62 の banked 判断により **routed-hold 自体が動的表現の外**。
+- ⇒ **(b)/(c) が真に機構問題を回避するのは「trainer scope を STEP 8 (C1 での解放) より手前で cap する場合のみ」。** そうでなければ壁は **訓練時に再来する**。
+
+### 未確立 (正直に、p5)
+
+「**C1 単独 (STEP 9) なら pin なしで動的保持できるか**」は未証明。RS71:62 の議論は千鳥 = 複数 clip の水平曲率についてであり、直線 cable が単一 V 溝に座るだけなら動的に成立し得る。**だが** (i) 2 clip 同時保持 = STEP 16 では確実に水平曲率が要る → そこでは確実に機構が要る (ii) DoD6 の Rs human-GT が既に「**cable OFF C1**」を出しており、**C1 単独保持も established でない**。⇒ **「pin 不要」を仮定しないこと。**
+
+### 帰結 (%12)
+
+**現 trainer node の全 build (B3b 以降) と、FORK-1 の根本原因診断 (「chaotic amplification ⇒ closed-loop RL のみが fix」) は、いずれも「pin 無しの env が route を保持できる」という *banked spec 自身が否定している* 前提の上に立っている。** これは B3 の問題ではなく **trainer node / W0-a 級の前提問題**。
+
+*%12 — 2026-07-14。p5 の 2 引用は %12 が on-disk VERIFIED。p5 からも Rs へ同内容を報告予定。*
