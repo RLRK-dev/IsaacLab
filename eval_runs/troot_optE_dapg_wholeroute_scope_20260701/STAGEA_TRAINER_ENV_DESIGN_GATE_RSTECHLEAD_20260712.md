@@ -576,3 +576,17 @@ layout_hash assert (F-6) が同一 layout を保証するので、**今日は ba
 ⇒ **どちらに転んでも情報が出る leg** = 本 arc の規律 (「PASS する DoD」でなく「間違いを落とす DoD」) の適用。
 
 *%12 — 2026-07-14。%10 が commit 前の再走で 2 連続 in-flight 破綻を捕捉 (arity TypeError / import json 欠落 NameError) — 「commit 前に必ず再走」を B3b 以降も維持。*
+
+### F-8.7 (追補 — %10 catch: **検証手順が自分の baseline を破壊する** / **容器 hash で比較しない**)
+
+**(1) ⭐検証手順は自分の baseline を破壊してはならない。**
+F-8.6 で「再走して新旧 npz の data 配列 byte-identity を assert せよ (= positive control)」と裁定した。**しかし `run_legs.sh` の LEG2 は再走前に `rm -f bank_capture.npz` する (:23)、かつ npz は非 commit (5.8MB)** ⇒ **そのまま再走すれば比較対象 (pre-fix artifact) が消滅し、裁定した assert が *永久に実行不能* になる**。
+⚠ **「再走を positive control に格上げする」という裁定そのものが、再走の副作用で失われる構図だった** (%10 が先回りで pre-fix npz [sha256 312dc638…770 = §7.1 の現 pin と EXACT、由来 module d8a1a3c8] を退避)。
+⇒ **規則: artifact を再生成する前に、pre-change artifact を保全し provenance を pin せよ。** 正式 baseline は **builder 側 (leg script が参照する場所)** に置く (verifier の session-local scratchpad は消える)。
+
+**(2) ⭐容器 (container) の hash で比較しない — 必ず false-FAIL する。**
+**npz は zip** ゆえ **file 単位の sha256 は圧縮 metadata で必ず変わる** ⇒ **file-sha を byte-identity の assert にすると、データが完全に同一でも必ず不一致 = false-FAIL** (= 「計器が対象を測れていない」class の再演)。
+⇒ **正しい assert は array 単位**: `joint_q` / `joint_qd` / `grip_target` / `qacc_warmstart` / `eq_active` / `frame_idx` の **6 配列すべてが `np.array_equal`** ∧ **meta のみ差分** (`route_executor_sha256` は更新される / `frames` / `backend` / `cell_env` は不変であるべき)。
+⇒ **一般則: 「同一性」を assert する時は、意味的な単位 (配列・field) で比較する。容器の hash は同一性の proxy にならない。**
+
+*%12 — 2026-07-14。%10 が裁定の自己破壊性と false-FAIL trap を同時に捕捉し、baseline を先回り保全。verify 側の 2 系統 (通し精読 + class 狙い) が、裁定側 (%12) の見落としを 2 回連続で捕まえた形。*
