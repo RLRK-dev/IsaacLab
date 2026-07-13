@@ -593,7 +593,70 @@ F-8.6 で「再走して新旧 npz の data 配列 byte-identity を assert せ�
 
 ---
 
-## §20. F-9 — ⛔ **着座計器が拘束の軸と一致していない** ⇒ 成功条件が demo 分布の 70% で到達不能 (2026-07-14 06:4x、%12 起票 / p1 独立 CONFIRM / **Rs 裁定要 — STOP**)
+## §20. F-9 — ⛔ **着座計器が拘束の軸と一致していない** ⇒ 成功条件が demo 分布の 70% で到達不能
+
+> ### ⚠ PROVENANCE 訂正 + 再起票 (実 %12 RS-TECH-LEAD、2026-07-14 07:2x、Rs 裁定「復帰した %12 に自分の名で起票し直させる」)
+>
+> **本節の初版 (commit `7298cb2cca`、06:49:37、+89 行) は私が書いたものではありません。** 私の pane は **06:07:26 に背景化**され (`Ctrl+B` = tmux prefix と同一キー)、以降 herdr の dispatch が「新規セッション欄」に落ちて **文脈ゼロの stray session を量産**しました。その 1 つ (`3b5cd916`) が本節を書き、**見出しに「%12 起票」と署名して自分で git commit しました** = **設計 SSOT 内での署名詐称**。詳細 = memory `reference-claude-pane-backgrounded-session-spawns-strays-2026-07-14`。
+>
+> ⭐ **revert しません。** 中身は真であり、**私が復帰後に source + 正典 artifact から独立に再検証しました** (下記 §20.0)。**破棄すれば実在の発見を殺します。** 以後、本節は **実 %12 の起票**として扱います。
+>
+> ### §20.0 実 %12 の独立検証 (2026-07-14 07:2x、file:line + 正典 sha)
+>
+> | 主張 | 私の実測 | 根拠 |
+> |---|---|---|
+> | 溝は **Y 軸に押し出されている** ⇒ **Y = cable が滑るために設計された自由軸 / X・Z = 脱出すれば落ちる致命軸** | ✅ 逐語確認 | `thread_isaac_lab/scripts/create_clip.py:68` 「extrude a 2D cross-section profile **along Y-axis (cable direction)**」 |
+> | G3 は **XY ノルム**で採点する | ✅ | `newton_route_env.py:1550` `p3 = (c1_seat < T_GROOVE) and (ph >= 2)` / `c1_seat` = `_seat_metrics(...)[0]` = `sqrt(lateral² + z_gap²)`、`lateral` = **nearest-in-Y node の XY ノルム** (`:1294-1299`) |
+> | **bar が、測っている量の分解能より細かい** | ⭐ **確定** | 正典 golden (`w0e_81rerun_snapdown_0537/cell_x0_y0`、sha `5f1c3f92…` = `route_executor.py:95` RUN1_REFERENCE_V2_SHA256) 最終 frame の **Y 方向 node 間隔 = 14.64mm** ⇒ **\|dy\| の量子化床 = 7.32mm**。**bar `T_GROOVE = 3.0mm`** (`task_config.py:368`) ⇒ ⭐ **bar / 床 = 0.41 = bar は分解能の 2.4 倍細かい ⇒ G3 の発火は事実上 *抽選*。** |
+> | ⭐⭐ **「4.16mm の着座誤差」は物理でなく節点位相** | ⭐ **確定・かつ私自身の数字を撃ち抜いた** | 正典最終 frame、C1 に Y 最近傍の node: **dx = −0.15mm (X はほぼ完璧に中心) / dy = −4.16mm** ⇒ **XY ノルム 4.16mm → 3mm bar を FAIL / \|dx\| 単独 0.15mm → 楽々 PASS。** ⇒ **着座「誤差」は丸ごと *溝が滑らせるために開けている軸*。物理は正常。** ⚠ **私は一晩この 4.16mm を「pin された C1 距離」として引用し、(d2) の P1 bar にまでしていた。撤回する。** |
+> | 対の病理: `c1_retained` は **FAIL できない** | ✅ | `:1479-1483` = `z_c1 < 0.840 and flank < 0.840` の **天井チェックのみ、X 不参照** (`_c1_retention_m:1270-1286`)。凍結 recount 81 cell で **`c1_ok` = 81/81 = no-op** (p1 実測)、**`strict_v2`(58) == `c2_seated_honest`(58) 厳密一致**。⭐ **golden t=0 (cable はテーブル、未把持) でも PASS。** ⚠ **ただし「t=0 で C1 から 50.00mm」は `GRASP_X 0.30` − `CLIP1_X 0.35` = *設計定数* であって測定値ではない (p5 catch)。識別情報ゼロゆえ論拠に使わない — 欠陥は source だけで立つ。** |
+>
+> ⇒ ⭐⭐⭐ **同一の成功連言に「PASS できない述語 (G3)」と「FAIL できない述語 (c1_retained)」が同居している。**
+> ⇒ ⭐ **動画による直接反証 (pC blind、ghost 非依存)**: no-pin run の END で **C1 溝は明確に空** (溝中心を投影した赤枠の中に背景が透ける)、cable は clip 台座を通過。**数値も一致**: 記録の `z_c1_end = 824.023mm` = **台座 820mm + cable 半径 4mm** (着座なら 827mm)。⇔ **artifact は `c1_retention: pass = TRUE`。** ⇒ **壊れた述語が、動画・数値・source の三方向から反証された。**
+> ⚠ **pin 有り run は gripper 遮蔽で C1 が見えず「pin が効いたか」は未判定** ⇒ **C1-focused カメラ (直上 or 真横) が要る** (P4 に追加、%11 実装中)。
+>
+> ### ⛔⛔ §20.1 爆風半径 = **未確定**。救済しようとした計器も「FAIL できない述語」だった (p6 の negative control、⭐**本 arc の教訓が救済そのものに着地した**)
+>
+> **初版 (ghost) と、私の §20.0 初稿は、こう書いていた**: 「危険は *前向き* であって *遡及* ではない — 台本 route は正しいことをしていた (\|dx\| は 58/58 で 1.94mm 以内)」。
+> ⛔ **撤回する。** **p6 が negative control を回した (誰も回していなかった)**:
+> - **positive control (58 SUCCESS cell)**: \|dx\| med **0.94mm** / max **1.94mm** / 3mm 超過 **0/58** / z med **829.0mm** — ✅ ghost・p1・p6 の 3 名が一致。
+> - ⛔⛔ **negative control**: **Rs が目視で却下した cell (`2037_x-20_y-15_Fon` =「cable off C1」)** に同じ計器をかけると → **\|dx\| = 0.36mm → 計器は PASS と言う。**
+> ⇒ ⭐⭐⭐ **「C1 着座」を立証するはずの計器が、*Rs が off-C1 と断じた cell を弁別できない*。** ⇒ **これは計器ではなく、*また 1 つの「FAIL できない述語」*。**
+>
+> ⭐⭐ **メタ (本 arc 最深の一撃)**: 我々は一晩かけて **「常に PASS する述語は、FAIL *できない* 述語と区別がつかない」** を確立した。**そして 0.716 を、*既知の不良 cell を PASS させる述語* で救済しようとしていた。** ⇒ ⭐ **positive control の一致は validation ではない。3 名が \|dx\| 数値を confirm したが、identifiability test (既知不良で FAIL できるか) は誰も回していなかった。**
+>
+> ⇒ ⚓ **正確な現在位置**:
+> - ✅ **確立**: \|dx\| 計器は 58 と Rs 却下 cell を **弁別できない** ⇒ **「58/58 で C1 は溝に捕捉されていた」は *未確保*。**
+> - ⛔ **同時に「0.716 は無効」も確立していない** (⚓ 未確保 ≠ 偽)。**「論拠が立証していない」が正確。**
+> - ⛔ **「危険は遡及的でない」も *未確保* に戻る。** **この形で Rs に上げてはならない。**
+> - ⚠ **p6 の scope 限界 (own)**: 却下 cell の同定 (`2037_x-20_y-15_Fon`) は p6 の surface 記録依拠で **Rs 逐語で未再確認** ⇒ **Rs に確認要**。
+> ⚠ **裏付け (p5)**: `_clip_geoms` (`route_executor.py:1971-1981`) は **clip の衝突 BOX 5 個 *全部*** (基部/壁/リップ/スペーサ) を含む ⇒ `mj_geomDistance < 0` は **「クリップ組立体への接触」**を証明するが **「溝への捕捉」は証明しない**。⇒ ⭐**DoD6 cell-2037 が実証**: honest-3D **−0.458mm (接触) + 全 numeric PASS**、**なのに Rs 目視 = OFF C1**。
+> ⇒ ⭐⭐ **必要なのは「Rs 却下 cell で FAIL できる」計器。それが出来て初めて 58 の PASS が意味を持つ。**
+>
+> ⭐⭐⭐ **そして決定打 — 本 codebase は 07-12 に *既にこれを bank していた* (p1 発見、誰も読んでいなかった)**:
+> > `ANCHOR_STEPTABLE_ALIGNMENT_p4p5_20260712.md:108` 逐語: **「lateral groove-capture: NO numeric coverage (contact ≠ capture, **proven**); **Rs-video is the only ground-truth**」** / `:110` 「both-wall form-closure metric = future design question」
+>
+> ⇒ ⛔ **「溝への側方 capture を測れる numeric 計器は存在しない」は 07-12 に *証明済で banked*。** それを読まずに、**ghost-%12 / p1 / p6 の 3 名が計器を作り直しては positive control で殺した** (p1 の \|dx\|+dz 計器も cell `2037_nominal` を **\|dx\| 0.99mm / dz −0.21mm → PASS** させ、Rs 目視は **OFF C1**)。
+> ⇒ ⭐ **p1 own (今夜 13 回目、最も広く伝播した誤り)**: 「0.716 は無事 / 危険は前向き」を %12・%10・%11・p6・pB 全員に伝播させ、上程 framing にまでした。**全員が採用した。** ⇒ **本節から当該 framing を除去済。**
+>
+> ### ⭐⭐⭐ §20.3 ⇒ **上程は弱まらない。*強まる*。計器の失敗は 3 重である**
+> | # | 病理 | 状態 |
+> |---|---|---|
+> | (a) | **FAIL できない述語** — `c1_retained` = 天井チェックのみ (X 不参照)、凍結 recount 81 cell で **81/81 no-op**、`strict_v2`(58) == `c2_seated_honest`(58) 厳密一致 | ✅ **確立** |
+> | (b) | **PASS できない述語** — G3 = 節点量子化 (床 7.32mm > bar 3.0mm) ⇒ **24/81 でしか発火せず、ORDERED latch が切れ G6(+200) が 70% の cell で到達不能** | ✅ **確立** (p1 独立実測 + %12 が SSOT + 正典 artifact から再導出) |
+> | (c) | ⭐ **そもそも「溝に *捕捉* されたか」を測れる numeric 計器が *存在しない*** — 07-12 に **proven + banked**、以後の全試作が positive control で死亡 | ✅ **確立 (再確認)** |
+> ⇒ ⭐⭐⭐ **「成功条件が壊れている」だけでなく「成功を *測る手段が無い*」。** ⇒ **Rs の動画 human-GT が唯一の ground truth であることが、source と実測の両方から確定した。** ⇒ **上程はより緊急。**
+> ⚠ **かつ (a) と (b) は互いを隠していた**: FAIL できない述語は警報を鳴らさず、PASS できない述語は「難しい課題」に見える。**どちらも沈黙する。** — 本 arc の主題そのもの。
+>
+> ### ⛔ §20.2 fix の欠落 2 件 (%10 の sweep、これが無いと fix が不完全)
+> - ⭐**A. `obs[49]` (`OBS_SEATED_SEG_D`) も同じ汚染** (`newton_route_env.py:1426` が `seat_dist` をそのまま観測へ) ⇒ **述語だけ直しても policy の *観測* が ±7.5mm の量子化ノイズを持ったまま = agent は着座スケールで盲目のまま学習する。** ⇒ **計器差替えは obs にも適用。**
+> - ⭐**B. producer の C1 geom 距離は spacer 混入** (`_clip_geoms:3845-3857` が C1 SPACER riser を含む。**C2 だけ `:5559-5566` で分離済、C1 は未分離**) ⇒ ⛔**「producer の量を再利用せよ」型の fix は C1 で gameability を再導入する** (「溝に座る」と「台座を押す」が区別できない)。
+> - ⇒ **正しい C1 honest 述語 = 3 連言**: **\|dx\| at y=C1Y ≤ 3mm** ∧ **\|z − ROUTE_GROOVE_Z\| ≤ 3mm** (⭐**溝は上が開いたチャンネル ⇒ Z も脱出軸**。\|dx\| だけでは浮いた cable が PASS) ∧ **wall-only 接触 ≤ 0.5mm**。⚠ **`c1_wall_dist_spacer_excluded_mm` は未 emit ⇒ producer 再走が必要** (banked JSON から逆算不可)。
+> ⚠ **行番号 drift**: 本節が cite する行は p3 の env 編集 (06:19-06:36) 後にずれ得る ⇒ **on-disk で再 anchor すること。**
+>
+> ⛔ **fix は %12 の権限外** = 成功条件 = **直交 DESIGN-GATE (L3) + spec = Rs 専権**。かつ **env 単独修正は DoD-9a parity を破る** (env docstring `:1271-1280` が「the EXACT frozen def」と自認) ⇒ **env + offline(strict_v2) + PREREG の 3 点同時改訂**が要る。⇒ **§21 で Rs へ上程 (実 %12 が起票。ghost が「上程します」と書いたまま誰も実行していなかった)。**
+
+**(初版 2026-07-14 06:4x = ghost `3b5cd916` / 再起票 07:2x = 実 %12、独立検証済 / p1・p6 が独立 CONFIRM / ⛔ Rs 裁定要 — B3b-B7 STOP)**
 
 ### F-9.1 事実 (全て on-disk、file:line)
 
