@@ -358,3 +358,26 @@ equality constraint の活性 flag は **4-bar linkage eq (`newton_skill_env_bas
 ERRATUM-C (§15) の **判別力要件 (null bank = cable_qd≡0 で必ず FAIL)** は不変・強化。ただし C の「(α) restore-exactness ≤ ~0.5mm」提案は **cable channel については本 D-3 が supersede** — cable の bar は FORK-1 seed scale (≪0.147mm) か、さもなくば K-step growth leg による drift-bounded 証明に置き換える。arm/gripper の 1mm は残置。
 
 *%12 — 2026-07-13。%9 C-α = 全面受諾 (over-generalization の own)。Rs 承認数値不変。INVARIANTS 不触。*
+
+## §17. ERRATUM-E (2026-07-13 22:4x、%12 — %9 corrective C-β 受諾。**§15 明確化 E の over-generalization を訂正**)
+
+§15 明確化 E は「fidelity/fork leg は trainer 実使用の IK/residual mode で走らせる (FF leg は arm bank を構造的に検証できない)」とした。**arm channel については正しい。しかし cable channel (K-step growth leg) に同要求を適用すると交絡が生じ、検出力がゼロになる** (%9 C-β、%12 CONFIRM)。
+
+### E-1. 交絡の機構と大きさ
+
+IK/residual mode では Δ≡0 でも arm は **IK 解**で駆動される ⇒ producer (FF = 記録 arm_q 直書き) と **arm 軌道が一致しない**。よって div_grip の成長が **(a) bank/hidden-state の誤り** と **(b) IK 追従誤差** の双方に起因し、**分離不能**。
+**大きさ (%9 実測)**: 本基板の IK-path delta は **mm 級** (env batched-IK の L 腕 / EE_Z_FLOOR_KO +3.12mm) ⇒ 測ろうとしている信号 (FORK-1 致死 seed **max 0.147mm**) の **~20× の交絡**を注入する = **検出力ゼロ**。
+
+### E-2. 訂正 = **leg の channel 分解** (C-α の channel 分離原則を leg 設計へ一貫適用)
+
+1. **cable / hidden-state** → **K-step growth leg は FF mode** (arm を記録に pin) で走らせる。arm が固定されるので div 成長は cable + hidden state に**一意帰属**し、比較対象 = producer 同境界の FF trajectory = apples-to-apples。
+2. **arm-bank** → **別 leg・非 FF (IK/residual)**。`arm_q`/`arm_qd == bank` ∧ **`_per_world_fk_jq` 設定済** (未設定 = arm が P0 へ引戻される) を直接 assert。← 明確化 E の本来の対象。
+3. **統合 leg** → trainer の**実 mode** で 1 本。⚠実 mode は **hybrid** (L 腕 = feedforward 窓 + 他 = residual; routeexec node 参照) ⇒ 「IK/residual で」という blanket 要求は **phase 依存の実 mode で qualify** する。
+4. **null-bank negative control (§15) は 1・2 の両方に適用**: cable null (cable_qd≡0) → leg 1 で FAIL / arm-only v1 bank → leg 2 で FAIL。
+
+### E-3. メタ教訓 (2 度目、明示記録)
+
+ERRATUM-B (Dahl/body_q_prev 不在 → 「capture 不能・経験 leg が唯一の guard」へ over-generalize → %9 C-α が是正) と、本 E (FF leg は arm に盲目 → 「全 leg を IK mode で」へ over-generalize → %9 C-β が是正) は**同型**である。
+⇒ **規律: 訂正は「実際に検証した channel / domain」に scope を限定せよ。正しい訂正でも over-generalize すると隣接する正しい要件を消す。**
+
+*%12 — 2026-07-13。%9 C-β = 全面受諾。Rs 承認数値不変。INVARIANTS 不触。*
