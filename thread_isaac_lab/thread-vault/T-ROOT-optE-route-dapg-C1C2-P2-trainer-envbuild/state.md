@@ -33,7 +33,9 @@ session_history:
 
 # T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild — working notes
 
-- 現況 (2026-07-14 04:0x): B0 ✓ / B1 CLOSE ✓ / B2 CLOSE ✓ / **B3a build COMPLETE — commit `a00a0a97f8` (legs 全 PASS、%12+%9 post-verify + %10 audit 待ち)** / ⛔**B3b = STOP (BLOCKED_FOR_USER、Rs 裁定待ち)** / B4-B7 も本件に依存。
+- 現況 (2026-07-14 04:3x): B0 ✓ / B1 CLOSE ✓ / B2 CLOSE ✓ / **B3a build COMPLETE + %9 3-leg post-verify = PASS-WITH-1-PROCESS-FINDING (legs 全 PASS、%10 audit 待ち)** / ⛔**B3b = STOP (BLOCKED_FOR_USER、Rs 裁定待ち)** / B4-B7 も本件に依存。
+- ⚠⭐ **B3a-F1 (MED、commit provenance) — 正本は本 file 下部の %12 記載 (`e458bf9b9e`)。当方 (%11) も on-disk で独立確認済。** 事実 = **`a00a0a97f8` = conformance doc +20 行のみ (source ゼロ) / `575069abe5` = BLOCKED_FOR_USER + B3a source 730 行**。✅**成果物は無害** (legs 完了 03:38:13 < sweep 03:43:50、working tree == HEAD、DEFECT-1 fix は `route_executor.py:851` に在る ⇒ commit 済 code = 全 leg PASS した最終 code)。⛔**history rewrite はしない** (%9/%12 一致: 不要かつ有害)。
+  **過失の切り分け (正確に)**: (a) **sweep 自体 = %12** (path 制限なし commit が当方の stage 済 index を巻き込んだ — %12 自認)。(b) ⚠**当方 (%11) の過失 = 別項**: commit 後に**その commit の中身を検証せずに「B3a 本体」と報告した** (`git show --stat` を打っていれば source ゼロに即気付けた)。⇒ **記録が事実と一致しない主張を、当方が発信した**。**教訓 = 自分の commit も「narrative でなく on-disk で検証してから主張する」** (`feedback-narrative-signal-not-established-fact-verify-on-disk` は他者の主張だけでなく**自分の commit にも適用される**)。
 
 ⛔ **BLOCKED_FOR_USER: RL env に clip-retention pin を配線してよいか (INVARIANT #5 の認可例外を新環境へ拡張 = 前提 scope 変更 ⇒ Rs 専権)**
 **Context (B3-α、%9 発見 → %11 + %12 が on-disk 独立確認):**

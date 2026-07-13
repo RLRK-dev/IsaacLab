@@ -8,6 +8,17 @@
 **[L-TRIAGE]:** L3 (diff keyword + ≥5 files)。直交 [DESIGN-GATE] = cite 充足 (reward/成功条件 不変)。
 **%12 裁定 (22:15、ERRATUM-B 955ff0648f):** A1 = 「state はそれが対応する記録 frame と比較する」規則 / A2 = 1 chunk 続行 (見積 delta 記録・~600 で分割) / **A3 = MOOT (Dahl/body_q_prev は本基板に不在 → 非項目、hidden-state guard は 1-step leg に昇格)**。
 
+> ⚠⭐ **B3a-F1 — commit provenance の訂正 (%9 発見、当方 on-disk 確認済、2026-07-14 04:3x)。records-must-match-fact ゆえ loud に残す。**
+> **B3a の source 730 行 (`route_executor.py` +570 / `test_routeexec_state_bank.py` +160−3) は `a00a0a97f8` に入っていない。実際の landing = `575069abe5` (%12 の BLOCKED_FOR_USER commit、03:43:50)。**
+> - `a00a0a97f8` (題「W1-B3a: capture producer state …」、当方が B3a 本体と報告) の中身 = **conformance doc +20 行のみ、source ゼロ**。⇒ **当方の commit message は、その commit に入っていない source を主張している。**
+> - 経緯: 当方は「defect 込みで bank しない」方針で source を意図的に未 commit のまま保持 → staged 済の index を **%12 の非 explicit-path commit が sweep** → 当方のその後の commit には差分が残っていなかった。
+> - ✅ **成果物は無害**: legs 完了 **03:38:13** < sweep **03:43:50**、working tree == HEAD、DEFECT-1 fix も HEAD に在る (`route_executor.py:851` = `use_mujoco_cpu` で buffer 選択、fallback 無し) ⇒ **commit されている code は全 leg PASS した最終 code そのもの**。
+> - ⛔ **history rewrite はしない** (%9/%12 一致: 不要かつ有害)。provenance の正本 = node state.md の %12 記載 (`e458bf9b9e`) + 本 note。
+> - **過失の切り分け (正確に、records-must-match-fact)**:
+>   - **(a) sweep 自体 = %12** — path 制限なしの `git commit` が当方の stage 済 index を巻き込んだ (%12 自認: 「貴の『未 commit を維持』判断は正しく、巻き込んだのは私」)。
+>   - ⚠**(b) 当方 (%11) の過失 = 別項** — **commit 後にその commit の中身を検証せずに「B3a 本体」と報告した**。`git show --stat a00a0a97f8` を打っていれば **source ゼロ**に即気付けた。⇒ **事実と一致しない主張を当方が発信した。**
+> - ⭐**教訓 (当方)**: `feedback-narrative-signal-not-established-fact-verify-on-disk` は**他者の narrative だけでなく、自分自身の commit にも適用される**。**自分が commit した内容も、主張する前に on-disk で検証せよ。** — 皮肉なことに、本 chunk 全体が「計器が生きているか先に測れ」の arc でありながら、**自分の commit という計器を測っていなかった。**
+
 **5体 verdict (全員着弾):** CC2 REVISE (CRIT1 = **artifact 取り違え → REFUTED**、他 MED/LOW 有効) / CC3 **CRIT (Rs-LOCKED)** / CC4 CRIT×4 / CC5 CRIT×1 / CC6 CRIT×2。**CC1 DECIDE = 全 finding ACCEPT (CC2-1/2 は実測で REFUTE、ただし hazard class は採用)**。
 **%12 ERRATUM 群 (本 v2.1 の SSOT):** §14 ERRATUM-B (955ff0648f、Dahl/body_q_prev = 非項目) / **§15 ERRATUM-C (aae9f78722、bar 2 本分離 + null-bank negative control を DoD 化)** / **§16 ERRATUM-D (a07b03ed69、mjWarp Data 露出 → warmstart は capture/restore 可能; 1mm bar は FORK-1 致死 seed の 6.8-50× 緩 → cable channel 再較正 + K-step growth leg; eq_active disposition 必須)** + 明確化 D (FD = consistency check) / E (FF mode leg は arm bank を構造的に検証不能)。
 **%9 C-α (22:23):** hidden state は消えたのでなく**移動** (mjWarp Data) / bar は FORK-1 seed より緩い / 1-step → **K-step divergence-growth leg** へ昇格。
