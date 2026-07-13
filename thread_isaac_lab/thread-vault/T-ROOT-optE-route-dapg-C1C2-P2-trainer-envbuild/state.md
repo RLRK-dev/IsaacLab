@@ -185,3 +185,7 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 
 ⛔ **`assert_bank_matches_solver` (route_executor.py:654) には production caller がまだ無い。** guard は unit で発火が実証されたが、**live restore 経路で実際に実行されることは未証明** = 本 arc が一晩焼かれ続けた **ABSENT-IN-CODE class そのもの** (機構は在るが到達されない = appearance-only)。⇒ **B3b の DoD に明示行として入れる:「guard が live restore path で実際に実行されることを run で示す」。仮定にしない。**
 (LOW carry) `require_canonical=False` が production caller から到達可能にならないこと (現在は到達不能、:756 既定 True / :781 synthetic fixture 限定)。
+
+### ⚠ 本 §RESOLUTION の commit provenance (records-must-match-fact)
+
+**本節 (§RESOLUTION、%12 執筆) は `aa15596710`「B3a CLOSE: carry the "prove the guard RUNS on the live path" DoD to B3b」(%11 の commit) に含まれている** — 共有 tree 上で %12 の未 commit 編集を %11 の commit が巻き込んだため (commit message は本節に言及していない)。**内容は無傷** (%12 が `git show aa15596710` で実体照合)。⇒ **git log で「Rs 裁定 (d) 承認はいつ記録されたか」を追う者のために本行を置く。** ⭐**これは %12 が `575069abe5` で犯した sweep の鏡像** — 共有 tree での `git add` は explicit path + `git diff --cached --name-only` の事前確認が要る、を双方向で再確認 (memory `feedback-explicit-path-commit-git-diff-file-first-sweep-both-directions`)。history 改変はしない (共有 tree、%9/%12/%10 一致方針)。
