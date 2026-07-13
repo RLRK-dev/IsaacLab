@@ -33,11 +33,11 @@ session_history:
 
 # T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild — working notes
 
-- 現況 (2026-07-14 05:0x): B0 ✓ / B1 CLOSE ✓ / B2 CLOSE ✓ / **B3a build COMPLETE + 3-leg post-verify PASS (%12+%9) + %10 audit = PASS-WITH-FINDINGS → 記録訂正 commit で CLOSE 条件充足**。⚠**build 本体の commit = `575069abe5`** (`a00a0a97f8` は conformance 追補のみ、source ゼロ — B3a-F1) / ⛔**B3b = STOP (BLOCKED_FOR_USER、Rs 裁定待ち)** / B4-B7 も本件に依存。
+- 現況 (2026-07-14 06:2x): B0 ✓ / B1 CLOSE ✓ / B2 CLOSE ✓ / ✅**B3a = CLOSE 確定 (2026-07-14 06:1x)** — 記録訂正 + guard-fire commit `0f13684709`、**3-leg 全 CONFIRM** (%12 on-disk 2 点照合 / %9 独立 run で unit 7/7 + guard identifiability 10 分岐 + Rs-LOCK run_route sha 4 点 byte-identical / %10 audit 残指摘ゼロ + positive control の非循環性を保全コピーで独立照合)。**push 済 (fork/rlrk/optE-s2-substrate-swap = `0f13684709`、remote==local 実測)**。⚠**build 本体の commit = `575069abe5`** (`a00a0a97f8` は conformance 追補のみ、source ゼロ — B3a-F1) / ⏳**B3b-B7 = STOP 継続 ((d) 結果待ち、下記 §RESOLUTION)**。
 - ⚠⭐ **B3a-F1 (MED、commit provenance) — 正本は本 file 下部の %12 記載 (`e458bf9b9e`)。当方 (%11) も on-disk で独立確認済。** 事実 = **`a00a0a97f8` = conformance doc +20 行のみ (source ゼロ) / `575069abe5` = BLOCKED_FOR_USER + B3a source 730 行**。✅**成果物は無害** (legs 完了 03:38:13 < sweep 03:43:50、working tree == HEAD、DEFECT-1 fix は `route_executor.py:851` に在る ⇒ commit 済 code = 全 leg PASS した最終 code)。⛔**history rewrite はしない** (%9/%12 一致: 不要かつ有害)。
   **過失の切り分け (正確に)**: (a) **sweep 自体 = %12** (path 制限なし commit が当方の stage 済 index を巻き込んだ — %12 自認)。(b) ⚠**当方 (%11) の過失 = 別項**: commit 後に**その commit の中身を検証せずに「B3a 本体」と報告した** (`git show --stat` を打っていれば source ゼロに即気付けた)。⇒ **記録が事実と一致しない主張を、当方が発信した**。**教訓 = 自分の commit も「narrative でなく on-disk で検証してから主張する」** (`feedback-narrative-signal-not-established-fact-verify-on-disk` は他者の主張だけでなく**自分の commit にも適用される**)。
 
-⛔ **BLOCKED_FOR_USER: RL env に clip-retention pin を配線してよいか (INVARIANT #5 の認可例外を新環境へ拡張 = 前提 scope 変更 ⇒ Rs 専権)**
+✅ **BLOCKED_FOR_USER = 部分解除 (Rs 裁定 2026-07-14 06:0x 逐語「はしらせて　push」)** — 下記 §RESOLUTION 参照。**(d1)+(d2) の実行 = 承認 / push = 承認 / B3b-B7 = (d) 結果まで STOP 継続 (pin の恒久 disposition は Rs 未裁定)**。以下は上程時点の記録 (歴史、⚠層 3 は §RESOLUTION で訂正済)。
 **Context (B3-α、%9 発見 → %11 + %12 が on-disk 独立確認):**
 - producer は `PERCLIP_PIN=1` で **40 本の pin 候補 eq** を事前確保 (test_newton_clip_routing.py:1405)。golden もこれで録画。総 eq = 46 (40 + 構造 6)。
 - ⭐**RL env (`build_multiworld_scene`) は構造 eq 6 本のみ、pin 候補ゼロ** (newton_skill_env_base.py:1451 の comment 自身が pin を *test harness* に帰属)。`newton_route_env.py` の pin 参照 = 0。
@@ -46,6 +46,8 @@ session_history:
 - ⚠**FORK-1 根本原因も open に戻る (断定はしない)**: C1 離脱 runaway (t≈300-320) が grip divergence runaway (t≈337) に**先行**。かつ c1pin「REFUTED」の evidence に **pin が発火した positive control が無い** ⇒ spec F-7.4 の規律により再検証を要する。⛔ 同時に「REFUTED を『pin 不要』の根拠に流用しない」も守る (prohibited.md)。
 **Options:** A) pin を RL env へ配線 (新しい正当理由 = fork-state 実現可能性; 過去の REFUTED は *FORK-1 fix 仮説* に対するもので本件とは別問題) / B) bank を k=1,2 に限定 (**G3-G5 curriculum を失う = bank v2 の主目的そのもの**) / C) curriculum を re-scope して carry
 **Recommendation:** 当方は推奨を付さない (前提 scope = Rs 専権)。%12 が Rs へ上程済 (`575069abe5`)。
+
+⛔⭐ **B3b 再開時の DoD 必須行 (%9 carry、B3a CLOSE 時に確定)**: **`assert_bank_matches_live` は unit (guard identifiability 10 分岐) で発火が実証済だが、production caller がまだ無い** (restore = B3b、STOP 中ゆえ正しい状態)。⚠**「unit で発火する」≠「live restore path で実際に実行される」** = **機構は在るが到達されない = appearance-only = CLAUDE.md §15 の ABSENT-IN-CODE class** (本 arc で一晩焼かれた当のもの)。⇒ **B3b の DoD に明示行**: 「**B3-α の状況そのもの (producer bank neq=46 → RL env neq=6) を live restore path に食わせ、`assert_bank_matches_live` が実際に raise して restore を止めることを run 出力で示す**」。unit の PASS で代替しない。(LOW) `require_canonical=False` は synthetic fixture 専用 — production caller から到達可能にしない (今日は到達不能、%9 確認済)。
 - Anchors (§運用4): LEDGER row49/50 → charter (本 node) → spec v0.8.1 (設計 SSOT) → W0A_PACKET (数値 decision-of-record) → devplan §7:192 (担当)。
 - 数値基盤 = Rs W0-a 採択値 (HOLD 15/12/24placeholder、Δ-bound 0.020、DR±20 OFF 既定、mix 集合のみ)。smoke 再導出条項付きの値はその条項が governs。
 
@@ -155,3 +157,31 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 ### %12 の git 事故 (own、records-must-match-fact)
 
 **B3a の source (route_executor.py +570 / test_routeexec_state_bank.py +160−3) は `575069abe5` (私の BLOCKED_FOR_USER commit) に混入している。** 原因 = %12 が `git add <state.md> && git commit -m` を実行した際、**path 制限を付けなかったため index に stage 済みだった %11 の B3a source を巻き込んだ** (memory `feedback-explicit-path-commit-git-diff-file-first-sweep-both-directions` 違反 — `git diff --cached --name-only` を commit 前に見ていない)。**コードは無傷で失われていない**が、commit message が実体と一致しない。⇒ **`a00a0a97f8` = conformance doc のみ / `575069abe5` = BLOCKED_FOR_USER + B3a source** が事実。history 改変は共有 tree で危険ゆえ行わず、**本記録を正とする**。
+
+---
+
+## ✅ RESOLUTION (2026-07-14 06:2x、%12) — Rs 裁定「はしらせて　push」
+
+**Rs 逐語 (2026-07-14 06:0x): 「はしらせて　push」** ⇒ 解釈 (%12): **(d1)+(d2) の実行を承認、かつ push を承認**。**pin の恒久 disposition (option A/B/C) は未裁定** — (d) はその判断材料を作るための測定である。
+
+### 解除の scope (厳密に)
+
+| 項目 | 状態 |
+|---|---|
+| **(d1) 幾何 feasibility テスト** (CPU、実モデル運動学) | ✅ **実行承認** — 担当 %9 |
+| **(d2) positive-control 付き c1pin 再走** (cuda:0、env-core へ測定用最小配線) | ✅ **実行承認** — 担当 %11 |
+| **push** | ✅ **実行済** (`73de09eed7..0f13684709` → fork、16 commit、remote==local 実測) |
+| **B3b / B4-B7 の build** | ⛔ **STOP 継続** — (d) の結果と Rs の pin 裁定を待つ |
+| **pin の恒久 env 配線 (option A)** | ⛔ **Rs 未裁定** — (d2) は「測定のための最小配線」であって恒久採択ではない |
+
+### ⚠ 層 3 の記録訂正 (%9 → %12 受諾、上記 §層3 は歴史記述として残置)
+
+- ❌ **撤回**: 「C2 は C1-C3 線から **50.0mm** 外れる = **8.3×**」「5-clip 目標は **配位空間の外**」 (%12 の over-claim)。
+- ✅ **正**: cable の bend plane は自由に向けられる ⇒ 効く量は **best-fit residual**。実測 (SVD best-fit、%9 → %12 が独立再計算し EXACT 一致): **2 clip = 0.0mm (SEATABLE) / 3 clip = 16.7mm (2.8×) / 5 clip = 20mm (3.3×)**。**壁は clip 3 にある** (2 点は必ず 1 平面に乗るので 2-clip は常に可能)。
+- ✅ **かつ 5 seat は coplanar (Z=0.809)** ⇒ **90° roll した鎖なら幾何的には zigzag し得る** ⇒ 「配位空間の外」は**厳密には偽**。⇒ **(d1) は root pose の roll を解に許さねばならない** (許さなければ結論を仕込むことになる)。
+- ⇒ **層 3 は「B3b の停止理由」ではない (%9 訂正)。停止理由は 層 1+2 = pin disposition + HOLD 較正の交絡。** 層 3 は T-ROOT 級の別 open question であり (d1) が決着させる。
+
+### %9 carry → B3b DoD 明示行 (必須)
+
+⛔ **`assert_bank_matches_solver` (route_executor.py:654) には production caller がまだ無い。** guard は unit で発火が実証されたが、**live restore 経路で実際に実行されることは未証明** = 本 arc が一晩焼かれ続けた **ABSENT-IN-CODE class そのもの** (機構は在るが到達されない = appearance-only)。⇒ **B3b の DoD に明示行として入れる:「guard が live restore path で実際に実行されることを run で示す」。仮定にしない。**
+(LOW carry) `require_canonical=False` が production caller から到達可能にならないこと (現在は到達不能、:756 既定 True / :781 synthetic fixture 限定)。

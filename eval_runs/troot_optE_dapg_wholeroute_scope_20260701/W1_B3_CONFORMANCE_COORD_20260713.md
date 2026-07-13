@@ -394,6 +394,20 @@ B3 = ①capture (lock-safe) ②bank v2 builder ③供給 API ④**fork write-set
 
 **fail-loud 条件 (B3b 側の bank-load):** recording sha ≠ RUN1_REFERENCE_V2 → raise / 要求 phase に frame 無し → raise / joint_q 幅 ≠ env の per-world 座標幅 → raise / cable_bodies_per_world ≠ 40 → raise / world spacing ≠ 0 → raise (origin-sensitivity)。
 
+### ⛔⭐ B3b DoD 必須行 — 「guard が live restore path で *実際に走る*」ことを run で示せ (%9 carry、B3a CLOSE 時)
+
+⚠**これは defect ではなく seam。しかし本 arc で一晩焼かれ続けた ABSENT-IN-CODE class そのものなので、仮定にしない。**
+
+- **事実**: `assert_bank_matches_live` / `assert_bank_matches_solver` は **unit (guard identifiability 10 分岐) で発火が実証済**。しかし **production caller はまだ存在しない** — restore 経路 = B3b であり、B3b は STOP 中だから。**今日はこれが正しい状態。**
+- ⛔**しかし**: 「guard は unit で発火する」は「**guard が live restore 経路で実際に実行される**」を意味しない。**機構は在るが到達されない = appearance-only** = CLAUDE.md §15 の ABSENT-IN-CODE bucket (「未 wired = wire-then-validate = premise FALSE」)。
+- ⇒ ⭐**B3b の DoD に明示行として入れる**: **「fork/restore を実走させ、bank と env の layout が一致しない場合に `assert_bank_matches_live` が *実際に raise して restore を止める* ことを、run の出力で示す」**。unit の PASS で代替しない。
+  - 具体的には **B3-α の状況そのもの** (producer bank neq=46 → RL env neq=6) を live restore path に食わせて **RAISE を実測**する negative control を 1 本。
+- ⚠**(LOW) 追加の見張り**: `build_state_bank_v2_from_capture(require_canonical=False)` は **synthetic unit fixture 専用**。**production caller から到達可能になってはならない** (今日は到達不能 — %9 が :756 既定 True / :781 の注記で確認済)。将来 caller を足す時の注意点。
+
+⭐**「断言されたから真」ではなく「test されたから真」— B3-α の fail-loud 保証が今そうなったのと同じ規律を、restore 経路にも適用する。**
+
+---
+
 ⭐**B3b が継承する義務 (v3、%12 F-5/F-6 裁定):**
 1. ⭐**provenance assert (fail-loud)**: restore 時に **`bank.provenance.backend_id` == live solver の backend_id** ∧ **`layout_hash` == live model の layout_hash**。⚠**%9 corollary で load-bearing**: `use_mujoco_cpu` は単一 global ⇒ producer/env は常に同一 backend で **flip は atomic** ⇒ **唯一 cross-backend を生む経路 = 「今日 capture した bank を flip 後の env へ restore」** ⇒ **この assert が唯一の防壁**。同様に **layout 変更 (C2 build / multi-cell / comp3b / DR) は backend flip より起きやすい** ⇒ layout_hash が本命。
 2. ⭐**eq は identity で解決** (`resolve_pin_eq_index(eq_identity, pin_seat_body_mjc)`) し、**banked `pin_eqid` と一致することを assert**。index 直用は禁止 (上記 +1 罠)。
