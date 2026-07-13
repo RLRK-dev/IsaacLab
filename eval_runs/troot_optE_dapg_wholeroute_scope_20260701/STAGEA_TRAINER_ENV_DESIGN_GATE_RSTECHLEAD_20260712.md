@@ -519,3 +519,46 @@ layout_hash assert (F-6) が同一 layout を保証するので、**今日は ba
 ⇒ **規律 (再掲・強化): 測定値を substrate の事実として扱う前に、「その計器は対象を測れているか」を先に discharge せよ。** 特に **ゼロ / 不在 / 変動なし** の測定は、**対象が無い**のか **計器が死んでいる**のかを区別できない — **必ず positive control (変動を示すはずの独立 witness) を併走させよ** (B3a leg6 = 記録 `pin_active` を独立 witness にした形が正解)。
 
 *%12 — 2026-07-14。F-7.1 の機構 (disableflags=524288 / WARMSTART bit=512 未設定) は %12 が mujoco module で独立確認。B4=(a) 確定。*
+
+## §19. F-8 — ⭐**本 arc の最終規律: guard 自身の positive control** (2026-07-14 05:3x、%9 escalate、%12 受諾)
+
+### F-8.1 事実
+
+我々は一晩で多数の guard を建てた (F-6 layout_hash / index-space assert / liveness / null-bank negative control)。**しかし guard が *発火すること* を一度も test していない。**
+- leg6 = **データ**が live であることの positive control ✅
+- **guard が live であることの positive control = ゼロ** ❌
+
+**具体的破れ (%9 が自らの保証を撤回、%12 verify)**: %9 と %12 は Rs 上程で「**bank 46 eq vs env 6 eq ゆえ layout_hash assert は必ず発火し、physics 前に fail-loud で BLOCK する**」と断言した。しかし **layout_hash は provenance が運んでおり**、provenance reader は当時 **meta 欠落 / parse 失敗 / key 欠落 の 3 経路すべてで無言 None** を返していた ⇒ 無言 None → eq_identity 空 → 無言 return None → **比較対象が消える** ⇒ ⛔ **assert は発火しない**。
+⇒ **「fail-loud に守られている」という保証自体が、保証されていなかった。** (⚠ 2026-07-14 05:1x に %12 の adversarial pass が発見 → %11 が同 turn で修正 [`_capture_provenance(capture, required)` = 必須時は RAISE、docstring に旧挙動を明記] — 修正済だが、**規律としては未確立だった**。)
+
+### F-8.2 ⭐規律 (F-7.4 の guard への適用)
+
+> **F-7.4** (零/不在の測定は「対象が無い」のか「計器が死んでいる」のか区別できない ⇒ positive control を併走させよ) は **guard 自身にも適用される。**
+> ⭐ **一度も発火しない guard は、発火 *できない* guard と区別がつかない。**
+
+### F-8.3 必須 DoD: **guard identifiability 表** (leg3 の 8/8 手法を「データ」でなく「guard」に当てる)
+
+全ての guard に対し、**それが落とすべき入力で実際に落ちること**を表で実証する。B3b の restore guard の場合:
+
+| # | 入力 | 期待 |
+|---|---|---|
+| (a) | provenance **欠落**の bank | **RAISE** |
+| (b) | provenance **破損** (parse 不能) の bank | **RAISE** |
+| (c) | **別 layout** の bank (neq=46 vs env neq=6 = **B3-α そのもの**) | **RAISE** |
+| (d) | **pin 無し** (k=1,2 = 正当) の bank | **PASS**、かつ (a)(b) と **`pin_active` 全ゼロの assert で区別されること** |
+
+⇒ **修正前は (a)(b)(d) が全て同一の無言 None を返していた = guard は 3 者を区別できなかった。** (a)-(c) が RAISE し (d) が PASS して初めて **guard は「生きている」**と言える。
+
+### F-8.4 併せて撤去すべき無言吸収の機構 (%9 roster、HEAD 実読)
+
+- **broad `except Exception` → `return None`** (mujoco import 経路 :537-542) — enum が動いただけで resolver が無言で「pin 無し」を返す。**narrow + raise へ。**
+- **`(prov or {}).get(...) or {} ... or []` の 3 連 fallback** — **無言吸収の機構本体**。明示的存在確認 → raise へ。
+- **「caller must fail loud」を *契約* で済ませない** (:544-549 のコメントが自認) — **機構にする** (呼ばれ方に依存させない)。
+- **「記録に pin 無し」と「witness field が無い」の同一視** (:611-617) — 前者は **assert された正当条件** (`pin_active` 全ゼロを実測)、後者は **raise**。
+
+### F-8.5 メタ (%9 の自己申告、記録として)
+
+%9 は「(d) は de-risk された」という**自分が欲しかった結論**を支持する証拠 (raise の多い assert 本体) を見つけて**そこで止め**、否定する証拠 (entry point の無言 None) を先に探さなかった — **prohibited.md「確証バイアス禁止」の明文違反、本 session 2 度目** (1 度目 = mjw_data の静的検証を全体に一般化) と自ら申告。**%12 も同型を 2 度踏んでいる** (ERRATUM-B の over-generalize / 明確化 E の over-generalize)。
+⇒ **verify 側の確証バイアスは、独立な adversarial pass (「自分が欲しい結論を否定する証拠を先に探す」担当) を per-chunk で立てることでしか捕まらない。** 本 arc では %12 の class 狙い read と %10 の通し精読が交互にそれを果たした。**B3b 以降も 2 系統を維持する。**
+
+*%12 — 2026-07-14。F-8 は本 arc の締めくくり。Rs 上程の「assert が守る」主張は F-8.1 のとおり *当時は* 保証されていなかった — 訂正済 (修正 landed、ただし F-8.3 の identifiability 表で実証するまで「発火する」とは主張しない)。*
