@@ -20,7 +20,7 @@
   "non_diverging": true,
   "bound_mm": 10.0
  },
- "cable_in_groove_ALL": {
+ "cable_NOT_ESCAPED_all": {
   "held": true,
   "x": {
    "ok": true,
@@ -43,7 +43,7 @@
    "bound_mm": 10.0
   }
  },
- "cable_in_groove_WELD_EXCLUDED": {
+ "cable_NOT_ESCAPED_weld_excluded": {
   "held": true,
   "x": {
    "ok": true,

@@ -17,9 +17,19 @@ calls that PASS (it reads only Z), which is precisely how a dead instrument look
 Scoring (never uses c1_retained / _seat_metrics / c1_seat -- see d2_metrics for why):
   * did the pin FIRE            -> the witness from route_executor.activate_c1_pin (every failure raises)
   * did the WELD hold           -> weld_hold_mm (no groove convention, no quantization)
-  * is the CABLE in the groove  -> centerline offset, BOTH axes (X across the walls, Z straight up and out),
-                                   with the welded segment EXCLUDED (a welded body is held by definition)
+  * did the CABLE ESCAPE        -> centerline offset, BOTH axes (X across the walls, Z straight up and out),
+                                   with the welded segment EXCLUDED (a welded body is held by definition).
+                                   ⛔ THIS DOES NOT ESTABLISH GROOVE CAPTURE -- see below.
   * is the instrument ALIVE     -> the t=0 positive control, asserted here, recorded in the JSON
+
+⛔⛔ NO NUMERIC METRIC CAN ESTABLISH GROOVE CAPTURE. This was PROVEN and banked on 2026-07-12, by the very
+author of the design spec: "EVERY numeric metric ... reads pass/retained, yet Rs-GT = OFF C1. therefore no
+current numeric metric covers lateral groove-CAPTURE; the honest-looking ones false-positive on wall/adjacent
+contact" (harness/state/ANCHOR_STEPTABLE_ALIGNMENT_p4p5_20260712.md:107-108). DoD6 cell 2037 is the standing
+counterexample: |dx| = 0.99mm and dz = -0.21mm -- a textbook "seated" reading -- and Rs's eyes said OFF C1.
+That is the same |dx|+dz instrument used here. So these fields are named for what they CAN support: the cable
+did not ESCAPE (a far-field question: 50mm vs 0.5mm is not ambiguous). Whether it is CAPTURED in the groove is
+a near-field question that this instrument provably cannot answer, and only Rs's video can.
 
 ⛔ NUMERIC NEVER YIELDS A PASS ON ITS OWN. A verdict that would falsify FORK-1 is not acted on until Rs's video
 human-GT: a weld overrides physics, so it can turn bad physics into good numbers (it may have HIDDEN the failure
@@ -61,8 +71,8 @@ def score(cable_xyz, onset, arm, artifact_sha, clip_y=0.150):
         "onset_frame": int(onset),
         "instrument_positive_control": alive,  # persisted, per run, per %10/%12
         "weld_hold": m._axis_verdict(m.weld_hold_mm(cable_xyz, onset), onset, m.P1_BOUND_MM),
-        "cable_in_groove_ALL": m.p1_verdict(dx_all, zg_all, onset),
-        "cable_in_groove_WELD_EXCLUDED": m.p1_verdict(dx_ex, zg_ex, onset),
+        "cable_NOT_ESCAPED_all": m.p1_verdict(dx_all, zg_all, onset),
+        "cable_NOT_ESCAPED_weld_excluded": m.p1_verdict(dx_ex, zg_ex, onset),
         "articulation": m.articulation(cable_xyz),  # input to the VIDEO judgment, never a verdict
         "confounded_telemetry_node3d_mm": {
             "median": round(float(np.median(m.seat_distance_mm(cable_xyz)[onset:])), 3),
@@ -103,7 +113,7 @@ def main():
     print(f"[d2] arm {a.arm}  artifact {sha}  onset {onset}")
     print(f"[d2] instrument positive control: t=0 |dx| = {pc['t0_dx_mm']}mm in {pc['band_mm']} -> ALIVE")
     print(f"[d2] weld held            : {res['weld_hold']['ok']}  (max {res['weld_hold']['max_mm']}mm)")
-    for k in ("cable_in_groove_ALL", "cable_in_groove_WELD_EXCLUDED"):
+    for k in ("cable_NOT_ESCAPED_all", "cable_NOT_ESCAPED_weld_excluded"):
         v = res[k]
         print(
             f"[d2] {k:30s}: held={v['held']}  X(max {v['x']['max_mm']}mm, slope {v['x']['slope_mm_per_kframe']})"
