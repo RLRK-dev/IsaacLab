@@ -33,11 +33,11 @@ session_history:
 
 # T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild — working notes
 
-- 現況 (2026-07-14 06:2x): B0 ✓ / B1 CLOSE ✓ / B2 CLOSE ✓ / ✅**B3a = CLOSE 確定 (2026-07-14 06:1x)** — 記録訂正 + guard-fire commit `0f13684709`、**3-leg 全 CONFIRM** (%12 on-disk 2 点照合 / %9 独立 run で unit 7/7 + guard identifiability 10 分岐 + Rs-LOCK run_route sha 4 点 byte-identical / %10 audit 残指摘ゼロ + positive control の非循環性を保全コピーで独立照合)。**push 済 (fork/rlrk/optE-s2-substrate-swap = `0f13684709`、remote==local 実測)**。⚠**build 本体の commit = `575069abe5`** (`a00a0a97f8` は conformance 追補のみ、source ゼロ — B3a-F1) / ⏳**B3b-B7 = STOP 継続 ((d) 結果待ち、下記 §RESOLUTION)**。
+- 現況 (2026-07-14 05:3x): B0 ✓ / B1 CLOSE ✓ / B2 CLOSE ✓ / ✅**B3a = CLOSE 確定 (2026-07-14 05:15-05:22、時刻は git author date と %10 stamp が anchor — 下記 §RESOLUTION の時刻訂正参照)** — 記録訂正 + guard-fire commit `0f13684709`、**3-leg 全 CONFIRM** (%12 on-disk 2 点照合 / %9 独立 run で unit 7/7 + guard identifiability 10 分岐 + Rs-LOCK run_route sha 4 点 byte-identical / %10 audit 残指摘ゼロ + positive control の非循環性を保全コピーで独立照合)。**push 済 (fork/rlrk/optE-s2-substrate-swap = `0f13684709`、remote==local 実測)**。⚠**build 本体の commit = `575069abe5`** (`a00a0a97f8` は conformance 追補のみ、source ゼロ — B3a-F1) / ⏳**B3b-B7 = STOP 継続 ((d) 結果待ち、下記 §RESOLUTION)**。
 - ⚠⭐ **B3a-F1 (MED、commit provenance) — 正本は本 file 下部の %12 記載 (`e458bf9b9e`)。当方 (%11) も on-disk で独立確認済。** 事実 = **`a00a0a97f8` = conformance doc +20 行のみ (source ゼロ) / `575069abe5` = BLOCKED_FOR_USER + B3a source 730 行**。✅**成果物は無害** (legs 完了 03:38:13 < sweep 03:43:50、working tree == HEAD、DEFECT-1 fix は `route_executor.py:851` に在る ⇒ commit 済 code = 全 leg PASS した最終 code)。⛔**history rewrite はしない** (%9/%12 一致: 不要かつ有害)。
   **過失の切り分け (正確に)**: (a) **sweep 自体 = %12** (path 制限なし commit が当方の stage 済 index を巻き込んだ — %12 自認)。(b) ⚠**当方 (%11) の過失 = 別項**: commit 後に**その commit の中身を検証せずに「B3a 本体」と報告した** (`git show --stat` を打っていれば source ゼロに即気付けた)。⇒ **記録が事実と一致しない主張を、当方が発信した**。**教訓 = 自分の commit も「narrative でなく on-disk で検証してから主張する」** (`feedback-narrative-signal-not-established-fact-verify-on-disk` は他者の主張だけでなく**自分の commit にも適用される**)。
 
-✅ **BLOCKED_FOR_USER = 部分解除 (Rs 裁定 2026-07-14 06:0x 逐語「はしらせて　push」)** — 下記 §RESOLUTION 参照。**(d1)+(d2) の実行 = 承認 / push = 承認 / B3b-B7 = (d) 結果まで STOP 継続 (pin の恒久 disposition は Rs 未裁定)**。以下は上程時点の記録 (歴史、⚠層 3 は §RESOLUTION で訂正済)。
+✅ **BLOCKED_FOR_USER = 部分解除 (Rs 裁定 2026-07-14 05:2x 逐語「はしらせて　push」)** — 下記 §RESOLUTION 参照。**(d1)+(d2) の実行 = 承認 / push = 承認 / B3b-B7 = (d) 結果まで STOP 継続 (pin の恒久 disposition は Rs 未裁定)**。以下は上程時点の記録 (歴史、⚠層 3 は §RESOLUTION で訂正済)。
 **Context (B3-α、%9 発見 → %11 + %12 が on-disk 独立確認):**
 - producer は `PERCLIP_PIN=1` で **40 本の pin 候補 eq** を事前確保 (test_newton_clip_routing.py:1405)。golden もこれで録画。総 eq = 46 (40 + 構造 6)。
 - ⭐**RL env (`build_multiworld_scene`) は構造 eq 6 本のみ、pin 候補ゼロ** (newton_skill_env_base.py:1451 の comment 自身が pin を *test harness* に帰属)。`newton_route_env.py` の pin 参照 = 0。
@@ -160,9 +160,11 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 
 ---
 
-## ✅ RESOLUTION (2026-07-14 06:2x、%12) — Rs 裁定「はしらせて　push」
+## ✅ RESOLUTION (2026-07-14 05:2x、%12) — Rs 裁定「はしらせて　push」
 
-**Rs 逐語 (2026-07-14 06:0x): 「はしらせて　push」** ⇒ 解釈 (%12): **(d1)+(d2) の実行を承認、かつ push を承認**。**pin の恒久 disposition (option A/B/C) は未裁定** — (d) はその判断材料を作るための測定である。
+⚠ **時刻訂正 (p6 捕捉、%12 が `date` 実測で確認 = 2026-07-14 05:30 JST)**: 本節の初版は **06:0x/06:1x/06:2x と ~63 分 先打ち**されていた (%12 の date-THEN-write 違反 — 記憶で stamp した)。**検証可能な anchor に差替え**: commit `0f13684709` = **05:09** / `aa15596710` = **05:18** / `e52ab93b9b` = **05:22** (git author date)。⇒ **Rs 裁定 ≤ 05:22** (push と同一 turn)、**B3a CLOSE = 05:15-05:22** (%10 CONFIRM stamp 05:15)。**未来時刻を durable record に書かない** (§運用15 records-must-match-fact: date-THEN-write)。
+
+**Rs 逐語 (2026-07-14 05:2x): 「はしらせて　push」** ⇒ 解釈 (%12): **(d1)+(d2) の実行を承認、かつ push を承認**。**pin の恒久 disposition (option A/B/C) は未裁定** — (d) はその判断材料を作るための測定である。
 
 ### 解除の scope (厳密に)
 
@@ -185,6 +187,18 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 
 ⛔ **`assert_bank_matches_solver` (route_executor.py:654) には production caller がまだ無い。** guard は unit で発火が実証されたが、**live restore 経路で実際に実行されることは未証明** = 本 arc が一晩焼かれ続けた **ABSENT-IN-CODE class そのもの** (機構は在るが到達されない = appearance-only)。⇒ **B3b の DoD に明示行として入れる:「guard が live restore path で実際に実行されることを run で示す」。仮定にしない。**
 (LOW carry) `require_canonical=False` が production caller から到達可能にならないこと (現在は到達不能、:756 既定 True / :781 synthetic fixture 限定)。
+
+### (d) DoD 裁定 (2026-07-14 05:3x、%12) — 両 DoD とも走行前に訂正が入った
+
+**(d2) [%11] = 3 腕へ設計変更、APPROVED。** ⛔**%12 の over-claim を撤回**: 「07-12 の c1pin run は Newton/MuJoCo の +1 index-space trap で別 body に weld した」は **code と一致しない** (%11 実読: c1pin は `norm(mjd.xpos[eq_obj1id[i]] - _seat_world)` = **world 位置一致**で解決、両者とも MuJoCo body id 空間 ⇒ index-space cross なし)。⭐**%12 は「342 step 死亡」という salient な症状に、直前に見た trap (B3a leg6) を当てはめた = 症状から機構を逆算した** — 本 arc で焼かれ続けた誤りの型そのもの (%9 の 2 度の over-claim を注意した直後に %12 が犯した)。
+⭐⭐**%11 の論理が本 leg 最大の発見**: pin が一度も発火しなかったなら run は pin-less と同挙動 (~499 step) のはず。**しかし 342 step で死んだ ⇒ 何かが確実に変わっている。fail-silent latch *だけ* では説明できない。** ⇒ **3 腕**: A=baseline / B=**事前確保のみ (発火ゼロ)** / C=事前確保+発火。**合格条件 = A ≡ B (厳密一致)。** ⇒ **A ≠ B なら「07-12 の 342 step は pin が発火しなくても説明できる ⇒ あの run は pin の反証ですらなく *交絡の実証*」= それ自体が上程項目** (機構候補: `_wire_s6_grasp_solref` が disabled eq も stiffen / nefc・njmax・constraint 順序)。
+
+**(d1) [%9] = APPROVE-WITH-3-CORRECTIONS。** %12 実測 (task_config 実値、env_isaaclab7):
+- ⭐⭐**5 groove center の min-width SLAB = 0.000mm (n=ẑ、座面は厳密 coplanar Z=0.809)** ⇒ 平面鎖の必要条件は **k=2,3,4,5 すべてで充足** ⇒ ⛔ **平面論では infeasibility を証明できない。** (%9 の 16.7mm は best-fit **LINE** 残差 = 「bend 平面が垂直」前提の量で、free root の下では前提が成立しない ⇒ **moot**。なお %12 の SVD 再計算では k=3 の垂直残差は max 33.33 / rms 23.57 / mean 22.22mm で 16.7 と一致せず — 定義照会中。)
+- ⭐**CORRECTION-1 (instrument-cannot-measure-its-target)**: %9 の P0 (FK 較正) が **hinge 39 本のみ**をランダム化 ⇒ **root 姿勢 (quaternion) 経路を一度も走らせない。しかし M2 の発見は丸ごと root roll に乗っている** ⇒ **quat 規約バグ (Newton wxyz vs MuJoCo xyzw) が P0 を素通りし infeasible を *計器の故障で* 出す** ⇒ **P0 は root pose (位置+quat) もランダム化必須。**
+- ⭐**CORRECTION-2 (governance)**: **「optimizer が infeasible」≠「IMPOSSIBLE」**。46 次元で multi-start 200 の失敗は証明でない。⇒ **infeasible 単独では T-ROOT 上程 (substrate 変更!) の根拠にしない。** 必要 = (1) 手組み witness も失敗 + (2) 障害を明示する厳密証明書 (joint-limit 算術 / slab / lift budget)。無ければ verdict は **NOT FOUND** であって IMPOSSIBLE でない。
+- **CORRECTION-3 (bar)**: seated bar は **6mm ではない** — code の `T_GROOVE = 0.003` (task_config.py:368) + `cable_in_groove` + `GROOVE_BODIES_MIN=2` (:384) が SSOT。6mm は溝の内半径。**%12 の 6mm 指定は緩すぎた。**
+- **拘束している真の量 (%12 実測、検定対象として %9 へ)**: hop 弦長 **90.14mm** ⇒ **1 hop に ≥7 seg** (⭐**p5 の副次 defect 決着: banked §2.1 の 5 seg = 誤り、7 seg が正**) / 各中間 clip の turn = **67.38°** ⇒ ~10°/joint ⇒ ⭐**`jnt_range` が決定的** / **2 seated 時の平面 pivot = 無制限** (2 点は共線、C3 端は C1-C2 線から **83.21mm** ⇒ 持上げ = 83.2·sinψ、ψ 無拘束) ⇒ ⭐**C3 を上から落とす運動は利用可能 — 壁は clip 3 に無い** / **3 seated 時の平面 tilt = 13.89° に pin** ⇒ **C4 位置の持上げ余地は 8.00mm のみ** (bar 3mm なら **4.0mm**) ⇒ ⭐⭐**壁があるとすれば clip 4。機構 = 「seated 集合が非共線になった瞬間に平面が pin され、面外の持上げ余地が崩壊する」。** ⚠ これは %12 の *導出* であって verdict でない — **ground truth = producer の C1→C2 記録から cable の Z=0.809 面からの最大逸脱 (= 実際の必要持上げ量) を実測して比較。**
 
 ### ⚠ 本 §RESOLUTION の commit provenance (records-must-match-fact)
 
