@@ -407,3 +407,39 @@ ERRATUM-B (Dahl/body_q_prev 不在 → 「capture 不能・経験 leg が唯一�
 ⇒ **DoD 設計の規律: 「PASS する DoD」ではなく「間違った成果物を落とす DoD」を書け。** 全ての fidelity DoD に対し **(i) この bar が落とす『間違った bank / 壊れた leg』を具体的に述べよ (ii) negative control (null bank 等) で実際に落ちることを実証せよ (iii) bar の測定 mode と leg の駆動 mode が一致していることを示せ** — 3 点を conformance の必須列とする。
 
 *%12 — 2026-07-13。%9 副次 2 件 = 実測 CONFIRM (phase_id[2583]=6 / [2589]=7 / pin onset == phase 5→6 遷移 2544 EXACT)。*
+
+## §18. ERRATUM-F (2026-07-13 24:0x、%12 — B3a leg の実測 DEFECT-1 を受諾。**§16 ERRATUM-D の前提を訂正**)
+
+### F-1. 訂正: 本基板の live hidden state は `mjw_data` ではなく **`mj_data`**
+
+§16 D-1 は「`SolverMuJoCo` の source に `mjw_data` が実在する ⇒ mjWarp Data は露出しており capture/restore できる」とした (%12 inspect + %9 独立 inspect)。**結論 (capture 可能) は正しいが、buffer の同定が誤り**:
+
+- **`task_config.py:116` `USE_MUJOCO_CPU = True`** — かつ `make_solver(..., use_mujoco_cpu=USE_MUJOCO_CPU)` (`newton_skill_env_base.py:1302`) が既定 ⇒ **producer も route env も MuJoCo-C の CPU backend で走っている** (%12 実測)。
+- `solver_mujoco.py:3267-3273`: `if self.use_mujoco_cpu:` → **`mj_step(self.mj_model, self.mj_data)`** = **CPU path が step するのは `mj_data`**。`mjw_data` を使うのは `else` (GPU) 分岐のみ。
+- `mjw_data` は `mujoco_warp.put_data(...)` で**無条件に生成される**が、CPU path では **一度も step されない dead mirror**。
+- ⇒ B3a の capture が `mjw_data` を読んでいたため **hidden-state channel が完全に inert** だった (実測: `qacc_warmstart` 非ゼロ = **0/562611**、`eq_active` は全 7707 frame で変動ゼロ)。記録側の独立 witness (`pin_active` = frame 2544-7706 ON / `pin_eqid`=27 / `pinned_body`=55) と矛盾する。
+- ⭐**producer は無事**: `mj_data` が実 buffer ゆえ clip-pin は効いている ⇒ **RS71 INVARIANT #5 intact、Rs-LOCKED producer に欠陥なし**。壊れていたのは capture の read 先のみ。
+
+**訂正**: hidden-state の capture/restore は **`use_mujoco_cpu` で buffer を選択** (`mj_data` / `mjw_data`) し、**liveness assert を必須**とする (下記 F-3)。
+
+### F-2. ⭐メタ教訓 (3 度目、E-3/E-5 と同族): **source 上の存在 ≠ 設定 backend での liveness**
+
+%12 も %9 も `inspect.getsource` / grep で **attribute の存在**を確認し、そこから **liveness を推論**した。**実際に走っている backend では死んでいた。** 捕捉したのは builder の **runtime 実測 leg** (0/562611)。
+⇒ **規律: solver / hidden state に関する主張は、source inspection では discharge できない。設定 backend 上の runtime 測定でのみ discharge せよ。** (既存 memory `feedback-reuse-validate-by-build-run-not-import` = 「existence ≠ function、real BUILD+RUN on CURRENT substrate で検証」の再演。verifier 2 名が同時に踏んだ = grep 由来の確信は特に危険。)
+
+### F-3. 裁定 (B3a ask D-1 / D-2)
+
+**D-1 (warmstart は実 buffer で非ゼロか)**: 0/562611 は **dead mirror の測定ゆえ情報ゼロ** — 再測定は正しい。⚠ただし **「ゼロだったから非 item」と symptom だけで再分類するな (ERRATUM-B の教訓)**: **(i) `mj_data.qacc_warmstart` の実測 (live buffer) に加え、(ii) 機構の確認 = `mj_model.opt.disableflags & mjDSBL_WARMSTART` (warmstart が model option で無効化されているか) を必ず取れ。** 非 item への再分類は **(i) 恒常ゼロ ∧ (ii) 機構がそれを説明する** の両方が揃った時のみ。片方だけなら **B4=(a) capture+restore を維持**。
+
+**D-2 (cross-backend transplant)**: **(a) を一般則 + (c) を W1 の instantiation** として採る。**(b) は D-1 の機構確認が済むまで不可。**
+- **(a) 一般則**: bank の provenance に **backend 識別子 (`use_mujoco_cpu` / newton version / solver config hash)** を記録し、**restore 時に backend 不一致で fail-loud**。cross-backend transplant を **構造的に silent 不可能**にする (安価・恒久)。
+- **(c) W1 instantiation**: env は producer と同一 backend (CPU) に **pin** — **現状すでにそうなっている** (`make_solver` 既定、%12 実測) ゆえ変更不要。**明示 assert として LOUD 化するのみ。**
+- ⚠**campaign への含意 (W1 完了報告で Rs へ上程)**: trainer が throughput のため GPU backend を要するなら、**bank はその backend で再 capture が必要** ((a) が強制する)。さらに **B0 baseline (ca33d1e1a0) / B2 較正 / golden byte-repro は全て CPU 基準**ゆえ、**backend 切替 = substrate 変更 = Rs-gated** (builder 判断で行わない)。
+
+### F-4. DEFECT-2 (leg3 の bar) = **CONCUR。E-5 (ii) の模範実行**
+
+frame 級 FD が原理的に不適 (κ = |Δqd|/|qd| が k=2 で 0.92 / k=3 で 1.81、SIM_SUBSTEPS=10 ゆえ位置差分は frame 平均しか返さない ⇒ 4 変種が同時に落ちる = **data でなく計器の帯域不足**) + spec が名指しした hazard (wrong substep) は frame 級 FD を κ/10 ≈ 1.6% しか動かさず **20% bar では原理的に検出不能** = **感度不足/SN 交絡 class そのもの**。
+置換 (2-param 回帰 → gain g / substep index m̂ / R²) と **identifiability 表 (m=9/m=8/null/sign-flip/×1.02/×0.98/permuted/frame-shift = 全 reject、real のみ accept)** は **E-5 の 3 必須列 (i)(ii)(iii) を満たす模範**。cable の gain 固有 bias −1.9% ゆえ scale bar は gripper (R²=1.000) が担う、の honest 分離も採用。
+**leg6 (hidden-state liveness: captured `eq_active[27]` ≡ recording `pin_active` を per-frame EXACT 照合) = 今回の DEFECT-1 を必ず落とす negative control** ⇒ **必須化**。
+
+*%12 — 2026-07-13。DEFECT-1/-2 とも builder の runtime leg が捕捉 (bar 緩和ゼロ = fix-first 遵守)。B3a の未 commit 判断も正 (defect を bank しない)。Rs 承認数値不変。INVARIANTS 不触。*
