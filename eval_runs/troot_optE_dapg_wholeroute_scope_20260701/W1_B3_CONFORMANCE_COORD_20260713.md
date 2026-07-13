@@ -378,6 +378,31 @@ clip-pin は **INVARIANT #5 の唯一の認可例外** (`log.md:6534`)。**RL en
 
 ⇒ **停止範囲 (%12 確定)**: **B3a = 影響なし (commit 可)** / **B3b = STOP (Rs 裁定まで着手しない)** / **B4-B7 も本件に依存**。BLOCKED_FOR_USER = `575069abe5`。
 
+### §9.2 ⭐⭐ %9 の追走 (04:1x) — leg6 の index-space catch が「c1pin REFUTED」自体を開けた
+
+⭐**私が leg6 で踏んで直した +1 罠 (Newton body id 55 vs MuJoCo body id 56) は、私だけの罠ではなかった。** %9 が reverted c1pin 実装 (`c70ba1b849`) を実読:
+
+| # | 事実 | 含意 |
+|---|---|---|
+| 1 | 07-12 の c1pin は **eq を body id 経由で解決**しており、**私が初版 `resolve_pin_eq_index` で踏んだのと同一の +1 経路** | **同じ穴に 2 度目を踏むところだった** |
+| 2 | ⭐**latch が fail-SILENT**: `self._c1_pin_done = True` が mjm/mjd の None check **より前**に、コメント自身が *regardless of outcome* と書いた上で焼かれる ⇒ **解決に失敗しても pin は無言で発火せず、assert ゼロ** | **「pin が実際に発火した」positive control が構造的に存在しない** |
+| 3 | ⭐**c1pin run は 342 step で死亡 vs pin-less 499** (baseline 499 / cablediag 499 = diag 非摂動)。**保持 pin が正しく効いたなら生存は延びるはず。早死には「誤 body への溶接」の signature** | **c1pin の REFUTED は unsafe — 反証されたのでなく「試されていない」公算** |
+
+⇒ ⭐**spec F-7.4 (零・不在は「対象が無い」か「計器が死んでいる」か区別できない ⇒ positive control を併走させよ) が、その規律を生んだ arc 自身の過去の REFUTED verdict に適用され、それを開けた。** 本 chunk で建てた **index-space round-trip assert + per-field liveness gate** が無ければ、同じ穴を 2 度踏んでいた (%9)。
+
+⭐**%9 の confound 測定 (記録の pin 発火 = golden f2544 = phase 5→6 = replay t=255、pin は記録の 67% で ON):**
+
+| 窓 | 構造差 | div_seg24 |
+|---|---|---|
+| **t < 255** | **記録も env も pin 無し ⇒ 構造差ゼロ (非 confounded)** | peak **10.56mm (t=124)** → **3.36mm へ減衰** = **暴走せず回復** |
+| **t ≥ 255** | **env だけ pin 無し (confounded)** | 3.78 → **129.24mm**。⭐**collapse も drop も全部この窓** |
+
+⇒ ⚠**FORK-1 の「発散する」は生きているが、「⇒ ゆえに落とす ⇒ ゆえに RL が唯一の fix」は未確立** (%12 + Rs へ上程済)。
+
+⭐**本 conformance / 既 banked 値への影響 (%9 が先回りで判定):**
+- ✅ **B2 の armed-quiet band 10.407mm / 本測定の 10.56mm = SAFE** — max は **t=124 = 非 confounded 窓**にある ⇒ **B2 の較正は無傷**。
+- ⚠ **HOLD_THRESH = 15mm は confounded** — 初交差が **t=343 (≥255 の窓)** ⇒ **parity 基板 (pin あり env) で再導出が要る**。⚠**当方 chunk の落ち度ではなく基板側の欠損** (%9 明記)。⇒ **carry**: 既存の B7「MAX_HOLD 再導出」項に **HOLD_THRESH 再導出**を併記。**B2 は CLOSED ゆえ独断で再開しない** — Rs/%12 裁定に含めて処理。
+
 ## §6. spec 却下済 代替の記録
 
 **FD による qd の「構築」= spec :140 が却下済 → 再審しない。** 本 v2 の L2 は **capture 済 qd の「検算」** であり構築ではない (記録の joint_q は既に存在する独立情報源 = F1)。この読みに異論があれば **STOP → ERRATUM 依頼**とする。
