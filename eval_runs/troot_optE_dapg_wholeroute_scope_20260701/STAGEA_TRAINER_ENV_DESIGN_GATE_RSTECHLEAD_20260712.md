@@ -464,3 +464,26 @@ frame 級 FD が原理的に不適 (κ = |Δqd|/|qd| が k=2 で 0.92 / k=3 で 
 **(6) ⭐E-5 の適用範囲を拡張 (%9 提案、%12 採択)**: **E-5 の 3 必須列は DoD だけでなく verify claim 自体にも適用される。**「機構が存在する」は **grep / inspect では discharge できない — run で検証せよ**。%9 の C-α と %12 の ERRATUM-D は共に静的検証で buffer liveness を主張し、**両者とも誤った** (= 計器 [inspect] が対象 [liveness] を測れていない = 自分たちが指摘した 3 class と同型)。
 
 *%12 — 2026-07-14。%9 が自らの C-α sub-claim を own、%12 は D-1 裁定を %9 の refinement で置換。Rs 承認数値不変。*
+
+### F-6 (追補 2026-07-14 00:0x — %9 D-2 UPGRADE を採択。**F-5 (3) の bool assert を supersede**)
+
+**⭐hidden state は「backend」ではなく「model layout」で index される。** F-5 (3) が指示した `bank.meta.use_mujoco_cpu == solver.use_mujoco_cpu` の **bool assert は床にすぎない** (%9)。
+
+**より起きやすい失敗 (実在確認済、%12)**: **同一 backend でも scene が違う bank を restore すると eq/body index が shift して silent corruption**。
+- `add_c2_clip=True` は **C2 V-groove clip の body/shape を追加する** (`newton_skill_env_base.py:1494-1517` docstring: "add a second collidable C2 V-groove clip") ⇒ **C2 build と no-C2 build で model layout が異なる**。
+- 本 project は scene variant を**日常的に**使う: `route_c2_scene` (既定 False = byte-identical baseline / True = comp5・route-executor) / no-C2 control run (`dd7c97d480`) / multi-cell / comp3b / DR。
+- ⇒ **backend flip より遥かに起きやすく、bool assert は素通りさせる。** pin は `eqid=27` / `pinned_body=55` という **index** で記録されているため、layout が 1 つずれれば **別の constraint を活性化する = 物理的に誤った state を silent に作る**。
+
+**訂正 (provenance の格上げ)**:
+1. **provenance = (backend_id, layout_hash)**:
+   - `backend_id` = `use_mujoco_cpu` + solver class + newton / mujoco version
+   - **`layout_hash`** = `nq` / `nv` / `neq` / `nefc-max` + **eq の name→index 写像** + **scene flags** (`route_c2_scene` / `grasp_actuation` / clip config)
+2. **restore で両方の一致を fail-loud assert** ⇒ **backend flip / scene 変更 / version bump / index shift の class 全体が 1 本の guard に畳まれる** (E-5 の「間違った成果物を落とす」を provenance 層で実装)。
+3. ⭐**eq は index でなく name で解決して restore する** — assert = 「**変わったことを検出する**」floor / name 解決 = 「**変わっても壊れない**」robust form。**両方要る** (%9)。
+4. cost = `layout_hash` は構築時 1 回。
+
+**corollary (%9)**: repo 全体で `use_mujoco_cpu` を override する caller は**ゼロ** ⇒ producer (`test:8146`) と RL env (`base:1938`) は同一 global に従う ⇒ **flip は atomic (片方だけ飛ばない)**。**唯一 cross-backend を生む経路 = 「今日 capture した bank を flip 後の env へ restore」** ⇒ **provenance assert が唯一の防壁**であり、これを layout_hash 込みにしておけば scene 変更も同時に守られる。
+
+**leg6 の穴 3 件 (%9 → p3、build 中に塞ぐ)**: (i) index-space trap (`eqid=27` の hardcode) (ii) 部分修正の素通り (warmstart の buffer 誤選択でも leg6 は PASS する → **各 hidden field に「変動 > 0」の liveness gate** を課す) (iii) lag convention (記録 `pin_active` と solver `eq_active` に 1 frame lag があり得る → EXACT を課すと fix 後に false-FAIL → **実測して pin**)。
+
+*%12 — 2026-07-14。F-5 (3) の bool assert は本 F-6 が supersede。%9 の upgrade を実在確認の上 採択。*
