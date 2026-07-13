@@ -326,3 +326,35 @@ M10 は restore-exact の write-set に **`body_q_prev` (solver double-buffer) +
 - **cable restore は新関数を作らず既存 `seed_cable_joint_state` に `cable_qd=None` kwarg を追加** (AGENTS.md reuse gate + repo の静的監査 script が書込面を関数名で列挙するため、twin 新設は監査不可視になる)。
 
 *%12 — 2026-07-13。PAPER-ONLY。Rs 承認数値 (HOLD 15/12/24 / Δ 0.020 / DR±20 OFF / mix 集合) は不変。INVARIANTS 不触。*
+
+## §16. ERRATUM-D (2026-07-13 22:2x、%12 — %9 corrective C-α を受諾。**§14 ERRATUM-B の over-generalization を訂正**)
+
+§14 ERRATUM-B は「body_q_prev / Dahl は本基板に存在しない」までは正しい (%9 独立 CONFIRM、反証不成立)。しかし続く **「本基板の hidden state = mjData 内部 → 1-step leg が *唯一の* guard に昇格」は誤り** (%9 C-α、%12 on-disk 再検証で CONFIRM)。訂正:
+
+### D-1. hidden state は「消えた」のでなく「移動した」— しかも **捕捉可能**
+
+- `SolverMuJoCo` の source に **`mjw_data` / `mj_data` / `mujoco_warp` / `eq_active` が実在** (inspect.getsource 実測) ⇒ **mjWarp `Data` は露出しており、B3 は capture/restore *できる*。**
+- 本基板の carried state (%9 実測) = **`qacc_warmstart` / `act` / `act_dot` / `eq_active` / `solver_niter` / `contact`**。
+- ⇒ 「触れないから経験 leg が唯一の guard」は **成立しない**。warmstart 系の disposition は **B3 の明示設計判断** (3 択、下記 D-3) であり、既定でも自明でもない。
+
+### D-2. ⭐`eq_active` = THREAD 固有の第 2 channel (見落とすと invariant 抵触)
+
+equality constraint の活性 flag は **4-bar linkage eq (`newton_skill_env_base.py:1446` の ENABLED-count assert 4)** と **clip-retention pin (`pin_eqid`、INVARIANT #5 の唯一の認可例外)** の両方を担う。fork 時に `eq_active` が不整合だと linkage/pin が producer と乖離する。**B3 は eq_active の fork disposition を明示すること** (capture/restore or 明示再構成 + 正当化)。
+
+### D-3. ⭐fidelity bar の calibration 不整合 (%9 主 finding — ERRATUM-C の cable channel を **supersede**)
+
+**事実 (npz 実測、%12 再現)**: FORK-1 の致死 seed = `frame0_perseg_mm` **mean 0.0200 / max 0.1469 mm** → t280 で 1.29mm → t343 で 16.07mm (HOLD 発火) = **~100× / 300 step の増幅**。
+**⇒ spec DoD の `qpos/qvel L∞ ≤ 1mm / 1mm/s` (§6.2-1 / §8) は、致死 seed の max より ~6.8× / mean より ~50× 緩い。** warmstart 由来 0.5mm の restore 誤差は 1mm bar を PASS した上で **FORK-1 と同一機構で発散する** = **本 node が防ぐべき当の failure class に盲目**。本 node の存在理由自体が「本基板は 0.02-0.15mm を増幅する」ことの実証である以上、そこに 1mm bar を当てるのは自己矛盾。
+
+**訂正 (bar の再設計)**:
+1. **channel 分離**: arm/gripper = 毎 frame kinematic re-pose ゆえ **非増幅** → 1mm/1mm/s 可。**cable = 増幅 channel → 1mm bar を適用しない。**
+2. **⭐1-step → K-step divergence-GROWTH leg に昇格 (本命 DoD)**: FORK-1 の signature は step-1 の *大きさ* でなく *成長* である。`G_k−ε` fork → Δ≡0 で **K ≈ 20-50 step** roll → producer 同境界 trajectory と `div_grip` 系列を比較。**PASS = 窓内 HOLD 発火 0 ∧ 健全域 band 内 (≤10.41mm aligned、B2 leg8) ∧ ramp signature (持続 ~1mm/step 単調増) 不在**。cuda:0 数秒、leg8 の較正手法を再利用。
+3. **warmstart disposition = 3 択を明示比較して選ぶ**: (i) capture+restore / (ii) 両側 zero 化 / (iii) 非 restore + K-step leg で drift-bounded を実証。
+4. **honest limit (bar の意味論)**: 全 solver state を復元しない限り fork は producer の連続軌道を **byte 再現できない**。⇒ 到達可能な bar は byte-parity ではなく **「physically valid ∧ drift-bounded continuation」** (= HOLD を発火させずに学習可能な episode を供給できること)。DoD はこの言葉で書く。
+5. **⚠P0-reset precedent を転用しない**: P0 = settled/quiescent (warmstart ≈ 静的平衡) ゆえ非復元でも ⑨a′ EXACT が成立した。**G3-G5 fork は mid-route・把持中・接触 rich で warmstart は実情報を持つ** — 「reset で問題ないから fork も」は非転移 (%9)。
+
+### D-4. ERRATUM-C との関係
+
+ERRATUM-C (§15) の **判別力要件 (null bank = cable_qd≡0 で必ず FAIL)** は不変・強化。ただし C の「(α) restore-exactness ≤ ~0.5mm」提案は **cable channel については本 D-3 が supersede** — cable の bar は FORK-1 seed scale (≪0.147mm) か、さもなくば K-step growth leg による drift-bounded 証明に置き換える。arm/gripper の 1mm は残置。
+
+*%12 — 2026-07-13。%9 C-α = 全面受諾 (over-generalization の own)。Rs 承認数値不変。INVARIANTS 不触。*
