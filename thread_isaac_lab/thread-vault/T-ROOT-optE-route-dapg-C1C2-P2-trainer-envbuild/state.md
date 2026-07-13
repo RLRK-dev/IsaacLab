@@ -200,6 +200,80 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 - **CORRECTION-3 (bar)**: seated bar は **6mm ではない** — code の `T_GROOVE = 0.003` (task_config.py:368) + `cable_in_groove` + `GROOVE_BODIES_MIN=2` (:384) が SSOT。6mm は溝の内半径。**%12 の 6mm 指定は緩すぎた。**
 - **拘束している真の量 (%12 実測、検定対象として %9 へ)**: hop 弦長 **90.14mm** ⇒ **1 hop に ≥7 seg** (⭐**p5 の副次 defect 決着: banked §2.1 の 5 seg = 誤り、7 seg が正**) / 各中間 clip の turn = **67.38°** ⇒ ~10°/joint ⇒ ⭐**`jnt_range` が決定的** / **2 seated 時の平面 pivot = 無制限** (2 点は共線、C3 端は C1-C2 線から **83.21mm** ⇒ 持上げ = 83.2·sinψ、ψ 無拘束) ⇒ ⭐**C3 を上から落とす運動は利用可能 — 壁は clip 3 に無い** / **3 seated 時の平面 tilt = 13.89° に pin** ⇒ **C4 位置の持上げ余地は 8.00mm のみ** (bar 3mm なら **4.0mm**) ⇒ ⭐⭐**壁があるとすれば clip 4。機構 = 「seated 集合が非共線になった瞬間に平面が pin され、面外の持上げ余地が崩壊する」。** ⚠ これは %12 の *導出* であって verdict でない — **ground truth = producer の C1→C2 記録から cable の Z=0.809 面からの最大逸脱 (= 実際の必要持上げ量) を実測して比較。**
 
+### ⛔⛔ 2026-07-14 05:4x — **壁は 3 説とも壊れた / 「c1pin REFUTED」が空虚である経路は 4 本**
+
+#### (A) 幾何の「壁」= **全説 撤回。差し替えの結論も置かない。**
+
+| 提案された壁 | 提案者 | 結末 |
+|---|---|---|
+| 「3 clip = best-fit 16.7mm ⇒ 配位空間の外」 | %12 → %9 | ⛔ **破棄** — best-fit **LINE** は「bend 平面が垂直」前提。root は **FREE joint** ゆえ強制されない |
+| 「壁は clip 4 (3 seated で平面が pin → 面外持上げ余地 8mm[bar6] / 4mm[bar3] / **2.67mm[bar2]** へ崩壊)」 | %12 | ⛔ **破棄** — **逐次順序 C1→C2→C3→C4→C5 を暗黙前提**にしていた |
+| 「置ける が 配線できない (水平平面 ⇒ 垂直曲げ厳密ゼロ)」 | %9 | ⛔ **破棄** — **共線 3 点は平面を pin しない** |
+
+⭐**破壊した反例 = 奇数 clip 先行 (%12、env_isaaclab7 実測、Z0=0.829 / bar=2mm)**: **C1・C3・C5 は全て x=0.35 = 共線** ⇒ 3 本座らせても **平面は x=0.35 の直線まわりに自由 pivot** ⇒ τ=**21.80°** 傾ければ **x=0.40 の材料が 20mm 持ち上がる**、その間 **奇数 3 本は pivot 軸上ゆえ溝を出ない** (軸から 2mm ずれた seat の z 変位 = **0.74mm** < bar 2mm) ⇒ **τ→0 で C2 と C4 に *同時* 着座、奇数 3 本は一度も動かない**。予算充足: zigzag **360.6mm** / cable 600mm (25 seg / 40)、turn **67.38°** ≈ 11.2°/joint に対し **%9 の M1 実測 `hinge_limited = 0` (range ±5.7e11 = 無制限)**。
+⭐**%9 の M1 (built model 実走)**: cable = **1 FREE + 39 HINGE**、**39 軸すべてが任意 q で平行** (25 試行、worst_nonparallel = 0.0)、共通軸 = world (1,0,0) ⇒ **鎖は PLANAR で確定**。⇒ ⛔**joint-limit による厳密証明書は取れない。**
+⇒ ⭐⭐ **「幾何的に不能」も「幾何的に可能」も現時点で言えない。どちら向きにも witness が無い。** ⛔ **壁を別の壁で置き換えない** (今夜 3 回やった誤りの 4 回目になる)。**p5 の HARD STOP (「5-clip は配位空間の外」) も撤回対象。**
+⇒ **(d1) の task を書き換え**: 「不能を証明する」→ ⭐**「witness を作る」** (W-1 静的手組み + FK 検算 [bar 2/3/6mm、groove center は **built model** から: `route_env_config.py:144` **ROUTE_GROOVE_Z=0.829**、task_config の 0.809 ではない] / W-2 運動の各 step で既着座が bar 内 / ⭐**W-3 = 本当の open question**)。
+⭐⭐**W-3 (物理、誰も 30 分前には聞いていなかった問い)**: 鎖に **twist DOF が無い** ⇒ **bend 平面の向き = root 姿勢 = 鎖全体で 1 個の剛体 DOF**。build 時 hinge 軸 = world (1,0,0) / cable は Y 方向 ⇒ **素の bend 平面は垂直 (YZ)**。奇数先行 plan は **鎖を ~68° roll する**ことを要求 ⇒ **重力・テーブル接触・gripper の下でその roll は実現するか?** (roll が位置的に無コストなのは **鎖が真っ直ぐな時だけ** / policy は root 姿勢を直接制御しない / 水平 bend 平面の鎖は **Z 方向に剛体 = 垂れない**)。⇒ **運動学ではなく物理。これが (d1) の本命。**
+
+#### (B) ⭐⭐ 「c1pin REFUTED」が空虚である **独立な経路 = 4 本**
+
+| # | 経路 | 発見者 | 状態 |
+|---|---|---|---|
+| 1 | **pin が一度も発火しなかった** — fail-silent は **2 本** (latch が None check の前で焼かれる + **5mm 位置一致 gate が print のみ・raise 無し** ⇒ index が正しくても `mjd.xpos` が stale なら silent skip) | %9 + **%10** | **code 上で確定** |
+| 2 | **事前確保だけで挙動が変わった** — pin が発火せずとも 342 step を説明可 (`_wire_s6_grasp_solref` が disabled eq も stiffen / nefc・njmax・constraint 順序) | **p3** | (d2) 腕 B が決める |
+| 3 | ⭐**342 vs 499 が baseline 自身の run-to-run ばらつきの中** = **信号が最初から存在しなかった** | **%12** | (d2) 腕 A/A′ が決める (**A ≢ A′ なら A を N≥5 回走らせ分布を取る**) |
+| 4 | ⭐⭐**artifact が「どれなのか」に *原理的に* 答えられない** — result.json に PERCLIP_PIN / eq_active / seat body / position-match が **1 field も無く**、**termination_reason すら無く、stdout も未保存** (⇔ producer 側 log には witness `[PERCLIP_PIN] ACTIVATED eq#27 ... position-match 0.000mm ... eq_active=1` が在る) | **%10** | ⭐**GPU 不要で *既に確定*** |
+
+⇒ ⭐⭐⭐ **#4 が確定している以上、1/2/3 のどれであれ「REFUTED」は成立していない。正確な現状は「反証された」ではなく「試されたか *不明*」。** (d2) は **「どれだったか」を決める**のであって「REFUTED が正しかったか」を決めるのではない。
+⇒ ⚠ **この連鎖の下流 = FORK-1 の終端帰属 → 「閉ループ RL だけが直せる」→ trainer を数週間 build する、の *起点* が witness 無き artifact。**
+
+#### (C) (d2) DoD v2 (p3、`D2_PIN_REMEASURE_DOD_COORD_20260714.md`、commit cf025fd872) — %12 verify = PASS-WITH-2-CRIT
+
+- ⛔⛔**CRIT-1 (Rs 専権 gate の欠落、3 名とも見落とし)**: **視覚レグが 1 行も無い (grep 0 件)**。⭐**測定対象そのものが kinematic trick (weld = 物理を上書きする機構)** ⇒ **「数値 PASS / 動画 wrong」に最も転びやすい配置** (「seg27 が 4.16mm に留まる」は cable が clip に *めり込んだまま* weld が押さえていても成立する / 「route 完走」は weld が物理的にありえない配置を保持していても成立する)。かつ **route 完走 ⇒ trainer を止める**決定 ⇒ **数値だけで下してはならない**。⇒ **追加必須**: P4 で動画 (route 全域 + **C1 接触点 zoom**) / **pC の blind 独立判定** / ⭐**FORK-1 を falsify する verdict は Rs の動画 human-GT を経てからでないと act しない** (autonomy grant の唯一の例外) / `~/Downloads` へ納品 / 見る 3 点 = **めり込み / 指間 slip / 不自然な硬直 (weld が divergence を「直した」のか「隠した」のか)**。
+- ⛔**CRIT-2**: **A ≢ A′ の分岐が無い** ⇒ 上記 (B)#3 を追加。
+- **MED-1**: 「seated で完走」は code 自身の述語 (`cable_in_groove` / `GROOVE_BODIES_MIN=2` :384 / `T_GROOVE=0.003` :368) を使う。発明しない。
+- **MED-2**: P1 の bar「4.16mm 近傍」は曖昧かつ **危険** — **4.16mm は *記録* (producer build) の値で、env は別 build (それが FORK-1 の前提)** ⇒ **一致する必然性は無い** ⇒ bar を **「有界かつ非発散」** に (52.87mm への単調離脱との差は十分大きく判別力は保たれる)。「4.16 と一致しないから INSTRUMENT DEAD」と誤読される bar にしない。
+- ✅ 承認: 3 腕 (A/B/C) / 走行順序 A′→A→B→[A≡B]→C→P1→P4→P5 / witness 永続化 + stdout 保存 / seat 非移植 (P0′) / termination_reason / flag-OFF byte-preserve / 新規 dir / **測定 ≠ 採択** (pin 常設は Rs 専権)。
+
+### ✅ 2026-07-14 05:5x — **(d1) = CLOSE。壁は 4 説とも死んだ。層 3 の警報 = 解除。**
+
+⭐⭐ **%9 が golden 記録 (Rs 宣言の MOTION STANDARD = 現に動いている route) を実測 → 私の W-3 (物理) が反証された。**
+- `route_demo_raw.npz` の `cable_xyz` (7707,40,3) を毎フレーム SVD 平面 fit: **cable の平面性 s3/s1 = median 2.5e-07 / max 1.4e-06** ⇒ **live route 上でも鎖は 100 万分の 1 の精度で平面** (M1 の構造的事実が実データで確認)。
+- ⭐⭐ **bend 平面の法線 vs 素の bend 軸 (world X): median 17.6° / p95 78.4° / MAX 89.6°** ⇒ ⭐⭐⭐ **現に動いている route は bend 平面を最大 89.6° roll させている。**
+- ⚠ **%12 の数値訂正 (%10 捕捉)**: 必要な roll は **68° ではなく 90°** (私は **67.38° = zigzag の *turn* 角** と roll を取り違えた)。⇒ **にもかかわらず答えは変わらない — golden 実測 MAX 89.6° ≈ 90°。**
+
+| # | 提案された壁 | 提案者 | 死因 (⭐ 4 つとも同型) |
+|---|---|---|---|
+| 1 | 3 clip = best-fit 16.7mm ⇒ 配位空間の外 | %12→%9 | **bend 平面を「垂直」と黙って固定** (root は FREE joint) |
+| 2 | 壁は clip 4 (持上げ余地 2.67mm) | **%12** | **seating 順序を「逐次」と黙って固定** (奇数先行は許される) |
+| 3 | 置ける が 配線できない | %9 | **seated 集合を「非共線」と黙って固定** (C1,C3,C5 は共線) |
+| 4 | ~90° roll は物理的に無理では | **%12 (W-3)** | **roll を「未検証」と黙って仮定** (**golden が既に 89.6° roll している**) |
+
+⭐⭐ **%9 の META (bank 済 `feedback-a-wall-is-a-forgotten-degree-of-freedom-2026-07-14`)**: **「壁とは、自由度を 1 つ忘れたときに現れるもの」。**
+⭐ **p5 も HARD STOP を撤回・自己診断**: 「**私自身の tool 出力に反証が印字されていた** — 『C1,C3,C5: cross=+0.00000 -> COLLINEAR』。出力しておきながら『route は偶数 clip も要る』で読み飛ばした = **自分で生成した反証の握り潰し**」(prohibited.md 確証バイアス、p5 自認)。
+- ✅ **%9 の調停 (XY rank)**: seated {C1,C2,C3} = rank 2 (非共線) ⇒ 平面 **PINNED** ⇒ **%10 の予算式 (≤5.4mm) は正しい** / seated {C1,C3,C5} = rank 1 (共線) ⇒ 平面 **FREE** ⇒ 上限なし。⇒ **%10 と %12 は矛盾していなかった — 効いているのは seating の *順序*。**
+- ✅ **RS71 §4 の読み方 (%9 が正、%12 受諾)**: 「horizontal routing curvature を動的に表現しない」は **fidelity の言明** (sim2real robustness を validate できない) であって **不能の言明ではない**。⇒ **substrate 変更 (2nd bend DOF 追加) の提案は撤回。新規上程 不要** (境界は RS71 が既に bank・Rs 受諾済)。
+- ✅ **副次決着**: hop 弦長 **90.14mm** ⇒ **1 hop に ≥7 seg** (p5 の banked step-table §2.1「5 seg」は誤り。訂正は p5 領域 ⇒ p5 が Rs へ上程)。**h_lip 実測 = 46.4mm** / **seated 平面の実測 Z = 829.0mm** (%10 の CRIT-1 を %9 が独立確認)。
+
+⛔ **ただし「壁が無い」≠「達成できる」(%12 の止め、%9 全面受諾)**: ⭐**5-clip 着座の witness (実際に構成して FK で検算した配置) は *まだ誰も作っていない*。** 4 つの壁は全て「証拠なしに断定した」から死んだ ⇒ **逆向きの断定も同じ規律に服する。**
+⇒ ⚓ **正確な状態 = 「提案された壁は 4 つとも壊れた。達成可能性の witness も存在しない。⇒『不能』も『可能』も未確立。」**
+⇒ **W-1 (手組み witness) = blocker から *carry* へ降格** (「5-clip route は達成可能」と誰かが主張する *前に* 必ず作る。whole-route DoD 行)。**現 gate は (d2) ただ 1 つ。**
+
+### ⭐⭐ 2026-07-14 05:5x — (d2): **07-12 の動画が現存。GPU ゼロで核心に答え得る (%10 発見)**
+
+`~/Downloads` fresh ls (%12 実測): **`comp5_c2seat_fullfire_c1pin_ctx.mp4`** (全景、07-12 02:20) / `comp5_c2seat_fullfire_c1pin_c2zoom.mp4` / `comp5_c1pin_GRIPDROP_bright.mp4` (02:25) + frames dir に c2zoom PNG **228 枚**。⚠ 07-12 の pC 判定 PNG も 3 枚残存 (`pC_c1pin_PHASE3_DROP_grippers-tilt_one-lifts-away_cable-FREE-END_t9.5.png` 等)。
+⇒ ⭐ **「07-12 の run で pin は cable を C1 に保持していたか」は *見れば分かる* 可能性がある** ⇒ **pC に blind 判定を dispatch 済** (設問 1 つ = 「C1 に保持され続けているか / 離れていくか」、数値・仮説・期待・過去判定は渡さない。判定不能なら「不能」と返せと明示)。⚠ **「保持されている」と「*物理的に妥当に* 保持されている」は別** — weld は物理を上書きする ⇒ めり込み / 不自然な硬直も報告させる。
+⇒ ⭐⭐⭐ **verdict は Rs の動画 human-GT が最終** (autonomy grant の唯一の例外)。動画は既に `~/Downloads` に在る。
+
+### (d2) bar の訂正 (%10 C-1、%12 の bar が誤り)
+
+⛔ **%12 が置いた「A ≡ B (厳密一致)」は誤り** — **A と B は model が違う (neq 6 vs 46)** ⇒ solver 内部配列・reduction 順序が変わる ⇒ **物理が同一でも bitwise は割れ得る** ⇒ **「効果ゼロ」でも FAIL する bar = 偽の escalation。**
+⇒ ⭐ **正しい構成 (%10 C-1 + %12 CRIT-2 の合成、%9 も支持)**: **A vs A′ (同一 arm 2 回) が *ノイズ床* を定義し、A vs B をその床に対する *相対* で判定する** — |A−B| ≈ |A−A′| ⇒ pre-alloc 効果なし / |A−B| ≫ |A−A′| ⇒ **07-12 は交絡の実証**。**boolean を捨てて「ノイズ床に対する相対」へ。**
+⚠ ⭐ **%10 の prior**: env 経路の決定性には強い証拠 (B1/B2/B3a の leg4 が `comp5_c2seat_fullfire.py` 再走で banked npz と全 array EXACT、日と code 変更を跨いで) ⇒ **A ≡ A′ が期待値** ⇒ ⛔ **A ≢ A′ が出たら (d2) を超える発見** (B1/B2/B3a の byte-anchor leg 群の前提が崩れる) ⇒ **A′ verdict 表に「A ≢ A′ ⇒ (d2) を止めて byte-anchor 系 leg の再審へ escalate」を入れる。**
+- **%10 C-2**: P1 の bar に **識別力の対** (同 leg で腕 A の同 metric が 52.87mm へ離脱することを示す = 追加コストゼロ)。
+- **%10 C-3 ⊥ %12 MED-2 (両方必要)**: **値の一致は不要** (4.16mm は producer build の値、env は別 build = FORK-1 の前提) ⇒ bar = **「有界かつ非発散 (≤10mm・単調増加でない)」** / **定義の一致は必須** (どの seg / どの clip 中心 / 3D か水平か / groove Z の読み元 = route 0.829)。
+
 ### ⚠ 本 §RESOLUTION の commit provenance (records-must-match-fact)
 
 **本節 (§RESOLUTION、%12 執筆) は `aa15596710`「B3a CLOSE: carry the "prove the guard RUNS on the live path" DoD to B3b」(%11 の commit) に含まれている** — 共有 tree 上で %12 の未 commit 編集を %11 の commit が巻き込んだため (commit message は本節に言及していない)。**内容は無傷** (%12 が `git show aa15596710` で実体照合)。⇒ **git log で「Rs 裁定 (d) 承認はいつ記録されたか」を追う者のために本行を置く。** ⭐**これは %12 が `575069abe5` で犯した sweep の鏡像** — 共有 tree での `git add` は explicit path + `git diff --cached --name-only` の事前確認が要る、を双方向で再確認 (memory `feedback-explicit-path-commit-git-diff-file-first-sweep-both-directions`)。history 改変はしない (共有 tree、%9/%12/%10 一致方針)。
