@@ -8,13 +8,23 @@
 
 ---
 
-## §0. 問い (これが全て)
+## §0. 問い + ⭐framing (%12 指示: これを冒頭に置く)
 
 > **「pin が実際に効いている env で、open-loop scripted replay は本当に落ちるのか」**
 
 これは **FORK-1 の終端失敗帰属**の再測定であり、**trainer 構築 (数週間) の存在根拠そのもの**を決める。
 
-⚠**07-12 の「c1pin REFUTED」は信用できない** (本 doc §1)。⇒ **今回は「それを区別できる計器」を作る。**
+### ⭐⭐ framing — 「REFUTED」が空虚である経路は **4 本**あり、**うち 1 本は既に確定している**
+
+| # | 経路 | 発見 | 状態 |
+|---|---|---|---|
+| 1 | **pin が一度も発火しなかった** (fail-silent latch + 5mm gate、**両方 raise 無し**) | %9 + %10 | **code 上で確定** |
+| 2 | **事前確保だけで挙動が変わった** (発火せずとも 342 を説明) | **p3 (当方)** | **(d2) 腕 B が決める** |
+| 3 | ⭐**342 vs 499 が baseline 自身のばらつきの中** (= **信号が最初から無かった**) | %12 | **(d2) 腕 A/A′ が決める** |
+| 4 | ⭐⭐**artifact が「どれなのか」を答える field を 1 つも持たない** (eq_active / seat / position-match / **termination_reason** すべて不在、stdout 未保存) | **%10** | ⭐**GPU 不要で *既に確定*** |
+
+⇒ ⭐⭐⭐ **4 が既に確定している以上、1/2/3 のどれであれ「REFUTED」は成立していない。**
+⇒ ⛔**(d2) は「どれだったか」を決めるのであって、「REFUTED が正しかったか」を決めるのではない。**
 
 ---
 
@@ -117,6 +127,91 @@ recorded pinned_body(newton)=55 -> mjc = 55+1 = 56      ⭐ CONSISTENT
 | ⚠**9** | **本 run は *測定* の authorization であって *設計採択* ではない** — 「pin を RL env に常設」= INVARIANT #5 の scope 変更 = **Rs 専権** | §6 + §5 |
 
 ⇒ **走行順序 (確定)**: **A′ (determinism) → A (HEAD baseline 再導出) → B (pre-alloc のみ) → [A ≡ B 判定] → C (発火) → P1 → P4 → P5**
+
+---
+
+## §4.6 ⭐ 走行前 audit の条件 (%10 C-1〜C-5 / %12 CRIT-1・2 + MED)
+
+### ⛔⛔ CRIT-1 (%12) — **視覚レグが無かった。3 人とも見落とした。** ⇒ 必須化
+
+⚠**測定対象そのものが kinematic trick (weld = 物理を *上書きする* 機構)** ⇒ **THREAD で最も「数値 PASS / 動画 wrong」に転びやすい配置**:
+- 「seg27 が C1 から 4.16mm」は、**cable が clip に *めり込んだまま* weld が押さえている**状態でも成立する。
+- 「route 完走 / C2 seated」は、**weld が物理的にありえない配置を保持している**状態でも成立する。
+⇒ ⭐**物理を上書きする機構を、数値だけで採点してはならない。**
+
+| # | 必須項目 |
+|---|---|
+| 1 | **P4 の run で動画を録る** — route 全域 + ⭐**C1 接触点の zoom** |
+| 2 | **pC (VIDEO-ANALYST) の独立判定 — blind** (数値・結論・期待を渡さない) |
+| ⭐**3** | ⛔⛔**FORK-1 を falsify する verdict は、Rs の動画 human-GT を経てからでないと *act しない*。** 数値だけで **B3b を止めない・trainer を否定しない**。(**Rs autonomy grant の唯一の例外 = 動画 human-GT**) |
+| 4 | **動画は `~/Downloads` へ proactive 納品** (Rs standing) |
+| ⭐**5** | **見るべき 3 点**: (a) **cable が clip にめり込んでいないか** (weld が幾何を上書き) (b) **把持が指の間を滑っていないか** (c) ⭐**cable が不自然に硬直していないか** — **weld が chain を固めて divergence を *隠して* いないか。「直した」のか「隠した」のかは動画でしか分からない** |
+| 6 | 省略時は **loud に理由を記録** (mandatory-or-justified) |
+
+⭐**補助診断 (%9 提案) — 「隠蔽」は数値に足跡を残す。⛔ただし *動画の代替ではない*: これは pC/Rs に「どこを見るか」を指す道具であって verdict ではない。**
+
+**weld が divergence を「直した」のでなく「chain を固めて隠した」なら、articulation が死ぬ。** 腕 C で測る:
+| # | 量 | golden の実測 (生きている chain) |
+|---|---|---|
+| (i) | **hinge 角の時間変化** `\|Δq\|` の分布 | weld 後に落ちれば硬直の足跡 |
+| (ii) | **bend 平面の roll 角の時間変化** | golden は route 中に **最大 89.6° roll** = **chain は生きて動いている** (%9 実測) |
+| (iii) | **seg27 近傍 vs 遠方の articulation 比** | weld 近傍だけ死んでいれば**局所硬直** |
+| — | (参考) cable の平面性 `s3/s1` | golden median **2.5e-07** (極めて平面) |
+
+⇒ **「A/B と比べて C だけ articulation が崩壊」= 隠蔽の足跡。**
+⇒ ⛔**ただし「数値が良い + articulation も生きている」でも、Rs の動画 human-GT 無しに FORK-1 を falsify しない** (CRIT-1 #3)。
+
+### ⛔ CRIT-2 (%12) — **A ≢ A′ の分岐が無い ⇒ 第 3 の経路**
+
+⭐**もし A ≢ A′ (GPU 非決定) なら「342 vs 499」は run-to-run のノイズかもしれない。**
+⇒ **分岐**: A ≢ A′ なら **arm A を N≥5 回**走らせ **step 数の分布**を取る。⇒ ⭐**342 が A 自身の分布内なら、07-12 の「信号」は最初から存在しなかった** (framing 経路 3)。
+
+### ⛔⭐ C-1 — **A≡B を boolean にしない。「ノイズ床に対する相対」で判定する** (%10 C-1 + %12 CRIT-2 の合成、%12 が自らの bar を訂正)
+
+⚠**当初 bar (当方 + %12) = 「A ≡ B (厳密一致)」は誤り**: **腕 A (neq=6) と腕 B (neq=46) は *model が違う*** ⇒ MuJoCo の arena/njmax/reduction 順序が変わり、**physics が同一でも bitwise は割れ得る** (FP path 差)。⇒ **「効果ゼロ」でも FAIL し、escalation を誤発火させる。**
+
+⭐**正しい構成 (3 段)**:
+| # | 手順 | 意味 |
+|---|---|---|
+| **1** | ⭐**A vs A′ (同一 arm を 2 回) が *ノイズ床* を定義する** — `max\|Δcable_xyz\|` と `step` / `termination_reason` の再現性 | **計器の分解能を先に測る** |
+| **2** | ⭐**A vs B は、そのノイズ床と *比較* して判定**: <br>・`\|A−B\| ≈ \|A−A′\|` ⇒ **pre-alloc に効果なし** (A ≡ B 成立) ⇒ C へ <br>・`\|A−B\| ≫ \|A−A′\|` ⇒ **pre-alloc が効いている** = ⭐**07-12 の run は交絡の実証** ⇒ 上程 | **相対判定** |
+| **3** | ⭐**A′ が A と割れる (= 非決定的) 場合**: 腕 A を **N≥5 回**走らせ **step 数の *分布*** を取る ⇒ ⭐**342 がその分布の中に入れば、07-12 の信号は最初から存在しなかった** (framing 経路 **#3**) | **信号の有無そのものを問う** |
+
+⇒ ⭐**boolean をやめ、`max|Δcable_xyz|` / `step` / `termination_reason` を **数値で**出し、**ノイズ床に対する相対**で判定する。** ⛔**「効果ゼロ」を FAIL にしない・「ノイズ」を発見にしない。**
+
+### ⛔ C-2 + MED-2 — **P1 の bar (⚠ 2 名の指示が衝突。調停する)**
+
+- **%10 C-2**: 「4.16mm 近傍」は数値でない ⇒ **許容を pin せよ** + ⭐**identifiability の対**を示せ。
+- **%12 MED-2**: ⚠**4.16mm は *記録 (producer build)* の値。env は別 build (それが FORK-1 の前提) ⇒ env の pinned 距離が 4.16 と一致する必然性は無い。**「4.16 と一致しないから INSTRUMENT DEAD」と誤読される bar にするな。
+
+⭐**調停 (両立する形)** — bar を **値の一致でなく *挙動* で定義**する:
+| # | bar | 根拠 |
+|---|---|---|
+| **B1** | **有界**: pin 後の全 window で `d(seat_seg, C1_groove_center) ≤ 10mm` | %12 MED-2 (env は別 build ⇒ 値一致を要求しない) |
+| **B2** | **非発散**: post-onset window で **単調増加でない** (線形 fit の傾き ≤ 0 近傍) | 52.87mm への**単調離脱**と判別 |
+| ⭐**B3** | ⭐**identifiability の対 (%10 C-2)**: **同じ metric・同じ code で 腕 A (pin 無し) を測り、A が B1/B2 を *FAIL* すること**を同 leg で示す ⇒ 「P1 は pin の有無を判別できる」の実証。**腕 A は既に走るので追加コストゼロ** | %10 C-2 |
+
+⇒ **B3 が無ければ P1 は「PASS するだけの計器」。**
+
+### ⛔ C-3 (%10) — **4.16mm を作った式と *完全同一* の式で測る (計器 parity)**
+
+⇒ **doc に逐語 pin**: (a) seat seg (b) clip 中心 (c) 3D か水平のみか (d) **groove center Z の読み元** — ⚠**route scene は `ROUTE_GROOVE_Z = 0.829` (`route_env_config.py:144`)、`task_config` の 0.809 ではない** (%10 CRIT-1、%9 が golden 実測 829.0mm で独立確認)。
+⇒ ⭐**parity 証明**: **記録側の 4.16mm を *同じ code* で再計算して一致を確認**してから env に使う。**計器を使う前に検証する。**
+
+### ⚠ C-4 (%10) — RAISE 化しても **診断可能性**を残す
+
+⇒ **raise message に実測 position-match 距離を必ず載せる** (producer は `position-match 0.000mm` を出す)。⭐**その距離こそ「なぜ 07-12 で pin が発火しなかったか」の答えかもしれない** — 落ちても finding が残る形に。
+⇒ **producer の呼出順序 (mj_forward の位置を含む) を verbatim 再利用**し、**position-match ≈ 0 を assert**。
+
+### ⚠ C-5 (%10) + MED-1 (%12) — **述語は banked のものを使う (発明しない)**
+
+- **route 完走 = `strict_v2` (`c1_retained_final` AND `c2_seated_honest`)** — banked 成功述語。
+- **seated = code 自身の述語**: `cable_in_groove` / `GROOVE_BODIES_MIN = 2` (`task_config.py:384`) / `T_GROOVE = 0.003` (`:368`)。
+⇒ ⛔**ここで新 bar を発明すると、最重要 verdict (FORK-1 帰属 FALSIFIED) が新 bar 依存になる。**
+
+### (LOW)
+- **P5 の出力は「データ」であって「採択値」ではない** — HOLD_THRESH は Rs W0-a 採択値・B2 は CLOSED ⇒ 変更は **spec 変更 = %12/Rs 経路**。
+- **A′ は comparator の検証にも使う** — 「A≡B に使う比較器が A vs A′ で *一致を返す* こと」を先に示す (**計器を使う前に検証する**の自己適用)。
 
 ---
 
