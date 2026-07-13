@@ -52,15 +52,60 @@ def c1_groove_center(clip_y: float = 0.150) -> np.ndarray:
 
 
 def seat_distance_mm(cable_xyz: np.ndarray, clip_y: float = 0.150, seg: int = SEAT_SEG) -> np.ndarray:
-    """3D distance [mm] from the seated cable segment to the C1 groove centre, per frame.
+    """⚠ CONFOUNDED -- telemetry only. Node-to-groove-centre 3D distance. DO NOT build a bar on this.
 
-    Args:
-        cable_xyz: [F, n_seg, 3] cable segment world positions (recording ``cable_xyz`` or the env's equivalent).
-        clip_y: C1 clip Y [m] for this cell.
-        seg: the seated segment (default: the measured C1 seat).
+    Kept because it is what the env's ``_seat_metrics`` computes, so the (d2) run can show the broken instrument
+    and the correct one side by side. But it charges CABLE-AXIS NODE PLACEMENT as if it were seating error:
+
+      * the cable has 40 nodes at ~14.64mm spacing, so |dy| has a quantization floor of +-7.32mm (%12);
+      * measured on the canonical golden's final frame, the 4.16mm "lateral" is dx = -0.15mm and dy = -4.16mm --
+        i.e. ENTIRELY the y-offset of whichever node happened to be nearest, with x essentially dead-centre;
+      * and the cable RADIUS is 4mm (task_config.py:137), so a 4.16mm CENTRE offset still leaves the SURFACE
+        embedded in the groove wall -- the producer measures ``cable_c1_final_dist_mm = -0.553mm`` (%10).
+
+    So a 3mm bar on this quantity is finer than the resolution of the quantity itself, and it fails a reference
+    that is physically seated. Two independent reviewers reached that from opposite directions (quantization;
+    surface-vs-centre convention). Use :func:`centerline_offset_mm` or the producer's wall distance instead.
     """
     a = np.asarray(cable_xyz, dtype=np.float64)
     return np.linalg.norm(a[:, int(seg), :] - c1_groove_center(clip_y), axis=1) * 1e3
+
+
+def centerline_offset_mm(cable_xyz: np.ndarray, clip_y: float = 0.150):
+    """Quantization-FREE seating offset: interpolate the cable CENTRELINE at y = C1_Y, measure (|dx|, z_gap).
+
+    Dropping the dy term removes the term that has no physical referent (where a node landed along the axis)
+    and keeps the two that do: how far the cable is from the groove in X, and how far in Z. Nothing is loosened
+    -- the bar is unchanged; a term with no measurand is simply not charged (%12's fix reaches 81/81 cells with
+    the SAME 3mm bar, against 24/81 for the node-based form).
+
+    Returns:
+        (dx_mm, z_gap_mm) per frame -- both signed-magnitude in mm.
+    """
+    a = np.asarray(cable_xyz, dtype=np.float64)
+    c1 = c1_groove_center(clip_y)
+    y = a[:, :, 1]
+    i = np.argmin(np.abs(y - c1[1]), axis=1)
+    f = np.arange(a.shape[0])
+    yi = y[f, i]
+    j = np.clip(i + np.where(yi < c1[1], 1, -1), 0, a.shape[1] - 1)
+    yj = y[f, j]
+    denom = np.where(np.abs(yj - yi) < 1e-12, 1.0, yj - yi)
+    w = np.where(np.abs(yj - yi) < 1e-12, 0.0, (c1[1] - yi) / denom)
+    x = a[f, i, 0] + w * (a[f, j, 0] - a[f, i, 0])
+    z = a[f, i, 2] + w * (a[f, j, 2] - a[f, i, 2])
+    return np.abs(x - c1[0]) * 1e3, (z - c1[2]) * 1e3
+
+
+def weld_hold_mm(cable_xyz: np.ndarray, onset: int, seg: int = SEAT_SEG) -> np.ndarray:
+    """Does the WELDED segment stay where it was welded? [mm from its anchor, per frame]
+
+    This is the cleanest P1 question, and it needs no groove convention at all: the pin welds segment ``seg`` to
+    a world anchor at the onset frame, so a working pin keeps that segment AT the anchor. It tracks one fixed
+    node throughout, so cable-axis quantization cannot enter. A pin that never fired lets the segment walk away.
+    """
+    a = np.asarray(cable_xyz, dtype=np.float64)
+    return np.linalg.norm(a[:, int(seg), :] - a[int(onset), int(seg), :], axis=1) * 1e3
 
 
 def p1_verdict(d_mm: np.ndarray, onset: int) -> dict:
