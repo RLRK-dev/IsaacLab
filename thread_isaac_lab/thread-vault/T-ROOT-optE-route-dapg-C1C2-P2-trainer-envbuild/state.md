@@ -305,8 +305,64 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 
 **%12 の推奨: (A) + (B) を並行。(C) は取らない。** ただし **決定は Rs。**
 
-### ⛔ 併せて未決 (ghost が上程を約束したまま消えた 2 件目)
-**pin (INVARIANT #5 の唯一の認可例外) を RL env へ *恒久* 配線してよいか** — B3-α (bank restore 先に retention 機構が無い)。**(d2) の最小配線は *測定* の授権であって *採択* ではない。** 依然 Rs 未裁定。
+### ⛔⛔⛔ 併せて未決 — **そして今夜の最初の発見と最後の発見は *同一* だった (p1、07:2x)**
+
+**pin (INVARIANT #5 の唯一の認可例外) を RL env へ *恒久* 配線してよいか** — 依然 Rs 未裁定。**(d2) の最小配線は *測定* の授権であって *採択* ではない。**
+
+⭐⭐⭐ **論拠が確定した (p1 が source で verify)**:
+1. **clip は衝突ジオメトリを持たない** — `test_newton_clip_routing.py:1194` `shape_flags = 0x6 if _clip_collide else 1`、**`CLIP_COLLISION` は既定 OFF** ⇒ ⛔ **clip は物理的に *何も保持できない*。**
+2. **cable の rest 形状は直線** — `:1012-1014` **`"mujoco:dof_springref": 0.0`** ⇒ **受動バネが常に直線へ引き戻す** ⇒ **湾曲は *外部拘束によってのみ* 維持される。**
+⇒ ⭐⭐⭐ **∴ routed cable を clip に留められる機構は、*認可された pin* だけ。**
+⇒ ⭐⭐⭐ **RS71 §4 は最初から正しかった** (逐語: 「Horizontal routing through the staggered clips is therefore **KINEMATIC** (grasp-drag + the **AUTHORIZED clip-retention pin**), NOT a dynamically-curved cable」)。
+⇒ ⭐⭐ **∴ 5-clip routing は *全 clip に pin* を要求する。RL env には 1 本も無い。**
+
+| | 発見 |
+|---|---|
+| **今夜 最初 (03:3x、B3-α)** | RL env に clip-retention pin が無い ⇒ bank の `eq_active` に着地先が無い |
+| **今夜 最後 (07:2x)** | clip は保持できず、cable の rest は直線 ⇒ **湾曲を保持できる機構は pin だけ** |
+⇒ ⭐ **同一の事実の 2 つの面。8 時間かけて一周し、banked spec に戻ってきた。** ⇒ **「壁が無い」≠「達成できる」— そして今、*何が足りないか* が正確に分かった: pin。**
+
+---
+
+## ⭐⭐⭐ CAPSTONE — **これは metric bug ではなく governance gap。fix は metric でなく *ゲート* に打つ**
+
+### (i) ⛔ 私 (%12) 自身の failure — **証明は 2 日前に、私が書いていた**
+
+`harness/state/ANCHOR_STEPTABLE_ALIGNMENT_p4p5_20260712.md` = **RS-TECH-LEAD p4 ⇄ VT-DESIGN p5 の joint decision doc (私が共著)**。`:104-110` 逐語:
+> **「EVERY numeric metric (z-proxy + honest-3D-contact + temporal-continuous + C2-seat + regrasp) reads pass/retained, yet Rs-GT = OFF C1. ∴ no current numeric metric covers lateral groove-CAPTURE; the honest-looking ones false-positive on wall/adjacent contact. This is the systematic root of the DoD⑥ false verdict + the "correlated agreement" trap (pB reads these numbers / pC scoped / **p4 glance** all shared the capture-blind basis.)」**
+
+⇒ ⭐⭐⭐ **私は 07-12 に、今夜の失敗を——「correlated agreement の罠」という名前まで付けて、自分を名指しして——書いていた。そして 07-14、その文書を読まずに、書いてあるとおりの穴に全員で落ちた。** (%10 も同じ own: 「anchor-set 接地で `harness/state/` を読んでいなかった」。)
+⇒ ⚠ **接地範囲の拡張提案 (%10)**: anchor-set gate に **`harness/state/`** を追加。
+
+### (ii) ⛔⛔ **唯一 *発火した* ゲートが、欠陥を *強制* していた (p5、source verified)**
+
+`newton_route_env.py:1283-1289` 逐語: 「**DoD-9a validates this live-geometry verdict against the frozen two-key reference and any divergence is fixed here to the frozen def, *never by loosening tol***」「**the EXACT frozen def**」
+⇒ ⭐ **C1-retention 述語は、frozen reference を厳密に鏡写しする *契約 (DoD-9a) に拘束されていた*。**
+⇒ ⛔ **契約は「frozen def から逸脱するな」と *命じて* いた** ⇒ **書いた者は「設計している」と思っていない。「忠実に移植している」と思っており、契約がそれを *要求* していた。** ⇒ ⭐ **`/reward-design` は *発火しようがなかった*。**
+⇒ ⭐⭐ **パリティ / 忠実性の契約は「正しく写したか」を検証するが、「写した *もの* が正しいか」は検証できない。しかも写しを *権威化* する。** ⇒ **ここでは契約は欠陥に *沈黙* していたのではない。欠陥を *命じて* いた。**
+
+### (iii) ⇒ **ゲート改訂案 = 4 条 (Rs 上程項。⚠ skill workflow 変更 = L3、%12 は self-start しない)**
+
+| # | 条 | 出自 |
+|---|---|---|
+| **1** | `/reward-design` に **Artifact 0 = banked-gap 照合** — 述語を作ろうとしている *量* について vault に「NO numeric coverage」「cannot measure」「X is the only ground truth」の banked annotation が無いか grep。**在れば numeric 述語は作れない ⇒ escalate。** | p1 |
+| **2** | **Reachability Table は *demo 分布全体* で取る** (単一 nominal cell 禁止)。⭐**24/81 はそこでしか出ない。** ⚠ **ゲートには reachability レグが *既に在る* — 走らなかったか、1 cell で走った。** | p1 |
+| **3** | ⭐ **強制ゲートは *コードの新規性* でなく *述語の役割* で発火する** — 「reward/成功条件の述語を **定義する / 採用する / 鏡写しする** のか?」→ YES なら発火。**reference を mirror することは免除にならない。** | p5 |
+| **4** | ⭐⭐ **パリティ / 忠実性の契約は、妥当性ゲートを *discharge できない***。**忠実性ゲートは妥当性ゲートに *従属* する。** 順序を逆にすると **忠実に壊れたものを増やす。** | p5 |
+| **5** | ⭐⭐⭐ **prior-art gate の *探索 root* に `harness/state/` (+ 他の banked 面) を入れる** — **実証済 (p3 が今、実際に走らせた)**: `scripts/check_thread_vault_prior_art.sh "groove capture" "lateral" "seat metric"` → **`findings=0 blockers=0` → PASS**。⛔ **しかし当該 banked finding は実在する** (`harness/state/ANCHOR_STEPTABLE_ALIGNMENT_p4p5_20260712.md:107-108`、plain grep で 30 秒)。**gate の探索 root = `thread-vault` / finding の在処 = `harness/state/`。** | **p3 (実測)** |
+⇒ ⛔ **(3)(4) が無ければ、(1)(2) を足したゲートは *今回と同じく発火しない*。** (移植者はゲートを呼ばない — 自分が設計しているとは思っていないから。)
+
+⭐⭐⭐ **そして p3 の実証が capstone を完成させた**: 我々は「**bank しただけでは実装は止まらない — 強制経路が無い**」と診断した。
+⇒ ⛔⛔ **さらに悪い。強制経路は *存在し*、p3 はそれを *持って* おり、走らせたら **PASS を返した**。**
+⇒ ⭐⭐⭐ **「gate が無い」のではなく「gate が、*見えない場所* を分母から外していた」。** ⇒ **pF の「分母を 06:34 で凍結」「書込で停止を主張」と *完全に同型* — 今度は *gate 自身* が踏んだ。**
+⇒ ⭐ **本 arc の中心命題は、最後に gate に着地した**: **「不在主張の分母は、主張する述語と同じ空間から取れ」— これは人にも、guard にも、そして *ゲートにも* 適用される。**
+
+### (iv) ⭐⭐⭐ **そして最後に、これは我々自身に返る (p1)**
+
+**今夜 ~13 の教訓を bank した。「guard には positive control を」「DoD は間違った成果物を落とすように」「comment は narrative、制約は code に在る」…**
+⇒ ⭐ **次にこの codebase を触る者に、それらを *実行させる* 強制経路は無い。**
+⇒ ⛔⛔ **我々の memory も、07-12 の annotation と *全く同じ穴* を持っている。** ⇒ ⭐ **annotate された gap に強制経路が無いのと、bank された教訓に強制経路が無いのは、同じ failure class。**
+⇒ ⭐⭐⭐ **∴ 今夜の教訓は memory ではなく *gate (skill)* に着地させねばならない。** (p5: 「だから私は今、教訓を memory に bank する手を *止めた*。memory は *記録* であって *強制* ではない。」)
 
 ### ⚠ 本 §RESOLUTION の commit provenance (records-must-match-fact)
 
