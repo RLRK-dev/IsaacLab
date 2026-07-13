@@ -117,3 +117,39 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 **現 trainer node の全 build (B3b 以降) と、FORK-1 の根本原因診断 (「chaotic amplification ⇒ closed-loop RL のみが fix」) は、いずれも「pin 無しの env が route を保持できる」という *banked spec 自身が否定している* 前提の上に立っている。** これは B3 の問題ではなく **trainer node / W0-a 級の前提問題**。
 
 *%12 — 2026-07-14。p5 の 2 引用は %12 が on-disk VERIFIED。p5 からも Rs へ同内容を報告予定。*
+
+## ⛔⛔ BLOCKED_FOR_USER 更新 (2026-07-14 04:2x) — **3 層に深化。上程 ceiling が上がった**
+
+### 層 2 (%9、%12 on-disk VERIFIED): FORK-1 の終端失敗の帰属は **confounded**、その反証 run は **構造的に fail-silent**
+
+- **pin 発火 = golden f2544 = phase 5→6 = replay t=255** (記録の 67% が pin-ON)。div metric に recentering 無し (`comp5:214`) ⇒ 以下は artifact でなく物理。
+- ⭐**t<255 (記録も env も pin 非活性 = 構造差ゼロ = UNCONFOUNDED)**: div_seg24 (把持 seg) 0.007 → **peak 10.56mm (t=124)** → **3.36mm へ減衰 (t=254)** = **暴走していない。excursion して回復している** (%12 再現)。div_max (最悪 seg) は 37.21mm = 実在の unconfounded 形状発散。
+- **t≥255 (記録=pin あり / env=pin 無し = CONFOUNDED)**: 3.78 → **129.24mm (34×)**。⭐**grip collapse も drop も 100% この窓の中。**
+⇒ **「open-loop は発散する」= CONFIRMED (unconfounded、div_max 37mm)。しかし「⇒ grip collapse ⇒ drop ⇒ RL closed-loop が唯一の fix」= NOT ESTABLISHED。**
+- ⭐**c1pin「REFUTED」は unsafe** (%9 が reverted 実装 `c70ba1b849` を実読、%12 確認): latch `_c1_pin_done = True` が **mjm/mjd の None check より前**に「**regardless of outcome**」で焼かれる ⇒ **eq 解決に失敗しても latch が閉じ pin は無言で発火しない。assert ゼロ = positive control が構造的に取れない設計**。かつ eq 解決は **body id 経由 = leg6 が今日捕捉した Newton 55 / MuJoCo 56 の +1 trap と同一経路**。かつ **c1pin run は 342 step で死亡 vs pin-less 499** = 保持 pin が正しく発火したなら生存は延びるはず → **早死には「誤 body への溶接」signature**。⇒ **仮説は「反証された」のでなく「試されていない」公算が高い。**
+- ⭐**c1pin 自身の docstring が機構を正しく述べていた** (逐語): *"the multi-world env-core was MISSING this activation (FORK-1 root cause): the C1-seated cable is not anchored, so the light L-hold drops it at the R-release handover"* — pin onset (f2544) は **まさにその handover の直前**。
+- ⭐**GOVERNANCE 訂正 (%9、%12 受諾)**: Rs 授権の逐語 (log.md 2026-06-16) = 「**クリップのみ**キネマティックトリックでケーブルを擬似固定して良い／その他は絶対禁止」= **機構 scope (clip での pin) であって file/harness scope ではない**。+ RS71 §4 が pin を routing 機構として NAME。⇒ **env へ pin を配線するのは INVARIANT #5 の *拡張* ではなく *遵守*。env が banked spec に非適合のまま build されていた。** Rs への問いは「不変前提を変えてよいか」(重い) ではなく **「env は RS71 §4 に非適合。是正すると W1 calibration が re-baseline になる。GO?」**。
+- **calibration carry**: ✅ B2 の armed-quiet band **10.407mm = SAFE** (max = t=124 = 非 confounded) / ⚠ **HOLD_THRESH 15mm = CONFOUNDED** (初交差 t=343 = missing-pin 窓の中) ⇒ **parity 基板で再導出要**。⚠⚠ **pin-less env では div_grip は policy に関わらず post-255 で必ず 15mm を超える** ⇒ **HOLD 発火は policy の質でなく env の欠損 = reference が到達不能。**
+
+### 層 3 (p5、%12 on-disk VERIFIED): ⛔ **5-clip 目標状態は cable の配位空間の外** — pin では救えない
+
+- **cable = 平面鎖** (RS71 §4: 39 joint 各 1 revolute、bend plane VERTICAL) + **Stage-B 実測「horiz out-of-plane tangent ≤0.173° across 30 held configs」** ⇒ **水平投影は直線**。
+- **clip は千鳥** (`task_config.py:202-204`、%12 実測): C1(0.35, +0.150) / **C2(0.40, +0.075)** / C3(0.35, 0.000) / C4(0.40, −0.075) / C5(0.35, −0.150)。
+- ⭐**C1 と C3 は共に x=0.35 → その直線から C2 は 50.0mm 外れる。溝捕捉半径 = 6.0mm。比 = 8.3×。**
+⇒ **平面 cable は C1+C2 に入れば C3 を外し、C1+C3 に入れば C2 を外す。3 本同時 = 配位空間の外。**
+- ⭐⭐**pin はこれを救わない**: eq constraint は segment を *保持* できるが、joint が持たない **bend DOF を供給できない**。RS71 自身が「the 5-clip 千鳥 X-Y curvature would need a **2nd bend DOF/joint**」と書いている。⇒ **pin を配線して買えるのは C2 まで。whole-route (C3-C5) は買えない。**
+- **なぜ今まで壊れなかったか**: producer は **C1→C2 (2 clip) しか実行していない** (C3-C5 未実装)。**任意 2 点は必ず 1 つの鉛直面に乗る** ⇒ 2-clip は表現可能。**壁に誰も到達していないだけ。**
+- **p5 の反証 2 本は失敗** (R1 「非平面鎖では」→ Stage-B 実測が平面性 CONFIRM / R2 「溝半径が 50mm 級では」→ 実値 6mm)。**未実施の決定的反証 = CPU のみ**: scene を build し C1+C2+C3 へ同時配置を試み、3 溝すべてに 6mm 以内で入るか測る (**入れば p5 が誤り**)。GPU 不要・即実行可。
+- **副次 defect (p5 自己申告)**: banked §2.1 の clip↔groove body 対応 (5 seg = 75mm) は千鳥ピッチ **90.1mm** (=√(50²+75²)) と矛盾 — 非伸長 cable は arc ≥ chord ゆえ **最低 7 seg (105mm)** 必要。p5 の r5 §1.4:109 も同誤対応を restate。p5 は独断修正せず Rs 上程。
+
+### Rs option (層 3 が支配的 — 全て Rs 専権)
+
+- **(A) 2nd bend DOF を追加** (= substrate upgrade、RS71 で DECLINED 済) — 全 cable 結果の再検証コスト。
+- **(B) 千鳥を外す** (clip を同一 X へ) — ⭐**C1, C3, C5 は既に collinear (全て x=0.35)** ゆえ平面 cable で 5 本貫通可能になる。**task 定義の変更**。
+- **(C) 目標を 2 clip (C1→C2) に cap** — 現 producer の実装範囲と一致。
+- **(D) pin で拘束違反のまま押し込む** — **物理的に bogus** (「数値 PASS / 動画 wrong」の温床、DoD6 型)。
+- **+ (d) 先に低コスト実験 2 本** (Rs 判断の材料、GPU 不要 or 数分): **(d1)** C1+C2+C3 同時配置の幾何テスト (p5 の反証) / **(d2)** positive-control 付き c1pin 再走 (%9 の DoD: 発火 = flag でなく **効果** [seg27 の C1 距離が記録の 4.16mm 近傍で一定] / fail-silent latch を殺す / negative control = pre-255 は pin ON/OFF で不変であること)。
+
+### %12 の git 事故 (own、records-must-match-fact)
+
+**B3a の source (route_executor.py +570 / test_routeexec_state_bank.py +160−3) は `575069abe5` (私の BLOCKED_FOR_USER commit) に混入している。** 原因 = %12 が `git add <state.md> && git commit -m` を実行した際、**path 制限を付けなかったため index に stage 済みだった %11 の B3a source を巻き込んだ** (memory `feedback-explicit-path-commit-git-diff-file-first-sweep-both-directions` 違反 — `git diff --cached --name-only` を commit 前に見ていない)。**コードは無傷で失われていない**が、commit message が実体と一致しない。⇒ **`a00a0a97f8` = conformance doc のみ / `575069abe5` = BLOCKED_FOR_USER + B3a source** が事実。history 改変は共有 tree で危険ゆえ行わず、**本記録を正とする**。
