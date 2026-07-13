@@ -110,6 +110,22 @@ PASS: no related prior-art hits found in configured roots.
 
 ---
 
+## 4-b. ⭐ D-5 — canonical step-table の 5-seg 汚染 (p5、**Rs 裁定待ち**)
+
+**`RL-Routing-Design.md` §2.1 の clip↔groove body 対応 (C1=30 / C2=25 / … = **5 seg = 75mm**) は幾何的に不成立。**
+- **千鳥 hop 弦長 = √(50²+75²) = 90.14mm**、非伸長 cable は **arc ≥ chord** ⇒ **正 = ≥7 seg** (⚠ **6 seg = 90.0mm は 0.139mm 不足** = 剃刀の縁)。
+- **origin**: config コメント「5-clip span 300mm」が **Y 投影のみ**を見ており、**千鳥の 50mm が計算から脱落** (真の折線長 = 4×90.14 = **360.6mm**)。
+- **正値** (p5 の幾何 witness `GEOM_WITNESS_5CLIP_p5_20260714.py`、6/6 PASS。**p6 が SSOT から自前導出で独立検算 → 全項一致**、p1 も独立確認): **C1:33 / C2:26 / C3:19 / C4:12 / C5:5**。
+
+⭐⭐ **p5 の対処が、本上程の第 8 条の *実演* である (commit `0778881d28`)**:
+- ✅ **§2 逸脱台帳に D-5 を登録** + **§1.4:109 に ERRATUM を掲示** (「本行の seg 数・body 番号を接地に使うな」)
+- ⛔ **body 番号は *一切変えていない*** ⇒ **banked §2.1 の faithful restate を維持**
+- ⭐ **理由: canonical の訂正 = 07-Design = Rs 専権。黙って直せば「鏡写しすべき SSOT」から乖離する。**
+⇒ ⭐⭐ **∴ 「忠実に restate し、欠陥を loud に掲示し、訂正は権限者に上げる」= 条 8 (ゲートの finding は *既存コードの欠陥項目* を開く。新規コードがそれを避けることで discharge されない) の正しい適用。**
+⇒ ⛔ **Rs 裁定待ち = canonical (§2.1) の訂正のみ。表側は記録済・faithful restate 維持。**
+
+---
+
 ## 5. ⛔ 撤回した主張 (上程に含めない)
 
 - ❌ **「clip は衝突を持たない ⇒ 何も保持できない ⇒ 全 clip に pin が要る」** (%12 + p1) — **producer も RL env も clip は COLLIDE** (`newton_skill_env_base.py:1876` = `0x6` / `w0e_81rerun_runner.sh:21` = `CLIP_COLLISION=1`)。**コードの既定値を実行時の値と取り違えた。1 コマンドで反証される負債ゆえ外す。**
