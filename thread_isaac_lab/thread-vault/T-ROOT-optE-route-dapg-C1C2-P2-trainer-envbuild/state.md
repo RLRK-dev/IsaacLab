@@ -329,18 +329,38 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 
 **pin (INVARIANT #5 の唯一の認可例外) を RL env へ *恒久* 配線してよいか** — 依然 Rs 未裁定。**(d2) の最小配線は *測定* の授権であって *採択* ではない。**
 
-⭐⭐⭐ **論拠が確定した (p1 が source で verify)**:
-1. **clip は衝突ジオメトリを持たない** — `test_newton_clip_routing.py:1194` `shape_flags = 0x6 if _clip_collide else 1`、**`CLIP_COLLISION` は既定 OFF** ⇒ ⛔ **clip は物理的に *何も保持できない*。**
-2. **cable の rest 形状は直線** — `:1012-1014` **`"mujoco:dof_springref": 0.0`** ⇒ **受動バネが常に直線へ引き戻す** ⇒ **湾曲は *外部拘束によってのみ* 維持される。**
-⇒ ⭐⭐⭐ **∴ routed cable を clip に留められる機構は、*認可された pin* だけ。**
-⇒ ⭐⭐⭐ **RS71 §4 は最初から正しかった** (逐語: 「Horizontal routing through the staggered clips is therefore **KINEMATIC** (grasp-drag + the **AUTHORIZED clip-retention pin**), NOT a dynamically-curved cable」)。
-⇒ ⭐⭐ **∴ 5-clip routing は *全 clip に pin* を要求する。RL env には 1 本も無い。**
+⛔⛔ **RETRACTED (2026-07-14 08:5x、実 %12 = session `25eca88d`、on-disk 再検証)。以下の「論拠が確定した」は *両前提とも立っていない*。歴史記述として残置し、訂正を直下に置く。**
 
-| | 発見 |
-|---|---|
-| **今夜 最初 (03:3x、B3-α)** | RL env に clip-retention pin が無い ⇒ bank の `eq_active` に着地先が無い |
-| **今夜 最後 (07:2x)** | clip は保持できず、cable の rest は直線 ⇒ **湾曲を保持できる機構は pin だけ** |
-⇒ ⭐ **同一の事実の 2 つの面。8 時間かけて一周し、banked spec に戻ってきた。** ⇒ **「壁が無い」≠「達成できる」— そして今、*何が足りないか* が正確に分かった: pin。**
+~~⭐⭐⭐ 論拠が確定した (p1 が source で verify):~~
+~~1. clip は衝突ジオメトリを持たない — `CLIP_COLLISION` は既定 OFF ⇒ clip は物理的に何も保持できない。~~
+~~2. cable の rest 形状は直線 (`dof_springref: 0.0`) ⇒ 湾曲は外部拘束によってのみ維持される。~~
+~~⇒ ∴ routed cable を clip に留められる機構は、認可された pin だけ。∴ 5-clip routing は全 clip に pin を要求する。~~
+
+### ✅ 訂正 (実 %12、両前提を自分で grep して確認)
+
+**前提 1「clip は衝突ジオメトリを持たない」= ⛔ VERIFIED FALSE。**
+- **RL env は `CLIP_COLLISION` を読んでいない。** clip の衝突は **ハードコード**: C1 の 5 parts (`newton_skill_env_base.py:1898`) / C2 の 5 parts (`:1915`) / C2 spacer (`:1927`) が全て `scene.shape_flags[idx] = 0x6  # COLLIDE | BROADPHASE` ⇒ **RL env の clip は常に衝突する。**
+- **producer** (`test_newton_clip_routing.py:1168`) は env-gate で既定 `"0"` = OFF。**だが実行系は全て `CLIP_COLLISION=1` を立てている** (`w0e_81rerun_runner.sh:21` / `w0e_probe_band.sh:15` / `b2_cpC_m8pair.sh:10` / `w0e_liftraise_smoke.sh:14` / `test_routeexec_byte_repro.py:77`) ⇒ **実行時は衝突する。**
+- ⇒ ⭐ **コードの *既定値* を *実行時の値* と取り違えていた。** 上程文 §5 (`RS_ESCALATION_GATE_REVISION_RSTECHLEAD_20260714.md:131`) が既に撤回済。**本節だけが未更新で残っていた。**
+
+**前提 2「cable の rest 形状は直線」= ⚠ producer では確認、RL env では未確立。**
+- **producer** = code で確認 (`test_newton_clip_routing.py:1014` `"mujoco:dof_springref": 0.0`)。
+- **RL env** = ⛔ **`springref` の代入が存在しない。唯一の出現は `newton_skill_env_base.py:1865` = *comment*。** cable は `add_rod` (`:1727`) 経由ゆえ rest 形状は Newton 既定に依存し、**env については誰も追っていない。**
+- ⇒ ⭐ ⚓ **comment は narrative、制約は code に在る。** 本節はその comment を論拠として使っていた。
+
+⇒ ⛔ **∴ 結論「湾曲を保持できる機構は pin だけ」「5-clip routing は全 clip に pin を要求する」は成立していない。撤回する。**
+
+### ⛔ ただし逆向きの断定もしない (本 arc で 4 つの壁が「証拠なき断定」で死んだ)
+
+- **実測は残る**: pin 無し env で C1 距離が **1.08 → 52.87mm** へ単調離脱 (本 file :67)。
+- ⇒ ⭐ **正確な現状: clip は衝突する。それでも cable は C1 から離れる。⇒ 言えるのは「衝突だけでは保持に足りない」まで。「何が保持するのか」は未確立。**
+
+### ⭐⭐ かつ — *より安い説明* が既に code に在り、一度も走っていない
+
+- `newton_skill_env_base.py:1873-1876` = **`ROUTE_C1_STIFF_MATCH` (flag、既定 OFF)**。既定の env C1 clip = **ke 2500 / kd 100 / gap 0.001**、`=1` で producer 一致の **40000 / 400 / 0.002** になる。
+- **%12 独立確認**: producer C1 (`test_newton_clip_routing.py:1179-1181`) = `MUJOCO_CONTACT_KE` / `MUJOCO_CONTACT_KD` / gap 0.002、実値 = **40000 / 400** (`task_config.py:168-169`)。env C2 も同値。⇒ ⭐ **env の C1 *だけ* が producer の 1/16 の接触剛性。**
+- ⇒ **(d2) 腕 D は既に配線・commit 済** (`92a62f6a96`、flag-gated・既定 OFF・byte-preserve)。**走っていないだけ。**
+- ⇒ ⛔⭐ **∴ pin 上程 (Rs 裁定 #2) は腕 D の結果に *条件付き* である。** 腕 D で横滑りが消えるなら、pin を要求する論拠は残らない。**⇒ 本上程は現状 Rs に出せる形になっていない。** (⚠ 腕 D の実行 = Rs の停止解除待ち。%12 は self-start しない。)
 
 ---
 
