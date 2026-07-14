@@ -199,6 +199,16 @@ THREAD project の全 task は logic tree 上の node として管理し、各 n
     - **検証出力はrsへの報告に添付する。検証出力なしの結果報告は不遵守**
 25. **CC Debate launch 前の context 制御:** `/handoff` は原則必須ではない（CC1 判断）。以下いずれか該当時のみ事前 /handoff 推奨: (a) raw ctx 70% 以上で debate 中 auto-compact 発火 risk (b) debate 結果を後続 turn で再利用する non-trivial work (c) Rs が明示要求。manual `/compact` は禁止（§13）。対象 = §2 [VERIFY] 事前 debate（L2+）+ §15 層2 事後 debate（L3）
 
+### 通信 (§27)
+
+27. **メッセージは必要なことだけ簡潔に書く（Rs 指示 2026-07-15）。** pane 間・Rs 宛とも。
+    - **型 = 3 行**: (1) 何をしたか (2) 数値 + **どこに在るか**（`file:line` / sha） (3) 相手に要るもの
+    - 詳細・推論・事前登録・撤回は **artifact（doc/json）に書き、path だけ送る**。message に書かない
+    - ⛔ **artifact に無い数値を送らない** ／ ⛔ **checkpoint 以外で報告しない**（起動した・走行中・思いつき・途中経過は送らない）
+    - ⛔ **他 pane の message の数値で裁定しない**（artifact を自分で見てから裁定する）
+    - 例外 = **STOP**（走行中の危険 / 前提の崩壊）のみ即時・短文
+    - **理由**: 未検証の主張が即流れ → 受け手が即裁定 → SSOT に着地 → 訂正が後を追う。2026-07-14 の誤り（artifact に無い「14.5%」を spec に記載 / 撤回済 over-claim の再導出 / stale 行番号の全 pane 伝播）は**すべてこの連鎖**から出た
+
 ### エスカレーション (§10, 26)
 
 10. **不整合解消ルール: CCがCLAUDE.md・タスク定義・ユーザー発言の間、または それらと自身の作業状態の間に不整合を発見した場合、実行を止めてrsに報告する。rsが指示を修正・補完した後に実行する**
