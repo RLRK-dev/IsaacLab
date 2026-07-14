@@ -610,7 +610,7 @@ F-8.6 で「再走して新旧 npz の data 配列 byte-identity を assert せ�
 > ✅ **それでも【source だけで立つ】欠陥は残る (human-GT に依存しない。独立に真)**:
 > | # | 欠陥 | 根拠 |
 > |---|---|---|
-> | 1 | `c1_retained` は **X を一度も見ない** (天井チェックのみ) = FAIL できない述語 | `newton_route_env.py:1479-1483` / `_c1_retention_m:1272-1286` |
+> | 1 | `c1_retained` は **X を一度も見ない** (天井チェックのみ) = FAIL できない述語 | `newton_route_env.py:1491-1495` / `_c1_retention_m:1272-1286` |
 > | 2 | offline `strict_v2` に **lateral が無い** ⇒ `c1_ok` = 81/81 no-op | `p9_recount_strict_v2.py:39-44`, `:107` |
 > | 3 | G3 の bar `T_GROOVE=3.0mm` < `\|dy\|` 量子化床 **7.32mm** | `task_config.py:368` + 正典 golden `5f1c3f92` 実測 |
 > ⇒ 🔒 **正しい言い方 = 「成功条件は【測れない】」ではなく「成功条件の【式が緩い】」。危険は *前向き* (RL が exploit し得る) であって、*遡及* ではない (台本 route は Rs の目で OK)。**
@@ -633,7 +633,7 @@ F-8.6 で「再走して新旧 npz の data 配列 byte-identity を assert せ�
 > | G3 は **XY ノルム**で採点する | ✅ | `newton_route_env.py:1550` `p3 = (c1_seat < T_GROOVE) and (ph >= 2)` / `c1_seat` = `_seat_metrics(...)[0]` = `sqrt(lateral² + z_gap²)`、`lateral` = **nearest-in-Y node の XY ノルム** (`:1294-1299`) |
 > | **bar が、測っている量の分解能より細かい** | ⭐ **確定** | 正典 golden (`w0e_81rerun_snapdown_0537/cell_x0_y0`、sha `5f1c3f92…` = `route_executor.py:95` RUN1_REFERENCE_V2_SHA256) 最終 frame の **Y 方向 node 間隔 = 14.64mm** ⇒ **\|dy\| の量子化床 = 7.32mm**。**bar `T_GROOVE = 3.0mm`** (`task_config.py:368`) ⇒ ⭐ **bar / 床 = 0.41 = bar は分解能の 2.4 倍細かい ⇒ G3 の発火は事実上 *抽選*。** |
 > | ⭐⭐ **「4.16mm の着座誤差」は物理でなく節点位相** | ⭐ **確定・かつ私自身の数字を撃ち抜いた** | 正典最終 frame、C1 に Y 最近傍の node: **dx = −0.15mm (X はほぼ完璧に中心) / dy = −4.16mm** ⇒ **XY ノルム 4.16mm → 3mm bar を FAIL / \|dx\| 単独 0.15mm → 楽々 PASS。** ⇒ **着座「誤差」は丸ごと *溝が滑らせるために開けている軸*。物理は正常。** ⚠ **私は一晩この 4.16mm を「pin された C1 距離」として引用し、(d2) の P1 bar にまでしていた。撤回する。** |
-> | 対の病理: `c1_retained` は **FAIL できない** | ✅ | `:1479-1483` = `z_c1 < 0.840 and flank < 0.840` の **天井チェックのみ、X 不参照** (`_c1_retention_m:1270-1286`)。凍結 recount 81 cell で **`c1_ok` = 81/81 = no-op** (p1 実測)、**`strict_v2`(58) == `c2_seated_honest`(58) 厳密一致**。⭐ **golden t=0 (cable はテーブル、未把持) でも PASS。** ⚠ **ただし「t=0 で C1 から 50.00mm」は `GRASP_X 0.30` − `CLIP1_X 0.35` = *設計定数* であって測定値ではない (p5 catch)。識別情報ゼロゆえ論拠に使わない — 欠陥は source だけで立つ。** |
+> | 対の病理: `c1_retained` は **FAIL できない** | ✅ | `:1491-1495` = `z_c1 < 0.840 and flank < 0.840` の **天井チェックのみ、X 不参照** (`_c1_retention_m:1270-1286`)。凍結 recount 81 cell で **`c1_ok` = 81/81 = no-op** (p1 実測)、**`strict_v2`(58) == `c2_seated_honest`(58) 厳密一致**。⭐ **golden t=0 (cable はテーブル、未把持) でも PASS。** ⚠ **ただし「t=0 で C1 から 50.00mm」は `GRASP_X 0.30` − `CLIP1_X 0.35` = *設計定数* であって測定値ではない (p5 catch)。識別情報ゼロゆえ論拠に使わない — 欠陥は source だけで立つ。** |
 >
 > ⇒ ⭐⭐⭐ **同一の成功連言に「PASS できない述語 (G3)」と「FAIL できない述語 (c1_retained)」が同居している。**
 > ⇒ ⭐ **動画による直接反証 (pC blind、ghost 非依存)**: no-pin run の END で **C1 溝は明確に空** (溝中心を投影した赤枠の中に背景が透ける)、cable は clip 台座を通過。**数値も一致**: 記録の `z_c1_end = 824.023mm` = **台座 820mm + cable 半径 4mm** (着座なら 827mm)。⇔ **artifact は `c1_retention: pass = TRUE`。** ⇒ **壊れた述語が、動画・数値・source の三方向から反証された。**

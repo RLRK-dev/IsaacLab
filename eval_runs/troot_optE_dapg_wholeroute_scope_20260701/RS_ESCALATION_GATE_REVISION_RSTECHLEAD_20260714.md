@@ -45,7 +45,7 @@
 
 | | 病理 | 根拠 |
 |---|---|---|
-| **(a) FAIL できない述語** | `c1_retained` (`newton_route_env.py:1479-1483`) = `z<0.840 ∧ flank<0.840` = **天井チェック、X 不参照**。凍結 recount 81 cell で **81/81 no-op**、`strict_v2`(58) == `c2_seated_honest`(58) **厳密一致** ⇒ **C1 の連言はタダ** | %12 code 実読 + p1 実測 |
+| **(a) FAIL できない述語** | `c1_retained` (`newton_route_env.py:1491-1495`) = `z<0.840 ∧ flank<0.840` = **天井チェック、X 不参照**。凍結 recount 81 cell で **81/81 no-op**、`strict_v2`(58) == `c2_seated_honest`(58) **厳密一致** ⇒ **C1 の連言はタダ** | %12 code 実読 + p1 実測 |
 | **(b) PASS できない述語** | 溝は **Y 押し出し** (`create_clip.py:68`) ⇒ **Y = 自由軸**。G3 (`:1550`) は **XY ノルム**で採点 ⇒ **自由軸 dy を着座誤差として課金**。node 間隔 14.64mm ⇒ **\|dy\| 床 7.32mm > bar 3.0mm** ⇒ **bar は分解能の 2.4 倍細かい = 抽選** ⇒ **G3 は 24/81、G6(+200) は demo 分布の 70% で到達不能。物理は 81/81 で着座。** | %12 が正典 golden (`5f1c3f92…`) から再導出 / p1・p6・%10 独立 CONFIRM |
 | **(c) そもそも測れない** | **「lateral groove-capture: NO numeric coverage (contact ≠ capture, **proven**); **Rs-video is the only ground-truth**」** — `harness/state/ANCHOR_STEPTABLE_ALIGNMENT_p4p5_20260712.md:107-108`、**07-12 に proven + banked (%12 共著)**。以後の全計器試作が positive control で死亡 (p1 の \|dx\| 計器は **Rs が目視却下した cell 2037 を PASS**) | p1 発見 / p5 source / p6 negative control |
 

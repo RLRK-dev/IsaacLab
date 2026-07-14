@@ -505,6 +505,225 @@ def bank_boundaries_from_recording(recording, phases=(1, 2, 3, 4, 5)):
     return out
 
 
+C1_SEAT_WAIT_MAX = int(os.environ.get("C1_SEAT_WAIT_MAX", "600"))
+# ⚠ WAIT_MAX IS NOT YET EVIDENCED. The "+80 frames would have rescued it" figure circulating tonight is measured
+# from the banked dumps -- but AFTER the pin fires the seat body is WELDED to the world, so its post-onset track is
+# not "a descent still going", it is "a frozen body being dragged". The counterfactual (would it have seated?) is
+# NOT measurable from any banked dump (p5). So the rescue count is UNMEASURED (somewhere in 0..8), and this bound
+# is provisional. ⭐ The first wait-then-fire run IS that measurement -- do not bank a rescue count before it.
+# What IS established: the canonical grid is in-channel >=100 frames before the clock (COORD2; my own sweep: 131
+# on a looser predicate) => wait == 0 for 81/81 => byte-identity holds regardless of what WAIT_MAX turns out to be.
+C1_SEAT_TRIGGER = os.environ.get("C1_SEAT_TRIGGER", "1") == "1"  # default ON; OFF only for the mutation control
+
+
+def c1_channel_from_model(mjm, clip_x, clip_y, xy_tol=0.030, z_min=0.815):
+    """The C1 channel, derived from the BOXES THE MODEL ACTUALLY HAS. Every failure RAISES.
+
+    ⛔ NEVER USE ``GROOVE_CENTER_Z`` (0.809) AS THE DATUM. The clip is FLOATED by CLIP_FLOAT_Z=20mm, so that
+    constant sits 20mm BELOW the real groove. The producer's own scene log says the clip is at z=0.820, and the
+    code that welds the cable prints "groove 809" beside a measured z of 880.7mm -- a 71mm discrepancy that was
+    printed every run and never read.
+
+    ⛔ NEVER SELECT THE CLIP BY NAME. On this model every geom is named ``shape_<i>_<j>``; only the gripper pads
+    carry a semantic name. ``"clip" in name`` matches ZERO geoms (measured 2026-07-14), and an empty set reads
+    exactly like "there is no clip" -- a silent zero cannot distinguish "absent" from "my selector is blind".
+    Three selectors in this repo had that bug. Here the COUNT is the selector's own positive control.
+
+    ⭐ THE CHANNEL BOUND IS THE INNERMOST SURFACE THAT DOES NOT STRADDLE THE CENTRELINE (COORD2/%10, 2026-07-14).
+    Boxes that straddle x=clip_x (the base plate AND the spacer -- which have IDENTICAL hx/hy and cannot be told
+    apart by dimension) drop out automatically. Of what remains, the innermost surface on each side is the bound.
+
+    Why not the alternatives:
+      * "outermost x"                -> grabs the LIPS (inner faces +-11.0mm) instead of the WALLS (+-7.5mm) and
+                                        silently doubles the bar from 3.5mm to 7.0mm: it would PASS a cable sitting
+                                        ON TOP OF A WALL.
+      * "z >= floor_z - eps"         -> returns FIVE boxes (base and lips both survive) and is CLIP_FLOAT_Z-dependent.
+      * "z-range contains base_top+r" -> CIRCULAR: it needs base_top, i.e. it must first tell the base from the
+                                        spacer, which is the very problem (identical hx/hy). Resolving them by
+                                        "the higher one" reintroduces FLOAT-dependence (at FLOAT=0 it picks the spacer).
+      * hardcoding |dx|=0.009, hx=0.0015 -> a hardcoded geometric premise is exactly how GROOVE_CENTER_Z came to be
+                                        20mm wrong. The datum must be READ, not asserted.
+
+    ⭐⭐ CONSERVATIVE BY CONSTRUCTION: an inclusion error can only pull the bound INWARD (stricter). The one way it
+    loosens is if a WALL GEOM IS DELETED, so that a lip becomes innermost -- which the structural self-test below
+    catches (2 walls + 2 lips + 2 straddlers, or refuse).
+
+    ⛔ NEVER SELECT BY NAME: every geom here is ``shape_<i>_<j>``; ``"clip" in name`` matches ZERO (measured
+    2026-07-14), and an empty set reads exactly like "there is no clip".
+    """
+    boxes = [
+        {
+            "x": float(mjm.geom_pos[g][0]),
+            "y": float(mjm.geom_pos[g][1]),
+            "z": float(mjm.geom_pos[g][2]),
+            "hx": float(mjm.geom_size[g][0]),
+            "hy": float(mjm.geom_size[g][1]),
+            "hz": float(mjm.geom_size[g][2]),
+        }
+        for g in range(int(mjm.ngeom))
+        if int(mjm.geom_type[g]) == int(mujoco.mjtGeom.mjGEOM_BOX)
+        and int(mjm.geom_bodyid[g]) == 0
+        and abs(float(mjm.geom_pos[g][0]) - clip_x) <= xy_tol
+        and abs(float(mjm.geom_pos[g][1]) - clip_y) <= xy_tol
+    ]
+    straddle = [b for b in boxes if (b["x"] - b["hx"]) < clip_x < (b["x"] + b["hx"])]  # base + spacer
+    flank = [b for b in boxes if b not in straddle]  # walls + lips
+    left = [b for b in flank if (b["x"] + b["hx"]) <= clip_x]
+    right = [b for b in flank if (b["x"] - b["hx"]) >= clip_x]
+    wl = max(left, key=lambda b: b["x"] + b["hx"]) if left else None  # innermost left surface
+    wr = min(right, key=lambda b: b["x"] - b["hx"]) if right else None  # innermost right surface
+    # ── LABEL-FREE STRUCTURAL SELF-TEST. ⛔ NOT `len(wall)==2 and len(lip)==2`: that presumes we already know which
+    # box is a wall, i.e. it checks the selector using the selector's own conclusion (p1: circular). These assert
+    # only COUNT, SYMMETRY and WIDTH -- none of which needs a label -- and together they catch the two ways layer-1
+    # can fail: a DELETED wall (a lip becomes innermost -> the bar silently doubles) and a badly wrong clip_x hint
+    # (the straddle test stops excluding the base -> the gate is disabled).
+    # ⚠ straddlers: the base plate ALWAYS; the spacer ONLY IF the scene builds one. Measured 2026-07-14: the
+    # producer builds a C1 spacer, the ENV does not -- so this must be >=1, not ==2. (I asserted ==2 from the
+    # producer's scene log and this tripwire caught it on its first run, before the gate could ship.)
+    if len(straddle) < 1 or len(left) != 2 or len(right) != 2:
+        raise RuntimeError(
+            f"C1 seat gate: clip structure is {len(straddle)} straddling + {len(left)} left + {len(right)} right, "
+            "expected >=1 straddling (base [+ spacer]) and 2+2 flanking (wall & lip each side). A mis-read wall "
+            "would DOUBLE this gate's bar (3.5mm -> 7.0mm) and PASS a cable sitting on top of a wall. Refusing."
+        )
+    in_L, in_R = wl["x"] + wl["hx"], wr["x"] - wr["hx"]
+    # ⭐ ONE tripwire, not two. A symmetry assert (|in_L - clip_x| == |in_R - clip_x|) would REINTRODUCE the
+    # datum this gate exists to eliminate -- and it is strictly dominated: width catches both-lips (22.0mm), which
+    # symmetry PASSES (both lips are symmetric). Width catches 3/3 mis-selections; symmetry catches 2/3.
+    # ⭐ TIGHT, not merely "sane" (p1): a loose 10-20mm band PASSES an ASYMMETRIC mis-selection (18.5mm) -- and so
+    # do all six synthetic probes. Two controls, one blind spot. 15.0 +- 0.5mm rejects every mis-selection directly:
+    # both-lips 22.0mm, asymmetric-either-way 18.5mm, base 32.0mm.
+    # source: newton_skill_env_base.py:1849-1851 (wall inner faces +-7.5mm => channel 15.0mm)
+    width = in_R - in_L
+    rim = min(wl["z"] + wl["hz"], wr["z"] + wr["hz"])
+    y_lo, y_hi = wl["y"] - wl["hy"], wl["y"] + wl["hy"]
+    base_top = max(b["z"] + b["hz"] for b in straddle)
+    # ⭐⭐ A TRIPWIRE ON *EVERY* BAR, NOT JUST X. The mutation sweep (2026-07-14) caught me shipping only the width
+    # tripwire: the rim and the dy span were guarded by PROBES ALONE, and a probe placed 2mm outside a bar CANNOT
+    # SEE THAT BAR MOVE BY LESS THAN 2mm. The blind band IS the probe's own margin -- 10 mutations (rim +0.5..+2.0mm,
+    # dy +-0.5..3.0mm) slipped through the entire suite. Bars need tripwires; probes alone leave a band.
+    # source: newton_skill_env_base.py:1849-1851 -- walls: inner faces +-7.5mm (channel 15.0), 15mm tall above the
+    # floor (rim 840 vs floor-top 825), hy=15mm (y-span 30.0). All three read from the model; no config constant.
+    for nm, got, want in (
+        ("channel width", width, 0.0150),  # both-lips 22.0 / asymmetric 18.5 / base 32.0 all land here
+        ("wall height above floor", rim - base_top, 0.0150),  # a lip-grab reads 25.0
+        ("wall y-span", y_hi - y_lo, 0.0300),
+    ):
+        if abs(got - want) > 0.0005:
+            raise RuntimeError(
+                f"C1 seat gate: {nm} = {got * 1e3:.1f}mm, expected {want * 1e3:.1f}+-0.5mm. Either the selector is "
+                "wrong or the clip changed -- both need a human. Refusing to gate on geometry I do not recognise."
+            )
+    return {
+        "in_L": in_L,  # world x of the left wall's inner face
+        "in_R": in_R,  # world x of the right wall's inner face
+        "top": rim,  # world z of the CHANNEL rim (the lips sit higher and further out)
+        "y_lo": y_lo,  # world y span of the wall itself -- ⛔ NOT clip_y
+        "y_hi": y_hi,
+        "cx_hint": clip_x,  # reporting only (dx_mm). ⛔ never a threshold.
+        "floor_top": base_top,  # telemetry only -- ⛔ NOT a gate leg
+    }
+
+
+def cable_radius_from_model(mjm):
+    """The cable's capsule radius, READ FROM THE BUILT MODEL. ⛔ Not task_config.CABLE_RADIUS.
+
+    Same rule as the channel bounds: a config constant that drifts from the built model is how GROOVE_CENTER_Z came
+    to sit 20mm wrong. The gate's clearance must come from the geometry the solver is actually stepping.
+    """
+    radii = {
+        round(float(mjm.geom_size[g][0]), 6)
+        for g in range(int(mjm.ngeom))
+        if int(mjm.geom_type[g]) == int(mujoco.mjtGeom.mjGEOM_CAPSULE) and int(mjm.geom_bodyid[g]) != 0
+    }
+    if len(radii) != 1:
+        raise RuntimeError(
+            f"C1 seat gate: cable capsules have {len(radii)} distinct radii {radii}; expected exactly 1."
+        )
+    return radii.pop()
+
+
+def gripper_pushes_cable_inside_channel(ch, p, cable_r):
+    """Is the GRIPPER pushing the cable inside the C1 channel? Pure predicate -- no side effects.
+
+    ⛔ NOT NAMED ``seated()`` / ``is_seated()`` / ``verify_seat()`` ON PURPOSE (p5). Those names claim the
+    GROOVE is working. It is not established that it is: the gripper is still clamped when the pin fires,
+    so this predicate is about the GRIPPER. Naming it "seated" is the exact trap of ``z_c1_seated`` -- the
+    variable we diagnosed tonight, which asserted a state it never checked. Do not dig that hole again.
+
+    ⭐ READS X. The lateral axis is the one that kills: 9 artifacts escape sideways (up to |dx|=42.3mm) while
+    sitting at the CORRECT height, so a height-only predicate (the ``c1_retained_lowwall`` family, which reads
+    only Y and Z and never X) calls them RETAINED.
+
+    ⛔ NO FLOOR TEST. Contact penetration reaches 1.541mm and scales with contact stiffness (env C1 ke=2500 vs
+    producer 40000 -- 16x). A floor line would make the SOFTER build fail for being soft, which is a property of
+    the solver, not of the seating.
+
+    ⛔ NO DATUM. Every threshold is a world coordinate of a wall the model actually has. Nothing here is expressed
+    relative to clip_x / clip_y / GROOVE_CENTER_Z, so a wrong datum cannot shift the gate and its test together.
+    """
+    legs = {
+        "dy_in_clip": ch["y_lo"] <= float(p[1]) <= ch["y_hi"],  # inside the WALL's own y-span (not "near clip_y")
+        "inside_left_wall": float(p[0]) > ch["in_L"] + cable_r,
+        "inside_right_wall": float(p[0]) < ch["in_R"] - cable_r,
+        "below_wall_top": float(p[2]) < ch["top"] - cable_r,
+    }
+    return {
+        "inside": all(legs.values()),
+        "legs": legs,
+        "dx_mm": (float(p[0]) - ch["cx_hint"]) * 1e3,  # reporting only
+        "dy_mm": (float(p[1]) - 0.5 * (ch["y_lo"] + ch["y_hi"])) * 1e3,
+        "z_mm": float(p[2]) * 1e3,
+    }
+
+
+def c1_seat_violation_msg(ch, v, waited, wait_max):
+    """The message the pin must print when it REFUSES to weld. Carries the numbers, the authority, AND the scope.
+
+    ⚠⚠ SCOPE, VERBATIM (COORD2, and it must not be dropped -- the next reader will over-read this gate otherwise):
+
+        This gate tests WHETHER THE GRIPPER IS PUSHING THE CABLE INTO THE GROOVE.
+        It does NOT test WHETHER THE GROOVE CAN HOLD THE CABLE.
+        The latter has NEVER been tested in the producer, and cannot be until STEP 8 -> STEP 9 is restored.
+
+    Why: the code pins while the gripper is still CLAMPED (grip_cmd = +0.7407 at the pin, identical in 81/81
+    canonical cells; the gripper first opens at onset+54). The banked step table has STEP 8 (release) BEFORE
+    STEP 9 (pin) -- so in the table, at STEP 9 the ONLY thing holding the cable is the groove, which is what makes
+    "is it seated?" a real question ABOUT THE GROOVE. As implemented, the gripper is still holding it, so the same
+    question is about the GRIPPER. A groove that could not retain the cable at all would still pass this gate.
+    It DOES still catch the aerial weld (the gripper holds the cable 41mm up, and the gate correctly says "not in
+    the channel") -- which is what it is for. Do not write "seated in the groove". Write "the gripper is holding
+    the cable inside the groove".
+
+    ⭐ And the gripper is not merely HOLDING it -- it is PUSHING IT DOWN. Measured on the canonical (p1): the
+    two grasp points sit at z=827.08 / 827.45mm while the cable's natural rest height on the floor is 829.0mm,
+    and the welded body (midway between them) sits at 828.65mm. So the gripper pulls the cable BELOW the floor
+    and the floor pushes the middle back up: the 0.347mm 'penetration' three of us measured is not a contact-
+    stiffness artifact, it is the EQUILIBRIUM OF THE GRIPPER'S PUSH against the floor's reaction. (The canonical
+    run is named `w0e_81rerun_snapdown`. The name said so all along.) ⇒ the pin freezes a posture the cable
+    cannot hold by itself: release the gripper and it springs back toward 829.0mm -- but seg 27 is already
+    welded at 828.65mm. This is also the deeper reason the floor leg (L3) is excluded: delta is dominated by
+    the gripper's push-down force, so it carries information about the REACTION, not about seating.
+    """
+    f = v["legs"]
+    return (
+        f"C1 SEAT GATE: the pin refuses to fire -- the cable is NOT inside the C1 channel after waiting {waited}/"
+        f"{wait_max} frames.\n"
+        f"  seat body: dx={v['dx_mm']:+.2f}mm  dy={v['dy_mm']:+.2f}mm  z={v['z_mm']:.2f}mm\n"
+        f"  channel:   inner faces x=[{ch['in_L'] * 1e3:.1f}, {ch['in_R'] * 1e3:.1f}]mm  rim z={ch['top'] * 1e3:.1f}mm  "
+        f"(floor top {ch['floor_top'] * 1e3:.1f}mm)\n"
+        f"  legs: dy_in_clip={f['dy_in_clip']} inside_left={f['inside_left_wall']} "
+        f"inside_right={f['inside_right_wall']} below_rim={f['below_wall_top']}\n"
+        "  The pin is a kinematic trick authorized for CLIPS ONLY (Rs, log.md:6534: "
+        "'クリップのみキネマティックトリックでケーブルを擬似固定して良い／その他は絶対禁止'). Welding here would "
+        "freeze the cable OUTSIDE the clip while the run is still recorded as a viable demo -- which is how 10 of "
+        "the 23 BC teacher demos came to hold the cable up to 41mm above the groove walls.\n"
+        "  ⚠ SCOPE: this gate checks that THE GRIPPER IS HOLDING THE CABLE INSIDE THE GROOVE. It does NOT check "
+        "that THE GROOVE CAN HOLD THE CABLE -- the gripper is still clamped when the pin fires (STEP 8 is skipped), "
+        "so that question is untested until the STEP 8->9 order is restored."
+    )
+
+
 def activate_c1_pin(solver, seat_body_newton, seat_world, match_tol_m=5e-3):
     """(d2) Activate the C1 clip-retention pin on the eq bound to the runtime seat. EVERY failure RAISES.
 
