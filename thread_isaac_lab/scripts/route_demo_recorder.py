@@ -28,6 +28,7 @@ import functools
 import hashlib
 import json
 import os
+import re
 import subprocess
 
 import numpy as np
@@ -65,6 +66,28 @@ _PROV_RELPATHS = (
     ("route_demo_recorder.py",),
     ("..", "configs", "task_config.py"),
 )
+
+
+def _env_keys_read_by(paths):
+    """Every environment variable the pinned sources actually read, scraped from them at construct.
+
+    A hand-written key list is how a run stops being reproducible. On 2026-07-14 this recorder wrote
+    19 keys while the producer read 59, and two attempts to reproduce the cell Rs had certified came
+    back byte-different because one default nobody had written down (``W0E_F1A_V2``) had been flipped
+    at the launcher. The only thing that recovered the run was a tag the producer happened to print.
+    Scraping the sources means a new env read is recorded the day it is added, without anyone
+    remembering to update a tuple. Rs 2026-07-15: "record every env".
+    """
+    keys = set()
+    for path in paths:
+        try:
+            with open(path, encoding="utf-8", errors="replace") as fh:
+                src = fh.read()
+        except OSError:
+            continue  # a missing source is already reported by as_run_sha256; do not fail the run
+        keys.update(re.findall(r'os\.environ\.get\(\s*["\']([A-Za-z_][A-Za-z0-9_]*)["\']', src))
+        keys.update(re.findall(r'os\.environ\[\s*["\']([A-Za-z_][A-Za-z0-9_]*)["\']\s*\]', src))
+    return keys
 
 
 def _sha256_file(path):
@@ -130,6 +153,11 @@ class RouteDemoRecorder:
         atexit.register(self.finalize)  # backstop: npz written even on a mid-fn sys.exit
 
     # --- provenance ----------------------------------------------------------
+    def _prov_paths(self):
+        """The source files pinned by as_run_sha256 -- the same set the env scrape reads."""
+        here = os.path.dirname(os.path.abspath(__file__))
+        return [os.path.join(here, *rel) for rel in _PROV_RELPATHS]
+
     def _capture_provenance(self):
         """Snapshot git head/dirty/diff + source sha256 [dict]. Called at construct AND finalize."""
         here = os.path.dirname(os.path.abspath(__file__))
@@ -145,7 +173,9 @@ class RouteDemoRecorder:
     # --- sparse register notes (all one-shot self-disarm guarded) -------------
     @_guarded
     def set_phase(self, name):  # current native route section [str], stamped onto subsequent frames
-        if self._inj_open is not None:  # DQ7 (ii): a still-open injection window closes at the phase boundary (defensive)
+        if (
+            self._inj_open is not None
+        ):  # DQ7 (ii): a still-open injection window closes at the phase boundary (defensive)
             self._inj_open["end_frame"] = len(self._buf["phase_id"])
             self._injection_windows.append(self._inj_open)
             self._inj_open = None
@@ -338,7 +368,14 @@ class RouteDemoRecorder:
                 "git_diff_sha256": prov["git_diff_sha256"],
                 "as_run_sha256": prov["as_run_sha256"],
                 "changed_during_run": changed,  # F5: sources whose sha256 moved between construct and finalize
-                "env_gates": {k: os.environ.get(k) for k in env_keys},
+                # Rs 2026-07-15: record EVERY env the pinned sources read, not a hand-written subset.
+                # The explicit tuple above stays as the documented core; the scrape is what makes the
+                # record complete, and complete is what makes a run reproducible.
+                "env_gates": {
+                    k: os.environ.get(k)
+                    for k in sorted(set(env_keys) | _env_keys_read_by(self._prov_paths()))
+                },
+                "env_gates_source": "explicit + scraped from as_run sources (Rs 2026-07-15)",
                 "phase_names": self._phase_names,
                 "injection_windows": self._injection_windows,  # DQ7 (ii): kick windows [start_frame,end_frame) (meta-only; [] on None-path)
                 "n_grip_events": self._n_grip_events,
