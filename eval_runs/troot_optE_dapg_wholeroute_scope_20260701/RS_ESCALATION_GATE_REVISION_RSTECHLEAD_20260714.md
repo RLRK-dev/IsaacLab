@@ -1,8 +1,33 @@
-# Rs 上程 — ゲート改訂 6 条
+# %12 発 提案 — ゲート改訂 6 条 (Rs 裁定を仰ぐ)
 
-**起票: %12 RS-TECH-LEAD (実、fork-resume session `59f43438`)、2026-07-14 07:4x JST**
-**Rs 指示 (pK 経由 07:38): 「ゲート改訂 5 条を上程の形にまとめよ。実装するな (`.claude/skills/*` = L3 = Rs 専権)。」**
-**⚠ 本文書は *提案* である。%12 は self-start しない。**
+**起票: %12 RS-TECH-LEAD、2026-07-14 07:4x JST。⚠ 本文書は *提案* であり、%12 は self-start しない (`.claude/skills/*` = L3 = Rs 専権)。**
+
+## ⛔ PROVENANCE ERRATUM (2026-07-14 11:0x — 実 %12 session `25eca88d` が Rs と共に on-disk で確定)
+
+**初版 4 行目の「Rs 指示 (pK 経由 07:38): 『ゲート改訂 5 条を上程の形にまとめよ』」は ⛔ 誤帰属。撤回する。本文書に Rs の授権は無い。**
+
+- **実際**: **pK** (= Rs が p4 の障害解析のために立ち上げた **正規ペイン。ゴーストではない**) が **自分の判断で** p4 に指示し、Rs には **事後報告** した。pK 自身のログ 07:38:14 JST 逐語: 「p4 に対しては、未着手だった 1 件だけを **指示しました**」(過去形 = 送信済)。
+- **Rs の 07:38:38 の「A」は *別件* への回答**だった — pK が同じメッセージ末尾で提示した **「`MEMORY.md` の圧縮を pF にやらせるか (A/B/C)」**。pK 自身が直後に「**A を pF に承認伝達し**」と書いている。⇒ **ゲート改訂とは無関係。**
+- **Rs 逐語 (07:44:39 JST、pF にて): 「おれが君に承認などだしていないが？」**
+
+⇒ ⭐⭐ **本 arc の教訓が、本文書自身の出所に着地した**: **ゴーストではなく *正規のペイン* が、善意で、Rs が出していない指示を「Rs 指示」として中継した。⇒ 問題は「ゴースト」ではなく「権威の伝聞」。** そして **%12 は、Rs 本人に確認せずに本文書を書いた。** ⇒ [[feedback-verify-on-disk-is-what-survives-impersonation]]
+
+## ✅ ただし *中身* は生き残る (provenance と content は独立軸)
+
+**実 %12 が 2026-07-14 11:0x に、6 条の事実主張を source から *独立に* 再検証 — 3 件とも TRUE:**
+
+| 条 | 主張 | 独立検証 (実 %12、source 直読) |
+|---|---|---|
+| **2** | 「ゲートには reachability レグが *既に在る*」 | ✅ **かつ article が言うより重い** — `.claude/skills/reward-design/SKILL.md:28` = **`### Artifact 1: Reward Signal Reachability Table`** = **強制ゲートの *第 1* 成果物**。それでも G3 の 24/81 は出荷された。 |
+| **4** | 「パリティ契約が欠陥を *命じて* いた」 | ✅ **逐語 CONFIRM** — `newton_route_env.py:1285-1287`「any divergence is fixed here to the frozen def, **never by loosening tol**」「**the EXACT frozen def**」 |
+| **5** | 「prior-art gate の探索 root に `harness/state/` が無い」 | ✅ **CONFIRM** — `scripts/check_thread_vault_prior_art.py:29-33` `DEFAULT_ROOTS = (thread-vault, docs, eval_runs)`。banked finding は `harness/state/` に在る ⇒ **gate は原理的に見えない。** |
+
+## ⚠ 本文書自身の未解決欠陥 (loud に掲示。黙って直さない)
+
+**条数が一致していない。**
+- タイトル・§2 の表 = **6 条** (1〜6)。
+- ⛔ **しかし §4-b が「第 8 条」「条 8」を引用している。表に 条 8 は無い。条 7 は本文がどこにも存在しない。**
+- ⇒ **条 7・条 8 は構想されたが文書に落ちていない。内容を勝手に発明しない** — **Rs 裁定を仰ぐ項目として掲示する。**
 
 ---
 
@@ -86,7 +111,9 @@ PASS: no related prior-art hits found in configured roots.
 
 ⭐ **不在主張の誤りは *両方向* にある** (過小は隠し、過大は捏造する)。⭐ **そして gate 自身も、memory 索引自身も、同じ穴を持つ。**
 
-⚠ **pF 実測 (推測と区別して報告)**: **MEMORY.md = 28,416 bytes / 宣言された読込上限 ≈ 24,985 bytes ⇒ 3,431 bytes 超過。** ⇒ **今夜 bank した教訓を載せた索引そのものが、自分の読込上限を超えている。** (truncation は直接観測していない ⇒ **超過 = 事実 / 「recall が壊れている」= 推測**。)
+⚠ **pF 実測**: **MEMORY.md = 28,416 bytes / 宣言された読込上限 ≈ 24,985 bytes ⇒ 3,431 bytes 超過。** ⇒ **今夜 bank した教訓を載せた索引そのものが、自分の読込上限を超えていた。** (truncation は直接観測していない ⇒ **超過 = 事実 / 「recall が壊れている」= 推測**。)
+
+✅ **RESOLVED (2026-07-14 11:0x、実 %12 が実測して確認)**: **本件は既に解消済。** pK が Rs に A/B/C で上程 (07:38) → **Rs が「A」を承認** → **pF が圧縮を実行**。⇒ **現在 = 21,635 bytes (実 %12 が 08:33 に実測) = 上限内。** ⇒ ⚠ **本節の 28,416 という数値は「書かれた時点では真、その後 Rs 承認の圧縮で偽になった」= 誰の誤りでもない stale value。上程時に持ち出さないこと。** ⭐ **なお、Rs の この「A」こそが上記 PROVENANCE ERRATUM の「A」である — ゲート改訂への承認ではない。**
 
 ---
 
