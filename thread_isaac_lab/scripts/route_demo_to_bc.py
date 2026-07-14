@@ -199,8 +199,23 @@ def _assert_e4prime(d, meta, strict=True):
     frozen 13-phase canonical) RAISES on a mismatch; ``strict=False`` (B2 multi-demo) records it as a
     quality flag so poorly-seated but CURATED survivors proceed with the structural (pinned) seg -- which
     also matches the runner's ``_live_seg_pos`` obs (policy_route_runner.py:117-118, seated_body_row).
+    ⛔ ``strict`` grades HOW WELL the cable seated. It cannot grade a demo that was never pinned at all --
+    that is outside its domain, and the two questions must be asked in order: fired at all, THEN how well.
+    Before the C1 seat gate (2026-07-14) the second question was the only one there was, because the pin
+    ALWAYS fired -- in mid-air if need be, which was the bug. Now that the weld can be refused, ``pin_active``
+    can be all-False, and ``np.argmax`` answers 0 for an all-False array without raising. That would read the
+    pin at frame 0, make ``seated_seg`` meaningless, and hand the B2 multi-demo path (which passes
+    ``strict_e4=False`` and proceeds on a mismatch) a teacher built as though the pin had fired on the first
+    frame. Fixing the weld opened this hole; it is closed fail-closed, before either question is asked.
+
     Returns (pin_frame, pinned_body, pin_eqid, c1xy, c2xy, seated_seg, seat_quality).
     """
+    if not bool(np.asarray(d["pin_active"]).any()):
+        raise SystemExit(
+            "E4' STOP: pin_active is all-False -- this demo was NEVER PINNED (the C1 seat gate refused the "
+            "weld, or the pin never fired). A demo with no pin is not a poorly-seated demo; it is outside "
+            "this function's domain, and strict=False must NOT wave it through. Do not train on it."
+        )
     pin_frame = int(np.argmax(d["pin_active"] > 0))
     pinned_body, pin_eqid = int(d["pinned_body"][pin_frame]), int(d["pin_eqid"][pin_frame])
     c1xy, c2xy = np.array(meta["resolved_clip_c1_xy"]), np.array(meta["resolved_clip_c2_xy"])
@@ -335,10 +350,12 @@ def _mask_injection(dm):
     step_f, next_f, tc0 = dm["step_f"], dm["next_f"], dm["tc"]
     kick = np.zeros(int(dm["T"]), dtype=bool)  # per-physics-frame kick flag
     for w in wins:
-        kick[int(w["start_frame"]):int(w["end_frame"])] = True
+        kick[int(w["start_frame"]) : int(w["end_frame"])] = True
     keep = ~(kick[step_f] | kick[next_f])  # drop a control-frame if its obs OR its action-target frame is a kick frame
     # %9 C1 command-key self-consistency: no KEPT control-frame touches a kick window (offset==0 by construction)
-    assert not (kick[step_f[keep]].any() or kick[next_f[keep]].any()), "p2r mask STOP: a kept row still touches a kick window"
+    assert not (kick[step_f[keep]].any() or kick[next_f[keep]].any()), (
+        "p2r mask STOP: a kept row still touches a kick window"
+    )
     for k in ("obs", "wp", "ph", "step_f", "next_f", "seg_idx", "seg_pos", "next_clip"):
         dm[k] = dm[k][keep]
     dm["tc"] = int(keep.sum())
@@ -611,7 +628,12 @@ def convert_b2(train_specs, heldout_specs, out_dir, seed=0):
     _rows += [(heldout_specs[i][0], held[i], held_off[i], "heldout") for i in range(len(held))]
     for npz, demo, off, role in _rows:
         sq = demo["seat_quality"]
-        entry = {"offset": list(off), "dir": os.path.basename(os.path.dirname(os.path.abspath(npz))), "role": role, **sq}
+        entry = {
+            "offset": list(off),
+            "dir": os.path.basename(os.path.dirname(os.path.abspath(npz))),
+            "role": role,
+            **sq,
+        }
         seat_quality_audit.append(entry)
         if not sq["argmin_matches_pinned"]:
             print(
@@ -655,7 +677,9 @@ def convert_b2(train_specs, heldout_specs, out_dir, seed=0):
         (i for i, off in enumerate(train_off) if off in B2_INTERIOR_OFFSETS),
         key=lambda i: train_off[i],
     )
-    assert len(interior_idx) >= 2, f"B2 STOP: need >=2 interior (non-hull-vertex) demos for val, got {len(interior_idx)}"
+    assert len(interior_idx) >= 2, (
+        f"B2 STOP: need >=2 interior (non-hull-vertex) demos for val, got {len(interior_idx)}"
+    )
     rs = np.random.RandomState(seed)
     pick = rs.choice(len(interior_idx), size=2, replace=False)
     val_idx = sorted(interior_idx[int(p)] for p in pick)
@@ -1120,7 +1144,12 @@ def augment_b2(in_npz, out_dir, ladder_step=1, seed=0):
                 "ladder_step": int(ladder_step),
                 "K": step_K,
                 "per_leg_magnitude_ranges_mm": {name: list(mag_tab[mk]) for (name, _, _, _, _, _, mk) in AUG_LEGS},
-                "rejection": {"axis_cos": AUG_AXIS_COS, "deg": 25, "tangent_projection": True, "box_max_abs_a": AUG_BOX_MAX},
+                "rejection": {
+                    "axis_cos": AUG_AXIS_COS,
+                    "deg": 25,
+                    "tangent_projection": True,
+                    "box_max_abs_a": AUG_BOX_MAX,
+                },
                 "sampler_seed": int(seed),
                 "source_npz_sha256": _sha256_file(src_npz),
                 "converter_git_note": "route_demo_to_bc.py augment_b2 (dq7_iv_mini_spec v1.1)",
