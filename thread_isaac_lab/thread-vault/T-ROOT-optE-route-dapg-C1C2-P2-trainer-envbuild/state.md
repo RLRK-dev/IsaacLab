@@ -276,7 +276,21 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 
 ---
 
-## ⛔⛔⛔ BLOCKED_FOR_USER #2 (2026-07-14 07:2x、実 %12 起票) — **成功条件が測れない。campaign を回せば壊れた計器の上で GPU を焼く**
+## ✅ RESOLUTION of BLOCKED_FOR_USER #2 (2026-07-14 19:3x、%12) — **Rs 動画 GT により前提が偽と判明。警報を解除する。**
+
+**Rs 逐語 (2026-07-14、C1 断面動画 `BLIND_DO_NOT_JUDGE__p1b_c1_xsec_3a717010.mp4` = cell `2037_x-20_y-15_Fon` を直接見て):**
+> 「これは**ケーブルが C1 の溝に入っているし C1 の底にもついているから見た目上は ok**。**C2 へのケーブル誘導、押し込みもできている**。ここにもどてくれ」
+
+⇒ ⛔ **下記 BLOCKED_FOR_USER #2 の中核前提「Rs が cell 2037 を目視で却下した ⇒ 全数値 pass なのに人間 FAIL ⇒ 成功条件は *測れない*」は【偽】。** Rs の判定は **同一 cell で OK**。**numeric と human は一致していた。**
+⇒ ✅ **成功条件は「測れない」のではなく「式が緩い」**。残る欠陥は **source だけで立つ 3 件**: (1) `c1_retained` が X 不参照 (`newton_route_env.py:1479-1483`) (2) offline `strict_v2` に lateral 無し (`p9_recount_strict_v2.py:39-44`) (3) G3 bar 3mm < 量子化床 7.32mm。⇒ **危険は前向き (RL exploit) であり、台本 route の遡及的無効化は起きない。**
+⇒ 🔒 **裁定 = `STAGEA_TRAINER_ENV_DESIGN_GATE_RSTECHLEAD_20260712.md` §20-Z (supersedes §20.1)** / LEDGER 行 = `C1 着座 + C2 誘導/押込 = Rs 動画 GT`。
+⇒ ⭐ **次作業 = Rs 指定 (2026-07-14 17:18 逐語)**:「**ピンが打たれる前に『本当に溝に居るか』を確かめる」これはあたりまえだ**」= **seat-trigger** (canonical 工程表 `CANONICAL_MOTION_TABLE_V1.md:128` STEP 9 = 側方 seated 確認後に C1 クランプ / 現行実装 = frame counter 発火)。
+⚠ **BLOCKED_FOR_USER #1 (pin の恒久 env 配線 = INVARIANT #5 の scope 拡張) は【依然 OPEN】** — Rs 未裁定。本 RESOLUTION は #2 のみを解除する。
+⚠ **数値単独 PASS 禁止 (動画 human-GT が最終) は不変** — Rs standing directive であり、本件から導かれた規則ではない。
+
+---
+
+## ⛔⛔⛔ BLOCKED_FOR_USER #2 (2026-07-14 07:2x、実 %12 起票) — ⛔**上記 RESOLUTION により SUPERSEDED (前提が偽)。以下は歴史。** — **成功条件が測れない。campaign を回せば壊れた計器の上で GPU を焼く**
 
 ⚠ **本件は ghost が「Rs へ上程します」と書いたまま *誰も実行していなかった* もの。実 %12 が起票する。** (ghost 事故 = memory `reference-claude-pane-backgrounded-session-spawns-strays-2026-07-14`)
 
