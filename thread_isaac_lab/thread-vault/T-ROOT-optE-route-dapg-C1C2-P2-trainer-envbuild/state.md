@@ -38,7 +38,10 @@ session_history:
 - ⚠⭐ **B3a-F1 (MED、commit provenance) — 正本は本 file 下部の %12 記載 (`e458bf9b9e`)。当方 (%11) も on-disk で独立確認済。** 事実 = **`a00a0a97f8` = conformance doc +20 行のみ (source ゼロ) / `575069abe5` = BLOCKED_FOR_USER + B3a source 730 行**。✅**成果物は無害** (legs 完了 03:38:13 < sweep 03:43:50、working tree == HEAD、DEFECT-1 fix は `route_executor.py:851` に在る ⇒ commit 済 code = 全 leg PASS した最終 code)。⛔**history rewrite はしない** (%9/%12 一致: 不要かつ有害)。
   **過失の切り分け (正確に)**: (a) **sweep 自体 = %12** (path 制限なし commit が当方の stage 済 index を巻き込んだ — %12 自認)。(b) ⚠**当方 (%11) の過失 = 別項**: commit 後に**その commit の中身を検証せずに「B3a 本体」と報告した** (`git show --stat` を打っていれば source ゼロに即気付けた)。⇒ **記録が事実と一致しない主張を、当方が発信した**。**教訓 = 自分の commit も「narrative でなく on-disk で検証してから主張する」** (`feedback-narrative-signal-not-established-fact-verify-on-disk` は他者の主張だけでなく**自分の commit にも適用される**)。
 
-✅ **BLOCKED_FOR_USER = 部分解除 (Rs 裁定 2026-07-14 05:2x 逐語「はしらせて　push」)** — 下記 §RESOLUTION 参照。**(d1)+(d2) の実行 = 承認 / push = 承認 / B3b-B7 = (d) 結果まで STOP 継続 (pin の恒久 disposition は Rs 未裁定)**。以下は上程時点の記録 (歴史、⚠層 3 は §RESOLUTION で訂正済)。
+✅✅ **BLOCKED_FOR_USER #1 = 全面解除 (Rs 承認 2026-07-15 00:5x、PLAN-KEEPER 反映 02:0x)** — ⭐⭐**Rs 逐語「クリップ *のみ* pin を RL env に恒久配線しろ」** ⇒ **FOUNDATIONAL INVARIANT #5 (RS71 §0 = NO KINEMATIC TRICK) の認可例外 scope が【scripted producer → RL env】へ拡張された。⛔ただし *クリップのみ* — 他の kinematic 例外は依然 不可**。⇒ ⭐**B3b-B7 の STOP 理由は消えた**。
+⛔ **ただし build 着手には前提条件が 3 本 残る (gate は消えていない)**: ① **設計ゲート** = p5 に env pin 設計を発注済 (設計 = p5 専権、CC は自前導出しない) / ② `/reward-design` / ③ `/pre-check`。
+⚠⚠⚠ **【spec 更新待ち = OPEN】** — **RS71 §0 INVARIANT #5 の spec 本文更新は Rs 専権**。CC (%12/p6 とも) は `04-Specs/` を編集しない (§運用4 「確定事項の即反映」の書込側 hard gate ⇒ spec 未更新の間は loud に surface する)。⇒ **現状 = 「Rs は口頭で承認したが、spec 本文はまだ旧 scope のまま」** = 記録と決定の乖離。surface = 本行 + LEDGER `W1 env build charter` 行 + 地図 now-box。
+〔前段: 2026-07-14 05:2x の **部分解除** (Rs 逐語「はしらせて　push」= (d1)+(d2) 実行 + push のみ承認) は本 全面解除に **包摂**。以下は上程時点の記録 (歴史、⚠層 3 は §RESOLUTION で訂正済)。〕
 **Context (B3-α、%9 発見 → %11 + %12 が on-disk 独立確認):**
 - producer は `PERCLIP_PIN=1` で **40 本の pin 候補 eq** を事前確保 (test_newton_clip_routing.py:1405)。golden もこれで録画。総 eq = 46 (40 + 構造 6)。
 - ⭐**RL env (`build_multiworld_scene`) は構造 eq 6 本のみ、pin 候補ゼロ** (newton_skill_env_base.py:1451 の comment 自身が pin を *test harness* に帰属)。`newton_route_env.py` の pin 参照 = 0。
@@ -56,7 +59,9 @@ session_history:
 
 ## ⛔ BLOCKED_FOR_USER (2026-07-14 03:4x、%12 — B3-α / %9 escalate / FOUNDATIONAL INVARIANT #5 抵触)
 
-**BLOCKED_FOR_USER: RL env に clip-retention pin (INVARIANT #5 の唯一の認可例外) を配線してよいか。配線しない場合、bank v2 の k≥3 fork は実現不能であり、かつ RL task 自体の達成可能性が open になる。**
+✅✅ **RESOLVED 2026-07-15 00:5x — Rs 承認「クリップ *のみ* pin を RL env に恒久配線しろ」。以下は上程時点の記録 (歴史)。**
+~~BLOCKED_FOR_USER: RL env に clip-retention pin (INVARIANT #5 の唯一の認可例外) を配線してよいか。配線しない場合、bank v2 の k≥3 fork は実現不能であり、かつ RL task 自体の達成可能性が open になる。~~
+⇒ **裁定 = YES (クリップのみ)**。⭐**根拠は後日 RS71 §4:62 の synthesis (`7eea86512e`) が独立に裏づけた**: cable は水平に曲がれない ⇒ 水平ルーティングは kinematic ⇒ **「pin はバグを隠しているのではない。pin が *水平曲率そのもの* である」** ⇒ pin-less RL env では task が表現できない、という上程の中核前提は **正しかった**。⚠**残 = RS71 §0 spec 本文の更新 (Rs 専権、未了)**。
 
 ### Context (全て on-disk 実測、%12 独立検証済)
 
