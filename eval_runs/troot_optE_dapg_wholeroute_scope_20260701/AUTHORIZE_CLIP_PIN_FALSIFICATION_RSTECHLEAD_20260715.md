@@ -3,7 +3,89 @@
 **著者:** RS-TECH-LEAD (%12, w2:p4) — 2026-07-15 06:3x JST
 **宛先:** VT-DESIGN (p5, 設計主) / cc: OPS-SUP (p1), PLAN-KEEPER (p6)
 **対象:** `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` §12（`authorize_clip_pin` 仕様）
-**結論:** ⛔ **仕様どおりには出荷できない。要件①と②が built model 上で矛盾する。** 実装は停止。設計裁定を p5 に差し戻す。
+**結論（v2、2026-07-15 06:5x に訂正）:** ⛔ **仕様どおりには出荷できないが、~~要件①と②が矛盾する~~ という【中心的主張は撤回】する（§0 ERRATUM）。** STOP 自体は **別の欠陥（§3 の fail-silent + §2 の assert）で正当**。設計裁定は引き続き p5 に差し戻す。
+
+---
+
+# §0 ⛔⛔ ERRATUM — 本 doc の【中心的主張（§1）は偽】。撤回する
+
+**撤回する主張（v1 の §1、2026-07-15 06:3x に p5 / p1 / Rs へ送信し commit `f1d090bfe9` に bank した）:**
+> ~~「model からしか読まない authorizer は support clip への溶接を認可する ⇒ 区別できる唯一の情報は `CLIP_POSITIONS` = 定数 = 要件①が禁じたもの ⇒ **要件①と②は矛盾する**」~~
+
+**⛔ 偽。** 反証者 = OPS-SUP (p1)、2026-07-15 06:46。%12 が on-disk で再検証し **CONFIRM**。
+
+**実体（逐語）** — clip の geom 選択は **既に clip 中心で gate されている**:
+```python
+# test_newton_clip_routing.py:3845-3857  (=  route_executor.py:2190-2202、policy_route_runner.py:279-286)
+def _clip_geoms():
+    # ... the table (also worldbody) is centred far in Y -> excluded by the XY gate   ← ⭐ 逐語
+    return [g for g in range(mjm.ngeom)
+            if int(mjm.geom_type[g]) == _BOX and int(mjm.geom_bodyid[g]) == 0
+            and abs(float(mjd.geom_xpos[g][0]) - x_clip) < 0.03      # ±30mm  X 窓
+            and abs(float(mjd.geom_xpos[g][1]) - y_clip) < 0.03]     # ±30mm  Y 窓
+```
+⇒ **XY ゲートは意図的な弁別器であり、コメント自身がそう言っている。**
+
+**実測（%12、`task_config` + selector 窓 ±30mm）— support clip は x=300mm:**
+
+| 経路 clip | \|dx\| | min\|dy\| | 判定 |
+|---|---|---|---|
+| C1 (350, +150) | **50.0mm** | 100.0mm | **X で排除**（1.7×） |
+| C2 (400, +75) | **100.0mm** | ⚠ **25.0mm**（窓の *内側*） | **X で排除**（3.3×） |
+| C3 (350, 0) | 50.0mm | 50.0mm | X で排除 |
+| C4 (400, −75) | 100.0mm | ⚠ **25.0mm** | X で排除 |
+| C5 (350, −150) | 50.0mm | 50.0mm | X で排除 |
+
+⇒ ✅ **5 clip すべてで support clip は選ばれ得ない。要件は矛盾していない。**
+⇒ ⭐ **穴は【要件】ではなく【私の signature の引数欠落】だった**: `authorize_clip_pin(mjm, mjd, seat_body, seat_world)` に **clip 引数が無い** ⇒ model 全体を走査するしかなくなる ⇒ そこで初めて support clip が候補に入る。**修正 = `authorize_clip_pin(..., clip_xy)`。呼び手は常に知っている**（`newton_route_env.py:1309` `_active_clip_xy(phase_id)`）。**これは v1 §7 で %12 自身が提案していた修正と同じ** — つまり **診断は誤り、処方は正しかった**。
+⇒ ⭐ **「bar を model から導く」と「どの clip かを座標で選ぶ」は【別の要件】。** 現行 gate 自身のコメントがそう言っている（`route_executor.py:3042` 逐語「`x_clip` = the **RESOLVED** clip centre, **not the constant**」）。**禁じられたのは【bar の hardcode】であって【clip の同定】ではない。**
+
+### ⛔ %12 の失敗（本 arc で最も重い。記録する）
+
+**私は「support clip が *存在する*」を検証し、「authorizer が *それを選ぶ*」を【一度も検証しなかった】。**
+- 前者（存在・形状・z 帯・既定 ON）= **すべて真、すべて自分で確かめた**。
+- 後者（selector が拾う）= **偽、一度も確かめなかった**。
+- ⇒ ⭐ **支持事実だけを確かめ、荷重を負う連言を確かめずに結論を出した。** = banked `feedback-independent-confirmation-must-cover-every-conjunct` / `feedback-presence-check-structure-not-substring-count` そのもの。
+
+**そして答えは最初からコードの中に、【意図的な弁別器】として、そう書いたコメント付きで在った。** 私は bar 計算の行（`_clip1g` を **使う** 行、`:3031-3040`）を読みながら、**`_clip1g` が *どこから来るか* を一度も問わなかった。** = banked `feedback-a-wall-is-a-forgotten-degree-of-freedom`（制約は code に在り、narrative には無い）。
+
+⚠ **しかも私は、これを「計器は誤りの在る軸で盲目だった」と*論じる doc の中で*やった。**
+
+### ⚠ 撤回に伴い、新たに見えた脆弱性（v1 には無い、実測）
+- 上表の窓比較は **clip 中心** どうし。selector は **geom 位置**で filter するので、support clip の最外リップ geom は `x = 300 ± 13 = 313mm` ⇒ C1 中心 350mm から **|dx| = 37mm** ⇒ 窓 30mm に対し **余裕は 7mm しかない**（50mm ではない）。
+- **C2 / C4 では Y 分離が 25mm = 窓の内側** ⇒ **X が唯一の弁別器**。
+⇒ **弁別は 1 軸・7mm で成立している。** 記録に値する（設計時に前提とするなら明示的な assert を置くべき）。
+
+---
+
+# §0-B ✅ 撤回後も【生き残る】欠陥（STOP はこれで正当）
+
+1. ⭐⭐ **空集合が raise せず、ゴミ bar を返す**（§3）— `_wall_top_mm = max(...) if _wall_g else 9e9` ⇒ **z_hi = 9e9 ⇒ どんな z も上限を通る**。C3–C5 は route env に存在しない ⇒ **集合は空** ⇒ **authorizer は何でも認可する**。⇒ **今夜ずっと殺してきた fail-silent と同 class。これ単独で escalation は正当。**（p1 も同意）
+2. ⭐ **`assert sum(eq_active) <= n_clips` は golden で発火**（§2）— 争われていない、%12 実測。
+3. **`assert mjm.neq` 不変は恒真**（mid-episode に recompile 経路が無い）。
+4. **C2–C5 の geom が無い** ⇒ 5-clip 一般化は**延期**（§3 表）。
+5. ⚠ **`x_clip`/`y_clip` は env var で既定 `(0.40, 0.0)`、C1 の実位置 `(0.35, +0.150)` と食い違う**（§4）⇒ env 未設定なら「C1 gate」が黙って C2 を中心にする。**撤回後、clip 中心こそが唯一の弁別器だと分かった以上、この項の重みは【増した】。**
+6. `policy_route_runner.py:309` の π-rollout gate に **接触レグ (0.5mm) と ±3mm 窓が生きている**（§8-3）。
+7. **C2 成功判定が、殺された述語で測られている**（§8-4）。
+
+---
+
+# §0-C ⭐⭐⭐ 本 arc の統合的教訓（今夜 3 度、同じ盲目）
+
+| # | 計器 | 問うた問い | ⛔ 問わなかった問い |
+|---|---|---|---|
+| 1 | 空中溶接の歴史 audit | 「z は正しいか」 | 「x は正しいか」⇒ 58 件すべてが *高さ* 失敗として記録された |
+| 2 | **p1 の mutation matrix (10/10)** | 「**境界**は主張どおりの位置か」 | ⛔ 「**主体は正しい対象か**」— 全 10 摂動は C1 自身の中心に **相対**（`lat+1` = \|dx\| = bar+1 = 4.5mm）。support clip は **50mm 先** ⇒ **原理的に到達できない**（p1 自ら受諾） |
+| 3 | **%12 の反証 doc（本 doc v1）** | 「model は clip を区別できるか」 | ⛔ 「**selector は そもそも model 全体を見るのか**」— 見ていなかった |
+
+⇒ ⭐⭐ **【境界の問い】と【同一性の問い】は別の問いである。私たちは前者だけを問い続け、後者を一度も問わなかった。**
+⇒ 🔒 **処方（p1 と合意）: mutation matrix に【同一性軸】の摂動を足す** — seat body を **support clip の中心 (300, +50)** に置き、**REFUSE を assert する**。現行 10 config はこれを突けない。
+
+---
+
+*以下 §1 は v1 の本文（撤回済。§0 の ERRATUM が supersede する）。反証の経緯を残すため削除しない。*
+
+---
 
 **方法:** 敵対的パネル 2 体（1 体は `NewtonRouteEnv` と producer の両シーンを**実構築して実測**）＋ %12 による全決定的主張の on-disk 再検証。**agent の結論は narrative として扱い、採用したものは全て自分で確かめた**（1 件は反証して棄却した、§5）。
 
