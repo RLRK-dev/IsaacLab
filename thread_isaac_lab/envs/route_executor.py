@@ -3041,26 +3041,45 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
         _seat_w = state.body_q.numpy()[seat_body, :3].astype(float)
         _dx_seat_mm = abs(float(_seat_w[0]) - x_clip) * 1e3  # x_clip = the RESOLVED clip centre, not the constant
         _dy_seat_mm = abs(float(_seat_w[1]) - y_clip) * 1e3  # the domain leg: is the pinned body even AT the clip
-        # The contact leg has to be about the same body the other legs are about (p3, 2026-07-15). The min over ALL
-        # cable geoms can be satisfied by a neighbouring segment while the body we are about to weld hangs elsewhere:
-        # a conjunction whose legs have different subjects is not a conjunction. Read the pinned body's own geom --
-        # the same world-position match the pin itself uses below to find _seat_geom_mj.
-        _seat_geom_gate = (
-            min(cable_geoms, key=lambda g: float(np.linalg.norm(np.asarray(mjd.geom_xpos[g]) - _seat_w)))
-            if cable_geoms
-            else None
+        # NO CONTACT LEG, NO DATUM (p5 ruling 2026-07-15, on pB's numbers). A touch-the-clip leg rejects a cable
+        # that IS captured: the clip stands on a 30mm mesa and the cable is draped across it, so the drooping ends
+        # cantilever the seated body OFF the floor -- pB measured the seated body hovering 0.679mm while its
+        # neighbour touched at -0.011mm, which is exactly what Rs saw ("it looks like it touched the bottom, but
+        # maybe not fully"). The hover scales with the overhang, which differs per clip (C1 is +150/-450mm about
+        # the cable, C3 is +300/-300), so no single contact bar can serve C1..C5 -- do not tune it, drop it.
+        # The height leg becomes two ONE-SIDED bars, both world coordinates of walls the model actually has:
+        #   upper -- below the wall top (a cable above the rim is out of the channel)
+        #   lower -- above the channel floor. This one is NOT optional: the clip floats 20mm over the table in the
+        #   route env (no spacer there), so a cable can slide UNDERNEATH it, and without a floor bar a cable under
+        #   the clip reads as SEATED.
+        _wall_g = [g for g in _clip1g if (abs(float(mjd.geom_xpos[g][0]) - x_clip) - float(mjm.geom_size[g][0])) > 1e-4]
+        _straddle_g = [g for g in _clip1g if g not in _wall_g]  # the base plate (and the spacer) span the centre
+        _wall_top_mm = (
+            max(
+                (float(mjd.geom_xpos[g][2]) + float(mjm.geom_size[g][2]))
+                for g in _wall_g
+                if (abs(float(mjd.geom_xpos[g][0]) - x_clip) - float(mjm.geom_size[g][0])) * 1e3 <= _wall_inner_mm + 0.1
+            )
+            * 1e3
+            if _wall_g
+            else 9e9
+        )  # the WALLS' top, not the lips' -- the lips sit further out and are filtered by the inner-face match
+        _floor_top_mm = (
+            max((float(mjd.geom_xpos[g][2]) + float(mjm.geom_size[g][2])) for g in _straddle_g) * 1e3
+            if _straddle_g
+            else 0.0
         )
-        _touch_mm = _min_dist_mm([_seat_geom_gate], _clip1g) if _seat_geom_gate is not None else 9e9
+        _z_hi_mm = _wall_top_mm - CABLE_RADIUS * 1e3  # 836.0: the cable centre must stay below the rim
+        _z_lo_mm = _floor_top_mm - CABLE_RADIUS * 1e3  # 821.0: ... and above the floor it could otherwise pass under
         _c1_seated = bool(
-            _touch_mm <= 0.5
-            and abs(z_c1_seated - _groove_z_mm) <= 3.0
+            _z_lo_mm < z_c1_seated < _z_hi_mm
             and _dx_seat_mm <= _lat_bar_mm
             and _dy_seat_mm <= _y_win_mm
         )
         if _seat_gate_on:
             print(
-                f"  [C2] C1 SEAT GATE: seated={_c1_seated} | touch(seat-body) {_touch_mm:+.3f}<=0.5mm "
-                f"| z {z_c1_seated:.1f} vs {_groove_z_mm:.1f}+-3.0mm "
+                f"  [C2] C1 SEAT GATE: seated={_c1_seated} "
+                f"| z {_z_lo_mm:.1f}<{z_c1_seated:.1f}<{_z_hi_mm:.1f}mm (floor/rim from the model) "
                 f"| lateral |dx| {_dx_seat_mm:.2f}<={_lat_bar_mm:.2f}mm "
                 f"(wall {_wall_inner_mm:.1f} - r {CABLE_RADIUS * 1e3:.1f}) "
                 f"| domain |dy| {_dy_seat_mm:.2f}<={_y_win_mm:.1f}mm"
@@ -4047,7 +4066,8 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
                     "on": _seat_gate_on,
                     "seated": _c1_seated,
                     "refused_to_pin": _pin_refused,
-                    "touch_mm": round(_touch_mm, 3),  # the PINNED body's own geom vs the clip (not a neighbour's)
+                    "z_lo_mm": round(_z_lo_mm, 1),  # floor_top - r: below this the cable is UNDER the clip
+                    "z_hi_mm": round(_z_hi_mm, 1),  # wall_top - r: above this it is out of the channel
                     "dx_mm": round(_dx_seat_mm, 3),
                     "dx_bar_mm": round(_lat_bar_mm, 3),
                     "dy_mm": round(_dy_seat_mm, 3),
