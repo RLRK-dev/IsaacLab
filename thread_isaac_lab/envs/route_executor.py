@@ -3019,6 +3019,36 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
         )
         _cap("C1 SEATED (full-clamp, pre half-unclamp)")
 
+        # --- C1 SEAT GATE -- identical to test_newton_clip_routing.py (the byte-repro twin; if only one of the two
+        # producers gates the weld, the twins diverge). Rs 2026-07-14: check the cable is really in the groove
+        # BEFORE the pin fires. z_c1_seated and c1_seat_dist were already measured above and no branch read them,
+        # so the weld fired on a frame count; 58 of 343 banked runs welded the cable up to 52mm ABOVE the wall top.
+        # touch + groove-z mirror policy_route_runner._pin_replay:309; the lateral leg is what STEP 9 of the
+        # canonical motion table asks for, and its bar comes off the BUILT model (wall inner face - cable radius).
+        # C1_SEAT_GATE=0 restores the pre-gate behaviour byte-for-byte (the mutation control).
+        _seat_gate_on = os.environ.get("C1_SEAT_GATE", "1") == "1"
+        _groove_z_mm = (GROOVE_CENTER_Z + _clip_float_z) * 1e3  # the seat = groove centre + clip float (NOT 809)
+        _wall_inner_mm = min(
+            (
+                (abs(float(mjd.geom_xpos[g][0]) - x_clip) - float(mjm.geom_size[g][0])) * 1e3
+                for g in _clip1g
+                if (abs(float(mjd.geom_xpos[g][0]) - x_clip) - float(mjm.geom_size[g][0])) > 1e-4
+            ),
+            default=0.0,
+        )
+        _lat_bar_mm = _wall_inner_mm - CABLE_RADIUS * 1e3  # how far the cable centre may sit off the groove axis
+        _dx_seat_mm = abs(float(state.body_q.numpy()[seat_body, 0]) - x_clip) * 1e3  # x_clip = the RESOLVED clip centre (CLIP_X can move it), not the constant
+        _c1_seated = bool(
+            c1_seat_dist <= 0.5 and abs(z_c1_seated - _groove_z_mm) <= 3.0 and _dx_seat_mm <= _lat_bar_mm
+        )
+        if _seat_gate_on:
+            print(
+                f"  [C2] C1 SEAT GATE: seated={_c1_seated} | touch {c1_seat_dist:+.3f}<=0.5mm "
+                f"| z {z_c1_seated:.1f} vs {_groove_z_mm:.1f}+-3.0mm "
+                f"| lateral |dx| {_dx_seat_mm:.2f}<={_lat_bar_mm:.2f}mm "
+                f"(wall {_wall_inner_mm:.1f} - r {CABLE_RADIUS * 1e3:.1f})"
+            )
+
         _ph("C1_PIN")
         # PERCLIP_PIN (b)-pin ACTIVATION on the VERIFIED C1 seat (%3 charter 2026-07-01) -- the headline freeze-scope
         # probe. Toggle the pre-allocated per-clip connect eq (seat_body <-> world@seat) ACTIVE now (mid-episode
@@ -3026,6 +3056,14 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
         # PER-CLIP: ONLY seat_body is anchored; body29/28.. stay articulated (measured over the guide below). The
         # anchor is set to the seat body's CURRENT world pos (~clip groove 809) so activation does NOT yank it.
         _perclip_on = os.environ.get("PERCLIP_PIN", "0") == "1"
+        _pin_refused = bool(_perclip_on and _seat_gate_on and not _c1_seated)
+        if _pin_refused:  # the seat gate is the branch the comment above always claimed was here
+            print(
+                "  [C2] C1 SEAT GATE: REFUSING TO PIN -- the cable is not in the C1 groove. Welding an unseated "
+                "cable is outside the Rs pin authorization (mirror policy_route_runner._pin_replay:309). "
+                "Re-run with C1_SEAT_GATE=0 for the pre-gate behaviour."
+            )
+            _perclip_on = False  # DO NOT FIRE
         _fs_on = _perclip_on or os.environ.get("FREEZE_SCOPE", "0") == "1"
         _pin_eqid, _z_c1_after_pin = None, None
         # W0-e producer field (%9 pin-excluded floor bar / %12 pin-frame-onward, 2026-07-05): _seat_geom_mj = the
@@ -3986,6 +4024,17 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
                 "z_c1_seated_mm": round(z_c1_seated, 1),
                 "z_c1_final_mm": round(zc1_final, 1),
                 "cable_c1_seat_dist_mm": round(c1_seat_dist, 3),
+                # C1 SEAT GATE (mirror test_newton_clip_routing.py): the three legs the weld is conditioned on.
+                # dx_mm is the lateral leg -- the axis the groove constrains and the one z can never report.
+                "c1_seat_gate": {
+                    "on": _seat_gate_on,
+                    "seated": _c1_seated,
+                    "refused_to_pin": _pin_refused,
+                    "dx_mm": round(_dx_seat_mm, 3),
+                    "dx_bar_mm": round(_lat_bar_mm, 3),
+                    "wall_inner_mm": round(_wall_inner_mm, 3),
+                    "groove_z_mm": round(_groove_z_mm, 1),
+                },
                 "cable_c1_final_dist_mm": round(c1_final_dist, 3),
                 "cable_c1_nonpin_final_mm": round(
                     _c1np_final, 3
