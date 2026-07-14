@@ -940,13 +940,18 @@
         "T-Meta",
         "T-Predicate-Redefinition",
         "T-ROOT-COORD",
+        "T-ROOT-DesignDoc-Renewal-20260711",
         "T-ROOT-Legacy-Architecture",
+        "T-ROOT-Paper-BCRL-JA-20260710",
         "T-ROOT-Pivot-Chain-Architecture-Review",
         "T-ROOT-Planning-Surfaces-Consolidation-20260702",
         "T-ROOT-R0-Measurement-Foundation",
         "T-ROOT-R1-Product-Predicate-Decision",
         "T-ROOT-R2-Architecture-Redesign",
         "T-ROOT-StepTable-Verbal-Teaching-20260703",
+        "T-ROOT-Vault-DesignContent-Audit-20260711",
+        "T-ROOT-VaultRefCopy-SpotAudit-20260711",
+        "T-ROOT-Verbal-Teaching-20260705",
         "T-Skill",
         "T-Vision",
         "T-WM"
@@ -1337,10 +1342,30 @@
       ]
     },
     {
+      "id": "T-ROOT-DesignDoc-Renewal-20260711",
+      "goal": "Rs 裁定 (2026-07-11 00:30、%12 AskUserQuestion 3 点、選択肢 label = verbatim、bank = routeexec node `1fb2ce4aae`): 対象 =「07-Design 主要 doc 群」/ 深さ =「構造から刷新」(canonical 値不変保証付き) / tracked 化 =「承認」。07-Design 主要設計文書を Fable5 で構造から刷新する。canonical 値 (数値・決定・sha anchor) の不変を保証しつつ、構造・可読性を刷新。",
+      "means": "DoD (charter = %12 00:35 dispatch、L3):\nstep 0: 残 6 file の tracked 化提案 (一括)\n→ RENEWAL_PLAN packet → 5体 [VERIFY] → %12 verify → Rs 承認 → per-doc 執行。\n不変保証 = canonical 値 (数値 / 決定記録 / sha anchor) の before/after 照合を per-doc で証跡化。\n除外推奨 = 00-DESIGN-STATUS-LEDGER.md (生きた SSOT、刷新対象外)。\n",
+      "status": "IN_PROGRESS",
+      "dependencies": [],
+      "parent": "T-ROOT",
+      "children": [],
+      "session_history": []
+    },
+    {
       "id": "T-ROOT-Legacy-Architecture",
       "goal": "Record the original T-ROOT architecture (5-skill strict-serial chain at current per-skill SR on uncalibrated substrate) as CLOSED / infeasible-as-scoped per P0 KILL 2026-05-19. Marker node, not a work node.",
       "means": "CLOSED because P0 KILL (2026-05-19) assessed the original architecture infeasible-as-scoped (goal NOT abandoned):\nArch A product ∏pᵢ ≈ 1.08% (honest 0%); Arch B IID-retry ≈ 20.5% (excl. untrained CR); Arch C IID-corrected ≈ 60.6%\n(−34pp via the 0.332 un-retryable subset); no architecture envelope ⊇ 0.95.\nThe pre-P0-KILL L1.A-H capability-axis subtrees under T-ROOT remain in place as a historical / structural map\n(NOT re-parented under this marker; no 179-node mass mutation performed).\n",
       "status": "ARCHIVED",
+      "dependencies": [],
+      "parent": "T-ROOT",
+      "children": [],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-Paper-BCRL-JA-20260710",
+      "goal": "Rs 直接指示 verbatim (原文ママ、誤字含む):「新規、いまはここで使用されているBC+RLのアルゴリズムの解説れべるでよい・日本語で」。解釈 (inference、p9 起案・Rs verbatim ではない): (a) 先行 draft 不使用・新規 (prior-art troot_s1b_academic_paper_draft_ja_0gpu_20260601 は基盤 superseded、骨格再利用も不使用) (b) 対象 = 現用 BC+RL アルゴリズム (c) 粒度 = 解説レベル (explainer、論文完成品でない) (d) 言語 = 日本語。 ⭐[STAGE 1 = 上記現 goal、不変保持] Long-term target 追記 (2026-07-11 04:28、Rs 直接指示 verbatim via p9 relay、p6 未直接観測):「いまはドラフトだが最終的にはこのプロジェクトに関する学術論文として出すことを念頭にしておいて」。含意 (inference、p9 起案・Rs verbatim ではない): 現 explainer draft = 学術論文 publication への stage 1; (a) 現 draft を prematurely academicize しない (b) paper build = self-start しない・staged + Rs-gated (「念頭にしておいて」≠ 即実行指示)。scope = 現 node BC+RL scoped 維持。⭐**long-term SCOPE 確定 2026-07-11** (Rs 論文計画確定 14:24、%12 relay via p9): academic paper = **BC+RL finding 焦点** (route/env = experimental substrate・独立 section でない、whole-project 化はしない — 旧『whole-project 化 = 将来 Rs 決定』OPEN を supersede)。併せ確定: TIMING = 技術 arc 継続→成熟後 academic build (今 pivot せず) / LANG = 英語 (arXiv) / VENUE = arXiv 最低 / framing = BC built・RL designed-not-built。現 explainer v0.1e 整合済 (rewrite 不要)。ref memory project-paper-bcrl-eventual-academic-publication.md + LOCKED PLAN PARAMETERS (p9 bank)。",
+      "means": "DoD: 初版 draft 完成 + 執筆契約 4 点遵守 (%12→p9 2026-07-10 23:57 送付済):\n① 段階ラベル厳密化 — R2-R4 (α residual DC-1 / RLPD DC-2 等) = 「Rs 承認済 設計・未 build」明記、現在形で動作記述しない (ABSENT-IN-CODE 規律)\n② 数値 trap — SR は公式値 0.716 のみ (strict_v2 58/81、W0-e CLOSED、pin W0E_F1B_SNAPDOWN=1)。0.728 は cite 禁止 (ERRATUM 値; 系譜 0.494→0.716 に触れる場合は erratum 明記)\n③ DISCARDED track (env6-VBD 系) = 歴史として明示ラベル時のみ言及可\n④ scope note 1 節 (主従の線引き、Rs が trim できる形)\n最終 gate = Rs 承認 (scope 最終権威 = Rs)。\n",
+      "status": "COMPLETE",
       "dependencies": [],
       "parent": "T-ROOT",
       "children": [],
@@ -2125,6 +2150,36 @@
       "id": "T-ROOT-StepTable-Verbal-Teaching-20260703",
       "goal": "Rs 意向 (2026-07-03 05:1x「今後、効率的に言葉で教示できるようにしたい」対象 = scripted 動作) を、Rs 原則「43step 表から外れるな」の延長で実装可能にする: step 表の行 (phase・動作・対象・条件) を日本語で編集 → route code 生成/パラメータ化 → byte-identity (不変行) + 動画/OG gate (変更行) で検証する motion authoring loop の設計。",
       "means": "Phase S (scoping): options 表 + 推奨が Rs に提示され、方式 (パラメータ駆動 / code-gen / interpreter) が Rs 決定される。\n最終 (実装 phase、別途 Rs GO): fix-⑤ 級の新動作 1 つが「表の行編集 → 生成 → gate PASS」だけで landing し、\n従来 loop (言葉→charter→手書き code ~1.5h) より往復数が実測で減る。\n",
+      "status": "ARCHIVED",
+      "dependencies": [],
+      "parent": "T-ROOT",
+      "children": [],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-Vault-DesignContent-Audit-20260711",
+      "goal": "Rs 直接指示 verbatim (via %12 relay 2026-07-11 04:24、p6 未直接観測 [Rs→%12 channel 範囲外、正直記載]):「設計内容がvaultで散在、重複などないか？あれば最適化して」。解釈 (inference、%12 charter 起案・Rs verbatim ではない): 監査 (設計内容の scatter/重複 特定) → disposition map 作成 → 最適化は per-item Rs 承認 (一括改変せず item ごとに承認 gate)。",
+      "means": "DoD (charter レベル、%10 [DEFINE] で精緻化):\n① scatter/重複 survey: 設計内容の所在を列挙 (%12 即時 survey = 04-Specs 10+ / 06-Knowledge 設計 15+ / eval_runs live 設計 doc 32 本)\n② disposition map: 各 scatter/重複 item に keep / merge / reference-over-copy / archive の disposition を付与 (memory feedback-vault-consistency-reference-over-copy 準拠)\n③ 最適化 = per-item Rs 承認 gate (設計内容改変は Rs 専権、一括改変禁止)\n⚠除外 = **07-Design 内部 doc 群 (renewal node T-ROOT-DesignDoc-Renewal-20260711 が owns、二重 scope 禁止)**\n最終 gate = per-item Rs 承認。\n",
+      "status": "COMPLETE",
+      "dependencies": [],
+      "parent": "T-ROOT",
+      "children": [],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-VaultRefCopy-SpotAudit-20260711",
+      "goal": "reference-over-copy 規約 (memory feedback-vault-consistency-reference-over-copy 準拠) の spot-audit: 設計内容が copy-duplication でなく reference-over-copy で維持されているかを抽出検査し、逸脱 item に disposition を付与する。起票根拠 = audit node T-ROOT-Vault-DesignContent-Audit-20260711 session_history 2026-07-11 04:38 entry (Rs 最適化 package 承認 04:38 で PR-3 = follow-on task 化を承認済; ⛔本 node の起動 = Rs 別途)。",
+      "means": "DoD (charter レベル、起動時に精緻化):\n① reference-over-copy spot-audit: design content の copy-duplication 逸脱を抽出\n② 逸脱 item に disposition (reference 化 / 許容 / archive) を付与\n③ 改変は per-item Rs 承認 gate (設計内容改変は Rs 専権)\n⚠除外 = 07-Design 内部 (renewal node owns) + vault-audit V1/V2 で処理済 lineage (二重 scope 禁止)\n最終 gate = per-item Rs 承認。\n",
+      "status": "IN_PROGRESS",
+      "dependencies": [],
+      "parent": "T-ROOT",
+      "children": [],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-Verbal-Teaching-20260705",
+      "goal": "scripted route の動作を人間の言葉で効率的に教示可能にする (往復数削減; Rs 意向 2026-07-03 verbatim)",
+      "means": "table-driven route (target-SOURCE 型 row schema) + 教示 loop (言葉→表 param→leg-diff+参照差分動画の機械検証→Rs 確認) — 段階 build St1a(証拠ゲート)→St1b/St2/St3(実測 trigger 繰延)",
       "status": "IN_PROGRESS",
       "dependencies": [],
       "parent": "T-ROOT",
@@ -2138,6 +2193,63 @@
       "status": "IN_PROGRESS",
       "dependencies": [],
       "parent": "T-L1C-PerSkill-RL",
+      "children": [
+        "T-ROOT-optE-route-dapg-C1C2-P2-envcore",
+        "T-ROOT-optE-route-dapg-C1C2-P2-routeexec",
+        "T-ROOT-optE-route-dapg-C1C2-P2-trainer"
+      ],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-optE-route-dapg-C1C2-P2-envcore",
+      "goal": "spec v1.5 §4 に基づく whole-route C1→C2 RL env-core を build する — obs 60D (v1.5a) / action α-6D residual (非累積 Δ, DOF = (b′) phase-conditional structural projection v1.5b) / reward sparse-primary predicate (G1-G6 latched-monotonic) / termination (horizon 900 + terminates) / guards ((b′) span projection: dual-grip hard-project + 再把持窓 per-arm)。staged build chain の第 1 component (env-core → route-executor → oracle → OG → trainer)。",
+      "means": "env-core smoke DoD 8 項 PASS (spec v1.5 §4): ①throughput ≥9.7 実効 fps ②device parity (per-phase predicate-fire + 終端 verdict 一致, cuda:0-only pin は FAIL 分岐) ③cg-GPU whole-route screen (全 phase finite + nacon engage + no nefc overflow) ④horizon 実測 max-of-81 (P3 piggyback) ⑤Δ=const drift-zero (=0.0 EXACT) ⑥predicate unit-test @cuda:0 (6 phase 全 fire + no-re-fire + guards-quiet) ⑦handover-fidelity (route-executor 接続後、qpos/qvel L∞) ⑧corner-miss 分布 (P3 grid 供給済)。\n現況 (2026-07-06 18:55): ✅ **[CHANGE] build COMMITTED (f6ee1443f5)**: route_env_config.py (186L) + newton_route_env.py (1143L)。validate.sh PASS (CHECK 4 non-ASCII cleared / SSOT / import-direction; 27 warn = pre-existing video-size 等 non-blocker)。**%12 (a)(b) resolution 反映済**: (a) obs [60:61]=SI meters (C1_RETAINED_LOW_WALL_TOP_M=0.840, predicate 等価 z<0.840m==840mm) / (b) frozen-def flank |y−0.15|≤0.010m max-z + NaN-guard (recount:107 忠実) + c2=groove+settle (wall/spacer exact-split = route-executor stage DoD⑨a 精緻化)。**当方 static-verify PASS (§運用28 独立)**: non-ASCII=0, meters landed, frozen-def exact, ruff clean, obs 62D contiguous 0..61, foundational faithful (time_outs purity / G6 strict_v2 mirror / (b′) schedule-ALONE common-mode as-executed / α-6D non-accumulating / [16:19] lane / [49] base-pin / [53:55] telemetry-not-gate)。**次 = fresh-context verify pass (%12 承認)**: smoke DoD (①②③⑤⑥⑨a⑩⑪ env-core dischargeable, cuda:0) + 層5 (幾何/物理/SSOT 3 視点, fresh subagent 群) + **Rs 動画 gate (20:59 追加, video-first; env-core-scope = arm+cable+C1 忠実, C2-seating route-executor へ honest-defer)** → **%12 最終 verify → node COMPLETE**。⚠当方 mistake own: ./isaaclab.sh -f --all-files で repo-wide reformat noise (当方 2 file 外, explicit-path commit ゆえ非混入, 残 uncommitted noise は commit しない)。locked runner 不触, task_config 不触。tally=scratchpad。\n",
+      "status": "COMPLETE",
+      "dependencies": [],
+      "parent": "T-ROOT-optE-route-dapg-C1C2",
+      "children": [],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-optE-route-dapg-C1C2-P2-routeexec",
+      "goal": "env-core が stub interface で受けている route を、locked `_run_mujoco_grasp_route` (test_newton_clip_routing.py:3692, 0.716 MOTION STANDARD, ANTI-REVERT Rs-LOCKED) を reference oracle とする実 route engine に置換する。D-1=C 採択 (Rs 2026-07-06 23:5x): locked file 不触・faithful 抽出 → 新 route_executor module + byte-repro guard。staged build chain 第 2 component (env-core [COMPLETE] → route-executor → oracle → OG → trainer)。",
+      "means": "route-executor DoD (charter scoping §1、byte-repro が全項の前提 guard):\n① byte-repro: 抽出 route で canonical 81-grid → strict_v2 58/81 EXACT (env-core ⑨a′ recorded-state 25/81 proxy を live 58/81 へ)\n② ⑦ handover-fidelity: ⑦(a) arm+gripper restore-L∞ ≤1mm/1mm/s STATIC [comp2 DONE 433ba6b246; qvel=0 data-forced ⇒ qvel-leg=self-consistency] + ⑦(b) Stage-B live 1-step divergence。⛔ **Stage-B ⑦(b) REQUIREMENT (LOUD-CARRY, %12 RULING 17:13)**: cable-fork consistency — reset_to_phase(k≥1) は arm+gripper のみ復元、env-core reset は cable を P0-settled に seed ゆえ k≥1 fork は空掴み mismatch。FIX (Stage-B MUST): (1) build_state_bank_from_recording に phase-k 境界 cable_xyz/quat capture 追加 + (2) env-level seed_cable_joint_state(banked cable_xyz, per-world offset-aware) を curriculum-fork reset の k≥1 branch に wire。cable restore は env-level (route_executor joint-index 不可: free-root world-offset が world≥1 誤配置)。plan §8(B) 同期。\n③ ⑨b online-numerator: residual≡0 × 81 live → 58/81 (live earned-clock + contact + physics)\n④ ⑥ 6-phase full-fire live (実 grip で cable carried)\n⑤ 58/81 wall/spacer exact predicate (mjModel geom introspection、center-dist≤3.5mm proxy → wall-dist≤0.5mm spacer-excluded)\n⑥ C2-seating 動画 gate (Rs 約束済、実 C2 groove scene)\n⑦ CABLE_XY_OFFSET per-cell wiring\n⑧ ⑬ enabler のみ (recorded-target-replay stub upgrade + C1-escape non-vacuous cell 供給; ⑬-VERDICT は D-2=trainer 段 defer)\n分子 conjoin = strict_v2 (C1-retention + C2-seat 両 leg)。trainer 段の policy 学習成果は本 node scope 外。\n現況 (2026-07-12 09:43, PLAN-KEEPER 反映): ⭐⭐**node CLOSED = COMPLETE-with-carry-forward (09:34、bank `bf088596a8`)** — core deliverable (faithful byte-repro oracle) DONE + banked `6d1cee5874`; open DoD ①-⑧ = orphan-zero 台帳で **明示 TRANSFER → `T-ROOT-optE-route-dapg-C1C2-P2-trainer`** (charter `TRAINER_NODE_DEFINE_RSTECHLEAD_20260712.md` §6; ⑥ C2-seating = ✅**CLOSED 2026-07-14 19:2x — Rs 動画 human-GT = OK** (Rs 逐語:「ケーブルが C1 の溝に入っているし C1 の底にもついている…C2 へのケーブル誘導、押し込みもできている」) ⛔旧記載「cell-2037 動画 Rs human-GT **REJECTED** [cable off C1] → Stage-C RL-deferred」は【偽・撤回 (PLAN-KEEPER 2026-07-14 19:5x)】— 却下は一度も起きていない ⇒ **Stage-C への RL-defer は解消** / comp3b = retired-as-standalone [⑦(b) に fold] / FORK-1 別 MW-node = trainer SUBSUME 起票不要化)。arc = scripted-executor → trainer(RL) pivot 完了。**以下 = 閉鎖前 snapshot (経緯、当時の記述 — 現在状態でない):** ⭐**comp3 残 DoD 消化 arc 開始** (Rs GO 06:29「1 go」、bank `994b2923c2`、executor %11 COORD; ⭐実行順訂正 06:45 [bank `a72b697c6b`]: **comp5** (C2-groove scene build、共有前提 — %11 fresh-read が env:636 C2 未 wire 捕捉→%12 独立確認+charter 内依存 ruling) → ⑥ full-fire (+C2-seat 相動画同載) → ⑨b 81-cell → comp3b、per-item 完了は %11→%12 ping; ⭐comp5 build ACCEPTED (13:56 `23d85014a9`) → ⭐**⑥ full-fire = NUMERIC_NOGO 確定** 14:46 [三者照合+confirmation-bias guard(no-C2 control byte-id)+%12 独立検証(bank `85b8982546`)+Rs human-GT; commit `65ae2c17fa`/`dd7c97d480`; video 納品 comp5_c2seat_fullfire_{ctx,c2zoom}.mp4]: ⭐comp5 C2-scene = **VALIDATED/EXONERATED**、原因 = ⭐**FORK-1 CONFIRMED** = builder-fork close-kinematics divergence (build_multiworld_scene[env-core] vs single-world locked build_scene・両者 world_count=1・world数でない)。⭐**DoD⑥ = B RESOLVED** (Rs「推奨でよい」03:24 07-12): env-core MW builder path は FORK-1 で BLOCKED のままだが C2-seating video は **single-world locked-runner seated-cell `2037_x-20_y-15_Fon` 経由で充足** (c2_seated_honest=true wall−0.257mm spacer-excl + c1_retained=true z_c1 828.9<840 → §運用29 両 leg conjoin PASS; 三者照合 AGREE = pB numeric=seated True + pC video=SEAT + §運用14 self-check = PLAUSIBLE valid seat; honest FLAGs 非 seat-blocker = span 94.7mm/tilt −10.99°/L transport 0N; 動画 ~/Downloads DoD6_C2seating_working_producer_2037_x-20_y-15.mp4 + working_C2seat_{OVERHEAD,FRONT}_zoom.mp4)。**⭐FORK-1 root cause CONFIRMED (04:18 %12 session_history) = (a1) open-loop drift amplification** (静的 param/build/pin/substep-fix では救えない=全 REFUTED [env vs producer 接触定数同一・pin=seg27≠grip24 category error・sub10 でも drop]; env-core 独立 cable settle の ~0.15mm 微差が ρ=0 開ループ replay で接触相カオス増幅 0.02→13.26mm → t280 grip 崩壊 → t499 drop)。**含意: fix = RL closed-loop policy (実 cable 再適応→drift 補正) or re-seed → Option B VINDICATED (env-core = valid RL substrate、DoD⑥ via producer 録画 妥当)**。⇒ **FORK-1 別 node 性質変化 = builder-fix → banked-finding + trainer-carry-forward** (Rs 反応後 %12 DEFINE→私 EXECUTE); 最終 = Rs human-GT (動画、numeric≠standalone PASS) = PENDING; ⚠§運用30 単一 seated cell demonstration ≠ seat-rate (58/81=⑨b 別 leg); arc 残 = ⑨b live 分子/comp3b/FORK-1 別 node; ⚠comp5 surface = C2-Y 0.000/0.075 LIVE 併存 (route_env_config:122-127、Rs batch review 待ち parked item))。先行 arc: **slot-redesign probe arc = 終結** (fork ④ = F-A 確定 CLOSED 02:2x `8dcf266314`、現行基準維持・再録画なし)。単軸 matrix closed = 機構同定: slot 過小説 REFUTED (footprint `44aacb92a5` = 22mm=pad-only・全軸 clear、条件 gate が 'slot 拡幅' 誤方向を GPU 前阻止) / 深さ単独不足 (flat sweep `5227d9e916` = 4-cell NUMERIC_NOGO) / 両腕 COUPLED via 共有 cable (per-arm `73c246f812` = prereg coupling-harmless REFUTED、『手前だけ修正』= 非独立 lever、L fail 予言的中); Rs#3 左右差 = flat 対称 → 旧 slot 接触 artifact。⭐L 解 = feedforward window のみ、trainer = (E or B) + D-b 窓 確定。comp3 scripted 駆動 = D ρ=0 CLOSED (23:28) は既達。⚠**残仮説 (未解決) = 中央支持が scoop-cage 把持を阻害する接触動力学** (支持 vs scoop 設計再考 = p5/VT intake)。point data (Rs#6) = STEP 表統合済 (工程表 v1.0a-r3 `f8d301cb86`)。⭐Rs 待ち (元2件、§運用10 は 09:01 RESOLVED→現 1件 active) = (1) C2-seating 動画の Rs human-GT (DoD⑥ 最終確認) → ✅**RESOLVED 2026-07-14 19:2x = OK** (Rs 動画 GT; path 自体は B RESOLVED 03:24) + (2) ⚠**§運用10 escalation** (04:18 %12 param照合中に発見) = Rs-LOCKED producer test_newton_clip_routing.py に +2036/-812 unbanked (LOCKED _run_mujoco_grasp_route 97 hunk = route-arc 拡張 [C2-scene/perclip_pin/cable_xy_offset/grasp_actuation] + pB tree-wide -f reformat) → ✅ **RESOLVED 09:01** (producer banked `6d1cee5874` [+2036/-812]、byte-repro ref-leg self-check x0_y0==golden RUN1_REFERENCE_V2 PASS [npz sha/ee/arm_q L-inf 0/strict_v2 EXACT]、**DoD gate-a closed**; LOCKED 編集不可ゆえ日本語コメント -f のみ失敗=正当 precedent); ⇒ ✅**active Rs 待ち = ゼロ (2026-07-14 19:2x 更新)** — C2-seating 動画 human-GT は Rs が判定済 (= OK)。⚠本 node 由来の Rs 待ちは無いが、**envbuild node の BLOCKED_FOR_USER #1 (pin の恒久 env 配線 = INVARIANT #5 の scope 拡張) は別件で OPEN** (renewal/論文 track CLOSED/vault監査 = 全裁定/完了)。前提済 = comp3+comp4 build + G1 診断 grid 完成 + SRG + Stage-A。詳細 = LEDGER 07-11 02:2x marker + session_history (%12/COORD bank)。node IN_PROGRESS 維持 (comp5-8 remain; C2-whiff=comp5 / table-edge retention CARRY)。\n",
+      "status": "COMPLETE",
+      "dependencies": [],
+      "parent": "T-ROOT-optE-route-dapg-C1C2",
+      "children": [],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-optE-route-dapg-C1C2-P2-trainer",
+      "goal": "RL 閉ループ policy (RLPD、residual-on-script primary per devplan D-C) で whole C1→C2 route を DR±20mm 下で達成し、FORK-1 (開ループ drift、静的 fix 全 REFUTED) を per-step feedback 補正で解消する。凍結 base = banked byte-repro oracle (6d1cee5874)。charter = eval_runs/troot_optE_dapg_wholeroute_scope_20260701/TRAINER_NODE_DEFINE_RSTECHLEAD_20260712.md (DEFINE banked、p1 verify PASS + P4 PASS 09:31)。authority = BCRL_DEVPLAN_LADDER_V2 (LEDGER row47、Rs W0-a′ 承認)。",
+      "means": "staged DoD (charter §3、DEFINE≠launch — campaign は全て HIGH-COST-GATE + production-launch-gate + fresh Rs GO):\nA. P2 env (L3 design-gate W0-c): oracle-query-API (CRIT1 phase-clock resolve) + progress scalar obs + contract 統一 + Δ非累積契約 (envelope = P4 ERRATUM 済: 実測 per-RL-step drift 直接比較、max ~1.9mm/RL-step ≪ bound 20mm — 旧「rate×decimation、mm/frame」は charter ERRATUM で撤回) + ⑦(b) cable-fork curriculum-reset 機構 + DR hooks (routeexec-⑦ env-level 継承) + OG port/composite/band 再較正 + throughput/device-parity smoke\nB. P3 demos: DR±20mm + script-SR-over-DR-grid 検収 + leg-2 batch\nC. R2b campaign: bar = Rs W0-a §4.3 確定値 (devplan draft ≥70% は illustrative)。carries: ⑨b live 分子 + 閉ループ full-fire + C2-seating video (Rs human-GT = Rs 専権、r5 §1.4 STEP16 CLASS-R)\nD. R3: 新規 off-policy trainer build ~500-800 LOC + campaign\nrouteexec ①-⑧ full disposition (orphan-zero) = charter §6。\n",
+      "status": "IN_PROGRESS",
+      "dependencies": [],
+      "parent": "T-ROOT-optE-route-dapg-C1C2",
+      "children": [
+        "T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild",
+        "T-ROOT-optE-route-dapg-C1C2-P2-trainer-stageA"
+      ],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild",
+      "goal": "banked Stage-A 設計 (STAGEA_TRAINER_ENV_DESIGN_GATE_RSTECHLEAD_20260712.md v0.8.1、全 gate PASS + Rs W0-a 承認) を env-core 上に実装する。対象 = route_t/HOLD/oracle-API/bank v2/DR+recenter+curriculum/export+会計/OG port/recording contract v2/smoke 一式 (est ~1.35-2.55k LOC)。charter = eval_runs/troot_optE_dapg_wholeroute_scope_20260701/W1_ENVBUILD_CHARTER_RSTECHLEAD_20260712.md (B0-B7 chunk 列)。設計判断は本 node で行わない — 疑義 = STOP → spec ERRATUM 手続き (charter §7-4)。campaign は不発効 (HIGH-COST + production-launch + fresh Rs GO 背後、不変)。",
+      "means": "charter §3 B0-B7 全 chunk close = node COMPLETE:\n- B0: c1pin revert + og format diff disposition + baseline sha pin\n- B1-B6: 各 chunk = L3 chain (pre 5体 [implementation-vs-spec fidelity scope] + [RULE-CHECK]) + chunk DoD legs + flag-OFF byte-preserve subset (毎 chunk、pinned baseline) + %10 audit + %12+%9 verify + explicit-path commit + p6 relay\n- B7: spec §8 smoke legs 全数 (bar = spec §8 表が正)。motion-bearing leg = 視覚レグ必須、物理妥当性正式 verdict = Rs video human-GT\n- 完了報告に §6 Rs 後決項 (OG band / mix 比率 / MAX_HOLD 再導出 / M-AB 時期) を単独項で同梱\n",
+      "status": "IN_PROGRESS",
+      "dependencies": [],
+      "parent": "T-ROOT-optE-route-dapg-C1C2-P2-trainer",
+      "children": [],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-optE-route-dapg-C1C2-P2-trainer-stageA",
+      "goal": "trainer charter §3-A / devplan §6 に基づき、banked env-core (spec v1.5h、newton_route_env.py f6ee1443f5) を trainer-grade に拡張する delta 設計を L3 design-gate で確定する。対象 = oracle-query-API (CRIT1 phase-clock 解決) / Δ-bound pin (P4 ERRATUM 済: per-RL-step 直接比較) / transition export / reward 成分ログ / DR hooks (CABLE_XY_OFFSET env wiring) / ⑦(b) curriculum-reset env 統合 (route_executor state-bank :314/:366 再利用 — ⚠spec §6.2 bank v2 が supersede [CRIT-1: 既存 bank は arm/gripper のみ、cable re-seed = build 項]) / OG port+composite+band 再較正 / device-parity smoke 計画。PAPER-ONLY / 0-build / 0-GPU。",
+      "means": "design-gate chain 全 PASS = node COMPLETE:\n1. delta-spec doc 起草 (基底 = P2_ROUTE_ENV_SPEC_INPUT v1.5h banked basis、live 値は task_config/後継 doc pointer)\n2. /reward-design 4 成果物 (delta scope) + /pre-check (BLOCK→fold→再走 収束)\n3. 5体 [VERIFY] (CC2 correctness / CC3 physics / CC4 RL / CC5 SSOT / CC6 NHA) DECIDE=PASS\n4. %9 (OPS-SUP) 9-lens cross-PV + %10/%11 audit\n5. 層5 多視点 (幾何/物理/SSOT)\n6. [RULE-CHECK] Tier0-3 + explicit-path bank + p6 cascade\nbuild 着手は本 gate PASS 後の別 stage (campaign は HIGH-COST + production-launch + fresh Rs GO 背後で不変)。\n",
+      "status": "COMPLETE",
+      "dependencies": [],
+      "parent": "T-ROOT-optE-route-dapg-C1C2-P2-trainer",
       "children": [],
       "session_history": []
     },
@@ -2200,7 +2312,8 @@
       "parent": "T-Skill",
       "children": [
         "T-AC-RewardRedesign-Phase1",
-        "T-Skill-AC-Cross-Skill-Apply-Transfer-Design"
+        "T-Skill-AC-Cross-Skill-Apply-Transfer-Design",
+        "T-Skill-AC-EEZ-Floor-Audit"
       ],
       "session_history": []
     },
@@ -2212,6 +2325,16 @@
       "dependencies": [
         "T-AC-RewardRedesign-Phase1"
       ],
+      "parent": "T-Skill-AC",
+      "children": [],
+      "session_history": []
+    },
+    {
+      "id": "T-Skill-AC-EEZ-Floor-Audit",
+      "goal": "AC env (thread_isaac_lab/envs/newton_approach_cable_mujoco_env.py) に、route-executor comp3 G1 で発覚した env-core EE_Z_FLOOR_KO clip 潜在欠陥 (G1 run-1 NUMERIC_NOGO 根因、lane-aware floor fix `65b5b9dd21` で解消) と同 class の EE-Z floor clip 欠陥が無いかを監査し、有れば同 class の lane-aware 修正を提案 (修正実装は別承認)、無ければ CLEAN と bank する。",
+      "means": "DoD: ① AC env の EE-Z floor / z-clip 系 code path を全数列挙 (grep + code read、absence-claim は全 build path 検索 [[feedback-absence-claims-grep-all-build-paths]]) ② env-core EE_Z_FLOOR_KO 欠陥 mechanism (route-executor node session_history 07-10 13:36 entry + `65b5b9dd21` diff) との照合表 ③ verdict = CLEAN or DEFECT-FOUND (+ 修正提案、実装は別承認)。\n",
+      "status": "IN_PROGRESS",
+      "dependencies": [],
       "parent": "T-Skill-AC",
       "children": [],
       "session_history": []
