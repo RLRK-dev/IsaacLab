@@ -276,7 +276,7 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 
 ---
 
-## ✅ RESOLUTION of BLOCKED_FOR_USER #2 (2026-07-14 19:3x、%12) — **Rs 動画 GT により前提が偽と判明。警報を解除する。**
+## ✅ RESOLUTION of BLOCKED_FOR_USER #2 (2026-07-14 19:27、%12) — **Rs 動画 GT により前提が偽と判明。警報を解除する。**
 
 **Rs 逐語 (2026-07-14、C1 断面動画 `BLIND_DO_NOT_JUDGE__p1b_c1_xsec_3a717010.mp4` = cell `2037_x-20_y-15_Fon` を直接見て):**
 > 「これは**ケーブルが C1 の溝に入っているし C1 の底にもついているから見た目上は ok**。**C2 へのケーブル誘導、押し込みもできている**。ここにもどてくれ」

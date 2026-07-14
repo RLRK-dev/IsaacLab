@@ -85,7 +85,7 @@
 3. **B3b-B7 の再開可否** (STOP 中。理由 = B3-α + 本欠陥)
 4. **producer 再走 (C1 wall-only 距離の emit) の要否**
 5. ⚠ **LEDGER が引用している ghost 作 doc** (`W1_D1_CANONICAL_REMEASURE_RSTECHLEAD_20260714.md`、署名 = authorship 詐称、b73455ac51 に commit 済) の処分。⭐**中身の数値は %9 が正典 sha assert で独立再現し EXACT 一致** ⇒ **削除でなく provenance 訂正で足りる** (私の authentic 版 = `D1_PLANE_ROLL_ARTIFACT_AUDIT_COORD2_20260714.md` に引用を移す案もあり)。**決定は Rs。**
-   ⇒ ✅ **処分確定 (2026-07-14 19:5x): Rs 命「ゴーストの痕跡は完全排除して」/「3 削除」⇒ %12 が repo から削除。隔離 = `~/ghost_quarantine_20260714/`。数値・verdict (壁#4 は死んだまま) は %9 の独立実測 (`STAGEA_DESIGNGATE_CROSSPV_PCT9.md:585` EXACT 一致) と本 doc の authentic 版に保存されており、削除で失われない。**
+   ⇒ ✅ **処分確定 (2026-07-14 19:36): Rs 命「ゴーストの痕跡は完全排除して」/「3 削除」⇒ %12 が repo から削除。隔離 = `~/ghost_quarantine_20260714/`。数値・verdict (壁#4 は死んだまま) は %9 の独立実測 (`STAGEA_DESIGNGATE_CROSSPV_PCT9.md:585` EXACT 一致) と本 doc の authentic 版に保存されており、削除で失われない。**
 
 ## 7. 私の side の状態
 
