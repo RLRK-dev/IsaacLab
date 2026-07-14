@@ -4695,16 +4695,33 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
             default=0.0,
         )
         _lat_bar_mm = _wall_inner_mm - CABLE_RADIUS * 1e3  # how far the cable centre may sit off the groove axis
-        _dx_seat_mm = abs(float(state.body_q.numpy()[seat_body, 0]) - x_clip) * 1e3  # x_clip = the RESOLVED clip centre (CLIP_X can move it), not the constant
+        _y_win_mm = max((float(mjm.geom_size[g][1]) for g in _clip1g), default=0.0) * 1e3  # the clip's Y window
+        _seat_w = state.body_q.numpy()[seat_body, :3].astype(float)
+        _dx_seat_mm = abs(float(_seat_w[0]) - x_clip) * 1e3  # x_clip = the RESOLVED clip centre, not the constant
+        _dy_seat_mm = abs(float(_seat_w[1]) - y_clip) * 1e3  # the domain leg: is the pinned body even AT the clip
+        # The contact leg has to be about the same body the other legs are about (p3, 2026-07-15). The min over ALL
+        # cable geoms can be satisfied by a neighbouring segment while the body we are about to weld hangs elsewhere:
+        # a conjunction whose legs have different subjects is not a conjunction. Read the pinned body's own geom --
+        # the same world-position match the pin itself uses below to find _seat_geom_mj.
+        _seat_geom_gate = (
+            min(cable_geoms, key=lambda g: float(np.linalg.norm(np.asarray(mjd.geom_xpos[g]) - _seat_w)))
+            if cable_geoms
+            else None
+        )
+        _touch_mm = _min_dist_mm([_seat_geom_gate], _clip1g) if _seat_geom_gate is not None else 9e9
         _c1_seated = bool(
-            c1_seat_dist <= 0.5 and abs(z_c1_seated - _groove_z_mm) <= 3.0 and _dx_seat_mm <= _lat_bar_mm
+            _touch_mm <= 0.5
+            and abs(z_c1_seated - _groove_z_mm) <= 3.0
+            and _dx_seat_mm <= _lat_bar_mm
+            and _dy_seat_mm <= _y_win_mm
         )
         if _seat_gate_on:
             print(
-                f"  [C2] C1 SEAT GATE: seated={_c1_seated} | touch {c1_seat_dist:+.3f}<=0.5mm "
+                f"  [C2] C1 SEAT GATE: seated={_c1_seated} | touch(seat-body) {_touch_mm:+.3f}<=0.5mm "
                 f"| z {z_c1_seated:.1f} vs {_groove_z_mm:.1f}+-3.0mm "
                 f"| lateral |dx| {_dx_seat_mm:.2f}<={_lat_bar_mm:.2f}mm "
-                f"(wall {_wall_inner_mm:.1f} - r {CABLE_RADIUS * 1e3:.1f})"
+                f"(wall {_wall_inner_mm:.1f} - r {CABLE_RADIUS * 1e3:.1f}) "
+                f"| domain |dy| {_dy_seat_mm:.2f}<={_y_win_mm:.1f}mm"
             )
 
         _ph("C1_PIN")
@@ -5689,8 +5706,11 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
                     "on": _seat_gate_on,
                     "seated": _c1_seated,
                     "refused_to_pin": _pin_refused,
+                    "touch_mm": round(_touch_mm, 3),  # the PINNED body's own geom vs the clip (not a neighbour's)
                     "dx_mm": round(_dx_seat_mm, 3),
                     "dx_bar_mm": round(_lat_bar_mm, 3),
+                    "dy_mm": round(_dy_seat_mm, 3),
+                    "dy_bar_mm": round(_y_win_mm, 3),
                     "wall_inner_mm": round(_wall_inner_mm, 3),
                     "groove_z_mm": round(_groove_z_mm, 1),
                 },
