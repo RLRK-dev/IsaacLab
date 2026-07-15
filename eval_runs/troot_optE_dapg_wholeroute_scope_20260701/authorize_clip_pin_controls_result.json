@@ -1,0 +1,150 @@
+{
+  "bars": {
+    "SEAT_LAT_BAR_M": 0.0034999999999999996,
+    "SEAT_Z_LO_M": 0.8210000000000001,
+    "SEAT_Z_HI_M": 0.8360000000000001,
+    "y_win_c1_m_from_model": 0.015,
+    "n_geoms_c1": 5,
+    "n_geoms_c2": 6
+  },
+  "pure_predicate": [
+    {
+      "leg": "P1_golden",
+      "seat": [
+        0.35,
+        0.15,
+        0.82968
+      ],
+      "expect_accept": true,
+      "got_accept": true,
+      "reason": "captured",
+      "PASS": true,
+      "catches": "golden seat (pB k28)"
+    },
+    {
+      "leg": "P2_arch",
+      "seat": [
+        0.35,
+        0.15,
+        0.83
+      ],
+      "expect_accept": true,
+      "got_accept": true,
+      "reason": "captured",
+      "PASS": true,
+      "catches": "arch float, old contact-leg trap"
+    },
+    {
+      "leg": "N1_aerial",
+      "seat": [
+        0.35,
+        0.15,
+        0.8809
+      ],
+      "expect_accept": false,
+      "got_accept": false,
+      "reason": "height z=880.9 not in (821,836)mm",
+      "PASS": true,
+      "catches": "880.9mm aerial weld (historic max)"
+    },
+    {
+      "leg": "N2_under",
+      "seat": [
+        0.35,
+        0.15,
+        0.816
+      ],
+      "expect_accept": false,
+      "got_accept": false,
+      "reason": "height z=816.0 not in (821,836)mm",
+      "PASS": true,
+      "catches": "under the clip (support-band top)"
+    },
+    {
+      "leg": "N3_lateral",
+      "seat": [
+        0.354,
+        0.15,
+        0.829
+      ],
+      "expect_accept": false,
+      "got_accept": false,
+      "reason": "lateral |dx|=4.00>3.50mm",
+      "PASS": true,
+      "catches": "4.0mm off-axis > 3.5mm wall"
+    },
+    {
+      "leg": "N4_domain",
+      "seat": [
+        0.35,
+        0.17,
+        0.829
+      ],
+      "expect_accept": false,
+      "got_accept": false,
+      "reason": "domain |dy|=20.00>15.00mm",
+      "PASS": true,
+      "catches": "20mm off in Y > 15mm window"
+    }
+  ],
+  "mechanism": [
+    {
+      "leg": "N5_support_seat",
+      "expect": "NotInAnyRouteClip",
+      "got": "NOT IN ANY ROUTE CLIP: seat @ [0.3, 0.05, 0.81] is inside no capture volume of the authori",
+      "PASS": true,
+      "catches": "support-clip trap (z-only controls are blind to it)"
+    },
+    {
+      "leg": "N5_selector_excludes_support",
+      "expect": "no x=0.30 geom in C1 selector",
+      "got": "support_geom_in_c1=False",
+      "PASS": true
+    },
+    {
+      "leg": "N6_built_c2_captured",
+      "expect": "captured & 5-6 geoms",
+      "got": "captured=True (captured) n_geoms=6",
+      "PASS": true,
+      "catches": "authorized-set content witness"
+    },
+    {
+      "leg": "N7_taskcfg_c2_broken_selector",
+      "expect": "count not in {5,6} -> BrokenSelector",
+      "got": "n_geoms_at_(0.40,0.075)=0",
+      "PASS": true,
+      "catches": "scene<->task drift (built C2 y=0.000 != task_config y=0.075)"
+    }
+  ],
+  "audit": [
+    {
+      "leg": "A_no_pin",
+      "expect": "pass (no-op)",
+      "got": "pass",
+      "PASS": true
+    },
+    {
+      "leg": "pin_candidates_present",
+      "expect": ">0",
+      "got": 40,
+      "PASS": true
+    },
+    {
+      "leg": "B_offclip_weld",
+      "expect": "AssertionError",
+      "got": "pin anchor audit: eq#0 anchored @ [0.35, 0.15, 0.8809] is outside every authorized route c",
+      "PASS": true
+    },
+    {
+      "leg": "C_legit_weld",
+      "expect": "pass",
+      "got": "pass",
+      "PASS": true
+    }
+  ],
+  "summary": {
+    "passed": 14,
+    "total": 14,
+    "ALL_PASS": true
+  }
+}

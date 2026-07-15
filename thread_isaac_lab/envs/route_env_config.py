@@ -138,6 +138,13 @@ HOLD_SPAN_TOL_M = 0.008
 # =====================================================================================================
 ROUTE_C1_XY = (0.35, 0.150)  # [m] meta CLIP_X/CLIP_Y = resolved_clip_c1_xy (== task_config CLIP_POSITIONS[0]; no drift)
 ROUTE_C2_XY = (0.40, 0.000)  # [m] meta CLIP2_X/CLIP2_Y = resolved_clip_c2_xy (Rs 07-05; != task_config (0.40, 0.075))
+# Authorized route-clip centres -- the ONLY (cx, cy) [m] the clip-retention pin may anchor at (RS71 §0 INVARIANT
+# #5 clip-only, Rs 2026-07-15; design RLENV_PIN_DESIGN_VTDESIGN_20260715 §15.1). ``authorize_clip_pin`` IMPORTS
+# this set rather than taking a centre argument, so "clip only" is a mechanism, not caller discipline: a support
+# jig (x=0.30, the cable's initial straight-pose fixture) is NOT here, so a frame-0 seat in one cannot be
+# authorized (design §14.1). 5-clip generalisation = extend THIS one tuple; the geom-count assert then RAISEs
+# until the scene actually builds that clip (deferral is mechanical, design §15.2).
+ROUTE_CLIP_CENTERS = (ROUTE_C1_XY, ROUTE_C2_XY)
 ROUTE_CLIP_FLOAT_Z = 0.020  # [m] meta CLIP_FLOAT_Z: routing clips float 20mm above the table (SPACER-supported)
 # Route seat/groove z = task_config base groove + float (== route_c2_pin.json groove_z_mm 829). Used by the
 # seat/groove predicate (_seat_metrics) AND the built clip z; the two MUST agree (%12 build+predicate flag).
@@ -251,6 +258,7 @@ _ROUTE_OWNED_PARAM_NAMES = {
     "HOLD_SPAN_TOL_M",
     "ROUTE_C1_XY",
     "ROUTE_C2_XY",
+    "ROUTE_CLIP_CENTERS",
     "ROUTE_CLIP_FLOAT_Z",
     "ROUTE_GROOVE_Z",
     "SEAT_LAT_BAR_M",

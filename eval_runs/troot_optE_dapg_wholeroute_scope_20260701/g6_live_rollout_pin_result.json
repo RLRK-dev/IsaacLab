@@ -1,0 +1,47 @@
+{
+  "pin_onset_frame": 2544,
+  "pin_seat_seg": 27,
+  "pin_fired": true,
+  "pin_fire_step": 254,
+  "pin_witness": {
+    "activated": true,
+    "eq_id": 27,
+    "eq_obj1_mjc_body": 56,
+    "seat_body_newton": 55,
+    "position_match_mm": 0.0001,
+    "eq_active_readback": 1,
+    "seat_world": [
+      0.35093,
+      0.14882,
+      0.82754
+    ],
+    "onset_frame": 2544,
+    "fired_at_frame": 2544
+  },
+  "onset_seat_world": [
+    0.3509,
+    0.1488,
+    0.8275
+  ],
+  "onset_seat_dx_c1_mm": 0.93,
+  "onset_seat_dy_c1_mm": 1.18,
+  "authorizer_raise": null,
+  "audit_raise": null,
+  "other_raise": null,
+  "early_done": 343,
+  "c1_retained_ever": true,
+  "g_latched_max": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    0
+  ],
+  "final_c1_z_mm": 0.84,
+  "final_flank_mm": 827.6,
+  "max_phase": 3,
+  "steps_run": 344,
+  "FM_E_authorizer_accepts_onset": true,
+  "FM1_c1_retained_reachable": true
+}

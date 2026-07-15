@@ -807,6 +807,211 @@ def activate_c1_pin(solver, seat_body_newton, seat_world, match_tol_m=5e-3):
     return witness
 
 
+class BrokenSelector(RuntimeError):
+    """An authorized route-clip centre has a geom count that cannot be a built V-groove clip (not in {5, 6}).
+
+    Raised by :func:`authorize_clip_pin` (design §15.2 scene<->task tripwire; §14 (4) the built C2 at y=0.000 vs
+    the ``task_config`` C2 at y=0.075). The count assert exists because the empty-set case is fail-LUCKY, not
+    fail-closed (§14.2): an empty geom set yields a garbage bar rather than a refusal, so the *machinery* is
+    mis-wired -- this must NOT be printed as "cable not seated", which would blame the cable for a scene/task drift.
+    """
+
+    def __init__(self, center, n):
+        self.center = tuple(round(float(c), 4) for c in center)
+        self.n = int(n)
+        super().__init__(
+            f"BROKEN SELECTOR: authorized route clip {self.center} has {self.n} clustered worldbody BOXes "
+            "(expected 5 or 6). The built scene and the task's ROUTE_CLIP_CENTERS have drifted -- fix the scene "
+            "or the authorized set. Do NOT read this as 'cable not seated' (the pin machinery is mis-wired)."
+        )
+
+
+class NotInAnyRouteClip(RuntimeError):
+    """The seat world position lies inside no authorized route clip's capture volume.
+
+    Raised by :func:`authorize_clip_pin` (design §15.1): the clip-only guarantee firing. A seat at a support jig
+    (x=0.30, §14.1), in the air (§15.5 N1, up to 880.9 mm historically), under a clip (N2, 816 mm), or off-axis
+    (N3/N4) is refused rather than welded -- welding it would place a kinematic pin outside the Rs clip-only
+    authorization (RS71 §0 INVARIANT #5).
+    """
+
+    def __init__(self, seat_world, centers, reasons=None):
+        self.seat_world = np.asarray(seat_world, dtype=float).round(4).tolist()
+        self.centers = [tuple(round(float(x), 4) for x in c) for c in centers]
+        detail = f" per-clip: {reasons}" if reasons else ""
+        super().__init__(
+            f"NOT IN ANY ROUTE CLIP: seat @ {self.seat_world} is inside no capture volume of the authorized "
+            f"route clips {self.centers}.{detail} Welding it is outside the clip-only pin authorization "
+            "(RS71 §0 INVARIANT #5)."
+        )
+
+
+def clip_geoms_at(mjm, mjd, cx, cy, xy_tol=0.03):
+    """The worldbody collision BOXes clustered within ``xy_tol`` of a clip centre.
+
+    Module-level form of the route gate's nested ``_clip_geoms`` (:2190): the 5 (or 6, with a spacer) small
+    V-groove BOXes parented to the worldbody (bodyid 0) at ``(cx, cy)``. Used as the scene<->task count tripwire
+    (design §15.2) and as the capture-volume witness. A clip's parts cluster within 30 mm of its centre; the
+    far-Y table is excluded by the same XY gate, and a neighbouring clip 50 mm away (support x=0.30 vs route
+    x=0.35) is excluded too -- the XY gate is a deliberate discriminator (design §17.1).
+
+    Args:
+        mjm: the CPU ``mj_model``.
+        mjd: the CPU ``mj_data`` (its ``geom_xpos`` is refreshed here).
+        cx: clip centre X [m].
+        cy: clip centre Y [m].
+        xy_tol: half-window [m] for the XY cluster gate.
+
+    Returns:
+        The list of geom ids (ints) at this clip.
+    """
+    import mujoco
+
+    mujoco.mj_forward(mjm, mjd)
+    box = int(mujoco.mjtGeom.mjGEOM_BOX)
+    return [
+        g
+        for g in range(int(mjm.ngeom))
+        if int(mjm.geom_type[g]) == box
+        and int(mjm.geom_bodyid[g]) == 0
+        and abs(float(mjd.geom_xpos[g][0]) - cx) < xy_tol
+        and abs(float(mjd.geom_xpos[g][1]) - cy) < xy_tol
+    ]
+
+
+def clip_capture_predicate(seat_world, cx, cy, lat_bar_m, y_win_m, z_lo_m, z_hi_m):
+    """Is the point ``seat_world`` inside clip ``(cx, cy)``'s capture volume? Pure -> unit-testable (N1-N7).
+
+    Three SEPARATE legs, mirroring the route gate's point-in-box test (:3074-3078): lateral ``|x - cx| <=
+    lat_bar_m`` (wall inner face minus cable radius), domain ``|y - cy| <= y_win_m`` (is the body even AT the
+    clip), and floor/rim ``z_lo_m < z < z_hi_m``. The floor leg (821 mm) is the ONLY one that rejects a support
+    clip's 801-816 mm capture band (design §15.6); lateral is the ONLY identity leg -- the other two read the same
+    on either side of the wall and on the shelf (design §18).
+
+    Args:
+        seat_world: candidate anchor ``(x, y, z)`` [m].
+        cx: clip centre X [m].
+        cy: clip centre Y [m].
+        lat_bar_m: max off-axis lateral distance [m] (built model: wall inner face - cable radius).
+        y_win_m: half-window in Y [m] (the clip's own Y extent).
+        z_lo_m: capture-volume floor [m] (below = cable under the clip).
+        z_hi_m: capture-volume rim [m] (above = cable over the rim).
+
+    Returns:
+        ``(captured, reason)``: ``reason`` names the failing leg on rejection, ``"captured"`` on pass.
+    """
+    x, y, z = float(seat_world[0]), float(seat_world[1]), float(seat_world[2])
+    dx, dy = abs(x - cx), abs(y - cy)
+    if dx > lat_bar_m:
+        return False, f"lateral |dx|={dx * 1e3:.2f}>{lat_bar_m * 1e3:.2f}mm"
+    if dy > y_win_m:
+        return False, f"domain |dy|={dy * 1e3:.2f}>{y_win_m * 1e3:.2f}mm"
+    if not (z_lo_m < z < z_hi_m):
+        return False, f"height z={z * 1e3:.1f} not in ({z_lo_m * 1e3:.0f},{z_hi_m * 1e3:.0f})mm"
+    return True, "captured"
+
+
+def authorize_clip_pin(solver, seat_body, seat_world, match_tol_m=5e-3):
+    """The SINGLE authorized entry to a clip-retention pin: clip-only by MECHANISM (design §15.1; RS71 §0 #5).
+
+    Wraps :func:`activate_c1_pin` behind a gate that makes "clip only" (Rs 2026-07-15) a mechanism, not caller
+    discipline:
+
+    * the authorized set :data:`route_env_config.ROUTE_CLIP_CENTERS` is IMPORTED here, never passed in -- a
+      caller cannot smuggle a support-jig centre (design §15.1);
+    * each authorized centre's geom count must be in ``{5, 6}`` or :class:`BrokenSelector` is raised (scene<->task
+      tripwire, design §15.2 / §14.2);
+    * the seat must fall inside some route clip's built-model capture volume or :class:`NotInAnyRouteClip` is
+      raised (design §15.5).
+
+    Only on authorization is the eq written, by the existing single writer :func:`activate_c1_pin` (design §15
+    "eq write is the only one"). Every rejection RAISES -- a guard that fails silently cannot be told from one
+    that cannot fire (design §12).
+
+    Args:
+        solver: the env's ``SolverMuJoCo`` (CPU backend; exposes ``mj_model`` / ``mj_data``).
+        seat_body: the runtime seat body index, in the ENV's Newton body space.
+        seat_world: that body's world position [m], shape (3,) -- the authorization point AND the anchor.
+        match_tol_m: the eq world-position match gate [m], forwarded to :func:`activate_c1_pin`.
+
+    Returns:
+        The activation witness dict from :func:`activate_c1_pin`.
+    """
+    import mujoco
+
+    mjm = getattr(solver, "mj_model", None)
+    mjd = getattr(solver, "mj_data", None)
+    if mjm is None or mjd is None:
+        raise RuntimeError(
+            "authorize_clip_pin: solver exposes no mj_model/mj_data -- the clip-only pin cannot be authorized."
+        )
+    mujoco.mj_forward(mjm, mjd)
+    sw = np.asarray(seat_world, dtype=np.float64).reshape(3)
+    reasons = []
+    for cx, cy in rc.ROUTE_CLIP_CENTERS:
+        g = clip_geoms_at(mjm, mjd, cx, cy)
+        if len(g) not in (5, 6):
+            raise BrokenSelector((cx, cy), len(g))
+        y_win_m = max((float(mjm.geom_size[gi][1]) for gi in g), default=0.0)
+        ok, why = clip_capture_predicate(sw, cx, cy, rc.SEAT_LAT_BAR_M, y_win_m, rc.SEAT_Z_LO_M, rc.SEAT_Z_HI_M)
+        if ok:
+            return activate_c1_pin(solver, seat_body, seat_world, match_tol_m=match_tol_m)
+        reasons.append(f"{(round(cx, 3), round(cy, 3))}:{why}")
+    raise NotInAnyRouteClip(sw, rc.ROUTE_CLIP_CENTERS, reasons)
+
+
+def audit_pin_anchors(mjm, mjd):
+    """Episode-end invariant: EVERY fired clip pin is anchored inside an authorized route clip (design §15.4).
+
+    Scans the eq table for FIRED pin candidates (``eq_type == CONNECT`` and ``eq_obj2id == 0`` and
+    ``eq_active0 == 0`` and ``eq_active == 1`` -- the pre-allocated, initially-disabled connect-to-world eqs that
+    got switched on) and asserts each world anchor ``eq_data[3:6]`` lies inside some
+    :data:`route_env_config.ROUTE_CLIP_CENTERS` capture volume. This is who-wrote-it-agnostic: it catches a
+    bypass write (an ``eq_active`` flipped without the authorizer) and the 58 historical aerial welds (up to
+    880.9 mm), because the evidence is in model state, not in the call graph (design §15.4). Also asserts at most
+    ``len(ROUTE_CLIP_CENTERS)`` pins fired (double-pin guard, design §15.3). Raises :class:`AssertionError` on
+    violation.
+
+    Args:
+        mjm: the CPU ``mj_model``.
+        mjd: the CPU ``mj_data``.
+    """
+    import mujoco
+
+    mujoco.mj_forward(mjm, mjd)
+    connect = int(mujoco.mjtEq.mjEQ_CONNECT)
+    fired = [
+        i
+        for i in range(int(mjm.neq))
+        if int(mjm.eq_type[i]) == connect
+        and int(mjm.eq_obj2id[i]) == 0
+        and int(mjm.eq_active0[i]) == 0
+        and int(mjd.eq_active[i]) == 1
+    ]
+    n_auth = len(rc.ROUTE_CLIP_CENTERS)
+    if len(fired) > n_auth:
+        raise AssertionError(
+            f"pin anchor audit: {len(fired)} pins fired > {n_auth} authorized route clips (double-pin, §15.3)"
+        )
+    for i in fired:
+        anchor = np.asarray(mjm.eq_data[i][3:6], dtype=np.float64)
+        inside = False
+        for cx, cy in rc.ROUTE_CLIP_CENTERS:
+            g = clip_geoms_at(mjm, mjd, cx, cy)
+            if len(g) not in (5, 6):
+                continue  # a broken selector is caught at fire time; the audit only judges the anchor position
+            y_win_m = max((float(mjm.geom_size[gi][1]) for gi in g), default=0.0)
+            ok, _ = clip_capture_predicate(anchor, cx, cy, rc.SEAT_LAT_BAR_M, y_win_m, rc.SEAT_Z_LO_M, rc.SEAT_Z_HI_M)
+            if ok:
+                inside = True
+                break
+        if not inside:
+            raise AssertionError(
+                f"pin anchor audit: eq#{i} anchored @ {anchor.round(4).tolist()} is outside every authorized "
+                "route clip capture volume -- an off-clip weld (bypass write or aerial pin, §15.4)."
+            )
+
+
 def resolve_pin_eq_index(eq_identity, mjc_seat_body, eq_connect_type=None):
     """Re-resolve the clip-pin equality by IDENTITY -- the CONNECT eq whose obj1 is the seat body, obj2 the world.
 

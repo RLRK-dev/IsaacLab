@@ -1704,9 +1704,12 @@ class NewtonRouteEnv(VecEnv):
         recorder/solver lag as 0), and the seat is resolved in the ENV's own body space by WORLD POSITION, never
         by transplanting the producer's body index -- that is the B3-alpha mistake.
 
-        Unlike its 07-12 ancestor, this latches ONLY on success. Every failure raises (see
-        :func:`route_executor.activate_c1_pin`), because a pin that silently never fired produced a run that was
-        then scored as "the pin does not work" -- and the artifact could not tell the two apart.
+        Unlike its 07-12 ancestor, this latches ONLY on success and fires through the clip-only authorizer
+        :func:`route_executor.authorize_clip_pin`, which RAISES (``BrokenSelector`` / ``NotInAnyRouteClip``)
+        unless the seat is inside an authorized route clip's capture volume -- the pin may weld ONLY at a clip
+        seat (RS71 §0 INVARIANT #5, clip-only RL-env scope, Rs 2026-07-15). Every failure raises, because a pin
+        that silently never fired produced a run that was then scored as "the pin does not work" -- and the
+        artifact could not tell the two apart.
         """
         if not self._route_c1_pin or self._c1_pin_witness is not None or self._pin_onset_frame is None:
             return
@@ -1719,7 +1722,10 @@ class NewtonRouteEnv(VecEnv):
         bq = self._state_0.body_q.numpy()
         cable = np.asarray(self._cable_bodies[0], dtype=int)
         seat_body = int(cable[int(self._pin_seat_seg)])  # the recording's seat, in THIS env's body numbering
-        self._c1_pin_witness = rex.activate_c1_pin(self._solver, seat_body, bq[seat_body, :3])
+        # clip-only pin: authorize_clip_pin wraps the single eq writer, raising unless seat_world is inside an
+        # authorized route clip's capture volume (RS71 §0 INVARIANT #5, design §15.1). Same args/return as the
+        # bare writer -- only a gate is added in front of it.
+        self._c1_pin_witness = rex.authorize_clip_pin(self._solver, seat_body, bq[seat_body, :3])
         self._c1_pin_witness["onset_frame"] = int(self._pin_onset_frame)
         self._c1_pin_witness["fired_at_frame"] = int(step_f[t]) + int(sub_i)
 
@@ -1801,6 +1807,15 @@ class NewtonRouteEnv(VecEnv):
 
         done_ids = dones.nonzero(as_tuple=False).squeeze(-1)
         if len(done_ids) > 0:
+            if self._route_c1_pin:
+                # §15.4 episode-end invariant: every fired clip pin must anchor inside an authorized route clip.
+                # Runs BEFORE _reset_worlds (which may clear eq_active). Who-wrote-it-agnostic -> catches a
+                # bypass write / aerial weld regardless of caller. No-op (empty scan) when no pin has fired.
+                import route_executor as rex  # lazy, path set in _build_route_executor (mirrors :1717)
+
+                _pin_solver = self._solver
+                if getattr(_pin_solver, "mj_model", None) is not None:
+                    rex.audit_pin_anchors(_pin_solver.mj_model, _pin_solver.mj_data)
             self._reset_worlds(done_ids.cpu().tolist())
             # W1-B1 consumer 6 (Stage-A sec 4.1 H6): per-world re-fork on done-reset. k=0 = env-authoritative
             # reset = structural no-op today (stub records only; RouteExecutor early-returns on k==0);
