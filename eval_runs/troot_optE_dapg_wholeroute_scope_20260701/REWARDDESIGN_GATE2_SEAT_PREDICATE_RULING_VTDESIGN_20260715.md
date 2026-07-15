@@ -197,3 +197,36 @@ z[mm]                     interp が測る点 = ●(x_cross, z_cross)  ← y=cli
 | defect #3 撤回済前提 | `harness/state/ANCHOR_STEPTABLE_ALIGNMENT_p4p5_20260712.md` 冒頭 RETRACTED 2026-07-14 19:27（Rs GT = C1 seated OK） |
 | §16.2 / §18 統合 | `RLENV_PIN_DESIGN_VTDESIGN_20260715.md §16.2`（C2 棚）/ `§18`（境界≠同一性）|
 | prior-art guard | `check_thread_vault_prior_art.sh "seat predicate interpolation" "nearest-in-Y quantization" …` ⇒ PASS（findings=0 blockers=0、2026-07-15 20:5x）|
+
+---
+
+## §11 §8(b) の実装 coupling 裁定（%12 の問いへの回答、2026-07-16 01:2x、post-bank addendum）
+
+**%12 の問い:** c1_retained を interp dx に差し替えると frozen recount / DoD-9a mirror と乖離する。§8(b) の意図は (i) frozen から decouple（DoD-9a mirror を drop、RL env 独自 interp）か (ii) producer re-run と coupling か?
+
+**⛔ 答えは (i) でも (ii) でもない = (iii)。%12 の message でなく on-disk を読んで裁定:**
+
+| 決定的事実 | cite | 帰結 |
+|---|---|---|
+| frozen recount は **npz の node 位置から計算** | `p9_recount_strict_v2.py:41-44` `flank_from_npz`（`z["cable_xyz"][-1]` → `cab[:,1]`/`cab[:,2]`）。`cable_xyz` = recorder が全 node 記録（`route_demo_recorder.py:279`） | ⇒ **interp-dx は同 npz からオフライン再計算可能・sim 不要** |
+| DoD-9a = **live 自己計算 == frozen recount**（両方 位置から導出） | `newton_route_env.py:1286-1287` / `:1289-1291`（live `_c1_retention_m` は `flank_from_npz` の EXACT mirror） | ⇒ **両側を interp 化すれば DoD-9a は保存**（interp は位置の決定的関数 ⇒ 位置が一致すれば interp も一致） |
+| c2_honest は **`_seat_metrics` を呼ぶ** | `:1317` `seat_dist,z_gap,_ = self._seat_metrics(cable_pos, _C2_XY)`。`:1314` = 「geometric **proxy**」（byte-mirror でない、DoD gate 無し） | ⇒ **G3/G5 の interp 化で自動追従**。gate は壊れない |
+
+### §11.1 裁定 = (iii) mirror を保ち、両側を interp 化する
+
+1. **G3/G5**（`_seat_metrics` 直読）: interp 化。self-contained。✅
+2. **c2_honest**（`_seat_metrics` を呼ぶ proxy）: **自動で interp 化**。producer の defective な `_c2_settled` に byte-mirror されていない（proxy ⇒ live が producer より正しくなるだけ、§16.2 で producer は defective と確定済）。gate 破壊なし。✅
+3. **c1_retained**（DoD-9a mirror）: **live `_c1_retention_m` と frozen recount `flank_from_npz` の【両側】に interp-dx レグを足す**。frozen 側は既存 npz `cable_xyz` から**オフライン再導出**（sim 不要）。⇒ DoD-9a「live==frozen」は**保存され**、今度は正しい計器を validate する。
+
+### §11.2 ⛔ (i) は誤り / (ii) は c1_retained には不要
+
+- **(i) decouple は誤り**: DoD-9a を drop すると「live 自己計算が正しい（frozen reference と一致）」という**不変条件を捨てる**。⚠ 不変条件が問題なのではない、**両側が共有していた def（z-only）が問題**。def を直して不変条件は保て。
+- **(ii) producer-couple は c1_retained には不要**: c1_retained の frozen reference は **オフライン recount（`flank_from_npz`、npz 由来）であって producer-sim-emitted metric ではない**。interp 再導出に sim 再走は要らない。⇒ **§9 の producer re-run は route/runner の *producer 自身の* seat/settle 計器（`route_executor.py:3881` / `policy_route_runner.py:309`）のためであって、RL 訓練 env の G6 とは別 concern。**
+
+### §11.3 ⇒ RL env の G6 は【完全 self-contained】
+
+interp `_seat_metrics`（G3/G5 + c2_honest 自動）+ c1_retained/recount の両側 interp-dx（オフライン）= **1 ヘルパ + 1 オフライン recount 再導出**。**producer sim 再走を待たずに今 実装できる。**
+
+### §11.4 ⚠ 副次 flag（gate-validated-under-the-bug の自己テスト）
+
+frozen recount を interp-dx で再導出することは、**frozen validated demo の自己テスト**でもある —「その demo は interp-dx bar を実際に通るか?」。もし demo の C1Y でケーブルが軸外（|dx| 大）なら **frozen demo は新 c1_retained を FAIL する**（旧 z-only は通していた = [[feedback-a-gate-validated-under-the-bug-is-validated-by-the-bug-2026-07-15]]）。⇒ その時は **demo の Rs 動画 re-validation 案件**（demo の「保持」が z-only で certified されていた）であって **interp fix の bug ではない**。block させず surface せよ。
