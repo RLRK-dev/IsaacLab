@@ -230,3 +230,97 @@ interp `_seat_metrics`（G3/G5 + c2_honest 自動）+ c1_retained/recount の両
 ### §11.4 ⚠ 副次 flag（gate-validated-under-the-bug の自己テスト）
 
 frozen recount を interp-dx で再導出することは、**frozen validated demo の自己テスト**でもある —「その demo は interp-dx bar を実際に通るか?」。もし demo の C1Y でケーブルが軸外（|dx| 大）なら **frozen demo は新 c1_retained を FAIL する**（旧 z-only は通していた = [[feedback-a-gate-validated-under-the-bug-is-validated-by-the-bug-2026-07-15]]）。⇒ その時は **demo の Rs 動画 re-validation 案件**（demo の「保持」が z-only で certified されていた）であって **interp fix の bug ではない**。block させず surface せよ。
+
+---
+
+## §12 design-owner verify verdict（実装 `70fc791359` の on-disk 照合、2026-07-16 04:0x）
+
+⚓ producing commit で照合（HEAD==`70fc791359`）。数値計器ゆえ code 照合 + synthetic ground-truth（動画不要、最終捕捉は Rs 動画のまま）。
+
+**判定 = ✅ PASS（設計に忠実、独立確認済、1 点は spec を上回る改良）。**
+
+| 設計点 | 実装 cite | 判定 |
+|---|---|---|
+| interp helper（straddle 検出・線形補間・dy≡0） | `newton_route_env.py:1295-1304` | ✅ |
+| S字 複数交差の選択 | `:1307` `lexsort((dx, where(in_band,0,1)))` = **in-band 優先 → min-dx** | ✅ ⭐**spec の pure-min-dx を上回る**（帯外 stray が帯内着座を隠すのを防ぐ、shelf は dx レグで拒否維持） |
+| fail-closed（無交差） | `:1299-1300` None → `:1327` `(_SEAT_MISS_DX_M=9.0, 0.0)` ⇒ dx レグ(9≫3.5)+z レグ(0∉band) 二重 reject | ✅ |
+| split leg・built-model bar | `:1315` `_seated_in_groove` = `dx≤SEAT_LAT_BAR_M(0.0035) ∧ SEAT_Z_LO(0.821)<z<SEAT_Z_HI(0.836)`、`route_env_config.py:154-158`（全て built model、T_GROOVE=3mm supersede） | ✅ |
+| G3/G5 配線 | `:1550` `p3=c1_seated ∧ ph≥2` / `:1552` `p5=c2_seated`（`T_GROOVE` 参照消滅） | ✅ |
+| c1_retained interp 化（defect#2） | `:1516` `c1_retained=c1_seated`（z-only 撤廃） | ✅ |
+| c2_honest auto-follow | `:1517` `c2_honest=c2_seated`（`_seat_metrics` 経由） | ✅ |
+| `_crossing_x_dev` 第4現場 | `:1341-1347` 真の補間（drop は fail-OPEN=妥当な非対称） | ✅ |
+| 全 caller 2-tuple 化 | `:1447` / `:1510-1511` / `:1339`（3-tuple 期待の残存なし、外部 caller 無し） | ✅ |
+| §16.2 C2 棚 blocker 同時 closure | 下記 S4 = code で REJECT 確認 | ✅ ⭐§9 の統合を code で実証 |
+
+**独立 ground-truth（%12 の「S0-S5 PASS」を鵜呑みにせず、code を verbatim 複製して自分で実行、scratchpad）:**
+```
+S0 centred     dx=0.50mm z=829 seated=True   (node dy 無関係=量子化床消滅)
+S1/S2 node-off dx=0.50mm z=829 seated=True   (旧: FN、seat_dist 3.73/7.34)
+S3 wall-rest   dx=3.40mm z=829 seated=True   (旧 3mm bar なら誤 reject)
+S4 shelf       dx=14.50mm z=829 seated=False (in-band z でも dx レグが棚を拒否=§16.2 閉)
+S5 unseated    dx=20.00mm       seated=False
+S字 in-band 優先: dx=3mm z=829 を選択=True / 無交差: fail-closed=False   → ALL PASS
+```
+
+### §12.1 ⚠ 非 blocker flag（3 件、%9/%12 へ）
+1. **File B（frozen recount）未更新 = docstring 先走り**: `:1293/:1336/:1515` は「DoD-9a (live==frozen) holds」と**断言**するが、frozen 側 `p9_recount_strict_v2.flank_from_npz` は**まだ z-only**（%12 が %9 artifact ゆえ deferred）。⇒ 現状 live=interp-dx ≠ frozen=z-only ⇒ **DoD-9a は今 走れば FAIL**。**非 blocker**（DoD-9a は comment、runtime assert なし=確認済）だが docstring は「once File B updated (pending %9)」と限定すべき。⭐ **%9 の File B 更新は §11.4 の demo 自己テストでもある**（demo が interp-dx を通るか）。
+2. **obs[58-61] semantics 変化**: `_seat_metrics` の戻りが (seat_dist,z_gap,lateral)→(dx,z_cross) ⇒ obs dim が別量を運ぶ。**訓練前ゆえ問題ないが、BC prior/demo が旧 obs semantics で記録されていれば train/demo mismatch を要確認**（%12 downstream）。
+3. **minor**: `_SEAT_MISS_DX_M=9.0`（`:1279`）は機能上 reject で正しいが 9.0「m」は sloppy sentinel（nit）。
+
+**⇒ RL env の interp fix = 設計忠実・独立確認済で PASS。gate ② は fix 実装済だが、正式 PASS は `/pre-check`（③）+ File B(%9) 整合後。最終捕捉 verdict は Rs 動画のまま。**
+
+---
+
+## §13 /pre-check FM3/FM4 の裁定（%12 上程、2026-07-16 04:2x）— **両方 TIGHTEN**
+
+%12 の `/pre-check` が 2 件の MED design-boundary を surface。両方とも **reward-exploit vector** ⇒ 訓練前に閉じる（reward-design 規律: exploit は agent が学習する前に close）。⛔ %12 の記述でなく drop 述語・producer identity leg・RL env の seat-body 情報を on-disk 読了。
+
+### §13.1 FM4（優先＝primary exploit）— **seat に routed-segment identity leg を足す**
+
+⭐ **これは §18 の教訓が私自身の fix を刺した。** 私の interp fix は交差**位置**の identity（dy=0）を足したが、**どの segment の交差か**（routed か stray-loop か）の identity を足していない。`_seat_crossing`（`:1298-1307`）は **全 straddling segment** を探索し min-dx（in-band 優先）を採る ⇒ **routed segment が溝外 ＋ 非 routed loop が溝内**（Case B）だと **loop を seated と読む false-positive**。
+
+- **exploit**: 偽 seated ⇒ G3/G5 が偽 latch（+5 each）⇒ ORDERED chain を偽進行 ⇒ +200 へ。**primary な success-signal 汚染。** RL 探索は +5 に gradient を持つ ⇒ 到達する。
+- **producer は既にこれを閉じている**: `route_executor.py:3074-3078` は **特定 seat-body** の位置で測る（`_dy_seat_mm ≤ _y_win_mm` = seat-body の Y-window identity）。§9 の統合原則「producer の identity leg を全 seat site へ」の未適用分。
+- **裁定 = TIGHTEN**: `_seat_crossing` の探索を **clip の expected routed seat-segment の node-index window に限定**する。RL env は identity 情報を持つ（`_pin_seat_seg` = C1 seat segment `:1721` / `_target_seg_indices` `:513`）。window 内の straddling segment のみ考慮 ⇒ window 外の stray loop は選べない。⇒ producer の seat-body identity の interp 版。
+  - ⚠ 実装 note（%12）: C1 の window source = `_pin_seat_seg`。C2(G5) の expected segment source が readily available でなければ surface せよ（別 source or 下記 fallback）。
+  - fallback（seat-body 追跡が無い場合）: 「交差 segment が **局所 Y-monotone な routed span**（≥K seg、loop は局所 Y 反転を持つ）の一部」= identity の heuristic。producer の seat-body identity が第一候補。
+- ⚠ **quantization fix と両立**: window 内でも interp は dy=0 の dx を返す（量子化フリー維持）。window は stray を除くだけ。
+
+### §13.2 FM3（secondary＝failure-mode incentive）— **escape guard を post-seat で fail-closed 化**
+
+`_crossing_x_dev` の no-crossing→0.0（fail-open、`:1347`）は、cable が y=C1Y を跨がなくなる極端 escape で lateral-escape drop（`:1543`）を沈黙させる。%12: 偽成功は無し（seat gate が reject）だが escape guard が消える。
+
+- **exploit math**: escape（no-crossing）⇒ lateral_dev=0 ⇒ drop せず ⇒ -0.01/step で timeout(900) まで継続 = 全 episode で −9.0。一方 -10 drop で終了 = −0.01·k − 10。**escape が常に安い**（−9.0 > −0.01k−10 ⇔ 0.01k > −1 = 恒真）⇒ agent は「失敗するなら full escape」を選好し得る。secondary（success 目的は +200≫ ゆえ支配的 gradient は seat へ、だが failure-mode を歪める）。
+- **fail-open は pre-seat では正しい**（en-route、cable がまだ C1Y を跨がないのは正常）。**post-seat では誤り**（seated cable が跨がなくなった = escape）。
+- **裁定 = TIGHTEN（phase-gate）**: lateral-escape drop を **G3 latched（C1-seat 済）で gate**。
+  - pre-G3: lateral-escape drop 無効（fail-open 維持、en-route の spurious drop も防ぐ）。
+  - post-G3: no-crossing **または** dx > `DROP_LATERAL_DEV_MAX_M` ⇒ escape ⇒ -10 drop。
+  - ⇒ `_crossing_x_dev` は no-crossing を **None で expose** し、call site（`:1516`）が phase で判定（`if _g_latched[w,2]: escape = (dev is None) or |dev|>max`）。
+  - ⚠ pin 整合: G3 後（さらに pin fire 後）cable は C1Y を跨ぐべき（pinned end が保持）⇒ post-G3 の no-crossing は fault。G3-latch gate で妥当。
+
+### §13.3 順序・severity
+
+| FM | severity | exploit | 裁定 | 訓練前必須? |
+|---|---|---|---|---|
+| **FM4** | **primary** | 偽 seat ⇒ G3/G5 偽 latch ⇒ +5 + chain 偽進行 | routed-segment identity window | ✅ **必須**（success 信号を直接汚染） |
+| FM3 | secondary | full escape が -10 drop より安い | post-G3 fail-closed escape guard | ✅ 望ましい（failure-mode 歪み） |
+
+**⇒ 両方 TIGHTEN。FM4 が優先（primary success-signal exploit）。小さく well-scoped ゆえ訓練 campaign 前に land、再 verify（interp helper の window 化 + drop の phase-gate を on-disk 照合）。⭐ /pre-check が gate の仕事をした — 非 conservative boundary を訓練前に捕捉。最終捕捉 verdict は Rs 動画のまま。**
+
+### §13.4 FM4 の C2 identity source 裁定（%12 の C2 source 照会、2026-07-16 04:3x）
+
+%12 が正しく突いた: C1 は `_pin_seat_seg`（`:1688/:1721`、録画の pin body ordinal、world-position で env body space に解決）があるが、**C2 は pin されないゆえ seat-body source が無い**（`_target_seg_indices` は R-lane regrasp target `:1418/:1518` で C2 seat でない、`_pin_seat_seg` は C1 のみ `:1671`）。⇒ (a) 既存 field 無し = 確認。
+
+**⛔ (b) 固定 N-hop は却下**: C1→C2 arc-in-segments は route-geometry 依存（**D-5 stride 7 は task_config 千鳥 75mm 用**、route env は C1(0.35,0.150)→C2(0.40,0.000) = **150mm** ⇒ 別値）＋ **しごき pay-through で C1-to-C2 body 数が可変** ⇒ hardcode は fragile。
+
+**✅ 裁定 = (b) を【contiguity で】正しくやる（新 field 不要、`_pin_seat_seg` から導出）:**
+
+> **C2 seat crossing は、C1 seat body（`_pin_seat_seg`）から Y-monotone な routed span で連結されていなければならない。**
+
+- 根拠: C1→C2 routed span は **y=0.150→0.000 の Y 単調減少**（S字は X 曲率で Y は単調、しごきは軸方向 slide で spatial-Y 単調維持）。**stray loop は C1 seat と単調連結しない**（loop は Y 反転を持つ）。
+- 実装: crossing の node-index と `_pin_seat_seg` が挟む cable span が Y-monotone か（両 index 間の monotone-run 判定）。⇒ **固定 hop でなく「C1 seat から C2 crossing まで歩いて Y が単調か」**。pay-through-robust（正確な C2 body 不要、単調連結のみ）。curling tail は C1 側だけ見るので許容（C2 の先は自由）。
+- **C1 側**: `_pin_seat_seg ± W` window（pinned = hard identity、producer :3074-3078 の seat-body identity と一致）。
+- ⇒ **両 clip とも identity source は `_pin_seat_seg`**: C1 は直接 window、C2 は monotone-span 連結。G5(C2) も守られる（exploit は両 clip、%12 の懸念に対応）。
+- ⚠ 実装 note（%12 → /pre-check 再検）: monotone 判定の tolerance/最小 run 長は、S字の Y 単調性を壊さない範囲で（S字は X 曲率ゆえ Y 単調は保たれるが、数値 wobble に小 tolerance）。edge（cable 端が C2 近傍で span が短い）は「available run で単調」に緩和。
+
+**✅ FM3（phase-gate drop）は seat identity と独立 ⇒ 先行実装 CONCUR。**
