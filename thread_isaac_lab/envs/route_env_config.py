@@ -143,6 +143,20 @@ ROUTE_CLIP_FLOAT_Z = 0.020  # [m] meta CLIP_FLOAT_Z: routing clips float 20mm ab
 # seat/groove predicate (_seat_metrics) AND the built clip z; the two MUST agree (%12 build+predicate flag).
 ROUTE_GROOVE_Z = task_config.GROOVE_CENTER_Z + ROUTE_CLIP_FLOAT_Z  # 0.809 + 0.020 = 0.829
 
+# Seat-predicate bars (reward-design 2 interp fix; ruling REWARDDESIGN_GATE2_SEAT_PREDICATE_RULING sec 2/sec 11).
+# DERIVED from the built V-groove clip geometry (newton_skill_env_base.py _v_groove_clip_parts: lower walls at
+# x = +/-0.009 with half-width hx 0.0015 -> inner face at |x| = 0.0075; lower-wall top - base-plate top =
+# 0.020 - 0.005 = 0.015) + CABLE_RADIUS + ROUTE_GROOVE_Z. NOT from CLIP_GROOVE_INNER_RADIUS (the stale datum
+# behind the old T_GROOVE=3mm). Same derivation as route_executor.py:3039/:3072/:3073 (lat_bar/z_hi/z_lo off
+# the model), kept as route-scope config so the RL env does not touch the producer file.
+# Seated (cable centre geometrically inside the groove) := |dx_at_y=clip_y| <= SEAT_LAT_BAR_M
+#   and SEAT_Z_LO_M < z_cross < SEAT_Z_HI_M.
+_GROOVE_WALL_INNER_M = 0.0075  # lower-wall inner face |x| (clip parts: 0.009 - hx 0.0015)
+_GROOVE_WALL_HEIGHT_M = 0.015  # lower-wall top - base-plate top (clip parts: 0.020 - 0.005)
+SEAT_LAT_BAR_M = _GROOVE_WALL_INNER_M - task_config.CABLE_RADIUS  # 0.0035 (3.5mm): cable centre max off-axis, in-groove
+SEAT_Z_LO_M = ROUTE_GROOVE_Z - 2.0 * task_config.CABLE_RADIUS  # 0.821: floor_top - R; below this = cable under the clip
+SEAT_Z_HI_M = SEAT_Z_LO_M + _GROOVE_WALL_HEIGHT_M  # 0.836: wall_top - R; above this = cable over the rim
+
 # =====================================================================================================
 # Route-executor interface contract v1 (build plan sec 6 + sec 12 CC5-2; PINNED)
 # =====================================================================================================
@@ -239,6 +253,9 @@ _ROUTE_OWNED_PARAM_NAMES = {
     "ROUTE_C2_XY",
     "ROUTE_CLIP_FLOAT_Z",
     "ROUTE_GROOVE_Z",
+    "SEAT_LAT_BAR_M",
+    "SEAT_Z_LO_M",
+    "SEAT_Z_HI_M",
     "HOLD_THRESH_MM",
     "HOLD_RESUME_MM",
     "HOLD_RESUME_K",

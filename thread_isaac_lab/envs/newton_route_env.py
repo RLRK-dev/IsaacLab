@@ -125,8 +125,6 @@ from newton_skill_env_base import (  # noqa: E402
 )
 from task_config import (  # noqa: E402
     CABLE_RADIUS,
-    CLIP1_X,
-    CLIP1_Y,
     CLIP_BASE_HEIGHT,
     CLIP_POSITIONS,
     EE_TO_PINCH_OPEN,
@@ -142,7 +140,6 @@ from task_config import (  # noqa: E402
     ROBOT_BODIES_PER_ARM,
     SETTLE_STEPS,
     SIM_SUBSTEPS,
-    T_GROOVE,
     TABLE_HEIGHT,
     WIDE_LEFT_Y,
     WIDE_RIGHT_Y,
@@ -1279,52 +1276,75 @@ class NewtonRouteEnv(VecEnv):
         """Phase-active clip XY (base-scripted phase_id pin, CC2-CH4). C1 through G4-start, then C2."""
         return _C1_XY if phase_id < 3 else _C2_XY
 
-    def _c1_retention_m(self, cable_pos):
-        """(z_c1 [m], flank_max [m]) for one world -- the c1_retained_final live inputs (obs [60]/[61]).
+    _SEAT_MISS_DX_M = 9.0  # sentinel dx when the cable never crosses y=clip_y (fail-closed: seat legs
+    #                        reject; finite so np.nan_to_num leaves it in obs, unlike NaN -> 0 = "seated").
 
-        SELF-COMPUTED from LIVE sim geometry (the producer fields do not exist in a live episode; the
-        reward must self-compute -- DoD-9a validates this live-geometry verdict against the frozen
-        two-key reference and any divergence is fixed here to the frozen def, never by loosening tol).
-        z_c1 = z of the cable body nearest C1 in Y (live-geometry analog of the producer's frozen
-        seat-body z, runner _zc1 :4331). flank_max = max cable z over |y - C1Y| <= C1_FLANK_WINDOW_M
-        (0.010 m) -- the EXACT frozen def (recount flank_from_npz p9_recount_strict_v2.py:39-44); NaN if
-        the window is empty, matching the frozen NaN -> c1_final=False (via the predicate flank==flank).
-        Stored in SI meters (obs-dim unit consistency); the 0.840 m threshold == the recount 840 mm.
+    def _seat_crossing(self, cable_pos, clip_x, clip_y):
+        """Interpolate the cable's (x, z) where it crosses exactly y=clip_y, at the groove-closest crossing.
+
+        reward-design 2 fix (ruling REWARDDESIGN_GATE2_SEAT_PREDICATE_RULING sec 2/sec 8/sec 11). The pre-fix
+        seat metric took the nearest-in-Y cable NODE and used its 2D lateral, leaking the node's Y-quantisation
+        residual (~half the 15mm segment pitch, ~7.5mm) into the off-axis distance -- so a physically seated
+        cable failed the 3mm bar ~60-70% of the time. Here we interpolate x,z at exactly y=clip_y (dy == 0 by
+        construction, quantisation-free). Among all segments straddling y=clip_y (S-curve / D-5) we prefer a
+        crossing inside the z-band, then the minimum ``|x - clip_x|``. Returns ``(x_cross, z_cross)`` [m], or
+        ``(None, None)`` if the cable never reaches y=clip_y (fail-closed). ``cable_pos`` is node-ordered (the
+        40-body chain, :1644), so consecutive rows are adjacent -- the offline mirror
+        (``p9_recount_strict_v2``) walks the same polyline and DoD-9a (live == frozen) holds.
         """
-        near_c1 = int(np.argmin(np.abs(cable_pos[:, 1] - CLIP1_Y)))
-        z_c1_m = float(cable_pos[near_c1, 2])
-        m = np.abs(cable_pos[:, 1] - CLIP1_Y) <= rc.C1_FLANK_WINDOW_M
-        flank_m = float(cable_pos[m, 2].max()) if m.any() else float("nan")
-        return z_c1_m, flank_m
+        ys = cable_pos[:, 1]
+        y0 = ys[:-1]
+        y1 = ys[1:]
+        straddle = ((y0 - clip_y) * (y1 - clip_y) <= 0.0) & (y0 != y1)
+        if not straddle.any():
+            return None, None
+        idx = np.nonzero(straddle)[0]
+        t = (clip_y - y0[idx]) / (y1[idx] - y0[idx])
+        x_cross = cable_pos[idx, 0] + t * (cable_pos[idx + 1, 0] - cable_pos[idx, 0])
+        z_cross = cable_pos[idx, 2] + t * (cable_pos[idx + 1, 2] - cable_pos[idx, 2])
+        dx = np.abs(x_cross - clip_x)
+        in_band = (z_cross > rc.SEAT_Z_LO_M) & (z_cross < rc.SEAT_Z_HI_M)
+        best = int(np.lexsort((dx, np.where(in_band, 0, 1)))[0])  # primary: prefer in-band; secondary: min dx
+        return float(x_cross[best]), float(z_cross[best])
+
+    @staticmethod
+    def _seated_in_groove(dx, z_cross):
+        """Shared seat predicate: cable centre geometrically inside the groove (built-model bars,
+        ``route_env_config.SEAT_*``). ``dx`` (walls) and ``z`` (floor/rim) are SEPARATE legs -- supersedes
+        the combined ``seat_dist < T_GROOVE`` (ruling sec 2)."""
+        return bool(dx <= rc.SEAT_LAT_BAR_M and rc.SEAT_Z_LO_M < z_cross < rc.SEAT_Z_HI_M)
 
     def _seat_metrics(self, cable_pos, clip_xy):
-        """(seat_dist [m], z_gap [m], lateral [m]) of the nearest-in-Y cable body vs a clip groove.
+        """(dx [m], z_cross [m]) of the interpolated y=clip_y crossing vs a clip groove axis.
 
-        Raw per-clip sim distance (NEW-5), NOT the scripted-gated obs [49]. z_gap = cable_z - groove_z;
-        lateral = XY distance of the nearest-in-Y cable body from the clip center.
+        ``dx = |x_cross - clip_x|`` at the groove-closest crossing (quantisation-free). ``z_cross`` =
+        interpolated cable-centre z. Fail-closed: a cable never reaching y=clip_y returns
+        ``(_SEAT_MISS_DX_M, 0.0)`` so both seat legs reject. Consumers: G3/G5 (:1487-1488 / :1550-1552),
+        obs [49]/[58]/[59], c2_honest, c1_retained.
         """
-        near = int(np.argmin(np.abs(cable_pos[:, 1] - clip_xy[1])))
-        p = cable_pos[near]
-        z_gap = float(p[2] - rc.ROUTE_GROOVE_Z)  # route groove z (809 + CLIP_FLOAT 20mm = 829), NOT base 809
-        lateral = float(np.linalg.norm(p[:2] - clip_xy))
-        seat_dist = float(np.sqrt(lateral * lateral + z_gap * z_gap))
-        return seat_dist, z_gap, lateral
+        x_cross, z_cross = self._seat_crossing(cable_pos, float(clip_xy[0]), float(clip_xy[1]))
+        if x_cross is None:
+            return self._SEAT_MISS_DX_M, 0.0
+        return abs(x_cross - float(clip_xy[0])), z_cross
 
-    def _c2_seated_honest(self, cable_pos):
-        """C2 groove-membership + settle (NOT raw d<3mm alone -- CC2-CH2). Geometric proxy of the runner
-        producer test_newton_clip_routing.py:4970-4971 (wall/spacer split is a route-executor refinement).
+    def _c1_retention_m(self, cable_pos):
+        """(dx_c1 [m], z_cross_c1 [m]) at the C1 groove -- the c1_retained live inputs (obs [60]/[61]).
+
+        Interp-dx REPLACES the pre-fix z-only ceiling (z_c1 < 0.840 and flank_max < 0.840), which had no
+        lateral (identity) leg and passed 81/81 = a no-op (ruling sec 8b, defect #2). The SAME interpolation
+        runs here (live) and in the frozen recount (``p9_recount_strict_v2.flank_from_npz``), both on the
+        node-ordered 40-body cable, so DoD-9a (live == frozen) holds on the corrected instrument.
+        ``c1_retained := _seated_in_groove(dx_c1, z_cross_c1)``.
         """
-        seat_dist, z_gap, _ = self._seat_metrics(cable_pos, _C2_XY)
-        in_groove = abs(z_gap * 1e3) <= rc.C2_SETTLE_Z_TOL_MM
-        wall_ok = (seat_dist * 1e3) <= (rc.C2_WALL_SEAT_TOL_MM + T_GROOVE * 1e3)  # groove-inner tolerance
-        return bool(wall_ok and in_groove)
+        return self._seat_metrics(cable_pos, _C1_XY)
 
     def _crossing_x_dev(self, cable_pos):
-        """H-drape crossing-x deviation [m]: cable x where it crosses y=C1Y, minus CLIP1_X (proxy)."""
-        ys = cable_pos[:, 1]
-        # nearest-in-Y interpolation of x at y = CLIP1_Y
-        i = int(np.argmin(np.abs(ys - CLIP1_Y)))
-        return float(cable_pos[i, 0] - CLIP1_X)
+        """Signed crossing-x deviation at y=C1Y [m] (H-drape / lateral-escape drop input, obs [57]). Now truly
+        interpolated (the pre-fix code took the nearest-in-Y NODE x despite its 'interpolation' comment; Rs
+        '4th site'). Fail-open to 0.0 (no crossing => no spurious lateral-escape drop; the held-z /
+        contact-loss drop legs still fire)."""
+        x_cross, _ = self._seat_crossing(cable_pos, float(_C1_XY[0]), float(_C1_XY[1]))
+        return 0.0 if x_cross is None else float(x_cross - float(_C1_XY[0]))
 
     def _lane_matched_target(self, cable_pos, phase_id, r_clamp_pos, search_idx):
         """[16:19] redefine (CC2-CH5): in the regrasp window, the reaching-arm's lane-matched grip target
@@ -1424,8 +1444,9 @@ class NewtonRouteEnv(VecEnv):
             obs_np[w, rc.OBS_HELD_CABLE_Z] = float(cable_pos[held_i, 2])
             # [49] seated-seg distance (phase-active clip, base-scripted phase_id pin).
             active_xy = self._active_clip_xy(ph)
-            seat_dist, z_gap, lateral = self._seat_metrics(cable_pos, active_xy)
-            obs_np[w, rc.OBS_SEATED_SEG_D] = seat_dist
+            dx_a, z_cross_a = self._seat_metrics(cable_pos, active_xy)  # interp seat (dx, z_cross) -- rd2 fix
+            zgap_a = z_cross_a - rc.ROUTE_GROOVE_Z
+            obs_np[w, rc.OBS_SEATED_SEG_D] = float(np.hypot(dx_a, zgap_a))  # combined interp seat distance
             # [50] within-phase progress.
             obs_np[w, rc.OBS_WITHIN_PHASE] = float(self._route_within[w])
             # [51:53] next-clip xy (C2 for the C1->C2 route; per-phase next-clip map = N-clip forward-compat).
@@ -1440,13 +1461,14 @@ class NewtonRouteEnv(VecEnv):
             obs_np[w, rc.OBS_L_IK_RESID] = self._last_ik_resid[w, 1]
             # [57] crossing-x deviation.
             obs_np[w, rc.OBS_CROSSING_X_DEV] = self._crossing_x_dev(cable_pos)
-            # [58:60] axis-resolved seat (z-gap, lateral) of the phase-active clip.
-            obs_np[w, rc.OBS_SEAT_ZGAP] = z_gap
-            obs_np[w, rc.OBS_SEAT_LATERAL] = lateral
-            # [60:62] C1-retention live inputs [mm].
-            z_c1_m, flank_m = self._c1_retention_m(cable_pos)
-            obs_np[w, rc.OBS_C1_REGION_Z] = z_c1_m
-            obs_np[w, rc.OBS_C1_FLANK_MAX_Z] = flank_m
+            # [58:60] axis-resolved seat: [58] z-gap (z_cross - groove), [59] lateral = interp dx (rd2 fix).
+            obs_np[w, rc.OBS_SEAT_ZGAP] = zgap_a
+            obs_np[w, rc.OBS_SEAT_LATERAL] = dx_a
+            # [60:62] C1-retention live inputs: now interp (dx_c1, z_cross_c1) -- rd2 fix (dim names kept; the
+            #         retention predicate = _seated_in_groove(dx_c1, z_cross_c1), sec 8b).
+            dx_c1_obs, z_cross_c1_obs = self._c1_retention_m(cable_pos)
+            obs_np[w, rc.OBS_C1_REGION_Z] = dx_c1_obs
+            obs_np[w, rc.OBS_C1_FLANK_MAX_Z] = z_cross_c1_obs
 
         np.nan_to_num(obs_np, copy=False, nan=0.0)
         return torch.from_numpy(obs_np).to(device=self.device)
@@ -1484,16 +1506,15 @@ class NewtonRouteEnv(VecEnv):
             mid_xy = 0.5 * (clamp_r[:2] + clamp_l[:2])
             held_i = int(np.argmin(np.linalg.norm(cable_pos[:, :2] - mid_xy, axis=1)))
             held_z = float(cable_pos[held_i, 2])
-            c1_seat, _, _ = self._seat_metrics(cable_pos, _C1_XY)
-            c2_seat, _, _ = self._seat_metrics(cable_pos, _C2_XY)
-            z_c1_m, flank_m = self._c1_retention_m(cable_pos)
-            # frozen def (recount:107): z_c1 < 0.840 and flank==flank (NaN guard) and flank < 0.840, in [m].
-            c1_retained = (
-                z_c1_m < rc.C1_RETAINED_LOW_WALL_TOP_M
-                and flank_m == flank_m
-                and flank_m < rc.C1_RETAINED_LOW_WALL_TOP_M
-            )
-            c2_honest = self._c2_seated_honest(cable_pos)
+            # Interp seat metrics (dx at exactly y=clip_y, z_cross) -- reward-design 2 fix.
+            dx_c1, z_cross_c1 = self._seat_metrics(cable_pos, _C1_XY)
+            dx_c2, z_cross_c2 = self._seat_metrics(cable_pos, _C2_XY)
+            c1_seated = self._seated_in_groove(dx_c1, z_cross_c1)
+            c2_seated = self._seated_in_groove(dx_c2, z_cross_c2)
+            # c1_retained := C1 still seated (interp-dx + z-band) -- supersedes the pre-fix z-only ceiling
+            # (81/81 no-op, defect #2). Same interp as the frozen recount => DoD-9a preserved (ruling sec 8b/11).
+            c1_retained = c1_seated
+            c2_honest = c2_seated  # G6 C2-honest = interp seat predicate (auto-follows _seat_metrics, sec 11)
             lane_seg = self._lane_matched_target(cable_pos, ph, clamp_r, self._target_seg_indices_r[w])
             r_reach = float(np.linalg.norm(clamp_r - lane_seg))  # R reach to lane-matched target (G4 _at_88 proxy)
 
@@ -1547,9 +1568,9 @@ class NewtonRouteEnv(VecEnv):
                 and (abs(span - rc.HOLD_SPAN_ACHIEVED) <= rc.HOLD_SPAN_TOL_M)
             )
             p2 = (held_z - self._cable_z_rest) >= self.LIFT_RISE_MIN_M
-            p3 = (c1_seat < T_GROOVE) and (ph >= 2)  # C1-seat and pin-fired proxy (phase reached G3)
+            p3 = c1_seated and (ph >= 2)  # C1-seat (interp dx<=3.5 and z in-band) and phase reached G3
             p4 = (r_reach <= self.REGRASP_REACH_TOL_M) and contact_r  # _at_88 and _R_grips proxy (in-scene lane)
-            p5 = c2_seat < T_GROOVE
+            p5 = c2_seated  # C2-seat (interp)
             preds = [p1, p2, p3, p4, p5]
 
             # --- ordered, latched, fire-once phase bonuses (G1..G5) ---
