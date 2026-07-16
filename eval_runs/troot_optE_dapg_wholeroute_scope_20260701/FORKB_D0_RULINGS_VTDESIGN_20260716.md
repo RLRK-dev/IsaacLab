@@ -1,6 +1,6 @@
 # fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.4
 
-**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: D0 = 6/6 CLOSE（design + evidence）** — 裁定 v1.0 R2-R6 `11fdb0bc11` / v1.1 R1 `889ce6b640`［cuda:2 配置 = %12 CONCUR 決着］/ v1.2 要件 #7 `8304500dbd` / v1.3 D1-VERIFY（CONFORM 7/7 + AMEND-1）`9cea41ac67`。**item-1 evidence = v4 `fd536235e9` PASS**（pN 独立 verify、末尾 EVIDENCE-RECORD UPDATE `55086b197b` [record-only、%12 custodial — p5 検証・受理済: 設計文 append-only、peak/RSS/CPU 同値ゆえ **R1 の N=4 結論 不変**、v4a narrative=UNVERIFIED 隔離は正]）。**v1.4 = 本 header の evidence-status 同期のみ（owner 実施、設計内容 無変更）**。次 = **E0**（D1 §7 事前登録どおり、fresh N=1 から）。0-commit（bank = %12）。
+**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: D0 = 6/6 CLOSE（design + evidence）** — 裁定 v1.0 R2-R6 `11fdb0bc11` / v1.1 R1 `889ce6b640`［cuda:2 配置 = %12 CONCUR 決着］/ v1.2 要件 #7 `8304500dbd` / v1.3 D1-VERIFY（CONFORM 7/7 + AMEND-1）`9cea41ac67`。**item-1 evidence = v4 `fd536235e9` PASS**（pN 独立 verify、末尾 EVIDENCE-RECORD UPDATE `55086b197b` [record-only、%12 custodial — p5 検証・受理済: 設計文 append-only、peak 一致・RSS/CPU 近似一致 (1317.8→1310/1.58→1.56) ゆえ **R1 の N=4 結論 不変**、v4a narrative=UNVERIFIED 隔離は正]）。**v1.4 = 本 header の evidence-status 同期のみ（owner 実施、設計内容 無変更）**。次 = **E0**（D1 §7 事前登録どおり、fresh N=1 から）。0-commit（bank = %12）。
 **入力**: 素材 = `FORKB_D0_MATERIALS_RSTECHLEAD_20260716.md`（DoD = `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` §21.11.2a、v1.13 `7b4c918251`）。
 **範囲**: 全 6 項の裁定 — 項 2/3/4/5/6 = v1.0、項 1 = v1.1 追裁定（当初「実測待ちで保留」〔歴史〕→ **v4 `fd536235e9` PASS で解消済**〔record-fix %12〕）。
 **接地検証（p5 自読、2026-07-16）**: 項2 `newton_route_env.py:1047-1049`（裸 `np.random.uniform`、行 drift 訂正を確認）/ 項3 `TRAINER_NODE_DEFINE...0712.md:7`（RLPD 条項逐語）+ `:30`（SAC/TD3/replay=ZERO 逐語）/ 項4 `STAGEA_...0712.md:117/:125/:131`（schema・disk budget・os.environ 規約 逐語）/ 項5 `newton_route_env.py:419`（default=4）+ caller grep（wc=1 明示を裏書き、wc=NW は E_probe のみ=意図的）。
@@ -123,7 +123,7 @@
 
 ### PROVISIONAL の扱い = 適正
 
-§0/§3/§7 の PROVISIONAL 明記 + pN HOLD → v3/v4 差替え → E0 最終、の三段は records-match-fact に適合。〔**RESOLVED 2026-07-16 19:5x〔record-fix %12〕**: v4 `fd536235e9` = pN 独立 verify PASS。数値 = peak 350/RSS 1310/CPU 1.56%（v2 近似一致、baseline 308/delta 42/n9 は相違）⇒ **R1 の拘束構造（唯一の拘束=4-proc 規則、margin 30-80×）は不変・再裁定不要**。E0 で最終確認。〕
+§0/§3/§7 の PROVISIONAL 明記 + pN HOLD → v3/v4 差替え → E0 最終、の三段は records-match-fact に適合。〔**RESOLVED 2026-07-16 19:5x〔record-fix %12〕**: v4 `fd536235e9` = pN 独立 verify PASS。数値 = peak 350 (v2 一致)/RSS 1310/CPU 1.56%（v2 近似一致: 1317.8→1310/1.58→1.56; baseline 308/delta 42/n9 は相違）⇒ **R1 の拘束構造（唯一の拘束=4-proc 規則、margin 30-80×）は不変・再裁定不要**。E0 で最終確認。〕
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: p5 verify = CONFORM 7/7 PASS (RULINGS v1.3 `9cea41ac67` §D1-VERIFY) + AMEND-1 反映済 (v0.2)。**
 **入力**: D0 裁定 = `FORKB_D0_RULINGS_VTDESIGN_20260716.md` v1.3 (`9cea41ac67`; R1 `889ce6b640` / R2-R6 `11fdb0bc11`) +
-素材 doc (`92eab23ceb`) + calibration profile **v4 (`fd536235e9`) = 確定 evidence (pN 独立 verify PASS、PASS-WITH-RECORDS-FIX 2026-07-16)**。⚠v4 実測 = peak 350 MiB/RSS 1310 MB/CPU 1.56% (v2/v3 同値) だが baseline 308/delta 42/window n=9 は v2/v3 (340/10/12) と異なる — §3 の定常 ~8 steps/s と R1 cap 結論 (N=4) は不変。
+素材 doc (`92eab23ceb`) + calibration profile **v4 (`fd536235e9`) = 確定 evidence (pN 独立 verify PASS、PASS-WITH-RECORDS-FIX 2026-07-16)**。⚠v4 実測 = peak 350 MiB (v2/v3 一致)/RSS 1310 MB/CPU 1.56% (v2/v3 近似一致: 1317.8→1310/1.58→1.56) だが baseline 308/delta 42/window n=9 は v2/v3 (340/10/12) と異なる — §3 の定常 ~8 steps/s と R1 cap 結論 (N=4) は不変。
 **⚠ scope**: 本 doc = 実装可能な spec の固定。**実装 (I0) は E0 の後** — E0 fence (pN 定義) と I0 gate は不変。
 数値で「E0 pin」と記す項は E0 実測で確定するまで PROVISIONAL。
 
