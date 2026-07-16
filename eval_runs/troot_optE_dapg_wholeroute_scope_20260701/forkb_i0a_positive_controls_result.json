@@ -1,0 +1,21 @@
+{
+  "MARK": "I0-a positive controls (D1 sec 4:78) -- fresh runs under the live tripwire, opt-out active",
+  "pre_declared": "E_probe rc=2 (banked disposition), E1v2 rc=3 (known ENV-MULTIWORLD freeze)",
+  "results": [
+    {
+      "probe": "pin_multiworld_E_probe",
+      "rc": 2,
+      "expect_rc": 2,
+      "PASS": true,
+      "fresh_artifact": "pin_multiworld_E_probe_result_postI0a.json"
+    },
+    {
+      "probe": "pin_multiworld_E1v2_release_contrast",
+      "rc": 3,
+      "expect_rc": 3,
+      "PASS": true,
+      "fresh_artifact": "pin_multiworld_E1v2_release_contrast_result_postI0a.json"
+    }
+  ],
+  "ALL_PASS": true
+}
