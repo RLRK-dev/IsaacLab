@@ -1,6 +1,6 @@
-# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.2
+# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.3
 
-**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: D0 = 6/6 CLOSE** — v1.0（R2-R6）= banked `11fdb0bc11` / v1.1（R1）= banked `889ce6b640`（verify PASS + **cuda:2 配置 = %12 CONCUR** = co-decide 決着）/ v1.2 = D1 要件 #7 追加（trainer 側 contention leg、%12 提案・p5 批准）— DRAFT、0-commit（bank = %12）。**次 = D1 起草（%12）→ p5 verify（要件 1-7 照合）。**
+**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status（tri-state、`dfae1390fe` 準拠）: D0 裁定 = 6/6 issued+banked**（v1.0 R2-R6 `11fdb0bc11` / v1.1 R1 `889ce6b640`［cuda:2 配置 = %12 CONCUR 決着］/ v1.2 要件 #7 `8304500dbd`）**・項 1 evidence = pN HOLD（v3 calibration 実行中、R1 数値 = PROVISIONAL-tolerant）・E0 fence = CLOSED**。**v1.3 = D1-VERIFY verdict（CONFORM 7/7 + AMEND-1 [seed key 3 要素統一] + contention bar 批准根拠 + I0 助言）** — DRAFT、0-commit（bank = %12）。
 **入力**: 素材 = `FORKB_D0_MATERIALS_RSTECHLEAD_20260716.md`（DoD = `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` §21.11.2a、v1.13 `7b4c918251`）。
 **範囲**: 項 2/3/4/5/6 の裁定（素材 ✅ 分）。項 1（N sizing）= 実測待ちで**保留**。
 **接地検証（p5 自読、2026-07-16）**: 項2 `newton_route_env.py:1047-1049`（裸 `np.random.uniform`、行 drift 訂正を確認）/ 項3 `TRAINER_NODE_DEFINE...0712.md:7`（RLPD 条項逐語）+ `:30`（SAC/TD3/replay=ZERO 逐語）/ 項4 `STAGEA_...0712.md:117/:125/:131`（schema・disk budget・os.environ 規約 逐語）/ 項5 `newton_route_env.py:419`（default=4）+ caller grep（wc=1 明示を裏書き、wc=NW は E_probe のみ=意図的）。
@@ -89,3 +89,38 @@
 ⇒ **D0 = 6/6 項 裁定完了**（R2-R6 banked `11fdb0bc11` + 本 R1）。次 = D1（fork-B spec、%12 起草・p5 verify、引き継ぎ要件 6 項 + R1-3 lever 追加）。
 
 **⚠ scope 注記**: 本裁定は設計固定であり実装認可ではない。実装は fork-B node の gate chain（L3、素材 doc §項 1 protocol・E0/I0 fence 不変）に従う。(d) policy-drive trigger の `/reward-design`+`/pre-check` gate は本 D0 と独立に不変（pin 側 §21.4）。
+
+---
+
+## D1-VERIFY 🔒 spec v0.1 照合 verdict（v1.3、2026-07-16、対象 = `FORKB_D1_SPEC_RSTECHLEAD_20260716.md` `d70fea96ed`）
+
+**方法**: 要件 1-7 を sub-item 単位で spec § と 1:1 照合（行単位 PASS 禁止規律）。input cites（v1.2 `8304500dbd` / calibration `e1298c4bf6`）on-disk 検証済。
+
+### verdict = **CONFORM 7/7** — 修正裁定 1（R2-1 AMEND）+ 批准根拠 1 + 助言 1 を添えて PASS
+
+| 要件 | spec § | 照合結果（sub-item） |
+|---|---|---|
+| 1 disk budget | §3 | ✅ 再見積の算術一致（8 steps/s→113 s/ep→~30 ep/h/proc→N=4 で 60 MB/h→24h 1.4 GB、p5 再計算一致）。rotation=**削除しない**+<50 GB loud warn+削除は人間判断 = silent-destruction 禁止と整合。PROVISIONAL 明記 ✓（⚠ 8 steps/s は profile summary でなく artifact timestamp からの導出 — E0 再実測明記済ゆえ可） |
+| 2 schema | §2 表 | ✅ :117 既存 field 不変+additive 9 field（R3-2 完全一致+source∈{online,demo}=R3-4）+ ⛔breaking 禁止明記 + R6-4 隔離 = (process_index, episode_idx) 機械可能 |
+| 3 layout | §2 | ✅ run_manifest/proc_meta（R2-2 全 field）/ep npz+manifest/FAILURE.json。atomic = tmp→sha256→rename（§1、R3-1）|
+| 4 flip+tripwire | §4 | ✅ flip :419 / tripwire@make_solver（guard 形・COMP3:79+charter cite・opt-out+使用記録文言）/ 検証 leg = byte-repro 無変化 + **識別性 4 象限**（(iv) S8 経路を塞がない、を含む — 良）+ 陽性対照 = 既存 probe 2 本 / L3 見立て+pin node 分離 ✓ |
+| 5 supervisor | §5 | ✅ launch（compute-apps **proc 数**判定=R1-4）/restart=新個体/halt=K_fail/backpressure（E0 代用形明示）/CPU-only。⚠ restart seed 形は下記 AMEND |
+| 6 lever+E0 事前登録 | §6/§7 | ✅ lever=config 値+fallback 形+**実在テストを I0 acceptance に**（R1-3 の「config で落とせる保証」そのもの）。E0 表 = N=1 新規再走（非流用）/contention ≥0.8/メモリ線形/決定論 byte-identical **hard**/K 機構テスト+初期 200 ep（≈1.7 h、算術一致）/K_fail=3 注入テスト/**死計器 正対照 standing 化**（v1 教訓の制度化 — 良）|
+| 7 trainer contention | §8 | ✅ I0+ bring-up で単独 vs VLM 同居を 1 回計測・lever 発動判断材料として Rs/pN へ surface・**E0 acceptance に含めない**（被覆軸分離が正確）|
+
+### 🔒 修正裁定 AMEND-1: R2-1 の seed key を【3 要素に統一】する
+
+§5 の restart seed = `SeedSequence([base, i, restart_count])` は R6-3「新個体」の自然な決定的導出だが、**R2-1 の字義（2 要素 `[base_seed, i]`）と初回 spawn で食い違う**（`SS([b,i])` ≠ `SS([b,i,0])`）。曖昧なまま実装させない:
+⇒ **R2-1 を AMEND: derived_seed = `SeedSequence([base_seed, process_index, restart_count]).generate_state(1)[0]`、初回 = restart_count=0 で統一**（一様な 1 形 > 字義保存。proc_meta に restart_count を記録 field として追加 — additive）。spec §1/§5 はこの統一形で実装。
+
+### 🔒 批准根拠の追記: contention bar ≥0.8 は恣意でない —「N=4 が理想 N=3 を支配する」導出
+
+効率 0.8 × 4 proc = **実効 3.2 > 3.0 =（完全 scaling の）N=3** ⇒ **bar ≥0.8 は「N=4 が N=3 fallback を必ず上回る」break-even+margin の線**。0.75 では理想 N=3 と同点。⇒ ≥0.8 提案を**この導出付きで批准**（E0 で下回れば §7 どおり N=3 再測 = R1-5 二段の設計どおり）。
+
+### 助言（FAIL でない）: I0 rule-check に R2-3 を carry
+
+「env 内に裸 `np.random` を増やさない / DR 供給は config 経由（os.environ 不可、Stage-A :131）」は D1 要件外の standing 規約 — **I0 の [RULE-CHECK] checklist に明示 carry** を推奨（collector/supervisor 新 code が対象になる最初の機会）。
+
+### PROVISIONAL の扱い = 適正
+
+§0/§3/§7 の PROVISIONAL 明記 + pN HOLD（v3 calibration: as_run sha256/env scrape/分母 in-artifact 化）→ §3 数値差替え → E0 最終、の三段は records-match-fact に適合。⚠ **v3 で数値が実質変動した場合（例 steps/s が ±30% 級）、§3 と R1-1 margin 表は差替え** — ただし **R1 の拘束構造（唯一の拘束=4-proc 規則）は margin 30-80× ゆえ v3 で覆る見込みは薄い**（覆れば R1 再裁定、loud）。
