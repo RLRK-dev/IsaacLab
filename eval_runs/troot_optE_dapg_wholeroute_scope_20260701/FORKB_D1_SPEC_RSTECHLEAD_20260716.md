@@ -2,8 +2,7 @@
 
 **Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: p5 verify = CONFORM 7/7 PASS (RULINGS v1.3 `9cea41ac67` §D1-VERIFY) + AMEND-1 反映済 (v0.2)。**
 **入力**: D0 裁定 = `FORKB_D0_RULINGS_VTDESIGN_20260716.md` v1.3 (`9cea41ac67`; R1 `889ce6b640` / R2-R6 `11fdb0bc11`) +
-素材 doc (`92eab23ceb`) + calibration profile **v3 (`86aced4221`、provenance 完備 — pN HOLD 対応の fresh 再実測。
-数値は v2 `e1298c4bf6` と同値ゆえ §3 の導出は不変)**。
+素材 doc (`92eab23ceb`) + calibration profile **v4 (`fd536235e9`) = 確定 evidence (pN 独立 verify PASS、PASS-WITH-RECORDS-FIX 2026-07-16)**。⚠v4 実測 = peak 350 MiB/RSS 1310 MB/CPU 1.56% (v2/v3 同値) だが baseline 308/delta 42/window n=9 は v2/v3 (340/10/12) と異なる — §3 の定常 ~8 steps/s と R1 cap 結論 (N=4) は不変。
 **⚠ scope**: 本 doc = 実装可能な spec の固定。**実装 (I0) は E0 の後** — E0 fence (pN 定義) と I0 gate は不変。
 数値で「E0 pin」と記す項は E0 実測で確定するまで PROVISIONAL。
 
@@ -50,7 +49,8 @@ rollouts/
 
 ## §3 disk budget + rotation (要件 #1、Stage-A :125 の N-process 再見積)
 
-実測基礎 (calibration `e1298c4bf6`、D0_CALIBRATION_ONLY ⇒ E0 で再確認): init ≈ 80 s/proc、定常 ≈ **8 RL steps/s/proc**
+実測基礎 (calibration v4 `fd536235e9` = 確定 evidence; timing 導出は v2 trace 由来で v4 同等、D0_CALIBRATION_ONLY ⇒
+E0 で再確認): init ≈ 80 s/proc、定常 ≈ **8 RL steps/s/proc**
 ⇒ 900-step episode ≈ 113 s ⇒ **~30 ep/h/proc、N=4 で ~120 ep/h**。0.5 MB/ep (Stage-A :125) ⇒ **~60 MB/h、24 h ≈ 1.4 GB**。
 - **rotation 方針: 削除しない**(容量が問題にならない)。retention = run 単位 dir、disk 残量 < 50 GB で supervisor が
   loud warn (削除は人間判断 — 学習データの silent destruction をしない)。

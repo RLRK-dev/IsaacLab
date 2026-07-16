@@ -12,7 +12,7 @@ status 記法: ✅=素材充足 (裁定可) / 🔶=部分 (収集中) / ⬜=未�
 
 ---
 
-## 項 1 — N と資源上限 🔶
+## 項 1 — N と資源上限 ✅ (MEASURED v4・pN 独立 verify PASS)
 
 **DoD**: 1-process 実測 profile (GPU MiB [⚠CPU mode でも warp 配列は cuda:0 — COMP3 §7]・CPU util/thread・RAM) +
 両 GPU 現占有 + ≤4 proc 規則 cite ⇒ N は演算で決める。
@@ -21,8 +21,10 @@ status 記法: ✅=素材充足 (裁定可) / 🔶=部分 (収集中) / ⬜=未�
 - GPU 序列: cuda:2 = RTX PRO 4000 24GB (VLM+訓練優先) / cuda:0 = A6000 48GB (Isaac/Newton)。route env = **cuda:0 系**
   (canonical route は device-fragile cuda:0 ONLY — memory `project-canonical-route-device-fragile-cpu-vs-cuda-2026-07-02`)。
 - ⚠ vision/WM 資源予約 (node invariant §5): N 採択は「空きの全部」を取らない。
-- **PENDING-MEASURE**: 1-process profile (live route env wc=1 CPU step、rollout 中の nvidia-smi MiB / psutil CPU%/threads
-  / RSS)。→ 実測後に N 上限式: `N ≤ min(4/GPU 規則, floor(GPU_free/GPU_per_proc), floor(CPU_cores_eff/threads_per_proc), RAM)`。
+- **MEASURED (v4 `fd536235e9`、pN 独立 verify PASS)**: GPU peak 350 MiB (baseline 308/delta 42)・RSS 1310 MB・
+  CPU 1.56% 正規化 ≈1.0 core・threads 144・n_window=9。N 上限式 → GPU≈132/RSS≈344/CPU≈63、**拘束 = ≤4 規則** (R1 裁定)。
+  artifact 系譜 = v1 deadcpu → v2 provenance gap → v3 closure gap → **v4 (確定 evidence)**、全保全。
+  ⚠v4a crash 捕捉の narrative は UNVERIFIED (crash artifact 未保全、非 blocker — pN 指示で明記)。
 
 ### 項 1 run 前 protocol (OPS-SUP CONCUR-WITH-CONDITIONS、run 前固定・全条件 hard)
 
@@ -120,4 +122,4 @@ grep 実測 (`STAGEA_TRAINER_ENV_DESIGN_GATE_RSTECHLEAD_20260712.md`、multi-wor
 ## 収集順 (%12 予定) — 進捗 2026-07-16 18:3x
 1. ✅ 項 5 caller grep + 項 2 棚卸し grep → 2. ✅ 項 4 line-anchor + 項 3 trainer define + 項 6 棚卸し
 → 3. 🔶 項 1 の 1-process profile 実測 (protocol = pN 6 条件で固定済、run 待ちのみ)。
-**status: 項 2/3/4/5/6 = 裁定可 (✅)、項 1 = protocol 固定・実測待ち (🔶)。**
+**status: 全 6 項 CLOSE — 項 1 evidence = calibration v4 `fd536235e9` (pN PASS、artifact 系譜 v1 deadcpu→v2 provenance gap→v3 closure gap→v4、全保全)。**

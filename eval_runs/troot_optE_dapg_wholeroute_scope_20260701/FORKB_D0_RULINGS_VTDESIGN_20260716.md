@@ -124,3 +124,17 @@
 ### PROVISIONAL の扱い = 適正
 
 §0/§3/§7 の PROVISIONAL 明記 + pN HOLD（v3 calibration: as_run sha256/env scrape/分母 in-artifact 化）→ §3 数値差替え → E0 最終、の三段は records-match-fact に適合。⚠ **v3 で数値が実質変動した場合（例 steps/s が ±30% 級）、§3 と R1-1 margin 表は差替え** — ただし **R1 の拘束構造（唯一の拘束=4-proc 規則）は margin 30-80× ゆえ v3 で覆る見込みは薄い**（覆れば R1 再裁定、loud）。
+
+---
+
+## EVIDENCE-RECORD UPDATE (record-only、%12 custodial per OPS-SUP PASS-WITH-RECORDS-FIX 2026-07-16 19:5x。設計内容 無変更・p5 通知済)
+
+- **item-1 evidence = 独立 verify PASS** (OPS-SUP-CODEX、v4 再々 verify): evidence artifact = **calibration v4 `fd536235e9`**
+  (blob sha256 `8d07643b…294dad`、closure 9/9・at-load==post-run・changed_during_run=[]・fingerprint 67 key・
+  recording sha=banked golden lineage 一致)。R1-0 の evidence 指示は v2/v3 系譜から **v4 へ supersede**。
+- ⚠ **精度記録 (pN 指示)**: v4 は v2/v3 と「完全同値」ではない — **baseline 308 MiB / delta 42 / window n=9**
+  (v2/v3: baseline 340/delta 10/n=12)。peak 350 MiB / RSS 1310 MB / CPU mean 1.56% は同値で **R1 の cap 結論 (N=4) 不変**。
+- ⚠ v4a crash 捕捉の主張 (「fail-loud が phantom __file__ を実捕捉」) = **narrative-only UNVERIFIED** (crash artifact 未保全、
+  非 blocker)。
+- ⇒ **D0 = 6/6 CLOSE (design + evidence)**。E0 = D1 事前登録 (K=200/K_fail=3/contention≥0.8/決定論/memory gate) に従い
+  fresh N=1 から開始可 (v4 非流用)。

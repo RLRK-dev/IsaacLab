@@ -22,6 +22,7 @@ provenance:
 authority: "Human-Rs 2026-07-16 verbatim『推奨でよい、fork Bで進めて』(作成承認) + 2026-07-16 18:0x『承認』(D0 [DEFINE] = 起動承認、%12 上程への回答)。"
 session_history:
   - "2026-07-16 18:0x D0 [DEFINE] Rs承認 (起動) — D0 design gate 開始 (design=p5+%12, evidence=w2:p4, verify=OPS-SUP-CODEX)"
+  - "2026-07-16 19:5x D0 = 6/6 CLOSE (design R1-R6 + item-1 evidence = calibration v4 fd536235e9、OPS-SUP 独立 verify PASS-WITH-RECORDS-FIX)。D1 spec = CONFORM 7/7 (v0.2)。E0 = 事前登録 (K=200/K_fail=3/contention≥0.8/決定論/memory) に従い fresh N=1 から開始可"
 created: 2026-07-16T17:49:20+09:00
 last_updated: 2026-07-16T18:05:00+09:00
 spec_version: LTM-1 v1.2
@@ -31,7 +32,7 @@ spec_version: LTM-1 v1.2
 
 ## 0. 起票状態と境界
 
-**IN_PROGRESS (起動承認済 2026-07-16 18:0x、Rs『承認』= D0 [DEFINE])。** D0 design gate から開始。probe (E0) は D0 の metric 定義固定後、source 実装 (I0) は D0/E0 bank 後。
+**IN_PROGRESS。D0 = 6/6 CLOSE (2026-07-16 19:5x: design 裁定 R1-R6 + item-1 evidence v4 `fd536235e9` = OPS-SUP 独立 verify PASS)。D1 spec = CONFORM 7/7 (v0.2)。現 phase = E0** (事前登録済 predicate: K=200ep/K_fail=3/contention≥0.8/byte-repro hard/死計器 正対照; v4 は非流用、N=1 も fresh)。I0 は D0/E0 bank 後。
 
 - 採択手段: **fork B** = `world_count=1`、`use_mujoco_cpu=True` のproven route envをN processで収集。
 - C: minimal smokeのみ。
