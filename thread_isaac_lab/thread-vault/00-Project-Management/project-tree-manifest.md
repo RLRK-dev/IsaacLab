@@ -193,7 +193,7 @@ _247 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-ROOT-optE-route-dapg-C1C2-P2-routeexec` | COMPLETE | `T-ROOT-optE-route-dapg-C1C2` |
 | `T-ROOT-optE-route-dapg-C1C2-P2-trainer` | IN_PROGRESS | `T-ROOT-optE-route-dapg-C1C2` |
 | `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild` | IN_PROGRESS | `T-ROOT-optE-route-dapg-C1C2-P2-trainer` |
-| `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB` | PENDING | `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild` |
+| `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB` | IN_PROGRESS | `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild` |
 | `T-ROOT-optE-route-dapg-C1C2-P2-trainer-stageA` | COMPLETE | `T-ROOT-optE-route-dapg-C1C2-P2-trainer` |
 | `T-RS6-6` | IN_PROGRESS | `T-L1X-Substrate-Realism` |
 | `T-RS7-1` | IN_PROGRESS | `T-L1X-Substrate-Realism` |
