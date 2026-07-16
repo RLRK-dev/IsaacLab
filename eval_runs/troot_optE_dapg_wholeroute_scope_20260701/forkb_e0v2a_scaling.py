@@ -22,9 +22,10 @@ an INJECTED CPU-zero self-test in a SEPARATE subprocess whose expected exit-2 ma
 failing the real run; harness source self-hash pre/post match. Every predicate failure escalates to errors and
 overall exit 2.
 
-Run (cuda:0 pinned):
+Run (cuda:0 pinned; env7 direct call intentional -- ./isaaclab.sh -p targets env_isaaclab, but the fork-B
+substrate is env_isaaclab7 [CLAUDE.md Option-E note]; the guard-wrapper exit-code rationale also applies):
     CUDA_VISIBLE_DEVICES=0 /home/rlrk/env_isaaclab7/bin/python \
-        eval_runs/troot_optE_dapg_wholeroute_scope_20260701/forkb_e0v2_scaling.py
+        eval_runs/troot_optE_dapg_wholeroute_scope_20260701/forkb_e0v2a_scaling.py
 """
 
 from __future__ import annotations
