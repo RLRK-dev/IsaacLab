@@ -50,7 +50,7 @@ Logic tree v1 (`~/.claude/projects/-home-rlrk-IsaacLab/memory/project_logic_tree
 
 <!-- GEN:NEST:BEGIN (build_nest_snapshot.py; 手書き禁止) -->
 
-_246 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
+_247 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
 
 | node_id | status | parent |
 |---|---|---|
@@ -193,6 +193,7 @@ _246 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-ROOT-optE-route-dapg-C1C2-P2-routeexec` | COMPLETE | `T-ROOT-optE-route-dapg-C1C2` |
 | `T-ROOT-optE-route-dapg-C1C2-P2-trainer` | IN_PROGRESS | `T-ROOT-optE-route-dapg-C1C2` |
 | `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild` | IN_PROGRESS | `T-ROOT-optE-route-dapg-C1C2-P2-trainer` |
+| `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB` | PENDING | `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild` |
 | `T-ROOT-optE-route-dapg-C1C2-P2-trainer-stageA` | COMPLETE | `T-ROOT-optE-route-dapg-C1C2-P2-trainer` |
 | `T-RS6-6` | IN_PROGRESS | `T-L1X-Substrate-Realism` |
 | `T-RS7-1` | IN_PROGRESS | `T-L1X-Substrate-Realism` |
