@@ -451,3 +451,26 @@ z-scope 明文化（escape = lateral+crossing-loss のみ、z 逸脱は G6 z-ban
 - **R1** = §S3.5「chain 位置」を FENCE 整合へ訂正。旧文（「次 = /pre-check 再走」「解除 = 再走 PASS 後」のみ）は、本 §S3.5a で HOLD を書いた同 arc で chain 行を更新し残した**内部矛盾**であり、かつ現行 pN/p6 面（LEDGER `bf5feef0bd`: /pre-check = FENCE〔correction bank + exact closure probe 再生成 + pN readback まで〕）を飛び越えていた。訂正後 = evidence closure → pN readback → FENCE 解除 → /pre-check。design leg 閉は維持。
 - **R2** = §S3.5 probe leg の「working tree clean 確認済」を撤回し **path 限定主張**へ（実測は banked json path の `git status` clean のみ — 同時点の repo は `route_executor.py` M 等で ambient dirty）。**#10 と同 class〔claim scope > measurement scope〕の残存 1 件を pN readback が捕捉** — 訂正番号は増やさず #10 の cleanup に帰属。
 - 検証: R1 の fence 文言は LEDGER の `bf5feef0bd` word-diff を自読して cite（message 転記でない）。R2 は自分の実測記録（path 限定 status check）との照合で確定。
+
+---
+
+## §S4 🔒 §S 解除裁定 — **GRANT〔scoped〕**: swept 意味論 = 批准（premise-set 条件付き・committed HEAD 限定）／ reward-valid・training-ready 禁止は §S と独立に存続（2026-07-17 06:2x、入力 = leg 3 再走 OUTCOME `6ec126b1bb`〔Q1-Q3 + issues 表、p5 全読〕）
+
+### §S4.1 判定の枠 — §S の主題と、解除条件の解釈裁定
+- §S（:333）が名指した hazard = **「HEAD で走る run の seat/G3+/escape 出力が【未批准の reward 意味論】で採点される」**（run 記録の妥当性 hazard）。訓練 readiness は §S の主題ではない（それは I1/I2 系 = gate② 完了条件 + pN の reward-valid/training-ready 禁止が別軸で保持）。
+- §S2 付帯 2(ii)「解除 = leg 3 /pre-check PASS 後」の解釈: leg 3 再走 verdict は主題を**分割**した — **意味論 sub-claim = 批准可能（verifier 明言・Q3）** ／ BLOCK は**訓練批准**（別主題、要因 = carry 済 I1/I2 + 新規 ISSUE2 のみ・**I3/I4 欠陥ゼロ**）。⇒ **「PASS」は §S の主題への PASS と読む**。反対読み（訓練批准まで §S 存続）は、§S が名指していない hazard に §S を人質へ取らせ、chain が意図的に分離した軸（§13.3 の severity 分離・軸別 tri-state）を再混同する。**本項で §S2 付帯 2(ii) の文言を supersede（解釈明示）。**
+
+### §S4.2 批准内容（Q3 逐語を採択）+ premise 執行の p5 自読確認
+- 批准命題: **「committed HEAD の seat/latch/escape 述語意味論は、【有効な per-episode pin identity + fired pin + reset 時 eq clear】の前提下で、単一 episode 上 banked correctness と等しい」**（前提の supply = (a)(b) 実装、I1 disposition で宣言済）。
+- **premise の fail-closed 執行は機構実在（p5 自読、本裁定の load-bearing leg）**:
+  - identity 無（pin 発火せず／wire されず）→ `_pin_seat_seg=None` → `_seat_identity_segments` `()` → MISS → G3 非 latch → ordered chain で G4+ 到達不能・escape は pre-G3 恒 False（§S2 row 2 の 3 経路 + `:1690-1699` ordered latch）。**silent 誤採点の状態が存在しない。**
+  - `route_c1_pin=True` × pin-fields 無 recording → **`ValueError` raise**（`newton_route_env.py:1782-1786`「route_c1_pin=True but prepared recording dropped pin witness fields」）+ partial witness → raise（`:649-657` all-or-none 契約）。**loud 死、採点に到達しない。**（committed `route_executor._prepare_recording` は fields を drop する = §S3.5a B1 — ゆえに committed HEAD では True 側は必ずこの fence に当たる。）
+
+### §S4.3 scope 限定（⛔ 3 本）
+1. **committed HEAD（fail-closed fence 実在）に限る** — dirty tree は `route_executor.py` pin-fields 差分が fence を **bypass**（ISSUE2 の順序 hazard、leg 3 再走 :96）ため本批准の外。**現 dirty tree からの訓練起動禁止に concur。** committed-HEAD lineage 外の code 状態で走る run は従前どおり loud 宣言義務。
+2. **単一 episode 意味論に限る** — multi-episode（lifecycle）妥当性は (a)(b) の供給物。**reward-valid / training-ready 禁止は §S と独立の carry として存続**（(a)(b) + bundle land + (d) まで、pN 規律のまま）。gate② = 完了ではない（完了条件不変）。
+3. **ISSUE2 bundle 裁定に concur**: route_executor pin-fields land は「(a)(b) より先」ではなく **(a)(b) と同一 landing に bundle（先行 land 禁止）** — §S3.5a (i)/B1 行の「land = precondition」の**先行 land 読みを supersede**（land はなお必要、順序が変わった: bundle → land 後 exact-landed 10/10 再走）。
+
+### §S4.4 効果
+- **§S run-hygiene 規則（:333）= 解除**: committed-HEAD lineage 上の将来 run に sec_S_exposure 宣言・pre-sweep pin 義務は不要。歴史 artifact の宣言は遡及編集しない（記録は当時の事実）。
+- 解除の bank・LEDGER/地図 flip = %12/p6（owner chain）。本裁定は §S の定義者鍵のみを回す — evidence/adversarial 軸の pN 規律には触れない。
