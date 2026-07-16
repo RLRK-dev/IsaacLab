@@ -129,6 +129,11 @@ def main():
         default=0,
         help="TEST HOOK (mechanism legs): hard-crash after N published episodes (0 = off)",
     )
+    ap.add_argument(
+        "--test-marker-exit-zero",
+        action="store_true",
+        help="TEST HOOK (B3 fresh-marker control): publish 1 episode, write FAILURE.json, exit 0",
+    )
     a = ap.parse_args()
 
     signal.signal(signal.SIGTERM, _on_sigterm)
@@ -193,7 +198,16 @@ def main():
         "code_sha": code_sha,
         "start_ts": time.time(),
         "drive_mode": a.drive_mode,
-        "test_hooks": {"test_crash_after": a.test_crash_after} if a.test_crash_after else {},
+        "test_hooks": (
+            {
+                k: v
+                for k, v in (
+                    ("test_crash_after", a.test_crash_after),
+                    ("test_marker_exit_zero", a.test_marker_exit_zero),
+                )
+                if v
+            }
+        ),
         "sec_S_exposure": SEC_S_EXPOSURE,
     }
     meta_txt = json.dumps(proc_meta, indent=1)
@@ -280,6 +294,20 @@ def main():
             if a.test_crash_after and published >= a.test_crash_after:
                 print(f"[collector {a.proc_index}] TEST CRASH (--test-crash-after={a.test_crash_after})", flush=True)
                 os._exit(17)  # simulated hard crash: no cleanup, no FAILURE.json -- the supervisor must cope
+            if a.test_marker_exit_zero and published >= 1:
+                (outbox / "FAILURE.json").write_text(
+                    json.dumps(
+                        {
+                            "last_episode": ep_idx - 1,
+                            "reason": "TEST hook marker-exit-zero (B3 fresh-marker control)",
+                            "ts": time.time(),
+                            "rc": a.restart_count,
+                        },
+                        indent=1,
+                    )
+                )
+                print(f"[collector {a.proc_index}] TEST MARKER written; exiting 0", flush=True)
+                return 0
             obs_prev = env.reset()[0]
     except Exception:  # R6-1 soft-crash marker: {last_episode, reason, ts, rc}
         (outbox / "FAILURE.json").write_text(

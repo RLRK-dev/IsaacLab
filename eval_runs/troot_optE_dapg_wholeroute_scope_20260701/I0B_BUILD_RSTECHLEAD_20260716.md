@@ -94,3 +94,20 @@ HEAD の FM3/FM4 tighten コードは live かつ **未批准** (owner chain = /
 - docstring 2 行はリテラル除去 (supervisor 経由の記述へ変更)。残る literal = 機能 2 行のみ (supervisor:116 / collector:189、各 typed 注釈)。
 - **self-test = `scripts/validations/test_check_safety_cvd.sh` 8/8 PASS** — production `cvd_ban_filter` を source (コピー実装でない = 配線の証明、E0v2a B7 と同型)。負対照 4 本: 無注釈代入 / environ 直接変異×両注釈 spoof / get 併記変異 = 全 BANNED。
 - validator-level 対照 = commit 前に実測 (staged 違反 fixture → CHECK 6 FAIL / 本 staged set → PASS)。
+
+## pN I0-b HOLD 対応 (B1-B4 + records、2026-07-16 23:2x 起票 — 各対応は typed control 付き)
+
+- **B1 (filter bypass)** → filter v2: child-env 許容 = target が文字どおり `env["CUDA_VISIBLE_DEVICES"]` ∧ 値が `str(<ident>)` か数字リテラル ∧ 行内 `os.environ`/`;` ゼロ。provenance 許容 = `os.environ.get` の dict-entry/単純代入形のみ ∧ `os.environ[`・get 以外の environ メソッド・`;` ゼロ。**self-test 13/13** (pN の 2 制御 `cfg[...]` / `update();get()` = BANNED 実測 + 任意呼出値 BANNED 追加)。既知残差 = 行跨ぎ alias dataflow (check comment に宣言 — grep は tripwire、review が backstop)。
+- **B2 (preflight fail-open + 順序)** → fail-closed: count 不能 (missing / nonzero / timeout) = None → **LAUNCH_ABORT.json (stage/detail/§S) + run_manifest preflight=ABORT + exit 2、spawn ゼロ**。D1 §5 順序どおり run_manifest を preflight より先に書く。test hook = `--nvidia-smi-cmd` (CLI、environ 不使用)。
+- **B3 (marker OR 検出)** → failure = `rc != 0` **OR** fresh marker (marker.rc == 現個体 restart_count)。stale marker (旧個体) = 不発。unreadable marker = fail-closed (failure 扱い)。hooks: collector `--test-marker-exit-zero` (1 ep publish → marker 書込 → exit 0) + supervisor `--test-crash-rc-max` (個体世代で hook 転送制御)。
+- **B4 (schema)** → **p5 v1.9 §B4-DISPOSITION = (a) ADOPT** (bank 本 chunk): termination_reason は taxonomy 着地まで "" 許容 (= 未測定) + truncated_by 3 値 additive 批准。**4 pin 継承**: pin-1 consumer guard (終端意味論は done/time_out+truncated_by のみ、"" 分岐は fail-loud、⛔truncated_by→time_out 写像禁止 — **trainer-ingest spec への binding carry**) / pin-2 backfill 禁止 / pin-3 LEDGER loud 記載 (p6 chain、Rs veto 可) / pin-4 失効 = taxonomy 着地+collector 配線+schema 再 verify。collector は既に (a) 形 → L7 conformance leg で landed 実測。
+- **records** → §S field を HALT.json / run_summary.json / LAUNCH_ABORT.json にも追加 (v3 以降 supervisor artifact も被覆。**v1/v2 時点の正確な範囲 = run_manifest / proc_meta / ep manifest / leg result のみ** — 過去の「全 artifact」claim をこの限定に訂正)。handoff memory の stale 「未 bank」記載 = 本 chunk 末に reconcile。
+
+**v3 pre-registered predicates (run 前固定; 未変更軸 L1a/L1b/L4/L5 は pN 指示により再走不要 — v2 が landed 証拠):**
+| leg | PASS 条件 (事前固定) |
+|---|---|
+| L2 再走 | v1/v2 と同型: 4 個体 (rc000-003)・seed 相異・ep 4 本 上書きゼロ・HALT + exit 2 (新検出ロジック下で crash 経路不変の証明) |
+| **L2b (新)** | rc0 個体: 1 ep publish + FAILURE.json (rc=0) + exit 0 → supervisor が **rc=0 でも fresh marker で failure 計上 + restart** / rc1 個体 (hook 無): stale marker 残存下で完走 = success。予測: 個体 2・restart 1・HALT 無・supervisor rc 0・ep 3 本 (採番 0-2) |
+| L3 再走 | v2 と同型 (default: trainer=cuda:2, CVD=["0"] / fallback: trainer=cuda:0, N=3) |
+| **L6 (新)** | `/bin/false` と missing cmd の両方で: exit 2 ∧ LAUNCH_ABORT (stage=preflight_unknown, §S 有) ∧ manifest preflight=ABORT:* ∧ proc dir ゼロ |
+| **L7 (新)** | manifest: termination_reason=="" ∧ truncated_by∈{workload_step_budget,env_done,supervisor_stop} ∧ §S 有 ∧ sha 一致 / npz: 必須 9 array の対称差 = ∅ ∧ time_out all-False / rc 0 |

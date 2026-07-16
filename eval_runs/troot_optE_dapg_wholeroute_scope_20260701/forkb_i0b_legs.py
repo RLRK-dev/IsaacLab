@@ -205,6 +205,166 @@ def leg_l2():
     return {"leg": "L2_kfail_restart_halt", "passed": passed, "evidence": ev}
 
 
+def leg_l2b():
+    """B3 marker controls: fresh FAILURE.json + rc0 exit MUST restart; a stale marker must NOT retrigger.
+
+    The rc0 individual (hooked) publishes 1 episode, writes FAILURE.json, exits 0 -> the supervisor must
+    count a failure and restart. The rc1 individual (unhooked) completes cleanly with the rc0 marker still
+    on disk (stale) -> must be treated as success. Expected: 1 restart, no HALT, supervisor rc 0.
+    """
+    root = RUNS / "l2b"
+    root.mkdir(parents=True, exist_ok=True)
+    cmd = [
+        PY,
+        str(SUPERVISOR),
+        "--run-root",
+        str(root),
+        "--base-seed",
+        "890",
+        "--episodes",
+        "2",
+        "--n-collect",
+        "1",
+        "--k-fail",
+        "3",
+        "--episode-steps",
+        "60",
+        "--test-crash-slot",
+        "0",
+        "--test-marker-exit-zero",
+        "--test-crash-rc-max",
+        "0",
+    ]
+    with open(root / "supervisor.log", "w") as lf:
+        proc = subprocess.Popen(cmd, stdout=lf, stderr=subprocess.STDOUT)
+    ev = {}
+    try:
+        ev["rc"] = proc.wait(timeout=900)
+    except subprocess.TimeoutExpired:
+        proc.kill()
+        ev["rc"] = "timeout_killed"
+    log = (root / "supervisor.log").read_text(errors="replace") if (root / "supervisor.log").exists() else ""
+    pdir = root / "proc_0"
+    metas = sorted(pdir.glob("proc_meta.rc*.json"))
+    marker_rc = None
+    if (pdir / "FAILURE.json").exists():
+        try:
+            marker_rc = json.loads((pdir / "FAILURE.json").read_text()).get("rc")
+        except json.JSONDecodeError:
+            marker_rc = "unreadable"
+    ev.update(
+        {
+            "individuals": [m.name for m in metas],
+            "fresh_marker_restarted": "FAILED rc=0 (fresh marker=True)" in log,
+            "stale_marker_completed": "rc=0 complete (restarts used=1)" in log,
+            "marker_rc_on_disk": marker_rc,
+            "halt_json": (root / "HALT.json").exists(),
+            "episodes": sorted(p.name for p in pdir.glob("ep_*.npz")),
+        }
+    )
+    passed = bool(
+        ev["rc"] == 0
+        and len(metas) == 2
+        and ev["fresh_marker_restarted"]
+        and ev["stale_marker_completed"]
+        and not ev["halt_json"]
+        and marker_rc == 0
+        and len(ev["episodes"]) == 3
+    )
+    return {"leg": "L2b_marker_fresh_stale", "passed": passed, "evidence": ev}
+
+
+def leg_l6():
+    """B2 preflight fail-closed: unmeasurable GPU count aborts the launch with artifacts, spawning nothing."""
+    ev = {}
+    for tag, stub in (("nonzero", "/bin/false"), ("missing", "/nonexistent_nvidia_smi_xyz")):
+        root = RUNS / f"l6_{tag}"
+        root.mkdir(parents=True, exist_ok=True)
+        cmd = [
+            PY,
+            str(SUPERVISOR),
+            "--run-root",
+            str(root),
+            "--base-seed",
+            "1",
+            "--episodes",
+            "1",
+            "--n-collect",
+            "1",
+            "--nvidia-smi-cmd",
+            stub,
+        ]
+        with open(root / "supervisor.log", "w") as lf:
+            p = subprocess.Popen(cmd, stdout=lf, stderr=subprocess.STDOUT)
+        try:
+            rc = p.wait(timeout=120)
+        except subprocess.TimeoutExpired:
+            p.kill()
+            rc = "timeout_killed"
+        abort = root / "LAUNCH_ABORT.json"
+        man = json.loads((root / "run_manifest.json").read_text()) if (root / "run_manifest.json").exists() else {}
+        ev[tag] = {
+            "rc": rc,
+            "launch_abort_exists": abort.exists(),
+            "abort_stage": json.loads(abort.read_text()).get("stage") if abort.exists() else None,
+            "abort_has_secS": ("sec_S_exposure" in json.loads(abort.read_text())) if abort.exists() else False,
+            "manifest_preflight": man.get("preflight"),
+            "no_proc_dirs": not list(root.glob("proc_*")),
+        }
+    ok = all(
+        e["rc"] == 2
+        and e["launch_abort_exists"]
+        and e["abort_stage"] == "preflight_unknown"
+        and e["abort_has_secS"]
+        and str(e["manifest_preflight"]).startswith("ABORT")
+        and e["no_proc_dirs"]
+        for e in ev.values()
+    )
+    return {"leg": "L6_preflight_failclosed", "passed": bool(ok), "evidence": ev}
+
+
+def leg_l7():
+    """B4 schema conformance at landed bytes per RULINGS v1.9 sec B4-DISPOSITION (minimal collector rerun)."""
+    import numpy as np
+
+    outbox = RUNS / "l7" / "proc_0"
+    proc, _log = _spawn_collector(outbox, seed=901, episodes=1, k=200, steps=60)
+    ev = {}
+    try:
+        ev["rc"] = proc.wait(timeout=420)
+    except subprocess.TimeoutExpired:
+        proc.kill()
+        ev["rc"] = "timeout_killed"
+    man_p = outbox / "ep_000000.manifest.json"
+    npz_p = outbox / "ep_000000.npz"
+    if not (man_p.exists() and npz_p.exists()):
+        return {"leg": "L7_schema_v19", "passed": False, "evidence": {**ev, "error": "episode missing"}}
+    man = json.loads(man_p.read_text())
+    arrays = dict(np.load(npz_p))
+    required_arrays = {"o", "o_next", "a_raw", "a_executed", "r_paid", "done", "time_out", "invalid_mask", "cable_traj"}
+    ev.update(
+        {
+            "termination_reason_empty": man.get("termination_reason") == "",
+            "truncated_by_ratified": man.get("truncated_by") in {"workload_step_budget", "env_done", "supervisor_stop"},
+            "sec_S_in_manifest": "sec_S_exposure" in man,
+            "arrays_symmetric_diff": sorted(required_arrays ^ set(arrays)),
+            "time_out_all_false": bool(~arrays["time_out"].any()),
+            "sha_matches": man.get("sha256") == _sha(npz_p),
+            "n_steps": man.get("n_steps"),
+        }
+    )
+    passed = bool(
+        ev["rc"] == 0
+        and ev["termination_reason_empty"]
+        and ev["truncated_by_ratified"]
+        and ev["sec_S_in_manifest"]
+        and ev["arrays_symmetric_diff"] == []
+        and ev["time_out_all_false"]
+        and ev["sha_matches"]
+    )
+    return {"leg": "L7_schema_v19", "passed": passed, "evidence": ev}
+
+
 def _lever_case(tag, device_map, n_collect):
     root = RUNS / f"l3_{tag}"
     root.mkdir(parents=True, exist_ok=True)
@@ -419,7 +579,17 @@ def leg_l5():
     }
 
 
-LEGS = {"l1a": leg_l1a, "l1b": leg_l1b, "l2": leg_l2, "l3": leg_l3, "l4": leg_l4, "l5": leg_l5}
+LEGS = {
+    "l1a": leg_l1a,
+    "l1b": leg_l1b,
+    "l2": leg_l2,
+    "l2b": leg_l2b,
+    "l3": leg_l3,
+    "l4": leg_l4,
+    "l5": leg_l5,
+    "l6": leg_l6,
+    "l7": leg_l7,
+}
 
 
 def main():

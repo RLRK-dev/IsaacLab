@@ -61,19 +61,41 @@ def _sha256_file(p):
     return h.hexdigest()
 
 
-def _gpu_compute_proc_count(gpu_index):
-    """Pre-existing compute processes on the GPU (R1-4 counts PROCESSES, not memory)."""
+def _gpu_compute_proc_count(gpu_index, nvidia_smi_cmd="nvidia-smi"):
+    """Pre-existing compute processes on the GPU (R1-4 counts PROCESSES, not memory).
+
+    Returns None when the count is UNKNOWN (tool missing, timeout, or nonzero exit) -- the caller must
+    treat None as FAIL-CLOSED: the <=4/GPU invariant can never be assumed satisfied without a measurement
+    (I0-b HOLD B2). ``nvidia_smi_cmd`` is a test hook (config-passed, not environ) for the fail-closed
+    controls.
+    """
     try:
-        out = subprocess.run(
-            ["nvidia-smi", "--query-compute-apps=pid", "--format=csv,noheader", "-i", str(gpu_index)],
+        r = subprocess.run(
+            [nvidia_smi_cmd, "--query-compute-apps=pid", "--format=csv,noheader", "-i", str(gpu_index)],
             capture_output=True,
             text=True,
             timeout=30,
-        ).stdout
-    except (OSError, subprocess.TimeoutExpired):
-        print("[supervisor] WARN: nvidia-smi unavailable; assuming k=0 pre-existing procs", flush=True)
-        return 0
-    return len([ln for ln in out.splitlines() if ln.strip()])
+        )
+    except (OSError, subprocess.TimeoutExpired) as e:
+        print(f"[supervisor] GPU preflight UNKNOWN ({type(e).__name__}) -- failing CLOSED", flush=True)
+        return None
+    if r.returncode != 0:
+        print(f"[supervisor] GPU preflight UNKNOWN (rc={r.returncode}) -- failing CLOSED", flush=True)
+        return None
+    return len([ln for ln in r.stdout.splitlines() if ln.strip()])
+
+
+def _fresh_failure_marker(run_root, slot):
+    """True iff proc_{i}/FAILURE.json exists AND was written by the CURRENT individual (marker rc ==
+    slot.restart_count). A stale marker from an earlier individual is not a failure signal; an unreadable
+    marker is treated as a failure signal (fail-closed). I0-b HOLD B3."""
+    p = run_root / f"proc_{slot.index}" / "FAILURE.json"
+    if not p.exists():
+        return False
+    try:
+        return json.loads(p.read_text()).get("rc") == slot.restart_count
+    except (json.JSONDecodeError, OSError):
+        return True
 
 
 class Slot:
@@ -110,8 +132,13 @@ def _spawn(slot, a, run_root, gpu_index):
         "--drive-mode",
         a.drive_mode,
     ]
-    if a.test_crash_slot == slot.index and a.test_crash_after > 0:
+    hooks_this_individual = a.test_crash_slot == slot.index and (
+        a.test_crash_rc_max < 0 or slot.restart_count <= a.test_crash_rc_max
+    )
+    if hooks_this_individual and a.test_crash_after > 0:
         cmd += ["--test-crash-after", str(a.test_crash_after)]
+    if hooks_this_individual and a.test_marker_exit_zero:
+        cmd += ["--test-marker-exit-zero"]
     env = dict(os.environ)
     env["CUDA_VISIBLE_DEVICES"] = str(gpu_index)  # cvd-child-env: R1-3 pin on the COPIED child env dict
     with open(slot.log_path, "w") as logf:  # Popen dups the fd; the child keeps writing after we close ours
@@ -147,8 +174,22 @@ def main():
     ap.add_argument("--episode-steps", type=int, default=230)
     ap.add_argument("--drive-mode", choices=("feedforward", "ik_chord"), default="feedforward")
     ap.add_argument("--device-map", choices=tuple(DEVICE_MAPS), default="default")
-    ap.add_argument("--test-crash-slot", type=int, default=-1, help="TEST HOOK: slot receiving --test-crash-after")
+    ap.add_argument("--test-crash-slot", type=int, default=-1, help="TEST HOOK: slot receiving the crash hooks")
     ap.add_argument("--test-crash-after", type=int, default=0)
+    ap.add_argument(
+        "--test-crash-rc-max",
+        type=int,
+        default=-1,
+        help="TEST HOOK: forward crash hooks only to individuals with restart_count <= this (-1 = all)",
+    )
+    ap.add_argument(
+        "--test-marker-exit-zero",
+        action="store_true",
+        help="TEST HOOK: collector writes FAILURE.json then exits 0 (B3 fresh-marker control)",
+    )
+    ap.add_argument(
+        "--nvidia-smi-cmd", default="nvidia-smi", help="TEST HOOK: preflight command (B2 fail-closed controls)"
+    )
     ap.add_argument("--poll", type=float, default=2.0)
     ap.add_argument("--grace", type=float, default=20.0)
     a = ap.parse_args()
@@ -158,25 +199,15 @@ def main():
     run_root = Path(a.run_root)
     run_root.mkdir(parents=True, exist_ok=True)
 
-    k_pre = _gpu_compute_proc_count(gpu_index)
-    cap = min(4 - k_pre, dm["n_collect_cap"])
-    requested = a.n_collect if a.n_collect > 0 else cap
-    n_collect = min(requested, cap)
-    print(
-        f"[supervisor] {dm['collector']} pre-existing compute procs k={k_pre} -> cap={cap}, "
-        f"requested={requested}, N_collect={n_collect} (<=4/GPU rule, R1-4)",
-        flush=True,
-    )
-    if n_collect <= 0:
-        print("[supervisor] FATAL: no collector slot available under the <=4/GPU rule", flush=True)
-        return 2
-
+    # D1 sec 5 order: write run_manifest FIRST, then the GPU preflight -- an aborted launch must still
+    # leave artifacts (I0-b HOLD B2). Preflight UNKNOWN or no free slot => fail CLOSED with LAUNCH_ABORT.
     run_manifest = {
         "launch_ts": time.time(),
         "base_seed": a.base_seed,
-        "n_collect": n_collect,
-        "requested": requested,
-        "preexisting_gpu_procs": k_pre,
+        "n_collect": None,
+        "requested": None,
+        "preexisting_gpu_procs": None,
+        "preflight": "pending",
         "device_map": dm,
         "episodes_per_slot": a.episodes,
         "episode_steps": a.episode_steps,
@@ -196,6 +227,37 @@ def main():
         ),
         "sec_S_exposure": SEC_S_EXPOSURE,
     }
+    (run_root / "run_manifest.json").write_text(json.dumps(run_manifest, indent=1))
+
+    def _launch_abort(stage, detail):
+        print(f"[supervisor] LAUNCH ABORT ({stage}): {detail} -- failing CLOSED, nothing spawned", flush=True)
+        (run_root / "LAUNCH_ABORT.json").write_text(
+            json.dumps(
+                {"stage": stage, "detail": detail, "ts": time.time(), "sec_S_exposure": SEC_S_EXPOSURE}, indent=1
+            )
+        )
+        run_manifest["preflight"] = f"ABORT:{stage}"
+        (run_root / "run_manifest.json").write_text(json.dumps(run_manifest, indent=1))
+        return 2
+
+    k_pre = _gpu_compute_proc_count(gpu_index, a.nvidia_smi_cmd)
+    if k_pre is None:
+        return _launch_abort(
+            "preflight_unknown", f"GPU compute-proc count unmeasurable via {a.nvidia_smi_cmd!r}; <=4/GPU unverifiable"
+        )
+    cap = min(4 - k_pre, dm["n_collect_cap"])
+    requested = a.n_collect if a.n_collect > 0 else cap
+    n_collect = min(requested, cap)
+    print(
+        f"[supervisor] {dm['collector']} pre-existing compute procs k={k_pre} -> cap={cap}, "
+        f"requested={requested}, N_collect={n_collect} (<=4/GPU rule, R1-4)",
+        flush=True,
+    )
+    if n_collect <= 0:
+        return _launch_abort("no_slot", f"k={k_pre} pre-existing procs leave no slot under the <=4/GPU rule")
+    run_manifest.update(
+        {"n_collect": n_collect, "requested": requested, "preexisting_gpu_procs": k_pre, "preflight": "measured"}
+    )
     (run_root / "run_manifest.json").write_text(json.dumps(run_manifest, indent=1))
 
     slots = [Slot(i) for i in range(n_collect)]
@@ -218,15 +280,17 @@ def main():
             rc = s.proc.poll()
             if rc is None:
                 continue
-            if rc == 0:
+            # D1 sec 5: failure = nonzero exit OR a FAILURE.json written by the CURRENT individual
+            # (I0-b HOLD B3). A stale marker from an earlier individual never retriggers.
+            fresh_marker = _fresh_failure_marker(run_root, s)
+            if rc == 0 and not fresh_marker:
                 s.done = True
                 s.consecutive_failures = 0
                 print(f"[supervisor] slot {s.index} rc=0 complete (restarts used={s.restart_count})", flush=True)
                 continue
             s.consecutive_failures += 1
-            failure_marker = (run_root / f"proc_{s.index}" / "FAILURE.json").exists()
             print(
-                f"[supervisor] slot {s.index} FAILED rc={rc} (soft marker={failure_marker}) "
+                f"[supervisor] slot {s.index} FAILED rc={rc} (fresh marker={fresh_marker}) "
                 f"consecutive={s.consecutive_failures}/{a.k_fail}",
                 flush=True,
             )
@@ -245,6 +309,7 @@ def main():
                             "last_rc": rc,
                             "ts": time.time(),
                             "restart_count": s.restart_count,
+                            "sec_S_exposure": SEC_S_EXPOSURE,
                         },
                         indent=1,
                     )
@@ -261,6 +326,7 @@ def main():
     summary = {
         "halted": halted,
         "ts": time.time(),
+        "sec_S_exposure": SEC_S_EXPOSURE,
         "slots": [
             {
                 "index": s.index,
