@@ -1,4 +1,4 @@
-# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.8
+# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.9
 
 **Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: D0 = 6/6 CLOSE（design + evidence）** — 裁定 v1.0 R2-R6 `11fdb0bc11` / v1.1 R1 `889ce6b640`［cuda:2 配置 = %12 CONCUR 決着］/ v1.2 要件 #7 `8304500dbd` / v1.3 D1-VERIFY（CONFORM 7/7 + AMEND-1）`9cea41ac67`。**item-1 evidence = v4 `fd536235e9` PASS**（pN 独立 verify、末尾 EVIDENCE-RECORD UPDATE `55086b197b` [record-only、%12 custodial — p5 検証・受理済: 設計文 append-only、peak 一致・RSS/CPU 近似一致 (1317.8→1310/1.58→1.56) ゆえ **R1 の N=4 結論 不変**、v4a narrative=UNVERIFIED 隔離は正]）。**v1.4 = 本 header の evidence-status 同期のみ（owner 実施、設計内容 無変更）**。**E0 status〔record-fix %12、pN 条件〕: 実測完了 `fb36c49540` → p5 E0-VERIFY = PASS（v1.5、⚠設計軸のみ・N=4 確定は この軸限定）／ pN independent verify = **HOLD**（evidence 完全性 B1-B5）→ B1/B2 = v1.6 R2-4-b + N-1 で I0 acceptance へ移管（**post-E0 design amendment**、元 §7 pre-reg PASS ではない）／ B3/B4/B5 = **E0v2 full 再走**（pN scope CONCUR-WITH-CONDITIONS 7 条件）。N=4 確定/I0 開始 = E0v2 全 PASS 後の pN 再判定。** 0-commit（bank = %12）。
 **入力**: 素材 = `FORKB_D0_MATERIALS_RSTECHLEAD_20260716.md`（DoD = `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` §21.11.2a、v1.13 `7b4c918251`）。
@@ -230,3 +230,18 @@ zero-residual scripted 収集 + DR OFF の env には **設計上 seed→data ch
 
 ### 3. ⛔ 派生 flag: INIT_XY_NOISE = 【appearance-only knob】と記録
 実測（FF + ik_chord 両 mode）で episode content に不達 ⇒ **どの training-data 多様性主張にも INIT_XY_NOISE を数えない**（appearance-only ≠ working）。処置（実効化 wire / inert 文書化 / 削除）は **(d)/trainer bring-up 設計の小項目**として carry（今は触らない — 触るのも env 変更 = gate 対象）。
+
+---
+
+## B4-DISPOSITION 🔒 termination_reason schema 裁定（v1.9、2026-07-16、%12 照会 = pN I0-b HOLD B4。p5 spot: env grep = taxonomy ゼロ実在確認 + manifest 実物 `""`+`truncated_by` 視認）
+
+### 一行 disposition: **(a) ADOPT** — `termination_reason` は env taxonomy（W1 B3b+ 成果物）着地まで `""` 許容〔意味 =「**未測定**」、「無終端」ではない〕+ `truncated_by ∈ {workload_step_budget, env_done, supervisor_stop}` を additive 批准。**(b) 却下・(c) 却下。**
+
+### 根拠と 4 pin（binding）
+- **(b) 却下 = 軸混同**: Stage-A `:117` の enum {success,timeout,drop,explosion} は **task-semantic 軸**（何が起きたか）。`infra_truncation` は**記録停止事由の軸**（なぜ記録が止まったか）— 別軸を同じ enum に足すのは category error（境界/同一性 lesson 族）。両軸は **2 field で分離**が正: `termination_reason`（semantic、未測定なら `""`）× `truncated_by`（infra、常に truthful）。**(c) 却下** = Stage-A core への breaking。**timeout 偽記 = 不可**（prohibited.md timeouts 汚染禁止 — %12 の前提どおり）。
+- **pin-1（consumer guard、trainer-ingest spec に binding）**: 学習側の終端意味論（bootstrap 判断等）は **done/time_out arrays + truncated_by のみに乗せる** — `termination_reason` が `""` であり得る間、これに分岐する consumer は **fail-loud**（`""` を黙って解釈しない）。⛔ `truncated_by` の値を time_out/termination_reason へ写像しない（step-budget 打切りの bootstrap 扱いは **trainer-ingest 設計時の明示裁定項目**とする — 今決めない、偽らない）。
+- **pin-2（無遡及）**: taxonomy 着地後も既存 `""` episode は `""` のまま（**backfill 禁止** — 「未測定だった」が歴史の真実。records-must-match-fact）。着地後の collector は前方のみ実測値を記録。
+- **pin-3（enum 不変）**: Stage-A `:117` enum は**測定値の contract として不変** — 本裁定は enum の変更でなく「未測定 sentinel の interim 許容」。⚠ **Rs-approved spec（Stage-A W0-a）に対する interim 逸脱ゆえ、LEDGER 行に loud 記載（p6 chain）— Rs はいつでも veto 可**（黙って運用しない）。
+- **pin-4（着地条件）**: 本許容の失効 = W1 B3b+ の env termination taxonomy 着地 + collector 配線 +（その時の）schema 再 verify。それまで manifest の `sec_S_exposure` 型の宣言 field 方式（今回実物で視認 — §S 規則の per-manifest 実装 = 良）を維持。
+
+⇒ %12: minimal collector schema rerun は本 disposition どおりで進めてよい。
