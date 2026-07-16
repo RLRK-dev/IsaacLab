@@ -1,0 +1,539 @@
+{
+  "MARK": "D0_CALIBRATION_ONLY -- not evidence for B-accept or N-adoption; E0 re-runs N=1 fresh",
+  "protocol": {
+    "commit_sha": "11fdb0bc11ba337ac9be8c1b3cc29b6d0a3fb690",
+    "command": "/home/rlrk/env_isaaclab7/bin/python /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/forkb_d0_calibration_profile.py --workload",
+    "CUDA_VISIBLE_DEVICES": "0",
+    "world_count": 1,
+    "workload": "FF-replay zero-residual RL steps [0,230)",
+    "warmup_steps": 30,
+    "window": [
+      30,
+      230
+    ],
+    "sampling_cadence_s": 2.0,
+    "cpu_normalization": "sum(proc-tree cpu%) / 64 cores",
+    "recording": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz",
+    "env_overrides_present": {}
+  },
+  "before": [
+    {
+      "t": 1784193658.1478515,
+      "gpu_used_mib_all": [
+        2706,
+        679
+      ]
+    },
+    {
+      "t": 1784193659.1777074,
+      "gpu_used_mib_all": [
+        2704,
+        679
+      ]
+    }
+  ],
+  "during": [
+    {
+      "t": 1784193662.2357185,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 0,
+      "tree_rss_mb": 235.913216,
+      "threads": 78,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193664.285777,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 340,
+      "tree_rss_mb": 1052.581888,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193666.3404222,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1165.447168,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193668.3950744,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1165.676544,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193670.4517515,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1165.832192,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193672.5054572,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1165.832192,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193674.5601656,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1165.836288,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193676.614894,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1165.836288,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193678.6707904,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1165.836288,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193680.7238863,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1165.836288,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193682.7788339,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1165.836288,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193684.831156,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.261376,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193686.8859704,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.392448,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193688.9442148,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.392448,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193690.9981954,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193693.0530055,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193695.1087768,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193697.1648753,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193699.2178664,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193701.2722175,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193703.3266413,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193705.3809116,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193707.4402547,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193709.4954734,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193711.5471559,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193713.6027539,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193715.6589746,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193717.7152603,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193719.7700927,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193721.8227682,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193723.877193,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193725.9303112,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193727.9872432,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193730.044664,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193732.0975192,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.515328,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193734.1525338,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.539904,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193736.2083032,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.539904,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193738.2618358,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.539904,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193740.3153143,
+      "phase": "warmup",
+      "step": 10,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.376064,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193742.3693345,
+      "phase": "window",
+      "step": 40,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.38016,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193744.428159,
+      "phase": "window",
+      "step": 70,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.384256,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193746.4837432,
+      "phase": "window",
+      "step": 90,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.40064,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193748.5403917,
+      "phase": "window",
+      "step": 110,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.417024,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193750.5929887,
+      "phase": "window",
+      "step": 120,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.417024,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193752.6488535,
+      "phase": "window",
+      "step": 140,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.417024,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193754.7000678,
+      "phase": "window",
+      "step": 160,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.417024,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193756.7562516,
+      "phase": "window",
+      "step": 170,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.417024,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193758.8105571,
+      "phase": "window",
+      "step": 180,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.437504,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193760.8629453,
+      "phase": "window",
+      "step": 200,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.4416,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193762.916752,
+      "phase": "window",
+      "step": 210,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.4416,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193764.9720457,
+      "phase": "done",
+      "step": 230,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1324.507136,
+      "threads": 144,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784193767.0250847,
+      "phase": "done",
+      "step": 230,
+      "gpu_pid_mib": 0,
+      "tree_rss_mb": 0.0,
+      "threads": 1,
+      "cpu_pct_norm": 0.0
+    }
+  ],
+  "after": [
+    {
+      "t": 1784193769.0586379,
+      "gpu_pid_mib_for_dead_pid": 0
+    }
+  ],
+  "phases_seen": [
+    "init",
+    "warmup",
+    "window",
+    "done"
+  ],
+  "workload_exit": 0,
+  "use_mujoco_cpu_observed": null,
+  "profile": {
+    "gpu_mib": {
+      "baseline_min": 340,
+      "window_mean": 350.0,
+      "peak": 350,
+      "delta_peak_minus_baseline": 10
+    },
+    "tree_rss_mb": {
+      "window_mean": 1324.4,
+      "peak": 1324.4
+    },
+    "cpu_pct_norm": {
+      "window_mean": 0.0,
+      "peak": 0.0
+    },
+    "threads": {
+      "window_max": 144
+    },
+    "n_window_samples": 11
+  }
+}
