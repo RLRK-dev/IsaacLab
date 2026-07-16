@@ -355,3 +355,27 @@ S字 in-band 優先: dx=3mm z=829 を選択=True / 無交差: fail-closed=False 
 **probe json 裏書き**: onset f2544 = first_seated 同 frame（②初回 FAIL の量子化床 fix 保存）/ post-onset seated 1.0 / `old_semantics_seated_fraction=1.0`（divergence 0 の根拠）/ FM3 誤発火 0・\|x_dev\|max 1.025mm vs 60mm / bars = built-model 値一致（3.5/821/836）。
 
 **付帯 2**: (i) 著者未特定 unit test = 内容検証の上 bank に concur（provenance 衛生 note は §S/manifest に残置、content 判定と独立）。(ii) §S の解除は **leg 3 /pre-check PASS 後**（本 verdict 単独では解除しない — owner chain 完了で）。
+
+---
+
+## §S3 🔒 leg 3 BLOCK への裁定 — I3/I4（2026-07-17、入力 = leg3 OUTCOME + `gate2_rerun_fm34_probe_v2_result.json`〔per-frame 訂正版、v1 lineage 保持 = 正〕）
+
+### §S3.0 受領と自己訂正（9 件目）
+- leg 3 BLOCK = **gate が仕事をした**（単一 ep 述語 clean のまま訓練展開面の blocker を訓練前捕捉 — §13.3 の再演）。I1 = banked (a)(b) の再発見 / I2 = (d) fold — concur。
+- ⛔ **私の §S2「FM3 = CONFORM」row の scope を訂正（9 件目）**: あれは **§13.2 の字義**（phase-gate + fail-closed）への適合判定としては正しいが、**§13.1（identity）× §13.2（escape）の【合成】に seam があること**を見なかった。加重事由: 私は `:1422` の identity 非限定呼出を**自分で読み**「互換」と note して意味論を問わなかった — §17.3（読みながら論じ抜ける）と同型。合成 seam の捕捉は leg 3 の設計どおりの仕事（conformance-verify ≠ adversarial-verify — chain の分業は機能した）。probe v2 の **global x_dev = pre-onset 最大 50.61mm** が計器差の実像。
+
+### §S3.1 🔒 I3 裁定 — **原則: guard と predicate は【同じ計器】を読む**（identity は測定の属性であって、述語ごとの選択肢ではない）
+- **fix = FM3 の post-G3 escape を identity 済 metrics から導出**（%12 方向を批准・具体化）: `_c1_escape_after_seat` は `_crossing_x_dev`（global）を捨て、**`_c1_retention_m` の出力**（identity-restricted (dx, z)）を読む — `escape := (dx == _SEAT_MISS_DX_M) ∨ (dx > DROP_LATERAL_DEV_MAX_M)`。seat を成立させた計器と escape を判定する計器が**同一物**になる（fail-open も偽 escape も構造的に消える: identity 窓の外の crossing は guard に見えない）。
+- **scope 限定**: obs[57]（`_crossing_x_dev`、H-drape 入力）の意味論は**本 fix で不変**（obs-space 変更 = 別 gate。drape 可視性は sensing であって reward gate でない）。`_crossing_x_dev` は obs 専用に残る — **reward/termination 系の消費者ゼロ**を fix 後 grep で assert。
+- 検証 leg: leg 3 の両 fixture（fail-open stray-straddle / 偽 escape）を **REJECT unit test 化** + ACCEPT = canonical per-frame divergence 0 維持（identity dx ~0.9mm ≪ 60mm ゆえ挙動不変の見込み — それ自体を検証）。
+
+### §S3.2 🔒 I4 裁定 — **C2 walk に【routed-side】識別を足す**（route-defined 方向定数、N-hop でも runtime 推定でもない）
+- **fix = (a) routed 側限定を採用**: `_seat_identity_segments` の C2 walk を **pin node から見て route が C2 へ進む側（cable index の ± 方向）に限定**。方向 = **route 設計定数**（step-table/canonical が「どちらの端を C2 へ運ぶか」を固定している — body/hop 数と違い **1 bit で route-invariant**、§13.4 の「fragile hardcode 却下」に抵触しない）。符号は実装時に canonical 実測で接地し、**probe の positive control として「canonical の C2 crossing 側 == 定数」を assert**（drift すれば loud）。
+- 単調 walk は側内で維持 ⇒ **単調 span は C2Y を高々 1 回しか跨がない**（±tol wobble を除く）ため leading-span leg は**不要に退化**（(b) は採らない — (a) が最小で完結）。feed 側 drape fixture = REJECT unit test 化。fail-closed 不変（routed 側に crossing 無し → MISS）。
+- ⚠ **登録（今は動かさない）**: probe v2 の **C2 lateral margin 3.183mm vs bar 3.5mm** = 最薄 margin、「DR で掠る」= **DR-ON 日の設計 tension として MED carry**（bar は built-model 由来ゆえ動かさない — DR 振幅設計の側が この margin を予算に入れる。N-2 standing rule の DR instance と同じ日に扱う）。
+
+### §S3.3 設計入力の fold — **pin = 既成着座の保持装置**（seat f2428 ≺ pin f2544、116 frame）
+- (a)(b) per-episode lifecycle + (d) trigger の**前提に採用**: 着座は pin の**前に**成立する（pin が作るのではない）。⇒ (d) の幾何 capture trigger（`RLENV_PIN_DESIGN` §21.4 = STEP 7 押込中発火・pin-before-release）は**定量裏書きを得た**: capture 述語の true 窓は onset 前 ~116 frame 存在 = **trigger は knife-edge でなく幅のある窓で発火**。(a)(b) の reset 設計は「pin 解除 ⇒ seat 消滅」を仮定してはならない（解除後も幾何着座は残り得る — 判定は計器で）。cross-ref: RLENV_PIN_DESIGN §21.4/§21.11.1 に本 premise を注記（%12 bank 時に pointer 追加で可）。
+
+### §S3.4 chain
+実装（%12、I3+I4 fix + fixture 化）→ **p5 delta 再 verify**（§S3.1/S3.2 条項のみ — 全再走不要）→ `/pre-check` 再走。**§S 継続**（解除 = 再走 PASS 後）。gate ② 完了条件に (a)(b) 実装 + (d) containment 設計が入った点 = concur（I1/I2 の帰結）。
