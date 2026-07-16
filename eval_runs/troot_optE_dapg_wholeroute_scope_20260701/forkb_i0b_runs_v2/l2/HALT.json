@@ -1,0 +1,8 @@
+{
+ "slot": 0,
+ "consecutive_failures": 4,
+ "k_fail": 3,
+ "last_rc": 17,
+ "ts": 1784210156.7695718,
+ "restart_count": 3
+}

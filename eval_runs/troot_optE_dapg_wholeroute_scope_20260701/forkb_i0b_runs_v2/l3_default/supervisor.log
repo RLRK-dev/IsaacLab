@@ -1,0 +1,4 @@
+[supervisor] cuda:0 pre-existing compute procs k=0 -> cap=4, requested=1, N_collect=1 (<=4/GPU rule, R1-4)
+[supervisor] spawned slot 0 rc=0 pid=404902 CVD=0 log=collector.rc000.log
+[supervisor] slot 0 rc=0 complete (restarts used=0)
+[supervisor] summary: {"halted": false, "ts": 1784210222.8856764, "slots": [{"index": 0, "restarts": 0, "done": true, "consecutive_failures": 0}], "episodes_published": 1}
