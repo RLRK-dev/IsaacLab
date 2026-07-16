@@ -1,0 +1,42 @@
+{
+ "ts": 1784232346.9343007,
+ "code_under_test": "post-I3/I4 (escape reads identity dx; C2 walk routed-side-restricted)",
+ "route_c2_side_from_pin": -1,
+ "leg_A_canonical_anchor_equality": {
+  "PASS": true,
+  "got": {
+   "n_frames": 7707,
+   "pin_onset_frame": 2544,
+   "c1_first_seated_frame_ANY": 2428,
+   "c1_pre_onset_seated_frames": 116,
+   "c1_seated_post_onset": "5163/5163",
+   "c2_first_seated_frame": 7394,
+   "c2_seated_after_first": "313/313",
+   "c2_max_dx_mm_while_seated_PER_FRAME": 3.183
+  },
+  "symmetric_diff": {}
+ },
+ "leg_B_new_guard_escape_post_onset": {
+  "PASS": true,
+  "frames": 0,
+  "window": "f >= onset 2544 (pre-registered)"
+ },
+ "leg_C_81cell_positive_control": {
+  "PASS": true,
+  "cells": 81,
+  "total_feed_side_straddles": 0,
+  "seat_k_histogram": {
+   "25": 1,
+   "26": 15,
+   "27": 19,
+   "28": 17,
+   "29": 2,
+   "32": 9,
+   "33": 9,
+   "34": 9
+  },
+  "note": "zero feed-side straddles => I4 restriction removes nothing on any recorded cell => per-frame instrument equality on all 81 cells (proof); routed side < seat_k everywhere"
+ },
+ "leg_D_obs_inheritance_declaration": "I4 propagates into obs[49]/[58]/[59] via _seat_metrics (active clip = C2 post-G4); canonical divergence 0 by legs A+C; surfaced for p5 delta verify",
+ "ALL_PASS": true
+}

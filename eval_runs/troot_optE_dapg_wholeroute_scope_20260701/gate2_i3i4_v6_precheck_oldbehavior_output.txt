@@ -1,0 +1,9 @@
+# V6 fails-without-fix capture -- run at PRE-I3/I4 HEAD (parent of the I3/I4 commit), 2026-07-17 04:5x JST.
+# NOTE: the script calls _c1_escape_after_seat(cable, True) (old signature) and is NOT re-runnable at the
+# post-fix commit (signature change makes it fail loudly) -- that non-re-runnability IS the V6 point.
+I3(a) OLD escape (expect False = fail-open): False
+I3(b) OLD escape (expect True = false escape): True
+I3(a) identity metrics: dx=9.0 (MISS sentinel=9.0?), z=0.0
+I3(b) identity metrics: dx=0.0000 (in-lateral), z=0.900 (out-of-band)
+I4 feed-drape OLD: dx=0.0000, z=0.829, seated=True (expect True = wrong credit)
+I4 OLD admitted candidate segs (both sides): (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38)

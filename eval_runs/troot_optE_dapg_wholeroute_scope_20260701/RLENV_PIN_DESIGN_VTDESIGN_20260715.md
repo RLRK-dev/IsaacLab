@@ -758,6 +758,8 @@ N5（支持 clip 中心 seat）は loop 形で `NotInAnyRouteClip`（実測 14/1
 
 **⭐ trigger timing（step-table 接地・pin-before-release）:** capture 述語は **STEP 7 押し込み中**（body30 が groove volume 進入）に True になる ⇒ **STEP 8 の gripper 解放（R unclamp/L 半、`CANONICAL_MOTION_TABLE_V1.md:50`）より前に発火** ⇒ **pin が解放を跨いで body30 を保持**（= 物理的に正しい順序。解放後発火だと cable が既に escape 開始し得る）。⇒ **memory `feedback` の「表『放す→打つ』vs code『打つ→放す』」懸念を解消** — 幾何 trigger は自然に「着座（押込中）→ 発火 → 解放」= pin-before-release。
 
+> ⭐ **§S3.3 定量裏書き（%12 pointer 追記 2026-07-17、授権 = seat-ruling §S3.3「%12 bank 時に pointer 追加で可」）**: canonical 実測 **seat f2428 ≺ pin onset f2544（116 frame 先行、`gate2_rerun_fm34_probe_v2_result.json`）** — capture 述語の true 窓は onset 前 ~116 frame 存在 ⇒ 本 trigger は knife-edge でなく幅のある窓で発火。premise = **pin は既成着座の【保持】装置**（seat を作るのではない）。
+
 **⛔⛔ (d) は RL 報酬意味論に coupling する（scope 注意）:**
 - pin 発火 → `c1_retained` latch（既存報酬項）→ policy は「cable を capture volume に入れる」を学習。**これは恒久配線の【意図】そのもの**（pin は物理 clip 保持のモデル、`fc088fe4fb` = INVARIANT#5 clip-only 恒久配線を Rs 承認）。
 - **だが「いつ・どう latch するか」が recording-onset → live-geometric に変わる = 報酬 dynamics の変化。** ⇒ 🔒 **実装前に `/reward-design`（到達可能性表 + 因果 DAG + ground-truth 値 + episode trace）+ `/pre-check` を (d) 述語に対し必須**（CLAUDE.md 強制ゲート、env/成功条件変更）。**この gate 未通過で %12 は (d) を実装不可。**
@@ -1004,6 +1006,8 @@ fork B では **各 env process = world_count=1 = `use_mujoco_cpu=True` の CPU 
 | **audit** | per-world 走査 + per-world cap | **現行のまま有効** — `audit_pin_anchors` は単一世界 mjm/mjd 走査として書かれており（`route_executor.py:963`）、fork B の各 process でそのまま正しい。per-world 化は不要 |
 
 ⇒ 🔒 **pin 恒久配線の残作業（fork B 下）= (a) + (b) + (d) + 既存 audit。全て proven CPU path 上・env 単体で完結。** E-1 positional / 真 E-2（warp 消費）は **S8 を選ぶ日まで MOOT**（§21.9.1/§21.8.2 の手続きは S8 復活時のために banked のまま）。
+
+> ⭐ **(a)(b) 実装への coupling 注記（%12 pointer 追記 2026-07-17、授権 = seat-ruling §S3.3; 出典 = I3 実装 [VERIFY] CC2 finding 1）**: I3 後の escape guard は identity 計器（`_c1_retention_m` の dx）を読む ⇒ (a)(b) の lifecycle 設計は**物理 eq のみを lifecycle 管理し、identity（`_pin_seat_seg` = seat seg index）は episode 内で永続**させること。G3 latch 後に identity を null 化すると escape guard が MISS を見て偽 −10 terminate を打つ。「pin 解除 ⇒ seat 消滅」も仮定しない（§S3.3: 解除後も幾何着座は残り得る — 判定は計器で）。
 
 ### §21.11.2 fork B trainer-infra の設計 gate agenda（charter node の設計 phase 向け・私の宿題リスト）
 

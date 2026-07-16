@@ -145,6 +145,19 @@ ROUTE_C2_XY = (0.40, 0.000)  # [m] meta CLIP2_X/CLIP2_Y = resolved_clip_c2_xy (R
 # authorized (design §14.1). 5-clip generalisation = extend THIS one tuple; the geom-count assert then RAISEs
 # until the scene actually builds that clip (deferral is mechanical, design §15.2).
 ROUTE_CLIP_CENTERS = (ROUTE_C1_XY, ROUTE_C2_XY)
+# C2-bound cable side from the C1 pin node, in cable-INDEX direction (-1: lower indices carry to C2; +1:
+# higher). A route DESIGN constant (1 bit, frame/DR-invariant), NOT a runtime estimate and NOT an N-hop
+# count (ruling REWARDDESIGN_GATE2_SEAT_PREDICATE_RULING sec S3.2): the step-table fixes which cable end
+# the route carries to C2. Structurally forced by (i) the cable build direction=(0,1,0) with node 0 = the
+# low-Y end (newton_skill_env_base.py _build_cable) and (ii) ROUTE_C2_XY[1]=0.000 < ROUTE_C1_XY[1]=0.150
+# above -- i.e. side = sign(C2Y - C1Y) under the Y-ascending build. Grounded empirically: all 313 canonical
+# C2-seated frames select crossing segment 16 < pin 27, and the full 81-cell grid (per-cell pin seat node
+# 25..34) has ZERO feed-side C2Y straddles in any frame (gate2_rerun_i3i4_probe leg C). The seat identity
+# walk (_seat_identity_segments) admits only this side, so a feed-side free span draping through the C2
+# groove can never be credited as seated (gate-2 leg-3 finding 4). Any FUTURE route (C3-C5 / other-end
+# routing) must re-ground its own side constant and re-run the probe positive control; N-clip
+# generalisation needs a per-hop side map (this constant is single-hop C1->C2 scope).
+ROUTE_C2_SIDE_FROM_PIN = -1
 ROUTE_CLIP_FLOAT_Z = 0.020  # [m] meta CLIP_FLOAT_Z: routing clips float 20mm above the table (SPACER-supported)
 # Route seat/groove z = task_config base groove + float (== route_c2_pin.json groove_z_mm 829). Used by the
 # seat/groove predicate (_seat_metrics) AND the built clip z; the two MUST agree (%12 build+predicate flag).

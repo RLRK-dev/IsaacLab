@@ -1337,8 +1337,10 @@ class NewtonRouteEnv(VecEnv):
 
         C1 uses the producer-equivalent hard identity: the pinned seat node must be one endpoint of the
         interpolated crossing. C2 has no fixed seat body, so its crossing must be connected to that C1 node by
-        a Y-monotone cable span. This is pay-through robust and rejects a disconnected stray loop without a
-        fixed N-hop assumption (reward-design gate-2 ruling section 13.4).
+        a Y-monotone cable span ON THE ROUTED CABLE-INDEX SIDE of the pin (``ROUTE_C2_SIDE_FROM_PIN``; I4,
+        ruling section S3.2 -- a FEED-side free span can drape through the C2 groove Y-monotonically too, so
+        monotony alone is not identity). This is pay-through robust and rejects a disconnected stray loop
+        without a fixed N-hop assumption (reward-design gate-2 ruling section 13.4).
         """
         pin_seg = getattr(self, "_pin_seat_seg", None)
         if pin_seg is None:
@@ -1361,8 +1363,14 @@ class NewtonRouteEnv(VecEnv):
         direction = target_y - float(ys[pin_seg])
         if abs(direction) <= self._SEAT_MONOTONE_TOL_M:
             return ()  # C1 identity is already at C2Y: ambiguous/corrupt route, fail closed
+        # I4: only the routed index side may seat C2; the side is a route design constant (grounded in
+        # route_env_config). An empty side (degenerate pin at a cable end) falls through to () = fail closed.
+        if int(rc.ROUTE_C2_SIDE_FROM_PIN) < 0:
+            seg_range = range(0, pin_seg)
+        else:
+            seg_range = range(pin_seg, n_nodes - 1)
         candidates = []
-        for seg in range(n_nodes - 1):
+        for seg in seg_range:
             # Walk in cable order FROM the C1 pin node TO both endpoints of this candidate crossing.
             if seg < pin_seg:
                 path_y = ys[seg : pin_seg + 1][::-1]
@@ -1390,7 +1398,8 @@ class NewtonRouteEnv(VecEnv):
         ``dx = |x_cross - clip_x|`` at the groove-closest crossing (quantisation-free). ``z_cross`` =
         interpolated cable-centre z. Fail-closed: a cable never reaching y=clip_y returns
         ``(_SEAT_MISS_DX_M, 0.0)`` so both seat legs reject. Consumers: G3/G5 (:1487-1488 / :1550-1552),
-        obs [49]/[58]/[59], c2_honest, c1_retained.
+        obs [49]/[58]/[59], c2_honest, c1_retained, and the post-G3 escape guard (I3: the same-step dx at
+        the reward site feeds :meth:`_c1_escape_after_seat`).
         """
         identity_segments = self._seat_identity_segments(cable_pos, clip_xy)
         x_cross, z_cross = self._seat_crossing(
@@ -1415,23 +1424,30 @@ class NewtonRouteEnv(VecEnv):
         return self._seat_metrics(cable_pos, _C1_XY)
 
     def _crossing_x_dev(self, cable_pos):
-        """Signed crossing-x deviation at y=C1Y [m] (H-drape / lateral-escape drop input, obs [57]). Now truly
+        """Signed crossing-x deviation at y=C1Y [m] -- obs [57] (H-drape sensing) ONLY. Now truly
         interpolated (the pre-fix code took the nearest-in-Y NODE x despite its 'interpolation' comment; Rs
-        '4th site'). Returns ``None`` when there is no crossing: pre-G3 callers may map that to zero, while the
-        post-G3 drop guard treats loss of the previously seated crossing as fail-closed escape (FM3)."""
+        '4th site'). Returns ``None`` when there is no crossing; pre-G3 callers may map that to zero.
+        NOT a reward/termination input: the post-G3 escape guard reads the identity-restricted
+        :meth:`_c1_retention_m` dx instead (I3, ruling sec S3.1) -- this global, identity-UNRESTRICTED
+        crossing wanders to ~50mm dev pre-onset on canonical and must never gate anything."""
         x_cross, _ = self._seat_crossing(cable_pos, float(_C1_XY[0]), float(_C1_XY[1]))
         return None if x_cross is None else float(x_cross - float(_C1_XY[0]))
 
-    def _c1_escape_after_seat(self, cable_pos, c1_latched):
-        """Return whether C1 escaped after G3 established a routed seat.
+    def _c1_escape_after_seat(self, dx_c1, c1_latched):
+        """Return whether C1 escaped after G3 established a routed seat (FM3, fail-closed).
 
-        Before G3, not crossing C1Y is normal and cannot terminate the episode. After G3, losing that crossing
-        or exceeding the lateral bound is a fail-closed escape (reward-design gate-2 FM3).
+        ``dx_c1`` MUST be the same-step identity-restricted C1 seat measurement -- the
+        :meth:`_seat_metrics` ``(cable_pos, _C1_XY)`` / :meth:`_c1_retention_m` dx the seat predicate itself
+        consumed (I3, ruling sec S3.1: the guard and the predicate read the SAME instrument; identity is a
+        property of the measurement, not a per-predicate choice). Before G3, not crossing C1Y is normal and
+        cannot terminate the episode. After G3, a MISS (the identity window lost its crossing) or a lateral
+        deviation beyond the drop bar is a fail-closed escape. Scope: lateral escape and crossing loss
+        ONLY -- a z-excursion out of the groove band keeps dx small and is NOT drop-guarded; it is sealed on
+        the success side by the G6 ``c1_retained`` z-band leg (:meth:`_seated_in_groove`).
         """
         if not bool(c1_latched):
             return False
-        crossing_x_dev = self._crossing_x_dev(cable_pos)
-        return bool(crossing_x_dev is None or abs(crossing_x_dev) > self.DROP_LATERAL_DEV_MAX_M)
+        return bool(dx_c1 == self._SEAT_MISS_DX_M or dx_c1 > self.DROP_LATERAL_DEV_MAX_M)
 
     def _lane_matched_target(self, cable_pos, phase_id, r_clamp_pos, search_idx):
         """[16:19] redefine (CC2-CH5): in the regrasp window, the reaching-arm's lane-matched grip target
@@ -1546,10 +1562,10 @@ class NewtonRouteEnv(VecEnv):
             # [55:57] per-arm IK residual (from the last action apply).
             obs_np[w, rc.OBS_R_IK_RESID] = self._last_ik_resid[w, 0]
             obs_np[w, rc.OBS_L_IK_RESID] = self._last_ik_resid[w, 1]
-            # [57] crossing-x deviation.
+            # [57] crossing-x deviation (sensing ONLY -- the sole _crossing_x_dev consumer; the post-G3
+            # escape guard reads the identity-restricted dx instead, I3). Pre-seat, not reaching C1Y is
+            # normal; keep the finite observation contract by mapping None to zero.
             crossing_x_dev = self._crossing_x_dev(cable_pos)
-            # Pre-seat, not reaching C1Y is normal. Keep the finite observation contract while the reward-side
-            # post-G3 guard retains the ``None`` distinction and fails closed (FM3).
             obs_np[w, rc.OBS_CROSSING_X_DEV] = 0.0 if crossing_x_dev is None else crossing_x_dev
             # [58:60] axis-resolved seat: [58] z-gap (z_cross - groove), [59] lateral = interp dx (rd2 fix).
             obs_np[w, rc.OBS_SEAT_ZGAP] = zgap_a
@@ -1624,7 +1640,9 @@ class NewtonRouteEnv(VecEnv):
                 self._contact_loss_count[w] += 1
             else:
                 self._contact_loss_count[w] = 0
-            c1_escape = self._c1_escape_after_seat(cable_pos, self._g_latched[w, 2])
+            # I3: the escape guard reads the SAME identity-restricted measurement (:1600 dx_c1) that the
+            # seat predicate consumed this step -- never the global crossing (obs-only).
+            c1_escape = self._c1_escape_after_seat(dx_c1, self._g_latched[w, 2])
             dropped = bool(
                 grasped
                 and (
