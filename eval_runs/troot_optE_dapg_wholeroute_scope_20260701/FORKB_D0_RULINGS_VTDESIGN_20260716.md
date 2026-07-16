@@ -1,6 +1,6 @@
-# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.0
+# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.1
 
-**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: DRAFT — %12 verify 待ち。0-commit（bank = %12）。**
+**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: v1.0（R2-R6）= banked `11fdb0bc11`。v1.1（R1 追裁定）= DRAFT — %12 verify 待ち。0-commit（bank = %12）。**
 **入力**: 素材 = `FORKB_D0_MATERIALS_RSTECHLEAD_20260716.md`（DoD = `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` §21.11.2a、v1.13 `7b4c918251`）。
 **範囲**: 項 2/3/4/5/6 の裁定（素材 ✅ 分）。項 1（N sizing）= 実測待ちで**保留**。
 **接地検証（p5 自読、2026-07-16）**: 項2 `newton_route_env.py:1047-1049`（裸 `np.random.uniform`、行 drift 訂正を確認）/ 項3 `TRAINER_NODE_DEFINE...0712.md:7`（RLPD 条項逐語）+ `:30`（SAC/TD3/replay=ZERO 逐語）/ 項4 `STAGEA_...0712.md:117/:125/:131`（schema・disk budget・os.environ 規約 逐語）/ 項5 `newton_route_env.py:419`（default=4）+ caller grep（wc=1 明示を裏書き、wc=NW は E_probe のみ=意図的）。
@@ -57,6 +57,34 @@
 | 5 | supervisor（restart/halt/marker）の仕様 | R6 |
 | 6 | E0 で pin する数値: **N**（項 1 実測後）/ **backpressure K**（R3-3）/ **K_fail**（R6-3）/ per-process byte-repro leg（R2-4） | 各項 |
 
-**保留**: 項 1（N と資源上限）= 1-process 実測 profile 待ち（protocol = pN 6 条件固定済）。実測到着後に N 上限式へ代入して裁定。
+**保留**: 項 1（N と資源上限）= 1-process 実測 profile 待ち（protocol = pN 6 条件固定済）。実測到着後に N 上限式へ代入して裁定。→ **v1.1 R1 で解消（下記）**。
+
+---
+
+## R1 🔒 項 1 — N と資源上限（v1.1 追裁定、2026-07-16。実測 = `forkb_d0_calibration_profile_result.json`、bank `e1298c4bf6`）
+
+**R1-0 実測批准（p5 artifact 自読）**: 全数値を artifact で確認 — GPU **350 MiB/proc**（PID 帰属 peak、delta 10、baseline 340）/ RSS **1317.8 MB/proc** / CPU **1.58% 正規化 ≈ 1.0 core/proc**（64 core、146 threads は idle pool = 単一 core 支配）/ n_window=12 / `use_mujoco_cpu_observed=true` / workload_exit=0 / after 正対照 dead-pid GPU=0。protocol 準拠（sha `11fdb0bc11` / CVD=0 / wc=1 / window [30,230) / cadence 2s / D0_CALIBRATION_ONLY MARK 明記）。⭐ **v1→v2 の経緯（CPU 計器死を self-check で捕捉 → fail-loud 正対照へ昇格、`_v1_deadcpu.json` 保全）= 「計器が自分の死を検出する」positive-control 教訓の正しい適用と評価。**
+
+**R1-1 上限式の各項（p5 再計算、artifact 分母）**:
+| 項 | 計算 | 上限 |
+|---|---|---|
+| GPU | (49,140 − 2,666 ambient) / 350 | ≈ **132** |
+| RSS | 455 GB / 1.32 GB | ≈ **344** |
+| CPU | 64 core / ~1.0 core | ≈ **63** |
+| **規則** | CLAUDE.md「最大 4 プロセス/GPU」 | **4** ← **唯一の拘束** |
+
+**R1-2 裁定: N_collect = 4 @ cuda:0**（collector = route env、device-fragile cuda:0 ONLY [memory: canonical-route-device-fragile]）。資源 margin = GPU 4×350=1.4 GB ≪ 46.5 GB free / CPU 4×1 ≪ 64 / RSS 4×1.32=5.3 GB ≪ 455 GB — 全次元で規則が先に効く。
+
+**R1-3 配置裁定（trainer/supervisor）**:
+- **trainer = cuda:2（primary）** — CLAUDE.md GPU 役割表（cuda:2 = 「VLM + **訓練**」優先 1）に整合。SAC（低次元 obs・6 act）の footprint は小さい見込み（実測は E0/I0）⇒ cuda:2 は **slot 3/4 + 大半の VRAM が vision/WM に残る** = node invariant §5（vision/WM 予約）は「全量温存」でなく「明示予約」で満たす読み。
+- ⭐ **relocate lever を config 化（D1 要件に追加）**: trainer device は config 値とし、vision/WM が cuda:2 全量を要する事態では **trainer→cuda:0 + N_collect 4→3** に落とせる形（設計変更でなく config 変更で済むことを D1 が保証）。
+- ⚠ **%12 の「cuda:2 温存」見立てとの差分を明示**: 温存 =「全量 untouched」なら Option-2（trainer@cuda:0、N_collect=3）。本裁定は CLAUDE.md 役割表を優先して primary を上記とするが、**ここは %12/pN の co-decide 対象 — 異見あれば返せ**（どちらも成立、lever があるため後から可逆）。
+- supervisor（restart/halt/marker、R6）= **CPU-only**（GPU slot 消費ゼロ）。
+
+**R1-4 launch-time 前提 check（機構化）**: N=4 は「cuda:0 に先客 compute proc ゼロ」前提。launcher は起動前に `nvidia-smi --query-compute-apps` を確認し（CLAUDE.md 既存規則の機構化）、**先客 k proc なら N_collect = 4−k に自動減 + loud log**。ambient 2,666 MiB は「メモリ」であって proc slot でない — 判定は compute-apps の proc 数で行う。
+
+**R1-5 E0 への条件付け**: 本 calibration は 1-proc・非流用（MARK どおり、E0 は N=1 も新規再走）。**N=4 は「calibration 上限確定・E0-confirmed で採択確定」の二段** — E0 が (i) N=4 契約: contention による per-proc 劣化（CPU cache/mem BW/GPU）≤ しきい値（E0 事前登録で pin）(ii) R2-4 per-process byte-repro leg (iii) backpressure K / K_fail を pin。
+
+⇒ **D0 = 6/6 項 裁定完了**（R2-R6 banked `11fdb0bc11` + 本 R1）。次 = D1（fork-B spec、%12 起草・p5 verify、引き継ぎ要件 6 項 + R1-3 lever 追加）。
 
 **⚠ scope 注記**: 本裁定は設計固定であり実装認可ではない。実装は fork-B node の gate chain（L3、素材 doc §項 1 protocol・E0/I0 fence 不変）に従う。(d) policy-drive trigger の `/reward-design`+`/pre-check` gate は本 D0 と独立に不変（pin 側 §21.4）。
