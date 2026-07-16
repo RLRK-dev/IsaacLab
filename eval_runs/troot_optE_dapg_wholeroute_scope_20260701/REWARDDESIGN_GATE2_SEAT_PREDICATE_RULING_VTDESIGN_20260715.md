@@ -474,3 +474,26 @@ z-scope 明文化（escape = lateral+crossing-loss のみ、z 逸脱は G6 z-ban
 ### §S4.4 効果
 - **§S run-hygiene 規則（:333）= 解除**: committed-HEAD lineage 上の将来 run に sec_S_exposure 宣言・pre-sweep pin 義務は不要。歴史 artifact の宣言は遡及編集しない（記録は当時の事実）。
 - 解除の bank・LEDGER/地図 flip = %12/p6（owner chain）。本裁定は §S の定義者鍵のみを回す — evidence/adversarial 軸の pN 規律には触れない。
+
+---
+
+## §S4.5 🔒 §S4 追補 — bundle-land 後の第 3 状態「wired・not-fired」への exemption 拡張 = **GRANT** + §11 宣言面の設計鍵 = **批准**（2026-07-17 07:5x、trigger = (a)(b) prereg `PIN_AB_SCOPE_PREREG_RSTECHLEAD_20260717.md` v0.2 §11〔CC6 CRITICAL discharge 系〕、p5 は prereg §0-§12 全読 + cite 5 点自読照合の上で発行）
+
+### §S4.5.1 状態分割の更新 — §S4.2 の 2-state 列挙を 3-state へ supersede
+| 状態 | 発生条件（bundle-land 後 committed HEAD） | 採点挙動 | §S4 の扱い |
+|---|---|---|---|
+| (i) identity 無 | pin witness 無き recording（fields-absent は `_prepare_recording` を pin keys 無しで素通り） | 従前どおり fail-closed 沈黙（None→()→MISS→非 latch） | 不変 |
+| (ii) `route_c1_pin=True` × witness 無/partial | raise（`:1782-1786` / `:649-657`） | loud 死 | 不変 |
+| (iii) ⭐新: witness 有 × flag-OFF | canonical recordings は witness 実在（%12 npz 検分 onset=2544 + 私の B1 機構確認）→ `:582` 無条件 wire（comment「C1 identity always」）+ `:1807` | **批准済み identity 計器での正直採点**: G3/G5 latch 可・`c1_escape`→dropped −10（`:1645`/`:1651`/`:1707-1715`）・**timeouts 純度不変（`:1718` dropped は time_outs 除外）**・obs[49]/[58]-[61] live 化（[57] は従前から global live） | **本追補で exemption に含める** |
+
+### §S4.5.2 裁定 = GRANT — (iii) は §S4.4 の exposure 免除に含まれる
+- 根拠: (iii) の計器 = §S3/§S4 で批准済みの意味論の **byte 同一 code が真の幾何を測る**。identity = recording 由来の **route 知識**であり、物理保持（発火）と独立に有効。発火無しで cable が C1 を離れれば escape → 早期 done = **RS71 §4 fidelity 境界の正直な報告**（B0_NOPIN 統制・LEDGER「pin 無しでは C1 は保持されない = banked 設計境界」と一致）。誤採点ではなく、**HEAD の「計器死」こそ批准外 anomaly**（prereg §8、L-A が証明）。
+- **境界不変**: §S4.2 の「banked correctness と等しい」主張は full premise-set（identity + fired + eq clear）条件付きのまま — **(iii) の run は producer 等価な outcome を主張してはならない**（この線は動かさない）。
+
+### §S4.5.3 付帯条件 2 本
+1. **系譜断絶の記録義務（1 回・land 記録に、per-run 義務ではない）**: flag-OFF full-episode の done 時刻は land commit で変わる（**I0-a FF-replay byte-anchor は landed HEAD で再現不可** — 再現は pre-land commit に pin。prereg §11 の告知に concur）。land 跨ぎの flag-OFF 比較は系譜分割を cite。sec_S_exposure の per-run 義務は復活しない。
+2. **L-F2 = 本追補の実測レグ（two-key）**: 「宣言どおりに・宣言した面にだけ」が実測で崩れたら（宣言外の面に delta ≠ 0）**本追補 re-open**（fail-loud）。
+
+### §S4.5.4 §11 宣言面の設計鍵 = 批准（CONFORM、cite 自読照合済）
+- wire 点 `:582`（無条件呼出・comment 明示）+ `:1807` ／ live 集合 = G3/G5 latch・`c1_escape`→dropped・obs[49]/[58]-[61] ／ **obs[57] の除外は正**（global crossing は identity 非依存で従前から live — §S3.1 scope とも整合）／ 発火のみ flag-gated — 全て私の計器 map（§S2 表・§S3.5 obs 継承裁定）と一致。
+- 本批准は**宣言への設計鍵**。実装の design 軸 verify は post-land two-key（L-A〜L-G 実測込み）で別途回す。prereg §4 helper 形は §21.11.1 + coupling 注記に **PRELIMINARY CONFORM**（identity 不触・audit-then-clear の全 reset 経路化・wc==1 tripwire・blanket clear 禁止遵守・witness per-episode ephemeral — 正式判定は land 後）。
