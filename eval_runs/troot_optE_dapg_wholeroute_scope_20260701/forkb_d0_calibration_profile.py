@@ -100,6 +100,57 @@ def _tree_stats(pid):
         return None, None, None
 
 
+_REPO = _EVAL.parent.parent
+_SRC_FILES = [  # the sources the workload actually imports -- as-run identity (the recorded HEAD sha alone
+    #             does NOT identify a dirty tree: OPS-SUP E0-fence HOLD finding 1, 2026-07-16)
+    _REPO / "thread_isaac_lab/envs/newton_route_env.py",
+    _REPO / "thread_isaac_lab/envs/route_executor.py",
+    _REPO / "thread_isaac_lab/envs/route_env_config.py",
+    _REPO / "thread_isaac_lab/envs/newton_skill_env_base.py",
+    _REPO / "thread_isaac_lab/configs/task_config.py",
+    Path(__file__).resolve(),
+]
+
+
+def _provenance():
+    """git head + dirty state + as-run source sha256 + the scraped env fingerprint (recorder pattern
+    b7553662a4: every env the pinned sources read, not a hand-written subset) + machine denominators."""
+    import hashlib
+    import re
+
+    def _git(*args):
+        return subprocess.run(["git", *args], capture_output=True, text=True, cwd=str(_REPO)).stdout.strip()
+
+    as_run = {}
+    env_keys = set()
+    for p in _SRC_FILES:
+        src = p.read_text(errors="replace")
+        as_run[str(p.relative_to(_REPO))] = hashlib.sha256(src.encode()).hexdigest()
+        env_keys.update(re.findall(r'os\.environ\.get\(\s*["\']([A-Za-z_][A-Za-z0-9_]*)["\']', src))
+        env_keys.update(re.findall(r'os\.environ\[\s*["\']([A-Za-z_][A-Za-z0-9_]*)["\']\s*\]', src))
+    gpu = subprocess.run(["nvidia-smi", "--query-gpu=index,memory.total,memory.used,memory.free",
+                          "--format=csv,noheader,nounits"], capture_output=True, text=True).stdout.strip()
+    mem = {}
+    for line in Path("/proc/meminfo").read_text().splitlines():
+        k = line.split(":")[0]
+        if k in ("MemTotal", "MemAvailable"):
+            mem[k] = line.split()[1] + " kB"
+    import psutil  # noqa: PLC0415
+    dirty_all = _git("status", "--short")
+    rels = [str(p.relative_to(_REPO)) for p in _SRC_FILES]
+    return {
+        "git_head": _git("rev-parse", "HEAD"),
+        "git_dirty_total_lines": len(dirty_all.splitlines()) if dirty_all else 0,
+        "git_dirty_as_run_files": _git("diff", "--stat", "HEAD", "--", *rels) or "(as_run set clean vs HEAD)",
+        "as_run_sha256": as_run,
+        "env_fingerprint": {k: os.environ.get(k) for k in sorted(env_keys)},
+        "env_fingerprint_source": "scraped from as_run sources (recorder pattern b7553662a4)",
+        "denominators": {"gpu_mib(index,total,used,free)": gpu.splitlines(), "meminfo": mem,
+                         "cpu_cores_logical": psutil.cpu_count(logical=True),
+                         "cpu_cores_physical": psutil.cpu_count(logical=False)},
+    }
+
+
 def main():
     if "--workload" in sys.argv:
         sys.exit(workload())
@@ -108,19 +159,16 @@ def main():
     assert _CVD == "0", f"protocol fixes CUDA_VISIBLE_DEVICES=0; got {_CVD!r}"
     import psutil  # noqa: PLC0415
 
-    code_sha = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True,
-                              cwd=str(_EVAL.parent.parent)).stdout.strip()
     n_cores = psutil.cpu_count(logical=True)
-    env_overrides = {k: v for k, v in os.environ.items()
-                     if k.startswith(("W0E_", "CLIP", "ROUTE_", "SEAT_", "PERCLIP", "C1_", "SOLVER"))}
     cmd = [sys.executable, str(Path(__file__).resolve()), "--workload"]
     r = {
         "MARK": "D0_CALIBRATION_ONLY -- not evidence for B-accept or N-adoption; E0 re-runs N=1 fresh",
-        "protocol": {"commit_sha": code_sha, "command": " ".join(cmd), "CUDA_VISIBLE_DEVICES": _CVD,
+        "protocol": {"command": " ".join(cmd), "CUDA_VISIBLE_DEVICES": _CVD,
                      "world_count": 1, "workload": f"FF-replay zero-residual RL steps [0,{WINDOW_END})",
                      "warmup_steps": WARMUP_STEPS, "window": [WARMUP_STEPS, WINDOW_END],
                      "sampling_cadence_s": CADENCE_S, "cpu_normalization": f"sum(proc-tree cpu%) / {n_cores} cores",
-                     "recording": str(GOLDEN_NPZ), "env_overrides_present": env_overrides},
+                     "recording": str(GOLDEN_NPZ),
+                     "provenance": _provenance()},
         "before": [], "during": [], "after": [], "phases_seen": [],
     }
 
