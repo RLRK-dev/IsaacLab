@@ -207,6 +207,7 @@ THREAD project の全 task は logic tree 上の node として管理し、各 n
     - ⛔ **artifact に無い数値を送らない** ／ ⛔ **checkpoint 以外で報告しない**（起動した・走行中・思いつき・途中経過は送らない）
     - ⛔ **他 pane の message の数値で裁定しない**（artifact を自分で見てから裁定する）
     - 例外 = **STOP**（走行中の危険 / 前提の崩壊）のみ即時・短文
+    - **メッセージ末尾に日時を付加する（Rs 指示 2026-07-17）**: Rs 宛の報告・他 pane 宛 dispatch とも、message 末尾に `date` 実測の日時（JST）を付加。記憶からの時刻記載は不可（date-THEN-write、§15 records-must-match-fact と同根）
     - **理由**: 未検証の主張が即流れ → 受け手が即裁定 → SSOT に着地 → 訂正が後を追う。2026-07-14 の誤り（artifact に無い「14.5%」を spec に記載 / 撤回済 over-claim の再導出 / stale 行番号の全 pane 伝播）は**すべてこの連鎖**から出た
 
 ### エスカレーション (§10, 26)
