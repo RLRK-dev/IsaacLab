@@ -258,9 +258,29 @@ r2a の有用残渣 = reset 時 `body_q_prev` sync 整合 (既存 `restore_world
 `w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz` に `pin_active/pin_eqid/pinned_body` 実在、
 onset=2544 (CC6 測定と一致)。⇒ 5-hunk land 後は flag-OFF でも identity が wire される、は事実。
 
-## §10 [RESULT] (legs 実測後追記)
+## §10 [RESULT] (legs 実測、記入開始 2026-07-17 08:22 JST — L-B/L-G は land 後追記)
 
-(pending)
+**§2 成分 2 の確定記録 (08:1x 実装)**: `audit_pin_anchors` への追加は **diff hunk 2 個 (論理変更 1 個**:
+docstring Returns + `return tuple(fired)`**)**。正規化 patch = scratchpad `re_hunk_p12_normalized.patch`、
+**正規化 sha256 = `5d1660023e78d1512f407a90adac6f6ed2db11e032053de2b391039d94254610`**。追加後の全 diff
+から成分 2 を除去→正規化 = **frozen5-body sha `2083786a…79ee` 完全一致** (分割検証、今 session 出力)。
+worktree aggregate sha (7 hunks) = `030b138cf174cba0a701a434826c086bd705c9856a48136b87a25ededf5f6450`
+— **staged 再計測 (08:3x) 一致**: frozen5-body staged == `2083786a…` / %12 hunk staged == 記録 bytes
+(`5d166002…`) / aggregate staged == 同値。staged set 対称差 = ∅ (13 paths、今 session 出力)。
+
+| leg | 実測 | bar 判定 |
+|---|---|---|
+| L-A | wt @ `11e130693e` (clean、diff 0 行) pytest: **1 failed = `test_pin_identity_fields_survive_recording_prepare`** (「recording preparation dropped pin_active」) / 9 passed。artifact = `pin_ab_LA_head_pytest.txt` (.log は gitignore 該当ゆえ .txt で bank) | **PASS** (FAIL 1 本 = V5 のみ、GATE2:79 再現) |
+| unit (pre-land) | bundle tree pytest **17/17 PASS** (旧 10 全 PASS = V5 flip 含む + 新 7: clear×4 + raise-branch×3)。正式 L-B は land 後 | (参考; L-B が binding) |
+| L-D | probe x0_y0: ep1 fire step **254**・eq **27**・eq_active=1・audit PASS → done-reset: eq_active[27]==0 ∧ witness None → ep2 **再発火 step 254**・新 witness・audit PASS。artifact = `pin_ab_lifecycle_probe_result_cell_x0_y0.json` | **nominal x0_y0 = PASS-SCOPED / aggregate = PASS-WITH-CARRY** (pN 裁定 08:2x — 無条件の 2-cell PASS は主張しない) |
+| L-D2 | ep1/ep2 event timeline **完全一致**: fire 254 / G first-latch [98,146,242,242,−,−] / done 343 / term (time_outs=0 等) 同一。reward trace: 両 ep 344 step、**max abs step diff = 0.0、sum diff = 0.0** (reward_sum 6.5699993894 一致) | **PASS (hard)** — trace 差ゼロは bar 超え (byte 主張はしない、記録のみ) |
+| L-E | ep1/ep2 とも reset 前後 eq_active vector の fired 外対称差 = ∅ (`adjacency_sym_diff_empty: true`) | **PASS** |
+| L-C3 | bypass 圏外 (eq#0 @ z=0.8809、witness None) → 「outside every authorized route clip capture volume」**RAISE、eq_active==1 のまま** (clear 未実行) | **PASS** |
+| L-C4 | bypass 圏内 (z=0.829、witness None) → audit PASS 後 **clear==0** | **PASS** |
+| L-C5 | (i) C1+C2 legit 2 本 → **全 clear** / (ii) 3 本 > n_auth=2 → 「double-pin」RAISE・全て ==1 のまま / (iii) legit+圏外 → RAISE・**部分 clear なし** | **PASS** (3/3) |
+| L-F1 | bundle vs **f1base** (= wt @ HEAD + 凍結 5-hunk 適用; 適用後 `git diff` sha = **`625647…7566` 再現** = 系譜 tree の byte 閉包)。flag-OFF 600 step 固定長: **phys / obs / reward / done_steps / final_digest 全 byte 一致**。artifacts = `pin_ab_trace_cell_x0_y0_{bundle,f1base}.json` | **PASS** ((a)(b) = state no-op の byte 証明) |
+| L-F2 | bundle vs **HEAD** (wt clean) flag-OFF 600 step: **phys first-div = 342 (= bundle の done-reset step。物理は分岐点まで一致)** / reward first-div = **242 (= G3 latch step、flag-ON 実測と一致)** / obs first-div = 207 / done: bundle=[342] vs HEAD=[] (600 内 done 無し)。**帰属確定 (08:2x 再走、obs full-dump)**: 分岐前窓 [0..341] で差の出た obs 列 = **{49, 58, 59, 60, 61} = §11 宣言集合と正確一致 (全列 first-div 207)**・**obs[57] は窓内不変** (宣言どおり従前 live)・done step の reward = **−10.0** (escape→dropped 宣言どおり)・**time_outs=0** (純度維持、prohibited.md 準拠)。再走 determinism: bundle 再走 final digest == f1base 初走 digest (L-F1 も新 artifact 対で再成立)。artifacts = `pin_ab_trace_cell_x0_y0_{bundle,f1base}.json` + `_bundle_obs.npy` | **測定 = §11 と完全一致 (宣言外の面に delta ゼロ)**。正式判定 = two-key |
+| L-D cell 2 | **INFEASIBLE-UNDER-G-F2 / DEFERRED**: `cell_x-20_y-15` boot は G-F2 fold-7 guard で assert 死 — 逐語「grasp_actuation=True requires the NOMINAL golden recording (RUN1_REFERENCE_V2): sha256(...)=3a717010… != 5f1c3f92…」(`newton_route_env.py:626-637`、「until DoD-7 cell-geometry compatibility lands」)。guard 回避は scope 外ゆえ不実施。**prereg 時の %12 feasibility 見落とし**。**pN 裁定 08:2x = CONCUR (SCOPED / PASS-WITH-CARRY)、5 条件**: (1) 元 2-cell bar/履歴は消さない (§5 原文維持) (2) nominal = PASS-SCOPED / cell2 = INFEASIBLE-UNDER-G-F2・DEFERRED / aggregate = PASS-WITH-CARRY、無条件 2-cell PASS 禁止 (3) DoD-7 着地/guard 解除 = 再走 trigger、x-20_y-15 の同一 L-D/L-D2 必須追補、追補 PASS 前は non-nominal/multi-cell の reward-valid・training-ready 主張禁止 (本 atomic land 自体は阻害しない) (4) 耐久 guard-block 記録 = **`pin_ab_lifecycle_probe_result_cell_x-20_y-15_guard_block.json`** (command/rc=1/両 sha/guard cite/逐語/no-bypass) (5) no-repeat: DoD-7 concrete delta 前の再試行禁止 (明示 defer disposition)。p5 設計軸 concur は pN が HANDOFF_p5_vtdesign.md 自読で確認 | **裁定 fold 済 — land 進行可** |
 
 ## §11 declared semantic surface (flag-OFF delta の宣言) — **p5 批准済 (§S4.5 GRANT)**
 
@@ -297,3 +317,8 @@ B0_NOPIN のとおり cable は C1 を離れ、escape 終了が早期 done を�
    0∈env_ids の reset が wc>1 で raise / 0 非含有 subset-reset は no-op — 本 note は診断 opt-out
    (`THREAD_ALLOW_CPU_MULTIWORLD=1`) 構成への carry**。
 4. B4 state-bank fork: post-onset bank state は最初の ff step で位置発火する → **B4 gate の prereg 項目**。
+5. **L-D cell-2 carry (pN 裁定 08:2x)**: DoD-7 cell-geometry compatibility 着地 (= G-F2 guard 解除) を
+   trigger に `cell_x-20_y-15` の同一 L-D/L-D2 を**必須追補**。追補 PASS まで **non-nominal / multi-cell
+   の reward-valid・training-ready 主張禁止**。no-repeat guard は本 carry を BLOCKER として返す —
+   DoD-7 concrete delta 前の再試行禁止 (明示 defer)。耐久記録 =
+   `pin_ab_lifecycle_probe_result_cell_x-20_y-15_guard_block.json`。

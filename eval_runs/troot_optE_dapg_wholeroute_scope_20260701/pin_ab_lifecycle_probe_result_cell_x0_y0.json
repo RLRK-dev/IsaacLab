@@ -1,0 +1,105 @@
+{
+  "cell": "cell_x0_y0",
+  "unpatched_source_boot": true,
+  "ep1": {
+    "label": "ep1",
+    "fire_step": 254,
+    "eq_id": 27,
+    "eq_active_at_fire": 1,
+    "audit_at_fire": "PASS",
+    "witness_fired_at_frame": 2544,
+    "g_first_latch": [
+      98,
+      146,
+      242,
+      242,
+      null,
+      null
+    ],
+    "done_step": 343,
+    "term": {
+      "time_outs": 0.0,
+      "invalid_mask": 0.0,
+      "info.projection_mode": 1.0,
+      "info.phase_id": 3.0,
+      "info.is_dual_grip": 0.0
+    },
+    "reward_sum": 6.569999389350414,
+    "post_reset_witness_none": true,
+    "post_reset_eq_cleared": true,
+    "adjacency_sym_diff_empty": true
+  },
+  "ep2": {
+    "label": "ep2",
+    "fire_step": 254,
+    "eq_id": 27,
+    "eq_active_at_fire": 1,
+    "audit_at_fire": "PASS",
+    "witness_fired_at_frame": 2544,
+    "g_first_latch": [
+      98,
+      146,
+      242,
+      242,
+      null,
+      null
+    ],
+    "done_step": 343,
+    "term": {
+      "time_outs": 0.0,
+      "invalid_mask": 0.0,
+      "info.projection_mode": 1.0,
+      "info.phase_id": 3.0,
+      "info.is_dual_grip": 0.0
+    },
+    "reward_sum": 6.569999389350414,
+    "post_reset_witness_none": true,
+    "post_reset_eq_cleared": true,
+    "adjacency_sym_diff_empty": true
+  },
+  "L_D": {
+    "PASS": true
+  },
+  "L_D2": {
+    "PASS_hard_timeline": true,
+    "reward_trace_len": [
+      344,
+      344
+    ],
+    "reward_max_abs_step_diff": 0.0,
+    "reward_sum_diff": 0.0
+  },
+  "L_E": {
+    "PASS": true
+  },
+  "bypass": {
+    "candidates": {
+      "n_pin_eqs": 40,
+      "n_auth": 2,
+      "used": [
+        0,
+        1,
+        2
+      ]
+    },
+    "C3": {
+      "PASS": true,
+      "got": "RAISE pin anchor audit: eq#0 anchored @ [0.35, 0.15, 0.8809] is outside every authorized route clip captur"
+    },
+    "C4": {
+      "PASS": true
+    },
+    "C5_i": {
+      "PASS": true
+    },
+    "C5_ii": {
+      "PASS": true,
+      "got": "RAISE pin anchor audit: 3 pins fired > 2 authorized route clips (double-pin, \u00a715.3)"
+    },
+    "C5_iii": {
+      "PASS": true,
+      "got": "RAISE pin anchor audit: eq#1 anchored @ [0.4, 0.0, 0.8809] is outside every authorized route clip capture "
+    },
+    "PASS_all": true
+  }
+}

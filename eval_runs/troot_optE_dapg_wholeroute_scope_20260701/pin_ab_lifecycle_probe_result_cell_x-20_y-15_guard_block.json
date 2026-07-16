@@ -1,0 +1,26 @@
+{
+  "leg": "L-D cell 2 (prereg PIN_AB_SCOPE_PREREG_RSTECHLEAD_20260717.md v0.3.1 sec 5)",
+  "cell": "cell_x-20_y-15",
+  "disposition": "INFEASIBLE-UNDER-G-F2 / DEFERRED (pN ruling 2026-07-17 08:2x: L-D aggregate = PASS-WITH-CARRY; nominal x0_y0 = PASS-SCOPED; unqualified 2-cell PASS forbidden)",
+  "measured_at": "2026-07-17 08:1x JST (probe launch 08:14, assert death during env __init__); record persisted 2026-07-17 08:28 JST",
+  "command": "CUDA_VISIBLE_DEVICES=0 /home/rlrk/env_isaaclab7/bin/python eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_ab_lifecycle_probe.py --cell cell_x-20_y-15",
+  "exit_code": 1,
+  "input_npz": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x-20_y-15/route_demo_raw.npz",
+  "input_npz_sha256": "3a7170100550c67e515bf0a0c505b0d4e35bffaeac73d370408568e022e13f5b",
+  "expected_nominal_sha256": "5f1c3f9238f45057011cfad1d010ac43000cb179b76b61d0461733a9075416cf",
+  "guard": {
+    "name": "G-F2 (fold 7): grasp_actuation=True pins the recording provenance to the banked nominal golden",
+    "file": "thread_isaac_lab/envs/newton_route_env.py",
+    "lines": "626-637",
+    "lift_condition_verbatim": "until DoD-7 cell-geometry compatibility lands"
+  },
+  "assertion_verbatim": "AssertionError: grasp_actuation=True requires the NOMINAL golden recording (RUN1_REFERENCE_V2): sha256(/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x-20_y-15/route_demo_raw.npz)=3a7170100550c67e515bf0a0c505b0d4e35bffaeac73d370408568e022e13f5b != 5f1c3f9238f45057011cfad1d010ac43000cb179b76b61d0461733a9075416cf",
+  "no_bypass": "The guard was NOT bypassed, relaxed, patched, or monkeypatched (out of bundle scope; a banked fold-7 decision). This is the guard's correct firing on a non-nominal recording, not an implementation/lifecycle failure.",
+  "carry": {
+    "rerun_trigger": "DoD-7 cell-geometry compatibility lands / G-F2 lift",
+    "mandatory_addendum": "same L-D/L-D2 on cell_x-20_y-15 (Rs-GT cell)",
+    "claim_prohibition": "until the addendum PASSes, non-nominal / multi-cell reward-valid and training-ready claims are forbidden (in addition to the standing sec S4.3 prohibitions)",
+    "no_repeat": "prior-art guard returns this carry as BLOCKER; retry before a concrete DoD-7 delta is forbidden (pN condition 5: explicit defer disposition, not a rerun-now)"
+  },
+  "pN_ruling": "OPS-SUP-CODEX message 2026-07-17 08:2x JST: CONCUR (SCOPED / PASS-WITH-CARRY), 5 conditions -- (1) original 2-cell bar/history preserved (2) PASS-SCOPED/DEFERRED/PASS-WITH-CARRY labels (3) DoD-7 rerun trigger + claim prohibition, does not block this atomic land (4) this durable record (5) no-repeat defer disposition"
+}

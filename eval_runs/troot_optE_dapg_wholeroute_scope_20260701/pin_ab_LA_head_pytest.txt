@@ -1,0 +1,51 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.0.3, pluggy-1.6.0 -- /home/rlrk/env_isaaclab7/bin/python
+cachedir: .pytest_cache
+rootdir: /tmp/claude-1000/-home-rlrk-IsaacLab/02ba521b-9b5e-425b-80ef-c347da617444/scratchpad/wt_head_la
+configfile: pyproject.toml
+plugins: anyio-4.12.1
+collecting ... collected 10 items
+
+thread_isaac_lab/scripts/test_route_reward_identity_guards.py::test_fm4_c1_uses_pin_identity PASSED [ 10%]
+thread_isaac_lab/scripts/test_route_reward_identity_guards.py::test_fm4_c2_requires_monotone_connection PASSED [ 20%]
+thread_isaac_lab/scripts/test_route_reward_identity_guards.py::test_fm3_no_crossing_remains_visible PASSED [ 30%]
+thread_isaac_lab/scripts/test_route_reward_identity_guards.py::test_i3_lost_identity_crossing_escapes_despite_stray PASSED [ 40%]
+thread_isaac_lab/scripts/test_route_reward_identity_guards.py::test_i3_stray_cannot_fake_escape PASSED [ 50%]
+thread_isaac_lab/scripts/test_route_reward_identity_guards.py::test_i4_c2_feed_side_drape_rejected PASSED [ 60%]
+thread_isaac_lab/scripts/test_route_reward_identity_guards.py::test_i4_below_pin_tail_return_rejected_by_walk PASSED [ 70%]
+thread_isaac_lab/scripts/test_route_reward_identity_guards.py::test_escape_sentinel_exceeds_drop_bar PASSED [ 80%]
+thread_isaac_lab/scripts/test_route_reward_identity_guards.py::test_crossing_x_dev_is_obs_only PASSED [ 90%]
+thread_isaac_lab/scripts/test_route_reward_identity_guards.py::test_pin_identity_fields_survive_recording_prepare FAILED [100%]
+
+=================================== FAILURES ===================================
+______________ test_pin_identity_fields_survive_recording_prepare ______________
+
+    def test_pin_identity_fields_survive_recording_prepare() -> None:
+        n_frames = rex._REC_LAST_CTRL_FRAME + 1
+        rec = {
+            "ee_pos_r": np.zeros((n_frames, 3), dtype=np.float32),
+            "ee_pos_l": np.zeros((n_frames, 3), dtype=np.float32),
+            "grip_cmd": np.zeros((n_frames, 2), dtype=np.float32),
+            "phase_id": np.zeros(n_frames, dtype=np.int64),
+            "cable_xyz": np.zeros((n_frames, 40, 3), dtype=np.float32),
+            "held_seg_l": np.zeros(n_frames, dtype=np.int64),
+            "pin_active": np.zeros(n_frames, dtype=np.int64),
+            "pin_eqid": np.full(n_frames, -1, dtype=np.int64),
+            "pinned_body": np.full(n_frames, -1, dtype=np.int64),
+        }
+        rec["pin_active"][100:] = 1
+        rec["pin_eqid"][100:] = 27
+        rec["pinned_body"][100:] = 55
+        prepared = rex._prepare_recording(rec)
+        for key in ("pin_active", "pin_eqid", "pinned_body"):
+>           assert key in prepared and np.array_equal(prepared[key], rec[key]), (
+                f"recording preparation dropped {key}; C1 identity/pin onset cannot be wired"
+            )
+E           AssertionError: recording preparation dropped pin_active; C1 identity/pin onset cannot be wired
+E           assert ('pin_active' in {'arm_q': None, 'cable_xyz': array([[[0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.],\n        ...,\n        [0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.]],\n\n       [[0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.],\n        ...,\n        [0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.]],\n\n       [[0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.],\n        ...,\n        [0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.]],\n\n       ...,\n\n       [[0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.],\n        ...,\n        [0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.]],\n\n       [[0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.],\n        ...,\n        [0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.]],\n\n       [[0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.],\n        ...,\n        [0., 0., 0.],\n        [0., 0., 0.],\n        [0., 0., 0.]]], shape=(7701, 40, 3), dtype=float32), 'ee_pos_l': array([[0., 0., 0.],\n       [0., 0., 0.],\n       [0., 0., 0.],\n       ...,\n       [0., 0., 0.],\n       [0., 0., 0.],\n       [0., 0., 0.]], shape=(7701, 3), dtype=float32), 'ee_pos_r': array([[0., 0., 0.],\n       [0., 0., 0.],\n       [0., 0., 0.],\n       ...,\n       [0., 0., 0.],\n       [0., 0., 0.],\n       [0., 0., 0.]], shape=(7701, 3), dtype=float32), ...})
+
+thread_isaac_lab/scripts/test_route_reward_identity_guards.py:237: AssertionError
+=========================== short test summary info ============================
+FAILED thread_isaac_lab/scripts/test_route_reward_identity_guards.py::test_pin_identity_fields_survive_recording_prepare
+========================= 1 failed, 9 passed in 4.40s ==========================
+exit=1

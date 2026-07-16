@@ -975,6 +975,11 @@ def audit_pin_anchors(mjm, mjd):
     Args:
         mjm: the CPU ``mj_model``.
         mjd: the CPU ``mj_data``.
+
+    Returns:
+        The verified fired pin eq indices, as a tuple (empty when no pin has fired). The reset-time
+        lifecycle clears exactly this set -- the audit is the single selector, so the clear can never
+        touch an eq the audit did not judge (prereg v0.3.1 sec 4, model-state authority).
     """
     import mujoco
 
@@ -1010,6 +1015,7 @@ def audit_pin_anchors(mjm, mjd):
                 f"pin anchor audit: eq#{i} anchored @ {anchor.round(4).tolist()} is outside every authorized "
                 "route clip capture volume -- an off-clip weld (bypass write or aerial pin, §15.4)."
             )
+    return tuple(fired)
 
 
 def resolve_pin_eq_index(eq_identity, mjc_seat_body, eq_connect_type=None):
@@ -4414,6 +4420,7 @@ def _prepare_recording(recording):
     Args:
         recording: A mapping with ``ee_pos_r``/``ee_pos_l`` [frames, 3], ``grip_cmd`` [frames, 2] (cols
             [L, R]), ``phase_id`` [frames]. 81 single-cell (the interface carries no world index, CC2-CH3).
+            The optional ``pin_active``/``pin_eqid``/``pinned_body`` witness must be supplied all-or-none.
 
     Returns:
         A dict with the validated arrays + int ``step_f``/``next_f`` (770 steps) precomputed single-source
@@ -4432,6 +4439,18 @@ def _prepare_recording(recording):
     cable = np.asarray(recording["cable_xyz"], dtype=np.float32)
     # dtype-normalize like phase_id above (golden carries int16; the seg lookup must be index-stable).
     held = np.asarray(recording["held_seg_l"]).astype(np.int64)
+    # Optional clip-pin identity/timing witness.  These three fields form one contract: retaining only a
+    # subset would let the route env derive a seat segment or onset from an incomplete identity.  Preserve
+    # them through preparation so reward FM4 and the clip-only firing path read the canonical recording,
+    # rather than the previously prepared bank that silently dropped all pin fields.
+    pin_keys = ("pin_active", "pin_eqid", "pinned_body")
+    pin_present = [key in recording for key in pin_keys]
+    if any(pin_present) and not all(pin_present):
+        missing_pin = [key for key, present in zip(pin_keys, pin_present) if not present]
+        raise ValueError(f"recording has a partial pin witness; missing {missing_pin} from {pin_keys}")
+    pin_fields = {}
+    if all(pin_present):
+        pin_fields = {key: np.asarray(recording[key]).astype(np.int64).ravel() for key in pin_keys}
     # OPTIONAL arm_q (D rho=0 feedforward drive source; validated when present, required only by
     # apply_recorded_arm_ff -- pure ik_chord / grip-only recordings stay valid without it).
     arm_q = None
@@ -4446,6 +4465,9 @@ def _prepare_recording(recording):
         raise ValueError("recording arrays have inconsistent frame counts")
     if cable.shape[0] != n_frames or held.shape[0] != n_frames:
         raise ValueError("recording cable_xyz/held_seg_l frame counts inconsistent with ee_pos (contract v2)")
+    for key, values in pin_fields.items():
+        if values.shape != (n_frames,):
+            raise ValueError(f"recording {key} must have one value per frame, got {values.shape}")
     if n_frames < _REC_LAST_CTRL_FRAME + 1:
         raise ValueError(f"recording has {n_frames} frames; need >= {_REC_LAST_CTRL_FRAME + 1}")
     if ee_r.shape[1:] != (3,) or ee_l.shape[1:] != (3,) or grip.shape[1:] != (2,):
@@ -4487,7 +4509,7 @@ def _prepare_recording(recording):
         if hits.size > 0:
             mask_event_frames[int(p)] = int(hits[0])
             validity_mask_g[_RECORDED_PHASE_TO_G[int(p)]] = True
-    return {
+    prepared = {
         "ee_pos_r": ee_r,
         "ee_pos_l": ee_l,
         "grip_cmd": grip,
@@ -4501,6 +4523,8 @@ def _prepare_recording(recording):
         "validity_mask_g": validity_mask_g,
         "mask_event_frames": mask_event_frames,
     }
+    prepared.update(pin_fields)
+    return prepared
 
 
 class RouteExecutor(rc.RouteInterfaceV1):

@@ -239,6 +239,181 @@ def test_pin_identity_fields_survive_recording_prepare() -> None:
         )
 
 
+def _env_for_clear(world_count: int = 1):
+    """Stub env for the ``_clear_c1_pin`` decision logic (the audit itself is monkeypatched per test).
+
+    The stub solver deliberately has NO ``world_count`` attribute -- the B1 premise: the guard must
+    read the env-authoritative ``_world_count``, never a solver getattr default (which is fail-open).
+    """
+    env = object.__new__(nre.NewtonRouteEnv)
+    env._world_count = world_count
+    env._c1_pin_witness = {"eq_id": 3}
+    env._pin_seat_seg = 27
+    env._pin_onset_frame = 2544
+    env._route_rec_step_f = "identity-sentinel"
+
+    class _Stub:
+        pass
+
+    solver = _Stub()
+    solver.mj_model = object()
+    mjd = _Stub()
+    mjd.eq_active = np.zeros(8, dtype=np.int64)
+    solver.mj_data = mjd
+    env._solver = solver
+    return env
+
+
+def test_clear_c1_pin_clears_all_audited_fired() -> None:
+    """L-C: the clear set is EXACTLY the audit's verified fired tuple, and the audit runs first.
+
+    eq 5 is fired but withheld from the fake audit's return: the helper must clear only what the
+    selector judged (model-state authority = the audit is the single selector; the real audit
+    returns every fired candidate -- that integration is the probe's L-C4 leg).
+    """
+    env = _env_for_clear()
+    env._solver.mj_data.eq_active[[3, 5, 7]] = 1
+    seen_at_audit = {}
+    real_audit = rex.audit_pin_anchors
+
+    def _fake_audit(mjm, mjd):
+        seen_at_audit["pre_clear"] = mjd.eq_active.copy()
+        return (3, 7)
+
+    rex.audit_pin_anchors = _fake_audit
+    try:
+        env._clear_c1_pin([0])
+    finally:
+        rex.audit_pin_anchors = real_audit
+    assert list(seen_at_audit["pre_clear"][[3, 5, 7]]) == [1, 1, 1], "audit must run BEFORE any clear"
+    expected = np.zeros(8, dtype=np.int64)
+    expected[5] = 1
+    assert np.array_equal(env._solver.mj_data.eq_active, expected), (
+        "the returned fired set must be cleared and ONLY that set (adjacent state untouched)"
+    )
+    assert env._c1_pin_witness is None, "(a): the witness must reset per episode"
+    assert (env._pin_seat_seg, env._pin_onset_frame, env._route_rec_step_f) == (27, 2544, "identity-sentinel"), (
+        "identity is recording-derived and must NEVER be cleared (sec 21.11.1 coupling note)"
+    )
+
+
+def test_clear_c1_pin_guards() -> None:
+    """L-C: 0-not-in-env_ids no-ops regardless of wc; wc!=1 with world 0 raises (env-authoritative)."""
+    env = _env_for_clear(world_count=4)
+    called = []
+    real_audit = rex.audit_pin_anchors
+    rex.audit_pin_anchors = lambda mjm, mjd: called.append(1) or ()
+    try:
+        # subset reset without world 0 -> out of scope, silent, even at wc=4 (the whole-config
+        # wc>1 loudness is owned by the make_solver tripwire, not this helper).
+        env._clear_c1_pin([1, 2])
+        assert called == [] and env._c1_pin_witness is not None, "no world-0: helper must not touch anything"
+        # wc=4 + world 0 -> RuntimeError from the env count; the stub solver has NO world_count
+        # attribute, so a solver-getattr guard would silently pass here (pN B1 leg).
+        assert not hasattr(env._solver, "world_count")
+        try:
+            env._clear_c1_pin([0, 1])
+            raise AssertionError("wc=4 with world 0 in the reset must raise")
+        except RuntimeError as e:
+            assert "world_count==1" in str(e)
+        assert called == [], "the wc guard must fire before the audit"
+    finally:
+        rex.audit_pin_anchors = real_audit
+
+
+def test_clear_c1_pin_no_candidate_and_no_cpu_model() -> None:
+    """L-C/(e): no active candidate = state no-op (audit still consulted); no mj_model = full no-op."""
+    env = _env_for_clear()
+    real_audit = rex.audit_pin_anchors
+    rex.audit_pin_anchors = lambda mjm, mjd: ()
+    try:
+        env._clear_c1_pin([0])
+        assert np.array_equal(env._solver.mj_data.eq_active, np.zeros(8, dtype=np.int64))
+        assert env._c1_pin_witness is None, "(a) applies even when nothing fired"
+        env2 = _env_for_clear()
+        env2._solver.mj_model = None
+        calls = []
+        rex.audit_pin_anchors = lambda mjm, mjd: calls.append(1) or ()
+        env2._clear_c1_pin([0])
+        assert calls == [] and env2._c1_pin_witness is not None, "no CPU model: return before the audit"
+    finally:
+        rex.audit_pin_anchors = real_audit
+
+
+def test_clear_c1_pin_readback_failure_raises() -> None:
+    """L-C: a clear whose readback does not stick must die loud (the GPU-inert-mirror failure class)."""
+
+    class _Sticky(np.ndarray):
+        def __setitem__(self, key, value):  # a write that silently does not take
+            return
+
+    env = _env_for_clear()
+    env._solver.mj_data.eq_active = np.ones(4, dtype=np.int64).view(_Sticky)
+    real_audit = rex.audit_pin_anchors
+    rex.audit_pin_anchors = lambda mjm, mjd: (2,)
+    try:
+        try:
+            env._clear_c1_pin([0])
+            raise AssertionError("an ignored eq_active write must raise on readback")
+        except RuntimeError as e:
+            assert "readback != 0" in str(e)
+        assert env._c1_pin_witness is not None, "the witness must NOT be nulled on a failed clear"
+    finally:
+        rex.audit_pin_anchors = real_audit
+
+
+def _pin_recording(n_frames: int) -> dict:
+    """Minimal valid recording dict with a full pin witness (mirrors the V5 fixture shape)."""
+    rec = {
+        "ee_pos_r": np.zeros((n_frames, 3), dtype=np.float32),
+        "ee_pos_l": np.zeros((n_frames, 3), dtype=np.float32),
+        "grip_cmd": np.zeros((n_frames, 2), dtype=np.float32),
+        "phase_id": np.zeros(n_frames, dtype=np.int64),
+        "cable_xyz": np.zeros((n_frames, 40, 3), dtype=np.float32),
+        "held_seg_l": np.zeros(n_frames, dtype=np.int64),
+        "pin_active": np.zeros(n_frames, dtype=np.int64),
+        "pin_eqid": np.full(n_frames, -1, dtype=np.int64),
+        "pinned_body": np.full(n_frames, -1, dtype=np.int64),
+    }
+    rec["pin_active"][100:] = 1
+    rec["pin_eqid"][100:] = 27
+    rec["pinned_body"][100:] = 55
+    return rec
+
+
+def test_prepare_recording_partial_pin_witness_raises() -> None:
+    """L-C2: 2/3 pin keys must refuse -- a subset witness would derive identity from a broken contract."""
+    rec = _pin_recording(rex._REC_LAST_CTRL_FRAME + 1)
+    del rec["pinned_body"]
+    try:
+        rex._prepare_recording(rec)
+        raise AssertionError("a partial pin witness must raise")
+    except ValueError as e:
+        assert "partial pin witness" in str(e) and "pinned_body" in str(e)
+
+
+def test_prepare_recording_pin_frame_mismatch_raises() -> None:
+    """L-C2: a pin field that is not one-per-frame must refuse (a silent ravel would shift the onset)."""
+    rec = _pin_recording(rex._REC_LAST_CTRL_FRAME + 1)
+    rec["pin_active"] = rec["pin_active"][:-1]
+    try:
+        rex._prepare_recording(rec)
+        raise AssertionError("a pin-field frame-count mismatch must raise")
+    except ValueError as e:
+        assert "one value per frame" in str(e)
+
+
+def test_prepare_recording_absent_pin_fields_pass_through() -> None:
+    """L-C2: a recording with NO pin fields stays valid and prepares WITHOUT them (fail-closed identity)."""
+    rec = _pin_recording(rex._REC_LAST_CTRL_FRAME + 1)
+    for key in ("pin_active", "pin_eqid", "pinned_body"):
+        del rec[key]
+    prepared = rex._prepare_recording(rec)
+    assert not any(key in prepared for key in ("pin_active", "pin_eqid", "pinned_body")), (
+        "absent pin fields must stay absent (identity stays conservatively fail-closed)"
+    )
+
+
 def main() -> None:
     test_fm4_c1_uses_pin_identity()
     test_fm4_c2_requires_monotone_connection()
@@ -250,10 +425,18 @@ def main() -> None:
     test_i4_below_pin_tail_return_rejected_by_walk()
     test_escape_sentinel_exceeds_drop_bar()
     test_crossing_x_dev_is_obs_only()
+    test_clear_c1_pin_clears_all_audited_fired()
+    test_clear_c1_pin_guards()
+    test_clear_c1_pin_no_candidate_and_no_cpu_model()
+    test_clear_c1_pin_readback_failure_raises()
+    test_prepare_recording_partial_pin_witness_raises()
+    test_prepare_recording_pin_frame_mismatch_raises()
+    test_prepare_recording_absent_pin_fields_pass_through()
     print(
         "ALL PASS: FM4 C1/C2 identity + FM3 no-crossing + recording pin-field preservation "
         "+ I3 same-instrument escape (fail-open/false-escape closed) + I4 routed-side (feed-drape/"
-        "tail-return rejected) + sentinel>bar + obs-only crossing_x_dev"
+        "tail-return rejected) + sentinel>bar + obs-only crossing_x_dev + (a)(b) clear lifecycle "
+        "(model-state authority / guards / readback) + pin-witness raise branches"
     )
 
 

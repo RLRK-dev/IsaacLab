@@ -1033,6 +1033,9 @@ class NewtonRouteEnv(VecEnv):
         """Reset specified worlds to the P0 settled state; clear reward-latch / route / debounce state."""
         if len(env_ids) == 0:
             return
+        # (a)(b) clip-pin lifecycle: audit-then-clear BEFORE the state restore, on every reset path
+        # (done-driven and public reset()) -- prereg v0.3.1 sec 4.
+        self._clear_c1_pin(env_ids)
         bq = self._state_0.body_q.numpy()
         bqd = self._state_0.body_qd.numpy()
         prev = self._solver.body_q_prev.numpy() if hasattr(self._solver, "body_q_prev") else None
@@ -1844,6 +1847,41 @@ class NewtonRouteEnv(VecEnv):
         self._c1_pin_witness = rex.authorize_clip_pin(self._solver, seat_body, bq[seat_body, :3])
         self._c1_pin_witness["onset_frame"] = int(self._pin_onset_frame)
         self._c1_pin_witness["fired_at_frame"] = int(step_f[t]) + int(sub_i)
+
+    def _clear_c1_pin(self, env_ids):
+        """Clear every fired clip pin and the episode witness on a world-0 reset ((a)(b) lifecycle).
+
+        Model-state authority (prereg v0.3.1 sec 4): the clear set is ALL fired pin candidates returned
+        by the design sec 15.4 audit's who-wrote-it-agnostic scan -- NOT the witness eq alone -- so a
+        bypass write (an ``eq_active`` flipped without the authorizer) is audited-then-cleared on EVERY
+        reset path (done-driven and public :meth:`reset`). The audit-then-clear order is load-bearing:
+        the clear destroys the episode's weld evidence. Identity (``_pin_seat_seg`` /
+        ``_pin_onset_frame`` / ``_route_rec_step_f``) is recording-derived and NEVER cleared here
+        (design sec 21.11.1 coupling note: the escape guard reads identity, not witness).
+        """
+        if 0 not in env_ids:
+            # pin is world-0-only: a reset not touching world 0 is out of this helper's scope
+            # (CPU x wc>1 whole-config loudness is owned by the make_solver tripwire, base:1324).
+            return
+        if int(self._world_count) != 1:
+            # env-authoritative count: the solver object exposes no world_count attribute, so a
+            # getattr default would be fail-open. CPU eq writes are GPU-inert at wc>1 (banked
+            # hypothesis 2026-07-16) -- the readback below would confirm the MIRROR, not physics.
+            raise RuntimeError(
+                f"clip-pin lifecycle requires world_count==1 (CPU path); got {self._world_count}"
+            )
+        import route_executor as rex  # lazy, path set in _build_route_executor (mirrors :1930)
+
+        mjm = getattr(self._solver, "mj_model", None)
+        if mjm is None:
+            return  # no CPU eq table -> no pin can exist (mirrors the done-path guard)
+        mjd = self._solver.mj_data
+        fired = rex.audit_pin_anchors(mjm, mjd)  # raises on count/anchor violation BEFORE any clear
+        for eq_id in fired:
+            mjd.eq_active[eq_id] = 0
+            if int(mjd.eq_active[eq_id]) != 0:
+                raise RuntimeError(f"clip-pin clear failed: eq_active[{eq_id}] readback != 0")
+        self._c1_pin_witness = None  # (a): the pin may re-fire next episode at the recording onset
 
     def _pull_route(self):
         """Query the route interface for all worlds (per-step ABSOLUTE base target + phase + grip + dual
