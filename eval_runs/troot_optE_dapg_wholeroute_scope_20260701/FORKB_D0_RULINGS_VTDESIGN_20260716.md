@@ -1,6 +1,6 @@
-# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.5
+# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.6
 
-**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: D0 = 6/6 CLOSE（design + evidence）** — 裁定 v1.0 R2-R6 `11fdb0bc11` / v1.1 R1 `889ce6b640`［cuda:2 配置 = %12 CONCUR 決着］/ v1.2 要件 #7 `8304500dbd` / v1.3 D1-VERIFY（CONFORM 7/7 + AMEND-1）`9cea41ac67`。**item-1 evidence = v4 `fd536235e9` PASS**（pN 独立 verify、末尾 EVIDENCE-RECORD UPDATE `55086b197b` [record-only、%12 custodial — p5 検証・受理済: 設計文 append-only、peak 一致・RSS/CPU 近似一致 (1317.8→1310/1.58→1.56) ゆえ **R1 の N=4 結論 不変**、v4a narrative=UNVERIFIED 隔離は正]）。**v1.4 = 本 header の evidence-status 同期のみ（owner 実施、設計内容 無変更）**。次 = **E0**（D1 §7 事前登録どおり、fresh N=1 から）。0-commit（bank = %12）。
+**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: D0 = 6/6 CLOSE（design + evidence）** — 裁定 v1.0 R2-R6 `11fdb0bc11` / v1.1 R1 `889ce6b640`［cuda:2 配置 = %12 CONCUR 決着］/ v1.2 要件 #7 `8304500dbd` / v1.3 D1-VERIFY（CONFORM 7/7 + AMEND-1）`9cea41ac67`。**item-1 evidence = v4 `fd536235e9` PASS**（pN 独立 verify、末尾 EVIDENCE-RECORD UPDATE `55086b197b` [record-only、%12 custodial — p5 検証・受理済: 設計文 append-only、peak 一致・RSS/CPU 近似一致 (1317.8→1310/1.58→1.56) ゆえ **R1 の N=4 結論 不変**、v4a narrative=UNVERIFIED 隔離は正]）。**v1.4 = 本 header の evidence-status 同期のみ（owner 実施、設計内容 無変更）**。**E0 status〔record-fix %12、pN 条件〕: 実測完了 `fb36c49540` → p5 E0-VERIFY = PASS（v1.5、⚠設計軸のみ・N=4 確定は この軸限定）／ pN independent verify = **HOLD**（evidence 完全性 B1-B5）→ B1/B2 = v1.6 R2-4-b + N-1 で I0 acceptance へ移管（**post-E0 design amendment**、元 §7 pre-reg PASS ではない）／ B3/B4/B5 = **E0v2 full 再走**（pN scope CONCUR-WITH-CONDITIONS 7 条件）。N=4 確定/I0 開始 = E0v2 全 PASS 後の pN 再判定。** 0-commit（bank = %12）。
 **入力**: 素材 = `FORKB_D0_MATERIALS_RSTECHLEAD_20260716.md`（DoD = `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` §21.11.2a、v1.13 `7b4c918251`）。
 **範囲**: 全 6 項の裁定 — 項 2/3/4/5/6 = v1.0、項 1 = v1.1 追裁定（当初「実測待ちで保留」〔歴史〕→ **v4 `fd536235e9` PASS で解消済**〔record-fix %12〕）。
 **接地検証（p5 自読、2026-07-16）**: 項2 `newton_route_env.py:1047-1049`（裸 `np.random.uniform`、行 drift 訂正を確認）/ 項3 `TRAINER_NODE_DEFINE...0712.md:7`（RLPD 条項逐語）+ `:30`（SAC/TD3/replay=ZERO 逐語）/ 項4 `STAGEA_...0712.md:117/:125/:131`（schema・disk budget・os.environ 規約 逐語）/ 項5 `newton_route_env.py:419`（default=4）+ caller grep（wc=1 明示を裏書き、wc=NW は E_probe のみ=意図的）。
@@ -150,6 +150,19 @@
 - **N-3（evidence→production 連続性）**: E0 は **dirty tree で走った**（git_head `8d64d8d2d1` + as-run 3 env file の未 commit 差分 137/29 行、**as_run sha256 で pin 済 = 開示適正**）。⇒ E0 数値を「production env の数値」として cite する前に、**I0 で as-run 差分を land するか inert 宣言する**（as-run sha と committed sha の一致確認を I0 verify に含める）。
 
 **付帯批准**: D1 §3 timing（v2 trace 由来 ~8 t/s）→ **実測 10.764 t/s へ更新** = PROVISIONAL 条項どおり（disk budget 再計算: 143.8 ep/h ×0.5MB ≈ 72 MB/h、rotation 方針に影響なし）。
+
+### 🔒 R2-4-b（v1.6 追加裁定、%12 要請 = pN HOLD B1 への回答）: **episode-npz serialization determinism = I0 acceptance 必須 leg（ADOPT）+ serializer は【byte-決定的】に作る**
+
+**要請の妥当性**: 私の D-1 npy 正式化は **E0 の計器レベル**（probe の traj 比較）を覆ったが、**production episode file（`ep_*.npz`、R3-1 の serializer が書く）は I0 成果物** — その byte 安定性は R2-4/D-1 の**外に残っていた**。B1 は真の gap。N-1 と対称（機構が I0 にしか存在しない ⇒ acceptance leg も I0）。
+
+**裁定**:
+1. **serializer 要件（design）**: I0 の episode serializer は **file レベルで byte-決定的**に作る — 同 (code sha, fingerprint, derived_seed, workload) ⇒ `ep_*.npz` が **container 込みで byte-identical**（実装手段 [zip date_time 固定 / `np.lib.format` 直書き等] は %12 自由）。⇒ **系論: R3-2 manifest の `sha256` が「identity のみ」から【identity + repro 比較可能】へ昇格**（D-1 の caveat は「非硬化 writer の generic npz」にのみ残る）。運用利得 = repro 検証が sha 比較 1 発（payload 抽出不要）。
+2. **I0 acceptance 必須 leg（binding、N-1 と同格）**: ⭐ **N-2 と統合した 2×2 判別テスト**で張る —
+   | | 同 derived_seed 再走 | 異 derived_seed |
+   |---|---|---|
+   | **期待** | file sha **一致**（serialization determinism = B1）| file sha **不一致**（seed-differentiation = N-2、episode 内容が実際に異なることの実証）|
+   両象限が期待どおりで初めて PASS — 「同」だけなら inert-seed でも通り、「異」だけなら非決定 serializer でも通る。**2×2 が両故障 mode を同時に判別する**（判別できないテストはテストでない、の適用）。⚠ 異 seed 象限は **seed が軌道に発現する workload**（policy-drive / noise-live 経路）で実施（N-2 の FF-inert 所見どおり FF では不成立）。
+3. ⇒ **B1 = 本裁定で closed**（pN 同意見の確認は %12 経由でそのまま進めてよい）。B3/B4/B5 の E0v2 補完 run 搭載 = 了解（裁定要請なし、到着時に verify）。
 
 ---
 
