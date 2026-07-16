@@ -85,3 +85,20 @@ route 後半 : C2 側 Y-monotone window で seated(C2)=True (dx~0.2mm) → G5 (+
 - 新規コード変更 = ゼロ (本 gate は live 済コードの設計検証)。probe/unit-test の実行 = 読み取り専用計算。
 - 視覚レグ: 省略 (justified) — 幾何述語の数値検証であり motion 妥当性の新規主張なし。最終捕捉 verdict は Rs 動画 standing (§13.3)。
 - 著者未特定の unit test は本 gate で内容検証の上 bank (owner chain は著者 claim と独立に進行、manifest:45)。
+
+## leg 3 再走 OUTCOME (2026-07-17 06:1x 追記) — **VERDICT = BLOCK〔訓練批准として〕継続 / I3/I4 = 欠陥ゼロ・findings 3/4 閉鎖 verify / §S 意味論 sub-claim = 批准可能 (verifier 明言、前提条件付き)**
+
+前段: I3/I4 実装 (`dfbddb4777`) + 二鍵 (p5 §S3.5/§S3.5a CONFORM + pN evidence HOLD B1-B3 → LIFT `85958627e3` chain) + pN FENCE OPEN GO (06:0x)。verifier = 独立 sub-agent (⚠ model = Opus 切替 — 同 tier spawn が API 529 ×3 で不能、infra 事由の documented deviation; 敵対姿勢・on-disk 自走: landed-bytes worktree 9/10 再現・diff/probe json 独立検証)。
+
+| # | SEV | 内容 | 新規性 / disposition |
+|---|---|---|---|
+| 1 | **CRITICAL** | I1 = pin lifecycle が episode を跨がない (`_reset_worlds` :1032-1076 は witness/eq 不触、実測)。ep2+ は stale eq で cable が物理的に溝内 → **述語は正直に測るが状態が pin artifact** → G3 無償 latch = 訓練信号の汚染 (述語の嘘ではない) | **carry 再確認** (leg3 finding 1、未修正のまま = 設計どおり (a)(b) chunk へ。banked disposition 不変) |
+| 2 | HIGH | ⭐**新規: 順序 hazard** — committed HEAD の fail-closed fence (pin fields 無 → route_c1_pin=True は raise / False は seat 到達不能 = 訓練不能) を、**dirty tree の route_executor.py pin-fields 差分が (a)(b) 無しで突破する**。現 dirty tree から route_c1_pin=True で訓練起動すると ISSUE 1 の汚染に直行 | **precondition を精密化**: route_executor pin-fields land は「(a)(b) より先」ではなく **(a)(b) と同一 landing に bundle (先行 land 禁止)** + 現 dirty tree からの訓練起動禁止 |
+| 3 | HIGH | I2 = authorize/audit raise が RL hot path で process-fatal (per-world 未 guard) | **carry 再確認** ((d) containment = p5 設計項目、不変) |
+| 4 | MED | C2 lateral margin 0.317mm | **既知 MED carry・I3/I4 で不変** (bar/routed dx 不触を verify) |
+
+**Q1 (findings 3/4 閉鎖) = YES**: `_crossing_x_dev` 消費者 = obs[57] :1568 のみ (reward/done body ゼロ) / escape = 同 step identity dx (:1645←:1616) / C2 = routed 側のみ (sign 正当性を独立導出)。攻撃全滅: same-step latch ordering 安全 (escape は step 開始時 latch を読む + seat-latch と seat-loss は同 step 排他) / MISS sentinel・1μm tol = pre-existing 不触 / wrong-sign・pin 端 = fail-closed 縮退 (false-success 不能) / post-release 抑制との相互作用 = benign (G6 c1_retained が封じる)。
+**Q2 (新規 mode) = NO**: I4 = 候補集合の純粋な縮小 (reject を増やすのみ、seat 捏造不能・G1-G6 到達性維持) / I3 = 分岐クラスの除去。非保守側の新規経路ゼロ。
+**Q3 (§S) = 意味論 sub-claim は批准可能**: 「HEAD の seat/latch/escape 述語意味論は、**有効な per-episode pin identity + fired pin + reset 時 eq clear** の前提下で、単一 episode 上 banked correctness と等しい」 — verified。前提は宣言済み (I1 disposition) かつ **committed HEAD では機構的に fail-closed enforce** (dirty tree では非 enforce = ISSUE 2)。訓練批准は NOT — (a)(b)+bundle land+(d) まで BLOCK 継続。
+
+**chain**: §S 解除の裁定 = 二鍵へ (p5 = §S 定義に対する意味論 sub-claim の充足判定 / pN = 本 verdict の evidence 軸受理)。reward-valid / training-ready 禁止 = **不変** ((a)(b)+(d) 完了まで — これは §S とは別の gate② 完了条件)。
