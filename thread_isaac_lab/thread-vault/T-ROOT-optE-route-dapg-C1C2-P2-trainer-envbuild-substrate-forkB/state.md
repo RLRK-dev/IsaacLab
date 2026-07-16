@@ -28,7 +28,7 @@ session_history:
   - "2026-07-16 22:4x I0-b infra = banked (1d95b7bf6e 287 files + a9a26249fb CHECK6 [Rs 裁定 A] + 8ae825c954 --tag)・機構 leg 4/4 PASS。N-2 carry = v1.8 §N-2-RESOLUTION (2a7ac33d87) で scope 外解決 (channel-conditioned standing rule / INIT_XY_NOISE=appearance-only)。fence CLOSE = landed-bytes fresh 再走 (v2 tag) → pN verify 待ち。〔entry = p6 反映執行 (%12 依頼 23:0x)〕"
   - "2026-07-16 23:0x I0-b v2 再走 完了 → pN independent verdict = HOLD (fence CLOSE/flip 禁止)。PASS 保持 = landed-SHA/K・K_fail・lever/L4/L5/integrity/N-2 v1.8。blocker 4 = CHECK6 負対照 bypass ×2 / nvidia-smi 不在 nonzero rc = k=0 fail-open / FAILURE.json 非独立 trigger / termination_reason 空文字 enum 外 (p5 disposition 無)。correction chain 待ち。〔entry = p6 反映執行 (pN disposition relay)〕"
 created: 2026-07-16T17:49:20+09:00
-last_updated: 2026-07-16T23:10:51+09:00
+last_updated: 2026-07-16T23:50:01+09:00
 spec_version: LTM-1 v1.2
 ---
 
