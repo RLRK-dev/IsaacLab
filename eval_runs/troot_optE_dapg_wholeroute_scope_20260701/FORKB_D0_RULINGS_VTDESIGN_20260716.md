@@ -1,6 +1,6 @@
-# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.1
+# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.2
 
-**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: v1.0（R2-R6）= banked `11fdb0bc11`。v1.1（R1 追裁定）= DRAFT — %12 verify 待ち。0-commit（bank = %12）。**
+**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: D0 = 6/6 CLOSE** — v1.0（R2-R6）= banked `11fdb0bc11` / v1.1（R1）= banked `889ce6b640`（verify PASS + **cuda:2 配置 = %12 CONCUR** = co-decide 決着）/ v1.2 = D1 要件 #7 追加（trainer 側 contention leg、%12 提案・p5 批准）— DRAFT、0-commit（bank = %12）。**次 = D1 起草（%12）→ p5 verify（要件 1-7 照合）。**
 **入力**: 素材 = `FORKB_D0_MATERIALS_RSTECHLEAD_20260716.md`（DoD = `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` §21.11.2a、v1.13 `7b4c918251`）。
 **範囲**: 項 2/3/4/5/6 の裁定（素材 ✅ 分）。項 1（N sizing）= 実測待ちで**保留**。
 **接地検証（p5 自読、2026-07-16）**: 項2 `newton_route_env.py:1047-1049`（裸 `np.random.uniform`、行 drift 訂正を確認）/ 項3 `TRAINER_NODE_DEFINE...0712.md:7`（RLPD 条項逐語）+ `:30`（SAC/TD3/replay=ZERO 逐語）/ 項4 `STAGEA_...0712.md:117/:125/:131`（schema・disk budget・os.environ 規約 逐語）/ 項5 `newton_route_env.py:419`（default=4）+ caller grep（wc=1 明示を裏書き、wc=NW は E_probe のみ=意図的）。
@@ -56,6 +56,7 @@
 | 4 | flip+tripwire の実装と検証 leg（byte-repro 無変化証明） | R5 |
 | 5 | supervisor（restart/halt/marker）の仕様 | R6 |
 | 6 | E0 で pin する数値: **N**（項 1 実測後）/ **backpressure K**（R3-3）/ **K_fail**（R6-3）/ per-process byte-repro leg（R2-4） | 各項 |
+| 7 | **初回 trainer bring-up 時の contention 観測 leg**（cuda:2、VLM 同居時）— E0 は collector 側/cuda:0 のみで**この軸を覆わない**（%12 提案 2026-07-16、p5 批准） | R1-3/R1-5 被覆 gap |
 
 **保留**: 項 1（N と資源上限）= 1-process 実測 profile 待ち（protocol = pN 6 条件固定済）。実測到着後に N 上限式へ代入して裁定。→ **v1.1 R1 で解消（下記）**。
 
