@@ -1,6 +1,6 @@
-# RS-TECH-LEAD handoff — 2026-07-17 01:13 JST (gate② chain 走破後)
+# RS-TECH-LEAD handoff — 2026-07-17 05:19 JST (gate② I3/I4 実装 bank 後)
 
-## セッション継続中: 2026-07-17 01:13 JST (RS-TECH-LEAD %12 / w2:p4)
+## セッション継続中: 2026-07-17 05:19 JST (RS-TECH-LEAD %12 / w2:p4)
 
 ⚠ **各 pane は自分の per-pane handoff を読め**。**%12 正本 = `handoff-cc-rstechlead-w1build-2026-07-12.md`**
 (全 arc の時系列 CURRENT STATE)。本 file = shared last-writer の要約。
@@ -12,8 +12,12 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
   + **pin node gate ② 再走** (並行 leg、招集済・未着手)
 - Phase: I0-a/I0-b = **CLOSE** (pN readback PASS 07-17 00:0x) / **gate ② 再走 = chain 走破**: leg1 /reward-design
   PASS (`1b59f23c44`+probe v2 訂正 `60368e6228`) → leg2 p5 CONFORM (§S2 `4589563ab4`) → **leg3 /pre-check =
-  BLOCK〔訓練批准〕** (単一 ep 述語=clean・SRG probe=可) → **I3/I4 の p5 裁定 = §S3 banked (`d807d077b8`)**。
-  **§S = 継続** (解除 = I3/I4 実装 + pin (a)(b) + (d) containment → p5 delta verify → /pre-check 再走 の後)
+  BLOCK〔訓練批准〕** (単一 ep 述語=clean・SRG probe=可) → **I3/I4 の p5 裁定 = §S3 banked (`d807d077b8`)** →
+  ⭐**I3/I4 実装 = bank 済 `dfbddb4777` (05:1x、Rs「A着手」04:3x)**: L3 chain 遵守 (L-TRIAGE→[VERIFY] 3-lens
+  panel [CC2/CC3/CC6 全て非 BLOCK、refinement 11 件 fold]→rule-check→実装→leg 全 PASS)。record =
+  `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` ([RESULT] 表 + staged-hunk 検査開示)。p5 delta verify 依頼済 +
+  pN evidence 判定/分割 co-decide 依頼済 (05:17 dispatch、Enter 到達確認済)。
+  **§S = 継続** (解除 = pin (a)(b) + (d) containment → p5 delta verify → /pre-check 再走 の後)
 - two-key = pN (OPS-SUP-CODEX、evidence 軸) + p5 (VT-DESIGN、設計軸)。**OPS-SUP 役割 = pN (p1 でない)**
 
 ### Vault SSOT checked（banked design 接地）
@@ -36,16 +40,20 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
 6. **pN HOLD B1-B4 → 全対応 bank** (`6cf3dc0015`: B2 preflight fail-closed+LAUNCH_ABORT / B3 marker OR 検出) →
    **v3 legs 5/5 PASS @ landed bytes** (`525afa8435`) → **pN 再判定 = PASS-WITH-RECORDS-FIX** (独立 287 assertions
    errors=0、唯一の残 = 本 file の stale 記載 → 本版で訂正)
+7. **gate② chain 走破 + I3/I4 実装 bank** (`1b59f23c44`→`4589563ab4`→`60368e6228`/`ccd285b9b6`→`d807d077b8`→
+   **`dfbddb4777`**): 3-lens [VERIFY] panel 非 BLOCK (refinement 11 fold) / legs 全 PASS (tests 10/10・probe
+   ALL_PASS・V6 反転・81-cell positive control) / foreign hunk 2 件は選択 stage で除外・開示 (B2 教訓の実施)
 
 ### 未完了・中断タスク
-- **gate ② 完了条件 (chain 再開点)**: ①I3 実装 = escape guard を `_c1_retention_m` (identity 済) に付替え
-  (§S3.1: escape := dx==MISS ∨ dx>60mm、obs[57] 不変、grep assert = reward/termination 系の `_crossing_x_dev`
-  消費者ゼロ、fixture 2 本 REJECT unit test 化、canonical per-frame divergence 0 維持) ②I4 実装 = C2 walk の
-  routed-side 限定 (§S3.2: route 設計定数 1 bit + canonical 側 probe assert、feed-drape fixture REJECT 化)
-  ③pin (a) witness per-episode reset + (b) eq clear on reset (leg3 Issue 1 = banked 残作業; 前提 = pin は
-  既成着座の【保持】装置、seat f2428 ≺ onset f2544) ④(d) containment (authorize 失敗を episode-scope へ、
-  leg3 Issue 2) → p5 delta verify (§S3.1/S3.2 のみ) → /pre-check 再走 → §S 解除。⚠C2 margin 3.183/3.5mm =
-  DR-ON 日の MED design tension (bar 不動、§S3.2)
+- **gate ② 完了条件 (chain 再開点)**: ①I3 実装 ✅ + ②I4 実装 ✅ = **bank 済 `dfbddb4777`** (§S3.1/S3.2 の
+  bar 全充足: escape = identity dx [MISS ∨ >60mm]・obs[57] 不変・`_crossing_x_dev` 消費者ゼロ [grep 対称差∅
+  + standing test 化]・fixture 3 本 REJECT unit test 化・canonical 対称差∅・**81-cell positive control**
+  [feed 側 straddle 総数 0、per-cell seat_k 25..34]・ROUTE_C2_SIDE_FROM_PIN=−1 [canonical 313 frame 接地]) →
+  **残 = ③pin (a) witness per-episode reset + (b) eq clear on reset** (leg3 Issue 1 = banked 残作業; 前提 =
+  pin は既成着座の【保持】装置、seat f2428 ≺ onset f2544; ⚠識別子永続 coupling = RLENV_PIN_DESIGN §21.11.1
+  pointer 注記済 [I3 の escape が identity を読む ⇒ identity null 化は偽 −10]) **④(d) containment** (authorize
+  失敗を episode-scope へ、leg3 Issue 2、設計 = p5) → **p5 delta verify (依頼済 05:17)** → /pre-check 再走 →
+  §S 解除。⚠C2 margin 3.183/3.5mm = DR-ON 日の MED design tension (bar 不動、§S3.2)
 - FM3/FM4 著者 claim 未決着 (manifest 呼びかけ中)
 - pin-1 (v1.9) = trainer-ingest spec への binding carry (⛔truncated_by→time_out 写像禁止、"" 分岐 fail-loud)
 - trainer contention leg (§8) = 初回 trainer bring-up 時
@@ -58,16 +66,20 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
 - **B4 = v1.9 (a) ADOPT**: termination_reason "" = 未測定 sentinel (taxonomy 着地まで)、truncated_by 3 値 additive、
   pin-3 = LEDGER loud 記載済 (p6 `879813d856`、Rs veto 可)
 
-### State Snapshot (2026-07-17 01:13 実測)
-- git: `287e51e506` まで push 済 (fork)。以降の gate② chain commits (`1b59f23c44`〜`d807d077b8`) = push 提案中。
-  ambient dirty 740 file = 他 pane 由来の standing residue (mtime 6/15-7/11、⛔ add 時 staged hunk 検査 hard
-  step)。GPU: 常駐プロセスなし。
+### State Snapshot (2026-07-17 05:19 実測)
+- git: `36d71222a1` まで **push 済** (fork、04:26 実測 0 unpushed — 01:13 時点の「6 commits 提案中」は解消済)。
+  以降の新規 = `dfbddb4777` (I3/I4) + `c1dd6f569b` (CLAUDE.md §27 日時規則、Rs 直指示) + 本 HANDOFF 更新 =
+  **push 提案中**。ambient dirty ~740 file = standing residue 不変 (⛔ staged hunk 検査 hard step — 本 chunk
+  で実施し foreign 2 hunk [route_env_config comment-only] を除外・開示済)。GPU: 常駐プロセスなし。
 - pre-check log = `logs/pre-check-log.jsonl` 追記済 (gitignored、ローカル)。
 
 ### 次にやるべきこと
-1. `引き継ぎ確認` → 本 file + %12 正本 + GATE2_RERUN doc (§leg3 OUTCOME) + ruling §S2/§S3 を read
-2. **gate ② 完了 chunk**: I3/I4 実装 (L3 chain) + pin (a)(b)/(d) の chunk 分割判断 → p5 delta verify → /pre-check 再走
-3. fork-B node V0 acceptance (移管 leg + trainer contention) = trainer bring-up 時
+1. `引き継ぎ確認` → 本 file + %12 正本 + `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` + ruling §S3 を read
+2. **p5 delta verify の受領** (依頼済) → 指摘あれば対応。**pN 返信** = evidence 判定 + (a)(b) 分割 co-decide
+   (私案 = 本セッション続行を提示済)
+3. **pin (a)(b) 実装 chunk** (co-decide 後): §21.11.1 単純化形 + identity 永続 coupling 注記に従う
+4. (d) containment = p5 設計待ち → 着地後 /pre-check 再走 → §S 解除判定
+5. fork-B node V0 acceptance (移管 leg + trainer contention) = trainer bring-up 時
 
 ### 重要な文脈 (規律教訓 — 全て pN/p5 verify が捕捉・記録済)
 - ①add 前 staged hunk 検査 ②主張=同 turn command 出力 ③計器の正対照 (コピー test≠配線 test、self-test は
