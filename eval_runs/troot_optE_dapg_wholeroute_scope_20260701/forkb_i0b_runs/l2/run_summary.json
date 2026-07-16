@@ -1,0 +1,13 @@
+{
+ "halted": true,
+ "ts": 1784207550.632013,
+ "slots": [
+  {
+   "index": 0,
+   "restarts": 3,
+   "done": false,
+   "consecutive_failures": 4
+  }
+ ],
+ "episodes_published": 4
+}

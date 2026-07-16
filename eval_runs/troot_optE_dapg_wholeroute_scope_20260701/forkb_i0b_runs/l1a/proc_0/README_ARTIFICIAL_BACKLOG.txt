@@ -1,0 +1,1 @@
+ep_000000..ep_000199.npz are ARTIFICIAL backlog (dummy npz) pre-seeded by forkb_i0b_legs.py leg L1a to exercise the pinned K=200 backpressure mechanism without a 1.4 h organic fill. Not episode data.

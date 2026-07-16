@@ -1,0 +1,155 @@
+=== leg l1a ===
+{
+ "leg": "L1a_kpause_pinned_200",
+ "passed": true,
+ "evidence": {
+  "pause_log_seen": true,
+  "count_during_pause": 200,
+  "no_publish_during_pause": true,
+  "resumed_publish_ep200": true,
+  "rc": 0
+ },
+ "wall_s": 84.6
+}
+=== leg l1b ===
+{
+ "leg": "L1b_kpause_organic_2",
+ "passed": true,
+ "evidence": {
+  "two_published": true,
+  "pause_log_seen": true,
+  "count_during_pause": 2,
+  "held_at_two": true,
+  "third_published": true,
+  "rc": 0
+ },
+ "wall_s": 89.8
+}
+=== leg l2 ===
+{
+ "leg": "L2_kfail_restart_halt",
+ "passed": true,
+ "evidence": {
+  "rc": 2,
+  "halt_json": true,
+  "individuals": [
+   "proc_meta.rc000.json",
+   "proc_meta.rc001.json",
+   "proc_meta.rc002.json",
+   "proc_meta.rc003.json"
+  ],
+  "derived_seeds": [
+   1783842106,
+   3294954633,
+   3975626108,
+   519546485
+  ],
+  "seeds_distinct": true,
+  "episodes": [
+   "ep_000000.npz",
+   "ep_000001.npz",
+   "ep_000002.npz",
+   "ep_000003.npz"
+  ],
+  "episodes_expected": [
+   "ep_000000.npz",
+   "ep_000001.npz",
+   "ep_000002.npz",
+   "ep_000003.npz"
+  ],
+  "no_overwrite_numbering": true
+ },
+ "wall_s": 306.1
+}
+=== leg l3 ===
+{
+ "leg": "L3_lever_smoke",
+ "passed": true,
+ "evidence": {
+  "default": {
+   "rc": 0,
+   "device_map": {
+    "collector": "cuda:0",
+    "trainer": "cuda:2",
+    "n_collect_cap": 4
+   },
+   "n_collect": 1,
+   "proc_dirs": [
+    "proc_0"
+   ],
+   "child_CVDs": [
+    "0"
+   ],
+   "episodes_published": 1
+  },
+  "fallback": {
+   "rc": 0,
+   "device_map": {
+    "collector": "cuda:0",
+    "trainer": "cuda:0",
+    "n_collect_cap": 3
+   },
+   "n_collect": 3,
+   "proc_dirs": [
+    "proc_0",
+    "proc_1",
+    "proc_2"
+   ],
+   "child_CVDs": [
+    "0",
+    "0",
+    "0"
+   ],
+   "episodes_published": 3
+  }
+ },
+ "wall_s": 186.2
+}
+=== leg l4 ===
+{
+ "leg": "L4_r24b_2x2_ikchord",
+ "passed": false,
+ "evidence": {
+  "note_ff_quadrant": "diff-seed under FF = banked N-2 inert (RULINGS v1.5), cited not rerun",
+  "rc_a": 0,
+  "rc_b": 0,
+  "rc_c": 0,
+  "sha": {
+   "a": "c3cc1791f77607435552638865384aa0ee6084f4856e83bfa05111b2685ce9f1",
+   "b": "c3cc1791f77607435552638865384aa0ee6084f4856e83bfa05111b2685ce9f1",
+   "c": "c3cc1791f77607435552638865384aa0ee6084f4856e83bfa05111b2685ce9f1"
+  },
+  "same_seed_identical": true,
+  "diff_seed_differs": false
+ },
+ "wall_s": 135.2
+}
+=== leg l5 ===
+{
+ "leg": "L5_n3_asrun_reconcile",
+ "passed": false,
+ "evidence": {
+  "source_artifact": "forkb_e0v2a_runs/n1_a/proc_0/post_bracket.json",
+  "n_files": 9,
+  "table": {
+   "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/forkb_e0v2a_scaling.py": "UNEXPLAINED",
+   "thread_isaac_lab/configs/__init__.py": "UNEXPLAINED",
+   "thread_isaac_lab/configs/task_config.py": "landed_at_HEAD",
+   "thread_isaac_lab/envs/cable_orientation_utils.py": "landed_at_HEAD",
+   "thread_isaac_lab/envs/newton_route_env.py": "UNEXPLAINED",
+   "thread_isaac_lab/envs/newton_skill_env_base.py": "explained_pre_flip (flip c60d311f96; behavior delta = none, I0-a byte-repro leg: post-flip n1 sha == pre-flip banked)",
+   "thread_isaac_lab/envs/route_env_config.py": "UNEXPLAINED",
+   "thread_isaac_lab/envs/route_executor.py": "UNEXPLAINED",
+   "thread_isaac_lab/scripts/test_newton_clip_routing.py": "landed_at_HEAD"
+  },
+  "unexplained": [
+   "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/forkb_e0v2a_scaling.py",
+   "thread_isaac_lab/configs/__init__.py",
+   "thread_isaac_lab/envs/newton_route_env.py",
+   "thread_isaac_lab/envs/route_env_config.py",
+   "thread_isaac_lab/envs/route_executor.py"
+  ]
+ },
+ "wall_s": 0.0
+}
+ALL_PASS=False

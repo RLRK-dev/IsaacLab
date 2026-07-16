@@ -1,0 +1,27 @@
+{
+ "launch_ts": 1784207244.6021419,
+ "base_seed": 888,
+ "n_collect": 1,
+ "requested": 1,
+ "preexisting_gpu_procs": 0,
+ "device_map": {
+  "collector": "cuda:0",
+  "trainer": "cuda:2",
+  "n_collect_cap": 4
+ },
+ "episodes_per_slot": 5,
+ "episode_steps": 60,
+ "drive_mode": "feedforward",
+ "backpressure_k": 200,
+ "k_fail": 3,
+ "code_sha": {
+  "forkb_supervisor.py": "89464e3ffb4a7b2117cd91b771bdf1e1ef1fef253018a1802d0d3c170bc65eb1",
+  "forkb_collector.py": "aa7b328ab8e4cee6b3d201d9d475aa58ab45d4ffdcb6deae4c0eb80dac590421"
+ },
+ "protocol_ref": "FORKB_D1_SPEC_RSTECHLEAD_20260716.md v0.3 sec1/sec5/sec6; ENV_MULTIWORLD_SUBSTRATE_CHARTER_RSTECHLEAD_20260716.md (APPROVED)",
+ "test_hooks": {
+  "test_crash_slot": 0,
+  "test_crash_after": 1
+ },
+ "sec_S_exposure": "HEAD FM3/FM4 tighten code is live and UNRATIFIED (I0A_SCOPE_MANIFEST AMENDMENT 1 + sec S, ad0bb76460): r_paid/done/seat/latch semantics in this run are NOT banked-valid; infra-only claims."
+}

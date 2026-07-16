@@ -1,0 +1,36 @@
+{
+ "ts": 1784208216.6011975,
+ "git_head": "2cfc58731d7a750b11abd508c99133ff69c9c76c",
+ "sec_S_exposure": "HEAD FM3/FM4 tighten code is live and UNRATIFIED (I0A_SCOPE_MANIFEST AMENDMENT 1 + sec S, ad0bb76460): these legs assert INFRA predicates only (files/sha/restart/pause/spawn); no semantic validity claims.",
+ "preregistration": "I0B_BUILD_RSTECHLEAD_20260716.md (predicates fixed before run)",
+ "legs": [
+  {
+   "leg": "L5_n3_asrun_reconcile",
+   "passed": true,
+   "evidence": {
+    "source_artifact": "forkb_e0v2a_runs/n1_a/proc_0/post_bracket.json",
+    "n_files": 9,
+    "table": {
+     "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/forkb_e0v2a_scaling.py": "landed_at_2933fa7bbc (a committed blob matches as-run byte-for-byte; HEAD differs only via later commits to this file -- see git log 2933fa7bbc..HEAD -- eval_runs/troot_optE_dapg_wholeroute_scope_20260701/forkb_e0v2a_scaling.py)",
+     "thread_isaac_lab/configs/__init__.py": "DECLARED_still_dirty_worktree (as-run == the CURRENT uncommitted worktree bytes; part of the standing shared-tree residue the E0 runs executed on; land-or-inert decision belongs to the tree-triage owner, out of I0-b scope -- declared per D1 sec 7 N-3)",
+     "thread_isaac_lab/configs/task_config.py": "landed_at_HEAD",
+     "thread_isaac_lab/envs/cable_orientation_utils.py": "landed_at_HEAD",
+     "thread_isaac_lab/envs/newton_route_env.py": "DECLARED_pre_flip_dirty_reconciled (as-run byte-stable across E0v2 AND E0v2a brackets; file is CLEAN at HEAD now, so the only delta is the c60d311f96 commit content = I0-a flip + the disclosed sweep [I0A_SCOPE_MANIFEST hunk attribution]; flip behavioral neutrality = I0-a byte-repro leg [post-flip n1 traj sha == pre-flip banked])",
+     "thread_isaac_lab/envs/newton_skill_env_base.py": "landed_at_92a62f6a96 (a committed blob matches as-run byte-for-byte; HEAD differs only via later commits to this file -- see git log 92a62f6a96..HEAD -- thread_isaac_lab/envs/newton_skill_env_base.py)",
+     "thread_isaac_lab/envs/route_env_config.py": "DECLARED_still_dirty_worktree (as-run == the CURRENT uncommitted worktree bytes; part of the standing shared-tree residue the E0 runs executed on; land-or-inert decision belongs to the tree-triage owner, out of I0-b scope -- declared per D1 sec 7 N-3)",
+     "thread_isaac_lab/envs/route_executor.py": "DECLARED_still_dirty_worktree (as-run == the CURRENT uncommitted worktree bytes; part of the standing shared-tree residue the E0 runs executed on; land-or-inert decision belongs to the tree-triage owner, out of I0-b scope -- declared per D1 sec 7 N-3)",
+     "thread_isaac_lab/scripts/test_newton_clip_routing.py": "landed_at_HEAD"
+    },
+    "declared_not_landed": [
+     "thread_isaac_lab/configs/__init__.py",
+     "thread_isaac_lab/envs/newton_route_env.py",
+     "thread_isaac_lab/envs/route_env_config.py",
+     "thread_isaac_lab/envs/route_executor.py"
+    ],
+    "unexplained": []
+   },
+   "wall_s": 0.5
+  }
+ ],
+ "all_pass": true
+}
