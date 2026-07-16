@@ -1,11 +1,11 @@
-# RL env pin 配線 — 設計裁定 v1.5
+# RL env pin 配線 — 設計裁定 v1.6
 
-**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
-**Trigger:** Rs 裁定 2026-07-15 00:5x「クリップ**のみ** pin を RL env に恒久配線しろ」（%12 経由）。
-**Scope:** Q1（pin をいつ打つか）/ Q2（clip-only を機構でどう保証するか）/ Q3（STEP 9 述語）/ (a) body 割当規則。
+**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
+**Trigger:** Rs 裁定 2026-07-15 00:5x「クリップ**のみ** pin を RL env に恒久配線しろ」（%12 経由）+ %12 依頼 2026-07-16（①署名裁定 ②恒久配線 scaffold）。
+**Scope:** Q1（pin をいつ打つか）/ Q2（clip-only を機構でどう保証するか）/ Q3（STEP 9 述語）/ (a) body 割当規則 / **①署名 canonical / ②恒久配線 firing scaffold（per-episode / done-world clear / policy-drive live trigger / multi-world eq / per-world audit）**。
 **⚠ 本 doc は message の代替である**（通信規律 2026-07-15 02:35: 数値は artifact に置き、message は path だけ）。
 
-**⛔ 読む順序（改訂が多いので明示）: §17（ERRATUM）→ §19（裁定表）→ §16（BLOCKING）→ §15（実装）。§12 = SUPERSEDED。§14.1 = 撤回。**
+**⛔ 読む順序（改訂が多いので明示）: 【最新 = §20（署名 canonical）→ §21（恒久配線 scaffold、(c) probe gate）】→ §17（ERRATUM）→ §19（裁定表）→ §16（BLOCKING）→ §15（実装）。§12 = SUPERSEDED。§14.1 = 撤回。§19 signature 行 = §20 が RE-SUPERSEDE（canonical = §15.1 loop 形）。**
 
 - **§17 ⛔ 私の撤回 6 件目** — §14.1（「∃-spec は支持 clip を認可する」）は**偽**。selector は**元から clip 中心で gate されている**（`route_executor.py:2200-2202`、XY gate は意図的な弁別器）。**私は selector を読みながら反例を論じ抜けた。**
 - **§19 ⭐⭐ 真の穴 = `route_executor.py:2133-2134`** — `os.environ.get("CLIP_X", "0.40")`。**clip 中心こそ唯一の弁別器**である以上、env 既定は**弁別器を未検証の既定値から供給している**。未設定 ⇒ 「C1 gate」が**静かに built C2 を採点する**。⇒ **既定を削れ**（membership check では捕まらない）。
@@ -648,3 +648,152 @@ and abs(float(mjd.geom_xpos[g][1]) - y_clip) < 0.03
 | **同じ 2 定数の 3 現場**（§16.3） | `route_executor.py:3881` / `test_newton_clip_routing.py:5540` / `policy_route_runner.py:1089` + `:50-51`（`SEAT_DIST_MM=0.5` / `SEAT_Z_TOL_MM=3.0`）/ `policy_route_runner.py:309` |
 | **反証 artifact** | `AUTHORIZE_CLIP_PIN_FALSIFICATION_RSTECHLEAD_20260715.md`（%12、2026-07-15 06:3x） |
 | **no-repeat guard** | `check_thread_vault_prior_art.sh --fail-on-blocker "SETTLED_IN_NOTCH" "c2_settled" "seat predicate lateral" "SEAT_DIST_MM"` ⇒ **PASS**（findings=0 blockers=0、2026-07-15 06:2x）= 本 §16.2 の主張は既往の再導出ではない |
+
+---
+
+## §20 🔒 署名 canonical 裁定（v1.6、2026-07-16、%12 依頼① への回答）
+
+**依頼（%12, 2026-07-16、`AUTHORIZE_CLIP_PIN_IMPL_PLAN_RSTECHLEAD_20260716.md` F4）:** 実装済 `authorize_clip_pin` は **§15.1 loop 形**（authorizer が `ROUTE_CLIP_CENTERS` を自 import・caller は clip を名指せない）。私の doc は §19 signature 行で **§19 clip_xy 引数+membership 形** を採用し §15.1 を「弱める」と書いた（内部矛盾）。OPS-SUP-CODEX 暫定 = §19。どちらを canonical にするか。
+
+### §20.0 on-disk 確認（実装済 = loop 形）
+
+`route_executor.py:914` `def authorize_clip_pin(solver, seat_body, seat_world, match_tol_m=5e-3)` — 中心を引数で受けない。`:951` `for cx, cy in rc.ROUTE_CLIP_CENTERS:` = 集合を **import して loop**。`:958` 合致した clip で `activate_c1_pin`。⇒ **§15.1 loop 形と逐語一致。** N1-N7 14/14 + g6_live で validated（同 doc）。
+
+### §20.1 🔒 裁定 = **canonical は §15.1 loop 形。§19 signature 行を RE-SUPERSEDE する（私の撤回ではなく、§19 の論拠を承認した上での上書き）。**
+
+**⚠ §19 は「弱める」で正しかった論点が 1 つある** — §15.1 の「引数では**機構にならない**」は**言い過ぎ**だった。`clip_xy ∈ ROUTE_CLIP_CENTERS` の membership check を足せば、支持 clip 中心 `(0.300, +0.050)` を渡す caller は**機構で拒否される**（∉ 集合）。⇒ **両形とも §15.1 が挙げた「支持 clip の穴」を閉じる。safety-equivalent。** ここは §19 が正しい。
+
+**だが canonical は loop 形。理由は §15.1 の元の主張ではなく、§19 自身が「真の穴」と昇格させた (5) にある:**
+
+| # | 論拠 | loop 形 | arg+membership 形 |
+|---|---|---|---|
+| 1 | 支持 clip の穴（§15.1） | ✅ caller が clip を名指せない（構造） | ✅ membership が拒否（check） — **等価** |
+| 2 | ⭐⭐ **§19 の「真の穴」(5) = env 既定中心** `os.environ.get("CLIP_X","0.40")` = built C2 中心（現ファイル確認済 `route_executor.py:2338-2339` M-Hook / `:2300-2301` DEMO_RECORD; ⚠ §19 の `:2133-2134` は 399faa51ec の executor 改修で行ドリフト — %12 が実装時に現行 selector-feed 位置を再確認） | ✅ **構造的に免疫** — authorizer は中心を caller/env から**一切受けない**（`ROUTE_CLIP_CENTERS` を import、= `ROUTE_C1_XY/ROUTE_C2_XY` from `route_env_config.py:139-140`、env 非経由）。**env 既定中心の穴は loop 形では発生不能。** | ⚠ **別途 (5) 削除に依存** — caller が中心を供給する以上、env 既定を**削り忘れれば** (5) が authorizer path に**再浮上**。§19 も「(5) は membership で防げない ⇒ 削除が本体」と認めている。= **機構 vs 規律**。 |
+| 3 | 5-clip 一般化 | ✅ `ROUTE_CLIP_CENTERS` を 1 行拡張（§15.2）、caller 不変 | ⚠ caller が各 pin 事象で**正しい clip_xy を追跡**して渡す必要（現 target clip の per-step 追跡） |
+| 4 | mis-pin（誤 clip 発火） | ✅ capture volume は **disjoint**（C1 y=0.150 vs C2 y=0.000 = 75mm 分離 ≫ y_win 15mm×2）⇒ 任意位置は**高々 1 clip** にしか入らない ⇒ loop は曖昧なし | ✅ caller が名指す（明示） — **幾何 disjoint ゆえ両形とも安全** |
+| 5 | 実装済・validated | ✅ 399faa51ec / N1-N7 14/14 / g6_live（**tie-breaker であって理由ではない** — 論拠 2-3 が既に merit で loop を支持） | ✗ 再実装要 |
+
+⇒ 🔒 **本 arc（§15/§17/§18）の一貫した原理 =「機構 > 規律」「境界 vs 同一性」。loop 形は (5) を【機構】で閉じ、arg 形は (5) を【削除規律】に残す。同じ理由で loop が canonical。** サンクコストではない（論拠 2-3 は実装状態に独立）。
+
+### §20.2 §19 の merit（明示的意図 / 診断明快）への応答 — **不要と裁定**
+
+arg 形の唯一の実質 merit = **call-site で意図が読める** + **診断が「C1 を頼んだが未着座」と言える**（loop は「どの認可 clip にも無い」）。⇒ **safety には不要:**
+- 誤 clip 発火の guard = **§15.4 episode 終端 anchor 監査**（`route_executor.py:963` `audit_pin_anchors`、fired pin の anchor が ∃ 認可 clip volume 内でなければ AssertionError）+ 幾何 disjoint。
+- loop の `NotInAnyRouteClip`（`:960`）は seat_world と全集合を報告 ⇒ 順次 route では「C1 を期待して未着座」も actionable。
+
+⇒ ⚠ **将来 5-clip で意図追跡が要るなら、オプションの非権威 `expected_clip_xy` ヒント**（合致 clip == expected を assert、**集合の import は維持**）で arg 形の意図明示だけを足せる。**今は YAGNI。5-clip 一般化時に再検討。**
+
+### §20.3 OPS-SUP-CODEX の §19 preference への応答
+
+**妥当な読み**（§19 は私の doc の最新 signature 行 = 私の「最終語」に見える）。**だが (5)-immunity で上書き。** §19 signature 行は「(5) は membership で防げない ⇒ env 既定削除が本体」と**自ら書いている** — その削除規律を**構造で不要にする**のが loop 形。⇒ §19 の (5) 洞察を**否定せず、機構で回収**した結果が loop canonical。
+
+### §20.4 反証テスト（両形 safety-equiv の確認・低コスト）
+
+N5（支持 clip 中心 seat）は loop 形で `NotInAnyRouteClip`（実測 14/14）。arg 形を採るなら **N5-arg = 「caller が `(0.300,+0.050)` を clip_xy に渡す」→ membership が AssertionError** を追加して等価性を実証すべき。**loop 形採用ゆえこのテストは不要**（caller は中心を渡さない）。⇒ **署名は loop で確定。%12 は再実装不要（実装済 = canonical）。doc 内矛盾を本 §20 が解消。**
+
+---
+
+## §21 🔒 恒久配線 firing scaffold 設計裁定（v1.6、2026-07-16、%12 依頼② への回答）
+
+**依頼（%12, 2026-07-16）:** 「恒久配線」= Rs 指示の未達部分（次 W1 critical）。発火足場の一般化 = [per-episode witness reset / reset 時 done-world 限定 pin 解除 / policy-drive live trigger / multi-world 別 eq 管理 / audit-before-clear + audit 総数上限 ≤N を per-world 化]。現状 = world-0 / env 一生 1 回 / FF-replay / eq 未 clear。scope=Rs（承認済 `fc088fe4fb` = INVARIANT#5 clip-only 恒久配線）/ 設計=p5 / 実装=%12。
+
+### §21.0 現状（on-disk、cited）— 発火足場 (d2) の 4 gap 源
+
+| 性質 | cite | 実体 |
+|---|---|---|
+| **world-0 のみ** | `newton_route_env.py:1723` `cable = _cable_bodies[0]` / `:1728` | seat body は world-0 の cable のみ |
+| **env 一生 1 回** | `:1714` `... or self._c1_pin_witness is not None or ...` | witness latch は `_reset_worlds`（`:1017`）で**リセットされない** ⇒ 一生 1 発火 |
+| **FF-replay path のみ** | `:1203`（`_apply_actions_batch` の `_route_drive_ff` 分岐内）/ policy 分岐 `:1230-1259` は `_maybe_activate_c1_pin` を**呼ばない** | policy drive（RL 訓練）では pin が**発火しない** |
+| **eq 未 clear** | `_reset_worlds`（`:1017-1095`）に `eq_active` clear 無し | ep1 の weld が reset を跨いで残存 |
+| **onset = recording** | `:1657` `_wire_c1_pin_from_recording` / `:1718` | policy drive には recording が無い ⇒ live trigger 要 |
+
+### §21.1 ⭐⭐⭐ **アーキテクチャ発見（(c) の核心・設計全体を gate する）— 3 表現と DEFERRED な mjw eq re-poke**
+
+**事実（on-disk）:** newton mujoco substrate には **3 つの eq 表現**がある:
+| 表現 | 実体 | eq 数 | cite |
+|---|---|---|---|
+| **CPU `mj_model`/`mj_data`** | single-world host template（pin が**現在書く先**） | neq=46 = 6 構造 + 40 cable pin | `route_executor.py:748` docstring / `:792-794` `mjm.eq_data[best]`（MODEL=共有）+ `mjd.eq_active[best]`（**単一 index**） |
+| **`solver.mjw_model`** | mujoco_warp model、**leading world axis**（GPU/step が読む配列） | per-world（例 `geom_solref` = `(world_count, ngeom, 2)`） | `newton_skill_env_base.py:1352-1357` |
+| **NEWTON `model`** | per-world 複製（proto → replicate ×world_count） | `equality_constraint_count = (6 + n_cable) × world_count` | `newton_skill_env_base.py:1595-1603`（proto に pin eq add）/ `:2007`「neq = (6 構造 + {n_cable} pin) × world_count」 |
+
+**⇒ 決定的含意 3 つ:**
+1. ✅ **per-world pin eq は【実在する】** — proto に replicate 前 add（`:1595-1603`）⇒ 各 world が自分の n_cable 個の DISABLED connect-to-world pin eq を持つ（`:2007`）。⇒ **multi-world 独立発火はアーキ的に【可能】**（eq は各 world にある）。
+2. ⛔ **現 pin は CPU `mj_data.eq_active[best]`（単一 index）に書く** — これが effective なのは **world_count=1（`separate_worlds=(world_count>1)` = False、`newton_skill_env_base.py:1325/:1335`）で CPU template が stepped state のとき**のみ。g6_live は world_count=1 でのみ検証。
+3. ⚠⚠ **world_count>1 では CPU-only 書き込みは【GPU-inert の疑い】** — 同型の geom_solref は「mj_model 単独書き込み = GPU-inert!」と assert（`:1422-1429`）。そして **「mjw eq re-poke は DEFERRED、CPU/mj_model が proven path」と明記**（`:1357/:1437`）。solver は warp State を step（`newton_route_env.py:787`）、CPU mj_data は step されない ⇒ **runtime の CPU eq 書き込みは warp sim に伝播しない可能性が高い = pin が silent に効かない**（pin の RAISE-everything 設計でも CPU readback は 1 を返すので**この silent 失敗は raise で捕まらない** — 最悪級）。
+
+### §21.2 🔒 (c) multi-world 別 eq 管理 = **DEFERRED な mjw eq re-poke を pin 用に実装。ただし低コスト feasibility probe を先に。**
+
+**設計（probe PASS 前提）:** 発火は CPU でなく **mjw/warp の per-world eq に書く**（geom_solref poke `:1388-1402` と同型、ただし ALL-world でなく該当 world w のみ）:
+- fire world w: `mjw.eq_active[w, eqid_w] = 1`（per-world）。
+- eqid_w = world w の seat 段（body30-equiv、§21.4）に bind された pin eq の mjw index（layout は probe で確定）。
+- ⭐ **anchor は【clip groove 点】に置く**（`ROUTE_CLIP_CENTERS[k]` + groove z、**全 world で同一の固定点**）— **achieved seat 位置ではない**。理由: (i) clip は固定位置で cable を保持する ⇒ groove 点 anchor が**物理的に faithful**、(ii) `eq_data` が mjw で per-world 化されていなくても（共有でも）**正しい**（各 world の eq copy は自 world の cable body を同じ groove 点へ pin ⇒ 各 world 正しい）。⇒ **eq_data の batching 有無に非依存**。現 CPU 版の achieved-seat anchor（`:793`）は world_count=1 の近似（seat≈groove、sub-mm）。
+
+**⛔ probe（低コスト・GPU・訓練なし・数分、%12 が実装前に実行）— gate:**
+| # | 問い | 手続き | 判定 |
+|---|---|---|---|
+| P-1 | **mjw `eq_active` は per-world か（batched, leading world axis）** | route-env（perclip_pin=True）を world_count=4 で build、`solver.mjw_model.eq_active` の shape 検査 | shape=`(4, neq)` ⇒ per-world ✅ / `(neq,)` 共有 ⇒ ⛔ **block** |
+| P-2 | eq index layout | replicate の順序（world-major か）を mjw eq 構造から確定 ⇒ (world w, seat 段) → eqid_w の写像 | 写像が決定的 |
+| P-3 | **per-world 書き込みの実効性（round-trip）** | `eq_active[2, eqid_2]=1` + anchor=clip groove、数百 step、cable 落下を観測 | world 2 の cable **のみ** groove に保持 ∧ world 0/1/3 は自由 ⇒ ✅ / 全 world 影響 or 無影響 ⇒ ⛔ |
+| P-4 | eq_data batching（anchor 精度用、二次） | `mjw.eq_data` shape | `(4,neq,7)` per-world / `(neq,7)` 共有（groove anchor なら両方可） |
+
+**⇒ 🛑 P-1 or P-3 が FAIL ⇒ multi-world 独立 pin は現 substrate で不能 ⇒ Rs escalation**（選択肢: (A) world_count=1 訓練[並列性ゼロ・高コスト] / (B) warp-native constraint 機構の調査 / (C) 別 retention 機構）。**P-1/P-3 PASS ⇒ 下記 (a)(b)(d) + audit が有効化。**
+
+### §21.3 (a) per-episode witness reset / (b) done-world 限定 eq 解除
+
+| 要素 | 設計 | cite / 規律 |
+|---|---|---|
+| **(a) witness reset** | `_c1_pin_witness`（scalar）→ **per-world 構造** `_c1_pin_witness[w]`（多 clip なら per-(w, clip) の集合）。`_reset_worlds(env_ids)` 内で **done world のみ** `= None`。 | 追加先 = `newton_route_env.py:1046-1062`（既存の per-world latch clear block と同居）|
+| **(b) eq clear** | `_reset_worlds` 内で done world のみ `mjw.eq_active[w, pin_eqids] = 0`（fire の逆操作）。**⛔ blanket clear 禁止** — mid-episode の隣 world の active pin を消してはならない。 | 既存規律 `:1058`「never a blanket clear（a neighbor's done-reset must leave OTHER held worlds byte-intact）」を eq にも適用 |
+
+⚠ **(a)(b) とも per-world eq（(c)）に依存** — (c) probe PASS が前提。gate 前は world-0/1-episode のまま。
+
+### §21.4 (d) policy-drive live trigger — **geometric capture trigger（step-table 接地）**
+
+**現状:** 発火は FF-replay loop（`:1203`）の recording onset のみ。policy drive（`:1230-1259`）には無い。**policy には recording が無い ⇒ live trigger 要。**
+
+**🔒 設計 = 幾何 capture trigger（recording onset ではなく seat の実体で発火）:**
+- 各 policy step、各**未 pin world w** について: seat body world 位置 `bq[_cable_bodies[w][seat_seg], :3]` を取り、**非 raise の capture 述語**（`route_executor.py:882` `clip_capture_predicate`、bool 返し）で ∃ 認可 clip volume 内か判定 ⇒ 内なら world w に発火（(c) の mjw 書き込み）+ per-world witness latch。
+- **seat_seg = route が定める固定段**（C1 = **body30**、`CANONICAL_MOTION_TABLE_V1.md:128` 逐語「body30 が C1 groove 壁内に側方 seated & 保持(Y+0.150)」= STEP 9 secured-predicate 行）。⇒ **recording 不要**（現 `_pin_seat_seg` の recording 依存を route-defined 定数へ）。多 clip は各 clip の route-defined seat 段。
+- **⚠ raise しない pre-check が必須** — 現 `authorize_clip_pin` は未着座で `NotInAnyRouteClip` を raise（`:960`）。live per-step で毎 step raise すると rollout が crash。⇒ **`clip_capture_predicate` で bool 判定 → True のときだけ raising `authorize_clip_pin` を呼ぶ**（発火は依然唯一の書き手経由）。
+
+**⭐ trigger timing（step-table 接地・pin-before-release）:** capture 述語は **STEP 7 押し込み中**（body30 が groove volume 進入）に True になる ⇒ **STEP 8 の gripper 解放（R unclamp/L 半、`CANONICAL_MOTION_TABLE_V1.md:50`）より前に発火** ⇒ **pin が解放を跨いで body30 を保持**（= 物理的に正しい順序。解放後発火だと cable が既に escape 開始し得る）。⇒ **memory `feedback` の「表『放す→打つ』vs code『打つ→放す』」懸念を解消** — 幾何 trigger は自然に「着座（押込中）→ 発火 → 解放」= pin-before-release。
+
+**⛔⛔ (d) は RL 報酬意味論に coupling する（scope 注意）:**
+- pin 発火 → `c1_retained` latch（既存報酬項）→ policy は「cable を capture volume に入れる」を学習。**これは恒久配線の【意図】そのもの**（pin は物理 clip 保持のモデル、`fc088fe4fb` = INVARIANT#5 clip-only 恒久配線を Rs 承認）。
+- **だが「いつ・どう latch するか」が recording-onset → live-geometric に変わる = 報酬 dynamics の変化。** ⇒ 🔒 **実装前に `/reward-design`（到達可能性表 + 因果 DAG + ground-truth 値 + episode trace）+ `/pre-check` を (d) 述語に対し必須**（CLAUDE.md 強制ゲート、env/成功条件変更）。**この gate 未通過で %12 は (d) を実装不可。**
+
+### §21.5 audit-before-clear + per-world cap ≤N
+
+現 `audit_pin_anchors`（`:963`、`step` の `:1810-1818` で `_reset_worlds` 前に実行）は **single-world mjm/mjd を走査、cap = `len(ROUTE_CLIP_CENTERS)` を global に**。⇒ **per-world 化:**
+- mjw の per-world eq_active を **world 毎に**走査、各 world の fired pin anchor が ∃ 認可 clip volume 内を assert（bypass/空中 weld を world 毎に捕捉）。
+- **cap を per-world 化**: `sum(fired in world w) ≤ len(ROUTE_CLIP_CENTERS)`（world 毎に double-pin guard）。global cap は world_count 倍で意味を失う。
+- **順序 = audit（`_reset_worlds` 前）→ done-world eq clear（`_reset_worlds` 内）**。現 `:1810-1818` の「BEFORE _reset_worlds」規律を維持し、clear を (b) で `_reset_worlds` 内に置く ⇒ audit は clear 前の状態を見る。⚠ (c) 依存。
+
+### §21.6 🔒 sequencing（gate 順序）+ Rs escalation 条件
+
+```
+(c) probe P-1..P-4  ──FAIL(P-1/P-3)──▶  🛑 Rs escalation（world_count=1 訓練 vs warp-native vs 別機構）
+        │PASS
+        ▼
+(a)(b)(c)(d) 有効化可 ──▶ (d) に /reward-design + /pre-check（4 artifact、強制）──▶ L3 検証 chain（§運用15 層2/3/5、L3）──▶ %12 実装
+```
+
+- ⚠ **本 §21 は設計裁定であって実装認可ではない** — 上流 gate（probe → design-gate → L3）未通過で実装しない。
+- ⚠ **(c) probe は %12 が実装前に実行**（数分・GPU・訓練なし・raw 観測 = cable 保持/自由）。私（p5）は結果を受けて (c) 設計を確定（groove-anchor / eqid layout / batching 分岐）。
+- ⚠ **scope の Rs 確認**: 恒久配線・clip-only は承認済（`fc088fe4fb`）。**live-geometric trigger による報酬 dynamics 変化**（(d)）は既承認 scope 内と解釈するが、`/reward-design` gate で顕在化させ Rs 可視化する（解釈は訂正可能な形で明示）。
+
+### §21.7 接地（本 §20/§21 追加分）
+
+| ソース | cite |
+|---|---|
+| 実装済 loop 形 | `route_executor.py:914`（署名）/ `:951`（import loop）/ `:958`（activate）|
+| pin CPU 書き込み | `route_executor.py:792-794`（`mjm.eq_data`/`mjd.eq_active[best]` 単一 index）/ docstring `:748`（CPU backend）|
+| 3 表現 / DEFERRED mjw eq | `newton_skill_env_base.py:1352-1357`（mjw leading world axis / mjw eq re-poke DEFERRED）/ `:1422-1429`（geom_solref mj_model-only = GPU-inert! assert）/ `:1435-1437` |
+| per-world pin eq 実在 | `newton_skill_env_base.py:1595-1603`（proto add、replicate 前）/ `:2007`（neq=(6+n_cable)×world_count）|
+| separate_worlds | `newton_skill_env_base.py:1325/:1335`（`=(world_count>1)`）|
+| solver は warp State を step | `newton_route_env.py:787`（`solver.step(state_0, state_1, control, contacts, dt)`）|
+| 現 firing scaffold | `newton_route_env.py:1657`（wire）/ `:1698-1730`（activate、world-0/witness-latch/FF-loop）/ `:1017-1095`（_reset_worlds、eq/witness clear 無し）/ `:1203`（FF 発火）/ `:1810-1818`（audit before reset）|
+| seat 段 = body30 / STEP 7-9 | finger-state 行 `CANONICAL_MOTION_TABLE_V1.md:49`（STEP 7 押込）/ `:50`（STEP 8 半保持・R 解放）/ `:51`（STEP 9 C1 固定）; secured-predicate 行（逐語 body30）`:126`（押込）/ `:127`（C1 が body30 保持開始）/ `:128`（body30 側方 seated & 保持）|
+| capture 述語（非 raise 化元） | `route_executor.py:882`（`clip_capture_predicate` bool 返し）/ `:914-960`（raising authorizer）/ `:963`（audit）|
+| scope 承認 | RS71 §0 INVARIANT#5 + `fc088fe4fb`（clip-only 恒久配線 Rs 承認）|
+| no-repeat guard | `check_thread_vault_prior_art.sh --fail-on-blocker "multi-world pin" "mjw eq_active" "permanent wiring pin" "policy-drive pin trigger"` を %12 が実装前に実行（本 §21 が既往再導出でないことの確認）|
