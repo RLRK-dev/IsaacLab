@@ -132,6 +132,7 @@
 **方法**: artifact 自読（message 数値で裁定しない）+ 全 predicate の p5 再計算。
 
 ### verdict = **PASS（全 5 predicate）→ R1-5 二段採択の E0-confirm 成立 = N_collect=4 採択【確定】**
+> ⚠〔scope-fix p5 2026-07-16、two-key 整合〕本 PASS/「確定」= **p5 設計軸のみ**。pN independent verify（evidence 完全性）= HOLD B1-B5 → B1/B2 = v1.6 R2-4-b+N-1 で I0 移管（**post-E0 amendment — 元 §7 pre-reg の PASS ではない**、pN `84665ddccc` の規律どおり）/ B3-B5 = **E0v2 full 再走**。⇒ **N=4 最終確定・I0 開始 = E0v2 全 PASS 後の pN 再判定**（header の record-fix と同旨、verdict 行にも刻む）。
 
 | 事前登録（D1 §7） | artifact 実測 | p5 再計算 | 判定 |
 |---|---|---|---|
