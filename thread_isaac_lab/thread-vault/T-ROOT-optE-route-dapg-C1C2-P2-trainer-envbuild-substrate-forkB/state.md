@@ -9,7 +9,7 @@ goal_verification: |
   4. Stage-A trainer-env gateとのreconcileがPASSし、processごとのseed/provenanceとasync rollout IPC/backpressure契約が検証される。
   5. use_mujoco_cpu と world_count>1 の誤構成をfail-loudに拒否するR-b tripwireが、診断用opt-outを含む識別可能なtestで検証される。
   6. fork Aはdormantのまま、L0必須4要素（RL/IL/vision/world model）の計算資源境界が保存される。
-status: PENDING
+status: IN_PROGRESS
 parent_node: T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild
 children_nodes: []
 dependencies:
@@ -19,10 +19,11 @@ provenance:
   - "APPROVED charter: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/ENV_MULTIWORLD_SUBSTRATE_CHARTER_RSTECHLEAD_20260716.md (approval reflected at db4cefc8fa)"
   - "Rs ruling/design consequence: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/RLENV_PIN_DESIGN_VTDESIGN_20260715.md v1.12 §21.11 (da6211991e)"
   - "Stage-A contract: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/STAGEA_TRAINER_ENV_DESIGN_GATE_RSTECHLEAD_20260712.md"
-authority: "Human-Rs 2026-07-16 verbatim『推奨でよい、fork Bで進めて』。node作成承認を含むと記録済み。NEST起動承認は別gateとして未記録。"
-session_history: []
+authority: "Human-Rs 2026-07-16 verbatim『推奨でよい、fork Bで進めて』(作成承認) + 2026-07-16 18:0x『承認』(D0 [DEFINE] = 起動承認、%12 上程への回答)。"
+session_history:
+  - "2026-07-16 18:0x D0 [DEFINE] Rs承認 (起動) — D0 design gate 開始 (design=p5+%12, evidence=w2:p4, verify=OPS-SUP-CODEX)"
 created: 2026-07-16T17:49:20+09:00
-last_updated: 2026-07-16T17:49:20+09:00
+last_updated: 2026-07-16T18:05:00+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -30,7 +31,7 @@ spec_version: LTM-1 v1.2
 
 ## 0. 起票状態と境界
 
-**PENDING。** Rs裁定に基づくnode実体の起票まで完了。NEST §3.1ではnode作成承認と起動承認が別gateのため、独立した起動承認が記録されるまでsession開始、probe、source実装を行わない。
+**IN_PROGRESS (起動承認済 2026-07-16 18:0x、Rs『承認』= D0 [DEFINE])。** D0 design gate から開始。probe (E0) は D0 の metric 定義固定後、source 実装 (I0) は D0/E0 bank 後。
 
 - 採択手段: **fork B** = `world_count=1`、`use_mujoco_cpu=True` のproven route envをN processで収集。
 - C: minimal smokeのみ。
