@@ -1,6 +1,6 @@
-# RL env pin 配線 — 設計裁定 v1.12
+# RL env pin 配線 — 設計裁定 v1.13
 
-**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**v1.8:** 2026-07-16（§21.9 = %12 E-probe `5b9fe8e62c` 結果 = 機構 feasible 確定・notify-safe・escalation なし・anchor=ref-pose hold-in-place / (c) 設計 finalize / E-1 positional が最終 gate）。**v1.9:** 2026-07-16（§21.10 = E-1 BLOCKED-BY-ENV 裁定: ENV-MULTIWORLD 発見 [worlds>0 物理凍結] は **USE_MUJOCO_CPU=True の CPU step=単一世界積分で by-construction 説明**・D-1/D-2 判別指定 / **§21.9 E-2/E-3/E-4 を sync 実証へ re-scope**［bug 下で緑の gate 教訓の自適用］/ env 発見=別 charter CONFIRM + fork A/B/C 事前分析）。**v1.10:** 2026-07-16（§21.10.6 = D-loop CLOSE [D-1 True / D-2 予測 2 本確認・NaN 実測] + charter 忠実性 PASS + 追加裁定 R-a [poke-parity 機構 = fork A DoD] / R-b [CPU×多世界 fail-loud tripwire = charter 即時項目]）。**v1.11:** 2026-07-16（§21.10.7 ERRATUM = ⛔「新規発見」撤回 [freeze は 07-08 既知 `COMP3_PLAN...20260708.md` §7、私も relay で propagate = 訂正 8 件目]・真の差分 5 点を批准）。**v1.12:** 2026-07-16（§21.11 = **Rs 裁定 fork B 採択**［verbatim「推奨でよい、fork Bで進めて」］+ ⭐設計帰結: **(c) は fork B の下で解消** — 各 process=単一世界 CPU path ⇒ 残作業 = (a)(b)(d)+既存 audit、newton-API 機構は S8 用 banked / trainer-infra 設計 gate agenda 5 項）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
+**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**v1.8:** 2026-07-16（§21.9 = %12 E-probe `5b9fe8e62c` 結果 = 機構 feasible 確定・notify-safe・escalation なし・anchor=ref-pose hold-in-place / (c) 設計 finalize / E-1 positional が最終 gate）。**v1.9:** 2026-07-16（§21.10 = E-1 BLOCKED-BY-ENV 裁定: ENV-MULTIWORLD 発見 [worlds>0 物理凍結] は **USE_MUJOCO_CPU=True の CPU step=単一世界積分で by-construction 説明**・D-1/D-2 判別指定 / **§21.9 E-2/E-3/E-4 を sync 実証へ re-scope**［bug 下で緑の gate 教訓の自適用］/ env 発見=別 charter CONFIRM + fork A/B/C 事前分析）。**v1.10:** 2026-07-16（§21.10.6 = D-loop CLOSE [D-1 True / D-2 予測 2 本確認・NaN 実測] + charter 忠実性 PASS + 追加裁定 R-a [poke-parity 機構 = fork A DoD] / R-b [CPU×多世界 fail-loud tripwire = charter 即時項目]）。**v1.11:** 2026-07-16（§21.10.7 ERRATUM = ⛔「新規発見」撤回 [freeze は 07-08 既知 `COMP3_PLAN...20260708.md` §7、私も relay で propagate = 訂正 8 件目]・真の差分 5 点を批准）。**v1.12:** 2026-07-16（§21.11 = **Rs 裁定 fork B 採択**［verbatim「推奨でよい、fork Bで進めて」］+ ⭐設計帰結: **(c) は fork B の下で解消** — 各 process=単一世界 CPU path ⇒ 残作業 = (a)(b)(d)+既存 audit、newton-API 機構は S8 用 banked / trainer-infra 設計 gate agenda 5 項）。**v1.13:** 2026-07-16（§21.11.2 に**項 6 追加**［process 故障/NaN 方針 — silent restart は process 軸の silent 汚染］+ **§21.11.2a D0 素材 DoD**［fork-B node D0 の per-item 素材要件、p5+%12 パターン用］）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
 **Trigger:** Rs 裁定 2026-07-15 00:5x「クリップ**のみ** pin を RL env に恒久配線しろ」（%12 経由）+ %12 依頼 2026-07-16（①署名裁定 ②恒久配線 scaffold）。
 **Scope:** Q1（pin をいつ打つか）/ Q2（clip-only を機構でどう保証するか）/ Q3（STEP 9 述語）/ (a) body 割当規則 / **①署名 canonical / ②恒久配線 firing scaffold（per-episode / done-world clear / policy-drive live trigger / multi-world eq / per-world audit）**。
 **⚠ 本 doc は message の代替である**（通信規律 2026-07-15 02:35: 数値は artifact に置き、message は path だけ）。
@@ -1013,6 +1013,18 @@ fork B では **各 env process = world_count=1 = `use_mujoco_cpu=True` の CPU 
 3. **rollout 収集 IPC**: RLPD は off-policy ⇒ **async 収集が自然**（process → replay buffer への搬送形式・頻度・backpressure）。
 4. **banked Stage-A trainer-env gate spec との整合**: process 並列化が Stage-A spec（W0-c delta v0.8、Rs 承認済）の前提と矛盾しないか reconcile leg を 1 本。
 5. **R-b tripwire の着地点**（make_solver / env init、opt-out env 変数名）。
+6. **［v1.13 追加提案］process 故障/NaN 方針**: N process の 1 つが crash/NaN したときの規約 — **fail-loud per-process + replay buffer の汚染防止**（NaN 化 process の直近 transitions を buffer から隔離できる provenance tag）+ restart 規約。⛔ silent restart は「凍結世界の garbage 訓練」と同クラスの silent 汚染を process 軸で再生する。
+
+### §21.11.2a D0 素材 DoD（v1.13 — %12 の素材 doc が各項で満たすべきもの。裁定はこれが揃った項から）
+
+| 項 | 素材 DoD（on-disk / 実測） |
+|---|---|
+| 1 | **1-process 実測 profile**: live route env（world_count=1、CPU step）の GPU MiB（nvidia-smi、⚠ CPU mode でも warp 配列は cuda:0 に載る — COMP3 §7 注記）/ CPU util・thread 数 / RAM。+ 両 GPU の現占有と ≤4 proc 規則 cite。⇒ N は演算で決める（推測でなく） |
+| 2 | 既存 seed 入口の棚卸し（env seed 経路・`_reset_worlds` の `np.random.uniform` INIT_XY_NOISE `newton_route_env.py:1038-1040` 等の裸 np.random 使用箇所）+ banked byte-repro protocol 群 + env-fingerprint 機構（60-key、`b7553662a4`）の per-process 適用形 |
+| 3 | P2 RLPD trainer の現 data-ingest 界面（TRAINER_NODE_DEFINE の該当 §）+ repo 内の既存 multiprocess/vecenv 前例の有無（grep）|
+| 4 | Stage-A spec 中の world_count / batch / env 数を前提にした**行**の列挙（line-anchored reconcile — narrative でなく）|
+| 5 | make_solver / env `__init__` の呼び出し site trace + **env default `world_count=4`（`newton_route_env.py` init）の扱い**（fork B 下で default flip するか、default 温存+tripwire で守るか = 裁定事項）+ opt-out env 変数名候補 |
+| 6 | 既存の NaN/crash 検出機構（env 側・trainer 側）の棚卸し + replay buffer の provenance 表現の現状 |
 
 ### §21.11.3 即時 disposition
 - 本 §21.11 = 裁定記録 + 設計帰結。**実装はここから 1 行も始めない**（(a)(b)(d) は charter/W1 chain の gate [(d) は reward-design gate] を通ってから）。
