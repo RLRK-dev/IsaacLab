@@ -133,7 +133,7 @@
   (blob sha256 `8d07643b…294dad`、closure 9/9・at-load==post-run・changed_during_run=[]・fingerprint 67 key・
   recording sha=banked golden lineage 一致)。R1-0 の evidence 指示は v2/v3 系譜から **v4 へ supersede**。
 - ⚠ **精度記録 (pN 指示)**: v4 は v2/v3 と「完全同値」ではない — **baseline 308 MiB / delta 42 / window n=9**
-  (v2/v3: baseline 340/delta 10/n=12)。peak 350 MiB / RSS 1310 MB / CPU mean 1.56% は同値で **R1 の cap 結論 (N=4) 不変**。
+  (v2/v3: baseline 340/delta 10/n=12)。peak 350 MiB は一致、RSS 1310 MB / CPU mean 1.56% は近似一致 (v2/v3: 1317.8 MB / 1.58%) で **R1 の cap 結論 (N=4) 不変**。
 - ⚠ v4a crash 捕捉の主張 (「fail-loud が phantom __file__ を実捕捉」) = **narrative-only UNVERIFIED** (crash artifact 未保全、
   非 blocker)。
 - ⇒ **D0 = 6/6 CLOSE (design + evidence)**。E0 = D1 事前登録 (K=200/K_fail=3/contention≥0.8/決定論/memory gate) に従い
