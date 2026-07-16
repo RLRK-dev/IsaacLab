@@ -1,6 +1,6 @@
-# fork-B D1 spec (RS-TECH-LEAD %12, 2026-07-16) v0.2
+# fork-B D1 spec (RS-TECH-LEAD %12, 2026-07-16) v0.3
 
-**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: p5 verify = CONFORM 7/7 PASS (RULINGS v1.3 `9cea41ac67` §D1-VERIFY) + AMEND-1 反映済 (v0.2)。**
+**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: p5 verify = CONFORM 7/7 PASS (v1.3) + AMEND-1 (v0.2) + ⭐v0.3 = §7/§9 の POST-E0 DESIGN AMENDMENT 版上げ** (pN E0 HOLD 調停: E0 predicate 再定義 + I0 acceptance leg 移管 [RULINGS v1.5 N-1 / v1.6 R2-4-b `2f6096a6a2`] + E0v2 7 条件 [pN CONCUR-WITH-CONDITIONS]。⛔「元 §7 事前登録の PASS」を主張しない — 移管 leg は amendment として記録)。
 **入力**: D0 裁定 = `FORKB_D0_RULINGS_VTDESIGN_20260716.md` v1.3 (`9cea41ac67`; R1 `889ce6b640` / R2-R6 `11fdb0bc11`) +
 素材 doc (`92eab23ceb`) + calibration profile **v4 (`fd536235e9`) = 確定 evidence (pN 独立 verify PASS、PASS-WITH-RECORDS-FIX 2026-07-16)**。⚠v4 実測 = peak 350 MiB (v2/v3 一致)/RSS 1310 MB/CPU 1.56% (v2/v3 近似一致: 1317.8→1310/1.58→1.56) だが baseline 308/delta 42/window n=9 は v2/v3 (340/10/12) と異なる — §3 の定常 ~8 steps/s と R1 cap 結論 (N=4) は不変。
 **⚠ scope**: 本 doc = 実装可能な spec の固定。**実装 (I0) は E0 の後** — E0 fence (pN 定義) と I0 gate は不変。
@@ -49,8 +49,8 @@ rollouts/
 
 ## §3 disk budget + rotation (要件 #1、Stage-A :125 の N-process 再見積)
 
-実測基礎 (resource evidence = calibration v4 `fd536235e9`; ⚠**timing は v2 trace 由来のみ** — v4 artifact に timing
-field は無い。timing の確証は E0 で取る。D0_CALIBRATION_ONLY): init ≈ 80 s/proc、定常 ≈ **8 RL steps/s/proc**
+実測基礎 (resource = calibration v4 `fd536235e9`; **timing = E0 v1 実測で更新 [p5 v1.5 批准・PROVISIONAL 条項]**:
+定常 ≈ **10.71 RL steps/s/proc** [199-step off-by-one 補正後、N1]、N4 total ≈ 35.78 t/s。E0v2 で最終): init ≈ 80 s/proc
 ⇒ 900-step episode ≈ 113 s ⇒ **~30 ep/h/proc、N=4 で ~120 ep/h**。0.5 MB/ep (Stage-A :125) ⇒ **~60 MB/h、24 h ≈ 1.4 GB**。
 - **rotation 方針: 削除しない**(容量が問題にならない)。retention = run 単位 dir、disk 残量 < 50 GB で supervisor が
   loud warn (削除は人間判断 — 学習データの silent destruction をしない)。
@@ -98,17 +98,25 @@ field は無い。timing の確証は E0 で取る。D0_CALIBRATION_ONLY): init 
 - fallback 形 = `{collector: "cuda:0" (N=3), trainer: "cuda:0"}` — **設計変更なしに config でこの形に落とせる**ことを
   I0 実装の acceptance に含める (lever の実在テスト: 両 config で supervisor が正しく spawn する smoke)。
 
-## §7 E0 事前登録 (要件 #6 — E0 実測の predicate を run 前に固定)
+## §7 E0 registration — v0.3 POST-E0 AMENDMENT 版 (旧 v0.2 表 = 歴史。移管 leg は「元事前登録の PASS」ではない)
 
-| 測定 | 定義 | acceptance / pin |
+**E0(v2) predicate (実測対象、全て errors/exit2 昇格 = fail-loud 完備):**
+| 測定 | 定義 (v0.3) | acceptance |
 |---|---|---|
-| transitions/s | N∈{1,2,4}、**metric bank 済み同一 harness で N=1 も新規再走** (calibration 非流用、pN 条件 2) | scaling 効率 = T(N)/(N·T(1)) を報告 (bar は下記 contention) |
-| contention 劣化 | per-proc steps/s の N=4 vs N=1 比 | **≥ 0.8 = 批准済 pin (p5 導出: 0.8×4=3.2 > 3.0 = 理想 N=3 ⇒ N=4 が N=3 fallback を必ず支配する break-even+margin 線)** — 下回れば N=3 で再測 → R1-5 二段採択の E0-confirm 側 |
-| メモリ | GPU MiB (PID 帰属)・RSS ×N | 線形性確認 (超線形 = 異常 loud) |
-| 決定論 (R2-4) | 同 (code sha, fingerprint, derived_seed_i, workload) 2 回 → npz byte-identical per-process | **byte-identical = hard PASS 条件** |
-| backpressure K | 人工消費停止で pause 発火を確認 (機構テスト) → K 数値 pin | K 初期案 = 200 ep (≈1.7 h 分) |
-| K_fail | 人工 crash 注入で restart→halt chain を確認 | K_fail = 3 (R6-3 提案の確認) |
-| 正対照 | 死計器検出 (CPU 0.0-flat 等 = FAIL、calibration v1 教訓の standing 化) | 全測定に適用 |
+| transitions/s | N∈{1,2,4} fresh (v1/calibration 非流用)、**timer = time.monotonic_ns・window = 199 step 厳密** (step30 実行後 start の off-by-one 修正) | 効率 T(N)/(N·T(1)) 報告 |
+| contention | per-proc steps/s N=4 vs **N1 基準 = n1 対の平均 (run 前固定、pN 条件 4)** | **≥0.8、<0.8 は errors/exit2** |
+| メモリ | GPU MiB (PID 帰属)・RSS ×N 線形 | **非線形 = errors/exit2** |
+| 決定論 (R2-4 npy level) | 同 (as-run sha, fingerprint, derived_seed, workload) 2 回 → **trajectory .npy file sha 一致** (v1.5 D-1 批准形) | **hard、 不一致 = exit2** |
+| provenance (pN 条件 3/6) | **per-child**: unified env fingerprint 実値・loaded closure+self hash・recording sha・post-run hash・changed_during_run=[] / harness source as-run hash 前後一致 / 分母 in-artifact / rc 全 0 / trajectory nontrivial+finite | 欠落 = errors/exit2 |
+| 正対照 (pN 条件 5) | **注入型**: CPU 0-flat injection → detector が非ゼロ exit する自己テスト + dead-PID GPU=0 対照 + missing GPU/RSS/overlap/closure/fingerprint/race = fail-loud | 自己テスト不発 = exit2 |
+
+**I0 acceptance へ移管 (POST-E0 DESIGN AMENDMENT — RULINGS v1.5 N-1 / v1.6 R2-4-b。E0v2 の PASS 数に数えない):**
+| leg | 内容 | 由来 |
+|---|---|---|
+| K=200 / K_fail=3 機構テスト | 人工消費停止→pause 発火 / 人工 crash→restart→halt chain (supervisor = I0 成果物) | N-1 (binding) |
+| episode-npz serialization 決定論 | serializer を **file レベル byte-決定的**に実装 + ⭐**2×2 判別 leg**: 同 seed 再走→sha 一致 × 異 seed→sha 不一致 (異 seed 象限は seed 発現 workload で — FF は inert [N-2]) | v1.6 R2-4-b |
+| seed-differentiation 観測 | 上記 2×2 の異 seed 象限 (N-2) | v1.5 N-2 |
+| as-run 差分 reconcile | E0 実行時 dirty tree の as-run sha ↔ committed sha 一致確認 (land or inert 宣言) | v1.5 N-3 |
 
 ## §8 trainer bring-up contention 観測 leg (要件 #7)
 
@@ -116,7 +124,9 @@ E0 は collector 側 (cuda:0) のみ被覆。**trainer@cuda:2 の VLM 同居 con
 trainer 単独 vs VLM 同居時の (update/s、GPU MiB、cuda:2 compute-apps slot 数) を 1 回計測し、劣化が大なら
 relocate lever (§6) の発動判断材料として Rs/pN へ surface。E0 の acceptance には**含めない** (被覆軸が別)。
 
-## §9 gate chain (再掲・不変)
+## §9 gate chain (v0.3)
 
-D1 (本 doc、p5 verify) → **E0** (pN fence 解除後、§7 事前登録どおり) → **I0** (flip+tripwire+supervisor+collector、L3 chain)
-→ V0 (charter §3.2 acceptance)。(d) policy-drive trigger の `/reward-design`+`/pre-check` は本 chain と独立に不変。
+D1 (本 doc) → E0 実測 v1 `fb36c49540` (p5 設計軸 PASS v1.5 / **pN evidence HOLD**) → **E0v2** (pN 7 条件の full 再走、
+新 run tag・v1 artifact 不変更) → **pN 再判定 (N=4 確定/I0 開始はここ)** → **I0** (flip+tripwire+supervisor+collector、
+L3 chain; acceptance = 従来分 + §7 移管 leg 4 本 [K/K_fail 機構・R2-4-b 2×2・N-2・N-3] + §8 trainer contention leg)
+→ V0 (charter §3.2)。(d) policy-drive trigger の `/reward-design`+`/pre-check` は本 chain と独立に不変。
