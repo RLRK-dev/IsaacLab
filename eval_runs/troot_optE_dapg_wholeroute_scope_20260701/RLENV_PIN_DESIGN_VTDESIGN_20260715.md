@@ -1,6 +1,6 @@
-# RL env pin 配線 — 設計裁定 v1.6
+# RL env pin 配線 — 設計裁定 v1.7
 
-**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
+**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
 **Trigger:** Rs 裁定 2026-07-15 00:5x「クリップ**のみ** pin を RL env に恒久配線しろ」（%12 経由）+ %12 依頼 2026-07-16（①署名裁定 ②恒久配線 scaffold）。
 **Scope:** Q1（pin をいつ打つか）/ Q2（clip-only を機構でどう保証するか）/ Q3（STEP 9 述語）/ (a) body 割当規則 / **①署名 canonical / ②恒久配線 firing scaffold（per-episode / done-world clear / policy-drive live trigger / multi-world eq / per-world audit）**。
 **⚠ 本 doc は message の代替である**（通信規律 2026-07-15 02:35: 数値は artifact に置き、message は path だけ）。
@@ -670,7 +670,7 @@ and abs(float(mjd.geom_xpos[g][1]) - y_clip) < 0.03
 | 1 | 支持 clip の穴（§15.1） | ✅ caller が clip を名指せない（構造） | ✅ membership が拒否（check） — **等価** |
 | 2 | ⭐⭐ **§19 の「真の穴」(5) = env 既定中心** `os.environ.get("CLIP_X","0.40")` = built C2 中心（現ファイル確認済 `route_executor.py:2338-2339` M-Hook / `:2300-2301` DEMO_RECORD; ⚠ §19 の `:2133-2134` は 399faa51ec の executor 改修で行ドリフト — %12 が実装時に現行 selector-feed 位置を再確認） | ✅ **構造的に免疫** — authorizer は中心を caller/env から**一切受けない**（`ROUTE_CLIP_CENTERS` を import、= `ROUTE_C1_XY/ROUTE_C2_XY` from `route_env_config.py:139-140`、env 非経由）。**env 既定中心の穴は loop 形では発生不能。** | ⚠ **別途 (5) 削除に依存** — caller が中心を供給する以上、env 既定を**削り忘れれば** (5) が authorizer path に**再浮上**。§19 も「(5) は membership で防げない ⇒ 削除が本体」と認めている。= **機構 vs 規律**。 |
 | 3 | 5-clip 一般化 | ✅ `ROUTE_CLIP_CENTERS` を 1 行拡張（§15.2）、caller 不変 | ⚠ caller が各 pin 事象で**正しい clip_xy を追跡**して渡す必要（現 target clip の per-step 追跡） |
-| 4 | mis-pin（誤 clip 発火） | ✅ capture volume は **disjoint**（C1 y=0.150 vs C2 y=0.000 = 75mm 分離 ≫ y_win 15mm×2）⇒ 任意位置は**高々 1 clip** にしか入らない ⇒ loop は曖昧なし | ✅ caller が名指す（明示） — **幾何 disjoint ゆえ両形とも安全** |
+| 4 | mis-pin（誤 clip 発火） | ✅ capture volume は **両軸で disjoint**（route 集合 C1(0.35,0.150) vs C2(0.40,0.000): Δy=**150mm** ≫ y_win 15mm×2、Δx=**50mm** ≫ lat_bar 3.5mm×2）⇒ 任意位置は**高々 1 clip** にしか入らない ⇒ loop は曖昧なし | ✅ caller が名指す（明示） — **幾何 disjoint ゆえ両形とも安全** |
 | 5 | 実装済・validated | ✅ 399faa51ec / N1-N7 14/14 / g6_live（**tie-breaker であって理由ではない** — 論拠 2-3 が既に merit で loop を支持） | ✗ 再実装要 |
 
 ⇒ 🔒 **本 arc（§15/§17/§18）の一貫した原理 =「機構 > 規律」「境界 vs 同一性」。loop 形は (5) を【機構】で閉じ、arg 形は (5) を【削除規律】に残す。同じ理由で loop が canonical。** サンクコストではない（論拠 2-3 は実装状態に独立）。
@@ -797,3 +797,47 @@ N5（支持 clip 中心 seat）は loop 形で `NotInAnyRouteClip`（実測 14/1
 | capture 述語（非 raise 化元） | `route_executor.py:882`（`clip_capture_predicate` bool 返し）/ `:914-960`（raising authorizer）/ `:963`（audit）|
 | scope 承認 | RS71 §0 INVARIANT#5 + `fc088fe4fb`（clip-only 恒久配線 Rs 承認）|
 | no-repeat guard | `check_thread_vault_prior_art.sh --fail-on-blocker "multi-world pin" "mjw eq_active" "permanent wiring pin" "policy-drive pin trigger"` を %12 が実装前に実行（本 §21 が既往再導出でないことの確認）|
+
+---
+
+## §21.8 🔒 (c) probe 結果 + 機構解決（v1.7、2026-07-16、%12 probe `6fb00b845c` を受けて）
+
+**%12 probe 報告（P-1..P-4、GPU/訓練なし）:**
+- ✅ **STRUCTURE 確定（P-1/P-2/P-4）:** `mjw_data.eq_active` = **(4,40) per-world** / `mjw_model.eq_data` = **(4,40,11) per-world** / pin eq index = **cable-seg 序数**（seat27→eq27）。⇒ **(c) 設計入力確定:** eqid layout ✓（seg 序数）/ eq_data batching ✓（per-world）⇒ **anchor は per-world achieved でも groove 固定でも可**（現 CPU 版の achieved-seat anchor が per-world で成立）。
+- ⚠ **EFFECTIVENESS（P-3）= INCONCLUSIVE-HARNESS（正直な報告、over-claim なし）:** `eq_active[2,27]=1` は warp array に readback OK + world-2 isolated だが、%12 の minimal build+step harness は **world-0(CPU-mirror)しか step しない**（worlds 1/2/3 凍結）⇒ per-world 実効性は測定不能。**GPU-inert 判定でも escalation でもない**（P-3 は前提=harness が multi-world を step が偽ゆえ PASS/FAIL 未定）。
+
+### §21.8.1 🔒 (i) 機構解決 — **直接 mjw eq_active 書込は【誤り】。正しい機構 = newton constraint API + notify。**
+
+**newton `SolverMuJoCo` source（`env_isaaclab7/.../newton/_src/`）の確定事実:**
+| 事実 | cite |
+|---|---|
+| step は 2 path: **use_mujoco_cpu**（world_count=1）は `mj_step(mj_model, mj_data)` 直接 ⇒ CPU `mjd.eq_active` 直書きが honor（g6_live が効いた理由）。**else**（world_count>1）は warp が `mjw_data` を step | `solver_mujoco.py:3266-3289`（`:3195` separate_worlds = not cpu and world_count>1）|
+| ⭐ **mjw `eq_active` は newton `equality_constraint_enabled` から【導出】** — `eq_active_out[world,eq] = eq_constraint_enabled[newton_eq]` | `kernels.py:2534`（eq props kernel）|
+| newton Model eq field = `equality_constraint_enabled`(bool) / `equality_constraint_anchor`(vec3) 他 | `newton/_src/sim/model.py:640/:654` / builder `:4500/:4507`（add_connect が append）|
+| ⭐ **`SolverNotifyFlags.CONSTRAINT_PROPERTIES` が enabled **と** anchor の両方を cover** ⇒ 単一 notify で eq_active(from enabled)+anchor を mjw へ sync | `newton/_src/solvers/flags.py:37` / `solver_mujoco.py:3477-3495`（notify→`_update_eq_properties`+connect anchor 更新）|
+
+⇒ 🔒 **multi-world runtime pin 活性化の【唯一正しい】機構:**
+```
+newton_model.equality_constraint_enabled[flat_eq_idx(world w, seat 段)] = True   # per-world enable
+newton_model.equality_constraint_anchor[flat_eq_idx]                   = anchor  # per-world 位置
+solver.notify_model_changed(SolverNotifyFlags.CONSTRAINT_PROPERTIES)             # enabled+anchor を mjw へ sync
+```
+⛔ **直接 `mjw_data.eq_active[w,eq]=1` 書込は誤り** — mjw eq_active は【derived】array（source = newton enabled）ゆえ、任意の後続 CONSTRAINT_PROPERTIES notify で **clobbered**、かつ **step が honor するかは probe 未確認**（readback≠honored、%12 harness は step せず）。source of truth を bypass する hack。
+⛔ **CPU `mjd.eq_active` 直書き（現 `route_executor.py:794`）は world_count=1 専用**（use_mujoco_cpu path のみ）。
+
+⇒ **⭐ これで §21.1 の「CPU-only 書込は world_count>1 で GPU-inert」仮説が source で【確定】** — CPU mjd は use_mujoco_cpu path でしか step されず、warp path は mjw を step し eq_active は newton enabled から sync される。「mjw eq re-poke DEFERRED」の正体 = この newton-API 経路が pin 用に未配線だっただけ。
+
+### §21.8.2 ⚠ (ii) 実効性確認は【依然必要】— %12 が実 NewtonRouteEnv world_count=4 で
+
+source が機構を確定したが、**mid-rollout の runtime 活性化が warp で実際に働くか**は実 env での確認が要る（source-read だけでは secure しない、⚓ 方法論）:
+| # | 確認事項 | risk | 対処 |
+|---|---|---|---|
+| E-1 | world w に fire→step→**world w の cable のみ保持・他自由** | (c) の実効性そのもの | 実 env world_count=4（g6_live で全 world step 実証済）で raw 観測 |
+| E-2 | **mid-rollout の constraint 活性化を warp が受容**（nefc/constraint array sizing が新規 active eq を収容するか） | ⛔ warp が initial-active でサイズ確定なら overflow/無視 | E-1 と同時に観測（pin 後に nefc/拘束が増えるか） |
+| E-3 | **`notify_model_changed` の mid-rollout 安全性** — kernel 再走 + contact fast-path invalidate（`:3476`）。**⚠ CUDA graph capture 下では model 変更+notify が graph を壊し得る** | ⛔ rollout が graph-captured step なら (d) live trigger の per-fire notify と衝突 | notify を **fire 時のみ**（毎 step でなく）+ 同一 step の多 world fire を **1 notify に batch**。graph 衝突なら fire を captured step の外に出す設計へ |
+| E-4 | pin が step を跨いで persist + reset で解除（(a)(b)） | — | (b) = `enabled[eq]=False` + notify（done-world のみ）|
+
+⇒ 🛑 **E-2 or E-3 が実 env で FAIL（warp が mid-rollout 活性化を受容しない / notify が graph を壊す）⇒ Rs escalation**（§21.6: world_count=1 訓練 / fire を step 外へ / 別機構）。**E-1..E-4 PASS ⇒ (c) 機構確定、(a)(b)(d)+audit 有効化。**
+
+### §21.8.3 %12 への指示（2択への回答 = (i) は解決済、(ii) へ進め）
+**(i) と (ii) は either/or でなく順序。(i) は本 §21.8.1 で source-解決（機構=newton-API+notify、直接 mjw 書込でない）。⇒ %12 は (ii) を、【newton-API 機構で】実 NewtonRouteEnv world_count=4 で実装し E-1..E-4 を raw 観測。** anchor は per-world achieved（現 CPU 版と同）で開始可（eq_data per-world 確定）。E-3 の notify/graph 衝突を最優先で観測（(d) live trigger 設計を左右）。
