@@ -1,4 +1,4 @@
-# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.4
+# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.5
 
 **Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: D0 = 6/6 CLOSE（design + evidence）** — 裁定 v1.0 R2-R6 `11fdb0bc11` / v1.1 R1 `889ce6b640`［cuda:2 配置 = %12 CONCUR 決着］/ v1.2 要件 #7 `8304500dbd` / v1.3 D1-VERIFY（CONFORM 7/7 + AMEND-1）`9cea41ac67`。**item-1 evidence = v4 `fd536235e9` PASS**（pN 独立 verify、末尾 EVIDENCE-RECORD UPDATE `55086b197b` [record-only、%12 custodial — p5 検証・受理済: 設計文 append-only、peak 一致・RSS/CPU 近似一致 (1317.8→1310/1.58→1.56) ゆえ **R1 の N=4 結論 不変**、v4a narrative=UNVERIFIED 隔離は正]）。**v1.4 = 本 header の evidence-status 同期のみ（owner 実施、設計内容 無変更）**。次 = **E0**（D1 §7 事前登録どおり、fresh N=1 から）。0-commit（bank = %12）。
 **入力**: 素材 = `FORKB_D0_MATERIALS_RSTECHLEAD_20260716.md`（DoD = `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` §21.11.2a、v1.13 `7b4c918251`）。
@@ -124,6 +124,32 @@
 ### PROVISIONAL の扱い = 適正
 
 §0/§3/§7 の PROVISIONAL 明記 + pN HOLD → v3/v4 差替え → E0 最終、の三段は records-match-fact に適合。〔**RESOLVED 2026-07-16 19:5x〔record-fix %12〕**: v4 `fd536235e9` = pN 独立 verify PASS。数値 = peak 350 (v2 一致)/RSS 1310/CPU 1.56%（v2 近似一致: 1317.8→1310/1.58→1.56; baseline 308/delta 42/n9 は相違）⇒ **R1 の拘束構造（唯一の拘束=4-proc 規則、margin 30-80×）は不変・再裁定不要**。E0 で最終確認。〕
+
+---
+
+## E0-VERIFY 🔒 事前登録照合 verdict（v1.5、2026-07-16、対象 = `forkb_e0_scaling_result.json` bank `fb36c49540`）
+
+**方法**: artifact 自読（message 数値で裁定しない）+ 全 predicate の p5 再計算。
+
+### verdict = **PASS（全 5 predicate）→ R1-5 二段採択の E0-confirm 成立 = N_collect=4 採択【確定】**
+
+| 事前登録（D1 §7） | artifact 実測 | p5 再計算 | 判定 |
+|---|---|---|---|
+| 決定論 byte-identical（hard） | n1_a vs n1_b（同 seed 2 回）traj sha `f5a32604…` 一致 | sha 同一を目視 | ✅ **PASS**（deviation 下記 D-1）|
+| contention ≥0.8 | 0.835 | 8.99/10.764=0.835 ✓。⭐**参照非依存**: n1_b 基準でも 0.815、平均基準 0.825 — 全変種 ≥0.8 | ✅ PASS |
+| メモリ線形 | GPU 350 flat ×4 / RSS 1303-1309 flat | per-proc 一定 = 線形 ✓ 超線形なし | ✅ PASS |
+| throughput | N1/N2/N4 = 10.764/20.574/35.96 t/s | 和の再計算一致（N2 効率 0.954 / N4 0.835）| ✅ 報告どおり |
+| K / K_fail | K=200ep→**1.39h**（実測 rate）/ K_fail=3 数値 pin | 35.96 t/s→143.8 ep/h→200/143.8=1.39 ✓ | ✅ 数値 pin（機構 = 下記 N-1）|
+
+**D-1 逸脱の批准: npz→npy 比較** — zip container の timestamp 非決定は実物の性質。⇒ **R2-4 の byte-repro predicate を【npy payload レベル】と正式化**。系論: R3-2 manifest の `sha256`（npz file）は **identity（同定）であって repro 証明ではない** — 両者を混同しない（記録）。
+
+### 注記 3 件（PASS を変えないが binding/観察）
+
+- **N-1（binding、I0 acceptance へ carry）**: K 機構テスト（人工消費停止→pause 発火）+ K_fail 機構テスト（人工 crash→restart[新個体]→halt chain）は **supervisor が I0 成果物ゆえ E0 では構造的に実行不能** — 繰延は正当。ただし**I0 acceptance の必須 leg として binding**（数値 pin だけで機構未検証のまま運用に入らない）。
+- **N-2（事前登録外の観察 = wire-then-validate 級）**: **全 traj sha が process/seed に依らず同一**（n1_a/n1_b/n2×2/n4×4 = 全て `f5a32604…`）。本 workload（FF-replay）は **seed 差を軌道に発現させない** ⇒ E0 は「同 seed → 同 bytes」を実証したが「**異 seed → 異 episode**」（per-process seed 機構が inert でないこと）は**未実証**。⇒ **I0/初回 policy-drive で seed-differentiation を 1 回観測**（INIT_XY_NOISE が live な経路で、異 seed 2 proc の episode が異なることを確認）— appearance-only ≠ working の防止。
+- **N-3（evidence→production 連続性）**: E0 は **dirty tree で走った**（git_head `8d64d8d2d1` + as-run 3 env file の未 commit 差分 137/29 行、**as_run sha256 で pin 済 = 開示適正**）。⇒ E0 数値を「production env の数値」として cite する前に、**I0 で as-run 差分を land するか inert 宣言する**（as-run sha と committed sha の一致確認を I0 verify に含める）。
+
+**付帯批准**: D1 §3 timing（v2 trace 由来 ~8 t/s）→ **実測 10.764 t/s へ更新** = PROVISIONAL 条項どおり（disk budget 再計算: 143.8 ep/h ×0.5MB ≈ 72 MB/h、rotation 方針に影響なし）。
 
 ---
 
