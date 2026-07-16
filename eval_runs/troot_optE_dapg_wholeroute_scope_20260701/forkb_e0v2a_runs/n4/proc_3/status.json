@@ -1,0 +1,1 @@
+{"pid": 4082807, "phase": "done", "step": 230, "use_mujoco_cpu": true, "window_steps_per_s": 8.914, "t_window_ns": [1482784693052971, 1482807018304980], "t_window_wall": [1784200914.247661, 1784200936.5729136], "traj_sha256": "f5a326046707e1472fe7c1e3819d6ff4349428d59d07fe67ef92130f0bea0e5a", "traj_finite_all": true, "traj_nontrivial_1e6": true}
