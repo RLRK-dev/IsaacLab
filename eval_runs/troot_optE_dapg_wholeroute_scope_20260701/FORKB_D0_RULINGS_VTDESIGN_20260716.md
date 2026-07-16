@@ -1,4 +1,4 @@
-# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.6
+# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.7
 
 **Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: D0 = 6/6 CLOSE（design + evidence）** — 裁定 v1.0 R2-R6 `11fdb0bc11` / v1.1 R1 `889ce6b640`［cuda:2 配置 = %12 CONCUR 決着］/ v1.2 要件 #7 `8304500dbd` / v1.3 D1-VERIFY（CONFORM 7/7 + AMEND-1）`9cea41ac67`。**item-1 evidence = v4 `fd536235e9` PASS**（pN 独立 verify、末尾 EVIDENCE-RECORD UPDATE `55086b197b` [record-only、%12 custodial — p5 検証・受理済: 設計文 append-only、peak 一致・RSS/CPU 近似一致 (1317.8→1310/1.58→1.56) ゆえ **R1 の N=4 結論 不変**、v4a narrative=UNVERIFIED 隔離は正]）。**v1.4 = 本 header の evidence-status 同期のみ（owner 実施、設計内容 無変更）**。**E0 status〔record-fix %12、pN 条件〕: 実測完了 `fb36c49540` → p5 E0-VERIFY = PASS（v1.5、⚠設計軸のみ・N=4 確定は この軸限定）／ pN independent verify = **HOLD**（evidence 完全性 B1-B5）→ B1/B2 = v1.6 R2-4-b + N-1 で I0 acceptance へ移管（**post-E0 design amendment**、元 §7 pre-reg PASS ではない）／ B3/B4/B5 = **E0v2 full 再走**（pN scope CONCUR-WITH-CONDITIONS 7 条件）。N=4 確定/I0 開始 = E0v2 全 PASS 後の pN 再判定。** 0-commit（bank = %12）。
 **入力**: 素材 = `FORKB_D0_MATERIALS_RSTECHLEAD_20260716.md`（DoD = `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` §21.11.2a、v1.13 `7b4c918251`）。
@@ -164,6 +164,30 @@
    | **期待** | file sha **一致**（serialization determinism = B1）| file sha **不一致**（seed-differentiation = N-2、episode 内容が実際に異なることの実証）|
    両象限が期待どおりで初めて PASS — 「同」だけなら inert-seed でも通り、「異」だけなら非決定 serializer でも通る。**2×2 が両故障 mode を同時に判別する**（判別できないテストはテストでない、の適用）。⚠ 異 seed 象限は **seed が軌道に発現する workload**（policy-drive / noise-live 経路）で実施（N-2 の FF-inert 所見どおり FF では不成立）。
 3. ⇒ **B1 = 本裁定で closed**（pN 同意見の確認は %12 経由でそのまま進めてよい）。B3/B4/B5 の E0v2 補完 run 搭載 = 了解（裁定要請なし、到着時に verify）。
+
+---
+
+## E0v2-VERIFY 🔒 照合 verdict（v1.7、2026-07-16、対象 = `forkb_e0v2_scaling_result.json` bank `945a5c229a`、bar = D1 v0.3 §7/§7.1〔run 前固定 `3a14e38c17`〕）
+
+**方法**: bar を先に自読（v0.3 §7/§7.1）→ artifact 自読 → 全 predicate + 全 exact bar を p5 再計算。
+
+### verdict = **PASS〔p5 設計軸〕— 全 pinned predicate + §7.1 exact bars 6 本、再計算一致。最終確定 = pN 再判定（並行中）を待つ。**
+
+| bar（§7/§7.1、run 前固定） | artifact | p5 再計算 | 判定 |
+|---|---|---|---|
+| 決定論 traj npy sha（hard） | TRUE | n1_a `f5a32604…` == n1_b ✓ | ✅ |
+| fingerprint n1 対一致（hard、67-key per-child 実値） | TRUE | 67-key dict 完全一致 ✓ | ✅ |
+| contention ≥0.8（**基準 = n1 対平均、run 前固定** — v1 の参照依存懸念を制度で解消） | 0.815 | 8.872/10.886=0.815 ✓ | ✅ |
+| §7.1-1 memory 式 bar（1.25 係数 carry） | PASS | GPU 350≤437.5 ✓ / RSS 1306.4≤1632.1 ✓ | ✅ |
+| §7.1-2 overlap > 5.0s | 22.3 | ✓ | ✅ |
+| §7.1-3 traj finite（全要素）+ nontrivial（>1e-6m）全 child | TRUE | 8/8 child ✓ | ✅ |
+| §7.1-4 注入型 CPU-zero 自己テスト（別 subprocess、実 run exit と分離） | PASS | field 分離記録 ✓ | ✅ |
+| §7.1-5/provenance | — | per-child {derived_seed, CVD, pid, closure at-load, recording sha, fingerprint} + `changed_during_run=[]`（at-load==post-run の実体）+ harness self-sha pre==post + rcs 全 0 | ✅ |
+| throughput | N1 対平均 10.886 / T2 20.503 / T4 35.488 | 全て和・比の再計算一致（eff2=0.942 / eff4=0.815）/ K=200ep→1.41h ✓ | ✅ 報告どおり |
+
+**所見**: (i) 全 traj sha 単一 = v1 と同じ FF-inert（既知、N-2 は I0 移管済 — 新事実でない）。(ii) v0.3 §7.1 の「後付け判定防止」（bar の run 前固定 + 移管 leg を PASS 数に数えない）は `84665ddccc` 規律の正しい制度化。(iii) timer monotonic_ns + window 199 厳密化（off-by-one 修正）で v1 数値との微差（10.764→10.886 等）は計器改善由来と読める — 拘束・結論に影響なし。
+
+⇒ **p5 設計軸 = E0v2 PASS。N=4 最終確定・I0 開始 gate = pN 再判定の完了**（two-key、私の軸はこれで閉、over-close しない）。I0 acceptance 積み残し（binding）= N-1 機構 2 本 / R2-4-b 2×2 / N-2 異 seed 象限 / N-3 as-run reconcile — v0.3 移管表に fold 済を確認。
 
 ---
 
