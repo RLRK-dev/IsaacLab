@@ -1,4 +1,4 @@
-# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.7
+# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.8
 
 **Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: D0 = 6/6 CLOSE（design + evidence）** — 裁定 v1.0 R2-R6 `11fdb0bc11` / v1.1 R1 `889ce6b640`［cuda:2 配置 = %12 CONCUR 決着］/ v1.2 要件 #7 `8304500dbd` / v1.3 D1-VERIFY（CONFORM 7/7 + AMEND-1）`9cea41ac67`。**item-1 evidence = v4 `fd536235e9` PASS**（pN 独立 verify、末尾 EVIDENCE-RECORD UPDATE `55086b197b` [record-only、%12 custodial — p5 検証・受理済: 設計文 append-only、peak 一致・RSS/CPU 近似一致 (1317.8→1310/1.58→1.56) ゆえ **R1 の N=4 結論 不変**、v4a narrative=UNVERIFIED 隔離は正]）。**v1.4 = 本 header の evidence-status 同期のみ（owner 実施、設計内容 無変更）**。**E0 status〔record-fix %12、pN 条件〕: 実測完了 `fb36c49540` → p5 E0-VERIFY = PASS（v1.5、⚠設計軸のみ・N=4 確定は この軸限定）／ pN independent verify = **HOLD**（evidence 完全性 B1-B5）→ B1/B2 = v1.6 R2-4-b + N-1 で I0 acceptance へ移管（**post-E0 design amendment**、元 §7 pre-reg PASS ではない）／ B3/B4/B5 = **E0v2 full 再走**（pN scope CONCUR-WITH-CONDITIONS 7 条件）。N=4 確定/I0 開始 = E0v2 全 PASS 後の pN 再判定。** 0-commit（bank = %12）。
 **入力**: 素材 = `FORKB_D0_MATERIALS_RSTECHLEAD_20260716.md`（DoD = `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` §21.11.2a、v1.13 `7b4c918251`）。
@@ -204,3 +204,29 @@
   非 blocker)。
 - ⇒ **D0 = 6/6 CLOSE (design + evidence)**。E0 = D1 事前登録 (K=200/K_fail=3/contention≥0.8/決定論/memory gate) に従い
   fresh N=1 から開始可 (v4 非流用)。
+
+---
+
+## N-2-RESOLUTION 🔒 seed-differentiation 移管 leg の解決先 裁定（v1.8、2026-07-16、%12 I0-b L4 照会への回答。入力 = `I0B_BUILD_RSTECHLEAD_20260716.md` OUTCOME L4 + `forkb_i0b_legs_result.json` + `forkb_i0b_runs/l4_*`）
+
+### 0. L4 の扱い = 批准
+- **事前登録どおり FAIL を record して escalate（bar 後付け変更なし）= 正**。infra 無罪（L2 = 4 restart 個体の derived_seed 全相異を provenance で実証 — seed の導出・搬送・記録は働いている）も批准。
+- **同 seed 象限 PASS の主張範囲を確定**: 実証されたのは **serializer の file-level byte 決定論（B1、`c3cc1791f776…`）+ pipeline/physics 決定論**。⚠ live channel 不在下では 2×2 が 1 軸に退化しており、「同 seed 一致」は seed-plumbing の正しさを**追加証明しない**（それは L2 が担う）。**B1 = PROVEN のまま。**
+
+### 1. 測定の by-construction 説明（設計事実、なぜ ik_chord でも inert か）
+zero-residual scripted 収集 + DR OFF の env には **設計上 seed→data channel が存在しない**。唯一の RNG 消費 = INIT_XY_NOISE（`_reset_worlds` reset 時 draw）だが、その書込先 `_ee_target_*` は **毎 step route の絶対 base target で上書きされる**（`_apply_actions_batch`: `target = route_targets + residual` → `_ee_target_*[w] = target.copy()`）⇒ **draw されるが記録系に到達しない**（%12 診断と一致）。⇒ 🔒 **教訓形: 「RNG が draw される」≠「RNG が出力に到達する」— 消費は因果でない**（L4 事前登録の期待「INIT_XY_NOISE で seed 発現」はこの前提誤りで、正直な FAIL 記録がそれを捕まえた = 事前登録の存在価値の実演）。
+
+### 2. 🔒 裁定 = **N-2 を【channel-conditioned standing acceptance rule】に転換**（(a)単独でも (b) 単独でもない）
+一回性の leg（どの日に閉じるか）ではなく、**規則**として置く:
+> **「per-process seed を消費すべき channel が live になる度、その channel の bring-up acceptance に『異 seed → 異 output』判別 leg を含める」**
+
+| instance | 時期 | gate |
+|---|---|---|
+| **(i) policy stochasticity（第一解決点）** | trainer/(d) bring-up（SAC sampling が本来の exploration 熵源） | trainer chain 内（追加 Rs gate 不要）— **これが N-2 の primary 解決点** |
+| **(ii) DR `CABLE_XY_OFFSET` wiring** | Stage-A §6.1 config が **Rs により ON** になった時 | ⛔ **N-2 を閉じるために DR を ON にしない**（ON は訓練設計上の Rs 専権判断 — テスト都合で系を変えるのは instrument-for-the-test） |
+| (iii) 将来の任意 noise channel | 各 bring-up | 同規則 |
+
+**却下**: 人工 entropy channel の追加（テストを通すための fake diversity）。**I0-b fence = infra 述語のみで進行 = 正**（本 carry は fence を block しない）。
+
+### 3. ⛔ 派生 flag: INIT_XY_NOISE = 【appearance-only knob】と記録
+実測（FF + ik_chord 両 mode）で episode content に不達 ⇒ **どの training-data 多様性主張にも INIT_XY_NOISE を数えない**（appearance-only ≠ working）。処置（実効化 wire / inert 文書化 / 削除）は **(d)/trainer bring-up 設計の小項目**として carry（今は触らない — 触るのも env 変更 = gate 対象）。
