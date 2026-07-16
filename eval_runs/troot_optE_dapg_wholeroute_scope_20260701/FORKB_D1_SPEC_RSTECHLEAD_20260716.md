@@ -1,8 +1,9 @@
 # fork-B D1 spec (RS-TECH-LEAD %12, 2026-07-16) v0.2
 
 **Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: p5 verify = CONFORM 7/7 PASS (RULINGS v1.3 `9cea41ac67` §D1-VERIFY) + AMEND-1 反映済 (v0.2)。**
-**入力**: D0 裁定 = `FORKB_D0_RULINGS_VTDESIGN_20260716.md` v1.2 (`8304500dbd`; R1 `889ce6b640` / R2-R6 `11fdb0bc11`) +
-素材 doc (`92eab23ceb`) + calibration profile (`e1298c4bf6`)。
+**入力**: D0 裁定 = `FORKB_D0_RULINGS_VTDESIGN_20260716.md` v1.3 (`9cea41ac67`; R1 `889ce6b640` / R2-R6 `11fdb0bc11`) +
+素材 doc (`92eab23ceb`) + calibration profile **v3 (`86aced4221`、provenance 完備 — pN HOLD 対応の fresh 再実測。
+数値は v2 `e1298c4bf6` と同値ゆえ §3 の導出は不変)**。
 **⚠ scope**: 本 doc = 実装可能な spec の固定。**実装 (I0) は E0 の後** — E0 fence (pN 定義) と I0 gate は不変。
 数値で「E0 pin」と記す項は E0 実測で確定するまで PROVISIONAL。
 
