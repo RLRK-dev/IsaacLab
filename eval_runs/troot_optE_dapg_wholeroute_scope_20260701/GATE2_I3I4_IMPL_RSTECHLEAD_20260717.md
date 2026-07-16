@@ -76,7 +76,7 @@ L = **L3** (reward/termination semantics; L-TRIAGE self=auto=L3)。chain per §S
 | leg | 結果 | 証拠 |
 |---|---|---|
 | **V6 fails-without-fix (変更前)** | ✅ 3/3 再現: I3(a) OLD escape=**False** (fail-open、identity=MISS 9.0) / I3(b) OLD escape=**True** (偽、identity dx=0.0・z=0.900 帯外) / I4 OLD seated=**True** (feed-drape 誤 credit、両側候補 0..38 実測) | scratchpad `v6_oldbehavior_capture.py` 出力 (04:5x、本 doc bank 時の会話 log) |
-| **V1+V5 unit tests (変更後)** | ✅ **10/10 ALL PASS** (既存 FM4×2+FM3+recording 4 本 + 新 I3a/I3b/I4-drape/I4-tail-return/sentinel>bar/obs-only 6 本) | `test_route_reward_identity_guards.py` 直呼び出力 (2 回実行、コメント修正後も PASS) |
+| **V1+V5 unit tests (変更後)** | ✅ **exact-landed 9/10 — §S3.1/S3.2 bar 該当 leg = 9/9 PASS**〔⚠scope 訂正 05:5x、pN B1〕: FAIL 1 本 = `test_pin_identity_fields_survive_recording_prepare` (V5 系 pre-existing invariant、**bar 外**) — 未 commit `route_executor.py` pin-fields 差分に依存 = **landed tree で invariant FALSE** (owner chain finding)。**disposition (b) 採択**: V5 recording-fields leg は本 chunk acceptance から除外、当該差分の land + exact-landed 10/10 再走 = **(a)(b) chunk precondition** へ登録。〔HISTORICAL: 当初報告 = main working tree で 10/10・exit 0 — 測定値は真だが code-state scope 誤帰属。教訓 = test-run claim の code-state surface は test の **import+call 閉包**が定義する (実装 diff の scope ではない)〕 | pN 隔離 worktree exact-landed readback (dfbdd 単体 9 leg PASS / 親 commit V6 旧挙動再現) + p5 §S3.5a 自己再現 (9/10、同 FAIL message) |
 | **V2 probe** | ✅ **ALL_PASS exit 0**: leg A = canonical anchor **厳密一致・対称差 = {}** (2428/116/5163⁄5163/7394/313⁄313/3.183mm) / leg B = 新 guard escape post-onset (f≥2544 事前固定窓) = **0** / leg C = **81/81 cell feed 側 straddle 総数 0** (per-cell seat_k 25..34、histogram = panel 実測一致) ⇒ side 制限は全記録 cell で除去ゼロ = **per-frame 計器等価の証明** / leg D = obs[49]/[58]/[59] 継承を宣言 | `gate2_rerun_i3i4_probe_result.json` |
 | **V3 grep** | ✅ `_crossing_x_dev` @ newton_route_env.py = **def :1426 + obs :1566 のみ** (旧 guard 消費 :1433 は消滅、対称差 = ∅)。standing 化 = `test_crossing_x_dev_is_obs_only` (inspect.getsource で reward/done 関数 source に参照ゼロを常時 assert) | grep 出力 + committed test |
 | **V4 lint** | ✅ ruff "All checks passed!" + py_compile OK (変更 4 py file; tree-wide `-f` は known trap ゆえ不使用 [pN format 事故前例、targeted lint = seat-fix 前例踏襲]) | 同ターン出力 |
@@ -85,7 +85,21 @@ L = **L3** (reward/termination semantics; L-TRIAGE self=auto=L3)。chain per §S
 
 **§S 露出宣言**: 本 chunk の全実行 = banked npz の read-only 再計算 + 合成 fixture。新規 sim rollout ゼロ・HEAD 実 run ゼロ ⇒ §S exposure なし。視覚レグ省略 = justified (幾何述語の数値検証のみ、motion 新主張なし)。
 
-**chain 位置 (§S3.4)**: 実装 = 本 doc で完 → **次 = p5 delta verify (§S3.1/S3.2 条項のみ)** → /pre-check 再走 → §S 解除判定。pin (a)(b)/(d) = 別 chunk (pN と分割 co-decide)。
+**chain 位置 (§S3.4)**: 実装 = 本 doc で完 → **次 = p5 delta verify (§S3.1/S3.2 条項のみ)** → /pre-check 再走 → §S 解除判定。pin (a)(b)/(d) = 別 chunk (pN と分割 co-decide)。〔⚠この段落は下記「pN HOLD 対応」で supersede — FENCE 順序が正〕
+
+## pN HOLD (B1-B3) 対応 + chain 再配列 (2026-07-17 05:5x 追記)
+
+**pN 二層判定 (05:3x)**: I3/I4 **mechanism semantics = PASS** (隔離 worktree exact-landed readback: dfbdd 単体 9 leg PASS / 親 = V6 旧挙動再現 / 81-grid recompute banked 値一致 / §S3.1-S3.2 整合) ／ **evidence/bank acceptance = HOLD (B1-B3)**。p5 = §S3.5a 訂正 (10 件目) banked `2dbc21d178` (pN pre-bank readback CONTENT PASS)。
+
+| # | 内容 | 対応 |
+|---|---|---|
+| B1 | exact-landed 10/10 不成立 (recording-fields test = 未 commit route_executor.py 依存) | **disposition (b)**: V5 leg を本 chunk acceptance から除外・claim 9/9 (bar) へ訂正 (上表)。**route_executor.py pin-fields 差分 (実測: 全 5 hunk が `_prepare_recording` 内、19+/1−) の land = (a)(b) chunk precondition** — 着手時に著者 claim + producer-unbanked〔Rs 待ち〕系との関係特定 + scope prereg を先行 (pN 推奨手順に concur) |
+| B2 | 新規 artifact が pre-commit-clean でない (V6: SPDX 欠落+lint / probe: format / json: EOF newline) | **修正済** (本 commit): V6 = SPDX 2026 + docstring 統合 + import 整列 + 行長 / probe = 下記 B3 と同時に整形 / json = probe が trailing newline を emit (再生成で反映) |
+| B3 | result json に git/source SHA・81-grid input hash・pre/post bracket なし + 入力 untracked | **probe に leg E (evidence closure) を実装**: git HEAD + closure file の git status + **sys.modules 由来 source closure sha256** (hand-list でない、E0 v4 教訓) + **81-cell 入力 manifest sha256** (162 file + aggregate digest — 入力は録画 data ゆえ tracked 化せず hash で pin) + pre/post source bracket (changed=[] fail-loud)。--grid/--out 引数化 (worktree exact-landed 実行用) → **本 commit 後、隔離 worktree @ 本 commit で fresh 再生成** |
+
+**co-decide 決着 (pN 非 CONCUR を受諾)**: pin (a)(b) は本セッション続行**せず** — I3/I4 correction CLOSE 後の **fresh session/chunk**。開始手順 = banked lifecycle design (§21.11.1 + identity-persistence coupling) readback → file/hunk scope prereg → prior-art → 実装。precondition = route_executor pin-fields land (B1)。
+
+**現 chain (LEDGER `bf5feef0bd` = 正)**: correction bank (本 commit) → **exact-landed closure probe 再生成** → **pN readback (evidence HOLD 解除判定)** → FENCE 解除 → **/pre-check 再走** → §S 解除判定。tri-state: design = CONFORM banked (§S3.5+§S3.5a) / evidence = pN HOLD 中 / adversarial = FENCE 待ち。⚠05:2x に spawn した /pre-check verifier は API 529 で 2 回死亡 — FENCE 発効により**再 spawn せず** (解除後に再走)。
 
 **V6 恒久 artifact**: `gate2_i3i4_v6_precheck_oldbehavior.py` + `_output.txt` (⚠ script は本 commit の **parent でのみ実行可** — 新 signature で loud に壊れる。それ自体が V6 の主旨)。
 
