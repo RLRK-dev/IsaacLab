@@ -1,6 +1,6 @@
-# fork-B D1 spec draft (RS-TECH-LEAD %12, 2026-07-16) v0.1
+# fork-B D1 spec (RS-TECH-LEAD %12, 2026-07-16) v0.2
 
-**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: DRAFT — p5 verify 待ち (要件 1-7 照合)。**
+**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: p5 verify = CONFORM 7/7 PASS (RULINGS v1.3 `9cea41ac67` §D1-VERIFY) + AMEND-1 反映済 (v0.2)。**
 **入力**: D0 裁定 = `FORKB_D0_RULINGS_VTDESIGN_20260716.md` v1.2 (`8304500dbd`; R1 `889ce6b640` / R2-R6 `11fdb0bc11`) +
 素材 doc (`92eab23ceb`) + calibration profile (`e1298c4bf6`)。
 **⚠ scope**: 本 doc = 実装可能な spec の固定。**実装 (I0) は E0 の後** — E0 fence (pN 定義) と I0 gate は不変。
@@ -14,7 +14,8 @@
 supervisor (CPU-only, R6)
  ├─ launch-time check: nvidia-smi compute-apps @cuda:0 → 先客 k proc ⇒ N_collect = 4−k + loud log (R1-4)
  ├─ collector proc i = 0..N-1  (cuda:0, world_count=1, use_mujoco_cpu=True = proven CPU path)
- │    ├─ derived_seed_i = SeedSequence([base_seed, i]) (R2-1) → np.random.seed(derived_seed_i)
+ │    ├─ derived_seed = SeedSequence([base_seed, process_index, restart_count]) (AMEND-1 統一形、初回 rc=0)
+ │    │    → np.random.seed(derived_seed)
  │    ├─ rollout: episode 完走 → tmp 書込 → sha256 → rename = 公開 (R3-1 atomic)
  │    └─ outbox: rollouts/proc_{i}/  (R3-2)
  ├─ trainer (将来 I0+; cuda:2 primary, R1-3) ← async tail-scan (R3-5)
@@ -27,8 +28,8 @@ supervisor (CPU-only, R6)
 rollouts/
   run_manifest.json            # run 単位: {base_seed, code_sha, launch_ts, N_collect, device_map, protocol_ref}
   proc_{i}/
-    proc_meta.json             # R2-2: {base_seed, process_index, derived_seed, pid, CUDA_VISIBLE_DEVICES,
-                               #        env_fingerprint (60-key), code_sha, start_ts}
+    proc_meta.json             # R2-2+AMEND-1: {base_seed, process_index, restart_count, derived_seed, pid,
+                               #        CUDA_VISIBLE_DEVICES, env_fingerprint, code_sha, start_ts}
     ep_{k:06d}.npz             # episode data (transition arrays、Stage-A :117 schema)
     ep_{k:06d}.manifest.json   # 下表
     FAILURE.json               # R6-1 (crash 時のみ): {last_episode, reason, ts, rc}
@@ -76,13 +77,15 @@ rollouts/
    - 陽性対照 = 既存 multi-world probe 2 本 (E_probe/E1v2) が opt-out 明示で従来どおり動くこと。
 4. **L-triage 見立て**: env default 変更 + solver factory logic = **L3** (newton/solver keyword)。gate chain = fork-B node の
    [VERIFY]→[RULE-CHECK]→実装→§運用15。⛔ pin node と分離 (本 node で実装)。
+   **I0 [RULE-CHECK] carry (p5 v1.3 助言)**: R2-3 = 裸 np.random を増やさない / DR・per-process 設定は config 経由
+   (os.environ 経路 不可) — checklist 項として明示 carry。
 
 ## §5 supervisor spec (要件 #5)
 
 - **launch**: run_manifest 書込 → cuda:0 compute-apps check (R1-4、proc 数判定・MiB でない) → N_collect=4−k →
   collector spawn (per-proc `CUDA_VISIBLE_DEVICES=0` 明示)。
-- **監視**: collector 非ゼロ exit or FAILURE.json 検出 → **restart = 新 derived_seed (SeedSequence([base, i, restart_count]))
-  + proc_meta 再記録 = 別個体** (R6-3)。in-flight episode は atomic 設計により outbox に現れない (R6-1、追加処理不要)。
+- **監視**: collector 非ゼロ exit or FAILURE.json 検出 → **restart = restart_count+=1 ⇒ 新 derived_seed
+  (AMEND-1 統一形 SeedSequence([base_seed, process_index, restart_count])) + proc_meta 再記録 = 別個体** (R6-3)。in-flight episode は atomic 設計により outbox に現れない (R6-1、追加処理不要)。
 - **halt**: 同一 slot 連続失敗 **K_fail (提案 3、E0 pin)** 超 → run 全体 halt + loud (systemic 欠陥を restart で隠さない)。
 - **backpressure**: outbox 未消費 (trainer 不在の E0 では「ディレクトリ内 episode 数」で代用) 高水位 **K (E0 pin)** で
   collector pause + loud log (R3-3)。
@@ -99,7 +102,7 @@ rollouts/
 | 測定 | 定義 | acceptance / pin |
 |---|---|---|
 | transitions/s | N∈{1,2,4}、**metric bank 済み同一 harness で N=1 も新規再走** (calibration 非流用、pN 条件 2) | scaling 効率 = T(N)/(N·T(1)) を報告 (bar は下記 contention) |
-| contention 劣化 | per-proc steps/s の N=4 vs N=1 比 | **≥ 0.8 (劣化 ≤20%) を提案 pin** — 下回れば N=3 で再測 → R1-5 二段採択の E0-confirm 側 |
+| contention 劣化 | per-proc steps/s の N=4 vs N=1 比 | **≥ 0.8 = 批准済 pin (p5 導出: 0.8×4=3.2 > 3.0 = 理想 N=3 ⇒ N=4 が N=3 fallback を必ず支配する break-even+margin 線)** — 下回れば N=3 で再測 → R1-5 二段採択の E0-confirm 側 |
 | メモリ | GPU MiB (PID 帰属)・RSS ×N | 線形性確認 (超線形 = 異常 loud) |
 | 決定論 (R2-4) | 同 (code sha, fingerprint, derived_seed_i, workload) 2 回 → npz byte-identical per-process | **byte-identical = hard PASS 条件** |
 | backpressure K | 人工消費停止で pause 発火を確認 (機構テスト) → K 数値 pin | K 初期案 = 200 ep (≈1.7 h 分) |
