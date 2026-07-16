@@ -51,7 +51,7 @@ rollouts/
 
 実測基礎 (resource = calibration v4 `fd536235e9`; **timing = E0 v1 実測で更新 [p5 v1.5 批准・PROVISIONAL 条項]**:
 定常 ≈ **10.71 RL steps/s/proc** [199-step off-by-one 補正後、N1]、N4 total ≈ 35.78 t/s。E0v2 で最終): init ≈ 80 s/proc
-⇒ 900-step episode ≈ 113 s ⇒ **~30 ep/h/proc、N=4 で ~120 ep/h**。0.5 MB/ep (Stage-A :125) ⇒ **~60 MB/h、24 h ≈ 1.4 GB**。
+⇒ 〔以下 HISTORICAL/PROVISIONAL — v2-trace 由来の旧導出。E0v2 最終値で一括更新予定〕900-step episode ≈ 113 s ⇒ ~30 ep/h/proc、N=4 で ~120 ep/h。0.5 MB/ep (Stage-A :125) ⇒ ~60 MB/h、24 h ≈ 1.4 GB。
 - **rotation 方針: 削除しない**(容量が問題にならない)。retention = run 単位 dir、disk 残量 < 50 GB で supervisor が
   loud warn (削除は人間判断 — 学習データの silent destruction をしない)。
 - E0 で steps/s を再実測後、本節の数値を更新 (PROVISIONAL)。
@@ -109,6 +109,20 @@ rollouts/
 | 決定論 (R2-4 npy level) | 同 (as-run sha, fingerprint, derived_seed, workload) 2 回 → **trajectory .npy file sha 一致** (v1.5 D-1 批准形) | **hard、 不一致 = exit2** |
 | provenance (pN 条件 3/6) | **per-child**: unified env fingerprint 実値・loaded closure+self hash・recording sha・post-run hash・changed_during_run=[] / harness source as-run hash 前後一致 / 分母 in-artifact / rc 全 0 / trajectory nontrivial+finite | 欠落 = errors/exit2 |
 | 正対照 (pN 条件 5) | **注入型**: CPU 0-flat injection → detector が非ゼロ exit する自己テスト + dead-PID GPU=0 対照 + missing GPU/RSS/overlap/closure/fingerprint/race = fail-loud | 自己テスト不発 = exit2 |
+
+### §7.1 E0v2 exact bars (run 前固定、pN CONCUR-WITH-FIXES 2026-07-16 21:0x — 後付け判定防止)
+
+1. **memory 線形 (式を一意固定、v1 の 1.25 係数を carry)**: `max(N4 per-proc GPU peak) ≤ 1.25 × max(n1_a, n1_b GPU peak)`
+   **AND** `max(N4 per-proc RSS peak) ≤ 1.25 × max(n1_a, n1_b RSS peak)`。いずれか超過 = errors/exit2。
+2. **n4 window overlap > 5.0 s** (共通区間)。以下 = errors/exit2。
+3. **trajectory 検査**: finite = **全要素** np.isfinite / nontrivial = `max_t |q(t) − q(0)| > 1e-6 m` (全 child)。違反 = errors/exit2。
+4. **注入型 CPU-zero 自己テスト**: **別 subprocess** に人工 0-flat CPU 系列を与え、detector が期待どおり exit2 することを
+   親が確認 = self-test PASS。⚠ この注入 subprocess の exit2 は【自己テストの成功】であり、**実 run の overall exit を
+   FAIL にしない** (self-test 結果 field として分離記録)。self-test 不発 (注入が exit0) = overall errors/exit2。
+5. **unified fingerprint = v4 67-key 機構** (explicit core ∪ actual loaded-closure scrape ∪ static scrape) を **per-child 実値**で
+   記録。**n1_a と n1_b の fingerprint 値一致 = hard 条件** (不一致 = exit2)。
+6. **artifact 追跡**: 全 result/closure/status/traj を bank 対象に列挙。**v1 path (`forkb_e0_runs/`・`forkb_e0_scaling_result.json`)
+   は不変更** — v2 は `forkb_e0v2_runs/`・`forkb_e0v2_scaling_result.json`。
 
 **I0 acceptance へ移管 (POST-E0 DESIGN AMENDMENT — RULINGS v1.5 N-1 / v1.6 R2-4-b。E0v2 の PASS 数に数えない):**
 | leg | 内容 | 由来 |
