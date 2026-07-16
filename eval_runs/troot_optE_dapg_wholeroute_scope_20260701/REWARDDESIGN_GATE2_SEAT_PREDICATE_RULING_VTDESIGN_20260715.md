@@ -379,3 +379,49 @@ S字 in-band 優先: dx=3mm z=829 を選択=True / 無交差: fail-closed=False 
 
 ### §S3.4 chain
 実装（%12、I3+I4 fix + fixture 化）→ **p5 delta 再 verify**（§S3.1/S3.2 条項のみ — 全再走不要）→ `/pre-check` 再走。**§S 継続**（解除 = 再走 PASS 後）。gate ② 完了条件に (a)(b) 実装 + (d) containment 設計が入った点 = concur（I1/I2 の帰結）。
+
+---
+
+## §S3.5 🔒 p5 delta verify verdict — I3/I4 実装 = **CONFORM — PASS〔p5 設計軸、§S3.1/S3.2 条項のみ〕**（2026-07-17 05:2x、対象 = `dfbddb4777` + `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` + `gate2_rerun_i3i4_probe_result.json` + `test_route_reward_identity_guards.py`）
+
+**verify 方法（artifact-first + 独立再現 3 legs、p5 自走）:**
+1. **unit tests 自走** = `env_isaaclab7` 直呼び **10/10 ALL PASS・exit 0**（%12 の V1/V5 と独立に再現）。
+2. **probe 自走** = script を scratchpad 複製・出力先隔離で post-fix code に対し再実行 → **banked json と byte 一致（`ts` 除外・完全一致）**。banked artifact は非破壊（working tree clean 確認済）。leg A 対称差 = {} / leg B escape post-onset 0 / leg C 81-cell feed 側 straddle 総数 0・seat_k hist {25:1,26:15,27:19,28:17,29:2,32:9,33:9,34:9} を replica で再現。
+3. **V3 grep 自走** = `_crossing_x_dev` @ `newton_route_env.py` = def `:1426` + obs 呼出 `:1568`（+comment `:1565`）のみ — reward/termination 消費者ゼロ。standing 化 = `test_crossing_x_dev_is_obs_only`（`inspect.getsource` で `_compute_rewards_dones_batch` + `_c1_escape_after_seat` の source に参照ゼロを常時 assert）。（%12 doc の「obs :1566」は comment 行 — 実呼出は `:1568`、cosmetic のみ・非 blocker。）
+
+**§S3.1（I3）条項別:**
+| bar | 判定 | 根拠 |
+|---|---|---|
+| escape は `_c1_retention_m`/`_seat_metrics(C1)` の identity dx を読む | ✅ CONFORM（bar より強い） | `:1616` `dx_c1 = _seat_metrics(cable_pos, _C1_XY)` → seat 述語 `:1618` と**同一の局所変数**が `:1645` で guard に渡る = 同じ計器どころか**同じ測定値・同 step** |
+| 式 `(dx==MISS) ∨ (dx>bar)` | ✅ CONFORM 逐語 | `:1450`。abs() 不要は正当（`_seat_metrics` dx = \|·\| 非負、`:1398` docstring）。MISS は定数 verbatim 伝播ゆえ `==` 安全。sentinel>bar 網 = static test 化 |
+| obs[57] 意味論 不変 | ✅ CONFORM | `:1568-1569` 同一計算・None→0.0 不変（comment のみ変更） |
+| `_crossing_x_dev` 消費者ゼロ grep assert | ✅ CONFORM+standing 化 | 上記 leg 3 |
+| fixture 2 本 REJECT test + canonical divergence 0 | ✅ CONFORM | I3a/I3b test（fixture 幾何を p5 自読で検証: I3a = identity 窓 {26,27} 無交差+in-bar stray seg5 / I3b = identity dx=0・z 帯外+窓外 70mm in-band stray〔CC2-9 制約遵守〕）+ leg A 厳密一致 + **V6 3/3 反転記録**（committed script+output、旧 signature ゆえ post-fix で loud に壊れる = 意図） |
+
+z-scope 明文化（escape = lateral+crossing-loss のみ、z 逸脱は G6 z-band が封じる）= 裁定の機構節 scope と一致（docstring `:1436-1448` に契約化）— concur。
+
+**§S3.2（I4）条項別:**
+| bar | 判定 | 根拠 |
+|---|---|---|
+| C2 walk を routed 側（index ±）に限定 | ✅ CONFORM | `:1368-1371` seg_range 分割 — clean partition（∪=全 seg・∩=∅、境界 seg pin−1/pin の帰属正しい）。退化（pin=端）→ 空 range → 既存 fail-closed () |
+| 方向 = route 設計定数 1 bit | ✅ CONFORM（bar 超過） | `route_env_config.py:158` `ROUTE_C2_SIDE_FROM_PIN=-1` + **構造導出 2 anchor**（build dir Y-ascending node0=低Y端 + C2Y<C1Y ⇒ side=sign(C2Y−C1Y)）+ 実測接地（313 frame seg16<pin27 / 81-cell）+ 将来 route 再接地義務 + N-clip per-hop scope 注記を comment に格納 |
+| positive control「canonical 側==定数」assert | ✅ CONFORM（bar 超過） | leg C = canonical だけでなく **81/81 cell**・**非循環**（raw npz の straddle 直接計数 — 制限計器を経由しない）+ 定数==−1 assert。replica 再現済 |
+| leading-span leg 不採用 | ✅ CONFORM | diff に不在 |
+| feed-drape REJECT test | ✅ CONFORM+追加 | drape test + **tail-return fixture**（16/81 cell 実在形状 — walk の load-bearing 性を将来編集から保護、CC3-R3）= 有益な超過 |
+| fail-closed 不変 | ✅ CONFORM | walk 本体無変更・空候補→MISS 経路保存 |
+| MED carry（3.183 vs 3.5mm）— bar 不動 | ✅ 確認 | diff に閾値変更なし・leg A で 3.183 再現 |
+
+**要判断 ① — obs[49]/[58]/[59] への I4 継承 = 🔒 RATIFY（継承は許容でなく【要請】）:**
+- 供給源 on-disk 確認: `:1549-1552` `_seat_metrics(cable_pos, active_xy)` → [49]=hypot(dx,zgap) / [58]=zgap / [59]=dx。post-G4 active clip = C2 ⇒ I4 が流入する。
+- §S3.1 の原則そのもの（identity は**測定の属性**）: obs が reward と**別の identity** を読めば、I3 で閉じた seam を reward↔obs 間に再生産する（policy が「reward が決して与えない seat」を観測する = reward-obs 整合性欠陥）。§11 c2_honest auto-follow 前例の範囲内。
+- **obs-space 変更ではない**: 次元・layout・単位・契約は不変（§S3.1 の scope 限定は「obs[57] の計器 swap をしない」であり、共有計器の修理が consumer に伝播する事を禁じない）。[57] global 不変・[60:62] C1 側は I4 無関係（C1 identity 無変更）・I3 は測定を変えない — 継承先列挙 {49,58,59} は**完全かつ過不足なし**。
+- 記録済データでの divergence 0 は legs A+C で**証明**（replica 再現）。runtime で値が変わり得るのは「旧 code が feed-drape を誤 credit した状態」のみ = 閉じるべき欠陥そのもの。leg D として loud に宣言した記録規律 = concur。
+
+**要判断 ② — ingest 時 runtime assert（frame-0 node-0 Y < pin Y）不採用 = 🔒 DECLINE を批准（本 chunk）+ (a)(b) chunk へ optional 候補として登録:**
+- 残余 hole = 「build 方向の code 変更 + probe 未再走」の合成のみ（node index は静的 — DR/INIT_XY_NOISE は並びを変えない）。route 変更側は定数 comment の再接地義務 + chain 内 probe が覆う ⇒ 追加被覆は LOW。
+- 配置の正しさ: この検証の自然な家は **reset 時・pin 配線面 = (a)(b) lifecycle chunk**（per-world witness と同居）。今入れるのは他 chunk の面への scope creep（chunk 分離規律の鏡像）。
+- §S3.2 の字義に反しない（assert は前提検証であり runtime 推定でない）ゆえ**恒久却下ではなく繰延**: (a)(b) 設計時に「pin 配線時 1 回の `ys[0] < ys[pin_seg]` fail-loud」を候補 leg として審査（非拘束・その場で採否）。
+
+**付帯:** (i) RLENV_PIN_DESIGN への pointer 2 件（§21.4 定量裏書き / §21.11.1 identity-persistence coupling）= §S3.3 事前授権の範囲内・内容忠実 — ACCEPT（coupling 側は (a)(b) verify で再照合する）。(ii) `route_env_config.py` の未 stage 外来 hunk 2 件 = p5 自読で **comment-only を確認**（代入値 60/61/slice 不変）・内容は on-disk env code `:1573-1577` と事実整合（stale comment の修正）— 挙動非影響、provenance 衛生は manifest 側の記録で足りる。
+
+**chain 位置**: 本 verdict で §S3.4 の「p5 delta verify」leg = **閉**。次 = **`/pre-check` 再走**（%12）。**§S 継続**（解除 = 再走 PASS 後）。gate ② 完了にはさらに (a)(b) 実装 + (d) containment 設計（I1/I2 帰結）。本 verdict は p5 設計軸 conformance であり、adversarial 軸は /pre-check 再走が担う（chain の分業どおり）。
