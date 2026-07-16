@@ -324,3 +324,12 @@ S字 in-band 優先: dx=3mm z=829 を選択=True / 無交差: fail-closed=False 
 - ⚠ 実装 note（%12 → /pre-check 再検）: monotone 判定の tolerance/最小 run 長は、S字の Y 単調性を壊さない範囲で（S字は X 曲率ゆえ Y 単調は保たれるが、数値 wobble に小 tolerance）。edge（cable 端が C2 近傍で span が短い）は「available run で単調」に緩和。
 
 **✅ FM3（phase-gate drop）は seat identity と独立 ⇒ 先行実装 CONCUR。**
+
+---
+
+## §S sweep-status 追記（2026-07-16、%12 開示 `c60d311f96` + manifest `I0A_SCOPE_MANIFEST_RSTECHLEAD_20260716.md` を受けて）
+
+1. **status**: FM3/FM4 tighten の**実装が HEAD に landed（sweep 経由・批准ゼロ）** — `_seat_identity_segments` + `_seat_crossing(segment_indices=)` 拡張（FM4）/ `_c1_escape_after_seat` post-G3 fail-closed（FM3）+ pin-witness triple + (d2) plumbing fix。**gate ② = FAIL のまま不変**（landed ≠ verified — manifest disposition「intentional-keep + 非批准」に concur、revert 不能理由 [peer 実装の tree/HEAD 双方消失] も妥当）。
+2. ⚠⚠ **p5 追加所見（manifest に無い、私の grep）: 巻込みコードは flag-gated でなく【HEAD で live】** — `newton_route_env.py:1395-1396`（seat predicate 本経路で identity+crossing を無条件使用）/ `:1627`（reward loop 内で `_c1_escape_after_seat` を無条件呼出）。⇒ 🔒 **run-hygiene 規則（owner chain PASS まで）**: HEAD で走る全 run の seat/G3+/escape 出力は**未批准 reward 意味論による採点** — banked-semantics を主張する run は (a) pre-sweep commit に pin するか (b) 未批准述語への暴露を artifact に loud 宣言する。⚠ I0-a の byte 一致は **physics 軌道**の一致であって reward/latch 経路の等価性ではない（FM3 が done/latch に触るなら rollout 挙動も変わり得る — /reward-design 再走の検査対象）。
+3. **owner chain 不変**（LEDGER:57）: `/reward-design` 再走 → **p5 再 verify**（本 doc §identity/monotone 設計への conformance 照合 — 上記 tail の設計形が bar）→ `/pre-check`。**著者 pane 未特定は chain を block しない**（判定は on-disk content に対して行う — provenance と content は独立軸）。
+4. spot（後方互換）: `:1422` の旧 2-arg 呼出は `segment_indices=None` default で互換 — 署名拡張自体の破壊は無し（詳細適合は chain で）。

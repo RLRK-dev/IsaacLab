@@ -32,3 +32,15 @@
 - **commit 前 hard step**: `git diff --cached --stat` + per-file hunk 数を意図 scope と照合し、**意図外 hunk が
   1 つでもあれば add をやり直す** (path 単位でなく hunk 単位の検査。`git add -p` 相当の規律)。
 - shared file の edit 警告 (「file has been modified on disk」) を見たら、**bank 前に必ず `git diff`全読**。
+
+## AMENDMENT 1 (2026-07-16、p5 追加所見の反映 — 本 manifest の欠落訂正)
+
+⚠ **巻込みコードは flag-gated でなく【HEAD で live】** (p5 実測: `newton_route_env.py:1395-1396` seat 本経路で
+無条件 + `:1627` reward loop で `_c1_escape_after_seat` 無条件呼出) — 初版 manifest はこの軸 (在る ≠ 有効) を
+記載していなかった。帰結:
+1. **run-hygiene 規則 (p5 §S 裁定、REWARDDESIGN_GATE2 doc)**: owner chain PASS まで、HEAD run の seat/G3+/escape
+   出力 = **未批准意味論**。banked-semantics を主張する run は pre-sweep commit へ pin するか、暴露を loud 宣言。
+2. **I0-a byte 一致の scope 縮小 (正確化)**: 一致は physics 軌道のみ — **reward/latch 経路の等価性ではない**
+   (FM3 が done に触れば rollout 挙動差があり得る = gate ② 再走の検査対象)。
+3. owner chain (= /reward-design 再走 → p5 再 verify [bar=identity/monotone 設計形] → /pre-check) は著者未特定でも
+   block されない (content 判定、p5 裁定)。`:1422` 旧呼出 = default 互換 (p5 spot 済)。
