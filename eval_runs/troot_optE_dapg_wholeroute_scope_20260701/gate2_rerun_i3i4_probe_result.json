@@ -1,7 +1,21 @@
 {
- "ts": 1784232346.9343007,
+ "ts": 1784235268.5893342,
  "code_under_test": "post-I3/I4 (escape reads identity dx; C2 walk routed-side-restricted)",
  "route_c2_side_from_pin": -1,
+ "provenance": {
+  "git_root": "/tmp/claude-1000/-home-rlrk-IsaacLab/d1ff019e-1952-4c6e-895a-4faa747f6ab3/scratchpad/wt_i3i4_regen",
+  "git_head": "bb82ae7a761b3448d3016f2b06e8088d99ea65d3",
+  "closure_git_status_porcelain": []
+ },
+ "source_closure_sha256": {
+  "/tmp/claude-1000/-home-rlrk-IsaacLab/d1ff019e-1952-4c6e-895a-4faa747f6ab3/scratchpad/wt_i3i4_regen/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/gate2_rerun_i3i4_probe.py": "01434ef05c5b76cfa2ad3cf4c852c40c257e4d7883818698cb9eab67b18a98db",
+  "/tmp/claude-1000/-home-rlrk-IsaacLab/d1ff019e-1952-4c6e-895a-4faa747f6ab3/scratchpad/wt_i3i4_regen/thread_isaac_lab/configs/task_config.py": "1a0851db9cfc2c740c98821c73c84f5405d1cc96df5fe22a71f66906bb1762bc",
+  "/tmp/claude-1000/-home-rlrk-IsaacLab/d1ff019e-1952-4c6e-895a-4faa747f6ab3/scratchpad/wt_i3i4_regen/thread_isaac_lab/envs/cable_orientation_utils.py": "2cbe8a3eb17338ab5f4e39d72ae701a9d81ab1e0887fb380f3e9957f32be4845",
+  "/tmp/claude-1000/-home-rlrk-IsaacLab/d1ff019e-1952-4c6e-895a-4faa747f6ab3/scratchpad/wt_i3i4_regen/thread_isaac_lab/envs/newton_route_env.py": "e73c1a6ca311cb48cdbff048ff8c5da523cdd3ef03c1be223846b4e167b54e65",
+  "/tmp/claude-1000/-home-rlrk-IsaacLab/d1ff019e-1952-4c6e-895a-4faa747f6ab3/scratchpad/wt_i3i4_regen/thread_isaac_lab/envs/newton_skill_env_base.py": "e7a67ee34c50b78ff02baba4ab1bfe7b6002b1b2dfee15948e2c6795ad954fb9",
+  "/tmp/claude-1000/-home-rlrk-IsaacLab/d1ff019e-1952-4c6e-895a-4faa747f6ab3/scratchpad/wt_i3i4_regen/thread_isaac_lab/envs/route_env_config.py": "ca66855408f52d43011165c97e62577bb6c8a0601c6a8e485760e54d56a0341c",
+  "/tmp/claude-1000/-home-rlrk-IsaacLab/d1ff019e-1952-4c6e-895a-4faa747f6ab3/scratchpad/wt_i3i4_regen/thread_isaac_lab/scripts/test_newton_clip_routing.py": "2e1fc1d84539877f91cc75eb1f6443a628dfb0743bd24cb7f0e8a1ab956779dd"
+ },
  "leg_A_canonical_anchor_equality": {
   "PASS": true,
   "got": {
@@ -37,6 +51,337 @@
   },
   "note": "zero feed-side straddles => I4 restriction removes nothing on any recorded cell => per-frame instrument equality on all 81 cells (proof); routed side < seat_k everywhere"
  },
- "leg_D_obs_inheritance_declaration": "I4 propagates into obs[49]/[58]/[59] via _seat_metrics (active clip = C2 post-G4); canonical divergence 0 by legs A+C; surfaced for p5 delta verify",
+ "leg_D_obs_inheritance_declaration": "I4 propagates into obs[49]/[58]/[59] via _seat_metrics (active clip = C2 post-G4); canonical divergence 0 by legs A+C; RATIFIED by ruling sec S3.5 item 1 (inheritance is required by the same-instrument principle)",
+ "leg_E_evidence_closure": {
+  "PASS": true,
+  "pre_post_source_bracket_changed": [],
+  "input_manifest_aggregate_sha256": "fa0e336380d597721c1026cb737cdb439e2d1e28481c71af47585ce8132ff0a4",
+  "input_manifest_sha256": {
+   "cell_x-10_y-10": {
+    "route_demo_raw.npz": "f348c90e8cf6e4387c6c4e759edb8839692a583bbab08522f8ba83e1ba89847e",
+    "route_c2_pin.json": "23b4711f11ab4e81a03a82b61ebe12843c8f940478cc78455069bb4bfc0a5e96"
+   },
+   "cell_x-10_y-15": {
+    "route_demo_raw.npz": "ffd59e5f43e0cf338ee2af6c1535771d5ae35b97b85a49fdb46749b3d41d764e",
+    "route_c2_pin.json": "0722bf85d793cb3e7c8037a7d160e63002f87841a613e3633fede0d651d75e61"
+   },
+   "cell_x-10_y-20": {
+    "route_demo_raw.npz": "1b61f82e1ed2af29a93d2b16c496e0d17fe86d34e2f7339485158a614f00f7d1",
+    "route_c2_pin.json": "a6be15f10d05549e654c477f44031f6fe8ad9f8fe130c856d484d29a6b4f5006"
+   },
+   "cell_x-10_y-5": {
+    "route_demo_raw.npz": "a4f84b0c8e83603dce9155624f5b7511def6ecd51350b8a3057b30f5b892d19c",
+    "route_c2_pin.json": "8392837239d8cd3a199a565d5aca2f03777feb58ec4d5c8bd34278b77dfdb8a9"
+   },
+   "cell_x-10_y0": {
+    "route_demo_raw.npz": "fd9af0ba52c9f7a84ee615d7f10a80b913a988b60eb8f7b3740e70bbefd81ba4",
+    "route_c2_pin.json": "fff1ae34a09df569c5b5d82ce4e3ff8767b9028167c9105f3f38b94abbbd2b45"
+   },
+   "cell_x-10_y10": {
+    "route_demo_raw.npz": "bfe2c0565a51ea2e10ee4b52b44115ebf2c95fabb118b59830b4f22bbc4beedf",
+    "route_c2_pin.json": "1b6b10c6e99d69c84f6e457bd8a0db5dbaf1a116b9189e5834a947bcf963639e"
+   },
+   "cell_x-10_y15": {
+    "route_demo_raw.npz": "22f459f8113649a12451b65f629d3af75b76bc14bf3d87e24628fdf25238ed97",
+    "route_c2_pin.json": "30e6b87733b2224b29e591f09636a6ecb5f2eec20a7cbad10c46748449c90fd2"
+   },
+   "cell_x-10_y20": {
+    "route_demo_raw.npz": "016a02d3da471552b1f25d17ade00f3bac387fd41bfad5d34ab0f549189891b2",
+    "route_c2_pin.json": "4d53a5c9baab1d2ddcb83f9e862737dd71614e183062c36ff99c9d9cad948e7e"
+   },
+   "cell_x-10_y5": {
+    "route_demo_raw.npz": "bd1edf1150c7ff38ef8be19134d41e17cb94c2265bf42fabdd9f550c7110ab57",
+    "route_c2_pin.json": "a2b532243118f720e402858cc8511cbfd4a5351f09ff1167ea34a4502f6ba84d"
+   },
+   "cell_x-15_y-10": {
+    "route_demo_raw.npz": "ea704345851f993fb6eb2684ee800a824d43d363d4755ad530c0a4fa6946f069",
+    "route_c2_pin.json": "029f4cc8a13806329fbf0b48c440be705e872238fe58df97444ca44074f4bfc1"
+   },
+   "cell_x-15_y-15": {
+    "route_demo_raw.npz": "8468f81cd92a852949293499c548ffaf59b8a0a3d805dc9e7e7c3dfd18dd5a0b",
+    "route_c2_pin.json": "012f8f2636a962b5344688159dfce058da87e74a19cba86fe2f7cd2e5605b52c"
+   },
+   "cell_x-15_y-20": {
+    "route_demo_raw.npz": "4926d32c31bb6b32023eb9136d0ece27a466254afaf6de46fbaa810ea1583877",
+    "route_c2_pin.json": "96d878fffd588787cc496b90c4c694ff302a300ec527e4b4b0d7b6a9d48d3acb"
+   },
+   "cell_x-15_y-5": {
+    "route_demo_raw.npz": "642dfe5fc65f7c8847c213b49a6ae83f5e4e0dbe414ff4a515435f0366ea7b03",
+    "route_c2_pin.json": "d7256e3fcf4dfd6823138afd59bc1f6e1c166152a051136f0fc970fef7bd8b0f"
+   },
+   "cell_x-15_y0": {
+    "route_demo_raw.npz": "8d1effe2e001d7982146ecf7621e6158871197f6ee5e6c4a6d4b91a4428fc7bb",
+    "route_c2_pin.json": "97c9a31b99107c52499d41870d4591866e52320ece9ddb83698a4e1d0654181e"
+   },
+   "cell_x-15_y10": {
+    "route_demo_raw.npz": "5fc975584e657de50edd6baa7de2fbc60342f9cc1194a157d82b3b24bd456556",
+    "route_c2_pin.json": "b59e1ad6e5f5dc68f6159fb79f8af89f3f43bd1325c0c5e89d169a63ab6c9607"
+   },
+   "cell_x-15_y15": {
+    "route_demo_raw.npz": "0838e3e28807f21bde14d8b1e631b5861fc9dc166f751e326d106e4dc866a32a",
+    "route_c2_pin.json": "fa88dd7ff94784128936e5deca66c53158e7b59009b2264f3051bf6577643aee"
+   },
+   "cell_x-15_y20": {
+    "route_demo_raw.npz": "efbd71295f22d7a7d25b56ae172dbd8b395e5377af02e913344a9bd2cc9c06ed",
+    "route_c2_pin.json": "494e7687780c1f393af4ec44cc6dacc21fb0d341951afc8fe4ecb605b332f31d"
+   },
+   "cell_x-15_y5": {
+    "route_demo_raw.npz": "4d4bab40a986b80d17604393ecfaae77dd95109d7653a9a369b6f6a3f2232e22",
+    "route_c2_pin.json": "7fe71f10bc6988f226ddcf0c91efbae56317027f8014a952833efc99e7fe8e7d"
+   },
+   "cell_x-20_y-10": {
+    "route_demo_raw.npz": "3b954a80a906f16e12e612740d3cf37478cd7879eb900609c2ad6453b45a7035",
+    "route_c2_pin.json": "c11af0d944bcdaa03ce0257144f7da014d5393d6338ecb24436a346711b3dda9"
+   },
+   "cell_x-20_y-15": {
+    "route_demo_raw.npz": "3a7170100550c67e515bf0a0c505b0d4e35bffaeac73d370408568e022e13f5b",
+    "route_c2_pin.json": "064701ec7843bfddc9601e99784704912f82cde9232078193494da558cd84477"
+   },
+   "cell_x-20_y-20": {
+    "route_demo_raw.npz": "1c5ee8fe6c793e6e317b4c06045022fb84041313fff36360dab8f223e1f10e36",
+    "route_c2_pin.json": "f4b1071dd12ceefafad271fd7018b434182f6bde7fd9e9380a633b366847ccfb"
+   },
+   "cell_x-20_y-5": {
+    "route_demo_raw.npz": "2fd9c219d3a7426a1a56de8160faf72633a7fc13e80fb49915185f8cd5ed426e",
+    "route_c2_pin.json": "a073dacdda872057322384ee02a6a711e0c11d861edd1fc133b98b869f385e06"
+   },
+   "cell_x-20_y0": {
+    "route_demo_raw.npz": "ae1326dae2d6043cb314c50d86832e8da222dc613dc94d80fa07a9872faad99b",
+    "route_c2_pin.json": "891e6c181a9c86f8a1e4e6f8d8c0a2220359795f7debd627290fc966aaac48b2"
+   },
+   "cell_x-20_y10": {
+    "route_demo_raw.npz": "eb563371824b4b55167f4aa305d83bdbd595e06a4729d92a8d4f3e0db72c7576",
+    "route_c2_pin.json": "fae325f345682b22548a9746d7cdddf84125e9beddb2e6f84a1cac6f6f1ed57a"
+   },
+   "cell_x-20_y15": {
+    "route_demo_raw.npz": "3c385d70122fe3b27fa8d195b9d2464c06c2eca9130395afb0739e243b24e0fe",
+    "route_c2_pin.json": "ddcbb0dc70b9aad197437bbe3ab655a20f43fa8d90cdf17b040aebc26628d33d"
+   },
+   "cell_x-20_y20": {
+    "route_demo_raw.npz": "47c0e3eb4a962c7e4264aaecc06bf82bbf74caff9c5602bb0b8d3645b94c15b2",
+    "route_c2_pin.json": "377d9edc81ee6e1b3bf6cf19bc0426be8d9734f1df37e62184fb4701ecce5931"
+   },
+   "cell_x-20_y5": {
+    "route_demo_raw.npz": "6ead8465a7d9fa2ebdb46990156c4d43ae75b434de36f72ec4eeb2304012c9c5",
+    "route_c2_pin.json": "1ca84161dbbcec15fb1d14c447e2d51b9d4892f6e90646f078f8131ec6a88986"
+   },
+   "cell_x-5_y-10": {
+    "route_demo_raw.npz": "57aac20240be09f467bd061be8d9873d3470b58489156fecb54966e89497064e",
+    "route_c2_pin.json": "53e4d3f387c456d5659bb7b9badab87225b2697a7bc05486b2e5307b64d6b65e"
+   },
+   "cell_x-5_y-15": {
+    "route_demo_raw.npz": "7539ed646629f893d17e1764263ecd5ebcdf34be4a9fd58fe1c8a6d47f12e1ff",
+    "route_c2_pin.json": "99541baf426c7a54b4c0bef4aa164dbaa32de4d5fa6d85125c258fa1931136fe"
+   },
+   "cell_x-5_y-20": {
+    "route_demo_raw.npz": "e24a3b6a8be1297025b53236d9f07b7cb669782d0c0c8acc3cbf8059c977c0ca",
+    "route_c2_pin.json": "9c5a67b99731fa4d5057e0d342981b7607d5d2132f027b481142d07f2945fb4d"
+   },
+   "cell_x-5_y-5": {
+    "route_demo_raw.npz": "22204807f552a627d8c197a8a163f1fe5e81f6e7a642899612c927c0b2f307ee",
+    "route_c2_pin.json": "5095b0eaeb32af0a0dcb7de48b53fe659546f5cc376f1ebd6ac368e4a6fe3ee3"
+   },
+   "cell_x-5_y0": {
+    "route_demo_raw.npz": "b69906b27efd8b3a6671adeaebff1d8acd51febcc3d934dd28dfc90239c1cad8",
+    "route_c2_pin.json": "f01c9c93d336bc9e5a65a2dc07b40cb785784aa18d6c347148342d71ded100f9"
+   },
+   "cell_x-5_y10": {
+    "route_demo_raw.npz": "a11e407426651e6b640f32213c0c1ed44033432ee80e492a7e7c736eaba3dde4",
+    "route_c2_pin.json": "b5f4042903e22d14165b8ba809c5eed8a7384c5f4132aa08faf77c9cc30b0495"
+   },
+   "cell_x-5_y15": {
+    "route_demo_raw.npz": "e444d8fcea398dc70a326d4f55ceb6303db36fa52da5f018c99301aadb06e52d",
+    "route_c2_pin.json": "95dab607785d3f5cf001e202a2442db93ac8c5043b0fa66bd16eb6ebc8243eb5"
+   },
+   "cell_x-5_y20": {
+    "route_demo_raw.npz": "4c22d8545f32e3c0e949cd3dd49a676c2419c97608afb3c6136fd5dae9a1f902",
+    "route_c2_pin.json": "7f566416a61fc29489d2c9bb2f9bc75af26eb26c40ecdad00afe85319f59055f"
+   },
+   "cell_x-5_y5": {
+    "route_demo_raw.npz": "8891a801ad3e0ca4e9cd123b4ddd7c77d1babe1b287bee1b4576bc85d51cc377",
+    "route_c2_pin.json": "c485ea086bf4657b946fa9f0c3b46729e6575283c5aab28a1fddbe1dcf8536ff"
+   },
+   "cell_x0_y-10": {
+    "route_demo_raw.npz": "9e1fde19a3f5dd7cefafef59e906815fedb5a020a3d0f5807af6738d84cb52d8",
+    "route_c2_pin.json": "35a548c0e588777a44ba4d467f894cf967c3d67d52f1c2d5f4e0eb014ba7c0ec"
+   },
+   "cell_x0_y-15": {
+    "route_demo_raw.npz": "b46572edf46e27ab879171c8da5d2d59da81eded396bf0c0dfc1574c177a7c4b",
+    "route_c2_pin.json": "3a26124fd8d6d3cd845ac5320dec850c55739c2014abdd3a268c10e97e8570f3"
+   },
+   "cell_x0_y-20": {
+    "route_demo_raw.npz": "0ad606a19d4b7ca91d372eef3bb0bf15392d215b33334176d84ed76b1290146d",
+    "route_c2_pin.json": "c4213afc21465ce2951f4ae274d42bef73937bef03f5ee6307260be3573b793e"
+   },
+   "cell_x0_y-5": {
+    "route_demo_raw.npz": "81e59343131f92261e7d9abb32834c735101ac1abdb80a955ff4692472309ce3",
+    "route_c2_pin.json": "2132a919575d951f3c951ef86f087fc359c4ada66687c60c40add92138f2946e"
+   },
+   "cell_x0_y0": {
+    "route_demo_raw.npz": "5f1c3f9238f45057011cfad1d010ac43000cb179b76b61d0461733a9075416cf",
+    "route_c2_pin.json": "4feef56cb60a1a7332b530ada178e24abda27f60a71e78da0a5fa627c0c45b5f"
+   },
+   "cell_x0_y10": {
+    "route_demo_raw.npz": "a049f515d2fb1d037bca3738c98bf9d8461331798b7b7bc63df36085d80ef4d3",
+    "route_c2_pin.json": "9cb3dd1142e4d47b1dab776656a3719d343648e1237b67eabd948c03da3726e6"
+   },
+   "cell_x0_y15": {
+    "route_demo_raw.npz": "0fc40f03cc0459c12526afb2c26fe94d5fbf37f0209e030bb9849a3101ff0933",
+    "route_c2_pin.json": "bd22a2d8c5d494c11402b685dedcc02ae640c1c46726f559c11064e164a2d186"
+   },
+   "cell_x0_y20": {
+    "route_demo_raw.npz": "099b8e1a6be9e6b3307213ecbe3407a78978368b53d2363f267fe963e5f1e54a",
+    "route_c2_pin.json": "c9fd278d3a363356992079147421d6bef63e02f9911e754224edd55bc45c3776"
+   },
+   "cell_x0_y5": {
+    "route_demo_raw.npz": "50763f65779247a8251a6166cc51ba0c42b126632b4db600920cdf63f2317423",
+    "route_c2_pin.json": "7d876be728240c7188f6c15b1435743b8bf14f286f59e44e035437ecc74e2f78"
+   },
+   "cell_x10_y-10": {
+    "route_demo_raw.npz": "3c095abb841b96c9890944c5932a2b8af042288310166274162feb64101b5b33",
+    "route_c2_pin.json": "466cce923b7125466a42e136fb5661eab31e586b5ff759664edcd67a6e87a808"
+   },
+   "cell_x10_y-15": {
+    "route_demo_raw.npz": "3b74fd4cccbfe55098a2fadeb69e26789789631c3ba7e6de3f3e2c178e1b7d03",
+    "route_c2_pin.json": "743787a95c8c07d5f9a7bcf3c29692443f0282455720d9c2d9f74dce0f91b644"
+   },
+   "cell_x10_y-20": {
+    "route_demo_raw.npz": "e93b454cf4c6d27a6dbfd0f3ac55f07cd8f86c6d8f8c32cd68f58cd5d15bb8d1",
+    "route_c2_pin.json": "00da1ead548b2cd5a2ed476da3ddc5efe2ebf1d91ef9a19b2539b915e58aa5bd"
+   },
+   "cell_x10_y-5": {
+    "route_demo_raw.npz": "cf9940d678d3e9cda7a7a3a546c2b5bab109e0db0daf9701f2a6bece5e7cc187",
+    "route_c2_pin.json": "af999eb1562b77ec42c0e51950ff8ea0f05d6fdcc6a852012bc2b602d8d1e04c"
+   },
+   "cell_x10_y0": {
+    "route_demo_raw.npz": "a17af72782ba00032d2f54887d1e5c8e0159ae53d89302ec02aec03fe995e12d",
+    "route_c2_pin.json": "36879f29dea5ced8a9b3273b19a172f6911d590db8228ad25f8a277ef03aa423"
+   },
+   "cell_x10_y10": {
+    "route_demo_raw.npz": "229905cf339a73f65c0a05bb8be0bf54c83fb3561e6c969968eb0ad89f652806",
+    "route_c2_pin.json": "ba4946e359747298f9b528a84071577f1dbe2657ae55a0b1a426b4bdd24af849"
+   },
+   "cell_x10_y15": {
+    "route_demo_raw.npz": "7082203c67e271c37bc675a63649f781ea261c43b5b6191fc4c5a7002b86248b",
+    "route_c2_pin.json": "fd1fe970cea92aa92ce77884662723c8b8aff9a73447a16039938a0a4b4a8567"
+   },
+   "cell_x10_y20": {
+    "route_demo_raw.npz": "e54b5510a9e0fa1ec6882f2f149559d71cc7c498429a4146913e64bf96d26d9d",
+    "route_c2_pin.json": "1f34091030ce6e23500f22a1303fcd1eb98d84e603a8d9ac5607b8affc545d01"
+   },
+   "cell_x10_y5": {
+    "route_demo_raw.npz": "413c94a725bdfffbfae7cb5435cf0075ab0d5c0d4a83c3b1fa84cee961f185c1",
+    "route_c2_pin.json": "10a817e7f85d5946feafc70e79ae28be21ddc6bb5313c3d66d8b1decbc8ada27"
+   },
+   "cell_x15_y-10": {
+    "route_demo_raw.npz": "10e65e6384234587aa274443913d8e4fdfa7c6934050b6a6af79718c6b6a6b92",
+    "route_c2_pin.json": "9d894fc622748548216a5a22053bc516e85e950d88187ea733912b33ae6a62f9"
+   },
+   "cell_x15_y-15": {
+    "route_demo_raw.npz": "9bf5c4071ac6c221c75e193d9b939d94c8fdafdbbe868a3e05c6f94ec172a936",
+    "route_c2_pin.json": "a7d94b31999cc10f0a9df5e3d50f03be817afbcea736ec0c2568e3279ce973e4"
+   },
+   "cell_x15_y-20": {
+    "route_demo_raw.npz": "6d8c1fb3783c80f4d9ae9c01a6a301fc70ca1d0990758dd4c58d443b8b86e166",
+    "route_c2_pin.json": "85869daa0c609881efb62c61419087dce48ebc9b32eae11f9cbc88cadaaa148d"
+   },
+   "cell_x15_y-5": {
+    "route_demo_raw.npz": "8e14030efdd6c643329c23c3cf5a3a3be882a1b42ead8ec05716adf81debb686",
+    "route_c2_pin.json": "c94c1fcb1229e893b37748708838a8ecd52633eebf3d6d77b24021ef98e70be7"
+   },
+   "cell_x15_y0": {
+    "route_demo_raw.npz": "712cbc37f52d7a89cf4731714d9039fa521817d87f55dac23fd37c104f8e3e85",
+    "route_c2_pin.json": "696fde2d9d4c89aa821bc3f45146e547d1daeee8554e03905e7fbeddeb1889a5"
+   },
+   "cell_x15_y10": {
+    "route_demo_raw.npz": "6f8e88e85014b03a7d3f3dbd380090db31346589baa43deb4822b354d0383207",
+    "route_c2_pin.json": "b98307ba0644f2b2d23aa16008c6526cbd6a28b312aef4f6fc45d4b1baf78e77"
+   },
+   "cell_x15_y15": {
+    "route_demo_raw.npz": "b75f8367684896498e2221f0f84ea292f3e2cc82e225caafe801e33315b8e056",
+    "route_c2_pin.json": "87267852bb25de9fc3ec551409363f8f9cfdc1aacf8651e340b781c91e497e6c"
+   },
+   "cell_x15_y20": {
+    "route_demo_raw.npz": "9fefd2bfd3206b8fa66edf0be088f7351ca743449923aa4df9d15e1ef75d8076",
+    "route_c2_pin.json": "ae12f3cbfe7498118a082a12b281f49969486c1e45b0139f5fe1a3e3f4240155"
+   },
+   "cell_x15_y5": {
+    "route_demo_raw.npz": "7af0a870c269bc2b58d5132b16be4e1f724f73d3a851dbc03d5385747c196e4d",
+    "route_c2_pin.json": "14824596feb32a0b4702774734b83fa3861660e95136d4e2ab49877197341566"
+   },
+   "cell_x20_y-10": {
+    "route_demo_raw.npz": "b9d34eb6e8419b8134d939a3430e947ea3ced6785e4356aedf3df5bb32c690e3",
+    "route_c2_pin.json": "948f99de40fddda72bc7fab7f10a42fb9532d40ace9f3a45ad62332bb6b3ef2d"
+   },
+   "cell_x20_y-15": {
+    "route_demo_raw.npz": "fff05d014ddbeca7f86ba4d5cf8f3a462628df8a3c4c4581d1cc517f674065f4",
+    "route_c2_pin.json": "e1bcc62f586596a347fd05be044bd32a4bdae6366a696be15f2b71a97c247c72"
+   },
+   "cell_x20_y-20": {
+    "route_demo_raw.npz": "72d4f9ef3028f5442a9f8bd823b498650f5a9cbbdbf2563d2282bc48a3aff73e",
+    "route_c2_pin.json": "c7d827ccd180cfd834a2d38b8aef23b1c58146caa9be357c8b85c15ac315afd9"
+   },
+   "cell_x20_y-5": {
+    "route_demo_raw.npz": "e66da7f1eb245dac9802f92982bae3f04f6fa089cb5c03a3324226939fec2d89",
+    "route_c2_pin.json": "5df6238d055a009f1719e60b9cb2ee427881ed06b4b65d299abdd726df350232"
+   },
+   "cell_x20_y0": {
+    "route_demo_raw.npz": "49d0d2d650e8c60d7dd4b7fc1b1bb17a30b9c22ae1bb96638c2492d55597f03a",
+    "route_c2_pin.json": "e067d4d5d8083adcad1976392f732554d3c54ee6f383de57aecdaa4771def61b"
+   },
+   "cell_x20_y10": {
+    "route_demo_raw.npz": "d0e700eb6180e710d560336546c4eb406eccfd29fc62b9c2fa20f76eff872746",
+    "route_c2_pin.json": "5e023cffa8ad68fc608d0b7317779c9e0d29d9b0285922fa3f7bed3ce92b379d"
+   },
+   "cell_x20_y15": {
+    "route_demo_raw.npz": "0a8bd586229189dc3897b93f855c7b23b64d6357ea3b88ad122d1de52bd40d45",
+    "route_c2_pin.json": "ee2ead7fcaf4a98e5ec80f4a167038a25d1c191436c5bd7bb00393790f30ce5b"
+   },
+   "cell_x20_y20": {
+    "route_demo_raw.npz": "93c076b34b0ed73a83aebbf82a5988e65afe0aae0170358cb84bd9c3dbf5c50b",
+    "route_c2_pin.json": "f69d6dbbe826ab61b83d13b984767f4c7de085bf70affc26a6ca36939eaf9a0a"
+   },
+   "cell_x20_y5": {
+    "route_demo_raw.npz": "3e20f4f210ae1abd72bc685727d55b10908bc56f90da645b6fdc9c6f6d20c39d",
+    "route_c2_pin.json": "20ff90ab590c0093ad71eb00b21fd6245e78207c406a03ecb1d29eaf26844b6e"
+   },
+   "cell_x5_y-10": {
+    "route_demo_raw.npz": "5f2cd03f72f9edb4dfb8dc53863c29fc37458d04ba3575d7395fa0138b6aab90",
+    "route_c2_pin.json": "fda6c16ea9e423c595b5d3fe929b248fb368ccc2623e501b24b54f7c9d8634be"
+   },
+   "cell_x5_y-15": {
+    "route_demo_raw.npz": "18e1a21c0c22f92dbc0accea851452fe88edd9f5eb0e50349fc693fdeca4f84e",
+    "route_c2_pin.json": "9e4ad63d5506b30294151e2978fc5b42a3fb9ed465d00715403b73b42a3b0d4d"
+   },
+   "cell_x5_y-20": {
+    "route_demo_raw.npz": "3472bc7c05391412e2c1ac014aa8a2f7cfabdb7351ad91a2fa4a7dc78b4b38e4",
+    "route_c2_pin.json": "ae08dfaa84352cee0d169d05f02d3e535c4735044692d3ebf0de881193806fac"
+   },
+   "cell_x5_y-5": {
+    "route_demo_raw.npz": "1fdb6a7a60cc14d483e6d5058c036b0e3f1692ebea37811bc7677574972a89ee",
+    "route_c2_pin.json": "7b8d225354b9f37d902284398322224b96e95a61c360b323ee3c915c6fa440df"
+   },
+   "cell_x5_y0": {
+    "route_demo_raw.npz": "305561560ba2092eda6969474f29472c0d8a8515c3c0e8dc7b44bedd343e68e0",
+    "route_c2_pin.json": "c3177eeeaefa151c47b197c1fe106a8837966f9ef8696651e56d48f8e4ab293e"
+   },
+   "cell_x5_y10": {
+    "route_demo_raw.npz": "f6ffc619964a0b48100c373ffe9ac63a1f362a370ee40ed9c9c215536f403610",
+    "route_c2_pin.json": "0351d1f0ef34e6471dba2c4790128c4a9efd19befad2abc5d20af49926013435"
+   },
+   "cell_x5_y15": {
+    "route_demo_raw.npz": "5c6cb2504ce7a7c012124824f9be3e63d698b71fee8dfeee041397504dca2602",
+    "route_c2_pin.json": "9b5d63772c457c4e35194ddfcd66b180e5f32c76b8d33c4470186c48294cba90"
+   },
+   "cell_x5_y20": {
+    "route_demo_raw.npz": "1ff8b8ce9fdce28b1d2855487d8b522c807f2b3310b335b66134aea9d8f1cdac",
+    "route_c2_pin.json": "76cf348b5d9396c8d221d456fda8e32315c5d4844301a9a2c79a18a2c9b48724"
+   },
+   "cell_x5_y5": {
+    "route_demo_raw.npz": "84d52d35e32cd6dc6f9475a884cb8fbc11b0bde7b3a980ab7a2bb1e47e912322",
+    "route_c2_pin.json": "4e422d391c374eddc1d9d7d25308a7bb00ab8fbdcce8859194e9b3806d5a323a"
+   }
+  }
+ },
  "ALL_PASS": true
 }
