@@ -1,6 +1,6 @@
-# RS-TECH-LEAD handoff — 2026-07-17 06:39 JST (gate② I3/I4 chunk = 全鍵 CLOSE)
+# RS-TECH-LEAD handoff — 2026-07-17 06:49 JST (chunk CLOSE + pin (a)(b) Rs GO — fresh session entry)
 
-## セッション継続中: 2026-07-17 06:39 JST (RS-TECH-LEAD %12 / w2:p4)
+## 本 session = 完了・close 可 (2026-07-17 06:49 JST、RS-TECH-LEAD %12 / w2:p4)。次 session entry = 下記「次にやるべきこと」3
 
 ⚠ **各 pane は自分の per-pane handoff を読め**。**%12 正本 = `handoff-cc-rstechlead-w1build-2026-07-12.md`**
 (全 arc の時系列 CURRENT STATE)。本 file = shared last-writer の要約。
@@ -97,11 +97,13 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
    「leg 3 再走 OUTCOME」§ + ruling §S3.5a/§S4 を read
 2. 〔済 06:3x〕pN readback = PASS ⇒ **gate② I3/I4 chunk = CLOSE**。p6 の record-only flip + LEDGER:58
    reconcile の着地を確認
-3. **pin (a)(b) 実装 chunk = fresh session** (pN 非 CONCUR 受諾済): 開始手順 = §21.11.1 +
-   identity-persistence coupling readback → **route_executor pin-fields 差分の著者 claim +
-   producer-unbanked〔Rs 待ち〕関係特定 → ⭐(a)(b) と同一 landing に bundle (先行 land 禁止、ISSUE2/
-   §S4.3-3)** → scope prereg → prior-art → 実装 → exact-landed 10/10 再走。⛔それまで dirty tree からの
-   訓練起動禁止 (§S4.3-1)
+3. **pin (a)(b) 実装 chunk = fresh session — ⭐Rs GO landed (2026-07-17 06:4x、Rs「1」= 選択肢① 採択)**:
+   次 session の entry task。開始手順 (banked、順序厳守) = §21.11.1 + identity-persistence coupling
+   readback → **route_executor pin-fields 差分の著者 claim + producer-unbanked〔Rs 待ち〕関係特定 →
+   ⭐(a)(b) と同一 landing に bundle (先行 land 禁止、ISSUE2/§S4.3-3)** → scope prereg → prior-art →
+   実装 → **exact-landed 10/10 再走 (pN binding)**。⛔それまで dirty tree からの訓練起動禁止 (§S4.3-1)。
+   two-key = p5 (設計軸: (a)(b) verify 宣言済) + pN (evidence 軸)。⚠dispatch 時は composer 空確認 +
+   受信 verify (defensive-flush 更新版、memory 固定済)
 4. (d) containment = p5 設計待ち → 着地後 gate② 完了判定 (reward-valid/training-ready 解禁はここ)
 5. fork-B node V0 acceptance (移管 leg + trainer contention) = trainer bring-up 時
 
