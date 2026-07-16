@@ -416,7 +416,13 @@ class NewtonRouteEnv(VecEnv):
     # --- IK / init ----------------------------------------------------------------------------------
     INIT_XY_NOISE = 0.005  # +/-5mm initial EE target randomization (tracked target only on mujoco)
 
-    def __init__(self, world_count=4, device="cuda:0", cfg=None):
+    def __init__(self, world_count=1, device="cuda:0", cfg=None):
+        # fork-B R5-1 flip (D1 spec sec 4, Rs-adopted fork B): the default is the WORKING config -- under
+        # USE_MUJOCO_CPU=True only the single-world template integrates, so a bare 4-world build would run
+        # three silently frozen worlds (COMP3:79; ENV_MULTIWORLD_SUBSTRATE_CHARTER). Every live caller passes
+        # world_count=1 explicitly (grep-verified, D0 materials item 5), so this changes no existing behavior;
+        # intentional multi-world diagnostics opt out via THREAD_ALLOW_CPU_MULTIWORLD=1 at the make_solver
+        # tripwire.
         self.num_envs = world_count
         self.num_actions = 6  # alpha-6D = 2x3D position-only residual
         self._total_env_steps = 0
@@ -573,7 +579,7 @@ class NewtonRouteEnv(VecEnv):
             # None = the recording has no scheduled release -> suppression inert).
             _rls = self._route._recording["release_step"]
             self._route_release_step = int(_rls) if _rls is not None else None
-            self._wire_c1_pin_from_recording()  # (d2): onset + seat, DERIVED from the recording (no-op when off)
+            self._wire_c1_pin_from_recording()  # C1 identity always; (d2) onset only when pin is enabled
         else:
             self._route = NominalRouteStub(self._settled_ee_r_pos, self._settled_ee_l_pos, self.MAX_EPISODE_STEPS)
 
@@ -640,6 +646,15 @@ class NewtonRouteEnv(VecEnv):
             "cable_xyz": z["cable_xyz"],
             "held_seg_l": z["held_seg_l"],
         }
+        # Optional canonical pin witness. RouteExecutor preparation must preserve this all-or-none triple;
+        # it supplies both the C1 routed-segment identity (reward FM4) and the recorded pin onset. The old
+        # prepared recording dropped these fields, so route_c1_pin crashed before the authorizer could run.
+        _pin_keys = ("pin_active", "pin_eqid", "pinned_body")
+        if any(key in z for key in _pin_keys):
+            missing_pin = [key for key in _pin_keys if key not in z]
+            if missing_pin:
+                raise ValueError(f"route recording has a partial pin witness; missing {missing_pin}")
+            recording.update({key: z[key] for key in _pin_keys})
         state_bank = rex.build_state_bank_from_recording(recording, self._world_count, arm_off=0)
         print(
             f"[NewtonRouteEnv] route_executor ON: recording={npz_path} "
@@ -1279,16 +1294,18 @@ class NewtonRouteEnv(VecEnv):
     _SEAT_MISS_DX_M = 9.0  # sentinel dx when the cable never crosses y=clip_y (fail-closed: seat legs
     #                        reject; finite so np.nan_to_num leaves it in obs, unlike NaN -> 0 = "seated").
 
-    def _seat_crossing(self, cable_pos, clip_x, clip_y):
+    def _seat_crossing(self, cable_pos, clip_x, clip_y, segment_indices=None):
         """Interpolate the cable's (x, z) where it crosses exactly y=clip_y, at the groove-closest crossing.
 
         reward-design 2 fix (ruling REWARDDESIGN_GATE2_SEAT_PREDICATE_RULING sec 2/sec 8/sec 11). The pre-fix
         seat metric took the nearest-in-Y cable NODE and used its 2D lateral, leaking the node's Y-quantisation
         residual (~half the 15mm segment pitch, ~7.5mm) into the off-axis distance -- so a physically seated
         cable failed the 3mm bar ~60-70% of the time. Here we interpolate x,z at exactly y=clip_y (dy == 0 by
-        construction, quantisation-free). Among all segments straddling y=clip_y (S-curve / D-5) we prefer a
-        crossing inside the z-band, then the minimum ``|x - clip_x|``. Returns ``(x_cross, z_cross)`` [m], or
-        ``(None, None)`` if the cable never reaches y=clip_y (fail-closed). ``cable_pos`` is node-ordered (the
+        construction, quantisation-free). ``segment_indices`` optionally restricts the search to routed
+        identity candidates (FM4); an empty set therefore fails closed. Among the remaining segments
+        straddling y=clip_y (S-curve / D-5) we prefer a crossing inside the z-band, then the minimum
+        ``|x - clip_x|``. Returns ``(x_cross, z_cross)`` [m], or ``(None, None)`` if no allowed segment reaches
+        y=clip_y (fail-closed). ``cable_pos`` is node-ordered (the
         40-body chain, :1644), so consecutive rows are adjacent -- the offline mirror
         (``p9_recount_strict_v2``) walks the same polyline and DoD-9a (live == frozen) holds.
         """
@@ -1296,6 +1313,12 @@ class NewtonRouteEnv(VecEnv):
         y0 = ys[:-1]
         y1 = ys[1:]
         straddle = ((y0 - clip_y) * (y1 - clip_y) <= 0.0) & (y0 != y1)
+        if segment_indices is not None:
+            allowed = np.zeros(len(straddle), dtype=bool)
+            allowed_idx = np.asarray(tuple(segment_indices), dtype=np.int64)
+            allowed_idx = allowed_idx[(allowed_idx >= 0) & (allowed_idx < len(straddle))]
+            allowed[allowed_idx] = True
+            straddle &= allowed
         if not straddle.any():
             return None, None
         idx = np.nonzero(straddle)[0]
@@ -1306,6 +1329,53 @@ class NewtonRouteEnv(VecEnv):
         in_band = (z_cross > rc.SEAT_Z_LO_M) & (z_cross < rc.SEAT_Z_HI_M)
         best = int(np.lexsort((dx, np.where(in_band, 0, 1)))[0])  # primary: prefer in-band; secondary: min dx
         return float(x_cross[best]), float(z_cross[best])
+
+    _SEAT_MONOTONE_TOL_M = 1.0e-6  # [m] permits micron-scale numeric wobble, not a physical Y reversal
+
+    def _seat_identity_segments(self, cable_pos, clip_xy):
+        """Return routed crossing-segment candidates for a C1 or C2 seat measurement.
+
+        C1 uses the producer-equivalent hard identity: the pinned seat node must be one endpoint of the
+        interpolated crossing. C2 has no fixed seat body, so its crossing must be connected to that C1 node by
+        a Y-monotone cable span. This is pay-through robust and rejects a disconnected stray loop without a
+        fixed N-hop assumption (reward-design gate-2 ruling section 13.4).
+        """
+        pin_seg = getattr(self, "_pin_seat_seg", None)
+        if pin_seg is None:
+            return ()  # identity unavailable -> fail closed, never fall back to the exploitable global search
+        pin_seg = int(pin_seg)
+        n_nodes = int(len(cable_pos))
+        if not 0 <= pin_seg < n_nodes:
+            raise ValueError(f"C1 pin seat segment {pin_seg} outside cable node range [0, {n_nodes})")
+
+        clip_xy = np.asarray(clip_xy, dtype=np.float64)
+        if np.allclose(clip_xy, np.asarray(_C1_XY), rtol=0.0, atol=1.0e-12):
+            # A crossing segment i owns nodes (i, i+1); requiring the pin node as an endpoint is the minimal
+            # interpolation window. Canonical 81-cell evidence is exactly i-pin in {-1, 0}.
+            return (pin_seg - 1, pin_seg)
+        if not np.allclose(clip_xy, np.asarray(_C2_XY), rtol=0.0, atol=1.0e-12):
+            raise ValueError(f"no routed seat identity is defined for clip centre {clip_xy.tolist()}")
+
+        ys = np.asarray(cable_pos[:, 1], dtype=np.float64)
+        target_y = float(clip_xy[1])
+        direction = target_y - float(ys[pin_seg])
+        if abs(direction) <= self._SEAT_MONOTONE_TOL_M:
+            return ()  # C1 identity is already at C2Y: ambiguous/corrupt route, fail closed
+        candidates = []
+        for seg in range(n_nodes - 1):
+            # Walk in cable order FROM the C1 pin node TO both endpoints of this candidate crossing.
+            if seg < pin_seg:
+                path_y = ys[seg : pin_seg + 1][::-1]
+            else:
+                path_y = ys[pin_seg : seg + 2]
+            steps = np.diff(path_y)
+            if direction < 0.0:
+                monotone = bool(np.all(steps <= self._SEAT_MONOTONE_TOL_M))
+            else:
+                monotone = bool(np.all(steps >= -self._SEAT_MONOTONE_TOL_M))
+            if monotone:
+                candidates.append(seg)
+        return tuple(candidates)
 
     @staticmethod
     def _seated_in_groove(dx, z_cross):
@@ -1322,7 +1392,13 @@ class NewtonRouteEnv(VecEnv):
         ``(_SEAT_MISS_DX_M, 0.0)`` so both seat legs reject. Consumers: G3/G5 (:1487-1488 / :1550-1552),
         obs [49]/[58]/[59], c2_honest, c1_retained.
         """
-        x_cross, z_cross = self._seat_crossing(cable_pos, float(clip_xy[0]), float(clip_xy[1]))
+        identity_segments = self._seat_identity_segments(cable_pos, clip_xy)
+        x_cross, z_cross = self._seat_crossing(
+            cable_pos,
+            float(clip_xy[0]),
+            float(clip_xy[1]),
+            segment_indices=identity_segments,
+        )
         if x_cross is None:
             return self._SEAT_MISS_DX_M, 0.0
         return abs(x_cross - float(clip_xy[0])), z_cross
@@ -1341,10 +1417,21 @@ class NewtonRouteEnv(VecEnv):
     def _crossing_x_dev(self, cable_pos):
         """Signed crossing-x deviation at y=C1Y [m] (H-drape / lateral-escape drop input, obs [57]). Now truly
         interpolated (the pre-fix code took the nearest-in-Y NODE x despite its 'interpolation' comment; Rs
-        '4th site'). Fail-open to 0.0 (no crossing => no spurious lateral-escape drop; the held-z /
-        contact-loss drop legs still fire)."""
+        '4th site'). Returns ``None`` when there is no crossing: pre-G3 callers may map that to zero, while the
+        post-G3 drop guard treats loss of the previously seated crossing as fail-closed escape (FM3)."""
         x_cross, _ = self._seat_crossing(cable_pos, float(_C1_XY[0]), float(_C1_XY[1]))
-        return 0.0 if x_cross is None else float(x_cross - float(_C1_XY[0]))
+        return None if x_cross is None else float(x_cross - float(_C1_XY[0]))
+
+    def _c1_escape_after_seat(self, cable_pos, c1_latched):
+        """Return whether C1 escaped after G3 established a routed seat.
+
+        Before G3, not crossing C1Y is normal and cannot terminate the episode. After G3, losing that crossing
+        or exceeding the lateral bound is a fail-closed escape (reward-design gate-2 FM3).
+        """
+        if not bool(c1_latched):
+            return False
+        crossing_x_dev = self._crossing_x_dev(cable_pos)
+        return bool(crossing_x_dev is None or abs(crossing_x_dev) > self.DROP_LATERAL_DEV_MAX_M)
 
     def _lane_matched_target(self, cable_pos, phase_id, r_clamp_pos, search_idx):
         """[16:19] redefine (CC2-CH5): in the regrasp window, the reaching-arm's lane-matched grip target
@@ -1460,7 +1547,10 @@ class NewtonRouteEnv(VecEnv):
             obs_np[w, rc.OBS_R_IK_RESID] = self._last_ik_resid[w, 0]
             obs_np[w, rc.OBS_L_IK_RESID] = self._last_ik_resid[w, 1]
             # [57] crossing-x deviation.
-            obs_np[w, rc.OBS_CROSSING_X_DEV] = self._crossing_x_dev(cable_pos)
+            crossing_x_dev = self._crossing_x_dev(cable_pos)
+            # Pre-seat, not reaching C1Y is normal. Keep the finite observation contract while the reward-side
+            # post-G3 guard retains the ``None`` distinction and fails closed (FM3).
+            obs_np[w, rc.OBS_CROSSING_X_DEV] = 0.0 if crossing_x_dev is None else crossing_x_dev
             # [58:60] axis-resolved seat: [58] z-gap (z_cross - groove), [59] lateral = interp dx (rd2 fix).
             obs_np[w, rc.OBS_SEAT_ZGAP] = zgap_a
             obs_np[w, rc.OBS_SEAT_LATERAL] = dx_a
@@ -1534,13 +1624,13 @@ class NewtonRouteEnv(VecEnv):
                 self._contact_loss_count[w] += 1
             else:
                 self._contact_loss_count[w] = 0
-            lateral_dev = abs(self._crossing_x_dev(cable_pos))
+            c1_escape = self._c1_escape_after_seat(cable_pos, self._g_latched[w, 2])
             dropped = bool(
                 grasped
                 and (
                     (self._g_latched[w, 1] and held_z < self._cable_z_rest + self.DROP_LIFT_MARGIN_M)
                     or (self._contact_loss_count[w] >= self.DROP_CONTACT_LOSS_DEBOUNCE)
-                    or (lateral_dev > self.DROP_LATERAL_DEV_MAX_M)
+                    or c1_escape
                 )
             )
             # W1-B2 sec 9 tail (iv) (charter ERRATUM-3): past the SCHEDULED release the cable is let go on
@@ -1655,7 +1745,7 @@ class NewtonRouteEnv(VecEnv):
         return rc.OBS_DIM  # 62
 
     def _wire_c1_pin_from_recording(self):
-        """(d2) Derive the pin's ONSET and SEAT SEGMENT from the recording. Nothing here is invented or hardcoded.
+        """Derive the C1 routed seat identity and optional pin onset from the recording.
 
         Onset: the first frame the producer's own ``pin_active`` is set (B3a leg 6 measured the recorder/solver
         lag as exactly 0, so the frame transfers directly).
@@ -1670,15 +1760,22 @@ class NewtonRouteEnv(VecEnv):
         self._pin_onset_frame = None
         self._pin_seat_seg = None
         self._route_rec_step_f = None
-        if not self._route_c1_pin:
-            return
         rec = self._route._recording
+        pin_keys = ("pin_active", "pin_eqid", "pinned_body")
+        missing = [key for key in pin_keys if key not in rec]
+        if missing:
+            if self._route_c1_pin:
+                raise ValueError(f"route_c1_pin=True but prepared recording dropped pin witness fields {missing}")
+            return  # non-pin route without identity: seat predicates remain conservatively fail-closed
         self._route_rec_step_f = np.asarray(rec["step_f"]).ravel()
-        pin = np.asarray(rec.get("pin_active") if hasattr(rec, "get") else rec["pin_active"]).ravel()
+        pin = np.asarray(rec["pin_active"]).ravel()
         on = np.nonzero(pin > 0)[0]
         if on.size == 0:
-            raise ValueError("route_c1_pin=True but the recording never pinned -- there is no onset to replay")
-        self._pin_onset_frame = int(on[0])
+            if self._route_c1_pin:
+                raise ValueError("route_c1_pin=True but the recording never pinned -- there is no onset to replay")
+            return
+        if self._route_c1_pin:
+            self._pin_onset_frame = int(on[0])
         eqid = np.unique(np.asarray(rec["pin_eqid"]).ravel()[pin > 0])
         body = np.unique(np.asarray(rec["pinned_body"]).ravel()[pin > 0])
         if eqid.size != 1 or body.size != 1:
@@ -1690,10 +1787,11 @@ class NewtonRouteEnv(VecEnv):
         if not 0 <= seat_seg < n_cable:
             raise ValueError(f"derived seat segment {seat_seg} outside this env's cable (0..{n_cable - 1})")
         self._pin_seat_seg = seat_seg
-        print(
-            f"[NewtonRouteEnv] (d2) C1 pin armed: onset frame {self._pin_onset_frame}, seat segment {seat_seg} "
-            f"(producer eq {int(eqid[0])} / body {int(body[0])}; resolved in THIS env's body space at activation)"
-        )
+        if self._route_c1_pin:
+            print(
+                f"[NewtonRouteEnv] (d2) C1 pin armed: onset frame {self._pin_onset_frame}, seat segment {seat_seg} "
+                f"(producer eq {int(eqid[0])} / body {int(body[0])}; resolved in THIS env's body space at activation)"
+            )
 
     def _maybe_activate_c1_pin(self, route_steps, sub_i):
         """(d2) Fire the C1 clip-retention pin at the RECORDING's own onset frame. No-op unless route_c1_pin.

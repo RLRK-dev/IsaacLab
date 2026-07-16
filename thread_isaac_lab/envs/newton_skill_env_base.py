@@ -1318,6 +1318,16 @@ def make_solver(model, backend=SOLVER_BACKEND, use_mujoco_cpu=USE_MUJOCO_CPU, en
         byte-identical to ``SolverVBD(model, iterations=VBD_ITERATIONS)``.
     """
     if backend == "mujoco":
+        # fork-B R5-2/R-b tripwire (D1 spec sec 4; charter sec 4-B): use_mujoco_cpu steps ONLY the single-world
+        # CPU template -- worlds>0 would be silently frozen garbage. The factory is the last common point that
+        # sees both flags, so the wrong combination is refused HERE, mechanically, for every caller.
+        if use_mujoco_cpu and model.world_count > 1 and os.environ.get("THREAD_ALLOW_CPU_MULTIWORLD") != "1":
+            raise RuntimeError(
+                "use_mujoco_cpu=True steps ONLY the single-world CPU template -- worlds>0 would be silently "
+                "frozen (COMP3_PLAN_ROUTEEXEC_GRASPACT_COORD_20260708.md:79; ENV_MULTIWORLD_SUBSTRATE_CHARTER_"
+                "RSTECHLEAD_20260716.md). Use world_count=1 (fork B), or use_mujoco_cpu=False (S8, unvalidated), "
+                "or set THREAD_ALLOW_CPU_MULTIWORLD=1 (diagnostics ONLY -- record the use in your artifact)."
+            )
         if enable_cable_contacts:
             return SolverMuJoCo(
                 model,

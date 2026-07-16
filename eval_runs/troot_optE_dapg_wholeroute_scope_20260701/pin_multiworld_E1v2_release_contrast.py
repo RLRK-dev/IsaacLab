@@ -40,6 +40,10 @@ for _p in (str(_TIL), str(_TIL / "envs")):
         sys.path.insert(0, _p)
 
 _CVD = os.environ.get("CUDA_VISIBLE_DEVICES", "<unset>")
+# fork-B R5-3 opt-out (RECORDED USE, D1 sec 4): this probe INTENTIONALLY builds world_count=4 on the
+# CPU path to exercise multi-world structure; the make_solver tripwire would otherwise refuse it.
+os.environ.setdefault("THREAD_ALLOW_CPU_MULTIWORLD", "1")
+
 assert _CVD == "0", f"E-1 v2 runs the real env on cuda:0 ONLY; got {_CVD!r}"
 
 import newton_route_env as nre  # noqa: E402
@@ -74,15 +78,29 @@ def main():
     pin = np.asarray(raw["pin_active"]).ravel()
     onset_frame = int(np.nonzero(pin > 0)[0][0])
     onset_rl = onset_frame // 10  # recorder cadence 10 (g6_live: fired_at_frame 2544 -> RL step 254)
-    r = {"world_count": NW, "seat_seg": SEAT_SEG, "pin_world": PIN_WORLD,
-         "onset_frame": onset_frame, "onset_rl_step": onset_rl}
+    r = {
+        "world_count": NW,
+        "seat_seg": SEAT_SEG,
+        "pin_world": PIN_WORLD,
+        "onset_frame": onset_frame,
+        "onset_rl_step": onset_rl,
+    }
 
     nre.NewtonRouteEnv._wire_c1_pin_from_recording = _no_auto_fire
     print(f"[E-1v2] building real NewtonRouteEnv world_count={NW}; drive to onset RL step {onset_rl} ...")
-    env = nre.NewtonRouteEnv(world_count=NW, device="cuda:0", cfg={
-        "grasp_actuation": True, "route_executor_impl": "route_executor", "route_recording_npz": str(GOLDEN_NPZ),
-        "g1_scene_align": True, "route_drive_mode": "feedforward", "route_c2_scene": True, "route_c1_pin": True,
-    })
+    env = nre.NewtonRouteEnv(
+        world_count=NW,
+        device="cuda:0",
+        cfg={
+            "grasp_actuation": True,
+            "route_executor_impl": "route_executor",
+            "route_recording_npz": str(GOLDEN_NPZ),
+            "g1_scene_align": True,
+            "route_drive_mode": "feedforward",
+            "route_c2_scene": True,
+            "route_c1_pin": True,
+        },
+    )
     env.reset()
     zero = torch.zeros((NW, 6), dtype=torch.float32)
 
@@ -128,10 +146,14 @@ def main():
     hv_all = all(hv_per_world)
     r["HV"] = {"seat_z_at_onset_mm": z_onset, "per_world_driven": hv_per_world, "PASS": bool(hv_all and early is None)}
     if not r["HV"]["PASS"]:
-        r["VERDICT"] = {"disposition": (
-            f"ENV-MULTIWORLD finding: worlds {[w for w, ok in enumerate(hv_per_world) if not ok]} never "
-            f"lifted/seated under the FF drive (early_done={early}) -> the multi-world drive/physics itself is "
-            "the blocker (broader than the pin; surfaced to p5/Rs). Pin untested."), "HV": False}
+        r["VERDICT"] = {
+            "disposition": (
+                f"ENV-MULTIWORLD finding: worlds {[w for w, ok in enumerate(hv_per_world) if not ok]} never "
+                f"lifted/seated under the FF drive (early_done={early}) -> the multi-world drive/physics itself is "
+                "the blocker (broader than the pin; surfaced to p5/Rs). Pin untested."
+            ),
+            "HV": False,
+        }
         OUT.write_text(json.dumps({**r, "trace": trace}, indent=2))
         print(json.dumps(r, indent=2))
         return 3
@@ -173,18 +195,28 @@ def main():
     in_groove_w2 = bool(dx_groove[PIN_WORLD] <= rc.SEAT_LAT_BAR_M * 1e3 and 821.0 < z_end[PIN_WORLD] < 836.0)
     e1_pass = bool(held_world == PIN_WORLD and move[PIN_WORLD] < 8.0 and min(others) > 15.0 and in_groove_w2)
 
-    r["E1"] = {"seat_move_after_fire_mm": move, "seat_z_end_mm": z_end, "seat_dx_to_c1_axis_mm": dx_groove,
-               "held_world_least_moved": held_world, "w2_still_in_groove": in_groove_w2,
-               "others_move_mm": others, "PASS": e1_pass}
+    r["E1"] = {
+        "seat_move_after_fire_mm": move,
+        "seat_z_end_mm": z_end,
+        "seat_dx_to_c1_axis_mm": dx_groove,
+        "held_world_least_moved": held_world,
+        "w2_still_in_groove": in_groove_w2,
+        "others_move_mm": others,
+        "PASS": e1_pass,
+    }
 
     if map_ok and e1_pass:
         disp = "PASS: w2 held IN GROOVE, unpinned worlds escaped -> body-index + hold semantics proven -> (c) UNBLOCKED"
     elif map_ok and move[PIN_WORLD] > 15.0 and not in_groove_w2:
-        disp = (f"ANCHOR-SEMANTICS finding: w2 moved {move[PIN_WORLD]}mm off the groove after fire "
-                f"(z_end={z_end[PIN_WORLD]}) -> ref-pose anchor did not hold at fire pose; p5 redesigns the anchor")
+        disp = (
+            f"ANCHOR-SEMANTICS finding: w2 moved {move[PIN_WORLD]}mm off the groove after fire "
+            f"(z_end={z_end[PIN_WORLD]}) -> ref-pose anchor did not hold at fire pose; p5 redesigns the anchor"
+        )
     elif map_ok and min(others) <= 15.0:
-        disp = (f"REVIEW: weak contrast -- unpinned seats moved only {others}mm (banked no-pin escape expected "
-                ">15mm); raw trace attached; verdict deferred to p5")
+        disp = (
+            f"REVIEW: weak contrast -- unpinned seats moved only {others}mm (banked no-pin escape expected "
+            ">15mm); raw trace attached; verdict deferred to p5"
+        )
     elif not map_ok:
         disp = f"BODY-INDEX BUG: mjw flip {flipped} != world {PIN_WORLD} -> fix replicate/index mapping before (c)"
     else:
@@ -193,8 +225,10 @@ def main():
 
     OUT.write_text(json.dumps({**r, "trace": trace}, indent=2))
     print(json.dumps(r, indent=2))
-    print(f"\n[E-1v2] HV z_onset={z_onset} | MAP flip={flipped} | move={move} z_end={z_end} dx_c1={dx_groove} "
-          f"held={held_world} in_groove_w2={in_groove_w2}")
+    print(
+        f"\n[E-1v2] HV z_onset={z_onset} | MAP flip={flipped} | move={move} z_end={z_end} dx_c1={dx_groove} "
+        f"held={held_world} in_groove_w2={in_groove_w2}"
+    )
     print(f"[E-1v2] VERDICT: {disp}  -> {OUT}")
     return 0 if (map_ok and e1_pass) else 2
 

@@ -1,0 +1,29 @@
+{
+  "branches": [
+    {
+      "branch": "i_cpu_wc4_bare",
+      "rc": 42,
+      "tail": "TRIPWIRE_RAISED",
+      "expect": "rc=42 TRIPWIRE_RAISED"
+    },
+    {
+      "branch": "ii_cpu_wc1",
+      "rc": 0,
+      "tail": "BUILD_OK use_mujoco_cpu= True",
+      "expect": "rc=0 BUILD_OK"
+    },
+    {
+      "branch": "iii_optout_cpu_wc4",
+      "rc": 0,
+      "tail": "BUILD_OK use_mujoco_cpu= True",
+      "expect": "rc=0 BUILD_OK (recorded-use diagnostics)"
+    },
+    {
+      "branch": "iv_s8_wc4",
+      "rc": 0,
+      "tail": "BUILD_OK_S8 use_mujoco_cpu= False",
+      "expect": "rc=0 BUILD_OK_S8 (tripwire silent on the warp path)"
+    }
+  ],
+  "ALL_PASS": true
+}

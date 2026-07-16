@@ -34,6 +34,10 @@ for _p in (str(_TIL), str(_TIL / "envs")):
         sys.path.insert(0, _p)
 
 _CVD = os.environ.get("CUDA_VISIBLE_DEVICES", "<unset>")
+# fork-B R5-3 opt-out (RECORDED USE, D1 sec 4): this probe INTENTIONALLY builds world_count=4 on the
+# CPU path to exercise multi-world structure; the make_solver tripwire would otherwise refuse it.
+os.environ.setdefault("THREAD_ALLOW_CPU_MULTIWORLD", "1")
+
 assert _CVD == "0", f"E-probe runs the real env on cuda:0 ONLY; got {_CVD!r}"
 
 import newton_route_env as nre  # noqa: E402
@@ -70,10 +74,19 @@ def main():
     r = {"world_count": NW, "seat_seg": SEAT_SEG, "pin_world": PIN_WORLD}
     nre.NewtonRouteEnv._wire_c1_pin_from_recording = _no_auto_fire
     print("[E-probe] building real NewtonRouteEnv world_count=4 (route_c1_pin=True -> perclip_pin, no auto-fire) ...")
-    env = nre.NewtonRouteEnv(world_count=NW, device="cuda:0", cfg={
-        "grasp_actuation": True, "route_executor_impl": "route_executor", "route_recording_npz": str(GOLDEN_NPZ),
-        "g1_scene_align": True, "route_drive_mode": "feedforward", "route_c2_scene": True, "route_c1_pin": True,
-    })
+    env = nre.NewtonRouteEnv(
+        world_count=NW,
+        device="cuda:0",
+        cfg={
+            "grasp_actuation": True,
+            "route_executor_impl": "route_executor",
+            "route_recording_npz": str(GOLDEN_NPZ),
+            "g1_scene_align": True,
+            "route_drive_mode": "feedforward",
+            "route_c2_scene": True,
+            "route_c1_pin": True,
+        },
+    )
     env.reset()
 
     # locate the per-world pin eq (connect-to-world, body1 == this world's seat body)
@@ -122,13 +135,28 @@ def main():
     pinned_reached = dist[PIN_WORLD] < 15.0
     others_not = all(dist[w] > 40.0 for w in range(NW) if w != PIN_WORLD)
 
-    r["E1"] = {"anchor": [round(float(x), 4) for x in anchor], "dx_mm_per_world": dx, "dist_to_anchor_mm": dist,
-               "pinned_reached": pinned_reached, "others_not_pulled": others_not,
-               "PASS": bool(pinned_reached and others_not)}
-    r["E2"] = {"n_active_eq_before": n_active_before, "n_active_eq_after": n_active_after,
-               "grew_by": n_active_after - n_active_before, "PASS": bool(n_active_after == n_active_before + 1)}
-    r["E3"] = {"notify_ok": notify_ok, "notify_err": notify_err, "step_ok": step_ok, "step_err": step_err,
-               "env_uses_cuda_graph": False, "PASS": bool(notify_ok and step_ok)}
+    r["E1"] = {
+        "anchor": [round(float(x), 4) for x in anchor],
+        "dx_mm_per_world": dx,
+        "dist_to_anchor_mm": dist,
+        "pinned_reached": pinned_reached,
+        "others_not_pulled": others_not,
+        "PASS": bool(pinned_reached and others_not),
+    }
+    r["E2"] = {
+        "n_active_eq_before": n_active_before,
+        "n_active_eq_after": n_active_after,
+        "grew_by": n_active_after - n_active_before,
+        "PASS": bool(n_active_after == n_active_before + 1),
+    }
+    r["E3"] = {
+        "notify_ok": notify_ok,
+        "notify_err": notify_err,
+        "step_ok": step_ok,
+        "step_err": step_err,
+        "env_uses_cuda_graph": False,
+        "PASS": bool(notify_ok and step_ok),
+    }
 
     # --- E-4: release (done-world path) enabled=False + notify, step, world should free ---
     rel_ok, rel_err = True, None
@@ -144,8 +172,13 @@ def main():
         rel_ok, rel_err = False, f"{type(e).__name__}: {str(e)[:160]}"
     p2 = [_seat_pos(env, w) for w in range(NW)]
     released_moved = round(float(np.linalg.norm(p2[PIN_WORLD] - p1[PIN_WORLD])) * 1e3, 2)
-    r["E4"] = {"release_ok": rel_ok, "release_err": rel_err, "pinned_moved_after_release_mm": released_moved,
-               "n_active_eq_after_release": _n_active_eq(env), "PASS": bool(rel_ok)}
+    r["E4"] = {
+        "release_ok": rel_ok,
+        "release_err": rel_err,
+        "pinned_moved_after_release_mm": released_moved,
+        "n_active_eq_after_release": _n_active_eq(env),
+        "PASS": bool(rel_ok),
+    }
 
     e1, e2, e3 = r["E1"]["PASS"], r["E2"]["PASS"], r["E3"]["PASS"]
     if not e3:
@@ -159,8 +192,10 @@ def main():
     r["VERDICT"] = {"E1": e1, "E2": e2, "E3": e3, "E4": r["E4"]["PASS"], "disposition": disp}
     OUT.write_text(json.dumps(r, indent=2))
     print(json.dumps(r, indent=2))
-    print(f"\n[E-probe] E-1={e1} E-2={e2} E-3={e3} E-4={r['E4']['PASS']} | flat_eq={flat_eq} "
-          f"dx={dx} n_active {n_active_before}->{n_active_after}")
+    print(
+        f"\n[E-probe] E-1={e1} E-2={e2} E-3={e3} E-4={r['E4']['PASS']} | flat_eq={flat_eq} "
+        f"dx={dx} n_active {n_active_before}->{n_active_after}"
+    )
     print(f"[E-probe] VERDICT: {disp}  -> {OUT}")
     return 0 if (e1 and e2 and e3) else 2
 

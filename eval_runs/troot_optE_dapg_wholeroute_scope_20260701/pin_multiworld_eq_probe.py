@@ -38,6 +38,10 @@ for _p in (str(_TIL), str(_TIL / "envs")):
         sys.path.insert(0, _p)
 
 assert os.environ.get("CUDA_VISIBLE_DEVICES", None) == "0", "probe runs the warp substrate on cuda:0 ONLY"
+# fork-B R5-3 opt-out (RECORDED USE, D1 sec 4): this probe INTENTIONALLY builds world_count=4 on the
+# CPU path to exercise multi-world structure; the make_solver tripwire would otherwise refuse it.
+os.environ.setdefault("THREAD_ALLOW_CPU_MULTIWORLD", "1")
+
 
 import mujoco  # noqa: E402
 import newton_route_env  # noqa: E402, F401  (side-effect: SOLVER_BACKEND="mujoco")
@@ -56,9 +60,15 @@ DISP = np.array([0.08, 0.0, 0.0])  # displaced anchor: +80mm lateral (gravity-or
 def main():
     fkm, fks, _ = build_fk_and_init(left_finger_pos=FINGER_OPEN_POS, right_finger_pos=FINGER_OPEN_POS, device="cuda:0")
     scene = build_multiworld_scene(
-        fkm, fks, NW, "cuda:0",
-        add_support_clips=False, add_target_clip=True, target_clip_float_z=rc.ROUTE_CLIP_FLOAT_Z,
-        add_c2_clip=True, c2_xy=rc.ROUTE_C2_XY,
+        fkm,
+        fks,
+        NW,
+        "cuda:0",
+        add_support_clips=False,
+        add_target_clip=True,
+        target_clip_float_z=rc.ROUTE_CLIP_FLOAT_Z,
+        add_c2_clip=True,
+        c2_xy=rc.ROUTE_C2_XY,
         grasp_actuation=False,  # ISOLATE the pin: no gripper servo holding the cable (else "held" masks "pinned")
         perclip_pin=True,
     )
@@ -70,16 +80,26 @@ def main():
 
     # --- P-1: mjw_data.eq_active per-world? ---
     ea = mjwd.eq_active.numpy()
-    r["P1"] = {"mjw_data.eq_active_shape": list(ea.shape), "cpu_mj_data.eq_active_shape": list(mjm.eq_data.shape[:1]),
-               "PASS": bool(ea.ndim == 2 and ea.shape[0] == NW)}
+    r["P1"] = {
+        "mjw_data.eq_active_shape": list(ea.shape),
+        "cpu_mj_data.eq_active_shape": list(mjm.eq_data.shape[:1]),
+        "PASS": bool(ea.ndim == 2 and ea.shape[0] == NW),
+    }
 
     # --- P-2: pin eq index layout (CPU template) ---
     CONNECT = int(mujoco.mjtEq.mjEQ_CONNECT)
-    pin_eqs = [(i, int(mjm.eq_obj1id[i])) for i in range(int(mjm.neq))
-               if int(mjm.eq_type[i]) == CONNECT and int(mjm.eq_obj2id[i]) == 0 and int(mjm.eq_active0[i]) == 0]
+    pin_eqs = [
+        (i, int(mjm.eq_obj1id[i]))
+        for i in range(int(mjm.neq))
+        if int(mjm.eq_type[i]) == CONNECT and int(mjm.eq_obj2id[i]) == 0 and int(mjm.eq_active0[i]) == 0
+    ]
     eqid = pin_eqs[SEAT_SEG][0] if len(pin_eqs) > SEAT_SEG else None
-    r["P2"] = {"n_pin_eq": len(pin_eqs), "seat_seg_eqid": eqid,
-               "eqids_are_seg_ordinal": [e[0] for e in pin_eqs] == list(range(len(pin_eqs))), "PASS": eqid is not None}
+    r["P2"] = {
+        "n_pin_eq": len(pin_eqs),
+        "seat_seg_eqid": eqid,
+        "eqids_are_seg_ordinal": [e[0] for e in pin_eqs] == list(range(len(pin_eqs))),
+        "PASS": eqid is not None,
+    }
 
     # --- P-4: eq_data batching ---
     ed = mjwm.eq_data.numpy()
@@ -117,11 +137,17 @@ def main():
         harness_stepped = any(abs(dx[w]) > 1.0 or abs(dz[w]) > 1.0 for w in range(NW) if w not in (0, PIN_WORLD))
         pinned_reached = dist[PIN_WORLD] < 15.0
         others_not = all(dist[w] > 40.0 for w in range(NW) if w != PIN_WORLD)
-        r["P3"] = {"anchor": [round(float(x), 4) for x in anchor], "readback_took_and_isolated": rb_ok,
-                   "dx_mm_per_world": dx, "dz_mm_per_world": dz, "dist_to_anchor_mm": dist,
-                   "harness_steps_nonzero_worlds": harness_stepped, "pinned_reached": pinned_reached,
-                   "others_not_pulled": others_not,
-                   "PASS": bool(rb_ok and harness_stepped and pinned_reached and others_not)}
+        r["P3"] = {
+            "anchor": [round(float(x), 4) for x in anchor],
+            "readback_took_and_isolated": rb_ok,
+            "dx_mm_per_world": dx,
+            "dz_mm_per_world": dz,
+            "dist_to_anchor_mm": dist,
+            "harness_steps_nonzero_worlds": harness_stepped,
+            "pinned_reached": pinned_reached,
+            "others_not_pulled": others_not,
+            "PASS": bool(rb_ok and harness_stepped and pinned_reached and others_not),
+        }
     else:
         r["P3"] = {"PASS": False, "harness_steps_nonzero_worlds": None, "skipped": "P-1 failed or eqid absent"}
 
@@ -131,21 +157,29 @@ def main():
     if not p1p:
         _disp = "INFEASIBLE: mjw eq_active is SHARED (not per-world) -> Rs escalation (§21.2)"
     elif harness_ok is False:
-        _disp = ("INCONCLUSIVE-HARNESS: per-world eq STRUCTURE exists (P-1/P-4 PASS) but this minimal "
-                 "build+step harness steps only world 0 -> per-world EFFECTIVENESS untestable here. NOT a "
-                 "GPU-inert verdict. Needs a validated multi-world stepping harness (real NewtonRouteEnv "
-                 "world_count>1) and/or p5's mjw eq re-poke mechanism (§21.1 DEFERRED).")
+        _disp = (
+            "INCONCLUSIVE-HARNESS: per-world eq STRUCTURE exists (P-1/P-4 PASS) but this minimal "
+            "build+step harness steps only world 0 -> per-world EFFECTIVENESS untestable here. NOT a "
+            "GPU-inert verdict. Needs a validated multi-world stepping harness (real NewtonRouteEnv "
+            "world_count>1) and/or p5's mjw eq re-poke mechanism (§21.1 DEFERRED)."
+        )
     elif p3p:
         _disp = "FEASIBLE: per-world mjw eq write propagates -> proceed to (c) design (groove-anchor/eqid/batching)"
     else:
         _disp = "INFEASIBLE: per-world eq write reads back but does NOT constrain -> Rs escalation (§21.2)"
-    r["VERDICT"] = {"P1_pass": bool(p1p), "harness_valid": harness_ok, "P3_effectiveness_pass": bool(p3p),
-                    "disposition": _disp}
+    r["VERDICT"] = {
+        "P1_pass": bool(p1p),
+        "harness_valid": harness_ok,
+        "P3_effectiveness_pass": bool(p3p),
+        "disposition": _disp,
+    }
     OUT.write_text(json.dumps(r, indent=2))
     print(json.dumps(r, indent=2))
-    print(f"\n[probe] P-1={p1p} P-2 eqid={eqid} P-4 per-world={r['P4']['per_world']} | "
-          f"P-3 readback={r['P3'].get('readback_took_and_isolated')} harness_valid={harness_ok} "
-          f"pinned_reached={r['P3'].get('pinned_reached')} PASS={p3p}")
+    print(
+        f"\n[probe] P-1={p1p} P-2 eqid={eqid} P-4 per-world={r['P4']['per_world']} | "
+        f"P-3 readback={r['P3'].get('readback_took_and_isolated')} harness_valid={harness_ok} "
+        f"pinned_reached={r['P3'].get('pinned_reached')} PASS={p3p}"
+    )
     print(f"[probe] VERDICT: {r['VERDICT']['disposition']}  -> {OUT}")
     return 0 if (p1p and p3p) else (3 if harness_ok is False else 2)
 

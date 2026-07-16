@@ -1,0 +1,12 @@
+{
+  "MARK": "I0-a flip no-change proof (post-flip n1 vs the PRE-flip E0v2a banked n1_a)",
+  "flip": "newton_route_env.py world_count default 4 -> 1 (this run passes wc=1 explicitly, as all live callers do)",
+  "reference_traj_sha_preflip_banked": "f5a326046707e1472fe7c1e3819d6ff4349428d59d07fe67ef92130f0bea0e5a",
+  "postflip_traj_sha": "f5a326046707e1472fe7c1e3819d6ff4349428d59d07fe67ef92130f0bea0e5a",
+  "byte_identical": true,
+  "recording_sha_now": "5f1c3f9238f45057011cfad1d010ac43000cb179b76b61d0461733a9075416cf",
+  "recording_sha_banked": "5f1c3f9238f45057011cfad1d010ac43000cb179b76b61d0461733a9075416cf",
+  "recording_unchanged": true,
+  "child_rc": 0,
+  "note_full_grid": "the 81-cell test_routeexec_byte_repro harness remains available at the verifier's call"
+}
