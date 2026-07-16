@@ -25,8 +25,9 @@ session_history:
   - "2026-07-16 19:5x D0 = 6/6 CLOSE (design R1-R6 + item-1 evidence = calibration v4 fd536235e9、OPS-SUP 独立 verify PASS-WITH-RECORDS-FIX)。D1 spec = CONFORM 7/7 (v0.2)。E0 = 事前登録 (K=200/K_fail=3/contention≥0.8/決定論/memory) に従い fresh N=1 から開始可"
   - "2026-07-16 20:2x E0 = GATE CLOSE PASS — E0v2a 2933fa7bbc が B6/B7 根治・全 predicate PASS (pN final = PASS-WITH-RECORDS-FIX、records-fix a90d9ab6db readback PASS)。N1/N2/N4 = 10.872/20.432/35.579 t/s・eff 0.818 ⇒ N_collect=4 FINAL ADOPTED・I0 OPEN GO。検証史 v1 fb36c49540→v2 945a5c229a→v2a (prereg 完全性 保持) = LEDGER:58"
   - "2026-07-16 21:1x I0-a (flip+tripwire c60d311f96) = CLOSE (pN final = PASS-WITH-CARRY; HOLD 応答 = df063c85c9 [scope manifest+format+陽性対照 harness] + 5d3924b12a [fresh 陽性対照 PASS] + ad0bb76460 [p5 §S run-hygiene 裁定])。I0-b (supervisor+collector) = fence OPEN GO (infra)。⚠carry = FM3/FM4 HEAD-live 未批准 → owner chain PASS まで reward-valid/training-ready claim 不可 (§0 carry 節)。〔20:2x/21:1x の 2 entry = p6 反映執行 (%12 依頼 21:3x、LEDGER:58 `3669b370d3` 準拠)〕"
+  - "2026-07-16 22:4x I0-b infra = banked (1d95b7bf6e 287 files + a9a26249fb CHECK6 [Rs 裁定 A] + 8ae825c954 --tag)・機構 leg 4/4 PASS。N-2 carry = v1.8 §N-2-RESOLUTION (2a7ac33d87) で scope 外解決 (channel-conditioned standing rule / INIT_XY_NOISE=appearance-only)。fence CLOSE = landed-bytes fresh 再走 (v2 tag) → pN verify 待ち。〔entry = p6 反映執行 (%12 依頼 23:0x)〕"
 created: 2026-07-16T17:49:20+09:00
-last_updated: 2026-07-16T21:42:00+09:00
+last_updated: 2026-07-16T22:48:51+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -34,7 +35,7 @@ spec_version: LTM-1 v1.2
 
 ## 0. 起票状態と境界
 
-**IN_PROGRESS。D0 = 6/6 CLOSE (2026-07-16 19:5x)。D1 = CONFORM 7/7 + AMEND-1 (v0.2)。⭐E0 = GATE CLOSE PASS (20:2x: E0v2a `2933fa7bbc` = B6/B7 根治・全 predicate PASS、pN final = PASS-WITH-RECORDS-FIX [records-fix `a90d9ab6db`]。実測 N1/N2/N4 = 10.872/20.432/35.579 t/s・eff 0.818 ⇒ N_collect=4 = FINAL ADOPTED [二段採択 完了])。⭐I0-a (flip+tripwire) = CLOSE (21:1x: pN = PASS-WITH-CARRY、bank `c60d311f96` + HOLD 応答 `df063c85c9`/`5d3924b12a`/`ad0bb76460`)。現 phase = I0-b (supervisor+collector、infra 実装 = fence OPEN GO)**。
+**IN_PROGRESS。D0 = 6/6 CLOSE (2026-07-16 19:5x)。D1 = CONFORM 7/7 + AMEND-1 (v0.2)。⭐E0 = GATE CLOSE PASS (20:2x: E0v2a `2933fa7bbc` = B6/B7 根治・全 predicate PASS、pN final = PASS-WITH-RECORDS-FIX [records-fix `a90d9ab6db`]。実測 N1/N2/N4 = 10.872/20.432/35.579 t/s・eff 0.818 ⇒ N_collect=4 = FINAL ADOPTED [二段採択 完了])。⭐I0-a (flip+tripwire) = CLOSE (21:1x: pN = PASS-WITH-CARRY、bank `c60d311f96` + HOLD 応答 `df063c85c9`/`5d3924b12a`/`ad0bb76460`)。現 phase = I0-b — ⭐**infra 実装 = banked・機構 leg 4/4 PASS・fence CLOSE は pN verify 待ち** (2026-07-16 22:4x: 本体 `1d95b7bf6e` [collector+supervisor+機構 leg 287 files: K/K_fail/lever PASS・L4 split・L5 v2 9/9] + CHECK6 typed exceptions `a9a26249fb` [Rs 裁定 A + pN 条件 4 項・self-test 8/8] + `8ae825c954` [--tag]。**N-2 carry = v1.8 §N-2-RESOLUTION `2a7ac33d87` で I0-b scope 外へ解決** [channel-conditioned standing rule 化・INIT_XY_NOISE=appearance-only knob と記録]。⏳landed-bytes fresh 再走 [v2 tag] 実行中 → 完了後 pN verify 依頼。所在 = `I0B_BUILD_RSTECHLEAD_20260716.md` OUTCOME:61+CHECK-6:90 / `FORKB_D0_RULINGS...md` §N-2-RESOLUTION:219)**。
 
 ⚠ **§S carry (binding — `I0A_SCOPE_MANIFEST_RSTECHLEAD_20260716.md:36-45` + `ad0bb76460`)**: 巻込 FM3/FM4 は **HEAD で live・未批准** (flag-gated でない: `newton_route_env.py:1395-1396` seat 本経路 無条件 + `:1627` `_c1_escape_after_seat` 無条件呼出)。⇒ **owner chain (/reward-design 再走 → p5 再 verify → /pre-check) PASS まで、HEAD run の seat/G3+/escape 出力 = 未批准意味論** — banked-semantics を主張する run は pre-sweep commit へ pin するか、暴露を loud 宣言。**I0-a byte 一致 = physics 軌道のみ (reward/latch 経路の等価性ではない)**。
 
