@@ -84,6 +84,17 @@ COMP3:110 が警告した「凍結世界が batch metric を汚染する」silen
 - fork A はさらに: 忠実度 re-anchor = **Rs 動画 GT 再取得** (human-GT leg) + 決定論 re-baseline = banked byte-repro 群の扱い裁定。
 - pin 側の carry (env 解決後、design v1.9 §21.10.5 #3): E-1 physical + 真 E-2 を **§21.9.1/§21.8.2 の手続きのまま**再走 (設計変更なし)。
 
+## 5-B. OPS-SUP-CODEX endorsement (final review = PASS / CO-SPONSOR、2026-07-16 17:1x)
+
+OPS-SUP-CODEX が bank `89af8fcd25` + v1.10 `4c0917d822` を on-disk 確認し、§1 訂正・§3.1 L0 全 4 要素・§3.2 B 実測
+gate・§4-B R-b・§6 上程 3 点を合意どおりと review = **PASS / CO-SPONSOR**。Rs 裁定への支持:
+1. fork **B primary / C smoke / A 独立 hardening**。
+2. pin node と分離した**新 node 起票** + **即時項目 #0 (R-b tripwire) の先行実装承認**。
+3. A 併走時は **R-a poke-parity 機構を DoD**、決定論 re-baseline + **Rs 動画 GT を必須化**。
+
+**境界 (endorsement 明記):** B は現時点で【推奨】であり、§3.2 の N=1/2/4 throughput・memory・determinism/fidelity・
+trainer budget 逆算の**実測 artifact を通って初めて accept**。不達なら A の優先度を Rs 再裁定。
+
 ## 6. 上程事項 (Rs へ)
 
 1. **fork A / B / C の選択** — **推奨 = B primary / C smoke / A 独立 hardening** (§3.1: OPS-SUP-CODEX 推奨、
