@@ -1,6 +1,6 @@
-# RS-TECH-LEAD handoff — 2026-07-17 06:29 JST (§S4 scoped GRANT bank 後)
+# RS-TECH-LEAD handoff — 2026-07-17 06:39 JST (gate② I3/I4 chunk = 全鍵 CLOSE)
 
-## セッション継続中: 2026-07-17 06:29 JST (RS-TECH-LEAD %12 / w2:p4)
+## セッション継続中: 2026-07-17 06:39 JST (RS-TECH-LEAD %12 / w2:p4)
 
 ⚠ **各 pane は自分の per-pane handoff を読め**。**%12 正本 = `handoff-cc-rstechlead-w1build-2026-07-12.md`**
 (全 arc の時系列 CURRENT STATE)。本 file = shared last-writer の要約。
@@ -28,8 +28,10 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
   禁止) + dirty tree 訓練起動禁止・verifier「§S 意味論 sub-claim = 批准可能」** → ⭐**p5 §S4 = GRANT
   〔scoped〕bank `a366622159` (06:2x)**: §S run-hygiene (:333) 解除 (committed-HEAD lineage 限定・単一
   episode 意味論限定・歴史 artifact 遡及編集なし)。**⛔存続 3 本**: reward-valid/training-ready 禁止
-  ((a)(b)+bundle land+(d) まで、pN 規律不触) / dirty tree 訓練起動禁止 / bundle land 順序。p6 scoped flip
-  依頼済 + pN readback 受付中。
+  ((a)(b)+bundle land+(d) まで、pN 規律不触) / dirty tree 訓練起動禁止 / bundle land 順序。→ ⭐⭐**pN 最終
+  verdict 06:3x = (i) 再走 evidence ACCEPT/PASS (ii) §S4 readback PASS (scope 分割 CONCUR) (iii) 面 2602ebfc11
+  内容 PASS ⇒ gate② I3/I4 chunk = 全鍵 CLOSE**。land 後 exact-landed 10/10 = binding (pN)。p6 へ record-only
+  flip (「readback 受付中」→PASS) + LEDGER:58 reconcile 依頼済 (06:36)。
 - two-key = pN (OPS-SUP-CODEX、evidence 軸) + p5 (VT-DESIGN、設計軸)。**OPS-SUP 役割 = pN (p1 でない)**
 
 ### Vault SSOT checked（banked design 接地）
@@ -93,7 +95,8 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
 ### 次にやるべきこと
 1. `引き継ぎ確認` → 本 file + %12 正本 + `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` + GATE2_RERUN doc
    「leg 3 再走 OUTCOME」§ + ruling §S3.5a/§S4 を read
-2. **pN readback 受領** (a366622159 の §S4 scoped bank、06:27 受付中) — HOLD が返れば correction chain
+2. 〔済 06:3x〕pN readback = PASS ⇒ **gate② I3/I4 chunk = CLOSE**。p6 の record-only flip + LEDGER:58
+   reconcile の着地を確認
 3. **pin (a)(b) 実装 chunk = fresh session** (pN 非 CONCUR 受諾済): 開始手順 = §21.11.1 +
    identity-persistence coupling readback → **route_executor pin-fields 差分の著者 claim +
    producer-unbanked〔Rs 待ち〕関係特定 → ⭐(a)(b) と同一 landing に bundle (先行 land 禁止、ISSUE2/
