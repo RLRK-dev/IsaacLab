@@ -25,8 +25,42 @@ from pathlib import Path
 
 _EVAL = Path(__file__).resolve().parent
 STATUS = _EVAL / "forkb_d0_calibration_status.json"
+CLOSURE = _EVAL / "forkb_d0_calibration_closure.json"  # v4: the child's ACTUAL import closure + load-time sha
 OUT = _EVAL / "forkb_d0_calibration_profile_result.json"
 GOLDEN_NPZ = _EVAL / "w0e_81rerun_snapdown_0537" / "cell_x0_y0" / "route_demo_raw.npz"
+
+# v4 (OPS-SUP v3-HOLD finding 2): the recorder's EXPLICIT core (route_demo_recorder.py:330-350, verbatim 19)
+# -- the fingerprint is explicit-core UNION loaded-source scrape, per the b7553662a4 mechanism.
+_EXPLICIT_ENV_CORE = (
+    "DEMO_RECORD", "S6_GRASP_ROUTE", "S13_ROUTE_C2", "SEAT_TOPDOWN", "C2_DUALSEAT", "PERCLIP_PIN",
+    "CLIP_FLOAT_Z", "SPACER", "CLIP2", "CLIP_COLLISION", "CLIP_X", "CLIP_Y", "CLIP2_X", "CLIP2_Y",
+    "C2_TILT_SIGN", "S6_ENGAGE_YC", "NEWTON_DEVICE", "CUDA_VISIBLE_DEVICES", "CABLE_XY_OFFSET",
+)
+
+
+def _sha256_file(p):
+    import hashlib
+
+    h = hashlib.sha256()
+    with open(p, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def _scrape_env_keys(paths):
+    """Every env var the given sources read (recorder pattern b7553662a4 _env_keys_read_by)."""
+    import re
+
+    keys = set()
+    for p in paths:
+        try:
+            src = Path(p).read_text(errors="replace")
+        except OSError:
+            continue
+        keys.update(re.findall(r'os\.environ\.get\(\s*["\']([A-Za-z_][A-Za-z0-9_]*)["\']', src))
+        keys.update(re.findall(r'os\.environ\[\s*["\']([A-Za-z_][A-Za-z0-9_]*)["\']\s*\]', src))
+    return keys
 
 WARMUP_STEPS = 30
 WINDOW_END = 230  # measurement window = RL steps [30, 230)
@@ -47,6 +81,22 @@ def workload():
         "g1_scene_align": True, "route_drive_mode": "feedforward", "route_c2_scene": True,
     })
     env.reset()
+    # v4 (OPS-SUP v3-HOLD findings 1/4): the ACTUAL import closure, auto-enumerated from THIS process's
+    # sys.modules (no hand-list to rot) + sha256 at load time (what this process runs is what it hashed).
+    repo = str(_REPO)
+    loaded = {}
+    for m in list(sys.modules.values()):
+        f = getattr(m, "__file__", None)
+        if not f:
+            continue
+        fp = Path(f).resolve()  # some modules carry a RELATIVE __file__ (e.g. '_ops.py') -- resolve() then
+        #                         maps them spuriously under CWD; the exists() check drops those phantoms.
+        if str(fp).startswith(repo) and fp.suffix == ".py" and fp.exists():
+            loaded[str(fp.relative_to(_REPO))] = _sha256_file(fp)
+    CLOSURE.write_text(json.dumps({
+        "loaded_repo_modules_sha256": dict(sorted(loaded.items())),
+        "scraped_env_keys": sorted(_scrape_env_keys([_REPO / rel for rel in loaded])),
+    }, indent=1))
     STATUS.write_text(json.dumps({"pid": os.getpid(), "phase": "warmup", "step": 0,
                                   "use_mujoco_cpu": bool(getattr(env._solver, "use_mujoco_cpu", None)),
                                   "world_count": 1}))
@@ -142,9 +192,9 @@ def _provenance():
         "git_head": _git("rev-parse", "HEAD"),
         "git_dirty_total_lines": len(dirty_all.splitlines()) if dirty_all else 0,
         "git_dirty_as_run_files": _git("diff", "--stat", "HEAD", "--", *rels) or "(as_run set clean vs HEAD)",
-        "as_run_sha256": as_run,
-        "env_fingerprint": {k: os.environ.get(k) for k in sorted(env_keys)},
-        "env_fingerprint_source": "scraped from as_run sources (recorder pattern b7553662a4)",
+        "as_run_sha256_static_prelaunch": as_run,
+        "recording_sha256": _sha256_file(GOLDEN_NPZ),  # v4 finding 3: the workload INPUT is pinned too
+        "static_scraped_env_keys": sorted(env_keys),
         "denominators": {"gpu_mib(index,total,used,free)": gpu.splitlines(), "meminfo": mem,
                          "cpu_cores_logical": psutil.cpu_count(logical=True),
                          "cpu_cores_physical": psutil.cpu_count(logical=False)},
@@ -180,6 +230,7 @@ def main():
         time.sleep(1.0)
 
     STATUS.unlink(missing_ok=True)
+    CLOSURE.unlink(missing_ok=True)
     child = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     ps_child = psutil.Process(child.pid)
     ps_child.cpu_percent(interval=None)  # prime the cpu% counter
@@ -210,6 +261,32 @@ def main():
     r["workload_exit"] = rc
     r["use_mujoco_cpu_observed"] = st.get("use_mujoco_cpu")
 
+    # ---- v4 (findings 1/2/4): closure identity + unified fingerprint + pre/post race bracket ----
+    closure = json.loads(CLOSURE.read_text()) if CLOSURE.exists() else {}
+    loaded = closure.get("loaded_repo_modules_sha256", {})
+    changed = []
+    post = {}
+    for rel, load_sha in loaded.items():
+        p = _REPO / rel
+        post[rel] = _sha256_file(p) if p.exists() else "(deleted)"
+        if post[rel] != load_sha:
+            changed.append(rel)
+    npz_post = _sha256_file(GOLDEN_NPZ)
+    if npz_post != r["protocol"]["provenance"]["recording_sha256"]:
+        changed.append(str(GOLDEN_NPZ.relative_to(_REPO)))
+    fp_keys = set(_EXPLICIT_ENV_CORE) | set(closure.get("scraped_env_keys", [])) \
+        | set(r["protocol"]["provenance"].pop("static_scraped_env_keys", []))
+    r["protocol"]["provenance"].update({
+        "loaded_closure_sha256_at_load": loaded,
+        "loaded_closure_n": len(loaded),
+        "post_run_sha256": post,
+        "changed_during_run": changed,  # expect [] -- a nonempty list means the run raced a writer
+        "env_fingerprint": {k: os.environ.get(k) for k in sorted(fp_keys)},
+        "env_fingerprint_source": "explicit core (route_demo_recorder.py:330-350, 19) UNION scrape over the "
+                                  "child's ACTUAL loaded closure (sys.modules) UNION static-set scrape "
+                                  "(b7553662a4 mechanism)",
+    })
+
     # ---- aggregate (fail-loud on missing samples) ----
     win = [s for s in r["during"] if s["phase"] == "window"]
     wu = [s for s in r["during"] if s["phase"] in ("warmup", "init")]
@@ -228,6 +305,10 @@ def main():
         errors.append("missing RSS/CPU samples in window")
     if cpu_ok and max(cpu_ok) == 0.0:
         errors.append("CPU instrument DEAD (0.0-flat on a CPU-bound workload -- positive control failed)")
+    if not loaded:
+        errors.append("closure MISSING (child never wrote the loaded-modules identity)")
+    if changed:
+        errors.append(f"RACE: sources/input changed during the run: {changed}")
     if errors:
         r["FAIL_LOUD"] = errors
     else:

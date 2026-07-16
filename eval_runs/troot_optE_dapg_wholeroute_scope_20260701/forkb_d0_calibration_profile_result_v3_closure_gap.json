@@ -1,0 +1,598 @@
+{
+  "MARK": "D0_CALIBRATION_ONLY -- not evidence for B-accept or N-adoption; E0 re-runs N=1 fresh",
+  "protocol": {
+    "command": "/home/rlrk/env_isaaclab7/bin/python /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/forkb_d0_calibration_profile.py --workload",
+    "CUDA_VISIBLE_DEVICES": "0",
+    "world_count": 1,
+    "workload": "FF-replay zero-residual RL steps [0,230)",
+    "warmup_steps": 30,
+    "window": [
+      30,
+      230
+    ],
+    "sampling_cadence_s": 2.0,
+    "cpu_normalization": "sum(proc-tree cpu%) / 64 cores",
+    "recording": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz",
+    "provenance": {
+      "git_head": "dfae1390fe459e928ced2002a3d79dc858b7070d",
+      "git_dirty_total_lines": 2907,
+      "git_dirty_as_run_files": ".../forkb_d0_calibration_profile.py                |  60 ++++++++-\n thread_isaac_lab/envs/newton_route_env.py          | 136 +++++++++++++++++----\n thread_isaac_lab/envs/route_env_config.py          |  10 +-\n thread_isaac_lab/envs/route_executor.py            |  20 ++-\n 4 files changed, 191 insertions(+), 35 deletions(-)",
+      "as_run_sha256": {
+        "thread_isaac_lab/envs/newton_route_env.py": "1fa382f2c794a1d1434d3eeeda148d8e7daf7c5a1e2ce5979fc02e425ad189dc",
+        "thread_isaac_lab/envs/route_executor.py": "961161c5a27680a029c3ededfb85fb55a5d0489acc4edc67dca5c94e1cc97fe3",
+        "thread_isaac_lab/envs/route_env_config.py": "08e1eff2e2eb67bc0b0622f3a5c3bdd61fd91dfda45e4856a3e8be023b9d9776",
+        "thread_isaac_lab/envs/newton_skill_env_base.py": "f1dc55b7ea7d2bdd48b089dd49a25b1e7c0f5a4572f3ce5d2d13e41225a6338a",
+        "thread_isaac_lab/configs/task_config.py": "1a0851db9cfc2c740c98821c73c84f5405d1cc96df5fe22a71f66906bb1762bc",
+        "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/forkb_d0_calibration_profile.py": "6a1dc32afaecb95e0210923895f70075af69111f5e49dea36ce4b2d3fbd5d43d"
+      },
+      "env_fingerprint": {
+        "BANK_CAPTURE": null,
+        "BANK_OUT": null,
+        "C1_SEAT_GATE": null,
+        "C1_SEAT_TRIGGER": null,
+        "C1_SEAT_WAIT_MAX": null,
+        "C2_DUALSEAT": null,
+        "C2_TILT_SIGN": null,
+        "CLIP2_X": null,
+        "CLIP2_Y": null,
+        "CLIP_COLLISION": null,
+        "CLIP_DELTAH": null,
+        "CLIP_FLOAT_Z": null,
+        "CLIP_X": null,
+        "CLIP_Y": null,
+        "COLLISION_AVOIDANCE": null,
+        "CUDA_VISIBLE_DEVICES": "0",
+        "DEMO_OUT": null,
+        "DEMO_RECORD": null,
+        "FREEZE_SCOPE": null,
+        "NEWTON_DEVICE": null,
+        "PERCLIP_PIN": null,
+        "PERTURB_INJECT": null,
+        "REL_CABLE_Z": null,
+        "ROUTE_C1_PIN": null,
+        "ROUTE_C1_STIFF_MATCH": null,
+        "S13_FEED": null,
+        "S13_ROUTE_C2": null,
+        "S13_TAIL_HOLD": null,
+        "S6_ENGAGE_YC": null,
+        "S6_HOOK": null,
+        "SEAT_TOPDOWN": null,
+        "SPACER": null,
+        "W0E_F1A": null,
+        "W0E_F1A_LAMBDA": null,
+        "W0E_F1A_SLOWSEAT": null,
+        "W0E_F1A_V2": null,
+        "W0E_F1B": null,
+        "W0E_F1B_SNAPDOWN": null,
+        "W0E_F2": null,
+        "W0E_F2_CAP_MM": null,
+        "W0E_F3": null,
+        "W0E_LIFT_M": null
+      },
+      "env_fingerprint_source": "scraped from as_run sources (recorder pattern b7553662a4)",
+      "denominators": {
+        "gpu_mib(index,total,used,free)": [
+          "0, 49140, 2646, 45895",
+          "1, 24467, 679, 23299"
+        ],
+        "meminfo": {
+          "MemTotal": "527988592 kB",
+          "MemAvailable": "476949476 kB"
+        },
+        "cpu_cores_logical": 64,
+        "cpu_cores_physical": 32
+      }
+    }
+  },
+  "before": [
+    {
+      "t": 1784194948.930064,
+      "gpu_used_mib_all": [
+        2646,
+        679
+      ]
+    },
+    {
+      "t": 1784194949.9606304,
+      "gpu_used_mib_all": [
+        2646,
+        679
+      ]
+    }
+  ],
+  "during": [
+    {
+      "t": 1784194953.0144856,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 0,
+      "tree_rss_mb": 237.170688,
+      "threads": 78,
+      "cpu_pct_norm": 0.0
+    },
+    {
+      "t": 1784194955.0679185,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 340,
+      "tree_rss_mb": 1064.706048,
+      "threads": 144,
+      "cpu_pct_norm": 5.0921875
+    },
+    {
+      "t": 1784194957.1223922,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1165.746176,
+      "threads": 144,
+      "cpu_pct_norm": 1.54375
+    },
+    {
+      "t": 1784194959.1780965,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1166.041088,
+      "threads": 144,
+      "cpu_pct_norm": 1.5671875
+    },
+    {
+      "t": 1784194961.2328281,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1166.114816,
+      "threads": 144,
+      "cpu_pct_norm": 1.58125
+    },
+    {
+      "t": 1784194963.283169,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1166.114816,
+      "threads": 144,
+      "cpu_pct_norm": 1.5703125
+    },
+    {
+      "t": 1784194965.3370688,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1166.114816,
+      "threads": 144,
+      "cpu_pct_norm": 1.5671875
+    },
+    {
+      "t": 1784194967.387853,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1166.114816,
+      "threads": 144,
+      "cpu_pct_norm": 1.5828125
+    },
+    {
+      "t": 1784194969.4406233,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1166.114816,
+      "threads": 144,
+      "cpu_pct_norm": 1.5703125
+    },
+    {
+      "t": 1784194971.494123,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 342,
+      "tree_rss_mb": 1186.500608,
+      "threads": 144,
+      "cpu_pct_norm": 1.56875
+    },
+    {
+      "t": 1784194973.550217,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.670976,
+      "threads": 144,
+      "cpu_pct_norm": 1.5734375
+    },
+    {
+      "t": 1784194975.6030214,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.670976,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784194977.6573756,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.5671875
+    },
+    {
+      "t": 1784194979.7105649,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.5734375
+    },
+    {
+      "t": 1784194981.7672508,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.5734375
+    },
+    {
+      "t": 1784194983.8222606,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.5734375
+    },
+    {
+      "t": 1784194985.874328,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784194987.9283893,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.5609375
+    },
+    {
+      "t": 1784194989.982352,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784194992.0357547,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.559375
+    },
+    {
+      "t": 1784194994.086165,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784194996.1386223,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.578125
+    },
+    {
+      "t": 1784194998.1928728,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.5671875
+    },
+    {
+      "t": 1784195000.2466824,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784195002.3006597,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.5734375
+    },
+    {
+      "t": 1784195004.3544888,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.56875
+    },
+    {
+      "t": 1784195006.409474,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784195008.4608665,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.565625
+    },
+    {
+      "t": 1784195010.5147762,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.5765625
+    },
+    {
+      "t": 1784195012.569774,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784195014.6247172,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.5671875
+    },
+    {
+      "t": 1784195016.6763864,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.56875
+    },
+    {
+      "t": 1784195018.7329748,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784195020.7853236,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.793856,
+      "threads": 144,
+      "cpu_pct_norm": 1.565625
+    },
+    {
+      "t": 1784195022.8363154,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.826624,
+      "threads": 144,
+      "cpu_pct_norm": 1.5765625
+    },
+    {
+      "t": 1784195024.8920908,
+      "phase": "init",
+      "step": null,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1260.826624,
+      "threads": 144,
+      "cpu_pct_norm": 1.56875
+    },
+    {
+      "t": 1784195026.9474819,
+      "phase": "warmup",
+      "step": 0,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.00736,
+      "threads": 144,
+      "cpu_pct_norm": 1.5796875
+    },
+    {
+      "t": 1784195029.0012553,
+      "phase": "window",
+      "step": 30,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.02784,
+      "threads": 144,
+      "cpu_pct_norm": 1.5671875
+    },
+    {
+      "t": 1784195031.0535982,
+      "phase": "window",
+      "step": 60,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.031936,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784195033.1069055,
+      "phase": "window",
+      "step": 90,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.040128,
+      "threads": 144,
+      "cpu_pct_norm": 1.5671875
+    },
+    {
+      "t": 1784195035.1598723,
+      "phase": "window",
+      "step": 100,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.072896,
+      "threads": 144,
+      "cpu_pct_norm": 1.5609375
+    },
+    {
+      "t": 1784195037.2134562,
+      "phase": "window",
+      "step": 120,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.072896,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784195039.2648995,
+      "phase": "window",
+      "step": 140,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.076992,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784195041.3224025,
+      "phase": "window",
+      "step": 150,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.076992,
+      "threads": 144,
+      "cpu_pct_norm": 1.5734375
+    },
+    {
+      "t": 1784195043.3755352,
+      "phase": "window",
+      "step": 170,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.076992,
+      "threads": 144,
+      "cpu_pct_norm": 1.5609375
+    },
+    {
+      "t": 1784195045.4295375,
+      "phase": "window",
+      "step": 180,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.097472,
+      "threads": 144,
+      "cpu_pct_norm": 1.575
+    },
+    {
+      "t": 1784195047.4818506,
+      "phase": "window",
+      "step": 190,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.097472,
+      "threads": 144,
+      "cpu_pct_norm": 1.565625
+    },
+    {
+      "t": 1784195049.5339384,
+      "phase": "window",
+      "step": 210,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.097472,
+      "threads": 144,
+      "cpu_pct_norm": 1.5765625
+    },
+    {
+      "t": 1784195051.5880864,
+      "phase": "window",
+      "step": 220,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.097472,
+      "threads": 144,
+      "cpu_pct_norm": 1.5765625
+    },
+    {
+      "t": 1784195053.6416018,
+      "phase": "done",
+      "step": 230,
+      "gpu_pid_mib": 350,
+      "tree_rss_mb": 1317.23264,
+      "threads": 144,
+      "cpu_pct_norm": 1.5671875
+    },
+    {
+      "t": 1784195055.6941006,
+      "phase": "done",
+      "step": 230,
+      "gpu_pid_mib": 0,
+      "tree_rss_mb": 0.0,
+      "threads": 1,
+      "cpu_pct_norm": 0.625
+    }
+  ],
+  "after": [
+    {
+      "t": 1784195057.7285447,
+      "gpu_pid_mib_for_dead_pid": 0
+    }
+  ],
+  "phases_seen": [
+    "init",
+    "warmup",
+    "window",
+    "done"
+  ],
+  "workload_exit": 0,
+  "use_mujoco_cpu_observed": true,
+  "profile": {
+    "gpu_mib": {
+      "baseline_min": 340,
+      "window_mean": 350.0,
+      "peak": 350,
+      "delta_peak_minus_baseline": 10
+    },
+    "tree_rss_mb": {
+      "window_mean": 1317.1,
+      "peak": 1317.1
+    },
+    "cpu_pct_norm": {
+      "window_mean": 1.57,
+      "peak": 1.58
+    },
+    "threads": {
+      "window_max": 144
+    },
+    "n_window_samples": 12
+  }
+}
