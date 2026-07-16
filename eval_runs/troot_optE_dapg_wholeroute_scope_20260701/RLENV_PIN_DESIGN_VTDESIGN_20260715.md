@@ -1,6 +1,6 @@
 # RL env pin 配線 — 設計裁定 v1.7
 
-**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
+**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**v1.8:** 2026-07-16（§21.9 = %12 E-probe `5b9fe8e62c` 結果 = 機構 feasible 確定・notify-safe・escalation なし・anchor=ref-pose hold-in-place / (c) 設計 finalize / E-1 positional が最終 gate）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
 **Trigger:** Rs 裁定 2026-07-15 00:5x「クリップ**のみ** pin を RL env に恒久配線しろ」（%12 経由）+ %12 依頼 2026-07-16（①署名裁定 ②恒久配線 scaffold）。
 **Scope:** Q1（pin をいつ打つか）/ Q2（clip-only を機構でどう保証するか）/ Q3（STEP 9 述語）/ (a) body 割当規則 / **①署名 canonical / ②恒久配線 firing scaffold（per-episode / done-world clear / policy-drive live trigger / multi-world eq / per-world audit）**。
 **⚠ 本 doc は message の代替である**（通信規律 2026-07-15 02:35: 数値は artifact に置き、message は path だけ）。
@@ -841,3 +841,47 @@ source が機構を確定したが、**mid-rollout の runtime 活性化が warp
 
 ### §21.8.3 %12 への指示（2択への回答 = (i) は解決済、(ii) へ進め）
 **(i) と (ii) は either/or でなく順序。(i) は本 §21.8.1 で source-解決（機構=newton-API+notify、直接 mjw 書込でない）。⇒ %12 は (ii) を、【newton-API 機構で】実 NewtonRouteEnv world_count=4 で実装し E-1..E-4 を raw 観測。** anchor は per-world achieved（現 CPU 版と同）で開始可（eq_data per-world 確定）。E-3 の notify/graph 衝突を最優先で観測（(d) live trigger 設計を左右）。
+
+---
+
+## §21.9 🔒 (c) 機構 = feasible 確定 + (c) 設計 finalize（v1.8、2026-07-16、%12 E-probe `5b9fe8e62c` を受けて）
+
+**%12 E-probe 報告（実 NewtonRouteEnv world_count=4、newton-API 機構）:**
+| # | 結果 | 含意 |
+|---|---|---|
+| **E-2** | ✅ warp が mid-rollout 活性化を**受容**（active-eq 24→25、world-2 seat pin **flat_eq 119 に isolated**）| nefc/array sizing は新規 active eq を収容。per-world activate は isolated。 |
+| **⭐E-3** | ✅ notify mid-rollout + step **安全**（crash なし・**env は `wp.capture` graph 未使用** ⇒ graph 衝突なし）| ⭐**私の最大懸念（notify×CUDA graph）が解消。(d) の per-fire notify は安全。** |
+| **E-4** | ✅ release 動作（`enabled=False`+notify で 25→24）| (b) done-world 解除の機構確定。 |
+| escalation | ✅ **なし**（E-2/E-3/E-4 PASS）| §21.6 の escalation 分岐は**発火せず**。multi-world pin は feasible。 |
+
+**⭐ anchor 機構の確定（%12 発見、`solver_mujoco.py:3490`）:** `equality_constraint_anchor` は **ref-pose 相対**（world target ではない）⇒ **pin は fire 時 pose で cable を保持 = hold-in-place**。⇒ ⭐ **これは (c)/pin が欲する【正しい挙動そのもの】**（clip は cable を「その位置で」保持する）。⇒ **§21.2/§21.8 の「world-target anchor を計算」は不要に簡約** — fire は「seated の瞬間に enable するだけ」、anchor は body-frame（例 origin）で hold-in-place。
+
+### §21.9.1 ⚠ E-1（positional per-world hold）は【依然 gate】— %12 診断は妥当だが確認は要る
+
+**%12 診断（採用）:** E-1 未実証の根因 = (1) displaced-world anchor は誤テスト（anchor=ref-pose ゆえ cable は移動せず hold-in-place が正）(2) 実 env が全 cable を gripper で保持 ⇒ free-fall 対照が mask。**⇒ 機構故障ではない。**
+
+**だが ⚓ 方法論上、E-1 の positional 確認は【skip 不可】:**
+- E-2 の count/isolation は「**activate が per-world**」を示す。しかし「**active eq が【正しい world の cable body】を拘束する**」（= flat_eq 119 が world-2 の cable body を参照し、world-0 の body でない = replicate の body-index 正しさ）を positional に確認**しない**。
+- ⛔ **body-index mismap は E-2 では見えず、訓練を silent 破損する**（world-w の pin が別 world の cable を保持 ⇒ (c) の全目的が崩れる）。これは (c) 調査全体が防ごうとした silent multi-world 破損クラスそのもの。
+- ✅ **安価かつ実 use-case そのもの**: gripper を解放し、**pin した world-w の cable は保持・非 pin world の cable は free-fall** を観測。これは STEP 8-10（pin が gripper 解放を跨いで保持）の実挙動。
+
+### §21.9.2 🔒 (c) 設計 finalize（機構確定分。実装は E-1 clean gate 後）
+
+```
+# fire（policy step、未 pin world w、seat body が capture volume 内）:
+eq = flat_eq_idx(world=w, seat_seg)                                  # E-2 で layout 確定（world-2→119）
+newton_model.equality_constraint_enabled[eq] = True                 # per-world enable
+newton_model.equality_constraint_anchor[eq]  = <body-frame anchor>  # ref-pose ⇒ hold-in-place（world-target 計算不要）
+solver.notify_model_changed(SolverNotifyFlags.CONSTRAINT_PROPERTIES) # fire 時のみ・同 step 多 world は 1 notify に batch
+# release（_reset_worlds、done world w のみ）:
+newton_model.equality_constraint_enabled[eq(w,*)] = False; notify(CONSTRAINT_PROPERTIES)   # ⛔ blanket 禁止
+```
+- **(c)** = 上記 per-world enable/anchor/notify。⛔ 直接 mjw / CPU 書込でない。
+- **(a)** witness per-world reset / **(b)** done-world release（上記）/ **audit** per-world（mjw の per-world eq_active を world 毎走査、cap ≤ len(ROUTE_CLIP_CENTERS)/world）。
+- **(d)** trigger = 幾何 capture 述語（§21.4、非 raise）が True の瞬間に fire。**notify は fire 時のみ**（毎 step でない、E-3 で安全確定だが per-fire コスト最小化）。⛔ reward coupling ゆえ `/reward-design`+`/pre-check` gate は不変。
+- anchor = ref-pose hold-in-place ⇒ fire は「seated 判定 → enable」のみ、world-target 計算なし。
+
+### §21.9.3 %12 への指示
+1. **(c) 設計 = 進めてよい**（機構 feasible 確定、E-2/E-3/E-4 PASS、escalation なし）。本 §21.9.2 が finalize 版。
+2. **E-1 clean demo = 実施**（並行・安価）= gripper 解放で **world-w cable 保持 / 非 pin world free-fall** を positional 確認（body-index 正しさ + 実 use-case）。**これが (a)-(d)+audit unblock の最終 gate。** E-1 FAIL（world-w が保持しない / 他 world 影響）なら body-index/replicate bug ⇒ (c) 前に fix。
+3. E-1 clean PASS 後: (d) の `/reward-design`+`/pre-check` gate → L3 chain → 実装。
