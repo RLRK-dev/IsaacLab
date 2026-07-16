@@ -1,0 +1,70 @@
+{
+  "world_count": 4,
+  "seat_seg": 27,
+  "pin_world": 2,
+  "onset_frame": 2544,
+  "onset_rl_step": 254,
+  "pin_flat_eq": 119,
+  "seat_body_newton": 191,
+  "early_done_during_drive": 130,
+  "HV": {
+    "seat_z_at_onset_mm": [
+      822.9,
+      809.0,
+      809.0,
+      809.0
+    ],
+    "per_world_driven": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "PASS": false
+  },
+  "VERDICT": {
+    "disposition": "ENV-MULTIWORLD finding: worlds [1, 2, 3] never lifted/seated under the FF drive (early_done=130) -> the multi-world drive/physics itself is the blocker (broader than the pin; surfaced to p5/Rs). Pin untested.",
+    "HV": false
+  },
+  "trace": {
+    "t": [
+      0,
+      0,
+      60,
+      120,
+      130
+    ],
+    "seat_z_mm": [
+      [
+        803.9,
+        809.0,
+        809.0,
+        809.0
+      ],
+      [
+        803.9,
+        809.0,
+        809.0,
+        809.0
+      ],
+      [
+        803.9,
+        809.0,
+        809.0,
+        809.0
+      ],
+      [
+        809.2,
+        809.0,
+        809.0,
+        809.0
+      ],
+      [
+        822.9,
+        809.0,
+        809.0,
+        809.0
+      ]
+    ]
+  }
+}

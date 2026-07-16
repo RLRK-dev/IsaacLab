@@ -1,0 +1,40 @@
+{
+  "world_count": 4,
+  "seat_seg": 27,
+  "pin_world": 2,
+  "pin_flat_eq": 119,
+  "seat_body_newton": 191,
+  "MAP": {
+    "flipped_world_eq": [
+      [
+        2,
+        27
+      ]
+    ],
+    "maps_to_world": 2,
+    "PASS": true
+  },
+  "E1": {
+    "step_ok": true,
+    "step_err": null,
+    "seat_move_mm_per_world": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "held_world_least_moved": 0,
+    "pinned_move_mm": 0.0,
+    "others_move_mm": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "PASS": false
+  },
+  "VERDICT": {
+    "MAP": true,
+    "E1": false,
+    "disposition": "REVIEW: mjw maps to world 2 but physics did not show a clean hold (held_world=0, move=[0.0, 0.0, 0.0, 0.0]) -> gripper-release contrast weak; body-index likely OK via MAP"
+  }
+}
