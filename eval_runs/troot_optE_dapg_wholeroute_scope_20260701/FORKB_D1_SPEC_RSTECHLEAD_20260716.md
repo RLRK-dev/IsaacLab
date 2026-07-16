@@ -49,8 +49,8 @@ rollouts/
 
 ## §3 disk budget + rotation (要件 #1、Stage-A :125 の N-process 再見積)
 
-実測基礎 (calibration v4 `fd536235e9` = 確定 evidence; timing 導出は v2 trace 由来で v4 同等、D0_CALIBRATION_ONLY ⇒
-E0 で再確認): init ≈ 80 s/proc、定常 ≈ **8 RL steps/s/proc**
+実測基礎 (resource evidence = calibration v4 `fd536235e9`; ⚠**timing は v2 trace 由来のみ** — v4 artifact に timing
+field は無い。timing の確証は E0 で取る。D0_CALIBRATION_ONLY): init ≈ 80 s/proc、定常 ≈ **8 RL steps/s/proc**
 ⇒ 900-step episode ≈ 113 s ⇒ **~30 ep/h/proc、N=4 で ~120 ep/h**。0.5 MB/ep (Stage-A :125) ⇒ **~60 MB/h、24 h ≈ 1.4 GB**。
 - **rotation 方針: 削除しない**(容量が問題にならない)。retention = run 単位 dir、disk 残量 < 50 GB で supervisor が
   loud warn (削除は人間判断 — 学習データの silent destruction をしない)。

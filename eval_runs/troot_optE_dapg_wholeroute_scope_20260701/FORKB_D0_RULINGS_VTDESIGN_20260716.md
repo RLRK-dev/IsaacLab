@@ -1,8 +1,8 @@
-# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.3
+# fork-B D0 設計裁定 (VT-DESIGN p5, 2026-07-16) v1.4
 
-**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status（tri-state、`dfae1390fe` 準拠）: D0 裁定 = 6/6 issued+banked**（v1.0 R2-R6 `11fdb0bc11` / v1.1 R1 `889ce6b640`［cuda:2 配置 = %12 CONCUR 決着］/ v1.2 要件 #7 `8304500dbd`）**・項 1 evidence = pN HOLD（v3 calibration 実行中、R1 数値 = PROVISIONAL-tolerant）・E0 fence = CLOSED**。**v1.3 = D1-VERIFY verdict（CONFORM 7/7 + AMEND-1 [seed key 3 要素統一] + contention bar 批准根拠 + I0 助言）** — DRAFT、0-commit（bank = %12）。
+**Node**: `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB`。**Status: D0 = 6/6 CLOSE（design + evidence）** — 裁定 v1.0 R2-R6 `11fdb0bc11` / v1.1 R1 `889ce6b640`［cuda:2 配置 = %12 CONCUR 決着］/ v1.2 要件 #7 `8304500dbd` / v1.3 D1-VERIFY（CONFORM 7/7 + AMEND-1）`9cea41ac67`。**item-1 evidence = v4 `fd536235e9` PASS**（pN 独立 verify、末尾 EVIDENCE-RECORD UPDATE `55086b197b` [record-only、%12 custodial — p5 検証・受理済: 設計文 append-only、peak/RSS/CPU 同値ゆえ **R1 の N=4 結論 不変**、v4a narrative=UNVERIFIED 隔離は正]）。**v1.4 = 本 header の evidence-status 同期のみ（owner 実施、設計内容 無変更）**。次 = **E0**（D1 §7 事前登録どおり、fresh N=1 から）。0-commit（bank = %12）。
 **入力**: 素材 = `FORKB_D0_MATERIALS_RSTECHLEAD_20260716.md`（DoD = `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` §21.11.2a、v1.13 `7b4c918251`）。
-**範囲**: 項 2/3/4/5/6 の裁定（素材 ✅ 分）。項 1（N sizing）= 実測待ちで**保留**。
+**範囲**: 全 6 項の裁定 — 項 2/3/4/5/6 = v1.0、項 1 = v1.1 追裁定（当初「実測待ちで保留」〔歴史〕→ **v4 `fd536235e9` PASS で解消済**〔record-fix %12〕）。
 **接地検証（p5 自読、2026-07-16）**: 項2 `newton_route_env.py:1047-1049`（裸 `np.random.uniform`、行 drift 訂正を確認）/ 項3 `TRAINER_NODE_DEFINE...0712.md:7`（RLPD 条項逐語）+ `:30`（SAC/TD3/replay=ZERO 逐語）/ 項4 `STAGEA_...0712.md:117/:125/:131`（schema・disk budget・os.environ 規約 逐語）/ 項5 `newton_route_env.py:419`（default=4）+ caller grep（wc=1 明示を裏書き、wc=NW は E_probe のみ=意図的）。
 
 ---
@@ -62,11 +62,11 @@
 
 ---
 
-## R1 🔒 項 1 — N と資源上限（v1.1 追裁定、2026-07-16。実測 = `forkb_d0_calibration_profile_result.json`、bank `e1298c4bf6`）
+## R1 🔒 項 1 — N と資源上限（v1.1 追裁定、2026-07-16。**evidence of record = v4 `fd536235e9`〔record-fix %12〕**; 裁定時実測 = v2 `e1298c4bf6`〔歴史〕）
 
-**R1-0 実測批准（p5 artifact 自読）**: 全数値を artifact で確認 — GPU **350 MiB/proc**（PID 帰属 peak、delta 10、baseline 340）/ RSS **1317.8 MB/proc** / CPU **1.58% 正規化 ≈ 1.0 core/proc**（64 core、146 threads は idle pool = 単一 core 支配）/ n_window=12 / `use_mujoco_cpu_observed=true` / workload_exit=0 / after 正対照 dead-pid GPU=0。protocol 準拠（sha `11fdb0bc11` / CVD=0 / wc=1 / window [30,230) / cadence 2s / D0_CALIBRATION_ONLY MARK 明記）。⭐ **v1→v2 の経緯（CPU 計器死を self-check で捕捉 → fail-loud 正対照へ昇格、`_v1_deadcpu.json` 保全）= 「計器が自分の死を検出する」positive-control 教訓の正しい適用と評価。**
+**R1-0 実測批准（p5 artifact 自読、⚠v2 時点〔歴史〕。current evidence = v4: peak 350 同値 / baseline 308 / delta 42 / RSS 1310 / CPU 1.56% / n_window=9〔record-fix %12〕）**: 全数値を v2 artifact で確認 — GPU **350 MiB/proc**（PID 帰属 peak、delta 10、baseline 340）/ RSS **1317.8 MB/proc** / CPU **1.58% 正規化 ≈ 1.0 core/proc**（64 core、146 threads は idle pool = 単一 core 支配）/ n_window=12 / `use_mujoco_cpu_observed=true` / workload_exit=0 / after 正対照 dead-pid GPU=0。protocol 準拠（sha `11fdb0bc11` / CVD=0 / wc=1 / window [30,230) / cadence 2s / D0_CALIBRATION_ONLY MARK 明記）。⭐ **v1→v2 の経緯（CPU 計器死を self-check で捕捉 → fail-loud 正対照へ昇格、`_v1_deadcpu.json` 保全）= 「計器が自分の死を検出する」positive-control 教訓の正しい適用と評価。**
 
-**R1-1 上限式の各項（p5 再計算、artifact 分母）**:
+**R1-1 上限式の各項（p5 再計算、v2 artifact 分母〔歴史〕— v4 分母で cap 再確認済: 拘束 = ≤4 規則 不変〔record-fix %12〕）**:
 | 項 | 計算 | 上限 |
 |---|---|---|
 | GPU | (49,140 − 2,666 ambient) / 350 | ≈ **132** |
@@ -94,7 +94,7 @@
 
 ## D1-VERIFY 🔒 spec v0.1 照合 verdict（v1.3、2026-07-16、対象 = `FORKB_D1_SPEC_RSTECHLEAD_20260716.md` `d70fea96ed`）
 
-**方法**: 要件 1-7 を sub-item 単位で spec § と 1:1 照合（行単位 PASS 禁止規律）。input cites（v1.2 `8304500dbd` / calibration `e1298c4bf6`）on-disk 検証済。
+**方法**: 要件 1-7 を sub-item 単位で spec § と 1:1 照合（行単位 PASS 禁止規律）。input cites（v1.2 `8304500dbd` / calibration `e1298c4bf6`〔verify 時点の artifact = v2 世代〔歴史〕; evidence of record は現在 v4 `fd536235e9`〔record-fix %12〕〕）on-disk 検証済。
 
 ### verdict = **CONFORM 7/7** — 修正裁定 1（R2-1 AMEND）+ 批准根拠 1 + 助言 1 を添えて PASS
 
@@ -123,7 +123,7 @@
 
 ### PROVISIONAL の扱い = 適正
 
-§0/§3/§7 の PROVISIONAL 明記 + pN HOLD（v3 calibration: as_run sha256/env scrape/分母 in-artifact 化）→ §3 数値差替え → E0 最終、の三段は records-match-fact に適合。⚠ **v3 で数値が実質変動した場合（例 steps/s が ±30% 級）、§3 と R1-1 margin 表は差替え** — ただし **R1 の拘束構造（唯一の拘束=4-proc 規則）は margin 30-80× ゆえ v3 で覆る見込みは薄い**（覆れば R1 再裁定、loud）。
+§0/§3/§7 の PROVISIONAL 明記 + pN HOLD → v3/v4 差替え → E0 最終、の三段は records-match-fact に適合。〔**RESOLVED 2026-07-16 19:5x〔record-fix %12〕**: v4 `fd536235e9` = pN 独立 verify PASS。数値 = peak 350/RSS 1310/CPU 1.56%（v2 近似一致、baseline 308/delta 42/n9 は相違）⇒ **R1 の拘束構造（唯一の拘束=4-proc 規則、margin 30-80×）は不変・再裁定不要**。E0 で最終確認。〕
 
 ---
 

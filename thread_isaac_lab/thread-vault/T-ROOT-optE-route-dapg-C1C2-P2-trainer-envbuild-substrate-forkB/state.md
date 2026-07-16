@@ -3,7 +3,7 @@ node_id: T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild-substrate-forkB
 node_name: "W1 Fork B CPU single-world process-parallel trainer infrastructure"
 goal: "world_count=1 の proven MuJoCo CPU route env を N process で収集する fork B を、Stage-A 契約・決定論・忠実度を保ったまま設計・実装し、RL/IL throughput を確保しつつ vision/world-model 用資源を圧迫しない構成として検証する。"
 goal_verification: |
-  1. design v1.12 §21.11.2 の5項（N/資源、seed、IPC、Stage-A整合、R-b）が設計文書に固定され、独立reviewを通る。
+  1. design v1.12 §21.11.2 の5項＋v1.13 追加の項6 = **6項**（N/資源、seed、IPC、Stage-A整合、R-b、process故障/NaN方針）が設計文書に固定され、独立reviewを通る。
   2. world_count=1 route env の N=1/2/4 process 実測artifactが transitions/s、CPU/GPU memory、determinism/fidelity を記録する。
   3. W1 trainer transition budget から必要throughputを逆算し、実測scalingで採択Nを決める。不達時はRsへ再裁定する。
   4. Stage-A trainer-env gateとのreconcileがPASSし、processごとのseed/provenanceとasync rollout IPC/backpressure契約が検証される。
@@ -60,13 +60,14 @@ spec_version: LTM-1 v1.2
 
 ## 3. design gate phases
 
-### D0 — 5項の設計固定
+### D0 — 6項の設計固定 (v1.13 で項6 追加)
 
 1. Nと資源上限。
 2. seed/provenanceと決定論。
 3. async rollout IPC、搬送単位、頻度、backpressure。
 4. Stage-A trainer-env契約とのreconcile。
 5. R-b tripwireの着地点、診断用opt-out、test matrix。
+6. process故障/NaN方針（fail-loud per-process、buffer汚染防止provenance、restart規約 — v1.13 追加・%12 採用）。
 
 ### E0 — sizing / fidelity evidence
 
