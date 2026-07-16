@@ -1,0 +1,250 @@
+{
+ "ts": 1784216024.5890708,
+ "golden": "w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz",
+ "n_frames": 7707,
+ "pin_onset_frame": 2544,
+ "derived_pin_node": 27,
+ "pin_node_derivation_stable": true,
+ "bars": {
+  "SEAT_LAT_BAR_M": 0.0034999999999999996,
+  "SEAT_Z_LO_M": 0.8210000000000001,
+  "SEAT_Z_HI_M": 0.8360000000000001,
+  "DROP_LATERAL_DEV_MAX_M": 0.06,
+  "G_PHASE_BONUS": 5.0,
+  "TERM_PENALTY": -10.0
+ },
+ "c1_first_seated_frame": 2544,
+ "c1_seated_fraction_post_onset": 1.0,
+ "c1_dx_tail_mm": [
+  0.865,
+  0.887,
+  0.905,
+  0.923,
+  0.945,
+  0.96,
+  0.967,
+  0.979,
+  0.991,
+  0.999,
+  1.01,
+  1.009,
+  0.998,
+  0.994,
+  1.025,
+  1.005,
+  0.999,
+  0.994,
+  0.989,
+  0.987
+ ],
+ "c1_z_tail": [
+  0.8286,
+  0.8286,
+  0.8286,
+  0.8286,
+  0.8287,
+  0.8287,
+  0.8287,
+  0.8287,
+  0.8287,
+  0.8287,
+  0.8287,
+  0.8287,
+  0.8287,
+  0.8287,
+  0.8288,
+  0.8288,
+  0.8288,
+  0.8288,
+  0.8288,
+  0.8288
+ ],
+ "tighten_divergence_frames": 0,
+ "old_semantics_seated_fraction": 1.0,
+ "ipin_identity_consistency": "517/517 seated frames have a straddle in {pin-1,pin}",
+ "fm3_false_escape_frames_post_onset": 0,
+ "fm3_max_abs_xdev_mm": 1.0253081653083806,
+ "c2_tail_rows_frame_dxmm_z_seated": [
+  [
+   7414,
+   0.291,
+   0.8355,
+   true
+  ],
+  [
+   7424,
+   0.265,
+   0.8352,
+   true
+  ],
+  [
+   7434,
+   0.237,
+   0.8347,
+   true
+  ],
+  [
+   7444,
+   0.226,
+   0.8342,
+   true
+  ],
+  [
+   7454,
+   0.242,
+   0.8337,
+   true
+  ],
+  [
+   7464,
+   0.241,
+   0.8331,
+   true
+  ],
+  [
+   7474,
+   0.286,
+   0.8328,
+   true
+  ],
+  [
+   7484,
+   0.304,
+   0.8327,
+   true
+  ],
+  [
+   7494,
+   0.273,
+   0.8323,
+   true
+  ],
+  [
+   7504,
+   0.246,
+   0.8318,
+   true
+  ],
+  [
+   7514,
+   0.243,
+   0.8313,
+   true
+  ],
+  [
+   7524,
+   0.243,
+   0.8308,
+   true
+  ],
+  [
+   7534,
+   0.252,
+   0.8303,
+   true
+  ],
+  [
+   7544,
+   0.296,
+   0.83,
+   true
+  ],
+  [
+   7554,
+   0.315,
+   0.8299,
+   true
+  ],
+  [
+   7564,
+   0.279,
+   0.8295,
+   true
+  ],
+  [
+   7574,
+   0.256,
+   0.829,
+   true
+  ],
+  [
+   7584,
+   0.289,
+   0.8285,
+   true
+  ],
+  [
+   7594,
+   0.333,
+   0.828,
+   true
+  ],
+  [
+   7604,
+   0.386,
+   0.8276,
+   true
+  ],
+  [
+   7614,
+   0.405,
+   0.8274,
+   true
+  ],
+  [
+   7624,
+   0.914,
+   0.8272,
+   true
+  ],
+  [
+   7634,
+   0.281,
+   0.8295,
+   true
+  ],
+  [
+   7644,
+   1.98,
+   0.8305,
+   true
+  ],
+  [
+   7654,
+   0.472,
+   0.8301,
+   true
+  ],
+  [
+   7664,
+   0.217,
+   0.8299,
+   true
+  ],
+  [
+   7674,
+   0.195,
+   0.8299,
+   true
+  ],
+  [
+   7684,
+   0.187,
+   0.8299,
+   true
+  ],
+  [
+   7694,
+   0.184,
+   0.8299,
+   true
+  ],
+  [
+   7704,
+   0.179,
+   0.8299,
+   true
+  ]
+ ],
+ "sec_S_note": "gate-2 rerun artifact: this probe VALIDATES the swept FM3/FM4 semantics (owner chain leg 1, I0A_SCOPE_MANIFEST:45); until the chain completes, HEAD reward semantics stay unratified (sec S)."
+}
