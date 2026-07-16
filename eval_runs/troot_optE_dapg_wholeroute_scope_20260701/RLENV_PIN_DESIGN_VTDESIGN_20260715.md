@@ -1,6 +1,6 @@
 # RL env pin 配線 — 設計裁定 v1.7
 
-**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**v1.8:** 2026-07-16（§21.9 = %12 E-probe `5b9fe8e62c` 結果 = 機構 feasible 確定・notify-safe・escalation なし・anchor=ref-pose hold-in-place / (c) 設計 finalize / E-1 positional が最終 gate）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
+**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**v1.8:** 2026-07-16（§21.9 = %12 E-probe `5b9fe8e62c` 結果 = 機構 feasible 確定・notify-safe・escalation なし・anchor=ref-pose hold-in-place / (c) 設計 finalize / E-1 positional が最終 gate）。**v1.9:** 2026-07-16（§21.10 = E-1 BLOCKED-BY-ENV 裁定: ENV-MULTIWORLD 発見 [worlds>0 物理凍結] は **USE_MUJOCO_CPU=True の CPU step=単一世界積分で by-construction 説明**・D-1/D-2 判別指定 / **§21.9 E-2/E-3/E-4 を sync 実証へ re-scope**［bug 下で緑の gate 教訓の自適用］/ env 発見=別 charter CONFIRM + fork A/B/C 事前分析）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
 **Trigger:** Rs 裁定 2026-07-15 00:5x「クリップ**のみ** pin を RL env に恒久配線しろ」（%12 経由）+ %12 依頼 2026-07-16（①署名裁定 ②恒久配線 scaffold）。
 **Scope:** Q1（pin をいつ打つか）/ Q2（clip-only を機構でどう保証するか）/ Q3（STEP 9 述語）/ (a) body 割当規則 / **①署名 canonical / ②恒久配線 firing scaffold（per-episode / done-world clear / policy-drive live trigger / multi-world eq / per-world audit）**。
 **⚠ 本 doc は message の代替である**（通信規律 2026-07-15 02:35: 数値は artifact に置き、message は path だけ）。
@@ -885,3 +885,64 @@ newton_model.equality_constraint_enabled[eq(w,*)] = False; notify(CONSTRAINT_PRO
 1. **(c) 設計 = 進めてよい**（機構 feasible 確定、E-2/E-3/E-4 PASS、escalation なし）。本 §21.9.2 が finalize 版。
 2. **E-1 clean demo = 実施**（並行・安価）= gripper 解放で **world-w cable 保持 / 非 pin world free-fall** を positional 確認（body-index 正しさ + 実 use-case）。**これが (a)-(d)+audit unblock の最終 gate。** E-1 FAIL（world-w が保持しない / 他 world 影響）なら body-index/replicate bug ⇒ (c) 前に fix。
 3. E-1 clean PASS 後: (d) の `/reward-design`+`/pre-check` gate → L3 chain → 実装。
+
+---
+
+## §21.10 🔒 E-1 BLOCKED-BY-ENV 裁定 + 私の §21.9 の re-scope（v1.9、2026-07-16、%12 E-1 報告 `100997a44a` を受けて）
+
+### §21.10.0 発見の確認（%12 報告、採用）
+
+- ✅ **E-1 v1 MAP = PASS**: flat_eq 119 → mjw flip が正確に (2,27) の 1 箇所 = **配列レベルの body-index は正しい**。
+- ⛔ **ENV-MULTIWORLD 発見**: world_count=4 の実 env で **worlds 1-3 の cable 物理が凍結**（settle 試験決定的: 全 world spawn z=809.0、world-0 のみ 803.9 へ settle → 把持 lift 822.9@t130、worlds 1-3 は 130 step 全区間 809.0 不動）。minimal harness（`6fb00b845c` P-3「world-0 しか step しない」）と**同一シグネチャ = 2 独立 harness 一致** ⇒ probe 固有でない、env の性質。prior-art PASS = 新規発見。
+- ⭐ **含意（%12、採用）**: **W1 多世界並列訓練は pin と無関係に不可能**（world_count>1 で worlds>0 が演算されない）。E-1 physical レグは env fix まで測定不能。
+
+### §21.10.1 ⭐⭐ 根因 = 【by-construction で説明される】— USE_MUJOCO_CPU=True の step は単一世界のみ積分
+
+**on-disk 接地（推測でなく構成の読み）:**
+| 事実 | cite |
+|---|---|
+| env solver build = `make_solver(model, ...)` → `SolverMuJoCo(model, use_mujoco_cpu=use_mujoco_cpu, separate_worlds=(world_count>1), ...)`、`use_mujoco_cpu` 既定 = **`USE_MUJOCO_CPU`** | `newton_skill_env_base.py:1302/:1322-1340/:1985` |
+| **`USE_MUJOCO_CPU = True`**（SSOT）。コメント逐語:「Opt-1/S4-S7 = CPU smoke; **GPU (use_mujoco_cpu=False) = S8**」— **多世界 GPU は S8 として最初から別 stage 扱い** | `task_config.py:116` |
+| solver step は 2 分岐: `use_mujoco_cpu=True` ⇒ **`mj_step(self.mj_model, self.mj_data)` = single-world host template のみ積分**（mjw は step されない）/ False ⇒ warp が `mjw_data` を step | `newton/_src/solvers/mujoco/solver_mujoco.py:3266-3289` |
+
+⇒ 🔒 **観測シグネチャ（worlds>0 完全不動・mjw 配列は per-world 実在するのに動かない・2 harness 一致）は、この構成で【余さず】説明される**: CPU path は template（=world-0 相当）だけを `mj_step` し、worlds 1-3 には積分が**一度も走らない**。バグというより **CPU-smoke 構成の既知限界が、初の world_count>1 物理試験で顕在化**したもの（これまで route env は world_count=1 でのみ物理検証されてきた: g6_live 含む）。
+
+**⚠ ただし確証バイアス防止 — 1-bit 判別テストを指定（%12、数分）:**
+- D-1: built env で `solver.use_mujoco_cpu` を print ⇒ **True なら本仮説が step 分岐 cite により確定**。
+- D-2（対照・任意だが推奨）: `use_mujoco_cpu=False` で同 settle 試験 ⇒ worlds>0 が settle し始めれば完全確定。⚠ **事前登録予測**: この対照では**把持 4-bar が flop し得る**（mjw eq re-poke = DEFERRED、`newton_skill_env_base.py:1357/:1437` — 4-bar 剛性 poke は CPU/mj_model にしか当てていない）⇒ settle は動くが grip 品質は未整備、が予測。flop したらそれは D-2 の失敗でなく **S8-gap リストの実証**。
+
+### §21.10.2 ⛔ 私の §21.9「E-2/E-3/E-4 PASS」を【re-scope】する（撤回でなく scope 縮小。7 件目の自己訂正として記録）
+
+`[[feedback-a-gate-validated-under-the-bug-is-validated-by-the-bug]]` の自適用。E-probe は「worlds>0 を step しない env」の中で走った:
+| 旧結論（§21.9） | re-scope 後 |
+|---|---|
+| E-2「warp が mid-rollout 活性化を**受容**」 | ✅ 実証されたのは **newton→mjw の sync**（enabled flip が mjw 配列に届く、count 24→25、isolated）。⛔ **warp step がそれを消費して拘束を生むかは【未実証】** — warp step は走っていない（CPU path）。nefc sizing 問いは **OPEN に戻す**。 |
+| E-3「notify mid-rollout 安全（graph 衝突なし）」 | ✅ 実証は **CPU-step 環境下**の notify 安全。「env は wp.capture 未使用」も CPU path では当然。⛔ **S8（warp step）で graph capture を使うかは env 実装次第 ⇒ E-3 は S8 構成で再検証対象**。 |
+| E-4「release 動作」 | ✅ sync レベル（25→24）のみ。同上。 |
+| E-1 MAP | ✅ **不変で有効**（配列 mapping は step と独立）。 |
+
+⇒ 🔒 **(c) の現在地を正直に言い直す: 「機構設計 = source-確定（§21.8.1、これは不変）+ sync 実証済。warp-step 消費の実証（真の E-2）と E-1 physical は【env fix 後】に carry。」**「feasible 確定」という §21.9 の言い方は sync までに縮む。
+
+### §21.10.3 🔒 disposition 裁定
+
+1. **(c) 設計（§21.9.2）= 不変・banked のまま**。newton-API+notify 機構は **path-agnostic**（notify は CPU/warp 両分岐を処理、`solver_mujoco.py:3497+`）⇒ env が S8 へ行っても CPU に留まっても設計は変わらない。**実装は gated 継続**（E-1 physical + 真の E-2 を env 解決後に再走）。
+2. **(a)-(d)+audit = world-0 据置を維持**（%12 の現状維持は正）。
+3. **E-1 = FAIL ではなく BLOCKED-BY-ENV** と記録（E-1 v1 MAP PASS は保持。pin 側に欠陥は出ていない）。
+
+### §21.10.4 🔒 env 発見の設計上の扱い = **別 charter 化を CONFIRM**（%12 推奨に同意）+ fork の事前分析
+
+**別 charter とする理由:** (i) pin と独立（pin 無しでも W1 多世界訓練を block する env-core の性質）(ii) 解決は **substrate 構成の変更 = `task_config.py` SSOT（L3 自動昇格 path）+ 忠実度・決定論の re-baseline** を伴う = **Rs 専権級の premise 判断**（S7→S8 移行は最初から Rs の stage 設計）(iii) blast radius = W1 訓練全体（pin 作業の中に埋めると §19 の教訓どおり埋没する）。
+
+**charter への設計 fork（p5 事前分析。選択 = Rs）:**
+| Path | 内容 | 得る | 既知 gap / コスト |
+|---|---|---|---|
+| **A: S8 移行**（`use_mujoco_cpu=False`、warp step） | 本来の多世界 mode（task_config.py:116 が最初から予定） | 真の in-process 多世界並列 | ① **mjw eq re-poke DEFERRED の清算**（4-bar 剛性ほか、CPU/mj_model にのみ当てた poke 全数を mjw へ mirror — grep で全 poke 棚卸し）② **決定論 re-baseline**（byte-repro は CPU 前提で pin されてきた; memory: canonical-route device-fragile CPU vs cuda）③ **忠実度 re-anchor**（golden route 1 本を warp substrate で再走 → Rs 動画 GT 再取得）④ E-2/E-3 再検証（§21.10.2） |
+| **B: CPU 維持 + process 並列** | world_count=1 env × N process（RL 側 vectorize） | substrate 不変（proven CPU 忠実度・byte-repro 温存）で並列性 | process overhead / rollout 収集の infra 変更（trainer 側）/ GPU メモリ×N |
+| **C: world_count=1 訓練** | 現状のまま | 追加作業ゼロ | throughput 最低（最終手段） |
+
+⚠ **A と B は排他でない**（A の gap 清算が長引く場合、B が W1 の実用 bridge になり得る）。**throughput 要件（W1 訓練規模）× 忠実度 × 工数の trade = Rs 判断**。
+
+### §21.10.5 %12 への指示
+1. **D-1 判別（1-bit、即時）** → D-2 対照（推奨、事前登録予測込み）。
+2. **env 発見の charter 起票**は %12/p1 経路で Rs へ（本 §21.10.4 の fork 表を材料に）。**pin node の中で env fix を始めない**（scope 混入禁止）。
+3. pin 側は **world-0 据置 + (c) 設計 banked** で完結。E-1 physical / 真の E-2 は env charter 解決後に **この doc の §21.9.1/§21.8.2 の手続きのまま**再走（設計変更なし）。
