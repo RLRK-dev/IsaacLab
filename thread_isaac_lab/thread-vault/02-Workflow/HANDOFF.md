@@ -1,6 +1,6 @@
-# RS-TECH-LEAD handoff — 2026-07-17 05:19 JST (gate② I3/I4 実装 bank 後)
+# RS-TECH-LEAD handoff — 2026-07-17 05:57 JST (gate② correction arc bank 後・pN readback 待ち)
 
-## セッション継続中: 2026-07-17 05:19 JST (RS-TECH-LEAD %12 / w2:p4)
+## セッション継続中: 2026-07-17 05:57 JST (RS-TECH-LEAD %12 / w2:p4)
 
 ⚠ **各 pane は自分の per-pane handoff を読め**。**%12 正本 = `handoff-cc-rstechlead-w1build-2026-07-12.md`**
 (全 arc の時系列 CURRENT STATE)。本 file = shared last-writer の要約。
@@ -15,9 +15,16 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
   BLOCK〔訓練批准〕** (単一 ep 述語=clean・SRG probe=可) → **I3/I4 の p5 裁定 = §S3 banked (`d807d077b8`)** →
   ⭐**I3/I4 実装 = bank 済 `dfbddb4777` (05:1x、Rs「A着手」04:3x)**: L3 chain 遵守 (L-TRIAGE→[VERIFY] 3-lens
   panel [CC2/CC3/CC6 全て非 BLOCK、refinement 11 件 fold]→rule-check→実装→leg 全 PASS)。record =
-  `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` ([RESULT] 表 + staged-hunk 検査開示)。p5 delta verify 依頼済 +
-  pN evidence 判定/分割 co-decide 依頼済 (05:17 dispatch、Enter 到達確認済)。
-  **§S = 継続** (解除 = pin (a)(b) + (d) containment → p5 delta verify → /pre-check 再走 の後)
+  `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` ([RESULT] 表 + staged-hunk 検査開示 + pN HOLD 対応 §)。
+  ⭐**two-key 結果 (05:2x-05:5x)**: p5 delta verify = **CONFORM PASS bank `2298cb0d27`** → **pN = 二層**
+  (mechanism PASS / **evidence-bank HOLD B1-B3**) → p5 §S3.5a 訂正 10 件目 (exact-landed 9/10、bar 9/9 —
+  design CONFORM 維持) + pN readback R1/R2 → **不可分 bank `2dbc21d178`** → **B1-B3 対応 bank `bb82ae7a76`**
+  (B1 = disposition (b): V5 recording-fields leg を chunk acceptance 外へ・route_executor pin-fields land
+  = (a)(b) precondition / B2 = pre-commit clean / B3 = probe leg E closure) → **exact-landed 再生成 bank
+  `85958627e3`** (worktree@bb82ae7a76、closure git status=[]・全 leg PASS) → **pN readback 依頼済 05:55**。
+  **/pre-check 再走 = FENCE 中** (解除 = pN evidence HOLD 解除後; LEDGER `bf5feef0bd`)。⚠05:2x の
+  /pre-check verifier spawn は API 529 ×2 で死亡 → FENCE 発効により再 spawn せず。
+  **§S = 継続** (解除 = FENCE 解除 → /pre-check 再走 PASS 後; gate② 完了はさらに (a)(b)+(d))
 - two-key = pN (OPS-SUP-CODEX、evidence 軸) + p5 (VT-DESIGN、設計軸)。**OPS-SUP 役割 = pN (p1 でない)**
 
 ### Vault SSOT checked（banked design 接地）
@@ -52,8 +59,9 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
   **残 = ③pin (a) witness per-episode reset + (b) eq clear on reset** (leg3 Issue 1 = banked 残作業; 前提 =
   pin は既成着座の【保持】装置、seat f2428 ≺ onset f2544; ⚠識別子永続 coupling = RLENV_PIN_DESIGN §21.11.1
   pointer 注記済 [I3 の escape が identity を読む ⇒ identity null 化は偽 −10]) **④(d) containment** (authorize
-  失敗を episode-scope へ、leg3 Issue 2、設計 = p5) → **p5 delta verify (依頼済 05:17)** → /pre-check 再走 →
-  §S 解除。⚠C2 margin 3.183/3.5mm = DR-ON 日の MED design tension (bar 不動、§S3.2)
+  失敗を episode-scope へ、leg3 Issue 2、設計 = p5) → 〔p5 delta verify = **済** CONFORM `2298cb0d27`+
+  `2dbc21d178`〕→ **pN readback (05:55 依頼中) → FENCE 解除 → /pre-check 再走** → §S 解除。
+  ⚠C2 margin 3.183/3.5mm = DR-ON 日の MED design tension (bar 不動、§S3.2)
 - FM3/FM4 著者 claim 未決着 (manifest 呼びかけ中)
 - pin-1 (v1.9) = trainer-ingest spec への binding carry (⛔truncated_by→time_out 写像禁止、"" 分岐 fail-loud)
 - trainer contention leg (§8) = 初回 trainer bring-up 時
@@ -66,19 +74,25 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
 - **B4 = v1.9 (a) ADOPT**: termination_reason "" = 未測定 sentinel (taxonomy 着地まで)、truncated_by 3 値 additive、
   pin-3 = LEDGER loud 記載済 (p6 `879813d856`、Rs veto 可)
 
-### State Snapshot (2026-07-17 05:19 実測)
-- git: `36d71222a1` まで **push 済** (fork、04:26 実測 0 unpushed — 01:13 時点の「6 commits 提案中」は解消済)。
-  以降の新規 = `dfbddb4777` (I3/I4) + `c1dd6f569b` (CLAUDE.md §27 日時規則、Rs 直指示) + 本 HANDOFF 更新 =
-  **push 提案中**。ambient dirty ~740 file = standing residue 不変 (⛔ staged hunk 検査 hard step — 本 chunk
-  で実施し foreign 2 hunk [route_env_config comment-only] を除外・開示済)。GPU: 常駐プロセスなし。
+### State Snapshot (2026-07-17 05:57 実測)
+- git: `36d71222a1` まで **push 済** (fork、04:26 実測 0 unpushed)。以降の新規 = `dfbddb4777` (I3/I4) +
+  `c1dd6f569b` (CLAUDE.md §27 日時規則、Rs 直指示) + `6a90d72660` (HANDOFF) + `2298cb0d27` (§S3.5) +
+  `2dbc21d178` (§S3.5a) + `bb82ae7a76` (B1-B3) + `85958627e3` (exact-landed probe) + 本 HANDOFF 更新 =
+  **push 提案中**。ambient dirty ~740 file = standing residue 不変 (⛔ staged hunk 検査 hard step — 本 arc
+  で 2 回実施: foreign 2 hunk [route_env_config comment-only] + route_executor pin-fields [5 hunk、
+  `_prepare_recording` 内] を除外・開示済)。GPU: 常駐プロセスなし。
 - pre-check log = `logs/pre-check-log.jsonl` 追記済 (gitignored、ローカル)。
 
 ### 次にやるべきこと
-1. `引き継ぎ確認` → 本 file + %12 正本 + `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` + ruling §S3 を read
-2. **p5 delta verify の受領** (依頼済) → 指摘あれば対応。**pN 返信** = evidence 判定 + (a)(b) 分割 co-decide
-   (私案 = 本セッション続行を提示済)
-3. **pin (a)(b) 実装 chunk** (co-decide 後): §21.11.1 単純化形 + identity 永続 coupling 注記に従う
-4. (d) containment = p5 設計待ち → 着地後 /pre-check 再走 → §S 解除判定
+1. `引き継ぎ確認` → 本 file + %12 正本 + `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` (「pN HOLD 対応」§ 含む)
+   + ruling §S3.5/§S3.5a を read
+2. **pN readback 受領** (05:55 依頼済) → evidence HOLD 解除なら **FENCE 解除 → /pre-check 再走** (再走の
+   問い 3 点は impl doc 記載; verifier prompt は前セッション形を再利用可)
+3. **pin (a)(b) 実装 chunk = fresh session** (pN 非 CONCUR 受諾済・同 session 続行案は撤回):
+   開始手順 = §21.11.1 + identity-persistence coupling readback → **route_executor pin-fields 差分の
+   著者 claim + producer-unbanked〔Rs 待ち〕関係特定 + land** (precondition) → scope prereg → prior-art
+   → 実装 → exact-landed 10/10 再走
+4. (d) containment = p5 設計待ち → 着地後 /pre-check 最終 → §S 解除判定
 5. fork-B node V0 acceptance (移管 leg + trainer contention) = trainer bring-up 時
 
 ### 重要な文脈 (規律教訓 — 全て pN/p5 verify が捕捉・記録済)
