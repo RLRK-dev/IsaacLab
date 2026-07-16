@@ -1867,9 +1867,7 @@ class NewtonRouteEnv(VecEnv):
             # env-authoritative count: the solver object exposes no world_count attribute, so a
             # getattr default would be fail-open. CPU eq writes are GPU-inert at wc>1 (banked
             # hypothesis 2026-07-16) -- the readback below would confirm the MIRROR, not physics.
-            raise RuntimeError(
-                f"clip-pin lifecycle requires world_count==1 (CPU path); got {self._world_count}"
-            )
+            raise RuntimeError(f"clip-pin lifecycle requires world_count==1 (CPU path); got {self._world_count}")
         import route_executor as rex  # lazy, path set in _build_route_executor (mirrors :1930)
 
         mjm = getattr(self._solver, "mj_model", None)

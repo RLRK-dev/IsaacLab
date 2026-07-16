@@ -104,11 +104,11 @@ def run_episode(env, label: str) -> dict:
         out["reward_trace"].append(r)
         out["reward_sum"] += r
         if out["fire_step"] is None and env._c1_pin_witness is not None:
-            wit = env._c1_pin_witness
+            witness_d = env._c1_pin_witness
             out["fire_step"] = t
-            out["eq_id"] = int(wit["eq_id"])
+            out["eq_id"] = int(witness_d["eq_id"])
             out["eq_active_at_fire"] = int(mjd.eq_active[out["eq_id"]])
-            out["witness_fired_at_frame"] = int(wit.get("fired_at_frame", -1))
+            out["witness_fired_at_frame"] = int(witness_d.get("fired_at_frame", -1))
             try:
                 rex.audit_pin_anchors(env._solver.mj_model, mjd)
                 out["audit_at_fire"] = "PASS"
@@ -246,8 +246,16 @@ def run_trace(env, steps: int) -> dict:
     final = hashlib.sha256(
         ("".join(phys_h) + "".join(obs_h) + json.dumps(rew) + json.dumps(done_steps)).encode()
     ).hexdigest()
-    return {"steps": steps, "phys": phys_h, "obs": obs_h, "reward": rew, "done_steps": done_steps,
-            "term_at_done": term_at_done, "final_digest": final, "_obs_dump": obs_dump}
+    return {
+        "steps": steps,
+        "phys": phys_h,
+        "obs": obs_h,
+        "reward": rew,
+        "done_steps": done_steps,
+        "term_at_done": term_at_done,
+        "final_digest": final,
+        "_obs_dump": obs_dump,
+    }
 
 
 def main() -> int:
@@ -285,8 +293,10 @@ def main() -> int:
         tp = _EVAL / f"pin_ab_trace_{args.cell}_{args.tag}.json"
         tp.write_text(json.dumps(tr, indent=2))
         np.save(str(tp).replace(".json", "_obs.npy"), np.stack(obs_dump))
-        print(f"[pin_ab] trace tag={args.tag} steps={tr['steps']} done_steps={tr['done_steps']} "
-              f"term_at_done={tr['term_at_done']} final={tr['final_digest'][:16]} -> {tp}")
+        print(
+            f"[pin_ab] trace tag={args.tag} steps={tr['steps']} done_steps={tr['done_steps']} "
+            f"term_at_done={tr['term_at_done']} final={tr['final_digest'][:16]} -> {tp}"
+        )
         return 0
 
     result = {"cell": args.cell, "unpatched_source_boot": True}  # reaching here = no g6-style patch needed
@@ -326,9 +336,7 @@ def main() -> int:
         "reward_max_abs_step_diff": max(reward_diff) if reward_diff else 0.0,
         "reward_sum_diff": abs(ep1["reward_sum"] - ep2["reward_sum"]),
     }
-    result["L_E"] = {
-        "PASS": bool(ep1["adjacency_sym_diff_empty"] and ep2["adjacency_sym_diff_empty"])
-    }
+    result["L_E"] = {"PASS": bool(ep1["adjacency_sym_diff_empty"] and ep2["adjacency_sym_diff_empty"])}
     if args.bypass:
         result["bypass"] = run_bypass_legs(env)
         result["bypass"]["PASS_all"] = all(
@@ -337,8 +345,10 @@ def main() -> int:
 
     out_path.write_text(json.dumps(result, indent=2))
     print(json.dumps({k: v for k, v in result.items() if k not in ("ep1", "ep2")}, indent=2))
-    print(f"[pin_ab] L-D={result['L_D']['PASS']} L-D2(hard)={result['L_D2']['PASS_hard_timeline']} "
-          f"L-E={result['L_E']['PASS']} -> {out_path}")
+    print(
+        f"[pin_ab] L-D={result['L_D']['PASS']} L-D2(hard)={result['L_D2']['PASS_hard_timeline']} "
+        f"L-E={result['L_E']['PASS']} -> {out_path}"
+    )
     return 0
 
 

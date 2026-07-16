@@ -1170,7 +1170,7 @@ def assert_bank_matches_solver(banked, solver, scene_info=None):
 
 
 def _capture_provenance(capture, required):
-    """The capture's recorded substrate identity. RAISES when it is required but missing or unparseable.
+    """The capture's recorded substrate identity. RAISES when it is required but missing or unparsable.
 
     .. warning::
        This used to swallow a parse failure into ``None`` -- and provenance carries the ``layout_hash``, which
@@ -1190,7 +1190,7 @@ def _capture_provenance(capture, required):
     try:
         prov = json.loads(str(np.asarray(meta).item())).get("provenance")
     except (ValueError, TypeError, AttributeError) as e:
-        raise ValueError(f"capture meta is unparseable ({e}) -- refusing to build a bank with no provenance") from e
+        raise ValueError(f"capture meta is unparsable ({e}) -- refusing to build a bank with no provenance") from e
     if required and not (prov or {}).get("layout_hash"):
         raise ValueError(
             "capture provenance carries no layout_hash -- the F-6 guard would be silently disabled. "
@@ -3282,11 +3282,7 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
         )
         _z_hi_mm = _wall_top_mm - CABLE_RADIUS * 1e3  # 836.0: the cable centre must stay below the rim
         _z_lo_mm = _floor_top_mm - CABLE_RADIUS * 1e3  # 821.0: ... and above the floor it could otherwise pass under
-        _c1_seated = bool(
-            _z_lo_mm < z_c1_seated < _z_hi_mm
-            and _dx_seat_mm <= _lat_bar_mm
-            and _dy_seat_mm <= _y_win_mm
-        )
+        _c1_seated = bool(_z_lo_mm < z_c1_seated < _z_hi_mm and _dx_seat_mm <= _lat_bar_mm and _dy_seat_mm <= _y_win_mm)
         if _seat_gate_on:
             print(
                 f"  [C2] C1 SEAT GATE: seated={_c1_seated} "
