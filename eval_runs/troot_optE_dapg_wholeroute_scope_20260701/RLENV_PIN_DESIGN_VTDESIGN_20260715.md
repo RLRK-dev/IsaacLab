@@ -1,6 +1,6 @@
-# RL env pin 配線 — 設計裁定 v1.7
+# RL env pin 配線 — 設計裁定 v1.10
 
-**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**v1.8:** 2026-07-16（§21.9 = %12 E-probe `5b9fe8e62c` 結果 = 機構 feasible 確定・notify-safe・escalation なし・anchor=ref-pose hold-in-place / (c) 設計 finalize / E-1 positional が最終 gate）。**v1.9:** 2026-07-16（§21.10 = E-1 BLOCKED-BY-ENV 裁定: ENV-MULTIWORLD 発見 [worlds>0 物理凍結] は **USE_MUJOCO_CPU=True の CPU step=単一世界積分で by-construction 説明**・D-1/D-2 判別指定 / **§21.9 E-2/E-3/E-4 を sync 実証へ re-scope**［bug 下で緑の gate 教訓の自適用］/ env 発見=別 charter CONFIRM + fork A/B/C 事前分析）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
+**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**v1.8:** 2026-07-16（§21.9 = %12 E-probe `5b9fe8e62c` 結果 = 機構 feasible 確定・notify-safe・escalation なし・anchor=ref-pose hold-in-place / (c) 設計 finalize / E-1 positional が最終 gate）。**v1.9:** 2026-07-16（§21.10 = E-1 BLOCKED-BY-ENV 裁定: ENV-MULTIWORLD 発見 [worlds>0 物理凍結] は **USE_MUJOCO_CPU=True の CPU step=単一世界積分で by-construction 説明**・D-1/D-2 判別指定 / **§21.9 E-2/E-3/E-4 を sync 実証へ re-scope**［bug 下で緑の gate 教訓の自適用］/ env 発見=別 charter CONFIRM + fork A/B/C 事前分析）。**v1.10:** 2026-07-16（§21.10.6 = D-loop CLOSE [D-1 True / D-2 予測 2 本確認・NaN 実測] + charter 忠実性 PASS + 追加裁定 R-a [poke-parity 機構 = fork A DoD] / R-b [CPU×多世界 fail-loud tripwire = charter 即時項目]）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
 **Trigger:** Rs 裁定 2026-07-15 00:5x「クリップ**のみ** pin を RL env に恒久配線しろ」（%12 経由）+ %12 依頼 2026-07-16（①署名裁定 ②恒久配線 scaffold）。
 **Scope:** Q1（pin をいつ打つか）/ Q2（clip-only を機構でどう保証するか）/ Q3（STEP 9 述語）/ (a) body 割当規則 / **①署名 canonical / ②恒久配線 firing scaffold（per-episode / done-world clear / policy-drive live trigger / multi-world eq / per-world audit）**。
 **⚠ 本 doc は message の代替である**（通信規律 2026-07-15 02:35: 数値は artifact に置き、message は path だけ）。
@@ -946,3 +946,25 @@ newton_model.equality_constraint_enabled[eq(w,*)] = False; notify(CONSTRAINT_PRO
 1. **D-1 判別（1-bit、即時）** → D-2 対照（推奨、事前登録予測込み）。
 2. **env 発見の charter 起票**は %12/p1 経路で Rs へ（本 §21.10.4 の fork 表を材料に）。**pin node の中で env fix を始めない**（scope 混入禁止）。
 3. pin 側は **world-0 据置 + (c) 設計 banked** で完結。E-1 physical / 真の E-2 は env charter 解決後に **この doc の §21.9.1/§21.8.2 の手続きのまま**再走（設計変更なし）。
+
+### §21.10.6 🔒 D-loop CLOSE + 追加裁定 2 件（v1.10、2026-07-16、%12 D-1/D-2 `56bdf04f4b` + charter 上程を受けて）
+
+**D-loop CLOSE:**
+- **D-1 = True 実測**（production build wc=4/cuda:0 で `solver.use_mujoco_cpu=True`）⇒ §21.10.1 仮説 = **確定**（flag 実測 + step 分岐 cite）。
+- **D-2 = 事前登録予測 2 本とも確認【より強い形】**: ① 全 4 world 同期 settle（warp path は worlds>0 を積分）= **根因二重確定** ② t≈180 全 world **NaN 爆発** = S8-gap（CPU 限定 poke 44 本 未 mirror）の実証 — **warp 移行は flag flip で済まない、の最小反例 = fork A コストの実測**。D-2 は失敗でなく計測。
+- **charter 忠実性 review = PASS**（`ENV_MULTIWORLD_SUBSTRATE_CHARTER_RSTECHLEAD_20260716.md` — §21.10.4 fork 表 verbatim carry・帰属明記・事前登録の記録適切・pin node clean 維持）。
+
+**⚠ caveat（charter 読者向け・帰属の限定）:** D-2 の NaN は「**44 本のうちどれが（あるいは warp path の他の差 — contacts/nconmax/solver・integrator 挙動 — が）致命か**」を単離していない。「NaN = 4-bar」と読んではならない。⇒ fork A 作業項目①の正しい形 = **棚卸し → mirror → NaN で bisect**（一括 mirror して clean を期待、ではない）。
+
+**🔒 追加裁定 R-a（fork A の DoD 要件）— poke-parity は【機構】にせよ:**
+本発見のクラス =「一致すべき 2 表現（mj_model / mjw）の parity が【規律】でしか保たれていない」。44 本を手で mirror しても、**明日 45 本目の CPU-only poke が同じクラスを再生する**。⇒ fork A の DoD に **poke-parity 機構**を含めること:
+- 形（いずれか）: (i) **単一書込 helper** — runtime の model-poke は全て 1 関数経由（mj_model と mjw の両方に書く or mjw-inert を明示 assert）/ (ii) **build 時 parity audit** — CPU 側 poke を列挙し mjw 等価性を assert。
+- 種は既にある: geom_solref の「GPU-inert!」assert（`newton_skill_env_base.py:1422-1429`）がこの機構の単発形 — **一般化せよ**。§20 と同じ原理: 機構 > 規律。
+
+**🔒 追加裁定 R-b（fork 選択と独立の即時 hygiene）— 凍結世界での silent 訓練を fail-loud で塞げ:**
+charter 解決までの間、world_count>1 訓練を CPU substrate で起動しても **crash せず garbage を produce する**（worlds>0 = 静止 obs/reward）= 本 project が繰り返し捕まえてきた silent-failure クラスそのもの。⇒ env 初期化（make_solver or env init）に:
+```
+if use_mujoco_cpu and world_count > 1: raise（明示 opt-out env 変数付き — probe/診断は正当に CPU×多世界 build を使う）
+```
+- **fail-loud 既定 + opt-out** = pin の RAISE-everything 哲学と同型。fork A/B/C いずれの下でも有効（B/C では発火せず、A では誤構成のみ捕捉）。
+- ⛔ **実装は charter node** — pin node に入れない（scope 規律）。charter の即時項目 #0 として推奨。Rs 承認は charter 経由。
