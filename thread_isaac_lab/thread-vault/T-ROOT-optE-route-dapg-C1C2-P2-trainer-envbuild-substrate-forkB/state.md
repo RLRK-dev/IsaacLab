@@ -23,8 +23,10 @@ authority: "Human-Rs 2026-07-16 verbatim『推奨でよい、fork Bで進めて�
 session_history:
   - "2026-07-16 18:0x D0 [DEFINE] Rs承認 (起動) — D0 design gate 開始 (design=p5+%12, evidence=w2:p4, verify=OPS-SUP-CODEX)"
   - "2026-07-16 19:5x D0 = 6/6 CLOSE (design R1-R6 + item-1 evidence = calibration v4 fd536235e9、OPS-SUP 独立 verify PASS-WITH-RECORDS-FIX)。D1 spec = CONFORM 7/7 (v0.2)。E0 = 事前登録 (K=200/K_fail=3/contention≥0.8/決定論/memory) に従い fresh N=1 から開始可"
+  - "2026-07-16 20:2x E0 = GATE CLOSE PASS — E0v2a 2933fa7bbc が B6/B7 根治・全 predicate PASS (pN final = PASS-WITH-RECORDS-FIX、records-fix a90d9ab6db readback PASS)。N1/N2/N4 = 10.872/20.432/35.579 t/s・eff 0.818 ⇒ N_collect=4 FINAL ADOPTED・I0 OPEN GO。検証史 v1 fb36c49540→v2 945a5c229a→v2a (prereg 完全性 保持) = LEDGER:58"
+  - "2026-07-16 21:1x I0-a (flip+tripwire c60d311f96) = CLOSE (pN final = PASS-WITH-CARRY; HOLD 応答 = df063c85c9 [scope manifest+format+陽性対照 harness] + 5d3924b12a [fresh 陽性対照 PASS] + ad0bb76460 [p5 §S run-hygiene 裁定])。I0-b (supervisor+collector) = fence OPEN GO (infra)。⚠carry = FM3/FM4 HEAD-live 未批准 → owner chain PASS まで reward-valid/training-ready claim 不可 (§0 carry 節)。〔20:2x/21:1x の 2 entry = p6 反映執行 (%12 依頼 21:3x、LEDGER:58 `3669b370d3` 準拠)〕"
 created: 2026-07-16T17:49:20+09:00
-last_updated: 2026-07-16T18:05:00+09:00
+last_updated: 2026-07-16T21:42:00+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -32,7 +34,9 @@ spec_version: LTM-1 v1.2
 
 ## 0. 起票状態と境界
 
-**IN_PROGRESS。D0 = 6/6 CLOSE (2026-07-16 19:5x: design 裁定 R1-R6 + item-1 evidence v4 `fd536235e9` = OPS-SUP 独立 verify PASS)。D1 spec = CONFORM 7/7 (v0.2)。現 phase = E0** (事前登録済 predicate: K=200ep/K_fail=3/contention≥0.8/byte-repro hard/死計器 正対照; v4 は非流用、N=1 も fresh)。I0 は D0/E0 bank 後。
+**IN_PROGRESS。D0 = 6/6 CLOSE (2026-07-16 19:5x)。D1 = CONFORM 7/7 + AMEND-1 (v0.2)。⭐E0 = GATE CLOSE PASS (20:2x: E0v2a `2933fa7bbc` = B6/B7 根治・全 predicate PASS、pN final = PASS-WITH-RECORDS-FIX [records-fix `a90d9ab6db`]。実測 N1/N2/N4 = 10.872/20.432/35.579 t/s・eff 0.818 ⇒ N_collect=4 = FINAL ADOPTED [二段採択 完了])。⭐I0-a (flip+tripwire) = CLOSE (21:1x: pN = PASS-WITH-CARRY、bank `c60d311f96` + HOLD 応答 `df063c85c9`/`5d3924b12a`/`ad0bb76460`)。現 phase = I0-b (supervisor+collector、infra 実装 = fence OPEN GO)**。
+
+⚠ **§S carry (binding — `I0A_SCOPE_MANIFEST_RSTECHLEAD_20260716.md:36-45` + `ad0bb76460`)**: 巻込 FM3/FM4 は **HEAD で live・未批准** (flag-gated でない: `newton_route_env.py:1395-1396` seat 本経路 無条件 + `:1627` `_c1_escape_after_seat` 無条件呼出)。⇒ **owner chain (/reward-design 再走 → p5 再 verify → /pre-check) PASS まで、HEAD run の seat/G3+/escape 出力 = 未批准意味論** — banked-semantics を主張する run は pre-sweep commit へ pin するか、暴露を loud 宣言。**I0-a byte 一致 = physics 軌道のみ (reward/latch 経路の等価性ではない)**。
 
 - 採択手段: **fork B** = `world_count=1`、`use_mujoco_cpu=True` のproven route envをN processで収集。
 - C: minimal smokeのみ。
