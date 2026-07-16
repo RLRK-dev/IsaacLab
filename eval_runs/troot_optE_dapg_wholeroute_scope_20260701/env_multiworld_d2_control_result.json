@@ -1,0 +1,136 @@
+{
+  "world_count": 4,
+  "seat_seg": 27,
+  "solver_use_mujoco_cpu": false,
+  "prediction_preregistered": "all worlds settle 809->~804; 4-bar may flop (mjw eq re-poke DEFERRED)",
+  "D2": {
+    "steps_ok": true,
+    "step_err": null,
+    "seat_z0_mm": [
+      809.0,
+      809.0,
+      809.0,
+      809.0
+    ],
+    "seat_z300_mm": [
+      NaN,
+      NaN,
+      NaN,
+      NaN
+    ],
+    "dz_mm": [
+      NaN,
+      NaN,
+      NaN,
+      NaN
+    ],
+    "per_world_settling": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "all_worlds_integrate": false,
+    "finger_sum_open0": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "finger_sum_300": [
+      [
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN
+      ]
+    ],
+    "finger_drift_rad": [
+      NaN,
+      NaN,
+      NaN,
+      NaN
+    ],
+    "flop_observed": false
+  },
+  "VERDICT": {
+    "disposition": "MIXED: per-world settling=[False, False, False, False] -> raw trace attached; p5 to rule"
+  },
+  "trace": {
+    "t": [
+      0,
+      60,
+      120,
+      180,
+      240,
+      300,
+      300
+    ],
+    "seat_z_mm": [
+      [
+        809.0,
+        809.0,
+        809.0,
+        809.0
+      ],
+      [
+        808.22,
+        808.22,
+        808.22,
+        808.22
+      ],
+      [
+        805.91,
+        805.91,
+        805.91,
+        805.91
+      ],
+      [
+        NaN,
+        802.53,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  }
+}
