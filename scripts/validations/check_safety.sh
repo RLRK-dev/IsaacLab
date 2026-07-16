@@ -19,6 +19,24 @@ apply_ignore() {
 }
 
 # ─── Check 6: CUDA_VISIBLE_DEVICES usage ban ───
+# Typed exact-shape exceptions (Rs ruling "A" 2026-07-16 + OPS-SUP-CODEX co-decide conditions;
+# I0B_BUILD_RSTECHLEAD_20260716.md sec CHECK-6). The ban targets scripts grabbing a GPU for THEMSELVES
+# instead of exposing --device. Two narrow allowances, each requiring BOTH the exact code shape AND an
+# explicit annotation (annotation alone never suffices):
+#   1. "# cvd-child-env"       : assignment into a COPIED child-env dict (a launcher pinning a child's GPU
+#                                per CLAUDE.md GPU rules / fork-B R1-3). Any line touching os.environ is
+#                                NEVER allowed by this exception, annotated or not.
+#   2. "# cvd-provenance-read" : read-only os.environ.get("CUDA_VISIBLE_DEVICES") for provenance recording.
+#                                Lines that also ASSIGN os.environ["CUDA_VISIBLE_DEVICES"] stay banned.
+# The filter is a named function so the self-test (test_check_safety_cvd.sh) exercises the SAME code path.
+cvd_ban_filter() {
+    # stdin: "file:line:content" grep hits -> stdout: lines that VIOLATE the ban
+    grep -vP ':\d+:\s*#' \
+        | grep -vP '# .*(ban|don'\''t|deprecated|Do NOT use|禁止)' \
+        | grep -vP '^(?!.*os\.environ).*\["CUDA_VISIBLE_DEVICES"\]\s*=.*#\s*cvd-child-env\b' \
+        | grep -vP '^(?!.*os\.environ\["CUDA_VISIBLE_DEVICES"\]\s*=).*os\.environ\.get\("CUDA_VISIBLE_DEVICES"\).*#\s*cvd-provenance-read\b'
+}
+
 check_cuda_visible_devices() {
     echo "  [CHECK 6] CUDA_VISIBLE_DEVICES usage"
 
@@ -42,9 +60,7 @@ check_cuda_visible_devices() {
 
     local tmpresults
     tmpresults=$(mktemp)
-    xargs grep -nH "CUDA_VISIBLE_DEVICES" < "$tmpfiles" 2>/dev/null \
-        | grep -vP ':\d+:\s*#' \
-        | grep -vP '# .*(ban|don'\''t|deprecated|Do NOT use|禁止)' > "$tmpresults" || true
+    xargs grep -nH "CUDA_VISIBLE_DEVICES" < "$tmpfiles" 2>/dev/null | cvd_ban_filter > "$tmpresults" || true
 
     if [ ! -s "$tmpresults" ]; then
         echo "  [PASS] No CUDA_VISIBLE_DEVICES usage"
@@ -134,11 +150,13 @@ check_video_size() {
     rm -f "$tmpresults"
 }
 
-# ─── Run ───
-echo "=== Layer 3: Safety Guards ==="
-check_cuda_visible_devices
-check_direct_bash_execution
-check_video_size
+# ─── Run (skipped when sourced by the self-test, which needs the functions only) ───
+if [ "${BASH_SOURCE[0]}" = "$0" ]; then
+    echo "=== Layer 3: Safety Guards ==="
+    check_cuda_visible_devices
+    check_direct_bash_execution
+    check_video_size
 
-echo "LAYER3_FAIL=$FAIL_COUNT"
-echo "LAYER3_WARN=$WARN_COUNT"
+    echo "LAYER3_FAIL=$FAIL_COUNT"
+    echo "LAYER3_WARN=$WARN_COUNT"
+fi
