@@ -64,16 +64,18 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
   **残 = ③pin (a) witness per-episode reset + (b) eq clear on reset** (leg3 Issue 1 = banked 残作業; 前提 =
   pin は既成着座の【保持】装置、seat f2428 ≺ onset f2544; ⚠識別子永続 coupling = RLENV_PIN_DESIGN §21.11.1
   pointer 注記済 [I3 の escape が identity を読む ⇒ identity null 化は偽 −10]) **④(d) containment** (authorize
-  失敗を episode-scope へ、leg3 Issue 2、設計 = p5) → 〔p5 delta verify = **済** CONFORM `2298cb0d27`+
-  `2dbc21d178`〕→ **pN readback (05:55 依頼中) → FENCE 解除 → /pre-check 再走** → §S 解除。
-  ⚠C2 margin 3.183/3.5mm = DR-ON 日の MED design tension (bar 不動、§S3.2)
+  失敗を episode-scope へ、leg3 Issue 2、設計 = p5) → 〔p5 delta verify・pN HOLD 解除・/pre-check 再走・
+  §S4 scoped 解除 = **全て済** (Phase 行が正)〕→ **残 = ③④ のみ → gate② 完了判定 (reward-valid/
+  training-ready 解禁はそこ)**。⚠C2 margin 3.183/3.5mm = DR-ON 日の MED design tension (bar 不動、§S3.2)
 - FM3/FM4 著者 claim 未決着 (manifest 呼びかけ中)
 - pin-1 (v1.9) = trainer-ingest spec への binding carry (⛔truncated_by→time_out 写像禁止、"" 分岐 fail-loud)
 - trainer contention leg (§8) = 初回 trainer bring-up 時
 
 ### Findings (全て banked、仮説なし)
-- ⚠**binding carry (§S) 不変**: swept FM3/FM4 = HEAD live・未批准 ⇒ gate ② 完了まで HEAD run の
-  reward/latch/seat 意味論 ≠ banked correctness。I0-b の全 artifact は §S exposure field 埋込済
+- **§S = §S4 で scoped 解除 (06:2x、`a366622159`)**: swept FM3/FM4+I3/I4 の意味論 = committed-HEAD lineage・
+  単一 episode で批准済 ⇒ 将来 run の exposure 宣言不要 (歴史 artifact は遡及編集しない — I0-b の §S
+  exposure field は当時の事実として残置)。⛔存続 = reward-valid/training-ready 禁止 ((a)(b)+bundle+(d)
+  まで) + dirty tree 訓練起動禁止
 - **N-2 = v1.8 で解決**: seed→data channel は env に不在 (両 drive mode 実測、INIT_XY_NOISE=appearance-only)。
   channel-conditioned standing rule 化 (primary = trainer/(d) policy stochasticity、⛔DR を N-2 のために ON しない)
 - **B4 = v1.9 (a) ADOPT**: termination_reason "" = 未測定 sentinel (taxonomy 着地まで)、truncated_by 3 値 additive、
