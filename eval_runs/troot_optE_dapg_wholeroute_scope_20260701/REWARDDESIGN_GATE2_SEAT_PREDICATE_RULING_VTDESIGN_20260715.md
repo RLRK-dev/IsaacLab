@@ -494,6 +494,34 @@ z-scope 明文化（escape = lateral+crossing-loss のみ、z 逸脱は G6 z-ban
 1. **系譜断絶の記録義務（1 回・land 記録に、per-run 義務ではない）**: flag-OFF full-episode の done 時刻は land commit で変わる（**I0-a FF-replay byte-anchor は landed HEAD で再現不可** — 再現は pre-land commit に pin。prereg §11 の告知に concur）。land 跨ぎの flag-OFF 比較は系譜分割を cite。sec_S_exposure の per-run 義務は復活しない。
 2. **L-F2 = 本追補の実測レグ（two-key）**: 「宣言どおりに・宣言した面にだけ」が実測で崩れたら（宣言外の面に delta ≠ 0）**本追補 re-open**（fail-loud）。
 
+### §S4.5.4a 〔前方 pointer〕two-key 正式 verdict = §S4.6（2026-07-17 09:0x 発行 — 本 §S4.5.4 の PRELIMINARY を正式化）
+
 ### §S4.5.4 §11 宣言面の設計鍵 = 批准（CONFORM、cite 自読照合済）
 - wire 点 `:582`（無条件呼出・comment 明示）+ `:1807` ／ live 集合 = G3/G5 latch・`c1_escape`→dropped・obs[49]/[58]-[61] ／ **obs[57] の除外は正**（global crossing は identity 非依存で従前から live — §S3.1 scope とも整合）／ 発火のみ flag-gated — 全て私の計器 map（§S2 表・§S3.5 obs 継承裁定）と一致。
 - 本批准は**宣言への設計鍵**。実装の design 軸 verify は post-land two-key（L-A〜L-G 実測込み）で別途回す。prereg §4 helper 形は §21.11.1 + coupling 注記に **PRELIMINARY CONFORM**（identity 不触・audit-then-clear の全 reset 経路化・wc==1 tripwire・blanket clear 禁止遵守・witness per-episode ephemeral — 正式判定は land 後）。
+
+---
+
+## §S4.6 🔒 pin (a)(b) two-key 設計鍵 正式 verdict = **CONFORM — PASS〔p5 設計軸〕+ §S4.5 付帯 2 本 = 充足**（2026-07-17 09:0x、対象 = v0.3.1 §4 実装 landed `fd6ded2959` + format `b0981630de` + [RESULT] `b91716d22a`、prereg = `11e130693e`）
+
+**独立再現 legs（p5 自走、artifact-first）:**
+1. **tests 17/17 自走** = 隔離 worktree @ `b0981630de`・per-test driver（fail-fast なし）・env7 直呼び **17/17 PASS・exit 0**（既存 10〔V5 pin-fields flip 含む〕+ clear×4 + prepare raise-branch×3 — L-B/L-C/L-C2 の独立確認。§S3.5a の import+call 閉包教訓は worktree 実行で構造的に満たす）。
+2. **L-F2 obs 帰属の独立再計算** = committed npy（`_bundle_obs.npy`/`_head_obs.npy`）から pre-div 窓 [0..341] の差分列を自分で計算 → **{49, 58, 59, 60, 61} = §11 宣言集合と厳密一致・全列 first-div 207・obs[57] 窓内不変** — 宣言外の面に delta ゼロを**転記でなく再計算で**確認。
+3. **bundle 二成分の hunk-level 自読** = route_executor diff = 5 frozen hunks（全て `_prepare_recording` 内 @@4414/4432/4446/4487/4501）+ audit-return（@@975 docstring Returns / @@1010 `return tuple(fired)` = return-only）— 成分外編集ゼロ。
+4. **landed helper + call site の on-disk 読** = `_clear_c1_pin` `:1851-1883` + `_reset_worlds:1038`（len==0 直後・state restore 前）。probe json（`pin_ab_lifecycle_probe_result_cell_x0_y0.json`）+ 耐久 guard-block json 自読 — L-D2 の reward_sum 6.5699993894 は算術自検（4 latch × 5.0 − 0.01×343 − 10 = 6.57 = drop 終了と整合、**time_outs=0 = timeouts 純度遵守**）。
+
+**条項別（v0.3.1 §4 → landed code）:**
+| bar | 判定 | 根拠 |
+|---|---|---|
+| guard 順 = 0∉env_ids return → env 権威 wc raise | ✅ | `:1862-1871`（v0.3.1 pN 指定順・make_solver owner 注記付き） |
+| model-state authority（clear 集合 = audit 検証済 fired 全数） | ✅ | `:1879-1882` + bypass C3/C5(ii)(iii) が **RAISE-before-clear・部分 clear なし**を実証 |
+| audit-then-clear 全 reset 経路 | ✅ | `_reset_worlds:1038` 冒頭呼出（done 経路 + public reset() を 1 点被覆）・done-path 既存 audit 残置 = read-only 二重で無害 |
+| identity 不触（coupling） | ✅ | 関数 body の書込 = eq_active + witness のみ・docstring に契約明記・L-C identity 対称差 test |
+| witness per-episode ephemeral | ✅ | `:1883` =None・ep2 再発火 254 実測（L-D） |
+| blanket clear 禁止 | ✅ | fired = §15.4 who-wrote-it-agnostic filter scope（pin 候補 eq のみ） |
+| §S4.5 付帯 1（系譜断絶 1 回記録） | ✅ **充足** | land commit message（L-F2 break 事実）+ in-bundle §11（I0-a FF-replay anchor 再現不可の明示宣言）+ [RESULT] L-F2 行（done bundle=[342] vs HEAD=[]）— land 記録 chain に 1 回、per-run 義務なし |
+| §S4.5 付帯 2（L-F2 崩れ → re-open） | ✅ **充足・実測済** | 上記 leg 2 の独立再計算 = 宣言外 delta ゼロ ⇒ **re-open 条項は発動しない** |
+| L-D cell-2 carry | ✅ CONFORM（PASS-WITH-CARRY） | pN 5 条件裁定 fold 済（§12-5・耐久 guard-block json・no-repeat blocker）— 私の設計軸 concur は 08:1x handoff 記録どおり（G-F2 guard は設計どおりの仕事・lifecycle 機構は cell-geometry 独立） |
+| format commit `b0981630de` | ✅ 意味論中立 | 全 hunk = 行結合/EOF newline/error-string 綴り/局所 rename（`wit`→`witness_d` 完全性を grep 自証: 残 0）— **凍結 hunk 領域 :963-1012/:4414-4517 は不触**。継承 debt の同梱は label 付き開示 — 受理。⚠ %12 pane message の「raise 1 行のみ」は圧縮表現（commit message 側は全面開示・分類済 — artifact が正、cosmetic note のみ） |
+
+**verdict**: 上記により **CONFORM — PASS〔p5 設計鍵〕**。two-key の evidence 軸 = pN。**standing 不変**: reward-valid / training-ready 禁止は (d) 完了 + §12-5 cell-2 追補条件まで存続（§S4.3-2 のまま）。次の p5 レグ = **(d) policy-drive trigger 設計 gate**（witness-vs-fired loud 化・refire 非 raise 化・訓練時 trigger 規則・witness run-level provenance を審査項目に含む）。
