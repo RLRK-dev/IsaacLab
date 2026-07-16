@@ -1,6 +1,6 @@
-# RL env pin 配線 — 設計裁定 v1.10
+# RL env pin 配線 — 設計裁定 v1.11
 
-**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**v1.8:** 2026-07-16（§21.9 = %12 E-probe `5b9fe8e62c` 結果 = 機構 feasible 確定・notify-safe・escalation なし・anchor=ref-pose hold-in-place / (c) 設計 finalize / E-1 positional が最終 gate）。**v1.9:** 2026-07-16（§21.10 = E-1 BLOCKED-BY-ENV 裁定: ENV-MULTIWORLD 発見 [worlds>0 物理凍結] は **USE_MUJOCO_CPU=True の CPU step=単一世界積分で by-construction 説明**・D-1/D-2 判別指定 / **§21.9 E-2/E-3/E-4 を sync 実証へ re-scope**［bug 下で緑の gate 教訓の自適用］/ env 発見=別 charter CONFIRM + fork A/B/C 事前分析）。**v1.10:** 2026-07-16（§21.10.6 = D-loop CLOSE [D-1 True / D-2 予測 2 本確認・NaN 実測] + charter 忠実性 PASS + 追加裁定 R-a [poke-parity 機構 = fork A DoD] / R-b [CPU×多世界 fail-loud tripwire = charter 即時項目]）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
+**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**v1.8:** 2026-07-16（§21.9 = %12 E-probe `5b9fe8e62c` 結果 = 機構 feasible 確定・notify-safe・escalation なし・anchor=ref-pose hold-in-place / (c) 設計 finalize / E-1 positional が最終 gate）。**v1.9:** 2026-07-16（§21.10 = E-1 BLOCKED-BY-ENV 裁定: ENV-MULTIWORLD 発見 [worlds>0 物理凍結] は **USE_MUJOCO_CPU=True の CPU step=単一世界積分で by-construction 説明**・D-1/D-2 判別指定 / **§21.9 E-2/E-3/E-4 を sync 実証へ re-scope**［bug 下で緑の gate 教訓の自適用］/ env 発見=別 charter CONFIRM + fork A/B/C 事前分析）。**v1.10:** 2026-07-16（§21.10.6 = D-loop CLOSE [D-1 True / D-2 予測 2 本確認・NaN 実測] + charter 忠実性 PASS + 追加裁定 R-a [poke-parity 機構 = fork A DoD] / R-b [CPU×多世界 fail-loud tripwire = charter 即時項目]）。**v1.11:** 2026-07-16（§21.10.7 ERRATUM = ⛔「新規発見」撤回 [freeze は 07-08 既知 `COMP3_PLAN...20260708.md` §7、私も relay で propagate = 訂正 8 件目]・真の差分 5 点を批准）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
 **Trigger:** Rs 裁定 2026-07-15 00:5x「クリップ**のみ** pin を RL env に恒久配線しろ」（%12 経由）+ %12 依頼 2026-07-16（①署名裁定 ②恒久配線 scaffold）。
 **Scope:** Q1（pin をいつ打つか）/ Q2（clip-only を機構でどう保証するか）/ Q3（STEP 9 述語）/ (a) body 割当規則 / **①署名 canonical / ②恒久配線 firing scaffold（per-episode / done-world clear / policy-drive live trigger / multi-world eq / per-world audit）**。
 **⚠ 本 doc は message の代替である**（通信規律 2026-07-15 02:35: 数値は artifact に置き、message は path だけ）。
@@ -968,3 +968,13 @@ if use_mujoco_cpu and world_count > 1: raise（明示 opt-out env 変数付き �
 ```
 - **fail-loud 既定 + opt-out** = pin の RAISE-everything 哲学と同型。fork A/B/C いずれの下でも有効（B/C では発火せず、A では誤構成のみ捕捉）。
 - ⛔ **実装は charter node** — pin node に入れない（scope 規律）。charter の即時項目 #0 として推奨。Rs 承認は charter 経由。
+
+### §21.10.7 ⛔ ERRATUM（v1.11、2026-07-16）— 「新規発見」を撤回する。**私の訂正 8 件目**
+
+**OPS-SUP-CODEX correction → %12 on-disk 確認 → 私も on-disk 確認済（本 ERRATUM は自読に基づく）:**
+
+- ⛔ **§21.10.0「prior-art guard PASS = 新規発見」= 偽。** freeze 現象は **07-08 に既知** — `COMP3_PLAN_ROUTEEXEC_GRASPACT_COORD_20260708.md` §7 逐語:「the as-coded env cannot live-step worlds≥1 (single_world_template → nworld=1; **CC3 empirical world1 dz==0**) … Options = GPU-mjwarp+cg plumbing … vs single-world training. **Rs-level, NOT comp3 scope.**」— **経験的観測（world1 dz==0）+ 根因方向 + fork 素形（A/C 相当）+ Rs escalation 項目化まで在った。** guard PASS は keyword miss（guard は「新規性の証明」でなく「その keyword で引っかからなかった」しか言わない）。
+- ⛔ **§21.10.1「初顕在化」も訂正** — 初ではない。正しくは「**pin/E-1 文脈での再顕在化**」。
+- ⛔ **私の propagation 過失（記録）**: §21.10.0 で %12 の新規性主張を**自分で grep せず relay した**。`[[feedback-narrative-signal-not-established-fact-verify-on-disk]]` + `[[feedback-absence-claims-grep-all-build-paths]]`（新規性主張 = vault についての不在主張 — 同じ規律が要る）の再演。本 ERRATUM は COMP3 を自読してから書いた。
+- ✅ **維持される真の差分**（charter §1 訂正と一致、私も批准）: ① 根因の**二重確定**（D-1 flag 実測 + D-2 統制対照 — COMP3 は構成読み + dz==0 単発で、統制対照なし）② **fork A コストの実測**（NaN t≈180 — COMP3 は plumbing を無コスト情報で記載）③ **fork B（process 並列）は COMP3 に無い選択肢** ④ R-a/R-b の機構化（COMP3 §13 ISSUE 2「PIN world_count=1」は R-b の**規律版前身** — R-b はそれを機構に昇格）⑤ **standing Rs escalation（COMP3「SEPARATE campaign item」）の discharge**（charter がその項目を正式に Rs へ運んだ）。
+- 🔒 **教訓の型（既存 lesson の適用で足りる、新 memory 不要）**: prior-art guard の PASS は**それ自体が不在主張** ⇒ 高 stakes の「新規」宣言前に、guard keyword を変えて再走 + 該当領域 doc の直接 grep（今回なら「world」「frozen」「nworld」で COMP3 群に即 hit した）。
