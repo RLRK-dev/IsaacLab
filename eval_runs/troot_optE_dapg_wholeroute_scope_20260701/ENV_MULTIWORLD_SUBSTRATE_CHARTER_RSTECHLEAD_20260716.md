@@ -1,6 +1,10 @@
 # ENV-MULTIWORLD substrate charter 上程 (RS-TECH-LEAD %12, 2026-07-16)
 
-**Status: PROPOSAL (Rs 裁定待ち)。実装ゼロ。** 経路 = %12 ⇄ OPS-SUP-CODEX(pN) → Rs (design v1.9 §21.10.5 #2)。
+**Status: ⭐APPROVED — Rs 裁定 2026-07-16 (p5 pane 直接、verbatim「推奨でよい、fork Bで進めて」、記録 = design v1.12 §21.11 `da6211991e`)。実装は design gate (§21.11.2) 通過後。**
+- **Q1 = CLOSED: fork B 採択** (CPU 維持 + process 並列)。**Q2 = 起票承認込みと解釈** (⚠訂正可能な形で明示、実務 = %12/pN 経路)。**Q3 = MOOT** — fork A は**発注されておらず dormant** (「並走可」は残るが Rs の言があるまで着手しない)。**R-b tripwire = 実装対象維持** (charter パッケージ承認)。
+- ⭐**設計帰結 (v1.12 §21.11.1): fork B は pin の (c) を不要化** — 各 process = wc=1 = proven CPU path (g6_live 実証のその path)。pin 残作業 = (a) witness reset + (b) eq clear on reset (単一世界に単純化・CPU 書込のまま) + (d) policy-drive trigger (reward-design gate 不変) + 既存 audit そのまま。newton-API 機構 = S8 用 banked。E-1/真 E-2 = S8 まで MOOT。
+
+経路 = %12 ⇄ OPS-SUP-CODEX(pN) → Rs (design v1.9 §21.10.5 #2)。
 親 node 候補 = `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild` 直下の新 node (起票承認 = Rs、NEST §3.1)。
 ⛔ pin node の中で env fix は始めない (§21.10.5、scope 混入禁止)。
 
