@@ -189,6 +189,8 @@
 
 ⇒ **p5 設計軸 = E0v2 PASS。N=4 最終確定・I0 開始 gate = pN 再判定の完了**（two-key、私の軸はこれで閉、over-close しない）。I0 acceptance 積み残し（binding）= N-1 機構 2 本 / R2-4-b 2×2 / N-2 異 seed 象限 / N-3 as-run reconcile — v0.3 移管表に fold 済を確認。
 
+**追記（E0v2a spot-check、2026-07-16、bank `2933fa7bbc`、任意 verify）**: pN B6/B7 対応の full fresh 再走を **整合 spot-check**（全再照合は pN 軸と重複ゆえ実施せず）— 数値再計算一致（対平均 10.872 / T4 35.579 / contention 0.818、v2 と noise 内整合）/ **B6 = `dead_pid_control {gpu_mib_attributed: 0, PASS}`** / **B7 = per-child post bracket（4 child）+ `changed_during_run_union=[]`** — ⚠ top-level `changed_during_run=None` は**旧 field の空置でなく per-child 形への移設**（union が「走って空」を証す — 死計器でないことを確認済）/ rcs 全 0。**v1.7 verdict は不変で有効。**
+
 ---
 
 ## EVIDENCE-RECORD UPDATE (record-only、%12 custodial per OPS-SUP PASS-WITH-RECORDS-FIX 2026-07-16 19:5x。設計内容 無変更・p5 通知済)
