@@ -67,6 +67,20 @@ route 後半 : C2 側 Y-monotone window で seated(C2)=True (dx~0.2mm) → G5 (+
 
 **GATE: PASS** — ただし owner chain 残 2 leg (p5 再 verify [宣言 bar: C1={pin−1,pin} hard identity / C2=monotone-span 連結 / tolerance note (`_SEAT_MONOTONE_TOL_M=1e-6` :1334 + minimal window 根拠 = canonical i-pin∈{−1,0} 実測 517/517)] → /pre-check) が PASS するまで §S 解除なし。
 
+## leg 3 = /pre-check OUTCOME (2026-07-17 01:0x 追記) — **VERDICT = BLOCK〔訓練批准として〕/ 単一 episode 述語数学 = clean・SRG probe 用途 = supportable (verifier 明言)**
+
+独立 verifier (sub-agent、敵対姿勢・全 frame 再計算・fixture 実行) の findings — 全て on-disk 検証可能:
+
+| # | SEV | 内容 | disposition |
+|---|---|---|---|
+| 1 | **CRITICAL** | **pin lifecycle が episode を跨いで生存しない** (`_c1_pin_witness` 生涯 1 回・`_reset_worlds` は eq を deactivate しない実測) ⇒ route_c1_pin=True では ep2+ の力学汚染+G3 無償化 / =False では G3 後に FM3 が正当 episode を −10 で殺す — **どちらの設定でも訓練 data 無効** | = **既 banked pin 残作業 (a) witness per-episode reset + (b) eq clear on reset の独立再発見** (I0-a SCOPE 開示済・fork B 採択で単純化済)。実装 = pin node 側、設計 = p5。訓練批准は (a)(b) 着地が前提 |
+| 2 | HIGH | authorize 失敗が RL hot path で **process-fatal raise** (探索残差で捕捉体積外 onset → 全 world 死) | **(d) policy-drive trigger 設計項目へ fold** (episode-scope containment: dropped/invalid 化。probe/測定 mode は raise 維持) — p5 設計 |
+| 3 | MED | **FM3 が identity 非限定の global crossing を消費** (`_crossing_x_dev` :1422) — 批准した seat 意味論との spec-code 不一致。fixture 実証: (a) identity MISS+溝外 stray 有 → escape=False = fail-open (episode 焼失) / (b) routed 帯外+stray 帯内 70mm → 偽 escape −10。canonical では divergence 0 | **新規 — p5 裁定要**。fix 方向 = post-G3 の escape を identity 済 metrics から導出 (sentinel が crossing-lost leg を包含) |
+| 4 | MED | **C2 単調 walk が feed 側 drape を受理** (fixture 実証: routed 側 60mm 外 + pin 後方の自由 span が C2 溝を通過 → seated=True → G5/G6 が誤 credit 可能)。scripted+capped residual では低確率、free RL/DR では実在 | **新規 — p5 裁定要**。fix 方向 = routed 側限定 (`held_seg_l` 系 leg) or leading-span identity leg |
+| 5 | MED | **v1 証拠の精度**: (a) `c1_first_seated_frame=2544` は不再現 — 真値 = **f2428 (onset の 116 frame 前)**。⭐**seat は pin より先に成立し、pin は既成着座の【保持】装置** — 私の「onset と同 frame・gap なし」記述は誤り (Issue 1 の窓を隠す方向の誤り) (b) C2 lateral 実 extremum = **3.183mm** (bar まで 0.317mm) — v1 の cadence-10 は 1.98mm と 1.6 倍過大 margin 表示 (c) z 進入は SEAT_Z_HI を 10.3μm で掠める (通過型・plateau でない) | **本 doc + probe v2 で訂正済** (`gate2_rerun_fm34_probe_v2_result.json` = per-frame、v1 は lineage 保全)。方向は全て conservative (canonical は 313/313 着座・sustain 31/10 のまま) |
+
+**帰結**: §S は**解除しない** (chain = leg1 PASS / leg2 CONFORM / **leg3 BLOCK**)。gate② 完了条件 = p5 裁定 (I3/I4) + pin (a)(b) 実装 + (d) containment 設計 → 修正後 /pre-check 再走。⭐gate が仕事をした — 単一 episode の意味論は両側検証済みのまま、**訓練展開面の blocker を訓練前に捕捉** (§13.3「/pre-check が gate の仕事をした」の再演)。canonical margin の実像: C1 dx ~0.9mm / FM3 post-onset x_dev max 1.059mm vs 60mm / C2 lateral 3.183mm vs 3.5mm (最薄 margin、DR で掠る見込み = MED 引継)。
+
 ## 検証注記
 - 新規コード変更 = ゼロ (本 gate は live 済コードの設計検証)。probe/unit-test の実行 = 読み取り専用計算。
 - 視覚レグ: 省略 (justified) — 幾何述語の数値検証であり motion 妥当性の新規主張なし。最終捕捉 verdict は Rs 動画 standing (§13.3)。
