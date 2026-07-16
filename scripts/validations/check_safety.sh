@@ -19,22 +19,26 @@ apply_ignore() {
 }
 
 # ─── Check 6: CUDA_VISIBLE_DEVICES usage ban ───
-# Typed exact-shape exceptions (Rs ruling "A" 2026-07-16 + OPS-SUP-CODEX co-decide conditions;
-# I0B_BUILD_RSTECHLEAD_20260716.md sec CHECK-6). The ban targets scripts grabbing a GPU for THEMSELVES
-# instead of exposing --device. Two narrow allowances, each requiring BOTH the exact code shape AND an
-# explicit annotation (annotation alone never suffices):
-#   1. "# cvd-child-env"       : assignment into a COPIED child-env dict (a launcher pinning a child's GPU
-#                                per CLAUDE.md GPU rules / fork-B R1-3). Any line touching os.environ is
-#                                NEVER allowed by this exception, annotated or not.
-#   2. "# cvd-provenance-read" : read-only os.environ.get("CUDA_VISIBLE_DEVICES") for provenance recording.
-#                                Lines that also ASSIGN os.environ["CUDA_VISIBLE_DEVICES"] stay banned.
+# Typed exact-shape exceptions (Rs ruling "A" 2026-07-16 + OPS-SUP-CODEX co-decide conditions, tightened
+# per the I0-b HOLD B1 controls; I0B_BUILD_RSTECHLEAD_20260716.md sec CHECK-6). The ban targets scripts
+# grabbing a GPU for THEMSELVES instead of exposing --device. Two narrow allowances, each requiring the
+# exact code shape AND an explicit annotation AND no compound statement (';' anywhere disqualifies):
+#   1. "# cvd-child-env"       : the target must be literally `env["CUDA_VISIBLE_DEVICES"]` and the value
+#                                str(<identifier>) or a quoted digit string -- the launcher shape pinning a
+#                                CHILD's GPU (CLAUDE.md GPU rules / fork-B R1-3). Any os.environ on the
+#                                line stays banned, annotated or not; cfg[...]/other targets stay banned.
+#   2. "# cvd-provenance-read" : read-only os.environ.get("CUDA_VISIBLE_DEVICES") as a dict entry or a
+#                                simple assignment. Any os.environ[...] subscript or any os.environ method
+#                                other than .get on the line stays banned (update()/setdefault()/pop()...).
+# Known residual (declared): a line-level grep cannot see dataflow (e.g. `env = os.environ` aliasing two
+# lines apart) -- this check is a tripwire, review remains the backstop.
 # The filter is a named function so the self-test (test_check_safety_cvd.sh) exercises the SAME code path.
 cvd_ban_filter() {
     # stdin: "file:line:content" grep hits -> stdout: lines that VIOLATE the ban
     grep -vP ':\d+:\s*#' \
         | grep -vP '# .*(ban|don'\''t|deprecated|Do NOT use|禁止)' \
-        | grep -vP '^(?!.*os\.environ).*\["CUDA_VISIBLE_DEVICES"\]\s*=.*#\s*cvd-child-env\b' \
-        | grep -vP '^(?!.*os\.environ\["CUDA_VISIBLE_DEVICES"\]\s*=).*os\.environ\.get\("CUDA_VISIBLE_DEVICES"\).*#\s*cvd-provenance-read\b'
+        | grep -vP '^(?!.*;)(?!.*os\.environ).*:\d+:\s*env\["CUDA_VISIBLE_DEVICES"\]\s*=\s*(str\([A-Za-z_][A-Za-z0-9_]*\)|"[0-9,]+")\s*#\s*cvd-child-env\b' \
+        | grep -vP '^(?!.*;)(?!.*os\.environ\[)(?!.*os\.environ\.(?!get\())[^;]*:\d+:\s*("CUDA_VISIBLE_DEVICES":\s*|[A-Za-z_][A-Za-z0-9_]*\s*=\s*)os\.environ\.get\("CUDA_VISIBLE_DEVICES"\),?\s*#\s*cvd-provenance-read\b'
 }
 
 check_cuda_visible_devices() {

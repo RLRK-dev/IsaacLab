@@ -49,9 +49,19 @@ run_case "mutation disguised beside a get(), provenance annotation" \
     'x.py:16:    os.environ["CUDA_VISIBLE_DEVICES"] = os.environ.get("CUDA_VISIBLE_DEVICES")  # cvd-provenance-read' BANNED
 run_case "bare env-var read without annotation" \
     'x.py:17:    d = os.environ.get("CUDA_VISIBLE_DEVICES")' BANNED
+run_case "non-env dict target with child-env annotation (HOLD B1 control 1)" \
+    'x.py:20:    cfg["CUDA_VISIBLE_DEVICES"] = "0"  # cvd-child-env' BANNED
+run_case "environ.update compound beside a get(), provenance annotation (HOLD B1 control 2)" \
+    'x.py:21:    os.environ.update({"CUDA_VISIBLE_DEVICES": "0"}); v = os.environ.get("CUDA_VISIBLE_DEVICES")  # cvd-provenance-read' BANNED
+run_case "env target but arbitrary-call value, child-env annotation" \
+    'x.py:22:    env["CUDA_VISIBLE_DEVICES"] = compute_idx()  # cvd-child-env' BANNED
+run_case "simple-assignment read, annotated" \
+    'x.py:23:    v = os.environ.get("CUDA_VISIBLE_DEVICES")  # cvd-provenance-read' ALLOWED
+run_case "legs-harness literal digit shape, annotated" \
+    'x.py:24:    env["CUDA_VISIBLE_DEVICES"] = "0"  # cvd-child-env: leg collectors pinned' ALLOWED
 
 if [ "$FAILURES" -eq 0 ]; then
-    echo "SELF-TEST PASS (8/8 controls)"
+    echo "SELF-TEST PASS (13/13 controls)"
     exit 0
 else
     echo "SELF-TEST FAIL ($FAILURES failing controls)"
