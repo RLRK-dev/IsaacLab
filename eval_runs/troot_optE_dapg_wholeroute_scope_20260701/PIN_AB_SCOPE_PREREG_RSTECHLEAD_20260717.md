@@ -1,7 +1,7 @@
 # pin (a)(b) chunk — scope prereg + claim manifest (%12/RS-TECH-LEAD)
 
-**v0.3 — 2026-07-17 07:52 JST** (pN PRE-BANK HOLD B1/B2 + p5 回答/§S4.5 GRANT を折込。v0.2 = 07:35
-[[VERIFY] panel 折込]、v0.1 = 07:13。fold 差分は §0)。
+**v0.3.1 — 2026-07-17 08:00 JST** (record-fix: pN readback 異議 1 点 = guard 順を指定順へ復帰 [§0]。
+v0.3 = 07:52 [pN B1/B2 + p5 折込]、v0.2 = 07:35 [[VERIFY] panel 折込]、v0.1 = 07:13。fold 差分は §0)。
 
 **Chunk**: pin 恒久配線の (a) witness per-episode reset + (b) eq clear on reset + route_executor pin-fields
 5-hunk の bundle land。**Rs GO = 2026-07-17 06:4x「1」**(選択肢① 採択、記録 = commit `7640695d9a` +
@@ -39,10 +39,14 @@ direct query + post-land 競合 unwind / §6 順序訂正。
   `audit_pin_anchors` に return-tuple を追加する **%12-authored hunk** を §3 IN に追加 (pN 推奨形、
   既存 caller 3+1 箇所は statement-position で戻り値不読 = 互換、%12 grep 07:47)。acceptance legs
   L-C3/L-C4/L-C5 新設 + L-C/L-E/L-F1 文言同期 (pN (a)-(e) 対応表 = §5 末尾)。
-- **順序 1 点の意図的乖離 (fail-louder 方向、loud 記録)**: pN 指定順 = (1) 0∉env_ids return → (2) wc
-  assert。v0.3 実装は **wc assert を先頭** — wc>1 は本 env の禁止構成 (banked hypothesis: CPU eq 書込
-  GPU-inert) ゆえ、どの world の reset でも最初に loud 死すべき。leg (d) は両順序で PASS。pN 異議あれば
-  入替は 1 行。
+- **順序乖離 → pN readback で指定順へ復帰 (v0.3.1 record-fix、08:00)**: v0.3 は wc assert を先頭に置く
+  乖離を提案したが、pN readback (07:5x-08:0x、B1/B2 fold 本体 = PASS・sha 全一致) が本項のみ異議 =
+  **指定順 ((1) 0∉env_ids return → (2) wc raise) へ復帰**。理由 (%12 が on-disk で confirm): helper の
+  責務は world-0 pin lifecycle 限定であり、CPU×wc>1 構成全体の fail-loud owner は既存 make_solver
+  tripwire (`newton_skill_env_base.py:1324-1329`、診断 opt-out `THREAD_ALLOW_CPU_MULTIWORLD=1` 込み、
+  `newton_route_env.py:424` が cite)。wc-first は world-0 を触らない subset-reset まで殺し opt-out 契約を
+  狭める一方、pin 安全性を増やさない。指定順でも 0∈env_ids の reset / public reset() は wc>1 で RAISE =
+  **B1 bar 維持** (leg (d) は 0∈env_ids で測る)。acceptance / 設計の reopen なし (pN 指定)。
 - **p5 回答 (07:43)**: ① author claim = **NOT MINE** (§1 更新) ② **§S4.5 追補 = GRANT + §11 批准**
   (on-disk 発行 → %12 bank = commit `e40fd541cc`、§11 更新)。
 - §2 に **frozen5-body 正規化 sha** を追加 (%12 hunk が :963 に入ると後続 5 hunk の @@ 行番号が shift
@@ -105,8 +109,9 @@ disposition 再 open (pN 条件 2)。%12 hunk 由来の @@ 行番号 shift = **�
    `authorize_clip_pin_controls.py:223-224` 踏襲)
 5. 本 doc + [RESULT] 追記
 
-**OUT**: (d) policy-drive trigger (p5 設計待ち、別 gate — refire の非 raise 化・訓練時 trigger 規則を
-含む) / FM3/FM4 (land 済) / task_config.py (不触) / dirty tree の他内容 (stage しない) / 訓練起動
+**OUT**: (d) policy-drive trigger (p5 設計待ち、別 gate — refire の非 raise 化・訓練時 trigger 規則、
++ **witness-vs-fired 不一致の runtime loud 化** [p5 optional-hardening 登録 08:00、本 chunk は
+L-C3/C4/C5 + probe 検出で足りる] を含む) / FM3/FM4 (land 済) / task_config.py (不触) / dirty tree の他内容 (stage しない) / 訓練起動
 (禁止継続) / route_executor.py の成分 1a/1b 外の編集 (ゼロ) / done path :1926-1934 の既存 audit block
 (残置 — 二重 audit は read-only で無害) / B4 state-bank fork との相互作用 (B4 gate 側 prereg 項目)。
 
@@ -125,13 +130,14 @@ def _clear_c1_pin(self, env_ids):
     load-bearing: the clear destroys the episode's weld evidence. Identity
     (_pin_seat_seg/_pin_onset_frame/_route_rec_step_f) is recording-derived and NEVER
     cleared (coupling note: the escape guard reads identity, not witness)."""
+    if 0 not in env_ids:              # pin is world-0-only: a reset not touching world 0 is out
+        return                        # of this helper's scope (wc>1 whole-config loudness is
+                                      # owned by the make_solver tripwire, base:1324-1329)
     if int(self._world_count) != 1:   # env-authoritative (pN B1: solver has no world_count
         raise RuntimeError(           # attr -> getattr(solver, ..., 1) is fail-open)
             f"clip-pin lifecycle requires world_count==1 (CPU path); got {self._world_count}"
             " -- CPU eq writes are GPU-inert at wc>1 (banked hypothesis 2026-07-16)"
         )
-    if 0 not in env_ids:              # pin is world-0-only
-        return
     import route_executor as rex      # lazy, mirrors :1930
     mjm = getattr(self._solver, "mj_model", None)
     if mjm is None:                   # no CPU eq table -> no pin can exist (mirrors :1933)
@@ -153,7 +159,8 @@ def _clear_c1_pin(self, env_ids):
   正 = 「**no active candidate = state no-op (audit は read-only で常に走る)**。bypass 候補が在れば
   witness=None でも flag-OFF でも audit→clear が走る」。`route_c1_pin` flag は発火 (activation) のみを
   gate し、episode 境界の cleanup は model state が支配する。
-- **wc assert 先頭** = §0 記載の意図的乖離 (fail-louder)。
+- **guard 順 = pN 指定順** (0∉env_ids return → wc raise): helper 責務 = world-0 pin lifecycle 限定。
+  wc>1 構成全体の loud 化は make_solver tripwire が owner (§0 v0.3.1 項)。
 - **不触**: `_pin_seat_seg` / `_pin_onset_frame` / `_route_rec_step_f` (recording 由来、coupling 注記)。
 - **anchor 残置無害** (CC3 実証): audit filter は `eq_active==1` の後にのみ `eq_data[3:6]` を読む
   (route_executor.py:989→:997)。refire 選択は xpos 距離 (:776)、eq_data 不読。`eq_active0` は全読取
@@ -175,7 +182,7 @@ def _clear_c1_pin(self, env_ids):
 |---|---|---|
 | L-A | **before**: exact committed HEAD (隔離 worktree) で V5 test FAIL 再確認 | FAIL 1 本 = `test_pin_identity_fields_survive_recording_prepare` のみ (GATE2:79 再現) |
 | L-B | **after**: landed commit の隔離 worktree で **既存 10 test (名前列挙で固定: fm4_c1 / fm4_c2 / fm3 / i3×2 / i4×2 / escape_sentinel / crossing_x_dev / pin_identity_fields) 全 PASS + 新規追加 test 全 PASS** | 全 PASS、exit 0 (**pN binding**) |
-| L-C | unit: `_clear_c1_pin` 決定論理 | clear 実行 iff (wc==1 ∧ 0∈env_ids ∧ audited fired ≠ ∅) / **wc≠1 → raise — env `_world_count=4` かつ solver に `world_count` 属性なしでも RAISE (pN B1 leg)** / readback 失敗 → raise / audit が clear より先 (呼出記録 assert) / identity 属性 前後対称差 = ∅ / 実行後 witness = None |
+| L-C | unit: `_clear_c1_pin` 決定論理 | clear 実行 iff (wc==1 ∧ 0∈env_ids ∧ audited fired ≠ ∅) / **0∉env_ids → wc に関わらず no-op (return、指定順)** / **wc≠1 (0∈env_ids 下) → raise — env `_world_count=4` かつ solver に `world_count` 属性なしでも RAISE (pN B1 leg)** / readback 失敗 → raise / audit が clear より先 (呼出記録 assert) / identity 属性 前後対称差 = ∅ / 実行後 witness = None |
 | L-C2 | unit: **raise-branch fixtures** — partial witness (2/3 keys) → ValueError / per-frame shape 不一致 → ValueError / fields 全欠 → pin_fields 無しで素通り (prepared に pin key 無) | 3/3 期待どおり (§1 共進化計器の穴埋め) |
 | L-C3 | **bypass + 圏外 (pN (a))**: `eq_active[k]=1` 直接書込 + anchor を capture volume 外 + witness=None → reset | **clear 前に audit RAISE** (raise 後 eq_active[k]==1 のまま = clear 未実行の証明) |
 | L-C4 | **bypass + 圏内 (pN (b))**: 直接書込 + anchor 圏内 + witness=None → reset | audit PASS → **eq_active[k]==0 に clear される** (witness gate で素通しされない = B2 の直接計器) |
@@ -286,6 +293,7 @@ B0_NOPIN のとおり cable は C1 を離れ、escape 終了が早期 done を�
 2. **witness の run-level provenance** (CC6-ref): (a) 化で witness は per-episode ephemeral → probe json
    は per-episode 記録 (L-D artifact)。訓練時代の等価物 = (d) gate の設計項目。
 3. wc>1 opt-out 文脈では frozen worlds の timeout done が world-0 mid-episode に audit を走らせ得る
-   (CC3-R3: 無害・pass するが、audit 呼出を episode 境界と読み替えるな)。**v0.3 の wc==1 raise 下では
-   本 env に wc>1 構成は存在しない — 本 note は将来 wc 制約を緩める設計への carry**。
+   (CC3-R3: 無害・pass するが、audit 呼出を episode 境界と読み替えるな)。**v0.3.1 guard 順では
+   0∈env_ids の reset が wc>1 で raise / 0 非含有 subset-reset は no-op — 本 note は診断 opt-out
+   (`THREAD_ALLOW_CPU_MULTIWORLD=1`) 構成への carry**。
 4. B4 state-bank fork: post-onset bank state は最初の ff step で位置発火する → **B4 gate の prereg 項目**。
