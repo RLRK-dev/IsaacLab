@@ -1,0 +1,41 @@
+[NewtonRouteEnv] Initializing: 1 worlds on cuda:0 (backend=mujoco)
+[NewtonRouteEnv] Building FK model...
+Warp 1.13.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.0
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA RTX A6000" (47 GiB, sm_86, mempool enabled)
+   Kernel cache:
+     /home/rlrk/.cache/warp/1.13.0
+Module validate_and_correct_inertia_kernel_524fb5ef 524fb5e load on device 'cuda:0' took 0.61 ms  (cached)
+  [FK] Robot-only model: bodies=28, joints=28, joint_coords=28, joint_dofs=28
+Module newton._src.sim.articulation 9875313 load on device 'cuda:0' took 5.30 ms  (cached)
+[NewtonRouteEnv] Building scene (1 worlds, backend=mujoco)...
+  [CABLE] add_revolute_cable: 40 bodies, 40 joints (FREE+REVOLUTE), k=0.33 N·m/rad, damping=0.01, springref=0, solref=(0.005,1.0), seg_mass=0.8g
+  [S6_GRASP] actuation wired (multiworld proto): drivers=[6, 10, 20, 24] servo(ke=66.7,kd=2.0,eff=2.5) connects=[(9, 7), (13, 11), (23, 21), (27, 25)] mirrors=[(9, 13), (23, 27)] condim6 on 56 shapes (16 pad + cable) rolling=0.005
+  [SCENE] Table → 4 boxes (S6_GRASP void): VOID Y[0.090,0.210] X[0.234,0.366] (gripper f1ext reaches under the cable)
+Module newton._src.sim.graph_coloring 95273ab load on device 'cpu' took 0.98 ms  (cached)
+Module newton._src.solvers.mujoco.kernels f5ae6c7 load on device 'cuda:0' took 7.46 ms  (cached)
+  [S6_GRASP] solref poked + I11 asserts OK: pad_geoms=16 condim mj_pad=6/mjw_pad=6 mj_cable=6/mjw_cable=6 solref_mjw=[-65789.0, -2105.300048828125] priority=1 roll=0.004999999888241291 connects_stiffened=4(eq_solref->[0.001,1])
+[NewtonRouteEnv] Model: 68 bodies, 68 joints, solver=SolverMuJoCo
+[NewtonRouteEnv] G1 scene-align: cable start y -> -0.30000001192092896 (recording frame-0; support clips OFF)
+[NewtonRouteEnv] Settling cable (~2s, arm held via joint_q re-pose)...
+Module newton._src.sim.collide 0e6be4c load on device 'cuda:0' took 0.74 ms  (cached)
+Module newton._src.geometry.broad_phase_nxn 4aedc5e load on device 'cuda:0' took 0.37 ms  (cached)
+Module narrow_phase_primitive_write_contact e070310 load on device 'cuda:0' took 0.68 ms  (cached)
+Module narrow_phase_gjk_mpr_True_write_contact_default_default 00fbe52 load on device 'cuda:0' took 1.79 ms  (cached)
+Module newton._src.geometry.narrow_phase e577950 load on device 'cuda:0' took 0.87 ms  (cached)
+[NewtonRouteEnv] Cable settled: mean_x=0.3000 z_rest=0.8040
+[NewtonRouteEnv] Setting up P0 precondition (lift-point)...
+Module newton._src.sim.ik.ik_solver d9f8ff8 load on device 'cuda:0' took 1.35 ms  (cached)
+Module newton._src.sim.ik.ik_common ec7ac17 load on device 'cuda:0' took 2.37 ms  (cached)
+Module newton._src.sim.ik.ik_objectives 2ab3ea8 load on device 'cuda:0' took 2.20 ms  (cached)
+Module newton._src.sim.ik.ik_lm_optimizer d941fd7 load on device 'cuda:0' took 0.92 ms  (cached)
+Module _lm_solve_tiled_28_34_63e6e95d 45e86ff load on device 'cuda:0' took 184.42 ms  (cached)
+  [P0-UPRISE] Done: steps=3000
+[NewtonRouteEnv] P0 complete -- lift-point reached
+[NewtonRouteEnv] P0 saved: EE_R=[0.29999942 0.19400033 1.1609197 ], EE_L=[0.30000007 0.10599986 1.1609201 ]
+[NewtonRouteEnv] Batched IK solver: n_problems=1, joint_coords=28
+[NewtonRouteEnv] route_executor ON: recording=/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz (frames=7707, state_bank phases=[1, 2, 3, 4, 5])
+[NewtonRouteEnv] Ready in 81.1s. obs=62, act=6, worlds=1
+[collector 2] published ep_000000 sha=1e4fdba57c08 steps=60 end=workload_step_budget

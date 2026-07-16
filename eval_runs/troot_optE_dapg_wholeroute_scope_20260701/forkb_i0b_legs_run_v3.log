@@ -1,0 +1,143 @@
+=== leg l2 ===
+{
+ "leg": "L2_kfail_restart_halt",
+ "passed": true,
+ "evidence": {
+  "rc": 2,
+  "halt_json": true,
+  "individuals": [
+   "proc_meta.rc000.json",
+   "proc_meta.rc001.json",
+   "proc_meta.rc002.json",
+   "proc_meta.rc003.json"
+  ],
+  "derived_seeds": [
+   1783842106,
+   3294954633,
+   3975626108,
+   519546485
+  ],
+  "seeds_distinct": true,
+  "episodes": [
+   "ep_000000.npz",
+   "ep_000001.npz",
+   "ep_000002.npz",
+   "ep_000003.npz"
+  ],
+  "episodes_expected": [
+   "ep_000000.npz",
+   "ep_000001.npz",
+   "ep_000002.npz",
+   "ep_000003.npz"
+  ],
+  "no_overwrite_numbering": true
+ },
+ "wall_s": 332.1
+}
+=== leg l2b ===
+{
+ "leg": "L2b_marker_fresh_stale",
+ "passed": true,
+ "evidence": {
+  "rc": 0,
+  "individuals": [
+   "proc_meta.rc000.json",
+   "proc_meta.rc001.json"
+  ],
+  "fresh_marker_restarted": true,
+  "stale_marker_completed": true,
+  "marker_rc_on_disk": 0,
+  "halt_json": false,
+  "episodes": [
+   "ep_000000.npz",
+   "ep_000001.npz",
+   "ep_000002.npz"
+  ]
+ },
+ "wall_s": 154.1
+}
+=== leg l3 ===
+{
+ "leg": "L3_lever_smoke",
+ "passed": true,
+ "evidence": {
+  "default": {
+   "rc": 0,
+   "device_map": {
+    "collector": "cuda:0",
+    "trainer": "cuda:2",
+    "n_collect_cap": 4
+   },
+   "n_collect": 1,
+   "proc_dirs": [
+    "proc_0"
+   ],
+   "child_CVDs": [
+    "0"
+   ],
+   "episodes_published": 1
+  },
+  "fallback": {
+   "rc": 0,
+   "device_map": {
+    "collector": "cuda:0",
+    "trainer": "cuda:0",
+    "n_collect_cap": 3
+   },
+   "n_collect": 3,
+   "proc_dirs": [
+    "proc_0",
+    "proc_1",
+    "proc_2"
+   ],
+   "child_CVDs": [
+    "0",
+    "0",
+    "0"
+   ],
+   "episodes_published": 3
+  }
+ },
+ "wall_s": 178.3
+}
+=== leg l6 ===
+{
+ "leg": "L6_preflight_failclosed",
+ "passed": true,
+ "evidence": {
+  "nonzero": {
+   "rc": 2,
+   "launch_abort_exists": true,
+   "abort_stage": "preflight_unknown",
+   "abort_has_secS": true,
+   "manifest_preflight": "ABORT:preflight_unknown",
+   "no_proc_dirs": true
+  },
+  "missing": {
+   "rc": 2,
+   "launch_abort_exists": true,
+   "abort_stage": "preflight_unknown",
+   "abort_has_secS": true,
+   "manifest_preflight": "ABORT:preflight_unknown",
+   "no_proc_dirs": true
+  }
+ },
+ "wall_s": 0.1
+}
+=== leg l7 ===
+{
+ "leg": "L7_schema_v19",
+ "passed": true,
+ "evidence": {
+  "rc": 0,
+  "termination_reason_empty": true,
+  "truncated_by_ratified": true,
+  "sec_S_in_manifest": true,
+  "arrays_symmetric_diff": [],
+  "time_out_all_false": true,
+  "sha_matches": true,
+  "n_steps": 60
+ },
+ "wall_s": 84.0
+}
+ALL_PASS=True -> forkb_i0b_legs_result_v3_only_l2_l2b_l3_l6_l7.json

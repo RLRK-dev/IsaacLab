@@ -1,0 +1,2 @@
+[supervisor] GPU preflight UNKNOWN (rc=1) -- failing CLOSED
+[supervisor] LAUNCH ABORT (preflight_unknown): GPU compute-proc count unmeasurable via '/bin/false'; <=4/GPU unverifiable -- failing CLOSED, nothing spawned

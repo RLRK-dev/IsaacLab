@@ -1,0 +1,2 @@
+[supervisor] GPU preflight UNKNOWN (FileNotFoundError) -- failing CLOSED
+[supervisor] LAUNCH ABORT (preflight_unknown): GPU compute-proc count unmeasurable via '/nonexistent_nvidia_smi_xyz'; <=4/GPU unverifiable -- failing CLOSED, nothing spawned

@@ -111,3 +111,10 @@ HEAD の FM3/FM4 tighten コードは live かつ **未批准** (owner chain = /
 | L3 再走 | v2 と同型 (default: trainer=cuda:2, CVD=["0"] / fallback: trainer=cuda:0, N=3) |
 | **L6 (新)** | `/bin/false` と missing cmd の両方で: exit 2 ∧ LAUNCH_ABORT (stage=preflight_unknown, §S 有) ∧ manifest preflight=ABORT:* ∧ proc dir ゼロ |
 | **L7 (新)** | manifest: termination_reason=="" ∧ truncated_by∈{workload_step_budget,env_done,supervisor_stop} ∧ §S 有 ∧ sha 一致 / npz: 必須 9 array の対称差 = ∅ ∧ time_out all-False / rc 0 |
+
+**v3 OUTCOME (2026-07-16 23:4x 実測、HEAD `6cf3dc0015` = landed bytes、result = `forkb_i0b_legs_result_v3_only_l2_l2b_l3_l6_l7.json`、runs = `forkb_i0b_runs_v3/`): 5/5 = 事前登録どおり ALL PASS**
+- L2 (332.1 s): 新検出ロジック下で crash 経路同型 — 4 個体・seed 相異・ep 4 本・HALT・exit 2。
+- **L2b (154.1 s)**: fresh marker (rc==0 exit + FAILURE.json rc=0) → supervisor が failure 計上 + restart ✓ / rc1 個体が stale marker 残存下で完走 = success ✓ / 個体 2・ep 3 本・HALT 無・rc 0。B3 の両象限 閉鎖。
+- L3 (178.3 s): lever 両形 同型 PASS。
+- **L6 (0.1 s)**: nonzero (`/bin/false`) と missing の両方で exit 2 + LAUNCH_ABORT (stage=preflight_unknown、§S 有) + spawn ゼロ。B2 閉鎖 (fail-closed 実測)。
+- **L7 (84.0 s)**: v1.9 (a) 形 conformance 全項 PASS (termination_reason=""・truncated_by 批准値・§S・sha 一致・9 array 対称差 ∅・time_out all-False)。B4 閉鎖 (landed 実測)。

@@ -1,0 +1,146 @@
+{
+ "ts": 1784212481.8926466,
+ "git_head": "6cf3dc0015b211f4633461f2b828191e9b45b838",
+ "sec_S_exposure": "HEAD FM3/FM4 tighten code is live and UNRATIFIED (I0A_SCOPE_MANIFEST AMENDMENT 1 + sec S, ad0bb76460): these legs assert INFRA predicates only (files/sha/restart/pause/spawn); no semantic validity claims.",
+ "preregistration": "I0B_BUILD_RSTECHLEAD_20260716.md (predicates fixed before run)",
+ "legs": [
+  {
+   "leg": "L2_kfail_restart_halt",
+   "passed": true,
+   "evidence": {
+    "rc": 2,
+    "halt_json": true,
+    "individuals": [
+     "proc_meta.rc000.json",
+     "proc_meta.rc001.json",
+     "proc_meta.rc002.json",
+     "proc_meta.rc003.json"
+    ],
+    "derived_seeds": [
+     1783842106,
+     3294954633,
+     3975626108,
+     519546485
+    ],
+    "seeds_distinct": true,
+    "episodes": [
+     "ep_000000.npz",
+     "ep_000001.npz",
+     "ep_000002.npz",
+     "ep_000003.npz"
+    ],
+    "episodes_expected": [
+     "ep_000000.npz",
+     "ep_000001.npz",
+     "ep_000002.npz",
+     "ep_000003.npz"
+    ],
+    "no_overwrite_numbering": true
+   },
+   "wall_s": 332.1
+  },
+  {
+   "leg": "L2b_marker_fresh_stale",
+   "passed": true,
+   "evidence": {
+    "rc": 0,
+    "individuals": [
+     "proc_meta.rc000.json",
+     "proc_meta.rc001.json"
+    ],
+    "fresh_marker_restarted": true,
+    "stale_marker_completed": true,
+    "marker_rc_on_disk": 0,
+    "halt_json": false,
+    "episodes": [
+     "ep_000000.npz",
+     "ep_000001.npz",
+     "ep_000002.npz"
+    ]
+   },
+   "wall_s": 154.1
+  },
+  {
+   "leg": "L3_lever_smoke",
+   "passed": true,
+   "evidence": {
+    "default": {
+     "rc": 0,
+     "device_map": {
+      "collector": "cuda:0",
+      "trainer": "cuda:2",
+      "n_collect_cap": 4
+     },
+     "n_collect": 1,
+     "proc_dirs": [
+      "proc_0"
+     ],
+     "child_CVDs": [
+      "0"
+     ],
+     "episodes_published": 1
+    },
+    "fallback": {
+     "rc": 0,
+     "device_map": {
+      "collector": "cuda:0",
+      "trainer": "cuda:0",
+      "n_collect_cap": 3
+     },
+     "n_collect": 3,
+     "proc_dirs": [
+      "proc_0",
+      "proc_1",
+      "proc_2"
+     ],
+     "child_CVDs": [
+      "0",
+      "0",
+      "0"
+     ],
+     "episodes_published": 3
+    }
+   },
+   "wall_s": 178.3
+  },
+  {
+   "leg": "L6_preflight_failclosed",
+   "passed": true,
+   "evidence": {
+    "nonzero": {
+     "rc": 2,
+     "launch_abort_exists": true,
+     "abort_stage": "preflight_unknown",
+     "abort_has_secS": true,
+     "manifest_preflight": "ABORT:preflight_unknown",
+     "no_proc_dirs": true
+    },
+    "missing": {
+     "rc": 2,
+     "launch_abort_exists": true,
+     "abort_stage": "preflight_unknown",
+     "abort_has_secS": true,
+     "manifest_preflight": "ABORT:preflight_unknown",
+     "no_proc_dirs": true
+    }
+   },
+   "wall_s": 0.1
+  },
+  {
+   "leg": "L7_schema_v19",
+   "passed": true,
+   "evidence": {
+    "rc": 0,
+    "termination_reason_empty": true,
+    "truncated_by_ratified": true,
+    "sec_S_in_manifest": true,
+    "arrays_symmetric_diff": [],
+    "time_out_all_false": true,
+    "sha_matches": true,
+    "n_steps": 60
+   },
+   "wall_s": 84.0
+  }
+ ],
+ "all_pass": true
+}
