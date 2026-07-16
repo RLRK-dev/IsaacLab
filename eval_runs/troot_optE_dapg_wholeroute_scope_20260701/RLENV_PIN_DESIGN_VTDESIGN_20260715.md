@@ -1,6 +1,6 @@
-# RL env pin 配線 — 設計裁定 v1.11
+# RL env pin 配線 — 設計裁定 v1.12
 
-**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**v1.8:** 2026-07-16（§21.9 = %12 E-probe `5b9fe8e62c` 結果 = 機構 feasible 確定・notify-safe・escalation なし・anchor=ref-pose hold-in-place / (c) 設計 finalize / E-1 positional が最終 gate）。**v1.9:** 2026-07-16（§21.10 = E-1 BLOCKED-BY-ENV 裁定: ENV-MULTIWORLD 発見 [worlds>0 物理凍結] は **USE_MUJOCO_CPU=True の CPU step=単一世界積分で by-construction 説明**・D-1/D-2 判別指定 / **§21.9 E-2/E-3/E-4 を sync 実証へ re-scope**［bug 下で緑の gate 教訓の自適用］/ env 発見=別 charter CONFIRM + fork A/B/C 事前分析）。**v1.10:** 2026-07-16（§21.10.6 = D-loop CLOSE [D-1 True / D-2 予測 2 本確認・NaN 実測] + charter 忠実性 PASS + 追加裁定 R-a [poke-parity 機構 = fork A DoD] / R-b [CPU×多世界 fail-loud tripwire = charter 即時項目]）。**v1.11:** 2026-07-16（§21.10.7 ERRATUM = ⛔「新規発見」撤回 [freeze は 07-08 既知 `COMP3_PLAN...20260708.md` §7、私も relay で propagate = 訂正 8 件目]・真の差分 5 点を批准）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
+**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-15 02:37 JST。**v1.5:** 2026-07-15 07:0x。**v1.6:** 2026-07-16（§20 署名 canonical + §21 恒久配線 scaffold、%12 依頼①② への回答）。**v1.7:** 2026-07-16（§21.8 = %12 probe `6fb00b845c` 結果 + (c) 機構 source-解決 = newton-API+notify、直接 mjw 書込でない）。**v1.8:** 2026-07-16（§21.9 = %12 E-probe `5b9fe8e62c` 結果 = 機構 feasible 確定・notify-safe・escalation なし・anchor=ref-pose hold-in-place / (c) 設計 finalize / E-1 positional が最終 gate）。**v1.9:** 2026-07-16（§21.10 = E-1 BLOCKED-BY-ENV 裁定: ENV-MULTIWORLD 発見 [worlds>0 物理凍結] は **USE_MUJOCO_CPU=True の CPU step=単一世界積分で by-construction 説明**・D-1/D-2 判別指定 / **§21.9 E-2/E-3/E-4 を sync 実証へ re-scope**［bug 下で緑の gate 教訓の自適用］/ env 発見=別 charter CONFIRM + fork A/B/C 事前分析）。**v1.10:** 2026-07-16（§21.10.6 = D-loop CLOSE [D-1 True / D-2 予測 2 本確認・NaN 実測] + charter 忠実性 PASS + 追加裁定 R-a [poke-parity 機構 = fork A DoD] / R-b [CPU×多世界 fail-loud tripwire = charter 即時項目]）。**v1.11:** 2026-07-16（§21.10.7 ERRATUM = ⛔「新規発見」撤回 [freeze は 07-08 既知 `COMP3_PLAN...20260708.md` §7、私も relay で propagate = 訂正 8 件目]・真の差分 5 点を批准）。**v1.12:** 2026-07-16（§21.11 = **Rs 裁定 fork B 採択**［verbatim「推奨でよい、fork Bで進めて」］+ ⭐設計帰結: **(c) は fork B の下で解消** — 各 process=単一世界 CPU path ⇒ 残作業 = (a)(b)(d)+既存 audit、newton-API 機構は S8 用 banked / trainer-infra 設計 gate agenda 5 項）。**Status:** DRAFT — %12 verify 待ち。0-commit（bank = %12）。
 **Trigger:** Rs 裁定 2026-07-15 00:5x「クリップ**のみ** pin を RL env に恒久配線しろ」（%12 経由）+ %12 依頼 2026-07-16（①署名裁定 ②恒久配線 scaffold）。
 **Scope:** Q1（pin をいつ打つか）/ Q2（clip-only を機構でどう保証するか）/ Q3（STEP 9 述語）/ (a) body 割当規則 / **①署名 canonical / ②恒久配線 firing scaffold（per-episode / done-world clear / policy-drive live trigger / multi-world eq / per-world audit）**。
 **⚠ 本 doc は message の代替である**（通信規律 2026-07-15 02:35: 数値は artifact に置き、message は path だけ）。
@@ -978,3 +978,42 @@ if use_mujoco_cpu and world_count > 1: raise（明示 opt-out env 変数付き �
 - ⛔ **私の propagation 過失（記録）**: §21.10.0 で %12 の新規性主張を**自分で grep せず relay した**。`[[feedback-narrative-signal-not-established-fact-verify-on-disk]]` + `[[feedback-absence-claims-grep-all-build-paths]]`（新規性主張 = vault についての不在主張 — 同じ規律が要る）の再演。本 ERRATUM は COMP3 を自読してから書いた。
 - ✅ **維持される真の差分**（charter §1 訂正と一致、私も批准）: ① 根因の**二重確定**（D-1 flag 実測 + D-2 統制対照 — COMP3 は構成読み + dz==0 単発で、統制対照なし）② **fork A コストの実測**（NaN t≈180 — COMP3 は plumbing を無コスト情報で記載）③ **fork B（process 並列）は COMP3 に無い選択肢** ④ R-a/R-b の機構化（COMP3 §13 ISSUE 2「PIN world_count=1」は R-b の**規律版前身** — R-b はそれを機構に昇格）⑤ **standing Rs escalation（COMP3「SEPARATE campaign item」）の discharge**（charter がその項目を正式に Rs へ運んだ）。
 - 🔒 **教訓の型（既存 lesson の適用で足りる、新 memory 不要）**: prior-art guard の PASS は**それ自体が不在主張** ⇒ 高 stakes の「新規」宣言前に、guard keyword を変えて再走 + 該当領域 doc の直接 grep（今回なら「world」「frozen」「nworld」で COMP3 群に即 hit した）。
+
+---
+
+## §21.11 🔒 Rs 裁定 = fork B 採択（v1.12、2026-07-16）+ ⭐ 設計帰結: (c) 問題は fork B の下で【解消】する
+
+### §21.11.0 Rs 裁定（human 決定、記録）
+
+**Rs verbatim（2026-07-16、p5 pane 直接）:「推奨でよい、fork Bで進めて」**
+- **charter §6 Q1 = CLOSED**: fork **B（CPU 維持 + process 並列 = world_count=1 env × N process、trainer 側 vectorize）**採択 — charter 推奨（B primary、pN co-sponsor、Rs L0 手段裁定[RL+IL+vision+WM 必須]接地）の承認。
+- **Q2（新 node 起票）**: 「進めて」を **起票承認込み**と解釈（NEST §3.1 の node 起票承認は charter 上程事項 #2 — 進行命令はそれを含意）。⚠ **解釈は Rs 返信で訂正可能な形で明示**。起票実務 = %12/pN 経路。
+- **Q3（fork A の GT 手順）= MOOT**（A は採択されず）。charter 記載の「A = R-a 込み独立 hardening として並走**可**」は**発注されていない** — 別途 Rs の言があるまで dormant（勝手に着手しない）。
+- **R-b tripwire（charter §4-B 即時項目 #0）= fork B の下でも実装する**（B/C では発火しない防御壁だが、将来の誤構成 [誰かが world_count>1 を CPU で起動] を機構で塞ぐ意義は不変。Rs「進めて」= charter パッケージの承認と読む）。
+
+### §21.11.1 ⭐⭐ 設計帰結 — fork B は pin 恒久配線の (c) を【不要化】し、(a)(b)(d)+audit を【proven CPU path】に戻す
+
+fork B では **各 env process = world_count=1 = `use_mujoco_cpu=True` の CPU 分岐 = `mj_step(mj_model, mj_data)`**（`solver_mujoco.py:3266-3274`）。これは **g6_live で pin 発火が実証済みの、まさにその path**。⇒ §21 の 5 要素を再裁定する:
+
+| 要素 | multi-world 設計（§21.2-21.5、fork A 前提） | **fork B での姿** |
+|---|---|---|
+| **(c) multi-world eq 管理** | newton-API+notify（§21.8-21.9） | ⭐ **不要化（解消）** — 各 process は単一世界 CPU path、既存 CPU eq 書込（`activate_c1_pin` `route_executor.py:792-794`）が**そのまま honored**。§21.8 の newton-API 機構は **S8 将来用の banked 知識として保持**（設計変更なし・実装対象から外れる） |
+| **(a) witness per-episode reset** | per-world 構造 | **残る（単純化）**: process 内は scalar のまま、`_reset_worlds` で `_c1_pin_witness = None`（episode 跨ぎ再発火） |
+| **(b) eq 解除 on reset** | done-world 限定 mjw clear | **残る（単純化）**: CPU path で `mjd.eq_active[fired] = 0`（+ witness clear と同時）。単一世界ゆえ blanket/隣 world 問題は**消滅** |
+| **(d) policy-drive live trigger** | §21.4（幾何 capture 述語、非 raise pre-check → authorizer） | **不変で必要** — fork 選択と独立。⛔ `/reward-design`+`/pre-check` gate も不変（§21.4） |
+| **audit** | per-world 走査 + per-world cap | **現行のまま有効** — `audit_pin_anchors` は単一世界 mjm/mjd 走査として書かれており（`route_executor.py:963`）、fork B の各 process でそのまま正しい。per-world 化は不要 |
+
+⇒ 🔒 **pin 恒久配線の残作業（fork B 下）= (a) + (b) + (d) + 既存 audit。全て proven CPU path 上・env 単体で完結。** E-1 positional / 真 E-2（warp 消費）は **S8 を選ぶ日まで MOOT**（§21.9.1/§21.8.2 の手続きは S8 復活時のために banked のまま）。
+
+### §21.11.2 fork B trainer-infra の設計 gate agenda（charter node の設計 phase 向け・私の宿題リスト）
+
+**解ではなく gate 項目の列挙**（設計 = charter node で p5+%12、実装 = charter node）:
+1. **N と資源上限**: GPU proc 上限 **≤4/GPU**（CLAUDE.md GPU 規則）+ `CUDA_VISIBLE_DEVICES` per process 必須 + mujoco CPU step は CPU-bound ⇒ **N は GPU メモリと CPU core の min で決まる**（実測 sizing probe が要る）。
+2. **決定論/seed 方針**: per-process byte-repro は fork B の**主要な得**（CPU 前提の banked byte-repro 群が温存される）— per-process seed 割当と記録の規約を design gate で固定。
+3. **rollout 収集 IPC**: RLPD は off-policy ⇒ **async 収集が自然**（process → replay buffer への搬送形式・頻度・backpressure）。
+4. **banked Stage-A trainer-env gate spec との整合**: process 並列化が Stage-A spec（W0-c delta v0.8、Rs 承認済）の前提と矛盾しないか reconcile leg を 1 本。
+5. **R-b tripwire の着地点**（make_solver / env init、opt-out env 変数名）。
+
+### §21.11.3 即時 disposition
+- 本 §21.11 = 裁定記録 + 設計帰結。**実装はここから 1 行も始めない**（(a)(b)(d) は charter/W1 chain の gate [(d) は reward-design gate] を通ってから）。
+- LEDGER / charter §6 / 計画面への裁定反映 = %12 bank + p6 chain（同 turn relay 済）。
