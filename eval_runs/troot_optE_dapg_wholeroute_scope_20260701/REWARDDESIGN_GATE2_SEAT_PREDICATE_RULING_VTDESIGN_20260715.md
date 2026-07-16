@@ -333,3 +333,25 @@ S字 in-band 優先: dx=3mm z=829 を選択=True / 無交差: fail-closed=False 
 2. ⚠⚠ **p5 追加所見（manifest に無い、私の grep）: 巻込みコードは flag-gated でなく【HEAD で live】** — `newton_route_env.py:1395-1396`（seat predicate 本経路で identity+crossing を無条件使用）/ `:1627`（reward loop 内で `_c1_escape_after_seat` を無条件呼出）。⇒ 🔒 **run-hygiene 規則（owner chain PASS まで）**: HEAD で走る全 run の seat/G3+/escape 出力は**未批准 reward 意味論による採点** — banked-semantics を主張する run は (a) pre-sweep commit に pin するか (b) 未批准述語への暴露を artifact に loud 宣言する。⚠ I0-a の byte 一致は **physics 軌道**の一致であって reward/latch 経路の等価性ではない（FM3 が done/latch に触るなら rollout 挙動も変わり得る — /reward-design 再走の検査対象）。
 3. **owner chain 不変**（LEDGER:57）: `/reward-design` 再走 → **p5 再 verify**（本 doc §identity/monotone 設計への conformance 照合 — 上記 tail の設計形が bar）→ `/pre-check`。**著者 pane 未特定は chain を block しない**（判定は on-disk content に対して行う — provenance と content は独立軸）。
 4. spot（後方互換）: `:1422` の旧 2-arg 呼出は `segment_indices=None` default で互換 — 署名拡張自体の破壊は無し（詳細適合は chain で）。
+
+---
+
+## §S2 🔒 gate ② 再走 leg 2 = p5 再 verify verdict（2026-07-17、対象 = swept FM3/FM4 実装 + `GATE2_RERUN_FM34_RSTECHLEAD_20260717.md` 4 artifacts + `gate2_rerun_fm34_probe_result.json` + `test_route_reward_identity_guards.py`）
+
+**方法**: 4 artifact doc 全読 → **swept code 本体の自読**（`newton_route_env.py:1297-1434`）→ 私の banked §13.1/§13.2/§13.4 + doc tail 設計形との条項照合 → probe json + unit test 実物 spot。
+
+### verdict = **CONFORM — PASS〔p5 設計軸〕→ leg 3 = /pre-check へ進んでよい**
+
+| banked 設計（bar） | 実装（自読） | 判定 |
+|---|---|---|
+| §13.1 C1 = routed-segment identity window（pinned = **hard identity**、producer seat-body 等価） | `:1352-1355` C1 → `(pin_seg−1, pin_seg)` = **「pin node を端点に持つ全 segment」= hard identity の最小・厳密形**（segment i は node (i,i+1) を所有 ⇒ endpoint 対称 — 私の ±W sketch の W を最小に取った適法形。canonical 実測 517/517 straddle={26,27}・divergence 0 が接地） | ✅ CONFORM（保守方向: 窓過小の故障 = false-negative であり exploit 側に開かない） |
+| §13.1 fail-closed（global fallback 禁止） | `:1343-1345` `pin_seg None → ()` / 空集合 → `:1322` (None,None) → `:1402` MISS sentinel / `:1348` range guard raise | ✅ 3 経路とも実在 |
+| §13.4 C2 = `_pin_seat_seg` からの **contiguity（歩いて Y 単調）**、固定 N-hop 却下、pay-through robust、edge =「available run で単調」 | `:1359-1378` walk-based（pin→候補 seg の実 span を diff 検査 — N-hop なし・edge 緩和は walk 構造に内在）、方向は実測 ys から導出（hardcode なし）、ambiguity（\|direction\|≤tol）→ () fail-closed | ✅ CONFORM |
+| tolerance 実装 note（数値 wobble 用の小 tol） | `_SEAT_MONOTONE_TOL_M = 1e-6` `:1333`（「micron wobble であって物理 Y 反転でない」と comment 明示） | ✅ 意図一致。⚠ **watch → /pre-check**: 静止時の物理 micro-jitter が 1e-6 を超える境界例 = **false-negative 方向のみ**（exploit 側でない）— 非 blocking、leg 3 で watch 指定 |
+| §13.2 FM3 = 既存 lateral-escape drop を **G3 latch で phase-gate + post-seat fail-closed** | `:1431-1434` pre-G3 → False（en-route 正常）/ post-G3 → crossing 消失 **or** \|x_dev\|>bar = escape。**bar = 既存 `DROP_LATERAL_DEV_MAX_M=0.060` `:412`（env-core `f6ee1443f5` 由来 — sweep 新設定数ではない）** | ✅ CONFORM |
+| FM3 の done 接触（§S 検査対象） | `:1627-1636` `c1_escape` は既存 **dropped** 機構の disjunct → **dones 経由**（⛔ time_outs 不触 = timeouts 汚染禁止 遵守）。post-release 抑制（ERRATUM-3 banked）の継承も確認 — **抑制されても G6 `c1_retained` conjunct が post-release escape を success から排除 ⇒ exploit 再開なし** | ✅ 解消 |
+| 両側被覆（判別できるテスト） | golden = **ACCEPT 側**（old==new、divergence 0 = tighten は正 route を 1 frame も奪わない）+ fixture = **REJECT 側**（stray loop MISS / no-crossing→post-G3 escape、unit test 4 本 + (d2) plumbing 回帰）| ✅ 構造適正 |
+
+**probe json 裏書き**: onset f2544 = first_seated 同 frame（②初回 FAIL の量子化床 fix 保存）/ post-onset seated 1.0 / `old_semantics_seated_fraction=1.0`（divergence 0 の根拠）/ FM3 誤発火 0・\|x_dev\|max 1.025mm vs 60mm / bars = built-model 値一致（3.5/821/836）。
+
+**付帯 2**: (i) 著者未特定 unit test = 内容検証の上 bank に concur（provenance 衛生 note は §S/manifest に残置、content 判定と独立）。(ii) §S の解除は **leg 3 /pre-check PASS 後**（本 verdict 単独では解除しない — owner chain 完了で）。
