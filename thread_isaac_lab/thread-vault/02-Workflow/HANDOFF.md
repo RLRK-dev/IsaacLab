@@ -1,6 +1,6 @@
-# RS-TECH-LEAD handoff — 2026-07-16 23:50 JST (record-only correction of the 21:23 edition per pN PASS-WITH-RECORDS-FIX)
+# RS-TECH-LEAD handoff — 2026-07-17 01:13 JST (gate② chain 走破後)
 
-## セッション継続中: 2026-07-16 23:50 JST (RS-TECH-LEAD %12 / w2:p4)
+## セッション継続中: 2026-07-17 01:13 JST (RS-TECH-LEAD %12 / w2:p4)
 
 ⚠ **各 pane は自分の per-pane handoff を読め**。**%12 正本 = `handoff-cc-rstechlead-w1build-2026-07-12.md`**
 (全 arc の時系列 CURRENT STATE)。本 file = shared last-writer の要約。
@@ -10,8 +10,10 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
 ### Context
 - タスク: **fork-B substrate node** (`…-P2-trainer-envbuild-substrate-forkB`、IN_PROGRESS) の **I0 実装 phase**
   + **pin node gate ② 再走** (並行 leg、招集済・未着手)
-- Phase: I0-a = **CLOSE** / **I0-b = 実装+HOLD 対応完了、pN 再判定 = PASS-WITH-RECORDS-FIX — 本訂正の bank +
-  pN readback で fence CLOSE** / gate ② 再走 = 未着手
+- Phase: I0-a/I0-b = **CLOSE** (pN readback PASS 07-17 00:0x) / **gate ② 再走 = chain 走破**: leg1 /reward-design
+  PASS (`1b59f23c44`+probe v2 訂正 `60368e6228`) → leg2 p5 CONFORM (§S2 `4589563ab4`) → **leg3 /pre-check =
+  BLOCK〔訓練批准〕** (単一 ep 述語=clean・SRG probe=可) → **I3/I4 の p5 裁定 = §S3 banked (`d807d077b8`)**。
+  **§S = 継続** (解除 = I3/I4 実装 + pin (a)(b) + (d) containment → p5 delta verify → /pre-check 再走 の後)
 - two-key = pN (OPS-SUP-CODEX、evidence 軸) + p5 (VT-DESIGN、設計軸)。**OPS-SUP 役割 = pN (p1 でない)**
 
 ### Vault SSOT checked（banked design 接地）
@@ -36,9 +38,14 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
    errors=0、唯一の残 = 本 file の stale 記載 → 本版で訂正)
 
 ### 未完了・中断タスク
-- **I0-b fence CLOSE**: 本訂正 bank + pN readback のみ (再走不要、pN 宣言)
-- **gate ② 再走** (pin node): /reward-design (swept FM3/FM4 semantics) → p5 verify (bar = C1 hard identity /
-  C2 monotone-span / tolerance note、p5 即応宣言済) → /pre-check — 未着手。難易度 complex
+- **gate ② 完了条件 (chain 再開点)**: ①I3 実装 = escape guard を `_c1_retention_m` (identity 済) に付替え
+  (§S3.1: escape := dx==MISS ∨ dx>60mm、obs[57] 不変、grep assert = reward/termination 系の `_crossing_x_dev`
+  消費者ゼロ、fixture 2 本 REJECT unit test 化、canonical per-frame divergence 0 維持) ②I4 実装 = C2 walk の
+  routed-side 限定 (§S3.2: route 設計定数 1 bit + canonical 側 probe assert、feed-drape fixture REJECT 化)
+  ③pin (a) witness per-episode reset + (b) eq clear on reset (leg3 Issue 1 = banked 残作業; 前提 = pin は
+  既成着座の【保持】装置、seat f2428 ≺ onset f2544) ④(d) containment (authorize 失敗を episode-scope へ、
+  leg3 Issue 2) → p5 delta verify (§S3.1/S3.2 のみ) → /pre-check 再走 → §S 解除。⚠C2 margin 3.183/3.5mm =
+  DR-ON 日の MED design tension (bar 不動、§S3.2)
 - FM3/FM4 著者 claim 未決着 (manifest 呼びかけ中)
 - pin-1 (v1.9) = trainer-ingest spec への binding carry (⛔truncated_by→time_out 写像禁止、"" 分岐 fail-loud)
 - trainer contention leg (§8) = 初回 trainer bring-up 時
@@ -51,15 +58,16 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
 - **B4 = v1.9 (a) ADOPT**: termination_reason "" = 未測定 sentinel (taxonomy 着地まで)、truncated_by 3 値 additive、
   pin-3 = LEDGER loud 記載済 (p6 `879813d856`、Rs veto 可)
 
-### State Snapshot (2026-07-16 23:50 実測)
-- git: `525afa8435` まで push 済 (fork)。本訂正 commit = push 提案対象。ambient dirty 740 file = 他 pane 由来の
-  standing residue (mtime 6/15-7/11、⛔ add 時 staged hunk 検査 hard step)。L5 が as-run 照合を 9/9 分類済
-  (宣言 4 = この residue と byte 一致)。GPU: レグ実行終了、常駐プロセスなし。
+### State Snapshot (2026-07-17 01:13 実測)
+- git: `287e51e506` まで push 済 (fork)。以降の gate② chain commits (`1b59f23c44`〜`d807d077b8`) = push 提案中。
+  ambient dirty 740 file = 他 pane 由来の standing residue (mtime 6/15-7/11、⛔ add 時 staged hunk 検査 hard
+  step)。GPU: 常駐プロセスなし。
+- pre-check log = `logs/pre-check-log.jsonl` 追記済 (gitignored、ローカル)。
 
 ### 次にやるべきこと
-1. `引き継ぎ確認` → 本 file + %12 正本 + I0B_BUILD doc を read
-2. I0-b fence CLOSE 確認 (pN readback) → node/LEDGER 面 = p6
-3. **gate ② 再走** (/reward-design 4 artifact → p5 → /pre-check) — 次チャンクの本命
+1. `引き継ぎ確認` → 本 file + %12 正本 + GATE2_RERUN doc (§leg3 OUTCOME) + ruling §S2/§S3 を read
+2. **gate ② 完了 chunk**: I3/I4 実装 (L3 chain) + pin (a)(b)/(d) の chunk 分割判断 → p5 delta verify → /pre-check 再走
+3. fork-B node V0 acceptance (移管 leg + trainer contention) = trainer bring-up 時
 
 ### 重要な文脈 (規律教訓 — 全て pN/p5 verify が捕捉・記録済)
 - ①add 前 staged hunk 検査 ②主張=同 turn command 出力 ③計器の正対照 (コピー test≠配線 test、self-test は
