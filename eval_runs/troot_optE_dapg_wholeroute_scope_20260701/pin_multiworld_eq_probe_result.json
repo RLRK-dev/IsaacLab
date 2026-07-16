@@ -1,0 +1,66 @@
+{
+  "world_count": 4,
+  "seat_seg": 27,
+  "pin_world": 2,
+  "grasp_actuation": false,
+  "P1": {
+    "mjw_data.eq_active_shape": [
+      4,
+      40
+    ],
+    "cpu_mj_data.eq_active_shape": [
+      40
+    ],
+    "PASS": true
+  },
+  "P2": {
+    "n_pin_eq": 40,
+    "seat_seg_eqid": 27,
+    "eqids_are_seg_ordinal": true,
+    "PASS": true
+  },
+  "P4": {
+    "mjw_model.eq_data_shape": [
+      4,
+      40,
+      11
+    ],
+    "per_world": true
+  },
+  "P3": {
+    "anchor": [
+      0.38,
+      0.255,
+      0.809
+    ],
+    "readback_took_and_isolated": true,
+    "dx_mm_per_world": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "dz_mm_per_world": [
+      -3.96,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "dist_to_anchor_mm": [
+      80.1,
+      80.0,
+      80.0,
+      80.0
+    ],
+    "harness_steps_nonzero_worlds": false,
+    "pinned_reached": false,
+    "others_not_pulled": true,
+    "PASS": false
+  },
+  "VERDICT": {
+    "P1_pass": true,
+    "harness_valid": false,
+    "P3_effectiveness_pass": false,
+    "disposition": "INCONCLUSIVE-HARNESS: per-world eq STRUCTURE exists (P-1/P-4 PASS) but this minimal build+step harness steps only world 0 -> per-world EFFECTIVENESS untestable here. NOT a GPU-inert verdict. Needs a validated multi-world stepping harness (real NewtonRouteEnv world_count>1) and/or p5's mjw eq re-poke mechanism (\u00a721.1 DEFERRED)."
+  }
+}
