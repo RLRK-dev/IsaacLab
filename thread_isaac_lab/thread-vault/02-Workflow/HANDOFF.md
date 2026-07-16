@@ -83,12 +83,13 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
 - **B4 = v1.9 (a) ADOPT**: termination_reason "" = 未測定 sentinel (taxonomy 着地まで)、truncated_by 3 値 additive、
   pin-3 = LEDGER loud 記載済 (p6 `879813d856`、Rs veto 可)
 
-### State Snapshot (2026-07-17 06:29 実測)
-- git: `36d71222a1` まで **push 済** (fork、04:26 実測 0 unpushed)。以降の新規 = `dfbddb4777` (I3/I4) +
-  `c1dd6f569b` (CLAUDE.md §27 日時規則、Rs 直指示) + `6a90d72660` (HANDOFF) + `2298cb0d27` (§S3.5) +
-  `2dbc21d178` (§S3.5a) + `bb82ae7a76` (B1-B3) + `85958627e3` (exact-landed probe) + `1bbfb27509`+本版 (HANDOFF) + `6ec126b1bb` (再走 OUTCOME) + `a366622159` (§S4) + p6 面反映数本 =
-  **push 提案中**。ambient dirty ~740 file = standing residue 不変 (⛔ staged hunk 検査 hard step — 本 arc
-  で 2 回実施: foreign 2 hunk [route_env_config comment-only] + route_executor pin-fields [5 hunk、
+### State Snapshot (2026-07-17 06:52 実測)
+- git: ⭐**`7640695d9a` まで push 済** (Rs「push」06:5x → fork へ 21 commits `36d71222a1..7640695d9a`、
+  push 後 0 unpushed 実測)。本 chunk の全 bank (I3/I4 `dfbddb4777` / CLAUDE.md §27 `c1dd6f569b` / §S3.5
+  `2298cb0d27` / §S3.5a `2dbc21d178` / B1-B3 `bb82ae7a76` / exact-landed probe `85958627e3` / 再走 OUTCOME
+  `6ec126b1bb` / §S4 `a366622159` / HANDOFF 系 / p6 面反映) = **remote 同期済**。〔本 push-state 行の commit
+  のみ後続 push で追従〕ambient dirty ~740 file = standing residue 不変 (⛔ staged hunk 検査 hard step —
+  本 arc で 2 回実施: foreign 2 hunk [route_env_config comment-only] + route_executor pin-fields [5 hunk、
   `_prepare_recording` 内] を除外・開示済)。GPU: 常駐プロセスなし。
 - pre-check log = `logs/pre-check-log.jsonl` 追記済 (gitignored、ローカル)。
 
