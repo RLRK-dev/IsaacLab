@@ -385,8 +385,8 @@ S字 in-band 優先: dx=3mm z=829 を選択=True / 無交差: fail-closed=False 
 ## §S3.5 🔒 p5 delta verify verdict — I3/I4 実装 = **CONFORM — PASS〔p5 設計軸、§S3.1/S3.2 条項のみ〕**（2026-07-17 05:2x、対象 = `dfbddb4777` + `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` + `gate2_rerun_i3i4_probe_result.json` + `test_route_reward_identity_guards.py`）
 
 **verify 方法（artifact-first + 独立再現 3 legs、p5 自走）:**
-1. **unit tests 自走** = `env_isaaclab7` 直呼び **10/10 ALL PASS・exit 0**（%12 の V1/V5 と独立に再現）。
-2. **probe 自走** = script を scratchpad 複製・出力先隔離で post-fix code に対し再実行 → **banked json と byte 一致（`ts` 除外・完全一致）**。banked artifact は非破壊（working tree clean 確認済）。leg A 対称差 = {} / leg B escape post-onset 0 / leg C 81-cell feed 側 straddle 総数 0・seat_k hist {25:1,26:15,27:19,28:17,29:2,32:9,33:9,34:9} を replica で再現。
+1. **unit tests 自走** = `env_isaaclab7` 直呼び、**main working tree で 10/10・exit 0**。⚠ **scope 訂正（§S3.5a、訂正 10 件目・pN 是正 2026-07-17 05:4x）**: exact-landed `dfbddb4777`（隔離 worktree・per-test 実行）では **9/10** — **§S3.1/S3.2 bar 該当 leg（I3a/I3b/I4-drape/I4-tail/sentinel/obs-only + FM3/FM4×2）= 9/9 PASS**。FAIL 1 本 = `test_pin_identity_fields_survive_recording_prepare`（V5 系 pre-existing invariant、bar 外）— **未 commit `route_executor.py` の pin-fields 保全差分**（`_prepare_recording` `pin_keys`、〜:4433-4459）に依存。
+2. **probe 自走** = script を scratchpad 複製・出力先隔離で post-fix code に対し再実行 → **banked json と byte 一致（`ts` 除外・完全一致）**。banked artifact は非破壊（**主張は path 限定〔§S3.5a R2 訂正〕**: 当該 json の `git status --porcelain` = clean を確認 + 出力は scratchpad 隔離。旧文言「working tree clean 確認済」は撤回 — 同時点の repo は ambient dirty〔`route_executor.py` M / `route_env_config.py` foreign comment M ほか〕）。leg A 対称差 = {} / leg B escape post-onset 0 / leg C 81-cell feed 側 straddle 総数 0・seat_k hist {25:1,26:15,27:19,28:17,29:2,32:9,33:9,34:9} を replica で再現。（closure 注記 = §S3.5a (ii)。）
 3. **V3 grep 自走** = `_crossing_x_dev` @ `newton_route_env.py` = def `:1426` + obs 呼出 `:1568`（+comment `:1565`）のみ — reward/termination 消費者ゼロ。standing 化 = `test_crossing_x_dev_is_obs_only`（`inspect.getsource` で `_compute_rewards_dones_batch` + `_c1_escape_after_seat` の source に参照ゼロを常時 assert）。（%12 doc の「obs :1566」は comment 行 — 実呼出は `:1568`、cosmetic のみ・非 blocker。）
 
 **§S3.1（I3）条項別:**
@@ -424,4 +424,30 @@ z-scope 明文化（escape = lateral+crossing-loss のみ、z 逸脱は G6 z-ban
 
 **付帯:** (i) RLENV_PIN_DESIGN への pointer 2 件（§21.4 定量裏書き / §21.11.1 identity-persistence coupling）= §S3.3 事前授権の範囲内・内容忠実 — ACCEPT（coupling 側は (a)(b) verify で再照合する）。(ii) `route_env_config.py` の未 stage 外来 hunk 2 件 = p5 自読で **comment-only を確認**（代入値 60/61/slice 不変）・内容は on-disk env code `:1573-1577` と事実整合（stale comment の修正）— 挙動非影響、provenance 衛生は manifest 側の記録で足りる。
 
-**chain 位置**: 本 verdict で §S3.4 の「p5 delta verify」leg = **閉**。次 = **`/pre-check` 再走**（%12）。**§S 継続**（解除 = 再走 PASS 後）。gate ② 完了にはさらに (a)(b) 実装 + (d) containment 設計（I1/I2 帰結）。本 verdict は p5 設計軸 conformance であり、adversarial 軸は /pre-check 再走が担う（chain の分業どおり）。
+**chain 位置〔§S3.5a R1 訂正済〕**: 本 verdict で §S3.4 の「p5 delta verify」leg（**design 軸**）= **閉**（維持）。ただし次段は /pre-check 直行ではない — **現行 pN/p6 面（LEDGER `bf5feef0bd`）: `/pre-check` 再走 = FENCE 中**（解除条件 = correction bank + exact closure probe 再生成 + pN readback）。順序 = **evidence closure（owner chain）→ pN readback → FENCE 解除 → `/pre-check` 再走**。**§S 継続**（解除 = 再走 PASS 後 — 不変）。gate ② 完了にはさらに (a)(b) 実装 + (d) containment 設計（I1/I2 帰結）。本 verdict は p5 設計軸 conformance であり、adversarial 軸は FENCE 解除後の /pre-check 再走が担う（軸別 tri-state: design=CONFORM banked ／ evidence/bank=pN HOLD ／ adversarial=FENCE 待ち）。
+
+---
+
+## §S3.5a 🔒 訂正 10 件目 + evidence-scope 裁定（2026-07-17 05:4x、trigger = pN 独立検証是正）
+
+**pN 指摘 3 点 — 全て p5 自身で on-disk 再現してから記載:**
+1. **再現 ✅**: 隔離 worktree @ `dfbddb4777` + `env_isaaclab7` 直呼び・per-test driver（fail-fast なし）→ **9/10**。FAIL = `test_pin_identity_fields_survive_recording_prepare`、message も pN 報告と一致（"recording preparation dropped pin_active"）。
+2. **機構 ✅**: `git status` = `route_executor.py` **M（未 commit）**。`_prepare_recording` の pin-fields 保全（`pin_keys = ("pin_active","pin_eqid","pinned_body")` + all-or-none 契約、〜:4433-4459）は **working tree のみ** — `dfbddb4777` 収録版は 3 key を drop する。
+3. **入力 ✅**: probe 入力 `w0e_81rerun_snapdown_0537/` = **tracked 0 / on-disk 82** = 全 untracked。input hash / source closure 未記録。
+
+**私の誤り（訂正 10 件目）**: §S3.5 の「10/10 独立再現」は **working tree での実測を landed 状態の再現として記載** — 測定値は真だが **code-state scope の誤帰属**（records-must-match-fact）。原因: 実装 diff の対象 3 file の未 commit 差分は確認したが、**test の import+call 閉包**（test は `rex._prepare_recording` を呼ぶ — `route_executor` が閉包に入る）を確認しなかった。**教訓（一般形）: test-run claim の code-state surface は、実装 diff の scope でなく test の import+call 閉包が定義する**（verify-on-disk-at-the-producing-commit の閉包版）。加えて元実行は `main()`（fail-fast 逐次）で per-test 分解を欠いた。
+
+**verdict への影響 = CONFORM — PASS〔p5 設計軸〕は維持（根拠を差し替えて再接地）:**
+- §S3.1/S3.2 の bar 該当 leg = **exact-landed 9/9 PASS（p5 worktree 自走）** + V6 3/3 = parent commit で %12 記録（committed script+output）。
+- probe replica の実行測定経路 = `newton_route_env`（`git diff dfbddb4777` = ∅ = 収録 byte 同一）+ `route_env_config` 定数（未 commit 差分 = comment-only 確認済）のみ・`route_executor` **非依存**（`:612`/`:748` は関数内 import・probe 非経由）⇒ 挙動として landed 等価（**分析** — 完全な source closure 記録ではない）。
+- FAIL した recording-fields test は **§S3.1/S3.2 の bar ではない**（V5 pre-existing invariant）⇒ 条項別表は不変。
+
+**evidence-package 裁定 — pN HOLD に CONCUR（evidence 軸 = pN/owner chain 管轄、p5 verdict は design 軸のみ）:**
+- (i) **新規 finding → owner chain**: 「recording-fields invariant（pin witness 3 key の `_prepare_recording` 生存）は **landed tree で FALSE**」。pin witness は (a)(b) lifecycle + C1 identity 配線の前提 ⇒ **`route_executor.py` pin-fields 差分の land = (a)(b) chunk の precondition**（producer-unbanked（Rs 待ち）系との関係特定含め %12 判断 — p5 は commit 権限外）。land 後、exact-landed 10/10 再走で invariant 回復を確認。
+- (ii) probe evidence closure: 81-grid untracked + input hash / source closure 未記録 ⇒ p5 の byte 一致は「**同一 on-disk 入力への計器等価・決定性**」の証明に**とどまる**（入力 provenance の閉包でない）。closure 化（hash manifest / tracked 化判断 / closure 記録）= owner chain。
+- **bank 要請（=%12）**: §S3.5 は本 §S3.5a と不可分で bank し、evidence package = **pN HOLD 中**の旨を併記すること。（注: §S3.5 本体は `2298cb0d27` で bank 済と事後判明 — 本 §S3.5a + leg1/leg2/chain 訂正が dirty delta。）
+
+**pN readback fixes（2026-07-17 05:5x 受領、R1/R2 — 適用済）:**
+- **R1** = §S3.5「chain 位置」を FENCE 整合へ訂正。旧文（「次 = /pre-check 再走」「解除 = 再走 PASS 後」のみ）は、本 §S3.5a で HOLD を書いた同 arc で chain 行を更新し残した**内部矛盾**であり、かつ現行 pN/p6 面（LEDGER `bf5feef0bd`: /pre-check = FENCE〔correction bank + exact closure probe 再生成 + pN readback まで〕）を飛び越えていた。訂正後 = evidence closure → pN readback → FENCE 解除 → /pre-check。design leg 閉は維持。
+- **R2** = §S3.5 probe leg の「working tree clean 確認済」を撤回し **path 限定主張**へ（実測は banked json path の `git status` clean のみ — 同時点の repo は `route_executor.py` M 等で ambient dirty）。**#10 と同 class〔claim scope > measurement scope〕の残存 1 件を pN readback が捕捉** — 訂正番号は増やさず #10 の cleanup に帰属。
+- 検証: R1 の fence 文言は LEDGER の `bf5feef0bd` word-diff を自読して cite（message 転記でない）。R2 は自分の実測記録（path 限定 status check）との照合で確定。
