@@ -1,0 +1,57 @@
+{
+  "world_count": 4,
+  "seat_seg": 27,
+  "pin_world": 2,
+  "pin_flat_eq": 119,
+  "seat_body_newton": 191,
+  "E1": {
+    "anchor": [
+      0.38,
+      0.105,
+      0.809
+    ],
+    "dx_mm_per_world": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "dist_to_anchor_mm": [
+      80.16,
+      80.0,
+      80.0,
+      80.0
+    ],
+    "pinned_reached": false,
+    "others_not_pulled": true,
+    "PASS": false
+  },
+  "E2": {
+    "n_active_eq_before": 24,
+    "n_active_eq_after": 25,
+    "grew_by": 1,
+    "PASS": true
+  },
+  "E3": {
+    "notify_ok": true,
+    "notify_err": null,
+    "step_ok": true,
+    "step_err": null,
+    "env_uses_cuda_graph": false,
+    "PASS": true
+  },
+  "E4": {
+    "release_ok": true,
+    "release_err": null,
+    "pinned_moved_after_release_mm": 0.0,
+    "n_active_eq_after_release": 24,
+    "PASS": true
+  },
+  "VERDICT": {
+    "E1": false,
+    "E2": true,
+    "E3": true,
+    "E4": true,
+    "disposition": "PARTIAL: notify-safe + activation accepted but per-world hold not shown (gripper/anchor) -> refine"
+  }
+}
