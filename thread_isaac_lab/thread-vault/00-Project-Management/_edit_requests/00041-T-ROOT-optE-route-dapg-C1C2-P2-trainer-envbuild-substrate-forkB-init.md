@@ -36,3 +36,4 @@ The child folder and `state.md` were created from the APPROVED charter and desig
 ## Audit log
 
 - 2026-07-16T17:49:20+09:00: deposit created after prior-art gate found the known freeze/envbuild context; continued under the explicit new Human-Rs fork-B directive and documented process-parallel delta.
+- 2026-07-16T17:54:57+09:00: **DRAINED by p6 (PLAN-KEEPER)** — parent `T-ROOT-optE-route-dapg-C1C2-P2-trainer-envbuild/state.md` `children_nodes` に子を登録 (block-list 形式)。child status = PENDING 維持 (起動承認 = 別 gate、未記録)。tracker/計画面反映 = 同 commit (LEDGER:58 node link + 地図 + nest-snapshot/manifest §2 regen)。
