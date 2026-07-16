@@ -1,6 +1,6 @@
-# RS-TECH-LEAD handoff — 2026-07-17 05:57 JST (gate② correction arc bank 後・pN readback 待ち)
+# RS-TECH-LEAD handoff — 2026-07-17 06:29 JST (§S4 scoped GRANT bank 後)
 
-## セッション継続中: 2026-07-17 05:57 JST (RS-TECH-LEAD %12 / w2:p4)
+## セッション継続中: 2026-07-17 06:29 JST (RS-TECH-LEAD %12 / w2:p4)
 
 ⚠ **各 pane は自分の per-pane handoff を読め**。**%12 正本 = `handoff-cc-rstechlead-w1build-2026-07-12.md`**
 (全 arc の時系列 CURRENT STATE)。本 file = shared last-writer の要約。
@@ -22,9 +22,14 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
   (B1 = disposition (b): V5 recording-fields leg を chunk acceptance 外へ・route_executor pin-fields land
   = (a)(b) precondition / B2 = pre-commit clean / B3 = probe leg E closure) → **exact-landed 再生成 bank
   `85958627e3`** (worktree@bb82ae7a76、closure git status=[]・全 leg PASS) → **pN readback 依頼済 05:55**。
-  **/pre-check 再走 = FENCE 中** (解除 = pN evidence HOLD 解除後; LEDGER `bf5feef0bd`)。⚠05:2x の
-  /pre-check verifier spawn は API 529 ×2 で死亡 → FENCE 発効により再 spawn せず。
-  **§S = 継続** (解除 = FENCE 解除 → /pre-check 再走 PASS 後; gate② 完了はさらに (a)(b)+(d))
+  → **pN 最終判定 06:0x = B1-B3 CLOSE・HOLD LIFT・FENCE OPEN GO** → **/pre-check 再走 = 完・bank
+  `6ec126b1bb`** (verifier = Opus 切替 [同 tier 529×3・doc 記載]): **BLOCK〔訓練批准〕継続 = carry I1/I2
+  起因のみ・I3/I4 欠陥ゼロ・⭐新規 ISSUE2 = route_executor pin-fields は (a)(b) と bundle land 必須 (先行
+  禁止) + dirty tree 訓練起動禁止・verifier「§S 意味論 sub-claim = 批准可能」** → ⭐**p5 §S4 = GRANT
+  〔scoped〕bank `a366622159` (06:2x)**: §S run-hygiene (:333) 解除 (committed-HEAD lineage 限定・単一
+  episode 意味論限定・歴史 artifact 遡及編集なし)。**⛔存続 3 本**: reward-valid/training-ready 禁止
+  ((a)(b)+bundle land+(d) まで、pN 規律不触) / dirty tree 訓練起動禁止 / bundle land 順序。p6 scoped flip
+  依頼済 + pN readback 受付中。
 - two-key = pN (OPS-SUP-CODEX、evidence 軸) + p5 (VT-DESIGN、設計軸)。**OPS-SUP 役割 = pN (p1 でない)**
 
 ### Vault SSOT checked（banked design 接地）
@@ -74,25 +79,25 @@ arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版
 - **B4 = v1.9 (a) ADOPT**: termination_reason "" = 未測定 sentinel (taxonomy 着地まで)、truncated_by 3 値 additive、
   pin-3 = LEDGER loud 記載済 (p6 `879813d856`、Rs veto 可)
 
-### State Snapshot (2026-07-17 05:57 実測)
+### State Snapshot (2026-07-17 06:29 実測)
 - git: `36d71222a1` まで **push 済** (fork、04:26 実測 0 unpushed)。以降の新規 = `dfbddb4777` (I3/I4) +
   `c1dd6f569b` (CLAUDE.md §27 日時規則、Rs 直指示) + `6a90d72660` (HANDOFF) + `2298cb0d27` (§S3.5) +
-  `2dbc21d178` (§S3.5a) + `bb82ae7a76` (B1-B3) + `85958627e3` (exact-landed probe) + 本 HANDOFF 更新 =
+  `2dbc21d178` (§S3.5a) + `bb82ae7a76` (B1-B3) + `85958627e3` (exact-landed probe) + `1bbfb27509`+本版 (HANDOFF) + `6ec126b1bb` (再走 OUTCOME) + `a366622159` (§S4) + p6 面反映数本 =
   **push 提案中**。ambient dirty ~740 file = standing residue 不変 (⛔ staged hunk 検査 hard step — 本 arc
   で 2 回実施: foreign 2 hunk [route_env_config comment-only] + route_executor pin-fields [5 hunk、
   `_prepare_recording` 内] を除外・開示済)。GPU: 常駐プロセスなし。
 - pre-check log = `logs/pre-check-log.jsonl` 追記済 (gitignored、ローカル)。
 
 ### 次にやるべきこと
-1. `引き継ぎ確認` → 本 file + %12 正本 + `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` (「pN HOLD 対応」§ 含む)
-   + ruling §S3.5/§S3.5a を read
-2. **pN readback 受領** (05:55 依頼済) → evidence HOLD 解除なら **FENCE 解除 → /pre-check 再走** (再走の
-   問い 3 点は impl doc 記載; verifier prompt は前セッション形を再利用可)
-3. **pin (a)(b) 実装 chunk = fresh session** (pN 非 CONCUR 受諾済・同 session 続行案は撤回):
-   開始手順 = §21.11.1 + identity-persistence coupling readback → **route_executor pin-fields 差分の
-   著者 claim + producer-unbanked〔Rs 待ち〕関係特定 + land** (precondition) → scope prereg → prior-art
-   → 実装 → exact-landed 10/10 再走
-4. (d) containment = p5 設計待ち → 着地後 /pre-check 最終 → §S 解除判定
+1. `引き継ぎ確認` → 本 file + %12 正本 + `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` + GATE2_RERUN doc
+   「leg 3 再走 OUTCOME」§ + ruling §S3.5a/§S4 を read
+2. **pN readback 受領** (a366622159 の §S4 scoped bank、06:27 受付中) — HOLD が返れば correction chain
+3. **pin (a)(b) 実装 chunk = fresh session** (pN 非 CONCUR 受諾済): 開始手順 = §21.11.1 +
+   identity-persistence coupling readback → **route_executor pin-fields 差分の著者 claim +
+   producer-unbanked〔Rs 待ち〕関係特定 → ⭐(a)(b) と同一 landing に bundle (先行 land 禁止、ISSUE2/
+   §S4.3-3)** → scope prereg → prior-art → 実装 → exact-landed 10/10 再走。⛔それまで dirty tree からの
+   訓練起動禁止 (§S4.3-1)
+4. (d) containment = p5 設計待ち → 着地後 gate② 完了判定 (reward-valid/training-ready 解禁はここ)
 5. fork-B node V0 acceptance (移管 leg + trainer contention) = trainer bring-up 時
 
 ### 重要な文脈 (規律教訓 — 全て pN/p5 verify が捕捉・記録済)
