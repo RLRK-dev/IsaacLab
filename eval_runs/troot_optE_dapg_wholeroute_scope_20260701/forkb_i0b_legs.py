@@ -423,9 +423,13 @@ LEGS = {"l1a": leg_l1a, "l1b": leg_l1b, "l2": leg_l2, "l3": leg_l3, "l4": leg_l4
 
 
 def main():
+    global RUNS
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", nargs="*", choices=tuple(LEGS), help="run a subset of legs")
+    ap.add_argument("--tag", default="", help="suffix isolating runs dir + result file (fresh rerun, v1 untouched)")
     a = ap.parse_args()
+    if a.tag:
+        RUNS = _HERE / f"forkb_i0b_runs_{a.tag}"
     RUNS.mkdir(parents=True, exist_ok=True)
     head = subprocess.run(["git", "-C", str(REPO), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
     results = []
@@ -447,7 +451,8 @@ def main():
         "legs": results,
         "all_pass": all(r["passed"] for r in results),
     }
-    name = "forkb_i0b_legs_result.json" if not a.only else f"forkb_i0b_legs_result_only_{'_'.join(a.only)}.json"
+    base = f"forkb_i0b_legs_result{'_' + a.tag if a.tag else ''}"
+    name = f"{base}.json" if not a.only else f"{base}_only_{'_'.join(a.only)}.json"
     (_HERE / name).write_text(json.dumps(out, indent=1))
     print(f"ALL_PASS={out['all_pass']} -> {name}", flush=True)
     return 0 if out["all_pass"] else 2
