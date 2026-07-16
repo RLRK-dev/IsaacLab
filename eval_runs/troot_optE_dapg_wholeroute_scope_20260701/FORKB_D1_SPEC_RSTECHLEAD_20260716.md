@@ -110,7 +110,7 @@ rollouts/
 | provenance (pN 条件 3/6) | **per-child**: unified env fingerprint 実値・loaded closure+self hash・recording sha・post-run hash・changed_during_run=[] / harness source as-run hash 前後一致 / 分母 in-artifact / rc 全 0 / trajectory nontrivial+finite | 欠落 = errors/exit2 |
 | 正対照 (pN 条件 5) | **注入型**: CPU 0-flat injection → detector が非ゼロ exit する自己テスト + dead-PID GPU=0 対照 + missing GPU/RSS/overlap/closure/fingerprint/race = fail-loud | 自己テスト不発 = exit2 |
 
-### §7.1 E0v2 exact bars (run 前固定、pN CONCUR-WITH-FIXES 2026-07-16 21:0x — 後付け判定防止)
+### §7.1 E0v2 exact bars (run 前固定、pN CONCUR-WITH-FIXES 2026-07-16・bank `3a14e38c17` — 後付け判定防止)
 
 1. **memory 線形 (式を一意固定、v1 の 1.25 係数を carry)**: `max(N4 per-proc GPU peak) ≤ 1.25 × max(n1_a, n1_b GPU peak)`
    **AND** `max(N4 per-proc RSS peak) ≤ 1.25 × max(n1_a, n1_b RSS peak)`。いずれか超過 = errors/exit2。
