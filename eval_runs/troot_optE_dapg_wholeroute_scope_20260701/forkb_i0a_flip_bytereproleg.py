@@ -59,7 +59,7 @@ def main():
     r = {
         "MARK": "I0-a flip no-change proof (post-flip n1 vs the PRE-flip E0v2a banked n1_a)",
         "flip": "newton_route_env.py world_count default 4 -> 1 "
-                "(this run passes wc=1 explicitly, as all live callers do)",
+        "(this run passes wc=1 explicitly, as all live callers do)",
         "reference_traj_sha_preflip_banked": ref_sha,
         "postflip_traj_sha": got_sha,
         "byte_identical": bool(got_sha and got_sha == ref_sha),
