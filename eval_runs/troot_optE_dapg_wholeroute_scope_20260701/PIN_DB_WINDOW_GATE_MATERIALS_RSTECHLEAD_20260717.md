@@ -14,10 +14,20 @@ pin fire → C1 retention → C1 seat geometry preserved → the reward's `c1_re
 
 Constants (rc = `envs/route_env_config.py`, task_config = `configs/task_config.py`): SEAT_LAT_BAR_M=**3.5mm**
 (`rc:174`) · SEAT_Z_LO/HI=**821/836mm** (`rc:175-176`) · Z_FIRE_DEPTH_M=**831mm** (`rc:185`) ·
-PIN_TRIGGER_DWELL_K=**3 frames** (`rc:181`) · _SEAT_MISS_DX_M=**9.0mm** (`env:1301`) ·
+PIN_TRIGGER_DWELL_K=**3 frames** (`rc:181`) · _SEAT_MISS_DX_M=**9.0 m** (`env:1301`) ·
 DROP_LATERAL_DEV_MAX_M=**60mm** (`env:412`) · G_PHASE_BONUS=**+5** (`rc:104`) · G6_TASK_BONUS=**+200**
 (`rc:105`) · TIME_PENALTY=**-0.01** (`rc:106`) · TERM_PENALTY=**-10** (`rc:107`) · K_ROUTE_SEAT=**10 RL steps**
 (`rc:84`) · CABLE_RADIUS=**4mm** (`task_config:137`).
+
+> **⚠ R3 forward-only correction (2026-07-17, per pN v0.2 + p5 §9.7.9 `082baa1ca6`):** two fixes to this doc.
+> (1) **`_SEAT_MISS_DX_M` = 9.0 m** (a fail-closed MISS *sentinel* checked by exact equality `dx==9.0`, NOT a
+> 9.0mm lateral distance) — the earlier "9.0mm" was a unit error (escape logic unchanged: exact-sentinel).
+> (2) There is **no "fire capture ~5mm > retention 3.5mm" loose-weld margin**: `clip_capture_check`
+> (`route_executor.py:981`) and `authorize_clip_pin` (`:1024`) both use `clip_capture_predicate(…,
+> SEAT_LAT_BAR_M=3.5mm, …)` (identity); `match_tol_m=5e-3` (`:1014`) is the eq world-position resolution, not the
+> capture width. The correct non-crutch argument is **fire strictness ≥ retention** (fire lateral 3.5mm same,
+> fire z `[821,831]` ⊆ retention z `[821,836]`) ⇒ every fire is a genuine seat (stronger than a margin). See
+> prereg §0/§3.1 L-DB-I′.
 
 ---
 
@@ -32,7 +42,7 @@ G4-G6 reachable at all"** — because the post-G3 escape guard drops the episode
 | G1 | p1 = grip_r,l≥0.5 ∧ contact_r,l ∧ \|span−92.4mm\|≤8mm (`:1680`) | from P0 | **yes** | yes | no |
 | G2 | p2 = held_z−z_rest ≥ 40mm (`:1685`) | after G1 | **yes** | yes | no |
 | G3 | p3 = c1_seated ∧ ph≥2; c1_seated = dx_c1≤3.5mm ∧ 821<z_c1<836mm (`:1686/:1400`) | after G2 | **yes** (seat is reached; pin fires here) | yes | no |
-| G4 | p4 = r_reach≤tol ∧ contact_r (`:1687`) | after G3, **while C1 stays seated** | **NO** — regrasp for C2 moves the cable; the C1 identity crossing is lost (`_seat_metrics`→MISS 9.0mm) or deviates >60mm ⇒ `c1_escape_after_seat`=True (`:1443-1457`) ⇒ dropped ⇒ **−10, terminate** before G4 latches | **yes** — pin welds the C1 identity body at seat ⇒ dx_c1 stays ≤3.5mm ⇒ no escape | **YES (without pin)** |
+| G4 | p4 = r_reach≤tol ∧ contact_r (`:1687`) | after G3, **while C1 stays seated** | **NO** — regrasp for C2 moves the cable; the C1 identity crossing is lost (`_seat_metrics`→MISS 9.0 m) or deviates >60mm ⇒ `c1_escape_after_seat`=True (`:1443-1457`) ⇒ dropped ⇒ **−10, terminate** before G4 latches | **yes** — pin welds the C1 identity body at seat ⇒ dx_c1 stays ≤3.5mm ⇒ no escape | **YES (without pin)** |
 | G5 | p5 = c2_seated (`:1688`) | after G4, C1 still held | **NO** (same escape deadlock) | yes | **YES (without pin)** |
 | G6 | c2_honest ∧ **c1_retained** ∧ ¬dropped ∧ span_ok, sustained 10 RL steps (`:1704-1711`) | after G5 | **NO** — c1_retained = c1_seated at C1 (`:1629`); lost once the cable routes to C2 ⇒ g6_live never sustains | yes — pin holds C1 ⇒ c1_retained stays True through the C2 route | **YES (without pin)** |
 
@@ -65,7 +75,7 @@ policy residual action (α-6D)  [ik_chord: _apply_actions_batch :1158]
                                   -> G6 SUCCESS (+200)
 
 WITHOUT (d-b): the branch after G3 is
-  -> policy routes toward C2 -> C1 identity crossing lost (MISS 9.0mm) OR |dev|>60mm
+  -> policy routes toward C2 -> C1 identity crossing lost (MISS 9.0 m) OR |dev|>60mm
       --[c1_escape_after_seat = True]--> dropped -> r=-10 -> terminate   *** DEADLOCK: G4-G6 unreachable ***
 ```
 
@@ -80,12 +90,12 @@ Values are geometric (the reward reads `cable_pos` via `_seat_metrics`), compute
 
 | State | dx_c1 | z_c1 | c1_seated / c1_retained | c1_escape (post-G3) | dropped | r (step) | latch/notes |
 |---|---|---|---|---|---|---|---|
-| P0 (rest, cable not at C1) | MISS 9.0mm (no C1Y crossing) | — | False | n/a (pre-G3) | False | −0.01 | move toward cable |
+| P0 (rest, cable not at C1) | MISS 9.0 m (no C1Y crossing) | — | False | n/a (pre-G3) | False | −0.01 | move toward cable |
 | C1 approaching | ~8→4mm, descending | 840→832mm | False (dx or z out) | n/a | False | −0.01 | G1,G2 latch en route |
 | **C1 seated (pre-fire)** | ≤3.5mm | ∈[821,836], ≈831 | **True** | False | False | **+5 (G3)** | fire gate now capture∧depth True; dwell begins |
 | C1 seated, dwell=3 (**FIRE**) | ≤3.5mm | ≈831 (≤831 depth) | True | False | False | −0.01 | **PIN FIRES** (eq weld @ seat_world) |
 | Route→C2, **WITH pin** | ≤3.5mm (held) | in-band (held) | True | **False** | False | +5 (G4/G5) | C1 held; regrasp+C2 proceed |
-| Route→C2, **WITHOUT pin** | → MISS 9.0mm (crossing lost) | — | False | **True** | **True** | **−10** | **terminate — deadlock** |
+| Route→C2, **WITHOUT pin** | → MISS 9.0 m (crossing lost) | — | False | **True** | **True** | **−10** | **terminate — deadlock** |
 | C2 seated (WITH pin), g6_live×10 | ≤3.5mm (held) | in-band | True (c1_retained) | False | False | **+200 (G6)** | c2_honest∧c1_retained∧¬drop∧span_ok |
 
 The WITHOUT-pin row is the current ik_chord behaviour and is the concrete deadlock; the WITH-pin rows show the

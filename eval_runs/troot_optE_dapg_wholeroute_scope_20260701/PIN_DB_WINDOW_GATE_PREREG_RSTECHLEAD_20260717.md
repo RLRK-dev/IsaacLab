@@ -1,163 +1,146 @@
 # (d-b) D-b window gate — prereg (impl + probe + acceptance)
 
-**v0.2 — 2026-07-17 22:45 JST** · **Author:** RS-TECH-LEAD (w2:p4) · **Node:** pin (d) — (d-b) half
-**Governing:** charter §9 framing (`463f156fc6`) + §9.7 6-item RATIFY (`bd1c534678`). **Baseline code = HEAD
-`469435014f`** (code identical to `5b0de67402`). **Status:** DRAFT — folds pN v0.1 conditions B1-B5
-(HOLD, 2026-07-17 21:5x); awaiting pN re-readback + p5 confirm on the B1 acceptance refinement. **⛔ [CHANGE]
-STOP until pN v0.2 readback PASS.** 0-code, training-ready禁止 continues.
+**v0.3 — 2026-07-17 23:14 JST** · **Author:** RS-TECH-LEAD (w2:p4) · **Node:** pin (d) — (d-b) half
+**Governing:** charter §9 framing (`463f156fc6`) + §9.7 RATIFY (`bd1c534678`) + §9.7.8/§9.7.9 (`082baa1ca6`,
+B1 refinement + pN R3/R1/R4). **Baseline code = HEAD `469435014f`** (code identical through `082baa1ca6`;
+intervening = docs). **Status:** DRAFT — folds pN v0.2 R1-R5 + p5 §9.7.8/§9.7.9. Awaiting pN v0.3 re-readback.
+**⛔ [CHANGE] STOP until pN readback PASS.** training-ready禁止 continues.
 
 **One line:** call the drive-agnostic `_maybe_activate_c1_pin` from the ik_chord (policy) drive loop at
-pre-step, with `route_steps` hoisted unconditionally, so the G4-G6 dead zone (post-G3 C1 escape → drop) is
-removed under policy drive. No reward term; no new kinematic exception.
+pre-step, `route_steps` hoisted unconditionally, removing the G4-G6 dead zone. No reward term, no new kinematic
+exception.
 
-## §0 v0.2 fold record (pN v0.1 conditions B1-B5)
-- **B1 (CRIT) K/training-ready circularity → closed** (§4-A binding adversarial sweep + §carry): the spurious-
-  fire rejection K is validated at prelaunch by a **deterministic adversarial speed-sweep binding leg**, NOT
-  deferred; only live-policy fire-rate is post-launch monitored. M2 loader assert moved to V0/prelaunch (§1).
-  ⚠ touches the acceptance/deferral boundary of §9.7.3 → **flagged to p5 for confirm** (refinement, not reversal).
-- **B2 (MAJ) provenance freeze → §3.0** (verbatim commands, A-pair, frozen cfg/sha/fingerprint/bracket).
-- **B3 (MAJ) binary bars → §3/§4** (WITHOUT reaches G3 then drops before G4; WITH latches G6 SUCCESS; loose-weld
-  named leg; bypass-audit exact test ID).
-- **B4 (MAJ) sync/clock/perf → §2/§3**: **Q1 RESOLVED** — warp **1.13.0** (env_isaaclab7, verified) `array.numpy()`
-  guarantees a synchronous device-to-host copy (`warp/_src/types.py:4083-4086` docstring: "a synchronous
-  device-to-host copy … will be automatically performed to ensure that any outstanding work is completed") ⇒
-  **no extra `wp.synchronize`, no sync fork** (this is why the FF pin `:1225` already reads body_q without an
-  explicit sync). Call order fixed; fire≺release single-clock; hold-trace + perf legs added.
-- **B5 (MAJ) landing protocol → §5** (tests-only patch first, claim manifest, gate SHAs, explicit-path atomic,
-  isolated-wt format, post-land, V0+gate②-L3 DoR).
+## §0 v0.3 fold record (pN v0.2 R1-R5, all resolved)
+- **R3 (CRIT, factual — p5 §9.7.9 corrected §9.7.0)**: the "fire capture ~5mm > retention 3.5mm loose-weld
+  margin" was WRONG. `clip_capture_check` (`route_executor.py:981`) and `authorize_clip_pin` (`:1024`) BOTH use
+  `clip_capture_predicate(…, rc.SEAT_LAT_BAR_M, …)` = **3.5mm** (identity, containment-by-identity `:1004-1006`);
+  `match_tol_m=5e-3` (`:1014`) is the eq world-position resolution, NOT the capture width. **Correct non-crutch =
+  fire strictness ≥ retention** (fire lateral 3.5mm same; fire z-window `[821,831]` ⊆ retention z `[821,836]`) ⇒
+  the pin CANNOT fire at a looser seat than retention — stronger than the margin claim. **L-DB-I → L-DB-I′**
+  (§3.1). Unit fix: `_SEAT_MISS_DX_M=9.0` is a **9.0 m** sentinel (`env:1301`; "9.0mm" was wrong; escape logic
+  unchanged — exact-sentinel equality `dx==9.0`).
+- **R1 (spurious re-def — §9.7.8 governing)**: "same-RL-step transit → no fire" is NOT derivable from K=3 (1 RL
+  step = 10 physics frames, `env:404`; a ≥3-frame inside-capture dwell correctly fires). **spurious = inside
+  capture∧depth for consecutive frames < K, only.** The circularity closes via fire⊆retention (a ≥K dwell fire
+  is a genuine seat), so **training-ready does NOT wait on the live-policy leg**; live-policy fire distribution
+  is a post-launch monitor; a pathology re-opens §8.2/§9.7.3. L-DB-G reframed (§3.1).
+- **R4 (perf)**: ratio ON/OFF ≥ **0.8** frozen pre-run (p5 bar; Rs override). **N framing fix**: fork-B = 4
+  process × wc=1, the pin reads world-0 body_q ⇒ **perf leg = wc=1 single-proc pin OFF/ON** (not wc=4). L-DB-K
+  (§3.1).
+- **R2 (provenance freeze)**: §3.0 now carries REAL values (recording sha, cfg, command, horizon, schema).
+- **R5 (landing protocol)**: §5 — fixed gate order, enumerated test IDs, claim manifest.
 
 ## §1 scope
-- **goal**: place the (d-a) live-geometric pin trigger into the **ik_chord** (default/policy) drive branch.
 - **IN**: (1) unconditional `route_steps` hoist; (2) `_maybe_activate_c1_pin` at ik_chord pre-step; (3) probe
-  `pin_db_window_probe.py`; (4) test additions (§5 tests-only patch first).
-- **OUT**: FF branch (`:1225`, (d-a)); the pin method body (`:1821-1860`, drive-agnostic); reward/obs/success
-  predicates; `task_config.py`; K/Z_FIRE/SEAT bars (§9.7.3); training launch; cell-2 (DoD-7).
-- **M2 (from (d-a) §8.14) — moved to V0/prelaunch acceptance (B1):** the DAPG/BC loader additive-key consumer
-  assert is asserted explicitly at V0/prelaunch acceptance (not "training-era"). Named as an acceptance item.
+  `pin_db_window_probe.py`; (4) test additions (§5).
+- **OUT**: FF branch (`:1225`); the pin method body (`:1821-1860`); reward/obs/success predicates;
+  `task_config.py`; K/Z_FIRE/SEAT bars; training launch; cell-2 (DoD-7).
+- **M2 → L-DB-L (named acceptance item at V0/prelaunch)**: the DAPG/BC loader additive-key consumer assert —
+  exact loader command + expected result, run at V0/prelaunch (not "training-era").
 
-## §2 impl design (condition-placement; code after pN readback + [CHANGE] gates)
-Baseline ik_chord else-branch (`newton_route_env.py:1245-1283`), two edits:
+## §2 impl design (2 edits; code after pN readback + [CHANGE] gates)
+Baseline ik_chord else-branch (`newton_route_env.py:1245-1283`):
+- **(2-1) route_steps unconditional hoist** — replace the `grasp_actuation`-gated block (`:1247-1251`) with an
+  unconditional pre-loop hoist (mirrors FF `:1210`; expression byte-identical, verified).
+- **(2-2) pin call at pre-step, order frozen** = `joint assign(:1272-1273) → grip(:1274-1280) → PIN → physics(:1281)`:
+  `self._maybe_activate_c1_pin(route_steps, step)` between the grip block and `_physics_step_all`.
+- **pre-step single-clock** (§9.7.1): body_q holds the previous frame (only `_physics_step_all` advances it) =
+  same clock as FF (`:1225`<`:1226`); §8.13 `run_start+K` transfers.
+- **sync (Q1 RESOLVED, pN-confirmed)**: `body_q.numpy()` auto-syncs GPU→CPU (**warp 1.13.0**,
+  `warp/_src/types.py:4083-4086`); **no `wp.synchronize`, no sync fork.** Version-pin: warp 1.13.0.
+- **INVARIANT #5**: reuses `authorize_clip_pin` (`route_executor.py:987`, single writer); no new exception.
 
-**(2-1) route_steps unconditional hoist** — replace the `grasp_actuation`-gated block (`:1247-1251`, computes
-ONLY `route_steps`) with an unconditional hoist before the loop (mirrors FF `:1210`; expression byte-identical,
-verified `[int(self.route_t[w].item()) for w in range(N)]`):
-```
-            old_fk_jq = np.array(self._per_world_fk_jq[:N])
-            route_steps = [int(self.route_t[w].item()) for w in range(N)]  # (d-b): route clock hoisted UNCONDITIONALLY
-            for step in range(self.PHYSICS_STEPS_PER_RL):
-```
-**(2-2) pin call at pre-step, fixed order** — the loop-body order is frozen as `joint assign (:1272-1273) →
-grip (:1274-1280) → PIN → physics (:1281)`:
-```
-                if self._grasp_actuation:
-                    self._route.apply_recorded_grip(route_steps, step, hold_mask=...)
-                self._maybe_activate_c1_pin(route_steps, step)  # (d-b): ik_chord pre-step live-geometric trigger
-                self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
-```
-- **pre-step semantics (§9.7.1)**: `joint_q.assign` writes joint_q/control, not body_q; only `_physics_step_all`
-  advances body_q. So the pin's `body_q.numpy()` (`:1847`) reads the PREVIOUS frame — same single-clock as FF
-  (`:1225` before `:1226`); §8.13 `run_start+K` transfers unchanged.
-- **sync (B4/Q1 RESOLVED)**: `body_q.numpy()` auto-syncs (warp 1.13.0, `types.py:4083-4086`) — **no explicit
-  `wp.synchronize` added, no impl-time sync fork**. Version-pinned: warp 1.13.0.
-- **no-op unless `route_c1_pin`** (method guard `:1841`) → (d-b) flag-OFF path byte-neutral.
-- **INVARIANT #5**: reuses the single authorized writer `authorize_clip_pin` (`route_executor.py:987`, called
-  `:1857`); no new kinematic exception.
+## §3 probe design (`pin_db_window_probe.py`, wc=1, deterministic ik_chord — no trainer)
 
-## §3 probe design (`pin_db_window_probe.py`, wc=1, deterministic — no trainer)
+### §3.0 provenance freeze (R2 — REAL values)
+- **env venv**: `/home/rlrk/env_isaaclab7/bin/python` · warp 1.13.0 · **CUDA_VISIBLE_DEVICES=0**, device cuda:0
+  (CPU mujoco stepping; one cell per process).
+- **command (verbatim)**: `CUDA_VISIBLE_DEVICES=0 /home/rlrk/env_isaaclab7/bin/python thread_isaac_lab/scripts/pin_db_window_probe.py --cell cell_x0_y0 --run <LEG>` (LEG ∈ {A_with, A_without, E_gT, E_gF, F, G, H, I, J, K, L}).
+- **recording (input)**: `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz` · **sha256 `5f1c3f9238f45057011cfad1…`** · 22 keys.
+- **cfg (frozen)**: `world_count=1` · `grasp_actuation=True` · `route_executor_impl="route_executor"` ·
+  `route_recording_npz=<above>` · `g1_scene_align=True` · **`route_drive_mode="ik_chord"`** (the (d-b) target;
+  (d-a) used feedforward) · `route_c2_scene=True` · `route_c1_pin=<A-pair flag>`.
+- **drive**: deterministic **zero-residual action** (action=0 ⇒ commanded = route base target ⇒ ik_chord follows
+  the recorded route; reproduces seat→route without a policy). · **horizon** = MAX_EPISODE_STEPS **900**
+  (`env:407`, ROUTE_TERMINAL_STEPS) · seed = N/A (deterministic replay/drive) · ep1≡ep2.
+- **A-pair**: A_with vs A_without differ ONLY by `route_c1_pin` on ONE landed source (changed-source set = []).
+- **output artifact**: `pin_db_window_probe_result_cell_x0_y0.json` (schema frozen at impl: per-leg fields).
+- **freeze also**: fresh outbox per run · expected rc=0 · harness self-sha · loaded-source closure + env
+  fingerprint · pre/post hash bracket.
 
-### §3.0 provenance freeze (B2 — every run records these, pre/post)
-- **command (verbatim, per run)**: `CUDA_VISIBLE_DEVICES=0 VIRTUAL_ENV=/home/rlrk/env_isaaclab7 /home/rlrk/env_isaaclab7/bin/python thread_isaac_lab/scripts/pin_db_window_probe.py --run <NAME> --outbox <FRESH_DIR>`
-  (exact flags frozen at impl; recorded in [RESULT]).
-- **A-pair discipline**: WITH and WITHOUT differ ONLY by `route_c1_pin` on the SAME landed source (one worktree,
-  one flag flip) — no code delta between the two.
-- **frozen**: baseline `469435014f` · cuda:0 · wc=1 · seed · horizon · recording npz sha · ALL cfg
-  (`route_drive_mode`=ik_chord / `grasp_actuation` / scene / `route_t` clock / `route_c1_pin`) · fresh outbox ·
-  expected rc=0 · artifact schema (npz field list) · harness self-sha · loaded-source closure + env fingerprint ·
-  **pre/post hash bracket: changed source set = [] between runs** (only the flag differs).
+### §3.1 legs (binary bars)
+- **L-DB-A (WITH/WITHOUT deadlock contrast — core, binary).**
+  - WITHOUT (`route_c1_pin=False`): MUST reach **G3 latch** (`_g_latched[w,2]=True`), THEN C2 route drives
+    `dx_c1`→MISS (**9.0 m** sentinel, crossing lost) or >60mm ⇒ `c1_escape`=True ⇒ `dropped` ⇒ **terminate before
+    G4** (`_g_latched[w,3]=False`). ⛔ a FAIL before G3 = not acceptable.
+  - WITH (`route_c1_pin=True`): genuine-seat fire + audit + retention continuity + `c1_escape`=False +
+    **G4 ∧ G5 ∧ G6 latch, `success`=True** + `invalid`=0 + `time_out`=0 (binary). ⛔ "reachable" insufficient.
+- **L-DB-B (fire ≺ release, single route-clock).** Bar = `route_t_at_fire < _route_release_step` (both route_t;
+  `:558/:584-585`). ⛔ no cross-clock.
+- **L-DB-C (same-snapshot poison).** Snapshot mutated between check and authorize ⇒ fire-True⇒accept breaks (red).
+- **L-DB-D (fire-once + refire).** Witness latch once/episode (`:1841`); post-reset refire; ep1≡ep2.
+- **L-DB-E (flag-OFF byte-neutral, BOTH grasp_actuation).** `route_c1_pin=False`: ik_chord path byte-identical to
+  baseline `469435014f` (phys/obs/reward/done) for grasp_actuation=True (E_gT) AND False (E_gF). No new npz fields.
+- **L-DB-F (route_steps hoist neutrality).** grasp_actuation=True: hoisted == old `:1251` value every step (byte);
+  False: `route_steps` now defined, consumed only by the pin label.
+- **L-DB-G (K debounce validation — §9.7.8 binding, deterministic).** spurious = <K consecutive inside-capture-
+  at-depth (§9.7.9/R1). Bars: (i) **settled** approach (dwell ≥K) FIRES within K+1 frames (positive control);
+  (ii) a **<K dwell** transit (drive the identity body through capture-at-depth for exactly K−1=2 frames then
+  out) does NOT fire (K debounce — negative control). Freeze the exact deterministic path + per-frame inside-
+  count (K−1=no-fire / K=fire). ⇒ validates the debounce MECHANISM at design-time. Residual (live-policy fire
+  distribution) = post-launch monitor (§carry) — training-ready does NOT wait on it (circularity closed by
+  fire⊆retention).
+- **L-DB-H (hold-era label trace).** Under `hold_mask` (injected via cfg; route_t clamped, FF `:1213` idiom):
+  `fired_at_frame` is provenance-only / non-gate; assert behavior (fire predicate) is hold-independent.
+- **L-DB-I′ (fire ⊆ retention — §9.7.9/R3, replaces L-DB-I).** For EVERY fire in the WITH run, assert the fired
+  snapshot has **dx ≤ 3.5mm AND z ∈ [821,831]mm** (fire strictness ≥ retention). ⇒ a fire is always a genuine
+  seat; no loose weld can fabricate G6 (structural, not a margin). (The old "3.5-5mm loose weld" is impossible on
+  the authorized path — the authorizer rejects >3.5mm.)
+- **L-DB-J (bypass-audit continuity — exact test ID).** `test_route_reward_identity_guards.py::test_c1_pin_bypass_audit_then_clear` (existing pattern): an `eq_active` flipped without the authorizer is audited-then-cleared on reset, unchanged by ik_chord placement.
+- **L-DB-K (perf hot-path — wc=1 single-proc, R4).** Measure **wc=1 single-process ik_chord pin OFF vs ON**
+  (fork-B runs 4 proc × wc=1; the pin reads world-0 only ⇒ per-proc cost is the wc=1 cost). Metrics:
+  transitions/s + peak GPU mem + RSS, matched window/timer, fresh tag, positive overlap. **Bar = throughput
+  ratio ON/OFF ≥ 0.8** (frozen; Rs override). <0.8 ⇒ mandate a batched/sliced body_q read.
+- **L-DB-L (M2 loader consumer assert — V0/prelaunch).** Exact loader command + expected result: the DAPG/BC
+  loader ingests the (d-a) additive npz keys without error (additive-key tolerance, D0-R3). Run at V0/prelaunch.
 
-### §3.1 legs (binary bars — B3; each PASS/FAIL with an exact predicate)
-- **L-DB-A (WITH/WITHOUT deadlock contrast) — core, binary.**
-  - **WITHOUT** (`route_c1_pin=False`): MUST reach **G3 latch** (`_g_latched[w,2]=True`), THEN after G3 the C2
-    route drives `dx_c1`→MISS(9.0mm) or >60mm ⇒ `c1_escape_after_seat`=True ⇒ `dropped`=True ⇒ **terminate
-    BEFORE G4 latches** (`_g_latched[w,3]=False` at done). ⛔ a FAIL *before* G3 is **not acceptable** (the leg
-    must exhibit the seat→escape deadlock, not a pre-seat failure).
-  - **WITH** (`route_c1_pin=True`): MUST show genuine-seat fire (capture∧depth∧K, z≤831) + audit PASS + retention
-    continuity (dx_c1≤3.5mm held) + `c1_escape`=False + **G4 ∧ G5 ∧ G6 all latch, `success`=True** +
-    `invalid`=0 + `time_out` per purity. ⛔ "reachable" is NOT sufficient — **actual G6 SUCCESS latch required**.
-- **L-DB-B (fire ≺ release, single-clock — B4).** Bar = `route_t_at_fire < _route_release_step` (BOTH in the
-  route_t clock; `_route_release_step` at `:558/:584-585`). ⛔ no cross-clock comparison (fired_at_frame is the
-  recording-frame label, non-gate). The probe records `route_t` at the fire step.
-- **L-DB-C (same-snapshot poison — binary).** The single body_q snapshot (`:1849`) feeds BOTH the capture check
-  and the authorizer: a poison variant mutating the snapshot between check and authorize MUST break fire-True⇒
-  accept (leg goes red). Fail-able instrument.
-- **L-DB-D (fire-once + refire).** Witness latch fires once/episode (`:1841`); post-`_clear_c1_pin` the next
-  episode refires; ep1≡ep2 deterministic (byte).
-- **L-DB-E (flag-OFF byte-neutral, BOTH grasp_actuation — B4).** `route_c1_pin=False`: ik_chord path byte-
-  identical to baseline `469435014f` (phys/obs/reward/done arrays byte-match) for **grasp_actuation=True AND
-  grasp_actuation=False** (the hoist must be neutral in both). No NEW npz fields ((d-a) fields already present).
-- **L-DB-F (route_steps hoist neutrality).** grasp_actuation=True: hoisted `route_steps` == old `:1251` value
-  every step (grip lookup unchanged, byte). grasp_actuation=False: `route_steps` now defined (was undefined),
-  consumed only by the pin label.
-- **L-DB-G (spurious-dwell adversarial speed-sweep — B1 binding, deterministic).** Drive the identity body
-  through the capture volume at depth at a sweep of deterministic speeds (fast transit → slow transit). Bars:
-  (i) a **settled** approach (speed→0 inside capture-at-depth) FIRES within K+1 frames (positive control);
-  (ii) a **same-RL-step transit** (the body enters AND leaves capture-at-depth within one RL step's frames)
-  does NOT fire (K=3 rejects it — negative control); (iii) the slowest transit that still fails to dwell K=3
-  does NOT fire. ⇒ K=3's spurious-rejection is validated at design-time (not deferred). Report the fire/no-fire
-  boundary vs speed.
-- **L-DB-H (hold-era label trace — B4/§9.7.4).** Under `hold_mask` (a held world), record `fired_at_frame` and
-  confirm it is provenance-only / drift-loud / non-gate (route_t clamped during hold, FF `:1213` idiom).
-- **L-DB-I (loose-weld → no false G6 — B3/§9.7.0).** Force a weld at 3.5-5mm (inside capture ~5mm but outside
-  the 3.5mm seat bar): assert `c1_retained`=False AND G6 does NOT latch (`success`=False). The safety margin is
-  a NAMED, run leg.
-- **L-DB-J (bypass-audit continuity — B3).** Exact test ID (`test_route_reward_identity_guards.py::<id>`): an
-  `eq_active` flipped without the authorizer is audited-then-cleared on reset (`_clear_c1_pin`), unchanged by
-  the ik_chord placement.
-- **L-DB-K (perf hot-path — B4).** pin adds a `body_q.numpy()` sync copy every physics frame (10×/RL-step).
-  Measure **matched ik_chord pin OFF vs ON** at **N=1 and N=4** worlds: transitions/s + peak GPU mem + RSS.
-  Bar = throughput ratio ON/OFF ≥ **0.8** (recommended; **final bar = p5/Rs**). ⛔ do not implicitly inherit V0
-  throughput. Report the numbers; if <0.8, escalate (batch the read / defer to physics-step body_q).
+## §4 acceptance (§9.7.6 + §9.7.8/9.7.9)
+- **positive**: genuine-seat fire (capture∧depth∧K, z≤831); L-DB-A WITH (G4∧G5∧G6 SUCCESS); L-DB-B fire≺release;
+  L-DB-G (i) settled→fire; **L-DB-I′ fire⊆retention**.
+- **negative / binary**: L-DB-A WITHOUT (G3→escape→drop→terminate-before-G4); L-DB-G (ii) <K dwell→no fire;
+  L-DB-C poison (red); L-DB-D fire-once.
+- **circularity closed (§9.7.8/9.7.9)**: L-DB-G validates the K debounce at design-time (binding); fire⊆retention
+  (L-DB-I′) makes every fire a genuine seat ⇒ no gate②-corrupting spurious ⇒ training-ready = the three keys
+  (no live-policy K key). Live-policy fire distribution = post-launch monitor only.
+- **NOT the (d-a) [242,250] step bar** (no policy-drive onset window).
 
-## §4 acceptance (§9.7.6 + B1/B3 folds)
-- **positive**: fire at genuine seat (capture∧depth∧K, z≤831); L-DB-A WITH row (G4∧G5∧G6 SUCCESS latch);
-  L-DB-B fire≺release (single-clock); L-DB-G positive control (settled → fires).
-- **negative / falsifiable (binary)**: L-DB-A WITHOUT (G3→escape→drop→terminate-before-G4); L-DB-G (ii)/(iii)
-  (transit → no fire); L-DB-I (loose weld → no G6); L-DB-C poison (red); L-DB-D fire-once.
-- **B1 binding (spurious-fire, prelaunch)**: **L-DB-G is a BINDING (d-b) two-key leg** — the spurious-fire
-  rejection (K's load-bearing job, §9.7.3) is validated at design-time here, NOT deferred. Only the
-  **live-policy fire-rate** is post-launch monitored (§carry). ⚠ p5-confirm: this refines §9.7.3's deferral
-  boundary (deterministic sweep binding-now / live-policy deferred).
-- **declared delta**: pin fire → retention → `c1_escape`=False (declared geometry coupling, NOT a reward term).
-- **acceptance is NOT the (d-a) [242,250] step bar** (no policy-drive onset window, §9.7.6).
-
-## §5 change / landing protocol (B5)
-1. **tests-only patch FIRST**: add the new tests (call-placement / order / hoist / L-DB-* IDs). On **baseline
-   `469435014f`** they FAIL with the expected signature (NOT a collection error); on the landed bundle they
-   PASS. Enumerate existing 31 + the new IDs.
-2. **gate SHAs recorded**: L3 CC-Debate bank · rule-check stage2 (done, this session) · /pre-check bank.
-3. **impl** = explicit-path atomic: stage only §1-IN paths (config-hunk isolation if any NOT-MINE hunk),
-   record path/hunk/aggregate staged sha; `validate.sh --staged-only` PASS.
-4. **claim manifest**: target source clean, frozen diff sha, changed-source set enumerated.
-5. **isolated worktree format**: `VIRTUAL_ENV=/home/rlrk/env_isaaclab7 ./isaaclab.sh -f` PASS after any format
-   normalization (re-run to green; porcelain 0).
-6. **post-land**: pytest (31+new) exit0 · pre-commit hooks porcelain 0 · probe legs §3 · two-key (p5 design +
-   pN evidence).
-7. **landing binds** (record exact SHA/status at landing-time): fork-B **V0 acceptance** + gate② **L3
-   training-ratification** decision-of-record.
+## §5 change / landing protocol (R5 — fixed order)
+**gate order**: pre-mutation **L3 CC-Debate** → **rule-check stage2** (done `082baa1ca6`-era) → **tests-only
+patch (baseline red)** → **impl + probe** → **/pre-check (concrete code)** → **land** → **post-land tests/hooks**
+→ **two-key** (p5 design + pN evidence).
+1. **tests-only patch first** (baseline `469435014f`: new tests FAIL with expected signature, NOT collection
+   error; landed PASS). New test IDs (in `test_route_reward_identity_guards.py`): `test_ik_chord_pin_call_placement`
+   (pin called pre-step in ik_chord) · `test_route_steps_hoist_unconditional` (defined when grasp_actuation=False)
+   · `test_ik_chord_pin_fire_subset_retention` (L-DB-I′) · `test_ik_chord_flagoff_byte_neutral_both_grasp` (L-DB-E).
+   Existing 31 continue to PASS.
+2. **impl** = explicit-path atomic (stage only §1-IN; config-hunk isolation if any NOT-MINE hunk; record
+   path/hunk/aggregate staged sha; `validate.sh --staged-only` PASS).
+3. **claim manifest**: baseline source sha, clean status, IN exact paths, frozen diff sha, changed-source set.
+4. **isolated worktree format**: `VIRTUAL_ENV=/home/rlrk/env_isaaclab7 ./isaaclab.sh -f` PASS after normalization
+   (porcelain 0).
+5. **post-land**: pytest (31+new) exit0 · hooks porcelain 0 · probe legs §3 · two-key.
+6. **landing binds (exact SHA/status at landing-time)**: fork-B **V0 acceptance** + gate② **L3 DoR**.
 
 ## §Q status
-- **Q-1 (sync) = RESOLVED** (§2, warp 1.13.0 `types.py:4083-4086` — auto-sync, no fork). ✅
-- **Q-2 (deterministic-probe representativeness)**: the deterministic probe validates the MECHANISM +
-  spurious-rejection (L-DB-G); live-policy dynamics = the post-launch monitor (§carry). Named, not open.
-- **Q-3 (hoist neutrality) = L-DB-F** (binary, both grasp_actuation). ✅ specced.
-- **Q-4 (flag-OFF byte scope) = L-DB-E** (both grasp_actuation; no new npz fields). ✅ specced.
+- **Q-1 sync = RESOLVED** (§2, warp 1.13.0 `types.py:4083-4086`). ✅ pN-confirmed.
+- **Q-2 deterministic-probe** = validates MECHANISM + K debounce (L-DB-G); live-policy = post-launch monitor.
+- **Q-3 hoist neutrality = L-DB-F** ✅. **Q-4 flag-OFF byte = L-DB-E** (both grasp_actuation) ✅.
 
-## §carry / deferred / landing binds
-- **deferred (post-launch monitor, trainer):** live-policy fire-rate only (the DESIGN-time spurious-rejection is
-  BINDING via L-DB-G — B1). If the live fire-rate shows spurious fires, §8.2/§9.7.3 re-open.
-- **landing binds:** fork-B V0 acceptance + gate② L3 DoR at landing-time (§9.7.5; (d-b) is an L3-closure
-  component, not blocked).
-- ⛔ **training-ready stays LOCKED** ((d-a) ∧ (d-b) two-key ∧ cell-2, §S4.7).
+## §carry / deferred
+- **deferred (post-launch monitor)**: live-policy fire distribution ONLY (design-time debounce is binding via
+  L-DB-G). Pathology → §8.2/§9.7.3 re-open.
+- **landing binds**: fork-B V0 + gate② L3 DoR at landing-time.
+- ⛔ **training-ready LOCKED** ((d-a) ∧ (d-b) two-key ∧ cell-2, §S4.7).
 
 ## §10 [RESULT] (stub — filled at probe/land time)
-_pending pN v0.2 readback → /pre-check → L3 CC-Debate → impl + probe → two-key._
+_pending pN v0.3 readback → L3 CC-Debate → tests-only red → impl + probe → /pre-check → land → two-key._
