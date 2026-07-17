@@ -2,9 +2,10 @@
 
 **v0.5.2 — 2026-07-18 04:18 JST** · **Author:** RS-TECH-LEAD (w2:p4) · **Node:** pin (d) — (d-b) half
 **Governing:** charter §9 (`463f156fc6`) + §9.7 (`bd1c534678`) + §9.7.8/§9.7.9 (`082baa1ca6`) + §9.7.10
-(`179a8e390a` + gap-bound fix `c6a7d43b9f`). **Baseline code = HEAD `469435014f`.** **Status:** DRAFT — **B1
-design PASS**; C1/C2/C4 + charter fix = PASS-CLOSE (pN v0.5.1). This rev folds the last blocker **C3** (L-DB-H)
-+ records-only fixes. Awaiting pN v0.5.2 re-readback. **⛔ [CHANGE] STOP until pN readback PASS.**
+(`179a8e390a` + gap-bound fix `c6a7d43b9f`). **Baseline code = HEAD `469435014f`.** **Status:** PRE-IMPL (0 code) — **evidence gate PASS-CLOSE** (pN v0.5.2 `9ec0369067` + records
+`f815d01c69`, 2026-07-18 04:20; all 7 versions v0.1→v0.5.2 folded, B1 design PASS, last blocker **C3**
+(L-DB-H) discharged; see §10 [RESULT]). **⛔ [CHANGE] STILL STOP** — the PASS is the GO to L3 CC-Debate +
+rule-check stage2 bank, NOT a direct [CHANGE] GO (tests-only/impl follow those two gates per §5). training-ready locked.
 
 **One line:** call the drive-agnostic `_maybe_activate_c1_pin` from the ik_chord (policy) drive loop at
 pre-step, `route_steps` hoisted unconditionally, removing the G4-G6 dead zone. No reward term, no new
