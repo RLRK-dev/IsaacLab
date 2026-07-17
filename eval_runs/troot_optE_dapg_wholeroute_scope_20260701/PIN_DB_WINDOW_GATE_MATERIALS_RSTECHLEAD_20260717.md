@@ -28,8 +28,13 @@ DROP_LATERAL_DEV_MAX_M=**60mm** (`env:412`) · G_PHASE_BONUS=**+5** (`rc:104`) �
 > (fire ⊆ retention)" is WITHDRAWN** (§9.7.10): it conflated two DIFFERENT measurement surfaces — FIRE reads the
 > identity BODY point `bq[seat_body,:3]` (`:1848-1849`), RETENTION reads the interpolated y=C1Y CROSSING
 > `_seat_crossing` (`:1304-1317`); the gate②-fix docstring (`:1307-1310`) shows the crossing was intentionally
-> moved off the node (~7.5mm apart), so containment-by-identity covers only check↔authorizer, never
-> body-fire⇒crossing-retention. (3) **fire ⇒ crossing-retention is the deadlock-removal RELIABILITY question**
+> moved off the nearest node (the docstring describes a **Y-quantization class**, ~half the 15mm segment pitch —
+> this is NOT a body↔crossing distance bound; the numeric is withdrawn, the surface-difference conclusion
+> survives), so containment-by-identity covers only check↔authorizer, never body-fire⇒crossing-retention.
+> **⚠ GOVERNING (pN v0.4 R4): every derivation in THIS doc that infers body-capture/fire from crossing-seated
+> (or the reverse) — Artifact 1 G3-row / the Causal DAG / Artifact 3 Ground-Truth — is an EMPIRICAL premise
+> verified by prereg L-DB-A / L-DB-I″ at nominal, NOT a structural PASS.** (The deadlock-removal conclusion is
+> unchanged; only its derivation status is downgraded from structural to empirical-at-nominal.) (3) **fire ⇒ crossing-retention is the deadlock-removal RELIABILITY question**
 > (the (d-b) crux, NOT non-crutch): verified empirically by **prereg L-DB-I″** (same-snapshot record BOTH surfaces
 > + assert `_seated_in_groove(dx_cross,z_cross)`) + L-DB-A retention-continuity, per-cell (single nominal ≠
 > structural proof). (4) z-windows (B7): fire z ∈ **(821,831]** (lower strict `:1400`); retention z ∈
