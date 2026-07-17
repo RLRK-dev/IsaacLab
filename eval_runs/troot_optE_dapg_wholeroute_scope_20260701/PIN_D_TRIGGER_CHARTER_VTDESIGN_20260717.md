@@ -110,6 +110,7 @@
 - 根拠: (i) **cadence 同一性** — 既存 call site（`newton_route_env.py:1221`、FF substep loop 内 = per-physics-frame 評価を p5 自読）への「条件置換のみ」（§8.4-1）に単位を一致させる。RL-step 単位は sub_i gating 等の新規機構 = 置換規律からの逸脱。(ii) debounce 対象（rim 通過の数値 wobble、進入 margin 0.07mm）は frame 級現象 — %12 推奨に concur。(iii) 窓安全性は両単位で成立（早発火余裕 min 99f・持続 ≥5262f）ゆえ**機構最小**を選ぶ。(iv) frame-exact anchor は録画から offline 再計算可能 = probe assert が厳密。
 - **凍結 anchor**: canonical 期待 **fire_frame = 2429**（= first-True 2427 + (K−1)、隣接 3 frame の連続性は持続実測 ≥5262f が保証）/ 期待 **fire_step = 242** = G3 latch と同 RL step（fire は substep 内・latch は同 step の reward 評価時 — (B) では両者独立ゆえ順序問題なし）。hard bar `fire_step ∈ [242, 250]` 維持。一般式 = `fire_frame = first_true_frame + (K−1)`。drift = loud。
 - 注記: §8.6(b) の「期待 fire ≈ 243+(K−1)」は step 算術で**単位曖昧だった** — 本項の frame 式で確定（Q-1 は曖昧さを正しく surface した）。
+- ⚠ **本項の凍結値（2429 / 242 / 式 `first_true+(K−1)`・「G3 と同 step」）は訂正 #12（§8.11.1）で supersede** — 現行凍結 = §8.11.2 / prereg §2-11（式 `run_start + K` = fire_label 2468 / fire_step 246 / anchor 830.640mm）。pointer 追記 = §8.12 授権により %12。
 
 **§8.10.2 Q-2 = containment-by-identity で CONFORM + ⚠訂正 11 件目（「6.0」）**
 - **訂正 #11**: §8.4-3「lat 3.5 < 6.0 = 真に内側」の **6.0 は on-disk に存在しない** — p5 自身の grep で確認（`route_executor.py` の capture 系に 6.0 なし〔hit は無関係な camera 角 `:2523` のみ〕・設計 doc §15 にもなし）。authorizer `:956` / audit `:1010` は fire 述語と**同一関数・同一 bar**（`clip_capture_predicate` + `rc.SEAT_LAT_BAR_M` 3.5mm `route_env_config.py:174` / `SEAT_Z_LO/HI_M` `:175-176` / y_win = model geom 由来を両者同式で取得）。真の関係 = **厳密包含でなく identity（等号）**。6.0 の出所 = 記憶からの捏造数値（%12 の幾何仮説 7.5−1.5 は私の生成過程を遡れず検証不能）— **裁定文に file:line なしの数値を書いた = artifact-first の自違反**（#10 の教訓〔claim scope > measurement scope〕の数値版）。**§8.4-3 の結論（設計経路から backstop raise 不可達）は survive し、identity の下でより強くなる**（数値 margin でなく構成的保証）。%12 bank 時に §8.4-3 へ訂正 pointer 1 行の追記を授権。
@@ -145,6 +146,35 @@
 **§8.11.4 Q-8 = 訂正 #13 + K 根拠文の downgrade 批准**
 - (i) **訂正 #13**: §8.10.4 の「§8.4-6」は dangling（§8.4 は項 1-5 — raise 3 列挙の実体 = prereg §2-6）。bank 時の pointer fix 授権。
 - (ii) **K=3 根拠文の地位 = downgrade を批准**: rim 境界の「数値 wobble」は canonical 実測で不支持（単調 ~0.13mm/f・flicker 0）、深さ境界の bounce も **0/81**（p5 実測: first-deep 後 10f 以内の再浮上ゼロ）⇒ K=3 の地位 = **保険 + policy-era swing-through hook**（遅い通過が dwell し得る誤発火への防波堤 — §12-6 D-b carry に concur）。**値 K=3 は凍結のまま**（downgrade は根拠の地位であって値でない）。
+
+### §8.12 🔒 prereg v0.4 設計軸 verify = **CONFORM — PASS〔p5 設計軸〕**（v1.5、2026-07-17 12:4x — 対象 = `PIN_D_TRIGGER_PREREG_RSTECHLEAD_20260717.md` v0.4 全文〔§0-§12、447 行 p5 全読〕。凍結値は p5 自計測・%12 独立再測・prereg 記載の**三者一致**）
+
+**条項別（§8 裁定 → v0.4 freeze の照合、全 ✅）:**
+| §8 裁定 | v0.4 | 判定 |
+|---|---|---|
+| §8.10.1 K=3 physics frame・strict consecutive | §2-1/2（深さ leg False もリセット明記） | ✅ |
+| §8.11.2 深さ leg（Z_FIRE_DEPTH_M = groove+R/2 = 0.831・新 literal ゼロ・fire ⊂ authorizer strict 化） | §2-2（home = rc SEAT bars 同居・hunk 分離） | ✅ |
+| §8.1-4 fire 対象 = identity body / §8.4-4 fire-once・ep 内 re-fire 不採用 | §2-3/4 | ✅ |
+| §8.4-1 条件置換（call site :1221 不動） | §2-5（+hold 下 label 意味論 = D-b carry へ — 適切な scope 外送り） | ✅ |
+| §8.10.4 非 raise + raise 3 限定 | §2-6（+mjm-None sentinel init = Q-3 の −1 意味論を全経路で成立 — bar 超過） | ✅ |
+| §8.10.2 same-snapshot（load-bearing） | §2-6a 逐語 + **L-C(d)-(vi) 毒殺型 unit**（値照合単独は fail 不能 → 摂動で re-read 実装を判別 = 「fail し得る計器」教訓の正しい適用 — bar 超過） | ✅ |
+| §8.10.2 containment-by-identity | §2-6b **cache+hoist**: 同 predicate + 同 rc bars + **同 cached clip set** — `clip_geoms_at` の mj_forward `:870`（p5 自読）を per-frame に持ち込まない解消形。static geom（body-0）は post-build 不変ゆえ cache 正当・count assert が BrokenSelector 意味論保存。⭐**audit は cache 非依存の live rescan 維持**（CC6-6）= 証拠計器が fire 経路の cache を信用しない — §15.4 の独立性構造の正しい保存（bar 超過） | ✅ |
+| §8.1 (B) identity・fail-closed | §2-7/8 | ✅ |
+| §8.2 mismatch 3-class 非 terminal | §2-9 + L-I fixtures | ✅ |
+| §8.5+§8.10.3 8 fields・window 意味論・counters | §2-D（+window↔episode 1:1 構造論証 + collector 読取 read-before-reset 凍結 + **production dormancy 宣言**〔既定 = flag OFF ∧ budget 230 < fire 246 → 全 sentinel が正常と宣言 = no-silent-cap の正形〕） | ✅ |
+| §8.11.1/§8.11.2 凍結 anchor（式 run_start+K・2465→2468/246・830.640・band・margin ≥5.10・hard bar・rim 値は非凍結） | §2-10/11/11a（三者一致。live probe 実測 → standing anchor 化も凍結） | ✅ |
+| §8.6 両 release 定義 assert・§8.11.2 ADOPT legs 5 本 | L-D(d)（efc max / seat z / retention continuity **hard PASS 期待**） | ✅ |
+| 宣言 delta（fire 254→246・latch 242 不変・**anchor 深度 = pin 意味論変化として宣言**・flag-OFF byte 恒等） | §11 + L-F1(d)/L-F2(d)（L-F1 の「trigger 非感応 = out-of-scope tripwire」開示は正直で正 — trigger 論理は L-C(d)+L-F2 が覆う） | ✅ |
+| §8.8 (iv) 繰延・§12-5/D-b/DR carry | §2-13 + §12-5/6/8（B4 は **K+1 physics frame 単位明記** = 曖昧さの B4 継承防止 — bar 超過） | ✅ |
+| additive-only（D1 bar）の実測化 | **L-H2**（HEAD vs bundle collector の既存 9 arrays byte 一致 + delta 過不足ゼロ — v0.2 に無かった測定 leg の新設） | ✅ |
+
+**非 blocking 注記 2 件（bank 時 fold 授権）:**
+1. **wrong-clip fire の宣言追加**（§11 へ 1 行）: capture check は ∃-認可 clip（loop 形 = §20 canonical の帰結・N-clip 前方互換）ゆえ、探索 policy が identity body を**他方の認可 clip** volume 深部に K frame 置けば wrong-clip weld が成立し得る。実測 81/81 で不到達（identity body は C1 前に C2 近傍へ行かない — I4 leg C の straddle 0 と整合）・帰結 = **保守的 dead-end**（C1 crossing MISS → G3 不到達 → false success 不能・reset で clear・npz `pin_eq_id`/`pin_anchor_xyz` で可視）。設計変更不要 — 宣言のみ（clip 名指し制限は §20 loop-form 哲学に反する）。
+2. **残押込の私の「≈1.8mm」= 算術ずさんの自認**: 830.640 − 828.653 = **1.987mm** — %12 の 1.99-2.01 が正で、「方法差」の半分は私の丸め。§11 の「≈1.8-2.0」表記に concur、確定 = L-D 実測（凍結 bar でないため訂正番号は付さない — ≈ 注記の精度不足として記録）。
+
+**授権 1 件**: §8.10.1 への **訂正 #12 pointer 1 行**（#10/#11 と同 pattern: 「⚠ 本項の凍結値 2429/242/式 first_true+(K−1) は訂正 #12〔§8.11.1〕で supersede — 現行 = §8.11.2/§2-11（2468/246/run_start+K）」）— %12 bank 時に追記可。
+
+**verdict**: **CONFORM — PASS〔p5 設計軸、prereg v0.4〕** — 実装着手可（chain = §8.9: 実装 → probe/legs → /pre-check → two-key〔p5 設計軸 + pN evidence 軸〕）。pN evidence 軸 pre-bank review = 並行（bank = claim deadline は pN 合流後、(a)(b) 前例どおり）。standing 不変: training-ready 禁止 = (d) two-key PASS + §12-5 cell-2 追補まで。
 
 ## §7 cites（本 charter の接地、全て p5 自読 2026-07-17）
 
