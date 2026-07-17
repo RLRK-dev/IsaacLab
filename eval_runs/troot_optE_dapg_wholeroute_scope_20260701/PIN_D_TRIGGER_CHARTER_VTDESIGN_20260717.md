@@ -231,6 +231,53 @@
 
 **verdict**: **CONFORM — PASS〔p5 設計軸、(d-a) post-land〕**。two-key の evidence 軸 = pN（legs 実測）。**standing 不変（§S4.7）**: training-ready 解除は **(d-a) ∧ (d-b) 両 two-key ∧ §12-5 cell-2** — 本 (d-a) two-key PASS はその **1 鍵のみ**。(d-a) は training-ready を解除しない。次 = (d-b)=D-b window gate（訓練 drive 分岐配置 + K 再検証 + hold label）+ cell-2（DoD-7 後）。
 
+## §9 🔧 (d-b) D-b window gate — 設計 framing（v1.8、2026-07-17 21:1x — 入力 = `PIN_DB_WINDOW_GATE_SCOPING_RSTECHLEAD_20260717.md`〔21:01〕+ p5 code 自読。**framing であって裁定でない** — 各 Q の 🔒 裁定は §9.6 materials→ruling が生む）
+
+**doc-home 決定**: (d-b) は本 (d) charter に §9 として拡張する（別 doc を作らない）。根拠 = §S4.7「(d) = (d-a) + (d-b)」= 単一 node ／ §1 scope「(d) policy-drive trigger」の本体は ik_chord（= policy path）ゆえ (d-b) こそ charter 表題の実現 ／ (d-a) 裁定 §8.1-8.14 は凍結・§9 は ADD のみ。framing≠裁定の境界: 本節は gate 構造 + 問い再枠付け + **方向（materials 依存で確定）**を出す。
+
+### §9.1 grounded code reality（p5 自読 2026-07-17、producing commit = HEAD `5b0de67402`）
+
+- **drive 既定 = `ik_chord`**（`newton_route_env.py:496`、`_dm = self.cfg.get("route_drive_mode", "ik_chord")`）= step 単位 batched-IK + residual 駆動 = **policy/訓練 path**。`feedforward` は recording-replay path（(d-a) が配線した先）。
+- **pin call site = 1 箇所のみ**（grep 確認）: `:1225`（FF branch）+ 定義 `:1821`。**ik_chord branch に `_maybe_activate_c1_pin` call 無し** ⇒ 既定 drive では trigger が一度も評価されない（pN B1 = 1 call site を on-disk 確認）。
+- **frame 意味論の非対称**:
+  - FF（`:1215-1226`）: `_maybe_activate_c1_pin(route_steps, step)` `:1225` が `_physics_step_all` `:1226` の**前**（pre-step）。§8.13 の `fire_label = run_start + K` off-by-one はこの layout で導出。
+  - ik_chord（`:1252-1281`）: `_physics_step_all` が loop **末** `:1281`。`joint_q.assign` `:1272-1273` は joint 配列を書くのみで **body_q を進めない**（body_q は物理 step のみが更新 — materials で step 前後不変を実測確認）⇒ **`:1281` の前に置いた pin call は FF と同じ「前 frame の body_q」を読む** ⇒ off-by-one が drive 間で不変。
+- **⭐ 核心 finding（framing を左右する）**: `_maybe_activate_c1_pin`（`:1841-1860`）は drive-mode **agnostic** — 必要な外部入力は `(route_steps, sub_i)` の 2 個のみ。かつ `route_steps` は **`fired_at_frame` LABEL** の材料（`:1846` `t=…route_steps[0]`、`:1858` `step_f[t]+sub_i`）としてのみ使われ、**発火判定（capture ∧ depth ∧ K-dwell = 純 body_q 幾何、`:1850-1856`）は route_steps を使わない**。⇒ **Q-Db3 は「label 供給」問題であって「発火 gate」問題でない**（framing 上の再分類）。
+- **route_steps 供給の gap**: ik_chord で route_steps は `:1251` = `grasp_actuation` 真の時のみ計算。`grasp_actuation` 偽（pure residual/IK sub-mode、`:1268-1271`）では未定義。FF は `:1210` で無条件計算（`route_t` にのみ依存）。
+- **gate② 計器の同居**: seat 述語 `_seat_crossing` `:1304`（ruling `REWARDDESIGN_GATE2_SEAT_PREDICATE_RULING`）は同 file。pin は幾何を保持（INVARIANT #5）→ cable 幾何を変える → seat 計器の読みを変える ⇒ policy-driven fire timing は gate② の reward/obs 計器に結合。
+
+### §9.2 D-b gate が決めるもの + acceptance の (d-a) との差
+
+- **決めるもの**: policy-drive（ik_chord）path で **どこに**（Q-Db1 配置）**どの frame 意味論で**（Q-Db2 clock）**どの label 契約で**（Q-Db3/Q-Db5）pin trigger を評価するか + **K の policy 時代 validity**（Q-Db4）+ **gate② 結合の宣言**（Q-Db6）。機構（capture ∧ depth ∧ K-dwell、identity = recording 由来 `_pin_seat_seg`、fire-once latch、`authorize_clip_pin` 単一書き手）は (d-a) から**不変で carry** — (d-b) は call site の**追加**と**評価配置**のみ。
+- **acceptance が (d-a) と違う点（framing の要）**: (d-a) の fire_step hard bar `[242,250]` は **FF-replay の recording-onset 窓**に接地。ik_chord では recording-onset 窓が無い（fire は policy が cable を seat させた時）⇒ **`[242,250]` bar は (d-b) に転写しない**。(d-b) の正 leg = 「fire が**正しい**（capture ∧ depth ∧ identity ∧ K を満たす real seat でのみ）」で、特定 frame ではない。fire_label は §8.13 どおり drift-loud・非 gate。
+
+### §9.3 Q-Db1..6 再枠付け + framing 方向（materials 依存）+ 要 materials
+
+- **Q-Db1 + Q-Db2〔配置 + off-by-one = 連結〕**: 一つの決定。**方向**: pin call を ik_chord の **pre-step（`:1281` の直前、joint assign `:1273` / grip `:1278` の後）**に置く ⇒ 前 frame body_q を読む = FF `:1225` と同一意味論 ⇒ §8.13 `run_start+K` が**再導出なしで転写**（single-clock invariant、parsimony + SSOT）。post-step 配置は新 off-by-one を要し drive 間で clock 分岐 = disfavored。**要 materials**: (i) ik_chord pre-step で body_q が「前 frame 物理結果」であることの実測（joint_q.assign が body_q を進めないこと — 1-frame probe で step 前後不変）(ii) FF と ik_chord で同一 cell の fire_label 導出が同一式に載る trace。
+- **Q-Db3〔route clock 供給〕= label 供給問題（発火 gate でない、§9.1）**: **方向**: route_steps を ik_chord loop 頭で **無条件 hoist**（FF `:1210` と同型、`route_t` にのみ依存）。ただし「pin を `grasp_actuation` 偽 sub-mode で arm するか」は別の設計 sub-問（そのモードで腕が route/grasp していなければ pin は本来不発）。**要 materials**: (i) 訓練で active な ik_chord sub-mode 列挙（grasp_actuation 真/偽 × residual）(ii) 各 sub-mode で route_t 有効性 (iii) grasp_actuation 偽で pin を arm すべきか（幾何が seat に達し得るか）の到達可能性。
+- **Q-Db4〔K=3 の policy 時代 validity〕**: K=3（6.25ms、§8.10.1）は FF-push 文脈で裁定。遅い policy swing が K=3 を **spurious dwell** し得る（CC3-4、prereg §12-6）。**方向**: K は config（`PIN_TRIGGER_DWELL_K`、既に config 化済）— design-now = K の bound + 「なぜ K=3 が既定か」+ **empirical 再検 criterion** を宣言。**empirical 実測は trainer 未起動ゆえ deferred leg**（(d-a) DR-ON M1 / cell-2 DoD-7 と同 pattern）。**要 materials**: (i) spurious-dwell worst-case（policy が depth bar 近傍を K frame 滞留する幾何条件）(ii) K↑/depth bar↑ の trade（false-fire vs no-fire、§12-8 headroom と同軸）(iii) empirical gate の DoD（trainer 起動後に fire-rate/fire-step 分布で spurious 検出する supervisor 契約）。
+- **Q-Db5〔hold 時代 label 意味論〕**: `fired_at_frame = step_f[t] + sub_i`（`:1858`）の held-world（`hold_mask`、prereg §2-5）下の意味。(d-a) probe は hold 不使用。**方向**: label は **provenance-only・drift-loud・非 gate**（§8.13）ゆえ held 下の値も gate でなく記録 — 設計は「何を記録し、hold 中は route clock 凍結ゆえ step_f[t] も凍結する」宣言で足りる。**要 materials**: hold_mask 下で route_t 凍結する経路の cite（`:1213` hm / `:1279`）+ label が held 中に何を指すかの 1-episode trace。
+- **Q-Db6〔reward-dynamics 結合 / gate② coupling〕**: policy-drive fire は recording-onset でない ⇒ reward-dynamics delta を宣言。pin fire → cable 保持 → `_seat_crossing` `:1304` が pinned 幾何を読む。**論理**: pin が**正しく**発火（real seat のみ）すれば seat 計器も正しく読む（両者は同一幾何真実を読む）⇒ **pin の fire-correctness は gate② 計器 validity の前提**。⇒ Q-Db4（spurious fire 防止）と Q-Db6 は**連結**（K の仕事 = spurious fire を殺す = gate② corruption を防ぐ）。**方向**: (d-b) 設計は進行可。ただし **gate② = FAIL / owner-chain pending（LEDGER:57-58）**ゆえ policy-driven fire を**未批准 reward に配線する landing は gate② owner chain と sequencing 調整**（設計 block でなく landing sequencing flag）。**要 materials**: (i) pin fire が seat 計器・reward・obs に与える delta の因果 DAG（§21.4:763 reward-coupling 宣言の policy 版）(ii) fire 後 reward が「locked high」になるか（weld 永続 → seat 永続）の episode trace と、それが physical truth（clip が保持）と一致するかの確認 (iii) gate② owner chain（/reward-design 再走 + p5 verify + /pre-check）との依存関係表。
+
+### §9.4 不変制約（(d-b) で動かさない — §4 に加えて）
+
+- INVARIANT #5 clip-only: (d-b) は新 kinematic 例外を作らない — 既存単一書き手 `authorize_clip_pin` の**評価時刻/場所**のみ追加（scoping §3）。
+- timeouts 純度（§4-2）/ identity-persistence（§4-3）/ 成功述語は幾何を読む・pin 状態を読まない（§4-4）/ fire-once latch = 全て carry 不変。
+- training-ready 禁止（§4-5 + §S4.7）: (d-b) two-key PASS でも **(d-a) ∧ (d-b) ∧ §12-5 cell-2** の 3 鍵が揃うまで解除しない。本 §9 は解除を約束しない。
+
+### §9.5 deferred legs + sequencing
+
+- **deferred（trainer 未起動）**: Q-Db4 empirical K + live policy fire dynamics = deferred leg（(d-a) DR-ON M1 / cell-2 DoD-7 と同 pattern）。design（配置 + framing）は今進む。
+- **M2 carry 引受け（§8.14）**: DAPG/BC loader の additive-key 許容（D0-R3）の consumer 側 assert = (d-b)/訓練時代の担当 — 本 gate の materials/legs に fold。
+- **gate② 依存**: Q-Db6 の結合は reconcile（assume でない）。landing は gate② owner chain と sequencing。
+- **V0 依存（PLAN-KEEPER）**: fork-B substrate V0 acceptance pending — ik_chord drive-branch 構造が V0 で変わるなら call site hard-wire 前に flag（設計は進行可、landing は待ち得る）。
+
+### §9.6 materials 要請（%12 へ、統合）+ 次 gate step
+
+- **要請**: /reward-design 4 artifacts の (d-b) 版 + §9.3 各 Q の measurements/options。特に (i) ik_chord pre-step body_q-read 実測（Q-Db1/2）(ii) 訓練 active な ik_chord sub-mode 列挙 + route_t 有効性（Q-Db3）(iii) spurious-dwell worst-case + empirical K DoD（Q-Db4）(iv) pin→seat→reward 因果 DAG + gate② 依存表（Q-Db6）(v) hold 下 label trace（Q-Db5）。
+- **gate chain**: 本 §9 framing → %12 materials → **p5 §9.x 裁定**（Q 順）→ prereg → 実装（call site 追加 + 条件、explicit-path atomic）→ probe → **/pre-check** → **two-key**（p5 設計軸 + pN evidence 軸）。training-ready = (d-b) two-key ∧ (d-a ✓) ∧ §12-5 cell-2。
+- **framing verdict**: **FRAMED**（gate 構造 + Q 再枠付け + 方向確定、🔒 裁定は materials 後）。0-commit — bank = %12。
+
 ## §7 cites（本 charter の接地、全て p5 自読 2026-07-17）
 
 | 項 | cite |
@@ -243,3 +290,4 @@
 | seat_k 分布 / L-D anchor | `gate2_rerun_i3i4_probe_result.json` leg C（25..34）/ `pin_ab_lifecycle_probe_result_cell_x0_y0.json`（fire 254・time_outs=0）|
 | standing | `REWARDDESIGN_...VTDESIGN_20260715.md` §S4.3-2 / §S4.5 / §S4.6（training-ready 解除条件・(iii) 状態・付帯）|
 | carry 引受け | `PIN_AB_SCOPE_PREREG_RSTECHLEAD_20260717.md` §12-2（witness provenance）/ §12-4（B4）/ §12-5（cell-2）|
+| (d-b) code reality（§9.1） | `newton_route_env.py:496`（drive 既定 ik_chord）/ `:1215-1226`（FF pin call `:1225` pre-step ≺ `:1226` step）/ `:1252-1281`（ik_chord physics `:1281` loop 末・pin call 無し・route_steps `:1251` grasp 時のみ）/ `:1841-1860`（helper drive-agnostic・route_steps=label のみ・fire=幾何 `:1850-1856`）/ `:1304`（`_seat_crossing` gate②）|
