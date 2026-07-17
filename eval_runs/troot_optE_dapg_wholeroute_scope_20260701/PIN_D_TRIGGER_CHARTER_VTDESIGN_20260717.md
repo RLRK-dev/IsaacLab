@@ -51,6 +51,27 @@
 3. **prereg**（pN 条件パターン: claim/freeze/legs/landing protocol）→ 実装 → probe/legs → **/pre-check** → two-key（p5 設計軸 + pN evidence 軸）。
 4. **acceptance legs の骨格**（prereg で確定）: 正 = canonical fire-window positive control（Q5）+ ep1≡ep2（(d) trigger 版 L-D2 相当）/ 負 = pre-capture 不発火・圏外 不発火**かつ不 raise**・fire-once・bypass 系継承（L-C3-5 型）/ 宣言 delta = (a)(b) tree 対比の L-F2 型（発火時刻分布の変化は**宣言面**）。
 
+## §8 🔒 裁定（v1.1 追記 2026-07-17 10:0x — 素材 v0.1 `f4bb58796d` を受けて。素材 §2 実測は p5 が 81 npz から独立再計算し完全一致〔分布 8-bin・全 cell 単一値・offset 28 = 81/81・leg-C bins 同一〕を確認済。⚠節順 note: §8 は時系列追記のため §7 cites の前に位置する — 版履歴の透明性を優先し並べ替えない）
+
+### §8.1 🔒 Q2 裁定 = **(B) recording 由来 identity を採用**（DAPG/recording 時代）+ **fire 対象 = identity body** + (A) は照合レグへ降格 + §21.4:756 固定段文を RE-SUPERSEDE
+
+1. **固定段 (C) = 実測死を批准**: 素材 §1（body30 は S2-S5 のどれの 30 でもない — C1 +3 / C2 +8.5 で affine 写像不能）+ §2（seat は cell 幾何の関数、spread 10 seg ≈ 146mm）。**`RLENV_PIN_DESIGN` §21.4:756「seat_seg = route が定める固定段（C1 = body30）」を本項で RE-SUPERSEDE**（「body30」は step-table の設計時呼称であり runtime index でない — %12 bank 時に §21.4 へ pointer 追記で可〔§S3.3 授権と同型〕）。step-table 自体は不変（呼称の地位が確定しただけ）。
+2. **(A) fired-body 由来を identity 源として不採用**（本時代）— 決定的理由 = **観測の再死**: identity が発火まで存在しない ⇒ obs[49]/[58]-[61] が発火まで MISS sentinel = gate②/§S4.5 が「計器死からの復元」として批准した状態の**逆行**。policy は着座を学ぶ局面（approach/descend/押込）で seat 感覚ゼロ、発火（≈着座時）後にようやく obs が生きる — **学習信号の因果が逆順**（到達可能性の構造欠陥）。global 計器で埋める代替は I3 の reward↔obs seam の再導入で不可。副次: G3 latch が fire 後へ遅延（242→243+）= 不要な報酬 dynamics delta の追加。
+3. **(B) の採用理由**: (i) latch 列不変（G3 242 のまま — 宣言 delta は fire 時刻 254→≈243 のみに局所化、素材 §3）(ii) DR 内故障方向 = **保守的**（実着座が identity 窓からずれる → MISS/false-negative → exploit 側に開かない、§S2 row 1 と同型。学習効率への影響定量は artifact (i) の 81-cell capture-window 解析で fold — /pre-check 前必須）(iii) multi-cell 拡張は per-cell recording identity で成立（§2: 81 cell 各自単一値の実測）— §12-5 cell-2 追補にそのまま伸びる (iv) DAPG residual-on-script 時代は recording が全 episode に随伴 = 供給保証。
+4. **fire 対象 = identity body**: capture 述語（`:882`）は `cable[_pin_seat_seg]` の world 位置に対して評価し、True で同 body を `authorize_clip_pin` に渡す ⇒ **welded body ≡ identity（by construction）** — (A) が守ろうとした pin=hard-identity の整合を、identity 源の交換なしに機構で獲得する。「volume 内の任意 body で発火」は不採用（identity と別 body を weld し得る → 計器と物理の乖離 → escape guard の偽 −10 経路）。
+5. **scope 限定**: 純 policy 時代（recording 消滅）の identity 源は当該時代の gate で再設計 — 本裁定は foreclose しない（(A) の順序問題解決を含め、その時代の設計問題）。
+6. episode-trace artifact (iv) は (B)+identity-target 前提で作成（(A) の比較列は 1 本参考掲載で可）。
+
+### §8.2 🔒 Q4 裁定 = **採用**（本 chunk）— 非 terminal loud、3 class 分類
+
+1. **検出 class**: (i) fired≠∅ ∧ witness=None（bypass 署名）(ii) witness≠None ∧ witness.eq_id ∉ fired（witness/model 乖離 — clear 前に消えた/別 eq）(iii) fired ⊋ {witness.eq_id}（併走 bypass）。
+2. **home** = `_clear_c1_pin` の audit 点（`fired` tuple は landed で既に返る `:1879`）。
+3. **応答 = loud print + supervisor counter + episode-npz additive flag**（D0 R3 原則）。⛔ **reward / termination / invalid には配線しない**（本 gate）: 偽 terminal は policy への infra 起因罰 = 訓練汚染 / `invalid` の意味拡張は trainer 契約変更で別問題。canonical/probe の期待値 = **0**（>0 = probe FAIL）。実訓練での頻度 = /pre-check 審査項目、>0 実測時は本裁定 re-open。
+4. Q2-4 の fire-target=identity-body により、class (i)/(iii) は**真の bypass 書込に限定**される（設計内発火からは構造的に発生しない — 検出器の信号純度が上がる）。
+
+### §8.3 残 Q の待ち
+Q1（評価配置・fire-once/re-fire）/ Q3（npz fields 確定）/ Q5（positive control 窓）/ Q6（B4 整合 cite）= 素材着弾順に裁定。artifact (i)(ii)(iv) は Q2 裁定 (B) 前提で作成のこと。
+
 ## §7 cites（本 charter の接地、全て p5 自読 2026-07-17）
 
 | 項 | cite |
