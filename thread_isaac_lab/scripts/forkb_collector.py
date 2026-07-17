@@ -250,6 +250,10 @@ def main():
                 print(f"[collector {a.proc_index}] SIGTERM mid-episode: aborted WITHOUT publish", flush=True)
                 return 0
             n = len(obs_l)
+            # (d-a) sec 2-D: the per-episode pin record -> 8 additive npz fields. A done window carries the env's
+            # closed record; a budget-cut window carries the "no reset" sentinel (its pin state is deliberately not
+            # closed -- window<->episode is 1:1 and the record travels with the done).
+            pin_rec = env._last_pin_record if truncated_by == "env_done" else env._sentinel_pin_record()
             arrays = {
                 "o": np.asarray(obs_l, dtype=np.float32),
                 "o_next": np.asarray(nobs_l, dtype=np.float32),
@@ -260,6 +264,15 @@ def main():
                 "time_out": np.zeros(n, dtype=bool),  # NEVER a workload truncation (timeouts-contamination rule)
                 "invalid_mask": np.zeros(n, dtype=bool),
                 "cable_traj": traj[:n],
+                # (d-a) additive pin fields (sec 2-D; names + dtypes frozen). The 9 arrays above are unchanged.
+                "pin_fire_step": np.asarray(pin_rec["pin_fire_step"], dtype=np.int64),
+                "pin_fire_frame": np.asarray(pin_rec["pin_fire_frame"], dtype=np.int64),
+                "pin_eq_id": np.asarray(pin_rec["pin_eq_id"], dtype=np.int64),
+                "pin_seat_seg": np.asarray(pin_rec["pin_seat_seg"], dtype=np.int64),
+                "pin_anchor_xyz": np.asarray(pin_rec["pin_anchor_xyz"], dtype=np.float64),
+                "pin_dwell_count_at_fire": np.asarray(pin_rec["pin_dwell_count_at_fire"], dtype=np.int64),
+                "pin_mismatch_class": np.asarray(pin_rec["pin_mismatch_class"], dtype=np.int64),
+                "pin_audit_verdict_at_reset": np.asarray(pin_rec["pin_audit_verdict_at_reset"], dtype=np.int64),
             }
             # R3-1 atomic publish: tmp -> sha -> manifest -> rename; the rename is the ONLY publication point
             name = f"ep_{ep_idx:06d}"
@@ -283,6 +296,10 @@ def main():
                 "sha256": sha,
                 "drive_mode": a.drive_mode,
                 "sec_S_exposure": SEC_S_EXPOSURE,
+                # (d-a) sec 2-D manifest mirror (aggregation keys; the npz holds all 8 pin fields).
+                "pin_fire_step": int(pin_rec["pin_fire_step"]),
+                "pin_eq_id": int(pin_rec["pin_eq_id"]),
+                "pin_mismatch_class": int(pin_rec["pin_mismatch_class"]),
             }
             (outbox / (name + ".manifest.json")).write_text(json.dumps(manifest, indent=1))
             os.replace(tmp, outbox / (name + ".npz"))

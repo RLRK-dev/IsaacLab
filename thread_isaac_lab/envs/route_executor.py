@@ -857,7 +857,8 @@ def clip_geoms_at(mjm, mjd, cx, cy, xy_tol=0.03):
 
     Args:
         mjm: the CPU ``mj_model``.
-        mjd: the CPU ``mj_data`` (its ``geom_xpos`` is refreshed here).
+        mjd: the CPU ``mj_data`` (its ``geom_xpos`` must already be current -- the caller runs ``mj_forward``;
+            the (d-a) refactor hoisted the forward out of this per-frame-adjacent helper, design sec 2-6b-iii).
         cx: clip centre X [m].
         cy: clip centre Y [m].
         xy_tol: half-window [m] for the XY cluster gate.
@@ -867,7 +868,6 @@ def clip_geoms_at(mjm, mjd, cx, cy, xy_tol=0.03):
     """
     import mujoco
 
-    mujoco.mj_forward(mjm, mjd)
     box = int(mujoco.mjtGeom.mjGEOM_BOX)
     return [
         g
@@ -911,6 +911,79 @@ def clip_capture_predicate(seat_world, cx, cy, lat_bar_m, y_win_m, z_lo_m, z_hi_
     return True, "captured"
 
 
+def _clip_capture_cache(solver):
+    """Build-once cache of each authorized route clip's static geom set + Y half-window (design sec 2-6b).
+
+    The worldbody clip BOXes and their world positions are immutable after the scene is built (the MuJoCo geom
+    table and the body-0 static ``geom_xpos``), so resolving each authorized clip's geom ids and Y window ONCE and
+    reusing the frozen set is equivalent to re-scanning on every call -- but keeps ``mj_forward`` off the per-frame
+    (d-a) trigger path. The result is memoized on the solver. A per-call ``len(g) in {5, 6}`` assert on the frozen
+    set (done by the consumers, not here) preserves the :class:`BrokenSelector` scene<->task tripwire, because a
+    runtime count change is not representable once the model is built (design sec 2-6b-ii).
+
+    Raising here is the shared misconfig locus mirrored by both :func:`clip_capture_check` and
+    :func:`authorize_clip_pin`: a solver with no CPU model while the pin is armed is a fail-loud ``RuntimeError``,
+    never a silent no-fire (design sec 2-6-iii).
+
+    Args:
+        solver: the env's ``SolverMuJoCo`` (CPU backend; exposes ``mj_model`` / ``mj_data``).
+
+    Returns:
+        A tuple of ``(cx, cy, geom_ids, y_win_m)`` per :data:`route_env_config.ROUTE_CLIP_CENTERS`.
+    """
+    import mujoco
+
+    cache = getattr(solver, "_route_clip_capture_cache", None)
+    if cache is not None:
+        return cache
+    mjm = getattr(solver, "mj_model", None)
+    mjd = getattr(solver, "mj_data", None)
+    if mjm is None or mjd is None:
+        raise RuntimeError(
+            "clip_capture cache: solver exposes no mj_model/mj_data -- the clip-only pin cannot be authorized."
+        )
+    mujoco.mj_forward(mjm, mjd)  # hoisted from clip_geoms_at (design sec 2-6b-iii); clip geoms are static post-build
+    built = []
+    for cx, cy in rc.ROUTE_CLIP_CENTERS:
+        g = tuple(clip_geoms_at(mjm, mjd, cx, cy))
+        y_win_m = max((float(mjm.geom_size[gi][1]) for gi in g), default=0.0)
+        built.append((float(cx), float(cy), g, y_win_m))
+    solver._route_clip_capture_cache = tuple(built)
+    return solver._route_clip_capture_cache
+
+
+def clip_capture_check(solver, seat_world):
+    """Non-raising capture test shared by the (d-a) trigger and :func:`authorize_clip_pin` (containment-by-identity).
+
+    Returns ``True`` iff ``seat_world`` lies inside SOME authorized route clip's built-model capture volume, using
+    the SAME frozen clip cache (:func:`_clip_capture_cache`) + SAME :func:`clip_capture_predicate` + SAME
+    ``route_env_config`` bars that :func:`authorize_clip_pin` consumes. So, given ONE snapshot, a fire-True from the
+    trigger and an accept from the authorizer are the same function on the same inputs (design sec 8.10.2). This is
+    the PER-FRAME path: it runs NO ``mj_forward`` -- the cable position is passed in from Newton, the clips are
+    cached static.
+
+    Non-raising by contract: an out-of-volume seat is a quiet ``False`` (the trigger resets its dwell), NOT an
+    exception. The ONLY raises are :class:`BrokenSelector` (a cached clip count not in ``{5, 6}``) and the misconfig
+    ``RuntimeError`` from :func:`_clip_capture_cache` (no CPU model while the pin is armed) -- the same fail-loud
+    locus the authorizer uses.
+
+    Args:
+        solver: the env's ``SolverMuJoCo`` (CPU backend).
+        seat_world: candidate anchor ``(x, y, z)`` [m], shape (3,).
+
+    Returns:
+        ``True`` if captured by some authorized clip, else ``False``.
+    """
+    sw = np.asarray(seat_world, dtype=np.float64).reshape(3)
+    for cx, cy, g, y_win_m in _clip_capture_cache(solver):
+        if len(g) not in (5, 6):
+            raise BrokenSelector((cx, cy), len(g))
+        ok, _ = clip_capture_predicate(sw, cx, cy, rc.SEAT_LAT_BAR_M, y_win_m, rc.SEAT_Z_LO_M, rc.SEAT_Z_HI_M)
+        if ok:
+            return True
+    return False
+
+
 def authorize_clip_pin(solver, seat_body, seat_world, match_tol_m=5e-3):
     """The SINGLE authorized entry to a clip-retention pin: clip-only by MECHANISM (design §15.1; RS71 §0 #5).
 
@@ -928,6 +1001,12 @@ def authorize_clip_pin(solver, seat_body, seat_world, match_tol_m=5e-3):
     "eq write is the only one"). Every rejection RAISES -- a guard that fails silently cannot be told from one
     that cannot fire (design §12).
 
+    The authorized clip set and its Y windows come from :func:`_clip_capture_cache` -- the SAME frozen cache and
+    :func:`clip_capture_predicate` that :func:`clip_capture_check` (the (d-a) per-frame trigger) reads, so a trigger
+    fire-True and an authorizer accept, given one snapshot, are the same decision (containment-by-identity, design
+    sec 2-6b / sec 8.10.2). A solver with no CPU model raises inside the cache (fail-loud, sec 2-6-iii). The eq
+    resolution's own ``mj_forward`` lives in :func:`activate_c1_pin`.
+
     Args:
         solver: the env's ``SolverMuJoCo`` (CPU backend; exposes ``mj_model`` / ``mj_data``).
         seat_body: the runtime seat body index, in the ENV's Newton body space.
@@ -937,22 +1016,11 @@ def authorize_clip_pin(solver, seat_body, seat_world, match_tol_m=5e-3):
     Returns:
         The activation witness dict from :func:`activate_c1_pin`.
     """
-    import mujoco
-
-    mjm = getattr(solver, "mj_model", None)
-    mjd = getattr(solver, "mj_data", None)
-    if mjm is None or mjd is None:
-        raise RuntimeError(
-            "authorize_clip_pin: solver exposes no mj_model/mj_data -- the clip-only pin cannot be authorized."
-        )
-    mujoco.mj_forward(mjm, mjd)
     sw = np.asarray(seat_world, dtype=np.float64).reshape(3)
     reasons = []
-    for cx, cy in rc.ROUTE_CLIP_CENTERS:
-        g = clip_geoms_at(mjm, mjd, cx, cy)
+    for cx, cy, g, y_win_m in _clip_capture_cache(solver):  # SAME cache clip_capture_check reads (identity)
         if len(g) not in (5, 6):
             raise BrokenSelector((cx, cy), len(g))
-        y_win_m = max((float(mjm.geom_size[gi][1]) for gi in g), default=0.0)
         ok, why = clip_capture_predicate(sw, cx, cy, rc.SEAT_LAT_BAR_M, y_win_m, rc.SEAT_Z_LO_M, rc.SEAT_Z_HI_M)
         if ok:
             return activate_c1_pin(solver, seat_body, seat_world, match_tol_m=match_tol_m)

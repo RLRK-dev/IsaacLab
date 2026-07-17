@@ -339,8 +339,48 @@ def main():
         "episodes_published": len(list(run_root.glob("proc_*/ep_*.npz"))),
     }
     (run_root / "run_summary.json").write_text(json.dumps(summary, indent=1))
+    (run_root / "pin_fire_summary.json").write_text(json.dumps(_pin_fire_summary(run_root), indent=1))  # (d-a) sec 2-D
     print(f"[supervisor] summary: {json.dumps(summary)}", flush=True)
     return 2 if halted else 0
+
+
+def _pin_fire_summary(run_root):
+    """(d-a) sec 2-D aggregation: scan every published manifest and summarize the pin fields.
+
+    ``windows_total`` counts every published window; ``windows_with_done`` counts those that closed on env done
+    (only a done window can carry a real pin record -- a budget-cut window is sentinel by contract, sec 2-D). Fire
+    rate is over done windows. Reporting both makes the in-flight / budget-cut fraction visible (no silent cap). A
+    manifest without its ``.npz`` is in-flight garbage and is skipped (the collector's atomic-publish contract).
+    """
+    windows_total = windows_with_done = fired = mismatch_total = 0
+    fire_steps = []
+    # rglob (not proc_*/): finds episode manifests whether they sit one level down under the supervisor's
+    # per-slot proc_{i}/ dirs OR flat in a single collector outbox (the L-H protocol runs collectors flat).
+    for mpath in sorted(run_root.rglob("ep_*.manifest.json")):
+        if not mpath.with_name(mpath.name[: -len(".manifest.json")] + ".npz").exists():
+            continue  # manifest without its npz = in-flight; the atomic rename is the only publication point
+        try:
+            m = json.loads(mpath.read_text())
+        except (json.JSONDecodeError, OSError):
+            continue
+        windows_total += 1
+        if m.get("truncated_by") == "env_done":
+            windows_with_done += 1
+        if int(m.get("pin_fire_step", -1)) >= 0:
+            fired += 1
+            fire_steps.append(int(m["pin_fire_step"]))
+        if int(m.get("pin_mismatch_class", 0)) > 0:
+            mismatch_total += 1
+    return {
+        "windows_total": windows_total,
+        "windows_with_done": windows_with_done,
+        "fired": fired,
+        "fire_rate_over_done": (fired / windows_with_done) if windows_with_done else 0.0,
+        "fire_step_min": min(fire_steps) if fire_steps else -1,
+        "fire_step_max": max(fire_steps) if fire_steps else -1,
+        "fire_step_mean": (sum(fire_steps) / len(fire_steps)) if fire_steps else -1.0,
+        "mismatch_total": mismatch_total,
+    }
 
 
 if __name__ == "__main__":

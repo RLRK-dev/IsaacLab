@@ -177,6 +177,15 @@ SEAT_LAT_BAR_M = _GROOVE_WALL_INNER_M - task_config.CABLE_RADIUS  # 0.0035 (3.5m
 SEAT_Z_LO_M = ROUTE_GROOVE_Z - 2.0 * task_config.CABLE_RADIUS  # 0.821: floor_top - R; below this = cable under the clip
 SEAT_Z_HI_M = SEAT_Z_LO_M + _GROOVE_WALL_HEIGHT_M  # 0.836: wall_top - R; above this = cable over the rim
 
+# (d-a) live-geometric pin trigger (charter sec 8.10.1 / sec 8.11.2; prereg PIN_D_TRIGGER v0.6). The FF-branch pin
+# fires when the identity cable body DWELLS in a route clip's capture volume AT DEPTH for K consecutive physics
+# frames, replacing the (a)(b) recorded-onset replay. Route-invariant, frozen.
+PIN_TRIGGER_DWELL_K = 3  # consecutive physics frames of (capture AND depth) required before the pin fires
+# Fire only when the seat has descended to z <= groove datum + CABLE_RADIUS/2. A rim-height catch (~835.7mm) leaves
+# only ~0.3mm to the retention ceiling (SEAT_Z_HI_M 836mm) and the eq elastic-restores out of the groove (charter
+# sec 8.11.2 REVISE); this depth gate keeps >=5mm retention margin. Existing constants only -- no new literal.
+Z_FIRE_DEPTH_M = ROUTE_GROOVE_Z + task_config.CABLE_RADIUS / 2.0  # 0.829 + 0.002 = 0.831
+
 # =====================================================================================================
 # Route-executor interface contract v1 (build plan sec 6 + sec 12 CC5-2; PINNED)
 # =====================================================================================================
@@ -277,6 +286,8 @@ _ROUTE_OWNED_PARAM_NAMES = {
     "SEAT_LAT_BAR_M",
     "SEAT_Z_LO_M",
     "SEAT_Z_HI_M",
+    "PIN_TRIGGER_DWELL_K",
+    "Z_FIRE_DEPTH_M",
     "HOLD_THRESH_MM",
     "HOLD_RESUME_MM",
     "HOLD_RESUME_K",

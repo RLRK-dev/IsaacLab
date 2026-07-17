@@ -467,6 +467,10 @@ class NewtonRouteEnv(VecEnv):
         assert isinstance(_rc1p, bool), f"cfg['route_c1_pin'] must be a bool, got {type(_rc1p).__name__}"
         self._route_c1_pin = bool(_rc1p)
         self._c1_pin_witness = None  # persisted proof the pin fired -- a run that cannot show this proves nothing
+        # (d-a) live-geometric trigger state (charter sec 8.10.1 / sec 8.2 / sec 2-D; prereg PIN_D_TRIGGER v0.6).
+        self._c1_pin_dwell = 0  # consecutive (capture AND depth) physics frames; reset on a gap and on clear
+        self._pin_mismatch_total = 0  # sec 8.2 bypass/divergence count -- LOUD only, NEVER wired to reward/term
+        self._last_pin_record = self._sentinel_pin_record()  # sec 2-D per-episode snapshot; set before each clear
         # W1-B1 (Stage-A sec 4.1): route_t_clock gates the route-clock DIVERGENCE machinery only (B2 HOLD
         # freeze / B3 fork init). False (default) = route_t mirrors episode_length_buf exactly (increment/
         # reset at the same sites) -> flag-OFF behavior byte-preserved. B1 ships no divergence mechanism,
@@ -1815,38 +1819,45 @@ class NewtonRouteEnv(VecEnv):
             )
 
     def _maybe_activate_c1_pin(self, route_steps, sub_i):
-        """(d2) Fire the C1 clip-retention pin at the RECORDING's own onset frame. No-op unless route_c1_pin.
+        """(d-a) Fire the C1 clip-retention pin when the identity cable body DWELLS in a route clip's capture
+        volume AT DEPTH for K consecutive physics frames -- a LIVE geometric trigger. No-op unless route_c1_pin.
 
-        The onset and the seat both come from the recording -- no trigger rule is invented here, because an
-        invented rule is a confound: the whole question is whether the producer's own pin, driven the producer's
-        own way, changes the outcome. The recording's ``pin_active`` gives the frame (B3a leg 6 measured the
-        recorder/solver lag as 0), and the seat is resolved in the ENV's own body space by WORLD POSITION, never
-        by transplanting the producer's body index -- that is the B3-alpha mistake.
+        This REPLACES the (a)(b) recorded-onset replay (charter sec 8.4-1 condition substitution; prereg
+        PIN_D_TRIGGER v0.6). The (a)(b) form fired at the recording's own ``pin_active`` onset, which asks whether
+        the producer's pin -- driven the producer's way -- changes the outcome. This form asks the (d) question:
+        can a LIVE geometric rule (one a policy could later drive) fire the same authorized pin. It fires only when
+        BOTH (i) the identity seat body is inside some authorized clip's capture volume (``clip_capture_check``, the
+        SAME predicate + cache the authorizer uses -- containment-by-identity, sec 8.10.2) AND (ii) that body has
+        descended to ``z <= Z_FIRE_DEPTH_M`` (sec 8.11.2: a rim-height fire elastic-restores out of the groove),
+        for K consecutive physics frames (``PIN_TRIGGER_DWELL_K``; a single gap resets the dwell).
 
-        Unlike its 07-12 ancestor, this latches ONLY on success and fires through the clip-only authorizer
-        :func:`route_executor.authorize_clip_pin`, which RAISES (``BrokenSelector`` / ``NotInAnyRouteClip``)
-        unless the seat is inside an authorized route clip's capture volume -- the pin may weld ONLY at a clip
-        seat (RS71 §0 INVARIANT #5, clip-only RL-env scope, Rs 2026-07-15). Every failure raises, because a pin
-        that silently never fired produced a run that was then scored as "the pin does not work" -- and the
-        artifact could not tell the two apart.
+        The identity seat is recording-derived (``_pin_seat_seg``; sec 8.1 (B)) and its world position is read ONCE
+        per frame -- that single snapshot is passed to BOTH the capture check and the authorizer, so a fire-True is
+        an authorizer-accept by construction (sec 2-6a same-snapshot). The pin welds through the clip-only
+        authorizer :func:`route_executor.authorize_clip_pin`, which permits an eq ONLY at an authorized clip seat
+        (RS71 §0 INVARIANT #5, Rs 2026-07-15). ``clip_capture_check`` is non-raising (an out-of-volume seat quietly
+        resets the dwell); only a broken selector or a missing CPU model raises (fail-loud, sec 2-6 / sec 8.10.4).
         """
-        if not self._route_c1_pin or self._c1_pin_witness is not None or self._pin_onset_frame is None:
-            return
-        step_f = self._route_rec_step_f
-        t = min(max(int(route_steps[0]), 0), len(step_f) - 1)
-        if int(step_f[t]) + int(sub_i) < int(self._pin_onset_frame):
-            return
+        if not self._route_c1_pin or self._c1_pin_witness is not None or self._pin_seat_seg is None:
+            return  # identity None (a non-pin recording) = fail-closed, no evaluation (sec 2-7)
         import route_executor as rex  # lazy, mirroring _build_route_executor's idiom (path set there)
 
+        step_f = self._route_rec_step_f
+        t = min(max(int(route_steps[0]), 0), len(step_f) - 1)
         bq = self._state_0.body_q.numpy()
-        cable = np.asarray(self._cable_bodies[0], dtype=int)
-        seat_body = int(cable[int(self._pin_seat_seg)])  # the recording's seat, in THIS env's body numbering
-        # clip-only pin: authorize_clip_pin wraps the single eq writer, raising unless seat_world is inside an
-        # authorized route clip's capture volume (RS71 §0 INVARIANT #5, design §15.1). Same args/return as the
-        # bare writer -- only a gate is added in front of it.
-        self._c1_pin_witness = rex.authorize_clip_pin(self._solver, seat_body, bq[seat_body, :3])
-        self._c1_pin_witness["onset_frame"] = int(self._pin_onset_frame)
+        seat_body = int(self._cable_bodies[0][int(self._pin_seat_seg)])  # identity body only (sec 2-3)
+        seat_world = bq[seat_body, :3].copy()  # single snapshot (sec 2-6a): check AND authorizer read THIS value
+        captured = rex.clip_capture_check(self._solver, seat_world)
+        if not (captured and float(seat_world[2]) <= rc.Z_FIRE_DEPTH_M):  # fire = capture AND depth (sec 8.11.2)
+            self._c1_pin_dwell = 0  # strict consecutive: any gap (capture OR depth False) resets the dwell
+            return
+        self._c1_pin_dwell += 1
+        if self._c1_pin_dwell < rc.PIN_TRIGGER_DWELL_K:  # K = 3 physics frames (sec 8.10.1)
+            return
+        self._c1_pin_witness = rex.authorize_clip_pin(self._solver, seat_body, seat_world)  # same snapshot
         self._c1_pin_witness["fired_at_frame"] = int(step_f[t]) + int(sub_i)
+        self._c1_pin_witness["fire_step"] = int(self.episode_length_buf[0].item())  # episode-relative (sec 2-D)
+        self._c1_pin_witness["dwell_count"] = int(self._c1_pin_dwell)
 
     def _clear_c1_pin(self, env_ids):
         """Clear every fired clip pin and the episode witness on a world-0 reset ((a)(b) lifecycle).
@@ -1875,11 +1886,93 @@ class NewtonRouteEnv(VecEnv):
             return  # no CPU eq table -> no pin can exist (mirrors the done-path guard)
         mjd = self._solver.mj_data
         fired = rex.audit_pin_anchors(mjm, mjd)  # raises on count/anchor violation BEFORE any clear
+        # (d-a) sec 8.2: classify the witness<->fired mismatch (bypass / divergence / concurrent) and snapshot the
+        # per-episode record BEFORE the clear destroys the weld. LOUD + counted; NEVER wired to reward/term/invalid.
+        mismatch_class = self._pin_mismatch_class(fired)
+        if mismatch_class != 0:
+            self._pin_mismatch_total += 1
+            w_eq = None if self._c1_pin_witness is None else self._c1_pin_witness.get("eq_id")
+            print(
+                f"[NewtonRouteEnv] (d-a) PIN MISMATCH class {mismatch_class}: fired={list(fired)} "
+                f"witness_eq={w_eq} total={self._pin_mismatch_total} (LOUD; not wired to reward)",
+                flush=True,
+            )
+        self._last_pin_record = self._snapshot_pin_record(fired, mismatch_class)
         for eq_id in fired:
             mjd.eq_active[eq_id] = 0
             if int(mjd.eq_active[eq_id]) != 0:
                 raise RuntimeError(f"clip-pin clear failed: eq_active[{eq_id}] readback != 0")
-        self._c1_pin_witness = None  # (a): the pin may re-fire next episode at the recording onset
+        self._c1_pin_witness = None  # (a): the pin may re-fire next episode
+        self._c1_pin_dwell = 0  # (d-a): re-arm the dwell counter for the next episode
+
+    def _sentinel_pin_record(self):
+        """The (d-a) sec 2-D per-episode pin record for a window with NO reset (budget cutoff) -- the "no reset"
+        sentinel: ``pin_mismatch_class`` / ``pin_audit_verdict_at_reset`` are -1 and the fire fields are -1 / NaN.
+        The identity ordinal is still reported when the episode was armed (a per-episode constant), else -1. The
+        collector writes THIS for an in-flight (budget-cut) window whose pin state is deliberately not closed
+        (window<->episode 1:1, the record travels with done); a done window overwrites it via
+        :meth:`_snapshot_pin_record`.
+        """
+        seat_seg = getattr(self, "_pin_seat_seg", None)
+        return {
+            "pin_fire_step": -1,
+            "pin_fire_frame": -1,
+            "pin_eq_id": -1,
+            "pin_seat_seg": -1 if seat_seg is None else int(seat_seg),
+            "pin_anchor_xyz": (float("nan"), float("nan"), float("nan")),
+            "pin_dwell_count_at_fire": -1,
+            "pin_mismatch_class": -1,
+            "pin_audit_verdict_at_reset": -1,
+        }
+
+    def _snapshot_pin_record(self, fired, mismatch_class):
+        """The (d-a) sec 2-D per-episode pin record captured at reset, BEFORE the clear destroys the weld evidence.
+
+        A done window carries this: real values when the pin fired this episode, and the "no fire" sentinel (fire
+        fields -1 / NaN) when it did not. ``pin_audit_verdict_at_reset`` is 1 when a fired pin eq was audited and 0
+        when the audit passed with none -- distinguishing a done-no-fire window (0) from a budget-cut window (-1).
+
+        Args:
+            fired: the audited fired-eq tuple from :func:`route_executor.audit_pin_anchors`.
+            mismatch_class: the sec 8.2 witness<->fired class (0 none / 1 bypass / 2 divergence / 3 concurrent).
+        """
+        w = self._c1_pin_witness
+        seat_seg = getattr(self, "_pin_seat_seg", None)
+        anchor = w["seat_world"] if w is not None else None
+        return {
+            "pin_fire_step": int(w["fire_step"]) if w is not None else -1,
+            "pin_fire_frame": int(w["fired_at_frame"]) if w is not None else -1,
+            "pin_eq_id": int(w["eq_id"]) if w is not None else -1,
+            "pin_seat_seg": -1 if seat_seg is None else int(seat_seg),
+            "pin_anchor_xyz": (
+                (float(anchor[0]), float(anchor[1]), float(anchor[2]))
+                if anchor is not None
+                else (float("nan"), float("nan"), float("nan"))
+            ),
+            "pin_dwell_count_at_fire": int(w["dwell_count"]) if w is not None else -1,
+            "pin_mismatch_class": int(mismatch_class),
+            "pin_audit_verdict_at_reset": 1 if len(fired) > 0 else 0,
+        }
+
+    def _pin_mismatch_class(self, fired):
+        """Classify the witness<->fired mismatch at reset (sec 8.2). 0 = none (agreement, or both empty).
+
+        * 1 (bypass): an eq fired but no authorizer witness recorded it (``fired`` non-empty, witness None) -- an
+          ``eq_active`` flipped outside :func:`route_executor.authorize_clip_pin`.
+        * 2 (divergence): a witness exists but its eq is NOT among the fired set (the weld vanished or moved).
+        * 3 (concurrent): the witness eq IS fired but more than one pin fired (a bypass ran alongside the pin).
+
+        LOUD only -- the caller prints and counts; nothing here is wired to reward, termination, or invalid.
+
+        Args:
+            fired: the audited fired-eq tuple from :func:`route_executor.audit_pin_anchors`.
+        """
+        w = self._c1_pin_witness
+        if w is None:
+            return 1 if len(fired) > 0 else 0
+        if int(w["eq_id"]) not in fired:
+            return 2
+        return 3 if len(fired) > 1 else 0
 
     def _pull_route(self):
         """Query the route interface for all worlds (per-step ABSOLUTE base target + phase + grip + dual

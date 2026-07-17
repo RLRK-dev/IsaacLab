@@ -25,6 +25,7 @@ for _path in (str(_ENVS_DIR), str(_THREAD_DIR)):
         sys.path.insert(0, _path)
 
 import newton_route_env as nre  # noqa: E402
+import route_env_config as rc  # noqa: E402
 import route_executor as rex  # noqa: E402
 
 
@@ -247,10 +248,21 @@ def _env_for_clear(world_count: int = 1):
     """
     env = object.__new__(nre.NewtonRouteEnv)
     env._world_count = world_count
-    env._c1_pin_witness = {"eq_id": 3}
+    # (d-a): a full witness (the trigger populates fire_step/fired_at_frame/dwell_count/seat_world) plus the
+    # mismatch counter the extended clear reads; the clear also snapshots _last_pin_record before the weld is
+    # destroyed. eq_id 3 vs the tests' fired sets makes these clears show a (harmless) class 2/3 mismatch.
+    env._c1_pin_witness = {
+        "eq_id": 3,
+        "fire_step": 246,
+        "fired_at_frame": 2468,
+        "dwell_count": 3,
+        "seat_world": [0.35, 0.15, 0.83064],
+    }
     env._pin_seat_seg = 27
     env._pin_onset_frame = 2544
     env._route_rec_step_f = "identity-sentinel"
+    env._pin_mismatch_total = 0
+    env._c1_pin_dwell = 3
 
     class _Stub:
         pass
@@ -414,6 +426,312 @@ def test_prepare_recording_absent_pin_fields_pass_through() -> None:
     )
 
 
+# --- (d-a) live-geometric trigger unit legs (prereg PIN_D_TRIGGER v0.6 sec 5 / sec 5a) --------------------------
+
+
+class _FakeSolver:
+    """A plain solver stand-in that accepts attribute assignment (for a seeded ``_route_clip_capture_cache``)."""
+
+
+class _FakeBodyQ:
+    def __init__(self, arr: np.ndarray):
+        self._arr = arr
+
+    def numpy(self) -> np.ndarray:
+        return self._arr
+
+
+class _FakeState0:
+    def __init__(self, arr: np.ndarray):
+        self.body_q = _FakeBodyQ(arr)
+
+
+def _env_for_trigger(seat_seg: int = 27, seat_xyz=(0.35, 0.15, 0.8306)):
+    """Stub env exercising the REAL ``_maybe_activate_c1_pin`` with monkeypatched capture/authorizer.
+
+    ``rex.clip_capture_check`` / ``rex.authorize_clip_pin`` are replaced per test; this fixture only wires the env
+    state the method reads: the flag, the witness latch, the identity ordinal, the dwell counter, the body_q
+    snapshot source, and the episode clock. Returns ``(env, bq, seat_body)`` so a test can poison the source.
+    """
+    env = object.__new__(nre.NewtonRouteEnv)
+    env._route_c1_pin = True
+    env._c1_pin_witness = None
+    env._pin_seat_seg = seat_seg
+    env._c1_pin_dwell = 0
+    env._route_rec_step_f = np.arange(4000, dtype=np.int64)  # step_f[t] == t (fired_at_frame bookkeeping only)
+    env._cable_bodies = [np.arange(10, 50, dtype=int)]  # 40 cable body ids; the seat body carries the target world
+    seat_body = int(env._cable_bodies[0][seat_seg])
+    bq = np.zeros((64, 7), dtype=np.float64)
+    bq[seat_body, :3] = seat_xyz
+    env._state_0 = _FakeState0(bq)
+    env._solver = _FakeSolver()
+    env.episode_length_buf = np.array([246], dtype=np.int64)  # episode-relative fire_step source
+    return env, bq, seat_body
+
+
+def test_pin_da_capture_check_exists_and_shares_cache() -> None:
+    """L-C(d): clip_capture_check exists and consumes the SAME memoized clip cache the authorizer reads (identity)."""
+    assert hasattr(rex, "clip_capture_check"), "the (d-a) trigger's capture helper must exist"
+    solver = _FakeSolver()
+    solver._route_clip_capture_cache = ((0.35, 0.15, (1, 2, 3, 4, 5), 0.015), (0.40, 0.0, (6, 7, 8, 9, 10), 0.015))
+    assert rex.clip_capture_check(solver, (0.35, 0.15, 0.829)) is True, "in-volume C1 seat is captured"
+    assert rex.clip_capture_check(solver, (0.9, 0.9, 0.829)) is False, "a far point is not captured"
+    assert rex._clip_capture_cache(solver) is solver._route_clip_capture_cache, "the cache is memoized (identity)"
+
+
+def test_pin_da_dwell_reset_on_gap() -> None:
+    """L-C(d)(i): K-1 True frames then a False frame resets the dwell; firing needs K FRESH consecutive frames."""
+    env, _bq, _sb = _env_for_trigger()
+    seq = iter([True] * (rc.PIN_TRIGGER_DWELL_K - 1) + [False] + [True] * rc.PIN_TRIGGER_DWELL_K)
+    fired = {"n": 0}
+
+    def _auth(solver, sb, sw):
+        fired["n"] += 1
+        return {"eq_id": 4, "seat_world": [float(x) for x in sw]}
+
+    real_check, real_auth = rex.clip_capture_check, rex.authorize_clip_pin
+    rex.clip_capture_check = lambda solver, sw: next(seq)
+    rex.authorize_clip_pin = _auth
+    try:
+        for _f in range(rc.PIN_TRIGGER_DWELL_K - 1):
+            env._maybe_activate_c1_pin([0], _f)
+        assert env._c1_pin_dwell == rc.PIN_TRIGGER_DWELL_K - 1 and env._c1_pin_witness is None
+        env._maybe_activate_c1_pin([0], 100)  # the gap frame
+        assert env._c1_pin_dwell == 0, "a single gap must reset the dwell counter"
+        for _f in range(rc.PIN_TRIGGER_DWELL_K):
+            env._maybe_activate_c1_pin([0], 200 + _f)
+        assert fired["n"] == 1 and env._c1_pin_witness is not None, "fires only after re-accumulating K"
+    finally:
+        rex.clip_capture_check, rex.authorize_clip_pin = real_check, real_auth
+
+
+def test_pin_da_fire_once_at_k_consecutive() -> None:
+    """L-C(d)(ii): K consecutive (capture AND depth) frames fire exactly once; the witness latch blocks re-fire."""
+    env, _bq, _sb = _env_for_trigger()
+    fired = {"n": 0}
+
+    def _auth(solver, sb, sw):
+        fired["n"] += 1
+        return {"eq_id": 4, "seat_world": [float(x) for x in sw]}
+
+    real_check, real_auth = rex.clip_capture_check, rex.authorize_clip_pin
+    rex.clip_capture_check = lambda solver, sw: True
+    rex.authorize_clip_pin = _auth
+    try:
+        for _f in range(rc.PIN_TRIGGER_DWELL_K - 1):
+            env._maybe_activate_c1_pin([0], _f)
+            assert env._c1_pin_witness is None, "must not fire before K consecutive frames"
+        env._maybe_activate_c1_pin([0], rc.PIN_TRIGGER_DWELL_K - 1)  # the K-th frame
+        assert env._c1_pin_witness is not None and fired["n"] == 1, "fire exactly at K"
+        assert env._c1_pin_witness["fire_step"] == 246, "fire_step is episode-relative (episode_length_buf)"
+        assert env._c1_pin_witness["dwell_count"] == rc.PIN_TRIGGER_DWELL_K
+        env._maybe_activate_c1_pin([0], rc.PIN_TRIGGER_DWELL_K)  # a further frame
+        assert fired["n"] == 1, "fire-once: the witness latch blocks a second authorize"
+    finally:
+        rex.clip_capture_check, rex.authorize_clip_pin = real_check, real_auth
+
+
+def test_pin_da_depth_leg_gates_fire() -> None:
+    """L-C(d)(vii): captured but ABOVE Z_FIRE_DEPTH_M never fires; dropping to the bar makes it accumulate + fire."""
+    env, bq, seat_body = _env_for_trigger(seat_xyz=(0.35, 0.15, rc.Z_FIRE_DEPTH_M + 0.004))  # rim height
+    real_check, real_auth = rex.clip_capture_check, rex.authorize_clip_pin
+    rex.clip_capture_check = lambda solver, sw: True
+    rex.authorize_clip_pin = lambda solver, sb, sw: {"eq_id": 4, "seat_world": [float(x) for x in sw]}
+    try:
+        for _f in range(rc.PIN_TRIGGER_DWELL_K + 2):
+            env._maybe_activate_c1_pin([0], _f)
+        assert env._c1_pin_witness is None and env._c1_pin_dwell == 0, "above the depth bar the pin must not fire"
+        bq[seat_body, 2] = rc.Z_FIRE_DEPTH_M  # drop to the bar
+        for _f in range(rc.PIN_TRIGGER_DWELL_K):
+            env._maybe_activate_c1_pin([0], 100 + _f)
+        assert env._c1_pin_witness is not None, "at/below the depth bar (with capture) it fires"
+    finally:
+        rex.clip_capture_check, rex.authorize_clip_pin = real_check, real_auth
+
+
+def test_pin_da_identity_none_no_eval() -> None:
+    """L-C(d)(iv): _pin_seat_seg None short-circuits before any capture evaluation (fail-closed, no fire)."""
+    env, _bq, _sb = _env_for_trigger()
+    env._pin_seat_seg = None
+    seen = {"check": 0}
+
+    def _check(solver, sw):
+        seen["check"] += 1
+        return True
+
+    real_check = rex.clip_capture_check
+    rex.clip_capture_check = _check
+    try:
+        for _f in range(rc.PIN_TRIGGER_DWELL_K + 1):
+            env._maybe_activate_c1_pin([0], _f)
+        assert seen["check"] == 0 and env._c1_pin_witness is None, "identity None must not even evaluate capture"
+    finally:
+        rex.clip_capture_check = real_check
+
+
+def test_pin_da_fire_target_is_identity_body() -> None:
+    """L-C(d)(v): the body handed to the authorizer is EXACTLY the identity seat body (cable_bodies[0][seg])."""
+    seg = 27
+    env, _bq, seat_body = _env_for_trigger(seat_seg=seg)
+    got = {}
+
+    def _auth(solver, sb, sw):
+        got["seat_body"] = sb
+        return {"eq_id": 4, "seat_world": [float(x) for x in sw]}
+
+    real_check, real_auth = rex.clip_capture_check, rex.authorize_clip_pin
+    rex.clip_capture_check = lambda solver, sw: True
+    rex.authorize_clip_pin = _auth
+    try:
+        for _f in range(rc.PIN_TRIGGER_DWELL_K):
+            env._maybe_activate_c1_pin([0], _f)
+        assert got["seat_body"] == seat_body == int(env._cable_bodies[0][seg]), "fire target must be the identity body"
+    finally:
+        rex.clip_capture_check, rex.authorize_clip_pin = real_check, real_auth
+
+
+def test_pin_da_same_snapshot_poison() -> None:
+    """L-C(d)(vi): the authorizer receives the K-reaching snapshot, not a re-read (same-snapshot, sec 2-6a).
+
+    The check double POISONS the body_q source on the K-reaching frame, AFTER the trigger has copied the seat. A
+    re-reading trigger would then hand the authorizer the poisoned value; this impl copies once and passes that
+    copy to both, so the authorizer must see the PRE-poison position (a value-only assert could not fail).
+    """
+    orig_xyz = (0.35, 0.15, 0.8306)
+    env, bq, seat_body = _env_for_trigger(seat_xyz=orig_xyz)
+    state = {"n": 0}
+    got = {}
+
+    def _check(solver, sw):
+        state["n"] += 1
+        if state["n"] == rc.PIN_TRIGGER_DWELL_K:  # poison AFTER this frame's snapshot was taken
+            bq[seat_body, :3] = (9.9, 9.9, 9.9)
+        return True
+
+    def _auth(solver, sb, sw):
+        got["sw"] = np.asarray(sw, dtype=np.float64).copy()
+        return {"eq_id": 4, "seat_world": [float(x) for x in sw]}
+
+    real_check, real_auth = rex.clip_capture_check, rex.authorize_clip_pin
+    rex.clip_capture_check, rex.authorize_clip_pin = _check, _auth
+    try:
+        for _f in range(rc.PIN_TRIGGER_DWELL_K):
+            env._maybe_activate_c1_pin([0], _f)
+        assert "sw" in got and np.allclose(got["sw"], orig_xyz), (
+            "authorizer must receive the pre-poison K-reaching snapshot (a re-read would deliver 9.9)"
+        )
+    finally:
+        rex.clip_capture_check, rex.authorize_clip_pin = real_check, real_auth
+
+
+def test_pin_da_check_quiet_outside_volume() -> None:
+    """L-C2: capture False every frame -> no raise, no fire, dwell pinned at 0 (quiet return, not an exception)."""
+    env, _bq, _sb = _env_for_trigger()
+    real_check = rex.clip_capture_check
+    rex.clip_capture_check = lambda solver, sw: False
+    try:
+        for _f in range(20):
+            env._maybe_activate_c1_pin([0], _f)  # must not raise
+        assert env._c1_pin_witness is None and env._c1_pin_dwell == 0
+    finally:
+        rex.clip_capture_check = real_check
+
+
+def test_pin_da_broken_selector_raises_in_check() -> None:
+    """L-C2: a cached clip whose count is outside {5,6} makes clip_capture_check raise BrokenSelector (sec 2-6b-ii)."""
+    solver = _FakeSolver()
+    solver._route_clip_capture_cache = ((0.35, 0.15, (1, 2, 3), 0.015), (0.40, 0.0, (6, 7, 8, 9, 10), 0.015))
+    try:
+        rex.clip_capture_check(solver, (0.35, 0.15, 0.829))
+        raise AssertionError("a broken cached clip count must raise BrokenSelector")
+    except rex.BrokenSelector as e:
+        assert "has 3" in str(e), "the tripwire must name the wrong count"
+
+
+def test_pin_da_mjm_none_flag_on_raises() -> None:
+    """L-C2 (sec 2-6-iii): clip_capture_check on a solver with no CPU model raises RuntimeError (fail-loud)."""
+
+    class _NoModel:
+        mj_model = None
+        mj_data = None
+
+    try:
+        rex.clip_capture_check(_NoModel(), (0.35, 0.15, 0.829))
+        raise AssertionError("a solver with no mj_model must raise (never a silent no-fire)")
+    except RuntimeError as e:
+        assert "no mj_model" in str(e)
+
+
+def test_pin_da_mismatch_class_fixtures() -> None:
+    """L-I: witness<->fired classes 1 (bypass), 2 (divergence), 3 (concurrent) are detected; agreement = 0."""
+    env = _env_for_clear()
+    env._c1_pin_witness = None
+    assert env._pin_mismatch_class((5,)) == 1, "eq fired, no witness = class 1 bypass"
+    assert env._pin_mismatch_class(()) == 0, "nothing fired, no witness = agreement"
+    env._c1_pin_witness = {"eq_id": 3}
+    assert env._pin_mismatch_class((5, 6)) == 2, "witness eq not in fired = class 2 divergence"
+    assert env._pin_mismatch_class(()) == 2, "witness present, weld vanished = class 2"
+    assert env._pin_mismatch_class((3, 6)) == 3, "witness eq fired + a second pin = class 3 concurrent"
+    assert env._pin_mismatch_class((3,)) == 0, "witness eq is the only fired pin = agreement"
+
+
+def test_pin_da_n1n7_semantics_unchanged() -> None:
+    """Invariance (baseline AND landed): clip_capture_predicate keeps its P1/P2 accept + N1-N4 reject legs.
+
+    The (d-a) refactor extracts a shared cache but does NOT touch clip_capture_predicate, so these legs are
+    invariant by construction. Full N5-N7 mechanism invariance is re-verified by re-running the controls script
+    (L-C2, needs a built scene); this pins the pure-predicate core both the trigger and the authorizer consume.
+    """
+    c1x, c1y = rc.ROUTE_C1_XY
+    lat, ylo, yhi, yw = rc.SEAT_LAT_BAR_M, rc.SEAT_Z_LO_M, rc.SEAT_Z_HI_M, 0.015
+    cases = [
+        ((c1x, c1y, 0.82968), True),  # P1 golden seat
+        ((c1x, c1y, 0.830), True),  # P2 arch float
+        ((c1x, c1y, 0.8809), False),  # N1 aerial 880.9mm
+        ((c1x, c1y, 0.816), False),  # N2 under the clip
+        ((c1x + 0.004, c1y, 0.829), False),  # N3 lateral 4mm > 3.5mm
+        ((c1x, c1y + 0.020, 0.829), False),  # N4 domain 20mm > 15mm
+    ]
+    for seat, expect in cases:
+        ok, _ = rex.clip_capture_predicate(seat, c1x, c1y, lat, yw, ylo, yhi)
+        assert ok is expect, f"predicate leg changed for {seat}: got {ok}, want {expect}"
+
+
+def test_pin_da_reasons_payload_content() -> None:
+    """Invariance (baseline AND landed): NotInAnyRouteClip carries the per-clip failing-leg reasons (CC6-7).
+
+    A type / accept-reject-only check would let a reasons-payload regression through; both versions build this
+    exception with the per-clip reason list, so this pins the payload content directly.
+    """
+    exc = rex.NotInAnyRouteClip(
+        (0.30, 0.05, 0.81),
+        rc.ROUTE_CLIP_CENTERS,
+        ["(0.35, 0.15):lateral |dx|=50.00>3.50mm", "(0.4, 0.0):domain"],
+    )
+    msg = str(exc)
+    assert "lateral |dx|=50" in msg and "domain" in msg, "per-clip reasons must appear in the message"
+    assert "INVARIANT #5" in msg, "the clip-only authorization must be named"
+
+
+def test_pin_da_audit_independent_rescan() -> None:
+    """Invariance: audit_pin_anchors stays a solver-cache-INDEPENDENT live rescan (sec 2-6b).
+
+    The audit takes ``(mjm, mjd)`` -- not the solver -- so it CANNOT read the solver clip cache; it rescans via
+    clip_geoms_at on every reset. That independence is the design value (a who-wrote-it-agnostic witness that does
+    not trust the fire path's cache). On baseline the cache does not exist (trivially holds); on landed this pins
+    that the audit was not 'helpfully' switched onto the cache.
+    """
+    import inspect
+
+    params = list(inspect.signature(rex.audit_pin_anchors).parameters)
+    assert params == ["mjm", "mjd"], f"audit must take (mjm, mjd), not the solver/cache: got {params}"
+    src = inspect.getsource(rex.audit_pin_anchors)
+    assert "_route_clip_capture_cache" not in src and "clip_capture_check" not in src, (
+        "the audit must not consume the fire-path cache/check -- it rescans live (independence, sec 2-6b)"
+    )
+    assert "clip_geoms_at" in src, "the audit must rescan clip geoms live"
+
+
 def main() -> None:
     test_fm4_c1_uses_pin_identity()
     test_fm4_c2_requires_monotone_connection()
@@ -432,11 +750,27 @@ def main() -> None:
     test_prepare_recording_partial_pin_witness_raises()
     test_prepare_recording_pin_frame_mismatch_raises()
     test_prepare_recording_absent_pin_fields_pass_through()
+    test_pin_da_capture_check_exists_and_shares_cache()
+    test_pin_da_dwell_reset_on_gap()
+    test_pin_da_fire_once_at_k_consecutive()
+    test_pin_da_depth_leg_gates_fire()
+    test_pin_da_identity_none_no_eval()
+    test_pin_da_fire_target_is_identity_body()
+    test_pin_da_same_snapshot_poison()
+    test_pin_da_check_quiet_outside_volume()
+    test_pin_da_broken_selector_raises_in_check()
+    test_pin_da_mjm_none_flag_on_raises()
+    test_pin_da_mismatch_class_fixtures()
+    test_pin_da_n1n7_semantics_unchanged()
+    test_pin_da_reasons_payload_content()
+    test_pin_da_audit_independent_rescan()
     print(
         "ALL PASS: FM4 C1/C2 identity + FM3 no-crossing + recording pin-field preservation "
         "+ I3 same-instrument escape (fail-open/false-escape closed) + I4 routed-side (feed-drape/"
         "tail-return rejected) + sentinel>bar + obs-only crossing_x_dev + (a)(b) clear lifecycle "
-        "(model-state authority / guards / readback) + pin-witness raise branches"
+        "(model-state authority / guards / readback) + pin-witness raise branches + (d-a) live-geometric "
+        "trigger (dwell/depth/fire-once/identity/target/same-snapshot/quiet/broken-selector/mjm-none/"
+        "mismatch classes) + N1-N7 predicate + reasons payload + audit cache-independence"
     )
 
 
