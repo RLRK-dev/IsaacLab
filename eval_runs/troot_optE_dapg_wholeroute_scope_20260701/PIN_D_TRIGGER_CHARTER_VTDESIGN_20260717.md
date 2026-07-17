@@ -336,7 +336,7 @@ coupling（Artifact 2 DAG）= RATIFY（§4-4 honest、§9.7.0）。**⭐ gate②
 - `clip_capture_check`（`:981`）と `authorize_clip_pin`（`:1024`）は**両方** `clip_capture_predicate(sw, cx, cy, rc.SEAT_LAT_BAR_M, y_win_m, rc.SEAT_Z_LO_M, rc.SEAT_Z_HI_M)` を呼ぶ = **同一 3.5mm lateral bar + [821,836] z band**（同一 predicate = containment-by-identity、docstring `:1004-1006`）。
 - `match_tol_m=5e-3`（`:987` default / `:1014` docstring 逐語「the eq world-position match gate … forwarded to activate_c1_pin」）= **eq world-position resolution であって capture 幅でない**。
 - ⇒ §9.7.0「fire capture ~5mm > retention 3.5mm = 3.5-5mm loose-weld margin」は**誤り**（match_tol を capture 幅と誤読 = `:914` を semantic 未検証で cite した #11 と同 class の自認）。**loose-weld band 不在・L-DB-I 不能**。
-- **正しい非-crutch 保証**: (1) success は幾何を独立に読む（§4-4 `:1629`）(2) **fire strictness ≥ retention** — fire = lateral ≤3.5mm ∧ z∈[821,831]（depth 追加）⊆ retention = lateral ≤3.5mm ∧ z∈[821,836]。pin は retention より緩い seat で発火できない ⇒ false c1_retained を機構的に捏造不能（元 margin 論より**強い**）。
+- **正しい非-crutch 保証**〔⚠(2) は §9.7.10 で撤回 = pN v0.3 B1: fire/retention は別 surface（body vs 補間 crossing）ゆえ「fire⊆retention」未成立。非-crutch は (1) 単独で構造成立〕: (1) success は幾何を独立に読む（§4-4 `:1629`）〔**これが構造保証、(2) 不要**〕 (2) ~~fire strictness ≥ retention — fire lateral ≤3.5mm ∧ z⊆retention~~ **← §9.7.10 撤回（surface-conflation）**。
 - **leg 置換**: L-DB-I（不能）→ **L-DB-I′「fire ⊆ retention」** = 任意 fire で dx≤3.5 ∧ z∈[821,831]（c1_retained 述語を満たす）を assert = fire-strictness-≥-retention の falsifiable leg。
 - **unit 訂正**: `_SEAT_MISS_DX_M=9.0`（`env:1301`）= **9.0 m sentinel**（全 dx は m）。「9.0mm」= 単位誤り → 9.0 m。escape guard は exact-sentinel 等値（`:1457`）ゆえ論理不変。
 
@@ -347,6 +347,27 @@ coupling（Artifact 2 DAG）= RATIFY（§4-4 honest、§9.7.0）。**⭐ gate②
 - (b) **N framing 訂正**: fork-B = **4 process × world_count=1**（wc=4 env でない）。pin は world-0 body_q（wc=1）を読む ⇒ perf leg = **wc=1 single-process の pin OFF vs ON** を測る・4-process contention は 4× 独立 wc=1。L-DB-K「N=1/N=4 worlds」→「wc=1 / 4-proc×wc=1」訂正（%12 v0.3 fold）。
 
 ⇒ **R3 訂正 CONFIRM（§9.7.0 forward-only fix + L-DB-I′）/ R1 §9.7.8 governing + 残余明記 / R4 ratio 0.8 freeze + N 訂正 = 全 CONFIRM〔p5 設計軸〕**。⛔ [CHANGE] STOP・training-ready 未解除 不変。0-commit — bank = %12（R2/R5+doc 訂正 + L-DB-K/L-DB-I′ を v0.3 fold）。
+
+### §9.7.10 🔒 pN v0.3 readback B1〔CRITICAL〕= §9.7.9「fire ⊆ retention」surface-conflation 訂正 + (a)/(b) 裁定（v1.12、2026-07-18 03:2x — pN v0.3 readback via %12 + p5 on-disk 再検証。B2-B7 は %12 v0.4 fold）
+
+**pN B1 = 正・CONFIRM（forward-only §9.7.9 訂正）**: §9.7.9 の「fire strictness ≥ retention（fire ⊆ retention）」は **異なる measurement surface を同一視**ゆえ未成立:
+- **FIRE surface = identity BODY 点**: `seat_world = bq[seat_body,:3]`（`:1848-1849`、`seat_body = cable_bodies[0][pin_seat_seg]` = identity node）→ `clip_capture_check` + depth on `seat_world[2]`（`:1850-1851`）。
+- **RETENTION surface = 補間 crossing**: `c1_retained = _seated_in_groove(dx_cross, z_cross)`（`:1625/:1629`）、`_seat_metrics(cable_pos,_C1_XY)` → `_seat_crossing`（`:1304-1317` = y=C1Y での polyline 補間、reward `:1623`）。**⭐ 決定的**: `_seat_crossing` の docstring（`:1307-1310`）は gate② fix が「nearest-in-Y **NODE**」（~7.5mm node-quantization leak）から **意図的に補間 crossing へ移した**と明記 ⇒ body-fire（node）と crossing-retention（補間）は **設計上別 surface**で、差は最大 ~7.5mm class（3.5mm bar より大）。
+- ⇒ 同一 3.5mm/z **定数**でも **入力幾何が別**。containment-by-identity（§8.10.2）は check↔authorizer（両方 body を読む）にしか効かず **body-fire ⇒ crossing-retention の構造保証でない**。⚠自認: §9.7.9 で match_tol 誤読を直した際、surface 差を verify せず「同 predicate＝同 measurement」と二重に誤った（本 arc 3 度目の非-crutch 論訂正）。
+
+**⭐ 非-crutch は argument (1) 単独で構造成立（(2) fire⊆retention は不要かつ誤り、撤回）**: **success（c1_retained）は crossing 幾何を pin 状態と独立に読む（§4-4 `:1629`、cable_pos = body 位置のみ・pin/eq/witness state を読まない `:1610/:1623`）**。pin は body を weld するが c1_retained は実際の crossing を測る ⇒ in-groove crossing は faithful な幾何 seat（clip が groove 内で保持）/ not-in-groove → c1_retained False → **G6 捏造なし**。⇒ **body→crossing 関係に依らず pin は false success を機構的に作れない**。
+
+**fire ⇒ crossing-retention（deadlock-removal RELIABILITY に関与、非-crutch でない）= (a) 採択・empirical**:
+- §9.7.0 deadlock「weld → dx_c1≤3.5mm → escape 回避」は精密には **weld が body を保持 → crossing が seated に留まる = 物理/経験的帰結**（escape guard も crossing dx_c1 を読む `:1650-1652`）で definitional でない。**⭐ これは (d-b) の core 主張（deadlock 除去）の load-bearing 検証点**: weld した body が crossing を ≤3.5mm に保てなければ c1_retained は False のまま → G6 到達せず → **(d-b) が deadlock を除去できない**。ゆえ empirical leg は「あれば良い」でなく **(d-b) 成否の crux**。
+- **裁定 = (a)**: **same-snapshot で body-fire surface と `_seat_metrics` crossing surface を両方記録し fire ⇒ `_seated_in_groove(dx_cross,z_cross)` を hard-assert** + L-DB-A で route 全体の retention-continuity（crossing ≤3.5mm 維持 + G6 latch）。**⚠ single nominal pass = structural proof でない**と [RESULT] 明記 — per-cell empirical（nominal + §12-5 cell-2）。nominal では identity seg は recording seat = y=C1Y crossing に近く fire≈crossing-seated だが経験則で validate。
+- **(b) 却下（fallback 保留）**: fire gate を crossing surface に結合（fire に `_seated_in_groove(crossing)` 追加）は structural fire⇒retention を与えるが (i) landed (d-a) fire predicate〔§8.1 identity-body + §8.10.2 same-snapshot containment、two-key closed〕を **reopen**（FF path も影響）(ii) identity-body 設計（§8.1 (B)）に non-identity 補間 crossing を混入。⇒ **(a) primary、(b) は (a) が real gap（fire 時 crossing not-seated）を示した時の escalation**。
+- **leg 更新**: §9.7.9 L-DB-I′ → **L-DB-I″「fire ⇒ `_seated_in_groove(dx_cross,z_cross)` same-snapshot empirical」**（(a)、nominal+cell-2、非 structural、[RESULT] 明記）。
+
+**B7 records-precision（z 区間、CONFIRM）**: fire/retention z-window は `SEAT_Z_LO_M < z` **strict**（`:1400` `SEAT_Z_LO_M < z_cross < SEAT_Z_HI_M`）⇒ fire z = **(821, 831]**（下限 strict・depth 上限 `≤831` closed `:1851`）であって [821,831] でない。retention z = (821, 836) 両端 strict。§9.7.9/材料の閉区間表記訂正（%12 v0.4）。
+
+**⚠ §9.7.9 R1 no-circularity 論拠の re-ground（fire≥retention 撤回に伴う）**: §9.7.9 R1 は「training-ready は live-policy leg を待たない ∵ fire≥retention で早期 fire も genuine」と論じたが fire≥retention は撤回。**正しい re-ground**: 循環解消は (i) K MECHANISM の prelaunch validation（L-DB-G、§9.7.8）+ (ii) **非-crutch の structural 成立（argument (1) §4-4）** による — non-crutch は live-policy leg に依存しない。live-policy leg = deadlock-removal **RELIABILITY** の post-launch monitor（policy rollout で crossing が seated に留まり G6 到達するか）であって non-crutch gate でない ⇒ training-ready unlock は non-crutch（structural）+ K mechanism（prelaunch）で足り循環なし。
+
+⇒ **B1 = §9.7.9 fire⊆retention 撤回・非-crutch は argument (1) §4-4 単独で構造成立・fire⇒crossing-retention は (a) empirical（L-DB-I″、per-cell、非 structural、(d-b) crux）・(b) fallback・B7 z 訂正 = 全 CONFIRM〔p5 設計軸〕**。⛔ [CHANGE] STOP・training-ready 未解除 不変。0-commit — bank = %12（B2-B7 + L-DB-I″ + 材料 z 訂正を v0.4 fold）。
 
 ## §7 cites（本 charter の接地、全て p5 自読 2026-07-17）
 
