@@ -525,3 +525,22 @@ z-scope 明文化（escape = lateral+crossing-loss のみ、z 逸脱は G6 z-ban
 | format commit `b0981630de` | ✅ 意味論中立 | 全 hunk = 行結合/EOF newline/error-string 綴り/局所 rename（`wit`→`witness_d` 完全性を grep 自証: 残 0）— **凍結 hunk 領域 :963-1012/:4414-4517 は不触**。継承 debt の同梱は label 付き開示 — 受理。⚠ %12 pane message の「raise 1 行のみ」は圧縮表現（commit message 側は全面開示・分類済 — artifact が正、cosmetic note のみ） |
 
 **verdict**: 上記により **CONFORM — PASS〔p5 設計鍵〕**。two-key の evidence 軸 = pN。**standing 不変**: reward-valid / training-ready 禁止は (d) 完了 + §12-5 cell-2 追補条件まで存続（§S4.3-2 のまま）。次の p5 レグ = **(d) policy-drive trigger 設計 gate**（witness-vs-fired loud 化・refire 非 raise 化・訓練時 trigger 規則・witness run-level provenance を審査項目に含む）。
+
+---
+
+## §S4.7 🔒 §S4.3-2「(d) two-key」の解釈裁定 — **「(d)」= 設計目標全体 =（d-a）+（d-b）**（2026-07-17 12:5x、trigger = pN pre-bank HOLD B1〔CRITICAL〕+ %12 照会 12:42。branch 事実は p5 自 grep で確認: `_maybe_activate_c1_pin` call site = `:1221` の 1 箇所のみ〔FF branch、`_route_drive_ff` `:496`〕・IK/residual 分岐 `:1226`+ に不在）
+
+### §S4.7.1 裁定
+- **§S4.3-2 / charter §4-5 / §8.12 standing の「(d) two-key PASS」の「(d)」= §21.4 の設計目標全体**（「policy が駆動する run での live 幾何 trigger」）であって、**(d) の label を最初に負った chunk ではない**。分解:
+  - **(d-a)** = trigger 機構（述語・K-dwell・深さ leg・same-snapshot・witness・provenance）の FF-branch 実装 = 現 chunk。
+  - **(d-b)** = 訓練 drive 分岐（residual / ik_chord）への評価配置 + K=3 の policy-dynamics 再検証 + hold 下 label 意味論 = **D-b window gate（prereg §12-6 carry）と同一物**（以後 (d-b) と呼んでよい）。
+- **training-ready 解除条件 = (d-a) two-key PASS ∧ (d-b) two-key PASS ∧ §12-5 cell-2 追補 PASS**。prereg v0.5 の保守側凍結 = **RATIFY**。
+
+### §S4.7.2 根拠
+1. **禁止の intent** = 「訓練に使う構成で pin 意味論が未完・未批准のまま訓練を始めない」。(d-a) 単独 unlock は、**訓練 branch に trigger が構造的に不在**（call site 無し = 評価ゼロ）のまま解除する — 字義は満たし intent を空洞化する読み（「バグの下で緑になる gate」の解釈版）。
+2. **不在の帰結は §S4.5-(iii) により正直採点**（wire 済・不発火 → escape 早期 done — 汚染はしない）が、**訓練は構造死**（release 後 C1 保持不能 → G6 不到達 = 信号死）+ **collector（FF・発火あり）と rollout（residual・発火なし）の意味論乖離**。「保守的だから可」ではなく「gate が防ぐべき当のもの」。
+3. **staging としての (d-a) の価値は不変**: 機構の批准は canonical ground-truth のある FF 基盤で行うのが正 — (d-b) は配置と再検証であって機構の再設計ではない（分割は正しい、unlock だけが全体条件）。
+
+### §S4.7.3 付帯
+- 本裁定は **Rs 明示指示による pinless ablation 等を foreclose しない**（Rs 専権の explicit order ≠ standing default の unlock）。
+- 授権: charter §4-5 と §8.12 standing 行の「(d) two-key」への **(d-a)+(d-b) 明示 pointer 各 1 行** = %12 bank 時追記可。%12 の保守側 prereg 凍結（照会と同時に凍結済み）は正しい既定動作 — concur。

@@ -36,6 +36,7 @@
 3. **identity-persistence coupling**（§21.11.1 + `dfbddb4777` pointer）: episode 内で identity を null 化しない。Q2-(A) 採用時も「発火後〜reset まで永続」は不変（escape guard は identity を読む）。
 4. **成功述語は幾何を読む — pin 状態を読まない**: c1_seated/c1_retained/G6 は `_seat_metrics`（gate② 批准計器）のまま。pin は物理保持のモデルであって採点入力でない（honest instrument、§S4.5.2）。
 5. **training-ready 禁止の解除条件**は §S4.3-2 のまま: **(d) two-key PASS + §12-5 cell-2 追補**。本 charter は解除を約束しない。
+   - ⚠ **「(d)」の解釈 = §S4.7（REWARDDESIGN doc、2026-07-17）**: (d) = **(d-a)**〔FF-branch trigger 機構 = 本 prereg chunk〕+ **(d-b)**〔訓練 drive 分岐への評価配置 = D-b window gate〕 — 解除 = **両 two-key ∧ §12-5 cell-2**。(d-a) 単独では解除しない。pointer 追記 = §S4.7.3 授権により %12。
 6. **(d) probe の cell 制約**: G-F2 fold-7 guard は不触 — 初期 probe は nominal cell、cell 多様性は DoD-7 後追補（§12-5 と同型・no-silent-caps で [RESULT] に記録）。
 7. **INIT_XY_NOISE disposition**（(d) 日送り登録分）: 到達可能性表・DR 感度の素材で処置（trigger 自体は後半 step 事象ゆえ直接影響は限定的 — が、Q2 の identity 源が DR に露出する）。
 
@@ -175,6 +176,7 @@
 **授権 1 件**: §8.10.1 への **訂正 #12 pointer 1 行**（#10/#11 と同 pattern: 「⚠ 本項の凍結値 2429/242/式 first_true+(K−1) は訂正 #12〔§8.11.1〕で supersede — 現行 = §8.11.2/§2-11（2468/246/run_start+K）」）— %12 bank 時に追記可。
 
 **verdict**: **CONFORM — PASS〔p5 設計軸、prereg v0.4〕** — 実装着手可（chain = §8.9: 実装 → probe/legs → /pre-check → two-key〔p5 設計軸 + pN evidence 軸〕）。pN evidence 軸 pre-bank review = 並行（bank = claim deadline は pN 合流後、(a)(b) 前例どおり）。standing 不変: training-ready 禁止 = (d) two-key PASS + §12-5 cell-2 追補まで。
+> ⚠ §S4.7 pointer（%12、授権 = §S4.7.3）: 本行の「(d)」= **(d-a) + (d-b)**（§S4.7.1 — 解除 = 両 two-key ∧ cell-2、(d-a) 単独では解除しない）。
 
 ## §7 cites（本 charter の接地、全て p5 自読 2026-07-17）
 
