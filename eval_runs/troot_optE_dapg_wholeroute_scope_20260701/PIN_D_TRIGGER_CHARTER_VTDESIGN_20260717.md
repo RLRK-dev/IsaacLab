@@ -278,6 +278,47 @@
 - **gate chain**: 本 §9 framing → %12 materials → **p5 §9.x 裁定**（Q 順）→ prereg → 実装（call site 追加 + 条件、explicit-path atomic）→ probe → **/pre-check** → **two-key**（p5 設計軸 + pN evidence 軸）。training-ready = (d-b) two-key ∧ (d-a ✓) ∧ §12-5 cell-2。
 - **framing verdict**: **FRAMED**（gate 構造 + Q 再枠付け + 方向確定、🔒 裁定は materials 後）。0-commit — bank = %12。
 
+## §9.7 🔒 (d-b) 裁定 6 項（materials `0e804ae3db` 受領・p5 独立 on-disk verify 済、v1.9、2026-07-17 21:4x — 入力 = `PIN_DB_WINDOW_GATE_MATERIALS_RSTECHLEAD_20260717.md` 全文 + p5 code 自読 @ HEAD `5b0de67402`）
+
+### §9.7.0 materials-verify 記録（deadlock-removal 主張の on-disk 確認 — 裁定の前提）
+core 主張「現 ik_chord は G4-G6 に hard dead zone・(d-b) pin が除去」を p5 独立 code 検証（全 cite HEAD `5b0de67402`）:
+- **escape guard 実在**: `_c1_escape_after_seat`（`:1443-1457`）= c1_latched（G3 = `_g_latched[w,2]`、`:1652`）∧（dx_c1 == MISS `9.0mm`（`:1301`）∨ dx_c1 > `60mm`（`:412`））→ `c1_escape` → `dropped`（`:1652-1660`）→ `r = TERM_PENALTY -10`（`:1714-1715`）→ terminate（`:1720`）。materials 一致。
+- **G4-G6 到達不能の機構**: c1_retained（G6 leg、`:1629` = c1_seated = `_seated_in_groove(dx,z)` = dx≤3.5mm ∧ 821<z<836、`:1400/:1625`）+ G6 = c1_retained ∧ c2_honest ∧ ¬drop ∧ span_ok を 10 step 持続（`:1704-1711`）。G3 後 C2 route で C1 crossing 喪失（dx→MISS）→ escape → drop → G4 latch 前に -10。materials Artifact 1/3 WITHOUT 行一致。
+- **fidelity boundary 接地**: `RS71 §4:66`（FIDELITY BOUNDARY, Rs DECISION B2 2026-06-25;⚠materials cited `:62` = 行 drift・内容一致）「cable = 1-DOF planar bender・vertical sag のみ・horizontal routing は KINEMATIC（grasp-drag + AUTHORIZED clip-retention pin）・Rs-accepted 限界（defect でない）」⇒ pin 無しの lateral 喪失は sim infidelity（実 clip は保持）で、pin（INVARIANT #5）が authorized retention を復元。`RS71:56`「pin = **Y-slide insurance**」= escape guard の lateral-only trigger（`:1451-1453`「lateral escape ONLY」）と正確に一致。
+- **⭐ honest instrument（reward crutch でない）**: (1) 成功は幾何を読む（c1_retained = `_seat_metrics` dx/z `:1629`・pin 状態を読まない、§4-4）(2) pin = authorized fidelity 復元（INVARIANT #5・新例外なし）(3) policy は依然 C2 route 必須（G4 = r_reach≤tol / G5 = c2_seated `:1687-1688`）(4) fire は G1-G3 seat 誘因に相乗り（別 reward なし・G3 = c1_seated ∧ ph≥2 `:1686` で fire volume 進入）。
+- **⭐ 構造的 safety margin（p5 追加検証）**: fire は authorizer capture volume（match_tol ~5mm `route_executor.py:914`）内で発火するが c1_retained は tighter 3.5mm を要求 ⇒ **3.5-5mm の緩い weld は G6 を捏造しない**（benign timeout・false success なし）。post-fire escape-inertness は faithful（clipped cable は escape しない = clip の定義）。
+- 定数 10 項（SEAT_LAT 3.5 / Z 821·836 / Z_FIRE 831 / K 3 / MISS 9.0 / DROP 60 / G bonus 5 / G6 200 / TERM -10 / K_ROUTE 10）= materials と on-disk 一致（rc:174-185/104-107、env:412/1301）。
+⇒ **deadlock-removal = CONFIRM（faithful・reward crutch でない）**。
+
+### §9.7.1 🔒 Q-Db1+Q-Db2 = pre-step 配置 + single-clock off-by-one 転写 = **RATIFY**
+pin call を ik_chord pre-step（`joint_q.assign :1273` / grip `:1278` の後・`_physics_step_all :1281` の前）に置く。根拠: joint_q.assign は body_q を進めない（物理 step のみ更新）⇒ pre-step 読取 =「前 frame body_q」= FF `:1225`（≺ `:1226`）同一意味論 ⇒ §8.13 `run_start+K` off-by-one が再導出なしで転写（single-clock invariant）。post-step 配置は新 off-by-one を要し disfavored。**実装 probe leg（条件）**: pin の `body_q.numpy()` 読取が sync 後であること（reward site は `:1595` `wp.synchronize()`・FF は loop step sync 依存・`.numpy()` は当該 array を sync — pre-step 配置の sync 状態を probe 確認）。(d-a) hard bar [242,250] は非転写（§9.7.6）。
+
+### §9.7.2 🔒 Q-Db3 = route_steps 無条件 hoist（label 供給）= **RATIFY**
+route_steps を ik_chord loop 頭で無条件 hoist（FF `:1210` 同型・`route_t` にのみ依存）。根拠: fire 判定は route_steps 非依存（純 body_q 幾何 `:1849-1856`、%12 独立 verify 一致）・route_steps は `fired_at_frame` label（`:1846/:1858`）のみ ⇒ label 供給問題。hoist で全 sub-mode に label 定義。**carry**: 訓練 active mode = ik_chord × grasp_actuation（materials (ii) inference: whole-route policy は grip 要）— trainer cfg `grasp_actuation` を trainer-time 確認（deferred）。grasp_actuation 偽 sub-mode で pin arm 可否は幾何到達性で決定（seat 未到達 = fail-closed 不発）。
+
+### §9.7.3 🔒 Q-Db4 = K=3 config + empirical DoD deferred = **RATIFY**（spurious-fire = load-bearing）
+K=3（`rc.PIN_TRIGGER_DWELL_K`）を design-time 定数 RATIFY。**design-time safety（今）**: fire = capture ∧ depth(≤831) ∧ K=3 は genuine depth-seat（rim-fire は §8.11.2 除外）+ same-snapshot containment（fire ⇒ authorizer-accept、§8.10.2）+ §9.7.0 の 3.5-5mm margin。K=3 physics frame は sub-RL-step（1 RL step 内の PHYSICS_STEPS_PER_RL frame の一部）ゆえ seated RL step で満たされる（policy が RL step 跨ぎ dwell を「選ぶ」必要なし）。**⭐ spurious-fire = load-bearing リスク**: K が非 settling transit で発火 → weld が bad seat lock → escape 永久不発 → false c1_retained（Q-Db6 gate② corruption と連結・K の仕事 = spurious fire を殺す）。**empirical DoD（deferred、trainer 要）RATIFY**: policy rollout で fire-vs-first-true-seat lag ≤ small bound ∧ 同一 RL step 内に volume を出る transit で不発火 — 違反なら K↑。worst-case transit bound = capture-volume extent ÷ max cable speed（α-6D residual 15mm/step `:401` + capture geom）= options 入力（裁定でない）。(d-a) DR-ON M1 / cell-2 DoD-7 と同 deferred pattern（trainer = fork-B V0）。
+
+### §9.7.4 🔒 Q-Db5 = hold-era label = provenance-only 非 gate = **RATIFY**
+`fired_at_frame = step_f[t] + sub_i`（`:1858`）の held-world 下の値 = provenance-only・drift-loud・非 gate（§8.13）。hold 中は route clock 凍結（`route_t` clamp、FF `:1213` hm / grip `:1279`）ゆえ step_f[t] も凍結 = label は「hold 進入時 frame」を指す。behavioral clock = fire_step（episode-relative `episode_length_buf :1859`）。**実装 leg**: ik_chord + hold_mask の 1-episode trace で label の held-中意味を宣言（(d-a) は hold 不使用ゆえ新規）。
+
+### §9.7.5 🔒 Q-Db6 = pin→seat→reward coupling RATIFY + gate② **三層** reconcile
+coupling（Artifact 2 DAG）= RATIFY（§4-4 honest、§9.7.0）。**⭐ gate② status reconcile（materials :151-154 flag に応答・§運用10 — assume でなく surface。status は三層で分離）**:
+- **(層1) seat-predicate INSTRUMENT**（`_seat_metrics :1402`/`_seat_crossing :1304`、§S2/§S3）= **RATIFIED**（banked §S2 `4589563ab4`/§S3 `d807d077b8`）。**pin retention はこの ratified instrument に coupling** ⇒ 設計軸 sound。
+- **(層2) §S run-hygiene**（swept 意味論の committed-HEAD/単一 episode/premise-set 条件付き批准）= **RELEASED**（§S4 GRANT `a366622159` + LEDGER flip `2602ebfc11`）。
+- **(層3) training-ratification（gate② 完全 closure）** = **BLOCKED/pending**（/pre-check `6ec126b1bb` BLOCK、I1/I2 carry + ISSUE2）。**⭐ 完了条件 = 再走 PASS + (a)(b) 実装 + 「(d) containment 設計」(I1/I2 帰結)**（p5 §S4 記録）⇒ **(d)/(d-b) containment 設計は gate② closure の COMPONENT・gate② に block されない**（materials「FAIL が (d-b) を止めるか」懸念の解消: (d-b) は critical path 上）。PLAN-KEEPER SSOT + scoping §4 の「gate②=FAIL」= 本層3。
+⇒ **(d-b) 設計は進行可**（層1 に coupling・層3 の component）。**(d-b) landing は層3 decision-of-record（landing 時点）に bind**（⚠ LEDGER 行番号 drift — custodian 確認）。materials dependency 表（:145-149）精緻化: instrument ratified（層1）/ run-hygiene released（層2）/ training-ratification pending（層3、(d) が寄与）。
+
+### §9.7.6 🔒 (d-b) acceptance = 幾何述語 + fire≺release + deadlock-removal legs（[242,250] 非転写）= **RATIFY**
+(d-a) fire_step hard bar [242,250] は FF-replay recording-onset 窓ゆえ **(d-b) 非転写**（policy-drive は onset 窓なし）。(d-b) acceptance:
+- **正**: (i) fire が genuine seat（capture∧depth∧K）で発火 (ii) fire≺release (iii) deadlock-removal = ik_chord drive で C1 seat 後 escape 不発火（WITH-pin）+ G4-G6 到達可能。
+- **負**: (i) WITHOUT-pin escape deadlock 再現（Artifact 3 WITHOUT 行）(ii) spurious fire が G6 捏造せず（3.5-5mm 緩 weld → false success なし）(iii) fire-once (iv) bypass-audit 継承（L-C3-5 型）。
+- **宣言 delta**: reward-dynamics delta（pin fire → retention → c1_escape=False）= 宣言済 coupling（hidden reward term でない）。
+- **deferred（trainer）**: empirical K + policy fire-rate（§9.7.3）。**probe（実装時）**: trainer 不在ゆえ ik_chord を deterministic action で駆動し WITH/WITHOUT-pin contrast を再現（full policy dynamics は deferred）。
+
+### §9.7.7 verdict + carry
+**verdict = 6 項 RATIFY〔p5 設計軸〕**（materials `0e804ae3db` = design-axis CONFORM; deadlock-removal = on-disk CONFIRM・faithful・reward crutch でない）。次 = prereg（pN 条件パターン）→ 実装（ik_chord pre-step call site + route_steps hoist、explicit-path atomic）→ probe（WITH/WITHOUT contrast + fire≺release + same-snapshot 毒殺）→ /pre-check → **two-key**（p5 設計軸 + pN evidence 軸）。**carry**: (C1) empirical K DoD = deferred（trainer/fork-B V0）/ (C2) gate② 層3 training-ratification = landing bind / (C3) V0 substrate 構造変化なら hard-wire 前に flag / (C4) M2（DAPG loader additive-key consumer assert）= (d-b) 訓練時代。**⛔ training-ready 未解除**（(d-a) ∧ (d-b) two-key ∧ §12-5 cell-2、§S4.7 — 本 6 項 RATIFY だが (d-b) two-key evidence 軸 + /pre-check + cell-2 が残）。0-commit — bank = %12。
+
 ## §7 cites（本 charter の接地、全て p5 自読 2026-07-17）
 
 | 項 | cite |
@@ -291,3 +332,4 @@
 | standing | `REWARDDESIGN_...VTDESIGN_20260715.md` §S4.3-2 / §S4.5 / §S4.6（training-ready 解除条件・(iii) 状態・付帯）|
 | carry 引受け | `PIN_AB_SCOPE_PREREG_RSTECHLEAD_20260717.md` §12-2（witness provenance）/ §12-4（B4）/ §12-5（cell-2）|
 | (d-b) code reality（§9.1） | `newton_route_env.py:496`（drive 既定 ik_chord）/ `:1215-1226`（FF pin call `:1225` pre-step ≺ `:1226` step）/ `:1252-1281`（ik_chord physics `:1281` loop 末・pin call 無し・route_steps `:1251` grasp 時のみ）/ `:1841-1860`（helper drive-agnostic・route_steps=label のみ・fire=幾何 `:1850-1856`）/ `:1304`（`_seat_crossing` gate②）|
+| (d-b) deadlock-removal verify（§9.7.0） | `newton_route_env.py:1443-1457`（`_c1_escape_after_seat`: c1_latched ∧ dx==9.0 ∨ >60mm）/ `:1652-1660`（`c1_escape`→`dropped`）/ `:1714-1715`（drop→-10）/ `:1629`（`c1_retained`=c1_seated=幾何）/ `:1704-1711`（G6 = c1_retained∧c2_honest∧¬drop∧span_ok×10）/ `:1687-1688`（G4/G5 = policy route）/ `RS71-System-Spec-SSOT.md:66`（§4 FIDELITY BOUNDARY: planar bender・horizontal routing kinematic w/ pin）/ `:56`（pin = Y-slide insurance）/ 定数 rc:174-185·104-107, env:412·1301 |

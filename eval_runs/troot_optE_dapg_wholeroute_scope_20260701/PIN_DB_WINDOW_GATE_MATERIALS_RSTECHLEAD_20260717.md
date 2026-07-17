@@ -36,8 +36,10 @@ G4-G6 reachable at all"** — because the post-G3 escape guard drops the episode
 | G5 | p5 = c2_seated (`:1688`) | after G4, C1 still held | **NO** (same escape deadlock) | yes | **YES (without pin)** |
 | G6 | c2_honest ∧ **c1_retained** ∧ ¬dropped ∧ span_ok, sustained 10 RL steps (`:1704-1711`) | after G5 | **NO** — c1_retained = c1_seated at C1 (`:1629`); lost once the cable routes to C2 ⇒ g6_live never sustains | yes — pin holds C1 ⇒ c1_retained stays True through the C2 route | **YES (without pin)** |
 
-**Reading:** the CURRENT ik_chord (policy) path has a **hard dead zone at G4-G6** — this is the RS71 §4:62
-fidelity boundary (pin-less C1 is not held) expressed as a reward-reachability failure. **(d-b) removes the
+**Reading:** the CURRENT ik_chord (policy) path has a **hard dead zone at G4-G6** — this is the RS71 §4
+**FIDELITY BOUNDARY** (Rs DECISION B2, 2026-06-25: cable = 1-DOF planar bender, routing is kinematic ⇒ a
+pin-less RL env cannot represent the task; cited by section+decision, not line — the RS71 line index drifts)
+expressed as a reward-reachability failure. **(d-b) removes the
 dead zone**; it does not create one. The pin gradient path is not a new reward term — it re-opens the
 existing G4/G5/G6 gradient that the escape guard otherwise closes.
 
