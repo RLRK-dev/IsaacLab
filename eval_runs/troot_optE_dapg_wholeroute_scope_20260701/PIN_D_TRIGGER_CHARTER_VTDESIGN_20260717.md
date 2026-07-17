@@ -178,6 +178,26 @@
 **verdict**: **CONFORM — PASS〔p5 設計軸、prereg v0.4〕** — 実装着手可（chain = §8.9: 実装 → probe/legs → /pre-check → two-key〔p5 設計軸 + pN evidence 軸〕）。pN evidence 軸 pre-bank review = 並行（bank = claim deadline は pN 合流後、(a)(b) 前例どおり）。standing 不変: training-ready 禁止 = (d) two-key PASS + §12-5 cell-2 追補まで。
 > ⚠ §S4.7 pointer（%12、授権 = §S4.7.3）: 本行の「(d)」= **(d-a) + (d-b)**（§S4.7.1 — 解除 = 両 two-key ∧ cell-2、(d-a) 単独では解除しない）。
 
+### §8.13 🔒 (d-a) live probe の fire_label 照会への裁定（v1.6、2026-07-17 16:2x — 入力 = `pin_d_trigger_probe_result_cell_x0_y0.json` + recording npz 直読。挙動 bar は全 PASS、唯一 `fire_label_exact=false`〔2462 vs offline 2468〕で `L_D.PASS=false`）
+
+**独立検証（p5 自読・自計測、message narrative 非依拠）:**
+- **recording npz に `step_f` key 不在**（keys 実列挙: frame_idx/…/cable_xyz/cable_quat — route-clock `step_f` は prep で派生、raw index でない）⇒ offline npz-index と live route-clock は**別クロック**（私の offline 2468 = npz array-index、live 2462 = route-clock）。
+- **決定的機構: live は cable を再シム（npz を byte-replay しない）** — npz z @frame **2462 = 831.321mm（深さ bar 831 の【上】）** vs live 発火 anchor **830.71mm（bar の【下】）**。同 frame で live cable が ~0.6mm 低い ⇒ 深さ bar を route-clock で数 substep 早く跨ぐ。offline `run_start=2465`（z=830.919）→ 2468（z=830.508）を p5 再計算で再現。
+- **hard bar は全 PASS**: fire_step **246 ∈ [242,250]** / anchor_z **830.71 ∈ [830.604,830.899]** / dwell=K=3 / eq_id=27（identity 正）/ audit PASS / **G3 latch 242 ≺ fire 246（+4 gap）** / **retention_max_after_fire 831.07mm < rim 836（margin ~4.9mm）** / ep1≡ep2 決定的（L-D2 hard・reward diff 0）/ reset+refire。
+
+**(a) governing = §2-11（drift-loud・standing-anchor）— `fire_label` の exact 化は誤り:**
+- 私の banked 設計意図（§8.11.1/§2-11、§8.12 で verify 済）= **hard timing bar は `fire_step ∈ [242,250]`**（粗・÷10・小 frame 差にロバスト）／ **`fire_label`・`anchor` は drift-loud、初回 live 値を standing anchor 化**。prereg §5 本文も「drift=loud・two-key 判定」で一致。
+- ⇒ probe 実装の **`fire_label_exact` 硬直 bar は §2-11 と §5 本文の双方より厳しく、`L_D.PASS=false` を誤設定**。**挙動は CONFORM**。fire_label を exact に縛る根拠は**存在しない** — offline 2468 は **byte-replay 前提の近似**で、live は再シムゆえ frame-exact 一致は原理的に起こらない（0.07mm anchor 差がその証拠）。
+- **是正**: probe PASS 論理を **fire_label exact → standing-anchor-drift** へ（fail 条件 = `fire_step` が band 逸脱 ∨ anchor が band 逸脱 ∨ latch⊀fire。fire_label 自体は記録・loud のみ）。**bar 緩和ではない** — exact-frame 粒度の bar は元々物理的に不成立で、hard timing 保護（fire_step band + anchor band + 順序 + retention）は不変。
+
+**(b) standing anchor = live 2462（offset-6 は機構帰属済・妥当）:**
+- **YES** — §2-11「初回 live 値を standing anchor 化」どおり `fire_label` standing anchor = **2462**、`anchor_z` = **830.71mm**（band 内）、`fire_step` = 246。以後の drift は 2462 に対して測る（offline 2468 に対してでない）。
+- offset-6 = **固定規約 offset ではない**（step_f が npz に無く、差は live 再シム差が駆動）= **live-physics 量**。offline npz 2468 は **anchor から RETIRE**（byte-replay 近似ゆえ）、live 2462 で supersede — **records-fix**（§2-11「期待 2468」を live standing anchor へ差し替え、%12 が [RESULT] + §2-11/§5 に反映）。
+
+**⭐ 設計判断の vindication（記録）:** 深さ leg REVISE（§8.11.2、rim 発火 ratify を不採用）は **live で確認** — retention_max_after_fire **831.07mm < rim 836**（margin ~4.9mm、私の予測 ≥5.10mm に整合）・保持中の seat_z trace は 830.7 で平坦（weld との fight 微小）。rim 発火を ratify していれば本 leg は retention が rim 際/超で G6-death を示したはず。live data が REVISE を裏書き。
+
+**chain / scope**: 本 §8.13 は **fire_label 照会への設計軸裁定**であって (d-a) 全体の two-key verdict ではない。two-key は **%12 が probe PASS 論理を是正（exact→standing-anchor-drift）+ live standing anchors を [RESULT] 記録・§2-11/§5 records-fix + L-F1/L-F2/L-H/L-H2/L-C(d) 毒殺 leg の結果提示** → その producing commit で p5 設計軸 + pN evidence 軸。**⛔bar 緩和はしていない**（hard timing/anchor/順序/retention は不変、fire_label のみ設計どおり drift 化）。
+
 ## §7 cites（本 charter の接地、全て p5 自読 2026-07-17）
 
 | 項 | cite |
