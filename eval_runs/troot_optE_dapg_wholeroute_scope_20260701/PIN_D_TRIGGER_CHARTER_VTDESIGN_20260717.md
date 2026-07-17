@@ -18,6 +18,7 @@
 2. **pin-before-release**: capture 述語は STEP 7 押込中に True（§21.4 :759、step-table 接地 = §21.7 表の `CANONICAL_MOTION_TABLE_V1.md:49-51/:126-128`）⇒ STEP 8 解放より前に発火。
 3. **発火窓は knife-edge でない**: canonical 実測 seat f2428 ≺ onset f2544（116 frame、§S3.3）+ (a)(b) L-D 実測 fire step 254（flag-ON、`pin_ab_lifecycle_probe_result_cell_x0_y0.json`）。
 4. **reward coupling 宣言**（§21.4 :763-765）: 「いつ・どう latch するか」が recording-onset → live-geometric に変わる = 報酬 dynamics の変化 ⇒ **/reward-design（到達可能性表・因果 DAG・ground-truth 値・episode trace）+ /pre-check が実装前必須**。未通過で %12 実装不可。
+   - ⚠ **/pre-check 配置の supersession（§8.11.3 GRANT、2026-07-17）**: 本 chunk（訓練なし・probe のみ）では chain §6-3/§8.9 の順（実装 → probe → /pre-check → two-key）が本項の字義「実装前」を supersede — intent（未批准 (d) 意味論での訓練禁止）は training-ready 禁止（§S4.3-2 + §12-5）が chunk を跨いで保持。gate② 再走前例に一致。pointer 追記 = §8.11.3 授権により %12。
 
 ## §3 ⭐ 設計 questions（gate が解くべきもの — 番号は %12 収集 4 点を包含）
 
@@ -120,6 +121,30 @@
 
 **§8.10.4 Q-4 = CONFORM**
 - per-step check でも BrokenSelector は raise — 構造異常の quiet-skip は「silently never fired」class の再発（`_maybe_activate_c1_pin` docstring が既に記す教訓の継承 = N7 意味論）。§8.4-6 の raise 3 限定列挙と整合（構造的ゆえ実質初回 1 発）。quiet 対象は capture 述語 False のみ。
+- ⚠ 「§8.4-6」= **訂正 #13**（§8.11.4-(i)、2026-07-17）: dangling cite — §8.4 は項 1-5、raise 3 限定列挙の実体 = **prereg §2-6**。pointer fix = §8.11.4 授権により %12。
+
+### §8.11 🔒 prereg v0.3 §Q（panel 由来 Q-5〜Q-8）への裁定（v1.4、2026-07-17 12:2x — 入力 = prereg v0.3 §Q + §9 panel OUTCOME。cite 2 本〔`route_executor.py:1768`「sample the post-step frame」逐語 / `newton_route_env.py:1221→:1222` pre-step check〕+ 数値 3 点〔z[2429]=835.665 / z[2544]=828.653 / onset-z 分布 827.714-829.715〕を p5 自読・自計測で確認済）
+
+**§8.11.1 Q-6 = ACCEPT = ⚠訂正 #12（off-by-one）+ 凍結値の再固定**
+- 機構: 録画 = **post-step** state（`:1768`）× online check = label f の **physics 前**（`:1221→:1222`）⇒ check(f) が読むのは録画 state f−1。**式 = `fire_label = run_start + K`**（run_start = 録画系で条件が最初に成立した frame）/ **anchor_state = 録画 [fire_label − 1]**。私の §8.10.1（2429 / 242 / `first_true+(K−1)` /「G3 と同 step」）は**録画 sampling 規約を trace しない offline 算術** — 訂正 #12。教訓の一般形: **offline 算術を online 凍結値へ移すときは録画の sampling 規約（post/pre-step）を trace せよ**（verify-at-producing-commit の frame-index 版）。
+- 凍結値は §8.11.2 の REVISE 後の規則に対して再固定（下記 — rim 規則の 2430/243 は経由地であり凍結しない）。
+
+**§8.11.2 Q-7 = REVISE 採択 — fire 条件に深さ leg を追加**（%12 ratify 提案は不採用・**測定 legs 5 本は全 ADOPT**）
+- **新 fire 条件（凍結）**: `clip_capture_predicate(identity body) ∧ z_B ≤ Z_FIRE_DEPTH_M`、**`Z_FIRE_DEPTH_M = ROUTE_GROOVE_Z + CABLE_RADIUS/2 = 0.831`**（既存定数 2 本の式・新 literal ゼロ）。K=3 連続 frame・same-snapshot・fire-once・authorizer 経路 = 全て不変。fire 集合 ⊂ authorizer 受理集合（深さ leg の分だけ真に内側）⇒ §8.10.2 の恒真は強化のまま。
+- **ratify 不採用の根拠（解析で決まる部分 — probe 待ち事項でない）**: K=3 rim 発火の anchor = **835.665mm = retention bar（rim 836）の 0.335mm 内側**（p5 npz 自読確認）。pin eq は anchor への**弾性**拘束で可塑機構が無い ⇒ 押込中に深部へ撓んでも**解放後は anchor（rim 際）へ復帰**し、下で保持する物理が存在しない。C2 drag 張力下の +0.34mm z 変位で `c1_retained` が flicker ⇒ `K_ROUTE_SEAT` sustain がリセットされ続け **G6 が構造的に到達不能**の予測。0.335mm は系の全 margin（lat 3.5 / C2 3.183 / producer retention 7.35mm）より一桁薄い。%12 の「実挙動は empirical ⇒ probe」への回答: **fight の transient は empirical、解放後平衡は拘束の弾性から解析的に決まる** — 予測 FAIL の構成を実装して測りに行かない（fix-first）。
+- **§8.4-2「margin-bar 不採用」との整合（scope 限定を明示）**: あの却下は **lateral 進入 margin の二重 bar**（capture volume の lateral 定義の複製）に対するもの。Z_FIRE_DEPTH は (i) 別軸（深さ）の **fire 時刻条件**で capture の再定義でない（authorizer 不変）(ii) 既存定数の式 (iii) banked §S3.3 premise「**pin = 既成着座の保持装置**」の直接執行 — rim 進入は着座の**形成中**であり保持すべき「既成」でない。%12 が深部案を「衝突」として自制した判断は当時の裁定文言に忠実 — scope を限定するのは定義者の仕事。
+- **81-cell 接地（p5 自計測、§S3.2 side 定数と同法〔構造式 + 実測分布〕）**: fire-able **81/81** / anchor z ∈ **[830.604, 830.899]**（retention margin **≥ 5.10mm**）/ onset−fire ∈ [56, 112]f（早発火維持）/ release−fire **≥ 206f** / bar 以下は release まで**連続 81/81**（re-arm 曖昧性なし）。⚠**素朴 bar 829（=groove_z）は 27/81 で fire 不能** — producer 静止高が 827.714-829.715mm と cell 変動（**固定深さは固定段と同じ罠** — bar は静止高分布の上に置く）。
+- **凍結 anchor（canonical、off-by-one 規約込み）**: run_start **2465** → **fire_label 2468 / fire_step 246 / anchor_state f2467 / anchor z 830.640mm**。hard bar `fire_step ∈ [242,250]` 維持（246 ✓）。
+- **DR carry 登録**: bar headroom = 831 − 829.715 = **1.285mm** — DR が静止高を +1.3mm 超上げると fire 不能（fail-closed no-fire、検出器 = Q3 supervisor fire 率 = loud）⇒ **DR-ON 日に bar 再検**（C2-margin MED carry と同 pattern）。
+- **%12 の測定 legs 5 本 = ADOPT**: expected anchor z 凍結（830.640 / band [830.604, 830.899]、drift loud）/ L-D に pin eq \|efc_force\| max / release・done 時 seat z / retention 述語 fire→done continuity（本 REVISE 下では **PASS 期待** — ratify 下では predicted-FAIL だった）/ §11 shift 宣言。
+- **§11 宣言 delta 更新**: fire 254 → **246**（canonical −8 step）・latch 242 ≺ fire 246（**+4 step の実 gap** — rim 規則の同/翌 step 隣接より分離明瞭）・fire 後の残押込 ≈ **1.8mm**（rim 規則の 7.0mm から縮小 — fight は微小化、efc leg は測る）。
+
+**§8.11.3 Q-5 = GRANT（/pre-check 配置の supersession pointer 授権）**
+- 本 chunk（訓練なし・probe のみ）について、chain §6-3 の順（impl → probe → /pre-check → two-key）が §21.4:763-765 の字義「実装前」を supersede。**intent（未批准 (d) 意味論での訓練禁止）は training-ready 禁止（§S4.3-2 + §12-5）が chunk を跨いで保持**するため不変。gate② 再走の前例（/pre-check は landed code に対して走った）に一致。charter §2-4 への 1 行 pointer 追記を授権。
+
+**§8.11.4 Q-8 = 訂正 #13 + K 根拠文の downgrade 批准**
+- (i) **訂正 #13**: §8.10.4 の「§8.4-6」は dangling（§8.4 は項 1-5 — raise 3 列挙の実体 = prereg §2-6）。bank 時の pointer fix 授権。
+- (ii) **K=3 根拠文の地位 = downgrade を批准**: rim 境界の「数値 wobble」は canonical 実測で不支持（単調 ~0.13mm/f・flicker 0）、深さ境界の bounce も **0/81**（p5 実測: first-deep 後 10f 以内の再浮上ゼロ）⇒ K=3 の地位 = **保険 + policy-era swing-through hook**（遅い通過が dwell し得る誤発火への防波堤 — §12-6 D-b carry に concur）。**値 K=3 は凍結のまま**（downgrade は根拠の地位であって値でない）。
 
 ## §7 cites（本 charter の接地、全て p5 自読 2026-07-17）
 
