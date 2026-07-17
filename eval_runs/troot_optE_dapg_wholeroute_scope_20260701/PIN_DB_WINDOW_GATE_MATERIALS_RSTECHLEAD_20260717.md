@@ -19,15 +19,21 @@ DROP_LATERAL_DEV_MAX_M=**60mm** (`env:412`) · G_PHASE_BONUS=**+5** (`rc:104`) �
 (`rc:105`) · TIME_PENALTY=**-0.01** (`rc:106`) · TERM_PENALTY=**-10** (`rc:107`) · K_ROUTE_SEAT=**10 RL steps**
 (`rc:84`) · CABLE_RADIUS=**4mm** (`task_config:137`).
 
-> **⚠ R3 forward-only correction (2026-07-17, per pN v0.2 + p5 §9.7.9 `082baa1ca6`):** two fixes to this doc.
+> **⚠ R3/B1 forward-only correction (2026-07-18, per pN v0.2/v0.3 + p5 §9.7.9→§9.7.10 `179a8e390a`):**
 > (1) **`_SEAT_MISS_DX_M` = 9.0 m** (a fail-closed MISS *sentinel* checked by exact equality `dx==9.0`, NOT a
 > 9.0mm lateral distance) — the earlier "9.0mm" was a unit error (escape logic unchanged: exact-sentinel).
-> (2) There is **no "fire capture ~5mm > retention 3.5mm" loose-weld margin**: `clip_capture_check`
-> (`route_executor.py:981`) and `authorize_clip_pin` (`:1024`) both use `clip_capture_predicate(…,
-> SEAT_LAT_BAR_M=3.5mm, …)` (identity); `match_tol_m=5e-3` (`:1014`) is the eq world-position resolution, not the
-> capture width. The correct non-crutch argument is **fire strictness ≥ retention** (fire lateral 3.5mm same,
-> fire z `[821,831]` ⊆ retention z `[821,836]`) ⇒ every fire is a genuine seat (stronger than a margin). See
-> prereg §0/§3.1 L-DB-I′.
+> (2) **The non-crutch argument stands on §4-4 ALONE, structurally.** `c1_retained` reads the interpolated
+> crossing from `cable_pos` INDEPENDENT of pin/eq/witness state (`:1629`), so a not-in-groove cable is False and
+> G6 cannot be fabricated — regardless of the fire→retention relation. **The earlier "fire strictness ≥ retention
+> (fire ⊆ retention)" is WITHDRAWN** (§9.7.10): it conflated two DIFFERENT measurement surfaces — FIRE reads the
+> identity BODY point `bq[seat_body,:3]` (`:1848-1849`), RETENTION reads the interpolated y=C1Y CROSSING
+> `_seat_crossing` (`:1304-1317`); the gate②-fix docstring (`:1307-1310`) shows the crossing was intentionally
+> moved off the node (~7.5mm apart), so containment-by-identity covers only check↔authorizer, never
+> body-fire⇒crossing-retention. (3) **fire ⇒ crossing-retention is the deadlock-removal RELIABILITY question**
+> (the (d-b) crux, NOT non-crutch): verified empirically by **prereg L-DB-I″** (same-snapshot record BOTH surfaces
+> + assert `_seated_in_groove(dx_cross,z_cross)`) + L-DB-A retention-continuity, per-cell (single nominal ≠
+> structural proof). (4) z-windows (B7): fire z ∈ **(821,831]** (lower strict `:1400`); retention z ∈
+> **(821,836)** (both strict). The "[821,836]" / "z≤831" shorthands below denote these open/half-open bands.
 
 ---
 
