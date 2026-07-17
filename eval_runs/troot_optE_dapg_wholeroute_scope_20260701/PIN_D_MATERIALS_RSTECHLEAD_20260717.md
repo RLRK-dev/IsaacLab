@@ -1,9 +1,12 @@
 # (d) trigger 設計 gate — 素材 (%12/RS-TECH-LEAD)
 
-**v0.1 — 2026-07-17 09:40 JST**。charter = `PIN_D_TRIGGER_CHARTER_VTDESIGN_20260717.md` v1.0
+**v0.2 — 2026-07-17 10:14 JST** (81-cell capture-window 解析を追補 — §4 の (i)(ii)(iii) 充足 +
+(iv) canonical 分。v0.1 = 09:40)。charter = `PIN_D_TRIGGER_CHARTER_VTDESIGN_20260717.md` v1.0
 (bank `e5ae494cb6`)。本 doc = charter §6-1 の素材側 (materials→ruling、D0 前例)。**設計解を主張しない**
-— 実測と対応表を p5 裁定に供する。§1-§3 = 即納分 (Q2 G-item + 新実測)。§4 = artifacts (i)-(iv) の
-skeleton (順次追補)。
+— 実測と対応表を p5 裁定に供する。解析体 = `pin_d_capture_window_analysis.py` (+ `_result.json`、
+純 offline: 録画 cable_xyz = 報酬計器が読む physics ground truth に対し、`clip_capture_predicate`
+:903-911 意味論を vectorize [正対照 6 点で scalar 一致 assert、境界 ≤/< 込み]、y_win = 0.015 =
+N1-N7 検証済み model 由来 bar)。
 
 ## §1 Q2 番号空間対応表 (charter G-item — 4+1 空間、file:line 付き)
 
@@ -52,13 +55,66 @@ cell geometry の関数 (spread 10 seg ≈ 146mm 幅)。⇒ Q2 の解は (A) fir
 - D-6 の A0-pinless 上程 (Rs 専権、byte-repro 破壊コスト) は本 gate と独立 — (d) は録画再生成を
   要求しない (trigger は consumer 側)。
 
-## §4 /reward-design 4 artifacts の (d) 版 — skeleton (順次追補、揃った Q から p5 裁定)
+## §4 /reward-design 4 artifacts の (d) 版 (v0.2 で (i)(ii)(iii) 充足 + (iv) canonical 分)
 
-- **(i) 到達可能性表**: capture volume への到達 margin — canonical + 81-cell 統計 (§2 分布が母材)、
-  INIT_XY_NOISE / DR 感度。**status: PENDING**
-- **(ii) 因果 DAG**: 述語→発火→identity→latch→reward の因果列、**Q2 順序問題** (identity 供給前は
-  seat=False fail-closed ⇒ (A) 案では G3 latch が発火後に遅延) を明示。**status: PENDING**
-- **(iii) ground-truth 値**: volume bar 群 (lat 3.5mm / z 821-836 / y_win 15mm、built-model 由来
-  再 cite) / fire anchor 254 (recorded) vs ~243 (幾何、§3) / seat 分布 (§2)。**status: 部分 (§2/§3)**
-- **(iv) episode trace**: canonical + 摂動 1 条件、旧 onset 経路との diff 列挙 (発火 step / latch 順 /
-  escape 窓)。**status: PENDING**
+### (i) 到達可能性表 — **DELIVERED** (81-cell 実測、result json `summary` + `per_cell`)
+
+| 量 | 実測 (81 cells) | 意味 |
+|---|---|---|
+| onset − geo_fire(B) | **min 99 / p50 116 / p90 153 / max 156 frame** (= RL step 9.9〜15.6 @10phys) | 幾何 trigger は録画 onset より**全 cell で ~10-16 step 早く**発火可能 — 窓は knife-edge でない (charter §2-3 の canonical 116f が全 cell に一般化)。canonical 実測: geo_fire 2427 (banked seat f2428 と 1 frame 一致) |
+| fire-before-release (B) | **81/81 TRUE** | pin-before-release 不変条件 (charter §2-2) は幾何 trigger 下でも全 cell 成立 |
+| 進入 margin @first-True (canonical) | dx **0.07mm** / dy 6.47mm / z **835.93mm (rim 836 の 0.07mm 内側)** | **first-True は rim 通過の瞬間 = 進入 frame の margin はほぼ 0** (押込は上から降下)。その後 100+ frame 窓が持続 ⇒ 発火規則の設計余地 = 「first-True 即発火 (margin~0)」vs「sustain K frame」vs「margin bar」— **p5 裁定項** (Q1-(i) に接続) |
+| INIT_XY_NOISE / DR 感度 | 分布幅そのもの (§2 の seat 10-seg spread + 窓 99-156f spread) が cell-geometry 感度の実測。INIT_XY_NOISE (±5mm EE) は trigger 窓には後半 step 事象ゆえ間接 (charter §4-7 どおり素材注記のみ) | |
+
+### (ii) 因果 DAG — **DELIVERED** (実測 step 付き、Q2 順序問題の明示)
+
+```
+[physics] cable_xyz ──> capture 述語 (per-step、identity 源 = fork 依存)
+                              │ True (canonical: f2427 ≈ RL 242.7)
+                              ▼
+                    authorize_clip_pin (唯一の書き手、backstop raise)
+                              │ fire
+                              ▼
+              witness latch + eq_active=1 ──> [physical holding] ──> c1_retained → G6
+                              │
+   fork (B): identity = recording 由来 (episode 開始前から供給)
+      ⇒ _seat_metrics は fire と独立に稼働: G3 latch 242 ≺ recorded fire 254 (canonical 実測)
+   fork (A): identity = fired-body 由来 (発火時に確立)
+      ⇒ 発火前は identity 無 = seat 計器 fail-closed ⇒ **G3 latch ≥ fire** — 順序が (B) と逆転。
+      幾何 trigger の fire ≈ 242.7 は G3 latch 242 と実質同時 ⇒ (A) でも latch 遅延は ~0-1 step に
+      収まる (幾何 trigger 併用の場合)。**ただし (A) × recorded-onset 型 trigger なら latch が
+      254 まで遅延** — fork と trigger 規則の組で帰結が変わる (裁定素材)
+```
+
+### (iii) ground-truth 値 — **DELIVERED**
+
+- volume bars (再 cite + result json `bars`): lat **3.5mm** (`route_env_config.py:174` = wall inner −
+  cable R) / z **(821, 836) mm** (:175-176、strict `<`) / y_win **15mm** (model 由来、N1-N7 検証)。
+- fire anchors (canonical): recorded onset **2544** (RL 254、(a)(b) L-D 実測) / 幾何 first-True
+  **2427** (RL 242.7) / G3 latch **242** / release (min grip < 0.5 bar) **2694**。
+  ⚠release 計器差 (loud): D-6 の「onset+54 で開く」と本解析の onset+150 は**別 bar** (D-6 = 独自
+  計器 / 本解析 = min(grip_cmd)<0.5 の初 frame)。**どちらでも fire ≺ release は成立** (最小 99+54)。
+  定義は artifact に固定、統一は p5 裁定に従う。
+- seat 分布 (§2): C1 pin seat = per-cell {25..34}、pinned_body = seg+28 (81/81)。
+
+### (iv) episode trace — **canonical 分 DELIVERED / 摂動 cell は宣言付き限界**
+
+- canonical 因果列 (実測): G1 latch 98 → G2 146 → **[幾何 trigger 可能域開始 242.7]** → G3/G4 latch
+  242 → recorded fire 254 → release 269.4 → done 343 (success 系、time_outs=0)。旧 (onset) 経路との
+  diff = fire が 254→242.7 へ移動 (**宣言 delta**)、G3 隣接 (fork (A) なら latch 順序も変わる —
+  上記 DAG)。
+- **摂動 cell の latch 列は offline で得られない** (latch = env 計器; 録画から得たのは trigger 窓と
+  順序不変条件のみ)。**declared limit**: per-cell trace が裁定に要るなら env replay probe を追加実装
+  (G-F2 により nominal cell 限定、charter §4-6)。窓統計 (81/81) で足りるかは **p5 判断**。
+
+### §4a ⭐ fork (A) 判別実測 (Q2 の決定的素材)
+
+**A_first == B_seat は 49/81 のみ。不一致 32/81 は全て A = B−1** (delta histogram {(−1,): 32} —
+方向一様: 1 個下流の隣接 seg が先に capture volume に入る)。
+- ⇒ fork (A) は 40% の cell で **fork (B) と異なる segment に identity を束縛**する — 選択は系統的
+  (−1 方向のみ、乱雑でない)。
+- 接続する banked 教訓: [[feedback-nearest-node-selection-has-a-quantization-floor]] (離散 body vs
+  連続目標の選択残差) — (A) の「最初に入った body」は half-pitch 級の選択 bias を持つ。
+- 緩和材料: I3/I4 の identity 窓は **{pin−1, pin}** (escape fixture、`dfbddb4777` 系) — (A) の B−1
+  選択は**既存計器の identity 窓の内側** ⇒ 計器非互換ではない (が、identity の意味 =「録画が押した
+  段」vs「最初に入った段」の設計差は残る)。**裁定 = p5**。
