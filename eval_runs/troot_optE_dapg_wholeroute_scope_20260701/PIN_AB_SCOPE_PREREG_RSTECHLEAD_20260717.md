@@ -284,6 +284,30 @@ worktree aggregate sha (7 hunks) = `030b138cf174cba0a701a434826c086bd705c9856a48
 | L-G | 初回 sweep (pre-commit --all-files @ `fd6ded2959` 隔離 worktree; 注: worktree の `./isaaclab.sh -f` は venv 検出不能で system-python fallback 死 → `env_isaaclab7/bin/pre-commit` 直呼びに切替) = repo 全体 947 files 修正 (**既存 debt = baseline 記録**)、うち **bundle 13 paths 中 7 が該当 → bar FAIL** → fix-first: hook-driven 正規化 + codespell 2 種 (probe `wit`→`witness_d` [bundle 起因] / route_executor 「unparseable」×2 + run_route :3282 black join [**継承 debt**、I3/I4・F-6 era、label 付で同梱]) = commit **`b0981630de`** (7 files 30+/26−、意味論再検証 17/17 + py_compile)。**fresh worktree @ `b0981630de`: 13 paths hook 全 Passed・porcelain = 0** — bundle の autoformat 残渣ゼロ。凍結 hunk 領域 (:963-1012 / :4414-4517) は format pass 不触 = 着地意味論 byte 温存 | **PASS** (FAIL→根本修正→green の経緯ごと記録) |
 | L-D cell 2 | **INFEASIBLE-UNDER-G-F2 / DEFERRED**: `cell_x-20_y-15` boot は G-F2 fold-7 guard で assert 死 — 逐語「grasp_actuation=True requires the NOMINAL golden recording (RUN1_REFERENCE_V2): sha256(...)=3a717010… != 5f1c3f92…」(`newton_route_env.py:626-637`、「until DoD-7 cell-geometry compatibility lands」)。guard 回避は scope 外ゆえ不実施。**prereg 時の %12 feasibility 見落とし**。**pN 裁定 08:2x = CONCUR (SCOPED / PASS-WITH-CARRY)、5 条件**: (1) 元 2-cell bar/履歴は消さない (§5 原文維持) (2) nominal = PASS-SCOPED / cell2 = INFEASIBLE-UNDER-G-F2・DEFERRED / aggregate = PASS-WITH-CARRY、無条件 2-cell PASS 禁止 (3) DoD-7 着地/guard 解除 = 再走 trigger、x-20_y-15 の同一 L-D/L-D2 必須追補、追補 PASS 前は non-nominal/multi-cell の reward-valid・training-ready 主張禁止 (本 atomic land 自体は阻害しない) (4) 耐久 guard-block 記録 = **`pin_ab_lifecycle_probe_result_cell_x-20_y-15_guard_block.json`** (command/rc=1/両 sha/guard cite/逐語/no-bypass) (5) no-repeat: DoD-7 concrete delta 前の再試行禁止 (明示 defer disposition)。p5 設計軸 concur は pN が HANDOFF_p5_vtdesign.md 自読で確認 | **裁定 fold 済 — land 進行可** |
 
+## §10a two-key CLOSE (2026-07-17 08:5x-09:0x)
+
+- **設計鍵 (p5) = CONFORM — PASS + §S4.5 付帯 2 本充足** (§S4.6 発行 → %12 bank `389ee546e2`)。
+  p5 独立 legs (転記なし): 17/17 per-test 自走 @`b0981630de` 隔離 worktree / L-F2 obs 帰属を committed
+  npy から再計算 = {49,58,59,60,61} 厳密一致・[57] 窓内不変・全列 first-div 207 / 二成分 hunk 自読
+  (成分外編集ゼロ) / landed helper `:1851-1883` + call site `:1038` 条項表 / reward_sum 6.5699993894 の
+  算術自検 (4×5.0 − 0.01×343 − 10 = 6.57)。
+- **evidence 鍵 (pN) = PASS-WITH-CARRY / CLOSE** (09:0x message、prereg re-open 乖離なし・STOP なし)。
+  pN 独立再算: lineage 3 commits (fd6=13 paths 6249+/4− 対称差∅ / b098=7 files 30+/26− / b917=record
+  1 file) / route_executor aggregate `030b138c…6450`・audit 2-hunk `5d166002…4610`・frozen5-body
+  `2083786a…79ee` を**分離再算で完全一致**・b098 は frozen/audit 領域不触 / L-A 独立再現 (fresh
+  @`11e130693e` = 1 failed=V5 / 9 passed) / 17/17 @b098 fresh / L-F recompute (5 channel exact、
+  first-div phys342/obs207/reward242、diff cols {49,58-61}、obs57 exact、reward[342]=−10、time_outs=0) /
+  L-G 独立実行 (`VIRTUAL_ENV=env_isaaclab7 ./isaaclab.sh -f`: repo-wide 既存 debt 940 files modified、
+  **target-13 intersection = 0**; 947→7 fix→940 の勘定整合) 。live GPU probe 再走なし (artifact 再計算)。
+- **pN NON-BLOCK 所見 (記録)**: `pin_ab_trace_cell_x0_y0_f1base.json` に `term_at_done` key 無し =
+  probe schema の歴史差 (f1base = 初走 schema、bundle/head = obs-dump 再走 schema)。bar の 5 channel 外・
+  whole-JSON equality 非主張 ⇒ NON-BLOCK。
+- **binding carry 3 本 (pN、存続)**: (1) L-D = nominal PASS-SCOPED / aggregate **PASS-WITH-CARRY** —
+  DoD-7 後 `x-20_y-15` L-D/L-D2 必須追補、完了まで non-nominal/multi-cell reward-valid・training-ready
+  禁止、concrete delta 前 rerun 禁止 (2) **reward-valid/training-ready 全面禁止 = (d) policy-drive gate
+  完了まで従前どおり** (3) full-repo hook debt = baseline 記録継続 (本 13 paths に帰属させない)。
+- ⇒ **(a)(b)+pin-fields bundle chunk = 両鍵 CLOSE**。**(d) / training-ready の GO ではない**。
+
 ## §11 declared semantic surface (flag-OFF delta の宣言) — **p5 批准済 (§S4.5 GRANT)**
 
 **宣言**: bundle land 後の committed HEAD では、route-executor 経由の全 run (canonical recordings は
