@@ -18,7 +18,7 @@ kinematic exception.
   identity BODY (`bq[seat_body,:3]`); RETENTION reads the interpolated CROSSING (`_seat_crossing`). Body-fire ⇒
   crossing-retention is MEASURED at nominal, not assumed (single nominal ≠ structural proof).
 - **pN v0.4 R1-R5 folds**: R1 → §3.0 (real seed, command=template+argv, leg-specific schema). R2 → L-DB-A full
-  `_seated_in_groove` continuity + L-DB-H real hold injection. R3 → §5 test dispositions (AST-red, I″
+  `_seated_in_groove` continuity + L-DB-H synthetic hold injection. R3 → §5 test dispositions (AST-red, I″
   positive+poison, L-DB-J narrowed). R4 → materials forward-sync (derivations → empirical; ~7.5mm numeric
   removed) [flagged to p5]. R5 → L-DB-L obs/actions-hash oracle + training-ready formula conjoins V0.
 
@@ -135,5 +135,6 @@ the L3 Debate on this v0.x plan.)
 - **deferred (post-launch monitor)**: live-policy fire distribution.
 - ⛔ **training-ready LOCKED.**
 
-## §10 [RESULT] (stub) — _pending pN v0.5 readback → L3 CC-Debate → rule-check stage2 → tests-only → impl +
-probe → /pre-check → land → two-key._
+## §10 [RESULT] (stub) — **prereg evidence gate = ✅ PASS-CLOSE (pN v0.5.2 `9ec0369067`, 2026-07-18 04:20).**
+next = **L3 CC-Debate → rule-check stage2 bank** (the PASS is the GO to these two gates, NOT a direct [CHANGE]
+GO) → tests-only → impl + probe → /pre-check → land → two-key._
