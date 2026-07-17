@@ -162,7 +162,7 @@
 | §8.10.2 containment-by-identity | §2-6b **cache+hoist**: 同 predicate + 同 rc bars + **同 cached clip set** — `clip_geoms_at` の mj_forward `:870`（p5 自読）を per-frame に持ち込まない解消形。static geom（body-0）は post-build 不変ゆえ cache 正当・count assert が BrokenSelector 意味論保存。⭐**audit は cache 非依存の live rescan 維持**（CC6-6）= 証拠計器が fire 経路の cache を信用しない — §15.4 の独立性構造の正しい保存（bar 超過） | ✅ |
 | §8.1 (B) identity・fail-closed | §2-7/8 | ✅ |
 | §8.2 mismatch 3-class 非 terminal | §2-9 + L-I fixtures | ✅ |
-| §8.5+§8.10.3 8 fields・window 意味論・counters | §2-D（+window↔episode 1:1 構造論証 + collector 読取 read-before-reset 凍結 + **production dormancy 宣言**〔既定 = flag OFF ∧ budget 230 < fire 246 → 全 sentinel が正常と宣言 = no-silent-cap の正形〕） | ✅ |
+| §8.5+§8.10.3 8 fields・window 意味論・counters | §2-D（+window↔episode 1:1 構造論証 + collector 読取 read-before-reset 凍結 + **production dormancy 宣言**〔既定 = flag OFF ∧ budget 230 < fire 246 → 7/8 sentinel が正常と宣言〔pN B3 records-fix: pin_seat_seg=seat identity は常時 populated、実 npz field-wise = prereg §10 Run B〕 = no-silent-cap の正形〕） | ✅ |
 | §8.11.1/§8.11.2 凍結 anchor（式 run_start+K・2465→2468/246・830.640・band・margin ≥5.10・hard bar・rim 値は非凍結） | §2-10/11/11a（三者一致。live probe 実測 → standing anchor 化も凍結） | ✅ |
 | §8.6 両 release 定義 assert・§8.11.2 ADOPT legs 5 本 | L-D(d)（efc max / seat z / retention continuity **hard PASS 期待**） | ✅ |
 | 宣言 delta（fire 254→246・latch 242 不変・**anchor 深度 = pin 意味論変化として宣言**・flag-OFF byte 恒等） | §11 + L-F1(d)/L-F2(d)（L-F1 の「trigger 非感応 = out-of-scope tripwire」開示は正直で正 — trigger 論理は L-C(d)+L-F2 が覆う） | ✅ |
@@ -217,7 +217,7 @@
 | retention continuity | ✅ | retention_max_after_fire **831.07 < rim 836**（margin ~4.9mm）・fire→done continuity |
 | fire_label 非 gate（§8.13） | ✅ | probe PASS 論理が fire_label を除外（`checks["PASS"]=all(checks)` に fire_label 不含）・standing anchor 2462 |
 | containment-by-identity（§8.12 bar 超過） | ✅ | 同 cache 共有・audit は cache 非依存 live rescan（`test_pin_da_audit_independent_rescan` PASS） |
-| dormancy（§8.12） | ✅ | L-H Run B budget cutoff = 全 sentinel・windows_with_done 0 |
+| dormancy（§8.12） | ✅ | L-H Run B budget cutoff = 7/8 sentinel (pin_seat_seg=seat identity 常時 populated、pN B3)・windows_with_done 0 |
 | L-H2 additive-only（§8.12） | ✅ | 既存 9 arrays byte 一致・additions = exact set 過不足ゼロ |
 
 **⭐ 設計判断 vindication（再確認）**: 深さ leg REVISE（§8.11.2、rim ratify 却下）を live が裏書き — retention 831.07 < 836。rim 発火なら retention が rim 際/超で G6-death を示したはず。

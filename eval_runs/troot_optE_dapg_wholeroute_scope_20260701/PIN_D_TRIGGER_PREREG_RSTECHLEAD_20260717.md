@@ -110,7 +110,7 @@ standing 行への pointer = 授権執行済 (同 commit)。
   §8.4-3 訂正 pointer = 授権により %12 追記済 (`65879a8fae`)。
 - **Q-3 npz fields の window 意味論** (§8.5 の 8 fields は per-episode 量、collector の発行単位 =
   workload window [done 跨ぎなし・budget 切りあり]): **%12 案 = episode-scoped record を「done が入った
-  window」にのみ実値で載せ、done の無い window は全 sentinel** (§2-D 表)。fire_step は episode-相対 RL
+  window」にのみ実値で載せ、done の無い window は 7/8 sentinel (pin_seat_seg=seat identity ゆえ常時 populated、pN B3)** (§2-D 表)。fire_step は episode-相対 RL
   step。supervisor 集計の分母 = done episode 数。→ **conform 確認要** (two-key 時で可、実装は本案で進む)。
   → ✅ **RESOLVED = §8.10.3**: CONFORM + additive 1 点 = supervisor に `windows_total`/`windows_with_done`
   (budget 切り in-flight episode の pin 状態が「見えず消える」ことの集計面可視化) → §2-D に反映。
@@ -249,7 +249,7 @@ Q-6 = ACCEPT・訂正 #12 (§8.11.1、式 = run_start + K) / **Q-7 = REVISE 採�
   trigger は **dormant** — env cfg に `route_c1_pin` 無し (`forkb_collector.py:157-168`) + flag default
   False (`newton_route_env.py:466`) ⇒ 評価すらされず、さらに `--episode-steps` default **230**
   (`forkb_collector.py:124` / supervisor `:174`) < fire 242/243 < done ≈342 ⇒ 仮に flag ON でも既定
-  budget の window に fire/done は構造的に入らない。⇒ **既定 production 収集の 8 fields = 全 sentinel・
+  budget の window に fire/done は構造的に入らない。⇒ **既定 production 収集の 8 fields = 7/8 sentinel (pin_seat_seg=seat identity ゆえ常時 populated、pN B3)・
   summary = fired 0/done 0 が正常** (declared)。有効化 = 訓練時代 config 決定: 既存 env-var
   `ROUTE_C1_PIN=1` 経路 (`:466`、新 CLI 不要 = hard-stop 準拠) + `--episode-steps ≥ ~350` (既存 arg の
   非 default 値)。L-H はこの有効化構成で fired/done window を実走する (§5)。
@@ -322,7 +322,7 @@ Q-6 = ACCEPT・訂正 #12 (§8.11.1、式 = run_start + K) / **Q-7 = REVISE 採�
      → 期待 = **windows_total 2 / windows_with_done 2**、両窓 fired (fire_step 246)・8 fields 実値。
    - **Run B (budget 切り対照、flag ON 維持 = flag-OFF と交絡させない)**:
      `CUDA_VISIBLE_DEVICES=0 ROUTE_C1_PIN=1 /home/rlrk/env_isaaclab7/bin/python thread_isaac_lab/scripts/forkb_collector.py --outbox eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runB --proc-index 0 --base-seed 20260717 --episodes 1 --episode-steps 230 --drive-mode feedforward`
-     → 期待 = **windows_total 1 / windows_with_done 0**・全 sentinel。
+     → 期待 = **windows_total 1 / windows_with_done 0**・7/8 sentinel (pin_seat_seg=seat identity ゆえ常時 populated、pN B3)。
    - **Run C (L-H2 対、flag-OFF — ROUTE_C1_PIN 非設定)**: HEAD 側 = worktree @ `88b7a16681`、bundle 側
      = landed worktree、**同一 command** (path 部のみ各 worktree):
      `CUDA_VISIBLE_DEVICES=0 /home/rlrk/env_isaaclab7/bin/python thread_isaac_lab/scripts/forkb_collector.py --outbox <各側>/pin_da_lh_runC_{head,bundle} --proc-index 0 --base-seed 20260717 --episodes 1 --episode-steps 60 --drive-mode feedforward`
@@ -397,7 +397,7 @@ self._c1_pin_witness["dwell_count"] = int(self._c1_pin_dwell)
 | L-E | reset clear 前後 eq_active の fired 外対称差 = ∅ (継承) | = ∅ |
 | L-F1(d) | **flag-OFF byte 恒等**: bundle vs baseline (下記 pin)、flag-OFF 固定長 replay で phys/obs/reward/done 全 byte 一致。**宣言済みの残余目的 (CC6-6)**: flag-OFF は refactored authorizer を実行しない (fire 時のみ到達) ため本 leg は trigger 論理に非感応 — その価値 = **out-of-scope 編集の tripwire** (audit 経路 [reset 毎実行] と env 本体の非宣言変更を捕まえる) | byte 一致 |
 | L-F2(d) | **flag-ON 宣言 delta**: bundle vs baseline、flag-ON canonical で (i) fire 254 → §2-11 (Q-6 裁定値) へ移動 (ii) **G3 latch 242 不変** (iii) 分岐点 = fire 時刻差の初出 frame、以降の物理 delta は fire 起因として宣言 (**anchor 深度 shift §11 込み**) (iv) **宣言外の面に delta ゼロ** (§S4.5 付帯: 宣言外 delta ≠ 0 → 追補 re-open)。**baseline 3 点 pin (CC2-2、(a)(b) §5 L-F2 の pin 復元)**: 明示 commit hash (**L-A 実行時 HEAD を [RESULT] に記録・以後固定**) + recording sha (golden 5f1c3f92) + flag/config 全列挙 | 測定が §2-12 宣言と一致 (判定 = two-key) |
-| L-H | fields (**実行体 = §3-8 Run A/B、exact command 固定済**): Run A done 窓 ×2 = 8 fields 実値・env ground truth 一致・fire_step 246 / Run B = windows_total 1・with_done 0・全 sentinel (budget cutoff 分離、flag ON 維持) / manifest mirror / summary 集計一致 (**`windows_total`/`windows_with_done` 込み**)。dtype/名 = §2-D 表と byte 一致 | 全一致 |
+| L-H | fields (**実行体 = §3-8 Run A/B、exact command 固定済**): Run A done 窓 ×2 = 8 fields 実値・env ground truth 一致・fire_step 246 / Run B = windows_total 1・with_done 0・7/8 sentinel (pin_seat_seg=seat identity ゆえ常時 populated、pN B3) (budget cutoff 分離、flag ON 維持) / manifest mirror / summary 集計一致 (**`windows_total`/`windows_with_done` 込み**)。dtype/名 = §2-D 表と byte 一致 | 全一致 |
 | L-H2 | **既存 artifact 面の不変 (CC6-4 + pN B2/R-B2 項目別 bar)**: §3-8 Run C (HEAD vs bundle、同 seed・flag-OFF・小 budget) — (i) **旧 9 arrays** (o/o_next/a_raw/a_executed/r_paid/done/time_out/invalid_mask/cable_traj) = **byte 一致** (ii) **期待一致 manifest keys** {process_index, derived_seed, episode_idx, n_steps, termination_reason, truncated_by, invalid_any, source, drive_mode, sec_S_exposure, **env_fingerprint_sha**} = **値一致** (R-B2: fingerprint = env-var key→値 map の hash [collector :195/:273-274、closure sha でない] — bundle は新 env-key read を足さず Run C は同 env ⇒ 一致が正、**元 map equality も併 assert**) (iii) **期待差分 keys = {code_sha, sha256} のみ** (source 変更 / 8 arrays 追加で必然差分 — 各版で各自の正しい hash であることを assert) (iv) **pid = self-consistency のみ** (各 run の manifest.pid == proc_meta.pid ∧ 正整数 — cross-run の一致/差分は OS 再利用のため不問) (v) **closure_sha256 = 各版 self-consistency** (proc_meta.closure_sha256 の各 entry == その tree の実 file sha) (vi) **additions = npz 8 / manifest 3 の exact set** (過不足ゼロ) | (i)-(vi) 全成立 |
 | L-G | post-land: 隔離 worktree で pre-commit 13-path 型 sweep、autoformat 残渣ゼロ (継承手順) | 残渣ゼロ |
 
@@ -529,7 +529,7 @@ L-D/L-D2 同型追補、それまで non-nominal/multi-cell の reward-valid・t
 - **pending (post-land)**: **post-land two-key のみ** — p5 設計軸 (same-snapshot 毒殺 leg・anchor drift・宣言外 delta ゼロ・retention continuity・fire_label 非gate §8.13) + pN 証拠軸 (legs 実測)。/pre-check の 3 MEDIUM carry [M1 DR-headroom §12-8 / M2 sim-replay byte-neutral / M3 latch≺fire dual-clock] を明示 ACK 対象として提示。
 - 執行時義務 (pN 第3 readback): Run A/B/C outbox = 各 fresh/non-existing 実測済 ✓ (Run C = `rm -rf` 後 launch) / 逐語 command 上記記録 ✓。
 - **post-land two-key = 両軸受領 (2026-07-17 18:5x)**: **p5 設計軸 = CONFORM PASS** (charter §8.14、本 records-fix commit で bank; producing commit `e8edd96a3e` で独立 legs 自走 — tests 31/31・same-snapshot 毒殺 = fail-able 計器 [K 到達で bq 汚染→authorizer pre-poison 受領 assert]・L_D non-gate/standing 2462・L-F1 byte 恒等 [source *.py diff ∅]・L-F2 delta のみ [latch 列不変]・retention 831.07<836; checklist 全 ✅ + containment 同 cache/audit 独立/dormancy/L-H2 additive)。**pN 証拠軸 = MECHANISM/LANDED PASS / EVIDENCE HOLD→records-fix** (独立実測 全 PASS: e8 full hash・parent diff 9 paths・aggregate `ae0b1bab`・隔離 wt pytest 31/31・9-file pre-commit porcelain 0・raw byte 照合 [L-F1 trace `227ec171`/obs `f313f559`・Run C old9 byte+差分{code_sha,sha256}]・§8.13 npz z 独立再計算 [z@2462=831.321 vs z@2467=830.640/z@2468=830.508])。**3 MEDIUM (M1 DR-headroom §12-8 / M2 sim-replay byte-neutral [loader assert=(d-b) consumer] / M3 latch≺fire dual-clock) = 両軸 binding carry ACK**。⛔training-ready 未解除 ((d-a)=1 鍵のみ、§S4.7 (d-a)∧(d-b)∧cell-2)。
-- **pN B1/B2/B3 records-fix (本 commit、rerun 不要)**: **B1** = 23 raw byte-leg artifacts を bank + immutable closure record `PIN_D_EVIDENCE_CLOSURE_RSTECHLEAD_20260717.json` (各 sha256 + as-run source closure 結合: baseline `88b7a16681`+tests-patch [f1base/Run C head/L-F2 baseline] / bundle worktree [16dde+(d-a) patch = e8 source: L-F1 bundle/Run C bundle] / bundle main-tree [e8+B2 exec-neutral delta: Run A/B])。**B2** = Run A/B proc_meta closure が main-tree dirty bytes を記録 → e8 committed tree と **exactly 2 files 差**、両者 exec-neutral (configs/__init__.py = SPDX header のみ / route_env_config.py = obs[60:62] comment hunk のみ [NOT-MINE、working-tree 温存])、closure record に as-run/e8 両 sha を記録・loud disposition (runtime 値不変ゆえ Run A/B 測定有効・rerun 不要)。**B3** = §10 Run B「全 sentinel」→ field-wise 訂正済 (pin_seat_seg=27 = armed identity) + land/post-land [RESULT] 行を本 commit で bank。**probe.py header docstring** (p5 non-blocking) = "fire_label==2468 exact" → "latch < fire; fire_label non-gate (sec 8.13)" 訂正。**pN readback で HOLD 解除見込み (数値再走なし)**。
+- **pN B1/B2/B3 records-fix (本 commit、rerun 不要)**: **B1** = 23 raw byte-leg artifacts を bank + immutable closure record `PIN_D_EVIDENCE_CLOSURE_RSTECHLEAD_20260717.json` (各 sha256 + as-run source closure 結合: baseline `88b7a16681`+tests-patch [f1base/Run C head/L-F2 baseline] / bundle worktree [16dde+(d-a) patch = e8 source: L-F1 bundle/Run C bundle] / bundle main-tree [e8+B2 exec-neutral delta: Run A/B])。**B2** = Run A/B proc_meta closure が main-tree dirty bytes を記録 → e8 committed tree と **exactly 2 files 差**、両者 exec-neutral (configs/__init__.py = SPDX header のみ / route_env_config.py = obs[60:62] comment hunk のみ [NOT-MINE、working-tree 温存])、closure record に as-run/e8 両 sha を記録・loud disposition (runtime 値不変ゆえ Run A/B 測定有効・rerun 不要)。**B3** = 全 governing records の false shorthand「全 sentinel」→ field-wise 訂正 (pN readback で 7 箇所指摘・forward-only supersession: prereg §2-D done無 window contract/production 8 fields/Run B 期待/L-H acceptance bar/production 宣言 [5] + charter 設計対応表/post-land checklist [2]、§10:520 が field-wise 正本)。**実 npz 三 context 実測** (Run A fired / Run B armed-no-fire / Run C flag-OFF dormant): fire/frame/eq/dwell/mismatch/audit = **−1**・anchor = **NaN×3**・**pin_seat_seg = seat identity ゆえ常時 populated** (cell_x0_y0 = 27、全 context)。+ land/post-land [RESULT] 行を bank。〔初回 bank `3d084435b6` = §10:520 のみ訂正で pN B3 PARTIAL → 本 follow-up で 7 箇所 sync 完了〕。**probe.py header docstring** (p5 non-blocking) = "fire_label==2468 exact" → "latch < fire; fire_label non-gate (sec 8.13)" 訂正。**pN readback で HOLD 解除見込み (数値再走なし)**。
 
 ## §11 declared semantic surface (flag 別 + flag 非依存の delta 宣言)
 
@@ -545,7 +545,7 @@ L-D/L-D2 同型追補、それまで non-nominal/multi-cell の reward-valid・t
   述語・obs 契約は不変** (identity は (B) のまま、§8.1-3(i))。fire 分布の変化 = 宣言面、L-F2(d) が測定。
 - **flag 非依存の artifact 面 (CC6-5)**: 全 published window の npz に 8 additive fields + manifest
   3 keys + supervisor に `pin_fire_summary.json` (counters 込み) が加わる (§2-D/§3) — 既存 field/key は
-  不変 (L-H2 が項目別 bar で測定 — provenance keys は期待差分)。**production 既定では全 sentinel**
+  不変 (L-H2 が項目別 bar で測定 — provenance keys は期待差分)。**production 既定では 7/8 sentinel (pin_seat_seg=seat identity ゆえ常時 populated、pN B3)**
   (§2-D dormancy 宣言)。
 - **wrong-clip fire の宣言 (p5 §8.12-①、v0.5 fold)**: capture check は ∃-認可 clip (loop 形 = N-clip
   前方互換) ゆえ、探索 policy が identity body を**他方の認可 clip** volume 深部に K frame 置けば
