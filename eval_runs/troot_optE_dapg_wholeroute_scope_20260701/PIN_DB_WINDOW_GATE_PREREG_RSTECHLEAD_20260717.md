@@ -39,16 +39,18 @@ kinematic exception.
 ### §3.0 provenance freeze (R1 — real values)
 - **env**: `/home/rlrk/env_isaaclab7/bin/python` · warp 1.13.0 · **CUDA_VISIBLE_DEVICES=0**, cuda:0.
 - **recording (input)**: `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz` · **sha256 `5f1c3f9238f45057011cfad1d010ac43000cb179b76b61d0461733a9075416cf`** · 22 keys.
-- **determinism / RNG (R1)**: the env has **no `seed()` method**; the ONLY RNG is `np.random.uniform` at reset
-  (`:1061-1062`), gated by `INIT_XY_NOISE>0`. The probe sets **`INIT_XY_NOISE=0`** (disables that RNG → fully
-  deterministic, ep1≡ep2 trivially) AND calls `np.random.seed(0)` before build+reset (belt-and-suspenders).
-  **Record in the artifact**: `INIT_XY_NOISE` value + the np.random get_state() digest.
+- **determinism / RNG (R1 → C1)**: the env has **no `seed()` method**; the ONLY RNG is `np.random.uniform` at
+  reset (`:1061-1062`), gated by `self.INIT_XY_NOISE>0`. ⚠ **`INIT_XY_NOISE=0.005` is a CLASS attr (`:417`), NOT
+  read from cfg** — a cfg entry is INEFFECTIVE. Exact procedure: (1) `np.random.seed(0)`; (2) **after build,
+  before the first reset, set `env.INIT_XY_NOISE = 0.0`** (instance override of the class attr) and **hard-assert
+  `env.INIT_XY_NOISE == 0.0`** (effective readback); (3) record the effective `env.INIT_XY_NOISE` +
+  `np.random.get_state()` digest in the artifact. ⇒ the reset RNG is disabled → fully deterministic (ep1≡ep2).
 - **command (TEMPLATE, `<LEG>` expanded at run)**: `CUDA_VISIBLE_DEVICES=0 /home/rlrk/env_isaaclab7/bin/python thread_isaac_lab/scripts/pin_db_window_probe.py --cell cell_x0_y0 --leg <LEG> --outbox <FRESH_OUTBOX>/<LEG>`. ⚠ this is a template; **the run-time EXPANDED argv is saved verbatim per leg** in the artifact.
-- **cfg (frozen)**: `world_count=1` · `grasp_actuation=True` (E_gF=False) · `route_executor_impl="route_executor"` · `route_recording_npz=<above>` · `g1_scene_align=True` · **`route_drive_mode="ik_chord"`** · `route_c2_scene=True` · `route_c1_pin=<A-pair flag>` · `INIT_XY_NOISE=0` · (`route_t_clock=True` only for L-DB-H). · **drive** = deterministic zero-residual · **horizon** 900 (`:407`).
+- **cfg (frozen)**: `world_count=1` · `grasp_actuation=True` (E_gF=False) · `route_executor_impl="route_executor"` · `route_recording_npz=<above>` · `g1_scene_align=True` · **`route_drive_mode="ik_chord"`** · `route_c2_scene=True` · `route_c1_pin=<A-pair flag>` · (`route_t_clock=True` only for L-DB-H). · `env.INIT_XY_NOISE` set to 0.0 via the attr-override above (NOT cfg) · **drive** = deterministic zero-residual · **horizon** 900 (`:407`).
 - **artifact schema (frozen)**: a **common envelope** (per leg) + a **leg-specific payload** (or a companion
   trace file with its own schema+path+sha256):
-  - **common envelope** (17 fields): `leg`·`expanded_argv`·`fire_step`·`route_t_at_fire`·`fired_at_frame`·`dwell_count`·`fire_body_dx_m`·`fire_body_z_m`·`fire_cross_dx_m`·`fire_cross_z_m`·`c1_retained_at_fire`·`g_latched`(6)·`success`·`invalid`·`time_out`·`dropped`·`pass` (bool)·`failed_predicates`(list).
-  - **leg-specific payloads**: L-DB-A → `post_fire_continuity` (per-step {step,dx_cross,z_cross,seated} + min_z/max_z/max_dx/first_fail_step); L-DB-G → `dwell_sequence` (per-frame {inside, dwell, fired}); L-DB-H → `hold_trace`; L-DB-K → `perf` ({transitions_per_s, peak_gpu_mib, rss_mib} × {OFF,ON}).
+  - **common envelope (21 fields, C2)**: `leg`·`expanded_argv`·`fire_step`·`route_t_at_fire`·`fired_at_frame`·`dwell_count`·`fire_body_dx_m`·`fire_body_z_m`·`fire_cross_dx_m`·`fire_cross_z_m`·`c1_retained_at_fire`·**`audit_verdict`**·**`eq_id`**·**`mismatch_class`**·`g_latched`(6)·`success`·`invalid`·`time_out`·`dropped`·`pass`(bool)·`failed_predicates`(list). (audit_verdict added for L-DB-A's genuine-fire+audit requirement.)
+  - **leg-specific payloads — FROZEN as INLINE JSON in the same result file (no separate companion, C2)**: L-DB-A → `post_fire_continuity` (per-step {step,dx_cross,z_cross,seated} + min_z/max_z/max_dx/first_fail_step); L-DB-G → `dwell_sequence` (per-frame {inside, dwell, fired}); L-DB-H → `hold_trace` (§3.1 L-DB-H bars); L-DB-I″ → `poison_subcase` ({forced_not_in_groove, leg_went_red}); L-DB-K → `perf` ({transitions_per_s, peak_gpu_mib, rss_mib} × {OFF,ON}).
   - **provenance closure (per run)**: `command`·`cfg`·`recording_sha256`·`loaded_source_closure`·`env_fingerprint`·`harness_self_sha`·`pre_hash`·`post_hash`·`changed_source_set` (=[] for the A-pair).
 
 ### §3.1 legs (binary bars)
@@ -68,17 +70,22 @@ kinematic exception.
   (i) **≥K dwell** → fires within K+1; (ii) **K−1 dwell** → no fire; (iii) **gap-reset** (`[True]*(K-1)+[False]+
   [True]*(K-1)`, mirrors unit `test_pin_da_dwell_reset_on_gap:482`) → no fire. Record `dwell_sequence`
   per-frame. spurious = <K consecutive (§9.7.9). Residual (live-policy dist) = post-launch monitor.
-- **L-DB-H (hold-era label, R2 real injection).** Injection = **`route_t_clock=True`** (cfg, `:478`) enables the
-  hold mechanism `_hold_mask_np = self._update_route_sync()` (`:2044`); the probe drives to a held-world state
-  (a world whose `_hold_mask_np[w]`=True). Oracle: `fired_at_frame` is provenance-only/non-gate (route_t clamped
-  during hold); the fire predicate (capture∧depth∧K on body_q) is **hold-independent**; record `hold_trace`.
+- **L-DB-H (hold-era label semantics — SYNTHETIC injection, C3).** ⚠ `route_t_clock=True` (`:478`) only ENABLES
+  the mechanism; `_hold_mask_np` is the data-dependent output of `_update_route_sync()` (`:2043-2045`) and is
+  NOT reproducibly forced by a flag. This leg uses a **synthetic hold**: with `route_t_clock=True`, after a fire,
+  directly set `env._hold_mask_np[0]=True` for a fixed window — a state injection to exercise the LABEL path,
+  **NOT a claim about `_update_route_sync`'s real hold trigger**. **Frozen bars (binary → `hold_trace`)**: (i)
+  precondition `hold_mask False→True` recorded; (ii) `route_t` does NOT increment while held (`:2044-2045`
+  clamp); (iii) the episode clock DOES increment; (iv) the fire predicate (capture∧depth∧K on body_q) is
+  **hold-independent** (fires/doesn't identically to the no-hold run); (v) `fired_at_frame` is
+  provenance-only/non-gate (recorded under the clamped route_t; asserted not wired to reward/term).
 - **L-DB-I″ (fire ⇒ crossing-retention, R2/R3 — measurement leg PROVEN alive).** At EVERY fire, record BOTH
   surfaces at the SAME snapshot (`fire_body_*` from `bq[seat_body,:3]`; `fire_cross_*` from
   `_seat_metrics(cable_pos,_C1_XY)`) + **hard-assert `_seated_in_groove(fire_cross_dx,fire_cross_z)`=True**.
   **Measurement-alive proof**: a landed **positive control** (a real fire → crossing seated True) AND a
   **crossing poison / forced-false** (inject a not-in-groove crossing → the leg goes RED). ⇒ the oracle is not
   vacuous. per-cell (nominal; cell-2 deferred). Escalation (b) only if a real gap shows.
-- **L-DB-J (clear-consumer continuity, R3 — narrowed claim).** `test_route_reward_identity_guards.py::test_clear_c1_pin_clears_all_audited_fired` (`:279`): the reset CLEAR-CONSUMER handles all audited fired tuples, unchanged by the ik_chord placement. ⚠ this leg claims clear-consumer continuity ONLY; **bypass-DETECTION by the audit is covered by the existing `test_pin_da_mismatch_class_fixtures`** (stated conjunction, not claimed by J alone).
+- **L-DB-J (clear-consumer continuity, R3/C4 — narrowed).** `test_route_reward_identity_guards.py::test_clear_c1_pin_clears_all_audited_fired` (`:279`): the reset CLEAR-CONSUMER handles all audited fired tuples, unchanged by the ik_chord placement. ⚠ **this leg claims clear-consumer continuity ONLY.** Two separate concerns it does NOT claim: (a) mismatch *classification* of an already-obtained fired tuple = `test_pin_da_mismatch_class_fixtures` (a **classifier**, not a bypass detector); (b) real bypass *detection* by the audit = the banked `authorize_clip_pin_controls.py` audit controls. L-DB-J neither subsumes nor depends on (a)/(b).
 - **L-DB-K (perf hot-path — wc=1 per-proc; 4-proc = V0 carry).** matched wc=1 single-proc ik_chord pin OFF vs
   ON: `perf` = {transitions/s, peak GPU MiB, RSS MiB}; matched window/timer, fresh tag, positive overlap.
   **Bar = ratio ON/OFF ≥ 0.8** (frozen; Rs override); <0.8 → batched body_q read. **Claim = per-proc only**;
