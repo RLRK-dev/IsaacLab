@@ -77,6 +77,7 @@
 1. **評価配置** = 既存 activation call site（update path、`_maybe_activate_c1_pin` `:1218` 系）の**条件置換** — FF onset 条件 → 幾何規則。`route_c1_pin` flag gate・fire と reward 評価の相対順序（physics 後・次 reward 前）= landed (a)(b)/L-D 時代と同一に保つ。
 2. **規則形 = K-consecutive dwell、K=3**（route-invariant 設計定数・prereg 凍結）: first-True は rim 通過瞬間で margin ~0.07mm（canonical、p5 再計算一致）= grazing ⇒ 即発火は 0-margin 発火（数値 wobble で境界を跨ぎ、authorizer backstop を設計経路から踏み得る）— 不採用。margin-bar 案 = volume 定義の二重管理 — 不採用。K=3 の遅延は窓（早発火余裕 min 99f・進入後持続 実質恒久）に対し無視可能。
 3. **containment 制約**: fire 述語 bars ⊆ authorizer capture volume（lat 3.5 < 6.0 = 真に内側 / z・y = 境界一致は dwell が吸収）⇒ **設計経路から backstop raise は不可達**（raise = 真の bypass 専用に純化）。
+   - ⚠ **本項の「6.0」は訂正 #11（§8.10.2、2026-07-17）**: on-disk に存在しない数値。真の関係 = 厳密包含でなく **identity（同一関数・同一 bar）** — 結論（backstop raise 不可達）は containment-by-identity + same-snapshot 規律でより強く survive。pointer 追記 = §8.10.2 授権により %12。
 4. **fire-once per episode**（witness latch 既存）。**episode 内 re-fire = 不採用確定**（escape 後の再発火は将来の別述語・別 gate）。
 5. 対象 = **identity body のみ**（§8.1-4 と一体）。
 
@@ -101,6 +102,24 @@
 
 ### §8.9 残作業 index
 全 Q 裁定済（Q2/Q4 = §8.1/§8.2〔banked `efad9c05b9`〕、Q1/Q3/Q5/Q6/(iv) = §8.4-§8.8）。次 = %12 prereg（pN 条件パターン・§8 準拠）→ 実装 → probe → `/pre-check` → two-key。
+
+### §8.10 🔒 prereg v0.1 §Q への裁定 4 本（v1.3、2026-07-17 10:5x — `PIN_D_TRIGGER_PREREG_RSTECHLEAD_20260717.md` §Q を受けて。cites 全て p5 自読・on-disk 検証済）
+
+**§8.10.1 Q-1 裁定 = K の単位 = physics frame（K = 3 連続 physics frame）— freeze 解除**
+- 根拠: (i) **cadence 同一性** — 既存 call site（`newton_route_env.py:1221`、FF substep loop 内 = per-physics-frame 評価を p5 自読）への「条件置換のみ」（§8.4-1）に単位を一致させる。RL-step 単位は sub_i gating 等の新規機構 = 置換規律からの逸脱。(ii) debounce 対象（rim 通過の数値 wobble、進入 margin 0.07mm）は frame 級現象 — %12 推奨に concur。(iii) 窓安全性は両単位で成立（早発火余裕 min 99f・持続 ≥5262f）ゆえ**機構最小**を選ぶ。(iv) frame-exact anchor は録画から offline 再計算可能 = probe assert が厳密。
+- **凍結 anchor**: canonical 期待 **fire_frame = 2429**（= first-True 2427 + (K−1)、隣接 3 frame の連続性は持続実測 ≥5262f が保証）/ 期待 **fire_step = 242** = G3 latch と同 RL step（fire は substep 内・latch は同 step の reward 評価時 — (B) では両者独立ゆえ順序問題なし）。hard bar `fire_step ∈ [242, 250]` 維持。一般式 = `fire_frame = first_true_frame + (K−1)`。drift = loud。
+- 注記: §8.6(b) の「期待 fire ≈ 243+(K−1)」は step 算術で**単位曖昧だった** — 本項の frame 式で確定（Q-1 は曖昧さを正しく surface した）。
+
+**§8.10.2 Q-2 = containment-by-identity で CONFORM + ⚠訂正 11 件目（「6.0」）**
+- **訂正 #11**: §8.4-3「lat 3.5 < 6.0 = 真に内側」の **6.0 は on-disk に存在しない** — p5 自身の grep で確認（`route_executor.py` の capture 系に 6.0 なし〔hit は無関係な camera 角 `:2523` のみ〕・設計 doc §15 にもなし）。authorizer `:956` / audit `:1010` は fire 述語と**同一関数・同一 bar**（`clip_capture_predicate` + `rc.SEAT_LAT_BAR_M` 3.5mm `route_env_config.py:174` / `SEAT_Z_LO/HI_M` `:175-176` / y_win = model geom 由来を両者同式で取得）。真の関係 = **厳密包含でなく identity（等号）**。6.0 の出所 = 記憶からの捏造数値（%12 の幾何仮説 7.5−1.5 は私の生成過程を遡れず検証不能）— **裁定文に file:line なしの数値を書いた = artifact-first の自違反**（#10 の教訓〔claim scope > measurement scope〕の数値版）。**§8.4-3 の結論（設計経路から backstop raise 不可達）は survive し、identity の下でより強くなる**（数値 margin でなく構成的保証）。%12 bank 時に §8.4-3 へ訂正 pointer 1 行の追記を授権。
+- **CONFORM 条件（load-bearing 1 本）**: **same-snapshot 規律** — K 到達 frame の check が評価した**同一の seat_world 値（同じ bq snapshot）**を `authorize_clip_pin` へ渡すこと。これで fire-True ⇒ authorizer-accept が同関数・同 bar・同入力の**恒真**になる（re-read や翌 frame 呼びは wobble が backstop を設計経路へ戻す）。prereg「同一 loop body を共有」は本規律を含むと読む — 実装はこの形を維持し、two-key で照合する。
+
+**§8.10.3 Q-3 = CONFORM + 追加 1 点（non-blocking additive）**
+- done を含む window にのみ episode record 実値・他は sentinel・fire_step = episode 相対・分母 = done episode 数 — CONFORM（records-match-fact: record は done と共に travel、部分帰属なし）。
+- 追加（no-silent-cap）: supervisor summary に **`windows_total` / `windows_with_done`** を併記 — budget 切りで done 前に終わった in-flight episode の pin 状態が「どこにも記録されない」事実を集計面で可視化（消えるのは正・見えず消えるのは不可）。
+
+**§8.10.4 Q-4 = CONFORM**
+- per-step check でも BrokenSelector は raise — 構造異常の quiet-skip は「silently never fired」class の再発（`_maybe_activate_c1_pin` docstring が既に記す教訓の継承 = N7 意味論）。§8.4-6 の raise 3 限定列挙と整合（構造的ゆえ実質初回 1 発）。quiet 対象は capture 述語 False のみ。
 
 ## §7 cites（本 charter の接地、全て p5 自読 2026-07-17）
 
