@@ -69,8 +69,38 @@
 3. **応答 = loud print + supervisor counter + episode-npz additive flag**（D0 R3 原則）。⛔ **reward / termination / invalid には配線しない**（本 gate）: 偽 terminal は policy への infra 起因罰 = 訓練汚染 / `invalid` の意味拡張は trainer 契約変更で別問題。canonical/probe の期待値 = **0**（>0 = probe FAIL）。実訓練での頻度 = /pre-check 審査項目、>0 実測時は本裁定 re-open。
 4. Q2-4 の fire-target=identity-body により、class (i)/(iii) は**真の bypass 書込に限定**される（設計内発火からは構造的に発生しない — 検出器の信号純度が上がる）。
 
-### §8.3 残 Q の待ち
-Q1（評価配置・fire-once/re-fire）/ Q3（npz fields 確定）/ Q5（positive control 窓）/ Q6（B4 整合 cite）= 素材着弾順に裁定。artifact (i)(ii)(iv) は Q2 裁定 (B) 前提で作成のこと。
+### §8.3 素材 v0.2（`b3823f2961`）の検証記録 + §8.1 への追記（v1.2、2026-07-17 10:2x）
+- **p5 独立再計算（81 npz 直読）= v0.2 の全 load-bearing 量と一致**: 窓統計 onset−geo_fire(B) min 99 / p50 116 / p90 153 / max 156 ✓ / A−B delta hist **{−1: 32, 0: 49}** ✓ / canonical geo_fire 2427・進入 margin dx 0.07mm・rim 内側 0.07mm ✓ / **fire-before-release 81/81** ✓（release = onset 後 min(grip)<0.5 初 frame、release−onset = **150f 一様 81/81**、canonical 2694 ✓）。⚠透明性: 私の初回 release 検出は frame 0 の grasp 前 open grip を誤検出（0/81 と出た）— 検出器修正後に一致。**追加発見**: B body の volume 内持続は「100+f」でなく**進入後 最小 5262f = 実質恒久**（pin が保持するため — K-dwell の安全余裕は事実上無限）。
+- **§8.1 Q2 への実証的裏書き（裁定不変・強化）**: §4a の A=B−1（32/81、系統 −1）= 「最初に入った段」は 40% の cell で「録画が押した段」と**別 body に identity を束縛**する — quantization-floor 教訓の実例。fire 対象 = identity body 規則（§8.1-4）の下で判別問題は**解消**（B 自身の窓が 81/81 で十分と実測）。
+
+### §8.4 🔒 Q1 裁定 — 発火規則 = **identity body への K-consecutive dwell（K=3）**、既存 call site の条件置換
+1. **評価配置** = 既存 activation call site（update path、`_maybe_activate_c1_pin` `:1218` 系）の**条件置換** — FF onset 条件 → 幾何規則。`route_c1_pin` flag gate・fire と reward 評価の相対順序（physics 後・次 reward 前）= landed (a)(b)/L-D 時代と同一に保つ。
+2. **規則形 = K-consecutive dwell、K=3**（route-invariant 設計定数・prereg 凍結）: first-True は rim 通過瞬間で margin ~0.07mm（canonical、p5 再計算一致）= grazing ⇒ 即発火は 0-margin 発火（数値 wobble で境界を跨ぎ、authorizer backstop を設計経路から踏み得る）— 不採用。margin-bar 案 = volume 定義の二重管理 — 不採用。K=3 の遅延は窓（早発火余裕 min 99f・進入後持続 実質恒久）に対し無視可能。
+3. **containment 制約**: fire 述語 bars ⊆ authorizer capture volume（lat 3.5 < 6.0 = 真に内側 / z・y = 境界一致は dwell が吸収）⇒ **設計経路から backstop raise は不可達**（raise = 真の bypass 専用に純化）。
+4. **fire-once per episode**（witness latch 既存）。**episode 内 re-fire = 不採用確定**（escape 後の再発火は将来の別述語・別 gate）。
+5. 対象 = **identity body のみ**（§8.1-4 と一体）。
+
+### §8.5 🔒 Q3 裁定 — witness run-level provenance = episode-npz additive fields（D0 R3 原則）
+- fields（名/型は prereg で凍結・additive-only・既存 field 不変）: `pin_fire_step`（int、−1=未発火）/ `pin_fire_frame` / `pin_eq_id` / `pin_seat_seg`（identity）/ `pin_anchor_xyz` / `pin_dwell_count_at_fire` / `pin_mismatch_class`（0=none・1/2/3 = §8.2 class）/ `pin_audit_verdict_at_reset`。
+- supervisor 集計 = fire 率・fire_step 分布・mismatch 総数。**未発火 episode = 正常データ**（記録されるゆえ silent でない — 学習初期は未発火が多数で正常）。
+
+### §8.6 🔒 Q5 裁定 — positive controls + 宣言 delta
+- (a) **fire ≺ release を【両 release 定義で】assert**（hard・全 probe cell）: D-6 計器（onset+54）と min-grip<0.5（onset+150、81/81 一様実測）— どちらでも margin ≥ 153f。**(d) の canonical release 定義 = min(grip)<0.5（post-onset）を採用**（D-6 計器は併記・定義は artifact 固定）。
+- (b) canonical anchor: `fire_step ∈ [G3_latch, G3_latch + W]`、W = K+5。期待 fire ≈ 243+(K−1) — **実測値を prereg で凍結**（drift = loud）。
+- (c) **宣言 delta**: fire 254 → ≈243+K の移動（+それに因る物理 delta）= L-F2 型 leg の**宣言面**（(a)(b) tree 対比）。
+- (d) 摂動 cell では窓の存在（fire ≺ release）のみ assert（step 値は cell 依存 — §8.8）。
+
+### §8.7 🔒 Q6 裁定 — B4 state-bank 整合
+- restore された着座状態: dwell K は restore 後 K step で充足 → **fire ≤ K+1 step = 宣言済み即発火**（§S3.3 により正 — pin は既成着座の保持）。抑制しない。B4 gate 側 prereg に「(d) K-dwell 下の bank-state fire = step ≤ K+1」を cite（転記 = %12）。
+
+### §8.8 🔒 (iv) declared-limit 裁定 — **窓統計 81/81 で本設計 gate は足りる**（per-cell replay probe の追加実装 = 不要）
+1. 裁定が依存する量（timing 包絡・順序不変条件・fork 判別）は全て録画から可得で 81/81 実測済 + **p5 独立再計算一致**（§8.3）。
+2. (B) 採用（§8.1）により latch 列は fire と独立 — 摂動 cell の latch 問題は recording 時代と同一に還元（gate② で批准済の計器の問題）。
+3. 残る未知 = **live fire 下の episode dynamics** = /pre-check probe（nominal cell・G-F2 内）+ DoD-7 後 cell-2 追補（§12-5 既 carry）の担当。
+4. **no-silent-cap**: 本繰延（摂動 cell latch 列 = live probe 段へ）を prereg [RESULT] に明記のこと。
+
+### §8.9 残作業 index
+全 Q 裁定済（Q2/Q4 = §8.1/§8.2〔banked `efad9c05b9`〕、Q1/Q3/Q5/Q6/(iv) = §8.4-§8.8）。次 = %12 prereg（pN 条件パターン・§8 準拠）→ 実装 → probe → `/pre-check` → two-key。
 
 ## §7 cites（本 charter の接地、全て p5 自読 2026-07-17）
 
