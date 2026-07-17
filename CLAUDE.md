@@ -160,10 +160,11 @@ THREAD project の全 task は logic tree 上の node として管理し、各 n
 
 ### タスク着手前 (§2, 4, 7, 8, 24)
 
-2. **[DEFINE]→[TASK]→[L-TRIAGE]→[CHECK]→[VERIFY]→[DESIGN-GATE if 直交該当]→[RULE-CHECK]→[CHANGE]→[HIGH-COST-GATE if 該当]→[RUN]→[RESULT]** — Unknownが残った状態で着手禁止。各 gate:
+2. **[DEFINE]→[TASK]→[L-TRIAGE]→[DEFER-RECON]→[CHECK]→[VERIFY]→[DESIGN-GATE if 直交該当]→[RULE-CHECK]→[CHANGE]→[HIGH-COST-GATE if 該当]→[RUN]→[RESULT]** — Unknownが残った状態で着手禁止。各 gate:
    - **[HIGH-COST-GATE]** (GPU 10h+ / production launch / multi-skill chain): default NO_GO。`/production-launch-gate` PASS まで [RUN] 不可。chain math / expected SR は file:line 根拠 + 実測再計算 + 仮定リスト必須、仮定は低コスト falsification test を定義。proxy metric だけで判断しない (actual success condition / raw metrics / termination reason 確認)。Rs explicit approval なしに production launch しない
    - **[TASK]** (NEST): node_id (`T-{seq}-{sub}-...`) 併記、tree = `project-tree-manifest.md`。node 起動承認 = 本 [DEFINE] rs 承認で兼ねる
    - **[L-TRIAGE]** (全タスク): `/rule-check stage1` で §0 keyword (path/diff/領域) から final_L (L0-L3) 確定 → 後続 gate に条件付与 ([VERIFY] CC Debate は L2+、§15 層2 事後 debate は L3、層5 多視点は L3 or 3+file)
+   - **[DEFER-RECON]** (全 chunk/task、[L-TRIAGE] と [CHECK] の間): 本 chunk の前提を **DEFERRED/PENDING DEPENDENCY REGISTER** (`00-DESIGN-STATUS-LEDGER.md` §DDR、SSOT) と照合。前提が register の未解決 deferred/pending 項目に依存するなら**その項目が本 chunk を GATE** — 解消 or Rs 明示 disposition まで [CHECK] 以降不可。出力 = **reconciliation record** (前提 × register 各項目の依存判定、必須 artifact)。§運用4 prior-art guard は継続必須だが keyword-miss を許すため、本 gate の **register 構造照合が backstop** (grep 単独に依存しない — 2026-07-16/18 の 2 回 miss 再発防止)。**FOUNDATIONAL 依存が未解決なら着手不可** (premise に地面が無い)。register 現行性維持 = PLAN-KEEPER (defer/carry 発生時に即 entry)。
    - **[DESIGN-GATE]** (直交、reward/env/成功条件 変更時常時): `/reward-design` (到達可能性テーブル + 因果DAG + ground-truth値 + トレース) + `/pre-check` (失敗モード検証)、両 PASS まで進まない
    - **[VERIFY]** (adversarial planning は全タスク、CC Debate は L2+): 計画が目的達成するか / 失敗シナリオ最低1 / THREAD 固有条件 (dual-arm/cable/PhysX-Newton/N-dependency) / CHECK と独立ツール検証。proxy・簡略化 setup は ⚓ methodology に従い代表性 verify (実 SSOT = `task_config.py` の CLIP_POSITIONS/table/GRASP_X、矛盾/artifact 無を確認)。CC Debate 詳細 = `verification-subagent` skill (CC1 PROPOSE → CC2-5 Challenger + CC6 NHA → REBUT_OR_ACCEPT → DECIDE)
    - **[RULE-CHECK]** (全変更): `/rule-check stage2` で Tier 0-3 チェックリスト、全 PASS まで [CHANGE] 不可
