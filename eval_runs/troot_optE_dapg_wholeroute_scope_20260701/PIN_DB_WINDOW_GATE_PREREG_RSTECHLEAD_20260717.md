@@ -1,9 +1,10 @@
 # (d-b) D-b window gate — prereg (impl + probe + acceptance)
 
-**v0.5 — 2026-07-18 04:05 JST** · **Author:** RS-TECH-LEAD (w2:p4) · **Node:** pin (d) — (d-b) half
+**v0.5.2 — 2026-07-18 04:18 JST** · **Author:** RS-TECH-LEAD (w2:p4) · **Node:** pin (d) — (d-b) half
 **Governing:** charter §9 (`463f156fc6`) + §9.7 (`bd1c534678`) + §9.7.8/§9.7.9 (`082baa1ca6`) + §9.7.10
-(`179a8e390a`, B1 surface fix). **Baseline code = HEAD `469435014f`.** **Status:** DRAFT — **B1 design PASS**
-(pN v0.4); folds pN v0.4 evidence conditions R1-R5. Awaiting pN v0.5 re-readback. **⛔ [CHANGE] STOP.**
+(`179a8e390a` + gap-bound fix `c6a7d43b9f`). **Baseline code = HEAD `469435014f`.** **Status:** DRAFT — **B1
+design PASS**; C1/C2/C4 + charter fix = PASS-CLOSE (pN v0.5.1). This rev folds the last blocker **C3** (L-DB-H)
++ records-only fixes. Awaiting pN v0.5.2 re-readback. **⛔ [CHANGE] STOP until pN readback PASS.**
 
 **One line:** call the drive-agnostic `_maybe_activate_c1_pin` from the ik_chord (policy) drive loop at
 pre-step, `route_steps` hoisted unconditionally, removing the G4-G6 dead zone. No reward term, no new
@@ -47,8 +48,8 @@ kinematic exception.
   `np.random.get_state()` digest in the artifact. ⇒ the reset RNG is disabled → fully deterministic (ep1≡ep2).
 - **command (TEMPLATE, `<LEG>` expanded at run)**: `CUDA_VISIBLE_DEVICES=0 /home/rlrk/env_isaaclab7/bin/python thread_isaac_lab/scripts/pin_db_window_probe.py --cell cell_x0_y0 --leg <LEG> --outbox <FRESH_OUTBOX>/<LEG>`. ⚠ this is a template; **the run-time EXPANDED argv is saved verbatim per leg** in the artifact.
 - **cfg (frozen)**: `world_count=1` · `grasp_actuation=True` (E_gF=False) · `route_executor_impl="route_executor"` · `route_recording_npz=<above>` · `g1_scene_align=True` · **`route_drive_mode="ik_chord"`** · `route_c2_scene=True` · `route_c1_pin=<A-pair flag>` · (`route_t_clock=True` only for L-DB-H). · `env.INIT_XY_NOISE` set to 0.0 via the attr-override above (NOT cfg) · **drive** = deterministic zero-residual · **horizon** 900 (`:407`).
-- **artifact schema (frozen)**: a **common envelope** (per leg) + a **leg-specific payload** (or a companion
-  trace file with its own schema+path+sha256):
+- **artifact schema (frozen)**: a **common envelope** (per leg) + **leg-specific payloads FROZEN as INLINE JSON**
+  in the same result file (no companion trace file):
   - **common envelope (21 fields, C2)**: `leg`·`expanded_argv`·`fire_step`·`route_t_at_fire`·`fired_at_frame`·`dwell_count`·`fire_body_dx_m`·`fire_body_z_m`·`fire_cross_dx_m`·`fire_cross_z_m`·`c1_retained_at_fire`·**`audit_verdict`**·**`eq_id`**·**`mismatch_class`**·`g_latched`(6)·`success`·`invalid`·`time_out`·`dropped`·`pass`(bool)·`failed_predicates`(list). (audit_verdict added for L-DB-A's genuine-fire+audit requirement.)
   - **leg-specific payloads — FROZEN as INLINE JSON in the same result file (no separate companion, C2)**: L-DB-A → `post_fire_continuity` (per-step {step,dx_cross,z_cross,seated} + min_z/max_z/max_dx/first_fail_step); L-DB-G → `dwell_sequence` (per-frame {inside, dwell, fired}); L-DB-H → `hold_trace` (§3.1 L-DB-H bars); L-DB-I″ → `poison_subcase` ({forced_not_in_groove, leg_went_red}); L-DB-K → `perf` ({transitions_per_s, peak_gpu_mib, rss_mib} × {OFF,ON}).
   - **provenance closure (per run)**: `command`·`cfg`·`recording_sha256`·`loaded_source_closure`·`env_fingerprint`·`harness_self_sha`·`pre_hash`·`post_hash`·`changed_source_set` (=[] for the A-pair).
@@ -70,15 +71,19 @@ kinematic exception.
   (i) **≥K dwell** → fires within K+1; (ii) **K−1 dwell** → no fire; (iii) **gap-reset** (`[True]*(K-1)+[False]+
   [True]*(K-1)`, mirrors unit `test_pin_da_dwell_reset_on_gap:482`) → no fire. Record `dwell_sequence`
   per-frame. spurious = <K consecutive (§9.7.9). Residual (live-policy dist) = post-launch monitor.
-- **L-DB-H (hold-era label semantics — SYNTHETIC injection, C3).** ⚠ `route_t_clock=True` (`:478`) only ENABLES
-  the mechanism; `_hold_mask_np` is the data-dependent output of `_update_route_sync()` (`:2043-2045`) and is
-  NOT reproducibly forced by a flag. This leg uses a **synthetic hold**: with `route_t_clock=True`, after a fire,
-  directly set `env._hold_mask_np[0]=True` for a fixed window — a state injection to exercise the LABEL path,
-  **NOT a claim about `_update_route_sync`'s real hold trigger**. **Frozen bars (binary → `hold_trace`)**: (i)
-  precondition `hold_mask False→True` recorded; (ii) `route_t` does NOT increment while held (`:2044-2045`
-  clamp); (iii) the episode clock DOES increment; (iv) the fire predicate (capture∧depth∧K on body_q) is
-  **hold-independent** (fires/doesn't identically to the no-hold run); (v) `fired_at_frame` is
-  provenance-only/non-gate (recorded under the clamped route_t; asserted not wired to reward/term).
+- **L-DB-H (hold-era label semantics — SYNTHETIC via monkeypatch, C3 v0.5.2).** ⚠ two facts block a naive
+  injection: (a) the witness is already latched at fire (`:1841`), so a hold set AFTER the fire cannot validate
+  the fire-time label; (b) `step()` OVERWRITES `self._hold_mask_np = self._update_route_sync()` post-physics
+  before the route_t-increment site consumes it (`:2043-2045`), so a direct `_hold_mask_np` assignment is
+  clobbered. This leg therefore **monkeypatches `env._update_route_sync`** to return a CONTROLLED `hold_mask`
+  sequence — **False before the fire window, True across a fixed K-frame/RL-step window that STARTS BEFORE the
+  K-dwell/fire, then restored** — so the value the increment site (`:2044-2045`) actually consumes is the
+  injected one (route_t clamp guaranteed). **NOT a claim about `_update_route_sync`'s real hold trigger.** Run a
+  **paired no-hold vs hold on the SAME body snapshot/path** (hold starts BEFORE the K-dwell/fire). **Frozen bars
+  (binary → `hold_trace`)**: (i) `hold_mask` False→True recorded; (ii) `route_t` constant while held; (iii) the
+  episode clock increments while held; (iv) the fire decision (body + crossing) is IDENTICAL between the no-hold
+  and hold runs (hold-independent); (v) the hold-side fire DOES occur (fire happens while held); (vi)
+  `fired_at_frame = step_f[clamped route_t] + sub_i`; (vii) reward/term do NOT read the `fired_at_frame` value.
 - **L-DB-I″ (fire ⇒ crossing-retention, R2/R3 — measurement leg PROVEN alive).** At EVERY fire, record BOTH
   surfaces at the SAME snapshot (`fire_body_*` from `bq[seat_body,:3]`; `fire_cross_*` from
   `_seat_metrics(cable_pos,_C1_XY)`) + **hard-assert `_seated_in_groove(fire_cross_dx,fire_cross_z)`=True**.
