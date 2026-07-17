@@ -9,7 +9,7 @@ pin_active onset but when the identity seat body DWELLS in a route clip's captur
 (``clip_capture_check`` AND ``z <= Z_FIRE_DEPTH_M``) for ``PIN_TRIGGER_DWELL_K`` consecutive physics frames.
 
 Legs (bars preregistered in PIN_D_TRIGGER_PREREG_RSTECHLEAD_20260717.md sec 5, v0.6):
-  L-D(d)  ep1: geometric fire -> hard bars {fire_step in [242,250]; fire_label == 2468 exact;
+  L-D(d)  ep1: geometric fire -> hard bars {fire_step in [242,250]; latch < fire; fire_label non-gate (sec 8.13);
           anchor z in [830.604, 830.899] mm; dwell == K; eq_active == 1; audit PASS; retention z<836 fire->done}
           -> done-reset clears eq + witness None -> ep2: re-fire, same bars. characterization-only: seat z @ done,
           residual push (min seat z below anchor), reward trace.

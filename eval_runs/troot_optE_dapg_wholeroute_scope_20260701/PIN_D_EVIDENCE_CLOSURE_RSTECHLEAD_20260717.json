@@ -1,0 +1,174 @@
+{
+  "record": "pin (d-a) byte-leg evidence closure (pN two-key B1/B2 records-fix)",
+  "generated_context": "RS-TECH-LEAD w2:p4, 2026-07-17",
+  "producing_commit": "e8edd96a3ed5e4dca56077ebf99bd201647ceb20",
+  "baseline_commit": "88b7a166810b6cfcf79eb7a96d745d3be1db532f",
+  "as_run_sources": {
+    "baseline": {
+      "commit": "88b7a166810b6cfcf79eb7a96d745d3be1db532f",
+      "delta_from_commit": "tests-only patch (test_route_reward_identity_guards.py) applied; production source is pure baseline",
+      "runs": [
+        "L-F1 f1base trace",
+        "L-H2 Run C head (collector)",
+        "L-F2 baseline (pin_ab_lifecycle_probe flag-ON, fire 254)"
+      ]
+    },
+    "bundle_worktree": {
+      "commit_equiv": "e8edd96a3ed5e4dca56077ebf99bd201647ceb20",
+      "delta_from_commit": "HEAD 16dde1ff5c + (d-a) bundle patch (== e8edd96a3e source, config hunk3+4 only)",
+      "runs": [
+        "L-F1 bundle trace",
+        "L-H2 Run C bundle (collector)"
+      ]
+    },
+    "bundle_maintree": {
+      "commit_equiv": "e8edd96a3ed5e4dca56077ebf99bd201647ceb20",
+      "runs": [
+        "L-H Run A (collector, fired/done)",
+        "L-H Run B (collector, budget cutoff)"
+      ],
+      "B2_exec_neutral_delta": "proc_meta.closure_sha256 recorded MAIN-TREE bytes at run time; differs from e8 committed tree on EXACTLY 2 files, both execution-semantics-neutral: (1) thread_isaac_lab/configs/__init__.py = SPDX license header only (unrelated 747-residue); (2) thread_isaac_lab/envs/route_env_config.py = obs[60:62] comment/name hunk only (NOT-MINE, working-tree preserved). Neither changes any runtime value; Run A/B measurements are valid, no rerun (pN B2 disposition, loud).",
+      "B2_delta_shas": {
+        "pin_da_lh_runA": {
+          "thread_isaac_lab/configs/__init__.py": {
+            "as_run_sha256": "8d41bd83289e298bd171ce4736739918eff4911f20531e804cab54d8a67252b9",
+            "e8_tree_sha256": "f8e4464c77e3f68d230cb57965f37c6691fc234c1b180ec1500f2d96837b4cad"
+          },
+          "thread_isaac_lab/envs/route_env_config.py": {
+            "as_run_sha256": "c3c068b5b3360059ec92e32ddd22ab5c9cf42255334b71e9d561d1fb6a4aef19",
+            "e8_tree_sha256": "c162f1810fadc197a0311e1977604bf7487cf109fb1e18caa36f05bd7a7eaa0f"
+          }
+        },
+        "pin_da_lh_runB": {
+          "thread_isaac_lab/configs/__init__.py": {
+            "as_run_sha256": "8d41bd83289e298bd171ce4736739918eff4911f20531e804cab54d8a67252b9",
+            "e8_tree_sha256": "f8e4464c77e3f68d230cb57965f37c6691fc234c1b180ec1500f2d96837b4cad"
+          },
+          "thread_isaac_lab/envs/route_env_config.py": {
+            "as_run_sha256": "c3c068b5b3360059ec92e32ddd22ab5c9cf42255334b71e9d561d1fb6a4aef19",
+            "e8_tree_sha256": "c162f1810fadc197a0311e1977604bf7487cf109fb1e18caa36f05bd7a7eaa0f"
+          }
+        }
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_d_trace_cell_x0_y0_bundle.json",
+      "sha256": "227ec171d61a4ca125d48938ea7d46bacf0aa5f90de8b2aa5fc8f68ae5364d44",
+      "side": "bundle"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_d_trace_cell_x0_y0_bundle_obs.npy",
+      "sha256": "f313f5598c7c944ff8fce78df7125e54a68b826d5549d6c290fa9f9a208f4dc1",
+      "side": "bundle"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_d_trace_cell_x0_y0_f1base.json",
+      "sha256": "227ec171d61a4ca125d48938ea7d46bacf0aa5f90de8b2aa5fc8f68ae5364d44",
+      "side": "baseline"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_d_trace_cell_x0_y0_f1base_obs.npy",
+      "sha256": "f313f5598c7c944ff8fce78df7125e54a68b826d5549d6c290fa9f9a208f4dc1",
+      "side": "baseline"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lf2_baseline_flagON_result_cell_x0_y0.json",
+      "sha256": "587e0e0431f88468caca432eb144e6dfeda3042af3ba2f597dc34f99caa82f60",
+      "side": "baseline"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runA/ep_000000.manifest.json",
+      "sha256": "295cf35ba5a76b5092064813fbe0e9473ac5d56ff8696b3f4be16e2bbaf4db39",
+      "side": "bundle_maintree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runA/ep_000000.npz",
+      "sha256": "c7ef23bd398b56e7ce589d9ae562e799155efbd817fa296bf49e20be8a28bdba",
+      "side": "bundle_maintree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runA/ep_000001.manifest.json",
+      "sha256": "51a1208d48eec905dfd5e99dc395df07c2782a725f70289ce64f5ba86274b2ad",
+      "side": "bundle_maintree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runA/ep_000001.npz",
+      "sha256": "c7ef23bd398b56e7ce589d9ae562e799155efbd817fa296bf49e20be8a28bdba",
+      "side": "bundle_maintree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runA/proc_meta.json",
+      "sha256": "80b9332a4e942d696b7d48656325143597f1eab777e2923c58e4d2fe70a6e981",
+      "side": "bundle_maintree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runA/proc_meta.rc000.json",
+      "sha256": "80b9332a4e942d696b7d48656325143597f1eab777e2923c58e4d2fe70a6e981",
+      "side": "bundle_maintree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runB/ep_000000.manifest.json",
+      "sha256": "678b053cf05a6f2062928412f01817908297a20af26b5fcd2631b5769a7c2d3c",
+      "side": "bundle_maintree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runB/ep_000000.npz",
+      "sha256": "e9e7515fcf123d289be527830e229e1ded61fca2e1ef5c14ab4dea483b143a0e",
+      "side": "bundle_maintree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runB/proc_meta.json",
+      "sha256": "99268d973fa618ff4bb03bcd80331d17e5925f654e52956efeea12759e6f83db",
+      "side": "bundle_maintree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runB/proc_meta.rc000.json",
+      "sha256": "99268d973fa618ff4bb03bcd80331d17e5925f654e52956efeea12759e6f83db",
+      "side": "bundle_maintree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runC_head/ep_000000.manifest.json",
+      "sha256": "9ac29027d75b8550534c7e2eb66b88005e309a830329c9fa2ecd7bf29d8fd941",
+      "side": "baseline_worktree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runC_head/ep_000000.npz",
+      "sha256": "1e4fdba57c08a775500016def8961308cf3cda8cf43af8ccc9401db192247f96",
+      "side": "baseline_worktree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runC_head/proc_meta.json",
+      "sha256": "b2c0c7675ae1115c6dd42e65dc499d29cd463c0abf2c8c39d9c6acbe0be27bae",
+      "side": "baseline_worktree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runC_head/proc_meta.rc000.json",
+      "sha256": "b2c0c7675ae1115c6dd42e65dc499d29cd463c0abf2c8c39d9c6acbe0be27bae",
+      "side": "baseline_worktree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runC_bundle/ep_000000.manifest.json",
+      "sha256": "d46fa5df87fb6c68e99af6841df6628d60fa2e677111df046240c8e5ddcca825",
+      "side": "bundle_worktree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runC_bundle/ep_000000.npz",
+      "sha256": "13e8983b75e7198b942f7519c871ae9dcf8822c467a84b8f6a53dc7141ff17b7",
+      "side": "bundle_worktree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runC_bundle/proc_meta.json",
+      "sha256": "9ab25333a3a0da8c82eb5ec74149c5d05a47a171fa3ca2beec43e79ef2ba6d1b",
+      "side": "bundle_worktree"
+    },
+    {
+      "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pin_da_lh_runC_bundle/proc_meta.rc000.json",
+      "sha256": "9ab25333a3a0da8c82eb5ec74149c5d05a47a171fa3ca2beec43e79ef2ba6d1b",
+      "side": "bundle_worktree"
+    }
+  ],
+  "artifact_count": 23,
+  "notes": "hash record alone is insufficient (pN B1): the raw files above are banked in the same commit as this record. Each side's as-run source is bound above. Byte-leg verdicts: L-F1 flag-OFF byte-identical (final_digest 4e81516c, obs f313f559), L-F2 fire 254->246 latch 242 unchanged, L-H2 Run C bars (i)-(vi) PASS."
+}

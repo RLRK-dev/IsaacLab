@@ -198,6 +198,39 @@
 
 **chain / scope**: 本 §8.13 は **fire_label 照会への設計軸裁定**であって (d-a) 全体の two-key verdict ではない。two-key は **%12 が probe PASS 論理を是正（exact→standing-anchor-drift）+ live standing anchors を [RESULT] 記録・§2-11/§5 records-fix + L-F1/L-F2/L-H/L-H2/L-C(d) 毒殺 leg の結果提示** → その producing commit で p5 設計軸 + pN evidence 軸。**⛔bar 緩和はしていない**（hard timing/anchor/順序/retention は不変、fire_label のみ設計どおり drift 化）。
 
+### §8.14 🔒 (d-a) post-land two-key = **CONFORM — PASS〔p5 設計軸〕** + 3 MEDIUM carry ACK（v1.7、2026-07-17 18:5x — producing commit `e8edd96a3e`。producing commit で verify〔HEAD narrative でない〕・独立 legs 走行）
+
+**独立検証 legs（p5 自走・自読、producing commit `e8edd96a3e`）:**
+1. **tests 31/31 自走** = 隔離 worktree @ `e8edd96a3e`・per-test driver・env7 直呼び **31/31 PASS**（既存 17 + (d-a) 14: same-snapshot poison / depth-leg / dwell-reset / fire-once / identity-body / identity-none-fail-closed / capture-check-shares-cache / audit-independent-rescan / broken-selector / quiet-outside / mjm-none-raises / n1n7-unchanged / reasons-payload / mismatch-3class）。%12 の L-B(31) を独立再現。
+2. **landed K-dwell 本体 自読**（`newton_route_env.py` `_maybe_activate_c1_pin`）= 裁定と精密一致: `seat_world = bq[seat_body,:3].copy()` **単一 snapshot** を check と authorizer に渡す（§2-6a same-snapshot）/ `captured ∧ z ≤ Z_FIRE_DEPTH_M`（§8.11.2 深さ leg）/ strict consecutive dwell reset / fire-once witness / identity None → fail-closed。
+3. **`clip_capture_check` + authorizer 自読** = **同一 `_clip_capture_cache` + 同一 predicate + 同一 rc bars**（§8.10.2 containment-by-identity 機構化）・per-frame mj_forward ゼロ（hoist 済）・non-raising・count assert on cached set。authorizer も同 cache を消費（`for cx,cy,g,y_win in _clip_capture_cache`）。
+4. **毒殺 test 自読** = `test_pin_da_same_snapshot_poison`: K 到達 frame で `bq[seat_body]`=(9.9,9.9,9.9) に**汚染 AFTER snapshot** → authorizer が **pre-poison 値受領**を assert（re-read 実装なら 9.9 で FAIL）= §8.12 の「値照合単独では fail 不能」要件を満たす **fail し得る計器**。
+5. **probe result 自読**（committed `pin_d_trigger_probe_result_cell_x0_y0.json`）= `L_D.PASS=True`・全 check True・`fire_label_standing_anchor=2462`・`fire_label_drift_vs_anchor=0`（非 gating）。L_D2 hard timeline PASS・L_E PASS。
+6. **§2-11 records-fix 自読** = offline 2468 **RETIRE** 明示 → live standing anchor **2462**、fire_label 非 gate（§8.13）反映済。
+
+**§8.12/§8.13 two-key checklist（全 ✅）:**
+| bar | 判定 | 根拠 |
+|---|---|---|
+| same-snapshot 毒殺 leg | ✅ | `.copy()` 単一 snapshot + poison test PASS（fail-able 計器） |
+| anchor drift | ✅ | anchor 830.71 ∈ band [830.604,830.899]・standing anchor 記録・drift 0 |
+| 宣言外 delta ゼロ | ✅ | L-F1 flag-OFF **byte 恒等**（final_digest 一致・obs.npy sha 一致・source 恒等 `git diff *.py`=∅ 確認）/ L-F2 flag-ON = latch列不変・宣言外 obs/reward/identity 変更なし・delta = 宣言 fire-timing のみ |
+| retention continuity | ✅ | retention_max_after_fire **831.07 < rim 836**（margin ~4.9mm）・fire→done continuity |
+| fire_label 非 gate（§8.13） | ✅ | probe PASS 論理が fire_label を除外（`checks["PASS"]=all(checks)` に fire_label 不含）・standing anchor 2462 |
+| containment-by-identity（§8.12 bar 超過） | ✅ | 同 cache 共有・audit は cache 非依存 live rescan（`test_pin_da_audit_independent_rescan` PASS） |
+| dormancy（§8.12） | ✅ | L-H Run B budget cutoff = 全 sentinel・windows_with_done 0 |
+| L-H2 additive-only（§8.12） | ✅ | 既存 9 arrays byte 一致・additions = exact set 過不足ゼロ |
+
+**⭐ 設計判断 vindication（再確認）**: 深さ leg REVISE（§8.11.2、rim ratify 却下）を live が裏書き — retention 831.07 < 836。rim 発火なら retention が rim 際/超で G6-death を示したはず。
+
+**3 MEDIUM carry ACK（/pre-check、two-key reviewer 明示 ACK 必須）:**
+- **M1 DR-headroom 1.285mm（§12-8）= ACK**: depth bar 0.831 の headroom（829.715 = 私の 81-cell 実測 max static height に対し）は保守側 fail-closed（DR が静止高を +1.285mm 超上げると **no-fire**、false-fire でなく）・検出器 = supervisor fire-rate。DR-ON 日に bar 再検（C2-margin MED と同 pattern）。私が §8.11.2/§12-8 で登録した carry — 妥当。
+- **M2 byte-neutral = sim-replay scope（ACK + scope 明記）**: L-F1 の byte-neutral は **phys/obs/reward/done の sim-replay** に限定。artifact 面は §11 宣言どおり（8 npz + 3 manifest additive）で L-H2 が bound。**DAPG/BC loader の additive-key 許容（D0-R3 規約）は本 legs で未 assert** — これは **consumer 側検証 = (d-b)/訓練時代**（trainer が実際に npz を ingest する gate）の担当。honest scoping として ACK、(d-b) carry に含める。
+- **M3 latch≺fire dual-clock +4 margin = ACK**: latch 242 と fire 246 は別 clock 経路の比較で +4 step margin により成立（§8.13 の coarse-bar 意図どおり）。**cell-2（§12-5）は gap 縮小に注意** = watch 登録に concur。
+
+**非 blocking 1 件（docs-must-not-lie、%12 fold 授権）**: `pin_d_trigger_probe.py:12` の module header docstring「fire_label == 2468 exact」は実 PASS 論理（§8.13 是正済・非 gate）と矛盾する **stale 記述**。挙動・PASS 判定は正（header comment のみ未更新）。次 commit で header を「fire_label = standing-anchor / non-gate（§8.13）」へ 1 行修正を推奨。
+
+**verdict**: **CONFORM — PASS〔p5 設計軸、(d-a) post-land〕**。two-key の evidence 軸 = pN（legs 実測）。**standing 不変（§S4.7）**: training-ready 解除は **(d-a) ∧ (d-b) 両 two-key ∧ §12-5 cell-2** — 本 (d-a) two-key PASS はその **1 鍵のみ**。(d-a) は training-ready を解除しない。次 = (d-b)=D-b window gate（訓練 drive 分岐配置 + K 再検証 + hold label）+ cell-2（DoD-7 後）。
+
 ## §7 cites（本 charter の接地、全て p5 自読 2026-07-17）
 
 | 項 | cite |

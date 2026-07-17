@@ -1,0 +1,19 @@
+{
+ "process_index": 0,
+ "derived_seed": 830481308,
+ "pid": 538484,
+ "env_fingerprint_sha": "876fb3b58846b0dc7db51e5ec4f069dd87f32ffbb39f794820c61877de51ba68",
+ "code_sha": "e6b96874322f22fec7c1a3d161511c69b177aed3712a67ff1a54addeb38cc4ac",
+ "episode_idx": 0,
+ "n_steps": 60,
+ "termination_reason": "",
+ "truncated_by": "workload_step_budget",
+ "invalid_any": false,
+ "source": "online",
+ "sha256": "13e8983b75e7198b942f7519c871ae9dcf8822c467a84b8f6a53dc7141ff17b7",
+ "drive_mode": "feedforward",
+ "sec_S_exposure": "HEAD FM3/FM4 tighten code is live and UNRATIFIED (I0A_SCOPE_MANIFEST AMENDMENT 1 + sec S, ad0bb76460): r_paid/done/seat/latch semantics in this artifact are NOT banked-valid; infra-only claims.",
+ "pin_fire_step": -1,
+ "pin_eq_id": -1,
+ "pin_mismatch_class": -1
+}
