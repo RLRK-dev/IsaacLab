@@ -58,3 +58,25 @@ The initial legs (M1/M2/M3) + an unauthorized FF-no-pin leg (M2b) were run with 
 
 ### Evidence rerun set + order (OPS-SUP cond 7)
 harness bank (done) → OPS-SUP commit readback → THIS prereg+M2b bank → OPS-SUP scope PASS → **fresh rerun**. Rerun = M1 (B4-shadow ik_chord+pin) · M2 (FF+pin+shadow: coverage + positive control) · M2b (FF-no-pin attribution) · M3 (ik_chord natural-term). Each to a **fresh leaf** with `run.log` in the parent. B6-char / B5b / impl remain UNAUTHORIZED.
+
+---
+
+## CORRECTION v3 — 2026-07-18 16:19 JST (harness PASS-CLOSE; M2b one-variable + exact 3-state + pre-fire trace)
+
+The evidence-grade harness is **OPS-SUP PASS-CLOSE** at **commit `78d2b94c`**, `gonow_measure.py` sha256 **`de44d4a1dce37cedf93e9582dffab7f5d2dd19df0bb7d9164ec34813809a732`** (1-path, working-tree clean, `device_provenance_ok` a hard bar). This v3 **SUPERSEDES** the v2 §Harness hash and the v2 M2b binary bar.
+
+### Evidence-grade harness (final)
+`commit 78d2b94c` / sha256 `de44d4a1…`. All v2 provenance PLUS an **enforced device hard bar**: before the drive it exit-2s unless `--device=cuda:N`, `sys.prefix==/home/rlrk/env_isaaclab7`, CVD non-empty, `torch.cuda.is_available`, no probe error, `str(env.device)==cuda:N`, `current_device==N` (CVD-visible namespace), `device_count>N`; `device_provenance_ok` is conjoined into `source_integrity_ok`, so `status=COMPLETE` implies it. The earlier 5-step `/tmp` provsmoke is **DIAGNOSTIC / NON-EVIDENCE** (pre-bank + no `cvd` field). Prior-art concrete delta = **this** harness (`78d2b94c`), not the superseded `c4253ed4`.
+
+### M2b — FF-no-pin, ONE-VARIABLE (SUPERSEDES v2 M2b)
+- **Config:** `--drive-mode feedforward` **`--shadow`** (NO `--route-c1-pin`) `--episode-steps 900`, GOLDEN, wc=1. So M2 (FF+pin+shadow) and M2b (FF+shadow, no-pin) differ in **exactly** `route_c1_pin`. **Hard-assert** in analysis: M2 and M2b provenance agree on harness sha / source-closure / recording sha / venv / effective device / `RL_SIM_SUBSTEPS` / `PHYSICS_STEPS_PER_RL` / horizon / drive_mode, and the effective-config diff set = **{`route_c1_pin_effective`, `pin_seat_seg`}** only. Any other diff → INCONCLUSIVE.
+- **Frozen anchor:** step **347** (`B_contact_loss`) is a POST-DIAGNOSTIC frozen anchor from the diagnostic M2 run; attribution window = steps **[242 (g3; pin-fire ≈246) .. 347]**.
+- **Causal precondition — pre-fire trace equality:** M2 and M2b per-step drop-metric traces (`contact_r`, `contact_l`, `held_z_minus_rest`, `dx_c1`, `g_latched`, `held_i`) must be **equal from route step 0 through the pin-fire step (~246)**. If they diverge before ~246, `route_c1_pin` is not the isolated variable in the drop window → **INCONCLUSIVE** (route_c1_pin also alters build-time bank prep).
+- **Exact three-state classification (no `≲`/`~`):**
+  - **PIN-ASSOCIATED:** pre-fire traces equal ∧ M2 drops (`B_contact_loss`) within [246..347] ∧ M2b does **not** drop through step 347 (no `B_contact_loss` in [246..347]).
+  - **BRANCH-INTRINSIC:** pre-fire traces equal ∧ M2b **also** drops in [246..347] with the **same** cause (`B_contact_loss`) — the recorded branch loses grip whole-route, pin-independent.
+  - **INCONCLUSIVE:** pre-fire traces diverge, OR M2b drops with a different cause or outside [246..347], OR any `device_provenance_ok`/`source_integrity_ok`/config-diff-set assertion fails on either leg.
+- **Alone does NOT discharge any gate:** M2b is attribution for the coverage question; the pre-impl coverage gate (CC2 CH-1) is only informed (whole-route ik_chord efficacy = B5b, post-impl).
+
+### Evidence rerun set (final)
+M1 (B4-shadow ik_chord+pin+shadow) · M2 (FF+pin+shadow) · M2b (FF+**shadow**, no-pin) · M3 (ik_chord natural-term). Each: fresh leaf, `run.log` in the parent, `--device cuda:0` with `CUDA_VISIBLE_DEVICES=0`. Order: THIS prereg bank → OPS-SUP scope PASS → prior-art readback → rerun. B6-char / B5b / impl UNAUTHORIZED.
