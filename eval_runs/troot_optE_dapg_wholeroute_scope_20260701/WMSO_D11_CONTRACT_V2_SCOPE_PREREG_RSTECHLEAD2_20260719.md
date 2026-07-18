@@ -2,12 +2,13 @@
 
 - node: `T-WMSO` (parent `T-ROOT-RS-TECH-LEAD2`); author = w2:pQ (RS-TECH-LEAD2)
 - **decision_status: ACCEPTED** (Rs directive 2026-07-19; verbatim §0)
-- **scope_status: DRAFT v3.2.1 — pN readback: C1/C2/C3 = PASS-CLOSE + records-only HOLD R1-R3 → 訂正 bank → pN blob readback → SCOPE CONCUR PENDING**
-- **implementation_status: NOT_STARTED**（pN C4: SCOPE CONCUR まで design authoring / [CHANGE] は開かない）
+- **scope_status: SCOPE CLOSED（3 軸）— Rs review-3「SCOPE PASS」+ pS 設計軸 CLOSE + pN SCOPE CONCUR / PASS-CLOSE（08:49 JST、C1-C4 + R1-R3 ALL CLOSE）。解錠 = D1.1-A DESIGN AUTHORING のみ**
+- **implementation_status: NOT_STARTED**（code / [CHANGE] / impl / run / authority 系は §9 gate 群 [CC Debate → pN DESIGN PASS → pre-check → rule-check → path freeze / impl GO] まで未解錠）
 - grounding_head: `11da258f75` | wmso_d1_commit: `57ed32b27a` (clean at HEAD)
-- version: v1 (07:42) → v2 (08:06, pS conditions fold) → v3 (08:12, Rs review-2 必須修正 #1-#8 + 重要事項 #9-#12 + pS addendum minor fold) → v3.1 (08:16, pS C-1 discharge: §0b fold-map 追記) → v3.2 (08:2x, pN SCOPE HOLD C1-C4 fold: §5 lineage domain 全列挙 / §4 non-increasing 訂正 + ceiling 明記 / §9 fail-closed re-verify loop / bank 手順 §13) → **v3.2.1 (08:4x, pN records-fix R1: §13-3「3-path atomic」claim 撤回 → 実際の二 commit chain `9ee7434aa1`→`6b6b30886b` に訂正; content 無変更)**
-- design-axis: pS RATIFY-WITH-CONDITIONS → v2 実読 CONFIRM → **v3 re-check = 設計軸 PASS**（§5 lineage 訂正 = 不変量喪失なし・identity 4分離・E0-E2・確定表 単調性 = 全 SOUND）+ records 条件 C-1 = §0b fold-map で discharge（`WMSO_D11_SCOPE_DESIGN_RATIFY_WMSODESIGN_20260719.md` addendum §7 版 sha256 `7023eb609a9b…`）
+- version: v1 (07:42) → v2 (08:06, pS conditions fold) → v3 (08:12, Rs review-2 必須修正 #1-#8 + 重要事項 #9-#12 + pS addendum minor fold) → v3.1 (08:16, pS C-1 discharge: §0b fold-map 追記) → v3.2 (08:29 JST sha 確定, pN SCOPE HOLD C1-C4 fold: §5 lineage domain 全列挙 / §4 non-increasing 訂正 + ceiling 明記 / §9 fail-closed re-verify loop / bank 手順 §13; bank `6b6b30886b`) → v3.2.1 (08:44 編集・08:47 bank `aaab83887a`, pN records-fix R1: §13-3「3-path atomic」claim 撤回 → 実際の二 commit chain `9ee7434aa1`→`6b6b30886b` に訂正; content 無変更) → **v3.2.2 (08:5x, Rs review-3 pre-bank 2 修正の事後適用 [仮時刻確定・完全 sha 化・JCS 担当 chunk 明記 §2/§3] + Rs design carries DC-1..DC-6 を §10b に固定; records/carry のみ・設計判断 無変更)**
+- design-axis: pS RATIFY-WITH-CONDITIONS → v2 実読 CONFIRM → v3 re-check = 設計軸 PASS + C-1 discharge（§0b fold-map）→ v3.2 delta PASS・bank GO → R1-R3 self-correction。**final ratify doc sha256（完全形・照合面）= `4a40bf2f59f58e17b9cb04fa4d9ef3c3d262cb09b8bf883d18434ae92ebf0e92`**（bank `aaab83887a` の committed blob と一致。過程中間版の参照 `196995598d67` / `db17a485d9d2` / `7023eb609a9b` / `cc395766296f` は short ref — 完全形は bank 版 2 点 [`cc395766296f65f5…` = `6b6b30886b`、上記 = `aaab83887a`] のみ保全）
 - Rs review-2 判定 (2026-07-19 verbatim): 「修正後PASSです。現状はpNへのscope-concur送付前に修正が必要です。」「これらを直せば、**scope preregとして承認可能な水準**です。」
+- Rs review-3 判定 (2026-07-19 verbatim): 「**SCOPE PASSです。**」「scope preregとしては承認可能。仮時刻・省略SHA・JCS担当範囲をbank前に修正し、その後pS delta re-checkとpN banked-SHA readbackへ進んでよい。」〔注: review-3 のレビュー対象は v3.2 時点の写し。pS delta re-check / bank / pN readback / SCOPE CONCUR は review-3 到着前に完了済み（行き違い）。指摘 2 修正は本 v3.2.2 で事後適用し再 bank + 軽 readback を回す〕
 
 **WMSO = World-Model-Based Skill Orchestration**（skill 単位の高位意思決定・計画・遷移管理層。low-level policy および独立安全層とは分離する）。
 
@@ -83,6 +84,7 @@ Rs delivered a full written design review of the WMSO deliverable (`~/Downloads/
 ### IN (D1.1-A)
 - static definition / runtime record の分離（`SkillDefinition` / `SkillInvocation` / `SkillOutcome` / `HandoffOffer` / `TransitionRecord`; runtime 側 optional `RuntimeSnapshot`）
 - stable identity と hash 体系（§3）
+- **minimal JCS canonicalization（Rs review-3 修正 2）**: `SkillActionId` および `SkillDefinitionHash` の計算に必要な**最小限の** RFC 8785 canonicalization を D1.1-A 内で実装（chunk Exit の cross-process hash stability を自足で満たす。package 全体への展開は D1.1-C）
 - evidence record の型（component 別 `EvidenceRecord`、§4）+ usage policy の型
 - cross-field validator（値単体 / identity 整合 = execution_family×training_lineage / lifecycle 整合 / handoff **compatibility**、§5-§6）
 - `ValidationReport` / `ContractCertificate`（§6）
@@ -91,7 +93,7 @@ Rs delivered a full written design review of the WMSO deliverable (`~/Downloads/
 
 ### OUT (後続 chunk — D1.1 内の別 build 単位)
 - D1.1-B: tensor binding 実装（`TensorBindingSpec`: source offset/length・訓練時順序・normalization・scale/bias・bounds・quaternion convention・frame・history stack・sampling rate・action control mode）
-- D1.1-C: training artifact manifest（training-time run manifest・canonical JSON pipeline 全面化・package/CI 最終整備）
+- D1.1-C: training artifact manifest（training-time run manifest・**canonical JSON pipeline の package 全体への展開**〔artifact manifest・証拠 bundle・配布 metadata — D1.1-A の minimal JCS を基盤に拡張〕・package/CI 最終整備）
 - D2 以降すべて（§8 roadmap）
 
 ### Exit 条件（2 段階、Rs #2）
@@ -135,6 +137,8 @@ SkillDefinitionHash
   = H(JCS で正規化した SkillDefinition 全体)   [RFC 8785]
   — 実際に使用した契約内容を完全固定する content hash
 ```
+
+（JCS 実装の担当: **D1.1-A が上記 2 hash に必要な minimal canonicalization を実装**（§2 IN）。package 全体への canonical JSON pipeline 展開は D1.1-C — Rs review-3 修正 2。）
 
 - serialization schema の v2→v3 変更だけでは **SkillActionId は変わらない**（Rs 指摘の不適切設計を排除）。
 - `handoff_start_context` は action ID から外し、**SDM 入力特徴 / stratification / provenance** に置く。
@@ -338,6 +342,25 @@ lanes: dev = w2:pQ / design-ratify = w2:pS (WMSO-DESIGN) / evidence-verify = w2:
 - **minor（pS addendum §6#4）**: §4 表の「条件付き」系 cell の意味を design doc で明示（silent 可 化 禁止）。
 - **pN carry（D1.1-C 向け）**: 新規依存の追加回避（AGENTS.md）・CI action は SHA pin + admin allowlist 維持。
 
+## 10b. Rs review-3 design carries（DC-1..DC-6 — scope は再開せず、contracts_v2 DESIGN doc の必須 carry として固定; pN DESIGN PASS-CLOSE までに必須）
+
+- **DC-1 ExecutionBundleHash**: 実行結果を決めるのは policy weights だけではない。identity は実行 bundle に結び付ける:
+  ```text
+  Learned: policy weights / model architecture / tensor binding / normalizer /
+           action scale / control mode / runtime parameters
+  Scripted・Wait: source closure / config / schedule / wait duration・wait condition
+  ExecutionBundleHash = H(executable artifact, tensor binding, normalization,
+                          control mode, runtime config)
+  SkillActionId = H(skill namespace, skill ID, ExecutionBundleHash,
+                    skill variant, behavior revision)
+  ```
+  **fail-closed 規則**: D1.1-B 完了前は tensor binding hash が存在しないため、当該 skill は closed-loop eligibility を得られない。
+- **DC-2 evidence の暗号学的結合**: `ContractCertificate` に `evidence_bundle_hash` / `evidence_policy_hash` / `contract_schema_version` を追加（どの EvidenceRecord 集合で合格したかを固定）。`EvidenceRecord.evaluator_version` は `evaluator_artifact_hash` へ変更または併記。**usage 別 required component set** を定義（`OfflineReplayProfile` / `ShadowProfile` / `ClosedLoopProfile`: required components + minimum grade per component; closed-loop は最低 POLICY_ARTIFACT / OBSERVATION_SCHEMA / ACTION_SCHEMA / TENSOR_BINDING / NORMALIZATION / CONTROL_MODE / INITIATION_SPEC / TERMINATION_SPEC / HANDOFF_SCHEMA）。`TENSOR_BINDING` / `CONTROL_MODE` component は D1.1-B で追加する方針を明記（§4 の 7 component は「最低限」）。
+- **DC-3 grade 別 proof obligation（fail-closed）**: 各 grade の認定に要求する証拠を明文化（EXACT_TRAIN_TIME = training run manifest / source commit / config hash / input・output schema hash / normalizer hash / final artifact hash / train-time cryptographic binding。HASH_BOUND_REPRODUCED = source・config・artifact hashes / reproduction procedure / reproduced output hash / evaluator artifact hash。RECONSTRUCTED_COMPATIBLE = reconstruction sources / compatibility tests / unresolved differences / evaluator artifact hash。DIMENSION_ONLY = dimension source + semantic fields explicitly unresolved。UNKNOWN = authority-relevant claim 不可）。これが無いと grade が測定値でなく自己申告値になる（§5b (a) MEASURED の実装形）。
+- **DC-4 数値検証の完全化**: `isfinite` を timestamp/duration/cost に加え **TTL / confidence / progress / p50 / p95 / std / 全 bounds 値 / normalization mean・std / scale・bias** にも適用（`ttl=+inf`・`p50=p95=+inf`・`std=+inf` は大小比較だけでは通る）。invalid corpus へ追加: `NaN` / `±Inf` / whitespace-only ID / `bool` を整数 shape として渡す / unknown enum / unknown JSON field / Unicode 正規化差 / duplicate canonical key / 非正規化 hash 文字列。property-based test（ランダム入力での不変条件試験）を加える。
+- **DC-5 lineage 表の実在限定**: `DAPG | RL_ONLY (from-scratch)` を実際にサポートするか DESIGN で明示。現に利用する実装が無ければ表から外し、必要になった時点で schema version / policy update として追加する方が fail-closed（「将来の algorithm independence」のためだけに validator の許容範囲を広げない）。
+- **DC-6 v1 compatibility shim の意味**: v1 と v2 を独立した二つの source of truth として共存させない。必要な v1 shim は**内部で v2 へ変換・委譲**し、新しい状態や validation logic を保持しない。
+
 ---
 
 ## 11. Process / L-triage
@@ -351,9 +374,10 @@ lanes: dev = w2:pQ / design-ratify = w2:pS (WMSO-DESIGN) / evidence-verify = w2:
 - **charter 文書への D1-exit criterion 正式 fold**（grade×usage + 2軸分離）: 方針は Rs review-2 で確定（§0 verbatim「usage matrix は D1.1 Exit の必須条件」）。charter 本文の改訂 commit は Rs ratify + pN 経由（Rs 専権、自分で bar を動かさない）。
 
 ## 13. 次アクション
-1. ✅ Rs review-2 #1-#12 fold (v3) → pS PASS + C-1 discharge (v3.1) → **pN SCOPE HOLD C1-C4 fold (本 v3.2)**。
-2. **pS へ v3.2 delta re-check 依頼**（C1 表 / C2 訂正は §4-§5 の設計内容 delta）。
-3. ✅ bank 完了 — 実際の bank は**二 commit chain**: LEDGER = `9ee7434aa1`（p6 先行 bank）→ prereg + pS ratify = `6b6b30886b`（explicit 2 paths）。当初計画の「3-path atomic commit」記述は実行形と不一致につき**撤回**（pN R1 records-fix; 履歴 rewrite はしない）。
-4. **pN へ banked sha readback dispatch** → SCOPE CONCUR。**banked sha readback まで design authoring / [CHANGE] は開かない**。
-5. pN CONCUR 後: contracts_v2 DESIGN doc → §9 の順（fail-closed re-verify loop 込み）で gates。
-6. milestone verdict を p6 へ relay（都度）。
+1. ✅ Rs review-2 #1-#12 fold (v3) → pS PASS + C-1 discharge (v3.1) → pN SCOPE HOLD C1-C4 fold (v3.2)。
+2. ✅ pS v3.2 delta re-check = 設計軸 PASS・bank GO（08:35）。
+3. ✅ bank 完了 — 実際の bank は**二 commit chain**: LEDGER = `9ee7434aa1`（p6 先行 bank）→ prereg + pS ratify = `6b6b30886b`（explicit 2 paths）。当初計画の「3-path atomic commit」記述は実行形と不一致につき**撤回**（pN R1 records-fix; 履歴 rewrite はしない）→ records-fix `aaab83887a`。
+4. ✅ pN blob readback → **SCOPE CONCUR / PASS-CLOSE（08:49、C1-C4 + R1-R3 ALL CLOSE）**。
+5. ✅ Rs review-3 = **SCOPE PASS** → pre-bank 2 修正を本 v3.2.2 で事後適用（行き違い、ヘッダー注記）+ DC-1..DC-6 を §10b に固定 → 再 bank + pS/pN 軽 readback。
+6. **contracts_v2 DESIGN doc 執筆**（§2 IN 6 項 + §5b/N-1/N-2 + §10b DC-1..DC-6 を駆動要件に）→ §9 の順（CC Debate / pre-mortem → pN DESIGN PASS → pre-check → rule-check → path freeze / impl GO; fail-closed re-verify loop 込み）。
+7. milestone verdict を p6 へ relay（都度）。
