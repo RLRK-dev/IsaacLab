@@ -22,8 +22,12 @@ session_history:
     status: active
     started_at: 2026-07-18T17:32:12+09:00
     note: "WMSO D0 architecture draft (§A–I, design-only) authored+banked 4baf5b2650 (sha 318e96471dbf). pN D0-exit design verify: v1→v2→v3→v4 ac9fc83165 (sha 1b107df59f6e). pN REVERIFY round-3 (observed 2026-07-18 22:14:37 JST) = ✅PASS-CLOSE / D0 Architecture EXIT GRANT: B7a (TERMINAL|INTERRUPT tagged union) + B6 (raw jsonl artifact_sha==banked sha, non-retroactive, PASS 0 issues) discharge, B1-B5/B7/B8 regress なし. D0=CLOSE, node overall IN_PROGRESS→D1 (Skill contracts). ⛔production/impl/training/sim/inference/closed-loop/grip なし. custody-reflected by p6。"
+  - id: T-ROOT-RS-TECH-LEAD2#s3
+    status: active
+    started_at: 2026-07-18T23:01:16+09:00
+    note: "D1 Skill contracts step-1: scope prereg v1 banked 7b899e88c7 (sha 5704174927). pN scope-concur verdict (2026-07-18 23:01) = HOLD B1-B7 (scope CONCUR 未付与): B1 impl-gate/exact-paths, B2 adapter step4 欠落, B3 gate① RL-only 未達, B4 triad provenance 未凍結, B5 identity-pin/admissibility 混同, B6 negative-controls/closure 不足, B7 V10 5/0 非再現(current 13/4/exit2). D0 EXIT 不触, node IN_PROGRESS D1, code/run/gate PASS なし. 次 = pQ B1-B7 対応 → pN re-concur. custody-reflected by p6。"
 created: 2026-07-18T12:44:00+09:00
-last_updated: 2026-07-18T22:30:13+09:00
+last_updated: 2026-07-18T23:01:16+09:00
 spec_version: LTM-1 v1.2
 ---
 

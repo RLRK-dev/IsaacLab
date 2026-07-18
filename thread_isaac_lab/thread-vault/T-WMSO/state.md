@@ -24,7 +24,7 @@ session_history:
     status: active
     note: "Rs direct 2026-07-18: development owner = T-ROOT-RS-TECH-LEAD2 (new Claude Code w2:pQ)。D0 read-only inventory を開始。independent verify = pN、custody = p6。"
 created: 2026-07-18T09:29:01+09:00
-last_updated: 2026-07-18T22:30:13+09:00
+last_updated: 2026-07-18T23:01:16+09:00
 ---
 
 # WMSO — World-Model-Based Skill Orchestration (L0 統合 architecture)
@@ -95,3 +95,12 @@ WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断�
 - **pre-check = ✅PASS** (v4 raw jsonl T19:31 artifact_sha == exact banked sha `1b107df59f6e`・non-retroactive・Run PASS 0 issues; pN round-3 で B6 CLOSE)。
 - **node overall = IN_PROGRESS** (D0 = CLOSE/PASS = EXIT GRANT・node は D1 へ)。⛔**production / implementation / training / sim / inference / closed-loop / grip authority は依然なし** (charter §0/§8-4)。次 = **D1 Skill contracts prereg/design**。
 - ⛔ boundary 不変 (charter §0/§8-4): production / training / inference / closed-loop 未承認。
+
+## 9. D1 progress (custody-reflected, verifier-governed)
+
+⭐ **2026-07-18 23:01 — D1 Skill contracts: step-1 prereg = pN scope-concur HOLD (B1-B7)**:
+
+- **D1 scope prereg v1 = BANKED** (`7b899e88c7`, sha `5704174927…`): `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D1_SKILL_CONTRACTS_SCOPE_PREREG_RSTECHLEAD2_20260718.md`。
+- ⏸ **pN scope-concur = HOLD (B1-B7、scope CONCUR 未付与)** (`w2:pN` 23:01): B1 prereg 権限から code 自動解錠不可〔design 後の明示 impl gate + exact paths 要〕 / B2 charter-required adapter 実体が step4 に欠落 / B3 BC+RL+BC-only+SCRIPTED/WAIT は gate① の RL-only を満たさず / B4 BC+RL triad+association provenance 未凍結 / B5 identity pin と selection admissibility 混同 / B6 negative controls+source closure/bracket 不足 / B7 V10 5/0 record 現 bank で非再現 (current exact run=13/4/exit2 self-match・as-run provenance/disposition 要)。
+- **D0 EXIT は不触** (D0 = CLOSE/EXIT GRANTED 維持)・**node IN_PROGRESS D1**・**code/run/gate PASS なし**。full conditions = pN→pQ 23:00 dispatch 済。次 = pQ が B1-B7 対応 → pN re-concur。
+- ⛔ production / implementation / training / sim / inference / closed-loop / grip authority flip なし。
