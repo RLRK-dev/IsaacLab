@@ -99,3 +99,26 @@ INTERRUPT{checkpoint_id mandatory; interrupt_reason ∈ {planned_switch, event, 
 compatibility + fail-close on both variants. **B6** — a fresh `/pre-check` ran on the **exact final banked sha `1b107df59f6e…`**
 (`precheck_sha == banked sha`, non-retroactive jsonl entry `T19:31:00`, matching pre-check record; no post-pre-check edit). Verdict = PASS,
 0 issues (see `WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md` Run 4). Resubmitted to pN for D0-exit reverify round-3.
+
+---
+
+## Verdict 4 — D0-exit REVERIFY round-3 on v4 = ✅ **PASS-CLOSE / D0 EXIT GRANT**
+
+- verified artifact: `WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md` v4, commit `ac9fc83165` (3 artifacts only), draft banked sha256
+  `1b107df59f6e42669247777ea48420022d84c1663d204bdc0b25bcc19da0f6bb`, 456 lines, working path clean, `git show --check` clean.
+- **observed_at 2026-07-18 22:14:32 JST** (pN records-match-fact correction; the interim `19:44` was a stale time reference and is superseded).
+- evidence basis (pN) = files read + git/sha/raw-jsonl command output.
+
+**Confirmed:**
+- **B7a**: `producer.outcome` is the exact tagged union `TERMINAL{ terminal_class; checkpoint nullable } | INTERRUPT{ checkpoint mandatory;
+  interrupt_reason ∈ {planned_switch, event, safety_stabilized} }`; INTERRUPT is non-terminal / resumable; belief + ownership captured
+  identically; `compatibility` + fail-close apply to both variants. Single-writer manager's atomic owner flip / no-gap / no-double-owner maintained.
+- **B6**: raw `logs/pre-check-log.jsonl` `T19:31:00` is **non-retroactive**, `artifact_sha == banked sha`, PASS / 0 issues; matches the banked
+  record; the draft does not self-certify and references the record neutrally.
+- **no regression**: v3→v4 draft delta = B7a + history/disposition only; closed B1–B5 / B7 / B8 and the DESIGN-ONLY boundaries carry unchanged.
+
+⇒ **charter §5 "D0 Architecture" exit condition (independent design verify) is SATISFIED.**
+
+**Next (pN):** D1 Skill contracts (adapters for BC+RL and at least one other policy lineage) — prereg / design gate.
+⛔ This grant gives **no** production / implementation / training / sim / inference / closed-loop / grip authority. Node `T-WMSO` overall
+remains **IN_PROGRESS** (D1→V0 pending).
