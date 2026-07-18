@@ -26,6 +26,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -109,10 +110,16 @@ def main() -> int:
         # B3: an evidence run requires the visible GPU pinned; fail-closed BEFORE the env build.
         print("[gonow] CVD-UNPINNED VIOLATION: the visible-device env var (CVD) is null/empty. An evidence run must pin it. exit 2", flush=True)
         raise SystemExit(2)
-    if "env_isaaclab7" not in sys.executable:
-        # B4: bar the interpreter to the Option-E venv.
-        print(f"[gonow] INTERPRETER VIOLATION: expected env_isaaclab7 venv, got {sys.executable}. exit 2", flush=True)
+    if sys.prefix != "/home/rlrk/env_isaaclab7":
+        # B4: bar the interpreter to the Option-E venv by EXACT sys.prefix (a substring on sys.executable is spoofable).
+        print(f"[gonow] INTERPRETER VIOLATION: sys.prefix must be /home/rlrk/env_isaaclab7, got {sys.prefix}. exit 2", flush=True)
         raise SystemExit(2)
+    _m = re.fullmatch(r"cuda:(\d+)", a.device)
+    if _m is None:
+        # B4: the requested device must be an explicit cuda:N.
+        print(f"[gonow] DEVICE VIOLATION: --device must be cuda:N, got {a.device!r}. exit 2", flush=True)
+        raise SystemExit(2)
+    requested_cuda_index = int(_m.group(1))
     harness_self_sha_pre = _sha256(Path(__file__).resolve())
     source_closure_import = _repo_source_closure()  # B2: pinned RIGHT AFTER imports, BEFORE env construction
 
@@ -200,6 +207,25 @@ def main() -> int:
         "source_closure_import": source_closure_import,
         "source_closure_run_start": source_closure_run_start,
     }
+
+    # --- B4: enforce effective-device provenance as a HARD BAR (exit 2 BEFORE the drive on any mismatch) --
+    _dev_fail = None
+    if not torch.cuda.is_available():
+        _dev_fail = "torch.cuda not available"
+    elif "error" in torch_cuda:
+        _dev_fail = f"device probe error: {torch_cuda.get('error')}"
+    elif str(getattr(env, "device", None)) != a.device:
+        _dev_fail = f"env.device {getattr(env, 'device', None)!r} != requested {a.device!r}"
+    elif int(torch_cuda.get("current_device", -1)) != requested_cuda_index:
+        _dev_fail = f"current_device {torch_cuda.get('current_device')} != requested index {requested_cuda_index}"
+    elif int(torch_cuda.get("device_count", 0)) <= requested_cuda_index:
+        _dev_fail = f"device_count {torch_cuda.get('device_count')} <= requested index {requested_cuda_index}"
+    device_provenance_ok = _dev_fail is None
+    provenance["requested_cuda_index"] = requested_cuda_index
+    provenance["device_provenance_ok"] = device_provenance_ok
+    if not device_provenance_ok:
+        print(f"[gonow] DEVICE-PROVENANCE VIOLATION: {_dev_fail}. exit 2 before drive", flush=True)
+        raise SystemExit(2)
 
     # --- reset-snapshot hook: snapshot pre-reset state on the terminal step (mirror measure_grip_retention) ---
     reset_snaps: list[dict] = []
@@ -380,7 +406,8 @@ def main() -> int:
     )
     self_sha_stable = harness_self_sha_pre == harness_self_sha_post
     source_integrity_ok = (
-        (not changed) and (not missing) and (not added_during_drive) and (not build_added_unstable) and self_sha_stable
+        (not changed) and (not missing) and (not added_during_drive) and (not build_added_unstable)
+        and self_sha_stable and device_provenance_ok
     )
     provenance["harness_self_sha256_post"] = harness_self_sha_post
     provenance["harness_self_sha_stable"] = self_sha_stable
