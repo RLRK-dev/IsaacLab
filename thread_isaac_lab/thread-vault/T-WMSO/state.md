@@ -4,7 +4,7 @@ node_name: WMSO adoption — World-Model-Based Skill Orchestration (L0 integrati
 goal: "learned skill (BC / BC+RL / PPO / DAPG 等) を algorithm-agnostic な共通 lifecycle contract で扱い、vision-grounded state・skill-resolution world model・runtime skill selection・handoff・transition・recovery・safe fallback を統合する L0 architecture (WMSO) を、node 定義 + D0 architecture design から段階採択する。"
 goal_verification: |
   charter §5 adoption sequence (D0→D1→D2→M0→O0→RT0→S0→V0) の各 gate exit condition + charter §6 の 10 binding acceptance gates を満たす。
-  当面の accept 対象 = D0 (state/action/transition/safety schema + event deadline) の independent design verify (charter §5 D0 exit)。
+  当面の accept 対象 = D1 Skill contracts (charter §5 D1)。D0 (architecture design + independent design verify) = ✅EXIT GRANTED 2026-07-18 (pN round-3 PASS-CLOSE)。
   ⛔ production control / training launch / closed-loop authority は本 charter で未承認 (charter §0 / §8-4)。
 status: IN_PROGRESS
 parent_node: T-ROOT-RS-TECH-LEAD2
@@ -24,7 +24,7 @@ session_history:
     status: active
     note: "Rs direct 2026-07-18: development owner = T-ROOT-RS-TECH-LEAD2 (new Claude Code w2:pQ)。D0 read-only inventory を開始。independent verify = pN、custody = p6。"
 created: 2026-07-18T09:29:01+09:00
-last_updated: 2026-07-18T22:17:06+09:00
+last_updated: 2026-07-18T22:30:13+09:00
 ---
 
 # WMSO — World-Model-Based Skill Orchestration (L0 統合 architecture)
@@ -82,9 +82,9 @@ WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断�
 
 ## 7. 次 action (charter §8) + boundary invariants
 
-**次** = D0 開始 (read-only inventory: current skill・policy provenance [BC+RL 含む]・obs schema・termination signal・checkpoint・`routing_orchestrator.py` 挙動) → **D0 independent design verify** (charter §5 D0 exit)。
+**次** = **D1 Skill contracts prereg/design** (charter §5 D1)。D0 (architecture design + independent verify) = ✅**EXIT GRANTED 2026-07-18** (pN round-3 PASS-CLOSE、§8 参照)。〔D0 開始時 initial scope = historical: read-only inventory — current skill・policy provenance [BC+RL 含む]・obs schema・termination signal・checkpoint・`routing_orchestrator.py` 挙動〕。
 
-⛔ **boundary invariants (未承認、超えたら STOP→Rs)**: production control 変更 / WMSO inference launch / training launch / closed-loop authority / 既存 safety・orchestrator path 除去。D0 が independent verify されるまで上記いずれも不可 (charter §8-4)。
+⛔ **boundary invariants (未承認、超えたら STOP→Rs)**: production control 変更 / WMSO inference launch / training launch / closed-loop authority / 既存 safety・orchestrator path 除去。**D0 通過 (EXIT GRANT) 後も上記は各項目の個別 gate 承認まで不可** (charter §8-4; D0 EXIT = DESIGN-ONLY grant、authority flip なし)。
 
 ## 8. D0 progress (custody-reflected, verifier-governed)
 

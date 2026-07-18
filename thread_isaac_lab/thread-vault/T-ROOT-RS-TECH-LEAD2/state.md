@@ -4,7 +4,7 @@ node_name: RS Technical Lead 2 — WMSO development owner
 goal: "WMSOをL0統合architectureとしてD0から段階開発し、RL・IL・Vision・World Modelをalgorithm-agnosticなskill lifecycle contractで接続し、安全・期限・独立verify gateを満たす。"
 goal_verification: |
   子 node T-WMSO の charter §5 adoption sequenceと§6 binding acceptance gatesを順番に満たす。
-  当面のexit = D0 read-only inventoryとarchitecture schemaをbankし、pN independent design verifyをPASSする。
+  当面のexit = D1 Skill contracts prereg/design。D0 (read-only inventory + architecture schema + pN independent design verify) = ✅EXIT GRANTED 2026-07-18 (round-3 PASS-CLOSE)。
   ⛔ production control / training launch / WMSO inference / closed-loop authorityは個別GOまで未承認。
 status: IN_PROGRESS
 parent_node: T-ROOT
@@ -23,7 +23,7 @@ session_history:
     started_at: 2026-07-18T17:32:12+09:00
     note: "WMSO D0 architecture draft (§A–I, design-only) authored+banked 4baf5b2650 (sha 318e96471dbf). pN D0-exit design verify: v1→v2→v3→v4 ac9fc83165 (sha 1b107df59f6e). pN REVERIFY round-3 (observed 2026-07-18 22:14:37 JST) = ✅PASS-CLOSE / D0 Architecture EXIT GRANT: B7a (TERMINAL|INTERRUPT tagged union) + B6 (raw jsonl artifact_sha==banked sha, non-retroactive, PASS 0 issues) discharge, B1-B5/B7/B8 regress なし. D0=CLOSE, node overall IN_PROGRESS→D1 (Skill contracts). ⛔production/impl/training/sim/inference/closed-loop/grip なし. custody-reflected by p6。"
 created: 2026-07-18T12:44:00+09:00
-last_updated: 2026-07-18T22:17:06+09:00
+last_updated: 2026-07-18T22:30:13+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -41,6 +41,8 @@ spec_version: LTM-1 v1.2
 - **previous p4 owner:** grip gate chain (§DDR #18)へ専念し、WMSO ownershipからrelease
 
 ## 1. Authorized scope
+
+> ⭐ **現況 (2026-07-18)**: D0 (architecture design) = ✅**EXIT GRANTED** (pN round-3 PASS-CLOSE)・node → **D1 Skill contracts prereg/design**。§1 authorized scope + §3 first deliverable = D0 phase の **initial/historical scope** 記述 (現行 = D1)。§2 hard boundary は **継続 active** (D0 EXIT = DESIGN-ONLY、production/impl/training/sim/inference/closed-loop/grip authority flip なし)。
 
 最初のauthorized workは `T-WMSO` charter §8-3の**D0 read-only inventory**:
 
