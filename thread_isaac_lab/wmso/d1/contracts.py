@@ -173,6 +173,12 @@ class ObsActionSchema:
     action_fields: list[FieldSpec]
     field_semantics: FieldSemantics
 
+    def __post_init__(self) -> None:
+        for name, fields in (("obs_fields", self.obs_fields), ("action_fields", self.action_fields)):
+            ids = [f.field_id for f in fields]
+            if len(ids) != len(set(ids)):
+                raise ValueError(f"duplicate field_id in {name}")
+
 
 # --------------------------------------------------------------------------------------------------
 # Executable identity (tagged union; construction is fail-closed on malformed hashes)
@@ -208,15 +214,21 @@ class LearnedIdentity:
     def __post_init__(self) -> None:
         if not is_hex64(self.policy_weight_hash):
             raise ValueError("policy_weight_hash must be a 64-hex sha256")
+        if self.policy_weight_hash != self.lineage.final_policy_hash:
+            raise ValueError("policy_weight_hash must equal lineage.final_policy_hash")
         # A recorded (non-crypto) or RL-only association must never claim a train-time crypto bind.
         if self.train_time_crypto_bound and (
             self.association_strength is not AssociationStrength.CRYPTO_TRAIN_TIME_BOUND
         ):
             raise ValueError("train_time_crypto_bound=True requires association_strength=CRYPTO_TRAIN_TIME_BOUND")
-        if self.association_strength is AssociationStrength.NOT_APPLICABLE_RL_ONLY and (
-            self.lineage.base_ckpt_hash is not None or self.lineage.finetune_cfg_hash is not None
-        ):
-            raise ValueError("RL-only identity must have null base_ckpt_hash and finetune_cfg_hash")
+        if self.association_strength is AssociationStrength.NOT_APPLICABLE_RL_ONLY:
+            if self.lineage.base_ckpt_hash is not None or self.lineage.finetune_cfg_hash is not None:
+                raise ValueError("RL-only identity must have null base_ckpt_hash and finetune_cfg_hash")
+        elif self.lineage.base_ckpt_hash is None or self.lineage.finetune_cfg_hash is None:
+            # A recorded/crypto BC+RL lineage must carry both a base checkpoint and a finetune-config hash.
+            raise ValueError(
+                f"{self.association_strength.value} lineage requires non-null base_ckpt_hash and finetune_cfg_hash"
+            )
 
 
 @dataclass(frozen=True)

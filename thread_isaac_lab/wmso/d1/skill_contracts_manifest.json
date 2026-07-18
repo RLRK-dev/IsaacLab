@@ -13,6 +13,7 @@
     "decision_2": "RSL-RL insert_clip model_9 is the RL-only exemplar (residual PPO rejected); structural-only does not satisfy contract_conformant or gate 1."
   },
   "source_closures": {
+    "provenance": "Pins are over the COMMITTED (clean-checkout) state of the members (git show HEAD). Verify on a fresh detached worktree; a dirty working tree fails closed by design. At pin time newton_routing_utils.py, step_table.py, and routing_orchestrator.py carried unrelated uncommitted edits in the shared tree; the committed state is the reference.",
     "SCRIPTED": {
       "members": [
         "thread_isaac_lab/skills/scripted_skills.py",
@@ -21,7 +22,7 @@
         "thread_isaac_lab/configs/task_config.py",
         "thread_isaac_lab/skills/step_table.py"
       ],
-      "source_closure_sha256": "318c4da40ec1c0f63e1befa0ec81450e6c1df17458dee8eae3bddaa26da37f53"
+      "source_closure_sha256": "cc11e388b05a72c75ae319a01778c1760e98bd03eabf9043e88ce4f860a5f0d5"
     },
     "WAIT": {
       "members": [
@@ -32,7 +33,7 @@
         "thread_isaac_lab/skills/step_table.py",
         "thread_isaac_lab/orchestrator/routing_orchestrator.py"
       ],
-      "source_closure_sha256": "37c6f936ba6ad32648b047e1ed0c7199b562e1b33a6098b7e5a57676b9be0b56"
+      "source_closure_sha256": "64a495adf70a8027aa99d6dcf53b663ba2ac7f5418587febcc54d5b62629bfbf"
     }
   },
   "skills": [
@@ -100,7 +101,7 @@
       "skill_id": "TRANSPORT",
       "kind": "SCRIPTED",
       "policy_family": "SCRIPTED",
-      "identity": {"callable_qualname": "transport_to_clip", "source_closure_sha256": "318c4da40ec1c0f63e1befa0ec81450e6c1df17458dee8eae3bddaa26da37f53"},
+      "identity": {"callable_qualname": "transport_to_clip", "source_closure_sha256": "cc11e388b05a72c75ae319a01778c1760e98bd03eabf9043e88ce4f860a5f0d5"},
       "admissibility": {"identity_pinned": true, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
       "conformance_reason": "identity pinned by skill_id+qualname+source_closure; full lifecycle contract conformance pending (identity manifest only)"
     },
@@ -108,7 +109,7 @@
       "skill_id": "RECLAMP_L",
       "kind": "SCRIPTED",
       "policy_family": "SCRIPTED",
-      "identity": {"callable_qualname": "reclamp_left", "source_closure_sha256": "318c4da40ec1c0f63e1befa0ec81450e6c1df17458dee8eae3bddaa26da37f53"},
+      "identity": {"callable_qualname": "reclamp_left", "source_closure_sha256": "cc11e388b05a72c75ae319a01778c1760e98bd03eabf9043e88ce4f860a5f0d5"},
       "admissibility": {"identity_pinned": true, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
       "conformance_reason": "identity pinned; full lifecycle contract conformance pending"
     },
@@ -116,7 +117,7 @@
       "skill_id": "HALF_UNCLAMP_RELEASE",
       "kind": "SCRIPTED",
       "policy_family": "SCRIPTED",
-      "identity": {"callable_qualname": "half_unclamp_release", "source_closure_sha256": "318c4da40ec1c0f63e1befa0ec81450e6c1df17458dee8eae3bddaa26da37f53"},
+      "identity": {"callable_qualname": "half_unclamp_release", "source_closure_sha256": "cc11e388b05a72c75ae319a01778c1760e98bd03eabf9043e88ce4f860a5f0d5"},
       "admissibility": {"identity_pinned": true, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
       "conformance_reason": "identity pinned; full lifecycle contract conformance pending"
     },
@@ -124,7 +125,7 @@
       "skill_id": "CLIP_CONFIRM",
       "kind": "WAIT",
       "policy_family": "WAIT",
-      "identity": {"callable_qualname": "_run_wait", "source_closure_sha256": "37c6f936ba6ad32648b047e1ed0c7199b562e1b33a6098b7e5a57676b9be0b56"},
+      "identity": {"callable_qualname": "_run_wait", "source_closure_sha256": "64a495adf70a8027aa99d6dcf53b663ba2ac7f5418587febcc54d5b62629bfbf"},
       "admissibility": {"identity_pinned": true, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
       "conformance_reason": "identity pinned by skill_id+qualname+WAIT source_closure; full lifecycle contract conformance pending"
     }

@@ -22,14 +22,21 @@ _SUMMARY = _APPROACH_DIR / "summary.json"
 # Design v4.1.1 / manifest pinned values.
 _FINETUNE_CFG = "1977e04691912dbef1b2d4bc3527272ec82456af3451fc80ff8445747bdd5594"
 _RAW_SUMMARY = "d280ea973c025d0bb5bade56eb0466bb2f4078e9ac287e2c8cd0453d59e2c620"
-_SCRIPTED_CLOSURE = "318c4da40ec1c0f63e1befa0ec81450e6c1df17458dee8eae3bddaa26da37f53"
-_WAIT_CLOSURE = "37c6f936ba6ad32648b047e1ed0c7199b562e1b33a6098b7e5a57676b9be0b56"
+# Clean/committed-state source-closure pins (a dirty working tree fails closed by design).
+_SCRIPTED_CLOSURE = "cc11e388b05a72c75ae319a01778c1760e98bd03eabf9043e88ce4f860a5f0d5"
+_WAIT_CLOSURE = "64a495adf70a8027aa99d6dcf53b663ba2ac7f5418587febcc54d5b62629bfbf"
 
 
 def test_canonical_json_is_deterministic_and_sorted():
     a = I.canonical_json({"b": 1, "a": 2})
     b = I.canonical_json({"a": 2, "b": 1})
     assert a == b == b'{"a":2,"b":1}'
+
+
+def test_finetune_cfg_hash_fails_closed_on_missing_required_key():
+    # A required projection key (e.g. ppo) missing must raise, never silently omit.
+    with pytest.raises(ValueError):
+        I.finetune_cfg_hash({"experiment": "x", "framework": "y"})
 
 
 @pytest.mark.skipif(not _SUMMARY.is_file(), reason="DAPG summary artifact not present")
@@ -58,11 +65,9 @@ def test_sha256_file_fails_closed_on_absent():
         I.sha256_file(_REPO_ROOT / "thread_isaac_lab/wmso/d1/__DOES_NOT_EXIST__.bin")
 
 
-@pytest.mark.skipif(
-    not all((_REPO_ROOT / m).is_file() for m in I.SCRIPTED_CLOSURE_MEMBERS),
-    reason="scripted source-closure members not present",
-)
 def test_source_closure_reproduces_pinned_and_is_order_independent():
+    # Required closure (repo source): no skip. Clean checkout reproduces the pin; a dirty tree
+    # or a missing member fails closed (source_closure_sha256 raises on absence).
     assert I.source_closure_sha256(I.SCRIPTED_CLOSURE_MEMBERS, _REPO_ROOT) == _SCRIPTED_CLOSURE
     assert I.source_closure_sha256(I.WAIT_CLOSURE_MEMBERS, _REPO_ROOT) == _WAIT_CLOSURE
     reordered = tuple(reversed(I.SCRIPTED_CLOSURE_MEMBERS))

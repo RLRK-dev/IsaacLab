@@ -95,13 +95,19 @@ def finetune_cfg_hash(summary: dict) -> str:
     Returns:
         The 64-hex sha256 of the canonical projection.
     """
-    proj: dict = {k: summary[k] for k in FINETUNE_CFG_TOPLEVEL_KEYS if k in summary}
-    dapg = summary.get("dapg")
-    if isinstance(dapg, dict):
-        proj["dapg"] = {k: v for k, v in dapg.items() if k != "bc_losses"}
-    convergence = summary.get("convergence")
-    if isinstance(convergence, dict):
-        proj["convergence"] = {k: convergence[k] for k in FINETUNE_CFG_CONVERGENCE_KEYS if k in convergence}
+    missing = [k for k in FINETUNE_CFG_TOPLEVEL_KEYS if k not in summary]
+    if missing:
+        raise ValueError(f"summary missing required finetune-cfg keys: {missing}")
+    if not isinstance(summary.get("dapg"), dict):
+        raise ValueError("summary.dapg must be a dict")
+    if not isinstance(summary.get("convergence"), dict):
+        raise ValueError("summary.convergence must be a dict")
+    conv_missing = [k for k in FINETUNE_CFG_CONVERGENCE_KEYS if k not in summary["convergence"]]
+    if conv_missing:
+        raise ValueError(f"summary.convergence missing required keys: {conv_missing}")
+    proj: dict = {k: summary[k] for k in FINETUNE_CFG_TOPLEVEL_KEYS}
+    proj["dapg"] = {k: v for k, v in summary["dapg"].items() if k != "bc_losses"}
+    proj["convergence"] = {k: summary["convergence"][k] for k in FINETUNE_CFG_CONVERGENCE_KEYS}
     return sha256_bytes(canonical_json(proj))
 
 

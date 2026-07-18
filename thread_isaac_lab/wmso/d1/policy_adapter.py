@@ -54,10 +54,12 @@ def _identity_hash(identity: ExecutableIdentity) -> str:
     return identity.source_closure_sha256
 
 
-def _identity_skill_id(identity: ExecutableIdentity, skill_id: str) -> str:
-    """Return the skill id, preferring an identity-carried id for scripted/wait."""
+def _resolve_skill_id(identity: ExecutableIdentity, skill_id: str) -> str:
+    """Return the skill id, rejecting a scripted/wait identity whose id disagrees with the caller."""
     if isinstance(identity, LearnedIdentity):
         return skill_id
+    if identity.skill_id != skill_id:
+        raise ValueError(f"skill_id mismatch: caller {skill_id!r} != identity {identity.skill_id!r}")
     return identity.skill_id
 
 
@@ -81,7 +83,7 @@ def canonicalize(identity: ExecutableIdentity, skill_id: str, schema: ObsActionS
     resolved = schema.field_semantics is FieldSemantics.RESOLVED
     kind = identity.kind.value if isinstance(identity.kind, IdentityKind) else str(identity.kind)
     return CanonicalContractRepr(
-        skill_id=_identity_skill_id(identity, skill_id),
+        skill_id=_resolve_skill_id(identity, skill_id),
         identity_kind=kind,
         identity_hash=_identity_hash(identity),
         obs_canonical=_canonical_fields(schema.obs_fields),

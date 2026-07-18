@@ -60,6 +60,41 @@ def test_learned_identity_crypto_and_rl_only_invariants():
     assert ok.kind is C.IdentityKind.LEARNED
 
 
+def test_policy_weight_must_equal_final_policy_hash():
+    with pytest.raises(ValueError):
+        C.LearnedIdentity(
+            policy_weight_hash="b" * 64,
+            lineage=C.Lineage(family=C.PolicyFamily.PPO, final_policy_hash=_H),
+            train_time_crypto_bound=False,
+            association_strength=C.AssociationStrength.NOT_APPLICABLE_RL_ONLY,
+        )
+
+
+def test_recorded_bc_rl_requires_non_null_base_and_finetune():
+    with pytest.raises(ValueError):
+        C.LearnedIdentity(
+            policy_weight_hash=_H,
+            lineage=C.Lineage(family=C.PolicyFamily.BC_RL, final_policy_hash=_H),
+            train_time_crypto_bound=False,
+            association_strength=C.AssociationStrength.RECORDED_PATH_CONFIG_COLOCATION,
+        )
+    ok = C.LearnedIdentity(
+        policy_weight_hash=_H,
+        lineage=C.Lineage(
+            family=C.PolicyFamily.BC_RL, final_policy_hash=_H, base_ckpt_hash="b" * 64, finetune_cfg_hash="c" * 64
+        ),
+        train_time_crypto_bound=False,
+        association_strength=C.AssociationStrength.RECORDED_PATH_CONFIG_COLOCATION,
+    )
+    assert ok.lineage.base_ckpt_hash == "b" * 64
+
+
+def test_obs_action_schema_rejects_duplicate_field_id():
+    dup = C.FieldSpec(field_id="dup", dtype=C.Dtype.FLOAT32, shape=(1,), unit="m", frame=C.Frame.WORLD)
+    with pytest.raises(ValueError):
+        C.ObsActionSchema(obs_fields=[dup, dup], action_fields=[], field_semantics=C.FieldSemantics.RESOLVED)
+
+
 def test_scripted_and_wait_identity_hash_validation():
     C.ScriptedIdentity(skill_id="TRANSPORT", callable_qualname="transport_to_clip", source_closure_sha256=_H)
     with pytest.raises(ValueError):

@@ -7,6 +7,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
@@ -41,7 +42,11 @@ def _contract(**overrides) -> C.SkillLifecycleContract:
         schema_version="1.0.0",
         action_key=key,
         policy_family=C.PolicyFamily.SCRIPTED,
-        obs_action_schema=C.ObsActionSchema(obs_fields=[], action_fields=[], field_semantics=C.FieldSemantics.RESOLVED),
+        obs_action_schema=C.ObsActionSchema(
+            obs_fields=[C.FieldSpec(field_id="x", dtype=C.Dtype.FLOAT32, shape=(1,), unit="m", frame=C.Frame.WORLD)],
+            action_fields=[],
+            field_semantics=C.FieldSemantics.RESOLVED,
+        ),
         initiation_predicate=C.InitiationPredicate(
             expr_kind=C.ExprKind.THRESHOLD,
             schema_ref="s",
@@ -128,3 +133,33 @@ def test_validate_source_closure_match_and_mismatch():
     H.validate_source_closure(pinned, I.SCRIPTED_CLOSURE_MEMBERS, str(_REPO_ROOT))
     with pytest.raises(ValueError):
         H.validate_source_closure("f" * 64, I.SCRIPTED_CLOSURE_MEMBERS, str(_REPO_ROOT))
+
+
+def test_identity_not_pinned_is_not_conformant():
+    adm = C.Admissibility(identity_pinned=False, contract_conformant=False)
+    result = H.evaluate_conformance(_contract(admissibility=adm))
+    assert result.conformant is False
+    assert any("identity_pinned" in r for r in result.reasons)
+
+
+def test_empty_resolved_schema_is_not_conformant():
+    schema = C.ObsActionSchema(obs_fields=[], action_fields=[], field_semantics=C.FieldSemantics.RESOLVED)
+    result = H.evaluate_conformance(_contract(obs_action_schema=schema))
+    assert result.conformant is False
+    assert any("no obs/action fields" in r for r in result.reasons)
+
+
+_MANIFEST = Path(__file__).resolve().parent.parent / "skill_contracts_manifest.json"
+
+
+def test_manifest_internal_consistency():
+    manifest = json.loads(_MANIFEST.read_text())
+    problems = H.validate_manifest(manifest, str(_REPO_ROOT), require_closure=False)
+    assert problems == [], problems
+
+
+def test_manifest_source_closure_pins_recompute_on_clean_tree():
+    # Required closure (no skip): a clean checkout recomputes the pins; a dirty tree fails closed.
+    manifest = json.loads(_MANIFEST.read_text())
+    problems = H.validate_manifest(manifest, str(_REPO_ROOT), require_closure=True)
+    assert problems == [], problems

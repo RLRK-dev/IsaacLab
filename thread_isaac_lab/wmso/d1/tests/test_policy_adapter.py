@@ -7,6 +7,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from thread_isaac_lab.wmso.d1 import policy_adapter as A
 from thread_isaac_lab.wmso.d1.contracts import (
     AssociationStrength,
@@ -72,3 +74,9 @@ def test_identity_hash_source_by_kind():
     assert learned.identity_kind == "LEARNED"
     assert scripted.identity_hash == _H
     assert learned.identity_hash == _H
+
+
+def test_scripted_skill_id_mismatch_rejects():
+    # A scripted identity for TRANSPORT canonicalized under caller INSERT_INTO_CLIP must reject.
+    with pytest.raises(ValueError):
+        A.canonicalize(_scripted(), "INSERT_INTO_CLIP", _schema())
