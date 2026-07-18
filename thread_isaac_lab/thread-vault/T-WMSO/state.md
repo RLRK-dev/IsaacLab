@@ -24,7 +24,7 @@ session_history:
     status: active
     note: "Rs direct 2026-07-18: development owner = T-ROOT-RS-TECH-LEAD2 (new Claude Code w2:pQ)。D0 read-only inventory を開始。independent verify = pN、custody = p6。"
 created: 2026-07-18T09:29:01+09:00
-last_updated: 2026-07-18T19:15:59+09:00
+last_updated: 2026-07-18T22:17:06+09:00
 ---
 
 # WMSO — World-Model-Based Skill Orchestration (L0 統合 architecture)
@@ -88,10 +88,10 @@ WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断�
 
 ## 8. D0 progress (custody-reflected, verifier-governed)
 
-⭐ **2026-07-18 17:32 — D0 architecture draft milestone (PROGRESS, NOT a D0 gate PASS)**:
+⭐ **2026-07-18 — D0 architecture: ✅ D0 EXIT GRANTED (PASS-CLOSE、pN round-3 observed 22:14:37 JST) → node D1 へ**:
 
 - **D0 §A–I architecture draft = BANKED** (`4baf5b2650`, sha256 `318e96471dbf…`, design-only): `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md` (author `w2:pQ`)。
-- ⏸ **D0-exit independent design verify = narrow HOLD (v3 REVERIFY round-2、`w2:pN` 18:47)**: **B1-B5+B8 CLOSE**・**B7 atomic-transfer 主旨 PASS**。残 2 narrow: **B7a** = mid-skill checkpoint interrupt を terminal_class enum で表現不能〔tagged terminal|interrupt union 要〕 / **B6** = precheck 実体 = pre-fold sha `581fd` で記録・final `ff840` 上と申告 mismatch〔final sha fresh precheck 要〕。closure 条件 = pN→pQ 送付済 (round-2 verdict は未 bank; pN relay 18:47 source)。
-- **pre-check = ⚠B6 再開** (pN round-2: precheck 実体 = pre-fold sha `581fd` で記録・final `ff840` 上と申告 mismatch ⇒ **final sha で fresh precheck 再要**; record `WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md`)。
-- **node status = IN_PROGRESS 継続** (両 pane 一致・no D0-exit/status flip・**status/authority flip 禁止**・D0 not exited)。次 = pQ が **B7a (interrupt terminal|interrupt union) + B6 (final-sha fresh precheck) closure** → pN 再 reverify (round-3)。
+- ✅ **D0-exit independent design verify = PASS-CLOSE / D0 Architecture EXIT GRANT** (`w2:pN` round-3、observed 2026-07-18 22:14:37 JST): v4 `ac9fc83165` (sha `1b107df59f6e…` exact) で **B7a** (TERMINAL|INTERRUPT tagged union・両 variant compatibility+fail-close・atomic owner transfer PASS) + **B6** (raw jsonl T19:31 artifact_sha == exact banked sha・non-retroactive・PASS 0 issues) discharge・**B1-B5/B7/B8 regress なし** ⇒ **D0 CLOSE**。evidence basis = files+git/sha/raw-jsonl command output。
+- **pre-check = ✅PASS** (v4 raw jsonl T19:31 artifact_sha == exact banked sha `1b107df59f6e`・non-retroactive・Run PASS 0 issues; pN round-3 で B6 CLOSE)。
+- **node overall = IN_PROGRESS** (D0 = CLOSE/PASS = EXIT GRANT・node は D1 へ)。⛔**production / implementation / training / sim / inference / closed-loop / grip authority は依然なし** (charter §0/§8-4)。次 = **D1 Skill contracts prereg/design**。
 - ⛔ boundary 不変 (charter §0/§8-4): production / training / inference / closed-loop 未承認。
