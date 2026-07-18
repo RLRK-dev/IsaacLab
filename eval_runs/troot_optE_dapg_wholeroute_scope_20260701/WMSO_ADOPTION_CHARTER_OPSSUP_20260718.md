@@ -1,8 +1,8 @@
 # WMSO adoption charter (OPS-SUP-CODEX, 2026-07-18)
 
-**Status:** Rs direction accepted as an L0 architecture requirement. This record authorizes design and node
-definition; it does **not** authorize production control, training launch, or removal of existing safety and
-orchestrator paths.
+**Status:** Rs direction accepted as an L0 architecture requirement. Rs direct 2026-07-18 assigned WMSO
+development to `T-ROOT-RS-TECH-LEAD2` and authorized D0 read-only inventory to start. This record does **not**
+authorize production control, training launch, or removal of existing safety and orchestrator paths.
 
 ## 0. Decision and terminology correction
 
@@ -13,6 +13,10 @@ handoff, transition, recovery, and safe fallback.
 WMSO may use a boundary-only or a real-time execution profile. This project retains the multi-rate,
 event-driven, deadline-bounded profile defined in this charter; removing “Real-Time” from the architecture
 name does not weaken its real-time or safety acceptance requirements.
+
+The assigned development owner is **`T-ROOT-RS-TECH-LEAD2`**. OPS-SUP-CODEX remains the independent evidence
+verifier and p6 remains the Vault/current-state custodian. The previous p4 design assignment is superseded so
+p4 can continue the grip gate chain without making WMSO wait for that checkpoint.
 
 The high-level action is a **learned skill**, not specifically a PPO skill. Supported skill provenance includes:
 
@@ -27,9 +31,10 @@ replace the skill's low-level controller.
 
 ## 1. L0 placement and node boundary
 
-Create a proposed node **`T-WMSO` under `T-ROOT`**, rather than placing it below the current `T-WM` node.
-The current `T-WM` is a failure-classification/recovery cascade. WMSO is the integration architecture across
-all four Rs-mandated L0 means:
+Maintain **`T-WMSO` as the L0 architecture node under administrative owner `T-ROOT-RS-TECH-LEAD2`**, which is
+itself under `T-ROOT`, rather than placing WMSO below the current `T-WM` node. The current `T-WM` is a
+failure-classification/recovery cascade. WMSO is the integration architecture across all four Rs-mandated L0
+means:
 
 | L0 means | WMSO role |
 |---|---|
@@ -161,9 +166,9 @@ stale Skill Dynamics Model data.
 
 ## 8. Immediate next action
 
-1. Bank this direction as the founding charter for proposed node `T-WMSO`.
+1. Keep this direction as the founding charter for node `T-WMSO`, assigned to `T-ROOT-RS-TECH-LEAD2`.
 2. Keep the node separate from the active route/pin implementation and from the existing `T-WM` classifier
    cascade; connect them through explicit dependencies.
-3. Start D0 with a read-only inventory of current skills, policy provenance (including BC+RL), observation
+3. `T-ROOT-RS-TECH-LEAD2` starts D0 with a read-only inventory of current skills, policy provenance (including BC+RL), observation
    schemas, termination signals, checkpoints, and existing `routing_orchestrator.py` behavior.
 4. Do not modify production control or launch WMSO inference until D0 is independently verified.

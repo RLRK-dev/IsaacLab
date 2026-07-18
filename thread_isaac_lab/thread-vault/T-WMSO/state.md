@@ -6,8 +6,8 @@ goal_verification: |
   charter §5 adoption sequence (D0→D1→D2→M0→O0→RT0→S0→V0) の各 gate exit condition + charter §6 の 10 binding acceptance gates を満たす。
   当面の accept 対象 = D0 (state/action/transition/safety schema + event deadline) の independent design verify (charter §5 D0 exit)。
   ⛔ production control / training launch / closed-loop authority は本 charter で未承認 (charter §0 / §8-4)。
-status: PENDING
-parent_node: T-ROOT
+status: IN_PROGRESS
+parent_node: T-ROOT-RS-TECH-LEAD2
 children_nodes: []
 dependencies:
   precedent: []
@@ -18,21 +18,24 @@ dependencies:
     - T-ROOT-optE-route-dapg-C1C2-P2-trainer
 session_history:
   - id: T-WMSO#s1
+    status: handed_off
+    note: "p6 custody 起票。initial design owner = p4、independent verify = pN。Rs direct で s2/T-ROOT-RS-TECH-LEAD2 へ移管。"
+  - id: T-WMSO#s2
     status: active
-    note: "p6 custody 起票 (charter bank + node/state/deposit/manifest)。design owner = p4、independent verify = pN。"
+    note: "Rs direct 2026-07-18: development owner = T-ROOT-RS-TECH-LEAD2 (new Claude Code w2:pQ)。D0 read-only inventory を開始。independent verify = pN、custody = p6。"
 created: 2026-07-18T09:29:01+09:00
-last_updated: 2026-07-18T11:10:00+09:00
+last_updated: 2026-07-18T12:44:00+09:00
 ---
 
 # WMSO — World-Model-Based Skill Orchestration (L0 統合 architecture)
 
 ## 0. 起票状態と境界 (p6 custody 起票)
 
-**PENDING。Rs direct 2026-07-18 09:24 で WMSO を L0 統合 architecture として採択。** 本 node は Rs の「**node definition + D0 design の承認**」記録として起票。owner 分担 (Rs 提案) = **p4 design / pN independent verify / p6 custody**。status=PENDING = custody 起票済・**p4 の D0 design session が bind して IN_PROGRESS に flip**する (NEST §3.1)。
+**IN_PROGRESS。Rs direct 2026-07-18 09:24 で WMSO を L0 統合 architecture として採択し、同日 12:44 に新設 `T-ROOT-RS-TECH-LEAD2` へ開発を割当。** D0 read-only inventory の開始を本割当で authorize。owner 分担 = **T-ROOT-RS-TECH-LEAD2 development / pN independent verify / p6 custody**。
 
 ⭐ **名称 supersession (Rs direct 2026-07-18 11:10)**: 初回 bank `5ad800fa56` の旧称 **RT-WMSO / `T-RT-WMSO`** は provenance 上の historical label とする。current canonical name は **WMSO / `T-WMSO`**。名称から Real-Time を外しても、charter §4・§6 の multi-rate/event-driven/deadline/safety acceptance は不変。
 
-⭐ **ownership + activation narrative (p4 readback 2026-07-18 09:36)**: **p4 が charter を接地し design owner を受領**。**current priority = grip gate chain (§DDR #18) 継続 — WMSO に priority override 無**。WMSO D0 (doc-only read-only inventory、charter §8-3) は **grip checkpoint 後に開始**する。⇒ **status=PENDING 継続が正** (node 定義済・design owner 確定・D0 activation は grip checkpoint 後の p4 session で IN_PROGRESS へ)。production/training 未承認は不変。
+⭐ **ownership supersession (Rs direct 2026-07-18 12:44)**: 09:36 の p4 ownership/grip-checkpoint 待ち narrative を supersede。p4 は grip gate chain (§DDR #18) を継続し、WMSO は新 Claude Code (`w2:pQ`) の `T-ROOT-RS-TECH-LEAD2` が独立に担当する。これにより WMSO D0 は grip checkpoint を待たず開始する。production/training 未承認は不変。
 
 ⛔ **境界 (charter §0 / §8-4)**: 本記録が承認するのは **設計 + node definition + D0 開始**のみ。**production control 変更 / training launch / WMSO inference launch / closed-loop authority / 既存 safety・orchestrator path の除去は未承認**。D0 は read-only inventory から開始 (charter §8-3)。
 
@@ -43,13 +46,13 @@ last_updated: 2026-07-18T11:10:00+09:00
 ## 1. founding documents
 
 - **founding charter** = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_ADOPTION_CHARTER_OPSSUP_20260718.md` (OPS-SUP-CODEX 起草、Rs direction accepted)。
-  - file sha256 = `6ff0a4a40326fe658023acb220e1d558f7ed2464fcb7440ff57e5d3e97978289` (deposit に pin)。initial bank = `5ad800fa56`、canonical rename bank = 本 record-only commit。
+  - file sha256 = `e925e7a4f6dd16136118b7e1c44c499be1225c8d4f91552b8737fab0b79b657c` (deposit に pin)。initial bank = `5ad800fa56`、canonical rename bank = `0f6e4af8e4`、owner-assignment bank = 本 commit。
 - **provenance/integrity deposit** = `00-Project-Management/_handoff/node-T-WMSO-pins-s1.sha256` (charter + 本 state.md + NEST rule を pin、repo-root から `sha256sum -c`)。
 - **governing rule** = NEST 仕様書 `00-Project-Management/operational-rule-LTM-1.md` (LTM-1 v1.2)。
 
 ## 2. goal + L0 placement (charter §1)
 
-WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断する統合 architecture。`T-ROOT` 直下に置く (`T-WM` 直下でない — T-WM は failure-classification/recovery cascade、WMSO は統合 architecture)。L0 means ↔ role: **RL**=RL-trained/fine-tuned skill 供給 / **IL**=BC/DAPG demo・init・learned skill 供給 / **Vision**=observation を belief/abstract state に接地・OOD/低信頼検出 / **WM**=skill-level transition・duration・success prob・cost・uncertainty 予測。
+WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断する統合 architecture。`T-ROOT` 直下の administrative owner `T-ROOT-RS-TECH-LEAD2` の child として置く (`T-WM` 直下でない — T-WM は failure-classification/recovery cascade、WMSO は統合 architecture)。L0 means ↔ role: **RL**=RL-trained/fine-tuned skill 供給 / **IL**=BC/DAPG demo・init・learned skill 供給 / **Vision**=observation を belief/abstract state に接地・OOD/低信頼検出 / **WM**=skill-level transition・duration・success prob・cost・uncertainty 予測。
 
 ## 3. component 責務 (charter §2)
 
@@ -75,7 +78,7 @@ WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断�
 - **blocker (並行制約・統合依存)**: `T-Skill` (skill 供給) / `T-Vision` (belief 接地) / `T-WM` (WM、ただし WMSO ≠ T-WM classifier cascade) / `T-ROOT-optE-route-dapg-C1C2-P2-trainer` (active trainer/env path)。
 - **code baseline dependency**: 既存 `routing_orchestrator.py` (D0 read-only inventory 対象、charter §8-3)。node でないため dependencies front-matter 外・本節に記録。
 - **precedent**: なし (D0 設計/inventory は並行進行可、charter §5)。
-- **責任分担 (Rs 提案)**: design = **p4** / independent verify = **pN** / custody (node/surface 保守) = **p6**。
+- **責任分担 (Rs direct 2026-07-18 12:44)**: development/design = **T-ROOT-RS-TECH-LEAD2 (`w2:pQ`)** / independent verify = **pN** / custody (node/surface 保守) = **p6**。p4 は grip gate chain を継続し、本 node ownership から release。
 
 ## 7. 次 action (charter §8) + boundary invariants
 

@@ -50,7 +50,7 @@ Logic tree v1 (`~/.claude/projects/-home-rlrk-IsaacLab/memory/project_logic_tree
 
 <!-- GEN:NEST:BEGIN (build_nest_snapshot.py; 手書き禁止) -->
 
-_248 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
+_249 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
 
 | node_id | status | parent |
 |---|---|---|
@@ -184,6 +184,7 @@ _248 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-ROOT-R2-A-Track-A-S1B-Telemetry-GPU-Query-Guardfix-Package-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
 | `T-ROOT-R2-A-Track-A-S1B-Telemetry-Rebased-Exact-Command-Package-20260531` | COMPLETE | `T-ROOT-R2-A-Track-A-S1B-Telemetry` |
 | `T-ROOT-R2-Architecture-Redesign` | IN_PROGRESS | `T-ROOT` |
+| `T-ROOT-RS-TECH-LEAD2` | IN_PROGRESS | `T-ROOT` |
 | `T-ROOT-StepTable-Verbal-Teaching-20260703` | ARCHIVED | `T-ROOT` |
 | `T-ROOT-Vault-DesignContent-Audit-20260711` | COMPLETE | `T-ROOT` |
 | `T-ROOT-VaultRefCopy-SpotAudit-20260711` | PENDING | `T-ROOT` |
@@ -301,7 +302,7 @@ _248 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-WM-G2-Master-Roadmap-Design` | COMPLETE | `T-WM-G2` |
 | `T-WM-G2-P1-Layer1-Spawn-Coord` | COMPLETE_WITH_LIMITATION | `T-WM-G2` |
 | `T-WM-G2-Spawn-Readiness-Final-Consolidation` | COMPLETE | `T-WM-G2` |
-| `T-WMSO` | PENDING | `T-ROOT` |
+| `T-WMSO` | IN_PROGRESS | `T-ROOT-RS-TECH-LEAD2` |
 
 _legend — 非正準 status (raw, coercion なし): APPROVED_FOR_IMPL, COMPLETE_WITH_LIMITATION, DESIGN+STAGING-APPROVED (St2 spec v0.4 Rs-approved 2026-07-06 10:27 b7d7857dfc: 設計承認 + Q2=B [St2 absorbs St1b, single arc + 2-checkpoint] + Q5=閉鎖 [DESIGN_V1 §3.1 に C2_TILT_SIGN=0 orientation-lock 追加 執行済]; BUILD = deferred+Rs-gated [single arc → Rs build-auth → L3 + byte-id re-proof, genuine new-source trigger]; φ10-collision resolved 09:57 | ← BUILD-AUTHORIZED paper先行 08:3x eba71929b3 | ← DESIGN-APPROVED 03:2x b17b473a15), IN_PROGRESS (design APPROVED 2026-05-03 + impl Phase 1 COMPLETE 2026-05-04T03:50 + impl Phase 2 design 2026-05-04T03:55 + impl Phase 3 integration design 2026-05-04T05:05 + impl Phase 4 validation design spawn 2026-05-04T14:05 + master closure design spawn 2026-05-04T14:50 T-ROOT-COORD#s11、impl phased decomposition 採択経 Q1+Q2 = T-Vision-CableState-Impl-Phase-1、Phase 2 design (Stage C/D/E skeleton + impl-design memo) = T-Vision-CableState-Impl-Phase-2-Design、Phase 3 = Stages A-E end-to-end integration design + Q5 benchmark protocol initial = T-Vision-CableState-Impl-Phase-3-Integration-Design、Phase 4 = validation methodology + benchmark protocol final = T-Vision-CableState-Impl-Phase-4-Validation-Design、Master Closure = 4-phase design master closure synthesis + Phase 5/6/7 impl spawn-readiness assessment = T-Vision-CableState-Master-Closure-Design (cross-Phase synthesis 軸 + impl spawn forward-looking 軸、orthogonal vs Phase 3 horizontal cross-stage / Phase 4 vertical cross-criteria)、Phase 5 train + Phase 6 impl + Phase 7 benchmark execution は後続子 node 候補 — Phase 番号 renumber 2-shift 経 (Phase 3 で旧 Phase 3=Stage C train → 新 Phase 4 に 1-shift 済、本 Phase 4 = Validation Design 占有 経で更に 1-shift: 旧 Phase 4-6 → 新 Phase 5-7)、Phase 3 が Integration Design + Phase 4 が Validation Design を占有 + Master Closure が cross-Phase synthesis を占有 (Phase 番号 占有せず)), approved (design phase 2026-05-03 Rs batch approve T-ROOT-COORD#s11) — NEST canonical lifecycle PENDING (impl trigger 待ち per §1 dependencies、T-Vision-Pose Stage 1-2 + T-Vision-CableState Stage A-E ready 後 IN_PROGRESS 遷移). 正準 = IN_PROGRESS / COMPLETE / DISCARDED / ARCHIVED (+ PENDING)._
 
