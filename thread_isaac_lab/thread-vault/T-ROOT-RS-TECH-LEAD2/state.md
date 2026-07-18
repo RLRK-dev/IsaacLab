@@ -25,9 +25,9 @@ session_history:
   - id: T-ROOT-RS-TECH-LEAD2#s3
     status: active
     started_at: 2026-07-18T23:01:16+09:00
-    note: "D1 Skill contracts step-1: scope prereg v1 banked 7b899e88c7 (sha 5704174927). pN scope-concur: v1 (23:01) = HOLD B1-B7 → v2 fed7b8d597 re-verdict (23:16) = HOLD R1-R3 (scope CONCUR 未付与): B1/B3/B6/B7 CLOSE, B4 fail-closed CLOSE (records fix 1); 残 R1 adapter境界(policy-contract vs per-dim map/D2 grounding 分離 binding), R2 status(O0 replay vs V0 closed-loop 混同→identity_pinned/contract_conformant/offline_admissible/closed_loop_admissible 分離, D1=前2 true 後2 false), R3 factual(manifest 実key=baseline_ckpt_sha256_at_start/_at_end). D0 EXIT 不触, node IN_PROGRESS D1, code/run/gate PASS なし. 次 = pQ R1-R3 対応 → pN re-concur. custody-reflected by p6。"
+    note: "D1 Skill contracts step-1: scope prereg v1 banked 7b899e88c7 (sha 5704174927). pN scope-concur: v1 (23:01) HOLD B1-B7 → v2 (23:16) HOLD R1-R3 → v3 d64298a62b re-verdict (23:21) = ✅SCOPE CONCUR (R1-R3 PASS-CLOSE, B1-B7 CLOSE). step-1 prereg CLOSED. 解錠 = §0 step2 contracts+adapters DESIGN AUTHORING のみ; code/impl/run/gate 未解錠 (impl は pN design-readback + 明示 GO + exact-path manifest 後). carry: BC+RL triad-absent→hash_unpinned/exit HOLD, RL-only unusable→gate① unresolved, offline+closed_loop admissible=false. D0 EXIT 不触, node IN_PROGRESS D1. 次 = D1 step-2 contracts design authoring (pQ). custody-reflected by p6。"
 created: 2026-07-18T12:44:00+09:00
-last_updated: 2026-07-18T23:17:38+09:00
+last_updated: 2026-07-18T23:23:28+09:00
 spec_version: LTM-1 v1.2
 ---
 
