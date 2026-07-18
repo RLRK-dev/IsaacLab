@@ -25,9 +25,9 @@ session_history:
   - id: T-ROOT-RS-TECH-LEAD2#s3
     status: active
     started_at: 2026-07-18T23:01:16+09:00
-    note: "D1 Skill contracts step-1: scope prereg v1 banked 7b899e88c7 (sha 5704174927). pN scope-concur: v1 (23:01) HOLD B1-B7 → v2 (23:16) HOLD R1-R3 → v3 d64298a62b re-verdict (23:21) = ✅SCOPE CONCUR (R1-R3 PASS-CLOSE, B1-B7 CLOSE). step-1 prereg CLOSED. 解錠 = §0 step2 contracts+adapters DESIGN AUTHORING のみ; code/impl/run/gate 未解錠 (impl は pN design-readback + 明示 GO + exact-path manifest 後). carry: BC+RL triad-absent→hash_unpinned/exit HOLD, RL-only unusable→gate① unresolved, offline+closed_loop admissible=false. D0 EXIT 不触, node IN_PROGRESS D1. step-2 design v3→v4 91210c26c4 → pN v4 re-verdict (00:52) = HOLD R1-R4 (verifier-governed, not gate PASS): #1 A/#2 model_9 unchanged, B3 schema fail-close + B5 design-only map PASS-CLOSE; 残 R1-R4 (exact paths+banked-line, finetune_cfg projection, SCRIPTED/WAIT source-closure, SkillActionKey/types+RL-only N/A). code path frozen, GO CLOSED, D1 exit HOLD, offline/live false, D0 unchanged. 次 = pQ R1-R4 fold → v5 → pN re-readback. custody-reflected by p6。"
+    note: "D1 Skill contracts step-1: scope prereg v1 banked 7b899e88c7 (sha 5704174927). pN scope-concur: v1 (23:01) HOLD B1-B7 → v2 (23:16) HOLD R1-R3 → v3 d64298a62b re-verdict (23:21) = ✅SCOPE CONCUR (R1-R3 PASS-CLOSE, B1-B7 CLOSE). step-1 prereg CLOSED. 解錠 = §0 step2 contracts+adapters DESIGN AUTHORING のみ; code/impl/run/gate 未解錠 (impl は pN design-readback + 明示 GO + exact-path manifest 後). carry: BC+RL triad-absent→hash_unpinned/exit HOLD, RL-only unusable→gate① unresolved, offline+closed_loop admissible=false. D0 EXIT 不触, node IN_PROGRESS D1. step-2 design →v4.1 82d6550512 → pN v4.1 readback (00:59) = HOLD C1-C3 (verifier-governed, not gate PASS): R2 finetune projection + R3 source closure PASS-CLOSE; 残 C1-C3 (C1 residual line-number, C2 missing SkillLifecycleContract/required_belief_confidence/handoff_start_context types, C3 obj/ellipsis/bare-ref + invalid G1-G6 progress enum/fail-close). decisions/path freeze unchanged, GO CLOSED, D1 exit HOLD, no authority, D0 unchanged. 次 = pQ C1-C3 fold → v4.2 → pN re-readback. custody-reflected by p6。"
 created: 2026-07-18T12:44:00+09:00
-last_updated: 2026-07-19T00:53:12+09:00
+last_updated: 2026-07-19T01:00:08+09:00
 spec_version: LTM-1 v1.2
 ---
 
