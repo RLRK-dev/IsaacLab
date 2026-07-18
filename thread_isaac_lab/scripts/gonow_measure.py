@@ -103,6 +103,19 @@ def main() -> int:
     import route_executor as rex
     from newton_route_env import _C1_XY, _LEFT_EE_BODY, _RIGHT_EE_BODY, clamp_pos_ko
 
+    # --- pre-build provenance (OPS-SUP cond B2/B3/B4): capture identity BEFORE any env construction --------
+    cvd = os.environ.get("CUDA_VISIBLE_DEVICES")  # cvd-provenance-read
+    if not cvd:
+        # B3: an evidence run requires the visible GPU pinned; fail-closed BEFORE the env build.
+        print("[gonow] CVD-UNPINNED VIOLATION: the visible-device env var (CVD) is null/empty. An evidence run must pin it. exit 2", flush=True)
+        raise SystemExit(2)
+    if "env_isaaclab7" not in sys.executable:
+        # B4: bar the interpreter to the Option-E venv.
+        print(f"[gonow] INTERPRETER VIOLATION: expected env_isaaclab7 venv, got {sys.executable}. exit 2", flush=True)
+        raise SystemExit(2)
+    harness_self_sha_pre = _sha256(Path(__file__).resolve())
+    source_closure_import = _repo_source_closure()  # B2: pinned RIGHT AFTER imports, BEFORE env construction
+
     rec = Path(a.recording)
     assert rec.exists(), f"recording (GOLDEN) not found: {rec}"
     out = Path(a.outbox)
@@ -150,19 +163,31 @@ def main() -> int:
     }
     print(f"[gonow] effective config: {json.dumps(eff)}", flush=True)
 
-    # --- provenance (OPS-SUP cond 4/5): embed run identity + a fail-closed pre/post source closure ---------
-    harness_self_sha_pre = _sha256(Path(__file__).resolve())
-    source_closure_pre = _repo_source_closure()
+    # --- post-build device provenance (OPS-SUP cond B4) + assemble run identity ---------------------------
+    torch_cuda: dict = {}
+    try:
+        if torch.cuda.is_available():
+            _idx = torch.cuda.current_device()
+            _props = torch.cuda.get_device_properties(_idx)
+            torch_cuda = {
+                "current_device": int(_idx),
+                "device_name": torch.cuda.get_device_name(_idx),
+                "uuid": str(getattr(_props, "uuid", "")),
+                "device_count": int(torch.cuda.device_count()),
+            }
+    except Exception as e:  # noqa: BLE001
+        torch_cuda = {"error": type(e).__name__}
+    source_closure_run_start = _repo_source_closure()  # B2: full loaded set after build (before drive)
     provenance = {
         "argv": sys.argv,
         "pid": os.getpid(),
         "venv_python": sys.executable,
         "VIRTUAL_ENV": os.environ.get("VIRTUAL_ENV"),
         "MUJOCO_GL": os.environ.get("MUJOCO_GL"),
-        # CVD env value (provenance READ for OPS-SUP cond 4, NOT GPU selection = --device); the name is split
-        # so the validate.sh CHECK-6 grep (which flags the literal regardless of use) does not false-positive.
-        "cvd": os.environ.get("CUDA_VISIBLE" + "_DEVICES"),
+        "cvd": cvd,
         "requested_device": a.device,
+        "env_device": str(getattr(env, "device", None)),
+        "torch_cuda": torch_cuda,
         "python_version": sys.version.split()[0],
         "numpy_version": np.__version__,
         "warp_version": getattr(wp, "__version__", "?"),
@@ -172,7 +197,8 @@ def main() -> int:
         "recording": str(rec),
         "recording_sha256": eff["recording_sha256"],
         "harness_self_sha256_pre": harness_self_sha_pre,
-        "source_closure_pre_size": len(source_closure_pre),
+        "source_closure_import": source_closure_import,
+        "source_closure_run_start": source_closure_run_start,
     }
 
     # --- reset-snapshot hook: snapshot pre-reset state on the terminal step (mirror measure_grip_retention) ---
@@ -339,18 +365,31 @@ def main() -> int:
             "shadow_fire_before_drop": bool(ff is not None and (done_step is None or ff < done_step)),
         }
 
-    # --- post-provenance + fail-closed source integrity (OPS-SUP cond 5/6) --------------------------------
+    # --- post-drive source integrity (OPS-SUP cond B1/B2): full maps + changed/missing/added hard bars ----
     harness_self_sha_post = _sha256(Path(__file__).resolve())
-    source_closure_post = _repo_source_closure()
-    changed = sorted(k for k in source_closure_pre if source_closure_pre.get(k) != source_closure_post.get(k))
-    missing = sorted(set(source_closure_pre) - set(source_closure_post))
+    source_closure_run_end = _repo_source_closure()
+    # import-time pinned modules must be byte-identical at end (changed=[]) and still present (missing=[]).
+    changed = sorted(k for k in source_closure_import if source_closure_import.get(k) != source_closure_run_end.get(k))
+    missing = sorted(set(source_closure_import) - set(source_closure_run_end))
+    # modules loaded during env build (beyond the import set) are recorded; their bytes must stay stable through
+    # the drive, and the drive itself must load nothing new (added_during_drive == []).
+    added_during_build = sorted(set(source_closure_run_start) - set(source_closure_import))
+    added_during_drive = sorted(set(source_closure_run_end) - set(source_closure_run_start))
+    build_added_unstable = sorted(
+        k for k in added_during_build if source_closure_run_start.get(k) != source_closure_run_end.get(k)
+    )
     self_sha_stable = harness_self_sha_pre == harness_self_sha_post
-    source_integrity_ok = (not changed) and (not missing) and self_sha_stable
+    source_integrity_ok = (
+        (not changed) and (not missing) and (not added_during_drive) and (not build_added_unstable) and self_sha_stable
+    )
     provenance["harness_self_sha256_post"] = harness_self_sha_post
     provenance["harness_self_sha_stable"] = self_sha_stable
-    provenance["source_closure_post_size"] = len(source_closure_post)
+    provenance["source_closure_run_end"] = source_closure_run_end
     provenance["changed_source_set"] = changed
     provenance["missing_source_set"] = missing
+    provenance["added_during_build"] = added_during_build
+    provenance["added_during_drive"] = added_during_drive
+    provenance["build_added_unstable"] = build_added_unstable
     provenance["source_integrity_ok"] = source_integrity_ok
 
     summary = {
