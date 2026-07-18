@@ -58,4 +58,23 @@ Golden side = **RECORDED_STATE_RENDER (NO PHYSICS)** explicitly labeled; current
 
 ## Authorization / order
 Diagnostic ONLY — no fix / B6-char / B5b / impl / training unlock. Results → p5 root-fix (L3). p6 DDR row HELD. (c) cable bend/stretch-stiffness compare or any cable-param change touches §0/banked cable design ⇒ **design-gate + Rs before change (STOP if touched)**.
-**Order:** Phase0 v0.2 (this) → **pN readback** → (b) PROJECTED-preliminary [cheap, A/B weight] **+ FF@10-vs-golden DECISIVE** (FF@4+FF@10 bracket, live-state, full-IC) → residual (c) → video → p5 root-fix. All results labeled TRACE_ORACLE_ONLY / EXECUTION_NOT_COMPARABLE.
+**Order (v0.2, SUPERSEDED by v0.3 below):** ~~Phase0 → pN readback → (b) + FF@10-vs-golden DECISIVE → (c) → video~~.
+
+---
+
+## v0.3 — 2026-07-19 02:13 JST (pN re-readback R1-R6 [00:22] + p5 §10.13.4 self-correction [02:09]) — **HONEST DEFLATION**
+
+pN v0.2 re-readback = **PARTIAL PASS / RUN HOLD** (B1/B2/B3/B5/B6 PASS-CLOSE, static-(b) PROJECTED-only direction PASS); execution auth held for R1-R6. p5 §10.13.4 = ACCEPT + **owns a prior-art miss**.
+
+- **R1 cadence (fix):** the trace is NOT `771×10`. SSOT `route_executor.py:4545-4547`: `cf = arange(0, LAST+1, CADENCE)` = **771 control frames** (0,10,…,7700); `step_f=cf[:-1]` = **770 driven chunks**; reward/drop projection endpoint `f=step_f[t]+9` = 9..7699; frame 7700 = terminal control obs; 7701..7706 = 6-frame tail. Counter 1/chunk, init 0, drop-reads-prior-latch-then-update — freeze exactly.
+- **R2 PRIOR-ART (decisive):** a whole-route **FF@10 already ran** — `comp5_c2seat_fullfire_sub10` (commit `311f18cb9b`, sha `6057802…`, feedforward, **steps_run=538, max_phase=3, c2_seat=false, NUMERIC_NOGO**). The node **already judged `sub10` is NOT the cause → open-loop drift amplification**. ⇒ **"gap = substep resolved" and "FF@10-vs-golden decisive" are RETRACTED** (p5 owns skipping the §運用4/V7-V10 prior-art check).
+- **R3 causal pair (fix):** the clean single-variable substep test = **current-FF@4 vs current-FF@10** (same current build/IC/pin/seed; substeps+paired dt only). current-FF@10-**vs-golden** is a SECONDARY trace-oracle (producer code/build/pin differ) — NOT decisive; an FF@10↔golden match does NOT license "substrate resolved."
+- **R4 pin confound:** golden recorded `pin_active` onset frame 2544 (step 254); current **live geometric trigger** fires step 246. Post-246 = `PIN_TRIGGER_CONFOUNDED`; only the **pre-pin (pre-246) window** is a clean golden-vs-current comparison.
+- **R5 override mechanism (pN answer):** NO source edit — isolated subprocess sets `nre.RL_SIM_SUBSTEPS=10` + `nre.RL_SIM_DT=nre.DT/10` (paired, assert `N·dt==DT`); prior art `comp5_c2seat_fullfire.py:58-71` / `comp3_g1sub10:80-87`. Fresh subprocess, record effective values + module sha, assert zero leakage to the FF@4 leg.
+- **R6 exact prereg:** harness path+sha, literal commands, **2×FF4 + 2×FF10** same-current-IC-hash, pin/seed/device, closure/bracket, comp5 prior-art disposition, verdict union. golden full-IC → report **L∞** only (NOT for causal attribution; mismatch ⇒ STOP causal claim to golden).
+
+### ⭐ Honest conclusion (both panes converged)
+The observed **producer-trace vs current-consumer divergence is largely a KNOWN property: open-loop feedforward-replay drift**, not a substrate-parameter regression. Evidence: FF@10 also NOGO (538) ⇒ substep is NOT the cause; the node (07-12) already attributed it to open-loop drift amplification. **Substrate fidelity gap = UNPROVEN and, on current evidence, effectively a re-discovery of the known open-loop-drift property.** (c) cable-param compare = **likely UNNECESSARY** (not authorized). ⭐ This **reinforces #18's motivation**: open-loop FF drifts, closed-loop RL corrects — the #18 fix repairs the M-b2 bug in the closed-loop (ik_chord) drive.
+
+### Scope + recommendation
+Limited remaining diagnostic (if run): **(b) PROJECTED-only preliminary + current-pair sensitivity (FF@4 vs FF@10, same build) + pre-pin trace comparison** — value is LOW (confirms substep modulates drift extent, already largely known). **Recommendation: accept the known-open-loop-drift conclusion; do NOT chase a substrate-param root; (c) unneeded.** Current authorization = **(b) + FF@10 harness AUTHORING ONLY, no execution/sim**, pending v0.3 pN readback + individual GO. All results TRACE_ORACLE_ONLY / EXECUTION_NOT_COMPARABLE. p6 DDR row stays HELD (likely re-labels to "known open-loop-drift, non-regression" not "foundational blocker"). Diagnostic only; no fix/B6/impl/training unlock.
