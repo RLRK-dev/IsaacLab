@@ -80,3 +80,64 @@ The evidence-grade harness is **OPS-SUP PASS-CLOSE** at **commit `78d2b94c`**, `
 
 ### Evidence rerun set (final)
 M1 (B4-shadow ik_chord+pin+shadow) · M2 (FF+pin+shadow) · M2b (FF+**shadow**, no-pin) · M3 (ik_chord natural-term). Each: fresh leaf, `run.log` in the parent, `--device cuda:0` with `CUDA_VISIBLE_DEVICES=0`. Order: THIS prereg bank → OPS-SUP scope PASS → prior-art readback → rerun. B6-char / B5b / impl UNAUTHORIZED.
+
+---
+
+## CORRECTION v3.1 — 2026-07-18 16:55 JST (OPS-SUP prereg-v3 scope readback: B1 causal boundary + B2 disjoint/exhaustive 3-state + B3 executable commands)
+
+OPS-SUP prereg-v3 scope readback (16:46 JST) = **HOLD**: harness pin (`78d2b94c` / `de44d4a1`) + one-variable config PASS; run fence CLOSED pending three **records-only** corrections (no harness change, no sim). This v3.1 **SUPERSEDES** the v3 §"Causal precondition — pre-fire trace equality" (~246 wording) + §"Exact three-state classification" and adds the executable command block. Anchors are **grounded on-disk** against the diagnostic summaries (NON-EVIDENCE, `gonow_20260718/`): M2 `ff_wholeroute` `first_shadow_fire=246`, `g3_step=242`, `done_step=347`, cause `B_contact_loss`; M2b `ff_nopin_wholeroute` `done_step=342`, cause `C_c1_escape`.
+
+### B1 — causal boundary (CRITICAL): the pin-intervention step f is EXCLUDED from the equality window
+- **f := M2 `summary.shadow.first_shadow_fire_step`** (the read-only detection of the (d-b) fire; in M2/FF the real weld fires the same step via `:1225`). **Frozen diagnostic expectation: `f == 246`** (grounded: diagnostic M2 `first_shadow_fire=246`). **Any other f → INCONCLUSIVE** (anchor moved).
+- **Pre-fire trace equality is on `per_step.step ∈ [0, f-1]` ONLY** (rollout rows strictly BEFORE f), NOT through f. Rationale: the real pin intervention (weld) occurs DURING step f, so M2 and M2b legitimately diverge from f onward — requiring equality AT f would reject the causal effect itself. All "~246"/"≈246"/route-step-ambiguous language is replaced by **f** + explicit **`per_step.step`** integer indices (pre-fire window = rows 0..245).
+- Compared fields per row (both legs, exact equality): `contact_r, contact_l, held_z_minus_rest, dx_c1, g_latched, held_i, grasped, contact_loss_count`.
+
+### B2 — disjoint + exhaustive three-state (HIGH): common validity predicate P first
+Per leg, from the harness summary: `term_step = done_step`; `term_cause` = the cause k∈{`A_held_z_floor`,`B_contact_loss`,`C_c1_escape`,`explosion`} with the smallest non-null `first_cause_step[k]` (None if the leg never terminates through its horizon).
+
+- **P (common validity predicate)** — REQUIRED for any non-INCONCLUSIVE verdict: both M2 and M2b `status==COMPLETE` ∧ `provenance.source_integrity_ok` (⊇ `device_provenance_ok`) on BOTH ∧ the run-independent provenance-equality assertion (§B3) ∧ config-diff-set == `{route_c1_pin_effective, pin_seat_seg}` only ∧ **f == 246** ∧ **exact per_step equality on [0, f-1]** (§B1).
+- **PIN-ASSOCIATED** = P ∧ [M2: `term_cause==B_contact_loss` ∧ `term_step ∈ [f, 347]`] ∧ [M2b: **no terminal of ANY cause through step 347** — `term_step is None` or `> 347`].
+- **BRANCH-INTRINSIC** = P ∧ [M2: `term_cause==B_contact_loss` ∧ `term_step ∈ [f, 347]`] ∧ [M2b: `term_cause==B_contact_loss` ∧ `term_step ∈ [f, 347]`] (both legs same B-cause terminal in-window → recorded branch loses grip pin-independently).
+- **INCONCLUSIVE** = every remaining outcome (the complement), explicitly including: M2 has no `B_contact_loss` terminal in `[f,347]`; **either leg terminates by an other cause** (`A_held_z_floor`/`C_c1_escape`/`explosion`); M2b `B_contact_loss` outside `[f,347]`; or any P conjunct fails.
+
+The three are **disjoint** (PIN-ASSOCIATED requires M2b to have NO terminal through 347; BRANCH-INTRINSIC requires an M2b B-terminal in-window ⊂ "some terminal"; INCONCLUSIVE = complement) and **exhaustive** (INCONCLUSIVE = complement). This removes the v3 overlap where an M2b other-cause terminal satisfied both the "no B_contact_loss" PIN-ASSOCIATED wording AND INCONCLUSIVE.
+
+**Diagnostic-informed, NON-EVIDENCE (does NOT force the fresh verdict):** the diagnostic M2b dropped `C_c1_escape@342` (an other-cause terminal ≤347) → under the strict rule the fresh rerun is **expected to classify INCONCLUSIVE** (M2b other-cause terminal). Mechanically correct: the pin-vs-branch binary does not cleanly resolve because FF-no-pin fails for a THIRD reason (C1 escape after seat) — itself a coverage finding for CC2 CH-1 / p5 (recorded branch does not hold C1 whole-route even pin-OFF). The fresh legs produce the actual verdict; this note only prevents a forced PIN-ASSOCIATED read.
+
+### B3 — executable prereg (HIGH): the four literal commands (banked before prior-art/run)
+Fresh parent (does not exist): `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/gonow_evidence_20260718/` (distinct from the diagnostic `gonow_20260718/`). Preamble once: `mkdir -p "$P"`. Each leg passes a **non-existent leaf** (`--outbox`) — the harness `exit 2`s if it pre-exists (fresh-outbox bar); `run.log` is written to the **parent** with a per-leg name; **no tee** → command rc == interpreter rc == the harness machine-decidable exit (0 COMPLETE / 2 provenance-violation / 3 source-integrity). Horizon `--episode-steps 900` (whole-route cap; each leg breaks at its natural terminal). `--recording` pinned to the GOLDEN npz.
+
+```bash
+cd /home/rlrk/IsaacLab
+P=eval_runs/troot_optE_dapg_wholeroute_scope_20260701/gonow_evidence_20260718
+G=eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz
+mkdir -p "$P"
+
+# M1 — B4-shadow (ik_chord + pin + shadow): necessity (expect shadow-fire=0 ∧ g3=false)
+CUDA_VISIBLE_DEVICES=0 MUJOCO_GL=egl /home/rlrk/env_isaaclab7/bin/python \
+  thread_isaac_lab/scripts/gonow_measure.py --device cuda:0 --episode-steps 900 --recording "$G" \
+  --drive-mode ik_chord --route-c1-pin --shadow \
+  --tag m1_b4shadow --outbox "$P/m1_b4shadow_ikchord" > "$P/run_m1_b4shadow.log" 2>&1
+
+# M2 — FF + pin + shadow: coverage baseline + positive control (expect f=246, drop B@347)
+CUDA_VISIBLE_DEVICES=0 MUJOCO_GL=egl /home/rlrk/env_isaaclab7/bin/python \
+  thread_isaac_lab/scripts/gonow_measure.py --device cuda:0 --episode-steps 900 --recording "$G" \
+  --drive-mode feedforward --route-c1-pin --shadow \
+  --tag m2_ff_pin --outbox "$P/m2_ff_pin_shadow" > "$P/run_m2_ff_pin.log" 2>&1
+
+# M2b — FF + shadow, NO pin: one-variable attribution (differs from M2 only in --route-c1-pin)
+CUDA_VISIBLE_DEVICES=0 MUJOCO_GL=egl /home/rlrk/env_isaaclab7/bin/python \
+  thread_isaac_lab/scripts/gonow_measure.py --device cuda:0 --episode-steps 900 --recording "$G" \
+  --drive-mode feedforward --shadow \
+  --tag m2b_ff_nopin --outbox "$P/m2b_ff_shadow_nopin" > "$P/run_m2b_ff_nopin.log" 2>&1
+
+# M3 — ik_chord natural-termination (B5a): current reachability (expect drop A@267)
+CUDA_VISIBLE_DEVICES=0 MUJOCO_GL=egl /home/rlrk/env_isaaclab7/bin/python \
+  thread_isaac_lab/scripts/gonow_measure.py --device cuda:0 --episode-steps 900 --recording "$G" \
+  --drive-mode ik_chord \
+  --tag m3_ikchord_natterm --outbox "$P/m3_ikchord_natterm" > "$P/run_m3_natterm.log" 2>&1
+```
+
+**Run-independent provenance-equality assertion (M2 vs M2b, analysis-time):** equal on `provenance.harness_self_sha256_post`, `provenance.source_closure_run_end` (∧ `changed/missing/added_during_drive/build_added_unstable == []`), `provenance.recording_sha256`, `provenance.venv_python`, effective device (`current_device`/uuid), `effective_config.RL_SIM_SUBSTEPS`, `.PHYSICS_STEPS_PER_RL`, `.drive_mode`, `episode_steps_requested`; effective-config diff-set == `{route_c1_pin_effective, pin_seat_seg}` ONLY. **Run-specific, NOT asserted equal:** `argv`, `pid`, `tag`, `outbox` (differ per leg by design).
+
+**Order (unchanged):** THIS v3.1 bank → OPS-SUP scope readback → prior-art readback (concrete delta = harness `78d2b94c`) → fresh rerun. Records-only; no harness change, no sim. B6-char / B5b / impl remain UNAUTHORIZED; execution HOLD; training-ready LOCKED; WMSO untouched (released to pQ).
