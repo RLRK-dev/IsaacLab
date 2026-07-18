@@ -2,10 +2,10 @@
 
 - node: `T-WMSO` (parent `T-ROOT-RS-TECH-LEAD2`); author = w2:pQ (RS-TECH-LEAD2)
 - **decision_status: ACCEPTED** (Rs directive 2026-07-19; verbatim §0)
-- **scope_status: DRAFT v3.2 — pN SCOPE HOLD C1-C4 fold 済 → pS delta re-check → explicit-path bank → pN banked-sha readback PENDING**
-- **implementation_status: NOT_STARTED**（pN C4: banked sha readback まで design authoring / [CHANGE] は開かない）
+- **scope_status: DRAFT v3.2.1 — pN readback: C1/C2/C3 = PASS-CLOSE + records-only HOLD R1-R3 → 訂正 bank → pN blob readback → SCOPE CONCUR PENDING**
+- **implementation_status: NOT_STARTED**（pN C4: SCOPE CONCUR まで design authoring / [CHANGE] は開かない）
 - grounding_head: `11da258f75` | wmso_d1_commit: `57ed32b27a` (clean at HEAD)
-- version: v1 (07:42) → v2 (08:06, pS conditions fold) → v3 (08:12, Rs review-2 必須修正 #1-#8 + 重要事項 #9-#12 + pS addendum minor fold) → v3.1 (08:16, pS C-1 discharge: §0b fold-map 追記) → **v3.2 (08:2x, pN SCOPE HOLD C1-C4 fold: §5 lineage domain 全列挙 / §4 non-increasing 訂正 + ceiling 明記 / §9 fail-closed re-verify loop / bank 手順 §13)**
+- version: v1 (07:42) → v2 (08:06, pS conditions fold) → v3 (08:12, Rs review-2 必須修正 #1-#8 + 重要事項 #9-#12 + pS addendum minor fold) → v3.1 (08:16, pS C-1 discharge: §0b fold-map 追記) → v3.2 (08:2x, pN SCOPE HOLD C1-C4 fold: §5 lineage domain 全列挙 / §4 non-increasing 訂正 + ceiling 明記 / §9 fail-closed re-verify loop / bank 手順 §13) → **v3.2.1 (08:4x, pN records-fix R1: §13-3「3-path atomic」claim 撤回 → 実際の二 commit chain `9ee7434aa1`→`6b6b30886b` に訂正; content 無変更)**
 - design-axis: pS RATIFY-WITH-CONDITIONS → v2 実読 CONFIRM → **v3 re-check = 設計軸 PASS**（§5 lineage 訂正 = 不変量喪失なし・identity 4分離・E0-E2・確定表 単調性 = 全 SOUND）+ records 条件 C-1 = §0b fold-map で discharge（`WMSO_D11_SCOPE_DESIGN_RATIFY_WMSODESIGN_20260719.md` addendum §7 版 sha256 `7023eb609a9b…`）
 - Rs review-2 判定 (2026-07-19 verbatim): 「修正後PASSです。現状はpNへのscope-concur送付前に修正が必要です。」「これらを直せば、**scope preregとして承認可能な水準**です。」
 
@@ -353,7 +353,7 @@ lanes: dev = w2:pQ / design-ratify = w2:pS (WMSO-DESIGN) / evidence-verify = w2:
 ## 13. 次アクション
 1. ✅ Rs review-2 #1-#12 fold (v3) → pS PASS + C-1 discharge (v3.1) → **pN SCOPE HOLD C1-C4 fold (本 v3.2)**。
 2. **pS へ v3.2 delta re-check 依頼**（C1 表 / C2 訂正は §4-§5 の設計内容 delta）。
-3. pS OK 後（pN C4）: **prereg v3.2 + pS ratify doc（final readback 版）+ LEDGER を explicit-path atomic commit（bank）**。
+3. ✅ bank 完了 — 実際の bank は**二 commit chain**: LEDGER = `9ee7434aa1`（p6 先行 bank）→ prereg + pS ratify = `6b6b30886b`（explicit 2 paths）。当初計画の「3-path atomic commit」記述は実行形と不一致につき**撤回**（pN R1 records-fix; 履歴 rewrite はしない）。
 4. **pN へ banked sha readback dispatch** → SCOPE CONCUR。**banked sha readback まで design authoring / [CHANGE] は開かない**。
 5. pN CONCUR 後: contracts_v2 DESIGN doc → §9 の順（fail-closed re-verify loop 込み）で gates。
 6. milestone verdict を p6 へ relay（都度）。
