@@ -1,4 +1,4 @@
-# RT-WMSO adoption charter (OPS-SUP-CODEX, 2026-07-18)
+# WMSO adoption charter (OPS-SUP-CODEX, 2026-07-18)
 
 **Status:** Rs direction accepted as an L0 architecture requirement. This record authorizes design and node
 definition; it does **not** authorize production control, training launch, or removal of existing safety and
@@ -6,9 +6,13 @@ orchestrator paths.
 
 ## 0. Decision and terminology correction
 
-Adopt **Real-Time World-Model-Based Skill Orchestration (RT-WMSO)** as the high-level architecture that
+Adopt **World-Model-Based Skill Orchestration (WMSO)** as the high-level architecture that
 integrates learned skills, vision-grounded state, a skill-resolution world model, runtime skill selection,
 handoff, transition, recovery, and safe fallback.
+
+WMSO may use a boundary-only or a real-time execution profile. This project retains the multi-rate,
+event-driven, deadline-bounded profile defined in this charter; removing “Real-Time” from the architecture
+name does not weaken its real-time or safety acceptance requirements.
 
 The high-level action is a **learned skill**, not specifically a PPO skill. Supported skill provenance includes:
 
@@ -18,16 +22,16 @@ The high-level action is a **learned skill**, not specifically a PPO skill. Supp
 - DAPG or another imitation-plus-RL method.
 
 The orchestration contract is algorithm-agnostic. Every skill must expose the same typed lifecycle contract,
-regardless of how its internal policy was trained. RT-WMSO does not generate motor commands and does not
+regardless of how its internal policy was trained. WMSO does not generate motor commands and does not
 replace the skill's low-level controller.
 
 ## 1. L0 placement and node boundary
 
-Create a proposed node **`T-RT-WMSO` under `T-ROOT`**, rather than placing it below the current `T-WM` node.
-The current `T-WM` is a failure-classification/recovery cascade. RT-WMSO is the integration architecture across
+Create a proposed node **`T-WMSO` under `T-ROOT`**, rather than placing it below the current `T-WM` node.
+The current `T-WM` is a failure-classification/recovery cascade. WMSO is the integration architecture across
 all four Rs-mandated L0 means:
 
-| L0 means | RT-WMSO role |
+| L0 means | WMSO role |
 |---|---|
 | RL | supplies RL-trained or RL-fine-tuned skills |
 | IL | supplies BC/DAPG demonstrations, initialization, and learned skills |
@@ -65,7 +69,7 @@ Choose and execute exactly one of:
 
 ### 2.4 Independent safety and event layers
 
-Low-level safety monitoring has priority over RT-WMSO and must not wait for world-model inference. The event
+Low-level safety monitoring has priority over WMSO and must not wait for world-model inference. The event
 layer detects completion, failure, slip/contact changes, lack of progress, OOD state, checkpoint arrival, and
 deadline risk. Mid-skill switching is allowed only at a declared safe interruption checkpoint unless the safety
 layer has already stopped or stabilized the system.
@@ -88,7 +92,7 @@ evaluation.
 
 ## 4. Multi-rate real-time contract
 
-RT-WMSO has three decision classes:
+The WMSO real-time execution profile has three decision classes:
 
 | Class | Owner | Function |
 |---|---|---|
@@ -118,7 +122,7 @@ defined deadline and that low average latency alone is insufficient:
 | O0 Offline orchestration | replay-only planning and switching | beats fixed-chain and heuristic baselines without safety regression |
 | RT0 Bounded fast path | preloaded candidate filter and Q/policy lookup | deadline and fail-loud tests |
 | S0 Shadow mode | decisions logged while existing orchestrator retains control | zero control authority and matched-event audit |
-| V0 Closed-loop pilot | limited RT-WMSO authority with fallback | safety, recovery, latency, and task-success gates |
+| V0 Closed-loop pilot | limited WMSO authority with fallback | safety, recovery, latency, and task-success gates |
 
 Design, contract definition, and offline data work may proceed in parallel with current skill work. Closed-loop
 authority remains blocked until the skills it selects have stable initiation/termination/handoff contracts.
@@ -139,7 +143,8 @@ authority remains blocked until the skills it selects have stable initiation/ter
    class budget under contention.
 8. **Safety independence:** safety action succeeds when the model/orchestrator is delayed, crashed, stale, or
    adversarially wrong.
-9. **Comparative value:** compare fixed chain, current heuristic recovery, non-real-time WMSO, and RT-WMSO.
+9. **Comparative value:** compare fixed chain, current heuristic recovery, boundary-only WMSO, and WMSO with
+   the event-driven, deadline-bounded execution profile.
 10. **No premature claim:** D0-M0 completion is not training-ready or closed-loop GO; S0 and V0 require their
     own two-key evidence/design verdicts.
 
@@ -156,10 +161,9 @@ stale Skill Dynamics Model data.
 
 ## 8. Immediate next action
 
-1. Bank this direction as the founding charter for proposed node `T-RT-WMSO`.
+1. Bank this direction as the founding charter for proposed node `T-WMSO`.
 2. Keep the node separate from the active route/pin implementation and from the existing `T-WM` classifier
    cascade; connect them through explicit dependencies.
 3. Start D0 with a read-only inventory of current skills, policy provenance (including BC+RL), observation
    schemas, termination signals, checkpoints, and existing `routing_orchestrator.py` behavior.
-4. Do not modify production control or launch RT-WMSO inference until D0 is independently verified.
-
+4. Do not modify production control or launch WMSO inference until D0 is independently verified.
