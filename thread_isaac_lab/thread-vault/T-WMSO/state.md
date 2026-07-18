@@ -24,7 +24,7 @@ session_history:
     status: active
     note: "Rs direct 2026-07-18: development owner = T-ROOT-RS-TECH-LEAD2 (new Claude Code w2:pQ)。D0 read-only inventory を開始。independent verify = pN、custody = p6。"
 created: 2026-07-18T09:29:01+09:00
-last_updated: 2026-07-19T00:45:31+09:00
+last_updated: 2026-07-19T00:53:12+09:00
 ---
 
 # WMSO — World-Model-Based Skill Orchestration (L0 統合 architecture)
@@ -102,5 +102,5 @@ WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断�
 
 - **D1 scope prereg v1 = BANKED** (`7b899e88c7`, sha `5704174927…`): `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D1_SKILL_CONTRACTS_SCOPE_PREREG_RSTECHLEAD2_20260718.md`。
 - ✅ **pN SCOPE CONCUR granted (v3 re-verdict 23:21)** (`w2:pN`): **R1-R3 PASS-CLOSE・B1-B7 CLOSE** (v1 B1-B7 → v2 R1-R3 → v3 `d64298a62b` 全 CLOSE)。**step-1 (scope prereg) = CLOSED**。**解錠範囲 = §0 step2 contracts+adapters DESIGN AUTHORING のみ**。⛔**code/impl/run/gate PASS 未解錠**: final design bank + /pre-check 後も pN design readback + 明示 implementation GO + exact added/changed path manifest まで [CHANGE] 禁止。⚠**carry conditions**: BC+RL triad association 不在→hash_unpinned/inadmissible + D1 exit HOLD / RL-only unusable→gate① unresolved / D1 では offline_orchestration_admissible=false ∧ closed_loop_admissible=false。
-- **D0 EXIT は不触** (D0 = CLOSE/EXIT GRANTED 維持)・**node IN_PROGRESS D1**・**code/run/gate PASS なし**。full conditions = pN→pQ 23:00 dispatch 済。**step-2 design v3 `3fd093e70c` banked → pN step-4 design-readback (00:43) = ⏸IMPL HOLD**〔verifier-governed・not gate PASS〕: OPEN#1 A adopted (non-crypto caveat) / OPEN#2 RSL-RL insert model_9 selected だが schema unresolved (structural-only・not contract-conformant・not gate-1 PASS)。**B1-B6 fold required**・**code path set frozen・GO CLOSED / no CHANGE until v4 readback**。次 = pQ が B1-B6 fold → v4 → pN re-readback。
+- **D0 EXIT は不触** (D0 = CLOSE/EXIT GRANTED 維持)・**node IN_PROGRESS D1**・**code/run/gate PASS なし**。full conditions = pN→pQ 23:00 dispatch 済。**step-2 design v3→v4 `91210c26c4` → pN v4 re-verdict (00:52) = ⏸HOLD R1-R4**〔verifier-governed・not gate PASS〕: Decisions #1 A / #2 RSL model_9 unchanged・**B3 schema fail-close + B5 design-only map = PASS-CLOSE**。残 R1-R4: exact full paths+banked-line correction / finetune_cfg projection correction / complete SCRIPTED/WAIT source-closure aggregate / exact SkillActionKey/types + RL-only association N/A。**code path set frozen・implementation GO CLOSED・D1 exit HOLD・offline/live false**。次 = pQ が R1-R4 fold → v5 → pN re-readback。
 - ⛔ production / implementation / training / sim / inference / closed-loop / grip authority flip なし。
