@@ -14,6 +14,7 @@ input than on a good one. The harness never sets an authority axis true: a contr
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 
 from .contracts import (
@@ -23,6 +24,7 @@ from .contracts import (
     HashRef,
     SkillLifecycleContract,
     SnapshotRef,
+    is_hex64,
 )
 from .identity import SCRIPTED_CLOSURE_MEMBERS, WAIT_CLOSURE_MEMBERS, source_closure_sha256
 
@@ -65,6 +67,19 @@ def evaluate_conformance(contract: SkillLifecycleContract) -> ConformanceResult:
     sb = contract.support_boundary
     if sb.region_ref is None and sb.in_support_predicate is None:
         reasons.append("support_boundary has neither region_ref nor in_support_predicate")
+    ip = contract.initiation_predicate
+    if not ip.schema_ref:
+        reasons.append("initiation_predicate.schema_ref is empty")
+    try:
+        json.loads(ip.payload_canonical_json)
+    except (ValueError, TypeError):
+        reasons.append("initiation_predicate.payload_canonical_json is not valid JSON")
+    # The declared admissibility.contract_conformant must equal the computed conformance.
+    computed = not reasons
+    if contract.admissibility.contract_conformant != computed:
+        reasons.append(
+            f"declared contract_conformant ({contract.admissibility.contract_conformant}) != computed ({computed})"
+        )
     return ConformanceResult(conformant=not reasons, reasons=reasons)
 
 
@@ -153,17 +168,23 @@ def validate_manifest(manifest: dict, repo_root: str, *, require_closure: bool =
     problems: list[str] = []
     if manifest.get("d1_exit") != "HOLD":
         problems.append(f"d1_exit must be HOLD, got {manifest.get('d1_exit')!r}")
+    closures = manifest.get("source_closures", {})
+    top_pin = {
+        "SCRIPTED": closures.get("SCRIPTED", {}).get("source_closure_sha256"),
+        "WAIT": closures.get("WAIT", {}).get("source_closure_sha256"),
+    }
     if require_closure:
-        closures = manifest.get("source_closures", {})
         for name, members in (("SCRIPTED", SCRIPTED_CLOSURE_MEMBERS), ("WAIT", WAIT_CLOSURE_MEMBERS)):
-            pinned = closures.get(name, {}).get("source_closure_sha256")
-            if pinned is None:
+            if top_pin.get(name) is None:
                 problems.append(f"source_closures.{name} missing a pin")
                 continue
-            validate_source_closure(pinned, members, repo_root)
+            validate_source_closure(top_pin[name], members, repo_root)
     skills = manifest.get("skills", [])
     if len(skills) != 9:
         problems.append(f"expected 9 skill rows, got {len(skills)}")
+    ids = [row.get("skill_id") for row in skills]
+    if len(set(ids)) != len(ids):
+        problems.append(f"skill_id values must be unique: {ids}")
     for row in skills:
         sid = row.get("skill_id", "?")
         adm = row.get("admissibility", {})
@@ -173,6 +194,25 @@ def validate_manifest(manifest: dict, repo_root: str, *, require_closure: bool =
             problems.append(f"{sid}: closed_loop_admissible must be false")
         if not isinstance(adm.get("contract_conformant"), bool):
             problems.append(f"{sid}: contract_conformant must be a bool")
-        if adm.get("identity_pinned") is True and not row.get("identity"):
+        if adm.get("identity_pinned") is not True:
+            continue
+        identity = row.get("identity")
+        if not identity:
             problems.append(f"{sid}: identity_pinned=true but no identity pins")
+            continue
+        kind = row.get("kind")
+        if kind == "LEARNED":
+            for hkey in ("policy_weight_hash", "final_policy_hash"):
+                if not is_hex64(identity.get(hkey, "")):
+                    problems.append(f"{sid}: {hkey} is not a 64-hex sha256")
+            for hkey in ("base_ckpt_hash", "finetune_cfg_hash"):
+                value = identity.get(hkey)
+                if value is not None and not is_hex64(value):
+                    problems.append(f"{sid}: {hkey} must be null or a 64-hex sha256")
+        elif kind in ("SCRIPTED", "WAIT"):
+            closure = identity.get("source_closure_sha256", "")
+            if not is_hex64(closure):
+                problems.append(f"{sid}: source_closure_sha256 is not a 64-hex sha256")
+            elif top_pin.get(kind) is not None and closure != top_pin[kind]:
+                problems.append(f"{sid}: row source_closure {closure} != top-level {kind} pin {top_pin[kind]}")
     return problems

@@ -216,11 +216,9 @@ class LearnedIdentity:
             raise ValueError("policy_weight_hash must be a 64-hex sha256")
         if self.policy_weight_hash != self.lineage.final_policy_hash:
             raise ValueError("policy_weight_hash must equal lineage.final_policy_hash")
-        # A recorded (non-crypto) or RL-only association must never claim a train-time crypto bind.
-        if self.train_time_crypto_bound and (
-            self.association_strength is not AssociationStrength.CRYPTO_TRAIN_TIME_BOUND
-        ):
-            raise ValueError("train_time_crypto_bound=True requires association_strength=CRYPTO_TRAIN_TIME_BOUND")
+        # Bidirectional: train_time_crypto_bound is True iff the association is a train-time crypto bind.
+        if self.train_time_crypto_bound != (self.association_strength is AssociationStrength.CRYPTO_TRAIN_TIME_BOUND):
+            raise ValueError("train_time_crypto_bound must be True iff association_strength=CRYPTO_TRAIN_TIME_BOUND")
         if self.association_strength is AssociationStrength.NOT_APPLICABLE_RL_ONLY:
             if self.lineage.base_ckpt_hash is not None or self.lineage.finetune_cfg_hash is not None:
                 raise ValueError("RL-only identity must have null base_ckpt_hash and finetune_cfg_hash")

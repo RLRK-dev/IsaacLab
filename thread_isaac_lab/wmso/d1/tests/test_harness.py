@@ -163,3 +163,51 @@ def test_manifest_source_closure_pins_recompute_on_clean_tree():
     manifest = json.loads(_MANIFEST.read_text())
     problems = H.validate_manifest(manifest, str(_REPO_ROOT), require_closure=True)
     assert problems == [], problems
+
+
+def test_invalid_initiation_predicate_is_not_conformant():
+    bad_ref = C.InitiationPredicate(
+        expr_kind=C.ExprKind.THRESHOLD,
+        schema_ref="",
+        schema_hash=_H,
+        payload_canonical_json="{}",
+        required_belief_fields=[],
+    )
+    r1 = H.evaluate_conformance(_contract(initiation_predicate=bad_ref))
+    assert r1.conformant is False
+    assert any("schema_ref" in x for x in r1.reasons)
+    bad_payload = C.InitiationPredicate(
+        expr_kind=C.ExprKind.THRESHOLD,
+        schema_ref="s",
+        schema_hash=_H,
+        payload_canonical_json="{not json",
+        required_belief_fields=[],
+    )
+    r2 = H.evaluate_conformance(_contract(initiation_predicate=bad_payload))
+    assert r2.conformant is False
+    assert any("JSON" in x for x in r2.reasons)
+
+
+def test_declared_conformant_must_equal_computed():
+    # An otherwise-valid contract declaring contract_conformant=false must not evaluate conformant.
+    adm = C.Admissibility(identity_pinned=True, contract_conformant=False)
+    result = H.evaluate_conformance(_contract(admissibility=adm))
+    assert result.conformant is False
+    assert any("declared contract_conformant" in x for x in result.reasons)
+
+
+def test_manifest_validator_catches_mutations():
+    corrupt = json.loads(_MANIFEST.read_text())
+    corrupt["skills"][0]["identity"]["policy_weight_hash"] = "not-a-hash"
+    assert H.validate_manifest(corrupt, str(_REPO_ROOT), require_closure=False)
+
+    bad_closure = json.loads(_MANIFEST.read_text())
+    for row in bad_closure["skills"]:
+        if row.get("kind") == "SCRIPTED":
+            row["identity"]["source_closure_sha256"] = "a" * 64
+            break
+    assert H.validate_manifest(bad_closure, str(_REPO_ROOT), require_closure=False)
+
+    dup = json.loads(_MANIFEST.read_text())
+    dup["skills"][1]["skill_id"] = dup["skills"][0]["skill_id"]
+    assert H.validate_manifest(dup, str(_REPO_ROOT), require_closure=False)

@@ -95,6 +95,27 @@ def test_obs_action_schema_rejects_duplicate_field_id():
         C.ObsActionSchema(obs_fields=[dup, dup], action_fields=[], field_semantics=C.FieldSemantics.RESOLVED)
 
 
+def test_crypto_association_train_time_flag_is_bidirectional():
+    lin = C.Lineage(
+        family=C.PolicyFamily.BC_RL, final_policy_hash=_H, base_ckpt_hash="b" * 64, finetune_cfg_hash="c" * 64
+    )
+    # CRYPTO association with train_time_crypto_bound=False must raise (bidirectional invariant).
+    with pytest.raises(ValueError):
+        C.LearnedIdentity(
+            policy_weight_hash=_H,
+            lineage=lin,
+            train_time_crypto_bound=False,
+            association_strength=C.AssociationStrength.CRYPTO_TRAIN_TIME_BOUND,
+        )
+    ok = C.LearnedIdentity(
+        policy_weight_hash=_H,
+        lineage=lin,
+        train_time_crypto_bound=True,
+        association_strength=C.AssociationStrength.CRYPTO_TRAIN_TIME_BOUND,
+    )
+    assert ok.train_time_crypto_bound is True
+
+
 def test_scripted_and_wait_identity_hash_validation():
     C.ScriptedIdentity(skill_id="TRANSPORT", callable_qualname="transport_to_clip", source_closure_sha256=_H)
     with pytest.raises(ValueError):
