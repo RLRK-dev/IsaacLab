@@ -19,9 +19,9 @@
 
 - **B1 causal boundary:** `f := M2.shadow.first_shadow_fire_step = 246` → frozen expectation `f==246` **PASS**.
 - **B1 pre-fire trace equality [0, f−1]=[0,245]:** all 246 rows present in both legs; **0 / 246 divergent steps** over `{contact_r, contact_l, held_z_minus_rest, dx_c1, g_latched, held_i, grasped, contact_loss_count}` → **bitwise-equal** = clean physics isolation before the pin fires.
-- **Config diff-set (M2 vs M2b):** `{route_c1_pin_effective}` only (subset of the registered `{route_c1_pin_effective, pin_seat_seg}` "only/any-other-diff" bar; **`pin_seat_seg=27` identical in ALL legs** — it is the C1-seat constant, not a pin-arming effect; `cable_z_rest`, `Z_FIRE_DEPTH_M`, substeps, recording sha all equal). → **subset_ok = True** (a *tighter* one-variable isolation than registered).
-- **Run-independent provenance equality (M2 vs M2b):** `harness_self_sha256_post`, `source_closure_run_end`, `recording_sha256`, `venv_python` all equal; `changed/missing/added_during_drive/build_added_unstable == []` on both. → **equal = True**.
-- **P (common validity predicate) = True** (both COMPLETE+integrity ∧ prov-equal ∧ cfg-subset ∧ f==246 ∧ trace-equal ∧ all rows present). **The experiment is VALID.**
+- **Config diff-set (M2 vs M2b):** actual diff = `{route_c1_pin_effective}`. The prereg P conjunct is the **literal** `== {route_c1_pin_effective, pin_seat_seg}`, so the conjunct is **FALSE** (actual ≠ registered) ⇒ contributes P-of-record = FALSE (§OPS-SUP audit B1). The route-only single-variable diff is a **separate post-run characterization** (narrower isolation); **`pin_seat_seg=27` identical in ALL legs** (the C1-seat constant, not a pin-arming effect); `cable_z_rest`, `Z_FIRE_DEPTH_M`, substeps, recording sha all equal.
+- **Run-independent equality (M2 vs M2b) — full registered set:** `harness_self_sha256_post`, `source_closure_run_end`, `recording_sha256`, `venv_python`, `requested/env device`, `cvd`, `MUJOCO_GL`, `torch_cuda.current_device/uuid/name/count`, `episode_steps_requested`, `drive_mode` all equal; `changed/missing/added_during_drive/build_added_unstable == []` on both. → **equal = True**.
+- **P (of record) = FALSE** — the prereg conjunct `config-diff-set == {route_c1_pin_effective, pin_seat_seg}` is FALSE (actual `{route_c1_pin_effective}`). **All OTHER validity invariants hold** (both COMPLETE+integrity+device_provenance, run-independent-equal, f==246, pre-fire trace bitwise-equal, per_step exact-sequence+uniqueness — **fail-loud asserts ALL PASS**). The verdict is **INCONCLUSIVE independent of P** (§OPS-SUP audit B1).
 
 ## THREE-STATE VERDICT = **INCONCLUSIVE**
 
@@ -30,7 +30,7 @@
 - M2b no-terminal-through-347 = **False** (M2b terminates @342 ≤ 347).
 - ⇒ **PIN-ASSOCIATED = False** (requires M2b to have NO terminal through 347) **∧ BRANCH-INTRINSIC = False** (requires M2b clean-B) ⇒ **INCONCLUSIVE**.
 
-**INCONCLUSIVE rests on the SUBSTANTIVE reason** (not a provenance/validity artifact — P holds): M2b (FF, no-pin) terminates by **C_c1_escape@342**, an *other cause*. This is the diagnostic-predicted outcome (`gonow_20260718/ff_nopin_wholeroute` C_c1_escape@342), now confirmed on evidence-grade data. Non-binding expectation → **confirmed**.
+**INCONCLUSIVE is INDEPENDENT of P** (P-of-record=FALSE does not change it): M2b (FF, no-pin) terminates by **C_c1_escape@342**, an *other cause* that fails PIN-ASSOCIATED's "no-terminal" **and** BRANCH-INTRINSIC's "clean-B" regardless of the validity gate. Diagnostic-predicted (`gonow_20260718/ff_nopin_wholeroute` C_c1_escape@342) → **confirmed** on evidence-grade data. Non-binding expectation → confirmed.
 
 ## Substantive findings (beyond the narrow attribution)
 
@@ -58,7 +58,7 @@ Raw summaries/per_step unchanged; **no sim rerun**. Banked: analyzer v3 = `gonow
 ## Disposition
 
 - **Deliver to OPS-SUP (pN):** rc0-set + raw evidence + this mechanical analysis (per the run-OPEN directive). Necessity DISCHARGED; verdict INCONCLUSIVE (substantive); coverage finding surfaced.
-- **Escalate to p5 (design):** the coverage finding (FF branch does not hold C1 whole-route, pin or no-pin; pin changes the failure mode) — bears on the v2.0 fix's whole-route efficacy and the (d-b) pin design.
+- **Escalate to p5 (design):** the coverage finding — a **numeric finding on the env's termination predicates**: both FF variants terminate pre-C2 (no-pin `C_c1_escape@342` / pin `B_contact_loss@347`); the pin shifts which predicate fires. Bears on the v2.0 fix's whole-route efficacy and the (d-b) pin design. ⚠ The *physical* reading is HOLD until video + independent blind judge.
 - **Unchanged authorization:** B6-char / B5b / impl / training remain **UNAUTHORIZED**; execution HOLD; training-ready LOCKED; WMSO untouched (released to pQ). The next design step (B6-char auth → re-debate v2.1) is p5/Rs-gated, not opened by this run.
 
 ## Visual leg (motion-bearing-sim rule — OMITTED-WITH-REASON, loud)
