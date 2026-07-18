@@ -18,8 +18,12 @@ session_history:
     status: active
     started_at: 2026-07-18T12:44:00+09:00
     note: "Rs direct: 新規Claude Code w2:pQへ本nodeとWMSO developmentを割当。"
+  - id: T-ROOT-RS-TECH-LEAD2#s2
+    status: active
+    started_at: 2026-07-18T17:32:12+09:00
+    note: "WMSO D0 architecture draft (§A–I, design-only) authored+banked 4baf5b2650 (sha 318e96471dbf). pN D0-exit independent design verify = HOLD (2026-07-18 17:25, 7 design blockers); pre-check pending re-run/bank (not a banked artifact per pN). node IN_PROGRESS, correction loop active. custody-reflected by p6 (milestone checkpoint)。"
 created: 2026-07-18T12:44:00+09:00
-last_updated: 2026-07-18T12:44:00+09:00
+last_updated: 2026-07-18T17:32:12+09:00
 spec_version: LTM-1 v1.2
 ---
 

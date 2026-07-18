@@ -24,7 +24,7 @@ session_history:
     status: active
     note: "Rs direct 2026-07-18: development owner = T-ROOT-RS-TECH-LEAD2 (new Claude Code w2:pQ)。D0 read-only inventory を開始。independent verify = pN、custody = p6。"
 created: 2026-07-18T09:29:01+09:00
-last_updated: 2026-07-18T12:44:00+09:00
+last_updated: 2026-07-18T17:32:12+09:00
 ---
 
 # WMSO — World-Model-Based Skill Orchestration (L0 統合 architecture)
@@ -85,3 +85,13 @@ WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断�
 **次** = D0 開始 (read-only inventory: current skill・policy provenance [BC+RL 含む]・obs schema・termination signal・checkpoint・`routing_orchestrator.py` 挙動) → **D0 independent design verify** (charter §5 D0 exit)。
 
 ⛔ **boundary invariants (未承認、超えたら STOP→Rs)**: production control 変更 / WMSO inference launch / training launch / closed-loop authority / 既存 safety・orchestrator path 除去。D0 が independent verify されるまで上記いずれも不可 (charter §8-4)。
+
+## 8. D0 progress (custody-reflected, verifier-governed)
+
+⭐ **2026-07-18 17:32 — D0 architecture draft milestone (PROGRESS, NOT a D0 gate PASS)**:
+
+- **D0 §A–I architecture draft = BANKED** (`4baf5b2650`, sha256 `318e96471dbf…`, design-only): `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md` (author `w2:pQ`)。
+- ⏸ **D0-exit independent design verify = HOLD** (`w2:pN`, 2026-07-18 17:25): commit/blob integrity PASS だが 7 design blockers — numeric event deadlines absent / event priority incomplete / belief+safety schema underspecified / scripted-wait identity undefined / SDM↔`T-WM` classifier ownership conflict / recovery-skill supply stage open / stale-SDM fallback → SDM slow path recursion。
+- **pre-check = pending re-run/bank** (pN: ignored JSONL line のみで banked artifact でない; custody on-disk 確認 — banked `WMSO*PRECHECK*` doc なし)。pQ relay 17:20 の「pre-check PASS / verify PENDING」framing は pN verdict 17:25 に **superseded**。
+- **node status = IN_PROGRESS 継続** (両 pane 一致・no D0-exit/status flip)。次 = pQ correction + pre-check re-run/bank + pN reverify。
+- ⛔ boundary 不変 (charter §0/§8-4): production / training / inference / closed-loop 未承認。
