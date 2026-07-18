@@ -24,7 +24,7 @@ session_history:
     status: active
     note: "Rs direct 2026-07-18: development owner = T-ROOT-RS-TECH-LEAD2 (new Claude Code w2:pQ)。D0 read-only inventory を開始。independent verify = pN、custody = p6。"
 created: 2026-07-18T09:29:01+09:00
-last_updated: 2026-07-18T23:01:16+09:00
+last_updated: 2026-07-18T23:17:38+09:00
 ---
 
 # WMSO — World-Model-Based Skill Orchestration (L0 統合 architecture)
@@ -101,6 +101,6 @@ WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断�
 ⭐ **2026-07-18 23:01 — D1 Skill contracts: step-1 prereg = pN scope-concur HOLD (B1-B7)**:
 
 - **D1 scope prereg v1 = BANKED** (`7b899e88c7`, sha `5704174927…`): `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D1_SKILL_CONTRACTS_SCOPE_PREREG_RSTECHLEAD2_20260718.md`。
-- ⏸ **pN scope-concur = HOLD (B1-B7、scope CONCUR 未付与)** (`w2:pN` 23:01): B1 prereg 権限から code 自動解錠不可〔design 後の明示 impl gate + exact paths 要〕 / B2 charter-required adapter 実体が step4 に欠落 / B3 BC+RL+BC-only+SCRIPTED/WAIT は gate① の RL-only を満たさず / B4 BC+RL triad+association provenance 未凍結 / B5 identity pin と selection admissibility 混同 / B6 negative controls+source closure/bracket 不足 / B7 V10 5/0 record 現 bank で非再現 (current exact run=13/4/exit2 self-match・as-run provenance/disposition 要)。
-- **D0 EXIT は不触** (D0 = CLOSE/EXIT GRANTED 維持)・**node IN_PROGRESS D1**・**code/run/gate PASS なし**。full conditions = pN→pQ 23:00 dispatch 済。次 = pQ が B1-B7 対応 → pN re-concur。
+- ⏸ **pN scope-concur = HOLD R1-R3 (v2 re-verdict、scope CONCUR 未付与)** (`w2:pN` v1 23:01 B1-B7 → v2 `fed7b8d597` re-verdict 23:16): **B1/B3/B6/B7 CLOSE・B4 fail-closed mechanism CLOSE〔records fix 1件〕**。残 R1-R3: **R1** adapter 境界 (policy adapter raw I/O→BeliefState 実装 vs A/B/C Belief adapters design-only 矛盾; D1 policy-contract adapter vs D1 per-dim map/D2 runtime grounding を分離 binding) / **R2** status (O0 replay-only と V0 live closed-loop を closed_loop_admissible に混同; identity_pinned/contract_conformant/offline_orchestration_admissible/closed_loop_admissible 分離・D1 は前2 true 後2 false hard test) / **R3** factual (demo manifest 実 key=baseline_ckpt_sha256_at_start/_at_end・記載 baseline_ckpt_sha256 不一致; sidecar=hash precedent のみ訂正)。V10 隔離再現 parent 5/0/0・v1 13/4/3・現 19/8/5 = 自己 match 同 class で非block。
+- **D0 EXIT は不触** (D0 = CLOSE/EXIT GRANTED 維持)・**node IN_PROGRESS D1**・**code/run/gate PASS なし**。full conditions = pN→pQ 23:00 dispatch 済。次 = pQ が R1-R3 対応 → pN re-concur。
 - ⛔ production / implementation / training / sim / inference / closed-loop / grip authority flip なし。
