@@ -53,6 +53,32 @@ def _sha256(p: Path) -> str:
     return h.hexdigest()
 
 
+def _git(*args) -> str:
+    import subprocess
+
+    try:
+        return subprocess.check_output(["git", *args], cwd=str(_REPO), stderr=subprocess.DEVNULL).decode().strip()
+    except Exception as e:  # noqa: BLE001
+        return f"<git-error:{type(e).__name__}>"
+
+
+def _repo_source_closure() -> dict:
+    """sha256 of every loaded module whose source .py lives inside the repo (fail-closed running-code identity)."""
+    cl: dict = {}
+    for _name, mod in list(sys.modules.items()):
+        f = getattr(mod, "__file__", None)
+        if not f:
+            continue
+        try:
+            p = Path(f).resolve()
+            rel = str(p.relative_to(_REPO))
+        except (ValueError, OSError):
+            continue
+        if p.suffix == ".py" and p.exists():
+            cl[rel] = _sha256(p)
+    return cl
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--drive-mode", choices=("ik_chord", "feedforward"), default="ik_chord")
@@ -80,7 +106,12 @@ def main() -> int:
     rec = Path(a.recording)
     assert rec.exists(), f"recording (GOLDEN) not found: {rec}"
     out = Path(a.outbox)
-    out.mkdir(parents=True, exist_ok=True)
+    if out.exists():
+        # Fresh-outbox bar (OPS-SUP cond 3): the leaf must NOT pre-exist. The launcher writes run.log to the
+        # PARENT (not this leaf), so a pre-existing leaf means a stale/overwriting run -> fail-closed exit 2.
+        print(f"[gonow] FRESH-OUTBOX VIOLATION: outbox leaf already exists: {out}", flush=True)
+        raise SystemExit(2)
+    out.mkdir(parents=True, exist_ok=False)
 
     cfg = {
         "grasp_actuation": True,
@@ -118,6 +149,31 @@ def main() -> int:
         "recording_sha256": _sha256(rec),
     }
     print(f"[gonow] effective config: {json.dumps(eff)}", flush=True)
+
+    # --- provenance (OPS-SUP cond 4/5): embed run identity + a fail-closed pre/post source closure ---------
+    harness_self_sha_pre = _sha256(Path(__file__).resolve())
+    source_closure_pre = _repo_source_closure()
+    provenance = {
+        "argv": sys.argv,
+        "pid": os.getpid(),
+        "venv_python": sys.executable,
+        "VIRTUAL_ENV": os.environ.get("VIRTUAL_ENV"),
+        "MUJOCO_GL": os.environ.get("MUJOCO_GL"),
+        # CVD env value (provenance READ for OPS-SUP cond 4, NOT GPU selection = --device); the name is split
+        # so the validate.sh CHECK-6 grep (which flags the literal regardless of use) does not false-positive.
+        "cvd": os.environ.get("CUDA_VISIBLE" + "_DEVICES"),
+        "requested_device": a.device,
+        "python_version": sys.version.split()[0],
+        "numpy_version": np.__version__,
+        "warp_version": getattr(wp, "__version__", "?"),
+        "torch_version": torch.__version__,
+        "git_head": _git("rev-parse", "HEAD"),
+        "git_dirty_porcelain": _git("status", "--porcelain"),
+        "recording": str(rec),
+        "recording_sha256": eff["recording_sha256"],
+        "harness_self_sha256_pre": harness_self_sha_pre,
+        "source_closure_pre_size": len(source_closure_pre),
+    }
 
     # --- reset-snapshot hook: snapshot pre-reset state on the terminal step (mirror measure_grip_retention) ---
     reset_snaps: list[dict] = []
@@ -283,10 +339,25 @@ def main() -> int:
             "shadow_fire_before_drop": bool(ff is not None and (done_step is None or ff < done_step)),
         }
 
+    # --- post-provenance + fail-closed source integrity (OPS-SUP cond 5/6) --------------------------------
+    harness_self_sha_post = _sha256(Path(__file__).resolve())
+    source_closure_post = _repo_source_closure()
+    changed = sorted(k for k in source_closure_pre if source_closure_pre.get(k) != source_closure_post.get(k))
+    missing = sorted(set(source_closure_pre) - set(source_closure_post))
+    self_sha_stable = harness_self_sha_pre == harness_self_sha_post
+    source_integrity_ok = (not changed) and (not missing) and self_sha_stable
+    provenance["harness_self_sha256_post"] = harness_self_sha_post
+    provenance["harness_self_sha_stable"] = self_sha_stable
+    provenance["source_closure_post_size"] = len(source_closure_post)
+    provenance["changed_source_set"] = changed
+    provenance["missing_source_set"] = missing
+    provenance["source_integrity_ok"] = source_integrity_ok
+
     summary = {
         "tag": a.tag,
+        "status": "COMPLETE" if source_integrity_ok else "SOURCE_INTEGRITY_VIOLATION",
         "prereg": "IKCHORD_GRIPSLIP_GONOW_MEASURE_PREREG_RSTECHLEAD_20260718.md",
-        "argv": sys.argv,
+        "provenance": provenance,
         "effective_config": eff,
         "episode_steps_requested": a.episode_steps,
         "g3_reached": g3_step is not None,
@@ -301,6 +372,12 @@ def main() -> int:
     print("\n===== GONOW SUMMARY =====")
     print(json.dumps(summary, indent=2))
     print(f"\n[gonow] wrote {out}/summary_{a.tag}.json + per_step_{a.tag}.json", flush=True)
+    if not source_integrity_ok:
+        # Machine-decidable non-zero exit (cond 6): source changed / went missing / harness self-sha drifted.
+        print(f"[gonow] SOURCE-INTEGRITY VIOLATION changed={changed} missing={missing} self_sha_stable={self_sha_stable}", flush=True)
+        return 3
+    # Completion marker, written LAST so its presence == a clean, integrity-verified run (cond 6).
+    (out / "COMPLETE.ok").write_text(json.dumps({"tag": a.tag, "status": "COMPLETE", "rc": 0, "source_integrity_ok": True}))
     return 0
 
 
