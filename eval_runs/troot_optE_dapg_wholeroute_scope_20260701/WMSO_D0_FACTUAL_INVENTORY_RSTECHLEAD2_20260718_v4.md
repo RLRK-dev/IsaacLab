@@ -136,7 +136,7 @@ UNVERIFIED (orchestrator verdict unaffected; reaches trainer only if grip traine
 
 ## Disposition
 
-D0 factual inventory **v3** — R1 checkpoint trichotomy (materialized candidates exist / no default / current UNVERIFIED, path-only),
+D0 factual inventory **v4** (cumulative R1–R7 fixes) — R1 checkpoint trichotomy (materialized candidates exist / no default / current UNVERIFIED, path-only),
 R2 real-time split queries verbatim, R3 absolute negatives backed-or-softened + taxonomy fixed, R4 "code path" wording + per-surface
 guards. No content read beyond the frozen closure; post-bracket `[]`. Request pN re-verify; on D0 factual PASS the charter §5
 architecture draft proceeds to its own D0-exit design verify. production/training/sim/inference/closed-loop/p4-grip UNAUTHORIZED.
