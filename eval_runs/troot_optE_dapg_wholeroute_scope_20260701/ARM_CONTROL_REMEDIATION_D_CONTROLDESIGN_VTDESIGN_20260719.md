@@ -1,6 +1,6 @@
 # (d) ARM-CONTROL REMEDIATION — CONTROL DESIGN (VT-DESIGN ruling)
 
-**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-19 08:1x JST。**Status:** DESIGN v1.0 — 0-commit（bank = %12）。
+**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-19 08:1x JST。**Status:** DESIGN v1.1 — 0-commit（bank = %12）。v1.1 = **訂正 #1（%12 catch、08:23）**: §5⇄§8-3 の cadence 矛盾（§5=newton_route_env は RL path @4 ハード定数 `newton_skill_env_base.py:95`、§8-3 は「FF@producer-cadence(10)」と記載）→ **裁定 (a) P-D1 = @4 で走行**（§5/§8-3 を整合化。@10 被覆は S-2 producer gate へ移設、knob 追加なし）。
 **Input:** `ARM_CONTROL_REMEDIATION_D_ENGBRIEF_RSTECHLEAD_20260719.md`（commit `1ee8be5c9e` = HEAD、p5 全文読了）。
 **Scope:** brief §4 Q1-Q6 + §5 staged approach への設計裁定。**実装認可ではない**（gate chain = §9）。Rs sign-off 前提（brief §0/§5-4）。
 
@@ -116,7 +116,7 @@ FOUNDATIONAL 未解決依存で本 **設計** chunk を block するものなし
 
 **目的 = brief §3 の pivotal unknown を最小コストで裁定**: 「MuJoCo arm PD は ±150/±28 N·m 下で（cable+gripper 負荷込み）記録軌道を bar 内追従するか」。
 
-- **環境**: `newton_route_env` **FF whole-route**（(d-a) probe infra 再利用、nominal cell、wc=1、deterministic、cable ON・grasp ON・pin ON）。**移行対象 = per-step drive（:1270 系）のみ**を実験 flag（例 `ARM_PD_DRIVE=1`）で切替 — reset 系 B は不変。read-only branch / 未 land。
+- **環境**: `newton_route_env` **FF whole-route**（(d-a) probe infra 再利用、nominal cell、wc=1、deterministic、cable ON・grasp ON・pin ON）。**cadence = RL path @4 のまま**（`RL_SIM_SUBSTEPS=4` `newton_skill_env_base.py:95`、knob 追加せず）— 根拠: ①trainer 基盤 = @4（DDR #18 title と同一 substrate、(d) の第一目的 = trainer 準拠基盤）②ctrl は frame 単位保持で substep はその内部積分 ⇒ @4 = 粗積分 = PD に等しいか厳しい側 = **conservative**（PASS@4⇒@10 は推論、S-2 で confirm）③基線対照は @4-vs-@4 の同 cadence で cadence 効果が contrast から消える（1 変数規律。@10 knob 追加は #18 substep-confound 軸への再進入 + scope creep）。**移行対象 = per-step drive（:1270 系）のみ**を実験 flag（例 `ARM_PD_DRIVE=1`）で切替 — reset 系 B は不変。read-only branch / 未 land。
 - **基線**: 同 build・同 seed の kinematic 走行（**1 変数差 = realization のみ**。[[feedback-same-constant-is-not-same-measurement-surface]] の統制直適用）。
 - **測定 legs**:
   1. **L-P1 tracking**: per-joint |q−ctrl| 時系列 → phase 別 max/p99（§3.2 bar 採点）+ EE 誤差（FK(q) vs FK(ctrl)）。
@@ -187,7 +187,7 @@ FOUNDATIONAL 未解決依存で本 **設計** chunk を block するものなし
 
 ### 8-3 dt 依存性
 - 積分 = `implicitfast`（陰）⇒ ke=2000 @ dt=1/1920〜1/4800 の離散安定性は堅牢（陽積分の ke·dt² 制約に非拘束）。
-- ⚠ **2 cadence を両方検証**: RL path（substeps=4、dt=1/1920）と producer path（substeps=10、dt=1/4800）で PD 実効挙動が異なり得る（既知の 10-vs-4 mismatch と同根）。P-D1 は FF@producer-cadence で実行、S-1 gate に RL-cadence leg を含める。
+- ⚠ **2 cadence を両方検証（訂正 #1 で整合化）**: RL path（substeps=4、dt=1/1920）と producer path（substeps=10、dt=1/4800）で PD 実効挙動が異なり得る（既知の 10-vs-4 mismatch と同根）。**P-D1 = @4**（trainer 基盤・conservative 側・§5 根拠 ①-③）/ **@10 = S-2 producer 移行 gate で native 検証**（route_executor は @10 が native ゆえ knob 不要、基線も @10 同士）。PASS@4⇒PASS@10 は推論であり S-2 で confirm — S-2 @10 が @4 より悪い追従を示したら（予想と逆方向）loud 異常として gains re-open。
 
 ### 8-4 感度テスト枠（probe 内 or FAIL 時）
 | leg | 範囲 | 期待 |
