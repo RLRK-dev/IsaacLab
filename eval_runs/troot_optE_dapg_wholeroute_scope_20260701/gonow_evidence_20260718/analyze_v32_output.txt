@@ -1,0 +1,113 @@
+========================================================================
+PER-LEG SUMMARY
+========================================================================
+
+[M1] m1_b4shadow_ikchord
+  status=COMPLETE  source_integrity_ok=True  device_provenance_ok=True
+  drive=ik_chord  route_c1_pin_effective=True  pin_seat_seg=27
+  RL_SIM_SUBSTEPS=4  PHYSICS_STEPS_PER_RL=10  ep_req=900
+  g3_reached=False  g3_step=None
+  first_cause_step={'A_held_z_floor': 267, 'B_contact_loss': None, 'C_c1_escape': None, 'explosion': None}
+  done_step=267  done_reward=-10.0  term_cause_set=['A_held_z_floor']
+  shadow.first_shadow_fire_step=None  max_dwell=0  shadow_fire_before_drop=False
+
+[M2] m2_ff_pin_shadow
+  status=COMPLETE  source_integrity_ok=True  device_provenance_ok=True
+  drive=feedforward  route_c1_pin_effective=True  pin_seat_seg=27
+  RL_SIM_SUBSTEPS=4  PHYSICS_STEPS_PER_RL=10  ep_req=900
+  g3_reached=True  g3_step=242
+  first_cause_step={'A_held_z_floor': None, 'B_contact_loss': 347, 'C_c1_escape': None, 'explosion': None}
+  done_step=347  done_reward=-10.0  term_cause_set=['B_contact_loss']
+  shadow.first_shadow_fire_step=246  max_dwell=985  shadow_fire_before_drop=True
+
+[M2b] m2b_ff_shadow_nopin
+  status=COMPLETE  source_integrity_ok=True  device_provenance_ok=True
+  drive=feedforward  route_c1_pin_effective=False  pin_seat_seg=27
+  RL_SIM_SUBSTEPS=4  PHYSICS_STEPS_PER_RL=10  ep_req=900
+  g3_reached=True  g3_step=242
+  first_cause_step={'A_held_z_floor': None, 'B_contact_loss': None, 'C_c1_escape': 342, 'explosion': None}
+  done_step=342  done_reward=-10.0  term_cause_set=['C_c1_escape']
+  shadow.first_shadow_fire_step=246  max_dwell=504  shadow_fire_before_drop=True
+
+[M3] m3_ikchord_natterm
+  status=COMPLETE  source_integrity_ok=True  device_provenance_ok=True
+  drive=ik_chord  route_c1_pin_effective=False  pin_seat_seg=27
+  RL_SIM_SUBSTEPS=4  PHYSICS_STEPS_PER_RL=10  ep_req=900
+  g3_reached=False  g3_step=None
+  first_cause_step={'A_held_z_floor': 267, 'B_contact_loss': None, 'C_c1_escape': None, 'explosion': None}
+  done_step=267  done_reward=-10.0  term_cause_set=['A_held_z_floor']
+  shadow=None
+
+========================================================================
+B1 CAUSAL BOUNDARY: f := M2 shadow.first_shadow_fire_step
+========================================================================
+f = 246   (frozen expectation f==246 -> PASS)
+
+========================================================================
+B1 PRE-FIRE TRACE EQUALITY  (M2 vs M2b, per_step step in [0, f-1])
+========================================================================
+  rows [0,245] present: M2 missing=[]  M2b missing=[]  -> rows_ok=True
+  compared fields=['contact_r', 'contact_l', 'held_z_minus_rest', 'dx_c1', 'g_latched', 'held_i', 'grasped', 'contact_loss_count']
+  #divergent steps=0  first_divergence=None  -> pre_fire_trace_equal=True
+
+========================================================================
+CONFIG DIFF-SET (M2 vs M2b)
+========================================================================
+  actual diff_set=['route_c1_pin_effective']  (pin_seat_seg=27 both; equal=True)
+  prereg P conjunct [== ['pin_seat_seg', 'route_c1_pin_effective']] = False   (P-of-record uses THIS literal conjunct)
+
+========================================================================
+RUN-INDEPENDENT EQUALITY (M2 vs M2b) — full registered set
+========================================================================
+  harness_self_sha256_post: equal=True
+  recording_sha256: equal=True
+  venv_python: equal=True
+  source_closure_run_end: equal=True
+  changed_source_set: equal=True
+  missing_source_set: equal=True
+  added_during_drive: equal=True
+  build_added_unstable: equal=True
+  requested_device: equal=True
+  env_device: equal=True
+  cvd: equal=True
+  MUJOCO_GL: equal=True
+  torch_cuda(current_device/uuid/device_name/device_count): equal=True  (uuid=4d2e6419-7df1-a8d7-5af0-536c42a89aed)
+  episode_steps_requested: equal=True   drive_mode: equal=True   -> run_indep_eq=True
+
+========================================================================
+B2 FAIL-LOUD INVARIANTS (integrity / device-episode equality / per_step sequence+uniqueness / anchors)
+========================================================================
+  ALL required invariants PASS (4 legs COMPLETE+integrity+device_provenance, closure-sets=[],
+  per_step contiguous 0..done & unique, M2/M2b run-independent-equal, f==246, pre-fire bitwise-equal).
+
+========================================================================
+P (common validity predicate) — prereg :98/:141 literal
+========================================================================
+  base invariants (asserted above) = True
+  config-diff conjunct [== ['pin_seat_seg', 'route_c1_pin_effective']] = False
+  >>> P (of record) = False   (FALSE: actual diff ['route_c1_pin_effective'] != registered ['pin_seat_seg', 'route_c1_pin_effective'])
+
+  POST-RUN CHARACTERIZATION (separate axis; NOT a P relaxation):
+    actual M2-vs-M2b effective-config diff = ['route_c1_pin_effective'] (single variable),
+    a proper subset of the registered ['pin_seat_seg', 'route_c1_pin_effective'] -> narrower one-variable isolation = True
+    (pin_seat_seg=27 is the recording-derived C1-seat constant, shared by real pin + shadow).
+
+========================================================================
+THREE-STATE VERDICT
+========================================================================
+  M2 clean-B in [f,347]=True   M2b clean-B in [f,347]=False   M2b no-terminal-thru-347=False
+  PIN-ASSOCIATED=False   BRANCH-INTRINSIC=False
+
+  INDEPENDENT-OF-P (M2b terminates by an other cause in-window):
+    PIN-ASSOCIATED requires M2b no-terminal-thru-347 = False -> False regardless of P
+    BRANCH-INTRINSIC requires M2b clean-B = False -> False regardless of P
+    => verdict is INCONCLUSIVE for ANY value of P (robust) = True
+
+  >>> VERDICT = INCONCLUSIVE <<<
+
+========================================================================
+M1 NECESSITY (CC6) + M3 B5a
+========================================================================
+  M1: shadow.first_shadow_fire_step=None  g3_reached=False  done_step=267  cause=['A_held_z_floor']
+     => necessity discharged (shadow-fire=0 AND g3=false) = True
+  M3: done_step=267  cause=['A_held_z_floor']  (B5a = BLOCKED_BY_PRE_C2_DROP)
