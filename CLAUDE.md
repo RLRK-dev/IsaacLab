@@ -59,7 +59,7 @@ Personal defaults と汎用ワークフロー (Modes / Scope boundaries / Output
 
 本方法論は旧 §運用14/17/18/28/29/30（個別検証対処法）+ §運用19/21/22/23（RL/env 設計 patch）を包摂・置換する。各失敗の specific 事例は vault（`06-Knowledge/LL-*` / memory `feedback-*` / archive `02-Workflow/CLAUDE-md-pruned-archive-2026-07-12.md`）+ 設計 skill（`/reward-design` `/geometric-design` `/pre-check`）に保存し、関連タスク時に §運用4 で参照する（常時ロードの patch にしない）。
 
-## DiffIK制御方式 — PhysX環境（他の制御方式への変更はrs承認必須）
+## DiffIK制御方式 — PhysX環境の具体 API 形（不変前提「IK 制御のみ・kinematic トリック禁止・制御方式変更は Rs 承認」は全 substrate 共通・§0#3/#5）（他の制御方式への変更はrs承認必須）
 
 **制御API制約（違反はrs承認なしに不可）:**
 - **IK: DifferentialIKController のみ使用。JT IK（自前実装）は廃止済み**
@@ -69,7 +69,7 @@ Personal defaults と汎用ワークフロー (Modes / Scope boundaries / Output
 - **arm制御: `set_joint_position_target` + `write_data_to_sim` のみ許可**
 - **制御方式の変更はrs承認なしに行わない**
 - **到達性・収束性の問題はtask_config.pyのパラメータ調整で解決。kinematic attachment、kinematic trick（物理無視のテレポート・強制配置等）禁止**
-- 〔Newton環境の制御制約は `thread-vault/06-Knowledge/LL-Newton.md` 参照〕
+- 〔上記のうち *具体 API 名*（`DifferentialIKController`/`write_joint_*`/`set_joint_*`）は PhysX 実装形。**不変前提「IK 制御のみ・kinematic トリック（物理無視の強制配置＝アーム関節角の直接書き込み等）禁止・制御方式変更は Rs 承認」は全 substrate 共通（§0#3/#5、`validate.sh` Layer 8 が機械検証、唯一の認可例外 = clip-retention pin）**。Newton の対応 API・制御制約は `thread-vault/06-Knowledge/LL-Newton.md` 参照〕
 
 - robot cfg: FRANKA_PANDA_HIGH_PD_CFG ベース（disable_gravity=True（HIGH_PD_CFG準拠）、hand actuatorのみ速度制御に上書き）
 - approach: `command_type="position"`、descend/push: `command_type="pose"`
