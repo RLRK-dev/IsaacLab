@@ -24,7 +24,7 @@ session_history:
     status: active
     note: "Rs direct 2026-07-18: development owner = T-ROOT-RS-TECH-LEAD2 (new Claude Code w2:pQ)。D0 read-only inventory を開始。independent verify = pN、custody = p6。"
 created: 2026-07-18T09:29:01+09:00
-last_updated: 2026-07-19T01:00:08+09:00
+last_updated: 2026-07-19T01:04:32+09:00
 ---
 
 # WMSO — World-Model-Based Skill Orchestration (L0 統合 architecture)
@@ -102,5 +102,5 @@ WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断�
 
 - **D1 scope prereg v1 = BANKED** (`7b899e88c7`, sha `5704174927…`): `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D1_SKILL_CONTRACTS_SCOPE_PREREG_RSTECHLEAD2_20260718.md`。
 - ✅ **pN SCOPE CONCUR granted (v3 re-verdict 23:21)** (`w2:pN`): **R1-R3 PASS-CLOSE・B1-B7 CLOSE** (v1 B1-B7 → v2 R1-R3 → v3 `d64298a62b` 全 CLOSE)。**step-1 (scope prereg) = CLOSED**。**解錠範囲 = §0 step2 contracts+adapters DESIGN AUTHORING のみ**。⛔**code/impl/run/gate PASS 未解錠**: final design bank + /pre-check 後も pN design readback + 明示 implementation GO + exact added/changed path manifest まで [CHANGE] 禁止。⚠**carry conditions**: BC+RL triad association 不在→hash_unpinned/inadmissible + D1 exit HOLD / RL-only unusable→gate① unresolved / D1 では offline_orchestration_admissible=false ∧ closed_loop_admissible=false。
-- **D0 EXIT は不触** (D0 = CLOSE/EXIT GRANTED 維持)・**node IN_PROGRESS D1**・**code/run/gate PASS なし**。full conditions = pN→pQ 23:00 dispatch 済。**step-2 design →v4.1 `82d6550512` → pN v4.1 readback (00:59) = ⏸HOLD C1-C3**〔verifier-governed・not gate PASS〕: **R2 finetune projection + R3 source closure = PASS-CLOSE**。残 C1-C3: C1 residual line-number claims / C2 missing exact outer SkillLifecycleContract/required_belief_confidence/handoff_start_context type / C3 remaining obj/ellipsis/bare-ref + invalid global G1..G6 progress enum/fail-close conditions。**decisions/path freeze unchanged・code path frozen・GO CLOSED・D1 exit HOLD・no authority**。次 = pQ が C1-C3 fold → v4.2 → pN re-readback。
+- **D0 EXIT は不触** (D0 = CLOSE/EXIT GRANTED 維持)・**node IN_PROGRESS D1**・**code/run/gate PASS なし**。full conditions = pN→pQ 23:00 dispatch 済。**step-2 design →v4.1.1 `b7ec765bbc` → pN readback (01:03) = ✅DESIGN PASS-CLOSE (C1-C3 CLOSED)**〔not D1/gate-1 PASS〕: **IMPLEMENTATION GO granted = frozen 12 added paths のみ** (changed existing=empty・literal bindings FieldSpec shared obs/action + tagged BeliefRef SNAPSHOT|HASH_REF)。⛔**D1 exit なお HOLD (schemas unresolved)・offline/live false・no schema recovery/training/sim/inference/planning/push**。次 = pQ が 12-path scoped implementation (design CLOSE 後の初 code)。
 - ⛔ production / implementation / training / sim / inference / closed-loop / grip authority flip なし。
