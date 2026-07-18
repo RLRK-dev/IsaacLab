@@ -1,16 +1,18 @@
-# [RS-TECH-LEAD2 → OPS-SUP-CODEX] WMSO D0 architecture draft — §A–§I (design-only schema)
+# [RS-TECH-LEAD2 → OPS-SUP-CODEX] WMSO D0 architecture draft — §A–§I (design-only schema) **v2**
 
 - node `T-WMSO`; author `w2:pQ` (RS-TECH-LEAD2); independent verify `w2:pN` (OPS-SUP-CODEX); Vault custody `w2:p6`.
-- prepared_at: **2026-07-18 16:55 JST** · repo HEAD `c66659f487` (advisory).
-- **authorization to author** = Rs direct 2026-07-18「§A–I authoring に入って」. Scope is pre-registered:
-  scope prereg **v2** (sha256 `674a80f303ed2a5fc80b2917979c5975d1efd6088db345c2102f222149f3010a`, intact at HEAD) +
-  arch-scope-v2 records-fix R1/R2 (`WMSO_D0_ARCH_SCOPE_V2_RECORDS_FIX_R1R2_20260718.md`). This draft = scope-v2 §B6 **step 2**.
+- prepared_at: **v1 2026-07-18 16:55 JST** (commit `4baf5b2650`) · **v2 revised 2026-07-18 17:35 JST** (this) per pN D0-exit HOLD B1–B6.
+- **authorization to author** = Rs direct 2026-07-18「§A–I authoring に入って」. Scope pre-registered: scope prereg **v2**
+  (sha256 `674a80f303ed2a5fc80b2917979c5975d1efd6088db345c2102f222149f3010a`, intact at HEAD) + arch-scope-v2 records-fix R1/R2
+  (`WMSO_D0_ARCH_SCOPE_V2_RECORDS_FIX_R1R2_20260718.md`). This draft = scope-v2 §B6 **step 2**.
 - **grounding source of all FACTUAL rows** = D0 factual inventory **v4** (sha256 `2e96ea478bdd6c83b41a8980…`, banked `513948a15e`,
-  pN substantive PASS-CLOSE). File:line citations below are carried through v4; this draft does not re-run the closure.
-- **pN scope-CONCUR status**: scope v2 = pN **CONTENT PASS** (2026-07-18 16:05); R1/R2 records HOLD **discharged**
-  (`bd1726d6d7`). No separate on-disk pN CONCUR stamp was located at author time; I proceed on **Rs direct instruction**
-  (CLAUDE.md precedence: Rs direction > plan gate). The substantive independent design verify remains scope-v2 §B6 **step 5**
-  (pN D0-exit), *after* this draft + `/pre-check`.
+  pN substantive PASS-CLOSE). File:line citations are carried through v4; this draft does not re-run the closure.
+- **pN scope-CONCUR status (corrected per pN B6)**: scope v2 = pN **CONTENT PASS** (16:05) → **scope PASS-CLOSE / CONCUR issued 16:12**
+  (relayed to p6; R1/R2 records HOLD **discharged** `bd1726d6d7`). Authoring therefore proceeded **post-CONCUR** (Rs direct go **and** pN
+  concur both present). The prior header's "no CONCUR located" note was stale and is **retracted**.
+- **Revision log**: **v1** (`4baf5b2650`, /pre-check PASS) → **pN D0-exit verify = HOLD B1–B6** (`WMSO_D0_EXIT_VERIFY_VERDICT_OPSSUP_20260718.md`,
+  17:24) → **v2 (this)** discharges B1–B6, re-runs /pre-check, banks a pre-check **record**, resubmits. **pN PASS axes** (boundaries,
+  factual/design split, algorithm independence, policy↔SDM identity, 10-gate map, measurement/stress) are **unchanged** by v2.
 
 ## ⛔ Boundaries and invariants (held; a schema draft changes none of them)
 - **DESIGN-ONLY.** No code, no impl, no run, no gate PASS. ⛔ production control / training launch / WMSO inference /
@@ -31,7 +33,8 @@ low-level controller (charter §0).
 **Belief state** = the abstract, grounded state WMSO reasons over (skill resolution), distinct from a skill's raw env observation.
 **Handoff state** = the declared state a skill leaves behind for the next skill to accept (charter §3), distinct from a physics snapshot.
 **Skill Dynamics Model (SDM)** = the world model at *skill* resolution: predicts next-belief, duration, success/fail class, cost, uncertainty.
-**D_situation** = the wall-clock deadline for an event class; **T_detect/T_ground/T_select/T_handoff** = the four latency terms that must sum below it.
+**D_situation** = the wall-clock deadline for an event class; orchestrator classes budget `T_detect+T_ground+T_select+T_handoff < D_situation`,
+while the **Safety class uses its own `T_detect_safety + T_override < D_safety`** (§G, pN B1).
 
 Every row below is tagged with one status:
 
@@ -62,30 +65,51 @@ model/closed-loop) + SPlaTES skill-level WM (H<5) + model-exploitation guard + c
 - **All 62 Surface-B dims are privileged/const — ZERO vision** (v4 §2). Vision modules (`vision_pipeline.py`, `visual_encoder.py`,
   `vision_obs_assembler.py` = `NotImplementedError` stub, `obs_builder.py` broken import) are **UNWIRED** to B/C.
 - No monotonic clock, per-field provenance, per-field confidence, or OOD flag exists on any current obs vector (**inferred** from the
-  privileged/const float-vector enumeration, v4 §2; the wall-clock-absence part is query-backed at v4 §6. This row is an inference from
-  structure, not a dedicated field-structure closure grep, so per §0 it is **not** tagged `ABSENT`).
+  privileged/const float-vector enumeration, v4 §2; the wall-clock-absence part is query-backed at v4 §6. Inference from structure, not a
+  dedicated field-structure closure grep, so per §0 it is **not** tagged `ABSENT`).
 
-**DESIGN-ONLY proposed schema** — `BeliefState` as a set of typed `BeliefField`s (skill resolution, above raw obs):
+**DESIGN-ONLY proposed schema** — `BeliefState` = a `schema_version`-stamped set of typed `BeliefField`s (skill resolution, above raw obs).
+Each `BeliefField` is the **full typed record** (pN B2 — value-alone is not interoperable):
 
-| field of `BeliefField` | type / domain | purpose |
+| attribute | type / domain | purpose |
 |---|---|---|
-| `value` | scalar / vector | the grounded quantity |
-| `provenance` | enum {`VISION_DERIVED`, `PRIVILEGED_SIM`, `SCRIPT_STATE`, `CONST`} | **mandatory per field** (pN B2) |
-| `t_obs` | monotonic timestamp [s, single declared origin] | staleness reasoning; not sim-step count |
-| `confidence` | [0,1] | belief confidence used by initiation predicates + abstention |
-| `ood_flag` | bool | field is out-of-support / low-confidence |
+| `field_id` | stable canonical id (enum) | interoperable key across surfaces (never a positional index) |
+| `semantic` | text | human-readable meaning |
+| `dtype` / `shape` | e.g. `float32` / `[3]` | typed layout |
+| `unit` | SI: `[m]`,`[rad]`,`[m/s]`,`[N]`,`[N·m]`, dimensionless | physical unit (AGENTS.md SI rule) |
+| `frame` | `world` \| `robot_base` \| `EE_L`/`EE_R` \| `clip` \| `N/A` | coordinate frame of `value` |
+| `value` | per `dtype`/`shape` | the grounded quantity |
+| `provenance` | enum {`VISION_DERIVED`,`PRIVILEGED_SIM`,`SCRIPT_STATE`,`CONST`} | **mandatory per field** (pN B2) |
+| `prod_admissible` | bool | `false` for every `PRIVILEGED_SIM` field (gate②) |
+| `t_obs` | monotonic timestamp `[s]`, single declared origin | staleness reasoning; not a sim-step count |
+| `age` / `ttl` / `validity` | `age=now−t_obs`; `ttl`=max age; `validity=(age≤ttl ∧ ¬ood_flag)` | freshness gate consumed by §D/§G |
+| `confidence` | `[0,1]` | belief confidence used by initiation predicates + abstention |
+| `ood_flag` | bool | field out-of-support / low-confidence |
+| `schema_version` | semver | belief-schema version (mismatch ⇒ fail-closed) |
 
-`GoalContext` (pN B2 "add goal/task-context schema"): `{ target_clip ∈ {C1,C2,…}, route_phase_goal, goal_change_token, task_id }` —
-a `goal_change_token` increments when the goal changes so the orchestrator (§D) can force a re-plan (charter §2.2 "replan after … events").
+**Canonical `BeliefState` content grouping** (pN B2 — minimum D0 groups the SDM/orchestrator reason over; concrete per-dim table = D1):
+- **cable**: both grasp-point positions `[m, world]`, cable crossing/seat state at C1/C2, `held`/`dropped` flag.
+- **arms/EE**: `EE_L`/`EE_R` wrist-flange pose `[m, rad]`, gripper open/close state.
+- **task/clip**: C1/C2 seat state, pin/latch state, current route phase (G1–G6), `phase_progress`.
+- **meta**: per-field `provenance`/`confidence`/`ood_flag`/`validity` (above).
 
-**Binding requirement folded (gate②, charter §6.2)**: any field with `provenance=PRIVILEGED_SIM` is **training/evaluation metadata only**
-and is **forbidden as an undeclared production/closed-loop input**. The schema carries this as a hard field attribute
-`prod_admissible: bool` that is `false` for every `PRIVILEGED_SIM` field. At closed-loop (V0, not now), belief selection must use
-`VISION_DERIVED` fields; the current 100%-privileged vectors are admissible only for D0–S0 design/shadow, never for control authority.
+**A/B/C adapter map** (pN B2 — each surface publishes an adapter into the canonical schema; the *contract* is D0, the *per-dim table* is D1):
 
-**Fail-closed unknowns**: because vision is UNWIRED today, every production belief field is currently `ood_flag=true` by construction
-(no in-support vision estimator exists). This is the correct fail-closed default and is the design driver for gate②/④; it is **not**
-a claim that vision is present.
+| surface | raw obs | adapter → canonical | provenance tag |
+|---|---|---|---|
+| **A** per-skill env | per-skill schemas (`routing_orchestrator.py` + 43 `StepDef`) | per-skill subset → cable/arms/task groups | `PRIVILEGED_SIM`/`SCRIPT_STATE` (`prod_admissible=false`) |
+| **B** whole-route | 62D privileged (`_compute_obs_batch:1475-1587`) | 62D → canonical, all privileged | `PRIVILEGED_SIM` (`prod_admissible=false`) |
+| **C** route runner | 25/27D (`route_demo_to_bc.py:301`) | 25/27D → canonical subset | `PRIVILEGED_SIM`/`SCRIPT_STATE` |
+
+`GoalContext` (pN B2 goal/task-context schema): `{ task_id, target_clip ∈ {C1,C2,…}, route_phase_goal, goal_change_token }` —
+`goal_change_token` increments on goal change so the orchestrator (§D) forces a re-plan (charter §2.2 "replan after … events").
+
+**Binding requirement folded (gate②, charter §6.2)**: any field with `provenance=PRIVILEGED_SIM` is **training/evaluation metadata only**,
+carried as `prod_admissible=false`, and **forbidden as an undeclared production/closed-loop input**. At closed-loop (V0, not now), belief
+selection must use `VISION_DERIVED` fields; the current 100%-privileged vectors are admissible only for D0–S0 design/shadow.
+
+**Fail-closed unknowns**: because vision is UNWIRED today, every production belief field is currently `ood_flag=true` / `validity=false`
+by construction (no in-support vision estimator exists). Correct fail-closed default; drives gate②/④. Not a claim that vision is present.
 
 **Gate linkage**: ② vision grounding, ④ unknown-state abstention.
 
@@ -103,31 +127,35 @@ a claim that vision is present.
 - **Version hash: present** in `bc_train_route.py:117-135` + `policy_route_runner.py:35-46,456,622`; **absent** in
   `eval_skill.py`/`train_common.py`/`train_base_model.py` (v4 §1).
 
-**DESIGN-ONLY proposed contract** — `SkillActionKey` (the identity a skill action is modeled/evaluated under):
+**DESIGN-ONLY proposed contract** — `SkillActionKey` (the identity a skill action is modeled/evaluated under). **NEVER key by skill-name
+alone** (charter §3); the key carries a **discriminated `ExecutableIdentity`** (pN B3 — scripted/wait skills have no policy weights):
 
-- `policy_hash` — immutable hash of the exact policy weights. **NEVER key by skill-name alone** (pN B2). Two policies sharing a name but
-  differing in lineage are **different skill actions** (charter §3).
-- `lineage` — `{ family ∈ {BC, BC+RL, PPO, DAPG, scripted, wait}, base_ckpt_hash, finetune_cfg_hash, final_policy_hash }`. **BC+RL must
-  distinguish** BC checkpoint hash, RL fine-tune config hash, and final policy hash (charter §3).
-- `handoff_start_context` — the incoming handoff-state id + initiation context the policy was entered from (same policy from a different
-  entry is tagged distinctly for modeling).
+- `ExecutableIdentity` = **one of** (tagged union on `kind`):
+  - `kind=LEARNED` → `{ policy_weight_hash, lineage{ family ∈ {BC,BC+RL,PPO,DAPG}, base_ckpt_hash, finetune_cfg_hash, final_policy_hash } }`.
+    **BC+RL must distinguish** BC checkpoint / RL fine-tune config / final policy hash (charter §3). Same name, different lineage = different action.
+  - `kind=SCRIPTED` → `{ source_hash, config_or_schedule_hash }` (no weights; the script source + its config/schedule are the identity).
+  - `kind=WAIT` → `{ wait_config_hash }`.
+- `handoff_start_context` — the incoming handoff-state id + initiation context the action was entered from (same executable from a
+  different entry is tagged distinctly for modeling).
+- All three `kind`s flow through the **one** `SkillLifecycleContract` below (gate① algorithm independence — the contract is uniform;
+  only the identity discriminant differs).
 
 `SkillLifecycleContract` published per skill (charter §3 fields, all DESIGN-ONLY):
-`skill_id`, `policy_family`, `SkillActionKey`; obs/action schema + `training_lineage`; `initiation_predicate` + `required_belief_confidence`;
-termination classes `{success, failure, timeout, invalid_state}`; `progress_phase` + **`safe_interruption_checkpoints`** (see §E);
-`SkillHandoffState` schema + `accepted_incoming_handoff_set`; `duration_cost_distribution` + `resource_requirements`;
-`recovery_rollback_target` + `fail_closed_action`.
+`skill_id`, `policy_family`, `SkillActionKey` (with `ExecutableIdentity`); obs/action schema + `training_lineage`; `initiation_predicate` +
+`required_belief_confidence`; termination classes `{success, failure, timeout, invalid_state}`; `progress_phase` +
+**`safe_interruption_checkpoints`** (see §E); `SkillHandoffState` schema + `accepted_incoming_handoff_set`;
+`duration_cost_distribution` + `resource_requirements`; `recovery_rollback_target` + `fail_closed_action`.
 
-**Binding requirement folded (pN B2)**: every contract additionally carries **model version / freshness / support-boundary** for the
-skill's *policy* (distinct from the SDM in §C) and a **fail-closed stale / out-of-support action**: if the running policy hash is not the
-one the contract/model was calibrated against, the skill is `out_of_support` → the orchestrator (§D) must not treat SDM predictions about
-it as valid → route to re-observe / recovery / safe-stop, never silent-accept.
+**Binding requirement folded (pN B2)**: every contract additionally carries **policy version / freshness / support-boundary** for the
+skill's *policy* (distinct from the SDM in §C) and a **fail-closed stale / out-of-support action**: if the running policy identity is not
+the one the contract/model was calibrated against, the skill is `out_of_support` → the orchestrator (§D) must not treat SDM predictions
+about it as valid → route to re-observe / recovery / safe-stop, never silent-accept.
 
 **Fail-closed unknowns**: skills whose version hash is currently absent (v4 §1: `eval_skill.py`/`train_common.py`/`train_base_model.py`)
-are `hash_unpinned` and are **inadmissible** as WMSO-selectable actions until D1 pins them (charter §5 D1 exit = hash-pinned lineage).
+are `hash_unpinned` and **inadmissible** as WMSO-selectable actions until D1 pins them (charter §5 D1 exit = hash-pinned lineage).
 AC/AR/IC RL wrappers are **ABSENT** and cannot be listed as available actions.
 
-**Gate linkage**: ① algorithm independence (same typed contract for BC+RL and RL-only), ⑩ no premature claim (contracts *registered*, not passed).
+**Gate linkage**: ① algorithm independence (uniform contract for LEARNED/SCRIPTED/WAIT), ⑩ no premature claim (contracts *registered*, not passed).
 
 ---
 
@@ -138,25 +166,24 @@ AC/AR/IC RL wrappers are **ABSENT** and cannot be listed as available actions.
   **separate** `bimanual_*` stack (v4 §8) — it is not a `(belief, skill, goal) → {next-belief, duration, class, cost, uncertainty}` predictor
   for the route skills. Transition distribution at skill resolution = **not established / UNVERIFIED**.
 
-**DESIGN-ONLY proposed model** — `SkillDynamicsModel`:
-- **Model identity** (kept explicitly distinct from §B policy identity, per R1/R2 authoring precision): `model_id`, `model_version`,
-  `trained_on` (dataset hash + coverage), **`support_boundary`** (the region of `(belief, skill_action_key, goal)` it is calibrated on),
-  `freshness` (max staleness before predictions are void).
+**DESIGN-ONLY proposed model** — `SkillDynamicsModel` (owned by the proposed `T-WMSO-SDM` child, §H/§I):
+- **Model identity** (kept explicitly distinct from §B policy identity): `model_id`, `model_version`, `trained_on` (dataset hash + coverage),
+  **`support_boundary`** (the region of `(belief, skill_action_key, goal)` it is calibrated on), `freshness` (max staleness before void).
 - input `(belief_state, skill_action_key, goal_context)` → output distribution over `{ next_belief, duration, success_fail_class, cost,
   uncertainty }`.
-- **skill-level transitions ONLY** — it must **not** claim low-level cable dynamics unless separately validated (charter §2.1).
+- **skill-level transitions ONLY** — must **not** claim low-level cable dynamics unless separately validated (charter §2.1).
 - **bounded short rollout `H < 5`** (SPlaTES precedent, INCORPORATED).
-- **calibration is per-skill AND per-handoff** — aggregate accuracy is explicitly insufficient (charter §6.3).
-- **model-exploitation guard**: regularization / constraint on planning against the model so the orchestrator cannot exploit model error
-  (INCORPORATED guard vs HMBRL-inferior finding).
+- **calibration per-skill AND per-handoff** — aggregate accuracy explicitly insufficient (charter §6.3).
+- **model-exploitation guard**: regularization / constraint on planning against the model so the orchestrator cannot exploit model error.
 
-**Binding requirement folded (pN B3)**: **duration and cost were not modeled in prior work (LL-WMF gap)** — they are **first-class outputs
-here**, designed explicitly, not implied. The SDM's `duration`/`cost` outputs are required inputs to §D's continuation-vs-switching value.
+**Binding requirement folded (pN B3-inventory)**: **duration and cost were not modeled in prior work (LL-WMF gap)** — they are **first-class
+outputs here**, designed explicitly. The SDM's `duration`/`cost` outputs are required inputs to §D's continuation-vs-switching value.
 
-**Fail-closed unknowns**: with no SDM today, every SDM query is `out_of_support` until M0 trains and calibrates one. The orchestrator (§D)
-must treat "no calibrated SDM" as "planning unavailable" → bounded slow path degrades to safe-stop / hand back to the **existing
-Surface-A heuristic retry-rollback engine** (`routing_orchestrator.py:1063-1214`; **not** the net-new Recovery Skill of §E), **never** a
-confident model-based switch. Closed-loop use of the SDM is blocked until held-out + OOD calibration gates pass (charter §5 M0 exit).
+**Fail-closed unknowns (pN B5)**: with no SDM today, every SDM query is `out_of_support` until M0 trains and calibrates one. Because **both**
+the fast and slow orchestrator paths consume the SDM, "no calibrated SDM" **voids both model-dependent decisions** (see §D): the orchestrator
+may then only **re-observe**, **hand control to an explicitly compatible still-owning existing controller** (only under a **verified
+handoff/ownership precondition** — the Surface-A heuristic is *not* inherently safe, it carries a default-accept OOD stub), or **safe-stop**.
+Never a confident model-based switch. Closed-loop use of the SDM is blocked until held-out + OOD calibration gates pass (charter §5 M0 exit).
 
 **Gate linkage**: ③ model calibration (per-skill + per-handoff), ⑩ no premature claim.
 
@@ -168,23 +195,28 @@ confident model-based switch. Closed-loop use of the SDM is blocked until held-o
 - Surface A = **heuristic skill-chaining + retry/rollback recovery** (`routing_orchestrator.py execute_step:1063-1214`, retry≤3/rollback≤3),
   **single-world only** (`:799-809`). This is the baseline gate⑨ compares WMSO against.
 - OOD gate = `bc_p0_region_check` **default-accept stub** (`:1152-1162`).
-- **Continuation-vs-switching value comparison = ABSENT** (net-new; the current path chains by fixed step table, it does not compare values).
+- **Continuation-vs-switching value comparison = net-new / not-present** (inference from the fixed step-table chaining fact, v4 §4/§5;
+  not a dedicated closure grep, so per §0 not tagged `ABSENT`).
 - **Skill-level anti-thrash = ABSENT** (v4 §7: the only dwell in code is `_c1_pin_dwell` pin-latch, unrelated).
 
 **DESIGN-ONLY proposed orchestrator** (charter §2.2), the pipeline per decision point:
 1. **candidate filter** — keep skills whose `initiation_predicate` holds AND whose safety predicate (from §F) permits, at the current belief.
-2. **value comparison** — compute continuation value (keep current skill) vs switching value (best alternative) using SDM
-   `{success, duration, cost, uncertainty}` (§C). **Net-new; absent in the reuse baseline.**
+2. **value comparison** — continuation value (keep) vs switching value (best alternative) from SDM `{success, duration, cost, uncertainty}`
+   (§C). **Net-new; absent in the reuse baseline.**
 3. **select** the argmax-value admissible skill; **replan** on outcome, event, or `goal_change_token` change.
 4. **arbitration — confidence-gated fast → slow** (INCORPORATED, Qwen<0.85→API precedent): known/high-confidence belief → **bounded fast
    path** (precomputed policy/Q lookup); uncertain / goal-changed / recovery → **bounded short-rollout slow path** (§C, H<5).
 5. **anti-thrash** — switch penalty + hysteresis + minimum-dwell so oscillatory switching is suppressed under repeated disturbance (gate⑥).
-6. **OOD abstention** — low-confidence / `ood_flag` belief **cannot force an ordinary skill choice**; it routes to re-observe / recovery /
-   safe-stop. This design **supersedes the `default-accept` stub** (pN B4) at build time (not now — the existing stub is unchanged in D0).
+6. **OOD abstention** — low-confidence / `ood_flag` / `validity=false` belief **cannot force an ordinary skill choice**; it routes to
+   re-observe / recovery / safe-stop. This design **supersedes the `default-accept` stub** (pN B5 / gate④) at build time (not now — stub unchanged in D0).
 
-**Binding requirement folded (R1/R2 authoring precision)**: the orchestrator **enforces model freshness / support** before trusting §C:
-if SDM `freshness` is exceeded or the query is outside `support_boundary`, the model output is void → fall to the bounded slow path's
-conservative branch or safe-stop; it does not act on a stale/out-of-support prediction.
+**Binding requirement folded (R1/R2 + pN B5) — stale/out-of-support SDM**: the orchestrator **enforces model freshness / support** before
+trusting §C. If SDM `freshness` is exceeded or the query is outside `support_boundary`, **both** the fast path (precomputed policy/Q) **and**
+the slow path (short rollout) are model-dependent and are therefore **both voided** — the orchestrator must **not** fall from the fast path
+onto the slow path (the naive "fall to the slow path" is self-contradictory: the slow path also uses the SDM). The only admissible actions
+are then: (i) **re-observe** for fresh belief; (ii) **hand to an explicitly compatible still-owning existing controller** under a **verified
+handoff/ownership precondition** (a controller that currently owns control and whose handoff-state is compatible — Surface-A heuristic is
+*not* inherently safe, default-accept OOD, so handback requires this precondition); else (iii) **safe-stop**.
 
 **Fail-closed unknowns**: with no SDM (§C) and no value model yet, D0 specifies the *interfaces and predicates*; the value comparison is
 **DESIGN-ONLY**. Until M0/O0, the orchestrator has **zero control authority** (charter §5 S0/V0 gating).
@@ -201,7 +233,7 @@ conservative branch or safe-stop; it does not act on a stale/out-of-support pred
 - Surface B has `RouteInterfaceV1` + `reset_to_phase(k=0 stub)`.
 - **Dedicated recovery / fallback SKILL = ABSENT** (v4 §4 exact grep → rc=1, 0 hits).
 - **Safe-interruption checkpoint = ABSENT** (v4 §3 exact grep → 0 core hits).
-- LL-ORCH Cascading-P0 hooks (`export_terminal_state` / `load_p0_from_cascade`) = **precedent**; their impl status is *not asserted*
+- LL-ORCH Cascading-P0 hooks (`export_terminal_state` / `load_p0_from_cascade`) = **precedent**; impl status *not asserted*
   (precedent-not-truth; v4 confirms the concrete in-code handoff mechanism is the physics snapshot).
 
 **DESIGN-ONLY proposed manager** (charter §2.3) — choose+execute exactly one of:
@@ -213,14 +245,15 @@ conservative branch or safe-stop; it does not act on a stale/out-of-support pred
 - **reuse**: the physics `StateSnapshot` mechanism (`snapshot.py`) is reused as the *state-capture substrate*; the Cascading-P0 export/load
   pattern is the *precedent* for terminal-state export. The **charter-§3 `SkillHandoffState` contract itself is net-new** (semantic handoff
   state ≠ raw physics snapshot).
-- **declare safe-interruption checkpoints** (pN B5; ABSENT in v4): each skill's contract (§B) enumerates the belief phases at which a
-  mid-skill switch is physics-safe; the manager may interrupt **only** at those, unless §F has already stopped/stabilized the system (gate⑤).
+- **declare safe-interruption checkpoints** (pN B5-inventory; ABSENT in v4): each skill's contract (§B) enumerates the belief phases at which
+  a mid-skill switch is physics-safe; the manager may interrupt **only** at those, unless §F has already stopped/stabilized the system (gate⑤).
 
-**Fail-closed unknowns**: no recovery skill and no declared checkpoints exist today, so the *only* fail-closed transition currently
-realizable is **re-observe / safe-stop**. The design mandates that until recovery skills + checkpoints are supplied and tested, the
-manager's default on any incompatible/uncertain transition is safe-stop, not an untested mid-skill switch. **Ownership note**: recovery
-skills are *supplied* by the **§H `T-Skill`** dependency, not built by WMSO; charter §5 has no explicit recovery-skill production stage,
-so the recovery-skill production stage is flagged an **open charter-sequencing item for pN** (do not assume D1 produces it).
+**Fail-closed unknowns + sequence (pN B4)**: no recovery skill and no declared checkpoints exist today, so the *only* fail-closed transition
+currently realizable is **re-observe / safe-stop**, which is the manager's default on any incompatible/uncertain transition (never an untested
+mid-skill switch). Transition/Recovery skills are *supplied* by the **§H `T-Skill`** dependency, **not** built by WMSO. Rather than leave this
+an open item, D0 places a **Transition/Recovery supply-readiness checkpoint** explicitly in the adoption sequence (§I): it **gates
+D2/O0/V0** — any consumer proceeds only when the required Transition/Recovery skills exist and are contract-tested (D1 hash-pinned); while
+**unavailable ⇒ the consuming path is safe-stop**. This removes the deadlock (a consumer cannot silently depend on an absent recovery skill).
 
 **Gate linkage**: ⑤ safe interruption.
 
@@ -236,17 +269,26 @@ so the recovery-skill production stage is flagged an **open charter-sequencing i
 - **gate⑧ conclusion (v4 §5)**: **none of the above is an independent low-level real-time safety monitor** — they are target/action clips,
   reward/termination faults, and an unwired legacy envelope.
 
-**DESIGN-ONLY proposed monitor** (charter §2.4):
-- a **separately owned interface** (its own owner/module, not inside the orchestrator or the WM), running at the safety rate.
-- **priority over WMSO**; it **does not wait on world-model inference**.
-- authorized actions: immediate stop / hold / retract / force-limit.
+**DESIGN-ONLY proposed monitor** (charter §2.4) — a **separately owned interface** (own owner/module, **not** inside the orchestrator or the
+WM), running at the safety rate, with **priority over WMSO** and **no wait on world-model inference**. Full schema (pN B2 — not only an action list):
+
+| element | schema | note |
+|---|---|---|
+| `SafetyObservation` | raw low-level signals read directly (not via belief/WM): F/T, EE velocity, cable-tension proxy, near-contact/penetration, NaN/explosion flag, grip-loss | independent sensing path |
+| `SafetyEvent` | `{ type ∈ {force_limit, velocity_limit, penetration, explosion, nan, grip_loss}, severity ∈ {warn, critical}, t_detect }` | detected hazard |
+| `SafetyDecision` | `{ action ∈ {STOP, HOLD, RETRACT, FORCE_LIMIT}, reason, severity, t_issue }` | action + **reason + severity** |
+| `heartbeat / health` | periodic heartbeat + `health ∈ {ok, degraded, failed}` | missed heartbeat ⇒ consumers must **not** assume safety alive; monitor `failed` ⇒ system fails to **safe-stop** |
+| `preemption / ack` | monitor **preempts** WMSO; WMSO must `ack` + yield; **preemption acts first, does not wait for ack** | one-way authority |
+| `stabilized_post_action_state` | the declared safe state after a safety action | lets §D reason about resumption eligibility |
+| `response_budget` + `owner_interface` | `D_safety` detect-to-override (§G); separately-owned module interface | worst-case, not mean |
+
 - **acceptance = fault-injection independence proof**: the safety action still fires correctly when the SDM/orchestrator is **delayed,
-  crashed, stale, or adversarially wrong** (pN B4 / charter §6.8). This is a *design contract*, tested at V-gates, not now.
-- reuse: the SOMA `SafetyEnvelope` may seed the predicate set, but it must be **wired and made independent** — its current unwired,
+  crashed, stale, or adversarially wrong** (pN B4 / charter §6.8). Design contract; tested at V-gates, not now.
+- reuse: the SOMA `SafetyEnvelope` may seed the predicate set, but must be **wired and made independent** — its current unwired,
   measure-only form does not satisfy §F.
 
 **Fail-closed unknowns**: because no independent monitor is wired today, WMSO **cannot be granted any control authority** — the safety-independence
-gate is unmet by construction. This is the hard blocker on S0→V0, correctly fail-closed.
+gate is unmet by construction. Hard blocker on S0→V0, correctly fail-closed.
 
 **Gate linkage**: ⑧ safety independence.
 
@@ -262,21 +304,34 @@ gate is unmet by construction. This is the hard blocker on S0→V0, correctly fa
   is 2 unrelated derived-Hz prints). ⇒ charter §4 `D_situation` / `T_*` **must be DESIGNED**.
 
 **DESIGN-ONLY proposed event + deadline schema** (charter §4):
-- **event taxonomy**: `{ completion, failure, slip/contact-change, no-progress, OOD-state, checkpoint-arrival, deadline-risk }`.
-- **frozen decisions the schema must fix** (pN B5): (a) **event priority + co-terminal resolution** — total order over simultaneous events
-  (safety/failure > checkpoint > completion > progress); (b) **monotonic clock + single time origin** — one declared monotonic source, no
-  sim-step proxy; (c) **detection-to-handoff completion definition** — the event is "handled" when the successor skill has *accepted* the
-  handoff, not when detection fires; (d) **fallback / deadline-miss behavior** — on miss, hand to the cached-recovery/safe path.
-- **three decision classes** (charter §4): Safety (independent monitor, §F) / Event-checkpoint (fast orchestrator path) / Deliberative
-  (short WM rollout).
-- **budget inequality**: for each event class, `T_detect + T_ground + T_select + T_handoff < D_situation` (all **DESIGN-ONLY**,
-  per-class values evidence-pending — to be measured, not asserted).
-- **acceptance metrics** (worst-case, not mean; charter §4/§6.7): p50 / p95 / p99 / **max** / **jitter** / **deadline-miss rate** /
-  **fallback latency** / **safety-override latency**. Claim ceiling = **bounded soft/firm real-time**, **not hard real-time**
-  (no bounded-execution evidence for OS/scheduler/memory/comms yet).
 
-**Fail-closed unknowns**: no wall-clock deadline exists in code, so every `D_situation` is a **design target with no measurement yet**; the
-draft records them as unresolved/evidence-pending and forbids any real-time *claim* until RT0 measures under contention.
+- **event taxonomy** (7): `completion, failure, slip/contact-change, no-progress, OOD-state, checkpoint-arrival, deadline-risk`.
+- **deterministic total order across the FULL taxonomy** (pN B1 — **independent safety override above all**). Tiers, high→low:
+  **T0 independent safety override (§F) — dominates everything** > **T1 hazard** `failure` > `slip/contact-change` > **T2 time** `deadline-risk`
+  > **T3 epistemic** `OOD-state` > **T4 transition** `checkpoint-arrival` > `completion` > **T5 progress** `no-progress`.
+  **Tie / co-terminal rule** (same step): higher tier wins; **within a tier**, break ties by (i) earliest `t_detect` (monotonic), then
+  (ii) the fixed enum order above — fully deterministic. Safety-override (T0) is evaluated first and can preempt any lower tier. (Note: T2
+  `deadline-risk` and T3 `OOD-state` both resolve to a *safe* fallback — cached-safe path / abstain-to-safe — so their relative order only
+  selects which safe path is taken, never a model-based choice.)
+- **monotonic clock + single time origin**: one declared monotonic source (e.g. `CLOCK_MONOTONIC`), origin = process/episode start; **no
+  sim-step proxy**.
+- **detection→handoff completion definition**: an event is "handled" when the successor skill has **accepted** the handoff (not when
+  detection fires).
+- **three decision classes + provisional deadline budgets** (pN B1 — **provisional numeric upper bounds, DESIGN-ONLY / evidence-pending,
+  to be *measured* at RT0, NOT claims of achieved latency**; @~48 Hz control ⇒ 1 RL-step ≈ 20.83 ms, 1 physics-step ≈ 2.08 ms):
+
+| class | owner | **budget formula** | **provisional D upper bound** | start → end measurement points | miss action |
+|---|---|---|---|---|---|
+| **Safety** | independent monitor (§F) | `T_detect_safety + T_override < D_safety` (**own detect-to-override budget, NOT the 4-term formula**) | `D_safety ≤ 20 ms` (~1 control step; ideally physics-rate ~2 ms) | raw triggering-sample `t` → safety actuator command issued | escalate to hardest safe action (STOP) |
+| **Event-checkpoint** | event monitor + fast orchestrator path | `T_detect + T_ground + T_select + T_handoff < D_event` | `D_event ≤ 100 ms` (~5 control steps) | event `t_detect` → successor accepts handoff | cached-recovery / safe-stop |
+| **Deliberative** | short WM rollout (§C, H<5) | `T_detect + T_ground + T_select(rollout) + T_handoff < D_delib` | `D_delib ≤ 500 ms` (~24 control steps) | deliberation trigger → decision committed | fall to Event-checkpoint cached path / safe-stop |
+
+- **acceptance metrics** (worst-case, not mean; charter §4/§6.7): p50 / p95 / p99 / **max** / **jitter** / **deadline-miss rate** /
+  **fallback latency** / **safety-override latency**. Claim ceiling = **bounded soft/firm real-time**, **not hard real-time** (no
+  bounded-execution evidence for OS/scheduler/memory/comms yet). The three `D` bounds above are **design targets to validate, not met deadlines.**
+
+**Fail-closed unknowns**: no wall-clock deadline exists in code; the three `D` bounds are provisional design targets with **no measurement
+yet**. D0 records them as evidence-pending and forbids any real-time *claim* until RT0 measures under contention.
 
 **Gate linkage**: ⑦ real-time.
 
@@ -286,16 +341,17 @@ draft records them as unresolved/evidence-pending and forbids any real-time *cla
 
 **FACTUAL current state** (v4 §0/§8; charter §1/§6): the four integration dependencies are `T-Skill`, `T-Vision`, `T-WM`, and the active
 trainer/env path; the code baseline is the existing `routing_orchestrator.py`. Vision is UNWIRED (§A); the only WM in code is the
-`bimanual_*` `WorldModelEncoder` (§C), which is **distinct** from the WMSO SDM and from the `T-WM` failure-classifier cascade.
+`bimanual_*` `WorldModelEncoder` (§C), **distinct** from the WMSO SDM and from the `T-WM` failure-classifier cascade.
 
-**DESIGN-ONLY explicit dependency interfaces + owners**:
+**DESIGN-ONLY explicit dependency interfaces + owners** (pN B4 — SDM ownership resolved; T-WM is NOT the SDM supplier):
 
 | dependency | owner node | interface WMSO consumes | reuse-vs-new | mix guard |
 |---|---|---|---|---|
-| **T-Skill** | skill supply | `SkillLifecycleContract` + `SkillActionKey` per skill (§B) | contract = NEW; skills reuse existing BC/DAPG/RLPD policies | WMSO does not train or alter skills; consumes their published contract |
-| **T-Vision** | belief grounding | `BeliefField{provenance,confidence,ood_flag,t_obs}` for `VISION_DERIVED` fields (§A) | vision pipeline = to-be-wired (currently `NotImplementedError`) | WMSO consumes belief; it does not implement the encoder |
-| **T-WM** | skill-resolution WM | SDM `(belief,skill,goal)→dist` (§C) | SDM = NEW; **kept DISTINCT from the `T-WM` classifier cascade** | classifier cascade ≠ SDM; connect by explicit call, never merge state |
-| **trainer (RLPD path)** | `…-P2-trainer` | policy hashes + lineage into `SkillActionKey`; env schema | reuse existing planned RLPD residual-on-script path | WMSO does not launch training (boundary held) |
+| **T-Skill** | skill supply | `SkillLifecycleContract` + `SkillActionKey` per skill (§B); Transition/Recovery skill supply (§E) | contract = NEW; skills reuse existing BC/DAPG/RLPD policies | WMSO does not train or alter skills; consumes their published contract |
+| **T-Vision** | belief grounding | `BeliefField{…}` for `VISION_DERIVED` fields (§A) | vision pipeline = to-be-wired (currently `NotImplementedError`) | WMSO consumes belief; it does not implement the encoder |
+| **`T-WMSO-SDM`** (proposed **new child** of `T-WMSO`; NEST child-node creation = **Rs approval**) | skill-resolution WM (SDM) | SDM `(belief,skill,goal)→dist` (§C) | SDM = **NEW, WMSO-owned** | SDM owned inside the WMSO subtree, **not** by `T-WM` |
+| **T-WM** | failure-classifier cascade | **classification outputs via a classifier adapter only** | reuse existing cascade | **T-WM does NOT supply the SDM** (pN B4); exposed only through the adapter unless Rs explicitly extends its charter; never merge state |
+| **trainer (RLPD path)** | `…-P2-trainer` | policy identities + lineage into `SkillActionKey`; env schema | reuse existing planned RLPD residual-on-script path | WMSO does not launch training (boundary held) |
 
 **Binding requirement folded (charter §8-2, Rs「現 (d-b) route/pin は停止・混入させない」)**: the current **(d-b) route/pin** implementation
 and the **`T-WM` classifier cascade** are connected to WMSO **by explicit dependency only** and are **not mixed** into WMSO state. The
@@ -305,24 +361,31 @@ current route/pin work is an intra-skill prerequisite and is **not paused** by t
 
 ---
 
-## §I. Ten-gate crosswalk + measurement + evaluation (every row DESIGN-ONLY / evidence-pending)
+## §I. Ten-gate crosswalk + adoption sequence + measurement + evaluation (every row DESIGN-ONLY / evidence-pending)
 
 **One row per charter §6 gate → schema surface + acceptance** (no gate PASS is claimed; D0 *registers* the contract):
 
 | # | gate | schema surface (§) | acceptance (DESIGN-ONLY) | D0 status |
 |---|---|---|---|---|
-| 1 | algorithm independence | §B, §H | BC+RL and RL-only skills accepted through one `SkillLifecycleContract` | contract registered; unresolved |
+| 1 | algorithm independence | §B, §H | LEARNED/SCRIPTED/WAIT accepted through one `SkillLifecycleContract` | contract registered; unresolved |
 | 2 | vision grounding | §A | control belief uses `VISION_DERIVED` fields; `PRIVILEGED_SIM` `prod_admissible=false` | vision UNWIRED → evidence-pending |
 | 3 | model calibration | §C | per-skill **and** per-handoff calibration error bounds; aggregate insufficient | no SDM yet → evidence-pending |
-| 4 | unknown-state abstention | §A, §D | `ood_flag`/low-conf → re-observe/recovery/stop; no default-accept | stub to be replaced; evidence-pending |
+| 4 | unknown-state abstention | §A, §D | `ood_flag`/`validity=false` → re-observe/recovery/stop; no default-accept | stub to be superseded; evidence-pending |
 | 5 | safe interruption | §B, §E | switch only at declared `safe_interruption_checkpoints`; compatibility sets tested | checkpoints ABSENT → evidence-pending |
 | 6 | anti-thrashing | §D | switch-penalty + hysteresis + min-dwell; tested under repeated disturbance | ABSENT → evidence-pending |
-| 7 | real-time | §G | per-class deadline-miss + max + fallback latency under contention; soft/firm only | no wall-clock deadline → evidence-pending |
+| 7 | real-time | §G | per-class deadline-miss + max + fallback latency under contention; soft/firm only; provisional D bounds | no measurement → evidence-pending |
 | 8 | safety independence | §F | safety fires under model/orchestrator delay/crash/stale/adversarial | no independent monitor wired → evidence-pending |
 | 9 | comparative value | §D, §I | beat baselines on task+recovery SR without safety regression | four-baseline plan (below); evidence-pending |
 | 10 | no premature claim | §0 boundaries | D0–M0 ≠ training-ready/closed-loop; S0/V0 need own two-key | held; boundary invariant |
 
-**Gate-9 four-baseline plan** (pN B5): compare **(1) fixed chain** (current step-table order, no value comparison) · **(2) current
+**Adoption-sequence supply-readiness gate (pN B4)**: the charter §5 sequence (D0→D1→D2→M0→O0→RT0→S0→V0) is annotated with two explicit
+preconditions so no consumer silently depends on an absent supplier:
+- **Transition/Recovery supply-readiness** (owner **T-Skill**): **D2/O0/V0 may not consume a Transition or Recovery skill until that skill
+  exists and is contract-tested (D1 hash-pinned)**; while unavailable, the consuming path is **safe-stop**.
+- **SDM ownership** (owner proposed **`T-WMSO-SDM`** child, not T-WM): **M0/O0 may not consume SDM outputs until held-out + OOD calibration
+  pass**; the node itself requires Rs/NEST child-creation approval before instantiation.
+
+**Gate-9 four-baseline plan** (pN B5-inventory): compare **(1) fixed chain** (current step-table order, no value comparison) · **(2) current
 heuristic recovery** (Surface-A retry/rollback, `routing_orchestrator.py:1063-1214`) · **(3) boundary-only WMSO** (switch only at checkpoints,
 no real-time event path) · **(4) event-driven WMSO** (full multi-rate, deadline-bounded profile). Metric = task SR + recovery SR + safety
 interventions; WMSO must beat (1)+(2) **without** safety regression (charter §5 O0 exit).
@@ -332,18 +395,21 @@ interventions; WMSO must beat (1)+(2) **without** safety regression (charter §5
   OOD-abstention precision/recall, model calibration error, predicted-vs-actual duration/cost, event-to-decision max latency, event-to-handoff
   max latency, deadline-miss rate, independent-safety-intervention count.
 - **stress cases**: long-duration skills, contact/slip disturbance, target movement, corrupted/delayed vision, unseen abstract states,
-  repeated switching pressure, slow WM inference, process failure, stale SDM data.
+  repeated switching pressure, slow world-model inference, process failure, stale SDM data.
 
 **Every D0 row is DESIGN-ONLY** with status ∈ {unresolved, evidence-pending, ABSENT, held}; **no gate is PASSED here**. D0's deliverable is
-the *schemas + event-deadline design*, which then goes to its own D0-exit independent design verify (charter §5 D0 exit).
+the *schemas + event-deadline design*, which goes to its own D0-exit independent design verify (charter §5 D0 exit).
 
 ---
 
-## Disposition and next steps (scope-v2 §B6 order)
+## Disposition and next steps
 
-- This draft = **step 2** (author §A–§I). It covers all 10 charter gates, holds every boundary/invariant, keeps FACTUAL (inventory v4) and
-  DESIGN-ONLY strictly separated, keys **policy identity (§B) distinct from model identity (§C)**, and marks every unknown fail-closed.
-- **Next**: step 3 = `/pre-check` on this own artifact (design failure-mode / deadlock / rule-violation scan) → step 4 = architecture-draft
-  **bank** (via p6 custody) → step 5 = **pN D0-exit independent design verify** (charter §5 D0 exit condition).
+- **v2 (this)** discharges pN D0-exit HOLD **B1–B6**: **B1** full-taxonomy deterministic total order + provisional ms deadlines + separate
+  Safety detect-to-override budget (§G); **B2** enriched `BeliefField` + canonical grouping + A/B/C adapter map (§A) + full safety schema
+  (§F); **B3** discriminated executable identity (§B); **B4** SDM owner = proposed `T-WMSO-SDM` child + T-Skill supply-readiness gate in the
+  sequence (§H/§I); **B5** void-both-model-paths stale fallback with verified-precondition handback (§C/§D); **B6** header CONCUR correction +
+  pre-check **record** (`WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md`) + this disposition. pN PASS axes unchanged.
+- **v2 `/pre-check` = PASS** (6/6 B1–B6 DISCHARGED; 3 LOW nits folded; record `WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md`).
+- **Next**: **resubmit to pN D0-exit independent design verify** (charter §5 D0 exit) — v2 draft + pre-check record banked together.
 - ⛔ Unchanged and UNAUTHORIZED until each own gate: production control / training launch / WMSO inference / closed-loop authority /
   removal of any safety-or-orchestrator path / p4 grip scope. FOUNDATIONAL invariants (RS71 §0) untouched by this schema draft.
