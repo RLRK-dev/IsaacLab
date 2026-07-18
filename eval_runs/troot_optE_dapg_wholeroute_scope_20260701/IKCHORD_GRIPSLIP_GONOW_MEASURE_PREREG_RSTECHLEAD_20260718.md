@@ -31,3 +31,30 @@
 - **Discharges:** CC6 necessity (M1 + §10.11) · CC2 coverage baseline (M2) · B5a reachability (M3).
 - **Defers (separate auth):** B6-char (basin/A1 threshold — A1 vetted threshold-TBD in re-debate, tuned post-auth), B5b (post-fix), impl.
 - **After:** results → B6-char auth decision → re-debate (L3) v2.1 WITH evidence → (if PASS) rule-check → impl (Rs sign-off + §C ratify).
+
+---
+
+## CORRECTION v2 — 2026-07-18 15:37 JST (evidence-readiness, OPS-SUP conditions)
+
+The initial legs (M1/M2/M3) + an unauthorized FF-no-pin leg (M2b) were run with a harness that omitted prereg-required provenance and did not enforce a fresh outbox, and M2b was not registered here. Per OPS-SUP (15:12 / 15:21) those runs are **DIAGNOSTIC history only, EXCLUDED from evidence**; the marked outboxes (`gonow_20260718/*`, `ff_nopin_wholeroute/ABORTED_UNAUTHORIZED.txt`) are retained untouched. The evidence set is produced by a **fresh rerun** under the conditions below.
+
+### Harness (banked, evidence-grade)
+`thread_isaac_lab/scripts/gonow_measure.py` commit **`c4253ed4`**, sha256 **`83342dc2…`**. Fail-closed, it now:
+- embeds argv / pid / venv_python / MUJOCO_GL / `cvd` (CVD env) / requested_device / git HEAD + dirty-porcelain / recording sha256 into `summary.provenance`;
+- computes a pre/post repo **source closure** from `sys.modules` with `changed_source_set`/`missing_source_set` (both must be `[]`) plus a **harness self-sha pre==post** hard bar;
+- **exits 2** if the outbox leaf already exists (fresh-outbox bar); the launcher writes `run.log` to the **parent** dir and passes a **non-existent leaf**;
+- writes a `COMPLETE.ok` marker LAST and returns **non-zero** on any integrity violation or existing outbox.
+
+### Prior-art / no-repeat disposition (OPS-SUP cond 2)
+`check_thread_vault_prior_art.sh --fail-on-blocker grip-slip ik_chord B4-shadow necessity` returned BLOCKER, but every match is in **this arc's own banked design** (`IKCHORD_GRIPSLIP_FORCEDESIGN_VTDESIGN §10.10/§10.12` — the B4-shadow spec + B5 split) — a **self-match of the current design that authorizes these measurements**, NOT a repeat of a failed path. The one prior failure in this arc (the **substep-decouple** plan) is REFUTED and is **not** what is rerun. **Concrete delta** from the diagnostic runs = the provenance-complete, integrity-fail-closed, fresh-outbox harness above (the *evidence-grade* rerun).
+
+### M2b — FF-no-pin whole-route (REGISTERED, OPS-SUP cond 1)
+- **Question:** is the M2 FF+pin drop@347 (`B_contact_loss`) caused by the pin (welding C1 displaces the cable → recorded arms lose it) or intrinsic to the FF/recorded branch?
+- **Purpose:** ATTRIBUTION of the M2 drop; isolates the recorded-branch grip WITHOUT the pin confound.
+- **Exact config:** `--drive-mode feedforward` (NO `--route-c1-pin`, NO `--shadow`) `--episode-steps 900`, GOLDEN recording, wc=1, `INIT_XY_NOISE=0.0`, fresh outbox.
+- **Falsifiable binary bar:** FF-no-pin **holds past step 347** (no drop through ≥ the M2 window) → the **pin** caused the M2 drop (a `(d-a)/(d-b)` finding, flagged to p5); **OR** FF-no-pin **also drops ≲ ~347** → the recorded branch itself does not hold whole-route (a #18 coverage concern).
+- **Conjoin:** interpreted ONLY against M2 (FF+pin); the pair is the attribution — a single-leg number is not a verdict.
+- **Alone does NOT discharge any gate:** M2b is attribution/diagnostic for the coverage question; the pre-impl coverage gate (CC2 CH-1) is only informed, not discharged (whole-route ik_chord efficacy = B5b, post-impl).
+
+### Evidence rerun set + order (OPS-SUP cond 7)
+harness bank (done) → OPS-SUP commit readback → THIS prereg+M2b bank → OPS-SUP scope PASS → **fresh rerun**. Rerun = M1 (B4-shadow ik_chord+pin) · M2 (FF+pin+shadow: coverage + positive control) · M2b (FF-no-pin attribution) · M3 (ik_chord natural-term). Each to a **fresh leaf** with `run.log` in the parent. B6-char / B5b / impl remain UNAUTHORIZED.
