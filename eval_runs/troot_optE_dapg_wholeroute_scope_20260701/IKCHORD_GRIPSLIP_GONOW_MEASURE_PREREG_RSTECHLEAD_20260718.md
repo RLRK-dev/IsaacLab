@@ -141,3 +141,39 @@ CUDA_VISIBLE_DEVICES=0 MUJOCO_GL=egl /home/rlrk/env_isaaclab7/bin/python \
 **Run-independent provenance-equality assertion (M2 vs M2b, analysis-time):** equal on `provenance.harness_self_sha256_post`, `provenance.source_closure_run_end` (∧ `changed/missing/added_during_drive/build_added_unstable == []`), `provenance.recording_sha256`, `provenance.venv_python`, effective device (`current_device`/uuid), `effective_config.RL_SIM_SUBSTEPS`, `.PHYSICS_STEPS_PER_RL`, `.drive_mode`, `episode_steps_requested`; effective-config diff-set == `{route_c1_pin_effective, pin_seat_seg}` ONLY. **Run-specific, NOT asserted equal:** `argv`, `pid`, `tag`, `outbox` (differ per leg by design).
 
 **Order (unchanged):** THIS v3.1 bank → OPS-SUP scope readback → prior-art readback (concrete delta = harness `78d2b94c`) → fresh rerun. Records-only; no harness change, no sim. B6-char / B5b / impl remain UNAUTHORIZED; execution HOLD; training-ready LOCKED; WMSO untouched (released to pQ).
+
+---
+
+## CORRECTION v3.2 — 2026-07-18 17:08 JST (OPS-SUP prereg-v3.1 readback: C1 command-block fail-closed + C2 co-terminal cause set + P row-completeness)
+
+OPS-SUP prereg-v3.1 readback (17:01 JST) = **HOLD (narrow, records-only)**: B1 causal-f boundary + B2 main disjoint/complement logic PASS; the four outbox paths are absent (fresh) and the `78d2b94c` pins/commands read correctly. Two fail-closed gaps remain. This v3.2 **SUPERSEDES** the v3.1 §B3 command-block preamble and the v3.1 §B2 `term_cause` (smallest-non-null) definition. No harness change, no sim.
+
+### C1 — command block fail-closed (HIGH): fresh-parent bar + set -e sequencing
+v3.1 used `mkdir -p "$P"` (**silently accepts a pre-existing parent**) and the four sequential legs had **no `set -e`** — an M1/M2/M2b nonzero rc was preserved only in that leg's local rc while the block continued, so the block's final rc could be M3's (masking an earlier integrity/provenance abort).
+
+**Frozen preamble (SUPERSEDES the v3.1 §B3 preamble):**
+```bash
+set -euo pipefail
+cd /home/rlrk/IsaacLab
+P=eval_runs/troot_optE_dapg_wholeroute_scope_20260701/gonow_evidence_20260718
+G=eval_runs/troot_optE_dapg_wholeroute_scope_20260701/w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz
+test ! -e "$P"   # fail-closed fresh-PARENT bar (complements the harness fresh-LEAF exit-2)
+mkdir "$P"       # plain mkdir (NOT -p): errors if $P exists or the grandparent is missing
+```
+The four leg commands (M1→M2→M2b→M3) are unchanged in flags/outbox/tag/redirect, but now run **under `set -e` with direct redirection (no tee)** → each harness nonzero exit (2 provenance / 3 source-integrity) **aborts the block before the later legs run** (fail-closed sequencing; an M1 integrity abort never silently proceeds to M2). The block rc == the first failing leg's rc.
+
+### C2 — co-terminal cause set (HIGH): term_cause_set + P row-completeness
+The v3.1 `term_cause = argmin non-null first_cause_step[k]` is **ambiguous when ≥2 causes share `done_step`** (co-terminal). Replace with a set:
+- **`term_cause_set = {k ∈ {A_held_z_floor, B_contact_loss, C_c1_escape, explosion} | first_cause_step[k] == done_step}`** (the cause(s) active exactly at the terminal step; `∅` if `done_step is None`). Grounded: harness sets `first[k]=t` at the first true frame and `done_step=t` at the break (`gonow_measure.py:364-375`), so a cause with `first_cause_step[k]==done_step` is active at termination.
+- A leg is a **clean-B terminal in-window** iff `done_step ∈ [f, 347]` **∧** `term_cause_set == {B_contact_loss}` (B is the **sole** cause at the terminal step). **Empty / multiple / co-terminal `term_cause_set` → INCONCLUSIVE** for any B-claim.
+
+**P (updated):** additionally require **both legs' `per_step` contain every integer index in `[0, f-1]`** (all pre-fire rows present; `per_step[i].step==i`, `:369`) before the exact row comparison; **any missing index → P failure** (a leg that terminated before `f` cannot supply the pre-fire trace).
+
+**Three-state (restated with `term_cause_set`; SUPERSEDES the v3.1 §B2 verdict clauses):**
+- **PIN-ASSOCIATED** = P ∧ [M2 clean-B terminal in-window] ∧ [M2b: `done_step is None or done_step > 347` — no terminal of any cause through 347].
+- **BRANCH-INTRINSIC** = P ∧ [M2 clean-B terminal in-window] ∧ [M2b clean-B terminal in-window].
+- **INCONCLUSIVE** = complement — explicitly incl. any B-claimed leg with `term_cause_set` empty/multiple/≠`{B_contact_loss}` in-window; M2b any terminal ≤347 that is not a clean-B (defeats BRANCH); M2b `B` outside `[f,347]`; missing pre-fire rows; `f != 246`; or any P conjunct failing.
+
+**Diagnostic-informed, NON-EVIDENCE (conclusion unchanged, restated in the set framing):** diagnostic M2 `first_cause_step={B:347}` → `term_cause_set={B_contact_loss}` clean-B@347 ∈ [246,347] ✓; diagnostic M2b `first_cause_step={C_c1_escape:342}` → `term_cause_set={C_c1_escape}` ≠ {B}, a terminal ≤347 → PIN-ASSOCIATED fails (M2b has a terminal) **and** BRANCH-INTRINSIC fails (not clean-B) → **INCONCLUSIVE**. Baked, not forced; the fresh legs produce the verdict.
+
+**Order (unchanged):** THIS v3.2 bank → OPS-SUP scope PASS (opens the **prior-art readback**, NOT the run) → prior-art readback → fresh rerun. Records-only; no harness change, no sim. B6-char / B5b / impl UNAUTHORIZED; execution HOLD; training-ready LOCKED; WMSO untouched (pQ).
