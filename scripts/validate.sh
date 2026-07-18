@@ -111,6 +111,11 @@ if [ -z "$LAYER" ] || [ "$LAYER" = "7" ]; then
     echo ""
 fi
 
+if [ -z "$LAYER" ] || [ "$LAYER" = "8" ]; then
+    run_layer "$VALIDATIONS_DIR/check_control_method.sh"
+    echo ""
+fi
+
 # Summary
 echo "═══════════════════════════════════════"
 if [ "$TOTAL_FAIL" -gt 0 ]; then
