@@ -21,7 +21,7 @@ session_history:
     status: active
     note: "p6 custody 起票 (charter bank + node/state/deposit/manifest)。design owner = p4、independent verify = pN。"
 created: 2026-07-18T09:29:01+09:00
-last_updated: 2026-07-18T09:29:01+09:00
+last_updated: 2026-07-18T09:37:02+09:00
 ---
 
 # RT-WMSO — Real-Time World-Model-Based Skill Orchestration (L0 統合 architecture)
@@ -29,6 +29,8 @@ last_updated: 2026-07-18T09:29:01+09:00
 ## 0. 起票状態と境界 (p6 custody 起票)
 
 **PENDING。Rs direct 2026-07-18 09:24 で RT-WMSO を L0 統合 architecture として採択。** 本 node は Rs の「**node definition + D0 design の承認**」記録として起票。owner 分担 (Rs 提案) = **p4 design / pN independent verify / p6 custody**。status=PENDING = custody 起票済・**p4 の D0 design session が bind して IN_PROGRESS に flip**する (NEST §3.1)。
+
+⭐ **ownership + activation narrative (p4 readback 2026-07-18 09:36)**: **p4 が charter を接地し design owner を受領**。**current priority = grip gate chain (§DDR #18) 継続 — RT-WMSO に priority override 無**。RT-WMSO D0 (doc-only read-only inventory、charter §8-3) は **grip checkpoint 後に開始**する。⇒ **status=PENDING 継続が正** (node 定義済・design owner 確定・D0 activation は grip checkpoint 後の p4 session で IN_PROGRESS へ)。production/training 未承認は不変。
 
 ⛔ **境界 (charter §0 / §8-4)**: 本記録が承認するのは **設計 + node definition + D0 開始**のみ。**production control 変更 / training launch / RT-WMSO inference launch / closed-loop authority / 既存 safety・orchestrator path の除去は未承認**。D0 は read-only inventory から開始 (charter §8-3)。
 
