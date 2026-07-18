@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "node": "T-WMSO",
+  "phase": "D1",
+  "kind": "declarative belief map (DESIGN-ONLY)",
+  "note": "Maps the surface-B 62D privileged observation to canonical BeliefState groups. This is a design artifact only: there is NO runtime belief grounding here (that is D2). Every field is PRIVILEGED_SIM or CONST, so prod_admissible=false for all.",
+  "source": "thread_isaac_lab/envs/newton_route_env.py _compute_obs_batch (62D)",
+  "prod_admissible_all": false,
+  "groups": ["arms_ee", "cable", "task_clip", "meta"],
+  "surface_b": {
+    "obs_dim": 62,
+    "fields": [
+      {"dims": [0, 3], "field_id": "ee_r_clamp_pos", "group": "arms_ee", "unit": "m", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [3, 7], "field_id": "ee_r_quat", "group": "arms_ee", "unit": "dimensionless", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [7, 8], "field_id": "ee_r_finger", "group": "arms_ee", "unit": "m", "frame": "EE_R", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [8, 11], "field_id": "ee_l_clamp_pos", "group": "arms_ee", "unit": "m", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [11, 15], "field_id": "ee_l_quat", "group": "arms_ee", "unit": "dimensionless", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [15, 16], "field_id": "ee_l_finger", "group": "arms_ee", "unit": "m", "frame": "EE_L", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [16, 19], "field_id": "cable_lane_seg_target", "group": "cable", "unit": "m", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [19, 23], "field_id": "cable_seg_quat", "group": "cable", "unit": "dimensionless", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [23, 26], "field_id": "c1_clip_pos", "group": "task_clip", "unit": "m", "frame": "world", "provenance": "CONST"},
+      {"dims": [26, 30], "field_id": "clip_quat_placeholder", "group": "task_clip", "unit": "dimensionless", "frame": "world", "provenance": "CONST"},
+      {"dims": [30, 33], "field_id": "ee_r_ori_error_aa", "group": "arms_ee", "unit": "rad", "frame": "EE_R", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [33, 36], "field_id": "ee_r_pos_error", "group": "arms_ee", "unit": "m", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [36, 39], "field_id": "ee_l_ori_error_aa", "group": "arms_ee", "unit": "rad", "frame": "EE_L", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [39, 42], "field_id": "ee_l_pos_error", "group": "arms_ee", "unit": "m", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [42, 48], "field_id": "route_phase_one_hot", "group": "task_clip", "unit": "dimensionless", "frame": "N/A", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [48, 49], "field_id": "held_cable_z", "group": "cable", "unit": "m", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [49, 50], "field_id": "seated_seg_distance", "group": "task_clip", "unit": "m", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [50, 51], "field_id": "within_phase_progress", "group": "task_clip", "unit": "dimensionless", "frame": "N/A", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [51, 53], "field_id": "next_clip_xy", "group": "task_clip", "unit": "m", "frame": "world", "provenance": "CONST"},
+      {"dims": [53, 55], "field_id": "arm_contact_flags", "group": "task_clip", "unit": "dimensionless", "frame": "N/A", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [55, 57], "field_id": "arm_ik_residual", "group": "arms_ee", "unit": "m", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [57, 58], "field_id": "crossing_x_deviation", "group": "cable", "unit": "m", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [58, 60], "field_id": "seat_zgap_lateral", "group": "task_clip", "unit": "m", "frame": "world", "provenance": "PRIVILEGED_SIM"},
+      {"dims": [60, 62], "field_id": "c1_retention", "group": "cable", "unit": "m", "frame": "world", "provenance": "PRIVILEGED_SIM"}
+    ]
+  },
+  "meta_fields_added_by_canonical_schema": [
+    {"field_id": "t_obs", "unit": "s", "note": "monotonic timestamp; single declared origin"},
+    {"field_id": "provenance", "note": "enum VISION_DERIVED|PRIVILEGED_SIM|SCRIPT_STATE|CONST (mandatory per field)"},
+    {"field_id": "confidence", "note": "[0,1]"},
+    {"field_id": "ood_flag", "note": "bool"},
+    {"field_id": "validity", "note": "age<=ttl and not ood_flag; false by construction while vision is UNWIRED"}
+  ],
+  "surface_c": {"note": "25/27D is a subset of the canonical fields (thread_isaac_lab/scripts/route_demo_to_bc.py); per-dim enumeration deferred to D2"},
+  "runtime_grounding": "OUT_OF_D1 (D2)"
+}

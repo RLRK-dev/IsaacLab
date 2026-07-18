@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0.0",
+  "node": "T-WMSO",
+  "phase": "D1",
+  "kind": "identity-and-admissibility manifest",
+  "design_ref": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D1_CONTRACTS_ADAPTERS_DESIGN_RSTECHLEAD2_20260718_v4_1_1.md",
+  "design_ref_commit": "b7ec765bbc",
+  "boundaries": "DESIGN/identity-only. No training, inference, planning, offline orchestration, or closed-loop authority. offline_orchestration_admissible and closed_loop_admissible are false for every skill.",
+  "d1_exit": "HOLD",
+  "d1_exit_reason": "Both learned exemplars have UNRESOLVED obs/action schemas; the D1 completion gate is authoritative training-env schema recovery. Identity is pinned; contract_conformant is not yet established for any skill.",
+  "decisions": {
+    "decision_1": "A (adopted with caveat): BC+RL pins present-time bytes + RECORDED_PATH_CONFIG_COLOCATION; train_time_crypto_bound=false; no retrain.",
+    "decision_2": "RSL-RL insert_clip model_9 is the RL-only exemplar (residual PPO rejected); structural-only does not satisfy contract_conformant or gate 1."
+  },
+  "source_closures": {
+    "SCRIPTED": {
+      "members": [
+        "thread_isaac_lab/skills/scripted_skills.py",
+        "thread_isaac_lab/skills/result.py",
+        "thread_isaac_lab/scripts/newton_routing_utils.py",
+        "thread_isaac_lab/configs/task_config.py",
+        "thread_isaac_lab/skills/step_table.py"
+      ],
+      "source_closure_sha256": "318c4da40ec1c0f63e1befa0ec81450e6c1df17458dee8eae3bddaa26da37f53"
+    },
+    "WAIT": {
+      "members": [
+        "thread_isaac_lab/skills/scripted_skills.py",
+        "thread_isaac_lab/skills/result.py",
+        "thread_isaac_lab/scripts/newton_routing_utils.py",
+        "thread_isaac_lab/configs/task_config.py",
+        "thread_isaac_lab/skills/step_table.py",
+        "thread_isaac_lab/orchestrator/routing_orchestrator.py"
+      ],
+      "source_closure_sha256": "37c6f936ba6ad32648b047e1ed0c7199b562e1b33a6098b7e5a57676b9be0b56"
+    }
+  },
+  "skills": [
+    {
+      "skill_id": "APPROACH_CABLE",
+      "kind": "LEARNED",
+      "policy_family": "BC+RL",
+      "artifacts": {
+        "final_policy": "thread_isaac_lab/data/rl_approach_cable_A_w256_20260409_073409/model_best.pt",
+        "base_ckpt": "thread_isaac_lab/data/base_model_mixed_20260404_190016.pt",
+        "run_record": "thread_isaac_lab/data/rl_approach_cable_A_w256_20260409_073409/summary.json"
+      },
+      "identity": {
+        "policy_weight_hash": "a49b6342bd1b0e16b549a87d0dea1423e967787bf8e115d98da2f2b39e78eb9b",
+        "final_policy_hash": "a49b6342bd1b0e16b549a87d0dea1423e967787bf8e115d98da2f2b39e78eb9b",
+        "base_ckpt_hash": "065c458101137729d4ff2593014e8c2d20c8c203a0037c784f160aa0c689313a",
+        "finetune_cfg_hash": "1977e04691912dbef1b2d4bc3527272ec82456af3451fc80ff8445747bdd5594",
+        "raw_summary_sha256": "d280ea973c025d0bb5bade56eb0466bb2f4078e9ac287e2c8cd0453d59e2c620",
+        "train_time_crypto_bound": false,
+        "association_strength": "RECORDED_PATH_CONFIG_COLOCATION"
+      },
+      "obs_action_schema": {"obs_dim": 42, "action_dim": 12, "field_semantics": "UNRESOLVED"},
+      "admissibility": {"identity_pinned": true, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
+      "conformance_reason": "obs_action_schema.field_semantics=UNRESOLVED (no authoritative training-env schema binding field order/unit/frame/action scaling)"
+    },
+    {
+      "skill_id": "CLAMP",
+      "kind": "LEARNED",
+      "status": "INADMISSIBLE_AMBIGUOUS",
+      "admissibility": {"identity_pinned": false, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
+      "conformance_reason": "no exact artifact selected (multiple rl_grip_clamp candidates; none designated); CLAMP{side} resolution deferred"
+    },
+    {
+      "skill_id": "INSERT_INTO_CLIP",
+      "kind": "LEARNED",
+      "policy_family": "PPO",
+      "artifacts": {"final_policy": "thread_isaac_lab/logs/rsl_rl/insert_clip_20260325_235722/model_9.pt"},
+      "identity": {
+        "policy_weight_hash": "7d80448612881635e1cf83d90993cf72194d5ac5f08cd97c28213950e11f4ffa",
+        "final_policy_hash": "7d80448612881635e1cf83d90993cf72194d5ac5f08cd97c28213950e11f4ffa",
+        "base_ckpt_hash": null,
+        "finetune_cfg_hash": null,
+        "train_time_crypto_bound": false,
+        "association_strength": "NOT_APPLICABLE_RL_ONLY"
+      },
+      "obs_action_schema": {"obs_dim": 10, "action_dim": 3, "field_semantics": "UNRESOLVED"},
+      "admissibility": {"identity_pinned": true, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
+      "conformance_reason": "RL-only field_semantics=UNRESOLVED (no obs/action schema record; tensor shapes only); structural-only does not satisfy contract_conformant or gate 1"
+    },
+    {
+      "skill_id": "UNCLAMP",
+      "kind": "LEARNED",
+      "status": "INADMISSIBLE_ABSENT",
+      "admissibility": {"identity_pinned": false, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
+      "conformance_reason": "no trained policy on disk (only thread_isaac_lab/data/rl_unclamp_cache/*.npz demo caches); route currently substitutes scripted HALF_UNCLAMP_RELEASE"
+    },
+    {
+      "skill_id": "AERIAL_REGRASP",
+      "kind": "LEARNED",
+      "status": "INADMISSIBLE_AMBIGUOUS",
+      "admissibility": {"identity_pinned": false, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
+      "conformance_reason": "no exact artifact selected (12 clean triad-final candidates; none designated)"
+    },
+    {
+      "skill_id": "TRANSPORT",
+      "kind": "SCRIPTED",
+      "policy_family": "SCRIPTED",
+      "identity": {"callable_qualname": "transport_to_clip", "source_closure_sha256": "318c4da40ec1c0f63e1befa0ec81450e6c1df17458dee8eae3bddaa26da37f53"},
+      "admissibility": {"identity_pinned": true, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
+      "conformance_reason": "identity pinned by skill_id+qualname+source_closure; full lifecycle contract conformance pending (identity manifest only)"
+    },
+    {
+      "skill_id": "RECLAMP_L",
+      "kind": "SCRIPTED",
+      "policy_family": "SCRIPTED",
+      "identity": {"callable_qualname": "reclamp_left", "source_closure_sha256": "318c4da40ec1c0f63e1befa0ec81450e6c1df17458dee8eae3bddaa26da37f53"},
+      "admissibility": {"identity_pinned": true, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
+      "conformance_reason": "identity pinned; full lifecycle contract conformance pending"
+    },
+    {
+      "skill_id": "HALF_UNCLAMP_RELEASE",
+      "kind": "SCRIPTED",
+      "policy_family": "SCRIPTED",
+      "identity": {"callable_qualname": "half_unclamp_release", "source_closure_sha256": "318c4da40ec1c0f63e1befa0ec81450e6c1df17458dee8eae3bddaa26da37f53"},
+      "admissibility": {"identity_pinned": true, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
+      "conformance_reason": "identity pinned; full lifecycle contract conformance pending"
+    },
+    {
+      "skill_id": "CLIP_CONFIRM",
+      "kind": "WAIT",
+      "policy_family": "WAIT",
+      "identity": {"callable_qualname": "_run_wait", "source_closure_sha256": "37c6f936ba6ad32648b047e1ed0c7199b562e1b33a6098b7e5a57676b9be0b56"},
+      "admissibility": {"identity_pinned": true, "contract_conformant": false, "offline_orchestration_admissible": false, "closed_loop_admissible": false},
+      "conformance_reason": "identity pinned by skill_id+qualname+WAIT source_closure; full lifecycle contract conformance pending"
+    }
+  ]
+}
