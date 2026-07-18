@@ -1,7 +1,7 @@
-# [RS-TECH-LEAD2 → OPS-SUP-CODEX] WMSO D0 architecture draft — §A–§I (design-only schema) **v3**
+# [RS-TECH-LEAD2 → OPS-SUP-CODEX] WMSO D0 architecture draft — §A–§I (design-only schema) **v4**
 
 - node `T-WMSO`; author `w2:pQ` (RS-TECH-LEAD2); independent verify `w2:pN` (OPS-SUP-CODEX); Vault custody `w2:p6`.
-- prepared_at: **v1 16:55** (`4baf5b2650`) · **v2 17:35** (`51e0a1c0bf`) · **v3 2026-07-18 ~18:1x JST** (this) per pN D0-exit REVERIFY HOLD (B7 CRITICAL + B6/B8 records).
+- prepared_at: **v1 16:55** (`4baf5b2650`) · **v2 17:35** (`51e0a1c0bf`) · **v3 18:35** (`e563c87869`) · **v4 2026-07-18 ~18:5x JST** (this) per pN reverify round-2 HOLD (B7a exit-union + B6 pre-check-on-final-sha).
 - **authorization to author** = Rs direct 2026-07-18「§A–I authoring に入って」. Scope pre-registered: scope prereg **v2**
   (sha256 `674a80f303ed2a5fc80b2917979c5975d1efd6088db345c2102f222149f3010a`, intact at HEAD) + arch-scope-v2 records-fix R1/R2
   (`WMSO_D0_ARCH_SCOPE_V2_RECORDS_FIX_R1R2_20260718.md`). This draft = scope-v2 §B6 **step 2**.
@@ -10,11 +10,13 @@
 - **pN scope-CONCUR status (corrected per pN B6)**: scope v2 = pN **CONTENT PASS** (16:05) → **scope PASS-CLOSE / CONCUR issued 16:12**
   (relayed to p6; R1/R2 records HOLD **discharged** `bd1726d6d7`). Authoring therefore proceeded **post-CONCUR** (Rs direct go **and** pN
   concur both present). The prior header's "no CONCUR located" note was stale and is **retracted**.
-- **Revision log**: **v1** (`4baf5b2650`, /pre-check PASS) → **pN D0-exit verify = HOLD B1–B6** (~17:24–17:31 JST, **coarse/unverified** stamp —
-  pN msg 17:24 / p6 narrative 17:25 / log-append 17:31; see `WMSO_D0_EXIT_VERIFY_VERDICT_OPSSUP_20260718.md`, a **pQ transcription** of pN's
-  message) → **v2** (`51e0a1c0bf`, B1–B6 discharged, /pre-check re-run PASS) → **pN D0-exit REVERIFY = HOLD** (18:11: **B1–B5 PASS-CLOSE** +
-  T-WMSO-SDM design CLOSE; new **B7** CRITICAL transition schema + **B6** pre-check-record + **B8** records) → **v3 (this)** discharges B7 + B6 +
-  B8, fresh /pre-check on the final sha. **pN PASS axes** (B1–B5, boundaries, identity separation, 10-gate map, measurement/stress) unchanged.
+- **Revision log**: **v1** (`4baf5b2650`) → **pN verify = HOLD B1–B6** (~17:24–17:31, **coarse/unverified**; see
+  `WMSO_D0_EXIT_VERIFY_VERDICT_OPSSUP_20260718.md`, a **pQ transcription**, not pN-authored) → **v2** (`51e0a1c0bf`, B1–B6 discharged) →
+  **pN REVERIFY = HOLD** (18:11: **B1–B5 PASS-CLOSE** + T-WMSO-SDM design CLOSE; new B7/B6/B8) → **v3** (`e563c87869`, B7 transition schema +
+  atomic owner transfer + B6/B8) → **pN REVERIFY round-2 = HOLD** (18:49: **B1–B5 + B8 PASS-CLOSE**, **B7 atomic-transfer PASS**; residual
+  **B7a** = `terminal_class` can't express a mid-skill safe-checkpoint interrupt → `TERMINAL | INTERRUPT` union; **B6** = pre-check must run on the
+  *final* sha) → **v4 (this)** adds the `TERMINAL | INTERRUPT` outcome union (§E, B7a) and re-runs the D0-exit `/pre-check` — **its verdict + the
+  pre-checked sha are in the banked pre-check record, not asserted in this draft**. **pN PASS axes** (B1–B5, B8, atomic transfer, boundaries, identity separation, 10-gate map, measurement/stress) unchanged.
 
 ## ⛔ Boundaries and invariants (held; a schema draft changes none of them)
 - **DESIGN-ONLY.** No code, no impl, no run, no gate PASS. ⛔ production control / training launch / WMSO inference /
@@ -250,10 +252,17 @@ handoff/ownership precondition** (a controller that currently owns control and w
 |---|---|---|
 | `handoff_state_id` | stable id | identity of this handoff state |
 | `schema_version` | semver | version; mismatch ⇒ fail-closed reject |
-| `producer` | `{ SkillActionKey (§B), terminal_class ∈ {success,failure,timeout,invalid_state}, checkpoint_id }` | producing action, how it ended, at which safe-interruption checkpoint (§B) |
+| `producer` | `{ SkillActionKey (§B), outcome }`, `outcome` = **`TERMINAL{ terminal_class ∈ {success,failure,timeout,invalid_state}; checkpoint_id: nullable }` \| `INTERRUPT{ checkpoint_id: mandatory; interrupt_reason ∈ {planned_switch, event, safety_stabilized} }`** | producing action + its **tagged outcome** (pN B7a — does **not** fake terminal): a *terminal* end **or** a mid-skill **safe-checkpoint interrupt** (skill NOT terminated, resumable). `compatibility` + fail-close apply to **both** variants |
 | `belief_ref` | `{ canonical BeliefState snapshot \| ref-hash, t_obs [monotonic], ttl, confidence, ood_flag }` | grounded state at handoff (§A canonical belief); stale/OOD ⇒ fail-closed |
 | `ownership` | `{ contact_ownership, resource_ownership, control_ownership (per-EE EE_L/EE_R + gripper) }` | which physical / compute resources are held |
 | `compatibility` | `{ compatibility_predicate, predicate_version, next_owner }` | who may accept and under what predicate |
+
+(**Outcome union — pN B7a**: a `TERMINAL` outcome *ends* the producer (its `checkpoint_id` is nullable); an `INTERRUPT` outcome is a
+**resumable** pause at a declared safe-interruption checkpoint (§B `safe_interruption_checkpoints` / gate⑤; `checkpoint_id` **mandatory**,
+`interrupt_reason ∈ {planned_switch, event, safety_stabilized}` — planned skill switch, an external event, or a safety-stabilized handback).
+The skill is **not** terminated; the manager may hand off and later **resume** the interrupted producer from its `checkpoint_id`. `belief_ref`
++ `ownership` are captured identically and `compatibility` + fail-close apply to **both** variants; the earlier terminal-only `terminal_class`
+could not express a mid-skill safe interrupt.)
 
 **Transition protocol + atomic owner transfer** (pN B7) — an `offer → accept → commit | abort` state machine with explicit `ack`:
 1. producer emits `offer(SkillHandoffState)`;
@@ -433,12 +442,15 @@ the *schemas + event-deadline design*, which goes to its own D0-exit independent
 
 ## Disposition and next steps
 
-- **v2** (`51e0a1c0bf`) discharged pN D0-exit HOLD **B1–B6**; **pN reverify (18:11) = B1–B5 PASS-CLOSE** + T-WMSO-SDM design CLOSE.
-- **v3 (this)** discharges the reverify HOLD: **B7** CRITICAL — the typed `SkillHandoffState` **transition schema** + `offer→accept→commit|abort`
-  protocol + **atomic owner transfer** (no double-owner / no owner-gap) + fail-closed on reject/timeout, with Transition/Recovery skills bound to
-  the §B `ExecutableIdentity`+contract (§E); **B6** — honest pre-check record matched to real `pre-check-log.jsonl` entries + fresh /pre-check on
-  the final v3 sha; **B8** — the pN-verdict file marked as a *pQ transcription* (not pN-authored) and the coarse/unverified `~17:24–17:31` stamp synced here.
-- **v3 `/pre-check`** (fresh, on the final sha) = see `WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md`.
-- **Next**: **resubmit to pN D0-exit independent design verify** (charter §5 D0 exit) — v3 draft + pre-check record + verdict file banked atomically.
+- **v3** (`e563c87869`) discharged the first reverify HOLD (B7 transition schema + atomic owner transfer + B6/B8). **pN reverify round-2 (18:49)
+  = B1–B5 + B8 PASS-CLOSE, B7 atomic-transfer PASS**; narrow residual.
+- **v4 (this)** discharges the round-2 residual: **B7a** — `producer.outcome` is now a tagged **`TERMINAL | INTERRUPT`** union (INTERRUPT
+  carries a mandatory `checkpoint_id` + `interrupt_reason ∈ {planned_switch, event, safety_stabilized}`; TERMINAL's `checkpoint_id` nullable;
+  `compatibility` + fail-close apply to both) so a mid-skill **safe-checkpoint interrupt** (resumable, gate⑤) is expressible without faking a
+  terminal class, which the terminal-only `terminal_class` could not (§E); **B6** — the D0-exit `/pre-check` is re-run on this final version and
+  its **record + raw `pre-check-log.jsonl` are (re)banked in this same commit, keyed to this draft's banked sha** (the record carries the
+  verdict + pre-checked sha; this draft makes no self-referential pre-check-status claim).
+- **D0-exit `/pre-check` verdict + pre-checked sha** = see the banked `WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md` (not restated here).
+- **Next**: **resubmit to pN D0-exit reverify** (charter §5 D0 exit) — v4 draft + pre-check record + verdict file banked atomically.
 - ⛔ Unchanged and UNAUTHORIZED until each own gate: production control / training launch / WMSO inference / closed-loop authority /
   removal of any safety-or-orchestrator path / p4 grip scope. FOUNDATIONAL invariants (RS71 §0) untouched by this schema draft.

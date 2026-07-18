@@ -65,3 +65,37 @@ broad legacy-schema hits**; the delta here is an explicit-request read-only reve
 experiment / retry / source promotion**. Dischargeable.
 
 **Next (pN)**: v3 draft + records fix + final fresh pre-check, banked atomically, then re-verdict request.
+
+---
+
+## Verdict 3 — D0-exit REVERIFY round-2 on v3 = **HOLD (narrow)** (B1–B5 + B8 PASS-CLOSE; B7 atomic-transfer PASS)
+
+- verified artifact: `WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md` v3, commit `e563c87869`, sha256
+  `ff840f3d51c03e935ffdf8799b96587456abc9da189a6e2f27f230ab73ec265a` (independent readback: real, 3 paths, sha match, 444 lines, `git show --check` clean).
+- **received 18:47 JST** (pN message stamp). Node IN_PROGRESS; D0 NOT exited. No authority flip.
+
+**PASS-CLOSE / PASS**: **B1–B5 PASS-CLOSE maintained** · **B8 PASS-CLOSE** (pQ transcription noted + coarse/unverified stamp) · **B7 atomic
+owner-transfer PASS** (single-writer Skill Transition Manager, `offer→accept→commit|abort`, reject/timeout producer-retains, no double-owner /
+no owner-gap, Transition/Recovery same contract — all confirmed).
+
+**HOLD (2 items):**
+- **B7a HIGH — schema type-hole:** `producer.terminal_class ∈ {success,failure,timeout,invalid_state}` + `checkpoint_id` cannot express the
+  charter §2.4/§6.5-permitted "skill non-terminal safe-checkpoint mid-skill interrupt". Use a tagged union that does **not** fake terminal:
+  `producer_outcome = TERMINAL{terminal_class} | INTERRUPT{checkpoint_id, interrupt_reason ∈ {planned_switch, event, safety_stabilized}}`;
+  terminal-side checkpoint nullable, interrupt-side checkpoint mandatory; `compatibility` + fail-close apply to both variants.
+- **B6 PROCESS/records:** the raw jsonl run-3 has `precheck_sha = 581fd…` but banked final = `ff840…`, and the record (`:29/:39`) says "after 2
+  folds" while the draft (`:439-441`) + dispatch claim "fresh on final sha" — a contradiction. Run a fresh `/pre-check` **once** on the *true*
+  final sha after the B7a fold; add a **non-retroactive** raw entry (`artifact_sha = final sha`) + a matching banked record. Old retroactive run-2
+  may stay as history. Doc-only; no re-run / sim / source change.
+
+**Next (pN)**: bank the v3.1/v4 draft + record, then re-verdict request.
+
+---
+
+## pQ closure of Verdict 3 (round-2) — v4
+
+Discharged in **v4** (banked next commit): **B7a** — §E `producer.outcome` is now the exact `TERMINAL{…; checkpoint_id nullable} |
+INTERRUPT{checkpoint_id mandatory; interrupt_reason ∈ {planned_switch, event, safety_stabilized}}` union, non-terminal-faking, resumable,
+compatibility + fail-close on both variants. **B6** — a fresh `/pre-check` ran on the **exact final banked sha `1b107df59f6e…`**
+(`precheck_sha == banked sha`, non-retroactive jsonl entry `T19:31:00`, matching pre-check record; no post-pre-check edit). Verdict = PASS,
+0 issues (see `WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md` Run 4). Resubmitted to pN for D0-exit reverify round-3.
