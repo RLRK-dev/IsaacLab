@@ -1,7 +1,7 @@
-# [RS-TECH-LEAD2 → OPS-SUP-CODEX] WMSO D0 architecture draft — §A–§I (design-only schema) **v2**
+# [RS-TECH-LEAD2 → OPS-SUP-CODEX] WMSO D0 architecture draft — §A–§I (design-only schema) **v3**
 
 - node `T-WMSO`; author `w2:pQ` (RS-TECH-LEAD2); independent verify `w2:pN` (OPS-SUP-CODEX); Vault custody `w2:p6`.
-- prepared_at: **v1 2026-07-18 16:55 JST** (commit `4baf5b2650`) · **v2 revised 2026-07-18 17:35 JST** (this) per pN D0-exit HOLD B1–B6.
+- prepared_at: **v1 16:55** (`4baf5b2650`) · **v2 17:35** (`51e0a1c0bf`) · **v3 2026-07-18 ~18:1x JST** (this) per pN D0-exit REVERIFY HOLD (B7 CRITICAL + B6/B8 records).
 - **authorization to author** = Rs direct 2026-07-18「§A–I authoring に入って」. Scope pre-registered: scope prereg **v2**
   (sha256 `674a80f303ed2a5fc80b2917979c5975d1efd6088db345c2102f222149f3010a`, intact at HEAD) + arch-scope-v2 records-fix R1/R2
   (`WMSO_D0_ARCH_SCOPE_V2_RECORDS_FIX_R1R2_20260718.md`). This draft = scope-v2 §B6 **step 2**.
@@ -10,9 +10,11 @@
 - **pN scope-CONCUR status (corrected per pN B6)**: scope v2 = pN **CONTENT PASS** (16:05) → **scope PASS-CLOSE / CONCUR issued 16:12**
   (relayed to p6; R1/R2 records HOLD **discharged** `bd1726d6d7`). Authoring therefore proceeded **post-CONCUR** (Rs direct go **and** pN
   concur both present). The prior header's "no CONCUR located" note was stale and is **retracted**.
-- **Revision log**: **v1** (`4baf5b2650`, /pre-check PASS) → **pN D0-exit verify = HOLD B1–B6** (`WMSO_D0_EXIT_VERIFY_VERDICT_OPSSUP_20260718.md`,
-  17:24) → **v2 (this)** discharges B1–B6, re-runs /pre-check, banks a pre-check **record**, resubmits. **pN PASS axes** (boundaries,
-  factual/design split, algorithm independence, policy↔SDM identity, 10-gate map, measurement/stress) are **unchanged** by v2.
+- **Revision log**: **v1** (`4baf5b2650`, /pre-check PASS) → **pN D0-exit verify = HOLD B1–B6** (~17:24–17:31 JST, **coarse/unverified** stamp —
+  pN msg 17:24 / p6 narrative 17:25 / log-append 17:31; see `WMSO_D0_EXIT_VERIFY_VERDICT_OPSSUP_20260718.md`, a **pQ transcription** of pN's
+  message) → **v2** (`51e0a1c0bf`, B1–B6 discharged, /pre-check re-run PASS) → **pN D0-exit REVERIFY = HOLD** (18:11: **B1–B5 PASS-CLOSE** +
+  T-WMSO-SDM design CLOSE; new **B7** CRITICAL transition schema + **B6** pre-check-record + **B8** records) → **v3 (this)** discharges B7 + B6 +
+  B8, fresh /pre-check on the final sha. **pN PASS axes** (B1–B5, boundaries, identity separation, 10-gate map, measurement/stress) unchanged.
 
 ## ⛔ Boundaries and invariants (held; a schema draft changes none of them)
 - **DESIGN-ONLY.** No code, no impl, no run, no gate PASS. ⛔ production control / training launch / WMSO inference /
@@ -143,7 +145,7 @@ alone** (charter §3); the key carries a **discriminated `ExecutableIdentity`** 
 `SkillLifecycleContract` published per skill (charter §3 fields, all DESIGN-ONLY):
 `skill_id`, `policy_family`, `SkillActionKey` (with `ExecutableIdentity`); obs/action schema + `training_lineage`; `initiation_predicate` +
 `required_belief_confidence`; termination classes `{success, failure, timeout, invalid_state}`; `progress_phase` +
-**`safe_interruption_checkpoints`** (see §E); `SkillHandoffState` schema + `accepted_incoming_handoff_set`;
+**`safe_interruption_checkpoints`** (see §E); `SkillHandoffState` schema (**typed body in §E**, pN B7) + `accepted_incoming_handoff_set`;
 `duration_cost_distribution` + `resource_requirements`; `recovery_rollback_target` + `fail_closed_action`.
 
 **Binding requirement folded (pN B2)**: every contract additionally carries **policy version / freshness / support-boundary** for the
@@ -241,6 +243,33 @@ handoff/ownership precondition** (a controller that currently owns control and w
 2. a **Transition Skill** (a learned/scripted bridge when states are incompatible but bridgeable);
 3. a **Recovery Skill** (net-new — must be designed; ABSENT today);
 4. **re-observe or safe-stop** when no valid transition exists.
+
+**`SkillHandoffState` — the typed transition schema** (pN B7; charter §5 D0 requires a *transition* schema, not just its name):
+
+| field | type | purpose |
+|---|---|---|
+| `handoff_state_id` | stable id | identity of this handoff state |
+| `schema_version` | semver | version; mismatch ⇒ fail-closed reject |
+| `producer` | `{ SkillActionKey (§B), terminal_class ∈ {success,failure,timeout,invalid_state}, checkpoint_id }` | producing action, how it ended, at which safe-interruption checkpoint (§B) |
+| `belief_ref` | `{ canonical BeliefState snapshot \| ref-hash, t_obs [monotonic], ttl, confidence, ood_flag }` | grounded state at handoff (§A canonical belief); stale/OOD ⇒ fail-closed |
+| `ownership` | `{ contact_ownership, resource_ownership, control_ownership (per-EE EE_L/EE_R + gripper) }` | which physical / compute resources are held |
+| `compatibility` | `{ compatibility_predicate, predicate_version, next_owner }` | who may accept and under what predicate |
+
+**Transition protocol + atomic owner transfer** (pN B7) — an `offer → accept → commit | abort` state machine with explicit `ack`:
+1. producer emits `offer(SkillHandoffState)`;
+2. the candidate `next_owner` evaluates `compatibility_predicate@predicate_version`: satisfied → `accept` + `ack`, else → `reject`;
+3. on `accept` → the **Skill Transition Manager — the single authoritative writer of `control_ownership`** — performs `commit` = **one atomic
+   token flip** of that manager-owned field (both producer and `next_owner` merely *observe* it; the concrete primitive — CAS/lock — is a D1
+   refinement): thus **exactly one owner at every instant — no double-owner interval and no owner-gap interval**; if the flip cannot complete → `abort`;
+4. **fail-closed**: `reject`, `abort`, or `timeout` (no `accept` within the handoff deadline, §G) → the **producer retains ownership and
+   safe-stops (or re-observes)** — control is never released into a vacuum and never duplicated.
+
+(**Reconciliation with §G**: §G's "handled = successor accepted" endpoint denotes the **commit-completed** state — the manager's atomic flip
+immediately follows a valid `accept` as one primitive, so accept/commit are a single step from the deadline's view; an `abort` reverts to
+producer-retains and the event is **not** counted handled.)
+
+**Transition & Recovery skills are ordinary skills** (pN B7): each follows the **same §B `ExecutableIdentity` + `SkillLifecycleContract`**
+(keyed by the discriminated identity, published through the one contract) — not a privileged side-channel.
 
 - **reuse**: the physics `StateSnapshot` mechanism (`snapshot.py`) is reused as the *state-capture substrate*; the Cascading-P0 export/load
   pattern is the *precedent* for terminal-state export. The **charter-§3 `SkillHandoffState` contract itself is net-new** (semantic handoff
@@ -404,12 +433,12 @@ the *schemas + event-deadline design*, which goes to its own D0-exit independent
 
 ## Disposition and next steps
 
-- **v2 (this)** discharges pN D0-exit HOLD **B1–B6**: **B1** full-taxonomy deterministic total order + provisional ms deadlines + separate
-  Safety detect-to-override budget (§G); **B2** enriched `BeliefField` + canonical grouping + A/B/C adapter map (§A) + full safety schema
-  (§F); **B3** discriminated executable identity (§B); **B4** SDM owner = proposed `T-WMSO-SDM` child + T-Skill supply-readiness gate in the
-  sequence (§H/§I); **B5** void-both-model-paths stale fallback with verified-precondition handback (§C/§D); **B6** header CONCUR correction +
-  pre-check **record** (`WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md`) + this disposition. pN PASS axes unchanged.
-- **v2 `/pre-check` = PASS** (6/6 B1–B6 DISCHARGED; 3 LOW nits folded; record `WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md`).
-- **Next**: **resubmit to pN D0-exit independent design verify** (charter §5 D0 exit) — v2 draft + pre-check record banked together.
+- **v2** (`51e0a1c0bf`) discharged pN D0-exit HOLD **B1–B6**; **pN reverify (18:11) = B1–B5 PASS-CLOSE** + T-WMSO-SDM design CLOSE.
+- **v3 (this)** discharges the reverify HOLD: **B7** CRITICAL — the typed `SkillHandoffState` **transition schema** + `offer→accept→commit|abort`
+  protocol + **atomic owner transfer** (no double-owner / no owner-gap) + fail-closed on reject/timeout, with Transition/Recovery skills bound to
+  the §B `ExecutableIdentity`+contract (§E); **B6** — honest pre-check record matched to real `pre-check-log.jsonl` entries + fresh /pre-check on
+  the final v3 sha; **B8** — the pN-verdict file marked as a *pQ transcription* (not pN-authored) and the coarse/unverified `~17:24–17:31` stamp synced here.
+- **v3 `/pre-check`** (fresh, on the final sha) = see `WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md`.
+- **Next**: **resubmit to pN D0-exit independent design verify** (charter §5 D0 exit) — v3 draft + pre-check record + verdict file banked atomically.
 - ⛔ Unchanged and UNAUTHORIZED until each own gate: production control / training launch / WMSO inference / closed-loop authority /
   removal of any safety-or-orchestrator path / p4 grip scope. FOUNDATIONAL invariants (RS71 §0) untouched by this schema draft.
