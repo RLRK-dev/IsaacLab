@@ -21,9 +21,9 @@ session_history:
   - id: T-ROOT-RS-TECH-LEAD2#s2
     status: active
     started_at: 2026-07-18T17:32:12+09:00
-    note: "WMSO D0 architecture draft (§A–I, design-only) authored+banked 4baf5b2650 (sha 318e96471dbf). pN D0-exit design verify: v1 = HOLD (17:25) → v2 banked 51e0a1c0bf → pN v2 REVERIFY (18:11) = HOLD継続: B1-B5 PASS-CLOSE, 未閉鎖 B7 CRITICAL (SkillHandoffState/transition schema 未定義) + B6 (pre-check run2 append vs logs 不一致) + B8 (verdict 転記 records). still NOT a gate PASS; node IN_PROGRESS, D0 not exited, status/authority flip 禁止. custody-reflected by p6。"
+    note: "WMSO D0 architecture draft (§A–I, design-only) authored+banked 4baf5b2650 (sha 318e96471dbf). pN D0-exit design verify: v1=HOLD (17:25) → v2 51e0a1c0bf → pN REVERIFY (18:11)=HOLD (B7/B6/B8) → v3 banked e563c87869 (sha ff840f3d51c0) が B7/B6/B8 discharge主張 [pN 未確認] (B7 schema 定義/B6 record+jsonl fixed/B8 verdict pQ-transcription mark), fresh pre-check PASS, B1-B5 stay close → pN reverify round-2 dispatched 18:35. still NOT a gate PASS; node IN_PROGRESS, D0 not exited. custody-reflected by p6。"
 created: 2026-07-18T12:44:00+09:00
-last_updated: 2026-07-18T18:09:23+09:00
+last_updated: 2026-07-18T18:42:03+09:00
 spec_version: LTM-1 v1.2
 ---
 

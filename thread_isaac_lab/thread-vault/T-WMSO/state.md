@@ -24,7 +24,7 @@ session_history:
     status: active
     note: "Rs direct 2026-07-18: development owner = T-ROOT-RS-TECH-LEAD2 (new Claude Code w2:pQ)。D0 read-only inventory を開始。independent verify = pN、custody = p6。"
 created: 2026-07-18T09:29:01+09:00
-last_updated: 2026-07-18T18:09:23+09:00
+last_updated: 2026-07-18T18:42:03+09:00
 ---
 
 # WMSO — World-Model-Based Skill Orchestration (L0 統合 architecture)
@@ -91,7 +91,7 @@ WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断�
 ⭐ **2026-07-18 17:32 — D0 architecture draft milestone (PROGRESS, NOT a D0 gate PASS)**:
 
 - **D0 §A–I architecture draft = BANKED** (`4baf5b2650`, sha256 `318e96471dbf…`, design-only): `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md` (author `w2:pQ`)。
-- ⏸ **D0-exit independent design verify = HOLD (v2 REVERIFY、`w2:pN` 18:11)**: v2 draft `51e0a1c0bf` [sha `297f3edca12b…`] で **B1-B5 = PASS-CLOSE**〔v2 discharge〕。**未閉鎖 3**: **B7 CRITICAL** = SkillHandoffState/transition schema 本体未定義〔charter D0-exit 要件〕 / **B6** = pre-check run2 append 申告 vs logs 実体 不一致 / **B8** = OPS verdict 転記 帰属 + exact 時刻 records。closure 条件 = pN→pQ 送付済 (reverify verdict は未 bank; banked = v1 verdict doc `WMSO_D0_EXIT_VERIFY_VERDICT_OPSSUP_20260718.md`)。
-- **pre-check run2 = PASS 6/6 claimed** (record `WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md` banked)、ただし **B6 未閉鎖** = pN が append-申告 vs logs 実体 不一致を検出 (records fix 待ち)。
-- **node status = IN_PROGRESS 継続** (両 pane 一致・no D0-exit/status flip・**status/authority flip 禁止**〔pN 18:11〕・D0 not exited)。次 = pQ が **B6/B7/B8 closure** (B7 schema 定義 + B6/B8 records fix) → pN 再 reverify。
+- 🔁 **D0-exit independent design verify = RE-REQUESTED (round-2、v3)**: v2 REVERIFY HOLD [`w2:pN` 18:11] の **B7/B6/B8 を v3 `e563c87869` [sha `ff840f3d51c0…`] が discharge**〔pQ claim・pN 未確認〕— B7 = SkillHandoffState/transition schema 定義 / B6 = record+jsonl fixed (run2 retroactively logged) / B8 = verdict file を pQ-transcription mark。**B1-B5 stay PASS-CLOSE**。pN D0-exit reverify **round-2 dispatched 18:35**・verdict pending。verdict doc = `WMSO_D0_EXIT_VERIFY_VERDICT_OPSSUP_20260718.md` (v3 で reverify 分 append)。
+- **pre-check = PASS** (v3 final sha で fresh /pre-check 再run PASS; record `WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md` — **B6 fixed**: record+jsonl 整合 [run2 retroactively logged])。
+- **node status = IN_PROGRESS 継続** (両 pane 一致・no D0-exit/status flip・**status/authority flip 禁止**・D0 not exited)。次 = **pN D0-exit reverify round-2 verdict**（v3 に対する; verdict で面再反映）。
 - ⛔ boundary 不変 (charter §0/§8-4): production / training / inference / closed-loop 未承認。
