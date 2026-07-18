@@ -24,7 +24,7 @@ session_history:
     status: active
     note: "Rs direct 2026-07-18: development owner = T-ROOT-RS-TECH-LEAD2 (new Claude Code w2:pQ)。D0 read-only inventory を開始。independent verify = pN、custody = p6。"
 created: 2026-07-18T09:29:01+09:00
-last_updated: 2026-07-18T17:32:12+09:00
+last_updated: 2026-07-18T17:56:48+09:00
 ---
 
 # WMSO — World-Model-Based Skill Orchestration (L0 統合 architecture)
@@ -91,7 +91,7 @@ WMSO = 4 つの Rs-mandated L0 means (RL / IL / Vision / World model) を横断�
 ⭐ **2026-07-18 17:32 — D0 architecture draft milestone (PROGRESS, NOT a D0 gate PASS)**:
 
 - **D0 §A–I architecture draft = BANKED** (`4baf5b2650`, sha256 `318e96471dbf…`, design-only): `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md` (author `w2:pQ`)。
-- ⏸ **D0-exit independent design verify = HOLD** (`w2:pN`, 2026-07-18 17:25): commit/blob integrity PASS だが 7 design blockers — numeric event deadlines absent / event priority incomplete / belief+safety schema underspecified / scripted-wait identity undefined / SDM↔`T-WM` classifier ownership conflict / recovery-skill supply stage open / stale-SDM fallback → SDM slow path recursion。
-- **pre-check = pending re-run/bank** (pN: ignored JSONL line のみで banked artifact でない; custody on-disk 確認 — banked `WMSO*PRECHECK*` doc なし)。pQ relay 17:20 の「pre-check PASS / verify PENDING」framing は pN verdict 17:25 に **superseded**。
-- **node status = IN_PROGRESS 継続** (両 pane 一致・no D0-exit/status flip)。次 = pQ correction + pre-check re-run/bank + pN reverify。
+- 🔁 **D0-exit independent design verify = RE-REQUESTED** (v1 HOLD [`w2:pN` 17:25, 7 blockers] → v2 draft `51e0a1c0bf` [sha `297f3edca12b…`] で B1-B6 = **pQ-claimed-discharged**〔pN 未確認〕; pN reverify **dispatched 17:51**・verdict pending)。verdict transcript = `WMSO_D0_EXIT_VERIFY_VERDICT_OPSSUP_20260718.md`。
+- **pre-check re-run = PASS 6/6** (v2; banked record `WMSO_D0_PRECHECK_RECORD_RSTECHLEAD2_20260718.md` — v1 の「ignored JSONL・not a banked artifact」を解消; custody on-disk 確認 = record + verdict transcript banked)。
+- **node status = IN_PROGRESS 継続** (両 pane 一致・no D0-exit/status flip・D0 not exited)。次 = **pN D0-exit REVERIFY verdict**（v2 に対する; verdict で面再反映）。
 - ⛔ boundary 不変 (charter §0/§8-4): production / training / inference / closed-loop 未承認。
