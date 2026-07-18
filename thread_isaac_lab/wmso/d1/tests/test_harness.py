@@ -211,3 +211,46 @@ def test_manifest_validator_catches_mutations():
     dup = json.loads(_MANIFEST.read_text())
     dup["skills"][1]["skill_id"] = dup["skills"][0]["skill_id"]
     assert H.validate_manifest(dup, str(_REPO_ROOT), require_closure=False)
+
+
+def test_noncanonical_initiation_payload_is_not_conformant():
+    noncanon = C.InitiationPredicate(
+        expr_kind=C.ExprKind.THRESHOLD,
+        schema_ref="s",
+        schema_hash=_H,
+        payload_canonical_json='{ "b": 1, "a": 2 }',
+        required_belief_fields=[],
+    )
+    result = H.evaluate_conformance(_contract(initiation_predicate=noncanon))
+    assert result.conformant is False
+    assert any("canonical" in x for x in result.reasons)
+
+
+def test_manifest_validator_catches_policy_weight_final_mismatch():
+    m = json.loads(_MANIFEST.read_text())
+    m["skills"][0]["identity"]["final_policy_hash"] = "b" * 64
+    problems = H.validate_manifest(m, str(_REPO_ROOT), require_closure=False)
+    assert any("policy_weight_hash != final_policy_hash" in p for p in problems)
+
+
+def test_manifest_validator_catches_renamed_skill():
+    m = json.loads(_MANIFEST.read_text())
+    for row in m["skills"]:
+        if row["skill_id"] == "CLAMP":
+            row["skill_id"] = "ARBITRARY_NEW_SKILL"
+            break
+    problems = H.validate_manifest(m, str(_REPO_ROOT), require_closure=False)
+    assert any("expected 9" in p for p in problems)
+
+
+_APPROACH_FINAL = _REPO_ROOT / "thread_isaac_lab/data/rl_approach_cable_A_w256_20260409_073409/model_best.pt"
+
+
+@pytest.mark.skipif(not _APPROACH_FINAL.is_file(), reason="learned artifacts not present (clean worktree)")
+def test_manifest_artifacts_match_actual_digests():
+    manifest = json.loads(_MANIFEST.read_text())
+    assert H.verify_manifest_artifacts(manifest, str(_REPO_ROOT)) == []
+    mutated = json.loads(_MANIFEST.read_text())
+    mutated["skills"][0]["identity"]["final_policy_hash"] = "b" * 64
+    mutated["skills"][0]["identity"]["policy_weight_hash"] = "b" * 64
+    assert H.verify_manifest_artifacts(mutated, str(_REPO_ROOT))

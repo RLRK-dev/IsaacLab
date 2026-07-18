@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
+from pathlib import Path
 
 from .contracts import (
     ROOT_REQUIRED_FIELDS,
@@ -26,7 +27,29 @@ from .contracts import (
     SnapshotRef,
     is_hex64,
 )
-from .identity import SCRIPTED_CLOSURE_MEMBERS, WAIT_CLOSURE_MEMBERS, source_closure_sha256
+from .identity import (
+    SCRIPTED_CLOSURE_MEMBERS,
+    WAIT_CLOSURE_MEMBERS,
+    canonical_json,
+    finetune_cfg_hash,
+    sha256_file,
+    source_closure_sha256,
+)
+
+# The exact canonical skill-id set every D1 manifest must enumerate (frozen; set-equality checked).
+EXPECTED_SKILL_IDS: frozenset[str] = frozenset(
+    {
+        "APPROACH_CABLE",
+        "CLAMP",
+        "INSERT_INTO_CLIP",
+        "UNCLAMP",
+        "AERIAL_REGRASP",
+        "TRANSPORT",
+        "RECLAMP_L",
+        "HALF_UNCLAMP_RELEASE",
+        "CLIP_CONFIRM",
+    }
+)
 
 
 @dataclass
@@ -71,9 +94,12 @@ def evaluate_conformance(contract: SkillLifecycleContract) -> ConformanceResult:
     if not ip.schema_ref:
         reasons.append("initiation_predicate.schema_ref is empty")
     try:
-        json.loads(ip.payload_canonical_json)
+        parsed = json.loads(ip.payload_canonical_json)
     except (ValueError, TypeError):
         reasons.append("initiation_predicate.payload_canonical_json is not valid JSON")
+    else:
+        if canonical_json(parsed).decode("utf-8") != ip.payload_canonical_json:
+            reasons.append("initiation_predicate.payload_canonical_json is not canonical")
     # The declared admissibility.contract_conformant must equal the computed conformance.
     computed = not reasons
     if contract.admissibility.contract_conformant != computed:
@@ -185,6 +211,10 @@ def validate_manifest(manifest: dict, repo_root: str, *, require_closure: bool =
     ids = [row.get("skill_id") for row in skills]
     if len(set(ids)) != len(ids):
         problems.append(f"skill_id values must be unique: {ids}")
+    if set(ids) != EXPECTED_SKILL_IDS:
+        extra = sorted(set(ids) - EXPECTED_SKILL_IDS)
+        missing = sorted(EXPECTED_SKILL_IDS - set(ids))
+        problems.append(f"skill_id set != expected 9 (extra={extra}, missing={missing})")
     for row in skills:
         sid = row.get("skill_id", "?")
         adm = row.get("admissibility", {})
@@ -205,14 +235,61 @@ def validate_manifest(manifest: dict, repo_root: str, *, require_closure: bool =
             for hkey in ("policy_weight_hash", "final_policy_hash"):
                 if not is_hex64(identity.get(hkey, "")):
                     problems.append(f"{sid}: {hkey} is not a 64-hex sha256")
-            for hkey in ("base_ckpt_hash", "finetune_cfg_hash"):
-                value = identity.get(hkey)
+            if identity.get("policy_weight_hash") != identity.get("final_policy_hash"):
+                problems.append(f"{sid}: policy_weight_hash != final_policy_hash")
+            base_h, cfg_h = identity.get("base_ckpt_hash"), identity.get("finetune_cfg_hash")
+            for hkey, value in (("base_ckpt_hash", base_h), ("finetune_cfg_hash", cfg_h)):
                 if value is not None and not is_hex64(value):
                     problems.append(f"{sid}: {hkey} must be null or a 64-hex sha256")
+            # Lineage semantics: RL-only => both null; a recorded/crypto lineage => both present.
+            if (base_h is None) != (cfg_h is None):
+                problems.append(f"{sid}: base_ckpt_hash and finetune_cfg_hash must be both null or both set")
         elif kind in ("SCRIPTED", "WAIT"):
             closure = identity.get("source_closure_sha256", "")
             if not is_hex64(closure):
                 problems.append(f"{sid}: source_closure_sha256 is not a 64-hex sha256")
             elif top_pin.get(kind) is not None and closure != top_pin[kind]:
                 problems.append(f"{sid}: row source_closure {closure} != top-level {kind} pin {top_pin[kind]}")
+    return problems
+
+
+def verify_manifest_artifacts(manifest: dict, repo_root: str) -> list[str]:
+    """Compare each learned row's manifest hashes to the ACTUAL on-disk artifact digests, where present.
+
+    For every learned, identity-pinned row whose artifact files exist, recomputes and compares the exact
+    values: the final-policy sha256 == ``final_policy_hash`` == ``policy_weight_hash``; the base sha256 ==
+    ``base_ckpt_hash``; and ``finetune_cfg_hash(run_record)`` == the manifest ``finetune_cfg_hash``. Rows
+    whose artifacts are absent are skipped (external-evidence absence is explicit, never a silent pass).
+
+    Args:
+        manifest: The parsed manifest.
+        repo_root: Repository root the artifact paths are relative to.
+
+    Returns:
+        A list of exact-value mismatches for artifacts that are present on disk.
+    """
+    root = Path(repo_root)
+    problems: list[str] = []
+    for row in manifest.get("skills", []):
+        if row.get("kind") != "LEARNED" or row.get("admissibility", {}).get("identity_pinned") is not True:
+            continue
+        sid = row.get("skill_id", "?")
+        artifacts = row.get("artifacts", {})
+        identity = row.get("identity", {})
+        final_path = artifacts.get("final_policy")
+        if final_path and (root / final_path).is_file():
+            actual = sha256_file(root / final_path)
+            for hkey in ("final_policy_hash", "policy_weight_hash"):
+                if identity.get(hkey) != actual:
+                    problems.append(f"{sid}: {hkey} {identity.get(hkey)} != actual final artifact {actual}")
+        base_path = artifacts.get("base_ckpt")
+        if base_path and (root / base_path).is_file():
+            actual = sha256_file(root / base_path)
+            if identity.get("base_ckpt_hash") != actual:
+                problems.append(f"{sid}: base_ckpt_hash != actual base artifact {actual}")
+        run_record = artifacts.get("run_record")
+        if run_record and (root / run_record).is_file():
+            actual = finetune_cfg_hash(json.loads((root / run_record).read_text()))
+            if identity.get("finetune_cfg_hash") != actual:
+                problems.append(f"{sid}: finetune_cfg_hash != recomputed {actual}")
     return problems
