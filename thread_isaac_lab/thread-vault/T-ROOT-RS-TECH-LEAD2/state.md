@@ -25,9 +25,9 @@ session_history:
   - id: T-ROOT-RS-TECH-LEAD2#s3
     status: active
     started_at: 2026-07-18T23:01:16+09:00
-    note: "D1 Skill contracts step-1: scope prereg v1 banked 7b899e88c7 (sha 5704174927). pN scope-concur: v1 (23:01) HOLD B1-B7 → v2 (23:16) HOLD R1-R3 → v3 d64298a62b re-verdict (23:21) = ✅SCOPE CONCUR (R1-R3 PASS-CLOSE, B1-B7 CLOSE). step-1 prereg CLOSED. 解錠 = §0 step2 contracts+adapters DESIGN AUTHORING のみ; code/impl/run/gate 未解錠 (impl は pN design-readback + 明示 GO + exact-path manifest 後). carry: BC+RL triad-absent→hash_unpinned/exit HOLD, RL-only unusable→gate① unresolved, offline+closed_loop admissible=false. D0 EXIT 不触, node IN_PROGRESS D1. step-2 design →v4.1.1 b7ec765bbc → pN readback (01:03) = DESIGN PASS-CLOSE (C1-C3 CLOSED, not D1/gate-1 PASS): scoped IMPLEMENTATION GO = frozen 12 added paths only (changed existing=empty, literal FieldSpec + tagged BeliefRef SNAPSHOT|HASH_REF). D1 exit なお HOLD (schemas unresolved), offline/live false, no schema recovery/training/sim/inference/planning/push, D0 unchanged. 次 = pQ 12-path scoped impl. custody-reflected by p6。"
+    note: "D1 Skill contracts step-1: scope prereg v1 banked 7b899e88c7 (sha 5704174927). pN scope-concur: v1 (23:01) HOLD B1-B7 → v2 (23:16) HOLD R1-R3 → v3 d64298a62b re-verdict (23:21) = ✅SCOPE CONCUR (R1-R3 PASS-CLOSE, B1-B7 CLOSE). step-1 prereg CLOSED. 解錠 = §0 step2 contracts+adapters DESIGN AUTHORING のみ; code/impl/run/gate 未解錠 (impl は pN design-readback + 明示 GO + exact-path manifest 後). carry: BC+RL triad-absent→hash_unpinned/exit HOLD, RL-only unusable→gate① unresolved, offline+closed_loop admissible=false. D0 EXIT 不触, node IN_PROGRESS D1. step-2 design →v4.1.1 b7ec765bbc → pN readback (01:03) = DESIGN PASS-CLOSE (C1-C3 CLOSED, not D1/gate-1 PASS): scoped IMPLEMENTATION GO = frozen 12 added paths only (changed existing=empty, literal FieldSpec + tagged BeliefRef SNAPSHOT|HASH_REF). D1 exit なお HOLD (完了gate=training-env schema recovery), offline/live false, no schema recovery/training/sim/inference/planning/push, D0 unchanged. 次 = pQ 12-path scoped impl. custody-reflected by p6。"
 created: 2026-07-18T12:44:00+09:00
-last_updated: 2026-07-19T01:04:32+09:00
+last_updated: 2026-07-19T01:07:30+09:00
 spec_version: LTM-1 v1.2
 ---
 
