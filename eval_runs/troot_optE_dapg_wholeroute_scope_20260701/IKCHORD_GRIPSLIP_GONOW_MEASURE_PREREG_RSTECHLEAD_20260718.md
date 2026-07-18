@@ -177,3 +177,25 @@ The v3.1 `term_cause = argmin non-null first_cause_step[k]` is **ambiguous when 
 **Diagnostic-informed, NON-EVIDENCE (conclusion unchanged, restated in the set framing):** diagnostic M2 `first_cause_step={B:347}` → `term_cause_set={B_contact_loss}` clean-B@347 ∈ [246,347] ✓; diagnostic M2b `first_cause_step={C_c1_escape:342}` → `term_cause_set={C_c1_escape}` ≠ {B}, a terminal ≤347 → PIN-ASSOCIATED fails (M2b has a terminal) **and** BRANCH-INTRINSIC fails (not clean-B) → **INCONCLUSIVE**. Baked, not forced; the fresh legs produce the verdict.
 
 **Order (unchanged):** THIS v3.2 bank → OPS-SUP scope PASS (opens the **prior-art readback**, NOT the run) → prior-art readback → fresh rerun. Records-only; no harness change, no sim. B6-char / B5b / impl UNAUTHORIZED; execution HOLD; training-ready LOCKED; WMSO untouched (pQ).
+
+---
+
+## Prior-art readback — EXECUTED (2026-07-18 17:22 JST; opened by OPS-SUP v3.2 PASS-CLOSE 17:11)
+
+**Command (registered, verbatim):** `scripts/check_thread_vault_prior_art.sh --fail-on-blocker grip-slip ik_chord B4-shadow necessity`
+**Exact outcome:** `EXIT=2` · `findings=30 blockers=30 lessons=0`. (Raw log in session scratchpad, 70.8KB; guard is deterministic grep over the vault → re-runnable for independent verification.)
+
+**All 30 blockers resolve to 4 files, every one THIS arc's own banked artifact (dated 20260718):**
+
+| n | file | nature | classification |
+|---|---|---|---|
+| 22 | `IKCHORD_GRIPSLIP_FORCEDESIGN_VTDESIGN_20260718.md` | p5 CURRENT design v2.1 (§10.10 L3-verdict fold / §10.11 **B4 = RESOLVED-BY-ANALYSIS + B4-shadow runnable-now + B5a/B5b split**) — the design that **AUTHORIZES** these measurements | **self-match (authorizing design)** |
+| 2 | `DEFERRECON_RECORD_IKCHORD_DIAGNOSTIC_20260718.md` | this arc's defer-recon premises (P1–P4, diagnostic-first) | **self-match (this arc's record)** |
+| 3 | `GRIP_SUBSTEP_DECOUPLE_DESIGN_VTDESIGN_20260718.md` | the substep-decouple design — status **⛔ SUPERSEDED / REFUTED** (L3 [VERIFY] FAIL + Rs 裁定 A); own header: "後継設計 = force-design §10; 本 substep 案は design around しない" | **REFUTED prior path (NOT rerun)** |
+| 3 | `GRIP_SUBSTEP_L3_DEBATE_VERDICT_RSTECHLEAD_20260718.md` | the L3 verdict that REFUTED the substep plan | **REFUTED-path record (NOT rerun)** |
+
+**Verified disposition (grounded on-disk, not relayed):**
+- **No un-refuted prior failed path is repeated by the rerun.** 24 hits (FORCEDESIGN + DEFERRECON) are the CURRENT authorizing design + this arc's diagnostic record — the guard fires on the arc's **own** keywords (self-match). 6 hits (substep design + its L3 verdict) are the **REFUTED** substep-decouple path, explicitly SUPERSEDED (L3 FAIL, Rs 裁定 A) and **not what is rerun** — the rerun (M1/M2/M2b/M3) is the B4-shadow necessity + FF coverage + one-variable attribution per FORCEDESIGN §10.10/§10.11 (the recorded-branch / measure-first lever), a **different approach** from the substep decouple.
+- **Concrete delta (VaultProtocol V7/V10 continue-past-blocker requirement):** the evidence-grade harness at commit **`78d2b94c`** (sha256 `de44d4a1…`) — provenance-complete, integrity-fail-closed, device-hard-bar, fresh-outbox — into the fresh parent `gonow_evidence_20260718`. Documented delta from (a) the REFUTED substep path (entirely different lever) AND (b) the earlier diagnostic runs (same measurement, EXCLUDED as non-evidence for missing provenance; the delta is the evidence-grade harness + fresh outbox).
+
+**Readback verdict:** blocker context is **100% self-match of this arc** (authorizing design + REFUTED-path records); no repeat of an un-refuted failed path; concrete delta documented → prior-art gate **satisfied for the rerun**, **PENDING OPS-SUP acceptance**. Fresh run remains **CLOSED** until pN accepts this readback. B6-char / B5b / impl UNAUTHORIZED; execution HOLD; training-ready LOCKED; WMSO untouched (pQ).
