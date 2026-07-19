@@ -1,4 +1,4 @@
-# P-D1 PREREG — arm-PD de-risk probe (design v1.6) 【v1.2 — FROZEN at this commit; runs immediately after (order pre-agreed with p5 12:44)】
+# P-D1 PREREG — arm-PD de-risk probe (design v1.7) 【v1.3 FROZEN `b3ddfbab1c` — version table below is authoritative】
 
 | prereg ver | commit | note |
 |---|---|---|
@@ -7,7 +7,7 @@
 | v1.2 | `32617b119a` | review v3 fold: Rs canonical R0-R4 matrix + named contrasts + **A-7 pin/eq ownership** (eq slice byte-identity + expected-unfired; smoke-10 PASS) + B2 = STOP+design-delta+p5/pN re-review gate (v1.6-②; implementer may not select B2) + declared bands inherited (p5 readback ALL-ACCEPT 12:30, §12.2-R)。**EXECUTED**: 6 runs + analysis + RESULT bank `e5d2dc214a`; §13 ruling = design v1.7 `c0b410b368` |
 | v1.3 | 〔this commit〕 | **W-a kd-lever re-probe (v1.7 §13 R-2)**: C-1/C-2 single runs on probe v0.8 (`bc1f7f2d48`, independent ke/kd scales) + declared lag-law/ringing observables (§7 below)。NOT a rescue of the R-1 FAIL verdict — S-1 bar-design input |
 
-- **Author:** RS-TECH-LEAD (w2:p4). **Status per the review's P0-2 taxonomy:** production impl CLOSED / probe scaffolding BUILT-UNLANDED (v0.5) / smokes+diagnostic batch EXECUTED (non-evidence) / probe evidence NONE until this v1.1's runs / authority CLOSED.
+- **Author:** RS-TECH-LEAD (w2:p4). **Status per the review's P0-2 taxonomy:** production impl CLOSED / probe scaffolding BUILT-UNLANDED (v0.8) / smokes+diagnostic batch EXECUTED (non-evidence) / v1.2 evidence BANKED e5d2dc214a / authority CLOSED.
 - **Design:** `ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md` **v1.6** (bank `f200bfd78c` + cell `cdf429e702`; chain per §0.0 table: v1.0-v1.5 all banked + v1.6 review-v3 arm-lane fold). **Findings:** `b9eaaf9d93`, `c1da5dcf54`; **disposition + diagnostic batch:** `fa1e786b46`. **Brief:** `1ee8be5c9e`. **Rs reviews:** v1 + v2 + v3 (`~/Downloads/PLAN_STATUS_review{,_v2,_v3}_2026-07-19.md`).
 - **PD-write surface (v1.5-① s1-s4):** s1 `apply_recorded_arm_ff` ctrl write (FF actual path = THE probe drive site) / s2 `newton_route_env` RL-path branch (present, NOT exercised in FF — S-1 scope) / s3 route-start re-pose / s4 harness M-4 sync.
 - **#3 mechanism (implemented, smoke-validated):** flag-gated B-class boundary init in `_reset_worlds` — arm q := recording frame-0 exact values + qd 0 + ctrl target-sync (M-4), gripper-OPEN ∧ not-grasping guard asserts, loud + `route_start_repose_count` in the summary. Smoke-4: fires once/episode, **err[0] = 4e-5 rad** (the repurposed L-P4 "no haul" predicate at smoke level).
