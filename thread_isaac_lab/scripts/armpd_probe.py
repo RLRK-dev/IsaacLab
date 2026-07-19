@@ -168,7 +168,7 @@ def main() -> int:
         "g1_scene_align": True,
         "route_drive_mode": "feedforward",  # P-D1 = FF whole-route (design sec 5)
         "route_c2_scene": True,
-        "route_c1_pin": True,  # pin ON (real fire, no shadow)
+        # route_c1_pin: REMOVED (Rs 2026-07-19 kinematic complete-removal; cfg True now refuses at __init__)
     }
 
     print(

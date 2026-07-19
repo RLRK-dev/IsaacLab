@@ -1090,6 +1090,13 @@ def seed_cable_joint_state(
     free_jid = cable_joints[0]
     q0 = int(jqs[free_jid])
     qd0 = int(jqds[free_jid])
+    # NO-KINEMATIC containment (Rs 2026-07-19, c5): this function's CABLE-SEED guard exemption must
+    # never be inheritable by an arm caller -- require cable_joints[0] to be the cable FREE root
+    # (7 q / 6 qd coords). An arm revolute joint (1/1) or any non-free joint refuses here.
+    assert len(cable_joints) >= 2 and int(jqs[cable_joints[1]]) - q0 == 7 and int(jqds[cable_joints[1]]) - qd0 == 6, (
+        "seed_cable_joint_state: cable_joints[0] is not a FREE root (q/qd widths != 7/6) -- refusing "
+        "(an arm-joint caller would reach the CABLE-SEED-exempt writes)"
+    )
     jq = state.joint_q.numpy()
     jqd = state.joint_qd.numpy()
     jq[q0 : q0 + 7] = root7
@@ -2132,13 +2139,18 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
 
 
 def broadcast_fk_to_all_worlds(fk_state, state_0, bws, world_count):
-    """Copy FK body transforms to all worlds' robot bodies."""
-    fk_bq = fk_state.body_q.numpy()[:ROBOT_BODY_COUNT]
-    phys_bq = state_0.body_q.numpy()
-    for w in range(world_count):
-        start = bws[w]
-        phys_bq[start : start + ROBOT_BODY_COUNT] = fk_bq
-    state_0.body_q.assign(phys_bq)
+    """REMOVED kinematic body broadcast: raises unconditionally (Rs directive 2026-07-19).
+
+    The former copy of FK robot body transforms into every world's physics state is a kinematic
+    forced placement (body-space analog of the joint_q overwrite). Remaining callers are the
+    DISCARDED VBD-track precondition builder scripts. Historical implementation: git 349d13551c
+    and earlier.
+    """
+    del fk_state, state_0, bws, world_count
+    raise RuntimeError(
+        "kinematic body broadcast REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+        "broadcast_fk_to_all_worlds is a kinematic write -- migrate this caller to actuator drive"
+    )
 
 
 def broadcast_jointq_to_all_worlds(fk_state, state_0, jws, world_count):

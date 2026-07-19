@@ -152,9 +152,11 @@ _RIGHT_EE_BODY = _RIGHT_ARM_BODY_OFFSET + EE_BODY_OFFSET  # 19: UR5e wrist_3 (ri
 _N_ARM_JOINTS = 2 * JOINTS_PER_ARM  # 28: both arms' joint_q span within a world (cable joints follow)
 # Route-start pose gate tolerance [rad] (max-abs over the 12 arm dofs): the arm must ARRIVE at the
 # recording's frame-0 pose PHYSICALLY (design sec14.2/14.3 homing transit) before the route may start.
-# PROVISIONAL fail-closed placeholder -- the acceptance value is a design (p5) ruling pending with the
-# sec14.3 transit chunk; until that chunk exists the gate always raises (home is ~5.6 rad away).
-_ROUTE_START_POSE_TOL_RAD = 0.05
+# 0.01 rad (10 mrad) = p5 TK-3 ruling 2026-07-19 16:36 JST: 2x the measured static PD tracking error
+# (1-5 mrad, P-D1 R2) -- 50 mrad would admit ~42 mm EE offset vs the 3.5 mm seat scale. PROVISIONAL
+# (freeze-after-measure): reconcile with the sec14.3 epsilon_arrival when the transit chunk lands.
+# Until that chunk exists the gate always raises (home is ~5.6 rad away) = fail-closed.
+_ROUTE_START_POSE_TOL_RAD = 0.01
 
 # koshape wrist-down IK rotation target (Rx(-90) xyzw) -- NOT Franka pi/8 (S5 horizontal-gripper bug).
 # alpha-6D is position-only, so this rotation target is HELD (no rot residual accumulation).
@@ -1001,7 +1003,23 @@ class NewtonRouteEnv(VecEnv):
                 err_r = np.linalg.norm(bq[ws0 + _RIGHT_EE_BODY][:3] - np.array(target_right)) * 1000
                 if max(err_l, err_r) < converge_mm:
                     break
-        print(f"  [{label}] Done: steps={step + 1}")
+        # NO-KINEMATIC fail-loud (c5, pre-check ISSUE 2): under the POSITION servo the arm can silently
+        # end short of the IK target (tracking lag) -- kinematic drive could not. A silent shortfall
+        # here corrupts P0 (span/pose wrong) and every state derived from it, so verify EVERY world.
+        wp.synchronize()
+        bq = self._state_0.body_q.numpy()
+        _mv_errs = []
+        for w in range(self._world_count):
+            ws = self._bws[w]
+            _mv_errs.append(float(np.linalg.norm(bq[ws + _LEFT_EE_BODY][:3] - np.array(target_left)) * 1000))
+            _mv_errs.append(float(np.linalg.norm(bq[ws + _RIGHT_EE_BODY][:3] - np.array(target_right)) * 1000))
+        if max(_mv_errs) >= converge_mm:
+            raise RuntimeError(
+                f"[{label}] servo-held move did NOT converge: max EE err {max(_mv_errs):.2f}mm >= "
+                f"{converge_mm}mm across {self._world_count} world(s) after {step + 1} steps -- "
+                "failing loud instead of returning a corrupt P0 (design sec14)"
+            )
+        print(f"  [{label}] Done: steps={step + 1}, max EE err {max(_mv_errs):.2f}mm (all worlds)")
         return True
 
     def _hold_all_worlds(self, n_frames):
@@ -2024,7 +2042,7 @@ class NewtonRouteEnv(VecEnv):
             mjd.eq_active[eq_id] = 0
             if int(mjd.eq_active[eq_id]) != 0:
                 raise RuntimeError(f"clip-pin clear failed: eq_active[{eq_id}] readback != 0")
-        self._c1_pin_witness = None  # (a): the pin may re-fire next episode
+        self._c1_pin_witness = None  # pin FIRING is removed (Rs 2026-07-19); this clear is defense-in-depth
         self._c1_pin_dwell = 0  # (d-a): re-arm the dwell counter for the next episode
 
     def _sentinel_pin_record(self):

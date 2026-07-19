@@ -326,6 +326,24 @@ def main():
                 print(f"[collector {a.proc_index}] TEST MARKER written; exiting 0", flush=True)
                 return 0
             obs_prev = env.reset()[0]
+    except RuntimeError as e:
+        # c5 (pre-check ISSUE 6): an invariant-gate violation (kinematic-removal raise / route-start
+        # pose gate) must ABORT loudly, never become a routine soft-crash the restart machinery loops on.
+        if "kinematic" in str(e) or "pose gate" in str(e) or "PERCLIP_PIN REMOVED" in str(e):
+            raise
+        (outbox / "FAILURE.json").write_text(
+            json.dumps(
+                {
+                    "last_episode": ep_idx - 1,
+                    "reason": traceback.format_exc()[-2000:],
+                    "ts": time.time(),
+                    "rc": a.restart_count,
+                },
+                indent=1,
+            )
+        )
+        print(f"[collector {a.proc_index}] FAILURE (soft): wrote FAILURE.json", flush=True)
+        return 1
     except Exception:  # R6-1 soft-crash marker: {last_episode, reason, ts, rc}
         (outbox / "FAILURE.json").write_text(
             json.dumps(

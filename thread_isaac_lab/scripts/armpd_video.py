@@ -82,7 +82,7 @@ def main() -> int:
             "g1_scene_align": True,
             "route_drive_mode": "feedforward",
             "route_c2_scene": True,
-            "route_c1_pin": True,
+            # route_c1_pin: REMOVED (Rs 2026-07-19 kinematic complete-removal)
         },
     )
     env.INIT_XY_NOISE = 0.0

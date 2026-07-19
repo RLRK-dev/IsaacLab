@@ -207,8 +207,8 @@ def apply_arm_only_write_broadcast(phys_jq, phys_jqd, fk_jq_1world, arm_ow_q_idx
         arm_ow_qd_idx: Destination qd indices for arm coords across all worlds, int array.
         arm_ow_src: Source indices into ``fk_jq_1world`` (``_ARM_OVERWRITE_LOCAL`` tiled), int array.
 
-    Returns:
-        The mutated ``(phys_jq, phys_jqd)`` tuple.
+    Raises:
+        RuntimeError: the kinematic drive is removed (Rs directive 2026-07-19).
     """
     raise RuntimeError(
         "kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
@@ -231,8 +231,8 @@ def apply_arm_only_write_perworld(phys_jq, phys_jqd, jq_interp, arm_ow_q_idx, ar
         arm_ow_q_idx: Destination q indices for arm coords across all worlds, int array.
         arm_ow_qd_idx: Destination qd indices for arm coords across all worlds, int array.
 
-    Returns:
-        The mutated ``(phys_jq, phys_jqd)`` tuple.
+    Raises:
+        RuntimeError: the kinematic drive is removed (Rs directive 2026-07-19).
     """
     raise RuntimeError(
         "kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
@@ -338,8 +338,8 @@ def apply_banked_restore(phys_jq, phys_jqd, joint_target_pos, maps, banked):
             ``gripper_qd`` (world-major over ``_GRIPPER_COORDS_LOCAL``), and ``grip_target`` (per driver DOF,
             world-major) -- the banked phase-k grip command (OPEN for phase-0, banked-CLOSED for G3-G6).
 
-    Returns:
-        The mutated ``(phys_jq, phys_jqd, joint_target_pos)`` tuple.
+    Raises:
+        RuntimeError: the kinematic restore is removed (Rs directive 2026-07-19).
     """
     raise RuntimeError(
         "banked phase-k kinematic restore REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
@@ -724,86 +724,18 @@ def c1_seat_violation_msg(ch, v, waited, wait_max):
 
 
 def activate_c1_pin(solver, seat_body_newton, seat_world, match_tol_m=5e-3):
-    """(d2) Activate the C1 clip-retention pin on the eq bound to the runtime seat. EVERY failure RAISES.
+    """REMOVED pin activator: raises unconditionally (Rs directive 2026-07-19).
 
-    This is the function whose 07-12 ancestor could not answer the question it was asked. That version had TWO
-    fail-silent paths, and it burned its "done" latch before either of them:
-
-        self._c1_pin_done = True   # "latch: one attempt at the onset frame (regardless of outcome)"
-        if mjm is None or mjd is None: return                    # (1) silently never fires, never retries
-        ...
-        if _best is None or _bestd >= 5e-3: print(...); return   # (2) prints, does not raise, latch already set
-
-    So a run in which the pin never fired was scored as a run in which the pin did not WORK -- and the artifact
-    it produced recorded no eq_active, no seat body, no match distance and no termination reason, with stdout
-    discarded. That is why "c1pin REFUTED" cannot be relied upon: it cannot distinguish "tried and failed" from
-    "never tried" (%10). Here, every failure path raises with the measured distance in the message, because that
-    distance may itself be the answer to why 07-12 never fired.
-
-    Resolution is by WORLD POSITION, exactly as the producer does it (:2352-2364) -- NOT by transplanting a body
-    index across models, which is the mistake B3-alpha just taught (the env's body numbering is its own).
-
-    Args:
-        solver: the env's SolverMuJoCo (CPU backend -> ``mj_model`` / ``mj_data`` are the live buffers).
-        seat_body_newton: the runtime C1 seat body, in the ENV's Newton body space.
-        seat_world: that body's world position [m], shape (3,) -- the match key.
-        match_tol_m: the producer's own gate. Exceeding it means we did NOT find the seat's eq.
-
-    Returns:
-        The witness dict -- persist it. A run that cannot show its pin fired proves nothing.
+    The clip-retention pin (RS71 sec0#5's former sole kinematic exception) is superseded --
+    retention must come from physical clip contact (design sec14.10). Historical implementation
+    (world-position eq match + eq_data/eq_active write + witness dict): git 349d13551c and earlier.
     """
-    import mujoco
-
-    mjm, mjd = getattr(solver, "mj_model", None), getattr(solver, "mj_data", None)
-    if mjm is None or mjd is None:
-        raise RuntimeError(
-            f"PERCLIP_PIN: solver exposes no mj_model/mj_data (use_mujoco_cpu="
-            f"{getattr(solver, 'use_mujoco_cpu', None)}) -- the pin CANNOT be activated. The 07-12 ancestor "
-            "returned silently here and its run was then scored as 'the pin does not work'."
-        )
-    wp.synchronize()
-    mujoco.mj_forward(mjm, mjd)  # refresh mjd.xpos -- a stale pose is a candidate cause of the 07-12 miss
-    seat_world = np.asarray(seat_world, dtype=np.float64).reshape(3)
-
-    best, best_d = None, 9e9
-    for i in range(int(mjm.neq)):
-        if (
-            int(mjm.eq_type[i]) == int(mujoco.mjtEq.mjEQ_CONNECT)
-            and int(mjm.eq_obj2id[i]) == 0
-            and int(mjm.eq_active0[i]) == 0  # only the pre-allocated, initially-disabled pin candidates
-        ):
-            d = float(np.linalg.norm(np.asarray(mjd.xpos[int(mjm.eq_obj1id[i])]) - seat_world))
-            if d < best_d:
-                best_d, best = d, i
-    if best is None:
-        raise RuntimeError(
-            "PERCLIP_PIN: the model carries NO disabled connect-to-world eq -- the pin was never pre-allocated "
-            "(build_multiworld_scene(perclip_pin=True)?). This is B3-alpha: the mechanism is absent at the "
-            "destination, and a run without it cannot be read as evidence about the pin."
-        )
-    if best_d >= match_tol_m:
-        raise RuntimeError(
-            f"PERCLIP_PIN: nearest pre-allocated eq is {best_d * 1e3:.3f}mm from the runtime seat (body "
-            f"{seat_body_newton} @ {seat_world.round(4).tolist()}), over the {match_tol_m * 1e3:.1f}mm gate. "
-            "The 07-12 ancestor PRINTED this and returned -- so its run silently had no pin. The distance IS "
-            "the finding: a stale mjd.xpos (pose not synced from Newton) would look exactly like this."
-        )
-    mjm.eq_data[best, 0:3] = [0.0, 0.0, 0.0]  # anchor at the seat body's own origin
-    mjm.eq_data[best, 3:6] = seat_world  # anchor in world = the seat's current position
-    mjd.eq_active[best] = 1
-    if int(mjd.eq_active[best]) != 1:  # read back: the write must have taken
-        raise RuntimeError(f"PERCLIP_PIN: eq#{best} did not activate (eq_active readback != 1)")
-    witness = {
-        "activated": True,
-        "eq_id": int(best),
-        "eq_obj1_mjc_body": int(mjm.eq_obj1id[best]),
-        "seat_body_newton": int(seat_body_newton),
-        "position_match_mm": round(best_d * 1e3, 4),
-        "eq_active_readback": int(mjd.eq_active[best]),
-        "seat_world": [round(float(x), 5) for x in seat_world],
-    }
-    print(f"  [PERCLIP_PIN] ACTIVATED {witness}", flush=True)
-    return witness
+    del solver, seat_body_newton, seat_world, match_tol_m
+    raise RuntimeError(
+        "clip-retention pin/weld REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+        "the sec0#5 pin exception is superseded -- retention must be physical clip contact "
+        "(design sec14.10 levers)"
+    )
 
 
 class BrokenSelector(RuntimeError):
@@ -1020,16 +952,7 @@ def authorize_clip_pin(solver, seat_body, seat_world, match_tol_m=5e-3):
         "complete-removal supersedes the sec0#5 pin exception): retention must come from physical "
         "clip contact (design sec14.10 levers)"
     )
-    sw = np.asarray(seat_world, dtype=np.float64).reshape(3)
-    reasons = []
-    for cx, cy, g, y_win_m in _clip_capture_cache(solver):  # SAME cache clip_capture_check reads (identity)
-        if len(g) not in (5, 6):
-            raise BrokenSelector((cx, cy), len(g))
-        ok, why = clip_capture_predicate(sw, cx, cy, rc.SEAT_LAT_BAR_M, y_win_m, rc.SEAT_Z_LO_M, rc.SEAT_Z_HI_M)
-        if ok:
-            return activate_c1_pin(solver, seat_body, seat_world, match_tol_m=match_tol_m)
-        reasons.append(f"{(round(cx, 3), round(cy, 3))}:{why}")
-    raise NotInAnyRouteClip(sw, rc.ROUTE_CLIP_CENTERS, reasons)
+    # Historical authorizer body (capture-cache match -> activate_c1_pin): git 349d13551c and earlier.
 
 
 def audit_pin_anchors(mjm, mjd):
@@ -1758,15 +1681,17 @@ def _bank_capture_sample(state, solver, scene_info):
 
 
 def update_kinematic_bodies(physics_state, fk_state, robot_body_count):
-    """Copy robot body transforms from FK state to physics state (verbatim; test:1752).
+    """REMOVED kinematic body mirror: raises unconditionally (Rs directive 2026-07-19).
 
-    FK model body indices map 1:1 to physics model body indices (both start at 0). Called each
-    substep to ensure kinematic bodies reflect current FK positions before contact detection.
+    The former per-substep copy of FK robot body transforms into the physics state is a kinematic
+    forced placement (the body-space analog of the joint_q overwrite). Historical implementation:
+    git 349d13551c and earlier.
     """
-    fk_bq = fk_state.body_q.numpy()
-    phys_bq = physics_state.body_q.numpy()
-    phys_bq[:robot_body_count] = fk_bq[:robot_body_count]
-    physics_state.body_q.assign(phys_bq)
+    del physics_state, fk_state, robot_body_count
+    raise RuntimeError(
+        "kinematic body mirror REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+        "update_kinematic_bodies is a kinematic write -- migrate this caller to actuator drive"
+    )
 
 
 def get_ee_positions(state, scene_info):
@@ -1815,8 +1740,6 @@ def physics_step(model, state, solver, contacts, scene_info):
                 "legacy kinematic FK arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
                 "migrate this caller to the actuator-driven path"
             )
-            state_0.clear_forces()
-            solver.step(state_0, state_1, vbd_control, None, SIM_DT)
         else:
             # Ensure kinematic bodies reflect current FK positions
             update_kinematic_bodies(state_0, fk_state, robot_body_count)
@@ -3355,70 +3278,24 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
             )
 
         _ph("C1_PIN")
-        # PERCLIP_PIN (b)-pin ACTIVATION on the VERIFIED C1 seat (%3 charter 2026-07-01) -- the headline freeze-scope
-        # probe. Toggle the pre-allocated per-clip connect eq (seat_body <-> world@seat) ACTIVE now (mid-episode
-        # eq_active; pre-seat activation forbidden per restore-gate log:6814 C2 -> gated on the verified seat above).
-        # PER-CLIP: ONLY seat_body is anchored; body29/28.. stay articulated (measured over the guide below). The
-        # anchor is set to the seat body's CURRENT world pos (~clip groove 809) so activation does NOT yank it.
-        _perclip_on = os.environ.get("PERCLIP_PIN", "0") == "1"
-        _pin_refused = bool(_perclip_on and _seat_gate_on and not _c1_seated)
-        if _pin_refused:  # the seat gate is the branch the comment above always claimed was here
-            print(
-                "  [C2] C1 SEAT GATE: REFUSING TO PIN -- the cable is not in the C1 groove. Welding an unseated "
-                "cable is outside the Rs pin authorization (mirror policy_route_runner._pin_replay:309). "
-                "Re-run with C1_SEAT_GATE=0 for the pre-gate behaviour."
+        # NO-KINEMATIC (Rs 2026-07-19): the PERCLIP_PIN (b)-pin activation arc (inline eq_data/eq_active
+        # writer on the verified C1 seat) is REMOVED -- the sec0#5 clip-retention pin exception is
+        # superseded; retention must come from physical clip contact (design sec14.10). A caller setting
+        # the env var learns LOUDLY (a silent no-pin run scored as evidence is the 07-12 failure class).
+        # Historical activation block: git 349d13551c and earlier.
+        if os.environ.get("PERCLIP_PIN", "0") == "1":
+            raise RuntimeError(
+                "PERCLIP_PIN REMOVED (Rs directive 2026-07-19 kinematic complete-removal): the pin/weld "
+                "exception is superseded -- clip retention must be physical contact (design sec14.10)"
             )
-            _perclip_on = False  # DO NOT FIRE
-        _fs_on = _perclip_on or os.environ.get("FREEZE_SCOPE", "0") == "1"
+        _fs_on = os.environ.get("FREEZE_SCOPE", "0") == "1"
         _pin_eqid, _z_c1_after_pin = None, None
         # W0-e producer field (%9 pin-excluded floor bar / %12 pin-frame-onward, 2026-07-05): _seat_geom_mj = the
         # mujoco cable geom co-located with the pinned seat body -> EXCLUDED from the POST-pin cable<->C1 min-dist
-        # (the free-neighbor "床" bar; pre-pin uses ALL geoms so the un-pinned body's penetration is NOT masked).
+        # (the free-neighbor "floor" bar; pre-pin uses ALL geoms so the un-pinned body's penetration is NOT masked).
         # _c1_np_min/_c2_pen_min = per-clip episode-min penetration (mm, <0=penetration) = the planned producer field.
+        # With the pin removed these stay at their inits (pin-off downstream paths are unchanged).
         _seat_geom_mj, _c1_np_min, _c2_pen_min = None, 9e9, 9e9
-        if _perclip_on:
-            assert scene_info.get("perclip_pin_n", 0) > 0, "PERCLIP_PIN=1 but build_scene pre-allocated no eqs"
-            wp.synchronize()
-            mujoco.mj_forward(mjm, mjd)  # refresh mjd.xpos so the seat-body position-match is current
-            _seat_world = state.body_q.numpy()[seat_body, :3].astype(float).copy()
-            # W0-e: the mujoco cable geom co-located with the pinned seat body (world-pos match, no Newton<->mjc index
-            # assumption -- same primitive as the eq match below) -> excluded from the POST-pin free-neighbor floor bar.
-            _seat_geom_mj = (
-                min(cable_geoms, key=lambda g: float(np.linalg.norm(np.asarray(mjd.geom_xpos[g]) - _seat_world)))
-                if cable_geoms
-                else None
-            )
-            # Activate the pre-allocated DISABLED connect-to-world eq whose body1 IS the runtime seat body, found by
-            # WORLD-POSITION match (no Newton<->mjc index assumptions): mjd.xpos[eq_obj1id] == the seat body's pos.
-            _best, _bestd = None, 9e9
-            for i in range(int(mjm.neq)):
-                if (
-                    int(mjm.eq_type[i]) == int(mujoco.mjtEq.mjEQ_CONNECT)
-                    and int(mjm.eq_obj2id[i]) == 0
-                    and int(mjm.eq_active0[i]) == 0
-                ):
-                    _d = float(np.linalg.norm(np.asarray(mjd.xpos[int(mjm.eq_obj1id[i])]) - _seat_world))
-                    if _d < _bestd:
-                        _bestd, _best = _d, i
-            assert _best is not None and _bestd < 5e-3, (
-                f"PERCLIP_PIN: no disabled connect eq matches the runtime seat body (best dist {_bestd * 1e3:.2f}mm)"
-            )
-            _pin_eqid = _best
-            mjm.eq_data[_pin_eqid, 0:3] = [0.0, 0.0, 0.0]  # anchor in seat-body frame = its origin
-            mjm.eq_data[_pin_eqid, 3:6] = _seat_world  # anchor in world frame = current seat pos (~clip groove)
-            mjd.eq_active[_pin_eqid] = 1
-            if _demo_rec is not None:  # P3 recorder: eq-pin AFTER activation (spec §2.5)
-                _demo_rec.note_pin(_pin_eqid, seat_body)
-            for _ in range(40):
-                state = physics_step(model, state, solver, contacts, scene_info)
-            _z_c1_after_pin = _zc1()
-            print(
-                f"  [PERCLIP_PIN] ACTIVATED eq#{_pin_eqid} on the EXACT runtime seat body idx{seat_body} "
-                f"(position-match {_bestd * 1e3:.3f}mm) @world{[round(v, 4) for v in _seat_world]}; "
-                f"z_c1 {z_c1_seated:.1f}->{_z_c1_after_pin:.1f}mm; eq_active={int(mjd.eq_active[_pin_eqid])} "
-                f"(does the pin hold the seat? body29/28.. freedom measured over the guide below)"
-            )
-            _cap(f"PERCLIP_PIN ON seat idx{seat_body}: z_c1={_z_c1_after_pin:.1f}mm")
 
         _ph("L_HALF_UNCLAMP")
         # (3) L HALF-UNCLAMP: ramp L CLOSE->HALF (R stays CLOSED = the +Y anchor). MEASURE is_cradle through the
