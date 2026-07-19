@@ -211,3 +211,33 @@ Target: **v2.4.1** sha256 `8310cb6fd3f8f239…` (359 lines, bank `ba10218549`, E
 - 副作用なし (delta = header records + cert 2 fields + 1 bullet のみ); version 履歴に v2.4 full sha + 私の §10 verdict sha を正確に記録 ✓。
 
 **FINAL CONFIRM = PASS。設計軸は D1.1-A DESIGN v2.4.1 (`8310cb6fd3f8f239…`) + EvidencePolicy v1.2 (`9ef8d558d0ebea44…`) を pN DESIGN verify (最終 sha 宛) へ送る状態にある。** 私の設計軸残タスク = pN verdict readback のみ。residual open = review-4 transcript の Rs 確認 PENDING (fidelity — 設計内容の blocker ではない)。impl は pN DESIGN PASS → pre-check → rule-check → path freeze まで CLOSED 不変。
+
+---
+
+## 12. ADDENDUM — v2.4.1→v2.7.1 全区間 re-check (pS, 2026-07-19 15:52 JST 実測)
+
+⚠ **honest scope**: 私の前 anchor = v2.4.1 (§11)。以後 **pN DESIGN HOLD B1-B7 (v2.5) → RV4 (v2.6) → RV5 (v2.7) → records-only (v2.7.1)** の未検証区間があった。PASS は検証 sha にのみ bind ゆえ、区間全体を照合。⭐**pN が私の FINAL CONFIRM PASS した exact sha (v2.4.1 `8310cb6fd3f8`) に対し B1-B7 の HOLD を出した** — 層状 gate が私の solo 3-round + final の逃した点を捕捉 (debate cycle-1 に続く 2 度目)。
+
+Targets (bank `86d127b5c0`, shas = 実測 == pQ claim): DESIGN **v2.7.1** `64e2b005d6dd7f7a…` (v2.7→v2.7.1 = design body 無変更・transcript fidelity PENDING→CONFIRMED のみ、私が git diff で確認) + EP **v1.5** `6dc3f93b78c9e673…` + JSON fixture `WMSO_EvidencePolicy_v1.5.json` `3b568dcf851feaca…`。EP markdown ↔ JSON = **全 cell 突合で完全一致** (grades/groups/proof_policy 各 grade×component/proof_binding/trust_boundary/applicability_rules/profiles) — W-P0-6 の三面一致要件を満たす (semantic hash は impl golden fixture へ正直に defer)。
+
+### 12.1 fold の忠実性 = B1-B7 + RV4 + RV5 全項 faithful/sound (要点)
+- **B2** callable identity 衝突 = §1.2 `callable_selector` を **hash-visible slot 化 (ExecutionBundleHash→ActionId 参加)**・canonical 形式 pin・旧 record-only scripted_callable_ref 廃止 → 衝突除去。✓
+- **B3** = §3-4 BehaviorSignature を **補集合定義** (列挙漏れを fail-closed 化、新 field は既定で signature 入り) + semantic schema 2 面追加。✓ (ただし面数 stale = G-2)
+- **B4** proof binding = EP §3d に total payload/binding + trust boundary (proof_artifact_resolver)。✓
+- **B5** ceiling = **私の lane の見落とし。Rs 確定表 (RECONSTRUCTED closed-loop 不可) を設計内 register ④ で per-component ≥2 に緩めていた** → EP §4 で **全 required ≥3 整列・register ④ 撤回**・「human-ruled ceiling の変更権限は設計内宣言に無い」明記。私が §7/§9 で register ④ を「sound」と通した点を訂正する fix。✓
+- **B6** 順序 = EP §3b を単一順序 (kind.value UTF-8 bytes) に固定・旧二義撤回。✓
+- **B7** registry = §1.4 **transitive projection** (definition が実参照する schema のみ・全域でない)・content-addressed producer_handoff_schema_hash・E_REGISTRY_DUPLICATE。✓
+- **B1** custody/fidelity = pN HOLD transcript bank + **pN 著者 readback CONFIRMED (15:42)**、review-4 transcript = RV5 §7-1 が Rs 確認提供 → **両 transcript fidelity leg CLOSE**。✓
+- **RV4/RV5** = TP+2 field (final_training_config_hash/final_source_commit)・TP applicability N/A for SCRIPTED/WAIT・EvidenceEvaluation trust boundary・JSON fixture — §11 W'/RV4 fold-map の全 anchor を body で確認。✓
+
+### 12.2 pS misses owned (pN HOLD; records-must-match-fact)
+私が v2.4.1 で PASS した設計に pN が見つけた 7 点のうち、**B5 は完全に私の lane** (Rs 専権 ceiling の設計内緩和 = 先走り抑制の核心を私が見逃した)。B2/B3 = identity 完全性 (value/cross-surface pass)、B4 = proof が「存在」だけで「束縛」を検査しない (structural≠measured)、B6 = 二義順序 (value 級)。§9/§10 の checklist を持ちながら B5 の register ④ を「sound」と通したのは、**「設計内 register は Rs 文言を supersede できる」を無検査で受けた** — 私の R-2 で「enumerated-only register は正当」と判定した延長で、register が human-ruled 面を触る時の権限接地を怠った。→ checklist に (g) **register 項目ごとに「触れる面が human-ruled か」を判定し、human-ruled なら Rs 明示裁定を要求 (設計内宣言で緩めない)** を追加。
+
+### 12.3 findings (機械照合で検出)
+- **G-1 (records, W-P0-1 class)**: DESIGN §4 line 239「全表 = EvidencePolicy **v1.4**」← 現 EP + JSON は **v1.5**。stale policy-version pointer = RV5-W-P0-1 が叩いたのと同一 class。→ v1.5 に更新。
+- **G-2 (records/test-completeness)**: B3 mutation 面数が §8 corpus:502 と §11 fold-map:532 で「**11 面**」、§3-4 body:193 (正) と RV5 fold:558 で「**13 面**」。impl が §8:502 を読むと mutation case を **RV5-W-P0-4 が要求した semantic schema 2 面ぶん過少 test** する。→ 502/532 を 13 に整合 (または「11 base + 2 = 13」明記)。
+- **G-3 (records, small)**: DESIGN header:15 が私の verify 記録を「banked `cd5482310d`」と cite。実際の last bank = `59b7720408` (sha `43ef06ef7f13`)。→ 更新。加えて **本 §12 追記後は私の記録が再び working-tree only** → RV5 §7-8 の順 (design/policy/pS record bank → pS final delta → pN 再 verify) どおり、pN 再 verify 前に pQ が私の記録を再 bank する必要 (custody leg、C-P0-2 の継続)。
+- **⭐G-4 (MEDIUM, cross-surface — RV5-W-P0-2 の部分未閉)**: RV5-W-P0-2 の fix (TP→N/A for SCRIPTED/WAIT) は TP を解くが、**SCRIPTED/WAIT は POLICY_ARTIFACT を CLOSED_LOOP で ≥3 に到達できない**。理由 = POLICY_ARTIFACT@HASH_BOUND(≥3) の A群 proof set が **SOURCE_COMMIT・CONFIG_HASH** を要求し、その binding (EP §3d/JSON) は learned 文脈 (final_source_commit / final_training_config_hash) に束縛。scripted は lineage=N/A ゆえ両 field = null → binding 不能 or null 不一致 → scripted POLICY_ARTIFACT は grade 2 (RECONSTRUCTED) が上限 → **CLOSED_LOOP 不可 (SHADOW/OFFLINE 止まり)**。WMSO は「scripted/transition/recovery/wait に依存」(RV5 逐語) ゆえ emergent な cap を放置しない。→ 解 = (a) 非学習 POLICY_ARTIFACT の evidence path を定義 (source-closure 再現ベース、訓練 proof でなく)、**又は** (b) 「D1.1-A では scripted/wait を SHADOW/OFFLINE cap・closed-loop は後段」を**明示** (emergent にしない)。⚠ (b) 意図なら fix 不要・記述のみ = 私は intent 確認を求める (誤 MEDIUM の可能性を明記)。
+
+### 12.4 Verdict
+**PASS-WITH-CONDITIONS (v2.7.1 `64e2b005d6dd7f7a` 宛)**。B1-B7/RV4/RV5 fold = 忠実・健全 (特に B5 = 私の lane の見落としを正しく修正)。EP↔JSON = 完全一致。G-1/G-2/G-3 = records・G-4 = cross-surface 実質 (intent 確認で記述解になり得る)。→ **G-1..G-4 fold → v2.7.2 + 私の記録 re-bank → pS final delta → pN 再 verify (最終 sha 宛)**。RV5 §6-5 = 本 bounded fix 後 D1.1-A **freeze → D1.1-B/C + 2-3 skill boundary-only** (Rs 方向) を design header が正しく保持。impl は pN DESIGN PASS まで CLOSED 不変。⭐**私の PASS は pN/panel を代替しない (層の一つ)** — G-4 も pN 再 verify で追加検出があり得る。

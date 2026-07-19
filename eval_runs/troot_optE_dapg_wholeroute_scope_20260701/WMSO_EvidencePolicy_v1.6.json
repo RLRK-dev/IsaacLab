@@ -1,7 +1,8 @@
 {
   "artifact": "WMSO_EvidencePolicy",
-  "policy_semver": "1.5.0",
-  "source_markdown": "WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md v1.5",
+  "policy_semver": "1.6.0",
+  "source_markdown": "WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md v1.6",
+  "non_learned_grade_bound": "SCRIPTED/WAIT reach HASH_BOUND_REPRODUCED(3) via kind-conditioned bindings; EXACT_TRAIN_TIME(4) unreachable (train-time-only proofs) — same ceiling row as HB, no functional loss (G-4)",
   "note_semantic_hash": "evidence_policy_definition_hash = H_WCJ(this object minus this note and source_markdown) is computed and pinned by the impl-stage golden fixture test (markdown/JSON/code three-way parity). No hand-computed hash is published here (records-vs-fact).",
   "grades": [
     {"name": "EXACT_TRAIN_TIME", "rank": 4},
@@ -68,8 +69,8 @@
   "proof_binding": {
     "_payload_rule": "artifact_hash required (64-hex lowercase) for all kinds except SOURCE_COMMIT (must be null; ref = 40-hex commit id, violation = E_PROOF_REF_MALFORMED); missing = E_PROOF_PAYLOAD_MISSING",
     "FINAL_ARTIFACT_HASH": {"binds_to": {"POLICY_ARTIFACT": "ExecutionBundle.executable_artifact_hash", "MODEL_ARCHITECTURE": "model_architecture slot hash", "TENSOR_BINDING": "tensor_binding slot hash", "NORMALIZATION": "normalization slot hash", "RUNTIME_CONFIG": "runtime_config slot hash", "TRAINING_DATASET": "TrainingProvenance.demo_dataset_hash", "TRAINING_PROVENANCE": "TrainingProvenance.final_artifact_hash"}},
-    "CONFIG_HASH": {"binds_to": "TrainingProvenance claimed-stage config hash: BC_THEN_RL BC-stage = bc_config_hash / final stage (RL_ONLY, BC_THEN_RL RL, BC_ONLY sole BC) = final_training_config_hash"},
-    "SOURCE_COMMIT": {"binds_to": "learned context: ref == TrainingProvenance.final_source_commit"},
+    "CONFIG_HASH": {"binds_to": "kind-conditioned (G-4): learned claim = TrainingProvenance claimed-stage config hash (BC_THEN_RL BC-stage = bc_config_hash / final stage = final_training_config_hash); SCRIPTED/WAIT claim = runtime_config slot hash (KNOWN at certification)"},
+    "SOURCE_COMMIT": {"binds_to": "kind-conditioned (G-4): learned claim = ref == TrainingProvenance.final_source_commit; SCRIPTED/WAIT claim = ref == closure source commit (registry-fixture held, provenance-attached)"},
     "INPUT_SCHEMA_HASH": {"binds_to": "H_WCJ(semantic_obs_schema)"},
     "OUTPUT_SCHEMA_HASH": {"binds_to": "H_WCJ(semantic_action_schema)"},
     "NORMALIZER_HASH": {"binds_to": "normalization slot hash (KNOWN); slot EXPLICIT_NONE -> claim N/A"},
