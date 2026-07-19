@@ -1,12 +1,13 @@
-# P-D1 PREREG — arm-PD de-risk probe (design v1.5) 【v1.1 — FROZEN at this commit; runs after p5's declared-band readback】
+# P-D1 PREREG — arm-PD de-risk probe (design v1.6) 【v1.2 — FROZEN at this commit; runs immediately after (order pre-agreed with p5 12:44)】
 
 | prereg ver | commit | note |
 |---|---|---|
 | v1.0 | `8ed56f65ea` | SUPERSEDED — froze pre-review; its 5-run batch = DIAGNOSTIC/NON-EVIDENCE (`fa1e786b46` disposition) |
-| v1.1 | 〔this commit〕 | design v1.5 compliance: B1-strip / L-P0 REQUIRED-to-RUN / L-P2′+P-1/P-2 / **R3 stale-target primary negative (§12.1)** / A-1..A-6 (§12.2) with declared bands |
+| v1.1 | `879df7945a` | design v1.5 compliance: B1-strip / L-P0 REQUIRED-to-RUN / L-P2′+P-1/P-2 / stale-target primary negative (§12.1) / A-1..A-6 (§12.2) with declared bands。**SUPERSEDED-pending by v1.2 (review v3)** — no runs were executed under it |
+| v1.2 | 〔this commit〕 | review v3 fold: Rs canonical R0-R4 matrix + named contrasts + **A-7 pin/eq ownership** (eq slice byte-identity + expected-unfired; smoke-10 PASS) + B2 = STOP+design-delta+p5/pN re-review gate (v1.6-②; implementer may not select B2) + declared bands inherited (p5 readback ALL-ACCEPT 12:30, §12.2-R) |
 
 - **Author:** RS-TECH-LEAD (w2:p4). **Status per the review's P0-2 taxonomy:** production impl CLOSED / probe scaffolding BUILT-UNLANDED (v0.5) / smokes+diagnostic batch EXECUTED (non-evidence) / probe evidence NONE until this v1.1's runs / authority CLOSED.
-- **Design:** `ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md` **v1.5** (bank `a584be8545`, version-table fixes `c951a072d7`+`084064778d`; chain: v1.1 @4 / v1.2 Option B / v1.3 route-start re-pose / v1.4 review-v1 compliance + B1-strip / v1.5 review-v2 residuals + §12). **Findings:** `b9eaaf9d93`, `c1da5dcf54`; **disposition + diagnostic batch:** `fa1e786b46`. **Brief:** `1ee8be5c9e`. **Rs reviews:** v1 + v2 (`~/Downloads/PLAN_STATUS_review{,_v2}_2026-07-19.md`).
+- **Design:** `ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md` **v1.6** (bank `f200bfd78c` + cell `cdf429e702`; chain per §0.0 table: v1.0-v1.5 all banked + v1.6 review-v3 arm-lane fold). **Findings:** `b9eaaf9d93`, `c1da5dcf54`; **disposition + diagnostic batch:** `fa1e786b46`. **Brief:** `1ee8be5c9e`. **Rs reviews:** v1 + v2 + v3 (`~/Downloads/PLAN_STATUS_review{,_v2,_v3}_2026-07-19.md`).
 - **PD-write surface (v1.5-① s1-s4):** s1 `apply_recorded_arm_ff` ctrl write (FF actual path = THE probe drive site) / s2 `newton_route_env` RL-path branch (present, NOT exercised in FF — S-1 scope) / s3 route-start re-pose / s4 harness M-4 sync.
 - **#3 mechanism (implemented, smoke-validated):** flag-gated B-class boundary init in `_reset_worlds` — arm q := recording frame-0 exact values + qd 0 + ctrl target-sync (M-4), gripper-OPEN ∧ not-grasping guard asserts, loud + `route_start_repose_count` in the summary. Smoke-4: fires once/episode, **err[0] = 4e-5 rad** (the repurposed L-P4 "no haul" predicate at smoke level).
 - **Neutralization mechanism (v1.4-③): B1-STRIP** — the 12 imported ur5e.xml arm actuators are removed at the proto (vendor values captured + numerically cross-checked first); census asserts exact nu (16 PD / 4 L-P0), imported set structurally ABSENT. Smoke-5/6 PASS. No dynamic force≡0 test needed (that requirement attaches to the B2 fallback only).
@@ -14,7 +15,7 @@
 
 ## 1. Substrate (pinned)
 
-- Worktree branch `probe/pd1-arm-pd` (base `0f39f7b598`), **final code sha = `a217086822`** (v0.2 `ab834ef4ab` FF-ctrl / v0.3 `5084712d2c` re-pose+body_q / v0.4 `3b7251029c` B1-strip / v0.5 `a217086822` **stale-R3 + A-suite**). Probe-only; NOT landed; landing = L3 chain + Rs sign-off (design §9). Path-freeze scope note (review ⑧): the probe touches committed files only; the S-1 migration path freeze will enumerate committed / WIP / excluded separately.
+- Worktree branch `probe/pd1-arm-pd` (base `0f39f7b598`), **final code sha = `7b4690eed2`** (v0.2 `ab834ef4ab` FF-ctrl / v0.3 `5084712d2c` re-pose+body_q / v0.4 `3b7251029c` B1-strip / v0.5 `a217086822` stale + A-suite / v0.6 `b9ced71d1a` A-7 witness / v0.7 `7b4690eed2` **A-7 full** [smoke-10 PASS]). Probe-only; NOT landed; landing = L3 chain + Rs sign-off (design §9). Path-freeze scope note (review ⑧): the probe touches committed files only; the S-1 migration path freeze will enumerate committed / WIP / excluded separately.
 - Env: `NewtonRouteEnv` wc=1, FF whole-route, `route_c1_pin=True` (real pin), `g1_scene_align=True`, `route_c2_scene=True`, `INIT_XY_NOISE=0`, cadence RL@4 (`RL_SIM_SUBSTEPS=4`, no knob — 訂正#1).
 - Recording: `w0e_81rerun_snapdown_0537/cell_x0_y0/route_demo_raw.npz` (nominal; harness pins sha256 into provenance).
 - Venv `/home/rlrk/env_isaaclab7` (exact `sys.prefix` bar) / `CUDA_VISIBLE_DEVICES=0` / `--device cuda:0` / MUJOCO_GL=egl / fresh-outbox + device + source-closure hard bars (gonow lineage, all inherited in `armpd_probe.py`).
@@ -40,18 +41,21 @@
 - **L-P0 magnitude (v1.4-④ REQUIRED):** R0-vs-R0b same-seed divergence under the B1 mechanism: per-frame arm |Δq|, predicate deltas, parity table — the tug-of-war component alone (Rs caveat-scale material, design §7-5; evidence-grade with verification legs + the video leg).
 - **L-P4 (repurposed per v1.3):** verify |q−ctrl| stays within the transient bar **from frame 0** after the route-start teleport+sync (no physical haul) — scored on R1. M-5 ramp now applies only to residual discontinuities; **R2 (ramp-on) is retained as a mechanism no-regression leg**: with a synced start the ramp should be ≈identity, so R2 ≈ R1 is EXPECTED — a large R2-vs-R1 divergence = LOUD anomaly (reported, not barred).
 
-## 3. Run matrix (v1.5-② 6 runs, frozen order; each: fresh outbox leaf, `--episode-steps 900`, set -e fail-closed sequencing, launched from the worktree)
+## 3. Run matrix 【v1.2 — Rs canonical R0-R4 form per review v3 A-P0-4; freeze pending design v1.6】
+(each: fresh outbox leaf, `--episode-steps 900`, set -e fail-closed sequencing, launched from the worktree)
 
-| run | tag | flags | substrate | pass-role (decision での役割) |
-|---|---|---|---|---|
-| R0 | `r0v11_kin` | (none) | banked AS-IS (imported tug present, kinematic) | characterization only (contaminated reference; L-P2 non-acceptance) |
-| R0b | `r0v11_lp0` | `--neutralize-only` | clean (B1-strip), kinematic | **L-P0 REQUIRED-to-RUN** impact assessment (gates banked-evidence reuse, NOT a probe pass condition) + the L-P2′ clean reference |
-| R1 | `r1v11_pd` | `--arm-pd` | clean, PD drive | **primary**: L-P1/L-P3 bars (vs own ctrl≡intended) + L-P4 no-haul + L-P2′ parity vs R0b + M-6 dwell leg |
-| R2 | `r2v11_pd_ramp` | `--arm-pd --ramp-frames 120` | clean, PD + M-5 ramp | mechanism no-regression (≈R1 expected; large delta = LOUD anomaly, reported) |
-| R3 | `r3v11_stale` | `--arm-pd --neg-stale` | clean, PD, ctrl frozen at route-start | **§12.1 PRIMARY negative control**: instrument calibration + fail-ability (scored vs intended stream) |
-| R4 | `r4v11_gains01` | `--arm-pd --gains-scale 0.1` | clean, PD ×0.1 gains | exploratory (non-gating gain-sensitivity reference) |
+| Run | tag | flags | Drive | Imported actuator | Purpose (pass-role) |
+|---|---|---|---|---|---|
+| R0 | `r0v12_kin` | (none) | kinematic | current/contaminated | historical substrate reference (characterization only) |
+| R1 | `r1v12_lp0` | `--neutralize-only` | kinematic | B1 clean | **L-P0 contamination isolation** (REQUIRED-to-RUN impact assessment; gates banked-evidence reuse, NOT a probe pass condition) + the L-P2′ clean reference |
+| R2 | `r2v12_pd` | `--arm-pd` | PD nominal | B1 clean | **main realization/acceptance contrast vs R1**: L-P1/L-P3 bars + L-P4 no-haul + L-P2′ parity + M-6 dwell leg |
+| R3 | `r3v12_ramp` | `--arm-pd --ramp-frames 120` | PD + M-5 ramp event | B1 clean | **ramp effect only** (contrast vs R2; ≈R2 expected at a synced start — large delta = LOUD anomaly) |
+| R4 | `r4v12_stale` | `--arm-pd --neg-stale` | PD, ctrl frozen | B1 clean | **fail-able instrumentation** (§12.1 calibration + fail-ability, scored vs intended stream) |
+| R5 | `r5v12_gains01` | `--arm-pd --gains-scale 0.1` | PD ×0.1 | B1 clean | exploratory extra beyond the Rs core (non-gating gain-sensitivity reference) |
 
-Outboxes: `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pd1_probe_20260719/<tag>/`; run logs to the parent dir. (New v1.1 tags — the v1.0 diagnostic leaves stay untouched as NON-EVIDENCE records.)
+**Named contrasts (review v3):** contamination effect = **R0 vs R1** / PD realization effect = **R1 vs R2** (the main clean-clean acceptance contrast) / total migration effect = **R0 vs R2** / ramp effect = **R2 vs R3**.
+
+Outboxes: `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pd1_probe_20260719/<tag>/`; run logs to the parent dir. (v1.2 tags — the v1.0 diagnostic leaves stay untouched as NON-EVIDENCE records.)
 
 ### Declared bands (v1.5 §12.2 — p5 readback target)
 
