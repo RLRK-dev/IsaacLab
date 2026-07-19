@@ -1,54 +1,59 @@
-# WMSO D1.1-A EvidencePolicy v1（DESIGN 付属 normative artifact）
+# WMSO D1.1-A EvidencePolicy v1.1（DESIGN 付属 normative artifact）
 
-- node: `T-WMSO`; author = w2:pQ; created 2026-07-19 10:5x JST（CC Debate cycle-1 U11/U12 fix — debate cycle-2 bundle + pN DESIGN verify の対象）
-- 親設計: `WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md` v2.2 §4（本 artifact が §4.3「全表」と §4.4「詳細表」の実体。`evidence_policy_hash` = 本 file の sha256）
-- status: DRAFT — cycle-2 debate → pS → pN DESIGN verify PENDING
+- node: `T-WMSO`; author = w2:pQ; v1 = 2026-07-19 10:54 JST / **v1.1 = 12:02 JST**（cycle-2 + Rs W-review fix: C-CH4/C-CH6/C-CH8/A-CH2/A-CH4/D-CH10/W-P1-3/records — 実測時刻運用開始）
+- 親設計: `WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md` v2.3 §4（本 artifact が全表の normative 実体。`evidence_policy_hash` = 本 file の sha256）
+- status: DRAFT v1.1 — pS delta re-check → pN DESIGN verify PENDING
+- v1 からの変更: §3 の 3 cell exact 化 / DC-3 準拠復元 / §3b ProofItem 順序・conflict 規則 / §4 EXPLICIT_NONE 免除 / §4b per-component 意味論の明示 / E_GRADE_INAPPLICABLE の S-group 拡張 / 引用 host 修正
 
-## 1. ProofKind semantics（15 種 — 親設計 §4.2 の enum と 1:1）
+## 1. ProofKind semantics（15 種 — 親設計 §4.2 の enum と 1:1; v1 から不変）
 
-| ProofKind | 意味（何を示せば成立か） |
+| ProofKind | 意味 |
 |---|---|
-| TRAIN_RUN_MANIFEST | 訓練 run の manifest（開始/終了・env・config 参照を含む一次記録） |
-| SOURCE_COMMIT | 訓練時 source の commit id（repo 実在） |
-| CONFIG_HASH | 訓練 config の sha256 |
-| INPUT_SCHEMA_HASH | 訓練時 観測 schema の sha256 |
-| OUTPUT_SCHEMA_HASH | 訓練時 行動 schema の sha256 |
-| NORMALIZER_HASH | normalizer state の sha256 |
-| FINAL_ARTIFACT_HASH | 対象 artifact（weights / dataset / config 等、component に応じた「物」）の sha256 |
-| TRAIN_TIME_CRYPTO_BINDING | 訓練時に生成された暗号学的束縛（hash chain / signed manifest） |
-| REPRODUCTION_PROCEDURE | 再現手順書（実行可能な手続き） |
-| REPRODUCED_OUTPUT_HASH | 再現実行の出力 sha256（一致証明） |
-| RECONSTRUCTION_SOURCES | 復元に用いた現存資料の列挙（path+sha） |
-| COMPATIBILITY_TEST | 互換性試験の記録（手順+結果） |
-| UNRESOLVED_DIFFERENCES | 未解決差分の明示列挙（空なら「なし」と明記） |
-| DIMENSION_SOURCE | 次元数の出所（checkpoint shape 等） |
-| EVALUATOR_ARTIFACT | 評価器実装の sha256（EvidenceRecord.evaluator_artifact_hash と一致必須） |
+| TRAIN_RUN_MANIFEST | 訓練 run の一次 manifest |
+| SOURCE_COMMIT | 訓練時 source commit id |
+| CONFIG_HASH | 訓練 config sha256 |
+| INPUT_SCHEMA_HASH | 訓練時 観測 schema sha256 |
+| OUTPUT_SCHEMA_HASH | 訓練時 行動 schema sha256 |
+| NORMALIZER_HASH | normalizer state sha256 |
+| FINAL_ARTIFACT_HASH | 対象 artifact sha256 |
+| TRAIN_TIME_CRYPTO_BINDING | 訓練時暗号束縛 |
+| REPRODUCTION_PROCEDURE | 再現手順書 |
+| REPRODUCED_OUTPUT_HASH | 再現出力 sha256 |
+| RECONSTRUCTION_SOURCES | 復元資料列挙（path+sha） |
+| COMPATIBILITY_TEST | 互換性試験記録 |
+| UNRESOLVED_DIFFERENCES | 未解決差分の明示列挙 |
+| DIMENSION_SOURCE | 次元数の出所 |
+| EVALUATOR_ARTIFACT | 評価器実装 sha256 |
 
-## 2. component 群（13 component を 3 群に分類）
-
-- **A: artifact 系**（「物」がある）= POLICY_ARTIFACT / MODEL_ARCHITECTURE / NORMALIZATION / TRAINING_DATASET / RUNTIME_CONFIG / TENSOR_BINDING
-- **S: schema/spec 系**（意味定義）= OBSERVATION_SCHEMA / ACTION_SCHEMA / INITIATION_SPEC / TERMINATION_SPEC / HANDOFF_SCHEMA / CONTROL_MODE
+## 2. component 群（v1 から不変）
+- **A: artifact 系** = POLICY_ARTIFACT / MODEL_ARCHITECTURE / NORMALIZATION / TRAINING_DATASET / RUNTIME_CONFIG / TENSOR_BINDING
+- **S: schema/spec 系** = OBSERVATION_SCHEMA / ACTION_SCHEMA / INITIATION_SPEC / TERMINATION_SPEC / HANDOFF_SCHEMA / CONTROL_MODE
 - **P: provenance 系** = TRAINING_PROVENANCE
 
-## 3. ProofPolicy — (component_kind, grade) → required ProofKind set（total 定義）
-
-規則形で全 65 cell を定義する（表外 cell は存在しない）。requires(群, grade) =
+## 3. ProofPolicy — (component_kind, grade) → required ProofKind set（total・全 cell 一意）
 
 | grade | A: artifact 系 | S: schema/spec 系 | P: TRAINING_PROVENANCE |
 |---|---|---|---|
-| EXACT_TRAIN_TIME | TRAIN_RUN_MANIFEST + SOURCE_COMMIT + CONFIG_HASH + FINAL_ARTIFACT_HASH + TRAIN_TIME_CRYPTO_BINDING | TRAIN_RUN_MANIFEST + SOURCE_COMMIT + (INPUT_SCHEMA_HASH if OBSERVATION_SCHEMA / OUTPUT_SCHEMA_HASH if ACTION_SCHEMA / CONFIG_HASH otherwise) | TRAIN_RUN_MANIFEST + SOURCE_COMMIT + FINAL_ARTIFACT_HASH + TRAIN_TIME_CRYPTO_BINDING |
-| HASH_BOUND_REPRODUCED | CONFIG_HASH + FINAL_ARTIFACT_HASH + REPRODUCTION_PROCEDURE + REPRODUCED_OUTPUT_HASH + EVALUATOR_ARTIFACT | REPRODUCTION_PROCEDURE + REPRODUCED_OUTPUT_HASH + (INPUT_SCHEMA_HASH / OUTPUT_SCHEMA_HASH / CONFIG_HASH — 同上の対応) + EVALUATOR_ARTIFACT | CONFIG_HASH + FINAL_ARTIFACT_HASH + REPRODUCTION_PROCEDURE + EVALUATOR_ARTIFACT |
-| RECONSTRUCTED_COMPATIBLE | RECONSTRUCTION_SOURCES + COMPATIBILITY_TEST + UNRESOLVED_DIFFERENCES + EVALUATOR_ARTIFACT | RECONSTRUCTION_SOURCES + COMPATIBILITY_TEST + UNRESOLVED_DIFFERENCES + EVALUATOR_ARTIFACT | RECONSTRUCTION_SOURCES + UNRESOLVED_DIFFERENCES + EVALUATOR_ARTIFACT |
-| DIMENSION_ONLY | DIMENSION_SOURCE（+ semantic unresolved 宣言 = UNRESOLVED_DIFFERENCES） | 同左 | （P に DIMENSION_ONLY は無意味 → **認定不可** = `E_GRADE_INAPPLICABLE`） |
-| UNKNOWN | （無条件 — authority-relevant claim 一切不可） | 同左 | 同左 |
+| EXACT_TRAIN_TIME | TRAIN_RUN_MANIFEST + SOURCE_COMMIT + CONFIG_HASH + FINAL_ARTIFACT_HASH + TRAIN_TIME_CRYPTO_BINDING | TRAIN_RUN_MANIFEST + SOURCE_COMMIT + schema-hash(下記 †) | TRAIN_RUN_MANIFEST + SOURCE_COMMIT + FINAL_ARTIFACT_HASH + TRAIN_TIME_CRYPTO_BINDING |
+| HASH_BOUND_REPRODUCED | **SOURCE_COMMIT** + CONFIG_HASH + FINAL_ARTIFACT_HASH + REPRODUCTION_PROCEDURE + REPRODUCED_OUTPUT_HASH + EVALUATOR_ARTIFACT | **SOURCE_COMMIT** + REPRODUCTION_PROCEDURE + REPRODUCED_OUTPUT_HASH + schema-hash(†) + EVALUATOR_ARTIFACT | **SOURCE_COMMIT** + CONFIG_HASH + FINAL_ARTIFACT_HASH + REPRODUCTION_PROCEDURE + **REPRODUCED_OUTPUT_HASH** + EVALUATOR_ARTIFACT |
+| RECONSTRUCTED_COMPATIBLE | RECONSTRUCTION_SOURCES + COMPATIBILITY_TEST + UNRESOLVED_DIFFERENCES + EVALUATOR_ARTIFACT | RECONSTRUCTION_SOURCES + COMPATIBILITY_TEST + UNRESOLVED_DIFFERENCES + EVALUATOR_ARTIFACT | RECONSTRUCTION_SOURCES + **COMPATIBILITY_TEST** + UNRESOLVED_DIFFERENCES + EVALUATOR_ARTIFACT |
+| DIMENSION_ONLY | **{DIMENSION_SOURCE, UNRESOLVED_DIFFERENCES}**（literal — C-CH8）。ただし**次元概念を持たない component は `E_GRADE_INAPPLICABLE`**: P 全体 + S のうち INITIATION_SPEC / TERMINATION_SPEC / HANDOFF_SCHEMA / CONTROL_MODE（D-CH10）。適用可 = OBSERVATION_SCHEMA / ACTION_SCHEMA / A 群 |
+| UNKNOWN | （無条件 — authority-relevant claim 不可） |
 
-- component 個別の追加要求（群規則への上書き、これで total）: **NORMALIZATION**@EXACT は + NORMALIZER_HASH。**TRAINING_DATASET**@{EXACT, HASH_BOUND} の FINAL_ARTIFACT_HASH = dataset の sha256。**TENSOR_BINDING / CONTROL_MODE / RUNTIME_CONFIG**@EXACT は TRAIN_RUN_MANIFEST 内の該当節 or CONFIG_HASH で足りる（独立 manifest を要求しない — 訓練 config に含まれる性質のため）。
-- 不足 = `E_PROOF_INSUFFICIENT`（1 段下の grade で再提出可 — 単調）。
-- **1 component = 1 certified claim**（重複 = `E_EVIDENCE_DUPLICATE`）。複数根拠 = claim 内 ProofItem 列。duplicate proof（同 kind 同 ref）は冪等単一。`notes` は evidence_bundle_hash 対象外。
-- **grade rank（明示）**: EXACT_TRAIN_TIME=4 > HASH_BOUND_REPRODUCED=3 > RECONSTRUCTED_COMPATIBLE=2 > DIMENSION_ONLY=1 > UNKNOWN=0。
-- **evidence record 不在の required component は UNKNOWN(0) として集約**（missing = 最弱、fail-closed）。
+† schema-hash = INPUT_SCHEMA_HASH（OBSERVATION_SCHEMA）/ OUTPUT_SCHEMA_HASH（ACTION_SCHEMA）/ CONFIG_HASH（他 S component）。
 
-## 4. Usage profiles（required set + min_grade — 親設計 §4.4 の「以上」を閉じる）
+- **DC-3 準拠復元（A-CH2）**: v1 で欠落していた SOURCE_COMMIT@HASH_BOUND（全群）、REPRODUCED_OUTPUT_HASH@P×HB、COMPATIBILITY_TEST@P×RECONSTRUCTED を追加（prereg §10b DC-3 の列挙に一致 — supersession でなく準拠に戻す）。
+- **3 cell の exact 化（C-CH4）**: 旧「TB/CM/RC@EXACT は…or…」の disjunction を廃止。**(TENSOR_BINDING | CONTROL_MODE | RUNTIME_CONFIG, EXACT_TRAIN_TIME) = {TRAIN_RUN_MANIFEST, SOURCE_COMMIT, CONFIG_HASH}**（config が該当節を運ぶ; FINAL_ARTIFACT_HASH / TTCB は要求しない — 独立 artifact が無い component のため）。NORMALIZATION@EXACT は A 群規則 + NORMALIZER_HASH。TRAINING_DATASET@{EXACT, HB} の FINAL_ARTIFACT_HASH = dataset sha256。
+- 不足 = `E_PROOF_INSUFFICIENT`（1 段下 grade で再提出可）。**1 component = 1 certified claim**（重複 = `E_EVIDENCE_DUPLICATE`）。`notes` は evidence_bundle_hash 対象外。
+- grade rank: EXACT=4 > HASH_BOUND=3 > RECONSTRUCTED=2 > DIMENSION_ONLY=1 > UNKNOWN=0（rank は親設計で `.rank` 属性、`.value` = member 名文字列 — C-CH5）。
+- **record 不在の required component は UNKNOWN(0) として集約**。
+
+### 3b. ProofItem の canonical 順序と conflict（W-P1-3）
+- claim 内 ProofItem の canonical 順 = **(kind の rank〔enum 宣言順位でなく §1 表の行順 = ProofKind.value 文字列 bytes 順で固定〕, ref, artifact_hash-or-empty)** の tuple 昇順。
+- **exact duplicate**（kind, ref, artifact_hash 全一致）→ 冪等 dedupe（hash に 1 回のみ寄与）。
+- **同 (kind, ref) で artifact_hash が異なる** → `E_PROOF_CONFLICT`（fail-closed — 曖昧な証拠を黙って選ばない）。
+
+## 4. Usage profiles（required set + min_grade）
 
 | component | CLOSED_LOOP | SHADOW（非 authority） | OFFLINE_REPLAY |
 |---|---|---|---|
@@ -56,26 +61,24 @@
 | MODEL_ARCHITECTURE | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
 | OBSERVATION_SCHEMA | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
 | ACTION_SCHEMA | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
-| TENSOR_BINDING | ✓ ≥3 | ✓ ≥2 | —（replay は binding 不要 — 記録 obs/act の次元・意味は schema 側で判定） |
+| TENSOR_BINDING | ✓ ≥3 | ✓ ≥2 | —（replay は記録済み obs/act を扱い binding を再実行しない） |
 | NORMALIZATION | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
-| CONTROL_MODE | ✓ ≥3 | ✓ ≥2 | — |
+| CONTROL_MODE | ✓ ≥3 | ✓ ≥2 | —（replay は制御を発行しない — 制御様式の証拠は再生妥当性に効かない） |
 | RUNTIME_CONFIG | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
-| **TRAINING_PROVENANCE** | **✓ ≥2**（U12 — lineage 自己申告の根絶） | ✓ ≥2 | —（provenance は replay 妥当性に効かない — 記録は §5 参照） |
-| TRAINING_DATASET | BC 系 lineage のみ ✓ ≥2 | BC 系のみ ✓ ≥2 | — |
+| TRAINING_PROVENANCE | ✓ ≥2 | ✓ ≥2 | —（来歴は replay 妥当性に効かない; 記録義務は §5） |
+| TRAINING_DATASET | BC 系のみ ✓ ≥2 | BC 系のみ ✓ ≥2 | — |
 | INITIATION_SPEC | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
 | TERMINATION_SPEC | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
 | HANDOFF_SCHEMA | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
 
-（数値 = min grade rank。✓ = required。— = not required。）
+- 「**BC 系**」= **{BC_ONLY, BC_THEN_RL}**（明示列挙 — A-CH8）。
+- **EXPLICIT_NONE 免除（C-CH6/D-CH3）**: 対応 bundle slot が **EXPLICIT_NONE** の component は required set から**免除**される — certified definition 自体（kind 別許容表を通過した契約）が「実体不存在」を attest する。免除は `UsageEligibilityReport` に **loud に記録**（silent skip でない）。これにより SCRIPTED/WAIT は MODEL_ARCHITECTURE / TENSOR_BINDING / NORMALIZATION を免除され、残る required で eligibility を評価できる。UNKNOWN slot に免除は**無い**（知識不足は免除でなく失格）。
+- **eligibility の意味論（per-component; C-CH1/B-CH2）**: profile 充足 ⇔ **免除されない全 required component について、その component の達成 grade ≥ 表の min_grade**。「required set の最弱 grade が bind」は**この per-component 判定の帰結**（不在 = UNKNOWN(0) = 失格）として読む — 集約値を単一 matrix 行に写す uniform 読みは、本表の component 別 min_grade（TP/TD の ≥2）により**精緻化されて supersede** される（prereg §4 由来の文言との差 = 親設計 header の supersession register に記録）。
+- 整合: CLOSED_LOOP ≥3 required は Rs 確定表の「EXACT/HASH_BOUND = acceptance test 後に可」に対応。TP/TD の ≥2 は「該当 component に要求する下限」であり、ceiling matrix の行を置換しない。profile 単調: CLOSED_LOOP ⊇ SHADOW ⊇ OFFLINE_REPLAY（免除前の集合比較）。
+- usage matrix = ceiling。acceptance test は必要条件の一つ。closed-loop authority は O0/S0/V0 two-key + 独立安全 gate を必ず conjoin。「条件付き」cell 定義は親設計 §4 と同一。
 
-- 整合確認: CLOSED_LOOP ≥3 = HASH_BOUND 以上（Rs 確定表「acceptance test 後に可」の hash 系 2 grade に一致）。SHADOW/REPLAY ≥2 = RECONSTRUCTED 以上（確定表: RECONSTRUCTED = 非 authority shadow 可 / replay 可。DIMENSION_ONLY(1) は required set を満たせない = 診断のみ、UNKNOWN(0) 不可）。**profile は monotone**: CLOSED_LOOP ⊇ SHADOW ⊇ OFFLINE_REPLAY の required 包含が成立（TENSOR_BINDING/CONTROL_MODE/TRAINING_DATASET/TRAINING_PROVENANCE の除外は下位 profile のみ）。
-- **usage matrix = ceiling**。profile 充足は必要条件 — closed-loop authority は acceptance test + O0/S0/V0 two-key + 独立安全 gate を必ず conjoin（grant ではない）。
-- 「条件付き」cell の意味（親設計 §4.4 から継承）: 「acceptance test 後に可」= 独立 acceptance test PASS が追加必要条件 / 「非 authority のみ」= 出力が制御に接続されない記録・比較 mode 限定 / 「診断のみ」= replay 入力にも使わず次元・形式診断限定。
-
-## 5. 記録義務（profile 外でも常時）
-- 全 13 component の EvidenceRecord（UNKNOWN 含む）を bundle に**常時記録**する（profile が要求しない component も、不在でなく UNKNOWN として明示 — 沈黙禁止）。
-- D1-exit は component 別達成 grade を記録（binary 化禁止 — 親設計 P2）。
+## 5. 記録義務（v1 から不変）
+- 全 13 component の EvidenceRecord（UNKNOWN 含む）を常時 bundle に記録（沈黙禁止）。D1-exit は component 別達成 grade を記録（binary 化禁止 — **prereg §10 (c)=P2**〔host 修正 — B-CH1〕）。
 
 ## 6. 版管理
-- 本 artifact の変更は `evidence_policy_hash` を変え、既発行 ContractCertificate を retroactive に無効化しない（certificate は発行時 policy hash を持つ）。新規発行は最新 policy による。
-- 改訂は親設計の §9 fail-closed re-verify loop に従う（design 変更扱い）。
+- 本 artifact の変更は `evidence_policy_hash` を変え、既発行 certificate を retroactive に無効化しない。改訂は **prereg §9 の fail-closed re-verify loop**（host 明記 — A-CH4）に従う（design 変更扱い）。
