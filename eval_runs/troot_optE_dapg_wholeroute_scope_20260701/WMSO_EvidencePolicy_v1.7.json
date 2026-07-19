@@ -1,7 +1,7 @@
 {
   "metadata": {
     "artifact": "WMSO_EvidencePolicy",
-    "source_markdown": "WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md v1.7",
+    "source_markdown": "WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md v1.7.1",
     "hash_projection_rule": "evidence_policy_definition_hash = H_WCJ(policy_definition) - metadata is OUTSIDE the hash input (RV6 s2 / pN C2). For this ASCII-key, int-and-string-only object, H_WCJ equals sha256 of RFC8785-canonical JSON (UTF-16 and ASCII key orders coincide).",
     "definition_hash_derivation": "python3 -c \"import json,hashlib;d=json.load(open('WMSO_EvidencePolicy_v1.7.json'));print(hashlib.sha256(json.dumps(d['policy_definition'],sort_keys=True,separators=(',',':'),ensure_ascii=True).encode()).hexdigest())\"",
     "evidence_policy_definition_hash": "066eed1049f4f51a89dd86e9d50614a65adba070b2ff650424ea7cef05dec4ea",

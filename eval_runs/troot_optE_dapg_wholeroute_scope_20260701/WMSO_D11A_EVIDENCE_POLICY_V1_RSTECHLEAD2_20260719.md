@@ -1,9 +1,9 @@
-# WMSO D1.1-A EvidencePolicy v1.7（DESIGN 付属 normative artifact）
+# WMSO D1.1-A EvidencePolicy v1.7.1（DESIGN 付属 normative artifact）
 
-- node: `T-WMSO`; author = w2:pQ; v1 = 2026-07-19 10:54 JST / v1.1 = 12:02 / v1.2 = 12:41 / v1.3 = 13:33 / v1.4 = 14:00 / v1.5 = 14:24 / v1.6 = 16:03 / **v1.7 = 16:40 JST（実測）**（RV6 §2-§5 + pN C1/C2 fold: claim_target 機構 / 二層 JSON + definition hash 実算出・掲載 / resolver 分割 / evaluator registry）
-- 親設計: `WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md` **v2.9**（本 artifact が全表の normative 実体。`policy_document_sha256` = 本 file の sha256、validator/certificate が結合するのは §6 の **`evidence_policy_definition_hash`**）
+- node: `T-WMSO`; author = w2:pQ; v1 = 2026-07-19 10:54 JST / v1.1 = 12:02 / v1.2 = 12:41 / v1.3 = 13:33 / v1.4 = 14:00 / v1.5 = 14:24 / v1.6 = 16:03 / v1.7 = 16:40 / **v1.7.1 = 17:34 JST（実測 — pN R1: §3d 旧 REPRODUCED/TTCB 重複行を claim_target 規則へ統一・15 kind の一意/total 再照合済〔重複 0〕）**
+- 親設計: `WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md` **v2.9.2**（本 artifact が全表の normative 実体。`policy_document_sha256` = 本 file の sha256、validator/certificate が結合するのは §6 の **`evidence_policy_definition_hash`**）
 - **機械可読兄弟 artifact（RV5-W-P0-6 / RV6 §2 二層形）**: `WMSO_EvidencePolicy_v1.7.json` = `{metadata, policy_definition}`。**`evidence_policy_definition_hash` = H_WCJ(policy_definition) = `066eed1049f4f51a89dd86e9d50614a65adba070b2ff650424ea7cef05dec4ea`**（pN C2 の要求どおり banked JSON から**実算出・掲載** — policy_definition は ASCII-key・int/str のみで H_WCJ = RFC8785 正準 JSON の sha256 と一致〔UTF-16/ASCII key 順が一致する部分集合〕。導出 command = JSON metadata に埋込・第三者再計算可能。metadata の変更は hash 不変・validator 挙動を変える規則の変更のみ hash 変化）。impl 時の golden test = 本値と code 定数の一致検証。
-- status: **DRAFT v1.7** — pS 照合 → pN 再 verify PENDING（⚠版数は title/status/親 pointer の 3 所同期 — G-1 規則）
+- status: **DRAFT v1.7.1** — pN 最終 pin 再 verify PENDING（⚠版数は title/status/親 pointer の 3 所同期 — G-1 規則）
 - v1 からの変更: §3 の 3 cell exact 化 / DC-3 準拠復元 / §3b ProofItem 順序・conflict 規則 / §4 EXPLICIT_NONE 免除 / §4b per-component 意味論の明示 / E_GRADE_INAPPLICABLE の S-group 拡張 / 引用 host 修正。v1.1 からの変更: §3c ApplicabilityResolver（v3 W-P0-1 sketch 採用）/ §3 total-map 宣言 + cell 表記の置換/補完 意味明示（v3 W-P0-5）/ §6 semantic hash 分離（v3 W-P1-3）
 
 ## 1. ProofKind semantics（15 種 — 親設計 §4.2 の enum と 1:1; v1 から不変）
@@ -104,8 +104,7 @@ ApplicabilityResolver(kind, lineage, component)
 | SOURCE_COMMIT | **kind 条件付き（G-4/RV6 §4）**: learned claim = ref == `TrainingProvenance.final_source_commit` / **SCRIPTED・WAIT claim = ref == `ExecutionProvenance.source_commit`**（親設計 §1.3b — 非学習の実行由来を definition 内で固定・registry fixture 依存を解消） |
 | INPUT_SCHEMA_HASH / OUTPUT_SCHEMA_HASH | definition の observation / action semantic schema の H_WCJ と一致 |
 | NORMALIZER_HASH | normalization slot（KNOWN）の hash と一致（slot EXPLICIT_NONE なら claim 自体 N/A — §3c） |
-| REPRODUCED_OUTPUT_HASH | **HB grade の核**: 対応する FINAL_ARTIFACT_HASH の値と一致（byte-repro の定義） |
-| TRAIN_TIME_CRYPTO_BINDING | binding blob sha; blob は (FINAL_ARTIFACT_HASH 値, TRAIN_RUN_MANIFEST 値) を束縛（内容検証 = test 層） |
+| TRAIN_TIME_CRYPTO_BINDING | binding blob sha; blob は **(claim_target_hash, TRAIN_RUN_MANIFEST hash) 対**を束縛（R1 — 旧 FINAL 表記を claim_target へ統一; 内容検証 = resolve_artifact 経由） |
 | EVALUATOR_ARTIFACT | `EvidenceRecord.evaluator_artifact_hash` と一致 |
 | TRAIN_RUN_MANIFEST / REPRODUCTION_PROCEDURE / COMPATIBILITY_TEST / UNRESOLVED_DIFFERENCES / DIMENSION_SOURCE | 当該 file/record の sha256（存在束縛; 内容 coherence = test 層） |
 | RECONSTRUCTION_SOURCES | H_WCJ([{path, sha256}…] path bytes 昇順) の集約 hash |
