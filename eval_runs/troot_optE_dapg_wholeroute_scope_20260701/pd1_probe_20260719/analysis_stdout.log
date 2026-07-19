@@ -1,0 +1,461 @@
+{
+  "prereg": "v1.2 (fill at freeze)",
+  "bars": {
+    "qs_joint_rad": 0.002,
+    "tr_joint_rad": 0.005,
+    "qs_ee_m": 0.0015,
+    "tr_ee_m": 0.003,
+    "sat_warn": 0.01,
+    "sat_fail": 0.05,
+    "mdiv_bar_rad": 0.015,
+    "mdiv_dwell": 48,
+    "calib_abs_rad": 0.06,
+    "calib_rel": 0.05,
+    "a4_eps_pen_m": 0.003,
+    "a4_dv_mult": 2.0,
+    "a4_dv_floor": 0.01
+  },
+  "runs": {
+    "r0v12_kin": {
+      "complete": true,
+      "parity": {
+        "mode": "kinematic_baseline",
+        "g3_reached": true,
+        "g3_step": 242,
+        "pin_fired": true,
+        "pin_fire_step": 246,
+        "first_cause": {
+          "B_contact_loss": 347
+        },
+        "done_step": 347,
+        "repose_count": 0,
+        "status": "COMPLETE"
+      }
+    },
+    "r1v12_lp0": {
+      "complete": true,
+      "parity": {
+        "mode": "l_p0_neutralize",
+        "g3_reached": false,
+        "g3_step": null,
+        "pin_fired": false,
+        "pin_fire_step": null,
+        "first_cause": {},
+        "done_step": 899,
+        "repose_count": 0,
+        "status": "COMPLETE"
+      }
+    },
+    "r2v12_pd": {
+      "complete": true,
+      "parity": {
+        "mode": "arm_pd",
+        "g3_reached": false,
+        "g3_step": null,
+        "pin_fired": false,
+        "pin_fire_step": null,
+        "first_cause": {
+          "B_contact_loss": 141
+        },
+        "done_step": 141,
+        "repose_count": 2,
+        "status": "COMPLETE"
+      },
+      "tracking": {
+        "scored_vs": "ctrl",
+        "frames": 1420,
+        "qs_frames": 0,
+        "tr_frames": 1420,
+        "qs_joint_max": null,
+        "tr_joint_max": 0.5123105049133301,
+        "per_joint_max": [
+          0.13047003746032715,
+          0.1125556230545044,
+          0.04890632629394531,
+          0.06702566146850586,
+          0.5123105049133301,
+          0.13004177808761597,
+          0.002501748502254486,
+          0.06979870796203613,
+          0.14473938941955566,
+          0.11012828350067139,
+          0.5122056007385254,
+          0.002380847930908203
+        ],
+        "lp4_err_frame0_max": 4.1604042053222656e-05,
+        "mdiv_dwell_events_per_joint": [
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          0,
+          2,
+          2,
+          2,
+          1,
+          0
+        ],
+        "ctrl_vs_intended_max": 0.0,
+        "qs_ee_max": null,
+        "tr_ee_max": 0.09992036614599256,
+        "sat_share_max": 0.0,
+        "sat_share_per_joint": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bar_verdicts": {
+          "L-P1 qs joint": "N/A (empty window)",
+          "L-P1 tr joint": false,
+          "L-P1 qs EE": "N/A (empty window)",
+          "L-P1 tr EE": false,
+          "L-P3 saturation": "PASS",
+          "L-P4 no-haul": true
+        }
+      },
+      "a4": {
+        "first_frame_pen_min_m": 0.0,
+        "A-4 penetration": true,
+        "first_frame_cable_vmax": 0.00020957794913556427,
+        "A-4 cable dv (band)": 0.01,
+        "A-4 cable dv": true
+      }
+    },
+    "r3v12_ramp": {
+      "complete": true,
+      "parity": {
+        "mode": "arm_pd",
+        "g3_reached": false,
+        "g3_step": null,
+        "pin_fired": false,
+        "pin_fire_step": null,
+        "first_cause": {
+          "B_contact_loss": 141
+        },
+        "done_step": 141,
+        "repose_count": 2,
+        "status": "COMPLETE"
+      },
+      "tracking": {
+        "scored_vs": "ctrl",
+        "frames": 1420,
+        "qs_frames": 0,
+        "tr_frames": 1420,
+        "qs_joint_max": null,
+        "tr_joint_max": 0.5123105049133301,
+        "per_joint_max": [
+          0.13047003746032715,
+          0.1125556230545044,
+          0.04890632629394531,
+          0.06702566146850586,
+          0.5123105049133301,
+          0.13004177808761597,
+          0.002501748502254486,
+          0.06979870796203613,
+          0.14473938941955566,
+          0.11012828350067139,
+          0.5122056007385254,
+          0.002380847930908203
+        ],
+        "lp4_err_frame0_max": 4.1604042053222656e-05,
+        "mdiv_dwell_events_per_joint": [
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          0,
+          2,
+          2,
+          2,
+          1,
+          0
+        ],
+        "ctrl_vs_intended_max": 0.0,
+        "qs_ee_max": null,
+        "tr_ee_max": 0.09992036614599256,
+        "sat_share_max": 0.0,
+        "sat_share_per_joint": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bar_verdicts": {
+          "L-P1 qs joint": "N/A (empty window)",
+          "L-P1 tr joint": false,
+          "L-P1 qs EE": "N/A (empty window)",
+          "L-P1 tr EE": false,
+          "L-P3 saturation": "PASS",
+          "L-P4 no-haul": true
+        }
+      },
+      "a4": {
+        "first_frame_pen_min_m": 0.0,
+        "A-4 penetration": true,
+        "first_frame_cable_vmax": 0.00020957794913556427,
+        "A-4 cable dv (band)": 0.01,
+        "A-4 cable dv": true
+      }
+    },
+    "r4v12_stale": {
+      "complete": true,
+      "parity": {
+        "mode": "arm_pd_stale_neg",
+        "g3_reached": false,
+        "g3_step": null,
+        "pin_fired": false,
+        "pin_fire_step": null,
+        "first_cause": {},
+        "done_step": 899,
+        "repose_count": 2,
+        "status": "COMPLETE"
+      },
+      "tracking": {
+        "scored_vs": "intended",
+        "frames": 9000,
+        "qs_frames": 0,
+        "tr_frames": 9000,
+        "qs_joint_max": null,
+        "tr_joint_max": 2.711435317993164,
+        "per_joint_max": [
+          0.6851062774658203,
+          0.805936336517334,
+          0.4960106611251831,
+          0.54732346534729,
+          2.711435317993164,
+          0.6853765845298767,
+          0.3457639403641224,
+          0.6687171459197998,
+          0.9581385850906372,
+          0.6785945892333984,
+          2.711433172225952,
+          0.3459353446960449
+        ],
+        "lp4_err_frame0_max": 4.1604042053222656e-05,
+        "mdiv_dwell_events_per_joint": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "qs_ee_max": null,
+        "tr_ee_max": 0.5771608232384793,
+        "sat_share_max": 0.9977777777777778,
+        "sat_share_per_joint": [
+          0.9928888888888889,
+          0.9923333333333333,
+          0.9837777777777778,
+          0.9883333333333333,
+          0.9977777777777778,
+          0.9944444444444445,
+          0.43177777777777776,
+          0.9594444444444444,
+          0.9932222222222222,
+          0.9873333333333333,
+          0.9977777777777778,
+          0.43444444444444447
+        ],
+        "bar_verdicts": {
+          "L-P1 qs joint": "N/A (empty window)",
+          "L-P1 tr joint": false,
+          "L-P1 qs EE": "N/A (empty window)",
+          "L-P1 tr EE": false,
+          "L-P3 saturation": "FAIL",
+          "L-P4 no-haul": true
+        }
+      },
+      "a4": {
+        "first_frame_pen_min_m": 0.0,
+        "A-4 penetration": true,
+        "first_frame_cable_vmax": 0.00020957794913556427,
+        "A-4 cable dv (band)": 0.01,
+        "A-4 cable dv": true
+      }
+    },
+    "r5v12_gains01": {
+      "complete": true,
+      "parity": {
+        "mode": "arm_pd",
+        "g3_reached": false,
+        "g3_step": null,
+        "pin_fired": false,
+        "pin_fire_step": null,
+        "first_cause": {},
+        "done_step": 899,
+        "repose_count": 2,
+        "status": "COMPLETE"
+      },
+      "tracking": {
+        "scored_vs": "ctrl",
+        "frames": 9000,
+        "qs_frames": 0,
+        "tr_frames": 9000,
+        "qs_joint_max": null,
+        "tr_joint_max": 0.4929213523864746,
+        "per_joint_max": [
+          0.13527965545654297,
+          0.1446242332458496,
+          0.09715306758880615,
+          0.17729544639587402,
+          0.4929213523864746,
+          0.1301865577697754,
+          0.10164695978164673,
+          0.08904910087585449,
+          0.15381908416748047,
+          0.3562883734703064,
+          0.4925098419189453,
+          0.07510495185852051
+        ],
+        "lp4_err_frame0_max": 6.99758529663086e-05,
+        "mdiv_dwell_events_per_joint": [
+          4,
+          3,
+          1,
+          3,
+          3,
+          4,
+          1,
+          8,
+          2,
+          4,
+          2,
+          3
+        ],
+        "ctrl_vs_intended_max": 0.0,
+        "qs_ee_max": null,
+        "tr_ee_max": 0.10475396421064072,
+        "sat_share_max": 0.0,
+        "sat_share_per_joint": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bar_verdicts": {
+          "L-P1 qs joint": "N/A (empty window)",
+          "L-P1 tr joint": false,
+          "L-P1 qs EE": "N/A (empty window)",
+          "L-P1 tr EE": false,
+          "L-P3 saturation": "PASS",
+          "L-P4 no-haul": true
+        }
+      },
+      "a4": {
+        "first_frame_pen_min_m": 0.0,
+        "A-4 penetration": true,
+        "first_frame_cable_vmax": 0.00020957794913556427,
+        "A-4 cable dv (band)": 0.01,
+        "A-4 cable dv": true
+      }
+    }
+  },
+  "r3_sec12_1": {
+    "frames_scored": 9000,
+    "max_dev_rad": 0.008872270584106445,
+    "max_band_rad": 0.19561975359916686,
+    "calibration_ok": true,
+    "failability_ok (exceeds an L-P1 bar)": true,
+    "instrument_verdict": "VALID"
+  },
+  "lp0_impact": {
+    "frames_compared": 3480,
+    "arm_dq_max": 0.001102447509765625,
+    "parity_r0": {
+      "mode": "kinematic_baseline",
+      "g3_reached": true,
+      "g3_step": 242,
+      "pin_fired": true,
+      "pin_fire_step": 246,
+      "first_cause": {
+        "B_contact_loss": 347
+      },
+      "done_step": 347,
+      "repose_count": 0,
+      "status": "COMPLETE"
+    },
+    "parity_r0b": {
+      "mode": "l_p0_neutralize",
+      "g3_reached": false,
+      "g3_step": null,
+      "pin_fired": false,
+      "pin_fire_step": null,
+      "first_cause": {},
+      "done_step": 899,
+      "repose_count": 0,
+      "status": "COMPLETE"
+    }
+  },
+  "lp2p_parity_vs_clean": {
+    "r2": {
+      "mode": "arm_pd",
+      "g3_reached": false,
+      "g3_step": null,
+      "pin_fired": false,
+      "pin_fire_step": null,
+      "first_cause": {
+        "B_contact_loss": 141
+      },
+      "done_step": 141,
+      "repose_count": 2,
+      "status": "COMPLETE"
+    },
+    "r0b_ref": {
+      "mode": "l_p0_neutralize",
+      "g3_reached": false,
+      "g3_step": null,
+      "pin_fired": false,
+      "pin_fire_step": null,
+      "first_cause": {},
+      "done_step": 899,
+      "repose_count": 0,
+      "status": "COMPLETE"
+    },
+    "p1_continuous_divergence_REPORTED": {
+      "frames_compared": 1420,
+      "arm_dq_max": 0.5123076438903809,
+      "arm_dq_p99": 0.5080023694038391,
+      "ee_div_max_m (subsampled)": 0.09994129888881913,
+      "cable_vmax_div_max": 4.416460222120804
+    }
+  },
+  "ramp_effect_r3_vs_r2_q_max_delta": 0.0
+}
+
+[analysis] wrote /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pd1_probe_20260719/analysis_result_v12.json
