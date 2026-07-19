@@ -4,7 +4,7 @@
 - 原文 = w2:pN から pQ への herdr pane message 1 通（受信 21:55:14 JST）。独立 file 原本なし（byte identity N/A — 既存 4 transcript と同類）。
 - 対象 = v2.11 世代 pin（DESIGN `8d1f356024f7e6f4a14f7d2f36d94a9e6958905d65920078b30831e76642759f` @ `37ddb72284` + 完全 bundle `81065b9b5c`）。
 - 目的 = pS §18 指摘 C-1' の解消（full custody — B1-B7 / C1-C3 / R+PASS-CLOSE / step-13 B1-B4 は bank 済で本 verdict のみ欠落していた）。
-- **fidelity: pN 確認 PENDING**（著者 readback 依頼中 — 新 pin 再判定と併せ）。
+- **fidelity: pN 著者 readback = SEMANTIC FIDELITY CONFIRMED / BYTE IDENTITY N/A**（2026-07-19 22:15 再判定内 — 逐語「R1-R4 transcript 7b8352…は私の21:55原文と SEMANTIC FIDELITY CONFIRMED / BYTE N/A」。⚠本行 = 転記者 wrapper metadata の状態更新のみ〔M4〕— 逐語引用部は不変。確認対象 blob = `7b8352fa5872…` @ `65a90d0bfc`）。
 
 ---
 
