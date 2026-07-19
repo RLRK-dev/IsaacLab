@@ -1,0 +1,118 @@
+{
+  "artifact": "WMSO_EvidencePolicy",
+  "policy_semver": "1.5.0",
+  "source_markdown": "WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md v1.5",
+  "note_semantic_hash": "evidence_policy_definition_hash = H_WCJ(this object minus this note and source_markdown) is computed and pinned by the impl-stage golden fixture test (markdown/JSON/code three-way parity). No hand-computed hash is published here (records-vs-fact).",
+  "grades": [
+    {"name": "EXACT_TRAIN_TIME", "rank": 4},
+    {"name": "HASH_BOUND_REPRODUCED", "rank": 3},
+    {"name": "RECONSTRUCTED_COMPATIBLE", "rank": 2},
+    {"name": "DIMENSION_ONLY", "rank": 1},
+    {"name": "UNKNOWN", "rank": 0}
+  ],
+  "component_groups": {
+    "A_artifact": ["POLICY_ARTIFACT", "MODEL_ARCHITECTURE", "NORMALIZATION", "TRAINING_DATASET", "RUNTIME_CONFIG", "TENSOR_BINDING"],
+    "S_schema_spec": ["OBSERVATION_SCHEMA", "ACTION_SCHEMA", "INITIATION_SPEC", "TERMINATION_SPEC", "HANDOFF_SCHEMA", "CONTROL_MODE"],
+    "P_provenance": ["TRAINING_PROVENANCE"]
+  },
+  "proof_policy": {
+    "_domain": "(component_kind, evidence_grade, applicability_class) -> exact required ProofKind set; cells listed only for applicability_class == REQUIRED; NOT_APPLICABLE / OPTIONAL cells carry no required set (see applicability_rules); UNKNOWN grade carries no authority-relevant claim",
+    "EXACT_TRAIN_TIME": {
+      "POLICY_ARTIFACT": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "TRAIN_TIME_CRYPTO_BINDING"],
+      "MODEL_ARCHITECTURE": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "TRAIN_TIME_CRYPTO_BINDING"],
+      "NORMALIZATION": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "TRAIN_TIME_CRYPTO_BINDING", "NORMALIZER_HASH"],
+      "TRAINING_DATASET": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "TRAIN_TIME_CRYPTO_BINDING"],
+      "RUNTIME_CONFIG": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+      "TENSOR_BINDING": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+      "OBSERVATION_SCHEMA": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "INPUT_SCHEMA_HASH"],
+      "ACTION_SCHEMA": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "OUTPUT_SCHEMA_HASH"],
+      "INITIATION_SPEC": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+      "TERMINATION_SPEC": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+      "HANDOFF_SCHEMA": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+      "CONTROL_MODE": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+      "TRAINING_PROVENANCE": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "FINAL_ARTIFACT_HASH", "TRAIN_TIME_CRYPTO_BINDING"]
+    },
+    "HASH_BOUND_REPRODUCED": {
+      "POLICY_ARTIFACT": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+      "MODEL_ARCHITECTURE": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+      "NORMALIZATION": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+      "TRAINING_DATASET": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+      "RUNTIME_CONFIG": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+      "TENSOR_BINDING": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+      "OBSERVATION_SCHEMA": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "INPUT_SCHEMA_HASH", "EVALUATOR_ARTIFACT"],
+      "ACTION_SCHEMA": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "OUTPUT_SCHEMA_HASH", "EVALUATOR_ARTIFACT"],
+      "INITIATION_SPEC": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "CONFIG_HASH", "EVALUATOR_ARTIFACT"],
+      "TERMINATION_SPEC": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "CONFIG_HASH", "EVALUATOR_ARTIFACT"],
+      "HANDOFF_SCHEMA": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "CONFIG_HASH", "EVALUATOR_ARTIFACT"],
+      "CONTROL_MODE": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "CONFIG_HASH", "EVALUATOR_ARTIFACT"],
+      "TRAINING_PROVENANCE": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"]
+    },
+    "RECONSTRUCTED_COMPATIBLE": {
+      "_all_13_components": ["RECONSTRUCTION_SOURCES", "COMPATIBILITY_TEST", "UNRESOLVED_DIFFERENCES", "EVALUATOR_ARTIFACT"]
+    },
+    "DIMENSION_ONLY": {
+      "_applicable": {
+        "components": ["OBSERVATION_SCHEMA", "ACTION_SCHEMA", "POLICY_ARTIFACT", "MODEL_ARCHITECTURE", "NORMALIZATION", "TRAINING_DATASET", "RUNTIME_CONFIG", "TENSOR_BINDING"],
+        "required": ["DIMENSION_SOURCE", "UNRESOLVED_DIFFERENCES"]
+      },
+      "_grade_inapplicable": ["TRAINING_PROVENANCE", "INITIATION_SPEC", "TERMINATION_SPEC", "HANDOFF_SCHEMA", "CONTROL_MODE"],
+      "_error": "E_GRADE_INAPPLICABLE"
+    },
+    "UNKNOWN": {"_all_13_components": []}
+  },
+  "proof_item_canonical_order": "(kind.value UTF-8 bytes, ref UTF-8 bytes, artifact_hash-or-empty ASCII) tuple ascending",
+  "proof_conflict_rules": {
+    "exact_duplicate": "idempotent dedupe (contributes once to hash)",
+    "same_kind_ref_different_hash": "E_PROOF_CONFLICT (fail-closed)"
+  },
+  "proof_binding": {
+    "_payload_rule": "artifact_hash required (64-hex lowercase) for all kinds except SOURCE_COMMIT (must be null; ref = 40-hex commit id, violation = E_PROOF_REF_MALFORMED); missing = E_PROOF_PAYLOAD_MISSING",
+    "FINAL_ARTIFACT_HASH": {"binds_to": {"POLICY_ARTIFACT": "ExecutionBundle.executable_artifact_hash", "MODEL_ARCHITECTURE": "model_architecture slot hash", "TENSOR_BINDING": "tensor_binding slot hash", "NORMALIZATION": "normalization slot hash", "RUNTIME_CONFIG": "runtime_config slot hash", "TRAINING_DATASET": "TrainingProvenance.demo_dataset_hash", "TRAINING_PROVENANCE": "TrainingProvenance.final_artifact_hash"}},
+    "CONFIG_HASH": {"binds_to": "TrainingProvenance claimed-stage config hash: BC_THEN_RL BC-stage = bc_config_hash / final stage (RL_ONLY, BC_THEN_RL RL, BC_ONLY sole BC) = final_training_config_hash"},
+    "SOURCE_COMMIT": {"binds_to": "learned context: ref == TrainingProvenance.final_source_commit"},
+    "INPUT_SCHEMA_HASH": {"binds_to": "H_WCJ(semantic_obs_schema)"},
+    "OUTPUT_SCHEMA_HASH": {"binds_to": "H_WCJ(semantic_action_schema)"},
+    "NORMALIZER_HASH": {"binds_to": "normalization slot hash (KNOWN); slot EXPLICIT_NONE -> claim N/A"},
+    "REPRODUCED_OUTPUT_HASH": {"binds_to": "equals the claimed FINAL_ARTIFACT_HASH target (byte-repro definition of HASH_BOUND)"},
+    "TRAIN_TIME_CRYPTO_BINDING": {"binds_to": "binding blob sha; blob binds (FINAL_ARTIFACT_HASH value, TRAIN_RUN_MANIFEST value); content check = test layer via proof_artifact_resolver"},
+    "EVALUATOR_ARTIFACT": {"binds_to": "EvidenceRecord.evaluator_artifact_hash; evaluator must be in allowlisted evaluator registry (else E_EVALUATOR_UNKNOWN)"},
+    "TRAIN_RUN_MANIFEST": {"binds_to": "manifest file sha256; content must list FINAL_ARTIFACT_HASH value (checked via proof_artifact_resolver)"},
+    "REPRODUCTION_PROCEDURE": {"binds_to": "procedure doc sha256"},
+    "COMPATIBILITY_TEST": {"binds_to": "test record sha256"},
+    "UNRESOLVED_DIFFERENCES": {"binds_to": "doc sha256 (empty set = explicit empty doc)"},
+    "DIMENSION_SOURCE": {"binds_to": "source doc sha256"},
+    "RECONSTRUCTION_SOURCES": {"binds_to": "H_WCJ([{path, sha256}...] path-bytes ascending) aggregate"}
+  },
+  "trust_boundary": {
+    "certify_signature": "certify_definition(definition, evidence_bundle, evidence_policy, schema_registry, proof_artifact_resolver)",
+    "resolver_contract": "(ref, expected_sha256) -> bytes | UNRESOLVED; unresolved/len-0/sha-mismatch = E_PROOF_ARTIFACT_UNRESOLVED (fail-closed)"
+  },
+  "applicability_rules": [
+    {"order": 1, "layer": "instance", "rule": "certified slot EXPLICIT_NONE (kind-allowance + evidence gate passed) -> NOT_APPLICABLE; carried by certificate.explicit_none_components"},
+    {"order": 2, "layer": "lineage", "rule": "TRAINING_DATASET: lineage in {BC_ONLY, BC_THEN_RL} -> REQUIRED(profile min_grade) else OPTIONAL; TRAINING_PROVENANCE: lineage == NOT_APPLICABLE (SCRIPTED/WAIT) -> NOT_APPLICABLE else REQUIRED"},
+    {"order": 3, "layer": "profile", "rule": "profile-table dash cells (TB/CM/TP/TD at OFFLINE_REPLAY etc.) -> NOT_APPLICABLE for that profile"},
+    {"order": 4, "layer": "default", "rule": "REQUIRED(min_grade = profiles table)"},
+    {"invariant": "NOT_APPLICABLE != UNKNOWN: N/A = validated absence, excluded from aggregation; UNKNOWN = knowledge gap, rank 0, disqualifying, never exempt"}
+  ],
+  "profiles": {
+    "_semantics": "eligible(profile) <=> for every non-exempt REQUIRED component: achieved grade rank >= min_grade rank; missing record = UNKNOWN(0)",
+    "CLOSED_LOOP": {
+      "min_grade_rank": 3,
+      "required": ["POLICY_ARTIFACT", "MODEL_ARCHITECTURE", "OBSERVATION_SCHEMA", "ACTION_SCHEMA", "TENSOR_BINDING", "NORMALIZATION", "CONTROL_MODE", "RUNTIME_CONFIG", "INITIATION_SPEC", "TERMINATION_SPEC", "HANDOFF_SCHEMA"],
+      "conditional_required": {"TRAINING_PROVENANCE": {"when": "learned lineage", "min_grade_rank": 3}, "TRAINING_DATASET": {"when": "lineage in {BC_ONLY, BC_THEN_RL}", "min_grade_rank": 3}},
+      "external_conjuncts": ["acceptance_test", "two_key(O0/S0/V0)", "independent_safety_gate"]
+    },
+    "SHADOW": {
+      "min_grade_rank": 2,
+      "required": ["POLICY_ARTIFACT", "MODEL_ARCHITECTURE", "OBSERVATION_SCHEMA", "ACTION_SCHEMA", "TENSOR_BINDING", "NORMALIZATION", "CONTROL_MODE", "RUNTIME_CONFIG", "INITIATION_SPEC", "TERMINATION_SPEC", "HANDOFF_SCHEMA"],
+      "conditional_required": {"TRAINING_PROVENANCE": {"when": "learned lineage", "min_grade_rank": 2}, "TRAINING_DATASET": {"when": "lineage in {BC_ONLY, BC_THEN_RL}", "min_grade_rank": 2}}
+    },
+    "OFFLINE_REPLAY": {
+      "min_grade_rank": 2,
+      "required": ["POLICY_ARTIFACT", "MODEL_ARCHITECTURE", "OBSERVATION_SCHEMA", "ACTION_SCHEMA", "NORMALIZATION", "RUNTIME_CONFIG", "INITIATION_SPEC", "TERMINATION_SPEC", "HANDOFF_SCHEMA"],
+      "not_applicable": {"TENSOR_BINDING": "replay does not re-execute binding", "CONTROL_MODE": "replay issues no control", "TRAINING_PROVENANCE": "provenance does not affect replay validity (recording duty stays)", "TRAINING_DATASET": "not required"}
+    }
+  },
+  "exemption_reporting": "EXPLICIT_NONE exemptions recorded loud in UsageEligibilityReport.exemptions; UNKNOWN slots receive no exemption",
+  "usage_ceiling_note": "usage matrix = ceiling not authority grant; closed-loop authority additionally requires evaluate_authority_grant conjuncts (acceptance test, O0/S0/V0 two-key, independent safety gate)"
+}

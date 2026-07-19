@@ -1,8 +1,9 @@
-# WMSO D1.1-A EvidencePolicy v1.4（DESIGN 付属 normative artifact）
+# WMSO D1.1-A EvidencePolicy v1.5（DESIGN 付属 normative artifact）
 
-- node: `T-WMSO`; author = w2:pQ; v1 = 2026-07-19 10:54 JST / v1.1 = 12:02 / v1.2 = 12:41 / v1.3 = 13:33 / **v1.4 = 14:00 JST（実測）**（Rs PLAN_STATUS review v4〔RV4〕fold: §2.3 機械可読 policy object 具体形 / §2.8 順序文字列 pin。v1.3 = pN B4/B5/B6 fold）
-- 親設計: `WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md` v2.4 §4（本 artifact が全表の normative 実体。custody hash = 本 file の sha256、validator/certificate が結合するのは §6 の **semantic hash**）
-- status: DRAFT v1.2 — pS 全行照合（v3 行込み）→ pN DESIGN verify PENDING
+- node: `T-WMSO`; author = w2:pQ; v1 = 2026-07-19 10:54 JST / v1.1 = 12:02 / v1.2 = 12:41 / v1.3 = 13:33 / v1.4 = 14:00 / **v1.5 = 14:24 JST（実測）**（Rs PLAN_STATUS review v5〔RV5〕fold: W-P0-1 stale 参照一掃 / W-P0-2 TP applicability / W-P0-3 束縛 gap / W-P0-6 JSON 兄弟 artifact）
+- 親設計: `WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md` **v2.7**（本 artifact が全表の normative 実体。`policy_document_sha256` = 本 file の sha256、validator/certificate が結合するのは §6 の **`evidence_policy_definition_hash`**）
+- **機械可読兄弟 artifact（RV5-W-P0-6）**: `WMSO_EvidencePolicy_v1.5.json`（total map の JSON 実体; file sha = 兄弟 doc header に記録。semantic H_WCJ 値は WCJ 実装が要るため **impl 時の golden fixture test で確定・照合**〔markdown ↔ JSON ↔ code 定数の三面一致〕 — 手計算の hash 値を先行掲載しない〔検証不能な自己申告値を作らないため — records-vs-fact〕）
+- status: **DRAFT v1.5** — pS delta 照合 → pN 再 verify PENDING
 - v1 からの変更: §3 の 3 cell exact 化 / DC-3 準拠復元 / §3b ProofItem 順序・conflict 規則 / §4 EXPLICIT_NONE 免除 / §4b per-component 意味論の明示 / E_GRADE_INAPPLICABLE の S-group 拡張 / 引用 host 修正。v1.1 からの変更: §3c ApplicabilityResolver（v3 W-P0-1 sketch 採用）/ §3 total-map 宣言 + cell 表記の置換/補完 意味明示（v3 W-P0-5）/ §6 semantic hash 分離（v3 W-P1-3）
 
 ## 1. ProofKind semantics（15 種 — 親設計 §4.2 の enum と 1:1; v1 から不変）
@@ -67,7 +68,7 @@ ApplicabilityResolver(kind, lineage, component)
 
 - **解決規則（優先順・全て機械判定）**:
   1. **instance 層**: certified definition の対応 slot が **EXPLICIT_NONE**（kind 別許容表 + 証拠 gate〔LEARNED は E_SLOT_NONE_UNPROVEN〕を通過済み）→ **NOT_APPLICABLE**。certificate の `explicit_none_components` が attest を運ぶ（§4 の免除と同一機構 — 名前を resolver に統一）。
-  2. **lineage 層**: TRAINING_DATASET は lineage ∈ BC 系 {BC_ONLY, BC_THEN_RL} → REQUIRED(min_grade = §4 表の profile 別値〔B5 整列後〕)、それ以外の lineage → **OPTIONAL**（記録可・集約外）。
+  2. **lineage 層**: TRAINING_DATASET は lineage ∈ BC 系 {BC_ONLY, BC_THEN_RL} → REQUIRED(min_grade = §4 表の profile 別値〔B5 整列後〕)、それ以外の lineage → **OPTIONAL**（記録可・集約外）。**TRAINING_PROVENANCE は lineage = NOT_APPLICABLE（SCRIPTED/WAIT）→ NOT_APPLICABLE**（RV5-W-P0-2 案 1 採用 — 非学習 skill は訓練来歴を正当に提供できない〔grade 3/4 の proof は訓練 run 実体を要求〕。実行来歴は source-closure が identity で担う。**N/A を UNKNOWN で表現しない**〔Rs 逐語〕。learned lineage では従来どおり REQUIRED）。
   3. **profile 層**: §4 表の「—」cell（TB/CM/TP@OFFLINE_REPLAY 等、理由明記済み）→ その profile では NOT_APPLICABLE。
   4. 上記非該当 → **REQUIRED(min_grade = §4 表の値)**。
 - ⛔ **N/A ≠ UNKNOWN**（v3 W-P0-1 逐語要求）: NOT_APPLICABLE は「実体が存在しない事の validated proof（kind 別許容表 + 証拠 gate 通過）」であり、UNKNOWN（知識不足 = 失格・免除なし）と型・集約の両方で区別する。
@@ -81,8 +82,9 @@ ApplicabilityResolver(kind, lineage, component)
 
 | ProofKind | 束縛対象（certify 時に機械照合） |
 |---|---|
-| FINAL_ARTIFACT_HASH | component 対応 slot/field の hash と一致: POLICY_ARTIFACT→executable_artifact_hash / MODEL_ARCHITECTURE・TENSOR_BINDING・NORMALIZATION・RUNTIME_CONFIG→当該 slot hash / TRAINING_DATASET→TrainingProvenance.demo_dataset_hash |
-| CONFIG_HASH | TrainingProvenance の claimed stage config hash（BC=bc_config_hash 等・family 依存）と一致 |
+| FINAL_ARTIFACT_HASH | component 対応 slot/field の hash と一致: POLICY_ARTIFACT→executable_artifact_hash / MODEL_ARCHITECTURE・TENSOR_BINDING・NORMALIZATION・RUNTIME_CONFIG→当該 slot hash / TRAINING_DATASET→TrainingProvenance.demo_dataset_hash / **TRAINING_PROVENANCE→TrainingProvenance.final_artifact_hash**（RV5-W-P0-3 gap 2 — learned では == executable、E_PROVENANCE_ARTIFACT_MISMATCH が既に拘束） |
+| CONFIG_HASH | TrainingProvenance の claimed stage config hash と一致: BC_THEN_RL の BC stage = bc_config_hash / **final stage（RL_ONLY・BC_THEN_RL の RL / BC_ONLY の唯一 BC）= `final_training_config_hash`（RV5-W-P0-3 gap 1 で新設 — 親設計 §1.3）** |
+| SOURCE_COMMIT（learned 文脈の coherence 追加） | ref = **`TrainingProvenance.final_source_commit`（新設）** と一致（RV5-W-P0-3 gap 1） |
 | INPUT_SCHEMA_HASH / OUTPUT_SCHEMA_HASH | definition の observation / action semantic schema の H_WCJ と一致 |
 | NORMALIZER_HASH | normalization slot（KNOWN）の hash と一致（slot EXPLICIT_NONE なら claim 自体 N/A — §3c） |
 | REPRODUCED_OUTPUT_HASH | **HB grade の核**: 対応する FINAL_ARTIFACT_HASH の値と一致（byte-repro の定義） |
@@ -91,7 +93,8 @@ ApplicabilityResolver(kind, lineage, component)
 | TRAIN_RUN_MANIFEST / REPRODUCTION_PROCEDURE / COMPATIBILITY_TEST / UNRESOLVED_DIFFERENCES / DIMENSION_SOURCE | 当該 file/record の sha256（存在束縛; 内容 coherence = test 層） |
 | RECONSTRUCTION_SOURCES | H_WCJ([{path, sha256}…] path bytes 昇順) の集約 hash |
 
-- **negative controls（親設計 §8 corpus 必須）**: (i) wrong-but-valid-hex（形式適合・対象不一致）→ E_PROOF_MISBOUND (ii) null-where-required → E_PROOF_PAYLOAD_MISSING (iii) 他 component 向け kind の混入（例: POLICY_ARTIFACT claim に INPUT_SCHEMA_HASH）→ E_PROOF_KIND_FOREIGN。
+- **negative controls（親設計 §8 corpus 必須）**: (i) wrong-but-valid-hex（形式適合・対象不一致）→ E_PROOF_MISBOUND (ii) null-where-required → E_PROOF_PAYLOAD_MISSING (iii) 他 component 向け kind の混入（例: POLICY_ARTIFACT claim に INPUT_SCHEMA_HASH）→ E_PROOF_KIND_FOREIGN (iv) resolver 不能 artifact → E_PROOF_ARTIFACT_UNRESOLVED（下記）。
+- **trust boundary（RV5-W-P0-3 gap 3 — 「構造 hash 一致だけでは grade は self-asserted」の解消）**: `certify_definition(..., proof_artifact_resolver)`（Rs 提示 2 案中 resolver 案採用）。resolver = `(ref, expected_sha256) → bytes | UNRESOLVED`（fail-closed: 取得不能/长さ 0/sha 不一致 = `E_PROOF_ARTIFACT_UNRESOLVED`）。certify は hash 構造一致に加え **asserted bytes の実在と内容整合**（TRAIN_RUN_MANIFEST が FINAL_ARTIFACT_HASH 値を列挙する / TTCB blob が (artifact, manifest) 対を束縛する / REPRODUCED_OUTPUT の equality 等）を resolver 経由で検査する。evaluator は `EvidenceRecord.evaluator_artifact_hash ∈ 許可 evaluator registry`（∉ = `E_EVALUATOR_UNKNOWN`）。standalone test は fixture resolver で全経路実行。
 
 ## 4. Usage profiles（required set + min_grade）
 
@@ -105,7 +108,7 @@ ApplicabilityResolver(kind, lineage, component)
 | NORMALIZATION | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
 | CONTROL_MODE | ✓ ≥3 | ✓ ≥2 | —（replay は制御を発行しない — 制御様式の証拠は再生妥当性に効かない） |
 | RUNTIME_CONFIG | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
-| TRAINING_PROVENANCE | ✓ **≥3**〔B5〕 | ✓ ≥2 | —（来歴は replay 妥当性に効かない; 記録義務は §5） |
+| TRAINING_PROVENANCE | **learned lineage のみ** ✓ **≥3**〔B5; SCRIPTED/WAIT = N/A — §3c lineage 層・RV5-W-P0-2〕 | learned lineage のみ ✓ ≥2 | —（来歴は replay 妥当性に効かない; 記録義務は §5） |
 | TRAINING_DATASET | BC 系のみ ✓ **≥3**〔B5〕 | BC 系のみ ✓ ≥2 | — |
 | INITIATION_SPEC | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
 | TERMINATION_SPEC | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
