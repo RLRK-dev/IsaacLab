@@ -1661,7 +1661,7 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
                     f"custom attrs, got gain={None if _apd_ga is None else len(_apd_ga.values)} "
                     f"bias={None if _apd_ba is None else len(_apd_ba.values)}"
                 )
-                # Capture the vendor values BEFORE zeroing (L-P6 numeric-equality cross-check source).
+                # Capture the vendor values BEFORE stripping (L-P6 numeric-equality cross-check source).
                 _apd_vendor = sorted(
                     (round(float(g[0]), 3), round(float(b[1]), 3), round(float(b[2]), 3))
                     for g, b in zip(_apd_ga.values, _apd_ba.values)
@@ -1670,11 +1670,26 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
                 assert _apd_vendor == _apd_vendor_want, (
                     f"armpd-neutralize vendor cross-check: imported (gain0,bias1,bias2) set {_apd_vendor} != "
                     f"design table {_apd_vendor_want} -- the proto servo values would NOT re-implement the "
-                    "same vendor actuators (design v1.2 M-1 census)"
+                    "same vendor actuators (design M-1 census)"
                 )
-                for _i in range(12):
-                    _apd_ga.values[_i] = type(_apd_ga.values[_i])()  # zero vec10 -> gain term 0
-                    _apd_ba.values[_i] = type(_apd_ba.values[_i])()  # zero vec10 -> bias term 0
+                # v1.4-③ B1-STRIP (PRIMARY ruling): REMOVE the 12 imported actuator entries from EVERY
+                # proto custom attribute of the mujoco:actuator frequency (list-based storage; the
+                # same-count-per-frequency finalize validation requires clearing them all consistently).
+                # At this build point ONLY the imported arm actuators exist in these attrs (asserted
+                # above via the gain/bias tables) -- the gripper servos come from joint_target wiring,
+                # not from these attrs. Result: nu = 16 (12 proto-wired arm + 4 gripper), NO inert set.
+                for _apd_attr in proto.custom_attributes.values():
+                    if getattr(_apd_attr, "frequency", None) == "mujoco:actuator":
+                        assert isinstance(_apd_attr.values, list), (
+                            f"armpd-strip: attr {_apd_attr.name} values is {type(_apd_attr.values).__name__}, not list"
+                        )
+                        if len(_apd_attr.values) == 0:
+                            continue  # runtime/Control-assignment attr (e.g. 'ctrl') -- nothing to strip
+                        assert len(_apd_attr.values) == 12, (
+                            f"armpd-strip: attr {_apd_attr.name} count {len(_apd_attr.values)} != 12 "
+                            "(unexpected non-imported actuator entries)"
+                        )
+                        del _apd_attr.values[:]
             if _apd_drive:
                 _apd_scale = float(os.environ.get("ARM_PD_GAINS_SCALE", "1.0"))
                 # local arm joint -> (ke, kd, effort cap): 0-2 = shoulder_pan/lift, elbow (size3);

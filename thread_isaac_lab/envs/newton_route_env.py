@@ -774,18 +774,16 @@ class NewtonRouteEnv(VecEnv):
             # R-C: fail-loud lane-floor vs as-built void parity (drift guard for future void changes).
             lane_void_parity_assert(self._solver.mj_model)
             if self._arm_xml_act_neutralize:
-                # (d) P-D1 L-P6 census (design v1.2 Option B): on the BUILT model --
-                # (1) the 12 IMPORTED ur5e.xml arm actuators are verifiably INERT: gainprm==0 AND
-                #     biasprm==0 on BOTH mj_model and mjw_model (the proto zeroing propagated), then
-                #     poke actuator_forcerange := 0 on both (imported carry forcelimited=1, measured
-                #     in diag/dump_forcerange.log) + readback -- force == 0 by gain AND by clamp;
+                # (d) P-D1 L-P6 census (design v1.4-③ B1-STRIP): on the BUILT model --
+                # (1) the imported ur5e.xml arm actuators are structurally ABSENT (stripped at the
+                #     proto -- no inert set to verify, the B1 point): NO arm-mapped actuator exists
+                #     beyond the [PD mode] 12 proto-wired servos; nu is exact (16 PD / 4 L-P0);
                 # (2) [PD mode only] exactly 12 actuators carry the SCALED design servo shape;
                 #     jnt_actfrcrange at the arm joints == the UNSCALED effort caps; negative control.
                 import mujoco as _apd_mj
 
                 _apd_scale = float(os.environ.get("ARM_PD_GAINS_SCALE", "1.0"))
                 _apd_m = self._solver.mj_model
-                _apd_mjw = getattr(self._solver, "mjw_model", None)
                 _apd_gain = np.asarray(_apd_m.actuator_gainprm)
                 _apd_bias = np.asarray(_apd_m.actuator_biasprm)
                 _apd_trn = np.asarray(_apd_m.actuator_trnid)
@@ -795,33 +793,12 @@ class NewtonRouteEnv(VecEnv):
                     jn = _apd_mj.mj_id2name(_apd_m, _apd_mj.mjtObj.mjOBJ_JOINT, j) or ""
                     if "ur5e" in jn:
                         _apd_arm_acts.append(a)
-                _apd_inert = [a for a in _apd_arm_acts if abs(float(_apd_gain[a, 0])) < 1e-9]
-                _apd_live = [a for a in _apd_arm_acts if a not in _apd_inert]
-                assert len(_apd_inert) == 12, (
-                    f"armpd-census: inert (imported, zeroed) arm actuators = {len(_apd_inert)} != 12 "
-                    f"(nu={int(_apd_m.nu)}, arm-mapped={len(_apd_arm_acts)})"
+                _apd_live = list(_apd_arm_acts)  # B1-strip: every arm-mapped actuator must be a live design servo
+                _apd_nu_want = 16 if self._arm_pd_drive else 4
+                assert int(_apd_m.nu) == _apd_nu_want, (
+                    f"armpd-census (B1-strip): nu = {int(_apd_m.nu)} != {_apd_nu_want} "
+                    f"(imported actuators not stripped, or wiring missing)"
                 )
-                for a in _apd_inert:
-                    assert float(np.max(np.abs(_apd_gain[a]))) < 1e-9, f"armpd-census: inert act {a} gainprm != 0"
-                    assert float(np.max(np.abs(_apd_bias[a]))) < 1e-9, f"armpd-census: inert act {a} biasprm != 0"
-                if _apd_mjw is not None and hasattr(_apd_mjw, "actuator_gainprm"):
-                    _g_dev = _apd_mjw.actuator_gainprm.numpy()
-                    _b_dev = _apd_mjw.actuator_biasprm.numpy()
-                    for a in _apd_inert:
-                        assert float(np.max(np.abs(_g_dev[:, a, :]))) < 1e-9, f"armpd-census: mjw act {a} gain != 0"
-                        assert float(np.max(np.abs(_b_dev[:, a, :]))) < 1e-9, f"armpd-census: mjw act {a} bias != 0"
-                # forcerange poke -> 0 on the inert set (host template + device model, ALL worlds), then
-                # readback. forcelimited must already be 1 (measured import default) so range 0 clamps to 0.
-                _apd_frl = np.asarray(_apd_m.actuator_forcelimited)
-                for a in _apd_inert:
-                    assert int(_apd_frl[a]) == 1, f"armpd-census: inert act {a} forcelimited != 1"
-                    _apd_m.actuator_forcerange[a, :] = 0.0
-                if _apd_mjw is not None and hasattr(_apd_mjw, "actuator_forcerange"):
-                    _fr_dev = _apd_mjw.actuator_forcerange.numpy()
-                    _fr_dev[:, _apd_inert, :] = 0.0
-                    _apd_mjw.actuator_forcerange.assign(_fr_dev)
-                    _fr_rb = _apd_mjw.actuator_forcerange.numpy()
-                    assert float(np.max(np.abs(_fr_rb[:, _apd_inert, :]))) < 1e-9, "armpd-census: mjw forcerange poke did not land"
                 if self._arm_pd_drive:
                     _apd_sz3 = (2000.0 * _apd_scale, 400.0 * _apd_scale, 150.0)
                     _apd_sz1 = (500.0 * _apd_scale, 100.0 * _apd_scale, 28.0)
@@ -861,7 +838,7 @@ class NewtonRouteEnv(VecEnv):
                         f"armpd-census (L-P0): expected 0 live arm actuators, got {len(_apd_live)}"
                     )
                 print(
-                    f"  [ARMPD] L-P6 census PASS: inert imported=12 (gain/bias/forcerange 0, mj+mjw), "
+                    f"  [ARMPD] L-P6 census PASS (B1-strip): imported=ABSENT, nu={int(_apd_m.nu)}, "
                     f"live={len(_apd_live)}, mode={'PD' if self._arm_pd_drive else 'L-P0'}, scale={_apd_scale}"
                 )
         print(
