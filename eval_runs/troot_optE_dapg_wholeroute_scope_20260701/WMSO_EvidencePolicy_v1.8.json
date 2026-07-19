@@ -1,14 +1,15 @@
 {
   "metadata": {
     "artifact": "WMSO_EvidencePolicy",
-    "source_markdown": "WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md v1.7.1",
-    "hash_projection_rule": "evidence_policy_definition_hash = H_WCJ(policy_definition) - metadata is OUTSIDE the hash input (RV6 s2 / pN C2). For this ASCII-key, int-and-string-only object, H_WCJ equals sha256 of RFC8785-canonical JSON (UTF-16 and ASCII key orders coincide).",
-    "definition_hash_derivation": "python3 -c \"import json,hashlib;d=json.load(open('WMSO_EvidencePolicy_v1.7.json'));print(hashlib.sha256(json.dumps(d['policy_definition'],sort_keys=True,separators=(',',':'),ensure_ascii=True).encode()).hexdigest())\"",
-    "evidence_policy_definition_hash": "066eed1049f4f51a89dd86e9d50614a65adba070b2ff650424ea7cef05dec4ea",
-    "informative_non_learned_grade_bound": "SCRIPTED/WAIT reach HASH_BOUND_REPRODUCED(3); EXACT_TRAIN_TIME(4) unreachable (train-time-only proofs); same closed-loop ceiling row as HB so no functional loss (G-4)"
+    "source_markdown": "WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md v1.8",
+    "hash_projection_rule": "evidence_policy_definition_hash = H_WCJ(policy_definition) - metadata is OUTSIDE the hash input (RV6 s2 / pN C2). policy_definition contains ASCII keys and ASCII string, integer, and boolean values only - no floats, no null, no non-ASCII (RV7 R-4 corrected wording). For this subset, H_WCJ equals sha256 of RFC8785-canonical JSON (UTF-16 and ASCII key orders coincide).",
+    "definition_hash_derivation": "python3 -c \"import json,hashlib;d=json.load(open('WMSO_EvidencePolicy_v1.8.json'));print(hashlib.sha256(json.dumps(d['policy_definition'],sort_keys=True,separators=(',',':'),ensure_ascii=True).encode()).hexdigest())\"",
+    "evidence_policy_definition_hash": "bdc508200889005142eaab5ac15c48cdfb8281df63bbb35537542f1f248891a8",
+    "informative_non_learned_grade_bound": "SCRIPTED/WAIT reach HASH_BOUND_REPRODUCED(3); EXACT_TRAIN_TIME(4) unreachable (train-time-only proofs); same closed-loop ceiling row as HB so no functional loss (G-4)",
+    "informative_rv7_delta": "v1.8 folds RV7 P0-2 (resolver signature + precedence), P0-3 (projection_rules member with golden vectors), P0-4 (CONFIG_HASH total map replaces stage discriminator), P0-6 (evaluation certificate wiring), R-4 (this metadata type wording). Semantic change - definition hash and file sha differ from the v1.7 line (066eed1049f4... / ed10c77a... are no longer pins, per RV7)."
   },
   "policy_definition": {
-    "policy_semver": "1.7.0",
+    "policy_semver": "1.8.0",
     "grades": [
       {"name": "EXACT_TRAIN_TIME", "rank": 4},
       {"name": "HASH_BOUND_REPRODUCED", "rank": 3},
@@ -22,7 +23,7 @@
       "P_provenance": ["TRAINING_PROVENANCE"]
     },
     "claim_targets": {
-      "_rule": "EvidenceRecord.claim_target_hash MUST equal the hash derived from the component's target below (mismatch = E_PROOF_MISBOUND). Single reproduction/binding anchor for every component (RV6 s3 / pN C1).",
+      "_rule": "EvidenceRecord.claim_target_hash MUST equal the hash derived from the component's target below (mismatch = E_PROOF_MISBOUND). Single reproduction/binding anchor for every component (RV6 s3 / pN C1). The two *_projection targets are defined exactly in projection_rules (RV7 P0-3).",
       "POLICY_ARTIFACT": "execution_bundle.executable_artifact_hash",
       "MODEL_ARCHITECTURE": "execution_bundle.model_architecture.artifact_hash",
       "TENSOR_BINDING": "execution_bundle.tensor_binding.artifact_hash",
@@ -36,6 +37,23 @@
       "INITIATION_SPEC": "H_WCJ(initiation_spec)",
       "TERMINATION_SPEC": "H_WCJ(termination_spec)",
       "HANDOFF_SCHEMA": "H_WCJ(handoff_schema_projection)"
+    },
+    "projection_rules": {
+      "_rule": "Exact keyed objects for the two projection claim targets (RV7 P0-3). All other H_WCJ targets hash the typed spec object itself per design s2.3 composite rules (keyed object, enum .value strings, frozenset as bytes-ascending array) - already unambiguous, no projection needed.",
+      "control_mode_projection": {
+        "object": "the canonical slot object of the control_mode slot per design s2.3: {\"state\":\"KNOWN\",\"value\":\"<ControlMode member name>\"}",
+        "slot_state_included": true,
+        "precondition": "certified definitions always have control_mode KNOWN: EXPLICIT_NONE is type-forbidden on ControlModeSlot (E_SLOT_FORBIDDEN_NONE, design s1.1) and UNKNOWN slots are not certifiable (Draft only) - therefore no sentinel encoding for EXPLICIT_NONE/UNKNOWN exists or is needed",
+        "golden_vector": {"input_canonical_json": "{\"state\":\"KNOWN\",\"value\":\"DIFF_IK_EE_TARGET\"}", "sha256": "4f0b26d50ca9def398021dc39027cd4aaeabde2440cb83a12360191134b6a01c"}
+      },
+      "handoff_schema_projection": {
+        "object": "{\"handoff_schema\": [<HandoffSchemaSpec per s2.3>...], \"accepted_handoff\": [<AcceptedHandoffSpec per s2.3>...]}",
+        "accepted_handoff_included": true,
+        "tuple_order": "declared tuple order preserved for BOTH arrays - no second canonical order is introduced; reordering a tuple changes SkillDefinitionHash and this claim target coherently (design s3-4 BehaviorSignature also sees the reorder)",
+        "fields_element_type": "SemanticFieldSpec {field_id, dtype, shape, unit, frame} (design s1.4 - pinned by RV7 P0-3)",
+        "empty_tuple": "empty tuple serializes as []; EXPLICIT_NONE/UNKNOWN states do not exist for tuple-typed definition fields (type level) - only slots have states",
+        "golden_vector": {"input_canonical_json": "{\"accepted_handoff\":[],\"handoff_schema\":[{\"fields\":[{\"dtype\":\"FLOAT32\",\"field_id\":\"ee_pos\",\"frame\":\"world\",\"shape\":[3],\"unit\":\"m\"}],\"handoff_schema_id\":\"hs_demo\",\"required_field_ids\":[\"ee_pos\"],\"schema_version\":\"1.0\"}]}", "sha256": "00ffb0154ddb241a4bf5f3b49e362cae02013338c051f7b9206c7c8cedfb602d"}
+      }
     },
     "proof_policy": {
       "_domain": "(component_kind, evidence_grade, applicability_class) -> exact required ProofKind set; REQUIRED cells only; UNKNOWN grade carries no authority-relevant claim",
@@ -88,9 +106,11 @@
       {"proof_kind": "FINAL_ARTIFACT_HASH", "bindings": [{"when": {"any": true}, "rule": "artifact_hash == claim_target_hash of the claimed component"}]},
       {"proof_kind": "REPRODUCED_OUTPUT_HASH", "bindings": [{"when": {"any": true}, "rule": "artifact_hash == claim_target_hash"}]},
       {"proof_kind": "CONFIG_HASH", "bindings": [
-        {"when": {"identity_kind": "LEARNED", "stage": "bc_of_bc_then_rl"}, "target_path": "training_provenance.bc_config_hash"},
-        {"when": {"identity_kind": "LEARNED", "stage": "final"}, "target_path": "training_provenance.final_training_config_hash"},
-        {"when": {"identity_kind": ["SCRIPTED", "WAIT"]}, "target_path": "execution_provenance.runtime_config_hash"}
+        {"when": {"identity_kind": "LEARNED", "training_lineage": ["RL_ONLY", "BC_ONLY"]}, "target_path": "training_provenance.final_training_config_hash"},
+        {"when": {"identity_kind": "LEARNED", "training_lineage": "BC_THEN_RL", "component": "TRAINING_DATASET"}, "target_path": "training_provenance.bc_config_hash"},
+        {"when": {"identity_kind": "LEARNED", "training_lineage": "BC_THEN_RL", "component_in": ["POLICY_ARTIFACT", "MODEL_ARCHITECTURE", "OBSERVATION_SCHEMA", "ACTION_SCHEMA", "TENSOR_BINDING", "NORMALIZATION", "CONTROL_MODE", "RUNTIME_CONFIG", "TRAINING_PROVENANCE", "INITIATION_SPEC", "TERMINATION_SPEC", "HANDOFF_SCHEMA"]}, "target_path": "training_provenance.final_training_config_hash"},
+        {"when": {"identity_kind": ["SCRIPTED", "WAIT"]}, "target_path": "execution_provenance.runtime_config_hash"},
+        {"totality_note": "RV7 P0-4: disjoint whens, total over (identity_kind, training_lineage, component) - LEARNED x NOT_APPLICABLE is impossible by kind-family coherence (design s3); no stage field exists on EvidenceRecord/ProofItem - this map replaces the former stage discriminator; TRAINING_DATASET under BC_THEN_RL binds bc_config_hash because the demo dataset is a BC-stage input, so the BC config is attested through the TD claim while all other components anchor to the final-stage config"}
       ]},
       {"proof_kind": "SOURCE_COMMIT", "bindings": [
         {"when": {"identity_kind": "LEARNED"}, "rule": "ref == training_provenance.final_source_commit"},
@@ -111,19 +131,32 @@
     "payload_rules": {"null_hash_kinds": ["SOURCE_COMMIT"], "source_commit_ref_format": "40-hex git commit id", "all_other_kinds": "artifact_hash required 64-hex lowercase", "violations": {"missing": "E_PROOF_PAYLOAD_MISSING", "ref_malformed": "E_PROOF_REF_MALFORMED", "misbound": "E_PROOF_MISBOUND", "foreign_kind": "E_PROOF_KIND_FOREIGN", "unresolved_artifact": "E_PROOF_ARTIFACT_UNRESOLVED"}},
     "trust_boundary": {
       "certify_inputs": ["definition", "evidence_bundle", "evidence_policy", "schema_registry", "evaluator_registry", "proof_artifact_resolver"],
+      "eligibility_inputs": ["certificate", "evidence_evaluations", "current_evidence_policy", "requested_profile"],
       "resolvers": [
         {"name": "resolve_artifact", "contract": "(ref, expected_sha256) -> bytes | UNRESOLVED; unresolved or zero-length or sha-mismatch = E_PROOF_ARTIFACT_UNRESOLVED"},
         {"name": "resolve_git_commit", "contract": "(commit_id_40hex) -> exists | UNRESOLVED; used for SOURCE_COMMIT which carries no artifact_hash; unresolved = E_PROOF_ARTIFACT_UNRESOLVED"}
       ]
     },
-    "evaluator_registry_rule": {"membership": "EvidenceRecord.evaluator_artifact_hash must be a member of the evaluator_registry passed to certify_definition", "violation": "E_EVALUATOR_UNKNOWN", "certificate_binding": "ContractCertificate.evaluator_registry_hash = H_WCJ of sorted evaluator artifact hashes"},
+    "evaluator_registry_rule": {
+      "membership": "EvidenceRecord.evaluator_artifact_hash must be a member of the evaluator_registry passed to certify_definition",
+      "violation": "E_EVALUATOR_UNKNOWN",
+      "certificate_binding": "ContractCertificate.evaluator_registry_hash = H_WCJ of sorted evaluator artifact hashes",
+      "evaluation_certificates": {
+        "issued_by": "certify_definition issues one EvidenceEvaluationCertificate per evaluated EvidenceRecord; canonical order = component_kind.value bytes ascending (RV7 P0-6)",
+        "grade_agreement": "EvidenceRecord.grade must equal assigned_grade; mismatch = E_GRADE_MISMATCH (fail-closed - grade is a measured value, not self-asserted)",
+        "result_binding": "ContractCertificate.evidence_evaluation_bundle_hash = H_WCJ(issued evaluation certificates in canonical order)",
+        "eligibility_source": "evaluate_usage_eligibility consumes assigned_grade from the evaluation certificates, verified against certificate.evidence_evaluation_bundle_hash (mismatch = E_CERT_INPUT_MISMATCH)"
+      }
+    },
     "applicability_rules": [
-      {"order": 1, "layer": "instance", "condition": {"slot_state": "EXPLICIT_NONE_certified"}, "result": "NOT_APPLICABLE", "carrier": "certificate.explicit_none_components"},
-      {"order": 2, "layer": "lineage", "condition": {"component": "TRAINING_DATASET", "lineage_in": ["BC_ONLY", "BC_THEN_RL"]}, "result": "REQUIRED_profile_min_grade", "else_result": "OPTIONAL"},
-      {"order": 2, "layer": "lineage", "condition": {"component": "TRAINING_PROVENANCE", "lineage": "NOT_APPLICABLE"}, "result": "NOT_APPLICABLE", "else_result": "REQUIRED_profile_min_grade"},
-      {"order": 3, "layer": "profile", "condition": {"profile_cell": "dash"}, "result": "NOT_APPLICABLE"},
-      {"order": 4, "layer": "default", "result": "REQUIRED_profile_min_grade"},
-      {"invariant": "NOT_APPLICABLE is not UNKNOWN; N/A = validated absence excluded from aggregation; UNKNOWN = rank 0, disqualifying, never exempt"}
+      {"resolver_signature": "resolve_applicability(identity_kind, training_lineage, explicit_none_components, requested_profile, component) -> REQUIRED(min_grade) | NOT_APPLICABLE | OPTIONAL", "note": "RV7 P0-2 supersedes ApplicabilityResolver(kind, lineage, component) and the former instance->lineage->profile->default order. requested_profile is null at certification (profile-neutral) - layer 2 is then skipped."},
+      {"order": 1, "layer": "instance_explicit_none", "condition": {"component_in_explicit_none_components": true, "carrier": "certificate.explicit_none_components"}, "result": "NOT_APPLICABLE"},
+      {"order": 2, "layer": "profile_dash", "condition": {"requested_profile_non_null": true, "profile_cell": "dash"}, "result": "NOT_APPLICABLE"},
+      {"order": 3, "layer": "lineage", "condition": {"component": "TRAINING_DATASET", "training_lineage_in": ["BC_ONLY", "BC_THEN_RL"]}, "result": "REQUIRED_profile_min_grade", "else_result": "OPTIONAL"},
+      {"order": 3, "layer": "lineage", "condition": {"component": "TRAINING_PROVENANCE", "training_lineage": "NOT_APPLICABLE"}, "result": "NOT_APPLICABLE", "else_result": "REQUIRED_profile_min_grade"},
+      {"order": 4, "layer": "kind_default", "result": "REQUIRED_profile_min_grade"},
+      {"invariant": "NOT_APPLICABLE is not UNKNOWN; N/A = validated absence excluded from aggregation; UNKNOWN = rank 0, disqualifying, never exempt"},
+      {"regression_vector": "requested_profile=OFFLINE_REPLAY, identity_kind=LEARNED, training_lineage=BC_ONLY, component=TRAINING_DATASET -> NOT_APPLICABLE at layer 2 (the v1.7.1 order wrongly yielded REQUIRED at the lineage layer before the profile dash cell was consulted - RV7 P0-2)"}
     ],
     "profiles": {
       "CLOSED_LOOP": {
