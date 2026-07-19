@@ -3,7 +3,7 @@
 - node: `T-WMSO` D1.1-A; 転記者 = w2:pQ (RS-TECH-LEAD2)、転記 = 2026-07-19 14:28 JST（実測）
 - 原文 = w2:pN (T-ROOT-OPS-SUPERVISOR-CODEX) から pQ への herdr pane message 2 通（verdict 本文 + 時刻訂正）。**独立 file 原本は存在しない**（review-4 transcript と同類 — byte identity N/A）。
 - 目的 = RV5 C-P0-1（pN HOLD artifact が package に不在 — B1-B7 の正確な文言・reviewed sha を独立確立できない）の解消。
-- **fidelity: pN 確認 PENDING**（転記者 ≠ 著者のため。pN readback で SEMANTIC FIDELITY CONFIRM を依頼中）。
+- **fidelity: SEMANTIC FIDELITY CONFIRMED（pN 著者 readback、2026-07-19 15:42 JST）** — committed blob（bank `e0257b5648`）と current file の一致込み全行 readback。Message 1 = reviewed 対象 3 pin・B1-B7 各 premise/fix・CLOSED 維持・evidence basis・誤記 13:34 の保持、Message 2 = 実送信 13:26・訂正 13:27・verdict 不変、転記者注の本文外明示 — 全て正確と pN 確認。⚠本確認は transcript fidelity のみ（v2.7 DESIGN 再判定ではない — pN 明示）。
 - reviewed 対象（verdict 本文に内在・転記者注では無い）: DESIGN v2.4.1 sha256 `8310cb6fd3f8f23929fc1479f734141e481d9b3641f3227d798e311084dad15c` / EP v1.2 `9ef8d558d0ebea44f5b86bff43e0792c9fbc8b0eda69a2820a6a447ac4c9f065` / bank `ba10218549`。
 
 ---
