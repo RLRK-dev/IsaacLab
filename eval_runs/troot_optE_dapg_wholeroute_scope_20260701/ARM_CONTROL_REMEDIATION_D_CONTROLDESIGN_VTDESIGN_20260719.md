@@ -10,7 +10,7 @@
 | v1.2 | `3b5f75c131` | 09:02 | 訂正 #2: imported actuator 12 本発見 → Option B（M-1、§0.0） |
 | v1.3 | `054ccf139a` | 09:42 | 訂正 #3: route-start pose bridge → (a-2) 境界 re-pose（§4 新 B row、§0.0） |
 | v1.4 | `e32c75c3a4` | 10:45 | Rs review 対応: ③B1 裁定 / ④§7-5 supersede + L-P0 REQUIRED / ⑤仮説 tag / ⑥guard rename+時間意味論 / ⑦§8-2 UNVERIFIED / L-P5 再設計 mark |
-| v1.5 | bank = %12 | 11:26/11:43 | §12 = prereg v1.1 L-P5′/L-P2′ RATIFY + 精密化 2（11:26 dispatch）→ **Rs review v2 残 6 点 fold（11:43）**: ①A-P0-5 FF 実経路 site 列挙（§5 修正）②A-P0-6 run-matrix 表 ③A-P0-3 L-P0 defer 句削除+役割宣言 ④A-P1-3 negative control 再設計 = stale-target PRIMARY（§12.1、**§12-① L-P5′ を supersede**）⑤A-P1-4 re-pose 受入検査群 spec（§12.2）⑥P-P1-2 stamp 規約注記 |
+| v1.5 | `a584be8545` | 11:26/11:43 | §12 = prereg v1.1 L-P5′/L-P2′ RATIFY + 精密化 2（11:26 dispatch）→ **Rs review v2 残 6 点 fold（11:43）**: ①A-P0-5 FF 実経路 site 列挙（§5 修正）②A-P0-6 run-matrix 表 ③A-P0-3 L-P0 defer 句削除+役割宣言 ④A-P1-3 negative control 再設計 = stale-target PRIMARY（§12.1、**§12-① L-P5′ を supersede**）⑤A-P1-4 re-pose 受入検査群 spec（§12.2）⑥P-P1-2 stamp 規約注記 |
 
 > **stamp/placeholder 規約（⑥ P-P1-2）**: stamp = dispatch 時 `date` 実測 JST。「bank = %12」SHA cell = bank 待ち placeholder（bank 後に %12 records-fix で実 SHA 充填、v1.4 先例 `c951a072d7`）。§0.0 narrative 内の「HH:2x」型 = 当時 verbatim の分丸め表記（exact anchor = 本表）。歴史注記: v1.4/v1.5 の stamp は当初 予測時刻を記入→dispatch 前に実測へ訂正した（10:52→10:45 / 11:29→11:26、date-THEN-write 違反の自己捕捉 2 回）。
 
