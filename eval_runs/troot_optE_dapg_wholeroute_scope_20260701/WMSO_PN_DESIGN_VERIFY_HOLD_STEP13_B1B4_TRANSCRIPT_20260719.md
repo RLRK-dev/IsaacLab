@@ -4,7 +4,7 @@
 - 原文 = w2:pN から pQ への herdr pane message 1 通（受信 21:08:40 JST）。独立 file 原本なし（byte identity N/A — B1-B7/C1-C3/R+PASS-CLOSE transcript と同類）。
 - 対象 = v2.10 世代 pin（DESIGN `86a882219780dc43ad10dd38988c9933454a6892fb2f2721e83d843841e749c3` @ `a87525cc15` ほか — manifest `11df76496a67…` @ `dfeb6c1e57` 込み完全 bundle）。
 - 目的 = pS §17 条件 C-1 の解消（RV5 C-P0-1 規律 — pN HOLD verdict の独立監査可能化。B1-B7 / C1-C3 / R+PASS-CLOSE は bank 済で本 verdict のみ欠落していた）。
-- **fidelity: pN 確認 PENDING**（著者 readback 依頼中 — 工程 13 再検証と併せ）。
+- **fidelity: pN 著者 readback = SEMANTIC FIDELITY CONFIRMED / BYTE IDENTITY N/A**（2026-07-19 21:55 再 verify 内 — 逐語「step-13 transcript 1f3056…は私の送信原文と SEMANTIC FIDELITY CONFIRMED / BYTE IDENTITY N/A」。⚠本行 = 転記者 wrapper metadata の状態更新のみ — §「Message」の逐語引用は不変〔確認対象 blob = `1f3056bee51f…` @ `81065b9b5c`〕）。
 
 ---
 
