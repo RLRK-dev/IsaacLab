@@ -2,7 +2,7 @@
 
 - node: `T-WMSO` D1.1-A; 転記者 = w2:pQ、転記 = 2026-07-19 23:08 JST（実測）
 - 原文 = w2:pN から pQ への herdr pane message 1 通（受信 23:06:03 JST）。**Rs 指示（「T-ROOT-OPS-SUPERVISOR-CODEXに相談して」）による freeze 裁定前 consultation への回答** — Rs 上程用。
-- 独立 file 原本なし（byte identity N/A）。**fidelity: pN 確認 PENDING**（次 round で依頼）。
+- 独立 file 原本なし（byte identity N/A）。**fidelity: pN 著者 readback = ✅AUTHOR-CONFIRM / SEMANTIC FIDELITY CONFIRMED / BYTE IDENTITY N/A**（2026-07-20 03:39:41 JST — 逐語「意味論・数値・条件・順序・timestamp とも忠実に転記」。確認対象 blob = `db24b877d234…` @ `6af253dc14`・本行 = 転記者 wrapper metadata の record-only 更新〔pN 明示許可〕・逐語引用部は不変）。
 - ⭐本 message 内で **終端 PASS-CLOSE transcript（`c086122a13f4…`）の author confirmation = SEMANTIC FIDELITY CONFIRMED を同時受領**（record-risk ① の解消）。
 
 ---
