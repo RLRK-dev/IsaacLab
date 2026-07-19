@@ -1630,6 +1630,88 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
                 if "pad" not in lbl.lower():
                     proto.add_shape_collision_filter_pair(cable_si, arm_si)
 
+        # --- (d)/PS-1 arm-PD wiring: hoisted OUT of grasp_actuation (c10, design sec14.15) so the
+        # grip env (which builds WITHOUT gripper servos -- fingers stay the physical spring/cage
+        # mechanism) can wire the SAME arm B1-strip + POSITION servos. Env-flag-gated inside
+        # (ARM_PD_DRIVE / ARM_XML_ACT_NEUTRALIZE); with neither set this is byte-identical. ---
+        # --- (d) P-D1 Option B (design doc ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md
+        # v1.2 M-1): (i) NEUTRALIZE the imported ur5e.xml arm actuators (they are unwired from Newton
+        # control -- ctrl==0 saturated pull, the tug-of-war finding b9eaaf9d93) + (ii) wire proto
+        # POSITION servos (gripper mirror). Probe-only, flag-gated, default OFF -> byte-identical.
+        # ARM_XML_ACT_NEUTRALIZE=1 alone = L-P0 mode (neutralize only, kinematic drive unchanged);
+        # ARM_PD_DRIVE=1 implies neutralize + servo wiring + the ctrl drive branch (route env).
+        # ARM_PD_GAINS_SCALE scales the SERVO ke/kd ONLY (L-P5 negative control) -- effort caps stay
+        # at the real-robot spec (+-150/+-28 N.m, sec3.1 raise-forbidden). ---
+        _apd_drive = os.environ.get("ARM_PD_DRIVE") == "1"
+        _apd_neutralize = _apd_drive or os.environ.get("ARM_XML_ACT_NEUTRALIZE") == "1"
+        if _apd_neutralize:
+            _apd_ga = proto.custom_attributes.get("mujoco:actuator_gainprm")
+            _apd_ba = proto.custom_attributes.get("mujoco:actuator_biasprm")
+            assert (
+                _apd_ga is not None
+                and _apd_ba is not None
+                and len(_apd_ga.values) == 12
+                and len(_apd_ba.values) == 12
+            ), (
+                "armpd-neutralize: expected EXACTLY the 12 imported ur5e arm actuators in the proto "
+                f"custom attrs, got gain={None if _apd_ga is None else len(_apd_ga.values)} "
+                f"bias={None if _apd_ba is None else len(_apd_ba.values)}"
+            )
+            # Capture the vendor values BEFORE stripping (L-P6 numeric-equality cross-check source).
+            _apd_vendor = sorted(
+                (round(float(g[0]), 3), round(float(b[1]), 3), round(float(b[2]), 3))
+                for g, b in zip(_apd_ga.values, _apd_ba.values)
+            )
+            _apd_vendor_want = sorted([(2000.0, -2000.0, -400.0)] * 6 + [(500.0, -500.0, -100.0)] * 6)
+            assert _apd_vendor == _apd_vendor_want, (
+                f"armpd-neutralize vendor cross-check: imported (gain0,bias1,bias2) set {_apd_vendor} != "
+                f"design table {_apd_vendor_want} -- the proto servo values would NOT re-implement the "
+                "same vendor actuators (design M-1 census)"
+            )
+            # v1.4-③ B1-STRIP (PRIMARY ruling): REMOVE the 12 imported actuator entries from EVERY
+            # proto custom attribute of the mujoco:actuator frequency (list-based storage; the
+            # same-count-per-frequency finalize validation requires clearing them all consistently).
+            # At this build point ONLY the imported arm actuators exist in these attrs (asserted
+            # above via the gain/bias tables) -- the gripper servos come from joint_target wiring,
+            # not from these attrs. Result: nu = 16 (12 proto-wired arm + 4 gripper), NO inert set.
+            for _apd_attr in proto.custom_attributes.values():
+                if getattr(_apd_attr, "frequency", None) == "mujoco:actuator":
+                    assert isinstance(_apd_attr.values, list), (
+                        f"armpd-strip: attr {_apd_attr.name} values is {type(_apd_attr.values).__name__}, not list"
+                    )
+                    if len(_apd_attr.values) == 0:
+                        continue  # runtime/Control-assignment attr (e.g. 'ctrl') -- nothing to strip
+                    assert len(_apd_attr.values) == 12, (
+                        f"armpd-strip: attr {_apd_attr.name} count {len(_apd_attr.values)} != 12 "
+                        "(unexpected non-imported actuator entries)"
+                    )
+                    del _apd_attr.values[:]
+        if _apd_drive:
+            # v1.7 §13 R-2: independent ke/kd scales (the kd/ke viscous-lag lever). Back-compat:
+            # ARM_PD_GAINS_SCALE sets both unless the specific scale overrides it.
+            _apd_scale = float(os.environ.get("ARM_PD_GAINS_SCALE", "1.0"))
+            _apd_ke_scale = float(os.environ.get("ARM_PD_KE_SCALE", str(_apd_scale)))
+            _apd_kd_scale = float(os.environ.get("ARM_PD_KD_SCALE", str(_apd_scale)))
+            # local arm joint -> (ke, kd, effort cap): 0-2 = shoulder_pan/lift, elbow (size3);
+            # 3-5 = wrist_1/2/3 (size1). ur5e.xml document order (cross-checked against the
+            # captured vendor set above), same index space as the gripper drivers (gripper
+            # starts at local 6).
+            _apd_gains = {
+                0: (2000.0, 400.0, 150.0),
+                1: (2000.0, 400.0, 150.0),
+                2: (2000.0, 400.0, 150.0),
+                3: (500.0, 100.0, 28.0),
+                4: (500.0, 100.0, 28.0),
+                5: (500.0, 100.0, 28.0),
+            }
+            for _base in (0, JOINTS_PER_ARM):
+                for _j, (_ke, _kd, _eff) in _apd_gains.items():
+                    _dof = _base + _j
+                    proto.joint_target_mode[_dof] = int(newton.JointTargetMode.POSITION)
+                    proto.joint_target_ke[_dof] = _ke * _apd_ke_scale
+                    proto.joint_target_kd[_dof] = _kd * _apd_kd_scale
+                    proto.joint_effort_limit[_dof] = _eff
+                    proto.joint_target_pos[_dof] = float(proto.joint_q[_dof])
         # --- S6_GRASP actuation + 4-bar equalities + S5 contact families (gated; mirrors the proven
         # build_scene grasp_actuation, test:1336-1421). default False -> skipped -> AC/Grip byte-identical.
         # Wired on the proto BEFORE replicate so every world inherits the servo + eqs + condim. ---
@@ -1645,84 +1727,6 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
                 proto.joint_target_kd[dof] = GRIPPER_SERVO_TARGET_KD
                 proto.joint_effort_limit[dof] = GRIPPER_DRIVER_EFFORT_LIMIT_NM
                 proto.joint_target_pos[dof] = GRIPPER_DRIVER_OPEN_RAD  # start OPEN; runner schedules CLOSE
-            # --- (d) P-D1 Option B (design doc ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md
-            # v1.2 M-1): (i) NEUTRALIZE the imported ur5e.xml arm actuators (they are unwired from Newton
-            # control -- ctrl==0 saturated pull, the tug-of-war finding b9eaaf9d93) + (ii) wire proto
-            # POSITION servos (gripper mirror). Probe-only, flag-gated, default OFF -> byte-identical.
-            # ARM_XML_ACT_NEUTRALIZE=1 alone = L-P0 mode (neutralize only, kinematic drive unchanged);
-            # ARM_PD_DRIVE=1 implies neutralize + servo wiring + the ctrl drive branch (route env).
-            # ARM_PD_GAINS_SCALE scales the SERVO ke/kd ONLY (L-P5 negative control) -- effort caps stay
-            # at the real-robot spec (+-150/+-28 N.m, sec3.1 raise-forbidden). ---
-            _apd_drive = os.environ.get("ARM_PD_DRIVE") == "1"
-            _apd_neutralize = _apd_drive or os.environ.get("ARM_XML_ACT_NEUTRALIZE") == "1"
-            if _apd_neutralize:
-                _apd_ga = proto.custom_attributes.get("mujoco:actuator_gainprm")
-                _apd_ba = proto.custom_attributes.get("mujoco:actuator_biasprm")
-                assert (
-                    _apd_ga is not None
-                    and _apd_ba is not None
-                    and len(_apd_ga.values) == 12
-                    and len(_apd_ba.values) == 12
-                ), (
-                    "armpd-neutralize: expected EXACTLY the 12 imported ur5e arm actuators in the proto "
-                    f"custom attrs, got gain={None if _apd_ga is None else len(_apd_ga.values)} "
-                    f"bias={None if _apd_ba is None else len(_apd_ba.values)}"
-                )
-                # Capture the vendor values BEFORE stripping (L-P6 numeric-equality cross-check source).
-                _apd_vendor = sorted(
-                    (round(float(g[0]), 3), round(float(b[1]), 3), round(float(b[2]), 3))
-                    for g, b in zip(_apd_ga.values, _apd_ba.values)
-                )
-                _apd_vendor_want = sorted([(2000.0, -2000.0, -400.0)] * 6 + [(500.0, -500.0, -100.0)] * 6)
-                assert _apd_vendor == _apd_vendor_want, (
-                    f"armpd-neutralize vendor cross-check: imported (gain0,bias1,bias2) set {_apd_vendor} != "
-                    f"design table {_apd_vendor_want} -- the proto servo values would NOT re-implement the "
-                    "same vendor actuators (design M-1 census)"
-                )
-                # v1.4-③ B1-STRIP (PRIMARY ruling): REMOVE the 12 imported actuator entries from EVERY
-                # proto custom attribute of the mujoco:actuator frequency (list-based storage; the
-                # same-count-per-frequency finalize validation requires clearing them all consistently).
-                # At this build point ONLY the imported arm actuators exist in these attrs (asserted
-                # above via the gain/bias tables) -- the gripper servos come from joint_target wiring,
-                # not from these attrs. Result: nu = 16 (12 proto-wired arm + 4 gripper), NO inert set.
-                for _apd_attr in proto.custom_attributes.values():
-                    if getattr(_apd_attr, "frequency", None) == "mujoco:actuator":
-                        assert isinstance(_apd_attr.values, list), (
-                            f"armpd-strip: attr {_apd_attr.name} values is {type(_apd_attr.values).__name__}, not list"
-                        )
-                        if len(_apd_attr.values) == 0:
-                            continue  # runtime/Control-assignment attr (e.g. 'ctrl') -- nothing to strip
-                        assert len(_apd_attr.values) == 12, (
-                            f"armpd-strip: attr {_apd_attr.name} count {len(_apd_attr.values)} != 12 "
-                            "(unexpected non-imported actuator entries)"
-                        )
-                        del _apd_attr.values[:]
-            if _apd_drive:
-                # v1.7 §13 R-2: independent ke/kd scales (the kd/ke viscous-lag lever). Back-compat:
-                # ARM_PD_GAINS_SCALE sets both unless the specific scale overrides it.
-                _apd_scale = float(os.environ.get("ARM_PD_GAINS_SCALE", "1.0"))
-                _apd_ke_scale = float(os.environ.get("ARM_PD_KE_SCALE", str(_apd_scale)))
-                _apd_kd_scale = float(os.environ.get("ARM_PD_KD_SCALE", str(_apd_scale)))
-                # local arm joint -> (ke, kd, effort cap): 0-2 = shoulder_pan/lift, elbow (size3);
-                # 3-5 = wrist_1/2/3 (size1). ur5e.xml document order (cross-checked against the
-                # captured vendor set above), same index space as the gripper drivers (gripper
-                # starts at local 6).
-                _apd_gains = {
-                    0: (2000.0, 400.0, 150.0),
-                    1: (2000.0, 400.0, 150.0),
-                    2: (2000.0, 400.0, 150.0),
-                    3: (500.0, 100.0, 28.0),
-                    4: (500.0, 100.0, 28.0),
-                    5: (500.0, 100.0, 28.0),
-                }
-                for _base in (0, JOINTS_PER_ARM):
-                    for _j, (_ke, _kd, _eff) in _apd_gains.items():
-                        _dof = _base + _j
-                        proto.joint_target_mode[_dof] = int(newton.JointTargetMode.POSITION)
-                        proto.joint_target_ke[_dof] = _ke * _apd_ke_scale
-                        proto.joint_target_kd[_dof] = _kd * _apd_kd_scale
-                        proto.joint_effort_limit[_dof] = _eff
-                        proto.joint_target_pos[_dof] = float(proto.joint_q[_dof])
             # Restore the 4 gripper 4-bar connect equalities (follower<->coupler), BY LABEL for both arms
             # (the shipped XML <connect> loaded with skip_equality_constraints=True). 4 connects / proto.
             _blabel = [str(x) for x in (getattr(proto, "body_label", None) or getattr(proto, "body_key", []))]

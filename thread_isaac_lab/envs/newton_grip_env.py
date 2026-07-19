@@ -265,6 +265,10 @@ class NewtonGripEnv(VecEnv):
             raise ValueError(f"Invalid expected_arm: {self._expected_arm!r}. Expected one of {sorted(EXPECTED_ARMS)}.")
         self._expected_arm_code = {"both": 0, "right": 1, "left": 2}[self._expected_arm]
         self._world_count = world_count
+        # PS-1 (Rs 2026-07-19 kinematic complete-removal; design sec14.15/14.17): the arm is driven
+        # by the POSITION-servo ctrl path ONLY. Flag mirrors the (d) route-env rollout; default OFF
+        # keeps the legacy build byte-identical but the per-step arm drive then FAILS CLOSED.
+        self._arm_pd_drive = os.environ.get("ARM_PD_DRIVE") == "1"
 
         # episode_length_buf is per-world (both arms share episode lifecycle)
         self._world_episode_length = torch.zeros(world_count, dtype=torch.long, device=device)
@@ -369,6 +373,45 @@ class NewtonGripEnv(VecEnv):
         self._cable_body_offset = scene["cable_body_offset"]
         self._bodies_per_world = scene["bodies_per_world"]
         self._jws = self._model.joint_world_start.numpy()
+
+        # PS-1: per-world qd indices of the 2*JOINTS_PER_ARM robot joint columns (joint_target_pos
+        # is qd-indexed). Robot joints lead each world's joint slice; the cable chain follows.
+        _jqds = self._model.joint_qd_start.numpy()
+        self._arm_qd_idx = np.stack(
+            [
+                np.array([int(_jqds[self._jws[w] + k]) for k in range(2 * JOINTS_PER_ARM)], dtype=np.int64)
+                for w in range(self._world_count)
+            ]
+        )
+        if self._arm_pd_drive:
+            # PS-1 census (ports the (d) L-P6 asserts; grip builds WITHOUT gripper servos so the
+            # expected actuator population is EXACTLY the 12 proto-wired arm servos, B1-strip clean).
+            import mujoco as _ps1_mj
+
+            _ps1_m = self._solver.mj_model
+            _ps1_scale = float(os.environ.get("ARM_PD_GAINS_SCALE", "1.0"))
+            _ps1_ke_scale = float(os.environ.get("ARM_PD_KE_SCALE", str(_ps1_scale)))
+            _ps1_arm_acts = []
+            for a in range(int(_ps1_m.nu)):
+                j = int(np.asarray(_ps1_m.actuator_trnid)[a, 0])
+                jn = _ps1_mj.mj_id2name(_ps1_m, _ps1_mj.mjtObj.mjOBJ_JOINT, j) or ""
+                if "ur5e" in jn:
+                    _ps1_arm_acts.append(a)
+            assert int(_ps1_m.nu) == 12 and len(_ps1_arm_acts) == 12, (
+                f"grip PS-1 census (B1-strip): nu={int(_ps1_m.nu)}, arm-mapped={len(_ps1_arm_acts)} "
+                "(expected exactly the 12 proto-wired arm servos; imported actuators must be ABSENT)"
+            )
+            _ps1_jtm = self._model.joint_target_mode.numpy()
+            _ps1_ke = self._model.joint_target_ke.numpy()
+            _ps1_pos = int(newton.JointTargetMode.POSITION)
+            for w in range(self._world_count):
+                for _base in (0, JOINTS_PER_ARM):
+                    for _li in range(6):
+                        d = int(self._arm_qd_idx[w, _base + _li])
+                        eke = (2000.0 if _li < 3 else 500.0) * _ps1_ke_scale
+                        assert int(_ps1_jtm[d]) == _ps1_pos, f"grip PS-1 census: dof {d} mode {_ps1_jtm[d]}"
+                        assert abs(float(_ps1_ke[d]) - eke) < 1e-3, f"grip PS-1 census: dof {d} ke {_ps1_ke[d]} != {eke}"
+            print(f"[GripEnv:{self._mode}] PS-1 census PASS: nu=12 arm servos wired (B1-strip clean)")
 
         print(f"[GripEnv:{self._mode}] Model: {self._model.body_count} bodies, {self._model.joint_count} joints")
 
@@ -1670,17 +1713,18 @@ class NewtonGripEnv(VecEnv):
             jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[0]] = jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[0]]
             jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[1]] = jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[1]]
 
-        # FK interpolation + physics stepping
+        # DRIVE: interpolate the FULL joint row per frame (arm columns included -- p5 sec14.17 Q2,
+        # route-env parity) and realize the ARM through the POSITION-servo ctrl ONLY (PS-1, Rs
+        # 2026-07-19 kinematic complete-removal). The former FK body_q broadcast of the arm bodies
+        # is REMOVED; eval_fk_batched stays as the FINGER-SPRING TARGET source (p5 sec14.17 Q1 --
+        # the spring applies FORCES, a physical mechanism, not a state write).
         old_fk_jq = np.array(self._per_world_fk_jq[:N])
         for step in range(self.PHYSICS_STEPS_PER_RL):
             t = min((step + 1) / self.PHYSICS_STEPS_PER_RL, 1.0)
 
-            jq_interp = old_fk_jq.copy()
-            jq_interp[:, finger_mask] = (
-                old_fk_jq[:, finger_mask] + (jq_targets[:, finger_mask] - old_fk_jq[:, finger_mask]) * t
-            )
-            for fc in (*GRIPPER_JOINT_RANGE, *(JOINTS_PER_ARM + j for j in GRIPPER_JOINT_RANGE)):
-                jq_interp[:, fc] = old_fk_jq[:, fc] + (jq_targets[:, fc] - old_fk_jq[:, fc]) * t
+            # Full-row lerp: subsumes the former finger-only interp (identical formula per column;
+            # the finger columns of jq_targets already carry their preserved commanded values).
+            jq_interp = old_fk_jq + (jq_targets - old_fk_jq) * t
 
             self._batch_fk_jq.assign(jq_interp)
             eval_fk_batched(
@@ -1688,13 +1732,18 @@ class NewtonGripEnv(VecEnv):
             )
             batch_bq = self._batch_fk_body_q.numpy()[:, :ROBOT_BODY_COUNT]
 
-            phys_bq = self._state_0.body_q.numpy()
-            for w in range(N):
-                ws = self._bws[w]
-                for bi in range(ROBOT_BODY_COUNT):
-                    if (ws + bi) not in self._finger_set:
-                        phys_bq[ws + bi] = batch_bq[w, bi]
-            self._state_0.body_q.assign(phys_bq)
+            if self._arm_pd_drive:
+                # ARM realization = servo target write only (qd-indexed; local cols 0-5 per arm).
+                _ps1_jtp = self._control.joint_target_pos.numpy()
+                for w in range(N):
+                    for _base in (0, JOINTS_PER_ARM):
+                        _ps1_jtp[self._arm_qd_idx[w, _base : _base + 6]] = jq_interp[w, _base : _base + 6]
+                self._control.joint_target_pos.assign(_ps1_jtp)
+            else:
+                raise RuntimeError(
+                    "kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+                    "the grip arm drive is the POSITION-servo ctrl path only (PS-1; set ARM_PD_DRIVE=1)"
+                )
 
             self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT, fk_batch_bq=batch_bq, n_worlds=N)
 
