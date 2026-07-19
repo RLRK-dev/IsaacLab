@@ -9,7 +9,7 @@
 | v1.1 | `ed24470097` | 08:26 | 訂正 #1: §5⇄§8-3 cadence 矛盾 → @4 走行（§0.0） |
 | v1.2 | `3b5f75c131` | 09:02 | 訂正 #2: imported actuator 12 本発見 → Option B（M-1、§0.0） |
 | v1.3 | `054ccf139a` | 09:42 | 訂正 #3: route-start pose bridge → (a-2) 境界 re-pose（§4 新 B row、§0.0） |
-| v1.4 | bank = %12 | 10:45 | Rs review 対応: ③B1 裁定 / ④§7-5 supersede + L-P0 REQUIRED / ⑤仮説 tag / ⑥guard rename+時間意味論 / ⑦§8-2 UNVERIFIED / L-P5 再設計 mark |
+| v1.4 | `e32c75c3a4` | 10:45 | Rs review 対応: ③B1 裁定 / ④§7-5 supersede + L-P0 REQUIRED / ⑤仮説 tag / ⑥guard rename+時間意味論 / ⑦§8-2 UNVERIFIED / L-P5 再設計 mark |
 
 ### §0.0 訂正 narrative 履歴（v1.1-v1.3、verbatim — 各裁定の本文 fold 先は版表参照）
 - v1.1 = **訂正 #1（%12 catch、08:23）**: §5⇄§8-3 の cadence 矛盾（§5=newton_route_env は RL path @4 ハード定数 `newton_skill_env_base.py:95`、§8-3 は「FF@producer-cadence(10)」と記載）→ **裁定 (a) P-D1 = @4 で走行**（§5/§8-3 を整合化。@10 被覆は S-2 producer gate へ移設、knob 追加なし）。
