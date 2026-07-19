@@ -425,6 +425,8 @@ _NEG_CONTROLS: list[tuple[str, str]] = [
         "fk-body-helper-alias",
         "def _a(t, v):\n    t.assign(v)\ndef g(fk_state, v):\n    _a(getattr(fk_state, 'body_q'), v)\n",
     ),
+    # surface-1: host-copy alias of an fk_state BODY buffer is still a source (fk exempts joint only).
+    ("fk-body-host-copy-alias", "def f(fk_state, a):\n    v = fk_state.body_q.numpy()\n    v[3] = a\n"),
 ]
 _POS_CONTROLS: list[tuple[str, str]] = [
     ("fk-state-real", "def f(self, a):\n    self._fk_state.joint_q.assign(a)\n"),
