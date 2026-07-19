@@ -1,9 +1,14 @@
-# WMSO D1.1-A 成果物 manifest（2026-07-19 16:58 JST 更新実測 — Rs review v6 + pN C1-C3 統合 fold = v2.9 + EP v1.7）
+# WMSO D1.1-A 成果物 manifest（2026-07-19 17:45 JST 更新実測 — **pN evidence 軸 PASS-CLOSE・freeze 判定 = Rs 上程中**）
 
 作成 = w2:pQ (RS-TECH-LEAD2)、node `T-WMSO`。全 sha256 = full 64-hex、bank commit 付き。
 
 ## 現在地（1 行）
-**DESIGN v2.7 = Rs review v5 の bounded fix 完了** → 残 = pS delta 照合 → pN 再 verify（最終 sha 宛）→ **D1.1-A freeze 判定**（RV5 §6-5 の Rs 方向どおり）。scope CLOSED / **impl・訓練・authority = CLOSED 不変**（kinematic 全廃 directive の HALT とも整合 — 契約層に kinematic/pin 依存なし、grep 確認済み・design §10）。
+**DESIGN v2.9.2 + EP v1.7.1 + JSON = pS §14 PASS ＋ pN evidence 軸 ✅PASS-CLOSE（17:43、R1-R3 CLOSED・blob 独立再現・hash 独立再計算一致）** → **残 = D1.1-A freeze の Rs 判定のみ**。freeze 適格性のみの PASS であり、code/[CHANGE]/impl/authority GO ではない（pN 逐語）。scope CLOSED / impl・訓練・authority = CLOSED 不変。freeze 後 = D1.1-B（tensor binding）/ D1.1-C（artifact manifest）/ 2-3 skill boundary-only vertical slice（RV5 §6-5 / RV6 §10）。
+
+## 最終 pin（pN PASS-CLOSE 対象・bank `ba69702cb9`）
+- DESIGN v2.9.2 = `e83a29061400b42c18a6607c96295e0ede2984cda8b9b047f338512ccb0b7f96`
+- EvidencePolicy v1.7.1 = `27701698ed38a0749d0446e72533888620a4579b23b7db0088e0f9fdb63d34ab`
+- JSON fixture = `ed10c77a4d9957368380195ee081368da3fdaa170b03ec275584e08d1c301faa`（definition hash `066eed1049f4…` = pS・pN 双方が独立再計算一致）
 
 ## 本 bundle（`~/Downloads/`）
 
