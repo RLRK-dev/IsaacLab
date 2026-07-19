@@ -100,6 +100,14 @@ def _has_fk_token(tokens: list[str]) -> bool:
     return any(t in FK_TOKENS for t in tokens)  # G3: exact token, not substring
 
 
+def _fk_exempt(attr: str, tokens: list[str]) -> bool:
+    """FK exemption is attr-sensitive (pN 23:11, BODY/RAW exception 0): the fk_state scratch is exempt
+    ONLY for joint_q/joint_qd (the FK *input*). body_q/qd/prev and qpos/qvel/eq are NEVER exempt --
+    a body/raw write is a sink on ANY receiver, since bodies must follow joint via ``eval_fk`` (never a
+    direct body write, even on the FK scratch)."""
+    return attr in JQ_ASSIGN_ATTRS and _has_fk_token(tokens)
+
+
 def _direct_param_sinks(node: ast.AST, idx: dict[str, int]) -> set[int]:
     """G6 (F1): which of this call/store's operands are a bare parameter delivered to a device/host
     sink -- ``p.assign(x)`` / ``p.fill_(x)`` / ``np.copyto(p, x)`` / ``wp.copy(p, x)`` / ``p[...] = x``.
@@ -201,7 +209,7 @@ class _FileCheck(ast.NodeVisitor):
             and value.func.attr == "numpy"
             and isinstance(value.func.value, ast.Attribute)
             and value.func.value.attr in STATE_ATTRS
-            and not _has_fk_token(_tokens(value.func.value.value))
+            and not _fk_exempt(value.func.value.attr, _tokens(value.func.value.value))
         ):
             for t in targets:
                 if isinstance(t, ast.Name):
@@ -267,7 +275,7 @@ class _FileCheck(ast.NodeVisitor):
                     self._hit(lineno, "SUBSCRIPT", "SOURCE", f"store into state host-copy '{base.id}[...]'")
         elif isinstance(target, ast.Attribute) and target.attr in RAW_MJ_ATTRS | BODY_ASSIGN_ATTRS | JQ_ASSIGN_ATTRS:
             # G2: whole-attr replacement, e.g. mjd.eq_active = x / state.joint_q = x
-            if not _has_fk_token(_tokens(target.value)):
+            if not _fk_exempt(target.attr, _tokens(target.value)):
                 self._hit(lineno, "ATTR-STORE", "SINK", f"attribute store .{target.attr} = ...")
 
     def visit_Assign(self, node: ast.Assign) -> None:
@@ -305,7 +313,7 @@ class _FileCheck(ast.NodeVisitor):
                     else:
                         spoof = " [SPOOFED MARKER]" if self._line_marked(node.lineno) else ""
                         self._hit(node.lineno, "JQ-ASSIGN", "SINK", ".".join(toks) + f".assign(...){spoof}")
-                elif holder.attr in BODY_ASSIGN_ATTRS and not _has_fk_token(toks[:-1]):
+                elif holder.attr in BODY_ASSIGN_ATTRS:  # BODY exception 0: never fk-exempt (pN 23:11)
                     key = (self.rel, self.func_stack[-1])
                     if key in BODY_CABLE_SEED_MANIFEST:
                         self.marked.append((self.func_stack[-1], holder.attr, node.lineno))
@@ -315,11 +323,19 @@ class _FileCheck(ast.NodeVisitor):
                 self._hit(node.lineno, "WP-COPY", "SINK", f".{f.value.attr}.fill_(...)")
             elif f.attr == "copy" and isinstance(f.value, ast.Name) and f.value.id == "wp" and node.args:
                 a0 = node.args[0]
-                if isinstance(a0, ast.Attribute) and a0.attr in STATE_ATTRS and not _has_fk_token(_tokens(a0.value)):
+                if (
+                    isinstance(a0, ast.Attribute)
+                    and a0.attr in STATE_ATTRS
+                    and not _fk_exempt(a0.attr, _tokens(a0.value))
+                ):
                     self._hit(node.lineno, "WP-COPY", "SINK", f"wp.copy(<...>.{a0.attr}, ...)")
             elif f.attr == "copyto" and isinstance(f.value, ast.Name) and f.value.id == "np" and node.args:
                 a0 = node.args[0]  # G2: np.copyto(<state array>, x) writes in place
-                if isinstance(a0, ast.Attribute) and a0.attr in STATE_ATTRS and not _has_fk_token(_tokens(a0.value)):
+                if (
+                    isinstance(a0, ast.Attribute)
+                    and a0.attr in STATE_ATTRS
+                    and not _fk_exempt(a0.attr, _tokens(a0.value))
+                ):
                     self._hit(node.lineno, "WP-COPY", "SINK", f"np.copyto(<...>.{a0.attr}, ...)")
         elif isinstance(f, ast.Name) and f.id in self.sink_params:
             # F1 (G6): a helper whose parameter is ANALYSED (not allowlisted) to reach a sink -- taint
@@ -333,12 +349,12 @@ class _FileCheck(ast.NodeVisitor):
                 if res is None:
                     continue
                 attr, recv_toks = res
-                if _has_fk_token(recv_toks):
-                    continue  # G3 FK exemption -- by the ORIGINAL receiver token, never the helper
                 recv = ".".join(recv_toks)
+                # FK exemption is attr-sensitive (pN 23:11): only joint_q/qd on an fk_state receiver is
+                # exempt; a body/raw write is a sink on ANY receiver (BODY/RAW exception 0).
                 if attr in BODY_ASSIGN_ATTRS:
                     self._hit(node.lineno, "BODY-ALIAS", "SINK", f"{f.id}(<{recv}>.{attr}) helper-param body write")
-                elif attr in JQ_ASSIGN_ATTRS:
+                elif attr in JQ_ASSIGN_ATTRS and not _has_fk_token(recv_toks):
                     self._hit(node.lineno, "JQ-ALIAS", "SINK", f"{f.id}(<{recv}>.{attr}) helper-param joint write")
                 elif attr in RAW_MJ_ATTRS:
                     self._hit(node.lineno, "RAW-ALIAS", "SINK", f"{f.id}(<{recv}>.{attr}) helper-param raw write")
@@ -399,6 +415,16 @@ _NEG_CONTROLS: list[tuple[str, str]] = [
         "def _a(t, v):\n    t.assign(v)\ndef g(not_fk_state, v):\n    _a(getattr(not_fk_state, 'joint_q'), v)\n",
     ),
     ("alias-helper-static-attr", "def _a(t, v):\n    t.assign(v)\ndef g(s, v):\n    _a(s.body_q, v)\n"),
+    # F1-fix (pN 23:11, BODY/RAW exception 0): a body write is a sink even on an fk_state receiver
+    # (fk is exempt ONLY for joint_q/qd). Each MUST fire.
+    ("fk-body-direct-assign", "def f(fk_state, a):\n    fk_state.body_q.assign(a)\n"),
+    ("fk-body-attr-store", "def f(fk_state, a):\n    fk_state.body_q = a\n"),
+    ("fk-body-wp-copy", "def f(fk_state, a):\n    wp.copy(fk_state.body_q, a)\n"),
+    ("fk-body-np-copyto", "def f(fk_state, a):\n    np.copyto(fk_state.body_q, a)\n"),
+    (
+        "fk-body-helper-alias",
+        "def _a(t, v):\n    t.assign(v)\ndef g(fk_state, v):\n    _a(getattr(fk_state, 'body_q'), v)\n",
+    ),
 ]
 _POS_CONTROLS: list[tuple[str, str]] = [
     ("fk-state-real", "def f(self, a):\n    self._fk_state.joint_q.assign(a)\n"),
