@@ -225,6 +225,8 @@ def main() -> int:
     print("  [SELF-TEST] all negative/positive controls behave (15 neg / 4 pos)")
 
     fail = 0
+    fixture_hits = 0
+    fixture_files: set[str] = set()
     marked_by_file: dict[str, int] = {}
     for root in roots:
         if not root.is_dir():
@@ -234,13 +236,27 @@ def main() -> int:
         for py in sorted(root.glob("*.py")):
             fc = check_file(py)
             rel = py.relative_to(repo)
+            # pN-adjudicated scope split (c6 reverify): writes in scripts/test_*.py are MOCK-state
+            # fixtures, inventoried loudly but not production writers. envs/ tests do not exist;
+            # any real writer must live in envs/ or a non-test script to run, where it FAILs.
+            is_fixture = root.name == "scripts" and py.name.startswith("test_")
             for lineno, cls, detail in fc.hits:
-                print(f"  [FAIL] {rel}:{lineno}: {cls}: {detail}")
-                fail += 1
+                if is_fixture:
+                    fixture_hits += 1
+                    fixture_files.add(py.name)
+                else:
+                    print(f"  [FAIL] {rel}:{lineno}: {cls}: {detail}")
+                    fail += 1
             if fc.marked:
                 marked_by_file[py.name] = marked_by_file.get(py.name, 0) + len(fc.marked)
                 for ln in fc.marked:
                     print(f"  [CARRY] {rel}:{ln}: CABLE-SEED marked (declared sec14.2 step-3 carry)")
+    if fixture_hits:
+        print(
+            f"  [FIXTURE-INVENTORY] {fixture_hits} mock-state write(s) in {len(fixture_files)} "
+            f"scripts/test_*.py file(s) (pN scope ruling: test fixtures, not production writers): "
+            + ", ".join(sorted(fixture_files))
+        )
     # carry manifest pin: every marked line must be accounted for, no extras anywhere
     if marked_by_file != CARRY_MANIFEST:
         print(f"  [FAIL] CABLE-SEED carry manifest mismatch: found {marked_by_file} expected {CARRY_MANIFEST}")
