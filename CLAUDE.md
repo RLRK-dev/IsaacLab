@@ -273,19 +273,19 @@ CCは対策案や推奨を出す前に、該当スキルをロードし、プロ
 
 ## Project Identity
 
-THREAD — Dual-arm cable manipulation (Franka Panda × 2, segmented cable, clip routing).
+THREAD — Dual-arm cable manipulation (UR5e × 2, segmented cable, clip routing).
 Repository: Isaac Lab fork with `thread_isaac_lab/`.
 
 ## GPU
 
 | 優先順 | Device | Model | Usage |
 |--------|--------|-------|-------|
-| 1 | cuda:2 | RTX PRO 4000 Blackwell 24GB | VLM + 訓練 |
+| 1 | cuda:1 | RTX PRO 4000 Blackwell 24GB | VLM + 訓練 |
 | 2 | cuda:0 | RTX A6000 48GB | Isaac Sim / Newton |
 
 - **プロセス上限:** A6000 48GB / PRO 4000 24GB は最大**4**プロセス。起動前に `nvidia-smi --query-compute-apps` で確認
 - **`CUDA_VISIBLE_DEVICES` 必須:** 訓練プロセス起動時は `CUDA_VISIBLE_DEVICES=N` で使用GPUを限定。未設定だと PyTorch が cuda:0 に不要な context (~264MiB) を確保。例: `CUDA_VISIBLE_DEVICES=1 python train_xxx.py --device cuda:0`（VISIBLE内の相対index）
-- **ハーネス**: 単一ハーネス方式。SHARED_DIR: `/home/rlrk/Claudecode/shared/`（cuda:2優先）
+- **ハーネス**: 単一ハーネス方式。SHARED_DIR: `/home/rlrk/Claudecode/shared/`（cuda:1優先）
 - **複数GPU使用時**: 個別にハーネスインスタンスを起動（SHARED_DIR + --device で分離）
 
 ## Key Files (SSOT)
@@ -297,8 +297,7 @@ Repository: Isaac Lab fork with `thread_isaac_lab/`.
 | `GOALS.md` | pointer + goal_evidence 契約 stub（実体 = SOMA.md / 地図 / LEDGER） |
 | `HARNESS_STATE.md` | 自動生成サマリ（手動編集禁止） |
 | `${SHARED_DIR}/CONSENSUS.md` | B+C verdict統合判定（自動生成） |
-| `thread_isaac_lab/docs/DAPG_DESIGN.md` | DAPG+DR設計（唯一の権威ソース） |
-| `thread-vault/07-Design/RL-Routing-Design.md` | RL Routing統合設計（工程・スキル・DAPG・DR） |
+| `thread-vault/07-Design/RL-Routing-Design.md` | RL Routing統合設計（工程・スキル・DAPG・DR。旧 `thread_isaac_lab/docs/DAPG_DESIGN.md` は本書 §5-9 へ consolidated 済） |
 | `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md` | 成否 SSOT |
 | `data/test_{run_id}/RUN_METRICS.json` | run単位メトリクス |
 
