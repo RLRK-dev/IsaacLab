@@ -1205,6 +1205,12 @@ class NewtonRouteEnv(VecEnv):
                 _rep_cable_q_idx = np.array([i for i in range(_rep_jq.shape[0]) if i not in _rep_arm_all], dtype=np.int64)
                 _rep_cable_q_pre = _rep_jq[_rep_cable_q_idx].copy()
                 _rep_cable_qd_pre = _rep_jqd.copy()
+                # A-7 (review v3 A-P1-1 residual): pin/equality ownership consistency at the boundary --
+                # the C1 pin must NOT be welded (the reset head's _clear_c1_pin already audited+cleared;
+                # this asserts the post-clear state so a future ordering regression fails loud).
+                assert getattr(self, "_c1_pin_witness", None) is None, (
+                    "armpd A-7: C1 pin witness still set at the route-start boundary (eq ownership inconsistent)"
+                )
                 for w in env_ids:
                     w = int(w)
                     # A-5: gripper OPEN + not-grasping (correction #3 guard folded into this suite).
