@@ -3289,6 +3289,11 @@ def run_route(model, solver, contacts, scene_info, fk_state, output_dir=None, re
                 "exception is superseded -- clip retention must be physical contact (design sec14.10)"
             )
         _fs_on = os.environ.get("FREEZE_SCOPE", "0") == "1"
+        # Pin removed => every freeze-scope run is the CONTROL (pin-OFF) arm; these two are the
+        # downstream branch/record inputs (c6: F821 repair -- the c5 block deletion removed their
+        # definitions while the pin-OFF consumers at :358x/:42xx legitimately survive).
+        _perclip_on = False
+        _pin_refused = False
         _pin_eqid, _z_c1_after_pin = None, None
         # W0-e producer field (%9 pin-excluded floor bar / %12 pin-frame-onward, 2026-07-05): _seat_geom_mj = the
         # mujoco cable geom co-located with the pinned seat body -> EXCLUDED from the POST-pin cable<->C1 min-dist

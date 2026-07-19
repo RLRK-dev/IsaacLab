@@ -273,40 +273,17 @@ def _discover_geoms(mujoco, mjm, mjd, x_clip, y_clip, c2x, c2y):
 
 
 def _pin_replay(rt, wp, mujoco, mjm, mjd, state, seated_body, geoms, groove_z_mm, out):
-    """§4.5: seat-verify the canonical multi-criterion seat FIRST; unseated => DO NOT FIRE => FAIL.
+    """REMOVED replay pin re-fire: raises unconditionally (Rs directive 2026-07-19).
 
-    Seated => mirror route pin poke (:4118-4134): eq_data[0:3]=[0,0,0], eq_data[3:6]=live seat pos,
-    eq_active=1. NO extra settle frames (E2 -- the demo timeline already carries the pin's 40 settle
-    frames). Returns True iff the pin fired.
+    The clip-retention pin (RS71 sec0#5's former sole kinematic exception) is superseded. A
+    recording whose verdict depends on the pin is kinematic-lineage evidence and cannot be
+    replayed as valid. Historical implementation: git 9d00a15276 and earlier.
     """
-    wp.synchronize()
-    mujoco.mj_forward(mjm, mjd)
-    seat_z_mm = float(state.body_q.numpy()[seated_body, 2]) * 1e3
-    cable_c1_mm = _min_dist_mm(mujoco, mjm, mjd, geoms["cable"], geoms["clip1"])
-    seated = bool(cable_c1_mm <= SEAT_DIST_MM and abs(seat_z_mm - groove_z_mm) <= SEAT_Z_TOL_MM)
-    out.update(seat_z_mm=round(seat_z_mm, 3), cable_c1_mm=round(cable_c1_mm, 3), seated=seated)
-    if not seated:  # pinning an unseated cable is outside the Rs pin authorization (§4.5)
-        out["fired"] = False
-        return False
-    seat_world = state.body_q.numpy()[seated_body, :3].astype(float).copy()
-    best, bestd = None, 9e9
-    for i in range(int(mjm.neq)):  # position-match the pre-allocated DISABLED connect eq (mirror :4123-4130)
-        if (
-            int(mjm.eq_type[i]) == int(mujoco.mjtEq.mjEQ_CONNECT)
-            and int(mjm.eq_obj2id[i]) == 0
-            and int(mjm.eq_active0[i]) == 0
-        ):
-            d = float(np.linalg.norm(np.asarray(mjd.xpos[int(mjm.eq_obj1id[i])]) - seat_world))
-            if d < bestd:
-                bestd, best = d, i
-    if best is None or bestd >= 5e-3:
-        out.update(fired=False, eq_match_dist_mm=round(bestd * 1e3, 3))
-        return False
-    mjm.eq_data[best, 0:3] = [0.0, 0.0, 0.0]
-    mjm.eq_data[best, 3:6] = seat_world
-    mjd.eq_active[best] = 1
-    out.update(fired=True, pin_eqid=int(best), seat_body=int(seated_body), eq_match_dist_mm=round(bestd * 1e3, 3))
-    return True
+    del rt, wp, mujoco, mjm, mjd, state, seated_body, geoms, groove_z_mm, out
+    raise RuntimeError(
+        "replay pin re-fire REMOVED (Rs directive 2026-07-19 kinematic complete-removal): the "
+        "sec0#5 pin exception is superseded -- clip retention must be physical contact (sec14.10)"
+    )
 
 
 def _run(args, out_dir) -> dict:  # noqa: C901 (linear 8-step preamble + single replay loop; mccabe cap 30)

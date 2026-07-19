@@ -4744,70 +4744,25 @@ def _run_mujoco_grasp_route(model, solver, contacts, scene_info, fk_state, outpu
             )
 
         _ph("C1_PIN")
-        # PERCLIP_PIN (b)-pin ACTIVATION on the VERIFIED C1 seat (%3 charter 2026-07-01) -- the headline freeze-scope
-        # probe. Toggle the pre-allocated per-clip connect eq (seat_body <-> world@seat) ACTIVE now (mid-episode
-        # eq_active; pre-seat activation forbidden per restore-gate log:6814 C2 -> gated on the verified seat above).
-        # PER-CLIP: ONLY seat_body is anchored; body29/28.. stay articulated (measured over the guide below). The
-        # anchor is set to the seat body's CURRENT world pos (~clip groove 809) so activation does NOT yank it.
-        _perclip_on = os.environ.get("PERCLIP_PIN", "0") == "1"
-        _pin_refused = bool(_perclip_on and _seat_gate_on and not _c1_seated)
-        if _pin_refused:  # the seat gate is the branch the comment above always claimed was here
-            print(
-                "  [C2] C1 SEAT GATE: REFUSING TO PIN -- the cable is not in the C1 groove. Welding an unseated "
-                "cable is outside the Rs pin authorization (mirror policy_route_runner._pin_replay:309). "
-                "Re-run with C1_SEAT_GATE=0 for the pre-gate behaviour."
+        # NO-KINEMATIC (Rs 2026-07-19): the PERCLIP_PIN (b)-pin activation arc (inline eq_data/eq_active
+        # writer on the verified C1 seat) is REMOVED -- the sec0#5 clip-retention pin exception is
+        # superseded; retention must come from physical clip contact (design sec14.10). A caller setting
+        # the env var learns LOUDLY. Historical activation block: git 9d00a15276 and earlier.
+        if os.environ.get("PERCLIP_PIN", "0") == "1":
+            raise RuntimeError(
+                "PERCLIP_PIN REMOVED (Rs directive 2026-07-19 kinematic complete-removal): the pin/weld "
+                "exception is superseded -- clip retention must be physical contact (design sec14.10)"
             )
-            _perclip_on = False  # DO NOT FIRE
-        _fs_on = _perclip_on or os.environ.get("FREEZE_SCOPE", "0") == "1"
+        _fs_on = os.environ.get("FREEZE_SCOPE", "0") == "1"
+        # Pin removed => every freeze-scope run is the CONTROL (pin-OFF) arm; branch/record inputs:
+        _perclip_on = False
+        _pin_refused = False
         _pin_eqid, _z_c1_after_pin = None, None
         # W0-e producer field (%9 pin-excluded floor bar / %12 pin-frame-onward, 2026-07-05): _seat_geom_mj = the
         # mujoco cable geom co-located with the pinned seat body -> EXCLUDED from the POST-pin cable<->C1 min-dist
-        # (the free-neighbor "床" bar; pre-pin uses ALL geoms so the un-pinned body's penetration is NOT masked).
-        # _c1_np_min/_c2_pen_min = per-clip episode-min penetration (mm, <0=penetration) = the planned producer field.
+        # (the free-neighbor "floor" bar; pre-pin uses ALL geoms so the un-pinned body's penetration is NOT masked).
+        # With the pin removed these stay at their inits (pin-off downstream paths are unchanged).
         _seat_geom_mj, _c1_np_min, _c2_pen_min = None, 9e9, 9e9
-        if _perclip_on:
-            assert scene_info.get("perclip_pin_n", 0) > 0, "PERCLIP_PIN=1 but build_scene pre-allocated no eqs"
-            wp.synchronize()
-            mujoco.mj_forward(mjm, mjd)  # refresh mjd.xpos so the seat-body position-match is current
-            _seat_world = state.body_q.numpy()[seat_body, :3].astype(float).copy()
-            # W0-e: the mujoco cable geom co-located with the pinned seat body (world-pos match, no Newton<->mjc index
-            # assumption -- same primitive as the eq match below) -> excluded from the POST-pin free-neighbor floor bar.
-            _seat_geom_mj = (
-                min(cable_geoms, key=lambda g: float(np.linalg.norm(np.asarray(mjd.geom_xpos[g]) - _seat_world)))
-                if cable_geoms
-                else None
-            )
-            # Activate the pre-allocated DISABLED connect-to-world eq whose body1 IS the runtime seat body, found by
-            # WORLD-POSITION match (no Newton<->mjc index assumptions): mjd.xpos[eq_obj1id] == the seat body's pos.
-            _best, _bestd = None, 9e9
-            for i in range(int(mjm.neq)):
-                if (
-                    int(mjm.eq_type[i]) == int(mujoco.mjtEq.mjEQ_CONNECT)
-                    and int(mjm.eq_obj2id[i]) == 0
-                    and int(mjm.eq_active0[i]) == 0
-                ):
-                    _d = float(np.linalg.norm(np.asarray(mjd.xpos[int(mjm.eq_obj1id[i])]) - _seat_world))
-                    if _d < _bestd:
-                        _bestd, _best = _d, i
-            assert _best is not None and _bestd < 5e-3, (
-                f"PERCLIP_PIN: no disabled connect eq matches the runtime seat body (best dist {_bestd * 1e3:.2f}mm)"
-            )
-            _pin_eqid = _best
-            mjm.eq_data[_pin_eqid, 0:3] = [0.0, 0.0, 0.0]  # anchor in seat-body frame = its origin
-            mjm.eq_data[_pin_eqid, 3:6] = _seat_world  # anchor in world frame = current seat pos (~clip groove)
-            mjd.eq_active[_pin_eqid] = 1
-            if _demo_rec is not None:  # P3 recorder: eq-pin AFTER activation (spec §2.5)
-                _demo_rec.note_pin(_pin_eqid, seat_body)
-            for _ in range(40):
-                state = physics_step(model, state, solver, contacts, scene_info)
-            _z_c1_after_pin = _zc1()
-            print(
-                f"  [PERCLIP_PIN] ACTIVATED eq#{_pin_eqid} on the EXACT runtime seat body idx{seat_body} "
-                f"(position-match {_bestd * 1e3:.3f}mm) @world{[round(v, 4) for v in _seat_world]}; "
-                f"z_c1 {z_c1_seated:.1f}->{_z_c1_after_pin:.1f}mm; eq_active={int(mjd.eq_active[_pin_eqid])} "
-                f"(does the pin hold the seat? body29/28.. freedom measured over the guide below)"
-            )
-            _cap(f"PERCLIP_PIN ON seat idx{seat_body}: z_c1={_z_c1_after_pin:.1f}mm")
 
         _ph("L_HALF_UNCLAMP")
         # (3) L HALF-UNCLAMP: ramp L CLOSE->HALF (R stays CLOSED = the +Y anchor). MEASURE is_cradle through the

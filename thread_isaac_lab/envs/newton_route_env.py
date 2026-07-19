@@ -2038,10 +2038,16 @@ class NewtonRouteEnv(VecEnv):
                 flush=True,
             )
         self._last_pin_record = self._snapshot_pin_record(fired, mismatch_class)
-        for eq_id in fired:
-            mjd.eq_active[eq_id] = 0
-            if int(mjd.eq_active[eq_id]) != 0:
-                raise RuntimeError(f"clip-pin clear failed: eq_active[{eq_id}] readback != 0")
+        if fired:
+            # NO-KINEMATIC (c6): firing is REMOVED, so an ACTIVE pin eq at the episode boundary can
+            # only mean a surviving kinematic writer upstream -- raise, never silently disarm (a
+            # clean-up write would itself be the last eq_active writer in envs/ and would mask the
+            # upstream violation).
+            raise RuntimeError(
+                f"clip-pin eq ACTIVE at the episode boundary: {sorted(int(e) for e in fired)} -- pin "
+                "firing is REMOVED (Rs directive 2026-07-19 kinematic complete-removal); an active eq "
+                "means a kinematic writer survives somewhere upstream"
+            )
         self._c1_pin_witness = None  # pin FIRING is removed (Rs 2026-07-19); this clear is defense-in-depth
         self._c1_pin_dwell = 0  # (d-a): re-arm the dwell counter for the next episode
 
