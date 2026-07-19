@@ -36,7 +36,8 @@ RV7 の review 環境 companion（EP `586fec2a…` = v1.7 / JSON `3fb7a452…` /
 | `WMSO_EvidencePolicy_v1.9.json` | 機械可読 fixture（二層・17 member・**golden vector 7 本掲載**〔CM 3 + HS 4・自己再現検証済〕） | `e63176af9b…`（上表） |
 | `WMSO_RS_REVIEW_V7_HOLD_TRANSCRIPT_20260719.md` | RV7 as-received 転記 + custody 事実確認注 | `91923be57c…`（上表） |
 | `WMSO_D11A_DESIGN_VERIFY_WMSODESIGN_20260719.md` | pS verify record **§1-§18**（§17 = v2.11 PASS-W-C〔:374 は §18 で strike 訂正 — 再 R4〕/ **§18 = v2.11.1 readback = ✅design-axis PASS**〔22:08・stale live 0 sweep〕） | `30326df195e59b61eab166d47e4f7bbab7ff9fa525dc66e116a644693e172d1d` |
-| `WMSO_PN_EXACTPIN_PASSCLOSE_V2112_TRANSCRIPT_20260719.md` | **pN 終端 ✅EXACT-PIN PASS-CLOSE transcript**（22:28 — pN fidelity PENDING） | `c086122a13f4e65c9a884ab3f079b475d56344de35a9fb10d49810700f62556f` |
+| `WMSO_PN_FREEZE_CONSULTATION_TRANSCRIPT_20260719.md` | **pN（OPS-SUP）freeze consultation = GO 推奨**（23:06・Rs 指示による裁定前相談 — 意味論 freeze/remote custody 分離・record-risk ①-⑤・次順序 B→C→slice。pN fidelity PENDING） | `db24b877d234fbc0da3450b82d39a3ef11804f387f808f7d01e7abc5a2624102` |
+| `WMSO_PN_EXACTPIN_PASSCLOSE_V2112_TRANSCRIPT_20260719.md` | **pN 終端 ✅EXACT-PIN PASS-CLOSE transcript**（22:28; **pN AUTHOR-CONFIRMED**〔23:06 consultation 内・byte N/A〕） | `c086122a13f4e65c9a884ab3f079b475d56344de35a9fb10d49810700f62556f` |
 | `WMSO_PN_DESIGN_VERIFY_REVERIFY_R1R4_TRANSCRIPT_20260719.md` | **pN 21:55 再 verify HOLD R1-R4 transcript**（pS §18 C-1' 解消; **pN fidelity = CONFIRMED**〔22:15・確認対象 blob = `7b8352fa…`@`65a90d0bfc`・wrapper header のみ更新 = M4〕） | `beee9bc1a851462e56ed16d1650f87da8d0077fb764e10b30f0d15c492956dce` |
 | `WMSO_PN_DESIGN_VERIFY_HOLD_STEP13_B1B4_TRANSCRIPT_20260719.md` | **pN 工程 13 HOLD B1-B4 transcript**（pS §17 C-1 解消; **pN fidelity = CONFIRMED**〔21:55・確認対象 blob = `1f3056bee51f…`@`81065b9b5c`・wrapper header の状態更新のみで逐語部不変〕） | `ddaf0dcd8b23250f71d539d4b7d553e91bfa65246a92fbe7cdf68f1914bd7ec1` |
 | `WMSO_PN_DESIGN_VERIFY_HOLD_C1C3_TRANSCRIPT_20260719.md` | pN HOLD C1-C3 transcript（pN CONFIRMED 21:08） | `d8b5f83e0af85cd069feec73c011ef3949d1a258ec61348565e0f2149fe6e4c2` |
@@ -53,7 +54,8 @@ RV7 の review 環境 companion（EP `586fec2a…` = v1.7 / JSON `3fb7a452…` /
 4. ~~pS readback~~ = **✅v2.11.1 design-axis PASS**（22:08 — 再 R1-R3 忠実 fold・member-scoped sweep {PPO/DAPG/BC/ExecutionFamily/E_LINEAGE_FORBIDDEN} で stale live 0・§17 :374 = strike 訂正済〔再 R4〕・B1-B4 transcript 実読一致。record §18 = `30326df195e5…`）
 5. pN 再判定（22:15）= **v2.11.1 設計/証拠 ✅PASS-CLOSE・exact-pin custody ⛔HOLD M1-M4**（record-only — M1 manifest 現行候補 stale / M2 design :20 循環構造 / M3 §17 引用の未 strike / M4 fidelity 表記。**pN 宣言: 単一 custody bank + manifest 自己整合 readback で pN 再走なしに exact-pin PASS-CLOSE**）→ **M1-M4 = 本 bank で fold 済**（M2 = design v2.11.2）
 6. ~~manifest 自己整合 readback~~ = **✅pN EXACT-PIN PASS-CLOSE**（22:28 — M1-M4 ALL CLOSE・commit path 3 files・ancestry PASS・blob 7/7 一致・manifest = dispatched pin 一致・def hash 独立再計算一致。verdict transcript = 本 bundle に bank〔pN fidelity PENDING — freeze round で確認依頼〕）
-7. register ⑩ confirm = **✅Rs CONFIRMED**（記録実測 22:59）→ 8. **Rs freeze 判定（上程中 — 一言で執行）**
+7. register ⑩ confirm = **✅Rs CONFIRMED**（記録実測 22:59）→ 8. **pN（OPS-SUP）consultation（Rs 指示）= GO 推奨**（23:06 — freeze は D1.1-A 限定・gate-1/実装許可へ非拡張の条件。record-risk: ① 終端 transcript author-confirm = 解消 / ②③ = Rs freeze 文言への織込み / ④ freeze record = 別 custody artifact〔frozen 3 artifact は再編集しない〕/ ⑤ push 後 remote readback まで FROZEN-LOCAL/CUSTODY-PENDING〔実測 23 ahead/0 behind @ 23:07〕）
+9. **Rs freeze 判定（上程中 — 相談結果報告済・一言で執行）**
 
 ## 未 push
 `a87525cc15` → `1ba0d0a9df` → `dfeb6c1e57` → `37ddb72284` → `4493552416` → `81065b9b5c` → `c628e58697` → `65a90d0bfc` → 本 M 系 commit（+ p6 の LEDGER commit 群）。**push は Rs 一言で実行**（`1fb038bc39` までは push 済み・remote 一致確認 19:46）。LEDGER 反映 = p6 row44 series（最新 = pS §18 PASS `62312bd08a`; pN M 系は dispatch 済み）。
