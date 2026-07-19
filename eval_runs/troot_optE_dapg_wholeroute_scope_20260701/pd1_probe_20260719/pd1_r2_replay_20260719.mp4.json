@@ -1,0 +1,9 @@
+{
+  "mode": "r2",
+  "label": "REPLAY VISUALIZATION (deterministic re-run; NOT the evidence bytes)",
+  "evidence_npz": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pd1_probe_20260719/r2v12_pd/armpd_frames_r2v12_pd.npz",
+  "frames": 142,
+  "done_at": 141,
+  "max_bodyq_pos_dev_vs_evidence_m": 0.0,
+  "cameras": "ctx az232/el-22 d1.2 lookat[0.35,0,0.90] | yz az0/el-12 d0.7 lookat[0.37,0,0.86]"
+}

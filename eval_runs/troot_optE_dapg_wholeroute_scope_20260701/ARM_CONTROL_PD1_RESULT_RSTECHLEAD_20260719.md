@@ -65,6 +65,9 @@ output (REQUIRED-to-RUN); it is NOT a probe pass/fail condition.
 
 ## 6. Video leg (mandatory-or-justified) — status
 
-**PENDING at first commit (flagged loud).** Next action in this chunk: offline replay renders of R0/R1/R2
-from the per-step `bq_steps` logs → `~/Downloads` for Rs human-GT (motion standard alongside
-`p2r_c11_route.mp4`). No physical-validity claim in this doc is final until the Rs video leg.
+**DELIVERED to Rs 13:44 JST** (`~/Downloads/pd1_r{0,1,2}_replay_20260719.mp4`, proactive; sidecar
+jsons alongside). Renderer = `armpd_video.py` (probe v0.8, comp3-lineage two-camera). **Faithfulness:
+the deterministic re-runs reproduced the evidence body_q with max positional deviation 0.000000 m and
+identical done steps (347/899/141)** — the videos are exact visualizations of the evidence runs, not
+approximations. Physical-validity judgment + the W-b (clean-substrate demo re-record) go/no-go = **Rs
+(pending)**. No physical-validity claim in this doc is final until the Rs video verdict.
