@@ -356,3 +356,38 @@ design-axis 役割 = 本 §15 で closure。freeze 裁定 (Rs) + 上記 custody 
 **minor（非 must-fix・記録のみ）**: design header line 24 の pS-record bank pointer が「最終 bank = 本 v2.8 commit」と旧表記（実 record sha は manifest が `7a212b9374e3…` で正しく pin）。cosmetic + manifest-authoritative ゆえ本 PASS を gate しない。次 re-bank 時に header 同期すれば足る（churn 回避のため単独 fix 不要）。
 
 → **工程 12 完了。pQ は工程 13（最終 SHA のみ pN へ・manifest 込み完全 bundle）へ進める。**
+
+---
+
+## 17. pN 工程 13 ⛔HOLD B1-B4 fold (v2.10→v2.11) 再照合 — design-axis PASS-WITH-CONDITIONS (pS, 2026-07-19 21:45 JST 実測)
+
+**経緯**: 私の 工程 12 PASS(v2.10) 後、**pN 工程 13(exact-pin 再検証) = custody/hash legs PASS だが design B1-B4 + R1-R2 の新規 ⛔HOLD**(21:08)。私の v2.10 PASS が捕捉しなかった 4 項 — 層状 gate が私の PASS 後に検出(4 度目)。pQ fold → **DESIGN v2.11(`8d1f356024…`) / EP v1.9(`c474acea7c…`) / JSON v1.9(`e63176af9b…`, def hash `e7ca43093084…`)** bank `37ddb72284` + manifest `4493552416`。
+
+**pin 実測一致(全 4)**: DESIGN `8d1f356024f7…` / EP `c474acea7c58…` / JSON `e63176af9bc3…` / manifest bank 別 commit。tree — 実測 sha == pin。
+
+**B1-B4 + R1-R2 per-item 照合(v2.10→v2.11 diff + EP + JSON parity):**
+| 項 | pN 指摘 | fold(実測) | 判定 |
+|---|---|---|---|
+| B1 CRITICAL | applicability の flat list に order 2 の else が component-scope 欠き→逐次評価で他 component 吸収 + None-profile min_grade 未定義 | EP §3c を **classify(profile 中立・component-scoped 排他 branch・明示 default fallthrough)+ overlay(eligibility 専用・非 None 必須)** に 2 段分割。JSON `applicability_rules` = split_rationale + classifier(REQUIRED_CLASS は min_grade 無し)+ branch scope_note("else applies ONLY when component==TRAINING_DATASET")。5 引数形は合成として保存。全域 corpus 13×5×4 義務化 | ✅ md↔JSON airtight |
+| B2 HIGH | EXACT×非学習の到達不能が prose のみ(synthetic manifest で充足可) | `identity_kind ∈ {SCRIPTED,WAIT} ∧ grade=EXACT → E_GRADE_INAPPLICABLE` を **proof 検査前の機械規則**に(JSON `proof_policy` 内 4 箇所)+ negative corpus | ✅ |
+| B3 HIGH | projection.object が prose placeholder | **構造化 field map**(handoff/field/accepted item 型付き列挙 + array 順序規則)**+ golden 7 本**(CM 全 3 member + HS empty/single/multi/reorder) | ✅ golden 7 本 sha256 全一致 + canon 全 True + reorder(`7a686477`)≠multi(`2c1d7760`)+ single=v2.10(`00ffb015`) |
+| B4 CRITICAL/L0 | ExecutionFamily enum-allowlist が charter『algorithm-agnostic』『PPO or another online RL / DAPG or another imitation-plus-RL』+ Rs RL+IL 非限定要件と不整合 | **TrainingMethodDescriptor{method_class,method_id}+METHOD_REGISTRY**(中立 5 クラス・registry 行=Rs 承認制・`E_METHOD_UNREGISTERED` fail-close)+ §3 表 6 行化(IMITATION_PLUS_RL×DEMO_PLUS_RL 新設)+ TrainingLineage+=DEMO_PLUS_RL + §6-5 DAPG 写像有効化。**dangling live ExecutionFamily = 0**(全て replaced-by 注記) | ⚠ **fold 忠実だが register ⑩ = Rs confirm 対象**(下記 C-2) |
+| R1 | transcripts fidelity 表記 | C1-C3 / R+PASS-CLOSE を **pN 著者 CONFIRMED** に更新 + R+PASS-CLOSE を sibling list 正式収載 | ✅ |
+| R2 | header の pS bank 表記 stale | 「本 v2.8 commit」→ **現行 bank `dfeb6c1e57`(§16 込み)+ 同時更新規則** | ✅(私の §16 minor 指摘を pN も捕捉・修正) |
+
+**hash 独立再計算 = 全一致(airtight)**: def hash `e7ca43093084…`(埋込 command)+ golden 7 本(CM: `4f0b26d5`/`bea5102d`/`b3b88e09`・HS: `76f0ddf3`/`00ffb015`/`2c1d7760`/`7a686477`)。member 17(不変 — METHOD_REGISTRY は親設計 identity.py 側で EP policy_definition に非収載 → def hash 変化は B1/B2/B3/B4 の EP 内 semantic 変更のみに由来)。md↔JSON parity: applicability classify/overlay・DEMO_PLUS_RL(6×)・E_GRADE_INAPPLICABLE(4×)・REQUIRED_CLASS(8×) 一致。
+
+**先祖返り/先走り/over-reach 抑制(pS duty)**:
+- **B4 の CONFIG_HASH map / §3 表 / §6-5 map の DEMO_PLUS_RL 追加 = 一貫**(単一 joint stage → final_training_config_hash・demo 消費 → TD required・bc_config=null)。
+- §10 open points = 「RV7 全項 + B1-B4/R1-R2 fold 済(自己申告)・open=0 の無条件宣言せず・⚠register ⑩=Rs confirm 対象」= 先走り抑制に忠実。
+- FOUNDATIONAL invariant 不抵触: TrainingMethodClass(ONLINE_RL 等)は**訓練手法**で制御様式でない — ControlMode は依然 LEARNED=DIFF_IK_EE_TARGET のみ(kinematic mode 無し)。kinematic-removal directive 写像(line 167)不変・EP kinematic 0。**Rs「sim is reality/kinematic 完全削除」と整合・先祖返り無し**。
+
+### 17.1 Verdict
+**design-axis PASS-WITH-CONDITIONS(DESIGN v2.11 `8d1f356024…` 宛)。** B1・B2・B3・R1・R2 = 忠実 fold + hash airtight + parity 成立 + regression/dangling 無し + invariant 不抵触。**fold 自体の must-fix = 0**。下記 2 条件は fold 欠陥でなく downstream gate:
+
+- **C-1(custody — must-flag)**: **pN 工程 13 B1-B4 の as-received transcript が未 bank**(ls・manifest grep で確認; B1-B7/C1-C3/R+PASS-CLOSE は bank 済だった系列で欠落)。ゆえ私の fold 忠実性判定は **pQ の fold-map(paraphrase)+ 内部整合 + hash** に対するもので、**pN の実 B1-B4 逐語に対する独立照合は不能**(特に B4 CRITICAL/L0 と B1 の「2 案」)。RV5 C-P0-1 が CRITICAL 化した「pN verdict record 不在」と同型。→ **pN exact-pin 再検証 / freeze 上程の前に pN 工程 13 B1-B4 transcript の bank を強く推奨**(fold-map の独立監査可能化 + terminal verdict の provenance)。
+- **C-2(register ⑩ = Rs 専権 gate — rule (g) 核心・must-flag)**: register ⑩ は **DC-5(register ②=Rs 確定の DAPG 除外)を逆転**し **DEMO_PLUS_RL lineage + §3 表 6 行**(Rs 確定 prereg §5 表)を変更 = human-ruled 面変更。design は (1) charter『algorithm-agnostic』逐語接地・(2) 「Rs confirm 対象」loud 記録・(3) freeze と併せ上程・(4) DC-5/② を明示 link = **materialize-but-flag の正しい handling**(私の B5 miss の教訓 rule (g) を pQ が遵守)。⚠**私の design-axis PASS は fold の忠実性と正しい flag を確認するもので、DC-5 逆転の実体を ratify しない — ⑩ の confirm は Rs 専権、freeze は ⑩ 未確認では B4 につき進めない**。〔Rs 判断の補助 = ⑩ は 2 要素を束ねる: (i) algorithm-neutral method_class/registry(charter 接地・pN B4 CRITICAL/L0 を解消)と (ii) 特定の DC-5 逆転(DAPG 再収容 + DEMO_PLUS_RL 行)。Rs confirm が要るのは主に (ii)〕。
+
+**境界(標準)**: 私の PASS は **pN の exact-pin 再検証を代替しない**(層の一つ・過去 4 度上書き)。freeze = Rs 専権。training-ready でない。production/training/authority = charter §0/§8-4 CLOSED。
+
+→ **工程 12 再入(pS 再照合)完了。** pQ 次手 = (a) pN 工程 13 B1-B4 transcript を bank(C-1)→ (b) pN へ完全 bundle + 最終 SHA(工程 13')→ (c) Rs freeze 判定に register ⑩ confirm を併せ上程(C-2)。

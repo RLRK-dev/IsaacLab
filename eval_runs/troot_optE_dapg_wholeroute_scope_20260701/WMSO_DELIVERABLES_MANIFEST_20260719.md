@@ -3,7 +3,7 @@
 作成 = w2:pQ (RS-TECH-LEAD2)、node `T-WMSO`。全 sha256 = full 64-hex・**committed blob から実算出**（bank commit 付き — dirty tree 由来の pin なし）。本 manifest は RV7-R-3（旧 manifest = v2.9 世代 pin の残置）への全面書換。
 
 ## 現在地（1 行）
-**pN 工程 13 = ⛔HOLD B1-B4（21:08、custody/hash legs = PASS）→ 全項 fold = DESIGN v2.11 + EP v1.9 + JSON v1.9（bank `37ddb72284`）** → 残 gate = **pS 再照合（工程 12 再入 — 依頼中）→ pN exact-pin 再検証 → Rs freeze 判定**。⚠**B4 = 批准済み §3 表の method registry 化（charter 整合の復元）— register ⑩・Rs confirm 対象**。impl / training / authority = CLOSED 不変。
+**pN 工程 13 HOLD B1-B4 の fold（v2.11/v1.9、bank `37ddb72284`）→ pS 再照合 = ✅design-axis PASS-WITH-CONDITIONS（21:46、fold must-fix 0・hash airtight・record §17）** → 条件 C-1（pN 工程 13 transcript 未 bank）= **本 round で bank 済** / **条件 C-2 = register ⑩〔B4 method registry 化〕の Rs confirm 無しに freeze 不可**。残 gate = **pN exact-pin 再検証 → Rs freeze 判定 + ⑩ confirm**。impl / training / authority = CLOSED 不変。
 
 ## 最終 pin（現行候補 — bank `37ddb72284`、committed blob から実算出）
 | artifact | 版 | sha256 |
@@ -32,8 +32,9 @@ RV7 の review 環境 companion（EP `586fec2a…` = v1.7 / JSON `3fb7a452…` /
 | `WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md` | **EvidencePolicy v1.9** | `c474acea7c…`（上表） |
 | `WMSO_EvidencePolicy_v1.9.json` | 機械可読 fixture（二層・17 member・**golden vector 7 本掲載**〔CM 3 + HS 4・自己再現検証済〕） | `e63176af9b…`（上表） |
 | `WMSO_RS_REVIEW_V7_HOLD_TRANSCRIPT_20260719.md` | RV7 as-received 転記 + custody 事実確認注 | `91923be57c…`（上表） |
-| `WMSO_D11A_DESIGN_VERIFY_WMSODESIGN_20260719.md` | pS verify record **§1-§16**（§16 = RV7 工程 12 差分照合 = **✅design-axis PASS**〔20:55・must-fix 0〕） | `383c3e3a0efcc0df00a37ce7bb877cb6e247db9f376689da02ef026ef0a0c562` |
-| `WMSO_PN_DESIGN_VERIFY_HOLD_C1C3_TRANSCRIPT_20260719.md` | pN HOLD C1-C3 transcript | `d8b5f83e0af85cd069feec73c011ef3949d1a258ec61348565e0f2149fe6e4c2` |
+| `WMSO_D11A_DESIGN_VERIFY_WMSODESIGN_20260719.md` | pS verify record **§1-§17**（§16 = v2.10 PASS / **§17 = v2.11 再照合 = ✅PASS-WITH-CONDITIONS**〔21:46・fold must-fix 0・条件 = C-1 bank / C-2 register ⑩ Rs confirm〕） | `e88e23503e7ea539af28b523c6f6d7be86db2ea4441ccfcab7155056a9d29478` |
+| `WMSO_PN_DESIGN_VERIFY_HOLD_STEP13_B1B4_TRANSCRIPT_20260719.md` | **pN 工程 13 HOLD B1-B4 transcript**（pS §17 C-1 解消 — pN fidelity PENDING） | `1f3056bee51fd8b7fa8f39b9722edcea7f8accb5efe287b035d220eac0f9d9d2` |
+| `WMSO_PN_DESIGN_VERIFY_HOLD_C1C3_TRANSCRIPT_20260719.md` | pN HOLD C1-C3 transcript（pN CONFIRMED 21:08） | `d8b5f83e0af85cd069feec73c011ef3949d1a258ec61348565e0f2149fe6e4c2` |
 | `WMSO_PN_DESIGN_VERIFY_R_AND_PASSCLOSE_TRANSCRIPT_20260719.md` | pN R1-R3 HOLD + ✅PASS-CLOSE（v2.9.2 宛）transcript | `2847e2aa9d30a9b57093232425c8fdbef2aa09a87d0291b489f79e471f911139` |
 | `WMSO_RS_REVIEW_V6_COPY_20260719.md` | Rs review v6 byte-identical copy | `3f64cbca44269bc8255fd2c0dcf4d96712248de4017d4b1943c0855daef2cead` |
 | `WMSO_RS_REVIEW4_FIDELITY_CONFIRM_20260719.md` | review-4 fidelity 確認 record | `f5737799522c7e679753299fe7ece1d9ae51caf6df723ee7f48cf54e1a7c15c8` |
@@ -41,10 +42,10 @@ RV7 の review 環境 companion（EP `586fec2a…` = v1.7 / JSON `3fb7a452…` /
 （Rs 発行 review v3/v4/v5 原本 = `~/Downloads/PLAN_STATUS_review_v{3,4,5}_2026-07-19.md` 既在。repo byte-identical copy = `20da075f9566…` / `338bdaf75a99…` / `44792e860e82…`。pN B1-B7 transcript = repo `6d26efde4739…`@`86d127b5c0`。）
 
 ## 残 gate（RV7 工程 12-14 の再入 — 順不同にしない）
-1. v2.10 round: pS 工程 12 = ✅PASS（record §16 `383c3e3a0efc…`）→ **pN 工程 13 = ⛔HOLD B1-B4**（21:08 — B1 applicability 分岐 semantics / B2 EXACT×非学習 機械拒否欠如 / B3 projection prose placeholder / B4 algorithm 固定 = charter 不整合〔CRITICAL/L0〕+ R1-R2 records。custody/hash legs = PASS）
-2. **pS 再照合（v2.10→v2.11 / EP v1.8→v1.9 差分 — 依頼中）**
-3. **pN exact-pin 再検証**（pS PASS 後 — 完全 bundle + 最終 SHA）
-4. **Rs freeze 判定**（pN PASS 後に上程。⚠register ⑩〔B4 method registry 化〕の confirm を併せて上程）
+1. v2.10 round: pS 工程 12 = ✅PASS（§16 `383c3e3a…`）→ pN 工程 13 = ⛔HOLD B1-B4（21:08、custody/hash legs PASS）→ fold = v2.11/v1.9
+2. ~~pS 再照合~~ = **✅design-axis PASS-WITH-CONDITIONS**（21:46 — B1-B4/R1-R2 忠実 fold・fold must-fix 0・def hash + golden 7 本 airtight・md↔JSON parity・dangling ExecutionFamily 0・invariant 不抵触。record §17 = `e88e23503e7e…`。**条件 C-1 = pN 工程 13 transcript 未 bank → 本 round で解消**〔`1f3056bee5…`〕/ **条件 C-2 = register ⑩ の Rs confirm 無しに freeze 不可**）
+3. **pN exact-pin 再検証**（**進行中** — 完全 bundle + 最終 SHA + C-1 transcript）
+4. **Rs freeze 判定 + register ⑩ confirm**（pN PASS 後に上程 — C-2 により ⑩ confirm は freeze の必要条件）
 
 ## 未 push
 `a87525cc15` / `1ba0d0a9df` / `dfeb6c1e57` / `37ddb72284`（B1-B4 fold）+ 本 manifest commit。**push は Rs 一言で実行**（`1fb038bc39` までは push 済み・remote 一致確認 19:46）。LEDGER 反映 = p6 row44（RV7 HOLD `0578b9b174` → pS PASS `2fd6045f32` 確認済み; 工程 13 HOLD 反映は dispatch 済み）。
