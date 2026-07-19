@@ -475,6 +475,11 @@ class NewtonRouteEnv(VecEnv):
         _rc1p = self.cfg.get("route_c1_pin", False) or os.environ.get("ROUTE_C1_PIN", "0") == "1"
         assert isinstance(_rc1p, bool), f"cfg['route_c1_pin'] must be a bool, got {type(_rc1p).__name__}"
         self._route_c1_pin = bool(_rc1p)
+        if self._route_c1_pin:
+            raise RuntimeError(
+                "clip-retention pin REMOVED from active execution (Rs directive 2026-07-19: the sec0#5 "
+                "exception is superseded) -- retention must be physical clip contact (design sec14.10)"
+            )
         self._c1_pin_witness = None  # persisted proof the pin fired -- a run that cannot show this proves nothing
         # (d-a) live-geometric trigger state (charter sec 8.10.1 / sec 8.2 / sec 2-D; prereg PIN_D_TRIGGER v0.6).
         self._c1_pin_dwell = 0  # consecutive (capture AND depth) physics frames; reset on a gap and on clear
