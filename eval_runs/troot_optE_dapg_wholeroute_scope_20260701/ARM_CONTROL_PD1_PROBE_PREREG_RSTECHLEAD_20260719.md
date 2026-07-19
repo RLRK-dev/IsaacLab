@@ -4,7 +4,8 @@
 |---|---|---|
 | v1.0 | `8ed56f65ea` | SUPERSEDED — froze pre-review; its 5-run batch = DIAGNOSTIC/NON-EVIDENCE (`fa1e786b46` disposition) |
 | v1.1 | `879df7945a` | design v1.5 compliance: B1-strip / L-P0 REQUIRED-to-RUN / L-P2′+P-1/P-2 / stale-target primary negative (§12.1) / A-1..A-6 (§12.2) with declared bands。**SUPERSEDED-pending by v1.2 (review v3)** — no runs were executed under it |
-| v1.2 | 〔this commit〕 | review v3 fold: Rs canonical R0-R4 matrix + named contrasts + **A-7 pin/eq ownership** (eq slice byte-identity + expected-unfired; smoke-10 PASS) + B2 = STOP+design-delta+p5/pN re-review gate (v1.6-②; implementer may not select B2) + declared bands inherited (p5 readback ALL-ACCEPT 12:30, §12.2-R) |
+| v1.2 | `32617b119a` | review v3 fold: Rs canonical R0-R4 matrix + named contrasts + **A-7 pin/eq ownership** (eq slice byte-identity + expected-unfired; smoke-10 PASS) + B2 = STOP+design-delta+p5/pN re-review gate (v1.6-②; implementer may not select B2) + declared bands inherited (p5 readback ALL-ACCEPT 12:30, §12.2-R)。**EXECUTED**: 6 runs + analysis + RESULT bank `e5d2dc214a`; §13 ruling = design v1.7 `c0b410b368` |
+| v1.3 | 〔this commit〕 | **W-a kd-lever re-probe (v1.7 §13 R-2)**: C-1/C-2 single runs on probe v0.8 (`bc1f7f2d48`, independent ke/kd scales) + declared lag-law/ringing observables (§7 below)。NOT a rescue of the R-1 FAIL verdict — S-1 bar-design input |
 
 - **Author:** RS-TECH-LEAD (w2:p4). **Status per the review's P0-2 taxonomy:** production impl CLOSED / probe scaffolding BUILT-UNLANDED (v0.5) / smokes+diagnostic batch EXECUTED (non-evidence) / probe evidence NONE until this v1.1's runs / authority CLOSED.
 - **Design:** `ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md` **v1.6** (bank `f200bfd78c` + cell `cdf429e702`; chain per §0.0 table: v1.0-v1.5 all banked + v1.6 review-v3 arm-lane fold). **Findings:** `b9eaaf9d93`, `c1da5dcf54`; **disposition + diagnostic batch:** `fa1e786b46`. **Brief:** `1ee8be5c9e`. **Rs reviews:** v1 + v2 + v3 (`~/Downloads/PLAN_STATUS_review{,_v2,_v3}_2026-07-19.md`).
@@ -80,7 +81,27 @@ Outboxes: `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/pd1_probe_2026071
 - FAIL(saturation) → re-trajectory/speed-profile chunk = SEPARATE (Rs 報告, design §5 分岐).
 - **R0b chain ≠ banked chain (L-P0 large, as the diagnostic suggested)** → that is an L-P0 RESULT, not a probe failure: reported Rs-visible per v1.4 §7-5 (banked-caveat scale + decision-critical contrast rerun scope = Rs).
 
-## 6. Sequencing / concur
+## 6. 【v1.3】 W-a kd-lever re-probe (design v1.7 §13 R-2; p5 readback ACCEPT 13:45)
+
+- **Runs (R2-class singles, same substrate/recording/seed as v1.2 R2; probe v0.8 `bc1f7f2d48`):**
+
+| Run | tag | flags | expectation (hypothesis-tagged) |
+|---|---|---|---|
+| C-1 | `c1v13_kd025` | `--arm-pd --kd-scale 0.25` | T_lag 0.2→**0.05 s**; lag@2rad/s ≈ 0.13 rad |
+| C-2 | `c2v13_kd025ke2` | `--arm-pd --kd-scale 0.25 --ke-scale 2.0` | T_lag ≈ **0.025 s**; ringing risk ↑ (ζ 概算 = hypothesis; measured governs) |
+
+  ⛔ effort caps UNCHANGED (census asserts the caps stay ±150/±28 while ke/kd carry the scaled values).
+- **Declared observables (frozen at the v1.3 freeze; analysis-computed):**
+  1. **lag-law leg:** per-frame instantaneous T_lag = err/ω on frames with intended speed ω > 0.5 rad/s
+     (ω from the intended stream's frame difference × 480); report per-joint p50/p95. S-1 `T_LAG_BAR`
+     freeze material — no pass bar in this probe.
+  2. **ringing leg (REQUIRED per §13):** per-joint count of error sign-flips with |err| > 2 mrad on both
+     flanks + max post-flip overshoot + M-6 dwell events (48f/15mrad). Sustained ringing = LOUD report.
+  3. L-P3 saturation (same WARN/FAIL bars) + L-P1 report per P-2 semantics + A-1..A-7 + census (scaled).
+- **Role:** S-1 bar-design input + the kd/ke mechanism confirmation. The R-1 FAIL verdict of v1.2 STANDS
+  regardless of C-1/C-2 outcomes (§13 R-2 "本 probe 救済でない").
+
+## 7. Sequencing / concur
 
 - **R-SEQ concur (design §6):** %12 concurs — #18 lands first on the kinematic basis; P-D1 runs now in parallel (read-only branch). No reverse-order request.
 - Probe result dispatch: p5 (bar freeze + verdict is p5's §9 gate) + p6 relay at bank.
