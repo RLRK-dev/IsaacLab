@@ -125,3 +125,89 @@ Target: **v2.1** (same path, sha256 **`c49ff132ff200257…`** = my measurement =
 - §11:428 fold map accurate. Version history line telling (v1→v1.1→v2→v2.1 with all shas + verdict shas) = complete provenance chain.
 
 **Delta confirm = PASS. Design-axis gate for DESIGN v2.1 = CLEAR → CC Debate 5体 GO** (§9 gate order; my next checkpoints = post-Debate delta re-confirm if the debate changes design, EvidencePolicy v1 artifact verify [V-2 scope], then pN DESIGN PASS-CLOSE readback).
+
+---
+
+## 8. ADDENDUM — CC Debate cycle-1 = FAIL; pS misses owned (2026-07-19 10:5x JST)
+
+Debate (5体, task-WMSO-D11A-design-debate-001, `harness-vault/verification-log/verification-log.jsonl`): 46 challenges → **19 union findings (CRIT 1 / HIGH 5 / MED 8 / LOW 4 / note 1), all ACCEPTED by pQ**. Read in full by pS; key items independently re-verified (U4/U8 from in-context doc content; **U3 re-verified on-disk by pS**: manifest rows CLAMP/UNCLAMP/AERIAL_REGRASP have empty identity, 3/9 — the "v1 も必ず保持" premise I endorsed is FALSE). The layered gate worked as designed: the panel caught what my three solo rounds (v1 / v2 / v2.1) did not. **No finding disputed.**
+
+### pS misses owned (records-must-match-fact; each with its lesson)
+1. **U8 — I silently disambiguated a malformed test.** v2 metamorphic #4's mutation object ("TrainingProvenance の grade/records") is ill-formed — grades live in EvidenceRecords, not provenance. I picked one reading and certified it "correct per §1.3" (§6.1). Violated my own rule: *don't silently pick one reading of an ambiguous spec — flag it*. (My record was cited in-panel as evidence of the two-oracle divergence.)
+2. **U4 — local-cell verification is not cross-surface verification.** I checked the §1.2 kind table "cell-by-cell = sound" (§7) and separately read §6:338 — but never cross-checked them: §6's "UNKNOWN slots for learned/scripted とも" contradicts the table's forced-KNOWN control_mode for SCRIPTED/WAIT. Two locally-sound surfaces, mutually inconsistent — the same class as [[feedback-same-constant-is-not-same-measurement-surface-2026-07-18]].
+3. **U2 — my context masked a self-containedness defect.** "§3.1 は v1.1 のまま有効" / "v1.1 から不変" were resolvable *for me* (v1.1 in my context) but dangling for any other reader — v1.1 was destroyed by in-place overwrite; prereg:184 requires the definitions IN the doc. A document must stand alone; context-resident knowledge is not an anchor.
+4. **U1 — I over-claimed "Review-4 fidelity … verified".** §6.1's heading asserts fidelity to a source that exists nowhere on disk. What I actually verified = anchor existence + internal coherence. I had flagged the gap (§5) and then accepted the fold-map as sufficient; the panel correctly escalated: **bank the source transcript itself**.
+5. **U3 — I endorsed an unverified premise.** "executable_artifact_hash kept required-str … consistent with migration reality (v1 always holds it)" (§7) — I had the manifest open earlier for DC-5 yet never checked identity presence per row. 3/9 rows are identity-less; "v1 全 skill → Draft" was unsatisfiable as written.
+6. **U15 — state-level ≠ value-level.** My kind-table check verified allowed slot *states*, not allowed *values*: KNOWN(WAIT) on a LEARNED skill was table-legal nonsense.
+7. **U16 — an unrecorded observation is not an anchor.** At v2.1 I noticed regex anchoring was unspecified ("fullmatch assumed — fine at design level") and wrote it nowhere. The panel filed it as LOW. If I see it, I record it.
+8. **U6 (adjacent) — "unchanged" claims need column-level diffing.** I passed §3 as "v1.1 のまま" without checking that the prereg's frozen table columns (必須hash/null必須/source-closure) survived the compaction. They didn't.
+
+### Checklist upgrade for v2.2 re-check (standing, added to my method)
+(a) cross-surface consistency pass (every rule × every table it touches), (b) document self-containedness pass (no normative reference to destroyed/unbanked versions; grep "のまま/不変/v1.1"), (c) premise verification for every "v1/世界 is X" claim (on-disk, row-level), (d) value-level constraints, not just state-level, (e) claimed-source artifacts must exist on disk before any fidelity PASS, (f) record every observation, however minor. Plus the 19 findings as explicit re-check rows.
+
+Next: pQ = review-4 transcript bank + EvidencePolicy v1 + DESIGN v2.2 → **cycle-2 re-debate → my delta re-check** (order per pQ message 10:44; my re-check follows cycle-2).
+
+---
+
+## 9. ADDENDUM — v2.3 + EvidencePolicy v1.1 全行照合 re-check (pS, 2026-07-19 12:21 JST 実測 — 以後 x-mask 廃止、cycle-2 finding#1 の同族を自分の記録にも適用)
+
+Targets (shas = my measurements == pQ claims, bank `efc355e52d` verified): DESIGN **v2.3** `94a42a0ea73a08d2…` (269 lines, committed-pointer 規約 = U2-sanctioned form, referent `ac5865b66d` blob immutable ✓) + **EvidencePolicy v1.1** `9e4c5019bb1bc6ac…` (84 lines). Both read in full. Method = upgraded 6-pass + explicit row-check of cycle-2 19 items + W-P0-1..4/W-P1-1..6 (all 10 — my 12:0x undercount flag confirmed folded: W-P1-6 = §5B report types + `now` param ✓).
+
+**Verdict: PASS-WITH-CONDITIONS — R-1..R-3 fold → v2.3.1 → pS final confirm → pN DESIGN verify (最終 sha 宛).**
+
+### 9.1 Row-check results (abridged; every row anchored in body)
+- **cycle-2 #1..#17**: all dispositioned ✓ — highlights verified: x-mask 廃止 + 実測時刻 (headers); W-copy = byte-identical banked (no fidelity confirm needed — reasonable, file copy > transcription); §6-6 Decimal(repr) algorithm w/ corpus (integral→integer string; exponent window; double-check via CanonicalDecimal form) = sound; EP §4 EXPLICIT_NONE exemption-with-attestation + **UNKNOWN gets no exemption** (知識不足 ≠ 免除) = the crucial asymmetry, correct; per-component semantics + supersession register ④ (prereg §4 rescope recorded); EP §3 3-cell exact 化 (no "or"); §6-4 total symbol disposition incl. dual-canonicalization guard + closure equality invariant + v1-tests-green window; enumerated-only register (5 items); §6-1 fixture-supplementation w/ provenance + E_MIGRATE_STATICS_ABSENT + non-promotion; §2.3 frozenset sorted-array + ≥2-member vector; enum .value=name / .rank split (EP consistent); DC-3 準拠復元 checked against prereg §10b DC-3 text = conformant (not supersession); ownership key-vocab pin + required⊆offered; recovery_rollback_target loud-discard; LOW cluster 11/11 (incl. anchored `re.fullmatch \A…\Z` = my U16 residual closed; #4b hashed-fields + notes row; E_GRADE_INAPPLICABLE S-group extension; BC×BC_ONLY null 列 + E_MIGRATE_BC_CONFIG_UNEXPECTED fail-close mapping).
+- **W-P0-1** ✓ §1.3 learned-conditional (Rs の "Alternatively" 分岐を採用 — sanctioned)。**W-P0-2** ✓ §0/§5A profile-neutral + §5A2 split — one residual → R-2. **W-P0-3** ✓ certificate.schema_registry_hash. **W-P0-4** ✓ EP exists/banked/v1.1. **W-P1-1** ✓ two-layer WCJ. **W-P1-2** ✓ evidence-gated EXPLICIT_NONE (E_SLOT_NONE_UNPROVEN; empirical assumption no longer a type invariant)。**W-P1-3** ✓ EP §3b order/dedupe/E_PROOF_CONFLICT — test residual → R-3. **W-P1-4** ✓ EP §4 TP≥2 CL/SHADOW + offline exemption WITH stated rationale. **W-P1-5** ✓ (#4a/4b + C-CH7). **W-P1-6** ✓ typed reports + `now: float`.
+- **Cross-surface passes**: §1.3 ↔ §3 rows ✓; §1.2† ↔ EP §4 exemption ✓ coherent (the slot-legalizing evidence IS the attestation); EP profile monotonicity CL⊇SHADOW⊇OFFLINE re-derived from the table ✓ (note: EP v1.1 puts TB/CM in SHADOW ≥2, superseding v2 §4.4 prose — no dangling text remains in v2.3 since §4 defers wholly to EP ✓); Rs 確定表 correspondence (EP:77) ✓; §6-2 "5 slot" wording ↔ §1.2 field count ✓.
+- **My 3 pre-announced owns confirmed against the fixes**: W-P0-1 (I praised the unconditional cross-check without checking SCRIPTED/WAIT rows — cross-surface recurrence), W-P1-2 (I endorsed the universal forbid as "sound" — endorsed an empirical assumption as a type invariant), W-P0-3 (my D-4 asked for the registry param but not the certificate binding — the reproducibility hole was my condition's own consequence). All three now fixed in-body.
+
+### 9.2 Conditions (R-1..R-3 — small; fold as v2.3.1, no re-debate needed [debate terminated at max-2; residuals ride the pS→pN chain per §11])
+- **R-1 (records):** header line 9 の W-copy sha が 16-hex 省略形 — B-CH5 の自らの規則 (sibling shas = full 64-hex) と不整合 (transcript/EP は full)。bank commit anchor があるため回復可能だが、規則どおり full 化。
+- **R-2 (unrecorded deviation — the substantive one):** §5A2 `evaluate_usage_eligibility(definition, evidence_bundle, evidence_policy, profile)` は W-P0-2 の Rs sketch `(certificate, evidence_bundle, evidence_policy, requested_profile, external_gate_state)` から **certificate と external_gate_state を落としている**。分離の本質は達成済みだが、header line 14 の enumerated-only 規律では「未記録の分岐 = 欠陥」— supervening Rs doc の具体 API sketch からの逸脱は **採用するか register に記録**のどちらか。実質面も 2 点: certificate-first は未認証 definition の eligibility 評価を型で防ぐ / external_gate_state は two-key conjoin を prose でなく機械可視にする。推奨 = Rs sketch のパラメータを採用 (certificate 必須入力 + external_gate_state で two-key/acceptance/安全 gate 状態を受けて conjoin を判定に含める) — さもなくば register ⑥ として理由付き記録。
+- **R-3 (test):** W-P1-3 が明示要求した **ProofItem 順序 shuffle metamorphic**(bundle hash 不変) が §8 に見当たらない (metamorphic #8 は record 級 shuffle のみ・E_PROOF_CONFLICT は corpus 側)。1 行追加。
+
+### 9.3 Verdict
+19+10 全行 disposition 確認・cross-surface/自立性/premise/value/source/記録の 6-pass クリア。R-1..R-3 は completion 級 (R-2 のみ register 規律との整合を要する実質)。**v2.3.1 fold → pS final confirm → pN DESIGN verify (最終 sha)。**残 open = review-4 transcript の Rs 確認 PENDING (v2.3 §10 が正直に保持 ✓)。impl CLOSED 不変。
+
+---
+
+## 10. ADDENDUM — v2.4 + EP v1.2 + Rs review v3 全行照合 (pS, 2026-07-19 13:02 JST 実測)
+
+Targets (bank `130813e934`, all shas = my measurements == pQ claims): DESIGN **v2.4** `772f346c32cf15f1…` (357 lines) + **EP v1.2** `9ef8d558d0ebea44…` + **Rs review v3 byte-copy** `20da075f9566904e…` (318 lines, WMSO §4 = v3 W-P0-1..6 / W-P1-1..3 read in full). Method: exact git diffs `efc355e52d→130813e934` for both artifacts + v3 source read + row-check (R-1..R-3, v3 9 項, cycle-2/W(v2) regression sweep on the delta).
+
+**Verdict: PASS-WITH-CONDITIONS — F-1・F-2 fold (v2.4.1) → pS final confirm → pN DESIGN verify.**
+
+### 10.1 R-1..R-3 = 3/3 DISCHARGED
+- **R-1** ✅ W-copy sha full 64-hex (+ v3 copy full-hex from birth).
+- **R-2** ✅ **via a better path than my recommendation**: Rs review v3 W-P0-3 sketch (verbatim vs v3 copy lines 112-121 = EXACT: 4 params `certificate / evidence_bundle / current_evidence_policy / usage_profile`; report fields all present + additive `exemptions`; "Acceptance tests, O0/S0/V0 two-key, and safety gates **remain external conjuncts**" quoted) supersedes v2's `external_gate_state` — **register ⑥ records it correctly**. My R-2 recommendation (adopt v2 sketch) is properly outranked by Rs's own later text; both my substantive concerns land: certificate-first = typed ✓, gate conjoin = Rs explicitly wants it OUTSIDE the API ✓ (Rs authority > my preference — correct precedence). `E_CERT_INPUT_MISMATCH` (bundle↔cert hash check) = good fail-close addition.
+- **R-3** ✅ metamorphic #9 ProofItem-shuffle (distinct object from #8) + corpus.
+
+### 10.2 v3 W' 9 項 row-check (fold-map §11 vs body vs v3 source)
+- **W-P0-1** ✅ EP §3c ApplicabilityResolver = Rs sketch adopted; 3-layer (instance=EXPLICIT_NONE attest / lineage=TD BC-conditional, else OPTIONAL / profile="—" cells); **N/A ≠ UNKNOWN** verbatim honored (N/A = validated absence·集約除外 / UNKNOWN = 失格·免除なし); resolver = typed form of EP §4 exemption (correctly marked non-supersession); N/A-vs-UNKNOWN discriminating corpus case.
+- **W-P0-2 / (a)(b)(d) of W-P0-5** ✅ 先行治癒 claims VERIFIED against my own prior reads (schema_registry_hash was in v2.3; REPRODUCED_OUTPUT_HASH@P×HB + COMPATIBILITY_TEST@P×RC present in EP v1.1; E_PROOF_CONFLICT in §3b) — the "先行治癒" labels are true, not narrative.
+- **W-P0-3** ✅ verbatim adoption + current-policy semantics (old certificate stays historically valid; stricter current policy → ineligible; corpus case) — one input gap → **F-1**.
+- **W-P0-4** ✅ evidence-chain types fully inlined in §4 (+ report types §5A2/§5B) — archive reader needs no git show for the evidence chain. Runtime types stay committed-pointer (sanctioned; not in v3's list).
+- **W-P0-5(c)** ✅ replace-vs-supplement cell semantics defined in EP §3 preamble; total-map domain (component, grade, applicability_class) declared; machine-readable via §6 policy_object.
+- **W-P0-6** ✅ design side (bank commit + full sha + PENDING kept honest); package side = p6 lane (noted, not folded here — correct lane separation, as is the exclusion of v3 §5 arm-control items).
+- **W-P1-1** ✅ §3-3 pins all 6 aspects Rs listed (path normalization / UTF-8-bytes member order / symlink forbidden / bytes-as-committed [= explicit no-line-ending-transform answer] / WCJ keyed-object composition [no delimiter ambiguity] / duplicate-path reject) + golden vector. Sound.
+- **W-P1-2** ✅ §3-4 registry invariant chosen (of Rs's two options) with stated rationale (no 5th identity input); `E_BEHAVIOR_REVISION_STALE` compares behavior-bearing hash group at same (skill_id, behavior_revision); corpus case.
+- **W-P1-3** ✅ EP §6 two-layer hash (custody doc-sha vs semantic H_WCJ(policy_object) incl. policy_semver); certificate/report bind semantic. → one records gap → **F-2**.
+- **Regression sweep (delta-scoped)**: kind table / §1-§2 / §6 / §7 untouched or additive; register grew ⑥ only; EP §4 table unchanged (monotonicity re-holds; "—" cells now named as profile-layer N/A); §10 process 注記 (debate coverage ends at v2.2; v2.3/v2.4 folds ride pS+pN; cycle-3 = Rs discretion — no self-start) = honest 先走り hygiene ✓.
+
+### 10.3 New conditions (fold as v2.4.1 — completions inside v3's own requirements)
+- **F-1 (small-medium, cross-surface):** `evaluate_usage_eligibility` **cannot execute the resolver's lineage layer**: the v3-verbatim signature is certificate-first (no definition input), but `ContractCertificate` carries neither `IdentityKind` nor `training_lineage` — so TD's BC-conditional applicability (and kind-dependent rules) are uncomputable from the API's inputs. Fix: add `identity_kind: str` + `training_lineage: str` (`.value` strings, definition-derived at certification) to `ContractCertificate` — making the resolver fully certificate-computable (same completion class as the already-added `explicit_none_components`).
+- **F-2 (records, 1 line):** DC-2's literal "evidence_policy_hash" → certificate now binds `evidence_policy_semantic_hash` (v3 W-P1-3 典拠) — record as **register ⑦** (enumerated-only 規律の適用; ④⑥ と同形).
+
+### 10.4 Verdict
+R-1..R-3 = discharged; v3 9 項 = faithful fold (先行治癒 claims independently verified); regression = clean. **F-1/F-2 → v2.4.1 → pS final confirm → pN DESIGN verify (最終 sha 宛).** 残 open = review-4 transcript Rs 確認 PENDING のみ。impl CLOSED 不変。
+
+---
+
+## 11. FINAL CONFIRM — DESIGN v2.4.1 (pS, 2026-07-19 13:12 JST 実測)
+
+Target: **v2.4.1** sha256 `8310cb6fd3f8f239…` (359 lines, bank `ba10218549`, EP v1.2 不変 — diffstat で確認)。Exact diff `130813e934→ba10218549` 全読:
+- **F-1** ✅ `ContractCertificate` += `identity_kind` (IdentityKind.value, certify 時に definition から抽出) + `training_lineage` (TrainingLineage.value) — rationale コメント正確; §5A2 に「resolver の (kind, lineage) 入力 = certificate fields — definition 実体なしで全 3 層計算可能」明記。私の指定どおり。
+- **F-2** ✅ register **⑦** (prereg §10b DC-2「evidence_policy_hash」→ `evidence_policy_semantic_hash` 結合; v3 W-P1-3 典拠; doc sha = custody 層残置)。
+- 副作用なし (delta = header records + cert 2 fields + 1 bullet のみ); version 履歴に v2.4 full sha + 私の §10 verdict sha を正確に記録 ✓。
+
+**FINAL CONFIRM = PASS。設計軸は D1.1-A DESIGN v2.4.1 (`8310cb6fd3f8f239…`) + EvidencePolicy v1.2 (`9ef8d558d0ebea44…`) を pN DESIGN verify (最終 sha 宛) へ送る状態にある。** 私の設計軸残タスク = pN verdict readback のみ。residual open = review-4 transcript の Rs 確認 PENDING (fidelity — 設計内容の blocker ではない)。impl は pN DESIGN PASS → pre-check → rule-check → path freeze まで CLOSED 不変。

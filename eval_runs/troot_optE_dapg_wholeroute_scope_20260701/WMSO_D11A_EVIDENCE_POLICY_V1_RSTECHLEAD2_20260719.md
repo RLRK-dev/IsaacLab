@@ -1,6 +1,6 @@
-# WMSO D1.1-A EvidencePolicy v1.2（DESIGN 付属 normative artifact）
+# WMSO D1.1-A EvidencePolicy v1.3（DESIGN 付属 normative artifact）
 
-- node: `T-WMSO`; author = w2:pQ; v1 = 2026-07-19 10:54 JST / v1.1 = 12:02 / **v1.2 = 12:41 JST（実測）**（Rs PLAN_STATUS review **v3** fold: v3 W-P0-1 ApplicabilityResolver / v3 W-P0-5 total-map 化・override 意味明示 / v3 W-P1-3 semantic hash）
+- node: `T-WMSO`; author = w2:pQ; v1 = 2026-07-19 10:54 JST / v1.1 = 12:02 / v1.2 = 12:41 / **v1.3 = 13:33 JST（実測）**（pN DESIGN verify B 系 fold: B4 §3d proof binding / B5 CLOSED_LOOP floor 整列 / B6 順序一意化）
 - 親設計: `WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md` v2.4 §4（本 artifact が全表の normative 実体。custody hash = 本 file の sha256、validator/certificate が結合するのは §6 の **semantic hash**）
 - status: DRAFT v1.2 — pS 全行照合（v3 行込み）→ pN DESIGN verify PENDING
 - v1 からの変更: §3 の 3 cell exact 化 / DC-3 準拠復元 / §3b ProofItem 順序・conflict 規則 / §4 EXPLICIT_NONE 免除 / §4b per-component 意味論の明示 / E_GRADE_INAPPLICABLE の S-group 拡張 / 引用 host 修正。v1.1 からの変更: §3c ApplicabilityResolver（v3 W-P0-1 sketch 採用）/ §3 total-map 宣言 + cell 表記の置換/補完 意味明示（v3 W-P0-5）/ §6 semantic hash 分離（v3 W-P1-3）
@@ -54,7 +54,7 @@
 - **record 不在の required component は UNKNOWN(0) として集約**。
 
 ### 3b. ProofItem の canonical 順序と conflict（W-P1-3）
-- claim 内 ProofItem の canonical 順 = **(kind の rank〔enum 宣言順位でなく §1 表の行順 = ProofKind.value 文字列 bytes 順で固定〕, ref, artifact_hash-or-empty)** の tuple 昇順。
+- claim 内 ProofItem の canonical 順 = **(ProofKind.value ASCII bytes 昇順, ref, artifact_hash-or-empty)** の tuple 昇順。〔B6: 旧「§1 表の行順 = .value bytes 順」は事実として両者が異なり二義的だったため撤回 — **唯一の正 = `.value` 文字列の ASCII bytes 昇順**（機械導出可能・表不要）。golden vector + shuffle test は本順序で固定（親設計 §8 #9）〕
 - **exact duplicate**（kind, ref, artifact_hash 全一致）→ 冪等 dedupe（hash に 1 回のみ寄与）。
 - **同 (kind, ref) で artifact_hash が異なる** → `E_PROOF_CONFLICT`（fail-closed — 曖昧な証拠を黙って選ばない）。
 
@@ -67,11 +67,31 @@ ApplicabilityResolver(kind, lineage, component)
 
 - **解決規則（優先順・全て機械判定）**:
   1. **instance 層**: certified definition の対応 slot が **EXPLICIT_NONE**（kind 別許容表 + 証拠 gate〔LEARNED は E_SLOT_NONE_UNPROVEN〕を通過済み）→ **NOT_APPLICABLE**。certificate の `explicit_none_components` が attest を運ぶ（§4 の免除と同一機構 — 名前を resolver に統一）。
-  2. **lineage 層**: TRAINING_DATASET は lineage ∈ BC 系 {BC_ONLY, BC_THEN_RL} → REQUIRED(≥2)、それ以外の lineage → **OPTIONAL**（記録可・集約外）。
+  2. **lineage 層**: TRAINING_DATASET は lineage ∈ BC 系 {BC_ONLY, BC_THEN_RL} → REQUIRED(min_grade = §4 表の profile 別値〔B5 整列後〕)、それ以外の lineage → **OPTIONAL**（記録可・集約外）。
   3. **profile 層**: §4 表の「—」cell（TB/CM/TP@OFFLINE_REPLAY 等、理由明記済み）→ その profile では NOT_APPLICABLE。
   4. 上記非該当 → **REQUIRED(min_grade = §4 表の値)**。
 - ⛔ **N/A ≠ UNKNOWN**（v3 W-P0-1 逐語要求）: NOT_APPLICABLE は「実体が存在しない事の validated proof（kind 別許容表 + 証拠 gate 通過）」であり、UNKNOWN（知識不足 = 失格・免除なし）と型・集約の両方で区別する。
 - 本 resolver は §4 の EXPLICIT_NONE 免除規則の**typed API 形**（同一 semantics の名前付け — supersession でない）。
+
+### 3d. ProofKind 別 payload / binding 規則（B4 — grade の自己申告化防止・total 15 kinds）
+
+**payload 必須性**（違反 = `E_PROOF_PAYLOAD_MISSING`）: **SOURCE_COMMIT のみ artifact_hash = null 必須**（ref = 40-hex commit id が束縛そのもの; ref 形式違反 = `E_PROOF_REF_MALFORMED`）。**他 14 kind は artifact_hash 必須**（64-hex 小文字）。ref = 全 kind 非空（artifact の所在/識別子）。
+
+**binding 対象（cross-field coherence; 不一致 = `E_PROOF_MISBOUND`、component に意味を持たない kind の混入 = `E_PROOF_KIND_FOREIGN`）**:
+
+| ProofKind | 束縛対象（certify 時に機械照合） |
+|---|---|
+| FINAL_ARTIFACT_HASH | component 対応 slot/field の hash と一致: POLICY_ARTIFACT→executable_artifact_hash / MODEL_ARCHITECTURE・TENSOR_BINDING・NORMALIZATION・RUNTIME_CONFIG→当該 slot hash / TRAINING_DATASET→TrainingProvenance.demo_dataset_hash |
+| CONFIG_HASH | TrainingProvenance の claimed stage config hash（BC=bc_config_hash 等・family 依存）と一致 |
+| INPUT_SCHEMA_HASH / OUTPUT_SCHEMA_HASH | definition の observation / action semantic schema の H_WCJ と一致 |
+| NORMALIZER_HASH | normalization slot（KNOWN）の hash と一致（slot EXPLICIT_NONE なら claim 自体 N/A — §3c） |
+| REPRODUCED_OUTPUT_HASH | **HB grade の核**: 対応する FINAL_ARTIFACT_HASH の値と一致（byte-repro の定義） |
+| TRAIN_TIME_CRYPTO_BINDING | binding blob sha; blob は (FINAL_ARTIFACT_HASH 値, TRAIN_RUN_MANIFEST 値) を束縛（内容検証 = test 層） |
+| EVALUATOR_ARTIFACT | `EvidenceRecord.evaluator_artifact_hash` と一致 |
+| TRAIN_RUN_MANIFEST / REPRODUCTION_PROCEDURE / COMPATIBILITY_TEST / UNRESOLVED_DIFFERENCES / DIMENSION_SOURCE | 当該 file/record の sha256（存在束縛; 内容 coherence = test 層） |
+| RECONSTRUCTION_SOURCES | H_WCJ([{path, sha256}…] path bytes 昇順) の集約 hash |
+
+- **negative controls（親設計 §8 corpus 必須）**: (i) wrong-but-valid-hex（形式適合・対象不一致）→ E_PROOF_MISBOUND (ii) null-where-required → E_PROOF_PAYLOAD_MISSING (iii) 他 component 向け kind の混入（例: POLICY_ARTIFACT claim に INPUT_SCHEMA_HASH）→ E_PROOF_KIND_FOREIGN。
 
 ## 4. Usage profiles（required set + min_grade）
 
@@ -85,16 +105,16 @@ ApplicabilityResolver(kind, lineage, component)
 | NORMALIZATION | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
 | CONTROL_MODE | ✓ ≥3 | ✓ ≥2 | —（replay は制御を発行しない — 制御様式の証拠は再生妥当性に効かない） |
 | RUNTIME_CONFIG | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
-| TRAINING_PROVENANCE | ✓ ≥2 | ✓ ≥2 | —（来歴は replay 妥当性に効かない; 記録義務は §5） |
-| TRAINING_DATASET | BC 系のみ ✓ ≥2 | BC 系のみ ✓ ≥2 | — |
+| TRAINING_PROVENANCE | ✓ **≥3**〔B5〕 | ✓ ≥2 | —（来歴は replay 妥当性に効かない; 記録義務は §5） |
+| TRAINING_DATASET | BC 系のみ ✓ **≥3**〔B5〕 | BC 系のみ ✓ ≥2 | — |
 | INITIATION_SPEC | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
 | TERMINATION_SPEC | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
 | HANDOFF_SCHEMA | ✓ ≥3 | ✓ ≥2 | ✓ ≥2 |
 
 - 「**BC 系**」= **{BC_ONLY, BC_THEN_RL}**（明示列挙 — A-CH8）。
 - **EXPLICIT_NONE 免除（C-CH6/D-CH3; typed 形 = §3c ApplicabilityResolver の instance 層）**: 対応 bundle slot が **EXPLICIT_NONE** の component は required set から**免除**される — certified definition 自体（kind 別許容表を通過した契約）が「実体不存在」を attest する。免除は `UsageEligibilityReport` に **loud に記録**（silent skip でない）。これにより SCRIPTED/WAIT は MODEL_ARCHITECTURE / TENSOR_BINDING / NORMALIZATION を免除され、残る required で eligibility を評価できる。UNKNOWN slot に免除は**無い**（知識不足は免除でなく失格）。
-- **eligibility の意味論（per-component; C-CH1/B-CH2）**: profile 充足 ⇔ **免除されない全 required component について、その component の達成 grade ≥ 表の min_grade**。「required set の最弱 grade が bind」は**この per-component 判定の帰結**（不在 = UNKNOWN(0) = 失格）として読む — 集約値を単一 matrix 行に写す uniform 読みは、本表の component 別 min_grade（TP/TD の ≥2）により**精緻化されて supersede** される（prereg §4 由来の文言との差 = 親設計 header の supersession register に記録）。
-- 整合: CLOSED_LOOP ≥3 required は Rs 確定表の「EXACT/HASH_BOUND = acceptance test 後に可」に対応。TP/TD の ≥2 は「該当 component に要求する下限」であり、ceiling matrix の行を置換しない。profile 単調: CLOSED_LOOP ⊇ SHADOW ⊇ OFFLINE_REPLAY（免除前の集合比較）。
+- **eligibility の意味論（per-component; C-CH1/B-CH2 + B5 整列）**: profile 充足 ⇔ **免除されない全 required component について、その component の達成 grade ≥ 表の min_grade**（不在 = UNKNOWN(0) = 失格）。**B5 により CLOSED_LOOP 列の min_grade は全 required で ≥3 に整列** — これで per-component 判定の帰結は Rs 確定表（prereg §4）の「必須集合の最弱 grade が bind → matrix 行」読みと**同値**になる（最弱 ≥3 ⇔ RECONSTRUCTED(2) の closed-loop 不可 row を厳守）。旧 v1.1-v1.2 の「TP/TD ≥2 が uniform 読みを精緻化 supersede」は **B5 で撤回**（human-ruled ceiling の変更権限は設計内宣言に無い — 親設計 register ④ の注記参照）。
+- 整合: CLOSED_LOOP 全 required ≥3 = Rs 確定表「EXACT/HASH_BOUND = acceptance test 後に可」row。SHADOW の ≥2 = 「RECONSTRUCTED = 非 authority のみ」row（SHADOW は定義上 非 authority）✓。OFFLINE_REPLAY ≥2 = 「可」row ✓。profile 単調: CLOSED_LOOP ⊇ SHADOW ⊇ OFFLINE_REPLAY（免除前の集合比較）。
 - usage matrix = ceiling。acceptance test は必要条件の一つ。closed-loop authority は O0/S0/V0 two-key + 独立安全 gate を必ず conjoin。「条件付き」cell 定義は親設計 §4 と同一。
 
 ## 5. 記録義務（v1 から不変）
