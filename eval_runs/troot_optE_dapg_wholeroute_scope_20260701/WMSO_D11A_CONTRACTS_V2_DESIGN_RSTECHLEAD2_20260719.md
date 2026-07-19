@@ -1,8 +1,8 @@
-# WMSO D1.1-A `contracts_v2` — DESIGN (v2.4)
+# WMSO D1.1-A `contracts_v2` — DESIGN (v2.4.1)
 
 - node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2)
-- created: v1 = 2026-07-19 09:09 JST / v1.1 = 09:24 / v2 = 09:32 / v2.1 = 09:43 / v2.2 = 10:59（editing 完了実測; 旧「10:5x」表記を確定 — 以後 x-mask 廃止）/ v2.3 = 12:07 / **v2.4 = 12:41 JST（実測; 12:31 に v2.3.1 として着手後、Rs review v3 着信により本版へ拡張）**
-- **status: DESIGN DRAFT v2.4 — fold = pS 全行照合 R-1..R-3（verify record §9）+ **Rs PLAN_STATUS review v3 の WMSO 全 9 項**（v3 W-P0-1..6 / v3 W-P1-1..3）→ pS 全行照合（v3 行込み）→ pN DESIGN PASS-CLOSE（最終 SHA 宛）PENDING**
+- created: v1 = 2026-07-19 09:09 JST / v1.1 = 09:24 / v2 = 09:32 / v2.1 = 09:43 / v2.2 = 10:59（editing 完了実測; 旧「10:5x」表記を確定 — 以後 x-mask 廃止）/ v2.3 = 12:07 / v2.4 = 12:41（12:31 に v2.3.1 として着手後、Rs review v3 着信により拡張）/ **v2.4.1 = 13:07 JST（実測）**
+- **status: DESIGN DRAFT v2.4.1 — pS v2.4 全行照合 PASS-WITH-CONDITIONS の F-1・F-2 fold（verify record §10）→ pS final confirm → pN DESIGN PASS-CLOSE（最終 SHA 宛）PENDING**
 - governing scope: `WMSO_D11_CONTRACT_V2_SCOPE_PREREG_RSTECHLEAD2_20260719.md` v3.2.2, sha256 `71097e58102e100657177b7ead2484bcc00840e4a788e6a295d944f7827d0966`, commit `ea6e39b93c`
 - 兄弟 normative artifacts（pN DESIGN verify の対象; full 64-hex — B-CH5）:
   - **Rs review-4 transcript** = `WMSO_RS_REVIEW4_DESIGN_TRANSCRIPT_20260719.md`, sha256 `8a7915dfa3386889d4efe3cbacb063c0ea20df0f138c8099b84ec64cbab5ad50`（as-received 転記、**Rs 確認 PENDING**; **bank `ac5865b66d`** — v3 W-P0-6 の custody 記録）
@@ -10,9 +10,9 @@
   - **Rs PLAN_STATUS review v3（W'-系; 対象 = v2.2 + EP v1・supervening）** = `WMSO_RS_PLAN_STATUS_REVIEW_V3_COPY_20260719.md`, sha256 `20da075f9566904e508e22c80cabce9d04d4d61ee9d306268a1a6fe311c6230b`（原本 `~/Downloads/PLAN_STATUS_review_v3_2026-07-19.md` の **byte-identical file copy** — fidelity 確認不要。⚠ **v3 の W-P0-n/W-P1-n は review v2 と別番号系** — 本 doc では常に「v3 W-」接頭辞で引用〔混同防止〕）
   - **EvidencePolicy v1.2** = `WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md`, sha256 `9ef8d558d0ebea44f5b86bff43e0792c9fbc8b0eda69a2820a6a447ac4c9f065`
   - pS design-verify record = `WMSO_D11A_DESIGN_VERIFY_WMSODESIGN_20260719.md`（banked `cd5482310d`; 現行版は pS 管理 — B-CH1 の host pin）
-- version 履歴: v1 (prefix `8bec472a6ac1` — content 非保全) → v1.1 (prefix `b807ce2abbd7` — 同) → v2 (prefix `4880dc0d6c6d` — 同) → v2.1 (full `c49ff132ff200257085f072c875c58e3200754ac74ee28de8634b786ab2681e7`, bank `cd5482310d`) → v2.2 (full `3a1577f89dfa3d3c7fa642c938f56a4ff05ab60e14b57194cb3368f7ddcb95f3`, bank `ac5865b66d`) → v2.3 (full `94a42a0ea73a08d2b85be562373322c5ebfd65f49393183b9cf7fff68040f192`, bank `efc355e52d`; **pS 全行照合 = PASS-WITH-CONDITIONS R-1..R-3**〔verify record §9〕) → **v2.4 (本版)**。以後毎版 bank。
+- version 履歴: v1 (prefix `8bec472a6ac1` — content 非保全) → v1.1 (prefix `b807ce2abbd7` — 同) → v2 (prefix `4880dc0d6c6d` — 同) → v2.1 (full `c49ff132ff200257085f072c875c58e3200754ac74ee28de8634b786ab2681e7`, bank `cd5482310d`) → v2.2 (full `3a1577f89dfa3d3c7fa642c938f56a4ff05ab60e14b57194cb3368f7ddcb95f3`, bank `ac5865b66d`) → v2.3 (full `94a42a0ea73a08d2b85be562373322c5ebfd65f49393183b9cf7fff68040f192`, bank `efc355e52d`; **pS 全行照合 = PASS-WITH-CONDITIONS R-1..R-3**〔verify record §9〕) → v2.4 (full `772f346c32cf15f11e3c62fa14ed1342f87b7bcf0acc9e8d0ea2a93f885986d7`, bank `130813e934`; **pS 全行照合 = PASS-WITH-CONDITIONS F-1/F-2**〔verify record §10, sha `609e7a35722b…`; R-1..R-3 = 3/3 discharge・register ⑥ 解 = 検証済で pS 推奨より正当・v3 9 項 = faithful〕) → **v2.4.1 (本版)**。以後毎版 bank。
 - 駆動要件（host 付き — B-CH1/A-CH5 修正）: prereg §2 IN / prereg §10 (a)-(d)〔旧ラベル §5b〕/ N-1・N-2（= **pS ratify doc §8 ADDENDUM C1** の carried 2 点）/ DC-1..DC-6（**prereg §10b**）/ review-4 P0・P1・T・OP（transcript）/ **W-P0-1..4・W-P1-1..6（W-review copy — supervening Rs review）**/ **v3 W-P0-1..6・v3 W-P1-1..3（review v3 copy — 後発 supervening; §11 W'→fold-map）**/ pS D・V・R 系 / CC Debate cycle-1 U1-U19 + cycle-2 findings（verification-log task-WMSO-D11A-design-debate-001 cycle 1・2; **cycle-1 の記録上 overall = "REVIEW"** — accepted CRITICAL を skill 表で FAIL 扱いした運用注記 = D-CH7）。「review-1 P0-n」（v1 コード欠陥）と「review-4 P0-n」（設計修正）は別番号系 — 常に接頭辞付き。
-- **SSOT supersession register（enumerated-only — B-CH6/NHA）**: 本 design が prereg 文言を supersede するのは**以下に列挙した点のみ**。未記録の分岐 = 欠陥であり precedence では解決しない（prereg §9 loop へ）。① DC-2 timing（TENSOR_BINDING/CONTROL_MODE enum 即時追加 — review-4 P0-4; transcript 典拠, Rs 確認 PENDING）② prereg §5 表 7→5 行（DC-5 実行）③ prereg §7b「SkillDefinitionHash」→ draft_definition_hash 読み（§6-8）④ **prereg §4 の uniform 最弱-bind→matrix 読み → per-component min_grade 意味論（EvidencePolicy §4; C-CH1/B-CH2）**⑤ **DC-6 の bounded 例外 = §6-4 の retained-in-v1 guard（D1.1-C 後継まで; D-CH2）**⑥ **review v2 W-P0-2 sketch の `external_gate_state` 引数 → review v3 W-P0-3 sketch（4 引数・「Acceptance tests, O0/S0/V0 two-key, and safety gates remain external conjuncts」）が supersede**（Rs 自身の後発 text; pS R-2 の推奨〔v2 sketch 採用〕より優先 — §5A2）。EvidencePolicy の表実体は §4 の規則どおり artifact 側が normative。
+- **SSOT supersession register（enumerated-only — B-CH6/NHA）**: 本 design が prereg 文言を supersede するのは**以下に列挙した点のみ**。未記録の分岐 = 欠陥であり precedence では解決しない（prereg §9 loop へ）。① DC-2 timing（TENSOR_BINDING/CONTROL_MODE enum 即時追加 — review-4 P0-4; transcript 典拠, Rs 確認 PENDING）② prereg §5 表 7→5 行（DC-5 実行）③ prereg §7b「SkillDefinitionHash」→ draft_definition_hash 読み（§6-8）④ **prereg §4 の uniform 最弱-bind→matrix 読み → per-component min_grade 意味論（EvidencePolicy §4; C-CH1/B-CH2）**⑤ **DC-6 の bounded 例外 = §6-4 の retained-in-v1 guard（D1.1-C 後継まで; D-CH2）**⑥ **review v2 W-P0-2 sketch の `external_gate_state` 引数 → review v3 W-P0-3 sketch（4 引数・「Acceptance tests, O0/S0/V0 two-key, and safety gates remain external conjuncts」）が supersede**（Rs 自身の後発 text; pS R-2 の推奨〔v2 sketch 採用〕より優先 — §5A2）⑦ **prereg §10b DC-2 の文言「evidence_policy_hash」→ certificate は `evidence_policy_semantic_hash` を結合**（v3 W-P1-3 が典拠; doc sha は custody 層に残置 — F-2）。EvidencePolicy の表実体は §4 の規則どおり artifact 側が normative。
 - **参照規約**: 本 doc 内の「v2.2 のまま」「v2.2 §N のまま」は全て **banked commit `ac5865b66d` の blob**（sha `3a1577f89dfa…`）を指す committed pointer である（U2 で sanctioned の形式 — 消滅版参照ではない。`git show ac5865b66d:<path>` で常時復元可能）。
 - ⛔ 本 doc は設計のみ。code / [CHANGE] / impl は pN DESIGN PASS → pre-check → rule-check → path freeze / impl GO まで CLOSED。
 
@@ -230,6 +230,8 @@ class ContractCertificate:
     evidence_policy_semantic_hash: str  # v3 W-P1-3: EP §6 の H_WCJ(policy_object) — 文書編集で不変・規則変更でのみ変わる（doc sha は custody 層）
     schema_registry_hash: str          # W-P0-3 / v3 W-P0-2: H_WCJ(registry 内容) — registry A/B での結果差を certificate に固定
     explicit_none_components: tuple[str, ...]  # certified EXPLICIT_NONE slot の ComponentKind.value 昇順 — 不存在 attest の可搬形（EP §3c instance 層の入力; certificate-first を可能にする）
+    identity_kind: str                 # F-1: IdentityKind.value（certify 時に definition から抽出）— EP §3c resolver の kind 依存規則を certificate 単独で計算可能に
+    training_lineage: str              # F-1: TrainingLineage.value — resolver lineage 層（TD の BC 系条件）の入力。explicit_none_components と同じ completion class
     validator_artifact_hash: str; contract_schema_version: str
     issued_at: float                   # 同一性判定外
 ```
@@ -255,7 +257,7 @@ class UsageEligibilityReport:          # field 集合 = v3 W-P0-3 の指定ど�
     eligible: bool
 ```
 
-- 判定 = EP §3c resolver → applicable へ per-component `達成 grade ≥ min_grade`（EP §4）。
+- 判定 = EP §3c resolver → applicable へ per-component `達成 grade ≥ min_grade`（EP §4）。resolver の (kind, lineage) 入力 = `certificate.identity_kind` / `certificate.training_lineage`（F-1 — definition 実体なしで全 3 層が計算可能）。
 - ⛔ **certificate ≠ authority grant / eligible ≠ authority grant**: acceptance test・O0/S0/V0 two-key・独立安全 gate は **external conjuncts のまま**（v3 W-P0-3 逐語 — 本 API の入力にしない。v2 sketch の external_gate_state 引数は register ⑥ で superseded）。profile は後段で何度でも（現行 policy で）再評価可。
 
 ### 5B. 実行時 lifecycle validation（W-P1-6 反映）
