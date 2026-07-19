@@ -92,6 +92,11 @@ def main() -> int:
         action="store_true",
         help="L-P0 mode: neutralize the imported XML arm actuators, keep the kinematic drive (design v1.2)",
     )
+    ap.add_argument(
+        "--neg-stale",
+        action="store_true",
+        help="R3 negative control (v1.5 sec12.1): freeze arm ctrl at the route-start pose; score |q - rec[t]| offline",
+    )
     ap.add_argument("--gains-scale", type=float, default=1.0, help="ke/kd scale (L-P5 negative control = 0.1); caps NOT scaled")
     ap.add_argument("--ramp-frames", type=int, default=0, help="M-5 activation ramp length in physics frames (0 = off)")
     ap.add_argument("--episode-steps", type=int, default=900)
@@ -103,12 +108,15 @@ def main() -> int:
 
     # Probe flags MUST be exported before env construction (the builder + __init__ read os.environ).
     assert not (a.arm_pd and a.neutralize_only), "--arm-pd and --neutralize-only are mutually exclusive"
-    for _k in ("ARM_PD_DRIVE", "ARM_XML_ACT_NEUTRALIZE", "ARM_PD_GAINS_SCALE", "ARM_PD_RAMP_FRAMES"):
+    assert not (a.neg_stale and not a.arm_pd), "--neg-stale requires --arm-pd (frozen-ctrl PD run)"
+    for _k in ("ARM_PD_DRIVE", "ARM_XML_ACT_NEUTRALIZE", "ARM_PD_GAINS_SCALE", "ARM_PD_RAMP_FRAMES", "ARM_PD_STALE_CTRL"):
         os.environ.pop(_k, None)  # defensive: never inherit a probe flag from the launcher's shell
     if a.arm_pd:
         os.environ["ARM_PD_DRIVE"] = "1"
         os.environ["ARM_PD_GAINS_SCALE"] = str(a.gains_scale)
         os.environ["ARM_PD_RAMP_FRAMES"] = str(a.ramp_frames)
+        if a.neg_stale:
+            os.environ["ARM_PD_STALE_CTRL"] = "1"
     elif a.neutralize_only:
         os.environ["ARM_XML_ACT_NEUTRALIZE"] = "1"
 
@@ -203,9 +211,15 @@ def main() -> int:
         }
 
     eff = {
-        "mode": ("arm_pd" if a.arm_pd else ("l_p0_neutralize" if a.neutralize_only else "kinematic_baseline")),
+        "mode": (
+            ("arm_pd_stale_neg" if a.neg_stale else "arm_pd")
+            if a.arm_pd
+            else ("l_p0_neutralize" if a.neutralize_only else "kinematic_baseline")
+        ),
         "arm_pd_effective": bool(getattr(env, "_arm_pd_drive", False)),
         "neutralize_effective": bool(getattr(env, "_arm_xml_act_neutralize", False)),
+        "stale_ctrl_effective": bool(getattr(env._route, "_arm_pd_stale_ctrl", False)),
+        "repose_frame_index": int(getattr(env, "_armpd_repose_frame_index", -1)),
         "gains_scale": float(a.gains_scale),
         "ramp_frames": int(a.ramp_frames),
         "drive_mode": "feedforward",
@@ -302,9 +316,28 @@ def main() -> int:
     fr_q: list = []
     fr_qd: list = []
     fr_ctrl: list = []
+    fr_intended: list = []  # sec12.1 scoring source: the per-frame intended (recorded) arm target
+    fr_cable_vmax: list = []  # A-4: per-frame max |cable body velocity| (world 0)
+    fr_pen_min: list = []  # A-4: per-frame min contact dist (negative = penetration), nan if unavailable
     fr_rl_step: list = []
     fr_route_t: list = []
+    _nan12 = np.full(12, np.nan)
+    cable_b0 = np.asarray(cable_bodies0, dtype=np.int64)
     _orig_phys = env._physics_step_all
+
+    def _pen_min_dist():
+        # A-4 raw: min contact dist over ACTIVE contacts (mujoco_warp: nacon + contact.dist prefix).
+        # No active contact -> 0.0 (no penetration). Global (all pairs) = conservative superset of
+        # "arm-involved" (declared as the implemented form in the prereg).
+        try:
+            d = env._solver.mjw_data
+            nacon = int(np.ravel(d.nacon.numpy())[0])
+            if nacon <= 0:
+                return 0.0
+            dist = np.ravel(d.contact.dist.numpy())[:nacon]
+            return float(np.min(dist))
+        except Exception:  # noqa: BLE001
+            return float("nan")
 
     def _log_then_phys(substeps=None, sim_dt=None):
         r = _orig_phys(substeps=substeps, sim_dt=sim_dt)
@@ -313,6 +346,10 @@ def main() -> int:
             fr_q.append(env._state_0.joint_q.numpy()[arm_q_idx].copy())
             fr_qd.append(env._state_0.joint_qd.numpy()[arm_qd_idx].copy())
             fr_ctrl.append(env._control.joint_target_pos.numpy()[arm_qd_idx].copy())
+            _it = getattr(env._route, "_last_ff_arm_target", None)
+            fr_intended.append(_it.copy() if _it is not None else _nan12)
+            fr_cable_vmax.append(float(np.max(np.abs(env._state_0.body_qd.numpy()[cable_b0]))))
+            fr_pen_min.append(_pen_min_dist())
             fr_rl_step.append(fr["cur_step"])
             fr_route_t.append(int(env.route_t[0].item()))
         return r
@@ -433,6 +470,9 @@ def main() -> int:
         qd=qd_arr,
         ctrl=ctrl_arr,
         bq_steps=np.asarray(bq_steps, dtype=np.float32),
+        intended=np.asarray(fr_intended, dtype=np.float64),
+        cable_vmax=np.asarray(fr_cable_vmax, dtype=np.float64),
+        pen_min=np.asarray(fr_pen_min, dtype=np.float64),
         rl_step=np.asarray(fr_rl_step, dtype=np.int64),
         route_t=np.asarray(fr_route_t, dtype=np.int64),
         arm_q_idx=np.asarray(arm_q_idx, dtype=np.int64),

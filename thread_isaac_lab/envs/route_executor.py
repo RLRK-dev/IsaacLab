@@ -4642,9 +4642,14 @@ class RouteExecutor(rc.RouteInterfaceV1):
         self._requested_phase = 0
         self._forbid_banked_fork = bool(forbid_banked_fork)
         self._grip_rb_checked = False  # one-time device-readback assert flag (CC3-CH5/R8) for apply_recorded_grip
-        # (d) P-D1 probe flag (design v1.2 sec2): the FF per-frame arm drive switches from the kinematic
-        # joint_q write to the POSITION-servo ctrl write in apply_recorded_arm_ff. Default OFF.
+        # (d) P-D1 probe flags (design v1.2 sec2 + v1.5 sec12.1): the FF per-frame arm drive switches
+        # from the kinematic joint_q write to the POSITION-servo ctrl write in apply_recorded_arm_ff.
+        # ARM_PD_STALE_CTRL=1 (R3 negative control) SUPPRESSES the per-frame ctrl write so ctrl stays
+        # frozen at the route-start re-pose value; the intended stream is still computed + stashed for
+        # the |q - rec[t]| scoring (sec12.1 RATIFY condition: never score the stale run vs its own ctrl).
         self._arm_pd_drive = os.environ.get("ARM_PD_DRIVE") == "1"
+        self._arm_pd_stale_ctrl = os.environ.get("ARM_PD_STALE_CTRL") == "1"
+        self._last_ff_arm_target = None  # per-frame intended arm target [n_world*12], probe logging
         if control is not None:
             servo_seed_assert(control.joint_target_pos.numpy(), self._maps["all_driver_dofs"])
         self._recording = _prepare_recording(recording) if recording is not None else None
@@ -5049,13 +5054,16 @@ class RouteExecutor(rc.RouteInterfaceV1):
             f = min(int(step_f[tt]) + si, n_frames - 1)
             jq_ff[w] = arm_q[f, :_N_ARM_JOINTS]
         if self._arm_pd_drive:
-            # (d) P-D1 FF ctrl-drive (design v1.2 sec2 (A), FF path): write the SAME recorded per-frame
-            # arm target into the POSITION-servo ctrl (read->mutate->assign, CC3-CH5) instead of the
-            # kinematic joint_q force. joint_target_pos is qd-indexed; the arm-local column selection
-            # mirrors apply_arm_only_write_perworld's own jq[:, _ARM_OVERWRITE_LOCAL] internal.
-            jtp = self._control.joint_target_pos.numpy()
-            jtp[self._maps["arm_ow_qd_idx"]] = jq_ff[:, _ARM_OVERWRITE_LOCAL].reshape(-1)
-            self._control.joint_target_pos.assign(jtp)
+            # (d) P-D1 FF ctrl-drive (design v1.2 sec2 (A), FF path = probe site s1, v1.5 sec5): write
+            # the SAME recorded per-frame arm target into the POSITION-servo ctrl (read->mutate->assign,
+            # CC3-CH5) instead of the kinematic joint_q force. joint_target_pos is qd-indexed; the
+            # arm-local column selection mirrors apply_arm_only_write_perworld's internal.
+            # Stash the intended stream ALWAYS (sec12.1 scoring source); skip the write in stale mode.
+            self._last_ff_arm_target = jq_ff[:, _ARM_OVERWRITE_LOCAL].reshape(-1).copy()
+            if not self._arm_pd_stale_ctrl:
+                jtp = self._control.joint_target_pos.numpy()
+                jtp[self._maps["arm_ow_qd_idx"]] = self._last_ff_arm_target
+                self._control.joint_target_pos.assign(jtp)
         else:
             phys_jq = state.joint_q.numpy()  # host copy (CC3-CH5)
             phys_jqd = state.joint_qd.numpy()

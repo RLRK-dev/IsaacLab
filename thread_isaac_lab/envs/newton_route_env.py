@@ -1192,27 +1192,66 @@ class NewtonRouteEnv(VecEnv):
                 _rep_src12 = self._arm_ow_maps["arm_ow_src"][:12]  # arm-local columns {0-5,14-19}
                 _rep12 = _rep_row[_rep_src12]
                 _rep_jq = self._state_0.joint_q.numpy()
+                _rep_jqd = self._state_0.joint_qd.numpy()
                 _rep_jtp = self._control.joint_target_pos.numpy()
                 _rep_open = float(self._rex.GRIPPER_DRIVER_OPEN_RAD)
+                # A-1 (v1.5 sec12.2): limits + winding -- the EXACT recorded values (no normalization /
+                # wrap folding) must lie inside the model joint limits at the arm dofs.
+                _rep_lo = self._model.joint_limit_lower.numpy()
+                _rep_hi = self._model.joint_limit_upper.numpy()
+                # A-3 pre-image: cable q/qd slices (everything outside the arm/gripper spans), snapshotted
+                # BEFORE the mutation of the SAME host arrays -- proves the teleport touches arm q only.
+                _rep_arm_all = set(int(x) for x in self._arm_ow_maps["arm_ow_q_idx"])
+                _rep_cable_q_idx = np.array([i for i in range(_rep_jq.shape[0]) if i not in _rep_arm_all], dtype=np.int64)
+                _rep_cable_q_pre = _rep_jq[_rep_cable_q_idx].copy()
+                _rep_cable_qd_pre = _rep_jqd.copy()
                 for w in env_ids:
                     w = int(w)
+                    # A-5: gripper OPEN + not-grasping (correction #3 guard folded into this suite).
                     assert not bool(np.any(self._g_latched[w])), (
-                        f"armpd re-pose guard: world {w} is grasp-latched at the route-start boundary"
+                        f"armpd A-5: world {w} is grasp-latched at the route-start boundary"
                     )
                     for d in self._arm_ow_maps["l_driver_dofs"][w] + self._arm_ow_maps["r_driver_dofs"][w]:
                         assert abs(float(_rep_jtp[d]) - _rep_open) < 1e-6, (
-                            f"armpd re-pose guard: driver dof {d} target {_rep_jtp[d]} != OPEN {_rep_open}"
+                            f"armpd A-5: driver dof {d} target {_rep_jtp[d]} != OPEN {_rep_open}"
                         )
                     _rep_q12 = self._arm_ow_maps["arm_ow_q_idx"][w * 12 : (w + 1) * 12]
                     _rep_qd12 = self._arm_ow_maps["arm_ow_qd_idx"][w * 12 : (w + 1) * 12]
+                    for k in range(12):
+                        d = int(_rep_qd12[k])
+                        assert float(_rep_lo[d]) - 1e-9 <= float(_rep12[k]) <= float(_rep_hi[d]) + 1e-9, (
+                            f"armpd A-1: rec frame-0 q[{k}]={_rep12[k]} outside joint limits "
+                            f"[{_rep_lo[d]}, {_rep_hi[d]}] at dof {d}"
+                        )
                     _rep_jq[_rep_q12] = _rep12
                     _rep_jtp[_rep_qd12] = _rep12
+                # A-3: the mutated host arrays are byte-identical outside the arm q slice, and qd was
+                # not touched by this block at all (solver step NOT interleaved).
+                assert np.array_equal(_rep_jq[_rep_cable_q_idx], _rep_cable_q_pre), (
+                    "armpd A-3: non-arm joint_q changed under the route-start re-pose"
+                )
+                assert np.array_equal(_rep_jqd, _rep_cable_qd_pre), (
+                    "armpd A-3: joint_qd changed under the route-start re-pose (must be write-free)"
+                )
                 self._state_0.joint_q.assign(_rep_jq)
                 self._control.joint_target_pos.assign(_rep_jtp)
+                # A-1 fidelity + A-2 M-4 sync: device readback after assign -- seeded q and ctrl carry the
+                # EXACT recorded values (eps 1e-9), qd[arm] == 0.
+                _rb_jq = self._state_0.joint_q.numpy()
+                _rb_jtp = self._control.joint_target_pos.numpy()
+                _rb_jqd = self._state_0.joint_qd.numpy()
+                for w in env_ids:
+                    w = int(w)
+                    _rep_q12 = self._arm_ow_maps["arm_ow_q_idx"][w * 12 : (w + 1) * 12]
+                    _rep_qd12 = self._arm_ow_maps["arm_ow_qd_idx"][w * 12 : (w + 1) * 12]
+                    assert np.max(np.abs(_rb_jq[_rep_q12] - _rep12)) <= 1e-9, "armpd A-1: seeded q readback != rec frame-0"
+                    assert np.max(np.abs(_rb_jtp[_rep_qd12] - _rep12)) <= 1e-9, "armpd A-2: ctrl readback != seeded q"
+                    assert np.max(np.abs(_rb_jqd[_rep_qd12])) <= 1e-9, "armpd A-2: qd[arm] != 0 after re-pose"
                 self._armpd_repose_count += len(env_ids)
+                self._armpd_repose_frame_index = 0  # A-6: recording row used for the seed
                 print(
-                    f"  [ARMPD] route-start re-pose (v1.3 #3): worlds={[int(x) for x in env_ids]} -> "
-                    f"rec frame-0 arm q (ctrl synced, guards PASS)"
+                    f"  [ARMPD] route-start re-pose (v1.3 #3 + v1.5 A-1..A-3/A-5 PASS): "
+                    f"worlds={[int(x) for x in env_ids]} -> rec frame-0 arm q (ctrl synced)"
                 )
         for w in env_ids:
             w = int(w)
