@@ -210,9 +210,10 @@ def apply_arm_only_write_broadcast(phys_jq, phys_jqd, fk_jq_1world, arm_ow_q_idx
     Returns:
         The mutated ``(phys_jq, phys_jqd)`` tuple.
     """
-    phys_jq[arm_ow_q_idx] = fk_jq_1world[arm_ow_src]
-    phys_jqd[arm_ow_qd_idx] = 0.0
-    return phys_jq, phys_jqd
+    raise RuntimeError(
+        "kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+        "drive the arm via the POSITION-servo ctrl path"
+    )
 
 
 def apply_arm_only_write_perworld(phys_jq, phys_jqd, jq_interp, arm_ow_q_idx, arm_ow_qd_idx):
@@ -233,9 +234,10 @@ def apply_arm_only_write_perworld(phys_jq, phys_jqd, jq_interp, arm_ow_q_idx, ar
     Returns:
         The mutated ``(phys_jq, phys_jqd)`` tuple.
     """
-    phys_jq[arm_ow_q_idx] = jq_interp[:, _ARM_OVERWRITE_LOCAL].reshape(-1)
-    phys_jqd[arm_ow_qd_idx] = 0.0
-    return phys_jq, phys_jqd
+    raise RuntimeError(
+        "kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+        "drive the arm via the POSITION-servo ctrl path"
+    )
 
 
 def set_gripper_target(joint_target_pos, dofs, target_rad):
@@ -339,13 +341,10 @@ def apply_banked_restore(phys_jq, phys_jqd, joint_target_pos, maps, banked):
     Returns:
         The mutated ``(phys_jq, phys_jqd, joint_target_pos)`` tuple.
     """
-    phys_jq[maps["arm_ow_q_idx"]] = banked["arm_q"]
-    phys_jqd[maps["arm_ow_qd_idx"]] = banked["arm_qd"]
-    phys_jq[maps["gripper_restore_q_idx"]] = banked["gripper_q"]  # G7: all 16 gripper coords (drivers + followers)
-    phys_jqd[maps["gripper_restore_qd_idx"]] = banked["gripper_qd"]
-    for i, d in enumerate(maps["all_driver_dofs"]):
-        joint_target_pos[d] = float(banked["grip_target"][i])  # F5 banked grip target (NOT blanket-OPEN)
-    return phys_jq, phys_jqd, joint_target_pos
+    raise RuntimeError(
+        "banked phase-k kinematic restore REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+        "phase forks require a physical re-execution path"
+    )
 
 
 def patch_settled_fk_gripper(settled_fk_jq, phys_jq, arm_q_start0):
@@ -1016,6 +1015,11 @@ def authorize_clip_pin(solver, seat_body, seat_world, match_tol_m=5e-3):
     Returns:
         The activation witness dict from :func:`activate_c1_pin`.
     """
+    raise RuntimeError(
+        "clip-retention pin/weld REMOVED from active execution (Rs directive 2026-07-19: kinematic "
+        "complete-removal supersedes the sec0#5 pin exception): retention must come from physical "
+        "clip contact (design sec14.10 levers)"
+    )
     sw = np.asarray(seat_world, dtype=np.float64).reshape(3)
     reasons = []
     for cx, cy, g, y_win_m in _clip_capture_cache(solver):  # SAME cache clip_capture_check reads (identity)
@@ -1807,20 +1811,10 @@ def physics_step(model, state, solver, contacts, scene_info):
             # MuJoCo articulated kinematic re-pose (D-Opt1-2): per-substep OVERWRITE joint_q=FK + zero
             # joint_qd (STEP-1 probe-validated; MuJoCo poses bodies from joint_q). disable_contacts=True
             # -> no model.collide (contacts None), mirroring the base mujoco branch.
-            n = 2 * JOINTS_PER_ARM
-            phys_jq = state_0.joint_q.numpy()
-            phys_jqd = state_0.joint_qd.numpy()
-            if gripper_dynamic:
-                # The gripper is a POSITION actuator (S6_GRASP) -> overwrite ONLY the arm coords
-                # ({0-5,14-19}); leave the gripper coords ({6-13,20-27}) DYNAMIC so the servo drives
-                # them via control.joint_target_pos. _ARM_OVERWRITE_LOCAL is the G7 SSOT (§13.0-2).
-                phys_jq[_ARM_OVERWRITE_LOCAL] = fk_state.joint_q.numpy()[_ARM_OVERWRITE_LOCAL]
-                phys_jqd[_ARM_OVERWRITE_LOCAL] = 0.0
-            else:
-                phys_jq[:n] = fk_state.joint_q.numpy()[:n]
-                phys_jqd[:n] = 0.0
-            state_0.joint_q.assign(phys_jq)
-            state_0.joint_qd.assign(phys_jqd)
+            raise RuntimeError(
+                "legacy kinematic FK arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+                "migrate this caller to the actuator-driven path"
+            )
             state_0.clear_forces()
             solver.step(state_0, state_1, vbd_control, None, SIM_DT)
         else:
@@ -5053,23 +5047,14 @@ class RouteExecutor(rc.RouteInterfaceV1):
             si = (_REC_CADENCE - 1) if (hold_mask is not None and bool(hold_mask[w])) else int(sub_i)
             f = min(int(step_f[tt]) + si, n_frames - 1)
             jq_ff[w] = arm_q[f, :_N_ARM_JOINTS]
-        if self._arm_pd_drive:
-            # (d) P-D1 FF ctrl-drive (design v1.2 sec2 (A), FF path = probe site s1, v1.5 sec5): write
-            # the SAME recorded per-frame arm target into the POSITION-servo ctrl (read->mutate->assign,
-            # CC3-CH5) instead of the kinematic joint_q force. joint_target_pos is qd-indexed; the
-            # arm-local column selection mirrors apply_arm_only_write_perworld's internal.
-            # Stash the intended stream ALWAYS (sec12.1 scoring source); skip the write in stale mode.
-            self._last_ff_arm_target = jq_ff[:, _ARM_OVERWRITE_LOCAL].reshape(-1).copy()
-            if not self._arm_pd_stale_ctrl:
-                jtp = self._control.joint_target_pos.numpy()
-                jtp[self._maps["arm_ow_qd_idx"]] = self._last_ff_arm_target
-                self._control.joint_target_pos.assign(jtp)
-        else:
-            phys_jq = state.joint_q.numpy()  # host copy (CC3-CH5)
-            phys_jqd = state.joint_qd.numpy()
-            apply_arm_only_write_perworld(phys_jq, phys_jqd, jq_ff, arm_ow_q_idx, arm_ow_qd_idx)
-            state.joint_q.assign(phys_jq)
-            state.joint_qd.assign(phys_jqd)
+        # NO-KINEMATIC (Rs directive 2026-07-19): the FF arm drive is the POSITION-servo ctrl path
+        # ONLY (read->mutate->assign, CC3-CH5). joint_target_pos is qd-indexed. The intended stream
+        # is stashed for scoring (sec12.1); the stale negative-control mode skips the write.
+        self._last_ff_arm_target = jq_ff[:, _ARM_OVERWRITE_LOCAL].reshape(-1).copy()
+        if not self._arm_pd_stale_ctrl:
+            jtp = self._control.joint_target_pos.numpy()
+            jtp[self._maps["arm_ow_qd_idx"]] = self._last_ff_arm_target
+            self._control.joint_target_pos.assign(jtp)
         return jq_ff
 
     def reseed_grip_open(self, env_ids):
