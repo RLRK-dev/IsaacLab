@@ -283,3 +283,26 @@ Targets (bank `8caa19a7a4`, shas 実測==pQ claim): DESIGN **v2.9** `e64c192b62e
 
 ### 14.3 Verdict
 **PASS-WITH-CONDITIONS (v2.9 `e64c192b62e754da` 宛)**。RV6 6 P0 + C1-C3 fold = 忠実・健全 (P0-1 = hash 実測で airtight・P0-2 = 私の §13 miss を根治する claim_target)。H-1 = P0-6 closure の 1 行未閉 (must-fix records)・H-3 = C custody・H-2 = minor。→ H-1..H-3 fold → v2.9.1 + 私記録 re-bank → pS final delta → **pN 再 verify (最終 sha 宛) → PASS なら D1.1-A freeze** (RV5 §6-5 / RV6 §9)。⭐私の PASS は pN 再 verify を代替しない — **B1-B7・C1-C3 の前例 (2 度)** どおり追加検出があり得る。impl は最終 PASS-CLOSE まで CLOSED 不変。
+
+---
+
+## 15. CLOSURE — design-axis chain complete; evidence-axis PASS-CLOSE relayed (pS, 2026-07-19 17:50 JST 実測)
+
+**確定 (on-disk 実測):**
+- 現行版 = DESIGN **v2.9.2** `e83a29061400b42c…`（bank `ba69702cb9`、EP v1.7.1 同時）。
+- pN v2.9.1 = ⛔**HOLD R1-R3**（17:30、記録: version 履歴）— 内容 = records/completeness（EP 旧重複行統一 / enum member 全数 inline / 版数 3 面同期）= 非設計実質。→ v2.9.2 に fold。
+- **design-axis chain (私の §1-§14) = 完走**。全 supervening review (RV3-RV6 + W-review v2) + pN 4 verdict (B1-B7 / C1-C3 / R1-R3) + CC Debate 2 cycle を fold し、私の各 verdict が bank 済。
+
+**⚠ relayed (未 on-disk・記録すべき custody):**
+- **pN evidence-axis PASS-CLOSE (17:43) = pQ relay** — 私は v2.9.2 が pN review 対象版であることは実測できるが、**PASS-CLOSE verdict 自体の as-received transcript は未 bank**（R1-R3 HOLD も同）。⭐この chain の規律 = pN verdict を as-received bank（RV5 C-P0-1 が「pN HOLD record 不在」を CRITICAL 化・B1-B7/C1-C3 は transcript bank 済）。**終端 PASS-CLOSE = 最重要 verdict** ゆえ、freeze 上程と併せ **pN R1-R3 + PASS-CLOSE の as-received transcript を bank 要**（terminal verdict の独立監査可能化）。私は本 §15 で「PASS-CLOSE = pN 発・pQ relay」とタグ付けし、on-disk 確認済とは記さない（an-absence/verdict-claim must be read not relayed）。
+- **design header status が stale**: 「HOLD R1-R3 / freeze PENDING」のまま（v2.9.2 は 17:35 bank・PASS-CLOSE は 17:43 後）。Rs freeze 裁定時に PASS-CLOSE/frozen へ更新要。
+
+**境界 (over-claim 防止):**
+- 本 PASS-CLOSE = **DESIGN evidence-axis** の判定。**freeze = Rs 専権**（上程中）。**training-ready ではない** — WMSO charter §0/§8-4 どおり production control / training launch / closed-loop authority は本 gate で未承認。D1.1-A freeze → D1.1-B（tensor binding）/ D1.1-C（artifact manifest）+ 2-3 skill boundary-only（RV5 §6-5 / RV6 §9）。impl は path freeze まで CLOSED 不変。
+
+**pS 自己記録 (chain 全体で own した 3 miss — 層状 gate が私の PASS 後に捕捉):**
+1. **register-④ / B5**（pN HOLD B1-B7）: Rs 確定 ceiling を設計内 register で緩めた案を「sound」と通した = 先走り抑制の核心を見逃し → checklist (g) register が human-ruled 面を触るなら Rs 裁定要求。
+2. **§13「scripted schema/spec HB 包括解消」over-claim**（pN HOLD C1-C3 / RV6 P0-2）: subset 検査から組合せ空間の完全性を主張 → checklist (h) 「包括/完全」を subset から主張しない・検査 leg 列挙。
+3. **pattern**: 私の design-axis PASS は 3 度 pN/panel に上書きされた。**私の PASS は層の一つで pN を代替しない** — 恒久記録。
+
+design-axis 役割 = 本 §15 で closure。freeze 裁定 (Rs) + 上記 custody bank 待ち。
