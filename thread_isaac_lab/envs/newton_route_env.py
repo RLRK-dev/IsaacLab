@@ -1205,11 +1205,31 @@ class NewtonRouteEnv(VecEnv):
                 _rep_cable_q_idx = np.array([i for i in range(_rep_jq.shape[0]) if i not in _rep_arm_all], dtype=np.int64)
                 _rep_cable_q_pre = _rep_jq[_rep_cable_q_idx].copy()
                 _rep_cable_qd_pre = _rep_jqd.copy()
-                # A-7 (review v3 A-P1-1 residual): pin/equality ownership consistency at the boundary --
-                # the C1 pin must NOT be welded (the reset head's _clear_c1_pin already audited+cleared;
-                # this asserts the post-clear state so a future ordering regression fails loud).
+                # A-7 (design v1.6-④): pin/eq ownership at the boundary. (i) expected-unfired state:
+                # the who-wrote-it-agnostic audit finds NO fired pin eq, the witness is None, the dwell
+                # counter is 0 (post _clear_c1_pin state); (ii) the clip-pin eq slice (eq_active flags +
+                # eq anchor/data arrays) is snapshotted here and byte-compared AFTER the re-pose writes
+                # (no solver step between) -- the re-pose must not activate/deactivate/re-anchor any eq;
+                # eq ownership stays exclusive to the pin mechanism (the INVARIANT#5 exception surface).
+                _a7_mjm = getattr(self._solver, "mj_model", None)
+                _a7_mjd = getattr(self._solver, "mj_data", None)
+                _a7_pre = None
+                if _a7_mjm is not None and _a7_mjd is not None:
+                    _a7_fired = self._rex.audit_pin_anchors(_a7_mjm, _a7_mjd)
+                    assert len(_a7_fired) == 0, (
+                        f"armpd A-7: fired pin eq present at the route-start boundary: {list(_a7_fired)}"
+                    )
+                    _a7_pre = (
+                        np.array(_a7_mjd.eq_active).copy(),
+                        np.array(_a7_mjm.eq_data).copy(),
+                        np.array(_a7_mjm.eq_obj1id).copy(),
+                        np.array(_a7_mjm.eq_obj2id).copy(),
+                    )
                 assert getattr(self, "_c1_pin_witness", None) is None, (
                     "armpd A-7: C1 pin witness still set at the route-start boundary (eq ownership inconsistent)"
+                )
+                assert int(getattr(self, "_c1_pin_dwell", 0)) == 0, (
+                    "armpd A-7: pin dwell counter non-zero at the route-start boundary"
                 )
                 for w in env_ids:
                     w = int(w)
@@ -1253,10 +1273,24 @@ class NewtonRouteEnv(VecEnv):
                     assert np.max(np.abs(_rb_jq[_rep_q12] - _rep12)) <= 1e-9, "armpd A-1: seeded q readback != rec frame-0"
                     assert np.max(np.abs(_rb_jtp[_rep_qd12] - _rep12)) <= 1e-9, "armpd A-2: ctrl readback != seeded q"
                     assert np.max(np.abs(_rb_jqd[_rep_qd12])) <= 1e-9, "armpd A-2: qd[arm] != 0 after re-pose"
+                # A-7 (ii): byte identity of the eq slice across the re-pose writes (no step between).
+                if _a7_pre is not None:
+                    _a7_post = (
+                        np.array(_a7_mjd.eq_active),
+                        np.array(_a7_mjm.eq_data),
+                        np.array(_a7_mjm.eq_obj1id),
+                        np.array(_a7_mjm.eq_obj2id),
+                    )
+                    for _a7_a, _a7_b, _a7_nm in zip(
+                        _a7_pre, _a7_post, ("eq_active", "eq_data", "eq_obj1id", "eq_obj2id")
+                    ):
+                        assert np.array_equal(_a7_a, _a7_b), (
+                            f"armpd A-7: {_a7_nm} changed across the route-start re-pose (eq ownership breach)"
+                        )
                 self._armpd_repose_count += len(env_ids)
                 self._armpd_repose_frame_index = 0  # A-6: recording row used for the seed
                 print(
-                    f"  [ARMPD] route-start re-pose (v1.3 #3 + v1.5 A-1..A-3/A-5 PASS): "
+                    f"  [ARMPD] route-start re-pose (v1.3 #3 + v1.5/v1.6 A-1..A-3/A-5/A-7 PASS): "
                     f"worlds={[int(x) for x in env_ids]} -> rec frame-0 arm q (ctrl synced)"
                 )
         for w in env_ids:
