@@ -100,6 +100,60 @@ def _has_fk_token(tokens: list[str]) -> bool:
     return any(t in FK_TOKENS for t in tokens)  # G3: exact token, not substring
 
 
+def _direct_param_sinks(node: ast.AST, idx: dict[str, int]) -> set[int]:
+    """G6 (F1): which of this call/store's operands are a bare parameter delivered to a device/host
+    sink -- ``p.assign(x)`` / ``p.fill_(x)`` / ``np.copyto(p, x)`` / ``wp.copy(p, x)`` / ``p[...] = x``.
+    Returns the parameter indices (from ``idx``: param-name -> position) that are directly sunk here."""
+    out: set[int] = set()
+    if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+        fn = node.func
+        if fn.attr in ("assign", "fill_") and isinstance(fn.value, ast.Name) and fn.value.id in idx:
+            out.add(idx[fn.value.id])
+        elif fn.attr in ("copyto", "copy") and node.args:
+            a0 = node.args[0]
+            if isinstance(a0, ast.Name) and a0.id in idx:
+                out.add(idx[a0.id])
+    elif isinstance(node, ast.Assign):
+        for t in node.targets:
+            if isinstance(t, ast.Subscript) and isinstance(t.value, ast.Name) and t.value.id in idx:
+                out.add(idx[t.value.id])
+    return out
+
+
+def _sink_param_indices(tree: ast.AST) -> dict[str, set[int]]:
+    """G6 (F1): interprocedural helper-param taint summary (within-file, >=2-hop fixpoint).
+
+    Maps each function NAME to the set of its positional-parameter indices that flow to a device/host
+    sink -- either directly (``_direct_param_sinks``) or by being forwarded to another summarized
+    function's sink position. This is a COMPUTED summary, never a helper-name allowlist: a call to
+    ``_assign_array(getattr(state_0, "body_q"), v)`` is only tainted because ``_assign_array``'s
+    param 0 is *analysed* to reach ``target.assign(...)``.
+    """
+    funcs: dict[str, tuple[list[str], ast.AST]] = {}
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            args = node.args
+            funcs[node.name] = ([a.arg for a in (args.posonlyargs + args.args)], node)
+    summary: dict[str, set[int]] = {name: set() for name in funcs}
+    for _ in range(8):  # bounded fixpoint (>= 2-hop; converges in <=len(funcs) passes)
+        changed = False
+        for name, (params, node) in funcs.items():
+            idx = {p: i for i, p in enumerate(params)}
+            for sub in ast.walk(node):
+                new = _direct_param_sinks(sub, idx)
+                if isinstance(sub, ast.Call) and isinstance(sub.func, ast.Name) and sub.func.id in summary:
+                    for pos, a in enumerate(sub.args):
+                        if pos in summary[sub.func.id] and isinstance(a, ast.Name) and a.id in idx:
+                            new.add(idx[a.id])
+                for i in new - summary[name]:
+                    summary[name].add(i)
+                    changed = True
+        if not changed:
+            break
+    # Drop the empties so a plain (non-sink) helper name never triggers callsite taint.
+    return {n: s for n, s in summary.items() if s}
+
+
 class Hit:
     __slots__ = ("lineno", "klass", "kind", "func", "detail")
 
@@ -110,13 +164,18 @@ class Hit:
 class _FileCheck(ast.NodeVisitor):
     """kind: SINK (device write) / SOURCE (host-copy mutation) / UNPARSEABLE (G5 separation)."""
 
-    def __init__(self, rel: str, src: str):
+    def __init__(self, rel: str, src: str, sink_params: dict[str, set[int]] | None = None):
         self.rel = rel
         self.lines = src.splitlines()
         self.hits: list[Hit] = []
         self.marked: list[tuple[str, str, int]] = []  # (func, receiver_attr, lineno)
         self.func_stack: list[str] = ["<module>"]
         self.alias_stack: list[set[str]] = [set()]
+        # F1 (G6): helper-param taint. sink_params: func name -> sink param positions (COMPUTED, not
+        # an allowlist). recv_alias_stack: Name -> (receiver_attr, receiver_tokens) for getattr/attr
+        # aliases, so a param delivered a state receiver via a helper is caught at the CALLSITE.
+        self.sink_params: dict[str, set[int]] = sink_params or {}
+        self.recv_alias_stack: list[dict[str, tuple[str, list[str]]]] = [{}]
 
     def _line_marked(self, lineno: int) -> bool:
         return 0 < lineno <= len(self.lines) and MARKER in self.lines[lineno - 1]
@@ -127,7 +186,9 @@ class _FileCheck(ast.NodeVisitor):
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         self.func_stack.append(node.name)
         self.alias_stack.append(set())
+        self.recv_alias_stack.append({})
         self.generic_visit(node)
+        self.recv_alias_stack.pop()
         self.alias_stack.pop()
         self.func_stack.pop()
 
@@ -145,6 +206,43 @@ class _FileCheck(ast.NodeVisitor):
             for t in targets:
                 if isinstance(t, ast.Name):
                     self.alias_stack[-1].add(t.id)
+
+    @staticmethod
+    def _receiver_of(arg: ast.AST) -> tuple[str, list[str]] | None:
+        """F1: if ``arg`` names a state receiver's attribute -- ``getattr(recv, "attr"[, dflt])`` with
+        a literal name, or ``recv.attr`` -- return (attr, receiver-tokens); else None."""
+        if (
+            isinstance(arg, ast.Call)
+            and isinstance(arg.func, ast.Name)
+            and arg.func.id == "getattr"
+            and len(arg.args) >= 2
+            and isinstance(arg.args[1], ast.Constant)
+            and isinstance(arg.args[1].value, str)
+        ):
+            return (arg.args[1].value, _tokens(arg.args[0]))
+        if isinstance(arg, ast.Attribute):
+            return (arg.attr, _tokens(arg.value))
+        return None
+
+    def _resolve_recv_attr(self, arg: ast.AST) -> tuple[str, list[str]] | None:
+        """F1: resolve a call argument to (receiver_attr, receiver_tokens), following one level of
+        local getattr/attribute alias (``t = getattr(s, "body_q_prev"); helper(t, ...)``)."""
+        direct = self._receiver_of(arg)
+        if direct is not None:
+            return direct
+        if isinstance(arg, ast.Name):
+            for scope in reversed(self.recv_alias_stack):
+                if arg.id in scope:
+                    return scope[arg.id]
+        return None
+
+    def _bind_recv_alias(self, value: ast.AST, targets: list[ast.AST]) -> None:
+        recv = self._receiver_of(value)
+        if recv is None:
+            return
+        for t in targets:
+            if isinstance(t, ast.Name):
+                self.recv_alias_stack[-1][t.id] = recv
 
     def _seeder_exempt(self, name: str) -> bool:
         key = (self.rel, self.func_stack[-1])
@@ -174,6 +272,7 @@ class _FileCheck(ast.NodeVisitor):
 
     def visit_Assign(self, node: ast.Assign) -> None:
         self._bind_alias_value(node.value, node.targets)
+        self._bind_recv_alias(node.value, node.targets)  # F1
         for t in node.targets:
             self._check_store_target(t, node.lineno)
         self.generic_visit(node)
@@ -181,6 +280,7 @@ class _FileCheck(ast.NodeVisitor):
     def visit_AnnAssign(self, node: ast.AnnAssign) -> None:  # G2: annotated alias binding
         if node.value is not None:
             self._bind_alias_value(node.value, [node.target])
+            self._bind_recv_alias(node.value, [node.target])  # F1
             self._check_store_target(node.target, node.lineno)
         self.generic_visit(node)
 
@@ -221,15 +321,39 @@ class _FileCheck(ast.NodeVisitor):
                 a0 = node.args[0]  # G2: np.copyto(<state array>, x) writes in place
                 if isinstance(a0, ast.Attribute) and a0.attr in STATE_ATTRS and not _has_fk_token(_tokens(a0.value)):
                     self._hit(node.lineno, "WP-COPY", "SINK", f"np.copyto(<...>.{a0.attr}, ...)")
+        elif isinstance(f, ast.Name) and f.id in self.sink_params:
+            # F1 (G6): a helper whose parameter is ANALYSED (not allowlisted) to reach a sink -- taint
+            # the callsite by the ORIGINAL receiver of the argument handed to that param. This catches
+            # ``_assign_array(getattr(state_0, "body_q"), v)`` that ``.body_q.assign`` grep and the
+            # per-call check both miss (interprocedural getattr-alias).
+            for pos, arg in enumerate(node.args):
+                if pos not in self.sink_params[f.id]:
+                    continue
+                res = self._resolve_recv_attr(arg)
+                if res is None:
+                    continue
+                attr, recv_toks = res
+                if _has_fk_token(recv_toks):
+                    continue  # G3 FK exemption -- by the ORIGINAL receiver token, never the helper
+                recv = ".".join(recv_toks)
+                if attr in BODY_ASSIGN_ATTRS:
+                    self._hit(node.lineno, "BODY-ALIAS", "SINK", f"{f.id}(<{recv}>.{attr}) helper-param body write")
+                elif attr in JQ_ASSIGN_ATTRS:
+                    self._hit(node.lineno, "JQ-ALIAS", "SINK", f"{f.id}(<{recv}>.{attr}) helper-param joint write")
+                elif attr in RAW_MJ_ATTRS:
+                    self._hit(node.lineno, "RAW-ALIAS", "SINK", f"{f.id}(<{recv}>.{attr}) helper-param raw write")
         self.generic_visit(node)
 
 
 def check_source(rel: str, src: str) -> _FileCheck:
-    fc = _FileCheck(rel, src)
     try:
-        fc.visit(ast.parse(src))
+        tree = ast.parse(src)
     except SyntaxError as e:
+        fc = _FileCheck(rel, src)
         fc.hits.append(Hit(int(e.lineno or 0), "UNPARSEABLE", "UNPARSEABLE", "<module>", f"SyntaxError: {e.msg}"))
+        return fc
+    fc = _FileCheck(rel, src, _sink_param_indices(tree))  # F1: helper-param taint summary (pre-pass)
+    fc.visit(tree)
     return fc
 
 
@@ -257,6 +381,24 @@ _NEG_CONTROLS: list[tuple[str, str]] = [
     ("fill", "def f(s):\n    s.joint_q.fill_(0.0)\n"),
     ("canonical-name-store", "def f(phys_jq):\n    phys_jq[0:6] = 0.0\n"),
     ("seeder-names-outside-seeder", "def f(state):\n    jq = state.joint_q.numpy()\n    jq[0:7] = 0.0\n"),  # G3
+    # F1 (G6): interprocedural helper-param getattr-alias sinks -- each MUST be caught.
+    ("alias-helper-body-q", "def _a(t, v):\n    t.assign(v)\ndef g(s, v):\n    _a(getattr(s, 'body_q'), v)\n"),
+    ("alias-helper-body-qd", "def _a(t, v):\n    t.assign(v)\ndef g(s, v):\n    _a(getattr(s, 'body_qd'), v)\n"),
+    (
+        "alias-helper-body-prev-localalias",
+        "def _a(t, v):\n    t.assign(v)\ndef g(sol, v):\n    p = getattr(sol, 'body_q_prev')\n    _a(p, v)\n",
+    ),
+    (
+        "alias-helper-two-hop",
+        "def _a(t, v):\n    t.assign(v)\ndef _b(t, v):\n    _a(t, v)\ndef g(s, v):\n    _b(getattr(s, 'body_q'), v)\n",
+    ),
+    ("alias-helper-copyto", "def _a(t, v):\n    np.copyto(t, v)\ndef g(s, v):\n    _a(getattr(s, 'body_q'), v)\n"),
+    ("alias-helper-subscript", "def _a(t, v):\n    t[...] = v\ndef g(s, v):\n    _a(getattr(s, 'joint_q'), v)\n"),
+    (
+        "alias-helper-wrong-receiver",  # not_fk_state is NOT fk_state -> must still be caught (G3)
+        "def _a(t, v):\n    t.assign(v)\ndef g(not_fk_state, v):\n    _a(getattr(not_fk_state, 'joint_q'), v)\n",
+    ),
+    ("alias-helper-static-attr", "def _a(t, v):\n    t.assign(v)\ndef g(s, v):\n    _a(s.body_q, v)\n"),
 ]
 _POS_CONTROLS: list[tuple[str, str]] = [
     ("fk-state-real", "def f(self, a):\n    self._fk_state.joint_q.assign(a)\n"),
@@ -264,6 +406,14 @@ _POS_CONTROLS: list[tuple[str, str]] = [
     ("ctrl-servo", "def f(c, a):\n    c.joint_target_pos.assign(a)\n"),
     ("read-only", "def f(s):\n    v = s.joint_q.numpy()\n    x = float(v[0])\n    return x\n"),
     ("plain-local", "def f():\n    buf = [0] * 4\n    buf[1] = 2\n    return buf\n"),
+    # F1 (G6): helper-param taint must NOT false-positive.
+    (
+        "alias-helper-fk-getattr",
+        "def _a(t, v):\n    t.assign(v)\ndef g(fk_state, v):\n    _a(getattr(fk_state, 'joint_q'), v)\n",
+    ),
+    ("alias-helper-fk-attr", "def _a(t, v):\n    t.assign(v)\ndef g(self, v):\n    _a(self._fk_state.joint_q, v)\n"),
+    ("alias-helper-plain-buffer", "def _a(t, v):\n    t.assign(v)\ndef g(v):\n    buf = make()\n    _a(buf, v)\n"),
+    ("non-sink-helper-body-arg", "def _a(t, v):\n    return t\ndef g(s, v):\n    _a(getattr(s, 'body_q'), v)\n"),
 ]
 
 
