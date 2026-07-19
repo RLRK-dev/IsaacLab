@@ -241,3 +241,17 @@ Targets (bank `86d127b5c0`, shas = 実測 == pQ claim): DESIGN **v2.7.1** `64e2b
 
 ### 12.4 Verdict
 **PASS-WITH-CONDITIONS (v2.7.1 `64e2b005d6dd7f7a` 宛)**。B1-B7/RV4/RV5 fold = 忠実・健全 (特に B5 = 私の lane の見落としを正しく修正)。EP↔JSON = 完全一致。G-1/G-2/G-3 = records・G-4 = cross-surface 実質 (intent 確認で記述解になり得る)。→ **G-1..G-4 fold → v2.7.2 + 私の記録 re-bank → pS final delta → pN 再 verify (最終 sha 宛)**。RV5 §6-5 = 本 bounded fix 後 D1.1-A **freeze → D1.1-B/C + 2-3 skill boundary-only** (Rs 方向) を design header が正しく保持。impl は pN DESIGN PASS まで CLOSED 不変。⭐**私の PASS は pN/panel を代替しない (層の一つ)** — G-4 も pN 再 verify で追加検出があり得る。
+
+---
+
+## 13. FINAL CONFIRM — DESIGN v2.8 + EP v1.6 (pS, 2026-07-19 16:17 JST 実測)
+
+Targets (bank `ba99db30f6`, shas 実測 == pQ claim): DESIGN **v2.8** `24f5fd3d8e8ec850…` / EP **v1.6** `fe3f4f1864d0f00a…` / JSON **v1.6** `WMSO_EvidencePolicy_v1.6.json` (v1.5→v1.6 改名, C-P0-4 filename/内容同期). 私の記録 §12 版 = banked `98e47cace83a` (G-3 record re-bank, HEAD blob 一致確認).
+
+**G-1..G-4 = 4/4 discharged (git diff v2.7.1→v2.8 + on-disk 照合):**
+- **G-1** ✅ DESIGN §4:239 EP版 → **v1.6** + 恒久規則「本行の版数は EP header と同期更新」(再発防止 = RV5-W-P0-1 class の構造的 close).
+- **G-2** ✅ §8:502 / §11:532 の「11 面」→ **13 面** (body §3-4 と整合; §567 fold-map が declare). 残る「11 面」2 件 = 193 (旧状態の historical 記述) / 567 (fix 記述) のみ — stale でない.
+- **G-3** ✅ header:15 = 「最終 bank = 本 v2.8 commit〔§12 込み〕; 以後 pS addendum 毎に re-bank」(cite 訂正 + 恒久 custody 規則).
+- **G-4** ✅ **実欠陥として正しく根治**: EP §3d + JSON proof_binding とも SOURCE_COMMIT/CONFIG_HASH を **kind 条件化** (learned=final_source_commit/stage-config / SCRIPTED-WAIT=closure source commit/runtime_config slot hash) — **EP markdown ↔ JSON 完全一致** (両 binding 逐語対応, semver 1.6.0, source_markdown v1.6). **完全性検証**: scripted CLOSED_LOOP 必須全 component (POLICY_ARTIFACT/OBS/ACT/CONTROL_MODE/RUNTIME_CONFIG/INITIATION/TERMINATION/HANDOFF) の HB(3) 阻害は learned-only 束縛の SOURCE_COMMIT・CONFIG_HASH の 2 点のみ → 両 kind 条件化で包括解消 (spot-patch でない). EXACT(4) は TRAIN_RUN_MANIFEST/TTCB が訓練実体要求 → scripted 不能維持・かつ Rs 確定表で EXACT と HB は同一 closed-loop row ゆえ機能欠損なし (pQ の ceiling-row 論拠を確認). learned 束縛不変・corpus に交差汚染 guard (learned に closure-commit → E_PROOF_MISBOUND) + scripted EXACT→E_PROOF_INSUFFICIENT (期待). intent = (a) 非学習 evidence path 採用 (SHADOW cap でない) = WMSO の scripted/transition/recovery/wait 依存に整合.
+
+**FINAL CONFIRM = PASS。設計軸は D1.1-A DESIGN v2.8 (`24f5fd3d8e8ec850`) + EP v1.6 (`fe3f4f1864d0f00a`) + JSON v1.6 (`e1f8d300dc206ac3`) を pN 再 verify (最終 sha 宛) へ送る状態。** ⚠ **本 §13 追記で私の記録が再び working-only** → G-3 の恒久規則どおり pN 再 verify 前に pQ が同 commit で re-bank 要 (RV5 §7-8 順)。私の設計軸残 = pN 再 verdict readback のみ。impl は pN DESIGN PASS → pre-check → rule-check → path freeze まで CLOSED 不変。⭐私の FINAL CONFIRM は pN 再 verify を代替しない (層の一つ)。B1-B7 の前例どおり pN が追加検出する可能性は残る。
