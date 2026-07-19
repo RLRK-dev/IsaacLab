@@ -69,12 +69,14 @@ from newton_skill_env_base import (
     build_fk_and_init,
     build_multiworld_scene,
     compute_clamp_pos,
+    derive_cable_joint_q_from_tangents,
     compute_ori_error_axis_angle,
     extract_clamp_pose,
     find_nearest_cable_point,
     normalize_quat_w_positive,
     quat_distance,
     quat_multiply_xyzw,
+    seed_cable_joint_state,
     solve_ik_single,
     temporal_quat_consistency,
 )
@@ -243,7 +245,7 @@ class NewtonGripEnv(VecEnv):
 
     # Cache
     CACHE_DIR = os.path.join(_env_dir, "..", "data", "rl_grip_cache")
-    CACHE_VERSION = "v9"  # v8→v9: gradual finger close (parallel move+clamp)
+    CACHE_VERSION = "v10_ps2"  # v9→v10_ps2: joint-seed restore (c11); pre-PS2 caches = kinematic-lineage settled states, invalidated
 
     def __init__(self, world_count=4, device="cuda:0", mode="clamp", cfg=None, dual_arm=False):
         assert mode in ("clamp", "unclamp"), f"Invalid mode: {mode}"
@@ -441,14 +443,9 @@ class NewtonGripEnv(VecEnv):
         self._fk_state.joint_q.assign(jq_solved)
         newton.eval_fk(self._fk_model, self._fk_state.joint_q, self._fk_state.joint_qd, self._fk_state)
 
-        fk_bq = self._fk_state.body_q.numpy()[:ROBOT_BODY_COUNT]
-        phys_bq = self._state_0.body_q.numpy()
-        for w in range(self._world_count):
-            ws = self._bws[w]
-            phys_bq[ws : ws + ROBOT_BODY_COUNT] = fk_bq
-        self._state_0.body_q.assign(phys_bq)
-        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
-            self._solver.body_q_prev.assign(phys_bq)
+        # NO-KINEMATIC (c11, PS-3): arms placed by the sanctioned build-time joint seed (once,
+        # before the next physics step) + servo hold; body poses follow via eval_fk.
+        self._seed_robot_joint_row(jq_solved, range(self._world_count), "p0-clamp")
 
         for _ in range(SETTLE_STEPS):
             self._physics_step_all()
@@ -486,34 +483,23 @@ class NewtonGripEnv(VecEnv):
         for w in range(self._world_count):
             self._per_world_fk_jq[w] = jq_target.copy()
 
-        fk_bq = self._fk_state.body_q.numpy()[:ROBOT_BODY_COUNT]
-        phys_bq = self._state_0.body_q.numpy()
-        for w in range(self._world_count):
-            ws = self._bws[w]
-            phys_bq[ws : ws + ROBOT_BODY_COUNT] = fk_bq
-        self._state_0.body_q.assign(phys_bq)
-
-        # Teleport cable into groove
-        wp.synchronize()
-        bq = self._state_0.body_q.numpy()
+        # NO-KINEMATIC (c11, PS-3): arms placed by the sanctioned build-time joint seed + servo
+        # hold; the cable's groove-line placement is an OBJECT episode-boundary init done
+        # JOINT-SPACE via the CABLE-SEED path (straight chain at the groove: free root at the
+        # groove start, zero bend angles) -- the former body teleport is REMOVED.
+        self._seed_robot_joint_row(jq_target, range(self._world_count), "p0-unclamp")
         cable_half_len = CABLE_SEGMENTS * CABLE_SEG_LEN / 2
         cable_y_start = CLIP1_Y - cable_half_len
+        _uc_root7 = np.array([CLIP1_X, cable_y_start, GROOVE_CENTER_Z, 0.0, 0.0, 0.0, 1.0], dtype=np.float64)
+        _uc_seg0 = np.zeros(self._cable_bodies_per_world - 1, dtype=np.float64)
         for w in range(self._world_count):
-            for i, bi in enumerate(self._cable_bodies[w]):
-                seg_y = cable_y_start + i * CABLE_SEG_LEN
-                bq[bi, 0] = CLIP1_X
-                bq[bi, 1] = seg_y
-                bq[bi, 2] = GROOVE_CENTER_Z
-                bq[bi, 3:7] = [0.0, 0.0, 0.0, 1.0]
-        self._state_0.body_q.assign(bq)
-
-        bqd = self._state_0.body_qd.numpy()
-        for w in range(self._world_count):
-            for bi in self._cable_bodies[w]:
-                bqd[bi, :] = 0.0
-        self._state_0.body_qd.assign(bqd)
-        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
-            self._solver.body_q_prev.assign(bq)
+            cable_joints_w = list(
+                range(
+                    self._jws[w] + 2 * JOINTS_PER_ARM,
+                    self._jws[w] + 2 * JOINTS_PER_ARM + self._cable_bodies_per_world,
+                )
+            )
+            seed_cable_joint_state(self._state_0, self._model, cable_joints_w, _uc_root7, _uc_seg0, dr_xy=(0.0, 0.0))
 
         # Reset Dahl friction
         if hasattr(self._solver, "enable_dahl_friction") and self._solver.enable_dahl_friction:
@@ -522,40 +508,16 @@ class NewtonGripEnv(VecEnv):
             if self._solver.joint_sigma_prev is not None:
                 self._solver.joint_sigma_prev.zero_()
 
-        # Initialize _settled_body_q for _sanitise_body_state during settle
-        self._settled_body_q = self._state_0.body_q.numpy().copy()
-
-        # VBD settle with cable Z-clamped to groove.
-        # VBD contact with clip geometry creates violent impulses that launch cable upward.
-        # Clamp cable XZ to groove center after each step to establish a settled state.
+        # NO-KINEMATIC (c11, PS-3): the VBD-era Z-clamped settle (per-frame arm FK broadcast +
+        # cable XZ hard-clamp + velocity zeroing = kinematic interventions) is REMOVED. The settle
+        # is PHYSICAL: the servo holds the arms, the groove spring (a force) retains the cable.
+        # Whether the unclamp P0 remains buildable under pure physics on the mujoco substrate is
+        # run-fenced (grip P-D1-analog leg) -- if the cable escapes the groove here, that is the
+        # physical truth, reported by the settle telemetry below, not masked.
         SETTLE_FRAMES = 100
-        # Cable XZ hard-clamped for all frames. VBD clip contact forces are too violent
-        # to allow free settle (cable launches 80-150mm), even with 10x groove spring.
-        # The groove spring maintains cable position during RL steps.
-        SETTLE_CLAMP_FRAMES = SETTLE_FRAMES
-        print(f"[GripEnv:unclamp] VBD settling ({SETTLE_FRAMES} frames, cable Z-clamped)...")
+        print(f"[GripEnv:unclamp] settling ({SETTLE_FRAMES} frames; servo hold + groove spring, physical only)...")
         for settle_i in range(SETTLE_FRAMES):
-            fk_bq_full = self._fk_state.body_q.numpy()[:ROBOT_BODY_COUNT]
-            phys_bq2 = self._state_0.body_q.numpy()
-            for w in range(self._world_count):
-                ws = self._bws[w]
-                phys_bq2[ws : ws + ROBOT_BODY_COUNT] = fk_bq_full
-            self._state_0.body_q.assign(phys_bq2)
             self._physics_step_all()
-            # Hard-clamp cable XZ to groove center during early settle frames
-            if settle_i < SETTLE_CLAMP_FRAMES:
-                wp.synchronize()
-                _bq = self._state_0.body_q.numpy()
-                _bqd = self._state_0.body_qd.numpy()
-                for w in range(self._world_count):
-                    for i, bi in enumerate(self._cable_bodies[w]):
-                        _bq[bi, 0] = CLIP1_X
-                        _bq[bi, 2] = GROOVE_CENTER_Z
-                        _bqd[bi, :] = 0.0  # zero all velocities
-                self._state_0.body_q.assign(_bq)
-                self._state_0.body_qd.assign(_bqd)
-                if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
-                    self._solver.body_q_prev.assign(_bq)
             if settle_i % 20 == 0:
                 _dbg_bq = self._state_0.body_q.numpy()
                 _dbg_z = np.mean(_dbg_bq[self._cable_bodies[0], 2])
@@ -563,17 +525,8 @@ class NewtonGripEnv(VecEnv):
                     f"  [settle {settle_i:3d}] cable_z={_dbg_z:.4f} delta={((_dbg_z - GROOVE_CENTER_Z) * 1000):.1f}mm"
                 )
 
-        # Zero cable velocities after settle
         wp.synchronize()
-        bqd_post = self._state_0.body_qd.numpy()
         bq_post = self._state_0.body_q.numpy()
-        for w in range(self._world_count):
-            for bi in self._cable_bodies[w]:
-                bqd_post[bi, :] = 0.0
-        self._state_0.body_qd.assign(bqd_post)
-        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
-            self._solver.body_q_prev.assign(bq_post)
-
         cable_z_w0 = np.mean(bq_post[self._cable_bodies[0], 2])
         print(
             f"[GripEnv:unclamp] Post-settle cable Z: {cable_z_w0:.4f} "
@@ -663,10 +616,11 @@ class NewtonGripEnv(VecEnv):
             print(f"[GripEnv:{self._mode}] Cache load failed: {e}")
             return False
 
-        self._state_0.body_q.assign(self._settled_body_q)
-        self._state_0.body_qd.assign(self._settled_body_qd)
-        if hasattr(self._solver, "body_q_prev") and self._solver.body_q_prev is not None:
-            self._solver.body_q_prev.assign(self._settled_body_q)
+        # NO-KINEMATIC (c11, PS-4): cache restore = the sanctioned joint seed (robot row from the
+        # cached FK row + cable derived from the cached settled snapshot); NO body-state writes.
+        # Pre-PS2 caches carried kinematic-lineage settled states -> CACHE_VERSION invalidates them.
+        self._seed_robot_joint_row(self._settled_fk_jq, range(self._world_count), "cache-restore")
+        self._seed_cable_from_snapshot(range(self._world_count))
 
         if hasattr(self._solver, "enable_dahl_friction") and self._solver.enable_dahl_friction:
             if self._solver.joint_C_fric is not None:
@@ -743,17 +697,19 @@ class NewtonGripEnv(VecEnv):
         self._state_0.body_f.assign(body_f)
 
     def _sanitise_body_state(self):
+        """Physics-fault DETECTOR (c11, PS-5): the per-substep settled-state RESTORE is REMOVED --
+        silently teleporting diverged bodies back masks the fault and is itself a kinematic write.
+        INTERIM disposition = fail-closed raise (p5 termination-design pending: option A raise /
+        option B route-env-style explosion termination + PPO mask)."""
         bq = self._state_0.body_q.numpy()
-        bqd = self._state_0.body_qd.numpy()
         pos = bq[:, :3]
-        bad_mask = ~np.isfinite(pos).all(axis=1)
-        drift_mask = (np.abs(pos) > 5.0).any(axis=1)
-        fix_mask = bad_mask | drift_mask
+        fix_mask = ~np.isfinite(pos).all(axis=1) | (np.abs(pos) > 5.0).any(axis=1)
         if fix_mask.any():
-            bq[fix_mask] = self._settled_body_q[fix_mask]
-            bqd[fix_mask] = 0.0
-            self._state_0.body_q.assign(bq)
-            self._state_0.body_qd.assign(bqd)
+            raise RuntimeError(
+                f"physics fault: {int(fix_mask.sum())} body pose(s) non-finite/divergent -- the "
+                "silent settled-state restore is REMOVED (Rs directive 2026-07-19 kinematic "
+                "complete-removal); fail-closed pending the p5 termination-design ruling (A/B)"
+            )
 
     def _physics_step_all(
         self, substeps=None, sim_dt=None, fk_batch_bq=None, n_worlds=None, groove_ke=None, groove_kd=None
@@ -890,23 +846,60 @@ class NewtonGripEnv(VecEnv):
         r = self.INIT_POS_NOISE * (np.random.uniform() ** (1.0 / 3.0))
         return d * r
 
+    def _seed_robot_joint_row(self, jq_row, worlds, label):
+        """RESET-SEED: the SINGLE sanctioned joint-state write site of this env (pN 18:17 ruling
+        adopting the CLAUDE.md once-at-reset init exception; guard RESET_SEED_MANIFEST pins this
+        (file, function)). Sets the robot joint columns of the given worlds to ``jq_row``, zeroes
+        their joint velocities, and syncs the arm POSITION-servo targets so the servo HOLDS the
+        seeded pose from the first step. Body poses follow via eval_fk (engine kinematics from the
+        sanctioned seed -- NOT a body-state write by us). Callers: episode reset / P0 build /
+        cache restore only -- all episode boundaries, before the next physics step.
+        """
+        worlds = [int(w) for w in worlds]
+        jq = self._state_0.joint_q.numpy()
+        jqd = self._state_0.joint_qd.numpy()
+        _jqs = self._model.joint_q_start.numpy()
+        jtp = self._control.joint_target_pos.numpy()
+        for w in worlds:
+            for k in range(2 * JOINTS_PER_ARM):
+                jq[int(_jqs[self._jws[w] + k])] = float(jq_row[k])
+                jqd[int(self._arm_qd_idx[w, k])] = 0.0
+            for _base in (0, JOINTS_PER_ARM):
+                jtp[self._arm_qd_idx[w, _base : _base + 6]] = jq_row[_base : _base + 6]
+        self._state_0.joint_q.assign(jq)
+        self._state_0.joint_qd.assign(jqd)
+        self._control.joint_target_pos.assign(jtp)
+        newton.eval_fk(self._model, self._state_0.joint_q, self._state_0.joint_qd, self._state_0)
+        print(f"[GripEnv:{self._mode}] RESET-SEED ({label}): robot joints seeded, worlds={worlds[:4]}{'...' if len(worlds) > 4 else ''}")
+
+    def _seed_cable_from_snapshot(self, worlds):
+        """Cable OBJECT episode-boundary init via the sanctioned CABLE-SEED path: derive the cable
+        chain's joint coords from the settled body snapshot (read-only source) and seed them
+        joint-space. No body-state writes."""
+        for w in worlds:
+            w = int(w)
+            cable_joints_w = list(
+                range(
+                    self._jws[w] + 2 * JOINTS_PER_ARM,
+                    self._jws[w] + 2 * JOINTS_PER_ARM + self._cable_bodies_per_world,
+                )
+            )
+            root7, seg_angles = derive_cable_joint_q_from_tangents(self._settled_body_q, self._cable_bodies[w])
+            seed_cable_joint_state(self._state_0, self._model, cable_joints_w, root7, seg_angles, dr_xy=(0.0, 0.0))
+
     def _reset_worlds(self, env_ids):
         if len(env_ids) == 0:
             return
-        bq = self._state_0.body_q.numpy()
-        bqd = self._state_0.body_qd.numpy()
-        # S4b: SolverMuJoCo has no body_q_prev (VBD-only prev-position buffer); on that path the
-        # reset is carried by joint_q seeding, so the prev maintenance is skipped (None-tolerant).
-        prev = self._solver.body_q_prev.numpy() if hasattr(self._solver, "body_q_prev") else None
+        # NO-KINEMATIC (c11, PS-2): the settled BODY-state restore is REMOVED -- the reset is
+        # carried by the once-per-boundary joint seed (the :898-era comment's promise is now the
+        # code): robot columns from the settled FK row (servo target synced = the servo holds),
+        # cable chain re-derived from the settled snapshot via the CABLE-SEED path.
+        env_ids_int = [int(w) for w in env_ids]
+        self._seed_robot_joint_row(self._settled_fk_jq, env_ids_int, "reset")
+        self._seed_cable_from_snapshot(env_ids_int)
 
         for w in env_ids:
             w = int(w)
-            start, end = self._bws[w], self._bws[w + 1]
-            bq[start:end] = self._settled_body_q[start:end]
-            bqd[start:end] = self._settled_body_qd[start:end]
-            if prev is not None:
-                prev[start:end] = self._settled_body_q[start:end]
-
             self._per_world_fk_jq[w] = self._settled_fk_jq.copy()
             self._step_bonus_given_r[w] = False
             self._step_bonus_given_l[w] = False
@@ -948,11 +941,6 @@ class NewtonGripEnv(VecEnv):
             else:
                 self.episode_length_buf[2 * w] = 0
                 self.episode_length_buf[2 * w + 1] = 0
-
-        self._state_0.body_q.assign(bq)
-        self._state_0.body_qd.assign(bqd)
-        if prev is not None:
-            self._solver.body_q_prev.assign(prev)
 
         # Reset Dahl friction
         if hasattr(self._solver, "enable_dahl_friction") and self._solver.enable_dahl_friction:

@@ -54,8 +54,12 @@ BODY_CABLE_SEED_MANIFEST: dict[tuple[str, str], int] = {}
 # first step" joint-state initialization is the ONLY sanctioned joint-seed class. Entries are
 # exact (file, function) pairs allowed to deliver a reset joint seed; the once/before-first-step
 # semantics are enforced by in-code asserts at these sites (the static guard pins WHERE, the
-# runtime asserts pin WHEN). EMPTY until the grip PS-2..5 implementation pins its reset funcs.
-RESET_SEED_MANIFEST: dict[tuple[str, str], dict[str, int]] = {}
+# runtime asserts pin WHEN).
+RESET_SEED_MANIFEST: dict[tuple[str, str], dict[str, int]] = {
+    # c11 (grip PS-2..5): the env's SINGLE sanctioned joint-state write site; callers = episode
+    # reset / P0 build / cache restore (all episode boundaries, before the next physics step).
+    ("thread_isaac_lab/envs/newton_grip_env.py", "_seed_robot_joint_row"): {"joint_q": 1, "joint_qd": 1},
+}
 
 # G4: host-mock pytest fixture manifest -- repo-relative file -> {function: expected hit count}.
 # A hit outside these functions, or a count drift, FAILs (fixture-injection control).
@@ -143,10 +147,13 @@ class _FileCheck(ast.NodeVisitor):
                     self.alias_stack[-1].add(t.id)
 
     def _seeder_exempt(self, name: str) -> bool:
-        return (
-            (self.rel, self.func_stack[-1]) == SEEDER_KEY
-            and name in SEEDER_HOST_NAMES
-        )
+        key = (self.rel, self.func_stack[-1])
+        if key == SEEDER_KEY and name in SEEDER_HOST_NAMES:
+            return True
+        # A RESET_SEED_MANIFEST-pinned function's own host-copy mutations are part of its
+        # sanctioned once-at-reset seed (the delivery .assign in the same function is what the
+        # manifest counts; a mutation without that delivery is inert).
+        return key in RESET_SEED_MANIFEST
 
     def _check_store_target(self, target: ast.AST, lineno: int) -> None:
         if isinstance(target, ast.Subscript):
@@ -341,7 +348,10 @@ def main() -> int:
             for func, attr, ln in fc.marked:
                 marked_seen.setdefault((rel, func), {}).setdefault(attr, 0)
                 marked_seen[(rel, func)][attr] += 1
-                print(f"  [CARRY] {rel}:{ln}: CABLE-SEED marked in {func} (declared sec14.2 step-3 carry)")
+                if attr.startswith("reset-seed:"):
+                    print(f"  [RESET-SEED] {rel}:{ln}: sanctioned once-at-reset joint seed in {func} (pN 18:17 manifest)")
+                else:
+                    print(f"  [CARRY] {rel}:{ln}: CABLE-SEED marked in {func} (declared sec14.2 step-3 carry)")
     expected_marks: dict[tuple[str, str], dict[str, int]] = {k: dict(v) for k, v in CARRY_MANIFEST.items()}
     for k, v in RESET_SEED_MANIFEST.items():
         expected_marks.setdefault(k, {}).update({"reset-seed:" + a: c for a, c in v.items()})
