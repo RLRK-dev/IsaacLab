@@ -46,6 +46,8 @@ CANONICAL_NAMES = {"phys_jq", "phys_jqd", "jq", "jqd", "bq", "bqd"}  # historica
 MARKER = "# CABLE-SEED (design sec14.2 step-3 scope-out"
 # Pinned carry manifest: file basename -> exact expected marked-line count (extra marks = FAIL).
 CARRY_MANIFEST = {"newton_skill_env_base.py": 2}
+# Pinned HOST-MOCK pytest files (write numpy fakes, never a sim): the ONLY fixture-inventory set.
+FIXTURE_FILES = {"test_routeexec_writesite.py", "test_route_reward_identity_guards.py", "test_routeexec_state_bank.py"}
 SEEDER_FUNC = "seed_cable_joint_state"  # the ONE function whose internal writes are the carry
 
 
@@ -236,10 +238,11 @@ def main() -> int:
         for py in sorted(root.glob("*.py")):
             fc = check_file(py)
             rel = py.relative_to(repo)
-            # pN-adjudicated scope split (c6 reverify): writes in scripts/test_*.py are MOCK-state
-            # fixtures, inventoried loudly but not production writers. envs/ tests do not exist;
-            # any real writer must live in envs/ or a non-test script to run, where it FAILs.
-            is_fixture = root.name == "scripts" and py.name.startswith("test_")
+            # pN-adjudicated scope split (c6 reverify): HOST-MOCK pytest files write mock state
+            # (numpy fakes), inventoried loudly but not production writers. PINNED allowlist --
+            # a test_*.py NOT on this list (e.g. the scripted sim harnesses test_newton_*) is
+            # production-class and FAILs like any other file (fail-closed for new files).
+            is_fixture = root.name == "scripts" and py.name in FIXTURE_FILES
             for lineno, cls, detail in fc.hits:
                 if is_fixture:
                     fixture_hits += 1
