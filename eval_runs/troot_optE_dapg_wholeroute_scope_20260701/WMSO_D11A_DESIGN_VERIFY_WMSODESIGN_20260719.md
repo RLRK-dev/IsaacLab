@@ -371,7 +371,7 @@ design-axis 役割 = 本 §15 で closure。freeze 裁定 (Rs) + 上記 custody 
 | B1 CRITICAL | applicability の flat list に order 2 の else が component-scope 欠き→逐次評価で他 component 吸収 + None-profile min_grade 未定義 | EP §3c を **classify(profile 中立・component-scoped 排他 branch・明示 default fallthrough)+ overlay(eligibility 専用・非 None 必須)** に 2 段分割。JSON `applicability_rules` = split_rationale + classifier(REQUIRED_CLASS は min_grade 無し)+ branch scope_note("else applies ONLY when component==TRAINING_DATASET")。5 引数形は合成として保存。全域 corpus 13×5×4 義務化 | ✅ md↔JSON airtight |
 | B2 HIGH | EXACT×非学習の到達不能が prose のみ(synthetic manifest で充足可) | `identity_kind ∈ {SCRIPTED,WAIT} ∧ grade=EXACT → E_GRADE_INAPPLICABLE` を **proof 検査前の機械規則**に(JSON `proof_policy` 内 4 箇所)+ negative corpus | ✅ |
 | B3 HIGH | projection.object が prose placeholder | **構造化 field map**(handoff/field/accepted item 型付き列挙 + array 順序規則)**+ golden 7 本**(CM 全 3 member + HS empty/single/multi/reorder) | ✅ golden 7 本 sha256 全一致 + canon 全 True + reorder(`7a686477`)≠multi(`2c1d7760`)+ single=v2.10(`00ffb015`) |
-| B4 CRITICAL/L0 | ExecutionFamily enum-allowlist が charter『algorithm-agnostic』『PPO or another online RL / DAPG or another imitation-plus-RL』+ Rs RL+IL 非限定要件と不整合 | **TrainingMethodDescriptor{method_class,method_id}+METHOD_REGISTRY**(中立 5 クラス・registry 行=Rs 承認制・`E_METHOD_UNREGISTERED` fail-close)+ §3 表 6 行化(IMITATION_PLUS_RL×DEMO_PLUS_RL 新設)+ TrainingLineage+=DEMO_PLUS_RL + §6-5 DAPG 写像有効化。**dangling live ExecutionFamily = 0**(全て replaced-by 注記) | ⚠ **fold 忠実だが register ⑩ = Rs confirm 対象**(下記 C-2) |
+| B4 CRITICAL/L0 | ExecutionFamily enum-allowlist が charter『algorithm-agnostic』『PPO or another online RL / DAPG or another imitation-plus-RL』+ Rs RL+IL 非限定要件と不整合 | **TrainingMethodDescriptor{method_class,method_id}+METHOD_REGISTRY**(中立 5 クラス・registry 行=Rs 承認制・`E_METHOD_UNREGISTERED` fail-close)+ §3 表 6 行化(IMITATION_PLUS_RL×DEMO_PLUS_RL 新設)+ TrainingLineage+=DEMO_PLUS_RL + §6-5 DAPG 写像有効化。~~dangling live ExecutionFamily = 0~~ → ⚠**訂正(再 R4・pS 著者権 2026-07-19 22:05)**: 本 claim は **誤り**。type-名 `ExecutionFamily` の grep に基づき、§1.2 IdentityKind coherence comment の旧 family **member {PPO,BC}** の live 参照を見逃した(name-scoped grep が member-alias に evade — [[feedback-verify-at-the-delivery-surface-not-the-source-variable-name]] の再発)。pN 再 verify R1 が捕捉 → v2.11.1 で {ONLINE_RL,IMITATION,IMITATION_PLUS_RL} に修正。**再実施した member-scoped sweep(PPO/DAPG/BC/ExecutionFamily/E_LINEAGE_FORBIDDEN)= v2.11.1 で stale live 0**(残存は全て provenance/charter 引用/method_id 例示文字列/§6-5・§8 の live-correct〔DAPG→valid〕)。 | ⚠ **fold 忠実だが register ⑩ = Rs confirm 対象**(下記 C-2) |
 | R1 | transcripts fidelity 表記 | C1-C3 / R+PASS-CLOSE を **pN 著者 CONFIRMED** に更新 + R+PASS-CLOSE を sibling list 正式収載 | ✅ |
 | R2 | header の pS bank 表記 stale | 「本 v2.8 commit」→ **現行 bank `dfeb6c1e57`(§16 込み)+ 同時更新規則** | ✅(私の §16 minor 指摘を pN も捕捉・修正) |
 
@@ -383,7 +383,7 @@ design-axis 役割 = 本 §15 で closure。freeze 裁定 (Rs) + 上記 custody 
 - FOUNDATIONAL invariant 不抵触: TrainingMethodClass(ONLINE_RL 等)は**訓練手法**で制御様式でない — ControlMode は依然 LEARNED=DIFF_IK_EE_TARGET のみ(kinematic mode 無し)。kinematic-removal directive 写像(line 167)不変・EP kinematic 0。**Rs「sim is reality/kinematic 完全削除」と整合・先祖返り無し**。
 
 ### 17.1 Verdict
-**design-axis PASS-WITH-CONDITIONS(DESIGN v2.11 `8d1f356024…` 宛)。** B1・B2・B3・R1・R2 = 忠実 fold + hash airtight + parity 成立 + regression/dangling 無し + invariant 不抵触。**fold 自体の must-fix = 0**。下記 2 条件は fold 欠陥でなく downstream gate:
+**design-axis PASS-WITH-CONDITIONS(DESIGN v2.11 `8d1f356024…` 宛)。** B1・B2・B3・R1・R2 = 忠実 fold + hash airtight + parity 成立 + regression 無し + invariant 不抵触。〔⚠**「dangling 無し」は :374 で誤記 → pN 再 verify R1 が §1.2 の member-ref {PPO,BC} 残存を捕捉・再 R4 で訂正済; v2.11.1 + member-scoped sweep で解消**〕**fold 自体の must-fix = 0**。下記 2 条件は fold 欠陥でなく downstream gate:
 
 - **C-1(custody — must-flag)**: **pN 工程 13 B1-B4 の as-received transcript が未 bank**(ls・manifest grep で確認; B1-B7/C1-C3/R+PASS-CLOSE は bank 済だった系列で欠落)。ゆえ私の fold 忠実性判定は **pQ の fold-map(paraphrase)+ 内部整合 + hash** に対するもので、**pN の実 B1-B4 逐語に対する独立照合は不能**(特に B4 CRITICAL/L0 と B1 の「2 案」)。RV5 C-P0-1 が CRITICAL 化した「pN verdict record 不在」と同型。→ **pN exact-pin 再検証 / freeze 上程の前に pN 工程 13 B1-B4 transcript の bank を強く推奨**(fold-map の独立監査可能化 + terminal verdict の provenance)。
 - **C-2(register ⑩ = Rs 専権 gate — rule (g) 核心・must-flag)**: register ⑩ は **DC-5(register ②=Rs 確定の DAPG 除外)を逆転**し **DEMO_PLUS_RL lineage + §3 表 6 行**(Rs 確定 prereg §5 表)を変更 = human-ruled 面変更。design は (1) charter『algorithm-agnostic』逐語接地・(2) 「Rs confirm 対象」loud 記録・(3) freeze と併せ上程・(4) DC-5/② を明示 link = **materialize-but-flag の正しい handling**(私の B5 miss の教訓 rule (g) を pQ が遵守)。⚠**私の design-axis PASS は fold の忠実性と正しい flag を確認するもので、DC-5 逆転の実体を ratify しない — ⑩ の confirm は Rs 専権、freeze は ⑩ 未確認では B4 につき進めない**。〔Rs 判断の補助 = ⑩ は 2 要素を束ねる: (i) algorithm-neutral method_class/registry(charter 接地・pN B4 CRITICAL/L0 を解消)と (ii) 特定の DC-5 逆転(DAPG 再収容 + DEMO_PLUS_RL 行)。Rs confirm が要るのは主に (ii)〕。
@@ -391,3 +391,30 @@ design-axis 役割 = 本 §15 で closure。freeze 裁定 (Rs) + 上記 custody 
 **境界(標準)**: 私の PASS は **pN の exact-pin 再検証を代替しない**(層の一つ・過去 4 度上書き)。freeze = Rs 専権。training-ready でない。production/training/authority = charter §0/§8-4 CLOSED。
 
 → **工程 12 再入(pS 再照合)完了。** pQ 次手 = (a) pN 工程 13 B1-B4 transcript を bank(C-1)→ (b) pN へ完全 bundle + 最終 SHA(工程 13')→ (c) Rs freeze 判定に register ⑩ confirm を併せ上程(C-2)。
+
+---
+
+## 18. pN 再 verify(v2.11)= B1-B4 mechanism PASS + R1-R4 bounded consistency の readback + 再 R4 訂正 (pS, 2026-07-19 22:08 JST 実測)
+
+**pN 再 verify(v2.11、21:55)結果**: **B1-B4 mechanism fold = ✅PASS**(私の §17 mechanism 評価と一致)・**260 cell totality 検証済**(applicability classify/overlay 全域)・**verified PASS = 6 blob pins/def hash/golden 7/7/manifest pins/ancestry**・残差 = **R1-R4 bounded consistency のみ**。→ **私の C-1(custody)= 解消**: pN B1-B4 as-received transcript が bank 済(`ddaf0dcd8b23…`@`81065b9b5c`、blob `1f3056…`、pN 著者 fidelity CONFIRMED)。**transcript 逐語を実読 → 私の §17 の B1-B4 fold-fidelity 評価は pN 実文言と一致**(B1「order=3 が 2 本・component-scope 無し・None-profile min_grade 未定義」等)。
+
+**pQ fold(再 R1-R3)→ DESIGN v2.11.1 `698bfc9e3c…`(bank `c628e58697`)。EP/JSON = v1.9 不変(`c474acea7c…`/`e63176af9b…`、def hash `e7ca4309…` 不変 — semantic 変更なし = records/consistency のみ)。pin 実測一致。**
+
+**readback(v2.11→v2.11.1 diff、再 R1-R3):**
+- **再 R1** = §1.2 IdentityKind coherence comment `{PPO,BC}` → **`{ONLINE_RL, IMITATION, IMITATION_PLUS_RL}`**(B4 の method_class 化 同期漏れ)。✅ **member-scoped sweep で on-disk 確認**: v2.11.1 の PPO/DAPG/BC/ExecutionFamily/E_LINEAGE_FORBIDDEN 全 occurrence 分類 = **stale live 参照 0**(残存は provenance/charter 引用/method_id 例示文字列/§6-5・§8 の live-correct〔DAPG→valid〕)。
+- **再 R2** = §8 base corpus 旧「"DAPG" → E_LINEAGE_FORBIDDEN」撤去 → **未登録 method_id → E_METHOD_UNREGISTERED**・DAPG valid-Draft を §6-5/§8 B4 cases に単一化(二重期待の正面衝突解消)。✅ 確認(:545)。
+- **再 R3** = §8 三面一致 fixture `v1.8.json` → **`v1.9.json`**(歴史ラベル明示)。✅ 確認(:551)。
+- **再 R4** = **本 record §17 :374「dangling live ExecutionFamily=0」の訂正**(pS 著者権)= **完了**(:374 strike + 訂正注記・:386 verdict 注記)。
+
+**⚠ 私の §17 miss を own(再 R4 の実体)**: §17 の「dangling live ExecutionFamily=0」は **type-名 `ExecutionFamily` の grep** に基づき、実際の stale 参照は **member 名 `{PPO,BC}`**(§1.2 coherence comment)だったため見逃した = **name-scoped grep を member-alias が evade** = [[feedback-verify-at-the-delivery-surface-not-the-source-variable-name-2026-07-19]] の**再発**(前回 = kinematic alias grep)。pN の source review が捕捉。今回は正しく **member-scoped sweep** を実施し stale live 0 を確認。**教訓 = 効果が届く delivery-surface(type 名 + 全 member 名 + 関連 error code)を列挙分類せよ・source 変数名 grep で「不在」を主張しない**。
+
+### 18.1 Verdict
+**readback CONFIRMED — v2.11.1 = design-axis PASS**(v2.11 の B1-B4 mechanism-PASS 上に載る records-only fold; EP/JSON/def hash 不変で新 semantic surface なし)。再 R1-R3 = 忠実 fold + on-disk 確認(member-scoped sweep)、再 R4 = 私の著者権で訂正済。**fold must-fix = 0**。
+
+**gate 現況**:
+- **C-1(custody・私の §17 flag)= 解消**(B1-B4 transcript bank 済)。
+- **⚠ 軽微 custody note(C-1′)**: pN の **21:55 R1-R4 再 verify message 自体**は as-received transcript が未 bank(現状 = fold-map §11 + B1-B4 transcript header の 21:55 quote に paraphrase)。R1-R4 = bounded consistency(mechanism でない)ゆえ B1-B4 より低優先だが、full custody consistency のため bank 推奨。
+- **C-2(register ⑩ = Rs 専権)= 維持**: pN も同旨(「⑩ 未確認では freeze 不可」)。私の PASS は fold 忠実性を確認するが DC-5 逆転の実体を ratify しない。
+- 標準境界: 私の PASS ≠ pN 再判定・freeze=Rs・training-ready でない・production/training/authority CLOSED。
+
+→ **readback + 再 R4 訂正 完了。** pQ は pN へ新 pin 一式(DESIGN v2.11.1 `698bfc9e3c…` + EP/JSON v1.9 + manifest `737ecdc119…` + transcript)を再提示可。次 = pN 再判定 → Rs freeze + ⑩ confirm。
