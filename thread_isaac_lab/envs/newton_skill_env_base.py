@@ -1097,8 +1097,8 @@ def seed_cable_joint_state(
     jq[q0 + 1] += dr_xy[1]
     jq[q0 + 7 : q0 + 7 + len(seg_angles)] = seg_angles
     jqd[qd0 : qd0 + 6 + len(seg_angles)] = 0.0
-    state.joint_q.assign(jq)
-    state.joint_qd.assign(jqd)
+    state.joint_q.assign(jq)  # CABLE-SEED (design sec14.2 step-3 scope-out: cable reset-init, NOT arm)
+    state.joint_qd.assign(jqd)  # CABLE-SEED (design sec14.2 step-3 scope-out: cable reset-init, NOT arm)
     newton.eval_fk(model, state.joint_q, state.joint_qd, state)
 
 
@@ -2142,24 +2142,17 @@ def broadcast_fk_to_all_worlds(fk_state, state_0, bws, world_count):
 
 
 def broadcast_jointq_to_all_worlds(fk_state, state_0, jws, world_count):
-    """Copy FK joint coords to all worlds' robot joints (MuJoCo articulated kinematic re-pose).
+    """REMOVED kinematic re-pose: raises unconditionally (Rs directive 2026-07-19).
 
-    The joint-space analog of :func:`broadcast_fk_to_all_worlds`: writes ``fk_state.joint_q`` into
-    each world's robot joint slice ``[jws[w] : jws[w] + 2*JOINTS_PER_ARM]`` (28) and zeros the
-    matching ``joint_qd`` -- the per-step OVERWRITE re-pose the STEP-1 probe validated (every step,
-    not a single set). Used under ``SOLVER_BACKEND == "mujoco"`` (MuJoCo poses bodies from joint_q).
+    The former joint-space broadcast (per-step joint_q OVERWRITE of every world's robot joint
+    slice) is a kinematic forced placement; arm motion must come from the POSITION-servo
+    actuator path. The signature is kept so legacy callers fail loudly, not with a TypeError.
     """
-    n = 2 * JOINTS_PER_ARM
-    fk_jq = fk_state.joint_q.numpy()[:n]
-    phys_jq = state_0.joint_q.numpy()
-    phys_jqd = state_0.joint_qd.numpy()
-    for w in range(world_count):
-        start = jws[w]
-        raise RuntimeError(
-            "kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): broadcast_jointq_to_all_worlds is a kinematic write -- migrate this caller to actuator drive"
-        )
-    state_0.joint_q.assign(phys_jq)
-    state_0.joint_qd.assign(phys_jqd)
+    del fk_state, state_0, jws, world_count
+    raise RuntimeError(
+        "kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+        "broadcast_jointq_to_all_worlds is a kinematic write -- migrate this caller to actuator drive"
+    )
 
 
 def physics_step(model, solver, state_0, state_1, control, contacts, substeps=None, sim_dt=None):

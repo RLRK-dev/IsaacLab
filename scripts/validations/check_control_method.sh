@@ -8,104 +8,91 @@
 #
 # WHAT IT ENFORCES (plain language):
 #   The robot ARM must be moved by physics actuators (MuJoCo `ctrl` / PD position actuators),
-#   never by writing the joint-position array directly. A line that assigns INTO a physics
-#   joint-position array (`phys_jq` / `joint_q` / `qpos`) forces the pose with no physics =
-#   a kinematic "forced placement", which RS71 §0#3 and §0#5 forbid on EVERY substrate
-#   (PhysX AND Newton) — the invariant is substrate-agnostic, NOT a PhysX-only rule.
-#   The ONE authorized kinematic exception is the clip-retention pin, which writes body_q /
-#   an eq constraint (NOT a joint-position array), so it is not matched here.
+#   never by writing joint state directly. Forcing joint positions (or velocities) bypasses
+#   physics = a kinematic "forced placement", which RS71 §0#3/#5 forbid on EVERY substrate.
+#   There are NO authorized exceptions (Rs directive 2026-07-19: the former clip-retention pin
+#   exception is superseded; pins/welds/attachments/direct state drives are all prohibited).
 #
-# WHY THERE ARE KNOWN HITS:
-#   The old VBD solver could not simulate the arm's revolute joints, so every Newton skill-env
-#   drives the arm by writing joint_q directly (FK "forced placement") as a workaround
-#   (LL-Newton.md:670). The current substrate is MuJoCo, which DOES support PD position
-#   actuators (ur5e.xml arm actuators), so all of these sites must migrate to actuator control.
-#   Until that remediation lands they are listed in BASELINE below and reported as WARN
-#   (visible + tracked, non-blocking).
+# HOW IT DECIDES (two layers -- both must pass):
+#   [CHECK 10] SUBSCRIPT layer: any line assigning into a canonical joint-state array name
+#     (phys_jq / phys_jqd / joint_q / joint_qd / qpos / qvel). Fast first line of defense.
+#     KNOWN LIMIT (proven 2026-07-19): a host-side alias (e.g. `_rep_jq = state.joint_q.numpy()`
+#     then `_rep_jq[idx] = x`) escapes this pattern -- host mutations are INERT until delivered.
+#   [CHECK 11] DELIVERY layer (airtight): a host mutation only reaches the sim through
+#     `<state>.joint_q.assign(...)` / `<state>.joint_qd.assign(...)`. ALL such calls are
+#     forbidden in envs/, except (a) FK scratch buffers (receiver contains `fk_state` -- an FK
+#     evaluation state, never the stepped sim state) and (b) lines carrying the explicit marker
+#     `# CABLE-SEED (design sec14.2 step-3 scope-out` (cable reset-init, Rs-acknowledged
+#     deferred surface -- counted and echoed LOUDLY, never silent).
+#   [CHECK 12] RAW-MUJOCO layer (defense): subscript writes to `.qpos` / `.qvel` of an mj/mjw
+#     data object in envs/ (CPU-side mj writes are GPU-inert in multi-world but are still a
+#     forced-placement attempt).
+#   Historical allowlists/baselines are forbidden: every unmarked hit FAILs.
 #
-# HOW IT DECIDES:
-#   Every direct write to a physics joint-position array in thread_isaac_lab/envs/*.py is
-#   detected (the greedy index match also catches nested-bracket and slice indices). A hit whose
-#   comment-stripped, whitespace-normalized code matches a BASELINE signature = KNOWN carryover
-#   -> WARN. Any OTHER direct write = NEW kinematic forced-placement -> FAIL. When a site migrates
-#   to actuator control, DELETE its BASELINE entry so any re-introduction FAILs (regression guard).
-#
-# Refs: thread-vault/04-Specs/RS71-System-Spec-SSOT.md §0#3/#5 ; .claude/rules/prohibited.md.
+# Refs: RS71-System-Spec-SSOT.md §0#3/#5 ; .claude/rules/prohibited.md ;
+#       ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md §14 (complete removal).
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-# ENVS_DIR is overridable (CHECK_CM_ENVS_DIR) so the FAIL path can be exercised against a fixture.
-ENVS_DIR="${CHECK_CM_ENVS_DIR:-$REPO_ROOT/thread_isaac_lab/envs}"
-
-# --- BASELINE: known VBD-era kinematic-arm-drive writes (comment-stripped, ALL whitespace removed).
-# 16 sites across 5 env files (newton_aerial_regrasp / newton_approach_cable / newton_route_env /
-# newton_skill_env_base / route_executor) collapse to these 12 unique signatures. 15 are ARM writes;
-# the gripper-restore one is included as the same class (a direct joint-position write).
-# ⚠ DELETE an entry when its site migrates to MuJoCo actuator control (so a regression re-FAILs).
-BASELINE='
-phys_jq[self._arm_ow_q_idx]=fk_jq[self._arm_ow_src]
-phys_jq[self._arm_ow_q_idx]=jq_interp[:,_ARM_OVERWRITE_LOCAL].reshape(-1)
-phys_jq[jq0:jq0+_N_ARM_JOINTS]=self._settled_fk_jq[:_N_ARM_JOINTS]
-phys_jq[jq0:jq0+_N_ARM_JOINTS]=jq_interp[w,:_N_ARM_JOINTS]
-phys_jq[self._arm_q_start[w]:self._arm_q_start[w]+n]=fk_jq
-phys_jq[start:start+n]=fk_jq
-phys_jq[arm_ow_q_idx]=fk_jq_1world[arm_ow_src]
-phys_jq[arm_ow_q_idx]=jq_interp[:,_ARM_OVERWRITE_LOCAL].reshape(-1)
-phys_jq[maps["arm_ow_q_idx"]]=banked["arm_q"]
-phys_jq[maps["gripper_restore_q_idx"]]=banked["gripper_q"]
-phys_jq[_ARM_OVERWRITE_LOCAL]=fk_state.joint_q.numpy()[_ARM_OVERWRITE_LOCAL]
-phys_jq[:n]=fk_state.joint_q.numpy()[:n]
-'
+ENVS_DIR="$REPO_ROOT/thread_isaac_lab/envs"
+if [ ! -d "$ENVS_DIR" ] || ! find "$ENVS_DIR" -maxdepth 1 -type f -name '*.py' -print -quit | grep -q .; then
+    echo "  [FAIL] canonical env scan root missing or empty: $ENVS_DIR"
+    echo "LAYER8_FAIL=1"
+    echo "LAYER8_WARN=0"
+    exit 1
+fi
 
 FAIL_COUNT=0
 WARN_COUNT=0
-warn_lines=""
 fail_lines=""
 
-echo "=== Layer 8: Control-Method Guard (§0 DiffIK-only / no-kinematic-trick) ==="
-echo "  [CHECK 10] direct physics joint-position write (kinematic 'forced placement') — arm must be actuator-driven"
-
-# All direct writes to a physics joint-position array. Greedy [^=]* runs up to the assignment '='
-# then backtracks to the last ']', so nested-bracket (maps["arm..."]) and slice ([jq0:jq0+N]) indices
-# are all caught. '=[^=]' excludes '=='/'>='/'<=' comparisons.
-HITS=$(grep -rnE '(phys_jq|joint_q|qpos)\[[^=]*\][[:space:]]*=[^=]' "$ENVS_DIR" --include='*.py' 2>/dev/null \
-    | grep -vE ':[0-9]+:[[:space:]]*#' \
-    || true)
-
-# Normalize a grep hit ("path:line:code") to its signature: drop the prefix, strip an inline comment,
-# remove all whitespace.
-sig_of() {
-    printf '%s\n' "$1" | sed -E 's/^[^:]+:[0-9]+://; s/[[:space:]]*#.*$//; s/[[:space:]]+//g'
-}
-
-if [ -n "$HITS" ]; then
+add_fails() {
+    # $1 = hits (grep path:line:code, possibly empty)
+    [ -z "$1" ] && return 0
     while IFS= read -r hit; do
         [ -z "$hit" ] && continue
-        sig=$(sig_of "$hit")
-        [ -z "$sig" ] && continue
         loc=$(printf '%s\n' "$hit" | sed -E "s#^$ENVS_DIR/##")
-        if printf '%s\n' "$BASELINE" | grep -qxF "$sig"; then
-            WARN_COUNT=$((WARN_COUNT + 1))
-            warn_lines="${warn_lines}         ${loc}"$'\n'
-        else
-            FAIL_COUNT=$((FAIL_COUNT + 1))
-            fail_lines="${fail_lines}         ${loc}"$'\n'
-        fi
-    done <<< "$HITS"
+        FAIL_COUNT=$((FAIL_COUNT + 1))
+        fail_lines="${fail_lines}         ${loc}"$'\n'
+    done <<< "$1"
+}
+
+echo "=== Layer 8: Control-Method Guard (§0 DiffIK-only / no-kinematic-trick; NO exceptions) ==="
+
+echo "  [CHECK 10] subscript writes into canonical joint-state arrays (q AND qd)"
+HITS10=$(grep -rnE '(phys_jq|phys_jqd|joint_q|joint_qd|qpos|qvel)\[[^=]*\][[:space:]]*=[^=]' "$ENVS_DIR" --include='*.py' 2>/dev/null \
+    | grep -vE ':[0-9]+:[[:space:]]*#' \
+    || true)
+add_fails "$HITS10"
+
+echo "  [CHECK 11] joint-state .assign delivery surface (fk_state scratch exempt; CABLE-SEED marker = loud scope-out)"
+HITS11_ALL=$(grep -rnE '\.(joint_q|joint_qd)\.assign\(' "$ENVS_DIR" --include='*.py' 2>/dev/null \
+    | grep -vE ':[0-9]+:[[:space:]]*#' \
+    | grep -v 'fk_state' \
+    || true)
+HITS11_MARKED=$(printf '%s\n' "$HITS11_ALL" | grep -F '# CABLE-SEED (design sec14.2 step-3 scope-out' || true)
+HITS11=$(printf '%s\n' "$HITS11_ALL" | grep -vF '# CABLE-SEED (design sec14.2 step-3 scope-out' | grep -v '^$' || true)
+add_fails "$HITS11"
+MARKED_COUNT=0
+if [ -n "$HITS11_MARKED" ]; then
+    MARKED_COUNT=$(printf '%s\n' "$HITS11_MARKED" | grep -c . || true)
+    echo "  [SCOPE-OUT] $MARKED_COUNT CABLE-SEED-marked joint-state assign(s) (cable reset-init, design sec14.2 step-3 -- deferred surface, NOT arm):"
+    printf '%s\n' "$HITS11_MARKED" | sed -E "s#^$ENVS_DIR/#         #"
 fi
 
+echo "  [CHECK 12] raw mujoco qpos/qvel subscript writes (mj/mjw data objects)"
+HITS12=$(grep -rnE '\.(qpos|qvel)\[[^=]*\][[:space:]]*=[^=]' "$ENVS_DIR" --include='*.py' 2>/dev/null \
+    | grep -vE ':[0-9]+:[[:space:]]*#' \
+    || true)
+add_fails "$HITS12"
+
 if [ "$FAIL_COUNT" -gt 0 ]; then
-    echo "  [FAIL] $FAIL_COUNT NEW direct joint-position write(s) = §0#5 kinematic-trick violation (arm must be actuator/ctrl-driven):"
+    echo "  [FAIL] $FAIL_COUNT kinematic joint-state write path(s) = §0#3/#5 violation (arm must be actuator/ctrl-driven):"
     printf '%s' "$fail_lines"
-    echo "         Fix: drive the arm via MuJoCo actuators (set ctrl / PD position target), NOT a joint_q write."
-    echo "         (If this is a legitimate reset-init or the pin exception, add its normalized signature to BASELINE with a note.)"
-fi
-if [ "$WARN_COUNT" -gt 0 ]; then
-    echo "  [WARN] $WARN_COUNT KNOWN kinematic-arm-drive site(s) — VBD-era carryover, PENDING migration to MuJoCo actuators (§0 remediation):"
-    printf '%s' "$warn_lines"
-fi
-if [ "$FAIL_COUNT" -eq 0 ] && [ "$WARN_COUNT" -eq 0 ]; then
-    echo "  [PASS] no direct joint-position write in envs/"
+    echo "         Fix: drive the arm via MuJoCo actuators (POSITION-servo ctrl target), NOT a joint-state write."
+    echo "         No baseline, pin, or reset-init exception is permitted (Rs 2026-07-19)."
+else
+    echo "  [PASS] no kinematic joint-state write path in envs/ (CHECK 10/11/12 all clean)"
 fi
 
 echo "LAYER8_FAIL=$FAIL_COUNT"

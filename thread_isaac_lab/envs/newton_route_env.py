@@ -150,6 +150,11 @@ _RIGHT_ARM_BODY_OFFSET = ROBOT_BODIES_PER_ARM  # 14
 _LEFT_EE_BODY = EE_BODY_OFFSET  # 5: UR5e wrist_3 (left arm)
 _RIGHT_EE_BODY = _RIGHT_ARM_BODY_OFFSET + EE_BODY_OFFSET  # 19: UR5e wrist_3 (right arm)
 _N_ARM_JOINTS = 2 * JOINTS_PER_ARM  # 28: both arms' joint_q span within a world (cable joints follow)
+# Route-start pose gate tolerance [rad] (max-abs over the 12 arm dofs): the arm must ARRIVE at the
+# recording's frame-0 pose PHYSICALLY (design sec14.2/14.3 homing transit) before the route may start.
+# PROVISIONAL fail-closed placeholder -- the acceptance value is a design (p5) ruling pending with the
+# sec14.3 transit chunk; until that chunk exists the gate always raises (home is ~5.6 rad away).
+_ROUTE_START_POSE_TOL_RAD = 0.05
 
 # koshape wrist-down IK rotation target (Rx(-90) xyzw) -- NOT Franka pi/8 (S5 horizontal-gripper bug).
 # alpha-6D is position-only, so this rotation target is HELD (no rot residual accumulation).
@@ -892,11 +897,13 @@ class NewtonRouteEnv(VecEnv):
             self._state_0, self._state_1 = self._state_1, self._state_0
 
     def _broadcast_arm_jointq(self):
-        """Re-pose both arms' joint_q (SC2b) at the COORD-correct per-world offset (sec 23 fix)."""
+        """Refresh both arms' POSITION-servo hold target at the FK home (NO joint_q write).
+
+        NO-KINEMATIC (Rs 2026-07-19): the former SC2b joint_q re-pose is REMOVED; the hold is a
+        servo TARGET refresh (actuator write only), fail-closed without the arm servo wiring.
+        """
         n = _N_ARM_JOINTS
         fk_jq = self._fk_state.joint_q.numpy()[:n]
-        phys_jq = self._state_0.joint_q.numpy()
-        phys_jqd = self._state_0.joint_qd.numpy()
         # NO-KINEMATIC (Rs 2026-07-19): the hold is a POSITION-servo TARGET refresh (actuator write),
         # never a joint_q force. Requires the arm servo wiring (fail-closed otherwise).
         if not (self._grasp_actuation and self._arm_pd_drive):
@@ -907,8 +914,8 @@ class NewtonRouteEnv(VecEnv):
         self._control.joint_target_pos.assign(_h_jtp)
 
     def _settle_cable(self):
-        """Settle the cable (~2s sim time) while holding both arms at the FK home via joint_q re-pose."""
-        print("[NewtonRouteEnv] Settling cable (~2s, arm held via joint_q re-pose)...")
+        """Settle the cable (~2s sim time) while holding both arms at the FK home via the POSITION servo."""
+        print("[NewtonRouteEnv] Settling cable (~2s, arms held via POSITION-servo target)...")
         for _ in range(int(2.0 / DT)):
             self._broadcast_arm_jointq()
             self._physics_step_all()
@@ -1181,121 +1188,36 @@ class NewtonRouteEnv(VecEnv):
             # OPEN (route step-0) for the reset worlds only (per-world subset; K1c) so episode >= 2 starts OPEN.
             self._route.reseed_grip_open(env_ids)
             if self._arm_pd_drive:
-                # (d) P-D1 route-start re-pose (design v1.3 correction #3, B-class = phase-k restore
-                # class, once per episode boundary): seed the arm at the recording's frame-0 EXACT q --
-                # the SAME state the banked kinematic FF teleports into on its first drive frame
-                # (finding c1da5dcf54) -- + ctrl target-sync (M-4). qd was zeroed by the authoritative
-                # re-pose above. Guard: gripper OPEN and not-grasping at this boundary, LOUD + counted
-                # (the probe harness folds the count into the npz/summary flag).
-                _rep_rec = getattr(self._route, "_recording", None)
-                assert _rep_rec is not None and _rep_rec.get("arm_q") is not None, (
-                    "armpd route-start re-pose needs a recording with arm_q"
-                )
-                _rep_row = np.asarray(_rep_rec["arm_q"][0], dtype=np.float64)[:_N_ARM_JOINTS]
-                _rep_src12 = self._arm_ow_maps["arm_ow_src"][:12]  # arm-local columns {0-5,14-19}
-                _rep12 = _rep_row[_rep_src12]
-                _rep_jq = self._state_0.joint_q.numpy()
-                _rep_jqd = self._state_0.joint_qd.numpy()
-                _rep_jtp = self._control.joint_target_pos.numpy()
-                _rep_open = float(self._rex.GRIPPER_DRIVER_OPEN_RAD)
-                # A-1 (v1.5 sec12.2): limits + winding -- the EXACT recorded values (no normalization /
-                # wrap folding) must lie inside the model joint limits at the arm dofs.
-                _rep_lo = self._model.joint_limit_lower.numpy()
-                _rep_hi = self._model.joint_limit_upper.numpy()
-                # A-3 pre-image: cable q/qd slices (everything outside the arm/gripper spans), snapshotted
-                # BEFORE the mutation of the SAME host arrays -- proves the teleport touches arm q only.
-                _rep_arm_all = set(int(x) for x in self._arm_ow_maps["arm_ow_q_idx"])
-                _rep_cable_q_idx = np.array([i for i in range(_rep_jq.shape[0]) if i not in _rep_arm_all], dtype=np.int64)
-                _rep_cable_q_pre = _rep_jq[_rep_cable_q_idx].copy()
-                _rep_cable_qd_pre = _rep_jqd.copy()
-                # A-7 (design v1.6-④): pin/eq ownership at the boundary. (i) expected-unfired state:
-                # the who-wrote-it-agnostic audit finds NO fired pin eq, the witness is None, the dwell
-                # counter is 0 (post _clear_c1_pin state); (ii) the clip-pin eq slice (eq_active flags +
-                # eq anchor/data arrays) is snapshotted here and byte-compared AFTER the re-pose writes
-                # (no solver step between) -- the re-pose must not activate/deactivate/re-anchor any eq;
-                # eq ownership stays exclusive to the pin mechanism (the INVARIANT#5 exception surface).
-                _a7_mjm = getattr(self._solver, "mj_model", None)
-                _a7_mjd = getattr(self._solver, "mj_data", None)
-                _a7_pre = None
-                if _a7_mjm is not None and _a7_mjd is not None:
-                    _a7_fired = self._rex.audit_pin_anchors(_a7_mjm, _a7_mjd)
-                    assert len(_a7_fired) == 0, (
-                        f"armpd A-7: fired pin eq present at the route-start boundary: {list(_a7_fired)}"
-                    )
-                    _a7_pre = (
-                        np.array(_a7_mjd.eq_active).copy(),
-                        np.array(_a7_mjm.eq_data).copy(),
-                        np.array(_a7_mjm.eq_obj1id).copy(),
-                        np.array(_a7_mjm.eq_obj2id).copy(),
-                    )
-                assert getattr(self, "_c1_pin_witness", None) is None, (
-                    "armpd A-7: C1 pin witness still set at the route-start boundary (eq ownership inconsistent)"
-                )
-                assert int(getattr(self, "_c1_pin_dwell", 0)) == 0, (
-                    "armpd A-7: pin dwell counter non-zero at the route-start boundary"
-                )
+                # NO-KINEMATIC (Rs 2026-07-19): the route-start re-pose (teleport of the arm joint_q to
+                # the recording's frame-0; design v1.3 correction #3) is REMOVED -- per-episode qpos
+                # seeding is abolished (design sec14.0/14.2). The replacement is the physical homing
+                # transit (sec14.2 steps 1-2 / sec14.3, future chunk): it must DELIVER the arm to the
+                # frame-0 pose under the POSITION servo before the route may start. Until then this
+                # gate fails LOUDLY: starting the route from a distant pose would PD-slew the arm
+                # across the whole gap and replay the choreography against a wrong start state.
+                _rs_rec = getattr(self._route, "_recording", None)
+                if _rs_rec is None or _rs_rec.get("arm_q") is None:
+                    raise RuntimeError("route-start pose gate needs a recording with arm_q")
+                _rs_row = np.asarray(_rs_rec["arm_q"][0], dtype=np.float64)[:_N_ARM_JOINTS]
+                _rs_tgt12 = _rs_row[self._arm_ow_maps["arm_ow_src"][:12]]  # arm-local columns {0-5,14-19}
+                _rs_jq = self._state_0.joint_q.numpy()  # read-only: gate measurement, never written back
+                _rs_jtp = self._control.joint_target_pos.numpy()
                 for w in env_ids:
                     w = int(w)
-                    # A-5: gripper OPEN + not-grasping (correction #3 guard folded into this suite).
-                    assert not bool(np.any(self._g_latched[w])), (
-                        f"armpd A-5: world {w} is grasp-latched at the route-start boundary"
-                    )
-                    for d in self._arm_ow_maps["l_driver_dofs"][w] + self._arm_ow_maps["r_driver_dofs"][w]:
-                        assert abs(float(_rep_jtp[d]) - _rep_open) < 1e-6, (
-                            f"armpd A-5: driver dof {d} target {_rep_jtp[d]} != OPEN {_rep_open}"
+                    _rs_q12 = _rs_jq[self._arm_ow_maps["arm_ow_q_idx"][w * 12 : (w + 1) * 12]]
+                    _rs_gap = float(np.max(np.abs(_rs_q12 - _rs_tgt12)))
+                    if _rs_gap > _ROUTE_START_POSE_TOL_RAD:
+                        raise RuntimeError(
+                            f"route-start pose gate: world {w} arm q is {_rs_gap:.3f} rad (max-abs) from "
+                            f"the recording's frame-0 (tol {_ROUTE_START_POSE_TOL_RAD}) and the kinematic "
+                            "re-pose is REMOVED (Rs directive 2026-07-19 kinematic complete-removal) -- "
+                            "the physical homing transit (design sec14.2/14.3) is not implemented yet, "
+                            "so the route cannot start from this pose"
                         )
-                    _rep_q12 = self._arm_ow_maps["arm_ow_q_idx"][w * 12 : (w + 1) * 12]
-                    _rep_qd12 = self._arm_ow_maps["arm_ow_qd_idx"][w * 12 : (w + 1) * 12]
-                    for k in range(12):
-                        d = int(_rep_qd12[k])
-                        assert float(_rep_lo[d]) - 1e-9 <= float(_rep12[k]) <= float(_rep_hi[d]) + 1e-9, (
-                            f"armpd A-1: rec frame-0 q[{k}]={_rep12[k]} outside joint limits "
-                            f"[{_rep_lo[d]}, {_rep_hi[d]}] at dof {d}"
-                        )
-                    _rep_jq[_rep_q12] = _rep12
-                    _rep_jtp[_rep_qd12] = _rep12
-                # A-3: the mutated host arrays are byte-identical outside the arm q slice, and qd was
-                # not touched by this block at all (solver step NOT interleaved).
-                assert np.array_equal(_rep_jq[_rep_cable_q_idx], _rep_cable_q_pre), (
-                    "armpd A-3: non-arm joint_q changed under the route-start re-pose"
-                )
-                assert np.array_equal(_rep_jqd, _rep_cable_qd_pre), (
-                    "armpd A-3: joint_qd changed under the route-start re-pose (must be write-free)"
-                )
-                self._state_0.joint_q.assign(_rep_jq)
-                self._control.joint_target_pos.assign(_rep_jtp)
-                # A-1 fidelity + A-2 M-4 sync: device readback after assign -- seeded q and ctrl carry the
-                # EXACT recorded values (eps 1e-9), qd[arm] == 0.
-                _rb_jq = self._state_0.joint_q.numpy()
-                _rb_jtp = self._control.joint_target_pos.numpy()
-                _rb_jqd = self._state_0.joint_qd.numpy()
-                for w in env_ids:
-                    w = int(w)
-                    _rep_q12 = self._arm_ow_maps["arm_ow_q_idx"][w * 12 : (w + 1) * 12]
-                    _rep_qd12 = self._arm_ow_maps["arm_ow_qd_idx"][w * 12 : (w + 1) * 12]
-                    assert np.max(np.abs(_rb_jq[_rep_q12] - _rep12)) <= 1e-9, "armpd A-1: seeded q readback != rec frame-0"
-                    assert np.max(np.abs(_rb_jtp[_rep_qd12] - _rep12)) <= 1e-9, "armpd A-2: ctrl readback != seeded q"
-                    assert np.max(np.abs(_rb_jqd[_rep_qd12])) <= 1e-9, "armpd A-2: qd[arm] != 0 after re-pose"
-                # A-7 (ii): byte identity of the eq slice across the re-pose writes (no step between).
-                if _a7_pre is not None:
-                    _a7_post = (
-                        np.array(_a7_mjd.eq_active),
-                        np.array(_a7_mjm.eq_data),
-                        np.array(_a7_mjm.eq_obj1id),
-                        np.array(_a7_mjm.eq_obj2id),
-                    )
-                    for _a7_a, _a7_b, _a7_nm in zip(
-                        _a7_pre, _a7_post, ("eq_active", "eq_data", "eq_obj1id", "eq_obj2id")
-                    ):
-                        assert np.array_equal(_a7_a, _a7_b), (
-                            f"armpd A-7: {_a7_nm} changed across the route-start re-pose (eq ownership breach)"
-                        )
-                self._armpd_repose_count += len(env_ids)
-                self._armpd_repose_frame_index = 0  # A-6: recording row used for the seed
-                print(
-                    f"  [ARMPD] route-start re-pose (v1.3 #3 + v1.5/v1.6 A-1..A-3/A-5/A-7 PASS): "
-                    f"worlds={[int(x) for x in env_ids]} -> rec frame-0 arm q (ctrl synced)"
-                )
+                    # Within tolerance (the transit delivered the arm): sync the POSITION-servo target
+                    # to the EXACT frame-0 row -- actuator write only (M-4 ctrl/q sync, kept).
+                    _rs_jtp[self._arm_ow_maps["arm_ow_qd_idx"][w * 12 : (w + 1) * 12]] = _rs_tgt12
+                self._control.joint_target_pos.assign(_rs_jtp)
         for w in env_ids:
             w = int(w)
             cable_joints_w = list(
@@ -1438,7 +1360,8 @@ class NewtonRouteEnv(VecEnv):
                     jq_targets[w, base + GRIPPER_DRIVER_JOINT_IDX[0]] = jq_starts[w, base + GRIPPER_DRIVER_JOINT_IDX[0]]
                     jq_targets[w, base + GRIPPER_DRIVER_JOINT_IDX[1]] = jq_starts[w, base + GRIPPER_DRIVER_JOINT_IDX[1]]
 
-            # DRIVE: interpolate arm joint_q start->target and OVERWRITE each world's joint_q slice per frame.
+            # DRIVE: interpolate the arm target start->target per frame and write it to the
+            # POSITION-servo ctrl (NO joint_q write -- Rs 2026-07-19 kinematic complete-removal).
             old_fk_jq = np.array(self._per_world_fk_jq[:N])
             if self._grasp_actuation:
                 # comp3 (R2): per-world route step for the recorded grip staircase lookup cf[t_w]+sub_i. This is
@@ -1448,12 +1371,10 @@ class NewtonRouteEnv(VecEnv):
             for step in range(self.PHYSICS_STEPS_PER_RL):
                 t = min((step + 1) / self.PHYSICS_STEPS_PER_RL, 1.0)
                 jq_interp = old_fk_jq + (jq_targets - old_fk_jq) * t
-                phys_jq = self._state_0.joint_q.numpy()
-                phys_jqd = self._state_0.joint_qd.numpy()
                 if self._grasp_actuation and self._arm_pd_drive:
                     # (d) P-D1 ARM ctrl-drive (design M-2 / sec2 (A)): write the SAME per-frame interp
                     # target into the POSITION-servo ctrl (read->mutate->assign, CC3-CH5) instead of
-                    # forcing joint_q/qd -- the kinematic write below is NOT executed on this path.
+                    # forcing joint_q/qd (the kinematic write path is REMOVED, Rs 2026-07-19).
                     # joint_target_pos is qd-indexed (set_gripper_target docstring); rows/cols via the
                     # maps so no private import. M-5 ramp: on activation, blend from the realized arm
                     # q over ARM_PD_RAMP_FRAMES physics frames (0 = off).
@@ -1462,7 +1383,7 @@ class NewtonRouteEnv(VecEnv):
                     _apd_tgt = jq_interp[_apd_rows, _apd_src]
                     if self._arm_pd_ramp_frames > 0:
                         if self._arm_pd_ramp_k is None:
-                            self._arm_pd_ramp_q0 = phys_jq[self._arm_ow_maps["arm_ow_q_idx"]].copy()
+                            self._arm_pd_ramp_q0 = self._state_0.joint_q.numpy()[self._arm_ow_maps["arm_ow_q_idx"]].copy()
                             self._arm_pd_ramp_k = 0
                         _apd_b = min(1.0, self._arm_pd_ramp_k / float(self._arm_pd_ramp_frames))
                         _apd_tgt = _apd_b * _apd_tgt + (1.0 - _apd_b) * self._arm_pd_ramp_q0
@@ -1472,11 +1393,9 @@ class NewtonRouteEnv(VecEnv):
                     self._control.joint_target_pos.assign(_apd_jtp)
                 else:
                     raise RuntimeError("kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): the per-step arm drive is the POSITION-servo ctrl path only")
-                self._state_0.joint_q.assign(phys_jq)
-                self._state_0.joint_qd.assign(phys_jqd)
                 if self._grasp_actuation:
                     # comp3 (R2): drive the gripper POSITION-servo from the recorded grip_cmd staircase for THIS
-                    # physics sub-frame, AFTER the arm joint_q assign and BEFORE the solver step (so the servo
+                    # physics sub-frame, AFTER the arm servo retarget and BEFORE the solver step (so the servo
                     # target is in place). Writes control.joint_target_pos ONLY (gripper joint_q is servo-DYNAMIC).
                     self._route.apply_recorded_grip(
                         route_steps, step, hold_mask=self._hold_mask_np if self._route_t_clock else None

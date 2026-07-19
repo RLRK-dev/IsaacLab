@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-"""env7 ApproachCable RL env -- mujoco-コ substrate (Newton 1.2.1 SolverMuJoCo, UR5e×2 + Robotiq koshape).
+"""env7 ApproachCable RL env -- mujoco-koshape substrate (Newton 1.2.1 SolverMuJoCo, UR5e×2 + Robotiq koshape).
 
 PORT-BY-INTENT, not a copy of the VBD impl. The quarantined VBD-AC snapshot under
 ``eval_runs/troot_ac_vbd_superseded_20260626/`` (the ``newton_approach_cable_env.py`` superseded copy)
@@ -13,7 +13,7 @@ active mujoco base ``newton_skill_env_base.build_multiworld_scene`` (the same sc
 ``NewtonGripEnv`` mirrors). Driving = ``broadcast_jointq_to_all_worlds`` (SC2b joint_q kinematic
 re-pose), the Newton mujoco substrate norm -- NOT VBD ``body_q.assign``.
 
-Anchor: LEDGER FAILED §2 (VBD-AC DISCARDED → mujoco-コ) / RS71-SSOT:15 (env7 SolverMuJoCo) /
+Anchor: LEDGER FAILED §2 (VBD-AC DISCARDED -> mujoco-koshape) / RS71-SSOT:15 (env7 SolverMuJoCo) /
 §0 INVARIANTS (DUAL-ARM, 88mm grasp span, koshape-LOCK, no-kinematic-trick).
 
 Skill: independent ApproachCable (DAPG Approach A). Both arms approach the cable (fingers OPEN;
@@ -47,7 +47,7 @@ Success: BOTH arms dist_pos < T_DIST_APPROACH(12mm) ∧ dist_ori < T_ALIGN(10°)
 IK: P0 init = per-arm independent solve (``_solve_ik_single_ko``); RL = per-step batched ``IKSolver``.
 NOTE: this is a DEVIATION from the banked debate DECIDE ("reuse ``solve_ik_dual``") -- the per-arm/custom
 solves were chosen because the combined dual solve compromises ~5mm/arm INWARD (span 78mm vs 88mm
-INVARIANT#2); per-arm reaches err=0 at the 88mm 上昇点. CONSEQUENCE: the ``solve_ik_dual`` arm-arm
+INVARIANT#2); per-arm reaches err=0 at the 88mm raise-point. CONSEQUENCE: the ``solve_ik_dual`` arm-arm
 collision spheres are DROPPED -> arm-arm clearance now relies on the reward + seg mid-split + the smoke
 mj_geomDistance check (NOT a solver objective).
 
@@ -200,9 +200,9 @@ KO_BASE_HAND_DOWN_QUAT = np.array([-0.7071067811865476, 0.0, 0.0, 0.707106781186
 EE_Z_FLOOR_KO = TABLE_HEIGHT + CLIP_BASE_HEIGHT + CABLE_RADIUS + EE_TO_PINCH_OPEN  # ≈ 1.06992
 
 # P0 init IK iterations: the base IK_ITERATIONS_INIT=100 under-converges the dual-arm solve at the
-# 上昇点 (wrist 1.16092, wide 88mm span, DC1) -> jq_target ~9mm short -> arms pulled ~8mm inward (span
+# Raise-point (wrist 1.16092, wide 88mm span, DC1) -> jq_target ~9mm short -> arms pulled ~8mm inward (span
 # 72mm vs 88mm INVARIANT#2). The gate_c2 per-arm probe reached err=0 at 200 iters; use a generous local
-# count for the one-time P0 solve (cost negligible). Scoped to AC (base const unchanged, §運用24).
+# count for the one-time P0 solve (cost negligible). Scoped to AC (base const unchanged, ops-rule sec24).
 _AC_IK_ITERATIONS_P0 = 400
 
 
@@ -219,7 +219,7 @@ def clamp_pos_ko(ee_pos, ee_quat_xyzw):
 
 
 class NewtonApproachCableMujocoEnv(VecEnv):
-    """RSL-RL VecEnv: ApproachCable on the env7 mujoco-コ substrate (UR5e×2 + Robotiq koshape).
+    """RSL-RL VecEnv: ApproachCable on the env7 mujoco-koshape substrate (UR5e×2 + Robotiq koshape).
 
     N physical worlds -> N RL environments (single 12D dual-arm agent per world). Fingers are always
     OPEN (approach is pre-grasp). The arm is kinematically re-posed via IK -> joint_q (SC2b, the Newton
@@ -410,20 +410,18 @@ class NewtonApproachCableMujocoEnv(VecEnv):
         that slice is wrong for world>=1 (world0 cable displaced + world1 arm un-posed in the smoke).
         This local version uses the authoritative per-world arm coord starts (q and qd separately).
         [base broadcast_jointq fix PROPOSED to %9 — it has the same latent bug for its own callers.]
+
+        NO-KINEMATIC (Rs 2026-07-19): the re-pose body is REMOVED; raises unconditionally until
+        the approach env is migrated to the POSITION-servo actuator path.
         """
-        n = _N_ARM_JOINTS
-        fk_jq = self._fk_state.joint_q.numpy()[:n]
-        phys_jq = self._state_0.joint_q.numpy()
-        phys_jqd = self._state_0.joint_qd.numpy()
-        for w in range(self._world_count):
-            raise RuntimeError("kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): approach env awaits actuator migration")
-            phys_jqd[self._arm_qd_start[w] : self._arm_qd_start[w] + n] = 0.0
-        self._state_0.joint_q.assign(phys_jq)
-        self._state_0.joint_qd.assign(phys_jqd)
+        raise RuntimeError(
+            "kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+            "approach env awaits actuator migration"
+        )
 
     def _settle_cable(self):
-        """Settle the cable (~2s sim time) while holding both arms at the FK home via joint_q re-pose."""
-        print("[ApproachCableMujocoEnv] Settling cable (~2s, arm held via joint_q re-pose)...")
+        """Settle the cable (~2s sim time). Fail-closed: the arm hold awaits actuator migration."""
+        print("[ApproachCableMujocoEnv] Settling cable (~2s; arm hold = actuator migration pending)...")
         settle_frames = int(2.0 / DT)
         for _ in range(settle_frames):
             # Hold the articulated arm against gravity every frame (SC2b overwrite; else the mujoco arm
@@ -436,17 +434,17 @@ class NewtonApproachCableMujocoEnv(VecEnv):
         print(f"[ApproachCableMujocoEnv] Cable settled: mean_x={self._settled_grasp_x:.4f}")
 
     # =====================================================================================================
-    # P0 Precondition (the 上昇点: arms wide @ 88mm span, wrist 100mm above table)
+    # P0 Precondition (the raise-point: arms wide @ 88mm span, wrist 100mm above table)
     # =====================================================================================================
 
     def _setup_p0_precondition(self):
-        """Move both arms to the NON-degenerate 上昇点 P0 (Rs-CONFIRMED frame ii, 2026-06-26).
+        """Move both arms to the NON-degenerate raise-point P0 (Rs-CONFIRMED frame ii, 2026-06-26).
 
         wrist Z = TABLE_HEIGHT + 0.100 + EE_TO_PINCH_OPEN = 1.16092 (koshape OPEN claw at 0.900, i.e.
         ~91mm ABOVE the cable center 0.809 -> dist_pos ≈ 91.8mm >> 12mm = NON-degenerate). XY span =
         WIDE_LEFT_Y(0.106)/WIDE_RIGHT_Y(0.194) = 88mm UNCHANGED (INVARIANT#2). DC1 koshape rot target.
         """
-        print("[ApproachCableMujocoEnv] Setting up P0 precondition (上昇点)...")
+        print("[ApproachCableMujocoEnv] Setting up P0 precondition (raise-point)...")
         grasp_x = self._settled_grasp_x
         p0_ee_z = TABLE_HEIGHT + 0.100 + EE_TO_PINCH_OPEN  # 1.16092 (wrist; NOT the grasp-ready degenerate point)
         self._ik_move_all_worlds(
@@ -456,13 +454,13 @@ class NewtonApproachCableMujocoEnv(VecEnv):
             converge_mm=2.0,  # tight: 10mm let the move break ~9mm short (t≈0.993) -> 78mm span vs 88 (INVARIANT#2)
         )
         self._hold_all_worlds(SETTLE_STEPS)
-        print("[ApproachCableMujocoEnv] P0 complete -- 上昇点 reached")
+        print("[ApproachCableMujocoEnv] P0 complete -- raise-point reached")
 
     def _solve_ik_single_ko(self, target_left, target_right):
         """Solve dual-arm IK (P0 init) with the DC1 koshape rotation target, PER-ARM.
 
         A single COMBINED solve (both arms' pos+rot + a shared joint-limit objective) compromises the
-        optimizer ~5mm/arm INWARD at the wide 88mm 上昇点 span (span 78mm vs 88mm INVARIANT#2). Solving
+        optimizer ~5mm/arm INWARD at the wide 88mm raise-point span (span 78mm vs 88mm INVARIANT#2). Solving
         each arm INDEPENDENTLY reaches err=0 (gate_c2 per-arm pure-IK proof), and is collision-safe at P0
         (arms are 88mm apart -- no inter-arm contact). Each solve starts from the FK home; we keep only
         that arm's joint slice (the other arm's joints from a given solve are free/discarded).
@@ -736,17 +734,12 @@ class NewtonApproachCableMujocoEnv(VecEnv):
         # Push body_q/bqd (None prev tolerated on mujoco).
         assign_world_states_to_sim(self._state_0, self._solver, bq, bqd, prev)
 
-        # AUTHORITATIVE re-pose (mujoco): seed arm joint_q = settled + cable joint_q from settled tangents.
-        phys_jq = self._state_0.joint_q.numpy()
-        phys_jqd = self._state_0.joint_qd.numpy()
-        for w in env_ids:
-            w = int(w)
-            jq0 = self._arm_q_start[w]  # §23: COORD start (NOT the joint-index self._jws)
-            jqd0 = self._arm_qd_start[w]
-            raise RuntimeError("kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): approach env awaits actuator migration")
-            phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
-        self._state_0.joint_q.assign(phys_jq)
-        self._state_0.joint_qd.assign(phys_jqd)
+        # NO-KINEMATIC (Rs 2026-07-19): the arm joint_q reset re-pose is REMOVED; raises
+        # unconditionally until the approach env is migrated to the POSITION-servo actuator path.
+        raise RuntimeError(
+            "kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+            "approach env awaits actuator migration"
+        )
 
         for w in env_ids:
             w = int(w)
@@ -997,7 +990,7 @@ class NewtonApproachCableMujocoEnv(VecEnv):
             # ⛔ TIMEOUTS PURITY (MUST-ADD #1, prohibited.md value_loss-105× history): time_outs =
             # MAX_EPISODE_STEPS reached ONLY. success / explosion are TRUE terminals (value=0) and MUST
             # be excluded -- RSL-RL PPO bootstraps γV(s_{T+1}) on timeouts; leaking a terminal there
-            # pollutes value targets (CLAUDE.md「timeouts汚染禁止」).
+            # pollutes value targets (CLAUDE.md timeouts-contamination prohibition).
             timeouts[w] = int(timeout and not success and not explosion)
             successes[w] = float(success)
             if done:
@@ -1182,23 +1175,13 @@ class NewtonApproachCableMujocoEnv(VecEnv):
             jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[0]] = jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[0]]
             jq_targets[w, GRIPPER_DRIVER_JOINT_IDX[1]] = jq_starts[w, GRIPPER_DRIVER_JOINT_IDX[1]]
 
-        # --- DRIVE: interpolate arm joint_q start->target and OVERWRITE each world's joint_q slice
-        # every physics frame (SC2b mujoco kinematic re-pose). The cable joints (after the 28 arm
-        # coords) are the dynamic part -- left untouched. ---
-        old_fk_jq = np.array(self._per_world_fk_jq[:N])  # [N, 28]
-        for step in range(self.PHYSICS_STEPS_PER_RL):
-            t = min((step + 1) / self.PHYSICS_STEPS_PER_RL, 1.0)
-            jq_interp = old_fk_jq + (jq_targets - old_fk_jq) * t  # [N, 28]
-            phys_jq = self._state_0.joint_q.numpy()
-            phys_jqd = self._state_0.joint_qd.numpy()
-            for w in range(N):
-                jq0 = self._arm_q_start[w]  # §23: COORD start (NOT the joint-index self._jws)
-                jqd0 = self._arm_qd_start[w]
-                raise RuntimeError("kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): approach env awaits actuator migration")
-                phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
-            self._state_0.joint_q.assign(phys_jq)
-            self._state_0.joint_qd.assign(phys_jqd)
-            self._physics_step_all(substeps=RL_SIM_SUBSTEPS, sim_dt=RL_SIM_DT)
+        # --- DRIVE: the former per-frame arm joint_q OVERWRITE (SC2b mujoco kinematic re-pose) is
+        # REMOVED (Rs 2026-07-19 kinematic complete-removal); raises unconditionally until the
+        # approach env is migrated to the POSITION-servo actuator path. ---
+        raise RuntimeError(
+            "kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+            "approach env awaits actuator migration"
+        )
 
         for w in range(N):
             self._per_world_fk_jq[w] = jq_targets[w].copy()

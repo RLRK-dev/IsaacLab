@@ -4728,13 +4728,11 @@ class RouteExecutor(rc.RouteInterfaceV1):
                 "gripper_qd": _blk(banked["gripper_qd"], n_grip),
                 "grip_target": _blk(banked["grip_target"], n_drv),
             }
-        phys_jq = self._state_0.joint_q.numpy()
-        phys_jqd = self._state_0.joint_qd.numpy()
-        jtp = self._control.joint_target_pos.numpy()
-        apply_banked_restore(phys_jq, phys_jqd, jtp, use_maps, use_banked)
-        self._state_0.joint_q.assign(phys_jq)
-        self._state_0.joint_qd.assign(phys_jqd)
-        self._control.joint_target_pos.assign(jtp)
+        del use_maps, use_banked  # sliced above for the (removed) restore; kept for the audit trail
+        raise RuntimeError(
+            "banked phase-k kinematic restore REMOVED (Rs directive 2026-07-19 kinematic complete-removal): "
+            "phase forks require a physical re-execution path (see apply_banked_restore)"
+        )
 
     def step_target(self, t: int) -> tuple:
         """Return the per-step route packet ``(target_6d, phase_id, grip_2, is_dual)`` for RL step ``t``.
