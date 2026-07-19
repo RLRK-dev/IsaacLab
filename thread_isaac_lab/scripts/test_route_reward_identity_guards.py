@@ -276,36 +276,33 @@ def _env_for_clear(world_count: int = 1):
     return env
 
 
-def test_clear_c1_pin_clears_all_audited_fired() -> None:
-    """L-C: the clear set is EXACTLY the audit's verified fired tuple, and the audit runs first.
-
-    eq 5 is fired but withheld from the fake audit's return: the helper must clear only what the
-    selector judged (model-state authority = the audit is the single selector; the real audit
-    returns every fired candidate -- that integration is the probe's L-C4 leg).
-    """
+def test_clear_c1_pin_raises_on_any_audited_fired() -> None:
+    """c6 fail-loud semantics (Rs 2026-07-19): pin FIRING is removed, so an audited fired eq at the
+    episode boundary is evidence of a surviving upstream kinematic writer -- the boundary must
+    RAISE, never silently disarm (a clean-up write would mask the violation and would itself be
+    the last eq_active writer). Audit still runs FIRST; eq state must be left untouched as
+    evidence. Migrated from test_clear_c1_pin_clears_all_audited_fired (pN c6-reverify B2)."""
     env = _env_for_clear()
     env._solver.mj_data.eq_active[[3, 5, 7]] = 1
     seen_at_audit = {}
     real_audit = rex.audit_pin_anchors
 
     def _fake_audit(mjm, mjd):
-        seen_at_audit["pre_clear"] = mjd.eq_active.copy()
+        seen_at_audit["pre"] = mjd.eq_active.copy()
         return (3, 7)
 
     rex.audit_pin_anchors = _fake_audit
     try:
-        env._clear_c1_pin([0])
+        try:
+            env._clear_c1_pin([0])
+            raise AssertionError("an audited fired eq must raise (pin firing is removed)")
+        except RuntimeError as e:
+            assert "pin firing is REMOVED" in str(e) and "[3, 7]" in str(e)
     finally:
         rex.audit_pin_anchors = real_audit
-    assert list(seen_at_audit["pre_clear"][[3, 5, 7]]) == [1, 1, 1], "audit must run BEFORE any clear"
-    expected = np.zeros(8, dtype=np.int64)
-    expected[5] = 1
-    assert np.array_equal(env._solver.mj_data.eq_active, expected), (
-        "the returned fired set must be cleared and ONLY that set (adjacent state untouched)"
-    )
-    assert env._c1_pin_witness is None, "(a): the witness must reset per episode"
-    assert (env._pin_seat_seg, env._pin_onset_frame, env._route_rec_step_f) == (27, 2544, "identity-sentinel"), (
-        "identity is recording-derived and must NEVER be cleared (sec 21.11.1 coupling note)"
+    assert list(seen_at_audit["pre"][[3, 5, 7]]) == [1, 1, 1], "audit must run BEFORE the verdict"
+    assert list(env._solver.mj_data.eq_active[[3, 5, 7]]) == [1, 1, 1], (
+        "the boundary must NOT write eq_active (evidence preserved, no disarm)"
     )
 
 
@@ -352,26 +349,11 @@ def test_clear_c1_pin_no_candidate_and_no_cpu_model() -> None:
         rex.audit_pin_anchors = real_audit
 
 
-def test_clear_c1_pin_readback_failure_raises() -> None:
-    """L-C: a clear whose readback does not stick must die loud (the GPU-inert-mirror failure class)."""
-
-    class _Sticky(np.ndarray):
-        def __setitem__(self, key, value):  # a write that silently does not take
-            return
-
-    env = _env_for_clear()
-    env._solver.mj_data.eq_active = np.ones(4, dtype=np.int64).view(_Sticky)
-    real_audit = rex.audit_pin_anchors
-    rex.audit_pin_anchors = lambda mjm, mjd: (2,)
-    try:
-        try:
-            env._clear_c1_pin([0])
-            raise AssertionError("an ignored eq_active write must raise on readback")
-        except RuntimeError as e:
-            assert "readback != 0" in str(e)
-        assert env._c1_pin_witness is not None, "the witness must NOT be nulled on a failed clear"
-    finally:
-        rex.audit_pin_anchors = real_audit
+# test_clear_c1_pin_readback_failure_raises: RETIRED (pN c6-reverify B2 per-test disposition).
+# It asserted the disarm WRITE's readback (GPU-inert-mirror class); c6 removed the write entirely
+# (boundary raises on any fired eq), so there is no readback surface left to test. The fired-eq
+# raise path is covered by test_clear_c1_pin_raises_on_any_audited_fired. Historical body:
+# git a004f2ce66 and earlier.
 
 
 def _pin_recording(n_frames: int) -> dict:

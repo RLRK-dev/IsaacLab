@@ -39,6 +39,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
+import pytest
 
 _SCRIPTS_DIR = Path(__file__).resolve().parent
 _TIL_DIR = _SCRIPTS_DIR.parent  # thread_isaac_lab/
@@ -408,7 +409,11 @@ def test_golden_transit_columns():
     """G-F6 (fold 8d): the transit-window mapping asserted against the REAL golden npz columns (not only
     the synthetic recording -- closes the self-referentiality of the L4 transit test)."""
     if not _GOLDEN_NPZ.exists():
-        raise AssertionError(f"golden npz missing: {_GOLDEN_NPZ}")
+        pytest.skip(
+            "external evidence artifact not in commit closure (pN c6-reverify B1 disposition): "
+            f"golden npz {_GOLDEN_NPZ} -- this leg needs a tree carrying the eval_runs data "
+            "(present on main; 12 MB binary deliberately not banked into git history)"
+        )
     z = np.load(_GOLDEN_NPZ)
     rec = {k: z[k] for k in ("ee_pos_r", "ee_pos_l", "grip_cmd", "phase_id", "cable_xyz", "held_seg_l")}
     control = _MockControl(_TOTAL, GRIPPER_DRIVER_OPEN_RAD)
@@ -492,7 +497,11 @@ def test_lane_floor():
     # and OUTSIDE the island -> shared max floor == lane floor == replay-neutral (R-A/R-B data assert;
     # the 81-cell version lives in comp3_lane_floor_sweep). Park frame also documents the old bind.
     if not _GOLDEN_NPZ.exists():
-        raise AssertionError(f"golden npz missing: {_GOLDEN_NPZ}")
+        pytest.skip(
+            "external evidence artifact not in commit closure (pN c6-reverify B1 disposition): "
+            f"golden npz {_GOLDEN_NPZ} -- this leg needs a tree carrying the eval_runs data "
+            "(present on main; 12 MB binary deliberately not banked into git history)"
+        )
     z = np.load(_GOLDEN_NPZ)
     pl = np.asarray(z["ee_pos_l"], dtype=np.float64)
     pr = np.asarray(z["ee_pos_r"], dtype=np.float64)
@@ -517,5 +526,3 @@ class _MockState:
     def __init__(self, n, fill):
         self.joint_q = _MockWarpArray(np.full(n, fill, dtype=np.float32))
         self.joint_qd = _MockWarpArray(np.full(n, fill, dtype=np.float32))
-
-
