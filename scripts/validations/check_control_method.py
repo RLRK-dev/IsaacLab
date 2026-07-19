@@ -158,7 +158,11 @@ class _FileCheck(ast.NodeVisitor):
 def check_file(path: Path) -> _FileCheck:
     src = path.read_text()
     fc = _FileCheck(path, src)
-    fc.visit(ast.parse(src))
+    try:
+        fc.visit(ast.parse(src))
+    except SyntaxError as e:
+        # Fail-closed, never crash: a file the checker cannot parse is a file it cannot certify.
+        fc.hits.append((int(e.lineno or 0), "UNPARSEABLE", f"SyntaxError: {e.msg} (cannot certify this file)"))
     return fc
 
 
