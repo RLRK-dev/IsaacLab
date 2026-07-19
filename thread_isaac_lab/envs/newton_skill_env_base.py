@@ -1691,7 +1691,11 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
                         )
                         del _apd_attr.values[:]
             if _apd_drive:
+                # v1.7 §13 R-2: independent ke/kd scales (the kd/ke viscous-lag lever). Back-compat:
+                # ARM_PD_GAINS_SCALE sets both unless the specific scale overrides it.
                 _apd_scale = float(os.environ.get("ARM_PD_GAINS_SCALE", "1.0"))
+                _apd_ke_scale = float(os.environ.get("ARM_PD_KE_SCALE", str(_apd_scale)))
+                _apd_kd_scale = float(os.environ.get("ARM_PD_KD_SCALE", str(_apd_scale)))
                 # local arm joint -> (ke, kd, effort cap): 0-2 = shoulder_pan/lift, elbow (size3);
                 # 3-5 = wrist_1/2/3 (size1). ur5e.xml document order (cross-checked against the
                 # captured vendor set above), same index space as the gripper drivers (gripper
@@ -1708,8 +1712,8 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
                     for _j, (_ke, _kd, _eff) in _apd_gains.items():
                         _dof = _base + _j
                         proto.joint_target_mode[_dof] = int(newton.JointTargetMode.POSITION)
-                        proto.joint_target_ke[_dof] = _ke * _apd_scale
-                        proto.joint_target_kd[_dof] = _kd * _apd_scale
+                        proto.joint_target_ke[_dof] = _ke * _apd_ke_scale
+                        proto.joint_target_kd[_dof] = _kd * _apd_kd_scale
                         proto.joint_effort_limit[_dof] = _eff
                         proto.joint_target_pos[_dof] = float(proto.joint_q[_dof])
             # Restore the 4 gripper 4-bar connect equalities (follower<->coupler), BY LABEL for both arms

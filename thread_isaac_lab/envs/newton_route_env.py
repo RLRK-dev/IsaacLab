@@ -783,6 +783,8 @@ class NewtonRouteEnv(VecEnv):
                 import mujoco as _apd_mj
 
                 _apd_scale = float(os.environ.get("ARM_PD_GAINS_SCALE", "1.0"))
+                _apd_ke_scale = float(os.environ.get("ARM_PD_KE_SCALE", str(_apd_scale)))
+                _apd_kd_scale = float(os.environ.get("ARM_PD_KD_SCALE", str(_apd_scale)))
                 _apd_m = self._solver.mj_model
                 _apd_gain = np.asarray(_apd_m.actuator_gainprm)
                 _apd_bias = np.asarray(_apd_m.actuator_biasprm)
@@ -800,8 +802,8 @@ class NewtonRouteEnv(VecEnv):
                     f"(imported actuators not stripped, or wiring missing)"
                 )
                 if self._arm_pd_drive:
-                    _apd_sz3 = (2000.0 * _apd_scale, 400.0 * _apd_scale, 150.0)
-                    _apd_sz1 = (500.0 * _apd_scale, 100.0 * _apd_scale, 28.0)
+                    _apd_sz3 = (2000.0 * _apd_ke_scale, 400.0 * _apd_kd_scale, 150.0)
+                    _apd_sz1 = (500.0 * _apd_ke_scale, 100.0 * _apd_kd_scale, 28.0)
                     assert len(_apd_live) == 12, (
                         f"armpd-census: live (synthesized) arm actuators = {len(_apd_live)} != 12"
                     )
@@ -839,7 +841,8 @@ class NewtonRouteEnv(VecEnv):
                     )
                 print(
                     f"  [ARMPD] L-P6 census PASS (B1-strip): imported=ABSENT, nu={int(_apd_m.nu)}, "
-                    f"live={len(_apd_live)}, mode={'PD' if self._arm_pd_drive else 'L-P0'}, scale={_apd_scale}"
+                    f"live={len(_apd_live)}, mode={'PD' if self._arm_pd_drive else 'L-P0'}, "
+                    f"ke_scale={_apd_ke_scale}, kd_scale={_apd_kd_scale}"
                 )
         print(
             f"[NewtonRouteEnv] Model: {self._model.body_count} bodies, "

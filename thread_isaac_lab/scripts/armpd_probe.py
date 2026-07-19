@@ -97,7 +97,9 @@ def main() -> int:
         action="store_true",
         help="R3 negative control (v1.5 sec12.1): freeze arm ctrl at the route-start pose; score |q - rec[t]| offline",
     )
-    ap.add_argument("--gains-scale", type=float, default=1.0, help="ke/kd scale (L-P5 negative control = 0.1); caps NOT scaled")
+    ap.add_argument("--gains-scale", type=float, default=1.0, help="ke/kd scale (both); caps NOT scaled")
+    ap.add_argument("--ke-scale", type=float, default=None, help="ke-only scale override (v1.7 sec13 R-2)")
+    ap.add_argument("--kd-scale", type=float, default=None, help="kd-only scale override (v1.7 sec13 R-2)")
     ap.add_argument("--ramp-frames", type=int, default=0, help="M-5 activation ramp length in physics frames (0 = off)")
     ap.add_argument("--episode-steps", type=int, default=900)
     ap.add_argument("--device", default="cuda:0")
@@ -114,6 +116,10 @@ def main() -> int:
     if a.arm_pd:
         os.environ["ARM_PD_DRIVE"] = "1"
         os.environ["ARM_PD_GAINS_SCALE"] = str(a.gains_scale)
+        if a.ke_scale is not None:
+            os.environ["ARM_PD_KE_SCALE"] = str(a.ke_scale)
+        if a.kd_scale is not None:
+            os.environ["ARM_PD_KD_SCALE"] = str(a.kd_scale)
         os.environ["ARM_PD_RAMP_FRAMES"] = str(a.ramp_frames)
         if a.neg_stale:
             os.environ["ARM_PD_STALE_CTRL"] = "1"
@@ -221,6 +227,8 @@ def main() -> int:
         "stale_ctrl_effective": bool(getattr(env._route, "_arm_pd_stale_ctrl", False)),
         "repose_frame_index": int(getattr(env, "_armpd_repose_frame_index", -1)),
         "gains_scale": float(a.gains_scale),
+        "ke_scale": (None if a.ke_scale is None else float(a.ke_scale)),
+        "kd_scale": (None if a.kd_scale is None else float(a.kd_scale)),
         "ramp_frames": int(a.ramp_frames),
         "drive_mode": "feedforward",
         "route_c1_pin_effective": bool(getattr(env, "_route_c1_pin", False)),
