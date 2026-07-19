@@ -2155,8 +2155,9 @@ def broadcast_jointq_to_all_worlds(fk_state, state_0, jws, world_count):
     phys_jqd = state_0.joint_qd.numpy()
     for w in range(world_count):
         start = jws[w]
-        phys_jq[start : start + n] = fk_jq
-        phys_jqd[start : start + n] = 0.0
+        raise RuntimeError(
+            "kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): broadcast_jointq_to_all_worlds is a kinematic write -- migrate this caller to actuator drive"
+        )
     state_0.joint_q.assign(phys_jq)
     state_0.joint_qd.assign(phys_jqd)
 

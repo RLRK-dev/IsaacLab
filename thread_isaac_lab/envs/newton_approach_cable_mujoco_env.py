@@ -416,7 +416,7 @@ class NewtonApproachCableMujocoEnv(VecEnv):
         phys_jq = self._state_0.joint_q.numpy()
         phys_jqd = self._state_0.joint_qd.numpy()
         for w in range(self._world_count):
-            phys_jq[self._arm_q_start[w] : self._arm_q_start[w] + n] = fk_jq
+            raise RuntimeError("kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): approach env awaits actuator migration")
             phys_jqd[self._arm_qd_start[w] : self._arm_qd_start[w] + n] = 0.0
         self._state_0.joint_q.assign(phys_jq)
         self._state_0.joint_qd.assign(phys_jqd)
@@ -743,7 +743,7 @@ class NewtonApproachCableMujocoEnv(VecEnv):
             w = int(w)
             jq0 = self._arm_q_start[w]  # §23: COORD start (NOT the joint-index self._jws)
             jqd0 = self._arm_qd_start[w]
-            phys_jq[jq0 : jq0 + _N_ARM_JOINTS] = self._settled_fk_jq[:_N_ARM_JOINTS]
+            raise RuntimeError("kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): approach env awaits actuator migration")
             phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
         self._state_0.joint_q.assign(phys_jq)
         self._state_0.joint_qd.assign(phys_jqd)
@@ -1194,7 +1194,7 @@ class NewtonApproachCableMujocoEnv(VecEnv):
             for w in range(N):
                 jq0 = self._arm_q_start[w]  # §23: COORD start (NOT the joint-index self._jws)
                 jqd0 = self._arm_qd_start[w]
-                phys_jq[jq0 : jq0 + _N_ARM_JOINTS] = jq_interp[w, :_N_ARM_JOINTS]
+                raise RuntimeError("kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): approach env awaits actuator migration")
                 phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
             self._state_0.joint_q.assign(phys_jq)
             self._state_0.joint_qd.assign(phys_jqd)

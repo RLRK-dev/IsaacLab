@@ -892,22 +892,14 @@ class NewtonRouteEnv(VecEnv):
         fk_jq = self._fk_state.joint_q.numpy()[:n]
         phys_jq = self._state_0.joint_q.numpy()
         phys_jqd = self._state_0.joint_qd.numpy()
-        if self._grasp_actuation:
-            # comp3: arm-only re-pose; gripper coords {6-13,20-27} left DYNAMIC (POSITION servo drives them).
-            self._rex.apply_arm_only_write_broadcast(
-                phys_jq,
-                phys_jqd,
-                fk_jq,
-                self._arm_ow_maps["arm_ow_q_idx"],
-                self._arm_ow_maps["arm_ow_qd_idx"],
-                self._arm_ow_maps["arm_ow_src"],
-            )
-        else:
-            for w in range(self._world_count):
-                phys_jq[self._arm_q_start[w] : self._arm_q_start[w] + n] = fk_jq
-                phys_jqd[self._arm_qd_start[w] : self._arm_qd_start[w] + n] = 0.0
-        self._state_0.joint_q.assign(phys_jq)
-        self._state_0.joint_qd.assign(phys_jqd)
+        # NO-KINEMATIC (Rs 2026-07-19): the hold is a POSITION-servo TARGET refresh (actuator write),
+        # never a joint_q force. Requires the arm servo wiring (fail-closed otherwise).
+        if not (self._grasp_actuation and self._arm_pd_drive):
+            raise RuntimeError("kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): settle/hold requires the arm POSITION-servo wiring")
+        _h_src = self._arm_ow_maps["arm_ow_src"]
+        _h_jtp = self._control.joint_target_pos.numpy()
+        _h_jtp[self._arm_ow_maps["arm_ow_qd_idx"]] = np.tile(fk_jq[_h_src[: len(_h_src) // self._world_count]], self._world_count)
+        self._control.joint_target_pos.assign(_h_jtp)
 
     def _settle_cable(self):
         """Settle the cable (~2s sim time) while holding both arms at the FK home via joint_q re-pose."""
@@ -1166,15 +1158,18 @@ class NewtonRouteEnv(VecEnv):
         assign_world_states_to_sim(self._state_0, self._solver, bq, bqd, prev)
 
         # AUTHORITATIVE re-pose (mujoco): seed arm joint_q = settled + cable joint_q from settled tangents.
-        phys_jq = self._state_0.joint_q.numpy()
-        phys_jqd = self._state_0.joint_qd.numpy()
-        for w in env_ids:
-            w = int(w)
-            jq0, jqd0 = self._arm_q_start[w], self._arm_qd_start[w]
-            phys_jq[jq0 : jq0 + _N_ARM_JOINTS] = self._settled_fk_jq[:_N_ARM_JOINTS]
-            phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
-        self._state_0.joint_q.assign(phys_jq)
-        self._state_0.joint_qd.assign(phys_jqd)
+        # NO-KINEMATIC (Rs 2026-07-19): the reset does NOT re-pose the arm joints (per-episode qpos
+        # seeding abolished, design sec14.0/14.2). The arm continues under its POSITION-servo hold;
+        # the physical homing transit (sec14.2 steps 1-2) is the replacement mechanism (future chunk).
+        # Servo target refresh to the settled home = actuator write only.
+        if self._grasp_actuation and self._arm_pd_drive:
+            _r_jtp = self._control.joint_target_pos.numpy()
+            _r_src12 = self._arm_ow_maps["arm_ow_src"][:12]
+            _r_home = self._settled_fk_jq[_r_src12]
+            for w in env_ids:
+                w = int(w)
+                _r_jtp[self._arm_ow_maps["arm_ow_qd_idx"][w * 12 : (w + 1) * 12]] = _r_home
+            self._control.joint_target_pos.assign(_r_jtp)
         if self._grasp_actuation:
             # comp3 (R1a): the 28-wide reset-init above re-poses the gripper joint_q (patched OPEN branch)
             # + zeroes qd, but the servo TARGET still carries the episode-end CLOSED command -> re-seed it to
@@ -1470,21 +1465,8 @@ class NewtonRouteEnv(VecEnv):
                     _apd_jtp = self._control.joint_target_pos.numpy()
                     _apd_jtp[self._arm_ow_maps["arm_ow_qd_idx"]] = _apd_tgt
                     self._control.joint_target_pos.assign(_apd_jtp)
-                elif self._grasp_actuation:
-                    # comp3: arm-only per-world drive; gripper coords {6-13,20-27} left DYNAMIC (servo-driven;
-                    # the recorded grip_cmd staircase writes control.joint_target_pos separately -- R2/chunk 2).
-                    self._rex.apply_arm_only_write_perworld(
-                        phys_jq,
-                        phys_jqd,
-                        jq_interp,
-                        self._arm_ow_maps["arm_ow_q_idx"],
-                        self._arm_ow_maps["arm_ow_qd_idx"],
-                    )
                 else:
-                    for w in range(N):
-                        jq0, jqd0 = self._arm_q_start[w], self._arm_qd_start[w]
-                        phys_jq[jq0 : jq0 + _N_ARM_JOINTS] = jq_interp[w, :_N_ARM_JOINTS]
-                        phys_jqd[jqd0 : jqd0 + _N_ARM_JOINTS] = 0.0
+                    raise RuntimeError("kinematic arm drive REMOVED (Rs directive 2026-07-19 kinematic complete-removal): the per-step arm drive is the POSITION-servo ctrl path only")
                 self._state_0.joint_q.assign(phys_jq)
                 self._state_0.joint_qd.assign(phys_jqd)
                 if self._grasp_actuation:
