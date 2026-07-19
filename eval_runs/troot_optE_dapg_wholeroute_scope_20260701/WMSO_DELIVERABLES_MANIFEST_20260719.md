@@ -3,7 +3,7 @@
 作成 = w2:pQ (RS-TECH-LEAD2)、node `T-WMSO`。全 sha256 = full 64-hex・**committed blob から実算出**（bank commit 付き — dirty tree 由来の pin なし）。本 manifest は RV7-R-3（旧 manifest = v2.9 世代 pin の残置）への全面書換。
 
 ## 現在地（1 行）
-**Rs review v7（RV7 ⛔HOLD、v2.9.2 宛）の全項 fold = DESIGN v2.10 + EvidencePolicy v1.8 + JSON v1.8（bank `a87525cc15`）** → 残 gate = **pS 差分照合 → pN exact-pin 再検証（最終 SHA のみ渡す）→ Rs freeze 判定**（RV7 工程 12-14）。impl / training / authority = CLOSED 不変。
+**RV7 全項 fold（DESIGN v2.10 + EP v1.8 + JSON v1.8、bank `a87525cc15`）→ pS 差分照合 = ✅design-axis PASS（20:55、must-fix 0・hash 3 本独立再計算一致・record §16）** → 残 gate = **pN exact-pin 再検証（工程 13 — 完全 bundle + 最終 SHA）→ Rs freeze 判定（工程 14）**。impl / training / authority = CLOSED 不変。
 
 ## 最終 pin（現行候補 — bank `a87525cc15`、worktree == committed blob 検証済み）
 | artifact | 版 | sha256 |
@@ -31,7 +31,7 @@ RV7 の review 環境 companion（EP `586fec2a…` = v1.7 / JSON `3fb7a452…` /
 | `WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md` | **EvidencePolicy v1.8** | `9713cafbd2…`（上表） |
 | `WMSO_EvidencePolicy_v1.8.json` | 機械可読 fixture（二層・17 member・golden vector 2 本掲載） | `00032f9091…`（上表） |
 | `WMSO_RS_REVIEW_V7_HOLD_TRANSCRIPT_20260719.md` | RV7 as-received 転記 + custody 事実確認注 | `91923be57c…`（上表） |
-| `WMSO_D11A_DESIGN_VERIFY_WMSODESIGN_20260719.md` | pS verify record §1-§15（v2.9.2 期まで） | `7a212b9374e3ae3f576031987b7483783a19a231041b6cbb3f4e6be060bf81dc` |
+| `WMSO_D11A_DESIGN_VERIFY_WMSODESIGN_20260719.md` | pS verify record **§1-§16**（§16 = RV7 工程 12 差分照合 = **✅design-axis PASS**〔20:55・must-fix 0〕） | `383c3e3a0efcc0df00a37ce7bb877cb6e247db9f376689da02ef026ef0a0c562` |
 | `WMSO_PN_DESIGN_VERIFY_HOLD_C1C3_TRANSCRIPT_20260719.md` | pN HOLD C1-C3 transcript | `d8b5f83e0af85cd069feec73c011ef3949d1a258ec61348565e0f2149fe6e4c2` |
 | `WMSO_PN_DESIGN_VERIFY_R_AND_PASSCLOSE_TRANSCRIPT_20260719.md` | pN R1-R3 HOLD + ✅PASS-CLOSE（v2.9.2 宛）transcript | `2847e2aa9d30a9b57093232425c8fdbef2aa09a87d0291b489f79e471f911139` |
 | `WMSO_RS_REVIEW_V6_COPY_20260719.md` | Rs review v6 byte-identical copy | `3f64cbca44269bc8255fd2c0dcf4d96712248de4017d4b1943c0855daef2cead` |
@@ -40,9 +40,9 @@ RV7 の review 環境 companion（EP `586fec2a…` = v1.7 / JSON `3fb7a452…` /
 （Rs 発行 review v3/v4/v5 原本 = `~/Downloads/PLAN_STATUS_review_v{3,4,5}_2026-07-19.md` 既在。repo byte-identical copy = `20da075f9566…` / `338bdaf75a99…` / `44792e860e82…`。pN B1-B7 transcript = repo `6d26efde4739…`@`86d127b5c0`。）
 
 ## 残 gate（RV7 工程 12-14 — 順不同にしない）
-1. **pS 差分照合**（v2.9.2→v2.10 差分 + EP v1.7.1→v1.8 — 依頼済み）
-2. **pN exact-pin 再検証**（pS PASS 後に**最終 SHA のみ**渡す）
+1. ~~pS 差分照合~~ = **✅design-axis PASS**（20:55 — RV7 11 項 faithful fold・must-fix 0・def/cm/ho hash 3 本独立再計算一致・md↔JSON parity・invariant 不抵触。record §16 = `383c3e3a0efc…`）
+2. **pN exact-pin 再検証**（工程 13 — **進行中**: 最終 SHA + manifest commit 込み完全 bundle を渡す〔pS 指示 = RV7 custody 教訓の再発防止〕）
 3. **Rs freeze 判定**（pN PASS 後に上程）
 
 ## 未 push
-`a87525cc15`（fold）+ 本 manifest commit。**push は Rs 一言で実行**（`1fb038bc39` までは push 済み・remote 一致確認 19:46）。
+`a87525cc15`（fold）+ `1ba0d0a9df`（manifest）+ 本 commit（pS §16 bank）。**push は Rs 一言で実行**（`1fb038bc39` までは push 済み・remote 一致確認 19:46）。LEDGER 反映 = p6 row44 `0578b9b174`（20:57 確認）。

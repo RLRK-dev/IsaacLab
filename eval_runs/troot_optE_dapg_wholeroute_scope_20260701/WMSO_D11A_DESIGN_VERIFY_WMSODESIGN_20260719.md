@@ -306,3 +306,53 @@ Targets (bank `8caa19a7a4`, shas 実測==pQ claim): DESIGN **v2.9** `e64c192b62e
 3. **pattern**: 私の design-axis PASS は 3 度 pN/panel に上書きされた。**私の PASS は層の一つで pN を代替しない** — 恒久記録。
 
 design-axis 役割 = 本 §15 で closure。freeze 裁定 (Rs) + 上記 custody bank 待ち。
+
+---
+
+## 16. RV7 re-verify — Rs review v7 ⛔HOLD fold (v2.9.2→v2.10) design-axis PASS (pS, 2026-07-19 20:54 JST 実測)
+
+**§15 closure の再開**: pN evidence-axis PASS-CLOSE (17:43) 後、**Rs review v7 = ⛔HOLD**（freeze 差し戻し、対象 = v2.9.2 + 旧 zip 世代 companion）。§15 で「freeze 待ち」とした chain が Rs HOLD で再開。RV7 = 規範ブロッカー P0-1..P0-7 + 記録 R-1..R-4 + custody（提示 bundle が exact-pin 不成立）+ 工程 1-14。pQ fold → **DESIGN v2.10 / EP v1.8 / JSON v1.8**（bank `a87525cc15`）。本 §16 = **工程 12（pS 差分照合）**。
+
+**pin 実測一致（records-must-match-fact — 全 4）**: DESIGN `86a882219780dc43…` / EP md `9713cafbd2919c5d…` / JSON v1.8 `00032f90916b56ab…` / RV7 transcript `91923be57c206eaa…`。bank `a87525cc15`（4 file）・prior v2.9.2 = `ba69702cb9`・4 file tree clean（committed==worktree、pin==worktree）。
+
+**RV7 11 項 per-item 照合（v2.9.2→v2.10 diff + EP v1.7.1→v1.8 + JSON parity）:**
+
+| 項 | Rs 要求 | fold（実測） | 判定 |
+|---|---|---|---|
+| P0-1 | EP 実体不在・v1.7 重複規則 | semantic = v1.7.1 で先行修正（REPRODUCED/TTCB → 単一 claim_target anchor・重複 0、grep 確認）; custody = 実 v1.8 bytes + manifest bank | ✅ semantic 閉／custody=pN leg |
+| P0-2 | resolver 5 引数 + 優先順位 instance→profile→lineage→default | EP §3c `resolve_applicability(...)` + 設計 §4 mirror + JSON `applicability_rules` order 1-4 一致 + regression_vector 埋込 + register ⑨ | ✅ md↔JSON airtight |
+| P0-3 | projection 確定形 + slot state/tuple 順/accepted/空/golden | EP §3d + JSON `projection_rules`（member 16→17）: control_mode={state,value}(KNOWN) / handoff={handoff_schema,accepted_handoff}・宣言順保持・空=[] / golden 2 本掲載 | ✅ golden 2 本独立再計算一致 |
+| P0-4 | CONFIG_HASH stage 入力不在 → total map | (identity_kind,training_lineage,component) 全域 map・**JSON `stage` 0 件**（判別子撤去）・EvidenceRecord 不変 | ✅（Rs 2 案中 total map 採用） |
+| P0-5 | validate_handoff に epoch snapshot | `validate_handoff(...,authority_epoch_snapshot:int)` + `E_HANDOFF_EPOCH_STALE` + manager 責務に snapshot 読出し | ✅ |
+| P0-6 | evaluation cert を certify/certificate/eligibility へ接続 | `DefinitionCertificationResult.evidence_evaluations` + `ContractCertificate.evidence_evaluation_bundle_hash` + eligibility 第2引数 evidence_bundle→evidence_evaluations(assigned_grade) + `E_GRADE_MISMATCH` + register ⑧ | ✅ |
+| P0-7 | IdentityKind inline | §1.2 `class IdentityKind(Enum)` + §1.4 enum inventory 収載 | ✅ |
+| R-1 | v1.6 現行参照 | §4 冒頭表・§8 三面一致 fixture 共に v1.8；全文 grep = 現行規則 0（残存は履歴/fold-map/退役 pin 注記のみ） | ✅ 完全 |
+| R-2 | mutation test 旧 field 名 | §8 #4b = {grade, source_ref, proof, claim_target_hash, evaluator_artifact_hash} | ✅ |
+| R-3 | manifest 全面旧版 | manifest 全面書換 + 別 commit **`1ba0d0a9df`** で bank（v2.10/v1.8/bdc508 pin + pS/pN record + v2.9.2 SUPERSEDED copy + pN R+PASS-CLOSE transcript `2847e2aa9d30…`） | ✅ |
+| R-4 | JSON 型記述（bool 欠落） | metadata = 「ASCII key/str・int・bool のみ・float/null/非 ASCII なし」 | ✅ 機械検証済 |
+
+**hash 3 本 独立再計算 = 全一致（airtight）:**
+- `evidence_policy_definition_hash` = `bdc508200889005142eaab5ac15c48cdfb8281df63bbb35537542f1f248891a8`（JSON metadata 埋込 command 実行）
+- control_mode golden = `4f0b26d50ca9def398021dc39027cd4aaeabde2440cb83a12360191134b6a01c`
+- handoff_schema golden = `00ffb0154ddb241a4bf5f3b49e362cae02013338c051f7b9206c7c8cedfb602d`（+ canonical round-trip 一致 = 掲載文字列が実正準・実装再正準化で同一 bytes）
+
+**先祖返り / 先走り / over-reach 抑制（pS duty）:**
+- register ⑧⑨ = 旧 Rs sketch（RV3-W-P0-3 / RV3-W-P0-1）を **後発 Rs review text（RV7 P0-6 / P0-2）が supersede** = human-ruled 面を Rs 自身の text で変更 = **checklist (g) 充足**（設計内宣言でない）。
+- §10 の無条件「open=0」= **撤回**（自己申告 fold を「open 0」と書かず、残 gate = pS→pN→Rs freeze を明記）= RV7 末尾指摘に忠実・**先走り抑制**。
+- FOUNDATIONAL invariant（RS71 §0 DUAL-ARM/88mm/DiffIK/コ/no-trick）**不抵触**。ControlMode enum = {DIFF_IK_EE_TARGET, SCRIPTED_SEQUENCE, WAIT}（kinematic mode 無し）; DESIGN 唯一の kinematic 言及 = 除去 directive 写像（line 563・契約層で DiffIK-only 執行・v1 kinematic 期 executable は Draft/evidence 化して実行候補から除外）; EP md kinematic 0 件 → **Rs 最上位原則「sim is reality / kinematic 完全削除」と整合・先祖返り無し**。
+- 退役 pin `066e…`/`ed10…` = 正しく退役表記（再利用無し）; register ④（B5 撤回）維持。
+
+**§15 custody 2 懸念の discharge（RV7 round で解消）:** (1) pN R1-R3 + 終端 PASS-CLOSE の as-received transcript = **bank 済** `2847e2aa9d30a9b5…`（manifest 記載）→ §15 の「terminal verdict 独立監査不能」concern 解消。(2) design header stale = v2.10 で現行 gate state（pS 差分照合→pN exact-pin 再検証→Rs freeze）へ更新済。
+
+### 16.1 Verdict
+**design-axis PASS（DESIGN v2.10 `86a882219780dc43…` 宛）。** RV7 11 項 = 忠実・完全 fold、hash 3 本 airtight、md↔JSON parity 成立、規範/records 全閉、regression/over-reach 無し、FOUNDATIONAL invariant 不抵触。**PASS-WITH-CONDITIONS でない = must-fix 検出 0**（H/G/F/R 系のような未閉 leg なし）。
+
+**境界（私の PASS の scope — over-claim 防止）:**
+- **exact-pin / custody 閉包 = pN の leg（工程 13）**。RV7 HOLD の中核（提示 bundle が旧 zip 世代 → exact-pin 不成立）は本 round の実 v1.8 bytes + manifest bank で解消される見込みだが、最終確認は **pN exact-pin 再検証**が担う。私の design-axis PASS は fold 忠実性 + hash 内部整合の確認で、pN custody leg を**代替しない**（standing: 私の PASS は層の一つ・過去 3 度上書きされた）。
+- **⚠ pN へ渡す最終 bundle は manifest commit `1ba0d0a9df` を必ず含めること（custody 完全性 — RV7 教訓の再発防止）**。fold = `a87525cc15`・manifest（R-3 deliverable, 全 pin）= 別 commit `1ba0d0a9df`。pQ dispatch は前者のみ pin。RV7 HOLD を招いた「companion pointer 欠落の bundle 納品 gap」を再発させぬよう、工程 13 で pN へ渡す SHA set は DESIGN/EP/JSON + **manifest** の完全 bundle とする。
+- **RV7 transcript fidelity = Rs 確認 PENDING**（chat 原文・byte identity N/A — 従前 transcript と同類・doc に明記）。
+- **freeze = Rs 専権（工程 14）**。**training-ready でない** — production control / training launch / closed-loop authority は WMSO charter §0/§8-4 で CLOSED 不変。
+
+**minor（非 must-fix・記録のみ）**: design header line 24 の pS-record bank pointer が「最終 bank = 本 v2.8 commit」と旧表記（実 record sha は manifest が `7a212b9374e3…` で正しく pin）。cosmetic + manifest-authoritative ゆえ本 PASS を gate しない。次 re-bank 時に header 同期すれば足る（churn 回避のため単独 fix 不要）。
+
+→ **工程 12 完了。pQ は工程 13（最終 SHA のみ pN へ・manifest 込み完全 bundle）へ進める。**
