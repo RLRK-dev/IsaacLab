@@ -1,6 +1,6 @@
 # (d) ARM-CONTROL REMEDIATION — CONTROL DESIGN (VT-DESIGN ruling)
 
-**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-19 08:1x JST。**Status:** DESIGN v1.1 — 0-commit（bank = %12）。v1.1 = **訂正 #1（%12 catch、08:23）**: §5⇄§8-3 の cadence 矛盾（§5=newton_route_env は RL path @4 ハード定数 `newton_skill_env_base.py:95`、§8-3 は「FF@producer-cadence(10)」と記載）→ **裁定 (a) P-D1 = @4 で走行**（§5/§8-3 を整合化。@10 被覆は S-2 producer gate へ移設、knob 追加なし）。
+**Author:** VT-DESIGN (w2:p5)。**Drafted:** 2026-07-19 08:1x JST。**Status:** DESIGN v1.1 — 0-commit（bank = %12）。v1.1 = **訂正 #1（%12 catch、08:23）**: §5⇄§8-3 の cadence 矛盾（§5=newton_route_env は RL path @4 ハード定数 `newton_skill_env_base.py:95`、§8-3 は「FF@producer-cadence(10)」と記載）→ **裁定 (a) P-D1 = @4 で走行**（§5/§8-3 を整合化。@10 被覆は S-2 producer gate へ移設、knob 追加なし）。v1.2 = **訂正 #2（%12 P-D1 pre-run finding `b9eaaf9d93`、08:54）**: M-1 の「XML actuator import に依存しない」前提が実測反転（flag-off build に imported arm actuator 12 本既存 nu=16・未配線 ctrl≡0 = 飽和 torque 隠れ綱引き・proto 配線は重複 24 本、p5 が diag log 3 本を自読 spot-check 済）→ **Option B 採択**（imported 無効化 + proto 配線、§1 M-1 改訂 + §5 L-P0 追加 + §7-5 substrate finding disposition）。M-1 旧前提 = 未検証 build 仮定（#11 と同 class の自認）。⭐L-P6 fail-able assert が走行前に捕捉 = 計器設計の vindication。
 **Input:** `ARM_CONTROL_REMEDIATION_D_ENGBRIEF_RSTECHLEAD_20260719.md`（commit `1ee8be5c9e` = HEAD、p5 全文読了）。
 **Scope:** brief §4 Q1-Q6 + §5 staged approach への設計裁定。**実装認可ではない**（gate chain = §9）。Rs sign-off 前提（brief §0/§5-4）。
 
@@ -33,7 +33,7 @@ FOUNDATIONAL 未解決依存で本 **設計** chunk を block するものなし
 
 ## §1 機構裁定 M-1〜M-6（HOW の骨格）
 
-- **M-1 wiring = gripper mirror そのまま**: builder proto で **12 arm driver DOF/world**（`_ARM_OVERWRITE_LOCAL` = {0-5,14-19} 対応 qd-index）に `joint_target_mode=POSITION` + `joint_target_ke/kd`（値 = §3）+ joint 側 `jnt_actfrcrange=±effort`（`:1636-1638` 同型）。⛔ ur5e.xml の `<general>` actuator import には依存しない（operative path = proto→SolverMuJoCo 合成、gripper と同じ）。**arm-servo-readback assert**（`newton_route_env.py:300-330` の arm 版: mj actuator 存在数 = 12/world・gain/bias/effort 照合 + negative control）を build 時必須に。既存 gripper assert（`servo_acts==4` は gainprm==66.7 filter ゆえ arm 追加と非衝突 — ke=66.7 を arm に使わない限り。§3 の値は非衝突）。
+- **M-1 wiring = imported 無効化 + proto 配線（訂正 #2 = Option B）**: 実測（`pd1_probe_20260719/diag/dump_actuators_baseline.log`、p5 自読）= flag-off build は **nu=16 で ur5e.xml `<actuator>` が既に import 済**（act4-15 = 12 arm、vendor gains、両腕 joint 0-5/14-19 に name-map）だが **未配線**（arm dof `joint_target_mode=0`・`mjw_data.ctrl≡0`、`dump_ctrl_wiring.log`）。proto 配線を足すと**重複 24 本**（`run_smoke_pd.log` assert 実証）。⇒ 設計 = **(i) imported 12 本を無効化**（受入基準: strip-at-import で nu=16 [12 proto + 4 gripper] **または** verifiable-inert 零化で nu=28 [gainprm=biasprm=**0 かつ forcerange=0** を assert]。機構選択 = %12）**+ (ii) proto 配線**（12 arm driver DOF/world に `joint_target_mode=POSITION` + ke/kd + joint 側 `jnt_actfrcrange`、`:1636-1638` 同型）。**Option A（imported を直接駆動）却下 3 点**: ① fail-open — ctrl 書込漏れ経路の既定 = 飽和 pull-to-zero = 本 finding の欠陥そのもの（B の漏れ既定 = 直前 target 保持 = 良性）② `mjw_data.ctrl` 直書きは新規手書き device 面（wc>1 layout 未検証、pin arc の書込面 hazard class）vs `joint_target_pos` = 実証済み面 ③ gripper との機構統一。**L-P6 census 改訂**: 選択機構に応じ「arm 上の実効力源 = design 値の 12 本のみ」（重複ゼロ・inert 検証・gripper 4 本不触・**proto 値 ≡ 無効化した imported 値の数値一致 cross-check**〔同じ vendor 値を別機構で再実装するだけであることの証明〕）+ negative control。
 - **M-2 駆動 = ctrl ストリーム置換（realization 層のみ変更）**: kinematic write が消費していた **同一 target ストリーム**を `control.joint_target_pos[arm_dofs]` に書く。`phys_jqd=0` 零化は**廃止**（速度は物理量になる）。target 生成層（IK / interp / FF indexing / `_per_world_fk_jq` chain）は**不変**。
 - **M-3 command-space 原則**: interp/warm-start chain（`old_fk_jq`/`jq_starts`/`_per_world_fk_jq`）は**指令空間のまま**（realized q から再 seed しない）。理由: lag 下で measured-q 再 seed は軌道を歪め noise を target に結合する。recorded/IK 軌道 = authoritative、realized は obs/verify 用測定のみ。（#18 A2 の frame spec と整合 — あれも recorded=指令空間。）
 - **M-4 teleport⇒target-sync 不変条件**: **許可される全 reset/restore teleport（§4 分類 B）は同一 turn で arm ctrl := 同じ pose を必ず設定**。さもないと PD が直後に stale target へ引き戻す（gripper が comp3 R1a で学んだ同じ罠 `newton_route_env.py:1098-1100` 系）。phase-k restore（`route_executor.py:342-344`）には banked **arm ctrl** の restore を追加（grip_target restore `:346-348` の arm 版）。
@@ -117,7 +117,8 @@ FOUNDATIONAL 未解決依存で本 **設計** chunk を block するものなし
 **目的 = brief §3 の pivotal unknown を最小コストで裁定**: 「MuJoCo arm PD は ±150/±28 N·m 下で（cable+gripper 負荷込み）記録軌道を bar 内追従するか」。
 
 - **環境**: `newton_route_env` **FF whole-route**（(d-a) probe infra 再利用、nominal cell、wc=1、deterministic、cable ON・grasp ON・pin ON）。**cadence = RL path @4 のまま**（`RL_SIM_SUBSTEPS=4` `newton_skill_env_base.py:95`、knob 追加せず）— 根拠: ①trainer 基盤 = @4（DDR #18 title と同一 substrate、(d) の第一目的 = trainer 準拠基盤）②ctrl は frame 単位保持で substep はその内部積分 ⇒ @4 = 粗積分 = PD に等しいか厳しい側 = **conservative**（PASS@4⇒@10 は推論、S-2 で confirm）③基線対照は @4-vs-@4 の同 cadence で cadence 効果が contrast から消える（1 変数規律。@10 knob 追加は #18 substep-confound 軸への再進入 + scope creep）。**移行対象 = per-step drive（:1270 系）のみ**を実験 flag（例 `ARM_PD_DRIVE=1`）で切替 — reset 系 B は不変。read-only branch / 未 land。
-- **基線**: 同 build・同 seed の kinematic 走行（**1 変数差 = realization のみ**。[[feedback-same-constant-is-not-same-measurement-surface]] の統制直適用）。
+- **基線**: 同 build・同 seed の kinematic 走行 = **flag-off AS-IS（imported 綱引き込み・banked substrate と byte 同一）**。**宣言 delta 裁定（訂正 #2）**: PD-vs-基線 contrast = 移行 delta = 〔realization 置換 + artifact（綱引き）除去〕の合成。artifact は現 arm-drive realization の一部（準拠 PD 設計なら必然的に消える）ゆえ主 contrast から除去すべき confound ではない — **成分分離は L-P0 が担う**。
+  0. **L-P0 contamination magnitude（RECOMMENDED、新設）**: kinematic + imported 無効化 vs kinematic 現状、同 seed — 綱引き成分単独の軌道/述語 divergence を定量。**banked evidence caveat の規模判定材料**（Rs 材料、§7-5）。
 - **測定 legs**:
   1. **L-P1 tracking**: per-joint |q−ctrl| 時系列 → phase 別 max/p99（§3.2 bar 採点）+ EE 誤差（FK(q) vs FK(ctrl)）。
   2. **L-P2 predicate parity**: grasp（fingertip l/r_near）/ G1-G3 latch / pin fire（fire_step・anchor）/ seat metrics / retention / drop 有無 — kinematic 基線との対照表。⚠ **一致は期待値でない**（timing shift は想定内）: 採点は「G 系到達 + fire≺release + retention 保持」の述語成立で行い、frame 番号差は宣言 delta として記録。
@@ -126,7 +127,7 @@ FOUNDATIONAL 未解決依存で本 **設計** chunk を block するものなし
   5. **L-P5 negative control（fail-able 計器の証明）**: gains ×0.1 走行 = bar **FAIL すること**（[[feedback-a-test-that-cannot-come-out-differently-is-not-a-test]]）。
   6. **L-P6 build readback**: arm-servo-readback assert（M-1）が 12 actuator/world・gain/bias/effort 一致を報告。
 - **成立 bar**: L-P1/L-P3 が §3.2 暫定 bar 内 ∧ L-P2 述語成立 ∧ L-P5 FAIL ∧ L-P6 PASS。
-- **規模/コスト**: 走行 = 基線1 + PD1 + ramp1 + neg1 = **4 走行 ×〜771 frame、GPU 数分・訓練なし**。
+- **規模/コスト**: 走行 = 基線1 + L-P0 1 + PD1 + ramp1 + neg1 = **5 走行 ×〜771 frame、GPU 数分・訓練なし**（L-P0 を defer するなら 4）。
 - **video leg**: PD 走行の動画を Rs へ（motion-bearing sim ⇒ mandatory；Rs motion 標準 `p2r_c11_route.mp4` と並べて）。
 
 **probe 結果の分岐**: PASS → §6 rollout へ / FAIL(tracking) → gains 感度枠（§8-4）→ 再走 / FAIL(saturation) → **軌道再設計 or 速度 profile 検討 = 別チャンク**（brief §3「re-tuning / re-trajectory effort」側へ分岐、Rs 報告）。
@@ -161,6 +162,7 @@ FOUNDATIONAL 未解決依存で本 **設計** chunk を block するものなし
 2. **residual-on-script**: 意味論が「script が recorded **状態**を実現」→「script が recorded **target** を指令、PD が実現」へ精密化。obs は実状態を読むので closed-loop 補償可能 = **#18 と同じ closed-loop 動機の強化**。ただし **demos は kinematic 実現状態の記録**ゆえ S-2 で再記録必須（§6）。obs の joint 速度由来量は零→実速度に分布変化（bounded by tracking bar、regen で吸収）。
 3. **(d-a)/(d-b) anchors**: fire_step/anchor 凍結値（live 2462 等）は kinematic-lineage。S-1 で **(d-a) probe を PD 基盤で再走し、§8.13 drift-loud 原則そのままに新 standing anchor を宣言 delta 付きで再基線**（bar 構造 = fire≺release / band / 順序は不変、番号のみ更新）。(d-b) は onset 窓を持たない設計（§9 charter）ゆえ構造変更なし — K-dwell の K=3 は physics-frame 単位で PD 下でも同一 cadence（`:1221` per-frame call 不変）、ただし **K の余裕（flicker）を S-1 で 1 leg 再確認**（PD の微小追従振動が capture 述語を flicker させないか）。
 4. **fork-B/#19**: wc=1/proc に ctrl 機構は自然適合。wc>1 復活時は arm-servo readback の per-world 複製 assert（gripper `:314-317` 同型）が守る。
+5. **substrate finding disposition（訂正 #2、`b9eaaf9d93` Implication A への p5 court 裁定）**: imported 綱引き（ctrl≡0 飽和 torque）は **全 banked run の両側に共通の定常背景** ⇒ **banked contrast 系 verdict は内部的に有効のまま**（artifact-vs-artifact の対照だったため、本 finding 単独で遡及 flip なし）。ただし **fidelity 接地系の主張**（物理妥当性・RS71 §4 境界・transfer 方向）には caveat が付く: 隠れ torque = 非物理的力注入・**方向は本測定から不定**（%12 明記に concur）→ **規模 = L-P0 実測 → 再検討 scope の要否 = Rs-visible 判断**。caveat row の custody = %12 bank 時に DDR/LEDGER + p6 relay。**#18-contributor 仮説は 推測 tag のまま維持**（#18 の M2 branch-selection 機構は本件と独立に airtight CONFIRMED — fold 禁止。ただし #18 の PD 基盤再測時に tug 除去が grip margin を動かすかは L-P0/PD 走行が示す — 観測項目として登録）。
 
 ---
 
