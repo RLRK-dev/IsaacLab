@@ -1,19 +1,21 @@
-# WMSO D1.1-A `contracts_v2` — DESIGN (v2.5)
+# WMSO D1.1-A `contracts_v2` — DESIGN (v2.6)
 
 - node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2)
-- created: v1 = 2026-07-19 09:09 JST / v1.1 = 09:24 / v2 = 09:32 / v2.1 = 09:43 / v2.2 = 10:59（editing 完了実測; 旧「10:5x」表記を確定 — 以後 x-mask 廃止）/ v2.3 = 12:07 / v2.4 = 12:41（12:31 に v2.3.1 として着手後、Rs review v3 着信により拡張）/ v2.4.1 = 13:07 / **v2.5 = 13:36 JST（実測）**
-- **status: DESIGN DRAFT v2.5 — pN DESIGN verify ⛔HOLD（B1-B7、13:26）の fold（全項 on-disk 検証で真と確認）→ pS delta 照合 → pN 再 verify（最終 SHA 宛）PENDING**
+- created: v1 = 2026-07-19 09:09 JST / v1.1 = 09:24 / v2 = 09:32 / v2.1 = 09:43 / v2.2 = 10:59（editing 完了実測; 旧「10:5x」表記を確定 — 以後 x-mask 廃止）/ v2.3 = 12:07 / v2.4 = 12:41（12:31 に v2.3.1 として着手後、Rs review v3 着信により拡張）/ v2.4.1 = 13:07 / v2.5 = 13:36 / **v2.6 = 14:16 JST（editing 完了実測; 14:00 着手）**
+- **status: DESIGN DRAFT v2.6 — fold = pN ⛔HOLD B1-B7（v2.5）+ **Rs PLAN_STATUS review v4〔RV4、13:25 原本〕WMSO 全項**（大半 = v2.4-v2.5 で先行治癒・新規 5 点 + transcript 確認解消）+ **full self-contained 化**（RV4 §2.4 推奨 — committed pointer 全 inline）→ pS delta 照合 → pN 再 verify（最終 SHA 宛）PENDING**
 - governing scope: `WMSO_D11_CONTRACT_V2_SCOPE_PREREG_RSTECHLEAD2_20260719.md` v3.2.2, sha256 `71097e58102e100657177b7ead2484bcc00840e4a788e6a295d944f7827d0966`, commit `ea6e39b93c`
 - 兄弟 normative artifacts（pN DESIGN verify の対象; full 64-hex — B-CH5）:
   - **Rs review-4 transcript** = `WMSO_RS_REVIEW4_DESIGN_TRANSCRIPT_20260719.md`, sha256 `8a7915dfa3386889d4efe3cbacb063c0ea20df0f138c8099b84ec64cbab5ad50`（as-received 転記、**Rs 確認 PENDING**; **bank `ac5865b66d`** — v3 W-P0-6 の custody 記録）
   - **Rs PLAN_STATUS review v2（W 系）** = `WMSO_RS_PLAN_STATUS_REVIEW_V2_COPY_20260719.md`, sha256 `dc57d8e10c5ba84d1d66a3977c9ccd98dac24c0bd15f53b0bba9711922e987b6`（bank `320545b477`; **byte-identical file copy — 転記でないため fidelity 確認不要**）〔R-1: full 64-hex 化〕
   - **Rs PLAN_STATUS review v3（W'-系; 対象 = v2.2 + EP v1・supervening）** = `WMSO_RS_PLAN_STATUS_REVIEW_V3_COPY_20260719.md`, sha256 `20da075f9566904e508e22c80cabce9d04d4d61ee9d306268a1a6fe311c6230b`（原本 `~/Downloads/PLAN_STATUS_review_v3_2026-07-19.md` の **byte-identical file copy** — fidelity 確認不要。⚠ **v3 の W-P0-n/W-P1-n は review v2 と別番号系** — 本 doc では常に「v3 W-」接頭辞で引用〔混同防止〕）
-  - **EvidencePolicy v1.3** = `WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md`, sha256 `db51655a1e68f9b48be86618ecd246e0d5a3159b7911cdd0c32c42f1c07455fa`
+  - **Rs PLAN_STATUS review v4（RV4; 対象 = v2.3 + EP v1.1 期 package）** = `WMSO_RS_PLAN_STATUS_REVIEW_V4_COPY_20260719.md`, sha256 `338bdaf75a993ac2a0871d7cc975fd13fb464063323fc59ad7a356996c4f860c`（原本 `~/Downloads/PLAN_STATUS_review_v4_2026-07-19.md` の byte-identical file copy — fidelity 確認不要）
+  - **EvidencePolicy v1.4** = `WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md`, sha256 `5f6023eb61583ce04c9b7734b783bed266a9ff9def6b390bb064127d753573de`
   - pS design-verify record = `WMSO_D11A_DESIGN_VERIFY_WMSODESIGN_20260719.md`（banked `cd5482310d`; 現行版は pS 管理 — B-CH1 の host pin）
-- version 履歴: v1 (prefix `8bec472a6ac1` — content 非保全) → v1.1 (prefix `b807ce2abbd7` — 同) → v2 (prefix `4880dc0d6c6d` — 同) → v2.1 (full `c49ff132ff200257085f072c875c58e3200754ac74ee28de8634b786ab2681e7`, bank `cd5482310d`) → v2.2 (full `3a1577f89dfa3d3c7fa642c938f56a4ff05ab60e14b57194cb3368f7ddcb95f3`, bank `ac5865b66d`) → v2.3 (full `94a42a0ea73a08d2b85be562373322c5ebfd65f49393183b9cf7fff68040f192`, bank `efc355e52d`; **pS 全行照合 = PASS-WITH-CONDITIONS R-1..R-3**〔verify record §9〕) → v2.4 (full `772f346c32cf15f11e3c62fa14ed1342f87b7bcf0acc9e8d0ea2a93f885986d7`, bank `130813e934`; **pS 全行照合 = PASS-WITH-CONDITIONS F-1/F-2**〔verify record §10, sha `609e7a35722b…`; R-1..R-3 = 3/3 discharge・register ⑥ 解 = 検証済で pS 推奨より正当・v3 9 項 = faithful〕) → v2.4.1 (full `8310cb6fd3f8f23929fc1479f734141e481d9b3641f3227d798e311084dad15c`, bank `ba10218549`; **pS FINAL CONFIRM = PASS**〔record §11〕→ **pN DESIGN verify = ⛔HOLD B1-B7**〔13:26 実測・時刻訂正済; 全項 pQ on-disk 検証で真〕) → **v2.5 (本版 — B1-B7 fold)**。以後毎版 bank。
-- 駆動要件（host 付き — B-CH1/A-CH5 修正）: prereg §2 IN / prereg §10 (a)-(d)〔旧ラベル §5b〕/ N-1・N-2（= **pS ratify doc §8 ADDENDUM C1** の carried 2 点）/ DC-1..DC-6（**prereg §10b**）/ review-4 P0・P1・T・OP（transcript）/ **W-P0-1..4・W-P1-1..6（W-review copy — supervening Rs review）**/ **v3 W-P0-1..6・v3 W-P1-1..3（review v3 copy — 後発 supervening; §11 W'→fold-map）**/ pS D・V・R 系 / CC Debate cycle-1 U1-U19 + cycle-2 findings（verification-log task-WMSO-D11A-design-debate-001 cycle 1・2; **cycle-1 の記録上 overall = "REVIEW"** — accepted CRITICAL を skill 表で FAIL 扱いした運用注記 = D-CH7）。「review-1 P0-n」（v1 コード欠陥）と「review-4 P0-n」（設計修正）は別番号系 — 常に接頭辞付き。
-- **SSOT supersession register（enumerated-only — B-CH6/NHA）**: 本 design が prereg 文言を supersede するのは**以下に列挙した点のみ**。未記録の分岐 = 欠陥であり precedence では解決しない（prereg §9 loop へ）。① DC-2 timing（TENSOR_BINDING/CONTROL_MODE enum 即時追加）— **B1 で典拠を再接地: prereg §10b DC-2 自身の「§4 の 7 component は『最低限』」floor 文言により即時追加は floor 内で整合（supersession でなく floor 内追加へ再分類; transcript P0-4 は補強典拠に降格 — 未確認 transcript への normative 依存を除去）**② prereg §5 表 7→5 行（DC-5 実行）③ prereg §7b「SkillDefinitionHash」→ draft_definition_hash 読み（§6-8）④ **〔B5 で撤回・整列済〕** 旧「per-component min_grade（TP/TD ≥2）が prereg §4 uniform 読みを精緻化 supersede」は **human-ruled ceiling の変更権限が設計内宣言に無く不成立** — EvidencePolicy v1.3 で CLOSED_LOOP 全 required min_grade ≥3 に整列し、per-component 判定は Rs 確定表と**同値**（supersession 消滅。per-component は評価機構としてのみ残る）⑤ **DC-6 の bounded 例外 = §6-4 の retained-in-v1 guard（D1.1-C 後継まで; D-CH2）**⑥ **review v2 W-P0-2 sketch の `external_gate_state` 引数 → review v3 W-P0-3 sketch（4 引数・「Acceptance tests, O0/S0/V0 two-key, and safety gates remain external conjuncts」）が supersede**（Rs 自身の後発 text; pS R-2 の推奨〔v2 sketch 採用〕より優先 — §5A2）⑦ **prereg §10b DC-2 の文言「evidence_policy_hash」→ certificate は `evidence_policy_semantic_hash` を結合**（v3 W-P1-3 が典拠; doc sha は custody 層に残置 — F-2）。EvidencePolicy の表実体は §4 の規則どおり artifact 側が normative。
-- **参照規約**: 本 doc 内の「v2.2 のまま」「v2.2 §N のまま」は全て **banked commit `ac5865b66d` の blob**（sha `3a1577f89dfa…`）を指す committed pointer である（U2 で sanctioned の形式 — 消滅版参照ではない。`git show ac5865b66d:<path>` で常時復元可能）。
+- version 履歴: v1 (prefix `8bec472a6ac1` — content 非保全) → v1.1 (prefix `b807ce2abbd7` — 同) → v2 (prefix `4880dc0d6c6d` — 同) → v2.1 (full `c49ff132ff200257085f072c875c58e3200754ac74ee28de8634b786ab2681e7`, bank `cd5482310d`) → v2.2 (full `3a1577f89dfa3d3c7fa642c938f56a4ff05ab60e14b57194cb3368f7ddcb95f3`, bank `ac5865b66d`) → v2.3 (full `94a42a0ea73a08d2b85be562373322c5ebfd65f49393183b9cf7fff68040f192`, bank `efc355e52d`; **pS 全行照合 = PASS-WITH-CONDITIONS R-1..R-3**〔verify record §9〕) → v2.4 (full `772f346c32cf15f11e3c62fa14ed1342f87b7bcf0acc9e8d0ea2a93f885986d7`, bank `130813e934`; **pS 全行照合 = PASS-WITH-CONDITIONS F-1/F-2**〔verify record §10, sha `609e7a35722b…`; R-1..R-3 = 3/3 discharge・register ⑥ 解 = 検証済で pS 推奨より正当・v3 9 項 = faithful〕) → v2.4.1 (full `8310cb6fd3f8f23929fc1479f734141e481d9b3641f3227d798e311084dad15c`, bank `ba10218549`; **pS FINAL CONFIRM = PASS**〔record §11〕→ **pN DESIGN verify = ⛔HOLD B1-B7**〔13:26 実測・時刻訂正済; 全項 pQ on-disk 検証で真〕) → v2.5 (full `2f0a706833b024f25e992c29791dfd2ab0837622ac5e58f2bea2abfd97c1dfac`, bank `59b7720408` — B1-B7 fold + pS record bank) → **v2.6 (本版 — RV4 fold + full self-contained 化)**。以後毎版 bank。
+- **review ID 完全修飾規約（RV4 §1.3）**: Rs review 引用は **RV2- / RV3- / RV4- / R4-（review-4 transcript）** 接頭辞で完全修飾する。本 doc 既出の「W-P0-n（v2 系）」= RV2-W-P0-n、「v3 W-P0-n」= RV3-W-P0-n と同値（fold-map §11 で対応）。
+- 駆動要件（host 付き — B-CH1/A-CH5 修正）: prereg §2 IN / prereg §10 (a)-(d)〔旧ラベル §5b〕/ N-1・N-2（= **pS ratify doc §8 ADDENDUM C1** の carried 2 点）/ DC-1..DC-6（**prereg §10b**）/ review-4 P0・P1・T・OP（transcript）/ **W-P0-1..4・W-P1-1..6（W-review copy — supervening Rs review）**/ **RV3 = v3 W-P0-1..6・v3 W-P1-1..3（review v3 copy; §11 W'→fold-map）**/ **RV4 全項（review v4 copy — 最後発 supervening; §11 RV4→fold-map）**/ pS D・V・R・F 系 / **pN DESIGN verify B1-B7（§11 B→fold-map）**/ CC Debate cycle-1 U1-U19 + cycle-2 findings（verification-log task-WMSO-D11A-design-debate-001 cycle 1・2; **cycle-1 の記録上 overall = "REVIEW"** — accepted CRITICAL を skill 表で FAIL 扱いした運用注記 = D-CH7）。「review-1 P0-n」（v1 コード欠陥）と「review-4 P0-n」（設計修正）は別番号系 — 常に接頭辞付き。
+- **SSOT supersession register（enumerated-only — B-CH6/NHA）**: 本 design が prereg 文言を supersede するのは**以下に列挙した点のみ**。未記録の分岐 = 欠陥であり precedence では解決しない（prereg §9 loop へ）。① DC-2 timing（TENSOR_BINDING/CONTROL_MODE enum 即時追加）— **B1 で典拠を再接地: prereg §10b DC-2 自身の「§4 の 7 component は『最低限』」floor 文言により即時追加は floor 内で整合（supersession でなく floor 内追加へ再分類; transcript P0-4 は補強典拠に降格 — 未確認 transcript への normative 依存を除去）**② prereg §5 表 7→5 行（DC-5 実行）③ prereg §7b「SkillDefinitionHash」→ draft_definition_hash 読み（§6-8）④ **〔B5 で撤回・整列済〕** 旧「per-component min_grade（TP/TD ≥2）が prereg §4 uniform 読みを精緻化 supersede」は **human-ruled ceiling の変更権限が設計内宣言に無く不成立** — EvidencePolicy v1.3 で CLOSED_LOOP 全 required min_grade ≥3 に整列し、per-component 判定は Rs 確定表と**同値**（supersession 消滅。per-component は評価機構としてのみ残る）⑤ **DC-6 の bounded 例外 = §6-4 の retained-in-v1 guard（D1.1-C 後継まで; D-CH2）**⑥ **review v2 W-P0-2 sketch の `external_gate_state` 引数 → review v3 W-P0-3 sketch（4 引数・「Acceptance tests, O0/S0/V0 two-key, and safety gates remain external conjuncts」）が supersede**（Rs 自身の後発 text; pS R-2 の推奨〔v2 sketch 採用〕より優先 — §5A2）⑦ **prereg §10b DC-2 の文言「evidence_policy_hash」→ certificate は `evidence_policy_definition_hash` を結合**（RV3-W-P1-3 が典拠・命名 = RV4 §2.3; policy_document_sha256 は custody 層に残置 — F-2）。EvidencePolicy の表実体は §4 の規則どおり artifact 側が normative。
+- **self-contained 宣言（RV4 §2.4 — 旧 参照規約を置換）**: v2.6 は **normative 内容を全て本 doc + 兄弟 artifact に inline** した完全 snapshot である（transfer package 単体で再構築可能 — repo/git show 不要）。旧「v2.2 のまま」pointer は本版で全 inline 済み（歴史 blob = `ac5865b66d`、参照は provenance 用のみ）。
 - ⛔ 本 doc は設計のみ。code / [CHANGE] / impl は pN DESIGN PASS → pre-check → rule-check → path freeze / impl GO まで CLOSED。
 
 ---
@@ -24,7 +26,8 @@
 Static:        DraftSkillDefinition（UNKNOWN 可・final ActionId なし）/ SkillDefinition
 Provenance:    TrainingProvenance / EvidenceBundle / EvidencePolicy（兄弟 artifact）
 Certification: certify_definition() → ValidationReport → (valid のみ) ContractCertificate   … profile 中立（W-P0-2）
-Eligibility:   evaluate_usage_eligibility() → UsageEligibilityReport                       … profile 別・certificate-first・現行 policy で評価（W-P0-2 / v3 W-P0-3; gate 群は external conjuncts）
+Eligibility:   evaluate_usage_eligibility() → UsageEligibilityReport                       … profile 別・certificate-first・現行 policy で評価（RV2-W-P0-2 / RV3-W-P0-3）
+Authority:     evaluate_authority_grant() → AuthorityDecision                              … RV4 §2.2 — eligibility と権限付与を型で分離（gate 群はこちらの入力）
 Runtime:       SkillInvocation / SkillOutcome / HandoffOffer / TransitionRecord
 Runtime val.:  validate_invocation_start(now) / validate_outcome() / validate_handoff()     … certificate を無効化しない
 ```
@@ -117,7 +120,7 @@ class SkillDefinition:
     # recovery_rollback_target は v2.3 で削除 — §6-3 の loud-discard へ（NHA: 消費者不在 field を validator 盲点付きで carry しない。recovery 層 chunk で schema bump 再導入）
 ```
 
-構成型（「≡ v1」= committed `57ed32b27a` の同名型と **field 同一（改名 or 宣言された dtype 変更のみ — A-CH8）**）: SemanticFieldSpec ≡ FieldSpec + 全数値検証 / InitiationSpec ≡ InitiationPredicate / TerminationSpec = {declared_classes（非空 frozenset）, predicate_schema_ref, predicate_schema_hash} / CheckpointSpec = {checkpoint_id, resume_state_schema | None} / HandoffSchemaSpec = {handoff_schema_id, schema_version（**形式 "MAJOR.MINOR"、major = 最初の int** — A-CH8）, fields, required_field_ids} / AcceptedHandoffSpec = {producer_skill_id, handoff_schema_id, schema_major_version} / ResumeCapability(3値) / SupportBoundary ≡ v1 / FreshnessPolicy ≡ Freshness（max_staleness_s: CanonicalDecimal | None — dtype 変更宣言） / Ownership ≡ v1（**control dict の key 語彙 = §6-3 で pin**） / ControlResourceSpec = {ee_left, ee_right, gripper_left, gripper_right: bool} / BeliefRef 系・ProducerOutcome・enums ≡ v1 / ExecutionFamily = {PPO, DAPG, BC, SCRIPTED, WAIT} / TrainingLineage = {RL_ONLY, BC_ONLY, BC_THEN_RL, NOT_APPLICABLE} / SchemaRegistry = {definitions_by_id}（standalone test = fixture registry。**B7 canonical projection**: `schema_registry_hash` = H_WCJ({"schemas": [{"schema_id", "definition_hash"}…]})、schema_id = 非空 NFC str・UTF-8 bytes 昇順 sort・definition_hash = 当該 schema 定義の H_WCJ。**登録済み定義のみ含む — Draft 由来は含めない**（certificate が不安定内容に依存しない）。重複 schema_id = `E_REGISTRY_DUPLICATE`（fail-closed）。挿入順に不変・1 entry 差で hash 相違 = §8 A/B golden） / MigrationReport = {issues: tuple[ValidationIssue, ...], discards: tuple[str, ...]}。
+構成型（「≡ v1」= committed `57ed32b27a` の同名型と **field 同一（改名 or 宣言された dtype 変更のみ — A-CH8）**）: SemanticFieldSpec ≡ FieldSpec + 全数値検証 / InitiationSpec ≡ InitiationPredicate / TerminationSpec = {declared_classes（非空 frozenset）, predicate_schema_ref, predicate_schema_hash} / CheckpointSpec = {checkpoint_id, resume_state_schema | None} / HandoffSchemaSpec = {handoff_schema_id, schema_version（**形式 "MAJOR.MINOR"、major = 最初の int** — A-CH8）, fields, required_field_ids} / AcceptedHandoffSpec = {producer_skill_id, handoff_schema_id, schema_major_version, **producer_handoff_schema_hash**〔RV4 §2.6: producer 複数 variant の曖昧性除去 — content-addressed schema hash が compatibility 評価対象を一意化（Rs 提示 4 案中「最も再現性が高い」schema content hash を採用）。migration: v1 に無い → registry fixture 供給（§6-1 同権）or UNKNOWN→Draft〕} / ResumeCapability(3値) / SupportBoundary ≡ v1 / FreshnessPolicy ≡ Freshness（max_staleness_s: CanonicalDecimal | None — dtype 変更宣言） / Ownership ≡ v1（**control dict の key 語彙 = §6-3 で pin**） / ControlResourceSpec = {ee_left, ee_right, gripper_left, gripper_right: bool} / BeliefRef 系・ProducerOutcome・enums ≡ v1 / ExecutionFamily = {PPO, DAPG, BC, SCRIPTED, WAIT} / TrainingLineage = {RL_ONLY, BC_ONLY, BC_THEN_RL, NOT_APPLICABLE} / SchemaRegistry = {definitions_by_id}（standalone test = fixture registry。**B7 canonical projection**: `schema_registry_hash` = H_WCJ({"schemas": [{"schema_id", "definition_hash"}…]})、schema_id = 非空 NFC str・UTF-8 bytes 昇順 sort・definition_hash = 当該 schema 定義の H_WCJ。**登録済み定義のみ含む — Draft 由来は含めない**（certificate が不安定内容に依存しない）。重複 schema_id = `E_REGISTRY_DUPLICATE`（fail-closed）。挿入順に不変・1 entry 差で hash 相違 = §8 A/B golden） / MigrationReport = {issues: tuple[ValidationIssue, ...], discards: tuple[str, ...]}。
 DraftSkillDefinition = 同 field 集合・bundle に UNKNOWN 可・draft_definition_hash のみ発行。
 
 ### 1.5 identity / hash（v2.2 から不変 + C-CH9 文言修正）
@@ -151,9 +154,22 @@ strict decode 済み正規 object の WCJ hash。SCRIPTED schedule = `[{op, args
 
 ---
 
-## 3. lineage 許容表（v2.2 から 1 点明示化）
+## 3. lineage 許容表（full inline — RV4 §2.4）
 
-表 5 行（PPO×RL_ONLY / PPO×BC_THEN_RL / BC×BC_ONLY / SCRIPTED×N/A / WAIT×N/A; 必須 hash / null 必須 / source-closure 列付き）は v2.2 §3 のまま。ただし **BC×BC_ONLY 行の null 列を明示**（C-CH10/A-CH7）: `bc_base_hash = null / bc_config_hash = null`（BC 単独訓練に RL stage も base 概念も無い。v1 "BC" migration で config hash が現れた場合は `E_MIGRATE_BC_CONFIG_UNEXPECTED` として fail-close — 推測写像しない）。§3-2 source-closure・coherence・N-1・demo 執行 = v2.2 のまま + 下記 §3-3 で決定論仕様を pin。
+**許容表（validator の唯一の許容源; 表外 = `E_LINEAGE_FORBIDDEN`、unknown enum = `E_ENUM_UNKNOWN`; 照合対象 = TrainingProvenance）**:
+
+| # | execution_family | training_lineage | 必須 hash | null 必須 | source-closure |
+|---|---|---|---|---|---|
+| 1 | PPO | RL_ONLY | final_artifact_hash | bc_base / bc_config / demo_dataset = null | null |
+| 2 | PPO | BC_THEN_RL | bc_base + bc_config + final_artifact_hash | —（demo は hash か absent_reason — §1.3） | null |
+| 3 | BC | BC_ONLY | final_artifact_hash | **RL stage fields = null: `bc_base_hash = null / bc_config_hash = null`**（C-CH10/A-CH7 — BC 単独訓練に RL stage も base 概念も無い。v1 "BC" migration で config hash 出現 = `E_MIGRATE_BC_CONFIG_UNEXPECTED` fail-close） | null |
+| 4 | SCRIPTED | NOT_APPLICABLE | —（executable = closure aggregate） | final/bc/demo 全 null | **必須** |
+| 5 | WAIT | NOT_APPLICABLE | — 同上 | 同上 | **必須** |
+
+- **§3-2 source-closure（U6 — prereg §5 の fail-closed 挙動を継承）**: SCRIPTED/WAIT の `executable_artifact_hash` = enumerated closure member の aggregate sha256（決定論仕様 = §3-3）。member 欠落 = fail-closed（v1 `validate_source_closure` と同挙動; error code = §3-3）。closure member 列は runtime_config でなく registry fixture が保持。
+- **prereg §5 表（7 行）との関係**: DAPG 2 行は DC-5 により除外（本表 5 行が supersede — register ②）。
+- coherence: IdentityKind ↔ ExecutionFamily（LEARNED⇔{PPO,BC}, SCRIPTED⇔SCRIPTED, WAIT⇔WAIT; `E_KIND_FAMILY_MISMATCH`）+ kind ↔ control_mode 値（§1.2 表 — U15）。
+- N-1: 本表は構造的許容規則。歴史 artifact の分類 verdict は evidence 過程（§4）の専管。demo hash 執行（D-2）: §1.3 のとおり。
 
 ### 3-3. source-closure hash の決定論仕様（v3 W-P1-1 — SkillActionId 参加の前提）
 
@@ -164,6 +180,7 @@ strict decode 済み正規 object の WCJ hash。SCRIPTED schedule = `[{op, args
 4. **改行/内容**: h_i = **committed bytes そのまま**の sha256（line-ending 変換・filter 一切なし）。
 5. **合成形式**: 上記 WCJ array の hash（連結文字列でなく keyed object — 区切り曖昧性なし）。
 6. **重複 path**: 正規化後の重複 = `E_CLOSURE_DUPLICATE_PATH`（fail-closed; 正規化前の見かけ違い同一 path を検出）。
+7. **member 欠落/読取不能**（RV4 §2.5 追補）: `E_CLOSURE_MEMBER_UNREADABLE`（fail-closed — v1 FileNotFoundError 挙動の typed 化）。
 
 ### 3-4. behavior_revision の registry 不変量（v3 W-P1-2 + B3 完全化 — 手動 valve の機械 backstop）
 
@@ -171,6 +188,7 @@ strict decode 済み正規 object の WCJ hash。SCRIPTED schedule = `[{op, args
 - **key = 4-way identity scope 完全形 `(namespace, skill_id, variant, behavior_revision)`**（旧 (skill_id, brev) は ns/variant 違いの正当な並存を誤検出 — 撤回）。
 - **比較対象 = `BehaviorSignature` = H_WCJ(SkillDefinition の全 static field のうち {identity 入力群, ExecutionBundle, TrainingProvenance, 記録専用 field} を除く全て)** — **補集合定義**（列挙漏れ構造を排除; 新 field は既定で signature 入り = fail-closed）。現行 field では initiation_spec / termination_spec / checkpoint_specs / handoff_schema / accepted_handoff / resume_capability / resume_state_schema / required_control_resources / support_boundary / freshness_policy / fail_closed_action の **11 面**。
 - registry 登録時、同 key の既存 entry と BehaviorSignature 不一致 → `E_BEHAVIOR_REVISION_STALE`（fail-closed）。ActionId は不変のまま、忘却は登録境界で機械捕捉される。**mutation corpus = 11 面それぞれ 1 変異 → 全て検出**（§8）。
+- **RV4 §2.5 との関係（loud 記録・Rs 判断事項）**: RV4 は「BehaviorSignatureHash を ActionId へ含める（前者）」を**推奨**しつつ registry validator 案も許容する（「または registry diff validator で…拒否」逐語）。本設計は **registry 案を維持**: 理由 = (a) RV2 で批准済みの identity 4-way split に第 5 入力を足さない (b) RV4 の具体懸念例（callable 変更 + revision 忘却）は **B2 の callable_selector bundle 編入で ActionId 側でも既に解消済み** (c) 残余面は本不変量が fail-closed で覆う。Rs が前者を明示指定する場合は schema bump で移行（1 行変更で可能な構造）。
 
 ---
 
@@ -214,7 +232,7 @@ class EvidenceBundle:
 ```
 
 - `evidence_bundle_hash` = H_WCJ(records の hash-visible 部分〔notes 除外〕、component_kind 順)。record 入力順に不変（metamorphic #8）、ProofItem 入力順に不変（metamorphic #9 — R-3）。
-- **全表 = EvidencePolicy v1.2**（sha 冒頭; **total map〔(component, grade, applicability_class)〕・ApplicabilityResolver・3 cell exact 化・DC-3 準拠復元・ProofItem 順序/conflict・EXPLICIT_NONE 免除・per-component 意味論・semantic hash** を含む）。
+- **全表 = EvidencePolicy v1.4**（sha 冒頭; **total map〔(component, grade, applicability_class)〕・ApplicabilityResolver・3 cell exact 化・DC-3 準拠復元・ProofItem 順序/conflict・§3d 束縛規則・EXPLICIT_NONE 免除・per-component 意味論・二層 hash** を含む）。
 - **applicability**（v3 W-P0-1）= EP §3c `ApplicabilityResolver(kind, lineage, component) → REQUIRED(min_grade) | NOT_APPLICABLE | OPTIONAL`。**N/A ≠ UNKNOWN**（N/A = validated 不存在・集約除外 / UNKNOWN = 知識不足・失格）。
 - CLOSED_LOOP required に TRAINING_PROVENANCE ≥2（U12/W-P1-4）。missing = UNKNOWN(0)。
 - ceiling / two-key conjoin / 「条件付き」cell 定義 = 従来どおり。
@@ -227,7 +245,9 @@ class EvidenceBundle:
 
 `certify_definition(definition, evidence_bundle, evidence_policy, schema_registry) → DefinitionCertificationResult`
 
-- 検査 = 値単体（v2.2 §5A 全項目 + **E_SKILL_UNREGISTERED**〔skill_id ∉ SKILL_ID_REGISTRY — B-CH7〕+ **E_SLOT_NONE_UNPROVEN**〔§1.2†〕+ **E_CALLABLE_REF_KIND_MISMATCH**）/ identity 整合 / 静的 lifecycle 内部整合 / **evidence = 「present な claim の well-formedness と ProofPolicy 適合」のみ**（**profile 充足は検査しない** — 第 3 解釈の明文化）。
+- **値単体検査の全項目（inline — U2 / RV4 §2.4）**: 全 ID/unit/schema_ref/namespace 非空（whitespace-only = `E_ID_EMPTY`）/ shape 全次元 `type(x) is int` かつ >0（bool-as-shape 拒否）/ isfinite: timestamp・duration・cost・TTL・confidence・progress・p50・p95・std・全 bounds・normalization mean/std・scale/bias〔本 chunk の型に現れない量（p50/p95/std 等）は §6-3 deferred-with-object 注記に従い D1.1-B/D2 で適用 — U13〕/ 範囲: TTL>0・confidence/progress∈[0,1]・duration/cost≥0・p50≤p95・std≥0（CanonicalDecimal は decimal.Decimal 演算）/ hash 64-hex 小文字（`E_HASH_MALFORMED`）/ NFC（`E_ID_NOT_NFC`）/ **E_SKILL_UNREGISTERED**〔skill_id ∉ SKILL_ID_REGISTRY — B-CH7〕/ **E_SLOT_NONE_UNPROVEN**〔§1.2†〕/ **E_CALLABLE_REF_KIND_MISMATCH**〔callable 行 — B2〕/ **E_CALLABLE_SELECTOR_MALFORMED**。
+- identity 整合 = §3 表・coherence・E_DEMO_HASH_MISSING・E_PROVENANCE_ARTIFACT_MISMATCH（learned のみ）。静的 lifecycle 内部整合 = checkpoint/handoff id 重複禁止・RESUME_WITH_STATE ⇔ resume_state_schema・accepted_handoff の静的互換（§5D 規則を registry の producer 定義に対し — **producer 特定 = producer_handoff_schema_hash、RV4 §2.6**）。Draft 入力 = 検査は走るが certificate 不発行（`E_BUNDLE_UNRESOLVED` を含む report のみ）。
+- **evidence = 「present な claim の well-formedness と ProofPolicy/束縛規則（EP §3d）適合」のみ**（**profile 充足は検査しない** — 第 3 解釈の明文化）。
 - 出力 = ValidationReport（issues 安定順 = **(code, field_path, message)** — C-CH10）→ valid のみ ContractCertificate:
 
 ```python
@@ -235,7 +255,7 @@ class EvidenceBundle:
 class ContractCertificate:
     skill_definition_hash: str; skill_action_id: str
     evidence_bundle_hash: str
-    evidence_policy_semantic_hash: str  # v3 W-P1-3: EP §6 の H_WCJ(policy_object) — 文書編集で不変・規則変更でのみ変わる（doc sha は custody 層）
+    evidence_policy_definition_hash: str  # RV3-W-P1-3 + RV4 §2.3 命名: EP §6 の H_WCJ(policy_object) — 文書編集で不変・規則変更でのみ変わる（policy_document_sha256 は custody 層）
     schema_registry_hash: str          # W-P0-3 / v3 W-P0-2: H_WCJ(registry 内容) — registry A/B での結果差を certificate に固定
     explicit_none_components: tuple[str, ...]  # certified EXPLICIT_NONE slot の ComponentKind.value 昇順 — 不存在 attest の可搬形（EP §3c instance 層の入力; certificate-first を可能にする）
     identity_kind: str                 # F-1: IdentityKind.value（certify 時に definition から抽出）— EP §3c resolver の kind 依存規則を certificate 単独で計算可能に
@@ -244,29 +264,42 @@ class ContractCertificate:
     issued_at: float                   # 同一性判定外
 ```
 
-### 5A2. usage eligibility（**別 API** — W-P0-2 / **signature = v3 W-P0-3 sketch 逐語採用**〔register ⑥: v2 sketch の external_gate_state を supersede〕）
+### 5A2. usage eligibility（**別 API** — RV2-W-P0-2 / **signature = RV3-W-P0-3 sketch、param 名 = RV4 §2.2 で `requested_profile` に確定**〔register ⑥〕）
 
 ```python
 evaluate_usage_eligibility(
     certificate,               # certificate-first — 未認証 definition の eligibility 評価を型で不可能に
     evidence_bundle,           # certificate.evidence_bundle_hash と一致検査（不一致 = E_CERT_INPUT_MISMATCH、fail-closed）
-    current_evidence_policy,   # 「現行」policy — 旧 certificate は歴史的に valid のまま、現行 policy が厳格化していれば ineligible（v3 W-P0-3 の意味論）
-    usage_profile,
+    current_evidence_policy,   # 「現行」policy — 旧 certificate は歴史的に valid のまま、現行 policy が厳格化していれば ineligible（RV3-W-P0-3 の意味論）
+    requested_profile,         # RV4 §2.2 の命名（RV3 の usage_profile と同一 semantics — 後発 Rs text 優先）
 ) -> UsageEligibilityReport
 
 @dataclass(frozen=True)
-class UsageEligibilityReport:          # field 集合 = v3 W-P0-3 の指定どおり
-    usage_profile: str
+class UsageEligibilityReport:          # field 集合 = RV3-W-P0-3 の指定どおり
+    requested_profile: str
     applicable_components: tuple[str, ...]        # resolver 通過分（NOT_APPLICABLE/OPTIONAL は除外され、免除は issues でなく exemptions に loud 記録）
     exemptions: tuple[str, ...]                   # EXPLICIT_NONE 免除の component（EP §4 の loud 記録）
     effective_grades: tuple[tuple[str, str], ...] # (component, 達成 grade) — missing = UNKNOWN
     issues: tuple[ValidationIssue, ...]           # 安定 code; (code, field_path, message) 順
-    evidence_policy_semantic_hash: str            # 評価に使った現行 policy
+    evidence_policy_definition_hash: str          # 評価に使った現行 policy（RV4 命名）
     eligible: bool
 ```
 
 - 判定 = EP §3c resolver → applicable へ per-component `達成 grade ≥ min_grade`（EP §4）。resolver の (kind, lineage) 入力 = `certificate.identity_kind` / `certificate.training_lineage`（F-1 — definition 実体なしで全 3 層が計算可能）。
-- ⛔ **certificate ≠ authority grant / eligible ≠ authority grant**: acceptance test・O0/S0/V0 two-key・独立安全 gate は **external conjuncts のまま**（v3 W-P0-3 逐語 — 本 API の入力にしない。v2 sketch の external_gate_state 引数は register ⑥ で superseded）。profile は後段で何度でも（現行 policy で）再評価可。
+- ⛔ **certificate ≠ authority grant / eligible ≠ authority grant**: acceptance test・O0/S0/V0 two-key・独立安全 gate は eligibility API の入力にしない（RV3-W-P0-3 逐語; RV2 sketch の external_gate_state 引数 = register ⑥ で superseded）。profile は後段で何度でも（現行 policy で）再評価可。
+
+### 5A3. authority grant（**別 API** — RV4 §2.2 が新設指定: 「権限付与は別APIにする」）
+
+```python
+evaluate_authority_grant(
+    eligibility_report,        # §5A2 の出力（eligible == True が前提条件 — False = 即 DENY）
+    acceptance_state,          # 独立 acceptance test の結果 record（PASS/FAIL/UNKNOWN + evidence_ref）
+    two_key_state,             # O0/S0/V0 two-key の状態 record
+    safety_gate_state,         # 独立安全 gate の状態 record
+) -> AuthorityDecision         # {granted: bool, denials: tuple[str, ...], inputs の hash/ref 束縛}
+```
+
+- **RV4 の意図**: evidence eligibility と authority を**再び混同しない** — conjoin は prose でなく本 API の型で機械可視。gate state の UNKNOWN/欠落 = fail-closed DENY。two-key/安全 gate の実体・充足規則は O0/S0/V0 層（本 chunk 外）— 本 API は conjoin 判定面のみ定義。closed-loop 実運転権限は本 API の granted == True を必要条件とする（十分条件ではない — 上位 orchestrator gate は自由に追加可）。
 
 ### 5B. 実行時 lifecycle validation（W-P1-6 反映）
 
@@ -289,22 +322,56 @@ validate_invocation_start(invocation, definition, belief, now: float) -> Lifecyc
 validate_outcome(invocation, outcome, definition) -> LifecycleValidationReport
 validate_handoff(invocation, offer, producer_definition, consumer_definition) -> HandoffValidationReport
 ```
-検査内容 = v2.2 §5B と同一（ownership 比較 = **required ⊆ offered** の bool 包含 — D-CH5）。certificate を無効化しない。
+検査内容（inline）: `validate_invocation_start` = initiation predicate / freshness_policy 評価（明示 `now`）/ required_control_resources vs 実 ownership（比較 = **required ⊆ offered** の bool 包含 — D-CH5）。`validate_outcome` = terminal ∈ declared_classes / interrupt checkpoint ∈ checkpoint_specs / duration・cost 有限非負 / invocation_id 一致。`validate_handoff` = offer.handoff_schema_id ∈ producer 宣言 / producer_invocation_id 一致 / control_epoch 単調 / §5D 互換。**certificate を無効化しない**。
 
-### 5C. codec / 5D. handoff compatibility = v2.2 のまま。
+### 5C. codec（strict decoder — inline）
+duplicate key 拒否 / NaN・±Inf 拒否 / unknown field 拒否 / enum strict（unknown = `E_ENUM_UNKNOWN`）/ lone surrogate 拒否。hash 入力経路で素の `json.loads` を使わない。
+
+### 5D. handoff compatibility 規則（inline）
+consumer required ⊆ producer fields / dtype・shape・unit・frame 完全一致 / schema major version 一致 / producer 追加 optional 可 / 暗黙変換禁止（変換は後続 transition adapter）。**producer 定義の特定 = AcceptedHandoffSpec.producer_handoff_schema_hash（content-addressed — RV4 §2.6）**。
 
 ---
 
 ## 6. Migration v1→v2
 
 ### 6-1. 入力 domain・分割・**Draft statics 規則（D-CH1）**
-- identity-pinned 6/9 → Draft / identity-less 3/9 → `E_MIGRATE_IDENTITY_ABSENT`（v2.2 のまま）。
+- **入力 = v1 `skill_contracts_manifest.json` の rows + 構築可能な v1 契約 instance**。identity-pinned 行（実測 6/9: APPROACH_CABLE / INSERT_INTO_CLIP / TRANSPORT / RECLAMP_L / HALF_UNCLAMP_RELEASE / CLIP_CONFIRM）→ DraftSkillDefinition / identity 無し行（実測 3/9: CLAMP / UNCLAMP / AERIAL_REGRASP — INADMISSIBLE_*、artifact hash 皆無）→ `E_MIGRATE_IDENTITY_ABSENT`（loud 拒否・Draft を作らない。**placeholder hash の発明 = review-1 P0-2 の再導入につき禁止**）。完全復元可能な場合のみ SkillDefinition 候補（実 v1 corpus では発生しない見込み — §6-2）。
 - **非 bundle static fields の供給規則（D-CH1）**: 実 v1 corpus（manifest 行）は semantic schema・initiation/termination/handoff spec を持たない。これらは **registry fixture が per-field で供給**する（`accepted_handoff` と同方式; **fixture 行に provenance 必須** = source_ref + 作成根拠。provenance 無き供給 = `E_MIGRATE_STATICS_ABSENT` fail-close）。fixture 供給 field は evidence 過程で RECONSTRUCTED 以下として grade（fixture = 復元資料であり訓練時 source でない — 昇格しない）。§8 の migration test は「manifest 行 + 供給 fixture」を入力に取り、fixture 欠落 case = `E_MIGRATE_STATICS_ABSENT` を負例に含む。
-### 6-2. kind 条件 slot 割当 = v2.2 のまま（**表現修正: LEARNED は callable を除く旧 5 slot が全て UNKNOWN〔executable は slot 外・常に KNOWN / callable = EXPLICIT_NONE〕** — C-CH9 + B2 整合）+ **B2 追加行: callable_selector = LEARNED: EXPLICIT_NONE（kind 強制）/ SCRIPTED,WAIT: KNOWN（v1 registry fixture の callable path から §6-1 と同権の provenance 付き供給; 無ければ UNKNOWN → Draft のまま）**。
-### 6-3. v1 19-field disposition 表 = v2.2 のまま、ただし:
-- `recovery_rollback_target` → **loud-discard に変更**（NHA — 消費者 = 未実装 recovery 層。再導入は当該 chunk で schema bump）。
-- `resource_requirements.control_ownership`（**untyped dict**）→ ControlResourceSpec: **key 語彙 = {ee_left, ee_right, gripper_left, gripper_right} に pin。未知 key = `E_MIGRATE_OWNERSHIP_KEY`（fail-close — D-CH5）**。
-- `handoff_start_context.incoming_handoff_state_id` → previous_handoff_class（**= 当該 state の handoff_schema_id; None → None** — D-CH6）。
+### 6-2. kind 条件 slot 割当（inline — 機械的導出、推測ではない; U4）
+
+| slot | LEARNED | SCRIPTED / WAIT |
+|---|---|---|
+| model_architecture / tensor_binding / normalization | UNKNOWN（v1 に無し — LEARNED は callable を除く旧 5 slot が全て UNKNOWN〔executable は slot 外・常に KNOWN〕 — C-CH9） | EXPLICIT_NONE（kind 強制 — §1.2 表準拠） |
+| control_mode | UNKNOWN | KNOWN(SCRIPTED_SEQUENCE) / KNOWN(WAIT)（kind 強制） |
+| runtime_config | UNKNOWN | UNKNOWN（schedule 情報は v1 に無し） |
+| callable_selector（B2） | EXPLICIT_NONE（kind 強制） | KNOWN（v1 registry fixture の callable path から §6-1 と同権の provenance 付き供給; 無ければ UNKNOWN → Draft のまま） |
+
+→ いずれの kind も runtime_config 等が UNKNOWN のため**主出力は Draft**。
+### 6-3. v1 全 root field の disposition 表（inline・完全列挙 — U13 + v2.3-v2.6 差分統合。silent drop なし）
+
+| v1 field (`contracts.py:511-533` の 19) | v2 disposition |
+|---|---|
+| schema_version | → contract_schema_version（"2.0.0" へ、MigrationReport 記録） |
+| action_key.skill_id / executable_identity | → skill_id / ExecutionBundle.executable_artifact_hash（scripted/wait = closure、learned = weights）+ TrainingProvenance（family/lineage/bc hashes — v1 family 文字列写像 = 6-5） |
+| action_key.handoff_start_context | class 相当 → TransitionRecord.previous_handoff_class の語彙（**= 当該 state の handoff_schema_id; None → None** — D-CH6）/ initiation_context_hash → **loud-discard**（再現不能文脈 hash） |
+| policy_family | → 6-5 写像 |
+| obs_action_schema (fields + field_semantics) | → semantic_obs/action_schema + 対応 component evidence（RESOLVED 実績根拠なし → RECONSTRUCTED_COMPATIBLE 以下で再記録・昇格なし） |
+| initiation_predicate | → InitiationSpec（同 field） |
+| required_belief_confidence | → InitiationSpec 側 predicate payload へ吸収（MigrationReport 記録） |
+| termination_classes | → TerminationSpec.declared_classes |
+| progress_phase | → RuntimeSnapshot.progress_phase（runtime 側 — U13 の home 明示） |
+| safe_interruption_checkpoints | → checkpoint_specs（resume_state_schema=None で） |
+| handoff (SkillHandoffState 実体) | → **loud-discard + `E_MIGRATE_RUNTIME_CONTEXT_ABSENT`**（**RV4 §2.7**: v1 に producer_invocation_id / producer_definition_hash / control_epoch が存在せず v2 HandoffOffer を構築不能 — **0/placeholder 捏造禁止**。RuntimeSnapshot.handoff = None。静的 schema 部分のみ HandoffSchemaSpec に再宣言） |
+| accepted_incoming_handoff_set | → accepted_handoff（producer/schema/version へ正規化 + **producer_handoff_schema_hash は registry fixture 供給 or UNKNOWN→Draft**〔RV4 §2.6〕; 不足情報は UNKNOWN 扱い） |
+| duration_cost_distribution | → **loud-discard**（静的 prior 廃止 — 分布推定は Phase D SDM の職務。DC-4 p50/p95/std 検査 = deferred-with-object） |
+| resource_requirements | control_ownership（untyped dict）→ required_control_resources: **key 語彙 = {ee_left, ee_right, gripper_left, gripper_right} pin・未知 key = `E_MIGRATE_OWNERSHIP_KEY`（fail-close — D-CH5）** / compute (FAST/SLOW_PATH) → **loud-discard**（O0/RT0 層の関心 — Phase F 再設計） |
+| recovery_rollback_target | → **loud-discard**（NHA — 消費者 = 未実装 recovery 層。再導入は当該 chunk で schema bump） |
+| fail_closed_action | → fail_closed_action |
+| policy_version | → **loud-discard**（identity は hash 体系が担う; 人可読 version は provenance notes へ） |
+| freshness | → FreshnessPolicy（max_staleness_s は 6-6 の decimal 変換） |
+| support_boundary | → support_boundary |
+| admissibility (4 bool) | → **明示 discard + MigrationReport loud 記録**（V-4 — conformance/authority は certificate + profiles で再導出） |
+| (scripted/wait) callable_qualname | → **ExecutionBundle.callable_selector**（B2 — canonical 形式 §1.2 へ正規化; 旧 v2 案の scripted_callable_ref は廃止済み） |
 ### 6-4. v1 公開 symbol disposition（**total 化 — D-CH2/B-CH3**）
 
 | v1 symbol | 処遇 |
@@ -318,7 +385,19 @@ validate_handoff(invocation, offer, producer_definition, consumer_definition) ->
 | contracts.py 型群 | shim = v2 へ変換・委譲のみ。**v1 `__post_init__` 検証は retained 期間 byte 保持**（負制御 test の前提 — D-CH2） |
 - **closure member 二重真実の解消**: v2 registry fixture の closure 列は「v1 定数の写し」であることを §8 の**等値 invariant test** で拘束（分岐 = test FAIL）。DC-6 の bounded 例外として supersession register ⑤ に記録済み。
 
-### 6-5. family 写像 = v2.2 のまま。6-6. **数値境界 algorithm（C-CH3/D-CH4 差替）**:
+### 6-5. v1 `policy_family` 全域写像（inline・total — U2）
+
+| v1 文字列 | → (ExecutionFamily, TrainingLineage) |
+|---|---|
+| "BC+RL" | (PPO, BC_THEN_RL) |
+| "PPO" | (PPO, base/config null なら RL_ONLY、else BC_THEN_RL) |
+| "BC" | (BC, BC_ONLY) |
+| "DAPG" | (DAPG, 宣言 provenance) — 写像は total、可否は §3 表が判定（現行 = `E_LINEAGE_FORBIDDEN`; corpus case 必須 — NHA） |
+| "SCRIPTED" | (SCRIPTED, NOT_APPLICABLE) |
+| "WAIT" | (WAIT, NOT_APPLICABLE) |
+| その他 / 欠落 | `E_MIGRATE_FAMILY_UNKNOWN` / identity 無し行は 6-1 の `E_MIGRATE_IDENTITY_ABSENT` が先行 |
+
+### 6-6. **数値境界 algorithm（C-CH3/D-CH4 差替）**:
 ```text
 convert(v: float) = Decimal(repr(v)) を正規化:
   整数値 (v == int(v)) → 整数形文字列 ("30.0"→"30", "0.0"→"0", "1.0"→"1")
@@ -327,13 +406,89 @@ convert(v: float) = Decimal(repr(v)) を正規化:
   出力は CanonicalDecimal 正規形検査を必ず通す (二重防御)
 corpus: 1.0→"1" / 30.0→"30" / 0.0→"0" / 0.1→"0.1" / 0.831→"0.831" / 1e-07→"0.0000001" / 1e-15→E_MIGRATE_FLOAT_FORM
 ```
-### 6-7. 既定値 / 6-8. §7b supersession = v2.2 のまま。
+### 6-7. 既定値（inline）
+`behavior_revision = 1` / `skill_variant_id = "default"` / `contract_schema_version = "2.0.0"`。
+
+### 6-8. prereg §7b 文言との関係（inline — U18）
+prereg §7b「同じ v1 → 常に同じ **SkillDefinitionHash**」は、Draft model 下では「**draft_definition_hash**（完全解決可能時は SkillDefinitionHash）」と読む（register ③）。
 
 ---
 
-## 7. Runtime 型 = v2.2 のまま（SkillInvocation / SkillOutcome / HandoffOffer / TransitionRecord / SchemaVersionStamp / RuntimeSnapshot）+ §5B の 2 report 型（W-P1-6）。§7-2（certified-only D2 帰結・runtime hash は D2 prereg へ defer）= 不変。
+## 7. Runtime 型（full inline — RV4 §2.4）+ §5B の 2 report 型（RV2-W-P1-6）
 
-## 8. Test plan（v2.2 から差分のみ）
+```python
+@dataclass
+class SkillInvocation:
+    invocation_id: str
+    skill_action_id: str        # certified action のみ（Draft は invocation 不可 — §7-2）
+    skill_definition_hash: str
+    start_belief_ref: BeliefRef
+    start_time: float
+    current_phase: str
+    elapsed_s: float
+    control_epoch: int
+
+@dataclass(frozen=True)
+class SkillOutcome:             # checkpoint_id 無し（outcome union からのみ — review-4 P0-5）
+    invocation_id: str
+    outcome: ProducerOutcome
+    end_belief_ref: BeliefRef
+    duration_s: float
+    accumulated_cost: float
+
+@dataclass(frozen=True)
+class HandoffOffer:             # compatibility 無し + control_epoch（review-4 P0-5）
+    handoff_schema_id: str
+    producer_invocation_id: str
+    producer_action_id: str
+    producer_definition_hash: str
+    control_epoch: int
+    outcome: ProducerOutcome
+    belief_ref: BeliefRef
+    ownership: Ownership
+
+@dataclass(frozen=True)
+class TransitionRecord:
+    episode_id: str
+    invocation_id: str
+    start_belief_ref: BeliefRef
+    goal_context: str
+    previous_handoff_class: str | None
+    skill_action_id: str
+    skill_definition_hash: str
+    end_belief_ref: BeliefRef
+    outcome: ProducerOutcome
+    duration_s: float
+    accumulated_cost: float
+    safety_events: tuple[str, ...]
+    schema_versions: SchemaVersionStamp
+
+@dataclass(frozen=True)
+class SchemaVersionStamp:
+    contract_schema_version: str
+    belief_schema_version: str
+    evidence_policy_definition_hash: str   # RV4 命名（旧 evidence_policy_hash）
+    recorder_artifact_hash: str
+
+@dataclass
+class RuntimeSnapshot:          # v1 runtime fields の migration 先
+    progress_phase: str | None = None
+    handoff: HandoffOffer | None = None    # v1 migration では常に None（§6-3 — RV4 §2.7 loud-discard）
+```
+
+**§7-2 明示帰結（U14）**: TransitionRecord / SkillInvocation は **certified SkillActionId のみ**を key にする（Draft 不可）。D2 データ収集は certified skill に限られ、D1.1-B 完了まで learned skill の transition 行は 0 になり得る — fail-closed の意図された帰結。**runtime 記録の content-hash 化は WCJ 対象外・方式は D2 prereg で確定（明示 defer — U14）**。
+
+## 8. Test plan（base inline — RV4 §2.4 + 全差分統合）
+
+**base（v2.2 から inline）**:
+- standalone / monorepo 分離（fixture registry / closure fixture 含む）。standalone = 配布物のみで全実行・unexpected skip 0。
+- **mutation test**: 各 operator は 1 不変条件を明示破壊し期待 error code + field path を宣言（valid→valid 変異は operator にしない）。
+- **generative / metamorphic**（stdlib random・seed 固定・失敗時 seed+入力保存）: #1 contract_schema_version 変更 → ActionId 不変・DefinitionHash 変化 / #2 behavior_revision 変更 → 両方変化 / #3 = 下記差替 / #4a TrainingProvenance field 変更 → ActionId・evidence_bundle_hash 不変・DefinitionHash/certificate 変化（U8） / #4b TRAINING_PROVENANCE 系 EvidenceRecord 変更 → ActionId・DefinitionHash 不変・evidence/certificate 変化 / #5 ExecutionBundle 変更 → ActionId 変化 / #6 previous_handoff_class 変更 → ActionId・static hash 不変 / #7 非 BMP key vector を層(a)に適用 → RFC 期待順 / #8 EvidenceRecord shuffle → EvidenceBundleHash 不変 / #9 = 下記 / #10 certificate 発行後の lifecycle 違反 → certificate 有効のまま・LifecycleReport のみ違反。
+- invalid corpus（base）: review-1 実証 negative + DC-4 追加分 + `E_DECIMAL_NONCANONICAL`（`-0`・anchoring-trap: `junk-0.5`・`0.0`・`1.50`・`03`・`1e3`・`5.` — U16）+ lone surrogate + duplicate key + non-NFC + int>2^53−1 + slot 不整合（E_SLOT_INCONSISTENT / E_SLOT_FORBIDDEN_NONE / E_KIND_CONTROL_MISMATCH: LEARNED×KNOWN(WAIT)）+ "DAPG" → E_LINEAGE_FORBIDDEN + identity-less v1 行 → E_MIGRATE_IDENTITY_ABSENT + float-bearing v1 → 変換 or E_MIGRATE_FLOAT_FORM。
+- migration tests: 決定的 / 同一入力同一 hash（6-8 の読み）/ v2→v2 no-op / 不完全 v1 fail-closed / UNKNOWN 非昇格 / identity-pinned 6/9 → Draft + 3 行 → E_MIGRATE_IDENTITY_ABSENT。
+- cross-process hash stability（subprocess）+ WCJ golden vectors + composite bundle vector（U9）。
+
+**差分**:
 - metamorphic **#3 差替（D-CH8）**: 「runtime 型の全 field 名が static hash の WCJ payload key 集合に不在」の **serialization-boundary assert**（vacuous 変異試験を廃止）。
 - **#4b は hashed fields（grade/source_ref/proof/artifact_hash）限定 + notes-mutation 行追加（全 hash 不変）**（C-CH7）。
 - **metamorphic #9（R-3 — W-P1-3 の明示要求）**: claim 内 **ProofItem の入力順 shuffle で全 hash 不変**（EP §3b canonical 順に正規化されるため。#8 = record 級 shuffle とは別 object）。
@@ -341,17 +496,18 @@ corpus: 1.0→"1" / 30.0→"30" / 0.0→"0" / 0.1→"0.1" / 0.831→"0.831" / 1e
 - corpus 追加（v3 fold）: `E_CLOSURE_PATH_MALFORMED` / `E_CLOSURE_SYMLINK` / `E_CLOSURE_DUPLICATE_PATH` + closure 決定論 golden vector（§3-3）/ `E_BEHAVIOR_REVISION_STALE`（§3-4 — 同 revision・異 termination_spec hash の登録拒否）/ `E_CERT_INPUT_MISMATCH`（§5A2）/ **N/A ≠ UNKNOWN 判別 case**（SCRIPTED の MODEL_ARCHITECTURE = NOT_APPLICABLE で eligible / LEARNED の UNKNOWN = ineligible — v3 W-P0-1）/ **現行 policy 厳格化 case**（旧 certificate + 新 policy → ineligible・certificate は valid のまま — v3 W-P0-3）。
 - corpus/test 追加（B 系 fold）: **B2 衝突 regression**（同 closure・同 runtime_config・異 callable_selector の SCRIPTED 2 定義 → ExecutionBundleHash/ActionId 相違を assert）+ `E_CALLABLE_SELECTOR_MALFORMED` / **B3 mutation corpus**（§3-4 の 11 面 × 各 1 変異 → 全て E_BEHAVIOR_REVISION_STALE 検出; ns/variant 違いの並存 = 非検出を併記）/ **B4 negative controls**（wrong-but-valid-hex → E_PROOF_MISBOUND・null-where-required → E_PROOF_PAYLOAD_MISSING・foreign kind → E_PROOF_KIND_FOREIGN — EP §3d）/ **B6 order golden**（ProofKind.value bytes 昇順の期待列を固定 + #9 shuffle と対）/ **B7 registry A/B golden**（1 entry 差 → hash 相違・挿入順 → 不変・重複 id → E_REGISTRY_DUPLICATE）/ **B5 境界 case**（TP=RECONSTRUCTED(2) の definition → CLOSED_LOOP ineligible・SHADOW eligible）。
 - **invariant tests（D-CH2）**: `SKILL_ID_REGISTRY == EXPECTED_SKILL_IDS`・registry fixture closure == v1 定数（retained window 中）・v1 test suite green。
-- 他（mutation 方式・generative seed 固定・golden vectors・cross-process・migration 分割 test）= v2.2 のまま + frozenset vector。
+- **RV4 fold 追加**: EP markdown 表 ↔ code 定数 一致試験（parser artifact hash 記録 — RV4 §2.3）/ `evaluate_authority_grant` の conjoin tests（eligible=False → DENY・gate UNKNOWN → fail-closed DENY・全 PASS → grant — §5A3）/ `E_CLOSURE_MEMBER_UNREADABLE` / `E_MIGRATE_RUNTIME_CONTEXT_ABSENT`（v1 handoff 実体 → loud-discard）/ producer_handoff_schema_hash による §5D 一意特定 case（同 producer 複数 variant）。frozenset vector（C-CH2）維持。
 
 ## 9. Module layout = v2.2 + `SKILL_ID_REGISTRY` の home = identity.py（D-CH2）。
 
 ## 10. Open points
-**1 件**: review-4 transcript の **Rs 確認 PENDING**（fidelity）。ただし **B1 により normative 依存は除去済み**（register ① は prereg floor 文言に再接地; transcript = 補強典拠）— Rs 確認は records 完全性のため引き続き要請。W-review v2 / v3 は file copy（byte 同一）のため確認不要。他の設計内 open = 0。
-**process 注記（over-claim 防止）**: CC Debate cycle-2 の対象 = v2.2（= review v3 の対象と同一 sha）であり、**v2.3/v2.4 の fold 内容は debate 未通過**（skill の max-2-cycles 到達）。v3 fold の検証 = pS 全行照合 + pN DESIGN verify が担う。cycle-3 の要否 = Rs 裁量（自己起動しない）。
+**設計内 open = 0**。review-4 transcript の fidelity は **RV4 §1.4 で Rs 確認済み: semantic fidelity CONFIRMED**（byte fidelity = N/A — 原本が chat message であり独立 file でないという限定付き。この限定を明記して PENDING 解消 — RV4 逐語「Rs確認PENDINGは、この限定を明記した上で解消してよい」）。W-review v2/v3/v4 は byte-identical file copy のため確認不要。
+**process 注記（over-claim 防止）**: CC Debate cycle-2 の対象 = v2.2 であり、**v2.3 以降の fold 内容は debate 未通過**（skill の max-2-cycles 到達）。fold の検証 = pS 全行照合 + pN DESIGN verify が担う。cycle-3 の要否 = Rs 裁量（自己起動しない）。
+**kinematic COMPLETE REMOVAL directive の写像（Rs 13:34 via pN relay・p6 FYI 14:03 — loud 記録）**: (a) 本契約構造は drive 方式を hard-code しない — LEARNED の control_mode 許容値 = DIFF_IK_EE_TARGET のみ（kinematic mode は enum に存在しない — §0 DiffIK-only を契約層で執行）。(b) v1 executable（kinematic 期 closure/weights）は migration で **Draft/evidence 化され実行候補にならない**（§7-2 certified-only + eligibility + authority — 「歴史 artifact = evidence 保存・実行候補から除外」指示と構造的に整合）。(c) demo 再記録必然化は demo_dataset_hash の content-address 構造に影響なし（新 demo = 新 hash・新 evidence record）。drive-substrate lineage を provenance 型で明示する必要が生じた場合は D1.1-B/C の schema delta として Rs review 経由。(d) 本 design + EP に clip-pin/weld/attachment/kinematic-drive への依存記述なし（grep 確認済み — 「pin」は全て仕様固定の語義）。(e) impl/run/training は本 chunk で元より CLOSED — HALT/fail-closed 指示と整合。
 
 ## 11. 検証系譜
 - cycle-1 = 19 項 accepted → v2.2 fix → **cycle-2 で 4-lens 全数 discharge 検証（16-18/18 + 残差）**。cycle-2 verdict = **REVIEW**（max-2-cycles; log cycle 2）→ escalation = Rs 報告済み。**本 v2.3 が cycle-2 残差 + W 系 + NHA 指摘の fold**（fix 台帳 = verification-log cycle 2 consolidation + scratchpad fix-list）。
-- **W→fold-map（review v2）**: W-P0-1 = §1.3（v2.2 先行治癒）/ W-P0-2 = §0・§5A・§5A2〔external_gate_state は register ⑥ で v3 が supersede〕/ W-P0-3 = §5A certificate / W-P0-4 = EvidencePolicy（存在 = `ac5865b66d`、内容 = v1.2）/ W-P1-1 = §2-7（U7）/ W-P1-2 = §1.2† / W-P1-3 = EvidencePolicy §3b / W-P1-4 = EvidencePolicy §4（U12）/ W-P1-5 = §8 #4a/4b（U8）/ W-P1-6 = §5B。
+- **W→fold-map（review v2）**: W-P0-1 = §1.3（v2.2 先行治癒）/ W-P0-2 = §0・§5A・§5A2〔external_gate_state は register ⑥ で v3 が supersede〕/ W-P0-3 = §5A certificate / W-P0-4 = EvidencePolicy（存在 = `ac5865b66d`、内容 = v1.4）/ W-P1-1 = §2-7（U7）/ W-P1-2 = §1.2† / W-P1-3 = EvidencePolicy §3b / W-P1-4 = EvidencePolicy §4（U12）/ W-P1-5 = §8 #4a/4b（U8）/ W-P1-6 = §5B。
 - **W'→fold-map（review v3 WMSO 全 9 項; 対象 = v2.2+EP v1 — 「先行治癒」= v2.3 が review 執筆時点で既に fold 済みの意）**:
   - **v3 W-P0-1**（SCRIPTED/WAIT が profile 恒久不能）= 実質は v2.3 の EP §4 免除で先行治癒 + **本版で Rs sketch の typed 形 `ApplicabilityResolver` を EP §3c に採用**（instance/lineage/profile 3 層・N/A ≠ UNKNOWN 逐語反映・OPTIONAL = TD 非 BC lineage）。
   - **v3 W-P0-2**（registry hash 未結合）= v2.3 §5A `schema_registry_hash` で先行治癒（review v2 W-P0-3 と同項）。
@@ -361,7 +517,7 @@ corpus: 1.0→"1" / 30.0→"30" / 0.0→"0" / 0.1→"0.1" / 0.831→"0.831" / 1e
   - **v3 W-P0-6**(transcript 不在) = 設計側: header に bank commit `ac5865b66d` + full sha 記載済み。package 側 = p6 が v4 で 11_ 同梱 + full SHA 表（p6 report 12:31）。Rs fidelity 確認 = §10 で PENDING のまま保持。
   - **v3 W-P1-1**（closure hash 決定論）= **本版 §3-3**（6 側面 pin: path 正規化/順序/symlink 禁止/bytes-as-committed/WCJ 合成/重複拒否）。
   - **v3 W-P1-2**（behavior_revision 手動 valve）= **本版 §3-4 registry 不変量 `E_BEHAVIOR_REVISION_STALE`**（2 案中 registry 案 — identity 4-way split を不変に保つ選択、理由付き）。
-  - **v3 W-P1-3**（semantic/custody hash 分離）= **本版 EP §6 `evidence_policy_semantic_hash` + §5A/§5A2 の結合先変更**（doc sha = custody 層に残置）。
+  - **v3 W-P1-3**（semantic/custody hash 分離）= **EP §6 二層 hash + §5A/§5A2 の結合先変更**（v2.4 導入; RV4 §2.3 で `evidence_policy_definition_hash` / `policy_document_sha256` に命名確定）。
   - （review v3 §5 の A-P0/A-P1 系 = arm-control 設計 = p4/p5 管轄 — 本 node 範囲外、fold 対象にしない。§6 package 系 = p6 管轄。）
 - **B→fold-map（pN DESIGN verify HOLD B1-B7、13:26 — 全項 pQ on-disk 検証で真と確認の上 fold）**:
   - **B1**（custody/fidelity）= pS verify record を本 bank で explicit-path bank（同 commit）。transcript normative 依存 = register ① の prereg-floor 再接地で除去（§10 注記; Rs 確認は継続要請）。
@@ -371,6 +527,32 @@ corpus: 1.0→"1" / 30.0→"30" / 0.0→"0" / 0.1→"0.1" / 0.831→"0.831" / 1e
   - **B5**（ceiling 抵触）= EP §4 CLOSED_LOOP 列 TP/TD ≥2 → **≥3 整列**（Rs 確定表と同値化; register ④ 撤回注記。緩和は Rs 再裁定のみ — §10 でなく Rs 判断事項として報告）。
   - **B6**（順序二義性）= EP §3b: 唯一の正 = **ProofKind.value ASCII bytes 昇順**（表行順 claim 撤回）+ §8 order golden。
   - **B7**（registry projection 未定義）= §1.4 SchemaRegistry canonical projection（sorted array・Draft 除外・E_REGISTRY_DUPLICATE・A/B golden）。
+- **RV4→fold-map（Rs PLAN_STATUS review v4、対象 = v2.3+EP v1.1 期; 「先行治癒」= review 執筆時点で後続版が既に fold 済みの意）**:
+  - **RV4 §1.1/§1.2**（file 07 sha 不一致・工程 stale）= p6 lane（summary v5）+ 根因 = pS record 未 bank → **B1 で解消済み**（`59b7720408`）。
+  - **RV4 §1.3**（review ID 混同）= header の完全修飾規約採用（RV2-/RV3-/RV4-）。指摘自体は正確: RV2 と RV3 の W-P1 番号は別物 — 本 doc は v2.4 以降「v3 W-」接頭辞で既に区別済み、規約として明文化。
+  - **RV4 §1.4**（transcript fidelity）= **semantic fidelity CONFIRMED → §10 で PENDING 解消**（byte N/A 限定明記）。
+  - **RV4 §2.2**（R-1..R-3）= R-1/R-3 先行治癒（v2.4）。R-2 = certificate-first 先行治癒（v2.4）+ **本版で param 名 requested_profile 確定 + `evaluate_authority_grant` 別 API 新設（§5A3）** — RV3「external conjuncts」と RV4「別 API」は整合（eligibility の外・typed API へ）。register ⑥ 注記維持。
+  - **RV4 §2.3**（EP 機械可読）= EP §6 二層 hash 先行治癒（v1.2）+ **本版 EP v1.4 で RV4 命名（policy_document_sha256 / evidence_policy_definition_hash）+ dataclass/golden fixture/parser hash/一致試験 requirement pin**。
+  - **RV4 §2.4**（self-contained）= **本版で全 committed pointer を inline**（§3 表・§5A 検査・§5C/5D・§6-2/6-3/6-5/6-7/6-8・§7・§8 base・§12）— full snapshot 化（Rs 推奨案 1）。
+  - **RV4 §2.5**（closure/behavior identity）= closure 6 側面 = §3-3 先行治癒（v2.5）+ **本版 §3-3 に E_CLOSURE_MEMBER_UNREADABLE 追補**。behavior = §3-4 registry 不変量（B3 完全化済み）+ **RV4 推奨（ActionId 編入）との差 = §3-4 に loud 記録・Rs 判断事項**（callable 面は B2 で ActionId 編入済み）。
+  - **RV4 §2.6**（AcceptedHandoffSpec producer 曖昧）= **本版 §1.4 producer_handoff_schema_hash 追加**（content hash 案採用）+ §5D 特定規則。
+  - **RV4 §2.7**（v1 runtime handoff 構築不能）= **本版 §6-3 handoff 行 = loud-discard + E_MIGRATE_RUNTIME_CONTEXT_ABSENT**（Rs 提示 2 案中 loud-discard 択 — 捏造禁止逐語準拠。LegacySnapshot 案は不採用: authority/runtime 再利用不可の型を作るより不在を明示）。
+  - **RV4 §2.8**（ProofItem 順序文）= B6 先行治癒（EP v1.3）+ **本版 EP §3b を RV4 指定文字列そのままに整列**。
+  - **RV4 §2.9**（v2.4 として bank せよ）= 実際の版進行 v2.4/v2.4.1/v2.5/v2.6 が充足。
+  - （RV4 §3 arm 系 = p4/p5 管轄・§1.1 package 系 = p6 管轄 — 本 node 対象外。）
 - pS D/V 系・review-4 fold-map（§12 相当）= v2.2 の記録を継承（transcript 参照）。
 
-## 12. review-4 fold-map = v2.2 §12 のまま有効（対象 sha のみ本版に更新）。
+## 12. review-4（R4-）→ fold-map（inline; Rs 見出し verbatim は transcript 参照）
+
+| review-4 # | fold 先 |
+|---|---|
+| R4-P0-1 | §0 / §5A / §5B / metamorphic #10 |
+| R4-P0-2 | §1.1–§1.5 |
+| R4-P0-3 | §2 |
+| R4-P0-4 | §4 + EvidencePolicy artifact |
+| R4-P0-5 | §7 |
+| R4-P0-6 | §6（6-1..6-8） |
+| R4-P1-1..P1-4 | §5D / §5A / §5C / §1.4 FreshnessPolicy+§5B |
+| R4-T | §8 |
+| R4-OP | §2.4 / §2-6・7 / §7 SchemaVersionStamp / §10 |
+| R4-header | 冒頭 |

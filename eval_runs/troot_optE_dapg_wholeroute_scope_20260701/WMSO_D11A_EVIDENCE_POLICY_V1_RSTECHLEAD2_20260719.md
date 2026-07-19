@@ -1,6 +1,6 @@
-# WMSO D1.1-A EvidencePolicy v1.3（DESIGN 付属 normative artifact）
+# WMSO D1.1-A EvidencePolicy v1.4（DESIGN 付属 normative artifact）
 
-- node: `T-WMSO`; author = w2:pQ; v1 = 2026-07-19 10:54 JST / v1.1 = 12:02 / v1.2 = 12:41 / **v1.3 = 13:33 JST（実測）**（pN DESIGN verify B 系 fold: B4 §3d proof binding / B5 CLOSED_LOOP floor 整列 / B6 順序一意化）
+- node: `T-WMSO`; author = w2:pQ; v1 = 2026-07-19 10:54 JST / v1.1 = 12:02 / v1.2 = 12:41 / v1.3 = 13:33 / **v1.4 = 14:00 JST（実測）**（Rs PLAN_STATUS review v4〔RV4〕fold: §2.3 機械可読 policy object 具体形 / §2.8 順序文字列 pin。v1.3 = pN B4/B5/B6 fold）
 - 親設計: `WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md` v2.4 §4（本 artifact が全表の normative 実体。custody hash = 本 file の sha256、validator/certificate が結合するのは §6 の **semantic hash**）
 - status: DRAFT v1.2 — pS 全行照合（v3 行込み）→ pN DESIGN verify PENDING
 - v1 からの変更: §3 の 3 cell exact 化 / DC-3 準拠復元 / §3b ProofItem 順序・conflict 規則 / §4 EXPLICIT_NONE 免除 / §4b per-component 意味論の明示 / E_GRADE_INAPPLICABLE の S-group 拡張 / 引用 host 修正。v1.1 からの変更: §3c ApplicabilityResolver（v3 W-P0-1 sketch 採用）/ §3 total-map 宣言 + cell 表記の置換/補完 意味明示（v3 W-P0-5）/ §6 semantic hash 分離（v3 W-P1-3）
@@ -54,7 +54,7 @@
 - **record 不在の required component は UNKNOWN(0) として集約**。
 
 ### 3b. ProofItem の canonical 順序と conflict（W-P1-3）
-- claim 内 ProofItem の canonical 順 = **(ProofKind.value ASCII bytes 昇順, ref, artifact_hash-or-empty)** の tuple 昇順。〔B6: 旧「§1 表の行順 = .value bytes 順」は事実として両者が異なり二義的だったため撤回 — **唯一の正 = `.value` 文字列の ASCII bytes 昇順**（機械導出可能・表不要）。golden vector + shuffle test は本順序で固定（親設計 §8 #9）〕
+- claim 内 ProofItem の canonical 順 = **(kind.value UTF-8 bytes, ref UTF-8 bytes, artifact_hash-or-empty ASCII)** の tuple 昇順（**RV4 §2.8 の指定文字列そのまま — 独立 rank は使わない**）。〔B6: 旧「§1 表の行順 = .value bytes 順」は事実として両者が異なり二義的だったため撤回。golden vector + shuffle test は本順序で固定（親設計 §8 #9）〕
 - **exact duplicate**（kind, ref, artifact_hash 全一致）→ 冪等 dedupe（hash に 1 回のみ寄与）。
 - **同 (kind, ref) で artifact_hash が異なる** → `E_PROOF_CONFLICT`（fail-closed — 曖昧な証拠を黙って選ばない）。
 
@@ -120,7 +120,8 @@ ApplicabilityResolver(kind, lineage, component)
 ## 5. 記録義務（v1 から不変）
 - 全 13 component の EvidenceRecord（UNKNOWN 含む）を常時 bundle に記録（沈黙禁止）。D1-exit は component 別達成 grade を記録（binary 化禁止 — **prereg §10 (c)=P2**〔host 修正 — B-CH1〕）。
 
-## 6. 版管理と hash 二層（v3 W-P1-3）
-- **document custody hash** = 本 markdown file の sha256（bank/管理用 — status/timestamp/編集も拾う）。
-- **`evidence_policy_semantic_hash`** = **H_WCJ(policy_object)**。policy_object = keyed object {`grades`（rank 付き列挙）, `component_groups`, `proof_policy`（§3 total map の REQUIRED cell 全列挙）, `profiles`（§4 required/min_grade 表）, `applicability_rules`（§3c の 1-4）, `policy_semver`}。文書編集で変わらず、**規則が変わった時のみ変わる**。**validator / ContractCertificate / UsageEligibilityReport が結合するのはこちら**（親設計 §5A/§5A2）。
-- 本 artifact の規則変更は semantic hash を変え、既発行 certificate を retroactive に無効化しない。改訂は **prereg §9 の fail-closed re-verify loop**（host 明記 — A-CH4）に従う（design 変更扱い）。
+## 6. 版管理と hash 二層（v3 W-P1-3 + RV4 §2.3 具体形）
+- **`policy_document_sha256`**（RV4 命名） = 本 markdown file の sha256（custody 用 — status/timestamp/編集も拾う）。
+- **`evidence_policy_definition_hash`**（RV4 命名; 旧称 evidence_policy_semantic_hash） = **H_WCJ(policy_object)**。policy_object = keyed object {`grades`（rank 付き列挙）, `component_groups`, `proof_policy`（§3 total map の REQUIRED cell 全列挙）, `proof_binding`（§3d の payload/束縛規則）, `profiles`（§4 required/min_grade 表）, `applicability_rules`（§3c の 1-4）, `policy_semver`}。文書編集で変わらず、**規則が変わった時のみ変わる**。**validator / ContractCertificate / UsageEligibilityReport が結合するのはこちら**（親設計 §5A/§5A2）。
+- **機械可読実体（RV4 §2.3 Required）**: impl 時に **`EvidencePolicyDefinition` frozen dataclass + golden JSON fixture**（`WMSO_EvidencePolicy_v1.x.json`）を作成し、(a) fixture の H_WCJ == 本 §6 の definition hash、(b) **本 markdown 表 ↔ code 内定数の一致試験**（parser artifact hash 記録付き）を standalone test に含める（親設計 §8）。⛔ impl CLOSED 中は作成しない — 本項は設計 requirement の pin のみ。
+- 本 artifact の規則変更は definition hash を変え、既発行 certificate を retroactive に無効化しない。改訂は **prereg §9 の fail-closed re-verify loop**（host 明記 — A-CH4）に従う（design 変更扱い）。
