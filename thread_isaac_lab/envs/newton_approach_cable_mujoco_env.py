@@ -134,7 +134,6 @@ from newton_skill_env_base import (  # noqa: E402
     RL_SIM_DT,
     RL_SIM_SUBSTEPS,
     SIM_DT,
-    assign_world_states_to_sim,
     axis_angle_to_quat_xyzw,
     build_fk_and_init,
     build_multiworld_scene,
@@ -147,7 +146,6 @@ from newton_skill_env_base import (  # noqa: E402
     quat_rotate_vec,
     reset_dahl_friction_for_envs,
     restore_ee_targets_per_world,
-    restore_world_body_state,
     seed_cable_joint_state,
     temporal_quat_consistency,
 )
@@ -681,22 +679,11 @@ class NewtonApproachCableMujocoEnv(VecEnv):
         if len(env_ids) == 0:
             return
 
-        bq = self._state_0.body_q.numpy()
-        bqd = self._state_0.body_qd.numpy()
-        # S4b: SolverMuJoCo has no body_q_prev (VBD-only); None-tolerant (reset carried by joint_q seeding).
-        prev = self._solver.body_q_prev.numpy() if hasattr(self._solver, "body_q_prev") else None
-
+        # NO-KINEMATIC (c13): the settled-BODY-state restore (restore_world_body_state /
+        # assign_world_states_to_sim) is REMOVED. approach reset fail-closes below (awaits actuator
+        # migration); on the mujoco path bodies follow joint_q via eval_fk. No body_q/body_qd write.
         for w in env_ids:
             w = int(w)
-            restore_world_body_state(
-                bq=bq,
-                bqd=bqd,
-                prev=prev,
-                settled_body_q=self._settled_body_q,
-                settled_body_qd=self._settled_body_qd,
-                w=w,
-                bws=self._bws,
-            )
             self._per_world_fk_jq[w] = self._settled_fk_jq.copy()
             self._step_completed_right[w] = False
             self._success_sustain_count[w] = 0
@@ -730,9 +717,6 @@ class NewtonApproachCableMujocoEnv(VecEnv):
             if self._last_actions is not None:
                 self._last_actions[w] = 0.0
             self.episode_length_buf[w] = 0
-
-        # Push body_q/bqd (None prev tolerated on mujoco).
-        assign_world_states_to_sim(self._state_0, self._solver, bq, bqd, prev)
 
         # NO-KINEMATIC (Rs 2026-07-19): the arm joint_q reset re-pose is REMOVED; raises
         # unconditionally until the approach env is migrated to the POSITION-servo actuator path.

@@ -110,7 +110,6 @@ from newton_skill_env_base import (  # noqa: E402
     RL_SIM_DT,
     RL_SIM_SUBSTEPS,
     SIM_DT,
-    assign_world_states_to_sim,
     build_fk_and_init,
     build_multiworld_scene,
     compute_ori_error_axis_angle,
@@ -119,7 +118,6 @@ from newton_skill_env_base import (  # noqa: E402
     normalize_quat_w_positive,
     quat_rotate_vec,
     reset_dahl_friction_for_envs,
-    restore_world_body_state,
     seed_cable_joint_state,
     temporal_quat_consistency,
 )
@@ -1142,20 +1140,12 @@ class NewtonRouteEnv(VecEnv):
         # (a)(b) clip-pin lifecycle: audit-then-clear BEFORE the state restore, on every reset path
         # (done-driven and public reset()) -- prereg v0.3.1 sec 4.
         self._clear_c1_pin(env_ids)
-        bq = self._state_0.body_q.numpy()
-        bqd = self._state_0.body_qd.numpy()
-        prev = self._solver.body_q_prev.numpy() if hasattr(self._solver, "body_q_prev") else None
+        # NO-KINEMATIC (c13): the settled-BODY-state restore (restore_world_body_state /
+        # assign_world_states_to_sim) is REMOVED. On the mujoco joint-authoritative path bodies follow
+        # joint_q via the CABLE-SEED eval_fk (below); the arm is held by its POSITION servo (design
+        # sec14.2, per-episode qpos re-pose abolished). No body_q/body_qd write at reset.
         for w in env_ids:
             w = int(w)
-            restore_world_body_state(
-                bq=bq,
-                bqd=bqd,
-                prev=prev,
-                settled_body_q=self._settled_body_q,
-                settled_body_qd=self._settled_body_qd,
-                w=w,
-                bws=self._bws,
-            )
             self._per_world_fk_jq[w] = self._settled_fk_jq.copy()
             self._ee_target_right[w] = self._settled_ee_r_pos.copy()
             self._ee_target_left[w] = self._settled_ee_l_pos.copy()
@@ -1184,8 +1174,6 @@ class NewtonRouteEnv(VecEnv):
             if self._route_t_clock:
                 self._route.clear_sync_state([int(w)])
                 self._hold_mask_np[int(w)] = False
-
-        assign_world_states_to_sim(self._state_0, self._solver, bq, bqd, prev)
 
         # AUTHORITATIVE re-pose (mujoco): seed arm joint_q = settled + cable joint_q from settled tangents.
         # NO-KINEMATIC (Rs 2026-07-19): the reset does NOT re-pose the arm joints (per-episode qpos

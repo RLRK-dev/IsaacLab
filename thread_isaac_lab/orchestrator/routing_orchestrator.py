@@ -1242,8 +1242,8 @@ class RoutingOrchestrator:
     # C6 (2026-04-25) extended :meth:`SnapshotManager.restore` to overwrite
     # ``solver.body_q_prev`` with the restored ``body_q``, preventing the
     # VBD velocity-spike failure mode (see snapshot.py:restore docstring).
-    # This aligns with the canonical reset pattern in
-    # :func:`restore_world_body_state` from
+    # This aligns with the canonical reset pattern once in
+    # ``restore_world_body_state`` (removed 2026-07-19, kinematic-complete-removal) from
     # :mod:`thread_isaac_lab.envs.newton_skill_env_base`.
     #
     # Remaining Phase 5-1b TODO for recovery (A2) wiring:

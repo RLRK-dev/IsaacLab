@@ -971,64 +971,16 @@ FINGER_JOINT_INDICES = tuple(GRIPPER_JOINT_RANGE) + tuple(JOINTS_PER_ARM + j for
 # =============================================================================
 
 
-def restore_world_body_state(
-    *,
-    bq: np.ndarray,
-    bqd: np.ndarray,
-    prev: np.ndarray | None,
-    settled_body_q: np.ndarray,
-    settled_body_qd: np.ndarray,
-    w: int,
-    bws: np.ndarray,
-) -> None:
-    """Restore one world's body state slice from the settled-state cache.
-
-    Keyword-only arguments (``*,``) to prevent positional swap bugs (e.g.,
-    accidentally passing ``bqd`` where ``bq`` expected — same shape/dtype,
-    would silently corrupt state).
-
-    Performs three slice copies for world index ``w``:
-    - ``bq[start:end] <- settled_body_q[start:end]``
-    - ``bqd[start:end] <- settled_body_qd[start:end]``
-    - ``prev[start:end] <- settled_body_q[start:end]`` (skipped when ``prev`` is None)
-
-    Where ``start, end = bws[w], bws[w + 1]``.
-
-    Args:
-        bq: Live ``state_0.body_q`` numpy view, shape ``[total_bodies, 7]``.
-            Mutated in place (slice assignment).
-        bqd: Live ``state_0.body_qd`` numpy view, shape ``[total_bodies, 6]``
-            (vel: lin [m/s] + ang [rad/s]). Mutated in place.
-        prev: Live ``solver.body_q_prev`` numpy view, shape
-            ``[total_bodies, 7]``, mutated in place — or ``None`` on the
-            SolverMuJoCo path (S4b: no ``body_q_prev`` buffer exists; the
-            reset is carried by joint_q seeding instead, so the prev
-            maintenance is correctly skipped).
-        settled_body_q: Cached settled state ``body_q``, shape
-            ``[total_bodies, 7]``, taken from a prior P0 settle.
-        settled_body_qd: Cached settled state ``body_qd``, shape
-            ``[total_bodies, 6]``.
-        w: World index (0-based).
-        bws: ``model.body_world_start`` numpy view, shape
-            ``[world_count + 1]``.
-
-    Raises:
-        ValueError: If ``settled_body_q.shape != bq.shape`` or
-            ``settled_body_qd.shape != bqd.shape`` (shape mismatch indicates
-            cache/live state divergence).
-
-    Returns:
-        None. Mutates ``bq``, ``bqd``, ``prev`` in place.
-    """
-    if settled_body_q.shape != bq.shape:
-        raise ValueError(f"settled_body_q shape {settled_body_q.shape} != bq shape {bq.shape}")
-    if settled_body_qd.shape != bqd.shape:
-        raise ValueError(f"settled_body_qd shape {settled_body_qd.shape} != bqd shape {bqd.shape}")
-    start, end = bws[w], bws[w + 1]
-    bq[start:end] = settled_body_q[start:end]
-    bqd[start:end] = settled_body_qd[start:end]
-    if prev is not None:
-        prev[start:end] = settled_body_q[start:end]
+# NO-KINEMATIC (c13, Rs 2026-07-19 kinematic complete-removal): ``restore_world_body_state`` and
+# ``assign_world_states_to_sim`` (the settled-BODY-state restore machinery, below) are REMOVED.
+# They were a VBD-era body-space reset leftover. On the mujoco (joint-authoritative) path the body
+# pose is derived from joint_q by ``eval_fk`` (run by the CABLE-SEED path over the whole model at
+# reset), so the settled-body push was redundant in every reachable reset path (overwritten by that
+# eval_fk) and dead-effect where the reset raises first (route-start pose gate / approach migration
+# raise). The reset is now carried joint-space (arm: POSITION-servo hold + physical homing transit,
+# design sec14.2/14.3; cable: CABLE-SEED derivation), with bodies following via eval_fk -- no
+# robot/finger body_q write. Mirrors grip PS-2..5 (c11 _seed_robot_joint_row). git c12 f88fe6ea04 =
+# evidence (last commit with the deleted bodies).
 
 
 def derive_cable_joint_q_from_tangents(
@@ -1152,39 +1104,10 @@ def restore_ee_targets_per_world(
     ee_quat_left[w] = settled_ee_l_quat.copy()
 
 
-def assign_world_states_to_sim(
-    state_0,
-    solver,
-    bq: np.ndarray,
-    bqd: np.ndarray,
-    prev: np.ndarray,
-) -> None:
-    """Push CPU-side ``bq``/``bqd``/``prev`` arrays back to the GPU sim state.
-
-    Three ``warp.array.assign`` calls. Use this after a per-world reset loop
-    completes its CPU mutations and before the next physics step.
-
-    Args:
-        state_0: Newton ``State`` instance whose ``body_q`` and ``body_qd``
-            are being updated.
-        solver: Newton ``SolverVBD`` instance whose ``body_q_prev`` is being
-            updated (separate buffer for VBD prev-frame integration).
-        bq: Updated CPU view of ``state_0.body_q``, shape
-            ``[total_bodies, 7]``.
-        bqd: Updated CPU view of ``state_0.body_qd``, shape
-            ``[total_bodies, 6]``.
-        prev: Updated CPU view of ``solver.body_q_prev``, shape
-            ``[total_bodies, 7]``.
-
-    Returns:
-        None. Mutates ``state_0.body_q``, ``state_0.body_qd``, and
-        ``solver.body_q_prev`` (GPU side) in place.
-    """
-    state_0.body_q.assign(bq)
-    state_0.body_qd.assign(bqd)
-    # SC3 flip-prep: SolverMuJoCo has no body_q_prev (VBD-only); hasattr-skip is VBD-byte-identical.
-    if hasattr(solver, "body_q_prev") and solver.body_q_prev is not None:
-        solver.body_q_prev.assign(prev)
+# NO-KINEMATIC (c13): ``assign_world_states_to_sim`` REMOVED -- see the provenance note above
+# ``derive_cable_joint_q_from_tangents``. It pushed the settled body_q/body_qd (and VBD body_q_prev)
+# to the GPU sim state; on the mujoco joint-authoritative path bodies follow joint_q via eval_fk, so
+# the body-state push is a forbidden SINK-2 kinematic write with no remaining purpose.
 
 
 def reset_dahl_friction_for_envs(

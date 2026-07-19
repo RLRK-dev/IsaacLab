@@ -83,8 +83,9 @@ class SnapshotManager:
     ) -> StateSnapshot:
         """Restore physics state to a saved snapshot.
 
-        Follows the reset pattern used by :func:`restore_world_body_state`
-        in :mod:`thread_isaac_lab.envs.newton_skill_env_base`: after writing
+        Follows the reset pattern once embodied by ``restore_world_body_state``
+        (removed 2026-07-19, kinematic-complete-removal) in
+        :mod:`thread_isaac_lab.envs.newton_skill_env_base`: after writing
         ``body_q`` / ``body_qd`` / ``joint_q``, the VBD solver's
         ``body_q_prev`` must be overwritten with the **just-restored**
         ``body_q`` (not the pre-save value). This zeroes the implicit
