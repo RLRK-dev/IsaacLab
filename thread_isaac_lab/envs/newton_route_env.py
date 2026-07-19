@@ -445,6 +445,7 @@ class NewtonRouteEnv(VecEnv):
         self._arm_pd_ramp_frames = int(os.environ.get("ARM_PD_RAMP_FRAMES", "0") or "0")
         self._arm_pd_ramp_k = None  # M-5 ramp frame counter; None = not yet activated
         self._arm_pd_ramp_q0 = None  # M-4 sync snapshot: activation-time realized arm q
+        self._armpd_repose_count = 0  # v1.3 #3 route-start re-pose counter (probe npz/summary flag)
         if self._grasp_actuation and self.cfg.get("route_executor_impl", "stub") != "route_executor":
             raise ValueError(
                 "grasp_actuation=True requires cfg['route_executor_impl']=='route_executor' "
@@ -1199,6 +1200,43 @@ class NewtonRouteEnv(VecEnv):
             # + zeroes qd, but the servo TARGET still carries the episode-end CLOSED command -> re-seed it to
             # OPEN (route step-0) for the reset worlds only (per-world subset; K1c) so episode >= 2 starts OPEN.
             self._route.reseed_grip_open(env_ids)
+            if self._arm_pd_drive:
+                # (d) P-D1 route-start re-pose (design v1.3 correction #3, B-class = phase-k restore
+                # class, once per episode boundary): seed the arm at the recording's frame-0 EXACT q --
+                # the SAME state the banked kinematic FF teleports into on its first drive frame
+                # (finding c1da5dcf54) -- + ctrl target-sync (M-4). qd was zeroed by the authoritative
+                # re-pose above. Guard: gripper OPEN and not-grasping at this boundary, LOUD + counted
+                # (the probe harness folds the count into the npz/summary flag).
+                _rep_rec = getattr(self._route, "_recording", None)
+                assert _rep_rec is not None and _rep_rec.get("arm_q") is not None, (
+                    "armpd route-start re-pose needs a recording with arm_q"
+                )
+                _rep_row = np.asarray(_rep_rec["arm_q"][0], dtype=np.float64)[:_N_ARM_JOINTS]
+                _rep_src12 = self._arm_ow_maps["arm_ow_src"][:12]  # arm-local columns {0-5,14-19}
+                _rep12 = _rep_row[_rep_src12]
+                _rep_jq = self._state_0.joint_q.numpy()
+                _rep_jtp = self._control.joint_target_pos.numpy()
+                _rep_open = float(self._rex.GRIPPER_DRIVER_OPEN_RAD)
+                for w in env_ids:
+                    w = int(w)
+                    assert not bool(np.any(self._g_latched[w])), (
+                        f"armpd re-pose guard: world {w} is grasp-latched at the route-start boundary"
+                    )
+                    for d in self._arm_ow_maps["l_driver_dofs"][w] + self._arm_ow_maps["r_driver_dofs"][w]:
+                        assert abs(float(_rep_jtp[d]) - _rep_open) < 1e-6, (
+                            f"armpd re-pose guard: driver dof {d} target {_rep_jtp[d]} != OPEN {_rep_open}"
+                        )
+                    _rep_q12 = self._arm_ow_maps["arm_ow_q_idx"][w * 12 : (w + 1) * 12]
+                    _rep_qd12 = self._arm_ow_maps["arm_ow_qd_idx"][w * 12 : (w + 1) * 12]
+                    _rep_jq[_rep_q12] = _rep12
+                    _rep_jtp[_rep_qd12] = _rep12
+                self._state_0.joint_q.assign(_rep_jq)
+                self._control.joint_target_pos.assign(_rep_jtp)
+                self._armpd_repose_count += len(env_ids)
+                print(
+                    f"  [ARMPD] route-start re-pose (v1.3 #3): worlds={[int(x) for x in env_ids]} -> "
+                    f"rec frame-0 arm q (ctrl synced, guards PASS)"
+                )
         for w in env_ids:
             w = int(w)
             cable_joints_w = list(

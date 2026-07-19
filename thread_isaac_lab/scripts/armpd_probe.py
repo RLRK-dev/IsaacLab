@@ -367,6 +367,7 @@ def main() -> int:
     # --- drive -------------------------------------------------------------------------------------------
     zero = torch.zeros((1, 6), dtype=torch.float32)
     per_step: list[dict] = []
+    bq_steps: list = []  # per-RL-step full body_q [nbody, 7] -- the offline video-replay source (design sec5 video leg)
     g3_step = None
     first = {"A_held_z_floor": None, "B_contact_loss": None, "C_c1_escape": None, "explosion": None}
     done_step = None
@@ -379,6 +380,7 @@ def main() -> int:
         n_before = len(reset_snaps)
         obs, rew, dones, extras = env.step(zero)
         wp.synchronize()
+        bq_steps.append(env._state_0.body_q.numpy().copy())
         reward = float(rew[0])
         done = bool(dones[0])
         if pin_fire_step is None and getattr(env, "_c1_pin_witness", None) is not None:
@@ -430,6 +432,7 @@ def main() -> int:
         q=q_arr,
         qd=qd_arr,
         ctrl=ctrl_arr,
+        bq_steps=np.asarray(bq_steps, dtype=np.float32),
         rl_step=np.asarray(fr_rl_step, dtype=np.int64),
         route_t=np.asarray(fr_route_t, dtype=np.int64),
         arm_q_idx=np.asarray(arm_q_idx, dtype=np.int64),
@@ -477,6 +480,7 @@ def main() -> int:
         "done_step": done_step,
         "done_reward": done_reward,
         "pin_fire_step": pin_fire_step,
+        "route_start_repose_count": int(getattr(env, "_armpd_repose_count", 0)),
         "quick_tracking": track,
         "frames_logged": int(q_arr.shape[0]) if len(q_arr) else 0,
     }
