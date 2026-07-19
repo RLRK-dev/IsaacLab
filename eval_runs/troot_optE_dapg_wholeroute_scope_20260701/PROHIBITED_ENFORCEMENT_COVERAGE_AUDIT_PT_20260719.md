@@ -123,3 +123,18 @@
 3. 「機構あり」= file:line 引用、「機構なし」= 検索空出力根拠（:39 の 0 件 grep は 2 者独立再現）。最重要 5 主張（PROTECTED_FILES / grip_env :1258,:1441 / sudo:* allow / replay コメントアウト / latent finding 実在）は landing 直前に CC1 が自己再導出。
 4. 提案 G-1〜G-11 全てに形・工数・FP・根拠。実装ゼロ。
 5. 5体 debate 1 round: 指摘全 ACCEPT 反映（REBUT 0）。集計は訂正後値（D4/P5/J10）。
+
+## §7 実装記録 — G-1 / G-10 / G-2（2026-07-19 13:24 JST 着地、Rs 承認「A」= 本バンドル）
+
+- **着地物**（backup = `settings.json.bak_20260719_132228_pre_{G1G2,G10}`、rollback 即可）:
+  - G-1: `~/.claude/settings.json` **deny 16 entries**（reboot 意味論のみ: sudo/bare reboot・systemctl (soft-)reboot・shutdown -r・init 6・telinit 6。⚠ audit 原文 `Bash(sudo reboot*)` 1 個からの**拡張は実装時 5体 debate CC2 指摘による — Rs 追認待ち**、一言で rollback 可）
+  - G-2: 同 file **ask 16 entries**（debate 採用: `Bash(kill:*)` は**意図的に不採用**〔isaac-sim-execution 必須手順・kill -0/-USR1 慣用と衝突、CC5〕/ systemctl **restart** 系を追加〔monitor restart = ハーネス停止相当、monitor_ssot.sh:1400 実例〕）
+  - G-10: `.claude/hooks/preflight_gate.sh`（advisory・exit 0 常時・WARN 詳細注入・~1KB）+ project settings SessionStart ×4 matcher に配線。**「F 化」は過大表現と判明 → 正しくは「強制注入つき P」**（SessionStart は block 不能）
+  - allow 配列は両 file とも **byte-identical**（緩和ゼロ、post-panel set-diff = ∅ 検証済）
+- **Positive control（実弾）**: `sudo reboot --help` → **"Permission ... has been denied" = deny 発火・再起動不要で即 live** ✓ / ask 対象 `pkill -f 'z[z]z…'` → **prompt なしで実行**（rc=1 無害）
+- **⭐ モード発見（本実装の最重要知見）**: user settings `defaultMode: "auto"` により session は don't-ask 系モード — CLI binary 実証（v2.1.215 strings）:「bypassPermissions auto-approves every tool call **(except explicit deny rules)**」「denied because Claude Code is running in don't ask mode」⇒ **ask 層は現行運用モードで silent auto-approve（inert）・deny のみ貫通**。系:
+  - G-2 の実効分類は F(ask) でなく **「LANDED-inert-in-auto-mode」**（default モード pane でのみ prompt 発火）。§4 G-2 行の F(ask) 表記はこの条件付きで読むこと。
+  - 逆に **G-1 deny は `--dangerously-skip-permissions` の自律 worker 経路（run_cc_agent.sh:146）にも効く**（bypass も deny は除外されない）— §7 以前の「自律経路は対象外」推定（CC3-F2）を上方修正。
+- **既知の迂回限界**（naive/事故防止が目的、確信犯は防げない）: `bash -c "…"` / `python -c os.system` / パイプ先頭別コマンド（`ps|…|xargs kill` は kill 規則に非該当）。`Bash(bash *)` が allow 済みである事も標準的迂回路。
+- **G-2 実効化の選択肢（Rs 裁定待ち）**: (i) 現状維持 = default モード pane 向け defense-in-depth（コストゼロ） (ii) 最鋭利パターンのみ deny 昇格（例 `Bash(pkill -f train:*)` — CC は常に不可・必要時は Rs が `!` で自走） (iii) pane を default モード運用に変更（全操作 prompt 化）。
+- **随伴 findings（別裁定推奨）**: isaac-sim-execution SKILL.md:214-238 の hygiene-kill が `isaac` substring で**稼働中 train プロセスを誤 kill し得る**（env_isaaclab6 python パス一致、CC5 発見 — skill の grep 修正が根治）/ 過去実事故 = `05-Thinking/Incident-20260405-Unauthorized-Kill.md`（CC が PID 146232 を無承認 kill = G-2 は再発防止）/ implementation-rules SKILL.md の reboot 文言（「approved 後実行」）は deny と不整合 → 「提案のみ・実行は Rs」へ改訂推奨 / `pkill:*` の allow/ask 重複整理・poweroff/halt への deny 拡張・settings.local.json 残置 allow 整理 = 任意。
