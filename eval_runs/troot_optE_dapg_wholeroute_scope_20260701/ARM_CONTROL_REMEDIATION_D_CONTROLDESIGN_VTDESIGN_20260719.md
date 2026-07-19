@@ -12,6 +12,7 @@
 | v1.4 | `e32c75c3a4` | 10:45 | Rs review 対応: ③B1 裁定 / ④§7-5 supersede + L-P0 REQUIRED / ⑤仮説 tag / ⑥guard rename+時間意味論 / ⑦§8-2 UNVERIFIED / L-P5 再設計 mark |
 | v1.5 | `a584be8545` | 11:26/11:43 | §12 = prereg v1.1 L-P5′/L-P2′ RATIFY + 精密化 2（11:26 dispatch）→ **Rs review v2 残 6 点 fold（11:43）**: ①A-P0-5 FF 実経路 site 列挙（§5 修正）②A-P0-6 run-matrix 表 ③A-P0-3 L-P0 defer 句削除+役割宣言 ④A-P1-3 negative control 再設計 = stale-target PRIMARY（§12.1、**§12-① L-P5′ を supersede**）⑤A-P1-4 re-pose 受入検査群 spec（§12.2）⑥P-P1-2 stamp 規約注記 |
 | v1.6 | `f200bfd78c` | 12:30/12:44 | §12.2-R: Declared bands readback = **全 5 項 ACCEPT**（12:30。走行 GO は v3 §7-7 に superseded — 注記済）→ **Rs review v3 lane 4 点 fold（12:44）**: ①header BANKED 形式化 ②B2 fallback = STOP+design delta+p5/pN 再レビュー gate 明文 ③implicitfast 安定性 = 仮説 tag 軟化（authority = 経験 gate）④A-7 pin/eq ownership 検査を §12.2 suite へ追加 |
+| v1.7 | bank = %12 | 13:29 | §13 = P-D1 RESULT 裁定: R-1 verdict = FAIL(tracking-transient) as-frozen record（力 FEASIBLE 確立・qs N/A ACK・L-P2′ PARTIAL ACK）/ R-2 §8-4 = 機構指向形で可（kd/ke lever、C-1 kd×0.25・C-2 +ke×2、S-1 bar 再設計宣言 = lag-law + endpoint）/ R-3 順序 = choreography-blocked CONFIRM・W-a 並行可・W-b + video 供覧 = Rs 専権・再記録 robustness leg 必須化 |
 
 > **stamp/placeholder 規約（⑥ P-P1-2）**: stamp = dispatch 時 `date` 実測 JST。「bank = %12」SHA cell = bank 待ち placeholder（bank 後に %12 records-fix で実 SHA 充填、v1.4 先例 `c951a072d7`）。§0.0 narrative 内の「HH:2x」型 = 当時 verbatim の分丸め表記（exact anchor = 本表）。歴史注記: v1.4/v1.5 の stamp は当初 予測時刻を記入→dispatch 前に実測へ訂正した（10:52→10:45 / 11:29→11:26、date-THEN-write 違反の自己捕捉 2 回）。
 
@@ -279,5 +280,28 @@ FOUNDATIONAL 未解決依存で本 **設計** chunk を block するものなし
 | A-7 | pin/eq ownership 不整合なし（v1.6-④、A-P1-1 残） | re-pose 書込の前後（solver step を挟まず）で clip-pin eq 状態 slice（eq_active flags + eq anchor/data 配列）が byte 恒等 ∧ 境界での期待状態 = pin 未発火（fired flag False・onset None・audit counter 0）を assert — **re-pose は eq を activate/deactivate/re-anchor しない・eq ownership は pin 機構（authorize_clip_pin 経路）に排他帰属のまま**（INVARIANT#5 の例外面に re-pose が触れないことの機械保証） |
 
 band/ε_pen の数値 = prereg 凍結時に %12 が宣言（p5 readback で確認）。
+
+## §13 P-D1 RESULT 裁定（v1.7、設計軸 — 対象 = `ARM_CONTROL_PD1_RESULT_RSTECHLEAD_20260719.md` bank `e5d2dc214a`、p5 全文読了。⚠ video leg = PENDING ゆえ物理妥当性の最終言明は Rs 動画後）
+
+### R-1 probe verdict（凍結 bar のまま・bar 移動なし）
+- **FAIL(tracking-transient)**〔tr_joint_max 0.512 rad / tr_EE 99.9mm vs 凍結 bar 5mrad/3mm〕を **as-frozen で record**。計器は全 VALID（R4 較正 dev 8.9mrad ≪ band 196 / R3≡R2 恒等 0.0 / ctrl≡intended 0.0）ゆえ FAIL は信頼できる。
+- pivotal unknown（brief §3）の分解回答: **力 = FEASIBLE 確立**（飽和 0.0%・worst 25.1<28 N·m、定常力 ≈ τ_ext の機構整合）/ **速度帯域 = vendor gains では banked 記録の速い区間に不足**（粘性 slew lag err≈(kd/ke)·ω、実測則一致、T_lag = 400/2000 = 100/500 = **0.2 s 一様**）/ 静的精度 = 遅い区間で 1-5 mrad（2mrad 目標圏。形式上は qs 窓 EMPTY→**N/A per P-2 — %12 の「never PASS」適用は正、ACK**）。
+- L-P2′ = **PARTIAL record ACK**（述語 parity 成立・termination parity 不成立〔R1 horizon vs R2 drop@141 = lag が contact-loss debounce を trip〕、P-1 連続量 reported ✓）。A-suite/L-P4/L-P6 = PASS。
+
+### R-2 §8-4 適用 = **可、ただし機構指向形（blind ×0.5/×2 でない）**
+- **lever = kd/ke 比**（%12 示唆に concur、実測機構が根拠）。授権 exploration = **R2-class 単発 re-probe × 候補 2**（prereg v1.3 = 宣言 diff で凍結後）: **C-1 = kd×0.25**（T_lag 0.2→0.05 s、lag@2rad/s ≈ 0.13 rad）/ **C-2 = kd×0.25 + ke×2**（T_lag 0.025 s）。⛔ effort cap 不変（§3.1）。各走行に ringing/overshoot 報告 leg + M-6 dwell + L-P3 を必須添付（ζ ~3→~0.8 の減衰余裕は概算〔仮説 tag〕— **安定性 authority = 実測**、v1.6-③）。
+- **S-1 bar 構造の再設計を宣言**（本 probe の verdict 救済ではない — measured mechanism が正当化根拠）: 一律 transient 5mrad は smooth-lag class を誤モデル化（実質、指令速度を bar している）。S-1 案 = (i) 静的/settle 窓 ≤2mrad〔維持〕 (ii) **lag-law bar: 実測 T_lag = err/ω ≤ T_LAG_BAR**（速度非依存の realization 品質量、凍結値は C-1/C-2 実測後） (iii) phase-endpoint 到達 err ≤ 5mrad（task が消費する精度点） (iv) no-ringing（overshoot bar + M-6 持続 0） (v) M-6 divergence guard。→ prereg v1.3 で宣言凍結、最終 S-1 freeze は Rs re-sequencing 後。
+- FAIL(saturation) 分岐 = 発動せず（0.0%）— re-trajectory chunk 不要の確認。
+
+### R-3 順序裁定（choreography-blocked との関係）
+- **L-P0 headline = S-1 choreography-blocked を evidence 級で CONFIRM**（R1 clean-kin ですら連鎖 never・arm q 差 ≤1.1mrad ⇒ flip は cable 側 knife-edge 応答。gains をどれだけ改善しても R1 の再現 = 連鎖死 — **gains 側では直せない**）。
+- 並行構造: **(W-a) kd-lever re-probe（R-2）= PARALLEL-OK**（安価・read-only・Rs 判断と独立に S-1 bar 設計を進める）/ **(W-b) 振付再工事**（清潔基盤 demo 再記録 = S-2 前倒し、#21 fold）= **Rs 専権 surface**（banked 再利用 impact + re-sequencing）。
+- 順序: **(1) video leg 納品（R0/R1/R2 → ~/Downloads）+ 本 RESULT の Rs 供覧が最優先**（L-P0 headline の物理妥当性は Rs 動画 human-GT が最終）→ (2) W-a 並行 → (3) Rs 決定後に S-1/S-2 計画改訂。
+- **forward 設計要件（再記録 charter への input、今裁定の付帯）**: 1mrad 級で連鎖が flip する振付は DR/residual（15mm 級）/noise 下の訓練に耐えない — **再記録振付には robustness leg（摂動耐性 ≥ trainer residual/DR scale）を必須化**し、「もう一つの knife-edge を bank する」再発を防ぐ（O-1/#18 の marginal-grasp 共通 thread）。
+
+### R-4 次 action
+1. %12: video leg 納品 → Rs 供覧（RESULT + 本 §13 pointer 添付）。
+2. %12: prereg v1.3（C-1/C-2 + S-1 bar 案 + ringing leg）起草 → p5 readback → 凍結 → W-a 走行。
+3. Rs: re-sequencing 決定（W-b）→ 決定後に p5 が S-1 bar 最終凍結 + stage 計画改訂。
 
 **§12.2-R readback 完（v1.6、12:30）**: prereg v1.1 凍結 `879df7945a` の §3 Declared bands 表を on-disk 照合 = message と全 5 項一致、p5 独立検算で **全 ACCEPT**: ①較正 band 0.06+5%·predicted（hold sag ≲0.04 基礎と整合・罠実証 0.007 vs 0.758 = catch class を桁判別）②ε_pen 3mm（正常貫通 1.1mm と teleport 交差を分離・GLOBAL min = spec の保守的上位集合）③Δv max(2×R0b 同 frame, 0.01)（scale-free + floor、R0b 先行順序確認）④M-6 48frame/15mrad report-only（v1.4-⑥ 一致）⑤L-P1 = |q−ctrl| + `max|ctrl−intended|≤1e-9` cross-check・R3 のみ intended 比（**§12.1 ⛔条件 discharge + R1/R2 配線 bug も封じる強化形として ACK**）。註 1: ①の band class = stream 同一性/粗配線の較正であり frame-exactness は A-2/A-6 が担う（band を frame offset 検出に読み替えない）。**6 走行（R4 exploratory 込み）開始 OK**。⚠**12:35 SUPERSEDED（Rs review v3 §7-7）**: 本 GO は v3 の gate（凍結/走行 = v1.6 bank + prereg v1.2 凍結後）に先行して発行されたため無効 — 走行保留、band ACCEPT 自体は有効のまま（v1.2 凍結時に継承）。
