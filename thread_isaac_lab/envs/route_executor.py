@@ -4642,6 +4642,9 @@ class RouteExecutor(rc.RouteInterfaceV1):
         self._requested_phase = 0
         self._forbid_banked_fork = bool(forbid_banked_fork)
         self._grip_rb_checked = False  # one-time device-readback assert flag (CC3-CH5/R8) for apply_recorded_grip
+        # (d) P-D1 probe flag (design v1.2 sec2): the FF per-frame arm drive switches from the kinematic
+        # joint_q write to the POSITION-servo ctrl write in apply_recorded_arm_ff. Default OFF.
+        self._arm_pd_drive = os.environ.get("ARM_PD_DRIVE") == "1"
         if control is not None:
             servo_seed_assert(control.joint_target_pos.numpy(), self._maps["all_driver_dofs"])
         self._recording = _prepare_recording(recording) if recording is not None else None
@@ -5045,11 +5048,20 @@ class RouteExecutor(rc.RouteInterfaceV1):
             si = (_REC_CADENCE - 1) if (hold_mask is not None and bool(hold_mask[w])) else int(sub_i)
             f = min(int(step_f[tt]) + si, n_frames - 1)
             jq_ff[w] = arm_q[f, :_N_ARM_JOINTS]
-        phys_jq = state.joint_q.numpy()  # host copy (CC3-CH5)
-        phys_jqd = state.joint_qd.numpy()
-        apply_arm_only_write_perworld(phys_jq, phys_jqd, jq_ff, arm_ow_q_idx, arm_ow_qd_idx)
-        state.joint_q.assign(phys_jq)
-        state.joint_qd.assign(phys_jqd)
+        if self._arm_pd_drive:
+            # (d) P-D1 FF ctrl-drive (design v1.2 sec2 (A), FF path): write the SAME recorded per-frame
+            # arm target into the POSITION-servo ctrl (read->mutate->assign, CC3-CH5) instead of the
+            # kinematic joint_q force. joint_target_pos is qd-indexed; the arm-local column selection
+            # mirrors apply_arm_only_write_perworld's own jq[:, _ARM_OVERWRITE_LOCAL] internal.
+            jtp = self._control.joint_target_pos.numpy()
+            jtp[self._maps["arm_ow_qd_idx"]] = jq_ff[:, _ARM_OVERWRITE_LOCAL].reshape(-1)
+            self._control.joint_target_pos.assign(jtp)
+        else:
+            phys_jq = state.joint_q.numpy()  # host copy (CC3-CH5)
+            phys_jqd = state.joint_qd.numpy()
+            apply_arm_only_write_perworld(phys_jq, phys_jqd, jq_ff, arm_ow_q_idx, arm_ow_qd_idx)
+            state.joint_q.assign(phys_jq)
+            state.joint_qd.assign(phys_jqd)
         return jq_ff
 
     def reseed_grip_open(self, env_ids):

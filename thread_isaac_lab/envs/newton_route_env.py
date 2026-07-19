@@ -437,6 +437,14 @@ class NewtonRouteEnv(VecEnv):
         _ga = self.cfg.get("grasp_actuation", False)
         assert isinstance(_ga, bool), f"cfg['grasp_actuation'] must be a bool, got {type(_ga).__name__}"
         self._grasp_actuation = _ga
+        # (d) P-D1 probe flags (design v1.2 sec5): ARM ctrl-drive switch for the per-step drive ONLY
+        # (reset/settle B-sites stay kinematic in the probe). Default OFF -> byte-identical.
+        # ARM_XML_ACT_NEUTRALIZE alone = L-P0 mode (imported-actuator neutralization, kinematic drive).
+        self._arm_pd_drive = os.environ.get("ARM_PD_DRIVE") == "1"
+        self._arm_xml_act_neutralize = self._arm_pd_drive or os.environ.get("ARM_XML_ACT_NEUTRALIZE") == "1"
+        self._arm_pd_ramp_frames = int(os.environ.get("ARM_PD_RAMP_FRAMES", "0") or "0")
+        self._arm_pd_ramp_k = None  # M-5 ramp frame counter; None = not yet activated
+        self._arm_pd_ramp_q0 = None  # M-4 sync snapshot: activation-time realized arm q
         if self._grasp_actuation and self.cfg.get("route_executor_impl", "stub") != "route_executor":
             raise ValueError(
                 "grasp_actuation=True requires cfg['route_executor_impl']=='route_executor' "
@@ -764,6 +772,97 @@ class NewtonRouteEnv(VecEnv):
             servo_readback_assert(self._model, self._solver.mj_model, self._arm_ow_maps["all_driver_dofs"], _neg)
             # R-C: fail-loud lane-floor vs as-built void parity (drift guard for future void changes).
             lane_void_parity_assert(self._solver.mj_model)
+            if self._arm_xml_act_neutralize:
+                # (d) P-D1 L-P6 census (design v1.2 Option B): on the BUILT model --
+                # (1) the 12 IMPORTED ur5e.xml arm actuators are verifiably INERT: gainprm==0 AND
+                #     biasprm==0 on BOTH mj_model and mjw_model (the proto zeroing propagated), then
+                #     poke actuator_forcerange := 0 on both (imported carry forcelimited=1, measured
+                #     in diag/dump_forcerange.log) + readback -- force == 0 by gain AND by clamp;
+                # (2) [PD mode only] exactly 12 actuators carry the SCALED design servo shape;
+                #     jnt_actfrcrange at the arm joints == the UNSCALED effort caps; negative control.
+                import mujoco as _apd_mj
+
+                _apd_scale = float(os.environ.get("ARM_PD_GAINS_SCALE", "1.0"))
+                _apd_m = self._solver.mj_model
+                _apd_mjw = getattr(self._solver, "mjw_model", None)
+                _apd_gain = np.asarray(_apd_m.actuator_gainprm)
+                _apd_bias = np.asarray(_apd_m.actuator_biasprm)
+                _apd_trn = np.asarray(_apd_m.actuator_trnid)
+                _apd_arm_acts = []
+                for a in range(int(_apd_m.nu)):
+                    j = int(_apd_trn[a, 0])
+                    jn = _apd_mj.mj_id2name(_apd_m, _apd_mj.mjtObj.mjOBJ_JOINT, j) or ""
+                    if "ur5e" in jn:
+                        _apd_arm_acts.append(a)
+                _apd_inert = [a for a in _apd_arm_acts if abs(float(_apd_gain[a, 0])) < 1e-9]
+                _apd_live = [a for a in _apd_arm_acts if a not in _apd_inert]
+                assert len(_apd_inert) == 12, (
+                    f"armpd-census: inert (imported, zeroed) arm actuators = {len(_apd_inert)} != 12 "
+                    f"(nu={int(_apd_m.nu)}, arm-mapped={len(_apd_arm_acts)})"
+                )
+                for a in _apd_inert:
+                    assert float(np.max(np.abs(_apd_gain[a]))) < 1e-9, f"armpd-census: inert act {a} gainprm != 0"
+                    assert float(np.max(np.abs(_apd_bias[a]))) < 1e-9, f"armpd-census: inert act {a} biasprm != 0"
+                if _apd_mjw is not None and hasattr(_apd_mjw, "actuator_gainprm"):
+                    _g_dev = _apd_mjw.actuator_gainprm.numpy()
+                    _b_dev = _apd_mjw.actuator_biasprm.numpy()
+                    for a in _apd_inert:
+                        assert float(np.max(np.abs(_g_dev[:, a, :]))) < 1e-9, f"armpd-census: mjw act {a} gain != 0"
+                        assert float(np.max(np.abs(_b_dev[:, a, :]))) < 1e-9, f"armpd-census: mjw act {a} bias != 0"
+                # forcerange poke -> 0 on the inert set (host template + device model, ALL worlds), then
+                # readback. forcelimited must already be 1 (measured import default) so range 0 clamps to 0.
+                _apd_frl = np.asarray(_apd_m.actuator_forcelimited)
+                for a in _apd_inert:
+                    assert int(_apd_frl[a]) == 1, f"armpd-census: inert act {a} forcelimited != 1"
+                    _apd_m.actuator_forcerange[a, :] = 0.0
+                if _apd_mjw is not None and hasattr(_apd_mjw, "actuator_forcerange"):
+                    _fr_dev = _apd_mjw.actuator_forcerange.numpy()
+                    _fr_dev[:, _apd_inert, :] = 0.0
+                    _apd_mjw.actuator_forcerange.assign(_fr_dev)
+                    _fr_rb = _apd_mjw.actuator_forcerange.numpy()
+                    assert float(np.max(np.abs(_fr_rb[:, _apd_inert, :]))) < 1e-9, "armpd-census: mjw forcerange poke did not land"
+                if self._arm_pd_drive:
+                    _apd_sz3 = (2000.0 * _apd_scale, 400.0 * _apd_scale, 150.0)
+                    _apd_sz1 = (500.0 * _apd_scale, 100.0 * _apd_scale, 28.0)
+                    assert len(_apd_live) == 12, (
+                        f"armpd-census: live (synthesized) arm actuators = {len(_apd_live)} != 12"
+                    )
+                    _apd_jfr = np.asarray(_apd_m.jnt_actfrcrange)
+                    for a in _apd_live:
+                        _is3 = abs(float(_apd_gain[a, 0]) - _apd_sz3[0]) < 1e-3
+                        _is1 = abs(float(_apd_gain[a, 0]) - _apd_sz1[0]) < 1e-3
+                        assert _is3 or _is1, f"armpd-census: live act {a} gain0 {float(_apd_gain[a, 0])} matches neither size"
+                        _eke, _ekd, _eeff = _apd_sz3 if _is3 else _apd_sz1
+                        assert abs(float(_apd_bias[a, 1]) + _eke) < 1e-3, f"armpd-census: live act {a} biasprm1"
+                        assert abs(float(_apd_bias[a, 2]) + _ekd) < 1e-3, f"armpd-census: live act {a} biasprm2"
+                        j = int(_apd_trn[a, 0])
+                        assert abs(float(_apd_jfr[j, 0]) + _eeff) < 1e-3 and abs(float(_apd_jfr[j, 1]) - _eeff) < 1e-3, (
+                            f"armpd-census: live act {a} joint {j} actfrcrange {_apd_jfr[j]} != +-{_eeff} (caps UNSCALED)"
+                        )
+                    _apd_jtm = self._model.joint_target_mode.numpy()
+                    _apd_ke = self._model.joint_target_ke.numpy()
+                    _apd_pos = int(newton.JointTargetMode.POSITION)
+                    for w in range(self._world_count):
+                        for _apd_base in (0, JOINTS_PER_ARM):
+                            for _apd_li in range(6):
+                                d = self._arm_qd_start[w] + _apd_base + _apd_li
+                                eke = (_apd_sz3 if _apd_li < 3 else _apd_sz1)[0]
+                                assert int(_apd_jtm[d]) == _apd_pos, f"armpd-census: dof {d} mode {_apd_jtm[d]}"
+                                assert abs(float(_apd_ke[d]) - eke) < 1e-3, f"armpd-census: dof {d} ke {_apd_ke[d]} != {eke}"
+                        d = self._arm_qd_start[w] + GRIPPER_DRIVER_JOINT_IDX[0] + 1  # a 4-bar follower
+                        _apd_neg = int(_apd_jtm[d]) == _apd_pos and (
+                            abs(float(_apd_ke[d]) - _apd_sz3[0]) < 1e-3 or abs(float(_apd_ke[d]) - _apd_sz1[0]) < 1e-3
+                        )
+                        assert not _apd_neg, f"armpd-census NEGATIVE CONTROL: follower dof {d} carries an arm servo"
+                else:
+                    # L-P0 mode: neutralize-only -- NO synthesized arm servos may exist.
+                    assert len(_apd_live) == 0, (
+                        f"armpd-census (L-P0): expected 0 live arm actuators, got {len(_apd_live)}"
+                    )
+                print(
+                    f"  [ARMPD] L-P6 census PASS: inert imported=12 (gain/bias/forcerange 0, mj+mjw), "
+                    f"live={len(_apd_live)}, mode={'PD' if self._arm_pd_drive else 'L-P0'}, scale={_apd_scale}"
+                )
         print(
             f"[NewtonRouteEnv] Model: {self._model.body_count} bodies, "
             f"{self._model.joint_count} joints, solver={type(self._solver).__name__}"
@@ -1254,7 +1353,27 @@ class NewtonRouteEnv(VecEnv):
                 jq_interp = old_fk_jq + (jq_targets - old_fk_jq) * t
                 phys_jq = self._state_0.joint_q.numpy()
                 phys_jqd = self._state_0.joint_qd.numpy()
-                if self._grasp_actuation:
+                if self._grasp_actuation and self._arm_pd_drive:
+                    # (d) P-D1 ARM ctrl-drive (design M-2 / sec2 (A)): write the SAME per-frame interp
+                    # target into the POSITION-servo ctrl (read->mutate->assign, CC3-CH5) instead of
+                    # forcing joint_q/qd -- the kinematic write below is NOT executed on this path.
+                    # joint_target_pos is qd-indexed (set_gripper_target docstring); rows/cols via the
+                    # maps so no private import. M-5 ramp: on activation, blend from the realized arm
+                    # q over ARM_PD_RAMP_FRAMES physics frames (0 = off).
+                    _apd_src = self._arm_ow_maps["arm_ow_src"]
+                    _apd_rows = np.repeat(np.arange(jq_interp.shape[0]), len(_apd_src) // jq_interp.shape[0])
+                    _apd_tgt = jq_interp[_apd_rows, _apd_src]
+                    if self._arm_pd_ramp_frames > 0:
+                        if self._arm_pd_ramp_k is None:
+                            self._arm_pd_ramp_q0 = phys_jq[self._arm_ow_maps["arm_ow_q_idx"]].copy()
+                            self._arm_pd_ramp_k = 0
+                        _apd_b = min(1.0, self._arm_pd_ramp_k / float(self._arm_pd_ramp_frames))
+                        _apd_tgt = _apd_b * _apd_tgt + (1.0 - _apd_b) * self._arm_pd_ramp_q0
+                        self._arm_pd_ramp_k += 1
+                    _apd_jtp = self._control.joint_target_pos.numpy()
+                    _apd_jtp[self._arm_ow_maps["arm_ow_qd_idx"]] = _apd_tgt
+                    self._control.joint_target_pos.assign(_apd_jtp)
+                elif self._grasp_actuation:
                     # comp3: arm-only per-world drive; gripper coords {6-13,20-27} left DYNAMIC (servo-driven;
                     # the recorded grip_cmd staircase writes control.joint_target_pos separately -- R2/chunk 2).
                     self._rex.apply_arm_only_write_perworld(
