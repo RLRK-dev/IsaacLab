@@ -245,7 +245,8 @@ class NewtonGripEnv(VecEnv):
 
     # Cache
     CACHE_DIR = os.path.join(_env_dir, "..", "data", "rl_grip_cache")
-    CACHE_VERSION = "v10_ps2"  # v9→v10_ps2: joint-seed restore (c11); pre-PS2 caches = kinematic-lineage settled states, invalidated
+    # v9->v10_ps2: joint-seed restore (c11); pre-PS2 caches = kinematic-lineage states, invalidated.
+    CACHE_VERSION = "v10_ps2"
 
     def __init__(self, world_count=4, device="cuda:0", mode="clamp", cfg=None, dual_arm=False):
         assert mode in ("clamp", "unclamp"), f"Invalid mode: {mode}"
@@ -412,7 +413,9 @@ class NewtonGripEnv(VecEnv):
                         d = int(self._arm_qd_idx[w, _base + _li])
                         eke = (2000.0 if _li < 3 else 500.0) * _ps1_ke_scale
                         assert int(_ps1_jtm[d]) == _ps1_pos, f"grip PS-1 census: dof {d} mode {_ps1_jtm[d]}"
-                        assert abs(float(_ps1_ke[d]) - eke) < 1e-3, f"grip PS-1 census: dof {d} ke {_ps1_ke[d]} != {eke}"
+                        assert abs(float(_ps1_ke[d]) - eke) < 1e-3, (
+                            f"grip PS-1 census: dof {d} ke {_ps1_ke[d]} != {eke}"
+                        )
             print(f"[GripEnv:{self._mode}] PS-1 census PASS: nu=12 arm servos wired (B1-strip clean)")
 
         print(f"[GripEnv:{self._mode}] Model: {self._model.body_count} bodies, {self._model.joint_count} joints")
@@ -870,7 +873,10 @@ class NewtonGripEnv(VecEnv):
         self._state_0.joint_qd.assign(jqd)
         self._control.joint_target_pos.assign(jtp)
         newton.eval_fk(self._model, self._state_0.joint_q, self._state_0.joint_qd, self._state_0)
-        print(f"[GripEnv:{self._mode}] RESET-SEED ({label}): robot joints seeded, worlds={worlds[:4]}{'...' if len(worlds) > 4 else ''}")
+        print(
+            f"[GripEnv:{self._mode}] RESET-SEED ({label}): robot joints seeded, "
+            f"worlds={worlds[:4]}{'...' if len(worlds) > 4 else ''}"
+        )
 
     def _seed_cable_from_snapshot(self, worlds):
         """Cable OBJECT episode-boundary init via the sanctioned CABLE-SEED path: derive the cable

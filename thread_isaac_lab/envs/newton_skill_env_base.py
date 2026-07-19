@@ -1648,10 +1648,7 @@ def build_multiworld_scene(  # noqa: C901 (pre-existing scene-builder complexity
             _apd_ga = proto.custom_attributes.get("mujoco:actuator_gainprm")
             _apd_ba = proto.custom_attributes.get("mujoco:actuator_biasprm")
             assert (
-                _apd_ga is not None
-                and _apd_ba is not None
-                and len(_apd_ga.values) == 12
-                and len(_apd_ba.values) == 12
+                _apd_ga is not None and _apd_ba is not None and len(_apd_ga.values) == 12 and len(_apd_ba.values) == 12
             ), (
                 "armpd-neutralize: expected EXACTLY the 12 imported ur5e arm actuators in the proto "
                 f"custom attrs, got gain={None if _apd_ga is None else len(_apd_ga.values)} "

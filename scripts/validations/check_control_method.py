@@ -48,7 +48,7 @@ SEEDER_HOST_NAMES = {"jq", "jqd"}
 
 # G5: sanctioned body-space cable seeds (object episode-boundary init, p5 sec14.14).
 # EMPTY today -- the sanctioned cable seed is joint-space. Robot/finger bodies may NEVER appear here.
-BODY_CABLE_SEED_MANIFEST: dict[tuple[str, str], int] = {}
+BODY_CABLE_SEED_MANIFEST: dict[tuple[str, str], dict[str, int]] = {}
 
 # RESET-SEED manifest (pN follow-up ruling 18:17 JST): CLAUDE.md:67's "once at reset, before the
 # first step" joint-state initialization is the ONLY sanctioned joint-seed class. Entries are
@@ -196,11 +196,7 @@ class _FileCheck(ast.NodeVisitor):
                 toks = _tokens(holder)
                 if holder.attr in JQ_ASSIGN_ATTRS and not _has_fk_token(toks[:-1]):
                     key = (self.rel, self.func_stack[-1])
-                    if (
-                        self._line_marked(node.lineno)
-                        and key in CARRY_MANIFEST
-                        and holder.attr in CARRY_MANIFEST[key]
-                    ):
+                    if self._line_marked(node.lineno) and key in CARRY_MANIFEST and holder.attr in CARRY_MANIFEST[key]:
                         # G3: a marker is honored ONLY at its pinned (file, function, receiver).
                         self.marked.append((self.func_stack[-1], holder.attr, node.lineno))
                     elif key in RESET_SEED_MANIFEST:
@@ -249,7 +245,10 @@ _NEG_CONTROLS: list[tuple[str, str]] = [
     ("receiver-substring-spoof", "def f(not_fk_state, a):\n    not_fk_state.joint_q.assign(a)\n"),  # G3
     ("body-assign", "def f(s, a):\n    s.body_q.assign(a)\n"),
     ("body-prev-assign", "def f(sol, a):\n    sol.body_q_prev.assign(a)\n"),
-    ("marker-on-unpinned-function", "def not_the_seeder(s, a):\n    s.joint_q.assign(a)  " + MARKER + ": fake)\n"),  # G3
+    (
+        "marker-on-unpinned-function",
+        "def not_the_seeder(s, a):\n    s.joint_q.assign(a)  " + MARKER + ": fake)\n",
+    ),  # G3
     ("eq-active-store", "def f(mjd):\n    mjd.eq_active[3] = 1\n"),
     ("eq-active-attr-store", "def f(mjd, x):\n    mjd.eq_active = x\n"),  # G2
     ("qpos-store", "def f(d, i):\n    d.qpos[i] = 0.5\n"),
@@ -278,7 +277,10 @@ def self_test() -> bool:
     for name, snippet in _POS_CONTROLS:
         fc = check_source("<pos>", snippet)
         if fc.hits or fc.marked:
-            print(f"  [SELF-TEST FAIL] positive control false-positived: {name} -> {[(h.lineno, h.klass) for h in fc.hits] or fc.marked}")
+            print(
+                f"  [SELF-TEST FAIL] positive control false-positived: "
+                f"{name} -> {[(h.lineno, h.klass) for h in fc.hits] or fc.marked}"
+            )
             ok = False
     # G3 same-count marker-spoof: a marker MOVED onto an arm writer (count preserved) must FAIL
     spoof = (
@@ -317,7 +319,9 @@ def main() -> int:
         print("LAYER8_FAIL=1")
         print("LAYER8_WARN=0")
         return 1
-    print(f"  [SELF-TEST] all controls behave ({len(_NEG_CONTROLS)} neg / {len(_POS_CONTROLS)} pos / spoof / injection)")
+    print(
+        f"  [SELF-TEST] all controls behave ({len(_NEG_CONTROLS)} neg / {len(_POS_CONTROLS)} pos / spoof / injection)"
+    )
 
     sink = source = unparse = fail = 0
     fixture_hits = 0
@@ -349,12 +353,16 @@ def main() -> int:
                 marked_seen.setdefault((rel, func), {}).setdefault(attr, 0)
                 marked_seen[(rel, func)][attr] += 1
                 if attr.startswith("reset-seed:"):
-                    print(f"  [RESET-SEED] {rel}:{ln}: sanctioned once-at-reset joint seed in {func} (pN 18:17 manifest)")
+                    print(
+                        f"  [RESET-SEED] {rel}:{ln}: sanctioned once-at-reset joint seed in {func} (pN 18:17 manifest)"
+                    )
                 else:
                     print(f"  [CARRY] {rel}:{ln}: CABLE-SEED marked in {func} (declared sec14.2 step-3 carry)")
     expected_marks: dict[tuple[str, str], dict[str, int]] = {k: dict(v) for k, v in CARRY_MANIFEST.items()}
     for k, v in RESET_SEED_MANIFEST.items():
         expected_marks.setdefault(k, {}).update({"reset-seed:" + a: c for a, c in v.items()})
+    for k, v in BODY_CABLE_SEED_MANIFEST.items():  # pN H1: merge so a nonempty BODY hook is usable
+        expected_marks.setdefault(k, {}).update(dict(v))
     if marked_seen != expected_marks:
         print(f"  [FAIL] carry/reset-seed manifest mismatch: found {marked_seen} expected {expected_marks}")
         fail += 1
@@ -364,15 +372,24 @@ def main() -> int:
         print(f"  [FAIL] fixture manifest count drift: found {fixture_hits} expected {expected_fixture}")
         fail += 1
     elif fixture_hits:
-        print(f"  [FIXTURE-INVENTORY] {fixture_hits} mock-state write(s) across {len(fixture_files)} pinned host-mock pytest file(s) (per-function manifest)")
+        print(
+            f"  [FIXTURE-INVENTORY] {fixture_hits} mock-state write(s) across "
+            f"{len(fixture_files)} pinned host-mock pytest file(s) (per-function manifest)"
+        )
 
     carries = sum(c for m in marked_seen.values() for c in m.values())
     if fail == 0 and carries:
-        print(f"  [PASS-WITH-DECLARED-CARRY] no kinematic writers; {carries} CABLE-SEED carry line(s) remain (sec14.2 step-3)")
+        print(
+            f"  [PASS-WITH-DECLARED-CARRY] no kinematic writers; "
+            f"{carries} CABLE-SEED carry line(s) remain (sec14.2 step-3)"
+        )
     elif fail == 0:
         print("  [PASS] no kinematic writers, no carries")
     else:
-        print(f"  [VERDICT] RED: delivery-sinks={sink} source-candidates={source} unparseable={unparse} (distinct classes, NOT unique-writer count)")
+        print(
+            f"  [VERDICT] RED: delivery-sinks={sink} source-candidates={source} "
+            f"unparseable={unparse} (distinct classes, NOT unique-writer count)"
+        )
     print(f"LAYER8_FAIL={fail}")
     print("LAYER8_WARN=0")
     return 1 if fail else 0
