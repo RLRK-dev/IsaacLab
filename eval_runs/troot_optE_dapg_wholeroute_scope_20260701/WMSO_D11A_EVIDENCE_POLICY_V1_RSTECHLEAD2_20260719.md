@@ -1,9 +1,9 @@
-# WMSO D1.1-A EvidencePolicy v1.6（DESIGN 付属 normative artifact）
+# WMSO D1.1-A EvidencePolicy v1.7（DESIGN 付属 normative artifact）
 
-- node: `T-WMSO`; author = w2:pQ; v1 = 2026-07-19 10:54 JST / v1.1 = 12:02 / v1.2 = 12:41 / v1.3 = 13:33 / v1.4 = 14:00 / v1.5 = 14:24 / **v1.6 = 16:03 JST（実測）**（pS §12 G-4 fold: SOURCE_COMMIT/CONFIG_HASH の kind 条件付き束縛 — SCRIPTED/WAIT の POLICY_ARTIFACT ≥3 到達可能化）
-- 親設計: `WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md` **v2.8**（本 artifact が全表の normative 実体。`policy_document_sha256` = 本 file の sha256、validator/certificate が結合するのは §6 の **`evidence_policy_definition_hash`**）
-- **機械可読兄弟 artifact（RV5-W-P0-6）**: `WMSO_EvidencePolicy_v1.6.json`（total map の JSON 実体; file sha = 兄弟 doc header に記録。semantic H_WCJ 値は WCJ 実装が要るため **impl 時の golden fixture test で確定・照合**〔markdown ↔ JSON ↔ code 定数の三面一致〕 — 手計算の hash 値を先行掲載しない〔検証不能な自己申告値を作らないため — records-vs-fact〕）
-- status: **DRAFT v1.6** — pS final confirm → pN 再 verify PENDING（⚠版数は title/status/親 pointer の 3 所同期 — RV5-W-P0-1/G-1 再発防止）
+- node: `T-WMSO`; author = w2:pQ; v1 = 2026-07-19 10:54 JST / v1.1 = 12:02 / v1.2 = 12:41 / v1.3 = 13:33 / v1.4 = 14:00 / v1.5 = 14:24 / v1.6 = 16:03 / **v1.7 = 16:40 JST（実測）**（RV6 §2-§5 + pN C1/C2 fold: claim_target 機構 / 二層 JSON + definition hash 実算出・掲載 / resolver 分割 / evaluator registry）
+- 親設計: `WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md` **v2.9**（本 artifact が全表の normative 実体。`policy_document_sha256` = 本 file の sha256、validator/certificate が結合するのは §6 の **`evidence_policy_definition_hash`**）
+- **機械可読兄弟 artifact（RV5-W-P0-6 / RV6 §2 二層形）**: `WMSO_EvidencePolicy_v1.7.json` = `{metadata, policy_definition}`。**`evidence_policy_definition_hash` = H_WCJ(policy_definition) = `066eed1049f4f51a89dd86e9d50614a65adba070b2ff650424ea7cef05dec4ea`**（pN C2 の要求どおり banked JSON から**実算出・掲載** — policy_definition は ASCII-key・int/str のみで H_WCJ = RFC8785 正準 JSON の sha256 と一致〔UTF-16/ASCII key 順が一致する部分集合〕。導出 command = JSON metadata に埋込・第三者再計算可能。metadata の変更は hash 不変・validator 挙動を変える規則の変更のみ hash 変化）。impl 時の golden test = 本値と code 定数の一致検証。
+- status: **DRAFT v1.7** — pS 照合 → pN 再 verify PENDING（⚠版数は title/status/親 pointer の 3 所同期 — G-1 規則）
 - v1 からの変更: §3 の 3 cell exact 化 / DC-3 準拠復元 / §3b ProofItem 順序・conflict 規則 / §4 EXPLICIT_NONE 免除 / §4b per-component 意味論の明示 / E_GRADE_INAPPLICABLE の S-group 拡張 / 引用 host 修正。v1.1 からの変更: §3c ApplicabilityResolver（v3 W-P0-1 sketch 採用）/ §3 total-map 宣言 + cell 表記の置換/補完 意味明示（v3 W-P0-5）/ §6 semantic hash 分離（v3 W-P1-3）
 
 ## 1. ProofKind semantics（15 種 — 親設計 §4.2 の enum と 1:1; v1 から不変）
@@ -74,17 +74,34 @@ ApplicabilityResolver(kind, lineage, component)
 - ⛔ **N/A ≠ UNKNOWN**（v3 W-P0-1 逐語要求）: NOT_APPLICABLE は「実体が存在しない事の validated proof（kind 別許容表 + 証拠 gate 通過）」であり、UNKNOWN（知識不足 = 失格・免除なし）と型・集約の両方で区別する。
 - 本 resolver は §4 の EXPLICIT_NONE 免除規則の**typed API 形**（同一 semantics の名前付け — supersession でない）。
 
-### 3d. ProofKind 別 payload / binding 規則（B4 — grade の自己申告化防止・total 15 kinds）
+### 3d. ProofKind 別 payload / binding 規則（B4 + RV6 §3 + pN C1 — grade の自己申告化防止・total 15 kinds）
 
-**payload 必須性**（違反 = `E_PROOF_PAYLOAD_MISSING`）: **SOURCE_COMMIT のみ artifact_hash = null 必須**（ref = 40-hex commit id が束縛そのもの; ref 形式違反 = `E_PROOF_REF_MALFORMED`）。**他 14 kind は artifact_hash 必須**（64-hex 小文字）。ref = 全 kind 非空（artifact の所在/識別子）。
+**claim_target_hash（RV6 §3 — 全 component の単一束縛 anchor; pN C1 の S 系 6 cell 未定義を閉じる機構）**: `EvidenceRecord.claim_target_hash`（旧 artifact_hash を改名）は component 別導出値と**必ず一致**（不一致 = `E_PROOF_MISBOUND`）:
+
+| component | claim_target 導出 |
+|---|---|
+| POLICY_ARTIFACT | ExecutionBundle.executable_artifact_hash |
+| MODEL_ARCHITECTURE / TENSOR_BINDING / NORMALIZATION / RUNTIME_CONFIG | 当該 slot hash |
+| TRAINING_DATASET | TrainingProvenance.demo_dataset_hash |
+| TRAINING_PROVENANCE | TrainingProvenance.final_artifact_hash |
+| OBSERVATION_SCHEMA / ACTION_SCHEMA | H_WCJ(semantic_obs/action_schema) |
+| CONTROL_MODE | H_WCJ(control_mode projection) |
+| INITIATION_SPEC / TERMINATION_SPEC | H_WCJ(当該 spec) |
+| HANDOFF_SCHEMA | H_WCJ(handoff schema projection) |
+
+- **`REPRODUCED_OUTPUT_HASH == claim_target_hash`**（全 component 共通の再現 anchor — S 系 cell に FINAL_ARTIFACT_HASH が無いのは claim_target が anchor を担うため = 定義済み・未定義でない〔pN C1 解消〕）。
+- **`TRAIN_RUN_MANIFEST` content は claim_target_hash を列挙**（resolve_artifact で検査 — EXACT の manifest content rule も claim_target に一般化・8 cell 不整合解消）。**`TRAIN_TIME_CRYPTO_BINDING` は (claim_target_hash, manifest_hash) 対を束縛**。
+
+**payload 必須性**（違反 = `E_PROOF_PAYLOAD_MISSING`）: **SOURCE_COMMIT のみ artifact_hash = null 必須**（ref = 40-hex commit id が束縛そのもの; ref 形式違反 = `E_PROOF_REF_MALFORMED`。**resolver は artifact 用と別: `resolve_git_commit(commit_id)`** — RV6 §4/expected_sha256 不在問題の解消）。**他 14 kind は artifact_hash 必須**（64-hex 小文字）。ref = 全 kind 非空。
 
 **binding 対象（cross-field coherence; 不一致 = `E_PROOF_MISBOUND`、component に意味を持たない kind の混入 = `E_PROOF_KIND_FOREIGN`）**:
 
 | ProofKind | 束縛対象（certify 時に機械照合） |
 |---|---|
-| FINAL_ARTIFACT_HASH | component 対応 slot/field の hash と一致: POLICY_ARTIFACT→executable_artifact_hash / MODEL_ARCHITECTURE・TENSOR_BINDING・NORMALIZATION・RUNTIME_CONFIG→当該 slot hash / TRAINING_DATASET→TrainingProvenance.demo_dataset_hash / **TRAINING_PROVENANCE→TrainingProvenance.final_artifact_hash**（RV5-W-P0-3 gap 2 — learned では == executable、E_PROVENANCE_ARTIFACT_MISMATCH が既に拘束） |
-| CONFIG_HASH | **kind 条件付き（G-4）**: learned claim = TrainingProvenance の claimed stage config hash（BC_THEN_RL の BC stage = bc_config_hash / final stage〔RL_ONLY・BC_THEN_RL の RL・BC_ONLY の唯一 BC〕= `final_training_config_hash`〔RV5-W-P0-3 gap 1〕）/ **SCRIPTED・WAIT claim = runtime_config slot hash（certified 時 KNOWN — 非学習の「config」の実体）** |
-| SOURCE_COMMIT | **kind 条件付き（G-4）**: learned claim = ref == `TrainingProvenance.final_source_commit`（RV5-W-P0-3 gap 1）/ **SCRIPTED・WAIT claim = ref == closure source commit（closure member 群を pin する repo commit — registry fixture が保持・provenance 付き）** |
+| FINAL_ARTIFACT_HASH | **== claim_target_hash**（§3d 冒頭表 — 全 A/P component で単一 anchor に統一; TRAINING_PROVENANCE→final_artifact_hash は learned で == executable、E_PROVENANCE_ARTIFACT_MISMATCH が拘束） |
+| REPRODUCED_OUTPUT_HASH | **== claim_target_hash**（§3d 冒頭 — HB grade の核; S 系 component も同 anchor で成立〔pN C1〕） |
+| CONFIG_HASH | **kind 条件付き（G-4/RV6 §4）**: learned claim = TrainingProvenance の claimed stage config hash（BC_THEN_RL の BC stage = bc_config_hash / final stage = `final_training_config_hash`）/ **SCRIPTED・WAIT claim = `ExecutionProvenance.runtime_config_hash`**（親設計 §1.3b — runtime_config slot hash と一致を coherence 検査） |
+| SOURCE_COMMIT | **kind 条件付き（G-4/RV6 §4）**: learned claim = ref == `TrainingProvenance.final_source_commit` / **SCRIPTED・WAIT claim = ref == `ExecutionProvenance.source_commit`**（親設計 §1.3b — 非学習の実行由来を definition 内で固定・registry fixture 依存を解消） |
 | INPUT_SCHEMA_HASH / OUTPUT_SCHEMA_HASH | definition の observation / action semantic schema の H_WCJ と一致 |
 | NORMALIZER_HASH | normalization slot（KNOWN）の hash と一致（slot EXPLICIT_NONE なら claim 自体 N/A — §3c） |
 | REPRODUCED_OUTPUT_HASH | **HB grade の核**: 対応する FINAL_ARTIFACT_HASH の値と一致（byte-repro の定義） |
@@ -95,7 +112,7 @@ ApplicabilityResolver(kind, lineage, component)
 
 - **negative controls（親設計 §8 corpus 必須）**: (i) wrong-but-valid-hex（形式適合・対象不一致）→ E_PROOF_MISBOUND (ii) null-where-required → E_PROOF_PAYLOAD_MISSING (iii) 他 component 向け kind の混入（例: POLICY_ARTIFACT claim に INPUT_SCHEMA_HASH）→ E_PROOF_KIND_FOREIGN (iv) resolver 不能 artifact → E_PROOF_ARTIFACT_UNRESOLVED（下記）。
 - **非学習 skill の到達可能 grade（G-4 の帰結・明示 bound）**: SCRIPTED/WAIT の A/S 群 component は上記 kind 条件付き束縛により **HASH_BOUND_REPRODUCED(3) まで到達可能**（= CLOSED_LOOP ceiling row 充足可）。**EXACT_TRAIN_TIME(4) は到達不能のまま**（TRAIN_RUN_MANIFEST / TTCB は訓練時概念で非学習に実体が無い — HB と同権限〔prereg §4 表: 両者 acceptance test 後に可〕ゆえ機能的欠損なし・grade を偽装しない）。
-- **trust boundary（RV5-W-P0-3 gap 3 — 「構造 hash 一致だけでは grade は self-asserted」の解消）**: `certify_definition(..., proof_artifact_resolver)`（Rs 提示 2 案中 resolver 案採用）。resolver = `(ref, expected_sha256) → bytes | UNRESOLVED`（fail-closed: 取得不能/长さ 0/sha 不一致 = `E_PROOF_ARTIFACT_UNRESOLVED`）。certify は hash 構造一致に加え **asserted bytes の実在と内容整合**（TRAIN_RUN_MANIFEST が FINAL_ARTIFACT_HASH 値を列挙する / TTCB blob が (artifact, manifest) 対を束縛する / REPRODUCED_OUTPUT の equality 等）を resolver 経由で検査する。evaluator は `EvidenceRecord.evaluator_artifact_hash ∈ 許可 evaluator registry`（∉ = `E_EVALUATOR_UNKNOWN`）。standalone test は fixture resolver で全経路実行。
+- **trust boundary（RV5-W-P0-3 gap 3 + RV6 §4/§5 — 「構造 hash 一致だけでは grade は self-asserted」の解消）**: `certify_definition(definition, evidence_bundle, evidence_policy, schema_registry, evaluator_registry, proof_artifact_resolver)`。resolver は **2 種**: `resolve_artifact(ref, expected_sha256) → bytes | UNRESOLVED` / `resolve_git_commit(commit_id) → exists | UNRESOLVED`（SOURCE_COMMIT は hash 無しのため専用 — RV6 §4）。いずれも fail-closed（= `E_PROOF_ARTIFACT_UNRESOLVED`）。certify は hash 構造一致に加え **asserted bytes の実在と内容整合**（manifest の claim_target 列挙 / TTCB の (claim_target, manifest) 束縛 / REPRODUCED == claim_target）を resolver 経由で検査する。**evaluator trust（RV6 §5）**: `EvidenceRecord.evaluator_artifact_hash ∈ evaluator_registry`（∉ = `E_EVALUATOR_UNKNOWN`）、**certificate は `evaluator_registry_hash` を結合**（どの評価器集合を信頼した certificate かを再現可能に）。grade 測定の明示形 = 親設計 §4 の `EvidenceEvaluationCertificate`。standalone test は fixture resolver + fixture registry で全経路実行。
 
 ## 4. Usage profiles（required set + min_grade）
 
@@ -126,6 +143,6 @@ ApplicabilityResolver(kind, lineage, component)
 
 ## 6. 版管理と hash 二層（v3 W-P1-3 + RV4 §2.3 具体形）
 - **`policy_document_sha256`**（RV4 命名） = 本 markdown file の sha256（custody 用 — status/timestamp/編集も拾う）。
-- **`evidence_policy_definition_hash`**（RV4 命名; 旧称 evidence_policy_semantic_hash） = **H_WCJ(policy_object)**。policy_object = keyed object {`grades`（rank 付き列挙）, `component_groups`, `proof_policy`（§3 total map の REQUIRED cell 全列挙）, `proof_binding`（§3d の payload/束縛規則）, `profiles`（§4 required/min_grade 表）, `applicability_rules`（§3c の 1-4）, `policy_semver`}。文書編集で変わらず、**規則が変わった時のみ変わる**。**validator / ContractCertificate / UsageEligibilityReport が結合するのはこちら**（親設計 §5A/§5A2）。
-- **機械可読実体（RV4 §2.3 Required）**: impl 時に **`EvidencePolicyDefinition` frozen dataclass + golden JSON fixture**（`WMSO_EvidencePolicy_v1.x.json`）を作成し、(a) fixture の H_WCJ == 本 §6 の definition hash、(b) **本 markdown 表 ↔ code 内定数の一致試験**（parser artifact hash 記録付き）を standalone test に含める（親設計 §8）。⛔ impl CLOSED 中は作成しない — 本項は設計 requirement の pin のみ。
+- **`evidence_policy_definition_hash`**（RV4 命名） = **H_WCJ(policy_definition)**。**projection は JSON 兄弟 artifact の `policy_definition` object と定義上同一の member 16 個に一意化**（RV6 §2 / pN C2 の二重定義解消）: {policy_semver, grades, component_groups, **claim_targets**, proof_policy, **reproduction_rules**, proof_item_canonical_order, proof_conflict_rules, proof_binding, payload_rules, trust_boundary, evaluator_registry_rule, applicability_rules, profiles, exemption_reporting, usage_ceiling}。**metadata（artifact 名・source_markdown・導出 command・掲載 hash 値・informative 注記）は hash 対象外** — metadata 変更 = hash 不変 / validator 挙動を変える規則の変更のみ hash 変化。**現行値 = `066eed1049f4f51a89dd86e9d50614a65adba070b2ff650424ea7cef05dec4ea`**（header 参照 — banked JSON から実算出）。**validator / ContractCertificate / UsageEligibilityReport が結合するのはこちら**（親設計 §5A/§5A2）。
+- **機械可読実体（RV4 §2.3 / RV6 §8-6 訂正）**: **golden JSON fixture = `WMSO_EvidencePolicy_v1.7.json` として既に存在・bank 済み**（data artifact — 旧「impl 時に作成」文言は fixture 部分について撤回）。impl 時に残るのは **`EvidencePolicyDefinition` frozen dataclass**（fixture の parser/型）と (a) code 定数の H_WCJ == 掲載 definition hash、(b) markdown ↔ JSON ↔ code の三面一致試験（parser artifact hash 記録付き — 親設計 §8）のみ。
 - 本 artifact の規則変更は definition hash を変え、既発行 certificate を retroactive に無効化しない。改訂は **prereg §9 の fail-closed re-verify loop**（host 明記 — A-CH4）に従う（design 変更扱い）。

@@ -1,0 +1,149 @@
+{
+  "metadata": {
+    "artifact": "WMSO_EvidencePolicy",
+    "source_markdown": "WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md v1.7",
+    "hash_projection_rule": "evidence_policy_definition_hash = H_WCJ(policy_definition) - metadata is OUTSIDE the hash input (RV6 s2 / pN C2). For this ASCII-key, int-and-string-only object, H_WCJ equals sha256 of RFC8785-canonical JSON (UTF-16 and ASCII key orders coincide).",
+    "definition_hash_derivation": "python3 -c \"import json,hashlib;d=json.load(open('WMSO_EvidencePolicy_v1.7.json'));print(hashlib.sha256(json.dumps(d['policy_definition'],sort_keys=True,separators=(',',':'),ensure_ascii=True).encode()).hexdigest())\"",
+    "evidence_policy_definition_hash": "066eed1049f4f51a89dd86e9d50614a65adba070b2ff650424ea7cef05dec4ea",
+    "informative_non_learned_grade_bound": "SCRIPTED/WAIT reach HASH_BOUND_REPRODUCED(3); EXACT_TRAIN_TIME(4) unreachable (train-time-only proofs); same closed-loop ceiling row as HB so no functional loss (G-4)"
+  },
+  "policy_definition": {
+    "policy_semver": "1.7.0",
+    "grades": [
+      {"name": "EXACT_TRAIN_TIME", "rank": 4},
+      {"name": "HASH_BOUND_REPRODUCED", "rank": 3},
+      {"name": "RECONSTRUCTED_COMPATIBLE", "rank": 2},
+      {"name": "DIMENSION_ONLY", "rank": 1},
+      {"name": "UNKNOWN", "rank": 0}
+    ],
+    "component_groups": {
+      "A_artifact": ["POLICY_ARTIFACT", "MODEL_ARCHITECTURE", "NORMALIZATION", "TRAINING_DATASET", "RUNTIME_CONFIG", "TENSOR_BINDING"],
+      "S_schema_spec": ["OBSERVATION_SCHEMA", "ACTION_SCHEMA", "INITIATION_SPEC", "TERMINATION_SPEC", "HANDOFF_SCHEMA", "CONTROL_MODE"],
+      "P_provenance": ["TRAINING_PROVENANCE"]
+    },
+    "claim_targets": {
+      "_rule": "EvidenceRecord.claim_target_hash MUST equal the hash derived from the component's target below (mismatch = E_PROOF_MISBOUND). Single reproduction/binding anchor for every component (RV6 s3 / pN C1).",
+      "POLICY_ARTIFACT": "execution_bundle.executable_artifact_hash",
+      "MODEL_ARCHITECTURE": "execution_bundle.model_architecture.artifact_hash",
+      "TENSOR_BINDING": "execution_bundle.tensor_binding.artifact_hash",
+      "NORMALIZATION": "execution_bundle.normalization.artifact_hash",
+      "RUNTIME_CONFIG": "execution_bundle.runtime_config.artifact_hash",
+      "TRAINING_DATASET": "training_provenance.demo_dataset_hash",
+      "TRAINING_PROVENANCE": "training_provenance.final_artifact_hash",
+      "OBSERVATION_SCHEMA": "H_WCJ(semantic_obs_schema)",
+      "ACTION_SCHEMA": "H_WCJ(semantic_action_schema)",
+      "CONTROL_MODE": "H_WCJ(control_mode_projection)",
+      "INITIATION_SPEC": "H_WCJ(initiation_spec)",
+      "TERMINATION_SPEC": "H_WCJ(termination_spec)",
+      "HANDOFF_SCHEMA": "H_WCJ(handoff_schema_projection)"
+    },
+    "proof_policy": {
+      "_domain": "(component_kind, evidence_grade, applicability_class) -> exact required ProofKind set; REQUIRED cells only; UNKNOWN grade carries no authority-relevant claim",
+      "EXACT_TRAIN_TIME": {
+        "POLICY_ARTIFACT": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "TRAIN_TIME_CRYPTO_BINDING"],
+        "MODEL_ARCHITECTURE": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "TRAIN_TIME_CRYPTO_BINDING"],
+        "NORMALIZATION": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "TRAIN_TIME_CRYPTO_BINDING", "NORMALIZER_HASH"],
+        "TRAINING_DATASET": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "TRAIN_TIME_CRYPTO_BINDING"],
+        "RUNTIME_CONFIG": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+        "TENSOR_BINDING": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+        "OBSERVATION_SCHEMA": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "INPUT_SCHEMA_HASH"],
+        "ACTION_SCHEMA": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "OUTPUT_SCHEMA_HASH"],
+        "INITIATION_SPEC": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+        "TERMINATION_SPEC": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+        "HANDOFF_SCHEMA": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+        "CONTROL_MODE": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "CONFIG_HASH"],
+        "TRAINING_PROVENANCE": ["TRAIN_RUN_MANIFEST", "SOURCE_COMMIT", "FINAL_ARTIFACT_HASH", "TRAIN_TIME_CRYPTO_BINDING"]
+      },
+      "HASH_BOUND_REPRODUCED": {
+        "POLICY_ARTIFACT": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+        "MODEL_ARCHITECTURE": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+        "NORMALIZATION": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+        "TRAINING_DATASET": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+        "RUNTIME_CONFIG": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+        "TENSOR_BINDING": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"],
+        "OBSERVATION_SCHEMA": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "INPUT_SCHEMA_HASH", "EVALUATOR_ARTIFACT"],
+        "ACTION_SCHEMA": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "OUTPUT_SCHEMA_HASH", "EVALUATOR_ARTIFACT"],
+        "INITIATION_SPEC": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "CONFIG_HASH", "EVALUATOR_ARTIFACT"],
+        "TERMINATION_SPEC": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "CONFIG_HASH", "EVALUATOR_ARTIFACT"],
+        "HANDOFF_SCHEMA": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "CONFIG_HASH", "EVALUATOR_ARTIFACT"],
+        "CONTROL_MODE": ["SOURCE_COMMIT", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "CONFIG_HASH", "EVALUATOR_ARTIFACT"],
+        "TRAINING_PROVENANCE": ["SOURCE_COMMIT", "CONFIG_HASH", "FINAL_ARTIFACT_HASH", "REPRODUCTION_PROCEDURE", "REPRODUCED_OUTPUT_HASH", "EVALUATOR_ARTIFACT"]
+      },
+      "RECONSTRUCTED_COMPATIBLE": {"_all_13_components": ["RECONSTRUCTION_SOURCES", "COMPATIBILITY_TEST", "UNRESOLVED_DIFFERENCES", "EVALUATOR_ARTIFACT"]},
+      "DIMENSION_ONLY": {
+        "_applicable": {"components": ["OBSERVATION_SCHEMA", "ACTION_SCHEMA", "POLICY_ARTIFACT", "MODEL_ARCHITECTURE", "NORMALIZATION", "TRAINING_DATASET", "RUNTIME_CONFIG", "TENSOR_BINDING"], "required": ["DIMENSION_SOURCE", "UNRESOLVED_DIFFERENCES"]},
+        "_grade_inapplicable": ["TRAINING_PROVENANCE", "INITIATION_SPEC", "TERMINATION_SPEC", "HANDOFF_SCHEMA", "CONTROL_MODE"],
+        "_error": "E_GRADE_INAPPLICABLE"
+      },
+      "UNKNOWN": {"_all_13_components": []}
+    },
+    "reproduction_rules": {
+      "reproduced_output_rule": {"proof_kind": "REPRODUCED_OUTPUT_HASH", "must_equal": "claim_target_hash", "note": "reproduction anchor for EVERY component including S-group (pN C1 closure); FINAL_ARTIFACT_HASH is NOT required in S cells because claim_target_hash is the anchor there"},
+      "manifest_content_rule": {"proof_kind": "TRAIN_RUN_MANIFEST", "content_must_list": "claim_target_hash", "checked_via": "resolve_artifact"},
+      "ttcb_rule": {"proof_kind": "TRAIN_TIME_CRYPTO_BINDING", "binds_pair": ["claim_target_hash", "train_run_manifest_hash"], "checked_via": "resolve_artifact"}
+    },
+    "proof_item_canonical_order": {"sort_key": ["kind.value UTF-8 bytes", "ref UTF-8 bytes", "artifact_hash-or-empty ASCII"], "direction": "ascending", "independent_rank_table": false},
+    "proof_conflict_rules": {"exact_duplicate": "idempotent_dedupe_single_hash_contribution", "same_kind_ref_different_hash": "E_PROOF_CONFLICT"},
+    "proof_binding": [
+      {"proof_kind": "FINAL_ARTIFACT_HASH", "bindings": [{"when": {"any": true}, "rule": "artifact_hash == claim_target_hash of the claimed component"}]},
+      {"proof_kind": "REPRODUCED_OUTPUT_HASH", "bindings": [{"when": {"any": true}, "rule": "artifact_hash == claim_target_hash"}]},
+      {"proof_kind": "CONFIG_HASH", "bindings": [
+        {"when": {"identity_kind": "LEARNED", "stage": "bc_of_bc_then_rl"}, "target_path": "training_provenance.bc_config_hash"},
+        {"when": {"identity_kind": "LEARNED", "stage": "final"}, "target_path": "training_provenance.final_training_config_hash"},
+        {"when": {"identity_kind": ["SCRIPTED", "WAIT"]}, "target_path": "execution_provenance.runtime_config_hash"}
+      ]},
+      {"proof_kind": "SOURCE_COMMIT", "bindings": [
+        {"when": {"identity_kind": "LEARNED"}, "rule": "ref == training_provenance.final_source_commit"},
+        {"when": {"identity_kind": ["SCRIPTED", "WAIT"]}, "rule": "ref == execution_provenance.source_commit"}
+      ]},
+      {"proof_kind": "INPUT_SCHEMA_HASH", "bindings": [{"when": {"any": true}, "rule": "artifact_hash == H_WCJ(semantic_obs_schema)"}]},
+      {"proof_kind": "OUTPUT_SCHEMA_HASH", "bindings": [{"when": {"any": true}, "rule": "artifact_hash == H_WCJ(semantic_action_schema)"}]},
+      {"proof_kind": "NORMALIZER_HASH", "bindings": [{"when": {"any": true}, "rule": "artifact_hash == normalization slot hash when KNOWN; EXPLICIT_NONE slot makes the claim N/A"}]},
+      {"proof_kind": "TRAIN_TIME_CRYPTO_BINDING", "bindings": [{"when": {"any": true}, "rule": "artifact_hash = binding blob sha256; blob binds (claim_target_hash, train_run_manifest_hash)"}]},
+      {"proof_kind": "EVALUATOR_ARTIFACT", "bindings": [{"when": {"any": true}, "rule": "artifact_hash == EvidenceRecord.evaluator_artifact_hash AND member of evaluator_registry"}]},
+      {"proof_kind": "TRAIN_RUN_MANIFEST", "bindings": [{"when": {"any": true}, "rule": "artifact_hash = manifest sha256; manifest content lists claim_target_hash"}]},
+      {"proof_kind": "REPRODUCTION_PROCEDURE", "bindings": [{"when": {"any": true}, "rule": "artifact_hash = procedure doc sha256"}]},
+      {"proof_kind": "COMPATIBILITY_TEST", "bindings": [{"when": {"any": true}, "rule": "artifact_hash = test record sha256"}]},
+      {"proof_kind": "UNRESOLVED_DIFFERENCES", "bindings": [{"when": {"any": true}, "rule": "artifact_hash = doc sha256; empty set = explicit empty doc"}]},
+      {"proof_kind": "DIMENSION_SOURCE", "bindings": [{"when": {"any": true}, "rule": "artifact_hash = source doc sha256"}]},
+      {"proof_kind": "RECONSTRUCTION_SOURCES", "bindings": [{"when": {"any": true}, "rule": "artifact_hash = H_WCJ of path-sha object array, path bytes ascending"}]}
+    ],
+    "payload_rules": {"null_hash_kinds": ["SOURCE_COMMIT"], "source_commit_ref_format": "40-hex git commit id", "all_other_kinds": "artifact_hash required 64-hex lowercase", "violations": {"missing": "E_PROOF_PAYLOAD_MISSING", "ref_malformed": "E_PROOF_REF_MALFORMED", "misbound": "E_PROOF_MISBOUND", "foreign_kind": "E_PROOF_KIND_FOREIGN", "unresolved_artifact": "E_PROOF_ARTIFACT_UNRESOLVED"}},
+    "trust_boundary": {
+      "certify_inputs": ["definition", "evidence_bundle", "evidence_policy", "schema_registry", "evaluator_registry", "proof_artifact_resolver"],
+      "resolvers": [
+        {"name": "resolve_artifact", "contract": "(ref, expected_sha256) -> bytes | UNRESOLVED; unresolved or zero-length or sha-mismatch = E_PROOF_ARTIFACT_UNRESOLVED"},
+        {"name": "resolve_git_commit", "contract": "(commit_id_40hex) -> exists | UNRESOLVED; used for SOURCE_COMMIT which carries no artifact_hash; unresolved = E_PROOF_ARTIFACT_UNRESOLVED"}
+      ]
+    },
+    "evaluator_registry_rule": {"membership": "EvidenceRecord.evaluator_artifact_hash must be a member of the evaluator_registry passed to certify_definition", "violation": "E_EVALUATOR_UNKNOWN", "certificate_binding": "ContractCertificate.evaluator_registry_hash = H_WCJ of sorted evaluator artifact hashes"},
+    "applicability_rules": [
+      {"order": 1, "layer": "instance", "condition": {"slot_state": "EXPLICIT_NONE_certified"}, "result": "NOT_APPLICABLE", "carrier": "certificate.explicit_none_components"},
+      {"order": 2, "layer": "lineage", "condition": {"component": "TRAINING_DATASET", "lineage_in": ["BC_ONLY", "BC_THEN_RL"]}, "result": "REQUIRED_profile_min_grade", "else_result": "OPTIONAL"},
+      {"order": 2, "layer": "lineage", "condition": {"component": "TRAINING_PROVENANCE", "lineage": "NOT_APPLICABLE"}, "result": "NOT_APPLICABLE", "else_result": "REQUIRED_profile_min_grade"},
+      {"order": 3, "layer": "profile", "condition": {"profile_cell": "dash"}, "result": "NOT_APPLICABLE"},
+      {"order": 4, "layer": "default", "result": "REQUIRED_profile_min_grade"},
+      {"invariant": "NOT_APPLICABLE is not UNKNOWN; N/A = validated absence excluded from aggregation; UNKNOWN = rank 0, disqualifying, never exempt"}
+    ],
+    "profiles": {
+      "CLOSED_LOOP": {
+        "min_grade_rank": 3,
+        "required": ["POLICY_ARTIFACT", "MODEL_ARCHITECTURE", "OBSERVATION_SCHEMA", "ACTION_SCHEMA", "TENSOR_BINDING", "NORMALIZATION", "CONTROL_MODE", "RUNTIME_CONFIG", "INITIATION_SPEC", "TERMINATION_SPEC", "HANDOFF_SCHEMA"],
+        "conditional_required": {"TRAINING_PROVENANCE": {"when": "learned_lineage", "min_grade_rank": 3}, "TRAINING_DATASET": {"when": "lineage_in_BC_ONLY_BC_THEN_RL", "min_grade_rank": 3}},
+        "external_conjuncts": ["acceptance_test", "two_key_O0_S0_V0", "independent_safety_gate"]
+      },
+      "SHADOW": {
+        "min_grade_rank": 2,
+        "required": ["POLICY_ARTIFACT", "MODEL_ARCHITECTURE", "OBSERVATION_SCHEMA", "ACTION_SCHEMA", "TENSOR_BINDING", "NORMALIZATION", "CONTROL_MODE", "RUNTIME_CONFIG", "INITIATION_SPEC", "TERMINATION_SPEC", "HANDOFF_SCHEMA"],
+        "conditional_required": {"TRAINING_PROVENANCE": {"when": "learned_lineage", "min_grade_rank": 2}, "TRAINING_DATASET": {"when": "lineage_in_BC_ONLY_BC_THEN_RL", "min_grade_rank": 2}}
+      },
+      "OFFLINE_REPLAY": {
+        "min_grade_rank": 2,
+        "required": ["POLICY_ARTIFACT", "MODEL_ARCHITECTURE", "OBSERVATION_SCHEMA", "ACTION_SCHEMA", "NORMALIZATION", "RUNTIME_CONFIG", "INITIATION_SPEC", "TERMINATION_SPEC", "HANDOFF_SCHEMA"],
+        "not_applicable": {"TENSOR_BINDING": "replay does not re-execute binding", "CONTROL_MODE": "replay issues no control", "TRAINING_PROVENANCE": "provenance does not affect replay validity; recording duty stays", "TRAINING_DATASET": "not required"}
+      }
+    },
+    "exemption_reporting": {"explicit_none": "recorded loud in UsageEligibilityReport.exemptions", "unknown_slots": "never exempt"},
+    "usage_ceiling": {"rule": "usage matrix is a ceiling not an authority grant", "closed_loop_authority": "requires evaluate_authority_grant conjuncts: acceptance_test, two_key_O0_S0_V0, independent_safety_gate"}
+  }
+}
