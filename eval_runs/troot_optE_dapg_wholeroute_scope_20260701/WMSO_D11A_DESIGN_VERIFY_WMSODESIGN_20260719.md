@@ -255,3 +255,31 @@ Targets (bank `ba99db30f6`, shas 実測 == pQ claim): DESIGN **v2.8** `24f5fd3d8
 - **G-4** ✅ **実欠陥として正しく根治**: EP §3d + JSON proof_binding とも SOURCE_COMMIT/CONFIG_HASH を **kind 条件化** (learned=final_source_commit/stage-config / SCRIPTED-WAIT=closure source commit/runtime_config slot hash) — **EP markdown ↔ JSON 完全一致** (両 binding 逐語対応, semver 1.6.0, source_markdown v1.6). **完全性検証**: scripted CLOSED_LOOP 必須全 component (POLICY_ARTIFACT/OBS/ACT/CONTROL_MODE/RUNTIME_CONFIG/INITIATION/TERMINATION/HANDOFF) の HB(3) 阻害は learned-only 束縛の SOURCE_COMMIT・CONFIG_HASH の 2 点のみ → 両 kind 条件化で包括解消 (spot-patch でない). EXACT(4) は TRAIN_RUN_MANIFEST/TTCB が訓練実体要求 → scripted 不能維持・かつ Rs 確定表で EXACT と HB は同一 closed-loop row ゆえ機能欠損なし (pQ の ceiling-row 論拠を確認). learned 束縛不変・corpus に交差汚染 guard (learned に closure-commit → E_PROOF_MISBOUND) + scripted EXACT→E_PROOF_INSUFFICIENT (期待). intent = (a) 非学習 evidence path 採用 (SHADOW cap でない) = WMSO の scripted/transition/recovery/wait 依存に整合.
 
 **FINAL CONFIRM = PASS。設計軸は D1.1-A DESIGN v2.8 (`24f5fd3d8e8ec850`) + EP v1.6 (`fe3f4f1864d0f00a`) + JSON v1.6 (`e1f8d300dc206ac3`) を pN 再 verify (最終 sha 宛) へ送る状態。** ⚠ **本 §13 追記で私の記録が再び working-only** → G-3 の恒久規則どおり pN 再 verify 前に pQ が同 commit で re-bank 要 (RV5 §7-8 順)。私の設計軸残 = pN 再 verdict readback のみ。impl は pN DESIGN PASS → pre-check → rule-check → path freeze まで CLOSED 不変。⭐私の FINAL CONFIRM は pN 再 verify を代替しない (層の一つ)。B1-B7 の前例どおり pN が追加検出する可能性は残る。
+
+---
+
+## 14. ADDENDUM — v2.8→v2.9 re-check (RV6 + pN HOLD C1-C3) (pS, 2026-07-19 17:14 JST 実測)
+
+⚠ honest scope: anchor = v2.8 (§13 FINAL CONFIRM PASS)。区間 = **pN 再 verify ⛔HOLD C1-C3 (v2.8 宛・16:26 — 私の PASS 後 3 度目の層状捕捉) + RV6 (7 領域 P0-1..P0-6 + custody)**。C ⊂ RV6 と同根。Rs RV6 §10 逐語「これ以上一般精緻化せず、証拠束縛/handoff/migration の閉包だけ直して **freeze**」= 終盤。
+
+Targets (bank `8caa19a7a4`, shas 実測==pQ claim): DESIGN **v2.9** `e64c192b62e754da…` / EP **v1.7** `586fec2a770207b5…` / JSON **v1.7** `WMSO_EvidencePolicy_v1.7.json`. ⚠版名 collision (Rs RV6 §10 が「v2.8/EP v1.6」命名、当該ラベルは pS-G fold が消費済 → 実版 v2.9/v1.7) = design header に loud 記録済 ✓。
+
+### 14.0 ⭐pS §13 の miss owned (3 度目・直接的)
+§13 で「scripted schema/spec が HB(3) 到達 ✓・包括解消 (spot-patch でない)」と**断言**したが、pN C1 / RV6 P0-2 が**同領域のより深い欠陥**を捕捉: S 系 component の HB は `REPRODUCED_OUTPUT_HASH == FINAL_ARTIFACT_HASH` を要求するが S cell に FINAL_ARTIFACT_HASH が無く **REPRODUCED の target が未定義**。私は SOURCE_COMMIT/CONFIG_HASH の providability は確認したが **REPRODUCED の target 存在を確認せず「包括」と over-claim**。→ checklist に (h) **組合せ空間 (component×grade×kind) の「包括/完全/comprehensive」を subset 検査から主張しない — 検査した leg を列挙し未検査を明示**。§13 の「包括」表現が正にこの overreach。
+
+### 14.1 RV6 P0-1..P0-6 + pN C1-C3 = 全 fold faithful/sound
+- **P0-1 (semantic hash 二重定義) = ⭐AIRTIGHT**: JSON 二層 {metadata, policy_definition}・hash=H_WCJ(policy_definition)・**EP §6 markdown ↔ JSON の policy_definition = 16 member 完全一致**・metadata 除外。⭐**pinned hash を私が独立再計算 = `066eed1049f4f51a89dd86e9d50614a65adba070b2ff650424ea7cef05dec4ea` 完全一致** (JSON metadata 埋込 command 実行、この chain で初の claimed-hash 実測成功 = records-vs-fact 満点)。
+- **P0-2 (S/spec HB の reproduced target 不在 = 私の §13 miss) = claim_target 機構**: EvidenceRecord.artifact_hash→claim_target_hash 改名・全 13 component 導出表 (EP §3d ↔ JSON claim_targets 一致)・REPRODUCED==claim_target で S 系も成立・TTCB/manifest も claim_target 一般化。scripted 全 required (POLICY_ARTIFACT/OBS/ACT/CONTROL_MODE/RUNTIME_CONFIG/INIT/TERM/HANDOFF) の HB 到達を再検証 = 成立 ✓。
+- **P0-3 (scripted binding) = ExecutionProvenance 型 (§1.3b)**: SCRIPTED/WAIT 必須・LEARNED None 必須 (E_EXECUTION_PROVENANCE_KIND_MISMATCH)・binding が typed field (source_commit/runtime_config_hash) 参照・coherence 2 本。私の G-4 kind 条件を typed record へ昇格。
+- **P0-4 (evaluator trust) = evaluator_registry**: certify 入力 + certificate.evaluator_registry_hash + membership E_EVALUATOR_UNKNOWN (EP↔JSON 一致)。
+- **P0-5 (handoff identity/epoch) = validate_handoff に 5 producer 検査** (action_id/definition_hash==invocation==H_WCJ(producer)/schema_id∈producer/producer_handoff_schema_hash) + **epoch 二層分離** (validator=等値のみ / authority manager O0=CAS・発行・stale/used-offer 拒否 via handoff_offer_id)。
+- **P0-6 (migration UNKNOWN 型不能) = 保守案** (§1.3b/line143: fixture 供給→Draft / 不能→E_MIGRATE_STATICS_ABSENT・UNKNOWN 分岐撤回)。⚠ **line 398 に未伝播 = H-1**。
+- **resolver 分割** (resolve_artifact / resolve_git_commit for SOURCE_COMMIT) ✓ / **C1-C3 = RV6 P0 と同根で同時解消** (C1=claim_target/C2=hash 実算出/C3=型 inline)。
+
+### 14.2 conditions (within Rs-named closure — 一般精緻化でない)
+- **H-1 (must-fix, records/cross-surface — P0-6 closure 内)**: DESIGN line 398 migration 表が「producer_handoff_schema_hash は … **or UNKNOWN→Draft**〔RV4 §2.6〕; 不足情報は **UNKNOWN 扱い**」を残し、**P0-6 修正の line 143「UNKNOWN 分岐は型に存在しないため撤回・供給不能→E_MIGRATE_STATICS_ABSENT」と直接矛盾**。型定義に適用済みの P0-6 fix が migration 表に未伝播 → line 398 を保守案に整合 (UNKNOWN→Draft 削除)。RV6 P0-6 が叩いた「UNKNOWN handoff-schema hash 型不能」がこの 1 行に残存。
+- **H-3 (custody, records)**: pN C1-C3 の as-received transcript が未 bank (B1-B7 は bank 済)。design line 16 が「次 round で pN v2.9 verdict と併せ確定」と defer。→ C→fold-map が現状 banked pN source に対し独立検証不能 (RV5 C-P0-1 と同型)。pN v2.9 再 verdict と併せ as-received bank 要 (pQ deferral は defensible だが open leg として記録)。
+- **H-2 (minor, records)**: RV6 §7-7「JSON file 自身の sha を header に」は semantic definition_hash 掲載のみで **JSON file の sha256 は manifest+bank commit へ defer**。file は commit で pin 済ゆえ実害小だが、§7-7 逐語は file sha inline → inline するか manifest 委譲を §7-7 充足と明記。
+
+### 14.3 Verdict
+**PASS-WITH-CONDITIONS (v2.9 `e64c192b62e754da` 宛)**。RV6 6 P0 + C1-C3 fold = 忠実・健全 (P0-1 = hash 実測で airtight・P0-2 = 私の §13 miss を根治する claim_target)。H-1 = P0-6 closure の 1 行未閉 (must-fix records)・H-3 = C custody・H-2 = minor。→ H-1..H-3 fold → v2.9.1 + 私記録 re-bank → pS final delta → **pN 再 verify (最終 sha 宛) → PASS なら D1.1-A freeze** (RV5 §6-5 / RV6 §9)。⭐私の PASS は pN 再 verify を代替しない — **B1-B7・C1-C3 の前例 (2 度)** どおり追加検出があり得る。impl は最終 PASS-CLOSE まで CLOSED 不変。
