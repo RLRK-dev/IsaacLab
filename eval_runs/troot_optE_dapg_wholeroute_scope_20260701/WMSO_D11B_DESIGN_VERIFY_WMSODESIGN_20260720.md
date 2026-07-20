@@ -508,3 +508,28 @@ pN が claim-set v2（私の §24 refinement を fold した版）に **V2-B1..B
 ⇒ ⭐**v13 delta = 確認（faithful・records-only）**。① stats_key の risk 記述が全 surface で正確化。**freeze-with-declared-open は §30 のまま設計軸 VALID**（機構 3 軸 CLOSE 不変・now-precise な ① risk 記述付き）。**freeze 判断 = Rs 専権**。
 
 **次**: Rs の freeze 判断 → freeze 後 D1.1-C。**私 = freeze 後の D1.1-C 設計 or 追加 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
+
+## 32. scope 境界変更（Rs 裁定: SKILL = pX 所管）受領 + D1.1-B 適合性 check + 監視 frame（2026-07-20 23:52 実測）
+
+⭐**Rs 裁定で本 node の scope 境界が変更**。custody = `WMSO_RS_SKILL_OWNERSHIP_RULING_20260720.md` = **on-disk 実測 sha `5ac668f13be408fa7c8621f22e7191dfb5e93f6f2443380f6756ab379028767a` @ `3cecb0d246`**。⚠**Rs 逐語（「SKILLについてはpX:SKILL-DESIGNが決めることとなった。整合性を持つように」）の真偽は検証していない・できない**（pQ session 内発話・独立 source 無し）— custody §0 が「bank≠検証・ratify は Rs のみ・転記は pQ」と明記（委譲 custody と同一 discipline）ゆえ over-claim 無し。custody は honest（§1 逐語 1 文のみ・§2 pane 実在確認 `w2:pX SKILL-DESIGN` idle・§3 解釈をタグ付け・§0 継承）。
+
+**scope 境界（custody §3・inference タグ付き）**:
+- **pX:SKILL-DESIGN 所管** = SKILL の細分化・分解能・何を 1 skill とするか（= subdivision）。
+- **本 node に残る** = **契約層**（SkillLifecycleContract schema / tensor_binding 契約 / EP evidence 束縛 / SDM 単位）= 「どの skill が在るかによらず上に載る契約」= **skill-agnostic**。
+- ⚠**両側にまたがる = DDR#32**（H<5 × routing 周期長 7: 周期長=分割の関数[pX]／H=SDM 設計[本 node]）→ pQ が p6 に owner 2 分割を依頼済（**私の action でない**）。
+
+**⭐監視の判定基準（設計番人 duty・pQ 依頼）**: WMSO surface が skill 分割**そのものを決めているか（=違反）** vs **pX の分割に束縛するだけか（=適法）**。
+
+**freeze 直前 D1.1-B v13 の適合性 check = ✅適合（skill-agnostic・違反を freeze しない）**: D1.1-B は throughout **field 契約のみ**を定め content/subdivision を全委譲（on-disk 実測）:
+- `chain_topology_class`（:331）= tensor_binding schema の field 契約（**cable 物理位相の観測 field**・skill 分割でない）。⭐**:339「値の算出法・class 台帳の内容・窓幅・閾値は契約でなく計測設計であり slice 詳細 prereg / D2 fixture が確定（本 doc は field 契約のみ）」** ⇒ どの位相 class が在るか（=subdivision に相当）を D1.1-B は決めず委譲。
+- :418「本 doc は field の契約（名前・dtype・単位・frame・ledger content-address）のみを定め、判定式・閾値・窓幅を一切定めない」。
+- U-6 topology ledger 束縛（:380）= D1.1-C carry（決めず defer）／ U-2 粒度（:375）= schema 水準で bind・artifact 水準は D1.1-C。
+⇒ **D1.1-B は subdivision を決めておらず、外部で決まる class に束縛する contract 層**。**freeze しても scope 違反を固定しない**。
+
+**standing 監視 watch-point（今後の WMSO surface）**: (a) DDR#32 の H 側 = pX の周期長を**入力として束縛**（決めない）(b) D1.1-C の topology ledger 束縛 = pX 決定の class に**束縛**（class を決めない）(c) SDM 単位 = 契約層に留める（subdivision 決定にしない）。**違反検出時は freeze/land 前に STOP + 報告**。
+
+**境界（私の action 外）**: p6 の DDR#32 owner 分割（mechanical）／ pX への材料引き渡し／ OPS-SUP consultation leg（Rs 指示待ち）は私の task でない。**D1.1-B freeze 状態は不変**（v13 two-key 完了・OPS-SUP leg Rs 待ち）。
+
+⇒ ⭐**scope 境界変更を受領**（custody record-verified honest・Rs verbatim は verbatim-verify せず境界保持）。**D1.1-B v13 は新境界に適合**（contract-only・subdivision を決めず）＝ freeze 適合性に影響なし。**設計番人の監視 duty を受諾**（判定基準 = 決める[違反] vs 束縛[適法]・watch-point 3 件）。
+
+**次**: standing 監視（今後の WMSO 設計 surface が subdivision を決めないか）。**私 = D1.1-B freeze 後の D1.1-C 設計 or 追加 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
