@@ -1,7 +1,7 @@
 ---
 title: THREAD Project Tree Manifest
 created: 2026-04-28T03:22:00+09:00
-last_updated: 2026-07-02 (M1/M2 planning-surface consolidation)
+last_updated: 2026-07-21 (C3 manifest section 2 in-sync 再確認; 直近の実体更新 = 2026-07-20 section 2 regen: COORD/COORD2 ARCHIVED + task (d) node 起票)
 root_node_id: T-ROOT
 root_goal: Isaac Lab / SIM 5-clip cable routing vision-based task operation; 100% remains final/ultimate goal (Rs 2026-06-23, 95 to 100; qualitative target at this stage, not a literal statistical SR), current bar is basic SIM operation first
 root_goal_source: thread_isaac_lab/thread-vault/log.md:2026-06-05 03:42 decision + 03:48 correction

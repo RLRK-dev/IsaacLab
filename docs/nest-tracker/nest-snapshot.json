@@ -1355,7 +1355,7 @@
     },
     {
       "id": "T-ROOT-Kinematic-Pin-Complete-Removal-20260719",
-      "goal": "active 実行面から kinematic / pin による物理バイパスを完全に除去し physics-faithful な制御へ置換して、RS71 §0 不変前提 #3 (DiffIK-only) / #5 (no-kinematic-trick) が機械検証で成立する状態にする。",
+      "goal": "【2026-07-21 Rs 裁定 B で範囲縮小】active 実行面から kinematic による物理バイパスを除去し（⛔ただし clip-retention pin = クリップのケーブル固定 は Rs 許可の例外として除去対象から外れる） physics-faithful な制御へ置換して、RS71 §0 不変前提 #3 (DiffIK-only) / #5 (no-kinematic-trick) が機械検証で成立する状態にする。",
       "means": "(すべて既存 SSOT に接地。本 node は新しい acceptance を発明しない)\n1. Layer 8 canonical census = 0 — F3 拡張後の all-root scan (全 thread_isaac_lab Python root) 基準。\n   ⚠ 現在地 = 35 (A 27 + D aerial 5 + skills-snapshot 3)。旧 restricted-root 基準の「128→125」は別 measurement surface。\n2. guard が fail-closed (既知=WARN の baseline 廃止済、scripts/validations/check_control_method.sh)。\n3. 各 chunk が two-key (機構軸 p5 + 証拠軸 pN)。片軸 PASS は充足でない。\n4. 各 stage が charter §6 の gate を通過 (L3 chain + Rs sign-off + video leg)。\n5. landing / HALT 解除は本 goal に含まれない (別 GO)。\n",
       "status": "IN_PROGRESS",
       "dependencies": [],

@@ -26,7 +26,7 @@ session_history:
     started_at: 2026-07-20T20:01:09+09:00
     note: "Rs 承認 (node 作成 + 起動、2026-07-20) により起票。[DEFINE] = 00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md @ 14a891d256。既往 c4-c48 は §3 adopted_existing_arc provenance であり本 session の成果ではない。起票時点 = step2 CLOSE / step3 docs-records-only OPEN。"
 created: 2026-07-20T20:01:09+09:00
-last_updated: 2026-07-21T01:33:43+09:00
+last_updated: 2026-07-21T02:14:53+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -34,7 +34,7 @@ spec_version: LTM-1 v1.2
 
 ## 0. 起票の経緯
 
-**IN_PROGRESS。** Rs 前提「**sim は現実世界・kinematic 完全削除 (pin 含む)**」(2026-07-19) に発する arc を、
+**IN_PROGRESS。** Rs 前提「**sim は現実世界・kinematic 完全削除 (pin 含む)**」(2026-07-19。⚠**§5-A で範囲縮小済 — 本行は起票時の経緯であって現行前提ではない**) に発する arc を、
 pN (T-ROOT-OPS-SUPERVISOR-CODEX) の NEST 整合裁定 (2026-07-20 13:02) に従って node 化したもの。
 
 裁定の骨子 = 本 arc は post-07-19 の新 task で **独立 goal・多 session・repo 横断 scope・HALT/acceptance 条件・
@@ -94,6 +94,7 @@ Rs 逐語 2 段「**kinematic は使用するなよ**」→「**ただし、ク�
 - ⛔**除去対象のまま** = 腕関節角の直接書込 / 指の kinematic close / FK→physics の body 複写（`update_kinematic_bodies`）/ weld・attachment
 - ⇒ **census 35 の各サイト class を再判定する必要**がある（**class 裁定 = 設計軸**。本 node の custody では行わない）
 - custody = `STEP43_CONTROLLER_REALIZATION_BASELINE_RSTECHLEAD_20260721.md` sha256 `f1ea5e5a0109` @ c69 `183c1bb5dc`
+- ⭐**rule-file 反映 = `35029056bd`**（2026-07-21 02:05・`CLAUDE.md:72`・p4・Rs 承認）。⚠p4 relay の前提「:72 は pin も禁止していた」は **on-disk と不一致**（:72 は 07-19 07:32 以降ずっと「唯一の認可例外 = clip-retention pin」を保持・directive 期間中 無変更）⇒ 本 commit = 復元ではなく **明確化**。⚠**逐語 mismatch**（:72 の「ケーブルクランプ」は repo 内で当該行のみ／banked 逐語 = 「ケーブル固定」）= owner Rs/p4 へ訂正要請。詳細 = LEDGER §governance 裁定 B 項（§4 に従い本 state.md へ複製しない）
 
 ⚠⚠**node ID `…-Kinematic-Pin-Complete-Removal-…` の「Pin-Complete」部分は、本裁定により実態と食い違う**。ただし **NEST §1 で node ID は永続**ゆえ改名しない。**ID を goal の要約として読まないこと** — goal は上記のとおり縮小済。
 
