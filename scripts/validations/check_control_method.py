@@ -319,6 +319,35 @@ class _FileCheck(ast.NodeVisitor):
                         self.marked.append((self.func_stack[-1], holder.attr, node.lineno))
                     else:
                         self._hit(node.lineno, "BODY-ASSIGN", "SINK", ".".join(toks) + ".assign(...)")
+            elif f.attr == "assign" and isinstance(f.value, ast.Name):
+                # F3: a receiver retained in a local alias is still the original state buffer.
+                # This is distinct from G6 helper-parameter taint: the alias itself receives the
+                # terminal write (for example ``p = getattr(solver, "body_q_prev"); p.assign(v)``).
+                res = self._resolve_recv_attr(f.value)
+                if res is not None:
+                    attr, recv_toks = res
+                    recv = ".".join(recv_toks)
+                    if attr in BODY_ASSIGN_ATTRS:
+                        self._hit(
+                            node.lineno,
+                            "BODY-ALIAS",
+                            "SINK",
+                            f"<{recv}>.{attr} local-alias body write",
+                        )
+                    elif attr in JQ_ASSIGN_ATTRS and not _has_fk_token(recv_toks):
+                        self._hit(
+                            node.lineno,
+                            "JQ-ALIAS",
+                            "SINK",
+                            f"<{recv}>.{attr} local-alias joint write",
+                        )
+                    elif attr in RAW_MJ_ATTRS:
+                        self._hit(
+                            node.lineno,
+                            "RAW-ALIAS",
+                            "SINK",
+                            f"<{recv}>.{attr} local-alias raw write",
+                        )
             elif f.attr == "fill_" and isinstance(f.value, ast.Attribute) and f.value.attr in STATE_ATTRS:
                 self._hit(node.lineno, "WP-COPY", "SINK", f".{f.value.attr}.fill_(...)")
             elif f.attr == "copy" and isinstance(f.value, ast.Name) and f.value.id == "wp" and node.args:
@@ -386,6 +415,10 @@ _NEG_CONTROLS: list[tuple[str, str]] = [
     ("body-assign", "def f(s, a):\n    s.body_q.assign(a)\n"),
     ("body-prev-assign", "def f(sol, a):\n    sol.body_q_prev.assign(a)\n"),
     (
+        "local-getattr-body-prev-assign",
+        "def f(sol, a):\n    p = getattr(sol, 'body_q_prev', None)\n    p.assign(a)\n",
+    ),
+    (
         "marker-on-unpinned-function",
         "def not_the_seeder(s, a):\n    s.joint_q.assign(a)  " + MARKER + ": fake)\n",
     ),  # G3
@@ -431,6 +464,10 @@ _NEG_CONTROLS: list[tuple[str, str]] = [
 _POS_CONTROLS: list[tuple[str, str]] = [
     ("fk-state-real", "def f(self, a):\n    self._fk_state.joint_q.assign(a)\n"),
     ("fk-state-plain", "def f(fk_state, a):\n    fk_state.joint_q.assign(a)\n"),
+    (
+        "local-getattr-fk-joint-assign",
+        "def f(fk_state, a):\n    p = getattr(fk_state, 'joint_q', None)\n    p.assign(a)\n",
+    ),
     ("ctrl-servo", "def f(c, a):\n    c.joint_target_pos.assign(a)\n"),
     ("read-only", "def f(s):\n    v = s.joint_q.numpy()\n    x = float(v[0])\n    return x\n"),
     ("plain-local", "def f():\n    buf = [0] * 4\n    buf[1] = 2\n    return buf\n"),
@@ -490,8 +527,10 @@ def self_test() -> bool:
 
 def main() -> int:
     repo = Path(__file__).resolve().parents[2]
-    roots = [repo / "thread_isaac_lab" / "envs", repo / "thread_isaac_lab" / "scripts"]
-    print("=== Layer 8 v3.1: AST Control-Method Guard (sec0#3/#5; NO exceptions; self-tested) ===")
+    # F3: scan the complete active Python surface. Limiting the roots to envs/ and scripts/
+    # silently omitted live rollback writers under skills/ and could miss a future relocation.
+    roots = [repo / "thread_isaac_lab"]
+    print("=== Layer 8 v3.2: AST Control-Method Guard (sec0#3/#5; NO exceptions; self-tested) ===")
     if not self_test():
         print("  [FAIL] self-test failed -- the checker cannot certify anything (fail-closed)")
         print("LAYER8_FAIL=1")
