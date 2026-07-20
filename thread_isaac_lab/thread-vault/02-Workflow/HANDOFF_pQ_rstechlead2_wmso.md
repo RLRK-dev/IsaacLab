@@ -1,4 +1,4 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 02:23 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 02:25 JST
 
 > Pane-specific handoff (multi-pane NEST; does not clobber the shared HANDOFF.md).
 > Full detail = memory `handoff_cc_pQ_rstechlead2_wmso_d11a_freeze_2026-07-20.md`. Ground truth = frozen package + freeze record + manifest + LEDGER row44, not this narrative (§運用4).
@@ -58,7 +58,11 @@
     - ⛔**旧記述「actuation が deferred と宣言されている」は over-claim だった**（actuation 皆無ではない）。**結論 (b)（証拠取得が先）は不変**。p4 も「左が保持している」を**主張しない**と明言。
   - ⚠**track 混同に注意（p4 §8-2）**: p4 の servo 根拠は **RL skill env** のもので **43-step 実行体ではない**。⇒ bind 前に LEDGER で track status を確認する。
   - ⭐**方法論（自己参照の罠・実測）**: 保持述語の全域 sweep を `--include=*.py` 無しで再走したら各 1 file に増えたが、**その 1 file は本 handoff 自身**（不在を記録した文書）。`.py` 限定では **0 のまま**。⇒ **不在の主張は、その記録自身が以後の同じ検索を汚染する**。absence 再測定時は検索空間から自分の記録面を除く。
-  - ⚠**pX の epistemic 訂正も採録**: Rs の「ABSENT は**動作不在の測定値**」は、表が動作を測定していない以上成り立たない。正しくは「**測定の不在**」。pX の 5 ABSENT セルは、**finger 状態を記録しない表の上で pX の遷移モデルが生成**したもので、「その間 R が何もしていない」は**表からもモデルからも出ない**。⇒ Rs の A 側根拠（右腕は再把持動作中かもしれない）は**反証材料が無くそのまま立つ**。
+  - ⚠**epistemic 訂正（pX・Rs 指示で 2 段）**: (i) Rs の「ABSENT は**動作不在の測定値**」は成り立たず「**測定の不在**」。(ii) ⭐**ただし「表は動作を一切測っていない」も広すぎる**（表全域を独立確認していない）。**正しい形 = 「当該表には、争点となるセル／window 内の arm・finger 状態または lane activity を直接観測した field が無い」**。私も同じ広すぎる言い方を用いていたので訂正。
+  - ⛔⛔**撤回済 5 件（下流で再利用しない・pX 撤回、私も伝播させていた）**: ①ABSENT = 動作不在の測定値 ②W の間 RIGHT は idle/parked ③fgL の持続を表が直接測定していた ④W は片手実行区間だと示される ⑤これらのセルが unary ParallelRegion を要求する。
+  - ⭐⭐**上程の形が変わった（Rs 指示・反証 → 分類依頼）**: 「不在の腕は適合か」と問うと**未測定の前提を Rs に呑ませる**（A′ 破棄と同型）。**正しい形** = 「表は W 内の右 lane 状態を直接観測していない。**権威ある task semantics の下で右 lane を分類してください** — `TRANSITIONING_TO_REGRASP` / `EXECUTING_AERIAL_REGRASP` / `PARKED` / `UNKNOWN`」。
+  - ⛔**Open A と Open B を分離し、B を A の証拠に使わない（Rs 明示）**: **Open A** = `ParallelRegion` の arity（**規範裁定**）／**Open B** = W 内の右 lane 分類（**task semantics**）。⇒ **表の ABSENT セルから arity を決めない**。
+  - **pX artifact**: SUSPENDED 記録へ更新 = `a0b6206e94652d1ef5c4111e23b70fc5232878c3`（supersedes `f3afccc2af`）/ blob_oid `99e0597186cf182cd2f094f6d9d7eff88cf81849` / artifact_sha256 `fbf7c38c96bea653cad0467e20f2a91afa0c62332ab2dc9d41a2e07a3effd4cc`・**未 push**。§1-1（B 前提）は削除せず **SUSPENDED マーク**で保存。
 - ✅**層 3（契約層）は欠落なし** — ⚠**私の当初主張「契約層は駆動と保持を区別できない」は撤回**（pS §33 で検証済）。実測: `:61 IdentityKind = LEARNED|SCRIPTED|WAIT` / `:62 ControlMode = DIFF_IK_EE_TARGET|SCRIPTED_SEQUENCE|WAIT` / `:83` 表で **kind → control_mode が決まる** / `:151 ControlResourceSpec` = **所有宣言で behavior と直交**。⇒ hold = `kind=WAIT ∧ control_mode=WAIT ∧ 資源 claim` で表現可。**誤りの型 = 1 型だけ見て「無い」と結論し、同じ凍結 file の enum を述語で引かなかった**。
 
 ### schema delta（Rs review へ上げる・私が上程）
