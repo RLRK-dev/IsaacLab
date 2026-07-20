@@ -26,7 +26,7 @@ session_history:
     started_at: 2026-07-20T20:01:09+09:00
     note: "Rs 承認 (node 作成 + 起動、2026-07-20) により起票。[DEFINE] = 00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md @ 14a891d256。既往 c4-c48 は §3 adopted_existing_arc provenance であり本 session の成果ではない。起票時点 = step2 CLOSE / step3 docs-records-only OPEN。"
 created: 2026-07-20T20:01:09+09:00
-last_updated: 2026-07-21T02:29:04+09:00
+last_updated: 2026-07-21T02:37:57+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -94,7 +94,7 @@ Rs 逐語 2 段「**kinematic は使用するなよ**」→「**ただし、ク�
 - ⛔**除去対象のまま** = 腕関節角の直接書込 / 指の kinematic close / FK→physics の body 複写（`update_kinematic_bodies`）/ weld・attachment
 - ⇒ **census 35 の各サイト class を再判定する必要**がある（**class 裁定 = 設計軸**。本 node の custody では行わない）
 - custody = `STEP43_CONTROLLER_REALIZATION_BASELINE_RSTECHLEAD_20260721.md` sha256 `f1ea5e5a0109` @ c69 `183c1bb5dc`
-- ⭐**rule-file 反映 = `35029056bd`**（2026-07-21 02:05・`CLAUDE.md:72`・p4・Rs 承認）。⚠p4 relay の前提「:72 は pin も禁止していた」は **on-disk と不一致**（:72 は 07-19 07:32 以降ずっと「唯一の認可例外 = clip-retention pin」を保持・directive 期間中 無変更）⇒ 本 commit = 復元ではなく **明確化**。⚠**逐語の出所 = ⛔OPEN** — :72 初出の文言が **Rs の 02:0x 追認発話**か p4 の言い換えかが未確定（p4 handoff memory は「追認」と記録・照会中）。p6 の当初「言い換え」推論は **撤回**。⚠p6 の論拠「クランプは gripper 動作の語」は **識別力なし**（banked 側「ケーブル固定」も同 cell で同じく gripper 動作を指す）= 自己訂正済。現行 :72 = `c2bcde7428`。詳細 = LEDGER §governance 裁定 B 項（§4 に従い本 state.md へ複製しない）
+- ⭐**rule-file 反映 = `35029056bd`**（2026-07-21 02:05・`CLAUDE.md:72`・p4・Rs 承認）。⚠p4 relay の前提「:72 は pin も禁止していた」は **on-disk と不一致**（:72 は 07-19 07:32 以降ずっと「唯一の認可例外 = clip-retention pin」を保持・directive 期間中 無変更）⇒ 本 commit = 復元ではなく **明確化**。✅**逐語の出所 = RESOLVED**（p4 回答 02:34 + c73 `23c320850e`・p6 verify 済）— **U1（01:3x「…ケーブル固定だけは…」）と U2（02:0x「これは変更。…ケーブルクランプのみ…」）は別時刻の 2 発話で両方 Rs 逐語**。U2 は p4 の現 context に現存ゆえ provenance が強い。⚠U2 は p4 が **pN の未 commit 編集**を引用提示した上での応答（指示自体は引用対象から独立・U1 と同方向）。p4 は LEDGER 削除要請を **撤回**。⚠p6 の論拠「クランプは gripper 動作の語」は **識別力なし**（banked 側「ケーブル固定」も同 cell で同じく gripper 動作を指す）= 自己訂正済。現行 :72 = `c2bcde7428`。詳細 = LEDGER §governance 裁定 B 項（§4 に従い本 state.md へ複製しない）
 
 ⚠⚠**node ID `…-Kinematic-Pin-Complete-Removal-…` の「Pin-Complete」部分は、本裁定により実態と食い違う**。ただし **NEST §1 で node ID は永続**ゆえ改名しない。**ID を goal の要約として読まないこと** — goal は上記のとおり縮小済。
 
