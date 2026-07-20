@@ -1,4 +1,4 @@
-# WMSO D1.1-B `tensor_binding` — DESIGN (v11)
+# WMSO D1.1-B `tensor_binding` — DESIGN (v12)
 
 - node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2); v1 = 2026-07-20 09:56 JST（実測）; **v2 = 2026-07-20 **11:08–11:13 JST**（実測 bracket: 著述開始前 11:08:16 / bank 時 11:13:35。⚠records-fix: 初稿は「11:10」と実測せずに記載した date-THEN-write 違反 — 実測 bracket に置換）— CC Debate cycle-1 FAIL の fold）; v3 = 2026-07-20 11:43 JST（実測 — pN exact-pin HOLD B1-B5 の fold）; v4 = 2026-07-20 12:10 JST（実測 — cycle-2 debate の fold）; v5 = 2026-07-20 12:40 JST（実測 — pN exact-pin HOLD R1-R3 の fold）; v6 = 2026-07-20 13:06 JST（実測 — pS v5 PASS 後に著者が自検出した検証計器の欠陥 1 件の fold）; v6.1 = 2026-07-20 13:17 JST（実測 — pN exact-pin HOLD H1-H3 の fold: 順序規律・fail-closed コマンド事前登録・records-fix。設計 semantics 不変）; v7 = 2026-07-20 14:43 JST（実測 — ⭐**Rs 裁定 A′ の fold**: B1 hash 供給 locator を確定。**v5 以来はじめての設計 semantic 変更**）; **v7.1 = 2026-07-20 15:08 JST（実測 — pS N-1 の scope 修正 + Rs 裁定 custody record 追加。版歴 = §12）**
 - 統治: **scope prereg v1.1.1**（`ffd06623e22f…` @ `cf94601f7a`・pN SCOPE CONCUR `0a5d0969218c…` @ `ccd8342c30`）§2 IN の実装設計。**土台 = frozen D1.1-A v2.11.2**（DESIGN `00192d20ca00b654…` / EP v1.9 md `c474acea7c58…` / JSON `e63176af9bc3…`）— **frozen 3 file を編集せず・schema delta を導入しない**（必要時は supersession + Rs review、prereg §1.3）。
@@ -393,7 +393,7 @@ v1 は本 gate 未実施だった。実施結果（on-disk 実測）:
 
 ## 10. Open points
 
-- 本 **v6.1** = **cycle-1（FAIL）→ pN HOLD B1-B5 → cycle-2（実施済・max-2-cycles 到達）→ pN HOLD R1-R3 → 著者自検出 S-1 → pN HOLD H1-H3 の fold**。以後の debate 再実行は Rs 裁量（pN「追加 debate 不要」）。fold の検証は §5 chain の pS / pN 両軸が担う。
+- ⚠**版参照の records-fix（v12）**: 旧文は「本 **v6.1** = …」と自版を **v6.1** と述べており、v7〜v11 を通じて更新漏れだった（**freeze 直前に本節の open 数え直しで自検出**）。正しい系譜 = **cycle-1（FAIL）→ pN HOLD B1-B5 → cycle-2（実施済・max-2-cycles 到達）→ pN HOLD R1-R3 → 著者自検出 S-1 → pN HOLD H1-H3 → v6.1（two-key 充足）→ Rs 裁定 A′ → ⛔A′ 破棄 → 前提/導出 claim-set 各 two-key → v9（D-1 採択）→ pS §27(B) flag → v10 → Rs ratify → v11 → 本 v12**。以後の debate 再実行は Rs 裁量（pN「追加 debate 不要」）。fold の検証は §5 chain の pS / pN 両軸が担う。
 - ✅✅**hash 供給 locator = CLOSED 確定（D-1 採択・CC1 の設計判断・v11）**: **設計軸（機構）= pS §27(A) PASS**（反証条件 4 件は完全集合・全て不発火）＋ **evidence 軸 = pN exact-pin PASS**（3 sha 一致）＋ **authority 軸 = ✅Rs ratify 済（21:44・veto 不行使）**。⇒ **3 軸すべて CLOSE**。custody = `WMSO_RS_B1_DELEGATION_RECORD_20260720.md` §5。対象 slot = **`tensor_binding` と `normalization` の両方**。**採択 = D-1（`EvidenceRecord.source_ref` の束縛）**。frozen delta なし。⚠**A′ 裁定の復活ではない**（A′ = VOID のまま・権威の根拠は CC1 の設計判断 + two-key 検証済 前提）。他 3 案を落とした理由・反証条件・実装形 = **§4**。**D-3 が必要になった場合のみ Rs 専権として再上程**。旧上程資料（A/A′/B の比較と rank 別 locator 表）は §4 の折りたたみに SUPERSEDED として保持。⚠**残る派生 open は §7 の到達性負例**（`E_BINDING_HASH_MISMATCH` が非 canonical bytes で実際に発火すること）— impl leg で実証必須。
 - §5 の必須化可否・class 台帳・判定器・窓幅 = slice 詳細 prereg + Rs 裁定。
 - U-2 の producer artifact 阻止・U-5 の demo 移行・**U-6 の topology ledger 束縛** = D1.1-C prereg への必須入力（**DDR への登録 = p6 へ dispatch 済** — cycle-2 CC5-CH4: 4 carry がいずれも DDR 未登録では次 chunk の [DEFER-RECON] が素通りする）。
@@ -487,4 +487,8 @@ v1 は本 gate 未実施だった。実施結果（on-disk 実測）:
   - ⚠**潰さない残差**: (i) **§0 の原則「bank ≠ 検証」は撤回しない** — 閉じたのは *この* 主張であって一般則ではない。(ii) **転記者は依然として私**（消えたのは「Rs が見ていない主張が面に載る」状態であって、転記という媒介ではない）。
   - ⛔**本 confirm が与えないもの**: **freeze**（別 gate・**Rs 専権**）／ implementation・training・closed-loop authority（**CLOSED 継続**）／ D1.1-C・slice 着手 ／ D-3（frozen schema delta）の許可。
   - **設計 semantics = 不変**（D-1 の実装形・error code・反証条件・fixture・builder はいずれも無変更。v9 以降 3 版連続で semantic delta = 0）。
+- **v12**（2026-07-20 22:5x 実測、本版）— **freeze 直前の records-fix 1 件（設計 semantics 不変）**:
+  - **§10 冒頭の版自参照が `v6.1` のまま v7〜v11 を通過していた**。freeze 提案の前に §10 自身の規律「『open = 0』の無条件宣言はしない」に従って **open を数え直した際に自検出**。⇒ 正しい系譜へ置換。⚠**freeze は doc を確定させる操作**ゆえ、自版を誤記した doc を凍結すると誤記ごと固定される。
+  - ⛔**取り下げた自警報 1 件（記録）**: 同じ数え直しで `E_BINDING_NORMALIZER_ORPHAN` が「定義文を持たない」ことに気付き freeze 阻却要因かと疑ったが、**doc の規約を測って取り下げ** — 自明な code 名には括弧注記を付けない方式（`LENGTH_SHAPE_MISMATCH` / `DUPLICATE_FIELD` / `MASK_SELF` 等 12 件以上が同様）で `E_BINDING_BELIEF_ORPHAN` とも一貫し、さらに **§7 `:370` が当該 code の到達性負例を必須化**しているため実装者は trigger を pin せざるを得ない。**規約を測る前に鳴らした警報**であり、defect ではない。
+  - **freeze 時に残る declared open（隠さず宣言）**: ①`stats_key` 一意性（per-feature 一意か共有可か・§1.2 / §10）— ⚠**どちらの読みでも fail-closed**（共有時に length 不一致なら `E_BINDING_NORMALIZER_VALUE` が発火）②§7 の到達性負例（impl leg）③§5 の必須化可否・class 台帳・判定器・窓幅（slice 詳細 prereg + Rs 裁定）④U-2 / U-5 / U-6（D1.1-C prereg の必須入力・DDR 登録済）。**D1.1-A も §10 に open を残したまま freeze しており、declared open を伴う freeze は本 project の確立した形**。
 - **v1 → v2 の非変更点**: 統治・carries・frozen 不変・impl CLOSED・§0 の WCJ 継承方針（B-declared 分を分離明記した点のみ変更）。
