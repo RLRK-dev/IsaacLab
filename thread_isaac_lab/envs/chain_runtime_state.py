@@ -7,6 +7,7 @@
 
 from __future__ import annotations
 
+import warnings
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -82,21 +83,6 @@ def _as_numpy_copy(value: Any) -> np.ndarray | None:
     if hasattr(value, "detach"):
         return value.detach().cpu().numpy().copy()
     return np.array(value, copy=True)
-
-
-def _assign_array(target: Any, value: np.ndarray | None) -> bool:
-    """Assign a NumPy array to a Warp-like or NumPy-like target."""
-
-    if value is None or target is None:
-        return False
-    if hasattr(target, "assign"):
-        target.assign(value)
-        return True
-    try:
-        target[...] = value
-    except Exception:
-        return False
-    return True
 
 
 def _field_array(obj: Any, name: str) -> np.ndarray | None:
@@ -263,44 +249,32 @@ def import_chain_state_into_env(
     target_skill: str | None = None,
     validate: bool = True,
 ) -> ChainRuntimeRestoreReport:
-    """Import a chain state into an environment without triggering reset."""
+    """Removed: importing chain state into a live environment is no longer supported.
 
-    report = validate_chain_state_for_env(env, state, target_skill=target_skill)
-    if validate and not report.ok:
-        return report
+    The former implementation restored solver and body state (``body_q``, ``body_qd``,
+    ``body_q_prev``) plus joint and per-world arrays directly into a running environment.
+    That is a kinematic placement, which is prohibited on every substrate. The
+    implementation was deleted rather than disabled, so no dead writer remains behind the
+    raise.
 
-    state_0 = getattr(env, "_state_0", None)
-    solver = getattr(env, "_solver", None)
-    fk_state = getattr(env, "_fk_state", None)
-    warnings = list(report.warnings)
+    The name and signature are retained so that any surviving import fails loudly at the
+    call instead of failing obscurely at import time.
 
-    if state_0 is not None:
-        if not _assign_array(getattr(state_0, "body_q", None), state.body_q):
-            warnings.append("body_q_assign_failed")
-        if not _assign_array(getattr(state_0, "body_qd", None), state.body_qd):
-            warnings.append("body_qd_assign_failed")
+    Migration: use :func:`export_chain_state_from_env` with
+    :func:`validate_chain_state_for_env` for read-only inspection, and carry a live skill
+    handoff through an action/joint/physics-based successor rather than by injecting state.
 
-    if solver is not None:
-        body_q_prev_target = getattr(solver, "body_q_prev", None)
-        if body_q_prev_target is not None:
-            _assign_array(body_q_prev_target, state.body_q)
-            warnings.append("body_q_prev_aligned_to_imported_body_q")
+    Raises:
+        RuntimeError: always, before any read or mutation of ``env`` or ``state``.
+    """
 
-    if fk_state is not None and state.fk_jq is not None:
-        if not _assign_array(getattr(fk_state, "joint_q", None), state.fk_jq):
-            warnings.append("fk_jq_assign_failed")
-
-    if state.per_world_fk_jq is not None and hasattr(env, "_per_world_fk_jq"):
-        _assign_array(getattr(env, "_per_world_fk_jq", None), state.per_world_fk_jq)
-
-    return ChainRuntimeRestoreReport(
-        ok=report.ok and "body_q_assign_failed" not in warnings and "body_qd_assign_failed" not in warnings,
-        source_skill=state.source_skill,
-        target_skill=target_skill or env.__class__.__name__,
-        topology_match=report.topology_match,
-        body_q_finite=report.body_q_finite,
-        body_qd_finite=report.body_qd_finite,
-        body_q_prev_aligned=True,
-        missing_fields=report.missing_fields,
-        warnings=warnings,
+    # provenance: body deleted 2026-07-20; last present at 3e9b973144 (probe/pd1-arm-pd).
+    # Rationale + disposition class: charter §14.10 / §14.12 TK-2 / §14.16-R / §14.20.
+    message = (
+        "import_chain_state_into_env is removed: restoring body/solver state into a live env"
+        " is a kinematic placement (charter §14.10). Use export_chain_state_from_env +"
+        " validate_chain_state_for_env for read-only inspection, or an"
+        " action/joint/physics-based handoff for live chaining."
     )
+    warnings.warn(message, DeprecationWarning, stacklevel=2)
+    raise RuntimeError(message)
