@@ -1,4 +1,4 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-20 23:48 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 00:23 JST
 
 > Pane-specific handoff (multi-pane NEST; does not clobber the shared HANDOFF.md).
 > Full detail = memory `handoff_cc_pQ_rstechlead2_wmso_d11a_freeze_2026-07-20.md`. Ground truth = frozen package + freeze record + manifest + LEDGER row44, not this narrative (§運用4).
@@ -37,6 +37,37 @@
 - ✅**解決（Rs 裁定 2026-07-20 23:4x・逐語「SKILLについてはpX:SKILL-DESIGNが決めることとなった。整合性を持つように」）**: **SKILL の細分化・分解能は `w2:pX SKILL-DESIGN` が決める** — ⛔**本 node の割当ではない**。（経緯: Rs 逐語は p4 経由の伝聞で届いたため割当として接地せず Rs へ照会 → 本裁定で「否」に決着）。custody = `WMSO_RS_SKILL_OWNERSHIP_RULING_20260720.md`。
   - **本 node に残る scope** = `SkillLifecycleContract` schema ／ `tensor_binding` 契約 ／ EP evidence 束縛 ／ **SDM 単位** = 「どの skill が在るかによらず、その上に載る契約層」。
   - ⚠**DDR#32 は両側にまたがる**（周期長 = 分割の関数 = pX ／ `H` = SDM 設計 = 本 node）⇒ owner をどちらか単独にしない。
+
+## ⭐ pX:SKILL-DESIGN との連携（2026-07-20 23:5x → 07-21 00:2x・Rs 指示「連携して」「不整合がないように」）
+
+- **pane 再導出（必須・stored map 信用禁止）**: `w2:pX SKILL-DESIGN`（SKILL 決定権）／⭐**`w2:pN` T-ROOT-OPS-SUPERVISOR-CODEX = 停止**（Rs 2026-07-21 00:2x）→ **`w2:pY` = T-ROOT-OPS-SUPERVISOR**（label 無し・peek で導出・Rs が直接指名し pN から引き継ぎ中）。
+- ⛔**未処理 = OPS-SUP consultation leg 1 件のみ**（D1.1-B freeze 前）。pN が停止前に「**exact-pin は consultation を兼ねない・別 leg 必要**」と判定（transcript `3432de3c3462…` @ `7ce2a520c9`）。D1.1-A 先例は **Rs 指示**で実施（形式参考 = `db24b877d234…` @ `6af253dc14`）。⇒ **pY へ引き継ぎ済・自己起動しない**。
+
+### ⛔ FOUNDATIONAL INVARIANT 系の発見（Rs 判断待ち・私は編集していない）
+
+- ⛔**`RL-Routing-Design.md:1032`「構造: 排他的単腕 (RIGHT→CLIP0,1 / LEFT→CLIP2,3,4)」** = §0 不変前提 **DUAL-ARM** に触れる。**live section**（`:1028 ## 1. 概要` 直下）・**supersession marker 無し**（同 doc は marker を 15 箇所で使用）・同 doc `:20`/`:1635`/`:2486` は両腕と記述 = **内部矛盾**。⚠**違反と断定していない**（label の誤りである読みを `:1635`/`:2486` が支持）。**07-Design は CC read-only・p5 管理・不変前提は Rs 専権**ゆえ未編集。p5 + pX + Rs へ通知済。
+- ⛔**層 1（工程表）の欠落**: `thread_isaac_lab/skills/step_table.py:60 StepDef` に `target_left`/`target_right`/`l_finger`/`r_finger` は在るが、**`None` が「保持」と「不関与」を潰す**。保持の意味論は行コメント `None = keep current` のみで、**4 field 中 1 つ（`l_finger`）だけ**（pX 指摘）。⇒ **腕の「参加」を機械判定できない**。
+- ✅**層 3（契約層）は欠落なし** — ⚠**私の当初主張「契約層は駆動と保持を区別できない」は撤回**（pS §33 で検証済）。実測: `:61 IdentityKind = LEARNED|SCRIPTED|WAIT` / `:62 ControlMode = DIFF_IK_EE_TARGET|SCRIPTED_SEQUENCE|WAIT` / `:83` 表で **kind → control_mode が決まる** / `:151 ControlResourceSpec` = **所有宣言で behavior と直交**。⇒ hold = `kind=WAIT ∧ control_mode=WAIT ∧ 資源 claim` で表現可。**誤りの型 = 1 型だけ見て「無い」と結論し、同じ凍結 file の enum を述語で引かなかった**。
+
+### schema delta（Rs review へ上げる・私が上程）
+
+- **1 件に束ねる**（pX 受諾）: **合成グラフ容器 + barrier を不可分**（barrier は容器の edge/node 属性ゆえ**容器なしに独立 landing 不可**。分けると「列は表現できるが合流は表現できない容器」が先に landing し、並行合成が合流意味論なしに宣言可能 = silent gap）。
+- ⚠**存在理由の訂正**: **DUAL-ARM 検証は delta を必要としない**（案 (B) なら claim の全称検査で足りる）。**delta の理由 = Rs の並行合成 MVP 裁定**（並行合成そのものの表現）。受入条件としての DUAL-ARM 検証可能性は維持。
+- **凍結側は触らない**: `ControlResourceSpec` も `ControlMode` も改造不要。
+- **不在確認（私が実施・pX 依頼）**: 合成容器の候補語（Composition / composition_graph / SkillGraph / PlanDefinition / CompositionEdge / multi-skill / DAG / successor / predecessor / next_skill / sequence）= **凍結 3 file 全域で 0 hit**。`:139 accepted_handoff: tuple[AcceptedHandoffSpec, ...]` = **pairwise 表現**。
+- **Q1(c) 確認**: `SKILL_ID_REGISTRY` 更新 = **Rs 承認事項**（`:436`）+ invariant test `SKILL_ID_REGISTRY == EXPECTED_SKILL_IDS`（`:556`）= **二重制約**。pX の「最大の衝突点」判断は正しい。
+
+### ⛔ pX へ返した未決（層 1 を確定する前に選択が要る）
+
+- **(A) 単腕レーン + 合成/barrier**（保持 = `kind=WAIT` の別単位。delta 必須） vs **(B) 両腕 skill + 静止目標**（保持 = 同一 skill 内の静止 target。DUAL-ARM 検査は claim の全称検査で足り delta 不要）。
+- ⚠**pX の「凍結が単腕レーンを強制する」は too strong**（反例 = (B)）。**選択は pX 所管**（skill 分解の形）。**層 1 の記録形式は選択に依存**するので選ぶ前に確定しない、と依頼済。
+- **層 1 → 契約層の写像（(A) の場合・pX 受諾済）**: 駆動 = claim あり + `control_mode` 非 WAIT ／ 保持 = claim あり + `control_mode` WAIT ／ 不関与 = claim なし。
+
+### 本 arc の恒久教訓（今夜追加分）
+
+- ⛔**「D0 draft を現行として引く」= pane 横断で本日 4 度（p4 が 3・私が 1）**。私は **pX へ送った「凍結済だから束縛せよ」の目録が 6/6 誤り**だった（凍結は `:416`-`:425` の migration 表で全部を改名/discard 済）。**原因 = D0 は自分が書いたので記憶から引用し、同じ message で pin した凍結 file を読まなかった**。⇒ **WMSO 契約 field は必ず `contracts_v2`（凍結）を読んでから引く**。
+- ⭐**pS の監視 duty = 3 軸に拡張**（受諾済）: ①subdivision 決定への over-reach ②over-claim ③⭐**frozen-vocabulary の under-statement**（過小申告は「凍結が既に持つ機能の delta 提案」= 不要な Rs review と「偽 absence 主張」を生む — 今夜どちらも起こりかけた）。**方法 = 凍結を述語で引く（何が X を表現するかを全空間に問う・1 型で「無い」としない）**。
+- **今夜の訂正 5 件はすべて、主張した側でない方が測って見つけた**（私の目録 → pX ／ pX の「分解で検証可能」→ 私 ／ 私の「区別できない」→ pX の筋 ／ pX の「レーン強制」→ 私 ／ 私の「delta は DUAL-ARM のため」→ 自己）。
 
 ## 参照（正）
 - 成否 SSOT: `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md` row44（p6 反映 `65d62d15ed`）
