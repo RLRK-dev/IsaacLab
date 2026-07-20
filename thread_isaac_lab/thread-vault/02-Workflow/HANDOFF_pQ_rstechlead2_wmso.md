@@ -1,4 +1,4 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 01:34 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 01:36 JST
 
 > Pane-specific handoff (multi-pane NEST; does not clobber the shared HANDOFF.md).
 > Full detail = memory `handoff_cc_pQ_rstechlead2_wmso_d11a_freeze_2026-07-20.md`. Ground truth = frozen package + freeze record + manifest + LEDGER row44, not this narrative (§運用4).
@@ -63,12 +63,25 @@
 - ⚠**pX の「凍結が単腕レーンを強制する」は too strong**（反例 = (B)）。**選択は pX 所管**（skill 分解の形）。**層 1 の記録形式は選択に依存**するので選ぶ前に確定しない、と依頼済。
 - **層 1 → 契約層の写像（(A) の場合・pX 受諾済）**: 駆動 = claim あり + `control_mode` 非 WAIT ／ 保持 = claim あり + `control_mode` WAIT ／ 不関与 = claim なし。
 
-### ✅ delta 仕様 = 確定（pX 入力完了 2026-07-21 01:33・上程は Rs 判断待ち）
+### ⚠ delta 仕様 — **Rs bank 判定 = ADOPTED DESIGN DECISION / ⛔NOT YET: normative delta closure**（2026-07-21 01:34）
+
+⛔**閉じた normative delta として表現しないこと**（Rs 明示）。**OPEN 継続 = runtime containment ／ predicate projection closure**。
+⚠**本節の旧版（01:34 bank `ed627314f2`）は「delta 仕様 = 確定」と書いており over-claim だった** — Rs 裁定受領の 1 分前に bank したもの。訂正済。
 
 **Rs 承認済（pX 経由）**: 単位 = **片腕レーン** ／ **並行合成を最初のマイルストーン**に。
 
-**単一不可分 delta = `SkillCompositionDefinition`**（10 点）:
-1. 容器（合成グラフ）+ **逐次合成** 2. **並行合成 `ParallelRegion`** 3. **必須 start barrier** 4. **必須 join** 5. **region-level postcondition** 6. **明示 planned synchronization events** 7. `OutcomeEffectSpec`（**branch-local**）8. `CompositionCertificate` 9. **`BranchEffectScope`** + `E_BRANCH_POSTCONDITION_OUT_OF_SCOPE` / **`RegionObservationScope`** 10. **evaluator registry** + `E_EVALUATOR_UNREGISTERED`（fail-close）+ **適合試験**
+**Rs 提示の確定形**: `SkillCompositionDefinition` + 逐次 + 並行 + **必須 barrier/join** + **region-level postcondition** + ⭐**required_belief_fields based scope projection** + ⭐**raw `Ownership.resource` exclusion** + `OutcomeEffectSpec` + `CompositionCertificate`。
+
+⚠**旧構成（`BranchEffectScope` + evaluator registry + 適合試験）は SUPERSEDED** — 下記「Rs による置換」参照。
+
+- ⭐⭐**Rs による置換（strictly better）**: raw ownership を**境界づけるのをやめ**、**述語に見せる入力を静的 projection に限定**する。`predicate_input = project(joint_snapshot, RegionPostconditionSpec.required_belief_fields)`。
+  - **不変条件 6 点**: (1) evaluator へ **raw joint snapshot を渡さない** (2) **raw `Ownership.resource` を渡さない** (3) `required_belief_fields` の全 field を **typed schema で解決** (4) 各 field が **指定 evaluation cut で取得可能** (5) **projection schema + field 集合を `CompositionDefinitionHash` へ含める** (6) **未宣言 field access は fail-closed**。
+  - ⭐**(a)/(b) の再帰が消える**: 「evaluator が宣言 scope を守ることを**信頼する**」必要が無い — **見せていないから**。runtime state の広さと postcondition が主張し得る scope の広さが**構造的に切り離される**。
+  - ⇒ **適合試験（識別不能性）は主機構から回帰検査へ降格**。不要ではない（side channel に有効）が **(b) を背負わせない**。cable 差分 fixture も同じ位置づけ。
+  - ⚠**pX の自己申告**: containment（runtime ⊆ definition）要求は、`required_control_resources` を**上限**として再解釈するもので、**凍結 `:380` の `required ⊆ offered`（下限制約）の意味そのものを変える**ところだった。
+- **certificate 検査**: `required_belief_fields` ⊆ joint snapshot の typed field closure ／ ⊆ 子の observation・handoff・effect から供給可能な集合 ／ evaluator input schema == projected joint belief schema ／ **raw `Ownership.resource` dependency == none**。
+- **error code**: `E_REGION_FIELD_UNDECLARED` / `E_REGION_FIELD_UNAVAILABLE` / `E_REGION_SCOPE_ESCAPE` / `E_REGION_PREDICATE_SCHEMA_MISMATCH` / `E_REGION_RAW_OWNERSHIP_FORBIDDEN`。
+- **cable は ownership 経由でなく typed belief field として宣言**: `cable_span_seated` / `cable_clip_contact_state` / `cable_span_tension` / `left_grasp_stability` / `right_grasp_stability`。導出値なら evaluator は宣言 primitive field のみを入力とし、**evaluator artifact hash を certificate へ結合**。
 
 - ⭐**核心不変式**: **merged branch effects does NOT entail region success**。`region_success = branch_readiness ∧ region_postcondition(joint_snapshot) ∧ planned_events_completed ∧ join_completion`。
   - **根拠 = 型論証**（動画ではない）: `OutcomeEffectSpec` は branch-local ／ 凍結 `ControlResourceSpec` の 4 key に **cable は存在しない**（`:142` definition 級 claim は `ControlResourceSpec` のみ・`:424` で untyped dict を pin 語彙へ**意図的に置換済**）／ region success は joint snapshot 上の述語 ⇒ **どの branch も cable を claim できず、branch postcondition は cable を参照できない** ⇒ merge しても含意しない。∎
