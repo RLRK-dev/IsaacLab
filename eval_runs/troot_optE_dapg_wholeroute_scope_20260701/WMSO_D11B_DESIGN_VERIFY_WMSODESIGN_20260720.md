@@ -361,3 +361,26 @@ pN が claim-set v2（私の §24 refinement を fold した版）に **V2-B1..B
 **records 波及（p6 レグ）**: C3 = CLOSED（SHADOW）+ DDR#27 の B1 =「rank2 で解く必須・SHADOW 要件から再導出」へ更新要（p6 sync）。
 
 **私 = pQ の B1 選択肢導出（SHADOW 要件から）→ claim-set 化 → 私が verify、を待つ（self-start なし）**。impl/training/authority CLOSED。
+
+## 26. B1 導出 claim-set の独立検証（2026-07-20 20:26 実測）
+
+⭐**pQ が SHADOW 要件から locator 供給源を再導出した premise claim-set を設計軸 verify 依頼**（選択肢0・推奨0・評価語なし）。artifact = `WMSO_D11B_B1_DERIVATION_CLAIMSET_RSTECHLEAD2_20260720.md`・**私の on-disk 実測 sha `546762259ec9518302495d6374d64bef5b24650b22f3e69583d1e84102c9e1e7` @ `57eac40c09` = pQ dispatch と一致**（fetch-not-cite）。⚠**本検証 = D-A..D-D の premise-fact を凍結源に照合するのみ — D-2/D-1 の優劣・SHADOW の是非・どの案を採るかは一切判定しない**（＝ Rs 裁定事項）。
+
+**pin 検証（全て on-disk 自算出）**: claim-set `546762259ec9…` @ 57eac40c09 ✅ / 凍結 3 file working-tree = 主張 prefix 一致（contracts_v2 `00192d20ca00`・EP md `c474acea7c58`・EP JSON `e63176af9bc3`）✅ / premise C3 custody `9ab6…85ebca3f` @ 42bbeafdda ✅（正 sha・捏造値でない）/ premise claim-set v6 `40e5ca3bb09d` @ 99a1fc5c6a ✅。
+
+**各 claim = 凍結 on-disk 逐語一致・全 TRUE**:
+- **D-A（rank2 proof set = 厳密集合・追加要求不可）= TRUE**: EP JSON `:71` `_domain`=「exact required ProofKind set; REQUIRED cells only; UNKNOWN grade carries no authority-relevant claim」逐語一致・「at least/minimum」不在（反証(i)否定）/ EP md `:114`「component に意味を持たない kind の混入 = E_PROOF_KIND_FOREIGN」逐語（例 md `:129`）。⇒「FINAL_ARTIFACT_HASH を rank2 に**追加要求**する型」= frozen delta（D-3）に合流、正。⭐**scope confirm（非欠陥・完全性確認）**: claim は「追加**要求**」に限定＝正。「optional な extra proof として供給」variant は enforced でない（profile は無しでも certify）ゆえ信頼できる locator route として非成立 → 表の ⛔FORECLOSED 行は当該 family で完全（欠落供給源でない）。
+- **D-B（source_ref）= TRUE**: (a) contracts_v2 `:252` `source_ref: str`（Optional でない・反証(i)否定）/ (b) `:269` `records: tuple[EvidenceRecord,…]`（全 component・rank2 も存在）/ (c) `:551` hashed fields に source_ref（差替が evidence_bundle_hash に現れる）/ (d) `:396` は migration-fixture provenance 用途を規定（欠落=E_MIGRATE_STATICS_ABSENT）だが**artifact 解決用途の指示対象は未規定**・EP md/JSON の source_ref 出現=0（実測 grep -c=0/0）。⭐**A′ episode の訂正を継承**（「frozen entirely unregulated」の過広を回避し用途限定）。
+- **D-C（RECONSTRUCTION_SOURCES）= TRUE**: (a) EP JSON `:106` rank2 set + `_all_13_components`（TB/NORM 双方）逐語 / (b) EP md `:23`「復元資料列挙（path+sha）」・`:127`「H_WCJ([{path,sha256}…] path bytes 昇順) の集約 hash」・EP JSON `:145`「artifact_hash = H_WCJ of path-sha object array, path bytes ascending」/ (c) **内容制約 未規定 = closed query（凍結3file 全体・述語=配列内容の制約行）で確認**：hit（JSON:106/145・md:23/45/127・contracts:239/396）は全て「required-set membership」「payload 構造」「aggregate hash」「grade（fixture 昇格せず）」で、**何を配列に載せてよいかを限定する行は不在**。⭐**line 60 ⚠未主張が正**（「claim target を載せてよい」とは言わず「未規定」でのみ止める＝permission 推論をしない・source_ref と同型の規律）。
+- **D-D（他 3 kind は target-byte locator でない）= TRUE**: EP JSON `:142` COMPATIBILITY_TEST=test record sha / `:143` UNRESOLVED_DIFFERENCES=doc sha / `:139` EVALUATOR_ARTIFACT==evaluator_artifact_hash ＝いずれも自 artifact 指示。含意（RECONSTRUCTION_SOURCES も集約 hash ゆえ 2-hop・entry sha と claim_target の一致は frozen 未要求＝B 側宣言）= 正：`:115-117` の anchor rule（reproduced/manifest/ttcb）に RECONSTRUCTION_SOURCES→claim_target 束縛は不在（line 145 に claim_target binding 無し）。
+
+**列挙表 D-1..D-4 = 誠実な到達可能性列挙（評価でない）**: D-3 を「frozen delta 要（supersession + Rs review）」と正しく明示 / D-1（=旧A′供給源）・D-4（=旧A）を**供給源として参照しつつ裁定=白紙**と明記 / line 86「実現可能性・妥当性・コストは未判定」。✅
+
+**先祖返り = 無し**: A′ を復活させず（VOID・引用不可を明記、D-1 は source のみ・ruling 白紙）/ 旧 A/A′/B を再提示せず要件から再導出 / 「entirely unregulated」過広を再発させず（D-B(d) 用途限定）。
+**先走り = 無し**: 順序 = pS PASS → pQ bank → pN exact-pin → Rs / impl・training・closed-loop authority 解錠せず / 選択肢を確定・推奨せず。
+**records = clean**: 作成 19:40 JST / dispatch 20:19:07 JST（date-measured）/ premise C3 custody sha = 正値（捏造 `…8d5b0f5c…` でなく `…85ebca3f…`）。
+**境界宣言（lines 9-12）= 全て遵守**。
+
+⇒ ⭐**設計軸 = PASS（premise-fact）**。claim-set は clean で規律的な premise 列挙。D-A..D-D は全て凍結 on-disk に逐語一致で TRUE、先祖返り/先走り/records 問題なし、A′ episode・§24 axis 訂正を継承。B1 解法の選択は含まず（Rs 事項）。
+
+**次**: 順序どおり pN exact-pin → その後 Rs へ選択肢上程。**私 = pN 後の Rs 選択、または追加 claim-set の verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
