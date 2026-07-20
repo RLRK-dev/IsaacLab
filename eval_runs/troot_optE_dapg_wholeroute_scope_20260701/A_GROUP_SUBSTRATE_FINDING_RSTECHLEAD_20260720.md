@@ -1,4 +1,35 @@
-# ⛔ A-group substrate finding — the PHYSICS_REWRITE premise does not hold on the VBD branch
+# ⛔ A-group substrate finding — the PS-1 rewrite premise does not hold on the VBD branch
+
+> ## ⚠ v1.1 NARROW CORRECTION (2026-07-20 11:1x JST) — read this before §2
+> pN ran a **source-only capability check** (11:12) and refuted part of my reasoning. Corrections:
+> 1. **"VBD supports none" is NOT a solver-capability fact.** It is a *repo build comment*
+>    (`test_newton_clip_routing.py:771`). Measured by pN on the installed package: current env7 =
+>    Newton **1.2.1**, `newton/_src/solvers/vbd/solver_vbd.py` (sha256 `f11cb9dabe44…`) doc `:105-121`
+>    lists supported joint types **including REVOLUTE / PRISMATIC / D6 / CABLE**, with `target_ke/kd`
+>    drives supported. ⇒ **VBD does not hard-reject REVOLUTE. The jointless scene is a build choice.**
+> 2. **My §2 S1B citation over-blocked.** Re-running the prior-art guard with better keywords
+>    (`"S1B" "do not re-attempt"`) returns the blocker — and its own text says:
+>    "⚠ Scoped 復活禁止 … **NOT a blanket ban**: closed/blocked **on the env6 Newton substrate** …
+>    (a) VBD-prismatic retry … **⚠ Scope limit (do NOT over-block): … Only the *faithful-prismatic
+>    Newton rebuild* is walled**" (`07-Design/S1B-Faithful-Finger-Design.md:25`). The A-group is on
+>    **env7 / Newton 1.2.1**, and the ask is a REVOLUTE arm, not a prismatic finger. **I retract
+>    "same shape as the closed S1B attempt" and "substrate-walled".**
+> 3. **The measurement I requested in §5 is withdrawn** — pN ruled it NO-GO/unnecessary: the installed
+>    source already answers it. No constructor/finalize/step probe.
+>
+> **What survives unchanged** (all independently measured, §1): the zeroed inverse mass, the absent
+> actuator wiring, the currently jointless scene, and therefore **prereg v2 §B2 = DO-NOT-IMPLEMENT**.
+> pN concurs on the operative point for an independent reason: **VBD does not support
+> `joint_target_mode`** (nor armature/friction/effort/velocity limit, equality, mimic) ⇒ **the PS-1
+> POSITION-servo form cannot transfer**. The correct statement of this finding is
+> **"the current scene is jointless (a build choice) and the PS-1 transfer is invalid"** — *not*
+> "VBD rejects joints". The faithful-Robotiq equality/mimic wall does remain.
+>
+> ⭐ **Process lesson (mine)**: my first prior-art run used keywords
+> (`"VBD kinematic bodies" "physics rewrite arm actuator" "S1B prismatic substrate"`) that returned
+> **0 hits**, and I treated that PASS as clearance. A guard PASS is an **absence claim**, and an
+> absence claim from a query that cannot hit the target proves nothing. Re-running with the banked
+> document's own vocabulary found it immediately.
 
 **p4 / RS-TECH-LEAD, 2026-07-20 11:0x JST. Raised while clearing pN R2 (11:01).**
 Measured at c29 `6970bbd22c` (clean worktree, committed blobs). **This is a STOP-and-report, not a
@@ -74,18 +105,24 @@ Plus `newton_routing_utils` 7 (VBD), `test_grip_modes` 2, `dry_run_43step` 1 (A-
 ⇒ The A-group is **not one class**. The mujoco-branch sites are plausibly PS-1-style rewritable; the
 VBD-branch sites are on the walled substrate.
 
-## 5. What I am asking for (no design authored here)
+## 5. What I am asking for (no design authored here) — **updated by v1.1 + pN scope ruling 11:12**
 
-- **p5 (design)**: §14.24(0)'s "principle transfers, grip PS-1 precedent holds" is measured false for
-  the VBD branch. Does the A-group split into (a) mujoco-branch → PHYSICS_REWRITE per PS-1 and
-  (b) VBD-branch → DISCARDED-track disposition (the env6-VBD track is already DISCARDED per
-  `CLAUDE.md`, Rs 2026-06-26), rather than a uniform rewrite?
-- **pN (scope)**: if the VBD-branch sites are DISCARDED-track, their disposition class changes from
-  PHYSICS_REWRITE to DELETE/retire — which moves rows in manifest v2.3 §1 and changes the expected
-  census arithmetic. Manifest and prereg both need re-issue after the ruling.
-- **The one open measurement** (§2 caveat): whether `SolverVBD` rejects a REVOLUTE arm articulation
-  (making it a hard wall) or the jointless build was a choice. I can run this as a static/API check —
-  it is cheap and needs no GPU run. **Requesting authorisation to measure it**; I have not.
+- **p5 (design)**: §14.24(0)'s "principle transfers, grip PS-1 precedent holds" is **measured false**
+  for the VBD branch — not because VBD refuses joints, but because the scene is jointless and VBD
+  lacks `joint_target_mode`. Class question stands: how does the A-group split?
+- **pN (scope) — RULED 11:12, recorded**: a blanket "VBD sites → DISCARDED-track DELETE" is
+  **HOLD / NOT APPROVED** (`routing_utils` has active B0/B1 consumers so it cannot be called
+  DISCARDED at file/row granularity; `clip_routing` is mixed-backend). **Interim classes**:
+  MuJoCo-only 4 = PHYSICS_REWRITE *candidate* · VBD-only writer sites = **KINEMATIC DELETE required**,
+  but their consumer/function disposition is **SUBSTRATE-BLOCKED** (retire vs env7-MuJoCo migrate =
+  p5/Rs ruling) · mixed definitions = branch/callsite split · `test_grip_modes` 2 = **unclassified**
+  until backend/liveness is exactly pinned. ⛔ **Manifest rows and census do not move now**, and
+  **a class change is not automatically an arithmetic change** (closing all 29 may still read 35→6).
+- **pN recommendation (recorded, not yet a ruling)**: do not rebuild the VBD track — delete/fail-close
+  the VBD kinematic writers and migrate the active B0/B1 to the articulated env7-MuJoCo path with
+  fresh re-acquisition. Sequenced after the p5 class ruling → Rs scope.
+- **Measurement request: WITHDRAWN** (v1.1 ③). If an empirical probe is ever judged necessary by p5,
+  pN's condition is a **new Rs directive naming the Newton version delta + an L3 substrate prereg**.
 
 ## 6. Status of my own artifacts
 
