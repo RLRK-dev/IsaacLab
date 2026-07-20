@@ -1,6 +1,6 @@
-# WMSO D1.1-B / D1.1-C + boundary-only vertical slice — Decision Record and Scope Preregistration (v1)
+# WMSO D1.1-B / D1.1-C + boundary-only vertical slice — Decision Record and Scope Preregistration (v1.1)
 
-- node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2); 記録 = **2026-07-20 08:53 JST（実測）**
+- node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2); 記録 = **2026-07-20 08:53 JST（実測）**; **v1.1 改訂 = 2026-07-20 09:32 JST（実測 09:32:42 — pN SCOPE HOLD B1-B4 fold、§10 版歴参照）**
 - 位置づけ: D1.1-A `contracts_v2` **FREEZE 後**の後続 chunk 群の decision record + **D1.1-B の詳細 prereg + D1.1-C / slice の banked outline**。工程ゲート順序 = D1.1 prereg v3.2.2 §9（Rs #8 一本化）を継承。
 - 統治: **frozen v2.11.2 package = 不変の土台**（`WMSO_D11A_FREEZE_RECORD_20260720.md` §2 pins: DESIGN `00192d20ca00b654…` / EP v1.9 `c474acea7c58…` / JSON v1.9 `e63176af9bc3…` / def hash `e7ca43093084…`）。本 doc は frozen 3 file を編集しない。
 - [DEFER-RECON] = `WMSO_D11BC_SLICE_DEFER_RECON_RSTECHLEAD2_20260720.md`（同時 bank・PASS〔設計 chunk として〕）。
@@ -40,7 +40,7 @@
 
 ### Exit（D1.1-B design chunk — D1.1-A と同型の「設計 chunk exit」）
 
-- design doc（機械可読 fixture + golden 同梱）完成 → **pS 設計軸 PASS → 5体 CC Debate（§5 の位置）→ pN DESIGN PASS-CLOSE（exact-pin）→ Rs freeze 判定**。
+- design doc（機械可読 fixture + golden 同梱）完成 → **5体 CC Debate / pre-mortem → design 修正 → pS final-design PASS → pN DESIGN PASS-CLOSE（exact-pin）→ Rs freeze 判定**（単一 chain — §5 と同一。pN B1 fold: pS を debate 後の final-design gate に置き、debate 修正による pS PASS の stale 化を除去）。
 - impl レグの exit（v3.2.2 §2 milestone Exit の「tensor_binding pass」等）= **impl 解錠後の別 chunk へ carry**（milestone 条件自体は不変に保持）。
 
 ## 3. D1.1-C `artifact_manifest` — banked outline（詳細 prereg は C 着手時）
@@ -55,16 +55,20 @@
 - 構成 = **2–3 skill + 1 transition/recovery、boundary-only**（mid-skill interruption なし — charter §5 Phase B）。候補 = **APPROACH_CABLE → INSERT_INTO_CLIP（必要なら → CLIP_CONFIRM）**（pN (3)）。
 - **必須化項目（pN (3) 逐語）**: success だけでなく **failure / no-chain・abstain / UNKNOWN・calibrated uncertainty・invalid handoff・stale epoch・recovery / stop・grasp / contact stability・deadline 計測**。（RV5 §6 (iii): 成功 transition のみで作らない）
 - 低位学習法 = **PPO 限定せず BC+RL / RL-only を許容**（METHOD_REGISTRY で担保 — B4）。高位 = **vision 由来 belief + skill-dynamics world model**（Rs L0 手段裁定〔RL+IL+vision+world model 必須〕と整合）。
-- boundary = **skill 終端 / 安全 checkpoint のみ**。mid-skill RT switching / full training-ready claim = **別 gate**（pN (3)）。
-- **実行前提（slice の run レグ — 設計書面はこれらに先行可**〔RV5 §6 (5): 契約完全主義で slice を無期延期しない〕**）**: impl 解錠（freeze record §4 の別 gate + kinematic 全廃 HALT 解消）+ **clean substrate**（(d) arm-control remediation 完了 — DDR #25/#26）+ [HIGH-COST-GATE] / production-launch-gate（該当時）+ **Rs 実行承認**。
+- **slice acceptance の portfolio 束（pN scope verdict B2 — L0 四手段の conjoin）**: slice acceptance 述語に **`portfolio_has_RL ∧ portfolio_has_IL ∧ vision_belief_live ∧ skill_dynamics_model_live`** を明示 — **1 つでも false なら L0 進捗 / slice-success claim 不可**。per-skill の RL-only は合法だが **IL leg を代替しない**（portfolio 水準で RL・IL 両方が生きていることが必須 — per-skill 許容だけでは RL-only 構成の slice が通ってしまう穴を塞ぐ）。
+- boundary（本 slice の **runtime 選択点**）= **skill 終端（TERMINAL outcome）のみ**（pN scope verdict B3 — pN (3) の「skill 終端 / 安全 checkpoint のみ」を同一著者がより厳格側へ精緻化・supersede）。**CheckpointSpec は静的契約として保持可**だが、**checkpoint 途中切替の実行 = Phase G / 別 gate**。checkpoint-enabled slice に変える場合は **chunk 改称 + scope 再審査**。mid-skill RT switching / full training-ready claim = **別 gate**（pN (3)）。
+- **実行前提（slice の run レグ — 設計書面はこれらに先行可**〔RV5 §6 (5): 契約完全主義で slice を無期延期しない〕**）**: impl 解錠（freeze record §4 の別 gate + kinematic 全廃 HALT 解消）+ **clean substrate = canonical all-thread_isaac_lab Layer-8 guard（landed successor 系譜 — 例 `7803f58f17`「Expand Layer 8 guard coverage」以降）で LAYER8_FAIL = 0**（pN scope verdict B4 — **snapshot remediation + scripts closure を含む全 root 被覆の 0 のみが解錠条件**。旧 envs/scripts 限定の 0・envs のみ 0 は十分条件でない。DDR #25/#26 の解消を包含。参考実測 = pN verdict 09:31: snapshot BODY3 + scripts 125 = 128 fail @ `7803f58f17`〔pN 測定・pQ 未再測〕）+ [HIGH-COST-GATE] / production-launch-gate（該当時）+ **Rs 実行承認**。
 
 ## 5. 工程ゲート順序（v3.2.2 §9 継承 — 変更なし）
 
 ```text
 scope prereg → pS design re-check → pN SCOPE CONCUR
 → design draft（D1.1-B DESIGN doc）→ 5体 CC Debate / pre-mortem（設計レビュー）
-→ design 修正 → pN DESIGN PASS-CLOSE →（impl 系 = CLOSED、解錠 = Rs + HALT 解消）
+→ design 修正 → pS final-design PASS → pN DESIGN PASS-CLOSE（exact-pin）
+→ Rs freeze 判定 →（impl 系 = CLOSED、解錠 = Rs + HALT 解消）
 ```
+
+- **v3.2.2 §9 からの明示 delta（pN B1・supersession）**: §9 原文の design 段 chain（draft → 5体 CC → 修正 → pN）に **pS final-design PASS を debate 後・pN 前に追加**（D1.1-A 実践で pS が §16-§18 design legs を担った形式を正式化）。**§2 Exit / 本 §5 / roadmap 記述は本 chain に一本化**（3 面一致 — pS record §8 の旧表現は本版が supersede）。**後段 finding で design が変わった場合は pS / pN 双方を再 verify**（片軸 PASS の持ち越し禁止）。
 
 - fail-closed re-verify loop（pN C3）: 後段 finding が design を変える場合、design 再 bank →（規模に応じ CC Debate 再実施）→ pN DESIGN 再 verify。PASS-CLOSE は最終 design sha に対してのみ有効。
 - lanes: dev = w2:pQ / design-ratify = w2:pS（WMSO-DESIGN）/ evidence-verify = w2:pN / custody = w2:p6。検証は fresh detached worktree（共有 dirty tree の結果を引用しない）。
@@ -96,3 +100,14 @@ scope prereg → pS design re-check → pN SCOPE CONCUR
 2. pS へ design re-check dispatch（§5 gate 順）→ pS PASS 後、pN へ SCOPE CONCUR readback dispatch。
 3. Rs へ checkpoint 報告(3 行 + artifact path / sha)。
 4. pN SCOPE CONCUR 後: **D1.1-B design draft 着手**（frozen v2.11.2 を土台にした別 doc — 本 prereg §2 の IN を実装する設計書面）。
+
+## 10. 版歴 / record-fix（fail-closed loop 記録）
+
+- **v1**（2026-07-20 08:53、blob `87f348540c93f0f2…` @ `7fc04d1baa`）: 初版。**pS 設計軸 re-check = PASS**（must-fix 0・carry C-1/C-2、record `bed5133fb28a…` @ `652ff63a60`）→ **pN scope verdict = SCOPE HOLD B1-B4 + N1**（09:31:43、transcript = `WMSO_PN_D11BC_SCOPE_HOLD_B1B4_TRANSCRIPT_20260720.md`。exact pins 3/3 CONFIRM・DEFER 26/26 被覆・frozen A 不触・design-only/impl CLOSED・C/slice 詳細 prereg 分離 = PASS 側）。
+- **v1.1**（2026-07-20 09:32 実測、本版）— **pN B1-B4 fold**:
+  - **B1** = design 段 gate chain を「draft → 5体 CC Debate → 修正 → **pS final-design PASS** → **pN DESIGN PASS-CLOSE（exact-pin）** → Rs freeze」に**一本化**（§2 Exit / §5 / roadmap の 3 面一致・v3.2.2 §9 からの明示 delta として §5 に記録・後段 finding 時は pS/pN 双方再 verify。pS record §8 の旧 chain 表現は本版が supersede — pS B1-B4 readback で確認予定）。
+  - **B2** = §4 に slice acceptance の portfolio 4-conjunct（`portfolio_has_RL ∧ portfolio_has_IL ∧ vision_belief_live ∧ skill_dynamics_model_live`、いずれか false = L0/slice-success claim 不可）。
+  - **B3** = §4 boundary（runtime 選択点）= **TERMINAL outcome のみ**（CheckpointSpec = 静的契約保持・checkpoint 途中切替 = Phase G/別 gate・checkpoint-enabled 化は chunk 改称 + scope 再審査）。
+  - **B4** = §4 run 前提の clean substrate 条件を **canonical all-thread_isaac_lab Layer-8 guard LAYER8_FAIL=0**（snapshot + scripts closure 含む全 root）へ強化（DDR #25/#26 包含・guard 系譜 anchor = `7803f58f17` 実在確認済み）。
+  - **N1（NON-BLOCK provenance）** = pS record bank commit **`652ff63a60` は p6 staged 5 path（LEDGER row44 / T-WMSO・T-ROOT-RS-TECH-LEAD2 state.md / \_handoff sidecar sha256 ×2）を co-land**（pQ の非 pathspec 限定 commit による掃き込み — 内容 = p6 staging snapshot 無改変・p6 へ records-fix 通知済 09:29）。**semantic blob（pS record `bed5133fb28a…`）は exact pin で不変**。以後の pQ commit = pathspec 限定（`git commit -- <paths>`）。
+- 本 v1.1 は v1 の §2 Exit / §5 / §4 該当 3 箇所を supersede。**次 = 本版 bank → pS B1-B4 readback → pN re-readback**（両 PASS まで **design authoring / [CHANGE] = CLOSED 継続**）。
