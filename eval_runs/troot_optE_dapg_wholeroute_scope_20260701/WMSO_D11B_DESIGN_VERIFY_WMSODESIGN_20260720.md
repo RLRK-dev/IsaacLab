@@ -490,3 +490,21 @@ pN が claim-set v2（私の §24 refinement を fold した版）に **V2-B1..B
 ⇒ ⭐**v12 delta = 確認（faithful・records-only）**・**freeze-with-declared-open = 設計軸 VALID**（核心 3 軸 CLOSE + 4 open は deferrable + D1.1-A 先例）・**① stats_key の risk 記述に non-blocking precision 1 件**（fail-closed は length 不一致に限定・同一 length 共有は unique 読みで silent gap — freeze は止めない）。**freeze 判断 = Rs**。
 
 **次**: Rs の freeze 判断（私は gate しない）→ freeze 後 D1.1-C。**私 = freeze 後の D1.1-C 設計 or 追加 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
+
+## 31. v13 = §30 stats_key precision の fold 確認（2026-07-20 23:14 実測）
+
+⭐**pQ が §30 の non-blocking precision（stats_key ①）を v13 に fold（records-only・設計 semantics 不変）+ 自らの過剰主張を訂正**。design v13 = **on-disk 実測 `5a1874d3be8b98b8aeaace73890d8021cbc7f9814e048741f7f58d6746f349a6` @ `07250f4a02`**（pQ dispatch 一致）。
+
+**pin 全一致（自算出）**: v13 `5a1874d3…` @ 07250f4a02 ✅ / 私の §30 `0f1a668405b1…` 同 commit で bank 済 ✅ / builder `c74ca3b36193` 不変 ✅。**diff = 3 file・records-only**（design +9/-3・私の §30 record +30・handoff +2/-1）— **D-1 表/反証条件/error code/fixture/builder 無変更**。
+
+**① risk 訂正 = ✅ 私の §30 に忠実**: 修正後（design `:493`）=「**length 不一致での共有は fail-closed**（NORMALIZER_VALUE）／**同一 length での共有は検出 code 不在**（normalizer 系は MISSING/ORPHAN/VALUE のみ・重複/一意性 code 0 件）⇒ **一意必須読みで silent-pass**」。⭐**pQ 独立実測が私の §30 と一致**（DUPLICATE_FIELD=field 用・BELIEF_DUPLICATE=belief 用でいずれも stats_key を覆わない）。**正しい consequence chain 追加**（`:496`: 誤 normalizer → identity hash valid → certificate 発行 → mis-normalized 観測で policy 走行・§1.2 で一意性規則を定めれば閉じる）= 事実として正。
+
+⭐**§24 教訓（訂正は全 surface を current-state 化）を満たす**: (i) design ① risk（:493 精緻化形）(ii) changelog（:495-496 訂正記録）(iii) **handoff 伝播も訂正**（「旧『どちらの読みでも fail-closed』は過剰主張」と明記して削除）。**残存 over-claim 無し**を grep で確認（"どちらの読みでも fail-closed" は :495 の訂正引用のみ・:64/:400 は「未定」で honest）。string-based 見落とし無し。
+
+**pQ の処理 = 正確**: (a) 検出者を私（pS）と帰属（自検出でない）(b) ⭐**freeze 可否は不変**を明記（「pS も『freeze は止めない』と明示・変わるのは Rs に渡す risk 記述」）(c) **なぜ重いかを内面化**（「declared open の risk 記述は open を残して freeze する判断の入力ゆえ、安全側の語の全称は freeze 判断そのものを汚す」= 私の §30 framing）。
+
+**先祖返り無し**（semantics 不変・A′ VOID）／**先走り無し**（freeze を Rs へ defer）。
+
+⇒ ⭐**v13 delta = 確認（faithful・records-only）**。① stats_key の risk 記述が全 surface で正確化。**freeze-with-declared-open は §30 のまま設計軸 VALID**（機構 3 軸 CLOSE 不変・now-precise な ① risk 記述付き）。**freeze 判断 = Rs 専権**。
+
+**次**: Rs の freeze 判断 → freeze 後 D1.1-C。**私 = freeze 後の D1.1-C 設計 or 追加 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
