@@ -4,23 +4,52 @@
 **Status（Rs 判定を逐語で採用・2026-07-21）:**
 
 ```text
-ADOPTED:
+STATUS: SUSPENDED   (2026-07-21 — Rs 修正版 status を逐語採用)
+
+ADOPTED (arity から独立に成立する面のみ):
 - unit = single-arm lane
-- composition = sequential ∘ and parallel ∥
+- composition includes sequential ∘ and parallel ∥
 - region-level postcondition is mandatory
 - postcondition scope is definition-bound
 - scope vocabulary reuses required_belief_fields
 - CompositionCertificate validates the declared scope
+- predicate input = projection over required_belief_fields only
 
-OPEN:
-- runtime predicate-input containment
-- raw Ownership.resource exclusion or equivalent upper-bound proof
+OBSERVED:
+- R-full-open is described at step 8.
+- Re-grasp is described at steps 13-14.
+- The disputed interval therefore exists as a description-level window.
+
+NOT OBSERVED:
+- Per-step right-arm activity inside the window.
+- Per-step finger state inside the window.
+- RIGHT=IDLE, RIGHT=PARKED, or RIGHT=ABSENT.
+- Continuous left retention.
+- Absence of a no-hand instant.
+
+MODEL-DERIVED, NOT EVIDENCE:
+- The five ABSENT cells.
+- "No close command implies still open."
+- The inferred one-hand-holding classification.
+
+WITHDRAWN:
+- ABSENT as a measurement of action absence.
+- RIGHT was idle/parked during W.
+- fgL persistence was directly measured by the table.
+- W proves a one-handed execution interval.
+- The use of those cells to determine ParallelRegion arity.
+
+OPEN-A: Rs normative ruling on ParallelRegion arity.
+OPEN-B: Rs authoritative classification of right-lane state during window W.
+        ⛔ OPEN-B must not be used as the evidentiary premise for OPEN-A.
 
 NOT CLOSED:
 - normative composition schema delta
-- composition certification closure
-- runtime implementation
+- CompositionCertificate schema
+- implementation / training / authority
 ```
+
+**測定主張の射程（narrowed — 表全域を独立確認していないため）:** 当該表には、**争点となるセル／window 内の arm・finger 状態または lane activity を直接観測した field が無い**。⇒「表に活動情報が一切ない」とは述べない。
 
 ⛔ **本書を「閉じた normative delta」として表現しない**（Rs 判定: bank as decision-with-open = PASS / bank as closed normative delta = HOLD）。上程は pQ（T-WMSO / RS-TECH-LEAD2）が Rs 判断 2 件の後に行う。
 
@@ -50,7 +79,13 @@ NOT CLOSED:
 **生成物 = 子を exact-pin した outcome 付き composition graph。**
 **`SKILL_ID_REGISTRY` に載るのは単位のみ。** 合成体は登録しない ⇒ 組み合わせが増えても registry は増えない。
 
-### 1-1. `ParallelRegion` の意味論 — **B 採択（Rs 裁定 2026-07-21）**
+### 1-1. `ParallelRegion` の意味論 — ⛔ **SUSPENDED（OPEN-A・使用禁止）**
+
+⛔ **本節の内容は使用しない。** Rs 逐語「B」を受けて本節を書いたが、その後の Rs 分析が **strict `∥` / `branch_count >= 2` / singleton 禁止（= A）** を推奨し、**両者の supersede 関係は未確定**（CC は決めない）。
+⛔ **本節が B を導いた根拠 — 表の ABSENT セル — は撤回済み**（上記 WITHDRAWN）。ABSENT は**動作不在の測定値ではなく測定の不在**であり、arity をここから決めることはできない。
+⇒ 以下は**係争前の記述として保存するのみ**。arity 確定まで下流で消費しない。
+
+（以下、旧記述 — SUSPENDED）
 
 `ParallelRegion` は**厳密な並行演算子ではなく、region contract の scope** である。region-level postcondition / evaluation cut / joint snapshot policy / planned synchronization event / region outcome route を保持する。⇒ **`branch_count >= 1` が意味を持つ。**
 
