@@ -384,3 +384,33 @@ pN が claim-set v2（私の §24 refinement を fold した版）に **V2-B1..B
 ⇒ ⭐**設計軸 = PASS（premise-fact）**。claim-set は clean で規律的な premise 列挙。D-A..D-D は全て凍結 on-disk に逐語一致で TRUE、先祖返り/先走り/records 問題なし、A′ episode・§24 axis 訂正を継承。B1 解法の選択は含まず（Rs 事項）。
 
 **次**: 順序どおり pN exact-pin → その後 Rs へ選択肢上程。**私 = pN 後の Rs 選択、または追加 claim-set の verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
+
+## 27. DESIGN v9 = B1 CLOSED（D-1 採択）の設計軸検証（2026-07-20 20:57 実測）
+
+⭐**pQ が B1 を D-1（`EvidenceRecord.source_ref` 束縛）で CLOSE（CC1 の設計判断・Rs 裁定ではない）**。design v9 = **on-disk 実測 `df4a1604503204e8b014f8b1786ae467e153288d9d5d436b461d8cc201bcc7a7` @ `ddbae19e0f`**（pQ dispatch 一致）。⚠**私の scope = D-1 が凍結に忠実で壊れていないか（機構の健全性）+ 先祖返り/先走り/records。D-1 vs D-2 の優劣は再判定しない**（Rs が pQ に委譲＝pQ の delegated 設計判断）。pQ 明示要求 = §4 反証条件 4 件の十分性。
+
+**pin 検証（全て on-disk 自算出）**: v9 `df4a1604…` @ ddbae19e0f ✅ / builder `c74ca3b36193c638…`（sha256・不変）✅〔⚠ls-tree の `c34904698e` は git-blob sha1 で別関数—sha256 で再照合し一致〕/ fixture 4 sha 不変（pQ 申告・delta stat で design file のみ変更を確認）/ transcript `67a989d9ca9ffdab…` @ 18bd6466d7 ✅。
+
+### (A) 設計軸（機構）= ✅PASS — §4 反証条件は十分・いずれも不発火
+
+**4 条件は D-1 機構の完全集合**（「ある field を rank2 locator にする」健全性 = 宣言可能 ∧ 非衝突 ∧ cert 経路で到達可能 ∧ 直接1hop）。各々を凍結 on-disk で照合＝**全て不発火**:
+- **#1（referent が別に固定されている＝未規定でない）不発火**: EP md/JSON の source_ref 出現=0（実測 grep -c）/ contracts_v2 の source_ref = `:252`(def)・`:396`(fixture provenance)・`:551`/`:651`(mutation test) のみ。**TB/NORM の artifact 解決 referent を固定する行は不在**。
+- **#2（:396 provenance 用途と同一 record 内衝突）不発火**: `:396` の source_ref provenance は **「非 bundle static fields」（semantic schema・init/term/handoff spec）を registry fixture が供給する場合**限定（実測）。**TENSOR_BINDING/NORMALIZATION は bundle field（`execution_bundle.*`）**ゆえ :396 の対象外 → 同一 record で source_ref が provenance と locator に二重要求されない。
+- **⭐#3（rank2 cert 経路で resolver に source_ref が渡らない）不発火 — load-bearing**: frozen `certify_definition(definition, evidence_bundle, …, proof_artifact_resolver)`（contracts_v2 `:284`）が **evidence_bundle（→ `records: tuple[EvidenceRecord,…]` `:269` → 各 source_ref `:252`）と resolver を引数に取る** ⇒ source_ref は cert 経路に**構造的に到達可能**。resolution 実体 = tensor_binding cross-artifact 検査（E_BINDING_* 群・D1.1-B の scope）が **frozen `resolve_artifact(ref=source_ref, expected=claim_target_hash)` を reuse**（v9 §7 line 362 が「**B 側 code でなく frozen code が発火**＝reuse の positive control」を必須化・error は frozen `E_PROOF_ARTIFACT_UNRESOLVED`/`E_PROOF_MISBOUND`）。frozen certify は既に component 別検査を持つ（`:87` normalization EXPLICIT_NONE の `E_SLOT_NONE_UNPROVEN`）ゆえ tensor_binding 検査追加は frozen 枠の component-validation 実装であり **frozen DESIGN doc を編集しない = frozen delta 無し**。⚠**到達性の実発火は impl 負例で実証必須**（v9 §7）= 正しい defer（appearance ≠ working を impl leg で closing）。
+- **#4（1hop 前提の崩壊）不発火**: source_ref は自由 str ref・宣言により slot artifact 実体を直接指す（v9 `:271`）→ `resolve_artifact(source_ref, claim_target_hash)` は 1 hop。中間 artifact 不要。
+- **5th mode 探索（十分性の adversarial check）**: tamper-evidence（source_ref は hashed `:551`・差替が bundle hash に出る + 正当性は sha256==claim_target_hash が enforce）/ 空 source_ref → fail-closed `E_PROOF_ARTIFACT_UNRESOLVED` / OFFLINE_REPLAY 非対称（TB 免除・NORM required）は両 slot 束縛で handled・slice=SHADOW は両 required / per-record 一意（component 順 records ゆえ TB・NORM 別 field）/ EXPLICIT_NONE NORM 免除 = locator 不要。**いずれも 4 条件に還元 or handled → 未被覆の 5th mode 無し**。⇒ **§4 反証条件は十分**。
+
+**先祖返り = 無し（A′ 復活でない）**: A′ 裁定は VOID のまま（v9 `:234-240`/`:262`/`:389`/`:464` 明記）・transcript も「A-prime remains VOID and is not revived」と記録。D-1 は **同じ供給源族（source_ref）を CC1 が訂正済+two-key 検証済 premise の上で新規に設計判断**したもの。⭐**D-B(d) の訂正を継承**（`:271`「frozen :396 は provenance として規定・artifact 解決という別文脈で未規定」= over-broad「entirely unregulated」を再発させない）。changelog `:448`/`:292` が「結論は正・当時の論証(resolver 実在)では不成立・成立させたのは別実測」と decision-integrity を厳守。⇒ 有害な reversion でない。
+
+### (B) ⚠ authority/records 軸 = LOUD FLAG（design-axis 対象外・Rs 最終 gate で要確認）
+
+⛔**「Rs はい 委譲」は pQ の narrative であり on-disk 未検証**。v9 `:234-240` は「Rs は 20:41 に『選択させる理由を述べよ』と問い→私回答→Rs 逐語『はい』」と記すが、**pQ が authority basis に挙げた transcript `67a989d9ca9f` は pN の premise-PASS transcript（verdict 20:35:07）** で、**Rs 20:41 交換より前**・かつ transcript 自身が「**does not select A/A-prime/B, determine profile policy, or authorize implementation… Those remain Rs/design decisions**」と明記。⇒ **transcript は premise two-key（D-A..D-D の pN PASS）を裏付けるが、Rs 委譲は裏付けない**。Rs 20:41 交換の custody record は**存在しない**（C3 は `WMSO_RS_C3_RULING…` を bank したのと対照的）。
+- ⇒ **私の design-axis PASS は D-1 の機構を批准するが、CC1 が escalate せず adopt してよいという authority を批准しない**（records-discipline: human 決定 narrative を検証せず伝播しない）。
+- **B1 「CLOSED」の権威 = D-1 機構健全性（検証済）+ CC1 設計裁量 + Rs 委譲 narrative（未検証）+ Rs veto（backstop）**。⇒ **B1 CLOSED は Rs veto 前の provisional**。
+- **推奨（fix-first・records）**: Rs 20:41 委譲交換の custody record を bank（C3 と同型）、または Rs が最終 gate で委譲＋D-1 を confirm。⚠これは design-axis の FAIL ではない（機構は健全）— **records/authority の verifiability gap を loud に surface** するもの。
+
+**先走り（機構軸）= 無し**: impl/training/closed-loop authority CLOSED（v9 `:397`）/ 順序 = pS PASS → bank → pN exact-pin → Rs veto。
+
+⇒ ⭐**設計軸（機構）= PASS**（D-1 は凍結に忠実・§4 反証条件は十分でいずれも不発火・A′ 有害復活でない）。⚠**authority 軸 = Rs 委譲 narrative が未検証ゆえ B1 CLOSED は Rs confirm/veto 前 provisional**（design-axis 対象外だが records-discipline で surface）。
+
+**次**: pN exact-pin → Rs（委譲 + D-1 + veto を confirm）。**私 = pN 後の Rs 判断、または追加 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。

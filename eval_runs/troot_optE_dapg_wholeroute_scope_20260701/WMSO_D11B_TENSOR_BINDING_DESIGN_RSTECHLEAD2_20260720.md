@@ -1,4 +1,4 @@
-# WMSO D1.1-B `tensor_binding` — DESIGN (v9)
+# WMSO D1.1-B `tensor_binding` — DESIGN (v10)
 
 - node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2); v1 = 2026-07-20 09:56 JST（実測）; **v2 = 2026-07-20 **11:08–11:13 JST**（実測 bracket: 著述開始前 11:08:16 / bank 時 11:13:35。⚠records-fix: 初稿は「11:10」と実測せずに記載した date-THEN-write 違反 — 実測 bracket に置換）— CC Debate cycle-1 FAIL の fold）; v3 = 2026-07-20 11:43 JST（実測 — pN exact-pin HOLD B1-B5 の fold）; v4 = 2026-07-20 12:10 JST（実測 — cycle-2 debate の fold）; v5 = 2026-07-20 12:40 JST（実測 — pN exact-pin HOLD R1-R3 の fold）; v6 = 2026-07-20 13:06 JST（実測 — pS v5 PASS 後に著者が自検出した検証計器の欠陥 1 件の fold）; v6.1 = 2026-07-20 13:17 JST（実測 — pN exact-pin HOLD H1-H3 の fold: 順序規律・fail-closed コマンド事前登録・records-fix。設計 semantics 不変）; v7 = 2026-07-20 14:43 JST（実測 — ⭐**Rs 裁定 A′ の fold**: B1 hash 供給 locator を確定。**v5 以来はじめての設計 semantic 変更**）; **v7.1 = 2026-07-20 15:08 JST（実測 — pS N-1 の scope 修正 + Rs 裁定 custody record 追加。版歴 = §12）**
 - 統治: **scope prereg v1.1.1**（`ffd06623e22f…` @ `cf94601f7a`・pN SCOPE CONCUR `0a5d0969218c…` @ `ccd8342c30`）§2 IN の実装設計。**土台 = frozen D1.1-A v2.11.2**（DESIGN `00192d20ca00b654…` / EP v1.9 md `c474acea7c58…` / JSON `e63176af9bc3…`）— **frozen 3 file を編集せず・schema delta を導入しない**（必要時は supersession + Rs review、prereg §1.3）。
@@ -231,11 +231,19 @@ tensor_binding_hash = H_WCJ(TensorBindingSpec)   # ExecutionBundle.tensor_bindin
 
 **適用位置**: 値/構造/schema/mask/belief/版/cast = TensorBindingSpec 単体 validator（standalone）。hash 供給 + cross-artifact = certify 段。
 
-✅**供給 locator = 確定（D-1 = `EvidenceRecord.source_ref` の束縛）— CC1 の設計判断・v9**。
+✅**供給 locator = D-1（`EvidenceRecord.source_ref` の束縛）— CC1 の設計判断**。⚠**status = PROVISIONAL（Rs confirm 前）**（v10 で pS §27(B) LOUD FLAG を fold）。
 
-> ### 判断の所在（重要）
-> **これは Rs 裁定ではなく、私（CC1 = RS-TECH-LEAD2）の設計判断である。** Rs は 2026-07-20 20:41 に「**選択させる理由を述べよ**」と問い、私は **D-3（frozen delta）以外は自分の裁量内であり、測定から順位が付く**と回答し、**この形で進める承認**を得た（Rs 逐語「はい」）。⇒ **Rs には拒否権が残る**。gate（pS → pN）または Rs が誤りを止める。
-> ⛔**破棄された A′ 裁定の復活ではない**。A′ と**同じ供給源を指す**が、権威の根拠が異なる — A′ は誤った前提の上の Rs 裁定（VOID・`WMSO_RS_B1_RULING_APRIME_20260720.md`・引用不可）、本判断は **two-key 検証済の前提**（導出 claim-set `546762259ec9518302495d6374d64bef5b24650b22f3e69583d1e84102c9e1e7` @ `57eac40c09` / pS `2bec590e3d7d…` / pN exact-pin PASS 20:35、transcript `67a989d9ca9f…` @ `18bd6466d7`）の上での**設計判断**である。
+> ### 判断の所在（重要 — v10 で権威の層を分離）
+>
+> **(a) 設計判断の主体** — **これは Rs 裁定ではなく、私（CC1 = RS-TECH-LEAD2）の設計判断である。** ⇒ **Rs には拒否権が残る**。gate（pS → pN）または Rs が誤りを止める。
+>
+> **(b) ✅検証済の前提**（D-A..D-D）— 導出 claim-set `546762259ec9518302495d6374d64bef5b24650b22f3e69583d1e84102c9e1e7` @ `57eac40c09` ／ pS `2bec590e3d7d…` ／ pN exact-pin PASS 20:35（transcript `67a989d9ca9f…` @ `18bd6466d7`）。⚠**これらの pin が覆うのは前提の事実性のみ**であり、下記 (c) を**覆わない**。
+>
+> **(c) ⚠未検証の authority 前提** — 「Rs が 20:41 の交換（逐語「はい」）で本件を私の裁量に委ねた」は **私の session narrative であり、on-disk の独立 source が無い**。custody record = **`WMSO_RS_B1_DELEGATION_RECORD_20260720.md`**（⚠**bank は可視化であって検証ではない** — ratify できるのは Rs のみ）。⇒ **B1 CLOSED は Rs confirm/veto 前の provisional**。
+>
+> ⭐**本項は自検出でなく pS §27(B) の指摘**（pS record `f6ff9c4caef7…`）。v9 は **(b) の pin を (c) に隣接して置いたため pin が authority も覆うように読める構造**になっており、しかも当該 transcript 自身が「does not select A/A-prime/B … Those remain Rs/design decisions」と明記していた ⇒ **narrative が引用先と矛盾**。A′ 破棄・C3 #1 破棄と**同じ族**（未検証の主張が決定面に載る）。
+>
+> ⛔**破棄された A′ 裁定の復活ではない**。A′ と**同じ供給源を指す**が、権威の根拠が異なる — A′ は誤った前提の上の Rs 裁定（VOID・`WMSO_RS_B1_RULING_APRIME_20260720.md`・引用不可）、本判断は **(b) の上での設計判断**である。
 
 **採択 = D-1。他 3 案を落とした理由（測定に基づく）**:
 
@@ -386,7 +394,7 @@ v1 は本 gate 未実施だった。実施結果（on-disk 実測）:
 ## 10. Open points
 
 - 本 **v6.1** = **cycle-1（FAIL）→ pN HOLD B1-B5 → cycle-2（実施済・max-2-cycles 到達）→ pN HOLD R1-R3 → 著者自検出 S-1 → pN HOLD H1-H3 の fold**。以後の debate 再実行は Rs 裁量（pN「追加 debate 不要」）。fold の検証は §5 chain の pS / pN 両軸が担う。
-- ✅**hash 供給 locator = CLOSED（D-1 採択・CC1 の設計判断・v9／Rs 拒否権あり）**: 対象 slot = **`tensor_binding` と `normalization` の両方**。**採択 = D-1（`EvidenceRecord.source_ref` の束縛）**。frozen delta なし。⚠**A′ 裁定の復活ではない**（A′ = VOID のまま・権威の根拠は CC1 の設計判断 + two-key 検証済 前提）。他 3 案を落とした理由・反証条件・実装形 = **§4**。**D-3 が必要になった場合のみ Rs 専権として再上程**。旧上程資料（A/A′/B の比較と rank 別 locator 表）は §4 の折りたたみに SUPERSEDED として保持。⚠**残る派生 open は §7 の到達性負例**（`E_BINDING_HASH_MISMATCH` が非 canonical bytes で実際に発火すること）— impl leg で実証必須。
+- ⚠**hash 供給 locator = CLOSED (PROVISIONAL)（D-1 採択・CC1 の設計判断・v9／⛔Rs confirm 前）**: **設計軸（機構）は pS §27(A) で PASS**（反証条件 4 件は完全集合・全て不発火）。⛔**残る gap = authority 軸**: 採択の前提である「Rs 委譲」が **on-disk 未検証の narrative**（pS §27(B)）⇒ **Rs confirm を得るまで provisional**。custody = `WMSO_RS_B1_DELEGATION_RECORD_20260720.md`（**bank ≠ 検証**）。対象 slot = **`tensor_binding` と `normalization` の両方**。**採択 = D-1（`EvidenceRecord.source_ref` の束縛）**。frozen delta なし。⚠**A′ 裁定の復活ではない**（A′ = VOID のまま・権威の根拠は CC1 の設計判断 + two-key 検証済 前提）。他 3 案を落とした理由・反証条件・実装形 = **§4**。**D-3 が必要になった場合のみ Rs 専権として再上程**。旧上程資料（A/A′/B の比較と rank 別 locator 表）は §4 の折りたたみに SUPERSEDED として保持。⚠**残る派生 open は §7 の到達性負例**（`E_BINDING_HASH_MISMATCH` が非 canonical bytes で実際に発火すること）— impl leg で実証必須。
 - §5 の必須化可否・class 台帳・判定器・窓幅 = slice 詳細 prereg + Rs 裁定。
 - U-2 の producer artifact 阻止・U-5 の demo 移行・**U-6 の topology ledger 束縛** = D1.1-C prereg への必須入力（**DDR への登録 = p6 へ dispatch 済** — cycle-2 CC5-CH4: 4 carry がいずれも DDR 未登録では次 chunk の [DEFER-RECON] が素通りする）。
 - **`stats_key` の一意性規則**（per-feature 一意か共有可か）= 未定・§1.2 参照。
@@ -464,4 +472,12 @@ v1 は本 gate 未実施だった。実施結果（on-disk 実測）:
   - ⛔**A′ の復活ではない**: 同じ供給源を指すが、**A′ は VOID のまま**（誤った前提の上の Rs 裁定）。本判断の権威は **CC1 の設計判断 + two-key 検証済 前提**であり、**Rs 拒否権が残る**。
   - **反証条件 4 件を §4 に明記**（未規定でないと判明 / provenance 用途との衝突 / rank 2 で resolver に渡らない / 1 hop 前提の崩壊）。
   - **自己評価**: 当初 D-1..D-4 を Rs へ menu として上程しようとしたのは**過剰な委譲**だった。A′ 破棄の直後で、同じ供給源を自分の権限で採ることが裁定の迂回に見えると考えたためだが、**破棄されたのは「誤前提の上の裁定」であって「A′ は不適」ではない**。`CLAUDE.md`「明白な最良案があれば選ばせない」に反していた。
+- **v10**（2026-07-20 21:0x 実測、本版）— **pS §27(B) LOUD FLAG の fold（records/authority のみ・設計 semantics 不変）**:
+  - **指摘（pS record `f6ff9c4caef78c6542de634520685b0cc7e92b1523387c549cca831d00745c84`）**: 「Rs はい 委譲」は **pQ の narrative であり on-disk 未検証**。v9 `:234-240` が authority basis に挙げた transcript `67a989d9ca9f…` は **pN premise-PASS（verdict 20:35:07）= Rs 20:41 交換より前**であり、かつ transcript 自身が「**does not select A/A-prime/B … Those remain Rs/design decisions**」と明記 ⇒ **前提 two-key は裏付けるが Rs 委譲は裏付けない**。
+  - **fold**: (1) §4 の「判断の所在」を **(a) 主体 / (b) 検証済 前提 / (c) 未検証 authority 前提**の 3 層に分離（pin が (c) を覆わないことを明記）／(2) §10 の B1 を **CLOSED (PROVISIONAL)** へ／(3) Rs 交換の custody record を新設 = `WMSO_RS_B1_DELEGATION_RECORD_20260720.md`。
+  - ⛔**bank ≠ 検証（重要）**: custody record は **CC が自 session context から転記したもので独立 source が無い**。bank の価値は「Rs が見て訂正できる面に出す」「下流の言い換えを防ぐ」の 2 点のみで、**ratify できるのは Rs だけ**。⇒ pS 推奨の 2 択（bank / Rs confirm）は **択一ではなく、bank は confirm の前段**。
+  - ⛔**構造的誤り（自己評価）**: **検証済 pin を未検証の authority 主張に隣接して置いた**ため、pin が authority も覆うように読める形になっていた。A′ 破棄（誤前提が決定面に載る）・C3 #1 破棄（未検証の言い換えが選択肢に載る）と**同族**で、新しい形は「**human 発話に依拠する authority を、その発話を record にしないまま設計面に書いた**」こと。
+  - **なぜ気づけなかったか**: C3 は structured-select（明らかに custody 対象）、今回は会話中の自由発話ゆえ「単なる context」と扱った。**この区別に原則が無い** — どちらも権威が乗る human 発話である。⇒ 恒久規律: **設計面に書く authority が human 発話に依拠するなら、同一ターンでその発話を custody record にする**。
+  - ⚠**検出者 = pS（自検出ではない）**。v6 の S-1 は自検出だったが、本件は**私が自分で気づけなかった class**。
+  - **設計 semantics = 不変**（D-1 の実装形・error code・反証条件・fixture・builder はいずれも無変更）。
 - **v1 → v2 の非変更点**: 統治・carries・frozen 不変・impl CLOSED・§0 の WCJ 継承方針（B-declared 分を分離明記した点のみ変更）。
