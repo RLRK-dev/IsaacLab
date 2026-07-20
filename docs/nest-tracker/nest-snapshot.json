@@ -941,6 +941,7 @@
         "T-Predicate-Redefinition",
         "T-ROOT-COORD",
         "T-ROOT-DesignDoc-Renewal-20260711",
+        "T-ROOT-Kinematic-Pin-Complete-Removal-20260719",
         "T-ROOT-Legacy-Architecture",
         "T-ROOT-Paper-BCRL-JA-20260710",
         "T-ROOT-Pivot-Chain-Architecture-Review",
@@ -963,7 +964,7 @@
       "id": "T-ROOT-COORD",
       "goal": "THREAD project routing + multi sub-session monitor + Rs disposition queue + memory persist + framework formalize、L0 (5-clip cable routing vision-based 95%) achievement の coordinator role",
       "means": "(a) Active sub-session close detection lag ≤30 min (post-runbook v1.1 §Y obligation 遵守)、(b) Framework artifacts integrity ≥99% (drift framework state.md / 5-CC Pre-Debate 全 challenge categorize 100% / handoff sidecar + pins ✓ OK 維持、CC-C-HIGH-1 fix で measurable predicate 化)、(c) Rs disposition queue (`_pending_index.txt`) up-to-date < 30 min lag、(d) NEST first deployment artifacts (handoff sidecar + pins + state.md systematic + project-tree-manifest) 整合性維持 + sha256 verify ✓ OK",
-      "status": "IN_PROGRESS",
+      "status": "ARCHIVED",
       "dependencies": [],
       "parent": "T-ROOT",
       "children": [
@@ -995,7 +996,7 @@
       "id": "T-ROOT-COORD2-AC-IC-GC-Audit-2026-05-13",
       "goal": "Compare AC vs IC vs GC current candidates and recommend which skill workstream should use the freed cuda:0 / parallel slots for maximum T-ROOT impact, after V7 A6 verdict closed as NEGATIVE_OR_NO_EFFECT.",
       "means": "|",
-      "status": "IN_PROGRESS",
+      "status": "ARCHIVED",
       "dependencies": [
         "T-Skill-AR-Phase-5-A6-V7-Behavioral-Rollout",
         "T-ROOT-Pivot-Chain-Architecture-Review"
@@ -1351,6 +1352,22 @@
       "parent": "T-ROOT",
       "children": [],
       "session_history": []
+    },
+    {
+      "id": "T-ROOT-Kinematic-Pin-Complete-Removal-20260719",
+      "goal": "active 実行面から kinematic / pin による物理バイパスを完全に除去し physics-faithful な制御へ置換して、RS71 §0 不変前提 #3 (DiffIK-only) / #5 (no-kinematic-trick) が機械検証で成立する状態にする。",
+      "means": "(すべて既存 SSOT に接地。本 node は新しい acceptance を発明しない)\n1. Layer 8 canonical census = 0 — F3 拡張後の all-root scan (全 thread_isaac_lab Python root) 基準。\n   ⚠ 現在地 = 35 (A 27 + D aerial 5 + skills-snapshot 3)。旧 restricted-root 基準の「128→125」は別 measurement surface。\n2. guard が fail-closed (既知=WARN の baseline 廃止済、scripts/validations/check_control_method.sh)。\n3. 各 chunk が two-key (機構軸 p5 + 証拠軸 pN)。片軸 PASS は充足でない。\n4. 各 stage が charter §6 の gate を通過 (L3 chain + Rs sign-off + video leg)。\n5. landing / HALT 解除は本 goal に含まれない (別 GO)。\n",
+      "status": "IN_PROGRESS",
+      "dependencies": [],
+      "parent": "T-ROOT",
+      "children": [],
+      "session_history": [
+        {
+          "session_id": "",
+          "summary": "",
+          "ts": ""
+        }
+      ]
     },
     {
       "id": "T-ROOT-Legacy-Architecture",
