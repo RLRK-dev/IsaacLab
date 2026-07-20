@@ -56,13 +56,32 @@ control must actually fire; the instrument must measure the same quantity (joint
 verdict difference must be attributed to physics, not instrument; and kinematic-era PASSes must be
 re-acquired under the new path (that last one is a **RUN leg, still HALT-fenced**).
 
-## 5. Next actions (p4 lane, in order)
+## 5. Next actions — **two workstreams, not one** (pN C2 fold, 12:03)
 
-1. Relay this ruling to pN (scope) and p5 (design) — done at 11:5x, same turn as this record.
-2. p5 design input for the gate migration onto env7-mujoco (§14.24(3) duties applied to the mujoco path).
-3. Re-issue the A-group class rows in manifest v2.x + prereg, against the ruled class.
-4. Gate migration implementation, under its own prereg and two-key.
-5. Only then: VBD copy retire, and the `CLAUDE.md` diff drafted for Rs.
+⚠ **v1.1 correction (pN C2, CRITICAL)**: my first draft listed only the *gate* migration. Rs item ②
+(**B0/B1 evaluator migration**) is a **separate implementation workstream** and was missing. Without
+it, step 5 could retire the VBD branch while an active consumer still sits on it. Corrected order:
+
+| # | step | gate |
+|---|---|---|
+| 1 | relay ruling to pN + p5 | done 11:5x |
+| 2 | **p5 design input for GATE-MIGRATE** (env7-mujoco; §14.24(3) duties on the mujoco path) | **OPEN — the only step pN has GO'd (12:03)** |
+| 3 | manifest/prereg re-issue against the ruled class | HOLD pending C1-C4 fold + pN review |
+| 4a | **GATE-MIGRATE**: design → prereg → impl → two-key | HOLD |
+| 4b | **B0B1-MIGRATE**: design → prereg → impl → two-key | HOLD (own workstream, pN C2) |
+| 5 | **fresh re-acquisition** of B0/B1 evidence on env7-mujoco | HOLD — **RUN leg, needs its own HALT release** |
+| 6 | **VBD retire + `CLAUDE.md` pointer update** | HOLD — atomicity conditions below |
+
+**C3 (manifest/census scope)**: step 3 may move **disposition/status only** (e.g. `DECIDED`,
+`MIGRATION_PENDING`). The **measured census stays 35 until source lands** — no retired/migrated/Layer8
+decrement may be claimed. The superseded B0/B1 artifacts must be pinned with their **cutover source sha
++ substrate id** when marked HISTORICAL / NOT_COMPARABLE.
+
+**C4 (retire atomicity)**: the VBD retire and the `CLAUDE.md` pointer update land **only** after
+(i) both env7 paths — gate *and* B0/B1 — are verified, (ii) fresh re-acquisition is complete, and
+(iii) Rs has approved the **exact** `CLAUDE.md` diff; and they land in **one indivisible
+release/chain**. ⛔ retire-first, or any interval where `CLAUDE.md` points at a retired gate, is
+forbidden.
 
 **Nothing in this record has been executed.** Gates unchanged: A [CHANGE], A-2, RUN, landing, push,
-training all CLOSED; manifest/census still frozen until step 3 re-issues them.
+training all CLOSED; manifest/census frozen (C3 limits what step 3 may touch).

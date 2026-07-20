@@ -146,7 +146,17 @@ be implemented as written**. ⛔ A [CHANGE] remains CLOSED — correctly so; had
 bundle would have produced a green census (35→6) with arms that no longer move, which is precisely the
 "a gate validated under the bug" / "appearance-only ≠ working" failure class.
 
-## 7. Current state in one place (authoritative; supersedes any earlier phrasing in §§1-6 above)
+## 7. Current state (⚠ **SUPERSEDED 2026-07-20 ~11:56 by the Rs ruling** — see pointer)
+
+> ⛔ **This section is no longer the current SSOT.** Rs ruled the decision package of §8 on
+> 2026-07-20 ~11:56 JST (verbatim "1：a 2:承認"). **Current SSOT =
+> `RS_RULING_AGROUP_SUBSTRATE_20260720.md` (banked c36 `eefad77773`, blob `b6edae469ea4`).**
+> In particular the rows below that read "pending Rs" are **discharged**: the disposition is decided
+> (migrate-then-retire; B0/B1 migration approved). What the table still states correctly is the
+> substrate facts and the gate posture. (pN C1, 12:03.)
+
+Below = the pre-ruling snapshot, retained as the record of what was true before Rs answered; it
+supersedes earlier phrasing in §§1-6 only.
 
 | question | current answer |
 |---|---|
