@@ -69,7 +69,7 @@ G1 = {
         ],
         "total_dim": 4, "history": None,
         "timing": {"policy_rate_hz": "30", "obs_sampling_rate_hz": "30", "max_obs_staleness_s": None},
-        "masks": [], "belief_inputs": [],
+        "masks": [], "belief_inputs": [], "container_dtype": "FLOAT32",
     },
     "action": {
         "features": [
@@ -80,6 +80,7 @@ G1 = {
         ],
         "total_dim": 4, "control_mode": "DIFF_IK_EE_TARGET", "action_scale": None,
         "timing": {"action_rate_hz": "30", "hold": "ZERO_ORDER_HOLD"},
+        "container_dtype": "FLOAT32",
     },
     "lineage_declaration": {"training_lineage": "RL_ONLY", "bc_stage_binding": None},
 }
@@ -103,6 +104,7 @@ G2 = {
             {"belief_field_id": "cable_kp", "producer_schema_hash": belief_schema_hash},
             {"belief_field_id": "cable_kp_valid", "producer_schema_hash": belief_schema_hash},
         ],
+        "container_dtype": "FLOAT32",
     },
     "action": {
         "features": [
@@ -111,6 +113,7 @@ G2 = {
         ],
         "total_dim": 6, "control_mode": "DIFF_IK_EE_TARGET", "action_scale": None,
         "timing": {"action_rate_hz": "30", "hold": "ZERO_ORDER_HOLD"},
+        "container_dtype": "FLOAT32",
     },
     # IDENTICAL carries NO hash — fixpoint removed
     "lineage_declaration": {
@@ -144,6 +147,7 @@ G3 = {
             {"belief_field_id": "belief_invalid", "producer_schema_hash": belief_schema_hash},
             {"belief_field_id": "z_cable_tension", "producer_schema_hash": belief_schema_hash},
         ],
+        "container_dtype": "FLOAT32",
     },
     "action": {
         "features": [
@@ -159,6 +163,7 @@ G3 = {
         "total_dim": 14, "control_mode": "DIFF_IK_EE_TARGET",
         "action_scale": {"scale": "0.02", "bias": "0"},
         "timing": {"action_rate_hz": "20", "hold": "ZERO_ORDER_HOLD"},
+        "container_dtype": "FLOAT32",
     },
     "lineage_declaration": {
         "training_lineage": "BC_THEN_RL",
@@ -190,7 +195,35 @@ for name, spec in [("G-1", G1), ("G-2", G2), ("G-3", G3)]:
     else:
         assert bsb is None, f"{name}: non-demo lineage must have null bc_stage_binding"
 
-print("assertions: PASS (coverage arithmetic, action source+bounds, lineage/stage rules — 3 fixtures)")
+# schema conformance: every REQUIRED top-level member must be present (pN B2 - a reproducible
+# hash proves reproducibility, not conformance; this loop is what makes the corpus self-checking)
+REQ_OBS = {"features", "total_dim", "history", "timing", "masks", "belief_inputs", "container_dtype"}
+REQ_ACT = {"features", "total_dim", "control_mode", "action_scale", "timing", "container_dtype"}
+REQ_FEAT = {"field_id", "source", "offset", "length", "dtype", "shape", "unit", "frame",
+            "flatten_order", "quaternion", "normalizer", "transform", "bounds"}
+CAST_OK = {("FLOAT32", "FLOAT32"), ("BOOL", "FLOAT32"), ("INT32", "FLOAT32"),
+           ("INT32", "INT32"), ("BOOL", "BOOL")}
+NORM_STATS = {"MEAN_STD": {"mean", "std"}, "MIN_MAX": {"min", "max"}}
+for name, spec in [("G-1", G1), ("G-2", G2), ("G-3", G3)]:
+    assert set(spec) == {"binding_schema_version", "obs", "action", "lineage_declaration"}, name
+    assert set(spec["obs"]) == REQ_OBS, f"{name}/obs members: {set(spec['obs']) ^ REQ_OBS}"
+    assert set(spec["action"]) == REQ_ACT, f"{name}/action members: {set(spec['action']) ^ REQ_ACT}"
+    for side in ("obs", "action"):
+        cdt = spec[side]["container_dtype"]
+        for f in spec[side]["features"]:
+            assert set(f) == REQ_FEAT, f"{name}/{side}/{f['field_id']} members: {set(f) ^ REQ_FEAT}"
+            assert (f["dtype"], cdt) in CAST_OK, f"{name}: cast {f['dtype']}->{cdt} not in v1.0 table"
+            if f["normalizer"] is not None:
+                assert set(f["normalizer"]) == {"scheme", "stats_key"}, name
+                assert f["normalizer"]["scheme"] in NORM_STATS, name
+    for m in spec["obs"]["masks"]:
+        mf = [f for f in spec["obs"]["features"] if f["field_id"] == m["mask_field_id"]]
+        assert mf and mf[0]["dtype"] == "BOOL", f"{name}: mask field must exist and be BOOL"
+        assert m["mask_field_id"] not in m["applies_to"], f"{name}: mask self-reference"
+        assert m["applies_to"] == sorted(m["applies_to"]), f"{name}: applies_to must be byte-ascending"
+
+print("assertions: PASS (schema conformance incl. container_dtype + cast table + normalizer payload +"
+      " mask dtype/self/sort, coverage arithmetic, action source+bounds, lineage/stage — 3 fixtures)")
 print(f"belief_schema_hash   = {belief_schema_hash}")
 print(f"superseded_demo_hash = {superseded_demo_hash}")
 print(f"topology_ledger_hash = {topology_ledger_hash}")
