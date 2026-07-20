@@ -1,4 +1,4 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 02:04 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 02:16 JST
 
 > Pane-specific handoff (multi-pane NEST; does not clobber the shared HANDOFF.md).
 > Full detail = memory `handoff_cc_pQ_rstechlead2_wmso_d11a_freeze_2026-07-20.md`. Ground truth = frozen package + freeze record + manifest + LEDGER row44, not this narrative (§運用4).
@@ -93,7 +93,11 @@
 - **再帰の停止条件**（「その規則は何が強制するのか」への答え）: **artifact identity + 人間承認**に着地。⚠ただし **method_id 追加 = label の追加**に対し **evaluator 追加 = 信頼基盤に実行コードを入れる行為**で類推は非対称 ⇒ **適合試験**を必須化して人間審査でなく機構で閉じる。
 - **適合試験の形**: 宣言 scope S 上で一致し **S の外だけが異なる 2 joint snapshot** に**同一 verdict** を要求（scope 外を読んでいれば verdict が割れて落ちる）。⚠**健全な反証器であって証明ではない** — 「banked pair 集合上で scope 違反を**反証する**」と書き「**保証する**」とは書かない。⚠⚠**fixture 選択が強度を決める**: 差分 pair に「**4 key 語彙上で一致し cable 状態だけが異なる**」ものを**必ず含める**（一般の S 外 pair では実際の懸念を識別しない = 「違う結果が出得ない試験は試験でない」の直接適用）。
 - **凍結側は触らない**: `ControlResourceSpec` / `ControlMode` とも改造不要。
-- ✅**外部依存 = 解消（Rs 裁定 B・2026-07-21 02:0x）**: **`ParallelRegion` は厳密な並行演算子ではなく region contract の scope**（region-level postcondition / evaluation cut / joint snapshot policy / planned synchronization event / region outcome route を保持）⇒ **`branch_count >= 1` を型に焼き込んでよい**。
+- ⛔⛔**SUSPENDED — Rs 発言間の不整合（2026-07-21 02:14 検出・§運用10 で停止し Rs へ報告）**: 先の Rs 裁定 = **「B」の一語**（`branch_count >= 1`）／Rs 最新分析 = **理由付きで `branch_count >= 2`・singleton parallel 禁止（= 先の A）を推奨** = **逆**。⛔**arity を型に固定しない**（本節の下記記述は保留・実装/起草に用いない）。⚠**supersede 関係を CC が決めない**（pX も同判断で自 artifact §1-1 の訂正を保留中）。
+  - ⭐**Rs 新根拠（強い）**: 当該窓は **`hold_cable@L ∥ aerial_regrasp@R`** で表せる — `AERIAL_REGRASP` の initiation = **R-full-open**、termination = **stable re-grasp** と定義すれば **窓内は常に 2 branch**。⇒ ⭐⭐**step 表の ABSENT は skill boundary の引き方（または表のラベル欠落）の artifact であって、composition branch の不在ではない**。
+  - **3 ケースとも singleton 不要**: (A) 右腕が re-grasp 動作中 → 常に 2 branch ／ (B) 真に park で Rs が許容 → `hold@L` を**通常 leaf node** として ParallelRegion の外に置き次 region へ再入場 ／ (C) invariant 違反 → graph を **fail-closed で拒否**。singleton を許して修復する問題ではない。region-level postcondition を単一 branch に適用したいなら **ParallelRegion を単項化せず、並行性とは別の contract scope** として扱う（代数と hash 正規形を壊さない）。
+  - ⭐**本 node の実測が新読みを支持**: `step_table.py` は routing 中 **finger を一切指令していない**（`l_finger` 明示指令は step 43 の open 1 回のみ・`r_finger` は全域で 0）⇒ **表の ABSENT は「腕が何もしていない」証拠ではなく記録の欠落**。Rs 新根拠と整合する。
+- ⏸**以下は B 前提の記述（SUSPENDED・上記解決まで使用しない）**: **`ParallelRegion` は厳密な並行演算子ではなく region contract の scope**（region-level postcondition / evaluation cut / joint snapshot policy / planned synchronization event / region outcome route を保持）⇒ **`branch_count >= 1` を型に焼き込んでよい**。
   - **根拠（branch 数に依存しない）**: branch は definition 級で cable を claim できず、これは 1 本でも 2 本でも同じ。⇒ 片腕のみ稼働の step でも「cable はまだ着座しているか」を述べられる主体が居ない。arity >= 2 を課すと、それらの step が region contract を持たない裸 node になり、**region postcondition の存在理由が片腕 step でだけ失われる**。
   - **singleton canonical 規則（hash 二重化の防止）**: singleton region かつ region postcondition が**非自明** → 独立対象 ／ **自明・不在** → 通常 node へ lowering。**`ParallelRegion([A]) ≠ A`**（A = node ／ 前者 = A に region contract を課した領域）。⇒ 「同一意味に複数 hash」が生じない。⭐D1.1-B cycle-1 CRITICAL（`IDENTICAL` = sha256 不動点）・D1.1-A M2 manifest 循環と**同族**の identity churn 対策。
   - ⛔⛔**ABSENT セルを合成 WAIT / NOOP skill として実体化しない（Rs 明示）**: **ABSENT は実行動作ではなく動作不在の測定値**。型 arity を満たすためだけの充填は禁止。**境界**: step 14 の `hold@L` = 左指が実際に把持・維持する**実在動作**（合成でない）／ step 12 の右腕 = 何も掴まず指令も無い = **ABSENT・充填しない**。
