@@ -22,6 +22,15 @@ evidence. The classifications are **Rs-confirmable**; entries marked **(Rs-confi
 that the design owner (human-Rs) should ratify. `%3` takes no design/frame position — these are evidence-based status
 labels, not design decisions.
 
+## ⭐ 統治優先順位 (Rs direct ruling 2026-07-20 13:04:29 JST) — WMSO = 最上位
+
+- **WMSO = 最優先概念。L0 統合アーキテクチャの最上位**であり、下位作業は **WMSO への寄与**で順序付ける。
+- **RL / IL / Vision / World Model = 必須かつ conjoin** (いずれか欠けたら L0 主張は成立しない)。per-skill 実装は **algorithm-agnostic** (妥当なら BC+RL でも RL-only でも可)。
+- **task (d) / substrate cleanup / demo 再生成 / safety 作業 = WMSO を可能にする前提・carry であって、競合する top-level goal ではない**。
+- ⛔**本優先順位は gate を迂回しない** — physics-realism / safety / evidence / two-key / Rs の run・launch gate は すべて不変。
+- ⛔**custody は優先順位を記録するのみ**。implementation / training / closed-loop authority を主張しない。
+- 出典 = Rs direct dispatch 2026-07-20 13:04:29 JST (本節 = p6 custody 記録・記録時刻 = 下記 commit)。関連 = Rs 2026-07-16 裁定「L0 達成手段 = RL+IL、vision + world model 必須」。
+
 ## Status vocabulary
 
 | Symbol | Status | Meaning |
