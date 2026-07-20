@@ -1,4 +1,17 @@
-# A-group PHYSICS_REWRITE — prereg **v2** (p4, 2026-07-20 10:4x JST)
+# ⛔ A-group PHYSICS_REWRITE — prereg **v2.1** — **DO-NOT-IMPLEMENT / SUPERSEDED-PENDING-CLASS**
+
+> ## ⛔⛔ THIS PREREG DOES NOT AUTHORISE ANY IMPLEMENTATION
+> - **§B2 (realization contract) = KNOWN-DEFECTIVE.** It presumes a POSITION-servo actuator surface
+>   that the current build does not have: the robot is constructed jointless with zeroed inverse mass,
+>   and VBD does not support `joint_target_mode`. Substrate finding = c30/c31
+>   (`A_GROUP_SUBSTRATE_FINDING_RSTECHLEAD_20260720.md`, v1.1, blob `b1a1d42bf22b`).
+> - **The A-1 six-path plan below has NO implementation GO.** The A-group class question is open
+>   (mujoco-only vs VBD-only writer sites vs mixed) and is **SUBSTRATE-BLOCKED pending p5/Rs**.
+> - **Manifest rows and census are frozen** — a class change is not automatically an arithmetic change.
+> - **v2.1 changes are records-only** (pN R1 fold, 11:19): the closure partition below is corrected.
+>   §B2 is untouched (deferred), §B3/§B4 untouched (deferred).
+
+## A-group PHYSICS_REWRITE — prereg v2 body (p4, 2026-07-20 10:4x JST)
 
 Supersedes v1 (banked c28 `adf486bb0d`, blob `976d6a935729`). Written to clear pN blockers **B1-B4**
 (10:39). B5 = charter records, returned to p5 (its author, live-editing) — banked when it lands.
@@ -11,7 +24,11 @@ Facts: call-graph c26 (blob `c84c2743f51e`). **Base sha for every path/blob belo
 
 ## B1 — exact path freeze
 
-### B1.1 `newton_routing_utils` closure — 11 unique / 23 import nodes (all must be in the A-1 stage set)
+### B1.1 `newton_routing_utils` **closure set** — 11 unique / 23 import nodes
+
+⚠ **v2.1 correction (pN R1)**: v2 said these "all must be in the A-1 stage set". Wrong — this is the
+**closure / byte-equality set**, not the stage set. Only **3** of the 11 (#8, #9, #10) were in the
+(now un-GO'd) A-1 changed set; the other **8** are byte-equality targets.
 
 | # | path | base blob | nodes |
 |---|---|---|---|
@@ -56,11 +73,34 @@ Facts: call-graph c26 (blob `c84c2743f51e`). **Base sha for every path/blob belo
 All six blobs measured at c28 this session (`snapshot.py` had never been pinned in a manifest row
 before; it is pinned here).
 
-**Unchanged-by-construction** (verified at execution, not edited): the remaining 9 `routing_utils`
-consumers (B1.1 #2,4,5,6,7,11 + #1 `route_executor` whose `update_kinematic_bodies` is already
-raise-only) and the 9 non-overlapping `clip_routing` consumers (B1.2 minus #6 aerial which is
-BLOCKED_OWNER). **Acceptance asserts their blobs are byte-identical post-bundle** — that is the
-"remaining 9" binding pN asked for, expressed as blob equality rather than prose.
+### B1.4 **Byte-equality set — exact partition (v2.1, pN R1 correction)**
+
+⚠ v2 wrote "the remaining 9 + the 9 non-overlapping" — the **total 18 was right but the partition and
+path binding were wrong**. Exact, measured at c28:
+
+**(a) `routing_utils` unchanged = 8** — B1.1 #1-#7 and #11 (`dry_run_43step` #3 **is** unchanged in
+A-1; it is the separate A-2 row):
+
+| path | base blob |
+|---|---|
+| `thread_isaac_lab/envs/route_executor.py` | `d9e97bf5e279` |
+| `thread_isaac_lab/scripts/dry_run_39step.py` | `5d34ed07295a` |
+| `thread_isaac_lab/scripts/dry_run_43step.py` | `5d3a2d1437e9` |
+| `thread_isaac_lab/scripts/dry_run_approach_cable.py` | `b58ccde391d9` |
+| `thread_isaac_lab/scripts/run_demo_from_waypoints.py` | `1ecdd2d3188f` |
+| `thread_isaac_lab/scripts/test_motion_sequence_dry_run.py` | `64e2d39a299d` |
+| `thread_isaac_lab/scripts/test_newton_20clip_reachability.py` | `c7b248719a38` |
+| `thread_isaac_lab/skills/scripted_skills.py` | `e8faa50c30f7` |
+
+Changed among the 11 (had A-1 been GO'd): #8 `test_newton_5clip_routing`, #9 `test_newton_clip_routing`,
+#10 `test_step_table_dryrun` — **3**, so 11 − 3 = **8**.
+
+**(b) `clip_routing` unchanged = 10 — ALL of B1.2**, including #6 `demo_aerial_regrasp.py`
+(`15b0fa0eb3d7`): BLOCKED_OWNER means *not edited*, which makes it a byte-equality target, not an
+exclusion. None of the 10 was in the A-1 changed set. Blobs = the B1.2 table.
+
+**(c) union = 18 unique paths** (no overlap between (a) and (b)). Acceptance asserts each blob is
+byte-identical post-bundle — the binding expressed as blob equality rather than prose.
 
 ---
 
@@ -125,7 +165,7 @@ bundle start; provenance header records base sha, banked sha, interpreter path, 
 | # | leg | exact command | expected |
 |---|---|---|---|
 | 1 | staged-set identity | `git diff --cached --name-only` | **exactly** the 6 paths of B1.3, sorted |
-| 2 | unchanged-consumer proof | `git rev-parse HEAD:<path>` for the 9+9 non-edited closure paths | blob == the B1.1/B1.2 base blob for each |
+| 2 | unchanged-consumer proof | `git rev-parse HEAD:<path>` for the **18** byte-equality paths of **B1.4** (8 + 10, incl. aerial) | blob == the B1.4 / B1.2 base blob for each |
 | 3 | compile | `python -m py_compile <each of the 6 changed paths>` | rc 0 |
 | 4 | lint | `python -m ruff check <each changed path>` | finding count **≤** the file's **measured base-sha count** (0 new). Baselines @ c28: `newton_routing_utils` **12** · `snapshot` **0** · `test_newton_clip_routing` **94** · `test_grip_modes` **4** · `test_step_table_dryrun` **9** · `test_newton_5clip_routing` **12** (all pre-existing; this bundle does not adopt them) |
 | 5 | canonical census | `bash scripts/validations/check_control_method.sh` | `LAYER8_FAIL=6`, `LAYER8_WARN=0` |

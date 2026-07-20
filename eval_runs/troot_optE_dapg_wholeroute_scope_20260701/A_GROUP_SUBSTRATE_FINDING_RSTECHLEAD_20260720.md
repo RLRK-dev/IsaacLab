@@ -48,7 +48,9 @@ the robot bodies' inverse mass. Verified on-disk:
 - Closed query over the same file for `joint_target_mode|joint_target_ke|joint_target_kd|joint_effort_limit|arm_qd_idx`
   = **0 hits**. No actuator wiring exists.
 
-Digging one level further shows the cause is not missing wiring but the substrate:
+Digging one level further shows the cause is not missing wiring but **what the current build
+constructs** — ⚠ the original wording here said "the substrate", which v1.1 ② retracted. The build
+comments quoted next state the *build's* contract, **not** VBD's capability:
 
 - `test_newton_clip_routing.py:11` — "Robot = kinematic bodies (positions from FK model).
   **No REVOLUTE/PRISMATIC joints in physics model.**"
@@ -63,7 +65,15 @@ Digging one level further shows the cause is not missing wiring but the substrat
 `joint_target_pos` for an arm to write, and the bodies cannot respond to force. A "physics rewrite to
 actuators" is not under-specified there — it is **undefined**.
 
-## 2. This is the already-banked substrate wall, not a new problem
+## 2. ⛔ SUPERSEDED IN FULL (v1.1 ②) — retained only as the record of a retracted argument
+
+> **Everything from here to the end of §2 is WITHDRAWN. Do not cite it as current state.**
+> The S1B wall is scoped to a **faithful PRISMATIC finger on the env6 substrate**, and that document
+> explicitly warns against a blanket reading. The A-group runs on **env7 / Newton 1.2.1**, and the ask
+> is a REVOLUTE arm. The claims below — "same shape as the closed S1B attempt", "substrate-walled",
+> and the open-measurement request — are all retracted. **Current state = header v1.1 + §5.**
+
+### 2-HISTORICAL (withdrawn argument, verbatim)
 
 `00-DESIGN-STATUS-LEDGER.md:112-121` (§FAILED #1, verbatim): S1B faithful prismatic-finger Newton
 rebuild — "env6 Newton has **no single solver** that hosts both a PRISMATIC finger joint and the
@@ -102,8 +112,10 @@ cable as a REVOLUTE chain for the mujoco path at `:937+`). Its 17 FAILs split by
 
 Plus `newton_routing_utils` 7 (VBD), `test_grip_modes` 2, `dry_run_43step` 1 (A-2, typed OFFLINE).
 
-⇒ The A-group is **not one class**. The mujoco-branch sites are plausibly PS-1-style rewritable; the
-VBD-branch sites are on the walled substrate.
+⇒ The A-group is **not one class**. Current statement (v1.1): the mujoco-branch sites are
+PHYSICS_REWRITE *candidates*; the VBD-branch writer sites require **KINEMATIC DELETE**, while their
+consumer/function disposition is **SUBSTRATE-BLOCKED pending p5/Rs** (retire vs env7-MuJoCo migrate).
+⚠ The original wording here — "on the walled substrate" — is **retracted** (v1.1 ②).
 
 ## 5. What I am asking for (no design authored here) — **updated by v1.1 + pN scope ruling 11:12**
 
@@ -131,3 +143,15 @@ surface that the VBD build does not have. It stands as the record of the B1/B3/B
 be implemented as written**. ⛔ A [CHANGE] remains CLOSED — correctly so; had it been opened, the
 bundle would have produced a green census (35→6) with arms that no longer move, which is precisely the
 "a gate validated under the bug" / "appearance-only ≠ working" failure class.
+
+## 7. Current state in one place (authoritative; supersedes any earlier phrasing in this doc)
+
+| question | current answer |
+|---|---|
+| Does VBD reject articulated arm joints? | **No.** Newton 1.2.1 VBD documents REVOLUTE/PRISMATIC/D6/CABLE as supported, with `target_ke/kd` drives (pN source check, `solver_vbd.py` sha256 `f11cb9dabe44…` doc `:105-121`) |
+| Why can't prereg v2 §B2 be implemented? | The **current build constructs a jointless robot** (`newton_routing_utils.py:875-881` zeroes robot `inv_mass`/`inv_inertia`; no actuator wiring) **and VBD does not support `joint_target_mode`** ⇒ the PS-1 POSITION-servo form cannot transfer |
+| Is this the S1B wall? | **No — retracted.** S1B is env6 + faithful PRISMATIC finger, and its own text forbids a blanket reading |
+| Is a substrate probe needed? | **No** — pN NO-GO; source answered it. Any future probe needs a new Rs directive naming the Newton version delta + an L3 substrate prereg |
+| A-group class | mujoco-only 4 = REWRITE candidate · VBD-only writer sites = KINEMATIC DELETE required · consumer disposition = **SUBSTRATE-BLOCKED pending p5/Rs** · mixed = branch/callsite split · `test_grip_modes` 2 = unclassified pending backend/liveness pin |
+| Manifest / census | **frozen** — a class change is not automatically an arithmetic change |
+| Gates | A [CHANGE], A-2, RUN, landing, push, training = **all CLOSED** |
