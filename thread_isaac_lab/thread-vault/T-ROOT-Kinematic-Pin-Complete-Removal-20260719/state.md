@@ -1,7 +1,7 @@
 ---
 node_id: T-ROOT-Kinematic-Pin-Complete-Removal-20260719
 node_name: kinematic / pin 完全削除 — arm-control remediation task (d)
-goal: "active 実行面から kinematic / pin による物理バイパスを完全に除去し physics-faithful な制御へ置換して、RS71 §0 不変前提 #3 (DiffIK-only) / #5 (no-kinematic-trick) が機械検証で成立する状態にする。"
+goal: "【2026-07-21 Rs 裁定 B で範囲縮小】active 実行面から kinematic による物理バイパスを除去し（⛔ただし clip-retention pin = クリップのケーブル固定 は Rs 許可の例外として除去対象から外れる） physics-faithful な制御へ置換して、RS71 §0 不変前提 #3 (DiffIK-only) / #5 (no-kinematic-trick) が機械検証で成立する状態にする。"
 goal_verification: |
   (すべて既存 SSOT に接地。本 node は新しい acceptance を発明しない)
   1. Layer 8 canonical census = 0 — F3 拡張後の all-root scan (全 thread_isaac_lab Python root) 基準。
@@ -26,7 +26,7 @@ session_history:
     started_at: 2026-07-20T20:01:09+09:00
     note: "Rs 承認 (node 作成 + 起動、2026-07-20) により起票。[DEFINE] = 00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md @ 14a891d256。既往 c4-c48 は §3 adopted_existing_arc provenance であり本 session の成果ではない。起票時点 = step2 CLOSE / step3 docs-records-only OPEN。"
 created: 2026-07-20T20:01:09+09:00
-last_updated: 2026-07-20T20:13:27+09:00
+last_updated: 2026-07-21T01:33:43+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -85,6 +85,17 @@ step4 以降は step3 two-key + 別 GO まで不可。**node の起票は実行�
 ⚠ R-SEQ = **A-first → affected B0/B1 reacquire → その後 #18 裁定**
 （charter §14 TOP PREMISE :3 + §14.9。旧「#18 impl 先行」は SUPERSEDED）。
 `#18` は相互作用があるが **GATE ではない**（charter design §0.3）。
+
+## 5-A. ⚠ 2026-07-21 Rs 裁定 B — 本 node の goal 範囲が縮小
+
+Rs 逐語 2 段「**kinematic は使用するなよ**」→「**ただし、クリップのケーブル固定だけは kinematic を使用する**」（適用範囲確認に Rs「ok」）。⇒ **2026-07-19 の「kinematic 完全削除（pin 含む）」を上書き**し、**clip-retention pin 例外が復活**（`RS71-System-Spec-SSOT.md:27` §0#5 の状態へ復帰）。
+
+- **除去対象から外れた** = クリップのケーブル固定 pin のみ
+- ⛔**除去対象のまま** = 腕関節角の直接書込 / 指の kinematic close / FK→physics の body 複写（`update_kinematic_bodies`）/ weld・attachment
+- ⇒ **census 35 の各サイト class を再判定する必要**がある（**class 裁定 = 設計軸**。本 node の custody では行わない）
+- custody = `STEP43_CONTROLLER_REALIZATION_BASELINE_RSTECHLEAD_20260721.md` sha256 `f1ea5e5a0109` @ c69 `183c1bb5dc`
+
+⚠⚠**node ID `…-Kinematic-Pin-Complete-Removal-…` の「Pin-Complete」部分は、本裁定により実態と食い違う**。ただし **NEST §1 で node ID は永続**ゆえ改名しない。**ID を goal の要約として読まないこと** — goal は上記のとおり縮小済。
 
 ## 6. 現在地（起票時点 2026-07-20 20:01）
 
