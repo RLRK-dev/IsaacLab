@@ -1,4 +1,4 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 01:36 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 02:04 JST
 
 > Pane-specific handoff (multi-pane NEST; does not clobber the shared HANDOFF.md).
 > Full detail = memory `handoff_cc_pQ_rstechlead2_wmso_d11a_freeze_2026-07-20.md`. Ground truth = frozen package + freeze record + manifest + LEDGER row44, not this narrative (§運用4).
@@ -93,7 +93,14 @@
 - **再帰の停止条件**（「その規則は何が強制するのか」への答え）: **artifact identity + 人間承認**に着地。⚠ただし **method_id 追加 = label の追加**に対し **evaluator 追加 = 信頼基盤に実行コードを入れる行為**で類推は非対称 ⇒ **適合試験**を必須化して人間審査でなく機構で閉じる。
 - **適合試験の形**: 宣言 scope S 上で一致し **S の外だけが異なる 2 joint snapshot** に**同一 verdict** を要求（scope 外を読んでいれば verdict が割れて落ちる）。⚠**健全な反証器であって証明ではない** — 「banked pair 集合上で scope 違反を**反証する**」と書き「**保証する**」とは書かない。⚠⚠**fixture 選択が強度を決める**: 差分 pair に「**4 key 語彙上で一致し cable 状態だけが異なる**」ものを**必ず含める**（一般の S 外 pair では実際の懸念を識別しない = 「違う結果が出得ない試験は試験でない」の直接適用）。
 - **凍結側は触らない**: `ControlResourceSpec` / `ControlMode` とも改造不要。
-- ⚠**外部依存 1 件**: Rs 裁定（43-step の step 9,12,20,28,36 で右腕が保持も指令もされない件）が **ParallelRegion に単一 branch を許すか**を決める ⇒ **裁定前に branch 数の下限を型に焼き込まない**。
+- ✅**外部依存 = 解消（Rs 裁定 B・2026-07-21 02:0x）**: **`ParallelRegion` は厳密な並行演算子ではなく region contract の scope**（region-level postcondition / evaluation cut / joint snapshot policy / planned synchronization event / region outcome route を保持）⇒ **`branch_count >= 1` を型に焼き込んでよい**。
+  - **根拠（branch 数に依存しない）**: branch は definition 級で cable を claim できず、これは 1 本でも 2 本でも同じ。⇒ 片腕のみ稼働の step でも「cable はまだ着座しているか」を述べられる主体が居ない。arity >= 2 を課すと、それらの step が region contract を持たない裸 node になり、**region postcondition の存在理由が片腕 step でだけ失われる**。
+  - **singleton canonical 規則（hash 二重化の防止）**: singleton region かつ region postcondition が**非自明** → 独立対象 ／ **自明・不在** → 通常 node へ lowering。**`ParallelRegion([A]) ≠ A`**（A = node ／ 前者 = A に region contract を課した領域）。⇒ 「同一意味に複数 hash」が生じない。⭐D1.1-B cycle-1 CRITICAL（`IDENTICAL` = sha256 不動点）・D1.1-A M2 manifest 循環と**同族**の identity churn 対策。
+  - ⛔⛔**ABSENT セルを合成 WAIT / NOOP skill として実体化しない（Rs 明示）**: **ABSENT は実行動作ではなく動作不在の測定値**。型 arity を満たすためだけの充填は禁止。**境界**: step 14 の `hold@L` = 左指が実際に把持・維持する**実在動作**（合成でない）／ step 12 の右腕 = 何も掴まず指令も無い = **ABSENT・充填しない**。
+  - ⭐⭐**本禁止が DUAL-ARM 検査の識別力を保っている（重要）**: ABSENT を合成 WAIT で埋められると、claim ベースの DUAL-ARM 検査は **vacuously PASS** する（何も掴んでいない腕を claim する単位を型充填のために置けるため）。⇒ 教訓「**違う結果が出得ない試験は試験でない**」の直接適用。
+  - **同時確定**: branch 数最小値 / singleton の hash 意味論 / singleton lowering の要否 / region postcondition の要否 / ABSENT セルの graph projection 規則 / outcome route の全域性 / golden vector。
+  - **bank**: `SKILL_UNIT_DECISION_SKILLDESIGN_20260721.md` blob `d753810b99638ffd1a40d6af0ef571c41f46656e2cb333f3a6198e42ef94a45e` @ `896b8e7252`（**pQ 独立照合一致**・⚠**未 push**・push は Rs 一言待ち）。
+- ⚠⚠**ただし不変前提の問いは別**: 裁定 B は**表現の問い**（arity / singleton / ABSENT projection）を閉じたが、**43-step step 9,12,20,28,36 の ABSENT 右腕が DUAL-ARM に適合するか**を閉じたとは限らない。「充填するな」は表現を**そのまま受け入れる**指示であって**適合判定ではない**。⇒ **Rs 判断待ち #4 として保持**（推論で閉じない）。pX lane の OPEN=0 は設計軸の意。
 - **containment（測定済・結論）**: 凍結の包含規則は `:380` の **`required ⊆ offered`（充足性）1 件のみ**で、**`runtime ⊆ declaration`（包含性）は強制されていない**。⇒ ただし scope を **definition 級に束縛**すれば runtime は宣言 scope の外ゆえ containment 検査は不要。
 
 ### 本 arc の恒久教訓（今夜追加分）
