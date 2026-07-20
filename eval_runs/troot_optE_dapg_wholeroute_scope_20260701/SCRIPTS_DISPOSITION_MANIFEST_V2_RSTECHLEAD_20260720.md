@@ -1,5 +1,12 @@
 # SCRIPTS DISPOSITION MANIFEST v2 (p4 / RS-TECH-LEAD, 2026-07-20)
 
+**v2.3 records-fix (2026-07-20 10:0x JST)** — pN c23 readback R1-R2 folded (chain itself =
+MECHANISM/EVIDENCE PASS): R1 = four stale "not executed / pending" sentences corrected to
+EXECUTED-c20/c21/c22 or explicitly HISTORICAL · R2 = §1 A/E coupling note demoted to HISTORICAL
+(pre-c22) and the **A-prereg closure frozen @ c23**: `newton_routing_utils` 11 unique consumers
+(23 import nodes) unchanged / `test_newton_clip_routing` **10 unique surviving (12 import nodes)**
+(pre-c22 "18" = historical) — both p4-re-derived by AST, exact match with pN. ⛔ A source [CHANGE]
+stays CLOSED until this records-fix banks + pN readback AND the p5 design pin readback.
 **v2.2 execution record (2026-07-20 09:5x JST)** — steps 0-4 EXECUTED under pN GO 09:43 (revised
 order); see §6/§7. Canonical bar now **35** = A 27 + D 5 + snapshot 3.
 **v2.1 disposition fold (2026-07-20 09:3x JST)** — pN court verdict 09:24 folded: §3 E = **ADOPT**
@@ -27,7 +34,9 @@ All blob SHAs below are `git hash-object` of the file at that commit.
 recursive): c17-equivalent `LAYER8_FAIL=128` = **scripts 125 + `skills/snapshot.py` 3**. The scripts
 bucket is byte-identical between the two guards, so this manifest's 125/125 coverage arithmetic is
 unchanged; `snapshot.py` 3 = **separate owner gate (HOLD), deliberately not a row here**.
-**Nothing in this manifest has been executed.** It is the disposition register; execution is per-row.
+**Execution state (v2.3)**: steps 0-4 **EXECUTED** c19-c22 (§6/§7); A = pending (p5 design pin +
+records readback gate); D = blocked. 〔The v2.0-v2.1 sentence "Nothing in this manifest has been
+executed" is **HISTORICAL** — true when written, superseded by §7.〕
 
 ---
 
@@ -66,9 +75,15 @@ joint-state replay keep their existing exemptions (`CLAUDE.md:67`, charter §14.
 **pN 09:24 ruling (adopted)**: classification = **env-class by placement only**; action stays
 **PHYSICS_REWRITE**; the 11-consumer closure means **no solo land** — it moves with its consumers.
 
-⚠ `test_newton_clip_routing.py` is the CLAUDE.md-sanctioned scripted verification harness. It is also
-imported by all 4 MPPI generators and 3 of the 5 MPPI consumers (§3) — so an A-group rewrite and the
-E-group bundle are **coupled**, not independent.
+⚠ `test_newton_clip_routing.py` is the CLAUDE.md-sanctioned scripted verification harness.
+〔**HISTORICAL (pre-c22)**: it was imported by all 4 MPPI generators and 3 of the 5 MPPI consumers, so
+the A rewrite and the E bundle were then coupled. The E bundle was deleted in c22 — the coupling is
+dissolved.〕 **A-prereg frozen closure @ c23 `07324776ac`** (p4 AST re-derivation, exact match with pN):
+`test_newton_clip_routing` = **10 unique surviving consumers (12 import nodes)** — 4 envs
+(approach/grip/route/skill_env_base) + 6 scripts (build_mppi_scene, demo_aerial_regrasp,
+measure_finger_extent, policy_route_runner, test_routeexec_byte_repro, wet_run_full_sequence);
+`newton_routing_utils` = **11 unique consumers (23 import nodes), unchanged** (the §1 table's "18" for
+clip_routing is the pre-c22 historical value).
 
 ## §2 Groups B / C / D — DELETE and BLOCKED_OWNER (15 rows, pN ①B/①C/①D)
 
@@ -129,7 +144,7 @@ current env/route surface (**verified**: `newton_route_env.py:76,960,1070,1076`,
 `newton_skill_env_base.py:25,1207` at c17). Demo re-recording remains the W-b programme.
 (Original p4 escalation, retained for the record: RETIRE-all-5 recommended; demo-strategy ownership
 made it pN/Rs's call — now decided.) Bundle subtotal: 44 FAILs (generators) + 0 (consumers).
-**Execution: pending post-readback GO.**
+**Execution: EXECUTED c22 `873c255ddb` (single atomic bundle; §7).**
 
 ## §4 ⚠ NOT IN pN's RULING — 2 rows required for Layer8 = 0 (p4 addition)
 
@@ -144,7 +159,7 @@ ruling**. Without a disposition, the scripts bucket floors at 2, not 0.
 Both write body state to place a fixture (platform height / finger positions).
 **pN 09:24 ruling = DELETE both (adopted)**: each test's *purpose itself* is moving kinematic bodies by
 `body_q` substitution, and with consumer 0 a rewrite would be a new test design, not preservation of
-this one. git blob SHA = evidence, same as group B. **Execution: pending post-readback GO.**
+this one. git blob SHA = evidence, same as group B. **Execution: EXECUTED c21 `2ada23b6ab` (§7).**
 
 ## §5 pN's correction — mechanically confirmed, and manifest v1's claim withdrawn
 
@@ -160,7 +175,7 @@ destroyed an unrelated file on a false edge.
 
 | path | blob | FAILs | disposition |
 |---|---|---|---|
-| `thread_isaac_lab/scripts/test_newton_phase5_ground_collision.py` | `659cac050e50` | **0** | **pN 09:24 = RETAIN + records-only docstring correction (adopted)**: replace the stale current-dependency wording on `diag_particle_q_layout` with a reference to its historical evidence blob `0ef8a4b31249` (its §2 row blob at c17); solver behaviour and test body untouched. **Execution: pending post-readback GO.** |
+| `thread_isaac_lab/scripts/test_newton_phase5_ground_collision.py` | `659cac050e50` | **0** | **pN 09:24 = RETAIN + records-only docstring correction (adopted)**: replace the stale current-dependency wording on `diag_particle_q_layout` with a reference to its historical evidence blob `0ef8a4b31249` (its §2 row blob at c17); solver behaviour and test body untouched. **Execution: EXECUTED c20 `56bca10f48`, atomic with B/C per pN step-1 (§7).** |
 
 ## §6 Execution status (v2.2) — steps 0-4 EXECUTED under pN GO (09:43); A pending
 
