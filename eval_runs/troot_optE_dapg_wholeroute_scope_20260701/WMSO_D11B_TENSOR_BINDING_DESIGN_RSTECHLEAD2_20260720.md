@@ -1,6 +1,6 @@
 # WMSO D1.1-B `tensor_binding` — DESIGN (v2)
 
-- node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2); v1 = 2026-07-20 09:56 JST; **v2 = 2026-07-20 11:10 JST（実測 — CC Debate cycle-1 FAIL の fold。版歴 = §12）**
+- node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2); v1 = 2026-07-20 09:56 JST（実測）; **v2 = 2026-07-20 **11:08–11:13 JST**（実測 bracket: 著述開始前 11:08:16 / bank 時 11:13:35。⚠records-fix: 初稿は「11:10」と実測せずに記載した date-THEN-write 違反 — 実測 bracket に置換）— CC Debate cycle-1 FAIL の fold。版歴 = §12**
 - 統治: **scope prereg v1.1.1**（`ffd06623e22f…` @ `cf94601f7a`・pN SCOPE CONCUR `0a5d0969218c…` @ `ccd8342c30`）§2 IN の実装設計。**土台 = frozen D1.1-A v2.11.2**（DESIGN `00192d20ca00b654…` / EP v1.9 md `c474acea7c58…` / JSON `e63176af9bc3…`）— **frozen 3 file を編集せず・schema delta を導入しない**（必要時は supersession + Rs review、prereg §1.3）。
 - **binding carries 遵守**: pS **C-1**（frozen enum に member を追加しない。§1.1 は B 新 schema の内部語彙）/ pS **C-2**（drive-substrate taxonomy を焼込まない — §1.6 TimingSpec は SI 量のみ・§8-3）/ prereg §6（DC-1..6・RV5 §6 (i)-(iv)・pN (3)・kinematic 写像・L0 手段裁定）。
 - gate 位置: §5 chain の **design（cycle-1 debate 済 → fold 済 v2）**。次 = pS final-design PASS → pN DESIGN PASS-CLOSE（exact-pin）→ Rs freeze 判定。**impl/training/authority = CLOSED 継続**。
@@ -275,7 +275,7 @@ v1 は本 gate 未実施だった。実施結果（on-disk 実測）:
 ## 12. 版歴 / fold-map
 
 - **v1**（2026-07-20 09:56、`31d96783c3f5392c…` @ `71e3985aab`）→ **5体 CC Debate cycle-1 = ⛔FAIL**（verdict record `WMSO_D11B_CC_DEBATE_CYCLE1_VERDICT_RSTECHLEAD2_20260720.md`、panel = lens A/B/C/D + NHA、union 集約 31 項）。
-- **v2**（2026-07-20 11:10 実測、本版）— fold:
+- **v2**（2026-07-20 11:08–11:13 実測 bracket、本版）— fold:
   - **D-1 (CRITICAL)** §3 の EP 不在主張 = FALSE → **全 grade を閉じた query で再導出**（wildcard/`_applicable` 展開）+ SHADOW rank2 が RECONSTRUCTED_COMPATIBLE を受理する事実を明記 + 4 grade 分の subject semantics を追加。
   - **D-2 (CRITICAL)** IDENTICAL の自己 hash 不動点 → **IDENTICAL は hash を持たない**（null 必須）+ 外部確認 code。§0 の反循環規則を「構造 pattern」へ一般化。
   - **D-3 (CRITICAL)** flatten 順序未規定 → `FeatureBinding.flatten_order`（v1.0 = ROW_MAJOR）。
