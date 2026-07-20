@@ -1,8 +1,9 @@
 """Newton Phase 5: Particle-Ground Collision Tuning
 
 Phase 4 finding: Particles fly through ground plane, accumulating extreme positions.
-Diagnosis (diag_particle_q_layout.py): particle z values range from -121 to +223,
-alternating chaotically. Ground collision with particle_ke=50000 is insufficient.
+Diagnosis (historical; the diagnostic script diag_particle_q_layout.py was deleted under the
+kinematic-removal directive — evidence = git blob 0ef8a4b31249): particle z values range from
+-121 to +223, alternating chaotically. Ground collision with particle_ke=50000 is insufficient.
 
 This script systematically tests particle-ground collision parameters:
 1. Ground collision basic test (no arm, no fingers)
