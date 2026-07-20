@@ -21,6 +21,8 @@ v4 (cycle-2 folds):
 """
 import copy
 import hashlib
+import re
+import unicodedata
 import json
 import sys
 from math import prod
@@ -72,8 +74,21 @@ ENUMS = {
     "training_lineage": {"RL_ONLY", "BC_ONLY", "BC_THEN_RL", "DEMO_PLUS_RL", "NOT_APPLICABLE"},
 }
 KNOWN_VERSIONS = {"1.0"}
-CAST_OK = {("FLOAT32", "FLOAT32"), ("BOOL", "FLOAT32"), ("INT32", "FLOAT32"),
-           ("INT32", "INT32"), ("BOOL", "BOOL")}
+# frozen DESIGN sec.2 item 5 verbatim
+CANON_DECIMAL = re.compile(r"\A(?:(0|-?[1-9][0-9]*)(\.[0-9]*[1-9])?|-0\.[0-9]*[1-9])\Z")
+HEX64 = re.compile(r"\A[0-9a-f]{64}\Z")
+# members typed CanonicalDecimal by the design; anything here must match the frozen regex
+DECIMAL_MEMBERS = {"scale", "bias", "lower", "upper", "policy_rate_hz", "obs_sampling_rate_hz",
+                   "max_obs_staleness_s", "action_rate_hz"}
+IDENT_MEMBERS = {"field_id", "unit", "frame", "stats_key", "mask_field_id", "belief_field_id",
+                 "binding_schema_version"}
+HASH_MEMBERS = {"producer_schema_hash", "demo_dataset_binding_hash"}
+# v5 (pN R1): INT32->FLOAT32 is FORBIDDEN in v1.0. float32 has a 24-bit significand, so
+# 16777216 and 16777217 both round to 16777216.0 — the cast is not injective, which breaks the
+# bijection the artifact exists to declare. v4 delegated reversibility to COMPATIBILITY_TEST,
+# but that proof is required only at RECONSTRUCTED_COMPATIBLE (rank 2); CLOSED_LOOP (rank 3/4)
+# certifies without it, so the delegation did not cover the grades that matter.
+CAST_OK = {("FLOAT32", "FLOAT32"), ("BOOL", "FLOAT32"), ("INT32", "INT32"), ("BOOL", "BOOL")}
 NORM_SCHEMES = {"MEAN_STD", "MIN_MAX"}
 
 
@@ -88,6 +103,14 @@ def check_type(obj, tname, path, errs):
     for k, v in obj.items():
         if k in ENUMS and v is not None and v not in ENUMS[k]:
             errs.append(f"{path}.{k}: unknown enum member {v!r}")
+        if k in DECIMAL_MEMBERS and v is not None:
+            if not isinstance(v, str) or not CANON_DECIMAL.fullmatch(v):
+                errs.append(f"{path}.{k}: not a CanonicalDecimal: {v!r}")
+        if k in IDENT_MEMBERS and v is not None:
+            if not isinstance(v, str) or not v or unicodedata.normalize("NFC", v) != v:
+                errs.append(f"{path}.{k}: identifier must be non-empty NFC: {v!r}")
+        if k in HASH_MEMBERS and v is not None and not HEX64.fullmatch(v):
+            errs.append(f"{path}.{k}: not 64-hex: {v!r}")
         child = children.get(k)
         if child is None or v is None:
             continue
@@ -314,6 +337,15 @@ NEGATIVE_CONTROLS = [
         "demo_dataset_binding_hash", "0" * 64)),
     ("coverage arithmetic broken", lambda s: s["obs"].__setitem__("total_dim", 12)),
     ("bool-as-int", lambda s: s["obs"]["features"][0].__setitem__("offset", False)),
+    ("Infinity as CanonicalDecimal", lambda s: s["obs"]["timing"].__setitem__("policy_rate_hz", "Infinity")),
+    ("NaN as CanonicalDecimal", lambda s: s["action"]["features"][0]["transform"].__setitem__("scale", "NaN")),
+    ("non-normalized decimal 1.10", lambda s: s["obs"]["timing"].__setitem__("policy_rate_hz", "1.10")),
+    ("leading-zero decimal 01", lambda s: s["obs"]["timing"].__setitem__("policy_rate_hz", "01")),
+    ("exponent notation 1e3", lambda s: s["obs"]["timing"].__setitem__("policy_rate_hz", "1e3")),
+    ("non-NFC identifier", lambda s: s["obs"]["features"][0].__setitem__("field_id", "e\u0301e_quat")),
+    ("malformed producer hash", lambda s: s["obs"]["belief_inputs"][0].__setitem__("producer_schema_hash", "zz")),
+    ("INT32->FLOAT32 now forbidden", lambda s: (s["obs"]["features"][1].__setitem__("dtype", "INT32"),
+                                                s["obs"]["features"][1].__setitem__("normalizer", None))),
 ]
 
 
@@ -338,7 +370,8 @@ def main():
         conformance(spec, name)
     print("conformance: PASS over all 14 declared types — member-set equality both directions, enum "
           "allowlists, known version, cast table, BOOL numeric-stage guard, mask dtype/self/target/"
-          "sort, belief coverage+duplicate, coverage arithmetic, bool-as-int, lineage/stage (4 fixtures)")
+          "sort, belief coverage+duplicate, coverage arithmetic, bool-as-int, CanonicalDecimal/NFC/64-hex, "
+          "lineage/stage (4 fixtures)")
     print(f"belief_schema_hash   = {belief_schema_hash}")
     print(f"superseded_demo_hash = {superseded_demo_hash}")
     for name, spec, fn in FIXTURES:
