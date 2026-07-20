@@ -1,4 +1,4 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 02:16 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 02:20 JST
 
 > Pane-specific handoff (multi-pane NEST; does not clobber the shared HANDOFF.md).
 > Full detail = memory `handoff_cc_pQ_rstechlead2_wmso_d11a_freeze_2026-07-20.md`. Ground truth = frozen package + freeze record + manifest + LEDGER row44, not this narrative (§運用4).
@@ -46,7 +46,13 @@
 ### ⛔ FOUNDATIONAL INVARIANT 系の発見（Rs 判断待ち・私は編集していない）
 
 - ⛔**`RL-Routing-Design.md:1032`「構造: 排他的単腕 (RIGHT→CLIP0,1 / LEFT→CLIP2,3,4)」** = §0 不変前提 **DUAL-ARM** に触れる。**live section**（`:1028 ## 1. 概要` 直下）・**supersession marker 無し**（同 doc は marker を 15 箇所で使用）・同 doc `:20`/`:1635`/`:2486` は両腕と記述 = **内部矛盾**。⚠**違反と断定していない**（label の誤りである読みを `:1635`/`:2486` が支持）。**07-Design は CC read-only・p5 管理・不変前提は Rs 専権**ゆえ未編集。p5 + pX + Rs へ通知済。
-- ⛔**層 1（工程表）の欠落**: `thread_isaac_lab/skills/step_table.py:60 StepDef` に `target_left`/`target_right`/`l_finger`/`r_finger` は在るが、**`None` が「保持」と「不関与」を潰す**。保持の意味論は行コメント `None = keep current` のみで、**4 field 中 1 つ（`l_finger`）だけ**（pX 指摘）。⇒ **腕の「参加」を機械判定できない**。
+- ⛔⛔**層 1 の分析を訂正（p4 実測・pQ 独立確認 2026-07-21 02:1x）— 私は制御経路でない file を測っていました**:
+  - **`skills/step_table.py` は production の制御経路ではない**: 参照元 `orchestrator/routing_orchestrator.py` は在るが、**`RoutingOrchestrator(` の構築点は `tests/test_orchestrator_transforms.py` の 8 箇所のみ**（pQ 独立確認）。⇒ **runtime に何も指令していない**。
+  - **実行体 = `scripts/wet_run_full_sequence.py`** で、**表を import せず** waypoint JSON の `left_finger` / `right_finger` を読む（`:451-452`）。⚠同 file `:145` 逐語「**Franka-legacy finger indices, NOT UR5e-swapped**」（p4）。
+  - ⇒ **旧記述「表の `None` が保持と不関与を潰す」は、非稼働 artifact についての指摘だった**。表そのものの事実としては真だが、**system の記録欠落の論拠にはならない**。
+  - ✅**より強い形で生き残る所見**: **保持述語が codebase 全域で不在** — `is_grasped` / `is_holding` / `grasp_state` / `has_grasp` = **0 file**（pQ 独立確認）。⇒ 「どちらの腕が保持しているか」は**表の問題でなく system 全体で観測不能**。
+  - ⭐⭐**さらに強い所見（#4 を決める）**: **`task_config.py:336-337` 逐語「NO grip-force claim; the faithful actuated close is deferred — production stripped build has no actuator/equality, R-S6.6」**（pQ 独立確認）。⇒ **「左手が保持している」は未測定なのではなく、それを生む actuation が「deferred」と宣言されている**。p4 も「左が保持している」を**主張しない**と明言。
+  - ⚠**pX の epistemic 訂正も採録**: Rs の「ABSENT は**動作不在の測定値**」は、表が動作を測定していない以上成り立たない。正しくは「**測定の不在**」。pX の 5 ABSENT セルは、**finger 状態を記録しない表の上で pX の遷移モデルが生成**したもので、「その間 R が何もしていない」は**表からもモデルからも出ない**。⇒ Rs の A 側根拠（右腕は再把持動作中かもしれない）は**反証材料が無くそのまま立つ**。
 - ✅**層 3（契約層）は欠落なし** — ⚠**私の当初主張「契約層は駆動と保持を区別できない」は撤回**（pS §33 で検証済）。実測: `:61 IdentityKind = LEARNED|SCRIPTED|WAIT` / `:62 ControlMode = DIFF_IK_EE_TARGET|SCRIPTED_SEQUENCE|WAIT` / `:83` 表で **kind → control_mode が決まる** / `:151 ControlResourceSpec` = **所有宣言で behavior と直交**。⇒ hold = `kind=WAIT ∧ control_mode=WAIT ∧ 資源 claim` で表現可。**誤りの型 = 1 型だけ見て「無い」と結論し、同じ凍結 file の enum を述語で引かなかった**。
 
 ### schema delta（Rs review へ上げる・私が上程）
