@@ -1,4 +1,4 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-20 13:12 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-20 21:18 JST
 
 > Pane-specific handoff (multi-pane NEST; does not clobber the shared HANDOFF.md).
 > Full detail = memory `handoff_cc_pQ_rstechlead2_wmso_d11a_freeze_2026-07-20.md`. Ground truth = frozen package + freeze record + manifest + LEDGER row44, not this narrative (§運用4).
@@ -24,8 +24,15 @@
   - **pN exact-pin PASS-CLOSE**（14:35:06）— 隔離 archive で素 `python3 --verify` = rc0 / 4/4 conformance / **24/24 fired** / fixture sha 前後不変、`Infinity` 注入は direct rc1・同入力の `./isaaclab.sh -p` は traceback+rc0 を再現。H1/H2/H3 全 CLOSE、R1-R3・S-1 closure 維持、v5→v6.1 の設計 semantic 節 変更なしを diff 直読で一致確認。⚠**transcript は未 landing**（message のみ）— pN へ bank 依頼済（14:36）。
   - **私の独立検算**: v5→v6.1 の全変更行をセクション写像 = header 5 / §6 9 / §10 **1（版参照のみ・B1 の A/A′/B content は byte 同一）** / §12 10 ⇒ **設計 semantic 節（§1-5, 7-9, 11）の変更 = 0 行**。**設計は v5 で収束**、S-1/H1-H3 は全て計器・記録・手順の硬化。
   - ⛔**freeze 不可**: 唯一の gate = **Rs の B1 裁定**（hash 供給 locator。**A** = hash 由来 canonical ref〔CAS 要求・`E_BINDING_HASH_MISMATCH` が store 整合性検査に縮退〕／**A′** = frozen `EvidenceRecord.source_ref` 束縛〔全 grade 存在・最小・**pQ 推奨**〕／**B** = frozen schema delta〔supersession + Rs review〕。**`tensor_binding` + `normalization` 両 slot に同型**）。pN「追加 debate 不要」。**impl/training/authority = CLOSED 継続**。
-- ⛔**B1 = Rs 裁定事項（未解決 open）**: frozen `ArtifactSlot` に ref が無く、locator は **rank 3 のみ存在・SHADOW rank 2 に無**（最初の slice が動く grade）。選択肢 **A / A′（frozen `EvidenceRecord.source_ref` 束縛）/ B（frozen schema delta）** を実測表付きで上程。**freeze は両 verifier key に加え Rs の B1 裁定を要する**（pS 明言）。`normalization` slot も同型。
-- **次 = pN exact-pin DESIGN verify（dispatch 済 12:2x）→ Rs B1 裁定 + freeze**。debate は max-2-cycles 到達（以後は Rs 裁量）。DDR carry 4 件（B1-locator / U-2 / U-5 / U-6）= p6 へ登録依頼済。
+- ⚠⚠**上記 :26 の A/A′/B 枠組みは SUPERSEDED（14:39 以降の arc で解体済）— 引用しないこと**。以下が現行。
+- ⭐⭐**B1 = ✅CLOSED (PROVISIONAL)（2026-07-20 21:15 two-key 完了）— 残 gate = Rs confirm 1 点のみ**:
+  - **現行 pin**: DESIGN **v10 `4851e1ec7e1d581063734df1d2d550dbdc71918ff1f2019a7c828a729cd08fc1` @ `d67773b63f`** ／ 委譲 custody `e119b94e2ed2ff07bd931a05f59f4693d41c4f8a1c68b4182280271d2b33da8a` ／ pS §28 `96c08eb4458db968c4f0403948bd2c6bba8ad8c6d410bd651e9574201a5ee397` @ `5c01273c50` ／ pN transcript `2456eb8bbd71aa71376625b008ebb52aaadf1c1a23f11f01ea4c1bdf2110d407` @ `d30fc2e4ad`。builder `c74ca3b36193…` + fixture 4 sha = **v6 以降不変**。
+  - **解**: **D-1 = `EvidenceRecord.source_ref` を locator に束縛**（frozen delta 不要・1 hop・B 側宣言 1 個・意味論適合）。⚠**Rs 裁定ではなく CC1 の設計判断**ゆえ **Rs 拒否権が残る**。落選 = D-2（2 hop・宣言 2 個。到達可能性は否定せず）／D-3（frozen を開ける必要なし。**必要時は Rs 専権**）／D-4（**失格** — 凍結が要求しない CAS を課す + `E_BINDING_HASH_MISMATCH` 失効）／rank 2 への proof 追加（**FORECLOSED**）。
+  - ⛔**唯一の open = Rs confirm**: 「20:41 の『はい』= B1 の解法選択（D-3 除く）を CC1 裁量に委ねる意味か」。**私の narrative で on-disk 未検証**。custody record を bank したが **bank は可視化であって検証ではない**（pN transcript も独立に同旨を明記）。**否なら B1 は OPEN へ戻す**。
+  - **arc（14:39→21:15）**: Rs 裁定 A′ → ⛔**Rs が破棄**（逐語「誤りが前提であるならそれは当然破棄にしろ」— 私が提示した前置き「両 slot に同型」が偽・**しかも v6.1 §10:327 の逐語で two-key を通過済だった**）→ B1 OPEN 復帰 → 前提 claim-set（C1-C4b）two-key → **Rs 裁定 C3 = slice の EP profile = SHADOW（rank 2・非 authority）**〔1 回目 17:57 も同結論だが **私の未検証の言い換えを前提にしたため Rs が破棄・逐語「前提が違ったので選び直す」**〕→ 導出 claim-set（D-A..D-D・選択肢 0/推奨 0）two-key → **D-1 採択（v9）** → **pS §27(B) LOUD FLAG**（authority が narrative）→ **v10 fold** → pS §28 + pN PASS-WITH-PROVISIONAL。
+  - ⛔**grounding から除外**: v7.1 `9b0c229a0695` = VOID ／ A′ 裁定 record `WMSO_RS_B1_RULING_APRIME_20260720.md` = VOID（引用不可・「破棄の経緯記録」用途のみ）。
+- ⭐**本 arc の恒久教訓（3 件・いずれも「未検証の主張が決定面に載る」の変奏）**: ①**誤前提の上の裁定は結論が同じでも無効**、かつ **前提を出した側にその誤りが immaterial だと決める standing は無い**（A′ / C3#1 の 2 例）②**two-key は open point 内の事実主張を measure していなかった** — banked かつ両 key 通過は、その事実主張が検証済である意味ではない ③**human 発話に依拠する権威を設計面に書くなら、同一ターンでその発話を custody record にする**（structured-select か自由発話かで扱いを変えない）。⚠③は**自検出できず pS が検出**。
+- **次 = ⛔Rs confirm 待ち（self-start 禁止）**。confirm 後 = D1.1-B freeze → D1.1-C（artifact manifest）→ boundary-only vertical slice。**impl / training / closed-loop authority = CLOSED 継続**。DDR carry（#27 B1-locator = p6 が CLOSED (PROVISIONAL) へ更新中 / #28 U-2 / #29 U-5 / #30 U-6）。
 
 ## 参照（正）
 - 成否 SSOT: `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md` row44（p6 反映 `65d62d15ed`）
