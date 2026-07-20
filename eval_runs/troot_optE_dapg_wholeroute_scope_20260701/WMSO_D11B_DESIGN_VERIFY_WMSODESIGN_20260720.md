@@ -93,4 +93,36 @@ pN（w2:pN）dispatch 11:39:03: DESIGN v2（pin `7248de8600a4`）exact-pin evide
 - 順序（pN 指定）= **v3 fold bank → bounded cycle-2 debate → pS final-design reverify（私の次レグ）→ pN exact-pin**。
 - **impl/training/authority = CLOSED 継続**。
 
-**訂正後 verdict = ⛔HOLD（B1-B5 5/5 CONCUR・v3 fold + bounded cycle-2 → pS reverify 待ち）**。dispatch = pN concurrence（+ pQ 認識済）。**私 = v3 bank + cycle-2 完了 → pS reverify 待ち（self-start なし）**。
+**訂正後 verdict = ⛔HOLD（B1-B5 5/5 CONCUR・v3 fold + bounded cycle-2 → pS reverify 待ち）**。dispatch = pN concurrence（+ pQ 認識済）。**私 = v3 bank + cycle-2 完了 → pS reverify 待ち（self-start なし）**。→ §11 で reverify。
+
+## 11. DESIGN v4 pS re-final-design verify（bounded cycle-2 fold 後・2026-07-20 12:24 実測）
+
+pQ dispatch 12:15: bounded cycle-2（B1-B5 限定・5体）完了 → DESIGN **v4** bank（HEAD `f00c02e378`）→ §5 chain の pS 再 final-design PASS レグ + 3 点確認を依頼。
+
+**pin（held commit `f00c02e378`・worktree==committed・git status clean = moving-tree hazard なし）**: DESIGN v4 `9087a2a6e01f042dc51d…`✅ / goldens `af90712a`/`991651b9`/`dd14f6b6`/`59bbfbba`（G-4 追加）✅ = pQ 主張一致。
+
+**⭐load-bearing premise を on-disk 検証（durable lesson「存在≠十分」を全項適用）**:
+| 検証 | v4 主張 | on-disk 結果 | 判定 |
+|---|---|---|---|
+| **B1 grade-locator 表**（Rs 裁定の前提事実） | locator は rank3 のみ有・SHADOW rank2 に無 | frozen JSON `proof_binding`: `artifact_hash==claim_target_hash` 束縛 = **FINAL_ARTIFACT_HASH / REPRODUCED_OUTPUT_HASH の 2 種のみ**。grade proof set 突合 → EXACT(4)無・**HASH_BOUND(3)有**・RECONSTRUCTED(2)無・DIMENSION(1)無 | ✅ **表 正確・rank4/3 逆転も実在** = **Rs escalation は true premise** |
+| **option A′ 基盤** | frozen EvidenceRecord.source_ref を全 grade で束縛可 | frozen DESIGN L249/252 `class EvidenceRecord: … source_ref: str` = 全 record 存在・claim_target=tensor_binding slot hash | ✅ grounded（rank 非依存） |
+| **ask③ §5 detect≠prevent** | validate_handoff は manifest を入力に取らない | frozen L375/381 `validate_handoff(invocation,offer,producer_def,consumer_def,…)` = manifest なし・§5D 照合のみ | ✅ 正確（ledger は detect のみ・prevent は schema delta=Rs） |
+| **B2 goldens schema 完全性** | 全 golden container_dtype 込み・builder 検査 | `build_goldens.py --verify`（held pin・非破壊）= G-1〜G-4 全 conformance PASS・sha 一致・G-4=INT32/BOOL container | ✅ schema-complete + 再現 |
+
+**pQ 指名 3 点回答**:
+- **① C2-1 guard = 十分**: `E_BINDING_NUMERIC_STAGE_ON_BOOL`（§4「値/構造」= standalone・無条件発火）が BOOL feature への normalizer/transform/bounds を禁止。mask 無効化の failure mode（false→-1/true→+1 で両 valid）を閉じる。container cast BOOL→FLOAT32（0/1・read v≠0）は数値段でなく safe。§1.4b が BOOL→INT32 も禁止。⇒ 識別した failure mode を被覆。
+- **② B1 3 択 = Rs 裁定に十分な事実を備える**: grade-locator 表を on-disk で正確確認（rank3 有/SHADOW rank2 無/rank4-3 逆転）。A（hash 由来 canonical ref・全 resolver=content-addressed store 要求・`E_BINDING_HASH_MISMATCH` が store 整合性検査に縮退）/ A′（既存 source_ref 束縛・rank 非依存・frozen 未規定意味論の解釈）/ B（frozen delta=Rs review）= 3 択が frozen 事実に grounded・trade-off 正直。CC1 単独確定不能を正しく Rs 上程。
+- **③ §5 detect≠prevent 訂正 = 正確**（上表）。
+
+**B1-B5 + cycle-2(C2-1..C2-7) fold fidelity**: 全て faithful（§12 v3/v4 map と §1-§10 本体が一致・私の read で確認）。特筆 = **B1 を silently 解決せず Rs escalation 化**（§4/§10・§2 DC-1 と §7 に BLOCKED flag）= over-claim なし。**面間整合**: B1 open が §2/§4/§7/§10 で一貫（v2 の §2 Exit⇔§5 不整合と対照的に、今回は矛盾なし）。C2-2 で `E_BINDING_CAST_LOSSY` を到達不能 code として削除（D-18 類型の再発を自己捕捉）。
+
+**FOUNDATIONAL（dual-arm G-3/88mm §5 引用/DiffIK §1.4/コ/no-kinematic U-3）非抵触・C-1（B-internal enum・frozen enum member+0）・C-2（TimingSpec SI-only・U-3）・rule-g・rule-h（3 択は grounded・完全性を frozen 事実で裏打ち）clean**。
+
+## 12. Verdict（v4）
+
+**設計軸 = ✅PASS（DESIGN v4・pin `9087a2a6e01f` @ `f00c02e378`）— fold の設計軸 sound + B1 を正しく Rs escalation 化**
+- B1-B5 + cycle-2 fold = faithful・load-bearing premise 4/4 on-disk 検証（存在≠十分 適用）・pQ 3 点 = ①十分 ②十分 ③正確・must-fix 0。
+- ⚠**B1 locator = 正当な OPEN（Rs 裁定事項・設計欠陥でない）**: §4 hash 供給レグは「設計未完」と honest に明示（§2 DC-1/§7 BLOCKED）。**Rs が A/A′/B を裁定するまで design は freeze-ready でない**。私の PASS は fold の soundness + escalation の事実正確性を確認するもので、**B1 の実体を ratify しない**（frozen 境界=Rs 専権）。
+- max-2-cycles 到達（cycle-1+cycle-2）ゆえ追加 debate は Rs 裁量。B1 は debate で解けない Rs 決定。
+- ⚠**two-key**: 本 PASS = 設計軸のみ・**pN exact-pin DESIGN verify を代替しない**（pN 6 度 supervene pattern 継承）。**+ freeze は Rs の B1 裁定を要する**（pS PASS → pN exact-pin → Rs B1 裁定 + freeze）。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin + Rs B1 裁定 待ち（self-start なし）**。
