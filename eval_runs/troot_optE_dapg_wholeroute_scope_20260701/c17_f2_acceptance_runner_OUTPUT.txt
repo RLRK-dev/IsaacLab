@@ -1,0 +1,37 @@
+== F2 acceptance runner (banked) ==
+repo            : /home/rlrk/IsaacLab/.claude/worktrees/pd1-arm-pd-probe
+HEAD            : 3117bbd21cd7fad7e790d9d2ab50180817d06448
+module blob     : 5c67bab83fb41461147b62032c070b08e4d64c51
+module dirty?   : CLEAN (committed state measured)
+
+-- BANKED LEGS --
+[PASS] 1 symbol importable
+        callable=True
+[PASS] 1 signature preserved
+        got=(env: 'Any', state: 'ChainRuntimeState', *, target_skill: 'str | None' = None, validate: 'bool' = True) -> 'ChainRuntimeRestoreReport'
+[PASS] 2 DeprecationWarning emitted
+        n=1
+[PASS] 2 RuntimeError raised
+        raised=RuntimeError
+[PASS] 3 env/state mutation == 0
+        writes=[]
+[PASS] 3 env/state read == 0
+        reads=[]
+[PASS] 4 wrapper approach (BANKED, committed)
+        line=1203 sole_call_to_removed_fn=True
+[PASS] 4 propagation through wrapper shape
+        raised=RuntimeError
+[PASS] A5 _assign_array deleted (AST)
+        n_defs=9
+[PASS] A5 _assign_array absent from text
+        closed query over module text
+[PASS] A5 no .assign() call in module
+        lines=[]
+
+-- OBSERVATIONS (NON-BANKED, pN B1; never gate exit code) --
+[OBS-NO-WRAPPER] grip: /home/rlrk/IsaacLab/.claude/worktrees/pd1-arm-pd-probe/thread_isaac_lab/envs/newton_grip_env.py — no import_chain_state def
+[OBS-ABSENT] aerial: /home/rlrk/IsaacLab/.claude/worktrees/pd1-arm-pd-probe/thread_isaac_lab/envs/newton_aerial_regrasp_mujoco_env.py — FILE ABSENT
+[OBS-CONSISTENT] grip@main: /home/rlrk/IsaacLab/thread_isaac_lab/envs/newton_grip_env.py — line=1739 sole_call_to_removed_fn=True
+[OBS-CONSISTENT] aerial@main: /home/rlrk/IsaacLab/thread_isaac_lab/envs/newton_aerial_regrasp_mujoco_env.py — line=1635 sole_call_to_removed_fn=True
+
+OVERALL (banked legs): ALL PASS
