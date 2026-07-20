@@ -61,10 +61,12 @@
 - **C-1（rule (g) — register⑩/METHOD_REGISTRY 境界）**: B/C design draft で低位学習法を追加する際、**method_id ROW(algorithm・例 SAC)の追加 = 認可済み data-row 拡張**だが、**新 TrainingMethodClass(enum) / 新 TrainingLineage の追加 = schema delta = Rs review 必須**（register⑩ の Rs-CONFIRMED surface に抵触）。draft は enum-vs-row 境界を明示すること。
 - **C-2（U-3 drive-substrate lineage ∩ 進行中 kinematic-removal rework）**: §2-7/§6(c) の drive-substrate lineage field は、**進行中の kinematic 完全削除 rework(DDR #25/#26・Rs 絶対指示)と交差**。draft は現行(rework 前)の drive-substrate taxonomy を**前提に焼き込まない**こと。field が要ると判明したら schema delta として Rs review 経由、かつ **削除後の substrate 定義（再定義中）と整合**させる（stale substrate 前提の焼込み = 先祖返り隣接 risk）。
 
-## 7. Verdict
+## 7. Verdict ⛔SUPERSEDED（2026-07-20 09:35 — 正 = §9）
 
-**設計軸 = ✅PASS（scope prereg v1・pin `87f348540c93`）**
-- 先祖返り 0 / 先走り 0 / DEFER-RECON CONCUR(rule h 完全・FOUNDATIONAL 判定妥当) / scope 完全性 GOOD(落とし 0) / must-fix 0。
+> ⛔ 当初の「must-fix 0 PASS」は**誤り**。pN evidence-axis HOLD B1-B4（09:31:54）が supervene し、私は 4/4 を on-disk CONCUR（§9）。当初 verdict（下記・打消）を撤回する。訂正後 verdict = **⛔HOLD（prereg B1-B4 fold 待ち → pS 再 readback）**。
+
+**~~設計軸 = ✅PASS（scope prereg v1・pin `87f348540c93`）~~**（SUPERSEDED → §9 HOLD）
+- ~~先祖返り 0 / 先走り 0 / DEFER-RECON CONCUR(rule h 完全・FOUNDATIONAL 判定妥当) / scope 完全性 GOOD(落とし 0) / must-fix 0。~~（B1/B3 内部不整合・B2 Rs L0 mandate 未照合・B4 clean 条件 under-spec を見逃し = §9）
 - carry = C-1 / C-2（B DESIGN DRAFT 段の遵守事項・prereg 内含の loud 固定）。
 - ⚠**two-key**: 本 PASS = **設計軸のみ**。**pN SCOPE CONCUR（証拠/custody 軸）を代替しない**。gate §5 = pS PASS → pN SCOPE CONCUR の two-key。D1.1-A で pN が pS PASS を 4 回 supervene した pattern を継承。
 
@@ -74,9 +76,9 @@
 
 **Roadmap（gate §5 / freeze §5）**:
 ```
-[今] scope prereg → pS re-check(✅PASS) → pN SCOPE CONCUR
+[今] scope prereg → pS re-check → pN SCOPE CONCUR  ⟨※ prereg B1-B4 fold 後に pS 再 readback 要 — §9⟩
   → D1.1-B DESIGN doc 着手(§2 IN 駆動・C-1/C-2 遵守) → 5体 CC Debate/pre-mortem
-  → design 修正 → pN DESIGN PASS-CLOSE(exact-pin) → Rs freeze 判定
+  → design 修正 → **pS final 設計軸 PASS**(B1 統一) → pN DESIGN PASS-CLOSE(exact-pin) → Rs freeze 判定
   → [C 着手時] D1.1-C 詳細 prereg → 同 loop
   → [slice 着手時] slice 詳細 prereg → 同 loop
   → slice RUN レグ = impl 解錠 + clean substrate(DDR #25/#26) + 実行 gate + Rs 承認（別 prereg）
@@ -85,4 +87,55 @@
 **次の一手**:
 1. **pQ**: 本 pS PASS を受け、**pN へ SCOPE CONCUR readback dispatch**（§9 gate 順）。C-1/C-2 は pN にも共有推奨。
 2. pN SCOPE CONCUR 後、pQ が D1.1-B DESIGN doc 着手（frozen v2.11.2 土台・§2 IN 実装・C-1/C-2 遵守）。
-3. **pS(私)**: standby。次レグ = D1.1-B DESIGN doc の設計軸 verify（draft 完成後・§5 の「pS 設計軸 PASS」ゲート）。self-start なし。
+3. **pS(私)**: ~~standby~~ → **§9 参照**（pN B1-B4 supervention・pQ の prereg revision 待ち → 再 readback）。self-start なし。
+
+## 9. ⛔pN evidence-axis HOLD B1-B4 supervention — 4/4 CONCUR + own（2026-07-20 09:35 実測）
+
+pN（w2:pN）dispatch 09:31:54: prereg `87f348540c93` evidence-axis = **HOLD B1-B4**（pQ へ逐語 dispatch 済）、私の must-fix 0 を supervene。**私は 4 項を on-disk 検証し 4/4 CONCUR。私の「must-fix 0 PASS」は誤り。** WMSO chain で pN が私の design-axis PASS を supervene した **5 度目**・うち **B1/B2/B3 は設計軸の欠陥**（evidence 軸限定でない = 私が設計軸を実際に見逃した）。
+
+| # | pN finding | on-disk 検証 | 私の miss | 分類 |
+|---|---|---|---|---|
+| B1 | §2 Exit / §5 / pS roadmap の gate 順不一致 | §2 Exit(L42)「pS PASS→CC Debate→pN」vs §5(L64-67)「draft→CC Debate→修正→pN(**pS 段なし**)」= 内部不整合。私の §8 roadmap も pS-final-PASS 欠落。v3.2.2 §9 も pS 段を明記せず | **面間整合(role-lesson (a))未適用** — §2 Exit と §5 が食い違うのを通した | 設計軸 |
+| B2 | slice acceptance に RL∧IL∧vision∧WM portfolio conjoin 無し・RL-only 誤通過可 | Rs L0 mandate verbatim「強化学習、模倣学習。ビジョン、ワールドモデルは必須」= conjunction。§4「RL-only 許容」を pN(3) 忠実として通したが **Rs standing mandate と未照合** | **mandate 照合 duty の失敗** | 設計軸(Rs mandate) |
+| B3 | boundary-only/no-mid-skill と safe-checkpoint 切替が矛盾・今回 TERMINAL のみ | §4「boundary = skill 終端 / **安全 checkpoint** のみ」∧「mid-skill interruption なし」= 安全 checkpoint(mid-skill) が boundary-only と矛盾 | **内部矛盾を見逃し** | 設計軸 |
+| B4 | F3 all-root guard `7803f58f17` で snapshot BODY3+scripts125=128・run clean = canonical Layer8=0 必須 | commit `7803f58f17`「Expand Layer 8 guard coverage」(09:23) 実在・LEDGER Layer8=128/BODY3/scripts125 一致。§4「clean substrate(DDR #25/#26)」= under-spec | **run-leg premise の精密条件(Layer8=0)欠落** | 精密化(run-leg) |
+
+**disposition（pN 推奨に CONCUR）**:
+- **prereg revision（pQ）**: B1 = gate 順を「draft → 5CC Debate → 修正 → **pS final 設計軸 PASS** → pN」に統一 + v3.2.2 delta を loud 化（§2 Exit/§5 全 surface 整合）。B2 = slice acceptance に **RL∧IL∧vision∧WM portfolio conjunction** を明記（RL-only 単独 pass 不可）。B3 = 本 slice boundary = **TERMINAL のみ**（安全 checkpoint = 別 gate）。B4 = slice run レグ clean 条件 = **canonical Layer8=0**（DDR #25/#26 完了の実測 gate）。
+- **pS（私）**: prereg B1-B4 fold 後に **再 readback**（pN 明示依頼）。§8 roadmap は B1 に沿い pS-final-PASS を明記済（本 amend）。
+- **own（恒久）**: role-lesson (a) 面間整合 + Rs mandate 照合を **scope-prereg re-check でも適用**する（今回は D1.1-A DESIGN doc 級の厳密さを scope 段で緩めた）。「私 PASS ≠ pN leg」= 5 度目の実証。
+
+**訂正後 verdict = ⛔HOLD（B1-B4 CONCUR・prereg revision 待ち）**。→ §10（v1.1 fold readback）で解消。
+
+## 10. prereg v1.1 fold readback — 設計軸検証（2026-07-20 09:41 実測）
+
+pQ dispatch 09:36: pN SCOPE HOLD B1-B4（+N1 non-block）を prereg **v1.1** に fold・bank（HEAD `1da8503d2c`）→ pN 必要 chain（record-fix bank → **pS B1-B4 readback** → pN re-readback）の pS レグ + 私の §8 roadmap 旧 chain supersede 確認を依頼。
+
+**検証対象 pin（committed blob @ HEAD `1da8503d2c`・独立確認）**:
+| artifact | sha256 | 検証 |
+|---|---|---|
+| prereg v1.1 | `24af15733e4de34444a0bcc74ce8d31d71374bebb8b8c16cd9b4afe25720278a` | ✅ = pQ 主張 |
+| pN HOLD transcript (`WMSO_PN_D11BC_SCOPE_HOLD_B1B4_TRANSCRIPT_20260720.md`) | `6944ee7c6b1f05473acf97ac8ec455ca7df157cbb17a37ad8391328757426178` | ✅ = pQ 主張・**custody leg CLOSED**(bank 済) |
+
+**B1-B4 fold 忠実性（fold diff v1→v1.1 + transcript 逐語照合 — 4/4 faithful）**:
+| # | v1.1 fold（diff 実測） | pN transcript 逐語(L13-16) | 判定 |
+|---|---|---|---|
+| B1 | §2 Exit + §5 とも「draft → 5CC → 修正 → **pS final-design PASS** → pN exact-pin PASS-CLOSE → Rs freeze」に一本化・§5 に v3.2.2 §9 明示 delta + 両軸再 verify 規則・**§8 旧 chain supersede** 明記 | 「単一 chain = draft→5体CC→修正→pS final-design PASS→pN exact-pin PASS・v3.2.2 明示 delta・全3面一致・双方再verify」 | ✅ 一致 |
+| B2 | §4 に `portfolio_has_RL ∧ portfolio_has_IL ∧ vision_belief_live ∧ skill_dynamics_model_live`・1つでも false = L0/slice-success 不可・per-skill RL-only は IL leg 代替せず | 同 4-conjunct 逐語 | ✅ 一致・Rs L0 四手段(RL/IL/vision/WM)に厳密対応 |
+| B3 | §4 boundary(runtime 選択点) = **TERMINAL outcome のみ**・CheckpointSpec 静的契約保持・途中切替 = Phase G・checkpoint-enabled 化 = chunk 改称+scope 再審査 | 同 逐語 | ✅ 一致 |
+| B4 | §4 clean = **canonical all-thread_isaac_lab Layer-8 guard(landed successor 系譜)で LAYER8_FAIL=0**・snapshot+scripts 全 root・envs 限定 0 は不十分・128 fail = pN 測定明記 | 同 逐語 | ✅ 一致 |
+
+**PASS 側の保持（pN concur — 私の当初評価が持った軸）**: transcript「exact pins 3/3・DEFER 26/26・frozen A 不触・design-only/impl CLOSED・C/slice 分離 = PASS」→ 私の §2(先走り)/§4(DEFER rule h)/frozen 不変 評価は**保持**（miss は B1-B4 の 4 軸のみ）。
+
+**§8 roadmap supersede 確認（pQ 依頼）**: ✅ 私の**当初** §8 chain（pS-final-PASS 欠落）は v1.1 §5 が supersede。私は本 record §8 を既に amend 済（「design 修正 → **pS final 設計軸 PASS**(B1 統一) → pN DESIGN PASS-CLOSE」）= v1.1 canonical chain と一致。supersession を確認する。
+
+**N1（NON-BLOCK provenance）acknowledge**: 私の record bank commit `652ff63a60` が p6 staged 5 path を co-land（pQ 非 pathspec commit）。semantic blob `bed5133fb28a` は exact-pin 不変・p6 通知済・以後 pathspec 限定 = 設計軸 issue でなく custody hygiene（pN/p6/pQ lane）・acknowledge のみ。
+
+**指摘 N-1（minor・records-only・非 blocking）**: §5 header（v1.1 L62）が「（v3.2.2 §9 継承 — **変更なし**）」のまま。だが §5 body は「v3.2.2 §9 からの**明示 delta**（pN B1・supersession）」を記載 → **header が body と矛盾**（B1 と同種の面間不整合）。gate semantics は一貫（PASS を妨げない）が header label が stale。**推奨 = header を「v3.2.2 §9 + pN B1 delta（pS final-design PASS 追加）」等へ records-only 修正**。
+
+## 11. Verdict（v1.1 fold）
+
+**設計軸 = ✅PASS（prereg v1.1・pin `24af15733e4d`）** — B1-B4 fold 4/4 faithful（transcript 逐語一致）・N1 handled・§8 supersede 確認。**residual = 指摘 N-1（§5 header stale・records-only・非 blocking）のみ**。
+- ⚠**two-key**: 本 PASS = **設計軸のみ**・**pN re-readback（証拠 exact-pin 軸）を代替しない**。gate = pS readback PASS → pN re-readback → pN SCOPE CONCUR。「私 PASS ≠ pN leg」= 本 chunk でも堅持（B1-B4 は pN が私の PASS を supervene して得た）。
+- **design authoring / [CHANGE] = CLOSED 継続**（pN transcript・v1.1 §10）。
+- dispatch = pQ（+ N-1 指摘）。次 = pN re-readback → SCOPE CONCUR。**私 = pN re-readback 待ち（self-start なし）**。
