@@ -257,4 +257,31 @@ pN exact-pin が v6（`0459a636e672`）を **HOLD H1-H3**。⚠v6 は pS→pN �
 - **条件（downstream・fold 欠陥でない）**: **C-1** Rs A′ verbatim 未 bank / **C-2** LEDGER+DDR #27 stale（B1→CLOSED/A′ + 非対称）/ **N-1** §4「frozen 未規定」scope 精確化（非 blocker）。§7 到達性負例 = impl leg。
 - ⚠**two-key**: 本 PASS = 設計軸のみ・**pN exact-pin（v7）再判定を代替しない**（pN が semantic 変更を exact-pin 判定）。H1 順序で **本 addendum bank → pN exact-pin（v7）→ Rs freeze**。
 - ⚠**freeze gate**: v6.1 と異なり B1 は CLOSED（Rs A′）ゆえ freeze の残 gate = **pN exact-pin（v7）PASS-CLOSE + C-1/C-2 custody 反映**。
-- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin（v7）待ち（self-start なし）**。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin（v7）待ち（self-start なし）**。→ §21/§22 で条件 C-1/N-1 処理（v7.1）。
+
+## 21. 条件 C-1/N-1 の v7.1 fold + Rs 裁定 custody 評価（2026-07-20 15:16 実測）
+
+pQ が私の v7 条件 **C-1（Rs 裁定 custody bank）+ N-1（scope 限定）を v7.1 に fold**（C-2 は p6 へ dispatch）。**pins（held `b53c9e5e4d`・6 file drift 無し・method sha256sum）**: design v7.1 `9b0c229a06` ✓ EXACT / Rs 裁定 custody `20d88fc1b3` ✓ EXACT / builder `c74ca3b36193` 不変 ✓ / fixtures 4 本不変 ✓。**design delta = 8+/3-・header + §4（N-1）+ §12・builder 0**。
+
+**N-1 fix = faithful**: §4「束縛の宣言」の**束縛内容は不変**（source_ref が slot artifact を解決する ref = 同一・diff で確認）・justification のみ scope 限定（frozen `:396` が source_ref を registry-fixture provenance に使うゆえ「一切規定せず」→「**TB/NORM の artifact 解決用途で未規定**」+ A′ は provenance role と整合する refinement）・非 frozen-delta 結論不変。pQ が根因（**closed query が frozen DESIGN 本体を含まず EP md/JSON のみ対象**）を own。⇒ 設計 semantic の追加変更 0。
+
+**C-1 custody = RESOLVED（exemplary）**: Rs A′ 裁定を `WMSO_RS_B1_RULING_APRIME_20260720.md`（`20d88fc1b3`）に bank。評価:
+- ⭐**honest scope**: 裁定 = single-select ゆえ Rs prose 無し → 「問い + 選択肢文言 + 選択」を逐語保持し **prose 引用を捏造しない**旨明記（records-must-match-fact / [[feedback-human-gt-is-fetched-not-cited-2026-07-14]] 遵守）。
+- ⭐**「(推奨)」は CC mark で Rs の語でないと明記**（framing 影響を開示）。§4 境界（裁定は impl/training/authority を解錠せず・freeze でなく・§4 逐条検証を意味しない）明記。
+- ⚠**custody の限界**: single-select ゆえ ground truth は pQ の忠実記録に依存（Rs-authored artifact は format 上存在しない）。honest scope でこの限界自体が開示済 = 現 format で最善の custody。
+
+⭐**不正確前置きの独立評価（rule-g）**: 問いの前置き「両 slot に同型で効く」は不正確（profile 非対称）と custody record が loud 開示。**私の評価 = 当該不正確は A/A′/B 選択に orthogonal ゆえ Rs の A′ 裁定は STANDS**:
+- 選択に効く前置きの accurate 部分（ArtifactSlot に ref 無・locator rank3 限定・**locator-gap の同型**）は全て真。
+- 不正確部分（profile 対称性）は「どの profile が slot を要求するか」の軸で、選択（locator **供給機構** A/A′/B）と**独立**。A′ は source_ref を required record 毎に locator 供給ゆえ非対称でも壊れない・A/B も非対称に favor されない。
+- ⇒ Rs は対称/非対称いずれでも A′ を選ぶ。**再裁定は不要**（immaterial）。ただし freeze 時に訂正 framing を Rs へ surface し「A′ stands」を軽く confirm 推奨（Rs 権威尊重・私の materiality 評価への veto 余地）。
+
+**残条件**: **C-2**（LEDGER + DDR #27 の B1→CLOSED/A′ + profile 非対称 反映）= p6 へ dispatch 済・**freeze 前反映要**（#27 は D1.1-C [DEFER-RECON] を gate）。
+
+## 22. Verdict（v7.1・delta）
+
+**設計軸 = ✅PASS（DESIGN v7.1・pin `9b0c229a06` @ `b53c9e5e4d`）— C-1/N-1 処理 faithful・設計 semantic（binding content）不変**
+- N-1 = justification の scope 限定のみ（束縛内容不変・非 frozen-delta 結論不変・根因 own）・diff で binding 不変を確認。C-1 = Rs 裁定 custody bank = **exemplary**（single-select honest scope・prose 捏造せず・(推奨) 開示・境界明記・限界も自己開示）。builder/fixtures 不変。
+- ⭐**不正確前置き（両 slot 同型）= custody が loud 開示 + 私の独立評価 = A/A′/B 選択に orthogonal ゆえ A′ STANDS**（accurate 部分＝locator-gap 同型が選択に効く・不正確部分＝profile 対称性は独立）。freeze 時に Rs へ訂正 framing surface + 軽 confirm 推奨（再裁定不要）。
+- **残条件**: **C-2**（LEDGER/DDR#27 反映）= p6 dispatch 済・freeze 前要。
+- ⚠**two-key**: 本 PASS = 設計軸のみ・**pN exact-pin（v7.1）を代替しない**。freeze 残 gate = pN(v7.1) PASS-CLOSE + C-2 反映。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin（v7.1）待ち（self-start なし）**。
