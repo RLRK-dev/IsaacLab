@@ -250,7 +250,9 @@ pN exact-pin が v6（`0459a636e672`）を **HOLD H1-H3**。⚠v6 は pS→pN �
 
 ## 20. Verdict（v7・A′ fold）
 
-**設計軸 = ✅PASS-WITH-CONDITIONS（DESIGN v7・pin `6bbf64b3575f` @ `a8b9d4004a`）— Rs 裁定 A′ の fold faithful + sound・B1 CLOSED**
+> ⛔**INVALIDATED（2026-07-20 15:55 Rs A′ 破棄・§23）**: 本 verdict は Rs の A′ 裁定を前提とするが、Rs が「誤りが前提であるならそれは当然破棄にしろ」で A′ を破棄。B1 = 再 OPEN。measurement（source_ref/claim_targets/profile 非対称）は retained（§23）。
+
+**~~設計軸 = ✅PASS-WITH-CONDITIONS（DESIGN v7・pin `6bbf64b3575f` @ `a8b9d4004a`）— Rs 裁定 A′ の fold faithful + sound・B1 CLOSED~~**（INVALIDATED → §23）
 - A′ 全前提を frozen（sha 一致）に対し on-disk 実測（source_ref 必須/全 record/hashed・claim_targets 両 slot・E_PROOF_* 実在・EXPLICIT_NONE 免除・source_ref 未規定 closed query）・fold は A′ を faithful 実装・must-fix 0。
 - ⭐**profile 非対称（OFFLINE_REPLAY: TB 免除/NORM required）を独立追認** → v7 §4 分離は正・**私の v4-v6.1「両 slot 同型」の不正確を own**（locator 同型は真だが profile 適用は未測）。
 - error-code reuse-first（E_BINDING_ARTIFACT_UNRESOLVED 撤回・closed query で active 0）+ E_BINDING_HASH_MISMATCH 限定 + §7 到達性負例必須（R1 教訓の自適用）= sound。
@@ -279,9 +281,30 @@ pQ が私の v7 条件 **C-1（Rs 裁定 custody bank）+ N-1（scope 限定）�
 
 ## 22. Verdict（v7.1・delta）
 
-**設計軸 = ✅PASS（DESIGN v7.1・pin `9b0c229a06` @ `b53c9e5e4d`）— C-1/N-1 処理 faithful・設計 semantic（binding content）不変**
+> ⛔**INVALIDATED（2026-07-20 15:55 Rs A′ 破棄・§23）**: ⭐**§21 の orthogonality 分析（「A′ STANDS」）は不当** — 誤った前提を出した側が、その誤りが Rs 判断に効かなかったと判定できない（§23）。C-1 custody record が記録した A′ 裁定も破棄対象。N-1 の measurement（frozen :396）は retained。
+
+**~~設計軸 = ✅PASS（DESIGN v7.1・pin `9b0c229a06` @ `b53c9e5e4d`）— C-1/N-1 処理 faithful~~**（INVALIDATED → §23）
 - N-1 = justification の scope 限定のみ（束縛内容不変・非 frozen-delta 結論不変・根因 own）・diff で binding 不変を確認。C-1 = Rs 裁定 custody bank = **exemplary**（single-select honest scope・prose 捏造せず・(推奨) 開示・境界明記・限界も自己開示）。builder/fixtures 不変。
 - ⭐**不正確前置き（両 slot 同型）= custody が loud 開示 + 私の独立評価 = A/A′/B 選択に orthogonal ゆえ A′ STANDS**（accurate 部分＝locator-gap 同型が選択に効く・不正確部分＝profile 対称性は独立）。freeze 時に Rs へ訂正 framing surface + 軽 confirm 推奨（再裁定不要）。
 - **残条件**: **C-2**（LEDGER/DDR#27 反映）= p6 dispatch 済・freeze 前要。
 - ⚠**two-key**: 本 PASS = 設計軸のみ・**pN exact-pin（v7.1）を代替しない**。freeze 残 gate = pN(v7.1) PASS-CLOSE + C-2 反映。
-- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin（v7.1）待ち（self-start なし）**。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin（v7.1）待ち（self-start なし）**。→ ⛔§23 で INVALIDATED（Rs A′ 破棄）。
+
+## 23. ⛔Rs が A′ 裁定を破棄 — 私の orthogonality 分析は不当（2026-07-20 15:57 実測）
+
+**Rs 裁定（pQ relay・15:55:58）逐語**: 「誤りが前提であるならそれは当然破棄にしろ」⇒ **A′ 裁定を破棄**。Rs は私の §21/§22 orthogonality 分析（裁定 STANDS）と pQ の同意を**両方 overrule**: **誤った前提を出した側が、その誤りが Rs の判断に効かなかったと判定することはできない**。
+
+**私の error（own・番人としての中核的失敗）**:
+- 私は Rs の single-select に**何が効いたかを Rs に代わって判定**した（materiality は decision-maker 専権・私に standing 無し）。
+- **誤りを出した側が「無害」を self-certify** した = 利益相反・[[feedback-refutation-is-self-certifying-agreement-is-not-2026-07-14]] 違反（pQ の同意も独立確認でない・[[feedback-a-test-that-cannot-come-out-differently-is-not-a-test-2026-07-14]]）。orthogonality 論は「都合の良い結論の確証」で、否定証拠を先に探す規律（anti-確証バイアス）に反した。
+- ⭐**meta-failure**: 私の banked lesson [[feedback-a-gate-validated-under-the-bug-is-validated-by-the-bug-2026-07-15]] の **human-decision 版そのもの** — 偽の前提の下で下された裁定は「偽の前提に validate されている」。remedy は正しい前提での**再裁定**であり、error-producer/downstream verifier の事後無害論ではない。lesson を持ちながら人間決定 case に適用しなかった。
+- ⭐**番人 role の反転**: 「裁定が偽の前提の下で下された」を検出した時、正しい stewardly action = **⛔tainted ゆえ正しい前提で再上程を要する**（結論を pre-judge しない）。私は逆に「STANDS」を構築し §21/§22 で「再裁定不要」と書いた = 先祖返り/先走り抑制の逆。
+
+**恒久教訓（v7.1 の「materiality 独立評価」lesson を訂正・置換）**: human 決定が後に偽と判明した前提の下で下された時、**auto-accept も、error-producer による orthogonality/無害 判定もしない**。前提の偽が裁定を tainted にする（materiality 判定は decision-maker 専権ゆえ error 側が下せない）。**正しい前提を明示して再上程し、結論を pre-judge しない**。
+
+**invalidation scope**:
+- §19/§20（v7 A′ verify + verdict）+ §21/§22（v7.1 条件処理 + orthogonality）= **INVALIDATED**（A′-premised）。C-1 が bank した Rs A′ 裁定（`WMSO_RS_B1_RULING_APRIME`）も破棄対象。
+- **retained（Rs 明示）**: 独立実測は保持 — source_ref `:252`/`:269`/`:551`・claim_targets 両 slot・**profile 非対称**（OFFLINE_REPLAY TB 免除/NORM required・proof_policy も非対称）・frozen `:396`（source_ref=provenance）・ArtifactSlot ref 無 `:51`。これらが A/A′/B 再上程の**正しい前提**を成す。
+- v6.1 の two-key PASS-CLOSE（pS `251e8c8516f2` / pN `a31498dd0582`）は A′ 以前ゆえ**有効**（B1 を OPEN として扱う版）。
+
+**現状**: **B1 = ⛔OPEN**。pQ が正しい前提（profile 非対称を明示）で A/A′/B を再上程。**Rs 指示「再裁定まで設計軸 verify は保留」ゆえ、私は再上程を待って verify を保留**（self-start なし）。impl/training/authority = CLOSED 継続。dispatch = pQ（本 record を bank 対象に含める）。
