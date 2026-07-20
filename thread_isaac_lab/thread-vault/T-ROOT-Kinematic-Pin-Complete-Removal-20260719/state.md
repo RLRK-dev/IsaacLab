@@ -26,7 +26,7 @@ session_history:
     started_at: 2026-07-20T20:01:09+09:00
     note: "Rs 承認 (node 作成 + 起動、2026-07-20) により起票。[DEFINE] = 00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md @ 14a891d256。既往 c4-c48 は §3 adopted_existing_arc provenance であり本 session の成果ではない。起票時点 = step2 CLOSE / step3 docs-records-only OPEN。"
 created: 2026-07-20T20:01:09+09:00
-last_updated: 2026-07-20T20:01:09+09:00
+last_updated: 2026-07-20T20:13:27+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -51,7 +51,7 @@ p4/p5/pN/p6 の分業**を持つため、LEDGER 行 + DDR #25 だけでは **構
 
 ## 2. means（workstream）
 
-charter **v2.25**（c42 `01d3011f5e`）の stage 定義に従う。identified な workstream:
+charter `ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md` — 現行 **v2.27**（c47 `4dc72baf08`・sha256 `8543c880365b`・p6 実測）の stage 定義に従う。**B0/B1 移管の acceptance 条件 = c48 `bb68cb3c0f`**。〔v2.25 = c42 `01d3011f5e` は superseded〕 identified な workstream:
 
 - **GATE-MIGRATE** — Fingertip Z-Check Gate を env7-mujoco へ移植 → 検証後に VBD copy retire（Rs 裁定 c36）
 - **B0B1-MIGRATE** — B0/B1 evaluator を env7-mujoco へ移管（Rs 承認済）・旧 artifact は fresh 再取得必須
@@ -66,7 +66,7 @@ charter **v2.25**（c42 `01d3011f5e`）の stage 定義に従う。identified �
 本 node は **既存 arc の採録**。既往作業を session として遡及生成していない（`#s1` = 起票時点）。
 既往の実体は以下を参照（node の成果ではなく node 化以前の記録）:
 
-- **chunk chain c4 … c48** — `probe/pd1-arm-pd`（2026-07-20 19:48 時点 tip `bb68cb3c0f`）。
+- **chunk chain c4 … c48** — `probe/pd1-arm-pd`（2026-07-20 20:12 時点 tip `bb68cb3c0f` = c48）。
   ⚠ 本 branch (`rlrk/optE-s2-substrate-swap`) には **未着地**
 - **Rs 裁定** = c36 `eefad77773`（逐語「1：a 2:承認」）
 - **[DEFINE]** = `00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md` @ `14a891d256`
