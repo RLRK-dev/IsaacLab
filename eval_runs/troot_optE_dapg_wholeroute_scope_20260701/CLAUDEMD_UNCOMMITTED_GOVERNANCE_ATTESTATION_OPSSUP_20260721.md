@@ -9,12 +9,48 @@
 | 面 | 状態 | kinematic 例外の扱い |
 |---|---|---|
 | `CLAUDE.md` **committed 履歴** | `35029056bd^`:72 実測 | ✅「**唯一の認可例外 = clip-retention pin**」 |
-| `.claude/rules/prohibited.md` | **committed・clean**・mtime 07-19 07:29 以降不変（`git status` 空） | ✅「**唯一の認可例外 = clip-retention pin（§0#5）**」 |
+| `.claude/rules/prohibited.md` | ⚠**git 管理外（untracked）**・mtime 07-19 07:29:13 以降不変（**v1.1 訂正** — 下記 §1-1） | ✅「**唯一の認可例外 = clip-retention pin（§0#5）**」（as-read） |
 | `RS71-System-Spec-SSOT.md` §0#5 | `:27` / `:28` | ✅「the ONLY authorized exception is the clip-retention pin」＋ **07-15 Rs 逐語「クリップのみ pin を RL env に恒久配線しろ」** |
 | ⛔ `CLAUDE.md:72` **working tree（未 commit）** | 全 session に auto-load | ⛔「**kinematic 例外は 0 件**」 |
 
 ⇒ **統治文書 4 面のうち 3 面が一貫して pin 例外を認めており、唯一の反対者が「未 commit の編集」だった。**
 そしてその 1 面が、実際に全 session の context を統治していた。
+⚠ **ただし「3 面」のうち `prohibited.md` の一致は *as-read* に限る** — producing commit での verify が原理的に不可能（§1-1）。
+
+## 1-1. ⚠ v1.1 訂正 — `prohibited.md` を「committed・clean」と書いたのは誤り（p6 指摘 02:40）
+
+**v1.0 の記載**:「`prohibited.md` = **committed・clean**（`git status` 空）」⇒ ⛔**FALSE**。
+
+**実測（p6 指摘を独立再現）**:
+
+| 検査 | 結果 |
+|---|---|
+| `git ls-files .claude/` | **0 件** — `.claude/` 配下は **tracked が 1 つも無い** |
+| `git check-ignore -v` | `.gitignore:101:/.claude/` に一致 = **ignored** |
+| `git cat-file -e 35029056bd^:.claude/rules/prohibited.md` | **存在しない**（当該 commit に file 自体が無い） |
+
+⭐ **私の誤りの機序 = 「空の出力」を 1 通りにしか読まなかった。**
+`git status --porcelain <path>` は **clean でも ignored でも空**を返し、**両者を区別しない**。
+私は空を見て「clean」と結論した。⇒ **述語が 2 状態を判別できないのに、負の結果を一方の確証として読んだ。**
+
+⛔ **さらに悪いことに、私は反証を手に持っていた。** `git show 35029056bd^:.claude/rules/prohibited.md`
+に grep をかけて 0 hit だった時、私はそれを「grep pattern が合っていない」と処理して先へ進んだ。
+**正しい読みは「その commit に file が無い」**だった。**負の結果の原因を、確かめずに自分に都合よく帰属させた。**
+
+⚠ **本件は、私が本 session で 3 度診断してきた欠陥クラス（`validate.sh` Layer 1-3 / NEST guard の membership 述語 /
+未 commit 編集）と同型である** — **「述語が世界と一致していないのに、その出力を根拠として読む」**。
+検証者が同じ型を踏んだ事実を、実例として記録する。
+
+⭐ **訂正は finding を弱めず、強める（p6 の指摘・採用）**:
+auto-load される rule 面 2 つのうち、**`CLAUDE.md` は未 commit 編集に統治され、`prohibited.md` は git 管理外**。
+**後者は編集しても diff も履歴も dirty 表示も残らない** ⇒ **未 commit 編集よりさらに追跡困難**で、
+**provenance は mtime のみ**。⇒ **「一貫して pin 例外を認めていた」は on-disk as-read としては真だが、
+`prohibited.md` については いかなる producing commit でも verify 不能**。
+（mtime `07-19 07:29:13` = `a97c3fe43d`（07-19 07:32）の 3 分前 ⇒ **同一編集窓と整合** という p6 の観察は有効。）
+
+**self-sweep（同クラスの掃き出し）**: 本 session で私が引いた他の面はすべて tracked を実測確認 —
+`RS71-System-Spec-SSOT.md` / `00-DESIGN-STATUS-LEDGER.md` / `CLAUDE.md` / `task_config.py` = **すべて tracked=1**。
+⇒ **同型の誤りは `.claude/` 配下の 1 件に限局**しており、他の verdict へは波及しない。
 
 ## 2. 統治していたことの attestation（3 pane・3 時点で独立）
 
