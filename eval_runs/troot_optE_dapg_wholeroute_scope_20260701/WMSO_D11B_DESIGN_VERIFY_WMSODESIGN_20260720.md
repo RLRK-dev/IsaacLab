@@ -437,3 +437,26 @@ pN が claim-set v2（私の §24 refinement を fold した版）に **V2-B1..B
 ⇒ ⭐**v10 fold は §27(B) を満たす = 確認**。機構 §27(A) PASS は不変で carry。**B1 = CLOSED (PROVISIONAL) が正しく成立**（Rs confirm/veto 前）。
 
 **次**: pN exact-pin → Rs confirm（委譲 + D-1 + veto）。**私 = pN 後の Rs 判断、または追加 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
+
+## 29. v11 = Rs ratify（委譲）の fold 確認 — B1 = CLOSED 確定（2026-07-20 21:57 実測）
+
+⭐**pQ が Rs の委譲 ratify（2026-07-20 21:44・逐語「はい」・veto 不行使）を v11 に fold ⇒ B1 = CLOSED 確定（PROVISIONAL 解除）**。design v11 = **on-disk 実測 `4aa797f4772553d05c2b3dfb22d1818be6c72ffec3a8d442c547a41def843a59` @ `95deebe66b`**（pQ dispatch 一致）。⚠**scope = v11 delta（records/authority のみ）の設計軸確認。機構は §27(A)/§28 で PASS 済・不変**。
+
+**pin 検証（全て on-disk 自算出）**: v11 `4aa797f4…` @ 95deebe66b ✅ / 委譲 custody `94658abd151a…` @ 95deebe66b ✅ / builder `c74ca3b36193` 不変 ✅ / **3軸 citation 全 grounded（捏造無し）**: pin軸 = pN v10 exact-pin transcript `2456eb8bbd71…` @ d30fc2e4ad（"PASS-WITH-PROVISIONAL"・実在）・機構軸 = 私の §28 `96c08eb4458d…` @ 5c01273c50（実在・一致）・authority軸 = Rs custody §5。
+
+**設計 semantics = 不変（機構 §27A/§28 PASS carries）**: v10→v11 diff は 2 file・54 挿入/9 削除で **records/authority のみ**（§4 status PROVISIONAL→CLOSED 確定・§4(c) 未検証→Rs ratify 済・§10 3軸 CLOSE・§12 v11 changelog・custody §5 新設）。⭐**D-1 表・反証条件 4件・実装形・error code・fixture 4 sha・builder = 全て無変更**（diff に該当 hunk 無し・v9 以降 3 版連続 semantic delta 0）。
+
+**委譲 custody §5 = ✅ exemplary（ratification を検証済 fact に化粧していない）**:
+- **§0「bank ≠ 検証」原則を撤回せず**（追記 note が「閉じたのは *この* 主張であって『bank すれば検証済』の一般則ではない」と明記）= 残差(i) 保持。
+- **§5.4 が残差(ii) を明記**（「本節も私が転記している・この channel で転記者を私以外にできず残差は消えない・消えたのは Rs が見ていない主張が面に載る状態であって媒介でない」）。
+- §5.1 単一 yes/no を逐語（両分岐帰結明記）・§5.2 Rs 逐語「はい」・§5.3 前回20:41との差（問いの形/前提状態/記録）を表で明示。§3 は strikethrough で履歴保持（~~未検証~~→✅ratify）。
+- **scope 明示**: confirm が与えないもの = freeze（別 gate・Rs 専権）/ impl・training・closed-loop authority（CLOSED 継続）/ D1.1-C・slice / D-3。
+- ⭐**pQ が §28 恒久規律を ratification 自体に適用**（confirm を反映する前に custody §5 に記録 = 20:41 の失敗を 21:44 に繰り返さない）。
+
+**⚠ 私の検証境界（§28 と同一・厳守）**: v11 delta の **records/authority 忠実性 + 機構不変 + scope 有界**を確認した。⚠**Rs 21:44「はい」逐語そのものの真偽は検証していない・できない**（pQ session 内発話・独立 source 無し・全 Rs 発話と同じ境界）。custody 自身が「ratify は Rs のみ・転記者は pQ」と明記ゆえ over-claim 無し。⇒ **authority CLOSE は Rs の ratify（pQ の誠実な転記・Rs が見て訂正できる面に可視）に依拠**（C3 と同一パターン）。
+
+**先祖返り無し**（A′ VOID 維持・設計 semantics 不変）／**先走り無し**（ratify は B1 選択権のみ CLOSE・freeze/impl/training/slice/D-3 は与えず CLOSED 継続）。⭐**scope 整合**: Rs が「はい」と答えた問い（§5.1 =「20:41 の『はい』は B1 解法選択(D-3 除く)を CC1 裁量に委ねる意味か」）は **選択権の委譲**であり **Rs が D-1 を選んだのではない**（custody §3 ⛔明記）。⇒ B1 CLOSED = 選択権が CC1 のもの（Rs ratify）+ D-1 が sound（機構+pin 検証）。
+
+⇒ ⭐**v11 delta = 確認（faithful）**。B1 = CLOSED 確定 が正しく記録。機構 PASS carry。authority CLOSE は Rs ratify（record-verified honest・私の verbatim-verify でない・境界保持）に依拠。
+
+**次**: **freeze = 別 gate・Rs 専権**（私は gate しない）。impl/training/authority CLOSED 継続。**私 = freeze 後の D1.1-C 設計、または追加 verify 依頼を待つ（self-start なし）**。
