@@ -168,7 +168,13 @@ supersedes earlier phrasing in §§1-6 only.
 | Manifest / census | **frozen** — a class change is not automatically an arithmetic change |
 | Gates | A [CHANGE], A-2, RUN, landing, push, training = **all CLOSED** |
 
-## 8. ⛔ DECISION PACKAGE FOR Rs — both axes converged, execution fenced
+## 8. ✅ DECISION PACKAGE FOR Rs — **DECIDED / SUPERSEDED by c36; pre-ruling package retained below**
+
+> **Rs ruled this package on 2026-07-20 ~11:56 JST** (verbatim "1：a 2:承認"): ① = option (a),
+> ② = approved. **Current SSOT = `RS_RULING_AGROUP_SUBSTRATE_20260720.md` (c36 `eefad77773`).**
+> Everything below is the package **as put to Rs**, kept as the record of what was asked. Its
+> future-tense wording ("Rs options…", "What unblocks on a decision…") describes the *pre-ruling*
+> state and must not be read as still-open. (pN N1, 12:12.)
 
 Design axis (p5, charter §14.24-c @ c33 `eab548a988`) and evidence/scope axis (pN, 11:39, from
 `git show @c33` + its own installed-source check) **independently reached the same recommendation**.
