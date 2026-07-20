@@ -533,3 +533,23 @@ pN が claim-set v2（私の §24 refinement を fold した版）に **V2-B1..B
 ⇒ ⭐**scope 境界変更を受領**（custody record-verified honest・Rs verbatim は verbatim-verify せず境界保持）。**D1.1-B v13 は新境界に適合**（contract-only・subdivision を決めず）＝ freeze 適合性に影響なし。**設計番人の監視 duty を受諾**（判定基準 = 決める[違反] vs 束縛[適法]・watch-point 3 件）。
 
 **次**: standing 監視（今後の WMSO 設計 surface が subdivision を決めないか）。**私 = D1.1-B freeze 後の D1.1-C 設計 or 追加 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
+
+## 33. pQ 訂正（契約層は駆動/保持を区別できる）の検証 + 監視 duty 拡張（2026-07-21 00:19 実測）
+
+⭐**pQ が自主張「契約層は駆動と保持を区別できない（ControlResourceSpec が bool 4 個ゆえ）」を撤回 + 設計番人に「凍結側の語彙を過小に述べていないか」の監視追加を依頼**。訂正の core（凍結が駆動/保持を区別できるか）を on-disk 検証。
+
+**訂正 = ✅正確（frozen `00192d20ca00` で実測）**:
+- **`:61` IdentityKind = LEARNED | SCRIPTED | WAIT** ✅ / **`:62` ControlMode = DIFF_IK_EE_TARGET | SCRIPTED_SEQUENCE | WAIT** ✅（WAIT は両 enum に存在）。
+- **`:151` ControlResourceSpec = {ee_left, ee_right, gripper_left, gripper_right: bool}** = **どの腕/gripper を claim するか（所有宣言）** — drive/hold を担わない。
+- **`:83` slot 表**: LEARNED → control_mode = KNOWN(DIFF_IK_EE_TARGET)（駆動）／WAIT → control_mode = KNOWN(WAIT)（保持）。⇒ **drive/hold の区別は ControlMode（behavior 側）が担い、所有（ControlResourceSpec）と直交**。
+- ⇒ hold 単位 = **kind=WAIT ∧ control_mode=WAIT ∧ 資源 claim** で表現可。**pQ 原主張は誤り＝契約層は区別できる**。⭐**誤りの型 = ControlResourceSpec 1 型だけ見て同一凍結 file の enum（ControlMode）を見なかった（述語「何が駆動/保持を表すか」で引かず 1 型を見た）** = 本 arc 反復の「述語で引かず場所/1 型で引く」型。
+
+**consequence（pQ 申告・core は検証済）**: (a) 「3 層同時欠落」→ **2 層（工程表・設計面 :1032）に縮小・層 3=契約層は欠落なし**（凍結 ControlMode WAIT が hold を表現ゆえ・**core 検証済**）(b) schema delta = **容器 + barrier のみ**・**ControlResourceSpec / ControlMode は凍結のまま**（core と整合）。⚠**2 層側の欠落（工程表・:1032）と容器+barrier delta 自体は pQ の別 surface 設計であり本 round では未検証**（core = 契約層の非欠落のみ検証）。
+
+**⭐監視 duty 拡張 = 受諾（frozen-vocabulary の過小申告）**: 既存の watch（subdivision を決める[違反]・over-claim[stats_key 型]）に加え、**「凍結契約が X を*できない*と述べるが実は*できる*」= under-statement を監視**。⭐**なぜ重いか**: frozen 語彙の過小申告は (i) **不要な schema delta**（既に凍結が持つ機能を「無い」として追加提案 → 凍結に触れる = Rs review・supersession = 高コスト）(ii) **偽の absence 主張**（層の非欠落を欠落と誤記）を生む。⭐**監視法 = 凍結を述語で引く**（「何が X を表現するか」を凍結 file 全体に問う・1 型だけ見て「無い」としない）— over-claim（全称 fail-closed）検出と同根の「述語 × 全空間」規律。
+
+**先祖返り/先走り 無し**（frozen 不変・D1.1-B freeze 状態不変）。
+
+⇒ ⭐**pQ 訂正は正確**（契約層は ControlMode で駆動/保持を区別・pQ 原主張は 1 型 tunnel-vision の誤り）。**ControlMode/ControlResourceSpec は凍結のまま**（不要 delta なし）。**監視 duty に frozen-vocabulary under-statement を追加受諾**（監視法 = 述語 × 凍結全空間）。
+
+**次**: standing 監視（over-reach[subdivision 決定] + over-claim + **under-statement[凍結語彙過小]** の 3 軸）+ freeze 後 D1.1-C。**私 = 追加 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
