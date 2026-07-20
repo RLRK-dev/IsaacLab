@@ -316,8 +316,8 @@ Rs の A′ 破棄後、pQ が **B1 前提 claim-set**（evidence artifact・選
 | claim | pQ 実測 | 私の独立検証 |
 |---|---|---|
 | **C1** ArtifactSlot に ref 無 | TRUE | ✅ **TRUE** — 全 4 file の closed query で ArtifactSlot に ref/locator/path/uri 付与 = 0（def `:51` `{state, artifact_hash}` のみ） |
-| **C2** locator rank3 のみ→under-scoped | 訂正形 TRUE | ⚠ **訂正形 TRUE + REFINEMENT**: (a) `ProofItem.ref: str` 必須 ✓ (b) TENSOR_BINDING は 4 evidence grade で非空 ✓（UNKNOWN=空は無 proof で整合）(c) `artifact_hash == claim_target_hash` **直接**束縛 = FINAL_ARTIFACT_HASH/REPRODUCED_OUTPUT_HASH の 2 種＝rank3(HBR) ✓。**⚠proof_binding 全列挙で claim_target を確立する ProofKind は 4 種**: **TRAIN_RUN_MANIFEST**（TENSOR_BINDING の **EXACT=rank4** proof set に在り manifest が claim_target を列挙＝**間接確立**）+ TRAIN_TIME_CRYPTO_BINDING（NORM 側）。⇒ **TENSOR_BINDING の slot hash 確立は rank3(直接==)+rank4(間接 manifest)** で「rank3 のみ」は不完全。pQ 自身の反証条件 (iii) の broad reading で 2 件 hit。premise set は「直接==束縛」と「間接確立」を分離すべき（同型 under-scope の一段深い再発防止） |
-| **C3** slice の EP profile 未規定 | TRUE（不在） | ✅ **TRUE + refinement**: prereg で SHADOW/CLOSED_LOOP/OFFLINE_REPLAY/profile = 0（再現）。**広域反証（charter/RL-Routing/LEDGER/node/D0/SOMA/全 prereg）でも slice の EP evidence profile を pin する記述 0**。⚠**(N-A) 用語衝突** — charter `:13`「boundary-only or real-time **execution** profile」は execution 軸（project は real-time を retain）で EP evidence profile と別（C3 は後者を測っており正）。**(N-B) DC-1 制約**（prereg `:31`）「D1.1-B 完了前は closed-loop eligibility 不可」= slice の到達可能 profile を CLOSED_LOOP 除外で bound + slice run-timing（完了前/後）自体が未決 ⇒ 「未決」consequence を強める |
+| **C2** locator rank3 のみ→under-scoped | 訂正形 TRUE | ✅ (a) `ProofItem.ref: str` 必須 ✓ (b) TENSOR_BINDING は 4 evidence grade で非空 ✓（UNKNOWN=空は無 proof で整合）(c) `artifact_hash == claim_target_hash` **直接**束縛 = FINAL_ARTIFACT_HASH/REPRODUCED_OUTPUT_HASH の 2 種＝rank3(HBR) ✓。⛔~~私の REFINEMENT「rank4 で間接確立ゆえ rank3 のみ不完全」~~ = **撤回（pN V2-B1・§24 訂正表）**: hash **association**（軸A・TRAIN_RUN_MANIFEST 等が rank4 で claim_target を列挙）と target-byte **locator**（軸B・ref が target 実体を解決）は別軸。B1 は軸B ゆえ **原形「rank3 のみ」が正**。私は 2 軸を混同した |
+| **C3** slice の EP profile 未規定 | TRUE（不在） | ✅ **TRUE + refinement**: prereg で SHADOW/CLOSED_LOOP/OFFLINE_REPLAY/profile = 0（再現）。**広域反証（charter/RL-Routing/LEDGER/node/D0/SOMA/全 prereg）でも slice の EP evidence profile を pin する記述 0**。⚠**(N-A) 用語衝突** — charter `:13`「boundary-only or real-time **execution** profile」は execution 軸（project は real-time を retain）で EP evidence profile と別（C3 は後者を測っており正）。⛔~~**(N-B) DC-1 が CLOSED_LOOP を除外し SHADOW/OFFLINE に限定**~~ = **撤回（pN V2-B2・§24 訂正表）**: prereg:18 着手順 = B→C→slice ゆえ slice は B/C **後**に走り、DC-1（pre-B 排除）は適用されず **3 profile とも未決**（C3 の「完全未決」を**強める**、限定ではない）。私は prereg:18 を目にしながら run-timing の含意を誤読 |
 | **C4** 両 slot 同型 | 偽（訂正形で成立） | ✅ **原形 FALSE / 訂正形 TRUE** — OFFLINE_REPLAY: TB=not_applicable / NORM=required（他 2 profile は両 required）・proof_policy も EXACT で NORM のみ NORMALIZER_HASH+FINAL_ARTIFACT_HASH。locator gap 構造は同型・profile/proof 適用は非対称 |
 
 **完全性**: custody record 質問（§2）は C1(ref無)+C2(rank3 locator)+C3(slice=SHADOW rank2)+C4(両slot同型)を逐語含む ⇒ **C1-C4 = Rs へ渡した事実主張の完全集合**（漏れ 0）。
@@ -327,3 +327,20 @@ Rs の A′ 破棄後、pQ が **B1 前提 claim-set**（evidence artifact・選
 **未測定への追加事実（pQ の deferred NORM に関連）**: NORM の EXACT proof set は **FINAL_ARTIFACT_HASH（直接束縛）**を含む一方 TB の EXACT は含まない ⇒ **rank4 での直接/間接も slot 間で非対称**（NORM 測定時に反映すべき）。
 
 **役割の境界（Rs 破棄の教訓を適用）**: 本検証は on-disk fact の照合のみ。**A/A′/B の選択・materiality・profile 決定は一切判定しない**（premise 確定=Rs、profile 決定=Rs/VT-DESIGN）。**B1 = OPEN 継続**。私 = 正しい前提での再上程を待って verify 保留（self-start なし）。impl/training/authority CLOSED。
+
+### §24 訂正 — pN EVIDENCE HOLD V2-B1..B4（私の refinement over-reach、on-disk で pN 正を確認・2026-07-20 17:30 実測）
+
+pN が claim-set v2（私の §24 refinement を fold した版）に **V2-B1..B4** を出し、**私の §24 の 2 refinement（C2 の rank4・C3 の N-B）が over-reach**と判明。全 4 点 on-disk 確認 = pN 正。⚠**前回の materiality 越権とは別種の失敗** = verifier として under-grounded な「refinement」を足し、正しい premise を濁した（観察「X を見た」から推論「ゆえに premise は Y」へ grounding 無しに飛んだ）。上表 C2/C3 セルに strike 反映済。
+
+| # | pN 指摘 | on-disk 確認（私） | 私の §24 error |
+|---|---|---|---|
+| **V2-B1 (CRIT)** | hash **association** と target-byte **locator** は別軸 | TRAIN_RUN_MANIFEST rule=`artifact_hash=manifest sha256; manifest lists claim_target` ⇒ ref は **manifest bytes** を解決（target 実体でない）/ TRAIN_TIME_CRYPTO_BINDING は blob 自身。FINAL/REPRODUCED のみ `artifact_hash==claim_target`＝ref が **target 実体**を解決 | **C2 refinement 撤回**: 私の「rank4 で claim_target 確立ゆえ rank3 のみ不完全」は **軸A(association)**。B1 は **軸B(target-byte locator)** で軸B では **原形「rank3 のみ」が正**。2 軸混同 |
+| **V2-B2 (CRIT)** | DC-1 は pre-B early run のみ排除 | prereg:18 着手順 = **B→C→slice** ⇒ slice は B/C **後**に走る ⇒ DC-1（pre-B 完了排除）適用されず **CLOSED_LOOP 排除されない・3 profile 未決** | **N-B 撤回**: 私の「DC-1 が CLOSED_LOOP 除外」は誤り。prereg:18 を目にしながら run-timing の含意を誤読（**転記/伝播前に読め の再発**）。正 = 3 profile 全開＝C3「未決」を**強める** |
+| **V2-B3** | locator-gap 同型 = schema 層のみ | schema 層（ArtifactSlot ref無・claim_targets 束縛）同型 / **end-to-end 非対称**: NORM の EXACT は FINAL_ARTIFACT_HASH（rank4 直接 locator）在・TB は無 | **「locator gap 同型」を schema 層限定に訂正**、end-to-end FALSE（私の §24「追加事実」の NORM/TB rank4 差が exactly これ — 観察したが「同型」訂正に繋げず） |
+| **V2-B4** | C4 反証条件が自己矛盾 | CLOSED_LOOP/SHADOW は既に両 required で「一致」⇒ 条件常時発火し (b) を偽化 | claim-set 側 fix（「**OFFLINE_REPLAY でも一致すれば FALSE**」へ）。私は C4 真偽は検証したが**反証条件の coherence を未検査** |
+
+**訂正後の premise（正）**: C1=TRUE / **C2**=軸B(locator)は **rank3 のみ**（原形正）・軸A(association)は rank3+rank4（2 軸分離）/ **C3**=slice の EP profile **完全未決**（3 profile 全開・DC-1 は bound しない）/ **C4**=schema 同型・end-to-end 非対称。**consequence（前提確定まで選択肢不能）= 変わらず SOUND**（私の誤 refinement を除いても C3 完全未決で locator が覆う grade/profile が定まらない）。
+
+⭐**恒久教訓（verifier refinement over-reach）**: verifier の第一義務は claim を on-disk で **clean に確認/反証**すること。**refinement/elaboration を足す時、その結論を primary claim と同等に grounding せよ** —「X を観察した」は「ゆえに premise は Y」を grounding 無しに licenses しない（推論は別 claim）。正しい premise を under-grounded な refinement で濁すのは net-negative。技術面: **hash association ≠ target-byte locator**（hash 値の確立 ≠ 実体を fetch する ref）を分離せよ。[[feedback-an-absence-claim-must-be-read-not-relayed-2026-07-15]]（prereg:18 を読まず伝播）+ [[feedback-the-boundary-question-and-the-identity-question-are-different-2026-07-15]]（軸A/軸B）。
+
+**pN 指定順**: pS §24 訂正（本節）→ 先 bank → claim-set 再 bank → pN 再依頼。dispatch = pQ。**私 = claim-set 再 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
