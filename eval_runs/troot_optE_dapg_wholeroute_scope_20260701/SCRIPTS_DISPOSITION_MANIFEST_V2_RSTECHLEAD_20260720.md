@@ -1,11 +1,13 @@
 # SCRIPTS DISPOSITION MANIFEST v2 (p4 / RS-TECH-LEAD, 2026-07-20)
 
+**v2.2 execution record (2026-07-20 09:5x JST)** — steps 0-4 EXECUTED under pN GO 09:43 (revised
+order); see §6/§7. Canonical bar now **35** = A 27 + D 5 + snapshot 3.
 **v2.1 disposition fold (2026-07-20 09:3x JST)** — pN court verdict 09:24 folded: §3 E = **ADOPT**
 (gen4 DELETE + consumer5 RETIRE, one atomic bundle) · §4 = **DELETE** both · §5 = **RETAIN +
 records-only docstring correction** · §1 `newton_routing_utils` = classification **env-class**
 (placement), action unchanged PHYSICS_REWRITE. v2.0 as-read sha256 =
-`499b21b0e2dfa13ca6e8810d70f09fc94a63ca3a09fcd7217b0da0b9004828bc`. **Nothing executed yet** — rows
-adopted here await the post-readback execution GO. Canonical guard note added to §0.
+`499b21b0e2dfa13ca6e8810d70f09fc94a63ca3a09fcd7217b0da0b9004828bc`; v2.1 banked blob =
+`ec0e5211975c` (c18). Canonical guard note added to §0.
 
 Supersedes manifest v1 (`ARM_CONTROL_REMOVAL_SOURCE_REVIEW_RSTECHLEAD_20260719.md` §14, as-read
 sha256 `10d1bad3a0511f4d744a636c7106cd9bde584820f4ae711c3923cb70e31ed403`).
@@ -160,17 +162,38 @@ destroyed an unrelated file on a false edge.
 |---|---|---|---|
 | `thread_isaac_lab/scripts/test_newton_phase5_ground_collision.py` | `659cac050e50` | **0** | **pN 09:24 = RETAIN + records-only docstring correction (adopted)**: replace the stale current-dependency wording on `diag_particle_q_layout` with a reference to its historical evidence blob `0ef8a4b31249` (its §2 row blob at c17); solver behaviour and test body untouched. **Execution: pending post-readback GO.** |
 
-## §6 Execution status — nothing executed (all dispositions now adjudicated except D)
+## §6 Execution status (v2.2) — steps 0-4 EXECUTED under pN GO (09:43); A pending
 
 | group | rows | disposition (pN 08:04 + 09:24) | execution |
 |---|---|---|---|
-| A PHYSICS_REWRITE | 4 | adopted; `newton_routing_utils` = env-class by placement, action unchanged, no solo land | pending |
-| B/C DELETE | 14 | adopted; closure verified 0 consumers | pending (executable) |
-| D BLOCKED_OWNER | 1 | **stands — not touched** (aerial excluded) | — |
-| E MPPI bundle | 9 | **ADOPTED 09:24**: gen4 DELETE + consumer5 RETIRE, one atomic commit | pending |
-| §4 additions | 2 | **DELETE (09:24)** | pending |
-| §5 correction | 1 | **RETAIN + records-only docstring fix (09:24)** | pending |
-| **total** | **31** | covers 125/125 scripts FAILs | 30 adjudicated / 1 blocked (D) |
+| A PHYSICS_REWRITE | 4 | adopted; `newton_routing_utils` = env-class by placement, action unchanged, **atomic with 11-consumer adaptation + tests, no solo land**; `test_newton_clip_routing` needs surviving positive-control acceptance (pN 09:43) | **pending — next chunk** (p5 physics-replacement semantics consult per §14.14) |
+| B/C DELETE | 14 | adopted; closure verified 0 consumers | **EXECUTED c20** |
+| D BLOCKED_OWNER | 1 | **stands — not touched** (aerial excluded) | — (5 FAILs carry) |
+| E MPPI bundle | 9 | ADOPTED: gen4 DELETE + consumer5 RETIRE, one atomic commit | **EXECUTED c22** |
+| §4 additions | 2 | DELETE | **EXECUTED c21** |
+| §5 correction | 1 | RETAIN + records-only docstring fix | **EXECUTED c20** (atomic with B/C per pN step-1) |
+| **total** | **31** | covers 125/125 scripts FAILs | 26 executed / 4 pending (A) / 1 blocked (D) |
+
+## §7 EXECUTION RECORD (steps 0-4, 2026-07-20 09:4x-09:5x JST, branch `probe/pd1-arm-pd`)
+
+Authority: pN execution GO 09:43 (Rs option B / isolated worktree / adjudicated rows only), revised
+order followed exactly. Every bank: clean tree at commit, canonical guard rerun at the banked sha,
+**exact expected decrement**, FAIL-line-count == `LAYER8_FAIL` identity, import-closure closed query
+(no survivor imports a deleted stem), `py_compile`+`ruff` on the one edited file (7 findings pre-edit ==
+7 post-edit ⇒ 0 new). Pre-delete git blob SHAs recorded in each commit message + §1-§5 tables.
+
+| step | commit | content | canonical `LAYER8_FAIL` | buckets (envs/scripts/skills) |
+|---|---|---|---|---|
+| 0 | c19 `78431144f0` | cherry-pick pN F3 guard `7803f58f17` (guard blob **`f498f888f18c`** exact) | **128** baseline fixed | 0 / 125 / 3 |
+| 1+2 | c20 `56bca10f48` | B/C DELETE 14 + §5 ground-collision docstring fix (atomic — no stale-reference intermediate state) | 128 → **81** | 0 / 78 / 3 |
+| 3 | c21 `2ada23b6ab` | §4 DELETE 2 | 81 → **79** | 0 / 76 / 3 |
+| 4 | c22 `873c255ddb` | E bundle: gen4 DELETE + consumer5 RETIRE (single atomic commit) | 79 → **35** | 0 / 32 / 3 |
+
+Residual 35 = **A group 27** (`test_newton_clip_routing` 17 + `newton_routing_utils` 7 +
+`test_grip_modes` 2 + `dry_run_43step` 1) + **D aerial 5** (BLOCKED_OWNER) + **`skills/snapshot.py` 3**
+(separate owner gate). After A completes: floor = **8** (D 5 + snapshot 3) — **Layer8 = 0 is not
+reached by this manifest alone**, per pN 09:43. Full hooks + two-key precede any promotion/landing;
+main-tree, push, and training remain CLOSED.
 
 Per-row acceptance leg (uniform): execute → rerun `check_control_method.sh` **at the banked post-change
 sha on a clean tree** → assert (a) that file's per-file FAIL count is 0, (b) `LAYER8_FAIL` drops by
