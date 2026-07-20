@@ -1,4 +1,4 @@
-# WMSO D1.1-B `tensor_binding` — DESIGN (v10)
+# WMSO D1.1-B `tensor_binding` — DESIGN (v11)
 
 - node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2); v1 = 2026-07-20 09:56 JST（実測）; **v2 = 2026-07-20 **11:08–11:13 JST**（実測 bracket: 著述開始前 11:08:16 / bank 時 11:13:35。⚠records-fix: 初稿は「11:10」と実測せずに記載した date-THEN-write 違反 — 実測 bracket に置換）— CC Debate cycle-1 FAIL の fold）; v3 = 2026-07-20 11:43 JST（実測 — pN exact-pin HOLD B1-B5 の fold）; v4 = 2026-07-20 12:10 JST（実測 — cycle-2 debate の fold）; v5 = 2026-07-20 12:40 JST（実測 — pN exact-pin HOLD R1-R3 の fold）; v6 = 2026-07-20 13:06 JST（実測 — pS v5 PASS 後に著者が自検出した検証計器の欠陥 1 件の fold）; v6.1 = 2026-07-20 13:17 JST（実測 — pN exact-pin HOLD H1-H3 の fold: 順序規律・fail-closed コマンド事前登録・records-fix。設計 semantics 不変）; v7 = 2026-07-20 14:43 JST（実測 — ⭐**Rs 裁定 A′ の fold**: B1 hash 供給 locator を確定。**v5 以来はじめての設計 semantic 変更**）; **v7.1 = 2026-07-20 15:08 JST（実測 — pS N-1 の scope 修正 + Rs 裁定 custody record 追加。版歴 = §12）**
 - 統治: **scope prereg v1.1.1**（`ffd06623e22f…` @ `cf94601f7a`・pN SCOPE CONCUR `0a5d0969218c…` @ `ccd8342c30`）§2 IN の実装設計。**土台 = frozen D1.1-A v2.11.2**（DESIGN `00192d20ca00b654…` / EP v1.9 md `c474acea7c58…` / JSON `e63176af9bc3…`）— **frozen 3 file を編集せず・schema delta を導入しない**（必要時は supersession + Rs review、prereg §1.3）。
@@ -231,7 +231,7 @@ tensor_binding_hash = H_WCJ(TensorBindingSpec)   # ExecutionBundle.tensor_bindin
 
 **適用位置**: 値/構造/schema/mask/belief/版/cast = TensorBindingSpec 単体 validator（standalone）。hash 供給 + cross-artifact = certify 段。
 
-✅**供給 locator = D-1（`EvidenceRecord.source_ref` の束縛）— CC1 の設計判断**。⚠**status = PROVISIONAL（Rs confirm 前）**（v10 で pS §27(B) LOUD FLAG を fold）。
+✅**供給 locator = D-1（`EvidenceRecord.source_ref` の束縛）— CC1 の設計判断・✅CLOSED 確定**（v11: **2026-07-20 21:44 に Rs が委譲を ratify・veto 不行使**）。
 
 > ### 判断の所在（重要 — v10 で権威の層を分離）
 >
@@ -239,7 +239,7 @@ tensor_binding_hash = H_WCJ(TensorBindingSpec)   # ExecutionBundle.tensor_bindin
 >
 > **(b) ✅検証済の前提**（D-A..D-D）— 導出 claim-set `546762259ec9518302495d6374d64bef5b24650b22f3e69583d1e84102c9e1e7` @ `57eac40c09` ／ pS `2bec590e3d7d…` ／ pN exact-pin PASS 20:35（transcript `67a989d9ca9f…` @ `18bd6466d7`）。⚠**これらの pin が覆うのは前提の事実性のみ**であり、下記 (c) を**覆わない**。
 >
-> **(c) ⚠未検証の authority 前提** — 「Rs が 20:41 の交換（逐語「はい」）で本件を私の裁量に委ねた」は **私の session narrative であり、on-disk の独立 source が無い**。custody record = **`WMSO_RS_B1_DELEGATION_RECORD_20260720.md`**（⚠**bank は可視化であって検証ではない** — ratify できるのは Rs のみ）。⇒ **B1 CLOSED は Rs confirm/veto 前の provisional**。
+> **(c) ✅authority 前提 = Rs が ratify 済（2026-07-20 21:44）** — 「Rs が 20:41 の交換で本件を私の裁量に委ねた」は **v10 時点では私の session narrative で on-disk 未検証**だったが、**書面の単一 yes/no（両分岐の帰結を明記）に対し Rs が逐語「はい」で ratify し、veto を行使しなかった**。custody record = **`WMSO_RS_B1_DELEGATION_RECORD_20260720.md` §5**。⚠**bank は可視化であって検証ではない**という §0 の原則は撤回しない — 閉じたのは *この* 主張であって一般則ではない。⚠**残差**: 転記者は依然として私である（消えたのは「Rs が見ていない主張が面に載る」状態）。
 >
 > ⭐**本項は自検出でなく pS §27(B) の指摘**（pS record `f6ff9c4caef7…`）。v9 は **(b) の pin を (c) に隣接して置いたため pin が authority も覆うように読める構造**になっており、しかも当該 transcript 自身が「does not select A/A-prime/B … Those remain Rs/design decisions」と明記していた ⇒ **narrative が引用先と矛盾**。A′ 破棄・C3 #1 破棄と**同じ族**（未検証の主張が決定面に載る）。
 >
@@ -394,7 +394,7 @@ v1 は本 gate 未実施だった。実施結果（on-disk 実測）:
 ## 10. Open points
 
 - 本 **v6.1** = **cycle-1（FAIL）→ pN HOLD B1-B5 → cycle-2（実施済・max-2-cycles 到達）→ pN HOLD R1-R3 → 著者自検出 S-1 → pN HOLD H1-H3 の fold**。以後の debate 再実行は Rs 裁量（pN「追加 debate 不要」）。fold の検証は §5 chain の pS / pN 両軸が担う。
-- ⚠**hash 供給 locator = CLOSED (PROVISIONAL)（D-1 採択・CC1 の設計判断・v9／⛔Rs confirm 前）**: **設計軸（機構）は pS §27(A) で PASS**（反証条件 4 件は完全集合・全て不発火）。⛔**残る gap = authority 軸**: 採択の前提である「Rs 委譲」が **on-disk 未検証の narrative**（pS §27(B)）⇒ **Rs confirm を得るまで provisional**。custody = `WMSO_RS_B1_DELEGATION_RECORD_20260720.md`（**bank ≠ 検証**）。対象 slot = **`tensor_binding` と `normalization` の両方**。**採択 = D-1（`EvidenceRecord.source_ref` の束縛）**。frozen delta なし。⚠**A′ 裁定の復活ではない**（A′ = VOID のまま・権威の根拠は CC1 の設計判断 + two-key 検証済 前提）。他 3 案を落とした理由・反証条件・実装形 = **§4**。**D-3 が必要になった場合のみ Rs 専権として再上程**。旧上程資料（A/A′/B の比較と rank 別 locator 表）は §4 の折りたたみに SUPERSEDED として保持。⚠**残る派生 open は §7 の到達性負例**（`E_BINDING_HASH_MISMATCH` が非 canonical bytes で実際に発火すること）— impl leg で実証必須。
+- ✅✅**hash 供給 locator = CLOSED 確定（D-1 採択・CC1 の設計判断・v11）**: **設計軸（機構）= pS §27(A) PASS**（反証条件 4 件は完全集合・全て不発火）＋ **evidence 軸 = pN exact-pin PASS**（3 sha 一致）＋ **authority 軸 = ✅Rs ratify 済（21:44・veto 不行使）**。⇒ **3 軸すべて CLOSE**。custody = `WMSO_RS_B1_DELEGATION_RECORD_20260720.md` §5。対象 slot = **`tensor_binding` と `normalization` の両方**。**採択 = D-1（`EvidenceRecord.source_ref` の束縛）**。frozen delta なし。⚠**A′ 裁定の復活ではない**（A′ = VOID のまま・権威の根拠は CC1 の設計判断 + two-key 検証済 前提）。他 3 案を落とした理由・反証条件・実装形 = **§4**。**D-3 が必要になった場合のみ Rs 専権として再上程**。旧上程資料（A/A′/B の比較と rank 別 locator 表）は §4 の折りたたみに SUPERSEDED として保持。⚠**残る派生 open は §7 の到達性負例**（`E_BINDING_HASH_MISMATCH` が非 canonical bytes で実際に発火すること）— impl leg で実証必須。
 - §5 の必須化可否・class 台帳・判定器・窓幅 = slice 詳細 prereg + Rs 裁定。
 - U-2 の producer artifact 阻止・U-5 の demo 移行・**U-6 の topology ledger 束縛** = D1.1-C prereg への必須入力（**DDR への登録 = p6 へ dispatch 済** — cycle-2 CC5-CH4: 4 carry がいずれも DDR 未登録では次 chunk の [DEFER-RECON] が素通りする）。
 - **`stats_key` の一意性規則**（per-feature 一意か共有可か）= 未定・§1.2 参照。
@@ -480,4 +480,11 @@ v1 は本 gate 未実施だった。実施結果（on-disk 実測）:
   - **なぜ気づけなかったか**: C3 は structured-select（明らかに custody 対象）、今回は会話中の自由発話ゆえ「単なる context」と扱った。**この区別に原則が無い** — どちらも権威が乗る human 発話である。⇒ 恒久規律: **設計面に書く authority が human 発話に依拠するなら、同一ターンでその発話を custody record にする**。
   - ⚠**検出者 = pS（自検出ではない）**。v6 の S-1 は自検出だったが、本件は**私が自分で気づけなかった class**。
   - **設計 semantics = 不変**（D-1 の実装形・error code・反証条件・fixture・builder はいずれも無変更）。
+- **v11**（2026-07-20 21:44 実測、本版）— ✅**Rs が委譲を ratify ⇒ B1 = CLOSED 確定（PROVISIONAL 解除）**:
+  - **Rs 逐語「はい」**（21:44）が答えたのは、私が書面で出した**単一の yes/no**:「20:41 の『はい』は B1 の解法選択（D-3 を除く）を私の裁量に委ねる意味か」＋ **両分岐の帰結を明記**（はい → CLOSED 確定 ／ いいえ → OPEN へ戻す）。⇒ **veto 不行使・D-1 採択が確定**。
+  - ⭐**本版の手順が本 arc の教訓の適用そのもの**: confirm を**反映する前に** confirm 自体を custody record §5 に記録した（「権威が乗る human 発話は同一ターンで record にする」）。**20:41 の失敗を 21:44 に繰り返さない**ことが目的。
+  - **20:41 との差（§5.3）**: 問いの形（多論点の説明 → **書面の単一 yes/no**）／前提の状態（未検証 → **two-key 検証済 + record の限界を自己申告**）／記録（無し → **同一ターンで作成**）。⇒ 21:44 は ratify として成立する。
+  - ⚠**潰さない残差**: (i) **§0 の原則「bank ≠ 検証」は撤回しない** — 閉じたのは *この* 主張であって一般則ではない。(ii) **転記者は依然として私**（消えたのは「Rs が見ていない主張が面に載る」状態であって、転記という媒介ではない）。
+  - ⛔**本 confirm が与えないもの**: **freeze**（別 gate・**Rs 専権**）／ implementation・training・closed-loop authority（**CLOSED 継続**）／ D1.1-C・slice 着手 ／ D-3（frozen schema delta）の許可。
+  - **設計 semantics = 不変**（D-1 の実装形・error code・反証条件・fixture・builder はいずれも無変更。v9 以降 3 版連続で semantic delta = 0）。
 - **v1 → v2 の非変更点**: 統治・carries・frozen 不変・impl CLOSED・§0 の WCJ 継承方針（B-declared 分を分離明記した点のみ変更）。
