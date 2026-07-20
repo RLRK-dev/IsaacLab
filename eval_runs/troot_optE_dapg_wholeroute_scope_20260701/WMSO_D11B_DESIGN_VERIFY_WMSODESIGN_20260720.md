@@ -222,4 +222,39 @@ pN exact-pin が v6（`0459a636e672`）を **HOLD H1-H3**。⚠v6 は pS→pN �
 - ⚠**B1 locator = 依然 OPEN**（v5 から不変・Rs 裁定 A/A′/B × `tensor_binding` + `normalization` 両 slot・設計欠陥でない）。**freeze は Rs の B1 裁定を要す**。
 - ⚠**two-key**: 本 PASS = 設計軸のみ・**pN exact-pin（v6.1）再判定を代替しない**。H1 是正順で **本 addendum bank → pN 再判定 → Rs B1 → freeze**。
 - ⭐**設計 content は v5（R1-R3）以降不変** — S-1/H1-H3 は全て verification 計器・records・process の硬化であり設計 semantics に触れていない。設計は収束済で、残 churn は harness 健全性のみ。
-- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin（v6.1）+ Rs B1 裁定 待ち（self-start なし）**。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin（v6.1）+ Rs B1 裁定 待ち（self-start なし）**。→ §20 で supersede（v7 = Rs A′ の semantic fold）。
+
+## 19. Rs 裁定 A′ の v7 fold — 設計 semantic verify（2026-07-20 15:0x 実測）
+
+⭐**Rs が B1（hash 供給 locator）= A′ を裁定**（14:39・frozen `EvidenceRecord.source_ref` を束縛）。⚠**v6.1 で chain 初の完全 two-key close 成立**（pS `251e8c8516f2` @ `ed60396e88` / pN exact-pin PASS-CLOSE `a31498dd0582` @ `ccff616b89`・14:35 — **pN も私の H2 fail-open を独立再現**: Infinity 注入 direct rc1 / `./isaaclab.sh -p` traceback+rc0）→ Rs A′ → **v7**（`6bbf64b3575f` @ `a8b9d4004a`）。**v5 以来はじめて設計 semantic 節（§2/§4/§7/§10）に触れる** ⇒ v6.1 two-key は v7 を覆わず、**full semantic verify**（delta scope でない）。
+
+**pins（held commit `a8b9d4004a`・6 file worktree drift 無し・method=sha256sum）**: design v7 `6bbf64b3575f` ✓ EXACT / builder `c74ca3b36193`（不変・code diff 0）✓ / fixtures 4 本不変 ✓。**Scope**: design doc 51+/9-・touched = header + §2（DC-1 unblock）+ §4（A′ 確定形 +30 行）+ §7（test）+ §10（B1 CLOSED）+ §12（v7 entry）。設計 semantic 変更ゆえ内容を frozen に対し on-disk 実測（frozen sha 一致: DESIGN `00192d20ca00` / EP JSON `e63176af9bc3` / EP md `c474acea7c58`）:
+
+| A′ 主張 | frozen 実測（私） | 判定 |
+|---|---|---|
+| `expected_sha256`=claim_target_hash（凍結側束縛済） | EP JSON `claim_targets`: TB→`execution_bundle.tensor_binding.artifact_hash` / NORM→`…normalization.artifact_hash`・不一致=E_PROOF_MISBOUND（frozen `:253`） | ✓ |
+| `ref`=`source_ref`（B 側束縛=B1 実体） | `:252 source_ref: str`（非 Optional）/ `:269 records: tuple[EvidenceRecord]`（全 component が record）/ `:551` source_ref=hashed（差替→evidence_bundle_hash に出る=tamper-evident） | ✓ **全 grade に locator**（rank3 限定旧表を解消） |
+| ArtifactSlot に ref 無（B1 root） | `:51 ArtifactSlot={state, artifact_hash}` ref field 無し | ✓ |
+| source_ref 指示対象=frozen 未規定（non-delta） | EP JSON source_ref=0 / EP md（`c474acea7c58`）source_ref=0（閉じた query） | ✓（N-1 参照） |
+| E_BINDING_ARTIFACT_UNRESOLVED 撤回→frozen E_PROOF_ARTIFACT_UNRESOLVED | frozen `:615`/`:285` に実在・v7 の撤回 code = closed query で **active 宣言 0**（4 箇所全て strike/撤回文/SUPERSEDED-`<details>`/§12 記録） | ✓ 面間整合 |
+| EXPLICIT_NONE 免除・UNKNOWN 非免除 | EP JSON `exemption_reporting.explicit_none="recorded loud in UsageEligibilityReport.exemptions"` / `unknown_slots="never exempt"` | ✓ |
+
+⭐**profile 非対称を私が独立実測で追認**: OFFLINE_REPLAY は **TB を `not_applicable`「replay does not re-execute binding」・NORM は required**（CLOSED_LOOP rank3 / SHADOW rank2 は両 required）。加えて proof_policy も EXACT/TB=[MANIFEST,COMMIT,CONFIG] vs EXACT/NORM=[…,NORMALIZER_HASH] と非対称。⇒ **v7 §4 表の slot 分離は正**。⚠**私の v4-v6.1「両 slot 同型」PASS は不正確**（locator-gap の同型は検証したが per-slot profile 適用を未測＝存在≠十分 / 全 surface 未照合の再発。A′ は壊れない=source_ref は required record 毎に locator 供給）。**own**。
+
+**先祖返り/先走り**: v7 は A′ を faithful 実装（A/B に戻さず）・§10 B1 を CLOSED 化・旧上程資料は `<details>` SUPERSEDED に正しく格納（active §10 と矛盾せず）・§7 到達性負例は「impl leg で実証必須」と honest（freeze-ready を主張せず）。**FOUNDATIONAL 非抵触**（source_ref=evidence provenance・control/geometry/kinematic 不触・ControlMode 不変）・**rule-g**（Rs A′ を反映・C-1 custody 条件付）・**rule-h**（profile 全列挙・subset 一般化なし＝むしろ旧 over-generalization を訂正）。
+
+**条件（fold 欠陥でなく downstream custody/records）**:
+- **C-1（custody）**: **Rs の 14:39 A′ 裁定の standalone verbatim が未 bank**（v7 doc + pQ relay のみ・grep で独立 Rs 記録 0）。pN PASS-CLOSE transcript は bank 済（`ccff616b89`）なのと対照。freeze は A′ を Rs 権威で確定するゆえ **freeze 前に Rs A′ verbatim を bank 推奨**（過去の pN transcript custody flag と同型）。
+- **C-2（records freshness）**: **LEDGER D1.1 行 + DDR #27 が stale** — 両者「B1 BLOCKED / Rs 裁定待ち」+ #27 は「normalization slot も同型」（v7 が訂正した非対称）のまま。B1 CLOSED/A′ + 非対称を反映要（確定事項即反映 gate・**#27 は D1.1-C [DEFER-RECON] を gate** ゆえ特に）。
+- **N-1（minor・非 blocker）**: frozen DESIGN `:396` は source_ref を migration-fixture provenance に使用 ⇒ v7 §4「frozen 一切規定していない」は「**TB/NORM の artifact 解決用途で未規定**」に scope 限定が精確（A′ は provenance role と整合する refinement ゆえ依然 non-frozen-delta）。
+
+## 20. Verdict（v7・A′ fold）
+
+**設計軸 = ✅PASS-WITH-CONDITIONS（DESIGN v7・pin `6bbf64b3575f` @ `a8b9d4004a`）— Rs 裁定 A′ の fold faithful + sound・B1 CLOSED**
+- A′ 全前提を frozen（sha 一致）に対し on-disk 実測（source_ref 必須/全 record/hashed・claim_targets 両 slot・E_PROOF_* 実在・EXPLICIT_NONE 免除・source_ref 未規定 closed query）・fold は A′ を faithful 実装・must-fix 0。
+- ⭐**profile 非対称（OFFLINE_REPLAY: TB 免除/NORM required）を独立追認** → v7 §4 分離は正・**私の v4-v6.1「両 slot 同型」の不正確を own**（locator 同型は真だが profile 適用は未測）。
+- error-code reuse-first（E_BINDING_ARTIFACT_UNRESOLVED 撤回・closed query で active 0）+ E_BINDING_HASH_MISMATCH 限定 + §7 到達性負例必須（R1 教訓の自適用）= sound。
+- **条件（downstream・fold 欠陥でない）**: **C-1** Rs A′ verbatim 未 bank / **C-2** LEDGER+DDR #27 stale（B1→CLOSED/A′ + 非対称）/ **N-1** §4「frozen 未規定」scope 精確化（非 blocker）。§7 到達性負例 = impl leg。
+- ⚠**two-key**: 本 PASS = 設計軸のみ・**pN exact-pin（v7）再判定を代替しない**（pN が semantic 変更を exact-pin 判定）。H1 順序で **本 addendum bank → pN exact-pin（v7）→ Rs freeze**。
+- ⚠**freeze gate**: v6.1 と異なり B1 は CLOSED（Rs A′）ゆえ freeze の残 gate = **pN exact-pin（v7）PASS-CLOSE + C-1/C-2 custody 反映**。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin（v7）待ち（self-start なし）**。
