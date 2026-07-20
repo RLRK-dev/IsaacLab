@@ -60,10 +60,37 @@ LEDGER row44 実読: scope 段 = **3 軸 CLOSE**（Rs 着手 08:42 / pS 設計�
 - **私が on-disk 独立検証**: §1 pin 3種 / §3 の 4 premise（resolver・EP grade 表・§5D・golden 再計算）/ C-1/C-2/§5/§4 の設計判断 / FOUNDATIONAL・rule-g・rule-h・自立性。
 - **debate（CC6）検証済として受領・私は再 grep せず**: §9 reuse gate の fail-open 行 cite（`observation_manager.py:271-272`）/ obs_builder dead code / D-29 mis-citation 修正後の cite。いずれも保守的方向（custom spec 正当化・records 精度）で **設計軸 blocker でない**。
 
-## 9. Verdict
+## 9. Verdict ⛔SUPERSEDED（2026-07-20 11:45 — 正 = §10）
 
-**設計軸 = ✅PASS（DESIGN v2・pin `7248de8600a4` @ `9d5d44e329`）= pS final-design PASS**
+> ⛔ 当初の「pS final-design PASS」は**誤り**。pN exact-pin DESIGN HOLD B1-B5（11:39:03）が supervene し、私は 5/5 を held v2 pin + frozen で on-disk CONCUR（§10）。当初 verdict（下記・打消）を撤回。訂正後 = **⛔HOLD（v3 fold + bounded cycle-2 → pS reverify 待ち）**。
+
+**~~設計軸 = ✅PASS（DESIGN v2・pin `7248de8600a4` @ `9d5d44e329`）= pS final-design PASS~~**（SUPERSEDED → §10 HOLD）
 - CRITICAL 4 fold 全て faithful（**D-1 再導出 = on-disk 完全一致 = closed-query error 再発なし**）・load-bearing premise 4/4 on-disk 検証・C-1/C-2 遵守・§5 PROVISIONAL 健全・§4 frozen delta 非要・FOUNDATIONAL/rule-g/rule-h/自立性 clean・**must-fix 0**。
 - **cycle-2 debate = 私は不要と判断**（v2 は 31 項の忠実 fold・私の独立検証で新規 CRITICAL/HIGH = 0）。ただし skill max-2-cycles ゆえ **pN/Rs 裁量は残る**。
 - ⚠**two-key**: 本 PASS = **設計軸のみ**・**pN exact-pin DESIGN PASS-CLOSE を代替しない**。§5 chain = pS final-design PASS → **pN DESIGN PASS-CLOSE（exact-pin）** → Rs freeze。D1.1-A で pN が私の PASS を 5 度 supervene した pattern を継承 — pN が design 変更 finding を出せば fail-closed loop 再起動（pS/pN 双方再 verify）。
-- **impl/training/authority = CLOSED 継続**。dispatch = pQ。次 = pN exact-pin DESIGN verify → Rs freeze。**私 = pN verdict 待ち（self-start なし）**。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。次 = pN exact-pin DESIGN verify → Rs freeze。**私 = pN verdict 待ち（self-start なし）**。→ §10 で supersede。
+
+## 10. ⛔pN exact-pin DESIGN HOLD B1-B5 supervention — 5/5 CONCUR + own（2026-07-20 11:45 実測）
+
+pN（w2:pN）dispatch 11:39:03: DESIGN v2（pin `7248de8600a4`）exact-pin evidence verdict = **DESIGN HOLD B1-B5**、私の pS final-design PASS を supervene。**私は 5 項を held v2 pin（`git show 9d5d44e329:…`）+ stable frozen に対し on-disk 検証し 5/5 CONCUR。私の PASS は誤り。** WMSO chain で pN が私の PASS を supervene した **6 度目**・⚠**B1+B2 は 5体 CC Debate cycle-1 と私の pS PASS の両方を escape**（= 私が設計軸を実際に見逃した）。
+
+| # | pN finding | on-disk 検証（held v2 pin / frozen — stable 面） | 私の miss | 分類 |
+|---|---|---|---|---|
+| B1 | ArtifactSlot は hash only・resolver は `(ref,expected)` 要・grade 横断の uniform TensorBindingSpec locator/proof 無 → frozen-delta-非要 は **unproven** | frozen L51 `ArtifactSlot={state, artifact_hash}`（**ref なし**）・resolver の `ref` は ProofItem(L245) 側 | **§4/A3 over-claim**: resolver 実在は確認したが **ref 供給（全 grade で uniform proof/locator）を未検証**。「機構の実在」を「機構が invoke 可能」と混同 | 設計軸・私の §4 直撃 |
+| B2 | 3 golden 全て required obs/action.container_dtype を欠く・builder assertion も欠く | **held v2 golden_1 の container_dtype = 0**（`git show 9d5d44e329:golden_1`）・v2 §1.3/§1.4 は container_dtype 必須 → goldens schema-invalid | **fixture の schema 完全性を未検**（hash 再現・builder「PASS」だけ見た＝**bug の下で緑**〔assertion が container_dtype 未検〕）。⚠**本 turn 私は最初 worktree(v3 WIP)を読み「container_dtype 在」と誤認 → held pin で 0 を再確認**（moving-tree hazard 実例） | 設計軸・私の golden 検証直撃 |
+| B3 | MIN_MAX 在・G-3 使用だが validator は mean/std のみ | v2 §4 `E_BINDING_NORMALIZER_VALUE`=mean/std のみ・§1.1 MIN_MAX・G-3 使用 | **面間整合 miss**（scheme × validator 被覆未照合） | 設計軸 |
+| B4 | container dtype の cast semantics / lossless-reject 不在 | v2 §1.3「cast が起きることを明示」のみ・§4 に cast error code 無 | **B2 随伴の未完**（container_dtype を足したが semantics 欠） | 設計軸 |
+| B5 | topology_ledger_hash は frozen HandoffSchemaSpec に representable location 無 | frozen `HandoffSchemaSpec.fields=SemanticFieldSpec{dtype∈FLOAT32/INT32/BOOL}`・v2 §5 topology_ledger_hash dtype「—」 | **「—」dtype を red flag と見ず**（schema 表現可能性未検） | 設計軸 |
+
+**U-5 ↔ portfolio_has_IL = pN も consistent PASS**（私の §6 評価が持った軸）。
+
+**⭐own（恒久・durable lesson）**: 私の supervene 6 回に共通する root = **「存在 ≠ 十分」**（resolver 存在≠ref 供給 / component 存在≠proof 供給 / golden hash 再現≠schema 完全性 / scheme 存在≠validator 被覆 / 「—」placeholder≠representable）。設計軸 verify では **機構の存在に加え、それが available data で invoke 可能・全 grade/scheme を被覆・schema-complete** まで確認する。加えて本 turn の **moving-tree near-miss**（v3 WIP を held v2 と混同しかけた）= verify-at-producing-commit を fixture にも徹底（[[feedback-pin-over-committed-state-not-dirty-tree-verify-in-worktree-2026-07-19]]）。
+
+**cycle-2「不要」判断 = 誤り**: pN 正当に override（**B1+B2 が cycle-1+私の PASS を escape した事実自体が cycle-2 必要の証拠**）。**bounded cycle-2 = REQUIRED**。
+
+**disposition**:
+- pQ = B1-B5 を fold（worktree に **v3 WIP** 進行中: §1.4b cast table・golden 再生成〔container_dtype 込み・worktree sha `af90712a`/`9ddeafc8`/`dd14f6b6`〕等を実測 — ⚠**uncommitted・未 bank ゆえ私は v3 を verify しない**）。
+- 順序（pN 指定）= **v3 fold bank → bounded cycle-2 debate → pS final-design reverify（私の次レグ）→ pN exact-pin**。
+- **impl/training/authority = CLOSED 継続**。
+
+**訂正後 verdict = ⛔HOLD（B1-B5 5/5 CONCUR・v3 fold + bounded cycle-2 → pS reverify 待ち）**。dispatch = pN concurrence（+ pQ 認識済）。**私 = v3 bank + cycle-2 完了 → pS reverify 待ち（self-start なし）**。

@@ -1,6 +1,6 @@
-# WMSO D1.1-B `tensor_binding` — DESIGN (v3)
+# WMSO D1.1-B `tensor_binding` — DESIGN (v4)
 
-- node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2); v1 = 2026-07-20 09:56 JST（実測）; **v2 = 2026-07-20 **11:08–11:13 JST**（実測 bracket: 著述開始前 11:08:16 / bank 時 11:13:35。⚠records-fix: 初稿は「11:10」と実測せずに記載した date-THEN-write 違反 — 実測 bracket に置換）— CC Debate cycle-1 FAIL の fold）; **v3 = 2026-07-20 11:43 JST（実測 11:43:35 — pN exact-pin DESIGN HOLD B1-B5 の fold。版歴 = §12）**
+- node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2); v1 = 2026-07-20 09:56 JST（実測）; **v2 = 2026-07-20 **11:08–11:13 JST**（実測 bracket: 著述開始前 11:08:16 / bank 時 11:13:35。⚠records-fix: 初稿は「11:10」と実測せずに記載した date-THEN-write 違反 — 実測 bracket に置換）— CC Debate cycle-1 FAIL の fold）; v3 = 2026-07-20 11:43 JST（実測 — pN exact-pin HOLD B1-B5 の fold）; **v4 = 2026-07-20 12:10 JST（実測 12:10:36 — B1-B5 限定 cycle-2 debate の fold。版歴 = §12）**
 - 統治: **scope prereg v1.1.1**（`ffd06623e22f…` @ `cf94601f7a`・pN SCOPE CONCUR `0a5d0969218c…` @ `ccd8342c30`）§2 IN の実装設計。**土台 = frozen D1.1-A v2.11.2**（DESIGN `00192d20ca00b654…` / EP v1.9 md `c474acea7c58…` / JSON `e63176af9bc3…`）— **frozen 3 file を編集せず・schema delta を導入しない**（必要時は supersession + Rs review、prereg §1.3）。
 - **binding carries 遵守**: pS **C-1**（frozen enum に member を追加しない。§1.1 は B 新 schema の内部語彙）/ pS **C-2**（drive-substrate taxonomy を焼込まない — §1.6 TimingSpec は SI 量のみ・§8-3）/ prereg §6（DC-1..6・RV5 §6 (i)-(iv)・pN (3)・kinematic 写像・L0 手段裁定）。
 - gate 位置: §5 chain の **design（cycle-1 debate FAIL → v2 fold → pS final PASS → **pN exact-pin HOLD B1-B5** → 本 v3 fold）**。次 = **pN 指示による B1-B5 限定 cycle-2 debate → 必要修正 → pS final-design 再 PASS → pN exact-pin 再 verify → Rs freeze**。**impl/training/authority = CLOSED 継続**。
@@ -53,7 +53,15 @@ class NormalizerBinding:  scheme: NormalizerScheme; stats_key: str          # �
 # scheme 別 stats payload 契約（v3 追加・§12 B-3）: stats_key の指す entry は scheme により型が決まる
 #   MEAN_STD → {"mean": CanonicalDecimal[], "std": CanonicalDecimal[]}   （要素数 = 対象 feature の length）
 #   MIN_MAX  → {"min":  CanonicalDecimal[], "max": CanonicalDecimal[]}   （同上）
-# 述語: 全要素 isfinite / MEAN_STD は std > 0 / MIN_MAX は min < max / 要素数 == length（§4 の E_BINDING_NORMALIZER_VALUE）
+# 述語: 要素数 == 対象 feature の length（index は当該 feature の flatten_order 順）/ MEAN_STD は std > 0
+#       / MIN_MAX は min < max。⚠isfinite は payload が CanonicalDecimal である限り **frozen §2 item 5 の
+#       正規形が構造的に保証**する（NaN/Inf は表現不能）ため独立述語としては vacuous — v4 で「構造的に discharge」
+#       と明記し、四択のうち 1 つを「常に真」として数えない（cycle-2 CC4-C8）。
+#       ⚠`std > 0` は frozen §5 U13 の `std ≥ 0` に対する **B 側の強化**（0 除算回避）であり「履行」ではない
+#       — v4 で B-declared strengthening として明示（cycle-2 CC2-CH7/CC4-C11）。
+#       ⚠`stats_key` の一意性規則は未定（共有可なら要素数述語が矛盾し得る）→ §10 open。
+# 適用順序（v4 追加・cycle-2 CC4-C3）: raw → normalizer → transform → bounds（表明）→ container cast。
+#       MEAN_STD = (x - mean)/std / MIN_MAX = (x - min)/(max - min)。順序も式も hash-visible な意味の一部。
 @dataclass(frozen=True)
 class FeatureBinding:
     field_id: str            # 参照先 semantic field（NFC・非空）
@@ -134,11 +142,13 @@ class ActionBinding:
 | semantic dtype | container FLOAT32 | container INT32 | container BOOL |
 |---|---|---|---|
 | FLOAT32 | 恒等 | ⛔ | ⛔ |
-| INT32 | **可（`\|v\| ≤ 2^24` の範囲でのみ可逆 — 逸脱は `E_BINDING_CAST_LOSSY`）** | 恒等 | ⛔ |
+| INT32 | **可**（可逆性は静的に判定不能 — 下記注記） | 恒等 | ⛔ |
 | BOOL | **可（canonical: false→`0`, true→`1`。読み出しは `v ≠ 0` を true とする）** | ⛔ | 恒等 |
 
 - v1.0 では **混在 vector の container_dtype は FLOAT32 のみ**を実用形として想定するが、単一 dtype 構成では INT32/BOOL container も上表の恒等行で合法。
 - cast は **feature 単位で一様**（同一 feature 内で要素毎に異なる cast をしない）。
+- ⛔**`E_BINDING_CAST_LOSSY` は v4 で削除**（cycle-2 5/5 + NHA）: v3 は `|v| ≤ 2^24` を **standalone validator** に置いたが、TensorBindingSpec は tensor 値を含まないため評価対象が存在せず**到達不能な code** だった。これは v2 が D-18 で除去したばかりの「到達不能 code」類型の再発。**可逆性の義務は §3 `COMPATIBILITY_TEST` の producer 側 obligation として保持**（値が実在する面で検査する）。
+- **BOOL feature には数値段を付けない（v4 追加・cycle-2 CC4-C1/CC2-CH5 = 安全関連）**: `dtype = BOOL` の feature に `normalizer` / `transform` / `bounds` を付すと、BOOL→FLOAT32 の読み出し規約（`v ≠ 0`）の下で **false/true が共に非零に写り mask が無効化される**（実証: mask 対象の validity field に MEAN_STD を付けると false→-1 / true→+1 で両方 valid）。§4 `E_BINDING_NUMERIC_STAGE_ON_BOOL` で禁止。
 
 ### 1.5 lineage 宣言（prereg IN-2 — BC+RL / RL-only の fail-closed bind）
 
@@ -176,7 +186,7 @@ tensor_binding_hash = H_WCJ(TensorBindingSpec)   # ExecutionBundle.tensor_bindin
 
 1. certified LEARNED bundle は `resolved()` ⇒ `tensor_binding` = KNOWN（64-hex）— frozen §1.1/§1.2 から**構造的**に従う。
 2. **TENSOR_BINDING を required とする profile = CLOSED_LOOP（min_grade_rank 3）と SHADOW（同 2）の両方**。OFFLINE_REPLAY のみ `not_applicable`（frozen JSON 逐語「replay does not re-execute binding」）。v1 は closed-loop だけを挙げ、**shadow 運用も同様に gate される事実を落としていた**（§12 D-19）。
-3. **B 完了前**: TensorBindingSpec artifact が存在しないため、KNOWN hash を**正当に**供給できない。⚠**v1 はこれを「構造的」と称したが、正しくは「§4 の hash-identity 検査（`E_BINDING_HASH_MISMATCH` / `E_BINDING_ARTIFACT_UNRESOLVED`）が走って初めて構造になる」**（§12 D-5）。v2 は当該検査を §4 に明記し、供給経路を §4「適用位置」で指名する。
+3. **B 完了前**: TensorBindingSpec artifact が存在しないため、KNOWN hash を**正当に**供給できない。⚠**v1 はこれを「構造的」と称したが、正しくは「§4 の hash-identity 検査が走って初めて構造になる」**（§12 D-5）。⛔**v4 追記（cycle-2 CC2-CH2）**: その供給経路は v3 §4 で**撤回**されたため、**DC-1 の「構造性」は §10 の B-1 解決に BLOCKED**。v2 の「供給経路を §4 で指名する」という結び句は失効。
 
 ## 3. EP 結合 — TENSOR_BINDING evidence の attest 対象（EP 変更なし・v2 で全 grade 再導出）
 
@@ -210,7 +220,7 @@ tensor_binding_hash = H_WCJ(TensorBindingSpec)   # ExecutionBundle.tensor_bindin
 
 **hash / 供給（v2 追加・§12 D-5）**: `E_BINDING_ARTIFACT_UNRESOLVED`（slot = KNOWN だが spec 実体を解決できない）/ `E_BINDING_HASH_MISMATCH`（`H_WCJ(解決した spec) ≠ slot.artifact_hash`）/ `E_BINDING_HASH_MALFORMED`（64-hex 違反）。
 **版**: `E_BINDING_SCHEMA_VERSION_MALFORMED`（"MAJOR.MINOR" 違反）/ `E_BINDING_SCHEMA_VERSION_UNKNOWN`（既知版 allowlist 外 = fail-closed）。
-**値/構造**: `E_BINDING_LENGTH_SHAPE_MISMATCH` / `E_BINDING_COVERAGE_INVALID`（offset 連鎖が `[0, total_dim)` を丁度被覆しない。⚠v1 の GAP/OVERLAP 2 code は算法上 overlap が表現不能で到達不能だったため **1 code に統合**・§12 D-18）/ `E_BINDING_EMPTY_FEATURES`（obs/action とも非空必須）/ `E_BINDING_DUPLICATE_FIELD` / `E_BINDING_INT_TYPE`（`offset`/`length`/`total_dim`/`depth` に `type(x) is int` — bool 拒否）/ `E_BINDING_NONFINITE`（CanonicalDecimal 正規形違反 — scale・bias・bounds・rate・staleness 全数）/ `E_BINDING_BOUNDS_EMPTY`・`E_BINDING_BOUNDS_INVERTED` / `E_BINDING_TIMING_NONPOSITIVE`（rate ≤ 0・staleness < 0）/ `E_BINDING_HISTORY_INVALID`（depth < 1）/ `E_BINDING_QUAT_ON_NONQUAT` / `E_BINDING_CONTAINER_DTYPE_MISSING` / `E_BINDING_CAST_FORBIDDEN`（§1.4b 表外）/ `E_BINDING_CAST_LOSSY`（INT32→FLOAT32 で |v| > 2^24）。
+**値/構造**: `E_BINDING_LENGTH_SHAPE_MISMATCH` / `E_BINDING_COVERAGE_INVALID`（offset 連鎖が `[0, total_dim)` を丁度被覆しない。⚠v1 の GAP/OVERLAP 2 code は算法上 overlap が表現不能で到達不能だったため **1 code に統合**・§12 D-18）/ `E_BINDING_EMPTY_FEATURES`（obs/action とも非空必須）/ `E_BINDING_DUPLICATE_FIELD` / `E_BINDING_INT_TYPE`（`offset`/`length`/`total_dim`/`depth` に `type(x) is int` — bool 拒否）/ `E_BINDING_NONFINITE`（CanonicalDecimal 正規形違反 — scale・bias・bounds・rate・staleness 全数）/ `E_BINDING_BOUNDS_EMPTY`・`E_BINDING_BOUNDS_INVERTED` / `E_BINDING_TIMING_NONPOSITIVE`（rate ≤ 0・staleness < 0）/ `E_BINDING_HISTORY_INVALID`（depth < 1）/ `E_BINDING_QUAT_ON_NONQUAT` / `E_BINDING_CONTAINER_DTYPE_MISSING` / `E_BINDING_CAST_FORBIDDEN`（§1.4b 表外）/ **`E_BINDING_NUMERIC_STAGE_ON_BOOL`**（BOOL feature に normalizer/transform/bounds — §1.4b）。
 **source 制約（v2 追加・§12 D-8）**: `E_BINDING_SOURCE_FORBIDDEN`（action 側に `source ≠ SEMANTIC_ACTION` / obs 側に `SEMANTIC_ACTION`〔前 action feedthrough は v1.0 では非対応・§8-4〕）。
 **schema 照合**: `E_BINDING_FIELD_UNKNOWN` / `E_BINDING_DTYPE_MISMATCH` / `E_BINDING_SHAPE_MISMATCH` / `E_BINDING_UNIT_MISMATCH` / `E_BINDING_FRAME_MISMATCH`。
 **mask（v2 強化・§12 D-15）**: `E_BINDING_MASK_TARGET_ABSENT` / `E_BINDING_MASK_SELF` / `E_BINDING_MASK_FIELD_ABSENT` / `E_BINDING_MASK_DTYPE`（mask_field_id の dtype ≠ BOOL）/ `E_BINDING_MASK_SHAPE`（mask の要素数が対象と非整合 — 1 要素の全体 gate か同 shape の要素毎かを scope と併せ判定）。
@@ -221,9 +231,22 @@ tensor_binding_hash = H_WCJ(TensorBindingSpec)   # ExecutionBundle.tensor_bindin
 
 ⛔**供給 locator = 未解決（v3 で over-claim 撤回・§12 B-1）**。v2 は「frozen `resolve_artifact(ref, expected_sha256)` を用い slot hash を expected として解決する」と書き、pS もこれを「frozen delta 非要」と判定したが、**両者とも resolver 関数の実在を確認しただけで locator の実在を示していなかった**。実測: frozen `ArtifactSlot = {state, artifact_hash}`（`WMSO_D11A_CONTRACTS_V2_DESIGN…:47` 相当行）に **ref field は無い**。`ProofItem.ref` は evidence 側の参照であり、**TensorBindingSpec 実体の ref は全 grade の proof set に共通必須ではない**。よって `resolve_artifact` に渡す `ref` の出所が設計上未定義であり、**「frozen delta 非要」は NO-PROOF**。
 
-- **選択肢 A（frozen delta なし）**: `ref` を **artifact_hash から導出する canonical ref 規約**（例 `wmso-artifact:sha256:<64hex>`）として固定し、resolver 契約の既存範囲内で解決可能であることを示す。これが成立するなら全 grade について positive/negative test を §7 に追加する。
+**grade 別 locator 実測（cycle-2 で closed-query 測定・Rs 裁定の前提事実）**: proof item の `artifact_hash == claim_target_hash` を束縛する ProofKind は `FINAL_ARTIFACT_HASH` / `REPRODUCED_OUTPUT_HASH` の 2 種のみ（EP JSON `proof_binding`）。TENSOR_BINDING の grade 別 proof set と突き合わせると:
+
+| grade (rank) | 束縛 ProofItem | locator |
+|---|---|---|
+| EXACT_TRAIN_TIME (4) | なし | **無** |
+| HASH_BOUND_REPRODUCED (3) | FINAL_ARTIFACT_HASH / REPRODUCED_OUTPUT_HASH | **有（in-band・delta 不要）** |
+| RECONSTRUCTED_COMPATIBLE (2) | なし | **無** |
+| DIMENSION_ONLY (1) | なし | **無** |
+
+⇒ **locator は 4 grade 中 1 つ（rank 3）にしか存在せず、最初の slice が動作する SHADOW（rank 2・§3）には無い**。rank 4 が rank 3 より弱いという逆転もここで顕在化する。
+
+- **選択肢 A（frozen delta なし）**: `ref` を **artifact_hash から導出する canonical ref 規約**（例 `wmso-artifact:sha256:<64hex>`）として固定する。⚠ただし上表より rank 1/2/4 には ref を載せる ProofItem 自体が無いため、A は「evidence bundle に無い locator を validator が合成し、全 deployment の resolver が sha256-keyed content-addressed store であること」を要求する — frozen `trust_boundary` は locator と完全性検査を分離しており、この要求は契約解釈でなく**契約意味論の変更**に当たる。⚠さらに A の下では `resolve_artifact` が hash を key に引く content-addressed 参照になるため、**`E_BINDING_HASH_MISMATCH` は store 整合性検査に縮退し、「bundle が別の binding を宣言している」という本来の失敗モードを検出しなくなる**（Rs 裁定時に必要な帰結）。
+- **選択肢 A′（frozen delta なし・cycle-2 NHA 提案）**: frozen `EvidenceRecord.source_ref: str` は**全 grade の全 evidence record に既存**であり、`claim_target_hash` は policy 規則により tensor_binding slot hash。`(source_ref, claim_target_hash)` は `resolve_artifact` の signature そのもの。`source_ref` の意味論は frozen package で未規定ゆえ、TENSOR_BINDING record についてこれを束縛することは prereg §2 IN-4（proof obligation の結合）の範囲内と解し得る。**A より小さく、rank 依存もない** — ただし Rs 承認の要否自体は Rs 判断。
 - **選択肢 B（frozen delta あり）**: `certify_definition` に binding 実体（または locator）を渡す引数追加 = **frozen A の schema delta** ⇒ supersession 記録 + Rs review 経由。
-- **本 doc の立場**: A/B のいずれも **CC1 が単独で確定できない**（A は resolver 契約の解釈、B は Rs 専権）。よって §10 の open point として上程し、**確定するまで §4 の hash 供給レグは「設計未完」と明示する**。`E_BINDING_ARTIFACT_UNRESOLVED` / `E_BINDING_HASH_MISMATCH` の**述語自体は確定**しており、未確定なのは実体到達の経路のみ。
+- **本 doc の立場**: A / A′ / B のいずれも **CC1 が単独で確定できない**（Rs 裁定事項）。よって §10 の open point として **3 択の完全な選択肢集合 + 上表の実測**を添えて上程し、**確定するまで §4 の hash 供給レグは「設計未完」と明示する**。⚠**「述語は確定・経路のみ未確定」という v3 の切り分けは v4 で限定する**: `E_BINDING_ARTIFACT_UNRESOLVED` は経路非依存だが、**`E_BINDING_HASH_MISMATCH` は選択肢 A の下で store 整合性検査に縮退する**（上記）ため、述語の**意味**が経路に依存する。
+- **同型の未解決が `bundle.normalization` にもある（v4・cycle-2 CC4-C4）**: §4 の `E_BINDING_NORMALIZER_VALUE` は normalization artifact の payload を読む必要があるが、その slot も frozen `ArtifactSlot = {state, artifact_hash}` で **ref を持たない**。B1 と同一の locator 問題であり、本 open point の対象に **`normalization` slot も含める**。
 
 ## 5. handoff の grasp/contact stability field group（**PROVISIONAL — 必須化は保留**）
 
@@ -240,7 +263,7 @@ RV5 §6(ii)（handoff は arm pose だけでなく grasp/contact stability を e
 
 - **必須化は行わない（v2 変更）**: v1 は「cable を運ぶ handoff schema は本 group を `required_field_ids` に含める」と書いたが、①該当を判定する機械可読述語が無い ②error code が無い ③既存 schema への `required_field_ids` 追加は frozen §5D の `consumer required ⊆ producer fields` を破り major version event（`producer_handoff_schema_hash` の stale 化・BehaviorSignature 影響）を起こす。よって **本 group は「宣言可能な標準 field 群」として提供し、必須化の可否・移行手順は slice 詳細 prereg + Rs 裁定に委ねる**。
 - **不確実性 channel（v2 追加）**: `stability_confidence` / `stability_unknown` を置く。理由 = ①RV5 §6(iii) が calibrated uncertainty を要求 ②THREAD には「grasp verdict を数値から PASS 宣言するな・human GT が最終」という standing lesson がある。boolean のみを fail-closed 必須にすると、occlusion 下の producer に「正当化できない bool を出す or handoff を諦める」を強いる＝捏造圧力になる。
-- ⛔**`topology_ledger_hash` は本表から削除（v3・§12 B-5）**: v2 は dtype/shape/unit/frame を「—」として表に載せたが、frozen `HandoffSchemaSpec.fields = tuple[SemanticFieldSpec, ...]` であり `SemanticFieldSpec = {field_id, dtype, shape, unit, frame}` ゆえ **4 属性を欠く entry は格納不能**、かつ frozen に metadata slot は無い。**`chain_topology_class` の台帳同一性の束縛は D1.1-C の run manifest 側 metadata として carry**（§8-6）。契約層で束縛が必要と判明した場合のみ schema delta として Rs review 経由。**この carry が解けるまで、`chain_topology_class` は「同 dtype/shape で意味の異なる台帳」を §5D が見抜けない既知の穴を持つ** — 本 group が PROVISIONAL である理由の一つとして loud に記録する。
+- ⛔**`topology_ledger_hash` は本表から削除（v3・§12 B-5）**: v2 は dtype/shape/unit/frame を「—」として表に載せたが、frozen `HandoffSchemaSpec.fields = tuple[SemanticFieldSpec, ...]` であり `SemanticFieldSpec = {field_id, dtype, shape, unit, frame}` ゆえ **4 属性を欠く entry は格納不能**、かつ frozen に metadata slot は無い。**`chain_topology_class` の台帳同一性の束縛は D1.1-C の run manifest 側 metadata として carry**（§8-6）。⚠**この carry は §5D の穴を閉じない（v4 訂正・cycle-2 CC5-CH1）**: §5D が評価されるのは registry 静的照合（frozen §5 certify）と runtime `validate_handoff` の 2 箇所のみで、**どちらも run manifest を入力に取らない**。よって carry は台帳差を**検出可能**にするだけで**阻止しない**（§8-2 の U-2 で自ら述べた detect-vs-prevent の区別を、v3 は U-6 に持ち越し損ねた）。**契約層で閉じる路は schema delta（Rs review）のみ**。**したがって `chain_topology_class` は carry 解決後も「同 dtype/shape で意味の異なる台帳」を §5D が見抜けない穴を持ち続ける** — 本 group が PROVISIONAL である理由の一つとして loud に記録する。
 - 値の算出法・class 台帳の内容・窓幅・閾値は **契約でなく計測設計**であり slice 詳細 prereg / D2 fixture が確定（本 doc は field 契約のみ）。
 
 ## 6. Golden vectors / invalid corpus（**機械可読 fixture を bank 済**）
@@ -250,18 +273,19 @@ RV5 §6(ii)（handoff は arm pose だけでなく grasp/contact stability を e
 | # | file | 内容 | H_WCJ (sha256) | canonical bytes |
 |---|---|---|---|---|
 | G-1 | `tensor_binding_golden_1.json` | 最小 RL_ONLY（history/normalizer/mask なし） | `af90712a293ee33d15ada71e1cf1baa7964d284af56ac45b4d50209ef12186b2` | 1491 |
-| G-2 | `tensor_binding_golden_2.json` | DEMO_PLUS_RL（quat WXYZ + BELIEF ×2 + MEAN_STD + history depth3 STEP_MAJOR + mask PER_STEP + **IDENTICAL（hash = null）**） | `9ddeafc8cc32086ddffba2e800930b9eb79e33f9aeb7ea3e118aeded81736b41` | 2023 |
+| G-2 | `tensor_binding_golden_2.json` | DEMO_PLUS_RL（quat WXYZ + BELIEF ×2 + MEAN_STD + history depth3 STEP_MAJOR + mask PER_STEP + **IDENTICAL（hash = null）**） | `991651b9d6374f423c4fcc3e0bbbe1b3d90be5fca932004cbf3870d7c9d28a23` | 2028 |
 | G-3 | `tensor_binding_golden_3.json` | **v2 追加 complement**: dual-arm 14dim action + `action_scale` 非 null + **≥2 要素 frozenset** + EXPLICIT_SUPERSEDE + MIN_MAX + XYZW_UNIT + ZERO_IS_VALID + OLDEST_FIRST/ZERO_PAD/**FEATURE_MAJOR** + ACROSS_STACK mask + 片側 bounds | `dd14f6b68949d0f0c11f4e5002013b43ed12a02da662f4c5f7270cbbf54842d3` | 3121 |
+| G-4 | `tensor_binding_golden_4.json` | **v4 追加**: **INT32 semantic dtype + INT32 container + BOOL container**（v3 は cast table 5 legal cell 中 2 つしか使わず `container_dtype` も 1 値のみ ⇒ 当該 field を無視する実装が全 golden を再現できた — cycle-2 CC3-CH2/CC4-C10/CC5-CH3） | `59bbfbba987d8703816f82c18b576d133d32424121a29c0a365d8207ba8274a4` | 1331 |
 
-- 補助 pin: `producer_schema_hash` = `744866166f80fd99…` / G-3 `demo_dataset_binding_hash` = `498a56fbe182f662…` / `topology_ledger_hash` = `f5bd178074c0175c…`（fixture 用の宣言的導出 — 実在 artifact の hash ではない）。
+- 補助 pin: `producer_schema_hash` = `744866166f80fd99…` / G-3 `demo_dataset_binding_hash` = `498a56fbe182f662…`（fixture 用の宣言的導出 — 実在 artifact の hash ではない）。⚠**`topology_ledger_hash` の pin は v4 で削除**（B5 で field を削除した後も §6 と builder に残り、どの fixture も束縛しない dead pin だった — cycle-2 で 4/5 が指摘）。
 - **frozenset 判別性の実証（frozen §2 item 8「≥2 要素 frozenset vector」要件の履行・§12 D-14）**: G-3 の `applies_to` を**挿入順**（sorted でない）で直列化すると `838cf7292592258b…` となり G-3 の値と**異なる** ⇒ 昇順 sort 規則がこの corpus で判別される（v1 は cardinality ≤1 のみで、誤実装が同じ hash を出せた）。
-- **再現**: `python3 wmso_d11b_fixtures/build_goldens.py <出力先>` が 3 fixture を再生成し hash を印字する。**v3 で builder に schema 適合 assertion を追加**（必須 member 集合の対称差 / cast table / normalizer payload / mask dtype・自己参照・昇順）— v2 は hash 再現性のみを検査しており、**再現する hash は schema 適合を証明しない**（§12 B-2）。⚠v1 が載せた `json.load→json.dumps` one-liner は **WCJ 非忠実**（duplicate key を後勝ちで通し、NaN/Infinity/float 型も通す＝本節 invalid corpus が拒否必須とするもの）ゆえ**撤回**。`build_goldens.py` の `wcj_bytes()` は float/bool/非 ASCII key を拒否する。REPRODUCTION_PROCEDURE proof（§3）は WCJ 実装を用いること。
-- **fixture の representativeness（§12 D-31）**: G-1/G-2 は意図的に合成・小規模（型網羅が目的）。G-3 のみ dual-arm 相当幅を持つ。実 demo の action 幅（12dim 系）との一致は主張しない — 実 binding の代表性は D1.1-C の run manifest が担う。
-- **invalid corpus（拒否必須・impl で全列挙）**: NaN/"Infinity"/float 型 / "01"・"1.10"（decimal 非正規形）/ offset gap・overlap / length ≠ prod(shape) / total_dim 不一致 / 空 features / field_id 重複・NFC 非正規 / dtype・unit・frame 不一致 / quat on shape≠[..,4] / **bool を offset・length・total_dim・depth に混入** / mask 自己参照・宛先不在・非 BOOL mask / BELIEF binding 欠落・重複 / bounds inverted・両 null / depth 0 / rate "0" / RL_ONLY + bc_stage_binding 非 null / **IDENTICAL + hash 非 null** / EXPLICIT_SUPERSEDE + detail null / 64-hex 違反 / 未知 enum member / 未知 JSON field / duplicate canonical key / 未知 binding_schema_version / action 側の非 SEMANTIC_ACTION source / action feature の bounds 欠落 / **container_dtype 欠落** / **表外 cast（FLOAT32→INT32 等）** / **INT32→FLOAT32 で |v| > 2^24** / **MIN_MAX で min ≥ max・要素数不一致・非 isfinite**。
+- **再現**: `python3 wmso_d11b_fixtures/build_goldens.py <出力先>` が 4 fixture を再生成、`--verify <dir>` が banked bytes を非破壊で検査する。**v4 で builder を全面強化**: ①**全 14 型**に対する member 集合の双方向対称差（v3 は 5 型のみ ⇒ `HistorySpec.layout` / `MaskBinding.scope` / `ActionTimingSpec.hold` の削除が無検出だった＝B2 の欠陥そのものの再現）②enum allowlist + 既知 version ③cast table + BOOL 数値段 guard ④mask・belief の被覆/重複 ⑤**negative control 16 本**（各 assertion が実際に赤になることを毎回実証 — 発火しなければ builder 自体が失敗する）⑥**`--verify <dir>` mode**（banked bytes を読んで検査するのみ・書き込まない）。⚠v3 の builder は出力先省略時に **banked file を上書き**するため、改竄を検出せず修復してしまった（検証が自らの baseline を破壊する類型 — cycle-2 CC3-CH6）。**「再現する hash は schema 適合を証明しない」に加え、v4 では「PASS する assertion 群はそれが検査する範囲しか証明しない」も明示する**。⚠v1 が載せた `json.load→json.dumps` one-liner は **WCJ 非忠実**（duplicate key を後勝ちで通し、NaN/Infinity/float 型も通す＝本節 invalid corpus が拒否必須とするもの）ゆえ**撤回**。`build_goldens.py` の `wcj_bytes()` は float/bool/非 ASCII key を拒否する。REPRODUCTION_PROCEDURE proof（§3）は WCJ 実装を用いること。
+- **fixture の representativeness（§12 D-31）**: G-1/G-2/G-4 は意図的に合成・小規模（型網羅が目的）。G-3 のみ dual-arm 相当幅を持つ。実 demo の action 幅（12dim 系）との一致は主張しない — 実 binding の代表性は D1.1-C の run manifest が担う。
+- **invalid corpus（拒否必須・impl で全列挙）**: NaN/"Infinity"/float 型 / "01"・"1.10"（decimal 非正規形）/ offset gap・overlap / length ≠ prod(shape) / total_dim 不一致 / 空 features / field_id 重複・NFC 非正規 / dtype・unit・frame 不一致 / quat on shape≠[..,4] / **bool を offset・length・total_dim・depth に混入** / mask 自己参照・宛先不在・非 BOOL mask / BELIEF binding 欠落・重複 / bounds inverted・両 null / depth 0 / rate "0" / RL_ONLY + bc_stage_binding 非 null / **IDENTICAL + hash 非 null** / EXPLICIT_SUPERSEDE + detail null / 64-hex 違反 / 未知 enum member / 未知 JSON field / duplicate canonical key / 未知 binding_schema_version / action 側の非 SEMANTIC_ACTION source / action feature の bounds 欠落 / **container_dtype 欠落** / **表外 cast（FLOAT32→INT32 等）**  / **MIN_MAX で min ≥ max・要素数不一致・非 isfinite**。
 
 ## 7. Test plan（impl GO 後 — 設計時宣言）
 
-standalone unit（配布物のみで全実行）: 型 round-trip（encode→decode→encode で同一 bytes）/ **golden G-1/G-2/G-3 一致 + G-3 挿入順 variant が別 hash になること**（判別性の positive control）/ invalid corpus 全拒否 / coverage 算術 property test（ランダム layout → `E_BINDING_COVERAGE_INVALID` 検出）/ **flatten_order・history.layout の判別 test**（同一 field 集合で layout だけ異なる 2 spec が別 hash になること）/ cross-artifact 検査の赤→緑 pair（HASH_MISMATCH・NORMALIZER_MISSING/ORPHAN/VALUE・NORM_COHERENCE・CONTROL_MODE_MISMATCH・LINEAGE_MISMATCH・IDENTICAL_HASH_PRESENT）/ Draft（slot UNKNOWN 混在）で cross-artifact 検査が発火しないこと。
+standalone unit（配布物のみで全実行）: 型 round-trip（encode→decode→encode で同一 bytes）/ **golden G-1/G-2/G-3 一致 + G-3 挿入順 variant が別 hash になること**（判別性の positive control）/ invalid corpus 全拒否 / coverage 算術 property test（ランダム layout → `E_BINDING_COVERAGE_INVALID` 検出）/ **flatten_order・history.layout の判別 test**（同一 field 集合で layout だけ異なる 2 spec が別 hash になること）/ cross-artifact 検査の赤→緑 pair（**HASH_MISMATCH は §10 B-1 の解決に条件付き** — 経路未確定のため現時点では設計上不成立・NORMALIZER_MISSING/ORPHAN/VALUE・NORM_COHERENCE・CONTROL_MODE_MISMATCH・LINEAGE_MISMATCH・IDENTICAL_HASH_PRESENT）/ Draft（slot UNKNOWN 混在）で cross-artifact 検査が発火しないこと。
 
 ## 8. 未解決点 disposition
 
@@ -287,10 +311,11 @@ v1 は本 gate 未実施だった。実施結果（on-disk 実測）:
 
 ## 10. Open points
 
-- 本 v2 = **CC Debate cycle-1 の fold**（verdict = FAIL・record `WMSO_D11B_CC_DEBATE_CYCLE1_VERDICT_RSTECHLEAD2_20260720.md`）。cycle-2 の要否 = pS/pN/Rs 裁量（skill max-2-cycles、CC1 は自己起動しない）。
+- 本 v4 = **CC Debate cycle-1（FAIL）→ pN exact-pin HOLD B1-B5 → B1-B5 限定 cycle-2 の fold**。**skill の max-2-cycles に到達**（cycle-1 + cycle-2 実施済）ゆえ、以後の debate 再実行は Rs 裁量。fold の検証は §5 chain の pS / pN 両軸が担う。
 - ⛔**§4 の hash 供給 locator = 未確定（最重要 open・§12 B-1）**: frozen `ArtifactSlot` に ref が無く、`resolve_artifact` に渡す ref の出所が未定義。選択肢 A（hash 由来 canonical ref を既存 resolver 契約内で固定）/ B（frozen A schema delta = supersession + Rs review）。**CC1 単独で確定できないため Rs 裁定事項として上程する**。v2 の「frozen delta 非要」主張は撤回。
 - §5 の必須化可否・class 台帳・判定器・窓幅 = slice 詳細 prereg + Rs 裁定。
-- U-2 の producer artifact 阻止・U-5 の demo 移行 = D1.1-C prereg への必須入力。
+- U-2 の producer artifact 阻止・U-5 の demo 移行・**U-6 の topology ledger 束縛** = D1.1-C prereg への必須入力（**DDR への登録 = p6 へ dispatch 済** — cycle-2 CC5-CH4: 4 carry がいずれも DDR 未登録では次 chunk の [DEFER-RECON] が素通りする）。
+- **`stats_key` の一意性規則**（per-feature 一意か共有可か）= 未定・§1.2 参照。
 - 「open = 0」の無条件宣言はしない（frozen §10 と同規律）。
 
 ## 11. Module layout（impl GO 時に確定 — 宣言のみ）
@@ -316,4 +341,13 @@ v1 は本 gate 未実施だった。実施結果（on-disk 実測）:
   - **B-4 (HIGH) container cast 規約なし** → §1.4b に v1.0 conversion table + `E_BINDING_CAST_FORBIDDEN` / `E_BINDING_CAST_LOSSY`。
   - **B-5 (HIGH) topology_ledger_hash が格納不能** → §5 表から削除し **D1.1-C metadata carry（§8-6）**へ。残る穴（同 dtype/shape で意味の異なる台帳）を PROVISIONAL 理由として loud 記録。
   - pN 指名 3 点: ①frozen delta 非要 = **NO-PROOF（撤回済）** ②U-5 と `portfolio_has_IL` の整合 = **PASS**（C 完了 ∧ demo 再記録まで IL=false、B 単独で slice/L0 claim 不可）③**cycle-2 = REQUIRED**（B1-B5 限定）。
+- **v4**（2026-07-20 12:10 実測、本版）— **B1-B5 限定 cycle-2 debate の fold**（panel = lens B1 / B2 / B3+B4 / B5 + NHA。fold 判定 = B2/B3/B5 に FAITHFUL+SUFFICIENT 票、B1/B4 は全員が FAITHFUL-BUT-INSUFFICIENT。custody = 4/4 が builder 独立再走で hash 再現）:
+  - **C2-1（安全関連・CRITICAL）** BOOL feature に normalizer/transform を付すと mask が無効化される（B4 fold の `v ≠ 0` 読み出し規約が可能にした）→ `E_BINDING_NUMERIC_STAGE_ON_BOOL` + builder guard。
+  - **C2-2（5/5 + NHA）** `E_BINDING_CAST_LOSSY` が standalone validator で到達不能（**v2 が D-18 で除去した類型の再発**）→ **削除**し、可逆性を §3 `COMPATIBILITY_TEST` の producer 側 obligation へ。
+  - **C2-3（CRITICAL）** B1 の escalation が問う範囲が誤り → **grade 別 locator 実測表**（rank 3 のみ有・**SHADOW rank 2 は無** = 最初の slice が動く grade）+ **選択肢 A′**（frozen `EvidenceRecord.source_ref` 束縛）+ **A の下で `E_BINDING_HASH_MISMATCH` が store 整合性検査に縮退する帰結** を追記し、3 択の完全集合として上程。**`normalization` slot も同型の locator 問題として open に収容**。
+  - **C2-4（CRITICAL）** §2 DC-1 と §7 が撤回済みの供給経路に依存したまま → 両所に BLOCKED flag。
+  - **C2-5（HIGH）** §5 の carry が §5D の穴を閉じるかのような記述 → **detect ≠ prevent** に訂正（§5D の入力に run manifest は無い）。
+  - **C2-6（HIGH×3）** builder が 14 型中 5 型しか検査せず（B2 の欠陥そのものが `HistorySpec.layout` 等で再現）/ `container_dtype` が 1 値のみで判別不能 / negative control 皆無 / 出力先省略時に **banked file を上書きして改竄を修復** → 全型検査 + enum allowlist + **negative control 16 本（16/16 発火を毎回実証）** + **`--verify` 非破壊 mode** + **G-4 追加**（INT32 dtype・INT32 container・BOOL container）。
+  - **C2-7（MED/LOW）** isfinite 述語の vacuity 明示 / `std > 0` を B-declared strengthening と明示 / 正規化の**適用順序と式**を明文化 / `stats_key` 一意性を open に登録 / dead `topology_ledger_hash` pin を §6 と builder から削除 / §10 の版・cycle-2 状態・U-6 欠落を訂正。
+  - **NHA = HOLD（縮小せよ）**: 収束はしているが「fold が新 surface を生み次の finding を生む」構造（pN 5 findings のうち 4 件が v2 自身の追加物由来）。v4 は NHA の minimal path 3 点（option A′+実測 / CAST_LOSSY 削除 / topology pin sweep）を全採用し、**§5 への field 追加・cast table 拡張・stats payload の追加規定は行わない**。
 - **v1 → v2 の非変更点**: 統治・carries・frozen 不変・impl CLOSED・§0 の WCJ 継承方針（B-declared 分を分離明記した点のみ変更）。
