@@ -344,3 +344,20 @@ pN が claim-set v2（私の §24 refinement を fold した版）に **V2-B1..B
 ⭐**恒久教訓（verifier refinement over-reach）**: verifier の第一義務は claim を on-disk で **clean に確認/反証**すること。**refinement/elaboration を足す時、その結論を primary claim と同等に grounding せよ** —「X を観察した」は「ゆえに premise は Y」を grounding 無しに licenses しない（推論は別 claim）。正しい premise を under-grounded な refinement で濁すのは net-negative。技術面: **hash association ≠ target-byte locator**（hash 値の確立 ≠ 実体を fetch する ref）を分離せよ。[[feedback-an-absence-claim-must-be-read-not-relayed-2026-07-15]]（prereg:18 を読まず伝播）+ [[feedback-the-boundary-question-and-the-identity-question-are-different-2026-07-15]]（軸A/軸B）。
 
 **pN 指定順**: pS §24 訂正（本節）→ 先 bank → claim-set 再 bank → pN 再依頼。dispatch = pQ。**私 = claim-set 再 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
+
+## 25. Rs 裁定 C3 = SHADOW の custody + consequence 検証（2026-07-20 19:26 実測）
+
+⭐**Rs が C3（slice の EP evidence profile）= SHADOW（rank2・非 authority）を裁定**（2 回目・有効）。custody record `WMSO_RS_C3_RULING_SLICE_PROFILE_20260720.md` = 私の **on-disk 実測 sha `9ab6be4c9f30…85ebca3f…` @ `42bbeafdda`**（clean）。⚠**pQ の dispatch した sha は捏造値**（24 文字で切れた出力を pQ が埋めた・§運用27 違反として pQ own）だが、**私は commit から sha を自算出したため実測値 = pQ 訂正値と一致・捏造値の影響なし**（fetch-not-cite の実証）。⚠**本検証は custody/consequence の premise-fact 照合のみ — SHADOW の是非・B1 解法は一切判定しない**。
+
+**custody record = exemplary**:
+- ⭐**1 回目（17:57）破棄を忠実記録**: SHADOW を「実機に出さず policy 並走」と CC が未検証 paraphrase → Rs「前提が違ったので選び直す」で破棄。2 回目は凍結逐語のみ（「非 authority」）で再提示 → Rs 再び SHADOW 選択。**A′ 破棄規律の 2 例目**（結論一致でも不正確前提は無効・orthogonal でも救済されない）。⭐今回 CC は自判定せず Rs へ上げた（A′ 時「orthogonal ゆえ有効」と誤自判定した点からの改善）・伝播 0。
+- **frozen-verbatim citations 全て on-disk 確認**（EP md `c474acea7c58`）: `:136`「SHADOW（非 authority）」/ `:155`「SHADOW は定義上 非 authority」/ `:156`「usage matrix=ceiling・closed-loop authority は O0/S0/V0 two-key + 独立安全 gate conjoin」。⇒ 1 回目 paraphrase「実機に出さず policy 並走」は凍結に不在＝確定。
+- **two-key 検証済 premise の上で裁定（A′ との決定的差）**: claim-set v6 `40e5ca3bb09d` @ `99a1fc5c6a` / pS 設計軸 `9937f2d01fcc` @ `16ef235c20`（私の §24・banked 確認）/ pN EVIDENCE PASS-CLOSE 17:53:58（C1/C2/C3/C4a/C4b 全 TRUE・選択肢0/推奨0）。
+
+**consequence 事実確認**: SHADOW min_grade_rank=2・TENSOR_BINDING+NORMALIZATION とも required（EP JSON 実測）・**rank2(RECONSTRUCTED) の TB proof set = [RECONSTRUCTION_SOURCES, COMPATIBILITY_TEST, UNRESOLVED_DIFFERENCES, EVALUATOR_ARTIFACT] に FINAL/REPRODUCED 無し**（axis-B target-byte locator 不在）⇒ **B1 は回避されず rank2 で解く必須事項**。OFFLINE_REPLAY の TB 免除（逃げ道）は取らない決定。✓ 事実として sound。
+
+**境界 confirm（over-reach 無し）**: B1 解法は未選択（A/A′/B は A′ 破棄で集合ごと未確定・SHADOW 要件から再導出）/ impl/training/closed-loop authority CLOSED（O0/S0/V0 + 安全 gate conjoin 必須）/ execution profile 別軸・run timing 未決。
+
+**records 波及（p6 レグ）**: C3 = CLOSED（SHADOW）+ DDR#27 の B1 =「rank2 で解く必須・SHADOW 要件から再導出」へ更新要（p6 sync）。
+
+**私 = pQ の B1 選択肢導出（SHADOW 要件から）→ claim-set 化 → 私が verify、を待つ（self-start なし）**。impl/training/authority CLOSED。
