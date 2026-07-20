@@ -1,4 +1,4 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-20 23:00 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-20 23:48 JST
 
 > Pane-specific handoff (multi-pane NEST; does not clobber the shared HANDOFF.md).
 > Full detail = memory `handoff_cc_pQ_rstechlead2_wmso_d11a_freeze_2026-07-20.md`. Ground truth = frozen package + freeze record + manifest + LEDGER row44, not this narrative (§運用4).
@@ -34,7 +34,9 @@
 - ⭐**本 arc の恒久教訓（3 件・いずれも「未検証の主張が決定面に載る」の変奏）**: ①**誤前提の上の裁定は結論が同じでも無効**、かつ **前提を出した側にその誤りが immaterial だと決める standing は無い**（A′ / C3#1 の 2 例）②**two-key は open point 内の事実主張を measure していなかった** — banked かつ両 key 通過は、その事実主張が検証済である意味ではない ③**human 発話に依拠する権威を設計面に書くなら、同一ターンでその発話を custody record にする**（structured-select か自由発話かで扱いを変えない）。⚠③は**自検出できず pS が検出**。
 - **次 = ⛔D1.1-B freeze の Rs 判断待ち（別 gate・Rs 専権・self-start 禁止）**。v12 = freeze 直前の records-fix（§10 の版自参照が v6.1 のまま v7〜v11 を通過していた — freeze は誤記ごと固定するため）。**freeze 時に残る declared open 4 件**を §12 に明記済: ①`stats_key` 一意性（⚠**length 不一致は fail-closed だが、同一 length 共有は検出 code 不在ゆえ一意必須読みで silent-pass** — v13 で訂正。旧「どちらの読みでも fail-closed」は過剰主張）②§7 到達性負例（impl leg）③§5 閾値系（slice prereg + Rs）④U-2/U-5/U-6。⚠**D1.1-A も §10 に open を残して freeze した先例**あり。freeze 後 = D1.1-C（artifact manifest）→ boundary-only vertical slice。**impl / training / closed-loop authority = CLOSED 継続**。
 - **DDR carry**: #27 B1-locator = ✅**CLOSED 確定**（p6 `1ba11fdf31`）／ #28 U-2 ／ #29 U-5 ／ #30 U-6 ／ ⭐**#32（新）= D0 slow-path rollout H<5 と実測 routing 周期長 7 の緊張**（p6 `472b693109`→`738eed3c67`。出所 = p4 実測 `dcc280855476` @ `0e1589c931`・⚠**probe/pd1-arm-pd branch のみ在中ゆえ commit 併記必須**）。⚠honest scope: step 数の比較であって実時間の主張でない ／ receding-horizon replan（D0 `:210`）がある以上「張れない = 破綻」ではない — **真の未測点は horizon 打ち切り時の終端 value 推定の有無** ／ owner = pQ + pS が未判断。
-- ⚠**Rs 逐語「WMSO を実現するための SKILL の細分化、分解能を検討する必要がある」は p4 経由の伝聞**（p4 も「pQ への割当として送ったのではない」と明言）。⇒ **本 node への割当かは Rs 確認待ち**。伝聞を自分への指示として接地しない。
+- ✅**解決（Rs 裁定 2026-07-20 23:4x・逐語「SKILLについてはpX:SKILL-DESIGNが決めることとなった。整合性を持つように」）**: **SKILL の細分化・分解能は `w2:pX SKILL-DESIGN` が決める** — ⛔**本 node の割当ではない**。（経緯: Rs 逐語は p4 経由の伝聞で届いたため割当として接地せず Rs へ照会 → 本裁定で「否」に決着）。custody = `WMSO_RS_SKILL_OWNERSHIP_RULING_20260720.md`。
+  - **本 node に残る scope** = `SkillLifecycleContract` schema ／ `tensor_binding` 契約 ／ EP evidence 束縛 ／ **SDM 単位** = 「どの skill が在るかによらず、その上に載る契約層」。
+  - ⚠**DDR#32 は両側にまたがる**（周期長 = 分割の関数 = pX ／ `H` = SDM 設計 = 本 node）⇒ owner をどちらか単独にしない。
 
 ## 参照（正）
 - 成否 SSOT: `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md` row44（p6 反映 `65d62d15ed`）
