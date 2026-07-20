@@ -414,3 +414,26 @@ pN が claim-set v2（私の §24 refinement を fold した版）に **V2-B1..B
 ⇒ ⭐**設計軸（機構）= PASS**（D-1 は凍結に忠実・§4 反証条件は十分でいずれも不発火・A′ 有害復活でない）。⚠**authority 軸 = Rs 委譲 narrative が未検証ゆえ B1 CLOSED は Rs confirm/veto 前 provisional**（design-axis 対象外だが records-discipline で surface）。
 
 **次**: pN exact-pin → Rs（委譲 + D-1 + veto を confirm）。**私 = pN 後の Rs 判断、または追加 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
+
+## 28. v10 = §27(B) LOUD FLAG fold の確認（2026-07-20 21:11 実測）
+
+⭐**pQ が §27(B) を v10 に fold（records/authority のみ・設計 semantics 不変）**。design v10 = **on-disk 実測 `4851e1ec7e1d581063734df1d2d550dbdc71918ff1f2019a7c828a729cd08fc1` @ `d67773b63f`**（pQ dispatch 一致）。⚠**scope = fold が §27(B) を満たすか（records/authority のみ）— 機構は §27(A) で PASS 済・不変**。
+
+**pin 検証（全て on-disk 自算出）**: v10 `4851e1ec…` @ d67773b63f ✅ / 委譲 custody `WMSO_RS_B1_DELEGATION_RECORD_20260720.md` = `e119b94e2ed2ff07bd931a05f59f4693d41c4f8a1c68b4182280271d2b33da8a` ✅ / 私の record `f6ff9c4caef7…`（§27）を同 commit d67773b63f で bank 済 ✅（+30 = 私の §27）。
+
+**設計 semantics = 不変（機構 §27A PASS carries）**: v9→v10 diff は 3 file・129 挿入/6 削除で、**変更は records/authority のみ**（§4 判断の所在を (a)/(b)/(c) に分離・§10 CLOSED→CLOSED (PROVISIONAL)・§12 v10 changelog・私の record +30・委譲 custody 新設）。⭐**D-1 採択表・§4 反証条件 4 件・実装形・error code・fixture 4 sha・builder `c74ca3b36193` = すべて無変更**（diff に該当 hunk 無し）。⇒ §27(A) 機構 PASS は不変で carry（pQ 再 verify 4/4 conformance + 24/24 fired + rc=0 も unchanged mechanism と整合、入力 pin 不変を私が確認）。
+
+**§27(B) の 3 要素 = 全て満たす**:
+- **(1) §4 の (a)/(b)/(c) 3 層分離 = ✅**: (b) 検証済前提の pin 群に **⚠「これらの pin が覆うのは前提の事実性のみであり、下記 (c) を覆わない」を明記**（私の flag の核心）／(c) 未検証 authority 前提を「私の session narrative・独立 source 無し・ratify は Rs のみ・B1 は provisional」と明記／⭐pin 隣接の**構造的誤り**（v9 が (b) pin を (c) に隣接させ authority も覆うように読めた・narrative が引用先 transcript と矛盾）まで自己診断し A′/C3 と同族と接続。
+- **(2) §10 B1 = CLOSED (PROVISIONAL) = ✅**: 設計軸(§27A PASS) と authority 軸(gap) を分離・「Rs confirm を得るまで provisional」明記。
+- **(3) 委譲 custody record = ✅ exemplary（narrative を検証済 fact に化粧していない）**: §0「**bank は検証ではない**（自 session 転記・独立 source 無し・ratify は Rs のみ・『bank したので閉じた』と扱うな）」／§1 honest scope（「はい」= 枠組みへの一語同意・条項 grant でない・C3 §1 と同規律）／§2 Rs 逐語（「私に選択させる理由を述べよ」/「はい」）と pQ 自身の枠組みを「これは私の言葉で Rs の言葉でない」と分離／§3 主張する(⚠未検証)/inference(タグ付け)/主張しない/Rs veto 保持 の表／§4 defect 記録（検出者=pS）。
+
+⭐**pQ が私の推奨 2 択を正しく処理**: 「bank / Rs confirm」を**択一にせず、bank は confirm の前段（bank ≠ 検証・ratify は Rs のみ）**と扱った。⇒ bank で confirm を代替する 先走り（narrative の化粧）を回避。私の "OR" 枠より正確。
+
+**私の検証境界**: 委譲 custody record の **on-disk 実在 + 内容の誠実さ**（narrative を化粧せず・inference タグ付け・provisional 維持）を確認した。⚠**Rs 逐語そのものの真偽は検証していない・できない**（pQ session 内発話・独立 source 無し）— custody record 自身が「ratify は Rs のみ」と明記しており、over-claim は無い。
+
+**先祖返り無し**（A′ VOID 維持・設計 semantics 不変）／**先走り無し**（B1 = PROVISIONAL・impl/training/closed-loop authority CLOSED・次 = Rs confirm）。
+
+⇒ ⭐**v10 fold は §27(B) を満たす = 確認**。機構 §27(A) PASS は不変で carry。**B1 = CLOSED (PROVISIONAL) が正しく成立**（Rs confirm/veto 前）。
+
+**次**: pN exact-pin → Rs confirm（委譲 + D-1 + veto）。**私 = pN 後の Rs 判断、または追加 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
