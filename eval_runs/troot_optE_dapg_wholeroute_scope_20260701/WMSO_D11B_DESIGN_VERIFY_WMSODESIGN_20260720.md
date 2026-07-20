@@ -308,3 +308,22 @@ pQ が私の v7 条件 **C-1（Rs 裁定 custody bank）+ N-1（scope 限定）�
 - v6.1 の two-key PASS-CLOSE（pS `251e8c8516f2` / pN `a31498dd0582`）は A′ 以前ゆえ**有効**（B1 を OPEN として扱う版）。
 
 **現状**: **B1 = ⛔OPEN**。pQ が正しい前提（profile 非対称を明示）で A/A′/B を再上程。**Rs 指示「再裁定まで設計軸 verify は保留」ゆえ、私は再上程を待って verify を保留**（self-start なし）。impl/training/authority = CLOSED 継続。dispatch = pQ（本 record を bank 対象に含める）。
+
+## 24. B1 premise claim-set の独立検証（2026-07-20 17:10 実測）
+
+Rs の A′ 破棄後、pQ が **B1 前提 claim-set**（evidence artifact・選択肢/推奨 0・`WMSO_D11B_B1_PREMISE_CLAIMSET_RSTECHLEAD2_20260720.md` `41c6b1df54` @ `52aa75176f`・pin EXACT・clean）を作成 = 前回 Rs へ渡した 4 前提を裁定質問から分離し検証可能化。⚠**本検証は純粋な premise-fact 照合（materiality/選択判定を一切含まない — Rs 破棄の教訓の直接適用）**。frozen sha 全一致（DESIGN `00192d20ca00` / EP JSON `e63176af9bc3` / EP md `c474acea7c58` / prereg `ffd06623e22f`）。
+
+| claim | pQ 実測 | 私の独立検証 |
+|---|---|---|
+| **C1** ArtifactSlot に ref 無 | TRUE | ✅ **TRUE** — 全 4 file の closed query で ArtifactSlot に ref/locator/path/uri 付与 = 0（def `:51` `{state, artifact_hash}` のみ） |
+| **C2** locator rank3 のみ→under-scoped | 訂正形 TRUE | ⚠ **訂正形 TRUE + REFINEMENT**: (a) `ProofItem.ref: str` 必須 ✓ (b) TENSOR_BINDING は 4 evidence grade で非空 ✓（UNKNOWN=空は無 proof で整合）(c) `artifact_hash == claim_target_hash` **直接**束縛 = FINAL_ARTIFACT_HASH/REPRODUCED_OUTPUT_HASH の 2 種＝rank3(HBR) ✓。**⚠proof_binding 全列挙で claim_target を確立する ProofKind は 4 種**: **TRAIN_RUN_MANIFEST**（TENSOR_BINDING の **EXACT=rank4** proof set に在り manifest が claim_target を列挙＝**間接確立**）+ TRAIN_TIME_CRYPTO_BINDING（NORM 側）。⇒ **TENSOR_BINDING の slot hash 確立は rank3(直接==)+rank4(間接 manifest)** で「rank3 のみ」は不完全。pQ 自身の反証条件 (iii) の broad reading で 2 件 hit。premise set は「直接==束縛」と「間接確立」を分離すべき（同型 under-scope の一段深い再発防止） |
+| **C3** slice の EP profile 未規定 | TRUE（不在） | ✅ **TRUE + refinement**: prereg で SHADOW/CLOSED_LOOP/OFFLINE_REPLAY/profile = 0（再現）。**広域反証（charter/RL-Routing/LEDGER/node/D0/SOMA/全 prereg）でも slice の EP evidence profile を pin する記述 0**。⚠**(N-A) 用語衝突** — charter `:13`「boundary-only or real-time **execution** profile」は execution 軸（project は real-time を retain）で EP evidence profile と別（C3 は後者を測っており正）。**(N-B) DC-1 制約**（prereg `:31`）「D1.1-B 完了前は closed-loop eligibility 不可」= slice の到達可能 profile を CLOSED_LOOP 除外で bound + slice run-timing（完了前/後）自体が未決 ⇒ 「未決」consequence を強める |
+| **C4** 両 slot 同型 | 偽（訂正形で成立） | ✅ **原形 FALSE / 訂正形 TRUE** — OFFLINE_REPLAY: TB=not_applicable / NORM=required（他 2 profile は両 required）・proof_policy も EXACT で NORM のみ NORMALIZER_HASH+FINAL_ARTIFACT_HASH。locator gap 構造は同型・profile/proof 適用は非対称 |
+
+**完全性**: custody record 質問（§2）は C1(ref無)+C2(rank3 locator)+C3(slice=SHADOW rank2)+C4(両slot同型)を逐語含む ⇒ **C1-C4 = Rs へ渡した事実主張の完全集合**（漏れ 0）。
+
+**consequence（pQ 主張）評価**: 「C3 未決 + C2 訂正で rank2-locator 動機づけ不成立 ⇒ 前提確定まで選択肢集合を確定できない」= **SOUND**。私の C2 refinement（rank4 間接確立）+ C3 refinement（DC-1 + run-timing 未決）が consequence を**強める**（未決 premise が記載より多い）⇒ **本 artifact が選択肢を提示しないのは正しい**。
+
+**未測定への追加事実（pQ の deferred NORM に関連）**: NORM の EXACT proof set は **FINAL_ARTIFACT_HASH（直接束縛）**を含む一方 TB の EXACT は含まない ⇒ **rank4 での直接/間接も slot 間で非対称**（NORM 測定時に反映すべき）。
+
+**役割の境界（Rs 破棄の教訓を適用）**: 本検証は on-disk fact の照合のみ。**A/A′/B の選択・materiality・profile 決定は一切判定しない**（premise 確定=Rs、profile 決定=Rs/VT-DESIGN）。**B1 = OPEN 継続**。私 = 正しい前提での再上程を待って verify 保留（self-start なし）。impl/training/authority CLOSED。
