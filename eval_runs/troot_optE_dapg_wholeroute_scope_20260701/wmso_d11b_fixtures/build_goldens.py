@@ -3,7 +3,17 @@
 
 Usage:
   build_goldens.py <outdir>            regenerate fixtures into <outdir> (writes)
-  build_goldens.py --verify <dir>      read banked fixtures, assert conformance, print sha256 (no writes)
+  build_goldens.py --verify <dir>      read banked fixtures, assert conformance, run the negative
+                                       controls, print sha256 (writes nothing)
+
+v6 (self-caught after the pS v5 PASS):
+- the negative controls now run on BOTH paths. Through v5 they ran only when generating, so
+  --verify — the non-destructive command a verifier is directed to use — returned rc=0 having
+  exercised no guard at all, while §6 advertised "24 fired" as a property of the builder. A
+  verifier could therefore read guard efficacy into a run that never tested it. Same class as
+  pN R3 (an evidence claim wider than the path that delivers it), found here by applying it to
+  my own instrument rather than waiting for the exact-pin gate. Fixture bytes are unaffected:
+  the controls mutate in-memory deepcopies only.
 
 v4 (cycle-2 folds):
 - conformance asserted over EVERY declared composite type; v3 checked 5 of 14, so a member
@@ -349,6 +359,30 @@ NEGATIVE_CONTROLS = [
 ]
 
 
+def run_negative_controls():
+    """Show every declared assertion class actually fires.
+
+    In-memory only (deepcopy of G2) — touches no file, so this runs in --verify too.
+    v5 ran it only on the generate path, so the non-destructive path a verifier is told
+    to use returned rc=0 without ever exercising a guard; §6's "24 fired" then described
+    coverage the recommended command did not deliver (the pN-R3 class, self-caught v6).
+    """
+    fired = []
+    for label, mut in NEGATIVE_CONTROLS:
+        t = copy.deepcopy(G2)
+        try:
+            mut(t)
+            conformance(t, "NEG")
+            fired.append(f"DID-NOT-FIRE: {label}")
+        except AssertionError:
+            pass
+        except (KeyError, IndexError):
+            fired.append(f"MALFORMED-CONTROL: {label}")
+    print(f"negative controls: {len(NEGATIVE_CONTROLS) - len(fired)}/{len(NEGATIVE_CONTROLS)} fired"
+          + ("" if not fired else " — " + "; ".join(fired)))
+    assert not fired, "a declared assertion did not fire: " + "; ".join(fired)
+
+
 def main():
     args = sys.argv[1:]
     verify = bool(args) and args[0] == "--verify"
@@ -364,6 +398,7 @@ def main():
             conformance(data, name)
             assert raw == wcj_bytes(data), f"{name}: banked bytes are not canonical WCJ"
             print(f"{name} conformance PASS  sha256={hashlib.sha256(raw).hexdigest()}  bytes={len(raw)}")
+        run_negative_controls()
         return
 
     for name, spec, _ in FIXTURES:
@@ -383,20 +418,6 @@ def main():
     bad["obs"]["masks"][0]["applies_to"] = ["z_cable_tension", "a_cable_kp"]
     print(f"G-3 insertion-order variant = {hashlib.sha256(wcj_bytes(bad)).hexdigest()}  (MUST differ from G-3)")
 
-    fired = []
-    for label, mut in NEGATIVE_CONTROLS:
-        t = copy.deepcopy(G2)
-        try:
-            mut(t)
-            conformance(t, "NEG")
-            fired.append(f"DID-NOT-FIRE: {label}")
-        except AssertionError:
-            pass
-        except (KeyError, IndexError):
-            fired.append(f"MALFORMED-CONTROL: {label}")
-    print(f"negative controls: {len(NEGATIVE_CONTROLS) - len(fired)}/{len(NEGATIVE_CONTROLS)} fired"
-          + ("" if not fired else " — " + "; ".join(fired)))
-    assert not fired, "a declared assertion did not fire: " + "; ".join(fired)
-
+    run_negative_controls()
 
 main()

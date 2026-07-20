@@ -118,11 +118,39 @@ pQ dispatch 12:15: bounded cycle-2（B1-B5 限定・5体）完了 → DESIGN **v
 
 **FOUNDATIONAL（dual-arm G-3/88mm §5 引用/DiffIK §1.4/コ/no-kinematic U-3）非抵触・C-1（B-internal enum・frozen enum member+0）・C-2（TimingSpec SI-only・U-3）・rule-g・rule-h（3 択は grounded・完全性を frozen 事実で裏打ち）clean**。
 
-## 12. Verdict（v4）
+## 12. Verdict（v4）⛔SUPERSEDED（2026-07-20 12:51 — 正 = §13/§14）
 
-**設計軸 = ✅PASS（DESIGN v4・pin `9087a2a6e01f` @ `f00c02e378`）— fold の設計軸 sound + B1 を正しく Rs escalation 化**
+> ⛔ 当初の v4 PASS は **pN exact-pin HOLD R1-R3（12:40）が supervene**（7 度目）。R1（cast 全単射破れ + 委譲先 grade 未被覆）= 私が §11 で C2-2 を sound と concur した際の miss（存在≠十分 の未適用）/ R2（§10 が A′ 欠落・§7 が G-4 欠落）= 私の「面間整合 一貫」主張自体の誤り / R3（--verify 非完全）= 私が「--verify PASS=schema-complete」と過信。3/3 own → v5 fold（§13/§14）。
+
+**~~設計軸 = ✅PASS（DESIGN v4・pin `9087a2a6e01f` @ `f00c02e378`）— fold の設計軸 sound + B1 を正しく Rs escalation 化~~**（SUPERSEDED → §13）
 - B1-B5 + cycle-2 fold = faithful・load-bearing premise 4/4 on-disk 検証（存在≠十分 適用）・pQ 3 点 = ①十分 ②十分 ③正確・must-fix 0。
 - ⚠**B1 locator = 正当な OPEN（Rs 裁定事項・設計欠陥でない）**: §4 hash 供給レグは「設計未完」と honest に明示（§2 DC-1/§7 BLOCKED）。**Rs が A/A′/B を裁定するまで design は freeze-ready でない**。私の PASS は fold の soundness + escalation の事実正確性を確認するもので、**B1 の実体を ratify しない**（frozen 境界=Rs 専権）。
 - max-2-cycles 到達（cycle-1+cycle-2）ゆえ追加 debate は Rs 裁量。B1 は debate で解けない Rs 決定。
 - ⚠**two-key**: 本 PASS = 設計軸のみ・**pN exact-pin DESIGN verify を代替しない**（pN 6 度 supervene pattern 継承）。**+ freeze は Rs の B1 裁定を要する**（pS PASS → pN exact-pin → Rs B1 裁定 + freeze）。
-- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin + Rs B1 裁定 待ち（self-start なし）**。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin + Rs B1 裁定 待ち（self-start なし）**。→ §13 で supersede。
+
+## 13. pN exact-pin HOLD R1-R3 supervention + v5 re-verify（2026-07-20 12:51 実測）
+
+pN exact-pin（12:40）= v4 に **HOLD R1-R3**、私の v4 §12 PASS を supervene（**7 度目**）。⚠**R1 は私と pQ が同じ「存在≠十分」を犯した**。held pin（v4 `9d5d44e329` / v5 `96f92af7c8`）+ frozen で全て on-disk 検証し 3/3 VALID + 私の v4 gap を own。
+
+| # | pN finding | on-disk 検証 | 私の v4 gap |
+|---|---|---|---|
+| R1 (CRITICAL・全単射破れ) | INT32→FLOAT32 非単射・v4 の COMPATIBILITY_TEST 委譲が CLOSED_LOOP grade 未被覆 | float32: `16777216`==`16777217`==`16777216.0` 衝突（実測）・frozen EP: COMPATIBILITY_TEST は **rank2(RECONSTRUCTED) のみ**・CLOSED_LOOP min_grade_rank=3 → 委譲先が rank3/4 を覆わない | **C2-2(CAST_LOSSY 削除+§3 委譲)を sound と concur したが委譲先の grade 被覆を未検 = 存在≠十分 の未適用**（pQ も同型を own） |
+| R2 (records) | header{1,2,3}/§7 G-4 欠落/§10 が A/B のみ(A′+normalization 脱落) | v4 で §10=A/B のみ・§7=G-1/2/3 のみ を確認 | **私の §11「面間整合 §2/§4/§7/§10 一貫」主張が誤り**（§10⇔§4 option 不一致・§7⇔§6 G-4 不一致を未照合で consistency を over-claim） |
+| R3 (evidence over-claim) | builder は WCJ 完全 validator でないのに §6 がそう読める | v5 --verify に Infinity 注入 → `not a CanonicalDecimal:'Infinity'` rc=1 拒否（v4 は rc=0 通過）・self-test 24/24 fired | **--verify PASS を「schema-complete」と過信**（validator 被覆を未検 = gate-validated-under-the-bug 類型） |
+
+**v5 fold（held pin `96f92af7c8`・tree clean・DESIGN v5 `df755007148d`・fixtures 不変〔既存 golden は禁止 cast 不使用〕）= faithful + sound**:
+- **R1** = §1.4b で INT32→FLOAT32 を **⛔禁止（表セル + prose 一致 — 面間整合 実照合）**・fail-closed（INT32 は INT32 container 恒等）・将来は全 grade obligation 付き schema delta で Rs review。
+- **R2** = header{1,2,3,4}・§7 に G-4・§10 が **A/A′/B × tensor_binding+normalization** に同期。
+- **R3** = builder に CanonicalDecimal/NFC/64-hex 実検査（negative control 16→**24/24 発火**・Infinity 拒否 concrete 確認）+ §6 に「検査する/しない」明記・WCJ 完全性を impl `canonicalize()` leg として事前登録。
+- 軽微 optional（非 blocker）: invalid corpus「表外 cast（FLOAT32→INT32 等）」の**等**が INT32→FLOAT32 を一般則で被覆・表セルも ⛔ ゆえ semantics 完全。明示列挙は cosmetic。
+
+**B1 = 依然 open**（Rs 裁定 A/A′/B・§10 で **tensor_binding + normalization 両 slot** に拡張・grade-locator 実測 §4）。C-1/C-2/FOUNDATIONAL/rule-g/rule-h clean（v4 から不変）。
+
+## 14. Verdict（v5）
+
+**設計軸 = ✅PASS（DESIGN v5・pin `df755007148d` @ `96f92af7c8`）— R1-R3 fold faithful + sound**
+- R1(cast 禁止・表/prose 一致)・R2(records sync)・R3(builder 硬化・Infinity 拒否実証)= 全て on-disk 検証・must-fix 0。今回は前回 miss(面間整合/validator 完全性)を **表セル実照合 + Infinity 注入 test** で実適用。
+- ⚠**B1 locator = 依然 OPEN**（Rs 裁定・設計欠陥でない）。**freeze は Rs の A/A′/B 裁定を要す**（両 slot）。
+- ⚠**two-key**: 本 PASS = 設計軸のみ・**pN exact-pin 再判定を代替しない**（pN 7 度 supervene・毎回私の後で新 surface を検出 = two-key が機能している証左ゆえ pN leg を軽視しない）。max-2-cycles 到達ゆえ追加 debate は Rs 裁量。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin 再判定 + Rs B1 裁定 待ち（self-start なし）**。
