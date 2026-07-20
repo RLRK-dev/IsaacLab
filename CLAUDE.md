@@ -69,7 +69,7 @@ Personal defaults と汎用ワークフロー (Modes / Scope boundaries / Output
 - **arm制御: `set_joint_position_target` + `write_data_to_sim` のみ許可**
 - **制御方式の変更はrs承認なしに行わない**
 - **到達性・収束性の問題はtask_config.pyのパラメータ調整で解決。kinematic attachment、kinematic trick（物理無視のテレポート・強制配置等）禁止**
-- 〔上記のうち *具体 API 名*（`DifferentialIKController`/`write_joint_*`/`set_joint_*`）は PhysX 実装形。**不変前提「IK 制御のみ・kinematic トリック（物理無視の強制配置＝アーム関節角の直接書き込み等）禁止・制御方式変更は Rs 承認」は全 substrate 共通（§0#3/#5、`validate.sh` Layer 8 が機械検証、唯一の認可例外 = clip-retention pin）**。Newton の対応 API・制御制約は `thread-vault/06-Knowledge/LL-Newton.md` 参照〕
+- 〔上記のうち *具体 API 名*（`DifferentialIKController`/`write_joint_*`/`set_joint_*`）は PhysX 実装形。**不変前提「IK 制御のみ・kinematic トリック（物理無視の強制配置＝アーム関節角の直接書き込み等）禁止・制御方式変更は Rs 承認」は全 substrate 共通（§0#3/#5、`validate.sh` Layer 8 が機械検証）**。**kinematic 例外は clip-retention pin（クリップのケーブルクランプ）の 1 件のみ使用可**（Rs 裁定 2026-07-21 逐語「クリップのケーブルクランプのみ kinematic を使用可」が 07-19「kimenatic 完全削除」を上書き＝ RS71 §0#5 の状態へ復帰）。weld / cable・finger attachment / arm・body state 直接駆動は引き続き禁止。Newton の対応 API・制御制約は `thread-vault/06-Knowledge/LL-Newton.md` 参照〕
 
 - robot cfg: FRANKA_PANDA_HIGH_PD_CFG ベース（disable_gravity=True（HIGH_PD_CFG準拠）、hand actuatorのみ速度制御に上書き）
 - approach: `command_type="position"`、descend/push: `command_type="pose"`
