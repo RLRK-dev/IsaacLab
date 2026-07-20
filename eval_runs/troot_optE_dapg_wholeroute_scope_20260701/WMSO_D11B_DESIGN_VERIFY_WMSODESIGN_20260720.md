@@ -460,3 +460,33 @@ pN が claim-set v2（私の §24 refinement を fold した版）に **V2-B1..B
 ⇒ ⭐**v11 delta = 確認（faithful）**。B1 = CLOSED 確定 が正しく記録。機構 PASS carry。authority CLOSE は Rs ratify（record-verified honest・私の verbatim-verify でない・境界保持）に依拠。
 
 **次**: **freeze = 別 gate・Rs 専権**（私は gate しない）。impl/training/authority CLOSED 継続。**私 = freeze 後の D1.1-C 設計、または追加 verify 依頼を待つ（self-start なし）**。
+
+## 30. v12 records-fix 確認 + declared-open を伴う freeze の設計軸所見（2026-07-20 23:05 実測）
+
+⭐**pQ が freeze 直前の records-fix を v12 に fold（設計 semantics 不変）+ declared-open を伴う freeze の設計軸所見を要求**。design v12 = **on-disk 実測 `62d4e44f959b2702eaf8ac266c82b1262d3c571bc329eb81b1d9e7d1c0f9787c` @ `f8b34bbd98`**（pQ dispatch 一致）。⚠**freeze 自体は Rs 専権 — 本所見は Rs の freeze 判断への設計軸入力であって freeze の authorize でない**。
+
+### (A) v12 delta = ✅確認（records-only・機構 §27A/§28/§29 PASS carry）
+
+**pin**: v12 `62d4e44f…` @ f8b34bbd98 ✅ / builder `c74ca3b36193` 不変 ✅。**diff = 1 file・+6/-2 の records-only**（§10 版自参照・§12 changelog のみ・**D-1 表/反証条件/error code/fixture/builder = 無変更**）。
+- **版自参照 fix = ✅正**: §10 冒頭が「本 v6.1 =」のまま v7〜v11 を通過していたのを正しい系譜（v6.1→A′→⛔破棄→claim-set two-key→v9→§27B→v10→ratify→v11→v12）へ置換。⭐**自検出経路 = freeze 前に §10 自身の規律「open=0 の無条件宣言をしない」に従い open を数え直したこと**（search/sweep 規律の適用）。
+- **取り下げた自警報（E_BINDING_NORMALIZER_ORPHAN）= ✅取り下げ妥当（defect でない）**: on-disk 照合 — (i) **self-evident・括弧無の code は 17+ 件**（LENGTH_SHAPE_MISMATCH/DUPLICATE_FIELD/BOUNDS_EMPTY/QUAT_ON_NONQUAT/MASK_SELF/CONTROL_MODE_MISMATCH…）で「自明名に括弧注記を付けない」規約は実在 (ii) **BELIEF_ORPHAN も bare**（:229）で一貫 (iii) **§7 `:370` が NORMALIZER_ORPHAN の到達性負例を必須化**（"NORMALIZER_MISSING/ORPHAN/VALUE" 明記）⇒ trigger は impl test で pin。⇒ under-defined defect でない。⭐**規約を測ってから取り下げた**のは正しい discipline（measure-before-assert）。
+
+### (B) declared-open を伴う freeze = 設計軸所見 = ✅VALID（non-blocking precision 1 件付き）
+
+**所見**: **freeze-with-declared-open は構造的に VALID**。核心機構（D-1・validator・error code）は完成し 3 軸 CLOSE（§27A/§28/§29）。残る 4 open は**いずれも deferrable 型**でメカニズム defect でない:
+- **② §7 到達性負例** = impl-leg 義務（§7:370 明記・impl = CLOSED ゆえ正しく impl へ defer）✅
+- **③ §5 閾値系**（必須化可否・class 台帳・判定器・窓幅）= slice 詳細 prereg + Rs 裁定へ defer ✅
+- **④ U-2/U-5/U-6** = D1.1-C prereg 必須入力・DDR 登録済（downstream chunk）✅
+- **① stats_key 一意性** = §1.2 詳細へ defer ✅ — ただし下記 precision。
+
+⚠**non-blocking precision（① の risk 記述の精緻化）**: pQ の「どちらの読みでも fail-closed」は **length 不一致 case に精確**（共有×異 length → NORMALIZER_VALUE の要素数述語が矛盾して発火）だが、**同一 length で key 共有**の case を覆わない。**duplicate-stats_key / uniqueness enforcement code は不在**（grep 0・stats 系 code は MISSING/ORPHAN/VALUE のみ）ゆえ **unique-required 読みでは同一 length 共有が silent-pass**（fail-closed でない）。⇒ 正確な risk = 「length 不一致 = fail-closed / 同一 length 共有 = unique 読みで silent-correctness gap（author-caused mis-config・unsafe 状態でない・§1.2 で読み確定時に解決／unique なら dup code 追加）」。design 自身 §1.2 `:64` が「共有可なら要素数述語が矛盾し得る」と interaction を自認済。⭐**これは freeze を止めない**（① は declared-open で §1.2 に解決を defer・worst case は author-caused silent mis-config で unsafe でない）が、「fail-closed either reading」の blanket 表現は同一 length residual を明記する形に精緻化すべき。
+
+**先例 = ✅apt + 確認済**: frozen D1.1-A `:567-568` §10 は **open を残したまま freeze**、しかも **同じ「open=0 の無条件宣言をしない」規律**、かつ **本 4 open より重い open**（RV7 transcript fidelity = Rs confirm PENDING・register ⑩ = Rs confirm 対象）を declared のまま freeze。⇒ declared-open を伴う freeze は本 project の確立形。
+
+### 境界・まとめ
+
+⛔**freeze の可否は Rs 専権**（本所見は設計軸入力）。impl/training/closed-loop authority = CLOSED 継続。**先祖返り無し**（semantics 不変・A′ VOID）／**先走り無し**（freeze を Rs へ defer・所見は authorize でない）。
+
+⇒ ⭐**v12 delta = 確認（faithful・records-only）**・**freeze-with-declared-open = 設計軸 VALID**（核心 3 軸 CLOSE + 4 open は deferrable + D1.1-A 先例）・**① stats_key の risk 記述に non-blocking precision 1 件**（fail-closed は length 不一致に限定・同一 length 共有は unique 読みで silent gap — freeze は止めない）。**freeze 判断 = Rs**。
+
+**次**: Rs の freeze 判断（私は gate しない）→ freeze 後 D1.1-C。**私 = freeze 後の D1.1-C 設計 or 追加 verify 依頼を待つ（self-start なし）**。impl/training/authority CLOSED。
