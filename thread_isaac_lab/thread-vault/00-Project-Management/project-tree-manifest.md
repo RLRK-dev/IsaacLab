@@ -120,8 +120,8 @@ _249 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-Meta-Path-Y-Precedent-Index-2026-05-04-Update` | IN_PROGRESS | `T-Meta-Path-Y-Precedent-Index` |
 | `T-Option-E` | COMPLETE | `T-L1X-Substrate-Realism` |
 | `T-Predicate-Redefinition` | IN_PROGRESS | `T-ROOT` |
-| `T-ROOT-COORD` | IN_PROGRESS | `T-ROOT` |
-| `T-ROOT-COORD2-AC-IC-GC-Audit-2026-05-13` | IN_PROGRESS | `T-ROOT-Pivot-Chain-Architecture-Review` |
+| `T-ROOT-COORD` | ARCHIVED | `T-ROOT` |
+| `T-ROOT-COORD2-AC-IC-GC-Audit-2026-05-13` | ARCHIVED | `T-ROOT-Pivot-Chain-Architecture-Review` |
 | `T-ROOT-Cable-Physics-Calibration-Packet-Design-2026-05-13` | IN_PROGRESS | `T-ROOT-Pivot-Chain-Architecture-Review` |
 | `T-ROOT-Chain-Architecture-Pivot-Design-Packet-2026-05-13` | IN_PROGRESS | `T-ROOT-Pivot-Chain-Architecture-Review` |
 | `T-ROOT-Chain-Context-Math-Diagnostic-2026-05-13` | COMPLETE | `T-ROOT-Pivot-Chain-Architecture-Review` |
