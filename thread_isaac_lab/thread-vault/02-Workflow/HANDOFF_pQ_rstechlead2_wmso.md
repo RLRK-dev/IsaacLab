@@ -1,4 +1,4 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 00:23 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 01:34 JST
 
 > Pane-specific handoff (multi-pane NEST; does not clobber the shared HANDOFF.md).
 > Full detail = memory `handoff_cc_pQ_rstechlead2_wmso_d11a_freeze_2026-07-20.md`. Ground truth = frozen package + freeze record + manifest + LEDGER row44, not this narrative (§運用4).
@@ -62,6 +62,26 @@
 - **(A) 単腕レーン + 合成/barrier**（保持 = `kind=WAIT` の別単位。delta 必須） vs **(B) 両腕 skill + 静止目標**（保持 = 同一 skill 内の静止 target。DUAL-ARM 検査は claim の全称検査で足り delta 不要）。
 - ⚠**pX の「凍結が単腕レーンを強制する」は too strong**（反例 = (B)）。**選択は pX 所管**（skill 分解の形）。**層 1 の記録形式は選択に依存**するので選ぶ前に確定しない、と依頼済。
 - **層 1 → 契約層の写像（(A) の場合・pX 受諾済）**: 駆動 = claim あり + `control_mode` 非 WAIT ／ 保持 = claim あり + `control_mode` WAIT ／ 不関与 = claim なし。
+
+### ✅ delta 仕様 = 確定（pX 入力完了 2026-07-21 01:33・上程は Rs 判断待ち）
+
+**Rs 承認済（pX 経由）**: 単位 = **片腕レーン** ／ **並行合成を最初のマイルストーン**に。
+
+**単一不可分 delta = `SkillCompositionDefinition`**（10 点）:
+1. 容器（合成グラフ）+ **逐次合成** 2. **並行合成 `ParallelRegion`** 3. **必須 start barrier** 4. **必須 join** 5. **region-level postcondition** 6. **明示 planned synchronization events** 7. `OutcomeEffectSpec`（**branch-local**）8. `CompositionCertificate` 9. **`BranchEffectScope`** + `E_BRANCH_POSTCONDITION_OUT_OF_SCOPE` / **`RegionObservationScope`** 10. **evaluator registry** + `E_EVALUATOR_UNREGISTERED`（fail-close）+ **適合試験**
+
+- ⭐**核心不変式**: **merged branch effects does NOT entail region success**。`region_success = branch_readiness ∧ region_postcondition(joint_snapshot) ∧ planned_events_completed ∧ join_completion`。
+  - **根拠 = 型論証**（動画ではない）: `OutcomeEffectSpec` は branch-local ／ 凍結 `ControlResourceSpec` の 4 key に **cable は存在しない**（`:142` definition 級 claim は `ControlResourceSpec` のみ・`:424` で untyped dict を pin 語彙へ**意図的に置換済**）／ region success は joint snapshot 上の述語 ⇒ **どの branch も cable を claim できず、branch postcondition は cable を参照できない** ⇒ merge しても含意しない。∎
+  - ⚠**動画は「この gap が空でないことの存在証人」に降格**（本 project では動画由来の物理妥当性判定は Rs 専権・独立 judge 経路が要るため、根拠を frame 番号に置くと delta の受入がその経路に従属する）。
+  - ⭐**より強い形**: 「**cable が絡む成功条件を持つタスクは region postcondition を構造上必然的に要する**」= 存在主張でなく**証明**。上程はこれを使う。
+- ⭐⭐**最大価値 = 安全帰結**: region postcondition を **support lane 解放前**に joint snapshot 上で評価し **PASS 時のみ** release event を発行 ⇒ **「成功確認前に支持 hold を解除する」経路が型で禁止**（既定値の議論でなく構造）。FAIL/UNKNOWN なら release せず hold 維持。
+- **級の分離（必須・同名で級だけ違う形にしない）**: **branch 級** = 自 claim の 4 key 語彙のみ ／ **region 級** = 宣言された joint belief field（**cable 含む**）。⚠一律適用すると **region postcondition が機能を失い delta が自壊**する。
+- **reuse（新機構を作らない）**: scope 規則 = 凍結 `InitiationSpec.required_belief_fields`（`:151`）pattern の合成層への適用 ／ evaluator registry = `SKILL_ID_REGISTRY`（`:436`）/ `METHOD_REGISTRY`（`:109`）と同 pattern。⭐`:109` 逐語「**schema 変更なしで algorithm を拡張可能**」⇒ **evaluator 追加は freeze 後も凍結を開け直さず Rs 承認だけで済む** = 上程の強い論点。
+- **再帰の停止条件**（「その規則は何が強制するのか」への答え）: **artifact identity + 人間承認**に着地。⚠ただし **method_id 追加 = label の追加**に対し **evaluator 追加 = 信頼基盤に実行コードを入れる行為**で類推は非対称 ⇒ **適合試験**を必須化して人間審査でなく機構で閉じる。
+- **適合試験の形**: 宣言 scope S 上で一致し **S の外だけが異なる 2 joint snapshot** に**同一 verdict** を要求（scope 外を読んでいれば verdict が割れて落ちる）。⚠**健全な反証器であって証明ではない** — 「banked pair 集合上で scope 違反を**反証する**」と書き「**保証する**」とは書かない。⚠⚠**fixture 選択が強度を決める**: 差分 pair に「**4 key 語彙上で一致し cable 状態だけが異なる**」ものを**必ず含める**（一般の S 外 pair では実際の懸念を識別しない = 「違う結果が出得ない試験は試験でない」の直接適用）。
+- **凍結側は触らない**: `ControlResourceSpec` / `ControlMode` とも改造不要。
+- ⚠**外部依存 1 件**: Rs 裁定（43-step の step 9,12,20,28,36 で右腕が保持も指令もされない件）が **ParallelRegion に単一 branch を許すか**を決める ⇒ **裁定前に branch 数の下限を型に焼き込まない**。
+- **containment（測定済・結論）**: 凍結の包含規則は `:380` の **`required ⊆ offered`（充足性）1 件のみ**で、**`runtime ⊆ declaration`（包含性）は強制されていない**。⇒ ただし scope を **definition 級に束縛**すれば runtime は宣言 scope の外ゆえ containment 検査は不要。
 
 ### 本 arc の恒久教訓（今夜追加分）
 
