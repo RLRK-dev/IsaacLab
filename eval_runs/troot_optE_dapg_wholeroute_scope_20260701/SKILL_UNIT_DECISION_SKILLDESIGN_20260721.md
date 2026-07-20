@@ -50,6 +50,25 @@ NOT CLOSED:
 **生成物 = 子を exact-pin した outcome 付き composition graph。**
 **`SKILL_ID_REGISTRY` に載るのは単位のみ。** 合成体は登録しない ⇒ 組み合わせが増えても registry は増えない。
 
+### 1-1. `ParallelRegion` の意味論 — **B 採択（Rs 裁定 2026-07-21）**
+
+`ParallelRegion` は**厳密な並行演算子ではなく、region contract の scope** である。region-level postcondition / evaluation cut / joint snapshot policy / planned synchronization event / region outcome route を保持する。⇒ **`branch_count >= 1` が意味を持つ。**
+
+**根拠（本書 §4 の型証明から・branch 数に依存しない）:** branch は definition 級で cable を claim できない。これは branch が **1 本でも 2 本でも同じ**。⇒ 片腕のみ稼働する step でも「cable はまだ着座しているか」を述べられる主体は存在しない。arity ≥ 2 を課すと、それらの step は region contract を持たない裸の node になり、**region postcondition が存在する理由そのものが片腕 step でだけ失われる**。
+
+**canonical 意味論（同一意味に複数 hash を生じさせない規則）:**
+
+```text
+singleton region かつ region postcondition が非自明  → 独立した対象（node とは別物）
+singleton region かつ region postcondition が自明/不在 → 通常 node へ lowering
+```
+
+⇒ `ParallelRegion([A])` は `A` と同値ではない（`A` = node ／ 前者 = A に region contract を課した領域）。ゆえに B の下で hash 二重化は生じない。
+
+⛔ **ABSENT セルを合成 WAIT / NOOP skill として実体化しない**（Rs 明示）。**ABSENT は実行動作ではなく、動作不在の測定値**である。型の arity を満たすためだけの充填を行わない。
+
+⚠ **紛れやすい境界（明示）:** step 14 の `hold@L` は左指が cable を実際に把持し維持している **実在の動作**であって合成ではない。対して step 12 の右腕は**何も掴んでおらず指令も無い** ⇒ **ABSENT。充填しない。**
+
 ## 2. 現行 9 語彙の写像
 
 | 現行 | 単位合成 |
@@ -92,7 +111,7 @@ predicate_input = project(joint_snapshot, RegionPostconditionSpec.required_belie
 
 ## 5. 未解決・依存
 
-1. ⛔ **不変前提の裁定待ち（Rs 専権）** — 43-step の step 9・12・20・28・36 で右腕が保持も指令もされない（`HALF_UNCLAMP_RELEASE` の R 全開放から `AERIAL_REGRASP` の再把持までの窓）。これが **`ParallelRegion` が単一 branch を許すか**を決める。⇒ **裁定前に branch 数の下限を型に焼き込まない。**
+1. ✅ **CLOSED（Rs 裁定 2026-07-21 =「B」）** — 43-step の step 9・12・20・28・36 で右腕が保持も指令もされない件（`HALF_UNCLAMP_RELEASE` の R 全開放から `AERIAL_REGRASP` の再把持までの窓）。`ParallelRegion` = region contract scope（`branch_count >= 1`）と確定。⇒ 当該 step は **single-branch region ＋ region postcondition** で表す（§1-1）。合成 WAIT/NOOP による充填は行わない。⇒ branch 数下限・singleton hash 意味論・ABSENT の graph projection 規則が同時に確定。
 2. **F4（腕参加が機械宣言されていない）** — `skills/*.py` に参加/所有語彙 0 hit、v1 manifest 9 行 8 field に該当 field 皆無。RL step は per-arm command field が全て `None` で、腕差の根拠は description 文字列のみ。
 3. `RL-Routing-Design.md:1032`「排他的単腕」の扱い（p5 所管 / 不変前提は Rs）。
 
