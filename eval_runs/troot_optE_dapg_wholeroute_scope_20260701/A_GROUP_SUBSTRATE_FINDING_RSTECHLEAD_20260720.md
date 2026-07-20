@@ -144,6 +144,36 @@ be implemented as written**. ⛔ A [CHANGE] remains CLOSED — correctly so; had
 bundle would have produced a green census (35→6) with arms that no longer move, which is precisely the
 "a gate validated under the bug" / "appearance-only ≠ working" failure class.
 
+## 8. ⛔ DECISION PACKAGE FOR Rs — both axes converged, execution fenced
+
+Design axis (p5, charter §14.24-c @ c33 `eab548a988`) and evidence/scope axis (pN, 11:39, from
+`git show @c33` + its own installed-source check) **independently reached the same recommendation**.
+Both fence execution behind Rs. Nothing below has been executed.
+
+**Recommendation (both axes):**
+1. **Migrate the Fingertip Z-Check Gate to env7-mujoco, then retire the VBD copy** — Rs updates
+   `CLAUDE.md` accordingly.
+2. **Approve the B0/B1 evaluator's migration to env7-mujoco**; existing B0/B1 artifacts become
+   **HISTORICAL / NOT_COMPARABLE** and fresh re-acquisition is **mandatory**.
+3. **Do not retain the VBD track** — pN: retention "runs counter to complete-removal and to single-substrate";
+   p5: it is reinvestment in a Rs-discarded track, re-meets the `joint_friction` gripper wall, and
+   defeats the single-realization convergence §14.24(2) already ordered.
+
+**Why this is Rs's call and not CC's:**
+- `CLAUDE.md:271` names the Fingertip Z-Check Gate as a sanctioned harness. **CLAUDE.md changes are
+  Rs prerogative** (三原則 #1 / `prohibited.md`), and §14.16-2 forbids removing a sanctioned gate
+  without verification. CC will not execute it.
+- Changing the substrate of an **active evaluator** invalidates banked B0/B1 evidence; the migration
+  cost and re-acquisition scope need Rs sign-off.
+
+**Rs options on item ①**: (a) migrate the gate to env7-mujoco and retire the VBD copy *(both axes'
+recommendation)* · (b) approve the retire and update `CLAUDE.md` · (c) hold the VBD branch for now.
+
+**What unblocks on a decision**: the A-group class closes → manifest v2.x rows and census arithmetic
+can move → prereg is re-issued against the ruled class → implementation may then be gated normally.
+**Until then**: A [CHANGE], A-2, RUN, landing, push, training all remain **CLOSED**, and prereg v2
+§B2 remains **DO-NOT-IMPLEMENT**.
+
 ## 7. Current state in one place (authoritative; supersedes any earlier phrasing in this doc)
 
 | question | current answer |
