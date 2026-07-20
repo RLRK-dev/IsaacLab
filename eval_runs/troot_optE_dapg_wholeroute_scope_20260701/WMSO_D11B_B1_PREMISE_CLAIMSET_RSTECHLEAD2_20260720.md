@@ -47,11 +47,11 @@
 
 ## CLAIM-2 — locator の可用性は **軸 B（target-byte）で rank 3 のみ**、軸 A（association）は rank 3 + rank 4
 
-> ⭐**本 claim は v1→v5 で 3 度書き換わった。現行形は以下のみ**。v1-v3 の系譜（誤訂正 2 回を含む）は末尾の折りたたみへ隔離した（pN V4-R1）。
+> ⭐**本 claim は v1→v6 で 3 度書き換わった。現行形（v6）は以下のみ**。v1-v3 の系譜（誤訂正 2 回を含む）は末尾の折りたたみへ隔離した（pN V4-R1）。
 
 | 項目 | 内容 |
 |---|---|
-| **claim_id** | `B1-C2`（v5 現行形） |
+| **claim_id** | `B1-C2`（**v6 現行形** — semantic form は v5 から不変・版ラベルのみ更新） |
 | **主張** | (a) `ProofItem.ref: str` は**必須 field**であり、TENSOR_BINDING は**全 4 grade で非空の proof set** を持つ ⇒ **ref 自体は全 grade に存在する**。(b) ⭐**ただし「ref が在る」ことと「target 実体を解決できる」ことは別軸**。**軸 A = hash association**（claim target hash を確立/言及する）／**軸 B = target-byte resolvability**（`resolve_artifact(ref, expected_sha256)` で **target artifact 自身の bytes** を得られる）。(c) **B1 が問うのは軸 B**。(d) ⇒ **TENSOR_BINDING の軸 B locator は rank 3（`FINAL_ARTIFACT_HASH` / `REPRODUCED_OUTPUT_HASH`）にのみ存在する**。rank 4 は軸 A のみ（`TRAIN_RUN_MANIFEST` の ref は **manifest 自身**を解決し、その内容が claim_target_hash を列挙するに留まる）。rank 2 / 1 は両軸ともなし |
 | **対象 slot / profile** | `tensor_binding`（`normalization` は `B1-C4b` の表で測定済） |
 | **期待真偽** | **TRUE** |
@@ -131,7 +131,7 @@
 | B1-C4a | 両 slot に同型で効く | ⛔ **偽** — **schema 層に限定してのみ成立** |
 | B1-C4b | （前回は主張していない） | ⚠ **end-to-end は非同型**（proof 層 rank4 + profile 層 OFFLINE_REPLAY） |
 
-**⇒ 集計（v5 現行・C4 分割後は 5 項目）**: **そのまま成立 = C1 / C2（軸 B）の 2 件**、**軸の明示が要った = C2**、**根拠なし = C3**、**schema 層のみ成立 = C4a**、**前回未主張 = C4b**。⚠**v1-v4 の「そのまま成立は 1 件のみ」は、C2 を誤って否定していた期間の集計であり撤回**する。
+**⇒ 集計（**v6 現行** — semantic form は v5 から不変・版ラベルのみ更新。C4 分割後は 5 項目）**: **そのまま成立 = C1 / C2（軸 B）の 2 件**、**軸の明示が要った = C2**、**根拠なし = C3**、**schema 層のみ成立 = C4a**、**前回未主張 = C4b**。⚠**v1-v4 の「そのまま成立は 1 件のみ」は、C2 を誤って否定していた期間の集計であり撤回**する。
 
 ⚠**訂正の系譜（v6 現行形・pN V5 指摘で置換）**: **C2 = v1 原形「locator は rank 3 のみ」は軸 B において正しかった**。v2（「不完全」）と v3（「逆転は測定 artifact」）は**いずれも誤訂正**であり、原因は**軸 A（hash association）と軸 B（target-byte locator）の混同**。**v4 で軸を分離し、原形が正しいと確定**。⇒ **訂正が誤りだったのであって、原主張が誤りだったのではない**。C4 = v2 で profile 非対称を訂正 → **v4 で C4a（schema 層・真）/ C4b（end-to-end・非同型）に分割**。
 ⚠**この事例の教訓**: **「訂正を重ねること」自体は正しさに近づく保証にならない**。軸を取り違えたまま訂正すると、**正しい主張から遠ざかる方向に 2 回進んだ**（v1 正 → v2 誤 → v3 更に誤 → v4 で復帰）。
