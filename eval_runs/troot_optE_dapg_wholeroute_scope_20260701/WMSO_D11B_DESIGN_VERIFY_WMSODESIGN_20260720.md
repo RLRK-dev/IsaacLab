@@ -147,10 +147,79 @@ pN exact-pin（12:40）= v4 に **HOLD R1-R3**、私の v4 §12 PASS を superve
 
 **B1 = 依然 open**（Rs 裁定 A/A′/B・§10 で **tensor_binding + normalization 両 slot** に拡張・grade-locator 実測 §4）。C-1/C-2/FOUNDATIONAL/rule-g/rule-h clean（v4 から不変）。
 
-## 14. Verdict（v5）
+## 14. Verdict（v5）— ✅VALID（v6 delta が supersede・§15/§16。error でなく version 前進 + 私の v5 gap は §15 で own）
+
+> v5 PASS は covered 範囲では valid。ただし pN 再判定に到達する**前**に pQ が S-1 を自検出 → v6 fold（§15）。ゆえ v5 は pN exact-pin 未到達で v6 が現行版。
 
 **設計軸 = ✅PASS（DESIGN v5・pin `df755007148d` @ `96f92af7c8`）— R1-R3 fold faithful + sound**
 - R1(cast 禁止・表/prose 一致)・R2(records sync)・R3(builder 硬化・Infinity 拒否実証)= 全て on-disk 検証・must-fix 0。今回は前回 miss(面間整合/validator 完全性)を **表セル実照合 + Infinity 注入 test** で実適用。
 - ⚠**B1 locator = 依然 OPEN**（Rs 裁定・設計欠陥でない）。**freeze は Rs の A/A′/B 裁定を要す**（両 slot）。
 - ⚠**two-key**: 本 PASS = 設計軸のみ・**pN exact-pin 再判定を代替しない**（pN 7 度 supervene・毎回私の後で新 surface を検出 = two-key が機能している証左ゆえ pN leg を軽視しない）。max-2-cycles 到達ゆえ追加 debate は Rs 裁量。
-- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin 再判定 + Rs B1 裁定 待ち（self-start なし）**。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin 再判定 + Rs B1 裁定 待ち（self-start なし）**。→ §16 で supersede。
+
+## 15. pQ 自検出 S-1（pS v5 PASS 後・pN/pS 指摘でない）+ v6 delta re-verify（2026-07-20 13:18 実測）
+
+私の v5 §14 PASS（`4e633489a9c2`・12:51）を pN が再判定する**前**に、pQ が自ら S-1（検証計器の欠陥・MED）を検出 → v6 fold。v5 は pN exact-pin 未到達で v6 が supersede（error でなく version 前進 + 私自身の v5 gap は下記 own）。
+
+**Pins（held commit `81f33ceefd`・当該 6 file 全て worktree drift 無し・method=sha256sum を v5 `df755007148d` 再現で確認）**:
+- DESIGN v6 = `0459a636e6722acb…` ✓ EXACT / build_goldens.py = `c74ca3b36193…` ✓ EXACT / fixtures 4本 `af90712a`/`991651b9`/`dd14f6b6`/`59bbfbba` = 不変 ✓ EXACT。
+
+**Scope（先祖返り/先走り guard・diff 実測）**:
+- design doc = 10+/4-・**全 hunk = 3 個のみ = header(`@@ -1`) + §6(`@@ -279`) + §12(`@@ -357`)**（全 hunk header 列挙で確定）。**設計 semantic 節（§1-§5,§7-§11・§1.4b cast 表/§4 grade-locator/§10 A/A′/B）は diff に一切不在** → 設計 semantics 不変。
+- build_goldens.py = 37+/16-・**negative-control loop の `run_negative_controls()` 抽出 + `--verify` 経路への追加のみ**・golden 生成コード（`for name,spec,_ in FIXTURES:` write loop）無変更（∴ fixture 不変と整合・生成 semantics へのしみ込み無し）。
+
+**S-1 fix efficacy（到達性 — doc を読まず私が実行して確保）**:
+
+| leg | 実測（scratch 複製・held-commit 版で実行） |
+|---|---|
+| --verify が negative control を実走するか | `--verify .` → `negative controls: 24/24 fired` を出力 + G-1..G-4 conformance PASS（sha=banked）+ rc=0（v5 なら当該経路 0 本） |
+| 非破壊 | 事後 fixture sha256 = pre と一致（`copy.deepcopy(G2)` の in-memory 変異のみ） |
+| guard live（positive control） | G-1 `policy_rate_hz`←`"Infinity"` 注入 → `AssertionError: … not a CanonicalDecimal: 'Infinity'` rc=1（R3 硬化が v6 で活きている） |
+| cosmetic-unchanged 判断の健全性 | INT32→FLOAT32 拒否 = CAST_OK allowlist(不在) + conformance assert(line149) + negative control(line357/list 24番目) が 24/24 に実含 ⇒ pQ の「churn 回避で不変」は 先走り隠しでなく健全 |
+
+**面間整合（R2 教訓 実適用）**: §12 が参照する「§6 の v6 訂正ブロック」= §6 line285 に**実在**・記載実測値（`24/24 fired`・rc=0・Infinity→rc=1）は私の run と**完全一致**・§12 は私の v5 record sha `4e633489a9c2` を正引用。header v1–v6 整合。
+
+⚠**私の v5 gap（own）**: v5 verify で私は Infinity 注入 → rc=1 を確認したが、それは**改竄ファイルへの conformance leg** の検査であり、**§6 ⑤「24/24 negative control」が `--verify` 経路で実走するか**は検証せず §6 記載を信用した。S-1 は exactly この gap。これで **R1（委譲先の到達性）→ R3（validator の経路）→ S-1（negative-control の経路）** の**同型 3 度目**。恒久教訓に追加: **「N 本発火 / guard 実在」主張の検証は、downstream verifier が使う exact command を実走し、その主張の evidence が当該経路の出力に現れることを確認せよ（doc 記載を信用しない）**。pQ が pN 到達前に自検出した点は健全（team lesson が proactive 実践へ成熟）。
+
+**records nit（非 blocker・honest 記録）**: §12 line363 が INT32→FLOAT32 拒否の根拠を「negative control #45」と引用するが、当該 control は build_goldens.py line357（list 24番目/最終）。「#45」は ordinal でも現行 line でもなく出所不明 — **事実は真（実測済）だが label が不正確**。churn 不要ゆえ v6 での修正不要に同意するが、pN exact-pin が拾い得る（v2 debate D-29 mis-citation 前例）。
+
+**FOUNDATIONAL（dual-arm/88mm/DiffIK/コ/no-kinematic）非抵触・C-1/C-2・rule-g・rule-h clean（v5 から不変・delta は設計 semantics 不変ゆえ再抵触なし）**。
+
+## 16. Verdict（v6・delta）— ⛔SUPERSEDED（pN が v6 を並行 exact-pin で HOLD H1-H3・§17/§18 が正）
+
+> ⛔ 本 v6 PASS は **未 bank のまま pN が v6 を並行 dispatch で HOLD H1-H3**（H1=その並行 dispatch 自体が pS→pN 順序違反）。**H2（wrapper fail-open）と H3（v5 行 records 矛盾）は私が v6 verify で見逃した gap**（§17 で own）。v6.1 が supersede。
+
+**設計軸 = ✅PASS（DESIGN v6・pin `0459a636e672` @ `81f33ceefd`）— S-1 fold は tooling/records のみ・設計 semantics 不変・fix は実行で確保**
+- delta scope（header + §6 + §12 + build_goldens.py）= diff 全 hunk 実測で確定・設計節不変（先祖返り/先走り 無し）。
+- S-1 fix = `--verify` で `24/24 fired` + 非破壊 + Infinity→rc=1 を**私が実行して確保**（到達性を doc 記載でなく実測）。must-fix 0。
+- ⚠**B1 locator = 依然 OPEN**（v5 から不変・Rs 裁定 A/A′/B × tensor_binding + normalization 両 slot）。**freeze は Rs の B1 裁定を要す**（設計欠陥でない — §4 hash 供給レグを honest に未完明示）。
+- ⚠**two-key**: 本 PASS = 設計軸のみ・**pN exact-pin 再判定を代替しない**。v5 は pN 到達前に v6 が supersede ゆえ pN は **v6** を exact-pin 判定する。pN が私の後で毎回新 surface を検出してきた pattern を軽視しない。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin（v6）+ Rs B1 裁定 待ち（self-start なし）**。→ §18 で supersede。
+
+## 17. pN exact-pin HOLD H1-H3 + v6.1 delta re-verify（2026-07-20 13:2x 実測）
+
+pN exact-pin が v6（`0459a636e672`）を **HOLD H1-H3**。⚠v6 は pS→pN の逐次でなく **pS/pN へ並行 dispatch**（13:10）されており、私の §16 v6 PASS は**未 bank・並行**ゆえ moot（H1 = その並行 dispatch 自体が順序違反）。pQ が v6.1（`0444d71f310a` @ `2c096150fc`）へ fold。**H2/H3 は私が v6 verify で見逃した gap**（H1 は pQ 手順誤り）。
+
+**Pins（held commit `2c096150fc`・当該 6 file worktree drift 無し・method=sha256sum）**:
+- design v6.1 = `0444d71f310a…` ✓ EXACT / builder = `c74ca3b36193…` ✓（**v6 から code diff = 0 行**確認）/ fixtures 4 本 `af90712a`/`991651b9`/`dd14f6b6`/`59bbfbba` = 不変 ✓。⚠HEAD は pQ dispatch 後に `f2eda5b403` へ前進（moving-tree）— pin `2c096150fc` に対して検証（held-commit 規律）。
+
+**Scope（先祖返り/先走り guard・全 hunk 実測）**: design doc = 18+/5-・全変更 = header + §6 + §10(版参照行) + §12（4 hunk）・**全て H1/H2/H3 の records/doc/process**。**設計 semantic 節（§1/§1.4b cast 表/§2/§3/§4 grade-locator/§5/§7/§8/§10 の B1 A/A′/B content/§11）は diff に不在**・**builder code 不変** → 設計 semantics 不変。
+
+| # | pN finding | on-disk 検証（私が実測） | 私の v6 gap |
+|---|---|---|---|
+| **H2**（fail-open・CRITICAL 相当） | §6 の rc=1 主張が interpreter 未指定・repo 標準 wrapper が exit を mask | **独立再現**: 破損 fixture に `python3`→**rc=1**（`not a CanonicalDecimal:'Infinity'`）/ `./isaaclab.sh -p`→**rc=0**（同一 traceback 出力しつつ）= fail-open。⇒ v6.1 §6 の fail-closed コマンド登録（素 python3・≥3.8・stdlib のみ）+ wrapper 禁止 = 正 | **positive control を素 python3 で走らせ rc=1 を得たが wrapper を試さず interpreter 依存を surface しなかった**。AGENTS.md「Exit-code exception」を常時ロードしながら自計器に未適用（pQ と同型・R1→R3→S-1→H2 の 4 度目の到達性盲点） |
+| **H3**（records 矛盾） | §12 v5 行「--verify 全発火」⇔ §6「v5 verify 経路 0 本」が同時成立不能 | **構造確認**: v5 blob `96f92af7c8` main() は L359 `if verify:`→L367 `return`、neg-control ループは L386+（return の後）＝ **--verify 発火 0 で確定**。⇒ v6.1 の v5 行 records-fix「生成経路のみ/verify 未発火」= 正 | **v6 verify で §12-v6-entry ⇔ §6-v6-block の面間整合は照合したが、§12-v5-行 ⇔ §6-v5-主張 の surface pair を再走査せず矛盾を見逃した**（R2「全 surface pair 照合」の不完全適用） |
+| **H1**（順序 bypass・process） | v6 を pS/pN 同時 dispatch し pS→pN 逐次を bypass | pN v6 検証は成立も pS v6 readback 未 bank で PASS-CLOSE 不成立。⇒ :6 に順序規律明記・以後 pS addendum bank 後に pN | pQ 手順誤り（私の miss でない）。**本 v6.1 addendum を bank してから pN へ回す = 是正の実行** |
+
+**v6.1 fold = faithful + sound**: H2 コマンド登録・H3 records-fix・H1 順序規律 = 全て on-disk 実測で追認。custody 行（§12 v6.1 entry）も pN 検証内容と整合。**B1 locator は v5 から不変で OPEN**。**FOUNDATIONAL/C-1/C-2/rule-g/rule-h clean（設計 semantics 不変ゆえ再抵触なし）**。
+
+## 18. Verdict（v6.1・delta）
+
+**設計軸 = ✅PASS（DESIGN v6.1・pin `0444d71f310a` @ `2c096150fc`）— H1-H3 fold は records/doc/process のみ・設計 semantics 不変・H2/H3 を独立実測で追認**
+- delta scope = header / §6 / §10 版参照 / §12 のみ・**builder code 不変・fixtures 不変**（diff 全 hunk 実測で確定）。設計節不変（先祖返り/先走り 無し）。
+- **H2 = 私が wrapper fail-open を独立再現**（python3 rc=1 / `./isaaclab.sh -p` rc=0・同一 traceback）→ §6 fail-closed コマンド登録は必須かつ正。**H3 = v5 blob 構造**（return が control ループの前）で決着確認。**H1 = 順序是正**（本 addendum を先 bank）。must-fix 0。
+- ⚠**私の v6 gap（own）**: H2（wrapper 未試行・interpreter 依存を未 surface）+ H3（v5 行 surface pair 未再走査）。到達性/経路の盲点の **4 度目**。恒久教訓に追加: **「rc/exit 主張は downstream verifier が使う exact interpreter/entrypoint で検証し、repo 標準 wrapper（`./isaaclab.sh -p`）が exit を mask しないか確認せよ（AGENTS.md Exit-code exception を自分の計器にも適用）」**。
+- ⚠**B1 locator = 依然 OPEN**（v5 から不変・Rs 裁定 A/A′/B × `tensor_binding` + `normalization` 両 slot・設計欠陥でない）。**freeze は Rs の B1 裁定を要す**。
+- ⚠**two-key**: 本 PASS = 設計軸のみ・**pN exact-pin（v6.1）再判定を代替しない**。H1 是正順で **本 addendum bank → pN 再判定 → Rs B1 → freeze**。
+- ⭐**設計 content は v5（R1-R3）以降不変** — S-1/H1-H3 は全て verification 計器・records・process の硬化であり設計 semantics に触れていない。設計は収束済で、残 churn は harness 健全性のみ。
+- **impl/training/authority = CLOSED 継続**。dispatch = pQ。**私 = pN exact-pin（v6.1）+ Rs B1 裁定 待ち（self-start なし）**。
