@@ -1,4 +1,4 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 02:20 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 02:23 JST
 
 > Pane-specific handoff (multi-pane NEST; does not clobber the shared HANDOFF.md).
 > Full detail = memory `handoff_cc_pQ_rstechlead2_wmso_d11a_freeze_2026-07-20.md`. Ground truth = frozen package + freeze record + manifest + LEDGER row44, not this narrative (§運用4).
@@ -51,7 +51,13 @@
   - **実行体 = `scripts/wet_run_full_sequence.py`** で、**表を import せず** waypoint JSON の `left_finger` / `right_finger` を読む（`:451-452`）。⚠同 file `:145` 逐語「**Franka-legacy finger indices, NOT UR5e-swapped**」（p4）。
   - ⇒ **旧記述「表の `None` が保持と不関与を潰す」は、非稼働 artifact についての指摘だった**。表そのものの事実としては真だが、**system の記録欠落の論拠にはならない**。
   - ✅**より強い形で生き残る所見**: **保持述語が codebase 全域で不在** — `is_grasped` / `is_holding` / `grasp_state` / `has_grasp` = **0 file**（pQ 独立確認）。⇒ 「どちらの腕が保持しているか」は**表の問題でなく system 全体で観測不能**。
-  - ⭐⭐**さらに強い所見（#4 を決める）**: **`task_config.py:336-337` 逐語「NO grip-force claim; the faithful actuated close is deferred — production stripped build has no actuator/equality, R-S6.6」**（pQ 独立確認）。⇒ **「左手が保持している」は未測定なのではなく、それを生む actuation が「deferred」と宣言されている**。p4 も「左が保持している」を**主張しない**と明言。
+  - ⭐⭐**#4 を決める所見（p4 精密化 c71 を採用・pQ 独立確認）— 3 分割で述べる**:
+    - **未実装（宣言済）= 「忠実な」close のみ**: `task_config.py:336-337` 逐語「NO grip-force claim; **the faithful actuated close is deferred** — production stripped build has no actuator/equality, R-S6.6」。
+    - ✅**在る = joint-level servo と指令経路**: `newton_skill_env_base.py:1635-1640` が driver DOF に `joint_target_mode=POSITION` + `joint_target_ke/kd` + `joint_effort_limit` を設定（`joint_target_pos = GRIPPER_DRIVER_OPEN_RAD`・コメント逐語「start OPEN; runner schedules CLOSE」）。`newton_route_env.py:273-277` に servo SSOT **66.7/2.0/2.5** + **NEGATIVE CONTROL**（非 driver DOF に servo ke が無いこと＝blanket-wired build は落ちる）。
+    - ⚠**未測定 = その servo で保持が成立するか**。
+    - ⛔**旧記述「actuation が deferred と宣言されている」は over-claim だった**（actuation 皆無ではない）。**結論 (b)（証拠取得が先）は不変**。p4 も「左が保持している」を**主張しない**と明言。
+  - ⚠**track 混同に注意（p4 §8-2）**: p4 の servo 根拠は **RL skill env** のもので **43-step 実行体ではない**。⇒ bind 前に LEDGER で track status を確認する。
+  - ⭐**方法論（自己参照の罠・実測）**: 保持述語の全域 sweep を `--include=*.py` 無しで再走したら各 1 file に増えたが、**その 1 file は本 handoff 自身**（不在を記録した文書）。`.py` 限定では **0 のまま**。⇒ **不在の主張は、その記録自身が以後の同じ検索を汚染する**。absence 再測定時は検索空間から自分の記録面を除く。
   - ⚠**pX の epistemic 訂正も採録**: Rs の「ABSENT は**動作不在の測定値**」は、表が動作を測定していない以上成り立たない。正しくは「**測定の不在**」。pX の 5 ABSENT セルは、**finger 状態を記録しない表の上で pX の遷移モデルが生成**したもので、「その間 R が何もしていない」は**表からもモデルからも出ない**。⇒ Rs の A 側根拠（右腕は再把持動作中かもしれない）は**反証材料が無くそのまま立つ**。
 - ✅**層 3（契約層）は欠落なし** — ⚠**私の当初主張「契約層は駆動と保持を区別できない」は撤回**（pS §33 で検証済）。実測: `:61 IdentityKind = LEARNED|SCRIPTED|WAIT` / `:62 ControlMode = DIFF_IK_EE_TARGET|SCRIPTED_SEQUENCE|WAIT` / `:83` 表で **kind → control_mode が決まる** / `:151 ControlResourceSpec` = **所有宣言で behavior と直交**。⇒ hold = `kind=WAIT ∧ control_mode=WAIT ∧ 資源 claim` で表現可。**誤りの型 = 1 型だけ見て「無い」と結論し、同じ凍結 file の enum を述語で引かなかった**。
 
