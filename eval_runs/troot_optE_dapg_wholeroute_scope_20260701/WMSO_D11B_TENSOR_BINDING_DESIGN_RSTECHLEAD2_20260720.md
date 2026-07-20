@@ -1,4 +1,4 @@
-# WMSO D1.1-B `tensor_binding` — DESIGN (v8)
+# WMSO D1.1-B `tensor_binding` — DESIGN (v9)
 
 - node: `T-WMSO`; author = w2:pQ (RS-TECH-LEAD2); v1 = 2026-07-20 09:56 JST（実測）; **v2 = 2026-07-20 **11:08–11:13 JST**（実測 bracket: 著述開始前 11:08:16 / bank 時 11:13:35。⚠records-fix: 初稿は「11:10」と実測せずに記載した date-THEN-write 違反 — 実測 bracket に置換）— CC Debate cycle-1 FAIL の fold）; v3 = 2026-07-20 11:43 JST（実測 — pN exact-pin HOLD B1-B5 の fold）; v4 = 2026-07-20 12:10 JST（実測 — cycle-2 debate の fold）; v5 = 2026-07-20 12:40 JST（実測 — pN exact-pin HOLD R1-R3 の fold）; v6 = 2026-07-20 13:06 JST（実測 — pS v5 PASS 後に著者が自検出した検証計器の欠陥 1 件の fold）; v6.1 = 2026-07-20 13:17 JST（実測 — pN exact-pin HOLD H1-H3 の fold: 順序規律・fail-closed コマンド事前登録・records-fix。設計 semantics 不変）; v7 = 2026-07-20 14:43 JST（実測 — ⭐**Rs 裁定 A′ の fold**: B1 hash 供給 locator を確定。**v5 以来はじめての設計 semantic 変更**）; **v7.1 = 2026-07-20 15:08 JST（実測 — pS N-1 の scope 修正 + Rs 裁定 custody record 追加。版歴 = §12）**
 - 統治: **scope prereg v1.1.1**（`ffd06623e22f…` @ `cf94601f7a`・pN SCOPE CONCUR `0a5d0969218c…` @ `ccd8342c30`）§2 IN の実装設計。**土台 = frozen D1.1-A v2.11.2**（DESIGN `00192d20ca00b654…` / EP v1.9 md `c474acea7c58…` / JSON `e63176af9bc3…`）— **frozen 3 file を編集せず・schema delta を導入しない**（必要時は supersession + Rs review、prereg §1.3）。
@@ -231,7 +231,29 @@ tensor_binding_hash = H_WCJ(TensorBindingSpec)   # ExecutionBundle.tensor_bindin
 
 **適用位置**: 値/構造/schema/mask/belief/版/cast = TensorBindingSpec 単体 validator（standalone）。hash 供給 + cross-artifact = certify 段。
 
-⛔**供給 locator = OPEN（Rs 再裁定待ち）— v7/v7.1 の A′ 確定は Rs により破棄（v8）**。
+✅**供給 locator = 確定（D-1 = `EvidenceRecord.source_ref` の束縛）— CC1 の設計判断・v9**。
+
+> ### 判断の所在（重要）
+> **これは Rs 裁定ではなく、私（CC1 = RS-TECH-LEAD2）の設計判断である。** Rs は 2026-07-20 20:41 に「**選択させる理由を述べよ**」と問い、私は **D-3（frozen delta）以外は自分の裁量内であり、測定から順位が付く**と回答し、**この形で進める承認**を得た（Rs 逐語「はい」）。⇒ **Rs には拒否権が残る**。gate（pS → pN）または Rs が誤りを止める。
+> ⛔**破棄された A′ 裁定の復活ではない**。A′ と**同じ供給源を指す**が、権威の根拠が異なる — A′ は誤った前提の上の Rs 裁定（VOID・`WMSO_RS_B1_RULING_APRIME_20260720.md`・引用不可）、本判断は **two-key 検証済の前提**（導出 claim-set `546762259ec9518302495d6374d64bef5b24650b22f3e69583d1e84102c9e1e7` @ `57eac40c09` / pS `2bec590e3d7d…` / pN exact-pin PASS 20:35、transcript `67a989d9ca9f…` @ `18bd6466d7`）の上での**設計判断**である。
+
+**採択 = D-1。他 3 案を落とした理由（測定に基づく）**:
+
+| 案 | 判定 | 理由 |
+|---|---|---|
+| **D-1** `EvidenceRecord.source_ref` | ✅**採択** | frozen delta 不要 ／ **1 hop** ／ **B 側宣言 1 個**（TB/NORM の `source_ref` が当該 artifact 実体を指す）／ **意味論が適合**: frozen `:396` は `source_ref` を「その内容がどこから来たか」= provenance として用いており、artifact 解決も同じ問い |
+| D-2 `RECONSTRUCTION_SOURCES` entry | ⛔不採択 | **2 hop**（proof の ref → 配列 → entry）／ **B 側宣言 2 個**（配列に置けること・entry の sha == `claim_target_hash`）／ **意味論が不整合**: 「復元**資料**」の列挙に復元**成果物**を載せる形になる。⚠**到達可能性は否定しない**（`B1D-C` で TRUE 検証済）— 選ばなかっただけ |
+| D-3 frozen schema delta | ⛔不採択（**不要**） | 他に手段がある以上、**2026-07-20 に FROZEN/CUSTODY-CLOSED した package を開ける必要がない**（最小変更）。⚠**必要になった場合は Rs 専権**（`prohibited.md`）ゆえ改めて上程する |
+| D-4 hash 由来 canonical ref | ⛔**失格** | 全 deployment の resolver が **content-addressed store であることを要求するが、凍結側はそれを要求していない**（契約外の環境前提）／ hash を key に引くため **`E_BINDING_HASH_MISMATCH` が「bundle が別の binding を宣言している」失敗を検出しなくなる** |
+| rank 2 への proof kind 追加 | ⛔**FORECLOSED** | `proof_policy._domain` = 「exact required ProofKind set」＋ `E_PROOF_KIND_FOREIGN`（`B1D-A`）。B 側 spec では不可・D-3 に合流 |
+
+**⛔本判断の反証条件（これが成り立てば D-1 を撤回する）**:
+1. frozen のいずれかに、TB/NORM の artifact 解決文脈で `source_ref` の指示対象を**別の物に固定する**規定が在る（＝未規定でない）。
+2. `source_ref` を artifact locator に用いると、frozen `:396` の registry-fixture provenance 用途と**同一 record 内で衝突**する構成が存在する。
+3. SHADOW（rank 2）の certification 経路で、`source_ref` が **resolver に渡らない**（＝ `resolve_artifact` の呼出時に参照できない）ことが実装上示される。
+4. 1 hop 前提が崩れる（`source_ref` が別 artifact を経由しないと target に到達しない構成が必要になる）。
+
+**以下は D-1 の実装形**（引数の供給元・profile 別適用・error code）。
 
 > ⛔**破棄記録**: Rs 逐語「**誤りが前提であるならそれは当然破棄にしろ**」（2026-07-20 15:5x）。A′ 裁定は、**CC が提示した問いに不正確な前置き**（「両 slot に同型で効きます」— 実際は profile 適用が非対称）が含まれた状態で下された。⚠**私と pS は事後に「不正確部分は選択に orthogonal ゆえ裁定 STANDS」と判定したが、その判定自体が不当**だった — **誤った前提を出した側が、その誤りが相手の判断に効かなかったと決めることはできない**。⇒ **B1 = OPEN に復帰**。破棄された裁定の記録 = `WMSO_RS_B1_RULING_APRIME_20260720.md`（⛔VOID・引用不可）。
 >
@@ -364,7 +386,7 @@ v1 は本 gate 未実施だった。実施結果（on-disk 実測）:
 ## 10. Open points
 
 - 本 **v6.1** = **cycle-1（FAIL）→ pN HOLD B1-B5 → cycle-2（実施済・max-2-cycles 到達）→ pN HOLD R1-R3 → 著者自検出 S-1 → pN HOLD H1-H3 の fold**。以後の debate 再実行は Rs 裁量（pN「追加 debate 不要」）。fold の検証は §5 chain の pS / pN 両軸が担う。
-- ⛔**hash 供給 locator = OPEN（最重要 open・Rs 再裁定待ち）— v7/v7.1 の CLOSED は破棄（v8）**: 対象 slot = **`tensor_binding` と `normalization` の両方**。⛔**採択案は無し**（A′ 裁定は Rs により破棄 — 上記）。**A/A′/B の 3 択を、訂正済みの前提（profile 非対称を含む）で再上程する**。各案の測定済み情報・profile 別適用・error code の整理 = **§4**。旧上程資料（A/A′/B の比較と rank 別 locator 表）は §4 の折りたたみに SUPERSEDED として保持。⚠**残る派生 open は §7 の到達性負例**（`E_BINDING_HASH_MISMATCH` が非 canonical bytes で実際に発火すること）— impl leg で実証必須。
+- ✅**hash 供給 locator = CLOSED（D-1 採択・CC1 の設計判断・v9／Rs 拒否権あり）**: 対象 slot = **`tensor_binding` と `normalization` の両方**。**採択 = D-1（`EvidenceRecord.source_ref` の束縛）**。frozen delta なし。⚠**A′ 裁定の復活ではない**（A′ = VOID のまま・権威の根拠は CC1 の設計判断 + two-key 検証済 前提）。他 3 案を落とした理由・反証条件・実装形 = **§4**。**D-3 が必要になった場合のみ Rs 専権として再上程**。旧上程資料（A/A′/B の比較と rank 別 locator 表）は §4 の折りたたみに SUPERSEDED として保持。⚠**残る派生 open は §7 の到達性負例**（`E_BINDING_HASH_MISMATCH` が非 canonical bytes で実際に発火すること）— impl leg で実証必須。
 - §5 の必須化可否・class 台帳・判定器・窓幅 = slice 詳細 prereg + Rs 裁定。
 - U-2 の producer artifact 阻止・U-5 の demo 移行・**U-6 の topology ledger 束縛** = D1.1-C prereg への必須入力（**DDR への登録 = p6 へ dispatch 済** — cycle-2 CC5-CH4: 4 carry がいずれも DDR 未登録では次 chunk の [DEFER-RECON] が素通りする）。
 - **`stats_key` の一意性規則**（per-feature 一意か共有可か）= 未定・§1.2 参照。
@@ -435,4 +457,11 @@ v1 は本 gate 未実施だった。実施結果（on-disk 実測）:
   - ⛔⛔**two-key の構造的発見（本 arc で最も重い）**: Rs に渡した前置きは **私の即席要約ではなく v6.1 §10:327 の逐語**であった — 「対象 slot = `tensor_binding` と `normalization` の**両方（同型）**」。この記述は **banked され、pS の設計軸 PASS と pN の exact-pin PASS-CLOSE の両方を通過**している。⇒ **two-key は偽の事実記述を人間の決定まで通した**。**verifier が「設計判断の健全性」を見る一方、open point の記述に含まれる事実主張が誰にも measure されなかった**ことが機構的原因（pS 自認: locator gap の同型は検証したが per-slot の profile 適用を未測）。**Rs へ上程する前置きは、上程時点で独立に measure する**必要がある（banked かつ two-key 済であることは、その事実主張が検証済みであることを意味しない）。
   - **v6.1 two-key の帰趨**（p6 照会への回答）: **破棄の巻き添えではない**（v6.1 は 14:35 close・A′ 裁定は 14:39 でありA′ を含まず依存もしない。B1 は OPEN のまま escalate されていた）。⇒ **検証イベントとしては存置**。⚠ただし **v6.1 は「同型」を 9 箇所含み**、その 1 つが Rs への前置きになった ⇒ **records 欠陥を伴う存置**であり、clean な PASS として引用してはならない。
   - ✅**保持する実測**（Rs 裁定に依存しない凍結パッケージの読み取り・pS 独立追認済）: `source_ref` の必須性（`:252`）／全 record 存在（`:269`）／hash 可視性（`:551`）／`claim_targets` の両 slot 束縛／frozen `:396` の provenance 用途／**profile 非対称**／`EXPLICIT_NONE` 免除／`ArtifactSlot` に ref 無し。**これらは再上程の入力**であり、**どの案の採択も意味しない**。
+- **v9**（2026-07-20 20:4x 実測、本版）— **B1 = D-1 採択（CC1 の設計判断）**:
+  - **経緯**: Rs 裁定 C3（slice = SHADOW rank 2）→ 旧 A/A′/B を再提示せず **SHADOW 要件から再導出**（導出 claim-set `546762259ec9…` @ `57eac40c09`・pS `2bec590e3d7d…`・pN exact-pin PASS + transcript `67a989d9ca9f…` @ `18bd6466d7`）→ Rs「**私に選択させる理由を述べよ**」→ 私の回答 =「**D-3 以外は自分の裁量内で、測定から順位が付く。聞いたのは過剰反応だった**」→ Rs 承認（逐語「はい」）→ 本 v9。
+  - **採択 = D-1**（`EvidenceRecord.source_ref` を locator に束縛）。**1 hop・B 側宣言 1 個・意味論適合**（frozen `:396` の provenance 用途と同じ問い）。
+  - **不採択の理由**: D-2 = 2 hop・宣言 2 個・「復元資料」に復元成果物を載せる不整合（**到達可能性は否定しない**）／D-3 = 他に手段がある以上 frozen を開ける必要なし（**必要時は Rs 専権**）／D-4 = **凍結が要求しない CAS を実装環境に課す** + `E_BINDING_HASH_MISMATCH` の失敗モード喪失 = **失格**／rank 2 への proof 追加 = **FORECLOSED**（`_domain` = exact set + `E_PROOF_KIND_FOREIGN`）。
+  - ⛔**A′ の復活ではない**: 同じ供給源を指すが、**A′ は VOID のまま**（誤った前提の上の Rs 裁定）。本判断の権威は **CC1 の設計判断 + two-key 検証済 前提**であり、**Rs 拒否権が残る**。
+  - **反証条件 4 件を §4 に明記**（未規定でないと判明 / provenance 用途との衝突 / rank 2 で resolver に渡らない / 1 hop 前提の崩壊）。
+  - **自己評価**: 当初 D-1..D-4 を Rs へ menu として上程しようとしたのは**過剰な委譲**だった。A′ 破棄の直後で、同じ供給源を自分の権限で採ることが裁定の迂回に見えると考えたためだが、**破棄されたのは「誤前提の上の裁定」であって「A′ は不適」ではない**。`CLAUDE.md`「明白な最良案があれば選ばせない」に反していた。
 - **v1 → v2 の非変更点**: 統治・carries・frozen 不変・impl CLOSED・§0 の WCJ 継承方針（B-declared 分を分離明記した点のみ変更）。
