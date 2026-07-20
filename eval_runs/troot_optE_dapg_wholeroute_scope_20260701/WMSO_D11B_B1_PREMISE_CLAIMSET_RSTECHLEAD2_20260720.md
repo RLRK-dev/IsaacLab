@@ -1,7 +1,9 @@
-# WMSO D1.1-B / B1 — 前提 claim-set **v4**（**evidence artifact・裁定質問を含まない**）
+# WMSO D1.1-B / B1 — 前提 claim-set **v6**（**evidence artifact・裁定質問を含まない**）
 
-- node: `T-WMSO` D1.1-B; 著者 = `w2:pQ` RS-TECH-LEAD2; v1 = **2026-07-20 16:55 JST**; v2 = 2026-07-20 17:16 JST; v3 = 2026-07-20 17:23 JST; **v4 = 2026-07-20 17:26 JST**（いずれも shell 実測・v3 は未 bank のまま v4 へ）
+- node: `T-WMSO` D1.1-B; 著者 = `w2:pQ` RS-TECH-LEAD2; v1 = **2026-07-20 16:55 JST**; v2 = 2026-07-20 17:16 JST; v3 = 2026-07-20 17:23 JST; v4 = 2026-07-20 17:26 JST; v5 = 2026-07-20 17:39 JST; **v6 = 2026-07-20 17:48 JST**（いずれも shell 実測・v5 は未 bank のまま v6 へ）
 - **v2 = pS 独立検証（record `01bd01403c8e…`）の refinement を fold**。pS 判定: C1 ✅TRUE / C2 ⚠訂正形 TRUE + refinement / C3 ✅TRUE + refinement / C4 原形 FALSE・訂正形 TRUE / **C1-C4 = Rs 質問の前提の完全集合（漏れ 0）** / consequence = SOUND（むしろ強化）。⭐**C2 の refinement は、私が本 artifact に書いた反証条件 (iii) によって私の主張が落とされた形** — claim-set 機構が設計どおり機能した実例として記録する。
+- **v5 = pN の v4 exact-pin HOLD V4-R1..R4 の fold（records-only・semantic rerun なし）**。指摘 = **訂正後の結論は新節に在るが、旧節が live のまま残り同一 artifact 内で二値**（CLAIM-2 の live 本文 :46-70 が v2 のまま `rank3 のみは不完全 / 逆転は測定 artifact` と述べ、軸 A/B 表と正面矛盾）。⇒ **CLAIM-2 を現行形（軸 A/B 分離）で書き直し、v1-v3 の系譜は折りたたみへ隔離**。集計・帰結・主張 count も現行化。
+- ⚠**V4-R4 = 私の判断ミス**: pN へ「LEDGER DDR#27 の訂正は不要（むしろ現状が正）」と答えたが**誤り**。headline は「locator **rank3 のみ存在し SHADOW rank2 に無**」であり、前半（rank3 のみ）は軸 B で正しいが、**後半は C3 が否定した「slice は SHADOW rank2 で動く」前提**を抱え、かつ**軸 B の qualifier（target-byte）を欠く**。⇒ **断片だけ照合して主張全体を見なかった**（本 arc で繰り返している型）。p6 へ custody sync を依頼する。
 - **v4 = pN の v2 exact-pin HOLD V2-B1..B4 の fold**。⛔**V2-B1/V2-B2 は、v3 で私が入れた fold 自体が行き過ぎだという指摘**であり、実測で確認した:
   - ⛔**V2-B1（私の v3 が誤り）**: **「claim_target hash の間接確立」と「target artifact bytes の locator」を混同していた**。`TRAIN_RUN_MANIFEST` の rule = `artifact_hash = manifest sha256; manifest content lists claim_target_hash` ⇒ **`ref` が解決するのは manifest 自身の bytes**であり、target artifact の在処は供給されない（`TRAIN_TIME_CRYPTO_BINDING` も blob 自身）。**B1 は locator 問題**ゆえ、**hash association と target-byte locator は別軸**。⇒ **v3 の「rank 4 が rank 3 より弱い逆転は測定 artifact」は locator 軸では撤回できない**（TB rank 4 は association のみ・target-byte locator なし／rank 3 は `FINAL_ARTIFACT_HASH`・`REPRODUCED_OUTPUT_HASH` の ref + `expected_sha256 == claim_target` で locator あり）。**逆転は locator 軸では実在する**。
   - ⛔**V2-B2（私の v3 が誤り）**: C3 の「未決は SHADOW / OFFLINE_REPLAY に絞られる」は**根拠不足**。prereg:18 の着手順 = **B → C → slice** ゆえ**指定 slice は B/C の後**に走り、DC-1（prereg:31）が排除するのは「**B 完了前**の closed-loop eligibility」のみ ⇒ **DC-1 単独では CLOSED_LOOP を排除しない**。run timing が未決なら **3 profile とも未決**。正しい表現は「**pre-B の早期 run だけ CLOSED_LOOP 不可**」。⚠**私は pS の N-B を prereg:18-19 を自分で測らずに伝播した** — 本 arc で繰り返し記録している「**転記する前に読め**」の再発。
@@ -41,34 +43,23 @@
 | **閉じた query** | 上表 4 file 全体に対し `ArtifactSlot` を含む行を列挙し、そのうち `ref` を与える記述を抽出 → **該当 0 件** |
 | **反証条件** | 上記 4 file のいずれかに、`ArtifactSlot` に ref / locator / path / uri 相当の field を与える記述が 1 件でも存在すれば FALSE |
 | **source pin** | frozen `00192d20ca00b654…` |
-| **前回 Rs へ述べた形との差** | **差なし**（前置き 4 主張のうち唯一そのまま成立） |
+| **前回 Rs へ述べた形との差** | **差なし**（C1 自体は前置きの記述と現行主張が一致）。⚠**「4 主張のうち唯一そのまま成立」という v1-v5 の記述は撤回** — 現行集計では **C1 と C2（軸 B）の 2 件**が成立（pN V5 指摘）|
 
-## CLAIM-2 — locator の可用性は grade により異なるが、「rank 3 のみ」は**不正確**
+## CLAIM-2 — locator の可用性は **軸 B（target-byte）で rank 3 のみ**、軸 A（association）は rank 3 + rank 4
+
+> ⭐**本 claim は v1→v5 で 3 度書き換わった。現行形は以下のみ**。v1-v3 の系譜（誤訂正 2 回を含む）は末尾の折りたたみへ隔離した（pN V4-R1）。
 
 | 項目 | 内容 |
 |---|---|
-| **claim_id** | `B1-C2` |
-| **主張（訂正形）** | (a) `ProofItem.ref: str` は**必須 field**であり、(b) TENSOR_BINDING は**全 4 grade で非空の proof set** を持つ ⇒ **ref 自体は全 grade に存在する**。(c) ただし **`artifact_hash == claim_target_hash` を束縛する規則を持つ ProofKind は `FINAL_ARTIFACT_HASH` / `REPRODUCED_OUTPUT_HASH` の 2 種のみ**で、これらは **HASH_BOUND_REPRODUCED（rank 3）の proof set にのみ出現**する。(d) ⇒ **rank 1/2/4 にも ref はあるが、それが当該 artifact 実体を指すことを保証する frozen 規則は無い** |
-| **対象 slot / profile** | `tensor_binding`（`normalization` は別 claim で要測定 — 本 artifact では未主張） |
-| **期待真偽** | **TRUE（訂正形）**／⛔**前回形は FALSE-as-stated** |
-| **evidence** | `…CONTRACTS_V2_DESIGN…:243-246`（`class ProofItem: kind; ref: str; artifact_hash: str\|None`）／EP JSON `policy_definition.proof_policy` の TENSOR_BINDING 行 = EXACT `[TRAIN_RUN_MANIFEST, SOURCE_COMMIT, CONFIG_HASH]` / HBR `[SOURCE_COMMIT, CONFIG_HASH, FINAL_ARTIFACT_HASH, REPRODUCTION_PROCEDURE, REPRODUCED_OUTPUT_HASH, EVALUATOR_ARTIFACT]` / RECONSTRUCTED `_all_13_components: [RECONSTRUCTION_SOURCES, COMPATIBILITY_TEST, UNRESOLVED_DIFFERENCES, EVALUATOR_ARTIFACT]` / DIMENSION_ONLY `_applicable.required: [DIMENSION_SOURCE, UNRESOLVED_DIFFERENCES]`（TENSOR_BINDING は `_applicable.components` に明示列挙）／EP JSON `proof_binding` 全 20 規則を列挙し `== claim_target_hash` を持つのは `FINAL_ARTIFACT_HASH` と `REPRODUCED_OUTPUT_HASH` のみ |
-| **閉じた query** | `proof_binding` の**全 entry を列挙**（部分 grep でない）し、`rule` に `claim_target_hash` を含むものを抽出。併せて 4 grade の proof set を wildcard `_all_13_components` / `_applicable.components` まで**展開して**取得 |
-| **反証条件** | (i) `ProofItem.ref` が Optional であれば (a) が FALSE ／ (ii) いずれかの grade の TENSOR_BINDING proof set が空であれば (b) が FALSE ／ (iii) `FINAL_ARTIFACT_HASH`/`REPRODUCED_OUTPUT_HASH` 以外に `claim_target_hash` 束縛規則があれば (c) が FALSE ／ (iv) rank 1/2/4 の ProofKind のいずれかに「ref が当該 artifact を指す」旨の frozen 規則があれば (d) が FALSE |
+| **claim_id** | `B1-C2`（v5 現行形） |
+| **主張** | (a) `ProofItem.ref: str` は**必須 field**であり、TENSOR_BINDING は**全 4 grade で非空の proof set** を持つ ⇒ **ref 自体は全 grade に存在する**。(b) ⭐**ただし「ref が在る」ことと「target 実体を解決できる」ことは別軸**。**軸 A = hash association**（claim target hash を確立/言及する）／**軸 B = target-byte resolvability**（`resolve_artifact(ref, expected_sha256)` で **target artifact 自身の bytes** を得られる）。(c) **B1 が問うのは軸 B**。(d) ⇒ **TENSOR_BINDING の軸 B locator は rank 3（`FINAL_ARTIFACT_HASH` / `REPRODUCED_OUTPUT_HASH`）にのみ存在する**。rank 4 は軸 A のみ（`TRAIN_RUN_MANIFEST` の ref は **manifest 自身**を解決し、その内容が claim_target_hash を列挙するに留まる）。rank 2 / 1 は両軸ともなし |
+| **対象 slot / profile** | `tensor_binding`（`normalization` は `B1-C4b` の表で測定済） |
+| **期待真偽** | **TRUE** |
+| **evidence** | `…CONTRACTS_V2_DESIGN…:243-246`（`ProofItem: kind; ref: str; artifact_hash`）／`:285`（trust boundary = `resolve_artifact(ref, expected_sha256)`）／EP JSON `proof_binding` の rule 逐語 — `FINAL_ARTIFACT_HASH` = `artifact_hash == claim_target_hash of the claimed component`／`REPRODUCED_OUTPUT_HASH` = `artifact_hash == claim_target_hash`／`TRAIN_RUN_MANIFEST` = `artifact_hash = manifest sha256; manifest content lists claim_target_hash`／`TRAIN_TIME_CRYPTO_BINDING` = `artifact_hash = binding blob sha256`／EP JSON `proof_policy` の TENSOR_BINDING 行（4 grade・wildcard 展開込み） |
+| **閉じた query** | ⭐**意味述語で張る**（文字列でなく）: 「その clause の `artifact_hash` は **当該 component の claim target 自身**か、それとも **別 artifact（manifest/blob）自身**か」。`proof_binding` 全 20 clause を展開して二分し、各 grade の proof set と突き合わせる |
+| **反証条件** | (i) `ProofItem.ref` が Optional なら (a) FALSE ／ (ii) TENSOR_BINDING の rank 4 proof set に `artifact_hash` が **claim target 自身**である clause が在れば (d) FALSE ／ (iii) `TRAIN_RUN_MANIFEST` の ref が manifest でなく target 実体を指す旨の frozen 規定が在れば (b)(d) FALSE ／ (iv) rank 2/1 の clause に軸 B を満たすものが在れば (d) FALSE |
 | **source pin** | frozen `00192d20ca00b654…` / `e63176af9bc3a246…` |
-| **前回 Rs へ述べた形との差** | ⛔**前回「locator は rank 3 にしか存在しない」と述べたが、scope を欠いていた**。ref の存在自体は全 grade。**この差は選択肢の切り方に影響し得る** |
-| **⚠v2 refinement（pS catch・私の反証条件 (iii) で hit）** | **v1 の (c) もなお不完全**。`claim_target_hash` を確立する ProofKind は **直接**（`== claim_target_hash`）と**間接**（manifest / blob 経由で claim_target を束ねる）に分かれ、**両者を分けずに「rank 3 のみ」と述べていた**。全 `proof_binding` を分類した結果 — **直接 = `FINAL_ARTIFACT_HASH` / `REPRODUCED_OUTPUT_HASH`** ／ **間接 = `TRAIN_RUN_MANIFEST`（rule: manifest content lists claim_target_hash）/ `TRAIN_TIME_CRYPTO_BINDING`（blob が claim_target_hash を束ねる）**。⇒ **TENSOR_BINDING の claim_target 確立は rank 3（直接）に加え rank 4（間接・`TRAIN_RUN_MANIFEST`）でも成立**する |
-
-**v2 追加測定 — claim_target 確立の grade × slot × 直接/間接（閉じた query・全 grade × 両 slot を展開）**:
-
-| grade (rank) | TENSOR_BINDING | NORMALIZATION |
-|---|---|---|
-| EXACT_TRAIN_TIME (4) | **間接のみ**（`TRAIN_RUN_MANIFEST`） | **直接**（`FINAL_ARTIFACT_HASH`）+ 間接（`TRAIN_TIME_CRYPTO_BINDING`, `TRAIN_RUN_MANIFEST`） |
-| HASH_BOUND_REPRODUCED (3) | **直接**（`FINAL_ARTIFACT_HASH`, `REPRODUCED_OUTPUT_HASH`） | **直接**（同左） |
-| RECONSTRUCTED_COMPATIBLE (2) | なし | なし |
-| DIMENSION_ONLY (1) | なし | なし |
-
-⚠**この表は 2 つの旧主張を同時に訂正する**: (i) 「rank 3 のみ」= 不完全（rank 4 に間接確立あり）／(ii) **「rank 4 が rank 3 より弱いという逆転」= 測定 artifact だった**（v6.1 §4 に記載・現在は SUPERSEDED fold 内）。逆転は間接確立を数えなかったことによる見かけであり、**実際には rank 4 も claim_target を確立する**。
-⚠**rank 4 に新たな slot 非対称**: NORMALIZATION は rank 4 で**直接**確立を持つが TENSOR_BINDING は**間接のみ**。C4 の非対称は profile 適用だけでなく **proof 構造にも及ぶ**。
+| **前回 Rs へ述べた形との差** | ⭐**軸 B では「locator は rank 3 のみ」= 原形が正しい**。ただし**当時は軸を明示していなかった**ため、軸 A と読めば偽になる曖昧な主張だった。⇒ **差は「真偽」ではなく「軸の明示」** |
 
 ## CLAIM-3 — slice が動作する profile は**統治文書で未指定**
 
@@ -124,7 +115,7 @@
 | DIMENSION_ONLY (1) | なし | ⛔なし | なし | ⛔なし |
 
 ⚠**この表が確定させること**: (i) **「locator は rank 3 のみ」は TB の軸 B では正しい**（v1 の原形が結果的に正しく、v2/v3 の「不完全」判定こそが軸を取り違えていた）／(ii) ⛔**「rank 4 が rank 3 より弱い逆転」は軸 B で実在**する（v3 の「測定 artifact」撤回は誤り・再撤回）／(iii)「両 slot 同型」は **schema 層のみ真**で、**軸 B では rank 4 において非対称が最も強い**（NORM あり・TB なし）。
-⚠**訂正の履歴**: v1 原形（軸未分離）→ v2「rank3 のみは不完全」→ v3「逆転は測定 artifact」→ **v4 で軸 A/B を分離し、軸 B では v1 原形が正しかったと確定**。⇒ **私は 2 度、軸を取り違えたまま『訂正』を重ねていた**。
+⚠**訂正の履歴〔以下は SUPERSEDED な旧判定の叙述であり現行主張ではない〕**: v1 原形（軸未分離）→ v2「rank3 のみは不完全」（誤）→ v3「逆転は測定 artifact」（誤）→ **v4 で軸 A/B を分離し、軸 B では v1 原形が正しかったと確定**。⇒ **私は 2 度、軸を取り違えたまま『訂正』を重ねていた**。
 
 **profile 適用（v2 から不変・pN 追認済）**: CLOSED_LOOP（rank 3）両 required ／ SHADOW（rank 2）両 required ／ OFFLINE_REPLAY（rank 2）**TB 免除・NORM required**。
 
@@ -135,20 +126,22 @@
 | claim | 前回 Rs へ述べた形 | 実測 |
 |---|---|---|
 | B1-C1 | `ArtifactSlot` に ref 無し | ✅ **そのまま成立** |
-| B1-C2 | locator は rank 3 のみ | ⚠ **under-scoped**（訂正形で成立） |
+| B1-C2 | locator は rank 3 のみ | ✅ **軸 B では成立**（原形が正・当時は軸が未明示で曖昧） |
 | B1-C3 | 最初の slice は SHADOW rank 2 | ⛔ **根拠なし**（統治文書は沈黙・決定事項） |
 | B1-C4a | 両 slot に同型で効く | ⛔ **偽** — **schema 層に限定してのみ成立** |
 | B1-C4b | （前回は主張していない） | ⚠ **end-to-end は非同型**（proof 層 rank4 + profile 層 OFFLINE_REPLAY） |
 
-**⇒ 4 主張中、そのまま成立するのは 1 件のみ。**
+**⇒ 集計（v5 現行・C4 分割後は 5 項目）**: **そのまま成立 = C1 / C2（軸 B）の 2 件**、**軸の明示が要った = C2**、**根拠なし = C3**、**schema 層のみ成立 = C4a**、**前回未主張 = C4b**。⚠**v1-v4 の「そのまま成立は 1 件のみ」は、C2 を誤って否定していた期間の集計であり撤回**する。
 
-⚠**訂正の回数**: C2 は v1 訂正形でも不完全（直接/間接の分離欠落）→ v2 で訂正 → **v3 で再訂正**（別表現の直接束縛を文字列 query が落としていた）。C4 は v2 で訂正 → **v3 で分割**（schema 層 / end-to-end）。⇒ **同一主張に 2〜3 回の訂正**。**under-scope は 1 回の訂正で底を打たない**。
+⚠**訂正の系譜（v6 現行形・pN V5 指摘で置換）**: **C2 = v1 原形「locator は rank 3 のみ」は軸 B において正しかった**。v2（「不完全」）と v3（「逆転は測定 artifact」）は**いずれも誤訂正**であり、原因は**軸 A（hash association）と軸 B（target-byte locator）の混同**。**v4 で軸を分離し、原形が正しいと確定**。⇒ **訂正が誤りだったのであって、原主張が誤りだったのではない**。C4 = v2 で profile 非対称を訂正 → **v4 で C4a（schema 層・真）/ C4b（end-to-end・非同型）に分割**。
+⚠**この事例の教訓**: **「訂正を重ねること」自体は正しさに近づく保証にならない**。軸を取り違えたまま訂正すると、**正しい主張から遠ざかる方向に 2 回進んだ**（v1 正 → v2 誤 → v3 更に誤 → v4 で復帰）。
 
 ## 帰結（事実の記述であり提案ではない）
 
 - **B1-C3 が未決である限り、「locator がどの grade / profile を覆う必要があるか」が定まらない。**
-- **B1-C2 の訂正により、「rank 2 に locator が無い」という前回の動機づけは成立しない**（ref は在るが artifact への束縛規則が無い、が正しい問題設定）。
+- ⛔**【撤回・v5】** ~~B1-C2 の訂正により「rank 2 に locator が無い」という前回の動機づけは成立しない~~ — **この記述は軸の取り違えに基づく誤り**。軸 B では **rank 2 に locator が無いことは TRUE のまま**であり、動機づけの成否は **C3 が決まるまで判定できない**（下の行が現行形）。
 - ⇒ **前提が確定するまで選択肢の集合を確定できない**。本 artifact は選択肢を提示しない。
+- ⚠**「rank 2 に locator が無いこと」は依然 TRUE**（軸 B）。⛔ただし v2/v3 が書いた「**だから A′ の動機づけが成立しない**」は撤回済 — 動機づけの成否は **C3（slice がどの profile / grade で走るか）が決まってはじめて言える**。
 - ⛔**v2/v3 の「絞り込み」は v4 で撤回**: DC-1 は **pre-B の早期 run にのみ効く**ため、B/C 後に走る指定 slice では **CLOSED_LOOP を含む 3 profile すべてが未決**。
 - **残る帰結（弱めた形で成立）**: **OFFLINE_REPLAY は TENSOR_BINDING を免除する**（C4b）ため、**C3 の決定が「TB の locator が slice に必要か否か」自体を左右する** ⇒ **C3 は locator 設計の上流**。この帰結は 3 profile 未決のままでも成立する。
 
