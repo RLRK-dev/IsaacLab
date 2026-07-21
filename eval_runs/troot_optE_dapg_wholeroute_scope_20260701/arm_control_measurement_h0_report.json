@@ -4,15 +4,15 @@
   "provenance": {
     "spec": {
       "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/ARM_CONTROL_MEASUREMENT_HARNESS_SPEC_V1_ARMCONTROLDESIGN_20260721.md",
-      "version": "v1.1",
-      "bank_sha": "37902fb909"
+      "version": "v1.3",
+      "bank_sha": "c8c326e00b"
     },
     "tree": "/home/rlrk/IsaacLab",
     "git_common_dir": ".git",
     "branch": "rlrk/optE-s2-substrate-swap",
-    "commit": "3cb06b0fe537a5e1e1f8936073e4d1e43c2db958",
+    "commit": "f7d9f86c76751905922eebd35e37cad7819ae753",
     "worktree_dirty": true,
-    "worktree_dirty_count": 3249,
+    "worktree_dirty_count": 3248,
     "python": "/home/rlrk/env_isaaclab7/bin/python",
     "venv": null,
     "versions": {
@@ -45,13 +45,21 @@
   },
   "h0": {
     "identity": {
-      "as_built_model_id": 134506521622672,
-      "as_built_model_type": "Model",
+      "I-1_measured_is_scene_model": true,
+      "I-1_grounding": "newton_route_env.py:725 -- self._model = scene['model']",
+      "I-2_solver_model_is_measured": true,
+      "I-2_grounding": "SolverBase.__init__ sets self.model = model (newton/_src/solvers/solver.py)",
+      "I-3_measured_is_not_fk_model": true,
+      "I-3_grounding": "newton_route_env.py:690 -- self._fk_model = build_fk_and_init(...)",
+      "identity_all_pass": true,
+      "object_ids": {
+        "measured": 134461736852256,
+        "env_model": 134461736852256,
+        "solver_model": 134461736852256,
+        "fk_model": 134461757831360
+      },
+      "measured_model_type": "Model",
       "solver_type": "SolverMuJoCo",
-      "solver_model_id": 134506521622672,
-      "solver_holds_as_built_model": true,
-      "fk_model_id": 134506555372128,
-      "fk_model_is_distinct_object": true,
       "fk_model_excluded_from_measurement": true,
       "derived_mj_model": {
         "status": "PRESENT",
@@ -60,7 +68,7 @@
       },
       "derived_mj_model_id": {
         "status": "PRESENT",
-        "value": 134496622426992,
+        "value": 134451836826992,
         "note": ""
       },
       "notes": []
@@ -1077,15 +1085,8 @@
           },
           "note": "A-1 VISIBLE-only pass, newton_skill_env_base.py:1574-1583",
           "predicate": "pad shapes retain COLLIDE AND at least one non-pad shape had COLLIDE cleared",
-          "pass": true
-        },
-        "clip": {
-          "status": "UNAVAILABLE",
-          "predicate": "clip present in scene",
-          "pass": false,
-          "required": false,
-          "reason": "No clip descriptor is exposed. scene{} returns cable handles only (newton_skill_env_base.py:542-555) and clip bodies carry no descriptive label (measured: 40/68 bodies are auto-labelled 'body_N').",
-          "escalation": "p11: section 1.1 names the clip as a witness but the code exposes no handle for it."
+          "pass": true,
+          "role": "CONTEXT ONLY -- passes on the FK model too; identifies nothing"
         },
         "world_count": {
           "status": "PRESENT",
@@ -1101,18 +1102,21 @@
         "a1_visible",
         "world_count"
       ],
-      "failed": [
-        "clip"
-      ],
+      "failed": [],
       "required_legs": [
         "cable",
-        "a1_visible",
         "world_count"
+      ],
+      "discriminating_legs": [
+        "cable"
+      ],
+      "context_only_legs": [
+        "a1_visible"
       ],
       "required_failed": [],
       "all_pass": true,
-      "unavailable_legs": [
-        "clip"
+      "removed_legs": [
+        "clip: REMOVED as a witness in spec v1.3. The scene's key set is closed and contains no clip key (newton_route_env.py:725-734: model / solver / state_0 / state_1 / control / contacts / bws / jws / cable_bodies / cable_bodies_per_world). Clip bodies carry the auto-label body_N, so substring matching would return 0 and read as 'no clip' -- a false negative dressed as a measurement. No clip handle is fabricated here; exposing one would be an env change (p4's court)."
       ],
       "forbidden_witness_note": "DOF count and 'gripper joints exist' are deliberately NOT used: the FK model carries gripper joints too (build_fk_and_init takes finger positions) and is passed into build_multiworld_scene, so those predicates cannot discriminate."
     },
@@ -1151,15 +1155,8 @@
             },
             "note": "A-1 VISIBLE-only pass, newton_skill_env_base.py:1574-1583",
             "predicate": "pad shapes retain COLLIDE AND at least one non-pad shape had COLLIDE cleared",
-            "pass": true
-          },
-          "clip": {
-            "status": "UNAVAILABLE",
-            "predicate": "clip present in scene",
-            "pass": false,
-            "required": false,
-            "reason": "No clip descriptor is exposed. scene{} returns cable handles only (newton_skill_env_base.py:542-555) and clip bodies carry no descriptive label (measured: 40/68 bodies are auto-labelled 'body_N').",
-            "escalation": "p11: section 1.1 names the clip as a witness but the code exposes no handle for it."
+            "pass": true,
+            "role": "CONTEXT ONLY -- passes on the FK model too; identifies nothing"
           },
           "world_count": {
             "status": "PRESENT",
@@ -1175,36 +1172,51 @@
           "world_count"
         ],
         "failed": [
-          "cable",
-          "clip"
+          "cable"
         ],
         "required_legs": [
           "cable",
-          "a1_visible",
           "world_count"
+        ],
+        "discriminating_legs": [
+          "cable"
+        ],
+        "context_only_legs": [
+          "a1_visible"
         ],
         "required_failed": [
           "cable"
         ],
         "all_pass": false,
-        "unavailable_legs": [
-          "clip"
+        "removed_legs": [
+          "clip: REMOVED as a witness in spec v1.3. The scene's key set is closed and contains no clip key (newton_route_env.py:725-734: model / solver / state_0 / state_1 / control / contacts / bws / jws / cable_bodies / cable_bodies_per_world). Clip bodies carry the auto-label body_N, so substring matching would return 0 and read as 'no clip' -- a false negative dressed as a measurement. No clip handle is fabricated here; exposing one would be an env change (p4's court)."
         ],
         "forbidden_witness_note": "DOF count and 'gripper joints exist' are deliberately NOT used: the FK model carries gripper joints too (build_fk_and_init takes finger positions) and is passed into build_multiworld_scene, so those predicates cannot discriminate."
       },
       "as_built_passed": true,
       "fk_rejected": true,
-      "discriminating_legs": [
+      "fk_failed_on_legs": [
         "cable"
       ],
+      "rejected_on_legs": [
+        "cable"
+      ],
+      "non_discriminating_legs": [
+        "a1_visible",
+        "world_count"
+      ],
+      "discrimination_margin": 1,
       "ac9_pass": true,
       "interpretation": "PASS requires the battery to ACCEPT the real model and REJECT the FK model on at least one leg. If both models fail, the battery is broken rather than discriminating, and every downstream number is void."
     },
     "verdicts_for_pZ": {
-      "V-1_measured_object_is_solver_model": true,
-      "V-3_scene_witnesses_present": true,
+      "V-1_identity_by_reference_I1_I2_I3": true,
+      "V-3_content_backstop_required_legs": true,
       "AC-9_wrong_model_rejected": true,
-      "note": "V-2 and V-4 are pZ-side predicates (independent rebuild / joint-name resolution)."
+      "AC-9_rejected_on_legs": [
+        "cable"
+      ],
+      "note": "V-1 is settled by 'is' comparisons (I-1..I-3), not by content agreement. V-2 and V-4 are pZ-side predicates (independent rebuild / joint-name resolution)."
     },
     "downstream_valid": true
   }

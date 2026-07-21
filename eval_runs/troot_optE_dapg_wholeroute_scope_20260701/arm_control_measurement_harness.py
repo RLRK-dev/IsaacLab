@@ -6,7 +6,7 @@
 """Arm-control design-time measurement harness (p0 / IMPL-BUILDER).
 
 Implements ``ARM_CONTROL_MEASUREMENT_HARNESS_SPEC_V1_ARMCONTROLDESIGN_20260721.md``
-**v1.1** (p11 ARM-CONTROL-DESIGN, bank ``37902fb909``).
+**v1.3** (p11 ARM-CONTROL-DESIGN, bank ``c8c326e00b``).
 
 What this is
 ------------
@@ -23,17 +23,33 @@ production-path env instance handed to ``SolverMuJoCo`` and measures *that*.
 * ``env._fk_model`` (the IK-only robot model) is explicitly excluded from
   measurement, and is additionally used as the AC-9 negative control.
 
-Why DOF counts cannot be the witness (spec section 1.1, pZ input 2026-07-21)
-----------------------------------------------------------------------------
-``build_fk_and_init(left_finger_pos, right_finger_pos, ...)`` takes finger positions,
-so the FK model *also* carries gripper joints. Worse, ``newton_route_env.py:712``
-passes ``self._fk_model`` *into* ``build_multiworld_scene``, so the robot-side
-topology is common to both objects by construction. A predicate over DOF count or
-"gripper joints exist" therefore cannot discriminate -- that is exactly how v0.4
-passed its gate while analysing the wrong model.
+Identity is taken from the reference, not from content (spec v1.3 section 1.1)
+------------------------------------------------------------------------------
+The primary legs are ``is`` comparisons, because a fingerprint can never beat a
+reference: matching contents do not prove identical objects, which is exactly how
+v0.4 analysed the wrong model while its content check agreed.
 
-Witnesses are placed **only** on scene-specific content (cable / A-1 VISIBLE trace /
-clip / world_count), which the FK model does not have.
+* **I-1** measured ``Model`` **is** ``scene["model"]`` (``newton_route_env.py:725``)
+* **I-2** ``scene["solver"].model`` **is** the measured ``Model`` (``SolverBase.__init__``
+  sets ``self.model = model``) -- the object the solver actually integrates
+* **I-3** measured ``Model`` **is not** ``env._fk_model`` (``newton_route_env.py:690``)
+
+Content witnesses are a backstop only, and their roles were settled by measurement
+rather than assumption:
+
+* ``cable`` -- the ONLY leg that discriminates. Grounded in ``scene["cable_bodies"]``
+  (``newton_route_env.py:733``); the FK model fails index resolution.
+* ``a1_visible`` -- CONTEXT ONLY. Measured pass=true on both the 68-body as-built model
+  and the 28-body FK model, so it identifies nothing. Recorded, never required.
+* ``world_count`` -- configuration cross-check, not a discriminator.
+* ``clip`` -- REMOVED. The scene key set is closed and has no clip key
+  (``newton_route_env.py:725-734``); clip bodies carry the auto-label ``body_N``, so
+  substring matching would return 0 and read as "no clip" -- a false negative.
+
+Note that ``build_fk_and_init(left_finger_pos, right_finger_pos, ...)`` takes finger
+positions, so the FK model carries gripper joints too, and ``newton_route_env.py:712``
+passes ``self._fk_model`` *into* ``build_multiworld_scene``. DOF counts and "gripper
+joints exist" are therefore structurally incapable of discriminating.
 
 Fidelity caveat (spec section 1.2) -- do not describe this as a faithful 2F-85
 -------------------------------------------------------------------------------
@@ -83,8 +99,8 @@ SPEC_PATH = (
     "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/"
     "ARM_CONTROL_MEASUREMENT_HARNESS_SPEC_V1_ARMCONTROLDESIGN_20260721.md"
 )
-SPEC_VERSION = "v1.1"
-SPEC_BANK_SHA = "37902fb909"
+SPEC_VERSION = "v1.3"
+SPEC_BANK_SHA = "c8c326e00b"
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -290,22 +306,40 @@ def identity_record(h: ModelHandles) -> dict[str, Any]:
     derivation link must be stated rather than assumed.
     """
     solver = h.solver
+    measured = h.as_built  # the object every downstream measurement reads
+    env_model = getattr(h.env, "_model", None)
     solver_model = getattr(solver, "model", None)
-    rec: dict[str, Any] = {
-        "as_built_model_id": id(h.as_built),
-        "as_built_model_type": type(h.as_built).__name__,
+
+    # I-1..I-3 are ``is`` comparisons. A fingerprint (matching contents) can never beat a
+    # reference: identical contents do not prove identical objects, which is precisely how
+    # v0.4 analysed the wrong model while its content check agreed.
+    i1 = measured is env_model
+    i2 = (solver_model is measured) if solver_model is not None else None
+    i3 = (measured is not h.fk_model) if h.fk_model is not None else None
+
+    return {
+        "I-1_measured_is_scene_model": i1,
+        "I-1_grounding": "newton_route_env.py:725 -- self._model = scene['model']",
+        "I-2_solver_model_is_measured": i2,
+        "I-2_grounding": "SolverBase.__init__ sets self.model = model (newton/_src/solvers/solver.py)",
+        "I-3_measured_is_not_fk_model": i3,
+        "I-3_grounding": "newton_route_env.py:690 -- self._fk_model = build_fk_and_init(...)",
+        "identity_all_pass": bool(i1 and i2 and i3),
+        "object_ids": {
+            "measured": id(measured),
+            "env_model": id(env_model) if env_model is not None else None,
+            "solver_model": id(solver_model) if solver_model is not None else None,
+            "fk_model": id(h.fk_model) if h.fk_model is not None else None,
+        },
+        "measured_model_type": type(measured).__name__,
         "solver_type": type(solver).__name__,
-        "solver_model_id": id(solver_model) if solver_model is not None else None,
-        # The decisive V-1 predicate: the object we measure IS the object the solver holds.
-        "solver_holds_as_built_model": (solver_model is h.as_built) if solver_model is not None else None,
-        "fk_model_id": id(h.fk_model) if h.fk_model is not None else None,
-        "fk_model_is_distinct_object": (h.fk_model is not h.as_built) if h.fk_model is not None else None,
         "fk_model_excluded_from_measurement": True,
+        # Dynamics quantities live on the MuJoCo model DERIVED from the measured Model;
+        # the derivation link is recorded rather than assumed.
         "derived_mj_model": probe(lambda: type(solver.mj_model).__name__),
         "derived_mj_model_id": probe(lambda: id(solver.mj_model)),
         "notes": h.notes,
     }
-    return rec
 
 
 def inventory(model: Any, solver: Any | None = None) -> dict[str, Any]:
@@ -451,30 +485,15 @@ def witness_a1_visible(model: Any) -> dict[str, Any]:
     return rec
 
 
-def witness_clip(model: Any) -> dict[str, Any]:  # noqa: ARG001 - kept for battery symmetry
-    """Clip witness -- NOT IMPLEMENTABLE from currently exposed state. Reported, not faked.
-
-    Spec section 1.1 lists the clip as a witness, but the production path exposes no clip
-    descriptor: ``build_multiworld_scene`` returns only cable handles
-    (``newton_skill_env_base.py:542-555``), and clip bodies are auto-labelled ``body_N``
-    like the cable, so there is nothing to match on.
-
-    Substring matching would silently return 0 and read as "no clip" -- a false negative
-    dressed as a measurement. This leg is therefore reported UNAVAILABLE and escalated to
-    p11 as a spec-vs-code gap, rather than being invented or quietly dropped.
-    """
-    return {
-        "status": UNAVAILABLE,
-        "predicate": "clip present in scene",
-        "pass": False,
-        "required": False,
-        "reason": (
-            "No clip descriptor is exposed. scene{} returns cable handles only "
-            "(newton_skill_env_base.py:542-555) and clip bodies carry no descriptive label "
-            "(measured: 40/68 bodies are auto-labelled 'body_N')."
-        ),
-        "escalation": "p11: section 1.1 names the clip as a witness but the code exposes no handle for it.",
-    }
+# Removed in spec v1.3, recorded here so the deletion is visible rather than silent.
+CLIP_WITNESS_REMOVED = (
+    "clip: REMOVED as a witness in spec v1.3. The scene's key set is closed and contains no "
+    "clip key (newton_route_env.py:725-734: model / solver / state_0 / state_1 / control / "
+    "contacts / bws / jws / cable_bodies / cable_bodies_per_world). Clip bodies carry the "
+    "auto-label body_N, so substring matching would return 0 and read as 'no clip' -- a false "
+    "negative dressed as a measurement. No clip handle is fabricated here; exposing one would "
+    "be an env change (p4's court)."
+)
 
 
 def witness_world_count(model: Any, declared: int | None) -> dict[str, Any]:
@@ -486,15 +505,21 @@ def witness_world_count(model: Any, declared: int | None) -> dict[str, Any]:
     return rec
 
 
-# Legs that must pass for V-3. The clip leg is excluded because the code exposes no
-# handle for it (see witness_clip) -- excluded LOUDLY, with the gap reported, not dropped.
-REQUIRED_WITNESS_LEGS = ("cable", "a1_visible", "world_count")
+# Spec v1.3 leg roles. Content witnesses are a BACKSTOP; identity is settled by I-1..I-3.
+#
+#   cable       -- the only leg that actually discriminates (measured: rejects the FK model)
+#   world_count -- configuration cross-check, NOT a discriminator (passes on both models)
+#   a1_visible  -- context only. Measured pass=true on BOTH the 68-body as-built model and
+#                  the 28-body FK model, so it identifies nothing. Recorded, never required.
+REQUIRED_WITNESS_LEGS = ("cable", "world_count")
+DISCRIMINATING_LEGS = ("cable",)
+CONTEXT_ONLY_LEGS = ("a1_visible",)
 
 
 def run_witness_battery(
     model: Any, declared_worlds: int | None, cable_bodies: Any = None, per_world: int | None = None
 ) -> dict[str, Any]:
-    """Run every section 1.1 witness against ``model`` and summarise.
+    """Run the section 1.1 content witnesses against ``model`` and summarise.
 
     The identical battery, with identical inputs, is applied to the FK model for AC-9,
     where **failing** is the required outcome. A battery that returns the same verdict on
@@ -503,9 +528,9 @@ def run_witness_battery(
     w = {
         "cable": witness_cable(model, cable_bodies, per_world),
         "a1_visible": witness_a1_visible(model),
-        "clip": witness_clip(model),
         "world_count": witness_world_count(model, declared_worlds),
     }
+    w["a1_visible"]["role"] = "CONTEXT ONLY -- passes on the FK model too; identifies nothing"
     passed = [k for k, v in w.items() if v.get("pass")]
     failed = [k for k, v in w.items() if not v.get("pass")]
     required_failed = [k for k in REQUIRED_WITNESS_LEGS if k in failed]
@@ -514,9 +539,11 @@ def run_witness_battery(
         "passed": passed,
         "failed": failed,
         "required_legs": list(REQUIRED_WITNESS_LEGS),
+        "discriminating_legs": list(DISCRIMINATING_LEGS),
+        "context_only_legs": list(CONTEXT_ONLY_LEGS),
         "required_failed": required_failed,
         "all_pass": len(required_failed) == 0,
-        "unavailable_legs": [k for k, v in w.items() if v.get("status") == UNAVAILABLE],
+        "removed_legs": [CLIP_WITNESS_REMOVED],
         "forbidden_witness_note": FORBIDDEN_WITNESS_NOTE,
     }
 
@@ -566,11 +593,19 @@ def negative_control(h: ModelHandles, declared_worlds: int | None, as_built_batt
 
     as_built_ok = bool(as_built_battery["all_pass"])
     fk_rejected = not fk_battery["all_pass"]
-    discriminating = [
+    # Which legs actually split the two models -- the evidence that the battery can come
+    # out differently at all. Spec v1.3 requires naming them explicitly.
+    rejected_on = [
         leg
         for leg in REQUIRED_WITNESS_LEGS
         if as_built_battery["witnesses"].get(leg, {}).get("pass")
         and not fk_battery["witnesses"].get(leg, {}).get("pass")
+    ]
+    fk_failed_legs = fk_battery["required_failed"]
+    non_discriminating = [
+        leg
+        for leg in fk_battery["witnesses"]
+        if fk_battery["witnesses"][leg].get("pass") and as_built_battery["witnesses"].get(leg, {}).get("pass")
     ]
     return {
         "status": PRESENT,
@@ -578,8 +613,11 @@ def negative_control(h: ModelHandles, declared_worlds: int | None, as_built_batt
         "battery": fk_battery,
         "as_built_passed": as_built_ok,
         "fk_rejected": fk_rejected,
-        "discriminating_legs": discriminating,
-        "ac9_pass": bool(as_built_ok and fk_rejected and discriminating),
+        "fk_failed_on_legs": fk_failed_legs,
+        "rejected_on_legs": rejected_on,
+        "non_discriminating_legs": non_discriminating,
+        "discrimination_margin": len(rejected_on),
+        "ac9_pass": bool(as_built_ok and fk_rejected and rejected_on),
         "interpretation": (
             "PASS requires the battery to ACCEPT the real model and REJECT the FK model on at "
             "least one leg. If both models fail, the battery is broken rather than discriminating, "
@@ -881,7 +919,8 @@ def run_h0(env: Any, declared_worlds: int | None) -> dict[str, Any]:
     battery = run_witness_battery(h.as_built, declared_worlds, h.cable_bodies, h.cable_bodies_per_world)
     neg = negative_control(h, declared_worlds, battery)
 
-    v1 = ident.get("solver_holds_as_built_model") is True
+    # V-1 is now settled by object reference (I-1..I-3), not by content agreement.
+    v1 = ident.get("identity_all_pass") is True
     v3 = battery["all_pass"]
     report = {
         "identity": ident,
@@ -890,10 +929,14 @@ def run_h0(env: Any, declared_worlds: int | None) -> dict[str, Any]:
         "fidelity": fidelity_record(),
         "negative_control_ac9": neg,
         "verdicts_for_pZ": {
-            "V-1_measured_object_is_solver_model": v1,
-            "V-3_scene_witnesses_present": v3,
+            "V-1_identity_by_reference_I1_I2_I3": v1,
+            "V-3_content_backstop_required_legs": v3,
             "AC-9_wrong_model_rejected": neg.get("ac9_pass"),
-            "note": "V-2 and V-4 are pZ-side predicates (independent rebuild / joint-name resolution).",
+            "AC-9_rejected_on_legs": neg.get("rejected_on_legs"),
+            "note": (
+                "V-1 is settled by 'is' comparisons (I-1..I-3), not by content agreement. "
+                "V-2 and V-4 are pZ-side predicates (independent rebuild / joint-name resolution)."
+            ),
         },
         # Fail-closed: downstream numbers are void unless the foundation holds.
         "downstream_valid": bool(v1 and v3 and neg.get("ac9_pass")),
