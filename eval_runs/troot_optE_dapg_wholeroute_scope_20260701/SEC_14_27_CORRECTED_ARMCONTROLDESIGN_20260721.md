@@ -102,7 +102,7 @@ B0/B1 は外部 5 callsite 中の **1**（`policy_route_runner.py:730`）、同 
 
 **(4) ⛔ escalation — `_pp` の機構は認可例外より広い（⭐ (A) 根拠 差替）**
 
-`_pp`（`r_fc0_c2_smoke_77.py:72-81` 他 2 file）は `_PIN["active"]` の時に `jq[ARM_Q:]` を snapshot で全置換し、`qd[ARM_Q:]` を全零化し、さらに render 元の `md.qpos[ARM_Q:]` / `md.qvel[ARM_Q:]` も凍結して `mujoco.mj_forward` を適用する。
+`_pp`（`r_fc0_c2_smoke_77.py:72-81` 他 2 file）は `_PIN["active"]` の時に `jq[ARM_Q:]` を snapshot で全置換し、`qd[ARM_Q:]` を全零化し、さらに render 元の `md.qpos[ARM_Q:]` / `md.qvel[ARM_Q:]` も同じく上書きして `mujoco.mj_forward` を適用する。
 
 **`[ARM_Q:]` が指すもの（SSOT 実測）**: `ARM_Q = 2 * T.JOINTS_PER_ARM`（`:57`）、`JOINTS_PER_ARM = ROBOT_NUM_JOINTS` = **14**（`task_config.py:42` 逐語「14: per-arm stride for joint_q arrays」）⇒ **`ARM_Q = 28`**。両ロボットの座標は arm `{0-5, 14-19}` / gripper `{6-13, 20-27}`（`test_newton_clip_routing.py:1771-1776`）で**全て < 28** ⇒ **`[28:]` = ケーブル側 DOF**。
 
@@ -111,9 +111,9 @@ B0/B1 は外部 5 callsite 中の **1**（`policy_route_runner.py:730`）、同 
 | 腕関節角を直接書くか | ⛔ 否 | 不許可事項に**当たらない** |
 | 指を kinematic close するか | ⛔ 否 | 同上 |
 | `update_kinematic_bodies` / weld / attachment か | ⛔ 否 | 同上 |
-| **clip の所でケーブルを保持するか** | ⛔ **否 — ケーブル全 DOF を凍結** | ⚠ **認可例外の範囲外（広すぎる）** |
+| **clip の所でケーブルを保持するか** | ⛔ **否 — ケーブル 40 節すべてが動かなくなる** | ⚠ **認可例外の範囲外（広すぎる）** |
 
-⇒ **「腕・指に触れないから不許可事項ではない」は真だが、「だから認可例外である」は導かれない。** 裁定 B が認可したのは *clip 側がケーブルを保持する機構*（`LEDGER:35` canonical）であって *ケーブル全体の凍結* ではない。
+⇒ **「腕・指に触れないから不許可事項ではない」は真だが、「だから認可例外である」は導かれない。** 裁定 B が認可したのは *clip 側がケーブルを保持する機構*（`LEDGER:35` canonical）であって *ケーブル全体を動かなくすること* ではない。
 
 ⛔ **原著の 2 根拠は両方とも失効している**（本訂正の実体）:
 1. **premise 失効** — 原著は「Rs 2026-07-19『kinematic 完全削除（pin 含む）』directive の射程内」を根拠にした。同 directive は **裁定 B（`LEDGER:35`）で superseded**。
@@ -121,8 +121,14 @@ B0/B1 は外部 5 callsite 中の **1**（`policy_route_runner.py:730`）、同 
 
 ⇒ ⭐ **escalation は破棄せず、根拠を差し替えて存続**: 「07-19 directive の射程」ではなく「**裁定 B の例外 scope を超える機構が、tracked 1 + untracked 2 の計 3 file に存在する**」。
 
-**disposition = ⏸ `Rs §0 解釈待ち`**（p4 が 2026-07-21 13:24 JST に Rs へ照会・即答不要）。
-照会の内容 = **「ケーブル全 DOF の凍結」は裁定 B の認可例外に含まれるか。** 設計 owner (p11) の読み = **含まれない**。⚠ **§0 不変前提の解釈は Rs 専権**ゆえ本書では裁定しない。
+**disposition = ⭐`Rs 指示により throw-away 形は不採用 → equality 拘束へ`**（2026-07-21・p4 承認のうえ更新）。
+
+**Rs 逐語 = 「すてるなよ」**。⚠ 係り先（受領文脈・必須）= p11 が `_pp` の機構を「**毎回捨てて同じ値に戻すので、変化が積み上がらない**」と説明した直後の応答 ⇒ 指す対象 = **毎ステップ物理計算の結果を捨てて保存値を書き戻す形**。
+⇒ **この形は採らない。** 認可された clip-retention は **clip の所に equality 拘束を置き、ソルバに解かせる形**（物理結果を捨てず、拘束も物理の一部として解かれ、残りの節は物理のまま動く）で実現する。
+**実現可能性 = 実測済**: env7 Newton 1.2.1 `SolverMuJoCo` は equality 対応（`solvers.py:326` support matrix / `solver_mujoco.py:295-296` 逐語 supported）。⇒ 形が認可文言「**クリップのみ／never beyond clip**」（`log.md:6534`）にも収まる。
+
+⛔ **書かないこと（p4 指示・over-claim 回避）**: 上記は **Rs の実務指示（redirect）**であって、**「ケーブル全体を動かなくするのが裁定 B の例外の外である」と Rs が formal に裁定した、とは書かない。** §0 不変前提の解釈は Rs 専権であり、本書は裁定しない。設計 owner (p11) の読みが「例外に収まらない」であることのみ記録する。
+⚠ **pin 実装の owner = pin arc (d-a)/(d-b) court**（p4 が tracking・非緊急ゆえ実装接近時に routing）。本書は制御設計側の記録に留める。
 ⛔ **live 判定は要求しない**（要求すると RUN レグを開ける）。⚠ **live とも dead とも主張しない** — production import = **0**（閉クエリ。唯一の参照は sibling `r_fc0_c2_pen_crosspv_opssup.py:92` の**コメント**）、3 file とも `if __name__ == "__main__": sys.exit(main())` の standalone script。**直接実行の履歴は未測定。**
 ⛔ **削除・改修を勧告しない。** F-β 3 択の適用（実測からは (iii) が自然）も**所管 arc + p4/Rs の court**。
 
@@ -147,7 +153,7 @@ B0/B1 は外部 5 callsite 中の **1**（`policy_route_runner.py:730`）、同 
 **class = 単一 `DRIVE` / `MIGRATION_PENDING` 維持**（consumer 別分割 = 却下。extent 差は kind 差でない）。
 **bind = 全 consumer**（B0/B1 部分 bind 不可）。
 **fence = F-α〔rebind sink を guard 契約に追加・⭐ census = **3 file**・rebind は **import 時**〕+ F-β〔untracked consumer を 3 択で disposition・⭐ 対象 = `r_s71_bothhook_c1_76.py` / `r_s71_clip_dropin_72.py`〕の 2 種を別立てで必須**（class の代替でなく加算）。
-**escalation = `_pp` の機構が裁定 B の認可例外より広い（ケーブル全 DOF 凍結 ≠ clip 側の保持機構）。⏸ disposition = Rs §0 解釈待ち。** ⛔ live 主張なし・削除勧告なし。
+**escalation = `_pp` の機構は認可例外より広い（ケーブル 40 節すべてが動かなくなる ≠ clip 側の保持機構）。⭐ disposition = Rs 指示「すてるなよ」により throw-away 形 不採用 → equality 拘束へ。** ⛔ Rs の formal 例外裁定とは書かない・live 主張なし・削除勧告なし。
 **⚠ 訂正 #27** = 「live consumer 無なら retire」を静的判定可能な [R-E] に差替 ⇒ else 枝 retire は現材料で不可と確定。
 **⚠ %12 count 訂正** = `main:8067` は else 枝に入らない（entry point 5→4）。
 **⚠ citation 訂正** = `policy_route_runner:506` → 実体 `:483`。
@@ -160,7 +166,9 @@ B0/B1 は外部 5 callsite 中の **1**（`policy_route_runner.py:730`）、同 
 
 | Δ | 箇所 | 内容 | 理由 |
 |---|---|---|---|
-| **A** | §4(4) | escalation の根拠を差替（07-19 directive → 裁定 B 例外 scope 超過）。disposition = `Rs §0 解釈待ち` を明記 | 原根拠の premise が裁定 B で失効・かつ「untracked」が事実誤り |
+| **A** | §4(4) | escalation の根拠を差替（07-19 directive → 裁定 B 例外 scope 超過） | 原根拠の premise が裁定 B で失効・かつ「untracked」が事実誤り |
+| **E** | §4(4) disposition | `Rs 解釈待ち` → **`Rs 指示: throw-away 形 不採用・equality 拘束へ`**（逐語「すてるなよ」+ 係り先 + 実現可能性の実測を併記）。⛔formal 例外裁定とは書かない | Rs 直接指示 2026-07-21（p4 経由・p4 承認 13:56 JST） |
+| **F** | 全体 | ケーブルについての「凍結」を平易語へ（「凍結」は bar/prereg の固定の意味で既用＝語衝突） | Rs 指摘「凍結とは？」 |
 | **B** | §4(3) F-β | 事例を `r_fc0_c2_smoke_77.py` → **untracked 2 件**へ差替 | 名指された file は 4 commit で tracked と実測。**規則は不変** |
 | **C** | §4(3) F-α | census 1 → **3**、**import 時 rebind** を明記 | 独立の閉クエリで同一パターン 3 件 |
 | **D** | §1 + 新節 D | citation 訂正を**行番号 → content pin** へ差替（c52 `:506` / c52 blob `:483` / HEAD `:506` / worktree `:540` = **面ごとに 4 値**） | 原著も c52 も自面では正しく、**面を明示せず行番号を引いたこと**が誤りだった |
