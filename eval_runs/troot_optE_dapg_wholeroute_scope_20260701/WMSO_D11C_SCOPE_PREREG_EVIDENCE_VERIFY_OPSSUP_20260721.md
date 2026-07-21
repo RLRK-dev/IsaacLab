@@ -15,7 +15,7 @@
 | frozen contracts_v2 | `00192d20ca00b654` | HEAD | ✅ 不変 |
 | frozen tensor_binding v13 | `5a1874d3be8b98b8` | HEAD | ✅ 不変 |
 | frozen EP md | `c474acea7c58acc2` | HEAD | ✅ 不変 |
-| frozen EP JSON | `e63176af9bc3a246` | — | ⚠ **独立再計算せず**（.json path を本 leg で特定できず）。corroborated = OUT#8「凍結 4 file 編集不可」+ 同一 frozen bank・他 3 file 不変 |
+| frozen EP JSON | `e63176af9bc3a246` | HEAD | ✅ 不変（**v1.1 で独立再計算・gap CLOSED** — path `WMSO_EvidencePolicy_v1.9.json` を pQ が提供・pY が独立算出 `e63176af9bc3a246b1c32db3` = 期待値一致） |
 
 ## (2) DDR 全 35 項目との対応 — ✅ **35/35 被覆・欠落 0**
 
@@ -41,10 +41,10 @@
 
 新規 file（prereg）・**凍結 4 file 非編集**（OUT#8 + sha 不変を実測）・公開 API code 境界に触れない・L3 physics/reward keyword 非該当（artifact/evidence packaging であり reward/env/control でない）。⇒ **L2**（two-key + design 段で CC Debate 発火）は正しい。
 
-## ⚠ 非 blocker の注記（2 件）
+## 非 blocker の注記
 
-1. **EP JSON sha 独立再計算せず**（上記・corroborated）。
-2. **IN③「proof obligation 実体供給」** = 本 prereg が design-scope（OUT#6 impl CLOSED）ゆえ「obligation の *設計*」であって「proof の *生成*」ではない、と読む。文面がそう限定していることを design 着手時に 1 語で確認推奨（現状 under-statement ではない）。
+1. ~~EP JSON sha 独立再計算せず~~ → ✅ **v1.1 で CLOSED**（pQ が path 提供 → pY が独立再計算・一致）。⇒ **frozen 4/4 全て独立確認済**。
+2. **IN③「proof obligation 実体供給」** = design-scope（OUT#6 impl CLOSED）ゆえ「obligation の *設計*」であって「proof の *生成*」ではない、を design 着手時に 1 語確認推奨。⇒ **pQ が design 段 carry として受諾**（pS の P-1/W-1/W-2 と同扱い）。
 
 ## 非主張
 
