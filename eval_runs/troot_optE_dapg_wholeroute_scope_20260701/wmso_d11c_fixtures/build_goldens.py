@@ -211,7 +211,9 @@ def check_against_declaration(record, declaration):
 
     # cycle-2 F-6: the record's self-asserted lineage must equal the frozen declaration's.
     if record["training_lineage"] != declaration["training_lineage"]:
-        return ["E_BINDING_LINEAGE_MISMATCH"]  # frozen code, reused (v13 :230)
+        return ["E_MANIFEST_LINEAGE_INCOHERENT"]  # cycle-3 G-6: a NEW C-side code. Overloading the
+        # frozen E_BINDING_LINEAGE_MISMATCH (v13 :171 TrainingProvenance operand, :230 certify-time)
+        # for a different operand and firing site would touch frozen semantics (pS design-axis read).
 
     relation = declaration.get("relation")
     if relation is None:
@@ -335,7 +337,7 @@ def _declaration_controls():
          {"training_lineage": "BC_THEN_RL", "relation": "EXPLICIT_SUPERSEDE", "demo_dataset_binding_hash": TB_A},
          ["E_MANIFEST_STAGE_BINDING_CONFLICT"]),
         ("lineage disagrees with frozen declaration", b,
-         {"training_lineage": "BC_ONLY", "relation": "IDENTICAL"}, ["E_BINDING_LINEAGE_MISMATCH"]),
+         {"training_lineage": "BC_ONLY", "relation": "IDENTICAL"}, ["E_MANIFEST_LINEAGE_INCOHERENT"]),
     ]
 
 
