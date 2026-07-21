@@ -95,7 +95,7 @@ L 判定の汎用枠組みは global CLAUDE.md (`~/.claude/CLAUDE.md` の「階�
 ### THREAD project L3 自動昇格キーワード
 
 **⛔ FOUNDATIONAL INVARIANT 抵触で即 L3 + STOP (最優先、2026-06-21 single-arm 重大事故後 landing):**
-設計案が `thread-vault/04-Specs/RS71-System-Spec-SSOT.md` §0 の不変前提 (DUAL-ARM / 88mm grasp span / DiffIK-only / gripper geometry LOCK / no-kinematic-trick) を**変更する**場合 → 即 L3 + **STOP → BLOCKED_FOR_USER で Rs 確認 → build/probe 前に §運用2 [VERIFY] 5体検証**。前提変更は design tradeoff ではなく Rs専権 (`prohibited.md:18`)。generative-design は OPTIONS + ESCALATION を出すのみで、独自 method-swap 不可。判定基準: 「この案は §0 不変前提のどれかを変えるか?」— 変えるなら build せず報告。本前提は session 開始時に `handoff_grounding_gate.sh` が auto-echo。
+設計案が `thread-vault/04-Specs/RS71-System-Spec-SSOT.md` §0 の不変前提 (DUAL-ARM / 88mm grasp span / DiffIK-only / gripper geometry LOCK / no-kinematic-trick) を**変更する**場合 → 即 L3 + **STOP → BLOCKED_FOR_USER で Rs 確認 → build/probe 前に §運用2 [VERIFY] 5体検証**。前提変更は design tradeoff ではなく Rs専権 (`prohibited.md:18`)。設計を生成する側（CC）は OPTIONS + ESCALATION を出すのみで、独自 method-swap 不可。判定基準: 「この案は §0 不変前提のどれかを変えるか?」— 変えるなら build せず報告。本前提は session 開始時に `handoff_grounding_gate.sh` が auto-echo。
 
 **ファイルパス一致で即 L3 (workflow / ロジック変更時):**
 - `thread_isaac_lab/configs/task_config.py` (SSOT、全数値パラメータ)
