@@ -7,7 +7,9 @@
 
 ---
 
-## (a) 凍結 D1.1-B v13 `:256` / `:471` の併記訂正
+## (a) 凍結 D1.1-B v13 `:256` / `:471` の併記訂正 — ✅**裁定済（Rs = 「B」= 別 artifact で訂正・凍結物は編集しない）**
+
+⇒ 履行 = `WMSO_D11B_COCITATION_CORRECTION_NOTE_20260721.md`。⛔**凍結物の sha は不変**（`5a1874d3be8b98b8…`）。⛔**(b) は本裁定で動かない**。
 
 **事実**（pQ 実測・pS 設計軸 read・pY custody 再測の 3 者が一致）:
 - v13 `:256` 逐語「`proof_policy._domain` = 「exact required ProofKind set」＋ `E_PROOF_KIND_FOREIGN`」。同行に「**D-3 に合流**」も在る。
