@@ -1,6 +1,22 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 18:1x JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 20:0x JST
 
-> ## ⛔ D1.1-C `artifact_manifest` — **design v2.4 / 3 cycle の debate 全て FAIL→収束 / ⛔Rs 判断 4 件で停止**（2026-07-21 18:1x）
+> ## ⭐ D1.1-C — **design v2.5 / Rs 裁定 3 件 受領済 / ⛔Rs 待ちは 0 件（escalate しすぎを是正）**（2026-07-21 20:0x）
+>
+> **現在地**: design **v2.5** `0c082b727a4cab9c…` @ `87ba9ee2c0`（190 行・open 18 件）＋ fixtures（builder `bc89e9d7148e15ca…` @ `b994b617b5`／golden A-D @ `e1ed170014`）。登録コマンド逐語実行 = **33/33 fired・4/4 PASS・rc=0**。⭐**凍結物は最後まで無傷** `5a1874d3be8b98b8…`（p6 が 3 点 byte 一致で独立確認）。
+>
+> ⭐⭐**Rs 裁定 3 件（custody 済）**: **(a) = B** 凍結を編集せず別 note で訂正 → `WMSO_D11B_COCITATION_CORRECTION_NOTE_20260721.md` `00cf0c0bf86681f8…` @ `20cd755ac9`／**(b) = 採択 D-1 を候補へ格下げ**（逐語「落選した案を却下した理由に誤りがあったとき、採択された案は再度候補にかくさげ」）⇒ **B1 は CLOSED → OPEN**／**「却下した理由に誤りがあれば戻す」** ⇒ 「rank 2 への proof kind 追加」= **候補へ復帰**。custody = `WMSO_RS_RULING_B_D1_DEMOTION_CUSTODY_20260721.md` `a9e6624a304b7f4b…` @ `3ce6d432f8`。
+>
+> ⭐⭐**escalate しすぎの是正（最終ターン・Rs 同意）**: 私は「**凍結物に触れる話題 = Rs 専権**」と混同していた。**規則が Rs 専権と定めるのは行為**（凍結物の**編集**／**freeze**／**scope 変更**／制御方式変更）。**推論・提案・検証に回すのは pQ の仕事**。⇒ **Rs 待ち 4 件 → 0 件**。⛔**本当に Rs が要るのは ①freeze ②凍結 package を実際に開ける（B1 で D-3 が勝った場合）の 2 つだけで、どちらもまだ来ていない**。
+>
+> **次の 4 手（pQ が進める）**: ①**D-3 の判断を出す**（「他に手段がある以上」は D-1 の採択に依存し支えを失った ⇒ 戻す）→ pS 検証 ②**凍結 B の status を既存 convention で処理**（現況 = LEDGER・凍結物は無傷）→ p6 ③**B1 の再選定を起草**（候補 = D-1 / D-2 / D-3 / D-4 / rank 2 案）→ pS → pY ④**v2.5 で two-key を開く**（部分版の境界可否は **pS に判定させる**）。
+>
+> **debate 3 cycle（全 FAIL・収束）**: cycle-1 `9851f165…` @ `7f6d038a30`（24 件）／cycle-2 `df2965a8…` @ `78d02f4257`（16 群）／cycle-3 `d23e5faa…` @ `acce4d5c79`（NHA = CHANGE_JUSTIFIED）。
+>
+> ⭐**cycle-3 の凍結波及調査の純結果 = 確認された non-conformance ゼロ**。私は 2 度「凍結との衝突」を主張し、**2 度とも凍結 file 自身の該当節を読んでいなかった**（`:171` の層定義・`:439` の disposition 表）。1 度目は `:208` の **1 行だけ**読んで断定。⚠**pS は私の誤枠組みに乗り、pY が測って反証した**（同意は独立確認でない）。
+>
+> ⚠**以下は 18:1x 時点の記録**。
+
+> ## （18:1x 時点）D1.1-C — design v2.4 / Rs 判断 4 件で停止
 >
 > **現在地**: design **v2.4** `b85fa905d4a60299…` @ `c0baa08663`（184 行・open **18 件**）＋ fixtures（builder `1c4eebff59c520c8…` @ `55705bfa56`／golden 4 本 @ `e1ed170014`）。**登録コマンド逐語実行 = 33/33 fired・4/4 PASS・rc=0**。LEDGER 反映 = p6 `59f2b47209`（DDR **#37** = gate 登録）。
 >
