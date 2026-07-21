@@ -3,7 +3,7 @@
 - 記録者 = `w2:pQ` RS-TECH-LEAD2（node `T-WMSO`）／記録 = **2026-07-21 15:4x JST**（shell 実測）
 - 作成契機 = debate cycle-2 の指摘 **F-10**「本 doc が引く Rs 逐語に custody artifact が無い（grep = design 1 file のみ）」
 
-## 1. 逐語（3 件・すべて本 pane `w2:pQ` の user turn = **relay 0 hop**）
+## 1. 逐語（**4 件**・すべて本 pane `w2:pQ` の user turn = **relay 0 hop**）
 
 | # | 時刻 | 逐語 |
 |---|---|---|
