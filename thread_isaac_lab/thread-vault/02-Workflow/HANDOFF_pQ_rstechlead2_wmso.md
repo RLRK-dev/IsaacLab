@@ -23,6 +23,8 @@
 > **prereg の IN / OUT 要旨**: IN = manifest 型定義（code/model/data/config/evaluator/EP/`substrate_id` の exact hash 結合）・`substrate_id` 必須化と区別機構・DC-3 grade 別 proof obligation の実体供給写像・minimal JCS の package 展開・**carry 機構 3 件**（U-2 pin / U-5 両段 binding 記録 / U-6 topology metadata）。OUT = 選別 policy（#26=Rs）・阻止実装・demo 再記録（p4/p0）・契約層 topology 束縛（schema delta⇒Rs review）・**合成 schema delta（pX court）**・impl/training/authority・slice・凍結 4 file 編集・**F4 腕参加の source（p5 court）**。
 >
 > ⛔**次 = Rs の scope 承認**（これで design authoring 解錠）。**self-start しない**。impl / training / closed-loop authority = **CLOSED 継続**。
+>
+> ⚠**2026-07-21 13:5x — Rs 発話「承認」の範囲を同一ターンで確認済（二択を構造化提示）= 「p6 への relay のみ」**。⇒ **D1.1-C scope は未承認のまま / design authoring 未解錠 / self-start 禁止 継続**。relay = LEDGER 行 58 へ「prereg 二鍵充足・Rs scope 承認待ち」の反映依頼（p6 court・13:57 送達確認済）。⛔**この「承認」を scope 承認として下流で引かないこと**（短い human 発話の指示対象は、直前の依頼 1 件に限る）。
 
 > ## ✅✅ D1.1-B `tensor_binding` = **FROZEN-LOCAL 完了**（2026-07-21）
 >
