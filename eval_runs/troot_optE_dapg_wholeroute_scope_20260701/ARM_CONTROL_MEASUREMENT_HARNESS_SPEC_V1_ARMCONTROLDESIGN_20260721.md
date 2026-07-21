@@ -1,8 +1,8 @@
-# 腕制御 測定ハーネス 仕様 v1.2 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 2026-07-21）
+# 腕制御 測定ハーネス 仕様 v1.3 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 2026-07-21）
 
-**Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.2** — **proposal**（landing = p4 経由）。
-**版歴（内容 pin・sha は照合記録）:** v1.0 `054a54bbb6` → v1.1 `37902fb909`（pZ の model-identity 入力を折込 = §1 witness の精緻化 / fidelity caveat / provenance 出力）→ ⭐**v1.2**（**p0 の照会に応答して H-2 の対象 DOF 集合と除外 DOF の扱いを宣言** = §H-2.1/2.2/2.3 新設 + AC-3 強化。**他章は無変更**）。
-⚠ **v1.2 の変更は H-2 と AC-3 に限局**（p0 は他章の実装をやり直さなくてよい）。
+**Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.3** — **proposal**（landing = p4 経由）。
+**版歴（内容 pin・sha は照合記録）:** v1.0 `054a54bbb6` → v1.1 `37902fb909`（pZ の model-identity 入力を折込）→ v1.2 `3cb06b0fe5`（**H-2 の DOF 宣言** = §H-2.1/2.2/2.3 + AC-3）→ ⭐**v1.3**（**p0 の h0 実測が v1.1 の witness 前提 2 点を偽と示したことへの応答** = §1.1 を **参照同一性 I-1〜I-3 主レグ**へ構造変更 / A-1 VISIBLE を文脈記録へ降格 / clip witness を削除 / V-1・V-3・AC-9 追従）。
+⚠ **v1.3 の変更は §1.1 と V-1/V-3/AC-9 に限局**（H-2 以降は無変更）。
 **根拠:** Rs 裁定 = **案 A 採択**（p4 relay 2026-07-21 15:44）。**設計数値を手で導かない。** 私は **spec + 受入条件**を書き、**p0 が実 build して測り**、**pZ が実 build と突き合わせて model-identity を検証**する。数値はその**検証済み出力**から取る。
 **下敷き:** v0.4 手続き（`c51dad2d54`）。⚠ v0.4 は BLOCK 済ゆえ**そのまま採らない** — 下記 §0 の 1 点を構造的に変える。
 
@@ -37,25 +37,44 @@ v0.4 の致命 = **私が書いた build recipe が、実際に走るモデル�
 **pZ が検証すること（受入の中核）**
 | # | 述語 |
 |---|---|
-| V-1 | 測定対象が **env が実際に solver へ渡した Model** であること（**別 build でも FK モデルでもない**） |
+| V-1 | 測定対象が **env が実際に solver へ渡した Model** であること（**別 build でも FK モデルでもない**）⇒ **§1.1.0 の I-1〜I-3（`is` 比較）で決める** |
 | V-2 | 上記記録が、**pZ が独立に構成した env** の同一項目と一致すること |
-| V-3 | ⭐**scene 固有物**が在ること（下記 §1.1 の witness）— **robot-only モデルを掴んでいないことの識別子**（v0.4 の失敗を狙って弾く leg） |
+| V-3 | ⭐**scene 固有物**が在ること（§1.1.1 の **cable leg**）— 参照同一性の **backstop**。⚠ v1.1 が挙げた A-1 VISIBLE / clip は **識別しない or handle 不在**と実測（§1.1.1） |
 | V-4 | 掃引に使う `q` が **joint 名で解決**されている（index 直書きでない） |
 
-### 1.1 ⭐ witness は **scene 固有物**に置く（pZ 入力・2026-07-21）
+### 1.1 ⭐ 同一性は **参照**で取る（v1.3 で構造変更・2026-07-21 20:5x）
+
+⚠⚠ **v1.1 の witness 前提は p0 の h0 実測で 2 点が偽と判明**（`a3e07577ba` + report `negative_control_ac9`）。⭐ **これは私が AC-9 に置いた negative control が仕事をした結果**であり、harness 側の欠陥ではない。⇒ 下記へ差し替える。
+
+#### 1.1.0 ⭐⭐ 主レグ = **object 参照の同一性**（指紋ではなく参照で決める）
+
+**scene は `model` と `solver` の**両方**を返す**（`newton_route_env.py:725-726`「`self._model = scene["model"]` / `self._solver = scene["solver"]`」）。⇒ **同一性は内容の一致で推定するのではなく、同じ object かどうかで決められる。**
+
+| # | 述語（**すべて `is` 比較**） | 接地 |
+|---|---|---|
+| **I-1** | 測る `Model` **is** `scene["model"]` | `newton_route_env.py:725` |
+| **I-2** | `scene["solver"].model` **is** 測る `Model`（= solver が積分している当の object） | `SolverBase.__init__` 逐語 `self.model = model`（`newton/_src/solvers/solver.py`。**p11 が env7 python で実行して確認**・2026-07-21 20:4x） |
+| **I-3** | 測る `Model` **is not** `env._fk_model` | `newton_route_env.py:690` |
+
+⇒ ⭐ **指紋（内容の一致）は参照に勝てない。** I-1〜I-3 を主レグにすれば、「witness が識別できていなかった」という失敗の族そのものが閉じる。
+
+#### 1.1.1 内容 witness（**backstop に降格**）
 
 ⛔⛔ **DOF 数・gripper joint の有無では FK robot-only と as-built を分けられない。**
-実測: `build_fk_and_init(left_finger_pos, right_finger_pos, …)`（`newton_skill_env_base.py:1223`）は **指の位置を引数に取る** ⇒ **FK モデルも gripper 系 joint を持つ**。⇒ 「gripper が在る」類の述語は **v0.4 型の誤一致**を起こす。
+実測: `build_fk_and_init(left_finger_pos, right_finger_pos, …)`（`newton_skill_env_base.py:1223`）は **指の位置を引数に取る** ⇒ **FK モデルも gripper 系 joint を持つ**。
 
-**採る witness（scene にしか無いもの・p11 が実測確認）**:
-| witness | 実体 |
-|---|---|
-| **cable** | `add_revolute_cable` が**両腕の後に**発行する REVOLUTE 鎖（`newton_skill_env_base.py:1587`。逐語「Cable: rigid-link REVOLUTE chain **AFTER both arms**」）⇒ **body 数 0 でないこと** |
-| **A-1 VISIBLE pass の痕跡** | `:1574-1578` 逐語「clear COLLIDE on **non-pad arm shapes** … **KEEP COLLIDE on the gripper PAD geoms**」⇒ **非 pad の腕 shape が COLLIDE を落としており、pad は保持している**こと |
-| **clip** | scene 側の clip 実体が在ること |
-| **world_count** | 宣言値と一致すること |
+| witness | 扱い（**v1.3**） | 根拠 |
+|---|---|---|
+| **cable** | ✅ **維持・唯一の識別レグ** | `add_revolute_cable` が両腕の後に発行する REVOLUTE 鎖（`newton_skill_env_base.py:1587`）。handle は `scene["cable_bodies"]`（`newton_route_env.py:733`）。**FK では index 解決に失敗し reject される**（p0 実測） |
+| **A-1 VISIBLE の痕跡** | ⛔ **必須集合から除外 → 文脈記録のみ** | **実 68-body でも FK 28-body でも pass=true**（p0 negative control 実測）⇒ **識別子でない**。出力には残すが「識別しない」と明記する |
+| **clip** | ⛔ **witness から削除** | `scene` の**閉じた key 集合**（`newton_route_env.py:725-734` = `model` / `solver` / `state_0` / `state_1` / `control` / `contacts` / `bws` / `jws` / `cable_bodies` / `cable_bodies_per_world`）に **clip の key が無い**（p11 実測）。clip body は `body_N` 自動ラベル ⇒ ⛔ **部分一致で探さない**（0 件が「clip 無し」と読めてしまう偽陰性） |
+| **world_count** | ⚠ **配置の照合として維持**（識別レグではない） | 宣言値と一致すること。⛔ 単独では FK と分けられない |
 
-⇒ **これらは FK/IK モデルには存在しない**ので、識別する。⛔ 「DOF 数一致」「gripper joint 在り」を witness に使わない。
+⭐ **clip handle は今は作らない。** 識別は cable と I-1〜I-3 で足りており、handle 露出は env 変更（p4 court）。⇒ **将来 clip 固有の測定が要ると判明したら、`scene` に**ラベル付き handle を足す**（⛔ 文字列一致で探す実装にしない）。
+
+⚠ **引用の訂正（records-must-match-fact）**: harness docstring と relay が「`scene{}` は cable handle のみ」の根拠に **`newton_skill_env_base.py:542-555`** を挙げるが、**p11 が当該範囲を読んだところ S1B 検証コードであり scene 辞書ではない**。⇒ **主張は正しいが引用が誤り**。正しい接地 = 上表の `newton_route_env.py:725-734`（閉じた key 集合）。**p0 は docstring の引用を差し替えること。**
+
+⭐ **p0 の判断は正しかった** — clip leg を「実装不能」と報告して**偽の pass を作らなかった**。⛔ 埋められない leg は**黙って落とさず、落ちていることを出力に残す**（本 spec の方針として維持）。
 
 ### 1.2 ⚠ fidelity caveat（model 記述は条件付きで書く）
 
@@ -161,7 +180,7 @@ p0 は次を**実測して報告する**（⛔ どれを採るかは決めない
 | AC-6 | H-5 の伝達比が **phase 別**に出ている（出ない限り task 許容値を関節 bar に変換しない） |
 | AC-7 | H-6a〜H-6c が **実測値**として報告されている（宣言値の転記でない）。H-6b は**正対照つき**（効いたことを状態変化で示す） |
 | AC-8 | **再現性**: 同一入力で再実行して同一出力（seed / 版 / env を出力に pin） |
-| AC-9 | ⭐**負対照**: 意図的に **FK robot-only モデル**を渡すと **H-0 が落ちる**ことを示す。⛔ 判定は **§1.1 の scene 固有 witness** に接地していること（DOF 数・gripper joint の有無で判定していたら**この負対照を通らない**）。これが示せないハーネスは v0.4 と同じ穴を持つ |
+| AC-9 | ⭐**負対照**: 意図的に **FK robot-only モデル**を渡すと **H-0 が落ちる**ことを示す。⛔ 判定は **§1.1.0 の参照同一性 I-1〜I-3** と **§1.1.1 の cable leg** に接地していること（DOF 数 / gripper joint の有無 / A-1 VISIBLE は **両モデルで pass = 識別しない**と実測済 ⇒ これらで判定していたら負対照を通らない）。**どの leg が落ちて reject になったかを出力に明記**する（「落ちた」だけでは、識別しない leg で落ちた場合と区別できない） |
 | AC-10 | 出力に **build tree / branch / commit + venv + 版**（§1.3）が在り、pZ が同一地点で再現できる |
 
 ---
