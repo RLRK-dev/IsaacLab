@@ -16,6 +16,16 @@
 >
 > ⭐**pS two-key 設計軸 = PASS-WITH-CONDITIONS（20:44・記録 `8a3aaa91a951797b…` @ `7c2df663b0`・pQ 三者一致実測）**: 本体 must-fix 0（§2 U-5 は凍結 `v13:158-171` ＋ EP JSON `:29` に忠実／§3 `substrate_id` は `contracts_v2:570` の**記名の連言のみ**で値では弾かない）・不変前提 非該当・court 越境なし。⛔条件 3 件 = **C-1 open-11 は本 PASS で批准されない**／**C-2 pY evidence 軸 未了ゆえ two-key 未完**／C-3 impl CLOSED。
 >
+> ⭐⭐**pY evidence 軸 = PASS（20:53・記録 `c26fcfcf8cedeff4…` @ `f7d9f86c76`・75 行・pQ 三者一致実測）** ⇒ **two-key の検証は 2 軸そろった**（pS 設計軸 ＋ pY evidence 軸）。⭐**pY が登録コマンドを逐語再実行**し **controls 33/33 fired・conformance 4/4 PASS・rc=0・golden A-D の byte が pinned hash と一致**を実測 = **私が本 session 未再測だった handoff 由来の gap を closure**（依頼時に「私は再測していない」と明示して回したレグ）。⛔**両 verdict とも scope 縮小を批准していない**。
+>
+> ⛔⛔**残る唯一の gate = open-11、しかもその「前提」が割れている（Rs へ上程中・pQ は決めない）**:
+> - **読み A**（design doc `:33`/`:172`）= これは**承認済 scope（IN 5 項→2 項）の縮小** ⇒ **Rs 専権**。
+> - **読み B**（routing doc `:43`・**pQ が cycle-3 G-10 で立て直したもの**）= 残り 3 項は捨てず**同一 chunk の後続版で設計する**＝内部の後回しで**縮小ではない**。先例 = **D1.1-B が同一 prereg の下で v1..v13 と多版 authoring**。
+> - ⛔**pQ が決めない理由 2 つ**: ①**B は自分に都合がよい**（自作業が Rs 待ちにならない）②**本 node は「CC が Rs の問いを言い換えた」ことで裁定を 2 回破棄されている**（A′ / C3・逐語「前提が違ったので選び直す」）。**pS・pY は独立に A（保守側）を取った**。
+> - ⇒ **A なら** open-11 裁定 → freeze ／ **B なら** open-11 は前提を失い **two-key 完了**・残るは freeze 可否のみ。
+>
+> ⚠**本 arc の誤り 2 件目（自分で検出できず p6 が反証）— 訂正済みの面を「古い文言が消えたか」で測った**: LEDGER `:58` に旧記述が残っていると Rs へ報告したが、実測すると私の grep は **p6 の訂正文の引用部分**（「旧『Rs court 外』は広すぎ」）に当たっていた。**訂正文は撤回する語をそのまま含む**ので、**否定（消えたか）を測ると訂正文自身に当たる** ⇒ **新しい文言が在るかで測る**。memory `feedback-a-predicate-that-cannot-discriminate-is-not-evidence-2026-07-21` に追記済。
+>
 > ⚠**自己発見（pS の baseline 精密化を pQ が独立再測・一致）**: bank commit `45bfdfcaca` は message に「a C-side lineage code」と書きながら、**その commit の本文に `E_MANIFEST_LINEAGE_INCOHERENT` は 0 件**（`988a005f91` 以降が 3 件）。⇒ **semantic な v2.5 は `988a005f91`**、`45bfdfcaca` は message と中身が食い違う byte-state。**commit message は内容の証拠にならない**（`0 vs 3` を数えて初めて分かる）。
 >
 > **次 = 移動③ B1 再選定 draft**（D-1 vs D-3・測定で順位）→ pS 設計軸 → pY evidence 軸。⚠**新規 file ゆえ L2** = Pre-mortem + 5 体 debate が要る。その後 ④ v2.5.1 で two-key。⛔impl / training / authority / push / freeze / slice = **CLOSED 継続**。
