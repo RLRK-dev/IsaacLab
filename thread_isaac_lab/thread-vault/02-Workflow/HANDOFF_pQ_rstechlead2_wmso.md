@@ -1,4 +1,26 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 09:08 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 11:58 JST
+
+> ## ✅✅ D1.1-B `tensor_binding` = **FROZEN-LOCAL 完了**（2026-07-21）
+>
+> **Rs 認可** = 逐語「freeze してよい」11:2x（pY OPS-SUP 経由）／**pQ 執行** 11:43。
+>
+> | 対象 | 値 |
+> |---|---|
+> | **freeze record** | `ef4db7aee2f700a08b81333cb50f1bbc6c6efd16532eabcb87bf8b713152642f` @ `465a59ed40`（**records-only commit** = freeze record 1 本のみ・frozen artifacts 不変） |
+> | **frozen DESIGN v13** | `5a1874d3be8b98b8aeaace73890d8021cbc7f9814e048741f7f58d6746f349a6` @ `07250f4a02` |
+> | builder / fixture 4 | `c74ca3b36193…` / `af90712a…` `991651b9…` `dd14f6b6…` `59bbfbba…`（v6 以降不変） |
+>
+> ⭐**exact-sha gate PASS = 三者一致**（banked == verify == consultation 検証値 `5a1874d3be8b98b8`）。freeze→verify→exact-sha の規律どおり。
+>
+> **検証系譜**: 機構 = pS §33 `f4a2f440bcb26071` @ `37ffb8f653` ／ pin = pN v13 exact-pin transcript `3432de3c3462336d` @ `7ce2a520c9` ／ authority = Rs ratify 2026-07-20 21:44（B1 = D-1 委譲）／ consultation = pY GO `424b8bfb1ff95ea8` ／ **custody verify = pY PASS** `bab58cb23ecb70b8…`（tracked）。⚠**pY の honest scope**: builder/fixture の content-sha は custody leg で**独立再計算していない**（records-only freeze が drift 無を保証・設計軸で既 PASS）。
+>
+> **declared-open 4 件は「open として」封印**（stats_key silent-pass ／ §7 到達性負例 = impl leg ／ §5 閾値 = slice prereg + Rs ／ U-2・U-5・U-6 = D1.1-C）。**open=0 とは宣言していない**。
+>
+> **LEDGER 反映済**（p6・11:54。旧記述「D1.1-B は FROZEN でなく」= v7 arc voiding 時点のもので **status 上 SUPERSEDED**）。
+>
+> ⛔**push = Rs 待ち**（**FROZEN-LOCAL / CUSTODY-PENDING**・branch `rlrk/optE-s2-substrate-swap`・Rs は「freeze」のみ言及で D1.1-A の「freeze + push」と異なる）。⛔**impl / training / closed-loop authority = CLOSED 継続**。**次 = D1.1-C（artifact manifest）→ slice。着手は Rs 指示・self-start しない**。
+>
+> ⚠**DDR#35（FOUNDATIONAL・pY 診断 02:28）が本 node の commit 様式に効く**: `validate.sh` Layer 1-3 は **staged `.py` が 0 件のとき `set -euo pipefail` で marker 未出力のまま異常終了** ⇒ **docs-only commit は必ず偽 FAIL 3 件**。⇒ 本 node の commit が全て `--no-verify` なのは**この guard 欠陥が原因**であり、規律の緩みではない。guard 修正まで継続。
 
 > ⭐**役割改名（pane label 実測 2026-07-21 09:0x）**: **`w2:p5` = SKILL-DETAIL-DESIGN**（各 SKILL の詳細設計。旧 VT-DESIGN）／**`w2:pX` = SKILL-DESIGN**（分解・単位・語彙）。stored map を信用せず /clear 後は peek で再導出（memory の PANE ROLES 規律）。
 >
