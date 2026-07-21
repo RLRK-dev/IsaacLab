@@ -26,7 +26,7 @@ session_history:
     started_at: 2026-07-20T20:01:09+09:00
     note: "Rs 承認 (node 作成 + 起動、2026-07-20) により起票。[DEFINE] = 00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md @ 14a891d256。既往 c4-c48 は §3 adopted_existing_arc provenance であり本 session の成果ではない。起票時点 = step2 CLOSE / step3 docs-records-only OPEN。"
 created: 2026-07-20T20:01:09+09:00
-last_updated: 2026-07-21T02:37:57+09:00
+last_updated: 2026-07-21T09:18:40+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -44,7 +44,7 @@ p4/p5/pN/p6 の分業**を持つため、LEDGER 行 + DDR #25 だけでは **構
 
 ## 1. 責任分離（lane）
 
-- **design owner:** p5 VT-DESIGN — charter `ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md`
+- **design owner:** p5 SKILL-DETAIL-DESIGN — charter `ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md`
 - **build / execute:** p4 RS-TECH-LEAD（worktree `probe/pd1-arm-pd`）
 - **independent verifier:** pN OPS-SUP-CODEX（証拠・custody 軸）
 - **Vault / current-state custody:** p6 PLAN-KEEPER
