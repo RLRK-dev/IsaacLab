@@ -1,7 +1,8 @@
-# WMSO D1.1-C `artifact_manifest` — DESIGN **v2.5（縮小版・fixture 同梱）**
+# WMSO D1.1-C `artifact_manifest` — DESIGN **v2.5.1（縮小版・fixture 同梱）**
 
 - node `T-WMSO` D1.1-C／著者 = `w2:pQ` RS-TECH-LEAD2／作成 = **2026-07-21 15:5x JST**（shell 実測）
-- 系譜: **v1**（`726f684c52421928…` @ `33e67626da`）= debate cycle-1 **FAIL**（`9851f165a5fc45eb…` @ `7f6d038a30`・ACCEPT 24）→ **v2 / v2.1**（`f0ffe2e016d7302f…` @ `5e82a3326d`）= debate cycle-2 **FAIL**（`df2965a8e0d2927e…` @ `78d02f4257`・ACCEPT 16 群）→ **本 v2.2**
+- 系譜: **v1**（`726f684c52421928…` @ `33e67626da`）= debate cycle-1 **FAIL**（`9851f165a5fc45eb…` @ `7f6d038a30`・ACCEPT 24）→ **v2 / v2.1**（`f0ffe2e016d7302f…` @ `5e82a3326d`）= debate cycle-2 **FAIL**（`df2965a8e0d2927e…` @ `78d02f4257`・ACCEPT 16 群）→ **v2.2 / v2.3** = debate cycle-3 **FAIL**（`d23e5faaa8d61273…` @ `acce4d5c79`）→ **v2.4**（`b85fa905d4a60299…` @ `c0baa08663`）→ **v2.5**（bank `45bfdfcaca` = `873a9b4788df715f…`。⚠**以後 records-only の訂正 2 回で byte が動いた** — `988a005f91` = `231870240a957962…` ／ `87ba9ee2c0` = `0c082b727a4cab9c…`。**同じ「v2.5」の名で 3 状態**が生じたため以後は点版で分離する）→ **本 v2.5.1**（records-only: §1.1 の「Rs 判断 (a)(b)」行を裁定済へ更新。**設計 semantics 不変**）
+- ⭐**版 label は照合用の注記であって pin ではない — 引くときは必ず content sha で引く**（本 arc の実測教訓）
 - **縮小の基準** = Rs 逐語「確かな前提条件があるほうを選べ」／custody = `WMSO_RS_D11C_REDUCTION_CRITERION_CUSTODY_20260721.md`（`90f7f1e6dceb835c…` @ `57d4dbb59c`）。⚠**同 custody §4 のとおり、承認済 scope を縮めてよいか自体は Rs 未裁定（open-11）**
 - **scope の正** = prereg（`d9caaffcf29d9524…` @ `1860edcc1c`）§2 IN / §3 OUT
 - 土台（凍結・編集しない・**4 file**）: contracts_v2 `00192d20ca00b654…`／EP md `c474acea7c58acc2…`／EP JSON `e63176af9bc3a246…`／tensor_binding v13 `5a1874d3be8b98b8…`
