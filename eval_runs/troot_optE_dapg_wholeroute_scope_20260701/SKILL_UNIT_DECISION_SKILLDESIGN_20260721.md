@@ -105,16 +105,16 @@ singleton region かつ region postcondition が自明/不在 → 通常 node �
 ⚠ **紛れやすい境界（明示）:** step 14 の `hold@L` は左指が cable を実際に把持し維持している **実在の動作**であって合成ではない。
 ⛔ **旧記述の訂正（pS reciprocal flag 2026-07-21 10:16・私が受諾）:** 本行の旧版は「step 12 の右腕は ABSENT」と分類していたが、これは (i) §Status で **WITHDRAWN 済みの ABSENT モデル**（canonical = 右は窓の間 approach 中・両腕とも作動）、(ii) **OPEN-B（右 lane 分類 = Rs 専権）**。⇒ step 12 の右腕分類を本 doc で断定しない。**私が pS の §3 に flag した線と同型を、自 doc にも残さない**（reciprocal 訂正）。
 
-## 2. 現行 9 語彙の写像
+## 2. 現行 9 SkillName の写像（source SkillName → 合成。⚠「9」= 元 SkillName 数であり基底数でない。基底 = 7 entry は §2-1）
 
-| 現行 | 単位合成 |
+| 現行 SkillName | 単位合成（基底 §2-1 の名で表記） |
 |---|---|
-| `CLAMP`@step4「L+R同時クランプ」 | `clamp@L ∥ clamp@R` |
-| `CLAMP`@step14「R把持」 | `clamp@R ∥ hold@L` |
-| `HALF_UNCLAMP_RELEASE`「L半開放+R全開放」 | `half_open@L ∥ full_open@R` |
-| `RECLAMP_L`「L再クランプ」 | `reclamp@L ∥ (右腕の単位)` |
+| `CLAMP`@step4「L+R同時クランプ」 | `acquire-grasp@L ∥ acquire-grasp@R` |
+| `CLAMP`@step14「R把持」 | `acquire-grasp@R ∥ hold@L` |
+| `HALF_UNCLAMP_RELEASE`「L半開放+R全開放」 | `set_finger(L,0.006) ∥ set_finger(R,0.04)` |
+| `RECLAMP_L`「L再クランプ」 | `set_finger(L,0.002) ∥ (右腕の単位)` |
 
-⭐ **`CLAMP{side}` 未解決の解消:** v1 `skill_contracts_manifest.json` は `CLAMP` を `INADMISSIBLE_AMBIGUOUS` とし理由に逐語「`CLAMP{side}` 未解決」を挙げる。**「側」を identity のラベルでなく合成の軸にする**ことで、`clamp` は 1 つの原始動作のまま、適用先の腕で区別される。
+⭐ **`CLAMP{side}` 未解決の解消:** v1 `skill_contracts_manifest.json` は `CLAMP` を `INADMISSIBLE_AMBIGUOUS` とし理由に逐語「`CLAMP{side}` 未解決」を挙げる。**「側」を identity のラベルでなく合成の軸にする**ことで、`acquire-grasp`（基底 §2-1）は 1 つの原始動作のまま、適用先の腕で区別される。
 
 ## 2-1. 基底 vocabulary（pX + pS = MWSO-DESIGN 合意 2026-07-21 09:3x）
 
