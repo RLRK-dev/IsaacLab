@@ -10,7 +10,13 @@
 >
 > **面**: design **v2.5.1** `97bfda4355b4fc3d…` @ `878b97bc2f`（records-only・**設計 semantics 不変**。⚠「v2.5」の名で byte が **3 状態**生じたため点版で分離 — ⭐**label でなく content sha で引く**）。LEDGER 反映 = p6 `175cfea80d`（#37 pin repoint ＋ gate = 2 行為 ＋ **#27 REOPEN**・pQ が on-disk 実測一致）。
 >
-> ⛔**Rs 判断待ち = 0**。Rs に要るのは **①freeze ②凍結を実際に開ける（D-3 が勝った場合）** の 2 **行為**のみ。⛔**D-3 が首位でも採択せず上程する**。
+> ⛔**Rs 行為 = ①freeze ②凍結を実際に開ける（D-3 が勝った場合）の 2 つ**。⛔**D-3 が首位でも採択せず上程する**。
+>
+> ⚠⚠**訂正（20:4x・pS の §運用10 flag 由来）— 私は (c) を外しすぎた**: (c) は **2 つの問い**だった。**(c-i) 縮小版に two-key 検証を開いてよいか = pQ/pS の court**（検証は Rs 専権行為でない）✅ 実行済／**(c-ii) 承認済 scope（IN 5 項）を 2 項へ縮小し、その状態で freeze してよいか = Rs 専権**（**scope 変更 ＋ freeze**）。⭐**design doc 自身が `:33`「縮小の可否は Rs 判断 (c)＝open-11」・`:172`「承認済 scope を 2 項へ縮小してよいか」と明記**（pQ 独立実測）⇒ 私の dispatch「(c) は pS 判定へ移った」は**自分の doc と矛盾していた**。是正の趣旨（Rs 専権 = **行為**）は正しく、**scope 変更はその行為の 1 つ**なのを私が落とした。⇒ **open-11 は未裁定のまま Rs**（= ①freeze の中の条件）。LEDGER `:58`/`:135` が広い記述を持つため p6 へ訂正 relay 済。
+>
+> ⭐**pS two-key 設計軸 = PASS-WITH-CONDITIONS（20:44・記録 `8a3aaa91a951797b…` @ `7c2df663b0`・pQ 三者一致実測）**: 本体 must-fix 0（§2 U-5 は凍結 `v13:158-171` ＋ EP JSON `:29` に忠実／§3 `substrate_id` は `contracts_v2:570` の**記名の連言のみ**で値では弾かない）・不変前提 非該当・court 越境なし。⛔条件 3 件 = **C-1 open-11 は本 PASS で批准されない**／**C-2 pY evidence 軸 未了ゆえ two-key 未完**／C-3 impl CLOSED。
+>
+> ⚠**自己発見（pS の baseline 精密化を pQ が独立再測・一致）**: bank commit `45bfdfcaca` は message に「a C-side lineage code」と書きながら、**その commit の本文に `E_MANIFEST_LINEAGE_INCOHERENT` は 0 件**（`988a005f91` 以降が 3 件）。⇒ **semantic な v2.5 は `988a005f91`**、`45bfdfcaca` は message と中身が食い違う byte-state。**commit message は内容の証拠にならない**（`0 vs 3` を数えて初めて分かる）。
 >
 > **次 = 移動③ B1 再選定 draft**（D-1 vs D-3・測定で順位）→ pS 設計軸 → pY evidence 軸。⚠**新規 file ゆえ L2** = Pre-mortem + 5 体 debate が要る。その後 ④ v2.5.1 で two-key。⛔impl / training / authority / push / freeze / slice = **CLOSED 継続**。
 >
