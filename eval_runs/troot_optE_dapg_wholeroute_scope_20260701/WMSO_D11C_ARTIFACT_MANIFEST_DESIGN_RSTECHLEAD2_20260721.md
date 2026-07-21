@@ -1,4 +1,4 @@
-# WMSO D1.1-C `artifact_manifest` — DESIGN **v2（縮小版）**
+# WMSO D1.1-C `artifact_manifest` — DESIGN **v2.1（縮小版・fixture 同梱）**
 
 - node `T-WMSO` D1.1-C／著者 = `w2:pQ` RS-TECH-LEAD2／作成 = **2026-07-21 15:1x JST**（shell 実測）
 - **v1 は SUPERSEDED**（`726f684c52421928…` @ `33e67626da`）— 5 体 CC Debate cycle-1 = **FAIL**（判定記録 `9851f165a5fc45eb…` @ `7f6d038a30`・ACCEPT 24 件）
@@ -70,7 +70,9 @@ dataset_substrate_ids: tuple[str, ...]  # 本記録が pin する dataset の su
 |---|---|---|
 | S-1 | `substrate_id` が存在し非空 | `E_MANIFEST_SUBSTRATE_ABSENT` |
 | S-2 | 構文適合（ASCII・NFC・`[A-Za-z0-9_.:-]{1,64}`） | `E_MANIFEST_SUBSTRATE_MALFORMED` |
-| S-3 | `dataset_substrate_ids` が **2 値以上のとき、その全値が列挙されている**（欠落 = 黙って混ぜた） | `E_MANIFEST_SUBSTRATE_POOLED` |
+| S-3 | `dataset_substrate_ids` が **非空**かつ **bytes 昇順・重複なし**（無記名 = 黙って混ぜた） | `E_MANIFEST_SUBSTRATE_POOLED` |
+
+⚠**v2.1 訂正（fixture 作成中に判明・設計文が誤っていた）**: v2 の S-3 は「2 値以上のとき**その全値が列挙されている**」と書いていたが、これは**記録単体からは判定できない**（列挙漏れの有無は外部の dataset を見ないと分からない）。⇒ 記録内で決定可能な形（**非空・正規形**）に訂正し、**列挙の網羅性は producer の義務**として §8 open-9 へ移す。⭐**fixture が設計文を反証した実例**（凍結 v13 B-2「再現する hash は schema 適合を証明しない」と同じ効用）。
 
 - ⛔⛔**値では弾かない（W-1）**: 述語は **存在・構文・相互比較**の 3 種のみ。allowlist も denylist も grade 係数も持たない。⇒ **DDR #26 のどちらの裁定でも機構は同一**。
 - ⛔**v1 の誤りを訂正（A-22）**: v1 は「宣言すれば混成してよい」と書き、**許可を与えていた**＝ policy の先取り。本版は **検出のみ**を行い、`dataset_substrate_ids` が 2 値以上なら **MIXED として記録する**。**混成が許容されるか否かは #26（Rs）の裁定**であり本設計は述べない。
@@ -97,11 +99,32 @@ dataset_substrate_ids: tuple[str, ...]  # 本記録が pin する dataset の su
 - ⭐**発見（未決）**: `thread_isaac_lab/wmso/d1/identity.py:80-82` に既存 `canonical_json()` = `json.dumps(sort_keys=True, ensure_ascii=False, separators=(",",":"))` があり、**凍結 WCJ とは別物**（UTF-16 key 順・JCS escape・int 限定・NFC を課さない）。同 node 内に**互換でない正規化が 2 つ**存在する。⇒ **本版は判定しない**（§8 open-5）。
 - **実行系の呼び方（原文どおりに引用する）**: AGENTS.md `:68` は guard wrapper が **`env_isaaclab/bin/python` を直接呼ぶ**理由として「`./isaaclab.sh -p` can mask non-zero Python exits」と述べる。⚠ v1 は「素の `python3`」と書き、AGENTS.md `:45` がむしろ `./isaaclab.sh -p` を prefer している点も落としていた（A-19）。⚠ rc の実測値は **凍結 v13 の測定**であり **C 側は未実測**。
 
-## 7. Fixtures / test（次段で bank・本版は宣言）
+## 7. Fixtures / test（**v2.1 で bank 済 — 宣言でなく実物**）
 
-- **golden 2 本**: M-A = `NOT_APPLICABLE`（両段 null・`substrate_id` 単一）／M-B = `DEMO_PLUS_RL` × `IDENTICAL`（両段一致・`dataset_substrate_ids` 2 値 = MIXED）。
-- **判別性の positive control**: M-B の bc 側 1 文字を変えると **別 hash かつ `…_CONFLICT` 発火**。
-- **invalid corpus**: `substrate_id` 欠落・空・構文違反／`dataset_substrate_ids` の重複・非昇順／2 値以上の列挙欠落／`IDENTICAL` で両段不一致／`RL_ONLY` で bc 非 null／`NOT_APPLICABLE` で execution 非 null／64-hex 違反／float・NaN・`"Infinity"`／bool を int field に混入／未知 JSON field／duplicate key／非 canonical bytes。
+**banked**（`eval_runs/troot_optE_dapg_wholeroute_scope_20260701/wmso_d11c_fixtures/` @ `b1053db355`）:
+
+| file | 内容 | sha256（先頭 16） | canonical bytes |
+|---|---|---|---|
+| `carry_record_golden_A.json` | `NOT_APPLICABLE`（両段 null・単一 substrate） | `ce474f3ad393767a` | 224 |
+| `carry_record_golden_B.json` | `DEMO_PLUS_RL` × `IDENTICAL`（両段一致・`dataset_substrate_ids` 2 値 = MIXED） | `f49d15698bf379c1` | 376 |
+| `build_goldens.py` | 生成器 + 非破壊 `--verify`（stdlib のみ・dataclass 不使用ゆえ **3.8 で import 可**） | `837dc37ffd2d69b5` | 15819 |
+
+- **negative control = 19 本**（拒否 14 + cross-artifact 2 + encoder 3）。⭐**生成経路と `--verify` 経路の両方で 19/19 発火**を実測（凍結 v13 の S-1 = 「control が生成 mode でしか走らない」の再発を回避）。変異は in-memory deepcopy のみ ⇒ `--verify` は非破壊（事後 sha256 2 本不変を実測）。
+- ⛔**fail-closed 実行コマンド（事前登録・C 側で実測済）**:
+  ```
+  env_isaaclab/bin/python eval_runs/troot_optE_dapg_wholeroute_scope_20260701/wmso_d11c_fixtures/build_goldens.py \
+      --verify eval_runs/troot_optE_dapg_wholeroute_scope_20260701/wmso_d11c_fixtures
+  ```
+  **実測（非 canonical bytes を注入・注入で sha が `ce474f3ad393767a` → `555ffe870dc6e899` に実際に変化したことを先に確認してから測定）**:
+
+  | 呼び方 | rc |
+  |---|---|
+  | `python3` / `/usr/bin/python3` / `env_isaaclab/bin/python` / `env_isaaclab7/bin/python` | **1** |
+  | `./isaaclab.sh -p` | ⛔**0（fail-open）** |
+
+  ⇒ **AGENTS.md `:68` が明記する hazard を C 側で再現**（同 `:68` は guard wrapper が `env_isaaclab/bin/python` を直接呼ぶ理由として「`./isaaclab.sh -p` can mask non-zero Python exits」と述べる）。⛔**wrapper 経由で検証してはならない**。復元後 sha 一致・clean rc=0 も実測。
+  ⚠**最初の測定は空振りだった**（key 順を変えたつもりが byte 同一で、全 interpreter rc=0 になった）。**壊れたことを sha で確認してから測る**手順に変更した — 「違う結果が出得ない試験は試験でない」の直接適用。
+- ⛔**builder が検査しないもの**: 非 ASCII key の UTF-16 順の全域／JCS escape の全域／duplicate key（Python dict では表現不能）。**WCJ 完全性は impl の `canonicalize()` leg**（凍結 v13 と同じ境界宣言）。
 - ⚠**代表性を主張しない**（合成物・型網羅が目的）。
 - **次段の順序（A-24 の訂正）**: **fixture bank → cycle-2 の 5 体 debate → two-key（pS 設計軸 / pY evidence 軸）→ ⛔Rs freeze 判断**。上位 prereg の design Exit は「**機械可読 fixture 同梱 → debate**」であり、v1 の debate は 1 段早かった。
 
@@ -115,8 +138,10 @@ dataset_substrate_ids: tuple[str, ...]  # 本記録が pin する dataset の su
 6. **凍結 v13 `:185` が委任した版 bump 移行手続が、承認済 prereg §2 IN に無い**（v1 open-5 を継承）⇒ **IN 集合が既知の不完全**。scope 裁定 = Rs / pS。
 7. **U-5 の捏造経路**（debate CC5 指摘）: `IDENTICAL` の等値検査は execution 段 hash の複写でも通る。⚠ ただし **凍結が委任したのは「両段に同一 hash を記録していること」の照合**であり、解決可能性の要求は**凍結を超える強化**になる ⇒ 本版は凍結どおりに実装し、**強化案として上程**する（pS / Rs）。
 8. **prereg §4 carry の再掲（v1 で脱落・A-11）**: ③**#29 = demo 再記録**（198 demo・OUT#3）／⑤**#31 = trainer 実在**（manifest の実データ充填は trainer 実在に依存・機構の設計は非依存）。⇒ **`portfolio_has_IL` は本 chunk 完了だけでは true にならない**。
+9. **`dataset_substrate_ids` の列挙が網羅的であること**は記録単体から判定できない（§3 の v2.1 訂正）。⇒ **producer 側の義務**として残る。機構で閉じるには dataset 実体を入力に取る検査が要り、それは本版の外。
 
 ## 9. 版歴
 
 - **v1**（14:2x・`726f684c52421928…` @ `33e67626da`）= 初版。**debate cycle-1 = FAIL**（`9851f165a5fc45eb…` @ `7f6d038a30`・ACCEPT 24 件）。
-- **v2**（本版・15:1x）= **縮小 + 全 fold**。中心前提 FALSE を §1 に訂正記録し、**v1 の 2 面構成（契約層 / package 層）を削除**（前提が落ちたため不要）。U-5 を discharge から**記録**へ降格、`substrate_id` の許可付与を**検出のみ**へ訂正、collection の正規化と時刻の preimage 除外を追加、引用 host・code 計数・AGENTS.md 引用・reuse gate 探索面を訂正、脱落していた carry #29/#31 を復活。IN-1/3/4 は**明示的に本版の外**。
+- **v2.1**（本版・15:2x）= **fixture bank 済**（golden 2 + builder @ `b1053db355`）＋ **fail-closed rc を C 側で実測**（wrapper のみ rc=0 = fail-open を再現）＋ **§3 S-3 を判定可能な形へ訂正**（fixture が設計文を反証・残余は open-9）。
+- **v2**（15:1x）= **縮小 + 全 fold**。中心前提 FALSE を §1 に訂正記録し、**v1 の 2 面構成（契約層 / package 層）を削除**（前提が落ちたため不要）。U-5 を discharge から**記録**へ降格、`substrate_id` の許可付与を**検出のみ**へ訂正、collection の正規化と時刻の preimage 除外を追加、引用 host・code 計数・AGENTS.md 引用・reuse gate 探索面を訂正、脱落していた carry #29/#31 を復活。IN-1/3/4 は**明示的に本版の外**。
