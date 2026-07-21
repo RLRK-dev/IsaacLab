@@ -119,11 +119,12 @@ singleton region かつ region postcondition が自明/不在 → 通常 node �
 
 **原則:** 2 候補 = 同一 vocabulary entry ⟺ 行動 intent が同じ。realization 差（learned/scripted）は ExecutionBundle の別で vocabulary を増やさない。start 状態・程度の差は束縛パラメータ。**side（L/R）・clip（C1-C5）は identity でなく合成座標。**
 
-**基底 = 8 entry**（接地 = `step_table.py:39-51` の 9 SkillName を腕ごとに分解・merge）:
+**基底 = 9 entry**（接地 = `step_table.py:39-51` の 9 SkillName を腕ごとに分解・merge。⭐**2026-07-21 09:49 p5 code 直読で grip を 2 分割** — 下記 (b) 参照）:
 
 | # | entry | intent | 吸収した現行 SkillName |
 |---|---|---|---|
-| 1 | grip | finger を全 clamp | CLAMP + RECLAMP_L |
+| 1a | acquire-grasp | EE 整列で cable を把持（learned・finger は auto-close の副産物） | CLAMP |
+| 1b | re-tighten | 位置決め済み finger の締め直し（半→全・EE 動作なし・scripted） | RECLAMP_L |
 | 2 | half_release | 緩めて誘導保持（接触維持） | HALF_UNCLAMP_RELEASE の L 側 |
 | 3 | full_release | 開いて手放す | HALF_UNCLAMP_RELEASE の R 側 + UNCLAMP |
 | 4 | approach | 把持可能姿勢へ EE 移動（精密） | APPROACH_CABLE + AERIAL_REGRASP |
@@ -139,8 +140,13 @@ singleton region かつ region postcondition が自明/不在 → 通常 node �
 **解決した merge:**
 - **(a) approach と carry は distinct**（grip 状態が別 = 把持前 vs 把持中・資源 claim 状態が別・intent が精密位置決め vs 運搬。pS 契約整合を確認）。
 
-**保留の merge（p5 detail 待ち）:**
-- **(b) grip が CLAMP(learned) と RECLAMP_L(scripted) を 1 entry に吸収**してよいかは、両 realization が同 obs/action schema を共有するか（= vocabulary coherence）を p5 が確認。⭐learned/scripted は schema 一致でも別 SkillDefinition（kind 別）ゆえ、確認するのは SkillDefinition の merge でなく vocabulary の coherence。一致 → 1 entry（2 realization）で正／不一致 → grip を 2 entry に分割。
+**(b) RESOLVED = 不一致（NO・p5 code 直読 2026-07-21 09:49）:**
+- CLAMP(learned)= obs 28D・action EE delta・dual-arm・finger auto-close = **acquire-grasp**（EE 整列）／ RECLAMP_L(scripted)= obs 無・action 左 finger を 0.002 へ補間のみ・EE=0 = **re-tighten**。全軸（obs/action/腕数/loop）不一致 ⇒ 私の規則で **2 分割（1a/1b）**。
+- ⭐**私の label 誤りも訂正（p5 指摘）**: 「grip = finger を全 clamp」は RECLAMP_L の正記述だが **CLAMP を誤記述** — CLAMP の action は finger でなく EE で、finger-close は auto-close の副産物・単独 invoke 不可。⇒ learned の把持原始は「finger-clamp」でなく **acquire-grasp**。
+- cut = **(a) 素直な分割**（(b) hides-reality=p5・(c) は CLAMP を acquire-grasp と正しく読めば moot）を pX 採用・pS 確認済（09:53）。
+
+**次の schema 照会（p5・(b) と同型・未確認）:**
+- scripted finger 原始（re-tighten / half_release / full_release）が同 schema を共有し `set_finger(target)` 1 parametric 原始へ merge 可か。可なら基底数が更に減る。
 
 **arity 非依存:** 本基底も pS の合成の形も arity（枝数下限）に依存しない。arity は held（Rs 確認待ち・§Status OPEN-A）。pS の `SkillCompositionDefinition` draft は基底数に不変（basis 非依存）で、基底 SET は本節を参照する。
 
