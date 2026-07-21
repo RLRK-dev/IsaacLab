@@ -26,7 +26,7 @@ session_history:
     started_at: 2026-07-20T20:01:09+09:00
     note: "Rs 承認 (node 作成 + 起動、2026-07-20) により起票。[DEFINE] = 00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md @ 14a891d256。既往 c4-c48 は §3 adopted_existing_arc provenance であり本 session の成果ではない。起票時点 = step2 CLOSE / step3 docs-records-only OPEN。"
 created: 2026-07-20T20:01:09+09:00
-last_updated: 2026-07-21T09:26:39+09:00
+last_updated: 2026-07-21T13:03:15+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -44,9 +44,9 @@ p4/p5/pN/p6 の分業**を持つため、LEDGER 行 + DDR #25 だけでは **構
 
 ## 1. 責任分離（lane）
 
-- **design owner:** ⛔**要再割当 (2026-07-20 Rs 裁定の反映・pY 指示 07-21 09:23)** — p5 は **(d) arm-control charter 全体を 2026-07-20 に剥奪** (memory `project-p5-scope-narrowed-to-skill-detail-2026-07-20`:20 逐語「p5 から外れた: control-method・(d) charter 全体」)。**後継 = control-method 引継先 Rs 指定待ち** (pY surface 済)・**近時実行 = p4**。〔⚠07-21 の name-only 改名 (VT-DESIGN→SKILL-DETAIL-DESIGN) は p5 が担当を失っていたため誤り = 本行で訂正 (改名は担当を保持している時のみ妥当・失った node では stale を強める)〕 charter `ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md`
-- **build / execute:** p4 RS-TECH-LEAD（worktree `probe/pd1-arm-pd`）
-- **independent verifier:** pN OPS-SUP-CODEX（証拠・custody 軸）
+- **design owner:** ⭐**p11 ARM-CONTROL-DESIGN (Rs 指定 2026-07-21 12:5x「新規 CC を owner に」採択・brief `ARM_CONTROL_DESIGN_ROLE_BRIEF_p11_20260721.md` @ `2887037c9f`・p5 同型の control-method 設計番人)**。任務 = ①前向き制御設計 (p0 実装本体・裁定 A) ②§14.27 bank 可否。〔経緯: p5 は 07-20 に (d) arm-control charter 全体を剥奪 (memory `project-p5-scope-narrowed-to-skill-detail-2026-07-20`:20)・「後継 = Rs 指定待ち」を本裁定で **p11 に確定**。07-21 の name-only 改名 (VT-DESIGN→SKILL-DETAIL-DESIGN) が誤りだった件も本 designation で解消〕。charter `ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md` (p5 authored・p11 が supersede 可否を判断)
+- **build / execute (実装):** p0 IMPL-BUILDER（Rs 12:5x reorg で p4 = まとめ役 へ移行・旧 worktree `probe/pd1-arm-pd` は p4 arc の記録）
+- **implementation verify:** pZ IMPL-VERIFIER ／ **custody・evidence verify:** pY OPS-SUPERVISOR（旧 pN OPS-SUP-CODEX = 停止）
 - **Vault / current-state custody:** p6 PLAN-KEEPER
 
 ## 2. means（workstream）
