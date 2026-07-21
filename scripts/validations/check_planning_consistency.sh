@@ -30,6 +30,7 @@ SNAPSHOT="$REPO_ROOT/docs/nest-tracker/nest-snapshot.json"
 GEN="$REPO_ROOT/scripts/build_nest_snapshot.py"
 PY="$REPO_ROOT/env_isaaclab/bin/python"
 ALLOWLIST="$(cd "$(dirname "$0")" && pwd)/planning_dangling_allowlist.txt"
+ROLES="$(cd "$(dirname "$0")" && pwd)/nest_role_labels.txt"
 SUPPRESS="$(cd "$(dirname "$0")" && pwd)/planning_pending_rs.txt"
 
 STAGED_ONLY="${1:-false}"
@@ -83,23 +84,26 @@ if [ -f "$SNAPSHOT" ] && [ -x "$PY" ]; then
     { "$PY" -c "import json;[print(n['id']) for n in json.load(open('$SNAPSHOT'))['nodes']]" 2>/dev/null; \
       sed -n '/GEN:NEST:BEGIN/,/GEN:NEST:END/p' "$MANIFEST" 2>/dev/null | grep -oE 'T-[A-Za-z0-9_.-]+'; } | sort -u > "$TMP/nodeset"
     if [ -f "$ALLOWLIST" ]; then grep -vE '^\s*#' "$ALLOWLIST" | grep -oE 'T-[A-Za-z0-9_.-]+' | sort -u > "$TMP/allow"; else : > "$TMP/allow"; fi
+    # role labels (DDR#34 fix, 2026-07-21 Rs-approved): a `T-ROOT-<role>` token is a role reference, not a
+    # dangling node. Match is EXACT on the stripped remainder, so real dangling refs (typos) still FAIL.
+    if [ -f "$ROLES" ]; then grep -vE '^\s*#' "$ROLES" | grep -oE '[A-Za-z0-9_.-]+' | sed 's#^#T-ROOT-#' | sort -u > "$TMP/roleforms"; else : > "$TMP/roleforms"; fi
     # candidate backtick node-ids from surfaces, EXCLUDING the manifest GEN region (self-consistent)
     { sed '/GEN:NEST:BEGIN/,/GEN:NEST:END/d' "$MANIFEST" 2>/dev/null; cat "$MAP" "$LEDGER" "$INDEX" 2>/dev/null; } \
         | grep -oE '`T-[A-Za-z0-9_.-]+`' | tr -d '`' | sort -u > "$TMP/cands"
-    comm -23 "$TMP/cands" "$TMP/nodeset" | comm -23 - "$TMP/allow" > "$TMP/dangling"
+    comm -23 "$TMP/cands" "$TMP/nodeset" | comm -23 - "$TMP/allow" | comm -23 - "$TMP/roleforms" > "$TMP/dangling"
     while IFS= read -r nid; do
         [ -n "$nid" ] || continue
         echo "  [FAIL] C2 dangling node-id ref: \`$nid\` not in NEST node set (snapshot ∪ manifest §2; nor allowlist)"
         echo "         (new node? run: env_isaaclab/bin/python scripts/build_nest_snapshot.py  # refresh snapshot + then --emit-manifest-section)"
         FAIL_COUNT=$((FAIL_COUNT + 1))
     done < "$TMP/dangling"
-    soma_n=$(grep -oE '`T-[A-Za-z0-9_.-]+`' "$SOMA" 2>/dev/null | tr -d '`' | sort -u | comm -23 - "$TMP/nodeset" | comm -23 - "$TMP/allow" | grep -c .)
+    soma_n=$(grep -oE '`T-[A-Za-z0-9_.-]+`' "$SOMA" 2>/dev/null | tr -d '`' | sort -u | comm -23 - "$TMP/nodeset" | comm -23 - "$TMP/allow" | comm -23 - "$TMP/roleforms" | grep -c .)
     soma_n=$(printf '%s' "${soma_n:-0}" | tr -dc '0-9'); soma_n=${soma_n:-0}
     if [ "$soma_n" -gt 0 ]; then
         echo "  [WARN] C2 SOMA has ${soma_n} dangling node-id ref(s) — permanent WARN (04-Specs = Rs 専権)"
         WARN_COUNT=$((WARN_COUNT + 1))
     fi
-    echo "  [INFO] C2 node-id leg = FAIL (0-FP verified 2026-07-02, %12-approved; membership = snapshot ∪ §2 GEN); SOMA node-id = permanent WARN; sha-token leg = deferred WARN/unwired (design-specified anchor extractor UNevaluated — owner %12, see design doc)"
+    echo "  [INFO] C2 node-id leg = FAIL (membership = snapshot ∪ §2 GEN; role labels in nest_role_labels.txt recognized as a category 2026-07-21, DDR#34 fix — a T-ROOT-<role> is a role ref, not a node); SOMA node-id = permanent WARN; sha-token leg = deferred WARN/unwired (design-specified anchor extractor UNevaluated — owner %12, see design doc)"
 else
     echo "  [WARN] C2 skipped: nest-snapshot.json or python missing"
     WARN_COUNT=$((WARN_COUNT + 1))

@@ -1,0 +1,31 @@
+# NEST role labels — the role category for check_planning_consistency.sh C2.
+#
+# What this is for:
+#   A `T-ROOT-<name>` token in the planning surfaces is NOT a dangling node
+#   reference when <name> is one of the role labels below. Per the NEST ruling
+#   (2026-07-20): role labels are role names, not nodes. Rs approved recording
+#   them as a category (2026-07-21) so the C2 check stops falsely flagging them.
+#
+# Why this is NOT the tolerance allowlist:
+#   planning_dangling_allowlist.txt tolerates individual dangling refs (grows one
+#   entry per tolerated typo). This file is the DEFINED SET of team roles — a
+#   category. The C2 check strips a leading `T-ROOT-` and, if the remainder is an
+#   exact match here, treats the token as a role reference, not a dangling node.
+#   A typo (e.g. RS-TECH-LEED) is not an exact match, so real dangling refs still
+#   fail. Add a line here only when the team gains a genuinely new role.
+#
+# Format: one bare role name per line (no `T-ROOT-` prefix).
+RS-TECH-LEAD
+RS-TECH-LEAD2
+OPS-SUPERVISOR
+OPS-SUPERVISOR-CODEX
+PLAN-KEEPER
+PAPER-AUTHOR
+LOG-ANALYST
+VIDEO-ANALYST
+MWSO-DESIGN
+SKILL-DESIGN
+SKILL-DETAIL-DESIGN
+VT-DESIGN
+COORD
+COORD2
