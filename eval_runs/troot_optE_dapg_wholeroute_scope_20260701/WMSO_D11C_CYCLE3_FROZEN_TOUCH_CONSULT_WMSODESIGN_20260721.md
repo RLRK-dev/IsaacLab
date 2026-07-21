@@ -57,3 +57,20 @@ G-4（canonicalization 方式の適合性）と G-6（error code の意味）は
 - ⛔**私は key を開かない・部分版 freeze の可否（Rs 判断 (c)）を先取りしない**（NHA/verdict §4 が「承認済境界 5 項なのに 2 項を批准させるのは順序が逆」と明記・私も同意 = 順序を逆にしない）。
 - ⛔凍結（D1.1-B fixture・v13）を編集しない。**disposition = Rs**: G-4 = D1.1-B fixture 方式訂正（低緊急・値正）+ identity.py impl（CLOSED）/ G-6 = code identity（新 code 傾く・Rs 決）。
 - 私の次レグ = Rs 裁定後の **design 全 fold 版の設計軸 verify**（前提修正・境界・両凍結触りの反映を確認）。**私 = reactive standby**。
+
+## 5. ⛔ RETRACTION（G-4 §1 の「D1.1-B fixture = 非適合」を撤回）— 2026-07-21 18:46 JST
+
+- ⛔**撤回**: §1 の「D1.1-B fixture `build_goldens.py:208` = 非適合 = 第 2 の凍結 locus（latent method）」は**誤り**。pY が実測で反証、**私も独立に on-disk 確認**: `wcj_bytes`（`:194-208`）は `sort_keys` の**前に** recursive `check()` が**全 dict key に `k.isascii()` を assert（`:198`）** ⇒ 非 ASCII key は raise。ASCII key では codepoint 順 == UTF-16BE 順ゆえ**乖離は構造的に到達不能**。⇒ 当該 fixture は**凍結 layer (b)（`:171`「typed 入口 canonicalize・ASCII-key assert」）を実装した適合物**。**凍結 chunk 内に確認された非適合は無い**（第 2 の凍結波及は存在しない）。custody = pY `WMSO_D11B_WCJ_SORT_COMPLIANCE_CUSTODY_OPSSUP_20260721.md`（`641229b6d6f18b3f` @ `bb7fd7cc19`・私も 194-209 通読）。反映 = design v2.5（`231870240a957962` @ `988a005f91`）§6・routing (d) 取り下げ可。
+- ⛔**私の miss（precise own）**: 私は `:208`（sort_keys 呼出）を読んで「非適合」と結論したが、**関数本体の入力 guard（`:198` isascii assert）を読まなかった**。さらに §1 で凍結の 2 層 model（`:171` (a)/(b)）を自分で引用していながら、fixture を layer (b) と照合しなかった。⇒ **sort_keys 呼出単体は conformance の識別面でない**（入力 domain guard が識別面）。⭐**[[feedback-a-predicate-that-cannot-discriminate-is-not-evidence-2026-07-21]] を自分に適用し損ねた**（§3 で他者に指摘した当の型）。**pY が識別面を読み、私が独立確認した**。⇒ 恒久教訓 = **impl の conformance を判定する時、method 呼出だけでなく関数全体（入力 guard + method）を読み、既に引用した層 model と artifact を照合する**。
+- **survives（撤回されない部分）**: 凍結 `:168` = UTF-16 を規範に確定（correct・不変）/ D1.1-C fixture `:95` = 適合（不変）。⇒ **「3 co-equal 実装」framing は誤りで、正しくは 2 適合 WCJ site（D1.1-B fixture = layer b・ASCII-guarded / D1.1-C fixture = layer a・utf-16-be）+ identity.py = 意図的別 canonicalizer**。§3 の原則（identity/name を fungible 扱い）は残るが、その D1.1-B fixture への適用は誤りだった。
+
+## 6. ② identity.py:80-82 — 凍結が既に裁定済（新規 open 設計問題でない）
+
+- pQ の②「identity.py:80-82 が :168 に一致すべきかの設計問題」= **凍結 spec が既に決めている**: 凍結 contracts_v2 `:439` 逐語「identity.canonical_json = **v1-internal ONLY — v2 hash に使用禁止**（**WCJ と別物**; dual-canonicalization guard を DeprecationWarning + §8 negative test で明示 — B-CH3）」。
+- 実測（使用先）: `finetune_cfg_hash`（`:111`・DAPG summary.json config・docstring「present-time・NOT a train-time crypto proof」）+ `make_initiation_context_hash`（`:194`・initiation_context_hash は contracts_v2 `:162`/`:413` で **loud-discard**）。**いずれも WMSO 契約 identity hash（H_WCJ / SkillDefinitionHash）でない**。
+- ⇒ **② 回答**: identity.py は **:168 に一致する必要はない**（意図的に別・v1-internal・v2 hash 使用禁止 — 凍結が明言）。**新規の open 設計問題でなく、凍結が既に裁定済**。唯一の impl-leg 義務 = 凍結が命じる **dual-canonicalization guard（DeprecationWarning + §8 negative test）の実装**（impl = CLOSED・設計 open でない）。⇒ **open-5 全体が解消**: D1.1-B fixture 適合 + D1.1-C fixture 適合 + identity.py = 凍結裁定済の別物 + guard は impl-leg。**凍結波及も Rs 専権事項もここに無い**。
+
+## 7. G-6 — 採用確認
+
+- pQ が私の G-6 read（新 C 側 code が凍結 overload を避ける clean 解）を採用し v2.5 で `E_MANIFEST_LINEAGE_INCOHERENT` を実装（凍結 code の overload を除去）= 正しい disposition。⇒ G-6 の凍結 semantics 触りは解消（Rs 裁定不要へ）。
+- ⇒ **cycle-3 凍結波及の純結果**: G-4 = 凍結波及ゼロ（両 fixture 適合・identity.py は凍結裁定済の別物）/ G-6 = 新 C 側 code で解消。**確認された凍結 non-conformance は無し**。残る Rs 判断は §0 arc 由来の (b)(c) 系のみ（本 cycle-3 の 2 件は落着）。
