@@ -119,7 +119,9 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 - **旧記述（open-5）**: `thread_isaac_lab/wmso/d1/identity.py:80-82` の `canonical_json()` = `json.dumps(sort_keys=True, ensure_ascii=False, separators=(",",":"))` は **凍結 WCJ と別物**。⭐**本版の encoder vector がこれを判別する**（§7）: 同一入力に対し WCJ = `{"😀":2,"！":1}` ／ `sort_keys=True` = `{"！":1,"😀":2}`（pQ 実測）。⇒ **どちらが正かは本版では決めない**（owner を付けることが freeze の前提 = open-5）。
 - ⛔⛔**v2.4 の主張を撤回（v2.5・pY が実測で反証）**: 「**D1.1-B fixture の `wcj_bytes` も非適合＝第 2 の凍結波及**」は**誤り**。同 fixture は `wcj_bytes` 内の `check()` で **全 dict key に `k.isascii()` を assert**（`wmso_d11b_fixtures/build_goldens.py:198`）しており、**非 ASCII key は AssertionError で拒否**される ⇒ ASCII では codepoint 順 == UTF-16BE 順ゆえ**乖離は構造的に到達不能** ⇒ **適合**。さらに**凍結 spec `:171` 自身が層を分けている** — 逐語「層: (a) key-sort comparator / raw-WCJ（full-Unicode key; golden vectors の対象）/ **(b) typed 入口 `canonicalize()`（ASCII-key assert）**」⇒ 当該 fixture は **(b) を実装している**。⇒ ⭐**凍結 chunk 内に確認された非適合は無い**。custody = pY `641229b6d6f18b3f…` @ `bb7fd7cc19`。
 - ⚠⚠**私の誤りの機序（自己記録）**: `:208` の **1 行だけ**を読んで `sort_keys=True` を見つけ、**囲む関数（guard は `:198`）も凍結 `:171` も読まずに**「非適合」と結論し、さらに **identity.py と同型**と一般化した。⇒ **v1 の中心前提の誤り（§1）と同じ型を、その訂正 note を書いている最中に再演した**。⚠**pS は私の枠組みを受け入れて上に議論を積んだ**（＝同意は独立確認ではない）／**pY は測って反証した**。
-- ⚠**残るのは `identity.py:80-82` の 1 site のみ**（guard 無し・codepoint 順）。ただし pY 実測のとおり**別 canonicalizer**で用途は `finetune_cfg_hash` / handoff payload hash（`identity.py:111`・`:194`・`harness.py:101`）であり **§168/WCJ を参照していない**。⇒ 「非適合」ではなく「**§168 に一致すべきか否かの設計問題**」（latent・pS + pQ）。
+- ⛔⛔**残りの 1 site も撤回 ⇒ open-5 は解消（v2.5・pS が凍結の裁定行を提示・pQ 実測）**: 凍結 contracts_v2 **`:439`** 逐語「`identity.canonical_json` | **v1-internal ONLY — v2 hash に使用禁止**（WCJ と別物; dual-canonicalization guard を DeprecationWarning + §8 negative test で明示 — B-CH3）」。⇒ **凍結が「WCJ と別物」と明言済**であり `:168` への一致は**不要**（意図的に別）。用途も `finetune_cfg_hash`（`:111`）と `make_initiation_context_hash`（`:194`・`initiation_context_hash` は `:162`/`:413` で loud-discard）で **H_WCJ ではない**。⇒ **唯一の義務 = 凍結が命じる guard の実装 = impl leg（CLOSED）**。
+- ⭐⭐**cycle-3 の凍結波及調査の純結果 = 確認された凍結 non-conformance ゼロ**。私は 2 度「凍結との衝突」を主張し、**2 度とも凍結 file 自身の該当節（`:171` の層定義・`:439` の disposition 表）を読んでいなかった**。
+- ⚠（旧記述・撤回済）残るのは `identity.py:80-82` の 1 site のみ（guard 無し・codepoint 順）。ただし pY 実測のとおり**別 canonicalizer**で用途は `finetune_cfg_hash` / handoff payload hash（`identity.py:111`・`:194`・`harness.py:101`）であり **§168/WCJ を参照していない**。⇒ 「非適合」ではなく「**§168 に一致すべきか否かの設計問題**」（latent・pS + pQ）。
 - ⛔⛔**引用面の注意（cycle-2 F-7）**: `./isaaclab.sh -p` が非零 exit を隠す旨を記す **AGENTS.md の当該記述は、本 pin 時点で commit されていない**（`git show HEAD:AGENTS.md` に 0 hit／working tree に 1 hit／`git status` = ` M AGENTS.md`・pQ 実測）。⇒ **本 doc は当該記述を「on-disk as-read」としてのみ引用**し、committed 典拠としては引かない。⚠**本 session で 3 度目の同型**（`CLAUDE.md` 未 commit 統治 = DDR #35 と同族）⇒ **open-7 として面へ surface する**。
 
 ## 7. Fixtures / test（**bank 済 — 宣言でなく実物**）
@@ -160,7 +162,7 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 2. **IN-4（JCS package 展開・CI）未着手** — 凍結 v13 `:24` の名指し委任。DDR #35（`validate.sh` の偽 FAIL）と接する。
 3. **凍結 v13 `:185` の版 bump 移行手続**が承認済 prereg §2 IN に無い ⇒ **IN 集合が既知の不完全**。scope 裁定 = **Rs**。
 4. **U-5 は記録であって discharge でない**（§2）。
-5. **`identity.py:80-82` との正規化衝突に owner が無い**（§6）。⇒ **freeze の前提**。
+5. ✅**解消（v2.5）** — 凍結 `:439` が `identity.canonical_json` を「**v1-internal ONLY・WCJ と別物**」と裁定済（§6）。両 fixture も適合。⇒ **凍結波及も Rs 判断もここに無い**。残る義務 = 凍結が命じる guard 実装（impl leg・CLOSED）。
 6. ⛔**Rs 判断 (a)(b)**（§1.1）。
 7. **`AGENTS.md` の当該記述が未 commit**（§6）— repo 全体の統治事項として surface する。
 8. **混成 substrate の可否を裁定する DDR が現存しない**（§3）。
@@ -177,7 +179,7 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 
 ## 9. 版歴
 
-- **v2.5**（本版・18:4x）= ⛔⛔**v2.4 §6 の「第 2 の凍結波及」を撤回**（pY が実測で反証・凍結 fixture は `:198` の ASCII-key assert で適合・凍結 `:171` が層を明示）。⇒ **凍結 chunk 内の非適合は無い**。／**cycle-3 G-6 を設計変更で解消** — 凍結 code の overload をやめ **C 側新 code `E_MANIFEST_LINEAGE_INCOHERENT`** を新設（pS 設計軸 read）⇒ **open-15 は不要に**。／§5 = **9 件**。builder 再 bank = `bc89e9d7148e15ca…` @ `b994b617b5`。⭐**Rs 裁定 (a) = B 履行済**（note `00cf0c0bf86681f8…` @ `20cd755ac9`・凍結物は無傷 `5a1874d3be8b98b8…`）。
+- **v2.5**（本版・18:5x）= ⭐**open-5 が完全解消**（pS が凍結 `:439` を提示・pQ 実測）⇒ **cycle-3 の凍結波及調査の純結果 = non-conformance ゼロ**。／⛔⛔**v2.4 §6 の「第 2 の凍結波及」を撤回**（pY が実測で反証・凍結 fixture は `:198` の ASCII-key assert で適合・凍結 `:171` が層を明示）。⇒ **凍結 chunk 内の非適合は無い**。／**cycle-3 G-6 を設計変更で解消** — 凍結 code の overload をやめ **C 側新 code `E_MANIFEST_LINEAGE_INCOHERENT`** を新設（pS 設計軸 read）⇒ **open-15 は不要に**。／§5 = **9 件**。builder 再 bank = `bc89e9d7148e15ca…` @ `b994b617b5`。⭐**Rs 裁定 (a) = B 履行済**（note `00cf0c0bf86681f8…` @ `20cd755ac9`・凍結物は無傷 `5a1874d3be8b98b8…`）。
 
 - **v2.4**（本版・18:0x）= cycle-3 の doc 側 G-3〜G-13 を fold。§0 に**未扱いの凍結委任 4 件**と **IN-2 部分履行**を追記／§1.1 の `:471` 逐語を訂正（v2.2 の記述は**逐語で偽**だった）／§2 で**凍結 code の適用域拡張を宣言**し Rs へ／§4 の `:178` に host を復元／§5 で **`E_PROOF_ARTIFACT_UNRESOLVED` の記載を撤回**（到達不能）／§6 で **open-5 を「未決」から「非適合の是正」へ読み直し**（D1.1-B fixture の非適合も明記）／§7 の「検査しないもの」を **mutation 研究の実測**で拡張・登録コマンドを絶対 path 化／§8 を **18 件**にし owner を付与。⚠**Rs 判断 (c) の framing 訂正は routing `e699aa86ac02e001…` @ `1c77a24430` 側で実施済**（「scope 縮小の可否」→「部分版 two-key の可否 / open-freeze の可否」）。
 

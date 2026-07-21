@@ -47,7 +47,9 @@
 
 ⭐**撤回**: 「**D1.1-B fixture も非適合＝第 2 の凍結波及**」は**誤り**でした（pY が実測で反証・custody `641229b6d6f18b3f…` @ `bb7fd7cc19`）。同 fixture は `:198` で **ASCII-key assert** を持ち乖離は到達不能、かつ**凍結 `:171` 自身が (b) typed 入口＝ASCII-key assert の層を定義**しており、fixture は**その層の実装**です。⇒ ⭐**凍結 chunk 内に確認された非適合は無く、(d) は凍結波及ではありません**。⚠ 機序 = 私が `:208` の 1 行だけを読み、囲む関数と凍結 `:171` を読まずに一般化した（§1 の誤りと同型）。
 
-⇒ **残る論点は `identity.py:80-82` のみ**で、これは別用途の canonicalizer（`finetune_cfg_hash` / handoff payload hash・§168 を参照しない）ゆえ「**§168 に一致すべきかの設計問題**」（pS + pQ・latent）。**Rs 判断としては (d) を取り下げ可**。
+⇒ ⛔⛔**(d) は全面取り下げ**（18:5x）。残る 1 site も**凍結が裁定済**: contracts_v2 **`:439`** 逐語「`identity.canonical_json` | **v1-internal ONLY — v2 hash に使用禁止**（WCJ と別物…B-CH3）」⇒ `:168` 一致は不要・用途も H_WCJ でない・唯一の義務は凍結が命じる guard 実装（**impl leg = CLOSED**）。⭐**cycle-3 凍結波及調査の純結果 = non-conformance ゼロ・Rs 判断は不要**。
+
+（旧記述）残る論点は `identity.py:80-82` のみで、これは別用途の canonicalizer（`finetune_cfg_hash` / handoff payload hash・§168 を参照しない）ゆえ「**§168 に一致すべきかの設計問題**」（pS + pQ・latent）。**Rs 判断としては (d) を取り下げ可**。
 
 **事実**（cycle-3 G-4 で読みが変わった）:
 - 凍結 contracts_v2 `:168` が **key 順を逐語で決めている**（「object key sort = UTF-16 code unit 順（`k.encode("utf-16-be")` bytes 昇順）」）。
