@@ -115,6 +115,35 @@ singleton region かつ region postcondition が自明/不在 → 通常 node �
 
 ⭐ **`CLAMP{side}` 未解決の解消:** v1 `skill_contracts_manifest.json` は `CLAMP` を `INADMISSIBLE_AMBIGUOUS` とし理由に逐語「`CLAMP{side}` 未解決」を挙げる。**「側」を identity のラベルでなく合成の軸にする**ことで、`clamp` は 1 つの原始動作のまま、適用先の腕で区別される。
 
+## 2-1. 基底 vocabulary（pX + pS = MWSO-DESIGN 合意 2026-07-21 09:3x）
+
+**原則:** 2 候補 = 同一 vocabulary entry ⟺ 行動 intent が同じ。realization 差（learned/scripted）は ExecutionBundle の別で vocabulary を増やさない。start 状態・程度の差は束縛パラメータ。**side（L/R）・clip（C1-C5）は identity でなく合成座標。**
+
+**基底 = 8 entry**（接地 = `step_table.py:39-51` の 9 SkillName を腕ごとに分解・merge）:
+
+| # | entry | intent | 吸収した現行 SkillName |
+|---|---|---|---|
+| 1 | grip | finger を全 clamp | CLAMP + RECLAMP_L |
+| 2 | half_release | 緩めて誘導保持（接触維持） | HALF_UNCLAMP_RELEASE の L 側 |
+| 3 | full_release | 開いて手放す | HALF_UNCLAMP_RELEASE の R 側 + UNCLAMP |
+| 4 | approach | 把持可能姿勢へ EE 移動（精密） | APPROACH_CABLE + AERIAL_REGRASP |
+| 5 | carry | 把持したまま EE 移動 | TRANSPORT |
+| 6 | insert | groove へ押込 | INSERT_INTO_CLIP |
+| 7 | hold | 把持と姿勢を維持 | （暗黙） |
+| 8 | wait | 制御なし・観測 | CLIP_CONFIRM |
+
+**契約層の精緻化（pS・案 B 不変・数え方の精度）:**
+- **(1)** evidence は SkillDefinition（realization）を数える。凍結 SkillDefinition は kind を 1 つしか持たないゆえ、grip の learned（CLAMP）と scripted（RECLAMP_L）は同 skill_id でも別 SkillDefinition。⇒ evidence = N × 13、N ≈ 8-16（entry あたり小定数）。「8 × 13」でなく、しかし still 基底数に線形（side/clip の組合せでない）。
+- **(2)** side/clip を座標にする契約層条件 = 基底 skill が coordinate-parametric（obs/action が side/clip を入力に取り evidence は 1 回）で、composition が具体座標を束縛する。⇒ 座標は合成層（自由）に残り組合せ爆発が消える。⚠ obs/action の parametric 化は **p5 = SKILL-DETAIL-DESIGN への設計要件**。
+
+**解決した merge:**
+- **(a) approach と carry は distinct**（grip 状態が別 = 把持前 vs 把持中・資源 claim 状態が別・intent が精密位置決め vs 運搬。pS 契約整合を確認）。
+
+**保留の merge（p5 detail 待ち）:**
+- **(b) grip が CLAMP(learned) と RECLAMP_L(scripted) を 1 entry に吸収**してよいかは、両 realization が同 obs/action schema を共有するか（= vocabulary coherence）を p5 が確認。⭐learned/scripted は schema 一致でも別 SkillDefinition（kind 別）ゆえ、確認するのは SkillDefinition の merge でなく vocabulary の coherence。一致 → 1 entry（2 realization）で正／不一致 → grip を 2 entry に分割。
+
+**arity 非依存:** 本基底も pS の合成の形も arity（枝数下限）に依存しない。arity は held（Rs 確認待ち・§Status OPEN-A）。pS の `SkillCompositionDefinition` draft は基底数に不変（basis 非依存）で、基底 SET は本節を参照する。
+
 ## 3. 凍結契約への影響
 
 | 面 | 影響 |
