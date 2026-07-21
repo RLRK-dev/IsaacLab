@@ -1,5 +1,21 @@
 # HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 20:0x JST
 
+> ## ⭐⭐ B1 — **D-3 は候補へ復帰（pS 設計軸 PASS）／Rs 判断待ち 0／次 = 再選定 draft**（2026-07-21 20:2x）
+>
+> **移動①②完了**: ①**D-3 の判断 = 候補へ復帰**（custody §4-B `3cf24be3023bcb7d…` @ `8f6b3718ee`）。却下脚は **1 本のみ**で、それが**比較の結果に依存する形**（「他に手段がある以上」= **採択された案**）。採択案は現在 **0 件**ゆえ脚が空。弱読み（「他候補が在る以上」）でも「（最小変更）」は**順位付けの基準であって除外の基準でない** ⇒ 順位付けをやり直す場でしか使えない。⇒ **生きた却下脚 0 で再選定へ入る**。②**凍結 v13 本文の「採択 = D-1」4 箇所（`:248`/`:252`/`:397`/`:470`）= freeze 時点の snapshot として読む**（pY の freeze-record convention の**同型適用**・新しい規則を作っていない）。記録 = 訂正 note `dffab3667b77d292…` @ `3c60d710fc`・⭐**凍結物は無傷** `5a1874d3be8b98b8…`（毎 commit 前後で実測）。
+>
+> ⭐**pS 設計軸 = PASS（20:21）** 3 点成立: (1) 却下脚の比較依存 (2) **順位づけ = pQ 権限内 / 採択 = 権限外**（委譲 `:41`/`:55`/`:99` が D-3 を除く） (3)「委譲そのものは生きている」は **pQ の inference と正しく flag**（確定は evidence/Rs）。⚠ 記録 `6b29bd60ed554b34…` は **untracked** — pS へ bank 依頼済。⛔**banked commit が付くまで anchor に引かない**（pN B1 の「pS record が working-tree only」HOLD と同型）。
+>
+> ⭐**候補集合 = {D-1, D-3}** — 「rank 2 への proof kind 追加」は add-require ゆえ **D-3 の一形態**で独立候補でない（pS 一致）。D-2 / D-4 は**内在的**却下ゆえ生存（脚 1 型の失効が及ばない。⚠「誤りを見つけられなかった」であり「無い」ではない）。
+>
+> **面**: design **v2.5.1** `97bfda4355b4fc3d…` @ `878b97bc2f`（records-only・**設計 semantics 不変**。⚠「v2.5」の名で byte が **3 状態**生じたため点版で分離 — ⭐**label でなく content sha で引く**）。LEDGER 反映 = p6 `175cfea80d`（#37 pin repoint ＋ gate = 2 行為 ＋ **#27 REOPEN**・pQ が on-disk 実測一致）。
+>
+> ⛔**Rs 判断待ち = 0**。Rs に要るのは **①freeze ②凍結を実際に開ける（D-3 が勝った場合）** の 2 **行為**のみ。⛔**D-3 が首位でも採択せず上程する**。
+>
+> **次 = 移動③ B1 再選定 draft**（D-1 vs D-3・測定で順位）→ pS 設計軸 → pY evidence 軸。⚠**新規 file ゆえ L2** = Pre-mortem + 5 体 debate が要る。その後 ④ v2.5.1 で two-key。⛔impl / training / authority / push / freeze / slice = **CLOSED 継続**。
+>
+> ⚠**以下は 20:0x 時点の記録**。
+
 > ## ⭐ D1.1-C — **design v2.5 / Rs 裁定 3 件 受領済 / ⛔Rs 待ちは 0 件（escalate しすぎを是正）**（2026-07-21 20:0x）
 >
 > **現在地**: design **v2.5** `0c082b727a4cab9c…` @ `87ba9ee2c0`（190 行・open 18 件）＋ fixtures（builder `bc89e9d7148e15ca…` @ `b994b617b5`／golden A-D @ `e1ed170014`）。登録コマンド逐語実行 = **33/33 fired・4/4 PASS・rc=0**。⭐**凍結物は最後まで無傷** `5a1874d3be8b98b8…`（p6 が 3 点 byte 一致で独立確認）。
