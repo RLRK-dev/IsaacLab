@@ -52,8 +52,8 @@ Personal defaults と汎用ワークフロー (Modes / Scope boundaries / Output
 
 ロッククライミング原則: **アンカーを打たないと頂上に登れない。自分がいる高さは、最後に「確保した」アンカーまで。未確保のアンカーの上を主張することは “未確認の前進” ではなく、前進していない（＝地面にいる）。** 個別の失敗ごとに対処法を足すのでなく、本方法論 1 本で検証失敗のクラス全体（未知含む）を覆う。
 
-1. **位置は権威ある記録から読む（記憶からでない）。** 多段タスクの現在位置は authoritative な順序記録（ステップ表 / 計画 / node）から読む。目の前の salient な信号や記憶で判断しない。ステップ表は VT-DESIGN が管理する canonical 版（`thread-vault/07-Design/RL-Routing-Design.md` §2 工程設計 等）を driver にする。
-2. **各段はアンカー。次へ進む前に ground-truth で確保する。** 「確保」は、その段の述語が**実体（物理状態・権威ソース）**で確認された時のみ成立。代理量（近接・閾値・z 高さ等）／相関した同意（同じ代理を見る複数者・agent の一致＝独立確認でない）／部分・範囲限定の確認（1 点 PASS を面に一般化、phase-scope で whole-route を代替）では確保にならない。全 sub-goal leg を列挙し、分子が conjoin する leg と cover しない leg を明示する。
+1. **位置は権威ある記録から読む（記憶からでない）。** 多段タスクの現在位置は authoritative な順序記録（ステップ表 / 計画 / node）から読む。目の前の salient な信号や記憶で判断しない。ステップ表は SKILL-DETAIL-DESIGN（旧 VT-DESIGN）が管理する canonical 版（`thread-vault/07-Design/RL-Routing-Design.md` §2 工程設計 等）を driver にする。
+2. **各段はアンカー。次へ進む前に ground-truth で確保する。** 「確保」は、その段の述語が**実体（物理状態・権威ソース）**で確認された時のみ成立。代理量（近接・閾値・z 高さ等）／相関した同意（同じ代理を見る複数者・agent の一致＝独立確認でない）／部分・範囲限定の確認（1 点 PASS を面に一般化、phase-scope で whole-route を代替）では確保にならない。全 sub-goal leg を列挙し、主張した成功（成功率の分子）が cover する/しない leg を明示する。
 3. **真偽が人間判断を要する所は、人間（Rs）が荷重試験。** critical / 前提アンカー（物理妥当性・把持・固定・着座・貫通等）は、体重をかける（先へ進む・成功を主張する・報告する）前に Rs 確認（動画等）で weight-test する。過去 run / 別条件の確認を流用しない。数値・agent 出力のみで成功を判定しない。
 4. **未確保＝地面。そう言う。** 確保できていなければその段は通過していない。位置を正直に報告し、上の点を主張しない・そこから先へ進まない。
 
@@ -77,7 +77,7 @@ Personal defaults と汎用ワークフロー (Modes / Scope boundaries / Output
 - 根拠: `thread-vault/06-Knowledge/LL-SimPerformance`
 
 ## Newton VBD（2026-03-19 開始、rs承認済み）
-- **状態:** env6-VBD track（AC/AR/IC/Clamp/Unclamp の全 skill env）は **DISCARDED → mujoco-コ**（Rs 2026-06-26）。Grip（`newton_grip_env.py`）は env7-mujoco **ACTIVE**。成否 SSOT = `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md` §FAILED。歴史詳細 = archive `02-Workflow/CLAUDE-md-pruned-archive-2026-07-12.md`
+- **状態:** env6-VBD track（AC/AR/IC/Clamp/Unclamp の全 skill env）は **DISCARDED → mujoco 基盤（コ字形グリッパ）**（Rs 2026-06-26）。Grip（`newton_grip_env.py`）は env7-mujoco **ACTIVE**。成否 SSOT = `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md` §FAILED。歴史詳細 = archive `02-Workflow/CLAUDE-md-pruned-archive-2026-07-12.md`
 - **環境:** Newton VBD solver（env_isaaclab6 venv）。PhysX環境とは完全に分離
 - **⚠ Option-E（mujoco-substrate S-series: S1-S8）の venv は `env_isaaclab7` / Newton 1.2.1（mujoco 3.8.1 / warp 1.13.0）。** 本 VBD/RL track の `env_isaaclab6` / Newton 1.0.0 とは別 track（env6 は Option-E では fallback）。Option-E の smoke/test/build は `/home/rlrk/env_isaaclab7/bin/python` で実行する
 - **RL進捗:** `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md`（成否 SSOT）+ 地図 `docs/logical_decomposition.html`（現在 frame）
@@ -184,7 +184,7 @@ THREAD project の全 task は logic tree 上の node として管理し、各 n
 
 3. **Vault書き込み権限:** `thread-vault/02-Workflow/Vault Write Permissions.md` の権限マトリクスに従う。許可されたディレクトリ以外への書き込み禁止（Rs明示指示時を除く）
 16. **先祖返り防止:** ファイルを編集する前に必ず `cat` で最新内容を確認せよ。コンテキスト内の記憶を信用しない。compaction後は特に厳守
-20. **不要プロセスの即時kill:** 新バージョンの訓練起動時、旧バージョンのプロセスが残っていたら即座にkillせよ。`ps aux | grep train_` で確認。訓練 kill / ハーネス停止は rs 承認必須（prohibited.md）
+20. **不要（ゾンビ）プロセスの即時kill:** 新バージョンの訓練起動時、旧バージョンの**訓練ゾンビプロセス**（defunct・停止済で残存）が `ps aux | grep train_` で見つかったら即座に kill せよ — **Rs 承認不要**。⚠ **稼働中の訓練プロセスの kill・ハーネス停止は Rs 承認必須**（prohibited.md）。ゾンビでない限り自律 kill しない
 
 ### 検証・報告 (§5, 15, 25)
 
