@@ -3,38 +3,49 @@
 # All rights reserved.
 #
 # SPDX-License-Identifier: BSD-3-Clause
-"""Golden vector builder / verifier for WMSO D1.1-C DESIGN v2 (carry record).
+"""Golden vector builder / verifier for WMSO D1.1-C DESIGN v2.2 (carry record).
 
-Scope note (design v2 s0): this builds the CARRY RECORD defined by v2 s2 (U-5 stage
-binding) and v2 s3 (substrate labelling) ONLY. It is deliberately NOT the full
-artifact manifest type -- prereg IN-1 stays out of v2.
+Scope (design v2.2 s0): builds ONLY the carry record defined by s2 (U-5 stage binding)
+and s3 (substrate labelling). It is NOT the full artifact manifest -- prereg IN-1 is out.
 
-Dependencies: stdlib only, Python >= 3.8. No dataclasses, no PEP-604 annotations,
-so the module imports cleanly on the declared floor.
+Dependencies: stdlib only. No dataclasses, no PEP-604 annotations, so the module parses
+and imports on the declared floor (3.8).
 
-Fail-closed usage (registered in design v2 s7):
+Registered fail-closed command (design v2.2 s7) -- call the interpreter DIRECTLY:
 
     env_isaaclab/bin/python .../wmso_d11c_fixtures/build_goldens.py --verify <dir>
 
-AGENTS.md:68 verbatim authorises calling ``env_isaaclab/bin/python`` directly
-because ``./isaaclab.sh -p`` "can mask non-zero Python exits". Any interpreter
-works (stdlib only); the wrapper must not be used.
+Never verify through ``./isaaclab.sh -p``: measured C-side, the wrapper returns rc=0 on a
+corrupted fixture while the script itself returns 1 (root cause: the -p handler discards
+the child's returncode). AGENTS.md documents this hazard, but NOTE: at the pinned commit
+that text lives only in an UNCOMMITTED working-tree edit of AGENTS.md -- it is cited here
+as read-on-disk, not as committed content (cycle-2 F-7).
+
+Cycle-2 fixes folded here: F-3 (verify now parses and re-canonicalises, and rejects
+unexpected files), F-4 (argv guard: no fallthrough that writes), F-6 (lineage coherence),
+F-8 (NOT_APPLICABLE no longer false-rejects a KNOWN execution binding), F-12/F-15
+(E_MANIFEST_NONCANONICAL_BYTES now has controls), F-2 (encoder vectors with HAND-DERIVED
+expected bytes, so a defect in this encoder cannot certify itself).
 """
 
 import copy
 import hashlib
 import json
 import re
+import shutil
 import sys
+import tempfile
 import unicodedata
 from pathlib import Path
 
+sys.dont_write_bytecode = True  # cycle-2: keep __pycache__ out of the pinned fixture dir
+
 # --------------------------------------------------------------------------------------
-# frozen vocabulary (referenced, never redefined here)
+# frozen vocabulary (referenced, never redefined)
 # --------------------------------------------------------------------------------------
 
 TRAINING_LINEAGES = ("RL_ONLY", "BC_ONLY", "BC_THEN_RL", "DEMO_PLUS_RL", "NOT_APPLICABLE")
-DEMO_LINEAGES = ("BC_ONLY", "BC_THEN_RL", "DEMO_PLUS_RL")
+DEMO_LINEAGES = ("BC_ONLY", "BC_THEN_RL", "DEMO_PLUS_RL")  # frozen v13 :166
 STAGE_RELATIONS = ("IDENTICAL", "EXPLICIT_SUPERSEDE")
 
 SUBSTRATE_RE = re.compile(r"\A[A-Za-z0-9_.:-]{1,64}\Z")
@@ -44,7 +55,7 @@ RECORD_KEYS = ("dataset_substrate_ids", "stage_bindings", "substrate_id", "train
 STAGE_KEYS = ("bc_stage_tensor_binding_hash", "execution_stage_tensor_binding_hash")
 
 # --------------------------------------------------------------------------------------
-# WMSO Canonical JSON (frozen contracts_v2 s2) -- inherited subset, no new rules
+# WMSO Canonical JSON (frozen contracts_v2 s2) -- inherited subset
 # --------------------------------------------------------------------------------------
 
 
@@ -55,9 +66,9 @@ class WcjError(ValueError):
 def _wcj_scalar(value):
     if value is None:
         return "null"
-    if type(value) is bool:  # B-declared (2): bool is not an int, and no bool fields exist here
+    if type(value) is bool:
         raise WcjError("bool is not encodable: {!r}".format(value))
-    if isinstance(value, float):  # frozen s2: float type rejected
+    if isinstance(value, float):
         raise WcjError("float is not encodable: {!r}".format(value))
     if isinstance(value, int):
         if abs(value) > 2**53 - 1:
@@ -73,11 +84,17 @@ def _wcj_scalar(value):
 
 
 def wcj_text(value):
-    """Serialize to canonical text: object keys sorted by UTF-16-BE bytes, tight separators."""
+    """Canonical text. Object keys sorted by UTF-16-BE bytes; arrays keep declared order.
+
+    NOTE (design v2.2 s4): this serializer does NOT reorder array elements. Set-typed
+    fields are held to bytes-ascending order by ``validate()``, i.e. by REJECTION, not by
+    normalisation -- a producer that hashes without validating can still emit a different
+    byte string for the same set. That residue is declared open (s8 open-10).
+    """
     if isinstance(value, dict):
         items = sorted(value.items(), key=lambda kv: kv[0].encode("utf-16-be"))
         return "{" + ",".join(_wcj_scalar(k) + ":" + wcj_text(v) for k, v in items) + "}"
-    if isinstance(value, (list, tuple)):  # B-declared (3): tuple -> array
+    if isinstance(value, (list, tuple)):
         return "[" + ",".join(wcj_text(v) for v in value) + "]"
     return _wcj_scalar(value)
 
@@ -91,22 +108,46 @@ def record_hash(record):
 
 
 # --------------------------------------------------------------------------------------
-# validation -- design v2 s2 (U-5) + s3 (substrate). Returns the fired error codes.
+# encoder vectors -- expected bytes DERIVED BY HAND, not by this encoder (cycle-2 F-2)
+# --------------------------------------------------------------------------------------
+
+# U+FF01 encodes UTF-16-BE as FF 01 and UTF-8 as EF BC 81.
+# U+1F600 encodes UTF-16-BE as D8 3D DE 00 (surrogate pair) and UTF-8 as F0 9F 98 80.
+# => UTF-16-BE order puts U+1F600 FIRST; UTF-8/codepoint order puts U+FF01 first.
+# A serializer that sorts by anything other than UTF-16-BE bytes fails this vector.
+ENCODER_VECTORS = [
+    ("utf16 key order differs from utf8", {"！": 1, "\U0001f600": 2}, '{"\U0001f600":2,"！":1}'),
+    ("non-ascii is not escaped", {"k": "é"}, '{"k":"é"}'),
+    ("int upper bound accepted", {"n": 2**53 - 1}, '{"n":9007199254740991}'),
+    ("nested array keeps declared order", {"a": [3, 1, 2]}, '{"a":[3,1,2]}'),
+    ("null is explicit", {"a": None}, '{"a":null}'),
+]
+
+ENCODER_REJECTS = [
+    ("int above 2**53-1", {"n": 2**53}),
+    ("float", {"n": 1.5}),
+    ("bool", {"n": True}),
+    ("lone surrogate", {"k": "\ud800"}),
+    ("non-NFC string", {"k": "Å"}),
+]
+
+
+# --------------------------------------------------------------------------------------
+# validation -- design v2.2 s2 (U-5) + s3 (substrate)
 # --------------------------------------------------------------------------------------
 
 
 def _substrate_ok(value):
-    return isinstance(value, str) and SUBSTRATE_RE.match(value) is not None and unicodedata.normalize("NFC", value) == value
+    return isinstance(value, str) and SUBSTRATE_RE.match(value) is not None
 
 
 def validate(record):
-    """Return the list of fired error codes, in declaration order. Empty list = conformant."""
+    """Return the fired error codes in declaration order. Empty list = conformant."""
+    if not isinstance(record, dict) or tuple(sorted(record)) != RECORD_KEYS:
+        return ["E_RECORD_SHAPE"]
+
     errors = []
 
-    if not isinstance(record, dict) or tuple(sorted(record)) != RECORD_KEYS:
-        return ["E_RECORD_SHAPE"]  # strict decoder territory (frozen s5C): unknown/missing field
-
-    # ---- v2 s3: substrate ----------------------------------------------------------
     substrate = record["substrate_id"]
     if not isinstance(substrate, str) or substrate == "":
         errors.append("E_MANIFEST_SUBSTRATE_ABSENT")
@@ -115,19 +156,16 @@ def validate(record):
 
     ids = record["dataset_substrate_ids"]
     if not isinstance(ids, (list, tuple)):
-        errors.append("E_MANIFEST_SUBSTRATE_POOLED")
+        errors.append("E_RECORD_SHAPE")  # cycle-2: a type fault is not a pooling finding
     elif len(ids) == 0:
-        # unlabelled data = silently pooled (v2 s3 S-3)
         errors.append("E_MANIFEST_SUBSTRATE_POOLED")
+    elif any(not _substrate_ok(x) for x in ids):
+        errors.append("E_MANIFEST_SUBSTRATE_MALFORMED")
     else:
-        if any(not _substrate_ok(x) for x in ids):
-            errors.append("E_MANIFEST_SUBSTRATE_MALFORMED")
-        encoded = [x.encode("utf-8") for x in ids if isinstance(x, str)]
+        encoded = [x.encode("utf-8") for x in ids]
         if encoded != sorted(encoded) or len(set(encoded)) != len(encoded):
-            # v2 s4: collections are canonicalised sets (bytes ascending, no duplicates)
             errors.append("E_MANIFEST_SUBSTRATE_POOLED")
 
-    # ---- v2 s2: stage bindings ------------------------------------------------------
     lineage = record["training_lineage"]
     if lineage not in TRAINING_LINEAGES:
         errors.append("E_RECORD_SHAPE")
@@ -140,47 +178,54 @@ def validate(record):
 
     execution = stages["execution_stage_tensor_binding_hash"]
     bc = stages["bc_stage_tensor_binding_hash"]
+    for value in (execution, bc):
+        if not (value is None or (isinstance(value, str) and HEX64_RE.match(value))):
+            errors.append("E_RECORD_SHAPE")
+            return errors
 
-    def _hex_or_none(v):
-        return v is None or (isinstance(v, str) and HEX64_RE.match(v) is not None)
-
-    if not _hex_or_none(execution) or not _hex_or_none(bc):
-        errors.append("E_RECORD_SHAPE")
-        return errors
-
-    if lineage == "NOT_APPLICABLE":
-        if execution is not None or bc is not None:
-            errors.append("E_MANIFEST_STAGE_BINDING_PRESENT")
-    elif lineage == "RL_ONLY":
-        if execution is None:
+    # frozen v13 :166 constrains the BC stage only. The execution stage mirrors the bundle's
+    # tensor_binding slot, which a SCRIPTED/WAIT skill may legitimately hold as KNOWN, so
+    # NOT_APPLICABLE does NOT force it to null (cycle-2 F-8).
+    if lineage in DEMO_LINEAGES:
+        if execution is None or bc is None:
             errors.append("E_MANIFEST_STAGE_BINDING_MISSING")
+    else:  # RL_ONLY, NOT_APPLICABLE
         if bc is not None:
             errors.append("E_MANIFEST_STAGE_BINDING_PRESENT")
-    else:  # demo lineages
-        if execution is None or bc is None:
+        if lineage == "RL_ONLY" and execution is None:
             errors.append("E_MANIFEST_STAGE_BINDING_MISSING")
 
     return errors
 
 
-def check_against_declaration(record, relation, superseded_binding_hash):
-    """Cross-artifact leg (v2 s2): compare the record against the frozen LineageBindingDeclaration.
+def check_against_declaration(record, declaration):
+    """Cross-artifact leg (design v2.2 s2) against the frozen LineageBindingDeclaration.
 
-    ``relation`` / ``superseded_binding_hash`` come from the frozen TensorBindingSpec
-    (v13 s1.5). Returns the fired error codes.
+    ``declaration`` = {"training_lineage", "relation", "demo_dataset_binding_hash"}.
+    Returns the fired error codes.
     """
+    if validate(record):
+        return ["E_RECORD_SHAPE"]
+    if not isinstance(declaration, dict) or "training_lineage" not in declaration:
+        return ["E_RECORD_SHAPE"]
+
+    # cycle-2 F-6: the record's self-asserted lineage must equal the frozen declaration's.
+    if record["training_lineage"] != declaration["training_lineage"]:
+        return ["E_BINDING_LINEAGE_MISMATCH"]  # frozen code, reused (v13 :230)
+
+    relation = declaration.get("relation")
+    if relation is None:
+        return [] if record["training_lineage"] not in DEMO_LINEAGES else ["E_RECORD_SHAPE"]
     if relation not in STAGE_RELATIONS:
         return ["E_RECORD_SHAPE"]
+
     stages = record["stage_bindings"]
     execution = stages["execution_stage_tensor_binding_hash"]
     bc = stages["bc_stage_tensor_binding_hash"]
     if relation == "IDENTICAL":
-        if execution is None or bc is None or execution != bc:
-            return ["E_MANIFEST_STAGE_BINDING_CONFLICT"]
-        return []
-    if bc is None or bc != superseded_binding_hash:
-        return ["E_MANIFEST_STAGE_BINDING_CONFLICT"]
-    return []
+        return [] if (bc is not None and bc == execution) else ["E_MANIFEST_STAGE_BINDING_CONFLICT"]
+    expected = declaration.get("demo_dataset_binding_hash")
+    return [] if (bc is not None and bc == expected) else ["E_MANIFEST_STAGE_BINDING_CONFLICT"]
 
 
 # --------------------------------------------------------------------------------------
@@ -191,31 +236,48 @@ TB_A = "a" * 64
 TB_B = "b" * 64
 
 GOLDENS = {
-    # M-A: no training stage at all (SCRIPTED / WAIT side), single substrate.
     "carry_record_golden_A.json": {
         "dataset_substrate_ids": ["kinematic_pin_2026_07"],
-        "stage_bindings": {
-            "bc_stage_tensor_binding_hash": None,
-            "execution_stage_tensor_binding_hash": None,
-        },
+        "stage_bindings": {"bc_stage_tensor_binding_hash": None, "execution_stage_tensor_binding_hash": None},
         "substrate_id": "kinematic_pin_2026_07",
         "training_lineage": "NOT_APPLICABLE",
     },
-    # M-B: demo lineage with IDENTICAL relation, and a MIXED dataset label set.
     "carry_record_golden_B.json": {
         "dataset_substrate_ids": ["kinematic_pin_2026_07", "physics_faithful_2026_07"],
-        "stage_bindings": {
-            "bc_stage_tensor_binding_hash": TB_A,
-            "execution_stage_tensor_binding_hash": TB_A,
-        },
+        "stage_bindings": {"bc_stage_tensor_binding_hash": TB_A, "execution_stage_tensor_binding_hash": TB_A},
         "substrate_id": "physics_faithful_2026_07",
         "training_lineage": "DEMO_PLUS_RL",
     },
+    # cycle-2 F-16: EXPLICIT_SUPERSEDE with bc != execution, so an implementation that
+    # mirrors execution into bc can no longer reproduce the corpus.
+    "carry_record_golden_C.json": {
+        "dataset_substrate_ids": ["physics_faithful_2026_07"],
+        "stage_bindings": {"bc_stage_tensor_binding_hash": TB_B, "execution_stage_tensor_binding_hash": TB_A},
+        "substrate_id": "physics_faithful_2026_07",
+        "training_lineage": "BC_THEN_RL",
+    },
+    "carry_record_golden_D.json": {
+        "dataset_substrate_ids": ["physics_faithful_2026_07"],
+        "stage_bindings": {"bc_stage_tensor_binding_hash": None, "execution_stage_tensor_binding_hash": TB_A},
+        "substrate_id": "physics_faithful_2026_07",
+        "training_lineage": "RL_ONLY",
+    },
+}
+
+DECLARATIONS = {
+    "carry_record_golden_A.json": {"training_lineage": "NOT_APPLICABLE", "relation": None},
+    "carry_record_golden_B.json": {"training_lineage": "DEMO_PLUS_RL", "relation": "IDENTICAL"},
+    "carry_record_golden_C.json": {
+        "training_lineage": "BC_THEN_RL",
+        "relation": "EXPLICIT_SUPERSEDE",
+        "demo_dataset_binding_hash": TB_B,
+    },
+    "carry_record_golden_D.json": {"training_lineage": "RL_ONLY", "relation": None},
 }
 
 
 # --------------------------------------------------------------------------------------
-# negative controls -- each mutates an in-memory deepcopy only (non-destructive)
+# controls
 # --------------------------------------------------------------------------------------
 
 
@@ -228,76 +290,121 @@ def _mutate(base, path, value):
     return record
 
 
-def negative_controls():
-    """Return (label, record, expected_code) triples. Every declared predicate gets one."""
+def _negative_controls():
+    """(label, record, expected_codes) -- expected is an EXACT match, not a subset."""
     a = GOLDENS["carry_record_golden_A.json"]
     b = GOLDENS["carry_record_golden_B.json"]
-    cases = [
-        ("substrate absent", _mutate(b, ["substrate_id"], ""), "E_MANIFEST_SUBSTRATE_ABSENT"),
-        ("substrate malformed", _mutate(b, ["substrate_id"], "bad substrate!"), "E_MANIFEST_SUBSTRATE_MALFORMED"),
-        ("substrate too long", _mutate(b, ["substrate_id"], "x" * 65), "E_MANIFEST_SUBSTRATE_MALFORMED"),
-        ("dataset ids empty", _mutate(b, ["dataset_substrate_ids"], []), "E_MANIFEST_SUBSTRATE_POOLED"),
-        ("dataset ids unsorted", _mutate(b, ["dataset_substrate_ids"], ["z_sub", "a_sub"]), "E_MANIFEST_SUBSTRATE_POOLED"),
-        ("dataset ids duplicated", _mutate(b, ["dataset_substrate_ids"], ["a_sub", "a_sub"]), "E_MANIFEST_SUBSTRATE_POOLED"),
-        ("dataset id malformed", _mutate(b, ["dataset_substrate_ids"], ["ok", "b a d"]), "E_MANIFEST_SUBSTRATE_MALFORMED"),
-        (
-            "NOT_APPLICABLE with execution hash",
-            _mutate(a, ["stage_bindings", "execution_stage_tensor_binding_hash"], TB_A),
-            "E_MANIFEST_STAGE_BINDING_PRESENT",
-        ),
-        (
-            "NOT_APPLICABLE with bc hash",
-            _mutate(a, ["stage_bindings", "bc_stage_tensor_binding_hash"], TB_A),
-            "E_MANIFEST_STAGE_BINDING_PRESENT",
-        ),
-        (
-            "RL_ONLY missing execution",
-            {
-                "dataset_substrate_ids": ["s"],
-                "stage_bindings": {"bc_stage_tensor_binding_hash": None, "execution_stage_tensor_binding_hash": None},
-                "substrate_id": "s",
-                "training_lineage": "RL_ONLY",
-            },
-            "E_MANIFEST_STAGE_BINDING_MISSING",
-        ),
-        (
-            "RL_ONLY carries bc",
-            {
-                "dataset_substrate_ids": ["s"],
-                "stage_bindings": {"bc_stage_tensor_binding_hash": TB_A, "execution_stage_tensor_binding_hash": TB_A},
-                "substrate_id": "s",
-                "training_lineage": "RL_ONLY",
-            },
-            "E_MANIFEST_STAGE_BINDING_PRESENT",
-        ),
-        (
-            "demo lineage missing bc",
-            _mutate(b, ["stage_bindings", "bc_stage_tensor_binding_hash"], None),
-            "E_MANIFEST_STAGE_BINDING_MISSING",
-        ),
-        ("unknown lineage", _mutate(b, ["training_lineage"], "PPO_ONLY"), "E_RECORD_SHAPE"),
-        ("non-hex binding", _mutate(b, ["stage_bindings", "execution_stage_tensor_binding_hash"], "AB" * 32), "E_RECORD_SHAPE"),
-    ]
-    return cases
-
-
-def cross_artifact_controls():
-    """Cross-artifact leg negative controls (v2 s2 declaration comparison)."""
-    b = GOLDENS["carry_record_golden_B.json"]
+    d = GOLDENS["carry_record_golden_D.json"]
     return [
-        ("IDENTICAL but stages differ", _mutate(b, ["stage_bindings", "bc_stage_tensor_binding_hash"], TB_B), "IDENTICAL", None),
-        ("EXPLICIT_SUPERSEDE mismatch", b, "EXPLICIT_SUPERSEDE", TB_B),
+        ("substrate absent", _mutate(b, ["substrate_id"], ""), ["E_MANIFEST_SUBSTRATE_ABSENT"]),
+        ("substrate malformed", _mutate(b, ["substrate_id"], "bad substrate!"), ["E_MANIFEST_SUBSTRATE_MALFORMED"]),
+        ("substrate too long", _mutate(b, ["substrate_id"], "x" * 65), ["E_MANIFEST_SUBSTRATE_MALFORMED"]),
+        ("dataset ids empty", _mutate(b, ["dataset_substrate_ids"], []), ["E_MANIFEST_SUBSTRATE_POOLED"]),
+        ("dataset ids unsorted", _mutate(b, ["dataset_substrate_ids"], ["z_sub", "a_sub"]), ["E_MANIFEST_SUBSTRATE_POOLED"]),
+        ("dataset ids duplicated", _mutate(b, ["dataset_substrate_ids"], ["a_sub", "a_sub"]), ["E_MANIFEST_SUBSTRATE_POOLED"]),
+        ("dataset id malformed", _mutate(b, ["dataset_substrate_ids"], ["a_sub", "b a d"]), ["E_MANIFEST_SUBSTRATE_MALFORMED"]),
+        ("dataset ids wrong type", _mutate(b, ["dataset_substrate_ids"], "a_sub"), ["E_RECORD_SHAPE"]),
+        ("NOT_APPLICABLE carries bc", _mutate(a, ["stage_bindings", "bc_stage_tensor_binding_hash"], TB_A), ["E_MANIFEST_STAGE_BINDING_PRESENT"]),
+        ("RL_ONLY carries bc", _mutate(d, ["stage_bindings", "bc_stage_tensor_binding_hash"], TB_A), ["E_MANIFEST_STAGE_BINDING_PRESENT"]),
+        ("RL_ONLY missing execution", _mutate(d, ["stage_bindings", "execution_stage_tensor_binding_hash"], None), ["E_MANIFEST_STAGE_BINDING_MISSING"]),
+        ("demo lineage missing bc", _mutate(b, ["stage_bindings", "bc_stage_tensor_binding_hash"], None), ["E_MANIFEST_STAGE_BINDING_MISSING"]),
+        ("unknown lineage", _mutate(b, ["training_lineage"], "PPO_ONLY"), ["E_RECORD_SHAPE"]),
+        ("non-lowercase hex", _mutate(b, ["stage_bindings", "execution_stage_tensor_binding_hash"], "AB" * 32), ["E_RECORD_SHAPE"]),
+        ("extra key", dict(list(b.items()) + [("extra", 1)]), ["E_RECORD_SHAPE"]),
     ]
 
 
-def positive_controls():
-    """Encoder-level rejections that must raise WcjError (frozen s2 inheritance)."""
+def _declaration_controls():
+    """(label, record, declaration, expected_codes)."""
     b = GOLDENS["carry_record_golden_B.json"]
+    c = GOLDENS["carry_record_golden_C.json"]
     return [
-        ("float rejected", _mutate(b, ["substrate_id"], 1.5)),
-        ("bool rejected", _mutate(b, ["substrate_id"], True)),
-        ("non-NFC rejected", _mutate(b, ["substrate_id"], "Å")),
+        ("IDENTICAL but stages differ", _mutate(b, ["stage_bindings", "bc_stage_tensor_binding_hash"], TB_B),
+         DECLARATIONS["carry_record_golden_B.json"], ["E_MANIFEST_STAGE_BINDING_CONFLICT"]),
+        ("SUPERSEDE hash mismatch", c,
+         {"training_lineage": "BC_THEN_RL", "relation": "EXPLICIT_SUPERSEDE", "demo_dataset_binding_hash": TB_A},
+         ["E_MANIFEST_STAGE_BINDING_CONFLICT"]),
+        ("lineage disagrees with frozen declaration", b,
+         {"training_lineage": "BC_ONLY", "relation": "IDENTICAL"}, ["E_BINDING_LINEAGE_MISMATCH"]),
     ]
+
+
+def _noncanonical_control():
+    """Write drifted bytes into a temp dir and assert the on-disk check fires. Never touches
+    the pinned directory."""
+    tmp = Path(tempfile.mkdtemp(prefix="wmso_d11c_nc_"))
+    try:
+        for name, record in GOLDENS.items():
+            (tmp / name).write_bytes(wcj_bytes(record))
+        target = tmp / "carry_record_golden_A.json"
+        parsed = json.loads(target.read_bytes())
+        target.write_bytes(json.dumps(parsed, separators=(", ", ": ")).encode("utf-8"))
+        failures = _verify_dir(tmp, quiet=True)
+        fired = any("E_MANIFEST_NONCANONICAL_BYTES" in f for f in failures)
+        return fired
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
+def run_controls():
+    """Run every control. Returns (fired, total, failures)."""
+    fired = 0
+    failures = []
+
+    for label, record, expected in _negative_controls():
+        codes = validate(record)
+        if codes == expected:
+            fired += 1
+        else:
+            failures.append("negative control: {} expected {} got {}".format(label, expected, codes))
+
+    for label, record, declaration, expected in _declaration_controls():
+        codes = check_against_declaration(record, declaration)
+        if codes == expected:
+            fired += 1
+        else:
+            failures.append("declaration control: {} expected {} got {}".format(label, expected, codes))
+
+    # positive controls: every golden must be conformant against its own declaration
+    for name, record in GOLDENS.items():
+        if validate(record) == [] and check_against_declaration(record, DECLARATIONS[name]) == []:
+            fired += 1
+        else:
+            failures.append("positive control failed for {}".format(name))
+
+    for label, obj, expected_text in ENCODER_VECTORS:
+        try:
+            actual = wcj_text(obj)
+        except WcjError as exc:
+            failures.append("encoder vector raised: {} ({})".format(label, exc))
+            continue
+        if actual == expected_text:
+            fired += 1
+        else:
+            failures.append("encoder vector: {} expected {!r} got {!r}".format(label, expected_text, actual))
+
+    for label, obj in ENCODER_REJECTS:
+        try:
+            wcj_bytes(obj)
+        except WcjError:
+            fired += 1
+        else:
+            failures.append("encoder did not reject: {}".format(label))
+
+    if _noncanonical_control():
+        fired += 1
+    else:
+        failures.append("non-canonical bytes control did not fire")
+
+    total = (
+        len(_negative_controls())
+        + len(_declaration_controls())
+        + len(GOLDENS)
+        + len(ENCODER_VECTORS)
+        + len(ENCODER_REJECTS)
+        + 1
+    )
+    return fired, total, failures
 
 
 # --------------------------------------------------------------------------------------
@@ -305,69 +412,65 @@ def positive_controls():
 # --------------------------------------------------------------------------------------
 
 
-def run_controls():
-    """Run every control. Returns (fired, total, failures)."""
-    fired = 0
+def _verify_dir(target, quiet=False):
+    """Parse, re-canonicalise and byte-compare every golden on disk. Returns failures."""
     failures = []
-    cases = negative_controls()
-    for label, record, expected in cases:
-        codes = validate(record)
-        if expected in codes:
-            fired += 1
-        else:
-            failures.append("negative control did not fire: {} (expected {}, got {})".format(label, expected, codes))
-    for label, record, relation, superseded in cross_artifact_controls():
-        codes = check_against_declaration(record, relation, superseded)
-        if "E_MANIFEST_STAGE_BINDING_CONFLICT" in codes:
-            fired += 1
-        else:
-            failures.append("cross-artifact control did not fire: {} (got {})".format(label, codes))
-    for label, record in positive_controls():
+    allowed = set(GOLDENS) | {"build_goldens.py"}
+    for entry in sorted(target.iterdir()):
+        if entry.name not in allowed:
+            failures.append("unexpected entry in fixture dir: {}".format(entry.name))
+    for name, record in GOLDENS.items():
+        path = target / name
+        if not path.is_file():
+            failures.append("missing fixture: {}".format(name))
+            continue
+        raw = path.read_bytes()
         try:
-            wcj_bytes(record)
-        except WcjError:
-            fired += 1
-        else:
-            failures.append("encoder control did not reject: {}".format(label))
-    total = len(cases) + len(cross_artifact_controls()) + len(positive_controls())
-    return fired, total, failures
+            parsed = json.loads(raw.decode("utf-8"))
+        except (UnicodeDecodeError, ValueError) as exc:
+            failures.append("unparseable fixture {}: {}".format(name, exc))
+            continue
+        if wcj_bytes(parsed) != raw:
+            failures.append("{}: E_MANIFEST_NONCANONICAL_BYTES".format(name))
+            continue
+        codes = validate(parsed)
+        if codes:
+            failures.append("{} is not conformant: {}".format(name, codes))
+            continue
+        if parsed != record:
+            failures.append("{} drifted from the expected record".format(name))
+            continue
+        if not quiet:
+            print("PASS {}  sha256={}  bytes={}".format(name, hashlib.sha256(raw).hexdigest(), len(raw)))
+    return failures
 
 
 def emit(target_dir):
     target = Path(target_dir)
     target.mkdir(parents=True, exist_ok=True)
     for name, record in GOLDENS.items():
+        codes = validate(record)
+        if codes:  # cycle-2 F-6/S-1 mirror: never bank a non-conformant golden
+            print("FAIL: refusing to write non-conformant golden {}: {}".format(name, codes))
+            return 1
         (target / name).write_bytes(wcj_bytes(record))
         print("wrote {}  sha256={}  bytes={}".format(name, record_hash(record), len(wcj_bytes(record))))
     fired, total, failures = run_controls()
-    print("negative controls: {}/{} fired".format(fired, total))
+    print("controls: {}/{} fired".format(fired, total))
     for line in failures:
         print("FAIL: " + line)
     return 1 if failures else 0
 
 
 def verify(target_dir):
-    """Non-destructive: recompute every golden and run every control. Never writes."""
     target = Path(target_dir)
-    failures = []
-    for name, record in GOLDENS.items():
-        path = target / name
-        if not path.is_file():
-            failures.append("missing fixture: {}".format(name))
-            continue
-        on_disk = path.read_bytes()
-        expected = wcj_bytes(record)
-        if on_disk != expected:
-            failures.append("non-canonical or drifted bytes: {} (E_MANIFEST_NONCANONICAL_BYTES)".format(name))
-            continue
-        codes = validate(record)
-        if codes:
-            failures.append("golden is not conformant: {} -> {}".format(name, codes))
-            continue
-        print("PASS {}  sha256={}  bytes={}".format(name, hashlib.sha256(on_disk).hexdigest(), len(on_disk)))
+    if not target.is_dir():
+        print("FAIL: not a directory: {}".format(target_dir))
+        return 1
+    failures = _verify_dir(target)
     fired, total, control_failures = run_controls()
     failures.extend(control_failures)
-    print("negative controls: {}/{} fired".format(fired, total))
+    print("controls: {}/{} fired".format(fired, total))
     if failures:
         for line in failures:
             print("FAIL: " + line)
@@ -377,11 +480,12 @@ def verify(target_dir):
 
 
 def main(argv):
+    # cycle-2 F-4: explicit subcommands only. No path that writes on a malformed argv.
     if len(argv) == 3 and argv[1] == "--verify":
         return verify(argv[2])
-    if len(argv) == 2:
-        return emit(argv[1])
-    print("usage: build_goldens.py <out_dir> | --verify <dir>", file=sys.stderr)
+    if len(argv) == 3 and argv[1] == "--emit":
+        return emit(argv[2])
+    print("usage: build_goldens.py --verify <dir> | --emit <dir>", file=sys.stderr)
     return 2
 
 
