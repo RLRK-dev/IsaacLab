@@ -138,6 +138,36 @@ SKILL は EE 到達閾値を持つ（例: CLAMP 2 mm）。⇒ **制御器の追�
 - **task への影響**: 目標も同じ 0.220 で作られていれば**腕と目標の一致には相殺**するが、**cable との接触は物理の世界で起きる**ので相殺しない。⇒ **どの点で閾値を評価すべきかは p5/Rs の court。**
 - ⚠ **私が確認していないこと**: 「live の acquire-grasp 成功判定が `compute_clamp_pos` を呼ぶ」は **p5 帰属**。私の `grep` では `T_DIST` の live 消費は tests / `mpc_config_ic.py` に見え、env 側の判定行は特定できていない。⇒ **p5 に live consumer の file:line を照会**（判定に効くため）。⭐ **本設計はこの未確認に依存しない** — H-4 を 3 点で出せば、どの点でも bar を立てられる。
 
+## 5.5 ⭐ H-2 着地（p0 `c16858c666`・p4 検証済・**p11 が report json を自分で読んだ**）
+
+| 出力 | 実測値 | 設計への帰結 |
+|---|---|---|
+| DOF 予測の照合 | `expected_by_p11 {arm 12, driver 4, passive 12, arm_side_total 28}` **== measured**（+ `cable_or_other 40`）・`mismatch {}`・`STOP_required false` | ✅ **§H-2.1 の宣言は実測と一致**。名前解決は `solver.mj_model + mj_id2name`（Newton Model に `joint_key` が無い build） |
+| `ζ_min`（連成・(i) 固定 12×12） | **2.857**（⭐**過減衰 ζ > 1**）。3 縮約が **0.02% 一致** | ⭐**§5.2 の dwell は単調枝**（`t_dwell ≥ k·T_lag`・**行き過ぎ無し**・節での誤判定も起きない）。⭐**縮約の選択は非重要**と実測で確定（(i) が最小＝保守側で正しい） |
+| 対角近似 `ζ_min` | **3.160**（連成 2.857 より **約 11% 楽観**） | ⛔ **対角近似を bar に使わない**（併記の理由がこれ） |
+| ⭐`T_lag` の妥当性 | ζ > 1 ⇒ **過減衰**。過減衰系の遅い根は `≈ −ke/kd` | ⭐ **`T_lag = kd/ke` は便宜的近似ではなく、実測された過減衰系の支配根**。§5.2 の `err ≈ T_lag·ω` はこの上に立つ |
+| `max|τ_bias|`（重力＋Coriolis） | **27.22 N·m** | ⭐ **gain 下限 `ke ≥ 27.22 / ε_joint`**（`ε_joint` は H-4 J-a 待ち） |
+| `λ_max(M)` | 2.393 | `a_max` の分母 |
+| ⛔⛔ `cap_used` | **1e6**（`cap_source = H-6a measured value`） | ⛔ **効力上限が実在しない（fail-open）**ことが**測定で確定**。⇒ `a_max = 417,881 rad/s²` は**算術は正しいが物理的に無意味**。⛔ **加速度余裕として使わない** |
+
+### 5.5.1 ⛔ fail-open な効力上限は **sim を非保守にする**（設計上の要処置）
+
+実機 UR5e には関節トルク上限が在るが、**build 済モデルには無い**（1e6）。⇒ **sim の方が現実より容易**になり、**§15 の非保守方向**に当たる（保守方向の FAIL は確定的に扱えるが、非保守な PASS は転移前に追加確認が要る）。
+⇒ **設計として実在の cap を課す**。⭐ **prior art をそのまま流用**: `task_config.py:316-318` 逐語「`GRIPPER_DRIVER_EFFORT_LIMIT_NM = 2.5` … **restores the force cap the tendon strip removed**」＋ 受入形「**one-frame post-clamp** `|qfrc_actuator| <= 2.5`」（rev7/rev8 で成立）。⇒ **腕にも同じ形**（定数の置き場所も受入形も既存に合わせる）。⚠ **腕の cap 値そのものは Rs / p4 court**（実機仕様の転記であり私が発明しない）。
+
+### 5.5.2 ⭐ H-4 が ABSENT の解消（**私の court** — 参照点の定義は設計側）
+
+p0 報告 = 「`pad` を含む MuJoCo body 名が無い。pad は `shape_label` に付く（`newton_skill_env_base.py:1576-1583`）ので pad→body は Newton モデル側から供給が要る」。⛔ **`wrist_3_link` で代用しなかったのは正しい**（spec が禁止）。
+
+⇒ **名前で探さず、SSOT の body index を使う**（⛔ 部分一致で探す実装にしない = §1.1.1 と同じ理由）:
+| 参照点 | 解決方法 |
+|---|---|
+| **J-a**（閾値の点） | `ee_pos + R(ee_q)·[0,0,0.220]`。**EE body = 各腕の local index 5**（`task_config.py:30` `EE_BODY_IDX = 5`）。⇒ **名前解決 不要** |
+| **J-b**（pad body） | ⭐ `task_config.py:37` **`GRIPPER_PAD_BODY_IDX = [9, 13]`**（**BODY space**・逐語「pad-carrying followers」）＋ 腕ストライド `:43` **`BODIES_PER_ARM = 14`**。⇒ world/arm ごとに `base + 9` / `base + 13`。⛔ 名前一致で探さない |
+| **J-c**（爪先） | `ee_pos + R(ee_q)·[0,0,0.2757]`（`task_config.py:321` `EE_TO_PINCH_TIP_CLOSED`）。⇒ **名前解決 不要** |
+
+⚠ **J-b は 2 body（左右の follower）**ゆえ、**どちらを取るか / 中点を取るか**を出力に明記すること（`task_config.py:320` の `EE_TO_PINCH_CLOSED` は **pinch_mid**＝中点基準の実測値ゆえ、**中点**が既存と整合）。
+
 ## 6. 数値（**測定待ち** — 決めない）
 
 | 量 | 出所 |
