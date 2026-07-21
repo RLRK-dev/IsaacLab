@@ -102,7 +102,8 @@ singleton region かつ region postcondition が自明/不在 → 通常 node �
 
 ⛔ **ABSENT セルを合成 WAIT / NOOP skill として実体化しない**（Rs 明示）。**ABSENT は実行動作ではなく、動作不在の測定値**である。型の arity を満たすためだけの充填を行わない。
 
-⚠ **紛れやすい境界（明示）:** step 14 の `hold@L` は左指が cable を実際に把持し維持している **実在の動作**であって合成ではない。対して step 12 の右腕は**何も掴んでおらず指令も無い** ⇒ **ABSENT。充填しない。**
+⚠ **紛れやすい境界（明示）:** step 14 の `hold@L` は左指が cable を実際に把持し維持している **実在の動作**であって合成ではない。
+⛔ **旧記述の訂正（pS reciprocal flag 2026-07-21 10:16・私が受諾）:** 本行の旧版は「step 12 の右腕は ABSENT」と分類していたが、これは (i) §Status で **WITHDRAWN 済みの ABSENT モデル**（canonical = 右は窓の間 approach 中・両腕とも作動）、(ii) **OPEN-B（右 lane 分類 = Rs 専権）**。⇒ step 12 の右腕分類を本 doc で断定しない。**私が pS の §3 に flag した線と同型を、自 doc にも残さない**（reciprocal 訂正）。
 
 ## 2. 現行 9 語彙の写像
 
