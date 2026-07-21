@@ -1,4 +1,15 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 02:25 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 09:08 JST
+
+> ⭐**役割改名（pane label 実測 2026-07-21 09:0x）**: **`w2:p5` = SKILL-DETAIL-DESIGN**（各 SKILL の詳細設計。旧 VT-DESIGN）／**`w2:pX` = SKILL-DESIGN**（分解・単位・語彙）。stored map を信用せず /clear 後は peek で再導出（memory の PANE ROLES 規律）。
+>
+> ⭐⭐**「Rs 判断待ち 5 件」の枠組み自体が誤りだった（Rs 指摘 2026-07-21 08:1x「これらはすでに決まっている」）**: 設計内容 = p5 がまとめる（`RL-Routing-Design.md §2` canonical）／計画 = p6 が取りまとめ／どちらも間違い得るので pQ が実測で検証。**私が決定済みを Rs 判断待ちに変換して溜めていた**。正しい切り分け（p6 の面読み・pQ が pX 文書実物で確認）:
+> - **決まっている層（表現・スキーマ・pX 委任・Rs「B」）**: 単位=片腕レーン／ABSENT 充填禁止／`ParallelRegion`=region contract scope。
+> - **Rs 専権 OPEN 層（不変前提=DUAL-ARM・委任で閉じない FOUNDATIONAL）**: ①`:1032` の DUAL-ARM 適合（文言修正=p5）／④枝数下限の **supersede**（Rs「B」(>=1) vs 後の「A 推奨」(>=2)・pX 文書 `2e5d2d7cb8:84`「CC は決めない」）／⑤右 lane 分類（`2e5d2d7cb8:151` 1-b）。**①④⑤ は 1 問に収束** = 「持ち替え窓（右腕が全開放→空中再把持、左腕は 0.002 全クランプ維持）は『neither arm dropped/parked』に適合するか」。
+> - **手続き層**: ②freeze 時期（面に未着地）／③OPS-SUP consultation（実施者 = pY・pN 停止）。
+>
+> ⛔⛔**pQ の 08:53 誤り（撤回済み・09:01）**: p5 canonical を得た勢いで pX に「A=2 以上で進めろ」と送ったが 2 つの禁を犯した — (1) supersede は「CC 決めない」のに決めようとした（越権）(2) **canonical の右腕/左保持（OPEN-B）を arity（OPEN-A）の根拠にした**（`2e5d2d7cb8:44` が明示禁止）。⭐**pX も独立に同じ推論（canonical で枝2確定）を fold する Edit の直前だった** — pQ の撤回 + p6 の catch が両方を止めた。**canonical の説得力が独立に 2 人を同じ禁止推論へ引き込み、p6 の構造的な線引きが止めた**。⇒ 教訓: **measurement の説得力 ≠ それを使ってよい問いの範囲**。OPEN-B の事実は OPEN-A に使えない。canonical motion 事実は **#5 材料としてのみ** pQ が Rs へ渡す（`2e5d2d7cb8:153`）。
+>
+> **canonical motion 事実（p5 まとめ・pQ が §2 offset 表 `:1500-1510`・`step_table.py:190-191`・`RS71:23` で実測。判定は Rs、前提として押し付けない）**: 持ち替え窓で 右=再把持へ接近中（park でない）／左=0.002 全クランプ維持（0.04 全開放にならない）／single-arm 区間ゼロ／落下禁止を success が enforce（`:1651 cable_not_dropped`）。
 
 > Pane-specific handoff (multi-pane NEST; does not clobber the shared HANDOFF.md).
 > Full detail = memory `handoff_cc_pQ_rstechlead2_wmso_d11a_freeze_2026-07-20.md`. Ground truth = frozen package + freeze record + manifest + LEDGER row44, not this narrative (§運用4).
