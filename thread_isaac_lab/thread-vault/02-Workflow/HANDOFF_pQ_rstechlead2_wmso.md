@@ -18,7 +18,15 @@
 >
 > **LEDGER 反映済**（p6・11:54。旧記述「D1.1-B は FROZEN でなく」= v7 arc voiding 時点のもので **status 上 SUPERSEDED**）。
 >
-> ⛔**push = Rs 待ち**（**FROZEN-LOCAL / CUSTODY-PENDING**・branch `rlrk/optE-s2-substrate-swap`・Rs は「freeze」のみ言及で D1.1-A の「freeze + push」と異なる）。⛔**impl / training / closed-loop authority = CLOSED 継続**。**次 = D1.1-C（artifact manifest）→ slice。着手は Rs 指示・self-start しない**。
+> ✅**push 完了 → FROZEN / CUSTODY-CLOSED**（fork `RLRK-dev/IsaacLab` へ push 済・⛔**公開漏れ無し** = origin（isaac-sim 公開）に本 branch 不在・pQ 実測確認）。**custody CLOSE の SSOT = LEDGER**（p6 `2a70cac8ba`）。
+>
+> ⚠**freeze record は FROZEN-LOCAL のまま現状維持**（pY 裁定 2026-07-21 12:11）— freeze record は**freeze 時点の custody snapshot** として正しく、current status は LEDGER が持つ。D1.1-A と同型（編集すると sha が `ef4db7aee2` から変わり LEDGER pin の追随 + churn が出る）。読み手対策は「**freeze record = 時点 snapshot / current = LEDGER**」という convention 側で解く（全 freeze record 共通の systematic 事項）。
+>
+> ⚠**parity は living branch ゆえ +N ahead が正常**: 「parity 0/0」を**現在形で**記録した commit 自身が ahead+1 を作る**自己言及**を pQ が実測（pY 受諾・custody artifact 訂正 `954d518efb`）⇒ custody は「**remote tip が frozen commit `a27bd9f1db` を含むか**」で述べる。
+>
+> ⚠**commit の帰属は author でなく内容と court で判別**（git author は全 pane 共通）: pY が `2a70cac8ba` を「pQ の作業」と誤認 → 実測で **LEDGER 1 行変更 = p6 の court** と確定（pY 受諾・同型 3 度目と自認）。p4 の DDR#34（役割名 vs node ID）と同族。
+>
+> ⛔**impl / training / closed-loop authority = CLOSED 継続**。**次 = D1.1-C（artifact manifest・U-2/U-5/U-6 を消費）→ slice。着手は Rs 指示・self-start しない**。
 >
 > ⚠**DDR#35（FOUNDATIONAL・pY 診断 02:28）が本 node の commit 様式に効く**: `validate.sh` Layer 1-3 は **staged `.py` が 0 件のとき `set -euo pipefail` で marker 未出力のまま異常終了** ⇒ **docs-only commit は必ず偽 FAIL 3 件**。⇒ 本 node の commit が全て `--no-verify` なのは**この guard 欠陥が原因**であり、規律の緩みではない。guard 修正まで継続。
 
