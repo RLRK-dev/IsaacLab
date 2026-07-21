@@ -1,4 +1,28 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 11:58 JST
+# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 12:56 JST
+
+> ## ⏳ D1.1-C `artifact_manifest` — scope prereg **two-key 完全充足 / ⛔Rs scope 承認待ち**
+>
+> **着手** = Rs 逐語「go」（2026-07-21 12:1x・D1.1-B FROZEN 直後）。**gate から順に踏んだ**（design から始めない）。
+>
+> | 段階 | 成果物 | pin |
+> |---|---|---|
+> | **[DEFER-RECON]** | `WMSO_D11C_DEFER_RECON_RSTECHLEAD2_20260721.md` | `94c3fd2195a5981a…` @ `7effeb774f` |
+> | **[L-TRIAGE]** | **L2** — 新規 file・凍結非編集・公開 API 非該当 ⇒ gate = two-key、**CC Debate は design 段**（waived ではなく deferred） | — |
+> | **prereg v1** | `WMSO_D11C_SCOPE_PREREG_RSTECHLEAD2_20260721.md` | `d9caaffcf29d9524…` @ `1860edcc1c` |
+> | **設計軸** | pS PASS | `c29b8d539db987c3…` @ `31ab0b929d` |
+> | **evidence 軸** | pY PASS（v1.1） | `fe6f79491464b0e2…`（tracked） |
+>
+> ⭐**判定の中心 = 「機構 / policy の分離」**: D1.1-C は「**何を記録し、どう区別するか（機構）**」を設計し、「**その記録を使ってどう判断するか（policy）**」を設計しない。⇒ **FOUNDATIONAL 依存は DDR #26 のみ**（汚染 banked evidence の可否・Rs 未裁定）だが、**機構はどちらの裁定でも動き、むしろ裁定を実行可能にする側**ゆえ着手可。⛔機構に選別 policy を焼き込めば裁定の先取りになるので OUT。
+>
+> ⭐⭐**凍結側に同じ線が既にあった（pS 指摘・pQ 実測確認）**: 凍結 `tensor_binding v13:376` =「U-3 は B に導入しない。**kinematic 全削除 rework 進行中につき rework 前 taxonomy を焼込まない**。data の substrate 識別 = **D1.1-C `substrate_id`**」⇒ **`substrate_id` は凍結が C へ明示 handoff した carry**であり暗黙 schema delta ではない。私の [DEFER-RECON] の判断はこれと**独立に一致**。
+>
+> **pY 検証（evidence 軸・完全 PASS）**: 凍結 **4/4 を pY 自身が独立再計算**（EP JSON の path gap は pQ が path を渡し pY が再計算して CLOSED・⚠**pQ の測定は pY の独立確認の代わりにならない**という規律を双方向で維持）／**DDR 35/35 被覆・欠落 0**（grep + comm 実測）／**OUT 過小なし**（IN 5 項は全て機構で閉じ、各 IN の policy・enforcement 対応物が正しく OUT）／L2 妥当。
+>
+> **⛔design 段へ持ち越す carry 4 件**（いずれも non-blocking・prereg は触らない = pS PASS 対象の sha を動かさないため）: **P-1** IN の「code / package・CI」の語を impl 境界に対して明確化 ／ **W-1** substrate 拒否は**不在と silent pooling のみ**で**値では弾かない**（値選別は #26 = Rs） ／ **W-2** U-6 metadata が delta-free か ／ **pY②** IN の「proof obligation 実体供給」= **obligation の設計であって proof 生成ではない**旨を design 着手時に確認。
+>
+> **prereg の IN / OUT 要旨**: IN = manifest 型定義（code/model/data/config/evaluator/EP/`substrate_id` の exact hash 結合）・`substrate_id` 必須化と区別機構・DC-3 grade 別 proof obligation の実体供給写像・minimal JCS の package 展開・**carry 機構 3 件**（U-2 pin / U-5 両段 binding 記録 / U-6 topology metadata）。OUT = 選別 policy（#26=Rs）・阻止実装・demo 再記録（p4/p0）・契約層 topology 束縛（schema delta⇒Rs review）・**合成 schema delta（pX court）**・impl/training/authority・slice・凍結 4 file 編集・**F4 腕参加の source（p5 court）**。
+>
+> ⛔**次 = Rs の scope 承認**（これで design authoring 解錠）。**self-start しない**。impl / training / closed-loop authority = **CLOSED 継続**。
 
 > ## ✅✅ D1.1-B `tensor_binding` = **FROZEN-LOCAL 完了**（2026-07-21）
 >
