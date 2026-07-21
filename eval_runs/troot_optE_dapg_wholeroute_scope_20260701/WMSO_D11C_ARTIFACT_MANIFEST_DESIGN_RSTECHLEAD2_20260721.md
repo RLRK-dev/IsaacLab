@@ -1,4 +1,4 @@
-# WMSO D1.1-C `artifact_manifest` — DESIGN **v2.2（縮小版・fixture 同梱）**
+# WMSO D1.1-C `artifact_manifest` — DESIGN **v2.4（縮小版・fixture 同梱）**
 
 - node `T-WMSO` D1.1-C／著者 = `w2:pQ` RS-TECH-LEAD2／作成 = **2026-07-21 15:5x JST**（shell 実測）
 - 系譜: **v1**（`726f684c52421928…` @ `33e67626da`）= debate cycle-1 **FAIL**（`9851f165a5fc45eb…` @ `7f6d038a30`・ACCEPT 24）→ **v2 / v2.1**（`f0ffe2e016d7302f…` @ `5e82a3326d`）= debate cycle-2 **FAIL**（`df2965a8e0d2927e…` @ `78d02f4257`・ACCEPT 16 群）→ **本 v2.2**
@@ -19,9 +19,14 @@
 | **U-6 topology metadata** | 凍結 v13 `:380`／DDR **#30** 逐語「D1.1-C prereg + 契約層閉鎖 … **pQ/Rs**」 | ⛔**本版では設計しない**（open-1） |
 | **package 全体への JCS 展開** | 凍結 v13 `:24` = prereg IN-4 | ⛔**本版では設計しない**（open-2） |
 | **版 bump 移行手続** | 凍結 v13 `:185` | ⛔**設計しない・prereg IN に無い**（open-3） |
+| **宣言↔producer code の責任 owner** | 凍結 v13 `:392`（venue = 「impl 解錠時 **or** D1.1-C prereg」） | ⛔**owner ゼロ**・impl は CLOSED（open-13） |
+| **実 binding の代表性** | 凍結 v13 `:365`「実 binding の代表性は D1.1-C の run manifest が担う」 | ⛔**設計しない**（open-13） |
+| **訓練時実次元 pin の非拘束推奨** | 凍結 v13 `:211` | ⛔**設計しない**（open-13） |
+| **v1 harness の後継**（`validate_manifest` 等・`d1_exit` HOLD guard） | 凍結 contracts_v2 `:437`「D1.1-C 後継まで」 | ⛔**設計しない**（open-13）・⭐**open-5 の retire 点を凍結が既に定めている** |
 
 ⛔**本版が設計しないもの（完全列挙）**: prereg §2 **IN-1（manifest 型の全体）／IN-3（grade 別 proof obligation の供給写像）／IN-4（JCS package 展開・CI）／IN-5 のうち U-2・U-6**。
 ⇒ ⭐**本版で D1.1-C は閉じない**。
+⚠⚠**cycle-3 G-5**: **IN-2 も部分履行**である。prereg IN-2 逐語は「異なる substrate の silent pooling を**禁止**する（検出・拒否の code を含む）」だが、§3 は「黙って混ざらない」の保証を**撤回**した（open-9）。⇒ 「設計する 2 件」は正確には **1 件 + 部分 1 件**。⚠ なお**承認済 prereg 自身も §3 OUT-1 で substrate policy を DDR #26 に帰属**させており（§3 と同じ誤同定）、これも未 surface だった（open-14）。
 
 **選抜の基準（前提の確かさ）**: 設計する 2 件の前提は**凍結の逐語のみ**で、いずれも実測済み・**未裁定の policy に非依存**。設計しない項目は §8 の未決（repo 内の別 canonicalization ／ Rs 判断 (a)(b)(c) ／ 前提訂正後の供給写像の再導出 ／ 版 bump の scope 欠落）に乗る。
 ⚠**過小履行も scope 逸脱である**（cycle-2 F-10）⇒ **縮小の可否は Rs 判断 (c)＝open-11**。
@@ -40,7 +45,7 @@
 ⚠**cycle-2 F-9 の訂正**: v2.1 はここで「限局している」「load-bearing でない」と**私が判定していた**。誤前提を出した側にその誤りが immaterial だと決める standing は無い。**以下は実測事実のみを置き、推論は Rs へ渡す。**
 
 - 凍結 v13 **`:256`**（D-1..D-4 選定表・`B1D-A`）逐語「`proof_policy._domain` = 「exact required ProofKind set」＋ `E_PROOF_KIND_FOREIGN`」。同行に「**D-3 に合流**」も在る。
-- 凍結 v13 **`:471`** は同旨の再掲で「kind」の語を含まない。
+- 凍結 v13 **`:471`** は同旨の再掲だが、集合の呼び方が「exact **required ProofKind** set」ではなく「**exact set**」と縮約されている（⚠ v2.2 は「「kind」の語を含まない」と書いたが `E_PROOF_KIND_FOREIGN` は同行に在り**逐語で偽**だった＝ cycle-3 G-13）。
 - 凍結 v13 **`:252`**（D-1 の採択理由）= 「frozen delta 不要／1 hop／B 側宣言 1 個／contracts_v2 `:396` の provenance 意味論適合」— **proof kind 集合への言及なし**。
 - 凍結 v13 **`:258-262`**（D-1 の反証条件 4 件）= `source_ref` 意味論／registry 衝突／resolver 到達性／1 hop — **proof kind 集合への言及なし**。
 - 当該 arc は B1 = D-1 採択に接続し、**Rs ratify 2026-07-20 21:44** が乗っている。
@@ -67,7 +72,7 @@ class StageBindingRecord:                        # 注: 型注釈は PEP-604 を
 ⚠**cycle-2 F-8 の訂正**: v2.1 は `NOT_APPLICABLE` で execution 段も null 必須としていたが、**凍結 v13 `:166` が null を要求するのは bc 段のみ**であり、SCRIPTED/WAIT が KNOWN な `tensor_binding` slot を持つ構成は契約上正当（EP JSON `:29`）。旧規則は**正直な記録を false-reject** していた。
 
 - **凍結 declaration との突合**（凍結 v13 `:158-166`）:
-  - ⭐**lineage 整合（cycle-2 F-6 で追加）**: 記録の `training_lineage` == 凍結 `LineageBindingDeclaration.training_lineage`。不一致 = **凍結 `E_BINDING_LINEAGE_MISMATCH` を再利用**（v13 `:230`・新 code を作らない）。⚠ これが無いと **DEMO_PLUS_RL の run が `NOT_APPLICABLE` を名乗って両段 null で通り、U-5 が 0 code で破られる**（cycle-2 実証）。
+  - ⭐**lineage 整合（cycle-2 F-6 で追加）**: 記録の `training_lineage` == 凍結 `LineageBindingDeclaration.training_lineage`。不一致 = **凍結 `E_BINDING_LINEAGE_MISMATCH` を再利用**（v13 `:230`・新 code を作らない）。⚠⚠**cycle-3 G-6 の宣言**: 凍結 `:171` は同 code を **`TrainingProvenance.training_lineage` との比較**に定義し、`:230` は **certify 時**の cross-artifact 検査に置いている。本版は **別 operand（`LineageBindingDeclaration`）・別発火点（C 側 record 検査）**で用いる ⇒ **凍結 code の適用域を広げている**。「新 code を作らない」を満たす代わりに凍結の意味に触れる決定であり、**Rs 判断へ回す**（open-15）。⚠ これが無いと **DEMO_PLUS_RL の run が `NOT_APPLICABLE` を名乗って両段 null で通り、U-5 が 0 code で破られる**（cycle-2 実証）。
   - `relation == IDENTICAL` ⇒ 両 field 非 null かつ相等。
   - `relation == EXPLICIT_SUPERSEDE` ⇒ bc 段 == 凍結 `TensorBindingSpec.lineage_declaration.bc_stage_binding.demo_dataset_binding_hash`（⚠ **dataset の content hash とは別物**・v2.1 の短縮 path 表記は凍結に存在しなかった＝ cycle-2 F-16 訂正）。
   - 不一致 = `E_MANIFEST_STAGE_BINDING_CONFLICT`。
@@ -95,7 +100,7 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 ## 4. 直列化と hash
 
 - **凍結 §2 WCJ を適用**（新 canonicalization を作らない）＋ 凍結 v13 `:24` の B-declared 3 規約を継承。
-- ⚠⚠**cycle-2 F-13 の訂正 — 直列化器は並べ替えない**: v2.1 は「集合として正規化」と書いたが、**実装も凍結規約も array を並べ替えない**（凍結 `:178` の bytes 昇順は **frozenset** 型の規則で、本 field は列）。本版は **順序を検証（拒否）で担保**する。⇒ ⚠**validate を通さずに hash する producer は同じ集合から別の byte 列を出せる**（open-10）。
+- ⚠⚠**cycle-2 F-13 の訂正 — 直列化器は並べ替えない**: v2.1 は「集合として正規化」と書いたが、**実装も凍結規約も array を並べ替えない**（凍結 **contracts_v2** `:178` の bytes 昇順は **frozenset** 型の規則で、本 field は列。⚠ v2.2 は host を落としており、直前の引用が v13 だったため **v13:178 と誤読され得た**＝ cycle-3 G-13）。本版は **順序を検証（拒否）で担保**する。⇒ ⚠**validate を通さずに hash する producer は同じ集合から別の byte 列を出せる**（open-10）。
 - **時刻を hash preimage に入れない**。⚠ v2.1 は「付随 metadata に置く」と書いたが**その置き場が存在しなかった**（cycle-2 F-16）⇒ **本版は時刻を記録しない**。
 - **配布 bytes は canonical bytes と byte 一致であること**（`E_MANIFEST_NONCANONICAL_BYTES`）。⚠**検出であって阻止ではない**。実行箇所 = §7 の `--verify`（**parse → 再正規化 → byte 比較**。v2.1 は parse せず file 内定数と比較するだけで**自己証明**だった = cycle-2 F-3）。
 
@@ -105,12 +110,13 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 ＋ **`E_RECORD_SHAPE`**（key 集合・型・enum member・64-hex の shape 違反。⚠ v2.1 は「decoder ゆえ code でない」と処理していたが**実装が code として発している** = cycle-2 F-12）
 ＋ builder 側 1: `E_MANIFEST_NONCANONICAL_BYTES`
 
-- **再利用（新設しない）**: lineage 不整合 = 凍結 `E_BINDING_LINEAGE_MISMATCH`／解決不能・sha 不一致 = 凍結 `E_PROOF_ARTIFACT_UNRESOLVED`。
+- **再利用（新設しない）**: lineage 不整合 = 凍結 `E_BINDING_LINEAGE_MISMATCH`（⚠ 適用域拡張 = §2 の G-6 宣言）。⚠⚠**`E_PROOF_ARTIFACT_UNRESOLVED` の記載は撤回**（cycle-3 G-13）: 本版の記録には解決すべき artifact 参照 field が無く、**実装も control も存在しない** ⇒ **宣言のみの到達不能 code** だった。後続版が artifact 参照を持ったときに再掲する。
 - ProofKind enum の出典 = **contracts_v2 `:236-240`**。
 
 ## 6. Reuse gate（AGENTS.md「Reuse / official-specification gate」）— repo に対して実行
 
-- ⭐**未決の衝突（open-5）**: `thread_isaac_lab/wmso/d1/identity.py:80-82` の `canonical_json()` = `json.dumps(sort_keys=True, ensure_ascii=False, separators=(",",":"))` は **凍結 WCJ と別物**。⭐**本版の encoder vector がこれを判別する**（§7）: 同一入力に対し WCJ = `{"😀":2,"！":1}` ／ `sort_keys=True` = `{"！":1,"😀":2}`（pQ 実測）。⇒ **どちらが正かは本版では決めない**（owner を付けることが freeze の前提 = open-5）。
+- ⭐⭐**cycle-3 G-4 で読みが変わった — 「未決」ではなく「非適合」の可能性が高い**: 凍結 **contracts_v2 `:168`** が key 順を逐語で決めている（「object key sort = UTF-16 code unit 順（`k.encode("utf-16-be")` bytes 昇順）」）。⇒ 下記 2 site は**凍結規則に非適合**であり、対等な候補ではない。さらに **D1.1-B fixture の `wcj_bytes` も同じ挙動**＝ **凍結 chunk 内の非適合**（§1.1 と同型の凍結波及・未上程だった）。⇒ 実態は「3 実装が併存」ではなく「**2 挙動 / 3 site で、凍結に適合しているのは本版のみ**」。⚠ 現行 corpus は全 ASCII ゆえ差は **latent**。
+- **旧記述（open-5）**: `thread_isaac_lab/wmso/d1/identity.py:80-82` の `canonical_json()` = `json.dumps(sort_keys=True, ensure_ascii=False, separators=(",",":"))` は **凍結 WCJ と別物**。⭐**本版の encoder vector がこれを判別する**（§7）: 同一入力に対し WCJ = `{"😀":2,"！":1}` ／ `sort_keys=True` = `{"！":1,"😀":2}`（pQ 実測）。⇒ **どちらが正かは本版では決めない**（owner を付けることが freeze の前提 = open-5）。
 - ⚠ 同 node には D1.1-B fixture の `wcj_bytes` も在り、**正規化の実装は 3 つ**（cycle-2 F-16）。
 - ⛔⛔**引用面の注意（cycle-2 F-7）**: `./isaaclab.sh -p` が非零 exit を隠す旨を記す **AGENTS.md の当該記述は、本 pin 時点で commit されていない**（`git show HEAD:AGENTS.md` に 0 hit／working tree に 1 hit／`git status` = ` M AGENTS.md`・pQ 実測）。⇒ **本 doc は当該記述を「on-disk as-read」としてのみ引用**し、committed 典拠としては引かない。⚠**本 session で 3 度目の同型**（`CLAUDE.md` 未 commit 統治 = DDR #35 と同族）⇒ **open-7 として面へ surface する**。
 
@@ -132,8 +138,8 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 - ⛔**argv guard（cycle-2 F-4）**: subcommand は `--verify <dir>` / `--emit <dir>` のみ。**引数落ち・flag 落ちは rc=2 で何も書かない**（実測）。v2.1 は `--verify` 単独で `--verify` という名の dir を作って書き込み rc=0、`<dir>` 単独で **banked golden を上書き**していた。
 - ⛔**fail-closed 実行コマンド（事前登録・C 側で実測）**:
   ```
-  env_isaaclab/bin/python eval_runs/troot_optE_dapg_wholeroute_scope_20260701/wmso_d11c_fixtures/build_goldens.py \
-      --verify eval_runs/troot_optE_dapg_wholeroute_scope_20260701/wmso_d11c_fixtures
+  /home/rlrk/IsaacLab/env_isaaclab/bin/python /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/wmso_d11c_fixtures/build_goldens.py \
+      --verify /home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/wmso_d11c_fixtures
   ```
   **実測**（非 canonical bytes を注入し、**sha が `ce474f3ad393767a` → `555ffe870dc6e899` に実際に変化したことを確認してから**測定）:
 
@@ -143,7 +149,7 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
   | `./isaaclab.sh -p` | ⛔**0（fail-open）** |
 
   ⚠**v2.1 の表は `env_isaaclab7/bin/python` を相対 path で書いており、repo 直下からは rc=127**（cycle-2 F-16）⇒ 絶対 path に訂正。復元後 sha 一致・clean rc=0・4/4 PASS・33/33 fired を実測。
-- ⛔**builder が検査しないもの**: JCS escape の全域／duplicate key（Python dict で表現不能）／非 BMP key の全域。**WCJ 完全性は impl の `canonicalize()` leg**。
+- ⛔**builder が検査しないもの（cycle-3 の mutation 研究 40 件で実測・G-7/G-13）**: JCS escape の全域／duplicate key（Python dict で表現不能）／非 BMP key の全域／⚠**`--verify` の on-disk leg のうち byte 比較以外（予期しない entry・欠落 file・期待 record 比較・失敗の伝播）に control が無い**（単点欠陥 5 件が 33/33 のまま生存）／⚠**argv guard に control が無い**／⚠**`emit()` が非原子**（不適合 golden の直前まで上書きしてから拒否）／⚠**`33` は assert されない**（`fired == total` を検査していない）／⚠**encoder の reject は値側のみで key 側は未検査**（lone surrogate key は `UnicodeEncodeError` で落ちるが `WcjError` ではない）。**WCJ 完全性は impl の `canonicalize()` leg**。
 - ⚠**代表性を主張しない**（合成物・型網羅が目的）。
 
 ## 8. Open points（⛔`open = 0` を宣言しない）
@@ -159,9 +165,17 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 9. **`dataset_substrate_ids` の網羅性は記録単体から判定不能**（producer の義務）。
 10. **直列化器は並べ替えない** ⇒ validate を通さない producer は同一集合から別 byte 列を出せる（§4）。
 11. ⛔**Rs 判断 (c) = 承認済 scope（IN 5 項）を 2 項へ縮小してよいか**（cycle-2 F-10・custody §4）。
-12. **prereg §4 carry の残り**: ②#28 ④#30 は open-1 に、③**#29 = demo 再記録**（198 demo）⑤**#31 = trainer 実在**は本項に保持。⇒ **`portfolio_has_IL` は本 chunk 完了だけでは true にならない**。
+12. **prereg §4 carry の残り**: ②#28 ④#30 は open-1 に、③**#29 = demo 再記録**（198 demo）⑤**#31 = trainer 実在**は本項に保持。⇒ **`portfolio_has_IL` は本 chunk 完了だけでは true にならない**。⚠ carry ①#26（選別 policy 非焼込）は §3 で恒久遵守中（討議で数え落としていた）。
+13. **凍結の名指し委任 4 件を本版が扱っていない**（§0 追加分）: v13 `:392`（**owner ゼロ**）／`:365`／`:211`／contracts_v2 `:437`。**owner = Rs（`:392` の venue 指名）／後続版（他 3 件）**。
+14. **承認済 prereg §3 OUT-1 も DDR #26 を誤同定している**（§0）。**owner = Rs / pS**。
+15. **凍結 `E_BINDING_LINEAGE_MISMATCH` の適用域拡張**（§2 の G-6 宣言）。**owner = Rs**。
+16. **v2.1 で無処置に消えた open 2 件を復活**（cycle-3 G-13）: ①**run をまたぐ pooling を宿す object が承認済 scope に無い** ②**`IDENTICAL` の等値検査は execution 段 hash の複写でも通る**（cycle-1 A-7 の捏造経路。⚠ 凍結が委任したのは「両段に同一 hash を記録していることの照合」ゆえ、解決可能性の要求は**凍結を超える強化**＝上程事項）。**owner = pS / Rs**。
+17. **pS / pY の受諾済 carry を本文に明記していなかった**（cycle-3 G-9）: **P-1** =「**code = error-code / 拒否規則の *設計*・package / CI = 構造と check の *仕様*（build でない）**」⇒ 本版は 21KB の実行可能 builder を bank しているため**特に明記が要る**（bank 自体は D1.1-B 先例あり）／**W-2** = U-6 の delta-free 確認（U-6 は本版の外＝open-1）／**pY note-2** = IN-3 は obligation の設計であって proof 生成ではない（IN-3 は本版の外）。
+18. **本 design が引く Rs 逐語は CC1 の transcription**（custody §5）。**byte 忠実性は独立検証されていない**／**Rs 拒否権は残る**（approval custody §4）。⇒ 本版の authoring 自体が未承認扱いに戻り得る。
 
 ## 9. 版歴
+
+- **v2.4**（本版・18:0x）= cycle-3 の doc 側 G-3〜G-13 を fold。§0 に**未扱いの凍結委任 4 件**と **IN-2 部分履行**を追記／§1.1 の `:471` 逐語を訂正（v2.2 の記述は**逐語で偽**だった）／§2 で**凍結 code の適用域拡張を宣言**し Rs へ／§4 の `:178` に host を復元／§5 で **`E_PROOF_ARTIFACT_UNRESOLVED` の記載を撤回**（到達不能）／§6 で **open-5 を「未決」から「非適合の是正」へ読み直し**（D1.1-B fixture の非適合も明記）／§7 の「検査しないもの」を **mutation 研究の実測**で拡張・登録コマンドを絶対 path 化／§8 を **18 件**にし owner を付与。⚠**Rs 判断 (c) の framing 訂正は routing `e699aa86ac02e001…` @ `1c77a24430` 側で実施済**（「scope 縮小の可否」→「部分版 two-key の可否 / open-freeze の可否」）。
 
 - **v2.3**（15:5x 追補）= cycle-3 の計器 2 件を修正。①**登録済コマンドが `__pycache__` で rc=1 になる偽 FAIL**（`sys.dont_write_bytecode` は import 経路では無効 = DDR #35 と同型）⇒ 許可 entry に追加。②**協調改竄が rc=0 で通る**（builder 内定数だけが oracle だった）⇒ **golden 4 本の pin 済 digest を builder に埋め込んで照合**。実測: `__pycache__` 有りで rc=0 / 33/33 / 4/4、協調改竄で rc=1、非 canonical control も発火。⚠ **cycle-3 の残り（doc 側 G-3〜G-13）は未 fold**。
 
