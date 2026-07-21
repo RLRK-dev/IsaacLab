@@ -146,13 +146,14 @@ predicate_input = project(joint_snapshot, RegionPostconditionSpec.required_belie
 
 ## 5. 未解決・依存
 
-1-a. ✅ **CLOSED — 表現の問い（Rs 裁定 2026-07-21 =「B」）**。`ParallelRegion` = region contract scope（`branch_count >= 1`）と確定 ⇒ step 9・12・20・28・36 は **single-branch region ＋ region postcondition** で表す（§1-1）。合成 WAIT/NOOP による充填は行わない。branch 数下限・singleton hash 意味論・ABSENT の graph projection 規則が同時に確定。
+1-a. ⛔ **OPEN — 枝数（下限）の表現（Rs 専権）**。Rs の早い時点の「B」（`branch_count >= 1`）と、後の詳細分析「並行演算子 / `branch_count >= 2` / singleton なし」の、どちらが最終かの supersede は **未確定で CC は決めない**（§Status の OPEN-A・§1-1 SUSPENDED と一致）。⛔ **以前ここを「CLOSED（B で確定）」と書いていたのは、§1-1 を SUSPENDED にした時に直し忘れた不整合で、訂正した**（p6 発見・pQ relay・2026-07-21 09:01）。合成 WAIT / NOOP による充填をしない点だけは、枝数と独立に確定。
 
-1-b. ⛔ **OPEN — 不変前提適合の問い（Rs 専権・未裁定）**。43-step の step 9・12・20・28・36 で右腕が保持も指令もされないこと（`HALF_UNCLAMP_RELEASE` の R 全開放から `AERIAL_REGRASP` の再把持までの窓）が、**RS71 §0#1 DUAL-ARM（逐語「neither arm is dropped/parked」）に適合するか**は未判定。
-⚠ **裁定 B はこれを閉じていない**（pQ 指摘 2026-07-21 02:04、私が受諾）。「充填するな」は**表現をそのまま受け入れる**指示であって、**その表現が不変前提に適合するという判定ではない**。⇒ **本書の初稿は本項を「CLOSED」と記載していたが over-close であり訂正した。**
-⭐ **本項が閉じないことには識別上の意味がある**（pQ）: もし ABSENT を合成 WAIT で埋められたら、claim ベースの DUAL-ARM 検査は **vacuously PASS** する（何も掴んでいない腕を「claim している」と宣言する単位を型充填のために置けるため）。⇒ **充填禁止が検査の識別力を保っている。**
+1-b. ⛔ **OPEN — DUAL-ARM 適合（Rs 専権・未裁定）**。窓（`HALF_UNCLAMP_RELEASE` の R 全開放から `AERIAL_REGRASP` の再把持まで）が RS71 §0#1（逐語「neither arm is dropped/parked」）に適合するかは Rs の判定。
+⭐ **canonical の motion 事実（p5 = SKILL-DETAIL-DESIGN 権威・pX 自己検証 2026-07-21 08:56）**: 窓の間、右腕は**再把持へ approach 中**（park ではない）・左腕は**保持継続**（`ReClamp(L)` の全クランプ 0.002 を維持）・**single-arm 区間なし**。根拠 = `RL-Routing-Design.md` offset 表 :1500-1510 / `step_table.py` :190-191 / `RS71:23`（いずれも自分で読んで確認）。
+⛔ **この事実は #5（右 lane 分類 = 本 1-b の材料）にのみ使い、#4（枝数 = 1-a）の根拠に使わない**（§Status「OPEN-B must not be used as the evidentiary premise for OPEN-A」）。pQ が Rs へ #5 材料として渡す。⚠ **2026-07-21 09:01、この事実を #4 の根拠にしかけた**（pQ の「A で進めろ」を私が採ろうとした）が、pQ 自身が撤回し p6 が捕まえた — まさに:44 が禁じる線。今日 11 件目の相互訂正。
+⭐ 「中身が空のまま PASS する（充填で腕を偽装できる）」懸念は充填禁止で保たれる（pQ）。canonical では窓に ABSENT セルが無い（両腕とも作動）ので、以前の ABSENT 前提の記述は撤回済み（§Status WITHDRAWN）。ただし **この撤回も #4 の根拠にしない**（同上）。
 2. **F4（腕参加が機械宣言されていない）** — `skills/*.py` に参加/所有語彙 0 hit、v1 manifest 9 行 8 field に該当 field 皆無。RL step は per-arm command field が全て `None` で、腕差の根拠は description 文字列のみ。
-3. `RL-Routing-Design.md:1032`「排他的単腕」の扱い（p5 所管 / 不変前提は Rs）。
+3. `RL-Routing-Design.md:1032`「排他的単腕」= §2 本文（両腕・offset 表）と食い違う古いラベルで、R/L 割当も異なる（pQ が p5 照会 + 独立検証で確認・2026-07-21）。信頼しない。修正は Rs 専権（pQ が flag 済）。
 
 ## 6. 所管
 
