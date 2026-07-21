@@ -33,9 +33,18 @@
 
 ## 4. ⛔ 本 note が述べないこと
 
-- ⛔**採択 D-1 の帰趨を判定しない**（= Rs 判断 **(b)**・未裁定）。pQ・pS・pY のいずれも「覆る」とも「不変」とも宣言していない。誤前提を出した側にその誤りが immaterial だと決める standing は無いため。
+- ⚠**更新（2026-07-21 20:2x）**: 旧記述「⛔採択 D-1 の帰趨を判定しない（= Rs 判断 **(b)**・未裁定）」は、**(b) が 2026-07-21 19:35 に Rs 裁定された**ため現況と異なる。逐語「**落選した案を却下した理由に誤りがあったとき、採択された案は再度候補にかくさげ**」⇒ **D-1 は 採択 → 候補・B1 は OPEN**（custody `WMSO_RS_RULING_B_D1_DEMOTION_CUSTODY_20260721.md` `a9e6624a304b7f4b…` @ `3ce6d432f8`）。⭐**本 note が判定を控えたこと自体は正しく、判定したのは Rs である**（pQ・pS・pY のいずれも判定していない）。
 - ⛔**凍結物の status を変えない**。D1.1-B は **FROZEN / CUSTODY-CLOSED のまま**。
 - ⛔**freeze record を編集しない**（同 record 逐語「**DESIGN v13 / builder / fixture は status 更新のためにも再編集しない**」）。**freeze record = 時点 snapshot / 現況 = LEDGER** という既存 convention に従う。
+
+### ⭐ 帰結 — 凍結 v13 本文の「B1 = 採択」記述をどう読むか（**既存 convention の適用**・pQ 判断・pS 検証待ち）
+
+凍結 v13 は本文 4 箇所で D-1 を採択として述べる（pQ 実測・**読むだけ**）: `:248`「採択 = D-1」／`:252` 表の ✅採択 ／`:397`「hash 供給 locator = **CLOSED 確定**（D-1 採択）」／`:470`「採択 = D-1」。**(b) 裁定により、これらは現況と一致しない。**
+
+- ⛔**凍結物は編集しない**（Rs 裁定 (a) = B）。⇒ **4 箇所は freeze 時点の snapshot として読む。**
+- ⭐**現況の所在 = LEDGER**（DDR #27 = **REOPENED → OPEN** @ `175cfea80d` ／ 行 58 に (b) 反映済）。
+- ⚠**新しい規則を作っていない** — freeze record について pY が 2026-07-21 12:11 に定めた「**時点 snapshot / 現況 = LEDGER**」convention（本 note §4 末尾に既載）を、**凍結 design 本文へ同型に適用しただけ**である。
+- ⛔**本 note では主張しないこと**: **D-3 の候補復帰**（同 custody §4-B `3cf24be3023bcb7d…` @ `8f6b3718ee`）は **pQ 判断・pS 検証待ち**であって、本 note の帰結ではない。
 
 ## 5. 検証の所在（本 note 自身は未検証）
 
@@ -48,5 +57,6 @@
 ## 6. 参照させる面
 
 - `00-DESIGN-STATUS-LEDGER.md`（D1.1-B 行 + §DDR）から本 note を指す — **反映は p6 court**。
-- D1.1-C design v2.4 §1.1 は本 note を一次参照とする。
+- D1.1-C design **v2.5.1** §1.1 は本 note を一次参照とする（`97bfda4355b4fc3d…` @ `878b97bc2f`）。
+- **DDR #27**（B1-locator）= **REOPENED → OPEN**（@ `175cfea80d`）— 上記「帰結」節と対。
 - routing `WMSO_D11C_RS_ROUTING_20260721.md` の **(a) = 裁定済（B）**。
