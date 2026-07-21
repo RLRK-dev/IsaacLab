@@ -26,7 +26,7 @@ session_history:
     started_at: 2026-07-20T20:01:09+09:00
     note: "Rs 承認 (node 作成 + 起動、2026-07-20) により起票。[DEFINE] = 00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md @ 14a891d256。既往 c4-c48 は §3 adopted_existing_arc provenance であり本 session の成果ではない。起票時点 = step2 CLOSE / step3 docs-records-only OPEN。"
 created: 2026-07-20T20:01:09+09:00
-last_updated: 2026-07-21T09:18:40+09:00
+last_updated: 2026-07-21T09:26:39+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -44,7 +44,7 @@ p4/p5/pN/p6 の分業**を持つため、LEDGER 行 + DDR #25 だけでは **構
 
 ## 1. 責任分離（lane）
 
-- **design owner:** p5 SKILL-DETAIL-DESIGN — charter `ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md`
+- **design owner:** ⛔**要再割当 (2026-07-20 Rs 裁定の反映・pY 指示 07-21 09:23)** — p5 は **(d) arm-control charter 全体を 2026-07-20 に剥奪** (memory `project-p5-scope-narrowed-to-skill-detail-2026-07-20`:20 逐語「p5 から外れた: control-method・(d) charter 全体」)。**後継 = control-method 引継先 Rs 指定待ち** (pY surface 済)・**近時実行 = p4**。〔⚠07-21 の name-only 改名 (VT-DESIGN→SKILL-DETAIL-DESIGN) は p5 が担当を失っていたため誤り = 本行で訂正 (改名は担当を保持している時のみ妥当・失った node では stale を強める)〕 charter `ARM_CONTROL_REMEDIATION_D_CONTROLDESIGN_VTDESIGN_20260719.md`
 - **build / execute:** p4 RS-TECH-LEAD（worktree `probe/pd1-arm-pd`）
 - **independent verifier:** pN OPS-SUP-CODEX（証拠・custody 軸）
 - **Vault / current-state custody:** p6 PLAN-KEEPER
