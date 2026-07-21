@@ -4,7 +4,7 @@
 >
 > **移動①②完了**: ①**D-3 の判断 = 候補へ復帰**（custody §4-B `3cf24be3023bcb7d…` @ `8f6b3718ee`）。却下脚は **1 本のみ**で、それが**比較の結果に依存する形**（「他に手段がある以上」= **採択された案**）。採択案は現在 **0 件**ゆえ脚が空。弱読み（「他候補が在る以上」）でも「（最小変更）」は**順位付けの基準であって除外の基準でない** ⇒ 順位付けをやり直す場でしか使えない。⇒ **生きた却下脚 0 で再選定へ入る**。②**凍結 v13 本文の「採択 = D-1」4 箇所（`:248`/`:252`/`:397`/`:470`）= freeze 時点の snapshot として読む**（pY の freeze-record convention の**同型適用**・新しい規則を作っていない）。記録 = 訂正 note `dffab3667b77d292…` @ `3c60d710fc`・⭐**凍結物は無傷** `5a1874d3be8b98b8…`（毎 commit 前後で実測）。
 >
-> ⭐**pS 設計軸 = PASS（20:21）** 3 点成立: (1) 却下脚の比較依存 (2) **順位づけ = pQ 権限内 / 採択 = 権限外**（委譲 `:41`/`:55`/`:99` が D-3 を除く） (3)「委譲そのものは生きている」は **pQ の inference と正しく flag**（確定は evidence/Rs）。⚠ 記録 `6b29bd60ed554b34…` は **untracked** — pS へ bank 依頼済。⛔**banked commit が付くまで anchor に引かない**（pN B1 の「pS record が working-tree only」HOLD と同型）。
+> ⭐**pS 設計軸 = PASS（20:21）** 3 点成立: (1) 却下脚の比較依存 (2) **順位づけ = pQ 権限内 / 採択 = 権限外**（委譲 `:41`/`:55`/`:99` が D-3 を除く） (3)「委譲そのものは生きている」は **pQ の inference と正しく flag**（確定は evidence/Rs）。✅ 記録 `6b29bd60ed554b347a0ebe1bc9bfcd4a9078a67d29511d5a5162bb586f506336` @ `a1c0d13daa` = **banked**（pQ 独立実測: **commit 時 sha == worktree sha == pS 申告 sha の三者一致**・tracked/clean・1 file 53 行）⇒ **anchor に引ける**。⚠ 当初 untracked だったのを pQ が検出 → bank 依頼（pN B1 の「pS record が working-tree only」HOLD と同型ゆえ）。⚠pS 自身の注記: 本 bank は**自 record の persist であって設計の landing ではない**。
 >
 > ⭐**候補集合 = {D-1, D-3}** — 「rank 2 への proof kind 追加」は add-require ゆえ **D-3 の一形態**で独立候補でない（pS 一致）。D-2 / D-4 は**内在的**却下ゆえ生存（脚 1 型の失効が及ばない。⚠「誤りを見つけられなかった」であり「無い」ではない）。
 >
