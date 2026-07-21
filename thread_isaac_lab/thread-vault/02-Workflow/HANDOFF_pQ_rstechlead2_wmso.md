@@ -24,7 +24,7 @@
 >
 > ⛔**次 = Rs の scope 承認**（これで design authoring 解錠）。**self-start しない**。impl / training / closed-loop authority = **CLOSED 継続**。
 >
-> ⚠**2026-07-21 13:5x — Rs 発話「承認」の範囲を同一ターンで確認済（二択を構造化提示）= 「p6 への relay のみ」**。⇒ **D1.1-C scope は未承認のまま / design authoring 未解錠 / self-start 禁止 継続**。relay = LEDGER 行 58 へ「prereg 二鍵充足・Rs scope 承認待ち」の反映依頼（p6 court・13:57 送達確認済）。⛔**この「承認」を scope 承認として下流で引かないこと**（短い human 発話の指示対象は、直前の依頼 1 件に限る）。
+> ⚠**2026-07-21 13:5x — Rs 発話「承認」の範囲を同一ターンで確認済（二択を構造化提示）= 「p6 への relay のみ」**。⇒ **D1.1-C scope は未承認のまま / design authoring 未解錠 / self-start 禁止 継続**。relay = LEDGER 行 58 へ「prereg 二鍵充足・Rs scope 承認待ち」の反映依頼（p6 court・13:57 送達確認済）→ ✅**反映済 `2795712862`**（p6・1 file 1 行・fence 分離記載）＋ **帰属訂正 `6141347cb4` + `0a4846a0d8`**（誤記「p4 relay」→ pQ relay 13:57。pQ が per-version 計数で L58 = 0 / L57 = 13 不変を実測確認）。⛔**この「承認」を scope 承認として下流で引かないこと**（短い human 発話の指示対象は、直前の依頼 1 件に限る）。
 
 > ## ✅✅ D1.1-B `tensor_binding` = **FROZEN-LOCAL 完了**（2026-07-21）
 >
