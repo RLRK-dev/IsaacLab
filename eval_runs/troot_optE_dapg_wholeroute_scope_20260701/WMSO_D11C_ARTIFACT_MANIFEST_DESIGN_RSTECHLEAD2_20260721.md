@@ -1,4 +1,4 @@
-# WMSO D1.1-C `artifact_manifest` — DESIGN **v2.4（縮小版・fixture 同梱）**
+# WMSO D1.1-C `artifact_manifest` — DESIGN **v2.5（縮小版・fixture 同梱）**
 
 - node `T-WMSO` D1.1-C／著者 = `w2:pQ` RS-TECH-LEAD2／作成 = **2026-07-21 15:5x JST**（shell 実測）
 - 系譜: **v1**（`726f684c52421928…` @ `33e67626da`）= debate cycle-1 **FAIL**（`9851f165a5fc45eb…` @ `7f6d038a30`・ACCEPT 24）→ **v2 / v2.1**（`f0ffe2e016d7302f…` @ `5e82a3326d`）= debate cycle-2 **FAIL**（`df2965a8e0d2927e…` @ `78d02f4257`・ACCEPT 16 群）→ **本 v2.2**
