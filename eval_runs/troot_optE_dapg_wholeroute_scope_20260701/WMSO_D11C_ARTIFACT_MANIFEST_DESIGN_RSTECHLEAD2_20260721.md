@@ -1,191 +1,122 @@
-# WMSO D1.1-C `artifact_manifest` — DESIGN v1
+# WMSO D1.1-C `artifact_manifest` — DESIGN **v2（縮小版）**
 
-- node `T-WMSO` D1.1-C／著者 = `w2:pQ` RS-TECH-LEAD2／作成 = **2026-07-21 14:2x JST**（shell 実測）
-- **解錠根拠** = Rs scope 承認（逐語「進んで」・custody `WMSO_RS_D11C_SCOPE_APPROVAL_CUSTODY_20260721.md` sha256 `2b64a66352ce5f50…` @ `d57ec90df1`）。⚠**解錠範囲の切り分けは CC1 の解釈**（同 custody §4）
-- **scope の正** = `WMSO_D11C_SCOPE_PREREG_RSTECHLEAD2_20260721.md`（`d9caaffcf29d9524…` @ `1860edcc1c`）§2 IN / §3 OUT。本 doc は IN の外へ出ない
-- **土台（凍結・編集しない）**: contracts_v2 `00192d20ca00b654…`／EP md `c474acea7c58acc2…`／EP JSON `e63176af9bc3a246…`／tensor_binding v13 `5a1874d3be8b98b8…`
-- ⛔**impl / training / closed-loop authority / push / freeze / slice = CLOSED 継続**。本 doc は設計書面のみ
+- node `T-WMSO` D1.1-C／著者 = `w2:pQ` RS-TECH-LEAD2／作成 = **2026-07-21 15:1x JST**（shell 実測）
+- **v1 は SUPERSEDED**（`726f684c52421928…` @ `33e67626da`）— 5 体 CC Debate cycle-1 = **FAIL**（判定記録 `9851f165a5fc45eb…` @ `7f6d038a30`・ACCEPT 24 件）
+- **縮小の判断根拠 = Rs 指示「確かな前提条件があるほうを選べ」（2026-07-21 15:0x）**
+- **scope の正** = prereg（`d9caaffcf29d9524…` @ `1860edcc1c`）§2 IN / §3 OUT
+- 土台（凍結・編集しない・**4 file**）: contracts_v2 `00192d20ca00b654…`／EP md `c474acea7c58acc2…`／EP JSON `e63176af9bc3a246…`／tensor_binding v13 `5a1874d3be8b98b8…`
+- ⛔**impl / training / closed-loop authority / push / freeze / slice = CLOSED 継続**
 
-## 0. 中心構造
+## 0. 本版の範囲 —「凍結が名指しで委任した 2 件」に限定
 
-```text
-RunArtifactManifest = 「1 回の run が実際に用いた artifact 群を content-address で pin した記録」。
-役割: (a) 凍結 EP の TRAIN_RUN_MANIFEST proof が resolve する実体を与える
-      (b) run の substrate を明示し、異なる substrate の silent pooling を機構で禁じる
-      (c) grade 別 proof obligation に対し「どの field が実体を供給するか」の全域写像を与える
-      (d) 凍結 B が C へ手渡した 3 carry（U-2 producer pin / U-5 両段 binding / U-6 topology metadata）を記録する
-⛔ manifest は判断しない。何を採用し何を棄てるかの policy は本 doc の外（DDR #26 = Rs）。
-```
+本版が設計するのは、**凍結文書が D1.1-C を名指しして委任し、他に owner が存在しない 2 件**のみ:
 
-- **反循環規則（凍結 v13 `:23` の構造 pattern を継承）**: manifest は **自身の hash・自身と同一であることを主張する任意の hash** を内包しない。⇒ ⭐**`TRAIN_TIME_CRYPTO_BINDING` blob は manifest の外部 artifact**（凍結 EP `:117` = blob が `(claim_target_hash, train_run_manifest_hash)` を束ねる）。**manifest が TTCB hash を内包すると `manifest_hash → TTCB → manifest_hash` の不動点**になり、D1.1-A M2 循環・D1.1-B D-2 と同型の再発になる。TTCB は `EvidenceRecord.proof` が携える。
-- **直列化 = 凍結 §2 WCJ を適用**（新 canonicalization を作らない）。凍結 v13 `:24` の **B-declared 3 規約**（Optional は明示 `null`／`int` は `type(x) is int`（`bool` 拒否）／tuple → array）を **C も継承**する。C-declared の追加は §6 の 1 件のみ。
+| 本版が設計する | 委任元（逐語確認済） |
+|---|---|
+| **U-5 = 両段 binding の記録機構** | 凍結 v13 `:169`「検証 = **D1.1-C の run manifest が両段に同一 `tensor_binding_hash` を記録していること**を外部照合」／`:378` |
+| **`substrate_id` の必須化と区別機構** | 凍結 contracts_v2 `:570` carry (i)「旧 contaminated log は明示 **substrate_id** を付け silent pooling 禁止」／凍結 v13 `:376`「data の substrate 識別 = **D1.1-C `substrate_id`**」 |
 
-## 1. 型定義（C-internal 新 schema。凍結型は参照のみ・改造しない）
+⛔**本版が設計しないもの（隠さず宣言）**: prereg §2 **IN-1（manifest 型の全体）／IN-3（grade 別 proof obligation の供給写像）／IN-4（minimal JCS の package 展開・CI）**。
+⇒ ⭐**本版で D1.1-C は閉じない**。後続版が必要であり、その版は本版の型を拡張する（この二度手間は「前提の確かさ」と引き換えに受け入れたもの）。
+
+**選択理由（前提の確かさで比較した結果）**: 上表 2 件の前提は **凍結の逐語 2 本のみ**で、いずれも実測済み・**DDR #26 の裁定に非依存**（pS 設計軸で確認）。対して IN-1/3/4 は §8 の未決 5 件（repo 内の別 canonicalization ／ DDR #35 ／ open-5 の scope 欠落 ／ Rs 判断 (a)(b) ／ 前提訂正後の §3・§6 再導出）に乗る。
+
+## 1. v1 の中心前提は **FALSE**（訂正記録）
+
+- **誤っていた主張（v1 §3 open-1）**: 「required set は exact ゆえ、HB 以下の record は `TRAIN_RUN_MANIFEST` を追加携行できない ⇒ manifest は EXACT 経由でしか到達しない」。
+- **正しい読み**: `E_PROOF_KIND_FOREIGN` は **component 意味論**（凍結 EP md `:114`「component に意味を持たない kind の混入」／`:129(iii)` 例示「POLICY_ARTIFACT claim に INPUT_SCHEMA_HASH」）。`TRAIN_RUN_MANIFEST` は **EXACT 13/13 cell で required**（pQ 実測）＝ どの component にも意味を持つ ⇒ 非 foreign。
+- ⭐**決定脚（pS 提示・pQ が閉じた列挙で再測）**: 凍結に **set-equality / 超過拒否の規則が存在しない**。凍結 3 file の proof 系 error 語彙 = `ARTIFACT_UNRESOLVED` / `CONFLICT` / `INSUFFICIENT` / `KIND_FOREIGN` / `MISBOUND` / `PAYLOAD_MISSING` / `REF_MALFORMED` のみで、**非 foreign な余分を拒否する code は 0 件**。`superset` / `excess` / `extraneous` = 3 file とも 0 hit。⚠**誠実な範囲 = error code 語彙上の不在**（散文規則の不在までは主張しない）。
+- **誤りの型**: 「**required SET が厳密（spec の性質）**」を「**record が超過携行不可（instance の禁止）**」に取り違えた。
+- ⭐**携行可 ≠ EXACT 達成**: grade は evaluator の測定値（凍結 `E_GRADE_MISMATCH`）ゆえ、HB の record が manifest を携えても昇格しない。
+- **機序（自己記録）**: 凍結 EP の **JSON の 1 文字列**だけを読み、**自分が土台に挙げた EP markdown を開かなかった**。
+
+### 1.1 ⛔ 凍結文書への波及（Rs 判断待ち・誰も編集していない）
+
+- 凍結 v13 **`:256`**（一次 locus = D-1..D-4 選定表・`B1D-A`）逐語「`proof_policy._domain` = 「exact required ProofKind set」＋ `E_PROOF_KIND_FOREIGN`」／**`:471`** は「kind」を落とした再掲（pY 指摘・pQ 実測）。
+- **限局している**: foreclose された案は「**rank 2 に proof kind を追加要求**（= required set の拡張 = frozen schema delta）」であり、その決定脚は **delta 要求**（`:256`「**D-3 に合流**」が証拠・pQ 実測）。`E_PROOF_KIND_FOREIGN` の併記は**不正確だが冗長な二次引用で load-bearing でない**（pS 設計軸 read）。
+- **採択 D-1 は非依存**: 積極根拠 `:252`（frozen delta 不要／1 hop／B 側宣言 1 個／`:396` の provenance 意味論適合）も、自身の反証条件 `:258-262`（`source_ref` 意味論・registry 衝突・resolver 到達性・1 hop）も **proof kind 集合に言及しない**（pQ 実測）。
+- ⛔**Rs 判断 2 件**: **(a)** 凍結 v13 `:256`/`:471` の併記訂正（**凍結編集 = Rs 専権**）／**(b)** 採択 D-1 が無影響であることの**正式確認**。⚠ pQ・pS・pY のいずれも「D-1 が覆る」とも「不変」とも宣言しない。
+- 記録: pY custody `b602a8c8030d47a7…` @ `337d08d787`／pS consult `b4ec93173db6c24c…` @ `a31adca295`（pS は 0-commit ゆえ pQ が bank）。
+
+## 2. U-5 — 両段 binding の記録機構
 
 ```python
 @dataclass(frozen=True)
-class ArtifactRef:                  # 単一 artifact の pin
-    role: str                       # 供給写像 §3 の key（ASCII・NFC・非空）
-    locator: str                    # resolve_artifact に渡す ref
-    artifact_hash: str              # 64-hex lowercase
-
-@dataclass(frozen=True)
-class ProducerArtifactPin:          # U-2（凍結 v13 `:375`）
-    producer_role: str              # belief / vision 等、definition が宣言する producer の役割
-    producer_schema_hash: str       # 64-hex — 凍結 B が identity に参加させる schema 水準の hash
-    producer_artifact_hash: str     # 64-hex — encoder weights 等、artifact 水準の実体
-
-@dataclass(frozen=True)
-class StageBindingRecord:           # U-5（凍結 v13 `:169` が外部照合を要求）
-    rl_stage_tensor_binding_hash: str          # 64-hex
-    bc_stage_tensor_binding_hash: str | None   # demo 系 lineage ⇒ 64-hex 必須 / RL_ONLY・NOT_APPLICABLE ⇒ null 必須
-
-@dataclass(frozen=True)
-class ManifestMetadata:             # U-6（凍結 v13 `:380`）— 契約層に束縛しない記録専用
-    chain_topology_class: str | None
-    recorded_at_utc: str            # RFC3339・秒精度・"Z" 固定
-
-@dataclass(frozen=True)
-class RunArtifactManifest:
-    manifest_schema_version: str    # "1.0"（既知版 allowlist で fail-closed）
-    run_id: str                     # ASCII・NFC・非空。identity ではなく人が辿るための label
-    substrate_id: str               # ⭐必須（§2）
-    skill_definition_hash: str      # 64-hex — 本 run が属する definition（凍結 §1.5 の値）
-    identity_kind: str              # 凍結 IdentityKind の member 名
-    training_lineage: str           # 凍結 TrainingLineage の member 名
-    code: CodeProvenance            # {source_commit: 40-hex}
-    config: ConfigHashes            # {final_training_config_hash, bc_config_hash, runtime_config_hash: str|None}
-    model: ModelArtifacts           # {final_artifact_hash, model_architecture_hash, normalization_artifact_hash: str|None}
-    data: DataArtifacts             # {demo_dataset_hash: str|None}
-    evaluator: tuple[ArtifactRef, ...]          # 本 run の evidence 生成に用いた evaluator artifact
-    evidence_policy_definition_hash: str        # 凍結 EP `:7` = e7ca43093084c167…（版の取り違え検出）
-    evidence_policy_semver: str                 # 凍結 EP `:12`
-    producers: tuple[ProducerArtifactPin, ...]  # U-2
-    stage_bindings: StageBindingRecord          # U-5
-    claims: tuple[str, ...]                     # ⭐64-hex の claim_target_hash 群（凍結 EP `:116` の content_must_list を満たす実体）
-    metadata: ManifestMetadata                  # U-6
-
-manifest_hash = sha256(WCJ_bytes(RunArtifactManifest))
+class StageBindingRecord:
+    execution_stage_tensor_binding_hash: str | None  # 64-hex。NOT_APPLICABLE ⇒ null 必須 / 他 4 lineage ⇒ 必須
+    bc_stage_tensor_binding_hash: str | None         # demo 系 lineage ⇒ 必須 / RL_ONLY・NOT_APPLICABLE ⇒ null 必須
 ```
 
-- ⭐**`claims` が凍結との接続点**: 凍結 EP `:116` `manifest_content_rule` =「TRAIN_RUN_MANIFEST の content が `claim_target_hash` を列挙していること、`resolve_artifact` 経由で検査」。⇒ `claims` に当該 component の `claim_target_hash` が無ければ **凍結側の `E_PROOF_MISBOUND`** で落ちる。**新 code を作らない**（reuse-first）。
-- **`manifest_hash` = sha256(canonical bytes)**: 凍結 EP `:140` は TRAIN_RUN_MANIFEST の `artifact_hash` を「manifest sha256」と定義する。⇒ **配布 bytes は WCJ bytes そのものでなければならない**（§6・`E_MANIFEST_NONCANONICAL_BYTES`）。凍結 v13 §7 が負例として挙げた「`sha256(raw)` は合うが `H_WCJ(parse(raw))` が合わない」経路を、C 側でも塞ぐ。
-- **識別子でないもの**: `run_id` / `metadata` は人間可読 label であって identity ではない。ただし **hash-visible**（manifest_hash に入る）— 記録の改変を検出可能にするため。⇒ 同一 run の再記録は別 manifest_hash になる（意図的）。
+- 命名 = 凍結の claim target（EP JSON `:29` `execution_bundle.tensor_binding.artifact_hash`）に合わせる。SCRIPTED/WAIT にも `tensor_binding` slot 概念は在るため「RL 段」と呼ばない。
+- **lineage 別の全域表**（凍結 `TrainingLineage` 5 member を全被覆）:
 
-## 2. `substrate_id` の必須化と区別機構（IN-2）
+| lineage | execution 段 | bc 段 | 違反 |
+|---|---|---|---|
+| `NOT_APPLICABLE` | null 必須 | null 必須 | 非 null = `E_MANIFEST_STAGE_BINDING_PRESENT` |
+| `RL_ONLY` | 64-hex 必須 | null 必須 | 欠落 = `E_MANIFEST_STAGE_BINDING_MISSING`／bc 非 null = `…_PRESENT` |
+| `BC_ONLY` / `BC_THEN_RL` / `DEMO_PLUS_RL` | 64-hex 必須 | 64-hex 必須 | 欠落 = `…_MISSING` |
 
-**由来（新規要求ではない）**: 凍結 contracts_v2 `:570` carry (i) 逐語「D2 transition data = 修正済み clean substrate のみ・旧 contaminated log は明示 **substrate_id** を付け silent pooling 禁止」／凍結 v13 `:376` 逐語「data の substrate 識別 = D1.1-C `substrate_id`」。
+- **凍結 declaration との突合**（凍結 v13 `:158-166`）: `relation == IDENTICAL` ⇒ **両 field が相等**／`relation == EXPLICIT_SUPERSEDE` ⇒ `bc_stage_tensor_binding_hash == tensor_binding_spec.demo_dataset_binding_hash`（⚠ **`data` 側の dataset content hash とは別物**・名前が近いので完全修飾する）。不一致 = `E_MANIFEST_STAGE_BINDING_CONFLICT`。
+- ⛔⛔**「解消する」とは書かない（v1 の過大主張を撤回）**: 凍結 `E_BINDING_STAGE_IDENTICAL_UNCONFIRMED` は **certify 時の cross-artifact 検査**（v13 `:230`）であり、凍結 `certify_inputs`（EP JSON `:149`）に manifest は**入っていない**。§1 の訂正により record は manifest proof を携行できるが、**tensor-binding 検査器から解決済 manifest への wiring は凍結に存在しない**。⇒ **本版が与えるのは記録であって discharge ではない**（§8 open-3）。U-2・U-6 で凍結が既に行った detect-vs-prevent の区別を、U-5 でも同じ厳しさで守る。
 
-**機構（3 述語のみ。W-1 の遵守）**:
+## 3. `substrate_id` — 必須化と区別機構
+
+```python
+substrate_id: str                       # 本記録が pin する run の substrate
+dataset_substrate_ids: tuple[str, ...]  # 本記録が pin する dataset の substrate 群（bytes 昇順・重複禁止）
+```
 
 | # | 述語 | 違反 code |
 |---|---|---|
-| S-1 | `substrate_id` が存在する（欠落・空文字を拒否） | `E_MANIFEST_SUBSTRATE_ABSENT` |
+| S-1 | `substrate_id` が存在し非空 | `E_MANIFEST_SUBSTRATE_ABSENT` |
 | S-2 | 構文適合（ASCII・NFC・`[A-Za-z0-9_.:-]{1,64}`） | `E_MANIFEST_SUBSTRATE_MALFORMED` |
-| S-3 | 集約時、2 つ以上の異なる `substrate_id` を **宣言なしに** 同一集合へ入れない | `E_MANIFEST_SUBSTRATE_POOLED` |
+| S-3 | `dataset_substrate_ids` が **2 値以上のとき、その全値が列挙されている**（欠落 = 黙って混ぜた） | `E_MANIFEST_SUBSTRATE_POOLED` |
 
-- ⛔⛔**値では弾かない（W-1）**: 本設計は **どの `substrate_id` が良い/悪いかを一切知らない**。allowlist も denylist も grade 係数も持たない。述語は **存在・構文・相互比較（等値/非等値）** の 3 種に限る。⇒ **DDR #26 のどちらの裁定でも本機構は同一**であり、裁定を先取りしない。むしろ裁定を**実行可能**にする（ラベルが無ければ選別自体ができない）。
-- **S-3 の「宣言」**: 複数 substrate を混ぜること自体は禁じない。禁じるのは **黙って混ぜること**。混成は `substrate_id` を **item ごとに保持したまま**上位に `substrate_ids: tuple[str, ...]`（bytes 昇順・重複なし）を明示宣言した集合としてのみ表現できる。⇒ 「混成である」という事実が hash-visible になる。
-- ⚠**本機構が保証しないもの**: `substrate_id` の値が**真実であること**は保証しない（自己申告である）。保証するのは「無記名でないこと」と「黙って混ざらないこと」。⇒ §10 の declared open に記す。
+- ⛔⛔**値では弾かない（W-1）**: 述語は **存在・構文・相互比較**の 3 種のみ。allowlist も denylist も grade 係数も持たない。⇒ **DDR #26 のどちらの裁定でも機構は同一**。
+- ⛔**v1 の誤りを訂正（A-22）**: v1 は「宣言すれば混成してよい」と書き、**許可を与えていた**＝ policy の先取り。本版は **検出のみ**を行い、`dataset_substrate_ids` が 2 値以上なら **MIXED として記録する**。**混成が許容されるか否かは #26（Rs）の裁定**であり本設計は述べない。
+- ⚠**保証しないこと**: 値の真正性（自己申告である）。保証するのは「無記名でないこと」と「黙って混ざらないこと」。
+- ⚠**host が無い case（§8 open-4）**: **run をまたぐ pooling**（別 run の記録どうしを集約する時）を宿す object は、承認済 prereg の範囲に存在しない。本版は**発明せず**、未決として上程する。
 
-## 3. grade 別 proof obligation の実体供給写像（IN-3）
+## 4. 直列化と hash
 
-⚠**本節が設計するのは obligation の供給写像であって proof の生成ではない**（pY② の確認事項をここで明示的に discharge する）。proof を作る行為は impl leg = OUT#6（CLOSED）。
+- **凍結 §2 WCJ を適用**（新 canonicalization を作らない）＋ 凍結 v13 `:24` の B-declared 3 規約（Optional は明示 `null`／`int` は `type(x) is int`／tuple → array）を継承。
+- ⭐**collection は集合として正規化**（v1 の欠落・A-4）: `dataset_substrate_ids` は **要素 bytes 昇順・重複禁止**。凍結 contracts_v2 `:178`（frozenset は文字列 bytes 昇順 array）の**再利用**であり新規則ではない。⇒ 同一内容が 1 つの byte 表現にしか写らない。
+- ⭐**時刻を hash preimage に入れない**（v1 の誤り・A-5）: 記録時刻は **hash 対象外の付随 metadata** に置く。凍結 EP JSON `:5` が `metadata is OUTSIDE the hash input` としている先例に従う。⇒ 記録が run から再導出可能なままになる。
+- **配布 bytes は canonical bytes と byte 一致であること**（`E_MANIFEST_NONCANONICAL_BYTES`）。⚠**これは検出であって阻止ではない**（v1 の「塞ぐ」を撤回・A-21）。⇒ 検査の実行箇所は §7 の builder（`--verify`）に置く。
 
-凍結 EP `:236-240` の **ProofKind 15 種を 3 class に全域分類**する（15/15・欠落 0）:
+## 5. 新規 error code = **6 件**（C 側のみ）
 
-| class | ProofKind | manifest 側の供給元 |
-|---|---|---|
-| **A. manifest 供給**（6） | `TRAIN_RUN_MANIFEST` | manifest 自身（`artifact_hash = manifest_hash`・content = `claims`） |
-| | `SOURCE_COMMIT` | `code.source_commit`（凍結 `:132-133` = LEARNED は `training_provenance.final_source_commit`／SCRIPTED・WAIT は `execution_provenance.source_commit` と一致必須） |
-| | `CONFIG_HASH` | `config.*` — 凍結 `:124-129` の **(identity_kind, training_lineage, component) 全域 map** が選ぶ slot（LEARNED×{RL_ONLY,BC_ONLY,DEMO_PLUS_RL} → `final_training_config_hash`／LEARNED×BC_THEN_RL は TD のみ `bc_config_hash`・他 12 = final／SCRIPTED・WAIT → `runtime_config_hash`） |
-| | `FINAL_ARTIFACT_HASH` | `model.final_artifact_hash` |
-| | `NORMALIZER_HASH` | `model.normalization_artifact_hash`（凍結 `:137` = slot KNOWN 時のみ・EXPLICIT_NONE は N/A） |
-| | `EVALUATOR_ARTIFACT` | `evaluator[].artifact_hash`（凍結 `:139` = `evaluator_registry` の member であること） |
-| **B. definition 由来**（2） | `INPUT_SCHEMA_HASH` / `OUTPUT_SCHEMA_HASH` | ⛔**manifest は供給しない**。凍結 `:135-136` = `H_WCJ(semantic_obs/action_schema)` = definition から決まる |
-| **C. evidence 過程の外部 artifact**（7） | `TRAIN_TIME_CRYPTO_BINDING` | ⛔**manifest 外**（§0 反循環）。blob が `(claim_target_hash, manifest_hash)` を束ねる |
-| | `REPRODUCTION_PROCEDURE` / `REPRODUCED_OUTPUT_HASH` / `RECONSTRUCTION_SOURCES` / `COMPATIBILITY_TEST` / `UNRESOLVED_DIFFERENCES` / `DIMENSION_SOURCE` | ⛔**manifest 外**。再現・復元・評価の産物であり run の記録ではない |
+`E_MANIFEST_SUBSTRATE_ABSENT` / `E_MANIFEST_SUBSTRATE_MALFORMED` / `E_MANIFEST_SUBSTRATE_POOLED` / `E_MANIFEST_STAGE_BINDING_MISSING` / `E_MANIFEST_STAGE_BINDING_PRESENT` / `E_MANIFEST_STAGE_BINDING_CONFLICT`
 
-- ⭐**grade 別の帰結（凍結 EP `:76-113` から機械的に従う）**: `EXACT_TRAIN_TIME` の 13 cell は**全て** `TRAIN_RUN_MANIFEST` を要求する ⇒ **EXACT を主張する record は必ず manifest を運ぶ**。`HASH_BOUND_REPRODUCED` / `RECONSTRUCTED_COMPATIBLE` / `DIMENSION_ONLY` の required set に `TRAIN_RUN_MANIFEST` は**含まれない**。
-- ⛔⛔**ここから出る構造的制約（本 doc 最重要・§10 open-1）**: 凍結 EP `:71` `_domain` 逐語「**exact** required ProofKind set」＋ `:147` `foreign_kind: E_PROOF_KIND_FOREIGN` を素直に読むと、**required set は集合として厳密**であり、HB 以下の record が `TRAIN_RUN_MANIFEST` を**追加で携えることはできない**（foreign 扱い）。⇒ **manifest は certify 時、EXACT claim 経由でしか到達できない**。
-  - ⇒ §2 の substrate 機構・§4 の U-5 照合を **契約層で全 grade に効かせることはできない**。効かせるには **凍結 schema delta（Rs review）= OUT#4** が要る。
-  - ⇒ 本 doc は delta を作らず、**到達できる面（EXACT）では契約層・届かない面では package 層（§6）**という 2 面構成にする。**package 層は certificate を無効化しない**（凍結 `:148-155` の trust boundary を動かさない）。
-  - ⚠**この「exact set = 追加不可」は凍結の読みであり、私の断定ではない** — pS / pY に**明示の確認を依頼する**（読みが逆なら open-1 の重さが変わる）。
+- **再利用（新設しない）**: 解決不能・sha 不一致 = 凍結 `E_PROOF_ARTIFACT_UNRESOLVED`／未知 JSON field・duplicate key = 凍結 §5C strict decoder（**code ではなく decoder**）。
+- ⚠ `E_MANIFEST_NONCANONICAL_BYTES` は §4 の検出用で builder 側。ProofKind enum の出典は **contracts_v2 `:236-240`**（v1 の引用 host 誤りを訂正・A-9）。
 
-## 4. carry 機構（IN-5）と fail-closed 規則
+## 6. Reuse gate（AGENTS.md「Reuse / official-specification gate」）— **repo に対して再実行**
 
-### 4.1 U-2 producer artifact pin（凍結 v13 `:375`）
+- ⚠**v1 の探索面は狭すぎた**（凍結 3 file と記載・実際は 4 file、しかも repo を見ていない）。
+- ⭐**発見（未決）**: `thread_isaac_lab/wmso/d1/identity.py:80-82` に既存 `canonical_json()` = `json.dumps(sort_keys=True, ensure_ascii=False, separators=(",",":"))` があり、**凍結 WCJ とは別物**（UTF-16 key 順・JCS escape・int 限定・NFC を課さない）。同 node 内に**互換でない正規化が 2 つ**存在する。⇒ **本版は判定しない**（§8 open-5）。
+- **実行系の呼び方（原文どおりに引用する）**: AGENTS.md `:68` は guard wrapper が **`env_isaaclab/bin/python` を直接呼ぶ**理由として「`./isaaclab.sh -p` can mask non-zero Python exits」と述べる。⚠ v1 は「素の `python3`」と書き、AGENTS.md `:45` がむしろ `./isaaclab.sh -p` を prefer している点も落としていた（A-19）。⚠ rc の実測値は **凍結 v13 の測定**であり **C 側は未実測**。
 
-- definition が宣言する producer role 集合に対し、`producers` が**全 role を pin**していること。欠落 = `E_MANIFEST_PRODUCER_PIN_MISSING`。
-- ⛔**detect であって prevent ではない**（凍結 v13 `:375` が v1 の over-claim を撤回した所と同一）。**発行済 certificate の下で後続 run が encoder を差し替えることを、本機構は阻止しない**。阻止は closed-loop eligibility 検査 = OUT#2。⇒ この限界を §10 に declared open として残す。
+## 7. Fixtures / test（次段で bank・本版は宣言）
 
-### 4.2 U-5 両段 binding 記録（凍結 v13 `:169`）
+- **golden 2 本**: M-A = `NOT_APPLICABLE`（両段 null・`substrate_id` 単一）／M-B = `DEMO_PLUS_RL` × `IDENTICAL`（両段一致・`dataset_substrate_ids` 2 値 = MIXED）。
+- **判別性の positive control**: M-B の bc 側 1 文字を変えると **別 hash かつ `…_CONFLICT` 発火**。
+- **invalid corpus**: `substrate_id` 欠落・空・構文違反／`dataset_substrate_ids` の重複・非昇順／2 値以上の列挙欠落／`IDENTICAL` で両段不一致／`RL_ONLY` で bc 非 null／`NOT_APPLICABLE` で execution 非 null／64-hex 違反／float・NaN・`"Infinity"`／bool を int field に混入／未知 JSON field／duplicate key／非 canonical bytes。
+- ⚠**代表性を主張しない**（合成物・型網羅が目的）。
+- **次段の順序（A-24 の訂正）**: **fixture bank → cycle-2 の 5 体 debate → two-key（pS 設計軸 / pY evidence 軸）→ ⛔Rs freeze 判断**。上位 prereg の design Exit は「**機械可読 fixture 同梱 → debate**」であり、v1 の debate は 1 段早かった。
 
-凍結 v13 は `IDENTICAL` を「hash を内包しない relation 宣言」とし、**外部照合を D1.1-C の manifest に委任**した。本 doc の履行:
+## 8. Open points（⛔`open = 0` を宣言しない）
 
-| 条件（凍結 `LineageBindingDeclaration`） | manifest 側の要求 | 違反 code |
-|---|---|---|
-| `bc_stage_binding == None`（RL_ONLY・NOT_APPLICABLE） | `bc_stage_tensor_binding_hash` = null 必須 | `E_MANIFEST_STAGE_BINDING_MISSING` |
-| `relation == IDENTICAL` | 両 field 非 null **かつ相等** | 不一致 = `E_MANIFEST_STAGE_BINDING_CONFLICT` |
-| `relation == EXPLICIT_SUPERSEDE` | `bc_stage_tensor_binding_hash == demo_dataset_binding_hash`（凍結 `:161`） | 同上 |
+1. ⛔**Rs 判断 2 件**（§1.1 (a)(b)）。
+2. **本版が設計しない prereg IN-1 / IN-3 / IN-4** — 後続版。**D1.1-C は本版で閉じない**。
+3. **U-5 は記録であって discharge でない**（§2）— certify 側の wiring が凍結に無い。
+4. **run をまたぐ pooling を宿す object が承認済 scope に無い**（§3）。
+5. **`identity.py:80-82` の別 canonicalization との関係**（supersede / 共存 / 衝突）が未測定（§6）。
+6. **凍結 v13 `:185` が委任した版 bump 移行手続が、承認済 prereg §2 IN に無い**（v1 open-5 を継承）⇒ **IN 集合が既知の不完全**。scope 裁定 = Rs / pS。
+7. **U-5 の捏造経路**（debate CC5 指摘）: `IDENTICAL` の等値検査は execution 段 hash の複写でも通る。⚠ ただし **凍結が委任したのは「両段に同一 hash を記録していること」の照合**であり、解決可能性の要求は**凍結を超える強化**になる ⇒ 本版は凍結どおりに実装し、**強化案として上程**する（pS / Rs）。
+8. **prereg §4 carry の再掲（v1 で脱落・A-11）**: ③**#29 = demo 再記録**（198 demo・OUT#3）／⑤**#31 = trainer 実在**（manifest の実データ充填は trainer 実在に依存・機構の設計は非依存）。⇒ **`portfolio_has_IL` は本 chunk 完了だけでは true にならない**。
 
-- ⭐**discharge の向き**: 上記が満たされたときに限り、凍結側の `E_BINDING_STAGE_IDENTICAL_UNCONFIRMED`（v13 `:230`）が**解消**する。満たされない/manifest に到達できない場合は**未解消のまま**（fail-closed・沈黙で通さない）。
-- ⚠ 到達可能性は §3 open-1 に従う（EXACT 以外は package 層で検出）。
+## 9. 版歴
 
-### 4.3 U-6 topology metadata（凍結 v13 `:380`・W-2）
-
-- `chain_topology_class` は **`ManifestMetadata` の記録専用 field**。⭐**delta-free の根拠 = 凍結 `SemanticFieldSpec` = {field_id, dtype, shape, unit, frame}・`Dtype = {FLOAT32, INT32, BOOL}` は数値専用**であり、categorical な class 名を**格納できない**（pS `:27` の独立確認と一致）。⇒ 凍結型に押し込まず manifest metadata に置くのが唯一の非-delta 経路。
-- ⛔**凍結 v13 `:338` が既に述べた限界をそのまま継承**: 本 carry は台帳差を **検出可能**にするだけで **§5D の穴（同 dtype/shape で意味の異なる台帳）を塞がない**。塞ぐには契約層束縛 = schema delta = OUT#4。**「carry したので閉じた」とは書かない**。
-
-### 4.4 code / 拒否規則の呼称（P-1 の履行）
-
-⚠ 本 doc で **「code」= error code と拒否規則の *設計*** を指し、**実装（動く code）を含まない**。同様に **「package / CI」= 構造と check の *仕様*** であって build ではない。**実装・実行は OUT#6（CLOSED）**。D1.1-B が `E_BINDING_*` を実装せず設計したのと同型。
-
-## 5. 新規 error code 一覧（7 件・C 側のみ。凍結 code は再利用し複製しない）
-
-`E_MANIFEST_SUBSTRATE_ABSENT` / `E_MANIFEST_SUBSTRATE_MALFORMED` / `E_MANIFEST_SUBSTRATE_POOLED` / `E_MANIFEST_STAGE_BINDING_MISSING` / `E_MANIFEST_STAGE_BINDING_CONFLICT` / `E_MANIFEST_PRODUCER_PIN_MISSING` / `E_MANIFEST_NONCANONICAL_BYTES` ＋ 版 allowlist の `E_MANIFEST_SCHEMA_VERSION_UNKNOWN`（凍結 v13 `E_BINDING_SCHEMA_VERSION_UNKNOWN` と同型）。
-
-- ⭐**再利用（新設しない）**: `claims` 欠落 = 凍結 `E_PROOF_MISBOUND`／manifest 解決不能・sha 不一致 = 凍結 `E_PROOF_ARTIFACT_UNRESOLVED`（`:152`）／evaluator 非登録 = 凍結 `E_EVALUATOR_UNKNOWN`（`:158`）／未知 JSON field・duplicate key = 凍結 §5C strict decoder。
-
-## 6. minimal JCS の package 展開（IN-4）
-
-- **canonical 適用対象** = ①`RunArtifactManifest` ②evidence bundle ③配布 metadata。いずれも **凍結 §2 WCJ + 凍結 v13 `:24` の B-declared 3 規約**で直列化する。
-- **C-declared 追加は 1 件のみ**: ⭐**配布 artifact の bytes は canonical bytes と byte 一致でなければならない**（`E_MANIFEST_NONCANONICAL_BYTES`）。理由 = 凍結 EP `:140` が `artifact_hash = manifest sha256` を **bytes に対して**定義するため、非 canonical bytes を配ると `sha256(bytes)` と `H_WCJ(parse(bytes))` が乖離する。
-- **package 層 check（仕様のみ・実装は OUT）**: 配布 package は manifest を 1 本必ず含む／`evidence_policy_definition_hash` が凍結値と一致／§2 S-1..S-3 が成立／§4.2 の stage 記録が成立／§4.1 の producer pin が完備。**これは検出であり、certificate の可否を変えない**（§3 open-1）。
-- ⛔**fail-closed 実行コマンドの事前登録（凍結 v13 `:356` H2 教訓の継承）**: package check は **素の `python3` を直接呼ぶ**こと。**`./isaaclab.sh -p` 経由で検証してはならない** — 同 wrapper は破損入力に対し traceback を出しつつ **rc=0** を返す（v13 実測・AGENTS.md「Exit-code exception」が明記する既知 hazard）。⇒ 本 doc の fixture builder も **stdlib のみ**に依存させ、任意の `python3`（≥3.8）で可搬に fail-closed とする。
-
-## 7. Golden vectors / invalid corpus（**設計宣言・fixture の bank は次版**）
-
-⚠ D1.1-B v1 は **fixture 未 bank で prereg 違反**（v13 §12 D-4）。同じ轍を踏まないため、**本 v1 は「fixture 未 bank」を明示**し、two-key 提出前に bank する。
-
-- **golden（4 本予定）**: M-1 最小 SCRIPTED（learned 系 field は全 null）／M-2 LEARNED × RL_ONLY（`bc_stage` null）／M-3 LEARNED × BC_THEN_RL（`IDENTICAL` 両段一致・`bc_config_hash` 非 null）／M-4 混成 substrate 宣言（`substrate_ids` 2 値）。
-- **判別性の positive control**: M-3 の両段 hash を 1 文字変えた variant が **別 hash になり `E_MANIFEST_STAGE_BINDING_CONFLICT` を発火**すること。
-- **invalid corpus（拒否必須）**: `substrate_id` 欠落・空・構文違反／無宣言の混成／`IDENTICAL` で両段不一致／RL_ONLY で `bc_stage` 非 null／producer role 欠落／64-hex 違反／40-hex 違反（`source_commit`）／float・NaN・`"Infinity"`／bool を int field に混入／未知 enum member／未知 JSON field／duplicate key／未知 `manifest_schema_version`／非 canonical bytes／`claims` に当該 `claim_target_hash` 不在。
-- ⚠**代表性を主張しない**（v13 D-31 と同じ規律）: golden は型網羅が目的の合成物であり、実 run の代表性は主張しない。
-
-## 8. Test plan（impl GO 後 — 設計時宣言）
-
-型 round-trip（encode→decode→encode の bytes 同一）／golden 4 本の hash 一致 ＋ 判別 variant が別 hash ／invalid corpus 全拒否 ／**凍結 code が発火することの positive control**（`claims` 欠落 → 凍結 `E_PROOF_MISBOUND`／解決不能 locator → 凍結 `E_PROOF_ARTIFACT_UNRESOLVED`。**C 側 code でなく凍結 code が出ること** = reuse の正しさの実証）／§3 class A 6 種の供給写像が凍結 `proof_binding` と一致すること（表駆動）／⭐**到達性の負例**: HB grade の record に `TRAIN_RUN_MANIFEST` を足すと `E_PROOF_KIND_FOREIGN` になること（open-1 の読みの真偽を機械で決着させる test）。
-
-## 9. Reuse gate 記録（AGENTS.md「Reuse / official-specification gate」）
-
-- 既存の再利用 = 凍結 WCJ（新 canonicalization を作らない）／凍結 error code 4 種（§5）／凍結 `resolve_artifact` `resolve_git_commit`（新 resolver を作らない）／v13 の fixture builder 方式（`--verify` 非破壊 + negative control 両経路）。
-- 新規作成が必要だった理由 = **run 単位の artifact 記録型が凍結側に存在しない**（凍結の 3 file 全域で `RunArtifactManifest` 相当の型は 0 件・pQ 実測）。凍結 EP は `TRAIN_RUN_MANIFEST` を **proof kind として参照する**のみで、その**中身の型を定義していない**。
-
-## 10. Open points（⛔`open = 0` を宣言しない）
-
-1. ⭐**manifest の到達可能性が EXACT に限られる**（§3）— 凍結の「exact required set」読みに依存。**pS / pY に読みの確認を依頼**。読みが正なら、HB 以下での substrate / stage 照合は package 層 = 検出のみ。契約層で閉じる路は schema delta（Rs review）。
-2. **U-2 は detect であって prevent でない**（§4.1）— 凍結 v13 の撤回済 over-claim を再導入しない。
-3. **U-6 は §5D の穴を塞がない**（§4.3）— 凍結 v13 `:338` の限界をそのまま継承。
-4. **`substrate_id` の値の真正性は保証しない**（§2）— 自己申告。真正性を要求するなら TTCB 相当の束縛が要り、それは本 chunk の外。
-5. ⭐⭐**prereg に無い凍結からの委任を 1 件発見**: 凍結 v13 `:185` は **`binding_schema_version` bump 時の移行手続（再 certify + transition 行の系譜記録）を「D1.1-C の manifest 側で定義」と委任**している。しかし**承認済 prereg §2 IN の 5 項に本項は無い**。⇒ **本 doc は設計しない**（scope 自己拡張の禁）。**scope 判断を Rs / pS へ上程**する。
-6. **fixture 未 bank**（§7）— two-key 提出前に bank する。本版は宣言のみ。
-
-## 11. Module layout（impl GO 時に確定 — 宣言のみ）
-
-`manifest.py`（型 + WCJ 直列化）／`manifest_validate.py`（§2/§4/§5 の拒否規則）／`wmso_d11c_fixtures/`（golden + `build_goldens.py`・stdlib のみ）。
-
-## 12. 版歴
-
-- **v1**（2026-07-21 14:2x）= 初版。Rs scope 承認後の最初の authoring。prereg IN 5 項 + design 段 carry 4 件（P-1 §4.4／W-1 §2／W-2 §4.3／pY② §3 冒頭）を fold 済。
-- **次段** = fixture bank → ⛔**5 体 CC Debate（L2 の debate は本 design 段で発火・waived ではない）** → 設計軸 pS + evidence 軸 pY の two-key → ⛔Rs freeze 判断。
+- **v1**（14:2x・`726f684c52421928…` @ `33e67626da`）= 初版。**debate cycle-1 = FAIL**（`9851f165a5fc45eb…` @ `7f6d038a30`・ACCEPT 24 件）。
+- **v2**（本版・15:1x）= **縮小 + 全 fold**。中心前提 FALSE を §1 に訂正記録し、**v1 の 2 面構成（契約層 / package 層）を削除**（前提が落ちたため不要）。U-5 を discharge から**記録**へ降格、`substrate_id` の許可付与を**検出のみ**へ訂正、collection の正規化と時刻の preimage 除外を追加、引用 host・code 計数・AGENTS.md 引用・reuse gate 探索面を訂正、脱落していた carry #29/#31 を復活。IN-1/3/4 は**明示的に本版の外**。
