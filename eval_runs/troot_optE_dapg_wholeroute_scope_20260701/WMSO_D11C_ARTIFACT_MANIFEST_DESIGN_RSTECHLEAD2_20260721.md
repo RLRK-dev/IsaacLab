@@ -84,7 +84,7 @@ dataset_substrate_ids: tuple[str, ...]  # 本記録が pin する dataset の su
 - ⭐**時刻を hash preimage に入れない**（v1 の誤り・A-5）: 記録時刻は **hash 対象外の付随 metadata** に置く。凍結 EP JSON `:5` が `metadata is OUTSIDE the hash input` としている先例に従う。⇒ 記録が run から再導出可能なままになる。
 - **配布 bytes は canonical bytes と byte 一致であること**（`E_MANIFEST_NONCANONICAL_BYTES`）。⚠**これは検出であって阻止ではない**（v1 の「塞ぐ」を撤回・A-21）。⇒ 検査の実行箇所は §7 の builder（`--verify`）に置く。
 
-## 5. 新規 error code = **6 件**（C 側のみ）
+## 5. 新規 error code = **7 件**（C 側のみ）= 拒否規則 6 件 ＋ builder 側 1 件（§4 の `E_MANIFEST_NONCANONICAL_BYTES`）
 
 `E_MANIFEST_SUBSTRATE_ABSENT` / `E_MANIFEST_SUBSTRATE_MALFORMED` / `E_MANIFEST_SUBSTRATE_POOLED` / `E_MANIFEST_STAGE_BINDING_MISSING` / `E_MANIFEST_STAGE_BINDING_PRESENT` / `E_MANIFEST_STAGE_BINDING_CONFLICT`
 
