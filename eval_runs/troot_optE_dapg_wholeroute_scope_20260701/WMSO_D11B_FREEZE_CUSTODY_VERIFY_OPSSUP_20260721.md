@@ -25,7 +25,10 @@
 ## 帰結
 
 - **D1.1-B tensor_binding = FROZEN 確認**（設計書面 v13 確定 + remote push 済）。
-- ⭐**push = 完了（Rs 認可 11:5x「push」）**: pY が **fork（`RLRK-dev/IsaacLab`）** へ push（`bc4872a804..a27bd9f1db`）・**remote parity 0/0**（`fork/rlrk/optE-s2-substrate-swap` == local HEAD `a27bd9f1db9d`）。⛔**公開漏れ無し確認**: HEAD を含む remote = **fork のみ**（`origin`=`isaac-sim/IsaacLab`=公開上流には本 branch 不在・`git branch -r --contains` 実測）。freeze commit `465a59ed40` も fork-only。
+- ⭐**push = 完了（Rs 認可 11:5x「push」）**: pY が **fork（`RLRK-dev/IsaacLab`）** へ push（`bc4872a804..a27bd9f1db`）。
+  - ⭐**custody basis = `remote tip contains the frozen commit`（安定表現・pQ 指摘で訂正）**: `fork/rlrk/optE-s2-substrate-swap` は **frozen commit `a27bd9f1db` を含む**（`git branch -r --contains` 実測）。⇒ freeze artifacts（DESIGN v13 / freeze record `465a59ed40` / custody / LEDGER flip `a27bd9f1db`）は全て fork 済。
+  - ⚠**「parity 0/0」は push 時点（`a27bd9f1db`）の値であって現在形の主張ではない**: shared branch では push 後の記録 commit（本 push 節を含む）が ahead を作るため、**「parity 0/0」は書いた瞬間から腐る**（`1533a4c5cb` = "parity 0/0" と書いた commit 自身が ahead+1 を作った自己言及）。custody は HEAD parity でなく **remote tip == frozen commit** で述べる（`+N ahead` の記録 commit は freeze artifacts と無関係ゆえ custody を損なわない）。
+  - ⛔**公開漏れ無し確認**: HEAD / freeze commit を含む remote = **fork のみ**（`origin`=`isaac-sim/IsaacLab`=公開上流には本 branch 不在・実測）。
 - ⛔ **impl / training / authority = CLOSED 継続**（freeze = 書面確定のみ）。
 - declared-open 4（stats_key silent-pass / §7 impl / §5 slice+Rs / U-2/5/6 D1.1-C）= 「open として」封印。arity（Rs 専権・SUSPENDED）= 本 freeze と独立。
 - ⇒ **p6 が LEDGER D1.1-B 行を FROZEN へ flip 可**（p6 は独立に frozen_sha を producing commit で再実測してから反映＝二重 custody）。
