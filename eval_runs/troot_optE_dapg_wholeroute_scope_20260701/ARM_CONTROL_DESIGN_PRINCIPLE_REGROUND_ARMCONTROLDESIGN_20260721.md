@@ -55,11 +55,12 @@ revert commit message は当該追記を「propagated from an **unconfirmed p11 
 
 ## 6. 未処置（p11 の court 外・通知のみ）
 
-| 面 | owner | 状態 |
+| 面 | owner | 状態（p11 が 2026-07-21 19:1x に on-disk 実測） |
 |---|---|---|
-| `CLAUDEMD_REALIZE_FORM_L3_CUSTODY_VERIFY_OPSSUP_…` / `…LANDED_RECONFIRM_OPSSUP_…` | pY | 逐語を authority として引用中 ⇒ **通知のみ** |
-| `00-DESIGN-STATUS-LEDGER.md:35` の realize 形 (a)(b) 記述 | p6 | 同根 ⇒ **p4 経由で通知** |
-| §0#5 の読み（述語 or 閉じた列挙） | p4 / Rs | §2 の ⚠ 参照 |
+| `CLAUDE.md` | p4 | ✅ **処置済** — 逐語 `grep` **0 件**（revert `3ef4814f30` = 追記前 `f45670929e` と byte 一致・p6 実測） |
+| `00-DESIGN-STATUS-LEDGER.md:35` の realize 形 (a)(b) 記述 | p6 | ✅ **処置済**（`a80184b05c`・19:01 JST）— realize 形 2 層を削除し **revert-record 化**。残る逐語 **1 件は disavow の記録**であり authority 引用ではない |
+| `CLAUDEMD_REALIZE_FORM_L3_CUSTODY_VERIFY_OPSSUP_…`（3 件）/ `…LANDED_RECONFIRM_OPSSUP_…`（1 件） | pY | ⏳ **未処置** — 逐語を authority として引用中（特に LANDED_RECONFIRM の「content は well-grounded（逐語 + PASS + §0.5）」は前提が失効）。⚠ **p11 の court 外 ⇒ 通知のみ**（p4 へ送付済） |
+| §0#5 の読み（述語 or 閉じた列挙） | p4 / Rs | ⏳ 判断待ち（§2 の ⚠ 参照・現行設計はどちらでも同結論） |
 
 ## 7. 非主張
 
