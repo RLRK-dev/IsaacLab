@@ -264,6 +264,16 @@ GOLDENS = {
     },
 }
 
+# cycle-3 (G-2): the pinned digests, quoted from design v2.2 s7. These are the EXTERNAL anchor
+# -- they are asserted against the on-disk bytes, so a coordinated edit of GOLDENS + the .json
+# files can no longer verify clean. A deliberate re-pin must update this table AND the design.
+EXPECTED_SHA256 = {
+    "carry_record_golden_A.json": "ce474f3ad393767a8d37e9e144d3374b896168c853bd6f3fd6a2520d77c280c8",
+    "carry_record_golden_B.json": "f49d15698bf379c10517450aac12590023283b1fab8c2283a0795b05e83bcae2",
+    "carry_record_golden_C.json": "1b88fdc0c95813dee54ffcc4f158b71572664e0f5af9f44c4e1d5963a9fe692b",
+    "carry_record_golden_D.json": "4971d3f7a6601ff32a1b6e85791ca136de5be71848224dbab12413a0272e4174",
+}
+
 DECLARATIONS = {
     "carry_record_golden_A.json": {"training_lineage": "NOT_APPLICABLE", "relation": None},
     "carry_record_golden_B.json": {"training_lineage": "DEMO_PLUS_RL", "relation": "IDENTICAL"},
@@ -415,7 +425,10 @@ def run_controls():
 def _verify_dir(target, quiet=False):
     """Parse, re-canonicalise and byte-compare every golden on disk. Returns failures."""
     failures = []
-    allowed = set(GOLDENS) | {"build_goldens.py"}
+    # cycle-3: __pycache__ is written by the import machinery BEFORE module code runs, so
+    # sys.dont_write_bytecode cannot suppress it for this module. Treating it as unexpected
+    # turned an interpreter artifact into a false FAIL of the registered gate (DDR #35 class).
+    allowed = set(GOLDENS) | {"build_goldens.py", "__pycache__"}
     for entry in sorted(target.iterdir()):
         if entry.name not in allowed:
             failures.append("unexpected entry in fixture dir: {}".format(entry.name))
@@ -430,8 +443,18 @@ def _verify_dir(target, quiet=False):
         except (UnicodeDecodeError, ValueError) as exc:
             failures.append("unparseable fixture {}: {}".format(name, exc))
             continue
+        # Canonicality is diagnosed BEFORE the pinned digest: a drifted-encoding file is both
+        # non-canonical and sha-mismatched, and the encoding diagnosis is the informative one.
         if wcj_bytes(parsed) != raw:
             failures.append("{}: E_MANIFEST_NONCANONICAL_BYTES".format(name))
+            continue
+        # cycle-3 (G-2): external anchor. Without a pinned digest, a coordinated edit of this
+        # file AND the goldens verifies clean -- the tool would certify only self-consistency.
+        # A tampered golden re-emitted by a tampered builder IS canonical, so only this catches it.
+        expected_sha = EXPECTED_SHA256.get(name)
+        actual_sha = hashlib.sha256(raw).hexdigest()
+        if expected_sha is not None and actual_sha != expected_sha:
+            failures.append("{}: pinned sha256 mismatch (expected {}, got {})".format(name, expected_sha[:16], actual_sha[:16]))
             continue
         codes = validate(parsed)
         if codes:
