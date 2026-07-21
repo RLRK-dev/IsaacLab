@@ -84,6 +84,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import traceback
@@ -313,18 +314,27 @@ def identity_record(h: ModelHandles) -> dict[str, Any]:
     # I-1..I-3 are ``is`` comparisons. A fingerprint (matching contents) can never beat a
     # reference: identical contents do not prove identical objects, which is precisely how
     # v0.4 analysed the wrong model while its content check agreed.
-    i1 = measured is env_model
+    # R1 (pZ, 62ec7583d0): I-1 was tautological. acquire_models takes `measured` FROM
+    # env._model, so `measured is env_model` could never be false, yet it was counted in
+    # identity_all_pass -- three legs that were really two. It is retained below as a
+    # provenance record and EXCLUDED from the verdict.
+    i1_tautological = measured is env_model
     i2 = (solver_model is measured) if solver_model is not None else None
     i3 = (measured is not h.fk_model) if h.fk_model is not None else None
 
     return {
-        "I-1_measured_is_scene_model": i1,
-        "I-1_grounding": "newton_route_env.py:725 -- self._model = scene['model']",
+        "I-1_EXCLUDED_tautological": i1_tautological,
+        "I-1_why_excluded": (
+            "measured is taken from env._model, so this comparison cannot fail. It does not "
+            "discriminate and is not counted (pZ finding R1 on 62ec7583d0)."
+        ),
         "I-2_solver_model_is_measured": i2,
         "I-2_grounding": "SolverBase.__init__ sets self.model = model (newton/_src/solvers/solver.py)",
         "I-3_measured_is_not_fk_model": i3,
         "I-3_grounding": "newton_route_env.py:690 -- self._fk_model = build_fk_and_init(...)",
-        "identity_all_pass": bool(i1 and i2 and i3),
+        # Only the two legs that can actually fail.
+        "identity_all_pass": bool(i2 and i3),
+        "identity_legs_counted": ["I-2", "I-3"],
         "object_ids": {
             "measured": id(measured),
             "env_model": id(env_model) if env_model is not None else None,
@@ -419,23 +429,46 @@ def witness_cable(model: Any, cable_bodies: Any, per_world: int | None) -> dict[
         if cable_bodies is None or per_world is None:
             raise AttributeError("scene cable descriptors absent (env exposes no _cable_bodies)")
         idx = np.asarray(_to_numpy(cable_bodies)).ravel()
+        # R2 (pZ, 62ec7583d0): the previous test was idx.max() < body_count -- an inequality
+        # on a count, which any object exposing a large enough body_count satisfies. Read the
+        # LABELS AT THE DECLARED INDICES instead. This is verification at known indices, not a
+        # label SEARCH, so it does not inherit the clip false-negative problem.
+        labels = [str(x) for x in _to_numpy(model.body_label)]
         n_bodies = int(model.body_count)
         in_range = bool(idx.size > 0 and int(idx.min()) >= 0 and int(idx.max()) < n_bodies)
+        robot_prefixes = ("ur5e/", "robotiq_2f85/")
+        at_idx, robot_labelled = [], 0
+        if in_range and len(labels) >= n_bodies:
+            for i in idx.tolist():
+                lbl = labels[int(i)]
+                at_idx.append(lbl)
+                if lbl.startswith(robot_prefixes):
+                    robot_labelled += 1
+        # Measured on the as-built model: 68 bodies = 40 auto-labelled + 28 robot-prefixed,
+        # with no third category. So cable indices must point at NON-robot-labelled bodies.
+        non_robot_ok = bool(at_idx and robot_labelled == 0)
         return {
             "cable_bodies_per_world": int(per_world),
             "cable_index_count": int(idx.size),
-            "cable_index_max": int(idx.max()) if idx.size else None,
-            "measured_model_body_count": n_bodies,
             "indices_resolve_in_measured_model": in_range,
+            "labels_readable_at_indices": bool(at_idx),
+            "robot_prefixed_at_cable_indices": robot_labelled,
+            "all_cable_indices_are_non_robot_bodies": non_robot_ok,
+            "sample_labels_at_cable_indices": at_idx[:4],
+            "measured_model_body_count": n_bodies,
         }
 
     rec = probe(_check, note="scene['cable_bodies'] (newton_route_env.py:733-734); add_revolute_cable :1587")
     val = rec.get("value") or {}
-    rec["predicate"] = "scene-declared cable bodies exist AND their indices resolve inside the measured model"
+    rec["predicate"] = (
+        "scene-declared cable bodies exist AND their indices resolve in the measured model "
+        "AND the bodies AT those indices carry non-robot labels (read, not counted)"
+    )
     rec["pass"] = bool(
         rec.get("status") == PRESENT
         and val.get("cable_bodies_per_world", 0) > 0
         and val.get("indices_resolve_in_measured_model") is True
+        and val.get("all_cable_indices_are_non_robot_bodies") is True
     )
     return rec
 
@@ -636,6 +669,22 @@ def declare_envelope(joint_names: list[str], lo: float, hi: float, step: float) 
     explicitly and attached to the output. Nothing here may be called a "maximum";
     it is a grid over a declared range, and outside it the quantities are UNMEASURED.
     """
+    # R4 (pZ, 62ec7583d0): with an empty joint list this used to emit a well-formed
+    # PROVISIONAL envelope declaring samples_per_joint over ZERO joints -- and it satisfied
+    # AC-2, because the range/step/count fields were all present. Fail closed instead. The
+    # guard is on whether the joint source RESOLVED, not on "is the list empty", because an
+    # empty list is the symptom; the cause was that joint names never resolved at all.
+    if not joint_names:
+        return {
+            "status": "INVALID",
+            "STOP_required": True,
+            "reason": (
+                "No joints resolved, so no envelope can be declared. An envelope over zero "
+                "joints would satisfy AC-2 while describing nothing."
+            ),
+            "fix": "Resolve joint names via solver.mj_model (mj_id2name); the Newton Model has no joint_key.",
+            "joints": [],
+        }
     n_per_joint = max(1, int(round((hi - lo) / step)) + 1)
     return {
         "status": "PROVISIONAL",
@@ -910,6 +959,299 @@ def mechanism_survey(solver: Any, model: Any) -> dict[str, Any]:
 
 
 # --------------------------------------------------------------------------------------
+# H-2 -- coupled modal damping (spec v1.2 sections H-2.1 / H-2.2 / H-2.3)
+#
+# DOF declaration by p11 (2026-07-21), checked against measurement rather than assumed:
+#   target   12  UR5e revolute            (ARM_DOF = 6 x 2, task_config.py:27)
+#   excl A    4  gripper driver           (GRIPPER_DRIVER_JOINT_IDX = [6, 10] x 2, :34)
+#   excl B   12  gripper passive 4-bar    (GRIPPER_JOINT_RANGE 8 - driver 2 = 6, x 2, :35)
+#   outside  >=40 cable joints
+# Arm-side total must be 28 = 12 + 16. If it is not, p11's premise is wrong and we STOP.
+# --------------------------------------------------------------------------------------
+# Joint names are underscore-joined (ur5e_worldbody_base_...), unlike BODY labels which are
+# slash-joined (ur5e/worldbody/...). Matching joints with the body-label form classified all
+# 68 joints as "cable" and tripped the STOP. Measured against real names instead.
+ARM_TOKEN = "ur5e"
+GRIPPER_TOKEN = "robotiq"
+# The driver joints are ids 6 and 10 per arm (task_config.py:34). A bare "driver" substring
+# over the full path also catches right_driver_right_coupler_joint, whose PARENT is the
+# driver -- 8 hits instead of 4. Anchor on the joint's own trailing name.
+DRIVER_JOINT_RE = re.compile(r"_driver_joint(_\d+)?$")
+
+
+def resolve_joint_table(solver: Any) -> dict[str, Any]:
+    """Build the measured joint name -> index table (spec H-2.1, and the V-4 fix).
+
+    Joint names are read from ``solver.mj_model`` via ``mj_id2name``. The Newton ``Model``
+    has no ``joint_key`` on this build, so names never resolved through it -- that was the
+    real cause behind pZ's G3 finding, and it made V-4 unsatisfiable by that route.
+
+    Classification is by name prefix, and the resulting counts are CHECKED against p11's
+    declaration. A mismatch is a STOP, not something to quietly reconcile.
+    """
+    import mujoco
+
+    mj_model, _ = _mj_pair(solver)
+    names, arm, driver, passive, other = [], [], [], [], []
+    for jid in range(int(mj_model.njnt)):
+        nm = mujoco.mj_id2name(mj_model, mujoco.mjtObj.mjOBJ_JOINT, jid) or ""
+        dofadr = int(mj_model.jnt_dofadr[jid])
+        entry = {"joint_id": jid, "name": nm, "dof_adr": dofadr, "jnt_type": int(mj_model.jnt_type[jid])}
+        names.append(entry)
+        low = nm.lower()
+        if ARM_TOKEN in low:
+            arm.append(entry)
+        elif GRIPPER_TOKEN in low:
+            (driver if DRIVER_JOINT_RE.search(low) else passive).append(entry)
+        else:
+            other.append(entry)
+
+    arm_side = len(arm) + len(driver) + len(passive)
+    expected = {"arm": 12, "driver": 4, "passive": 12, "arm_side_total": 28}
+    measured = {
+        "arm": len(arm),
+        "driver": len(driver),
+        "passive": len(passive),
+        "arm_side_total": arm_side,
+        "cable_or_other": len(other),
+    }
+    mismatch = {k: (expected[k], measured[k]) for k in expected if expected[k] != measured[k]}
+    return {
+        "resolved_via": "solver.mj_model + mj_id2name (Newton Model has no joint_key on this build)",
+        "n_joints_named": sum(1 for e in names if e["name"]),
+        "n_joints_total": len(names),
+        "expected_by_p11": expected,
+        "measured": measured,
+        "mismatch": mismatch,
+        "STOP_required": bool(mismatch),
+        "stop_reason": (
+            "Measured joint classification does not match p11's declaration (28 = 12 + 16). "
+            "EITHER the declaration or this classifier is wrong -- inspect the emitted names "
+            "before attributing the mismatch. Report; do not silently adjust either side."
+            if mismatch
+            else None
+        ),
+        "table": names,
+        "arm_dof_adr": [e["dof_adr"] for e in arm],
+        "excluded_dof_adr": [e["dof_adr"] for e in driver + passive],
+        "cable_dof_adr": [e["dof_adr"] for e in other],
+    }
+
+
+def stiffness_damping_diagonals(solver: Any, n_dof: int) -> dict[str, Any]:
+    """Assemble K_e and K_d diagonals from the model's own fields (never invented).
+
+    Passive terms come from ``jnt_stiffness`` and ``dof_damping``; driven terms from
+    position-servo actuators (``actuator_gainprm``/``actuator_biasprm``). The source of
+    every contribution is recorded so the H-2.2 self-check (passive 4-bar entries should
+    be about zero) is testing measured values, not assumptions.
+    """
+    mj_model, _ = _mj_pair(solver)
+    k_e = np.zeros(n_dof, dtype=np.float64)
+    k_d = np.asarray(_to_numpy(mj_model.dof_damping), dtype=np.float64)[:n_dof].copy()
+
+    jnt_stiff = np.asarray(_to_numpy(mj_model.jnt_stiffness), dtype=np.float64)
+    for jid in range(int(mj_model.njnt)):
+        adr = int(mj_model.jnt_dofadr[jid])
+        if 0 <= adr < n_dof:
+            k_e[adr] += float(jnt_stiff[jid])
+
+    # A position servo carries kp/kv in biasprm ([0, -kp, -kv]); gainprm[0] mirrors kp, so
+    # reading bias alone is sufficient and avoids double-counting.
+    servo = 0
+    bias = np.asarray(_to_numpy(mj_model.actuator_biasprm), dtype=np.float64)
+    trnid = np.asarray(_to_numpy(mj_model.actuator_trnid), dtype=np.int64)
+    for aid in range(int(mj_model.nu)):
+        jid = int(trnid[aid][0])
+        if not (0 <= jid < int(mj_model.njnt)):
+            continue
+        adr = int(mj_model.jnt_dofadr[jid])
+        if not (0 <= adr < n_dof):
+            continue
+        # MuJoCo position servo: bias = [0, -kp, -kv].
+        kp, kv = -float(bias[aid][1]), -float(bias[aid][2])
+        if kp or kv:
+            k_e[adr] += max(kp, 0.0)
+            k_d[adr] += max(kv, 0.0)
+            servo += 1
+    return {
+        "k_e_diag": k_e,
+        "k_d_diag": k_d,
+        "sources": "K_e = jnt_stiffness + position-servo kp; K_d = dof_damping + servo kv",
+        "servo_actuators_contributing": servo,
+    }
+
+
+def _zeta_from_qep(mass: np.ndarray, k_d: np.ndarray, k_e: np.ndarray) -> dict[str, Any]:
+    """Quadratic eigenvalue solve returning the damping ratios and the modes."""
+    n = mass.shape[0]
+    companion = np.vstack(
+        [np.hstack([np.zeros((n, n)), np.eye(n)]), np.linalg.solve(mass, np.hstack([-k_e, -k_d]))]
+    )
+    eigs, vecs = np.linalg.eig(companion)
+    return {"eigs": eigs, "vecs": vecs, "n": n}
+
+
+def _pair_zetas(eigs: np.ndarray, vecs: np.ndarray | None = None, n: int | None = None) -> list[float]:
+    """Apply the spec's zeta form to the two roots of each second-order mode.
+
+    Uses ``zeta = -(l1 + l2) / (2 sqrt(l1 l2))``, which can exceed 1. Never mixes in
+    ``-Re(l)/|l|``, which saturates at 1 and hides overdamping (spec H-2).
+
+    Pairing is by MODE SHAPE, not by conjugacy. An earlier version paired only complex
+    conjugates, which silently produced zero mode pairs on this model: the measured system
+    is overdamped (diagonal zeta ~3.2), so each mode's two roots are DISTINCT REALS and are
+    not each other's conjugate. The spec's own wording ("for real root pairs") assumes those
+    pairs exist, so the pairing has to find them. Two roots belong to the same mode when
+    their companion-form mode shapes are parallel.
+    """
+    m = len(eigs)
+    out, used = [], np.zeros(m, dtype=bool)
+
+    if vecs is not None and n:
+        shapes = vecs[:n, :]
+        norms = np.linalg.norm(shapes, axis=0)
+        norms[norms == 0] = 1.0
+        unit = shapes / norms
+
+    for i in range(m):
+        if used[i]:
+            continue
+        partner, best = None, -1.0
+        for j in range(i + 1, m):
+            if used[j]:
+                continue
+            if vecs is not None and n:
+                sim = float(abs(np.vdot(unit[:, i], unit[:, j])))
+            else:
+                sim = 1.0 if abs(eigs[j] - np.conj(eigs[i])) < 1e-9 * max(1.0, abs(eigs[i])) else 0.0
+            if sim > best:
+                best, partner = sim, j
+        if partner is None or best < 0.9:
+            used[i] = True
+            continue
+        used[i] = used[partner] = True
+        l1, l2 = eigs[i], eigs[partner]
+        prod = l1 * l2
+        if abs(prod) < 1e-30:
+            continue
+        out.append(float(np.real(-(l1 + l2) / (2.0 * np.sqrt(prod)))))
+    return out
+
+
+def run_h2(solver: Any, table: dict[str, Any]) -> dict[str, Any]:
+    """H-2: coupled modal damping over the three reductions, with the self-checks."""
+    mj_model, _ = _mj_pair(solver)
+    nv = int(mj_model.nv)
+    mass_full = dense_mass_matrix(solver)
+    diag = stiffness_damping_diagonals(solver, nv)
+    k_e_full, k_d_full = np.diag(diag["k_e_diag"]), np.diag(diag["k_d_diag"])
+
+    arm = [a for a in table["arm_dof_adr"] if 0 <= a < nv]
+    excl = [a for a in table["excluded_dof_adr"] if 0 <= a < nv]
+    cable = [a for a in table["cable_dof_adr"] if 0 <= a < nv]
+    arm_side = arm + excl
+
+    # --- H-2.3 self-check: p11 predicts the arm/cable mass coupling is exactly zero -------
+    coupling = float(np.linalg.norm(mass_full[np.ix_(arm_side, cable)])) if (arm_side and cable) else None
+    coupling_zero = coupling is not None and coupling < 1e-12
+
+    # --- H-2.2 self-check: passive 4-bar stiffness should be about zero ------------------
+    ke_arm_side = diag["k_e_diag"][arm_side] if arm_side else np.array([])
+    passive_adr = [a for a in excl if a not in set(table["arm_dof_adr"])]
+    ke_passive = diag["k_e_diag"][passive_adr] if passive_adr else np.array([])
+
+    def _reduce(idx: list[int]) -> dict[str, Any]:
+        if not idx:
+            return {"status": UNAVAILABLE}
+        sl = np.ix_(idx, idx)
+        sol = _zeta_from_qep(mass_full[sl], k_d_full[sl], k_e_full[sl])
+        z = _pair_zetas(sol["eigs"], sol["vecs"], sol["n"])
+        return {"zeta_min": float(min(z)) if z else None, "n_dof": len(idx), "mode_pairs": len(z)}
+
+    # (i) fixed: leading 12x12 principal minor -- the conservative bar
+    red_i = _reduce(arm)
+    # (ii) mass condensation: excluded DOF are force-free -> optimistic lower bound
+    red_ii: dict[str, Any] = {"status": UNAVAILABLE}
+    if arm and excl:
+        m_aa, m_ab = mass_full[np.ix_(arm, arm)], mass_full[np.ix_(arm, excl)]
+        m_bb = mass_full[np.ix_(excl, excl)]
+        try:
+            m_red = m_aa - m_ab @ np.linalg.solve(m_bb, mass_full[np.ix_(excl, arm)])
+            sl = np.ix_(arm, arm)
+            sol2 = _zeta_from_qep(m_red, k_d_full[sl], k_e_full[sl])
+            z = _pair_zetas(sol2["eigs"], sol2["vecs"], sol2["n"])
+            red_ii = {"zeta_min": float(min(z)) if z else None, "n_dof": len(arm), "mode_pairs": len(z)}
+        except np.linalg.LinAlgError as exc:
+            red_ii = {"status": ERROR, "error": str(exc)}
+    # (iii) full arm-side 28 DOF with real stiffness; zeta read ONLY on arm-dominated modes
+    red_iii: dict[str, Any] = {"status": UNAVAILABLE}
+    if arm_side:
+        sl = np.ix_(arm_side, arm_side)
+        sol = _zeta_from_qep(mass_full[sl], k_d_full[sl], k_e_full[sl])
+        pos = {a: k for k, a in enumerate(arm_side)}
+        arm_rows = [pos[a] for a in arm]
+        eigs, vecs, n = sol["eigs"], sol["vecs"], sol["n"]
+        dominated = []
+        for m in range(len(eigs)):
+            shape = np.abs(vecs[:n, m])
+            tot = float(np.sum(shape))
+            if tot <= 0:
+                continue
+            part = float(np.sum(shape[arm_rows]) / tot)
+            if part > 0.5:
+                # Keep the INDEX. Storing the eigenvalue and recovering the index via `is`
+                # fails: numpy scalars are fresh objects on every access.
+                dominated.append((m, part))
+        dom_idx = [m for m, _ in dominated]
+        z = _pair_zetas(eigs[dom_idx], vecs[:, dom_idx], n) if dom_idx else []
+        red_iii = {
+            "zeta_min_arm_dominated": float(min(z)) if z else None,
+            "n_dof": len(arm_side),
+            "arm_dominated_modes": len(dominated),
+            "note": "zeta read only on modes whose arm-coordinate participation exceeds 0.5",
+        }
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        d = np.diag(mass_full)[arm] * diag["k_e_diag"][arm] if arm else np.array([])
+        diag_zeta = diag["k_d_diag"][arm] / (2.0 * np.sqrt(np.clip(d, 1e-30, None))) if arm else np.array([])
+
+    return {
+        "zeta_formula": "zeta = -(l1 + l2) / (2 sqrt(l1 l2))  [may exceed 1]",
+        "zeta_formula_not_used": "zeta = -Re(l)/|l|  [saturates at 1 -- deliberately not mixed in]",
+        "dof_sets": {"target_arm": arm, "excluded": excl, "cable_outside": len(cable)},
+        "reduction_i_fixed_12x12_BAR": red_i,
+        "reduction_ii_mass_condensation_lower_bound": red_ii,
+        "reduction_iii_full_armside_arm_dominated": red_iii,
+        "diagonal_approx_zeta_min": float(np.min(diag_zeta)) if len(diag_zeta) else None,
+        "self_check_H2_3_arm_cable_mass_coupling": {
+            "norm_M_arm_cable": coupling,
+            "p11_prediction": 0.0,
+            "matches_prediction": coupling_zero,
+            "STOP_required": bool(coupling is not None and not coupling_zero),
+            "meaning": "Non-zero means the cable IS in the arm's kinematic tree; the DOF declaration is void.",
+        },
+        "self_check_H2_2_passive_stiffness_near_zero": {
+            "k_e_diag_arm_side": ke_arm_side.tolist(),
+            "k_e_diag_passive": ke_passive.tolist(),
+            "passive_max_abs": float(np.max(np.abs(ke_passive))) if ke_passive.size else None,
+            "p11_prediction": "passive 4-bar entries approximately 0",
+            "meaning": "If passive stiffness is NOT ~0, p11's explanation for the structural zeta=0 is wrong.",
+        },
+        "raw_matrices_arm_side": {
+            "dof_order": arm_side,
+            "note": "Raw blocks are emitted so the reduction can be re-adjudicated without re-measuring.",
+            "M": mass_full[np.ix_(arm_side, arm_side)].tolist() if arm_side else [],
+            "K_e": k_e_full[np.ix_(arm_side, arm_side)].tolist() if arm_side else [],
+            "K_d": k_d_full[np.ix_(arm_side, arm_side)].tolist() if arm_side else [],
+        },
+        "stiffness_sources": diag["sources"],
+        "servo_actuators_contributing": diag["servo_actuators_contributing"],
+        "grasp_caveat": "Cable inertia while grasped does NOT enter M, so zeta is on the optimistic side.",
+    }
+
+
+# --------------------------------------------------------------------------------------
 # Orchestration
 # --------------------------------------------------------------------------------------
 def run_h0(env: Any, declared_worlds: int | None) -> dict[str, Any]:
@@ -1003,8 +1345,20 @@ def main(argv: list[str] | None = None) -> int:
                 }
             else:
                 h = acquire_models(env)
-                names = inventory(h.as_built).get("joint_names", {}).get("value", [])
+                # V-4 / R3: names come from solver.mj_model. The Newton Model has no
+                # joint_key, so the old inventory route silently yielded nothing.
+                table = resolve_joint_table(h.solver)
+                report["h2_joint_table"] = table
+                names = [e["name"] for e in table["table"] if e["name"]]
                 report["h1_envelope"] = declare_envelope(names, args.sweep_lo, args.sweep_hi, args.sweep_step)
+                if table["STOP_required"]:
+                    report["h2_modal_damping"] = {
+                        "status": "STOP",
+                        "reason": table["stop_reason"],
+                        "mismatch_expected_vs_measured": table["mismatch"],
+                    }
+                else:
+                    report["h2_modal_damping"] = probe(lambda: run_h2(h.solver, table))
                 report["h6_mechanisms"] = mechanism_survey(h.solver, h.as_built)
                 cap_rec = report["h6_mechanisms"]["H-6a"]["jnt_actfrcrange"]
                 cap = None
@@ -1014,14 +1368,6 @@ def main(argv: list[str] | None = None) -> int:
                     cap = float(np.min(np.abs(finite))) if finite.size else None
                 report["h3_torque_budget"] = probe(lambda: torque_budget(h.solver, cap))
                 report["h4_grasp_jacobian"] = probe(lambda: grasp_jacobian(h.solver, h.as_built))
-                report["h2_modal_damping"] = {
-                    "status": UNAVAILABLE,
-                    "reason": (
-                        "K_d and K_e must come from the model's actual drive stiffness/damping, and the "
-                        "DOF subset plus the treatment of excluded DOF must be declared per AC-3. Emitting "
-                        "a number before those are grounded would repeat the v0.4 error."
-                    ),
-                }
                 report["h5_transmission"] = {
                     "status": UNAVAILABLE,
                     "reason": "Requires stepping the sim through grasp/seat phases; not run in this stage.",
@@ -1029,10 +1375,14 @@ def main(argv: list[str] | None = None) -> int:
     except Exception as exc:  # noqa: BLE001 - always emit a report, even on failure
         report["fatal"] = {"error": f"{type(exc).__name__}: {exc}", "traceback": traceback.format_exc()}
 
-    with open(args.out, "w") as fh:
+    # A relative --out is resolved against the repo root, not the caller's cwd: an entire
+    # env build was once lost to a FileNotFoundError raised only at the final write.
+    out_path = args.out if os.path.isabs(args.out) else os.path.join(REPO_ROOT, args.out)
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+    with open(out_path, "w") as fh:
         json.dump(report, fh, indent=2, default=str)
     print(json.dumps(report.get("h0", {}).get("verdicts_for_pZ", report.get("fatal", {})), indent=2))
-    print(f"[harness] wrote {args.out}")
+    print(f"[harness] wrote {out_path}")
     return 0 if "fatal" not in report else 1
 
 
