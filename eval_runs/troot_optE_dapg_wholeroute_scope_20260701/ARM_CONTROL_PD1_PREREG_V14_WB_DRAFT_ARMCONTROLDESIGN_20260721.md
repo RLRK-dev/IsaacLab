@@ -27,7 +27,7 @@
 | 項目 | v1.3 での位置 | v1.4 | 理由 |
 |---|---|---|---|
 | **L-P2′ parity vs R0b**（清潔基盤 kinematic playback との一致） | acceptance leg | ⛔ **退役** | ①参照 R0b は **kinematic 走行**であり、Rs 07-19「kinematic 基線 run = 廃止」は裁定 B（pin のみ復活）でも**戻っていない** ②W-b で**旧 chain との一致自体が目標でなくなった**（合わせる相手を作り直す） |
-| **R0 / R1**（kinematic 走行） | run matrix | ⛔ **本 prereg では走らせない** | 同上。⭐**v1.4 は kinematic 走行を 1 本も要求しない**（P-1 / 裁定 B 適合）。L-P0 の既存 evidence は banked `e5d2dc214a` を参照するのみ |
+| **R0 / R1**（kinematic 走行） | run matrix | ⛔ **本 prereg では走らせない** | 同上。⭐**v1.4 は kinematic 走行を 1 本も要求しない**（§0#5 / 裁定 B 適合）。L-P0 の既存 evidence は banked `e5d2dc214a` を参照するのみ |
 | **L-P4 no-haul**（route-start teleport 後の追従） | R1 で採点 | 🔶 **保留**（C-1/C-2 では採点しない） | route-start re-pose は分類 B（reset 系）で残るが、**W-b で route-start の pose 自体が再定義される**ため、旧 frame-0 値に対する採点は意味を持たない |
 | **decision tree の probe PASS→S-1 rollout** | §5 | 🔶 **切離し** | S-1 rollout は W-b 振付と design-gate 後。本 probe は**包絡の測定**であって rollout の許可条件でない |
 
@@ -83,7 +83,7 @@ trainer の residual は**指令の上に角速度を上乗せする**ため、�
 
 | 規則 | 適合 |
 |---|---|
-| **P-1 物理結果を捨てない**（Rs「すてるなよ」） | ✅ C-1/C-2 は PD 駆動のみ。**kinematic 走行 0 本**（§1 で R0/R1 を退役） |
+| **§0#5 `physics-faithful only`**（`RS71-System-Spec-SSOT.md:27`。⚠ 旧記載「P-1（Rs 逐語）」は 07-21 18:56 取り下げ ⇒ `ARM_CONTROL_DESIGN_PRINCIPLE_REGROUND_…`） | ✅ C-1/C-2 は PD 駆動のみ。**kinematic 走行 0 本**（§1 で R0/R1 を退役） |
 | **裁定 B**（kinematic 例外 = clip-retention pin のみ） | ✅ 本 probe は pin を `route_c1_pin=True` で使うが**実装は pin arc court**。⚠ pin 実装が equality 形へ変わる場合、本 probe の substrate pin も追随が要る（**下記 §6 の flag**） |
 | **§0#3 IK-only / #4 コ字 LOCK / #1 dual-arm** | ✅ 非接触（gains のみ） |
 | effort cap 実機 spec | ✅ 不変・census assert |

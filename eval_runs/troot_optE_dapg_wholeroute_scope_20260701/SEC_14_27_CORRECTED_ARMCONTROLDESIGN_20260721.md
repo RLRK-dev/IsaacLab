@@ -121,9 +121,11 @@ B0/B1 は外部 5 callsite 中の **1**（`policy_route_runner.py:730`）、同 
 
 ⇒ ⭐ **escalation は破棄せず、根拠を差し替えて存続**: 「07-19 directive の射程」ではなく「**裁定 B の例外 scope を超える機構が、tracked 1 + untracked 2 の計 3 file に存在する**」。
 
-**disposition = ⭐`Rs 指示により throw-away 形は不採用 → equality 拘束へ`**（2026-07-21・p4 承認のうえ更新）。
+**disposition = ⭐`書き戻し形は不採用 → equality 拘束へ`**（2026-07-21）。
 
-**Rs 逐語 = 「すてるなよ」**。⚠ 係り先（受領文脈・必須）= p11 が `_pp` の機構を「**毎回捨てて同じ値に戻すので、変化が積み上がらない**」と説明した直後の応答 ⇒ 指す対象 = **毎ステップ物理計算の結果を捨てて保存値を書き戻す形**。
+⚠⚠ **2026-07-21 18:56 訂正（p4 接地更新・STOP）**: 本 disposition の根拠から **Rs 逐語「すてるなよ」を外す**（Rs が当該 rule を disavow・逐語「そんなルール知らない」⇒ `ARM_CONTROL_DESIGN_PRINCIPLE_REGROUND_ARMCONTROLDESIGN_20260721.md`）。
+⇒ **根拠 = §0#5 の認可例外 scope 超過**（`RS71-System-Spec-SSOT.md:27` 逐語 `physics-faithful only; the ONLY authorized exception is the clip-retention pin`）。これは Δ A で**既に併記していた根拠**であり、**逐語を外しても disposition は変わらない**。
+📎 **receipt（authority ではない・保持のみ）**: 2026-07-21 13:48:37 JST、p11 が `_pp` を「**毎回捨てて同じ値に戻すので、変化が積み上がらない**」と説明した直後の Rs 応答 =「すてるなよ」（session transcript line 535 / role=user）。⛔ **規範として引かない**。
 ⇒ **この形は採らない。** 認可された clip-retention は **clip の所に equality 拘束を置き、ソルバに解かせる形**（物理結果を捨てず、拘束も物理の一部として解かれ、残りの節は物理のまま動く）で実現する。
 **実現可能性 = 実測済**: env7 Newton 1.2.1 `SolverMuJoCo` は equality 対応（`solvers.py:326` support matrix / `solver_mujoco.py:295-296` 逐語 supported）。⇒ 形が認可文言「**クリップのみ／never beyond clip**」（`log.md:6534`）にも収まる。
 
@@ -153,7 +155,7 @@ B0/B1 は外部 5 callsite 中の **1**（`policy_route_runner.py:730`）、同 
 **class = 単一 `DRIVE` / `MIGRATION_PENDING` 維持**（consumer 別分割 = 却下。extent 差は kind 差でない）。
 **bind = 全 consumer**（B0/B1 部分 bind 不可）。
 **fence = F-α〔rebind sink を guard 契約に追加・⭐ census = **3 file**・rebind は **import 時**〕+ F-β〔untracked consumer を 3 択で disposition・⭐ 対象 = `r_s71_bothhook_c1_76.py` / `r_s71_clip_dropin_72.py`〕の 2 種を別立てで必須**（class の代替でなく加算）。
-**escalation = `_pp` の機構は認可例外より広い（ケーブル 40 節すべてが動かなくなる ≠ clip 側の保持機構）。⭐ disposition = Rs 指示「すてるなよ」により throw-away 形 不採用 → equality 拘束へ。** ⛔ Rs の formal 例外裁定とは書かない・live 主張なし・削除勧告なし。
+**escalation = `_pp` の機構は認可例外より広い（ケーブル 40 節すべてが動かなくなる ≠ clip 側の保持機構）。⭐ disposition = 書き戻し形 不採用 → equality 拘束へ（根拠 = **§0#5 の認可例外 scope 超過**。⚠ 旧記載の Rs 逐語根拠は 2026-07-21 18:56 に取り下げ ⇒ REGROUND doc）。** ⛔ Rs の formal 例外裁定とは書かない・live 主張なし・削除勧告なし。
 **⚠ 訂正 #27** = 「live consumer 無なら retire」を静的判定可能な [R-E] に差替 ⇒ else 枝 retire は現材料で不可と確定。
 **⚠ %12 count 訂正** = `main:8067` は else 枝に入らない（entry point 5→4）。
 **⚠ citation 訂正** = `policy_route_runner:506` → 実体 `:483`。
@@ -167,7 +169,7 @@ B0/B1 は外部 5 callsite 中の **1**（`policy_route_runner.py:730`）、同 
 | Δ | 箇所 | 内容 | 理由 |
 |---|---|---|---|
 | **A** | §4(4) | escalation の根拠を差替（07-19 directive → 裁定 B 例外 scope 超過） | 原根拠の premise が裁定 B で失効・かつ「untracked」が事実誤り |
-| **E** | §4(4) disposition | `Rs 解釈待ち` → **`Rs 指示: throw-away 形 不採用・equality 拘束へ`**（逐語「すてるなよ」+ 係り先 + 実現可能性の実測を併記）。⛔formal 例外裁定とは書かない | Rs 直接指示 2026-07-21（p4 経由・p4 承認 13:56 JST） |
+| **E** | §4(4) disposition | `Rs 解釈待ち` → **`書き戻し形 不採用・equality 拘束へ`**（根拠 = **§0#5 の認可例外 scope 超過** + 実現可能性の実測）。⛔formal 例外裁定とは書かない。⚠ **2026-07-21 18:56 訂正** = 旧版は Rs 逐語「すてるなよ」を根拠に置いたが **Rs disavow** により取り下げ（逐語は receipt として保持・disposition 不変） | `ARM_CONTROL_DESIGN_PRINCIPLE_REGROUND_ARMCONTROLDESIGN_20260721.md` |
 | **F** | 全体 | ケーブルについての「凍結」を平易語へ（「凍結」は bar/prereg の固定の意味で既用＝語衝突） | Rs 指摘「凍結とは？」 |
 | **B** | §4(3) F-β | 事例を `r_fc0_c2_smoke_77.py` → **untracked 2 件**へ差替 | 名指された file は 4 commit で tracked と実測。**規則は不変** |
 | **C** | §4(3) F-α | census 1 → **3**、**import 時 rebind** を明記 | 独立の閉クエリで同一パターン 3 件 |

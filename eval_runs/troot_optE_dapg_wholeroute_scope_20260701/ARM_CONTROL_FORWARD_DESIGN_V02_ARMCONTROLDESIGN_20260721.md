@@ -2,7 +2,8 @@
 
 **Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** DESIGN v0.2 — **proposal**（landing = p4）。v0.1 = `bec159aec5` を継承・supersede しない（v0.1 = scope、本書 = 中身）。
 **設計対象（確定）:** substrate = **env7-mujoco**（Rs 裁定 A）/ 振付 = **再工事 W-b**（Rs 裁定 B）/ robot = UR5e×2 + Robotiq 2F-85。
-**原則:** **P-1 = 物理計算の結果を捨てない**（Rs 逐語「すてるなよ」・v0.1 §0.5）。
+**接地:** **RS71 §0#5 `physics-faithful only`**（`04-Specs/RS71-System-Spec-SSOT.md:27`・適用 = v0.1 §0.5）。
+⚠⚠ **2026-07-21 18:56 訂正**: 旧記載の名前付き原則「**P-1**」（Rs 逐語「すてるなよ」由来）は **Rs disavow により取り下げ** ⇒ 経緯 = `ARM_CONTROL_DESIGN_PRINCIPLE_REGROUND_ARMCONTROLDESIGN_20260721.md`。**本文中の「P-1」は §0#5 と読み替える**（技術内容は不変）。
 ⛔⛔ **`/pre-check` VERDICT = BLOCK（2026-07-21）。本書 v0.2 は設計前提として使えない。** 詳細 = `ARM_CONTROL_PRECHECK_V02_RESULT_ARMCONTROLDESIGN_20260721.md`。
 ⛔ **実装認可でない。** `/force-design`（gains 確定時）は **未実施**。
 **BLOCK の芯（3 件・私が独立に原文確認済）**: ①§2.3 の一次系近似は**高慣性関節で成立しない**（実測 0.512 rad は **wrist_2** = 低慣性 size1 の値・`…PD1_RESULT…:35` 逐語「worst joint = wrist_2」。肩に一般化したのは **同じ定数を別の測定面へ持ち込む誤り**）②**重力が入っている**（`test_newton_clip_routing.py:125` `GRAVITY = -9.81`）ため純 PD には恒久ドループが残り bar (i)(iii) が広い範囲で到達不能 ③飽和余裕の読み違い（下記 §2 訂正）。

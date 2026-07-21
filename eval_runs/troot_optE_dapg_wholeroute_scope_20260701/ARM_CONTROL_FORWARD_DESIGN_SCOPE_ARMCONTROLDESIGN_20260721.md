@@ -22,21 +22,27 @@
 
 ---
 
-## 0.5 ⭐ 設計原則（Rs 直接指示 2026-07-21・p4 経由 / p4 承認 13:56 JST）
+## 0.5 ⭐ 本設計が従う不変前提（接地 = RS71 §0#5）
 
-**Rs 逐語 = 「すてるなよ」**。⚠ 係り先（受領文脈・必須）= p11 が `_pp` の機構を「**毎回捨てて同じ値に戻すので、変化が積み上がらない**」と説明した直後の応答 ⇒ 指す対象 = **毎ステップ物理計算の結果を捨てて保存値を書き戻す形**。
+⚠⚠ **2026-07-21 18:56 訂正（p4 接地更新・STOP）**: 旧 §0.5 は Rs 逐語「すてるなよ」から**名前付き原則「P-1」**を立てていた。**Rs が当該 rule を disavow**（p4 relay 逐語「そんなルール知らない」）⇒ **P-1 は取り下げ**、以後 **逐語を authority として引かない**。上流 `CLAUDE.md` の realize 形追記も revert 済（`3ef4814f30`）。⇒ 経緯と誤りの形 = `ARM_CONTROL_DESIGN_PRINCIPLE_REGROUND_ARMCONTROLDESIGN_20260721.md`。
+⇒ ⭐ **設計の向きは不変**（下記は元から §0#5 が要求している）。
 
-⛔ **原則 P-1（本設計に無条件適用）: 物理計算の結果を捨てる実装を採らない。**
-- 具体的に禁じる形 = **毎 step、solver が出した状態を破棄して保存値／FK 値を書き戻す**（`phys_jq[:n] = fk_state…` / `jq[ARM_Q:] = snapshot` 系）。
+⛔ **接地（逐語）**: `04-Specs/RS71-System-Spec-SSOT.md:27` — **NO KINEMATIC TRICK — physics-faithful only; the ONLY authorized exception is the clip-retention pin**。
+＋ `.claude/rules/prohibited.md:19`（kinematic トリック禁止・唯一の認可例外 = clip-retention pin）／ `CLAUDE.md:72`（⛔不許可（不変）= 腕関節角の直接書込 / 指の kinematic close / `update_kinematic_bodies` / weld・attachment）。
+
+**本設計への適用（新規規範ではなく上記の適用）:**
+- ⛔ 採らない形 = **毎 step、solver が出した状態を破棄して保存値／FK 値を書き戻す**（`phys_jq[:n] = fk_state…` / `jq[ARM_Q:] = snapshot` 系）。⇒ 腕のそれは `CLAUDE.md:72` の不許可列挙に**名指しで載る**。ケーブル全 DOF のそれは**認可例外（clip 側の保持機構）より広い**。
 - 効かせたい拘束は **solver に解かせる**（equality 等）か、**actuator を通じて力で効かせる**。⇒ 物理は常に生きたまま。
 - ⇒ 腕・指の駆動は **target を与えて PD/actuator が追従する形**のみ（charter M-2 と同方向）。**書き戻しで「実現」しない。**
-- 関連 = 恒久原則「**sim は現実世界だ**」（Rs 2026-07-19）/ 裁定 B の不許可列挙。
+- 関連 = 恒久原則「**sim は現実世界だ**」（Rs 2026-07-19）。
 
-⭐ **P-1 は「kinematic 禁止」より広い。** 裁定 B の不許可列挙（腕関節角 直接書込・指の kinematic close・`update_kinematic_bodies`・weld/attachment）に**名前として載っていない形**でも、**物理結果を捨てているなら P-1 に触れる**。⇒ 設計・実装レビューの述語は「列挙に載っているか」ではなく「**solver の出した状態を捨てているか**」で立てる。
+⚠ **§0#5 の読み（p4/Rs 判断・私の court 外）**: 本書は §0#5 を**述語**（逐語 `physics-faithful only`）として読み、不許可列挙を**その例示**として扱う。**閉じた列挙**として読む場合、列挙に名前が無い形は都度 Rs 確認が要る。⇒ **現行設計はどちらの読みでも同じ結論**（腕の書き戻しは列挙に載り、ケーブル全 DOF 書き戻しは pin 例外より広い）。
 
-⚠ **P-1 の適用範囲 = 制御ループ内**（毎 step 走る駆動経路）。**episode 開始時 1 回の初期化（reset）は対象外** — そこには「捨てられる物理結果」が存在せず、`CLAUDE.md` も reset 直後の初期化を明示的に許容し、banked charter §4 も分類 B（reset/init/restore）を許可として維持している。⇒ **P-1 は分類 B を否定しない**（M-4 の target-sync 義務はそのまま）。
-⚠ **pin 実装そのものの owner = pin arc (d-a)/(d-b) court**（p4 tracking・非緊急）。本書は**腕・指の制御設計**に P-1 を適用する範囲のみを扱う。
-⛔ **書かないこと**: 「Rs が §0 例外 scope を formal に裁定した」とは書かない（実務 redirect であり formal 裁定の認定は p4/Rs court）。
+⚠ **適用範囲 = 制御ループ内**（毎 step 走る駆動経路）。**episode 開始時 1 回の初期化（reset）は対象外** — `CLAUDE.md` が reset 直後の初期化を明示的に許容し、banked charter §4 も分類 B（reset/init/restore）を許可として維持している。⇒ **分類 B は否定されない**（M-4 の target-sync 義務はそのまま）。
+⚠ **pin 実装そのものの owner = pin arc (d-a)/(d-b) court**（p4 tracking・非緊急）。本書は**腕・指の制御設計**への適用範囲のみを扱う。
+⛔ **書かないこと**: 「Rs が §0 例外 scope を formal に裁定した」とは書かない（formal 裁定の認定は p4/Rs court）。
+
+📎 **receipt（authority ではない・保持のみ）**: 2026-07-21 13:48:37 JST、p11 の「毎回捨てて同じ値に戻すので、変化が積み上がらない」という説明への Rs 応答 =「すてるなよ」（session transcript line 535 / role=user）。⛔ **規範として引かない**（Rs disavow 済）。発話記録として残置する。
 
 ---
 

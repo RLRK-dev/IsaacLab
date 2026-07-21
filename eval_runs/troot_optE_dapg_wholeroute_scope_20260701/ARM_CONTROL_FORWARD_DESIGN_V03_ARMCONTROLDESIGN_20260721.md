@@ -1,7 +1,8 @@
 # 前向き腕制御設計 v0.3 — BLOCK 6 件の根治（p11 ARM-CONTROL-DESIGN, 2026-07-21）
 
 **Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** DESIGN v0.3 — **proposal**（landing = p4）。**v0.2 = BLOCK（`cf02408202`）を supersede。**
-**設計対象:** env7-mujoco / UR5e×2 + Robotiq 2F-85 / 振付 = 再工事 W-b / 原則 **P-1 = 物理結果を捨てない**。
+**設計対象:** env7-mujoco / UR5e×2 + Robotiq 2F-85 / 振付 = 再工事 W-b / 接地 **RS71 §0#5 `physics-faithful only`**（`RS71-System-Spec-SSOT.md:27`）。
+⚠⚠ **2026-07-21 18:56 訂正**: 旧記載の名前付き原則「**P-1**」（Rs 逐語由来）は **Rs disavow により取り下げ** ⇒ `ARM_CONTROL_DESIGN_PRINCIPLE_REGROUND_ARMCONTROLDESIGN_20260721.md`。**本文中の「P-1」は §0#5 と読み替える**。
 ⛔ **実装認可でない**（`/pre-check` 再実行の結果は §8）。
 
 **⚠ 本書の数値は全て p11 が env7 の MuJoCo で自ら実測**（`mj_fullM` / `mj_jac` / `qfrc_bias`、asset = `ur5e.xml`）。v0.2 pre-check の検証者値と**独立に一致**（M = 3.498 / 3.294、ζ vendor 2.39 / 2.46、ドループ 26.2 mrad）。
