@@ -1,6 +1,6 @@
-# 腕制御 測定ハーネス 仕様 v1 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 2026-07-21）
+# 腕制御 測定ハーネス 仕様 v1.1 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 2026-07-21）
 
-**Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC v1 — **proposal**（landing = p4 経由）。
+**Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.1** — **proposal**（landing = p4 経由）。v1.0 = `054a54bbb6` ⇒ **pZ の model-identity 入力を折込**（§1 witness の精緻化 / fidelity caveat / provenance 出力）。
 **根拠:** Rs 裁定 = **案 A 採択**（p4 relay 2026-07-21 15:44）。**設計数値を手で導かない。** 私は **spec + 受入条件**を書き、**p0 が実 build して測り**、**pZ が実 build と突き合わせて model-identity を検証**する。数値はその**検証済み出力**から取る。
 **下敷き:** v0.4 手続き（`c51dad2d54`）。⚠ v0.4 は BLOCK 済ゆえ**そのまま採らない** — 下記 §0 の 1 点を構造的に変える。
 
@@ -37,8 +37,32 @@ v0.4 の致命 = **私が書いた build recipe が、実際に走るモデル�
 |---|---|
 | V-1 | 測定対象が **env が実際に solver へ渡した Model** であること（**別 build でも FK モデルでもない**） |
 | V-2 | 上記記録が、**pZ が独立に構成した env** の同一項目と一致すること |
-| V-3 | **cable の body 数が 0 でない**・**equality 件数が 0 でない**・**gripper servo が wired** — ⭐ **robot-only モデルを掴んでいないことの識別子**（v0.4 の失敗を狙って弾く leg） |
+| V-3 | ⭐**scene 固有物**が在ること（下記 §1.1 の witness）— **robot-only モデルを掴んでいないことの識別子**（v0.4 の失敗を狙って弾く leg） |
 | V-4 | 掃引に使う `q` が **joint 名で解決**されている（index 直書きでない） |
+
+### 1.1 ⭐ witness は **scene 固有物**に置く（pZ 入力・2026-07-21）
+
+⛔⛔ **DOF 数・gripper joint の有無では FK robot-only と as-built を分けられない。**
+実測: `build_fk_and_init(left_finger_pos, right_finger_pos, …)`（`newton_skill_env_base.py:1223`）は **指の位置を引数に取る** ⇒ **FK モデルも gripper 系 joint を持つ**。⇒ 「gripper が在る」類の述語は **v0.4 型の誤一致**を起こす。
+
+**採る witness（scene にしか無いもの・p11 が実測確認）**:
+| witness | 実体 |
+|---|---|
+| **cable** | `add_revolute_cable` が**両腕の後に**発行する REVOLUTE 鎖（`newton_skill_env_base.py:1587`。逐語「Cable: rigid-link REVOLUTE chain **AFTER both arms**」）⇒ **body 数 0 でないこと** |
+| **A-1 VISIBLE pass の痕跡** | `:1574-1578` 逐語「clear COLLIDE on **non-pad arm shapes** … **KEEP COLLIDE on the gripper PAD geoms**」⇒ **非 pad の腕 shape が COLLIDE を落としており、pad は保持している**こと |
+| **clip** | scene 側の clip 実体が在ること |
+| **world_count** | 宣言値と一致すること |
+
+⇒ **これらは FK/IK モデルには存在しない**ので、識別する。⛔ 「DOF 数一致」「gripper joint 在り」を witness に使わない。
+
+### 1.2 ⚠ fidelity caveat（model 記述は条件付きで書く）
+
+⛔ **「UR5e×2 + Robotiq 2F-85」と無条件に書かない。** scene が読むのは **`ROBOTIQ_STRIPPED_XML` = `2f85_koshape.xml`**（`test_newton_clip_routing.py:161`）＝ **コ字 claw の stripped asset**（`<tendon>` 除去）で、かつ **`skip_equality_constraints=True`**（4-bar equality を落として build）。
+⇒ 出力の model 記述は **「コ字 stripped asset・equality 無効で build された gripper」**と条件付きで書く。⇒ **H-6d（4-bar が有効化できるか）は、この条件下の問いである**ことを明記。
+
+### 1.3 provenance 出力（pZ 再現突合用・pZ 要求）
+
+ハーネスは出力に **build tree / branch / commit** を記録すること（+ venv path と Newton/mujoco/warp の版）。⇒ pZ が**同じ地点で**再現して突き合わせられる。
 
 ⛔ **V-1〜V-4 のいずれかが落ちたら、下流の全数値は無効**（fail-closed）。
 
@@ -84,7 +108,7 @@ p0 は次を**実測して報告する**（⛔ どれを採るかは決めない
 | H-6a | **effort cap** | `joint_effort_limit` / `jnt_actfrcrange` の**実値**は何か。⚠ 予測 = 既定 `1e6`（`ur5e.xml` に `actuatorfrcrange` 0 件ゆえ）。**±150/±28 は imported actuator の `forcerange` にのみ在る**。⇒ **B1-strip 後に cap が残るか**を実測 |
 | H-6b | **重力補償** | 実際に効かせられる経路はどれか。⚠ 私の v0.4 案（`gravcomp`+`jnt_actgravcomp` の実行時書込）は **到達不能の可能性**が指摘済（custom attribute の values が空・`ngravcomp` に setter 無し・全経路が無言で失敗）。⇒ **効いたことを `qfrc_gravcomp` / `qacc` の変化で示す正対照**が要る。効く経路が無ければ**「無い」と報告**する |
 | H-6c | `Control.joint_f` | cap の**内か外か**を実測（予測 = `qfrc_applied` 経由＝**外**）。⇒ 使えば実機より強くなる |
-| H-6d | 指の 4-bar | equality/mimic を有効にして 2F-85 を build できるか（⚠ **コ字 asset は human-LOCKED** ⇒ **asset を編集しない**。編集が要ると判明したら **STOP → p4 → Rs**） |
+| H-6d | 指の 4-bar | equality/mimic を有効にして **4-bar 連成を持つ gripper** を build できるか（⚠ 現状は **stripped コ字 asset + equality 無効**＝§1.2。「2F-85 を build」と書かない）（⚠ **コ字 asset は human-LOCKED** ⇒ **asset を編集しない**。編集が要ると判明したら **STOP → p4 → Rs**） |
 
 ⚠ **prior art（必ず参照）**: 同型の問題（strip が force cap を消す）は **gripper で解決済** — `task_config.py:316-318` 逐語「`GRIPPER_DRIVER_EFFORT_LIMIT_NM = 2.5` … **restores the force cap the tendon strip removed**（D-S5-2）; the **one-frame post-clamp `|qfrc_actuator| <= 2.5`** gate held on rev7/rev8」。⇒ **定数の置き方も受入形（1 frame post-clamp assert）も流用すること。**
 
@@ -104,7 +128,8 @@ p0 は次を**実測して報告する**（⛔ どれを採るかは決めない
 | AC-6 | H-5 の伝達比が **phase 別**に出ている（出ない限り task 許容値を関節 bar に変換しない） |
 | AC-7 | H-6a〜H-6c が **実測値**として報告されている（宣言値の転記でない）。H-6b は**正対照つき**（効いたことを状態変化で示す） |
 | AC-8 | **再現性**: 同一入力で再実行して同一出力（seed / 版 / env を出力に pin） |
-| AC-9 | ⭐**負対照**: 意図的に誤ったモデル（例 = FK robot-only）を渡すと **H-0 が落ちる**ことを示す。⛔ これが示せないハーネスは v0.4 と同じ穴を持つ |
+| AC-9 | ⭐**負対照**: 意図的に **FK robot-only モデル**を渡すと **H-0 が落ちる**ことを示す。⛔ 判定は **§1.1 の scene 固有 witness** に接地していること（DOF 数・gripper joint の有無で判定していたら**この負対照を通らない**）。これが示せないハーネスは v0.4 と同じ穴を持つ |
+| AC-10 | 出力に **build tree / branch / commit + venv + 版**（§1.3）が在り、pZ が同一地点で再現できる |
 
 ---
 
