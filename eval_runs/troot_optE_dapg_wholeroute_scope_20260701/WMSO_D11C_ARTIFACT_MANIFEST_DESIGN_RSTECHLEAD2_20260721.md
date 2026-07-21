@@ -124,7 +124,7 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 | `carry_record_golden_B.json` | `DEMO_PLUS_RL` × `IDENTICAL`（両段一致・substrate 2 値） | `f49d15698bf379c1` | 376 |
 | `carry_record_golden_C.json` | `BC_THEN_RL` × `EXPLICIT_SUPERSEDE`（**bc ≠ execution**） | `1b88fdc0c95813de` | 350 |
 | `carry_record_golden_D.json` | `RL_ONLY`（bc = null） | `4971d3f7a6601ff3` | 285 |
-| `build_goldens.py` | 生成器 + 非破壊 `--verify`（stdlib のみ・PEP-604 不使用ゆえ 3.8 で parse 可。⚠**3.8 実機は本 host に無く未実測**） | `4e49438cf5c722c7` | 21159 |
+| `build_goldens.py` | 生成器 + 非破壊 `--verify`（v2.3: **pin 済 digest を外部アンカーとして照合**・`__pycache__` の偽 FAIL を除去）（stdlib のみ・PEP-604 不使用ゆえ 3.8 で parse 可。⚠**3.8 実機は本 host に無く未実測**） | `1c4eebff59c520c8` | 22965 |
 
 - **control = 33 本**（拒否 15・declaration 3・golden の positive 4・**encoder vector 5**・encoder reject 5・**非 canonical bytes 1**）。**期待 code は完全一致で判定**（v2.1 は部分一致だった = cycle-2 F-16）。
 - ⭐**encoder vector が判別する（cycle-2 F-2 の中核修正）**: 期待バイト列を**手で導出**して埋め込む（この encoder で生成しないので自己循環しない）。U+FF01 は UTF-16-BE で `FF 01`・UTF-8 で `EF BC 81`、U+1F600 は UTF-16-BE で `D8 3D DE 00`・UTF-8 で `F0 9F 98 80` ⇒ **両者の順序が逆転する**。実測: WCJ = `{"😀":2,"！":1}` ／ `sort_keys=True` = `{"！":1,"😀":2}` ／ 無 sort = 同左 ⇒ **3 実装すべて不一致で落ちる**。v2.1 の golden は全 ASCII で**どの実装でも byte 同一**だった。
@@ -162,6 +162,8 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 12. **prereg §4 carry の残り**: ②#28 ④#30 は open-1 に、③**#29 = demo 再記録**（198 demo）⑤**#31 = trainer 実在**は本項に保持。⇒ **`portfolio_has_IL` は本 chunk 完了だけでは true にならない**。
 
 ## 9. 版歴
+
+- **v2.3**（15:5x 追補）= cycle-3 の計器 2 件を修正。①**登録済コマンドが `__pycache__` で rc=1 になる偽 FAIL**（`sys.dont_write_bytecode` は import 経路では無効 = DDR #35 と同型）⇒ 許可 entry に追加。②**協調改竄が rc=0 で通る**（builder 内定数だけが oracle だった）⇒ **golden 4 本の pin 済 digest を builder に埋め込んで照合**。実測: `__pycache__` 有りで rc=0 / 33/33 / 4/4、協調改竄で rc=1、非 canonical control も発火。⚠ **cycle-3 の残り（doc 側 G-3〜G-13）は未 fold**。
 
 - **v2.2**（本版・15:5x）= cycle-2 の 16 群を fold。**§0 の委任集合を訂正**（U-2/U-6 を非設計として明示）／**§1.1 から私の immateriality 判定を削除**（事実のみ）／**§2 に lineage 整合を追加・`NOT_APPLICABLE` の false-reject を除去**／**§3 の保証文を縮小・`:570` を全文引用・DDR #26 の誤同定を訂正**／**§4 の「正規化」を「拒否で担保」に訂正**／**§5 を 8 件に**／**§6 で AGENTS.md 未 commit を明示**／**§7 = 判別する encoder vector・parse する verify・argv guard・33 control・絶対 path の rc 表**／**open を 12 件に**。
 - **v2 / v2.1**（15:1x–15:2x・`f0ffe2e016d7302f…` @ `5e82a3326d`）= 縮小 + cycle-1 fold + fixture 初版。**cycle-2 FAIL**。
