@@ -25,6 +25,7 @@
 | U-1 | D1.1-C の **design authoring 解錠** | impl / training / authority / push / freeze / slice（別 custody §3.2） |
 | U-2 | **選択基準**（前提の確かさで選べ） | ⛔**どちらの案を採るか**（適用は CC1）／⛔**承認済 scope（prereg §2 IN 5 項）を 2 項へ縮小してよいか** |
 | U-3 | **以後の逐次承認を求めず、CC1 推奨で前進してよい**（standing） | ⛔既存の fence の解除（U-1 の §3.2 は不変）／⛔Rs 専権事項（凍結編集・freeze・scope 変更） |
+| U-4 | **手順の承認**（cycle-3 を回す／two-key を開かず Rs へ routing する） | ⛔routing (a)-(d) の**中身の裁定**（凍結訂正・D-1 の帰趨・部分版の可否・open-5 owner）は**未裁定** |
 
 ## 4. ⛔ U-2 から導かれる未決（cycle-2 F-10・本 custody の主目的）
 
