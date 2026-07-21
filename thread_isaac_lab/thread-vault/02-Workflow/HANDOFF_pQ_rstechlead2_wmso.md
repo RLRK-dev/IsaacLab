@@ -1,6 +1,21 @@
 # HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 12:56 JST
 
-> ## ⏳ D1.1-C `artifact_manifest` — scope prereg **two-key 完全充足 / ⛔Rs scope 承認待ち**
+> ## ⛔ D1.1-C `artifact_manifest` — **design v2.4 / 3 cycle の debate 全て FAIL→収束 / ⛔Rs 判断 4 件で停止**（2026-07-21 18:1x）
+>
+> **現在地**: design **v2.4** `b85fa905d4a60299…` @ `c0baa08663`（184 行・open **18 件**）＋ fixtures（builder `1c4eebff59c520c8…` @ `55705bfa56`／golden 4 本 @ `e1ed170014`）。**登録コマンド逐語実行 = 33/33 fired・4/4 PASS・rc=0**。LEDGER 反映 = p6 `59f2b47209`（DDR **#37** = gate 登録）。
+>
+> ⛔⛔**次の gate = Rs 判断 4 件のみ。two-key は開いていない。self-start しない。** routing = `WMSO_D11C_RS_ROUTING_20260721.md` `e699aa86ac02e001…` @ `1c77a24430`:
+> **(a)** 凍結 D1.1-B v13 `:256`/`:471` の併記訂正（**凍結編集 = Rs 専権**・誰も編集していない）／**(b)** 採択 D-1 の帰趨（⛔pQ/pS/pY のいずれも「覆る」とも「不変」とも宣言していない）／**(c)** 部分版で two-key してよいか・IN-1/3/4 + U-2(#28)/U-6(#30) を open のまま freeze してよいか〔⚠旧「scope を縮めてよいか」は**問い方が誤り**・多版 authoring は D1.1-B v1..v13 の先例〕／**(d)** open-5 の**是正 owner**（⚠ D1.1-B fixture の非適合を含む）。
+>
+> **経緯（3 cycle）**: v1 `726f684c…` @ `33e67626da` → cycle-1 **FAIL**（`9851f165…` @ `7f6d038a30`・24 件）→ v2/v2.1 `f0ffe2e0…` @ `5e82a3326d` → cycle-2 **FAIL**（`df2965a8…` @ `78d02f4257`・16 群）→ v2.2/v2.3 → cycle-3 **FAIL**（`d23e5faa…` @ `acce4d5c79`・NHA は CHANGE_JUSTIFIED・収束方向）→ v2.4。
+>
+> ⭐⭐**v1 の中心前提は FALSE と確定**（pS 設計軸 + pY custody + pQ 実測の 3 者）: 「required set が exact ゆえ HB 以下は `TRAIN_RUN_MANIFEST` を追加携行できない」は誤り。`E_PROOF_KIND_FOREIGN` は **component 意味論**（EP md `:114`/`:129iii`）で、凍結に**超過拒否の code は 0 件**。誤りの型 = 「**spec の性質（required set が厳密）**」を「**instance の禁止（record が超過携行不可）**」に取り違え。**機序 = 凍結 EP の JSON 1 文字列だけ読み、自分が土台に挙げた EP markdown を開かなかった**。⇒ **凍結 v13 `:256`（一次 locus・`:471` は縮約再掲）へ波及**し (a)(b) に。
+>
+> **恒久教訓（本 arc）**: ①**fixture は設計文を反証する**（S-3 が記録単体で判定不能と判明・encoder vector が「どの実装でも同じ byte」を破った）②**修正が別 check を壊す**（sha アンカー追加で非 canonical control が沈黙 → control が検出）③**計数は 3 cycle 連続で誤った**（7→8・3 件→4 件・§3 の disposition 欠落）④**未 commit の面を「原文」として引用した**（`AGENTS.md :68`・本 session 3 度目の同型＝ DDR #35 族）。
+>
+> ⚠**以下は prereg 段（12:56）の記録 — 現状は上記**。
+
+> ## ⏳ D1.1-C `artifact_manifest` — scope prereg **two-key 完全充足**（当時）
 >
 > **着手** = Rs 逐語「go」（2026-07-21 12:1x・D1.1-B FROZEN 直後）。**gate から順に踏んだ**（design から始めない）。
 >
