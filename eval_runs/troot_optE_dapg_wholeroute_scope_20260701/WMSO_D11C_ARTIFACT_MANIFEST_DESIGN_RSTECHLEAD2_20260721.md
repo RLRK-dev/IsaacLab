@@ -72,7 +72,7 @@ class StageBindingRecord:                        # 注: 型注釈は PEP-604 を
 ⚠**cycle-2 F-8 の訂正**: v2.1 は `NOT_APPLICABLE` で execution 段も null 必須としていたが、**凍結 v13 `:166` が null を要求するのは bc 段のみ**であり、SCRIPTED/WAIT が KNOWN な `tensor_binding` slot を持つ構成は契約上正当（EP JSON `:29`）。旧規則は**正直な記録を false-reject** していた。
 
 - **凍結 declaration との突合**（凍結 v13 `:158-166`）:
-  - ⭐**lineage 整合（cycle-2 F-6 で追加）**: 記録の `training_lineage` == 凍結 `LineageBindingDeclaration.training_lineage`。不一致 = **凍結 `E_BINDING_LINEAGE_MISMATCH` を再利用**（v13 `:230`・新 code を作らない）。⚠⚠**cycle-3 G-6 の宣言**: 凍結 `:171` は同 code を **`TrainingProvenance.training_lineage` との比較**に定義し、`:230` は **certify 時**の cross-artifact 検査に置いている。本版は **別 operand（`LineageBindingDeclaration`）・別発火点（C 側 record 検査）**で用いる ⇒ **凍結 code の適用域を広げている**。「新 code を作らない」を満たす代わりに凍結の意味に触れる決定であり、**Rs 判断へ回す**（open-15）。⚠ これが無いと **DEMO_PLUS_RL の run が `NOT_APPLICABLE` を名乗って両段 null で通り、U-5 が 0 code で破られる**（cycle-2 実証）。
+  - ⭐**lineage 整合（cycle-2 F-6 で追加）**: 記録の `training_lineage` == 凍結 `LineageBindingDeclaration.training_lineage`。不一致 = ⭐**C 側の新 code `E_MANIFEST_LINEAGE_INCOHERENT`**（v2.5 で変更）。⚠⚠**cycle-3 G-6 → v2.5 で解消**: 凍結 `:171` は同 code を **`TrainingProvenance.training_lineage` との比較**に定義し、`:230` は **certify 時**の cross-artifact 検査に置いている。本版は **別 operand（`LineageBindingDeclaration`）・別発火点（C 側 record 検査）**で用いる ⇒ v2.4 までは凍結 code の適用域を広げていた。**pS 設計軸 read**（`0aaed7d98965aa60…`）= 「v13 `:169` は別 check・別 code を委任しており lineage も本 code も委任していない ⇒ **凍結 semantics に触れる**」「**reuse-first は同一 check の再帰に code を再利用する規律であって、構造的に別の check を 1 名に押し込む規律ではない** ⇒ **新 C 側 code が clean 解**」。⇒ **v2.5 で新 code へ変更し、抵触を設計変更で解消**（Rs 判断を 1 件減らした）。⚠ これが無いと **DEMO_PLUS_RL の run が `NOT_APPLICABLE` を名乗って両段 null で通り、U-5 が 0 code で破られる**（cycle-2 実証）。
   - `relation == IDENTICAL` ⇒ 両 field 非 null かつ相等。
   - `relation == EXPLICIT_SUPERSEDE` ⇒ bc 段 == 凍結 `TensorBindingSpec.lineage_declaration.bc_stage_binding.demo_dataset_binding_hash`（⚠ **dataset の content hash とは別物**・v2.1 の短縮 path 表記は凍結に存在しなかった＝ cycle-2 F-16 訂正）。
   - 不一致 = `E_MANIFEST_STAGE_BINDING_CONFLICT`。
@@ -104,9 +104,9 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 - **時刻を hash preimage に入れない**。⚠ v2.1 は「付随 metadata に置く」と書いたが**その置き場が存在しなかった**（cycle-2 F-16）⇒ **本版は時刻を記録しない**。
 - **配布 bytes は canonical bytes と byte 一致であること**（`E_MANIFEST_NONCANONICAL_BYTES`）。⚠**検出であって阻止ではない**。実行箇所 = §7 の `--verify`（**parse → 再正規化 → byte 比較**。v2.1 は parse せず file 内定数と比較するだけで**自己証明**だった = cycle-2 F-3）。
 
-## 5. error code = **8 件**（C 側）
+## 5. error code = **9 件**（C 側）
 
-拒否規則 6: `E_MANIFEST_SUBSTRATE_ABSENT` / `…_MALFORMED` / `…_POOLED` / `E_MANIFEST_STAGE_BINDING_MISSING` / `…_PRESENT` / `…_CONFLICT`
+拒否規則 7: ⭐`E_MANIFEST_LINEAGE_INCOHERENT`（v2.5 新設）／ `E_MANIFEST_SUBSTRATE_ABSENT` / `…_MALFORMED` / `…_POOLED` / `E_MANIFEST_STAGE_BINDING_MISSING` / `…_PRESENT` / `…_CONFLICT`
 ＋ **`E_RECORD_SHAPE`**（key 集合・型・enum member・64-hex の shape 違反。⚠ v2.1 は「decoder ゆえ code でない」と処理していたが**実装が code として発している** = cycle-2 F-12）
 ＋ builder 側 1: `E_MANIFEST_NONCANONICAL_BYTES`
 
@@ -117,7 +117,9 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 
 - ⭐⭐**cycle-3 G-4 で読みが変わった — 「未決」ではなく「非適合」の可能性が高い**: 凍結 **contracts_v2 `:168`** が key 順を逐語で決めている（「object key sort = UTF-16 code unit 順（`k.encode("utf-16-be")` bytes 昇順）」）。⇒ 下記 2 site は**凍結規則に非適合**であり、対等な候補ではない。さらに **D1.1-B fixture の `wcj_bytes` も同じ挙動**＝ **凍結 chunk 内の非適合**（§1.1 と同型の凍結波及・未上程だった）。⇒ 実態は「3 実装が併存」ではなく「**2 挙動 / 3 site で、凍結に適合しているのは本版のみ**」。⚠ 現行 corpus は全 ASCII ゆえ差は **latent**。
 - **旧記述（open-5）**: `thread_isaac_lab/wmso/d1/identity.py:80-82` の `canonical_json()` = `json.dumps(sort_keys=True, ensure_ascii=False, separators=(",",":"))` は **凍結 WCJ と別物**。⭐**本版の encoder vector がこれを判別する**（§7）: 同一入力に対し WCJ = `{"😀":2,"！":1}` ／ `sort_keys=True` = `{"！":1,"😀":2}`（pQ 実測）。⇒ **どちらが正かは本版では決めない**（owner を付けることが freeze の前提 = open-5）。
-- ⚠ 同 node には D1.1-B fixture の `wcj_bytes` も在り、**正規化の実装は 3 つ**（cycle-2 F-16）。
+- ⛔⛔**v2.4 の主張を撤回（v2.5・pY が実測で反証）**: 「**D1.1-B fixture の `wcj_bytes` も非適合＝第 2 の凍結波及**」は**誤り**。同 fixture は `wcj_bytes` 内の `check()` で **全 dict key に `k.isascii()` を assert**（`wmso_d11b_fixtures/build_goldens.py:198`）しており、**非 ASCII key は AssertionError で拒否**される ⇒ ASCII では codepoint 順 == UTF-16BE 順ゆえ**乖離は構造的に到達不能** ⇒ **適合**。さらに**凍結 spec `:171` 自身が層を分けている** — 逐語「層: (a) key-sort comparator / raw-WCJ（full-Unicode key; golden vectors の対象）/ **(b) typed 入口 `canonicalize()`（ASCII-key assert）**」⇒ 当該 fixture は **(b) を実装している**。⇒ ⭐**凍結 chunk 内に確認された非適合は無い**。custody = pY `641229b6d6f18b3f…` @ `bb7fd7cc19`。
+- ⚠⚠**私の誤りの機序（自己記録）**: `:208` の **1 行だけ**を読んで `sort_keys=True` を見つけ、**囲む関数（guard は `:198`）も凍結 `:171` も読まずに**「非適合」と結論し、さらに **identity.py と同型**と一般化した。⇒ **v1 の中心前提の誤り（§1）と同じ型を、その訂正 note を書いている最中に再演した**。⚠**pS は私の枠組みを受け入れて上に議論を積んだ**（＝同意は独立確認ではない）／**pY は測って反証した**。
+- ⚠**残るのは `identity.py:80-82` の 1 site のみ**（guard 無し・codepoint 順）。ただし pY 実測のとおり**別 canonicalizer**で用途は `finetune_cfg_hash` / handoff payload hash（`identity.py:111`・`:194`・`harness.py:101`）であり **§168/WCJ を参照していない**。⇒ 「非適合」ではなく「**§168 に一致すべきか否かの設計問題**」（latent・pS + pQ）。
 - ⛔⛔**引用面の注意（cycle-2 F-7）**: `./isaaclab.sh -p` が非零 exit を隠す旨を記す **AGENTS.md の当該記述は、本 pin 時点で commit されていない**（`git show HEAD:AGENTS.md` に 0 hit／working tree に 1 hit／`git status` = ` M AGENTS.md`・pQ 実測）。⇒ **本 doc は当該記述を「on-disk as-read」としてのみ引用**し、committed 典拠としては引かない。⚠**本 session で 3 度目の同型**（`CLAUDE.md` 未 commit 統治 = DDR #35 と同族）⇒ **open-7 として面へ surface する**。
 
 ## 7. Fixtures / test（**bank 済 — 宣言でなく実物**）
@@ -130,7 +132,7 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 | `carry_record_golden_B.json` | `DEMO_PLUS_RL` × `IDENTICAL`（両段一致・substrate 2 値） | `f49d15698bf379c1` | 376 |
 | `carry_record_golden_C.json` | `BC_THEN_RL` × `EXPLICIT_SUPERSEDE`（**bc ≠ execution**） | `1b88fdc0c95813de` | 350 |
 | `carry_record_golden_D.json` | `RL_ONLY`（bc = null） | `4971d3f7a6601ff3` | 285 |
-| `build_goldens.py` | 生成器 + 非破壊 `--verify`（v2.3: **pin 済 digest を外部アンカーとして照合**・`__pycache__` の偽 FAIL を除去）（stdlib のみ・PEP-604 不使用ゆえ 3.8 で parse 可。⚠**3.8 実機は本 host に無く未実測**） | `1c4eebff59c520c8` | 22965 |
+| `build_goldens.py` | 生成器 + 非破壊 `--verify`（v2.3: **pin 済 digest を外部アンカーとして照合**・`__pycache__` の偽 FAIL を除去）（stdlib のみ・PEP-604 不使用ゆえ 3.8 で parse 可。⚠**3.8 実機は本 host に無く未実測**） | `bc89e9d7148e15ca` | 23191 |
 
 - **control = 33 本**（拒否 15・declaration 3・golden の positive 4・**encoder vector 5**・encoder reject 5・**非 canonical bytes 1**）。**期待 code は完全一致で判定**（v2.1 は部分一致だった = cycle-2 F-16）。
 - ⭐**encoder vector が判別する（cycle-2 F-2 の中核修正）**: 期待バイト列を**手で導出**して埋め込む（この encoder で生成しないので自己循環しない）。U+FF01 は UTF-16-BE で `FF 01`・UTF-8 で `EF BC 81`、U+1F600 は UTF-16-BE で `D8 3D DE 00`・UTF-8 で `F0 9F 98 80` ⇒ **両者の順序が逆転する**。実測: WCJ = `{"😀":2,"！":1}` ／ `sort_keys=True` = `{"！":1,"😀":2}` ／ 無 sort = 同左 ⇒ **3 実装すべて不一致で落ちる**。v2.1 の golden は全 ASCII で**どの実装でも byte 同一**だった。
@@ -174,6 +176,8 @@ dataset_substrate_ids        # str の列（bytes 昇順・重複禁止）
 18. **本 design が引く Rs 逐語は CC1 の transcription**（custody §5）。**byte 忠実性は独立検証されていない**／**Rs 拒否権は残る**（approval custody §4）。⇒ 本版の authoring 自体が未承認扱いに戻り得る。
 
 ## 9. 版歴
+
+- **v2.5**（本版・18:4x）= ⛔⛔**v2.4 §6 の「第 2 の凍結波及」を撤回**（pY が実測で反証・凍結 fixture は `:198` の ASCII-key assert で適合・凍結 `:171` が層を明示）。⇒ **凍結 chunk 内の非適合は無い**。／**cycle-3 G-6 を設計変更で解消** — 凍結 code の overload をやめ **C 側新 code `E_MANIFEST_LINEAGE_INCOHERENT`** を新設（pS 設計軸 read）⇒ **open-15 は不要に**。／§5 = **9 件**。builder 再 bank = `bc89e9d7148e15ca…` @ `b994b617b5`。⭐**Rs 裁定 (a) = B 履行済**（note `00cf0c0bf86681f8…` @ `20cd755ac9`・凍結物は無傷 `5a1874d3be8b98b8…`）。
 
 - **v2.4**（本版・18:0x）= cycle-3 の doc 側 G-3〜G-13 を fold。§0 に**未扱いの凍結委任 4 件**と **IN-2 部分履行**を追記／§1.1 の `:471` 逐語を訂正（v2.2 の記述は**逐語で偽**だった）／§2 で**凍結 code の適用域拡張を宣言**し Rs へ／§4 の `:178` に host を復元／§5 で **`E_PROOF_ARTIFACT_UNRESOLVED` の記載を撤回**（到達不能）／§6 で **open-5 を「未決」から「非適合の是正」へ読み直し**（D1.1-B fixture の非適合も明記）／§7 の「検査しないもの」を **mutation 研究の実測**で拡張・登録コマンドを絶対 path 化／§8 を **18 件**にし owner を付与。⚠**Rs 判断 (c) の framing 訂正は routing `e699aa86ac02e001…` @ `1c77a24430` 側で実施済**（「scope 縮小の可否」→「部分版 two-key の可否 / open-freeze の可否」）。
 

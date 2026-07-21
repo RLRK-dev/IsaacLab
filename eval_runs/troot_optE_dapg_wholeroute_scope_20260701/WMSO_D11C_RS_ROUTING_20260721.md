@@ -43,7 +43,11 @@
 
 ⚠**付随事実（cycle-3 G-5）**: prereg **IN-2 も部分履行**である。IN-2 逐語は「silent pooling を**禁止**する（検出・拒否の code を含む）」だが、設計は「列挙の網羅性は記録単体から判定不能」として**保証を撤回**した（open-9）。⇒ 「2 項設計済」も正確には **1 項 + 部分 1 項**。
 
-## (d) open-5 の owner 指名（正規化の非適合）
+## (d) open-5 の owner 指名 — ⛔⛔**下記の前提 1 件を撤回**（2026-07-21 18:4x）
+
+⭐**撤回**: 「**D1.1-B fixture も非適合＝第 2 の凍結波及**」は**誤り**でした（pY が実測で反証・custody `641229b6d6f18b3f…` @ `bb7fd7cc19`）。同 fixture は `:198` で **ASCII-key assert** を持ち乖離は到達不能、かつ**凍結 `:171` 自身が (b) typed 入口＝ASCII-key assert の層を定義**しており、fixture は**その層の実装**です。⇒ ⭐**凍結 chunk 内に確認された非適合は無く、(d) は凍結波及ではありません**。⚠ 機序 = 私が `:208` の 1 行だけを読み、囲む関数と凍結 `:171` を読まずに一般化した（§1 の誤りと同型）。
+
+⇒ **残る論点は `identity.py:80-82` のみ**で、これは別用途の canonicalizer（`finetune_cfg_hash` / handoff payload hash・§168 を参照しない）ゆえ「**§168 に一致すべきかの設計問題**」（pS + pQ・latent）。**Rs 判断としては (d) を取り下げ可**。
 
 **事実**（cycle-3 G-4 で読みが変わった）:
 - 凍結 contracts_v2 `:168` が **key 順を逐語で決めている**（「object key sort = UTF-16 code unit 順（`k.encode("utf-16-be")` bytes 昇順）」）。
