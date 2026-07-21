@@ -114,6 +114,30 @@ SKILL は EE 到達閾値を持つ（例: CLAMP 2 mm）。⇒ **制御器の追�
 
 ⇒ 変換経路: **cable 中心の量は H-5 の伝達比**で、**腕 EE の量は H-4 の Jacobian**で関節 bar に落とす。⛔ **cable の量を腕 Jacobian で変換しない**（cable は腕の剛体従属ではない）。
 
+#### 5.4.1 p5 から受領した閾値表（`P5_EE_REACH_THRESHOLDS_for_p11_20260721.md` @ `49a6f66323`・sha256 `e93ee3d799f0bb0d…`・**p11 が code 側を独立確認**）
+
+| skill | 閾値 | 点 | 瞬間 | routing |
+|---|---|---|---|---|
+| acquire-grasp | pos **2 mm**（`task_config.py:362` `T_DIST=0.002`）/ ori **10°**（`:364` `T_ALIGN=0.1745`） | 指先 | **保持 K=5**（静定） | **H-4** |
+| approach | pos **12 mm**（`:363` `T_DIST_APPROACH=0.012`） | 指先 | — | **H-4 + H-5**（基準が cable 分節ゆえ分離） |
+| insert 着座 | pos **3 mm**（`:368` `T_GROOVE=0.003`）/ ori `cos > 0.85`（`:369` `T_SEAT`） | ⭐**cable 分節 body**（腕でない） | 着座 | ⛔**H-5 のみ**。腕側の押込目標 `PUSH_Z=1.025` は H-4 |
+| aerial | 落下不可 `min(cable z) > 0.82` | cable body | — | ⛔**H-5** |
+| carry | 明示数値なし（下流継承 = grasp の 2 mm 予算内） | 指先 | — | H-4 |
+| hold / wait | grasp の 2 mm 保持を継承 | 指先 | **静定** | H-4 |
+| set_finger | `0.002 / 0.006 / 0.04` | **指 joint** | — | **H-4/H-5 とも N/A**（gripper servo・腕 EE 量ゼロ） |
+
+⭐ **結論（sizing の核）**: **ほぼ全ての成功閾値が「保持・静定」で評価される** ⇒ §5.4 の表より **縛るのは重力たわみ = `ke` の大きさ**（`kd` ではない）。
+⚠ **`T_SEAT = 0.85` は段階的引き締めの初期値**（`:369` 逐語「0.85→0.9→0.95」）⇒ **sizing は最終側 0.95 で見る**（保守側）。p5 の指摘どおり。
+
+#### 5.4.2 ⛔⛔ 実測で見つけた測定面のずれ（**p5/Rs へ escalate・私は裁定しない**）
+
+閾値が測る「指先」は `ee_pos + R(ee_q)·[0,0,**0.220**]`（`newton_skill_env_base.py:899-905`）。⚠ **その 0.220 は自身のコメントで Franka legacy と明記**（`task_config.py:78` / `:84`「Franka value; **re-derive S6**」/ `:324`）。⚠ **同 file に実測のコ字値が別に在る**: `EE_TO_PINCH_CLOSED = 0.2548`（`:320`）/ `EE_TO_PINCH_TIP_CLOSED = 0.2757`（`:321`）。
+
+⇒ ⭐ **「指先」という同じ語が 2 点を指し、差は 34.8〜55.7 mm = 2 mm 閾値の 17〜28 倍。**
+- **sizing への影響**: 腕の手先までの長さが変わる ⇒ **mrad あたりの mm が変わる** ⇒ 関節 bar が変わる。⇒ **H-4 を 3 点で出させる**（spec v1.4 §H-4.1: J-a 閾値の点 0.220 / J-b pad body / J-c 爪先 0.2757）。**sizing は「閾値と同じ面」= J-a で行う**。
+- **task への影響**: 目標も同じ 0.220 で作られていれば**腕と目標の一致には相殺**するが、**cable との接触は物理の世界で起きる**ので相殺しない。⇒ **どの点で閾値を評価すべきかは p5/Rs の court。**
+- ⚠ **私が確認していないこと**: 「live の acquire-grasp 成功判定が `compute_clamp_pos` を呼ぶ」は **p5 帰属**。私の `grep` では `T_DIST` の live 消費は tests / `mpc_config_ic.py` に見え、env 側の判定行は特定できていない。⇒ **p5 に live consumer の file:line を照会**（判定に効くため）。⭐ **本設計はこの未確認に依存しない** — H-4 を 3 点で出せば、どの点でも bar を立てられる。
+
 ## 6. 数値（**測定待ち** — 決めない）
 
 | 量 | 出所 |

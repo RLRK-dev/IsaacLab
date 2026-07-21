@@ -1,8 +1,8 @@
 # 腕制御 測定ハーネス 仕様 v1.3 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 2026-07-21）
 
 **Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.3** — **proposal**（landing = p4 経由）。
-**版歴（内容 pin・sha は照合記録）:** v1.0 `054a54bbb6` → v1.1 `37902fb909`（pZ の model-identity 入力を折込）→ v1.2 `3cb06b0fe5`（**H-2 の DOF 宣言** = §H-2.1/2.2/2.3 + AC-3）→ ⭐**v1.3**（**p0 の h0 実測が v1.1 の witness 前提 2 点を偽と示したことへの応答** = §1.1 を **参照同一性 I-1〜I-3 主レグ**へ構造変更 / A-1 VISIBLE を文脈記録へ降格 / clip witness を削除 / V-1・V-3・AC-9 追従）。
-⚠ **v1.3 の変更は §1.1 と V-1/V-3/AC-9 に限局**（H-2 以降は無変更）。
+**版歴（内容 pin・sha は照合記録）:** v1.0 `054a54bbb6` → v1.1 `37902fb909`（pZ の model-identity 入力を折込）→ v1.2 `3cb06b0fe5`（**H-2 の DOF 宣言** = §H-2.1/2.2/2.3 + AC-3）→ v1.3 `c8c326e00b`（**参照同一性 I-1〜I-3 を主レグ**へ / A-1 VISIBLE 降格 / clip witness 削除 / V-1・V-3・AC-9 追従）→ ⭐**v1.4**（**p5 の閾値表 `49a6f66323` を受けて H-4 を 3 参照点に** = §H-4.1 新設。閾値が測る点 `EE_TO_FINGERTIP=0.220` は **Franka legacy** で、実測のコ字 pad/爪先 `0.2548/0.2757` と **34.8〜55.7 mm 違う**）。
+⚠ **v1.4 の変更は H-4 に限局**（他章は無変更）。
 **根拠:** Rs 裁定 = **案 A 採択**（p4 relay 2026-07-21 15:44）。**設計数値を手で導かない。** 私は **spec + 受入条件**を書き、**p0 が実 build して測り**、**pZ が実 build と突き合わせて model-identity を検証**する。数値はその**検証済み出力**から取る。
 **下敷き:** v0.4 手続き（`c51dad2d54`）。⚠ v0.4 は BLOCK 済ゆえ**そのまま採らない** — 下記 §0 の 1 点を構造的に変える。
 
@@ -147,6 +147,20 @@ v0.4 の致命 = **私が書いた build recipe が、実際に走るモデル�
 - ⛔ `wrist_3_link` を使わない（`wrist_2`/`wrist_3` の位置列が構造的にゼロ）。
 - ⛔ `pinch` site も**単独では不可** — `collapse_fixed_joints` で `wrist_3_link` に剛体固定されており、**8 本の gripper DOF の列がゼロ**になる（v0.4 ISSUE 8）。使う場合は**その旨と誤差の向き**を明記。
 - 出力 = per-joint **mm/mrad**（envelope 上の最大）＋ **回転成分の別評価**。
+
+#### H-4.1 ⭐ **3 点で出す**（v1.4・2026-07-21）— 閾値が測る点と、実際に触れる点が違う
+
+SKILL の閾値は **`ee_pos + R(ee_q)·[0,0,+EE_TO_FINGERTIP]`** で測られる（`newton_skill_env_base.py:899-905`）。⚠ その **`EE_TO_FINGERTIP = 0.220` は自身のコメントで Franka/legacy と明記**（`task_config.py:78`「FRANKA panda_hand->fingertip」/ `:84`「220mm, **Franka value; re-derive S6**」/ `:324`「**EE_TO_FINGERTIP above (0.220) is the Franka/legacy**」）。⚠ **同 file には実測の Robotiq/コ 値が別に在る**: `EE_TO_PINCH_CLOSED = 0.2548`（`:320`）/ `EE_TO_PINCH_TIP_CLOSED = 0.2757`（`:321`）。
+
+⇒ ⭐ **同じ「指先」という語が 2 つの点を指し、差は 34.8〜55.7 mm**（2 mm 閾値の **17〜28 倍**）。⇒ **どちらで Jacobian を取るかで関節 bar が変わる**（腕手先までの腕の長さが変わるため、mrad あたりの mm が変わる）。
+
+| # | 参照点 | なぜ要るか |
+|---|---|---|
+| **J-a** | `ee_pos + 0.220·ẑ_ee`（**閾値が測っている点**） | **PD sizing はこの点で行う**（判定式と同じ面で bar を立てるため） |
+| **J-b** | **pad body**（`body_label` から発見・cable に実際に触れる） | **接触・把持の物理**はこの点で起きる |
+| **J-c** | `EE_TO_PINCH_TIP_CLOSED = 0.2757` 相当の爪先 | J-a と J-b の差を**定量化**して報告するため |
+
+⛔ **1 点だけ出さない。** 3 点の差を出力に併記する。⇒ **どの点で閾値を評価すべきかは p5/Rs の court**（本 spec は判断せず、両方で測れる材料を出す）。
 
 ### H-5 ⭐ 伝達測定（cable 変位 ÷ EE 変位）— **v0.4 に欠けていた段**
 - **なぜ要るか**: task 許容値 `SEAT_LAT_BAR_M`（`route_env_config.py:170` 逐語「**cable centre** geometrically inside the groove」）は **cable 中心**の量。⛔ **arm Jacobian で関節 bar に変換してはならない**（cable は arm の剛体従属ではない）。v0.4 はこれを禁じたまま**解除に要る測定を用意しなかった**ため、bar が原理的に決まらなかった（ISSUE 3）。
