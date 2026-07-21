@@ -119,23 +119,21 @@ singleton region かつ region postcondition が自明/不在 → 通常 node �
 
 **原則:** 2 候補 = 同一 vocabulary entry ⟺ 行動 intent が同じ。realization 差（learned/scripted）は ExecutionBundle の別で vocabulary を増やさない。start 状態・程度の差は束縛パラメータ。**side（L/R）・clip（C1-C5）は identity でなく合成座標。**
 
-**基底 = 9 entry**（接地 = `step_table.py:39-51` の 9 SkillName を腕ごとに分解・merge。⭐**2026-07-21 09:49 p5 code 直読で grip を 2 分割** — 下記 (b) 参照）:
+**基底 = 7 entry**（接地 = `step_table.py:39-51` の 9 SkillName を腕ごとに分解・merge。⭐**2026-07-21 p5 code 直読 2 件で確定**: grip を 2 分割 [+1・(b)] → scripted finger 原始 3 つを `set_finger(side,target)` へ merge [-2・(c)] = 原 8 から -1）。p5 根拠 = `P5_ANSWER_TO_pX_grip_schema_coherence_20260721.md`（sha256 `6eb945f0dca867f0…` @ `bfe1927391`）／ `P5_ANSWER_TO_pX_finger_primitive_merge_20260721.md`（sha256 `8bac26197d07076c…` @ `2aa479ba10`）:
 
-| # | entry | intent | 吸収した現行 SkillName |
-|---|---|---|---|
-| 1a | acquire-grasp | EE 整列で cable を把持（learned・finger は auto-close の副産物） | CLAMP |
-| 1b | re-tighten | 位置決め済み finger の締め直し（半→全・EE 動作なし・scripted） | RECLAMP_L |
-| 2 | half_release | 緩めて誘導保持（接触維持） | HALF_UNCLAMP_RELEASE の L 側 |
-| 3 | full_release | 開いて手放す | HALF_UNCLAMP_RELEASE の R 側 + UNCLAMP |
-| 4 | approach | 把持可能姿勢へ EE 移動（精密） | APPROACH_CABLE + AERIAL_REGRASP |
-| 5 | carry | 把持したまま EE 移動 | TRANSPORT |
-| 6 | insert | groove へ押込 | INSERT_INTO_CLIP |
-| 7 | hold | 把持と姿勢を維持 | （暗黙） |
-| 8 | wait | 制御なし・観測 | CLIP_CONFIRM |
+| # | entry | intent | 吸収した現行 SkillName | kind |
+|---|---|---|---|---|
+| 1 | acquire-grasp | EE 整列で cable を把持（finger は auto-close の副産物） | CLAMP | learned |
+| 2 | set_finger(side, target) | 指定側 finger を target へ補間（target ∈ {0.002 全 / 0.006 半 / 0.04 開}） | RECLAMP_L + HALF_UNCLAMP_RELEASE + UNCLAMP | scripted |
+| 3 | approach | 把持可能姿勢へ EE 移動（精密） | APPROACH_CABLE + AERIAL_REGRASP | learned |
+| 4 | carry | 把持したまま EE 移動 | TRANSPORT | scripted |
+| 5 | insert | groove へ押込 | INSERT_INTO_CLIP | learned |
+| 6 | hold | 把持と姿勢を維持 | （暗黙） | 実現=p4/p5 |
+| 7 | wait | 制御なし・観測 | CLIP_CONFIRM | wait |
 
 **契約層の精緻化（pS・案 B 不変・数え方の精度）:**
-- **(1)** evidence は SkillDefinition（realization）を数える。凍結 SkillDefinition は kind を 1 つしか持たないゆえ、grip の learned（CLAMP）と scripted（RECLAMP_L）は同 skill_id でも別 SkillDefinition。⇒ evidence = N × 13、N ≈ 8-16（entry あたり小定数）。「8 × 13」でなく、しかし still 基底数に線形（side/clip の組合せでない）。
-- **(2)** side/clip を座標にする契約層条件 = 基底 skill が coordinate-parametric（obs/action が side/clip を入力に取り evidence は 1 回）で、composition が具体座標を束縛する。⇒ 座標は合成層（自由）に残り組合せ爆発が消える。⚠ obs/action の parametric 化は **p5 = SKILL-DETAIL-DESIGN への設計要件**。
+- **(1)** evidence は SkillDefinition（realization）を数える。凍結 SkillDefinition は kind を 1 つしか持たないゆえ、learned entry（例 acquire-grasp）と scripted entry（例 set_finger）は別 SkillDefinition。⇒ evidence = N × 13、N ≈ 7-16（7 entry × 各 realization・小定数）。「entry 数 × 13」でなく realization 数で数えるが、still 基底数に線形（side/clip の組合せでない）。
+- **(2)** side/clip を座標にする契約層条件 = 基底 skill が coordinate-parametric で composition が具体座標を束縛する。⇒ 座標は合成層（自由）に残り組合せ爆発が消える。⭐**side は obs 入力にする必要なし（p5 確認 2026-07-21）**: learned（acquire-grasp）は own-frame で side-agnostic・scripted（set_finger）は side が呼出引数（obs でない）。明示 side スカラが要るのは pS が §4 で要求する時のみ。clip は learned の obs に既に入る（clip/groove pose）。
 
 **解決した merge:**
 - **(a) approach と carry は distinct**（grip 状態が別 = 把持前 vs 把持中・資源 claim 状態が別・intent が精密位置決め vs 運搬。pS 契約整合を確認）。
@@ -145,8 +143,9 @@ singleton region かつ region postcondition が自明/不在 → 通常 node �
 - ⭐**私の label 誤りも訂正（p5 指摘）**: 「grip = finger を全 clamp」は RECLAMP_L の正記述だが **CLAMP を誤記述** — CLAMP の action は finger でなく EE で、finger-close は auto-close の副産物・単独 invoke 不可。⇒ learned の把持原始は「finger-clamp」でなく **acquire-grasp**。
 - cut = **(a) 素直な分割**（(b) hides-reality=p5・(c) は CLAMP を acquire-grasp と正しく読めば moot）を pX 採用・pS 確認済（09:53）。
 
-**次の schema 照会（p5・(b) と同型・未確認）:**
-- scripted finger 原始（re-tighten / half_release / full_release）が同 schema を共有し `set_finger(target)` 1 parametric 原始へ merge 可か。可なら基底数が更に減る。
+**(c) RESOLVED = 一致（YES・p5 code 直読 2026-07-21 10:06）:**
+- scripted finger 原始 3 つ（re-tighten / half_release / full_release）は別原始でなく **同一 `interpolate_fingers`（`newton_routing_utils.py:1275`）の 3 パラメータ値**。obs=無（3 つ同一）・action=per-side finger 補間・target 値だけ違う ⇒ schema 同一 ⇒ **1 parametric 原始 `set_finger(side, target)` へ merge**（基底 -2）。
+- ⚠nuance（p5）: (1) side も引数ゆえ `set_finger(target)` でなく **`set_finger(side, target)`**。(2) HALF_UNCLAMP は 1 呼出で両側別 target（L 0.006 / R 0.04）= merge 後 **2 回 `set_finger`** = `set_finger(L,0.006) ∥ set_finger(R,0.04)`（私の並行合成と整合）。(3) scope = **scripted のみ**・learned の acquire-grasp（1 の auto-close）は吸収しない（policy 内部）。(4) ⚠ **schema ≠ realization**: finger target を sim にどう効かせるか（制御 API）は control-method の court（p4・07-20 に p5 外）ゆえ本表は裁定しない。
 
 **arity 非依存:** 本基底も pS の合成の形も arity（枝数下限）に依存しない。arity は held（Rs 確認待ち・§Status OPEN-A）。pS の `SkillCompositionDefinition` draft は基底数に不変（basis 非依存）で、基底 SET は本節を参照する。
 
