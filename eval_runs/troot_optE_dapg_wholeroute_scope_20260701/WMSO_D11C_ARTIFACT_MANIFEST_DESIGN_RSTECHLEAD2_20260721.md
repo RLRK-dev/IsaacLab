@@ -49,7 +49,7 @@
 - 凍結 v13 **`:252`**（D-1 の採択理由）= 「frozen delta 不要／1 hop／B 側宣言 1 個／contracts_v2 `:396` の provenance 意味論適合」— **proof kind 集合への言及なし**。
 - 凍結 v13 **`:258-262`**（D-1 の反証条件 4 件）= `source_ref` 意味論／registry 衝突／resolver 到達性／1 hop — **proof kind 集合への言及なし**。
 - 当該 arc は B1 = D-1 採択に接続し、**Rs ratify 2026-07-20 21:44** が乗っている。
-- ⛔**Rs 判断**: **(a)** 凍結 v13 `:256`/`:471` の併記訂正（**凍結編集 = Rs 専権**）／**(b)** 採択 D-1 への影響の正式判断。
+- ✅**(a)(b) とも裁定済（2026-07-21・旧「Rs 判断」は解消）**: **(a) = B** 凍結を編集せず別 note で訂正（`WMSO_D11B_COCITATION_CORRECTION_NOTE_20260721.md` `00cf0c0bf86681f8…` @ `20cd755ac9`）／**(b) = 採択 D-1 を候補へ格下げ ⇒ B1 は OPEN**（custody `WMSO_RS_RULING_B_D1_DEMOTION_CUSTODY_20260721.md`。同 §4-B で **D-3 も候補へ復帰** = pQ 判断・pS 検証待ち）。⚠**本 doc の機構は D-1 に依存していない**（同 custody §6 実測）ゆえ v2.5 の内容は不変。
 - 記録: pY custody `b602a8c8030d47a7…` @ `337d08d787`／pS consult `b4ec93173db6c24c…` @ `a31adca295`。
 
 ## 2. U-5 — 両段 binding の記録機構
