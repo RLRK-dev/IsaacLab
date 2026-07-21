@@ -24,8 +24,8 @@
 
 ## 帰結
 
-- **D1.1-B tensor_binding = FROZEN-LOCAL 確認**（設計書面 v13 確定）。
-- ⛔ **push = Rs 一言待ち**（Rs は「freeze」のみ言及・本 verdict は push を imply しない・branch `rlrk/optE-s2-substrate-swap`）。
+- **D1.1-B tensor_binding = FROZEN 確認**（設計書面 v13 確定 + remote push 済）。
+- ⭐**push = 完了（Rs 認可 11:5x「push」）**: pY が **fork（`RLRK-dev/IsaacLab`）** へ push（`bc4872a804..a27bd9f1db`）・**remote parity 0/0**（`fork/rlrk/optE-s2-substrate-swap` == local HEAD `a27bd9f1db9d`）。⛔**公開漏れ無し確認**: HEAD を含む remote = **fork のみ**（`origin`=`isaac-sim/IsaacLab`=公開上流には本 branch 不在・`git branch -r --contains` 実測）。freeze commit `465a59ed40` も fork-only。
 - ⛔ **impl / training / authority = CLOSED 継続**（freeze = 書面確定のみ）。
 - declared-open 4（stats_key silent-pass / §7 impl / §5 slice+Rs / U-2/5/6 D1.1-C）= 「open として」封印。arity（Rs 専権・SUSPENDED）= 本 freeze と独立。
 - ⇒ **p6 が LEDGER D1.1-B 行を FROZEN へ flip 可**（p6 は独立に frozen_sha を producing commit で再実測してから反映＝二重 custody）。
