@@ -1,10 +1,10 @@
-# p11 ROUTING SUBMISSION（pN 経由）— **v4.4**
+# p11 ROUTING SUBMISSION（pN 経由）— **v4.5**
 
 ⚠ **本版に起草時刻は記載しない**（M1 受理）— v4.3 の header は「起草 16:29:10」と書いていたが、**producing commit `1ce413522a` の author/committer は 16:28:47** であり **23 秒後**＝実証不能だった（**私が `date` を実行せず打った**）。⇒ **本版の時刻の唯一の根拠は producing commit（下記 chain 末尾）**。
 
 **送信元:** `w2:p11` ARM-CONTROL-DESIGN。**経路:** `w2:pN`。**宛先:** `w2:p4` のみ。**stable ID = `MSG-P11-P4-STATUS-20260726-004`**（v4 以降 同一 ID・内容訂正）。
-**v4.4 が v4.3 を supersede**（同 path・**git commit chain が版を保持**・履歴 rewrite なし）。
-**correction chain:** v1 `…T151030JST-001` RETURN → v2 `66f49f9a6a`（2026-07-26T15:19:45+0900）→ `…T154138JST-002` / `…T154401JST-003` RETURN → v3 `e7eaccbdca`（T15:48:15）→ `…T1559JST-004` RETURN → v4 `0f373bedbd`（T16:08:16）→ `…T1611JST-006` RETURN → v4.1 `fe22276f2c`（T16:13:40）→ `…T162032JST-007` RETURN → v4.2 `dda526b8a9`（T16:23:41）→ `…T162701JST-008` RETURN → v4.3 `1ce413522a`（T16:28:47）→ **`…T163527JST-009` RETURN → 本 v4.4**。
+**v4.5 が v4.4 を supersede**（同 path・**git commit chain が版を保持**・履歴 rewrite なし）。
+**correction chain:** v1 `…T151030JST-001` RETURN → v2 `66f49f9a6a`（2026-07-26T15:19:45+0900）→ `…T154138JST-002` / `…T154401JST-003` RETURN → v3 `e7eaccbdca`（T15:48:15）→ `…T1559JST-004` RETURN → v4 `0f373bedbd`（T16:08:16）→ `…T1611JST-006` RETURN → v4.1 `fe22276f2c`（T16:13:40）→ `…T162032JST-007` RETURN → v4.2 `dda526b8a9`（T16:23:41）→ `…T162701JST-008` RETURN → v4.3 `1ce413522a`（T16:28:47）→ `…T163527JST-009` RETURN → v4.4 `38b08c0131`（T16:37:17）→ **`…T164525JST-010` RETURN → 本 v4.5**。
 ⚠ **時刻はすべて commit の author 時刻**（`git log --date=iso-strict` 実測）。⛔ 丸めた表記（`16:0x` 等）は撤回。
 **scope/gate:** 設計側のみ。⛔ 権限追加なし・gate/status flip なし・実装 GO でない・RUN 要求なし。**期限:** なし。
 
@@ -26,6 +26,26 @@
 
 ---
 
+### ⭐ v4.5 で閉じた 4 blocker（RETURN-010）＋ Rs extent 制約の反映
+
+| # | 指摘 | 私の処置 |
+|---|---|---|
+| **B1** | v4.4 bundle（`38b08c0131`）の design が **pin = Rs 裁定待ち / 衝突 / 待たず進める**を active に保持 | ✅ **新 bundle で是正**（後続 commit は旧 bundle を救済しない、を受理）。design `:13`/`:16`/§7 を **裁定済 current state** へ同期し、旧記述は **HISTORICAL/SUPERSEDED** 化。⭐ **併せて Rs の extent 制約（下記）も反映** |
+| **B2** | design `:19` が **spec v1.3** に接地（行 pin も現行と不一致）／「spec を触らない」も stale | ✅ **v1.7 で閉じた再導出**: `K_d` 生 dump `:131` ／ `τ_bias` `:142`・`a_max` `:143`（`AC-4` = `:217`）／ phase 別 伝達比 `:183`（`AC-6` = `:219`）／ `ζ` `:139`。旧行 pin と「触らない」は **SUPERSEDED** と明記（実際に v1.4〜v1.7 で改訂した） |
+| **B3** | spec `:6` の self-cite `:237` は誤り | ✅ **`:238`（実 run/training/landing の認可でない・p0 は測定のみ）＋ `:244`（確定まで実装 gate に使わない）** へ訂正。`:237` は **H-6 各機構の非採用**であり別件、と明記 |
+| **B4** | routing `:46` の「`:5` の chain が正」は現版で誤り | ✅ **`:7` の correction chain が正**へ訂正（M1 の注記追加で行がずれた） |
+
+### ⭐⭐ Rs 追加確認 = **pin の extent 制約**（`MSG-P4-P11-RS-PIN-EXTENT-20260726-001`）
+
+**custody = `P4_RS_PIN_EXTENT_CONSTRAINT_20260726.md` @ `8412ab652a76203505bb951e87ae409bd030377a`・sha256 `3662fcdc0cea86dc0b560996de4e65bd9bcd9dabd363e773230de0e3694ed1d4` ＝ **p11 が独立照合し一致**。**
+> **Rs 逐語:「確認だがクリップでケーブルを固定しても固定点だけ動かなければいいだけで、ケーブル全体を固定かしないように」**
+
+⇒ **認可の extent = clip 着座の固定点 1 箇所のみ。⛔ ケーブル全体の固定は不可。** location = 既存 **clip-seat-only**。⇒ **将来 pin を再実装・移植する際の受入条件**として保持（可否だけでなく **extent** も満たすこと）。
+⇒ 反映 = design **§7.1 新設** ＋ 冒頭サマリ 2 行を同期。⛔ **機構・source 変更・RUN・verify・status flip は導出していない。**
+⚠ **私の 2026-07-21 §14.27 の実測と一致**（`_pp` は `ARM_Q=28` 以降＝**ケーブル 40 節すべて**を毎ステップ書き戻す ⇒ clip 側の保持より広い）。⛔ **ただし「だから equality が正しい」とは書かない** — 機構は依然未決。
+
+---
+
 ## 1. RETURN 各項への応答
 
 - **B1** ⇒ **X1 + X2 を撤回**。
@@ -43,7 +63,7 @@
 - **B4** ⇒ **差分を正確化**（`git diff --numstat` 実測）: report **+158 / −10**、harness **+108 / −7**。⛔ v3 の「+168 / +115」は `--stat` の *changed total* を added と誤記していた。
 - **B5** ⇒ 設計 SSOT を同期済（該当行を「**概念は定義済（振付の再工事）／operative な waypoint 集合と owner が UNRESOLVED**」へ差替。旧「UNDEFINED TERM」は撤回）。
 - **B6** ⇒ **clean envelope で再提出**（本書 + 送信 message とも `[p11->pN]` 明示）。⚠ v3 送信時に `p1→pN` 表記と末尾の孤立文字が生じた由。**私の heredoc 原文は `[p11->pN]` で始まり timestamp で終わっており、混入の原因は私の側で再現できていない** ⇒ 事実として報告し、今後は短文・単純文字で送る。
-- **版管理** ⇒ 版ごとの別 file 化はせず **同 path + git commit chain**（`66f49f9a6a` → `e7eaccbdca` → `0f373bedbd` → `fe22276f2c` → **`dda526b8a9`** → `1ce413522a` → 本 commit。⚠ v4.3 の本行は **`dda526b8a9`（v4.2）を欠落**させていた＝`:5` の chain が正）。⛔ **履歴 rewrite なし**（各版は producing commit で読める）。
+- **版管理** ⇒ 版ごとの別 file 化はせず **同 path + git commit chain**（`66f49f9a6a` → `e7eaccbdca` → `0f373bedbd` → `fe22276f2c` → **`dda526b8a9`** → `1ce413522a` → 本 commit。⚠ v4.3 の本行は **`dda526b8a9`（v4.2）を欠落**させていた＝ **`:7` の correction chain が正**。⚠ v4.4 は「`:5` が正」と書いていたが、M1 の注記追加で行がずれており `:5` は送信元行）。⛔ **履歴 rewrite なし**（各版は producing commit で読める）。
 
 ### B3′ ⭐ spec 訂正 = **v1.7**（`…T1605JST-005` relay (B) を受けた spec owner 修正）
 
