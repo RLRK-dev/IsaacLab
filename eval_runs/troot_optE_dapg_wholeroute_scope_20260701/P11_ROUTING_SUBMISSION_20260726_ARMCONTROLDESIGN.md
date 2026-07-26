@@ -1,10 +1,10 @@
-# p11 ROUTING SUBMISSION（pN 経由）— **v4.5**
+# p11 ROUTING SUBMISSION（pN 経由）— **v4.6**
 
 ⚠ **本版に起草時刻は記載しない**（M1 受理）— v4.3 の header は「起草 16:29:10」と書いていたが、**producing commit `1ce413522a` の author/committer は 16:28:47** であり **23 秒後**＝実証不能だった（**私が `date` を実行せず打った**）。⇒ **本版の時刻の唯一の根拠は producing commit（下記 chain 末尾）**。
 
 **送信元:** `w2:p11` ARM-CONTROL-DESIGN。**経路:** `w2:pN`。**宛先:** `w2:p4` のみ。**stable ID = `MSG-P11-P4-STATUS-20260726-004`**（v4 以降 同一 ID・内容訂正）。
-**v4.5 が v4.4 を supersede**（同 path・**git commit chain が版を保持**・履歴 rewrite なし）。
-**correction chain:** v1 `…T151030JST-001` RETURN → v2 `66f49f9a6a`（2026-07-26T15:19:45+0900）→ `…T154138JST-002` / `…T154401JST-003` RETURN → v3 `e7eaccbdca`（T15:48:15）→ `…T1559JST-004` RETURN → v4 `0f373bedbd`（T16:08:16）→ `…T1611JST-006` RETURN → v4.1 `fe22276f2c`（T16:13:40）→ `…T162032JST-007` RETURN → v4.2 `dda526b8a9`（T16:23:41）→ `…T162701JST-008` RETURN → v4.3 `1ce413522a`（T16:28:47）→ `…T163527JST-009` RETURN → v4.4 `38b08c0131`（T16:37:17）→ **`…T164525JST-010` RETURN → 本 v4.5**。
+**v4.6 が v4.5 を supersede**（同 path・**git commit chain が版を保持**・履歴 rewrite なし）。
+**correction chain:** v1 `…T151030JST-001` RETURN → v2 `66f49f9a6a`（2026-07-26T15:19:45+0900）→ `…T154138JST-002` / `…T154401JST-003` RETURN → v3 `e7eaccbdca`（T15:48:15）→ `…T1559JST-004` RETURN → v4 `0f373bedbd`（T16:08:16）→ `…T1611JST-006` RETURN → v4.1 `fe22276f2c`（T16:13:40）→ `…T162032JST-007` RETURN → v4.2 `dda526b8a9`（T16:23:41）→ `…T162701JST-008` RETURN → v4.3 `1ce413522a`（T16:28:47）→ `…T163527JST-009` RETURN → v4.4 `38b08c0131`（T16:37:17）→ `…T164525JST-010` RETURN → v4.5 `9d6aed738d`（T16:50:09）→ **`…20260726-011` RETURN → 本 v4.6**。
 ⚠ **時刻はすべて commit の author 時刻**（`git log --date=iso-strict` 実測）。⛔ 丸めた表記（`16:0x` 等）は撤回。
 **scope/gate:** 設計側のみ。⛔ 権限追加なし・gate/status flip なし・実装 GO でない・RUN 要求なし。**期限:** なし。
 
@@ -25,6 +25,16 @@
 ⛔ **p0 の正しい breach 記録を帳尻合わせで変えることは要求しない。** X1 の撤回は **私の主張の取り下げ**であって、p0 の自認・p4 の裁定への異議ではない。
 
 ---
+
+### ⭐ v4.6 で閉じた 3 件（RETURN-011）
+
+| # | 指摘 | 私の処置 |
+|---|---|---|
+| **R1**（私の原因） | routing `:66` の版 chain が **v4.4 `38b08c0131` を欠落**し、`:7` と実 history（`1ce`→`38b`→`9d6`）に矛盾 | ✅ `38b08c0131` を chain に復元。**`:7` の correction chain が正**と明記 |
+| **R2**（後発 authority の fold） | design `:133`/`:139`・spec `:178` の「**p5/Rs の court**」が **p5 correction `fe80839219` §3 で stale**（**Rs が自らの court であることを撤回**） | ✅ **p11 が p5 の artifact を直読**して fold: **(A) success 述語の測定面 = p5**（`/reward-design` + `/pre-check`）／**(B)(C) `GRASP_Z`/`PUSH_Z`/`EE_TO_FINGERTIP` 自体 = ⛔UNCONFIRMED / HOLD**（候補 p5 / p17 / p11 / p16）。⛔**帰属を捏造せず、私は自分を owner とも他者とも書かない**。✅ 非 blocking（H-4 は 3 参照点ゆえ再測定不要） |
+| **R3**（私の原因・records） | spec `:1` の「更新 16:08:16」/ `:3` の landing `0f373…` が **current-update と読める** が、同 blob は `fe22276f2c` / `9d6aed738d` で修正済 | ✅ `0f373…` を **v1.7 の *initial* semantic landing** と限定し、後続 2 commit を明記。⭐**現 pin は自己参照では書けない**ため、**外部 routing 提出物の申告 3 SHA を正**とし、**推測時刻を書かない**と明記 |
+
+⚠ **class B（reset 再配置）** = p4 `f9e10ecc8d` が別 RETURN 中 ⇒ **HOLD / 無仮定を維持**（私は自力で確定しない）。
 
 ### ⭐ v4.5 で閉じた 4 blocker（RETURN-010）＋ Rs extent 制約の反映
 
@@ -63,7 +73,7 @@
 - **B4** ⇒ **差分を正確化**（`git diff --numstat` 実測）: report **+158 / −10**、harness **+108 / −7**。⛔ v3 の「+168 / +115」は `--stat` の *changed total* を added と誤記していた。
 - **B5** ⇒ 設計 SSOT を同期済（該当行を「**概念は定義済（振付の再工事）／operative な waypoint 集合と owner が UNRESOLVED**」へ差替。旧「UNDEFINED TERM」は撤回）。
 - **B6** ⇒ **clean envelope で再提出**（本書 + 送信 message とも `[p11->pN]` 明示）。⚠ v3 送信時に `p1→pN` 表記と末尾の孤立文字が生じた由。**私の heredoc 原文は `[p11->pN]` で始まり timestamp で終わっており、混入の原因は私の側で再現できていない** ⇒ 事実として報告し、今後は短文・単純文字で送る。
-- **版管理** ⇒ 版ごとの別 file 化はせず **同 path + git commit chain**（`66f49f9a6a` → `e7eaccbdca` → `0f373bedbd` → `fe22276f2c` → **`dda526b8a9`** → `1ce413522a` → 本 commit。⚠ v4.3 の本行は **`dda526b8a9`（v4.2）を欠落**させていた＝ **`:7` の correction chain が正**。⚠ v4.4 は「`:5` が正」と書いていたが、M1 の注記追加で行がずれており `:5` は送信元行）。⛔ **履歴 rewrite なし**（各版は producing commit で読める）。
+- **版管理** ⇒ 版ごとの別 file 化はせず **同 path + git commit chain**（`66f49f9a6a` → `e7eaccbdca` → `0f373bedbd` → `fe22276f2c` → **`dda526b8a9`** → `1ce413522a` → **`38b08c0131`（v4.4）** → 本 commit。⚠ **v4.5 の本行は `38b08c0131` を欠落**させており、`:7` の chain と実 history（`1ce` → `38b` → `9d6`）に矛盾していた ⇒ 本版で補った。⚠ v4.3 の本行は `dda526b8a9`（v4.2）を欠落。⇒ ⭐**`:7` の correction chain が正**（v4.4 は「`:5` が正」と書いていたが M1 の注記追加で行がずれ、`:5` は送信元行）。⛔ **履歴 rewrite なし**（各版は producing commit で読める）。
 
 ### B3′ ⭐ spec 訂正 = **v1.7**（`…T1605JST-005` relay (B) を受けた spec owner 修正）
 

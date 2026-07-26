@@ -1,6 +1,8 @@
-# 腕制御 測定ハーネス 仕様 v1.7 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 2026-07-21 / 更新 2026-07-26T16:08:16+0900）
+# 腕制御 測定ハーネス 仕様 v1.7 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 起草 2026-07-21）
 
-**Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.7** — **proposal**（landing = p4 経由）。⚠ v1.7 の landing commit = `0f373bedbdfa25d361917e50036e11947b146bdf`（2026-07-26T16:08:16+0900）。
+**Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.7** — **proposal**（landing = p4 経由）。
+⚠⚠ **records 訂正（RETURN-011 R3 受理）**: `0f373bedbdfa25d361917e50036e11947b146bdf`（2026-07-26T16:08:16+0900）は **v1.7 の *initial* semantic landing**（pad body 導出規則の訂正）**であって、本 file の現在版ではない**。⇒ 同 blob はその後 **`fe22276f2c`（title/status 同期）→ `9d6aed738d`（`:6` self-cite 訂正）** で修正済。⛔ **旧 header は「更新 = 16:08:16」と読めたが stale。**
+⭐ **本 file の *現* pin は、自己参照では書けない**（commit する前に自分の SHA は決まらない）。⇒ **現行 pin は外部の routing 提出物（`P11_ROUTING_SUBMISSION_20260726_ARMCONTROLDESIGN.md` の当該版が申告する 3 SHA）を正とする。⛔ 推測時刻を書かない。**
 **版歴（内容 pin・sha は照合記録）:** v1.0 `054a54bbb6` → v1.1 `37902fb909`（pZ の model-identity 入力）→ v1.2 `3cb06b0fe5`（**H-2 DOF 宣言**）→ v1.3 `c8c326e00b`（**参照同一性 I-1〜I-3 を主レグ**へ）→ v1.4（**H-4 を 3 参照点に** = §H-4.1。閾値の `EE_TO_FINGERTIP=0.220` は **Franka legacy**・実測コ字値と 34.8〜55.7 mm 違う）→ v1.5 `cca446e1a6`（**§H-5.1 把持状態の ζ**）→ v1.6 `0025fd32b6`（**§H-3.1 = per-joint `τ_bias`**）→ ⭐**v1.7**（**§H-4 の pad body 導出規則を訂正** — 旧 `body_label` 検索は**現モデルで実行不能**。p4 の R8 裁定 `442f58678359bf85` が **spec owner = p11 へ RETURN** したのを受けた**記録是正**）。
 ⚠ **v1.4〜v1.7 の変更はいずれも該当章に限局**（他章は無変更）。
 ⛔⛔ **本 spec は実装 gate ではない**（接地 = **`:238`**「実 run / training / landing の認可でない。⛔ p0 は本 spec の範囲＝測定のみ」＋ **`:244`**「確定するまで本 spec を実装 gate として使わない」。⚠ 旧 cite `:237` は誤り — 同行は **H-6 各機構の非採用**を述べており、実装 gate の話ではない）。**v1.6 §H-3.1 は authorization 無しに実装され、p4 が `d724031b77` で「既存 GO 無し・認可外」と裁定済**。⇒ **本 spec の章が tree に在ることは、実装してよいことを意味しない。**
@@ -175,7 +177,7 @@ SKILL の閾値は **`ee_pos + R(ee_q)·[0,0,+EE_TO_FINGERTIP]`** で測られ�
 | **J-b** | **pad を担う body**（cable に実際に触れる）。⭐**導出は §H-4 の (i) SSOT 定数 index / (ii) `shape_label` の親 body のいずれか**。⛔ **`body_label` を "pad" で検索しない**（実測 0 件・v1.7 訂正） | **接触・把持の物理**はこの点で起きる |
 | **J-c** | `EE_TO_PINCH_TIP_CLOSED = 0.2757` 相当の爪先 | J-a と J-b の差を**定量化**して報告するため |
 
-⛔ **1 点だけ出さない。** 3 点の差を出力に併記する。⇒ **どの点で閾値を評価すべきかは p5/Rs の court**（本 spec は判断せず、両方で測れる材料を出す）。
+⛔ **1 点だけ出さない。** 3 点の差を出力に併記する。⇒ **どの点で閾値を評価すべきかは本 spec で判断しない**（両方で測れる材料を出すのみ）。⚠ **court の訂正（2026-07-26・p5 correction `fe80839219` §3）**: 旧記載「**p5/Rs の court**」は stale（**Rs が自らの court であることを撤回**）⇒ **(A) success 述語の測定面 = p5**（`/reward-design` + `/pre-check`）／**(B)(C) `GRASP_Z`/`PUSH_Z`/`EE_TO_FINGERTIP` 自体 = ⛔UNCONFIRMED / HOLD**（候補 p5 / p17 / p11 / p16・**帰属を捏造しない**）。
 
 ### H-5 ⭐ 伝達測定（cable 変位 ÷ EE 変位）— **v0.4 に欠けていた段**
 - **なぜ要るか**: task 許容値 `SEAT_LAT_BAR_M`（`route_env_config.py:170` 逐語「**cable centre** geometrically inside the groove」）は **cable 中心**の量。⛔ **arm Jacobian で関節 bar に変換してはならない**（cable は arm の剛体従属ではない）。v0.4 はこれを禁じたまま**解除に要る測定を用意しなかった**ため、bar が原理的に決まらなかった（ISSUE 3）。
