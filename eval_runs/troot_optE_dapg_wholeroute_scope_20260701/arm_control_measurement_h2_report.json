@@ -4,15 +4,31 @@
   "provenance": {
     "spec": {
       "path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/ARM_CONTROL_MEASUREMENT_HARNESS_SPEC_V1_ARMCONTROLDESIGN_20260721.md",
-      "version": "v1.3",
-      "bank_sha": "c8c326e00b"
+      "version": "v1.6",
+      "sha256_as_implemented": "22bf42c6908ad07a9e147ed334266a6a5ecd9e513128346680fa01dacf3ee928",
+      "landing_commit": "0025fd32b69038ca61e77db059191afa19765f27",
+      "sections_implemented": [
+        "H-0",
+        "H-1",
+        "H-2",
+        "H-2.1-2.3",
+        "H-3",
+        "H-3.1",
+        "H-4",
+        "H-4.1",
+        "H-6"
+      ],
+      "sections_NOT_implemented": [
+        "H-5",
+        "H-5.1"
+      ]
     },
     "tree": "/home/rlrk/IsaacLab",
     "git_common_dir": ".git",
     "branch": "rlrk/optE-s2-substrate-swap",
-    "commit": "0025fd32b69038ca61e77db059191afa19765f27",
+    "commit": "64021225038f61d088d52077a353bad19047da70",
     "worktree_dirty": true,
-    "worktree_dirty_count": 3250,
+    "worktree_dirty_count": 3249,
     "python": "/home/rlrk/env_isaaclab7/bin/python",
     "venv": null,
     "versions": {
@@ -57,10 +73,10 @@
         "I-3"
       ],
       "object_ids": {
-        "measured": 124964088646928,
-        "env_model": 124964088646928,
-        "solver_model": 124964088646928,
-        "fk_model": 124964088609920
+        "measured": 123194646342560,
+        "env_model": 123194646342560,
+        "solver_model": 123194646342560,
+        "fk_model": 123194690481152
       },
       "measured_model_type": "Model",
       "solver_type": "SolverMuJoCo",
@@ -72,7 +88,7 @@
       },
       "derived_mj_model_id": {
         "status": "PRESENT",
-        "value": 124954203047216,
+        "value": 123184733842224,
         "note": ""
       },
       "notes": []
@@ -6386,6 +6402,108 @@
     "status": "PRESENT",
     "value": {
       "tau_bias_includes": "gravity + Coriolis/centrifugal (qfrc_bias)",
+      "per_joint_H3_1": {
+        "note": "Per-joint tau_bias and Dq_i = tau_bias,i / ke_i for the 12 arm joints (spec H-3.1, v1.6). Multiply Dq by the H-4 J-a Jacobian to get tip droop in mm, which is the quantity comparable against the 2 mm threshold.",
+        "joints": [
+          {
+            "dof_adr": 0,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_shoulder_pan_joint",
+            "tau_bias_Nm": 0.325513265214517,
+            "abs_tau_bias_Nm": 0.325513265214517,
+            "ke_Nm_per_rad": 2000.0,
+            "delta_q_rad": 0.0001627566326072585
+          },
+          {
+            "dof_adr": 1,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_upper_arm_link_shoulder_lift_joint",
+            "tau_bias_Nm": -27.22037264638709,
+            "abs_tau_bias_Nm": 27.22037264638709,
+            "ke_Nm_per_rad": 2000.0,
+            "delta_q_rad": -0.013610186323193545
+          },
+          {
+            "dof_adr": 2,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_upper_arm_link_forearm_link_elbow_joint",
+            "tau_bias_Nm": -17.09838321737438,
+            "abs_tau_bias_Nm": 17.09838321737438,
+            "ke_Nm_per_rad": 2000.0,
+            "delta_q_rad": -0.00854919160868719
+          },
+          {
+            "dof_adr": 3,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_upper_arm_link_forearm_link_wrist_1_link_wrist_1_joint",
+            "tau_bias_Nm": -2.2369754855259742,
+            "abs_tau_bias_Nm": 2.2369754855259742,
+            "ke_Nm_per_rad": 500.0,
+            "delta_q_rad": -0.004473950971051949
+          },
+          {
+            "dof_adr": 4,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_upper_arm_link_forearm_link_wrist_1_link_wrist_2_link_wrist_2_joint",
+            "tau_bias_Nm": 0.009163056410782078,
+            "abs_tau_bias_Nm": 0.009163056410782078,
+            "ke_Nm_per_rad": 500.0,
+            "delta_q_rad": 1.8326112821564154e-05
+          },
+          {
+            "dof_adr": 5,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_upper_arm_link_forearm_link_wrist_1_link_wrist_2_link_wrist_3_link_wrist_3_joint",
+            "tau_bias_Nm": 5.442467940971682e-05,
+            "abs_tau_bias_Nm": 5.442467940971682e-05,
+            "ke_Nm_per_rad": 500.0,
+            "delta_q_rad": 1.0884935881943364e-07
+          },
+          {
+            "dof_adr": 14,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_shoulder_pan_joint_2",
+            "tau_bias_Nm": -0.09555085427934497,
+            "abs_tau_bias_Nm": 0.09555085427934497,
+            "ke_Nm_per_rad": 2000.0,
+            "delta_q_rad": -4.7775427139672484e-05
+          },
+          {
+            "dof_adr": 15,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_upper_arm_link_shoulder_lift_joint_2",
+            "tau_bias_Nm": -20.988227907593572,
+            "abs_tau_bias_Nm": 20.988227907593572,
+            "ke_Nm_per_rad": 2000.0,
+            "delta_q_rad": -0.010494113953796786
+          },
+          {
+            "dof_adr": 16,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_upper_arm_link_forearm_link_elbow_joint_2",
+            "tau_bias_Nm": -12.612959255871244,
+            "abs_tau_bias_Nm": 12.612959255871244,
+            "ke_Nm_per_rad": 2000.0,
+            "delta_q_rad": -0.006306479627935622
+          },
+          {
+            "dof_adr": 17,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_upper_arm_link_forearm_link_wrist_1_link_wrist_1_joint_2",
+            "tau_bias_Nm": 2.2611345203768085,
+            "abs_tau_bias_Nm": 2.2611345203768085,
+            "ke_Nm_per_rad": 500.0,
+            "delta_q_rad": 0.004522269040753617
+          },
+          {
+            "dof_adr": 18,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_upper_arm_link_forearm_link_wrist_1_link_wrist_2_link_wrist_2_joint_2",
+            "tau_bias_Nm": 0.011903908159952903,
+            "abs_tau_bias_Nm": 0.011903908159952903,
+            "ke_Nm_per_rad": 500.0,
+            "delta_q_rad": 2.3807816319905804e-05
+          },
+          {
+            "dof_adr": 19,
+            "joint_name": "ur5e_worldbody_base_shoulder_link_upper_arm_link_forearm_link_wrist_1_link_wrist_2_link_wrist_3_link_wrist_3_joint_2",
+            "tau_bias_Nm": -7.90586825029551e-05,
+            "abs_tau_bias_Nm": 7.90586825029551e-05,
+            "ke_Nm_per_rad": 500.0,
+            "delta_q_rad": -1.581173650059102e-07
+          }
+        ],
+        "max_abs_delta_q_rad": 0.013610186323193545
+      },
       "pose_coverage": {
         "measured_at": "the single pose/velocity the env is in after construction",
         "envelope_max_implemented": false,
@@ -7383,8 +7501,38 @@
     },
     "note": ""
   },
+  "static_tip_droop_H3_1_x_H4": {
+    "status": "PRESENT",
+    "value": {
+      "status": "PRESENT",
+      "reference_point": "J-a (the point the SKILL threshold measures, ee + 0.220 z)",
+      "formula": "droop_mm = sum_i |J_a_trans_i [mm/rad]| * |Dq_i [rad]|",
+      "bound_note": "sum-of-absolute is an UPPER bound on the magnitude at this pose (it ignores sign cancellation between joints); the worst-single-joint figure is a lower bound.",
+      "pose_coverage": "single pose, same limitation as H-3 and H-4 -- not an envelope maximum",
+      "threshold_for_comparison_mm": 2.0,
+      "per_arm": [
+        {
+          "arm": 0,
+          "droop_mm_sum_of_abs": 14.593809385312591,
+          "droop_mm_worst_single_joint": 8.837687519653631,
+          "n_joints_contributing": 12
+        },
+        {
+          "arm": 1,
+          "droop_mm_sum_of_abs": 4.074094093154737,
+          "droop_mm_worst_single_joint": 2.0000425755496543,
+          "n_joints_contributing": 12
+        }
+      ]
+    },
+    "note": ""
+  },
   "h5_transmission": {
     "status": "UNAVAILABLE",
-    "reason": "Requires stepping the sim through grasp/seat phases; not run in this stage."
+    "reason": "Requires stepping the sim through grasp/seat phases; not run in this stage. NOTE spec v1.5 adds H-5.1 (zeta while grasped, read from step-response overshoot, with the 8.16x effective-inertia branch) -- also NOT implemented, since it rides on the same H-5 run.",
+    "spec_sections_outstanding": [
+      "H-5",
+      "H-5.1 (v1.5)"
+    ]
   }
 }

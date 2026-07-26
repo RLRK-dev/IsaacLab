@@ -6,7 +6,7 @@
 """Arm-control design-time measurement harness (p0 / IMPL-BUILDER).
 
 Implements ``ARM_CONTROL_MEASUREMENT_HARNESS_SPEC_V1_ARMCONTROLDESIGN_20260721.md``
-**v1.3** (p11 ARM-CONTROL-DESIGN, bank ``c8c326e00b``).
+**v1.6** (p11 ARM-CONTROL-DESIGN, landed in ``0025fd32b6``).
 
 What this is
 ------------
@@ -100,8 +100,12 @@ SPEC_PATH = (
     "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/"
     "ARM_CONTROL_MEASUREMENT_HARNESS_SPEC_V1_ARMCONTROLDESIGN_20260721.md"
 )
-SPEC_VERSION = "v1.3"
-SPEC_BANK_SHA = "c8c326e00b"
+SPEC_VERSION = "v1.6"
+# Pinned by CONTENT, with the version kept only as a collation note: this spec was revised
+# three times in one day (v1.4 H-4.1, v1.5 H-5.1, v1.6 H-3.1), so a version string alone
+# does not identify what was implemented against.
+SPEC_SHA256 = "22bf42c6908ad07a9e147ed334266a6a5ecd9e513128346680fa01dacf3ee928"
+SPEC_LANDING_COMMIT = "0025fd32b69038ca61e77db059191afa19765f27"
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -221,7 +225,14 @@ def collect_provenance() -> dict[str, Any]:
 
     dirty = _git("status", "--porcelain")
     return {
-        "spec": {"path": SPEC_PATH, "version": SPEC_VERSION, "bank_sha": SPEC_BANK_SHA},
+        "spec": {
+            "path": SPEC_PATH,
+            "version": SPEC_VERSION,
+            "sha256_as_implemented": SPEC_SHA256,
+            "landing_commit": SPEC_LANDING_COMMIT,
+            "sections_implemented": ["H-0", "H-1", "H-2", "H-2.1-2.3", "H-3", "H-3.1", "H-4", "H-4.1", "H-6"],
+            "sections_NOT_implemented": ["H-5", "H-5.1"],
+        },
         "tree": REPO_ROOT,
         "git_common_dir": _git("rev-parse", "--git-common-dir"),
         "branch": _git("rev-parse", "--abbrev-ref", "HEAD"),
@@ -813,7 +824,7 @@ def modal_damping(mass: np.ndarray, k_d: np.ndarray, k_e: np.ndarray) -> dict[st
     }
 
 
-def torque_budget(solver: Any, cap: float | None) -> dict[str, Any]:
+def torque_budget(solver: Any, cap: float | None, table: dict[str, Any] | None = None) -> dict[str, Any]:
     """H-3: ``tau_bias(q, qd) = qfrc_bias`` and the acceleration headroom.
 
     ``qfrc_bias`` carries gravity *and* Coriolis/centrifugal terms, so this is swept
@@ -828,8 +839,43 @@ def torque_budget(solver: Any, cap: float | None) -> dict[str, Any]:
     a_max = None
     if cap is not None and max_bias is not None and lam_max > 0:
         a_max = (cap - max_bias) / lam_max
+    # H-3.1 (spec v1.6): a single global max cannot give static droop. Droop is per joint,
+    # Dq_i = tau_bias,i / ke_i, and ke differs 4x across joints (2000 vs 500 N.m/rad measured),
+    # so there is no single ke to divide a global max by.
+    per_joint: list[dict[str, Any]] = []
+    if table is not None:
+        nv_local = int(_mj_pair(solver)[0].nv)
+        ke = stiffness_damping_diagonals(solver, nv_local)["k_e_diag"]
+        by_adr = {e["dof_adr"]: e["name"] for e in table["table"]}
+        raw_bias = _to_numpy(mj_data.qfrc_bias)
+        for adr in table["arm_dof_adr"]:
+            if not (0 <= adr < nv_local):
+                continue
+            t_i = float(raw_bias[adr])
+            ke_i = float(ke[adr])
+            per_joint.append({
+                "dof_adr": adr,
+                "joint_name": by_adr.get(adr, "<unresolved>"),
+                "tau_bias_Nm": t_i,
+                "abs_tau_bias_Nm": abs(t_i),
+                "ke_Nm_per_rad": ke_i,
+                # Static deflection at this joint under its own bias torque.
+                "delta_q_rad": (t_i / ke_i) if ke_i else None,
+            })
+
     return {
         "tau_bias_includes": "gravity + Coriolis/centrifugal (qfrc_bias)",
+        "per_joint_H3_1": {
+            "note": (
+                "Per-joint tau_bias and Dq_i = tau_bias,i / ke_i for the 12 arm joints "
+                "(spec H-3.1, v1.6). Multiply Dq by the H-4 J-a Jacobian to get tip droop in mm, "
+                "which is the quantity comparable against the 2 mm threshold."
+            ),
+            "joints": per_joint,
+            "max_abs_delta_q_rad": (
+                max((abs(j["delta_q_rad"]) for j in per_joint if j["delta_q_rad"] is not None), default=None)
+            ),
+        },
         # Same limitation as H-4: this is one pose, not a maximum over (q, qd).
         "pose_coverage": {
             "measured_at": "the single pose/velocity the env is in after construction",
@@ -1349,6 +1395,52 @@ def run_h2(solver: Any, table: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def static_tip_droop(h3: dict[str, Any], h4: dict[str, Any], table: dict[str, Any]) -> dict[str, Any]:
+    """Combine H-3.1 joint deflections with the H-4 J-a Jacobian to get tip droop [mm].
+
+    Spec H-3.1 states this product is the only quantity comparable against the 2 mm
+    threshold: per-joint ``Dq_i`` alone is in radians, and the Jacobian alone has no load.
+
+    This is arithmetic over two measurements taken at the SAME single pose. It inherits
+    that limitation -- it is not a maximum over the envelope.
+    """
+    h3v, h4v = h3.get("value", h3), h4.get("value", h4)
+    joints = (h3v.get("per_joint_H3_1") or {}).get("joints") or []
+    if not joints or h4v.get("status") != PRESENT:
+        return {"status": UNAVAILABLE, "reason": "H-3.1 per-joint or H-4 unavailable"}
+
+    dq_by_adr = {j["dof_adr"]: (j["delta_q_rad"] or 0.0) for j in joints}
+    arm_adr = list(table["arm_dof_adr"])
+    per_arm = []
+    for arm_rec in h4v.get("arms", []):
+        if arm_rec.get("status") == ABSENT:
+            continue
+        # J-a translation row-max per DOF column, in mm/rad; pair each with its own Dq.
+        col_mm = arm_rec["J_a_threshold_point_0.220"]["translation_mm_per_rad"]
+        contrib = []
+        for adr in arm_adr:
+            if adr < len(col_mm):
+                contrib.append(abs(col_mm[adr]) * abs(dq_by_adr.get(adr, 0.0)))
+        per_arm.append({
+            "arm": arm_rec["arm"],
+            "droop_mm_sum_of_abs": float(sum(contrib)),
+            "droop_mm_worst_single_joint": float(max(contrib)) if contrib else None,
+            "n_joints_contributing": len(contrib),
+        })
+    return {
+        "status": PRESENT,
+        "reference_point": "J-a (the point the SKILL threshold measures, ee + 0.220 z)",
+        "formula": "droop_mm = sum_i |J_a_trans_i [mm/rad]| * |Dq_i [rad]|",
+        "bound_note": (
+            "sum-of-absolute is an UPPER bound on the magnitude at this pose (it ignores sign "
+            "cancellation between joints); the worst-single-joint figure is a lower bound."
+        ),
+        "pose_coverage": "single pose, same limitation as H-3 and H-4 -- not an envelope maximum",
+        "threshold_for_comparison_mm": 2.0,
+        "per_arm": per_arm,
+    }
+
+
 # --------------------------------------------------------------------------------------
 # Orchestration
 # --------------------------------------------------------------------------------------
@@ -1464,11 +1556,20 @@ def main(argv: list[str] | None = None) -> int:
                     arr = np.asarray(cap_rec["value"], dtype=float)
                     finite = arr[np.isfinite(arr) & (arr != 0)]
                     cap = float(np.min(np.abs(finite))) if finite.size else None
-                report["h3_torque_budget"] = probe(lambda: torque_budget(h.solver, cap))
+                report["h3_torque_budget"] = probe(lambda: torque_budget(h.solver, cap, table))
                 report["h4_grasp_jacobian"] = probe(lambda: grasp_jacobian(h.solver, h.as_built))
+                report["static_tip_droop_H3_1_x_H4"] = probe(
+                    lambda: static_tip_droop(report["h3_torque_budget"], report["h4_grasp_jacobian"], table)
+                )
                 report["h5_transmission"] = {
                     "status": UNAVAILABLE,
-                    "reason": "Requires stepping the sim through grasp/seat phases; not run in this stage.",
+                    "reason": (
+                        "Requires stepping the sim through grasp/seat phases; not run in this stage. "
+                        "NOTE spec v1.5 adds H-5.1 (zeta while grasped, read from step-response "
+                        "overshoot, with the 8.16x effective-inertia branch) -- also NOT implemented, "
+                        "since it rides on the same H-5 run."
+                    ),
+                    "spec_sections_outstanding": ["H-5", "H-5.1 (v1.5)"],
                 }
     except Exception as exc:  # noqa: BLE001 - always emit a report, even on failure
         report["fatal"] = {"error": f"{type(exc).__name__}: {exc}", "traceback": traceback.format_exc()}
