@@ -2,10 +2,10 @@
 
 **Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.9** — **proposal**（landing = p4 経由）。
 ⚠⚠ **records 訂正（RETURN-011 R3 受理）**: `0f373bedbdfa25d361917e50036e11947b146bdf`（2026-07-26T16:08:16+0900）は **v1.7 の *initial* semantic landing**（pad body 導出規則の訂正）**であって、本 file の現在版ではない**。⇒ **同 file/path** はその後 **`fe22276f2c`（title/status 同期）→ `9d6aed738d`（`:6` self-cite 訂正）→ `01aa2ea09b`（本 header の records 訂正）** で修正されている。⚠⚠ **型の訂正（RETURN-012 C2 受理）**: 旧文は「**同 blob** はその後…修正済」と書いていたが **git の blob は immutable** であり、**修正のたびに別 blob が生成される**（同じであり続けるのは **path** の方）。⇒ 「同 blob が修正された」は型として誤り。⛔ **旧 header は「更新 = 16:08:16」と読めたが stale。**
-⭐ **本 file の *現* pin は、自己参照では書けない**（commit する前に自分の SHA は決まらない）。⇒ **現行 pin は外部の routing 提出物（`P11_ROUTING_SUBMISSION_20260726_ARMCONTROLDESIGN.md` の当該版が申告する 3 SHA）を正とする。⛔ 推測時刻を書かない。**
+⭐ **本 file の *現* pin は、自己参照では書けない**（commit する前に自分の SHA は決まらない）。⛔⛔ **訂正（pN **B32**）**: 旧文が指していた **`P11_ROUTING_SUBMISSION_20260726_ARMCONTROLDESIGN.md` の「3 SHA」は stale** — **今回の final bundle を指していない**。⇒ ⭐ **現行の authority = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P11_ROUTING_SUBMISSION_MATERIALS_V4_20260726.md` の提出 message が宣言する 4-path pin**（commit / parent / 4 path の full SHA256 / `git show --check`）。**自己 pin 不可の原則はそのまま維持。** ⛔ **推測時刻を書かない。**
 **版歴（内容 pin・sha は照合記録）:** v1.0 `054a54bbb6` → v1.1 `37902fb909`（pZ の model-identity 入力）→ v1.2 `3cb06b0fe5`（**H-2 DOF 宣言**）→ v1.3 `c8c326e00b`（**参照同一性 I-1〜I-3 を主レグ**へ）→ v1.4（**H-4 を 3 参照点に** = §H-4.1。閾値の `EE_TO_FINGERTIP=0.220` は **Franka legacy**・実測コ字値と 34.8〜55.7 mm 違う）→ v1.5 `cca446e1a6`（**§H-5.1 把持状態の ζ**）→ v1.6 `0025fd32b6`（**§H-3.1 = per-joint `τ_bias`**）→ ⭐**v1.7**（**§H-4 の pad body 導出規則を訂正** — 旧 `body_label` 検索は**現モデルで実行不能**。p4 の R8 裁定 `442f58678359bf85` が **spec owner = p11 へ RETURN** したのを受けた**記録是正**）→ ⭐⭐**v1.8**（**§H-4 / §H-4.1 から「cable に実際に触れる点」という接触の主張を撤回** — pN RETURN-004 **B6**。**実際の接触 geom / 面は UNMEASURED**（`route_executor.py:2436-2438` の f1ext+f2ext sandwich・f1ext-only の false-FAIL 実績／`task_config.py:37-38` は接触フィルタ logic 用で pad 幾何は先送り）。**J-a/J-b/J-c は「ラベルの付いた参照点」としてのみ保持**し、測るのは各点の Jacobian）。⚠ v1.4 の説明文にある「実測コ字値と 34.8〜55.7 mm 違う」も **参照点どうしの差**の意味で読むこと（接触面のずれではない）。
 ⚠ **v1.4〜v1.7 の変更はいずれも該当章に限局**（他章は無変更）。
-⛔⛔ **本 spec は実装 gate ではない**（接地 = **`:238`**「実 run / training / landing の認可でない。⛔ p0 は本 spec の範囲＝測定のみ」＋ **`:244`**「確定するまで本 spec を実装 gate として使わない」。⚠ 旧 cite `:237` は誤り — 同行は **H-6 各機構の非採用**を述べており、実装 gate の話ではない）。**v1.6 §H-3.1 は authorization 無しに実装され、p4 が `d724031b77` で「既存 GO 無し・認可外」と裁定済**。⇒ **本 spec の章が tree に在ることは、実装してよいことを意味しない。**
+⛔⛔ **本 spec は実装 gate ではない**（接地 = **現 v1.9 の `:257`**「実 run / training / landing の認可でない。⛔ p0 は本 spec の範囲＝測定のみ」＋ **`:263`**「確定するまで本 spec を実装 gate として使わない」。⛔ **訂正（pN **B33**・行 pin の drift）**: 旧 cite の **`:238` / `:244` は v1.9 では別の行**（`:238` = AC-6 行／`:244` = 区切り）であり **stale**。**私が現 file 上で読み直して `:257` / `:263` に更新した。** ⚠ さらに古い cite `:237` も誤り — 同行は **H-6 各機構の非採用**を述べており、実装 gate の話ではない。⇒ **本 spec の行 pin は「現行版の行」で書く。⛔ 版をまたいだ行番号を混在させない。**）。**v1.6 §H-3.1 は authorization 無しに実装され、p4 が `d724031b77` で「既存 GO 無し・認可外」と裁定済**。⇒ **本 spec の章が tree に在ることは、実装してよいことを意味しない。**
 **根拠:** Rs 裁定 = **案 A 採択**（p4 relay 2026-07-21 15:44）。**設計数値を手で導かない。** 私は **spec + 受入条件**を書き、**p0 が実 build して測り**、**pZ が実 build と突き合わせて model-identity を検証**する。数値はその**検証済み出力**から取る。
 **下敷き:** v0.4 手続き（`c51dad2d54`）。⚠ v0.4 は BLOCK 済ゆえ**そのまま採らない** — 下記 §0 の 1 点を構造的に変える。
 
@@ -181,7 +181,7 @@ SKILL の閾値は **`ee_pos + R(ee_q)·[0,0,+EE_TO_FINGERTIP]`** で測られ�
 - ⛔ **旧記載「どちらで Jacobian を取るかで関節 bar が変わる」も narrow**（**B8**）: **参照点を変えると並進 Jacobian は変わり得るが、差の量・方向・bar への帰結は UNVERIFIED。**
 - ⛔ **「3 点を出す設計だから再測定不要」は撤回**（**B9**）。⇒ **既出の値（例 127〜133 mm/rad）を bar 変化の根拠に使わない。**
 - ⭐⭐ **B15 の区別（両方とも真・一般形をここへ narrow）**: **proxy は測定済／evidence-grade は未測**。
-  - ✅ **測定済（proxy）** = 現行 H-4 の 3 点の値（`908ac46745`）。**ただし各列を最大絶対成分に縮約した量 ＋ 1 姿勢**である。**「未測」ではない。消さない。**
+  - ✅ **測定済（proxy）** = 現行 H-4 の 3 点の値（`908ac4674576c3b936fe66866254d17691b6cc8e`）。**ただし各列を最大絶対成分に縮約した量 ＋ 1 姿勢**である。**「未測」ではない。消さない。**
   - ⛔ **未測（evidence-grade）** = **方向つきの完全な 3 成分 Jacobian ＋ 認可された envelope**。
   - ⇒ ⛔⛔ **proxy から bar への帰結を導かない。** 「Jacobian を別途測る必要がある」という一般形は、**この 2 段の区別**として読むこと。
 - ⛔ **「J-a/J-c は gripper のたわみを含まず感度は過小側」も撤回**（**B10**）。**`gripper_dof_contribution` を含まない**という事実は残すが、**task に効く感度に対し過小か過大かは UNVERIFIED**。
