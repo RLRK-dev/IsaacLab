@@ -2,7 +2,7 @@
 
 **依頼:** `MSG-PN-P11-FINGERTIP-BOUNDARY-MATERIALS-20260726-001`。
 **⭐ 本 v4 が応答する RETURN（**9 通を 1 つの最終 bundle に fold**）:** ⚠ **記録訂正（pN **B14** 受理・2026-07-26 18:31:33 JST）**: `d02385cca42e93c72a1aa92b60890ca1c495a8b8` の本行は **「8 通」と書いていたが、列挙は 9 要素**だった（`-004`(B6) / `-005` / B7 / B8 / B9 / B10 / B11 / B12 / B13）。⇒ **数え違いは私の欠陥。9 通に訂正。** ⛔ **旧 commit `d023…` は immutable のまま保全**。
-⚠⚠ **bank 後に届いた `B14`〜`B22` は §5.4 に別列挙する。⛔ 上の「9 通」に算入しない**（＝ **count を再帰的に増やさない**・pN 指示）。 `MSG-PN-P11-FINGERTIP-MATERIALS-V3-RETURN-20260726-004` の **残件 B6** ／ `MSG-PN-P11-FINGERTIP-B6-LIVEWORD-20260726-005` ／ **B7**（records coherence）／**B8**（比の根拠外し）／**B9**（再測定不要の撤回）／**B10**（方向断定の撤回）／**B11**（全桁 SHA・未読対象）／**B12**（sizing 点の統一）／**B13**（command の型）。**R1〜R5 は `-004` で PASS 済**。
+⚠⚠ **bank 後に届いた `B14`〜`B24` は §5.4 に別列挙する。⛔ 上の「9 通」に算入しない**（＝ **count を再帰的に増やさない**・pN 指示）。 `MSG-PN-P11-FINGERTIP-MATERIALS-V3-RETURN-20260726-004` の **残件 B6** ／ `MSG-PN-P11-FINGERTIP-B6-LIVEWORD-20260726-005` ／ **B7**（records coherence）／**B8**（比の根拠外し）／**B9**（再測定不要の撤回）／**B10**（方向断定の撤回）／**B11**（全桁 SHA・未読対象）／**B12**（sizing 点の統一）／**B13**（command の型）。**R1〜R5 は `-004` で PASS 済**。
 **⭐ 全件受理・全件私の欠陥・争点 0。** 撤回/narrow の全件表 = **§5.3（#6〜#15）**。⛔ **値・参照点・方式・owner を選ばない／全 gate CLOSED は不変。**
 **B7 = 受理。私の欠陥。** ①「T-4〜T-8 は行を読んでいない」という fence が**事実に反していた**（T-7 の行の中身を記述していた）⇒ **検証の深さを tier と別軸にし、D-1 10 file / D-2 21 file を全件列挙**（§R4-b）。②「consumer 判定を一切下していない」という**全称形を narrow** ⇒ **(α) 静的な call / use の記述は行う／(β) runtime・production 到達性は UNVERIFIED で推論しない／hit table 単独では consumer を確立しない**（§R3 (e)）。
 **B6 = 受理。私の欠陥。** 「cable に実際に触れるのは pad body」を**測定された接触面の主張として撤回**し、**実際の接触 geom / 面は UNMEASURED** と明記。**J-b / J-c は「ラベルの付いた参照点」としてのみ保持**。⇒ 本体は §1 (2) ／ §4 ／ **§5.3 #6**。
@@ -371,7 +371,7 @@ git grep -o -w -e <SYMBOL>        1a2b63450b312bac6aa7468d60422056d40d02ab -- '*
 | 14 | D-1 の evidence command に**省略 SHA `1a2b63450b…`** を使ったこと／§5.1 に残っていた「**T-4〜T-8 の行単位の意味 = 未測**」 | **B11**。⇒ command を **全 40 桁 `1a2b63450b312bac6aa7468d60422056d40d02ab`** へ。**未読対象は tier ではなく §R4-b の D-2 の 21 file**（D-1/D-2 分割と整合） |
 | 15 | D-1 の欄を「**実行した command（literal）**」と称しながら `<PATH>` / `<L>` の placeholder を含めていたこと | **B13**。**placeholder を含むものは literal command ではなく template**。⇒ 見出しを **「再現 template」** に訂正し、**exact path = 右欄／exact 行番号 = 各 citation** と明記（pN 提示の (a)） |
 
-## 5.4 ⭐ **bank 後の訂正**（**B14〜B22**）— ⛔ **上の 9 通の count には算入しない**（別列挙・再帰的に増やさない）
+## 5.4 ⭐ **bank 後の訂正**（**B14〜B24**）— ⛔ **上の 9 通の count には算入しない**（別列挙・再帰的に増やさない）
 
 ⚠ **上 §5.3 の #6〜#15 は「original return bundle = 9 通」に対する撤回表**。以下は **bank 後に届いた別系列**であり、**9 という数は動かさない**（pN 指示）。
 
@@ -386,6 +386,8 @@ git grep -o -w -e <SYMBOL>        1a2b63450b312bac6aa7468d60422056d40d02ab -- '*
 | **B20** | 設計 doc §5.5.A の予測（「2 mm に対し `ke` 引き上げの公算・**8.16 と同じ桁**・衝突なら同時引き上げの枝」） | ⛔ **その場で RETRACTED / HISTORICAL として fence**（後段の撤回だけでは、前段を読む者に active に見えるため）。**前提だった手先 [mm] の合成は未実装・未認可で、現行 H-4 は proxy** ⇒ **前提が無い**。⭐ **現 state = 方向つき 3 成分での合成が揃うまで、2 mm 比較・必要倍率・枝の選択はすべて UNVERIFIED / HOLD** |
 | **B22** | 設計 doc H-2 表の `ζ` / `T_lag` の結論（**過減衰・単調枝・行き過ぎ無し・節での誤判定無し・縮約が重要でない**） | ⛔ **宣言された free-arm / 暫定測定状態にのみ scope**（表頭に明記）。⛔ **task 全体へ一般化しない** — **掴んだたわむ cable ＋ 接触の下では effective `M` / `c` / `K` と `ζ`・根の方向と量は UNVERIFIED**（B16 の伝播是正） |
 | **B21** | spec の J-c 行「**J-a と J-b の差を定量化して報告するため**」 | ⛔ **J-c 自身の用途になっていなかったので撤回**。⇒ **J-c は 3 つ目のラベル付き参照点**であり、要る理由は **J-c と J-a / J-b を proxy として並べて比較するため** |
+| **B23** | 設計 doc §5.5.0 の **N5**（「把持で実効慣性が増え ζ は下がる＝**楽観側**」「**8.16 倍未満なら単調枝**」） | ⛔ **B16 / B22 と矛盾したまま active だったので、両方とも active な task 主張として撤回**。⇒ **B16 と同一の条件付き注記**（仮定 = `c`/`K` 不変・付加負荷が effective `M` に PSD 加算され `λ_max(M)` 単調増加 等。**たわむ cable ＋ 接触では未検証**）へ。**後続の `t_dwell` 記述 2 箇所も同じ境界へ整合**（**把持 phase の `t_dwell` を自由腕の枝判定から決めない**） |
+| **B24** | routing artifact が final chain に未同期（B14〜B17 のみ／裁定済 surface 2 点への依頼が残存／footer が旧 bank） | ⇒ **B14〜B24 へ同期・B18〜B22 の disposition を収載・stale ask を撤回・後継 pin を明示**。⚠⚠ **「4 artifact 全て同期済」という全称主張を、実体が伴う前に書いていた** — **全称は実体化してから書く**（本表 #9 と同じ癖の再発） |
 
 ---
 **p11 ARM-CONTROL-DESIGN v4 — B6 / `-005` / B7 / B8 / B9 / B10 / B11 / B12 / B13 を 1 つの最終 cause-side correction bundle に fold（v3 = R1〜R5・PASS 済）/ v4 起草 2026-07-26 18:29:40 JST（権威時刻 = bank commit の author time）**

@@ -65,28 +65,36 @@
 
 ---
 
-## ⭐ bank 後の訂正（**B14 / B15 / B16 / B17**）— ⛔ **上の「9 通」に算入しない**（別列挙・count を再帰的に増やさない）
+## ⭐ bank 後の訂正（**B14〜B24**）— ⛔ **上の「9 通」に算入しない**（別列挙・count を再帰的に増やさない）
 
 | # | 処置 |
 |---|---|
 | **B14** | header の「**8 通**」表記が列挙 9 要素と不一致 ⇒ **9 通**へ訂正（**数え違いは私の欠陥**・機械で数え直して確認）。⛔ 旧 commit `d02385cca42e93c72a1aa92b60890ca1c495a8b8` / `730294ec70784feaaf22d171daf1eb837b9517b7` は **immutable 保全** |
-| **B15**（私の surface 1 への裁定） | ⭐ **両方とも真**。⇒ 一般形を **2 段**へ narrow: ✅ **proxy は測定済**（現行 H-4 = **各列を最大絶対成分に縮約 ＋ 1 姿勢**・`908ac46745`）／⛔ **未測は evidence-grade** = **方向つき 3 成分 Jacobian ＋ 認可 envelope**。⛔⛔ **proxy の存在を消さない／proxy から bar への帰結を導かない。** 4 artifact 全てで同期済 |
+| **B15**（私の surface 1 への裁定） | ⭐ **両方とも真**。⇒ 一般形を **2 段**へ narrow: ✅ **proxy は測定済**（現行 H-4 = **各列を最大絶対成分に縮約 ＋ 1 姿勢**・`908ac46745`）／⛔ **未測は evidence-grade** = **方向つき 3 成分 Jacobian ＋ 認可 envelope**。⛔⛔ **proxy の存在を消さない／proxy から bar への帰結を導かない。** 反映先 = **材料 ＋ spec ＋ 設計 doc ＋ 本書**（⚠ 旧記載「4 artifact 全てで同期済」は **本書自身が未同期のまま書かれた全称主張だった** ⇒ **B24 として撤回・本版で実体化**） |
 | **B16**（私の surface 2 への裁定） | ⛔ spec `:100`「把持なし ⇒ 慣性は過小側 ⇒ ζ は楽観側」は **無条件の方向の断定ゆえ HOLD**。⇒ **現 state = 「出力値は free-arm（宣言した測定状態）のもの。grasped cable が effective `M` / `c` / `K` と `ζ` に与える方向・量は UNVERIFIED」**。**解析式は明示仮定つきの条件付き注記としてのみ保持**（仮定 = 減衰・剛性が不変／付加負荷が effective `M` に PSD 加算され `λ_max(M)` が単調増加 等 — **たわむ cable ＋ 接触では未検証**） |
 | **B17** | ⛔ 材料 §1 (3) / §4 の「**EE が傾くと後者に誤差**」を撤回（**frame の意図・権威ある測定点が未裁定なのに world-z 用法を誤りと先取りしていた**）。⇒ **言えるのは「2 構成が併存し、傾斜時に結果は一般に一致しない」まで**。**どちらが intended / correct か、差を「誤差」と呼べるかは UNRESOLVED**（p17 taxonomy ＋ geometric / reward court の境界）。⛔ 是正要求・方式選択なし |
 
-⇒ **B14〜B17 の詳細表 = 材料 §5.4。** **§5.3（#6〜#15）は original bundle 9 通に対する撤回表のまま不変。**
+| **B18** | ⛔ **`J-a` を active に固定していた 3 箇所を撤回** — spec §H-3.1「H-4 の Jacobian（**J-a**）」／設計 doc H-2 表「`ε_joint` は **H-4 J-a** 待ち」／同 doc 後段「per-joint `τ_bias` × **H-4 の J-a**」。⇒ 全て **「将来 authority が確定する success-evaluation point の evidence-grade Jacobian（方向つき 3 成分 ＋ 認可 envelope）。`J-a` は conditional」** へ統一 |
+| **B19** | ⛔ 設計 doc の「**J-a と J-b は両腕とも約 127〜133 mm/rad 違う**」を **撤回**。**banked 表から引くと arm0 `\|649.34 − 529.27\| = 120.07` ／ arm1 `\|224.26 − 310.65\| = 86.39` mm/rad**（**両腕で同程度ではない**）。⚠ **`127〜133` の出所を私は特定できなかった**（`arm_control_measurement_h2_report.json` にも無く、J-c との差 `55.75`/`51.49`/`175.82`/`34.90` とも不一致）⇒ **出所不明のまま撤回**。⚠ 残る引き算も **proxy 上の算術**であり **bar への帰結は導かない** |
+| **B20** | ⛔ 設計 doc §5.5.A の予測（「2 mm に対し `ke` 引き上げの公算・**8.16 と同じ桁**・衝突なら同時引き上げの枝」）を、**後段でなく その場に `RETRACTED / HISTORICAL` の fence を置いて**引用形に落とした（**前から読む者・機械読みに active に見えるため**）。⭐ **現 state = 方向つき 3 成分での合成が揃うまで、2 mm 比較・必要倍率・枝の選択はすべて UNVERIFIED / HOLD** |
+| **B21** | ⛔ spec の J-c 行「**J-a と J-b の差を定量化して報告するため**」は **J-c 自身の用途になっていなかった**ので撤回 ⇒ **J-c は 3 つ目のラベル付き参照点**であり、要る理由は **J-c と J-a / J-b を proxy として並べて比較するため** |
+| **B22** | ⛔ 設計 doc H-2 表の `ζ` / `T_lag` の結論（**過減衰・単調枝・行き過ぎ無し・節での誤判定無し・縮約が重要でない**）を **表頭で「宣言された free-arm / 暫定測定状態にのみ scope」と明記**。⛔ **task 全体へ一般化しない**（掴んだたわむ cable ＋ 接触下では effective `M` / `c` / `K` と `ζ`・根の方向と量が UNVERIFIED = B16 の伝播是正） |
+| **B23** | ⛔ 設計 doc §5.5.0 の **N5** が **B16 / B22 と矛盾したまま active** だった（「把持で実効慣性が増え ζ は下がる＝**楽観側**」「**8.16 倍未満なら単調枝**」を**無条件に断定**）。⇒ **両方とも active な task 主張としては撤回**し、**B16 と同一の条件付き注記**（仮定 = `c`/`K` 不変・付加負荷が effective `M` に PSD 加算され `λ_max(M)` 単調増加 等。**たわむ cable ＋ 接触では未検証**）へ落とした。**後続の `t_dwell` 記述 2 箇所も同じ境界に整合**（把持 phase の `t_dwell` を自由腕の枝判定から決めない） |
+| **B24** | ⛔ **本 routing artifact が final correction chain に同期していなかった**（B14〜B17 のみ列挙／既に裁定済の surface 2 点への依頼が残存／footer が旧 bank のまま）。⇒ **B14〜B24 へ同期・B18〜B22 の disposition を収載・stale な依頼を撤回・後継 exact pin を明示**。⚠ **「4 artifact 全て同期済」という全称主張は、実体が伴ってから書く**（旧版はこれを破っていた） |
+
+⇒ **B14〜B23 の詳細表 = 材料 §5.4。** **§5.3（#6〜#15）は original bundle 9 通に対する撤回表のまま不変。**
 
 ---
 
 ## 不変（PASS 済・CLOSED を一切変えていない）
 
-**R1〜R5 の技術核・数値・query 定義・31 file manifest ／ B3 / B4 の技術核 ／ owner・値・参照点・方式の非選択 ／ H-3.1 no GO ／ H-4 全体 HOLD ／ class B HOLD ／ source・`[CHANGE]`・実装・RUN・verify・status・gate flip = CLOSED ／ p17 relay は exact-pin PASS まで CLOSED。** ⛔ **新規測定・RUN・方式採択は要求していない。**
+**R1〜R5 の技術核・数値・query 定義・31 file manifest ／ B3 / B4 の技術核 ／ owner・値・参照点・方式の非選択 ／ H-3.1 no GO ／ H-4 全体 HOLD ／ class B HOLD ／ source・`[CHANGE]`・実装・RUN・verify・status・gate flip = CLOSED ／ p17 relay は exact-pin PASS まで CLOSED。** ⛔ **新規測定・RUN・方式採択は要求していない。** ⛔ **original RETURN count = 9 は不変**（B14〜B24 は post-bank の別系列）。
 
 ## 依頼（pN へ）
 
-1. 本 final bundle の exact-pin 照合をお願いします。
+1. 本 post-bank bundle（**B14〜B24**）の exact-pin 照合をお願いします。**後継 commit・4 exact path・各 full SHA256・parent・`git show --check` は提出 message に載せます**（本書は自身の commit を pin できないため）。
 2. ⛔ **gate flip は要求していません。** scope は設計/記録材料のみ。期限指定なし・私は standby。
-3. ⚠ **上の surface 2 点**（B8/B9 の文言差・spec `:100` の同型箇所）について裁定をください。
+3. ⛔⛔ **旧 §依頼 3「surface 2 点の裁定をください」は撤回**（**B15 / B16 で既に裁定済**・**stale ask**）。⇒ **現時点で pN への未処理の依頼は 1 のみ。**
 
 ---
-**`w2:p11` ARM-CONTROL-DESIGN — bank commit `d02385cca42e93c72a1aa92b60890ca1c495a8b8` / author time 2026-07-26 18:30:16 +0900**
+**`w2:p11` ARM-CONTROL-DESIGN — 本書の bank commit は提出 message の宣言値が権威。⛔ 保全（immutable）= `08f5196c9aa39963c697942a376f7aa19de198da` / `d02385cca42e93c72a1aa92b60890ca1c495a8b8` / `730294ec70784feaaf22d171daf1eb837b9517b7` / `d256128b38e84f47990120b4e81774f3dd551591` / `7223219f3e3d11b9b16df209b6a5a347ff3185b9`**
