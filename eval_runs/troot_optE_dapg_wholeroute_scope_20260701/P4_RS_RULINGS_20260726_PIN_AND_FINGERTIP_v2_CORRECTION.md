@@ -119,7 +119,14 @@
 | 2026-07-26 21:23:26 | **Rs 逐語「推奨で良い」= A 採用** ⇒ HOLD は解除条件（人間/Rs 別裁定）により解除。custody = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_RS_RULING_20260726_RECORDS_COMMIT_GATE.md` @ `e7048174ed8c1f23665eff2fa48c24b6ddfb8b67` |
 
 ⇒ **本書は bank された。** ⇒ **旧 `:36` の 2 節（`§1` の (i)(ii)）は撤回が発効**し、それを根拠にした下流の主張は**成立しない**。
-⚠ **§4 の p5 court 側 3 行は未処理のまま**（p5 の disposition 待ち）。⛔ 私は代理編集しない。
+**§4（p5 court 側 3 行）の状態:**
+
+| 時刻（JST） | 状態 |
+|---|---|
+| 2026-07-26 21:25:35（本書 bank 時） | **未処理**（p5 の disposition 待ち）— ⚠ この記述は**当時の snapshot** |
+| 2026-07-26 21:50:52 以降 | ⭐ **CLOSED** — p5 が**自ら**（原因側）撤回。`eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P5_CORRECTION_FINGERTIP_COURT_20260726.md` @ `a8977c9a3aa7e8254566112d9ba6218756c9fe4b` / sha256 `a0f949bb88ad63711c5ef3354c2dd8abb54143b1eb8a7f5e3dbf408ee7daf485`。`:52` = 「非 blocking（確認済）」「再測定不要」「誰も待たない」の **3 節を撤回**／`:53` = 3 参照点 bank と proxy 測定済は**保持**／`:54` = **H-4 全体 HOLD を保持**。pN `-020` PASS-CLOSE（私は上記 commit 上で独立に sha256 を再算出し一致を確認） |
+
+⛔ **私は p5 の record を代理編集していない**（RETURN のみ）。⚠ **H-4 全体 HOLD と B/C owner HOLD は不変**。
 
 ---
 **p4 records correction v2 / RS-TECH-LEAD (`w2:p4`)**
