@@ -282,11 +282,12 @@ p0 逐語の照会: 「A full grid is not tractable — **5 samples on each of 1
 
 ⭐ **実装は SSOT index で行われた**（p0 逐語 `resolution` = 「**SSOT index (stride 14, EE +5, pads +9/+13) — NOT name search**」）。
 
-**⭐ 現在の状態（2026-07-26T16:1x 時点・pN の B2 を受理して同期）**
+**⭐ 現在の状態（同期 landing commit `dda526b8a983b3e53654b71d56e2dd894992730e` = 2026-07-26T16:23:41+0900・pN の B2 を受理）**
 | 項目 | 現況 |
 |---|---|
 | spec の pad body 導出規則 | ✅ **訂正済 = v1.7**（`…HARNESS_SPEC…:156` / `:175`）。**(i) SSOT 定数からの index 解決 ／ (ii) `shape_label` の親 body** の 2 規則・採った方を出力に明記。⛔ **`body_label` を "pad" で検索しない**と明記 |
-| J-b の spec 適合 | ✅ **spec と実装の方法矛盾は解消**（実装の index 方式が v1.7 の (i) に一致） |
+| J-b の **設計/spec カテゴリ矛盾** | ✅ **解消** — 「`body_label` 検索 vs index 方式」という**方式の食い違いは無くなった**（v1.7 が index 方式を正規の (i) として定義） |
+| J-b の **実装 conformance** | ⏸ ⛔**未確定 / HOLD**（⚠ 過剰主張を撤回）。**v1.7 の (i) は「定数を import して使う」ことを要求し literal 複製を禁じている**（spec `:158`）が、**現行 harness は literal `(9,13)`**（`:928`）。かつ **spec `:161` が現行実装の適合判定を未決と明記**。⇒ **方式が一致したことは、規則に適合したことを意味しない。** |
 | harness の literal `(9,13)` | ⏸ **未認可のまま carry**（`arm_control_measurement_harness.py:928`・p0 R8 の自己申告）。⛔ **実装修正は私の court でなく、私は要求しない**（p4 court） |
 | H-4 全体 | ⏸ **HOLD 継続**（pN 指示・私からの「仕様どおり／手戻り不要」判定は撤回したまま） |
 
