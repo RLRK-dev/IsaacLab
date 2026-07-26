@@ -399,6 +399,10 @@ def inventory(model: Any, solver: Any | None = None) -> dict[str, Any]:
 #   * DOF / joint / body counts matching
 #   * "gripper joints exist"
 # --------------------------------------------------------------------------------------
+# Newton's auto-generated body label for anything the scene did not name: "body_12" (and
+# bare "body"). Measured on the as-built model: 40 of 68 bodies carry this form.
+AUTO_BODY_LABEL_RE = re.compile(r"body(_?\d+)?")
+
 FORBIDDEN_WITNESS_NOTE = (
     "DOF count and 'gripper joints exist' are deliberately NOT used: the FK model "
     "carries gripper joints too (build_fk_and_init takes finger positions) and is "
@@ -437,23 +441,30 @@ def witness_cable(model: Any, cable_bodies: Any, per_world: int | None) -> dict[
         n_bodies = int(model.body_count)
         in_range = bool(idx.size > 0 and int(idx.min()) >= 0 and int(idx.max()) < n_bodies)
         robot_prefixes = ("ur5e/", "robotiq_2f85/")
-        at_idx, robot_labelled = [], 0
+        at_idx, robot_labelled, auto_labelled = [], 0, 0
         if in_range and len(labels) >= n_bodies:
             for i in idx.tolist():
                 lbl = labels[int(i)]
                 at_idx.append(lbl)
                 if lbl.startswith(robot_prefixes):
                     robot_labelled += 1
-        # Measured on the as-built model: 68 bodies = 40 auto-labelled + 28 robot-prefixed,
-        # with no third category. So cable indices must point at NON-robot-labelled bodies.
-        non_robot_ok = bool(at_idx and robot_labelled == 0)
+                if AUTO_BODY_LABEL_RE.fullmatch(lbl):
+                    auto_labelled += 1
+        # N3 (pZ, c16858c666): the accept condition is the POSITIVE form -- every declared
+        # cable index must carry the auto-generated body_N label. The earlier negative form
+        # ("not robot-labelled") leaned on there being no third label category, which holds
+        # today but breaks SILENTLY the moment one appears (e.g. clips becoming bodies).
+        # An empty label or a clip_i label passes the negative test and fails this one.
+        all_auto = bool(at_idx and auto_labelled == len(at_idx))
         return {
             "cable_bodies_per_world": int(per_world),
             "cable_index_count": int(idx.size),
             "indices_resolve_in_measured_model": in_range,
             "labels_readable_at_indices": bool(at_idx),
             "robot_prefixed_at_cable_indices": robot_labelled,
-            "all_cable_indices_are_non_robot_bodies": non_robot_ok,
+            "auto_labelled_at_cable_indices": auto_labelled,
+            "all_cable_indices_are_auto_labelled_bodies": all_auto,
+            "accept_form": "POSITIVE (label matches body_N); the negative 'not robot' form was N3",
             "sample_labels_at_cable_indices": at_idx[:4],
             "measured_model_body_count": n_bodies,
         }
@@ -462,13 +473,13 @@ def witness_cable(model: Any, cable_bodies: Any, per_world: int | None) -> dict[
     val = rec.get("value") or {}
     rec["predicate"] = (
         "scene-declared cable bodies exist AND their indices resolve in the measured model "
-        "AND the bodies AT those indices carry non-robot labels (read, not counted)"
+        "AND every body AT those indices carries the auto-generated body_N label (read, not counted)"
     )
     rec["pass"] = bool(
         rec.get("status") == PRESENT
         and val.get("cable_bodies_per_world", 0) > 0
         and val.get("indices_resolve_in_measured_model") is True
-        and val.get("all_cable_indices_are_non_robot_bodies") is True
+        and val.get("all_cable_indices_are_auto_labelled_bodies") is True
     )
     return rec
 
@@ -819,6 +830,16 @@ def torque_budget(solver: Any, cap: float | None) -> dict[str, Any]:
         a_max = (cap - max_bias) / lam_max
     return {
         "tau_bias_includes": "gravity + Coriolis/centrifugal (qfrc_bias)",
+        # Same limitation as H-4: this is one pose, not a maximum over (q, qd).
+        "pose_coverage": {
+            "measured_at": "the single pose/velocity the env is in after construction",
+            "envelope_max_implemented": False,
+            "consequence": (
+                "max_abs_tau_bias is the max over JOINTS at this state, NOT the max over the "
+                "(q, qd) envelope the spec asks for. Velocity is whatever the settled state "
+                "holds, so the Coriolis/centrifugal contribution is near its low end."
+            ),
+        },
         "max_abs_tau_bias": max_bias,
         "lambda_max_M": lam_max,
         "cap_used": cap,
@@ -828,71 +849,115 @@ def torque_budget(solver: Any, cap: float | None) -> dict[str, Any]:
     }
 
 
-def grasp_jacobian(solver: Any, model: Any) -> dict[str, Any]:
-    """H-4: Jacobian at the pad body -- the body that actually contacts the cable.
+def grasp_jacobian(solver: Any, model: Any) -> dict[str, Any]:  # noqa: ARG001
+    """H-4: grasp-point Jacobian at THREE reference points (spec H-4.1, v1.4).
 
-    ``wrist_3_link`` is not used (its wrist_2/wrist_3 position columns are structurally
-    zero) and the ``pinch`` site alone is not used (``collapse_fixed_joints`` rigidly
-    fixes it to ``wrist_3_link``, zeroing all eight gripper DOF columns).
+    Bodies are resolved by the SSOT index scheme, not by name search. The earlier
+    name-based lookup correctly reported ABSENT (MuJoCo body names carry no "pad"), but
+    searching was the wrong method: p11's index SSOT is authoritative.
 
-    The pad body is discovered from labels. Note the scene marks pads on *shape*
-    labels (``shape_label`` at ``:1576-1583``); the owning body is resolved from the
-    shape, and if only shape labels carry 'pad' that resolution path is recorded.
+    Layout: stride 14 bodies per arm; within an arm, EE (wrist_3) = +5 and the two pad
+    bodies = +9 and +13. ``task_config.py:84`` states the same: "IK target = wrist_3
+    (EE body 5)".
+
+    The three points exist because the threshold and the contact are not the same place:
+
+    * **J-a** ``ee_pos + 0.220 * z_ee`` -- the point the SKILL threshold actually measures
+      (``compute_clamp_pos``, ``newton_skill_env_base.py:899-905``). PD sizing belongs here
+      because it is the surface the decision is made on. Note ``EE_TO_FINGERTIP = 0.220``
+      is self-declared Franka/legacy (``task_config.py:78/84/324``, "re-derive S6").
+    * **J-b** pad midpoint -- where contact and grasp physics actually happen. The midpoint
+      is linear in the two pad origins, so its Jacobian is the mean of theirs.
+    * **J-c** ``ee_pos + 0.2757 * z_ee`` -- the measured KO claw tip
+      (``EE_TO_PINCH_TIP_CLOSED``, ``task_config.py:321``), which quantifies the J-a/J-b gap.
+
+    Emitting one point only is forbidden: which point the threshold should be evaluated at
+    is p5/Rs's decision, so this reports all three and their differences.
     """
     import mujoco
+    from task_config import EE_TO_FINGERTIP, EE_TO_PINCH_TIP_CLOSED  # noqa: PLC0415
 
     mj_model, mj_data = _mj_pair(solver)
-
-    def _pad_body_ids() -> list[tuple[int, str]]:
-        out: list[tuple[int, str]] = []
-        for bid in range(int(mj_model.nbody)):
-            name = mujoco.mj_id2name(mj_model, mujoco.mjtObj.mjOBJ_BODY, bid) or ""
-            if "pad" in name.lower():
-                out.append((bid, name))
-        return out
-
-    pads = _pad_body_ids()
-    if not pads:
-        return {
-            "status": ABSENT,
-            "reference_frame": None,
-            "note": (
-                "No MuJoCo body name contains 'pad'. The scene tags pads on shape_label "
-                "(newton_skill_env_base.py:1576-1583), so the pad->body resolution must be "
-                "supplied from the Newton model; reporting ABSENT rather than substituting "
-                "wrist_3_link, which is explicitly forbidden."
-            ),
-        }
-
     nv = int(mj_model.nv)
-    results = []
-    for bid, name in pads:
+    stride, ee_off, pad_offs = 14, 5, (9, 13)
+
+    def _point_jac(point: np.ndarray, body_id: int) -> tuple[np.ndarray, np.ndarray]:
         jacp = np.zeros((3, nv), dtype=np.float64)
         jacr = np.zeros((3, nv), dtype=np.float64)
-        mujoco.mj_jacBody(mj_model, mj_data, jacp, jacr, bid)
-        results.append(
-            {
-                "body_id": bid,
-                "body_name": name,
-                # mm of pad translation per rad of joint motion.
-                "translation_mm_per_rad": (np.abs(jacp) * 1000.0).max(axis=0).tolist(),
-                # mrad of pad rotation per rad of joint motion, evaluated separately.
-                "rotation_mrad_per_rad": (np.abs(jacr) * 1000.0).max(axis=0).tolist(),
-            }
-        )
+        mujoco.mj_jac(mj_model, mj_data, jacp, jacr, np.ascontiguousarray(point, dtype=np.float64), body_id)
+        return jacp, jacr
+
+    def _summarise(jacp: np.ndarray, jacr: np.ndarray) -> dict[str, Any]:
+        return {
+            "translation_mm_per_rad": (np.abs(jacp) * 1000.0).max(axis=0).tolist(),
+            "rotation_mrad_per_rad": (np.abs(jacr) * 1000.0).max(axis=0).tolist(),
+            "max_translation_mm_per_rad": float((np.abs(jacp) * 1000.0).max()),
+            "max_rotation_mrad_per_rad": float((np.abs(jacr) * 1000.0).max()),
+        }
+
+    arms = []
+    for arm in range(2):
+        base = arm * stride
+        ee_body = base + ee_off
+        pads = [base + o for o in pad_offs]
+        if ee_body >= int(mj_model.nbody) or max(pads) >= int(mj_model.nbody):
+            arms.append({"arm": arm, "status": ABSENT, "reason": "index outside nbody"})
+            continue
+        ee_pos = np.array(mj_data.xpos[ee_body], dtype=np.float64)
+        z_ee = np.array(mj_data.xmat[ee_body], dtype=np.float64).reshape(3, 3)[:, 2]
+
+        ja_p, ja_r = _point_jac(ee_pos + EE_TO_FINGERTIP * z_ee, ee_body)
+        jc_p, jc_r = _point_jac(ee_pos + EE_TO_PINCH_TIP_CLOSED * z_ee, ee_body)
+        pad_j = [_point_jac(np.array(mj_data.xpos[b], dtype=np.float64), b) for b in pads]
+        jb_p = 0.5 * (pad_j[0][0] + pad_j[1][0])
+        jb_r = 0.5 * (pad_j[0][1] + pad_j[1][1])
+
+        arms.append({
+            "arm": arm,
+            "ee_body_index": ee_body,
+            "pad_body_indices": pads,
+            "pad_midpoint_world": (0.5 * (np.array(mj_data.xpos[pads[0]]) + np.array(mj_data.xpos[pads[1]]))).tolist(),
+            "J_a_threshold_point_0.220": _summarise(ja_p, ja_r),
+            "J_b_pad_midpoint": _summarise(jb_p, jb_r),
+            "J_c_measured_claw_tip_0.2757": _summarise(jc_p, jc_r),
+            "J_a_minus_J_b_max_mm_per_rad": float((np.abs(ja_p) - np.abs(jb_p)).max() * 1000.0),
+            "J_a_minus_J_c_max_mm_per_rad": float((np.abs(ja_p) - np.abs(jc_p)).max() * 1000.0),
+        })
+
     return {
         "status": PRESENT,
-        "reference_frame": "pad body (cable-contacting), discovered by name",
+        "resolution": "SSOT index (stride 14, EE +5, pads +9/+13) -- NOT name search",
+        # Stated because the spec asks for the maximum OVER THE ENVELOPE and this is not that.
+        # Reporting one pose as if it were an envelope maximum would be a silent cap.
+        "pose_coverage": {
+            "measured_at": "the single pose the env is in after construction (P0 lift-point)",
+            "envelope_max_implemented": False,
+            "why": (
+                "A full grid over the declared provisional box is not tractable: 5 samples on "
+                "each of 12 arm joints is 5**12 = 244,140,625 poses. Which sweep to run "
+                "(random sampling, one-joint-at-a-time, or optimisation for the maximum) "
+                "changes the answer, so it is a design choice and belongs to p11."
+            ),
+            "consequence": "These numbers hold at this pose only. Treat them as a sample, not a bound.",
+        },
+        "constants": {
+            "EE_TO_FINGERTIP": float(EE_TO_FINGERTIP),
+            "EE_TO_FINGERTIP_provenance": "task_config.py:78 -- self-declared Franka/legacy, 're-derive S6'",
+            "EE_TO_PINCH_TIP_CLOSED": float(EE_TO_PINCH_TIP_CLOSED),
+            "EE_TO_PINCH_TIP_CLOSED_provenance": "task_config.py:321 -- measured KO claw tip",
+            "gap_mm": float((EE_TO_PINCH_TIP_CLOSED - EE_TO_FINGERTIP) * 1000.0),
+        },
         "excluded_frames": [
-            "wrist_3_link (position columns structurally zero)",
-            "pinch site alone (gripper DOF columns zero)",
+            "wrist_3_link origin alone (wrist_2/wrist_3 position columns structurally zero)",
+            "pinch site alone (rigidly fixed to wrist_3 by collapse_fixed_joints; gripper DOF columns zero)",
         ],
-        "gripper_dof_contribution_included": True,
-        "error_direction_note": (
-            "Using the pad body includes the gripper DOF columns. Had a wrist frame been used, "
-            "gripper compliance would be omitted and the reported sensitivity would be an UNDER-estimate."
+        "gripper_dof_contribution": (
+            "J-b includes the gripper DOF columns because the pad bodies hang off them. J-a and "
+            "J-c are taken on the EE body, so gripper compliance is NOT represented there and "
+            "their sensitivity is an UNDER-estimate by that amount."
         ),
-        "pads": results,
+        "which_point_to_threshold_on": "p5/Rs decision -- this harness reports all three, it does not choose.",
+        "arms": arms,
     }
 
 
@@ -1221,9 +1286,33 @@ def run_h2(solver: Any, table: dict[str, Any]) -> dict[str, Any]:
         "zeta_formula_not_used": "zeta = -Re(l)/|l|  [saturates at 1 -- deliberately not mixed in]",
         "dof_sets": {"target_arm": arm, "excluded": excl, "cable_outside": len(cable)},
         "reduction_i_fixed_12x12_BAR": red_i,
+        # (b) N5: state the scope of "conservative" wherever the bar is read. It is
+        # conservative WITH RESPECT TO THE CHOICE OF REDUCTION -- not with respect to grasp.
+        "bar_conservatism_scope": {
+            "conservative_with_respect_to": "the choice of reduction ((i) is the smallest of the three)",
+            "NOT_conservative_with_respect_to": (
+                "grasp state -- cable inertia is absent from M (H-2.3 measured the arm/cable "
+                "coupling as exactly 0), so effective inertia rises when grasping and zeta falls. "
+                "The bar is a FREE-ARM value."
+            ),
+            "required_when_quoting_the_bar": "carry this scope note with the number",
+        },
         "reduction_ii_mass_condensation_lower_bound": red_ii,
         "reduction_iii_full_armside_arm_dominated": red_iii,
+        # (a) N2: the diagonal approximation reads HIGHER than the coupled bar, i.e. it
+        # understates the damping problem. Never quote it without this flag.
         "diagonal_approx_zeta_min": float(np.min(diag_zeta)) if len(diag_zeta) else None,
+        "diagonal_approx_is_NON_CONSERVATIVE": True,
+        "diagonal_approx_note": (
+            "The diagonal approximation is OPTIMISTIC relative to the coupled bar (measured "
+            "+10.6% on this build). It is reference-only; do not size against it, and mark it "
+            "NON-CONSERVATIVE wherever it is quoted."
+        ),
+        "diagonal_vs_bar_percent": (
+            float((np.min(diag_zeta) / red_i["zeta_min"] - 1.0) * 100.0)
+            if len(diag_zeta) and red_i.get("zeta_min")
+            else None
+        ),
         "self_check_H2_3_arm_cable_mass_coupling": {
             "norm_M_arm_cable": coupling,
             "p11_prediction": 0.0,
@@ -1244,6 +1333,15 @@ def run_h2(solver: Any, table: dict[str, Any]) -> dict[str, Any]:
             "M": mass_full[np.ix_(arm_side, arm_side)].tolist() if arm_side else [],
             "K_e": k_e_full[np.ix_(arm_side, arm_side)].tolist() if arm_side else [],
             "K_d": k_d_full[np.ix_(arm_side, arm_side)].tolist() if arm_side else [],
+        },
+        # (d) N4: emit the arm x cable block too. Without it the |M[arm,cable]| = 0 claim can
+        # only be re-run, not re-derived independently -- the banked 28x28 does not contain
+        # the entries the claim is about.
+        "raw_matrix_arm_cable_block": {
+            "row_dof_order": arm_side,
+            "col_dof_order": cable,
+            "note": "Lets |M[arm,cable]| = 0 be re-derived from banked data by another method.",
+            "M_arm_cable": mass_full[np.ix_(arm_side, cable)].tolist() if (arm_side and cable) else [],
         },
         "stiffness_sources": diag["sources"],
         "servo_actuators_contributing": diag["servo_actuators_contributing"],
