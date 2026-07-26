@@ -171,12 +171,19 @@ v0.4 の致命 = **私が書いた build recipe が、実際に走るモデル�
 
 SKILL の閾値は **`ee_pos + R(ee_q)·[0,0,+EE_TO_FINGERTIP]`** で測られる（`newton_skill_env_base.py:899-905`）。⚠ その **`EE_TO_FINGERTIP = 0.220` は自身のコメントで Franka/legacy と明記**（`task_config.py:78`「FRANKA panda_hand->fingertip」/ `:84`「220mm, **Franka value; re-derive S6**」/ `:324`「**EE_TO_FINGERTIP above (0.220) is the Franka/legacy**」）。⚠ **同 file には実測の Robotiq/コ 値が別に在る**: `EE_TO_PINCH_CLOSED = 0.2548`（`:320`）/ `EE_TO_PINCH_TIP_CLOSED = 0.2757`（`:321`）。
 
-⇒ ⭐ **同じ「指先」という語が 2 つの点を指し、差は 34.8〜55.7 mm**（2 mm 閾値の **17〜28 倍**）。⇒ **どちらで Jacobian を取るかで関節 bar が変わる**（腕手先までの腕の長さが変わるため、mrad あたりの mm が変わる）。
-⚠ **v1.8 の但し書き（B6）**: この差は **「ラベルの付いた参照点どうしの差」**である。⛔ **「判定面と接触面のずれ」と読まない** — **実際の接触 geom / 面は UNMEASURED**。
+⇒ ⭐ **同じ「指先」という語が 2 つの点を指し、pin された参照オフセットどうしの差は 34.8〜55.7 mm。** ⇒ **各参照点で Jacobian を別途測る必要がある。**
+
+⛔⛔ **v1.8 の境界（B6 / B8 / B9 / B10・3 artifact 共通）**:
+- この差は **「ラベルの付いた参照点どうしの差」**。⛔ **「判定面と接触面のずれ」と読まない** — **実際の接触 geom / 面は UNMEASURED**。
+- ⛔ **旧記載「2 mm 閾値の 17〜28 倍」は active な根拠から外す**（**B8**）。**2 mm は別の量（成功距離の閾値）**であり、**この比は接触誤差も bar の倍率も違反も確立しない**。参考として引く場合は **引き算だけ・誤差や bar を導かない**と明記する。
+- ⛔ **旧記載「どちらで Jacobian を取るかで関節 bar が変わる」も narrow**（**B8**）: **参照点を変えると並進 Jacobian は変わり得るが、差の量・方向・bar への帰結は UNVERIFIED。**
+- ⛔ **「3 点を出す設計だから再測定不要」は撤回**（**B9**）。**現行 H-4 の出力は「各列の最大絶対成分」への縮約 ＋ 1 姿勢**であり、**方向つき 3 成分 Jacobian でも envelope の証拠でもない**。⇒ **既出の値（例 127〜133 mm/rad）を bar 変化の根拠に使わない。**
+- ⛔ **「J-a/J-c は gripper のたわみを含まず感度は過小側」も撤回**（**B10**）。**`gripper_dof_contribution` を含まない**という事実は残すが、**task に効く感度に対し過小か過大かは UNVERIFIED**。
+- ⭐ **今の時点で安全に言えること** = **pin された参照オフセットどうしが 34.8〜55.7 mm 違う**、それだけ。**権威ある参照点の選択 ＋ 認可された envelope 上の 3 成分 Jacobian が揃うまで、J と bar への帰結は UNVERIFIED。**
 
 | # | 参照点 | なぜ要るか |
 |---|---|---|
-| **J-a** | `ee_pos + 0.220·ẑ_ee`（**閾値が測っている点**） | **PD sizing はこの点で行う**（判定式と同じ面で bar を立てるため） |
+| **J-a** | `ee_pos + 0.220·ẑ_ee`（**現行の判定式が測っている点**） | ⛔ **v1.8 訂正（B12）**: 旧「**PD sizing はこの点で行う**」は **active な選択に読めるので撤回**。⭐ **保持する原則 = sizing 点は、将来 authority が確定する成功評価の点と一致させる**（別の面で bar を立てると、満たしても判定は落ちる／その逆）。⇒ **「J-a で sizing」は conditional proposal**（authority が確定する点が J-a だった場合）**であり現行採択ではない**（成功述語の測定面 = p5 court／定数そのものは UNCONFIRMED / HOLD） |
 | **J-b** | **pad を担う body**（**ラベルの付いた参照点**）。⭐**導出は §H-4 の (i) SSOT 定数 index / (ii) `shape_label` の親 body のいずれか**。⛔ **`body_label` を "pad" で検索しない**（実測 0 件・v1.7 訂正） | ⛔ **v1.8 訂正（B6）**: 旧「**接触・把持の物理はこの点で起きる**」は**撤回**（**接触 geom / 面は UNMEASURED**）。⇒ 要る理由は **J-a と異なる参照点での Jacobian を並べて出すため** |
 | **J-c** | `EE_TO_PINCH_TIP_CLOSED = 0.2757` 相当の爪先（**ラベルの付いた参照点**・`task_config.py:321` のラベルは「pad TIP drop; コ f1ext claw tip」） | J-a と J-b の差を**定量化**して報告するため |
 
