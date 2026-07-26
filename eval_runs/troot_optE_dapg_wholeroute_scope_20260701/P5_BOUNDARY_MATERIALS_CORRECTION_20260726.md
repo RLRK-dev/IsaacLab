@@ -21,7 +21,7 @@
 
 ⭐ **行番号が指す tree = 読取時の working tree**（banked tree ではない）。
 ⚠**R1 訂正 2026-07-26**: 旧記載の「読取 2026-07-26T17:2x–17:35 JST」は **非 exact ゆえ撤回**（時刻を合成しない）。確実に言えるのは **bank commit `46377eef9f79efc20acc7e8bfdee739c5f35a09c`（author `2026-07-26T17:35:22+09:00`）より前に読んだ**ことのみで、**per-read の時刻は未記録**。
-⭐**R1 に従い WT 行を historical / 非 evidence へ格下げ**: 下表の `as_read (WT)` 列は **retrievable committed bytes を持たない**ため **evidence として用いない**。**operative な主張はすべて banked commit `46377eef9f79efc20acc7e8bfdee739c5f35a09c` にのみ接地する**。
+⭐**R1 に従い WT 行を historical / 非 evidence へ格下げ**: 下表の `as_read (WT)` 列は **retrievable committed bytes を持たない**ため **evidence として用いない**。**本書の evidential な主張はすべて banked commit `46377eef9f79efc20acc7e8bfdee739c5f35a09c` にのみ接地する**（⚠C4: 「operative」を分類語として使わない）。
 ⭐**用語の分離（R1）**: 旧 `changed` → **`modified_vs_banked`**（banked と WT が異なる path）。**`changed_during_read` は別概念であり本書では未記録＝主張しない**（読取中の変化を測っていない）。
 
 | path | tracked | 状態 | banked blob sha256 | as_read (WT) sha256 |
@@ -38,7 +38,7 @@
 | `thread_isaac_lab/skills/step_table.py` | tracked | ⚠**MODIFIED** | `6f9c3fb3d0010721c9287b8b63e2e86e7cecd7210e8ee8c2f222becaf3e5422b` | `ff1c0029e9e061b33a8bd7ff004703f89c136835ea5b4b7a1e81cb369017c649` |
 | `thread_isaac_lab/scripts/test_newton_clip_routing.py` | tracked | ⚠**MODIFIED** | `2e1fc1d84539877f91cc75eb1f6443a628dfb0743bd24cb7f0e8a1ab956779dd` | `312e80d522a6e6d6667b070a024244cf9680227d23f50f6c528613644cffb345` |
 | `thread_isaac_lab/scripts/newton_routing_utils.py` | tracked | ⚠**MODIFIED** | `bac4fbc92984b2e506ce095b7ee5d6ce4641da87536ad351269dae4995ecc137` | `23795ca75eec9e58d058aad11b08326879b07bef046e375d2086c06ae984ac85` |
-| `harness/scripts/predict_training.py` | ⛔**untracked** | **ABSENT（commit tree に不在）** | ⚠**ABSENT / N/A**〔**R4 訂正**: 不在に blob SHA は存在しない。旧記載の `e3b0c442…` は空入力の sha256 であって blob SHA ではないため **banked 列から撤回**〕 | （historical・非 evidence: `7117860535ad2c95…`） |
+| `harness/scripts/predict_training.py` | ⛔**untracked** | **ABSENT（commit tree に不在）** | ⚠**ABSENT / N/A**〔**R4 訂正**: 不在に blob SHA は存在しない。旧記載の `e3b0c442…` は空入力の sha256 であって blob SHA ではないため **banked 列から撤回**〕 | （historical・非 evidence・as_read 値の full 64-hex: `7117860535ad2c95a9377eb85c7aa853d93a2e5d085a57b59ffdecffa7ee3401`） |
 
 **`modified_vs_banked = [newton_grip_env.py, newton_approach_cable_mujoco_env.py, step_table.py, test_newton_clip_routing.py, newton_routing_utils.py]`／`untracked = [harness/scripts/predict_training.py]`（ABSENT）／`clean = 残り 7 path`。**
 ⚠**`changed_during_read` = 未記録（unmeasured）** — 読取中に変化しなかったという主張はしない（R1）。
@@ -96,9 +96,10 @@ grep -rn --include='*.py' --exclude-dir=.git --exclude-dir=.codex --exclude-dir=
 
 **banked 総計（本書の参照面）**: `EE_TO_FINGERTIP` = 17 file / 68 hit ／ `GRASP_Z` = 22 file / 105 hit ／ `PUSH_Z` = 13 file / 55 hit。
 
-### 2-c. 役割分類（banked・**operative-candidate のみ列挙**。probe-script は集計のみ）
+### 2-c. 役割分類（banked・**source-role candidate のみ列挙**。probe-script は集計のみ）
+⚠**C4 訂正**: 旧ラベル `operative-candidate` / `operative path` を **撤回**。runtime status が UNVERIFIED である限り `operative` を分類語に使わない ⇒ **`source-role candidate`（path 由来の構造分類）** に改称。
 
-| 定数 | operative-candidate（file:hit） | probe-script |
+| 定数 | source-role candidate（file:hit） | probe-script |
 |---|---|---|
 | `EE_TO_FINGERTIP` | `configs/task_config.py`:5 / `envs/newton_grip_env.py`:3 / `envs/newton_skill_env_base.py`:3 / `configs/mpc_config_ic.py`:1 | 13 file / 56 hit |
 | `GRASP_Z` | `configs/task_config.py`:3 / `envs/newton_grip_env.py`:3 / `configs/mpc_config_grip.py`:1 / `envs/newton_approach_cable_mujoco_env.py`:1 / `envs/route_executor.py`:1 | 17 file / 96 hit |
@@ -106,8 +107,8 @@ grep -rn --include='*.py' --exclude-dir=.git --exclude-dir=.codex --exclude-dir=
 
 ⚠⚠ **分類は path 由来の役割であって稼働証明ではない（liveness は UNVERIFIED）。** pN の「tracked `*.py` だけから live を推論しない」に従い、以下を明記する:
 - ⭐ **反例あり**: `scripts/newton_routing_utils.py` は path 上 probe-script だが、**`envs/route_executor.py`（`:1910`/`:2144`/`:3040`/`:3041`/`:3893`）と `skills/scripted_skills.py`（`:124`/`:244`/`:288`/`:336` 他）から import される library**（banked 実測）。⇒ **path bucket ≠ reachability**（本 arc で私が別件で立てた指摘と同型）。
-- `envs/route_executor.py` の `GRASP_Z`/`PUSH_Z` hit は **legacy 宣言そのもの**（`:2450`「LEGACY P1-P4 path, NOT used by `route_c1_c2`」）⇒ operative path にあるが **operative な消費ではない**。
-- ⇒ **operative/legacy/harness/test/probe/snapshot の確定分類には runtime 証拠（実行経路）が要る。本書は静的分類に留める。**
+- `envs/route_executor.py` の `GRASP_Z`/`PUSH_Z` hit は **legacy 宣言そのもの**（`:2450`「LEGACY P1-P4 path, NOT used by `route_c1_c2`」）⇒ **source-role candidate に属するが、当該 hit は legacy 宣言であって消費ではない**（⚠C4: 旧「operative path」表現を撤回）。
+- ⇒ **source-role / legacy / harness / test / probe / snapshot の確定分類には runtime 証拠（実行経路）が要る。本書は静的分類に留める。**（⚠C4: 分類語から `operative` を除去）
 
 ### 2-d. 自己検出した query 欠陥（記録）
 本訂正の作業中、`git grep … -- 'thread_isaac_lab/skills/**/*.py'` が **`skills/` 直下の file に一致せず 0 hit** を返した。0 を不在の根拠にせず検索対象集合（`skills/` の `*.py` = 5 file）を確認して pathspec を `'thread_isaac_lab/skills/'` に修正した結果、上記の library import が判明した。⇒ **pathspec の `**` は直下を覆わない**ことを本書に記録する。
@@ -119,7 +120,7 @@ grep -rn --include='*.py' --exclude-dir=.git --exclude-dir=.codex --exclude-dir=
 **RETRACT（旧 artifact `:32`）**: 「| `task_config.py:93` / `:95` | `GRASP_Z` / `PUSH_Z` を導出 | **全 skill 横断（下流全部）** |」の **「全 skill 横断（下流全部）」**。
 ⇒ 旧 artifact 自身の `:54` / `:81` / `:115` が「approach(mujoco) と route は非消費」と正しく述べており、`:32` はそれと矛盾していた。
 
-**正**: `task_config.py:93`/`:95` の**派生先は `GRASP_Z` / `PUSH_Z` の 2 定数**。その consumer は §2-c の operative-candidate 集合（`newton_grip_env` / `scripted_skills` / `step_table` / `mpc_config_grip` / `task_config` 内部）＋ probe-script 群。⛔ **`approach`(mujoco) と `route_c1_c2` は非消費**（`newton_approach_cable_mujoco_env.py:197`／`route_executor.py:2450`）。
+**正**: `task_config.py:93`/`:95` の**派生先は `GRASP_Z` / `PUSH_Z` の 2 定数**。その consumer は §2-c の source-role candidate 集合（`newton_grip_env` / `scripted_skills` / `step_table` / `mpc_config_grip` / `task_config` 内部）＋ probe-script 群。⛔ **`approach`(mujoco) と `route_c1_c2` は非消費**（`newton_approach_cable_mujoco_env.py:197`／`route_executor.py:2450`）。
 ⇒ ⭐ **「全 skill 共通は現状の事実でない」という結論は保持**（B3 は要約行の誤りであり結論の誤りではない）。
 
 ---
@@ -150,7 +151,7 @@ grep -rn --include='*.py' --exclude-dir=.git --exclude-dir=.codex --exclude-dir=
 ⛔ **実際の接触 geom は UNMEASURED。** 反証材料（banked `route_executor.py:2436-2440`）:
 - `:2436-2437` 逐語「retention = the cable is **SANDWICHED between the two claws (f1ext bottom + f2ext top**, mouth ~10mm, Ø8 cable -> ~2mm play; `GD-KoShape-Finger.md:51-58`)」
 - `:2438` 逐語「The OLD **f1ext-only** gate false-FAILed "cable risen to the TOP claw under drag"」
-⇒ **単一 geom を接触面と断定できない**（live gate は両爪＋横方向 footprint で判定）。接触面の同定には測定が要る。
+⇒ **単一 geom を接触面と断定できない**（⚠**C3 訂正**: 旧記載「live gate」を撤回 — **banked source の retention 述語**〔`route_executor.py:2436-2440` の comment ＋ 判定式〕が両爪＋横方向 footprint で定義している、が正。**source の記述であって runtime 到達性の主張ではない**）。接触面の同定には測定が要る。
 
 ---
 
@@ -169,16 +170,30 @@ grep -rn --include='*.py' --exclude-dir=.git --exclude-dir=.codex --exclude-dir=
 
 ---
 
-## 8. R1-R6 訂正記録（pN RETURN `MSG-PN-P5-FINGERTIP-MATERIALS-CORRECTION-RETURN-20260726-002` / 発行 2026-07-26T18:03:24+09:00）
+## 8. R1-R6 訂正記録（pN RETURN `MSG-PN-P5-FINGERTIP-MATERIALS-CORRECTION-RETURN-20260726-002`）
+
+⚠**C2 訂正**: 旧記載「発行 2026-07-26T18:03:24+09:00」は **誤り（＝私の作業時刻を pN の発行時刻として書いた）ゆえ撤回**。
+**pN RETURN の発行時刻 = `2026-07-26 18:00:50 JST`**（pN message の stamp 逐語）。⛔ 受信・処理時刻をこの欄に代入しない。
+本節の追記が着地した記録 = bank commit `b5d4a3d4887de8088c8361eaaac000bab97ed12b`（author `2026-07-26T18:04:26+09:00`）。
 
 | # | pN 指摘 | 本書での処置 |
 |---|---|---|
-| **R1** | 非 exact 時刻 `17:2x-17:35`／dirty-WT hash に pre-post bracket も retrievable bytes も無い／`changed` の語が混在 | **時刻主張を撤回（合成しない）**・**WT 行を historical / 非 evidence へ格下げ**し operative 主張を banked `46377eef9f` のみに接地・**`changed` → `modified_vs_banked`**、**`changed_during_read` は未記録＝主張しない**（§1 冒頭） |
+| **R1** | 非 exact 時刻 `17:2x-17:35`／dirty-WT hash に pre-post bracket も retrievable bytes も無い／`changed` の語が混在 | **時刻主張を撤回（合成しない）**・**WT 行を historical / 非 evidence へ格下げ**し evidential 主張を banked `46377eef9f` のみに接地・**`changed` → `modified_vs_banked`**、**`changed_during_read` は未記録＝主張しない**（§1 冒頭） |
 | **R2** | WT-only delta が manifest 外 3 path を evidence に使用 | **delta 表を historical explanation（再現不能）へ格下げ**・evidence は §2-a の banked 計数のみ・当該 3 path は manifest 外＋SHA 未被覆ゆえ非 evidence と明記（§2-b） |
 | **R3** | 「live code」と liveness=UNVERIFIED が矛盾 | **「banked source に存在する」へ改め**、runtime 到達性を推論しない（§4） |
-| **R4** | ABSENT path に空入力 SHA を割当 | **ABSENT / N/A** に改め、`e3b0c442…` を banked 列から撤回（§1 表） |
+| **R4** | ABSENT path に空入力 SHA を割当 | **ABSENT / N/A** に改め、空入力 sha256（`e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`）を banked 列から撤回（§1 表） |
 | **R5** | ⚠**私の過剰撤回** — banked `newton_grip_env.py:644-675` は `FINGER_LOCAL=[9,13]` 由来 index で `body_q`/`body_qd` を読む | **過剰撤回を撤回**し正しい区別を記載: **pad-body source read は存在**（`:660`/`:667-668`/`:670`/`:671`）／**production reachability と「要求された観測・測定面としての用途」は UNVERIFIED**（当該 read の用途は `:673-674` の spring force）（§4） |
 | **R6** | wrapped historical artifact に live / two-regime の残留 | **旧本文全体を HISTORICAL / SUPERSEDED 境界の内側に置き**、`:18`/`:64-65`/`:125`/`:131` の live・「2 つ併存」表現を個別に narrow（対象 = materials artifact 側） |
 
 ⛔ **PASS 済の事実は保持**（correction/wrapped SHA256・old pin 一致・banked path hash・68/105/55 計数・B3/B5 の方向・authority fence）。⛔ owner / 値 / 方式は非選択維持。source / `[CHANGE]` / 実装 / RUN / verify / status / gate flip = CLOSED。旧 commit（`46377eef9f`・`44f3c8af3e`）は immutable。
 
+## 9. C1-C4 訂正記録（pN RETURN `MSG-PN-P5-FINGERTIP-MATERIALS-R1R6-RETURN-20260726-003`・発行 `2026-07-26 18:07:08 JST`）
+
+| # | pN 指摘 | 処置 |
+|---|---|---|
+| **C1** | `git show --check` FAIL（本 file `:184` に EOF の新規空行） | **EOF を単一改行へ修正**し `git show --check` clean を確認。旧 commit `b5d4a3d488` は保存（records-only の後継 commit で着地） |
+| **C2** | §8 が pN RETURN 発行を `18:03:24+09:00`（= 私の作業時刻）と誤記録 | **虚偽の `18:03:24` を撤回**し **pN 発行 = `2026-07-26 18:00:50 JST`（stamp 逐語）** を記載。⛔ 受信・処理時刻を代入しない。私の追記の着地は bank commit の author 時刻で示す |
+| **C3** | 「live gate」が同 artifact の liveness=UNVERIFIED と矛盾 | **banked source の retention 述語（comment＋判定式）** という source-only 表現へ改め、runtime 到達性を主張しない |
+| **C4** | `operative-candidate` / `operative path` を分類語に使用／`:41` に切り詰め digest | 分類語を **`source-role candidate`** へ全面改称し `operative` を分類語から除去（`:24`/`:99`/`:101`/`:109`/`:110`/`:122`/`:176`）。`:41` の as_read digest を **full 64-hex に展開**、`:179` の `e3b0c442…` も full 展開（partial hash は historical でも exact pin でない） |
+
+⛔ **PASS 済は保持**（WT demotion・`modified_vs_banked` 分離・manifest 外 delta の格下げ・ABSENT/N-A・pad-source-read 訂正・historical 境界・banked 計数/pins・B3/B5 方向・authority fence）。⛔ **新たな値 / owner / 方式の選択なし・実装 gate なし。**
