@@ -1,5 +1,14 @@
 # 境界材料 — `GRASP_Z` / `PUSH_Z` / `EE_TO_FINGERTIP`（要求事実の列挙のみ）
 
+> ⛔⛔ **2026-07-26: 本書は 5 点訂正された（原因側 = p5 自身）。訂正版 = `P5_BOUNDARY_MATERIALS_CORRECTION_20260726.md`（stable ID `P5-BOUNDARY-MATERIALS-CORRECTION-20260726-001`）を先に読むこと。**
+> 契機 = pN RETURN `MSG-PN-P5-FINGERTIP-MATERIALS-RETURN-20260726-001`（B1-B5）。**5 件すべて p5 が独立実測で CONFIRM**。
+> **B1** 行番号・引用は **as-read working tree**（banked でない）。`changed=[newton_grip_env.py, newton_approach_cable_mujoco_env.py, step_table.py, test_newton_clip_routing.py, newton_routing_utils.py]`・`untracked=[harness/scripts/predict_training.py]`（**commit tree に不在**）。⚠`newton_grip_env.py` の引用は banked では **一律 −5 行**（例: `tip[2] -=` `:751/:757` → **`:746/:752`**）。⭐banked に列挙漏れの `compute_clamp_pos` 呼出 **`:1610/:1617`** が存在。
+> **B2** 件数は working-tree 由来で **banked と 10 件相違**（`test_diagonal_reach` 13／`test_motion_sequence_dry_run` 11／`collect_expert_demos` 3／`demo_aerial_regrasp` 1 は記載漏れ 等）。exact query と役割分類は訂正版 §2。
+> **B3** 下記 `全 skill 横断（下流全部）` = **RETRACTED**（本書 §2/§3/§4 と矛盾）。⭐**「全 skill 共通でない」結論は保持**。
+> **B4** 「Z-Check が finger body z を直読 ⇒ 観測移行の live 先例」= **格下げ / UNVERIFIED**（SSOT の pad は `[9,13]`・読み取りは `+7/+8`＝**stale/mismatch 候補**）。
+> **B5** 「物理接触面 = f1ext 爪先」= **UNMEASURED**（banked `route_executor.py:2436-2440` は f1ext+f2ext の sandwich・f1ext-only は false-FAIL 実績）。
+> ⭐ **owner / 値 / 方式の非選択と CLOSED gates は不変。** 原文は履歴として残す（rewrite しない）。
+
 **stable ID:** `P5-BOUNDARY-MATERIALS-GRASPZ-PUSHZ-EETOFINGERTIP-20260726-001`
 **著者:** SKILL-DETAIL-DESIGN (`w2:p5`)。**発行:** 2026-07-26T17:32:57+09:00（shell 実測）。
 **依頼元:** pN relay `MSG-PN-P5-FINGERTIP-BOUNDARY-MATERIALS-20260726-001`（p17 scope response = T1 skill identity/count・T2 frame/unit・T3 fixed-vs-composition-vs-observation のみ／**定数値・geometric/reward gate・arm-target・landing を p17 単独で決めない**／**B/C owner はなお UNCONFIRMED/HOLD**）。
@@ -29,7 +38,7 @@
 
 | consumer | 用途 | skill 帰属 |
 |---|---|---|
-| `task_config.py:93` / `:95` | `GRASP_Z` / `PUSH_Z` を導出 | **全 skill 横断**（下流全部） |
+| `task_config.py:93` / `:95` | `GRASP_Z` / `PUSH_Z` を導出 | ~~**全 skill 横断**（下流全部）~~ ⚠**RETRACTED（B3）** → 派生先は `GRASP_Z`/`PUSH_Z` の 2 定数。consumer は §2/§3 の集合であり ⛔**approach(mujoco)・route_c1_c2 は非消費**（訂正版 §3） |
 | `envs/newton_skill_env_base.py:902` `clamp_pos = ee_pos + quat_rotate(ee_quat, [0,0,+EE_TO_FINGERTIP])`（`:904` 同式の local offset） | **success 述語の測定点**（`compute_clamp_pos`） | **acquire-grasp**（`newton_grip_env.py:1163`/`:1169` → 距離 `:1174-1176` → 判定 `:1230`/`:1236`） |
 | `envs/newton_grip_env.py:751` / `:757` `tip[2] -= EE_TO_FINGERTIP` | cable 目標分節の選択（最近傍探索の query 点） | **acquire-grasp**（obs 用の target seg） |
 | `configs/mpc_config_ic.py:146` | 「approach: 91mm descend（`LIFT_Z=1.120` → `GROOVE_CENTER_Z=0.809 - EE_TO_FINGERTIP`）」 | **insert**（IC） |
@@ -39,7 +48,7 @@
 （凍結 snapshot = `eval_runs/` 配下 15 file・live に数えない。）
 
 ### (2) 必要 measurement surface
-**要求されている面 = 「cable に接触する点」の世界位置**。現状の実装が置いている面 = **wrist_3 から `0.220` 下の nominal 点**（`:902`）。⚠ 物理接触が起きる面は **コ f1ext 爪先**（asset `2f85_koshape.xml:116` `right_pad_f1ext`・実測 `0.27574726696`）であり、両者は **55.7mm** 離れる。
+**要求されている面 = 「cable に接触する点」の世界位置**。現状の実装が置いている面 = **wrist_3 から `0.220` 下の nominal 点**（`:902`）。⚠ ~~物理接触が起きる面は **コ f1ext 爪先**~~ ⚠**UNMEASURED（B5）**〔実際の接触 geom は未測定。banked `route_executor.py:2436-2440` は retention を **f1ext(bottom)+f2ext(top) の sandwich**＋横 footprint で定義し **f1ext-only の旧 gate は false-FAIL 実績**（`:2438`）⇒ 単一 geom を接触面と断定できない。以下の asset 幾何事実のみ保持〕**コ f1ext 爪先**（asset `2f85_koshape.xml:116` `right_pad_f1ext`・実測 `0.27574726696`）であり、両者は **55.7mm** 離れる。
 ⭐ `dist_pos` は **`clamp_pos`（0.220 点）↔ 物理 cable body** で測る（`newton_grip_env.py:1174-1176` `find_nearest_cable_point(cable_pos, clamp_r_pos, …)`・query 点は第 2 引数 = `newton_skill_env_base.py:845`）⇒ **offset 差は success 距離に残り、目標側と相殺しない**。
 
 ### (3) frame / unit
@@ -52,7 +61,7 @@
 ### (4) 要求事実（共通必要 / skill 別分割可 / 観測量へ移行可）
 - **共通である必要（事実）**: `GRASP_Z`/`PUSH_Z` を導出する唯一の項（`:93`/`:95`）であり、`step_table.py`→`scripted_skills.py`→env の連鎖に単一値で流れる。⇒ **分割するなら派生 2 定数と step 表側に per-skill の受け皿が要る**。
 - **skill 別に分けられる（事実 = 既に分岐している）**: `insert` は `GROOVE_CENTER_Z - EE_TO_FINGERTIP` を使う（`mpc_config_ic.py:146`）が、`approach`(mujoco) は **本定数を使わずコ実測へ移行済**（§4 参照）。⇒ **skill 別の面は既に併存**。
-- **観測量へ移せる（事実 = 同 repo に live 先例）**: `2f85_koshape.xml` に **`left_pad`/`right_pad` は実 body**（`:154`/`:107`）、爪先は pad 上の geom（`:116` `f1ext`・local `pos="0 -0.0026 0.0382"`）。live 先例 = **Z-Check が finger body z を定数なしで直読**（`test_newton_clip_routing.py:468-470` `body_q[bs+7][2]` / `body_q[bs+8][2]`・同 `:466` は hand z）／**grip env も finger body を読む**（`newton_grip_env.py:649-663` `_finger_physics_ids`・`task_config.py:48` `FINGER_LOCAL = GRIPPER_PAD_BODY_IDX # [9,13] (BODY-space finger-pos reads)`）。
+- **観測量へ移せる** ⚠**（B4 で格下げ: 「同 repo に live 先例」を RETRACT ⇒ 残る根拠は asset に pad body が実在することのみ。`+7/+8` が pad/finger かは **UNVERIFIED**〔SSOT の pad = `task_config.py:37/48` の `[9,13]`〕⇒ **stale/mismatch 候補**であり対等な 2 規約ではない。訂正版 §4）**: `2f85_koshape.xml` に **`left_pad`/`right_pad` は実 body**（`:154`/`:107`）、爪先は pad 上の geom（`:116` `f1ext`・local `pos="0 -0.0026 0.0382"`）。live 先例 = **Z-Check が finger body z を定数なしで直読**（`test_newton_clip_routing.py:468-470` `body_q[bs+7][2]` / `body_q[bs+8][2]`・同 `:466` は hand z）／**grip env も finger body を読む**（`newton_grip_env.py:649-663` `_finger_physics_ids`・`task_config.py:48` `FINGER_LOCAL = GRIPPER_PAD_BODY_IDX # [9,13] (BODY-space finger-pos reads)`）。
   ⚠ **未解決事実**: 「finger body」の index 規約が **2 つ併存**（Z-Check は `+7`/`+8`・grip env は `FINGER_LOCAL=[9,13]`）。／asset の `<site name="pinch">`（`:79`）は site であり、**Newton が site pose を露出するかは未検証**（pad **body** は読めている）。
 
 ---
@@ -113,7 +122,7 @@
 
 1. ⭐**3 定数は独立でない** — `GRASP_Z`/`PUSH_Z` は `EE_TO_FINGERTIP` の派生（`:93`/`:95`）。1 個の測定面仮定が 3 箇所に現れている。
 2. ⭐⭐**「全 skill 共通」は現状の事実ではない** — 3 面が併存: acquire-grasp = 0.220 系／approach(mujoco) = コ `EE_TO_PINCH_OPEN`（`:197-200`・「stale Franka `GRASP_Z=1.025`」と code に明記）／route = 動的 `GROOVE_CENTER_Z + ee_off`（`route_executor.py:2450`「LEGACY … NOT used by `route_c1_c2`」）。
-3. ⭐⭐**観測への移行は仮説でなく先例がある** — Z-Check は finger body z を定数なしで直読（`test_newton_clip_routing.py:468-470`）、grip env も finger body を読む（`_finger_physics_ids`）。pad は実 body（asset `:107`/`:154`）、爪先はその上の geom（`:116`）。
+3. ~~⭐⭐**観測への移行は仮説でなく先例がある**~~ ⚠**RETRACTED（B4）** → 生の BODY-space index 読み取りが live code に在る事実は保持するが、それが pad/finger を観測している証拠はない（**UNVERIFIED**・訂正版 §4）。旧本文↓ — Z-Check は finger body z を定数なしで直読（`test_newton_clip_routing.py:468-470`）、grip env も finger body を読む（`_finger_physics_ids`）。pad は実 body（asset `:107`/`:154`）、爪先はその上の geom（`:116`）。
 4. ⚠⚠**frame が 2 種混在** — `EE_TO_FINGERTIP` は EE-local 回転適用（`newton_skill_env_base.py:902`）と world −Z 直接減算（`newton_grip_env.py:751`/`:757`）の両方で使われ、**一致するのは特定姿勢のみ**。`GRASP_Z`/`PUSH_Z` は world 絶対高さ。
 
 ## 5. 未測定 / 未解決（捏造しない）
