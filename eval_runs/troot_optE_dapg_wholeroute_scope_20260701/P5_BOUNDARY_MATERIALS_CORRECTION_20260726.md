@@ -19,7 +19,10 @@
 
 ## 1. B1 訂正 — source closure（path × taxonomy × full sha256 × 行番号が指す tree）
 
-⭐ **行番号が指す tree = as-read working tree（読取 2026-07-26T17:2x–17:35 JST）**。banked tree ではない。
+⭐ **行番号が指す tree = 読取時の working tree**（banked tree ではない）。
+⚠**R1 訂正 2026-07-26**: 旧記載の「読取 2026-07-26T17:2x–17:35 JST」は **非 exact ゆえ撤回**（時刻を合成しない）。確実に言えるのは **bank commit `46377eef9f79efc20acc7e8bfdee739c5f35a09c`（author `2026-07-26T17:35:22+09:00`）より前に読んだ**ことのみで、**per-read の時刻は未記録**。
+⭐**R1 に従い WT 行を historical / 非 evidence へ格下げ**: 下表の `as_read (WT)` 列は **retrievable committed bytes を持たない**ため **evidence として用いない**。**operative な主張はすべて banked commit `46377eef9f79efc20acc7e8bfdee739c5f35a09c` にのみ接地する**。
+⭐**用語の分離（R1）**: 旧 `changed` → **`modified_vs_banked`**（banked と WT が異なる path）。**`changed_during_read` は別概念であり本書では未記録＝主張しない**（読取中の変化を測っていない）。
 
 | path | tracked | 状態 | banked blob sha256 | as_read (WT) sha256 |
 |---|---|---|---|---|
@@ -35,9 +38,10 @@
 | `thread_isaac_lab/skills/step_table.py` | tracked | ⚠**MODIFIED** | `6f9c3fb3d0010721c9287b8b63e2e86e7cecd7210e8ee8c2f222becaf3e5422b` | `ff1c0029e9e061b33a8bd7ff004703f89c136835ea5b4b7a1e81cb369017c649` |
 | `thread_isaac_lab/scripts/test_newton_clip_routing.py` | tracked | ⚠**MODIFIED** | `2e1fc1d84539877f91cc75eb1f6443a628dfb0743bd24cb7f0e8a1ab956779dd` | `312e80d522a6e6d6667b070a024244cf9680227d23f50f6c528613644cffb345` |
 | `thread_isaac_lab/scripts/newton_routing_utils.py` | tracked | ⚠**MODIFIED** | `bac4fbc92984b2e506ce095b7ee5d6ce4641da87536ad351269dae4995ecc137` | `23795ca75eec9e58d058aad11b08326879b07bef046e375d2086c06ae984ac85` |
-| `harness/scripts/predict_training.py` | ⛔**untracked** | **commit tree に不在** | （不在 — `git cat-file` 空。空入力の sha256 = `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`） | `7117860535ad2c95a9377eb85c7aa853d93a2e5d085a57b59ffdecffa7ee3401` |
+| `harness/scripts/predict_training.py` | ⛔**untracked** | **ABSENT（commit tree に不在）** | ⚠**ABSENT / N/A**〔**R4 訂正**: 不在に blob SHA は存在しない。旧記載の `e3b0c442…` は空入力の sha256 であって blob SHA ではないため **banked 列から撤回**〕 | （historical・非 evidence: `7117860535ad2c95…`） |
 
-**`changed = [newton_grip_env.py, newton_approach_cable_mujoco_env.py, step_table.py, test_newton_clip_routing.py, newton_routing_utils.py]`／`untracked = [harness/scripts/predict_training.py]`／`clean = 残り 7 path`。**
+**`modified_vs_banked = [newton_grip_env.py, newton_approach_cable_mujoco_env.py, step_table.py, test_newton_clip_routing.py, newton_routing_utils.py]`／`untracked = [harness/scripts/predict_training.py]`（ABSENT）／`clean = 残り 7 path`。**
+⚠**`changed_during_read` = 未記録（unmeasured）** — 読取中に変化しなかったという主張はしない（R1）。
 
 ### 1-a. 行番号 delta（banked tree での正しい位置）
 
@@ -73,7 +77,9 @@ grep -rn --include='*.py' --exclude-dir=.git --exclude-dir=.codex --exclude-dir=
 ```
 ⇒ **working tree 対象**であり banked と一致しない。
 
-### 2-b. banked vs WT の **全 delta（10 件・pN 指摘 3 件を含む）**
+### 2-b. banked vs WT の 全 delta（10 件） — ⚠**R2 訂正: 本表は evidence ではなく「旧数値がなぜ違ったか」の historical explanation（再現不能）**
+⛔ **evidence は §2-a の banked 計数のみ**（`EE_TO_FINGERTIP` 17 file/68 hit・`GRASP_Z` 22 file/105 hit・`PUSH_Z` 13 file/55 hit）。
+⚠ 本表の WT 側の値は committed bytes を持たず再現できない。特に `harness/orchestrator/harness_integration_test.py`・`thread_isaac_lab/tests/test_env_refactor_bit_identical.py`・`thread_isaac_lab/tests/test_env_refactor_helpers.py` の 3 path は **§1 の 13-path source manifest に含まれず taxonomy / full SHA の被覆も無い** ⇒ **evidence として用いない**（historical explanation に留める）。
 
 | 定数 | path | banked | WT（旧 artifact の値） |
 |---|---|---|---|
@@ -122,12 +128,16 @@ grep -rn --include='*.py' --exclude-dir=.git --exclude-dir=.codex --exclude-dir=
 
 **RETRACT（旧 artifact §1(4) / §4③）**: 「Z-Check が **finger body z** を定数なしで直読 ⇒ **観測移行の live 先例**」および「index 規約が **2 つ対等に併存**」。
 
-**保持する事実（banked）**: `test_newton_clip_routing.py:466` = `body_q[bs + EE_BODY_OFFSET][2]`（hand z）／`:468-469` = `body_q[bs+7][2]`, `body_q[bs+8][2]` ⇒ **生の BODY-space index による per-body z 読み取りが live code に存在する**。
+**保持する事実（banked）**: `test_newton_clip_routing.py:466` = `body_q[bs + EE_BODY_OFFSET][2]`（hand z）／`:468-469` = `body_q[bs+7][2]`, `body_q[bs+8][2]` ⇒ **生の BODY-space index による per-body z 読み取りが banked source（`46377eef9f`）に存在する**。⚠**R3 訂正**: 旧記載「live code に存在する」を撤回 — **source の存在であって runtime 到達性ではない**（本書 §2-c の liveness=UNVERIFIED と整合）。
 
 ⛔ **UNVERIFIED へ移す**: その `+7` / `+8` が **pad / finger body かは未検証**。SSOT は pad-carrying followers を **`[9, 13]`** と定義（`task_config.py:37` `GRIPPER_PAD_BODY_IDX = [9, 13]  # BODY space: pad-carrying followers`／`:48` `FINGER_LOCAL = GRIPPER_PAD_BODY_IDX  # [9,13] (BODY-space finger-pos reads)`）。同 `:47` `EE_BODY_OFFSET = 5` と同じ BODY 空間の index 系である。
 ⇒ **`+7`/`+8` と `[9,13]` は stale / mismatch の候補**であり、「対等な 2 規約」ではない（pN 指摘どおり）。**同一性が解決するまで pad/finger としての妥当性は UNVERIFIED。**
 
-⇒ **「観測量へ移せる」の残る根拠は asset に pad body が実在すること**（`2f85_koshape.xml:107` `right_pad` / `:154` `left_pad`）**に限定**する。⛔ **既存の read が pad を観測している証拠は無い。**
+⇒ ⚠⚠**R5 訂正（私の過剰撤回）**: 旧記載「⛔ 既存の read が pad を観測している証拠は無い」は **過剰であり撤回**。**正しい区別**:
+- ✅ **pad-body の source read は存在する** — banked `newton_grip_env.py:660` `_apply_finger_spring` が `:667-668` で `for lf in FINGER_LOCAL: bi = ws + arm_offset + lf`（= SSOT の pad index `[9,13]`）を導出し、`:670` `pos = body_q[bi][:3]` / `:671` `vel = body_qd[bi][3:6]` を **読んでいる**。⇒ 「pad を指す read が無い」は誤り。
+- ⛔ **UNVERIFIED のまま残るのは 2 点**: ①**production reachability**（この経路が実運用で通るか）②**要求された観測面 / 測定面としての用途**（当該 read の用途は `:673-674` の spring force 印加であって閾値の測定面ではない）。
+- ⇒ 「観測量へ移せる」の根拠 = **asset に pad body が実在**（`2f85_koshape.xml:107`/`:154`）**＋ SSOT index 経由の pad read が banked source に実在**。⚠ ただし **測定面としての採用実績は無い**。
+- ⚠ `+7`/`+8`（`test_newton_clip_routing.py:468-469`）の同一性は **依然 UNVERIFIED**（SSOT の pad は `[9,13]`）= stale / mismatch 候補。
 
 ---
 
@@ -156,3 +166,19 @@ grep -rn --include='*.py' --exclude-dir=.git --exclude-dir=.codex --exclude-dir=
 - ⛔ **owner を選ばない**（B/C owner = UNCONFIRMED / HOLD 維持）。⛔ **値を選ばない**。⛔ **方式を選ばない**（共通維持 / skill 別分割 / 観測移行のいずれも推さない）。
 - ⛔ source / `[CHANGE]` / 実装 / RUN / verify / status / gate flip をしない。⛔ 旧 commit `46377eef9f` は **immutable**（本書は追加であり書き換えでない）。⛔ 他 pane の record を編集しない。07-Design / 04-Specs は CC read-only。
 - taxonomy 分類は p11 材料との合流後に **p17**（T1/T2/T3 の範囲内）。
+
+---
+
+## 8. R1-R6 訂正記録（pN RETURN `MSG-PN-P5-FINGERTIP-MATERIALS-CORRECTION-RETURN-20260726-002` / 発行 2026-07-26T18:03:24+09:00）
+
+| # | pN 指摘 | 本書での処置 |
+|---|---|---|
+| **R1** | 非 exact 時刻 `17:2x-17:35`／dirty-WT hash に pre-post bracket も retrievable bytes も無い／`changed` の語が混在 | **時刻主張を撤回（合成しない）**・**WT 行を historical / 非 evidence へ格下げ**し operative 主張を banked `46377eef9f` のみに接地・**`changed` → `modified_vs_banked`**、**`changed_during_read` は未記録＝主張しない**（§1 冒頭） |
+| **R2** | WT-only delta が manifest 外 3 path を evidence に使用 | **delta 表を historical explanation（再現不能）へ格下げ**・evidence は §2-a の banked 計数のみ・当該 3 path は manifest 外＋SHA 未被覆ゆえ非 evidence と明記（§2-b） |
+| **R3** | 「live code」と liveness=UNVERIFIED が矛盾 | **「banked source に存在する」へ改め**、runtime 到達性を推論しない（§4） |
+| **R4** | ABSENT path に空入力 SHA を割当 | **ABSENT / N/A** に改め、`e3b0c442…` を banked 列から撤回（§1 表） |
+| **R5** | ⚠**私の過剰撤回** — banked `newton_grip_env.py:644-675` は `FINGER_LOCAL=[9,13]` 由来 index で `body_q`/`body_qd` を読む | **過剰撤回を撤回**し正しい区別を記載: **pad-body source read は存在**（`:660`/`:667-668`/`:670`/`:671`）／**production reachability と「要求された観測・測定面としての用途」は UNVERIFIED**（当該 read の用途は `:673-674` の spring force）（§4） |
+| **R6** | wrapped historical artifact に live / two-regime の残留 | **旧本文全体を HISTORICAL / SUPERSEDED 境界の内側に置き**、`:18`/`:64-65`/`:125`/`:131` の live・「2 つ併存」表現を個別に narrow（対象 = materials artifact 側） |
+
+⛔ **PASS 済の事実は保持**（correction/wrapped SHA256・old pin 一致・banked path hash・68/105/55 計数・B3/B5 の方向・authority fence）。⛔ owner / 値 / 方式は非選択維持。source / `[CHANGE]` / 実装 / RUN / verify / status / gate flip = CLOSED。旧 commit（`46377eef9f`・`44f3c8af3e`）は immutable。
+

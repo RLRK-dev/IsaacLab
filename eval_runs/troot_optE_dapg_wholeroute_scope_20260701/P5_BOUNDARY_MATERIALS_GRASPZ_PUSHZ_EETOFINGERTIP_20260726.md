@@ -9,13 +9,24 @@
 > **B5** 「物理接触面 = f1ext 爪先」= **UNMEASURED**（banked `route_executor.py:2436-2440` は f1ext+f2ext の sandwich・f1ext-only は false-FAIL 実績）。
 > ⭐ **owner / 値 / 方式の非選択と CLOSED gates は不変。** 原文は履歴として残す（rewrite しない）。
 
+---
+
+# ⛔⛔ HISTORICAL / SUPERSEDED BOUNDARY（2026-07-26 R6）
+
+**以下の本文すべて（§0 以降・末尾まで）は HISTORICAL / SUPERSEDED である。**
+⛔ **機械読者・readback consumer は本文の記述を current fact として扱ってはならない。**
+⭐ **current = `P5_BOUNDARY_MATERIALS_CORRECTION_20260726.md`（stable ID `P5-BOUNDARY-MATERIALS-CORRECTION-20260726-001`）のみ。**
+本文の行番号・件数・`live`・`2 つ併存`・接触面の記述は、訂正版 §1-§5 と §8（R1-R6）で置き換えられている。原文は監査のために残置する。
+
+---
+
 **stable ID:** `P5-BOUNDARY-MATERIALS-GRASPZ-PUSHZ-EETOFINGERTIP-20260726-001`
 **著者:** SKILL-DETAIL-DESIGN (`w2:p5`)。**発行:** 2026-07-26T17:32:57+09:00（shell 実測）。
 **依頼元:** pN relay `MSG-PN-P5-FINGERTIP-BOUNDARY-MATERIALS-20260726-001`（p17 scope response = T1 skill identity/count・T2 frame/unit・T3 fixed-vs-composition-vs-observation のみ／**定数値・geometric/reward gate・arm-target・landing を p17 単独で決めない**／**B/C owner はなお UNCONFIRMED/HOLD**）。
 ⛔ **本書は材料のみ。owner / 値 / 方式を選ばない。** p11 側材料と合流後に p17 が taxonomy を分類する。
 ⛔ source / `[CHANGE]` / 実装 / RUN / verify / status / gate flip = **CLOSED**（本書は records/design material）。
 
-**列挙の規律:** 全て on-disk 直読。閉じたクエリは `.git` と worktree 複製（`.codex/worktrees/`・`.claude/worktrees/`）と `*.pre_3c_backup` を除外し、**live code（`*.py`）** を対象にした。⚠ `eval_runs/` 配下の `*_pre_*`・`BASELINE_*`・`RECOVERED_*`・`*_deleted.py` 等は **凍結された歴史 snapshot** であり live consumer に数えない（数のみ後述）。
+**列挙の規律:** 全て on-disk 直読。閉じたクエリは `.git` と worktree 複製（`.codex/worktrees/`・`.claude/worktrees/`）と `*.pre_3c_backup` を除外し、~~**live code（`*.py`）** を対象にした。~~ ⚠**R6: 「live」は誤り** — banked source の存在であって runtime 到達性ではない（訂正版 §2-c: liveness=UNVERIFIED）。⚠ `eval_runs/` 配下の `*_pre_*`・`BASELINE_*`・`RECOVERED_*`・`*_deleted.py` 等は **凍結された歴史 snapshot** であり live consumer に数えない（数のみ後述）。
 
 ---
 
@@ -62,7 +73,7 @@
 - **共通である必要（事実）**: `GRASP_Z`/`PUSH_Z` を導出する唯一の項（`:93`/`:95`）であり、`step_table.py`→`scripted_skills.py`→env の連鎖に単一値で流れる。⇒ **分割するなら派生 2 定数と step 表側に per-skill の受け皿が要る**。
 - **skill 別に分けられる（事実 = 既に分岐している）**: `insert` は `GROOVE_CENTER_Z - EE_TO_FINGERTIP` を使う（`mpc_config_ic.py:146`）が、`approach`(mujoco) は **本定数を使わずコ実測へ移行済**（§4 参照）。⇒ **skill 別の面は既に併存**。
 - **観測量へ移せる** ⚠**（B4 で格下げ: 「同 repo に live 先例」を RETRACT ⇒ 残る根拠は asset に pad body が実在することのみ。`+7/+8` が pad/finger かは **UNVERIFIED**〔SSOT の pad = `task_config.py:37/48` の `[9,13]`〕⇒ **stale/mismatch 候補**であり対等な 2 規約ではない。訂正版 §4）**: `2f85_koshape.xml` に **`left_pad`/`right_pad` は実 body**（`:154`/`:107`）、爪先は pad 上の geom（`:116` `f1ext`・local `pos="0 -0.0026 0.0382"`）。live 先例 = **Z-Check が finger body z を定数なしで直読**（`test_newton_clip_routing.py:468-470` `body_q[bs+7][2]` / `body_q[bs+8][2]`・同 `:466` は hand z）／**grip env も finger body を読む**（`newton_grip_env.py:649-663` `_finger_physics_ids`・`task_config.py:48` `FINGER_LOCAL = GRIPPER_PAD_BODY_IDX # [9,13] (BODY-space finger-pos reads)`）。
-  ⚠ **未解決事実**: 「finger body」の index 規約が **2 つ併存**（Z-Check は `+7`/`+8`・grip env は `FINGER_LOCAL=[9,13]`）。／asset の `<site name="pinch">`（`:79`）は site であり、**Newton が site pose を露出するかは未検証**（pad **body** は読めている）。
+  ⚠ **未解決事実**: ~~「finger body」の index 規約が **2 つ併存**~~ ⚠**R6/B4: 「2 つ併存（対等）」は撤回** — SSOT の pad は `FINGER_LOCAL=[9,13]`（`task_config.py:37/48`）であり、`+7`/`+8` は **stale / mismatch 候補**（同一性 UNVERIFIED）。／asset の `<site name="pinch">`（`:79`）は site であり、**Newton が site pose を露出するかは未検証**（pad **body** は読めている）。
 
 ---
 
@@ -122,13 +133,13 @@
 
 1. ⭐**3 定数は独立でない** — `GRASP_Z`/`PUSH_Z` は `EE_TO_FINGERTIP` の派生（`:93`/`:95`）。1 個の測定面仮定が 3 箇所に現れている。
 2. ⭐⭐**「全 skill 共通」は現状の事実ではない** — 3 面が併存: acquire-grasp = 0.220 系／approach(mujoco) = コ `EE_TO_PINCH_OPEN`（`:197-200`・「stale Franka `GRASP_Z=1.025`」と code に明記）／route = 動的 `GROOVE_CENTER_Z + ee_off`（`route_executor.py:2450`「LEGACY … NOT used by `route_c1_c2`」）。
-3. ~~⭐⭐**観測への移行は仮説でなく先例がある**~~ ⚠**RETRACTED（B4）** → 生の BODY-space index 読み取りが live code に在る事実は保持するが、それが pad/finger を観測している証拠はない（**UNVERIFIED**・訂正版 §4）。旧本文↓ — Z-Check は finger body z を定数なしで直読（`test_newton_clip_routing.py:468-470`）、grip env も finger body を読む（`_finger_physics_ids`）。pad は実 body（asset `:107`/`:154`）、爪先はその上の geom（`:116`）。
+3. ~~⭐⭐**観測への移行は仮説でなく先例がある**~~ ⚠**RETRACTED（B4）** → 生の BODY-space index 読み取りが **banked source に在る**事実は保持するが（⚠**R6: 「live code」は撤回** — source の存在 ≠ runtime 到達性）、それが pad/finger を観測している証拠はない（**UNVERIFIED**・訂正版 §4）。旧本文↓ — Z-Check は finger body z を定数なしで直読（`test_newton_clip_routing.py:468-470`）、grip env も finger body を読む（`_finger_physics_ids`）。pad は実 body（asset `:107`/`:154`）、爪先はその上の geom（`:116`）。
 4. ⚠⚠**frame が 2 種混在** — `EE_TO_FINGERTIP` は EE-local 回転適用（`newton_skill_env_base.py:902`）と world −Z 直接減算（`newton_grip_env.py:751`/`:757`）の両方で使われ、**一致するのは特定姿勢のみ**。`GRASP_Z`/`PUSH_Z` は world 絶対高さ。
 
 ## 5. 未測定 / 未解決（捏造しない）
 
 - `:902`（EE frame）と `:751`（world −Z）が **nominal 把持姿勢で一致するか・乖離量** = **未測定**（p11 の H-4 3 参照点測定が該当計器）。
-- 「finger body」の index 規約が 2 つ併存（`+7`/`+8` vs `FINGER_LOCAL=[9,13]`）— **どちらが pad body かの照合は未実施**。
+- ~~「finger body」の index 規約が 2 つ併存~~ ⚠**R6/B4 撤回**: SSOT の pad = `FINGER_LOCAL=[9,13]`。`+7`/`+8` は **stale / mismatch 候補**で対等ではない。⭐**訂正版 §4（R5）**: pad-body の source read は banked `newton_grip_env.py:660/667-668/670-671` に**存在する**が、**production reachability と観測・測定面としての用途は UNVERIFIED**。
 - asset `<site name="pinch">`（`:79`）を Newton が露出するか **未検証**（pad **body** は読めている）。
 - 各 skill の要求面が**同一である必要があるか**（把持面 = 押込面 = 着座面か）= **要求事実の列挙に留め、判定しない**。
 
