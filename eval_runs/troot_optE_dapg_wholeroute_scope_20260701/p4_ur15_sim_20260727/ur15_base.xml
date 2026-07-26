@@ -1,0 +1,47 @@
+<mujoco model="ur15">
+  <compiler angle="radian"/>
+
+  <asset>
+    <mesh name="base" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/base.stl"/>
+    <mesh name="shoulder" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/shoulder.stl"/>
+    <mesh name="upperarm" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/upperarm.stl"/>
+    <mesh name="forearm" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/forearm.stl"/>
+    <mesh name="wrist1" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/wrist1.stl"/>
+    <mesh name="wrist2" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/wrist2.stl"/>
+    <mesh name="wrist3" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/wrist3.stl"/>
+  </asset>
+
+  <worldbody>
+    <geom pos="0 0 0" quat="-1 0 0 0" type="mesh" mesh="base"/>
+    <body name="shoulder_link" pos="0 0 0.2186" quat="0 0 0 1">
+      <inertial pos="2.4e-05 -0.025304 -0.033309" quat="0.695667 0.163117 -0.158899 0.681316" mass="9.9883" diaginertia="0.0520589 0.0513337 0.0299064"/>
+      <joint name="shoulder_pan_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-433 433"/>
+      <geom quat="0 0 0 1" type="mesh" mesh="shoulder"/>
+      <body name="upper_arm_link" quat="0.707107 0.707107 0 0">
+        <inertial pos="-0.228491 -8.3e-05 0.192787" quat="0.508311 0.491722 0.494029 0.505732" mass="14.9255" diaginertia="1.1885 1.18368 0.0472925"/>
+        <joint name="shoulder_lift_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-433 433"/>
+        <geom pos="0 0 0.1" quat="0.5 0.5 -0.5 -0.5" type="mesh" mesh="upperarm"/>
+        <body name="forearm_link" pos="-0.6475 0 0">
+          <inertial pos="-0.210929 1.9e-05 0.070552" quat="0.48756 0.51214 0.511914 0.487793" mass="6.1015" diaginertia="0.303502 0.297506 0.017818"/>
+          <joint name="elbow_joint" pos="0 0 0" axis="0 0 1" range="-3.14159 3.14159" actuatorfrcrange="-204 204"/>
+          <geom pos="0 0 0.125" quat="0.5 0.5 -0.5 -0.5" type="mesh" mesh="forearm"/>
+          <body name="wrist_1_link" pos="-0.5164 0 0.1824">
+            <inertial pos="2.5e-05 -0.016413 -0.019695" quat="0.833332 0.5518 -0.0145415 0.0293715" mass="2.089" diaginertia="0.00433968 0.00421107 0.00224825"/>
+            <joint name="wrist_1_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-70 70"/>
+            <geom pos="0 0 -0.0502" quat="0.707107 0.707107 0 0" type="mesh" mesh="wrist1"/>
+            <body name="wrist_2_link" pos="0 -0.1361 -2.79146e-11" quat="0.707107 0.707107 0 0">
+              <inertial pos="2.5e-05 0.015886 -0.01996" quat="0.548572 0.831821 0.0724532 -0.0435051" mass="2.0869" diaginertia="0.00428972 0.00423268 0.0022586"/>
+              <joint name="wrist_2_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-70 70"/>
+              <geom pos="0 0 -0.064" quat="1 0 0 0" type="mesh" mesh="wrist2"/>
+              <body name="wrist_3_link" pos="0 0.1434 -2.94118e-11" quat="0.707107 -0.707107 0 0">
+                <inertial pos="-1.8e-05 -0.000112 -0.053397" quat="0.933909 -0.0233442 -0.0218371 -0.356078" mass="1.0666" diaginertia="0.00140944 0.00140222 0.00100034"/>
+                <joint name="wrist_3_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-70 70"/>
+                <geom pos="0 0 -0.0715" quat="0.707107 0.707107 0 0" type="mesh" mesh="wrist3"/>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+</mujoco>
