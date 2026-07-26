@@ -1,6 +1,6 @@
-# 腕制御 測定ハーネス 仕様 v1.6 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 2026-07-21 / 更新 07-26）
+# 腕制御 測定ハーネス 仕様 v1.7 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 2026-07-21 / 更新 2026-07-26T16:08:16+0900）
 
-**Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.6** — **proposal**（landing = p4 経由）。
+**Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.7** — **proposal**（landing = p4 経由）。⚠ v1.7 の landing commit = `0f373bedbdfa25d361917e50036e11947b146bdf`（2026-07-26T16:08:16+0900）。
 **版歴（内容 pin・sha は照合記録）:** v1.0 `054a54bbb6` → v1.1 `37902fb909`（pZ の model-identity 入力）→ v1.2 `3cb06b0fe5`（**H-2 DOF 宣言**）→ v1.3 `c8c326e00b`（**参照同一性 I-1〜I-3 を主レグ**へ）→ v1.4（**H-4 を 3 参照点に** = §H-4.1。閾値の `EE_TO_FINGERTIP=0.220` は **Franka legacy**・実測コ字値と 34.8〜55.7 mm 違う）→ v1.5 `cca446e1a6`（**§H-5.1 把持状態の ζ**）→ v1.6 `0025fd32b6`（**§H-3.1 = per-joint `τ_bias`**）→ ⭐**v1.7**（**§H-4 の pad body 導出規則を訂正** — 旧 `body_label` 検索は**現モデルで実行不能**。p4 の R8 裁定 `442f58678359bf85` が **spec owner = p11 へ RETURN** したのを受けた**記録是正**）。
 ⚠ **v1.4〜v1.7 の変更はいずれも該当章に限局**（他章は無変更）。
 ⛔⛔ **本 spec は実装 gate ではない**（`:237` と同旨）。**v1.6 §H-3.1 は authorization 無しに実装され、p4 が `d724031b77` で「既存 GO 無し・認可外」と裁定済**。⇒ **本 spec の章が tree に在ることは、実装してよいことを意味しない。**
@@ -43,7 +43,7 @@ v0.4 の致命 = **私が書いた build recipe が、実際に走るモデル�
 | V-3 | ⭐**scene 固有物**が在ること（§1.1.1 の **cable leg**）— 参照同一性の **backstop**。⚠ v1.1 が挙げた A-1 VISIBLE / clip は **識別しない or handle 不在**と実測（§1.1.1） |
 | V-4 | 掃引に使う `q` が **joint 名で解決**されている（index 直書きでない） |
 
-### 1.1 ⭐ 同一性は **参照**で取る（v1.3 で構造変更・2026-07-21 20:5x）
+### 1.1 ⭐ 同一性は **参照**で取る（v1.3 で構造変更・landing commit `c8c326e00b04874cca2c20d17355c3f944cb5119` = 2026-07-21T20:48:13+0900）
 
 ⚠⚠ **v1.1 の witness 前提は p0 の h0 実測で 2 点が偽と判明**（`a3e07577ba` + report `negative_control_ac9`）。⭐ **これは私が AC-9 に置いた negative control が仕事をした結果**であり、harness 側の欠陥ではない。⇒ 下記へ差し替える。
 
@@ -54,7 +54,7 @@ v0.4 の致命 = **私が書いた build recipe が、実際に走るモデル�
 | # | 述語（**すべて `is` 比較**） | 接地 |
 |---|---|---|
 | **I-1** | 測る `Model` **is** `scene["model"]` | `newton_route_env.py:725` |
-| **I-2** | `scene["solver"].model` **is** 測る `Model`（= solver が積分している当の object） | `SolverBase.__init__` 逐語 `self.model = model`（`newton/_src/solvers/solver.py`。**p11 が env7 python で実行して確認**・2026-07-21 20:4x） |
+| **I-2** | `scene["solver"].model` **is** 測る `Model`（= solver が積分している当の object） | `SolverBase.__init__` 逐語 `self.model = model`（`newton/_src/solvers/solver.py`。**p11 が env7 python で実行して確認**・同 v1.3 の landing commit `c8c326e00b` 以前） |
 | **I-3** | 測る `Model` **is not** `env._fk_model` | `newton_route_env.py:690` |
 
 ⇒ ⭐ **指紋（内容の一致）は参照に勝てない。** I-1〜I-3 を主レグにすれば、「witness が識別できていなかった」という失敗の族そのものが閉じる。
