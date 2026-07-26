@@ -38,7 +38,7 @@
 | `thread_isaac_lab/skills/step_table.py` | tracked | ⚠**MODIFIED** | `6f9c3fb3d0010721c9287b8b63e2e86e7cecd7210e8ee8c2f222becaf3e5422b` | `ff1c0029e9e061b33a8bd7ff004703f89c136835ea5b4b7a1e81cb369017c649` |
 | `thread_isaac_lab/scripts/test_newton_clip_routing.py` | tracked | ⚠**MODIFIED** | `2e1fc1d84539877f91cc75eb1f6443a628dfb0743bd24cb7f0e8a1ab956779dd` | `312e80d522a6e6d6667b070a024244cf9680227d23f50f6c528613644cffb345` |
 | `thread_isaac_lab/scripts/newton_routing_utils.py` | tracked | ⚠**MODIFIED** | `bac4fbc92984b2e506ce095b7ee5d6ce4641da87536ad351269dae4995ecc137` | `23795ca75eec9e58d058aad11b08326879b07bef046e375d2086c06ae984ac85` |
-| `harness/scripts/predict_training.py` | ⛔**untracked** | **ABSENT（commit tree に不在）** | ⚠**ABSENT / N/A**〔**R4 訂正**: 不在に blob SHA は存在しない。旧記載の `e3b0c442…` は空入力の sha256 であって blob SHA ではないため **banked 列から撤回**〕 | （historical・非 evidence・as_read 値の full 64-hex: `7117860535ad2c95a9377eb85c7aa853d93a2e5d085a57b59ffdecffa7ee3401`） |
+| `harness/scripts/predict_training.py` | ⛔**untracked** | **ABSENT（commit tree に不在）** | ⚠**ABSENT / N/A**〔**R4 訂正**: 不在に blob SHA は存在しない。旧記載の `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` は空入力の sha256 であって blob SHA ではないため **banked 列から撤回**〕 | （historical・非 evidence・as_read 値の full 64-hex: `7117860535ad2c95a9377eb85c7aa853d93a2e5d085a57b59ffdecffa7ee3401`） |
 
 **`modified_vs_banked = [newton_grip_env.py, newton_approach_cable_mujoco_env.py, step_table.py, test_newton_clip_routing.py, newton_routing_utils.py]`／`untracked = [harness/scripts/predict_training.py]`（ABSENT）／`clean = 残り 7 path`。**
 ⚠**`changed_during_read` = 未記録（unmeasured）** — 読取中に変化しなかったという主張はしない（R1）。
@@ -194,6 +194,6 @@ grep -rn --include='*.py' --exclude-dir=.git --exclude-dir=.codex --exclude-dir=
 | **C1** | `git show --check` FAIL（本 file `:184` に EOF の新規空行） | **EOF を単一改行へ修正**し `git show --check` clean を確認。旧 commit `b5d4a3d488` は保存（records-only の後継 commit で着地） |
 | **C2** | §8 が pN RETURN 発行を `18:03:24+09:00`（= 私の作業時刻）と誤記録 | **虚偽の `18:03:24` を撤回**し **pN 発行 = `2026-07-26 18:00:50 JST`（stamp 逐語）** を記載。⛔ 受信・処理時刻を代入しない。私の追記の着地は bank commit の author 時刻で示す |
 | **C3** | 「live gate」が同 artifact の liveness=UNVERIFIED と矛盾 | **banked source の retention 述語（comment＋判定式）** という source-only 表現へ改め、runtime 到達性を主張しない |
-| **C4** | `operative-candidate` / `operative path` を分類語に使用／`:41` に切り詰め digest | 分類語を **`source-role candidate`** へ全面改称し `operative` を分類語から除去（`:24`/`:99`/`:101`/`:109`/`:110`/`:122`/`:176`）。`:41` の as_read digest を **full 64-hex に展開**、`:179` の `e3b0c442…` も full 展開（partial hash は historical でも exact pin でない） |
+| **C4** | `operative-candidate` / `operative path` を分類語に使用／`:41` に切り詰め digest | 分類語を **`source-role candidate`** へ全面改称し `operative` を分類語から除去（`:24`/`:99`/`:101`/`:109`/`:110`/`:122`/`:176`）。`:41` の as_read digest を **full 64-hex に展開**、`:179` の `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` も full 展開（partial hash は historical でも exact pin でない） |
 
 ⛔ **PASS 済は保持**（WT demotion・`modified_vs_banked` 分離・manifest 外 delta の格下げ・ABSENT/N-A・pad-source-read 訂正・historical 境界・banked 計数/pins・B3/B5 方向・authority fence）。⛔ **新たな値 / owner / 方式の選択なし・実装 gate なし。**
