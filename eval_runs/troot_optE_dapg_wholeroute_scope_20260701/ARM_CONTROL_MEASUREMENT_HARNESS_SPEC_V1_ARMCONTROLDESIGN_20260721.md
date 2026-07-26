@@ -1,8 +1,9 @@
 # 腕制御 測定ハーネス 仕様 v1.6 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 2026-07-21 / 更新 07-26）
 
 **Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.6** — **proposal**（landing = p4 経由）。
-**版歴（内容 pin・sha は照合記録）:** v1.0 `054a54bbb6` → v1.1 `37902fb909`（pZ の model-identity 入力）→ v1.2 `3cb06b0fe5`（**H-2 DOF 宣言**）→ v1.3 `c8c326e00b`（**参照同一性 I-1〜I-3 を主レグ**へ）→ v1.4（**H-4 を 3 参照点に** = §H-4.1。閾値の `EE_TO_FINGERTIP=0.220` は **Franka legacy**・実測コ字値と 34.8〜55.7 mm 違う）→ v1.5 `cca446e1a6`（**§H-5.1 把持状態の ζ** = pZ の N5 に応答）→ ⭐**v1.6**（**§H-3.1 = per-joint `τ_bias`**。全体最大 1 値では静的たわみが計算できない）。
-⚠ **v1.4〜v1.6 の変更はいずれも該当章に限局**（他章は無変更 ⇒ p0 は他章の実装をやり直さない）。
+**版歴（内容 pin・sha は照合記録）:** v1.0 `054a54bbb6` → v1.1 `37902fb909`（pZ の model-identity 入力）→ v1.2 `3cb06b0fe5`（**H-2 DOF 宣言**）→ v1.3 `c8c326e00b`（**参照同一性 I-1〜I-3 を主レグ**へ）→ v1.4（**H-4 を 3 参照点に** = §H-4.1。閾値の `EE_TO_FINGERTIP=0.220` は **Franka legacy**・実測コ字値と 34.8〜55.7 mm 違う）→ v1.5 `cca446e1a6`（**§H-5.1 把持状態の ζ**）→ v1.6 `0025fd32b6`（**§H-3.1 = per-joint `τ_bias`**）→ ⭐**v1.7**（**§H-4 の pad body 導出規則を訂正** — 旧 `body_label` 検索は**現モデルで実行不能**。p4 の R8 裁定 `442f58678359bf85` が **spec owner = p11 へ RETURN** したのを受けた**記録是正**）。
+⚠ **v1.4〜v1.7 の変更はいずれも該当章に限局**（他章は無変更）。
+⛔⛔ **本 spec は実装 gate ではない**（`:237` と同旨）。**v1.6 §H-3.1 は authorization 無しに実装され、p4 が `d724031b77` で「既存 GO 無し・認可外」と裁定済**。⇒ **本 spec の章が tree に在ることは、実装してよいことを意味しない。**
 **根拠:** Rs 裁定 = **案 A 採択**（p4 relay 2026-07-21 15:44）。**設計数値を手で導かない。** 私は **spec + 受入条件**を書き、**p0 が実 build して測り**、**pZ が実 build と突き合わせて model-identity を検証**する。数値はその**検証済み出力**から取る。
 **下敷き:** v0.4 手続き（`c51dad2d54`）。⚠ v0.4 は BLOCK 済ゆえ**そのまま採らない** — 下記 §0 の 1 点を構造的に変える。
 
@@ -151,7 +152,13 @@ v0.4 の致命 = **私が書いた build recipe が、実際に走るモデル�
 - ⚠ **`a_max` は据え置き**（cap が 1e6 = fail-open ゆえ現状は意味を持たない・設計側 §5.5.1 で処理）。
 
 ### H-4 把持点 Jacobian
-- 参照 frame = **pad body**（cable に実際に触れる body。`body_label` から発見すること）。
+- 参照 frame = **pad を担う body**（cable に実際に触れる body）。
+  ⛔⛔ **訂正 v1.7（2026-07-26・p4 の R8 裁定 `442f58678359bf85` による RETURN を受けた spec owner 修正）**: 旧文「**`body_label` から発見すること**」は **現モデルで実行不能**ゆえ撤回。**実測（p11 が h0 report を独立に走査）= `body_label` 70 件中 "pad" は 0 件／`shape_label` 107 件中 16 件** ⇒ **pad は shape のラベルであって body のラベルではない**。⇒ p0 が `wrist_3` で代用せず **ABSENT と報告した判断は正しかった**。
+  ⭐ **導出規則（どちらでもよい・採った方を出力に明記すること）**:
+  - **(i) SSOT 定数から index 解決** — `task_config.py:37` **`GRIPPER_PAD_BODY_IDX = [9, 13]`**（逐語 "pad-carrying followers"）＋ `:43` `BODIES_PER_ARM = 14` の腕ストライド。⚠ **定数は import して使う**（literal 複製は SSOT が変わると黙って乖離する）。
+  - **(ii) label から導く場合** — `shape_label` に "pad" を含む **shape の親 body** を取る（⛔ `body_label` を "pad" で検索しない）。
+  ⚠ **実測での裏取り**: body idx **9 = `…/right_spring_link/right_follower`** / **13 = `…/left_spring_link/left_follower`**（p11 実測・p4 の裁定表と一致）。
+  ⚠ **現行実装が本規則に適合しているかの判定と、適合させる作業は本 spec では決めない**（p0 の R8 が `arm_control_measurement_harness.py:928` の literal `(9,13)` を自己申告済。**実装修正は未認可** = p4 の court）。
 - ⛔ `wrist_3_link` を使わない（`wrist_2`/`wrist_3` の位置列が構造的にゼロ）。
 - ⛔ `pinch` site も**単独では不可** — `collapse_fixed_joints` で `wrist_3_link` に剛体固定されており、**8 本の gripper DOF の列がゼロ**になる（v0.4 ISSUE 8）。使う場合は**その旨と誤差の向き**を明記。
 - 出力 = per-joint **mm/mrad**（envelope 上の最大）＋ **回転成分の別評価**。
@@ -165,7 +172,7 @@ SKILL の閾値は **`ee_pos + R(ee_q)·[0,0,+EE_TO_FINGERTIP]`** で測られ�
 | # | 参照点 | なぜ要るか |
 |---|---|---|
 | **J-a** | `ee_pos + 0.220·ẑ_ee`（**閾値が測っている点**） | **PD sizing はこの点で行う**（判定式と同じ面で bar を立てるため） |
-| **J-b** | **pad body**（`body_label` から発見・cable に実際に触れる） | **接触・把持の物理**はこの点で起きる |
+| **J-b** | **pad を担う body**（cable に実際に触れる）。⭐**導出は §H-4 の (i) SSOT 定数 index / (ii) `shape_label` の親 body のいずれか**。⛔ **`body_label` を "pad" で検索しない**（実測 0 件・v1.7 訂正） | **接触・把持の物理**はこの点で起きる |
 | **J-c** | `EE_TO_PINCH_TIP_CLOSED = 0.2757` 相当の爪先 | J-a と J-b の差を**定量化**して報告するため |
 
 ⛔ **1 点だけ出さない。** 3 点の差を出力に併記する。⇒ **どの点で閾値を評価すべきかは p5/Rs の court**（本 spec は判断せず、両方で測れる材料を出す）。
