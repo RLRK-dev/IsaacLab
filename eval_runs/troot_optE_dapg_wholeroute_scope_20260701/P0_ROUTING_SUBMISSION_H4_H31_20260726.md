@@ -182,7 +182,8 @@ p11 の回答（逐語要旨・私の再測定はしていない）: 格子は�
 | **H-5 / H-5.1** | 同 spec `### H-5` / `#### H-5.1`（v1.5） | **未実装** |
 | J-a 定数 | `task_config.py:78` `EE_TO_FINGERTIP = 0.220`（`:84`/`:324` に **Franka legacy・re-derive S6** と自己申告） | — |
 | J-c 定数 | `task_config.py:321` `EE_TO_PINCH_TIP_CLOSED = 0.27574726696` | — |
-| SSOT index | **実コード**: `newton_route_env.py:149-151`（`ROBOT_BODIES_PER_ARM`=14 / `_LEFT_EE_BODY`=5 / `_RIGHT_EE_BODY`=19）＋ `task_config.py:84` | — |
+| SSOT index（**stride / EE**） | `newton_route_env.py:149-151`（`ROBOT_BODIES_PER_ARM`=14 / `_LEFT_EE_BODY`=5 / `_RIGHT_EE_BODY`=19）＋ `task_config.py:84` | — |
+| SSOT index（**pad `[9,13]`**） | ⚠ **`task_config.py:37` `GRIPPER_PAD_BODY_IDX`**（`newton_route_env.py:149-151` **ではない** — rev1/rev2 の記載は偽引用・R8 参照）。⛔ harness は import せず literal hardcode（`:928`）／⛔ 支配 spec `:154`・`:168` は `body_label` から発見せよと規定し矛盾 | **R8 = p4 裁定待ち** |
 | caveat (a)-(d) | ⚠ **artifact でなく pane message 由来**（p4 07-21 21:57 / pZ verdict N1-N5） | — |
 | **W-b** | ⛔ **UNDEFINED TERM** — spec §2 に現れるが定義が spec 内に無い | 未解決 |
 
