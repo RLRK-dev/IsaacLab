@@ -1,9 +1,9 @@
-# 腕制御 測定ハーネス 仕様 v1.7 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 起草 2026-07-21）
+# 腕制御 測定ハーネス 仕様 v1.8 — p0 実装 / pZ 検証（p11 ARM-CONTROL-DESIGN, 起草 2026-07-21）
 
-**Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.7** — **proposal**（landing = p4 経由）。
+**Author:** ARM-CONTROL-DESIGN (`w2:p11`)。**Status:** SPEC **v1.8** — **proposal**（landing = p4 経由）。
 ⚠⚠ **records 訂正（RETURN-011 R3 受理）**: `0f373bedbdfa25d361917e50036e11947b146bdf`（2026-07-26T16:08:16+0900）は **v1.7 の *initial* semantic landing**（pad body 導出規則の訂正）**であって、本 file の現在版ではない**。⇒ **同 file/path** はその後 **`fe22276f2c`（title/status 同期）→ `9d6aed738d`（`:6` self-cite 訂正）→ `01aa2ea09b`（本 header の records 訂正）** で修正されている。⚠⚠ **型の訂正（RETURN-012 C2 受理）**: 旧文は「**同 blob** はその後…修正済」と書いていたが **git の blob は immutable** であり、**修正のたびに別 blob が生成される**（同じであり続けるのは **path** の方）。⇒ 「同 blob が修正された」は型として誤り。⛔ **旧 header は「更新 = 16:08:16」と読めたが stale。**
 ⭐ **本 file の *現* pin は、自己参照では書けない**（commit する前に自分の SHA は決まらない）。⇒ **現行 pin は外部の routing 提出物（`P11_ROUTING_SUBMISSION_20260726_ARMCONTROLDESIGN.md` の当該版が申告する 3 SHA）を正とする。⛔ 推測時刻を書かない。**
-**版歴（内容 pin・sha は照合記録）:** v1.0 `054a54bbb6` → v1.1 `37902fb909`（pZ の model-identity 入力）→ v1.2 `3cb06b0fe5`（**H-2 DOF 宣言**）→ v1.3 `c8c326e00b`（**参照同一性 I-1〜I-3 を主レグ**へ）→ v1.4（**H-4 を 3 参照点に** = §H-4.1。閾値の `EE_TO_FINGERTIP=0.220` は **Franka legacy**・実測コ字値と 34.8〜55.7 mm 違う）→ v1.5 `cca446e1a6`（**§H-5.1 把持状態の ζ**）→ v1.6 `0025fd32b6`（**§H-3.1 = per-joint `τ_bias`**）→ ⭐**v1.7**（**§H-4 の pad body 導出規則を訂正** — 旧 `body_label` 検索は**現モデルで実行不能**。p4 の R8 裁定 `442f58678359bf85` が **spec owner = p11 へ RETURN** したのを受けた**記録是正**）。
+**版歴（内容 pin・sha は照合記録）:** v1.0 `054a54bbb6` → v1.1 `37902fb909`（pZ の model-identity 入力）→ v1.2 `3cb06b0fe5`（**H-2 DOF 宣言**）→ v1.3 `c8c326e00b`（**参照同一性 I-1〜I-3 を主レグ**へ）→ v1.4（**H-4 を 3 参照点に** = §H-4.1。閾値の `EE_TO_FINGERTIP=0.220` は **Franka legacy**・実測コ字値と 34.8〜55.7 mm 違う）→ v1.5 `cca446e1a6`（**§H-5.1 把持状態の ζ**）→ v1.6 `0025fd32b6`（**§H-3.1 = per-joint `τ_bias`**）→ ⭐**v1.7**（**§H-4 の pad body 導出規則を訂正** — 旧 `body_label` 検索は**現モデルで実行不能**。p4 の R8 裁定 `442f58678359bf85` が **spec owner = p11 へ RETURN** したのを受けた**記録是正**）→ ⭐⭐**v1.8**（**§H-4 / §H-4.1 から「cable に実際に触れる点」という接触の主張を撤回** — pN RETURN-004 **B6**。**実際の接触 geom / 面は UNMEASURED**（`route_executor.py:2436-2438` の f1ext+f2ext sandwich・f1ext-only の false-FAIL 実績／`task_config.py:37-38` は接触フィルタ logic 用で pad 幾何は先送り）。**J-a/J-b/J-c は「ラベルの付いた参照点」としてのみ保持**し、測るのは各点の Jacobian）。⚠ v1.4 の説明文にある「実測コ字値と 34.8〜55.7 mm 違う」も **参照点どうしの差**の意味で読むこと（接触面のずれではない）。
 ⚠ **v1.4〜v1.7 の変更はいずれも該当章に限局**（他章は無変更）。
 ⛔⛔ **本 spec は実装 gate ではない**（接地 = **`:238`**「実 run / training / landing の認可でない。⛔ p0 は本 spec の範囲＝測定のみ」＋ **`:244`**「確定するまで本 spec を実装 gate として使わない」。⚠ 旧 cite `:237` は誤り — 同行は **H-6 各機構の非採用**を述べており、実装 gate の話ではない）。**v1.6 §H-3.1 は authorization 無しに実装され、p4 が `d724031b77` で「既存 GO 無し・認可外」と裁定済**。⇒ **本 spec の章が tree に在ることは、実装してよいことを意味しない。**
 **根拠:** Rs 裁定 = **案 A 採択**（p4 relay 2026-07-21 15:44）。**設計数値を手で導かない。** 私は **spec + 受入条件**を書き、**p0 が実 build して測り**、**pZ が実 build と突き合わせて model-identity を検証**する。数値はその**検証済み出力**から取る。
@@ -154,7 +154,7 @@ v0.4 の致命 = **私が書いた build recipe が、実際に走るモデル�
 - ⚠ **`a_max` は据え置き**（cap が 1e6 = fail-open ゆえ現状は意味を持たない・設計側 §5.5.1 で処理）。
 
 ### H-4 把持点 Jacobian
-- 参照 frame = **pad を担う body**（cable に実際に触れる body）。
+- 参照 frame = **pad を担う body**。⛔⛔ **訂正 v1.8（2026-07-26・pN RETURN-004 **B6**）**: 旧文の括弧「**cable に実際に触れる body**」は **測定された接触の主張ゆえ撤回**。⭐ **実際の接触 geom / 接触面は UNMEASURED** — ① `task_config.py:37-38` は当該定数を **接触フィルタの logic 用**とし **pad の幾何は先送り**と明記（"contact-filter LOGIC; pad GEOMETRY itself deferred to S5"）② `route_executor.py:2436-2438` は保持を **f1ext(下爪)+f2ext(上爪) の sandwich** と定義し、**f1ext のみを見た旧 gate は「cable が上爪へ上がった」場面で false-FAIL した実績**がある ⇒ **触れる相手が 1 つに固定されない** ③ 同 `:2430`/`:2432`/`:2433` で **`pad1`/`pad2` geom と `f1ext`/`f2ext` geom は別集合**。⇒ **本 spec では J-b を「ラベルの付いた参照点」としてのみ扱う**（測るのは Jacobian であって接触ではない）。
   ⛔⛔ **訂正 v1.7（2026-07-26・p4 の R8 裁定 `442f58678359bf85` による RETURN を受けた spec owner 修正）**: 旧文「**`body_label` から発見すること**」は **現モデルで実行不能**ゆえ撤回。**実測（p11 が h0 report を独立に走査）= `body_label` 70 件中 "pad" は 0 件／`shape_label` 107 件中 16 件** ⇒ **pad は shape のラベルであって body のラベルではない**。⇒ p0 が `wrist_3` で代用せず **ABSENT と報告した判断は正しかった**。
   ⭐ **導出規則（どちらでもよい・採った方を出力に明記すること）**:
   - **(i) SSOT 定数から index 解決** — `task_config.py:37` **`GRIPPER_PAD_BODY_IDX = [9, 13]`**（逐語 "pad-carrying followers"）＋ `:43` `BODIES_PER_ARM = 14` の腕ストライド。⚠ **定数は import して使う**（literal 複製は SSOT が変わると黙って乖離する）。
@@ -165,17 +165,20 @@ v0.4 の致命 = **私が書いた build recipe が、実際に走るモデル�
 - ⛔ `pinch` site も**単独では不可** — `collapse_fixed_joints` で `wrist_3_link` に剛体固定されており、**8 本の gripper DOF の列がゼロ**になる（v0.4 ISSUE 8）。使う場合は**その旨と誤差の向き**を明記。
 - 出力 = per-joint **mm/mrad**（envelope 上の最大）＋ **回転成分の別評価**。
 
-#### H-4.1 ⭐ **3 点で出す**（v1.4・2026-07-21）— 閾値が測る点と、実際に触れる点が違う
+#### H-4.1 ⭐ **3 点で出す**（v1.4・2026-07-21）— 閾値が測る点と、別のラベルが付いた参照点が違う
+
+⛔ **見出しの訂正 v1.8（B6）**: 旧見出し「**実際に触れる点**が違う」は**接触の主張**ゆえ撤回。**実際の接触 geom / 面は UNMEASURED**（上 §H-4 参照）。**3 点はいずれも「ラベルの付いた参照点」**であり、本 spec が測るのは**その点での Jacobian** である。
 
 SKILL の閾値は **`ee_pos + R(ee_q)·[0,0,+EE_TO_FINGERTIP]`** で測られる（`newton_skill_env_base.py:899-905`）。⚠ その **`EE_TO_FINGERTIP = 0.220` は自身のコメントで Franka/legacy と明記**（`task_config.py:78`「FRANKA panda_hand->fingertip」/ `:84`「220mm, **Franka value; re-derive S6**」/ `:324`「**EE_TO_FINGERTIP above (0.220) is the Franka/legacy**」）。⚠ **同 file には実測の Robotiq/コ 値が別に在る**: `EE_TO_PINCH_CLOSED = 0.2548`（`:320`）/ `EE_TO_PINCH_TIP_CLOSED = 0.2757`（`:321`）。
 
 ⇒ ⭐ **同じ「指先」という語が 2 つの点を指し、差は 34.8〜55.7 mm**（2 mm 閾値の **17〜28 倍**）。⇒ **どちらで Jacobian を取るかで関節 bar が変わる**（腕手先までの腕の長さが変わるため、mrad あたりの mm が変わる）。
+⚠ **v1.8 の但し書き（B6）**: この差は **「ラベルの付いた参照点どうしの差」**である。⛔ **「判定面と接触面のずれ」と読まない** — **実際の接触 geom / 面は UNMEASURED**。
 
 | # | 参照点 | なぜ要るか |
 |---|---|---|
 | **J-a** | `ee_pos + 0.220·ẑ_ee`（**閾値が測っている点**） | **PD sizing はこの点で行う**（判定式と同じ面で bar を立てるため） |
-| **J-b** | **pad を担う body**（cable に実際に触れる）。⭐**導出は §H-4 の (i) SSOT 定数 index / (ii) `shape_label` の親 body のいずれか**。⛔ **`body_label` を "pad" で検索しない**（実測 0 件・v1.7 訂正） | **接触・把持の物理**はこの点で起きる |
-| **J-c** | `EE_TO_PINCH_TIP_CLOSED = 0.2757` 相当の爪先 | J-a と J-b の差を**定量化**して報告するため |
+| **J-b** | **pad を担う body**（**ラベルの付いた参照点**）。⭐**導出は §H-4 の (i) SSOT 定数 index / (ii) `shape_label` の親 body のいずれか**。⛔ **`body_label` を "pad" で検索しない**（実測 0 件・v1.7 訂正） | ⛔ **v1.8 訂正（B6）**: 旧「**接触・把持の物理はこの点で起きる**」は**撤回**（**接触 geom / 面は UNMEASURED**）。⇒ 要る理由は **J-a と異なる参照点での Jacobian を並べて出すため** |
+| **J-c** | `EE_TO_PINCH_TIP_CLOSED = 0.2757` 相当の爪先（**ラベルの付いた参照点**・`task_config.py:321` のラベルは「pad TIP drop; コ f1ext claw tip」） | J-a と J-b の差を**定量化**して報告するため |
 
 ⛔ **1 点だけ出さない。** 3 点の差を出力に併記する。⇒ **どの点で閾値を評価すべきかは本 spec で判断しない**（両方で測れる材料を出すのみ）。⚠ **court の訂正（2026-07-26・p5 correction `fe80839219` §3）**: 旧記載「**p5/Rs の court**」は stale（**Rs が自らの court であることを撤回**）⇒ **(A) success 述語の測定面 = p5**（`/reward-design` + `/pre-check`）／**(B)(C) `GRASP_Z`/`PUSH_Z`/`EE_TO_FINGERTIP` 自体 = ⛔UNCONFIRMED / HOLD**（候補 p5 / p17 / p11 / p16・**帰属を捏造しない**）。
 

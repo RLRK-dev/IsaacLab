@@ -1,7 +1,12 @@
-# 腕側 consumer レビュー材料 — `GRASP_Z` / `PUSH_Z` / `EE_TO_FINGERTIP`（p11 ARM-CONTROL-DESIGN）**v3**
+# 腕側 consumer レビュー材料 — `GRASP_Z` / `PUSH_Z` / `EE_TO_FINGERTIP`（p11 ARM-CONTROL-DESIGN）**v4**
 
 **依頼:** `MSG-PN-P11-FINGERTIP-BOUNDARY-MATERIALS-20260726-001`。
-**本 v3 が応答する RETURN:** `MSG-PN-P11-FINGERTIP-MATERIALS-V2-RETURN-20260726-003`（**R1〜R5**）。
+**⭐ 本 v4 が応答する RETURN（3 通を 1 つの bundle に fold）:** `MSG-PN-P11-FINGERTIP-MATERIALS-V3-RETURN-20260726-004` の **残件 B6** ／ `MSG-PN-P11-FINGERTIP-B6-LIVEWORD-20260726-005` ／ **B7**（records coherence）。**R1〜R5 は `-004` で PASS 済**。
+**B7 = 受理。私の欠陥。** ①「T-4〜T-8 は行を読んでいない」という fence が**事実に反していた**（T-7 の行の中身を記述していた）⇒ **検証の深さを tier と別軸にし、D-1 10 file / D-2 21 file を全件列挙**（§R4-b）。②「consumer 判定を一切下していない」という**全称形を narrow** ⇒ **(α) 静的な call / use の記述は行う／(β) runtime・production 到達性は UNVERIFIED で推論しない／hit table 単独では consumer を確立しない**（§R3 (e)）。
+**B6 = 受理。私の欠陥。** 「cable に実際に触れるのは pad body」を**測定された接触面の主張として撤回**し、**実際の接触 geom / 面は UNMEASURED** と明記。**J-b / J-c は「ラベルの付いた参照点」としてのみ保持**。⇒ 本体は §1 (2) ／ §4 ／ **§5.3 #6**。
+⭐ **同一の言い方が私の別 artifact（測定 spec §H-4/§H-4.1 → **v1.8**・設計 doc §5.4）にも残っていたので同時に訂正した**（型 6「指摘された 1 箇所だけ直す」の再発防止）。
+**⭐ 併せて `MSG-PN-P11-FINGERTIP-B6-LIVEWORD-20260726-005` も受理**: 「**live** の acquire-grasp consumer」を **p5 帰属の未決事実／照会依頼として残さない**。⇒ **①呼び出しの連鎖は banked source に実在（immutable）／②runtime・production での到達性は UNVERIFIED** の 2 段で書き、**p5 への新規照会は出さない**（本書 §1 (1) ／ 設計 doc §5.4）。
+**v3 が応答した RETURN:** `MSG-PN-P11-FINGERTIP-MATERIALS-V2-RETURN-20260726-003`（**R1〜R5**）。
 ⚠ **`…-002` は pN 自身が全面 RETRACT 済**（pN の shell quoting により C2 payload が壊れた ＝ **cause = pN**、p11 の記録に帰責なし）。⇒ **本書は `-003` のみに応答する。** `-002` の C1〜C4 は operative でない。
 
 **⭐ R1〜R5 は 5 件とも受理する。5 件とも私の欠陥である**（争点なし）。
@@ -12,7 +17,8 @@
 |---|---|---|---|
 | **v1** | `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P11_ARM_TARGET_CONSUMER_REVIEW_20260726.md` | `55d95a35f6b894dd54020fa0ec0eeb2ac8a89d1d` | `e561b53f49243a9742279e56720dc2267d1feff1ebe23012b71ea0a077819236` |
 | **v2** | 同上（同一 path） | `1a2b63450b312bac6aa7468d60422056d40d02ab` | `09796ed5e1a4cb594d99aa69b64a2116470aa3639e3e6f090d578c0e0e111f09` |
-| **v3** | 同上（同一 path） | **本書を bank した commit**（file は自身の commit を pin できない ⇒ **routing 提出の宣言値が権威**） | 同左 |
+| **v3** | 同上（同一 path） | `5f57b9421964779692277be32be36eaeeba7a6e2` | `943c1a9f976a467dd04b3f4703e5193d1f026e14b64ab74d619a881958295b91` |
+| **v4** | 同上（同一 path） | **本書を bank した commit**（file は自身の commit を pin できない ⇒ **routing 提出の宣言値が権威**） | 同左 |
 
 **起草時刻（`date` 実測）: 2026-07-26 17:57:07 JST。** ⚠ **権威ある時刻は本書を bank した commit の author time**（上記）。
 
@@ -161,7 +167,11 @@ git grep -o -w -e <SYMBOL>        1a2b63450b312bac6aa7468d60422056d40d02ab -- '*
 ### (e) ⭐⭐ **これは文字列の hit 数であって consumer 数ではない**（pN R3 の指摘を受理）
 
 - **hit には import 行・docstring・comment・変数への再定義・log 文字列が含まれる。** これらは「その定数がその file の**振る舞いを決めている**」ことを意味しない。
-- ⇒ 本書は **`.py` scope の hit を「その symbol が現れた file と行の全体」としてのみ提示する。** ⛔ **「consumer である」「operative である」という判定は本書では下していない。**
+- ⇒ 本書は **`.py` scope の hit を「その symbol が現れた file と行の全体」としてのみ提示する。**
+- ⛔⛔ **narrow（RETURN B7 受理）**: 旧文の全称形「**consumer である／operative であるという判定は本書では下していない**」は、**後段 §1〜§3 で個々の行の静的な使われ方を記述している**ことと衝突していた。⇒ ⭐ **正しくは 2 段に分ける**:
+  - **(α) 静的な call / use の記述** — 「この行がこの symbol を import している／target の z に入れている／docstring である」は **banked source を読んで書いた記述**であり、**本書はこれを行っている**。
+  - **(β) runtime / production で到達するか** — ⛔ **UNVERIFIED。本書は一切推論しない。** **(α) から (β) を導かない。**
+  - ⇒ ⛔ **hit table 単独では consumer を確立しない**（数は文字列の出現であり、(α) でも (β) でもない）。
 
 ---
 
@@ -184,7 +194,17 @@ git grep -o -w -e <SYMBOL>        1a2b63450b312bac6aa7468d60422056d40d02ab -- '*
 
 **3 + 4 + 2 + 5 + 6 + 9 + 1 + 1 = 31**（§R2 manifest と一致）。
 
-⚠ **後続 §1〜§3 で私が行単位に読んだのは T-1〜T-3 の一部の行だけ**である。**「読んだ」は「runtime で効いている」を意味しない。** T-4〜T-8 は **file 単位でのみ列挙**し、行単位では読んでいない（**明示 fence**）。
+⛔⛔ **訂正（RETURN B7 受理）**: 旧文「**T-4〜T-8 は file 単位でのみ列挙し、行単位では読んでいない**」は **事実に反していた** — 後段 §2 (1) / §3 (1) で **T-7 `newton_routing_utils.py` の個々の行の中身**（`:53` / `:1295` / `:1346` / `:1382-1383` / `:1529` / `:1568` / `:1587` / `:1602`）を記述しており、**それは targeted な行読みである**。⇒ ⭐ **検証の深さは構造 tier とは別の軸**なので、**tier で区切らず、実際に読んだ file を列挙して区切る**。
+
+### R4-b ⭐ **検証の深さ**（構造 tier と独立の軸・31 file を 2 群に分割）
+
+| 群 | 私が実際に行ったこと | file（**全件**） |
+|---|---|---|
+| **D-1 targeted 行読み（10 file）** | `git show 1a2b63450b…:<path> \| sed -n '<L>p'` で **引用した各行の中身を読み、本書に記述した** | `configs/task_config.py`・`configs/mpc_config_grip.py`・`envs/newton_skill_env_base.py`・`envs/newton_grip_env.py`・`envs/route_executor.py`・`envs/newton_approach_cable_mujoco_env.py`・`skills/scripted_skills.py`・`skills/step_table.py`・`scripts/newton_routing_utils.py`・`scripts/test_newton_20clip_reachability.py` |
+| **D-2 lexical / file 単位のみ（21 file）** | **一致件数と path を数えただけ。行の中身は読んでいない** | `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/arm_control_measurement_harness.py`・`configs/mpc_config_ic.py`・`scripts/build_aerial_regrasp_precondition.py`・`scripts/build_unclamp_precondition.py`・`scripts/collect_expert_demos.py`・`scripts/demo_aerial_regrasp.py`・`scripts/dry_run_39step.py`・`scripts/dry_run_approach_cable.py`・`scripts/eval_skill.py`・`scripts/generate_demos_mppi_m3_ar.py`・`scripts/m4_phase0_verify_ee_clamp.py`・`scripts/measure_finger_extent.py`・`scripts/plot_fingertip_waypoints.py`・`scripts/test_arm_reachability.py`・`scripts/test_clip_routing.py`・`scripts/test_diagonal_reach.py`・`scripts/test_grip_modes.py`・`scripts/test_motion_sequence_dry_run.py`・`scripts/test_newton_clip_routing.py`・`scripts/test_newton_clip_routing_sdf_plain.py`・`scripts/test_newton_dual_clip_routing.py` |
+
+**10 + 21 = 31**（§R2 manifest と一致）。⚠ **D-1 は tier をまたぐ**（T-1・T-2・T-3・T-6・T-7 を含む）⇒ **「tier が下位だから浅く読んだ」ではない。**
+⛔⛔ **D-1 / D-2 のどちらであっても、runtime / production での到達性は UNVERIFIED。** **読んだこと（静的）から、効いていること（実行時）を導かない。**
 
 ---
 
@@ -217,15 +237,20 @@ git grep -o -w -e <SYMBOL>        1a2b63450b312bac6aa7468d60422056d40d02ab -- '*
 
 | 箇所 | 位置 | 何に使っているか |
 |---|---|---|
-| **成功述語の測定点** | `newton_skill_env_base.py:899-905` `compute_clamp_pos` = `ee_pos + R(ee_q)·[0,0,+EE_TO_FINGERTIP]` | acquire-grasp 判定が使う点。判定連鎖 = `newton_grip_env.py:1158`/`:1164` `compute_clamp_pos` → `:1167` `cable_pos` → `:1169` `find_nearest_cable_point(...)` → `dist_pos` → `:1224` `clamp_r_ok = finite_measurements and (…)`（閾値 `CLAMP_DIST_THRESH = T_DIST` 2 mm・`:223`） |
+| **成功述語の測定点** | `newton_skill_env_base.py:899-905` `compute_clamp_pos` = `ee_pos + R(ee_q)·[0,0,+EE_TO_FINGERTIP]` | ✅**呼び出しの連鎖が banked source に実在する**（immutable）= `newton_grip_env.py:1158`/`:1164` `compute_clamp_pos` → `:1167` `cable_pos` → `:1169` `find_nearest_cable_point(...)` → `dist_pos` → `:1224` `clamp_r_ok = finite_measurements and (…)`（閾値 `CLAMP_DIST_THRESH = T_DIST` 2 mm・`:223`）。⛔ **runtime / production で到達するかは UNVERIFIED**（`MSG-PN-P11-FINGERTIP-B6-LIVEWORD-20260726-005` 受理。**source に在ること ≠ 実行時に効いていること**。⛔「live consumer」を未決事実としても依頼としても残さない・p5 への新規照会も出さない） |
 | **cable 分節の探索窓** | `newton_grip_env.py:746` / `:752`（`right_tip[2] -= EE_TO_FINGERTIP` / `left_tip[2] -= …`） | 最近傍 cable 分節 index の決定（**z のみを引く軸固定の近似**・下記 (3)） |
 | **positioning 定数の材料** | `task_config.py:93` `GRASP_Z` / `:95` `PUSH_Z` | 両者の定義式に含まれる |
-| **p11 側 spec** | 測定 spec §H-4.1 **J-a**（`ee_pos + 0.220·ẑ_ee`） | **閾値が測っている点**として 3 参照点の 1 つ（他 = J-b pad 中点 / J-c `EE_TO_PINCH_TIP_CLOSED 0.2757`） |
+| **p11 側 spec** | 測定 spec §H-4.1 **J-a**（`ee_pos + 0.220·ẑ_ee`） | **閾値が測っている点**として 3 参照点の 1 つ（他 = **J-b pad body** / **J-c** `EE_TO_PINCH_TIP_CLOSED 0.2757`）。⛔ **J-b / J-c は「ラベルの付いた参照点」としてのみ保持** — **接触面ではない**（B6） |
 | ⚠ 自己申告 | `task_config.py:78` 逐語「FRANKA panda_hand->fingertip [m]」／`:84`「220mm, **Franka value; re-derive S6**」／`:324`「**EE_TO_FINGERTIP above (0.220) is the Franka/legacy**」 | **定数自身が legacy と宣言している** |
 
 ### (2) 腕側が必要とする measurement surface
 - **腕の制御が要求するのは「閾値が評価される点」と同じ面**。⇒ gain sizing は **判定式が使う面**で行う必要がある（別の面で bar を立てると、満たしても判定は落ちる／その逆）。
-- ⚠ **接触の物理が起きる面は別**: cable に実際に触れるのは **pad body**（`GRIPPER_PAD_BODY_IDX = [9, 13]`・`task_config.py:37`）。**実測コ字値** = `EE_TO_PINCH_CLOSED 0.2548`（`:320`）／`EE_TO_PINCH_TIP_CLOSED 0.2757`（`:321`）／`EE_TO_PINCH_OPEN 0.26092`（`:326`）。⇒ **`0.220` と 34.8〜55.7 mm 違う**（= 2 mm 閾値の 17〜28 倍）。
+- ⛔⛔ **撤回（RETURN-004 **B6** 受理）**: 旧文「**接触の物理が起きる面は別**: cable に**実際に触れる**のは **pad body**（`GRIPPER_PAD_BODY_IDX = [9,13]`）」は、**測定された接触面の主張として撤回する。** ⭐**私が自分で読み直した反証**:
+  - `task_config.py:37` 逐語 = `GRIPPER_PAD_BODY_IDX = [9, 13]  # BODY space: pad-carrying followers (contact-filter LOGIC;` ＋ `:38` 逐語 `pad GEOMETRY itself deferred to S5` ⇒ **この定数は接触フィルタの logic 用の index であり、pad の幾何自体は先送りされている。** ⇒ **どの geom が cable に触れるかを確定しない。**
+  - `route_executor.py:2436-2437` 逐語「retention = the cable is **SANDWICHED between the two claws (f1ext bottom + f2ext top**, mouth ~10mm, Ø8 cable -> ~2mm play)」＋ `:2438` 逐語「The OLD **f1ext-only** gate **false-FAILed** "cable risen to the TOP claw under drag"」 ⇒ **触れる相手は 1 つに固定されない**（下爪に載る／drag で上爪へ上がる）。しかも `:2430`/`:2432`/`:2433` で **`pad1`/`pad2` geom と `f1ext`/`f2ext` geom は別集合**として列挙されている。
+  - ⇒ ⛔⛔ **実際の接触 geom / 接触面は UNMEASURED。**（同結論を p5 も bank 済 — `P5_BOUNDARY_MATERIALS_CORRECTION_20260726.md:145` 見出し「B5 訂正 — 「物理接触面 = f1ext 爪先」を UNMEASURED へ」/ `:151`「**実際の接触 geom は UNMEASURED**」。⚠ **relay でなく、私が同 file を開いて確認した。**）
+- **残る事実 = ラベルの付いた参照点どうしの差（⛔接触面の主張ではない）**: `EE_TO_PINCH_CLOSED 0.2548`（`:320` ラベル「wrist_3 -> pinch_mid drop」）／`EE_TO_PINCH_TIP_CLOSED 0.2757`（`:321` ラベル「pad TIP drop; コ f1ext claw tip」）／`EE_TO_PINCH_OPEN 0.26092`（`:326`）。⇒ **`0.220` との差は 34.8〜55.7 mm。** ⛔ **これを「判定面と接触面のずれ」と呼ぶ labeling は撤回。** 差が効くのは **どの参照点で Jacobian を取るか**（＝腕手先までの長さが変わり、mrad あたりの mm が変わる）まで。
+  - ⚠ **B6 の読み方を明示する**（誤解があれば RETURN してください）: pN の指示「retract … *when labeled as contact-surface mismatch*」を、**接触面という labeling の撤回**であって**引き算そのものの撤回ではない**と読んだ。**全面撤回が意図なら、その旨の RETURN で即座に落とす。**
 - ⇒ **腕側の要求事実**: 「**どの面で bar を立てるか**」が決まらないと gain の下限が確定しない。⛔ **どちらにすべきかは本書で言わない。**
 
 ### (3) frame / unit
@@ -248,7 +273,7 @@ git grep -o -w -e <SYMBOL>        1a2b63450b312bac6aa7468d60422056d40d02ab -- '*
 | **Grip env の把持開始高さ** | `newton_grip_env.py:113` import ／ `:142` **`GRIP_Z = GRASP_Z + CABLE_RADIUS`**（逐語「1.029m: fingertip at cable center Z (0.809)」） | 把持開始高さの定義 |
 | MPC config（comment のみ） | `mpc_config_grip.py:110` 逐語「Grip P0 precondition already positions arms at GRASP_Z (cable-proximal).」 | 前提の記述（comment） |
 | 到達性テスト | `test_newton_20clip_reachability.py:46` **独自に再定義** `GRASP_Z = TABLE_HEIGHT + EE_TO_FINGERTIP`（**`CLIP_BASE_HEIGHT` を含まない**） | ⚠ **task_config の定義と一致しない別式** |
-| routing utils | `newton_routing_utils.py:53` import ／ `:1295` / `:1346` / `:1382-1383` に target の z として出現 | ⚠ **T-7・行単位の runtime 判定はしていない** |
+| routing utils | `newton_routing_utils.py:53` import ／ `:1295` / `:1346` / `:1382-1383` に target の z として出現 | **D-1（行の中身を読んだ）**・静的な use の記述。⛔ **runtime / production 到達性は UNVERIFIED** |
 | ⛔ **`route_c1_c2` code path** | — | **使っていない**（**F-1**） |
 
 ### (2) 腕側が必要とする measurement surface
@@ -274,7 +299,7 @@ git grep -o -w -e <SYMBOL>        1a2b63450b312bac6aa7468d60422056d40d02ab -- '*
 | **scripted skill の押込目標** | `scripted_skills.py:39` import ／ `:88` `return (x, y, PUSH_Z)` | 押込みの EE 目標 |
 | **工程表** | `step_table.py:32` import ／ `:97` `return (cx, ly, PUSH_Z), (cx, ry, PUSH_Z)` | 左右の EE 目標（1 行に 2 出現） |
 | Grip env | `newton_grip_env.py:123` import ／ `:430-431` `ee_left/ee_right = (CLIP1_X, CLIP1_Y ∓ GRIP_HALF_SPAN, PUSH_Z)` | 初期 EE 目標 |
-| routing utils | `newton_routing_utils.py:53` import ／ `:1529` docstring ／ `:1568` target ／ `:1587` comment ／ `:1602` target | ⚠ **T-7・行単位の runtime 判定はしていない** |
+| routing utils | `newton_routing_utils.py:53` import ／ `:1529` docstring ／ `:1568` target ／ `:1587` comment ／ `:1602` target | **D-1（行の中身を読んだ）**・静的な use の記述。⛔ **runtime / production 到達性は UNVERIFIED** |
 | ⛔ **`route_c1_c2` code path** | — | **使っていない**（F-1） |
 
 ### (2) 腕側が必要とする measurement surface
@@ -298,7 +323,7 @@ git grep -o -w -e <SYMBOL>        1a2b63450b312bac6aa7468d60422056d40d02ab -- '*
 | **共有の実態** | **`EE_TO_FINGERTIP` だけが 3 者の根** — `GRASP_Z` / `PUSH_Z` は**その派生量**（同じ式・同じ値 1.025）。⇒ **根を動かせば 2 つが同時に動く。** |
 | **共通性** | ⛔ **3 定数とも「全 skill 共通」として機能していない**（`route_c1_c2` code path 不使用 = F-1／approach env は別値へ離脱 = F-3／到達性テストは別式） |
 | **観測量への移行** | ⭐ **`route_c1_c2` code path では実装済**（`ee_off` = 実行時計測・F-2）。⚠ **成功述語側は定数のまま** ⇒ そこを移すのは **成功条件の変更**（`/reward-design` 直交ゲート対象） |
-| **面の不一致** | **判定面（`0.220`）と接触面（pad・実測 `0.2548`/`0.2757`/`0.26092`）が 34.8〜55.7 mm 違う** ＝ **2 mm 閾値の 17〜28 倍** |
+| **参照点の食い違い** | ⛔⛔**旧「判定面と接触面が 34.8〜55.7 mm 違う ＝ 2 mm 閾値の 17〜28 倍」は撤回**（RETURN-004 B6）。**残るのは「ラベルの付いた参照点どうしの差 34.8〜55.7 mm」**（判定式の `0.220` 対 `0.2548`/`0.2757`/`0.26092`）。⛔ **実際の接触 geom / 面は UNMEASURED**（`route_executor.py:2436-2438` = f1ext+f2ext の sandwich・f1ext-only は false-FAIL 実績／`task_config.py:37-38` = 接触フィルタ logic 用で pad 幾何は先送り）。⇒ 効くのは **どの参照点で Jacobian を取るか**まで |
 | **散らばり** | **`.py` scope で `GRASP_Z` は 22 file・`PUSH_Z` は 13 file・`EE_TO_FINGERTIP` は 18 file に現れる**（§R3 (c) 全件）。⛔ **これは文字列 hit であり consumer 数ではない**（§R3 (e)） |
 | **腕側の依存** | ⭐ **面の選択それ自体は、新たな measurement-design point を増やさない** — H-4 は **3 参照点**を出す設計（`53b8997ed4`）。⛔⛔ **「再測定不要」とは言えない** — **H-4 全体は HOLD 継続**であり、**認可済みの rerun および H-4 の他の欠陥・要求（literal `(9,13)` の carry・envelope が 1 姿勢）は残る** |
 | ⚠ **同一定数の 2 用法** | `compute_clamp_pos` は**姿勢で回す**／`newton_grip_env.py:746`/`:752` は **world z から直に引く** ⇒ **EE が傾くと後者に誤差**（⛔ 是正は求めない・事実の記載のみ） |
@@ -315,8 +340,9 @@ git grep -o -w -e <SYMBOL>        1a2b63450b312bac6aa7468d60422056d40d02ab -- '*
 - ⛔ **owner を書いていない**（`GRASP_Z`/`PUSH_Z`/`EE_TO_FINGERTIP` の court は **UNCONFIRMED / HOLD**・候補 p5 / p17 / p11 / p16）。**私は自分を owner とも他者とも書かない。**
 - ⛔ **値・方式・推奨を書いていない。** 分類は p17（p5 側材料と合流後）。
 - **p5 の材料を私は再解釈していない**（本書は**腕側の読み取り**のみ）。
-- ⛔ **runtime で効いているか（operative か）を、どの file についても判定していない**（全 tier `UNVERIFIED`・§R4）。
-- **未測と明記した項目**: 手先たわみの合成量 `‖Σ_i jacp[:,i]·Δq_i‖`（**未実装・未認可**）／定数を skill 別に分けた場合の影響／Grip・scripted 経路で観測量へ移せるか／T-4〜T-8 の行単位の意味。
+- ⛔ **runtime / production で効いているか（到達するか）を、どの file についても判定・推論していない**（全 tier `UNVERIFIED`・§R4）。⚠ **静的な call / use の記述は行っている**（§R3 (e) の (α)）— **(α) から (β) を導かない**のが本書の線。⛔ **hit table 単独では consumer を確立しない。**
+- **私が行の中身を読んだのは 31 file 中 10 file**（§R4-b D-1）。**残り 21 file は件数と path のみ**（D-2）。
+- **未測と明記した項目**: ⭐**実際の接触 geom / 接触面 = UNMEASURED**（B6）／⭐**`compute_clamp_pos` 連鎖の runtime・production 到達性 = UNVERIFIED**（source には実在・`-005`）／手先たわみの合成量 `‖Σ_i jacp[:,i]·Δq_i‖`（**未実装・未認可**）／定数を skill 別に分けた場合の影響／Grip・scripted 経路で観測量へ移せるか／T-4〜T-8 の行単位の意味。
 
 ## 5.2 v2 から撤回した主張（全件）
 
@@ -328,5 +354,14 @@ git grep -o -w -e <SYMBOL>        1a2b63450b312bac6aa7468d60422056d40d02ab -- '*
 | 4 | tier 名「**operative**（env / skill）」 | 下していないはずの runtime 判定を名付けが先取りしていた（R4） |
 | 5 | §2 (4) 「（Grip skill のみが実質の consumer）」 | §B2 の撤回と同一文書内で矛盾（R5） |
 
+## 5.3 v3 から撤回・narrow した主張（**B6** ＋ live-wording `-005` ＋ **B7**）
+
+| # | 撤回した v3 の主張 | 理由（私が自分で読んだ反証） |
+|---|---|---|
+| 6 | 「**cable に実際に触れるのは pad body**」＋「**判定面と接触面が 34.8〜55.7 mm 違う ＝ 2 mm 閾値の 17〜28 倍**」という **接触面としての labeling** | ⛔**実際の接触 geom / 面は UNMEASURED**。①`task_config.py:37-38` は当該定数を **接触フィルタの logic 用**とし **pad の幾何は先送り**と明記 ⇒ 接触を確定しない。②`route_executor.py:2436-2438` は保持を **f1ext(下爪)+f2ext(上爪) の sandwich** と定義し、**f1ext のみを見た旧 gate は「cable が上爪へ上がった」場面で false-FAIL した実績**がある ⇒ **触れる相手は 1 つに固定されない**。③同 `:2430`/`:2432`/`:2433` で **`pad1`/`pad2` geom と `f1ext`/`f2ext` geom は別集合**。⇒ **J-b / J-c は「ラベルの付いた参照点」としてのみ保持**（差の引き算は残すが、接触面という呼び方は撤回） |
+| 7 | 「**live** の acquire-grasp consumer」を **p5 帰属の未決事実**として持ち、かつ **p5 への照会依頼**として残していたこと | `MSG-PN-P11-FINGERTIP-B6-LIVEWORD-20260726-005`。p5 が既にこの区別を閉じている。⇒ ⭐**①呼び出しの連鎖は banked source に実在（immutable）／②runtime・production 到達性は UNVERIFIED** の 2 段で書く。⛔**新規照会は出さない** |
+| 8 | 「**T-4〜T-8 は file 単位でのみ列挙し、行単位では読んでいない**」という fence | **B7**。⛔**事実に反していた** — T-7 `newton_routing_utils.py` の個々の行の中身を §2 (1)/§3 (1) で記述している。⇒ **検証の深さは tier と別軸**として **D-1（10 file）/ D-2（21 file）** に列挙し直した（§R4-b） |
+| 9 | 「**consumer である／operative であるという判定は本書では下していない**」という**全称形** | **B7**。後段の静的 use 記述と衝突。⇒ **narrow**: **(α) 静的な call / use の記述は行う ／ (β) runtime 到達性は UNVERIFIED で一切推論しない ／ hit table 単独では consumer を確立しない**（§R3 (e)） |
+
 ---
-**p11 ARM-CONTROL-DESIGN v3 — R1〜R5 cause-side correction / 起草 2026-07-26 17:57:07 JST（権威時刻 = bank commit の author time）**
+**p11 ARM-CONTROL-DESIGN v4 — B6 ＋ live-wording（`-005`）＋ B7 を 1 bundle で cause-side correction（v3 = R1〜R5・PASS 済）/ v4 起草 2026-07-26 18:21:39 JST（権威時刻 = bank commit の author time）**

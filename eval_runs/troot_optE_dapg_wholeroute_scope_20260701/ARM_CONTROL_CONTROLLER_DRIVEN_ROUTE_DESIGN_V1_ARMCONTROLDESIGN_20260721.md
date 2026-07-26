@@ -143,10 +143,15 @@ SKILL は EE 到達閾値を持つ（例: CLAMP 2 mm）。⇒ **制御器の追�
 
 閾値が測る「指先」は `ee_pos + R(ee_q)·[0,0,**0.220**]`（`newton_skill_env_base.py:899-905`）。⚠ **その 0.220 は自身のコメントで Franka legacy と明記**（`task_config.py:78` / `:84`「Franka value; **re-derive S6**」/ `:324`）。⚠ **同 file に実測のコ字値が別に在る**: `EE_TO_PINCH_CLOSED = 0.2548`（`:320`）/ `EE_TO_PINCH_TIP_CLOSED = 0.2757`（`:321`）。
 
-⇒ ⭐ **「指先」という同じ語が 2 点を指し、差は 34.8〜55.7 mm = 2 mm 閾値の 17〜28 倍。**
+⇒ ⭐ **「指先」という同じ語が 2 つの点を指し、差は 34.8〜55.7 mm。**
+⛔⛔ **訂正（2026-07-26・pN RETURN-004 **B6**）**: 本節でこの差を **「判定面と接触面のずれ」** と読ませていた箇所を撤回する。**実際の接触 geom / 接触面は UNMEASURED** — ①`task_config.py:37-38` は `GRIPPER_PAD_BODY_IDX` を **接触フィルタの logic 用**とし **pad の幾何は先送り**と明記 ②`route_executor.py:2436-2438` は保持を **f1ext(下爪)+f2ext(上爪) の sandwich** と定義し、**f1ext のみを見た旧 gate は「cable が上爪へ上がった」場面で false-FAIL した実績**がある ⇒ **触れる相手は 1 つに固定されない**。⇒ **J-a/J-b/J-c は「ラベルの付いた参照点」**であり、差が効くのは **どの点で Jacobian を取るか（＝関節 bar が変わる）** までである。
 - **sizing への影響**: 腕の手先までの長さが変わる ⇒ **mrad あたりの mm が変わる** ⇒ 関節 bar が変わる。⇒ **H-4 を 3 点で出させる**（spec v1.4 §H-4.1: J-a 閾値の点 0.220 / J-b pad body / J-c 爪先 0.2757）。**sizing は「閾値と同じ面」= J-a で行う**。
-- **task への影響**: 目標も同じ 0.220 で作られていれば**腕と目標の一致には相殺**するが、**cable との接触は物理の世界で起きる**ので相殺しない。⇒ **どの点で閾値を評価すべきかは p5/Rs の court。**
-- ⚠ **私が確認していないこと**: 「live の acquire-grasp 成功判定が `compute_clamp_pos` を呼ぶ」は **p5 帰属**。私の `grep` では `T_DIST` の live 消費は tests / `mpc_config_ic.py` に見え、env 側の判定行は特定できていない。⇒ **p5 に live consumer の file:line を照会**（判定に効くため）。⭐ **本設計はこの未確認に依存しない** — H-4 を 3 点で出せば、どの点でも bar を立てられる。
+- **task への影響**: 目標も同じ 0.220 で作られていれば**腕と目標の一致には相殺**する。⛔⛔ **旧文「cable との接触は物理の世界で起きるので相殺しない」は撤回**（B6・**接触面が UNMEASURED** ゆえ、相殺しない根拠として接触を持ち出せない）。⇒ 言えるのは **「判定式が使う点」と「別ラベルの参照点」が 34.8〜55.7 mm 離れている**ことまで。⇒ **どの点で閾値を評価すべきかの court** は **`fe80839219` §3 で更新済**（**(A) success 述語の測定面 = p5** ／ **(B)(C) 定数自体 = UNCONFIRMED / HOLD**）。⛔ 旧「p5/Rs の court」は stale。
+- ⛔⛔ **訂正（2026-07-26・pN `MSG-PN-P11-FINGERTIP-B6-LIVEWORD-20260726-005`）**: 旧文「**live** の acquire-grasp 成功判定が `compute_clamp_pos` を呼ぶ」は **p5 帰属**・「**p5 に live consumer の file:line を照会**」は **両方とも撤回**。**p5 が既にこの区別を閉じている。** ⇒ ⭐ **正しい書き方は 2 段**:
+  - ✅ **呼び出しの連鎖は banked source に実在する**（immutable）: `newton_skill_env_base.py:899-905` `compute_clamp_pos` → `newton_grip_env.py:1158`/`:1164` → `:1167` `cable_pos` → `:1169` `find_nearest_cable_point` → `:1224` の閾値比較（`CLAMP_DIST_THRESH = T_DIST`・`:223`）。
+  - ⛔ **runtime / production で到達するかは UNVERIFIED。** **source に在ること ≠ 実行時に効いていること。**
+  - ⇒ ⛔ **「live consumer」を未決の事実としても、依頼としても残さない。p5 への新規照会は出さない。**
+- ⭐ **本設計はこの未確認に依存しない** — H-4 を 3 点で出せば、どの点でも bar を立てられる。
 
 ## 5.5 ⭐ H-2 着地（p0 `c16858c666`・p4 検証済・**p11 が report json を自分で読んだ**）
 
@@ -220,7 +225,7 @@ p0 実測（`h4_grasp_jacobian`・SSOT index 解決・**名前探索でない**�
 | 参照点 | 最大並進 [mm/rad] arm0 / arm1 |
 |---|---|
 | **J-a**（閾値の点 `ee + 0.220·ẑ`） | **649.34 / 224.26** |
-| **J-b**（pad 中点＝実際に触れる所） | 529.27 / 310.65 |
+| **J-b**（pad body・**ラベルの付いた参照点**。⛔ 旧「＝実際に触れる所」は撤回 = B6） | 529.27 / 310.65 |
 | **J-c**（実測 爪先 `0.2757`） | 705.09 / 275.75 |
 
 ⚠ **J-a と J-b は両腕とも約 127〜133 mm/rad 違う**（p0 実測）⇒ **どの点で閾値を評価するかで関節 bar が変わる**という §5.4.2 の懸念は**数値で確認された**。⚠ **J-a/J-c は EE body 上ゆえ gripper のたわみを含まず、感度は過小側**（p0 逐語 `gripper_dof_contribution`）。
