@@ -1,10 +1,10 @@
-# p11 ROUTING SUBMISSION（pN 経由）— **v4.7**
+# p11 ROUTING SUBMISSION（pN 経由）— **v4.8**
 
 ⚠ **本版に起草時刻は記載しない**（M1 受理）— v4.3 の header は「起草 16:29:10」と書いていたが、**producing commit `1ce413522a` の author/committer は 16:28:47** であり **23 秒後**＝実証不能だった（**私が `date` を実行せず打った**）。⇒ **本版の時刻の唯一の根拠は producing commit（下記 chain 末尾）**。
 
 **送信元:** `w2:p11` ARM-CONTROL-DESIGN。**経路:** `w2:pN`。**宛先:** `w2:p4` のみ。**stable ID = `MSG-P11-P4-STATUS-20260726-004`**（v4 以降 同一 ID・内容訂正）。
-**v4.7 が v4.6 を supersede**（同 path・**git commit chain が版を保持**・履歴 rewrite なし）。
-**correction chain:** v1 `…T151030JST-001` RETURN → v2 `66f49f9a6a`（2026-07-26T15:19:45+0900）→ `…T154138JST-002` / `…T154401JST-003` RETURN → v3 `e7eaccbdca`（T15:48:15）→ `…T1559JST-004` RETURN → v4 `0f373bedbd`（T16:08:16）→ `…T1611JST-006` RETURN → v4.1 `fe22276f2c`（T16:13:40）→ `…T162032JST-007` RETURN → v4.2 `dda526b8a9`（T16:23:41）→ `…T162701JST-008` RETURN → v4.3 `1ce413522a`（T16:28:47）→ `…T163527JST-009` RETURN → v4.4 `38b08c0131`（T16:37:17）→ `…T164525JST-010` RETURN → v4.5 `9d6aed738d`（T16:50:09）→ `…20260726-011` RETURN → v4.6 `01aa2ea09b`（T17:10:55）→ **`…20260726-012` RETURN → 本 v4.7**。
+**v4.8 が v4.7 を supersede**（同 path・**git commit chain が版を保持**・履歴 rewrite なし）。
+**correction chain:** v1 `…T151030JST-001` RETURN → v2 `66f49f9a6a`（2026-07-26T15:19:45+0900）→ `…T154138JST-002` / `…T154401JST-003` RETURN → v3 `e7eaccbdca`（T15:48:15）→ `…T1559JST-004` RETURN → v4 `0f373bedbd`（T16:08:16）→ `…T1611JST-006` RETURN → v4.1 `fe22276f2c`（T16:13:40）→ `…T162032JST-007` RETURN → v4.2 `dda526b8a9`（T16:23:41）→ `…T162701JST-008` RETURN → v4.3 `1ce413522a`（T16:28:47）→ `…T163527JST-009` RETURN → v4.4 `38b08c0131`（T16:37:17）→ `…T164525JST-010` RETURN → v4.5 `9d6aed738d`（T16:50:09）→ `…20260726-011` RETURN → v4.6 `01aa2ea09b`（T17:10:55）→ `…20260726-012` RETURN → v4.7 `d3c6e4270a`（T17:15:18）→ **`…20260726-013` RETURN → 本 v4.8**。
 ⚠ **時刻はすべて commit の author 時刻**（`git log --date=iso-strict` 実測）。⛔ 丸めた表記（`16:0x` 等）は撤回。
 **scope/gate:** 設計側のみ。⛔ 権限追加なし・gate/status flip なし・実装 GO でない・RUN 要求なし。**期限:** なし。
 
@@ -26,6 +26,12 @@
 
 ---
 
+### ⭐ v4.8 で閉じた 1 件（RETURN-013・私の records 欠陥）
+
+| # | 指摘 | 私の処置 |
+|---|---|---|
+| **R1** | **routing artifact の R3 行**に「**同 blob** は … 修正済」が **live で残存**（spec header は C2 で訂正済） | ✅ 当該 1 行を **RETRACT し「同 file/path」へ訂正**。⚠⚠ **見落としの型**: C2 を **spec header の 1 箇所だけ**直し、**同一表現が自分の routing 側にも在ることを確認しなかった**。⇒ **以後、型の訂正は「その表現を全 artifact で grep してから閉じる」**（今回 `grep -n "同 blob"` で 2 件在ることを実測）。⛔ 非原因側（C2/spec・class-B HOLD・authority/gate）は**変更していない** |
+
 ### ⭐ v4.7 で閉じた 2 件（RETURN-012・いずれも私の records 欠陥）
 
 | # | 指摘 | 私の処置 |
@@ -39,7 +45,7 @@
 |---|---|---|
 | **R1**（私の原因） | routing `:66` の版 chain が **v4.4 `38b08c0131` を欠落**し、`:7` と実 history（`1ce`→`38b`→`9d6`）に矛盾 | ✅ `38b08c0131` を chain に復元。**`:7` の correction chain が正**と明記 |
 | **R2**（後発 authority の fold） | design `:133`/`:139`・spec `:178` の「**p5/Rs の court**」が **p5 correction `fe80839219` §3 で stale**（**Rs が自らの court であることを撤回**） | ✅ **p11 が p5 の artifact を直読**して fold: **(A) success 述語の測定面 = p5**（`/reward-design` + `/pre-check`）／**(B)(C) `GRASP_Z`/`PUSH_Z`/`EE_TO_FINGERTIP` 自体 = ⛔UNCONFIRMED / HOLD**（候補 p5 / p17 / p11 / p16）。⛔**帰属を捏造せず、私は自分を owner とも他者とも書かない**。✅ 非 blocking（H-4 は 3 参照点ゆえ再測定不要） |
-| **R3**（私の原因・records） | spec `:1` の「更新 16:08:16」/ `:3` の landing `0f373…` が **current-update と読める** が、同 blob は `fe22276f2c` / `9d6aed738d` で修正済 | ✅ `0f373…` を **v1.7 の *initial* semantic landing** と限定し、後続 2 commit を明記。⭐**現 pin は自己参照では書けない**ため、**外部 routing 提出物の申告 3 SHA を正**とし、**推測時刻を書かない**と明記 |
+| **R3**（私の原因・records） | spec `:1` の「更新 16:08:16」/ `:3` の landing `0f373…` が **current-update と読める** が、**同 file/path** は `fe22276f2c` / `9d6aed738d` で修正されている（⚠⚠ **本セル自体の RETRACT・RETURN-013 受理**: v4.6/v4.7 の本行は「**同 blob** は…修正済」と書いていた。**blob は immutable ゆえ型として FALSE** — 修正のたびに別 blob が生成され、同じであり続けるのは **path**。⚠ C2 で spec header は訂正したが **本 routing 行の同一表現を見落とした** ⇒ ここで訂正） | ✅ `0f373…` を **v1.7 の *initial* semantic landing** と限定し、後続 2 commit を明記。⭐**現 pin は自己参照では書けない**ため、**外部 routing 提出物の申告 3 SHA を正**とし、**推測時刻を書かない**と明記 |
 
 ⚠ **class B（reset 再配置）** = p4 `f9e10ecc8d` が別 RETURN 中 ⇒ **HOLD / 無仮定を維持**（私は自力で確定しない）。
 
