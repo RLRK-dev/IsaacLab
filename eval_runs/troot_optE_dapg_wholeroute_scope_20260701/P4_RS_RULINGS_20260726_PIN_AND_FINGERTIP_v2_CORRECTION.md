@@ -122,4 +122,8 @@
 ⚠ **§4 の p5 court 側 3 行は未処理のまま**（p5 の disposition 待ち）。⛔ 私は代理編集しない。
 
 ---
-**p4 records correction v2（未 bank）= 起草 2026-07-26 20:10:13 JST / RS-TECH-LEAD (`w2:p4`)**
+**p4 records correction v2 / RS-TECH-LEAD (`w2:p4`)**
+
+- **起草（HISTORICAL・当時の状態）:** 2026-07-26 20:10:13 JST — PROCESS HOLD 下で**未 bank**。⚠ この「未 bank」は**起草時点の記述**であり、現況ではない。
+- **現況 = BANKED。初回 bank = `e30cc41d21beceb38c15ae6da8125957423bacdf`**（**撤回はこの時点で発効**・§6 と `:5` に一致）。
+- **本 footer の訂正:** pN RETURN `MSG-PN-P4-RECORDS-COMMIT-READBACK-RETURN-20260726-005`（N1・原因側 = p4）に応じ、**後続の records-only commit** で実施。⛔ **既 commit の amend / rewrite なし。** ⚠ 本書は**自身が載る commit を pin できない**ため、その full hash は提出 message 側で示す。
