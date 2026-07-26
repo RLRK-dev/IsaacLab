@@ -64,7 +64,7 @@ Personal defaults と汎用ワークフロー (Modes / Scope boundaries / Output
 **制御API制約（違反はrs承認なしに不可）:**
 - **IK: DifferentialIKController のみ使用。JT IK（自前実装）は廃止済み**
 - **`write_joint_position_to_sim` 全面禁止**（arm j0-j6 も finger j7/j8 も）
-- **`write_joint_state_to_sim` — 制御ループ中は禁止（物理破壊防止）。例外: オフラインreplay（replay_for_video.py等、制御ループ外の事後可視化）は許可。reset直後の初期化（episode開始時1回）も許可**
+- **`write_joint_state_to_sim` — 制御ループ中は禁止（物理破壊防止）。例外: オフラインreplay（replay_for_video.py等、制御ループ外の事後可視化）は許可。reset直後の初期化（episode開始時1回）は「関節状態の seed に限り」許可（body 状態の直接書込は不可 — body は `eval_fk`/`mj_forward` で関節から従属させる）。⛔腕を姿勢へ書き込むことは不可 — 腕の開始姿勢は PD の実移動で到達する。ケーブルの reset 再 seed は対象外・現行のまま。〔根拠 = p5 banked charter `charter_v231.md:351`/`:352`/`:360`/`:361`（reset-init 例外 = 失効・cable は対象外）＋ `probe/pd1-arm-pd` で実装済（arm reset 書込 0・サーボ目標のみ）。Rs 承認 2026-07-26〕**
 - **finger制御: `set_joint_velocity_target` のみ許可**（open/close両方。符号で方向指定）
 - **arm制御: `set_joint_position_target` + `write_data_to_sim` のみ許可**
 - **制御方式の変更はrs承認なしに行わない**
