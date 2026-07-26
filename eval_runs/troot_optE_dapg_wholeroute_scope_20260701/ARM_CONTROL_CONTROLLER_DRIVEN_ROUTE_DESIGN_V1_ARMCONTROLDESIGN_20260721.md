@@ -281,10 +281,17 @@ p0 逐語の照会: 「A full grid is not tractable — **5 samples on each of 1
 ### 5.5.2 ⏸ **HOLD → 解消**（landing commit `0f373bedbd` = 2026-07-26T16:08:16+0900・pN の B3 を受理）— H-4 の ABSENT は解消したが「仕様どおり」とは言えない
 
 ⭐ **実装は SSOT index で行われた**（p0 逐語 `resolution` = 「**SSOT index (stride 14, EE +5, pads +9/+13) — NOT name search**」）。
-⛔⛔ **しかし私の「仕様どおり・手戻り要求なし」は撤回し HOLD にする。理由は私の spec 側にある**:
-- **spec `…HARNESS_SPEC…:154` / `:168` は今も逐語「`body_label` から発見すること」**＝ **名前検索**を指定している。⇒ **実装（index 方式）と支配 spec が矛盾**しており、**spec を index 方式へ改訂していないのは私**。
-- p0 の R8 は併せて **harness が `GRIPPER_PAD_BODY_IDX` を import せず literal `(9, 13)` を hardcode**（`arm_control_measurement_harness.py:928`）と自己申告 ⇒ SSOT 定数が変われば黙って乖離する。
-⇒ ⭐ **cause-side = 私**（spec 本文の未改訂）。⛔ **ただし本 doc では spec を改訂しない** — spec 自身が `:237` で「**確定するまで本 spec を実装 gate として使わない**」と述べており、かつ H-3.1 の authority 裁定（`d724031b77`）を受けて**私が作業面へ指示を追加する行為そのものが係争中**。⇒ **p4 の指示を待って改訂する。**
+
+**⭐ 現在の状態（2026-07-26T16:1x 時点・pN の B2 を受理して同期）**
+| 項目 | 現況 |
+|---|---|
+| spec の pad body 導出規則 | ✅ **訂正済 = v1.7**（`…HARNESS_SPEC…:156` / `:175`）。**(i) SSOT 定数からの index 解決 ／ (ii) `shape_label` の親 body** の 2 規則・採った方を出力に明記。⛔ **`body_label` を "pad" で検索しない**と明記 |
+| J-b の spec 適合 | ✅ **spec と実装の方法矛盾は解消**（実装の index 方式が v1.7 の (i) に一致） |
+| harness の literal `(9,13)` | ⏸ **未認可のまま carry**（`arm_control_measurement_harness.py:928`・p0 R8 の自己申告）。⛔ **実装修正は私の court でなく、私は要求しない**（p4 court） |
+| H-4 全体 | ⏸ **HOLD 継続**（pN 指示・私からの「仕様どおり／手戻り不要」判定は撤回したまま） |
+
+📎 **HISTORICAL（2026-07-26T16:08:16 以前の状態・根拠には用いない）**: 当時 spec `:154`/`:168` は「`body_label` から発見すること」のままで、実装（index 方式）と矛盾していた。**cause-side = 私**（spec 未改訂）。⇒ **p4 の R8 裁定 `442f58678359bf85` が spec owner = 私へ RETURN したことで解錠され、`0f373bedbd` で訂正した。**
+⚠ **裏取り（私の実測）**: `body_label` 70 件中 "pad" **0 件** ／ `shape_label` 107 件中 **16 件** ⇒ 旧指定は**現モデルで実行不能**だった。⇒ **p0 が `wrist_3` で代用せず ABSENT と報告した判断は正しい。**
 
 ### 5.5.2（原記録）⭐ H-4 が ABSENT だった件への指定（参照点の定義は設計側）
 
