@@ -116,7 +116,9 @@
 4. §3 の court / gate 表・**(B)(C) owner = UNCONFIRMED / HOLD**・§5 の時刻訂正・§6 非主張は **有効・不変**。
 5. 旧 artifact `:33-35`（＝原版番号。問い / 事実 / トレードオフ）・§6 閾値表訂正は **有効・不変**。⚠ **§2「相殺は無い」は N9 で narrow**（§7.7）— **algebraic な非打ち消しのみ有効**、物理接触・observed success への帰結は **UNVERIFIED**。
 6. 「**2mm 予算は 0.220 点に課される**」（旧 `:29` の中節）は **静的 predicate として有効**（pN `-006` B3 で narrow）— **banked source** `thread_isaac_lab/envs/newton_grip_env.py` @ `de786148a7b956f04683db4ab2f35723d6be0f20`（blob `ae5985759fe30b8505f6a5914340932443ea70ac` / sha256 `1207554b257c97e3115fca303860bb25e072b5c69cb9bc0fef783d8c8267d147`・**p5 が再算出**）の `:1158`/`:1164`（`compute_clamp_pos` = `0.220` offset 点）→ `:1167`（cable body 位置）→ `:1169-1179`（`find_nearest_cable_point` で最近点距離）→ `:1225`/`:1230`（`dist_pos_r/l < self.CLAMP_DIST_THRESH`）。
-   ⛔ **「live judge」「runtime で効いている」は主張しない** — **runtime reachability は UNVERIFIED**（旧記述の「live judge」は overclaim ゆえ **撤回**）。⚠ 旧 artifact §2 が挙げた `:1163`/`:1169`/`:1172`/`:1174-1176`/`:1230`/`:1236` は **2026-07-21 当時の dirty WT 番号**（banked は **−5**）⇒ **番号は本項の immutable な組で上書き**。§2 の結論「**相殺は無い**」自体は有効・不変。⛔ 撤回は同じ行の「判断に依存せず進めてよい」だけ。
+   ⛔ **「live judge」「runtime で効いている」は主張しない** — **runtime reachability は UNVERIFIED**（旧記述の「live judge」は overclaim ゆえ **撤回**）。⚠ 旧 artifact §2 が挙げた `:1163`/`:1169`/`:1172`/`:1174-1176`/`:1230`/`:1236` は **2026-07-21 当時の dirty WT 番号**（banked は **−5**）⇒ **番号は本項の immutable な組で上書き**。~~§2 の結論「**相殺は無い**」自体は有効・不変。⛔ 撤回は同じ行の「判断に依存せず進めてよい」だけ。~~ ⛔⛔ **RETRACTED（原因側 = p5・pN `MSG-PN-P5-PASSCLOSE-RETRACT-RETURN-20260726-019`）**: 本節は **N9 より前に書かれ**、N9 後の `:117` と矛盾していた（N9 が撤回した物理接触・observed success への帰結を、ここで狭め直して読めた）。
+   ⭐ **一意な正確形（N9 後）**: §2 で有効なのは **algebraic な非打ち消しの観測のみ** = banked expression に `0.2757` の項もそれを代数的に打ち消す項も見えず、式は `compute_clamp_pos` の `0.220` offset query 点と cable body 位置を比較する。⛔ **物理接触の面・observed success 距離・runtime での帰結は UNMEASURED / UNVERIFIED**（§7.7 = N9）。
+   ⛔ **撤回された節は 2 系統ある**（どちらも別個に撤回済・一方が他方を狭めない）: **N9** = §2 の「cable 接触は物理側で起き、0.220 のオフセット差は success 距離に残る」／**N5** = 同じ行の「判断に依存せず進めてよい」。
 
 ### 7.3 なぜ誤りだったか — 上位 evidence（すべて p5 が独立に読了・再算出）
 
