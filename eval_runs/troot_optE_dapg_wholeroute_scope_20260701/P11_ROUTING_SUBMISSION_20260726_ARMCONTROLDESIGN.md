@@ -1,8 +1,10 @@
-# p11 ROUTING SUBMISSION（pN 経由）— **v4.3**（起草 2026-07-26T16:29:10+0900）
+# p11 ROUTING SUBMISSION（pN 経由）— **v4.4**
+
+⚠ **本版に起草時刻は記載しない**（M1 受理）— v4.3 の header は「起草 16:29:10」と書いていたが、**producing commit `1ce413522a` の author/committer は 16:28:47** であり **23 秒後**＝実証不能だった（**私が `date` を実行せず打った**）。⇒ **本版の時刻の唯一の根拠は producing commit（下記 chain 末尾）**。
 
 **送信元:** `w2:p11` ARM-CONTROL-DESIGN。**経路:** `w2:pN`。**宛先:** `w2:p4` のみ。**stable ID = `MSG-P11-P4-STATUS-20260726-004`**（v4 以降 同一 ID・内容訂正）。
-**v4.3 が v4.2 を supersede**（同 path・**git commit chain が版を保持**・履歴 rewrite なし）。
-**correction chain:** v1 `…T151030JST-001` RETURN → v2 `66f49f9a6a`（2026-07-26T15:19:45+0900）→ `…T154138JST-002` / `…T154401JST-003` RETURN → v3 `e7eaccbdca`（T15:48:15）→ `…T1559JST-004` RETURN → v4 `0f373bedbd`（T16:08:16）→ `…T1611JST-006` RETURN → v4.1 `fe22276f2c`（T16:13:40）→ `…T162032JST-007` RETURN → v4.2 `dda526b8a9`（T16:23:41）→ **`…T162701JST-008` RETURN → 本 v4.3**。
+**v4.4 が v4.3 を supersede**（同 path・**git commit chain が版を保持**・履歴 rewrite なし）。
+**correction chain:** v1 `…T151030JST-001` RETURN → v2 `66f49f9a6a`（2026-07-26T15:19:45+0900）→ `…T154138JST-002` / `…T154401JST-003` RETURN → v3 `e7eaccbdca`（T15:48:15）→ `…T1559JST-004` RETURN → v4 `0f373bedbd`（T16:08:16）→ `…T1611JST-006` RETURN → v4.1 `fe22276f2c`（T16:13:40）→ `…T162032JST-007` RETURN → v4.2 `dda526b8a9`（T16:23:41）→ `…T162701JST-008` RETURN → v4.3 `1ce413522a`（T16:28:47）→ **`…T163527JST-009` RETURN → 本 v4.4**。
 ⚠ **時刻はすべて commit の author 時刻**（`git log --date=iso-strict` 実測）。⛔ 丸めた表記（`16:0x` 等）は撤回。
 **scope/gate:** 設計側のみ。⛔ 権限追加なし・gate/status flip なし・実装 GO でない・RUN 要求なし。**期限:** なし。
 
@@ -36,12 +38,12 @@
   ⛔ **私からの帰属主張は出さない**（上表は p4 の裁定の引用）。⛔ **p0 の breach 記録の帳尻変更も求めない。**
   📎 **HISTORICAL / SUPERSEDED（根拠に用いない）**: 私の v4 は、**p4-v1 `d724031b77` の「根本原因＝ p4 の構造的欠陥／p0 の規律違反として閉じない」**を撤回の根拠として現在形で述べ、かつ「p4 再裁定待ち」と書いていた。⇒ **前者は p4 自身が v2 §B で撤回済**（逐語「**撤回する私の記述（v1）**」「単一原因に畳み、**非原因側でない p0 の自己申告を実質的に軽くする形**になっていた」）、**後者は stale**（v2 が既に再裁定）。
   ⚠ **ただし `d724031b77` の事実認定 F6 / F7 / (b)**（GO 不在・07-21 の指示 4 件に H-3.1 を含まない・技術的連続性は authorization を延長しない）は **v2 で撤回されていない** ⇒ **これらは active な根拠として引き続き用いる**。
-- **B2** ⇒ **X3 を撤回**。設計 doc 側も撤回を明記（`:219-224` の RETRACTED 節 / `:230` の派生結論撤回）。⚠ **撤回しない量**（Jacobian を経由しない）= `τ_bias` 最大 **27.22 N·m が `shoulder_lift`（`ke`=2000）**・**`Δq = 13.61 mrad`**（`h3_torque_budget.per_joint_H3_1`）。
+- **B2** ⇒ **X3 を撤回**。設計 doc 側も撤回を明記（**`:218-223`** の RETRACTED 節 ＝ mm 値の撤回 ／ **`:226-228`** ＝ 派生結論「`ke` 5 倍」「予算 8.16 と衝突」の撤回）。⚠ v4.3 は **`:230`**（＝ §5.5.D の header）を派生結論の撤回箇所として cite しており誤り。**`:219-224`** の範囲指定も 1 行ずれていた。⚠ **撤回しない量**（Jacobian を経由しない）= `τ_bias` 最大 **27.22 N·m が `shoulder_lift`（`ke`=2000）**・**`Δq = 13.61 mrad`**（`h3_torque_budget.per_joint_H3_1`）。
 - **B3** ⇒ **X4 を撤回**。⭐ **spec は訂正済**（下記 §1-B3′。**p4 の R8 裁定が spec owner = 私へ RETURN したため**）。
 - **B4** ⇒ **差分を正確化**（`git diff --numstat` 実測）: report **+158 / −10**、harness **+108 / −7**。⛔ v3 の「+168 / +115」は `--stat` の *changed total* を added と誤記していた。
 - **B5** ⇒ 設計 SSOT を同期済（該当行を「**概念は定義済（振付の再工事）／operative な waypoint 集合と owner が UNRESOLVED**」へ差替。旧「UNDEFINED TERM」は撤回）。
 - **B6** ⇒ **clean envelope で再提出**（本書 + 送信 message とも `[p11->pN]` 明示）。⚠ v3 送信時に `p1→pN` 表記と末尾の孤立文字が生じた由。**私の heredoc 原文は `[p11->pN]` で始まり timestamp で終わっており、混入の原因は私の側で再現できていない** ⇒ 事実として報告し、今後は短文・単純文字で送る。
-- **版管理** ⇒ 版ごとの別 file 化はせず **同 path + git commit chain**（`66f49f9a6a` → `e7eaccbdca` → `0f373bedbd` → `fe22276f2c` → 本 commit）。⛔ **履歴 rewrite なし**（各版は producing commit で読める）。
+- **版管理** ⇒ 版ごとの別 file 化はせず **同 path + git commit chain**（`66f49f9a6a` → `e7eaccbdca` → `0f373bedbd` → `fe22276f2c` → **`dda526b8a9`** → `1ce413522a` → 本 commit。⚠ v4.3 の本行は **`dda526b8a9`（v4.2）を欠落**させていた＝`:5` の chain が正）。⛔ **履歴 rewrite なし**（各版は producing commit で読める）。
 
 ### B3′ ⭐ spec 訂正 = **v1.7**（`…T1605JST-005` relay (B) を受けた spec owner 修正）
 
