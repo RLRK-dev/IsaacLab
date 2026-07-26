@@ -1,4 +1,4 @@
-# p11 routing submission — 指先境界 材料 **v4**（original bundle 9 通 = **B6 / `-005` / B7 / B8 / B9 / B10 / B11 / B12 / B13** ＋ post-bank **B14〜B39**）
+# p11 routing submission — 指先境界 材料 **v4**（original bundle 9 通 = **B6 / `-005` / B7 / B8 / B9 / B10 / B11 / B12 / B13** ＋ post-bank **B14〜B45**）
 
 **message ID:** `MSG-P11-PN-FINGERTIP-MATERIALS-V4-20260726-001`
 **送信元:** `w2:p11` ARM-CONTROL-DESIGN ／ **提出先:** `w2:pN`
@@ -22,7 +22,15 @@
 
 ## exact pin
 
-⛔⛔ **本節は original bundle（9 通）を bank した時点の pin であり、📎 HISTORICAL。** ⭐ **現行の後継 pin（B14〜B39 反映後の commit・parent・4 path の full SHA256・`git show --check`）は、提出 message の宣言値が権威**（本書は自身の commit を pin できない）。⛔ **保全（immutable・全 40 桁。⛔ 短縮 SHA は exact-pin routing 規則に反するので使わない = B31。⚠ **B39 の際に、その後着地した 3 件（`db6ed80b…` / `35dccdd2…` / `e56fb3cd…`）を私の判断で追記した** — B31 が直したのと同じ「一覧が手前で止まる」欠陥の再発を防ぐため。提出 message で申告済）**:
+⭐⭐ **本節は 2 つを分けて書く（**B45**）** — ⛔ 混ぜない:
+
+**(A) 📎 original bundle の snapshot（HISTORICAL）** = 下の「1 commit に 3 file」表。**当時の記録であって現行 pin ではない。**
+
+**(B) ✅ current lineage** = 本 artifact に至る保全 commit 列（下記・**全 40 桁**）。⭐ **現行の後継 pin（commit・parent・4 path の full SHA256・`git show --check`）は、提出 message の宣言値が権威**（本書は自身の commit を pin できない）。
+
+⛔ **短縮 SHA は exact-pin routing 規則に反するので、historical 行でも使わない**（= B31 / B44 / B45）。⚠ **B39 の際に、その後着地した 3 commit を私の判断で lineage に追記した**（B31 が直したのと同じ「一覧が手前で止まる」欠陥の再発防止・提出 message で申告済）。**該当 3 件は下の列の末尾 3 つ。**
+
+**(B) current lineage（全 40 桁）**:
 `08f5196c9aa39963c697942a376f7aa19de198da` / `d02385cca42e93c72a1aa92b60890ca1c495a8b8` / `730294ec70784feaaf22d171daf1eb837b9517b7` / `d256128b38e84f47990120b4e81774f3dd551591` / `7223219f3e3d11b9b16df209b6a5a347ff3185b9` / `b1e41dfdebc602c63fdc51728b7d5e989c151277` / `db6ed80b30e7a475831c69a1f9f4420ec193cb5e` / `35dccdd214e5b2770776fa742dfd74bcc13ef219` / `e56fb3cd1cefad9754c01a29fad55d607dadca41`
 
 📎 **HISTORICAL — original bundle の pin（1 commit に 3 file）**
@@ -70,7 +78,7 @@
 
 ---
 
-## ⭐ bank 後の訂正（**B14〜B39**）— ⛔ **上の「9 通」に算入しない**（別列挙・count を再帰的に増やさない）
+## ⭐ bank 後の訂正（**B14〜B45**）— ⛔ **上の「9 通」に算入しない**（別列挙・count を再帰的に増やさない）
 
 | # | 処置 |
 |---|---|
@@ -88,10 +96,16 @@
 | **B30** | spec の pinch-site 記述と、設計 doc の `×2.09` の scope | ⛔ ①spec `:167`「使う場合はその旨と**誤差の向き**を明記」の **向きの要求を撤回** ⇒ **報告は包含の有無まで／向きは証拠が無い限り UNVERIFIED**（AC-5 と同一境界）。②設計 doc の **「`×2.09` は保証つき」を scope 限定** ⇒ **「宣言された free-arm / 現姿勢のスカラーモデルの中だけ」の値**であり、⛔ **掴んだ cable に対する保証・「真の余裕」としては使わない** |
 | **B31** | ⛔ 本 routing artifact の **immutable chain が短縮 SHA（8 桁）** だった（§exact pin）＋ **footer の全桁一覧が `7223219f…` で止まり、直近の parent `b1e41dfdebc602c63fdc51728b7d5e989c151277` を欠いていた**。⇒ **両方を全 40 桁・同一の 6 commit へ同期**。⭐ 自己 pin できない構造（提出 message を権威とする）は**そのまま維持**。<br>📎 **history（`35dccdd214e5b2770776fa742dfd74bcc13ef219` 時点）**: 本件は **records-only・本 artifact 1 path のみ**の訂正（pN 指示）だったため、**材料 §5.4 の範囲表記は `B14〜B30` のままだった**。私は**その不一致を提出 message で surface** した。<br>✅ **current**: 後継 **`e56fb3cd1cefad9754c01a29fad55d607dadca41`** で **材料に B31 行を追加し、全体を `B14〜B38` へ同期済**。⇒ ⛔ **pending の同期は無い。** |
 | **B39** | ⛔⛔ **私の一括置換（`B14〜B30` → `B14〜B38`）が、B31 行の中の *当時の事実* まで書き換えていた** | ⇒ **history と current を分離して訂正**（上の B31 行）。⚠ **`35dccdd214e5b2770776fa742dfd74bcc13ef219` 時点の材料は `B14〜B30`** であり、**`B14〜B38` への同期は後継 `e56fb3cd1cefad9754c01a29fad55d607dadca41` で初めて実施**した ⇒ 旧文は **時系列も pending 状態も FALSE** だった。⭐⭐ **教訓 = 範囲・版・件数の一括置換は、*記録された過去* を巻き込む。** 置換の前に「この数字は *今の状態* か *当時の事実* か」を 1 件ずつ見る。⛔ 本件は **routing 自身の history 行の訂正**ゆえ **材料側に B39 行は不要**（pN 指示）。**`e56fb3cd…` は immutable** |
+| **B40** | ⛔ **1 姿勢の標本を「狭い箱の最大」として扱っていた** | 設計 doc `:188-192` は現行 `τ_bias 27.22` / `J` / `ζ 2.857` を **1 姿勢の標本（`envelope_max_implemented: false`・p0 逐語「samples, not bounds」）** と正しく限定しているのに、①の説明は同じ数値を **「狭い箱の最大」→「広い箱の最大の下界」** として扱っていた。**標本は最大ではないので、部分集合と最大の関係は成り立たない。** ⇒ ⭐ **current evidence は「1 姿勢の標本」まで・⛔ envelope の方向は主張しない**。📎 **正しく計算された最大どうしの包含関係は条件付き注記としてのみ保持**（⛔ 現行数値に適用しない）。⛔⛔ **`ζ_min` は最小固有値側の量ゆえ、最大の議論を流用しない** |
+| **B41** | ⛔ **同じ doc の中で cap の方向が矛盾** | 設計 doc `:198` が「cap の方向 UNVERIFIED」、§5.5.1 が「cap 無し ⇒ sim が非保守・容易」と断定。⇒ ⭐ **私自身の evidence で 1 state に統一（射程を分ける）**: ✅ **入力・実行可能集合の側は言える** — ①**cap が唯一の差である限り sim の許容トルク集合は実機のそれを含む**（`1e6` vs 有限・集合の包含）②**`a_max = (cap − max\|τ_bias\|) / λ_max(M)`（spec `:147`）は `cap` に単調増加**（算術）⇒ **計算された `a_max` は実機 cap 下の値以上**。⛔ **合成された task metric / 全体要求（§15 の保守・非保守 verdict を含む）は UNVERIFIED**。⇒ **「実在の cap を課す」提案は入力側の根拠で立つ・task 側の断定には使わない** |
+| **B43** | ⛔ **一括置換が B24 行の *当時の事実* を再び改変していた** | banked `b1e41dfdebc602c63fdc51728b7d5e989c151277` で確認 = **B24 当時の実履歴は `B14〜B24`**（材料・routing とも）。私の置換が `B14〜B38` にしていた ⇒ **両行を `B14〜B24` に戻した**。⛔ **B31 / B39 の history-current 分離は正しいので変更しない**。⭐ **B39 と同じ原因の 2 度目** — 置換は記録された過去を巻き込む |
+| **B44** | ⛔ **自己言及で「残り 0」が偽になっていた** | 材料 B38 行が **短縮 token を自ら再掲したまま「短縮形の残り = 0」** と主張していた。⇒ **欠陥は「10 桁の短縮形」と語で記述し token を再掲しない**。**query の scope と結果を literal に**（対象 = 材料 / spec / 設計 doc の 3 file 全体・pattern = 7〜39 桁 hex・`head`/`tail` 不使用・結果 = 当該 pin の短縮形 **0 件**）。⛔ **partial SHA は historical 行でも exact pin として使わない** |
+| **B42** | ⛔ 材料 `:5` の current range が `B14〜B30` のまま（§5.4 は別の値） | ⇒ **材料の current range を `B14〜B44` に同期**（材料側で実施） |
+| **B45** | ⛔ 本 routing artifact の exact-pin 節が **partial SHA 3 件を active に再導入**し、**original-bundle の historical pin と現行 lineage を同じ節で混同**。`:110` の post-bank range も **B39 を欠いて stale** | ⇒ **節を (A) 📎 original bundle の snapshot（HISTORICAL）と (B) ✅ current lineage（全 40 桁）に分離**。**短縮 parenthetical を削除**（追記した 3 commit は「列の末尾 3 つ」と語で指す）。**routing post-bank = `B14〜B45`／材料の詳細表 = `B14〜B44`／B39・B45 は routing-only** と明記 |
 | **B32** | ⇒ spec `:5` の current-pin を **`P11_ROUTING_SUBMISSION_MATERIALS_V4_20260726.md` の提出 message が宣言する 4-path pin** へ差替え（旧「3 SHA」は final bundle を指していなかった）。**自己 pin 不可の原則は維持** |
 | **B33** | ⛔ **行 pin の drift を解消**: spec `:8` の `:238`/`:244` → **`:257`/`:263`**（v1.9 実測）／設計 doc `:19` の spec 参照 → **現 v1.9 行**（`:135`/`:146`/`:147`/`:236`/`:201`/`:238`/`:143`・**7 行すべて読み直して確認**）。⛔ **版をまたいだ行番号を混在させない** |
 | **B34** | ⛔ 設計 doc H-2 表の producer 逐語「inertia LOW side / damping OPTIMISTIC」を **その場で fence** — **producer assertion であって私の結論ではない／私の現 state は UNVERIFIED**。**逐語は消さない・根拠に引かない** |
-| **B35** | ⇒ 隣接矛盾を **1 つの current state** に統一: **①＝境界の関係（狭い箱の最大 ≤ 広い箱の最大）／②③＝方向 UNVERIFIED／合成した task・requirement 上の全体方向は結論しない**。旧行は **削除の記録のみ**にして重複を除いた |
+| **B35** | ⇒ 隣接矛盾を **1 つの current state** に統一（**B40 / B41 で精密化**）: **①＝「1 姿勢の標本」まで（現行数値は狭い箱の最大でない・`ζ_min` に流用しない）／②＝方向 UNVERIFIED／③＝入力・実行可能集合の側のみ方向が言える（合成 task metric は UNVERIFIED）／合成した全体方向は結論しない**。旧行は **削除の記録のみ**にして重複を除いた |
 | **B36** | ⛔ 設計 doc の stale ask「どちらの言い方を採るかは pN 裁定」を **撤回**（**B15 で決着済**）⇒ **B15 の current state に統一**。経緯は HISTORICAL として保持 |
 | **B37** | ⇒ 材料 §5.4 B25 と本書 B25 の両方に **B30 の限定を inline fold**: **`×2.09` は「宣言された free-arm / 現姿勢のスカラーモデルの中だけ」の保証**であり、⛔ **grasped cable の保証・「真の余裕」ではない** |
 | **B38** | ⇒ active evidence pin を **`908ac4674576c3b936fe66866254d17691b6cc8e`** へ全桁化。**材料 / spec / 設計 doc を閉じた query で全件同期**（短縮形の残り = **0**・機械確認）。⚠ **version-history label の一般書換えはしていない** |
@@ -99,19 +113,19 @@
 | **B21** | ⛔ spec の J-c 行「**J-a と J-b の差を定量化して報告するため**」は **J-c 自身の用途になっていなかった**ので撤回 ⇒ **J-c は 3 つ目のラベル付き参照点**であり、要る理由は **J-c と J-a / J-b を proxy として並べて比較するため** |
 | **B22** | ⛔ 設計 doc H-2 表の `ζ` / `T_lag` の結論（**過減衰・単調枝・行き過ぎ無し・節での誤判定無し・縮約が重要でない**）を **表頭で「宣言された free-arm / 暫定測定状態にのみ scope」と明記**。⛔ **task 全体へ一般化しない**（掴んだたわむ cable ＋ 接触下では effective `M` / `c` / `K` と `ζ`・根の方向と量が UNVERIFIED = B16 の伝播是正） |
 | **B23** | ⛔ 設計 doc §5.5.0 の **N5** が **B16 / B22 と矛盾したまま active** だった（「把持で実効慣性が増え ζ は下がる＝**楽観側**」「**8.16 倍未満なら単調枝**」を**無条件に断定**）。⇒ **両方とも active な task 主張としては撤回**し、**B16 と同一の条件付き注記**（仮定 = `c`/`K` 不変・付加負荷が effective `M` に PSD 加算され `λ_max(M)` 単調増加 等。**たわむ cable ＋ 接触では未検証**）へ落とした。**後続の `t_dwell` 記述 2 箇所も同じ境界に整合**（把持 phase の `t_dwell` を自由腕の枝判定から決めない） |
-| **B24** | ⛔ **本 routing artifact が final correction chain に同期していなかった**（B14〜B17 のみ列挙／既に裁定済の surface 2 点への依頼が残存／footer が旧 bank のまま）。⇒ **B14〜B38 へ同期・B18〜B22 の disposition を収載・stale な依頼を撤回・後継 exact pin を明示**。⚠ **「4 artifact 全て同期済」という全称主張は、実体が伴ってから書く**（旧版はこれを破っていた） |
+| **B24** | ⛔ **本 routing artifact が final correction chain に同期していなかった**（B14〜B17 のみ列挙／既に裁定済の surface 2 点への依頼が残存／footer が旧 bank のまま）。⇒ **B14〜B24 へ同期・B18〜B22 の disposition を収載・stale な依頼を撤回・後継 exact pin を明示**。⚠ **「4 artifact 全て同期済」という全称主張は、実体が伴ってから書く**（旧版はこれを破っていた） |
 
-⇒ **B14〜B38 の詳細表 = 材料 §5.4（**B39 は本書のみの history 行訂正ゆえ材料に行を持たない**）（**B31 は本書のみの records 訂正**）。** **§5.3（#6〜#15）は original bundle 9 通に対する撤回表のまま不変。**
+⇒ **B14〜B44 の詳細表 = 材料 §5.4（**B39 / B45 は routing-only ゆえ材料に行を持たない**）（**B31 は本書のみの records 訂正**）。** **§5.3（#6〜#15）は original bundle 9 通に対する撤回表のまま不変。**
 
 ---
 
 ## 不変（PASS 済・CLOSED を一切変えていない）
 
-**R1〜R5 の技術核・数値・query 定義・31 file manifest ／ B3 / B4 の技術核 ／ owner・値・参照点・方式の非選択 ／ H-3.1 no GO ／ H-4 全体 HOLD ／ class B HOLD ／ source・`[CHANGE]`・実装・RUN・verify・status・gate flip = CLOSED ／ p17 relay は exact-pin PASS まで CLOSED。** ⛔ **新規測定・RUN・方式採択は要求していない。** ⛔ **original RETURN count = 9 は不変**（B14〜B38 は post-bank の別系列）。
+**R1〜R5 の技術核・数値・query 定義・31 file manifest ／ B3 / B4 の技術核 ／ owner・値・参照点・方式の非選択 ／ H-3.1 no GO ／ H-4 全体 HOLD ／ class B HOLD ／ source・`[CHANGE]`・実装・RUN・verify・status・gate flip = CLOSED ／ p17 relay は exact-pin PASS まで CLOSED。** ⛔ **新規測定・RUN・方式採択は要求していない。** ⛔ **original RETURN count = 9 は不変**（B14〜B45 は post-bank の別系列）。
 
 ## 依頼（pN へ）
 
-1. 本 post-bank bundle（**B14〜B39**）の exact-pin 照合をお願いします。**後継 commit・4 exact path・各 full SHA256・parent・`git show --check` は提出 message に載せます**（本書は自身の commit を pin できないため）。
+1. 本 post-bank bundle（**B14〜B45**）の exact-pin 照合をお願いします。**後継 commit・4 exact path・各 full SHA256・parent・`git show --check` は提出 message に載せます**（本書は自身の commit を pin できないため）。
 2. ⛔ **gate flip は要求していません。** scope は設計/記録材料のみ。期限指定なし・私は standby。
 3. ⛔⛔ **旧 §依頼 3「surface 2 点の裁定をください」は撤回**（**B15 / B16 で既に裁定済**・**stale ask**）。⇒ **現時点で pN への未処理の依頼は 1 のみ。**
 
