@@ -1,71 +1,211 @@
-# 腕側 consumer レビュー材料 — `GRASP_Z` / `PUSH_Z` / `EE_TO_FINGERTIP`（p11 ARM-CONTROL-DESIGN）**v2**
+# 腕側 consumer レビュー材料 — `GRASP_Z` / `PUSH_Z` / `EE_TO_FINGERTIP`（p11 ARM-CONTROL-DESIGN）**v3**
 
-**依頼:** `MSG-PN-P11-FINGERTIP-BOUNDARY-MATERIALS-20260726-001`。**訂正:** `MSG-PN-P11-FINGERTIP-MATERIALS-RETURN-20260726-001`（B1〜B4・**全て私の原因**）。
-**correction chain:** v1 `55d95a35f6b894dd54020fa0ec0eeb2ac8a89d1d`（sha256 `e561b53f49243a97…`）→ **本 v2**（v1 は git 履歴に保持・**rewrite なし**）。
+**依頼:** `MSG-PN-P11-FINGERTIP-BOUNDARY-MATERIALS-20260726-001`。
+**本 v3 が応答する RETURN:** `MSG-PN-P11-FINGERTIP-MATERIALS-V2-RETURN-20260726-003`（**R1〜R5**）。
+⚠ **`…-002` は pN 自身が全面 RETRACT 済**（pN の shell quoting により C2 payload が壊れた ＝ **cause = pN**、p11 の記録に帰責なし）。⇒ **本書は `-003` のみに応答する。** `-002` の C1〜C4 は operative でない。
+
+**⭐ R1〜R5 は 5 件とも受理する。5 件とも私の欠陥である**（争点なし）。
+
+**correction chain（履歴 rewrite なし・v1/v2 とも git 履歴に保持）:**
+
+| 版 | literal path | commit | sha256（全 64 桁） |
+|---|---|---|---|
+| **v1** | `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P11_ARM_TARGET_CONSUMER_REVIEW_20260726.md` | `55d95a35f6b894dd54020fa0ec0eeb2ac8a89d1d` | `e561b53f49243a9742279e56720dc2267d1feff1ebe23012b71ea0a077819236` |
+| **v2** | 同上（同一 path） | `1a2b63450b312bac6aa7468d60422056d40d02ab` | `09796ed5e1a4cb594d99aa69b64a2116470aa3639e3e6f090d578c0e0e111f09` |
+| **v3** | 同上（同一 path） | **本書を bank した commit**（file は自身の commit を pin できない ⇒ **routing 提出の宣言値が権威**） | 同左 |
+
+**起草時刻（`date` 実測）: 2026-07-26 17:57:07 JST。** ⚠ **権威ある時刻は本書を bank した commit の author time**（上記）。
+
 ⛔⛔ **owner を選ばない ／ 値を選ばない ／ 方式を選ばない ／ 推奨を書かない。** 分類は p5 側材料と合流後に **p17**。
-**scope:** 設計/記録材料のみ。⛔ source / `[CHANGE]` / 実装 / RUN / verify / status / gate flip は CLOSED。**H-3.1 GO 無し・H-4 全体 HOLD** も不変。
+**scope:** 設計/記録材料のみ。⛔ source / `[CHANGE]` / 実装 / RUN / verify / status / gate flip は CLOSED。**H-3.1 GO 無し・H-4 全体 HOLD・class B HOLD** も不変。
 
 ---
 
-## B1 応答 — ⭐ source closure（**citation tree を committed へ統一**）
+## R1 応答 — ⭐ `changed=[]` を撤回し、**可変な作業ツリーへの参照を全廃**する
 
-⛔⛔ **v1 の欠陥（受理）**: 「on-disk 実測」と書きながら **as-read manifest を付けず**、**行番号は dirty working tree（WT）のもの**だった。⇒ **pN の指摘は私の再測で完全に一致**（下表）。
+⛔⛔ **v2 の欠陥（受理）**: v2 §B1 は「読取前後の `git status --porcelain` が同一 ⇒ `changed=[]`」と書いた。**これは述語として成立しない** — **既に ` M`（modified）である file は、中身の byte が変わっても ` M` のまま**であり、`git status` の出力は同一になる。⇒ **その比較は「変わった／変わらない」を見分けられない。** ⛔ **`changed=[]` を撤回する。**
 
-**⭐ 本 v2 は committed tree（blob）で統一して cite する。** 理由 = **blob は immutable で第三者が再現できる**（WT は他 pane の編集で動く）。
+**⭐ v3 が採る道 = `-003` R1 の第 1 案**: **可変な作業ツリー（WT）への参照・as-read hash・bracket 主張を全廃**し、**immutable な commit 上の path だけを cite する。**
 
-### 参照した全 source の manifest（`changed=[]` bracket つき）
-- **読取前後の `git status --porcelain -- <全 path>` = 同一**（読取中に変化なし）⇒ `changed=[]`。
+- **本書の全 cite 元 = `1a2b63450b312bac6aa7468d60422056d40d02ab:<path>`**（= v2 を bank した commit。**immutable**）。
+- ⇒ 第三者は `git show 1a2b63450b312bac6aa7468d60422056d40d02ab:<path>` で**同一 byte を再現できる**。WT の状態に依存しない。
+- ⛔ **本書には WT の行番号・WT の hash・WT の clean/dirty 主張を一切書かない。**（v2 §B1 の as-read 列・taxonomy 列は**削除**。v2 は履歴に残る。）
 
-| path | taxonomy | **committed blob（cite 元）** | as_read WT sha256(16) | 行番号の差 |
-|---|---|---|---|---|
-| `thread_isaac_lab/configs/task_config.py` | **clean** | `d86380dbe186af00…` | `1a0851db9cfc2c74` | **同一** |
-| `thread_isaac_lab/envs/newton_skill_env_base.py` | **clean** | `aaf15111377ac0c0…` | `e7a67ee34c50b78f` | **同一** |
-| `thread_isaac_lab/envs/route_executor.py` | **clean** | `46f49d2722dbceda…` | `09db5a6d7e9d28e9` | **同一** |
-| `thread_isaac_lab/skills/scripted_skills.py` | **clean** | `e8faa50c30f7d65b…` | `3586a1954720f829` | **同一** |
-| `thread_isaac_lab/configs/mpc_config_grip.py` | **clean** | `6795ad3ad463940a…` | `62b20692d59d8e9f` | **同一** |
-| ⚠`thread_isaac_lab/envs/newton_grip_env.py` | **modified** | `ae5985759fe30b8505f6a5914340932443ea70ac` | `8521e96335398b64` | **異なる**（v1 は WT `:118/:147/:435-436/:751/:757/:1163/:1169`／**committed `:113/:142/:430-431/:746/:752/:1158/:1164`**） |
-| ⚠`thread_isaac_lab/envs/newton_approach_cable_mujoco_env.py` | **modified** | `515ebfbb63cc69797c9b25c532d31d5597669332` | `3544a78583caa9d8` | committed `:197-200`（v1 の `:196-199` は WT） |
-| ⚠`thread_isaac_lab/scripts/newton_routing_utils.py` | **modified** | `b6eaf1a828feef00ae149179dc49d3fe90a8725d` | `23795ca75eec9e58` | **異なる**（WT `:1403/:1469/:1521-1522`, `:1730-1731/:1773-1774`／**committed `:1295/:1346/:1382-1383`, `:1568-1569/:1602-1603`**） |
-| ⚠`thread_isaac_lab/skills/step_table.py` | **modified** | `1e18a63dcf14d9c6278d2c1fd094a447d1003696` | `ff1c0029e9e061b3` | committed `:32/:97`（本件の 2 行は同番号） |
-| ⚠`thread_isaac_lab/scripts/test_newton_20clip_reachability.py` | **modified** | `c7b248719a38eb5dd9b0f98fe88b14aa11e71ace` | `d94137ef26518794` | **異なる**（v1 の `:58` は WT／**committed `:46`**） |
-
-⚠ **`newton_grip_env.py` の committed blob を私が `git show | sha256sum` した値 = `1207554b257c97e3…`**（pN 提示値と一致）。⚠ **WT 値 `8521e96335398b64…`** も pN 提示の dirty-WT 値と一致。⇒ **pN の指摘は私の独立再測で確認済。**
-⚠ **v1 の `newton_routing_utils.py` の path 記載も誤り**（`envs/` でなく **`scripts/`**）。
-
-**⇒ 以下 §1〜§4 の行番号は、断りがない限り すべて上表の committed blob 上のもの。**
+⚠ **v2 で「committed 行番号」として示した値は、本 v3 でも同一**（下記 §R2 の manifest 上で全件を再検証した。検証方法 = `git show <commit>:<path> | sed -n '<L>p'` を cite した全行に実行）。**v2 のこの部分は取り消さない。**
 
 ---
 
-## B2 応答 — ⭐ consumer closure（**truncate せず全件を数えた**）
+## R2 応答 — ⭐ query 入力を **全件・全桁 pin** する（31 file）
 
-⛔⛔ **v1 の欠陥（受理）**: v1 の一覧は `head -12` 等で**切り詰めた出力**から書いており、そこから「**Grip skill のみが実質 consumer**」という **taxonomy 全体の結論**を出していた。⇒ ⛔ **当該結論を撤回する。**（**切り詰めた一覧は inventory ではない。**）
+⛔⛔ **v2 の欠陥（受理）**: v2 の manifest は **10 file** しか載せず、しかも blob / sha256 を **16 桁に切り詰めていた**。一方 §B2 の結論は **21/11/19 file** を対象にしていた。⇒ **結論の入力が pin されていなかった。**
 
-### 全件数（`grep -rn` を truncate せず集計・`thread-vault/` 除外）
-| symbol | **総 hit 数** | file 数 |
-|---|---|---|
-| `GRASP_Z` | **99** | 21 |
-| `PUSH_Z` | **53** | 11 |
-| `EE_TO_FINGERTIP` | **74** | 19 |
+**⭐ 以下が §R3 の query が返した `.py` file の union = 31 件。全件・全桁。**（tree = `1a2b63450b312bac6aa7468d60422056d40d02ab`）
 
-### 階層別の分類（**tier は完全・行分類は §1〜§3 の operative tier のみ**）
-| tier | path 群 | 扱い |
-|---|---|---|
-| **operative（env / skill）** | `envs/newton_grip_env.py`・`envs/newton_skill_env_base.py`・`envs/newton_approach_cable_mujoco_env.py`・`envs/route_executor.py`・`skills/scripted_skills.py`・`skills/step_table.py` | ⭐ **§1〜§3 で行単位に分類** |
-| **config / SSOT** | `configs/task_config.py`（定義）・`configs/mpc_config_grip.py`・`configs/mpc_config_ic.py` | 同上（注記のみの hit を含む） |
-| **harness / test / demo / builder** | `scripts/*`（`newton_routing_utils.py` / `test_*` / `build_*_precondition.py` / `generate_demos_*` / `demo_*` / `dry_run_*` / `plot_*` / `measure_*` / `collect_expert_demos.py` / `eval_skill.py` / `m4_phase0_*`）・`tests/*` | ⚠⚠ **file 単位でのみ分類し、行単位では分類していない**（**明示的に fence する**） |
+| # | path | blob SHA-1（全 40 桁） | 内容 sha256（全 64 桁） |
+|---|---|---|---|
+| 1 | `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/arm_control_measurement_harness.py` | `03913fec72de452ac01b5f6b68d9e686f210b340` | `b5b35c0e58bdace60775e456acc22c614501ecbb75eb4027323dd85df1aea108` |
+| 2 | `thread_isaac_lab/configs/mpc_config_grip.py` | `6795ad3ad463940a4e8be7ee12d2733cbe3da873` | `62b20692d59d8e9fb3325c12f28b301499ac2e1ac2acdce5b69d370b79268cbf` |
+| 3 | `thread_isaac_lab/configs/mpc_config_ic.py` | `cc00d69370bf7362fa5b5b0b1040561165894ca4` | `37d185fcaced27caf1539a08d6d96504799934f02a4a61c6bfd0b0c3b2d69699` |
+| 4 | `thread_isaac_lab/configs/task_config.py` | `d86380dbe186af003d97465376690c9eba00e9ed` | `1a0851db9cfc2c740c98821c73c84f5405d1cc96df5fe22a71f66906bb1762bc` |
+| 5 | `thread_isaac_lab/envs/newton_approach_cable_mujoco_env.py` | `515ebfbb63cc69797c9b25c532d31d5597669332` | `73ac245268084472574555fc7e03f3ec6cfeff78f78bfaef96d0ea25699221cd` |
+| 6 | `thread_isaac_lab/envs/newton_grip_env.py` | `ae5985759fe30b8505f6a5914340932443ea70ac` | `1207554b257c97e3115fca303860bb25e072b5c69cb9bc0fef783d8c8267d147` |
+| 7 | `thread_isaac_lab/envs/newton_skill_env_base.py` | `aaf15111377ac0c0e32fafeffdf8309a919245dd` | `e7a67ee34c50b78ff02baba4ab1bfe7b6002b1b2dfee15948e2c6795ad954fb9` |
+| 8 | `thread_isaac_lab/envs/route_executor.py` | `46f49d2722dbceda3c732f282e3fc6902cf51cbd` | `09db5a6d7e9d28e9eebdcf568636b8f059545c077f919fa8e1f9e7014082c599` |
+| 9 | `thread_isaac_lab/scripts/build_aerial_regrasp_precondition.py` | `0447834b6d9c42fc8027acfb5c43d92f0ef5aee6` | `bc2c77afc048b5e8b3732fcb1daf0612bf44ce98b067f96fcd115ab3f532d89d` |
+| 10 | `thread_isaac_lab/scripts/build_unclamp_precondition.py` | `6062bf9555ea896a231274e616acc65d6d10f600` | `a2c5a297df9b261b1efa19b7cd6614802cdfcc34c8840135b5bf66a643f70b10` |
+| 11 | `thread_isaac_lab/scripts/collect_expert_demos.py` | `5fc8f570ff10e6cf5bbddf74e4c8a225db613922` | `8e0b9c795a9d4a316eda845d219f5e34f16c2fe934f6e6e39603148d888090e9` |
+| 12 | `thread_isaac_lab/scripts/demo_aerial_regrasp.py` | `15b0fa0eb3d798e52e4001c78693f6d053b7bf4a` | `97867b59b80ac67974f711fa7dcf64613ae9422024d4c06c8f965403e89578d7` |
+| 13 | `thread_isaac_lab/scripts/dry_run_39step.py` | `5d34ed07295a24f6ab350d373245c33a7fc18a68` | `a0d40364ec8863eb33d3ac2182a8b07d9267e9b2c15b7bb93c25edcb38d88b07` |
+| 14 | `thread_isaac_lab/scripts/dry_run_approach_cable.py` | `b58ccde391d95a542a7d5f47ec080913d946ff9b` | `8489984b5d2965a03823bdc57407c75a5269b7ab587ec911120b84b61a7ee51c` |
+| 15 | `thread_isaac_lab/scripts/eval_skill.py` | `a6060dd9a26be22d2d4df9f26bc89c4797506dcc` | `f69080bc9fe4a18cf8878607d0fe81805c685b82b0c3e17aa564bbc948cad739` |
+| 16 | `thread_isaac_lab/scripts/generate_demos_mppi_m3_ar.py` | `c0dc66af122b895961c89bf081527b74005a7c69` | `b26b0faab46d56ded310fa67db3141727c3b529dd2c3a2c8d72420edca3fc9c4` |
+| 17 | `thread_isaac_lab/scripts/m4_phase0_verify_ee_clamp.py` | `3683b0060536f70160f0304cf00e70ef39f2778a` | `056e2a2903c8963670850a5bfa90c68583feafcb9449f7d02a4a2eadcc8d8ad7` |
+| 18 | `thread_isaac_lab/scripts/measure_finger_extent.py` | `fc65fb0029feb4e14a9f42278ab0545785b98a5d` | `bf28375497767681a62512cdf4d9b8b25bfde03889a3d0a5ef7f937b991a9c95` |
+| 19 | `thread_isaac_lab/scripts/newton_routing_utils.py` | `b6eaf1a828feef00ae149179dc49d3fe90a8725d` | `bac4fbc92984b2e506ce095b7ee5d6ce4641da87536ad351269dae4995ecc137` |
+| 20 | `thread_isaac_lab/scripts/plot_fingertip_waypoints.py` | `214626b5ebf4de4a6b37506643f2630776cd7953` | `4e457c89fb00b821df095588a6bcc62ff2d52b6f059656b8cc313815797d2fe2` |
+| 21 | `thread_isaac_lab/scripts/test_arm_reachability.py` | `d213605ae220b0280791b195ee04a052932513a4` | `a396074af94f5f46e915b571671d74bbf3e2db0f0f5c092cc883cf439c09744e` |
+| 22 | `thread_isaac_lab/scripts/test_clip_routing.py` | `b8cbe0e9a4a8d60cee865f166a07bbcbe50c56f7` | `677538ec8a3b9c5a26e9f78086ccc16c3ac2b287d5db0c0e165231169cd1315f` |
+| 23 | `thread_isaac_lab/scripts/test_diagonal_reach.py` | `09b3bf77e63f1b3b4297ce29154d26c16e5c2740` | `8c6cc1f3b6ebb47a15165fb3172a47d68cfd148daac76ca85932c8f4c9a8ec05` |
+| 24 | `thread_isaac_lab/scripts/test_grip_modes.py` | `bb633944a2b90e3b8ed1be0cea7811374e161553` | `2d0c7e7371b5731b94ab599be6865921a7a8474dae482b8071cae4b13c838247` |
+| 25 | `thread_isaac_lab/scripts/test_motion_sequence_dry_run.py` | `64e2d39a299de40c7c8905b5da9e4fc74d25365a` | `51a909e36f90c0b18419caddb43955e9aff94b9c3b6885c7b9d2b026f45d8765` |
+| 26 | `thread_isaac_lab/scripts/test_newton_20clip_reachability.py` | `c7b248719a38eb5dd9b0f98fe88b14aa11e71ace` | `e6f68b786bc51e5d0b4e1a6c23ff1a59e7253919f59b5bb346db8275789b7292` |
+| 27 | `thread_isaac_lab/scripts/test_newton_clip_routing.py` | `69a588d75f08b3c15e752c5211b7d64cef5f5be6` | `2e1fc1d84539877f91cc75eb1f6443a628dfb0743bd24cb7f0e8a1ab956779dd` |
+| 28 | `thread_isaac_lab/scripts/test_newton_clip_routing_sdf_plain.py` | `5136e02477ed4ea248ef5638f7e88fd201bce100` | `8e817bbf2bba16dce123e11a18d37c76ef5d7bf4929107836de59486a66b4c3a` |
+| 29 | `thread_isaac_lab/scripts/test_newton_dual_clip_routing.py` | `73b8cb6456fb83772ef9896b7c9c4104b9197dcb` | `a5426a3e756cf3fc30436e7cf8bf4bac41a17b65470a42cda210ded74952d86b` |
+| 30 | `thread_isaac_lab/skills/scripted_skills.py` | `e8faa50c30f7d65b27bf52179fc23b6c69d758c8` | `3586a1954720f82950a6f1e0698a621cdb1c7e2c2556efdf0bfc5f93f8889fca` |
+| 31 | `thread_isaac_lab/skills/step_table.py` | `1e18a63dcf14d9c6278d2c1fd094a447d1003696` | `6f9c3fb3d0010721c9287b8b63e2e86e7cecd7210e8ee8c2f222becaf3e5422b` |
 
-⭐ **pN 指摘の脱漏を取り込み**: `scripts/newton_routing_utils.py`（committed）**`GRASP_Z` = `:53`(import) / `:1295` / `:1346` / `:1382-1383`**、**`PUSH_Z` = `:53` / `:1529`(docstring) / `:1568-1569` / `:1587`(comment) / `:1602-1603`**。**AerialRegrasp 系** = `scripts/build_aerial_regrasp_precondition.py`（`GRASP_Z` 8 / `EE_TO_FINGERTIP` 3）・`scripts/demo_aerial_regrasp.py`（`EE_TO_FINGERTIP` 3）・`scripts/generate_demos_mppi_m3_ar.py`（`GRASP_Z` 4 / `EE_TO_FINGERTIP` 6）。⇒ **いずれも harness/demo/builder tier**（⛔ 行単位の operative 判定はしていない）。
-
-⇒ ⛔ **「実質 consumer は Grip skill のみ」とは言えない。** operative tier だけでも `newton_grip_env` / `scripted_skills` / `step_table` が consumer であり、harness tier には**多数**在る。**どこまでを operative と見なすかの判断は本書では行わない。**
+⇒ **§R3 の集計対象 file と §R2 の manifest は同一集合（31 = 31）。** v2 の 10 対 21/11/19 という乖離は解消。
 
 ---
-## 0. ⭐ 先に、分類に効く 3 つの観測事実（値や owner の主張ではない）
 
-| # | 観測事実（実測） | 出典（逐語） |
+## R3 応答 — ⭐ query の**完全な定義**と**全件出力**
+
+⛔⛔ **v2 の欠陥（受理）**: v2 は「`grep -rn` を truncate せず集計・`thread-vault/` 除外」としか書いておらず、**root / include-exclude 集合 / 行と出現の別 / 測った tree** を一つも定義していなかった。⇒ **再現不能**。しかも測った対象は **可変な作業ツリー**だった。⇒ **v2 の 99/21・53/11・74/19 を撤回する。**
+
+### (a) query の定義（**literal**）
+
+```
+git grep -c -w -e GRASP_Z         1a2b63450b312bac6aa7468d60422056d40d02ab -- '*.py'
+git grep -c -w -e PUSH_Z          1a2b63450b312bac6aa7468d60422056d40d02ab -- '*.py'
+git grep -c -w -e EE_TO_FINGERTIP 1a2b63450b312bac6aa7468d60422056d40d02ab -- '*.py'
+git grep -o -w -e <SYMBOL>        1a2b63450b312bac6aa7468d60422056d40d02ab -- '*.py' | wc -l
+```
+
+| 項目 | 定義 |
+|---|---|
+| **測った tree** | **commit `1a2b63450b312bac6aa7468d60422056d40d02ab`**（immutable）。⛔ 作業ツリーではない |
+| **root** | repository root（`git grep` の既定 = 指定 tree 全体） |
+| **include** | pathspec **`'*.py'` のみ**（repo 全域。`eval_runs/` 配下の `.py` も含む） |
+| **exclude** | **無し**（⛔ v2 の「`thread-vault/` 除外」は撤回 — `.py` scope には `thread-vault/` 配下の `.py` が 0 件ゆえ除外規則自体が不要） |
+| **一致の意味** | **`-w` = 語境界一致**（symbol としての一致）。⇒ `EE_TO_FINGERTIP_provenance` のような**別 identifier は数えない** |
+| **行 vs 出現** | `-c` = **一致した行数**（1 行に 2 回出ても 1）／`-o \| wc -l` = **出現回数**。**両方を別々に出す** |
+| **自己参照** | **`.py` scope には本書（`.md`）は入らない ⇒ 自己参照 0**。（全 file scope では本書自身が数に混ざる — 下記 (d)） |
+
+### (b) 合計（**`.py` scope・上記 tree**）
+
+| symbol | 一致した行数 | 出現回数 | file 数 |
+|---|---|---|---|
+| `GRASP_Z` | **105** | **126** | **22** |
+| `PUSH_Z` | **55** | **60** | **13** |
+| `EE_TO_FINGERTIP` | **73** | **78** | **18** |
+
+⚠ **`-w` を外す（部分一致）と `EE_TO_FINGERTIP` だけ 74 行/18 file** になる。差分 **+1 行**の正体は `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/arm_control_measurement_harness.py` の **`EE_TO_FINGERTIP_provenance`**（= **別の identifier**）。`GRASP_Z` / `PUSH_Z` は `-w` 有無で不変（105/22・55/13）。
+
+### (c) **全件・per-file 出力**（`一致行数 / 出現回数`、`—` = 0 件）
+
+| path | `GRASP_Z` | `PUSH_Z` | `EE_TO_FINGERTIP` |
+|---|---|---|---|
+| `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/arm_control_measurement_harness.py` | — | — | 5 / 6 |
+| `thread_isaac_lab/configs/mpc_config_grip.py` | 1 / 1 | — | — |
+| `thread_isaac_lab/configs/mpc_config_ic.py` | — | — | 1 / 1 |
+| `thread_isaac_lab/configs/task_config.py` | 3 / 3 | 1 / 1 | 5 / 5 |
+| `thread_isaac_lab/envs/newton_approach_cable_mujoco_env.py` | 1 / 1 | — | — |
+| `thread_isaac_lab/envs/newton_grip_env.py` | 3 / 3 | 3 / 3 | 3 / 3 |
+| `thread_isaac_lab/envs/newton_skill_env_base.py` | — | — | 3 / 3 |
+| `thread_isaac_lab/envs/route_executor.py` | 1 / 1 | 1 / 1 | — |
+| `thread_isaac_lab/scripts/build_aerial_regrasp_precondition.py` | 8 / 9 | — | 3 / 3 |
+| `thread_isaac_lab/scripts/build_unclamp_precondition.py` | — | 3 / 3 | — |
+| `thread_isaac_lab/scripts/collect_expert_demos.py` | 3 / 3 | 1 / 1 | — |
+| `thread_isaac_lab/scripts/demo_aerial_regrasp.py` | 1 / 1 | — | 3 / 3 |
+| `thread_isaac_lab/scripts/dry_run_39step.py` | 2 / 2 | 1 / 1 | — |
+| `thread_isaac_lab/scripts/dry_run_approach_cable.py` | 4 / 5 | — | 2 / 2 |
+| `thread_isaac_lab/scripts/eval_skill.py` | — | — | 1 / 1 |
+| `thread_isaac_lab/scripts/generate_demos_mppi_m3_ar.py` | 4 / 4 | — | 6 / 6 |
+| `thread_isaac_lab/scripts/m4_phase0_verify_ee_clamp.py` | — | — | 5 / 5 |
+| `thread_isaac_lab/scripts/measure_finger_extent.py` | — | — | 3 / 5 |
+| `thread_isaac_lab/scripts/newton_routing_utils.py` | 5 / 5 | 7 / 7 | — |
+| `thread_isaac_lab/scripts/plot_fingertip_waypoints.py` | 2 / 2 | — | 2 / 2 |
+| `thread_isaac_lab/scripts/test_arm_reachability.py` | 5 / 9 | — | — |
+| `thread_isaac_lab/scripts/test_clip_routing.py` | 10 / 11 | 11 / 11 | — |
+| `thread_isaac_lab/scripts/test_diagonal_reach.py` | 13 / 13 | — | — |
+| `thread_isaac_lab/scripts/test_grip_modes.py` | 5 / 5 | — | 3 / 3 |
+| `thread_isaac_lab/scripts/test_motion_sequence_dry_run.py` | 11 / 20 | — | 3 / 3 |
+| `thread_isaac_lab/scripts/test_newton_20clip_reachability.py` | 5 / 8 | — | 2 / 2 |
+| `thread_isaac_lab/scripts/test_newton_clip_routing.py` | 7 / 8 | 9 / 11 | 12 / 13 |
+| `thread_isaac_lab/scripts/test_newton_clip_routing_sdf_plain.py` | 6 / 7 | 8 / 10 | 11 / 12 |
+| `thread_isaac_lab/scripts/test_newton_dual_clip_routing.py` | 5 / 5 | 6 / 6 | — |
+| `thread_isaac_lab/skills/scripted_skills.py` | — | 2 / 2 | — |
+| `thread_isaac_lab/skills/step_table.py` | — | 2 / 3 | — |
+
+### (d) 参考: **全 file scope**（pathspec 無し・同 tree・`-w`）
+
+| symbol | 一致した行数 | 出現回数 | file 数 |
+|---|---|---|---|
+| `GRASP_Z` | 164 | 192 | 37 |
+| `PUSH_Z` | 95 | 105 | 25 |
+| `EE_TO_FINGERTIP` | 155 | 167 | 57 |
+
+⚠⚠ **この scope は本書自身を数えている**（`P11_ARM_TARGET_CONSUMER_REVIEW_20260726.md` の v2 が `GRASP_Z` 16 行 / `PUSH_Z` 11 行 / `EE_TO_FINGERTIP` 16 行）。**報告が自分を数に入れている。** ⇒ **consumer の議論には `.py` scope (b)(c) を使う。**
+
+### (e) ⭐⭐ **これは文字列の hit 数であって consumer 数ではない**（pN R3 の指摘を受理）
+
+- **hit には import 行・docstring・comment・変数への再定義・log 文字列が含まれる。** これらは「その定数がその file の**振る舞いを決めている**」ことを意味しない。
+- ⇒ 本書は **`.py` scope の hit を「その symbol が現れた file と行の全体」としてのみ提示する。** ⛔ **「consumer である」「operative である」という判定は本書では下していない。**
+
+---
+
+## R4 応答 — ⭐ tier を **構造 tier（status = UNVERIFIED）** に改める
+
+⛔⛔ **v2 の欠陥（受理）**: v2 は tier を「**operative**（env / skill）」と名付けながら、同じ文書の中で「どこまでを operative と見なすかの判断は本書では行わない」と書いていた。⇒ **名付けが、下していないはずの判定を先取りしていた。**
+
+**⭐ 訂正: tier は「path の構造上の位置」だけで決める。runtime 上の効き（operative か否か）は全 tier で `UNVERIFIED`。**
+
+| 構造 tier（path 位置のみ） | file（**全件**） | runtime status |
 |---|---|---|
-| **F-1** | **`GRASP_Z` / `PUSH_Z` は `route_c1_c2` code path では使われていない** | `route_executor.py:2450` 逐語「**GRASP_Z/PUSH_Z (task_config) are the LEGACY P1-P4 path, NOT used by route_c1_c2** -> the route descent target is **GROOVE_CENTER_Z+ee_off (dynamic)**」 |
+| **T-1 定数定義 / config** | `configs/task_config.py`・`configs/mpc_config_grip.py`・`configs/mpc_config_ic.py` | **UNVERIFIED** |
+| **T-2 env** | `envs/newton_grip_env.py`・`envs/newton_skill_env_base.py`・`envs/newton_approach_cable_mujoco_env.py`・`envs/route_executor.py` | **UNVERIFIED** |
+| **T-3 skills** | `skills/scripted_skills.py`・`skills/step_table.py` | **UNVERIFIED** |
+| **T-4 builder / demo / generator** | `scripts/build_aerial_regrasp_precondition.py`・`scripts/build_unclamp_precondition.py`・`scripts/collect_expert_demos.py`・`scripts/demo_aerial_regrasp.py`・`scripts/generate_demos_mppi_m3_ar.py` | **UNVERIFIED** |
+| **T-5 dry-run / eval / measure / plot** | `scripts/dry_run_39step.py`・`scripts/dry_run_approach_cable.py`・`scripts/eval_skill.py`・`scripts/m4_phase0_verify_ee_clamp.py`・`scripts/measure_finger_extent.py`・`scripts/plot_fingertip_waypoints.py` | **UNVERIFIED** |
+| **T-6 test** | `scripts/test_arm_reachability.py`・`scripts/test_clip_routing.py`・`scripts/test_diagonal_reach.py`・`scripts/test_grip_modes.py`・`scripts/test_motion_sequence_dry_run.py`・`scripts/test_newton_20clip_reachability.py`・`scripts/test_newton_clip_routing.py`・`scripts/test_newton_clip_routing_sdf_plain.py`・`scripts/test_newton_dual_clip_routing.py` | **UNVERIFIED** |
+| **T-7 routing utils** | `scripts/newton_routing_utils.py` | **UNVERIFIED** |
+| **T-8 測定ハーネス** | `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/arm_control_measurement_harness.py` | **UNVERIFIED** |
+
+**3 + 4 + 2 + 5 + 6 + 9 + 1 + 1 = 31**（§R2 manifest と一致）。
+
+⚠ **後続 §1〜§3 で私が行単位に読んだのは T-1〜T-3 の一部の行だけ**である。**「読んだ」は「runtime で効いている」を意味しない。** T-4〜T-8 は **file 単位でのみ列挙**し、行単位では読んでいない（**明示 fence**）。
+
+---
+
+## R5 応答 — ⭐ 生き残っていた矛盾文を撤回
+
+⛔⛔ **v2 の欠陥（受理）**: v2 は §B2（`:41`/`:59`）で「実質 consumer は Grip skill のみ」を**撤回**しながら、§2 (4)（`:123`）に **「現に分かれている（Grip skill のみが実質の consumer）」** を**生きたまま残していた**。⇒ **同一文書内の矛盾。** ⛔ **`:123` の当該括弧を撤回する**（下記 §2 (4) は訂正済み）。
+⇒ **私の手続き上の欠陥**: 撤回した表現を**自分の全 artifact 横断で grep してから閉じる**という手順を、同一 file 内ですら実行していなかった。**v3 では 3 symbol ＋「実質」「のみ」で本書全体を再走査した。**
+
+**v1 の sha256 も全 64 桁に展開済**（上記 correction chain）。
+
+---
+
+## 0. ⭐ 分類に効く 3 つの観測事実（値や owner の主張ではない）
+
+以下すべて **tree = `1a2b63450b312bac6aa7468d60422056d40d02ab`** 上の行。
+
+| # | 観測事実 | 出典（逐語） |
+|---|---|---|
+| **F-1** | **`GRASP_Z` / `PUSH_Z` は `route_c1_c2` code path では使われていない** | `route_executor.py:2450` 逐語「**GRASP_Z/PUSH_Z (task_config) are the LEGACY P1-P4 path, NOT** used by route_c1_c2 -> the route descent target is **GROOVE_CENTER_Z+ee_off (dynamic)**」 |
 | **F-2** | ⭐**`route_c1_c2` code path の降下目標は「観測量」で作られている** — `ee_off` は**実行時に測った値**（EE の実 z − 把持中 cable 分節の実 z） | `route_executor.py:2900` `ee_off = float(get_ee_positions(state, scene_info)[1][2]) - _seg_z_mm(GRASP_YC) / 1e3` ／ 使用 `:3106` `seat_ee_z` / `:4214` `c2_seat_ee_z = GROOVE_CENTER_Z + _clip_float_z + ee_off` |
-| **F-3** | ⭐**ある env は既に `EE_TO_FINGERTIP` から離脱し、実測コ字値を使っている** | `newton_approach_cable_mujoco_env.py:197-199` 逐語「the koshape OPEN claw bottom reaches the cable centerline（**NOT 40mm into the table via the stale Franka GRASP_Z=1.025**）」＋ `EE_Z_FLOOR_KO = TABLE_HEIGHT + CLIP_BASE_HEIGHT + CABLE_RADIUS + **EE_TO_PINCH_OPEN**`（`:200`。`EE_TO_PINCH_OPEN = 0.26092`・`task_config.py:326`） |
+| **F-3** | ⭐**ある env は既に `EE_TO_FINGERTIP` から離脱し、実測コ字値を使っている** | `newton_approach_cable_mujoco_env.py:197` 逐語「…centerline (**NOT 40mm into the table via the stale Franka GRASP_Z=1.025**)」＋ `:200` `EE_Z_FLOOR_KO = TABLE_HEIGHT + CLIP_BASE_HEIGHT + CABLE_RADIUS + **EE_TO_PINCH_OPEN**`（`EE_TO_PINCH_OPEN = 0.26092`・`task_config.py:326`） |
 
 ⇒ **F-1〜F-3 は「3 定数が全 skill 共通の単一定数として実際に機能しているか」に直接効く**（本書 §4 の要求事実）。⛔ **どう分類するかは書かない。**
 
@@ -73,46 +213,47 @@
 
 ## 1. `EE_TO_FINGERTIP`（`task_config.py:78` = `0.220`）
 
-### (1) 実 consumer・skill・source pin
+### (1) 私が行単位に読んだ箇所（⛔ runtime status は UNVERIFIED）
 
-| consumer | 位置 | 何に使っているか |
+| 箇所 | 位置 | 何に使っているか |
 |---|---|---|
-| **成功述語の測定点** | `newton_skill_env_base.py:899-905` `compute_clamp_pos` = `ee_pos + R(ee_q)·[0,0,+EE_TO_FINGERTIP]` | **live の acquire-grasp 判定**が使う点。判定連鎖 = `newton_grip_env.py:1158`/`:1164` `compute_clamp_pos` → `:1167` `cable_pos` → `:1169-1171` `find_nearest_cable_point(cable_pos, clamp_r_pos, …)` → `dist_pos` → `:1224-1232` `< CLAMP_DIST_THRESH`（= `T_DIST` 2 mm・`:223`） |
-| **cable 分節の探索窓** | `newton_grip_env.py:746` / `:752`（`right_tip[2] -= EE_TO_FINGERTIP`） | 最近傍 cable 分節 index の決定（**z のみを引く軸固定の近似**・下記 (3) 参照） |
+| **成功述語の測定点** | `newton_skill_env_base.py:899-905` `compute_clamp_pos` = `ee_pos + R(ee_q)·[0,0,+EE_TO_FINGERTIP]` | acquire-grasp 判定が使う点。判定連鎖 = `newton_grip_env.py:1158`/`:1164` `compute_clamp_pos` → `:1167` `cable_pos` → `:1169` `find_nearest_cable_point(...)` → `dist_pos` → `:1224` `clamp_r_ok = finite_measurements and (…)`（閾値 `CLAMP_DIST_THRESH = T_DIST` 2 mm・`:223`） |
+| **cable 分節の探索窓** | `newton_grip_env.py:746` / `:752`（`right_tip[2] -= EE_TO_FINGERTIP` / `left_tip[2] -= …`） | 最近傍 cable 分節 index の決定（**z のみを引く軸固定の近似**・下記 (3)） |
 | **positioning 定数の材料** | `task_config.py:93` `GRASP_Z` / `:95` `PUSH_Z` | 両者の定義式に含まれる |
-| **p11 側 spec** | 測定 spec §H-4.1 **J-a**（`ee_pos + 0.220·ẑ_ee`） | ⭐ **閾値が測っている点**として 3 参照点の 1 つに明示（他 = J-b pad 中点 / J-c `EE_TO_PINCH_TIP_CLOSED 0.2757`） |
-| ⚠ 自己申告 | `task_config.py:78` 逐語「FRANKA panda_hand->fingertip」/ `:84`「220mm, **Franka value; re-derive S6**」/ `:324`「**EE_TO_FINGERTIP above (0.220) is the Franka/legacy**」 | **定数自身が legacy と宣言している** |
+| **p11 側 spec** | 測定 spec §H-4.1 **J-a**（`ee_pos + 0.220·ẑ_ee`） | **閾値が測っている点**として 3 参照点の 1 つ（他 = J-b pad 中点 / J-c `EE_TO_PINCH_TIP_CLOSED 0.2757`） |
+| ⚠ 自己申告 | `task_config.py:78` 逐語「FRANKA panda_hand->fingertip [m]」／`:84`「220mm, **Franka value; re-derive S6**」／`:324`「**EE_TO_FINGERTIP above (0.220) is the Franka/legacy**」 | **定数自身が legacy と宣言している** |
 
 ### (2) 腕側が必要とする measurement surface
 - **腕の制御が要求するのは「閾値が評価される点」と同じ面**。⇒ gain sizing は **判定式が使う面**で行う必要がある（別の面で bar を立てると、満たしても判定は落ちる／その逆）。
-- ⚠ **接触の物理が起きる面は別**: cable に実際に触れるのは **pad body**（`GRIPPER_PAD_BODY_IDX = [9,13]`・`task_config.py:37`）。**実測コ字値** = `EE_TO_PINCH_CLOSED 0.2548`（`:320`）/ `EE_TO_PINCH_TIP_CLOSED 0.2757`（`:321`）/ `EE_TO_PINCH_OPEN 0.26092`（`:326`）。⇒ **`0.220` と 34.8〜55.7 mm 違う**（= 2 mm 閾値の 17〜28 倍）。
-- ⇒ **腕側の要求事実**: 「**どの面で bar を立てるか**」が決まらないと gain の下限が確定しない。⛔ **どちらにすべきかは本書で言わない**（H-4 は 3 面すべてを出す設計ゆえ、**面の選択のために新たな測定設計は要らない**。⚠ ただし **H-4 全体は HOLD** であり再測定の要否は別問題）。
+- ⚠ **接触の物理が起きる面は別**: cable に実際に触れるのは **pad body**（`GRIPPER_PAD_BODY_IDX = [9, 13]`・`task_config.py:37`）。**実測コ字値** = `EE_TO_PINCH_CLOSED 0.2548`（`:320`）／`EE_TO_PINCH_TIP_CLOSED 0.2757`（`:321`）／`EE_TO_PINCH_OPEN 0.26092`（`:326`）。⇒ **`0.220` と 34.8〜55.7 mm 違う**（= 2 mm 閾値の 17〜28 倍）。
+- ⇒ **腕側の要求事実**: 「**どの面で bar を立てるか**」が決まらないと gain の下限が確定しない。⛔ **どちらにすべきかは本書で言わない。**
 
 ### (3) frame / unit
 - **unit = m**（`task_config.py` 全体の慣行）。
-- **frame = EE body（wrist_3・local index 5・`task_config.py:30` `EE_BODY_IDX`）の local +Z**。⇒ `compute_clamp_pos` は **姿勢で回す**（`quat_rotate(ee_quat, [0,0,+EE_TO_FINGERTIP])`）。
-- ⚠ **同じ定数が 2 通りに使われている**: `compute_clamp_pos` は **回転を掛ける**が、`newton_grip_env.py:746/752` は **world z から直に引く**（`tip[2] -= EE_TO_FINGERTIP`）。⇒ **後者は EE が傾くと誤差を持つ**（要求事実として記載・⛔ 是正は求めない）。
+- **frame = EE body（wrist_3・local index 5・`task_config.py:30` `EE_BODY_IDX`）の local +Z**。⇒ `compute_clamp_pos` は **姿勢で回す**（`:905` `offset_world = quat_rotate_vec(ee_quat_xyzw, offset_local)`）。
+- ⚠ **同じ定数が 2 通りに使われている**: `compute_clamp_pos` は **回転を掛ける**が、`newton_grip_env.py:746`/`:752` は **world z から直に引く**（`tip[2] -= EE_TO_FINGERTIP`）。⇒ **後者は EE が傾くと誤差を持つ**（要求事実として記載・⛔ 是正は求めない）。
 
 ### (4) 要求事実（共通必要 / skill 別可分 / 観測量へ移せるか）
 - **全 skill 共通である必要**: ⛔ **現状の実装は共通になっていない**（**F-3**: `newton_approach_cable_mujoco_env` は同じ役割に `EE_TO_PINCH_OPEN` を使い、`GRASP_Z=1.025` を「stale Franka」と明記）。⇒ **「共通でなければ成立しない」ことを示す実装事実は、私の court では観測されなかった。**
-- **skill 別に分けられるか**: 現に **分かれている**（前項）。⚠ ただし **acquire-grasp の判定式**（`compute_clamp_pos`）と **cable 窓選択**（`:746/:752`）は**同一 env 内で同じ定数を共有**しており、この 2 つを分けた場合の影響は**私は測っていない**。
-- **観測量へ移せるか**: ⭐ **`route_c1_c2` code path では移っている**（**F-2**: `ee_off` は実行時計測）。⚠ ただし **acquire-grasp の判定式は定数のまま**であり、判定面を観測量へ移す場合は **成功条件の変更**に当たる（＝ `/reward-design` の直交ゲート対象）。⛔ **可否は本書で判断しない。**
+- **skill 別に分けられるか**: 現に **分かれている**（前項）。⚠ ただし acquire-grasp の判定式（`compute_clamp_pos`）と cable 窓選択（`:746`/`:752`）は**同一 env 内で同じ定数を共有**しており、この 2 つを分けた場合の影響は**私は測っていない**。
+- **観測量へ移せるか**: ⭐ **`route_c1_c2` code path では移っている**（**F-2**）。⚠ ただし acquire-grasp の判定式は定数のままであり、判定面を観測量へ移す場合は **成功条件の変更**に当たる（＝ `/reward-design` の直交ゲート対象）。⛔ **可否は本書で判断しない。**
 
 ---
 
 ## 2. `GRASP_Z`（`task_config.py:93` = `TABLE_HEIGHT + CLIP_BASE_HEIGHT + EE_TO_FINGERTIP` = **1.025**）
 
-### (1) 実 consumer・skill・source pin
-| consumer | 位置 | 何に使っているか |
+### (1) 私が行単位に読んだ箇所（⛔ runtime status は UNVERIFIED）
+| 箇所 | 位置 | 何に使っているか |
 |---|---|---|
-| **Grip skill の P0 前提** | `newton_grip_env.py:113` import / `:142` **`GRIP_Z = GRASP_Z + CABLE_RADIUS`**（逐語「1.029m: fingertip at cable center Z (0.809)」） | 把持開始高さ |
-| MPC config（注記） | `mpc_config_grip.py:110` 逐語「Grip P0 precondition already positions arms at GRASP_Z (cable-proximal)」 | 前提の記述 |
-| 到達性テスト | `test_newton_20clip_reachability.py:46` **独自に再定義**（`TABLE_HEIGHT + EE_TO_FINGERTIP`・**`CLIP_BASE_HEIGHT` を含まない**） | ⚠ **task_config の定義と一致しない別式**（要求事実として記載） |
+| **Grip env の把持開始高さ** | `newton_grip_env.py:113` import ／ `:142` **`GRIP_Z = GRASP_Z + CABLE_RADIUS`**（逐語「1.029m: fingertip at cable center Z (0.809)」） | 把持開始高さの定義 |
+| MPC config（comment のみ） | `mpc_config_grip.py:110` 逐語「Grip P0 precondition already positions arms at GRASP_Z (cable-proximal).」 | 前提の記述（comment） |
+| 到達性テスト | `test_newton_20clip_reachability.py:46` **独自に再定義** `GRASP_Z = TABLE_HEIGHT + EE_TO_FINGERTIP`（**`CLIP_BASE_HEIGHT` を含まない**） | ⚠ **task_config の定義と一致しない別式** |
+| routing utils | `newton_routing_utils.py:53` import ／ `:1295` / `:1346` / `:1382-1383` に target の z として出現 | ⚠ **T-7・行単位の runtime 判定はしていない** |
 | ⛔ **`route_c1_c2` code path** | — | **使っていない**（**F-1**） |
 
 ### (2) 腕側が必要とする measurement surface
 - **これは「腕への指令 z」**（IK 目標）であり、**判定面ではない**。⇒ 腕側が要求するのは **指令が到達可能で、かつ静定後のたわみ込みで意図した面に載ること**。
-- ⚠ **静的たわみが直に効く**: 実測 `τ_bias` 最大 **27.22 N·m** が `shoulder_lift`（`ke = 2000`）に載り **`Δq = 13.61 mrad`**（report `h3_torque_budget.per_joint_H3_1`）。⇒ **指令 z と実現 z はずれる**。⛔ **ずれの手先 [mm] は未確定**（合成 `‖Σ_i jacp[:,i]·Δq_i‖` が未測・H-4 の per-joint 列と対応付けが要る）。
+- ⚠ **静的たわみが直に効く**: 実測 `τ_bias` 最大 **27.22 N·m** が `shoulder_lift`（`ke = 2000`）に載り **`Δq = 13.61 mrad`**（`arm_control_measurement_h2_report.json` の `h3_torque_budget.per_joint_H3_1`）。⇒ **指令 z と実現 z はずれる**。⛔ **ずれの手先 [mm] は未確定**（合成 `‖Σ_i jacp[:,i]·Δq_i‖` は**未実装・未認可**）。
 
 ### (3) frame / unit
 - **unit = m**、**frame = world z**（`TABLE_HEIGHT` 起点の絶対高さ）。
@@ -120,31 +261,32 @@
 
 ### (4) 要求事実
 - **全 skill 共通である必要**: ⛔ **現に共通ではない**（`route_c1_c2` code path は不使用 = F-1／到達性テストは別式）。
-- **skill 別に分けられるか**: **現に分かれている**（Grip skill のみが実質の consumer）。
-- **観測量へ移せるか**: ⭐ **`route_c1_c2` code path 側は観測量**（F-2）。**Grip skill 側で同じ移行が可能かは私は測っていない**（P0 前提の作り方に依存）。⛔ 判断しない。
+- **skill 別に分けられるか**: **同じ symbol が別の式で再定義されている実装事実がある**（`test_newton_20clip_reachability.py:46`）。⛔⛔ **v2 にあった「Grip skill のみが実質の consumer」は撤回済み**（R5）。**`.py` scope で `GRASP_Z` は 22 file に現れる**（§R3 (c)）。**どれが consumer かの判定は本書では下していない。**
+- **観測量へ移せるか**: ⭐ **`route_c1_c2` code path 側は観測量**（F-2）。**Grip env 側で同じ移行が可能かは私は測っていない**（P0 前提の作り方に依存）。⛔ 判断しない。
 
 ---
 
 ## 3. `PUSH_Z`（`task_config.py:95` = 同式 = **1.025**・逐語「same as GRASP_Z」）
 
-### (1) 実 consumer・skill・source pin
-| consumer | 位置 | 何に使っているか |
+### (1) 私が行単位に読んだ箇所（⛔ runtime status は UNVERIFIED）
+| 箇所 | 位置 | 何に使っているか |
 |---|---|---|
-| **scripted skill の押込目標** | `skills/scripted_skills.py:39` import / `:88` `return (x, y, PUSH_Z)` | 押込みの EE 目標 |
-| **工程表** | `skills/step_table.py:32` import / `:97` `return (cx, ly, PUSH_Z), (cx, ry, PUSH_Z)` | 左右の EE 目標 |
-| Grip env | `newton_grip_env.py:123` import / `:430-431` `ee_left/ee_right = (CLIP1_X, CLIP1_Y ∓ GRIP_HALF_SPAN, PUSH_Z)` | 初期 EE 目標 |
+| **scripted skill の押込目標** | `scripted_skills.py:39` import ／ `:88` `return (x, y, PUSH_Z)` | 押込みの EE 目標 |
+| **工程表** | `step_table.py:32` import ／ `:97` `return (cx, ly, PUSH_Z), (cx, ry, PUSH_Z)` | 左右の EE 目標（1 行に 2 出現） |
+| Grip env | `newton_grip_env.py:123` import ／ `:430-431` `ee_left/ee_right = (CLIP1_X, CLIP1_Y ∓ GRIP_HALF_SPAN, PUSH_Z)` | 初期 EE 目標 |
+| routing utils | `newton_routing_utils.py:53` import ／ `:1529` docstring ／ `:1568` target ／ `:1587` comment ／ `:1602` target | ⚠ **T-7・行単位の runtime 判定はしていない** |
 | ⛔ **`route_c1_c2` code path** | — | **使っていない**（F-1） |
 
 ### (2) 腕側が必要とする measurement surface
-- `GRASP_Z` と同じ（指令 z・判定面ではない）。⚠ **押込みは接触が効く局面**ゆえ、**§5.2 の「接触が効く瞬間の前に静定させる」要求が直接かかる**（静定判定は窓で行う）。
+- `GRASP_Z` と同じ（指令 z・判定面ではない）。⚠ **押込みは接触が効く局面**ゆえ、**「接触が効く瞬間の前に静定させる」要求が直接かかる**（静定判定は窓で行う）。
 - ⚠ **`GRASP_Z` と数値が同一**（両者とも `1.025`）だが、**役割は別**（把持開始高さ vs 押込目標）。⇒ **値が同じことは、同じ量であることを意味しない。**
 
 ### (3) frame / unit
 - `GRASP_Z` と同一（**m / world z**・`EE_TO_FINGERTIP` 依存の派生量）。
 
 ### (4) 要求事実
-- **全 skill 共通である必要**: ⛔ **現に共通ではない**（`route_c1_c2` code path 不使用）。⚠ ただし **scripted skill と step_table が同じ値を共有**しており、**この 2 者の間では共通**。
-- **skill 別に分けられるか**: **分けられている実装事実は無い**（上記 2 者は共有）。⚠ **分けた場合の影響は私は測っていない。**
+- **全 skill 共通である必要**: ⛔ **現に共通ではない**（`route_c1_c2` code path 不使用）。⚠ ただし `scripted_skills.py` と `step_table.py` は**同じ値を共有**（`step_table.py:32` が `scripted_skills` から import）。⇒ **この 2 者の間では共通。**
+- **skill 別に分けられるか**: **分けられている実装事実は、私が読んだ範囲には無い**（上記 2 者は共有）。⚠ **分けた場合の影響は私は測っていない。**
 - **観測量へ移せるか**: **`route_c1_c2` code path に前例あり**（F-2）。⛔ **scripted 経路で可能かは未測・判断しない。**
 
 ---
@@ -157,19 +299,34 @@
 | **共通性** | ⛔ **3 定数とも「全 skill 共通」として機能していない**（`route_c1_c2` code path 不使用 = F-1／approach env は別値へ離脱 = F-3／到達性テストは別式） |
 | **観測量への移行** | ⭐ **`route_c1_c2` code path では実装済**（`ee_off` = 実行時計測・F-2）。⚠ **成功述語側は定数のまま** ⇒ そこを移すのは **成功条件の変更**（`/reward-design` 直交ゲート対象） |
 | **面の不一致** | **判定面（`0.220`）と接触面（pad・実測 `0.2548`/`0.2757`/`0.26092`）が 34.8〜55.7 mm 違う** ＝ **2 mm 閾値の 17〜28 倍** |
-| **腕側の依存** | ⭐ **面の選択それ自体は、新たな measurement-design point を増やさない** — H-4 は **3 参照点**を出す設計（`53b8997ed4`）ゆえ、どの面に決まっても**そのための追加設計は不要**。⛔⛔ **「再測定不要」とは言えない** — **H-4 全体は HOLD 継続**であり、**認可済みの rerun および H-4 の他の欠陥・要求（例: literal `(9,13)` の carry・envelope が 1 姿勢）は残る**（RETURN B4 受理） |
-| ⚠ **同一定数の 2 用法** | `compute_clamp_pos` は**姿勢で回す**／`newton_grip_env.py:746/752` は **world z から直に引く** ⇒ **EE が傾くと後者に誤差**（⛔ 是正は求めない・事実の記載のみ） |
+| **散らばり** | **`.py` scope で `GRASP_Z` は 22 file・`PUSH_Z` は 13 file・`EE_TO_FINGERTIP` は 18 file に現れる**（§R3 (c) 全件）。⛔ **これは文字列 hit であり consumer 数ではない**（§R3 (e)） |
+| **腕側の依存** | ⭐ **面の選択それ自体は、新たな measurement-design point を増やさない** — H-4 は **3 参照点**を出す設計（`53b8997ed4`）。⛔⛔ **「再測定不要」とは言えない** — **H-4 全体は HOLD 継続**であり、**認可済みの rerun および H-4 の他の欠陥・要求（literal `(9,13)` の carry・envelope が 1 姿勢）は残る** |
+| ⚠ **同一定数の 2 用法** | `compute_clamp_pos` は**姿勢で回す**／`newton_grip_env.py:746`/`:752` は **world z から直に引く** ⇒ **EE が傾くと後者に誤差**（⛔ 是正は求めない・事実の記載のみ） |
 
 ---
 
-## 5. B3 / B4 応答（要点の再掲）
+## 5. B3 / B4（**PASS 済・不変**）
 
 - **B3**: 「**現行 route** / **production route**」という **status 主張を撤回**。source が示すのは **`route_executor.py` の `route_c1_c2` code path の挙動**のみ ⇒ 全箇所を「**`route_c1_c2` code path**」へ置換した。⛔ **どの route が現行かを述べる authority/status SSOT を私は exact-pin していない。**
-- **B4**: 「**どれに決まっても再測定不要**」という**絶対主張を撤回**。正しくは **「面の選択それ自体は新たな measurement-design point を増やさない」**まで。⛔ **H-4 全体は HOLD 継続**であり、**認可済み rerun および H-4 の他の欠陥・要求（literal `(9,13)` の carry／envelope が 1 姿勢 等）は残る**。
+- **B4**: 「**どれに決まっても再測定不要**」という**絶対主張を撤回**。正しくは **「面の選択それ自体は新たな measurement-design point を増やさない」**まで。⛔ **H-4 全体は HOLD 継続。**
 
 ## 5.1 非主張
 
 - ⛔ **owner を書いていない**（`GRASP_Z`/`PUSH_Z`/`EE_TO_FINGERTIP` の court は **UNCONFIRMED / HOLD**・候補 p5 / p17 / p11 / p16）。**私は自分を owner とも他者とも書かない。**
 - ⛔ **値・方式・推奨を書いていない。** 分類は p17（p5 側材料と合流後）。
-- **p5 の材料を私は再解釈していない**（本書は**腕側 consumer の実測**のみ）。
-- **未測と明記した項目**: 手先たわみの合成量 `‖Σ_i jacp[:,i]·Δq_i‖`／定数を skill 別に分けた場合の影響／Grip・scripted 経路で観測量へ移せるか。
+- **p5 の材料を私は再解釈していない**（本書は**腕側の読み取り**のみ）。
+- ⛔ **runtime で効いているか（operative か）を、どの file についても判定していない**（全 tier `UNVERIFIED`・§R4）。
+- **未測と明記した項目**: 手先たわみの合成量 `‖Σ_i jacp[:,i]·Δq_i‖`（**未実装・未認可**）／定数を skill 別に分けた場合の影響／Grip・scripted 経路で観測量へ移せるか／T-4〜T-8 の行単位の意味。
+
+## 5.2 v2 から撤回した主張（全件）
+
+| # | 撤回した v2 の主張 | 理由 |
+|---|---|---|
+| 1 | `changed=[]`（読取中に source は変わっていない） | `git status` は既に `M` の file の byte 変化を見分けられない（R1） |
+| 2 | as-read WT hash（16 桁）と WT 行番号の対照表 | 可変な面への参照。immutable commit へ全面移行（R1） |
+| 3 | **`GRASP_Z` 99 hit / 21 file・`PUSH_Z` 53 / 11・`EE_TO_FINGERTIP` 74 / 19** | root/include/exclude/行 vs 出現/測った tree が未定義 ＝ 再現不能。かつ可変 WT 上の測定（R3） |
+| 4 | tier 名「**operative**（env / skill）」 | 下していないはずの runtime 判定を名付けが先取りしていた（R4） |
+| 5 | §2 (4) 「（Grip skill のみが実質の consumer）」 | §B2 の撤回と同一文書内で矛盾（R5） |
+
+---
+**p11 ARM-CONTROL-DESIGN v3 — R1〜R5 cause-side correction / 起草 2026-07-26 17:57:07 JST（権威時刻 = bank commit の author time）**
