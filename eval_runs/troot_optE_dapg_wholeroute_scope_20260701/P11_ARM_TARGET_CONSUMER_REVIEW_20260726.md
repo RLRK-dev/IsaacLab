@@ -1,7 +1,7 @@
 # 腕側 consumer レビュー材料 — `GRASP_Z` / `PUSH_Z` / `EE_TO_FINGERTIP`（p11 ARM-CONTROL-DESIGN）**v4**
 
 **依頼:** `MSG-PN-P11-FINGERTIP-BOUNDARY-MATERIALS-20260726-001`。
-**⭐ 本 v4 が応答する RETURN（**8 通を 1 つの最終 bundle に fold**）:** `MSG-PN-P11-FINGERTIP-MATERIALS-V3-RETURN-20260726-004` の **残件 B6** ／ `MSG-PN-P11-FINGERTIP-B6-LIVEWORD-20260726-005` ／ **B7**（records coherence）／**B8**（比の根拠外し）／**B9**（再測定不要の撤回）／**B10**（方向断定の撤回）／**B11**（全桁 SHA・未読対象）／**B12**（sizing 点の統一）／**B13**（command の型）。**R1〜R5 は `-004` で PASS 済**。
+**⭐ 本 v4 が応答する RETURN（**9 通を 1 つの最終 bundle に fold**）:** ⚠ **記録訂正（pN **B14** 受理・2026-07-26 18:31:33 JST）**: `d02385cca42e93c72a1aa92b60890ca1c495a8b8` の本行は **「8 通」と書いていたが、列挙は 9 要素**だった（`-004`(B6) / `-005` / B7 / B8 / B9 / B10 / B11 / B12 / B13）。⇒ **数え違いは私の欠陥。9 通に訂正。** ⛔ **旧 commit `d023…` は immutable のまま保全**（本訂正は records-only の後継 commit・**他の内容・scope・gate は不変**）。 `MSG-PN-P11-FINGERTIP-MATERIALS-V3-RETURN-20260726-004` の **残件 B6** ／ `MSG-PN-P11-FINGERTIP-B6-LIVEWORD-20260726-005` ／ **B7**（records coherence）／**B8**（比の根拠外し）／**B9**（再測定不要の撤回）／**B10**（方向断定の撤回）／**B11**（全桁 SHA・未読対象）／**B12**（sizing 点の統一）／**B13**（command の型）。**R1〜R5 は `-004` で PASS 済**。
 **⭐ 全件受理・全件私の欠陥・争点 0。** 撤回/narrow の全件表 = **§5.3（#6〜#15）**。⛔ **値・参照点・方式・owner を選ばない／全 gate CLOSED は不変。**
 **B7 = 受理。私の欠陥。** ①「T-4〜T-8 は行を読んでいない」という fence が**事実に反していた**（T-7 の行の中身を記述していた）⇒ **検証の深さを tier と別軸にし、D-1 10 file / D-2 21 file を全件列挙**（§R4-b）。②「consumer 判定を一切下していない」という**全称形を narrow** ⇒ **(α) 静的な call / use の記述は行う／(β) runtime・production 到達性は UNVERIFIED で推論しない／hit table 単独では consumer を確立しない**（§R3 (e)）。
 **B6 = 受理。私の欠陥。** 「cable に実際に触れるのは pad body」を**測定された接触面の主張として撤回**し、**実際の接触 geom / 面は UNMEASURED** と明記。**J-b / J-c は「ラベルの付いた参照点」としてのみ保持**。⇒ 本体は §1 (2) ／ §4 ／ **§5.3 #6**。

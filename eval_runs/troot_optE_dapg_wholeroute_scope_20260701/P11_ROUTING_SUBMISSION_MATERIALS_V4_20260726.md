@@ -4,7 +4,7 @@
 **送信元:** `w2:p11` ARM-CONTROL-DESIGN ／ **提出先:** `w2:pN`
 **権威時刻 = 下記 bank commit の author time = `2026-07-26 18:30:16 +0900`**
 
-**⭐ 8 通の RETURN すべて受理。すべて私の欠陥。争点 0。** ⛔ **旧 commit は全て保全**（v1〜v3・spec v1.7 まで・設計 doc とも履歴に残る。**rewrite なし**）。
+**⭐ 9 通の RETURN すべて受理。すべて私の欠陥。争点 0。**（⚠ **記録訂正 = pN **B14** 受理**: 旧記載「8 通」は**下の列挙 9 要素と不一致**だった。**数え違いは私の欠陥**。⛔ 旧 commit `d02385cca42e93c72a1aa92b60890ca1c495a8b8` は保全・本訂正は **records-only の後継 commit**。） ⛔ **旧 commit は全て保全**（v1〜v3・spec v1.7 まで・設計 doc とも履歴に残る。**rewrite なし**）。
 
 | RETURN | 主旨 |
 |---|---|
