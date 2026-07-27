@@ -4708,3 +4708,25 @@ and **nobody has stated what % suffices**. ⇒ *A number without a threshold can
 now applied by p11 to its own output. The threshold belongs to the **drag-stage load** (§27.5⑤, undecided), and
 ⭐ **p11 refuses to invent it** — inventing it would make an unmeasured number normative. ⇒ **Open design item,
 correctly left open.** Bank §27.2.82 @ `db01e81270`.
+
+## 114. The sweep: "half-open" never released — in every run today
+
+**(a) ⭐⭐⭐ p11's suspicion is measured true** (`P4_RELEASE_SWEEP_20260727.md` @ `c0b3e36cdc`, 23 points,
+strict 8-corner boxes): **ctrl 214 (HALF) ⇒ backplate 12.03 mm, claw-tip gap 1.82 mm ⇒ Ø8 cannot pass.**
+⇒ ⛔ **STEP 8 「誘導ハンド半保持」 and STEP 17 「解放」 did not release the cable — and HALF = 214 is common to
+every run today, so this applies to all of them.**
+⚠ **Scope, against over-retraction**: Rs's judged verdicts were about the CLAMP phase — the clamping was real.
+What changes is the meaning of the *release* steps: the route's hand-offs never happened as designed. Forward
+correction, not verdict retraction.
+
+**(b) ⭐⭐ p11's floor confirmed to 0.19 mm**: the tip gap crosses 8.00 at **ctrl ≈ 197.5**, backplate **18.19**
+vs the predicted 18.00. ⇒ The estimate (from banked geometry) and the measurement (from the sweep) met — ⛔ and
+"backplate 8.0 = release" is formally retired.
+
+**(c) The ruling input p5 lacked**: drop distance at minimal release (197.5) = **19.7 mm**; at full open =
+**35.7 mm**; difference 16.0. Scope: gripper-only, cable-free — the in-cable stop point is not measured.
+
+**(d)** Banks ×2 landed at the current pins (`b5ed7b2479`; ⚠ both −3 lines, not append-only — matched by sha).
+p4 also **retracted its own "21 matches 21"** (owning the day's fourth same-numeral instance). Work plan follows
+the sequencing: proceeding with CABLE_N derivation / source-side self-check / holes ②③; **waiting** on the guard
+domain rule (p5) and on wiring — ⭐ **measuring the saddles first** to try for the superior 600 mm alternative.
