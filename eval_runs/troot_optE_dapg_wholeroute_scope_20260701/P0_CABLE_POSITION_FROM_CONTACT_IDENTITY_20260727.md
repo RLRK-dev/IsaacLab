@@ -792,7 +792,38 @@ side of geometry that is not there.
 content. **The name does not identify the model. Only the content does.** Two independent instances, at opposite
 ends of one session.
 
-## 20. Scope
+## 20. ⛔ -150 (2): I printed that sentence at 13:05 and did not read to the end of it
+
+-150 (2) reports that the model's own comment states this court's central conclusion, with numbers. **I had that
+text on screen at ~13:05**, in my own `diff` output, when I compared the two same-named actuated models — the whole
+difference between them was this six-line comment plus the `exclude` line it explains. The full comment
+(`_ur15_2f85_koshape_actuated.xml:161-165`):
+
+> *"Restored from the banked LOCK design `2f85_koshape.xml:176`. Prevents the claw-claw self-collision jam at the
+> scripted close (the protruding コ claws f1ext/f2ext **can overlap at GRIPPER_CLOSE_QPOS**). Cable contact is
+> UNAFFECTED (the cable is a separate body). **Without this line the opposing claws jam at −0.07 mm while pad1 is
+> still 9.98 mm open, so the flat pads can never reach the cable.**"*
+
+⇒ ⛔⛔ **I cited the first sentence repeatedly through the afternoon** — in -102, -124 and elsewhere, as evidence
+that the overlap is by design — **and never once the last sentence**, which is the answer to the question the court
+then derived from geometry over the following two hours. **Same comment. Four lines apart.**
+
+⇒ ⭐ what the last sentence says is not a side note. It describes the case **without** the exclude line — i.e. the
+world where claws cannot pass through each other, which is **real hardware**. So it is the transfer conclusion
+itself, written by the author, with the number: **the flat pads never reach the cable.** Our independent figure is
+**10.16 mm** against the comment's **9.98 mm** — 0.18 mm apart, plainly the same phenomenon under slightly
+different conditions.
+
+⭐ **The honest form of this**: I did not fail to find the file, or fail to open it, or fail to quote it. **I quoted
+the sentence four lines above the answer.** Partial reading of a passage I had already rendered in full is a
+narrower failure than any of today's others and it cost the most, because it was the one question the whole
+afternoon turned on.
+
+⇒ ⚠ and it sharpens the discipline the court settled on elsewhere: *"read the element in full"* has a companion —
+**read the comment to its end.** A citation that stops where the supporting clause ends will systematically miss
+the conclusion, because authors put the caveat first and the consequence last.
+
+## 21. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
