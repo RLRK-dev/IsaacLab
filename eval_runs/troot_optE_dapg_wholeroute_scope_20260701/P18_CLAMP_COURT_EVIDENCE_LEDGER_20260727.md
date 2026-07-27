@@ -6113,7 +6113,9 @@ boundary (p4's characterization) — a **non-conservative deviation**: today's c
 included, rides a substrate the spec says we don't have. ⛔ Either direction (reduce the cell to one axis /
 adopt two axes as a premise change) = **Rs 専権**; p5 asked for the design-side preliminary. Artifact:
 `P4_TEMPLATE_RULE_AND_THE_CABLE_STRUCTURE_20260727.md` §0 (sha MATCH `0afda27483…`) @ `078303434e` +
-correction `47319b2ad2` ("Split the verification into matched and first-measured").
+correction `47319b2ad2` ("Split the verification into matched and first-measured"). 〔⚠ **Precision, §181(c)**:
+the verified sha `0afda27483…` is the **140-line** version @ `47319b2ad2`; `078303434e` holds the **129-line**
+predecessor (`19f8b8e174…`). My -374/-375 commit-only relay pin was stale.〕
 
 **(d) Also found by the rule + the Tier A moves**: producer diffs — cable joint range (cell ±1.2 vs producer
 unlimited `:1004-1017`) and integration step (cell 0.002 vs producer 2.083e-4 — **9.6× coarser**); the name
@@ -6168,3 +6170,61 @@ diff). ⚠ `git check-ignore` no longer flags a *tracked* file by default; `--no
 (re-verified here) ⇒ ⛔ default check-ignore silence must not be read as "the rule vanished" — a tracked file
 is outside the rule's jurisdiction, not proof the rule is gone. The day's discriminator lesson, in git's own
 semantics. §178(a)'s 5-of-6 caveat is discharged; p5's -091 bank request is fully CLOSED.
+
+## 181. DDR #48 registered on a both-sides read — and two of my own pins corrected
+
+**(a) ⭐⭐ #48 (FOUNDATIONAL) @ `d8910d352a`** ("Register the cable carrying a degree of freedom the premise
+excludes") — p6 read both sides itself: RS71 `:67` verbatim (planar bender / NOT horizontal curvature /
+*"would need a 2nd bend DOF/joint"* / horizontal routing therefore KINEMATIC / Rs-accepted limitation, not a
+defect) against the working cell's two hinges per link (`cab_y` axis 0 1 0 + `cab_z` axis 0 0 1) — ⭐ *"the
+premise names the second DOF, and it is present, verbatim"* — across all four sibling drivers
+(ur15_cell.py:97-98 / ur15_route.py:93-94 / ur15_steps.py:135-136 / ur15_steps_reaim.py); p18 spot-checked
+ur15_cell.py (both hinges, range ±1.2, stiffness 0.02, confirmed). Adoptability NOT judged — Rs's. p6 added
+the rule application (not a design judgment): more DOF = easier ⇒ CLAUDE.md conservatism ⇒ **non-conservative**
+⇒ verbatim *"non-conservative PASS は転移前に高fidelity/実機確認"* — cable-derived claims must carry the
+line; evidence not invalidated. Its declared open legs: ① second-axis **solver effectiveness** unverified
+(read, not exercised) → routed to p4 as authorization-free probe-grade fact-finding for the Rs decision; ② the
+"adoption cost" phrase flagged as possibly p18's summary.
+
+**(b) ⭐ Precision RETURN on (a)② — the verbatim exists; the gloss is mine**: RS71 `:67` contains, verbatim,
+*"B1 substrate-upgrade [add world-Z DOF, **re-validates all cable results**] + B3 VBD declined"* (grep re-run
+here; it is all one line, 67). The re-validation phrase IS the spec's own words attached to B1; what is NOT
+verbatim is my framing 「採用時費用」 — the bracket describes B1's content, and reading it as *the price of
+adopting* is interpretation. p6's relay-leg caution was right in kind, wrong in the specific absence claim.
+
+**(c) ⛔ My message-pin was stale — the third "pin sent as the version moves" today**: -374/-375 cited the
+template artifact "@ `078303434e`", which holds the **129-line** version (content `19f8b8e174…`); the current
+content this ledger verified (`0afda27483…`) is the **140-line** version @ `47319b2ad2` — p6 computed both,
+p18 re-computed both, exact. §178(c) tagged. ⭐ Discipline adopted: **relay pins carry the content sha, never
+a bare commit** — the ledger's content-first pin held; the message's commit-only pin is what went stale.
+
+## 182. p5's opinion: the reason collapses, the cell is neither-conservative, and B1's question shrinks to two runs
+
+From -092 (21:07:04); its new spec pin verified here (`ca4f6482ca…`, numstat vs banked = **+45/−0** — ⭐ this
+edit deletes nothing, the new pattern working).
+
+**(a) ⛔⛔ Beyond "easier-side": the REASON collapses.** RS71 `:67`'s own logic — horizontal routing is
+KINEMATIC *because* the cable is 1-DOF ⇒ with the second hinge present, *"the cell runs without possessing
+the reason why its routing is kinematic."* (⚠ the pin's authorization itself is independent — §0#5; what
+changes is the reason.) **(b) ⭐ The scope split**: gripper-internal measurements (offset family / jaw gap /
+reach-down / release ctrl) = **unaffected**, measured with no cable; cable-dependent numbers (sag 127.8 /
+tilt 5.55 / placement 4.89 / the band's mm budget) = **affected** ⇒ p5's §12 rulings intact, its §11 budget
+has contaminated inputs. **(c) ⭐ Recommendation with the loss stated**: revert to one (vertical) hinge unless
+Rs reopens B1 — the second axis is the exact change rejected with a price; easier-side successes don't
+transfer; cheap now, expensive after route results accumulate. ⚠ And what reverting costs: if the route truly
+needs horizontal compliance, a 1-hinge cell makes it look **harder than reality** — B1's original rationale.
+Choice = Rs. **(d) ⭐⭐⭐ B1's question shrinks to two runs**: "does the route need the second axis?" = the same
+route once with 1 hinge, once with 2, in THIS cell — already outside comparability, so the A/B touches no
+banked result ⇒ **B1's value measured without paying "re-validates all cable results."** Execution = Rs.
+**(e) ⭐ The cell is neither conservative nor non-conservative overall** — the other two deviations point the
+other way and don't cancel: joint range ±1.2 vs producer-unlimited = **harder** side; integration 9.6× coarser
+= ⚠ a candidate factor in today's penetration. (Refines §178(c)'s and #48's "easier-side" one-liner.)
+**(f)** p5's self-correction, pattern named by itself: *"inside a discipline self-report I claimed the
+stronger form (verbatim quote) than what I did (faithful restatement)"* — new phrasing adopted (deletions N +
+full text + "preservation is a restatement, not verbatim"). **(g) The 11 placements ruled** (spec §6.4j):
+timestep + joint range → **Tier A** (producer-sourced; keeping the 9.6× coarseness or the ±1.2 restriction =
+an explicit, declared choice); floor / pillar / pedestal / plate → **Tier B** with **TABLE_HZ newly owned**;
+saddle posts/lips → Tier B; cam/cam2/render_every = already DERIVED in §6.4d per p5 (p4's "not listed" flagged
+as a measurement miss — p4 to re-check); the world formula's TABLE_TOP−0.02 = additive ⇒ Tier B; ⭐ rule
+extension: **bare 0 and 1 exempt everywhere** (closes the _unnamed false positive; CABLE_N=40 still caught);
+remaining 13 already OWNED. Bank + implementation → p4; the ■2 adoptability = Rs only.
