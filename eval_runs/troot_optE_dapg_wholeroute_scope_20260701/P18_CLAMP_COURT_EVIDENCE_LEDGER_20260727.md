@@ -4195,3 +4195,35 @@ Tier C (per-run) = not unified. ⛔ CLAMP/OPEN/HALF and PD gains **not frozen** 
 ⭐ Guard = **AST detection of in-driver redefinition** — grep would miss (today's own evidence: p11's five false
 zeros, pB's attribute-order miss). ⭐ p5 pre-declared its weak spot: TABLE_HX/HY chosen on "later cell" grounds
 alone — p4 may supersede with evidence.
+
+## 91. The unresolved item is not the label — two briefs on disk contradict each other
+
+**(a) ⛔ My `-202` framing partly misdirected the label question.** `w2:p6` measured: the registry holds **both**
+words already (`:36`/`:37`) and is a **category of role names, not a pane→role map** ⇒ **no registry line changes
+under either outcome** ⇒ nothing in p6's file-court to touch. ⇒ The rename itself = role assignment = **Rs**, and
+p6 recommends **not renaming until Rs disposes of pZ** — consistent with the brief's own `:34`.
+
+**(b) ⭐⭐ p6 then found what my dispatch did not contain: the on-disk briefs contradict.**
+`IMPL_ROLE_BRIEF_p0_20260721.md:32` verbatim: 「着地の前に、あなたの変更を pZ が独立に検証する。」 `:33`: pZ 判定
+後に p4 が着地 ⇒ ⛔ **p0's own brief still instructs the OLD chain** — head-on against
+`RSTECHLEAD_ROLE_BRIEF_p4_20260727.md:33-:34`. ⇒ ⭐ **If p0 reads its own brief, it returns to the superseded
+structure. Renaming the pane does not touch this.** Owner of the stale briefs = p4 (their footers) ⇒ **routed to
+p4: append supersession notes to the p0 and pZ briefs pointing at the new §体制.**
+
+**(c) ⚠ p6's fifth self-instance, caught before writing**: it checked "is p0 bound to the new role on disk?" by
+reading **only the brief named after p0** — the appointment lives in **p4's** brief. ⇒ *Building the predicate
+from the target's name*, again. It verified my citation before asserting absence ⇒ nothing false left its pane.
+
+**(d)** Node registration: p6 reads NEST §3.1 child-node creation as its own gate ⇒ **draft done, awaiting Rs
+approval** (not covered by the 起動 blanket in p6's reading — the surface owner's reading governs).
+
+## 92. p15's first act: a collation-first ACK, and one out-of-court finding handed up, not banked
+
+`w2:p15` ACKed by **collating, not trusting**: both briefs byte-match commit `124b8cad70`, tree clean, registry
+re-read — ⭐ **noting it had read the same file at 14:05 when both lines were absent, so it verified the update
+rather than assuming its own stale read** (freshness discipline on its first message).
+⭐ **And it declared an out-of-court finding correctly**: two static-reading findings on the already-landed WMSO D1
+implementation (`thread_isaac_lab/wmso/d1`) made **before** its brief landed ⇒ ⛔ **not p14's implementation ⇒ not
+its verdict** — unbanked, numbers withheld, disposition requested of p12 (bank? where? or discard). ⇒ **Routed to
+p12.** ⇒ ⭐ The lane's verifier demonstrated the boundary on day one: **findings outside the court are material,
+not verdicts.**
