@@ -6635,3 +6635,53 @@ FLOAT_Z 0.0). **(c)** Open in p4's court by its own count: the re-grasp diagnost
 p18's §196(c) disposition stands (instrumentation = p4's measurement powers; the *remedy* design = the p5/p11
 court question, pending). ⭐ **The static lane is closed**: every constant single-sourced, every pin banked
 clean; p0's final confirmation is the one remaining verification step — everything else waits on Rs.
+
+## 200. The seam is phases vs requirements — measured from the step table, with the cause left unclaimed
+
+From p11's -089 (21:49); pins verified here (@ `db77b65ccf` "Answer the re-grasp court question from the step
+table", doc sha MATCH `52ee57d7e5…`; the aim-phase asymmetry re-checked — `aim_slot_at` lives at
+`:466/:510/:523/:809` and nowhere in the re-grasp region).
+
+**(a) ⭐ The one-line jurisdiction**: *"相の有無と順序 = p5 / 相の合否条件と指令 = 私"* — p5 goes first; p11
+supplies per-phase requirements; ⛔ p11 does not rewrite the step table. **(b) ⭐⭐⭐ Grounded by reading, not
+opinion**: ① the right hand's RELEASE did not fail — STEPS 12/13 carry OPEN=18 = backplate gap 79.92 mm ≫ the
+18.19 release floor ⇒ §27.2.83's "HALF cannot release" is STEP-8/17 business, not this; ② the difference is
+**phase structure** — first grasp = above-cable → descend + standoff re-aim → "re-aimed on the settled cable"
+(closed-loop `aim_slot_at`) → close; re-grasp = lateral to RX_MID → close, **both at transport height** ⇒
+**none of the three phases** — consistent with `grip=L-` at STEP14 and with Rs's eyes. **(c) ⭐ The split's
+content**: p5 = whether re-grasp decomposes into the same phases or another structure, the order, which hand
+supports when; p11 = what each phase must satisfy as control (aim target — the slot onto the cable, inside
+band 12.00, evaluated at the working point / the finger command sequence — release above 18.19, close into
+the band / the roll-yaw allocation per §27.2.90). **(d) ⚠ Scope kept**: the ABSENCE of the three phases is
+measured; ⛔ that the absence CAUSES the failure is NOT — *"構造差は仮説を 1 つに絞る材料であって原因の証明
+ではありません."* Routed: p5 (the design question, now carrying the split proposal + the structural finding)
+and p4 (FYI — its diagnostic block will instrument whatever p5 designs).
+
+## 201. The two answers mesh — and the killable test cannot run for the very reason the structure predicts
+
+From p5's -097 (21:50:28); measured here before banking.
+
+**(a) ⭐ p5's split, by LEGS** (*"「再把持失敗」は連言なので、先に どの脚が落ちたかを分けるのが順序"*): p5 = ①
+the success predicate (grasped() errs both ways, its §12-6 — redefine on claw-tip gap) ② the geometry legs
+(aim point / approach / escape / close floor — the first-grasp rulings applied to re-grasp) ③ the step-table
+detail (what STEP12-14 should command); p11 = ④ did the arm reach the commanded pose (servo / settling /
+roll-yaw budget) ⑤ inter-hand timing and gates. Boundary: **"what to aim at, how wide to open, when to close"
+= p5 / "did it get where it aimed" = p11** — compatible with §200(a)'s phases-vs-requirements; conflicts → Rs.
+
+**(b) ⭐⭐ One leg dropped immediately, twice-independently**: the OPENING leg is satisfied — p5: OPEN=18 ⇒ pad
+79.92 / claw 69.90 ≫ its floors 18.20 / 8.00; p11 (§200(b)①): backplate 79.92 ≫ 18.19 ⇒ **the failure is not
+"didn't open"** — two courts, two derivations, one verdict.
+
+**(c) ⭐⭐⭐ The candidate, its test — and what p18 measured**: p5's hypothesis (declared, no dependent values):
+the re-grasp targets a cable HELD by the other hand ⇒ constrained, not free ⇒ `cable_at()`'s fixed-x +
+nearest-link snapping (±15 mm quantization) should aim WORSE than at first grasp. Killable test = compare
+STEP13's aim residual against the first-grasp 1.45–4.89 mm. ⭐ **p18 ran the check: the log's aim prints exist
+ONLY at `:20-25`** (initial aim + STEP3 standoff — the exact 1.45/1.64/2.33/4.89 values) — **nothing after
+STEP12** ⇒ the test cannot run on the existing log **for the very reason §200(b)② predicts: there is no aim
+print at STEP13 because there is no aim phase at STEP13.** The findings interlock; the candidate stays live
+and untested; and the instrumentation requirement falls out — **p4's re-grasp diagnostic block must include
+the aim residual**, so the next authorized run carries the discriminator.
+
+**(d) ⚠ The hand-identification caution held open**: the step table's re-grasper is RIGHT (STEP13); Rs said
+LEFT; p4's geometric mapping says no conflict — p5 still correctly holds: ⛔ **hand identity waits for the
+visual side (pC, in flight, blind)**; the mechanism argument is hand-independent either way.
