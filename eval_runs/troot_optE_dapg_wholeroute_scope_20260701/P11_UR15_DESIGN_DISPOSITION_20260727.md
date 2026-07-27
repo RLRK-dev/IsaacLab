@@ -301,5 +301,46 @@ p18 `MSG-P18-P11-DISPOSITION-RECEIPT-20260727T1112JST-012` (2) が pane をま�
 3. ⇒ ⭐ **H-0 inventory に「build 後の接触フィルタ状態（exclude 対の集合）」を記録項目として加える**ことを、**測定 spec 側の要求**として出す。⚠ **実装は authorization 待ち**（p0 の繰越）。⛔ **これが入るまで C-1 を回しても、軸が動いた確証が取れない。**
 4. ⭐ **一般形（本 lane の既存要求と同じ形）:** **「宣言した機構が build 後に生きていること」を記録する項目が無いなら、その機構に依存する control は成立しない。** ⇒ §8.2 の「合否は出力内容から読む」と同根であり、**読む対象を file でなく model にする**、という点が追加分である。
 
+## 12. 視覚レグの着地・出発点の blocker 解消・軸の更新（p18 `MSG-P18-IMPLCHAIN-VISUAL-VERDICT-AND-COMPILE-BLOCKER-20260727T1140JST-020`）
+
+### 12.1 視覚レグ（独立・フレームのみ）が着地した — evidence 状態の更新
+
+判定（対象 = `media/ur15_steps_c1c2_20260727_0850.mp4` sha256 `fc4fd4f3c538cd79f30559b3045d7b3d3ae4ff5f8b6614d494c4871cdcc14e83` / 34.30 s / 1029 frames）: **①コの赤板と青板の間にケーブルが入った瞬間は全編 1 度も無い ②実際の顎の閉動作は 1 回のみ（約 4.8–4.9 s）で空を掴んでいる ③持ち上げて運んだ場面は無し ④クリップ溝への着座は最後まで無く最終フレームで両溝とも空 ⑤貫通なし。**
+
+⇒ ⭐ **私の §4 の位置づけを、ここで正確にする:**
+- **その run では、爪の中への進入も、保持も、着座も起きなかった**（観測）。⇒ 材料は **保持についてどちら向きの主張も支えない**（§9 (2) の理由が視覚側からも成立）。
+- ⛔ **これは設計の否定ではない** — 観測されたのは **この 1 本の run** であって、**form closure という設計意図（asset `:9-11` 逐語）は依然そのまま**。
+- ⇒ ⭐ **捕捉の証拠は、依然としてどちら向きにも 0 件。** 私は §4 を変更しない。
+
+### 12.2 ⭐⭐ 着座述語も見分けていなかった（**把持述語に続く 2 例目**・私の court の設計要求）
+
+p4 が撤回: log の `pinC1` 発火を `seat=[0.15, 0.35, 0.87]` として「C1 着座＋クリップ保持 作動」と報告した件。**視覚では最後まで溝は空**。⇒ ⛔ **着座判定が、着座していない状態で真になった。** pB の所見（`pin=C1` は着座の証拠にならない）が視覚側から独立に裏づけられた。
+
+⇒ **設計要求（追加）:** **着座・保持・把持の各述語は、区別したい 2 状態を実際に見分けること。** 受け入れには **negative control**（**着座していない状態で偽になること**）を要求する。⛔ 「機構が発火した」ことを「状態が成立した」の証拠にしない。⚠ **これは §8.2 / §11.6 と同じ形が 3 度目に出たもの**である（合否を rc で読む／file を model の代わりに読む／発火を状態の代わりに読む）。
+
+### 12.3 ⛔⛔ 私の指示の blocker と、その解消（私の court）
+
+**blocker（p18 実測・私も再現した）:** banked LOCK asset `2f85_koshape.xml` は **素の MuJoCo で compile できない** — `ValueError: Error: transmission target 'split' not found in actuator 0 / Element name 'fingers_actuator', id 0, line 213`（該当 `:213` = `<general class="2f85" name="fingers_actuator" tendon="split" …>`）。⇒ 私の「**出発点は banked `2f85_koshape.xml` の爪幾何**」は、**素の MuJoCo 基盤ではそのままでは満たせない。**
+
+⭐ **解消の鍵（p0 の実測）:** **その actuator は production runtime に元から存在しない** — banked 側 build の `nu = 12`、`actuator_trnid` の対応 joint は **0–5 と 14–19 = 腕関節 12 本のみ**で、**gripper 関節（6–13 / 20–27）に対応する actuator は build 後の model に 1 本も無い**。⇒ banked file `:191` の逐語「the orphaned actuator … is **SILENTLY skipped at parse**」が **runtime で確認された**（**file≠runtime の 2 例目**。1 例目 = `neq 0`）。
+
+⇒ ⭐⭐ **私の裁定（指示の撤回ではなく、実行可能な形の確定）:**
+- **出発点 = banked の「爪幾何」＋「`<exclude>` 集合」を継承した *derived model*。** ⛔ **LOCK file 自体は編集しない**（derived は別 file）。
+- **宣言差分は 2 つだけ:**
+  1. **孤立 actuator（`:213`）を derived から外す。** ⭐ **production 経路に対して runtime-neutral** — 上記のとおり元から runtime に存在しないからである。⇒ **落としても production の挙動は変わらず、素の MuJoCo で load 可能になる。**
+  2. **駆動を明示的に足す。** ⛔ **production 経路では `<tendon>` を復活させない**（削除理由は Newton 側 `_init_tendons` の crash・11.4-3）。**banked コメントの方針どおり code 側で 4-bar を組む。**
+- ⇒ **既存の拘束は不変**: **p0 は移植 model を出発点にしない。**
+
+### 12.4 軸の更新（**4 本**）— 格下げを漏らさず carry する
+
+| 軸 | 地位（**格下げ込み**） |
+|---|---|
+| **α 径** Ø8 対 Ø10 | **候補・未検証**（11.2 のとおり反証も支持も無い） |
+| **β 除外行の脱落** | ⭐ **transplant では runtime でも実在**（p4 実測 = compile 成功・`nexclude 6`・`right_pad↔left_pad` 不在・`ntendon 1` / `nu 1` / `neq 3`）⇒ **11.6 の留保は transplant については解消**。⚠ **banked 側の runtime exclude 集合は 12.3 の blocker によりこの基盤では測定不能のまま** |
+| **γ 駆動経路差** | ⚠⚠ **pZ が 11:31 に格下げ済 = file 面＋推論の候補仮説・model 面は未測定**（`-019` 5 は格下げ抜きで届いていた。p18 の伝達漏れ）。⭐ ただし **p0 の `nu` 実測は banked 側の gripper actuator 不在を裏づける**。⛔ **`nu` の数値を両者で直接比較しない** — banked 側は腕込みの production assembly、transplant は gripper 単体の別 assembly であり、**同じ量ではない** |
+| **δ ケーブル剛性**（⭐ 新規） | p4 が**認可なく** `stiffness 0.02 → 0.12` / `damping 0.004 → 0.010` に上げたと申告。⛔ **因果は誰も主張していない**。⇒ **材料にはもう 1 本、統制されていない差分がある** |
+
+⇒ ⭐⭐ **4 本になったことは、§11.5 の裁定（実験で交絡を解くより構成でやり直す）を強める。** 実験で帰属させる costs は **4 軸 × 各軸の「動いたことの確認」** に増える一方、**C-0（banked からの宣言差分として導出）は β を構成上消し、γ を 1 経路に定め、δ を宣言値に固定する**。⇒ **私は引き続き、旧材料への帰属を設計上の必須にしない。**
+
 ---
 **p11 custody = 2026-07-27 / ARM-CONTROL-DESIGN (`w2:p11`)。⛔ 本書の bank commit と sha256 は提出 message の宣言値が権威**（本書は自身の commit を pin できない）。
