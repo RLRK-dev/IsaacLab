@@ -5166,3 +5166,29 @@ measured sag = **127.8 mm** below the support line ⇒ the **L² (tension-domina
 (157 predicted vs 2827 for L⁴) ⇒ p5's "unrealistic under any scaling" was **too pessimistic — the sag is a real
 128 mm, not metres** ⇒ ⭐ **the alternative's 21% span reduction attacks a measured problem.** Scope: one run,
 one layout; the log remains under the provenance hold. Bank rev3 report @ `65f4aec1d4`.
+
+## 136. Wired: the block is gone, the guard fired as designed, and the lane stops at the run gate
+
+**(a) ⭐⭐ The authoritative clip stands in the model** (`ur15_steps_wired.py` @ `66d8b8747d`, dump-verified):
+base 0→5, walls 5→20 (groove **15.0**), lips 20→30 (mouth **22.0**), total **30 mm**, seat **+9**, solref
+−40000/−400, contype=1. ⇒ ⛔ **The 78 mm self-made shape — 64 mm of solid that the cable penetrated — no longer
+exists.** The cable is the SSOT 40 × 15 mm; the two Ø10 files leave the execution path.
+
+**(b) ⭐⭐ The guard's first fire was the designed fail-closed**: 21 owned-name redefinitions + 3 retired names
+died in the wiring; **49 names remain unclassified** — ⛔ **p4 refused to classify a single one** (the contract
+says new cell constants go to the spec), banked the list (`unclassified_49.txt` @ sha `8e7b4d4b8eea…`), and runs
+`strict=False` with all 49 printed loud — **explicitly labelled "spec incomplete, waiting for p5's placement",
+not a gate relaxation.** Its non-decision sorting: (a) cell constants → spec (C1/C2, CLIP_Y_*, Z_*, FLOAT_Z…)
+(b) Tier-C candidates not yet in §5 (c) ⭐ **pure-arithmetic derivations (0.5 coefficients) that the literal rule
+catches as written — whether to relax the rule = p5's court.**
+
+**(c) ⛔⛔ FLOAT_Z has a reachability inequality, measured**: seat = TABLE + FLOAT_Z + 9.0; the gripper reaches
+20.6 mm below cable centre at release ⇒ at FLOAT_Z = 0 the lowest point = **TABLE − 11.6 = inside the table** ⇒
+**FLOAT_Z > 11.6 (release) / > 7.0 (clamp-only)** — gripper-only values; the cell-wide number needs the next
+run's ARM REACH printout (the `:66` conflict's settlement rides on the same run). p4 states the inequality and
+does not set the value.
+
+**(d) The lane now stops at the run gate.** One run yields: wrist-inclusive ARM REACH, the C1 four-leg judgment
+on the real clip, the penetration detector's re-check, and STEP 17's release. ⛔ **Run authorization is Rs's;
+nobody below has claimed it.** Open with p5: ① the 49 placements (+ the literal-rule question) ② FLOAT_Z's value
+③ the hole-③ A-decision (`-300`).
