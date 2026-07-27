@@ -2727,3 +2727,74 @@ interpolation.**
 `0.6 + 0.2/66.8` = **0.6030 rad = 34.55°** — `w2:p0`'s figure. ⭐ The ledger above carries p0's number and is
 correct, but **I used it without reconciling my own disagreeing output** — the same failure as §25d, at a smaller
 scale, and caught only because I printed both.
+
+## 41. ⛔ CORRECTION — the trade does not vanish, it loosens. Three bands, and only one matches the banked mechanism
+
+`w2:p0` caught its own error before it reached Rs; **p18 recomputed all three**:
+
+| predicate | band | at roll 34.4° | 100% up to |
+|---|---|---|---|
+| **full containment** (cable floats clear) | 2.00 mm | 2.92 mm (**13.3%**) | 5.19° |
+| ⭐ **straddle — claws on BOTH sides** (the banked mechanism) | **10.00 mm** | **14.62 mm (66.4%)** | **24.44°** |
+| overlap only (cable merely within the claws' span) | 18.00 mm | 22.00 mm (100%) | 39.29° |
+
+⇒ ⛔ **p0's 18.00 mm band is too loose**: cable centre in [23.00, 41.00] **includes configurations where the cable
+sits to one side**, with a claw on one side only ⇒ **that is not the straddle.**
+⇒ ⭐ **The banked design requires claws on both sides** (`GD-KoShape-Finger.md:95` — `f1ext`/`f2ext` **straddle**;
+*"f1ext bottom claw engages under lift load"*) ⇒ **the correct band is the cable centre inside the slot,
+[27.00, 37.00] = 10.00 mm.**
+
+⇒ ⛔⛔ **So §37/§39's "the trade disappears" is wrong as stated. It loosens — from 13.3% to 66.4% — and 34.4°
+sits outside the 100% region (24.4°), not inside it.**
+⇒ ⭐ The **direction** of §39's conclusion survives (moving an invariant is still not shown necessary), but its
+**strength** does not. ⛔ p0 declines to judge and asks only that the numbers be replaced; p18 replaces them.
+
+⚠ **p0's own diagnosis, and it is today's shape again:** it **held three bands and used the loosest without
+asking which one corresponds to the banked mechanism** — and **p0 is the pane that wrote in `-138` that the two
+bands are different predicates.** ⇒ **Its own distinction, unused in its own claim.**
+
+### 41a. `w2:p11` retracted its "the grid hides nothing", and named the direction
+
+⛔ p11 withdrew §40a ①: it had **no basis for linearity** in the reach-versus-roll relation ⇒ if convex, the
+crossing comes earlier ⇒ ⭐ **the minimum reaching roll is bracketed in (0.35, 0.60] rad and nothing more.**
+⇒ ⭐⭐ **Its own words: "I answered a concern about insufficient samples by substituting a model for samples."**
+⇒ ⚠⚠ **And it records the direction: its interpolation fell on the 'no need to investigate' side** ⇒ ⭐
+**conclusions that close work deserve stricter scrutiny than conclusions that open it.** ⇒ This pairs with its
+morning finding about accepting an *unfavourable* claim unchecked — **now the favourable side, completing the
+pair.**
+⭐ p11 also notes the receiver checked instead of taking its word: **its mistaken "closed" did not slip past
+because p18 verified independently** — the receiver-side implementation of *do not treat agreement as
+independence*.
+
+### 41b. ⭐⭐⭐ The remaining question is `w2:p11`'s own OPEN 5 — and the test has a required axis
+
+⭐ p11 observes the single remaining question **is the OPEN 5 it opened this morning** (capture ≠ grasp; is it
+enough for the dragging process). ⇒ **The morning's question narrowed, over a day, into the only one left.**
+
+⭐⭐ **And it predicts the answer's direction from the mechanism:**
+
+| term | kind of constraint | what it stops |
+|---|---|---|
+| **claw straddle** | **form** — needs no normal force | motion **perpendicular** to the cable axis ⇒ ✅ **lifting works** (the lower claw catches — the asset's stated intent) |
+| **backplate pinch** | **friction** — needs normal force | sliding **along** the cable axis ⇒ ⛔ with 2.00 mm clearance the normal force is 0, so friction is 0 |
+
+⇒ ⭐⭐⭐ **Prediction, falsifiable: straddle alone suffices for lift and transport, and slides under axial drag.**
+
+⇒ ⛔⛔ **And p11 specifies the測定 axis, which is the part that matters:** the banked retention test was
+**X+Z load axes plus lateral ±8 mm wiggle** (`:99-100`) **and ran under the COMPOSITE grip** ⇒ ⭐ **a
+straddle-only test must load along the cable's own axis.** ⇒ **Testing up-and-down only would exercise the axis
+the straddle is good at — a test that cannot come out differently.**
+⇒ ⚠ Any PASS still carries §運用15's non-conservative tag (the sim can reach the pinch; hardware cannot).
+
+### 41c. `w2:p5` strengthened the confirmation question's premise without relying on an adjudication
+
+⭐ The reading 「上下 = the slot」 stands on **geometry and internal consistency alone**, independent of p11's
+§27.2.16:
+- **(a) geometry** — the only gap that can be called 上下 is the **10.00 mm intra-pad slot**; the jaw direction is
+  left-right, measured at **85.400 mm** in the default pose, which cannot be called 上下.
+- **(b) sense** — Rs's 「**上下をきつくしすぎるとクランプしづらくなる**」 is **self-contradictory** if 上下 means the
+  jaw, since *tightening the jaw is the clamping* ⇒ ⭐ **it is coherent only as the slot** (narrow the slot and the
+  Ø8 no longer enters easily ⇒ harder to clamp).
+⇒ ⭐ **So the premise under §40's confirmation question is a notch stronger than "it rests on p11's adjudication."**
+⚠ ⛔ **p5 has not received the verbatim from Rs directly either** — the provenance remains a relay, and p5's
+contribution is the conditional reading: *if that sentence is true, 上下 is the slot.*
