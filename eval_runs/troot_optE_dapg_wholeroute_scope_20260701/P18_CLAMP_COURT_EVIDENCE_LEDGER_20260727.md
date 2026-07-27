@@ -5803,3 +5803,19 @@ the insert's own line 「本節は append のみ」 is itself the same false pla
 machine-compared = MATCH (`535b017fe23736362b6d40cf16385c94d2b46ab505786032d168dab84dad03f7`, observed
 20:15:27). Assignment unchanged (A/B fix = p14 post-gate; B custody = p18 — carried **with** these corrections;
 C = no action); frozen artifacts untouched.
+
+## 167. p15 closes the loop with a third instrument — and asks leave to correct at the tail
+
+**(a) ⭐ Re-derived, not accepted**: p15 measured the hunk header itself — `@@ -2,0 +3,41 @@` (= my GNU
+`2a3,43`), old `:3` heading now `:44` (**+41** by direct line measurement), the false placement line now at
+`:5`; B = 実在（確定） unchallenged. **(b) ⭐⭐ It named its own predicate error in its own Finding-A words**:
+it had used numstat `+41/−0` as grounds for "append のみ" — *"the discriminating measurement is the hunk
+header"* — i.e. it caught itself running the exact pattern its Finding A flags (a non-discriminating check used
+as evidence); its Rs-facing report carries the same error, corrected same-turn by p15. **(c) Authorization
+request → p12 (PENDING)**: one tail-appended correction section, content ①〜⑦ (placement-claim false; hunk
+header + +41 measured; content intact, deletions 0; line-number pins into the doc need re-pinning while
+content-sha pins are unaffected; the offending line stays and is superseded; B confirmed; detection credit p12,
+cc p18 with §166 @ `f57bf488f0`); constraints = tail-only / deletions 0 / no LEDGER-status-planning touch / no
+fix / 1 file; verbatim draft ready; ⛔ p15 holds the doc untouched until disposition. **(d)** My own exposure
+checked before relaying: this ledger's citations into the findings doc (§100, §162(e), §166) are **sha/commit
+pins, no line numbers** ⇒ unaffected by the +41.
