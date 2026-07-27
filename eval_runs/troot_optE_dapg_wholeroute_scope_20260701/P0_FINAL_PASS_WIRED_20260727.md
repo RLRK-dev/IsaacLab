@@ -130,6 +130,29 @@ in a fresh interpreter prints **nothing**. The declaration only runs under `__ma
 `CABLE_BEND_STIFFNESS_OVERRIDE` can rescale EI at runtime, a run under an override would leave no
 trace at the place the trace is needed. One line at import, or a call the drivers must make.
 
+## 7.1 ✅ (d) independently reproduced — and the promise it makes is true
+
+Commit `5a428777b5`, sha256 `72359f781d9d4987cdf4a5b5…` — pin re-derived, matches.
+
+| | measured |
+|---|---|
+| import, override **unset** | **0 lines** |
+| import, `CABLE_BEND_STIFFNESS_OVERRIDE=0.02` | **1 line**, naming the variable, its value, that the EI does **not** come from `task_config.py:144`, and that `self_check()` will refuse |
+| does the override actually take effect? | `k = 1.3333` = `0.02 / 0.015` ✅ — the declaration is truthful, not decorative |
+
+⭐ And the warning makes a **checkable promise**, so I checked it:
+
+| | `self_check()` |
+|---|---|
+| override set | **refuses**, citing the producer line `test_newton_clip_routing.py:928` and the consequence |
+| override unset (control) | *all sources agree* |
+
+⇒ the string's promise is backed by the body. That is the opposite of the two cases this court
+corrected today — the `66.67` contract text and the `known` docstring — where the prose claimed a
+behaviour the code did not have. Here the prose was checked and holds.
+
+**(d) is closed**, on both legs: the print discriminates, and what it says is true.
+
 ## 8. Guard over every driver, measured
 
 | driver | findings | | driver | findings |
