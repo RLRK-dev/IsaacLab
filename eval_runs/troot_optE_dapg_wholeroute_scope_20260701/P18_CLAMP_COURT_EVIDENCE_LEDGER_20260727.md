@@ -2216,3 +2216,95 @@ does** — this time the name of a *file* rather than of a constant.
 constant from the run's own driver.** `SHOULDER_HEIGHT = 0.37 + 0.58 × 2.0 = 1.53` is identical at driver `:36`
 (p18 verified). ⚠ **Unverified on the driver side:** the `foot` radius 0.215, and the column's world-origin /
 no-rotation premise — both were read from the cell file. ⇒ **Read them from the driver before using them.**
+
+## 32. ⭐⭐⭐ Rs's pose observation, quantified — the mouth is a channel, and tilt costs contained length
+
+`w2:p5` derived it; **p18 recomputed every figure and they match.** The mouth is not a hole but a **channel**:
+10.00 mm of clearance in pad-local z, but the claws run **22.00 mm** along pad-local x
+(`2f85_koshape.xml:116` — `size="0.011 0.009 0.0012"` ⇒ x half-width 0.011).
+
+⇒ A cable (Ø8.00) crossing the channel at angle θ rises or falls by `22.00 × tanθ` over the claw's length, and
+the usable clearance is `10.00 − 8.00` = **2.00 mm** ⇒ ⭐ **full-length containment requires
+`tanθ ≤ 2.00/22.00` ⇒ θ ≤ 5.194°.**
+
+| θ | claw length that can contain the cable |
+|---|---|
+| 5.19° | **22.00 mm (100%)** |
+| 10° | 11.34 mm (51.6%) |
+| 17° | 6.54 mm (29.7%) |
+| 20° | 5.49 mm (25.0%) |
+| **34°** | ⛔ **2.97 mm (13.5%)** |
+
+⇒ ⭐⭐ **At the poses p4 measured — left roll 20° + yaw 17°, right roll 34° — only 13–25% of the claw length can
+straddle the cable.** ⇒ ⭐ **That is Rs's 「姿勢があっていない」, written as a number.**
+⇒ ⚠ **And the remaining 75–87% of claw length sits z-offset from the cable** ⇒ during the descent and the close it
+is on the **striking** side ⇒ consistent with p4's observed contact geom `f1ext`.
+
+⛔ **Axis premise, stated by p5 and not to be skipped:** this applies to the component that produces z-offset
+along the channel — **rotation about pad-local y**. **Rotation about the cable's own axis does not enter.**
+⇒ ⭐ **Open question to `w2:p4`: about which axes are "roll 34°" and "yaw 17°"?** The contained length is not
+determined until that is answered; p5 declines to guess the conversion.
+
+⇒ ⭐⭐ **The chain is placement → pose → containment → holding, and upstream fixes downstream** ⇒ ⛔ **containment
+cannot be restored by adjusting pose alone** — either the placement or the tolerance has to move.
+⇒ ⭐ **p5 adds a requirement to §15's gate:** when the sweep is re-run, the predicate must include **"can the mouth
+face the cable square-on"**, not only "do the arms clear each other." ⚠ **The current menu was selected on the
+latter alone.**
+
+### 32a. `w2:p11`'s best lever was already spent — and two constraints collide at one instant
+
+⛔⛔ **§30 hits p11's own §27.2.30 directly.** The free roll about the closing axis, which it had judged the
+best-founded option, **is not free**: reach pins it at 34° (roll 0 ⇒ 158.2 mm; roll 34 ⇒ 0.2 mm).
+⇒ ⭐ **There is a third claimant on that single redundant DoF — reach — and it has priority.** ⇒ p11's options
+reduce to **① DLS damping λ** (with its blunting trap) and **③ waypoint re-lay** (`w2:p5`'s court); ⛔ **② is
+withdrawn.**
+
+⇒ ⭐⭐⭐ **And the two constraints collide at the same moment**: σ_min's minimum (left **0.0381**) occurs at
+**STEP 4 — the grasp** — and roll is pinned by reach **at the grasp as well**.
+⇒ ⭐ **Falsifiable prediction (p11's): sweep roll at that waypoint while computing σ_min — if reach and
+conditioning are in direct opposition, σ_min should rise as roll returns toward 0.**
+⇒ ⭐⭐ **If it holds, the common cause of "the pose doesn't match" and "the conditioning is poor" is the yoke
+geometry** ⇒ back to p11's GATED item ⇒ **§0#2** ⇒ **§15's gate applies unchanged.** ⚠ If it does not hold, the
+two are independent. ⛔ p11 claims no causation and requests no run.
+
+### 32b. ⛔⛔ The arm's collision meshes are outside the repo — reproduction is unpinned
+
+`w2:p0` corrected its own narrowing and then found something larger.
+
+**Correction:** **forearm also qualifies** for containment. The column's diameter is **204.0 mm**, and the best
+case aligns a link's longest edge with the axis, so it turns on whether the other two edges' diagonal ≤ 204:
+base 228.8 ⛔ / shoulder 236.0 ⛔ / upperarm 242.6 ⛔ / ⭐ **forearm 193.0 ✅** / wrist1 133.0 ✅ / wrist2 141.4 ✅ /
+wrist3 114.9 ✅.
+⇒ ⭐⭐ **Containment is geometrically possible for the three wrist links and the forearm, impossible for upperarm,
+shoulder and base.** ⇒ ⭐ **So the concern was not empty.** ⚠ The forearm is 626 mm long, so it additionally needs
+to be near-coaxial.
+
+⇒ ⚠⚠ **And the conservative inequality is unusable on the long links.** Circumscribed radii (max |v| from the mesh
+origin): base 130.2 / shoulder 134.9 / **upperarm 721.1** / **forearm 569.5** / wrist1 119.3 / wrist2 130.6 /
+wrist3 77.9 mm ⇒ **at 721 and 569 the conservative test fires almost everywhere** ⇒ ⭐ **§29b's inequality is
+useful for the three wrist links only**; the long links need real vertices or a tighter envelope (a per-link
+capsule).
+
+⇒ ⛔⛔ **Provenance finding: the arm meshes live outside the repository.** `ur15_base.xml` references absolute
+paths under `/home/rlrk/src/ur15-line-render/assets/…` ⇒ ⭐ **the arm's collision geometry is pinned to no commit,
+so reproduction depends on files nobody is tracking.** ⛔ p0 proposes no disposition; recorded as a
+reproducibility gap.
+
+### 32c. The 118 mm was `w2:p5`'s, I relayed it, and its artifact stayed clean
+
+⛔ **Attribution, precisely, since §31 assigned it all to me:** the figure originated in **p5's `-043 B`**; **p5
+sourced the constant from the wrong copy, and I relayed it without checking.** Both are true and neither
+substitutes for the other.
+⇒ ⛔⛔ **p5's self-diagnosis is the sharpest instance of the day's shape**: it had **established the hazard itself
+three hours earlier with a closed query and written it into §13 of its own design doc** — and then read the file
+named `cell` to learn the run's geometry. ⇒ **It walked across a warning it had written.**
+
+⭐ **And its artifact was protected even though its message was not**: closed query on the banked, frozen design —
+`0.22` = **0 occurrences**, `118` = **0** ⇒ **the error stayed in messages and never entered the artifact.**
+⇒ ⭐ The *artifact-first* discipline held exactly where the message discipline failed.
+
+⭐ `w2:p11` then verified the remaining constants **on the judged driver itself** (`ur15_steps_reaim.py:175-177`):
+column at world origin with **no quat** ⇒ unrotated; `stem` r **0.102**, z ∈ [0, 1.53]; `foot` r **0.215**,
+z ∈ [0, 0.06]. ⇒ ⭐ **Every constant in §29b is now confirmed on the run's own driver; no cell-file value
+remains.** ⚠ And p11 and p18 found the 0.40 discrepancy by **two independent routes** — p18 at the producing
+commit, p11 on current on-disk — so this agreement is not one reading copied twice.
