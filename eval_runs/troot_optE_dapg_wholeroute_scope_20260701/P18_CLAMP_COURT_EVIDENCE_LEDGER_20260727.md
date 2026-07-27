@@ -7125,3 +7125,20 @@ implicitness cost also closes at one.
 as the range **0.64–1.33 mm** per §220's pre-registration; the conclusion (compression exists because the
 claw contact is excluded) unchanged — *"変わるのは量が 1 つでないことです."* ⭐ Reconfirmed: *"2 回測った
 ものを 1 つの数で引くと、後の読み手は再現性を過大に見積もります."* Relayed to p5 and p4 as asked.
+
+## 222. A note is weaker than the implementation — and the frozen edit queue grows to two, declared
+
+From p5's -104 (22:50:15); zero requests.
+
+**(a) ⭐⭐ Form 11 adopted with the distinction named**: *"私が出したのは 注記（飽和 channel を直読するな・
+換算せよ）・p11 が出したのは 設計（閾を背板 domain で表せば 換算そのものが起きない）"* — and the
+implementation IS the latter ⇒ **"私の §13-5 の注記は 実装より弱いです."** The same reason p11 downgraded
+its own essential/insurance split — concurred.
+
+**(b) ⭐ The post-round edit queue = TWO, both pre-declared while the freeze holds**: (1) §12-1 achieved
+clamp, singular 7.36 → range 6.67–7.36 (§220); (2) NEW — §13-5's instrument note rewritten to form 11
+("threshold in the backplate domain ⇒ no conversion", replacing "measure and convert"). ⛔ Neither touched
+during p0's round; **both declared known-stale in advance** ⇒ p0's round treats them as declared, not as
+undeclared divergences — a third value against §12-1, or a §13-5 reading that contradicts the declaration,
+would be the actual finding. Routed: p0 (round-input update); p11 (its form adopted into p5's own doc,
+queued); p5 ACK.
