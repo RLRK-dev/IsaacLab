@@ -62,6 +62,41 @@ GROOVE_CENTER_Z = _tc.GROOVE_CENTER_Z           # task_config.py:226 == TABLE + 
 CLIP_SOLREF = (-_tc.MUJOCO_CONTACT_KE, -_tc.MUJOCO_CONTACT_KD)     # task_config.py:168-169
 CLIP_FRICTION = tuple(_tc.MUJOCO_CABLE_TABLE_FRICTION)             # task_config.py:180
 
+
+# --- cable physics: per-element quantities, DERIVED from the discretisation -------------------
+# Halving the link length changes every one of these, and not all in the same direction.  The
+# wiring landed the shorter link while the driver still wrote a literal mass and a literal joint
+# stiffness, which made the cable 3.6x too heavy AND 64% too soft at the same time.  So each is
+# derived here from the quantity that does not depend on how the cable is cut up.
+
+CABLE_DENSITY = 1100.0          # task_config.py:138 verbatim "capsule volume x rho=1100"
+CABLE_BEND_EI = _tc.CABLE_BEND_STIFFNESS        # task_config.py:144 -- EI [N m^2], not a joint K
+CABLE_BEND_DAMPING = _tc.CABLE_BEND_DAMPING     # task_config.py:152
+CABLE_CONDIM = _tc.MUJOCO_CONTACT_CONDIM        # task_config.py:176
+CABLE_FRICTION = tuple(_tc.MUJOCO_CABLE_TABLE_FRICTION)   # task_config.py:180
+
+
+def cable_seg_mass() -> float:
+    """Mass of one link [kg]: the capsule's own volume times the material density.
+
+    A capsule is a cylinder plus a sphere's worth of end caps.  Leaving the caps out is a known
+    error in this project's history -- task_config.py:140 records an old figure that did exactly
+    that and came out 36% light.
+    """
+    r, L = CABLE_R, CABLE_SEG
+    return (math.pi * r * r * L + (4.0 / 3.0) * math.pi * r ** 3) * CABLE_DENSITY
+
+
+def cable_joint_k() -> float:
+    """Bend stiffness of one joint [N m/rad] = EI / link length.
+
+    task_config.py:146 verbatim: "CABLE_MUJOCO_BEND_K = EI/CABLE_SEG_LEN".  Shorter links means
+    MORE joints over the same cable, so each one has to be stiffer, not softer -- the opposite
+    direction to the mass.
+    """
+    return CABLE_BEND_EI / CABLE_SEG
+
+
 _ENV_BASE = pathlib.Path(_REPO, "thread_isaac_lab/envs/newton_skill_env_base.py")
 
 
@@ -338,6 +373,16 @@ def self_check():
             f"bindings have drifted apart.")
     # ⛔ `CABLE_N * CABLE_SEG == 0.600` is not a check on this module: both come from the same
     # SSOT, so the claim belongs where they are bound independently, which is the block above.
+    seg_g = cable_seg_mass() * 1000.0
+    if abs(seg_g - 1.1243) > 5e-4 and abs(CABLE_SEG - 0.015) < 1e-12:
+        problems.append(
+            f"one link works out at {seg_g:.4f} g, but task_config.py:138 states 1.1243 g/seg "
+            f"for this 15 mm link -- the density or the capsule formula is wrong.")
+    total = cable_seg_mass() * CABLE_N
+    if abs(total - 0.04497085511684418) > 1e-5 and abs(CABLE_SEG - 0.015) < 1e-12:
+        problems.append(
+            f"the whole cable works out at {total*1000:.2f} g against the measured "
+            f"44.97 g at task_config.py:139.")
     return problems
 
 

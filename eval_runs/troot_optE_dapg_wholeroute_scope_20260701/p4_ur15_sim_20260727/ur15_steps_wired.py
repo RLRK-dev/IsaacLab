@@ -165,14 +165,14 @@ def cable_xml():
     x0 = -CABLE_SEG * CABLE_N / 2.0
     z0 = REST_TOP + CABLE_R
     s = f'\n    <body name="cab0" pos="{x0:.4f} {REST_Y} {z0:.4f}">\n      <freejoint name="cable_free"/>\n'
-    s += f'      <geom name="cab0_g" type="capsule" fromto="0 0 0 {CABLE_SEG:.4f} 0 0" size="{CABLE_R}" mass="0.004" material="cable" friction="1.1 0.03 0.002" condim="6"/>\n'
+    s += f'      <geom name="cab0_g" type="capsule" fromto="0 0 0 {CABLE_SEG:.4f} 0 0" size="{CABLE_R}" mass="{_spec.cable_seg_mass():.6f}" material="cable" friction="{_spec.CABLE_FRICTION[0]} {_spec.CABLE_FRICTION[1]} {_spec.CABLE_FRICTION[2]}" condim="{_spec.CABLE_CONDIM}"/>\n'
     dep = 1
     for i in range(1, CABLE_N):
         pad = "  " * dep
         s += pad + f'      <body name="cab{i}" pos="{CABLE_SEG:.4f} 0 0">\n'
-        s += pad + f'        <joint name="cab{i}_y" type="hinge" axis="0 1 0" range="-1.2 1.2" damping="0.010" stiffness="0.12"/>\n'
-        s += pad + f'        <joint name="cab{i}_z" type="hinge" axis="0 0 1" range="-1.2 1.2" damping="0.010" stiffness="0.12"/>\n'
-        s += pad + f'        <geom name="cab{i}_g" type="capsule" fromto="0 0 0 {CABLE_SEG:.4f} 0 0" size="{CABLE_R}" mass="0.004" material="cable" friction="1.1 0.03 0.002" condim="6"/>\n'
+        s += pad + f'        <joint name="cab{i}_y" type="hinge" axis="0 1 0" range="-1.2 1.2" damping="{_spec.CABLE_BEND_DAMPING:.5f}" stiffness="{_spec.cable_joint_k():.5f}"/>\n'
+        s += pad + f'        <joint name="cab{i}_z" type="hinge" axis="0 0 1" range="-1.2 1.2" damping="{_spec.CABLE_BEND_DAMPING:.5f}" stiffness="{_spec.cable_joint_k():.5f}"/>\n'
+        s += pad + f'        <geom name="cab{i}_g" type="capsule" fromto="0 0 0 {CABLE_SEG:.4f} 0 0" size="{CABLE_R}" mass="{_spec.cable_seg_mass():.6f}" material="cable" friction="{_spec.CABLE_FRICTION[0]} {_spec.CABLE_FRICTION[1]} {_spec.CABLE_FRICTION[2]}" condim="{_spec.CABLE_CONDIM}"/>\n'
         dep += 1
     for i in range(CABLE_N - 1, 0, -1):
         dep -= 1
