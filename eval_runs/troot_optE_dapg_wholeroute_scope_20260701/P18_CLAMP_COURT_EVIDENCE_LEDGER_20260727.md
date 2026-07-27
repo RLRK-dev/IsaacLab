@@ -6900,3 +6900,45 @@ granularity: one formula may carry two provenances, and each term keeps its own.
 sweep received as the empirical backing of the conjunction AND *"私が -099 で自認した「片側しか見ていない
 述語」の実例"*. Routed: p4 (implement the two-provenance floor form); p11 (FYI — its backplate conversion now
 has its exact expression).
+
+## 211. The audit under new information — and a bound that outlived its target
+
+From p11's -093 (22:16); pins verified — ⚠ **with my own mis-aim owned first**: I measured the WORKING TREE
+against its sha@commit pin and read NOMATCH; the blob at the declared commit (`382fad0092`) matches exactly
+(`03c79c05…`), and the tree had simply moved on to the next banked section (-094's `c4b0c93d…`). **A
+sha@commit pin is measured at its commit; the on-disk check is a separate freshness question** — the day's
+measurement-surface rule, applied to me.
+
+**(a) ✅ The instruments confirmed from p11's side** (driver `:446-447` centreline-interpolation docstring;
+`:650` component print — both re-read here); ⚠ with the distinction kept: the OLD reaim still snaps
+(`:903-907`) — the satisfied driver is the NEW one; do not conflate. **(b) ⛔⛔ The self-threat found and
+audited**: the driver's seat_point fix records that the old seat (4-claw average) sat **up to 21 mm off the
+centreline** (the four-bar swings the pads asymmetrically) and rammed the cable 20-30 mm before closing ⇒
+p11's §27.2.73 placement-error points were residuals against a DISPLACED target. **(c) ✅ The certification
+survives — for two reasons, neither claimed as foresight**: ① the displacement lives in x,y and the band's
+axis (pad-local z) kept its definition (z from claws in both versions); ② **mag = |err| was an UPPER BOUND,
+and a bound does not care which component carries the error** — an inflated bound is still a bound ⇒ z ≤ mag
+≤ 4.89 stands; the band-12.00 certification and the 3/4-of-6.00 statement both hold. *"どちらか一方でも
+違っていれば落ちていました。"* ⭐⭐ **The 9th general form: claims stated as upper bounds survive a moving
+target; point estimates fall to the same fix — stating weakly has a strength that pays later.**
+**(d)** cable_in_mouth implements the R6(ii) weak form and prints the value beside the band *because* p5 had
+not stated the origin (`:656` verbatim re-read) — §27.2.92's print-kills-silence, already in practice.
+
+## 212. The floor is implicit, converges in one step — and the conversion is essential exactly where the channel is dead
+
+From p11's -094 (22:18); pin verified at its commit (@ `2ec264f201` "Take the floor expression, with two
+notes for whoever implements it" — `c4b0c93d…`, the value my §211 mis-aim had already measured on disk).
+
+**(a) ⚠ Note 1 — the formula is IMPLICIT**: offset is a function of gap and the floor IS a gap ⇒
+floor = 2r + offset(floor). ✅ Harmless in practice — offset spans only 0.22 mm, so one iteration converges
+(18.20 → 18.19 → 18.19, computed) ⇒ **seed with 2r + 10.20, re-draw once**; ⛔ but written unaware, it jams
+drawing offset where no gap exists. **(b) ⭐⭐⭐ Note 2 — essential vs insurance, with the WHY attached**: R1's
+release floor (backplate 18.19 / claw +8.00) sits far from the saturation floor (≈ −2.6) ⇒ direct read fine,
+conversion = insurance; R6①'s capture check (backplate 7.36 / claw −2.85) sits **inside the saturation band**
+⇒ the direct channel returns −2.6 regardless ⇒ **conversion REQUIRED — p5's instrument requirement bites
+exactly where the channel is dead.** ⛔ *"「換算は一律の作法」と読むと なぜ必要かが失われ、次に誰かが R6 で
+直読へ戻します"* — the why must ride the code. ⚠ And the redemption: the saturation floor (−2.6, from the
+2.40 box thickness) is the very value p11 once wrongly subtracted (§27.2.74) — *"一度 値として引き算して
+しまった床が、いま計器選択の根拠として正しく使われています."* Routed: p4 (both notes as implementation
+requirements — the seed-and-once iteration + a comment carrying the essential-vs-insurance why); p5 (relay as
+asked).
