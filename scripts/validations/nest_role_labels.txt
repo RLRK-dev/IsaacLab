@@ -23,7 +23,9 @@ PLAN-KEEPER
 PAPER-AUTHOR
 LOG-ANALYST
 VIDEO-ANALYST
-MWSO-DESIGN
+# Renamed 2026-07-27 (Rs: name change only, not a new role). Was MWSO-DESIGN;
+# no prefixed reference to the old spelling exists anywhere, so nothing breaks.
+WMSO-DESIGN
 SKILL-DESIGN
 SKILL-DETAIL-DESIGN
 VT-DESIGN
