@@ -4381,3 +4381,34 @@ overestimate on a 1.2 mm plate; three values retracted before use.
 **(d)** `TABLE_HX/HY`: p4 holds no grounds (assignment without a comment) ⇒ p5's "weak grounds" self-assessment
 stands as the best available. **Next**: p4 implements the constants module (§6 contract, AST-value guard);
 verification = p0.
+
+## 100. p15's submission: all five conditions met — and a finding it refused to confirm cheaply
+
+`w2:p15` banked `WMSO_D1_IMPL_STATIC_FINDINGS_IMPLVERIFIER2_20260727.md` (sha256 `de3cad3832…` @ `9e9832a652`,
+100 lines, single-file pathspec) — **each of p12's five conditions explicitly discharged**, including ⑤: an
+independent section stating that if finding A holds it is *a hole remaining in a PASS-CLOSEd surface*, while
+**declining to claim pN erred** (it has not seen which predicates pN tested) and handing the gate/custody question
+to p12+p18(+Rs). **Findings**: A (real, medium) — constants/dataclass drift that the two existing tests cannot
+discriminate, **19 instances today, machine-collated by exact name**; B (candidate, unconfirmed) — the hash-check
+regex likely passes a trailing newline, 12 pass-points, ⭐ **needs one line of execution which it did NOT run** —
+⛔ **the impl-CLOSED gate respected at the cost of leaving its own finding unconfirmed**; C — naming only, no
+defect; plus one suspected-then-cleared item recorded. ⇒ Relayed to p12 for sorting.
+
+## 101. p5 adopted all three — and the spec pin moved onto the just-banked version
+
+**(a) ⭐ Each fix was re-verified on disk before adoption** (`:136` the real constant; `:226` verbatim — no float
+term, the float lives at `newton_skill_env_base.py:1897`; the guard rewritten to AST value-comparison, byte-sha
+demoted to notification). ⭐ Tier A's seat row **split in two** (unfloated seat / float amount), carrying p0's point
+verbatim into the spec: **the constant keeps the name "seat" while the clip moves** — code using `GROOVE_CENTER_Z`
+as the insertion target in a floated cell misses silently.
+
+**(b) ⭐⭐ p5 named its own class for each error, unprompted**: ① *read one line and stopped* (never counted the
+next line of the same block) ② ⛔⛔ *cited something absent from the citation — in its own Tier A row, the exact
+type it flagged in others all day* ③ *a predicate without discriminating power*. And on the collision question it
+declined the favourable framing — not "I was right" but **"two build paths carry opposite defaults"**, noting p0's
+fold is the same type as its own `-062` endorsement overreach.
+
+**(c) ⚠ Pin moved again — and this crossing is NOT benign.** New spec pin `c65d39d71c18…` (135 lines; Tier A rows
+and §6.2 **modified**, not just appended). ⛔ **The version p4 banked an hour ago (`1838823e16`) contains the false
+float_z citation and the line-sha guard** ⇒ **the follow-up bank must precede the module implementation** — the
+module follows §6, and §6 changed. Follow-up queue with p4 is now two: clip doc `b3954ed7…` + spec `c65d39d7…`.
