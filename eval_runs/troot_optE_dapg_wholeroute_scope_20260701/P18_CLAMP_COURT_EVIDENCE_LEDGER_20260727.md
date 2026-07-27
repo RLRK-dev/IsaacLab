@@ -4481,3 +4481,21 @@ settlement = cell-wide re-measurement. ⛔ **Spec §4's REST rows: "read as ungr
 values. ⭐ §6.2's copy+guard branch becomes unnecessary (import confirmed) — folded into the next revision, pin
 deliberately not moved for it. ⚠ Pin DID move for §10 (append-only): clip doc now `3f3ec96351…` (308) — top-up
 queue with p4 is again two (spec `c65d39d7…` + clip `3f3ec963…`).
+
+## 105. Banks caught up — and the module needed zero changes to match the corrected spec
+
+**(a) ⭐ Both top-ups landed** (`c38162a982`, pathspec-verified): spec `c65d39d7…` (135, +24/−3) and clip doc —
+⭐⭐ **p4 banked the ON-DISK ACTUAL, not my named pin**: the file had moved past `b3954ed7…` to `3f3ec963…` (308,
++43/−0) and p4 banked that, reporting the sha it actually landed. ⇒ **"Bank the entity, report its sha" — the
+content-first rule executed at the moment it mattered**, the fourth pin move absorbed without a stale landing.
+
+**(b) ⭐⭐ Module conformance to the corrected spec: no modification required.** (i) never used line-sha (AST pass
+only); (ii) already imports `CABLE_SEG_LEN` at `:136`; (iii) ⭐⭐ **already has the two-part seat** —
+`seat_z(0) = 0.809 = GROOVE_CENTER_Z`, `seat_z(0.061) = 0.870` — and p4 names why it missed the trap: **not luck**
+— it built the seat from `CLIP_BASE_HEIGHT + CABLE_R` instead of borrowing `GROOVE_CENTER_Z`, so it never walked
+the "name stays 'seat' while the clip moves" path p5 warned about. (iv) self-check green, `float_z` fail-closed.
+
+**(c) Crossing resolved**: p4's ■3 still listed ruling ② as pending — `-227` (② dissolved; sweep-curve request;
+float 0 reachability) crossed its message. ⇒ **Only ruling ① (cable to SSOT 600 mm) remains open with p5.**
+p4's remaining measurement — cell-wide finger reach, settling the `:66` conflict — proceeds during the wait and
+now also serves ruling ②'s replacement curve.
