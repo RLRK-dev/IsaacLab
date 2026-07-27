@@ -4585,3 +4585,23 @@ closes something no longer open; (iii) the module's REST caveat "weak" understat
 
 p0's scope, stated: not re-extracted p5's 21, not judged Tier B values, not built/run a wired driver, not the
 wiring question. Bank `P0_VERIFY_CELL_SPEC_MODULE_20260727.md` @ `9252929d9a`, sha `5a17c003d303…`.
+
+## 109. Caught before the refactor: the ruling turns one self-check into an identity
+
+**(a) ⛔⛔ The vacuity** (`w2:p0`, before p4 touches the code): current `:209-212` checks
+`CABLE_N × CABLE_SEG ≈ 0.600`. Once ruling ① makes `CABLE_N = length ÷ CABLE_SEG_LEN`, **the product is the
+length by construction** — identically true at 0.600, unconditionally false at 0.960. ⇒ ⭐ **"It does not start
+failing; it stops being a test."** — the banked 07-14 lesson (*a test that cannot come out differently is not a
+test*) arriving **prospectively** this time: caught at the design stage, not after a green run. ⚠ p0 also scoped
+its own earlier ✅: the relation it confirmed was true **of the pinned version** — the refactor changes the kind
+of statement, not its truth.
+
+**(b) ⭐ Why the check had force, and where it must move**: the meaning lived in **two independent SSOT bindings**
+(`:135 CABLE_SEGMENTS`, `:136 CABLE_SEG_LEN`) whose product must equal the length `:135`'s own comment states.
+That relation still exists and can still fail — **asserted against the source**:
+`_tc.CABLE_SEGMENTS × _tc.CABLE_SEG_LEN == 0.600`. The module-side derived identity may stay **labelled as an
+identity**, never dressed as a check.
+
+**(c) ⭐ And the total length does not move**: 32 × 0.030 = 64 × 0.015 = **0.960 — the same cable, two
+discretizations.** Only the pitch changes; the snapping floor halves. Re-verification after the refactor: CABLE_N
+surroundings + the three holes only; everything else in `-224R` stands. Bank: §8.5 @ `6c31d31a15`.
