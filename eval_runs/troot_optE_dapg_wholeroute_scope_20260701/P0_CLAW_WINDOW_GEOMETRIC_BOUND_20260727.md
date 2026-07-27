@@ -110,7 +110,44 @@ tilt, and that the tilt measurement then serves as the check on the bound rather
 5. ⛔ **This is the idealized asset, not the actuated build.** p4's real-build measurement is authoritative for the
    build; where they disagree, mine is the one that is wrong about the build.
 
-## 5. Scope
+## 5. Checked against p4's decisive sweep (-093) — what held and what I withdraw
+
+⚠ **The messages crossed.** I committed §1-§4 at 13:19:44 and p18's -093 is stamped 13:19:36; I had not seen it.
+**I claim no priority** — what matters is that an independently derived bound and an independent measurement agree,
+and that the parts of my §3 prediction that were wrong are visible because I wrote them down first.
+
+**Held:**
+
+| my statement | p4's measurement | |
+|---|---|---|
+| worst pair contacts at backplate gap **≥ 8.188 mm**, any admissible tilt | **10.16 mm** | ✅ bound holds |
+| ordering: **claws contact first, no window** | claws contact 5.6 counts earlier; backplate still 2.16 mm short of the cable | ✅ |
+| the **deeper pair is f1** (it protrudes more once the pad tilts) | `f1×f1` crosses zero at ctrl **219.16** < `f2×f2` **220.99** ⇒ f1 first | ✅ |
+| pair separation = 24.8·sin θ ⇒ **0.679 mm** at θ = 1.57° | **0.68-0.70 mm**, near-constant across the range | ✅ |
+| the cross pair `f1×f2` can never be the minimum (10.00 mm clear in z) | +9.8 … +10.0 mm, constant | ✅ |
+| the offset depends on **orientation only**, so it is one scalar | separation near-constant across 205-240 ⇒ tilt near-constant | ✅ |
+
+**Accuracy of the idealisation:** at p4's measured tilt my model puts contact at 10.548 mm against a measured
+10.16 mm — **I over-predict by 0.39 mm**; at zero tilt I under-predict by 0.16 mm. ⇒ the idealised asset geometry is
+good to about **0.4 mm** here. ⛔ Where we differ, **p4's build measurement is authoritative and mine is not.**
+
+**⛔ Withdrawn — §3's magnitude claim.** I wrote that p4's earlier −2.57 mm "is one specific pair, not the minimum,
+and the other pair is deeper," and my worked figures implied a pair separation of order 4 mm. **The measured
+separation is 0.68 mm.** The direction was right (f1 is the deeper, first-contacting pair) but **the magnitude was
+wrong**, because I sized it from the whole joint-limit tilt range while the achieved tilt is only 1.57°. I withdraw
+the magnitude and the inference that −2.57 must have a much deeper partner; I keep the pair ordering, which held.
+
+⭐ The split is not accidental: **every part of the prediction that did not depend on the tilt survived, and the one
+part that did depend on it failed.** That is the same distinction that makes §2 a bound rather than an estimate —
+and it is why the bound was not weakened by the tilt being unknown while my §3 sketch was.
+
+**Reconciliation with p11's lever table** (so it is not later read as two banked numbers disagreeing): p11 has
+`f1ext 51.72 / f2ext 39.32`; I have `45.220 / 32.820` from the follower pivot. The offset is **+6.500 mm on both
+claws**, i.e. a different origin, and the **claw-to-claw spacing is 12.400 mm in both**. Since only the spacing
+enters the pair separation (24.8 = 2 × 12.400), the two readings agree on the quantity that does the work. **Not a
+contradiction.**
+
+## 6. Scope
 
 ⛔ I do not rule on window-open / window-closed, on whether the clamp is reachable on real hardware, on capture vs
 grip, or on any change to the locked geometry (§0#4 = Rs). ⛔ I ran nothing and hold no RUN authorization. What I
