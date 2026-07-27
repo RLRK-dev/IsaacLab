@@ -209,7 +209,44 @@ keeping the corner figure: **+0.188 mm at −67° is a face-centre number and th
 angle**, so the corner margin is not established. The working-range conclusion (near-parallel pads, margin ≈2 mm,
 measured 2.16 mm) is unaffected.
 
-## 7. Scope
+## 7. p4's saturation finding (-101 B): the exact cap, and what it does and does not touch
+
+p4 found that the claw-distance reading **saturates** near −2.5 mm, which kills the "the jaw stopped on the cable"
+explanation (the sweep was cable-free) and with it the reconciliation everyone including me had built around it.
+The asset gives the **exact cap**:
+
+| claw box (`:116`/`:117`) | full extent |
+|---|---|
+| x | 22.00 mm |
+| y (the closing direction) | 18.00 mm |
+| **z** | **2.400 mm** |
+
+Two same-index claws meet face-to-face along y at equal z (the mirror is 180° about z, `:128`/`:142`). Their
+overlap region is therefore 22.0 × y(growing) × **2.40** mm, and a minimum-translation penetration depth is the
+**smallest** of those. ⇒ **the depth cannot exceed 2.400 mm however far the jaw closes.**
+
+⇒ ⭐ p4's plateau ≈ −2.5 mm **is the claw's own thickness**. The old datum −2.57 sits **0.17 mm past the cap**;
+I do not have an explanation for that excess and do not paper over it.
+
+**Untouched by saturation** — because saturation distorts values only *after* contact, never the crossing itself:
+
+- ✅ **my §2 bound**, which is entirely a statement about where the distance reaches **zero**;
+- ✅ the **deeper-pair identification** (crossings at ctrl 219.16 / 220.99, both before the plateau);
+- ✅ the **pair separation** used to derive the 1.571° tilt (measured at those crossings, pre-saturation);
+- ✅ **§6**, which used the offset at ctrl 219-225 — p4's own valid window.
+
+⚠ **Affected, and this is new for pZ's court.** Any claw reading below about −2.4 mm **carries no depth
+information** — it is the instrument's floor, not the geometry. ⇒ the alternative instrument floated in -093 D,
+*"the actual gap at verdict time"*, **cannot serve as a graded measure once the claws interpenetrate**, which is
+the regime CLAMP-1 is being asked about. A graded predicate there needs a different quantity (e.g. the commanded
+closure, or the backplate gap, both of which stay informative).
+
+⚠ **-101 D noted, and I keep the two margins apart.** The measured operating point gives **2.16 mm** of clearance;
+my worst-case-over-all-tilts figure gives **0.188 mm**. The second is the one that matters for transfer — and it is
+**not established**, by my own §6 caveat (it was computed on face-centre geometry, where the edge term reaches
+several mm at that angle). I will not let it be quoted as though it were.
+
+## 8. Scope
 
 ⛔ I do not rule on window-open / window-closed, on whether the clamp is reachable on real hardware, on capture vs
 grip, or on any change to the locked geometry (§0#4 = Rs). ⛔ I ran nothing and hold no RUN authorization. What I
