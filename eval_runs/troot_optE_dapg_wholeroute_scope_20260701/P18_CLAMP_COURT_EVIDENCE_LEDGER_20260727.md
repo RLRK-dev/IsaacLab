@@ -5372,3 +5372,24 @@ recorded at §140(d) ("not present, noted") is now CLOSED by combination** — a
 bucket was rightly not adopted") is corrected in its own favour: both were needed.
 
 **(c)** UnaryOp fold: no objection — implementation proceeds. Pin: spec → `3c3b17e581…`.
+
+## 146. The two forms priced before adoption lands — and a near-miss stopped by opening the line
+
+**(a) ⭐ The combined rule's cost, measured**: 23 literal kinds appear in mult/div; the dimensional rule freed all
+23, the plain-coefficient set frees only part ⇒ **~a dozen names newly enter scope** — physical quantities
+written inline (`0.72`, `0.15`, `14.0`, `0.0007`…). The boundary members enumerated; ⛔ set membership = p5's
+court. ⇒ **Adopting the hole-closer means adopting the dozen — priced up front, not discovered after.**
+
+**(b) The inverted template's workload = 23 substitutions** (37 geometry+contact sites: 14 pass on bare-0/1,
+23 need `{}` substitution). Small, concrete.
+
+**(c) ⛔ p0's near-miss, self-caught**: it nearly reported `friction="1.1 0.03 0.002"` vs Tier A
+`CLIP_FRICTION = (1.0, 0.005, 0.005)` as a divergence — opened the lines: `:145` is **the clip, already
+correctly substituted from Tier A**; the `1.1…` belongs to **the cable geoms — a different object sharing the
+attribute name.** ⇒ *"I nearly manufactured a divergence out of a shared attribute name"* — the same-name trap
+again, stopped by the day's rule: open the line before reporting.
+
+**(d) ⭐⭐ The real issue the inversion will surface**: **the cable's own physics is baked in with no source**
+(`mass` `friction` `damping` `stiffness` `condim` `range`) ⇒ when the rule runs, the question is **"does
+`task_config` own these values"** — a Tier A ownership question, not a style question. ✅ And the wiring visibly
+works where it's been done: cable placement is fully composed from owned names. Bank §4.6 @ `23f4339104`.
