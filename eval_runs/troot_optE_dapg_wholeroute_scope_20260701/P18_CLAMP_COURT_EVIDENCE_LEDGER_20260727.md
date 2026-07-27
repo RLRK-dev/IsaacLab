@@ -537,7 +537,56 @@ ABOVE the upper claw.** ⇒ **At that instant the cable was above the opening.**
 the place it then failed to apply it. ⛔ Scope: that instant, R side only; do not generalise to other runs, other
 steps, or the L side.
 
-### 10g-1. ⚠ A transposition reconciles the two legs — p18's inference, corrected and narrowed
+### 10g-1x. ⛔⛔ RETRACTED — there is no transposition. `w2:p0` settled it at the source.
+
+p0 read the producing commit's build code (no run) and found the label↔arm binding is **structural**:
+
+```
+:42   SIDES = {L: -1.0, R: +1.0}
+:193  for tag, sign in SIDES.items():
+:195      column.add_frame(pos=[sign * YOKE_SPREAD, 0, SHOULDER_HEIGHT])
+:196      attach_body(..., f"{tag}_")
+:230-231  PADG[t] = geoms whose name starts with t + "g_"
+```
+
+⇒ ⭐⭐ **The name prefix and the world position are set from the same `sign`, in the same loop iteration**
+(`YOKE_SPREAD = 0.40`, `:37`). ⇒ **`L` *is* the arm at column-local x = −0.40 and `R` the one at +0.40; they
+cannot be transposed.** ⇒ ⛔ **My §10g-1 hypothesis is dead**, and it was dead in the build code the whole time.
+
+⚠ p0 also bounds it: the separation is **column-local x**, not the production env's y = ∓0.35 — this driver
+builds its own cell ⇒ ⛔ do not import `ROBOT_LEFT_BASE`/`RIGHT_BASE` into readings of this run.
+
+⇒ ⭐ **What actually remains open is one link: column-local x ↔ which side of the screen.** p0 confirms from
+source that the close-up `cam2` has **fixed azimuth 250** (`:723`, only `cam` varies at `:813`) with lookat at the
+midpoint of the two pinch points (`:816`) ⇒ **`w2:pC`'s methodological claim — close-up stable, wide panel
+unusable — is source-backed.** ⛔ p0 declines to convert azimuth 250 into "screen-left is +x" from memory; that
+needs the convention read, or one frame rendered with the two pinch points marked. **p0 left the last link open
+rather than closing it from recall.**
+
+⭐ **And the physics now points one way.** `w2:p4` derived (from camera geometry alone, projecting world grasp
+coordinates) that in the close-up **screen-right = L**. Under that mapping: pC saw screen-right with the cable
+**inside the opening**, and log-L records **6 contacts including both claws, fingers blocked, jaw held at
+6.81 mm** ⇒ ⭐⭐ **all three agree.** Under pC's mapping they contradict. ⇒ p18 notes the asymmetry as
+**evidence favouring p4's mapping — not as proof.** The deciding read is the one p0 named, and it is pC's court.
+
+⛔ **Two other things I suspected do not exist, and p0 checked before reporting:** the arm/pad mix-up
+(`clamp_faces`'s `side` is the two pads of the *same* gripper; the arm is selected by `PADG[t]` at `:364`), and
+any need for new measurement. ⭐ p0's posture: *"I do not report bugs that are not there."*
+
+### 10g-1y. ⭐⭐⭐ The defended sets already exist — one line from the defect
+
+p0 confirmed the real defect at source: `:366` splits only on `ext`, so the pad set is true for **`pad1` or
+`pad2`**, while the docstring says `pad1`. ⇒ **That is the mechanism for R's `clamped=True` on `pad2` alone.**
+
+⇒ ⭐⭐⭐ **And the positive-form sets `w2:p11` asked for are already in the same file**: `:234 CLAWG` and
+`:236 PAD1G`, built from explicit names, carrying the comment — verbatim — *"Named, not substring-matched, so the
+set cannot silently pick up another geom."*
+
+⇒ **The author knew about the substring trap, built defended sets against it, and `clamp_faces` reaches past them
+for the prefix-only `PADG` one line away.** ⇒ The repair is not new code; it is using the set that is already
+there. ⚠ The production env's `newton_skill_env_base.py:1392` still carries the undefended form.
+
+### 10g-1. ⚠ SUPERSEDED by §10g-1x — retained for the record
 
 ⭐ **The reconciliation survives the direction fix and gets stronger.** With the sign corrected:
 
@@ -839,3 +888,35 @@ backplates — not as contact.** Grounds: in a correctly captured state the cabl
 Gate unchanged. Nothing unlocked. p18 authorises no run. Still with Rs: the holding-mechanism choice (A accept
 capture / B change claw protrusion — §0#4 LOCK / C declare sim-only), the DUAL-ARM reading of the acceptance
 predicate, and OPEN 5 (does capture suffice for the しごき / drag process — 捕捉 ≠ 把持, clearance ⇒ zero normal force).
+
+### 10g-2x. ⭐⭐⭐ CONFIRMED AT SOURCE — the error metric was comparing against the wrong link
+
+`w2:p4` read its own code and confirmed §10g-2. `ur15_steps.py:548-555`: `cable_at(x)` returns the centre of the
+link **nearest a given world x**. `:878`: `cw, _ci = cable_at(GL[0] if t == 'L' else GR[0])` — and **`GL[0]` /
+`GR[0]` are fixed x values measured at STEP 1 and never updated.**
+
+⇒ ⭐⭐ **`slot vs cable` was comparing the mouth against the link nearest the start-of-run x, not the link in the
+jaw.** ⇒ **`w2:p4` retracts:**
+
+1. every live `slot vs cable` error (L 25.0 / R 17.4 …) ⇒ ⛔ **not evidence that the aim missed**
+2. *"the cable moved 14–26 mm during the descent"* ⇒ against a fixed x, **a cable sliding in x changes which link
+   is compared** ⇒ displacement and identity-change are mixed together
+3. ⇒ ⛔ **p4's question D2 to `w2:p5` — "the arm must move because the cable shifts 14–26 mm" — has lost its
+   basis.** ⚠ **p5's delivered Q2 answer rests partly on that magnitude and must be revisited.** The other half of
+   p5's evidence (contact geom = `f1ext`, i.e. the claws struck the cable) is independent and survives.
+
+⇒ ⭐ **This dissolves §10g's internal contradiction**: log-L printed 25.0 mm while touching both claws and holding
+the jaw at 6.81 mm — not a conflict between physics and geometry, but **one invalid number**. The physics prints
+were right throughout.
+
+⇒ ⭐ It also explains p4's invention ⑤ (the live correction loop): **it used this metric as its objective**, and
+its divergence (11.6 → 21.0 → 17.1 → 2.4) is consistent with optimising against a quantity that tracks the wrong
+body. ⛔ p4 retracts ⑤ at its basis; causation not claimed.
+
+⚠ **On `w2:p11`'s slot-motion hypothesis, p4 reports what its code does and does not do:** `slot_after_close`
+predicts the post-close mouth position and aligns the arm to it ⇒ **it handles the endpoint, not the path.**
+⇒ p11's mechanism — the mouth sweeping 13.4 mm while closing and the claws flicking the cable — is **not guarded
+against** in this implementation.
+⇒ ⭐ This is the banked lesson *a recovery mechanism must respect the same constraint on its path, not just its
+endpoint* landing on a new surface: endpoint-consistency ≠ path-consistency, and the unguarded interval is
+exactly where the disturbance lives.
