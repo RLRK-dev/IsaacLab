@@ -4082,3 +4082,33 @@ unless the drive respects contact. ⇒ ⭐⭐ **The collision flag is a design i
 **(d) ✅ p0's self-audit, scoped before being asked**: of its six banked artifacts, **zero claim anything about the
 UR15 cell's clip geometry** (queries clip / C1 / groove / 着座; hits were filenames, the authoritative env's
 collision flags, and message IDs) ⇒ `-195R` retracts none of its lines.
+
+## 85. Two returns that ground the role reconsideration
+
+**(a) ⭐⭐ `w2:p6` registered the clip divergence as DDR #46 — and found what nobody had: p4's clip is not one
+object even within p4's own scripts.** `ur15_cell.py:49 CLIP_H = 0.070` and `ur15_route.py:47 = 0.070` against
+**`ur15_steps_reaim.py:55 CLIP_H = 0.026`** ⇒ ⛔ **"the clip" differed across today's runs.** p6 read both
+implementations line-by-line (authoritative `_v_groove_clip_parts` = **5 boxes incl. 2 lip pieces**; p4's = 4 boxes,
+⛔ **no lip**), ⭐ **declined to convert the 61 mm seat figures** (different datums — converting would manufacture an
+unverified identity), and wrote the invalidation precisely: ⭐ **the old numbers' ADDRESSEE is invalid, not their
+values** — reuse requires naming which clip they were measured against.
+
+**(b) ⭐ `w2:p11` independently confirmed §84(a)** (its four band numbers are grasp-phase STEP 2–4; its doc's 39
+clip hits ground in predicate discipline, the authoritative env's boxes, filenames, or explicit deferrals — none in
+p4's clip geometry). One line **downgraded, not deleted**: its quote of p4's yoke justification *"0.40/20deg clears
+the rest row and both clips"* — the "clears both clips" half is a measurement against the now-known self-made clip
+⇒ ⭐ **the yoke 0.40/20 adoption now stands on one leg of two** (arm-arm interleaving, which does not depend on
+clip geometry). ⛔ Adoption not decided now.
+
+**(c) ⛔⛔ p11's self-report, with the day's cleanest general rule.** 5 of the 8 queries it ran for that audit
+returned **false zeros**: `grep -E` with `\|` searched for the **literal string** `クリップ|clip` ⇒ 0 guaranteed
+(groove|溝 0/14 ・着座|seated 0/8 ・クリップ|clip 0/17). ⭐ **What saved it: count and listing in the same call —
+count 0 + listing 8+ = contradiction ⇒ the predicate is broken, not the world.**
+⇒ ⭐⭐ **Rule: a predicate's count and its listing must agree; either alone cannot distinguish "absent" from
+"broken predicate."** ⚠ Its `60 *mm` hit was a false positive (14.**60** internal match) ⇒ its doc carries no
+60 mm-offset discussion.
+
+**(d) ⭐ NEST grounding for the role question** (my closed query): `project-tree-manifest.md` contains **one** `UR15`
+hit — the scope note `:10` — and **no node for today's UR15 cell / clamp / C1 work** (the `T-CLAMP-R-*` rows are the
+April-era `T-Skill-CR` subtree). ⇒ **Today's whole lane is node-unbound**: no [DEFINE], no [L-TRIAGE], no [VERIFY]
+chain ever fired for it.
