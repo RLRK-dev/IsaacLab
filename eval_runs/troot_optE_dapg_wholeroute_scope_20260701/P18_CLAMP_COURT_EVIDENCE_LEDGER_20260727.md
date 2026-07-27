@@ -3785,3 +3785,69 @@ section indexing *written ≠ effective*. ⚠ It marks the relay leg: it has not
 What is outstanding there is that **Rs's authorisation is unimplemented**, which is a different thing from a stale
 record. ⇒ ⭐⭐ **Only §0#4 needs the spec surface reflected.**
 ⭐ p5 also read `route_executor.py:150` directly ⇒ **independent confirmation** of the guard that raises #45's cost.
+
+## 73. ⭐⭐⭐ Heavier than the bands: the instrument cannot judge containment at ANY opening
+
+`w2:p11` recomputed the bands from the asset it read itself, then reported something that outranks the answer:
+
+**The log's seat-versus-cable vector is dominated by sampling, not by geometry.**
+- **(a)** it snaps to the **nearest link centre** (`:885-888`); with `CABLE_SEG 0.030` that is **up to ±15 mm of
+  residual along the cable axis**. ⇒ ⛔ **The measured dx — L 9.4 / R 14.1 — both sit inside ±15** ⇒ **sampling
+  alone explains them.**
+- **(b)** the jaw is **rolled** (`:588` is about the closing axis) ⇒ the world components **are not the slot axis**.
+- ⇒ combined: `15·sin θ` = **5.2 mm at 20.1° / 7.9 at 32° / 8.5 mm at 34.4°** ⇒ ⭐⭐ **1.7–2.8× the new half-band
+  of ±3.00 mm.**
+
+⇒ ⭐⭐⭐ **Whatever band is chosen, this instrument cannot check it.** ⇒ The band question is real but **downstream
+of an instrument that must be fixed first.**
+⭐ **Nothing was decided on it**: the ±1.0 mm is **a print string, not a gate** — the gate is `:385 grasped()`
+(both pad1 contacts, face separation 2–8 mm) ⇒ **no number moved a gate.** ⛔ **But a reader compares |13.8|
+against ±1.0**, which is why it must be said out loud.
+⭐ **Fix, no new run required**: do not snap to the nearest link — **interpolate to the centreline, drop a
+perpendicular, transform to pad-local, print the slot axis (z) and the closing axis (y) separately** ⇒ the axial
+term structurally drops out. ⚠ **The script already repaired a cousin of this at `:878-882` — but it fixed *which
+link to compare against*, not *snapping to a link at all*.** ⇒ ⭐ **A repair that leaves the mechanism in place.**
+
+⚠⚠ **And the five-copy trap is live right now**: the run reads `assets/.../_ur15_2f85_koshape_actuated.xml`
+(`:32 GRIP_XML`) at **0.0402 / 0.0238 = 14.00**, while **a same-named copy under `p4_ur15_sim_20260727/` is still
+0.0382 / 0.0258 = 10.00.** ⇒ **Fourth instance today.**
+
+⭐ **Bands at the 14.00 mouth** (p11, ⛔ **explicitly not independent confirmation** — same formula, same inputs;
+only its asset re-read is independent): **6.00 → 15.26° / 39.8%**, **12.00 → 28.61° / 79.7%**, **14.00 → 32.47° /
+92.9%**. ⭐ **The y-axis 10.00 is unaffected** (protrusion 5.00 and claw length 22.0 unchanged) — **independent
+agreement with p5's orthogonality finding (§68).**
+
+## 74. ⚠ The run Rs judged was at 88 mm — so "the angle may disappear" is a prediction, not a state
+
+⭐ `w2:p11` from the driver side: **`ur15_steps_reaim.py:56 GRIP_HALF_SPAN = 0.044` unchanged, log-measured
+89.5 mm, start-pose IK R roll 34.4°.** ⇒ ⛔ **My §63 wording — "34.4° may be moot" — is a prediction about a run
+that has not reported, not a property of the judged run.** p11 shares the prediction and **refuses to use it as
+grounds.** ⇒ **Corrected here.**
+
+⭐ **p11's self-diagnosis is sharper than "I agreed"**: **both values were already in its own document**
+(`:781` 28.00–36.00 and `:1204` 10.00) ⇒ ⭐⭐ **it folded two numbers it already held without cross-checking them.**
+⇒ Its arithmetic for band 10.00 was right; **the naming was wrong.**
+
+⭐ **The guard is bigger than one line** (p11, read directly): the constant is a **pair across two files**
+(`task_config.py:235` 0.044 + `route_executor.py:132 _SPAN_NOMINAL_M` 0.088) with **two** assertions (`:150`, `:155`).
+⭐ And `task_config.py:236-244` records 0.044 as a **min-converging span** — dual-arm collision avoidance **floors**
+achievable spacing near 80.5 mm ⇒ same shape as the driver's own comment about wrists meeting. ⛔ **80.5 is a
+Newton production figure — carry the structure, not the number.**
+
+⭐⭐ **And the answer to today's most-repeated trap was already in the repository**: `dagger_relabel.py:43`,
+verbatim **`ABS_SPAN_NOMINAL_M = 0.0924 ... NOT 88mm grip span`** ⇒ **the author annotated the collision at the
+declaration.** ⇒ ⭐ **A confusable number should be labelled where it is declared, not guarded against where it is
+used.**
+
+## 75. ⭐ `w2:p6` re-measured before adopting my refinement — and found my wording still collapsed a state
+
+Both assets are **tracked and clean**: banked = `85315bbec6` (2026-06-23) blob `b4a6158c9d…`; working =
+`f11273d5be` (16:25:29) blob `1dd8007d03…`. ⇒ ⭐ **Both are records; one is merely newer.**
+⇒ ⭐⭐ **The task is therefore "resolve a disagreement — decide which is the LOCK reference" (⛔ Rs), not "create a
+record."** p6 pinned **both blobs** and split the state three ways: **working = landed / banked = clean at its own
+sha / spec = not reflected** ⇒ **do not read the three as one state.**
+⭐ **#45 deliberately left asymmetric** — there the value genuinely is absent on disk and a guard defends the old one.
+
+⚠ **p6 names its own type**: it had **verified `git status` was clean** and then **wrote "an unrecorded record"**
+⇒ ⭐ **the measurement was right; the wording collapsed a state it had just measured apart.** ⇒ **Sixth pane to
+self-report today.**
