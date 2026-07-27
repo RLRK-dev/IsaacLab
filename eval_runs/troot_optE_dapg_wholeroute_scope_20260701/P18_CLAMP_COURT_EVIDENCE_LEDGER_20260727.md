@@ -2117,3 +2117,65 @@ is the decisive one**, with video narrowing candidate times.
 
 ⭐ pC also notes its three self-reports today (the six timestamps, the missing axis, the handedness sign) were
 each **measured before being reported** — the posture §27 asks for.
+
+## 30. ⭐⭐⭐ The pose mismatch Rs saw is forced by the arm placement — measured
+
+Rs, verbatim (relayed by `w2:p4`): **「ケーブルクランプ部とフィンガの姿勢があっていない」**
+
+`w2:p4` measured what its pose menu had actually selected — **left = roll 20° + yaw 17°, right = roll 34°** ⇒
+⭐ **the mouth is tilted relative to the cable**, which matches Rs's observation. It then re-measured the right
+arm's reach error while **preferring square-on**:
+
+| right-arm pose | seat error |
+|---|---|
+| **roll 0° (square-on)** | ⛔ **158.2 mm** |
+| roll 20° | 16.9 mm |
+| roll 20° + yaw 17° | 14.9 mm |
+| **roll 34°** | ⭐ **0.2 mm** ← the only one that reaches |
+
+⇒ ⭐⭐ **With the current yoke geometry (spread 0.40 / tilt 20°) and the 88 mm grasp span, the right arm cannot
+reach the cable without tilting the mouth 34°.**
+⇒ ⭐ **So the pose mismatch is not under-tuning — the arm placement forces it.** ⛔ p4 takes no design position:
+this is `w2:p5`'s (path and pose), `w2:p11`'s (arm control), and **Rs's if it reaches §0#2**.
+
+⇒ ⚠⚠ **This lands directly on §15's gate.** Before any obstacle-aware re-run of the sweep, one point is already
+established: **the current placement does not admit a square-on pose.** ⛔ p4 explicitly does **not** say
+infeasible — only the 12-entry pose menu was searched; **spread and tilt were never varied.** ⇒ **The yoke
+geometry question is now live with a concrete driver**, and §15's ruling stands: a re-run returning a different
+geometry is a **premise-change candidate**, not a parameter update.
+
+### 30a. What is working, and Rs's third consecutive agreement with the log
+
+Rs on `ur15_p5design.mp4`, verbatim: **「右は成功したが左は失敗」** ⇒ ⭐ **matches p4's log for the third run in a
+row** (p4's `L` is the close-up panel's screen-right, §11d).
+
+| hand | containment-direction error | contacts |
+|---|---|---|
+| **succeeded** | ⭐ **+0.4 mm** (inside ±1.0) | `pad1` both sides **+ all four claws** |
+| failed | **−13.5 mm** | `pad2` only |
+
+⇒ ⭐⭐ **One hand now works as `w2:p5`'s design specifies.** What remains is §30 — the other hand cannot go
+square-on.
+
+⛔ **p4 retracted another of its own hypotheses**: that the IK's 0.30 rad orientation tolerance was too loose and
+moved the aim by ~9 mm. Tightened to **0.02 rad (1.1°)** and re-run, **the numbers do not change by even an order
+of magnitude** (L 0.09 / R 0.16 mm; live errors identical) ⇒ **falsified, withdrawn.**
+
+### 30b. Two clean ways to settle the column, and neither needs the flag restored
+
+⭐ `w2:p0` narrowed the degeneracy sharply: the arm's `ur15_base.xml` holds **7 geoms, all `type=mesh`, zero
+primitives** — **one mesh per link** (base / shoulder / upperarm / forearm / wrist1 / wrist2 / wrist3).
+⇒ ⭐⭐ **So the `+0.00` degeneracy requires an entire link mesh inside the cylinder** ⇒ ⛔ **a thin cross-section is
+not enough**: the link's **whole length** must lie within 102 mm of the axis, i.e. essentially **coaxial with the
+column**. ⇒ **A far stronger condition than my framing implied.** ⛔ p0 does not call it impossible — the mesh
+dimensions are not in the XML and it has not read them — but candidates are **limited to the short wrist meshes**;
+upperarm and forearm are unlikely on length. ⇒ **One number decides it: the mesh's overall length.**
+
+⇒ ⭐⭐ **And p0 points out the third method already exists**: `mj_geomDistance`'s **second return value, `fromto`**
+— the witness segment. **Containment and separation differ in how its endpoints sit**, so ⭐ **a single call
+separates the two meanings of `+0.00`.** ⛔ No flag restoration, no separate point-in-solid code.
+⇒ **Third use today of the same tool** that filled the contract's documentation gap.
+
+⇒ ⭐ **So the column question now has three independent routes** — the two inequalities (§29b), the `fromto`
+endpoints (here), and `w2:p4`'s offer of a flag-restored probe from its own court. ⛔ p18 authorises none of them;
+the item is no longer blocked for want of a method.
