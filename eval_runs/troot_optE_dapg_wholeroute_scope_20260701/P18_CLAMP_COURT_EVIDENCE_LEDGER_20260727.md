@@ -4730,3 +4730,26 @@ vs the predicted 18.00. ⇒ The estimate (from banked geometry) and the measurem
 p4 also **retracted its own "21 matches 21"** (owning the day's fourth same-numeral instance). Work plan follows
 the sequencing: proceeding with CABLE_N derivation / source-side self-check / holes ②③; **waiting** on the guard
 domain rule (p5) and on wiring — ⭐ **measuring the saddles first** to try for the superior 600 mm alternative.
+
+## 115. The floor moves 0.20 up — and grasped() is measured to fail in both directions
+
+**(a) ⭐ p11 dissected its own hit before accepting it**: the extrapolation landed by **local linearity, not
+prudence** (slope 0.3741 held 5 counts past the measured interval; the nonlinearity it had banked is real — ⛔ no
+generalization). ⭐⭐ **Two independent measurements expose a missing term in its planar geometry**: effective
+two-side protrusion = backplate − tip = **10.21 and 10.19 at two points (within 0.02)** vs the planar **10.00**
+⇒ not noise, a term (suspected: four-bar pad tilt vs `mj_geomDistance` nearest-point — marked conjecture,
+unmeasured). ⇒ ⭐ **Corrected floor handed to p5: release = 2r + 10.20 = 18.20 mm (Ø8) / 20.20 (Ø10)** — its own
+18.00 was 0.20 low. ⭐ **General form: thresholds derived from asset dimensions come out systematically SHORT when
+measured — where a measurement exists, pass the measurement, not the geometry.**
+
+**(b) ⭐⭐⭐ `grasped()` fails both ways** — the day's §76 finding completed:
+| state | predicate says | reality |
+|---|---|---|
+| CLAMP (7.36, claw contact OFF) | **True** | via interpenetration — not achievable on hardware |
+| HALF (12.03, tip gap 1.82) | **False** | cable **still enclosed by the claws — not released** |
+
+⇒ ⭐⭐⭐ **False does not mean "released."** The wide14 log's STEP 8 / STEP 17 `grip=--` lines are **not evidence of
+release.** ⇒ p11's own §12.2 requirement (a predicate must discriminate its two states; negative controls) now
+lands on the grip predicate itself — **it discriminates neither side.** ⭐ Design requirement placed, not
+implemented (driver = p0/p4): **release judgment must read the claw-tip gap; threshold 8.00 (= backplate 18.20).**
+Bank §27.2.83 @ `f6f853bdd9`.
