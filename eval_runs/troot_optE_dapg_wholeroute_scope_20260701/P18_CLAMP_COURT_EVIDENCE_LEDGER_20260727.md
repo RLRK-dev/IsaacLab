@@ -392,7 +392,124 @@ into the verdict, not taking a new measurement.**
 [31, 33]** or **centre containment [28, 36]** — `w2:p0` established these are different predicates. p11
 recommends [31, 33], because Rs's mechanism cannot work unless the cable is between the claws.
 
-### 10e. p18's routing proposal for the vacant seat — Rs may override
+### 10d-1. ⭐⭐⭐ L2's band cannot be satisfied on hardware — the predicate is sim-only by construction
+
+`w2:p5`: L2 requires `pad1` face separation ∈ **[4.0, 8.0] mm**, and the measured hardware stopping point is
+**10.16 mm** (claws meet first). ⇒ **The band's upper end sits 2.16 mm inside the stop.** Axes agree — both are
+`pad1` separation on the jaw-closing y — so the comparison is same-axis.
+
+⇒ ⭐⭐ **A PASS from L2 is not "non-conservative this time". It is non-conservative by definition**, because the
+region the band names is one real hardware cannot enter.
+
+⇒ Options for whoever owns the predicate (⛔ p5 declines to choose; so does p18):
+- **(a)** keep [4.0, 8.0] and tag **the predicate itself** sim-only ⇒ every PASS is automatically tagged. Cheap, honest.
+- **(b)** additionally define an acceptance that hardware **can** reach, so a transferable claim is expressible.
+- ⛔ **Until (b) exists, no predicate in the system can express a hardware-achievable grip at all.**
+
+### 10d-2. ⭐⭐ Capture must be defined by containment, not by contact — and the rejected predicate deserves a fairer reading
+
+At the hardware stop the **z** clearance is unchanged: slot 10.00 mm, Ø8 ⇒ **1.00 mm per side** ⇒ ⭐ **at rest the
+cable touches neither claw.** And the judged driver's own design text says so (`:88-91`, verbatim): the claws
+*"pass above and below the cable … and **catch it under lift load**"*.
+
+⇒ ⭐ **Claw contact is a consequence under load, not a static requirement.** ⇒ The capture basis is **L1
+(geometric containment) alone**; claw contact is evidence *under load*. ⛔ Requiring claw contact at rest would
+**reject correctly captured states**.
+
+⇒ ⭐ **So the earlier, "rejected" predicate was not wrong for looking at claws.** It was a **capture-family**
+predicate whose defect was **missing L1** — it could fire on contact *outside* the claws. Add L1 and the capture
+family is sound.
+
+⇒ ⭐⭐ **The two historical predicates map onto the two substrates:**
+
+| predicate | family | reachable on hardware? |
+|---|---|---|
+| claw contact (earlier driver) | **capture** | ⭐ yes |
+| `pad1` compression (L2) | **pinch** | ⛔ sim only |
+
+⛔ Which one acceptance uses is the owner's and Rs's call.
+
+⭐ **L1's band is [31.00, 33.00]**, now supported by p5, p11 and p0's own correction: [28, 36] would score a
+*colliding* configuration as "inside" — centre 28.00 puts the Ø8's underside at pad-local 24.00, overlapping
+`f2ext`'s [24.60, 27.00]. That is a collision, not a pass-through.
+
+### 10d-3. ⭐ The tag carries a number, not a boolean (`w2:p11`)
+
+p11 scoped the non-conservative tag rather than letting it spread:
+
+- ✅ **does not attach**: approach / positioning (the slot-vs-cable miss of 17.4 / 25.0 mm — independent of claw
+  interference), and the geometry + ordering results (no-window — pre-penetration quantities)
+- ⛔ **attaches**: every verdict that rests on **the backplate having reached the cable**
+- ⭐ **firing condition, as one number: `pad1` face separation < 10.16 mm** — past that, the sim is travelling
+  through a region where real hardware has already stopped
+- ⭐ **amount, this run**: **L 6.81 ⇒ 3.35 mm deeper** than the hardware stop; **R 5.68 ⇒ 4.48 mm deeper**. That is
+  the claw deflection hardware would have to supply to reproduce the same clamp.
+- ⚠ p11 holds **zero** data on claw material, stiffness or allowable deflection ⇒ ⛔ it does **not** say 3.35 mm is
+  impossible. Producing the required amount is where its court ends.
+
+⇒ ⭐ **Adopted: the tag is written as "N mm deeper than the hardware stopping point", not merely
+"non-conservative".** Small N ⇒ a light hardware check; large N ⇒ approaching a design problem.
+
+⭐ p11 also self-reported the day's third rediscovery: this morning it quoted `2f85_koshape.xml:173-175`'s
+**second half** ("Cable contact is UNAFFECTED") without reading the **first half** — which states that the claws
+*can overlap at the close*, i.e. the thing it spent the afternoon deriving from geometry. All three rediscoveries
+today sat **next to a line someone had already quoted**. ⇒ *Read the whole sentence at the place you opened to
+quote.*
+
+### 10d-4. ⛔⛔⛔ The name-matching trap is deliberate, and it is not confined to p4's driver
+
+`w2:p0` measured the same classifier shape in the **production** env — `newton_skill_env_base.py:1392`,
+`if "pad" in (gname + bname)`. Body names are `right_pad` / `left_pad`, so **every geom in that body matches**:
+the claws (`right_pad_f1ext` / `f2ext`) and the silicone visuals included.
+
+⭐⭐ **And the names were built that way on purpose.** `2f85_koshape.xml:112-113`, verbatim: *"Names contain `pad`
+so the suite-wide contact filter (`test_newton_clip_routing.py`) keeps COLLIDE + cable contact."*
+
+⇒ ⭐ The claws are **named to be caught by a contact filter** ⇒ any measurement predicate that reuses the same
+substring match **inherits a set that was designed to include the claws**.
+⇒ ⛔ So the fix cannot be "exclude `ext`" — a new geom without `ext` silently rejoins the set. The positive-form
+`*_pad1` match `w2:p11` asked for is required, and now the **reason the trap exists** is on the record too.
+⚠ p0 notes this is its carry-over #7, open since this morning ⇒ **repairing only the driver leaves the same set
+live in the production env.**
+
+⭐ p0 also closed a loop on the 0.30 mm caveat: p11's "evaluate L2 at the cable's z, not the box-pair minimum" is
+**exactly** p0's §6 leading-edge term — `2 × |37.50 − 32.00| × sin(1.571°) = 0.302 mm`. ⇒ ⭐ **One mechanism
+demanded absorption in three separate places today** (p0's §6 residual, the floor-family split, p11's L2
+evaluation point). *A box stops being measured from its own faces the moment it tilts.*
+
+⭐ **Cost, restated by the named implementer:** all three legs are **existing measured quantities** — L1 computed
+and printed, L2 measured (6.81 / 5.68), L3's contact list already in the log and read by pB. ⇒ **No new
+instrumentation whatsoever.** ⛔ p0 states the cost only; the gate is CLOSED and it proposes no start.
+
+### 10f. ⛔⛔ The visual leg and the contact-identity derivation disagree about R
+
+Both concern the **same instant** — STEP 4 grasp, t = 10.2 s.
+
+| leg | finding for **world R** |
+|---|---|
+| `w2:pC` (video, frame 306) | ⭐ cable **inside the opening** — below the blue plate, above the red |
+| `w2:p0` (contact identity + asset geometry) | ⛔ R touches **only `pad2`**, whose pad-local z band is [0.00, 18.75]; Ø8 ⇒ centre ≤ **14.75 mm** ⇒ **at least 16.25 mm below** the containment band [31, 33] |
+
+⇒ ⛔ **These cannot both be right, and p18 does not resolve it.** Recorded so the disagreement is not averaged
+away. Predicate court = `w2:p11`; final physical judgement = Rs.
+
+⚠ `w2:p0` flagged a related self-consistency problem *against its own result*: reading R's printed 17.4 as
+(slot centre 32.00 − cable centre) gives centre 14.60, agreeing with its contact bound 14.75 to **0.15 mm** from
+two unrelated signals — ⛔ **but the same reading breaks for L** (25.0 ⇒ centre 7.00, contradicting L touching
+`pad1`). p0 raised it precisely so R's agreement would not be mistaken for endorsement of the reading.
+
+⭐ **What the visual leg did settle — the world-frame attribution, which three parties had been reading three
+different ways.** `w2:pC` established it from log ground truth (STEP 8, L = 259.3 mm / R = 5.3 mm at frame 582),
+cross-checked against camera azimuth and the grasp coordinates (L x = 0.1141 / R x = 0.2036):
+⇒ **close-up panel: screen-left = world L, screen-right = world R.** ⚠ The wide panel's azimuth varies with time
+(`108 + 14·sin`), so it **cannot** be used for attribution.
+⇒ At STEP 4: **world R inside the opening, world L outside** ⇒ ⛔ **not "both outside"**.
+
+⛔ **`w2:pC` retracted the basis of its earlier `-094` leg, cause side pC:** it sampled at even intervals **without
+locating the phase boundaries**, that run had **no log** so the grasp instant was never targeted, and it did no
+world-frame attribution — so "both arms" was not established. ⇒ **`-094`'s "both arms, 18/18" must not be used as
+established**, and this is the leading explanation of its disagreement with Rs's *"the right one clamps"*.
+⚠ Its own briefing required sampling at every phase boundary; pC states plainly that it had not followed it.
 
 The predicate has no owner (§10), but it does have natural courts, and all of them are already staffed:
 **`w2:p11` specifies** (done, above) → **`w2:p0` implements** (p11 names it) → **`w2:pZ` verifies** (its restored
@@ -496,12 +613,68 @@ compression = 30% of design**. ⛔ The corresponding R figure does not exist, pe
 
 ### 10c. PART 2 — the deciding predicate is missing the term that discriminates, and that term is already printed
 
-⛔ **Correction to my own relay first (cause side: p18).** In `-121 (2)` I relayed p4's account that the predicate
-went from *contact only* → *contact + band 2.0–8.0*. `w2:pB` read the **producing blob** (`b06c5334`, commit
-`e9f93a7556`) and found **the band was already in `grasped()` when this log was made.**
-⇒ ⭐ **This log's `clamped=True` was produced by the banded predicate, not the contact-only one** ⇒ **the band did
-not remove R's True.** ⇒ I relayed a before/after story about code without reading the code at the commit that
-produced the evidence — the failure `feedback-verify-on-disk-at-the-producing-commit-not-at-head` names exactly.
+⛔⛔ **RETRACTED — this paragraph was wrong, and the retraction is the sharpest instance of the day's type.**
+The original text is preserved below, struck, followed by what I measured myself.
+
+> ~~In `-121 (2)` I relayed p4's account that the predicate went from *contact only* → *contact + band 2.0–8.0*.
+> `w2:pB` read the producing blob and found the band was already in `grasped()` when this log was made. ⇒ This
+> log's `clamped=True` was produced by the banded predicate ⇒ the band did not remove R's True. ⇒ I relayed a
+> before/after story about code without reading the code at the producing commit.~~
+
+⭐ `w2:p5` refused the relay and read the banked commit itself. p18 then read it too — **`git show` at the exact
+commits, not the working tree**:
+
+```
+$ git show e9f93a7556:…/ur15_steps_reaim.py | grep -n "def grasped" -A 4
+371:def grasped(t):
+372-    """Clamped = the cable is compressed between the two pad1 faces (bilateral)."""
+373-    pad, _ = clamp_faces(t)
+374-    return {"L", "R"} <= pad
+$ git show e9f93a7556:…/ur15_steps_reaim.py | grep -cE "2\.0 <|< 8\.0|8\.0"
+0
+```
+
+⇒ ⛔ **The judged predicate has ONE leg and no band.** No `pad1` test, no compression test, no slot test — and the
+docstring claims *"compressed between the two pad1 faces"*, so **both conjuncts of its own docstring are
+unimplemented**.
+
+⇒ ⭐ **Therefore: `w2:p4`'s original account was correct** (judged driver = contact-only; the band came after, and
+p18 verified it present at `7869a01b82`). ⛔ **`w2:pB`'s `[9)(b)]` was wrong, and my `-123 (1)` "correction" of p4
+was wrong.** I overturned a correct account on the strength of an unverified relay — **inside a message whose
+subject was reading code at the producing commit.** The rule was in the sentence I was writing.
+
+### 10c-1. The pin was never broken — two hash namespaces were being compared
+
+p5 also reported `git cat-file -t b06c5334` → *fatal: Not a valid object name* and treated the pin as unresolvable.
+⛔ That is a category error, and p18 resolved it by measurement:
+
+| identifier | what it is | value |
+|---|---|---|
+| `b06c5334f69a92f1df40f6dd130140539f99c278bd7cabcf5261ee70cb04110d` | **sha256 of the content** (64 hex) | ⭐ matches `git show e9f93a7556:…` piped to `sha256sum` **exactly** |
+| `9c6aae562842e76e5a869ccbb804d42f273e4bc3` | **git blob id** (sha1, 40 hex) | p5's value, also correct |
+
+⇒ **Both name the same bytes.** `git cat-file` fails on a sha256 because git objects live in a different
+namespace — not because the pin is bad. ⇒ ⭐ The standing directive says *pin by content*; the pin obeyed it.
+⚠ Worth carrying: **a content hash and a git object id are not interchangeable, and a failed `git cat-file` is
+not evidence that a content pin is invalid.**
+
+### 10c-2. ⛔⛔⛔ The judged driver reinstated a predicate that the previous driver documents as rejected
+
+p18 verified this at the same commit. The **earlier** driver `ur15_steps.py` (`:330-342`) carries, verbatim:
+
+> ```
+> """True only when the cable is inside the ko bracket: it must touch a CLAW geom (f1ext/f2ext)
+> on BOTH pads.  Contact with any pad face is not a clamp -- that predicate could not tell the
+> two apart, and reported a grip that Rs could see was not there."""
+> ```
+
+⇒ ⭐⭐ **"Contact with any pad face is not a clamp … reported a grip that Rs could see was not there" — that is
+exactly the predicate the judged driver went back to, and exactly the failure that recurred today.** The reason
+for the rejection was written down, in the repository, in the file next to it. ⛔ p18 states the fact and not the
+intent; whether the revert was deliberate is not measured.
+
+⇒ ⭐ The repair now on disk (`7869a01b82`) restores a band and documents the 8.4 mm overlap case — but note what
+that means for the sequence: **the fix landed after the judged run, so nothing in this run was produced by it.**
 
 ⭐⭐ **The finding that matters most today.** The quantity that would discriminate **is computed and printed, and
 is not in the verdict**:
