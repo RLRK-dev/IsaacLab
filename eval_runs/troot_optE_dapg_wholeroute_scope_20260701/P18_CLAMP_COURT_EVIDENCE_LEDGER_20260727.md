@@ -1224,3 +1224,46 @@ collision-disabled value.**
 ⭐ `w2:p5` also declined to defend its own conditional: *"the conditional said 'conditional because the quantity
 is undetermined'; once the quantity lands the conditional is spent, and I will not defend it."* And it lifted its
 freeze after confirming the bank, adding future material as **new sections without rewriting banked lines**.
+
+## 13. The inversion probably does not happen, and the aim "improvement" is not one
+
+**(a) `w2:p0` reproduced the window and bounded the answer.** Claw reach at backplate gap
+`2 × (4.00 + 5.000) = 18.00 mm` ⇒ window `[10.16, 18.00]` = 7.84 mm wide ⇒ **ctrl [198.19, 219.16]**;
+`w2:p11` re-derived it independently from both calibration slopes (2.6750 → ctrl 198.0; 2.8882 → 196.8) ⇒
+**window ≈ ctrl [197, 219] either way.**
+⇒ ⭐⭐ The window spans two of p4's sample intervals ⇒ **in-window displacement ≤ 0.47 + 0.05 = 0.52 mm** ⇒
+**3.8× margin against the 2.00 mm band** ⇒ ⭐ **the bands overlap and the design does not invert.**
+⚠ Reservations kept by p0 and not dropped here: the series reached it by **relay** (source unread); it assumes no
+reversal **within** a sample interval; and the values are **base +z**, not the component (b) requires.
+⇒ **An upper bound, not a measurement of the window.** ⛔ p18 does not report an inversion to Rs.
+
+**(b) `w2:p0` settled the axis question exactly.** The mouth's height axis **is pad-local z**: `f1ext`
+(0, −0.0026, **0.0382**) and `f2ext` (0, −0.0026, **0.0258**) share x and y and differ only in z ⇒ the line
+joining them is precisely pad-local z ⇒ the decomposition is **"project onto the pad body's local z"** — no new
+geometry, no ambiguity, and the world direction is already grounded (`GD-KoShape-Finger.md:58-59`), so the sign
+is not free either.
+⭐ `w2:p11` accordingly tightened its own rule: **|t| < 2.00 mm is sufficient but not necessary** — a large
+displacement with a small height component still overlaps ⇒ ⛔ **its rule errs toward over-detecting inversion**
+⇒ adopt **|t_slot| < 2.00 mm** on the height component, and report decomposed into the mouth's own axes.
+
+**(c) ⛔⛔ The improved aim residual is not evidence of a better aim.** `w2:p0` checked all three commits of the
+driver: even at the latest (`887d3fefde`), `:767-769` still calls `cable_at(GL[0])` / `cable_at(GR[0])` — **the
+frozen x. Only the reporting path moved to the seat point** (`:883-886`).
+⇒ ⭐⭐ So **L 0.09 / R 0.16 mm measures convergence onto the link the frozen x selected.**
+⇒ ⭐ p0 states the trap plainly, and it is worth keeping in this form: **a small residual against a target that
+can be wrong means the convergence tightened, not that the aim improved. What separates the two is the selection
+rule — and that is unchanged.** ⚠ A 10× improvement looks like success, which is exactly why it needed saying.
+
+**(d) `w2:p11` took Rs's singularity finding, with a measurement plan and no design choice yet.**
+- Instrument = **Jacobian minimum singular value**. ⭐ p4's offered quantity is the right one — ⛔ **but per
+  waypoint is not enough: singularities are passed *between* waypoints** ⇒ sample along the interpolated path and
+  report the **minimum over the window**. *(The path-not-endpoint lesson, third surface today.)*
+- Options, all inside DiffIK and none a method change: ① raise DLS damping λ — ⚠ **blunts tracking** (λ 0.20 can
+  drop effective tracking to ~0.5%), the "safe but immobile" trap; ② ⭐⭐ **use the free axis** — the tool-pose
+  spec permits outward roll, so roll about the closing axis is free ⇒ **even a 6-DoF arm gains one redundancy**,
+  usable as a nullspace objective to raise σ_min — p11 judges this best-founded; ③ re-lay waypoints to detour —
+  ⚠ touches the step table's geometry ⇒ **`w2:p5`'s court**.
+- ⛔ **It chooses none, because σ_min measurements are zero.** Measure, then choose.
+- ⚠ ⛔ It has not measured UR15's joint layout and **refuses to assume "UR family ⇒ wrist singularity"**.
+- ⭐ And it turned p18's correlation remark into a test: **if the departure and the singularity share a root, the
+  σ_min valley and the 259 mm departure should coincide in time** ⇒ falsifiable; if they do not, different cause.
