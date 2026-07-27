@@ -5848,3 +5848,36 @@ the broken proof).
 
 **(d) Bank request routed to p4**: three items, **clip doc first** (two retractions ride on it), then spec,
 then the env7 dir. The env7 task completion itself is unchanged (-090 stands).
+
+## 169. A completeness condition arrives already met; DDR #42 fires on schedule; the evidence gains an env epoch
+
+**(a) ⭐ p0's condition on the `known` deletion (-358R)** — placed *in advance* as the shape of its
+re-verification: `known` sat at **five** sites (four code: `:356` parameter, `:373` membership test, `:386` the
+caller *builds* the set, `:401` *passes* it; plus `:89` **English prose** "…is a known …"). Deleting only
+`:373` would leave "build-and-pass an ignored set" readable as a live check; ⛔ and a string-match edit would
+touch `:89` — *"don't edit with a non-discriminating predicate"*, applied to editing itself. p18 verified the
+five sites at the then-current pin (`72359f781d9d…`). **⭐⭐ Then measured again after p4's `6b6f0953` (which
+landed before this condition could reach p4): the condition is ALREADY MET** — the module (now
+`dab09ec05861259911ae3af230e9c2b89b0e8f8d737030fa736000f0f9a888c3`, working tree = commit blob) contains
+exactly **one** `known`: the `:89` prose, untouched; **all four code sites are gone**. Independent convergence:
+p4's deletion was complete without having seen the condition. (Module pin thereby moved `72359f781d9d…` →
+`dab09ec05861…`; §165's (d)-reproduction stands as a record *of the old pin* — the declaration's survival at
+the new pin is p0's re-verification item, not assumed here.)
+
+**(b) ⭐⭐ DDR #42 FIRED (p6, -066)**: registered at 18:2x as "the moment the update runs, RS71:15 goes false" —
+fired as predicted; transition @ `50e7116ec0` ("Fire #42: the env moved and the spec line is now false",
+verified here). p6 measured the four axes **from dist-info directly**, not from reports: newton 1.4.0 / mujoco
+3.10.0 / mujoco_warp 3.10.0.3 / warp_lang 1.15.0; RS71 `:15` still reads 1.2.1/3.8.1 = **currently false**
+(read by p6 at 20:23:40 and p18 at 20:15). **Cluster disposition accepted** — Rs's pen on three items, natures
+stated: ① §0#4 mouth (carries a *decision*: which opening is the LOCK standard) ② step-table `:1315` (ruling
+exists; reflection only) ③ RS71 `:15` (**fact-false; most mechanical**). ⚠ p6's self-caught checker defect (7th
+today, caught before writing): its dist-info grep `warp[-_][0-9]` missed `warp_lang` ⇒ pattern discarded, named
+enumeration used; no 3-axis report escaped.
+
+**(c) ⭐ #42's second consequence — the evidence needs an env axis.** Every run today ran on the **old stack**,
+and the pZ-v3 evidence rule requires the env axis (the 4-tuple) to match before numbers are collated. ⭐ Epoch
+line, recorded as custody: **evidence banked in this ledger through §163 is old-stack** (upgrade window
+20:03:40–20:06:03, runs 0 during; §164 onward = new-stack epoch); any future run carries the new 4-tuple and
+⛔ must not be collated against old-stack numbers without the axis stated. Owner of the per-item re-collation:
+**proposed = p4** (producer of today's runs; p0 verify leg; pZ out pending Rs) — flagged for Rs confirmation;
+the assignment is neither p6's court nor decided here.
