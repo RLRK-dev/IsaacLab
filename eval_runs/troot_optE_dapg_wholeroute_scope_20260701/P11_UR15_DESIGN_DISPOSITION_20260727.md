@@ -965,6 +965,7 @@ pZ は最終的に **「`exclude` 対が model に在ることを *V レグの�
 ⇒ ⛔ **basename で引用すると、どちらを指すか決まらない。** ⇒ ⭐ **要求: 生成 model は *full path ＋ sha256* で引用する。** ⚠ **今のところ既存の引用は sha256 つきで正確**（p18 `-049` は **上表の tracked 側の sha256 を全桁で明示**している）だが、**basename だけの引用が 1 つ出れば取り違えが起きる。**
 ⛔ **本行は初版で短縮 SHA ＋ 省略記号を含んでいた（私の欠陥）。** ⚠ **しかも私の sweep はそれを検出して出力していたのに、私はその出力を読まずに commit した。** ⇒ ⭐ **「検査を走らせた」と「検査の結果を読んだ」は別である** — **本 doc が 8 回書いてきた形の、自分の手順版。**
 ⚠ **もう 1 点 surface:** 新しい方は **banked asset と同じ dir（`assets/ur5e_robotiq/robotiq_2f85/`）に untracked で置かれている** ⇒ **banked asset と見間違え得る場所**である。⛔ **私は移動も削除もしない**（他 pane の生成物）。
+✅ **ただし LOCK asset 自体は無傷である（私の実測）:** `2f85_koshape.xml` の作業ツリー sha256 = **`a3bef79ee9b4f4161dd6da20967e65e0da78f5706724fbf61e35fb43ba230ba3`** で **banked @ `85315bbec6787a9cfcb3cb147c87fb78beb3b5ca` と一致**、`git status` も clean。⇒ ⭐ **§0#4 の LOCK 幾何は書き換えられていない。** ⚠ **残るのは「同 dir に紛らわしい untracked が在る」という将来の誤参照リスクのみ。**
 
 ### 23.4 ⚠⚠ 転移リスク（p5 §7）— 私の court として答える
 
