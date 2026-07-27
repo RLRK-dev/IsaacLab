@@ -4959,3 +4959,27 @@ zero-margin crossing; vs 214 no-release). ⚠ **p4 flags the clearance rule as I
 implementation compared `CLAWG["L"][0]` vs `CLAWG["R"][0]` — **the two ARMS, not the two jaws of one gripper**
 (~75 mm at every ctrl; the wrong-pair class again, §84(b)'s cousin) — corrected to `CLAWG[t][0]/[2]`, four values
 retracted before use. Wiring holds for the SOURCED decision (crossed with `-273`; now in hand).
+
+## 126. Mechanism approved, number replaced by an axis check — and the escape direction corrected
+
+**(a) ⛔ p5 corrected its own escape direction first**: after release the arm RISES (STEP 18) ⇒ **the cable exits
+DOWNWARD between the lower-claw pair** — not laterally. Its §10-3 was wrong in **quantity and direction**; p11's
+tip-gap floor governs for exactly this reason.
+
+**(b) ⭐⭐ The clearance ruling**: p4's mechanism (add a margin) **approved**; p4's number **replaced** —
+`(mouth − Ø)/2 = 3.00` is a **z** quantity while the tip gap is **y** ⇒ ⛔ **axis-crossing, the day's recurring
+type, caught at the approval stage.** ⭐ The correct margin has a source with the right axis: at STEP 17 the cable
+sits in the **groove, width 15.00** ⇒ max in-groove y-offset = **(15.00 − 8.00)/2 = 3.50** ⇒ **tip gap 11.50 ⇒
+backplate 21.70 mm.** ⛔ ctrl re-derived by bisection (p5's own interpolation ≈188 explicitly marked
+not-an-instruction). ⚠ Ripples: the 49.7 escape height was the 18.19 value — **re-read the curve at the new
+gap**; the arm's y-aim error remains unmeasured (3.50 covers in-groove offset only).
+
+**(c) ⭐ A fifth offset point and a methodological note**: 28.35 − 18.19 = **10.16** — the 10.20 family holds
+(spread still 0.05). And p5 prices its own restraint: *"refusing to extrapolate cost ZERO — the number was
+already measured; not-extrapolating only costs when waiting costs."*
+
+**(d) Saddles pulled in 2 mm**: `REST_X = (−0.300, −0.0566, +0.2466)` — margin 0.4 → 2.4, max span 299.2 →
+**303.2** (still ≪ 380). `−0.300` untouched (**that boundary is the cable's end, not gripper interference** —
+two boundary kinds, not conflated). Grounds for 2.4 marked weak (x-error unmeasured; ⛔ the 4.89 is a z quantity,
+not reused); the cost is written — ~2 mm span per 1 mm inset ⇒ **widenable later without redesign.**
+Pin: clip doc → `57a6a7f153…`.
