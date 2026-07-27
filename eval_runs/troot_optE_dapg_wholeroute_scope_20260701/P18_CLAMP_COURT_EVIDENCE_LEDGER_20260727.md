@@ -481,7 +481,102 @@ evaluation point). *A box stops being measured from its own faces the moment it 
 and printed, L2 measured (6.81 / 5.68), L3's contact list already in the log and read by pB. ⇒ **No new
 instrumentation whatsoever.** ⛔ p0 states the cost only; the gate is CLOSED and it proposes no start.
 
-### 10f. ⛔⛔ The visual leg and the contact-identity derivation disagree about R
+### 10g. ⭐⭐⭐ p18 read the log itself — and "the numbers" are not one witness. They disagree with each other.
+
+I framed §10f as *video vs numbers*. That framing is wrong, and reading the log directly shows why. Verbatim,
+`ur15_reaim_1352.log` (sha256 `5e4b59ed…`, unchanged), the STEP 4 block:
+
+```
+GRASP L: slot vs cable, live [ 22.2 -11.4   1.5] mm (| 25.0| mm; the band is +-1.0)
+GRASP L: … cable moved  25.1 mm since the aim
+GRASP L: cable touched by pads ['L','R'] / claws ['L','R']   clamped=True
+GRASP L: fingers blocked by ['cab17', 'cab18']
+GRASP L: nearest cable link cab18 at  33.5 mm from the pinch … pad geoms touching cable =
+         ['Lg_left_pad1','Lg_left_pad_f1ext','Lg_left_pad_f2ext',
+          'Lg_right_pad1','Lg_right_pad_f1ext','Lg_right_pad_f2ext']
+GRASP R: slot vs cable, live [ -1.8   7.3 -15.7] mm (| 17.4| mm; the band is +-1.0)
+GRASP R: cable touched by pads ['L','R'] / claws none   clamped=True
+GRASP R: nearest cable link cab21 at  18.8 mm … pad geoms touching cable = ['Rg_left_pad2','Rg_right_pad2']
+STEP 4 cable把持      t= 10.2s … grip=LR
+```
+
+⭐ First, this confirms `w2:p5`: the GRASP prints sit **inside** the STEP 4 block, so they are the same instant as
+the disagreement. ⇒ p0's concern #1 (time correspondence) is discharged for the slot quantity.
+
+⛔⛔ **But the arm the log calls L is internally inconsistent**, and nobody had put these lines side by side:
+
+| quantity for log-L | says |
+|---|---|
+| `slot vs cable` **25.0 mm** (band ±1.0) | cable is far from the slot |
+| `nearest cable link` **33.5 mm** from the pinch | cable is far from the jaw |
+| `fingers blocked by ['cab17','cab18']` | ⛔ a cable link is **physically obstructing the jaw** |
+| contacts: **6 geoms** — `pad1` **and** `f1ext` **and** `f2ext`, on **both** pads | ⛔ the cable is **inside the コ**, touching both claws |
+| face gap **+6.81 mm** at `ctrl=255` | ⛔ the jaw is **fully commanded shut and stopped by something 6.81 mm thick** |
+
+⇒ ⭐ **A cable 25 mm outside the slot cannot simultaneously touch both claws and both backplates and block the
+fingers and hold the jaw open at ctrl 255.** ⇒ ⛔ **The two geometric prints disagree with the physics prints,
+for the same arm at the same instant.**
+
+⚠ By contrast **log-R is self-consistent**: `slot vs cable` 17.4 and `nearest link` 18.8 agree; contacts are
+`pad2` only; no claw contact. ⇒ Cable low, outside the slot, resting on the lower box.
+
+⇒ ⭐⭐ **So "the numbers" cannot be treated as a single witness against `w2:pC`.** One arm's numbers corroborate
+pC's reading of *some* arm being properly engaged; the other arm's numbers corroborate p0. What is actually in
+conflict is **which arm is which**.
+
+### 10g-0. ⛔⛔ DIRECTION INVERTED — the cable was ABOVE the opening, not below (`w2:p11`)
+
+⛔ **§10f's "at least 16.25 mm **below**" has the sign backwards, and so did every restatement of it, mine
+included.** `2f85_koshape.xml` labels **`f1ext` BOTTOM (red)** and **`f2ext` TOP (blue)** — yet pad-local z is
+**f1ext 38.2 > f2ext 25.8** (I had this in front of me at `:9` and did not use it). ⇒ ⭐ **pad-local +z points
+DOWN in world**, consistent with `GD-KoShape-Finger.md:58-59` (world Z: f1ext 796.6 < f2ext 809).
+
+⇒ `pad2` occupies pad-local **[0, 18.75]**, i.e. **smaller** z than `f2ext`'s 25.8 ⇒ ⭐ **in world, `pad2` sits
+ABOVE the upper claw.** ⇒ **At that instant the cable was above the opening.**
+⚠ p11 reports it made the same sign error this morning — writing the GD-KoShape inversion **two sections above**
+the place it then failed to apply it. ⛔ Scope: that instant, R side only; do not generalise to other runs, other
+steps, or the L side.
+
+### 10g-1. ⚠ A transposition reconciles the two legs — p18's inference, corrected and narrowed
+
+⭐ **The reconciliation survives the direction fix and gets stronger.** With the sign corrected:
+
+| | log's numbers say | `w2:pC` saw |
+|---|---|---|
+| **log-L** | cable **in the コ** — both claws + both `pad1` touching, fingers blocked, jaw held at 6.81 mm | *"cable above both plates"* — **outside** |
+| **log-R** | cable **above the opening**, `pad2` only | *"below blue, above red"* — **inside** |
+
+⇒ ⛔ **Exactly opposite, and consistently so on both arms.** ⇒ ⭐ **One transposition reconciles every observation
+at once**, and nothing else has to be wrong.
+
+⛔ **Correction to my first statement of this.** I wrote the swap as *"log labels vs world"*. That does not work:
+`w2:pC` derived its attribution **from this same log** (STEP 8 `L=259.3 / R=5.3`), so pC's "world L/R" is really
+*"the arm the log calls L/R"* — a **video↔log correspondence**, not an independent world determination. A swap of
+log-vs-world moves both together and resolves nothing.
+⇒ ⭐ The transposition that does fit sits **between the log's per-arm data blocks and the arms pC identified** —
+i.e. in the identification step or in the per-arm reporting, not in the naming convention.
+
+⇒ ⛔ **And pC's leg cannot arbitrate it**, because the identification hinged on a log field. ⇒ ⭐ **The
+non-circular check** (cheap, no run): resolve arm↔label from the **model** — the two grippers' body/site world
+positions — rather than from any log field. ⛔ p18 requests nothing; `w2:p0` / `w2:p4`'s court.
+
+⚠ It also fits `w2:p4`'s earlier note that its log read `L` succeeded where Rs saw **the right one** clamp.
+
+⇒ ⭐ **The non-circular check** (cheap, no run): resolve the arm→label mapping from the **model** — body/site world
+positions of the two grippers — rather than from any log field. ⛔ p18 requests nothing; this is `w2:p0`'s
+(implementation) and `w2:p4`'s (driver) court.
+
+### 10g-2. The other lead: what does `slot vs cable` measure the cable *at*?
+
+⚠ Also inference. For log-L the printed drift is **`cable moved 25.1 mm since the aim`** and the slot error is
+**25.0 mm** — the same magnitude. ⇒ Consistent with `slot vs cable` being evaluated against **the link that was
+aimed at**, which has since moved away, while a *neighbouring* link (`cab17`/`cab18`) is what actually sits in
+the jaw. ⇒ That would make the 25.0 mm a true statement about the **wrong link**, and would leave both pC and the
+contact list correct.
+⇒ ⭐ Cheap check, no run: does the slot-vs-cable computation use a **fixed link index chosen at aim time** or the
+**nearest link at evaluation time**? ⛔ Same court as above.
+
+## 10f. ⛔⛔ The visual leg and the contact-identity derivation disagree about R
 
 Both concern the **same instant** — STEP 4 grasp, t = 10.2 s.
 

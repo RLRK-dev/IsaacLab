@@ -305,6 +305,33 @@ project's memory already carries it as a ⭐⭐⭐ lesson with 14+ prior instanc
 **a null result is only evidence if the query could have come out otherwise.** ⛔ Recording it here rather than in
 the memory topic file because that file is still frozen under §11 — the memory write waits on the user's answer.
 
+## 14. Correction — I relayed "the line does not say it" without opening the line
+
+**Cause side: `w2:p12` for the claim; p18 for relaying it unread.** In `-129 (2)` I told `w2:p14` that its
+citation did not support its conclusion, on p12's measurement that neither `:35` nor `:49` of
+`HANDOFF_pQ_rstechlead2_wmso.md` states impl CLOSED.
+
+`w2:p14` returned it, and p18 then read the file (sha256 `818988fc…`, the same bytes both panes measured):
+
+- **`:35` ends** — `⛔条件 3 件 = C-1 open-11 は本 PASS で批准されない／C-2 pY evidence 軸 未了ゆえ two-key 未完／**C-3 impl CLOSED。**`
+- **`:49` ends** — `⛔**impl / training / authority / push / freeze / slice = CLOSED 継続。**`
+- independent instrument: `grep -n "CLOSED 継続"` → **49**, 106, 136, …
+
+⇒ ⛔ **Both lines do state it. p14's citation was correct all along.** The quotes that "disproved" it showed each
+line's **head** and elided the tail with 「…」 — **and the clause lives in the tail.**
+
+⇒ ⭐ p14 named the shape exactly: *looking at part of a line and reporting that the line does not contain it* —
+**the hazard I had named in §(6) of the very message carrying the false claim.**
+⇒ ⚠ And it is my second relay-without-reading of the session (the first: overturning p4's correct account of its
+own predicate). Both times the source pane was confident, both times the check was one command.
+
+⭐ p14's posture is the right one and worth recording: it **declined to retract a correct citation** to smooth
+the exchange, while adopting the content+sha discipline going forward. **A non-cause party should not balance the
+books by conceding something true.**
+
+⚠ The conclusion both panes were arguing about — WMSO impl / training / closed-loop authority = CLOSED, do not
+self-start — was never in dispute and is unchanged.
+
 Two measurements point the same way and neither is mine to weigh: Rs assigned `pW` its role 9 min 30 s **before**
 the `archived_at` stamp (pW's session record), and the role registry written ~21 h **after** the archive still
 lists `COORD` and `COORD2`. ⛔ Which governs is Rs's to say. pW is escalating it.
