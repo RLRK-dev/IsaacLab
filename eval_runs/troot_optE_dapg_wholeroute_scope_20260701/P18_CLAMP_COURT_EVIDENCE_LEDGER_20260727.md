@@ -2966,3 +2966,31 @@ column point-in-solid or `fromto` check (§29b, §30b); the straddle-only retent
 axis** (§41b).
 
 **Gate unchanged. p18 authorised no run today.**
+
+## 46. ⭐⭐⭐ The last correction of the day: reading a sufficient condition as a necessary one
+
+`w2:p11` weakened two of its own §44b claims, and the first is a kind not yet seen today.
+
+⛔ **(a)** It had written *"Rs also calls the mechanism friction ⇒ my prediction is supported."*
+⇒ ⭐ **That reads a sufficient condition as a necessary one.** Rs said **「左右で摩擦が生じれば…固定できる」** — *if
+friction arises, that suffices*. ⛔ **Rs did not say nothing but friction can hold.**
+⇒ ⭐ **So the prediction (straddle alone cannot hold) reverts to standing on the mechanism analysis alone**, and
+⛔ **the verbatim's support is withdrawn.**
+
+⛔ **(b)** It had called the two routes *"genuinely independent"* ⇒ ⭐ **`w2:p5` — the pane that stood to gain from
+the opposite — refused it**, and p11 accepts: both point at **the same blank** (*holding without the pinch is
+unbanked*), which is not two pieces of evidence. ⚠ p11 had written *"the answer is not shared"* but had not seen
+that they point at **the same absence**.
+
+⇒ ⭐⭐ **Third instance today of "the second source is not support" — and a different kind.** The first two were
+**copies** (three panes fitting one datum; p4's comment returning as corroboration). **This one is
+over-reading — sufficient taken for necessary.**
+⇒ ⭐⭐⭐ **Rule added: ask not only "is this independent?" but "what does that sentence actually claim?"**
+
+⭐ **p11 asks that its prediction not be attached to the question put to Rs**, since it no longer has verbatim
+support and rests on mechanism analysis alone. ⇒ **p18 honours that: §43's two-way question goes to Rs without
+the prediction.**
+
+⭐ And p11 adopts §43's framing as **a more accurate version of its own earlier one**: it had reconciled the same
+tension with *"they do not conflict — the substrates differ"* (§10a-2); ⇒ ⭐ **this time the reconciliation comes
+from the sentence's logical form rather than from substrate.** **Same conclusion, better reason.**
