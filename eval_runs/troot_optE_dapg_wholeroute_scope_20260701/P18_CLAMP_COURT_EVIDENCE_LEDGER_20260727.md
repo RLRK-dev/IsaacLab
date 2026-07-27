@@ -171,14 +171,93 @@ the real pads (which also carry `pad1`/`pad2`, and whose tilt comes from the fou
 itself was not validated** by the probe; and the probe covers **mujoco 3.8.1 with default flags only**
 (`nativeccd` and friends untested). ⇒ **Applying this to p4's sweep still requires p4's recomputation from raw.**
 
-⚠ **A coupling nobody has flagged: the queued env7 upgrade replaces the library whose contract was just
-measured.** newton 1.4.0 / mujoco **3.10.0** would move `mj_geomDistance` out from under every number in this
-section, and the pane holding this measurement (`w2:p5`) is the pane that performs the upgrade. ⇒ The probe
-should be re-run on 3.10.0 before these numbers are relied on afterwards. Surfaced, not directed.
+### 5d. Both of §5c's forward-looking notes were answered within minutes — one of them by being refuted
 
-⭐ **A free second path, from `w2:p0`, still open:** the θ-convention cap 2.6463 has only 0.0363 mm of headroom at
-ctrl 239. If p4's sweep has points above 239 whose floor exceeds 2.6463, the θ reading is refuted and 2θ stands
-alone — deciding it independently of p0's kinematic derivation, with no new run.
+**(1) The upgrade coupling is discharged: the contract is version-neutral.** I flagged that the queued
+mujoco 3.8.1 → 3.10.0 move would pull the library out from under these numbers. `w2:p5` did not wait for the
+upgrade — a staging env (`env_isaaclab7_latest`, mujoco **3.10.0**) already exists, so it re-ran the same probe
+there: **15/15 points identical to 3.8.1** (5 parallel, 4 tilted, 6 deep-overlap). Overlap 5.93 → **−2.561** on
+both; parallel ≥ 3.00 → **−2.400** on both.
+⇒ ⭐ **The env7 upgrade is neutral with respect to this instrument's contract.**
+⚠ Scope, stated by p5 and preserved: this measured **only** `mj_geomDistance`'s box-box penetration semantics.
+⛔ **Solver behaviour, contact, and run reproducibility were not measured** — those are separate axes and still
+need a post-upgrade smoke.
+
+**(2) ⛔⛔ The "free second path" I relayed does not discriminate. Cause side: p18.**
+I recorded, and dispatched in `-114 (7)`, that if p4's sweep had points above ctrl 239 whose floor exceeded the
+θ-convention value 2.6463, the θ reading would be refuted. **There is no ceiling.** p5 measured past the
+half-width (θ = 1.571°/plate):
+
+| overlap (mm) | 8.00 | 9.00 | 10.00 | 12.00 | 14.00 | 16.00 |
+|---|---|---|---|---|---|---|
+| returned | −2.617 | −2.645 | −2.672 | −2.727 | −2.782 | −2.837 |
+
+⇒ **2.6463 is crossed at overlap ≈ 9.0 mm under the θ convention itself.** ⇒ ⛔ **Exceeding it refutes nothing,
+so the path has no discriminating power** — and I published it as a live route to a decision.
+⚠ `w2:p0` offered it as its own kinematic reading and marked it as such; **I am the one who wrote it into the
+ledger as an open path without asking whether it could come out either way.** That is the same failure I had
+already recorded three times today, committed while writing the record of it.
+
+⭐ **Why it fails, which also sharpens p0's residual claim (p18's arithmetic, marked as mine):** family I is
+family II evaluated at **overlap = half-width**. `2.400 + 9.0 × 0.0274 = 2.6466` ≈ p5's measured −2.645 at
+overlap 9.00. ⇒ family I is the **full-overlap limit** of family II, exactly as `w2:p11` said when it retracted.
+⇒ ⛔ So p0's "refuted as an explanation, **intact as a bound**" holds **only while overlap < 9.0 mm**. It bounded
+the four measured points because their overlaps were 2.93–7.42 mm; it is **not** a bound in general.
+
+**(3) `w2:p5` also refines its own instrument rule, in the generous direction.** Past the floor the claw channel
+is **not invalid — its gain drops and becomes tilt-dependent**: below the floor, reading = overlap (gain 1);
+above it, reading = thickness + overlap·sin θ (gain 0.0274, about 1/36). ⛔ Inverting it needs **θ at that
+configuration**, which is the hardest quantity to obtain. ⇒ The practical recommendation is unchanged:
+**backplate separation is the primary instrument.**
+
+⭐ p5 adds one more thing worth keeping: the linear form holds across overlap **2.93 → 16.0 mm (a 5× span)** with
+the residual constant at 0.002 mm. ⇒ **Not a local fit.**
+
+### 5e. Which results the upgrade can touch — two panes cut it the same way, and the cut is the useful artefact
+
+`w2:p0` and `w2:p11` independently partitioned their own results by **version-dependence**, before knowing p5
+had already tested the upgrade. The partitions agree:
+
+| bucket | contents | lifetime |
+|---|---|---|
+| **asset geometry** | claw protrusion 5.00, slot [27.00, 37.00], link arms 51.72 / 39.32 / 41.64 / 22.90 | ⭐ survives version changes |
+| **model + solver state** | ctrl→backplate gap, claw zero-crossing 219.16, stopping point 10.16 | ⚠ worth re-confirming |
+| **instrument contract** | `mj_geomDistance` penetration semantics | ⛔ dies with the version — *by definition* |
+| **derived from the contract** | the floor formula's validity (family II) | ⛔ falls with the bucket above |
+
+⭐ **`w2:p11`'s general form, which is the reusable part:** *a number measured from the asset and a number measured
+from the instrument have different lifetimes across a version change — the first outlives it, the second dies
+with it. Bank a number without saying which kind it is, and after an upgrade nobody can tell what to discard.*
+
+⭐ **`w2:p0`'s application of it is the load-bearing one for this court:** the **no-window ordering conclusion does
+not rest on the contract at all.** Its §2 bound is a claim about *where the distance reaches zero* — no
+penetration, so no SAT question arises — as are the zero-crossing, the deep pairs, the pair differences, and the
+ctrl 219–225 band. ⇒ **The upgrade cannot reopen the no-window result.** Only the floors and caps (§7–§9) sit on
+the contract.
+
+⇒ ⭐ **And p5's staging probe empties the third bucket empirically:** the contract is identical on 3.10.0
+(15/15). So the bucket that "dies by definition" **did not die in fact** — which is exactly why it had to be
+measured rather than reasoned about. ⚠ Both p0 and p11 wrote before seeing that result; p18 relayed it.
+
+⚠ **Bound claims need their range attached.** `w2:p0` keeps its family-I values as bounds (all measured points
+sit 0.29–0.33 mm below 2.893). That holds **inside the measured overlap band only**: by p18's arithmetic on p5's
+series, the θ value 2.6463 is crossed at overlap ≈ 9.0 mm and the 2θ value 2.8915 at overlap ≈ 18.0 mm. ⇒ Neither
+is a bound in general.
+
+⛔ **`w2:p11` computed exactly the number that voids the second path, and read it as enabling the path.**
+p11 finds the floor reaches 2.6463 at overlap 9.053 mm ⇒ backplate 1.057 ⇒ **ctrl ≈ 243.4**, notes p4's sweep
+stops at 240, and concludes the test is *available* with ~3.4 more counts. ⇒ But that computation **is** the
+refutation: under the θ convention the floor **exceeds 2.6463 by construction** past overlap 9.05, so an excess
+is what θ *predicts*, not what refutes it. ⇒ ⭐ p11's arithmetic is right and its reading inverts. ⛔ The path
+stays void; no sweep extension would rescue it. (p11 wrote at 14:00:52, p5's measurement landed 14:00:38.)
+
+⭐ **`w2:p0` retracted the same misattribution I did** — that p11's tilt label had slipped — and names how it
+arrived there: *"I attributed to p11 an error p11 had not made, in the course of agreeing with p11's number."*
+⇒ Two panes made the identical error about the same third pane while endorsing its result.
+
+⭐ **`w2:p0` also declined to widen its own retraction, correctly:** p5's probe confirms −2.400 exactly for
+parallel boxes, so **the number was right**; the error was applying it as a cap to pads that are not parallel.
+⇒ Retract the false clause, keep the true one.
 
 ### 5b. The discriminator that did the work
 
