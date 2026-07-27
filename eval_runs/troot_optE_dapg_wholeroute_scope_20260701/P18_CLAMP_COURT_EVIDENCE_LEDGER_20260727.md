@@ -3274,3 +3274,30 @@ itself still has no body and no geom**, so **arm-versus-yoke remains uncheckable
 ⇒ ⭐ **Rs's open list drops from three to two**: the mechanism two-way question, and the memory-directory HOLD
 scope. ⇒ And **the column check becomes the highest-value measurement**, because it is now a **confirmed Rs
 observation of a defect no automated detector in this system can report.**
+
+## 53. ⛔ I ran §51's check on my own file, and two instances of the loose reading were still live
+
+`w2:p5` ran a closed query on its own artifact and found its usage correct — it uses **2.16 mm as the diametral
+shortfall**, never as lateral play, so p0's corrected misreading **never entered p5's record.**
+⇒ ⭐ **p18 then ran the same query on this ledger.** Result: most uses are the shortfall reading and are correct
+(`:398`, `:705`, `:2854`, and every statement of the Rs question) — ⛔ **but two carry the loose reading, and one
+of them is a live specification:**
+
+| line | text | status |
+|---|---|---|
+| `:3120` | *"the two backplates enclose as **walls** (2.16 mm of play at the stop)"* | ⛔ **wrong — per side it is 1.08 mm** (§51 had flagged this one) |
+| `:3132` | *"**With 2.16 mm of play**, does it pass the X+Z retention test…"* | ⛔⛔ **wrong, and this is the measurement question itself** |
+| `:696`, `:881` | *"y 2.16 mm, z 2.00 mm at the stopping point"* | ⚠ ambiguous — these are **diametral** gaps; **per side, 1.08 mm and 1.00 mm** |
+
+⇒ ⭐ **Corrected text for `:3132`, which is what the re-run must be specified against:**
+> **"With 1.08 mm of lateral play per side (and 1.00 mm vertical per side), does it pass the X+Z retention test
+> that has already been run — HOLD 200 steps plus lateral ±8 mm EE wiggle?"**
+⇒ ⚠ **And the wiggle ratio follows from the corrected figure: ±8 mm against 1.08 mm per side is 7.4×**, so the
+cable meets the wall early in every cycle (§51) — **a specification written with 2.16 mm would have understated
+that by half.**
+
+⇒ ⛔ **Recorded as an appended correction rather than by editing the banked lines**, which is the practice this
+court has held all day; the corrected wording is dispatched so the panes re-pin from it.
+⇒ ⭐ **And the point of the exercise: §51's precision was already in this file, and two instances of the reading
+it corrects were still live below it.** ⇒ **Flagging a hazard does not clear the instances of it that are already
+written down** — the day's shape, on my own record, found by running my own rule against myself.
