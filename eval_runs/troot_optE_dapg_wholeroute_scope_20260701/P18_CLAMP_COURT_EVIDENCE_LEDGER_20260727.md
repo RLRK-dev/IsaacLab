@@ -4831,3 +4831,34 @@ a run binds to the version that produced it"*) did exactly its job. ⚠ **And it
 grasp established); **no line reads grip=-- as release**; annotations added are all of the "do not extend this
 reading" form (+24/−0, judgments unchanged; §2 pin-conclusion invariant because it never depended on cause
 attribution; §3's C2 line marked "a code-state fact, not a seating observation").
+
+## 119. The blind leg returns: one controlled positive, three refusals, and an empty final state
+
+`w2:pC` (numbers unseen, sha self-collated = the wide14/c1 bytes): the clip is drawn in every frame, static,
+opaque — **it participates in depth ordering**. ⭐ **One positive**: f660 (t 22.00 s) close-up — the cable's
+outline **cuts off mid-face, 9 px inside the clip's edge**, with a measured control (the same x-column without
+cable shows uniform green = no ridge there). ⛔ **Three candidate events REFUSED** by its own two-view
+requirement (wide-view crossings and a pad intrusion have zero overlap in the synchronous close-up; f510's cut is
+explained by the clip's own ridge) — ⛔ **not to be circulated as penetration evidence.** Final state f1157:
+**the cable sits in neither clip** (consistent with, but independent of, the no-final-release finding).
+Bank `UR15_PENTEST_CLIP_VIDEO_LEG_pC_20260727.md` @ `e6759c5679` (+93/−0). Numeric side released to pC now, as
+promised post-blind.
+
+## 120. ⭐⭐⭐ The last ruling: 600 mm ADOPTED — and the sag argument runs the other way
+
+**(a) The ruling** (`w2:p5`): **both** SSOT constants now match (`CABLE_SEG_LEN 0.015`, `CABLE_SEGMENTS 40`) ⇒
+the N-derivation special case **becomes unnecessary** (N = 40 IS the SSOT value); compute drops (64→40).
+**Wiring authorized.**
+
+**(b) ⭐⭐ The unanswered support question answered by comparison — in the alternative's favour**: placing saddles
+at the window edges, max unsupported span **380 → 299.2 mm (−21%)**. ⚠ Absolute sag values are broken under any
+scaling (p5's extrapolation, not measurement; the cable likely rests on the table — unmeasured) ⇒ ⭐ **the middle
+span is already today's problem, not one the alternative introduces** — and the RATIO is scaling-invariant.
+
+**(c) Saddle centres given**: `REST_X = (−0.300, −0.055, +0.245)`. ⚠ **One question to p4**: is the window a
+constraint on saddle **centres or outlines**? (If outlines: centres shift 14 mm inward, max span worsens to
+327.2 — still better than 380 ⇒ **the adoption is invariant either way.**) ⭐ Ruling ① stands (pitch 0.015 is
+part of this; only the derivation special-case drops). Scope: CABLE_R divergence independent (SSOT 0.004);
+p5 has not read p4's doc (window/half-width via relay).
+
+⇒ **Every design decision of the day is now issued. The lane is in build + verify.**
