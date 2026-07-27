@@ -1012,3 +1012,42 @@ closure under load; **(B) pinch** — keep 4.0 mm and treat all Phase-A results 
 span), not taken from the cable ⇒ **only y and z are re-aimed**. p5's first version said "fix x,y" and is corrected.
 ⚠ Revised design: sha256 **`b9eda46e7b98e408a3221d038dcd12b322f908ccd1fc5a48e21f9711cef4c444`** supersedes
 `afa56085…`; still **untracked** — banking is `w2:p4`'s court, p5 is 0-commit.
+
+## 11. ⭐⭐⭐ The day's general lesson, named by `w2:p11` — three instances of one shape
+
+**Three times today a quantity that seemed to demand an explanation turned out not to be that quantity at all:**
+
+| # | quantity | what it actually was |
+|---|---|---|
+| 1 | **3.43 mm** | the difference between a **saturated** reading and an unsaturated extrapolation |
+| 2 | **0.17 mm** | an "excess" over an **upper bound computed for parallel boxes** that were not parallel |
+| 3 | **14–26 mm** | an instrument comparing against the link nearest a **frozen x**, not the link in the jaw |
+
+⇒ ⭐⭐ **Discipline: before setting out to explain a number, check that it measures what its name says.**
+⇒ Each of the three would have vanished from **one check taken before the explanation began** — and in each case
+substantial work by several panes was spent explaining an artefact.
+
+⭐ `w2:p11` also split its own corroboration correctly rather than defending it whole:
+- ✅ **survives** — the contact-based estimate (`pad2`-only contact ⇒ centre ≤ 14.75 mm). **It uses no instrument.**
+- ⛔ **weakened** — the printed 17.4 ⇒ centre 14.60, since that instrument is retracted.
+⇒ **"R's cable was outside the opening" stands**, carried by the contact identification, not by the print. ⇒ And
+p11 retracted the *phrasing* "two quantities agree" in favour of "one quantity plus one weakened quantity".
+
+⭐ **A reverse implication worth keeping:** if the 0.15 mm agreement was not coincidence, then in R the frozen-x
+link and the pad-touching link were **the same**, i.e. the cable barely slid in x. ⇒ That gives the
+state-dependence a concrete reading: **slid ⇒ different link; did not slide ⇒ same link.**
+⇒ ⭐ And the hypothesis is no longer a hypothesis — **the mechanism is confirmed in code**; only *which run, how
+much* remains open.
+
+⭐ `w2:p11` kept the true half of its own falsified hypothesis: `slot_after_close` demonstrably handles the
+**endpoint and not the path**, so an unguarded sweep during closing **does exist** — ⛔ but the conclusion it
+supported (that this caused the observed miss, downward) stays falsified on R and is **not to be revived as a
+root cause**. ⚠ And the 14–26 mm it was invented to explain has itself since been retracted.
+
+⭐ **`w2:p4` then repaired the instrument** (⛔ explicitly *not* a new design version — it remains on hold): the
+comparison is now against the link nearest the **seat point**, and **the compared link's identity is printed**
+(`seat vs NEAREST cable link cab19`), with the drift line reworded to *"nearest link is N mm from where the aimed
+link was (identity may differ — not a drift)"*. driver sha256 `770b2271…` @ `887d3fefde` (p18 verified).
+⇒ ⭐⭐ That is the direct answer to `w2:p0`'s finding that the index was **computed and discarded**: from here on,
+*"the cable moved"* and *"the measurement jumped"* are separable by a reader of the log.
+⚠ The existing log and video are unchanged, so the object under judgement has not moved.
