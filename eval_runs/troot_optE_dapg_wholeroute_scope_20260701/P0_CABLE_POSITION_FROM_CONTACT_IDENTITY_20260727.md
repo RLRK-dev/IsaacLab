@@ -161,7 +161,54 @@ Whether L1 is full containment [31, 33] or centre containment [28, 36] is the ow
 distinction between the two predicates and the geometry behind each; the selection is not mine, and -126 records
 p11's recommendation.
 
-## 9. Scope
+## 9. -128 (8): my §2 contradicts pC's visual leg. ⛔ I downgrade §2 and name what could be wrong on my side.
+
+pC places the R cable **inside the opening** at STEP 4 (t = 10.2 s); my §2 places it **at least 16.25 mm below the
+containment band**. -128 (8) leaves this unresolved. Since §2 is mine, I examine my own side first.
+
+### 9.1 The two claims are incompatible by a margin that excludes noise
+
+The slot **[27.00, 37.00]** lies **entirely inside** `pad_box1`'s span [18.75, 37.50]. A cable centred anywhere in
+the containment band spans at most **[27.00, 37.00]**, and `pad_box2`'s top is **18.75**.
+
+> ⇒ **a cable in the slot misses `pad_box2` by at least 8.25 mm.**
+
+⇒ ⭐ this is not a near-miss that measurement noise could bridge. **The disagreement has to be an alignment error or
+an identity error — it cannot be a measurement error.** That narrows what to check.
+
+### 9.2 ⛔ Where my side can be wrong — ranked, with the check for each
+
+1. ⛔⛔ **Time alignment — my strongest candidate.** §2 rests on the contact-geom list cited in -123 (3) as "log
+   `:65`". **I never established that that log line is the same instant as pC's t = 10.2 s.** If they are different
+   moments, there is no contradiction at all and both observations stand. **Check:** read the timestamp on that log
+   line. Cheap, no run.
+2. ⚠ **Geom identity.** I mapped the runtime name `Rg_left_pad2` to the asset's `left_pad2` = the `pad_box2` class
+   **by its name**. That is a name-based inference — the exact class of inference that failed elsewhere in this
+   court today (§8.2, where "pad" matches the claws on purpose). **Check:** resolve the geom id to its asset class
+   rather than to its name.
+3. ⚠ **The relay itself.** ⛔ **I have not opened the log.** §2's input is pB's observation as relayed through p18,
+   and -128 (1) is a live example of a correct account being overturned by an unverified relay. **I therefore
+   downgrade §2 from established to conditional:** *if* the relayed geom list is correct and refers to pC's instant,
+   then §2 follows; the geometry is sound but its input is not mine.
+
+⭐ **What survives unconditionally** is the geometry, not the conclusion: **`pad_box2` sits entirely below the slot,
+so contact on pad2 and presence in the slot cannot both be true of the same cable at the same moment.** That
+statement holds whoever's data turns out to be right, and it is what makes the check worth doing.
+
+⚠ **Frame check, since I raised the hazard myself:** pC's "below the blue plate, above the red plate" is world-frame
+and describes the space between `f2ext` (blue/TOP) and `f1ext` (red/BOTTOM) — the same region as the pad-local slot
+[27.00, 37.00], because `f1ext` carries the **larger** pad-local z despite being labelled BOTTOM (`:9`). ⇒ **the
+frame inversion is not the source of the disagreement**; I checked before offering the contradiction.
+
+### 9.3 What I take from -128 (8) about my own §2
+
+⭐ pC established the world-frame attribution (close-up panel: screen-left = world L, screen-right = world R) and
+withdrew the basis of its own earlier "both arms" reading. ⇒ **STEP 4 has world R inside the opening and world L
+outside** — not both outside. My §2 spoke about "R" using an arm label I took from the relay and never verified
+against pC's attribution. ⚠ **That is a fourth way my §2 could be misaligned, and it is the same kind as the other
+three: every input to §2 came from someone else's reading, and only the geometry was mine.**
+
+## 10. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
