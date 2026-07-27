@@ -287,6 +287,46 @@ substitutes the bend stiffness is reading a runtime-variable quantity, and a Tie
 would need to say so. ⭐ Structurally the same shape as the clip-collision flag gated on
 `CLIP_COLLISION` — worth noting because that one has already cost this court two passes.
 
+## 4.9 The mass/stiffness landing verified (MSG-P18-335, commit `442b468d84`)
+
+**Ran it. The claim of exact reproduction holds.**
+
+| | module | authority |
+|---|---|---|
+| one link | **1.1243 g** | 1.1243 g (`task_config.py:138`) |
+| whole cable | **44.971 g** | 0.04497085511684418 kg (probe JSON) |
+
+split: cylinder **0.8294 g** + hemispheres **0.2949 g**. The module asserts against both figures and
+guards the assertion on `CABLE_SEG == 0.015`, so it will not silently pass at another link length.
+
+Both substitutions I asked about are in, and **the damping is handled exactly as my read implied**:
+
+```
+:173  damping="{_spec.CABLE_BEND_DAMPING:.5f}" stiffness="{_spec.cable_joint_k():.5f}"
+```
+
+— the damping **value** is unchanged (no `SEG` scaling, per §4.8) but is no longer a bare literal;
+the stiffness is now `EI/SEG = 0.3333` against the old literal `0.12`, i.e. it had been
+**64% too soft**, which reproduces (`1 − 0.12/0.3333 = 0.64`).
+
+### ⛔ A false alarm I nearly raised on p4's work
+
+Before running it I hand-computed the capsule volume and got **1.0724 g**, concluding the module
+was 4.8% off the authority and that its own assert should therefore fire. Running it gave exact
+agreement. **My cylinder term was wrong** — I used `7.0686e-7 m³` where `π r² L` is `7.5398e-7`.
+
+Had I sent the hand calculation, I would have manufactured a discrepancy in work that is correct —
+the same failure I have been reporting in others all day, from the other side. The rule that saved
+it is the ordinary one: run the thing rather than recompute it in your head.
+
+### ⭐ One clarification so nobody "corrects" a correct comment
+
+`task_config.py:140` calls the retired cylinder-only figure **"−36%"**. Measured, the hemispheres
+are **26%** of the capsule value but **36% of the cylinder-only value** (`0.2949/0.8294`). The
+comment is right under the cylinder-relative reading, which is the natural one for a formula that
+*was* cylinder-only. And its arithmetic checks out end to end: cylinder-only gives
+`0.8294 × 40 = 33.2 g`, against the retired *"0.8 g/seg → 32 g"*.
+
 ## 5. Scope
 
 **Did**: re-derive both pins; read the guard; reproduce the 49; classify the reasons; prove the
