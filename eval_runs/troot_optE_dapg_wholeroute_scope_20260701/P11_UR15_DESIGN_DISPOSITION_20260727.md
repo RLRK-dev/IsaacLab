@@ -1748,6 +1748,20 @@ pZ は自説（pristine 土台由来）を **自分の実測で反証**した（
 ⚠ **`:1580` の側（Newton の `shape_label`）は依然 未検証** ⇒ ⛔ **私も断定しない。** ⇒ **ただし label が同じ名前から作られていれば同じく保たれる、という *向き* は言える。**
 ⚠⚠ **ここが効く理由: もし爪が `pad` 集合に *入らない* なら、生産 env で 爪はケーブルと衝突しない** ⇒ **捕捉（コ内保持）の機構そのものが 生産経路で無効になる。** ⇒ **これは確かめる価値が最も高い 1 点。**
 
+### 27.2.35 ✅ **未解決の最重要点を 読んで閉じた — 爪の衝突は 生産 env で 生きている**
+
+**問い（p18 -146 (7)・Rs へ上げる直前）: `:1580` の `shape_label` に爪が入るか。入らなければ 生産 env で爪はケーブルと衝突せず、捕捉の機構が無効になる。**
+⭐ **私が読んで閉じた（2 本とも on-disk・relay からでない）:**
+1. **`newton/_src/utils/import_mjcf.py:693` 逐語 = `shape_label = f"{label_prefix}/{geom_name}" if label_prefix else geom_name`**（`geom_name` は `:597` で MJCF の `name` 属性）⇒ ⭐ **Newton の `shape_label` は *MJCF の geom 名そのもの*。**
+2. **爪の geom 名 = `right_pad_f1ext` / `right_pad_f2ext`**（`2f85_koshape.xml:116-117`）⇒ **`"pad"` を含む** ⇒ **`if "pad" not in lbl.lower()` は False** ⇒ ✅ **COLLIDE は落とされない。**
+⇒ ⭐⭐⭐ **したがって 捕捉の機構は 生産 env で wired である。**（**CLAUDE.md:198 の ABSENT-IN-CODE 検査を、私の設計の中核機構に対して実施した結果＝ ACTIVE。**）
+⚠ **限定:** **私が読んだのは `env_isaaclab7` の newton 1.2.1** ⇒ **生産経路が別版なら labeling は変わり得る。** ／ **prefix が付いても部分一致なので結論は変わらない。**
+
+⭐⭐ **副産物 1 — 名前が値と合っていない（危うく私が逆に読むところだった）:** **`ROBOTIQ_STRIPPED_XML` の値は `2f85_koshape.xml`**（`test_newton_clip_routing.py:161`）⇒ ⛔ **名前は「stripped（爪なし）」と読めるが、実体は コ 爪 *あり* の資産。** ⇒ ⭐ **名前だけ見れば「生産には爪が無い」と結論しかねない。** ⇒ **本日の型（記録と事実の不一致）の変種。**
+⭐⭐ **副産物 2 — 私の court に直接効く非対称:** **`test_newton_clip_routing.py:7577-7579` 逐語 = 「the FK/IK model loads the un-clawed `2f85.xml`, but the コ claw is geom-only (no new body/joint) so wrist_3 kinematics -- hence the IK -- are identical」。**
+⇒ ⭐ **爪は *physics には在り、FK/IK モデルには無い*。** ⇒ **運動学は同一なので IK 解は正しい**（資産の主張どおり・geom のみで body/joint を足さない）。
+⇒ ⛔ **しかし: FK/IK モデル上で行う *幾何的な検査*（クリアランス・干渉・経路の余裕）は、爪を見ることができない。** ⇒ ⭐⭐ **私の §27.2.30（特異点・経路）で経路を設計するとき、FK/IK 側で余裕を測ると 爪の 5.00 mm 突出が抜け落ちる。** ⇒ **経路の検査は physics 側の model で行うこと。**
+
 ### 27.3 ⭐ p16 の finding への裁定（p18 -088 E が私に振ったもの）
 
 **凍結 D1.1-B v13 `:332` の `grasp_span_error` が `RS71:24` の 88 mm を参照基準として明示引用**している件。
