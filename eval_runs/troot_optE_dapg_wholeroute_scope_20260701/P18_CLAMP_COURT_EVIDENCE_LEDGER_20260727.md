@@ -1760,3 +1760,63 @@ into a name given for the author's question ("are the tendons there?").**
 ⇒ ⭐⭐ **General form: a name answers the question its author was asking, not the question you are asking now.
 Say what you are asking before you classify by name.**
 ⇒ ⭐ Both panes converge on `w2:p0`'s sentence: **a name does not identify a model; only content does.**
+
+## 24. ⛔⛔ RETRACTION — §20b's "the asset's author corroborates us" is wrong. It was our own measurement.
+
+**Cause side: p18.** `w2:p4` disclosed that **it wrote that comment today**, at 12:20:38, when it restored the
+`exclude` line — transcribing its own measurement (`P4_EXCLUDE_RESTORED_PINCH_MEASUREMENT_20260727.md`).
+p18 verified: the actuated asset's last commit is **`a3fbd7d7e4`, 12:47:15 today**, *"Track the gripper model the
+UR15 runs actually read"*.
+
+⇒ ⛔⛔ **So it is not an independent witness — it is a copy of this court's own measurement**, and I banked it as
+external corroboration in §20b and leaned on it in §22 and §23.
+
+⇒ ⛔ **And the 0.18 mm gap is not two parties measuring under different conditions.** Both numbers are p4's, taken
+at different times: **9.98 mm** = full close **before** the exclude was restored; **10.16 mm** = the zero-crossing
+of the stepped sweep **after**. ⇒ **There was never a second, independent estimate to agree with.**
+
+⭐ **What actually is independent — and it is shorter than I claimed.** p18 read the banked LOCK asset
+`2f85_koshape.xml:173-175` directly. Verbatim, in full:
+
+> `Prevent claw-claw self-collision jam at the scripted close (the protruding コ claws`
+> `f1ext/f2ext can overlap at GRIPPER_CLOSE_QPOS). Cable contact is UNAFFECTED (the cable is`
+> `a separate body).`
+
+⇒ ⛔ **It contains no 9.98 mm and no "can never reach the cable".** ⇒ ⭐ **The independent author statement is
+that the claws can overlap at the close — which the court had been quoting all day — and nothing more.**
+⇒ **The A/B branch rests on that, plus the court's own geometry. Not on p4's transcription.**
+
+### 24a. What survives, and what each earlier section becomes
+
+| section | claim | status |
+|---|---|---|
+| §20b | "the no-window result, written by the asset's author, with a number" | ⛔ **retracted** |
+| §20b | the measurement itself (claws jam before the backplates reach the cable) | ⭐ **stands** — p4 measured it, twice |
+| §22 | `w2:p0` quoted the first sentence and never the last | ⭐ **the discipline stands** — ⚠ but the sentence it did not quote was **p4's**, so quoting it would not have added independent support either |
+| §23 | *a workaround's "without this line" describes hardware* | ⭐ **stands as a rule** — ⛔ its instance here carries no independent weight |
+| §17 | "fifth rediscovery of banked knowledge" | ⛔ **withdrawn for this item** — it was **our own measurement returning to us**, not banked knowledge we had missed |
+
+⇒ ⭐ **The general lesson is unchanged and now better grounded: establish an artifact's provenance before
+counting it as corroboration.** ⚠ And the disproof was in output **I had already printed** — I listed the file
+with `mtime 2026-07-27_12:20:38` earlier today and did not connect it. ⇒ **The same shape as p0's "I quoted the
+sentence four lines above the answer": the contradicting fact was in my own output.**
+
+### 24b. ⛔ A new instrument defect — `+0.00` does not mean "almost touching"
+
+`w2:p4` ran a contract check on the arm-to-column distance and found: **`mj_geomDistance` returns `+0.00` for a
+fully-overlapping configuration** (cylinder vs box with coincident centres), while returning **−12 … −102**
+correctly for **partial** overlap. ⇒ ⛔ **So the reported "worst column distance = +0.0 mm, both arms" cannot be
+read as near-contact — it is uninterpretable at that value.** ⇒ p4 will settle it with direct contact recording.
+⭐ This is the day's instrument theme once more: **a value the instrument cannot represent, returned as if it
+were a measurement** — and p4 found it by checking the contract before trusting the number.
+
+⚠ **Two of p4's own numbers need reconciling and p18 does not reconcile them:** earlier it reported arm-to-column
+minimum distance **+85 … +258 mm across STEP 2–8, all positive**; now the worst case is **+0.0 mm on both arms**.
+Both are p4's; they are different measurements and must not be averaged or quietly replaced.
+
+⭐ **σ_min, as measured:** worst **left 0.0381 at STEP 4 — the grasping moment** — against **right 0.1884 at
+STEP 8** ⇒ **the left arm sits at one fifth of the right.** ⚠ Between waypoints remains unmeasured, so the
+valley's location is still not established.
+⭐ p4 also notes its driver runs **one model, the one with claws**, and has no separate FK/IK model ⇒ its σ_min
+and column distances are measured on the clawed model. ⚠ And σ_min is **kinematic only**, so the claws do not
+affect its value either way.
