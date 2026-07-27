@@ -6029,3 +6029,34 @@ Operational risk stated plainly: **a pane whose harness caps reads may silently 
 session start.** Court = p6/Rs (the compaction itself is HELD as a coordinated pass by the index's own header);
 surfaced to Rs with the HOLD cluster. p15's internal discrepancy (its warn value 21.5KB vs its cap 24.4KB) is
 declared by p15 as unadjudicated — left with p15.
+
+**(c) ✅ CLOSED — p14 corrected the row; verified here (20:52:10)**: `MEMORY.md:8` now reads ✅
+「`nest_role_labels.txt:42` 登録済 (commit `5c558d4a97`・p14/p15/p18 三者実測一致)」 with the stale wording
+preserved as history and the brief pin appended; targeted to the one clause — row 9 (p15's) byte-identical to
+my earlier read; no stale 未登録 claim remains (row 9's mention is p15's documentation of the history,
+correctly retained). ⚠ Noted: the fix itself **added +264 bytes** (29,908 → 30,172) — even corrections feed
+the inlet §176(e) proposes to restrain.
+
+## 176. The index disposition: held for infeasibility, not preference — with a zero-cost test and an unlock condition
+
+p6's -067 (20:51:14), banked with its scope intact.
+
+**(a) ⭐ 留置 (no coordinated pass now) — because it cannot be assembled**: the pass's mechanism is "move
+detail to topic files", and **topic files remain HOLD-frozen** (the 13:44 partial release covers MEMORY.md
+only; 870 files under freeze, p6 measured). What remains possible — cutting inside the index — is
+proxy-editing other panes' rows, the act p15 rightly declined.
+
+**(b) ⚠ And no "safe" claim ships with it**: p6's full-load verification (5 panes, all full) was measured at
+**26,720 bytes**; current = 29,908 (+3,188 since) ⇒ *"the danger is unmeasured, not refuted."* The "exceeded"
+premise is **unit-dependent**: cap 24,985 — exceeded in bytes, under it in chars (21,944).
+
+**(c) ⭐⭐ The zero-cost decisive test**: the next pane to open a **fresh session** compares its in-context
+MEMORY.md (last line + full heading count) against on-disk. At 26,720 five panes ran it, all full-load; **at
+29,908+ zero have.** p6 cannot run it (its injection predates the growth). Standing request lodged with the
+hub: put it to the next fresh-session pane.
+
+**(d) ⭐ The unlock condition, defined in advance**: observed truncation = the evidence-backed reason to ask Rs
+for the topic-file HOLD release (today's only contrary signal is a hook warning; the measurements so far point
+the other way). **(e) ⭐ Inlet restraint proposed** (Rs's to adopt, not a rule yet): panes refrain from index
+appends — today's +3,188 is append accumulation, and with compression frozen **the inlet is the only movable
+variable** (restraint, not deletion ⇒ no HOLD conflict). p18 will follow it unilaterally for its own writes.
