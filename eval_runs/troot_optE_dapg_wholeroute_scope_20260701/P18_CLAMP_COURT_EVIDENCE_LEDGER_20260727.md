@@ -2445,3 +2445,64 @@ authority is the **LOCK asset**, and the dimensions it used (claw x half-width 0
 from there — **the correct source for that kind of claim**. ⇒ And `w2:pC`'s measurement on the run's model
 supplies the second leg. ⛔ **But pC checked the agreement, not p5** — the gap §34a names, acknowledged by the
 pane it applies to.
+
+## 36. ⭐⭐⭐ The trade is an exchange rate — and the "independent" agreement is one formula reached twice
+
+`w2:p11` derived the containment loss from the oblique-crossing geometry: the cable crosses the slot at the roll
+angle, ±1.00 mm of vertical room is available, and the cable drifts `x·tan(roll)` along the claw ⇒
+**contained length = 2.00 / tan(roll)**.
+
+| roll | contained | of the 22 mm claw |
+|---|---|---|
+| 0° | full | 100% |
+| 17.2° (0.3 rad) | 6.47 mm | 29.4% |
+| ⭐ **34.4° (0.6 rad — the only value the right arm reaches)** | **2.92 mm** | ⛔ **13.3%** |
+| 63.0° (1.1 rad) | 1.02 mm | 4.6% |
+
+⛔ **p11 refused to count its agreement with §32 as corroboration** — it had not read §32's derivation, and it
+named its own two instances of that mistake today. ⇒ ⭐ **p18 can settle it, holding both: they are the same
+formula.** p5's `2.00 / tanθ` with θ = the channel-to-cable angle, and p11's `2.00 / tan(roll)` with roll = that
+same angle (§35). **p18 recomputed: 34.0° ⇒ 13.5%, 34.4° ⇒ 13.3%** — ⭐ **the whole difference is the rounding of
+the angle.**
+⇒ ⛔ **So the numeric agreement is arithmetic, not independent confirmation**, and p11's refusal was correct.
+⭐ What *is* shared and worth keeping is the **mechanism**: both identify that roll costs containment **because the
+cable crosses the slot obliquely** — but that is one identification, reached twice, not two.
+
+### 36a. ⭐⭐⭐ The third Rs question, in its final quantitative form
+
+⭐ **p18 verified p11's exchange rate:** to keep **50%** of the claw engaged, `roll ≤ 10.3°`; to keep **30%**,
+`roll ≤ 16.9°`.
+
+⇒ ⭐⭐⭐ **So the question Rs is being asked is one number, not a judgement about a pose:**
+> **The 88 mm span demands roll 34.4°, and at that roll only 13% of the claw can contain the cable. Wanting 50%
+> containment requires roll ≤ 10.3° — and at that roll the driver's own note says the wrists meet at an 88 mm
+> span.**
+
+⇒ **The branch is the exchange rate between the 88 mm span and the containment fraction.** ⇒ Rs decides one
+quantity, and §35a's three exits are what that quantity selects between.
+
+⚠ **p11's premises, carried unabridged:** the cable is treated as straight; the claw's effective length is taken
+as the geom's 22 mm (not a measured contact length); the roll is about the pinch point (per the docstring's
+*"pinch stays put"*); the clearance is 2.00 mm.
+
+### 36b. `w2:p0` closed my "unverified", and the line numbers had a commit attached to them all along
+
+⛔ The mismatch was **line numbers from a different commit**: p0 cited `e9f93a7556`'s numbering while I printed
+`887d3fefde` — a **25-line shift**. ⇒ **p18 read `887d3fefde:603-607` and confirms verbatim:**
+
+```
+:603      sgn = -1.0 if t == "L" else 1.0   # each arm tips AWAY from the other
+:604      POSES = [(0.0, sgn * r) for r in (0.0, 0.35, 0.6, 0.85, 1.1)] + \
+:605              [(y, sgn * r) for r in (0.35, 0.6, 0.85) for y in (0.3, -0.3)]
+:606      if wide:  # per-STEP waypoints get a bigger pose menu so a CONTINUOUS branch survives
+:607          POSES = POSES + [(y, sgn * r) for r in (0.2, 0.5, 0.75, 1.0) for y in (0.15, -0.15, 0.5, -0.5)]
+```
+
+⇒ ⭐ Radians, so **0.6 rad = 34.4°** and **0.3 rad = 17.2°** — matching the reported 34 / 17 — and **the roll's
+sign is opposite between arms** (*"each arm tips AWAY from the other"*).
+⚠ **`:607` holds a `wide` variant menu** (r = 0.2/0.5/0.75/1.0, y = ±0.15, ±0.5) ⇒ **which menu a run used changes
+the value set**, so the roll figures must be attributed to the menu that ran.
+
+⇒ ⭐ **p0's discipline, adopted: write the commit alongside the line number.** That is today's *pin by content,
+not by name* applied to line numbers — and it is the second time today a line citation went stale between
+commits (§14 was the first, `w2:p12`'s 19-line prepend).
