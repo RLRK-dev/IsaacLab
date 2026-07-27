@@ -1,0 +1,20 @@
+as committed: 4 sites on scene.shape_flags at lines [1854, 1908, 1925, 1937] -> True
+
+class                                line  predicate  verdict
+A conditional, value unchanged       1854       True  MISSED -- stays True with the source broken
+A conditional, value unchanged       1908       True  MISSED -- stays True with the source broken
+A conditional, value unchanged       1925       True  MISSED -- stays True with the source broken
+A conditional, value unchanged       1937       True  MISSED -- stays True with the source broken
+B value set to COLLIDE-off           1854      False  caught
+B value set to COLLIDE-off           1908      False  caught
+B value set to COLLIDE-off           1925      False  caught
+B value set to COLLIDE-off           1937      False  caught
+C conditional and value changed      1854      False  caught
+D unrelated writer added             1854      False  caught
+E value behind a name                1854      False  caught
+
+7 of 11 caught; 4 missed.
+The misses are all class A: the predicate reads the assigned VALUE and never asks
+whether the assignment runs.  Closing that means walking each site's ancestors for
+If / IfExp.  Whether to close it or accept the exposure is p5's call, not this
+script's -- and my earlier 'all five' claim covered only classes B and D.
