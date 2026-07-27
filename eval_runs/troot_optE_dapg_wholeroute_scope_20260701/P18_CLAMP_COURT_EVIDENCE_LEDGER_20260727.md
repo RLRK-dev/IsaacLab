@@ -2994,3 +2994,57 @@ the prediction.**
 ⭐ And p11 adopts §43's framing as **a more accurate version of its own earlier one**: it had reconciled the same
 tension with *"they do not conflict — the substrates differ"* (§10a-2); ⇒ ⭐ **this time the reconciliation comes
 from the sentence's logical form rather than from substrate.** **Same conclusion, better reason.**
+
+## 47. ⛔ CLOSING-STATE CORRECTION — item ④ is out of scope by design, and the "replace" option is far cheaper than it sounded
+
+`w2:p0` read two lines before the close; **p18 confirmed both verbatim** (`GD-KoShape-Finger.md:100-101`).
+
+**(1) ⛔ My measurement item ④ names an axis the banked design excludes.** Verbatim:
+> `Axial Y = out-of-scope by design (through-cable topological; clip-pin downstream).`
+⇒ ⭐ **The axial-load retention test I queued is the very axis the design declares out of scope and delegates to
+the downstream clip-pin.** ⇒ ⛔ **Leaving it in the queue would mean measuring something the design does not
+claim.** ⇒ ⭐ **④ is either re-scoped, or raised to Rs as a change to the design's scope — it is not a queue
+item.** Judgement: `w2:p5` / `w2:p11` / Rs.
+
+⇒ ⚠⚠ **And the irony is informative, not merely awkward:** `w2:p11` specified the **axial** load as the
+*discriminating* test (§41b) — because the straddle is a **form** constraint (good perpendicular, i.e. lift) and
+the pinch is a **friction** constraint (good axially, i.e. drag). ⇒ ⭐⭐ **So the axis on which the pinch is
+indispensable is the axis the design had already excluded.**
+⇒ ⭐⭐⭐ **p18's inference, marked as mine: losing the pinch may cost far less than feared, because the design
+never relied on it for the axis it is needed for.** ⛔ Not established — the straddle's own force share is
+unmeasured (below).
+
+**(2) ⭐⭐ And this bears directly on the two-way question.** Verbatim:
+> `grip-force NOW MEASURED: ~76–153N/arm (lift needs <1N) = over-squeeze`
+⇒ ⭐ **The composite grip delivers 76–153 N per arm where lifting needs under 1 N — roughly a 100× margin.**
+⇒ ⭐⭐ **So "can the straddle alone hold?" may not be "can it replace the dominant term?" but "can it supply under
+1 N?"** — a far lower bar than the wording of §35a's exit ② implied.
+⚠ **p0's limits, kept:** the <1 N figure is for **lifting**; dragging (the cable axis) is out of scope per (1);
+and ⛔ **the straddle's own share of the force has never been separately measured.** ⇒ **The bar is low only for
+the leg the design covers.**
+
+⇒ ⭐⭐⭐ **Both facts travel with the question to Rs**, because together they change how the "replace" option
+reads: it is not obviously the expensive branch.
+
+### 47a. Corrected closing state
+
+**For Rs — one two-way question, plus two:**
+> **The mechanism you described requires left–right friction. Measurement shows the backplates cannot reach the
+> cable (claws meet at a backplate gap of 10.16 mm; the backplates fall 2.16 mm short). RECOVER the mechanism
+> (change the geometry so they reach) or REPLACE it (accept holding on the claws alone)?**
+> ⭐ **Context that belongs with it:** the composite grip measured **76–153 N/arm against a <1 N need for lifting**,
+> and **the axial (drag) axis is already out of scope by design**, delegated to the clip-pin.
+⇒ plus **which cylinder Rs meant** (frame delivered) and **the memory-directory HOLD scope**.
+
+**Blocked on measurement:** ① the roll sweep over (0.35, 0.60] rad — **criterion written first**, **no interpolated
+minimum** ② the σ_min valley along the interpolated path ③ the column point-in-solid or `fromto` check.
+⛔ **Item ④ is withdrawn from this list** per (1).
+
+**Gate unchanged. p18 authorised no run today.**
+
+⭐ `w2:p11` applied §45's wording split to its own document as well (「むしろ逆を指す」→「silent about the straddle
+case」), and named the mechanism: **it had taken p0's phrase via p18 and carried it into its own record** ⇒
+⭐ **taking someone's wording brings that wording's strength along with it.**
+⭐ Its day, by its own count: **73 commits to a single artifact, records-only, no code, no hardware measurement —
+and a substantial fraction of them retractions or downgrades of its own claims.** ⇒ Its summary, which fits the
+day: **"because the court returned my errors one at a time, the record stayed and became accurate."**
