@@ -5917,3 +5917,49 @@ machine-compared = MATCH (`698ffa18dc36143efa739b5fee63adbafd9243a1dfde534d6b590
 **(d)** Remaining on p4 = the template-inversion rule (23 sites, started) + p5's three-item bank (§168(d),
 reaches p4 with -363). The lane's run-readiness now hangs on: template sites → p5's bank → p0's re-verification
 (first check = the declaration at the new pin `dab09ec05861…`) → Rs's run authorization.
+
+## 171. APPROVE with three conditions — and the coordinate dispute ends as an invariant
+
+p12's disposition on p15's tail-correction request (the -360/-362 cycle), 20:38.
+
+**(a) ⭐ APPROVED**, p12 finding the proposal *"implements today's lesson itself"* (tail placement creates no
+new line shift). Verbatim-draft fetch waived; the declared constraints suffice (tail-only / deletions 0 / no
+LEDGER-status-planning touch / no fix / 1 file / offending line superseded, not rewritten).
+
+**(b) ⭐⭐ Three added conditions**: ① **write invariants, not coordinates** — p12 checked the invariant itself:
+all nine old headings shift by exactly +41 (3→44 / 11→52 / 26→67 / 36→77 / 56→97 / 75→116 / 79→120 / 85→126 /
+91→132; difference set = **{41}**), plus line count +41, deletions 0 ⇒ the record says *"41 lines inserted at
+the head side; deletions 0; everything after +41"*, ⛔ never a single asserted coordinate (the slide would
+reignite). ② **after appending, re-measure with the same instrument that the append IS at the tail** (the old
+headings' positions must not move — the difference set unchanged); ⛔ numstat barred for placement (the root
+cause here). ③ **declare the new sha + observation time**; p12 pins by content sha (unaffected by +41) and
+will re-point.
+
+**(c) ⭐ p18 re-derivation of (b)①**: all nine pairs measured here on the blobs — difference set = **{41}**,
+exact match. Line counts: my wc -l = 100→141 (the old blob is newline-terminated, od-checked); p12 reported
+101→142 — a constant +1 in both absolutes (p12's counting convention, not re-derived here); ⭐ the shared,
+instrument-independent facts are **+41 and {41}** — the coordinate dispute closes the same way it opened:
+**measure the thing that cannot slide.**
+
+**(d)** p12 confirmed this ledger's records match (the §162(e) tag / §166 @ `f57bf488f0` / §167 @ `8ccb9b031f`;
+its handoff sha match), placed **no further demands** on p15 (endorsing its self-report handling: the numstat
+error = its own Finding-A shape = sourcing the verification set from the claim under review), and holds all
+assignments unchanged (A/B fix = p14 post-gate; B custody = p18; C = none; frozen artifacts intact; its two
+Rs-waits unchanged). Routed to p15 for execution; p15's old→new sha report returns via p18 to p12 for the
+re-pin.
+
+## 172. (d) survives the pin move — p0's first re-verification item discharged
+
+From -365R (20:37:20), commit `419f222d0b` ("Re-verify the override declaration at the moved pin"), doc §7.2
+(`:156`), sha256 machine-compared = MATCH
+(`a7096d5e1ecacdc56fbdaf0c4b15f260991bb5219ae9344cc650277d07a33e3c`).
+
+**(a) ✅ All three legs at the new pin** (`dab09ec05861…` = `6b6f095387`): deletion state — `known` exactly
+one, the `:89` English prose, untouched; the four code sites gone. Declaration leg 1 — unset → 0 lines,
+self_check "all sources agree". Leg 2 — set → 1 line (full text), k = 1.3333 = 0.02/0.015, self_check refuses
+naming the producer. ⇒ **(d) holds across the pin move.**
+
+**(b) ⭐ The independent convergence, recorded from the verifier's side too**: the fixing commit predates p0's
+condition, and the `:89` trap was not stepped on — *"it passed on the correct side before the condition could
+arrive."* **(c)** p0's remaining bundle confirmed: (a)(b)(c) + the template rule + walrus + the three Tier A
+derivations, gathered after p4's landing (+ the three-item bank). Needs nothing; gate unchanged.
