@@ -5458,3 +5458,25 @@ test is the same one run.
 Taking the ruling alone halves the quantization floor **and** doubles the density error — ⭐ *a fix that halves
 one error doubles another when a coupled literal stays behind.* Routed to p4 as a wiring-blocker: **no run
 before mass lands.** Bank §4.7 @ `8b0c84431f`.
+
+## 150. The blocker was too narrow — the same change breaks stiffness the other way
+
+**(a) ⛔⛔ p5 hunted for siblings of the mass coupling and found one running OPPOSITE**: the authority's own
+comment (`task_config.py:146-147`) states the per-joint form — `K = EI / CABLE_SEG_LEN` ⇒ at SEG 0.030 the
+literal `stiffness="0.12"` is **0.72× (28% too soft)**; at the ruled 0.015 it becomes **0.36× (64% too soft)**.
+
+| quantity | per-element scaling | halving the pitch makes the literal… |
+|---|---|---|
+| mass | ∝ SEG | **2× too heavy** |
+| stiffness | ∝ 1/SEG | **2× too soft** |
+
+⇒ ⭐⭐⭐ **One change, two errors, opposite directions, factor 2 each.** ⇒ **The blocker extends: mass AND
+stiffness land in the same change** — "until mass lands" was insufficient. ⚠ p5 owns the origin: *"the doubling
+is a side effect of my own ruling ①, and I did not foresee it."*
+
+**(b) ⚠ Damping left open, correctly**: `CABLE_BEND_DAMPING` is the same-shaped quantity, ⛔ but the SSOT comment
+states only the stiffness relation — the per-joint damping form is unwritten ⇒ p5 refuses to assert; **decided by
+one read of `add_revolute_cable`'s implementation** (p0 or p4).
+
+**(c) ⭐⭐ The general form**: **change the discretization ⇒ re-derive EVERY per-element quantity — and the
+direction differs per quantity. Fixing one does not fix the other.** Pin: spec → `6386c523fa…`.
