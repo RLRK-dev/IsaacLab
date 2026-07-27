@@ -3192,3 +3192,48 @@ Recorded only; p5 asks for no change.
 not resolve on current on-disk — `:3031` states `_wire_s6_grasp_solref RELOCATED to newton_skill_env_base.py
 (2026-06-28, L3 base-infra)`, so the body is at `newton_skill_env_base.py:1354`. ⇒ ⭐ **Today's "write the commit
 beside the line number" rule, appearing on the banked-document side.** ⛔ The doc is read-only; p0 does not edit it.
+
+## 51. ⭐ Final precision — 2.16 mm is both sides; the lateral play is 1.08 mm
+
+`w2:p0`, and **p18 recomputed**: at the claw-contact point the backplate faces sit **10.16 mm** apart ⇒ **±5.08 mm**
+from centre, while the Ø8 cable's surface is at **±4.00 mm** ⇒ ⭐ **per-side clearance = 1.08 mm.**
+⇒ ⛔ **So the lateral distance the cable can travel before meeting a wall is 1.08 mm, not 2.16 mm.** ⇒ **Reading
+the 2.16 mm figure as lateral freedom is 2× too loose** — and §49's "walls with 2.16 mm of play" is one of the
+places that reading appears.
+
+⇒ ⭐ **And it fixes the expected character of the re-run**: the banked test's lateral wiggle is **±8 mm** against
+**1.08 mm** of per-side play ⇒ **7.4×** ⇒ ⭐ **the cable meets the wall early in every wiggle cycle.**
+⇒ ⭐⭐ That is **consistent with the "the backplates still work as walls" reading** — ⚠ **and it also means the
+test repeatedly strikes those walls.** ⇒ **`w2:p11`'s two unheld items — the claws' structural strength, and how
+the wiggle behaves when play is present — are asked precisely under that condition**, not incidentally.
+
+⛔ p0 offers no prediction and takes no position on whether the re-run happens; it aligned the units.
+
+---
+
+## CLOSING STATE — 2026-07-27, final
+
+**For Rs — one two-way question:**
+> **The mechanism you described requires left–right friction. Measurement shows the backplates cannot reach the
+> cable (claws meet at a backplate gap of 10.16 mm — 2.16 mm short in total, 1.08 mm per side). Should it be
+> RECOVERED (change the geometry so they reach) or REPLACED (accept holding on the claws alone)?**
+
+**Five things travel with it, so "replace" is not judged by its wording:**
+1. the composite grip measures **76–153 N/arm against a <1 N lift need** — the design calls this **over-squeeze**
+   and **recommends grip-DOWN tuning** (`GD-KoShape-Finger.md:101-102`);
+2. **the axial (drag) axis is already out of scope by design**, delegated to the clip-pin (`:100`) — and that is
+   the axis on which the pinch, not the straddle, carries the load;
+3. the straddle **estimates** to ≈46 N (≈46× the stated need) — ⛔ **an estimate on three declared assumptions**;
+4. ⛔ **grip-DOWN tuning is not grip-to-zero**: the bar being low is established, the straddle clearing it is not;
+5. ⭐ **the real cost is not loss of holding but ≈1 mm of sink** — the <1 N requirement is met 0.015 mm after
+   contact, so the verdict item is **"is 1 mm of sink acceptable?"**, which is the step table's and Rs's to judge.
+
+⇒ **Plus:** which cylinder Rs meant (frame delivered), and the memory-directory HOLD scope (topic and handoff
+files still frozen; `p5`, `p6`, `pW`, `p12` waiting).
+
+**Blocked on measurement, not on Rs:** ① the roll sweep over (0.35, 0.60] rad — **criterion written first, no
+interpolated minimum** ② the σ_min valley along the interpolated path ③ the column point-in-solid or `fromto`
+check ④ **one re-run of the existing X+Z retention test** (HOLD 200 steps + lateral ±8 mm wiggle) in a reachable
+configuration.
+
+**Gate unchanged. p18 authorised no run today, and selected neither branch.**
