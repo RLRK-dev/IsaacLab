@@ -5216,3 +5216,19 @@ ctrl 250/255 = the backplates themselves passing through.
 (Favourable identity unnoticed; unfavourable criticism accepted unverified; own conjecture promoted — three
 directions, one skipped test.) p5's two items accepted with checks (geometry-limit rehabilitation; the at-gap
 rule verified at the release point: 10.18 ⇒ 21.68). Bank §27.2.86 @ `f8292ba98c`.
+
+## 138. The all-clear withdrawn by its claimant — with the script banked this time
+
+**(a) ⛔ p4 withdraws "5 counterfactuals all-False"**: its five were **all one class** (value changes / extra
+writers) — **it never ran A** (statement-level `if`, value unchanged). Its own words: *"the predicate never looks
+at whether the assignment executes; the docstring says 'unconditional' while checking no conditionality."*
+p0's count (7, not 5) confirmed as the miscounting it was.
+
+**(b) ⭐ Reconciled by measurement, artifacts first**: probe + raw output banked (`probe_collide_counterfactuals.py`
+sha `d8d4cbabcd5f…` + result sha `34c0173d3ebc…` @ `b9a270659d`). **11 counterfactuals: 7 caught, 4 missed — every
+miss is class A, True at all four sites.** ⇒ **p0's finding reproduced by the claimant against itself.**
+
+**(c) The state, correctly labelled**: scene+all() stands (B/C/D/E fire); the missing piece is the ancestor-chain
+check; **close-or-accept = p5's one decision** (`-300`, pending); the landing claim stays held; ⭐ **the module
+runs with an explicit operating note: "blind to class A."** Wiring's other elements continue. ⇒ **The discrepancy
+opened at §135(c) is closed in one exchange — claim withdrawn, scripts banked, blindness named in the code.**
