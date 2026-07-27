@@ -465,6 +465,16 @@ def cable_perp(sp, dd=None):
     return best
 
 
+def _cable_tangent(t, dd=None):
+    """Unit tangent of the cable where this jaw meets it -- from the interpolated centreline."""
+    dd = dd if dd is not None else d
+    _, _, ci, _ = cable_perp(pinch(t, dd), dd)
+    a = np.array(dd.xpos[CAB[max(0, ci - 1)]])
+    b = np.array(dd.xpos[CAB[min(CABLE_N - 1, ci + 1)]])
+    v = b - a
+    return v / max(1e-12, float(np.linalg.norm(v)))
+
+
 def jaw_axes(t, dd=None):
     """The jaw's own frame, MEASURED rather than assumed.
 
@@ -625,17 +635,48 @@ def aim_both(cl, cr, prev_q, seed):
     return got
 
 
-def held(t, dd=None):
-    """R6 CANDIDATE -- implemented, measured, NOT yet wired into any verdict.
+def claw_gap(t, dd=None):
+    """Claw-tip gap [mm] of arm `t`, read where the channel does not saturate.
 
-    Clip design §12-6: is the cable captured, judged on the CLAW TIPS?
-
-    `grasped()` answers a different question -- whether the flat pads are compressing the cable --
-    and p5 showed it errs in both directions: True at CLAMP with the claws closed through each
-    other, False at HALF with the cable still inside the claws.  The claw tips are what the cable
-    has to pass to leave, so capture is the tips being closer than the cable is thick.
+    p5 -099: the tip-to-tip query clamps once the tips overlap, so near closure it reports a floor
+    instead of a distance.  The backplate gap keeps reading, and the offset between the two is a
+    measured function of the opening -- so measure there and convert.  At CLAMP this is the
+    difference between "the claws are 2.6 mm through each other" (the floor) and 6.4 mm (real).
     """
-    return jaw_gaps(t, dd)[1] < CLAW_RELEASE_GAP * 1000.0
+    return _spec.claw_from_backplate(jaw_gaps(t, dd)[0])
+
+
+def cable_in_mouth(t, dd=None):
+    """(is the cable centre inside the mouth band, its pad-local z [mm]).
+
+    R6(ii), the weak form: between the tips is not enough -- the centre has to be in the mouth.
+
+    ⚠ The reference: z is measured along the jaw's own mouth axis from the PAD BODY origin, since
+    that is the frame the band [25.00, 39.00] mm has to be in for those numbers to be positive and
+    ~14 mm apart.  p5 did not state the origin, so this prints the value next to the band rather
+    than only the verdict -- if the reference is a different one the printed number will say so.
+    """
+    dd = dd if dd is not None else d
+    q = np.asarray(cable_perp(pinch(t, dd), dd)[1])
+    origin = np.array(dd.xpos[PAD[t][0]])
+    z = float(jaw_axes(t, dd)[2] @ (q - origin)) * 1000.0
+    lo, hi = (v * 1000.0 for v in _spec.MOUTH_BAND_Z)
+    return (lo <= abs(z) <= hi), abs(z)
+
+
+def held(t, dd=None):
+    """R6 (p5 -099): capture is the CONJUNCTION, not either half.
+
+    (i) the jaw is closed past the floor at which the cable could leave.  p5 -100's form, with
+        its two origins kept apart: the floor is 2 x CABLE_R (Tier A) PLUS offset(gap) (the
+        measured sweep).  Compared at the backplate, because the claw-tip channel saturates, and
+    (ii) the cable's centre is inside the mouth band.
+
+    `grasped()` answers neither: p5 showed it says held when the claws have closed through each
+    other and released when the cable is still surrounded by them.
+    """
+    pad = jaw_gaps(t, dd)[0]
+    return pad < _spec.release_floor(pad) and cable_in_mouth(t, dd)[0]
 
 
 def jaw_gaps(t, dd=None):
@@ -1257,6 +1298,37 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             # that keeps arriving at the edge of what this phase can do is what would revive R4.
             print(f"[steps] STEP{num} {t}: correction applied  y {_dy:+6.2f} mm  z {_dz:+6.2f} mm "
                   f"(x held at RX_MID by ruling; a large or clipped z is the R4 signal)")
+            # p5 -099: print the MARGIN, not a pass mark against a number someone chose.  What is
+            # left of the containment half-band after the aim residual and after the tilt term --
+            # the claw is not a point, so a cable that leans costs half its length times the lean.
+            _hb = 0.5 * (mouth_clear(t) - 2 * CABLE_R) * 1000.0
+            _tilt = float(np.arcsin(min(1.0, abs(float(jaw_axes(t)[2] @ _cable_tangent(t))))))
+            _claw_half = float(m.geom_size[CLAWG[t][0]][0]) * 1000.0
+            _margin = _hb - abs(mag) * 1000.0 - _claw_half * np.sin(_tilt)
+            # p11 -424(3): three numbers about z, printed as numbers.  Required is the z offset
+            # THIS re-grasp has to cover -- ⛔ not the 8.7 mm from the judged run, which was a
+            # different span on a different cable.  Available is what the phase can actually
+            # deliver in the roll attitude it is in, taken by re-solving at offset targets rather
+            # than from the solver's own opinion of itself.  The difference is the third.
+            _req = abs(_dz)
+            # ⚠ Ask the question through the SAME path the phase uses: shift the cable the aim is
+            # solving for, and see how far the solve still lands.  My first version passed a
+            # position as `pose_only`, which selects an ATTITUDE INDEX -- it would have reported a
+            # number that measured nothing, which is the defect this whole day has been about.
+            _avail, _step_mm = 0.0, 1.0
+            for _k in range(1, 41):
+                _c2 = np.array(c_re, dtype=float)
+                _c2[2] += _k * _step_mm / 1000.0
+                _w2, _t2, _mag2 = aim_slot_at(t, _c2, prev[t], seed=40 + (t == "R"),
+                                              pose_rd=grasp_pose[t][2], fix_x=RX_MID)
+                if _mag2 > mag + _step_mm / 1000.0:      # the solve stopped tracking the cable
+                    break
+                _avail = _k * _step_mm
+            print(f"[steps] STEP{num} {t}: z required {_req:6.2f} mm | available {_avail:6.2f} mm "
+                  f"| difference {_avail - _req:+6.2f} mm  (printed, not a verdict -- p11)")
+            print(f"[steps] STEP{num} {t}: margin {_margin:+6.2f} mm = half-band {_hb:5.2f} "
+                  f"- aim residual {abs(mag)*1000:5.2f} - claw half {_claw_half:5.2f} x sin(tilt "
+                  f"{np.degrees(_tilt):4.1f} deg) -> {'clears' if _margin > 0 else 'DOES NOT CLEAR'}")
     if num in (2, 3, 4, 5):   # grasp steps: aim at where the cable IS, right now
         cl, _ = cable_at(GL[0])
         cr, _ = cable_at(GR[0])
@@ -1393,7 +1465,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     row = (f"STEP{num:2d} {name:12s} t={n*m.opt.timestep:5.1f}s L={le:6.1f}mm R={re_:6.1f}mm "
            f"c1[y{p1[1]:+.3f} z{p1[2]-TABLE_TOP:+.3f}] c2[y{p2[1]:+.3f} z{p2[2]-TABLE_TOP:+.3f}] "
            f"pin={'C1' if d.eq_active[EQ['C1']] else '--'}/{'C2' if d.eq_active[EQ['C2']] else '--'} "
-           f"grip={'L' if grasped('L') else '-'}{'R' if grasped('R') else '-'}")
+           f"grip={'L' if held('L') else '-'}{'R' if held('R') else '-'}")   # R6 conjunction
     print(f"[steps] STEP{num:2d} sigma_min L={sigma_min('L'):.4f} R={sigma_min('R'):.4f}"
           f"  column gap L={column_gap('L'):+7.1f} R={column_gap('R'):+7.1f} mm")
     gc1 = np.array([C1[0], C1[1], TABLE_TOP + CLIP_RISER + 0.030])

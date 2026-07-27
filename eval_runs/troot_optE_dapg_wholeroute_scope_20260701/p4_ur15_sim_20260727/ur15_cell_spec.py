@@ -423,6 +423,77 @@ Z_RISE_REST = TABLE_TOP + 0.230         # spec §6.4d -- clearance over the sadd
 # the diameter and the two merely agree today, this should become a carried number instead.
 CLAW_RELEASE_GAP = 2.0 * CABLE_R        # clip design §12-5 / §12-6
 
+# The mouth band, pad-local z [m]: the cable's centre has to be inside the jaw's mouth, not merely
+# between the claw tips.  Clip design §13 (p5 -099), the weak form of the conjunction.
+MOUTH_BAND_Z = (0.025, 0.039)           # clip design §13-3 R6(ii)
+
+# The claw-tip reading saturates once the two tips overlap, so a claw gap cannot be read directly
+# near closure.  p5's route: measure at the BACKPLATE, which does not saturate, and convert with
+# the offset between the two -- which is not a constant but a function of the opening (9.99 mm at
+# full open to 10.21 closed, clip design §12-12).  That function is read from the banked sweep.
+_SWEEP = pathlib.Path(__file__).with_name("sweep_raw_23points.txt")
+
+
+def _sweep_rows():
+    """(pad gap, claw gap) in mm from the banked sweep, saturated rows dropped.
+
+    Saturation is excluded by SIGN, not by a floor: `mj_geomDistance` returns a real separation
+    while the tips are apart and a clamped value once they overlap, so a negative reading is the
+    query's floor rather than a distance.  Keeping only positive rows needs no measured constant --
+    naming a floor would put p0's withdrawn 2.40 back into the code.
+
+    ⚠ My first version detected saturation as "the reading stopped falling", and it kept the
+    saturated rows: those readings DO keep drifting down (-2.55, -2.59, -2.64, -2.75), so nothing
+    tripped.  The offset it produced ran from 1.62 to 10.22 mm instead of 9.99 to 10.21, which is
+    how it was caught.
+    """
+    rows = []
+    for line in _SWEEP.read_text().splitlines():
+        parts = line.split()
+        if len(parts) >= 3:
+            try:
+                rows.append((int(parts[0]), float(parts[1]), float(parts[2])))
+            except ValueError:
+                continue
+    rows.sort()
+    return [(pad, claw) for _ctrl, pad, claw in rows if claw > 0.0]
+
+
+def offset_at(pad_gap_mm: float) -> float:
+    """Backplate-to-claw-tip offset [mm] at this opening, READ from the measured sweep.
+
+    p5 -100: do NOT derive this the way the 8.00 is derived.  The geometric 10.00 is not the
+    offset -- the claws swing as the jaw closes, so it runs 9.99 to 10.21 across the range, and a
+    floor built on 10.00 comes out short.  The diameter has a single source (CABLE_R, Tier A); the
+    offset has a different one (the sweep table).  Two origins, and the floor needs both.
+    """
+    return pad_gap_mm - claw_from_backplate(pad_gap_mm)
+
+
+def release_floor(pad_gap_mm: float) -> float:
+    """The BACKPLATE gap at which a cable can leave [mm] = 2 x CABLE_R + offset(that gap).
+
+    p5 -100's exact form.  Comparing at the backplate is what makes it measurable: the claw-tip
+    channel saturates near closure and this one does not.
+    """
+    return 2.0 * CABLE_R * 1000.0 + offset_at(pad_gap_mm)
+
+
+def claw_from_backplate(pad_gap_mm: float) -> float:
+    """Claw-tip gap [mm] inferred from the backplate gap, via the measured offset."""
+    rows = sorted(_sweep_rows())
+    pads = [p for p, _ in rows]
+    offs = [p - c for p, c in rows]
+    if pad_gap_mm <= pads[0]:
+        return pad_gap_mm - offs[0]
+    if pad_gap_mm >= pads[-1]:
+        return pad_gap_mm - offs[-1]
+    for i in range(1, len(pads)):
+        if pad_gap_mm <= pads[i]:
+            f = (pad_gap_mm - pads[i - 1]) / (pads[i] - pads[i - 1])
+            return pad_gap_mm - (offs[i - 1] + f * (offs[i] - offs[i - 1]))
+    return pad_gap_mm - offs[-1]
+
 SETTLE_S = 5.0                          # spec §6.4d -- was `range(2500)` at dt 0.002
 START_RAMP_S = 8.0                      # spec §6.4d -- was `RAMP = 4000`
 START_HOLD_S = 6.0                      # spec §6.4d -- was the `+ 3000` after it
