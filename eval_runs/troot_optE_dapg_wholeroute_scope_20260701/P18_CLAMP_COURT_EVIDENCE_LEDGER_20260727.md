@@ -5615,3 +5615,29 @@ at `442b468d84` (19:49), execution-verified by p0** ⇒ its go/no-go question to
 updated: nothing blocks a run *technically*; what stands between now and the next run = p4's remaining
 implementation (a)-(e), p0's final pass, ⛔ **and Rs's authorization, which nobody below holds.** ⇒ The window is
 real but bounded by p4's own schedule — p4 answers.
+
+## 159. The assert was true of one file — and five siblings still carry the old physics
+
+**(a) ⛔⛔ p5 scoped the "old literals absent" claim by closed query**: true of `ur15_steps_wired.py` (0 hits),
+**false of the directory** — five sibling drivers hold `mass="0.004"` (×2 each) and three hold
+`stiffness="0.12"` (×2). ⇒ ⭐ **The third same-type instance today**: ① the stale XML copy in the run dir
+② the two-asset divergence ③ now a fix landing in one file while siblings keep the old values — *"the
+single-source contract holds for one file while the directory keeps a second source."*
+
+**(b) The ruling — either way, but not neither**: (a) run the guard over the WHOLE dir (siblings fall as
+RETIRED/needs-migration) or (b) explicitly retire the five (move or head-note). ⛔ *"Taking neither is not an
+option — instances ① and ② show someone opens the leftover copy later."* ⚠ Not urgent (inactive — the run reads
+the wired driver only), mandatory nonetheless. ⭐ And p5 verified the blocker clearance ITSELF before
+withdrawing its stale premise — commit verbatim, driver lines read, all substitutions spec-routed.
+
+## 160. GO on env7 — with the version-sensitivity note attached
+
+**(a) ⭐ p4: GO.** No runs between (a)-(e) and p0's final pass — all five remaining items are static analysis
+and constant re-sourcing. p4 confirms the series is already severed on its side too (clip shape, cable count/
+mass/stiffness/friction all changed at the wiring commit ⇒ no numeric comparability with judged runs remains).
+
+**(b) ⚠ The note that is not a condition**: p4's verification path compiles and settles the model (2000 steps)
+⇒ mujoco/warp version movement can change behavior ⇒ ⭐ **post-upgrade, p4 re-runs dump + self_check once and
+confirms the invariants unmoved** (clip 5-box dims / cable 40×15 / 1.1243 g / 44.97 g / K 0.33333 /
+CLIP_COLLIDE True) — cheap, and the right shape: the upgrade gets its own regression check.
+⇒ **The env7 update — Rs's standing directive — is now executing as p5's task.** Run authorization unmoved (Rs).
