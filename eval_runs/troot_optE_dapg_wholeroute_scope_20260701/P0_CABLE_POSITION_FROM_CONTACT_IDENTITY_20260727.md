@@ -586,7 +586,66 @@ it got tighter.**
 possibly-wrong target is **tighter convergence, not better targeting**. The two are distinguishable only by the
 selection rule, which is unchanged.
 
-## 16. Scope
+## 16. -140 (4): the closed query, and the same blindness in the production env
+
+### 16.1 ⭐⭐⭐ (4)(b) settled — five duplicated builders, not references
+
+-140 (4)(b) records the cylinder definitions in five files and says explicitly it was **not checked** whether they
+are duplicated builders or references. Closed query at `e9f93a7556`:
+
+| file | own `stem`/`foot` definitions | imports `ur15_cell` |
+|---|---|---|
+| `ur15_cell.py` | **2** | 0 |
+| `ur15_route.py` | **2** | 0 |
+| `ur15_steps.py` | **2** | 0 |
+| `ur15_steps_reaim.py` | **2** | 0 |
+| `ur15_yoke_video.py` | **2** | 0 |
+
+⇒ ⭐⭐⭐ **every file defines the cylinders itself and none imports the cell builder.** ⇒ **repairing
+`ur15_cell.py` alone repairs none of the other four.** p18's suspicion is confirmed and is stronger than
+suspected — not "might be duplicated" but "duplicated, with zero imports".
+
+### 16.2 ✅ (4)(a) confirmed
+
+`ur15_cell.py:112` — `<geom name="floor" type="plane" ... contype="0" conaffinity="0"/>` ⇒ collision disabled.
+`:118` — `table_top` carries **no** such flags ⇒ it collides. ✅ matches -140.
+
+### 16.3 ⭐⭐⭐ The same blindness exists in the **production** env, by design
+
+`thread_isaac_lab/envs/newton_skill_env_base.py:1574-1583`, verbatim comment and code:
+
+> *"A-1 VISIBLE-only pass (probe-proven, F4c): clear COLLIDE on non-pad arm shapes (→ MuJoCo
+> contype=conaffinity=0); KEEP COLLIDE on the gripper PAD geoms (cable grasp)."*
+
+```
+for si in range(mj_left_ss, mj_arm_se):
+    lbl = str(_labels[si]) if si < len(_labels) else ""
+    if "pad" not in lbl.lower():
+        proto.shape_flags[si] = int(newton.ShapeFlags.VISIBLE)
+```
+
+⇒ ⭐⭐ **every arm shape whose label lacks "pad" has collision cleared, and the comment states the equivalence to
+`contype=conaffinity=0` itself.** ⇒ **arm-versus-anything interpenetration produces no contact in the production
+env either.**
+
+⇒ ⭐⭐⭐ **so -140 (1)'s conclusion is not confined to p4's driver**: any contact-based check for arm/structure
+interference is blind in the production path too, and there by deliberate design rather than by an overlooked flag.
+⛔ I am **not** saying the design is wrong — it was taken for a stated reason. I am saying **the detector everyone
+would reach for does not exist on that path**, which is exactly -140 (1)'s point one level up.
+
+⚠ And the selection is the **same substring predicate** as `:1392` — `"pad" in lbl`. Two sites, one rule. ⚠ Caveat
+I attach: `shape_label` is Newton's label and may not be the MuJoCo geom name, so **I have not verified that the
+claws fall inside this set** the way they do at `:1392`; the shared rule is the point, not a specific membership.
+
+### 16.4 ⭐ (3)② rests on a property that survives all of this
+
+`mj_geomDistance` is **independent of the contact filter** — established today by p5's probe and consistent with
+what I read of its contract (§9.2 of the bound artifact). ⇒ ⭐ **distance still measures where contact has been
+switched off**, so the proposed arm-to-column sweep works despite the flags — and for the same reason it would
+work on the production path. ⭐ The instrument this court spent the day arguing about turns out to be the one tool
+that sees what the physics was told to ignore.
+
+## 17. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
