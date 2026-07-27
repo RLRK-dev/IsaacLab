@@ -4112,3 +4112,15 @@ count 0 + listing 8+ = contradiction ⇒ the predicate is broken, not the world.
 hit — the scope note `:10` — and **no node for today's UR15 cell / clamp / C1 work** (the `T-CLAMP-R-*` rows are the
 April-era `T-Skill-CR` subtree). ⇒ **Today's whole lane is node-unbound**: no [DEFINE], no [L-TRIAGE], no [VERIFY]
 chain ever fired for it.
+
+## 86. Rs launched the role clarification — three briefs drafted
+
+Rs, single word after the revised proposal: **「起動」**. Drafted per the launch:
+- `RSTECHLEAD_ROLE_BRIEF_p4_20260727.md` — procurement rules ①design/constants from p5, never in-driver
+  ②three-way verification per run (pC + pB + Rs video) ③measurement stays p4's, but derive constants from the
+  asset, never write them down. Rules ①-③ = codification of Rs's own same-day instructions ⇒ effective now.
+  Org: p0 appointed lane verifier (ratifying today's de-facto role), pZ out of the lane pending Rs disposition.
+- `IMPL_BUILDER2_ROLE_BRIEF_p14_20260727.md` / `IMPL_VERIFIER2_ROLE_BRIEF_p15_20260727.md` — WMSO lane, lead p12,
+  design axis p16; ⛔ gate CLOSED 継続 ⇒ both waiting, no self-start.
+Node registration (T-ROOT-UR15-Cell-Clamp-Route-20260727 案) and cell-constant single-sourcing dispatched to p6
+and p5 respectively. Any of this reverts on one word from Rs.
