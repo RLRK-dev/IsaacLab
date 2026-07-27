@@ -3632,3 +3632,42 @@ written**; the file that existed was the pre-widening version, and **Rs replied 
 **(e) ⛔ p4 also reports a failure**: a hard singularity floor (σ_min ≥ 0.12) made **the jaws never close**
 (+79.89 mm) — the floor selected poses the servo cannot hold. ⭐ Direction is right (the left hand could choose
 roll 0.0°, fully square); **the floor was crude** ⇒ redo as ranking, not rejection.
+
+## 65. ⛔ My §62 table was too coarse — the two premise changes are in opposite states
+
+`w2:p6` registered both as **DDR #44 / #45** (`2af3ed1775`) and, in doing so, **took my table apart correctly**:
+
+| | §0#4 mouth (**#44**) | §0#2 grasp span (**#45**) |
+|---|---|---|
+| Rs authorised | ✅ 「コの上下幅を4mm増やして」 | ✅ 「左右ハンド間隔を2倍にして良い」 |
+| implemented on disk | ⭐ **yes** — working model f1ext 40.20 / f2ext 23.80 ⇒ **14.00**, centre 32.00 unchanged | ⛔ **no** — **`176` appears nowhere**; `task_config.py:235 GRIP_HALF_SPAN = 0.044` unchanged, `CLIP_Y_SPACING` unchanged |
+| recorded in spec / banked asset | ⛔ no — both still **10.00** (asset mtime 06-22) | ⛔ no — `RS71:24` still **88** |
+
+⇒ ⛔ **§62 presented both as "authorised, spec stale". Only #44 is that.** #45 is **authorised but unbuilt** —
+p4's span change lives in **its own ported driver**, not in the repository. ⭐ **Both reports are true of
+different surfaces; my table flattened them into one.**
+
+⭐⭐ **And p6 found something that changes the cost of #45**: `envs/route_executor.py:150` carries a live assertion
+— **`"INVARIANT#2 (FOUNDATIONAL 88mm span) broken:"`** ⇒ **the old value is actively enforced at runtime**
+⇒ changing one constant is not enough; the guard fires. ⚠ **And the same-numeral trap again**: most `0.088` in the
+repository is **DH link length**, unrelated to the span ⇒ **⛔ no bulk replace.** ⭐ **Second instance today, on a
+different number** (the first: cable Ø 8.00 vs band width 8.00, §63) — **not a rare accident.**
+
+⭐ p6 also updated **DDR #41**: the frozen D1.1-B artefact's 88 mm basis moves from *"waiting on a hypothetical
+correction"* to **"waiting on a correction by a known new value"** ⇒ disposition needed once #45 resolves (Rs).
+⭐ And it **marked its own relay legs** — it has not primary-verified the two Rs verbatims and says so.
+
+## 66. Two panes scoped the numbers they had supplied, before anyone asked
+
+**⭐ `w2:pB`** re-measured both models itself (working: f1ext 0.0402 / f2ext 0.0238 ⇒ **14.00**; banked LOCK:
+0.0382 / 0.0258 ⇒ **10.00**, untouched today) ⇒ ⭐⭐ **independent on-disk confirmation that Rs's +4 mm landed.**
+⇒ Its ruling on its own contribution: **10.00 is true of the banked design and false of the working model** —
+⛔ do not carry numbers built on 10.00 into working-model statements. ⭐ It also checked its own banked document
+and found the figure is **not in it** (message-only) ⇒ **no correction needed.**
+
+**⭐ `w2:pC` asked whether to annotate its banked records**, which state the 10.00 mm criterion, since they are
+**currently being referenced in p11's court** and a later reader could take 10.00 as current.
+⇒ ⭐ **My answer: yes — append-only, no deletion, verdicts unchanged.** ⛔ **My ledger's scoping is not a
+substitute**: a reader who opens pC's record directly never sees this file. ⇒ ⭐⭐ **A scope note has to live where
+the number lives.** ⚠ pC's own point stands and belongs in the record: **its visual leg is scoped to the 10.00 mm
+model** — it observed a grasp under the superseded geometry, not the current design.
