@@ -1068,7 +1068,7 @@ STEPS = [
     (11, "C2上空へ", (LX2, C2[1], Z_RISE_ROUTE), (RX2, C2[1], Z_RISE_ROUTE), HALF, OPEN, 2.6, None),
     (12, "左クランプ", (LX2, C2[1], Z_RISE_ROUTE), (RX2, C2[1], Z_RISE_ROUTE), CLAMP, OPEN, 1.4, None),
     (13, "右がcable再把持へ", (LX2, C2[1], Z_RISE_ROUTE), (RX_MID, C2[1], Z_RISE_ROUTE), CLAMP, OPEN, 2.2, None),
-    (14, "両手クランプ", (LX2, C2[1], Z_RISE_ROUTE), (RX_MID, C2[1], Z_RISE_ROUTE), CLAMP, CLAMP, 1.6, None),
+    (14, "両手クランプ", (LX2, C2[1], Z_RISE_ROUTE), (RX_MID, C2[1], Z_RISE_ROUTE), CLAMP, CLAMP, 1.6, "regrasp"),
     (15, "C2へ押し込み", (LX2, C2[1], Z_SEAT), (RX2, C2[1], Z_SEAT), CLAMP, CLAMP, 2.6, None),
     (16, "C2固定", (LX2, C2[1], Z_SEAT), (RX2, C2[1], Z_SEAT), CLAMP, CLAMP, 1.6, "pinC2"),
     # p5: the final release opens BOTH hands to the claw-clearing command.  HALF is not a
@@ -1116,6 +1116,94 @@ if _os.environ.get("P4_RELEASE_ONLY") == "1":
         print(f"[rel] ctrl {_c:6.1f} -> claw tips {_g:6.2f} mm apart"
               f"{'   <- solved release' if abs(_c-_r)<0.05 else ''}")
     raise SystemExit(0)
+
+def grasp_diagnostics(gate, w, aim_seat, aim_cable, gates):
+    """Measure a closure -- the first grasp, or the re-grasp.
+
+    Extracted from the step loop so it can be CALLED.  Inline, the only way to find out
+    whether this instrument works was to run the whole choreography, which needs an
+    authorisation I do not have; an instrument I cannot demonstrate is the same shape as
+    the reports it is meant to check.
+    """
+    gates[gate] = grasped("L") and grasped("R")
+    for t in SIDES:
+        pw = pinch(t)
+        dists = [float(np.linalg.norm(np.array(d.xpos[b]) - pw)) for b in CAB]
+        j = int(np.argmin(dists))
+        sep = float(np.linalg.norm(np.array(d.xpos[PAD[t][0]]) - np.array(d.xpos[PAD[t][1]])))
+        names = set()
+        for i in range(d.ncon):
+            g1, g2 = d.contact[i].geom1, d.contact[i].geom2
+            for a, b in ((g1, g2), (g2, g1)):
+                if a in PADG[t] and b in CABG:
+                    names.add(mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, a))
+        blk = set()
+        for i in range(d.ncon):
+            g1, g2 = d.contact[i].geom1, d.contact[i].geom2
+            for a, b in ((g1, g2), (g2, g1)):
+                if a in PADG[t] and b not in PADG[t]:
+                    bb = m.geom_bodyid[b]
+                    blk.add(mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, bb) or f"g{b}")
+        # Where the slot ACTUALLY ended up relative to the cable, live.  The aim loop predicts
+        # this on scratch data; printing both tells us whether the descent is disturbing the
+        # cable or the servos are simply not arriving.
+        # Measure against the link the hand is actually near, not the link nearest an x
+        # measured at STEP 1.  The old version compared the seat with whatever piece of cable
+        # happened to sit at a fixed x, so once the cable slid along its own axis the
+        # comparison changed identity rather than reporting motion -- one hand printed a 25 mm
+        # miss while holding the cable on all six ko surfaces.  Those numbers are retracted.
+        sp = seat_point(t)
+        _dist, _q, _ci, _u = cable_perp(sp)
+        _loc = jaw_axes(t) @ (np.asarray(_q) - sp) * 1000.0
+        cw = np.asarray(_q)
+        sc_err = (sp - cw) * 1000.0
+        qerr = (np.array([d.qpos[a] for a in QADR[t]]) - w[t]) * 1000.0
+        _half = 0.5 * (mouth_clear(t) - 2 * CABLE_R) * 1000.0
+        print(f"[steps] {gate.upper()} {t}: cable centreline is {_dist*1000:5.2f} mm from the seat "
+              f"(perpendicular, interpolated on cab{_ci} at {_u:.2f} along it)")
+        print(f"[steps] {gate.upper()} {t}: in the jaw's own axes: along cable {_loc[0]:+6.2f}  "
+              f"closing {_loc[1]:+6.2f}  across the mouth {_loc[2]:+6.2f} mm "
+              f"(containment wants |across| < {_half:4.2f}, derived from the asset; "
+              f"the along-cable term does not affect it)")
+        # Root cause split, not a bias.  The aim predicts where the seat ENDS UP after the
+        # jaw closes.  If the seat is where that predicted, the arm did its job and the cable
+        # moved; if it is not, the arm did not arrive.  Those need opposite fixes, and a
+        # constant offset would paper over whichever one it is.
+        # ⛔ Only the FIRST grasp is aimed -- aiming runs at steps 2-5, and the re-grasp sends
+        # the hand to RX_MID, a fixed midpoint between the clips, with no measurement of where
+        # the cable is.  So at a re-grasp `aim_seat` still holds the first grasp's prediction,
+        # and comparing against it would report a residual for a closure that never had an aim.
+        if gate == "regrasp":
+            print(f"[steps] {gate.upper()} {t}: this closure was NOT aimed -- the hand goes to a "
+                  f"fixed x (RX_MID), so it has no prediction of its own.  The distance-from-seat "
+                  f"line above is the quantity comparable with the first grasp.")
+        _sd = (seat_point(t) - aim_seat[t]) * 1000.0
+        _cd = (np.asarray(cw) - aim_cable[t]) * 1000.0
+        print(f"[steps] {gate.upper()} {t}: "
+              f"{'(the FIRST grasp aim, for reference only) ' if gate == 'regrasp' else ''}"
+              f"seat vs its own PREDICTION {np.round(_sd,1)} mm "
+              f"(|{np.linalg.norm(_sd):5.1f}|)  cable vs where it was aimed "
+              f"{np.round(_cd,1)} mm (|{np.linalg.norm(_cd):5.1f}|)")
+        print(f"[steps] {gate.upper()} {t}: joints vs commanded {np.round(qerr,1)} mrad "
+              f"-> {'servo did not arrive' if np.abs(qerr).max() > 5 else 'servo arrived'}; "
+              f"nearest link is {np.linalg.norm(np.asarray(cw) - aim_cable[t])*1000:5.1f} mm "
+              f"from where the aimed link was (identity may differ -- not a drift)")
+        padg, clawg = jaw_gaps(t)
+        pf, lf, cf = clamp_faces(t)
+        print(f"[steps] {gate.upper()} {t}: pad faces {padg:+6.2f} mm (design target 4.00 on a "
+              f"O8 cable, task_config.py:277), opposing claws {clawg:+6.2f} mm, "
+              f"claw min over the run {claw_min[t]:+6.2f} mm"
+              f"{'  <- NEGATIVE: non-conservative for transfer' if claw_min[t] < 0 else ''}")
+        print(f"[steps] {gate.upper()} {t}: cable touched by pad1 {sorted(pf) or 'none'} "
+              f"/ claws {sorted(cf) or 'none'} / pad2-only {sorted(lf) or 'none'} "
+              f"  clamped={grasped(t)} "
+              f"(needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had "
+              f"closed through the cable)")
+        print(f"[steps] {gate.upper()} {t}: fingers blocked by {sorted(blk) if blk else 'nothing'}")
+        print(f"[steps] {gate.upper()} {t}: nearest cable link cab{j} at {dists[j]*1000:5.1f} mm from the "
+              f"pinch, pad separation {sep*1000:5.1f} mm, ctrl={d.ctrl[GIDX[t]]:.0f}, "
+              f"pad geoms touching cable = {sorted(names) if names else 'none'}")
+
 
 RELEASE = release_ctrl()
 print(f"[steps] release opening solved from the asset: ctrl {RELEASE:.1f} "
@@ -1253,75 +1341,12 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             cam2.lookat[:] = 0.5 * (pinch("L") + pinch("R"))
             renderer.update_scene(d, camera=cam2)
             frames.append(np.hstack([a_img, renderer.render()]))
-    if gate == "grasp":
-        gates["grasp"] = grasped("L") and grasped("R")
-        for t in SIDES:
-            pw = pinch(t)
-            dists = [float(np.linalg.norm(np.array(d.xpos[b]) - pw)) for b in CAB]
-            j = int(np.argmin(dists))
-            sep = float(np.linalg.norm(np.array(d.xpos[PAD[t][0]]) - np.array(d.xpos[PAD[t][1]])))
-            names = set()
-            for i in range(d.ncon):
-                g1, g2 = d.contact[i].geom1, d.contact[i].geom2
-                for a, b in ((g1, g2), (g2, g1)):
-                    if a in PADG[t] and b in CABG:
-                        names.add(mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, a))
-            blk = set()
-            for i in range(d.ncon):
-                g1, g2 = d.contact[i].geom1, d.contact[i].geom2
-                for a, b in ((g1, g2), (g2, g1)):
-                    if a in PADG[t] and b not in PADG[t]:
-                        bb = m.geom_bodyid[b]
-                        blk.add(mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, bb) or f"g{b}")
-            # Where the slot ACTUALLY ended up relative to the cable, live.  The aim loop predicts
-            # this on scratch data; printing both tells us whether the descent is disturbing the
-            # cable or the servos are simply not arriving.
-            # Measure against the link the hand is actually near, not the link nearest an x
-            # measured at STEP 1.  The old version compared the seat with whatever piece of cable
-            # happened to sit at a fixed x, so once the cable slid along its own axis the
-            # comparison changed identity rather than reporting motion -- one hand printed a 25 mm
-            # miss while holding the cable on all six ko surfaces.  Those numbers are retracted.
-            sp = seat_point(t)
-            _dist, _q, _ci, _u = cable_perp(sp)
-            _loc = jaw_axes(t) @ (np.asarray(_q) - sp) * 1000.0
-            cw = np.asarray(_q)
-            sc_err = (sp - cw) * 1000.0
-            qerr = (np.array([d.qpos[a] for a in QADR[t]]) - w[t]) * 1000.0
-            _half = 0.5 * (mouth_clear(t) - 2 * CABLE_R) * 1000.0
-            print(f"[steps] GRASP {t}: cable centreline is {_dist*1000:5.2f} mm from the seat "
-                  f"(perpendicular, interpolated on cab{_ci} at {_u:.2f} along it)")
-            print(f"[steps] GRASP {t}: in the jaw's own axes: along cable {_loc[0]:+6.2f}  "
-                  f"closing {_loc[1]:+6.2f}  across the mouth {_loc[2]:+6.2f} mm "
-                  f"(containment wants |across| < {_half:4.2f}, derived from the asset; "
-                  f"the along-cable term does not affect it)")
-            # Root cause split, not a bias.  The aim predicts where the seat ENDS UP after the
-            # jaw closes.  If the seat is where that predicted, the arm did its job and the cable
-            # moved; if it is not, the arm did not arrive.  Those need opposite fixes, and a
-            # constant offset would paper over whichever one it is.
-            _sd = (seat_point(t) - aim_seat[t]) * 1000.0
-            _cd = (np.asarray(cw) - aim_cable[t]) * 1000.0
-            print(f"[steps] GRASP {t}: seat vs its own PREDICTION {np.round(_sd,1)} mm "
-                  f"(|{np.linalg.norm(_sd):5.1f}|)  cable vs where it was aimed "
-                  f"{np.round(_cd,1)} mm (|{np.linalg.norm(_cd):5.1f}|)")
-            print(f"[steps] GRASP {t}: joints vs commanded {np.round(qerr,1)} mrad "
-                  f"-> {'servo did not arrive' if np.abs(qerr).max() > 5 else 'servo arrived'}; "
-                  f"nearest link is {np.linalg.norm(np.asarray(cw) - aim_cable[t])*1000:5.1f} mm "
-                  f"from where the aimed link was (identity may differ -- not a drift)")
-            padg, clawg = jaw_gaps(t)
-            pf, lf, cf = clamp_faces(t)
-            print(f"[steps] GRASP {t}: pad faces {padg:+6.2f} mm (design target 4.00 on a "
-                  f"O8 cable, task_config.py:277), opposing claws {clawg:+6.2f} mm, "
-                  f"claw min over the run {claw_min[t]:+6.2f} mm"
-                  f"{'  <- NEGATIVE: non-conservative for transfer' if claw_min[t] < 0 else ''}")
-            print(f"[steps] GRASP {t}: cable touched by pad1 {sorted(pf) or 'none'} "
-                  f"/ claws {sorted(cf) or 'none'} / pad2-only {sorted(lf) or 'none'} "
-                  f"  clamped={grasped(t)} "
-                  f"(needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had "
-                  f"closed through the cable)")
-            print(f"[steps] GRASP {t}: fingers blocked by {sorted(blk) if blk else 'nothing'}")
-            print(f"[steps] GRASP {t}: nearest cable link cab{j} at {dists[j]*1000:5.1f} mm from the "
-                  f"pinch, pad separation {sep*1000:5.1f} mm, ctrl={d.ctrl[GIDX[t]]:.0f}, "
-                  f"pad geoms touching cable = {sorted(names) if names else 'none'}")
+    # The same block for the first grasp AND for the re-grasp.  It used to fire only at the first:
+    # Rs watched the re-grasp fail in the video while the log had nothing to say about it beyond
+    # `grip=L-`, because the one part that fails was the one part with no measurement.  p18 cleared
+    # this as measurement, which is p4's court -- no control changes here, only instruments.
+    if gate in ("grasp", "regrasp"):
+        grasp_diagnostics(gate, w, aim_seat, aim_cable, gates)
     le = np.linalg.norm(pinch("L") - tgt["L"]) * 1000
     re_ = np.linalg.norm(pinch("R") - tgt["R"]) * 1000
     p1, p2 = np.array(d.xpos[CAB[SEAT1]]), np.array(d.xpos[CAB[SEAT2]])
