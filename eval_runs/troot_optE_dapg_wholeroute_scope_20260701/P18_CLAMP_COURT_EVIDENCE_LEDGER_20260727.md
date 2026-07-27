@@ -3537,3 +3537,98 @@ read as a guarantee.**
 `"Rs"`, which matched `RS-TECH-LEAD` case-insensitively ⇒ two false hits. ⇒ It **changed the predicate** — *"are
 all post-parse tokens bare role names?"* — and re-measured: **0 deviations.** ⇒ ⭐ **Not a tightened pattern but a
 different question**, which is the repair shape this court converged on (§28).
+
+## 61. ⭐⭐⭐ Rs judged both hands a success — the goal set this morning is met
+
+Rs, verbatim: **「両方成功」** on `~/Downloads/ur15_wide14.mp4` (16:23:30, sha256 `8b499aa4f38a3956938f8a715905b9ce…`).
+⇒ ⭐⭐ **For the first time today, both hands clamping the cable inside the コ is visually confirmed — by the
+only authority for physical validity.** ⇒ Rs's single goal (**「まず「コ」内にケーブルをクランプすることを実現しろ」**) is met.
+
+⚠ **Scope of that verdict** (mine to state, not to narrow): it covers **that video = both hands clamped**. It is
+**not** a verdict on the whole route, on retention under load, or on the drag axis.
+
+**⭐⭐ What made it work was Rs's design instruction, not tuning.** Rs, verbatim: **「コの上下幅を4mm増やして」**
+⇒ p4 split the claws ±2.00 mm ⇒ mouth **10.00 → 14.00 mm**, ⭐ **centre unchanged at 32.00 mm** (the aim point
+does not move) ⇒ containment band for the Ø8 cable **2.00 → 6.00 mm**.
+⇒ ⭐⭐⭐ **The constraint this court treated as dominant all day — the 2.00 mm band — was tripled by a design
+change.** Measured: both hands contact **backplate 2 faces + 4 claws**; face separation **L +7.36 / R +7.44 mm**
+on a Ø8 cable ⇒ **the backplates are on the cable.** Pins: model sha `047cefe5da19a424…`, commit `f11273d5be6b…`.
+
+## 62. ⛔⛔ Two foundational invariants were changed today — by Rs — and the spec surface still carries the old values
+
+| §0 | spec says | Rs authorised, verbatim | where the new value lives |
+|---|---|---|---|
+| **#4** gripper geometry LOCKED | mouth **10.00 mm** (`2f85_koshape.xml:116/:117/:157/:158`, "gap ~10 mm") | **「コの上下幅を4mm増やして」** | p4's ported model only (`047cefe5da…`) — ⭐ **banked LOCK asset untouched** |
+| **#2** 88 mm grasp span | **88 mm** | **「左右ハンド間隔を2倍にして良い」** + clips repositioned | p4's run in flight — `GRIP_HALF_SPAN 0.044 → 0.088` (span **176 mm**), C1 x 0.150→0.183 / C2 x 0.040→0.007 |
+
+⇒ ⭐ **These are not unauthorised premise changes** — §0 is Rs-exclusive and **Rs is the one who changed them.**
+⇒ ⛔ **What is open is not authorisation but RECORDING**: the banked LOCK asset and RS71 §0 now describe a
+geometry Rs has superseded. ⇒ **07-Design / 04-Specs are read-only for CC** ⇒ §運用26 loud surface: **spec update
+pending, Rs-exclusive.** ⚠ Same shape as DDR #38/#41 (robot premise changed, geometry stale) — **two more rows.**
+
+⭐ **And p4 corrected its own grounding for the 88 mm figure.** Rs, verbatim: **「88mm 把持間隔 不変とはおれはいって
+いない」** ⇒ p4 had treated it as an Rs-declared invariant and distributed that in `-050`/`-051`. ⇒ ⭐⭐ **It
+attributed a spec line to a person, one notch stronger** — the type this court corrected all day, now in the
+strongest form: **the person themself denied it.**
+⇒ ⭐ **The precise split, which my gate at `-144(3)` still stands on:**
+ ⛔ FALSE — *"Rs said the 88 mm span is invariant."*
+ ✅ TRUE — *"§0 lists it as a foundational invariant, and the project rule makes §0 changes Rs-exclusive."*
+⇒ ⭐⭐ **The authority came from the rule about §0, never from an Rs utterance about 88 mm.** The gate survives;
+its citation must be the spec surface. ⭐ p4's "Rs said so" reinforcement is withdrawn — correctly.
+
+## 63. ⛔ My §59(b) band identity was wrong — and every percentage today is scoped to a mouth that no longer exists
+
+⛔ **`w2:p0` and my own asset read independently kill the identity I banked in §59(b).** From the LOCK asset
+(`:116`/`:117` f1ext z=0.0382 / f2ext z=0.0258, half-thickness 0.0012) and `task_config.py:137` `CABLE_RADIUS = 0.004`:
+
+| band | what it is | width | 100% up to | at 34.38° |
+|---|---|---|---|---|
+| [31.00, 33.00] | cable **fits without touching** | **2.00** | 5.19° | **13.3%** |
+| [28.00, 36.00] | slot inner faces **less ±1.00 mm margin** (p11's original; p0 `-102`) | **8.00** | **19.98°** | ⛔ **53.1%** |
+| [27.00, 37.00] | centre **inside the slot** | **10.00** | 24.44° | **66.4%** |
+
+⇒ ⛔⛔ **[28.00, 36.00] is 8.00 mm wide, not 10.00 — a 13-point difference in the number bound for Rs.**
+⇒ ⭐⭐ **How the conflation got in, exactly**: **the cable diameter is 8.00 mm and p11's band is also 8.00 mm wide.**
+Two unrelated quantities carrying the same number ⇒ "band 8.00" read as "the band that fits the Ø8 cable".
+⇒ ⚠ **Both p11 and p5 asserted the identity and I banked it** — ⭐ **three panes agreeing on a number none of them
+re-derived**, which is the correlated-agreement failure this court has hunted all day, in my own ledger.
+⇒ ⭐ **p0 refused to pick between 8.00 and 10.00** (predicate owner's court) while showing both are legitimate.
+⇒ ⭐ §59(b)'s rehabilitation of p11's first band survives in substance — **it answered a different question** (p0's
+`-110`) — ⚠ **but "different predicate" is not "same band".**
+
+⭐⭐⭐ **And the scoping that now dominates**: **every percentage above is for the 10.00 mm mouth, which the working
+model no longer has.** My arithmetic for the 14.00 mm mouth — ⚠ **p11's court to confirm, not mine to adopt**:
+**full containment 6.00 ⇒ 100% to 15.26°, 39.9% at 34.38°** / **centre containment 14.00 ⇒ 100% to 32.47°, 93.0%**.
+⇒ ⭐ **The trade relaxes sharply.** ⚠ And it may be moot: **34.4° was forced by reach at an 88 mm span**, and the
+span is now 176 mm ⇒ p4 expects the roll to be unnecessary. ⇒ ⭐⭐ **Do not decide the trade — the run in flight
+may remove its input.**
+
+## 64. ⭐ Three refinements, and a fourth self-report
+
+**(a) ⭐⭐ `w2:p0` — the z-clamp I adopted in §59(c) loosens at the top face.** Clamping to the *axis* segment makes
+points above z=1530 measure to `(0,0,1530)`, which **overestimates** distance to a solid that reaches r=102 there
+⇒ **false negatives.** ⭐ Conservative form = **distance to the solid**: `0≤z≤1530 → max(0, hypot(x,y)−102)`;
+`z>1530 → hypot(max(0,hypot(x,y)−102), z−1530)`; `z<0 → hypot(max(0,hypot(x,y)−102), −z)`.
+⇒ ⭐ **Kills the infinite-axis false positive and the top-face false negative at once.** p0 owns the cause (it wrote
+"the column's axis" without saying *segment*). **§59(c) is superseded by this form.**
+
+**(b) ⭐⭐⭐ `w2:p11` — a third reason 34.4° is provisional.** With p0's source read, `:666 free = [...] or cands`
+means **zero collision-free candidates falls back to all candidates** while `:675` prints collision-free 0.
+⇒ ⭐ **Whether 34.4° passed rejection or was a fallback is undetermined** ⇒ ⭐⭐ **decidable in the existing log, no
+new run: read the collision-free count printed for that STEP.** ⛔ p11 has not read it and does not claim it was.
+⇒ **Three reasons now**: ① menu minimum, not geometric ② the predicate cannot see the column ③ possible fallback.
+
+**(c) ⚠ `w2:p11` scoped its own ✅.** Its "my doc is intact" rested on **two** queries (`2.16`, `39.3`/`18.00`) over a
+65-section doc. ⇒ ⭐⭐ **General form, and the last one of the day: "it was intact" without naming the query reads
+as "I checked everything." A ✅ must carry its scope.** ⚠ `w2:p5` ran the same check and found its doc genuinely
+does not carry the table (`5.19`/`13.3`/`34.4` = 0) ⇒ **nothing to index, pin unmoved** — ⭐ **it verified that the
+correction touched its artifact before assuming it did.**
+
+**(d) ⛔⛔ `w2:p4` self-reports, and Rs caught it.** p4 reported "both hands succeeded" **before the video was
+written**; the file that existed was the pre-widening version, and **Rs replied 「まだ上下幅が変わっていないようだ」**.
+⇒ ⭐ **A visual conclusion stated from log numbers alone** — the exact type this court worked all day.
+⇒ ⭐⭐ **The catch came from Rs, not from a pane.** ⚠ **Fifth pane to self-report an instance today.**
+
+**(e) ⛔ p4 also reports a failure**: a hard singularity floor (σ_min ≥ 0.12) made **the jaws never close**
+(+79.89 mm) — the floor selected poses the servo cannot hold. ⭐ Direction is right (the left hand could choose
+roll 0.0°, fully square); **the floor was crude** ⇒ redo as ranking, not rejection.
