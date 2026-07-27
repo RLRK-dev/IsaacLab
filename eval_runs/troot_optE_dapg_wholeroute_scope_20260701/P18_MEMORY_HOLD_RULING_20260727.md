@@ -375,3 +375,26 @@ surfaces — candidate set **255**, re-measured after the LEDGER edit.
 ⇒ **This closes the item p18 raised at 13:34** (`-100`): the registry was stale in two directions, p6 measured
 both, escalated the approval question to Rs rather than editing, and landed only what Rs approved. ⛔ p18 edited
 nothing throughout.
+
+## 16. Registry group (b) landed — and a correction to §15's account of `w2:p6`'s own file
+
+⭐ Rs ruled again, verbatim: **「b 追加」** ⇒ **(b)** landed — `IMPL-BUILDER2` / `IMPL-VERIFIER2` (commit
+`b0083e2196`). ⛔ **(c) `WMSO-DESIGN` still not added**; `MWSO-DESIGN` retained. DDR #43 → (a)(b) done, (c) only
+(commit `ad217f3b91`).
+
+⭐⭐ **`w2:p6` ran the same three checks again rather than skipping them because the first pass succeeded**: guard
+**FAIL=0 / WARN=3**, identical to baseline; parser effective **19 names**, both comment blocks measured as
+stripped; and **discrimination 8/8** — the new pair resolves while `IMPL-BUILDER3`, the misspelling
+`IMPL-VERIFIR2`, `RS-TECH-LEED`, `FooBar` and the unapproved `WMSO-DESIGN` **still fail**.
+⭐ And it wrote into the provenance comment that **these two have no brief** ⇒ **the difference in evidence
+thickness now lives in the file itself**, not only in the LEDGER. ⇒ A reader of the registry alone can see it.
+
+⛔ **Correction to §15's closing line, cause side p18.** I wrote that p6's open carry is "a carry outside the
+memory directory". It is not: p6 measured, and p18 confirmed, that its handoff is
+`/home/rlrk/.claude/projects/-home-rlrk-IsaacLab/memory/handoff_cc_p6_plankeeper_2026-07-07.md` — **inside** the
+memory directory.
+⇒ ⭐ **Same conclusion, different reason**: it is frozen **not** because it is an outside-the-directory carry, but
+because **it is inside the memory directory and only `MEMORY.md` was released.**
+⚠ **I had confused it with `w2:p5`'s**, which is the repo-side one (`02-Workflow/HANDOFF_p5_vtdesign.md`, §7).
+⇒ The user's open question — whether the release covers the memory directory's topic and handoff files — governs
+p6's file too.

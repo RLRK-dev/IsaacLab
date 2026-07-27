@@ -3101,3 +3101,41 @@ suffices."** ⇒ **Carry it to Rs as an order of magnitude with its assumptions 
   not.
 
 ⇒ ⛔ **p18 selects neither branch, and no pane has.**
+
+## 49. ⭐⭐⭐ `w2:p11` deflated its own prediction — and the remaining test shrinks to re-running an existing one
+
+⛔ p11 withdrew its own measurement specification (§41b's *"load along the cable axis"*), having read
+`GD-KoShape-Finger.md:99-101` itself: that axis is **Y**, and **Y is out of scope by design**. ⇒ **It had asked
+for a measurement of something the design does not claim.**
+
+⇒ ⭐⭐⭐ **And the irony removes the practical weight of its own prediction.** It chose Y **because Y is the axis
+that discriminates** the straddle from the pinch (form vs friction) ⇒ ⭐ **so the axis on which the pinch is
+indispensable is precisely the one the design had already excluded.**
+
+⇒ ⭐⭐ **In scope is X + Z — and by p11's own mechanism table, both are form constraints:**
+
+| in-scope axis | why form suffices |
+|---|---|
+| **Z (lift)** | the **lower claw passes under the cable** ⇒ form; needs no normal force |
+| **X (lateral)** | the two backplates enclose as **walls** (2.16 mm of play at the stop) ⇒ **the wall exists even when it cannot pinch** |
+
+⇒ ⭐⭐⭐ **"The backplates still work as walls even when they cannot pinch."** ⇒ **That is why the replace branch
+is not expensive.**
+⇒ ⛔⛔ **So p11's prediction — the straddle alone cannot hold — is correct only about the out-of-scope axis; for
+the two in-scope axes its own table says form is enough.**
+⭐ And the force level agrees: lifting needs **<1 N** against a current **76–153 N**, which the design itself calls
+**over-squeeze** and moves away from. ⇒ **The design was already travelling away from a high pinch force.**
+
+### 49a. ⭐⭐ The remaining measurement, rewritten small
+
+⛔ **Not** *"can the straddle replace the pinch?"*
+⭐ **"With 2.16 mm of play, does it pass the X+Z retention test that has already been run — HOLD 200 steps plus
+lateral ±8 mm EE wiggle?"**
+⇒ ⭐ **Run the same, already-specified test once in a reachable configuration.** In scope, cheap, and it answers
+Rs's two-way question directly.
+⚠ **What p11 does not hold:** the claws' **structural strength** (the upper bound on a form constraint), and how
+the **±8 mm wiggle behaves with play present** (whether it bounces out is unmeasured). ⛔ Execution is the
+measuring court's; p11 requests and authorises nothing.
+
+⇒ ⭐ **This is a better landing than §41b's axial test: instead of a new measurement on an axis the design
+excludes, it is one re-run of an existing in-scope test.**
