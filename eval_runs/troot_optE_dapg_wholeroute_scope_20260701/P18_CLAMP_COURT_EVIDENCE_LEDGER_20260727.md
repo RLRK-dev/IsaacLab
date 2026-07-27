@@ -1648,3 +1648,44 @@ answerable at a glance.
 through the table plate down to the floor.** With `contype=0` no interference is generated, and it may well be
 intentional — ⛔ pC judges nothing. ⇒ ⭐ **So Rs's 「円柱のもぶつかっている」 might mean the column against the
 table, not the arm against the column** — and the same single frame settles that too.
+
+## 21. The last detail closes, and the mechanism's default points the wrong way
+
+**(a) ✅ `w2:p11` closed the detail `w2:p0` left open.** The importer's default name would match `pad` for an
+unnamed visual geom on a pad body — ⛔ **but no such geom is ever created**: the asset's `class=visual` is
+`type=mesh` (`2f85_koshape.xml:53-54`), the importer states verbatim *"If False, geometries of type mesh are
+ignored"* (`:264`, gated at `:850`), and production passes **`parse_meshes=False`**
+(`test_newton_clip_routing.py:205` / `:220`). ⇒ **No visual geom takes the default name, so none keeps COLLIDE.**
+⚠ Scope kept: p11 read those call sites; that `newton_skill_env_base.py:1564` reaches the same function is
+**inferred** from the shared import at `:81`, not executed.
+
+**(b) ⛔⛔ The mechanism's default is fail-open, and `w2:p11` raised it to a design requirement.**
+`:1576` = `_labels = list(getattr(proto, "shape_label", []) or [])` ⇒ if that attribute is ever renamed,
+`_labels` is empty ⇒ every label is `""` ⇒ `"pad" not in ""` is **True** ⇒ ⭐⭐ **every shape including the pads
+loses COLLIDE, and the whole grasp mechanism disables silently — by default rather than by exception.**
+
+⇒ ⭐⭐⭐ **And the repo already answers this question the other way, in a sibling file**: `newton_route_env.py:283`,
+verbatim — *"A flag-OFF build has 0 such actuators -> raises"* — with further `raise ValueError` guards on flag
+premises from `:441`.
+⇒ ⭐ **Requirement: if a mechanism's activation depends on a lookup, a failed lookup must raise, not silently
+disable everything.** ⇒ ⭐ **Not an invention — aligning with a pattern already present**, the same move as putting
+`stem`/`foot` on `RS71:55`'s disposition template. ⛔ p11 changes no code (impl = `w2:p0`, landing = `w2:p4`).
+
+### 21a. ⭐⭐ The naming trap is what the measurement harness was built to prevent
+
+`w2:p0` read the harness. `test_newton_clip_routing.py:156` `ROBOTIQ_XML` = `2f85.xml` (**no claws**, FK/IK side);
+`:161` `ROBOTIQ_STRIPPED_XML` = `2f85_koshape.xml` (**claws**, physics side) ⇒ **two assets, two models, and the
+5.00 mm claw protrusion exists in only one of them.** ⚠ `STRIPPED` refers to **tendon removal**, not claws — so
+reading the constant's name lands you on the wrong model.
+
+⭐⭐ And the harness header says so structurally, verbatim: *"env._fk_model (the IK-only robot model) is
+explicitly excluded from measurement, and is additionally used as the AC-9 negative control"* (`:23-24`);
+`I-3 = the measured Model is not env._fk_model` (`:35`); `:261` *"EXCLUDED from measurement; AC-9 control"*.
+⇒ ⭐⭐ **AC-9 requires the as-built to pass *and* the FK model to fail at least one leg** — an assertion that the
+two are different models and that the difference is detectable. ⇒ ⭐ **§19a(b) made that difference concrete: it
+is the claws.**
+
+⇒ ⭐⭐⭐ **`w2:p0`'s general rule, and the day's cleanest single sentence: a name does not identify a model; only
+content does.** Two independent instances at opposite ends of one session — the two same-named
+`_ur15_2f85_koshape_actuated.xml` differing by the one line that inverts the conclusion (§20a), and these two
+constants pointing at opposite models (§21a).
