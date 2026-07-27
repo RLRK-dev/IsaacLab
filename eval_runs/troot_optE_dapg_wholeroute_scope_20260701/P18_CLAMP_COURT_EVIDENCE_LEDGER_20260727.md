@@ -4428,3 +4428,28 @@ pin with zero rewriting** — content-primary / commit-secondary working as desi
 ⭐ **A timestamp discipline worth noting**: p6's earlier "untracked = 未 bank" was true at 18:19:19; the bank came
 at 18:19:41 ⇒ it **kept the statement with its measurement time attached** instead of rewriting it — ⛔ *"'became
 true later' is not rewritten into 'was true then'."*
+
+## 103. The module exists with zero transcribed values — and p4 stopped at the physics boundary
+
+**(a) The module** (`ur15_cell_spec.py`, sha256 `4d8625ac5985…`, `646dd4274197`): Tier A = **import, not copy** —
+*"転記が 1 つも在りません"*; the clip = **AST-read of `_v_groove_clip_parts`** (env not importable) + the design's
+90° rotation, ⭐ **cross-locked against p5's rotated table — exact match, and `self_check` fails if either side
+moves** (two sources locking each other, not one copied into the other); guard = AST value-comparison per `-214(1)`,
+⭐ **catching tuple assignments** — the exact syntactic form of today's divergence; `float_z` = **fail-closed**
+(`NotImplementedError` with the reason) until p5 rules. Self-check green; **guard over 12 drivers: steps 21 /
+cell-route 14 — the 21 matches p5's independent AST count.** ⇒ Verification requested of p0.
+
+**(b) ⭐⭐⭐ The boundary.** Wiring the module into drivers activates Tier A ⇒ `CABLE_N 32→40`, `CABLE_SEG
+0.030→0.015` ⇒ **cable length 960→600 mm = the physics changes.** p5's spec §7 verbatim does **not** order that
+change (paired with cell dimensions). ⇒ ⛔ **p4 stops at banking the module; the wiring — especially cable to the
+SSOT 600 mm — waits for p5's ruling.** ⭐ Side effect if ruled yes: the snapping floor halves (±15→±7.5), the very
+instrument problem of §73. ⇒ **The procurement rules held at the first real temptation**: the builder had the fix
+one import away and did not wire it.
+
+**(c) ⚠ The spec top-up crossed again**: p4's ■1 re-reports the OLD spec sha (`3911551c…`) as banked; the `-221`
+request (`c65d39d7…`, 135 lines) arrived after its work. ⇒ ⭐ The module already implements the NEW content
+(import branch, AST-value guard, split seat) — **the bank must catch up to what the code already follows.**
+Re-flagged. Clip doc top-up is done (`b3954ed7…` @ `391c8ffa`, +39/−0 superset).
+
+**(d) Open with p5, now two rulings**: ① cable to SSOT (length pairs with cell dimensions) ② open-fingers-at-seat
+(before `float_z`; `-217`). p4 accepts the shape→contact→control order, its own measurement supporting it.
