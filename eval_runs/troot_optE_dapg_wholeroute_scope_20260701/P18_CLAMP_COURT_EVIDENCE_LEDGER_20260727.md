@@ -357,7 +357,50 @@ takes no design position on the predicate's content.
 Still undecided inside it, unchanged: **grasp-basis vs capture-basis** (`w2:p11`'s position is capture-basis;
 final is Rs) and **the §0 DUAL-ARM composition rule** (both arms, or a designated arm — Rs).
 
-### 10a. ⭐⭐ Rs's own words bear on the grasp/capture branch — placed here, not adjudicated
+#### 10d. ⭐⭐ `w2:p11` specified the predicate's shape — three legs, each naming its own surface
+
+Its court, its ruling; implementation is `w2:p0`'s. p18 checked the cited constants against the files itself
+(`task_config.py:137` `CABLE_RADIUS = 0.004` ⇒ Ø8; `:277` verbatim `gap=4mm … 2mm/side compression` ⇒ 4.0 mm),
+and the containment arithmetic (slot [27.00, 37.00], Ø8 fully inside ⇒ centre in [31.00, 33.00]).
+
+| leg | condition | axis | source |
+|---|---|---|---|
+| **L1 containment** | cable centre within pad-local **[31.00, 33.00]** | **z** | ⭐ the quantity the driver **already computes and prints** (`:856-857`, ±1.0 band) |
+| **L2 compression** | `pad1` face separation within **[4.0, 8.0] mm** | **y** | 8.0 = Ø8 (`:137`); 4.0 = design full-close (`:277`) |
+| **L3 contact identity** | ⛔ the contact must be **on the faces L2 measures** — both `*_pad1` ↔ cable | — | **the missing leg; this is what made R True** |
+
+⚠ p11 adds that L2 must be evaluated **at the cable's z**, not as the box-pair minimum (they differ by 0.30 mm =
+30% of the positioning tolerance).
+
+⭐⭐ **The structural lesson, and it generalises past this predicate:** *legs that speak about the same physical
+event must be required to speak about the same surface.* "Contact occurred" and "face separation is X" can point
+at **different events** unless the surfaces are bound together.
+
+⭐ **L3 is not an addition — it is what Rs's own mechanism requires.** Rs: 「**左右で摩擦が生じれば**」 ⇒ the
+friction-bearing surface *is* the backplate. ⇒ And once L3 is in, §10c's observation (only L could satisfy Rs's
+mechanism) **falls out of the predicate itself** instead of needing a human to re-read the contact list.
+
+⚠ **`w2:p11` also flags the classification's form, not just its content:** the code says *"name lacks `ext` ⇒
+pad"* — a **negative** filter, so **any new geom silently becomes a pad**. ⇒ Use the positive form: *matches
+`*_pad1` ⇒ pad1*. Same shape as the attribute-order grep failure p11 committed earlier today — **filters that
+silently drop, and filters that silently pick up.**
+
+⭐ **Cost, for whoever decides:** L1's quantity is already computed and printed. ⇒ **What is missing is putting it
+into the verdict, not taking a new measurement.**
+
+⛔ **Left open by p11 deliberately** (owner's choice, not the specifier's): whether L1 uses **full containment
+[31, 33]** or **centre containment [28, 36]** — `w2:p0` established these are different predicates. p11
+recommends [31, 33], because Rs's mechanism cannot work unless the cable is between the claws.
+
+### 10e. p18's routing proposal for the vacant seat — Rs may override
+
+The predicate has no owner (§10), but it does have natural courts, and all of them are already staffed:
+**`w2:p11` specifies** (done, above) → **`w2:p0` implements** (p11 names it) → **`w2:pZ` verifies** (its restored
+brief is exactly *"independently verify p0's implementation"*) → **`w2:p4` uses it**.
+⇒ ⭐ So what §10 recorded as a vacancy may need **no new owner** — only a decision that the document follows this
+chain. ⛔ p18 proposes the routing; it takes no design position on the predicate's content, and Rs decides.
+
+## 10a. ⭐⭐ Rs's own words bear on the grasp/capture branch — placed here, not adjudicated
 
 Relayed verbatim by `w2:p4` (⛔ p4's relay of Rs, not p4's reading):
 
