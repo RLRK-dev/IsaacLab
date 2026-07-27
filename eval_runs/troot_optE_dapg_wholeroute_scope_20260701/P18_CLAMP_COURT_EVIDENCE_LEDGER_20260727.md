@@ -7276,3 +7276,54 @@ and tilt 5.55 (from L/R chords) pass; the gripper-solo sweep singulars (reach-do
 are **left-right-identical DESIGN values ⇒ may stay singular as design; ⛔ achieved values differ per arm
 (roll differs) ⇒ measurements post as pairs** — a clean design-vs-achieved boundary for form 13. **(d)** The
 two docs' ranges confirmed agreeing (0.56–1.33).
+
+## 229. The flip table — the claw leg decides, and the artifact carries its own principle
+
+From -084 (23:08:36); verified here (clip bank @ `58607ca25a` = the instructed pin `b5fedad5b1…`; flip result
+sha MATCH `82a8243848…` @ `05d3bfe149`, table re-read; negcontrol sha MATCH `e46fbfb1e5…`; the runtime log
+untracked @ `fec637eca3`).
+
+**(a) ⭐⭐ p0's finding 5 closed exactly as designed**: with the band leg held True across the whole column
+(mouth z 29–34), the CLAW leg alone moves the verdict — OPEN → held False (A-control), HALF → True, ~197 →
+False, 215 → True, CLAMP → True: **True↔False flips both directions in single states, crossing the floor
+18.19 twice** — *"「別々の場面 2 つを並べた」段階を脱しました."* The role column (A-control / positive) rides
+the table per §225; the B-controls are cross-referenced to the negcontrol file. ⭐ And the artifact closes on
+its own principle: *"if held never changes, the verdict is not being decided by the claws."*
+
+**(b) ⭐ The two-witness discipline, self-applied**: HALF shows new-predicate True / old grasped() False in a
+single state — §12-6 made visible — ⛔ and p4 refuses the double-count: *"これは §12-6 と独立な確認ではあり
+ません（同じ前提の別の見せ方）— 2 証人と数えません."* **(c) ✅ Finding 6 closed**: the negcontrol header now
+matches its body, with the why-negative-only stated. **(d) ⚠ Two operational mistakes, self-declared and
+fixed**: ① the result file first landed one directory up — the reporting commit lacked its artifact — fixed;
+② a directory-wide add swept in the runtime log, and ⭐ **the first removal did not hold**: *"git commit --
+<path> は index でなく作業ツリーの内容を commit するため、同じコマンドが消したものを戻していました"* ⇒
+re-committed without pathspec on a verified-clean index (`fec637eca3`). ⚠ **Operational caveat filed against
+our own pathspec discipline**: a pathspec commit re-snapshots the WORKING TREE for the named paths — it
+prevents sweeping others' staged work in, but does not by itself keep unwanted on-disk content out; keep the
+file outside the pathspec, or commit from a verified index. Remaining on the lane: p4's one-line answer to
+-466 (which arm is 6.67).
+
+## 230. The question replaced by the requirement that dissolves it — and the range warned against mixing
+
+Two crossing messages (p5's -107, 23:10:49; p4's -085, 23:11); both banked with the cross resolved.
+
+**(a) ⭐⭐ p5 read the artifact itself and found the real problem**: the positive's five lines carry **no arm
+label at all** ⇒ the artifact cannot distinguish (a) a single-gripper unit test from (b) both-arms-ran-one-
+printed ⇒ *"artifact が (a) か (b) かを区別できない、という事実の方が問題です"* — and so it REPLACED its
+question with the requirement: **arm-capable quantities carry the arm label at print time
+(seat error L … / R …); single-gripper configurations say "single-gripper" explicitly** — *"「どちらの腕か」
+を後から聞く形は、形式 13 が既に破れた後の質問です"* — §0#1 DUAL-ARM compliance at the instrument layer.
+Its range left standing meanwhile (conclusions invariant under either reading).
+
+**(b) ✅ p4's answer, source-settled in the crossing**: **6.67 = one arm, arm R** — `r6_positive.py:29`
+`T = "R"`; aim, servo, and finger commands all T-only; L never aimed (`:30-31`) ⇒ *"落としたのではなく
+存在しません"* (p18's inference confirmed at source, no longer an inference). ⛔ p4 owns the form-13 breach
+(a pair-capable quantity reported singular) and **the both-arms version is already running** (probe-class,
+same §217(c) classification) — the pair to follow.
+
+**(c) ⚠ p4's sharper caution, routed to p5**: *"7.44 は判定 run の反対腕の値で、私の静的陽性の対ではありま
+せん（別 run・別 cell）⇒ 私の対が出るまで 2 つを 1 つの幅に混ぜないでください"* — the 6.67–7.44 range spans
+**different cells** (the judged run = the old stiffness family; the static positive = the current cell) as
+well as different conditions; whether to annotate the standing range as a cross-run envelope, or hold for the
+pair, is p5's call — its own §14 already declares the conditions differ; the per-cell split becomes possible
+when p4's pair lands.
