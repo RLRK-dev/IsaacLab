@@ -1532,3 +1532,60 @@ the production env **the claws do not collide with the cable at all** ⇒ ⛔ **
 cable inside the コ — is void on the production path.**
 ⇒ ⭐ p11 judges this the single highest-value thing to check, and p18 concurs: it is cheap, it is a read, and it
 decides whether the approach works in the environment that actually matters.
+
+## 19. ✅ RESOLVED BY READING — the claws keep COLLIDE in the production env
+
+§18a's question — the highest-value item open in this session — is **closed, affirmatively, with no run.**
+`w2:p0`, `w2:p5` and `w2:p11` walked the chain independently; **p18 verified every link directly:**
+
+| link | measured |
+|---|---|
+| production clears COLLIDE on arm shapes whose label lacks `pad` | `newton_skill_env_base.py:1578-1583` |
+| `shape_label` **is** the MJCF geom name | `import_mjcf.py:693` — `shape_label = f"{label_prefix}/{geom_name}" if label_prefix else geom_name` |
+| unnamed geoms fall back to a **body-derived** name | `import_mjcf.py:597` — `f"{body_name}_geom_{geo_count}{'_visual' if just_visual else ''}"` |
+| production loads the LOCK asset | `test_newton_clip_routing.py:161` → `2f85_koshape.xml` |
+| claw geom names | `:116` `right_pad_f1ext`, `:117` `right_pad_f2ext`, `:157` `left_pad_f1ext`, `:158` `left_pad_f2ext` |
+
+⇒ ⭐⭐⭐ **All four claw names contain `pad` ⇒ `"pad" not in lbl` is False ⇒ the claws keep COLLIDE and enter
+`pad_shape_idx`.** ⇒ **The capture mechanism is ACTIVE in runtime code, not ABSENT-IN-CODE.**
+⭐ `w2:p0` closed the unnamed-geom case too: a nameless geom on `right_pad` becomes `right_pad_geom_N`, which also
+matches ⇒ **`:1580` and `:1392` agree even for unnamed geoms** — not by design, but because the importer's default
+already folds in what the other site adds by hand.
+⭐ `w2:p5` checked the queued upgrade: **newton 1.4.0 carries the same rule** (`import_mjcf.py:808`) ⇒ **the env7
+upgrade does not break this mechanism.**
+
+⚠ Limits carried forward, unabridged: this was **read, not executed** — no import was run and no label list
+observed (⭐ though `CLAUDE.md:198` asks whether the mechanism is ACTIVE in runtime code, and the chain closes at
+that level); it establishes only that **the claws collide with the cable** — ⛔ **the arm-vs-structure finding
+(§18) is untouched**; and ⛔ **whether the hold physically works is a separate, unverified question.**
+⚠ `w2:p5` also excluded a silent failure mode: `:1576` uses `getattr(proto, "shape_label", [])`, so a missing
+attribute would empty every label and drop **everything including the pads** to VISIBLE. Measured: newton 1.2.1's
+ModelBuilder **has** `shape_label`, so it does not happen here — ⚠ but the idiom would disable the whole mechanism
+**silently, by default rather than by exception**, if the attribute were ever renamed.
+⚠ `w2:p0` left one detail open honestly: the importer's default appends `_visual`, which also matches `pad`, so a
+visual-only geom on a pad body could keep COLLIDE. `add_ur5e_robotiq` passes `parse_meshes=False` so they may not
+exist at all — **unverified, and p0 asserts neither way.**
+
+### 19a. ⭐⭐ Two by-products, and the second changes how path checks must be done
+
+**(a) A name that contradicts its value.** `ROBOTIQ_STRIPPED_XML`'s value is `2f85_koshape.xml` — ⛔ the name
+reads *"stripped"*, i.e. no claws, while the asset it names **has the コ claws**. ⇒ ⭐ **Reading the name alone,
+one would conclude production has no claws.** Today's records-vs-fact shape, in an identifier.
+
+**(b) ⭐⭐ The claws are in physics but not in the FK/IK model.** `test_newton_clip_routing.py:7577-7579`,
+verbatim (p18 read it):
+> `ROBOTIQ_STRIPPED_XML = the コ-shape claw asset the mujoco physics build loads (test:975/980). The FK/IK model`
+> `loads the un-clawed 2f85.xml, but the コ claw is geom-only (no new body/joint) so wrist_3 kinematics --`
+> `hence the IK -- are identical; the コ f1ext claw tip (only in physics) drops EE_TO_PINCH_TIP_CLOSED below`
+
+⇒ ⭐ **Kinematics are identical, so the IK solutions are right.** ⛔ **But any geometric check run on the FK/IK
+model — clearance, interference, path margin — cannot see the claws.**
+⇒ ⭐⭐ This lands directly on `w2:p11`'s singularity/path work: **measuring clearance on the FK/IK side silently
+drops the claws' 5.00 mm protrusion.** ⇒ p11 adds it as a design requirement: **path checks must use the
+physics-side model.**
+
+⭐ `w2:p11` also reports the **same ABSENT-IN-CODE rediscovery** — it proposed the rule I then adopted — and notes
+its own version is the worse one: the three earlier rediscoveries sat *next to a line someone had read*, while
+this rule sits in **a file loaded into every session**. ⭐ And it points at the disposition template already in
+`RS71:55`: **audit → confirm ROBUST → record "not re-enabled"** ⇒ **`stem`/`foot` should ride that template; no
+new disposition needs inventing.**
