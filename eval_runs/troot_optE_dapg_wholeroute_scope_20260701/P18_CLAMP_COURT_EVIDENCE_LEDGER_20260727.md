@@ -4150,3 +4150,20 @@ until Rs disposes of pZ) or keep `IMPL-BUILDER` while doing verification (name c
 false as a p0-to-role binding** — a ✅ with its scope measured, per today's rule.
 ⭐ One constraint dissolved, one kept: the "wait for p11's design" hold was a *builder's* wait and does not bind
 verification; ⛔ implementation stays off (execution = p4).
+
+## 89. p12 ratified the WMSO-lane briefs — with its own collation, and one precision
+
+`w2:p12` read both briefs **as lane lead** and collated them against its node's on-disk state: **no corrections** —
+gate verbatim match (⭐ noting the brief cites by *path, not line number*, which is the durable form), design
+lineage (frozen v13 + v2.5.1, pin by content sha), Rs-exclusive acts, the four-seat structure, §0. It **re-verified
+two facts itself**: the D0 `:31-34` quote is accurate, and registry lines **41-42** carry `IMPL-BUILDER2` /
+`IMPL-VERIFIER2`.
+
+⭐ **One precision, banked**: **the registry binds ROLE NAMES, not pane IDs** — grepping the file for pane IDs
+returns **0** (p12's measurement). ⇒ "p14/p15 registered" is true **at the role-name level**; the briefs'
+`w2:p14` / `w2:p15` are **observed posted names**. ⇒ ⚠ **Guard against a future misreading**: when pane IDs swap
+again (they swapped wholesale today), the registration has NOT disappeared — the binding was never to the ID.
+No brief correction needed; the note prevents the wrong inference later.
+
+⛔ Unchanged: gate CLOSED, both panes waiting, p12 issues no implementation work, and **its two pending Rs items do
+not unlock impl**. ⇒ **All three readback loops are closed** (p4, p0, p12).
