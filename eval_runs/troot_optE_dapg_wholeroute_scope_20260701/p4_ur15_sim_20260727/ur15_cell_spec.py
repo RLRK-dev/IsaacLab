@@ -31,6 +31,8 @@ from __future__ import annotations
 
 import ast
 import math
+import os as _os_module
+from os import environ as _os_env
 import pathlib
 import sys
 
@@ -70,6 +72,11 @@ CLIP_FRICTION = tuple(_tc.MUJOCO_CABLE_TABLE_FRICTION)             # task_config
 # derived here from the quantity that does not depend on how the cable is cut up.
 
 CABLE_DENSITY = 1100.0          # task_config.py:138 verbatim "capsule volume x rho=1100"
+# ⚠ NOT a pure constant at runtime.  test_newton_clip_routing.py:928 rescales this from the
+# environment variable CABLE_BEND_STIFFNESS_OVERRIDE, so the value in task_config is what the
+# producer starts from, not necessarily what it runs with.  Same shape as the collision flag: a
+# name that reads like a fact and is actually a default.  self_check refuses to let this cell run
+# while that override is set, rather than quietly disagreeing with the producer.
 CABLE_BEND_EI = _tc.CABLE_BEND_STIFFNESS        # task_config.py:144 -- EI [N m^2], not a joint K
 CABLE_BEND_DAMPING = _tc.CABLE_BEND_DAMPING     # task_config.py:152
 CABLE_CONDIM = _tc.MUJOCO_CONTACT_CONDIM        # task_config.py:176
@@ -87,6 +94,28 @@ def cable_seg_mass() -> float:
     return (math.pi * r * r * L + (4.0 / 3.0) * math.pi * r ** 3) * CABLE_DENSITY
 
 
+def bend_ei_in_force() -> tuple:
+    """The EI actually in force, and where it came from.
+
+    p5's disposition for the runtime override: do not forbid the second source, declare it.  An
+    invisible second source becomes a visible one, which is the only version anyone can check.
+    """
+    raw = _os_env.get("CABLE_BEND_STIFFNESS_OVERRIDE", "")
+    return (float(raw), "CABLE_BEND_STIFFNESS_OVERRIDE") if raw else (CABLE_BEND_EI,
+                                                                      "task_config.py:144")
+
+
+def announce():
+    """Print the values whose source can move at runtime.  Call this at driver start-up."""
+    ei, src = bend_ei_in_force()
+    print(f"[cell] cable bend EI in force: {ei} N.m^2 from {src}"
+          f"{'   <- NOT task_config; the producer rescales it' if 'OVERRIDE' in src else ''}")
+    print(f"[cell] -> joint stiffness {ei / CABLE_SEG:.5f} N.m/rad over a {CABLE_SEG*1000:.0f} mm link")
+    print(f"[cell] cable {CABLE_N} x {CABLE_SEG*1000:.0f} mm, {cable_seg_mass()*1000:.4f} g each, "
+          f"{cable_seg_mass()*CABLE_N*1000:.2f} g total")
+    print(f"[cell] clip collision read from the env source: {CLIP_COLLIDE}")
+
+
 def cable_joint_k() -> float:
     """Bend stiffness of one joint [N m/rad] = EI / link length.
 
@@ -94,13 +123,13 @@ def cable_joint_k() -> float:
     MORE joints over the same cable, so each one has to be stiffer, not softer -- the opposite
     direction to the mass.
     """
-    return CABLE_BEND_EI / CABLE_SEG
+    return bend_ei_in_force()[0] / CABLE_SEG
 
 
 _ENV_BASE = pathlib.Path(_REPO, "thread_isaac_lab/envs/newton_skill_env_base.py")
 
 
-def _clip_collides_in_source():
+def _clip_collides_in_source(text=None):
     """Does the env build its clips with collision on, unconditionally?
 
     Read rather than transcribed.  A written-down True says what someone believed when they typed
@@ -115,14 +144,45 @@ def _clip_collides_in_source():
     So take EVERY assignment on `scene.shape_flags` -- the arm pass writes to `proto.` and is not
     this question -- and require all of them.
     """
-    tree = ast.parse(_ENV_BASE.read_text())
-    flags = [node for node in ast.walk(tree) if isinstance(node, ast.Assign)
-             for t in node.targets
+    tree = ast.parse(_ENV_BASE.read_text() if text is None else text)
+    parent = {}
+    for node in ast.walk(tree):
+        for child in ast.iter_child_nodes(node):
+            parent[child] = node
+
+    def creates_shape(node):
+        """Does this subtree build the shape whose flags are being set?"""
+        return any(isinstance(c, ast.Call) and isinstance(c.func, ast.Attribute)
+                   and c.func.attr.startswith("add_shape") for c in ast.walk(node))
+
+    def conditional(node):
+        """Is the FLAG conditional, as opposed to the whole clip being conditional?
+
+        Every one of these sites sits inside `if add_target_clip:` or its sibling, and those decide
+        whether the clip exists at all -- not whether it collides once it does.  Reading those as
+        conditionals says the env's clips might not collide, which is false and would be a loud
+        wrong answer.  So walk up only as far as the construction that made the shape: an `if`
+        between the two is a real guard on the flag; one above them both is a guard on the clip.
+        This is p5's "roll up one line" for the false positives.
+        """
+        if isinstance(node.value, ast.IfExp):
+            return True
+        cur, child = parent.get(node), node
+        while cur is not None:
+            if creates_shape(cur):
+                return False
+            if isinstance(cur, ast.If) and child in (cur.body + cur.orelse):
+                return True
+            cur, child = parent.get(cur), cur
+        return False
+
+    flags = [n for n in ast.walk(tree) if isinstance(n, ast.Assign)
+             for t in n.targets
              if isinstance(t, ast.Subscript) and isinstance(t.value, ast.Attribute)
              and t.value.attr == "shape_flags"
              and isinstance(t.value.value, ast.Name) and t.value.value.id == "scene"]
     return bool(flags) and all(isinstance(n.value, ast.Constant) and n.value.value == 0x6
-                               for n in flags)
+                               and not conditional(n) for n in flags)
 
 
 CLIP_COLLIDE = _clip_collides_in_source()   # clip design §6-A
@@ -373,6 +433,12 @@ def self_check():
             f"bindings have drifted apart.")
     # ⛔ `CABLE_N * CABLE_SEG == 0.600` is not a check on this module: both come from the same
     # SSOT, so the claim belongs where they are bound independently, which is the block above.
+    override = _os_env.get("CABLE_BEND_STIFFNESS_OVERRIDE")
+    if override:
+        problems.append(
+            f"CABLE_BEND_STIFFNESS_OVERRIDE is set to {override!r}, which the producer applies at "
+            f"runtime (test_newton_clip_routing.py:928). This cell derives its joint stiffness "
+            f"from task_config's {CABLE_BEND_EI} and would silently disagree with it.")
     seg_g = cable_seg_mass() * 1000.0
     if abs(seg_g - 1.1243) > 5e-4 and abs(CABLE_SEG - 0.015) < 1e-12:
         problems.append(

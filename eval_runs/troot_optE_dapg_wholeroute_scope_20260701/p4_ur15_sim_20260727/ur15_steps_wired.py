@@ -43,6 +43,7 @@ from ur15_cell_spec import (  # noqa: E402
 )
 import ur15_cell_spec as _spec  # noqa: E402
 
+_spec.announce()
 _unclassified = guard(__file__, strict=False)
 if _unclassified:
     print(f"[steps] ⚠ the cell-constant contract is not satisfied yet: {len(_unclassified)} names")

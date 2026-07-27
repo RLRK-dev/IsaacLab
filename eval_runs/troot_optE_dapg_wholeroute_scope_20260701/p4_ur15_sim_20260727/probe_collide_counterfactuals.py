@@ -13,20 +13,28 @@ the classes so the gap is on the record rather than in a claim.
 import ast
 import pathlib
 import re
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).parent))
+import ur15_cell_spec as _spec
 
 ENV = pathlib.Path("/home/rlrk/IsaacLab/thread_isaac_lab/envs/newton_skill_env_base.py")
 
 
 def predicate(text):
-    """The check as implemented in ur15_cell_spec._clip_collides_in_source, over supplied text."""
+    """The module's own check, run over supplied text.
+
+    It used to be a copy of the check living here.  That is the failure this whole day has been
+    about -- a second copy agreeing with itself while the original moved -- and it bit here too:
+    the copy went on reporting four misses after the module had closed them.
+    """
     tree = ast.parse(text)
-    flags = [n for n in ast.walk(tree) if isinstance(n, ast.Assign)
-             for t in n.targets
-             if isinstance(t, ast.Subscript) and isinstance(t.value, ast.Attribute)
-             and t.value.attr == "shape_flags"
-             and isinstance(t.value.value, ast.Name) and t.value.value.id == "scene"]
-    return len(flags), (bool(flags) and all(isinstance(n.value, ast.Constant)
-                                            and n.value.value == 0x6 for n in flags))
+    sites = [n for n in ast.walk(tree) if isinstance(n, ast.Assign)
+             for tgt in n.targets
+             if isinstance(tgt, ast.Subscript) and isinstance(tgt.value, ast.Attribute)
+             and tgt.value.attr == "shape_flags"
+             and isinstance(tgt.value.value, ast.Name) and tgt.value.value.id == "scene"]
+    return len(sites), _spec._clip_collides_in_source(text)
 
 
 src = ENV.read_text()
