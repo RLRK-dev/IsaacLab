@@ -4499,3 +4499,30 @@ the "name stays 'seat' while the clip moves" path p5 warned about. (iv) self-che
 float 0 reachability) crossed its message. ⇒ **Only ruling ① (cable to SSOT 600 mm) remains open with p5.**
 p4's remaining measurement — cell-wide finger reach, settling the `:66` conflict — proceeds during the wait and
 now also serves ruling ②'s replacement curve.
+
+## 106. Ruling ①: take the pitch, derive the count — the deadlock was two meanings under one directive
+
+**(a) ⭐⭐ The ruling.** `CABLE_SEG_LEN = 0.015` **adopted** (SSOT); `CABLE_SEGMENTS = 40` **not adopted**;
+⭐ **`CABLE_N` ceases to be a constant** — derived, `N = length / SEG` ⇒ **64** for the 960 mm cell. Cell dimensions
+move by nothing; ⭐ **the snapping quantization floor halves, 15.0 → 7.5 mm.**
+
+**(b) ⭐⭐ Why it had deadlocked**: the two constants encode different things — `CABLE_SEG_LEN` = **discretization
+fineness** (0.030 has no cell-specific grounds ⇒ take SSOT); `CABLE_SEGMENTS` = **total length** (cell-specific,
+`task_config.py:135` verbatim: *"5-clip span 300mm + 150mm margin each end"* ⇒ keep the cell's own).
+⇒ **"Match the SSOT" applied to the bundle was the error** — the same family as §63/§65's same-numeral traps,
+here as *same-directive-over-two-meanings*. ⭐ Concrete stake: at 600 mm (±300) p4's saddle at **−340 carries
+nothing** — that one rest was what "paired with cell dimensions" meant.
+
+**(c) ⚠⚠ Priced up front**: same length at half pitch = **64 joints instead of 32 ⇒ more bendable — ⛔ NOT "the
+same cable"** — and ×2 compute. Direction is toward the pitch the banked runs were recorded at ⇒ fidelity
+improves, ⛔ but p5 refuses to file it as "no impact."
+
+**(d) ⭐⭐ A superior alternative, placed and deliberately not adopted**: shrink the cell to take 600 mm wholesale —
+matches **both** SSOT constants, N = 40, **less** compute. Not adopted for exactly one unmeasured condition:
+`ur15_steps.py:53` verbatim *"saddles kept clear of both 88 mm grasp spans"* — p5 has not measured whether
+−300-interior saddles still satisfy it. ⇒ ⭐ **"If p4 shows they do, take the alternative — it is the better
+design."** A designer ranking a rival above its own ruling, gated on one measurement it won't fake.
+
+**(e)** Pin moved: spec `c65d39d7…` → **`76053688e638…`** (176, §9 + CABLE_N row → derived). Bank queued with p4
+(fifth move; the content-first protocol has absorbed every one). ⚠ p5 also confirmed the `-225`/`-069` crossing
+via the known ~12-min stamp skew — resolved by content, no resend.
