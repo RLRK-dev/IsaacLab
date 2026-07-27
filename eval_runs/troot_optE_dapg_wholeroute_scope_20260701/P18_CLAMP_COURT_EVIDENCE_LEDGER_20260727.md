@@ -6453,3 +6453,42 @@ limit hits 0/79; three fixed step-counts converted to seconds (4000 steps = 8 s 
 new); cost ≈ 3197 steps/s ⇒ ~1 min integration per 40 s of procedure. **(e) ⛔ The one open name**: FLOAT_Z is
 frozen by **two contradicting p5 rulings** — §6.4j "move to spec" vs clip design §4 "refuse supply until p5
 decides" ⇒ routed to p5 for resolution. The lane's remaining static work = that resolution + p0's delta.
+
+## 192. FLOAT_Z resolved: the spec owns a provisional zero — and withholding was the defect
+
+From p5's -095 (21:33:58); both pins verified here (clip `54a07c62d7…`, spec `c61b03c2e7…`; +5/−0 and +10/−0
+since `691648d445`; the ownership text read at spec `:343-:347`, new §6.4l).
+
+**(a) ⭐⭐ The one-line ruling: §6.4j lives — the spec owns FLOAT_Z = 0.0**, annotated a **fail-closed initial
+value** (⛔ not settled; the only reason to raise it = arm reach, clip doc §10-4). **(b) ⭐⭐ The two rulings
+were never truly opposed**: "the spec owns it" and "the value is unsettled" are compatible — *"a single source
+can hold a provisional value; write the provisionality into the source."* ⛔⛔ p5 names its own defect: **"refuse
+supply" was wrong — withhold the value and the driver invents one, creating a second source = the exact failure
+the spec exists to prevent.** ⭐⭐ General form: **never remove a value from the single source because it is
+unsettled — the moment it is absent, downstream invents; unsettledness is an annotation, not an absence.** The
+retraction landed in BOTH docs (its -093 rule applied: never message-only). **(c) ⭐ The 600 mm ruling survives
+the stiffness contamination by its own construction**: the conclusion used only the **ratio** (380 vs 299.2),
+same direction under either scaling — re-derivation is owed on the improvement **magnitude** (49 mm / 38%),
+not the ruling. *"Having narrowed the claim to a ratio is what protected the ruling."* **(d)** Routed: p4 =
+bank the two pins + implement FLOAT_Z spec-ownership ⇒ **name-rule remainder → 0**.
+
+## 193. A formula enforced from one side — my EI note comes back as a hazard in the seg-length ruling
+
+From p11's -087 (21:34), relay to p5/p4 requested; pins verified here (@ `186f7ea349`, doc sha MATCH
+`6b7b16d87f…`).
+
+**(a) ⭐ The EI note independently re-derived from the SSOT** (task_config `:144` EI 0.005 / `:136` SEG 0.015 /
+`:146` K = EI/SEG ⇒ 0.33333): K-ratios (2.78/16.67) and EI-ratios (1.39/8.33) are *"the same three cables in
+different quantities — different numbers pointing at the same thing"* — the inversion of the day's
+same-numeral trap. **(b) ⭐⭐⭐ And it exposes a gap in p11's own §27.2.79** (which had ruled 0.030→0.015 as
+instrument-only: halving = mitigation, interpolation = the fix): EI = K×L ⇒ halve L with K held and **EI
+silently halves** (0.0036 → 0.0018). ⛔ The retired drivers HARDCODE K (reaim `stiffness="0.12"`) with SEG a
+separate constant — no co-variation; the SSOT derives (`:146`) and auto-balances; **the wired module derives
+too (`cable_joint_k()`) ⇒ the current path is safe** — the hazard binds any hardcoding driver: *"drop the
+adopted 0.015 into one and the cable's bending stiffness silently halves."* **(c) ⭐ Self-return to its own
+court**: EI halved ⇒ sag up ⇒ its 5.55° grows ⇒ the band composition (§27.2.82) is touched ⇒ §27.2.79
+supplemented: **change the discretization ⇒ convert K to the derivation EI/L** — physics invariant, only the
+quantization halves; hold K and instrument + physics move together, inseparable. ⭐ Its 8th general form today:
+**"where two quantities are bound by a formula but only one is written as a constant, the formula is enforced
+from only one side."** **(d)** Credit precisioned at p11's request: the two-value stiffness divergence = p11's
+find; the five-file head-note audit = p4's own read (§191(c) so allocated).
