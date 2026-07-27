@@ -4124,3 +4124,15 @@ Rs, single word after the revised proposal: **「起動」**. Drafted per the la
   design axis p16; ⛔ gate CLOSED 継続 ⇒ both waiting, no self-start.
 Node registration (T-ROOT-UR15-Cell-Clamp-Route-20260727 案) and cell-constant single-sourcing dispatched to p6
 and p5 respectively. Any of this reverts on one word from Rs.
+
+## 87. Readback: p4 accepted the brief — and widened the CLIP_H evidence while doing it
+
+`w2:p4` read the brief (sha256 `1479828c1dec…`, 43 lines, `124b8cad70`), **no objection, procurement rules applied
+immediately.** ⭐ It took the CLIP_H split **without accepting my number** — opened the files itself and **widened
+the finding**: not 3 files but **5** — `ur15_cell.py:49` = 0.070 / `ur15_route.py:47` = 0.070 /
+**`ur15_steps.py:57`, `ur15_steps_reaim.py:55`, `ur15_steps_c1seat.py:57` = 0.026** ⇒ the 0.026 side has three
+scripts, including the judged driver. ⇒ **The verification habit the brief encodes was exercised on the brief's
+own contents.**
+
+**Lane state**: implementation stopped, **0 runs**, waiting on p5's four rulings (clip geometry / seat Z / contact
+stiffness / stand height). ⇒ ⭐ **The critical path of the whole UR15 lane is now p5's design.**
