@@ -3851,3 +3851,79 @@ sha / spec = not reflected** ⇒ **do not read the three as one state.**
 ⚠ **p6 names its own type**: it had **verified `git status` was clean** and then **wrote "an unrecorded record"**
 ⇒ ⭐ **the measurement was right; the wording collapsed a state it had just measured apart.** ⇒ **Sixth pane to
 self-report today.**
+
+## 76. ⭐⭐⭐ The two numbers reconcile — and the answer qualifies the success
+
+**`w2:p5`, `w2:pB`, `w2:p0` and `w2:p4` reached this independently.** The asset carries
+`:166 <exclude body1="right_pad" body2="left_pad">` (from banked LOCK `:176`), and **`exclude` takes a BODY pair**
+⇒ ⭐⭐ **every geom pair under those two bodies is excluded — the opposing claws AND the opposing pad1 faces.**
+
+⇒ ⛔⛔ **In sim nothing stops the jaws mechanically. The only thing that stops the close is the cable.**
+⇒ ⭐⭐⭐ **7.36 < 10.16 was never a contradiction: 10.16 is the HARDWARE stop and it cannot fire in sim.**
+**Two correct numbers from different worlds.** ⇒ **§68's tension is closed, and it needed no new measurement.**
+
+⭐ **p4 measured the mechanism directly** (14.00 model, cable-free): ctrl 219 ⇒ pad1 gap **10.16**; ctrl 236 ⇒
+**3.80**; claw gap flat near **−2.5** from ctrl 229 ⇒ claw box half-size 1.2 × 2 = **2.40 is the instrument floor**
+⇒ ⭐ **the successful run's −2.45 is the floor, not the overlap depth.** ⇒ face separation 7.36 = jaws travelling
+toward their no-load destination of 3.80, **stopped by the Ø8 cable ⇒ 0.64 mm compression.**
+
+⭐⭐⭐ **`w2:p0` supplied the sentence that matters most.** The judged predicate prints at `:906` — verbatim
+*"needs both pads AND a 2-8 mm face gap"*:
+
+| | face gap | same predicate |
+|---|---|---|
+| sim | 7.36 / 7.44 | **inside [2, 8] ⇒ True** |
+| hardware | 10.16 | **outside ⇒ False** |
+
+⇒ ⭐⭐ **The clamp verdict passes in sim precisely because sim has no claw stop.**
+⇒ ⭐ **The run's own log printed `NEGATIVE: non-conservative for transfer`.**
+⇒ ⛔ **This says nothing about Rs's verdict.** *What happened in sim* and *what transfers* are different questions,
+and physical validity is Rs's court. ⚠ Conditions p0 states: (i) 10.16 is the true hardware stop (ii) the band is
+[2,8] as printed — (ii) sits under the same provenance hold, since `:906` is not the file that wrote that log.
+
+⚠⚠ **And `w2:p4` surfaces a quantity the design side should see**: at CLAMP 236 the **opposing claws of the same
+hand interpenetrate ≥ 2.6 mm** (true depth unknown — the instrument floors). ⇒ Against Rs's standing principle
+**「sim は現実世界だ」**, a mechanism that requires solid parts to pass through each other is a design-side matter.
+⛔ p4 does not judge it; ⛔ nor do I. **Geometry is Rs's court.**
+
+⭐ **p5 found the explanation had been in its own document all along**, `:86` verbatim: *"sim で 4.0 mm に到達できる
+のは、asset が claw-claw の contact を exclude しているため ⇒ sim だけの配置。"*
+⇒ ⭐⭐ **Second time today the answer was already written down** (the first: `GD-KoShape-Finger.md:95`, where five
+panes re-derived from geometry what one line already said). ⇒ ⭐ **When numbers refuse to reconcile, pull the known
+caveats out of your own document before measuring anything.**
+
+## 77. ⛔⛔ My prediction is measured false — the angle does not disappear, and the wider span does not reach
+
+`w2:p4` measured both, and both go against what I carried:
+
+- ⛔ **34.4° did NOT disappear.** Start-pose IK right-arm roll is **34.4° at 88 mm AND at 176 mm.**
+  ⇒ ⭐ **Do not put "34.4° disappears" into p11's recomputation inputs. The only changed input is the 14.00 mouth.**
+  ⚠ Scope: start-pose roll only; whether it is the same quantity as the reach analysis's 34.4° is p11's court.
+- ⛔ **At 176 mm the right arm does not reach at all**: tool error **717.1 mm**, joints 1 and 3 **saturated** at
+  their torque limits (433 / 204 N·m). Control at 88 mm: **2.1 mm, no saturation.**
+  ⇒ ⭐ **#45 is not merely "authorised but unimplemented" — it is unreachable in this cell.** ⚠ Scope: this driver,
+  this base layout, this start pose. ⚠ The 176 run did not finish (stopped at STEP 2).
+
+⇒ ⛔ **I stated the prediction twice (§63, §74) and softened it once. It is now measured false; §74 already
+downgraded it from a state to a prediction, and this retires the prediction.**
+⭐ **No fallback fired in p4's run** (4 collision-free) ⚠ but that is p4's driver, a different file from the `:666`
+one, so §64(b) stays open on its own provenance.
+
+## 78. Series state, a second Rs verdict, and the column showing up in the measurements
+
+⛔ **The series is NOT complete** (p4). Rs, verbatim: **「クランプできたので次のステップ、C1ケーブルくらんぷまで
+進めて。」** ⇒ back to the 88 mm configuration, running toward C1. ⇒ **env7 continues to wait.**
+
+⚠ **A second Rs verdict**: `ur15_nosing.mp4` = **「クランプできているがアームが1本だけ」**. p4's log agrees — the
+left arm sat **1388.0 mm** from mouth to cable, **−1523 mrad** off command, and ⭐⭐ **−1.3 mm to the column, i.e.
+INSIDE it.** ⇒ ⭐⭐⭐ **The column blindness established at §58 and §64(b) has now appeared in a measurement**: the
+pose scoring weighed seat error and singularity but **not reachability**, and the arm came to rest inside a solid.
+⇒ Cause = the hard singularity rejection; **that setting is withdrawn** (p4).
+
+⭐ **`w2:pC` annotated all three of its banked records** (+39 / −0, `665527e8cb`), recording that its figures are
+the 10.00 mouth's and that **its visual leg is scoped to that model, not to the current design.** ⚠ It reports two
+shared-tree hazards from the attempt: another pane's file was staged (handled with pathspec), and `-m` placed
+after `--` was read as a pathspec.
+⭐ **p4 banked the newer pin** `ae8696772a84…` — ⛔ **not the one I named**, because p5 moved again after I sent it;
+p4 verified append-only (`+125 / −0`) before banking. ⭐ **Third pin move today; content is the pin, the version is
+only a collation note.**
