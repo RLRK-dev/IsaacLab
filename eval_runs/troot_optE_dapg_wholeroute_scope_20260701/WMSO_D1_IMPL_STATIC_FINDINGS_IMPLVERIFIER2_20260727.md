@@ -1,5 +1,46 @@
 # WMSO D1 実装 — 静的読解による findings（IMPL-VERIFIER2 / w2:p15）
 
+## ⭐ 追記（2026-07-27 20:0x JST）— Finding B は「候補」→「実在」に確定
+
+⛔ **本書は依然として verdict ではありません**（下の §「これは verdict ではありません」は有効）。⛔ **修正は行っていません**（fix は gate 開放後に p14）。⛔ **LEDGER / status / planning 面も無変更**。⛔ **原文は 1 文字も消していません**（本節は append のみ）。
+
+**何が変わったか**: 下の §Finding B は「候補（未確認）」と書いてあります。**その記述は、書いた時点（読解 2026-07-27 14:0x–14:2x JST）の私の証拠としては正しいまま**ですが、**その後 B は確定しました**。原文を残したまま、確定の事実をここに追記します。
+
+- **一次確定 = p12**（p18 経由 relay `-343`。私の pane では 20:00:25 JST の測定より前に受信）: pattern 文字列のみを standalone 評価して `"a"*64 + "\n"` → True。精密化 = 通るのは**末尾改行 1 個のみ**、`fullmatch` で直る。
+- **独立再測 = 私（p15）**: relay の数値を根拠にせず自分で測り、**一致を確認**。
+
+### 私の測定（p12 発の read-only 測定則の 3 条件に従う）
+
+- **① command / interpreter**: `/usr/bin/python3` に heredoc で stdin 供給（`isaaclab.sh` は不使用）。pattern は `contracts.py` から**機械抽出**（転記していない）→ 抽出値 `^[0-9a-f]{64}$`
+- **② rc = 0**。⚠ その直前に **rc=1 の失敗が 1 回**あります（shell の quote による `SyntaxError`。測定値は出ていません）
+- **③ 副作用**: import は stdlib `re` のみ・**project module は import せず**・file 書込 0・sim / GPU / network 不触
+- **対象版**: `contracts.py` = `be24c30eda1b2907a872d50bccc7b668253d034f12256f053a0e3ee3d374c56c` — **追記時（2026-07-27 20:02:45 JST）に再測して同一を確認**。本書が引用する他 4 file も同時刻に再測し、全て同一でした（cached な接地を使っていません）。
+
+| ケース | `match()` | `fullmatch()` |
+|---|---|---|
+| 64 hex | True | True |
+| **64 hex + 改行 1 個** | **True（欠陥）** | **False（fix が効く）** |
+| 64 hex + 改行 2 個 | False | False |
+| 64 hex + 改行 + 文字 | False | False |
+| 63 hex / 65 hex / 大文字 / 空文字 | False | False |
+
+⇒ 「通るのは末尾改行 1 個のみ」も「`fullmatch` で直る」も、**私の測定で成立**します。
+
+### Finding A について
+
+p12 が識別可能な 5 綴りの query で独立確認 ⇒ **集合等値検査は不在＝実在・潜在**。
+
+### 私の見積り誤り（記録として残す）
+
+私は B の確認を「**実行が要るから保留**」としましたが、**pattern 文字列の評価だけで足りました**。実行の範囲を過大に見積もっていた、ということです。p12 発の一般則（read-only・in-memory・file / sim / GPU / network 不触の測定は CLOSED に当たらない。条件 = command と interpreter の明記・rc の明記・import 副作用の事前確認）で解消済みです。
+
+### 追記の許可と sha
+
+p18 の custody 裁定（relay `-348`。私の pane では 20:02:45 JST の再測より前に受信）= **追記して新 sha を宣言**。
+**旧 sha** `de3cad3832aabf06e32b013080223c3b596d04de40aef4b5b41643b6f497237c` → **新 sha は本追記の bank 後に p18 へ 1 行で通知**します。
+
+---
+
 ## ⛔ これは verdict ではありません（条件①）
 
 本書は **判定（PASS / FAIL / PASS-CLOSE）ではなく、材料**です。理由:
