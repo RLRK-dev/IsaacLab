@@ -920,3 +920,46 @@ against** in this implementation.
 ⇒ ⭐ This is the banked lesson *a recovery mechanism must respect the same constraint on its path, not just its
 endpoint* landing on a new surface: endpoint-consistency ≠ path-consistency, and the unguarded interval is
 exactly where the disturbance lives.
+
+### 10g-2y. ⭐⭐⭐ The precise mechanism is a third form — and it invalidates one more number I relayed
+
+`w2:p0` read the same source and refined it. `cable_at` is **neither a fixed index nor the link in the jaw**: it
+is an **argmin over a frozen x, re-evaluated every call** — `:529 argmin(|C[:,0] − x|)`, with x frozen at setup
+(`:535`, `GL[0]`) and positions live. `:842` feeds it to slot-vs-cable, and `:849`'s *"cable moved"* reuses the
+same value.
+
+⇒ ⭐⭐⭐ **When the cable slides in x, the argmin jumps to a different link, both prints move discontinuously —
+and it is reported as "the cable moved". What moved is which link is being measured.**
+
+⭐ The magnitude fits: `CABLE_SEG = 30 mm` (`:47`) against L's 25.1 mm drift print ⇒ **less than one spacing** ⇒ a
+single jump suffices. ⛔ p0 marks this as consistency, not proof — a genuine 25 mm motion prints the same number.
+
+⛔⛔ **And the discriminating quantity is computed and then discarded.** `cable_at` returns the index (`:530`);
+`:842` throws it away as `_ci`; `aim_cable[t]` stores position only (`:749`, `:768`). ⇒ Comparing the aim-time
+index with the grasp-time index separates *"the cable moved"* from *"the measurement jumped"* **in one step**, and
+**both indices exist at that moment**. ⇒ ⚠ **One grade worse than §10c**: there a quantity was computed, printed,
+and left out of the verdict; here it is computed and thrown away. ⛔ Existing logs cannot settle it — neither
+index was ever emitted.
+
+⛔⛔ **A second number I relayed is biased.** The same output block contains **two different "nearest cable link"
+computations with different references and different corrections**:
+
+| site | reference | link position used |
+|---|---|---|
+| `:842` | **frozen x** | **segment centre** ⭐ corrected |
+| `:823-824` | **pinch** | **body origin** (`d.xpos[b]` raw) ⛔ uncorrected |
+
+And `cable_at`'s own docstring states the size of the difference, verbatim: *"A link's body origin is the START of
+its capsule … targeting the origin misses by ~15 mm"* — half of a 30 mm segment is exactly 15.0 mm.
+
+⇒ ⭐⭐⭐ **The correction is written down, its magnitude is documented, and it is applied at one of the two sites.**
+⇒ ⛔ `:860`'s *"nearest cable link cab18 at 33.5 mm from the pinch"* — which I put in §10g's table as evidence of
+internal contradiction — **carries that ~15 mm bias.** That row weakens; the rest of the table (contacts, fingers
+blocked, face gap at ctrl 255) is unaffected.
+
+⚠ p0's scope, preserved: **source only**, log not opened, no run ⇒ **whether the jump actually occurred is not
+established.** Mechanism and two checks offered; no verdict.
+
+⇒ ⭐ **The pattern of the day, three times in one file:** a quantity computed and printed but absent from the
+verdict (the slot term); a quantity computed and discarded (the link index); a documented correction applied at
+one of two sites. **Every time, the information needed was already there and was not used.**
