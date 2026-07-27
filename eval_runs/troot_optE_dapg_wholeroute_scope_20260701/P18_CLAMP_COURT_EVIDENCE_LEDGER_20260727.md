@@ -7073,3 +7073,35 @@ negative readings. **(d) ⭐ The probe failed loudly, and that is why it was cau
 its header above solve_ik ⇒ NameError ⇒ *"測定でなくエラーでした… 落ちたので気づけた形です（黙って 0 を返す
 作りなら気づけませんでした）"*. **The instrument commissioning is COMPLETE**; the lane's remaining
 verification = p0's final round.
+
+## 219. Which quantity is the 6.67 — answered by the producing artifact, not by preference
+
+From p11's -097 (22:44), an inquiry into MY -443 phrasing; resolved here.
+
+**(a) ⭐ The question, properly refused as a coin-flip**: my -443 line 「背板換算が…実測値を返した（CLAMP 後
+6.67mm）」 reads two ways; p11 declined to decide and supplied the arithmetic instead — Reading A (6.67 =
+backplate ⇒ converted claw −3.54, below the −2.6 saturation floor ⇒ the saturation story stands; R6① true) is
+the only internally consistent one; Reading B (6.67 = converted claw ⇒ backplate 16.88 = "nearly open jaws")
+contradicts a clamp. **(b) ✅ The producing artifact settles it**: `r6_positive_result.txt` verbatim —
+"[pos] CLOSED: **backplate 6.67 mm** (floor 18.19)" ⇒ **6.67 = 背板間**; §218(a) already carried it correctly;
+the loose phrase was my -443's. ⭐ Mechanism, stated precisely: **the reading never leaves the backplate
+domain — the offset is folded into the FLOOR** (18.19 = 2r + offset), so nothing is converted at read time;
+the implied claw gap (−3.54) is sub-saturation, exactly as reading A computes. **(c)** p11's scope line kept:
+*"陰性 3 種 False は識別性の証拠になりますが、陽性 1 例は分布ではありません"* — one positive is an existence
+proof, not a distribution.
+
+## 220. The range pre-registered before it can split — and the doc frozen while it is being verified
+
+From p5's -103 (22:44:40); zero requests.
+
+**(a) ⭐⭐ The two-value split caught at its entrance**: achieved clamp backplate = **7.36** (the successful
+clamp run) vs **6.67** (today's static positive) ⇒ Ø8 compression **0.64 vs 1.33 mm ≈ 2×** ⇒ *"達成 clamp は
+1 つの数ではありません"* — not a contradiction (different run; free vs held), ⛔ but citing "THE compression"
+in the singular erases one of them — the entry point of the day's same-quantity-two-values pattern,
+pre-registered as a RANGE before any surface diverges. **(b) ⭐ The deferral discipline**: its own §12-1 holds
+7.36 as a singular — ⛔ **deliberately not fixed now**, because it is an input to p0's final round ⇒ rewritten
+as a range AFTER the round; the representative value chosen only once conditions are matched. **A surface
+under verification is not edited by its owner mid-round.** **(c) ⭐ The observation (not a ruling)**: 1.33 mm
+compression is consistent with §12-6 — with claw-claw contact excluded, **only the cable stops the jaws**, so
+the achieved gap rides cable stiffness and push force and varies per run ⇒ *"幅が出たこと自体が その機構の
+徴候です."*
