@@ -370,8 +370,57 @@ Relayed verbatim by `w2:p4` (⛔ p4's relay of Rs, not p4's reading):
 the goal is met) is right **about capture**, but the state Rs calls clamped appears to be **the compression side**.
 ⛔ p18 does not decide this; the predicate is p11's court and the final call is Rs's. The verbatim is placed on
 the branch, nothing more.
-⇒ ⚠ Separately, "tightening the top and bottom makes it *harder* to clamp" reads against **option B** (reducing
-claw protrusion) from the mechanism menu. Also placed, not decided.
+⛔⛔ **I attached that verbatim to the wrong axis, and `w2:p11` returned it.** I wrote that "tightening the top
+and bottom makes it harder to clamp" reads against **option B** (reducing claw protrusion). It does not:
+
+| Rs's phrase | axis | current |
+|---|---|---|
+| 「上下」 = the claw slot inside **one** pad | **pad-local z** | 10.00 mm |
+| 「爪の突出」 = backplate front face → claw tip | **y (jaw closing)** | 5.00 mm/side |
+
+⇒ ⭐ **Both of Rs's sentences are about z. Neither touches the y protrusion.** ⇒ ⛔ **Option B is neither endorsed
+nor rejected** and remains under §0#4 LOCK, in Rs's court. What Rs did rule out explicitly is **narrowing the z
+slot**.
+
+⚠ Worth stating plainly: **§3 of this very file is my own warning that two ~10 mm quantities live on orthogonal
+axes** — and I then conflated the same two axes, in the same court, two hours later. Raising a hazard is not the
+same as being immune to it.
+
+### 10a-2. `w2:p11` retracts its capture-basis ruling, and places the sim/real split without asking me to judge it
+
+⭐ **p11 retracted the ruling as a *target*, keeping the part that is true:** the clearance-capture state does
+exist geometrically (y 2.16 mm, z 2.00 mm at the stopping point) — ⛔ **but it is not what Rs calls clamped.**
+p11's own words: *"I mistook 'it exists' for 'it is the goal'."* ⇒ The acceptance predicate goes on the
+**contact + compression** side, which makes `w2:p4`'s repaired predicate the right *shape*.
+
+⭐⭐ **And p11 resolved the tension I was preparing to escalate, correctly and without over-reaching:**
+
+- **In sim**, the pad-pair `exclude` means the two pads never collide ⇒ the jaw travels to the cable and the
+  backplates **can** compress Ø8 ⇒ **it behaves exactly as Rs describes.**
+- **In real hardware built to this geometry**, the claws meet at backplate gap 10.16 mm and the backplates fall
+  **2.16 mm short** of the cable.
+- ⇒ ⭐ **Not a contradiction — different substrates.** p11 notes physical validity is Rs's exclusive and that it
+  holds **zero** data on real claw stiffness or deflection, so it argues nothing and asks nothing.
+
+⇒ ⭐⭐ **The consequence is mine to state, and I state it: any clamp success measured in this sim is
+NON-CONSERVATIVE for transfer.** The sim is *easier* than reality here, because the claws pass through each other
+where real ones would jam — and the asset says so in its own words (`2f85_koshape.xml:173-175`: the exclude
+exists to *"Prevent claw-claw self-collision jam at the scripted close … the protruding コ claws f1ext/f2ext can
+overlap at GRIPPER_CLOSE_QPOS"*). ⇒ Per §運用15, a non-conservative PASS requires high-fidelity or hardware
+confirmation before transfer. ⛔ This tags the evidence; it does not question Rs's ruling about the real
+mechanism, which is Rs's to make.
+
+### 10a-3. A non-arbitrary lower bound already exists
+
+`w2:p4` flagged its own 2.0 mm lower bound as neither measured nor designed. ⭐ `w2:p11` supplies the designed
+value: `task_config.py:277` verbatim — `FINGER_CLOSE_POS = 0.002 # 2mm gripping (gap=4mm < cable 8mm → 2mm/side
+compression)` ⇒ **design full-close = 4.0 mm face separation**. Paired with the upper bound 8.0 mm (Ø8, `:137`),
+**the design's own band is [4.0, 8.0]**.
+
+⇒ Choosing 2.0 means *allowing 2.0 mm deeper than the design's full close* — ⛔ which needs its reason and its
+amount written down. p11 recommends 4.0; the predicate's owner decides, and that seat is vacant (§10).
+⚠ Note it changes no verdict here: L 6.81 and R 5.68 both sit inside [4.0, 8.0]. **What decides R is the surface
+problem in §10b, not the band.**
 
 ### 10b. ⛔⛔ The repaired predicate still has a hole, and `w2:pB` measured it
 
