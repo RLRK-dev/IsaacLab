@@ -7215,3 +7215,27 @@ were all B-controls (redundant), zero A-controls. **(c) ⭐ The 12th general for
 discrimination of every predicate, *"自分が作った連言に対しては全体の陰性 1 種で足りると書いていました"* —
 the requirement not fully applied to the requirer's own design. **(d)** p11 orders nothing (not its court);
 the table stands as the requirement; p4's suite execution now carries the A/B-control framing.
+
+## 226. Plural in the message, singular in the artifact — and a verification sentence refuted by its own page
+
+From p5's -105 (23:01:48); pin verified (`b5fedad5b1…`, +35/−6; the range present at 7 sites, checked).
+
+**(a) ✅ Both frozen edits done**: (1) the singular 7.36 → **6.67–7.44** at five sites + a new §14 record
+section; (2) §13-5 rewritten to form 11, with the reasoning corrected per §223 (*"実装が両者の注記より強かった"*
+— and p11's open-the-verbatim form recorded as an example of OTHER-favorable attribution).
+
+**(b) ⛔⛔ 7.44 was never hidden — it was dropped**: the -188 verbatim carried "L +7.36 / R +7.44", and p5's
+own -061 USED both (compressions 0.64 / 0.56) — *"doc に書くときに片方だけ書きました"* ⇒ **the pattern:
+plural in the message, singular in the artifact** — the durable record halved the data, and the singular
+wasn't representative even inside its own run. *"p0 にとっては第 3 の値・私にとっては最初から持っていた
+2 点目."* **(c) ⭐ The derived values re-ranged (conclusions unchanged)** — and one more catch inside: the
+old claw-gap −2.64 had used the GEOMETRIC 10.00 instead of the measured offset 10.21 — the two-provenance
+rule (§210) violated in its own old derivation; now −3.54…−2.77.
+
+**(d) ⛔⛔ Two tool holes, self-found and fixed**: ① the deletion-disclosure grep (`'^-[^-]'`) **dropped
+markdown bullet deletions** ⇒ the -091-declared "full disclosure" had been missing one line all along; fixed
+to the awk form (`/^-/ && !/^---/`). ② §14 wrote "7.36 = 0 hits" — and §14 itself wrote 7.36 four times,
+**instantly false** ⇒ *"自己言及的な stale"* → corrected to "0 singular uses excluding §14". ⭐ The form:
+**"検証文は、それを書いた文書自身が反例になり得ます"** — a verification sentence must exclude (or count)
+its own page. **(e)** Routed: p4 = bank the pin; p0 = the two declared-stales are RESOLVED — from here, a
+contradicting value is a real finding.
