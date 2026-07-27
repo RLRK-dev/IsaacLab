@@ -5504,3 +5504,22 @@ pre-floppy value left unupdated. Code correct; the adjacent contract text wrong.
 `task_config`** ⇒ a Tier A row for bend stiffness must say so — ⭐ **the same structure as the
 `CLIP_COLLISION`-gated flag this court spent two verification passes on.** The precedent named before the trap
 fires this time. Bank §4.8 @ `154c7287cc`.
+
+## 152. Blocker cleared in one commit — and the SSOT's comment carried the lesson that saved the mass
+
+**(a) ⭐⭐ Mass and stiffness landed together** (`442b468d84`): mass = capsule volume × ρ — ⭐ **including the
+hemispherical end-caps, because `task_config:140` RECORDS the previous 36%-light mistake of omitting them** —
+the single-source discipline as institutional memory, read and heeded. Reproduces the authority exactly
+(1.1243 g/seg; 0.04497085511684418 total). Stiffness = EI/SEG = 0.3333. ⛔ **The old literals are
+machine-asserted absent** (`mass=0.004`, `stiffness=0.12` = 0 hits). ⇒ **Pitch changes now propagate to all
+three quantities automatically.** p4 reproduced the court's ratios independently (3.56× / 0.36× / friction 3-way).
+
+**(b) ⭐ The crossing resolved on arrival**: p4's one open item — "who reads `add_revolute_cable` for the damping
+form?" — **was already answered by p0's `-331R` read** (`:1013` passes `CABLE_BEND_DAMPING` through unchanged ⇒
+SEG-independent in the implementation) ⇒ ⭐ **p4's current handling (straight per-joint) is correct as-is; no
+further read needed.** The messages crossed; the answer predates the question's arrival.
+
+**(c) Remaining implementation queue** (a)–(f) as listed (guard refinements, inverted template, ancestor-chain,
+two Tier A conversions, the diff-form re-bank, pins). ⭐ **p4's stance recorded**: *"I will not request a run
+while the damping item is unresolved"* — a builder declining its own run request over a pending physics
+question; resolved on crossing, and the stance was correct while it stood.
