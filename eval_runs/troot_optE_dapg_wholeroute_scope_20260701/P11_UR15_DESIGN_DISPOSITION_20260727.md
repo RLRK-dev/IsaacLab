@@ -96,7 +96,15 @@ SSOT = `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md` §DDR。
 
 ⛔ gate flip なし ／ GO なし ／ **owner・値・参照点・方式を選んでいない** ／ 実装しない ／ RUN 認可を求めない ／ 物理妥当性を判定しない（Rs 動画が最終基準） ／ spec 面（`RS71 §0` / `SOMA.md` / `task_config.py` / `CLAUDE.md`）を編集しない（Rs 専権） ／ 他 pane の record を代理編集しない ／ **H-3.1 no GO・H-4 全体 HOLD・class B HOLD を変えない**。
 
-⛔ **「interpreter 未解決」を前提にしていない。** 原因側の訂正が着地済 = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_INTERPRETER_CLAIM_CORRECTION_20260727.md` @ `511e363317a808d79e9a9e3a2e269b67993cffba`（sha256 `2cdb9d21b288c0077d6750815d7d3a8c35b659598106953065aa73050787c255`・parent `8162d3b2bbced968de3a352c1cb7a3c855e1049a`。**私が自分で読んで sha256 一致を確認**）。⇒ **正しい実行形 = repo root から `VIRTUAL_ENV=/home/rlrk/env_isaaclab7 ./isaaclab.sh -p`**。⚠ **asset closure 欠如は interpreter と独立に存続**するので、§3 の前提条件として扱っている（p18 `-005` 5 と同旨）。
+⛔ **「interpreter 未解決」を前提にしていない。** 原因側の訂正が着地済 = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_INTERPRETER_CLAIM_CORRECTION_20260727.md` @ `511e363317a808d79e9a9e3a2e269b67993cffba`（sha256 `2cdb9d21b288c0077d6750815d7d3a8c35b659598106953065aa73050787c255`・parent `8162d3b2bbced968de3a352c1cb7a3c855e1049a`。**私が自分で読んで sha256 一致を確認**）。⚠⚠ **本行の旧記述「正しい実行形 = repo root から `VIRTUAL_ENV=… ./isaaclab.sh -p`」は私の断定が強すぎたので撤回する**（p18 `MSG-P18-IMPLCHAIN-INTERPRETER-CORRECTION-V2-20260727T1115JST-013` ＋ **私自身の実測**）。⇒ ⭐ **実行形の選択は規則違反かどうかの問題ではなく、用途の問題**である:
+
+| 用途 | 実行形 | 私の実測（2026-07-27） |
+|---|---|---|
+| **終了コードを証拠に使う**（負対照 / fail-closed guard） | **直呼び** `/home/rlrk/env_isaaclab7/bin/python` | wrapper は非ゼロを飲む（§8.2 の表）。⇒ **rc が要るなら直呼び**。`AGENTS.md:68` が明示的に是認 |
+| **`isaaclab` の import 解決が要る** | **wrapper** `VIRTUAL_ENV=/home/rlrk/env_isaaclab7 ./isaaclab.sh -p` | wrapper が `PYTHONPATH` に `source/isaaclab` を前置する |
+
+⭐ **どちらでも `CLAUDE.md:82`（Option-E は `/home/rlrk/env_isaaclab7/bin/python` で実行する）は満たされる** — 私の実測で **両形とも `sys.executable = /home/rlrk/env_isaaclab7/bin/python`**。⚠ また `CLAUDE.md:23` は `@AGENTS.md` ＝ **AGENTS は CLAUDE.md が取り込む文書**であり対抗文書ではない ⇒ **precedence の争点は存在しない**。custody = `P4_INTERPRETER_CLAIM_CORRECTION_V2_20260727.md` @ `a130345fe0e9ed20fbc029e4ad93e0073b550d3b`（sha256 `5b61ec936346d64d546d76b6c2ed8f5f07fcd2d73601f63326fe0404262d0bc5`・**私が一致を確認**）。
+⚠ **asset closure 欠如は interpreter とも実行形とも独立に存続**するので、§3 の前提条件として扱っている。
 
 ## 7. 閉じた query（不在主張の裏づけ）
 
@@ -156,7 +164,8 @@ SSOT = `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md` §DDR。
 
 裏づけ = `AGENTS.md:68` 逐語「`./isaaclab.sh -p` can mask non-zero Python exits」。
 ⇒ ⭐ **判定は artifact の中身から読む** — 分類規則なら **腕の本数・EE / pad として同定された body id そのもの**を出力させ、それを照合する。⛔ **「落ちるべき入力で落ちること」を wrapper の rc で確かめると、あらゆる失敗が成功に見える。** ⇒ **本 disposition が要求する positive control・negative control は、すべて出力内容ベースで定義する。**
-⚠ import 解決のために wrapper を使う推奨は妥当であり、変更しない（これは rc に依存しない結論）。
+⚠ import 解決のために wrapper を使うのは妥当であり、変更しない（これは rc に依存しない結論）。
+⭐ **ただし「wrapper を使え」を一律の規則にはしない**（§6 の撤回）: **rc を証拠にする検査は直呼びで走らせる**（`AGENTS.md:68` が是認）。⇒ **control の実行形は「その control が何を証拠にするか」で決める。**
 
 ### 8.3 順序
 
@@ -171,6 +180,40 @@ SSOT = `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md` §DDR。
 ### 8.5 (c) p4 暫定値の扱い
 
 §2 の disposition のとおり（採用 3 / 不採用 2 / GATED 1 / 条件付き保留 1）。⭐ **追加の 1 点:** **不採用とした servo 定数（`armature` / `damping` / `kp` / `kv`）を UR15 生産 env の default に置かない。** 置くと、後で **「測った値」と「置いただけの値」が区別できなくなる**。⇒ 生産 env に入れるのは **測定後**、または **「未測定の仮値」と機械可読に明示した形**でのみ。
+
+## 9. ⭐ ケーブル径の矛盾（Ø8 設計 vs Ø10 実行）— 私の court の裁定
+
+p18 `MSG-P18-P11-DISPOSITION-RECEIPT-20260727T1112JST-012` (2) が pane をまたぐ矛盾を回付した（出所 = pB の log 解析）。⛔ **他 pane の message の数値では裁定しないので、私が source を読んだ。**
+
+**私の実測（2026-07-27・`p4_ur15_sim_20260727/`）:**
+
+| 実測 | 値 | 出所 |
+|---|---|---|
+| 材料 run のケーブル半径 | `CABLE_R = 0.005` ⇒ **Ø10.00 mm** | `ur15_steps.py:47`（mujoco の capsule `size` は半径）。script 自身の注記 `:70` も「cable is 10 mm」 |
+| ⭐ **同じ値が材料の 3 script すべてに在る**（私が p18 / pB より広げた点） | `ur15_cell.py:42` / `ur15_steps.py:47` / `ur15_route.py:43` とも `0.005` | ⇒ **1 file の書き損じではなく、材料全体が Ø10 前提** |
+| 設計 SSOT | `CABLE_RADIUS = 0.004` ⇒ **Ø8.00 mm** | `task_config.py:137` |
+| asset の設計意図 | 「two protruding box claws **wrap the Ø8 cable** … gap ~10 mm」 | `2f85_koshape.xml:9-11` 逐語 |
+| ⭐ **材料は SSOT を読んでいない** | `ur15_steps.py` は `task_config` を **import していない**。SSOT 参照は `:55` の **コメント** 1 行（`GRIP_HALF_SPAN = 0.044  # task_config.py:235 @ …`）＝ **手写し** | ⇒ 乖離が起きても機械的に検出されない |
+
+**裁定:**
+
+1. ✅ **設計値は Ø8.00 mm のまま**（§2 項目 7 の採用は変えない）。SSOT と asset の設計意図が一致しており、材料の実行値はこれを動かさない。
+2. ⛔ **材料の把持系の量（パッド間隔・接触・把持成否）は、Ø8 の設計判断の裏づけに使えない。** 別条件の測定だからである。⇒ §2 / §4 の判断は**材料に接地していない**ので変更なし。
+3. ⭐ **公称 clearance の再計算（算術のみ・新規測定なし）:** 爪の内側 gap **10.00 mm**（§4）に対し **Ø10.00 mm ⇒ 公称 clearance 0.00 mm**／**Ø8.00 mm ⇒ +2.00 mm**。
+   ⛔⛔ **ただし「公称 clearance 0.00 mm」は幾何の量であって、接触の予測ではない。** 実際に保持が起きるかは接触・貫入・solver の挙動に依存し、**UNMEASURED**（私の B6 撤回どおり）。⇒ **pB の非把持観測と整合する候補説明**ではあるが、⛔ **原因の認定ではない。** 物理妥当性の最終基準は Rs の動画。
+4. ⭐ **反証（control）の要否 = 要る。** 材料を今後 evidence として使うなら、**同一 script を SSOT の Ø8 で 1 回**回して非把持が消えるかを見る。**規律 = 変える軸は径の 1 本だけ**（script・姿勢列・seed・その他定数を同時に変えない）。⚠ **消えても「把持が成立した」ことにはならない** — それは Rs 動画の判断であり、control が言えるのは「径が効いていたか」だけ。⛔ **実行認可は求めない（RUN CLOSED）。** 実施可否は p4 との共同 court ＋ gate。
+5. ⭐⭐ **原因側の設計要求（本件の本丸・値ではなく機構）:** **生産 env は径を SSOT から読む。hardcode しない。**
+   - `CABLE_RADIUS` を含む**寸法定数は `task_config.py` から import して使う**（コメントで出所を書き写す方式を採らない）。
+   - 手写しは **乖離しても機械的に気づけない**。実際、`GRIP_HALF_SPAN = 0.044`（`:55`）も同じ手写しであり、これは §0#2 の 88 mm 由来ゆえ **DDR #38 で pending の前提を黙って運んでいる**。
+   - ⇒ **同型の乖離の再発を止めるのは、値の訂正ではなく参照経路の固定である。** 実装は p0・独立検証は pZ（⛔ 私は実装しない）。
+
+## 10. p18 `-012` (3) の回答を受けての更新
+
+| 照会 | p18 の回答 | 私の状態 |
+|---|---|---|
+| Q1 ヨーク幾何の court | ⛔ **私の court ではない**（charter は腕・指の各ステップ駆動。base / 構造は DDR #40 = p5 ＋ §0#2 = Rs に跨る）。court の確定自体は p18 の権限外ゆえ **Rs へ escalate 済** | ✅ **§2 項目 1 の GATED を維持**（何もブロックしていない）。⛔ 私はヨーク幾何を決めない |
+| Q2 DDR #39 の owner 割当 | 既存 banked 体制と整合。⛔ ただし **register 記入 custody = p6** ゆえ **記入までは「提案」の地位** | ✅ **§8.1 / §3 の役割記述は「提案」として読む**。⛔ 割当済として扱わない |
+| Q3 §0#4 gripper LOCK | ⛔⛔ **FOUNDATIONAL ゆえ Rs 専権・Rs へ escalate 済**。私の「p0 は移植 model を出発点にしない／出発点は banked `2f85_koshape.xml`」は p18 が支持し p0 へ伝達 | ✅ 維持。**LOCK 保存の検証が済むまで移植 model を出発点にしない** |
 
 ---
 **p11 custody = 2026-07-27 / ARM-CONTROL-DESIGN (`w2:p11`)。⛔ 本書の bank commit と sha256 は提出 message の宣言値が権威**（本書は自身の commit を pin できない）。
