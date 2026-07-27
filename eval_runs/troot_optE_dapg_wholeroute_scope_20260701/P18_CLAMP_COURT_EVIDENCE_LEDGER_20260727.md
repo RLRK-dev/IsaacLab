@@ -2179,3 +2179,40 @@ separates the two meanings of `+0.00`.** ⛔ No flag restoration, no separate po
 ⇒ ⭐ **So the column question now has three independent routes** — the two inequalities (§29b), the `fromto`
 endpoints (here), and `w2:p4`'s offer of a flag-restored probe from its own court. ⛔ p18 authorises none of them;
 the item is no longer blocked for want of a method.
+
+## 31. ⛔⛔ I read the file named "cell" to learn the run's geometry — the trap I recorded in §12a
+
+**Cause side: p18.** §29b cited `ur15_cell.py:29` for `YOKE_SPREAD` and computed a 118 mm mount margin from it,
+and I broadcast that in `-159`. `w2:p0` caught it; p18 enumerated all five files at the producing commit:
+
+| file | `YOKE_SPREAD` |
+|---|---|
+| `ur15_cell.py:29` | 0.22 |
+| `ur15_route.py:33` | 0.22 |
+| `ur15_yoke_video.py:30` | 0.22 |
+| ⭐ `ur15_steps.py:37` | **0.40** |
+| ⭐ **`ur15_steps_reaim.py:37`** — **the judged driver** | **0.40** |
+
+⇒ ⛔ **0.22 is the cell-side value; the driver that produced the run uses 0.40.**
+⇒ ⛔⛔ **The margin at the mount is `0.40 − 0.102` = 298 mm, not 118 mm — 2.5× out.** ⇒ ⭐ And 298 mm reads far
+better against p4's measured +85 … +258 mm (a large excursion inboard from a 298 mm mount margin) than 118 mm
+would have.
+
+⭐ **And the driver states why, in its own comment** (p18 read it, verbatim):
+> `YOKE_SPREAD, TILT = 0.40, math.pi / 2.0 - math.radians(20.0)  # measured: 0.22/45deg made the two arms`
+> `interleave at an 88 mm span; 0.40/20deg clears the rest row and both clips`
+
+⇒ ⭐ **`0.22 / 45°` is the superseded value that failed** — and `ur15_cell.py` still carries it. ⇒ ⭐⭐ It also
+puts the yoke history in the driver's own words: **the arms interleaved at an 88 mm span**, which is the
+arm-to-arm interference `w2:p11` flagged in §14b(b) — now readable verbatim rather than relayed.
+
+⇒ ⭐⭐⭐ **This is §12a's finding actually biting.** I recorded, three hours earlier, that the five files are
+**independent copies importing nothing, so repairing one repairs none of the others** — ⛔ **and then read the
+file named `cell` to learn the run's geometry, and got a superseded number.** The copies have already diverged,
+and the name is what led me there. ⇒ **`w2:p0`'s sentence again: a name does not identify a model; only content
+does** — this time the name of a *file* rather than of a constant.
+
+⇒ ⭐ **The inequality framework of §29b is unaffected** — only its constants were sourced wrongly. **Take every
+constant from the run's own driver.** `SHOULDER_HEIGHT = 0.37 + 0.58 × 2.0 = 1.53` is identical at driver `:36`
+(p18 verified). ⚠ **Unverified on the driver side:** the `foot` radius 0.215, and the column's world-origin /
+no-rotation premise — both were read from the cell file. ⇒ **Read them from the driver before using them.**
