@@ -151,6 +151,61 @@ The rendering group is genuinely run-specific and can stay out.
 are indicative, and at least one (`type`) is a false positive from a digit inside a non-numeric
 value. The grouping is the point, not the exact totals.
 
+## 4.6 The combined coefficient set and the inverted template, measured (MSG-P18-319)
+
+### The combined rule adds flags; it does not only close a hole
+
+Across every driver, **23 distinct** literals appear in a multiplication or division. The
+dimensional rule frees all 23. A *plain-coefficient* set would free only some, and the rest are
+**physical values that happen to be written in a multiplication**:
+
+`0.72` ×4, `0.15` ×4, `14.0` ×4, `0.0007` ×4, `30.0` ×2, `0.0011` ×2, `0.0008`, `0.0009`,
+`0.85`, `0.55`, `18.0`, `24.0`, `500`, `100.0`, `10` …
+
+⇒ roughly half of the 23 are borderline: the unit-conversion and halving/doubling family
+(`0.5`, `2`, `10`, `100`, `1000`) is plainly a coefficient; `0.0007`, `0.15`, `0.72`, `14.0` are
+plainly quantities. ⭐ So the combined form **flags more than the dimensional rule did**, which is
+the intent — the `1.0375` hole is exactly this class — but it should be adopted knowing it moves
+about a dozen names into scope rather than only catching a smuggled ratio. ⛔ Membership of the
+set is p5's; I am listing the borderline members, not choosing them.
+
+### The inverted template rule: 23 substitutions
+
+Of the **37** geometry + contact sites, splitting by whether *bare 0/1* alone would allow them:
+
+| | count | attributes |
+|---|---|---|
+| allowed by bare 0/1 | **14** | `pos` 8, `fromto` 2, `axis` 2, `anchor` 2 |
+| **need substitution** | **23** | `size`, `mass`, `friction`, `condim`, `range`, `damping`, `stiffness`, some `pos` |
+
+⇒ a concrete and modest edit. Examples: `size="0.014 0.004 0.006"`, `pos="0 -0.012 {h+0.006}"`,
+`range="-1.2 1.2"`, `condim="6"`.
+
+### ⛔ A near-miss I caught before sending it
+
+I was about to report that `friction="1.1 0.03 0.002"` disagrees with Tier A's
+`CLIP_FRICTION = (1.0, 0.005, 0.005)`. Checking the context first:
+
+```
+:145  f'friction="{CLIP_FRICTION[0]} {CLIP_FRICTION[1]} {CLIP_FRICTION[2]}"'     <- the CLIP
+:168  <geom name="cab0_g" … friction="1.1 0.03 0.002" condim="6"/>               <- the CABLE
+```
+
+The clip already substitutes from Tier A correctly. The `1.1 0.03 0.002` is on the **cable**
+geoms — a different object. **There is no disagreement**, and I would have manufactured one out of
+the coincidence that both attributes are called `friction`. Same shape as the day's other
+same-name-different-thing findings, caught by opening the line instead of trusting the match.
+
+⭐ What does survive: the cable's own physics is baked with no source cited — `mass="0.004"`,
+`friction="1.1 0.03 0.002"`, `damping="0.010"`, `stiffness="0.12"`, `condim="6"`,
+`range="-1.2 1.2"`. The inverted rule will surface all of them, and the question it raises is
+**whether `task_config` owns those values** (a Tier A question) rather than a matter of style.
+
+### ✅ The wiring is visibly working
+
+`x0 = -CABLE_SEG * CABLE_N / 2.0`, `z0 = REST_TOP + CABLE_R`, and
+`pos="{x0:.4f} {REST_Y} {z0:.4f}"` — the cable's placement is now built entirely from owned names.
+
 ## 5. Scope
 
 **Did**: re-derive both pins; read the guard; reproduce the 49; classify the reasons; prove the
