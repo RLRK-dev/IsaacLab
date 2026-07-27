@@ -373,7 +373,61 @@ The pinch-referenced number at `:860` — the one a reader uses to judge "was th
 hop actually occurred is not established** — I supply the mechanism and the two checks, not a verdict. Aiming
 choices (p4's question ①) are p5's court.
 
-## 12. Scope
+## 12. -135: the frame p11 flagged as unmeasured **is** measured, and the hop has a threshold
+
+### 12.1 ⭐⭐ The frame is banked. p11's refutation stands on measured ground.
+
+p11 dropped its own "the slot moves up" hypothesis because R's cable was **above** the slot, and flagged that the
+direction rested on *"p4 の相対値を p11 が world 上と読んだもので、フレームは未実測"*. **It is measured** —
+`thread_isaac_lab/thread-vault/06-Knowledge/GD-KoShape-Finger.md:58-59`, which I read:
+
+> *"At the grasp pose: **f1ext Z≈796.6 (BELOW cable)**, **f2ext Z≈809 (ABOVE cable)**, cable Z≈800-808 between
+> them."*
+
+against the asset's pad-local z: **f1ext 38.20 > f2ext 25.80**.
+
+⇒ ⭐⭐ **larger pad-local z ⇔ lower in world** ⇒ **pad-local +z points DOWN in world at the grasp pose.** ⇒ p11's
+reading is **supported by a banked measurement**, so the refutation does not rest on an assumed frame.
+⚠ Scope: *"at the grasp pose"* — the mapping follows the hand's orientation and is not universal.
+
+### 12.2 ⚠ A citation that does not resolve at the pinned commit
+
+-135 (1) cites `ur15_steps.py:548-555` as `cable_at` and `:878` as the call site. At **`e9f93a7556`** I read
+`:548-555` as the **camera block** (`cam`/`cam2` construction). In that file at that commit:
+
+| | line |
+|---|---|
+| `def cable_at(x)` | **:370** |
+| `GL` / `GR` frozen | **:382-383**, and **re-frozen at :509-510** |
+| call sites `cable_at(GL[0])` / `(GR[0])` | **:570-571** |
+
+⇒ ⛔ either a different commit of that file was read, or the line numbers are stale. **I do not adjudicate** — I
+report what resolves at the commit that was pinned. ⚠ Note also that `ur15_steps.py` has **two** freeze points, so
+"frozen at STEP 1 and never updated" needs care in that file.
+
+### 12.3 ⭐ The mechanism is in **both** drivers
+
+`ur15_steps_reaim.py` — `cable_at` `:523`, `GL` `:535`, call `:842`.
+`ur15_steps.py` — `cable_at` `:370`, `GL`/`GR` `:382-383` and `:509-510`, calls `:570-571`.
+
+⇒ ⭐ **fixing one leaves the other.** Same shape as §8.2's second site.
+
+### 12.4 ⭐⭐ The hop has a threshold, so -135 (3)'s state-dependence becomes a number
+
+The selection is `argmin |C[:,0] − x|` over link centres spaced `CABLE_SEG = 30 mm` apart. ⇒ **the selected link
+changes only when the cable slides in x by more than half a spacing — 15.0 mm.**
+
+| arm | evidence | against the 15.0 mm threshold |
+|---|---|---|
+| **R** | instrument 17.4 vs my contact-based ≤14.75 — agree to **0.15 mm** | ⭐ consistent with **no hop** |
+| **L** | printed drift **25.1 mm** | ⚠ **above the threshold — a hop is admissible** |
+
+⇒ ⭐ this is the quantitative form of p11's "state-dependent": the condition is not "something in the jaw" but
+**"an x-slide past 15.0 mm"**, and the two arms fall on opposite sides of it. ⛔ It stays undecidable for L without
+the index, per §11.3 — real motion and a hop produce numbers of the same size, which is precisely why the discarded
+index mattered.
+
+## 13. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
