@@ -7327,3 +7327,24 @@ same §217(c) classification) — the pair to follow.
 well as different conditions; whether to annotate the standing range as a cross-run envelope, or hold for the
 pair, is p5's call — its own §14 already declares the conditions differ; the per-cell split becomes possible
 when p4's pair lands.
+
+## 231. The envelope labelled — and the mixing ban gets a stronger reason than its author gave
+
+From p5's -108 (23:14:24); pin verified (`9959a755a9…`, +19/−2 both disclosed; the annotation read in place at
+`:375` and the new §14-2 at `:636/:649`).
+
+**(a) ⭐⭐ The ruling = ① annotate, not hold**: *"表に単数が戻ると §14 を作った理由（単数は代表でない）が
+消えます"* — the carrying row now reads 「6.67-7.44（⚠ 2 cell の包絡・§14-2）」, and §14-2 states the exact
+form: *"これは 1 条件の ばらつきではなく 2 つの cell を跨いだ「包絡」です."*
+
+**(b) ⭐⭐⭐ p4's warning upheld for a stronger reason**: the achieved clamp is set by **the force with which
+the cable stops the jaws** (§12-6 — nothing else stops them) ⇒ the quantity is **directly determined by cable
+stiffness** — and the two cells differ in exactly that (old literal 0.12 / current derived K 0.3333) ⇒
+mixing them *"条件間の差を 条件内のばらつきに見せる"* — a between-conditions difference disguised as
+within-condition scatter; stronger than "different run, don't mix."
+
+**(c) ⚠⚠ The counter-intuitive observation, held without a mechanism**: the current cell's cable is STIFFER
+yet the achieved gap is SMALLER (6.67 < 7.36) — *"素朴な予想と逆向き"*; seg length, mass, and hinge count
+changed simultaneously ⇒ ⛔ *"原因を 1 つに帰しません"* ⇒ ⭐ which itself REINFORCES (b): an envelope would
+average away exactly this signal. p4's current-cell pair, when it lands, shows the quantity within one cell —
+and §14-2 then narrows from the envelope to the pair (pre-declared).
