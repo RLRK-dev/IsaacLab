@@ -7061,7 +7061,10 @@ result sha MATCH `89a3fd87a6…`; the decisive lines re-read from the artifact i
 **R6 held() = True**. (⭐ The artifact also records old grasped() = True at this point — the two predicates
 agree HERE; their 3-of-5 disagreements live elsewhere in the sweep.) **(b) ⭐⭐ The negatives, re-taken after
 the datum fix, stay False** (full-open / half-closed / cable-away + CLAMP) ⇒ **R6 moves in both directions**
-— the "only ever False" state resolved; p5's requirement ③ satisfied. ⚠ Scope kept by its author: ONE
+— the "only ever False" state resolved; p5's requirement ③ satisfied. 〔⚠ **Scope corrected by §224(b)**:
+both OUTPUTS occur, but the negatives all sit 160-210 mm outside the band — the band leg pinned False — so
+**no single-state True→False flip was demonstrated**; the positive-vs-negative difference is dominated by jaw
+POSITION. The single-variable demonstration = the aimed-posture negative suite, routed.〕 ⚠ Scope kept by its author: ONE
 positive, on a resting saddle cable; ⛔ not a task-success claim (the three-way protocol applies if ever
 cited as one); ⚠ and **not p5's -097 killable test** — that test concerns a cable HELD by the other hand;
 this one was free. The 2.90 mm is a first favorable data point for the aim mechanism at a re-grasp-like
@@ -7133,7 +7136,10 @@ From p5's -104 (22:50:15); zero requests.
 **(a) ⭐⭐ Form 11 adopted with the distinction named**: *"私が出したのは 注記（飽和 channel を直読するな・
 換算せよ）・p11 が出したのは 設計（閾を背板 domain で表せば 換算そのものが起きない）"* — and the
 implementation IS the latter ⇒ **"私の §13-5 の注記は 実装より弱いです."** The same reason p11 downgraded
-its own essential/insurance split — concurred.
+its own essential/insurance split — concurred. 〔⚠ **Attribution corrected by §223**: p11 wrote the same
+convert-note (its own verbatim refutes the credit) — the two notes are PEERS; the strong form lives in p4's
+implementation (+ p18's articulation); p5's self-criticism "mine was weaker" is unowed. The §13-5 rewrite
+stands; only its reasoning changes.〕
 
 **(b) ⭐ The post-round edit queue = TWO, both pre-declared while the freeze holds**: (1) §12-1 achieved
 clamp, singular 7.36 → range 6.67–7.36 (§220); (2) NEW — §13-5's instrument note rewritten to form 11
@@ -7142,3 +7148,49 @@ during p0's round; **both declared known-stale in advance** ⇒ p0's round treat
 undeclared divergences — a third value against §12-1, or a §13-5 reading that contradicts the declaration,
 would be the actual finding. Routed: p0 (round-input update); p11 (its form adopted into p5's own doc,
 queued); p5 ACK.
+
+## 223. The credit refused by its recipient — both notes were the same note
+
+From p11's -099 (22:53, urgent); pin verified (@ `e6222fb381` "Return a design credited to me: I made the
+same weaker note p5 did" → `68eb784c67…`, MATCH).
+
+**(a) ⛔⛔ p5's self-criticism is unowed — the attribution ran backwards**: p11 opened its own verbatim
+(its doc `:2943-2948`, the -094 text): *"換算 必須"*, *"p5 の計器要件は R6① で効いている"* ⇒ **p11 wrote the
+same convert-the-reading note and endorsed p5's requirement — the two notes are PEERS.** *"「自分のほうが
+弱かった」は成立しません — 2 人とも同じ所に居ました."* The §13-5 rewrite stays right; only its reasoning
+changes (§222(a) tagged). **(b) ⭐ The allocation, made precise — including p18's own part, stated
+carefully**: the threshold-in-the-living-domain DESIGN lives in **p4's implementation** (the floor held in
+backplate terms); **p18's part = articulating it** (§219(b), read off p4's artifact — a description, not a
+design); **p11's part = folding it into general form 11**; **p5's and p11's notes = the same weaker
+convert-form.** **(c) ⭐⭐⭐ The form**: the day's third attribution event — and this one arrived as INBOUND
+credit: *"有利な方向の主張ほど逐語を開いて確かめるべきで、開いたら私の逐語が反証でした"* — favorable credit
+gets the same verbatim check as unfavorable blame.
+
+## 224. The final round: everything reproduces — and the negative control cannot show a flip
+
+From p0's -444R450R (22:53:37); artifact verified (@ `e001d95a6f`, sha MATCH `9132d53078…`).
+
+**(a) ✅ Reproductions, complete**: the positive's five lines exact; the negatives byte-wise; ⭐ the floor
+probed at **eight seeds (0/2/5/10.20/15/25/50/100) — all 18.1875**: *"docstring の「18.20 → 18.19 → 18.19」
+は控えめで… 試した全 seed で不変です"* (the carried number stays 18.19 per §216). R3 / z-3 / datum read in
+source: p0's own demanded scope sits in the code verbatim ("not the 8.7 mm from the judged run, which was a
+different span on a different cable"); the pose_only near-miss is recorded in source as a caught defect; the
+datum's sign is physically coherent (closing lets the cable settle toward the lower claw, 34.49 → 29.02).
+
+**(b) ⛔⛔ Finding 5 — the negative control repeats ONE negative and cannot flip**: all four rows sit
+**160-210 mm outside the band** (mouth z −169.06/−163.92/−161.99/−209.92 vs [25, 39]) ⇒ the band leg is
+pinned False and **nothing the claws do can flip held** (the claw column itself responds: 69.87 → 1.81 →
+−6.42) ⇒ *"どの単一の設定も、述語が状態変化で True → False へ反転する様子を示していません"* — positive vs
+negative differ dominantly in jaw POSITION, not jaw state (§218(b) tagged accordingly). ⭐ p0's cheap closure:
+run the same four states **from the aimed posture** — in-band starts True, the claw leg alone decides, and
+the flip appears in one table → p4, probe-class (§217(c) classification unchanged).
+
+**(c) ⛔ Finding 6 — the header promises what the body calls impossible**: negcontrol `:8` *"cable inside →
+must be True"* vs the run's False and its own `:37-39` explanation (placing moved the cable 491 mm away) ⇒
+the 66.67-contract shape again; a one-line alignment → p4. **(d) ⭐ Finding 7 — the third value, exactly as
+the pre-registration invited**: the same banked log carries GRASP L **+7.36** AND GRASP R **+7.44** — same
+quantity, same run, the other arm ⇒ the range's upper end was understated ⇒ **6.67–7.44**, corrected BEFORE
+being written; §12-1's singular had already dropped its own run's second arm — strengthening the range's
+case → p5's queued edit takes the corrected endpoints. **(e)** Scope kept (no route; R6's task-correctness
+not judged; frozen items untouched). **The final round is DONE** — the lane's verification closes on these
+three dispositions.
