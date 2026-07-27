@@ -46,6 +46,10 @@ from thread_isaac_lab.configs import task_config as _tc  # noqa: E402
 
 TABLE_TOP = _tc.TABLE_HEIGHT                    # task_config.py:20
 CABLE_R = _tc.CABLE_RADIUS                      # task_config.py:137
+CABLE_N = _tc.CABLE_SEGMENTS                    # task_config.py:135 -- p5's final
+                                                # ruling takes the SSOT cable whole,
+                                                # so the count is imported again and
+                                                # the derivation special case is gone
 CABLE_SEG = _tc.CABLE_SEG_LEN                   # task_config.py:136 -- the variable, not the
                                                 # comment the spec §3 cited; same value, and it
                                                 # cannot drift away from its own source
@@ -69,18 +73,21 @@ def _clip_collides_in_source():
     together with BROADPHASE -- with no flag or environment variable in front of it, which is the
     thing worth carrying over.  If that ever becomes conditional this returns False and the cell
     stops claiming otherwise.
+
+    ⚠ An earlier version of this took the first two such assignments in walk order and happened to
+    return the right answer for the wrong reason: walk order reaches the C2 spacer and line 1908
+    but never 1925, and an unrelated edit flipped it.  p0 showed that with two counterfactuals.
+    So take EVERY assignment on `scene.shape_flags` -- the arm pass writes to `proto.` and is not
+    this question -- and require all of them.
     """
     tree = ast.parse(_ENV_BASE.read_text())
-    unconditional = []
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Assign):
-            continue
-        for t in node.targets:
-            if (isinstance(t, ast.Subscript) and isinstance(t.value, ast.Attribute)
-                    and t.value.attr == "shape_flags"):
-                unconditional.append(isinstance(node.value, ast.Constant)
-                                     and node.value.value == 0x6)
-    return bool(unconditional) and all(unconditional[:2])   # the two clip builders, C1 and C2
+    flags = [node for node in ast.walk(tree) if isinstance(node, ast.Assign)
+             for t in node.targets
+             if isinstance(t, ast.Subscript) and isinstance(t.value, ast.Attribute)
+             and t.value.attr == "shape_flags"
+             and isinstance(t.value.value, ast.Name) and t.value.value.id == "scene"]
+    return bool(flags) and all(isinstance(n.value, ast.Constant) and n.value.value == 0x6
+                               for n in flags)
 
 
 CLIP_COLLIDE = _clip_collides_in_source()   # clip design §6-A
@@ -134,17 +141,12 @@ TILT = math.pi / 2.0 - math.radians(20.0)  #          88 mm span; 0.40/20deg cle
 TABLE_HX, TABLE_HY = 0.70, 0.20         # spec §4 -- ⚠ weak grounds, and spec §7 asked whether p4
                                         #            had better: it does not.  The driver line
                                         #            carries no measurement comment at all.
-
-# The cable's total length is a cell dimension, and p5's ruling ① leaves it where it is while
-# adopting the SSOT's step: take the 15 mm link, derive the count, and do not resize the cell.
-# 32 x 30 mm and 64 x 15 mm are the same 960 mm of cable at two discretisations -- so this is a
-# fidelity change and a halving of the instrument's quantisation floor, not a different cable.
-# ⚠ It is not free: 64 joints bend more easily than 32 and cost twice the computation.
-CABLE_TOTAL = 0.960                     # spec §4 (ruling ①: cell dimensions unchanged)
-CABLE_N = int(round(CABLE_TOTAL / CABLE_SEG))   # DERIVED -- see the note in self_check
-
 REST_Y = 0.28                           # spec §4
-REST_X = (-0.34, -0.14, 0.24)           # spec §4 -- "saddles kept clear of both 88 mm grasp spans"
+REST_X = (-0.300, -0.055, +0.245)       # spec §4 -- placed by p5 inside the free windows this
+                                        #            cell was measured to have; the previous
+                                        #            three had one outside the shorter cable and
+                                        #            one five millimetres into the right hand's
+                                        #            zone.  These are saddle CENTRES.
 REST_TOP = TABLE_TOP + 0.150            # spec §4 -- "at +0.060 the open fingers press into the
                                         #            table".  ⚠ p4's own gripper-only measurement
                                         #            (36 mm of reach below the cable with the
@@ -265,10 +267,8 @@ def self_check():
             f"task_config binds {_tc.CABLE_SEGMENTS} segments and a {_tc.CABLE_SEG_LEN} m step, "
             f"which is {ssot_total:.3f} m, but task_config.py:135 states 0.600 m. The SSOT's two "
             f"bindings have drifted apart.")
-    if abs(CABLE_N * CABLE_SEG - CABLE_TOTAL) > 0.5 * CABLE_SEG:
-        problems.append(
-            f"{CABLE_N} links of {CABLE_SEG} m is {CABLE_N * CABLE_SEG:.3f} m, more than half a "
-            f"link away from the cell's {CABLE_TOTAL} m -- the rounding in the derivation is off.")
+    # ⛔ `CABLE_N * CABLE_SEG == 0.600` is not a check on this module: both come from the same
+    # SSOT, so the claim belongs where they are bound independently, which is the block above.
     return problems
 
 
