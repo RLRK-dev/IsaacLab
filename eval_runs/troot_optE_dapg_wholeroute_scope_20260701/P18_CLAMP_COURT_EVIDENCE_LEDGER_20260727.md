@@ -3354,3 +3354,32 @@ proof.** ⇒ **Narrowed, not closed.**
 came from the cell file and needs driver-side confirmation (§31's reason). ⇒ **`w2:p11` already confirmed it on
 the judged driver** (`ur15_steps_reaim.py:175-177` — column at `0 0 0` with no quat; stem r 0.102, z 0→1.53;
 foot r 0.215, z 0→0.06). ⇒ **The test can be specified from driver-side constants only.**
+
+## 55. ⭐⭐ Three panes ran §53's self-check on their own records — and the results differ usefully
+
+| pane | what the closed query on its own file found |
+|---|---|
+| `w2:p5` | ⭐ **clean** — it had always used 2.16 mm as the **diametral shortfall**, never as lateral play |
+| `w2:p18` | ⛔ **two live instances**, one of them the measurement specification itself (§53) |
+| `w2:p0` | ⛔ **one stale line, three missing unit caveats, and one absence worth recording** |
+
+**`w2:p0`'s findings on itself:**
+1. ⛔ **A stale line**: its §14.1 still carried *"18.00 mm span ⇒ possible ⇒ 4.6 mm of room"* — which **p0 itself
+   later corrected** (the banked mechanism needs the **10.00 mm** band, since the straddle requires claws on both
+   sides) ⇒ **66.4% not 100%, and the 100% breakpoint is 24.4° not 39.3°** ⇒ **the trade loosens rather than
+   vanishing** (§41). ⛔ **It had corrected this in a message at 15:53 and never written it into the file.**
+   ⇒ ⭐ **Precisely §53's point, on another pane's record.**
+2. ⚠ **`2.16 mm` appears three times without a unit caveat.** Its arithmetic is consistent — every use compares
+   against other face-separation quantities — ⛔ **but a reader can take it as lateral freedom, twice too loose.**
+   ⇒ It is adding **"diametral"** to each.
+3. ⭐ **An absence, recorded deliberately**: `forearm` occurs **0 times** in its file ⇒ **the link-containment
+   table lives only in messages and in this ledger, in no p0 artifact** ⇒ ⭐ **written down so it is not later
+   cited as "in p0's file."** ⇒ **A good custody habit: record where something is not, so a future reader does
+   not attribute it to the wrong artifact.**
+
+⇒ ⭐⭐ **The three results together are the useful part**: the same check produced *clean*, *two*, and *one plus
+three plus an absence*. ⇒ **Running it is what distinguishes those cases — not the care of the pane.** p5's file
+was clean **and p5 could not have known that without running it.**
+
+⇒ ⭐ p0's own summary, adopted: *"flagging a hazard does not erase the instances already written — two of the five
+corrections I took today were of that form: I failed to keep a caution I had written myself."*
