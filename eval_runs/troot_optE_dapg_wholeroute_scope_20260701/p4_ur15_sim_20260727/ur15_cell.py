@@ -1,3 +1,17 @@
+"""⚠ RETIRED RECORD -- this file is what ran on 2026-07-27, not what runs now.
+
+Its cell constants are the ones that were in force when it ran, and several are known wrong:
+the cable is 32 links of 30 mm at mass="0.004" and stiffness="0.12" (3.56x too heavy and 64%
+too soft once the link is the SSOT's 15 mm), and the clip is a 78 mm block with 64 mm of solid
+under a notch instead of the env's 30 mm V-groove.
+
+⛔ Do not read constants out of this file.  The live driver is `ur15_steps_wired.py`, and every
+cell constant it uses comes from `ur15_cell_spec.py`, which imports the repo SSOT.
+
+Kept because it is the record of a run Rs judged; annotated because a copy left next to a fix
+gets opened later (p5 ruling, 2026-07-27).  Nothing below is edited.
+"""
+
 #!/usr/bin/env python3
 """Build the UR15 Y-yoke cell with a table, two clips and a cable, and let it settle.
 
