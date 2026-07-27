@@ -4753,3 +4753,36 @@ release.** ⇒ p11's own §12.2 requirement (a predicate must discriminate its t
 lands on the grip predicate itself — **it discriminates neither side.** ⭐ Design requirement placed, not
 implemented (driver = p0/p4): **release judgment must read the claw-tip gap; threshold 8.00 (= backplate 18.20).**
 Bank §27.2.83 @ `f6f853bdd9`.
+
+## 116. Release ruled: STEP 8 stands, STEP 17 is the defect — and my §114(a) overshot
+
+**(a) ⛔ My §114(a)/-252 framing is corrected**: I wrote "STEP 8 and STEP 17 never released." Factually true and
+**wrong as a defect claim for STEP 8**: ⭐ **the shigoki slip is along the cable axis (x); the 1.82 mm tip gap is
+y and impedes x-sliding not at all.** Authority intent says exactly this — `task_config.py:276` verbatim:
+*"guide hand しごき position (cable slides through claw)"*. ⇒ ⭐ **HALF = 214 works as designed for STEP 8: catch
+in y, slide in x. Not a defect; not to be fixed.**
+
+**(b) ⛔⛔ The defect is STEP 17 (final release)**: the guide hand stays HALF ⇒ tip gap 1.82 ⇒ ⭐⭐ **every run
+today ended with the cable still captured in the left claws — the final release never occurred.** Ruling: **both
+hands to release ctrl (≈197.5 or more) at STEP 17; HALF is never a release.** ⇒ ⚠ **Scoping duty (mine + pB's)**:
+"seated"-type observations in today's logs occurred **with the cable still held by the left hand** — annotations
+required where those observations are banked.
+
+**(c) ⭐ The assignment, from the curve**: minimal-release escape = **49.7 mm — only 3.7 above carry height**,
+saving 16.0 mm of drop vs full-open. (p11's floor correction 18.20 crossed this ruling; the measured 18.19 at the
+tip-8.00 crossing is the operative number — the two agree within 0.01.)
+
+**(d) ⭐⭐⭐ The threshold answered without inventing a number — a mm budget**: half-band 6.00 − placement 4.89
+(measured worst) − slope·claw 1.07 (pitch-independent) = **residual +0.04 mm**; the threshold is **"residual ≥ 0",
+derived from geometry.** Breakdown: **placement 82% / slope 18%** ⇒ ⭐ **the effective remedy targets placement** —
+converging with p11's §113(b) independently. ⛔ "≥0 is a geometric lower bound, not a safety margin" — the height
+above 0 belongs to the unmeasured drag load; p5 refuses to place it, and sketches the measurement instead.
+p5 also retracted its §9-5 naming its own type (*"hung a conclusion on a quantity that did not measure it"*).
+
+**(e) ⭐⭐ Guard domain ruled — one rule, no enumeration**: over ALL module-level bindings, **does the value
+expression contain a numeric literal not derivable from owned names?** Yes ⇒ must be OWNED/RETIRED/TIER-C else
+FAIL; No ⇒ **DERIVED, free** — p0's fourth kind (45 model handles) falls there automatically; `Z_SEAT` is caught
+by its `0.030`. **UPPER-limit rejected**: *"a convention is not a mechanism"* — tomorrow's lowercase `clip_h`
+would pass. Human judgment needed only where literals occur (~23, ⛔ estimate). Known discretionary line: direct
+numeric-literal bindings always count (`CABLE_N = 32` caught); indices/ranges excluded. New pins: clip
+`0a1b29155e…` (408) / spec `1e1fad5368…` (239) — bank ×2 with p4.
