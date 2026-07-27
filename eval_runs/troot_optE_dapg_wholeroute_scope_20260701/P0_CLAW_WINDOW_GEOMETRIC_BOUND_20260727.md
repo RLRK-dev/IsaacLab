@@ -246,7 +246,47 @@ my worst-case-over-all-tilts figure gives **0.188 mm**. The second is the one th
 **not established**, by my own §6 caveat (it was computed on face-centre geometry, where the edge term reaches
 several mm at that angle). I will not let it be quoted as though it were.
 
-## 8. Scope
+## 8. ⛔ I correct my own 2.400 mm cap — and with it the one OPEN item it created
+
+**Cause side is me.** In §7 I wrote *"the cap is exactly 2.400 mm"* and reported that the old datum −2.57 sat
+**0.170 mm past it** with no explanation. That excess became the single OPEN item p18 is holding (-102 (4)). It was
+**my error, and it is the same error class as §6**: I computed the cap on **parallel** boxes while the pads are
+demonstrably tilted.
+
+The minimum-translation depth is capped by the overlap along the thin axis, and once the two claw boxes are
+mutually rotated by an angle *a*, that overlap is **h_z + (h_y·|sin a| + h_z·|cos a|)** — the tall 18.0 mm y-extent
+starts contributing as soon as *a* ≠ 0:
+
+| mutual angle of the two claw boxes | cap on the reported depth | old datum −2.57 |
+|---|---|---|
+| 0° — parallel (what my 2.400 assumed) | **2.4000 mm** | exceeds by 0.170 |
+| θ = 1.571° (the measured per-pad tilt) | **2.6463 mm** | **within by 0.076** |
+| 2θ = 3.142° | **2.8915 mm** | **within by 0.321** |
+
+⇒ ⭐ **under either tilted convention the old −2.57 sits inside the cap, so it is not anomalous.** The excess was an
+artefact of my parallel-box assumption.
+
+⭐ **This also identifies pZ's convention.** pZ reported a floor of **−2.647 mm** at the measured tilt and declined
+to claim it fit. My cap at mutual angle θ is **2.6463 mm** — the two agree to **0.0007 mm**, which says pZ used
+mutual angle = θ. ⚠ I cannot settle from geometry alone whether the mutual angle is θ or 2θ (it turns on how the
+180° z-mirror composes with the two pads' tilt senses), and I do not need to: **both resolve the excess**.
+
+⛔ **I do not mark the OPEN item resolved** — -102 (4) says not to, and the disposition is p18's and pZ's. What I
+supply is the retraction of the number that created it. ⚠ Note also that pZ was correct twice over here: pZ
+computed the tilted floor rather than the parallel one, **and** declined to assert the fit. I asserted an exact cap
+that was not exact.
+
+**Axis disambiguation for -102 (3).** Two ~10 mm quantities appear in this document on **orthogonal axes**. Every
+occurrence is labelled in place, but so that no figure can be lifted out of a table without its axis:
+
+- **10.00 mm — the コ opening's clear gap. Axis = pad-local z.** Between `f1ext` (z 37.00) and `f2ext` (z 27.00).
+  Used in §3 and §5 to exclude the cross pair. **This one is measured and valid.**
+- **10.00 / 10.100 / 10.11-10.20 mm — the backplate gap at which the claws touch. Axis = the jaw's closing
+  direction (pad-local y).** Used in §2, §5, §6. **This one is a function of tilt, not a constant.**
+
+⛔ They are never the same number and must not share a column.
+
+## 9. Scope
 
 ⛔ I do not rule on window-open / window-closed, on whether the clamp is reachable on real hardware, on capture vs
 grip, or on any change to the locked geometry (§0#4 = Rs). ⛔ I ran nothing and hold no RUN authorization. What I
