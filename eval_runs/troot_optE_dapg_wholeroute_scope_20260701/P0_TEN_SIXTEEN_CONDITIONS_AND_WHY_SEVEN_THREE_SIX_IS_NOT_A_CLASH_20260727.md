@@ -102,6 +102,52 @@ match means least.
 commit on any ref (`P0_WIDE14_ASSET_AND_LOG_PROVENANCE_20260727.md` §2). The two open items
 are the same item.
 
+### 2.3 ⛔ §2.2 is void — there was no residual, there was a saturated instrument
+
+p4's direct sweep on the 14.00 model with no cable (relayed in MSG-P18-191 §1) measures the
+opposing-claw gap **flat at about −2.5 from ctrl 229 onward**, and identifies the floor: the
+claw box's own thinnest dimension, half-size **1.2 mm** ⇒ **2.40 mm**.
+
+That is `mj_geomDistance` **saturating at the thin-axis overlap** — the same contract property
+I measured earlier and recorded. So:
+
+| | value |
+|---|---|
+| my predicted overlap at face gap 7.36 | **2.80 mm** |
+| instrument floor (claw thickness) | **2.40 mm** |
+| what the log read | **2.45 mm** |
+
+⇒ **2.80 is past the floor, so it could never have been read.** The 0.35 mm I called an
+unexplained residual is the distance from a saturated reading to a real geometric value, not a
+disagreement between two measurements. Once saturation is applied, everything is consistent
+and **nothing is left open**.
+
+⛔ And the saturation was already in my own record. p18's §4 lesson today — *when numbers do
+not meet, pull the known caveat out of your own doc before measuring* — lands on me here, third
+instance today after `GD-KoShape-Finger.md:95` and p5's `:86`. I even declined to explain the
+0.35 mm with a coincidence, on the grounds that it was fit-shaped; declining the wrong
+explanation is not the same as noticing the quantity was saturated.
+
+**Consequence for §2.2's ask:** the claw-pair reporting convention no longer needs recovering
+for this. Past 2.40 mm the reading carries no depth information at all, whichever pair it names.
+
+### 2.4 What the floor hides, geometrically
+
+At **ctrl 236** p4 measures the pad1 gap at **3.80 mm**. The claws touch at **10.16 mm** (that
+number is unchanged by the widening, which moved them in z only), so the geometric overlap
+there is
+
+**10.16 − 3.80 = 6.36 mm**, against an instrument that cannot read past **2.40 mm**.
+
+⇒ the reading understates by roughly **4 mm** at the clamp command. p18 §2 carries p4's
+statement that the same hand's opposing claws bite in by ≥2.6 mm with the true depth unknown;
+**6.36 mm is that unknown depth under the geometry**, offered as the arithmetic behind the
+bound. ⛔ Whether that is acceptable is a geometry question and therefore Rs's, not mine.
+
+And the success run sits between the two: face gap **7.36** ⇒ geometric overlap **2.80**, just
+past the floor, read as **2.45**. The no-load destination is **3.80**, so a jaw travelling there
+was stopped by the Ø8.00 cable at 7.36 = **0.64 mm of compression**.
+
 ---
 
 ## 3. The consequence p18 asked me to cross with p5's observation
