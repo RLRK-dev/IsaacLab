@@ -93,8 +93,8 @@
             <geom class="visual" mesh="follower" material="black"/>
             <geom class="collision" mesh="follower"/>
             <body name="right_pad" pos="0 -0.0189 0.01352">
-              <geom name="right_pad_f1ext" type="box" mass="0" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0382" quat="1 0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.85 0.25 0.25 1"/>
-              <geom name="right_pad_f2ext" type="box" mass="0" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0258" quat="1 -0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.20 0.45 0.95 1"/>
+              <geom name="right_pad_f1ext" type="box" mass="0" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0402" quat="1 0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.85 0.25 0.25 1"/>
+              <geom name="right_pad_f2ext" type="box" mass="0" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0238" quat="1 -0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.20 0.45 0.95 1"/>
               <geom class="pad_box1" name="right_pad1"/>
               <geom class="pad_box2" name="right_pad2"/>
               <inertial mass="0.0035" pos="0 -0.0025 0.0185" quat="0.707107 0 0 0.707107"
@@ -134,8 +134,8 @@
             <geom class="visual" mesh="follower" material="black"/>
             <geom class="collision" mesh="follower"/>
             <body name="left_pad" pos="0 -0.0189 0.01352">
-              <geom name="left_pad_f1ext" type="box" mass="0" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0382" quat="1 0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.85 0.25 0.25 1"/>
-              <geom name="left_pad_f2ext" type="box" mass="0" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0258" quat="1 -0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.20 0.45 0.95 1"/>
+              <geom name="left_pad_f1ext" type="box" mass="0" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0402" quat="1 0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.85 0.25 0.25 1"/>
+              <geom name="left_pad_f2ext" type="box" mass="0" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0238" quat="1 -0 0 0" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" rgba="0.20 0.45 0.95 1"/>
               <geom class="pad_box1" name="left_pad1"/>
               <geom class="pad_box2" name="left_pad2"/>
               <inertial mass="0.0035" pos="0 -0.0025 0.0185" quat="1 0 0 1"
