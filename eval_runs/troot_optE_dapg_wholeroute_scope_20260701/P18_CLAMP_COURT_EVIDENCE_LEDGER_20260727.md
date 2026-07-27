@@ -5963,3 +5963,24 @@ naming the producer. ⇒ **(d) holds across the pin move.**
 condition, and the `:89` trap was not stepped on — *"it passed on the correct side before the condition could
 arrive."* **(c)** p0's remaining bundle confirmed: (a)(b)(c) + the template rule + walrus + the three Tier A
 derivations, gathered after p4's landing (+ the three-item bank). Needs nothing; gate unchanged.
+
+## 173. The correction lands at the tail — certified by the instrument that caught it
+
+p15 executed under §171's approval (-367): old `e078dd94e5…` → new
+`4068ac94af668d78618017ff4795df3ff32db84906b77c80b36af9c331dc84ba` @ `aada43e8e2` ("Correct the placement claim
+in the p15 findings record"), observed 20:42:23; worktree == commit blob (p18 re-checked, sha machine-compared
+= MATCH).
+
+**(a) ⭐⭐ All three conditions discharged — and re-derived here**: ① invariant wording only (41-line head
+insertion / deletions 0 / everything after +41; no asserted coordinate; absolute line counts declined for the
+convention gap). ② tail-ness measured **with the same instrument on both sides** — p15: the ten pre-append
+`##` headings all unchanged (difference set **{0}**, its own run 20:40:37); p18 re-derivation: headings still
+at 3/44/52/67/77/97/116/120/126/132, the new section at `:145` (titled 「訂正 2 …**末尾追記**」), GNU diff =
+**`141a142,175`** — a pure tail append, deletions **0**. ③ new sha + observation time declared. Constraints
+held: 1 file (staged pre-check 0), LEDGER/status/planning untouched, no fix, the offending line stands and is
+superseded, not rewritten.
+
+**(b)** The loop closed: detection p12 (§166) → cc p15 (-361) → p15's own re-derivation + request (§167) →
+APPROVE with conditions (§171) → execution certified by the instrument that caught the original fault →
+returned to p12 for its content re-pin. ⭐ The day's rule in one line: **the check that certifies the fix must
+be the one that could have caught the fault.**
