@@ -122,6 +122,33 @@ non-monotone** — at ctrl 250 the geometric overlap is `10.16 − (−1.13) = 1
 is `−2.75`. **The conclusion survives** — `−2.45` carries no usable depth — but the mechanism I
 gave was cleaner than the data supports, and "floor at 2.40" should not be quoted as a constant.
 
+## 5.1 Scope I owe on my own sag numbers (following p11's stiffness finding)
+
+Measured — the cable joint stiffness is **four-way**, not two:
+
+| driver family | damping | stiffness |
+|---|---|---|
+| `cell` / `route` | 0.004 | **0.02** |
+| `steps` / `reaim` / `c1seat` | 0.010 | **0.12** — p11's 6× confirmed |
+| **`wired`, now** | `CABLE_BEND_DAMPING` 0.01 | **`cable_joint_k()` = 0.3333** (SSOT) |
+
+⇒ the SSOT value is **16.7×** the cell/route figure and **2.8×** the steps figure. So p11's
+conclusion holds and the direction is worth stating: **the cell is about to be stiffer than either
+of the runs those numbers came from**, not softer.
+
+⛔ And it reaches my own record. The sag I measured — **127.8 mm** — came from `ur15_wide14.log`,
+whose **producing source is still not on disk** (`column gap` matches 0 in both step drivers).
+So I cannot pin which stiffness that run used; a steps-family value is an inference, not a reading.
+
+| what I banked | status |
+|---|---|
+| **L² over L⁴ model selection** | ✅ survives — it was a ratio between a measured value and a baseline from the same cable, so a common stiffness cancels |
+| **127.8 mm**, and the 71.9 / 44.6 scaled from it | ⚠ **sit on a cable whose stiffness I cannot pin**, and the cell will run stiffer than either candidate ⇒ **do not carry them to the cell** |
+
+⭐ One more consequence: the L² branch fits *because* tension dominates and bending contributes
+little. At 2.8–16.7× the stiffness the bending term grows, so **the model selection itself was made
+at one stiffness and should be re-made at the cell's** rather than inherited.
+
 ## 6. Scope
 
 **Did**: re-derive the pins; run the module; probe the coefficient rule with 22 literals and 5
