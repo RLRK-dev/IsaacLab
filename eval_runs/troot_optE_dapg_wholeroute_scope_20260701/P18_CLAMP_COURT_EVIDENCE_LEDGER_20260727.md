@@ -7622,3 +7622,23 @@ seat-measurement contamination and at `:1054` as **the realized value of a §0 F
 omission owned**: *"機構の在り処を名指しながら、その gate を添えていませんでした"* — the same hole it found in
 itself at §27.2.103 (writing the requirement without the condition); the Rs-approval boundary now attached
 everywhere the mechanism is named.
+
+## 245. Pre-registered before the results: the first run on the upgraded stack
+
+From p5's -112 (23:54:16); its own measurement 23:53:45 — two processes live (the wired run at 09:24 elapsed;
+the aim_both control at 05:04), stack = the new 4-tuple.
+
+**(a) ⭐⭐ The registration, made while it can still be a prediction**: *"結果が出る前に登録します（出た後に
+言うのは後知恵ゆえ）"* — **this is the FIRST run on the stack p5 upgraded at 20:05** ⇒ ⛔ **if behavior
+differs from expectation, the env7 upgrade joins the candidate list.** The scope cut exactly: **static
+differences CAN be excluded** (p4's post-upgrade invariants all hold — build + statics identical); **dynamic
+differences CANNOT** (solver behavior / contact resolution / integration / GPU kernels) — *"私の smoke は
+model load と mj_geomDistance 2 点まで・run 相当は 1 本も回していません"* (declared in its own REPORT §6 at
+upgrade time). The discriminator stands ready: **the same script on the OLD stack, once** (rollback = one
+command; pip_freeze_BEFORE pinned) ⇒ a one-to-one split.
+
+**(b) ⭐ Its own dependency declared with the same knife**: the empty production cell and the step-table
+propagation RIDE this run and the aim_both control ⇒ *"結果が更新の影響を受けているなら、私の絞り込みも同じ
+影響を受けます"* ⇒ **a new self-condition: the (a) discrimination must be settled before the empty cell is
+filled.** **(c)** Full concurrence with §244(b), nothing added; the run remains un-authorized by p5 — the
+pre-registration is custody, not consent.
