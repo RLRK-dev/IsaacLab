@@ -3139,3 +3139,56 @@ measuring court's; p11 requests and authorises nothing.
 
 ⇒ ⭐ **This is a better landing than §41b's axial test: instead of a new measurement on an axis the design
 excludes, it is one re-run of an existing in-scope test.**
+
+## 50. ⭐⭐⭐ 46 N is a capacity, not a resting force — so the real cost of "replace" is 1 mm of sink
+
+`w2:p11` corrected the reading of §48's estimate, and it changes what the branch costs.
+
+⭐ **The 46 N is the force at 0.70 mm of penetration** — and in the banked configuration the cable is 0.70 mm
+into the claws **because the pinch presses it there**. ⇒ ⭐ **In the reachable configuration (stopped at claw
+contact, with play) the claws are not touching at rest and the force is 0 N.** Force builds only after motion.
+
+⇒ ⭐⭐ **So "can it hold?" is not a force question but a travel question** (p11's arithmetic on p0's K; **p18
+recomputed**):
+
+| | penetration | total travel |
+|---|---|---|
+| free travel to first contact | — | **1.000 mm** (half of the 2.00 mm z clearance), force **0 N** |
+| ⭐ to reach **1 N** | +0.015 mm | **1.015 mm** |
+| to 10 N | +0.152 mm | 1.152 mm |
+| to 46 N | +0.701 mm | 1.701 mm |
+
+⇒ ⭐⭐⭐ **The <1 N lift requirement is met 0.015 mm after contact** ⇒ ⛔ **whether it holds is barely in
+question.** ⇒ ⭐ **What is in question is that it sinks about 1 mm before stopping — the play.**
+
+⭐⭐ **And p11 pre-registers the prediction, so the criterion cannot be chosen afterwards**: the banked result was
+**sag 0 (848→850 mm)**; in the reachable configuration it should become **"sinks ≈1.0 mm, then holds."**
+⇒ ⭐ **The verdict item therefore becomes not "does it drop?" but "is 1 mm of sink acceptable?"** ⛔ Acceptability
+is `w2:p5`'s and Rs's — the step table's tolerance and the clip-seating requirement.
+
+⇒ ⭐⭐ **So the actual cost of the "replace" branch is not loss of holding — it is 1 mm of sink.** ⇒ **Added as the
+fifth point travelling with the question to Rs.**
+⚠ Assumptions: p0's remaining three, **plus** p11's own — free travel taken as **1.00 mm**, half the z clearance,
+i.e. the cable centred.
+
+### 50a. Assumption ③ discharged at source, by two panes
+
+⭐ `w2:p5` and `w2:p0` independently read it; **p18 confirmed at `newton_skill_env_base.py:1389-1401`**:
+`if "pad" in (gname + bname): pad_geoms.append(g)` builds the set, and `for g in pad_geoms: m.geom_solref[g] =
+pad_solref` writes `MUJOCO_PAD_SOLREF` to **all of them** (mjw side likewise, all worlds).
+⇒ ⭐ The claw geoms are `right_pad_f1ext` etc. — they contain `pad` — **and** their body names are
+`right_pad`/`left_pad`, so they qualify **twice over**. ⇒ ⭐⭐ **The claws receive the same K = 65 789 N/m** ⇒
+**assumption ③ is discharged**, and the estimate now rests on **three**: linear-spring reading, one contact point
+per term, per-arm versus per-contact. ⛔ Neither pane claims the straddle suffices.
+⇒ ⛔ **And the constant being named `PAD_SOLREF` was not narrowing the scope** — the name suggested a limit the
+code does not impose.
+
+⚠⚠ **`w2:p5`'s structural note, which closes a circle:** this selection is **also** a substring match on `pad`.
+⇒ ⭐⭐ **Three mechanisms now ride on "does the name contain `pad`"** — the grasp predicate (§10b), the production
+env's COLLIDE clearing (§18), and this solref poke. ⇒ ⛔ **Renaming a geom could break three places at once.**
+Recorded only; p5 asks for no change.
+
+⚠ **`w2:p0` also found a stale citation on the banked side**: the doc's `test_newton_clip_routing.py:2585` does
+not resolve on current on-disk — `:3031` states `_wire_s6_grasp_solref RELOCATED to newton_skill_env_base.py
+(2026-06-28, L3 base-infra)`, so the body is at `newton_skill_env_base.py:1354`. ⇒ ⭐ **Today's "write the commit
+beside the line number" rule, appearing on the banked-document side.** ⛔ The doc is read-only; p0 does not edit it.
