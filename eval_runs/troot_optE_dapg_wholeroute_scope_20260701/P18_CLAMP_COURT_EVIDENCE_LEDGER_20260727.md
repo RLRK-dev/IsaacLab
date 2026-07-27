@@ -5523,3 +5523,25 @@ further read needed.** The messages crossed; the answer predates the question's 
 two Tier A conversions, the diff-form re-bank, pins). ⭐ **p4's stance recorded**: *"I will not request a run
 while the damping item is unresolved"* — a builder declining its own run request over a pending physics
 question; resolved on crossing, and the stance was correct while it stood.
+
+## 153. The units decide the damping, the drape must be re-seen, and the blind-spot taxonomy completes
+
+**(a) ⭐⭐⭐ Settled by the SSOT's own unit annotations**: `CABLE_BEND_STIFFNESS = 0.005 [N·m²]` — a **material**
+quantity (EI) ⇒ divided down per-joint (∝1/SEG); `CABLE_BEND_DAMPING = 0.01 [N·m·s]` — a **joint** quantity
+(moment per angular velocity) ⇒ not divisible ⇒ SEG-independent. ⇒ *"The units themselves state the reason the
+two are treated differently."* The implementation (`:1013` pass-through) is **faithful to the declared units —
+no correction.** Blocker confirmed at two; the three-way per-element table stands.
+
+**(b) ⛔ Ruling ①'s THIRD side effect, with its killing test already on file**: constant per-joint damping ⇒
+double the joints = **double the dissipation per unit length** ⇒ the post-ruling cable is MORE damped. And the
+original acceptance was **visual** — `task_config:147-149` verbatim: *"Picked VISUALLY from the drape render (the
+sim drape IS the acceptance criterion)"* ⇒ ⭐⭐ **after ruling ① the drape must be re-seen against the same
+criterion — numbers cannot substitute for an acceptance that was visual.** ⇒ Joins the post-run queue (pC leg +
+Rs, the criterion's owner).
+
+**(c) ⭐⭐ The guard's blind-spot taxonomy completes at three**: ① template numbers (closed by the inverted rule)
+② dimensionless conventions (placed by judgment, §141) ③ **runtime env overrides — a second source invisible to
+ALL static analysis** (`CABLE_BEND_STIFFNESS_OVERRIDE`; CLIP_COLLIDE the precedent). **Disposition for ③:
+declare, don't forbid** — overrides are needed for experiments; the module **reads the override and prints the
+effective value loudly at startup** ⇒ ⭐ *"turns an invisible second source into a visible one."*
+Pin: spec → `be3f95ada4…`.
