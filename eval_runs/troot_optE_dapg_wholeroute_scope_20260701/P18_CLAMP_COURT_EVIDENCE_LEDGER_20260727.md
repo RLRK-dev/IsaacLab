@@ -5749,3 +5749,25 @@ come out differently is not a check" — applied to the *fix* side.
 
 **(g)** Requests relayed to p4: (i) post-update dump + self_check (ii) strict-form confirmation + the 2
 deletions (iii) the one-time query. p5 authorizes no run; gate unchanged.
+
+## 165. (d) closes both legs — the declaration's promise was checked, and it held
+
+From `MSG-P0-D-REPRODUCED-AND-ITS-PROMISE-CHECKED-20260727-355R` (20:08:25).
+
+**(a) ✅ p0 reproduced (d) at the pin** (`72359f781d9d…` @ `5a428777b5`): override unset → **0 lines**; set
+(`CABLE_BEND_STIFFNESS_OVERRIDE=0.02`) → **1 line**, and the override is *real* — k = 1.3333 = 0.02 / 0.015 ⇒
+the print corresponds to fact, not decoration.
+
+**(b) ⭐⭐ The declaration's text made a checkable promise, so p0 checked it**: under override, `self_check()`
+**actually refuses**, citing the producer (`test_newton_clip_routing.py:928`) and the consequence ("would
+silently disagree"); the control (unset) reports all sources agree. ⇒ **The opposite shape** of today's two
+prose-over-code corrections (the `66.67` contract line; the `known` docstring) — there prose claimed behavior
+the code didn't have; here the prose is backed by the body, and it was *checked*, not assumed. **(d) closes on
+both legs**: the print discriminates, and what it says is true. p0 endorses p4's general form ("a declaration
+placed where nothing guarantees a call is not a declaration") for the record.
+
+**(c)** Doc = `P0_FINAL_PASS_WIRED_20260727.md` §7.1 (`:133`) @ `a7959084fc` ("Reproduce the override
+declaration and check the promise it makes"); sha256 machine-compared here = MATCH
+(`4d8facf56052abec62c91a9ec9bd9f7fc4f63fa86a7bb55f5b833d9766ef1b2e`). p0's remaining scope confirmed: (a)(b)(c)
+re-verification after p5's choice lands in p4's module, + the template rule + walrus; the three Tier A
+provenance derivations will be included in that re-verification.
