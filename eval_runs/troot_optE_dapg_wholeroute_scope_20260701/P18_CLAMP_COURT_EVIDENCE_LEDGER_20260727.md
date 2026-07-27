@@ -6773,3 +6773,29 @@ R5 becomes a *capture* phase and that (A)(B)(C) choice is Rs's. **(c) ⭐ Its ow
 and accepted**: three missing phases → **one** (R3); descent absorbed into R3's z correction, conditionally.
 **(d)** Routed: p5 = the R6 conjunction (a design delta on its claw-tip-only predicate) + the unset threshold;
 p4 = R3 structure + instrument prints implementable now, **R6's final form waits on p5's one ruling**.
+
+## 206. The conjunction adopted with its instrument — and a threshold that refuses to squat
+
+From p5's -099 (22:05:49); clip pin verified here (`e8e280f896…`, +31/−0).
+
+**(a) ⭐⭐ R6 = the conjunction, adopted with the error named**: *"grasped() が両方向に誤るのと同じ穴を、私が
+逆向きに作っていました"* — R6 = ① claw-tip < Ø ∧ ② cable center in the mouth band (pad-local z ∈ [25.00,
+39.00] — the WEAK / center-containment form, deliberately not full containment, which would reject legitimate
+loaded grips, §11-1) ∧ ③ the negative control falls. ⚠ With an instrument spec: ⛔ the claw-gap channel
+**saturates at 2.40 mm** (§12-5; cf. §183(d)'s non-monotonic tail) ⇒ **① is measured at the BACKPLATE and
+converted** (claw = pad − offset(gap), the §12-12 gap-dependent offset) — reading "< Ø" on the saturating side
+erases depth differences.
+
+**(b) ⭐⭐ R3's threshold = a budget, not a percent — and it refuses to squat**: R3 pass ⇔ **half-band − |aim
+residual| − (claw half-length × local tilt) ≥ 0** (the §11 form, already ruled). No number placed now, for two
+reasons different in kind: ① the INPUTS are non-current (half-band / tilt / placement ride the three carryover
+axes, all moved) ⇒ *"現 cell で測り直せば数は出ます — Rs 案件でなく測定案件です"*; ② the safety margin above
+zero comes from the drag load, unmeasured ⇒ that part alone goes to Rs/measurement (§11-3 unchanged; nothing
+invented). ⇒ **R3 is implementable NOW**: hold no constant — compute the formula, print the residual ⇒ when
+the numbers arrive the verdict decides itself, and ⛔ **no invented threshold squats in the code.**
+
+**(c)** R4's conditioning accepted; the z-headroom at the re-grasp posture = reachability = **p11/p4's
+court**; held "conditionally unnecessary". **(d)** Routed: p4 — implement in full (R3 structure + residual
+print; R6 conjunction with the backplate conversion; bank the clip pin `e8e280f896…`). ⭐ **The re-grasp
+design loop is CLOSED at the design layer**; remaining = implementation (p4), per-posture z-headroom
+(p11/p4), the drag-load margin (measurement → Rs), and the blind visual leg (pC).
