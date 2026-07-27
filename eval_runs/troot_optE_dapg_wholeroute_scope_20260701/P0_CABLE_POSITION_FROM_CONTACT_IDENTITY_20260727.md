@@ -427,7 +427,64 @@ changes only when the cable slides in x by more than half a spacing — 15.0 mm.
 the index, per §11.3 — real motion and a hop produce numbers of the same size, which is precisely why the discarded
 index mattered.
 
-## 13. Scope
+## 13. -137 (4): what the repair reaches, and what it does not
+
+I named the defect, so I checked the fix against it, at `887d3fefde`. **The content sha reproduces**:
+`770b2271b6cea1392684eb264098bf9ec9ba9d78e7a18102f07546e5f4e408f1` ✅ (my own `sha256sum` of `git show`).
+
+### 13.1 ✅ The reporting path is fixed, exactly as claimed
+
+```
+:886   _ci = int(np.argmin(np.linalg.norm(_cc - sp, axis=1)))     # reference = the SEAT point, 3-D norm
+:887   cw  = _cc[_ci]
+:890   print(... f"seat vs NEAREST cable link cab{_ci}, live" ...)
+:895   print(... "nearest link is N mm from where the aimed link was (identity may differ -- not a drift)")
+```
+
+⇒ ✅ the frozen x is gone from this path — selection is now against the **seat point**, in a full 3-D norm.
+⇒ ✅ **the index that was computed and discarded is now printed**, which is the check §11.3 said was missing.
+⇒ ✅ the drift line no longer asserts movement it cannot establish.
+
+### 13.2 ⚠ Two related sites are not reached
+
+**(a) The aiming path still selects by the frozen x.**
+
+```
+:767   if num in (2, 3, 4, 5):   # grasp steps: aim at where the cable IS, right now
+:768       cl, _ = cable_at(GL[0])
+:769       cr, _ = cable_at(GR[0])
+...        aim_cable[t] = np.asarray(c, dtype=float)      # position only; still no index
+```
+
+⇒ ⭐ **the report now tracks the seat point while the aim still tracks a frozen x.** The same hop therefore
+survives on the **control** path rather than the reporting one: past 15.0 mm of x-slide (§12.4) the arm aims at a
+different link than it did before. ⚠ And because `aim_cable` stores only the position, the new
+*"nearest link is N mm from where the aimed link was"* compares a **seat-selected** link against a
+**frozen-x-selected** one — two different selection rules. ⭐ The added caveat *"identity may differ -- not a
+drift"* is honest about the consequence; the two-rule mismatch underneath is still there.
+
+**(b) The pinch-referenced print still uses body origins.**
+
+```
+:859   dists = [float(np.linalg.norm(np.array(d.xpos[b]) - pw)) for b in CAB]
+:860   j = int(np.argmin(dists))
+```
+
+⇒ ⚠ **no half-segment correction**, so the ~15.0 mm bias that `cable_at`'s own docstring documents is still on that
+number. ⭐ -137 (3) already instructs that this value not be used, so the practical risk is handled by the
+instruction — but the code still emits it, and an instruction is not a guard.
+
+### 13.3 Verdict on the repair, stated narrowly
+
+⭐ **It does what -137 (4) claims: the reporting reference is repaired and the index is visible.** ⛔ It is **not** a
+general fix of the mechanism — the frozen-x selection remains on the aiming path, and the uncorrected origin
+remains on the pinch print. ⇒ "the instrument is repaired" is true of the **reported slot quantity** and should not
+be widened past that.
+
+⚠ Scope: source read only, at `887d3fefde`. I ran nothing, and I am not the designated verifier; this is material
+about a defect I raised, not a verification verdict. ⛔ I propose no change.
+
+## 14. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
