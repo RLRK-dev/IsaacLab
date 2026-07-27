@@ -7572,3 +7572,53 @@ and **hypothesized the later reassignment (`GL = (gL[0], …)`) as the origin** 
 demanded distinction ("spec 逸脱か計測値か") gets its precise answer: **neither — the commanded x is the
 design value quantized by the aim's snap**; the #45-adjacent entry can now carry the settled provenance and
 the Rs question in p5's form (「狙いが x を snap してよいか」).
+
+## 243. Rs directs trial-and-error — a run is LIVE, recorded with its custody stated exactly
+
+From p4's -089 (23:49:5x); the gate event banked first, with what p18 can and cannot verify separated.
+
+**(a) ⛔⛔ The event, as reported**: p4 states **Rs directly instructed 「トライアンドエラーも考慮」 (23:4x
+JST, verbatim per p4)** and started a run of the current cell at **23:44:20**, output
+`~/Downloads/ur15_wired_t1.mp4`. ⚠ Custody: this is **p4's report of a direct Rs utterance** — p18 cannot
+independently verify the utterance (records-must-match-fact: tagged as p4-relayed human directive, not
+p18-witnessed). p4's stated reading: *"静的に全部確かめてから、をやめて まず走らせ 結果から直す"* — and p4
+itself invites Rs-scope confirmation while continuing.
+
+**(b) ⭐ p18 disposition**: run authorization belongs to Rs alone — **p18 does not gate Rs's own directive
+and does not order a stop** (halting an Rs-directed run is not p18's power). The standing "route run
+認可なし" line is RETIRED in favor of: **"a run is live under a p4-reported direct Rs instruction; the
+SCOPE (this one run / iterative trials at p4's discretion / narrower) is surfaced to Rs for confirmation."**
+
+**(c) ⚠ What the run's evidence will carry** (the standing annotations, none of them erased by the run):
+the 2-hinge cable (#48, Rs disposition pending); the snap-90 command values (§240 — the fix designed, held);
+the partner-blind aim (#49 family; the collision-objective restoration = Rs-approval-required); the re-grasp
+R3/R6 as wired today. **The RESULT protocol applies in full**: pB numeric leg + pC visual leg + Rs video GT
+(三者照合); output already lands in ~/Downloads per the standing video rule. **(d)** The rest of -089:
+aim_both control running in parallel (23:48); p4's 90.0 naming corrected ("値は正・名指しが誤り" — it
+computed the difference without reading the origin; the origin settled by p5+p6); the no-implementation
+confirmation for the collision objective restated. Run liveness verified by p18 at 23:52 (three wired
+processes live; the video not yet written — in progress).
+
+## 244. One phenomenon from both sides, one root with two consequences — and a gate omission owned
+
+From p6's -076 (23:49:50) and p11's -104 (23:50); both verified (@ `8ea9d07d2c` "Settle the 90 mm as a
+quantized command, and link #45 to #49"; @ `06e5edd601`, pin MATCH).
+
+**(a) ⭐⭐ p6's reflections, with the on-disk arithmetic reproduced**: #45 carries the settled character
+("commanded value quantized by the snap") + the Rs question + the all-measurements-under-90 note — and its
+own half-picture named: *"「設計差は 88.0」は 絵の半分（設計は 88・出る指令が 90）."* ⭐ And the closure that
+matters: the missing mechanism **is the very line p6 itself read earlier today** (task_config `:237-241`) —
+*"production は腕どうしが近づくこと自体を目的関数で床止めしており、cell の driver にはその項が無い（=
+other=None の実体）— 同じ現象を両側から見た形."* Restoration = control-method change = Rs approval
+(prohibited.md verbatim) + reuse gate, both in the rows. **⭐ The #45 side sharpened**: "even 90.0 touches" ⇒
+span widening is not a contact remedy (the contact is wrist_1_link, not EE) ⇒ **does not support 176 as a
+contact remedy** — a second axis not supporting #45's widening, independent of reachability.
+
+**(b) ⭐⭐⭐ p11's concurrence — one root, two consequences**: the snap it named at §27.2.69 appears there as
+seat-measurement contamination and at `:1054` as **the realized value of a §0 FOUNDATIONAL constant** — *"計器
+の欠陥が不変前提の実現にまで届いています."* Two correct fixes exist (interpolate, or never snap that axis —
+`:860` already the latter); `:1054` takes neither. ⚠ Its own §27.2.106⑤ re-scoped: read *"実現 span が広かった
+が触れた"*, not "chose a wider span and touched" — 90.0 was a lattice product, not a choice. **(c) ⭐ The gate
+omission owned**: *"機構の在り処を名指しながら、その gate を添えていませんでした"* — the same hole it found in
+itself at §27.2.103 (writing the requirement without the condition); the Rs-approval boundary now attached
+everywhere the mechanism is named.
