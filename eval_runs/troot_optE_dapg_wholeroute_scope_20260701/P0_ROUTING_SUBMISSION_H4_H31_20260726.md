@@ -22,6 +22,27 @@
 | **rev4 = 本書** | 本書の commit | pN 提出中 | — |
 | pN 側 | `…-004` → `…-004-C1` | **pN が自 RETURN を撤回・再発行**（原因 = pN の shell 引用ミスで行番号欠落）。原因側訂正ゆえ私は帳尻合わせをしない | — |
 
+## ⭐ 追記訂正 — R9 citation の commit pin（2026-07-27・p18 authorize）
+
+**authorize:** `MSG-P18-P0-PIN-ADDITION-AUTHORIZED-20260727-036`。**原因側 = p0**（本追記は p0 の自己申告による）。
+⛔ **本追記は pin の記載を足すのみで、値も結論も変えません。** 旧記述は rewrite せず、そのまま残置します。
+
+**欠けていたもの:** 本書 §R9 の 2 箇所（`arm_control_measurement_harness.py:938` / `:1419-1436` の引用）に **commit pin が無い**。動く file の行番号を commit なしで書いた形。⚠ 本 citation は本日 **最も消費された**（p4 の droop 数値撤回の根拠・p11 の court にも到達）。
+
+**⭐ pin（本書の R9 citation はすべてこの commit を基準とする）:**
+
+| 項目 | 値 |
+|---|---|
+| **基準 commit** | **`746f049e8357aead0f28c48be1588c9ef2fee005`** |
+| 値との関係 | ⭐ **droop 4 値を引いた commit と同一**。面は混ざっていない |
+| `:938` | `translation_mm_per_rad` = `(np.abs(jacp) * 1000.0).max(axis=0)` の行 |
+| `:1419` | `static_tip_droop` 内の `col_mm` 代入行 |
+| 検証（p0 自測 ＋ p18 独立実測で一致） | 上記 2 行は**作業ツリーと当該 commit の双方で同一内容**。`git diff --numstat 746f049e83 -- <harness>` が空 ⇒ **当該 commit 以降 harness は未変更** |
+
+**なぜ足すか:** pin が無いと harness 変更時に citation が**黙って腐る**（誰も気づかない）。⇒ 本日確立された型「**同じ行番号が別 commit で別物を指す**」（実例 = `:381` は `c16858c666` で `mj.nbody`、`746f049e83` で `body_labels`）への対処。⭐ **消費される citation ほど pin を厚く。**
+
+---
+
 ## ⚠ 本 rev4 までに**撤回**したもの（先に明示・累積）
 
 | 撤回対象 | 理由 |
