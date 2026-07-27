@@ -702,7 +702,55 @@ cover the hazard that was just named inherits a fresh one. My first fix addresse
 described rather than the **shape** of the predicate, which is the same move this court has been correcting all
 day, in the correction itself.
 
-## 18. Scope
+## 18. ⭐⭐⭐ -146 (7) resolved by reading: the claws **do** keep collision in the production env
+
+-146 (7) names this the session's highest-value open item: if the claws fall outside the `"pad"` set at
+`newton_skill_env_base.py:1580`, then **the claws never collide with the cable in the production env and the whole
+capture mechanism is void there.** It is decidable by reading Newton's MJCF importer. I read it.
+
+**`newton/_src/utils/import_mjcf.py:693`** — how a shape's label is formed:
+
+```
+shape_label = f"{label_prefix}/{geom_name}" if label_prefix else geom_name
+```
+
+⇒ ⭐ **the Newton `shape_label` *is* the MJCF geom name** (optionally prefixed). ⇒ the claws are named
+`right_pad_f1ext` / `right_pad_f2ext` / `left_pad_f1ext` / `left_pad_f2ext` (`2f85_koshape.xml:116-117`, `:157-158`)
+⇒ every one **contains "pad"** ⇒ `if "pad" not in lbl.lower()` is **False** ⇒ ⭐⭐⭐ **the claws KEEP COLLIDE.**
+
+> **The capture mechanism is not void in the production env. The claws collide with the cable.**
+
+### 18.1 ⭐ The unnamed-geom case closes too, and the two sites turn out to agree
+
+**`import_mjcf.py:597`** — the fallback for a geom with no `name=`:
+
+```
+geom_name = geom_attrib.get("name", f"{body_name}_geom_{geo_count}{'_visual' if just_visual else ''}")
+```
+
+⇒ ⭐⭐ **the fallback is built from the BODY name**, so an unnamed geom on the `right_pad` body is labelled
+`right_pad_geom_N` — which **also contains "pad"**.
+
+⇒ ⭐ therefore `:1580` (Newton label = geom name, with a body-derived fallback) and `:1392`
+(`gname + bname` concatenated) **agree even for unnamed geoms** — not because they were designed to match, but
+because the importer's fallback already folds in the body name that the other site adds by hand. ⭐ The
+label-vs-geom-name caveat I attached in §16.3 is therefore **discharged**, in the direction that keeps the
+mechanism working.
+
+⚠ One detail I do **not** close: the fallback appends `_visual` for visual-only geoms, which would also match
+"pad", so visual geoms on a pad body would keep COLLIDE. `add_ur5e_robotiq` passes `parse_meshes=False`, so those
+geoms may not be created at all — **I have not verified that**, and I do not claim it either way.
+
+### 18.2 What this settles and what it does not
+
+✅ **settles:** the claws collide with the cable in the production env; the capture mechanism exists there; §16.3's
+caveat is discharged.
+⛔ **does not settle:** anything about the **arm** shapes, which is the finding that stands unchanged —
+non-pad arm shapes have COLLIDE cleared across **both** arms (`mj_left_ss` is taken before the first arm and
+`mj_arm_se` after the second), so arm-to-arm and arm-to-structure interpenetration still generates no contact.
+⭐ **the two facts sit together:** the gripper's working surfaces collide; the arms do not.
+
+## 19. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
