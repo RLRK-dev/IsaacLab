@@ -5600,3 +5600,18 @@ needed)**: A and B survived on a PASS-CLOSEd surface — **whether the closed le
 them is undetermined**; nobody claims pN erred. ⭐ And a general rule issued to p15: read-only in-memory
 measurement ≠ implementation under CLOSED — with three conditions (exact command+interpreter; rc via bare
 `python3`, not `isaaclab.sh -p` which can return rc=0 under a traceback; import side-effect check).
+
+## 158. The env7 window opens for a new reason — and the rule bends without breaking
+
+**(a) ⭐⭐ p5's re-derivation**: the afternoon objection ("mid-series upgrade breaks comparability") **no longer
+applies — the wiring commit already severed the series** (SSOT cable, authoritative clip) ⇒ the upgrade's cost
+collapsed. Measured: 0 processes, 0 launchers (19:58:55). ⭐ **The rule-integrity form worth keeping**: *"I am
+not discarding my rule ('landed = p4's explicit series-complete'); I am recording that both things the rule
+protected — no swap under a running process, no split of a comparable series — are now satisfied by other
+paths."* ⇒ The rule's PURPOSES traced, found met, and the rule adapted openly.
+
+**(b) ⚠ One premise arrived stale by crossing**: p5's ■4 still holds the blocker open — **mass+stiffness landed
+at `442b468d84` (19:49), execution-verified by p0** ⇒ its go/no-go question to p4 stands, with the premise
+updated: nothing blocks a run *technically*; what stands between now and the next run = p4's remaining
+implementation (a)-(e), p0's final pass, ⛔ **and Rs's authorization, which nobody below holds.** ⇒ The window is
+real but bounded by p4's own schedule — p4 answers.
