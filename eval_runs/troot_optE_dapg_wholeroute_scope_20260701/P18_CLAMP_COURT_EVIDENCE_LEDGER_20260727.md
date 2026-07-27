@@ -6417,3 +6417,39 @@ is 1.39× the judged family and 8.3× the soft family** (this morning's rule aga
 measurement surface — per-joint K conflates discretizations). Direction unchanged; magnitudes halve.
 **(d)** p0 confirms its delta scope (`:415` deletion / 11 placements / stack stamps) and endorses the
 set-removal (*"I enumerated boundary members; the form that needs no enumeration is superior"*).
+
+## 191. All four land in one commit — and the report cites the pin the bank outgrew
+
+From -077 (21:27:01); every pin machine-checked here.
+
+**(a) ✅ The four items landed** @ `691648d445` ("Take the strict form, land the placements, and correct my own
+notes"): ② `_plain_coefficient` deleted, mul/div classified — probe: `0.5` / `*3` / `*1000.0` / `/2` /
+`CABLE_R*2` all caught; subscripts, range(), sum(1 for) free ⇒ **the strict form is real on disk** (module pin
+now `f6f0d357af…`). ③ placements done ⇒ **template literals 0; name-rule remainder = 1 (FLOAT_Z)**; the five
+names strictness raised (RX_MID / Y_GRASP_REST / Z_GRASP_REST / kps / world×2) all rewritten literal-free.
+④ stack stamps on all five probes + re-output — ⭐ with the elegant check: **body-minus-stack-line md5 = 5/5
+unchanged** ⇒ discriminability added, values untouched (p18 read the `[stack]` header in the sweep output).
+Recollation artifact → `0a987eee14…` (MATCH); template artifact → `a1fb263304…` (MATCH; carries p4's own
+source correction: -074 said "producer `:101`"; actually task_config `:101`, producer imports `:111`, divides
+`:124` — number right, citation wrong, caught when making the quantity actually read from code).
+
+**(b) ⛔ RETURN issued — the report cites the pin the bank outgrew**: -077 ① reports on-disk sha `41c5b24eae…`
+(+18/−1); but the banked blob at `691648d445` **is `f29a684118…`** (machine: git show = current on-disk). ⇒
+The BANK is current and correct — it took p5's -094 edit, which p4 had not yet been told of (my -390 relayed
+the -093 pin); the REPORT's sha + numstat are the previous pin's. Mechanism: a verify-to-commit gap while p5
+edited (or relay numbers standing in for own output). Nothing further to bank; the correction owed is to the
+record only.
+
+**(c) ⛔⛔ The head-note confession, verified**: p4's retirement notes said "0.12" on all five siblings — wrong
+for two (cell/route are 0.02) ⇒ *"note が警告している当の欠陥を note 自身がやっていました"* ⇒ all five
+corrected with date + discoverer p11 credited (p18 read cell `:4/:8` and route `:4/:8`: corrected value + the
+confession line 「this note said 0.12 for every file it was stamped on…」 in place). p4's own read gives the
+**3-valued** family picture (0.12 × steps/c1seat/reaim; 0.02 × cell/route; wired 0.33333/0.01) — consistent
+with §190's 4-way audit counting wired as its own tier.
+
+**(d) ⚠ Timestep at producer value, measured**: cell builds identical (nq 113 / nu 14 / nbody 88 / ngeom 139 /
+eq 8; cab30/cab23); statics essentially unchanged (z-table +0.1486..+0.1559 vs +0.1487..+0.1558); cable-joint
+limit hits 0/79; three fixed step-counts converted to seconds (4000 steps = 8 s at the old dt, 0.83 s at the
+new); cost ≈ 3197 steps/s ⇒ ~1 min integration per 40 s of procedure. **(e) ⛔ The one open name**: FLOAT_Z is
+frozen by **two contradicting p5 rulings** — §6.4j "move to spec" vs clip design §4 "refuse supply until p5
+decides" ⇒ routed to p5 for resolution. The lane's remaining static work = that resolution + p0's delta.
