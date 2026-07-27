@@ -7513,4 +7513,62 @@ the same control VIA aim_both — does the menu-chosen posture also touch? ~4 mi
 **(d) ⚠⚠ The byproduct, recorded without adjudication**: **this cell's grasp span = 90.0 mm** (the GL/GR
 design x-difference) vs §0#2's 88 mm — a 2.0 mm discrepancy on a FOUNDATIONAL constant (itself pending #45's
 88→176) → routed to p5 (design provenance: where does 90.0 come from?) and p6 (register: the #45-adjacent
-complex).
+complex). 〔⚠ **Corrected by §240**: "design x-difference" was the wrong name — the design difference is 88.0
+everywhere; 90.0 is the design value QUANTIZED by the aiming code's snap.〕
+
+## 240. Ninety is not a constant — it is the snap, and nobody chose it
+
+From p5's -111 (23:44:29); verified here (the two GL/GR definitions read at `:860-861` and `:1054-1055`; the
+arithmetic re-run: 90/15 = 6.0 exactly, 88/15 = 5.867, nearest 15 mm centre to ±44.0 = ±45.0).
+
+**(a) ⭐⭐⭐ The provenance**: the wired driver holds TWO GL/GR definitions and the later wins — `:860-861`
+takes x from the design constant (span = 2×44.0 = **88.0** ✅); `:1054-1055` overwrites with `cable_at()`'s
+nearest link centre ⇒ **x is quantized to the 15 mm pitch** ⇒ ±44.0 snaps to ±45.0 ⇒ **span 90.0, one
+millimetre per side — *"誰も選んでいません."*** **(b) ⛔ So 88-vs-90 is not two designs diverging**: 88 is the
+design; 90 is its quantization ⇒ *"Rs が裁定する対象は「90 という設計」ではなく「狙いが x を snap してよい
+か」"* — p5 stops exactly there. **(c) ⭐⭐ The third instance of the snap family it flagged today** (①
+cable_at fixed-x+snap ② the aim-less re-grasp ③ now: **the snap silently changed the realized value of a §0
+premise**) — and its §4-Q2 ruling ("x は狙い直さない — 設計定数だから") exists precisely for this: `:1054`
+violates the ruling while `:860` obeys it — *"同一 file 内に 従う版と反する版が両方在り、反する方が後"* — the
+five-copy danger inside one file. **(d) ⭐ The remedy, designed and HELD**: restore `:1054-1055` to the
+`:860-861` form (x from the constant; y,z from cable_at) — an application of the existing ruling, not new
+design; span returns to 88.0 and the question dissolves. ⛔ **Execution after Rs** — the runs that ran at 90.0
+remain fact, and the existing measurements (placement error / tilt / band) were taken UNDER 90.0.
+
+## 241. The driver's own rationale is refuted — and the missing mechanism already exists in production
+
+From p11's -103 (23:45); pin verified (@ `2f8985d936` "The wrists meet, which refutes the reason the driver
+gives for rolling" → `d3298f6071…`, MATCH; the `:885` docstring and task_config `:237-241` re-read here).
+
+**(a) ✅ The aim_both control adopted, rescoped**: not a mechanism test — the mechanism is source-settled — but
+a **prevalence check** (does the menu-chosen posture also touch), worth its 4 minutes as triage toward the
+judged-run question. ⛔ What it cannot answer: a negative is *"今日は firing していない"* — nothing CHECKS
+non-touching, so other targets/seeds may touch. **(b) ⭐⭐⭐ The driver's own design rationale refuted by the
+measurement**: `:885` verbatim — *"Rolling is what lets two arms share an 88 mm span without their wrists
+meeting"* — ⛔⛔ **the wrists ARE meeting** ⇒ the 34.4° roll serves a purpose it does not achieve. ⚠ p11
+corrects its own §27.2.46 citation: right as grounding of INTENT, wrong as grounding of EFFECT. **(c) ⭐⭐ The
+missing mechanism is not new design — it exists in production**: task_config `:237-241` (re-read) — the
+dual-arm collision-avoidance IK objective (EE-EE safety spheres, +margin, COLLISION_WEIGHT) that FLOORS arm
+separation in production ⇒ **production IK carries "the arms must not close on each other" as an objective;
+the UR15 driver dropped it and substituted geometry (roll), which fails.** ⛔ p11 implements nothing and
+carries no numbers across substrates — only the mechanism's location; the AGENTS reuse gate applies (check
+the existing implementation first). ⚠ p18 boundary note: restoring a collision objective into the IK solve =
+**a control-method change ⇒ Rs approval required** before any implementation. **(d) ⚠ "Widen the span" does
+not solve it**: this cell runs at 90.0 — wider than 88 — and the wrists still touch; another refutation datum
+beside -191's, and directly relevant to the pending #45 (88→176): **widening guarantees nothing while nothing
+checks.**
+
+## 242. The register could not reproduce ninety — and the two readings converge on the same line
+
+From p6's -075 (23:45:11, crossing p5's -111); verified (@ `79d59d181f` the #49 append).
+
+**(a) ⭐ #49 appended with the coherence stated**: the cause points at *"「腕が 2 本であること」ではなく
+「2 本を独立に解いていること」"* — consistent with the arm-count framing correction; scopes carried
+(driver-posture prevalence pending; judged-run identity unverified). **(b) ⭐⭐ The honest failure that
+converges**: p6's closed query found the DESIGN x-difference = **88.0 exactly in all five drivers**
+(GRIP_HALF_SPAN 0.044, authority-grounded via _tc; zero 0.045/0.090 literals) — it could NOT reproduce 90.0
+and **hypothesized the later reassignment (`GL = (gL[0], …)`) as the origin** ⇒ exactly what p5's crossing
+-111 established with line numbers and arithmetic. The two independent readings meet on `:1054-1055`. ⇒ p6's
+demanded distinction ("spec 逸脱か計測値か") gets its precise answer: **neither — the commanded x is the
+design value quantized by the aim's snap**; the #45-adjacent entry can now carry the settled provenance and
+the Rs question in p5's form (「狙いが x を snap してよいか」).
