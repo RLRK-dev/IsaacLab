@@ -145,7 +145,10 @@ sha256 `a3bef79ee9b4f4161dd6da20967e65e0da78f5706724fbf61e35fb43ba230ba3` / **WT
 | `2f85_koshape_scratch_wide.xml` | – | **在り** | （untracked） |
 | **`eval_runs/.../p4_ur15_sim_20260727/_ur15_2f85_koshape_actuated.xml`** | **6** | ⛔ **無し** | sha256 `c2d65167d32b413bcbf2985a153025e5455a3d5e8051cd89733cb67e11751ffe` |
 
-⇒ ⭐⭐ **本 1 行は「設計に無い」のではなく、生成された `_ur15_..._actuated.xml` で欠落している。** 他 6 本（base×driver 等）は残っているので、**欠落はこの 1 対に限る**。
+⇒ ⭐⭐ **本 1 行は「設計に無い」のではなく、上表の sha256 `c2d65167d32b413bcbf2985a153025e5455a3d5e8051cd89733cb67e11751ffe` の生成物で欠落している。**
+〔⛔ **訂正 2026-07-27（原因側 = p5・pN 便 `MSG-P18-TWO-FILES-ONE-BASENAME-20260727-077`）**: 初出の「生成された `_ur15_..._actuated.xml` で欠落している」は **basename による指示で一意でなく、偽になり得る**。**同 basename の file は tree 内に 2 件在る**（p5 が独立実測）— ①`eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/_ur15_2f85_koshape_actuated.xml` sha256 `c2d65167d32b413bcbf2985a153025e5455a3d5e8051cd89733cb67e11751ffe`（tracked・exclude **6**・pad 対 **無**）／②`thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml` sha256 `1966631e61496f980c398bee17d46bfda3eafd38b497c35d584cf403a03015c0`（**untracked**・exclude **7**・pad 対 **有**・mtime 2026-07-27 12:20）。⇒ **②では本文が偽**。⭐ 本書の測定・裁定が対象としたのは **①のみ**（上表は full path + sha256 で pin 済ゆえ内容は不変）。
+⛔ **私の列挙の欠陥（自己申告）**: 私の探索は `find . -name '2f85_koshape*.xml'` で、②の basename は `_ur15_` 始まりゆえ **構造的に当たり得なかった**（`git ls-files` 側は untracked ゆえ当たらない）。⇒ 「全 variant を列挙した」と読める書き方をしたのは誤り。⭐ 以後、生成 model は **full path + sha256 でのみ**引用する。
+⛔ **②の素性（いつ・どの run のために生成されたか）は私は測っていない**（mtime のみ）。⇒ 生成した側（`w2:p4`）の court。〕 他 6 本（base×driver 等）は残っているので、**欠落はこの 1 対に限る**。
 ⇒ ⛔ **私が測っていないこと**: (i) その生成物が p0/p4 の実測に使われた model か（**測定した側の court**）(ii) 生成手順のどこで落ちたか。⚠ 併せて確認: `thread_isaac_lab/` の Python で `2f85_koshape` を参照する行 = **0 件**、`envs/`・`scripts/` で contact exclude を操作する行 = **0 件**（⇒ code は exclude を落としていない）。
 ⇒ **要求（私の依頼）**: 生成物を作った側が、欠落が **生成 step の回帰**か **意図的な除去**かを 1 行で確定してください。回帰であれば **案 1 は「復帰」であって設計変更ではありません**。
 
