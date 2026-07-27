@@ -4259,3 +4259,33 @@ here**); **(2)** ⚠ step ③'s verifier is **unresolved on disk** — the brief
 `-208`) plus pZ's Rs-pending disposition ⇒ **the path's third step is subordinate to the role fix.**
 ⭐ And it widened the row's scope: #46 now names the **whole 21-constant / 10-physical divergence**, not one
 clip constant.
+
+## 95. p11 rules on both spec inputs — the band survives Ø10, and the pitch fix is refused for a better one
+
+**(a) ⭐⭐ Band 12.00 is diameter-independent.** Deviation asks whether the cable **centre** crosses the claw's
+inner face — no thickness term; only full containment (`W − 2r`) carries the radius. ⇒ At Ø10 the determination
+stands (all 4 placement points still determined at ±6.00); only the sub-case moves (full containment 40%→27%,
+determinations 3/4→2/4). ⚠ p11's own scope: **geometric independence, not physical** — a thicker cable can deform
+against the claw and ride up; this model does not have that.
+
+**(b) ⭐⭐⭐ Segment-pitch halving: refused as mitigation.** At 15 mm pitch the leakage at 34.4° drops to 4.24 mm —
+under its 6.00 half-band **but still over full-containment's 3.00**, and: (i) the effect is angle-dependent (sin) —
+more roll breaks it again, while interpolation kills it at any angle; (ii) pitch couples to cell dimensions
+(600 vs 960 mm total) — **changing the environment for the instrument's sake**; (iii) interpolation costs zero.
+⇒ ⭐⭐ **General form: quantization is removed by interpolating the crossing, not by refining the pitch — a cheap
+structural repair dominates an expensive, coupled mitigation.**
+⭐ **This is the second independent derivation of a lesson already banked on 2026-07-15** (nearest-node selection
+has a quantization floor; interpolate the crossing). The lesson re-derived itself on a new instrument, which is
+what a real invariant does. ⛔ p11 requests neither change; the radius hazard is registered forward-looking only.
+
+## 96. p12's disposition: how to accept out-of-court material without opening a gate
+
+To p15's question, `w2:p12` ruled: **bank = YES, submit to p12, lane records dir** — ⭐ reasoning that findings on a
+**PASS-CLOSEd surface are the kind most worth keeping**, that ⛔ **impl CLOSED blocks acts (implement / train /
+push / freeze), not reading or receiving defects**, and that message-only findings die at /clear (today's repeated
+type). **Five conditions**: ① marked not-a-verdict in the doc ② each finding pinned file:line + **content sha256**
+(⚠ p12 cites its own line-number-citation failure) ③ ⛔ no reflection to LEDGER/status/planning (verdict-only
+surfaces) ④ ⛔ no fixing (that is p14's court after the gate opens) ⑤ ⭐ **any contradiction with pN's step-5
+PASS-CLOSE must be flagged explicitly** — that becomes a gate/custody question for p12 + p18 (+ Rs), **not p15's
+judgment.** Routing: via p18 with path + content sha + observation time; p12 then sorts by type (design semantics
+→ p16 / code defects → p14 later / evidence-custody → p18). **Gate opened: none.** ⇒ Relayed to p15.
