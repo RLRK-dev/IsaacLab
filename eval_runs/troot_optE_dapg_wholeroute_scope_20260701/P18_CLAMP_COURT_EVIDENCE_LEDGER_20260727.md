@@ -1077,3 +1077,43 @@ collation note*. Banking is p4's court; p5 is 0-commit.
 ⚠ `w2:p5` also disclosed that its own `-029` reached me with **three passages missing**: an unquoted heredoc let
 backticks be command-substituted away. That is the project's documented **backtick hazard**, and p5 restored the
 three passages in plain text. ⇒ p18's dispatches use quoted heredocs and are unaffected — checked, not assumed.
+
+### 11b. The aim residual, the narrow scope of the repair, and one inference withdrawn from my own argument
+
+⛔ **p18's own relay needs qualifying.** I passed on *"the aim is solving (1.0 / 0.4 mm)"* as established. Reading
+the producing blob myself: `:438 err = slot_after_close(t, w, CLAMP) − cable_w`, and the call site supplies
+`cable_w` from `:743-744 cable_at(GL[0]) / cable_at(GR[0])` — **the frozen-x rule.**
+⇒ ⭐ So the residual is a valid measure of convergence **onto the link the frozen-x argmin selected at aim time**.
+⛔ It is **not** evidence that the aim was at the right link, and that selection can differ from the link that
+later occupies the jaw. ⇒ **"The solver converges" survives; "the aim was correct" does not.**
+⭐ `w2:pB` reached the same place independently and stated it plainly: what survives is **the servo reached the
+commanded pose** (joints vs commanded ≤ 0.5 mrad, log `:55`/`:61`); **whether the aim was on target is UNKNOWN**.
+⭐ Incidentally the same line confirms the endpoint/path split from the other side: `slot_after_close` sits
+**inside** the aim loop, so the **endpoint** is explicitly accounted for — and the path still is not.
+
+⛔⛔ **`w2:p11` withdrew an inference it had handed me, while it was load-bearing in my argument.** It had reasoned
+that the 0.15 mm agreement implied the cable had not slid in x in R. With p0's second defect (body origin,
+15.0 mm uncorrected, `CABLE_SEG = 0.030` ⇒ half = 15.0), a ±15.0 systematic on the printed 17.4 would put the
+centre at −0.4 or 29.6 — ⇒ **neither near the contact bound of 14.75** ⇒ ⭐ **the agreement can be coincidence.**
+⇒ p11 withdraws *"in R the frozen-x link and the contact link were the same."*
+⭐ Its stated reason for the urgency is worth keeping: **it does not leave an inference it originated sitting
+inside another pane's argument.** ⚠ And it phrases the limit correctly — *"cannot be used as grounds"*, not
+*"is false"* — because it has not read whether the 15.0 mm systematic reaches the z comparison.
+✅ Unaffected: the contact-based estimate (`pad2`-only ⇒ centre ≤ 14.75) ⇒ **"R's cable was outside the opening"
+still stands**, on no instrument at all. ✅ My hypothesis also unaffected — the mechanism is confirmed in code;
+what is lost is only the limitation *"it did not bite in R"*.
+
+⚠⚠ **`w2:p0` checked p4's repair and its verdict is deliberately narrow — do not widen it.**
+✅ Independently reproduced the sha; the **reporting** path is genuinely fixed: `:886` selects by
+`argmin(norm(_cc − sp))` — **seat point, 3-D norm, frozen x gone**; `:890` prints `cab{_ci}`, so the discarded
+discriminator is now **visible**; `:895-896` no longer asserts motion it cannot establish.
+⛔ **Two sites did not get the repair:**
+1. **The aiming path is still frozen-x** (`:768-769`), under a comment reading *"aim at where the cable IS, right
+   now"* ⇒ ⭐ **reporting now follows the seat point while aiming follows the frozen x** ⇒ the same jump survives
+   **on the control side rather than the reporting side**, and the new line compares a seat-selected link against
+   a frozen-x-selected link — **two rules**. The added *"identity may differ"* caveat is honest about the
+   consequence but does not remove the mismatch.
+2. **The pinch-reference print still uses the body origin** (`:859 norm(d.xpos[b] − pw)`) ⇒ the documented
+   half-segment bias is still on it. ⭐ `-137` told the court not to use that number — ⛔ **but an instruction is
+   not a guard.**
+⇒ ⭐ **Correct scope: "repaired with respect to the reported slot quantity."** Not a general fix.
