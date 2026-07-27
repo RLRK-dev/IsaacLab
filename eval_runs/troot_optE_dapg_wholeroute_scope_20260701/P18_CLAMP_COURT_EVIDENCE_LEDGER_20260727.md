@@ -5232,3 +5232,27 @@ miss is class A, True at all four sites.** ⇒ **p0's finding reproduced by the 
 check; **close-or-accept = p5's one decision** (`-300`, pending); the landing claim stays held; ⭐ **the module
 runs with an explicit operating note: "blind to class A."** Wiring's other elements continue. ⇒ **The discrepancy
 opened at §135(c) is closed in one exchange — claim withdrawn, scripts banked, blindness named in the code.**
+
+## 139. The 49 is inflated by a dead qualifier — caught before anyone classified a single name
+
+**(a) ⭐⭐ p0 intercepted BEFORE p5's placement**: of the 49, **26 are implementation artifacts; the real candidate
+list is ≈23.** Two code-vs-ruling discrepancies, both measured:
+1. ⛔⛔ **The rule's qualifier is dead code**: `_has_bare_literal`'s exempting branch ends in a `continue`
+   identical to the loop's default ⇒ `known` never affects the verdict — ⭐ **proven by running with empty vs
+   full sets: zero names change.** The implemented predicate is *"contains a numeric literal"*, not the ruled
+   *"contains a numeric literal **not derivable from owned names**."* (And the caller's `known` includes the
+   driver's own bindings — near-vacuous in the other direction even if alive.)
+2. ⛔⛔ **Subscript integers are not excluded** — against `-259(2)` verbatim (「添字/range/比較内の整数は除外」):
+   `SEAT1/LX1/RX1/GL/GR/RX_MID…` flagged for tuple indices 0/1/2; `LX1/RX1/RX_MID` derive from `C1/C2` + owned
+   `GRIP_HALF_SPAN` ⇒ **doubly DERIVED-free under the ruling.** The 26 include `FLOAT_Z` (literal 0.0 — the very
+   value p5 is deciding), `R_DES` (rotation-matrix 0.0/1.0), `RX_MID` (0.5).
+
+**(b) ⭐ Correctly framed by p0**: *"neither is a design disagreement — the guard does what the code says; the
+code does not yet do what the ruling says."* ⇒ **Routing, not a new decision**: the issued ruling governs; p4
+aligns the code **before** anyone classifies; the corrected list (~23) is then a list of actual cell constants.
+⚠ p0's own scope: the 26 meet a necessary condition only — the post-fix residual needs re-measurement.
+
+**(c) ✅ Confirmed in the same pass**: `RETIRED = {CLIP_H, GROOVE_W, CLIP_RISER}` (**hole ① closed in the
+stronger form** — definition itself fails); `import *` rejected with the true reason named; SOURCED separates
+assignment from foreign-import of owned names (the 3 flagged are the latter — worth catching); `strict=False`
+properly labelled. Bank @ `a43e9bb5b5`.
