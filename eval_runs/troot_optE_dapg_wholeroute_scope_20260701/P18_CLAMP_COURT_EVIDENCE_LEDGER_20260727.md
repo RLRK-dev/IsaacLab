@@ -1175,3 +1175,52 @@ cable inside the opening; R (screen-left) = outside.**
 both claws and the jaw held at 6.81 mm. ⛔ pC notes, correctly, that agreement is not proof; the verdict is Rs's.
 ⇒ **§10f is closed: the disagreement was a sign error in a projection axis, and the physics was consistent
 throughout.**
+
+## 12. ⛔⛔ Rs's second video finding lands on a surface the sim cannot report
+
+`w2:p5` ran a closed query on the banked commit and p18 verified it independently at the same commit
+(`git show e9f93a7556:…/ur15_cell.py`, `:112-115`):
+
+```
+<geom name="floor" type="plane"    … contype="0" conaffinity="0"/>
+<body name="column">
+  <geom name="stem" type="cylinder" size="0.102 …" … contype="0" conaffinity="0"/>
+  <geom name="foot" type="cylinder" size="0.215 0.03" … contype="0" conaffinity="0"/>
+</body>
+<body name="table"> <geom name="table_top" type="box" …/>          ← no flags: the table DOES collide
+```
+
+⇒ ⭐ **The scene's cylinders are the robot's stem and foot, and both have collision disabled.** The cable is
+capsules (`cab{i}_g`), a separate matter.
+
+⇒ ⛔⛔ **So if the video shows the arm hitting a cylinder, that is not contact — it is penetration.** With
+`contype=0 / conaffinity=0` the physics offers **no resistance at all** ⇒ ⭐⭐ **the sim cannot report it as a
+failure**: no contacts are generated, so it is invisible to every contact-based check we have.
+⇒ ⭐ **Rs's eye was the only detector.** That is the clearest justification for the visual leg the day has
+produced.
+
+⇒ ⭐ **Design consequence (`w2:p5`'s court):** the current path **cannot work on hardware** — the real column is
+physically there. Path and pose must be designed with the column as a **real obstacle**. ⚠ p5 notes this is the
+project's named anti-pattern: **do not justify penetration by disabled collision; design must not rest on a
+collision-disabled value.**
+
+⭐ **Two cheap things decide it, and p5 named both:**
+1. **Whether Rs's 「円柱」 means the column or the cable capsule** — one word from Rs. ⚠ If the cable, this is
+   ordinary contact and not the above.
+2. ⭐⭐ **Measure arm-geom to `stem`/`foot` minimum distance along the trajectory.** `mj_geomDistance` is
+   **independent of the contact filter** — p5 established exactly that in today's probe ⇒ **distance is
+   measurable even where collision is disabled, and penetration appears as a negative value.**
+   ⇒ ⭐ Today's instrument work now supplies the tool that sees what the physics was told to ignore.
+
+⚠ **p18 adds two observations from its own closed query, neither of which p5 reported:**
+- **The floor is also collision-disabled** (`contype=0 conaffinity=0`) ⇒ a second surface the arm can pass
+  through without the sim objecting. Same class, not yet examined.
+- **The cylinder definition appears in five files** at that commit, not one — `ur15_cell.py`, `ur15_route.py`,
+  `ur15_steps.py`, `ur15_steps_reaim.py`, `ur15_yoke_video.py` (2 matches each). ⛔ p18 has **not** established
+  whether these are duplicate cell builders or references, so this is **not** a claim that five scenes are
+  affected. ⇒ ⚠ But if a repair is applied to `ur15_cell.py` alone, the others must be checked — **the same
+  shape as `newton_skill_env_base.py:1392` surviving a driver-only fix.**
+
+⭐ `w2:p5` also declined to defend its own conditional: *"the conditional said 'conditional because the quantity
+is undetermined'; once the quantity lands the conditional is spent, and I will not defend it."* And it lifted its
+freeze after confirming the bank, adding future material as **new sections without rewriting banked lines**.
