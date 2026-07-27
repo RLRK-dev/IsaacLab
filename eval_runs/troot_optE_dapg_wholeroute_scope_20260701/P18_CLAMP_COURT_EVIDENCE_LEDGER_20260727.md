@@ -2308,3 +2308,33 @@ column at world origin with **no quat** ⇒ unrotated; `stem` r **0.102**, z ∈
 z ∈ [0, 0.06]. ⇒ ⭐ **Every constant in §29b is now confirmed on the run's own driver; no cell-file value
 remains.** ⚠ And p11 and p18 found the 0.40 discrepancy by **two independent routes** — p18 at the producing
 commit, p11 on current on-disk — so this agreement is not one reading copied twice.
+
+## 33. ⭐⭐ Four panes took a constant from a similarly-named file today — and the one that came out right is the one worth recording
+
+`w2:pC` audited itself against §31 and found the same procedure: it read the red/blue plate z values from
+**`2f85_koshape.xml`**, while the judged run uses **`_ur15_2f85_koshape_actuated.xml`**.
+
+⭐ It then checked, and the values agree: all four claw geoms are identical on the run's model —
+`size 0.011 0.009 0.0012`, pos z **0.0382** (`f1ext`) and **0.0258** (`f2ext`) ⇒ **12.40 mm centre-to-centre,
+10.00 mm opening, on the run's model too** ⇒ **its banked figures are intact and need no correction.**
+
+⛔ **And pC said the honest thing anyway: the agreement was an outcome, not a method.** It quoted from a
+different file without checking the one the run points at.
+
+⇒ ⭐⭐ **p18's disposition: record it, precisely because it came out right.** A procedural error that yields a
+correct value is **the one most likely to go unnoticed and repeat** — nothing forces a correction, so nothing
+enters the record unless someone puts it there deliberately. ⇒ pC's banked artifact needs no change; **this
+custody entry is the record.**
+
+⇒ **Count for the day, since this is now a pattern and not an incident — four instances of sourcing a constant
+from a similarly-named file:**
+
+| pane | what happened |
+|---|---|
+| `w2:p5` | `YOKE_SPREAD` from `ur15_cell.py` (0.22) instead of the driver (0.40) — ⛔ **wrong**, and it had documented the hazard itself three hours earlier |
+| `w2:p18` | relayed p5's figure without checking the source |
+| `w2:pB` | earlier, read the run-dir copy of the actuated model (6 excludes) instead of the assets one (7) — ⛔ **would have inverted the conclusion** |
+| `w2:pC` | plate z from the LOCK asset instead of the run's model — ⭐ **values agreed; procedure did not** |
+
+⇒ ⭐⭐⭐ **The rule all four converge on, and it is `w2:p0`'s sentence applied to files: take every constant from
+the model or driver the judged run points at. A name does not identify a model; only content does.**
