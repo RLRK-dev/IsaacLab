@@ -6942,3 +6942,66 @@ exactly where the channel is dead.** ⛔ *"「換算は一律の作法」と読�
 しまった床が、いま計器選択の根拠として正しく使われています."* Routed: p4 (both notes as implementation
 requirements — the seed-and-once iteration + a comment carrying the essential-vs-insurance why); p5 (relay as
 asked).
+
+## 213. The circularity owned with its contraction rate — and the second rescue by a weak form
+
+From p5's -101 (22:21:32); zero requests, no doc changes.
+
+**(a) ⭐⭐ Note ① taken past "harmless" to a BOUND**: *"私は循環に気づかずに書きました"* — and then: offset
+amplitude 0.22 mm over the 75.03 mm gap domain ⇒ **Lipschitz constant ≤ 0.00293** ⇒ one-iteration error bound
+= **0.00065 mm (0.65 µm)**; measured 0.0005 mm from the 10.00 seed, 0.0276 mm even from a deliberate 30.0;
+fixed point = **18.1875 mm**. ⇒ *"「収束するから気にしない」ではなく 縮小率が 0.003 だから"* — the
+convergence claim carries its rate, not its vibes. (Arithmetic sanity-checked here: 0.22/75.03 = 0.00293;
+0.22×0.00293 ≈ 0.00064.)
+
+**(b) ⭐ Note ② taken with auto-relaxing semantics**: the code comment reads *"爪先間を直読しない理由は この
+判定点が飽和帯（床 2.40 mm）の内側に在るから"* — written so that **if the judgment point ever moves outside
+the band, the requirement visibly relaxes on its own**. p11's redemption line received as the general shape:
+*"誤って値に使った量が、正しくは 計器の適用範囲を決める量だった."*
+
+**(c) ⭐⭐ The pattern, self-named — twice today a weak form saved a ruling**: the 600 mm ruling survived input
+contamination because it was narrowed to a RATIO (§192(c)); the band certification survived a moved target
+because it was stated as an UPPER BOUND (§211(c)) ⇒ *"主張の形を弱く保つことが、2 回とも裁定を守りました。
+強い形で書いていたら 2 回とも落ちていました."* Routed: p4 (the strengthened requirement text); p11 (closure).
+
+## 214. R6 wired as the two-origin conjunction — and its author declares the positive leg undemonstrated
+
+From -082 (22:21:10); verified here (@ `e2b8979f5b` "Solve the release floor as the fixed point it is" +
+`50fb6a8259` "**Wire R6 as the two-origin conjunction; its positive leg is undemonstrated**" — the honest
+scope riding the commit subject itself; module git-show sha MATCH `ef724216d5…`; the negcontrol pair in-tree;
+the saturation why-comment at module `:430-431`, with the author's own first-version error recorded in-code
+at `:445`).
+
+**(a) ✅ The wiring**: the floor solved as the fixed point it is (seed 2r+10.20 → 18.20→18.19→18.19; ⭐ seeds
+10.00 and 10.50 also land 18.19 — *"seed は答を決めていません"* — matching p11's 18.1875). ⚠ The first
+version drew offset at "the current gap" — not implicit — corrected. Offset interpolated from the banked
+23-point table with **saturated rows excluded by SIGN** (a negative mj_geomDistance is not a distance) ⇒ ⛔
+2.40 never written as a constant — p0's retraction honored mechanically; 16/23 rows, offset domain 9.99-10.21
+= §12-12. The why-comment rides the code. R6 = (i) backplate < floor ∧ (ii) cable centre in [25.00, 39.00]
+pad-local z; both the gate and the grip column replaced.
+
+**(b) ⛔⛔ The self-report that matters**: the negative control passes (two negative states → False, banked) —
+but **held=True has never been produced**: *"False しか出したことのない述語は、まだ識別性を示していません"* —
+the day's discriminator rule applied by the author to his own fresh wiring. The static-placement attempt
+failed honestly (mouth z 491 mm after placing); ⚠ and (ii)'s reference plane is thereby UNCONFIRMED — the
+resting mouth-z reads 162-1243 mm against the band [25, 39], and the static test **cannot distinguish "wrong
+datum" from "jaws far from the cable"** → the datum question routed to p5. **(c) ⚠ A near-miss caught in
+flight**: the first `available` implementation passed a position into `pose_only` — a POSTURE-INDEX argument
+— *"⛔ 何も測らない数を出すところでした"* — corrected to the move-and-resolve path; the three z numbers print
+without verdicts. **(d)** ACKs folded (pC's count caution; the reaim conflation warning; its `:34` → `:31`
+citation corrected). Open: ① the (ii) datum (p5) ② standing the positive leg — an improved static placement
+(p5's geometry) or the authorized run; ⛔ the run decision is Rs's alone.
+
+## 215. Half the pin ambiguity claimed by its other owner — and the tenth general form
+
+From p11's -095 (22:21); pin verified in its own new form (git show `96b6948dcd` "Fix how I pin: compute the
+sha from the commit, not the working tree" → `f52bbe902b…`, MATCH).
+
+**(a) ⛔ The ownership**: p11 had been pinning with `sha256sum <file>` — the working tree at a moment — so its
+own next commit changed the on-disk sha: *"受け手が「pin と現物が違う」と読む余地を私が作っていました"*;
+-093's pin was never wrong — **what was missing was the statement of what the sha was OF.** **(b) ⭐⭐ The fix,
+self-verified across three points** (-093, -094, the tree) and adopted: pins now computed
+`git show <commit>:<path> | sha256sum`. ⭐ **The 10th general form**: *"on a moving surface, the pin must
+carry what was measured — sha256(file) is time-dependent; sha256(commit:file) is invariant, and only the
+latter lets the receiver reproduce the number later."* (The measuring-side complement of the pin-by-content
+rule.) Hub practice aligned: p18's own pins go sha@commit henceforth.
