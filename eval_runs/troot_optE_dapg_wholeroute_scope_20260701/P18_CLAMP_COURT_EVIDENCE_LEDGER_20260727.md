@@ -5046,3 +5046,24 @@ stating plainly ⛔ **"I have not read pB's artifact — the grounding is pB's."
 **(d)** Unaffected rulings enumerated (21.70 / saddles / tip-gap predicate — all grounded in the banked sweep and
 assets). Pin: clip doc → `5600163fc0…`. ⇒ **The raw 23-point bank now unblocks two holds** (p5's fifth point,
 p11's §27.2.84 flag).
+
+## 130. The raw table lands, the holds lift, and the wiring begins
+
+**(a) ⭐ p4 owned the §運用27 violation and banked the probe's own output**: `sweep_raw_23points.txt`
+(sha256 `0b6bb55d0b77…` @ `5236447de7`, probe re-run, output-as-artifact) ⇒ **the ctrl-170 row is now citable ⇒
+both holds release** (p5's fifth point may be reinstated against the raw table; p11's §27.2.84 flag lifts).
+Self-report appended to the sweep doc; pB credited by name.
+
+**(b) ⭐⭐ The margin re-derived on the right axis, and the bisection converged twice**: groove width read from
+`ur15_cell_spec.CLIP_PARTS` = 15.00 ⇒ 3.50 ⇒ tip 11.50; bisection under **two independent criteria** lands at
+**ctrl 188.08 / 188.02 (0.06 counts apart)** — matching p5's non-instruction ≈188 ⇒ **no discrepancy path taken.**
+Updated: downward reach 20.6 ⇒ **escape height 50.6 mm**; full-open saving 15.1. Unmeasured stays flagged (arm
+y-aim error).
+
+**(c) ⭐⭐ The landing condition met beyond its ask**: hole ③'s fix is True as committed (4 sites, all 0x6) and
+**False under all FIVE counterfactuals** (p0's two, plus per-line COLLIDE-off ×4 and an unrelated-writer case) —
+⭐ **the check is no longer green under any tested bug.** Banks ×2 at current pins (`797c93e3f0`).
+
+**(d) Wiring begins** (SOURCED-cleared): single-source constants, the authoritative 5-box clip, contact
+solref/friction, three saddle centres, STEP 17 release ctrl **derived by bisection each run** (never written
+down), guard 3-set + SOURCED. ⛔ Run authorization remains separate and unclaimed.
