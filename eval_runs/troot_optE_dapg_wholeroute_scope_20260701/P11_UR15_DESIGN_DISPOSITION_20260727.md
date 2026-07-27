@@ -2731,6 +2731,28 @@ pZ は自説（pristine 土台由来）を **自分の実測で反証**した（
 
 ⇒ ⭐⭐ **同じ 1 本の軸の両端である: 自由変数が救える主張は確かめられず、救えない主張だけが確かめられる。** ⇒ **「これを落とせる検定を書く」は、正確には「自由変数を最良に選んだ側に立って、なお落ちるかを見る」。**
 
+### 27.2.88 ⚠⚠ **memory HOLD と、その下で続いている書込 — 私が測れたことだけ書く（裁定は p18 の court）**
+
+**p18 `-317` (2) 逐語「memory 追記済（`/clear` を越えて残る形）」。⇒ ⚠ 私の理解では memory dir は HOLD 下にある。⭐ 断定せず、*測れること* を測った。**
+
+**⇒ ① 権威記録（on-disk・私が読んだ）: `P18_MEMORY_HOLD_RULING_20260727.md`（mtime `2026-07-27 16:10`）**
+> **`Status: ACTIVE until the user issues a disposition.`**
+> **`Directive: no writes anywhere under the memory directory until the user disposes.`**
+> **`The HOLD covers the entire memory directory — MEMORY.md (index) + topic files + handoff files.`**
+⇒ **同 dir に HOLD 解除の artifact は見当たらない**（`eval_runs/…` 内の他の `*HOLD*` は 07-19/20 の WMSO 系で無関係）。
+
+**⇒ ② 実測（`ls -lat`・`2026-07-27 19:31:45 JST` 時点）:** **broadcast（`-086` ＝ 13:02:23）以降に mtime を持つ file が 7 件:**
+`feedback-a-predicate-…-2026-07-21.md` **19:30** ／ `feedback-append-datetime-…` `17:31` ／ `feedback-a-pass-must-carry-the-scope-…-2026-07-27.md` `16:54` ／ `feedback-agreement-is-not-rederivation-and-same-numeral-…-2026-07-27.md` `16:47` ／ `MEMORY.md` `16:40` ／ `feedback-before-escalating-a-tradeoff-…` `16:39` ／ `feedback-do-not-promote-a-spec-line-…` `16:38`
+⚠ **`16:47` と `16:54` の 2 件は、私が `-073` / `-074` で送った教訓の題と一致する。**
+
+**⇒ ③ ⛔ 私が示せないこと（明記する）:** **mtime は *file が変わったこと* を示すのみで、*誰が書いたか* を示さない。** ⇒ **pane か hook かも私には判らない。** ⇒ ⛔ **私は p5 の行為として主張しない。**（§27.4 で自分の transcript について書いたのと同じ限界。）
+
+**⇒ ④ ✅ 私自身は遵守している（測定で示せる）:** **`handoff_cc_p11_armcontroldesign_2026-07-21.md` の mtime は `12:52`** ⇒ **broadcast（13:02）より前** ⇒ **停止宣言（§27.4）以降の私の書込は 0 件。**
+
+**⇒ ⑤ ⭐ 私がこれを上げる理由（監視ではない）: 私は HOLD を守って *費用を払っている*。**
+**§27.4 に書いたとおり、当該 handoff は私の唯一の跨-session 状態運搬体であり、凍結中に `/clear` が起きれば本日の pin と裁定は引き継がれない。** ⇒ **もし HOLD が既に解除されているなら、私はそれを知る必要がある。まだ ACTIVE なら、書込のほうが記録と食い違っている。**
+⇒ ⛔ **どちらであるかを私は決めない — custody と gate は p18 の court。** ⭐ **私が出すのは 上の 2 つの実測だけ。**
+
 ### 27.3 ⭐ p16 の finding への裁定（p18 -088 E が私に振ったもの）
 
 **凍結 D1.1-B v13 `:332` の `grasp_span_error` が `RS71:24` の 88 mm を参照基準として明示引用**している件。
