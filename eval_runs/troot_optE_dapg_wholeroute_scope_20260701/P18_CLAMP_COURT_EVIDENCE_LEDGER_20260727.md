@@ -4862,3 +4862,40 @@ part of this; only the derivation special-case drops). Scope: CABLE_R divergence
 p5 has not read p4's doc (window/half-width via relay).
 
 ⇒ **Every design decision of the day is now issued. The lane is in build + verify.**
+
+## 121. The release capability was lost in a version update — one point decides the old family
+
+⭐⭐ **p5, from the ctrl direction alone**: the sweep is monotone (larger ctrl = more closed) ⇒ HALF 170→214 and
+OPEN 0→18 both moved **toward closed** ⇒ ⭐ **the old driver sat on the OPEN side of the release crossing
+(197.5), the new one on the CLOSED side — release capability was lost in the update.** ⛔ **And p5 refuses the
+easy claim**: the old family ran **Ø10** (floor 20.20), ctrl 170's gap is unmeasured, and it will not extrapolate
+27.5 counts ("the kind of estimate I have spent today flagging in others"). ⇒ **One point decides**: backplate gap
+at ctrl 170 — ≥20.20 ⇒ the old version released; below ⇒ it did not at Ø10. pB's UNKNOWN dies with one number
+(optional measurement, p4). Scope-narrowing landed in its doc (§12-3 → HALF-214 family); pin → `6241b5ea…`.
+⭐ It also banked the Ø10-was-live fact as **the single-source argument's concrete instance**.
+
+## 122. Rev2 verified: hole ② beats its claim, hole ③'s replacement is right by accident
+
+**(a) ✅ Confirmed by execution**: ruling ① live (N=64 at this version), the source-side identity **reads two
+independent bindings and can still fail**, self-check exit 0, ⭐ **hole ② catches 6 forms — one more than
+claimed** (with-target added; only walrus remains).
+
+**(b) ⛔⛔⛔ Hole ③'s replacement measures something else — proven with two counterfactual sources.**
+The predicate never evaluates conditionality (the docstring claims what no line checks), and `unconditional[:2]`
+takes **ast.walk breadth-first order** — of 7 sites it reads **1937 (C2's spacer) and 1908**, ⛔ never the 1925
+the comment names. Counterfactual A (wrap C1+C2 in `if`): predicate goes False — ⚠ **via an ARM-shape line
+(1581) pushed into the slice by the changed walk order, nothing to do with clips.** Counterfactual B (touch only
+the spacer, clips untouched): **False.** ⇒ ⭐⭐ **Broken in both directions; its current True is an accident** —
+the day's retired shape (right answer, unrelated reason), and the module's own theme: **a name does not identify
+its target** (the comment says C1/C2; the code says "first two in walk order").
+⭐ **Fix, measured where possible**: filter to `scene.shape_flags` (clip builder) vs `proto.` (arm pass), use
+`all()` not `[:2]` — targets 1937/1908/1925/1854, all 0x6 today, flips if any changes ✅ measured. ⚠ Unmeasured:
+the conditionality check itself (ancestor-chain If/IfExp scan — stated as a requirement, not implemented).
+
+**(c) ⛔ New, and it gates the wiring**: the guard **rejects the authorized reading style** —
+`from ur15_cell_spec import CABLE_R` is flagged as redefinition, while spec §6.1 says to read from the module.
+⇒ **One line must be decided BEFORE wiring** (else the first spec-faithful driver fails its own guard): either
+the guard exempts imports originating from the spec module, or ⭐ the spec mandates attribute access
+(`spec.CABLE_R`). Routed to p5 (contract) + p4 (implementation). ⚠ p5's one-rule is NOT yet in this version —
+that re-verification remains for the next commit. Earlier measurement stands: the rule catches the 10 misses
+10/10. Bank rev2 @ `ccf872195f`.
