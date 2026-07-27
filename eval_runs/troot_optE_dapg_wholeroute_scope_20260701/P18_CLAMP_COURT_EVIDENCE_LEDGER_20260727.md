@@ -6553,3 +6553,85 @@ configurations whose per-joint length differed — the very 'same name, differen
 reported about others today"* — 2.78/16.66 exactly 2× overstated; direction and conclusions survive at
 1.39/8.33. **(e)** Scope kept clean: -077's message body unread (messages are not banked files); FLOAT_Z's
 freeze not judged; no runs. Artifact `P0_DELTA_VERIFICATION_20260727.md` sha MATCH (`fdae8693fc…`).
+
+## 196. Rs's verdict on the judged video — two penetrations, a failed re-grasp, and the instruments' silence named
+
+From -079 (21:39:16); verified here (@ `4639f10747` "Record Rs's video verdict, and what my instruments
+missed"; artifact sha MATCH `a03b026878…`; log lines `:56/:64/:66` re-read — exact).
+
+**(a) ⭐⭐ Rs verbatim (human-GT leg)**: 「**C1、C2ケーブル貫通、左ハンドの再把持失敗**」 — on
+`ur15_wide14.mp4` (original sha `8b499aa4…`; Rs viewed by phone via p4's 960px compression `13f160b6…`,
+content unedited).
+
+**(b) ✅ Log collation, correctly scoped** (*"⛔ not re-verifying Rs — checking the same events exist in the
+log"*): ① seat-link at table height — C1 from STEP9 (`:56` c1[z+0.004]), C2 from STEP16 — a 4 mm-radius cable
+at table height sits 66 mm below the then-groove ⇒ passing through the solid; ② only one hand re-grasps
+(`:64` STEP13 「右がcable再把持へ」) and STEP14 still `grip=L-` (`:66`) ⇒ the re-grasp never established.
+Screen-side mapping by geometry (cameras 108°/250°, reaim `:763-767`): arm R is screen-left in both views ⇒
+Rs's 「左ハンド」 = arm R = the only re-grasping arm — no contradiction. ⚠ The formal visual leg = pC
+(dispatched blind — the verdict is NOT included in its tasking, per the blind-judge protocol); p4's mapping is
+geometry, not visual judgment.
+
+**(c) ⛔⛔ p4's two self-declared holes — one of them RETURNED for scope**: ② the GRASP diagnostics run only
+`:31-44`, all before STEP4 ⇒ **the re-grasp has zero diagnostic lines** — *"Rs には見えて私の計器は黙っている"*
+— fix = emit the same diagnostic block at the re-grasp (⭐ p18 affirms: instrumentation on its own driver =
+p4's measurement powers per the role brief; no control change involved). ① *"my penetration report was
+C1-only"* — ⚠ **RETURNED for precision**: the report's own `:26/:31` DO cover C2 (*"C2 でも同じことが起きて
+います"* — the riser mode, cab16 inside C2_riser, 11.3/8.9/9.8 mm) ⇒ either the self-criticism means the
+*table-height* mode specifically, or it overshoots — **a self-report's scope gets measured too** (the
+calibrate-retraction rule cutting the other way).
+
+**(d) ⚠ Scope**: the verdict is on the PRE-rebuild cell. The two penetration candidates (the self-made solid
+clip / the 9.6× coarse timestep) are both replaced but ⛔ unverified — runs 0 ⇒ the next authorized run is the
+test. The re-grasp failure is NOT explained by either ⇒ expected to persist in the current cell ⇒ **court
+question routed to p5 (step-table detail) and p11 (arm-control)** — Rs arbitrates if contested. Run
+authorization untouched; nothing run.
+
+## 197. The form becomes a test — and the table that already passes it
+
+From p5's -096 (21:43:02); zero requests.
+
+**(a) ⭐⭐ p11's form ③ adopted as the superior of p5's own §6.4g-2** — and made testable: **"the spec owns the
+INVARIANT side of the pair; the dependent side becomes a function."** **(b) ⭐ Applied to its own Tier A — all
+three pairs pass**: K = EI/L owns EI (task_config `:144`, verbatim "EI [N*m^2]") ✅; m = ρ×V(L) owns the ρ=1100
+MODEL-TRUTH (`:138`) ✅; N = length/L owns the length (N ruled derived, §9-3) ✅ ⇒ *"the table was already in
+the form the rule demands — ③ is the rule that explains WHY the table is right."* **(c)** The seg-length/band
+linkage read as an axis already on the §11 contamination list; wired-safe / five-hardcode consistent with its
+own §6.4g-2. **(d) ⭐ "sha @ commit" adopted — from the NEXT bank**: both docs are dirty and match no commit ⇒
+*"writing a commit now would be false"* — the adoption itself arrives scope-disciplined.
+
+## 198. The hazard is closed in the live path — and "silently" is killed by the print, not the derivation
+
+From p11's -088 (21:43); pins verified here (@ `f49ff9a797` "Scope the stiffness hazard: the live path already
+derives", doc sha MATCH `fb425f4e75…`; the module lines re-read).
+
+**(a) ✅ p11 verified my relay itself** (opened the module, refused the relay): `:53/:57/:179/:238-244` — the
+spec path derives K = EI/L (`:240` quoting task_config `:146` verbatim) ⇒ its §27.2.91 hazard does not touch
+the live path; p6's exit is correct. **(b) ⛔ Two scopes kept**: ① today's judged run came from the hardcode
+driver — *"「退役」は今後の話であって既に出た数の出自は変わりません"* — §27.2.90's carryover tag stays; ② the
+ruling body (derive, don't hold) remains — the live path doing it already CONFIRMS the ruling, doesn't
+obsolete it. **(c) ⭐⭐⭐ And the live path is one step ahead of the ruling**: it derives AND PRINTS
+(`:229-231`: effective EI + its provenance + the per-run joint stiffness — re-read here, incl. the
+OVERRIDE-branch note) ⇒ *"「黙って半分になる」の"黙って"を殺しているのは導出ではなく印字のほうです。導出は
+不整合を起こさせず、印字は起きた不整合を見せます。"* General form extended: **a one-sided formula is
+protected two ways — derivation AND printing; only both together stop the next person from breaking it.** ⚠
+`:170` records the file's own precedent (mass and stiffness placed separately → "3.6× too heavy AND 64% too
+soft") — today's pattern had already happened in this file once, and was fixed.
+
+## 199. The driver defines nothing — the static lane closes
+
+From p4's -080 (21:43:26); verified here (@ `fa276aa42a` "Let the single source hold a provisional float_z";
+all three git-show shas re-derived — clip `54a07c62…` / spec `c61b03c2…` / module `d0b8c4cdb1…`, exact; dirty
+resolved, sole residue = `MUJOCO_LOG.TXT`, mujoco's runtime append-log, not an edit — p18 disposition: leave
+untouched).
+
+**(a) ✅ The two pins banked under the new procedure** (git-show shas; no bundled citations — and p4 keeps its
+own lesson against my softer framing: *"「書いた瞬間は正しかった」は 読む側が瞬間へ解決できない引用を正当化
+しません"*). **(b) ⭐⭐ FLOAT_Z owned by the spec** (module `:448` = 0.0 "spec §6.4l"; `:467-469` the
+provisional note + return — re-read here): float_z() returns instead of raising; the driver's declaration
+deleted in favor of the import ⇒ **name rule 0 / template rule 0 ⇒ the driver defines ZERO cell constants.**
+self_check all-agree; the cell builds identical (nq 113 / nu 14 / nbody 88 / ngeom 139 / eq 8; dt 0.000208333;
+FLOAT_Z 0.0). **(c)** Open in p4's court by its own count: the re-grasp diagnostic block before any next run —
+p18's §196(c) disposition stands (instrumentation = p4's measurement powers; the *remedy* design = the p5/p11
+court question, pending). ⭐ **The static lane is closed**: every constant single-sourced, every pin banked
+clean; p0's final confirmation is the one remaining verification step — everything else waits on Rs.
