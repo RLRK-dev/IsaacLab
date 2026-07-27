@@ -147,7 +147,69 @@ claws**, i.e. a different origin, and the **claw-to-claw spacing is 12.400 mm in
 enters the pair separation (24.8 = 2 × 12.400), the two readings agree on the quantity that does the work. **Not a
 contradiction.**
 
-## 6. Scope
+## 6. The last 0.4 mm: it is box-edge migration, and it closes to 0.01 mm
+
+-097 A establishes the measured relation **claw gap = backplate gap − 10.11**, and reports pZ's static 10.00 as
+confirmed within 0.11 mm. My §5 left a **0.39 mm** residual against my own tilt-corrected figure (10.548 at the
+measured 1.57°), and that residual was pointing the wrong way — my model was *further* from the measurement than
+the zero-tilt value was. Two measured quantities implied two different tilts:
+
+- the measured **pair separation** 0.68 mm ⇒ θ = 0.68/24.8 = **1.571°**
+- the measured **absolute offset** 10.11 mm ⇒ θ ≈ **0.31°** on face-centre geometry
+
+⇒ a factor of five apart. Something structural was missing, and w2:p11 had already named it: *the backplate is a
+box, so the closest point migrates.*
+
+**Quantified from the asset dimensions.** `mj_geomDistance` returns the minimum distance between two **boxes**.
+Once the pad tilts, the closest point leaves the face centre and moves to the **leading edge**, and the two boxes
+have very different heights — backplate `pad_box1` half-height **9.375 mm** (`:59`), claw half-height **1.200 mm**
+(`:116`/`:117`). The differential advance is therefore **(9.375 − 1.200)·sin θ = 8.175·sin θ per side**.
+
+| per side [mm] | face-centre | edge term | min-distance offset |
+|---|---|---|---|
+| `f1ext` | 5.2743 | −0.2241 | **5.0502** |
+| `f2ext` | 4.9344 | −0.2241 | **4.7103** |
+
+| | predicted (asset only) | measured (p4 sweep) | residual |
+|---|---|---|---|
+| pair separation | **0.680 mm** | 0.68 - 0.70 mm | ✅ |
+| deeper pair | **f1** | `f1×f1` crosses first | ✅ |
+
+For the absolute offset I pin **my** number and give the spread, because the measured figure has itself moved across
+messages and pinning to one value of it would be the mistake this project has been correcting all day:
+
+| measured value in circulation | source | residual vs my 10.100 | residual without the edge term (10.549) |
+|---|---|---|---|
+| 10.11 mm | -097 A | **−0.010 mm** | +0.439 mm |
+| 10.16 mm | -093 B, -097 A upper | **−0.060 mm** | +0.389 mm |
+| 10.20 mm | -098 A upper | **−0.100 mm** | +0.349 mm |
+
+⇒ ⭐ **the finite box heights account for 0.448 mm, which is the right size against every circulating value, and the
+residual after it is ≤ 0.10 mm in the worst pairing.** ⛔ I do **not** claim the 0.010 mm agreement — that is one
+pairing out of three, and I have no basis for choosing it. The edge term is **common to both claws**, so it cancels
+in their difference: the separation stays 0.680 mm and the tilt derived from it was never contaminated. That is why
+the separation and the absolute offset disagreed about θ — only one of the two was affected.
+
+⚠ **What is fitted and what is not.** The tilt (1.571°) is **not mine** — it is p4's measured separation through
+pZ's relation. The only thing I chose is the **sign** of the tilt, so that the edge term subtracts. Given that one
+binary choice, **two independent quantities come out right** (absolute offset to 0.01 mm, separation to 0.00 mm)
+plus the pair ordering. Still idealised: rigid boxes, symmetric tilt, min distance taken at the leading edge.
+
+**Consequence for -097 C③ ("carry 10.11 forward as the constant").** Strictly it is not a constant — it is the
+function evaluated at the tilt that happened to hold. Its sensitivity is
+**d/dθ = 2·(10.075 − 8.175) = 3.80 mm/rad = 0.066 mm per degree of pad tilt.** ⇒ ⭐ carrying **10.11** forward is
+safe to about **0.07 mm per degree** of tilt variation, which over any plausible variation is far below the 2.16 mm
+clearance the ordering question turns on. ⇒ **the ordering conclusion is insensitive to this; a future claim at
+0.1 mm resolution would not be.**
+
+⇒ this also sharpens §2: the bound is unchanged (the edge term only ever *reduces* the offset by at most
+8.175·sin θ, and at the joint-limit corner the bound was already computed on face-centre geometry, so **the bound
+should be re-derived with the edge term before being relied on at the corner**). ⚠ I flag that rather than silently
+keeping the corner figure: **+0.188 mm at −67° is a face-centre number and the edge term is ±7.5 mm at that
+angle**, so the corner margin is not established. The working-range conclusion (near-parallel pads, margin ≈2 mm,
+measured 2.16 mm) is unaffected.
+
+## 7. Scope
 
 ⛔ I do not rule on window-open / window-closed, on whether the clamp is reachable on real hardware, on capture vs
 grip, or on any change to the locked geometry (§0#4 = Rs). ⛔ I ran nothing and hold no RUN authorization. What I
