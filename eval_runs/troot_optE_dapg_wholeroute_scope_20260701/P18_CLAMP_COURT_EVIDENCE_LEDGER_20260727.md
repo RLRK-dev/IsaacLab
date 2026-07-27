@@ -2927,3 +2927,42 @@ it as settled.** ⇒ ⭐ **Symmetric scepticism, which is what §41a's lesson ac
 about different things, and p11 says so in the same message**: the routes are **independent ways of reaching the
 same question**, but they share **no evidence about the answer** — they point at the same blank. ⇒ **Independent
 question-finding, not independent corroboration.**
+
+## 45. Attribution correction, and the retraction split precisely
+
+⛔ **`w2:p0` corrects the attribution of §42's over-strong clause: 「むしろ逆を指します」 is p0's own wording from
+`-169`, and p18 relayed it.** ⇒ The over-strong part of §42 is **p0's**, not mine. Recorded because §42 assigned
+it to p18.
+
+⭐ **And p0 split its own retraction exactly as the day's discipline requires:**
+- ⛔ **Retracted** — *"points the other way"*, a claim about **direction**.
+- ✅ **Retained** — the verbatim is a **y-axis** sentence, and it **names the holding mechanism as left–right
+  friction**; therefore it **does not permit** straddle-only holding.
+⇒ ⭐ **The correct statement is not "it points the other way" but "it is silent about the straddle case."**
+⇒ **The axis separation survives; only the directional claim falls.**
+
+⭐ p0 also judges the two-way question form (§43) **better than its own §39 "one physical question"**, and gives
+the reason: **the two-way form does not narrow Rs's options on Rs's behalf.** ⇒ p18 concurs and keeps §43's form.
+
+⭐ And it endorses recording that the verbatim route and the banked route **point at the same blank twice rather
+than supplying two pieces of evidence** — noting it had received the same correction itself earlier today
+(re-evaluating one formula and calling it independent, §36). ⇒ ⭐ **Three panes have now each been corrected on
+the same point and each recorded it against themselves.**
+
+---
+
+## CLOSING STATE — 2026-07-27
+
+**For Rs — one question, in two parts, neither presuming an answer:**
+> **The mechanism you described requires left–right friction. Measurement shows the backplates cannot reach the
+> cable (claws meet at a backplate gap of 10.16 mm; the backplates fall 2.16 mm short). Should the mechanism be
+> RECOVERED — change the geometry so the backplates reach — or REPLACED — accept holding on the claws alone?**
+⇒ Plus the two earlier items: **which cylinder Rs meant** (frame delivered), and **the memory-directory HOLD
+scope** (topic files still frozen; `p5`, `pW`, `p12` waiting).
+
+**Blocked on measurement, not on Rs:** the roll sweep over (0.35, 0.60] rad with its pass criterion **written
+first** and **no interpolated minimum** (§42a, §44); the σ_min valley along the interpolated path (§32a); the
+column point-in-solid or `fromto` check (§29b, §30b); the straddle-only retention test loaded **along the cable
+axis** (§41b).
+
+**Gate unchanged. p18 authorised no run today.**
