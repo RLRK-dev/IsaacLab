@@ -2506,3 +2506,51 @@ the value set**, so the roll figures must be attributed to the menu that ran.
 ⇒ ⭐ **p0's discipline, adopted: write the commit alongside the line number.** That is today's *pin by content,
 not by name* applied to line numbers — and it is the second time today a line citation went stale between
 commits (§14 was the first, `w2:p12`'s 19-line prepend).
+
+## 37. ⭐⭐⭐ The 13% is a consequence of demanding FULL containment — and that changes the question
+
+`w2:p0` priced exit ②, and **p18 recomputed every figure**:
+
+| roll | **full containment** (band 2.00 mm) | **weak predicate** (band 18.00 mm — cable within the claws' span, contact allowed) |
+|---|---|---|
+| 17.2° | 6.46 mm (29.4%) | ⭐ **22.00 mm (100%)** |
+| ⭐ **34.4°** — the value the right arm needs | ⛔ **2.92 mm (13.3%)** | ⭐ **22.00 mm (100%)** |
+| 39.0° | 2.47 mm (11.2%) | ⭐ **22.00 mm (100%)** |
+| 45.0° | 2.00 mm (9.1%) | 18.00 mm (81.8%) |
+
+⇒ ⭐ **The weak predicate holds 100% up to roll 39.3°** (p18: `atan(18.0/22.0)`), and **the required 34.4° sits
+inside that.**
+⇒ ⭐⭐⭐ **So exit ② does not buy a little — it buys the difference between 13% and 100%, and in this angular range
+it removes the roll-versus-88 mm trade altogether.**
+
+⛔ **But under the weak predicate the cable touches the claws**, so whether it can be *held* that way is a design
+and physics question — `w2:p5` / `w2:p11` / finally Rs. **p0 supplies arithmetic only and selects no exit.**
+⚠ Both bands (2.00 and 18.00) come from the same LOCK geometry, so they are **design claims** and their authority
+is the **LOCK asset** — ⭐ **p0 applied §34a's qualifier to its own claim without being asked.**
+⚠ Premise carried: the cable is horizontal; sag makes it worse.
+
+### 37a. ⭐⭐ The third Rs question, materially improved
+
+⇒ **The trade exists only if full containment is required.** So the decision is not really "pick one of three
+exits" — it is **one physical question**:
+
+> **Can the コ hold the cable when the cable lies within the claws' span and touches them, rather than floating
+> clear inside the slot?**
+> **If yes** — roll 34.4° costs nothing, and **no premise has to move.**
+> **If no** — full containment is required, 34.4° leaves 13% of the claw, and the 88 mm span, the roll, or the
+> holding mechanism must give (§35a).
+
+⇒ ⭐ That is a question about the **physics of the hold**, which is where the day started (§10a: Rs's *"left–right
+friction"*), and it is Rs's to answer.
+
+### 37b. `w2:p11` reached §36's conclusion itself, and named what stopped it
+
+⛔ p11 withdrew its own "independently reproduced by a different route": setting its `usable = 2.00/tan(roll)` to
+`usable = 22.0` gives `atan(2.00/22.0) = 5.19°` — **exactly p5's angle** ⇒ **one relation, two anchor points**
+(p5 anchored at *the largest roll that keeps the full length*; p11 at *the length remaining at the run's roll*).
+⇒ ✅ **What survives: the formula is one, and the two statements do not conflict.** ⛔ **The mutual-confirmation
+weight is lighter than it claimed.** ⚠ The 13.3 / 13.5% difference is the rounding of 0.6 rad = 34.377°.
+
+⇒ ⭐⭐ **And this is the day's third "the second source was a copy of the first" — but the first time the pane found
+it before asserting**, rather than being told. ⭐ p11 names the mechanism: **the limitation it had written into its
+own message is what stopped it later.** ⇒ **Writing the caveat is what makes it possible to catch yourself.**
