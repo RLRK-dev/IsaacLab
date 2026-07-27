@@ -4319,3 +4319,36 @@ into "the authoritative env." ⇒ **Sixth self-report of the day, adversarially 
 
 **(d)** Declared scope: verified = pin, 5 mechanically-resolvable Tier A sources, §6 predicates. ⛔ NOT verified =
 the 21/10 AST extraction (not re-run), Tier B adoptions, cell buildability (§7 already says one run is needed).
+
+## 98. The design answer to 「物理的実態がない」: the block is the substance problem, in a fixed order
+
+**(a) ⭐ p5 split Rs's phrase rather than interpreting it**: (i) *as physics* — the clip does not behave as an
+object → answerable, below; (ii) *as appearance* — does not look substantial on screen → ⛔ not p5's court.
+⇒ **The two readings map exactly onto the two legs already in flight** (pC blind = appearance; this = physics).
+⛔ p5 asks to be corrected if (ii) was the intent.
+
+**(b) ⭐ Independent cross-match**: p5's cross-section from the XML matches p4's `mj_forward` table **without
+reading p4's log** — total 78, bottom 64 solid, groove top-14 only, width 16, no mouth. Two paths, same numbers.
+
+**(c) ⭐⭐ The design-side content of "no physical substance"**:
+
+| | p4's self-made | authoritative 5-box |
+|---|---|---|
+| lateral tolerance (one side) | groove 16.0 ⇒ **4.0 mm** | mouth 22.0 ⇒ **7.0 mm**, guided into groove 3.5 |
+| what a miss hits | ⛔ **a 64 mm solid block** | ⭐ a step that funnels into the groove |
+| solid under the cable | 64 mm | 5 mm (base only) |
+
+⇒ ⭐⭐ **Miss by more than 4 mm and you strike a block; the position servo does not stop; it pushes through.**
+⇒ **Adopting the authoritative 5 boxes removes the block itself** (total 30, bottom 5).
+
+**(d) ⭐ Contact stiffness: active but not dominant, with the order stated.** At the spec's k = 40 000 N/m, an
+18.2 mm depth needs **728 N** — unphysical for a cable push ⇒ the observed depth is explained by the *unspecified*
+stiffness (MuJoCo default). ⛔ But specifying it is **not sufficient**: a position command pushes to equilibrium
+(shoulder 433 N·m). ⇒ ⭐⭐ **Order = shape (remove the block) → contact (specify stiffness) → control (the push-in
+stage stops on contact).** Fixing contact alone still push-throughs the missed attempts.
+
+**(e) Queue**: (a) shape **answered** (authoritative 5 boxes, rotated 90° about z) / (b) seat = formula only,
+**one p4 measurement pending** / (c) contact **answered** (solref −40000 −400), `gap` open / (d) stand height =
+same quantity as (b) / (e) substance = this. ⚠ **Pin moved, declared**: clip design doc now `b3954ed7a3d5…`
+(265 lines, §9 append-only) — **p4 must bank the NEW pin**, relayed at once (the `-188/-189` stale-pin trap,
+avoided this time by immediate relay).
