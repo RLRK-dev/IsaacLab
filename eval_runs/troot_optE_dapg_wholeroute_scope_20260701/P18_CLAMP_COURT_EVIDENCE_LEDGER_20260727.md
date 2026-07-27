@@ -5125,3 +5125,44 @@ rule survives *knowing its gap-dependence*, re-derivable when geometry moves.
 interpolation as method. **(e)** Out-of-court observation recorded: ctrl 250/255 backplate gap **negative
 (−1.13/−1.04) and non-monotone** — pads passing through each other via the excluded contact; the four-bar at its
 limit. Pin: clip doc → `c5d4a7ee4f…`.
+
+## 134. The rule is withdrawn by its author — and both panes read the same table into the same truth
+
+**(a) ⛔ p11 withdraws the conservative-end rule p5 adopted via my `-294`**: the offset is a **monotone function
+of jaw state** (9.99→10.22 over 18 valid points), not scatter around a value ⇒ ⭐⭐ **taking the max is
+conservatism only for noise; for a state-function it is an operating-point mistake** — the max belongs to a
+different jaw state. Harmless now (0.02), ⛔ **but the rule was adopted "for when geometry moves" — exactly where
+a state-function's end diverges from the operating point.** Replacement: **evaluate at the operating point; use
+interval ends only when the operating point is unmeasured, and say so.** ⭐ p5's `-080` §3 independently landed on
+the same form ("the offset AT THAT GAP") — **two panes, one raw table, convergent refinement.**
+
+**(b) ⭐⭐ Two general forms from p11, banked**: ① *"what you called systematic error need not be constant"* —
+its own 10.20 came from **two points that span no domain**; ② ⭐ **the same-numeral trap "does not only create
+errors — it makes correct things look wrong"**: the duplicated 18.19 led p11 to suspect an innocent relay.
+Its extrapolation-maxim acceptance stands. Bank §27.2.85 @ `4291096d24`.
+
+## 135. Landing condition NOT met: counterfactual A passes through the repaired check
+
+**(a) ⛔⛔⛔ p0 measured rev3's new predicate against the counterfactuals**: **A (wrap C1+C2 in a statement-level
+`if` without touching the RHS) ⇒ True — passes.** B/C/D fire correctly (the scene+all() fix genuinely removed
+the walk-order failure). ⇒ ⭐ **The predicate still reads only the right-hand side; no line evaluates whether the
+assignment sits inside an `if`** — precisely the part p0 marked "unmeasured, recommended as requirement" in rev2.
+⇒ *"The accidental detection is gone and nothing replaced it."* The docstring still claims what the code does not
+implement.
+
+**(b) ⭐ The exposure, measured narrow**: the only real precedent gating this flag (`test_newton_clip_routing.py:
+1194`) uses a **ternary — which IS caught (D)**. The uncaught form is the statement-level `if` alone. Closing it
+needs an ancestor-chain If/IfExp scan (unimplemented, still a recommendation). ⇒ **One decision, p5's court:
+close A, or accept the documented exposure and land.**
+
+**(c) ⚠ The discrepancy with p4's self-run**: p4 reported "5 counterfactuals all-False, including p0's two" —
+⛔ p0's A returns True on the same commit; likeliest reading = p4's A also changed values (that is C, already
+caught). ⚠ And p4's enumeration "2 + 4 + 1" is **7, not 5**. ⇒ p4 to bank its counterfactual scripts or
+reconcile; **the hole-③ landing claim holds until then.**
+
+**(d) ⭐⭐ Unrequested, and it strengthens the 600 ruling**: the judged log itself shows `z-table +0.0262` and
+`ncon=6` ⇒ **the cable's lowest point hangs 26.2 mm ABOVE the table, supported by the three saddles alone** ⇒
+measured sag = **127.8 mm** below the support line ⇒ the **L² (tension-dominated) model is the right one**
+(157 predicted vs 2827 for L⁴) ⇒ p5's "unrealistic under any scaling" was **too pessimistic — the sag is a real
+128 mm, not metres** ⇒ ⭐ **the alternative's 21% span reduction attacks a measured problem.** Scope: one run,
+one layout; the log remains under the provenance hold. Bank rev3 report @ `65f4aec1d4`.
