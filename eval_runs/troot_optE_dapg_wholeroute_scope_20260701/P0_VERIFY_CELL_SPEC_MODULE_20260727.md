@@ -205,6 +205,69 @@ the change that halves the nearest-link sampling floor from ±15 mm to ±7.5 mm.
 document is unaffected: the clip cross-lock, the seat relation, the counts, the three holes, and
 the refutation of the two-21s agreement all stand.
 
+## 8.6 The closed-world guard contract (MSG-P18-246) — sound, but it has no domain rule
+
+The answer to hole ① inverts my finding the right way: instead of enumerating what the guard
+owns (open-world, blind to anything new), partition into **OWNED / RETIRED / TIER-C** and **fail
+on anything else**. A constant invented tomorrow is then caught by default.
+
+⚠ What the contract does not say is **which names it applies to**, and that decides whether it
+is usable. Measured over the drivers (spec now `498beac18dd179b5531be058f90418938592126370525a4f8a376d918f87a936`, 207 lines, re-derived):
+
+| driver | module-level names bound | UPPERCASE | owned | **unclassified** |
+|---|---|---|---|---|
+| `ur15_steps_reaim.py` | **105** | 79 | 21 | **58** |
+| `ur15_cell.py` | 39 | 29 | 14 | 15 |
+| `ur15_grip_video.py` | 47 | 21 | 6 | 15 |
+
+⇒ fail-closed over *every* module-level binding means classifying **105 names** in one driver,
+including `cam`, `cell`, `column`, `d`. Over uppercase only it is still **58**.
+
+### 8.6.1 A fourth kind exists in the drivers, and it is not a constant
+
+Splitting the 58 by **how they are bound** separates them cleanly:
+
+| driver | bound to a **literal** | **computed** |
+|---|---|---|
+| `ur15_steps_reaim.py` | **13** | 45 |
+| `ur15_cell.py` | 7 | 8 |
+
+The 45 computed are scene handles and derived poses — `CABG`, `CLAWG`, `PADG`, `GIDX`, `AIDX`,
+`QADR`, `VADR`, `EQ`, `LIMS`, `GNAME` — read out of the model at import. **They are not cell
+constants at all**, and a constants spec should not be made to declare them. The three sets do
+not have a home for them; that is the gap.
+
+The 13 literals are, by contrast, almost exactly the right list:
+`CLIP_H, CLIP_RISER, CLIP_Y_EVEN, CLIP_Y_ODD, GROOVE_W` (cell geometry the spec does not cover),
+`FPS, H, W` (already Tier C in spec §5), and `GRIP_XML, SIDES, J6, RAMP, FINGER_RAMP`.
+`ur15_cell.py` adds `CABLE_Y, GROOVE_D`.
+
+⇒ ⭐ a domain of **"module-level uppercase names bound to a literal"** turns 58 into 13, keeps
+fail-closed for anything invented tomorrow (a new `CLIP_W = 0.012` is a literal), and stops the
+guard from demanding declarations for model handles.
+
+### 8.6.2 ⚠ That narrowing is not free, and here is what it misses
+
+Genuine cell geometry is also written as **expressions**, and those land in the computed 45:
+`Z_SEAT`, `CLIP_C1`, `CLIP_C2`, `CABLE_Z0`, `CLAW_OFFSET`, `Y_GRASP_REST`, `Z_GRASP_REST`,
+`Z_HOME`, `Z_RISE_REST`, `Z_RISE_ROUTE`. A literal-only domain lets every one of them through.
+
+So the choice is a real trade, not a free simplification:
+
+| domain | names to classify (biggest driver) | misses |
+|---|---|---|
+| every module-level binding | 105 | nothing |
+| uppercase only | 58 | lowercase constants (none seen) |
+| **uppercase ∧ literal** | **13** | **constants written as expressions — 10 measured** |
+
+⛔ Choosing among these is p5's and p4's, not mine. A middle option exists — accept expressions
+whose leaves are literals and already-owned names — but it is more machinery and I have not
+measured what it would cost.
+
+⚠ Note `CLIP_RISER`, `CLIP_Y_ODD` and `Z_SEAT` are names spec `:38` already flagged as existing
+only in `steps*` — *"the same cell in two versions"*. The contract will surface them, which is
+its purpose; the point here is that the answer to hole ① is not one name but roughly two dozen.
+
 ## 9. Scope of this verification
 
 **Did**: re-derive the pin; read all 231 lines; execute the module and its `self_check`; run
