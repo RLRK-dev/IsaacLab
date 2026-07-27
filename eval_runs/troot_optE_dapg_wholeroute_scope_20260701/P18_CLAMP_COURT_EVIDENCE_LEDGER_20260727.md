@@ -4227,3 +4227,35 @@ implementation (`thread_isaac_lab/wmso/d1`) made **before** its brief landed ⇒
 its verdict** — unbanked, numbers withheld, disposition requested of p12 (bank? where? or discard). ⇒ **Routed to
 p12.** ⇒ ⭐ The lane's verifier demonstrated the boundary on day one: **findings outside the court are material,
 not verdicts.**
+
+## 93. Rs's third statement on the same bytes: 「クリップの物理的実態がない」
+
+**Rs verbatim (18:1x)**: 「'/home/rlrk/Downloads/ur15_pentest.mp4' **クリップの物理的実態がない**」.
+⭐ **My own measurement**: `ur15_pentest.mp4` sha256 `8b499aa4f38a…bac77046`, 26736970 bytes — **byte-identical to
+`ur15_wide14.mp4` and `ur15_c1.mp4`** (third filename over one byte sequence; mtimes differ, bytes do not).
+⇒ ⭐ **One video now carries three Rs statements**: 「両方成功」 (clamp scene) → 「クリップの底面を貫通して
+いるのは認識できないのか」 (later scene) → 「クリップの物理的実態がない」. ⇒ ⛔ **None cancels the others** —
+successive observations of different aspects of the same footage.
+
+**p4's conduct followed the new rules exactly**: no interpretation of Rs's words, no judgment, measurement only —
+and it requested the visual leg **blind** (pC to judge before reading p4's numbers, so the numbers cannot
+contaminate the eye). ⚠ It also self-caught a near-miss: its first dump ran **before `mj_forward`**, printing all
+world coordinates as 0 — it stopped one step short of reporting "the clip sits at the origin."
+
+**p4's measured table (what the clip IS in the model)**: total height **78 mm, bottom 64 mm a solid block**, groove
+only the top 14 mm, width 16 mm; **no catch mouth**; all 10 geoms present, `contype=1 conaffinity=1`, opaque,
+welded static to world; ⛔ **contact parameters unspecified = MuJoCo defaults** (authoritative side explicitly sets
+ke=2500 / kd=100 / mu=1.0 / gap=0.001). Authoritative shape: 30 mm total, seat +9 mm.
+⇒ ⚠ **The open tension, not resolved here**: numerically the clip has collision and substance, yet the judged run
+put the cable inside its riser — the servo overpowered the contact. What Rs's phrase names is for **pC (blind) and
+Rs**, not for the numeric side to decide.
+
+## 94. DDR #46 now points at the repair path — with two caveats that are both live
+
+`w2:p6` updated #46 to point at the path **① p5 spec → ② p4 implementation → ③ verification** (`ff2302939a`),
+independently recomputing the spec's sha (match). Its two caveats: **(1)** ⛔ the spec is **untracked = as-read
+pin, not banked** — commit to be added as secondary pin after p4 banks (p6 asks for a one-line notice; **open item
+here**); **(2)** ⚠ step ③'s verifier is **unresolved on disk** — the brief contradiction (§91b, routed to p4 at
+`-208`) plus pZ's Rs-pending disposition ⇒ **the path's third step is subordinate to the role fix.**
+⭐ And it widened the row's scope: #46 now names the **whole 21-constant / 10-physical divergence**, not one
+clip constant.
