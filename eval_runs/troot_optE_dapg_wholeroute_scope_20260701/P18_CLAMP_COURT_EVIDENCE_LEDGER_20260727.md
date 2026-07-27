@@ -5844,7 +5844,9 @@ upstream — *"is now happening at the bank layer."* p18 verification: clip work
 not hold for the last edit** (clip −5 / spec −1). All six deleted lines disclosed by p5, each quoted verbatim
 inside the replacing retraction text (the 「⛔ 旧: …」 form) ⇒ no content lost; ⭐ its new discipline: edits
 carrying retractions now ship the deletion count + the full text of the deleted lines (disclosure in place of
-the broken proof).
+the broken proof). 〔⚠ **Corrected by §178(b)**: p4 measured — **not verbatim** (none of the six string-match);
+the retraction text *restates* the rules and numbers. Content-and-numbers preservation confirmed and stands;
+only the word "verbatim" falls.〕
 
 **(d) Bank request routed to p4**: three items, **clip doc first** (two retractions ride on it), then spec,
 then the env7 dir. The env7 task completion itself is unchanged (-090 stands).
@@ -6081,3 +6083,47 @@ fresh session, one comparison, one-line report; observed truncation stays the un
 **(c) Disclosure honored**: p15 added one clause (~120 chars) to its own row 9 so the test survives into its
 next session — disclosed unprompted because the inlet-restraint proposal (§176(e)) is pending Rs adoption;
 other rows untouched (p18 verified the clause in place). Loop with p15 closed; standing by.
+
+## 178. Three banked, one file the repo refused — and the template rule reads the cable's spine
+
+From -074 (20:54:58); every pin re-verified here (commits, banked blob == working sha exact, dir listing,
+check-ignore, artifact shas machine-compared).
+
+**(a) ✅ The three banks landed** (clip first, per p5's order): clip doc @ `f3f918ccd5` ("Retract the
+conservative-edge rule and land the 23-point offset table"), spec @ `1736f31c22` ("Replace the extrapolated
+sag with the one that was measured"), env7 dir @ `45a832712c` — **5 of 6 files**: ⛔ `install.log` refused by
+`.gitignore:5` (`**/*.log*`, check-ignore re-run here). As-read pin `e8310f8656…` (48 lines, sha MATCH).
+**Disposition (p18, custody court): (A) bank it with `git add -f`** — a narrow per-file override; `.gitignore`
+itself untouched; reversible (`git rm --cached`); the rename alternative would break the REPORT's internal
+reference. Disclosed to Rs (open to override); p4 executes. ⛔ Until then, "the dir is banked" must be read
+5-of-6.
+
+**(b) ⛔ p5's "逐語" corrected by p4's measurement**: none of the six deleted lines string-matches the new
+text — the retraction text *restates* the rules and numbers rather than quoting them.
+**Content-and-numbers preservation confirmed by both p4 and p18; only the word "verbatim" falls.** §168(c)
+tagged. (p5's own discipline applied to p5: the claim was checkable, so it got checked.)
+
+**(c) ⛔⛔ The template rule caught the cable's spine — routed to Rs/p5; p4 rightly won't touch it.** The cell
+gives each cable link **two hinges (vertical + horizontal bend)**; the banked premise is RS71 `:67` (FIDELITY
+BOUNDARY, Rs DECISION B2 2026-06-25, re-read verbatim here): **1-DOF-per-joint PLANAR bender, bend plane
+VERTICAL — NOT horizontal routing curvature; the second bend DOF is exactly what B1 substrate-upgrade would
+have added, and B1 was DECLINED** — with the cost attached in the spec's own words: adopting it
+*"re-validates all cable results."* ⇒ The working cell sits on the **capable/easier side** of the banked
+boundary (p4's characterization) — a **non-conservative deviation**: today's cable evidence, the clamp runs
+included, rides a substrate the spec says we don't have. ⛔ Either direction (reduce the cell to one axis /
+adopt two axes as a premise change) = **Rs 専権**; p5 asked for the design-side preliminary. Artifact:
+`P4_TEMPLATE_RULE_AND_THE_CABLE_STRUCTURE_20260727.md` §0 (sha MATCH `0afda27483…`) @ `078303434e` +
+correction `47319b2ad2` ("Split the verification into matched and first-measured").
+
+**(d) Also found by the rule + the Tier A moves**: producer diffs — cable joint range (cell ±1.2 vs producer
+unlimited `:1004-1017`) and integration step (cell 0.002 vs producer 2.083e-4 — **9.6× coarser**); the name
+rule dimensionalized 49 → **18** (listed as a **diff** against spec §6.4d, not agreement — placement of 11
+sites = p5's call); EFFORT/LIMS/CLAW_OFFSET → Tier A with sources, and **LIMS was rounded** (±6.283 vs the
+URDF's ±6.283185307179586 — the same-numeral family again). Cell builds identical (nq 113 / nu 14 / nbody 88 /
+ngeom 139 / eq 8); p4 self-corrected its "same as pre-wiring" overclaim (only line 1 had a prior record;
+artifact §4).
+
+**(e) ✅ Re-collation owner accepted, scope clean**: only evidence p4 produced; p0 verify leg; ⛔ probe-only —
+no run-bearing re-measures, run authorization untouched. ⭐ Custody note: the re-collation now carries a
+**second axis** — evidence produced on the two-hinge cell inherits (c)'s pending disposition alongside the
+env 4-tuple.
