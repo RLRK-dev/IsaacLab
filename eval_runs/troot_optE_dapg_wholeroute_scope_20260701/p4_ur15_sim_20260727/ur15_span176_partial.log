@@ -1,0 +1,20 @@
+[steps] nq=97 nu=14 nbody=80 ngeom=131 eq=8  seat links C1=cab22 C2=cab16
+[steps] geoms: 131 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.469,+0.410] y[+0.280,+0.280] z-table[+0.0262,+0.1588] ncon=6
+[steps] measured grasp: L=cab18 [0.0843 0.28   0.9464]  R=cab24 [0.2625 0.28   0.9499]  drop across the span = 3.5 mm
+[steps] start-pose IK L: 8 solved / 4 collision-free / 4 away from a singularity, chosen pos  0.00 mm roll 20.1 deg sigma_min 0.0505 |q|max=1.30 rad
+[steps] start-pose IK R: 14 solved / 4 collision-free / 4 away from a singularity, chosen pos  0.00 mm roll 34.4 deg sigma_min 0.1118 |q|max=2.84 rad
+[steps] STEP1 L arm touching: clear
+[steps] STEP1 R arm touching: ['table']
+[steps] re-measured after the approach: L=cab18 [0.1084 0.28   0.9475]  R=cab23 [0.2572 0.28   0.9521]
+[steps] STEP1 L: tool err=   2.1mm
+          joint err   = [-0.  0. -0. -0. -0.  0.] mrad
+          act force   = [0. 0. 0. 0. 0. 0.] N.m   (limits [433. 433. 204.  70.  70.  70.])
+          gravity load= [-62.5 -98.6 -13.5   4.4  -1.1   0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] STEP1 R: tool err= 717.1mm
+          joint err   = [ -364.    -25.4 -1052.3     3.7     0.     -0. ] mrad
+          act force   = [433.  252.8 204.   -4.4  -0.    0. ] N.m   (limits [433. 433. 204.  70.  70.  70.])
+          gravity load= [ 85.4 -43.1  18.3   2.    1.2  -0. ] N.m
+          saturated   = [np.True_, np.False_, np.True_, np.False_, np.False_, np.False_]
+[steps] aim L: yaw +0.00 roll +0.30 rad (+17 deg tilt), seat error 1.64 mm

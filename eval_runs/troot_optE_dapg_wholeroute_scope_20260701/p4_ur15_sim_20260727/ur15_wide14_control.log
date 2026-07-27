@@ -1,0 +1,80 @@
+[steps] nq=97 nu=14 nbody=80 ngeom=131 eq=8  seat links C1=cab21 C2=cab17
+[steps] geoms: 131 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.469,+0.410] y[+0.280,+0.280] z-table[+0.0262,+0.1588] ncon=6
+[steps] measured grasp: L=cab19 [0.1141 0.28   0.9499]  R=cab22 [0.2036 0.28   0.9586]  drop across the span = 8.7 mm
+[steps] start-pose IK L: 8 solved / 4 collision-free, chosen pos  0.00 mm roll 20.1 deg |q|max=1.27 rad
+[steps] start-pose IK R: 13 solved / 3 collision-free, chosen pos  0.00 mm roll 34.4 deg |q|max=3.06 rad
+[steps] STEP1 L arm touching: clear
+[steps] STEP1 R arm touching: clear
+[steps] re-measured after the approach: L=cab18 [0.1084 0.28   0.9475]  R=cab21 [0.1978 0.28   0.9573]
+[steps] STEP1 L: tool err=   2.1mm
+          joint err   = [-0.  0. -0. -0. -0.  0.] mrad
+          act force   = [0. 0. 0. 0. 0. 0.] N.m   (limits [433. 433. 204.  70.  70.  70.])
+          gravity load= [ -61.6 -101.5  -14.4    4.5   -1.1    0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] STEP1 R: tool err=   2.1mm
+          joint err   = [ 0.  0.  0. -0.  0.  0.] mrad
+          act force   = [ 0.  0. -0.  0.  0.  0.] N.m   (limits [433. 433. 204.  70.  70.  70.])
+          gravity load= [82.6 29.7 -8.8  0.1  1.5 -0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] aim L: yaw +0.00 roll +0.30 rad (+17 deg tilt), seat error 1.64 mm
+[steps] aim R: yaw +0.00 roll +0.55 rad (+32 deg tilt), seat error 1.45 mm
+[steps] STEP 2 sigma_min L=0.0880 R=0.2380  column gap L= +117.2 R= +186.1 mm
+[steps] STEP 2 cable上空へ     t=  2.2s L=   2.1mm R=   2.1mm c1[y+0.280 z+0.157] c2[y+0.280 z+0.143] pin=--/-- grip=--
+[steps] STEP3 L: standoff re-aim (y,z only), seat error  2.33 mm
+[steps] STEP3 R: standoff re-aim (y,z only), seat error  4.89 mm
+[steps] STEP 3 sigma_min L=0.0390 R=0.2019  column gap L=  +78.5 R= +186.4 mm
+[steps] STEP 3 cableへ下降     t=  6.7s L=   2.1mm R=   2.1mm c1[y+0.280 z+0.156] c2[y+0.280 z+0.142] pin=--/-- grip=--
+[steps] STEP4 L: holding the seated pose, fingers only
+[steps] STEP4 R: holding the seated pose, fingers only
+[steps] STEP4: arms settled to 0.00 mrad at t=3.24s into the step -- fingers may close
+[steps] GRASP L: seat vs NEAREST cable link cab17, live [ 9.4 -9.9  1.4] mm (| 13.8| mm; containment wants the cable centre within +-1.0 mm of the seat)
+[steps] GRASP L: seat vs its own PREDICTION [-0.2 -0.4 -0.2] mm (|  0.4|)  cable vs where it was aimed [-12.   11.2  -0.6] mm (| 16.4|)
+[steps] GRASP L: joints vs commanded [0.1 0.3 0.2 0.3 0.3 0.1] mrad -> servo arrived; nearest link is  16.4 mm from where the aimed link was (identity may differ -- not a drift)
+[steps] GRASP L: pad faces  +7.36 mm (design target 4.00 on a O8 cable, task_config.py:277), opposing claws  -2.45 mm, claw min over the run  -2.45 mm  <- NEGATIVE: non-conservative for transfer
+[steps] GRASP L: cable touched by pad1 ['L', 'R'] / claws ['L', 'R'] / pad2-only none   clamped=True (needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had closed through the cable)
+[steps] GRASP L: fingers blocked by ['cab17', 'cab18']
+[steps] GRASP L: nearest cable link cab18 at  31.1 mm from the pinch, pad separation  22.1 mm, ctrl=236, pad geoms touching cable = ['Lg_left_pad1', 'Lg_left_pad_f2ext', 'Lg_right_pad1', 'Lg_right_pad_f2ext']
+[steps] GRASP R: seat vs NEAREST cable link cab20, live [14.1 14.2 -2.7] mm (| 20.2| mm; containment wants the cable centre within +-1.0 mm of the seat)
+[steps] GRASP R: seat vs its own PREDICTION [-0.1 -2.8 -0.3] mm (|  2.8|)  cable vs where it was aimed [-17.6 -12.3   1.2] mm (| 21.5|)
+[steps] GRASP R: joints vs commanded [ 0.4  0.5  0.5  1.4 -1.6 -0. ] mrad -> servo arrived; nearest link is  21.5 mm from where the aimed link was (identity may differ -- not a drift)
+[steps] GRASP R: pad faces  +7.44 mm (design target 4.00 on a O8 cable, task_config.py:277), opposing claws  -2.43 mm, claw min over the run  -2.43 mm  <- NEGATIVE: non-conservative for transfer
+[steps] GRASP R: cable touched by pad1 ['L', 'R'] / claws ['L', 'R'] / pad2-only none   clamped=True (needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had closed through the cable)
+[steps] GRASP R: fingers blocked by ['cab20', 'cab21']
+[steps] GRASP R: nearest cable link cab21 at  29.7 mm from the pinch, pad separation  22.2 mm, ctrl=236, pad geoms touching cable = ['Rg_left_pad1', 'Rg_left_pad_f2ext', 'Rg_right_pad1', 'Rg_right_pad_f2ext']
+[steps] STEP 4 sigma_min L=0.0389 R=0.2011  column gap L=  +78.2 R= +207.2 mm
+[steps] STEP 4 cable把持      t= 11.2s L=  13.5mm R=  13.0mm c1[y+0.266 z+0.158] c2[y+0.292 z+0.144] pin=--/-- grip=LR
+[steps] STEP 5 sigma_min L=0.0761 R=0.2655  column gap L= +106.6 R= +174.2 mm
+[steps] STEP 5 持ち上げ         t= 13.2s L=  13.5mm R=  13.2mm c1[y+0.238 z+0.197] c2[y+0.303 z+0.182] pin=--/-- grip=LR
+[steps] STEP 6 sigma_min L=0.0769 R=0.1946  column gap L= +165.7 R= +256.0 mm
+[steps] STEP 6 C1上空へ搬送      t= 16.0s L=  13.5mm R=  13.5mm c1[y+0.325 z+0.137] c2[y+0.367 z+0.138] pin=--/-- grip=LR
+[steps] STEP 7 sigma_min L=0.0813 R=0.1895  column gap L= +200.6 R= +252.0 mm
+[steps] STEP 7 C1へ押し込み      t= 18.8s L=   7.9mm R=  11.9mm c1[y+0.324 z+0.017] c2[y+0.352 z+0.012] pin=--/-- grip=LR
+[steps] STEP 8 sigma_min L=0.0810 R=0.1889  column gap L= +200.5 R= +228.9 mm
+[steps] STEP 8 誘導ハンド半保持     t= 20.4s L=   8.1mm R=   5.4mm c1[y+0.321 z+0.010] c2[y+0.355 z+0.012] pin=--/-- grip=--
+[steps] STEP 9 sigma_min L=0.0810 R=0.1889  column gap L= +200.7 R= +229.1 mm
+[steps] STEP 9 C1がcable固定   t= 22.0s L=   8.3mm R=   5.5mm c1[y+0.318 z+0.004] c2[y+0.354 z+0.013] pin=--/-- grip=--
+[steps] STEP10 sigma_min L=0.0769 R=0.1948  column gap L= +165.7 R= +231.5 mm
+[steps] STEP10 C1から上昇       t= 24.0s L=  13.5mm R=   2.1mm c1[y+0.304 z+0.093] c2[y+0.361 z+0.138] pin=--/-- grip=--
+[steps] STEP11 sigma_min L=0.0963 R=0.2870  column gap L= +234.1 R= +238.2 mm
+[steps] STEP11 C2上空へ        t= 26.6s L=  13.5mm R=   2.1mm c1[y+0.325 z+0.056] c2[y+0.395 z+0.111] pin=--/-- grip=--
+[steps] STEP12 sigma_min L=0.0963 R=0.2870  column gap L= +235.0 R= +238.2 mm
+[steps] STEP12 左クランプ        t= 28.0s L=  13.5mm R=   2.1mm c1[y+0.324 z+0.055] c2[y+0.392 z+0.111] pin=--/-- grip=L-
+[steps] STEP13 sigma_min L=0.0963 R=0.2553  column gap L= +235.0 R= +240.3 mm
+[steps] STEP13 右がcable再把持へ  t= 30.2s L=  13.5mm R=   2.1mm c1[y+0.323 z+0.055] c2[y+0.392 z+0.110] pin=--/-- grip=L-
+[steps] STEP14 sigma_min L=0.0963 R=0.2547  column gap L= +235.0 R= +265.3 mm
+[steps] STEP14 両手クランプ       t= 31.8s L=  13.5mm R=  13.4mm c1[y+0.322 z+0.054] c2[y+0.391 z+0.110] pin=--/-- grip=L-
+[steps] STEP15 sigma_min L=0.1055 R=0.2867  column gap L= +234.4 R= +251.7 mm
+[steps] STEP15 C2へ押し込み      t= 34.4s L=   7.8mm R=  13.4mm c1[y+0.310 z+0.004] c2[y+0.391 z+0.006] pin=--/-- grip=L-
+[steps] STEP16 sigma_min L=0.1054 R=0.2867  column gap L= +235.1 R= +251.7 mm
+[steps] STEP16 C2固定         t= 36.0s L=   7.8mm R=  13.4mm c1[y+0.311 z+0.004] c2[y+0.393 z+0.004] pin=--/-- grip=L-
+[steps] STEP17 sigma_min L=0.1058 R=0.2894  column gap L= +235.9 R= +231.3 mm
+[steps] STEP17 解放           t= 37.4s L=   8.3mm R=  14.6mm c1[y+0.310 z+0.004] c2[y+0.392 z+0.004] pin=--/-- grip=--
+[steps] STEP18 sigma_min L=0.0960 R=0.2848  column gap L= +206.5 R= +237.9 mm
+[steps] STEP18 上昇           t= 39.4s L=  13.5mm R=   2.1mm c1[y+0.307 z+0.068] c2[y+0.381 z+0.120] pin=--/-- grip=--
+[steps] WORST L: sigma_min 0.0389 at STEP4 t=11.2s   (a singular pose is sigma_min -> 0)
+[steps] WORST L: column gap    +0.0 mm at STEP2 t=0.1s
+[steps] WORST R: sigma_min 0.1885 at STEP8 t=19.3s   (a singular pose is sigma_min -> 0)
+[steps] WORST R: column gap  +174.2 mm at STEP5 t=13.2s
+[steps] gates: {'grasp': True}
+[steps] wrote /home/rlrk/Downloads/ur15_wide14.mp4 frames=1158 26736970 bytes
