@@ -2554,3 +2554,60 @@ weight is lighter than it claimed.** ⚠ The 13.3 / 13.5% difference is the roun
 ⇒ ⭐⭐ **And this is the day's third "the second source was a copy of the first" — but the first time the pane found
 it before asserting**, rather than being told. ⭐ p11 names the mechanism: **the limitation it had written into its
 own message is what stopped it later.** ⇒ **Writing the caveat is what makes it possible to catch yourself.**
+
+## 38. ⛔⛔ HOLD THE ESCALATION — 34.4° is the menu's minimum, not the geometry's
+
+`w2:p0` and `w2:p5` reached this independently; **p18 recomputed all of it.**
+
+The roll menu (`ur15_steps_reaim.py:604` @ `887d3fefde`) is **five discrete points**, and what each buys:
+
+| r (rad) | angle | contained | of the claw |
+|---|---|---|---|
+| 0.00 | 0.00° | 22.00 mm | **100.0%** |
+| ⛔ **0.35** | 20.05° | 5.48 mm | **24.9%** ← the very next point after zero |
+| 0.60 | 34.38° | 2.92 mm | 13.3% |
+| 0.85 | 48.70° | 1.76 mm | 8.0% |
+| 1.10 | 63.03° | 1.02 mm | 4.6% |
+
+**Thresholds:** 100% needs **0.091 rad (5.19°)**, 50% needs **0.180 rad (10.30°)**, 30% needs **0.294 rad
+(16.86°)**.
+⇒ ⭐⭐ **Every one of them falls in the gap between 0.00 and 0.35 rad.**
+⇒ ⭐⭐⭐ **The search has never sampled the region where containment stays above 50%.** In effect the menu offers
+**"full, or ≤25%"** and nothing between.
+
+⇒ ⭐⭐⭐ **And p4's own numbers bracket the answer without pinning it**: roll 0 ⇒ **158.2 mm** short; **0.35 rad ⇒
+16.9 mm**; **0.60 rad ⇒ 0.2 mm**. ⇒ **The minimum roll that reaches lies between 0.35 and 0.6 rad and has never
+been bracketed — because those are the only two menu points in that span.**
+
+| unsampled | angle | contained |
+|---|---|---|
+| 0.40 rad | 22.92° | 4.73 mm (**21.5%**) |
+| 0.45 rad | 25.78° | 4.14 mm (**18.8%**) |
+| 0.50 rad | 28.65° | 3.66 mm (16.6%) |
+| 0.55 rad | 31.51° | 3.26 mm (14.8%) |
+
+⇒ ⭐ **Every degree shaved buys containment**: a minimum at 0.45 rad would take 13.3% → **18.8% (1.4×)**; at
+0.40 rad, **1.6×**.
+
+⇒ ⛔⛔ **So p18 holds the third escalation.** *"The 88 mm span demands 34.4°"* is **the minimum of a five-point
+menu, not the minimum of the geometry** — and handing Rs a premise-level question built on a sampling artefact is
+exactly what §15's gate exists to prevent. ⇒ **Bracket first, escalate after.**
+⇒ ⭐ **Request to `w2:p4` (its court; reachability computation only, no physics run): sweep roll finely between
+0.35 and 0.6 rad and report the minimum that reaches.**
+⚠ **This is a driver change (adding menu points), not a premise change** — `w2:p0` states the distinction and
+proposes nothing further.
+
+⚠ **Attribution kept:** the containment percentages depend on **which menu ran**, and `w2:p5` has not confirmed
+which the judged run used (p4's court). The 34.4° figure is **the standard menu's 0.6 rad**. `:607`'s `wide`
+variant gives a different set (0.2 rad = 11.46° ⇒ 44.8%; 0.5 ⇒ 16.6%; 0.75 ⇒ 9.8%; 1.0 ⇒ 5.8%).
+⚠ Premises carried unchanged: cable straight and horizontal; claw effective length taken as the geom's 22 mm;
+roll about the pinch; clearance 2.00 mm.
+
+⭐ **And all three panes have now withdrawn the same independence claim about this formula** — `w2:p5`,
+`w2:p11` and `w2:p0` each stated that `band / tan(roll)` is one relation, so the agreement between their numbers
+is arithmetic. ⇒ **What was genuinely new in p0's last message was only the weak-predicate band (§37), and it
+said so.**
+
+⇒ ⭐⭐ **The day's theme, one more time and in the most expensive place: a quantity treated as a constraint that
+is actually an artefact of how it was sampled.** The saturated claw channel, the frozen-x error metric, the
+`+0.00` distance — and now a five-point pose menu standing in for a continuum.
