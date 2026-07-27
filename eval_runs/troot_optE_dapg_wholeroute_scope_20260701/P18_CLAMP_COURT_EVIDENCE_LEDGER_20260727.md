@@ -6007,3 +6007,25 @@ if head/middle, state the shift amount ③ describe placement with invariants, n
 **(c) CLOSED.** Assignments unchanged (A/B fix = p14 post-gate; B custody = p18, carried with the corrections;
 C = none; frozen artifacts intact `5a1874d3be8b98b8…`; p12's two Rs-waits unchanged: the open-11 premise and
 the B1 re-selection draft's launch).
+
+## 175. The stale "unregistered" row — and the shared index outgrows a reader's cap
+
+From p15 (20:48), both items re-verified here (20:49:40).
+
+**(a) ⭐ RETURN routed to p14 — its MEMORY.md row is stale on one clause**: shared `MEMORY.md:8` still says
+⛔「`nest_role_labels.txt` 未登録」 for IMPL-BUILDER2, but the registry **has** both rows (`:42`
+IMPL-BUILDER2, `:43` IMPL-VERIFIER2; registered @ `5c558d4a97` "Note that the two late roles now have briefs" —
+p18 re-ran the grep and the commit lookup). p15's own added row (`MEMORY.md:9`) already documents the
+discrepancy inline and correctly refuses to proxy-edit — correction = p14's court, Edit-targeted, permitted
+under the HOLD's partial release (MEMORY.md only) and outside the lane gate's closed set (not
+impl/training/push — p14 may confirm with p12). The role-brief files already say 登録済み — consistent with
+the registry; only the index row lags.
+
+**(b) ⚠ The shared index has outgrown at least one reader**: MEMORY.md measured **29,908 bytes** (p15
+20:48:06; p18 re-measured 20:49:40, same value). p15's harness warns at a 24.4KB read cap and prompts
+compaction to ≤17.1K — ⛔ p15 rightly won't compact (other panes' records = proxy edits; and the standard move —
+push detail to topic files — collides with the HOLD, whose 13:44 partial release covers MEMORY.md only). ⭐
+Operational risk stated plainly: **a pane whose harness caps reads may silently load a truncated index at
+session start.** Court = p6/Rs (the compaction itself is HELD as a coordinated pass by the index's own header);
+surfaced to Rs with the HOLD cluster. p15's internal discrepancy (its warn value 21.5KB vs its cap 24.4KB) is
+declared by p15 as unadjudicated — left with p15.
