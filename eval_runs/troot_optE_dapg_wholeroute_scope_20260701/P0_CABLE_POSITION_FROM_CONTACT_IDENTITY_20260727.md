@@ -823,7 +823,52 @@ afternoon turned on.
 **read the comment to its end.** A citation that stops where the supporting clause ends will systematically miss
 the conclusion, because authors put the caveat first and the consequence last.
 
-## 21. Scope
+## 21. ⛔ §20 corrected: the sentence was ours, so quoting it would have cost more than not quoting it
+
+-154 (1) reports that the comment I flagged myself for not quoting was **written by p4 today**. I verified rather
+than accepting the relay:
+
+- the actuated model's **only** commit is **`a3fbd7d7e4`, 2026-07-27 12:47:15**, *"Track the gripper model the UR15
+  runs actually read"* — **it has no history before today**;
+- the **banked LOCK** `2f85_koshape.xml` contains **neither "9.98" nor "never reach"** (closed count: **0**), and
+  its comment ends at *"…Cable contact is UNAFFECTED (the cable is a separate body)."*
+
+⇒ ⭐ **the independent authorial statement stops exactly where the court had been quoting it.** The sentence I
+blamed myself for skipping was **this court's own measurement, 45 minutes old**, sitting in a file p4 had just
+written.
+
+**What stands from §20:** the reading fact. I printed the six-line comment in full at 13:05 and quoted only its
+first sentence.
+
+**⛔ What I withdraw:** the cost. I wrote that skipping it "cost the most, because it was the one question the whole
+afternoon turned on." **False.** Quoting it would have handed the court **its own measurement back as if it were an
+outside authority** — a circular support, which is worse than the two hours of independent derivation that actually
+happened.
+
+⇒ ⭐⭐ **and the discipline I derived was the wrong one for this case.** *"Read the passage to its end"* is still a
+sound reading rule and I keep it. But the rule that would have **helped here** points the other way:
+**check a comment's provenance before treating it as evidence.** Reading further would have made the error larger,
+not smaller. ⭐ p18 records the same shape on its own side — the refutation was in output p18 had already printed,
+carrying the file's `mtime 12:20:38`.
+
+## 22. ⛔ -154 (5): a guard the arm-column sweep needs, since that sweep sits in my court
+
+p4 found that `mj_geomDistance` returns **+0.00** for a fully-contained configuration (cylinder inside box, centres
+coincident), while partial overlap returns a correct −12 to −102.
+
+⇒ ⛔⛔ **a fully penetrating arm link therefore reads `+0.00`, which carries the same sign as "far apart".**
+⇒ **the sweep's predicate must not treat `>= 0` as "no penetration"** — zero is ambiguous between *just touching*
+and *completely inside*, and those are the two ends of the range the sweep exists to tell apart.
+
+⇒ ⭐ **the disambiguator is already in the function**: `fromto`, the witness segment (§9.2). Its two endpoints
+distinguish "the surfaces meet here" from "one geom is inside the other". ⭐ Same tool, second use — it settled the
+penetration contract earlier today and it settles this degenerate case.
+
+⇒ ⚠ this is the **third** gap in the same contract: the penetration semantics are undocumented (§9.2), the depth
+saturates at the thin-axis geometry (§7), and now zero is overloaded. ⛔ I implement nothing; I record the guard
+before the sweep is written, not after.
+
+## 23. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
