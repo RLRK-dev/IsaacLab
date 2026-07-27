@@ -6138,7 +6138,10 @@ From -075 (20:58:41); pins verified here.
 sweep is **byte-identical** to the banked baseline — ⭐ p18 re-derived it: `env7_recollation_sweep.txt` and
 `sweep_raw_23points.txt` hash to the **same** sha256
 (`0b6bb55d0b771191817836ed7df43d2643cd031d0dba53b27c0d274ba0386338`) — *"not close values; the same
-computation."* The other four: claw-floor saturations (−2.55/−2.59/−2.64/−2.75/−2.71), release point (tip
+computation."* 〔⚠ **Scope corrected by §183(c)**: byte-identity establishes **content equality only** — the
+artifacts carry **no stack stamp** (0 of 5 contain any version string; closed query, p18 re-ran) ⇒ the
+*new-stack provenance* rides the commit timestamp + p4's testimony, not the content. Fix routed: one
+stack-stamp line per probe output.〕 The other four: claw-floor saturations (−2.55/−2.59/−2.64/−2.75/−2.71), release point (tip
 11.50 → ctrl 188.08 / pad 21.70 → 188.02; 0.06-count agreement), reach-under-cable (OPEN roll 0.55 → 35.7 mm),
 saddle windows (600 mm → 9, 3 in) — all equal to banked values. env 4-tuple read from p5's banked record
 (`45a832712c`); interpreter re-measured = AFTER.
@@ -6228,3 +6231,44 @@ saddle posts/lips → Tier B; cam/cam2/render_every = already DERIVED in §6.4d 
 as a measurement miss — p4 to re-check); the world formula's TABLE_TOP−0.02 = additive ⇒ Tier B; ⭐ rule
 extension: **bare 0 and 1 exempt everywhere** (closes the _unnamed false positive; CABLE_N=40 still caught);
 remaining 13 already OWNED. Bank + implementation → p4; the ■2 adoptability = Rs only.
+
+## 183. The bundle returns: four pass, the coefficient set has holes, and the strongest result carried the least information
+
+From -377R (21:08:14); pins re-verified here (bundle sha MATCH @ `04cb430ffd` "Verify the bundle: subscripts
+and Tier A pass, the coefficient set has holes"; module `15c071b521…` / 666 lines = current working tree; the
+0-of-5 stack-stamp query reproduced).
+
+**(a) ✅ Four passes**: `known` = the `:89` prose only; subscript closure (`X = C[0]` no longer lists `X`);
+Tier A three **derived from sources, not transcribed** (CLAW_OFFSET = 0.27574726696 − 0.2548428289592266 =
+0.020904; EFFORT = the URDF's six efforts; LIMS 6/6/6); template rule = **23 sites** in wired (size 15 /
+range 4 / pos 3 / timestep 1); the physics attributes p0 once flagged (friction / mass / condim / damping /
+stiffness) are **gone** — the cable-commit substitutions and the rule agree; partial templates caught by
+their literal part (`size="0.102 {}"`).
+
+**(b) ⚠ Finding 1 — what landed is the COMBINED form, not the relayed strict form**: `CABLE_R*2` free /
+`CABLE_R*1.0375` detected ⇒ coefficients ARE discriminated — the strict ruling p5 accepted at -351 would not.
+Sequence: strict landed @ `6b6f0953` (-073); -074's "6.4d 結合形" dimensionalization then moved it —
+disclosed as a diff, ⛔ but the -351 acceptance was never re-ratified for the combined form ⇒ **p5 to confirm
+which form is intended.** And the enumeration has **int/float holes**: `*2`/`/2` free but `*2.0`/`/2.0`
+**detected**; `*3` free / `*3.0` detected; `1.0/10.0/100.0` present, `2.0/3.0` absent ⇒ *"halving is the most
+common coefficient operation, and `x / 2.0` is its normal spelling"* — the same coefficient passes as `2` and
+fails as `2.0`. (Structure confirmed here: `_plain_coefficient(value, written_as_int)` at module `:415`.)
+Inherent cost honestly separated by p0: small coefficients free inside multiplication is inherent to ANY
+coefficient set; the int/float gap is not.
+
+**(c) ⛔⛔ Finding 2 — the artifacts cannot prove they ran on the new stack**: all five recollation outputs
+contain **zero version strings** (closed query; p18 re-ran it, 0 of 5) ⇒ byte-identity appears equally under
+"re-measured, same computation" and "not re-measured at all" — **and that discrimination is the entire
+claim.** §179(a) tagged: my "the same computation" line described content equality; the provenance rode the
+commit timestamp + testimony. Fix routed to p4: **one line per probe printing the stack versions** — a changed
+header beside unchanged numbers becomes content-level, discriminating evidence. p0's stance verbatim: *"p4 が
+再実行されたことを疑ってはいません… artifact が決着に要るものを運んでおらず、会話より長く残るのは artifact
+だ。"* ✅ Its numeric leg: all four collations match (claw floor five values; half-dims 11.0/9.0/1.2; excluded
+7 = independent count from its own assets; bisection 188.08 vs 188.02 = 0.06 counts; reach 24.6/35.7 mm;
+saddles: [−300,−54.6] 245.4→8 + [+244.6,+300] 55.4→1 = 9, 3 FIT) + the sweep sha independently re-derived.
+
+**(d) ⛔ p0's self-correction, its own record**: the "saturates at 2.40 mm" mechanism was *"cleaner than the
+data"* — the sweep keeps moving (−2.51 … −2.75, back to −2.71, non-monotonic; ctrl-250 geometric overlap
+11.29 mm vs reading −2.75). The conclusion (−2.45 has no usable depth) survives; ⛔ **"floor = 2.40" must not
+be cited as a constant.** **(e)** walrus remains the last uncaught binding form (known-open). Its scope
+exclusions stand; the install.log exclusion was already discharged by §180 (timing, not conflict).
