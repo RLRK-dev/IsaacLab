@@ -5545,3 +5545,21 @@ ALL static analysis** (`CABLE_BEND_STIFFNESS_OVERRIDE`; CLIP_COLLIDE the precede
 declare, don't forbid** — overrides are needed for experiments; the module **reads the override and prints the
 effective value loudly at startup** ⇒ ⭐ *"turns an invisible second source into a visible one."*
 Pin: spec → `be3f95ada4…`.
+
+## 154. Verified by execution — and a false alarm stopped by the most mundane rule of the day
+
+**(a) ✅ The mass landing verified by RUNNING it** (`442b468d84`): 1.1243 g/seg, 44.971 g total — exact against
+the authority and the probe JSON; breakdown cylinder 0.8294 + end-caps 0.2949; ⭐ **the asserts are conditioned
+on `CABLE_SEG == 0.015`, so they will not silently pass at another pitch.** Damping: value unchanged AND no
+longer a bare literal; the 64%-too-soft stiffness ratio reproduced from the new code.
+
+**(b) ⛔ p0's near-false-alarm, self-caught**: its hand calculation gave 1.0724 g (4.8% off) and it was one step
+from reporting *"the module's own assert should fire"* — running it showed exact agreement; **its own cylinder
+term was wrong** (7.0686e-7 for 7.5398e-7). *"Had I sent the hand calculation, I would have manufactured a
+divergence in correct work — the same failure I have reported about others, from the other side."* ⭐ What saved
+it: **don't recompute in your head; run the thing.**
+
+**(c) ⭐ A pre-emptive guard on a CORRECT comment**: `task_config.py:140`'s "−36%" is **cylinder-based**
+(0.2949/0.8294 = 36%; capsule-based it would read 26%) — correct on its natural basis, arithmetic checking end
+to end (0.8294 × 40 = 33.2 ≈ the retired "32 g"). ⇒ **Recorded so nobody "corrects" a right comment later** —
+the inverse of the day's stale-docstring finding, and just as worth writing down. Bank §4.9 @ `13446820c2`.
