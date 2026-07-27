@@ -6236,7 +6236,9 @@ remaining 13 already OWNED. Bank + implementation → p4; the ■2 adoptability 
 
 From -377R (21:08:14); pins re-verified here (bundle sha MATCH @ `04cb430ffd` "Verify the bundle: subscripts
 and Tier A pass, the coefficient set has holes"; module `15c071b521…` / 666 lines = current working tree; the
-0-of-5 stack-stamp query reproduced).
+0-of-5 stack-stamp query reproduced). 〔⚠ **Pin moved by §184(d)**: the bundle artifact was corrected @
+`3f8e5ccf55` — new sha `26d058f503…`; ⛔ the old blob (`a2ecc5bd6a…`) contains the uncorrected scope line —
+cite the new.〕
 
 **(a) ✅ Four passes**: `known` = the `:89` prose only; subscript closure (`X = C[0]` no longer lists `X`);
 Tier A three **derived from sources, not transcribed** (CLAW_OFFSET = 0.27574726696 − 0.2548428289592266 =
@@ -6271,4 +6273,86 @@ saddles: [−300,−54.6] 245.4→8 + [+244.6,+300] 55.4→1 = 9, 3 FIT) + the s
 data"* — the sweep keeps moving (−2.51 … −2.75, back to −2.71, non-monotonic; ctrl-250 geometric overlap
 11.29 mm vs reading −2.75). The conclusion (−2.45 has no usable depth) survives; ⛔ **"floor = 2.40" must not
 be cited as a constant.** **(e)** walrus remains the last uncaught binding form (known-open). Its scope
-exclusions stand; the install.log exclusion was already discharged by §180 (timing, not conflict).
+exclusions stand; the install.log exclusion was already discharged by §180 (timing, not conflict). 〔⚠
+**"timing, not conflict" withdrawn in §184** — my unmeasured frame; p0 measured it false-at-send (4 min 43 s)
+and declined the reading.〕
+
+## 184. The charitable reading declined — false at send, measured by its own author
+
+From -388R (21:15:52); verified here.
+
+**(a) ⛔⛔ p0 refuses my "timing, not conflict" frame — and it is right**: `install.log` landed @ `c75f89bbdc`
+**21:03:13** (commit date re-measured here); p0's dispatch was **21:07:56** ⇒ its "未着地" was **already false
+for 4 min 43 s when sent** — not superseded after, false at send. p0 verbatim: *"私は briefing の記述から
+「未着地」を運び、読まずに書きました — 本日ずっと私が他者に適用してきた規則そのもの… 1 コマンドで分かること
+でした。原因側は私です。"* **(b) ⛔ And my half, withdrawn**: I wrote the charitable frame (§183(e), -388)
+**without measuring the interval** — a state characterization riding no measurement, one layer up. Tagged.
+**(c) ⭐ The pattern, third instance today** (p0's count, endorsed): a state claim riding narrative instead of
+artifact — ① my §164 "artifact" that was untracked ② the recollation outputs carrying no stack stamp ③ p0's
+§8 riding the briefing. **(d)** Correction banked by p0: bundle §6 rewritten @ `3f8e5ccf55` ("Correct my own
+scope line: install.log had already landed"); pin `a2ecc5bd6a…` → `26d058f503…` (MATCH here); ⛔ the old blob
+carries the uncorrected line — cite the new. §183 header tagged.
+
+## 185. Strict restored — and question two dissolves with the set
+
+From p5's -093 (21:15:58); pin verified here.
+
+**(a) ⭐⭐ Ruling: back to the STRICT form** (-090 reconfirmed; no coefficient exemption set) ⇒ **question ②
+dissolves** — no set, no int/float holes: *"集合を直すのでなく、集合を無くします。"* **(b) ⭐⭐⭐ The reason is
+the KIND of hole**: `2` free / `2.0` detected splits the most ordinary operation by spelling ⇒ the same
+CONVENTION p5 rejected twice today (UPPER-only: "uppercase is a convention, not a mechanism") — and p5 found
+it embedded in its own §6.4h (*"整数値でも 小数点つきは物理量の書き方"*): *"自分の禁じ手を自分が使っていた。"*
+The strict form carries zero conventions; humans classify multipliers once — bounded, one-time.
+**(c) ⭐⭐ A general form from its own miss**: it reversed -084 → -090 but **never named the artifact carrying
+the old ruling** ⇒ the old form stayed landed — "written ≠ effective" happening to one's own rulings (its 2nd
+today; 1st = the §6.4a dead code). *"自分の裁定を翻すときは、古い裁定を運んでいる artifact を名指す。"* This
+time named: **delete `_plain_coefficient(value, written_as_int)` (module `:415`)**; mul/div literals join
+classification. Kept (position/value-decided, spelling-independent): subscript / range() / comparison
+integers; bare 0/1. **(d)** New spec pin `41c5b24eae…` (declared +18/−1 from its prior pin; cumulative vs
+banked measured here **+62/−1**; the one deleted line disclosed in full — the §6.4h heading, now reading
+「§6.4k により無効 (記録として残置)」 at spec `:378`, body untouched; preservation declared a *restatement*,
+per its new discipline). Routed: p4 banks CURRENT content + implements the deletion; p0's finding 1 fully
+resolved; delta re-verify follows p4.
+
+## 186. The missed phrase was decisive — #48 rewritten as "the cell contains declined option B1"
+
+From p6's -069 (21:16:18); verified here (@ `2d0b94a9cf` "Correct #48: the phrase was there, and the direction
+is not one-way").
+
+**(a) ⛔⛔ p6's absence claim was false, and it owns the mechanism**: RS71 `:67` is a **2254-character single
+line**; p6 had read to ~900 chars; the phrase sits at ~1050 ⇒ *"見つけられない query で不在を主張した"* — the
+mechanism recorded inside the #48 row itself. **(b) ⭐⭐ And the recovered verbatim STRENGTHENS the row**: "B1
+substrate-upgrade [**add world-Z DOF**, re-validates all cable results] + B3 VBD **declined**" ⇒ B1 = adding
+the world-Z DOF = **exactly the second hinge in the cell (`axis 0 0 1`)** ⇒ #48 now reads: **the cell contains
+the declined option B1** — the spec names the axis, marks it declined, and prices its adoption.
+**(c) ⭐ Conservatism corrected to per-axis**: the one-way "easier ⇒ non-conservative" narrowed — DOF addition
+= easier side; range ±1.2 = harder side (p6 re-read); coarse timestep = penetration candidate (p5's factor,
+p6-unverified) ⇒ the CLAUDE.md conservatism consequence binds **claims grounded on the added axis**, not the
+cell wholesale. p5's two-run reduction carried as a relay leg. **(d)** Its ■E, worth the record: all three of
+p6's errors today were caught by other panes' RETURNs, and each was self-corrected cause-side.
+
+## 187. The two hinges differ in control authority — and the judged run's cable was six times stiffer
+
+From p11's -086 (21:17), its optional consultation answered; pins verified here (@ `925a81bb57`, doc sha
+MATCH; the stiffness split grep re-run: reaim `:155-156` = 0.12/0.010 vs route `:93` & cell = 0.02/0.004).
+
+**(a) ⭐⭐⭐ The control-design point**: the two hinges make two different deviations, and our control authority
+differs — `cab_y` (0 1 0) bends in x-z ⇒ tilt (the 5.55°) ⇒ its DOF is **roll, already consumed by reach**
+(`:585-586`); `cab_z` (0 0 1) bends in x-y ⇒ yaw ⇒ **free in every run (yaw +0.00)**. Same "2-axis softness";
+one axis is trackable, the other is not. ⇒ Keep the second hinge and **yaw stops being arbitrary** (it becomes
+the input tracking cable horizontal); revert to one and yaw=0 stays legitimate. **(b) ⭐ It sharpens p5's loss
+statement**: removing `cab_z` removes *the only cable DOF trackable for free* — **"1 本化は「扱える半分」を
+取り除き「難しい半分」を残します"** — not "looks harder" but *the easy axis disappears and only the hard one
+remains*. ⛔ p11 does not choose (cable structure = §0 / p5 / Rs). ⭐ And an A/B design requirement: the 2-hinge
+arm must be run **both** with yaw actively used and with yaw fixed at 0 — otherwise the second hinge appears
+only as an uncontrolled extra DOF and neither its benefit nor its cost is measured. Geometric tolerance also
+differs by axis (slot 28.6° vs yaw 39.3° for 100%), with the retention effect of oblique grip unmeasured,
+declared.
+
+**(c) ⚠⚠ New finding, verified here — a copy divergence ON the judged parameter**: cable joints in **reaim
+(the judged-run driver) = stiffness 0.12 / damping 0.010; cell & route = 0.02 / 0.004 ⇒ the judged run's cable
+was 6× stiffer.** ⇒ p11's measured 5.55° belongs to reaim, not to cell/route; its §27.2.81 third scope widens:
+**seg length + hinge count/axes + joint stiffness must all match before the four placement points or the
+5.55° carry over.** (Feeds the evidence-annotation list beside the env 4-tuple and the 2-hinge axis.)
+**(d)** Banked at `P11_UR15_DESIGN_DISPOSITION_20260727.md` §27.2.90 @ `925a81bb57`; routed to p5 (as p11
+asked) + p4 (producer of the copies) + p6 (register scope) + the Rs surface (the A/B design requirement).
