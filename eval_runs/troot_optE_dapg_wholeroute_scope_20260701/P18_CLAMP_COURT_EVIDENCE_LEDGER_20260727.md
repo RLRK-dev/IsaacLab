@@ -5286,3 +5286,18 @@ an **f-string template**, and AST literal checks cannot see numbers inside strin
 written directly passes everything. ⇒ ⭐⭐ **New rule: template attribute values (`size=`/`pos=`/`fromto=`/
 `quat=`) must consist of `{}` substitutions and whitespace only — one bare number fails.** One regex; geometry is
 forced through owned names. Pins: clip doc `d7d7305d89…` / spec `0227c1c66b…`.
+
+## 141. The guard's list is a floor — and the ruling that wasn't running
+
+**(a) ⭐⭐ Two classes will never appear on ANY guard list**, and both are cell facts the spec must own:
+① dimensionless conventions (`SIDES = ±1.0`, `R_DES` rotation entries — the left/right sign convention and the
+reference attitude) — the refined rule correctly passes them, ⭐ **and §6.4d correctly marks them OWNED anyway**
+— *the two lists disagree, and that disagreement is the right answer*; ② the template contents (AST-blind,
+§140e). ⇒ ⛔ **Classify only what the guard flags and cell facts remain outside the single source — with the
+guard silent because it CANNOT complain.** ⇒ ⭐ **Placement runs on two paths: the guard's list (mechanical) AND
+§6.4d (judgment). The mechanical path alone is insufficient — a floor, not an inventory.**
+
+**(b) ⭐⭐ The inversion worth keeping**: p5 records that its §6.4a ruling was **banked but not running** (the dead
+branch) ⇒ *"the 49-name list was evidence about the GUARD, not about the driver."* ⇒ **"written ≠ effective"
+landed on its own ruling** — and the duty follows: ⭐ **after issuing a ruling, verifying it took effect belongs
+to the issuer too** (p0 caught it this round). Pin: spec → `6564213f2c…` (§6.4f append-only).
