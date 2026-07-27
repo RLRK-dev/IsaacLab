@@ -50,7 +50,7 @@ Logic tree v1 (`~/.claude/projects/-home-rlrk-IsaacLab/memory/project_logic_tree
 
 <!-- GEN:NEST:BEGIN (build_nest_snapshot.py; 手書き禁止) -->
 
-_250 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
+_252 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
 
 | node_id | status | parent |
 |---|---|---|
@@ -119,7 +119,9 @@ _250 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-Meta-Path-Y-Precedent-Index` | IN_PROGRESS | `T-Meta` |
 | `T-Meta-Path-Y-Precedent-Index-2026-05-04-Update` | IN_PROGRESS | `T-Meta-Path-Y-Precedent-Index` |
 | `T-Option-E` | COMPLETE | `T-L1X-Substrate-Realism` |
+| `T-PRODUCTION-LINE` | IN_PROGRESS | `—` |
 | `T-Predicate-Redefinition` | IN_PROGRESS | `T-ROOT` |
+| `T-ROOT` | IN_PROGRESS | `T-PRODUCTION-LINE` |
 | `T-ROOT-COORD` | ARCHIVED | `T-ROOT` |
 | `T-ROOT-COORD2-AC-IC-GC-Audit-2026-05-13` | ARCHIVED | `T-ROOT-Pivot-Chain-Architecture-Review` |
 | `T-ROOT-Cable-Physics-Calibration-Packet-Design-2026-05-13` | IN_PROGRESS | `T-ROOT-Pivot-Chain-Architecture-Review` |

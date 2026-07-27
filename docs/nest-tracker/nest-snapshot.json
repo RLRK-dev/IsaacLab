@@ -910,6 +910,18 @@
       "session_history": []
     },
     {
+      "id": "T-PRODUCTION-LINE",
+      "goal": "Rs 提示の生産ラインを実現する（⛔⑨電気検査 と ⑩外観検査 は除く）。対象製品 = EV バッテリー用ジャンクションボックス + 高電圧ハーネス。対象工程 = ①筐体投入 ②高電圧コネクター同時挿入 ③主配線の配索 ④分岐配線の配索 ⑤クリップ固定 ⑥ストレインリリーフ取付 ⑦カバー取付 ⑧ラッチ固定。",
+      "means": "現時点の means は 子 node `T-ROOT`（現行の中間目標）のみ。⑨⑩ を除く 8 工程の分解・担当割当は未着手（Rs 裁定待ち）。",
+      "status": "IN_PROGRESS",
+      "dependencies": [],
+      "parent": null,
+      "children": [
+        "T-ROOT"
+      ],
+      "session_history": []
+    },
+    {
       "id": "T-Predicate-Redefinition",
       "goal": "Redefine the product success predicate post-P0-KILL: L0 95%->100% interpreted QUALITATIVELY (aspirational 'fully works', NOT a literal statistical SR).",
       "means": "IN_PROGRESS (Rs axis). L0 reframed 95->100 QUALITATIVE 2026-06-23 (Rs verbatim「95は100に変更…定性的なものとして解釈していい」). The 100%-qualitative reframe IS the P0-KILL #2 predicate-redefinition instance, side-stepping the 'as-scoped 95% infeasible' verdict. Rs-decision axis.\n",
@@ -927,7 +939,7 @@
       "means": "知覚 (T-Vision) + 制御 (T-Skill) + 統合 (T-L1-B) + 経験基盤 (T-Empirical) + 失敗回復 (T-WM) の 5 capability axis",
       "status": "IN_PROGRESS",
       "dependencies": [],
-      "parent": null,
+      "parent": "T-PRODUCTION-LINE",
       "children": [
         "T-Empirical",
         "T-Forward-Capability",
