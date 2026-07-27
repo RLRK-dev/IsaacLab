@@ -5,8 +5,14 @@ cannot discriminate is not evidence.  Four states, two of which the predicate MU
 
     fingers wide open      -> nothing between the claws            -> must be False
     cable moved out of the mouth, jaw closed -> tips shut on air   -> must be False
-    half closed on the cable -> tips 1.8 mm, cable inside          -> must be True
-    clamped on the cable   -> tips through each other, cable there -> reports what it reports
+    half closed, jaw away  -> tips 1.8 mm, cable NOT inside        -> must be False
+    clamped, jaw away      -> tips through each other, no cable    -> must be False
+
+⚠ Every state here has the jaw away from the cable, so the mouth-band leg is False throughout and
+only ever the same leg is doing the rejecting.  That is what r6_flip.py is for: the same finger
+commands from the AIMED pose, where the band leg starts True and the claw leg alone decides.
+This file's header used to claim a "cable inside -> must be True" row; the body never did that,
+and a header promising what the code does not do is the defect this whole day has been about.
 """
 import pathlib, sys, numpy as np, mujoco
 S = pathlib.Path("/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727")
