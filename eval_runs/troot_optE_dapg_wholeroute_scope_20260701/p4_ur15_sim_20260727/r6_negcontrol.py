@@ -34,22 +34,9 @@ for label, ctrl, expect in (("wide open, nothing between", ns["OPEN"], "False"),
     print(f"{label:34s} {claw_gap('R'):8.2f} {z:9.2f} {str(inb):>8} {str(held('R')):>6} "
           f"{str(grasped('R')):>8}  {expect}")
 
-# the POSITIVE case: put the cable where the jaw is, then close.  Placing it is instrumentation
-# for a static test, not a control action -- the alternative is that the only state the predicate
-# can be checked in is one the run has to reach first.
-free = m.jnt_qposadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, "cable_free")]
-q0 = d.qpos[free:free + 3].copy()
-settle(ns["OPEN"])
-pin = ns["pinch"]("R")
-seat = np.array(d.xpos[ns["CAB"][ns["link_at"](float(pin[0]))]])
-d.qpos[free:free + 3] += (pin - seat)
-mujoco.mj_forward(m, d)
-settle(ns["CLAMP"])
-inb, z = cable_in_mouth("R")
-print(f"{'cable PLACED in the jaw, CLAMPED':34s} {claw_gap('R'):8.2f} {z:9.2f} {str(inb):>8} "
-      f"{str(held('R')):>6} {str(grasped('R')):>8}  True")
-d.qpos[free:free + 3] = q0
-mujoco.mj_forward(m, d)
+# ⛔ The positive case is NOT here: placing the cable in the jaw moved it further away
+# (491 mm) and measured nothing.  p5's covering approach works and lives in
+# r6_positive.py -- keep the two apart so this file stays the negatives.
 
 # now take the cable away and close on nothing: the predicate must reject it
 free = m.jnt_qposadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, "cable_free")]

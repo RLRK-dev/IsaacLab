@@ -649,19 +649,25 @@ def claw_gap(t, dd=None):
 def cable_in_mouth(t, dd=None):
     """(is the cable centre inside the mouth band, its pad-local z [mm]).
 
-    R6(ii), the weak form: between the tips is not enough -- the centre has to be in the mouth.
+    R6(ii).  The datum is the PAD BODY's own frame, not the world and not the jaw frame I used
+    first: p5 -102 gives the band as f2ext's top at 25.00 mm to f1ext's bottom at 39.00 mm in
+    right_pad / left_pad coordinates (asset :95), so
 
-    ⚠ The reference: z is measured along the jaw's own mouth axis from the PAD BODY origin, since
-    that is the frame the band [25.00, 39.00] mm has to be in for those numbers to be positive and
-    ~14 mm apart.  p5 did not state the origin, so this prints the value next to the band rather
-    than only the verdict -- if the reference is a different one the printed number will say so.
+        p_pad = R_pad^T (p_world - x_pad)
+
+    ⚠ and the sign is not intuition's: a LARGER pad-local z is FURTHER DOWN in the world
+    (GD-KoShape :58-59), so reading world z gives the band upside down.  My first version measured
+    along the jaw's claw-to-claw axis from the pad origin and produced 162-1243 mm against a band
+    of 25-39 -- far enough out that it could not tell a wrong datum from a jaw that was simply
+    nowhere near the cable.  It was the datum.
     """
     dd = dd if dd is not None else d
     q = np.asarray(cable_perp(pinch(t, dd), dd)[1])
-    origin = np.array(dd.xpos[PAD[t][0]])
-    z = float(jaw_axes(t, dd)[2] @ (q - origin)) * 1000.0
+    b = PAD[t][0]
+    R_pad = np.array(dd.xmat[b]).reshape(3, 3)
+    z = float((R_pad.T @ (q - np.array(dd.xpos[b])))[2]) * 1000.0
     lo, hi = (v * 1000.0 for v in _spec.MOUTH_BAND_Z)
-    return (lo <= abs(z) <= hi), abs(z)
+    return (lo <= z <= hi), z
 
 
 def held(t, dd=None):

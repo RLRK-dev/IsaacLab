@@ -1,0 +1,40 @@
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+ur15_steps_wired.py:257: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  m = cell.compile()
+[stack] newton 1.4.0 / mujoco 3.10.0 / mujoco-warp 3.10.0.3 / warp-lang 1.15.0
+[cell] cable bend EI in force: 0.005 N.m^2 from task_config.py:144
+[cell] -> joint stiffness 0.33333 N.m/rad over a 15 mm link
+[cell] cable 40 x 15 mm, 1.1243 g each, 44.97 g total
+[cell] clip collision read from the env source: True
+[steps] nq=113 nu=14 nbody=88 ngeom=139 eq=8  seat links C1=cab30 C2=cab23
+[steps] geoms: 139 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.300,+0.285] y[+0.280,+0.280] z-table[+0.1486,+0.1559] ncon=13
+[steps] measured grasp: L=cab27 [0.1125 0.28   0.9486]  R=cab32 [0.1875 0.28   0.9509]  drop across the span = 2.3 mm
+[steps] start-pose IK L: 8 solved / 4 collision-free / 4 away from a singularity, chosen pos  0.00 mm roll 20.1 deg sigma_min 0.0504 |q|max=1.27 rad
+[steps] start-pose IK R: 13 solved / 3 collision-free / 3 away from a singularity, chosen pos  0.00 mm roll 34.4 deg sigma_min 0.2368 |q|max=3.06 rad
+[steps] STEP1 L arm touching: clear
+[steps] STEP1 R arm touching: clear
+[steps] re-measured after the approach: L=cab26 [0.0986 0.28   0.9488]  R=cab32 [0.1886 0.28   0.951 ]
+[steps] STEP1 L: tool err=   2.1mm
+          joint err   = [-0.  0. -0. -0. -0.  0.] mrad
+          act force   = [ 0.  0.  0.  0.  0. -0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [ -61.6 -101.5  -14.4    4.5   -1.1    0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] STEP1 R: tool err=   2.1mm
+          joint err   = [-0.  0.  0. -0.  0.  0.] mrad
+          act force   = [ 0.  0.  0.  0. -0. -0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [82.6 29.7 -8.8  0.1  1.5 -0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] release opening solved from the asset: ctrl 189.3 (claw tips reach 11.00 mm = cable 8.0 plus the 3.00 mm the cable can sit off centre)
+[pos] aim at the resting cable: seat error  2.90 mm, target [0.1886 0.2876 0.9884]
+[pos] arrived: residual   0.00 mrad | backplate  79.89 mm | pad-local z   34.49 mm (band 25.00-39.00) in-band=True
+
+[pos] CLOSED: backplate   6.67 mm (floor 18.19) -> past floor=True
+[pos]          pad-local z   29.02 mm in band 25.00-39.00 -> True
+[pos]          R6 held() = True   (old grasped() = True)

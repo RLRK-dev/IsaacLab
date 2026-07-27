@@ -18,8 +18,7 @@ impratio: parent has 1, child has 10, keeping parent value
 [steps] measured grasp: L=cab27 [0.1125 0.28   0.9486]  R=cab32 [0.1875 0.28   0.9509]  drop across the span = 2.3 mm
 
 state                                  claw   mouth z  in band   held  grasped  expect
-wide open, nothing between            69.87    169.06    False  False    False  False
-half closed                            1.81    163.92    False  False    False  -
-clamped                               -6.42    161.99    False  False    False  -
-cable PLACED in the jaw, CLAMPED      -6.42    491.30    False  False    False  True
-cable moved away, jaw CLAMPED         -6.42   1242.91    False  False    False  False
+wide open, nothing between            69.87   -169.06    False  False    False  False
+half closed                            1.81   -163.92    False  False    False  -
+clamped                               -6.42   -161.99    False  False    False  -
+cable moved away, jaw CLAMPED         -6.42   -209.92    False  False    False  False
