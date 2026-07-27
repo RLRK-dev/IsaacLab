@@ -3484,3 +3484,56 @@ exists, it falls back to all of them**, and `:675` prints *collision-free 0* whi
 belongs in the specification rather than in a printed line nobody has to read.**
 ⇒ ⭐ p0's outstanding premise is discharged: the column constants were read driver-side by `w2:p11`, so the
 in/out test can be specified from driver constants alone.
+
+## 59. ⛔ "The trade vanishes" → "the trade shrinks" — and the column test needs a clamp
+
+**(a) `w2:p11` corrected the wording that would have gone to Rs.** The 18.00 mm band was retracted (§41), so:
+
+| band | 100% up to | at the required 34.4° |
+|---|---|---|
+| **2.00 mm** — full containment | 5.2° | **13.3%** |
+| ⭐ **10.00 mm** — centre containment, the weak predicate (**correct**) | **24.4°** | ⭐ **66.4%** |
+| ⛔ 18.00 mm | 39.3° | 100% — **retracted** |
+
+⇒ ⭐ **13.3% → 66.4% is a shrink, not a disappearance: 34.4° still exceeds 24.4°, so it is not 100%.**
+⇒ ⭐ **The wording carried to Rs must be "shrinks", never "vanishes."** ⚠ p11 notes its own dispatch had carried
+*"39.3° ⇒ 100%"* as confirmed and that it flowed through this ledger — §56's index already lists the
+"trade disappears" phrasing as superseded by §41; **this fixes the wording at the Rs-facing surface too.**
+
+**(b) ⭐ A closure worth recording**: the 10.00 mm band **is** p11's original **[28.00, 36.00]** — the one it
+corrected to [31, 33] in its §27.2.4. ⇒ ⭐⭐ **Its first band was not wrong; it was answering the weak-predicate
+question** — exactly as `w2:p0` refined in `-110` (*"not arbitrary — a different predicate"*).
+
+**(c) ⭐⭐ A practical fix to §54a's test.** `stem` is a **finite** cylinder, z ∈ [0, 1.53], and the arms mount at
+`[±0.40, 0, 1.53]` — **its top face** (p11 read this on the judged driver). ⇒ ⛔ **Testing against the axis as an
+infinite line would flag every link above shoulder height — most of the arm — permanently.**
+⇒ ⭐ **Use segment-to-segment distance, clamping z to [0, 1.53].**
+⇒ ⭐⭐ **With the clamp the search reduces to one sentence: how far inboard (x → 0) does any link that descends
+below 1.53 m swing?**
+⇒ ⭐ **Scale**: mount margin **298 mm** against p4's measured minimum of **85 mm** ⇒ **something swings ≈213 mm
+inboard** ⇒ **the test is worth running; this is not a "nothing moves" system.**
+⭐ Carrying p0's narrowing: only **wrist1/2/3** have a principal-axis radius under 102 mm ⇒ **full containment —
+the `+0.00` degeneracy — can only arise for the wrist links.** ⚠ `forearm` at 118.2 > 102 is **about the
+principal axis** and does not close the cross-section case.
+
+## 60. ✅ The registry item is CLOSED — and `w2:p6` measured the dependency before deleting
+
+Rs, verbatim: **「WMSO-DESIGNは名称変更のみでよい」** ⇒ p6 landed **(c) as a rename of the existing entry, not an
+addition** (`b6eaa4f10a`, +3/−1) ⇒ ⭐ **the entry count stays 19**; `MWSO-DESIGN` is gone from the role lines.
+
+⚠⚠ **And before deleting, it verified the absence of dependencies with a closed query**: the old spelling's
+prefixed token is **0 across the five scanned surfaces and across the whole repository** ⇒ **no live reference
+could be left dangling.**
+⇒ ⭐ **Its earlier caution — "do not clean entries out, some are load-bearing" (§25a-adjacent, its `-048`) — was
+discharged by measurement rather than overridden.** ⇒ **That is the right way to retire one's own caveat.**
+
+⭐ It ran the three checks a **third** time, and this time also confirmed the rename's *intent*: **the old spelling
+is no longer recognised as a role.** ⇒ **Both directions of a rename tested, not just the new one.**
+⭐ DDR #43 → **RESOLVED** (`0a7b29ac06`) — ⚠ **and marked explicitly as not permanent**: the structure recurs
+whenever roles change, so **the row is to be reopened at the next role change.** ⇒ ⭐ **A ✅ that refuses to be
+read as a guarantee.**
+
+⭐ p6 also self-reported a **third** checker defect of the same family: its comment-contamination grep included
+`"Rs"`, which matched `RS-TECH-LEAD` case-insensitively ⇒ two false hits. ⇒ It **changed the predicate** — *"are
+all post-parse tokens bare role names?"* — and re-measured: **0 deviations.** ⇒ ⭐ **Not a tightened pattern but a
+different question**, which is the repair shape this court converged on (§28).
