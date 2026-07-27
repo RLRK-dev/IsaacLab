@@ -1906,3 +1906,64 @@ driver reads the **assets** one by absolute path; that pad-to-cable is neither c
 ⚠ pB also applied §24b to its own numbers: L +6.81 / R +5.68 and claws −2.44 / −2.48 are **none of them 0.00**, so
 they are outside the degenerate band — ⭐ and it records the rule for next time: **a face gap reported as exactly
 +0.00 will be read neither as "almost touching" nor as "clear."**
+
+## 26. ⭐⭐⭐ The instrument's worst failure returns its most reassuring value — and its range is now known
+
+`w2:p5` reproduced `w2:p4`'s defect on synthetic geometry and **characterised where it bites**. A thin box
+(20×20×100 mm) inside a thick cylinder (r = 102 mm):
+
+| configuration | returned |
+|---|---|
+| centres coincident | ⛔ **+0.000** |
+| z offset 50 / 100 / 200 mm | **−111.856 / −111.9 / −111.9** |
+| z offset 350 mm — **exactly touching** | ⛔ **+0.000** |
+| x offset 30 / 60 / 90 / 112 mm | −82.0 / −52.0 / −22.0 / −0.016 |
+
+⇒ ⭐ **The failure is not "full containment" in general — it is the degenerate, near-coincident-centre case.**
+⇒ ⛔⛔ **The same `+0.000` is returned for *exactly touching* and for *maximum penetration*.** ⇒ ⭐⭐ **The
+instrument's worst failure returns its most reassuring value.**
+
+⇒ ⭐ **Operating rule (p5's, adopted here): treat `0.000` as UNDECIDABLE — neither "touching" nor "clear."**
+Penetration announces itself in the **neighbours**: adjacent samples return strong negatives. ⇒ **Sample the
+sweep densely and judge from the neighbourhood, not the point.**
+⇒ ⚠ **This matters for the pending column sweep specifically**, because that sweep contains exactly the
+configurations where an arm link passes near the column's axis. Without the rule, **the worst case is the one
+that reads clean.**
+
+### 26a. The upgrade assert, in its correct form
+
+⭐ `w2:p5` pre-verified `w2:p11`'s assertion on **both** versions before the upgrade: `shape_count = 2`,
+`len(shape_label) = 2`, equality **True on newton 1.2.1 and on 1.4.0** ⇒ **the upgrade does not break the
+equality**, and p11's concern (the guarantee lives in the installed package, not in our code) is discharged **for
+the version we are moving to**, in advance.
+⭐ p5 also confirmed p11's third path empirically: adding a shape without a label yields the default **`shape_0`**,
+which **does not contain `pad`**.
+
+⇒ ⛔ **`w2:p0` then found that the assertion as proposed does not catch that path**: asserting *the label is
+non-empty* **passes**, because `shape_0` is non-empty. ⇒ ⭐⭐ **Assert the result instead: that `pad_shape_idx`
+(`:1582`) holds the expected number of shapes.** ⇒ Same shape as `newton_route_env.py:283` — *"A flag-OFF build
+has 0 such actuators → raises."* ⇒ **The question moves from the label's form to the pad-shape count**, which is
+what the mechanism actually depends on.
+⇒ ⭐ **Both checks together**: length equality covers the index entrance; the pad-count covers "labels present but
+generic". ⛔ p18 implements nothing; the requirement is recorded for whoever lands it.
+
+⚠ `w2:p0` also lists what it swept for that path: **13 `add_shape`-family entry points**, several defaulting to
+`label: str | None = None` (`:2817`, `:3559`, `:3656`, `:3730`). ⭐ Current scope is safe because everything in
+`[mj_left_ss, mj_arm_se)` comes from `add_mjcf`, which always passes a name.
+
+### 26b. ⛔ Correction to §25 — the authority file has no omission
+
+**Cause side: p18, for banking the strong version.** §25 said *"you can follow the authority rule correctly and
+still not reach the information."* ⭐ `w2:p5` **weakened its own claim first**, and it is right: the sentence not
+present in the LOCK asset was **p4's own note from 12:20 today** (§24), not an independent author's statement.
+⇒ ⭐ **Correct form: the LOCK asset has no omission.** What it says — *the claws can overlap at the close* — is
+the whole of the independent author record, and the A/B branch rests on that plus this court's own geometry.
+⇒ ⭐ `w2:p0` puts the direction well: **not reaching it was not a loss — reaching it would have been circular.**
+
+⚠ `w2:p0` also notes its banked measurements carry provenance for newton 1.2.1 / mujoco 3.8.1 / warp 1.13.0 but
+**not `mujoco_warp`** (its eighth carry-over); the current 3.8.1 was measured today at 12:5x and appears in
+messages and in this ledger ⇒ **retro-identifiable after the upgrade** ⇒ ⛔ **not a reason to delay it.**
+
+⭐ `w2:p5` appended to the banked design again with **36 added / 0 deleted** — new sha256
+`137fa9dfc8e21dd64f61586014d0edf1d5e4d9494ec8922e816d55f8bfa91c60` (269 lines), **re-frozen**, banking is p4's.
+⭐ env7 runs remain **0 since 15:05**; p5 still declines to call the series complete and waits on p4's answer.
