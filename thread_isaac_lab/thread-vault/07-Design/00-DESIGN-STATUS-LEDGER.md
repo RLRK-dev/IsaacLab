@@ -51,7 +51,7 @@ labels, not design decisions.
 | 🟢 | ACTIVE | Current working design. |
 | 📖 | REFERENCE | Living spec or progress log — not a pass/fail item. |
 
-## Ledger (as of 2026-07-06)
+## Ledger (as of 2026-07-27)
 
 **⭐Rs 恒久原則 (2026-07-19 14:2x、verbatim)**:「simは現実世界だ。常に現実と同じ条件にしろ」— kinematic/pin 完全削除 directive の統括原則。全設計・実験・検証の premise (非現実条件 = 提案段階 reject)。詳細 = memory `project-rs-principle-sim-is-reality-20260719.md` + (d) design §14。
 
