@@ -247,6 +247,46 @@ already specified — mass restored, same span.
 was compared against came from the same heavy cable, so choosing between L² and L⁴ was a ratio
 question and the common factor cancels.
 
+## 4.8 The damping question, settled by one read (MSG-P18-331)
+
+**Answer: no — the damping is not the same shape as K. It carries no `SEG` dependence at all.**
+
+Read from `test_newton_clip_routing.py`, all three per-element quantities:
+
+| quantity | per-element form | line | `SEG` dependence |
+|---|---|---|---|
+| mass | `cable_cfg.density * π * CABLE_RADIUS**2 * CABLE_SEG_LEN` | `:907`, `:1020` | **∝ SEG** |
+| stiffness | `CABLE_MUJOCO_BEND_K = _CABLE_EI_ACTIVE / CABLE_SEG_LEN` → `"mujoco:dof_passive_stiffness"` | `:928` → `:1012` | **∝ 1/SEG** |
+| **damping** | `"mujoco:dof_passive_damping": CABLE_BEND_DAMPING` — **verbatim** | `:1013` | **none** |
+
+⇒ halving `SEG`: mass per segment **halves**, stiffness per joint **doubles**, damping per joint
+**does not change**. That is exactly p5's "mass and stiffness, opposite 2× each", and it completes
+the set: **damping needs no correction.**
+
+⚠ Whether a bending damping *should* be `SEG`-independent is a modelling question — a continuum
+damping coefficient would scale like the stiffness. I am reporting what the implementation does,
+which is what was asked; the physical question is not mine.
+
+### 4.8.1 By-product: the docstring's `66.67` is stale by 200×
+
+`:920` states the contract as *"k = EI/L = 66.67 N·m/rad"*, and `:943` repeats it. But `:928`
+computes `0.005 / 0.015 = 0.3333`. **66.67 implies EI = 1.000**, whereas `:144` carries
+**EI = 0.005** — the human VISUAL "power-cable-floppy" pick of 2026-06-19. And `task_config:147-148`
+gives the realistic Ø8 window as `1e-3 .. 5e-2`, so 1.000 is twenty times above its top.
+
+⇒ the two docstrings record a pre-floppy EI and were never updated. The code is right; the contract
+text next to it is not.
+
+### 4.8.2 By-product: the stiffness is env-var dependent
+
+`:928` `_CABLE_EI_ACTIVE = float(os.environ.get("CABLE_BEND_STIFFNESS_OVERRIDE", "") or CABLE_BEND_STIFFNESS)`
+
+⇒ **`CABLE_MUJOCO_BEND_K` is not a pure function of `task_config`** — an environment variable
+rescales it at runtime, documented at `:922-926` as a 0-commit probe override. So a template that
+substitutes the bend stiffness is reading a runtime-variable quantity, and a Tier A entry for it
+would need to say so. ⭐ Structurally the same shape as the clip-collision flag gated on
+`CLIP_COLLISION` — worth noting because that one has already cost this court two passes.
+
 ## 5. Scope
 
 **Did**: re-derive both pins; read the guard; reproduce the 49; classify the reasons; prove the
