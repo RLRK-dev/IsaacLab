@@ -4983,3 +4983,22 @@ already measured; not-extrapolating only costs when waiting costs."*
 two boundary kinds, not conflated). Grounds for 2.4 marked weak (x-error unmeasured; ⛔ the 4.89 is a z quantity,
 not reused); the cost is written — ~2 mm span per 1 mm inset ⇒ **widenable later without redesign.**
 Pin: clip doc → `57a6a7f153…`.
+
+## 127. Unbanked numbers rode the relay — pB alone refused them, and 18.19 is two quantities again
+
+**(a) ⛔⛔ The ctrl-170 values p4 circulated are NOT in the banked artifact.** My own closed query reproduces pB's:
+`P4_RELEASE_SWEEP_20260727.md` has **no 170 row, no 28.35**; 18.19 exists **only as ctrl-197.5's backplate gap**
+(`:27`/`:43`). ⇒ p4's `-064` sent numbers outside its artifact (§運用27 ⛔), **I relayed them** (`-276`/`-277`),
+⛔ **and p5 built its "fifth offset point" (28.35 − 18.19 = 10.16) on them** — an unverifiable pillar until banked.
+
+**(b) ⭐ pB alone did the right thing**: refused the relay ("cannot collate ⇒ not used as grounds") and derived
+the conclusion **from the published table only** — tip gap monotone (8 points machine-checked), ctrl 170 bracketed
+by 160 (21.86) and 190 (10.79) ⇒ **worst case 10.79 > 10.00 ⇒ Ø10 passes ⇒ release geometrically possible.**
+Same verdict, artifact-grounded — **the only standing leg for the UNKNOWN closure.** Two limits kept: can-pass ≠
+did-release; the sweep is the 14.00 mouth vs the run's 10.00 (z-only transfer assumed, itself unmeasured).
+
+**(c) ⚠⚠ The 18.19 is INDISCRIMINABLE between two hypotheses** — pB suspected a column mix-up (copying 197.5's
+backplate into 170's tip); the offset relation predicts the same numeral genuinely (28.35 − 10.16 = 18.19).
+⇒ ⭐ **Both hypotheses produce 18.19 — the reported value cannot distinguish them.** The day's
+same-numeral trap, now *inside one dataset*, and decidable only by **banking the probe's raw 23-point table.**
+⇒ Requested of p4; p5's fifth point holds until then.
