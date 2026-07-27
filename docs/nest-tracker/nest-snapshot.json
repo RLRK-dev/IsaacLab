@@ -935,7 +935,7 @@
     },
     {
       "id": "T-ROOT",
-      "goal": "Isaac Lab / SIM で 5-clip cable routing を vision-based で動作させ、最終/ultimate target として 95% 成功率へ改善する。現在の bar は rough/imperfect でも SIM で基本動作させること。real-world / physical Franka × 2 deploy は current project scope ではない。REAL2SIM / sim-to-real は future consideration のみ。Foundation (robot mechanism / environment / cable) は厳密に構成する。",
+      "goal": "Isaac Lab / SIM で 5-clip cable routing を vision-based で動作させ、最終/ultimate target として 95% 成功率へ改善する。現在の bar は rough/imperfect でも SIM で基本動作させること。real-world / physical UR15 × 2 deploy は current project scope ではない。REAL2SIM / sim-to-real は future consideration のみ。Foundation (robot mechanism / environment / cable) は厳密に構成する。",
       "means": "知覚 (T-Vision) + 制御 (T-Skill) + 統合 (T-L1-B) + 経験基盤 (T-Empirical) + 失敗回復 (T-WM) の 5 capability axis",
       "status": "IN_PROGRESS",
       "dependencies": [],

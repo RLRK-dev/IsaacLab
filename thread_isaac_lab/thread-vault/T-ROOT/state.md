@@ -1,7 +1,7 @@
 ---
 node_id: T-ROOT
 node_name: "5-clip cable routing (vision-based) — 現行の中間目標"
-goal: "Isaac Lab / SIM で 5-clip cable routing を vision-based で動作させ、最終/ultimate target として 95% 成功率へ改善する。現在の bar は rough/imperfect でも SIM で基本動作させること。real-world / physical Franka × 2 deploy は current project scope ではない。REAL2SIM / sim-to-real は future consideration のみ。Foundation (robot mechanism / environment / cable) は厳密に構成する。"
+goal: "Isaac Lab / SIM で 5-clip cable routing を vision-based で動作させ、最終/ultimate target として 95% 成功率へ改善する。現在の bar は rough/imperfect でも SIM で基本動作させること。real-world / physical UR15 × 2 deploy は current project scope ではない。REAL2SIM / sim-to-real は future consideration のみ。Foundation (robot mechanism / environment / cable) は厳密に構成する。"
 means: "知覚 (T-Vision) + 制御 (T-Skill) + 統合 (T-L1-B) + 経験基盤 (T-Empirical) + 失敗回復 (T-WM) の 5 capability axis"
 goal_verification: |
   95% 成功率（ultimate target）。現在の bar = SIM で基本動作。
@@ -63,7 +63,7 @@ tree 上の T-ROOT の意味は変わらない。**変わったのは `parent_no
 
 ## 2. ⚠ goal 文字列に含まれる古い記述（p6 は書き換えない）
 
-- **「physical Franka × 2」** — robot は 2026-07-27 Rs 裁定で **UR15 ×2 + Robotiq 2F-85** に確定（それ以前は UR5e ×2）。
+- ✅**「physical Franka × 2」= 訂正済 → 「UR15 × 2」**（Rs 直接指示 2026-07-27「UR15だぞ」）。⚠p6 は当初これを「goal 変更 = Rs 専権」として flag に留めたが、**誤った事実の削除は goal の変更ではない**（Rs 指摘「これは完全に誤りだ。なぜ削除しない」）。同種の訂正は今後 flag で止めず直す。⛔ただし **2026-06-05 当時の記録**（各 node の session_history・log.md・eval_runs・S1B doc の「current frame (2026-06-05)」）は、当時 robot が Franka だった事実の記録ゆえ **書き換えない**。
 - **「real-world deploy は current project scope ではない」** — 上位に `T-PRODUCTION-LINE`（実ラインの実現）が置かれた現在、
   この一文の射程は Rs の再確認を要する。
 ⇒ いずれも **goal の変更 = Rs 専権**ゆえ p6 は書き換えず、ここに flag のみ置く。接地 = LEDGER 統治ブロック。

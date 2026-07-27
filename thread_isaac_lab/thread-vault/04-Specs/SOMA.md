@@ -10,7 +10,7 @@ Quality-first. No deadline.
 ### L1: Isaac Lab Simulation Full Pipeline
 
 **Scope correction (2026-06-05):** Human-Rs rescoped the current project target to
-Isaac Lab / SIM. Real-world physical Franka × 2 deployment is **not** part of
+Isaac Lab / SIM. Real-world physical UR15 × 2 deployment is **not** part of
 the current project scope. REAL2SIM / sim-to-real transfer remains a future
 consideration only, not a current deliverable. The final / ultimate target
 remains **100%** (Rs 2026-06-23 に100%へ定性的に再定義; 数値記載だが現時点では**定性的目標**として解釈 = 完全動作を目指す aspirational target、literal 統計 SR の測定対象ではない; = the P0-KILL #2 predicate-redefinition), but the current bar is basic SIM operation first, even rough or

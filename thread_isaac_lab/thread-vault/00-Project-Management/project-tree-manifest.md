@@ -7,7 +7,7 @@ root_goal: Isaac Lab / SIM 5-clip cable routing vision-based task operation; 100
 root_goal_source: thread_isaac_lab/thread-vault/log.md:2026-06-05 03:42 decision + 03:48 correction
 program_status: |
   Human-Rs SIM rescope (2026-06-05): current project target is Isaac Lab / SIM.
-  Real-world / physical Franka x2 deployment is out of current scope; REAL2SIM / sim-to-real transfer remains future-awareness only.
+  Real-world / physical UR15 x2 deployment is out of current scope; REAL2SIM / sim-to-real transfer remains future-awareness only.
   100% is the final/ultimate goal (Rs 2026-06-23, 95 to 100; qualitative target at this stage, not a literal statistical SR; = the P0-KILL #2 predicate-redefinition), not the current bar; the current bar is basic SIM operation, rough/imperfect task performance acceptable before precision/accuracy improvement.
   Human-Rs foundation rigor correction (2026-06-05): robot mechanism, environment, and cable are the foundation and must be rigorous / physically-valid / reuse-first / gate-reviewed.
   Rough/imperfect latitude does not apply to foundation; spring-follow / KINEMATIC_INV_MASS / kinematic tricks / teleport / physics-bypass holds are not acceptable as foundation.

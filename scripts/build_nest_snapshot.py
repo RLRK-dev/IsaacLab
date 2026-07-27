@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 """Aggregate thread-vault per-node state.md files into nest-snapshot.json for NEST Tracker viewer.
 
 Adapter at load boundary: maps NEST LTM-1 v1.1 state.md frontmatter schema to viewer's NEST_Node schema.
@@ -39,11 +44,13 @@ VALID_STATES = {"IN_PROGRESS", "COMPLETE", "DISCARDED", "ARCHIVED"}
 T_ROOT_GOAL = (
     "Isaac Lab / SIM で 5-clip cable routing を vision-based で動作させ、最終/ultimate target として"
     " 95% 成功率へ改善する。現在の bar は rough/imperfect でも SIM で基本動作させること。"
-    "real-world / physical Franka × 2 deploy は current project scope ではない。"
+    "real-world / physical UR15 × 2 deploy は current project scope ではない。"
     "REAL2SIM / sim-to-real は future consideration のみ。"
     "Foundation (robot mechanism / environment / cable) は厳密に構成する。"
 )
-T_ROOT_MEANS = "知覚 (T-Vision) + 制御 (T-Skill) + 統合 (T-L1-B) + 経験基盤 (T-Empirical) + 失敗回復 (T-WM) の 5 capability axis"
+T_ROOT_MEANS = (
+    "知覚 (T-Vision) + 制御 (T-Skill) + 統合 (T-L1-B) + 経験基盤 (T-Empirical) + 失敗回復 (T-WM) の 5 capability axis"
+)
 
 UMBRELLA_GOALS = {
     "T-ROOT-COORD": ("CC#1 master coordinator (meta-node)", "T-ROOT"),
@@ -173,11 +180,13 @@ def adapt(fm: dict) -> dict:
     for item in sh_raw:
         if not isinstance(item, dict):
             continue
-        norm_sh.append({
-            "session_id": str(item.get("session_id", "")),
-            "summary": str(item.get("summary") or item.get("progress") or item.get("phase") or ""),
-            "ts": str(item.get("ts") or item.get("started") or ""),
-        })
+        norm_sh.append(
+            {
+                "session_id": str(item.get("session_id", "")),
+                "summary": str(item.get("summary") or item.get("progress") or item.get("phase") or ""),
+                "ts": str(item.get("ts") or item.get("started") or ""),
+            }
+        )
 
     means = str(fm.get("means") or fm.get("goal_verification") or "")
     status = fm.get("status", "IN_PROGRESS")
@@ -185,7 +194,10 @@ def adapt(fm: dict) -> dict:
         # Map NEST's 'PENDING' (起動待ち) → viewer's 'IN_PROGRESS' (viewer enum lacks PENDING)
         status = "IN_PROGRESS"
     elif status not in VALID_STATES:
-        print(f"  Warning: invalid status '{status}' on {fm.get('node_id', '?')}, defaulting to IN_PROGRESS", file=sys.stderr)
+        print(
+            f"  Warning: invalid status '{status}' on {fm.get('node_id', '?')}, defaulting to IN_PROGRESS",
+            file=sys.stderr,
+        )
         status = "IN_PROGRESS"
 
     parent = fm.get("parent_node")
@@ -204,6 +216,7 @@ def adapt(fm: dict) -> dict:
     # - non-conformant state.md deps (descriptive strings like 'T-Skill-GC-EvalGap COMPLETE'
     #   or 'T-Skill-IC F1 WarmStart done (...)' which create spurious blockers in viewer)
     _NODE_ID_RE = re.compile(r"^T-[\w-]+$")
+
     def _is_node_id(s: str) -> bool:
         return bool(_NODE_ID_RE.match(s.strip()))
 
@@ -285,7 +298,9 @@ def collect_state_nodes():
             if rel in skip:
                 manual.append(("INFO", rel, "no node_id; in nest_skiplist.txt (intentional non-node)"))
             else:
-                manual.append(("HARD", rel, "no frontmatter / no node_id -> skipped (add to nest_skiplist.txt if intentional)"))
+                manual.append(
+                    ("HARD", rel, "no frontmatter / no node_id -> skipped (add to nest_skiplist.txt if intentional)")
+                )
             continue
         nid = str(fm.get("node_id")).strip()
         if nid in seen:
@@ -323,19 +338,25 @@ def _atomic_write(path, text: str) -> None:
 def _build_manifest_region():
     """Build the §2 GEN region string from state.md. Returns (region, rows, manual). Pure; no write."""
     rows, manual = collect_state_nodes()
-    noncanon = sorted({r["status"] for r in rows
-                       if r["status"] not in VALID_STATES and r["status"] not in ("PENDING", "(missing)")})
+    noncanon = sorted(
+        {r["status"] for r in rows if r["status"] not in VALID_STATES and r["status"] not in ("PENDING", "(missing)")}
+    )
     out = [GEN_BEGIN, ""]
-    out.append(f"_{len(rows)} nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 "
-               "(SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。"
-               "全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_")
+    out.append(
+        f"_{len(rows)} nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 "
+        "(SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。"
+        "全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_"
+    )
     out += ["", "| node_id | status | parent |", "|---|---|---|"]
     for r in rows:
         tag = " *(archived)*" if r["archived"] else ""
         out.append(f"| `{_md_cell(r['id'])}`{tag} | {_md_cell(r['status'])} | `{_md_cell(r['parent'])}` |")
     if noncanon:
-        out += ["", f"_legend — 非正準 status (raw, coercion なし): {', '.join(noncanon)}. "
-                    "正準 = IN_PROGRESS / COMPLETE / DISCARDED / ARCHIVED (+ PENDING)._"]
+        out += [
+            "",
+            f"_legend — 非正準 status (raw, coercion なし): {', '.join(noncanon)}. "
+            "正準 = IN_PROGRESS / COMPLETE / DISCARDED / ARCHIVED (+ PENDING)._",
+        ]
     out += ["", GEN_END]
     return "\n".join(out), rows, manual
 
@@ -346,8 +367,11 @@ def _report_manual(rows, manual, action) -> int:
     info = [m for m in manual if m[0] == "INFO"]
     print(f"{action}: {len(rows)} nodes -> {MANIFEST.relative_to(REPO)}", file=sys.stderr)
     if manual:
-        print(f"MANUAL-REVIEW ({len(hard)} HARD / {len(soft)} SOFT / {len(info)} INFO) — SOFT/INFO 非空は正常 "
-              "(raw+legend / skiplist で対処, state.md 一括改変禁止):", file=sys.stderr)
+        print(
+            f"MANUAL-REVIEW ({len(hard)} HARD / {len(soft)} SOFT / {len(info)} INFO) — SOFT/INFO 非空は正常 "
+            "(raw+legend / skiplist で対処, state.md 一括改変禁止):",
+            file=sys.stderr,
+        )
         for sev, path, reason in manual:
             print(f"  [{sev}] {path}: {reason}", file=sys.stderr)
     return 1 if hard else (2 if soft else 0)
@@ -367,7 +391,7 @@ def emit_manifest_section() -> int:
         if GEN_BEGIN not in text or GEN_END not in text:
             print(f"ERROR: GEN:NEST markers not found in {MANIFEST.relative_to(REPO)}", file=sys.stderr)
             return 1
-        new_text = text[:text.index(GEN_BEGIN)] + region + text[text.index(GEN_END) + len(GEN_END):]
+        new_text = text[: text.index(GEN_BEGIN)] + region + text[text.index(GEN_END) + len(GEN_END) :]
         _atomic_write(MANIFEST, new_text)
     return _report_manual(rows, manual, "Emitted §2")
 
@@ -386,26 +410,34 @@ def check_manifest_section() -> int:
     if GEN_BEGIN not in text or GEN_END not in text:
         print(f"C3 DRIFT: GEN:NEST markers not found in {MANIFEST.relative_to(REPO)}", file=sys.stderr)
         return 1
-    current = text[text.index(GEN_BEGIN):text.index(GEN_END) + len(GEN_END)]
+    current = text[text.index(GEN_BEGIN) : text.index(GEN_END) + len(GEN_END)]
     if current == region:
         if hard:
-            print(f"C3-DATA: manifest §2 in sync but {len(hard)} HARD data issue(s) "
-                  "(same grading as emit; fix the state.md data):", file=sys.stderr)
+            print(
+                f"C3-DATA: manifest §2 in sync but {len(hard)} HARD data issue(s) "
+                "(same grading as emit; fix the state.md data):",
+                file=sys.stderr,
+            )
             for sev, path, reason in hard:
                 print(f"  [{sev}] {path}: {reason}", file=sys.stderr)
             return 1
         print(f"C3 OK: manifest §2 GEN region in sync ({len(rows)} nodes)", file=sys.stderr)
         return 0
-    print("C3 DRIFT: manifest §2 GEN region != generator recompute "
-          "(fix: build_nest_snapshot.py --emit-manifest-section)", file=sys.stderr)
+    print(
+        "C3 DRIFT: manifest §2 GEN region != generator recompute (fix: build_nest_snapshot.py --emit-manifest-section)",
+        file=sys.stderr,
+    )
     return 1
 
 
 def emit_map_index() -> int:
     """Reserved: regenerate a map node-index GEN region. No such region exists yet (M1 did not
     create one; the map's node views are iframe srcdoc where GEN markers are invalid). Deferred."""
-    print("--emit-map-index: 地図に GEN:NEST region 未定義 (M1 未作成; srcdoc 内 GEN 不可)。"
-          "地図 node 索引の GEN 化は別 step (CP-B report で報告)。", file=sys.stderr)
+    print(
+        "--emit-map-index: 地図に GEN:NEST region 未定義 (M1 未作成; srcdoc 内 GEN 不可)。"
+        "地図 node 索引の GEN 化は別 step (CP-B report で報告)。",
+        file=sys.stderr,
+    )
     return 3
 
 
@@ -455,15 +487,18 @@ def main() -> int:
         inferred_parent = _infer_parent(node_id)
 
         if node_id == "T-ROOT":
-            stub = synthesize_stub("T-ROOT", parent=None, children=stub_children,
-                                   goal=T_ROOT_GOAL, means=T_ROOT_MEANS)
+            stub = synthesize_stub("T-ROOT", parent=None, children=stub_children, goal=T_ROOT_GOAL, means=T_ROOT_MEANS)
         elif node_id in UMBRELLA_GOALS:
             goal, parent = UMBRELLA_GOALS[node_id]
             stub = synthesize_stub(node_id, parent=parent, children=stub_children, goal=goal)
         else:
             parent_for_stub = inferred_parent or "T-ROOT"
-            stub = synthesize_stub(node_id, parent=parent_for_stub, children=stub_children,
-                                   goal=f"(synthesized stub — no state.md found for {node_id})")
+            stub = synthesize_stub(
+                node_id,
+                parent=parent_for_stub,
+                children=stub_children,
+                goal=f"(synthesized stub — no state.md found for {node_id})",
+            )
         nodes_by_id[node_id] = stub
         print(f"  Synthesized: {node_id} (parent={stub['parent']}, {len(stub_children)} children)")
 
@@ -504,12 +539,21 @@ def main() -> int:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="NEST snapshot / manifest §2 generator")
-    ap.add_argument("--emit-manifest-section", action="store_true",
-                    help="regenerate manifest §2 GEN region from state.md (TERSE id|status|parent, strict SSOT)")
-    ap.add_argument("--check-manifest-section", action="store_true",
-                    help="C3: check manifest §2 GEN region == generator recompute (no write; exit 1 on drift)")
-    ap.add_argument("--emit-map-index", action="store_true",
-                    help="(reserved/dropped) map node-index GEN region — see design §10; map keeps a static pointer")
+    ap.add_argument(
+        "--emit-manifest-section",
+        action="store_true",
+        help="regenerate manifest §2 GEN region from state.md (TERSE id|status|parent, strict SSOT)",
+    )
+    ap.add_argument(
+        "--check-manifest-section",
+        action="store_true",
+        help="C3: check manifest §2 GEN region == generator recompute (no write; exit 1 on drift)",
+    )
+    ap.add_argument(
+        "--emit-map-index",
+        action="store_true",
+        help="(reserved/dropped) map node-index GEN region — see design §10; map keeps a static pointer",
+    )
     args = ap.parse_args()
     if args.emit_manifest_section:
         sys.exit(emit_manifest_section())
