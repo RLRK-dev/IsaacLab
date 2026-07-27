@@ -527,7 +527,66 @@ authorised, not after.**
 direction as unmeasured; §12.1 grounds the **frame** from the vault but **not the displacement**. ⛔ I do not
 propose a value, a predicate, or a run.
 
-## 15. Scope
+## 15. -139: the window arithmetic, the axis p5 asked for, and a direct answer on the aim path
+
+### 15.1 ✅ The window checks out, and the in-window displacement is bounded well under the band
+
+| | value | source |
+|---|---|---|
+| claw tip reaches the cable's y extent at backplate gap | 2 × (4.00 + **5.000**) = **18.00 mm** | my protrusion (§1 of the bound artifact) + `CABLE_RADIUS` `:137` |
+| constraint window | backplate gap **[10.16, 18.00]** → **7.84 mm** | ✅ reproduces p11/p18 |
+| in ctrl, at 2.675 counts/mm from the crossing 219.16 | **ctrl [198.19, 219.16]** | ✅ reproduces p18's "≈198" |
+
+Against p4's mouth-centre series (relayed): 146.00@18 / 153.17@100 / 156.81@180 / 157.28@214 / 157.23@236. The
+window touches **two** sample intervals, not one — `[180,214]` (+0.47) and `[214,236]` (−0.05):
+
+> ⇒ **in-window displacement ≤ 0.52 mm**, bounding by the total variation of the intervals it touches
+> ⇒ **3.8× of headroom against the 2.00 mm band** ⇒ ⭐ **supports -139 (3): the bands very likely overlap and the
+> design does not invert.**
+
+⚠ Three caveats I keep attached: the series is **relayed** and I have not read it at source; the bound assumes the
+motion does not reverse **inside** a sample interval; and the values are **base +z**, not the component §15.2 says
+is the deciding one. ⛔ It is a bound from coarse samples, not a measurement of the window.
+
+### 15.2 ⭐⭐ The axis p5 asks for **is the pad's local z** — and it is identifiable from the asset
+
+-139 (4) asks that the displacement be resolved onto the mouth's height axis rather than reported as a base-frame
+magnitude. **That axis is exactly the pad's local z**, because `f1ext` and `f2ext` differ in **nothing else**:
+
+| geom | pad-local pos |
+|---|---|
+| `f1ext` | (0, −0.0026, **0.0382**) |
+| `f2ext` | (0, −0.0026, **0.0258**) |
+
+⇒ same x, same y ⇒ **the line joining them is the pad-local ẑ**, exactly. ⇒ the decomposition is *"project onto the
+pad body's local z"*, readable from that body's `xmat` — no new geometry needed, and no ambiguity about which axis
+is meant. ⭐ Its **world** direction is already grounded in §12.1 (**down** at the grasp pose,
+`GD-KoShape-Finger.md:58-59`), so the sign is not free either.
+
+### 15.3 ⛔⛔ -139 (8): the aim path has **not** moved. I read the newest commit.
+
+`git log` on the driver gives three commits — `e9f93a7556` → `7869a01b82` → **`887d3fefde` (newest)**. At the
+newest:
+
+```
+:767   if num in (2, 3, 4, 5):   # grasp steps: aim at where the cable IS, right now
+:768       cl, _ = cable_at(GL[0])        <- STILL the frozen x
+:769       cr, _ = cable_at(GR[0])
+...
+:883       sp  = seat_point(t)            <- only the REPORTING path moved
+:886       _ci = argmin(norm(_cc - sp))
+```
+
+⇒ ⭐⭐ **p18's caution in (8) is correct and now confirmed at HEAD of that file: the improved residuals
+(L 0.09 / R 0.16 mm, from 1.0 / 0.4) measure convergence onto the link the frozen x selected.** They do not
+establish that the right link was aimed at — **the target-selection rule did not change; only the convergence onto
+it got tighter.**
+
+⇒ ⚠ and that is worth saying plainly because a **10× improvement reads as success**: a smaller residual against a
+possibly-wrong target is **tighter convergence, not better targeting**. The two are distinguishable only by the
+selection rule, which is unchanged.
+
+## 16. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
