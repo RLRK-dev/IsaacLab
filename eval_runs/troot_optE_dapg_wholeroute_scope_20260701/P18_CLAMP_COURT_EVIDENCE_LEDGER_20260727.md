@@ -4547,3 +4547,41 @@ STEP 8 may still be RETAINING the cable.** ⛔ Nonlinearity is measured, so this
 one cable-free point at ctrl 214**, same method as 219. p11 requests no run. ⇒ ⭐ **If ≈12 holds, ruling ②'s
 release premise does not stand as written** — the composition (which escape height governs) returns to p5 with
 the 18.00 floor as input.
+
+## 108. Module verdict: 4 confirmed, 1 refuted, 3 holes — and the refuted one is in my §103
+
+**(a) ✅ Confirmed by execution, not reading**: p0 **ran** the module (env7, pure python) — self-check exit 0, all
+three relations; the clip cross-lock exact; counts reproduced over **all 13-14 drivers** (110 total); float_z
+fail-closed; ⭐ all three of p0's `-206R` fixes verified present in the code.
+
+**(b) ⛔⛔ REFUTED — "the two 21s agree" carries no information, and I banked it (§103a).**
+**p5's 21** = constants whose values diverge BETWEEN files. **p4's 21** = redefinitions of module-owned names
+WITHIN one driver. ⇒ **Different populations, different units — both correct, neither checks the other.**
+⇒ ⚠⚠ **Fourth same-numeral-different-quantity instance today** (Ø8/band-8.00, DH-0.088/span, 12.00/14.00 —
+and now 21/21), ⛔ **and it passed through three panes and my ledger hours after we named the trap.** §103(a)'s
+"matches p5's independent count" is **superseded by this section.**
+
+**(c) The three holes**:
+1. ⛔⛔ **`CLIP_H` is not module-owned ⇒ the guard is blind to it** — *the constant that started all of this*
+   (p6's find; 9 of p5's physics-10 owned, CLIP_H alone not). A driver keeping `CLIP_H = 0.026` **passes**.
+   ⇒ decision routed to p5 (contract: what must the guard's name-set cover) + p4 (implementation).
+2. ⚠ Four binding forms pass (AugAssign / **import-alias** / For-target / walrus) — realistic one is the alias,
+   the innocent-looking way to shadow a name. Closeable by widening the node set. (⭐ tuple assignment — the form
+   today's divergence actually wore — **was** caught, confirmed by probe.)
+3. ⚠ `:58 CLIP_COLLIDE = True` is **the one transcription** in Tier A — correctly read today, but neither
+   imported nor AST-read nor self-checked ⇒ if the env's two lines ever become conditional, the module stays
+   silently True. One line closes it.
+
+**(d) ⭐ The wording refutation that strengthens the claim**: `guard()` detects redefinition only; values live in
+`self_check()`. "guard = value comparison" overstates — ⭐ but the actual design is **stronger than what p0 asked
+for**: value comparison presupposed copies; **import leaves nothing to compare. Import > collation.** Fix is
+wording only.
+
+**(e) Ruling-② adjacencies for p5's next revision**: (i) float_z's fail-closed **mechanism survives while its
+cited reason is the question ruling ② dissolved** — today's mechanism-vs-reason type, in code comments;
+(ii) ⭐ **fail-closed and "default 0" are different dispositions** — once the spec records 0 as decided, a raise
+closes something no longer open; (iii) the module's REST caveat "weak" understates p5's final "ungrounded" —
+**`REST_TOP = +0.150` against a cited comment saying +0.060.**
+
+p0's scope, stated: not re-extracted p5's 21, not judged Tier B values, not built/run a wired driver, not the
+wiring question. Bank `P0_VERIFY_CELL_SPEC_MODULE_20260727.md` @ `9252929d9a`, sha `5a17c003d303…`.
