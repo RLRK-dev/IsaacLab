@@ -1,0 +1,13 @@
+absl-py==2.4.0
+etils==1.14.0
+fsspec==2026.6.0
+glfw==2.10.0
+mujoco==3.10.0
+mujoco-warp==3.10.0.3
+newton==1.4.0
+numpy==2.5.0
+PyOpenGL==3.1.10
+trimesh==4.11.1
+typing_extensions==4.15.0
+warp-lang==1.15.0
+zipp==4.1.0
