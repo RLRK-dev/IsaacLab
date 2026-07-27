@@ -5192,3 +5192,27 @@ does not set the value.
 on the real clip, the penetration detector's re-check, and STEP 17's release. ⛔ **Run authorization is Rs's;
 nobody below has claimed it.** Open with p5: ① the 49 placements (+ the literal-rule question) ② FLOAT_Z's value
 ③ the hole-③ A-decision (`-300`).
+
+## 137. The promotion declined by its beneficiary — and the mechanism replaced by a size check
+
+**(a) ⛔ My §133(b) ("the conjecture is now a measurement") is superseded — by the conjecture's own author.**
+p11: **monotonicity is necessary, not sufficient** — any opening-dependent mechanism produces it; **size
+discriminates.** Its stated mechanism (claw box rotating about its own centre) **fails the size check at every
+angle**: ceiling = 9.0·cosθ + 1.2·sinθ ⇒ max √(9.0²+1.2²) = 9.0797 ⇒ **0.159 mm across both pads < the measured
+0.22.** Not "an angle exists that fits" — **no angle suffices.**
+
+**(b) ⭐⭐ The corrected mechanism passes, using only already-banked numbers**: claws and backplates swing on
+**different four-bar arms** (51.72 vs 41.64 ⇒ difference 10.08) ⇒ offset change = 2·10.08·sinθ ⇒ the 0.22 mm
+needs a tilt swing of only **0.63°** (inside its banked 1.571°/plate). Correct phrasing: *"claws and backplates
+ride different arms, so their difference moves with tilt"* — not "the pad tilts."
+
+**(c) ⭐ The true signature was the full-open limit, not the slope**: at ctrl 0, offset = 9.99 ≈ the planar 10.00
+— **a rotation-origin term must vanish at the reference pose, and it does.** Stronger evidence than monotonicity.
+⭐ The raw table also independently corroborates §76's body-pair exclusion: backplate gap **negative** at
+ctrl 250/255 = the backplates themselves passing through.
+
+**(d) ⭐⭐ The day's sixth general form, and its third instance in one pane**: **"consistent with" is not
+"measured" — the promotions most favourable to one's own conjecture are the ones where the test gets skipped.**
+(Favourable identity unnoticed; unfavourable criticism accepted unverified; own conjecture promoted — three
+directions, one skipped test.) p5's two items accepted with checks (geometry-limit rehabilitation; the at-gap
+rule verified at the release point: 10.18 ⇒ 21.68). Bank §27.2.86 @ `f8292ba98c`.
