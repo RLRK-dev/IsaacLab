@@ -165,6 +165,46 @@ should follow the code.
 
 ---
 
+## 8.5 ⚠ The spec changed under this verification, and it kills one of the three checks
+
+Added after MSG-P18-235. The spec is now **sha256 `76053688e6387c4203ecfdb3ac019f77b5e48fe1e486372dd16114d431e15d46`, 176 lines** (re-derived, matches), and `:63` makes `CABLE_N` a **derived** quantity — required length ÷ `CABLE_SEG_LEN`, **64** for this cell's 960 mm — noting that `task_config.py:135`'s 40 is *the env cell's length*, not a constant.
+
+⇒ the third relation in `self_check` (`:209-212`) does not survive that change:
+
+```python
+if abs(CABLE_N * CABLE_SEG - 0.600) > 1e-9:
+```
+
+Once `CABLE_N = required_length / CABLE_SEG`, the product is `required_length` **by
+construction**, so the check becomes either
+
+- an **identity** that cannot fail (if the required length is 0.600), or
+- **unconditionally false** (if it is 0.960, which the spec says it is for this cell).
+
+Vacuously true or always failing — either way it stops discriminating. My §1 recorded this
+relation as one of three that hold; that was true of the pinned module, and it is about to stop
+being a test rather than start being a failure.
+
+⭐ **What made it worth having, and how to keep it:** the check had force because
+`CABLE_SEGMENTS` (`:135`) and `CABLE_SEG_LEN` (`:136`) are **two independent bindings in the
+SSOT** whose product must match the length `:135`'s own comment states. That relation is still
+real and can still fail, but it has to be asserted **on the sources**:
+
+```python
+assert abs(_tc.CABLE_SEGMENTS * _tc.CABLE_SEG_LEN - 0.600) < 1e-9   # the env cell's length
+```
+
+A separate assertion on the module's own derived `CABLE_N × CABLE_SEG` is fine to keep, but it
+is an identity and should say so rather than look like a check.
+
+⚠ Note the cell length itself does not move: the drivers' `32 × 0.030 = 0.960` and the spec's
+`64 × 0.015 = 0.960` are the same cable at two discretisations. Only the step halves — which is
+the change that halves the nearest-link sampling floor from ±15 mm to ±7.5 mm.
+
+⇒ **Re-verification is owed against the revised module, not this pin.** Everything else in this
+document is unaffected: the clip cross-lock, the seat relation, the counts, the three holes, and
+the refutation of the two-21s agreement all stand.
+
 ## 9. Scope of this verification
 
 **Did**: re-derive the pin; read all 231 lines; execute the module and its `self_check`; run
