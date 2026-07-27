@@ -3237,3 +3237,40 @@ check ④ **one re-run of the existing X+Z retention test** (HOLD 200 steps + la
 configuration.
 
 **Gate unchanged. p18 authorised no run today, and selected neither branch.**
+
+## 52. ✅ Rs ANSWERED question ② — the cylinder is the column, and no automated detector can see it
+
+**Rs, verbatim, received by `w2:p5` directly from Rs — not relayed:** **「円柱はY字の下部」**
+⇒ ⭐ **The cylinder Rs meant is the yoke's lower part — the column (`stem`).** ⛔ **Not the cable capsule.**
+⚠ **Provenance note:** every Rs verbatim this court handled today arrived **p4 → p18**; ⭐ **this one came to a
+pane directly.** p5 added no interpretation — the one line above is the whole of it.
+
+⇒ ⭐⭐ **So Rs's earlier 「円柱のもぶつかっている」 is an observation about the column.** Set against what is
+established:
+
+| detector | why it is silent here |
+|---|---|
+| **contacts** | `stem` is `contype=0 conaffinity=0` ⇒ **no contact is ever generated** (§12) |
+| **distance** | `mj_geomDistance` returns **`+0.000`** near coincident centres ⇒ **maximum penetration reads the same as exactly touching** (§26) |
+| **video** | the column is **opaque** ⇒ a link fully inside **is not drawn at all** ⇒ cannot prove absence (§29c) |
+
+⇒ ⭐⭐⭐ **All three go silent in precisely this configuration. Rs's eye was the only detector that caught it.**
+⇒ **That is the clearest justification the day produced for the human visual leg — and it is now a confirmed
+observation, not a hypothesis.**
+
+⇒ ⭐ **The decisive method is unchanged and does not degenerate** (§29b, constants re-taken from the judged
+driver): a point is inside the column ⇔ **√(x² + y²) < 0.102 and 0 ≤ z ≤ 1.53** (base: < 0.215, 0 ≤ z ≤ 0.06);
+for extended geoms, **√(x² + y²) − circumscribed radius < 0.102 ⇒ penetrating**. ⇒ **No `mj_geomDistance`, no
+contact record, no flag restoration** — only the arm geoms' world positions, which the driver already holds.
+⛔ Execution belongs to `w2:p4` / `w2:p0`; p18 authorises nothing.
+
+⭐ **`w2:p5`'s design consequence, unchanged from `-034`:** the column enters path design as a **real obstacle**
+(r 0.102, z 0 → 1.53) — ⛔ **but establish penetration first**: if there is none, this is **adding a constraint,
+not changing a design.**
+⚠ It carries the §31 correction (mount margin **298 mm**, not the 118 mm it first gave) and notes that **the yoke
+itself still has no body and no geom**, so **arm-versus-yoke remains uncheckable by any means** (§16) — ⭐
+**separate from Rs's answer, which names the column.**
+
+⇒ ⭐ **Rs's open list drops from three to two**: the mechanism two-way question, and the memory-directory HOLD
+scope. ⇒ And **the column check becomes the highest-value measurement**, because it is now a **confirmed Rs
+observation of a defect no automated detector in this system can report.**
