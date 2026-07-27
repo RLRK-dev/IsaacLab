@@ -1,4 +1,8 @@
-"""R6's positive leg, statically: cover the cable and close on it.
+"""R6's positive leg, statically: cover the cable and close on it -- BOTH arms.
+
+p5 -106: a quantity that comes in pairs gets written down in pairs.  The first version
+ran one arm (R) and reported 6.67 mm without saying so; the other side was not dropped,
+it was never taken.  Both are aimed and closed here.
 
 p5 -102(2): not "place the cable in the jaw" -- that failed and moved it further away -- but leave
 the cable where it rests and bring the OPEN jaw over it using the aim from clip design §4 (y and z
@@ -26,39 +30,55 @@ m, d = ns["m"], ns["d"]
 held, claw_gap, cable_in_mouth, grasped = ns["held"], ns["claw_gap"], ns["cable_in_mouth"], ns["grasped"]
 jaw_gaps, pinch, cable_at = ns["jaw_gaps"], ns["pinch"], ns["cable_at"]
 
-T = "R"
+ARMS = ("L", "R")
 for t in ns["SIDES"]:
     d.ctrl[ns["GIDX"][t]] = ns["OPEN"]
 for _ in range(int(2.0 / m.opt.timestep)):
     mujoco.mj_step(m, d)
 
-x_design = ns["GR"][0]                      # the design x for this hand -- NOT re-aimed (§4)
-c, _ = cable_at(x_design)
 q_now = {t: np.array([d.qpos[a] for a in ns["QADR"][t]]) for t in ns["SIDES"]}
-w, tgt, mag = ns["aim_slot_at"](T, c, q_now[T], seed=41, fix_x=x_design)
-print(f"[pos] aim at the resting cable: seat error {mag*1000:5.2f} mm, target {np.round(tgt,4)}")
+W, MAG = {}, {}
+for T in ARMS:
+    x_design = (ns["GL"] if T == "L" else ns["GR"])[0]   # design x per hand -- NOT re-aimed (§4)
+    c, _ = cable_at(x_design)
+    W[T], _tg, MAG[T] = ns["aim_slot_at"](T, c, q_now[T], seed=41 + (T == "R"), fix_x=x_design)
+    print(f"[pos] {T}: aim at the resting cable, seat error {MAG[T]*1000:5.2f} mm")
 
 # servo there, the way the step loop does: ramp the command, no writes to any pose
-q_from = q_now[T].copy()
+# Wait for the arms to SETTLE before closing, the way the driver's own gate does -- the fixed
+# ramp left them at 12-20 mrad, ten times SETTLE_TOL, so the first pair I took was measured on
+# arms still moving.  The driver does not close the fingers in that state and neither should this.
 RAMP = int(4.0 / m.opt.timestep)
-for s_ in range(RAMP + int(2.0 / m.opt.timestep)):
+settled_at = None
+for s_ in range(RAMP + int(20.0 / m.opt.timestep)):
     f = min(1.0, s_ / RAMP)
-    for k, i in enumerate(ns["AIDX"][T]):
-        d.ctrl[i] = (1.0 - f) * q_from[k] + f * w[k]
+    for T in ARMS:
+        for k, i in enumerate(ns["AIDX"][T]):
+            d.ctrl[i] = (1.0 - f) * q_now[T][k] + f * W[T][k]
     mujoco.mj_step(m, d)
-resid = float(np.abs(np.array([d.qpos[a] for a in ns["QADR"][T]]) - w).max())
-inb, z = cable_in_mouth(T)
-print(f"[pos] arrived: residual {resid*1000:6.2f} mrad | backplate {jaw_gaps(T)[0]:6.2f} mm | "
-      f"pad-local z {z:7.2f} mm (band 25.00-39.00) in-band={inb}")
+    if s_ > RAMP:
+        r = max(float(np.abs(np.array([d.qpos[a] for a in ns["QADR"][T2]]) - W[T2]).max())
+                for T2 in ARMS)
+        if r < ns["SETTLE_TOL"]:
+            settled_at = s_
+            break
+print(f"[pos] settle gate: {'reached ' + format(settled_at * m.opt.timestep, '.2f') + ' s' if settled_at else 'NOT REACHED in 20 s -- numbers below are from moving arms'}"
+      f" (tolerance {ns['SETTLE_TOL']*1000:.1f} mrad)")
+for T in ARMS:
+    resid = float(np.abs(np.array([d.qpos[a] for a in ns["QADR"][T]]) - W[T]).max())
+    inb, z = cable_in_mouth(T)
+    print(f"[pos] {T}: arrived, residual {resid*1000:6.2f} mrad | backplate {jaw_gaps(T)[0]:6.2f} mm "
+          f"| pad-local z {z:7.2f} mm in-band={inb}")
 
 for _ in range(int(ns['FINGER_RAMP'] / m.opt.timestep)):
-    d.ctrl[ns["GIDX"][T]] = ns["CLAMP"]
+    for T in ARMS:
+        d.ctrl[ns["GIDX"][T]] = ns["CLAMP"]
     mujoco.mj_step(m, d)
 for _ in range(int(2.0 / m.opt.timestep)):
     mujoco.mj_step(m, d)
-inb, z = cable_in_mouth(T)
-pad = jaw_gaps(T)[0]
-print(f"\n[pos] CLOSED: backplate {pad:6.2f} mm (floor {_cs.release_floor():5.2f}) -> past floor="
-      f"{pad < _cs.release_floor()}")
-print(f"[pos]          pad-local z {z:7.2f} mm in band 25.00-39.00 -> {inb}")
-print(f"[pos]          R6 held() = {held(T)}   (old grasped() = {grasped(T)})")
+print(f"\n[pos] CLOSED (floor {_cs.release_floor():5.2f} mm) -- the pair:")
+for T in ARMS:
+    inb, z = cable_in_mouth(T)
+    pad = jaw_gaps(T)[0]
+    print(f"[pos] {T}: backplate {pad:6.2f} mm past-floor={pad < _cs.release_floor()} | "
+          f"pad-local z {z:7.2f} in band={inb} | R6 held={held(T)} (old grasped={grasped(T)})")
