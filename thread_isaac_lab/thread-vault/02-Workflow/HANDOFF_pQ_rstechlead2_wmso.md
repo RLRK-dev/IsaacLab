@@ -1,4 +1,22 @@
-# HANDOFF — pane pQ (w2:pQ RS-TECH-LEAD2), node T-WMSO — 2026-07-21 20:0x JST
+# HANDOFF — pane **w2:p12** (RS-TECH-LEAD2), node T-WMSO — 2026-07-21 20:0x JST（⭐2026-07-27 に環境節を追記）
+
+> ## ⭐⭐ 2026-07-27 の環境変化 — **/clear を越えて要る 4 点**（すべて pQ 実測・観測時刻つき）
+>
+> **1. ⛔ 私の pane ID が変わった: `w2:pQ` → `w2:p12`。`w2:pQ` は存在しない**（消えた ID へ dispatch してもエラーは返らず黙って落ちる）。session 同一性 = `74fcaf5a`。label 再付与済（`w2:p12 RS-TECH-LEAD2`・pane label と agent name の両方）。⭐同時に旧 pS→**p16**(MWSO-DESIGN) / 旧 pX→**p17**(SKILL-DESIGN) / 旧 pY→**p18**(OPS-SUPERVISOR)。⛔**stored map を信用せず `pane list` で再導出**（peek は routing 規則で不可・下記 2）。
+>
+> **2. ⛔ pane 間 message は全て `w2:p18` を経由**（2026-07-27 04:56:15 の user 移管指示。旧 hub `w2:pN` は凍結・離脱済で**旧 pN 宛は処理も転送もされない**）。提出項目 = 宛先 / 逐語本文 / 依頼 / scope・gate / 期限 / evidence pin。⛔**宛先へ直送しない**・**自分で delivery を判定しない**（送信側 poll は「未 submit」と「脱落」を識別しない — 私はこれで誤報告し撤回した）・**再送は明示の RETURN か未達通知が来た時だけ**。⭐**私が受け取る thread は 2 つだけ**（p18 の -096）= **(6) WMSO / SKILL 分解・合成** と **(3) HOLD / §0 不変前提 / gate 変更**。⛔**court 外の便に ACK を返さない**（1 行「court 外」で足りる）。⚠相手が working なら Enter は効かず **Tab で queue**・提出判定は本文一致でなく**標識**（`Press up to edit queued messages` = queue 済 ／ `[Pasted text …]` や `tab to queue message` = **未送信**）。
+>
+> **3. ⭐⭐ §0 不変前提が変わった — ただし「型式名だけ」。私の実測**（2026-07-27 13:1x）: commit `460f66e3f5`（12:36:37「Correct the robot model in the live spec surfaces: UR5e -> UR15」）が RS71 で変えたのは **3 行のみ（`:15` / `:23` / `:44`）**で、⭐**各行の変更は literal 2 文字「5e」→「15」だけ・同一行の他の全 byte は同一**。⇒ **§0#1 の述語部**（BOTH arms in EVERY motion / neither dropped-parked / asymmetric = DIFFERENT motions）は **byte 同一** ⇒ 合成規則の論点は本 commit で動いていない（解釈は Rs）。⛔**`RS71:24`（§0#2 = 88 mm span / bases Y = ∓0.35）は before==after で未変更**。
+>
+> **4. ⛔⛔ DDR #41（LEDGER:142）= 私の凍結物に効く「未発火の依存」。owner は私**。凍結 **D1.1-B v13 `:332`** 逐語 =「`grasp_span_error` … 実把持スパンの **RS71 §0#2 の 88 mm 基準**（`RS71-System-Spec-SSOT.md:24` / `task_config.py:21-22,:235`）からの誤差」。
+>   - ⭐**当該行は出典を 2 つ併記**（spec 行 **と** code 定数）。私の実測 = `task_config.py:21-22` が Y=∓0.35、`:235` が `GRIP_HALF_SPAN = 0.044`（「span = 88mm」）⇒ **2 出典は現時点で一致**、凍結物と spec は**今は整合**。⇒ **PENDING・未発火**。
+>   - ⭐**発火条件** = §0#2 が UR15 へ訂正された時点。その時に**凍結物の disposition が要る**（**Rs 専権**）。⚠**watch すべき失敗形** = spec 側だけ訂正して **code 側が追随しない（逆も）**と、凍結行が**食い違う 2 出典を引く**状態になる ⇒ **訂正時は 2 面を同時に見る**。
+>   - **曝露範囲**（私の実測）= **凍結 v13 のこの 1 行のみ**。現行 D1.1-C design v2.5.1 = `88mm` 0 件 / `grasp_span` 0 件、fixtures（builder + golden A-D）も**全て 0 件** ⇒ **現行作業に曝露なし**。
+>   - ⛔**私は凍結物を編集しない**。88 mm の正否 = p11 / Rs、§0 の訂正と凍結を開ける可否 = **Rs 専権**。
+>
+> **5. ⛔ memory dir の HOLD（部分解除・2026-07-27 13:44）**: `MEMORY.md` = **解除**（書込可）／⛔**topic file・handoff file・名指しされた carry は凍結継続**。⇒ **私の carry**（`reference-codex-pane-long-dispatch-paste-mode-2026-07-18.md`・pN が採否未裁定として別途 HOLD）は **凍結のまま・編集も revert もしない**（baseline sha256 `47f09d3282d3aba78f48c9b7da4f61445634a25adfde42ecb18577f37b164513`）。⚠**本 handoff は carry と名指ししていないので HOLD 対象外**（ゆえに本追記は可）。
+>
+> ⛔**gate は不変**（下記の 20:2x 節が現況）。**Rs 判断待ち 2 件**: ①**open-11 の前提 = A / B**（⭐証拠は **A 寄り** — design doc `:33`/`:172` が「縮小の可否は Rs 判断」と明記し、pS・pY が独立に A。B の支えは**私が書いた** routing doc `:43` のみ）②**移動③ B1 再選定 draft の起動可否**（**L2** = Pre-mortem + 5 体 debate）。
 
 > ## ⭐⭐ B1 — **D-3 は候補へ復帰（pS 設計軸 PASS）／Rs 判断待ち 0／次 = 再選定 draft**（2026-07-21 20:2x）
 >
