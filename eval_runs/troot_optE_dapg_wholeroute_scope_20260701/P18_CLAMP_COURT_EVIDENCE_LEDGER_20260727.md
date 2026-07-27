@@ -5641,3 +5641,27 @@ mass/stiffness/friction all changed at the wiring commit ⇒ no numeric comparab
 confirms the invariants unmoved** (clip 5-box dims / cable 40×15 / 1.1243 g / 44.97 g / K 0.33333 /
 CLIP_COLLIDE True) — cheap, and the right shape: the upgrade gets its own regression check.
 ⇒ **The env7 update — Rs's standing directive — is now executing as p5's task.** Run authorization unmoved (Rs).
+
+## 161. Final pass: hole ③ discriminates both ways — and the module is stricter than its ruling, on purpose
+
+**(a) ✅✅ Hole ③ CLOSED with the control that today demanded**: A/A2/A3/B/D all False **and the unmodified
+source E = True** — ⭐ **verified not to be an always-False predicate** (the discriminating-both-ways test,
+applied). Ancestor-walk real (`:168` IfExp, `:174` If-membership). p0's rev3 verdict resolved; its earlier
+findings all closed (SOURCED free / UnaryOp caught / new-constant fail-closed / per-element three kinds).
+
+**(b) ⭐⭐ The headline divergence — stricter than ruled, with the reason written in**: the units/coefficient rule
+is NOT implemented; all four probe forms (`*2`, `/2`, `*1.0375`, `+0.02`) are **equally detected**, and the
+docstring says why, verbatim: *"Small arithmetic factors are not exempted — that was tempting, but '0.5 is
+obviously just arithmetic' is the same judgement call that let two files disagree about a cable radius."*
+⇒ ⭐ **Not a defect — a reasoned divergence for p5 to accept or overturn.** Subscript exclusion (`-259(2)`'s
+explicit item) is swept into the same choice; ⛔ **the vestigial `known` branch + a first docstring line
+promising an unimplemented derivability check** (the hole-③-v1 shape) resolve WITH that choice: accept-strict ⇒
+delete the branch and the promise; enforce-ruled ⇒ implement them — ⚠ with p0's forward note: under
+`import as spec` owned names appear as **`Attribute`, not `ast.Name`** — a Name-keyed check would call every
+such expression non-derivable.
+
+**(c) ⛔⛔ The one-liner that matters for evidence**: the loud override declaration **runs only under
+`__main__`** — a driver import prints nothing, **and the driver is what runs** ⇒ a run under
+`CABLE_BEND_STIFFNESS_OVERRIDE` leaves no trace where the trace is needed. One line (import-time print, or the
+driver calls it) closes it. **(d)** Census: 17 drivers, wired = 49 (strict count); walrus remains the sole
+uncaught form; template rule not yet aboard. Bank `P0_FINAL_PASS_WIRED_20260727.md` @ `ae8401915e`.
