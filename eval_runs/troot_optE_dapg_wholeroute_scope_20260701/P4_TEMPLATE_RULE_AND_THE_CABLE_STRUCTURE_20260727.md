@@ -1,0 +1,129 @@
+# p4 — テンプレート反転規則の実装と、それが見つけた ケーブル構造の差
+
+作成 2026-07-27 20:51:43 JST (w2:p4 RS-TECH-LEAD)
+対象 = `p4_ur15_sim_20260727/ur15_cell_spec.py` / `ur15_steps_wired.py`
+規則の出所 = `P5_UR15_CELL_CONSTANTS_SPEC_20260727.md` §6.4d / §6.4e / §6.4f (banked `1736f31c22`)
+
+---
+
+## 0. ⭐⭐⭐ 先に 1 件 — ⛔ **これは私の court の外です (Rs / p5 へ)**
+
+⭐ **私の cell のケーブルは、リンクごとに 蝶番が 2 つ在ります** (`ur15_steps_wired.py:179` `cab{i}_y` 軸 `0 1 0` ・`:180` `cab{i}_z` 軸 `0 0 1`)。
+⇒ ⛔ **banked された前提は 1 つです。** `RS71-System-Spec-SSOT.md:67` 逐語:
+
+> the cable is a **1-DOF-per-joint PLANAR bender** built with the bend plane **VERTICAL (sag)** … but **NOT horizontal routing curvature** (the 5-clip 千鳥 X-Y curvature would need a 2nd bend DOF/joint) … **B1 substrate-upgrade [add world-Z DOF, re-validates all cable results] + B3 VBD declined.**
+
+⇒ ⭐⭐ **私の cell が持っている 2 本目の軸は、Rs が 2026-06-25 に 却下した B1 そのものです** (水平カーブ = ルーティング曲率)。
+⇒ ⛔ **したがって私の cell は banked な substrate より「できる」側にずれています** — 易しい方向 (non-conservative) ⇒ ここで出る成功は banked env へそのまま渡せません。
+⇒ ⛔ **私は直しません** (どちらの向きも設計変更 = 前提変更 ⇒ Rs 専権 / §0)。**報告して止めます。**
+
+⚠ 事実関係の限定: p5 の cell constants spec は **ケーブルの関節構造について沈黙**しています (私が全文 grep 済) ⇒ この 2 軸は **spec 由来ではなく driver 由来 (=私の側)** です。⛔ いつ入ったかは未調査。
+
+**同じ場所で見つかった、権威実装との差 2 件** (どちらも `test_newton_clip_routing.py` = 権威 producer を実読):
+
+| 量 | 私の cell | 権威 producer | 差 |
+| --- | --- | --- | --- |
+| ケーブル関節の可動域 | `range="-1.2 1.2"` (±68.75°) | ⛔ **制限なし** (`:1004-1017` `add_joint_revolute` に `limit_*` 無し) | 私だけが制限している |
+| 積分刻み | `timestep="0.002"` (500 Hz) | `DT = 1/480` (`:123`) ÷ `SIM_SUBSTEPS = 10` (`:101`) = **2.083e-4 s** | ⭐ **私が 9.6 倍 粗い** |
+| 接触 gap | 設定なし | `cable_cfg.gap = 0.002` (`:978`) | 私は既定値 |
+
+⇒ ⭐ どれも **出所が在る量**です (rule ①) ⇒ **私の court ではありません** ⇒ 採否は p5 / Rs。
+
+---
+
+## 1. 実装したもの
+
+### 1-1 テンプレート反転規則 (§6.4e)
+
+`ur15_cell_spec.template_literals()`。**f-string を再構成してから**属性を読みます — `size="0.102 {SHOULDER_HEIGHT/2:.4f}"` は AST 上 3 ノードに割れており、別々に見ると **属性名も、0.102 がその属性の数であることも 失われる**ためです。
+
+- 静的部分の数値リテラルは **すべて失敗**。
+- 例外① 描画属性の allow-list (`rgba` `material` `texture` `texrepeat` `reflectance` `rgb1` `rgb2` `markrgb` `ambient` `diffuse` `specular` `shininess` `emission` `width` `height` `offwidth` `offheight` `znear` `zfar` `shadowsize` `fovy`)。
+- 例外② トークン `0` `1` `-1` `+1` そのもの。
+
+⚠ **わざと残した穴 (記録)**: 例外②は**綴り**で判定します ⇒ `friction="1 …"` は通り、`friction="1.0 …"` は捕まります。⛔ 原点を `0.0 0.0 0.0` と書く人は居ない一方、摩擦を `1` と書く人は居得る ⇒ **穴です**。⭐ ただし ケーブル・クリップの `friction` は既に置換済 (`442b468d84`) ⇒ 現物では発火しません。
+
+### 1-2 名前規則の次元化 (§6.4d、p5 の結合形)
+
+`_unowned_literals()`。位置で判定します — 名前の一覧ではありません。
+
+- **加算・減算**に現れる ⇒ 同じ単位を持つ ⇒ **cell 定数** (失敗)。
+- **乗除**に現れる ⇒ **素の係数のときだけ通る** = 小数点なしの整数 / `0.5` `0.25` `0.75` / 10 の冪。⇒ p5 の穴 (`OWNED * 1.0375`) は **1.0375 が素でない**ので捕まります。
+- **添字 / `range()` / 比較**の中の整数 ⇒ 数えている ⇒ 通す。
+- 先頭の `-` は リテラルへ畳む (p0 `-316`(2) / p5 承認) ⇒ `REST_X` の `-0.300` が二重に落ちません。
+
+### 1-3 出所が在ったのに写されていた 3 名 (Tier A へ移動)
+
+| 名前 | 権威ある出所 | 写しの誤差 |
+| --- | --- | --- |
+| `CLAW_OFFSET` | `task_config.py:321 − :320` | 値は同じ (長い小数の引き算が書かれていた) |
+| `EFFORT` | `ur15_mj.urdf <limit effort>` (433/433/204/70/70/70) | 値は同じ |
+| `LIMS` | `ur15_mj.urdf <limit lower/upper>` | ⭐ **丸められていた** (`±6.283` 対 `±6.283185307179586`) ⇒ driver は**ロボット自身より僅かに狭い範囲**で乱数姿勢を引き、巻き戻していました |
+
+⇒ 併せて actuator の `ctrlrange` を `[-6.3, 6.3]` の直書きから **関節ごとの URDF 値**へ (肘は ±3.1416)。⚠ **これは model が変わる変更です** — 検証は §4。
+
+### 1-4 p5 が §6.4f で「spec が所有すべき」とした 2 件を実装
+
+`SIDES` (左右の符号) と `R_DES` (基準姿勢) を spec 側へ。⭐ **どちらも 0 と ±1 だけで書かれており、どんなリテラル規則も永久に捕まえません** — p5 が規則でなく**決定**で置いた理由がそのまま実装されています。
+
+### 1-5 見つかった 2 つ目の写し
+
+`ur15_steps_wired.py` は `CLAMP / HALF / OPEN` を **import した上で 98 行目で束縛し直して**いました ⇒ import は死んでいました。⚠ 値は両方 `236 / 214 / 18` で**挙動差なし** ⇒ ⛔ だから気づかれない形です。削除しました。
+
+---
+
+## 2. テンプレート規則が挙げたもの — **23 リテラル / 12 site**
+
+⚠⚠ **数字の一致に注意**: この **23 は p0 の「置換 site 23」とは別の母集団**です (私 = 残っているリテラルの個数 ・p0 = 置換すべき site の個数)。⛔ 同じ数字が同じ量である証拠にはしません。
+
+| 行 | 属性 | 値 | 私の判定 |
+| --- | --- | --- | --- |
+| 194 | `timestep` | `0.002` | ⛔ **§0 の 3 番** — 出所は producer 側に在る |
+| 194 | `size` | `6 6 0.1` | 床板 (非衝突・見た目のみ) ⇒ ⭐ **`size` は描画 allow-list に無い** ⇒ p5 判断 |
+| 194 | `size` | `0.102 {}` | 支柱の半径 ⇒ Tier B 候補 |
+| 194 | `size` / `pos` | `0.215 0.03` / `0 0 0.03` | 台座 ⇒ Tier B 候補 |
+| 194 | `size` | `{} {} 0.02` | ⭐ **テーブル板厚** ⇒ Tier B 候補 (spec §4 は HX/HY のみ所有) |
+| 162 | `size` ×3 / `pos` ×2 | `0.014 …` / `±0.012` | ⭐ **鞍の支柱と唇** ⇒ spec §4 が `REST_X/Y/TOP` を所有済 ⇒ **同じ物の寸法** ⇒ p5 court |
+| 179/180 | `range` | `-1.2 1.2` | ⛔ **§0 の 2 番** — producer は制限を置いていない |
+
+⇒ ⭐ **私が直したのは 1 件だけ**: 浮かせたクリップの下駄 (`size="0.020 0.024 …"`) は **自作クリップ由来の 40×48 mm** で、権威クリップの footprint は 30×40 mm でした ⇒ `CLIP_PARTS[0]` から導出に変更 (⭐ 導出であって設計ではありません)。⚠ 現在 `FLOAT_Z = 0` なので下駄は出力されず、**走行結果は変わりません**。
+
+⇒ ⛔ **残り 11 site は 直しません** — §6.4f のとおり **配置は p5 の court** で、私が値を選べば「driver 内で自作」に戻ります。
+
+---
+
+## 3. 名前規則 — **49 → 18**、⭐ §6.4d への **差分**として
+
+p5 の求めどおり「一致」ではなく **差分**として出します。
+
+**残る 18** (実測 2026-07-27 20:5x):
+`C1` `C2` `CLIP_Y_EVEN` `CLIP_Y_ODD` `FINGER_RAMP` `FLOAT_Z` `GRASP_ATTITUDES` `RAMP` `SETTLE_TOL` `SIGMA_FLOOR` `Z_HOME` `Z_RISE_REST` `Z_RISE_ROUTE` `_unnamed` `cam` `cam2` `render_every` `world`
+
+- **§6.4d に在って私の一覧に無い**: `SIDES` `R_DES` ⇒ ⭐ **§1-4 で spec 所有にしたため消えました** (期待どおりの差)。
+- **私の一覧に在って §6.4d に無い**: `cam` `cam2` `render_every` ⇒ ⭐ Tier C と同型に見えますが **p5 の §6.4d に記載が無い** ⇒ ⛔ 私が置きません。
+- ⭐ **`world` が挙がる理由**: f-string の**置換式の中**のリテラル (`TABLE_TOP-0.02`) です ⇒ §1-1 の静的部分規則とは**別の母集団** ⇒ 2 経路が噛み合っている証拠。
+- ⚠ **偽陽性 1 類を実測**: `_unnamed = sum(1 for g in range(m.ngeom) if …)` (`:311`) の `1` は**数えている 1** ですが、添字でも `range()` でも比較でもないので落ちます ⇒ ⛔ 規則の拡張は p5 の court ・私は報告のみ。
+
+---
+
+## 4. 検証 — cell は同一に建ちます
+
+`ur15_steps_wired.py` のヘッダを exec して再測 (新 stack = mujoco 3.10.0):
+
+```
+nq=113 nu=14 nbody=88 ngeom=139 eq=8      seat links C1=cab30 C2=cab23
+cable settled: x[-0.299,+0.286] y[+0.280] z-table[+0.1487,+0.1558] ncon=13
+measured grasp: L=cab27 R=cab32   drop across the span = 2.3 mm
+```
+
+⇒ ⭐ **配線前と同一** (`6b6f095387` 時点の実測と一致)。
+⚠ ただし **actuator の `ctrlrange` は変わりました** (肘 ±6.3 → ±3.1416 = URDF 値)。⇒ 静定姿勢は範囲内 ・⛔ **走行での影響は未測** (run 認可待ちのため)。
+
+---
+
+## 5. 要るもの
+
+1. ⛔⛔ **§0 のケーブル 2 軸** — Rs / p5 の disposition。私は触りません。
+2. §2 の 11 site の配置 (p5)。
+3. §0 の `range` / `timestep` / `gap` の採否 (p5)。
+4. §3 の `cam` `cam2` `render_every` の分類 (p5)。

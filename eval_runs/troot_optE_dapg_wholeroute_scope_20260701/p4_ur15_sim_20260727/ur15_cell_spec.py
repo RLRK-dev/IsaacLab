@@ -34,7 +34,9 @@ import math
 import os as _os_module
 from os import environ as _os_env
 import pathlib
+import re
 import sys
+import xml.etree.ElementTree as _ET
 
 _REPO = "/home/rlrk/IsaacLab"
 if _REPO not in sys.path:
@@ -63,6 +65,39 @@ GROOVE_CENTER_Z = _tc.GROOVE_CENTER_Z           # task_config.py:226 == TABLE + 
 # and the clip is a static geom so it takes the same friction triple as the table.
 CLIP_SOLREF = (-_tc.MUJOCO_CONTACT_KE, -_tc.MUJOCO_CONTACT_KD)     # task_config.py:168-169
 CLIP_FRICTION = tuple(_tc.MUJOCO_CABLE_TABLE_FRICTION)             # task_config.py:180
+
+# Distance from the pinch point to the claw tip [m].  The driver had this written out as a
+# subtraction of two long decimals, which is the same value but stops being the same value the
+# moment either end moves.
+CLAW_OFFSET = _tc.EE_TO_PINCH_TIP_CLOSED - _tc.EE_TO_PINCH_CLOSED  # task_config.py:321 - :320
+
+
+# --- the arm's own limits: read from the robot description, not transcribed --------------------
+# The driver carried both as literal arrays, and the joint limits had been rounded on the way in
+# (-6.283 for -6.283185307179586), which narrows the range the driver samples and unwraps within.
+
+_URDF = pathlib.Path(__file__).with_name("ur15_mj.urdf")
+ARM_JOINTS = ("shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint",
+              "wrist_1_joint", "wrist_2_joint", "wrist_3_joint")
+
+
+def _arm_limits_from_urdf():
+    """(effort [N m], lower [rad], upper [rad]) per arm joint, in kinematic order."""
+    root = _ET.parse(_URDF).getroot()
+    joints = {j.get("name"): j for j in root.iter("joint")}
+    out = []
+    for name in ARM_JOINTS:
+        j = joints.get(name)
+        if j is None or j.find("limit") is None:
+            raise RuntimeError(f"{_URDF.name} has no <limit> for {name}; the robot description "
+                               f"moved, and this cell will not guess what it now says")
+        lim = j.find("limit")
+        out.append((float(lim.get("effort")), float(lim.get("lower")), float(lim.get("upper"))))
+    return out
+
+
+EFFORT = tuple(e for e, _, _ in _arm_limits_from_urdf())            # ur15_mj.urdf <limit effort>
+LIMS = tuple((lo, hi) for _, lo, hi in _arm_limits_from_urdf())     # ur15_mj.urdf <limit lower/upper>
 
 
 # --- cable physics: per-element quantities, DERIVED from the discretisation -------------------
@@ -250,6 +285,19 @@ REST_TOP = TABLE_TOP + 0.150            # spec §4 -- "at +0.060 the open finger
                                         #            gripper.  Unresolved; see
                                         #            P4_FINGER_REACH_BELOW_CABLE_20260727.md §4.
 
+# --- dimensionless conventions: cell facts that no literal check would ever have caught ---------
+# Spec §6.4f, p5's second class: the guard excuses these (unit quaternions and index integers) and
+# they are still facts about this cell -- which side is which, and how the tool is meant to hang.
+# A rule cannot find them, so the spec owns them by decision instead.
+
+SIDES = {"L": -1.0, "R": +1.0}           # spec §6.4f -- the sign convention, left negative in y
+
+# Desired tool orientation: closing axis along world y, across the cable; approach along world z,
+# so the gripper hangs down with the pinch at the bottom.  Rows, in the tool's own frame.
+R_DES = ((0.0, -1.0, 0.0),
+         (1.0, 0.0, 0.0),
+         (0.0, 0.0, 1.0))                # spec §6.4f -- the reference attitude
+
 # Arm servo -- the spec names these but explicitly declines to judge their values; they belong to
 # the arm-control court.  Carried here only so drivers stop each keeping their own copy.
 ARMATURE, DAMP = 0.1, 1.0               # spec §4
@@ -305,8 +353,12 @@ _OWNED = {n for n in globals() if n.isupper() and not n.startswith("_")}
 RETIRED = {"CLIP_H", "GROOVE_W", "CLIP_RISER"}
 
 # TIER-C is run-specific by design -- the spec §5 keeps these OUT so drivers can still differ.
+# The lower-case entries are p5's own placements in spec §6.4d: `frames` `log` `n` are recording
+# bookkeeping and `claw_min` `col_min` `sig_min` are running minima whose 1e9 is a sentinel rather
+# than an input.
 TIER_C = {"OUT", "W", "H", "FPS", "HOLD_S", "WAY", "STEPS", "SEED",
-          "CAM", "CAM2", "RENDERER", "FRAMES"}
+          "CAM", "CAM2", "RENDERER", "FRAMES",
+          "frames", "log", "n", "claw_min", "col_min", "sig_min"}
 
 _SPEC_MODULE = "ur15_cell_spec"
 
@@ -353,24 +405,154 @@ def _module_level_bindings(path):
     return out
 
 
-def _has_bare_literal(node):
-    """Does this value expression contain a number written into it?
+# Coefficients that carry no unit: a literal in a multiplication or division is arithmetic if it
+# is one of these and a hidden length otherwise.  Spec §6.4d, in the combined form p5 settled on:
+# p5's dimensional rule alone lets `OWNED * 1.0375` through, and p0's small-set rule alone has no
+# principle behind it, so a factor has to pass BOTH -- be in a multiplication AND be plain.
+_PLAIN_FRACTIONS = frozenset({0.5, 0.25, 0.75})
 
-    p5 took the strict reading, and the reason is worth keeping: my first version's docstring
-    promised to exempt numbers "derivable from owned names", and the code never did it -- the
-    branch that was supposed to was a `continue` that did nothing.  A promise the code does not
-    keep is the same defect this whole contract exists to catch, so the promise goes rather than
-    the strictness.
 
-    So: any numeric literal at all, and the binding has to say which of the three sets it is in.
-    No exemption for small arithmetic factors either -- "0.5 is obviously just arithmetic" is the
-    same judgement call that let two files disagree about a cable radius.
+def _plain_coefficient(value, written_as_int):
+    """Is this multiplier plain -- a count, a simple fraction, or a unit conversion?
+
+    Written-as-int matters: `2` is a count of something, `2.0` is a measurement someone happened
+    to write as two.  The spelling is the only signal available, and it is the author's own.
+    """
+    if written_as_int:
+        return True
+    x = abs(float(value))
+    if x in _PLAIN_FRACTIONS:
+        return True
+    if x > 0.0:
+        e = math.log10(x)
+        return abs(e - round(e)) < 1e-12       # a power of ten: mm to m and back
+    return False
+
+
+def _counting_position(node, parent):
+    """Is this integer counting rather than measuring -- an index, a range, a comparison?
+
+    Spec §6.4d exempts these three, and only for integers: `q[2]` and `range(3)` are structural,
+    while `q[0.02]` is not a thing anyone writes.
+    """
+    cur, child = parent.get(node), node
+    while cur is not None:
+        if isinstance(cur, ast.Subscript) and child is cur.slice:
+            return True
+        if isinstance(cur, ast.Compare):
+            return True
+        if isinstance(cur, ast.Call) and isinstance(cur.func, ast.Name) and cur.func.id == "range":
+            return True
+        cur, child = parent.get(cur), cur
+    return False
+
+
+def _unowned_literals(node):
+    """Numbers written into this binding that the contract does not excuse.
+
+    The earlier version failed on any numeric literal at all, which was p5's strict reading after
+    my first docstring promised an exemption the code never implemented.  The strictness stays;
+    what changes is that the two exemptions p5 has since ruled on are now IMPLEMENTED rather than
+    described -- and they are implemented as one rule about position, not a list of names:
+
+      * added or subtracted -> the literal has the same unit as what it is added to, so it is a
+        cell constant.  `TABLE_TOP + 0.2` is a height and gets caught.
+      * multiplied or divided -> plain coefficients pass, anything else is a length in disguise.
+      * index, `range()`, comparison -> integers there are counting.
     """
     value = getattr(node, "value", None)
     if value is None:
-        return False
-    return any(isinstance(leaf, ast.Constant) and isinstance(leaf.value, (int, float))
-               and not isinstance(leaf.value, bool) for leaf in ast.walk(value))
+        return []
+    parent = {}
+    for p in ast.walk(value):
+        for c in ast.iter_child_nodes(p):
+            parent[c] = p
+    out = []
+    for leaf in ast.walk(value):
+        if not (isinstance(leaf, ast.Constant) and isinstance(leaf.value, (int, float))
+                and not isinstance(leaf.value, bool)):
+            continue
+        # fold a leading minus into the literal, per p5's acceptance of p0 `-316`(2): otherwise
+        # REST_X's -0.300 is a UnaryOp wrapping a bare 0.300 and reads as unowned twice over.
+        here = leaf
+        up = parent.get(here)
+        if isinstance(up, ast.UnaryOp) and isinstance(up.op, (ast.USub, ast.UAdd)):
+            here, up = up, parent.get(up)
+        if isinstance(leaf.value, int) and _counting_position(here, parent):
+            continue
+        if isinstance(up, ast.BinOp) and isinstance(up.op, (ast.Mult, ast.Div, ast.FloorDiv,
+                                                            ast.Pow)) \
+                and _plain_coefficient(leaf.value, isinstance(leaf.value, int)):
+            continue
+        out.append(leaf.value)
+    return out
+
+
+# --------------------------------------------------------------------------------------------
+# The template rule -- spec §6.4e.  The name checks above cannot see inside a string, and the XML
+# the driver builds is a string, so the cell's geometry was living in the one place nothing looked.
+# p5 withdrew the first version (a list of four geometry attributes: it covered 27 of 59 sites and
+# missed ten burnt-in physics values) and inverted it instead: EVERY number in the static text of
+# a template fails, with two exceptions.  Inverting it means tomorrow's sixtieth attribute is
+# caught without anyone adding it to a list.
+# --------------------------------------------------------------------------------------------
+
+# Exception 1 -- attributes that only change how the cell LOOKS.  Nothing here reaches the solver.
+DRAWING_ATTRS = frozenset({
+    "rgba", "material", "texture", "texrepeat", "reflectance", "rgb1", "rgb2", "markrgb",
+    "ambient", "diffuse", "specular", "shininess", "emission",
+    "width", "height", "offwidth", "offheight", "znear", "zfar", "shadowsize", "fovy",
+})
+
+# Exception 2 -- `0` and `1` themselves: origins, axis directions, unit quaternions, and the
+# contact flags.  Spelling is the discriminator and it is deliberate: a friction of "1" would slip
+# through here, but a friction of "1.0" is caught, and nobody writes an origin as "0.0 0.0 0.0".
+_BARE_UNITS = frozenset({"0", "1", "-1", "+1"})
+
+_ATTR_IN_TEMPLATE = re.compile(r'([A-Za-z_][\w:.-]*)\s*=\s*"([^"]*)"')
+_NUMBER_IN_VALUE = re.compile(r'(?<![\w.])[+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?(?![\w.])')
+_SUBSTITUTION = "\x00"
+
+
+def _templates(tree):
+    """Every string the module builds, with each `{...}` substitution replaced by one marker.
+
+    Reconstructing the f-string rather than reading its pieces is what lets an attribute be read
+    when it is PART static and PART substituted -- `size="0.102 {SHOULDER_HEIGHT/2:.4f}"` splits
+    into three AST nodes, and looking at them separately loses both the attribute name and the
+    fact that 0.102 is one of its numbers.
+    """
+    inner = {id(v) for n in ast.walk(tree) if isinstance(n, ast.JoinedStr) for v in n.values}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.JoinedStr):
+            yield node.lineno, "".join(
+                v.value if isinstance(v, ast.Constant) and isinstance(v.value, str)
+                else _SUBSTITUTION for v in node.values)
+        elif isinstance(node, ast.Constant) and isinstance(node.value, str) \
+                and id(node) not in inner:
+            yield node.lineno, node.value
+
+
+def template_literals(driver_path):
+    """Numbers written into the static text of the driver's XML.  Spec §6.4e.
+
+    Returns [(line, attribute, whole value, the literal)].  Only attribute values are examined:
+    a number in prose inside a comment is not a cell constant, and the geometry is all in
+    attributes.
+    """
+    tree = ast.parse(pathlib.Path(driver_path).read_text())
+    out = []
+    for lineno, text in _templates(tree):
+        if '="' not in text:
+            continue
+        for m in _ATTR_IN_TEMPLATE.finditer(text):
+            attr, value = m.group(1), m.group(2)
+            if attr in DRAWING_ATTRS:
+                continue
+            for num in _NUMBER_IN_VALUE.finditer(value):
+                if num.group(0) not in _BARE_UNITS:
+                    out.append((lineno, attr, value.replace(_SUBSTITUTION, "{}"), num.group(0)))
+    return out
 
 
 def guard(driver_path, strict=True):
@@ -395,10 +577,16 @@ def guard(driver_path, strict=True):
             bad.append((name, line, f"owned by {_SPEC_MODULE} but imported from somewhere else, "
                                     f"which is how a second copy starts"))
         elif kind == "assign" and name not in _OWNED and name not in TIER_C \
-                and _has_bare_literal(node):
+                and _unowned_literals(node):
             bad.append((name, line, "carries a number of its own and belongs to none of the three "
                                     "sets: add it to the p5 spec, or derive it from names that "
                                     "are already owned"))
+    for line, attr, value, literal in template_literals(driver_path):
+        bad.append((f'{attr}="{value}"', line,
+                    f"{literal} is written into the XML this driver builds.  The templates are "
+                    f"where the cell's geometry actually lives, and no name check can see inside "
+                    f"a string, so a number here is outside every other rule in this module.  "
+                    f"Substitute it from an owned name"))
     if bad and strict:
         detail = "\n  ".join(f"{n} (line {ln}): {why}" for n, ln, why in bad)
         raise RuntimeError(f"{pathlib.Path(driver_path).name} does not satisfy the cell-constant "

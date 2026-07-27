@@ -36,10 +36,11 @@ OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "/home/rlrk/Downloads/ur15_step
 # SOURCED: importing these from ur15_cell_spec is the one form the contract allows.  They used to
 # be defined here, and in eleven sibling files, with twenty-one of them disagreeing.
 from ur15_cell_spec import (  # noqa: E402
-    ARMATURE, CABLE_N, CABLE_R, CABLE_SEG, CLAMP, CLIP_BASE_HEIGHT, CLIP_COLLIDE, CLIP_FRICTION,
-    CLIP_PARTS, CLIP_SOLREF, DAMP, GRIP_HALF_SPAN, GROOVE_CENTER_Z, HALF, KP_ARM, KP_WRI, KVR,
-    OPEN, REST_TOP, REST_X, REST_Y, SHOULDER_HEIGHT, TABLE_HX, TABLE_HY, TABLE_TOP, TILT,
-    YOKE_SPREAD, guard, seat_z,
+    ARMATURE, CABLE_N, CABLE_R, CABLE_SEG, CLAMP, CLAW_OFFSET, CLIP_BASE_HEIGHT, CLIP_COLLIDE,
+    CLIP_FRICTION, CLIP_PARTS, CLIP_SOLREF, DAMP, EFFORT, GRIP_HALF_SPAN, GROOVE_CENTER_Z, HALF,
+    KP_ARM, KP_WRI, KVR, LIMS, OPEN, REST_TOP, REST_X, REST_Y, R_DES,
+    SHOULDER_HEIGHT, SIDES, TABLE_HX, TABLE_HY, TABLE_TOP, TILT, YOKE_SPREAD, guard,
+    seat_z,
 )
 import ur15_cell_spec as _spec  # noqa: E402
 
@@ -51,20 +52,20 @@ if _unclassified:
     for _n, _l, _w in _unclassified:
         print(f"[steps]     {_n:20s} line {_l:5d}  {_w[:60]}")
 
-J6 = ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]
-SIDES = {"L": -1.0, "R": +1.0}
+J6 = list(_spec.ARM_JOINTS)      # the URDF names, in kinematic order
 
 # ⚠ STILL DEFINED HERE, and each one is a cell constant the spec does not yet carry.  The contract
 # says a driver that needs a new one adds it to the spec rather than defining it, so these are
-# reported to p5 rather than kept: EFFORT, CLIP_Y_ODD, CLIP_Y_EVEN, C1, C2, CLAW_OFFSET, Z_HOME,
-# Z_RISE_ROUTE, Z_RISE_REST, FLOAT_Z.
-EFFORT = np.array([433.0, 433.0, 204.0, 70.0, 70.0, 70.0])
+# reported to p5 rather than kept: CLIP_Y_ODD, CLIP_Y_EVEN, C1, C2, Z_HOME, Z_RISE_ROUTE,
+# Z_RISE_REST, FLOAT_Z.
+#
+# EFFORT, LIMS and CLAW_OFFSET have LEFT this list: each had an authoritative source all along and
+# was copied rather than read.  The joint limits had been rounded on the way across -- ±6.283 for
+# ±6.283185307179586 -- so the driver was sampling and unwrapping inside a range very slightly
+# narrower than the robot's own.
 CLIP_Y_ODD, CLIP_Y_EVEN = 0.35, 0.40
 C1 = (0.150, CLIP_Y_ODD)
 C2 = (0.040, CLIP_Y_EVEN)
-
-# task_config.py:320 EE_TO_PINCH_CLOSED / :321 EE_TO_PINCH_TIP_CLOSED
-CLAW_OFFSET = 0.27574726696 - 0.2548428289592266
 
 Z_HOME = TABLE_TOP + 0.20
 Z_RISE_ROUTE = TABLE_TOP + 0.180
@@ -95,7 +96,8 @@ Z_SEAT = GROOVE_Z - CLAW_OFFSET            # the same height expressed at the pi
 # run it clamped was one where the cable was not seated, so it is no evidence for the method.  With
 # the cable seated the jaw stops on the cable anyway: the hand that held stopped at 6.81 mm while
 # commanding 255.  So command 4.0 mm and let the cable and the effort cap decide where it stops.
-CLAMP, HALF, OPEN = 236, 214, 18
+# CLAMP / HALF / OPEN come from the spec module (imported above).  They were rebound here
+# as well, which made the import dead -- the same second copy this contract exists to stop.
 # Rs: the clamp is too fast, halve it.  Stepping the command shut the jaw in 0.544 s (149.2 mm/s
 # of face travel, measured with probe_close_time.py on this model).  Ramping the command over
 # 0.75 s gives 1.084 s (74.9 mm/s) -- half the speed, measured, not estimated.
@@ -136,7 +138,10 @@ def clip_xml(name, cx, cy):
     16 mm slot on top and no lip at all -- 78 mm tall against this one's 30, and 64 mm of it
     solid.  The cable was being driven straight through that solid part.
     """
-    spacer = (f'      <geom name="{name}_spacer" type="box" size="0.020 0.024 '
+    # The spacer stands the clip off the table, so it is the clip's own footprint --
+    # not a shape of its own.  It used to be 40x48 mm against the real clip's 30x40.
+    _bx, _by = CLIP_PARTS[0][3], CLIP_PARTS[0][4]
+    spacer = (f'      <geom name="{name}_spacer" type="box" size="{_bx:.4f} {_by:.4f} '
               f'{max(FLOAT_Z / 2, 1e-4):.4f}" pos="0 0 {max(FLOAT_Z / 2, 1e-4):.4f}" '
               f'material="clipf"/>\n' if FLOAT_Z > 0 else "")
     parts = "".join(
@@ -245,7 +250,7 @@ for tag in SIDES:
         a.name, a.trntype, a.target = f"{tag}_{j}_act", mujoco.mjtTrn.mjTRN_JOINT, f"{tag}_{j}"
         a.gaintype, a.biastype = mujoco.mjtGain.mjGAIN_FIXED, mujoco.mjtBias.mjBIAS_AFFINE
         a.gainprm[0], a.biasprm[1], a.biasprm[2] = kps[i], -kps[i], -(kps[i] * KVR)
-        a.forcerange, a.ctrlrange, a.ctrllimited = [-EFFORT[i], EFFORT[i]], [-6.3, 6.3], 1
+        a.forcerange, a.ctrlrange, a.ctrllimited = [-EFFORT[i], EFFORT[i]], list(LIMS[i]), 1
 
 # Gravity compensation on the arm links, as the official UR MJCF does and as this project's
 # PhysX config does (disable_gravity=True on the robot).  Without it the servos sit ~17 mm short
@@ -362,9 +367,10 @@ def pinch_jac(t):
     return 0.5 * (Js[0] + Js[1]), jr[:, VADR[t]]
 
 
-# Desired tool orientation: closing axis along world Y (across the cable), approach along world Z
-# (the gripper hangs down, pinch at the bottom).  Measured once, in the tool's own frame.
-R_DES = np.array([[0.0, -1.0, 0.0], [1.0, 0.0, 0.0], [0.0, 0.0, 1.0]])
+# Desired tool orientation, from the spec module (§6.4f): closing axis along world y, approach
+# along world z.  It reads as three rows of 0 and ±1, which is exactly why no literal rule
+# would ever have flagged it -- p5 placed it by decision instead.
+_R_DES = np.array(R_DES)      # the imported rows, in the form the error term needs
 
 
 def tool_R(t):
@@ -374,7 +380,7 @@ def tool_R(t):
 def ik(t, target, gain=0.45, lam=0.06, dq_max=0.030, lag=0.35, wrot=0.6):
     Jp, Jr = pinch_jac(t)
     ep = target - pinch(t)
-    Rerr = (R_DES @ AXFIX[t]) @ tool_R(t).T
+    Rerr = (_R_DES @ AXFIX[t]) @ tool_R(t).T
     er = Rotation.from_matrix(Rerr).as_rotvec()
     J = np.vstack([Jp, wrot * Jr])
     e = np.concatenate([ep, wrot * er])
@@ -802,16 +808,15 @@ print(f"[steps] measured grasp: L=cab{iL} {np.round(gL,4)}  R=cab{iR} {np.round(
 
 # ---- start pose: solve full 6-DOF IK on a THROWAWAY MjData; the live d is never written ----
 GRASP1 = {"L": np.array([GL[0], GL[1], Z_RISE_REST]), "R": np.array([GR[0], GR[1], Z_RISE_REST])}
-LIMS = np.array([[-6.283, 6.283], [-6.283, 6.283], [-3.1416, 3.1416],
-                 [-6.283, 6.283], [-6.283, 6.283], [-6.283, 6.283]])  # ur15_mj.urdf <limit>
+LIM = np.array(LIMS)          # the URDF values, read by the spec module
 
 
 def _wrap(q):
     q = q.copy()
     for k in range(6):
-        while q[k] > math.pi and q[k] - 2 * math.pi >= LIMS[k, 0]:
+        while q[k] > math.pi and q[k] - 2 * math.pi >= LIM[k, 0]:
             q[k] -= 2 * math.pi
-        while q[k] < -math.pi and q[k] + 2 * math.pi <= LIMS[k, 1]:
+        while q[k] < -math.pi and q[k] + 2 * math.pi <= LIM[k, 1]:
             q[k] += 2 * math.pi
     return q
 
@@ -901,7 +906,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         elif warm is not None and _try < len(POSES):
             q = np.asarray(warm)
         else:
-            q = rg.uniform(LIMS[:, 0], LIMS[:, 1])
+            q = rg.uniform(LIM[:, 0], LIM[:, 1])
         for k, a in enumerate(QADR[t]):
             sc.qpos[a] = q[k]
         for _ in range(iters):
@@ -922,7 +927,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
             n = float(np.linalg.norm(dq))
             if n > 0.15:
                 dq *= 0.15 / n
-            qc = np.clip(np.array([sc.qpos[a] for a in QADR[t]]) + dq, LIMS[:, 0], LIMS[:, 1])
+            qc = np.clip(np.array([sc.qpos[a] for a in QADR[t]]) + dq, LIM[:, 0], LIM[:, 1])
             for k, a in enumerate(QADR[t]):
                 sc.qpos[a] = qc[k]
         mujoco.mj_forward(m, sc)
@@ -997,7 +1002,7 @@ for t in SIDES:
     print(f"          joint err   = {np.round((qa-START[t])*1000,1)} mrad")
     print(f"          act force   = {np.round(af,1)} N.m   (limits {EFFORT})")
     print(f"          gravity load= {np.round(bias,1)} N.m")
-    print(f"          saturated   = {list(np.abs(af) >= EFFORT*0.999)}")
+    print(f"          saturated   = {list(np.abs(af) >= np.array(EFFORT)*0.999)}")
 
 # ---- STEP table 2-18.  (step, name, L target, R target, Lfinger, Rfinger, seconds, gate) ----
 LX1, RX1 = C1[0] - GRIP_HALF_SPAN, C1[0] + GRIP_HALF_SPAN
