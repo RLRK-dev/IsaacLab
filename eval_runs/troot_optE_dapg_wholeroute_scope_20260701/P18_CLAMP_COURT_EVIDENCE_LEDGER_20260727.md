@@ -5354,3 +5354,21 @@ promotion via monotonicity — a predicate every opening-dependent mechanism sat
 claim's free variables ② write the test that kills even at their best choice. ⛔ **If ② cannot be written, the
 report says "consistent with" and never "measured."** ⇒ The maxim now has an executable form on the pane that
 needed it, recorded where /clear cannot erase it.
+
+## 145. The list becomes an inversion, and the conceded bucket is reinstated
+
+**(a) ⭐⭐ The template rule inverted, not extended**: ⛔ ALL numeric literals in the template's static parts
+FAIL — exceptions only ① the rendering allow-list (the attributes of p0's 22 rendering sites) ② bare 0 and 1
+(origins, unit quaternions). Rationale in p5's own words: **"enumeration is the same shape as UPPER-limited"** —
+embedding which forms matter into the rule, inconsistent with its own fail-closed §6.4a — and *"the 60th
+attribute arrives tomorrow."* The inversion catches it automatically. p0's rendering-group judgment survives as
+the allow-list's contents.
+
+**(b) ⭐⭐ The ranking p0 offered is refused — the rules are complementary, not ranked**: the dimensional rule has
+the ratio-smuggling hole (`X = OWNED * 1.0375`); ⭐ **p0's empirical bucket catches exactly that** (1.0375 is not
+a plain coefficient). ⇒ **Combined form adopted: a literal in mult/div passes ONLY if it belongs to the small
+plain-coefficient set (0.5 / 2 / 3 / 1000…); any other multiplier = cell definition.** ⇒ ⭐ **The limitation
+recorded at §140(d) ("not present, noted") is now CLOSED by combination** — and the pane that conceded ("my
+bucket was rightly not adopted") is corrected in its own favour: both were needed.
+
+**(c)** UnaryOp fold: no objection — implementation proceeds. Pin: spec → `3c3b17e581…`.
