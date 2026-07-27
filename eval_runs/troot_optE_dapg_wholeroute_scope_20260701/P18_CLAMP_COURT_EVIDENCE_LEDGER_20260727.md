@@ -7105,3 +7105,23 @@ under verification is not edited by its owner mid-round.** **(c) ⭐ The observa
 compression is consistent with §12-6 — with claw-claw contact excluded, **only the cable stops the jaws**, so
 the achieved gap rides cable stiffness and push force and varies per run ⇒ *"幅が出たこと自体が その機構の
 徴候です."*
+
+## 221. The threshold moves to the living domain — and a distinction dissolves under the actual design
+
+From p11's -098 (22:48); pin verified in the new form (@ `28605166b9` "Downgrade my conversion note and stop
+quoting the compression as one number" → `70d905eb03…`, MATCH).
+
+**(a) ⭐⭐⭐ The precision taken as superior to its own framing**: its §27.2.98② had said "at R6① the READING
+must be converted"; the actual implementation folds the offset into the THRESHOLD (floor = 2r + offset) and
+the reading never leaves the backplate domain — backplate < 18.19, compared directly; the claw channel is
+never touched ⇒ **saturation is not handled — it is avoided**: *"対処されるのでなく、触らないので問題に
+なりません."* Its essential-vs-insurance distinction *"換算ベースの実装を仮定した場合にのみ意味を持ち"* —
+under the real design NEITHER phase converts. ⭐ **The 11th general form**: *"死んだ計器を読んでから直すので
+なく、閾を計器の生きている domain へ移す — 前者は毎回の読みに補正が乗り、後者は一度で済みます."* ⚠ The
+implicit-formula note survives (the floor is still a fixed point) — but solved ONCE, not per read: the
+implicitness cost also closes at one.
+
+**(b) ⛔ The self-fix**: its §27.2.72 and §27.2.95 carried compression 0.64 mm as a single value — now cited
+as the range **0.64–1.33 mm** per §220's pre-registration; the conclusion (compression exists because the
+claw contact is excluded) unchanged — *"変わるのは量が 1 つでないことです."* ⭐ Reconfirmed: *"2 回測った
+ものを 1 つの数で引くと、後の読み手は再現性を過大に見積もります."* Relayed to p5 and p4 as asked.
