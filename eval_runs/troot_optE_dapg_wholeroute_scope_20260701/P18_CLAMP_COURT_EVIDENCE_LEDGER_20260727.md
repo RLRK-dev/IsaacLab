@@ -5256,3 +5256,33 @@ aligns the code **before** anyone classifies; the corrected list (~23) is then a
 stronger form** — definition itself fails); `import *` rejected with the true reason named; SOURCED separates
 assignment from foreign-import of owned names (the 3 flagged are the latter — worth catching); `strict=False`
 properly labelled. Bank @ `a43e9bb5b5`.
+
+## 140. Three answers, one symmetrical withdrawal, and the hole the rule cannot see
+
+**(a) ⛔ p5 withdraws its own promotion** of p11's conjecture — *"I promoted another's estimate because my data
+agreed with it: the same defect, vanity pointing the other way."* ⭐ Its maxim: **before promoting, write one test
+that could kill it.** (The corrected two-arm mechanism and the full-open signature adopted; its own observation —
+geometry as the full-open limit — survives on the correct mechanism's side.)
+
+**(b) ⭐⭐ Hole ③ A = CLOSED** (ancestor-chain scan for `If`/`IfExp`). The "narrow exposure" acceptance refused
+with the day's sharpest scoping rule: ⭐⭐ **"narrow" is measured against the forms this codebase actually uses,
+not the space of possible forms** — the missed form is the semantic twin of the producer's real `_clip_collide`
+gate, so a conditionality-blind guard **cannot verify the very claim it was built on.** False positives cost a
+one-line hoist — cheaper than relaxing fail-closed.
+
+**(c) ⭐⭐ FLOAT_Z stays 0 — the inequality is a SYMPTOM, not a constraint.** The >11.6 figure assumes release at
+seat height; ruling §10-1 says the gripper is never there — release happens at escape height 50.6, lowest point
+table+30. ⇒ ⛔ **If the process still descends to Z_SEAT, §10-1/§12 are unimplemented — fix the PROCESS, not the
+parameter.** (Same for the STEP 7/15 push-in.) Only measured arm reach (next run) can justify raising it.
+
+**(d) ⭐ The 49 classified by reading expressions, not names** (spec §6.4d): ⛔⛔ **two more transcriptions
+found** — `CLAW_OFFSET` (a literal difference of `task_config.py:320/:321`) and `EFFORT`/`LIMS` (robot-spec
+literal arrays) → **Tier A imports**; the literal rule refined with UNITS: *literals in mult/div/repeat/subscript
+with OWNED/DERIVED leaves are dimensionless ⇒ DERIVED; literals in add/sub carry units ⇒ cell definition*
+(RX_MID's 0.5 passes; `Z_HOME = TABLE_TOP + 0.2` is caught). Remaining hole recorded, not present: ratio-smuggling.
+
+**(e) ⛔⛔ The most important find — the rule's blind spot is where the geometry LIVES**: the cell is built from
+an **f-string template**, and AST literal checks cannot see numbers inside strings ⇒ `size="0.016 0.024 0.02"`
+written directly passes everything. ⇒ ⭐⭐ **New rule: template attribute values (`size=`/`pos=`/`fromto=`/
+`quat=`) must consist of `{}` substitutions and whitespace only — one bare number fails.** One regex; geometry is
+forced through owned names. Pins: clip doc `d7d7305d89…` / spec `0227c1c66b…`.
