@@ -4167,3 +4167,31 @@ No brief correction needed; the note prevents the wrong inference later.
 
 ⛔ Unchanged: gate CLOSED, both panes waiting, p12 issues no implementation work, and **its two pending Rs items do
 not unlock impl**. ⇒ **All three readback loops are closed** (p4, p0, p12).
+
+## 90. The constants spec is delivered — and "copy from the right script" is measured impossible
+
+`w2:p5` delivered `P5_UR15_CELL_CONSTANTS_SPEC_20260727.md` (sha256 `3911551c6d07…`, 114 lines, untracked —
+bank requested of p4). Measured by **AST over module-level assignments in all 12 files, not grep**: **21
+conflicting constants, 10 physics-changing.**
+
+**(a) ⛔⛔ Neither script family is the right one.** `CABLE_R`: authority 0.004 (`task_config.py:137`) — cell/route
+carry **0.005**, steps\* carry 0.004. `CABLE_N`: authority 40 (`:135`) — cell/route right, **steps\* carry 32**.
+⇒ ⭐⭐ **One family errs on radius, the other on link count ⇒ single-sourcing is the only repair that exists.**
+⚠ **The shapes differ too**: six constants exist only in the steps family ⇒ "the cell" is two different cells.
+
+**(b) ⚠⚠ A Ø10 cable is latent in the cell/route family** (0.005 radius). Today's window/band arithmetic is all
+Ø8. ⭐ **Scope that protects today's verdicts**: the judged driver is steps-family with `CABLE_R = 0.004`
+(`ur15_steps_reaim.py:47`, read directly earlier) ⇒ **the runs Rs judged were Ø8; nothing retracts.** The hazard
+is forward-looking: any cell/route-based run would quietly change the cable.
+
+**(c) ⭐⭐ The SSOT segment length halves the instrument floor.** `task_config.py:135` verbatim: 40 segments ×
+**15 mm**; ⛔ every p4 driver uses **30 mm** ⇒ nearest-link snapping quantization ±15 instead of **±7.5**.
+⚠ Not a drop-in fix — total length changes (600 vs 960 mm), so segment length pairs with cell dimensions.
+⭐ p5 explicitly does not say "fix it"; it says decide it as a pair.
+
+**(d) The contract**: Tier A (authoritative source exists) = **read, never write** — with a **sha-collation guard**
+(⛔ copying without a guard is exactly today's state); Tier B (cell-specific) = spec holds it with section numbers;
+Tier C (per-run) = not unified. ⛔ CLAMP/OPEN/HALF and PD gains **not frozen** (measurement / arm-control courts).
+⭐ Guard = **AST detection of in-driver redefinition** — grep would miss (today's own evidence: p11's five false
+zeros, pB's attribute-order miss). ⭐ p5 pre-declared its weak spot: TABLE_HX/HY chosen on "later cell" grounds
+alone — p4 may supersede with evidence.
