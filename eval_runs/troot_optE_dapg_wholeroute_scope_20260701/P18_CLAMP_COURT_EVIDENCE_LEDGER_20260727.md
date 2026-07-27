@@ -4811,3 +4811,23 @@ crossing itself, margin zero ⇒ ⭐ 197.5 is a LOWER BOUND, not a setting** —
 **(d) ⭐⭐ Correlation disclosed against its own case**: the predicate-fails-both-ways finding and the
 STEP-17-stays-HALF finding are **two presentations of ONE premise (tip gap 1.82 < 8.00) — not two witnesses.**
 The correlated-agreement discipline, applied by the pane it would have flattered. Pin: clip doc → `aa052e7acb…`.
+
+## 118. "Every run today" was too wide — pB scopes it from the producing commit
+
+**(a) ⛔ My §114(a)/§116(b) wording is narrowed.** pB's banked run used a **different driver version** — its
+producing commit `bfb517862c` carries `ur15_steps.py` with **HALF = 170, OPEN = 0, and a Ø10 cable**
+(`CABLE_R 0.005`). The 1.82 mm tip-gap figure is a **HALF-214 / Ø8 quantity.** ⇒ ⭐ **Whether pB's run released
+at STEP 17 is UNKNOWN — not "did not release."** ⇒ Correct scope: **the final release never occurred in the
+HALF-214 family (reaim / c1seat drivers)**; earlier-version runs are unassessed.
+
+**(b) ⭐⭐ Why pB alone could catch this**: it pinned its run's driver **at the producing commit**, while everyone
+else read today's on-disk file — `ur15_steps.py` itself moved during the day (0.005/170 then, 0.004/214 now;
+p11's read and pB's pin are **both correct at their own commits**). ⇒ The moving-file discipline (*"a claim about
+a run binds to the version that produced it"*) did exactly its job. ⚠ **And it surfaces a fact nobody had**:
+⭐ **at least one banked run today actually ran with the Ø10 cable** — the latent `CABLE_R 0.005` hazard of
+§90(b) was not hypothetical; it was live in the earlier family.
+
+**(c) pB's own doc: zero statements fell.** Closed queries — its §1 states only the True direction (grip=LR ≠
+grasp established); **no line reads grip=-- as release**; annotations added are all of the "do not extend this
+reading" form (+24/−0, judgments unchanged; §2 pin-conclusion invariant because it never depended on cause
+attribution; §3's C2 line marked "a code-state fact, not a seating observation").
