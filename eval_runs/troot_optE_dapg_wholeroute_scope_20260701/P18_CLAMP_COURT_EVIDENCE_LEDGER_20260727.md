@@ -1295,3 +1295,67 @@ p12's own rule, and it caught this one.
 table above — ⛔ **p5 marks that as its own unverified guess** and measurable (are there waypoints below the
 table?). ⇒ ⛔ p5 will not rewrite the path until the distance measurement establishes whether penetration is
 actually happening: **if it is not, this is adding a constraint, not changing a design.**
+
+## 14. ⭐⭐⭐ "The sim permits what hardware forbids" is a class — and the production env shares it by design
+
+`w2:p11` generalised the day's three instances rather than treating them as separate accidents:
+
+| # | disabled pair | what it permits |
+|---|---|---|
+| ① | pad-pair `exclude` (`2f85_koshape.xml:176`) | claws interpenetrate ⇒ **backplates reach the cable** (the compression clamp) |
+| ② | `stem` / `foot` `contype=0` | **the arm passes through the yoke column** |
+| ③ | `floor` `contype=0` | the arm passes through the floor (⛔ unexamined) |
+
+⇒ ⭐⭐⭐ **Rule adopted, replacing the single-item tag: if a verdict's validity depends on a
+collision-disabled pair not interfering, that verdict is non-conservative for transfer.**
+⇒ ⭐⭐ And it is **enumerable by closed query**: (1) list every collision-disabled pair (`contype`/`conaffinity`
+zero, plus `exclude` body pairs); (2) for each, ask whether any verdict depends on it; (3) tag those.
+⛔ **Do not stop at "repair what was found"** — that is how ② and ③ survived ① all day.
+
+### 14a. ⛔⛔ The same blind spot is in the production env, and it is deliberate — p18 verified it
+
+`w2:p0` found it; p18 read `thread_isaac_lab/envs/newton_skill_env_base.py:1574-1583` directly. Comment, verbatim:
+
+> `# A-1 VISIBLE-only pass (probe-proven, F4c): clear COLLIDE on non-pad arm shapes (→ MuJoCo`
+> `# contype=conaffinity=0); KEEP COLLIDE on the gripper PAD geoms (cable grasp).`
+
+and the code does exactly that — `if "pad" not in lbl.lower(): proto.shape_flags[si] = VISIBLE`.
+
+⇒ ⭐⭐ **Every arm shape whose label lacks `pad` has collision cleared in the production env too.** ⇒ **Arm-to-
+structure penetration generates no contacts there either** ⇒ ⛔ **§12's conclusion is not confined to p4's
+driver.** Any check that looks for arm/structure interference **through contacts** is blind on the production
+path as well — ⭐ and this is an **explicit design decision, not an oversight** (it is even labelled
+*probe-proven*).
+⛔ **p0 does not call the design wrong, and neither do I.** The claim is narrower and sharper: **the detector
+everyone instinctively reaches for does not exist on that path.**
+⚠ Note the selection is the **same substring rule** as `:1392` — one rule in two places. ⚠ p0's reservation
+kept: `shape_label` is a Newton label and need not equal the MuJoCo geom name, so **whether the claws fall in
+that set is unverified** — the shared rule is the point, not the specific membership.
+
+⇒ ⭐ **And the instrument this court spent the whole day characterising is the one tool that sees it:**
+`mj_geomDistance` is independent of the contact filter (established by p5's probe, corroborated by p0's contract
+read) ⇒ **it measures distance where collision is off, and penetration reads negative** ⇒ the proposed
+arm-to-column sweep works **despite** the flags, and for the same reason it works on the production path too.
+
+### 14b. `w2:p11` reports two of its own items hit by the class
+
+**(a) Its singularity work assumed a physically valid path.** ⇒ If the arm penetrates the column, the trajectory
+it would measure σ_min along **cannot be executed on hardware** ⇒ ⭐ **singularity correction and column
+avoidance are two constraints on one path and must not be solved separately.**
+⇒ ⚠⚠ And the option p11 judged best — free roll about the closing axis, used as a nullspace objective — supplies
+**exactly one** redundant DoF on a 6-axis arm ⇒ ⛔ **the same single DoF would have to serve both raising σ_min
+and clearing the column** ⇒ they may not be simultaneously satisfiable. ⭐ p11 states the budget **before**
+anyone picks: *there is one.*
+
+**(b) Its GATED item's evidence has a checkable hole.** The yoke geometry (spread 0.40 m / tilt 20°) rests on
+p4's finding that at 0.22 m / 45° the **two arms** interfere (`P4_UR15_HANDOVER_TO_IMPL_CHAIN_20260727.md:73`) —
+**arm-to-arm**. ⇒ ⛔ Could **arm-to-yoke** interference have entered that sweep's predicate at all? **If the
+predicate was contact-based, in principle no** — those cylinders generate no contacts. ⇒ ⭐ **"0.40 m / 20°
+works" may never have been tested against the yoke itself.** ⚠ p11 has not read whether the sweep was contact- or
+distance-based and **does not assert it** — it registers the hole in its **own** item's evidence.
+
+⭐ `w2:p5` appended to the banked design with **deletions = 0**, provable by `git diff --numstat` ⇒ no banked
+observation, verdict or caveat was altered; new sha `d8a1494d06ea4b8cee9d6dc81fc6a6fec900c1b1cd39be4a08065d59615e2765`
+(233 lines), re-frozen pending `w2:p4`'s bank. ⛔ It declines to design the detour while σ_min measurements are
+zero, and pre-states the invariant: **a detour must satisfy its condition over the whole path** — citing today's
+two endpoint-only failures so the same error is not repeated in the fix.
