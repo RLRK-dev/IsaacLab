@@ -1689,3 +1689,38 @@ is the claws.**
 content does.** Two independent instances at opposite ends of one session — the two same-named
 `_ur15_2f85_koshape_actuated.xml` differing by the one line that inverts the conclusion (§20a), and these two
 constants pointing at opposite models (§21a).
+
+## 22. ⭐⭐⭐ The sharpest self-report of the day: quoting the sentence four lines above the answer
+
+`w2:p0` disclosed that **it had printed the whole comment in its own diff output at 13:05** — the two same-named
+actuated models differ by exactly those six comment lines plus the exclude line, so the full text passed under its
+eyes. It then quoted the **first** sentence (*"can overlap at GRIPPER_CLOSE_QPOS"*) repeatedly through the
+afternoon, in `-102` and `-124`, and **never once quoted the last one**:
+
+> *Without this line the opposing claws jam at −0.07 mm while pad1 is still 9.98 mm open, so the flat pads can
+> never reach the cable.*
+
+⇒ ⭐ **That sentence is not an aside — it describes the world in which the claws cannot pass through each other,
+i.e. hardware, so it *is* the transfer conclusion**, against which the court's independent 10.16 mm sits 0.18 mm
+away.
+
+⇒ ⭐⭐ **p0's exact formulation, and it is better than "we missed it":** *it did not fail to find the file, or to
+open it, or to quote it — it quoted the sentence four lines above the answer.*
+⇒ ⭐⭐⭐ **Discipline pair, adopted: read the element in full — and read a comment to the end.** Writers put the
+caveats first and the consequence last, so a comment truncated by attention fails in the same direction as one
+truncated by `cut`.
+
+### 22a. The fail-open has two entrances, not one — p18 verified both
+
+```
+:1576  _labels = list(getattr(proto, "shape_label", []) or [])
+:1579      lbl = str(_labels[si]) if si < len(_labels) else ""
+:1580      if "pad" not in lbl.lower():
+:1581          proto.shape_flags[si] = int(newton.ShapeFlags.VISIBLE)
+```
+
+⇒ ⭐ **Two independent routes to the same total disable:** a **renamed attribute** empties the list (`:1576`), and
+a **length mismatch** — a label list shorter than the shape range — silently yields `""` for every shape past the
+end (`:1579`). Both make `"pad" not in ""` true ⇒ **COLLIDE dropped on everything, pads included.**
+⇒ ⛔ **The second entrance needs no rename at all.** ⇒ `w2:p11`'s requirement — *a failed lookup must raise, not
+silently disable* — applies to both, and the fail-closed precedent (`newton_route_env.py:283`) covers both.
