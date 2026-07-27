@@ -34,3 +34,7 @@ COORD2
 IMPL-BUILDER
 IMPL-VERIFIER
 ARM-CONTROL-DESIGN
+# Added 2026-07-27 (Rs approved). Roles assigned the same day; unlike the
+# three above, these have no role brief on disk yet.
+IMPL-BUILDER2
+IMPL-VERIFIER2
