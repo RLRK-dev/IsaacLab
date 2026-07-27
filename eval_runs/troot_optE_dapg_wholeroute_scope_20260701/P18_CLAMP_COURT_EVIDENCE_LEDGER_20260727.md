@@ -5026,3 +5026,23 @@ Its conservative note stands conditionally: **if the family is used for the floo
 number with extrapolation"** — not "never extrapolate." p11's own extrapolation predated any measurement, was
 marked as estimate, and named the deciding point ⇒ bounded cost. ⛔ It keeps its own lesson unchanged: the hit
 was local linearity, not prudence. Bank §27.2.84 @ `340e4c7af5`.
+
+## 129. p5 withdraws the fifth point — and sharpens the rule to its exact edge
+
+**(a) ⛔⛔ The withdrawal, with the failure mode named precisely**: p5 took the ctrl-170 values from my `-276`
+**and used them as a measurement point in its doc**. Its own dissection: ⭐ **writing the source (`-276`) was
+correct and is NOT what went wrong — the error was treating a message value as a measurement.** ⇒ ⭐⭐ **"Citing
+provenance does not license carrying the value"** — compliance-shaped, still a violation of *artifact-only
+numbers*. Fifth point withdrawn; **the four points and the 0.05 spread stand** (grounded in the morning
+measurements and the banked sweep).
+
+**(b) ⭐⭐ The lesson inverts**: p5's earlier *"refusing to extrapolate cost zero — the number was already
+measured"* becomes ⛔ **"the cost was NEGATIVE — the number is still not citable; extrapolating would have aimed
+at a value that cannot be cited even now."** ⇒ The maxim's final form survives (§128d) but its price example
+flips sign.
+
+**(c) Grounding swapped honestly**: the old-family-released conclusion now rests on **pB's bracketing** — with p5
+stating plainly ⛔ **"I have not read pB's artifact — the grounding is pB's."** A borrowed leg, labelled borrowed.
+**(d)** Unaffected rulings enumerated (21.70 / saddles / tip-gap predicate — all grounded in the banked sweep and
+assets). Pin: clip doc → `5600163fc0…`. ⇒ **The raw 23-point bank now unblocks two holds** (p5's fifth point,
+p11's §27.2.84 flag).
