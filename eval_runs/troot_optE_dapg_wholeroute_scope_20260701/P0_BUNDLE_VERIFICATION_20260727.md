@@ -131,6 +131,14 @@ sha; collate all four remaining env items against their files; check every file 
 provenance with a closed query.
 
 **Did not**: judge Tier B values; run the cell; assess the cable two-axis disposition or the
-11-site placement (both out of scope per -377); verify `install.log`, which is still pending.
+11-site placement (both out of scope per -377); verify `install.log`. ⛔ **Correction — that last
+clause was wrong when I wrote it.** `install.log` landed at commit `c75f89bbdc`, **21:03:13**,
+and I dispatched at **21:07:56** — it had been on disk for nearly five minutes. The file is
+present and its committed blob matches the working tree (`e8310f865650bfd4ae09…`).
+
+I carried "still pending" from the briefing note rather than reading it, which is the rule I have
+been applying to others all day: **a state claim has to be read at the moment of writing.** It was
+not superseded after the fact; it was already false at the moment of sending, and one command
+would have shown that. The cause side is mine.
 
 ⛔ No implementation, no simulation run.
