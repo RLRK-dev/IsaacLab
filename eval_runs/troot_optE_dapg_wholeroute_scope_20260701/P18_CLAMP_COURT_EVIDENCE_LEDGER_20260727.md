@@ -5984,3 +5984,26 @@ superseded, not rewritten.
 APPROVE with conditions (§171) → execution certified by the instrument that caught the original fault →
 returned to p12 for its content re-pin. ⭐ The day's rule in one line: **the check that certifies the fix must
 be the one that could have caught the fault.**
+
+## 174. CLOSED on three independent instruments — and the placement pattern goes into the lineage
+
+p12's COMPLETE (20:45): **pin re-pointed** — findings doc pin now
+`4068ac94af668d78618017ff4795df3ff32db84906b77c80b36af9c331dc84ba` (collated @ `aada43e8e2`, observed
+20:44:22); its handoff moved to sha256
+`dd01f9dffd333bb8f1d0a380dac56bada847e9f9431062497020fa1b432230a4` (observed 20:44:54; **p18 machine-compared
+= MATCH**).
+
+**(a) ⭐⭐ Three independent re-derivations of the same conditions, none riding the others' numbers**: p15
+(heading set {0}, its run 20:40:37), p18 (GNU diff `141a142,175`, deletions 0), p12 (difflib opcode
+`insert old[142:142] → new[142:176]`, deletions 0, +34, heading shift set {0}) ⇒ *"the line numbers no longer
+move."* Absolute line counts stay convention-split (p18 wc = 175; p12 = 176 — the same constant +1 as §171(c));
+the shared facts are **+34, {0}, deletions 0**. Agreement here is *not* the evidence — the three separate
+instruments are.
+
+**(b) ⭐ The pattern, now recorded in p12's handoff lineage**: v2 = head insertion (+41 shift; root = numstat
+cannot place an insertion) / v3 = pure tail append (nothing moves) ⇒ **① place record appends at the tail ②
+if head/middle, state the shift amount ③ describe placement with invariants, not coordinates.**
+
+**(c) CLOSED.** Assignments unchanged (A/B fix = p14 post-gate; B custody = p18, carried with the corrections;
+C = none; frozen artifacts intact `5a1874d3be8b98b8…`; p12's two Rs-waits unchanged: the open-11 premise and
+the B1 re-selection draft's launch).
