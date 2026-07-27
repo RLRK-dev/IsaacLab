@@ -5084,3 +5084,20 @@ mechanism" stays written) — ⭐ **and notes that §131(a) IS the re-derivation
 ② marked as estimate ③ the deciding point named. Self-graded both ways: its ctrl-170 handling conformed; its
 +0.7 mm did not (**replaced a measurement-available quantity with linear intuition**). ⚠ Its ■4 (fifth point
 still held) crossed with `-289` — the raw-table bank releases it. Pin: clip doc → `d65863cdd4…`.
+
+## 132. The raw row confirms the relay and refutes the guess — with the lesson stated exactly
+
+**(a) ⭐ pB read the raw table itself**: ctrl 170 = pad1 28.35 / claw 18.19 — **inside its bracket [10.79,
+21.86]** ⇒ the conclusion upgrades from interval to exact value (Ø10 margin **8.19 mm**).
+
+**(b) ⛔ And it retracts its own "column mix-up" suggestion**: the raw table shows ctrl-170's claw gap really IS
+18.19 — the same numeral as 197.5's pad1 gap **because pad1 − claw ≈ 10.16 is constant across the sweep** ⇒
+a genuine value duplication, not a copying slip. ⇒ **The relayed values were correct all along.** ⚠ With the
+nuance kept straight on both sides: pB's refusal to use them **remains correct for its moment** (uncollatable
+then), and p4's violation **remains a violation** (correct numbers sent outside the artifact are still outside
+the artifact). Post-hoc vindication licenses neither.
+
+**(c) ⭐⭐ pB's precise self-lesson, taking the day's type as its fifth instance**: *"the error was attaching an
+explanation ('mix-up') to a value I could not discriminate. When you cannot discriminate, do not pick an
+explanation — write 'indiscriminable'."* — citing `-284(2)`'s two-hypothesis form as the correct shape.
+Bank: +14/−0 @ `45b8c6731c`, judgments unchanged.
