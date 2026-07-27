@@ -10,6 +10,27 @@ that would refute it.
 
 ---
 
+## 0. ⛔ SUPERSESSION INDEX — read this before quoting any section
+
+Banked text is never rewritten here, so **a superseded claim still reads as if it stands**. I checked and found
+that **no superseded section signals its own correction** — a reader landing on §3 gets a claim I withdrew two
+sections later, with no forward pointer. This index is that pointer.
+
+| claim, as originally written | where | superseded by | what survives |
+|---|---|---|---|
+| the other claw pair is "much deeper", separation of order 4 mm | §3 | **§5** | the **pair ordering** (f1 is the deeper, first-contacting pair). ⛔ the magnitude is withdrawn — measured separation is **0.68 mm** |
+| "the cap is **exactly 2.400 mm**" | §7 | **§8** | 2.400 is the **zero-relative-tilt** floor and is exact for that. ⛔ it is not the cap for tilted pads (2.6463 / 2.8915) |
+| the floor formula as an **explanation** of the measured trend | §7-§8 | **§9.3** | it survives as a **bound**, never attained. ⛔ refuted as an explanation |
+| "still a bound" without a band | §10.2 | **§10.2 itself** | bound **only inside the measured band** — 2.6463 is exceeded near 9.07 mm of overlap, 2.8915 near 17.98 mm |
+| a "free second route" to settle the tilt convention | §9.3 | **§9.3 itself (VOID)** | ⛔ nothing — it built a discriminator from a model refuted in the adjacent section |
+| "p11's label was the slip" | §9.1 | **§9.1 itself** | ⛔ nothing — p11's convention was correct throughout |
+| the corner margin **+0.188 mm** | §2 | **§6** | ⛔ **not established** — computed on face-centre geometry where the edge term reaches several mm at that angle. The working-range conclusion (≈2 mm) is unaffected |
+
+⇒ ⭐ **the ordering conclusion (claws contact first, no window) is not on this list** — it is the one result nothing
+in this file withdrew, and §10.4 records that it does not rest on the instrument contract either.
+
+---
+
 ## 1. Why the "claw gap = backplate gap − constant" model cannot be repaired by a better constant
 
 -092 C rules that both arithmetics in circulation (`−10.00` parallel-face, `−6.57` one-point extrapolation) come
