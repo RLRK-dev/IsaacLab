@@ -750,7 +750,49 @@ non-pad arm shapes have COLLIDE cleared across **both** arms (`mj_left_ss` is ta
 `mj_arm_se` after the second), so arm-to-arm and arm-to-structure interpenetration still generates no contact.
 ⭐ **the two facts sit together:** the gripper's working surfaces collide; the arms do not.
 
-## 19. Scope
+## 19. -149 (3): the FK/physics split is exactly what my harness's identity legs guard
+
+-149 (3) reports that the FK/IK model loads the **un-clawed** asset while physics loads the clawed one, so
+clearance and interference checks done on the FK model **cannot see the claws**. Verified at source:
+
+| | asset | claws |
+|---|---|---|
+| `test_newton_clip_routing.py:156` `ROBOTIQ_XML` | `2f85.xml` | ⛔ **absent** — this is the FK/IK model |
+| `:161` `ROBOTIQ_STRIPPED_XML` | `2f85_koshape.xml` | ⭐ **present** — this is the physics build |
+
+⇒ ⭐ **two assets, two models, and the 5.00 mm claw protrusion exists in only one of them.**
+
+### 19.1 ⭐⭐⭐ This is the concrete failure the measurement harness was built to prevent
+
+`arm_control_measurement_harness.py`, from its own header:
+
+```
+:23   * ``env._fk_model`` (the IK-only robot model) is explicitly excluded from
+:24     measurement, and is additionally used as the AC-9 negative control.
+:35   * **I-3** measured ``Model`` **is not** ``env._fk_model`` (``newton_route_env.py:690``)
+:261      fk_model: Any | None  # env._fk_model -- EXCLUDED from measurement; AC-9 control
+```
+
+⇒ ⭐⭐ the harness's structural rule — *measure the `Model` the production env handed to `SolverMuJoCo`, never
+`env._fk_model`* — was not abstract hygiene. **AC-9 requires the as-built to pass and the FK model to fail on at
+least one leg**, i.e. it asserts that these two models are different *and that the difference is detectable*.
+-149 (3) is that difference, made concrete: **the claws.**
+
+⇒ ⭐ so for p11's path and clearance work the rule falls out directly: **run those checks against the physics
+model.** A clearance measured on the FK model omits the claws silently — no error, no warning, just 5.00 mm per
+side of geometry that is not there.
+
+### 19.2 ⚠ And the naming trap in -149 (2) is the day's first finding again
+
+`ROBOTIQ_STRIPPED_XML` **is the clawed asset**; `ROBOTIQ_XML` is the un-clawed one. "STRIPPED" names the
+**tendon** stripping, not the claws. ⇒ reading the constant's name gives exactly the **wrong** model.
+
+⇒ ⭐⭐ this is the same rule as my first measurement of the day (§4.1 of the bound artifact): two files named
+`_ur15_2f85_koshape_actuated.xml`, differing in the one line that reverses the conclusion, distinguishable only by
+content. **The name does not identify the model. Only the content does.** Two independent instances, at opposite
+ends of one session.
+
+## 20. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
