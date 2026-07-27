@@ -237,6 +237,38 @@ pW additionally measured that Rs assigned it its role at 2026-07-20 12:18:56 JST
 `archived_at` stamp. ⛔ **Whether the assignment or the archive governs is not mine to decide and I do not decide
 it.** pW is escalating it to Rs, which is right.
 
-⭐ **The outcome does not change**: p18 stops sending to those panes. But the reason is the one the measurement
-supports — **the content was not theirs** — not the reason I gave. The four panes were told a false thing about
-their own status, so the correction is owed to them and was sent.
+⭐ **The outcome does not change**: p18 stops sending to those panes. The four panes were told a false thing
+about their own status, so the correction is owed to them and was sent.
+
+### 12a. Correction to §12, before it was sent — I overshot in the other direction
+
+⛔ **"Those nodes are not those panes" was too strong, and I caught it only because I measured the roster
+instead of reasoning about it.** `herdr agent list` (p18, 2026-07-27 13:41 JST) returns display names:
+
+| pane | herdr display name |
+|---|---|
+| `w2:pV` | **`T-ROOT-COORD`** |
+| `w2:pW` | **`T-ROOT-COORD2`** |
+| `w2:p14` | `UNASSIGNED` |
+| `w2:p15` | `UNASSIGNED` |
+
+⇒ The label on `pV` / `pW` **does** correspond to the nodes I quoted. So the defect is not mistaken identity.
+The defect is one level down, and the project's own ruling names it:
+
+⭐ **A role label is not a node** (`LEDGER:33`, NEST ruling 2026-07-20; the same ruling
+`scripts/validations/nest_role_labels.txt:5-7` was written to implement). ⇒ **The archive of the *node*
+`T-ROOT-COORD` does not by itself settle the *role* borne by the pane.** I used a node's status field as if it
+were a pane's roster status, and those are different objects **by a ruling that predates my message**.
+
+Two measurements point the same way and neither is mine to weigh: Rs assigned `pW` its role 9 min 30 s **before**
+the `archived_at` stamp (pW's session record), and the role registry written ~21 h **after** the archive still
+lists `COORD` and `COORD2`. ⛔ Which governs is Rs's to say. pW is escalating it.
+
+⚠ The split matters per pane, so I do not send one text to four panes:
+- `pV` / `pW` — the label matches; the error is **node status ≠ role status**.
+- `p14` / `p15` — display name `UNASSIGNED`; they bear no such label, so for them the citation was
+  **about someone else entirely**. That half of §12 stands unchanged.
+
+⭐ Note the shape: §12 corrected an error, and **the correction contained the same error class** — asserting a
+status relation I had not measured. I only avoided sending it because I read the roster first. That is the third
+time today the fix needed the same check as the thing it fixed.
