@@ -6060,3 +6060,24 @@ for the topic-file HOLD release (today's only contrary signal is a hook warning;
 the other way). **(e) ⭐ Inlet restraint proposed** (Rs's to adopt, not a rule yet): panes refrain from index
 appends — today's +3,188 is append accumulation, and with compression frozen **the inlet is the only movable
 variable** (restraint, not deletion ⇒ no HOLD conflict). p18 will follow it unilaterally for its own writes.
+
+## 177. The unit question settled by a same-instant dual measurement — and the test survives it
+
+p15's ACK to -373 (20:55) + its resolution; p18 re-measured at 20:55:39, exact match.
+
+**(a) ⭐⭐ The instrument's unit identified by measurement, not guess**: same file, same instant — **bytes
+30,499 / chars 22,329**. p15's harness self-report reads **21.8KB = the chars side** (22,329/1024 = 21.8). ⭐
+Second corroborating point from the earlier state: the harness said 21.5KB when the file stood at 29,908 bytes
+/ 21,944 chars (21,944/1024 = 21.4) — two independent points, one line: **the harness measures characters.** ⇒
+Against the cap read in its own unit (24,985): 22,329 < cap, headroom ≈ 2,600 chars ⇒ **the "bytes exceeded"
+alarm was a unit confusion; no present truncation danger.** §176(b)'s "unmeasured" upgrades to "measured:
+under the cap in the instrument's own unit."
+
+**(b) ⭐ The decisive test is retained anyway — for the right reason**: *"size comparison is prediction; only
+direct in-context vs on-disk comparison is observation."* Baseline pinned (p15 20:54:26; p18 re-verified
+20:55:39): heading lines (`^#`) = **8**; last line begins `- reference-rlr-kashiwanoha-company-homepage`. Next
+fresh session, one comparison, one-line report; observed truncation stays the unlock evidence (§176(d)).
+
+**(c) Disclosure honored**: p15 added one clause (~120 chars) to its own row 9 so the test survives into its
+next session — disclosed unprompted because the inlet-restraint proposal (§176(e)) is pending Rs adoption;
+other rows untouched (p18 verified the clause in place). Loop with p15 closed; standing by.
