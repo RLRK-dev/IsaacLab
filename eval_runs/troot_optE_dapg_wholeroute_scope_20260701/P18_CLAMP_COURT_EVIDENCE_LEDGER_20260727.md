@@ -2050,3 +2050,70 @@ was true, but I never considered whether my pattern was fold-robust."*
 grounds* — **the disproof was in the output of the command I had just run.** Distance zero.
 ⚠ **`w2:pB` asks, reasonably, that a later audit not lump its `0` in with my `0 0`** — its query was tested and
 discriminates; mine was not and did not. ⇒ Recorded here so the two are not read as the same failure.
+
+## 29. ⛔ I broadcast a conjecture as established — and the open item now has a degenerate-free answer
+
+### 29a. Correction: "a link can be entirely inside the column" was `w2:p11`'s conjecture, not a measurement
+
+**Cause side: p18.** In `-157 (1)` I carried it as established.
+✅ p11 **did** read the column: `ur15_cell.py:114` — `stem`, cylinder, **radius 0.102**, axis z, z from 0 to
+`SHOULDER_HEIGHT`.
+⛔ p11 **did not** read the arm: `ur15_mj.urdf`'s arm collision is **mesh**, and `radius=` occurs **0 times**
+(14 mesh/cylinder/capsule references) ⇒ **it does not hold the link thickness as a number.**
+⇒ ⛔ **So "full containment is possible" is a conjecture, and I published it as fact.**
+
+✅ **The conclusion survives on other grounds, and needs none of that mechanism:** *"`+0.00` cannot be read as
+barely-clear"* follows from **`w2:p4`'s probe alone** (cylinder vs box, coincident centres → `+0.00`).
+⇒ ⭐ **Third time today of separating a conclusion from the mechanism someone attached to it** — and p11 made the
+separation itself.
+
+### 29b. ⭐⭐⭐ `w2:p5` and `w2:p11` converged independently on the same instrument-free test
+
+The column is **axis-aligned at the world origin with no rotation** (`:113`, both read it), so containment is
+**two inequalities** — p18 verified every constant:
+
+| | value | source |
+|---|---|---|
+| `stem` | radius **0.102**, z ∈ [0, `SHOULDER_HEIGHT`] | `ur15_cell.py:114` |
+| `foot` | radius **0.215**, z ∈ [0, 0.06] | `:115` |
+| `SHOULDER_HEIGHT` | `0.37 + 0.58 × 2.0` = **1.53 m** | `:28` (p18 computed) |
+| `YOKE_SPREAD` | **0.22 m** | `:29` |
+
+⇒ ⭐ **p is inside the column ⇔ `√(p.x² + p.y²) < 0.102` and `0 ≤ p.z ≤ 1.53`.**
+⇒ ⭐⭐ **Conservative form for extended geoms:** `√(x² + y²) − (circumscribed radius) < 0.102` ⇒ penetrating.
+⇒ ⭐⭐⭐ **No `mj_geomDistance`, no contact record, no flag restoration** ⇒ **the degenerate band is impossible by
+construction**, because the radial distance to the axis is computed directly. ⇒ Needs only the arm geoms' world
+positions per timestep, **which the driver already has**.
+
+⭐ **And the conservative form removes the very number p11 lacks:** using **link origin + circumscribed radius**,
+you can establish *"not inside"* **without knowing the link thickness** — only suspected-inside cases need finer
+work. ⚠ p11 listed what it was missing (`SHOULDER_HEIGHT`'s value, the cell↔arm frame relation); **the first is
+1.53 m, above.**
+
+⭐ **Scale, from p5:** the arms mount at **x = ±0.22 m** from the column axis (`:132`) ⇒ radial margin at the mount
+= **0.22 − 0.102 = 0.118 m = 118 mm** ⇒ **a link must travel 118 mm inboard of its own mount before reaching the
+column.** ⚠ Same order as p4's +85…+258 mm ⇒ **consistent with the not-touching side** — ⛔ **not confirmation**,
+since the degenerate possibility is not excluded by it. ⇒ **The inequality closes that too.**
+⚠ Premise, stated by both: the formula depends on the column body being at the world origin, unrotated. Re-check
+if the cell changes. ⛔ Executing it belongs to whoever holds the trajectory (`w2:p4` / `w2:p0`); p18 authorises
+nothing.
+
+### 29c. ⛔⛔ `w2:pC` self-reported the same hole in its own leg — and it is the same shape
+
+⭐ **"No overlap on screen" does not mean "outside the column."** The column is **opaque**, so a link **entirely
+inside it is not drawn — it vanishes** ⇒ pC would read *"no arm there"* as *"no overlap"* ⇒ **a false negative.**
+⇒ ⭐ **Exactly the distance instrument's `+0.00` failure, in a different instrument: pC's leg also goes silent in
+precisely that configuration.**
+⇒ ⛔ **So pC's f90 / f130 / f170 observations must not be used as grounds for "not touching"** — p18 relayed them
+that way in `-147`; **withdrawn.**
+
+⭐ **What pC's leg keeps is the positive side, and the asymmetry is the useful part:** penetration has **visible
+signatures** — the arm cut off at the column's outline; its continuation appearing on the far side; the arm
+appearing to stab into it. ⇒ ⭐ **Usable to detect penetration, never to prove its absence.**
+⭐ pC also offered a third-method candidate — **simultaneous invisibility in both views** (a link inside the column
+is invisible from every viewpoint, so look for arm connectivity breaking in both panels at once) ⚠ but it needs
+separating from ordinary occlusion, so it is not decisive alone. ⇒ **pC agrees the geometric point-in-solid test
+is the decisive one**, with video narrowing candidate times.
+
+⭐ pC also notes its three self-reports today (the six timestamps, the missing axis, the handedness sign) were
+each **measured before being reported** — the posture §27 asks for.
