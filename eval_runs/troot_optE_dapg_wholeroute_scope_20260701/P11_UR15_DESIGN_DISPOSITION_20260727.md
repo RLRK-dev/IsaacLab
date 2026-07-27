@@ -331,6 +331,9 @@ p4 が撤回: log の `pinC1` 発火を `seat=[0.15, 0.35, 0.87]` として「C1
   2. **駆動を明示的に足す。** ⛔ **production 経路では `<tendon>` を復活させない**（削除理由は Newton 側 `_init_tendons` の crash・11.4-3）。**banked コメントの方針どおり code 側で 4-bar を組む。**
 - ⇒ **既存の拘束は不変**: **p0 は移植 model を出発点にしない。**
 
+⭐ **精度（p18 `-025` 2 ＋ 私の再実測）:** banked の `<actuator>` block は **`:212-215`** で、その中の actuator は **`:213-214` の `fingers_actuator` ただ 1 本**（**`:37` の `<general biastype="affine"/>` は `:35` の `<default class="2f85">` 内の宣言であって actuator 実体ではない**）。⇒ **孤立 actuator を derived から外すと、その file の actuator は 0 本**になり、**production build の実測（gripper 関節に対応する actuator が 0 本）と一致する。** ⇒ runtime-neutral の主張はこの点でも整合する。
+⛔ **本裁定は §0#4 の Rs 裁定を先取りしない。** derived が **LOCK 幾何をそのまま継承する**形は Rs 判断を待つ間も安全側だが、**抵触可否そのものは未決のまま**である（11.3）。
+
 ### 12.4 軸の更新（**4 本**）— 格下げを漏らさず carry する
 
 | 軸 | 地位（**格下げ込み**） |
@@ -341,6 +344,29 @@ p4 が撤回: log の `pinC1` 発火を `seat=[0.15, 0.35, 0.87]` として「C1
 | **δ ケーブル剛性**（⭐ 新規） | p4 が**認可なく** `stiffness 0.02 → 0.12` / `damping 0.004 → 0.010` に上げたと申告。⛔ **因果は誰も主張していない**。⇒ **材料にはもう 1 本、統制されていない差分がある** |
 
 ⇒ ⭐⭐ **4 本になったことは、§11.5 の裁定（実験で交絡を解くより構成でやり直す）を強める。** 実験で帰属させる costs は **4 軸 × 各軸の「動いたことの確認」** に増える一方、**C-0（banked からの宣言差分として導出）は β を構成上消し、γ を 1 経路に定め、δ を宣言値に固定する**。⇒ **私は引き続き、旧材料への帰属を設計上の必須にしない。**
+
+### 12.5 ⛔ 12.3 の射程を直す — blocker は **基盤に付く**（p18 `MSG-P18-IMPLCHAIN-COMPILE-BLOCKER-IS-SUBSTRATE-SCOPED-20260727T1147JST-024`）
+
+**私が自分で確認した接地:** 生産経路は **同じ banked file を出発点にして現に build している** — `thread_isaac_lab/scripts/test_newton_clip_routing.py:161` `ROBOTIQ_STRIPPED_XML = os.path.join(_UR5E_ASSET, "robotiq_2f85", "2f85_koshape.xml")`、使用箇所 `thread_isaac_lab/envs/newton_skill_env_base.py:1564` / `:1570`（両腕とも `robotiq_xml=ROBOTIQ_STRIPPED_XML`）。
+
+⇒ **12.3 を次のとおり限定する:**
+- ⭐ **生産基盤（Newton `add_mjcf` ＋ SolverMuJoCo）では、「出発点は banked `2f85_koshape.xml`」は *既に成立している*。** ⇒ **12.3 の derived model ＋ 宣言差分は、この基盤では load 可能性のためには不要。**
+- ⛔ **12.3 の裁定が要るのは、素の MuJoCo を target 基盤にする場合だけ**（`:213` の `ValueError` は**この基盤限定の実測**）。
+- ⛔ **12.4 β 行の「測定不能」も言い過ぎ** ⇒ 正しくは **「現行の記録項目では未取得」**。生産基盤なら測定可能で、足りないのは **`mj_model` の exclude 対という記録項目**だけ（実装ゆえ authorization 待ち・11.6-3）。**11.6 もこの語で読む。**
+- ⚠ **「build できる」は「すべてが生き残る」ではない** — 同じ生産基盤でも `neq 0`（equality 消失）・`nu 12`（腕のみ）である。⇒ **file ≠ runtime の 2 例はそのまま有効**（12.3 の根拠は変わらない）。
+- ⚠ **p0 実測では gripper joint に driver 4 ＋ passive 12 が在る**（Newton 側の joint drive）。⛔ **ただし「driver が在る」ことは「指が閉じる」ことを意味しない** — 本 doc が 3 度繰り返している「在る ≠ 効く」と同型ゆえ、ここでも断定しない。
+
+### 12.6 ⭐⭐ 本当の未決 = **UR15 をどの基盤で建てるか**（私の court ＋ Rs）
+
+p0 の基盤は **UR5e**、p4 の移植 sim は **素の MuJoCo**、**UR15 の target 基盤は未定**。⇒ **12.5 のどの枝に入るかは、これが決まるまで決まらない。** ⚠ **これは §8.1 の P1（UR15 の生産 env が無い）と同じ軸である** — env を建てるとは、基盤を選ぶことだからである。
+
+⭐ **私の設計上の推奨（根拠つき。⛔ 決定は Rs — 基盤は env の前提であり私が確定しない）= 生産基盤（Newton / SolverMuJoCo）で建てる。**
+1. ⭐ **H 系列の量（`M` / `τ_bias` / 接触）は基盤依存**であり、設計が特徴づけるべきは **production が実際に回す物理**である。⇒ **測る基盤 = 走らせる基盤**。
+2. ⭐ **`:213` の blocker がそもそも発生しない**（生産経路は同 file を build 済 = 12.5）。
+3. ⛔ **基盤をまたいだ規約の混同は本 project の既知の再発事故**（`prohibited.md` の PhysX / Newton 混同禁止）。**測定だけ別基盤で行うと、その risk を新規に作る。**
+
+⚠ **反対側の考慮も書く:** 素の MuJoCo は起動が軽く反復が速い ⇒ **探索用の probe としては有用**。
+⇒ ⭐ **私の裁定 = probe と測定を分ける。** **probe は素の MuJoCo で可。⛔ ただし H 系列の測定と設計値の決定は生産基盤で行う。** ⇒ **probe の結果を設計値の根拠にしない**（本 doc §9 (2) と同じ理由 = 別条件の測定である）。
 
 ---
 **p11 custody = 2026-07-27 / ARM-CONTROL-DESIGN (`w2:p11`)。⛔ 本書の bank commit と sha256 は提出 message の宣言値が権威**（本書は自身の commit を pin できない）。
