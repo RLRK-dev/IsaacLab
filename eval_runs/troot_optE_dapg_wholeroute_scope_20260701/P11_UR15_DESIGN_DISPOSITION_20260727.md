@@ -107,5 +107,70 @@ SSOT = `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md` §DDR。
 - **結果** = 0.40 / 20° は **`p4_ur15_sim_20260727/ur15_steps.py:37` の定数と行内コメント 1 行としてのみ存在**。**掃引の script・入力範囲・出力表・seed は上記集合に無い。**
 - ⚠ **限界:** これは**上記集合についての不在**である。p4 の session ローカルに在る可能性は否定しない（同 doc は log を durable pin できないと明記している）。⇒ **在るなら pin つきで出してもらえば項目 1 の (a) は満たされる。**
 
+## 8. 追補 — H 系列の**順序と条件**（p18 `MSG-P18-P11-HSERIES-UPSTREAM-FACTS-20260727T1102JST-007` を受けて）
+
+初版（commit `cdbbe9f15029dba30e3a049fe7890c9e15c6e895`）は「再測定は要る」までしか書いていなかった。上流事実 3 点を受け、**順序と条件**をここで確定する。⛔ §2 / §3 / §4 の判断は変えていない（追加のみ）。
+
+**私が自分で再測した結果（p18 は (2)(3) を独立再測済・私はさらに自分で測った）:**
+
+| 事実 | 私の実測 | 帰結 |
+|---|---|---|
+| (2) UR15 の生産 env が無い | `thread_isaac_lab/envs/` ＋ `configs/` 配下の UR15 出現 = **0 件**。生産経路は `newton_skill_env_base.py:85` の `add_ur5e_robotiq` | ⛔ **測る対象が存在しない** ⇒ 上流ブロッカー |
+| (3) 分類器が名前 token 依存 | `arm_control_measurement_harness.py:1085` `ARM_TOKEN = "ur5e"` ／ `:1086` `GRIPPER_TOKEN = "robotiq"` ／ 適用 `:1113` `:1115` | ⛔ UR15 model では**腕 0 本**と分類 ⇒ self-falsification が STOP |
+| (3) UR15 の topology | `ur15_mj.urdf` 実測 = **link 13 / joint 12（revolute 6 ＋ fixed 6）** | ⭐ 下の精度注記へ |
+
+⭐ **精度注記（私の追加実測・p0 申告を狭める）:** UR15 の **revolute は 6** であり、**DOF 数は UR5e と同じ**。壊れるのは DOF 数ではなく **body / link の stride と index**（fixed frame が 6 本ぶら下がる）。さらに **import 後の body 数は importer の fixed-joint の扱いに依存する** ⇒ ⛔ **stride を机上で仮定してはならない。as-built（H-0）から読む。** これは H-0 が既に果たしている役割そのものである。
+
+### 8.1 再測定の前提条件（3 つ・すべて満たすまで H 系列を回さない）
+
+| | 条件 | 現状 | owner |
+|---|---|---|---|
+| **P1** | **UR15 の生産 env が存在すること**（`p4_ur15_sim_20260727/` は認可外材料ゆえ測定基盤にしない） | ⛔ 不在（実測 0 件） | ⛔ **私の court ではない**（実装 = p0 / 認可 = gate）⇒ §5 で照会 |
+| **P2** | **asset closure**（mesh を含む再現可能な model 一式が pin できる） | ⛔ banked dir の `.stl` = 0 件 | 同上 |
+| **P3** | **body / index の分類規則が確定していること** | ⛔ 未確定（token 方式） | ⭐ **私の court** ⇒ 8.2 で裁定 |
+
+### 8.2 ⭐ P3 の裁定 — 名前 token をやめ、構造で同定する
+
+⛔ **採らない案 = `ARM_TOKEN` に `"ur15"` を足す。** 理由 2 つ:
+1. **識別性が上がらない。** token 一致は「腕である」ことを測っていない（機種名の文字列を測っている）。次の機種でまた同じ壊れ方をする。
+2. **今の STOP は設計どおりの停止であり、沈黙の誤りではない**（p18 `-007` (3) と同旨）。⇒ **STOP を消す方向の修正**は、壊れていることを隠す方向である。
+
+⭐ **採る案 = 構造ベースの同定。** 規則の要件（設計要求として記す。⛔ 実装はしない = p0、独立検証 = pZ）:
+- **腕 = revolute の連鎖**として同定する（機種名を見ない）。UR15 / UR5e とも **revolute 6** ゆえ同じ規則で両方通る。
+- **EE = その連鎖の末端**から topology を辿って決める（`+5` のような固定オフセットを使わない）。
+- **pad / 爪 = gripper サブツリーの body 階層**から決める（`(9, 13)` のような literal index を使わない）。⚠ literal `(9,13)` の除去は **p0 の繰越（authorization 待ち）**であり、私はここで規則を定義するだけ。
+- **stride は as-built から読む**（8 節冒頭の精度注記）。
+
+⭐ **positive control（規則の受け入れ条件・両方満たすこと）:**
+1. **UR5e model で、従来と同一の分類を再現する**（腕 2 本・従来の EE / pad と同じ body に着地）
+2. **UR15 model で、腕 2 本を返す**
+⇒ **片方でも落ちたら規則を採らない。** ⛔ 「UR15 で通った」だけでは受け入れない（従来を壊していないことが示されない）。
+
+⛔⛔ **合否の読み取り方（設計要求・p18 `MSG-P18-ADVISORY-WRAPPER-RC-MASKING-20260727T1105JST-009` を受け、私が自分で再現した）:**
+**上の positive control の合否を、プロセスの終了コードで判定してはならない。** 私の実測（2026-07-27 11:0x JST・`sys.exit(3)` するだけの probe）:
+
+| 実行形 | 標準出力 | rc |
+|---|---|---|
+| 直呼び `/home/rlrk/env_isaaclab7/bin/python probe.py` | `probe ran` | **3**（正しい） |
+| `VIRTUAL_ENV=/home/rlrk/env_isaaclab7 ./isaaclab.sh -p probe.py` | `probe ran` | **0**（⛔ 非ゼロが飲まれる） |
+
+裏づけ = `AGENTS.md:68` 逐語「`./isaaclab.sh -p` can mask non-zero Python exits」。
+⇒ ⭐ **判定は artifact の中身から読む** — 分類規則なら **腕の本数・EE / pad として同定された body id そのもの**を出力させ、それを照合する。⛔ **「落ちるべき入力で落ちること」を wrapper の rc で確かめると、あらゆる失敗が成功に見える。** ⇒ **本 disposition が要求する positive control・negative control は、すべて出力内容ベースで定義する。**
+⚠ import 解決のために wrapper を使う推奨は妥当であり、変更しない（これは rc に依存しない結論）。
+
+### 8.3 順序
+
+**P1 ∧ P2 ∧ P3 → H-0（as-built topology を読む）→ H-2（`M` / `τ_bias` / `ζ`）→ H-4（Jacobian・3 参照点）→ H-3 / H-3.1 / H-5 / H-5.1。**
+⛔ **gate 状態は不変** — H-3.1 no GO / H-4 全体 HOLD は再測定で flip しない。
+
+### 8.4 範囲
+
+**対象は H-2 / H-3 / H-4 に留まらず、H-0 〜 H-6 の全体になり得る**（p0 / pZ 申告 = banked 測定はすべて UR5e 構成。⚠ この (1) は p18 未再測・私も未再測 ⇒ **申告として扱う**）。
+⛔ **廃棄範囲（他の UR5e 由来 evidence にどこまで及ぶか）は決めない** — DDR #39 のとおり未判断であり、私が推定してよい対象ではない。**私が言えるのは「私の spec が定義する量はすべて robot 依存」まで。**
+
+### 8.5 (c) p4 暫定値の扱い
+
+§2 の disposition のとおり（採用 3 / 不採用 2 / GATED 1 / 条件付き保留 1）。⭐ **追加の 1 点:** **不採用とした servo 定数（`armature` / `damping` / `kp` / `kv`）を UR15 生産 env の default に置かない。** 置くと、後で **「測った値」と「置いただけの値」が区別できなくなる**。⇒ 生産 env に入れるのは **測定後**、または **「未測定の仮値」と機械可読に明示した形**でのみ。
+
 ---
 **p11 custody = 2026-07-27 / ARM-CONTROL-DESIGN (`w2:p11`)。⛔ 本書の bank commit と sha256 は提出 message の宣言値が権威**（本書は自身の commit を pin できない）。
