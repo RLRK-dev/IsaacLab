@@ -3927,3 +3927,74 @@ after `--` was read as a pathspec.
 ⭐ **p4 banked the newer pin** `ae8696772a84…` — ⛔ **not the one I named**, because p5 moved again after I sent it;
 p4 verified append-only (`+125 / −0`) before banking. ⭐ **Third pin move today; content is the pin, the version is
 only a collation note.**
+
+## 79. ⭐⭐⭐ The band is settled at 12.00 — decided by the run's own placement error, not by preference
+
+`w2:p11` closed it with an instrument that ⭐ **does not snap to the nearest link**: `aim_slot_at :463-464`,
+`mag = |slot_after_close − cable_w|`, where `cable_w` is **the aim point** ⇒ **no sampling contamination.**
+
+| half-band | aim L 1.64 | aim R 1.45 | STEP3 L 2.33 | STEP3 R 4.89 |
+|---|---|---|---|---|
+| old ±1.00 | — | — | — | — |
+| ±3.00 (band 6.00) | ✅ | ✅ | ✅ | — |
+| **±6.00 (band 12.00)** | ✅ | ✅ | ✅ | ✅ |
+
+⇒ ⭐⭐ **The gain from Rs's widening can be stated from existing logs alone: three of four points moved from
+undetermined to determined.** Reasons: **6.00 is not required** (demanding no claw contact demands that the claws
+do nothing) / **14.00 is not required** (it is the deviation boundary itself — ⭐ **do not set a tolerance at your
+own boundary**) / **12.00 is the only band all four placement errors satisfy.**
+
+⚠ **p11's correction to itself, and the number to carry forward**: the ±1.00 is **chosen, not measured** ⇒ ⭐⭐ **the
+effective margin is `half-band 6.00 − worst residual 4.89 = 1.11 mm`. Carry the 1.11 mm, not the band's name.**
+⚠ Scope: aim-stage predicted residual; four points are **not a distribution** (no success rate); span 88 and that
+run's roll; the upper-bound test is one-sided.
+
+⛔ **And a correction to my §73.** I wrote that the band question is downstream of the broken instrument. ⭐ **Half
+of it is not**: `mag` is a **norm — rotation-invariant and free of sampling** ⇒ the upper-bound determination needs
+neither frame nor interpolation. ⇒ ⭐⭐ **Separate prediction (aim stage, usable now) from achieved (live, needs the
+fix). Only the achieved half is downstream.**
+
+## 80. ⭐⭐⭐ The asset documents the exclusion — and p11's three-way question to Rs is still live
+
+⭐⭐ **`w2:p11` found the asset comments its own mechanism**, `:164` verbatim: *"Without this line the opposing
+claws jam at -0.07mm while pad1 is still 9.98mm open, so the flat pads can never reach the cable."*
+⇒ ⭐ **The file states that the exclusion is what lets the pads reach the cable at all.** Cross-check: 10.00 − 7.36
+= 2.64 against the measured 2.45 (0.19 = measurement-surface difference) ⇒ **sign and magnitude agree.**
+⇒ ⭐⭐ This is the class p11 named at §27.2.31 = **ABSENT-IN-CODE (`CLAUDE.md:198`)** ⇒ ⭐⭐⭐ **the first time today
+that class has appeared as the mechanism OF a success rather than of a false claim.**
+
+⇒ ⭐⭐⭐ **Two consequences that must reach Rs:**
+1. ⛔ **Do not read today as "it clamps now because we widened it."** The widening is in **z**; the stop is in **y**.
+   ⭐ **Rs's +4 mm bought the containment margin above (§79) — it did not buy the close.**
+2. ⭐⭐ **While the claws are solid, "flat-pad compression" and "capture inside the コ" cannot both hold**
+   (protrusion 5.00 per side > half of Ø8). ⇒ ⭐ **p11's three-way choice to Rs (its doc `:1207`, options A/B/C) is
+   still live, and today's widening is none of the three — it is a different axis.**
+
+## 81. Three more self-corrections, each one changing the grounding rather than the conclusion
+
+**⭐ `w2:p5` — significant figures.** The 0.1-point spread between its numbers and p11's is **only the input angle**
+(34.38 vs 34.40). ⛔ And if the authoritative datum is **34.4 (three figures)**, then **39.9 / 79.7 / 93.0 carry a
+digit finer than the input** ⇒ ⭐ **write 40% / 80% / 93%.** ⚠ 34.38 is menu-derived, not a log datum.
+
+**⭐⭐ `w2:p5` confirmed p11's instrument diagnosis from the file** and **added the half nobody had**: the same
+residual puts `15·cos θ` = **12.4 mm at 34.4°** onto the *axial* component ⇒ ⛔ **no printed component is clean** —
+the contamination is not one-sided. ⭐⭐ **And it is the same defect p5 hit first**: `cable_at` picks the nearest of
+32 centres by x (same 30 mm spacing ⇒ same ±15) ⇒ ⭐ **the same snapping in two channels of one driver.**
+⚠ p5 also caught its own citation going stale (`cable_at` is at `:548-555`, not `:523-530`; `:523` is `seated()`)
+⇒ ⭐ **"pin by content on a moving file" — the rule it had told others, broken by itself.**
+
+**⭐ `w2:p5` refined my §73(2)**: the old 10.00 copy exists (mtime 04:18:21) ⛔ **but all seven drivers read the
+absolute path under `assets/`** ⇒ ⭐ **zero drivers read it.** ⇒ **The hazard is dormant, not live**: it is *"the
+next person opens or edits the same-named one"*, not *"the run reads 10.00"*. ⇒ **My wording is corrected.**
+
+**⭐⭐ `w2:p6` re-counted the span invariant with a closed query — and both my refinement and its own were still
+undercounts**: **6 files / 44 references**; ⭐ **3 asserts actually stop** (`route_executor.py:149`, `:155`,
+**`test_newton_clip_routing.py:6029`**); ⭐ **4 declarations must move together** — `task_config.py:235` (source),
+`route_env_config.py:80`, `newton_aerial_regrasp_mujoco_env.py:306`, and ⛔ **`route_executor.py:132
+_SPAN_NOMINAL_M = 0.088`, which is a hardcoded duplicate, not derived** ⇒ ⭐ **fixing the source alone fires `:149`
+by design — the guard is working correctly.**
+⚠⚠ **One path breaks silently**: `policy_route_runner.py:1127` hardcodes `"target_y_span_mm": 88.0` independently
+⇒ ⭐ **every assert passes while the output metric keeps the old value.**
+⚠ **p6's fourth defect today — caught before writing**: its `^\s*(assert|raise)` pattern missed a multi-line
+assert; it found the miss by **cross-checking against a broader grep** ⇒ ⭐⭐ **it counted on a different surface
+and reconciled, instead of tightening the pattern** — the repair shape this court converged on (§28).
