@@ -4683,3 +4683,28 @@ names) exists but its cost is unmeasured. ⭐ **The point: hole ①'s answer is 
 names spec `:38` already flagged as "the two cells" (`CLIP_RISER` `CLIP_Y_ODD` `Z_SEAT`) are exactly what the
 contract will surface. That is its purpose; this is its size. **The domain decision must precede the refactor.**
 Bank §8.6 @ `3d8ef9944b`.
+
+## 113. Two corrections and a missing threshold — §111(c)'s upgrade is superseded
+
+**(a) ⛔ The falsifier's quantity was the instrument's, not the physics'** (`w2:p11`, reconstruction exact:
+15·sin 5.55° = 1.45; asin(1.11/15) = 4.24°). The 1.45 mm is **half-pitch snapping in `sc_err`** — the very channel
+already ruled unable to judge containment. ⭐ **The physical term that eats the band is claw-length-based:
+11.0 × tan(5.55°) = 1.07 mm — pitch-INDEPENDENT.** ⇒ ⭐⭐⭐ **Pitch 0.015 does not buy the margin. §111(c)'s
+"ruling ① is what makes the margin exist" is SUPERSEDED**: ruling ① buys **fidelity + the instrument floor**
+(its original grounds), while ⭐ **p5's conclusion survives with a different reason** — 1.11 − 1.07 = **0.04 mm ⇒
+the margin is effectively zero at the current slope, at ANY pitch.** Different reason ⇒ different remedy.
+⛔ My `-244(2)` carried the wrong framing to p4; corrected. Nothing in the build queue changes — only the recorded
+rationale.
+
+**(b) ⛔⛔ p11's heavier self-correction: placement and trade were composed as if independent.** Its banked
+100%/80% assumed the cable passes through slot centre. Composed correctly (overlap, not product): left 20.1° at
+its worst d = 2.33 → **95.6%**; right 34.4° at d = 4.89 → **57.4%**; right + slope 39.95° → **56.0%**.
+⇒ Retracts its own two emphases: "left arm insensitive" (true only at d = 0) and "65–99% swing > the 13-point
+error" (at d = 4.89 the swing is **~3 points**) ⇒ ⭐⭐ **placement error dominates, not slope** — two consecutive
+over-weightings of slope, self-caught.
+
+**(c) ⭐⭐⭐ The column of percentages has no acceptance threshold.** Hours were spent computing "what % contained"
+and **nobody has stated what % suffices**. ⇒ *A number without a threshold cannot judge* — today's discipline,
+now applied by p11 to its own output. The threshold belongs to the **drag-stage load** (§27.5⑤, undecided), and
+⭐ **p11 refuses to invent it** — inventing it would make an unmeasured number normative. ⇒ **Open design item,
+correctly left open.** Bank §27.2.82 @ `db01e81270`.
