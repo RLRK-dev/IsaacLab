@@ -4786,3 +4786,28 @@ by its `0.030`. **UPPER-limit rejected**: *"a convention is not a mechanism"* �
 would pass. Human judgment needed only where literals occur (~23, ⛔ estimate). Known discretionary line: direct
 numeric-literal bindings always count (`CABLE_N = 32` caught); indices/ranges excluded. New pins: clip
 `0a1b29155e…` (408) / spec `1e1fad5368…` (239) — bank ×2 with p4.
+
+## 117. The alternative fits, the module closes its holes, and the release point has zero margin
+
+**(a) ⭐⭐ Saddles fit — the superior alternative is feasible** (`P4_SADDLE_WINDOWS_20260727.md` @ `8303fa622f`):
+gripper cable-axis half-width (closed, only parts reaching below cable height) = **36.6 mm** ⇒ saddle clearance
+50.6; free windows on ±300 = **[−300, −54.6] + [+244.6, +300] = room for 9 saddles ⇒ 3 fit.** ⚠ Both current
+rests must move (−340 outside; **+240 intrudes 4.6 mm into the C1 right-hand forbidden band**) — where they go =
+p5. ⛔ **Unanswered by design**: whether the left-skewed windows *support* 600 mm (sag between supports — separate
+judgment). ⚠ Self-report: first figure 78.6 was decided by a base-mesh bounding sphere 150 mm above the tool —
+retracted; the current value remains conservative (mesh spheres).
+
+**(b) ⭐ Module refactor landed** (`cda9bc0379`): ruling ① implemented (SEG imported, N derived = 64, costs noted
+in-module); the identity moved to the source (`_tc` pair == 0.600; derived form labelled identity, rounding-only);
+**hole ③ closed by construction** — the unconditional `0x6` is AST-read, so **it turns False the day the env makes
+it conditional**; hole ② closed (5 binding forms caught, measured); wording fixed. Guard 3-set awaited p5's domain
+rule — which crossed in `-257` and is in hand.
+
+**(c) ⭐⭐ p5 adopted the 18.20 floor from its own four-point re-derivation** (offsets 10.16 / 10.20 / 10.21 /
+10.19 — **constant within 0.05**; ⛔ no trend claimed, resolution-order spread). ⚠⚠ **And drew the consequence
+the numbers were hiding: the measured release point 18.19 sits 0.01 BELOW the floor 18.20 ⇒ ctrl 197.5 is the
+crossing itself, margin zero ⇒ ⭐ 197.5 is a LOWER BOUND, not a setting** — the release ctrl goes further open.
+
+**(d) ⭐⭐ Correlation disclosed against its own case**: the predicate-fails-both-ways finding and the
+STEP-17-stays-HALF finding are **two presentations of ONE premise (tip gap 1.82 < 8.00) — not two witnesses.**
+The correlated-agreement discipline, applied by the pane it would have flattered. Pin: clip doc → `aa052e7acb…`.
