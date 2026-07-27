@@ -415,6 +415,14 @@ Z_RISE_REST = TABLE_TOP + 0.230         # spec §6.4d -- clearance over the sadd
 # counts, which stopped meaning the same thing the moment the timestep moved: 4000 steps was 8 s
 # at the old 0.002 and is 0.83 s at the producer's.  Seconds survive a change of substrate; step
 # counts silently do not.
+# The claw-tip gap at which a cable can leave the jaw [m].  Clip design §12-5 gives 8.00 mm and
+# §12-6 requires that release be judged on THIS and not on grasped(), which errs both ways: it
+# says held when the claws have closed through each other, and released when the cable is still
+# surrounded.  8.00 mm is the cable's own diameter, so it is derived here rather than written --
+# a thinner SSOT cable moves the floor with it.  ⚠ If p5 measured 8.00 as something other than
+# the diameter and the two merely agree today, this should become a carried number instead.
+CLAW_RELEASE_GAP = 2.0 * CABLE_R        # clip design §12-5 / §12-6
+
 SETTLE_S = 5.0                          # spec §6.4d -- was `range(2500)` at dt 0.002
 START_RAMP_S = 8.0                      # spec §6.4d -- was `RAMP = 4000`
 START_HOLD_S = 6.0                      # spec §6.4d -- was the `+ 3000` after it

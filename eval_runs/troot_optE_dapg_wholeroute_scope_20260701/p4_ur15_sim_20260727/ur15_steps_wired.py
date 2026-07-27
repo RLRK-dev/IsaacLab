@@ -38,7 +38,8 @@ OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "/home/rlrk/Downloads/ur15_step
 from ur15_cell_spec import (  # noqa: E402
     ARMATURE, CABLE_N, CABLE_R, CABLE_SEG, CLAMP, CLAW_OFFSET, CLIP_BASE_HEIGHT, CLIP_COLLIDE,
     CLIP_FRICTION, CLIP_PARTS, CLIP_SOLREF, DAMP, EFFORT, GRIP_HALF_SPAN, GROOVE_CENTER_Z, HALF,
-    C1, C2, CABLE_JOINT_RANGE, CELL_TIMESTEP, CLIP_Y_EVEN, CLIP_Y_ODD, COLUMN_R,
+    C1, C2, CABLE_JOINT_RANGE, CELL_TIMESTEP, CLAW_RELEASE_GAP, CLIP_Y_EVEN,
+    CLIP_Y_ODD, COLUMN_R,
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
@@ -622,6 +623,19 @@ def aim_both(cl, cr, prev_q, seed):
               f"({math.degrees(att[1]):+.0f} deg tilt), seat error {r[2]*1000:.2f} mm"
               f"{'' if chosen is not None else '   <- nothing seated it; best effort'}")
     return got
+
+
+def held(t, dd=None):
+    """R6 CANDIDATE -- implemented, measured, NOT yet wired into any verdict.
+
+    Clip design §12-6: is the cable captured, judged on the CLAW TIPS?
+
+    `grasped()` answers a different question -- whether the flat pads are compressing the cable --
+    and p5 showed it errs in both directions: True at CLAMP with the claws closed through each
+    other, False at HALF with the cable still inside the claws.  The claw tips are what the cable
+    has to pass to leave, so capture is the tips being closer than the cable is thick.
+    """
+    return jaw_gaps(t, dd)[1] < CLAW_RELEASE_GAP * 1000.0
 
 
 def jaw_gaps(t, dd=None):
@@ -1217,6 +1231,32 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # the pinch rises by CLOSE_RISE between OPEN and CLAMP.  Approach that much lower or the grip
     # closes just above the cable.
     aimed = {}
+    # R3, clip design §13-3.  The re-grasp had no aim at all: the hand went to RX_MID -- a design
+    # constant, the midpoint between the two clips -- and closed on whatever happened to be there,
+    # with no call that reads the cable.  p5's fix is not a new mechanism; it is the ruling already
+    # made for the first grasp at §4 Q2, applied here too: measure the cable at the NEW x, correct
+    # y and z, leave x alone.
+    if num == 13:      # STEPS row 13, the approach that precedes the "regrasp" closure
+        for t in SIDES:
+            if abs(float(tgt[t][0]) - RX_MID) > 1e-9:
+                continue                     # the other hand is holding; it does not move
+            before = np.array(tgt[t], dtype=float)   # the un-aimed target, for the R4 question
+            c_re, _ = cable_at(RX_MID)       # <- the reading that was missing
+            wq, tg, mag = aim_slot_at(t, c_re, prev[t], seed=40 + (t == "R"),
+                                      pose_rd=grasp_pose[t][2], fix_x=RX_MID)
+            aimed[t], tgt[t] = wq, tg
+            grasp_pose[t] = (wq, tg, grasp_pose[t][2], mag)
+            aim_cable[t] = np.asarray(c_re, dtype=float)
+            aim_seat[t] = slot_after_close(t, wq, CLAMP)
+            _dy, _dz = (np.array(tg, dtype=float) - before)[1] * 1000, \
+                       (np.array(tg, dtype=float) - before)[2] * 1000
+            print(f"[steps] STEP{num} {t}: re-grasp re-aim (y,z only, x fixed at RX_MID), "
+                  f"seat error {mag*1000:5.2f} mm  (first grasp measured 1.45-4.89 mm)")
+            # p11's R4 question: is a y,z correction ENOUGH, or does the step need a descent of
+            # its own?  The correction actually applied is the evidence, so print it -- a z term
+            # that keeps arriving at the edge of what this phase can do is what would revive R4.
+            print(f"[steps] STEP{num} {t}: correction applied  y {_dy:+6.2f} mm  z {_dz:+6.2f} mm "
+                  f"(x held at RX_MID by ruling; a large or clipped z is the R4 signal)")
     if num in (2, 3, 4, 5):   # grasp steps: aim at where the cable IS, right now
         cl, _ = cable_at(GL[0])
         cr, _ = cable_at(GR[0])
