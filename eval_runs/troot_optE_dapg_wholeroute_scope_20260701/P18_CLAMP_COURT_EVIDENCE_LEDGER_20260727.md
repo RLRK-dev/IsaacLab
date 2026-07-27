@@ -1724,3 +1724,39 @@ a **length mismatch** — a label list shorter than the shape range — silently
 end (`:1579`). Both make `"pad" not in ""` true ⇒ **COLLIDE dropped on everything, pads included.**
 ⇒ ⛔ **The second entrance needs no rename at all.** ⇒ `w2:p11`'s requirement — *a failed lookup must raise, not
 silently disable* — applies to both, and the fail-closed precedent (`newton_route_env.py:283`) covers both.
+
+## 23. ⭐⭐ A pose-free bound, and the day's most reusable lesson
+
+**(a) `w2:p11` removed the "per-pose projection needed" caveat with one inequality.** The claws exceed the
+backplate envelope by pad-local **(Δy, Δz) = (5.00, 1.90)**, with **Δx = 0** (claws and backplate share the 11 mm
+x half-width) ⇒ a fixed vector's projection in **any** direction cannot exceed its magnitude ⇒ the excess is at
+most **√(5.00² + 1.90²) = 5.349 mm** in **every** pose (p18 recomputed).
+
+⇒ ⭐⭐⭐ **Usable requirement: a clearance measured on the FK/IK model that exceeds 5.35 mm guarantees no contact
+in physics — no per-pose projection required.**
+⚠ Asymmetric, and p11 says so: 5.35 is the **worst-angle** value ⇒ **passing is safe; failing does not mean it
+collides.** ⇒ This closes the gap `w2:p5` explicitly left open as uncomputed.
+
+**(b) ⭐⭐⭐ The most reusable lesson of the session.** `w2:p11` placed its own record precisely rather than
+generally:
+- ✅ It read the **9.98 mm** correctly in the morning, as the stopping state of a port lacking the exclude.
+- ✅ It correctly **retracted** its "the design has a 1.98 mm hole" framing once it found `task_config.py:277`.
+- ⛔⛔ **What it dropped was one final inference: the "without this line" branch describes hardware itself.** Real
+  hardware has no `exclude`, and real claws cannot pass through each other ⇒ ⭐ **"without this line" is a
+  description of reality.**
+
+⇒ ⭐⭐⭐ **General form: a workaround's comment — "without this line, X happens" — describes the behaviour of the
+substrate that lacks the workaround, which is the real system. Whenever you read a workaround, read its opposite
+branch as a statement about hardware.**
+
+⚠ p11 notes its afternoon would have ended at 09:00 had it read that sentence to the end — ⛔ **but records that
+deriving it independently was not wasted**: the two agree to **0.18 mm** and are **mutually independent
+confirmation.** ⇒ **Only the order was inverted.** p18 concurs, and this is the right way to weigh it: the
+rediscovery cost time, and the independent derivation bought a corroboration the comment alone could not give.
+
+**(c) ⛔ `w2:p11` corrected its own naming claim, and `w2:p0` was right.** `STRIPPED` refers to **tendon removal**
+and says nothing about claws ⇒ ⭐ **the name is not wrong — p11 read its own question ("are the claws there?")
+into a name given for the author's question ("are the tendons there?").**
+⇒ ⭐⭐ **General form: a name answers the question its author was asking, not the question you are asking now.
+Say what you are asking before you classify by name.**
+⇒ ⭐ Both panes converge on `w2:p0`'s sentence: **a name does not identify a model; only content does.**
