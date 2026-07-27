@@ -178,6 +178,12 @@ def float_z():
     raise NotImplementedError(_FLOAT_Z_UNSET)
 
 
+def groove_width() -> float:
+    """Clear width of the clip groove [m], off the two wall parts of the authoritative table."""
+    walls = [q for q in CLIP_PARTS if abs(q[2] - 0.0125) < 1e-9]
+    return 2.0 * (abs(walls[0][1]) - walls[0][4])
+
+
 def seat_z(float_z_m: float) -> float:
     """World z at which the cable centre rests, for a clip floated this far [m].
 
@@ -196,53 +202,116 @@ def seat_z(float_z_m: float) -> float:
 _OWNED = {n for n in globals() if n.isupper() and not n.startswith("_")}
 
 
-def _module_level_assignments(path):
-    """Every name bound at module level in `path`, by syntax tree rather than by grep.
+# The three sets the guard sorts a driver's module-level names into, per p5's contract.
+#
+# RETIRED are the names whose very existence is the bug: each was a cell constant that this
+# directory kept two different values of, and the fix is not to agree on one but to stop having
+# them.  Defining one at all fails, whatever value it is given.
+RETIRED = {"CLIP_H", "GROOVE_W", "CLIP_RISER"}
 
-    grep misses tuple targets -- and tuple targets are exactly how these drivers wrote the
-    constants that disagreed (`GROOVE_W, CLIP_H = 0.016, 0.026`).
+# TIER-C is run-specific by design -- the spec §5 keeps these OUT so drivers can still differ.
+TIER_C = {"OUT", "W", "H", "FPS", "HOLD_S", "WAY", "STEPS", "SEED",
+          "CAM", "CAM2", "RENDERER", "FRAMES"}
+
+_SPEC_MODULE = "ur15_cell_spec"
+
+
+def _module_level_bindings(path):
+    """Every name bound at module level in `path`, with how it was bound and what it was bound to.
+
+    By syntax tree rather than by grep: grep misses tuple targets, and tuple targets are exactly
+    how these drivers wrote the constants that disagreed (`GROOVE_W, CLIP_H = 0.016, 0.026`).
+
+    Returns {name: (line, kind, node)} where kind is "assign", "sourced" (imported from the spec
+    module), "import" (imported from anywhere else), or "star".
     """
-    names = {}
+    out = {}
     tree = ast.parse(pathlib.Path(path).read_text())
     for node in tree.body:
         targets = []
         if isinstance(node, ast.Assign):
             targets = node.targets
-        elif isinstance(node, (ast.AnnAssign, ast.AugAssign)):
-            targets = [node.target]
-        elif isinstance(node, (ast.For, ast.AsyncFor)):
+        elif isinstance(node, (ast.AnnAssign, ast.AugAssign, ast.For, ast.AsyncFor)):
             targets = [node.target]
         elif isinstance(node, (ast.With, ast.AsyncWith)):
             targets = [i.optional_vars for i in node.items if i.optional_vars]
-        elif isinstance(node, (ast.Import, ast.ImportFrom)):
-            # `from x import CABLE_R` and `import y as CABLE_R` bind the name just as an assignment
-            # does, and reading it back from the wrong module is exactly how a second copy starts.
+        elif isinstance(node, ast.ImportFrom):
+            src = (node.module or "").split(".")[-1]
             for a in node.names:
-                names[(a.asname or a.name).split(".")[0]] = node.lineno
+                if a.name == "*":
+                    out["*"] = (node.lineno, "star", node)
+                else:
+                    kind = "sourced" if src == _SPEC_MODULE else "import"
+                    out[a.asname or a.name] = (node.lineno, kind, node)
+            continue
+        elif isinstance(node, ast.Import):
+            for a in node.names:
+                out[(a.asname or a.name).split(".")[0]] = (node.lineno, "import", node)
+            continue
         elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-            names[node.name] = node.lineno
+            out[node.name] = (node.lineno, "assign", node)
+            continue
         for t in targets:
             for leaf in ast.walk(t):
                 if isinstance(leaf, ast.Name):
-                    names[leaf.id] = node.lineno
-    return names
+                    out[leaf.id] = (node.lineno, "assign", node)
+    return out
+
+
+def _has_bare_literal(node, known):
+    """Does this value expression contain a number that does not come from a name we know about?
+
+    p5's single rule for scope: a driver may bind whatever it likes as long as the value is
+    derived from names that already have an owner.  The moment a bare number appears, the binding
+    is carrying a constant of its own and has to say which set it belongs to.
+
+    Small arithmetic factors are not exempted -- that was tempting, but "0.5 is obviously just
+    arithmetic" is the same judgement call that let two files disagree about a cable radius.
+    """
+    value = getattr(node, "value", None)
+    if value is None:
+        return False
+    for leaf in ast.walk(value):
+        if isinstance(leaf, ast.Constant) and isinstance(leaf.value, (int, float)) \
+                and not isinstance(leaf.value, bool):
+            return True
+        if isinstance(leaf, ast.Name) and leaf.id not in known:
+            continue
+    return False
 
 
 def guard(driver_path, strict=True):
-    """Fail if `driver_path` redefines anything this module owns.
+    """Sort a driver's module-level names into p5's contract, and fail on anything that breaks it.
 
-    Returns the list of offending (name, line).  With strict=True a non-empty list raises, so a
-    driver cannot quietly go back to keeping its own copy.
+    Fail-closed: a name that carries a number of its own and belongs to none of the three sets is
+    a failure, not a pass.  Returns the list of (name, line, reason); with strict=True a non-empty
+    list raises.
     """
-    clashes = sorted((n, ln) for n, ln in _module_level_assignments(driver_path).items()
-                     if n in _OWNED)
-    if clashes and strict:
-        detail = ", ".join(f"{n} at line {ln}" for n, ln in clashes)
-        raise RuntimeError(
-            f"{pathlib.Path(driver_path).name} defines cell constants that belong to "
-            f"ur15_cell_spec: {detail}. Read them from this module, or add the constant to the "
-            f"p5 spec if it is genuinely new (spec §6.5).")
-    return clashes
+    bindings = _module_level_bindings(driver_path)
+    known = set(_OWNED) | RETIRED | TIER_C | set(bindings)
+    bad = []
+    for name, (line, kind, node) in sorted(bindings.items()):
+        if name == "*":
+            bad.append((name, line, f"`from {_SPEC_MODULE} import *` hides its own bindings from "
+                                    f"the syntax tree, so nothing can check them"))
+        elif name in RETIRED:
+            bad.append((name, line, "retired: this constant is the divergence itself; the cell "
+                                    "spec carries the clip geometry now, so it should not exist"))
+        elif name in _OWNED and kind == "assign":
+            bad.append((name, line, f"owned by {_SPEC_MODULE}; import it instead of redefining it"))
+        elif name in _OWNED and kind == "import":
+            bad.append((name, line, f"owned by {_SPEC_MODULE} but imported from somewhere else, "
+                                    f"which is how a second copy starts"))
+        elif kind == "assign" and name not in _OWNED and name not in TIER_C \
+                and _has_bare_literal(node, known):
+            bad.append((name, line, "carries a number of its own and belongs to none of the three "
+                                    "sets: add it to the p5 spec, or derive it from names that "
+                                    "are already owned"))
+    if bad and strict:
+        detail = "\n  ".join(f"{n} (line {ln}): {why}" for n, ln, why in bad)
+        raise RuntimeError(f"{pathlib.Path(driver_path).name} does not satisfy the cell-constant "
+                           f"contract:\n  {detail}")
+    return bad
 
 
 def self_check():
