@@ -215,5 +215,67 @@ p18 `MSG-P18-P11-DISPOSITION-RECEIPT-20260727T1112JST-012` (2) が pane をま�
 | Q2 DDR #39 の owner 割当 | 既存 banked 体制と整合。⛔ ただし **register 記入 custody = p6** ゆえ **記入までは「提案」の地位** | ✅ **§8.1 / §3 の役割記述は「提案」として読む**。⛔ 割当済として扱わない |
 | Q3 §0#4 gripper LOCK | ⛔⛔ **FOUNDATIONAL ゆえ Rs 専権・Rs へ escalate 済**。私の「p0 は移植 model を出発点にしない／出発点は banked `2f85_koshape.xml`」は p18 が支持し p0 へ伝達 | ✅ 維持。**LOCK 保存の検証が済むまで移植 model を出発点にしない** |
 
+## 11. コ字爪 LOCK の差分と、**反証 control の再設計**（p18 `MSG-P18-IMPLCHAIN-KOSHAPE-LOCK-DELTA-20260727T1126JST-017`）
+
+⛔ **他 pane の数値では裁定しないので、私が両 model を読んだ。** custody = 測定 artifact `P4_KOSHAPE_LOCK_DELTA_MEASUREMENT_20260727.md` sha256 `4c2a51d3508f27c0ff9d58c1463807c35be650b9b7c086198282fc453afd3464` @ `03d924b3128e617acecb1ed979d35b91ec38ff45`／banked LOCK asset sha256 `a3bef79ee9b4f4161dd6da20967e65e0da78f5706724fbf61e35fb43ba230ba3` @ `85315bbec6787a9cfcb3cb147c87fb78beb3b5ca`（**両方とも私の実測で一致**）。
+
+### 11.1 私の実測（3 点）⚠ **すべて file の面の測定である**（11.6 の限定を先に読むこと）
+
+| 対象 | banked `2f85_koshape.xml` | p4 移植版 `_ur15_2f85_koshape_actuated.xml` | 判定 |
+|---|---|---|---|
+| ⭐ **LOCK の対象＝コ字爪 4 geom** | `right/left_pad_f1ext` `f2ext`（`size 0.011 0.009 0.0012` / `pos 0 -0.0026 0.0382` と `0.0258` / `quat` / `friction 0.7` / `solimp` / `solref` / `priority 1`） | **同一** | ✅ **byte 同一 = LOCK 対象の幾何は保たれている** |
+| **A tendon** | `<tendon>` **削除済**（`:188-194` は削除理由のコメント。逐語 = 結合 build が `SolverMuJoCo` の `_init_tendons`（`solver_mujoco.py:2165`）で OOB crash ／「**NOT a faithful gripper** — the Robotiq 4-bar grasp is **rebuilt at S5**」） | `<tendon>` node が **`:169-174` に在る** | ⚠ **差分（宣言つきなら許容余地あり・11.3）。⛔ *file に在る* だけで、**それが駆動に効いているかは未測定**（11.6） |
+| **B 接触除外** | **7 行**。うち `:176` `<exclude body1="right_pad" body2="left_pad"/>`。直前コメント `:174-175` 逐語 =「Prevent claw-claw self-collision jam at the scripted close（the protruding コ claws f1ext/f2ext can overlap at `GRIPPER_CLOSE_QPOS`）. **Cable contact is UNAFFECTED**（the cable is a separate body）」 | **6 行**。⛔ **`right_pad`×`left_pad` の 1 行が無い**（他 6 行は一致） | ⛔ **file 面では脱落 = 欠陥。** ⚠ **build 後の `mj_model` で当該 exclude 対が生きているかは未測定**（11.6） |
+
+### 11.2 ⛔ clearance 説の格下げ（p18 の自己訂正を受け、私の §9 (3) に fence を置く）
+
+p4 の実測 = **全閉指令 `ctrl=255` でパッド間隔が 24.2 mm で停止し、Ø6〜Ø10 の *いずれの径でも* 爪に入らなかった**。
+⇒ **clearance だけが原因なら Ø6（clearance +4 mm）は入るはずだが、入っていない。** ⇒ ⛔ **「公称 clearance 0.00 mm」を非把持の候補説明として置いた §9 (3) の位置づけを、ここで下げる**（**単独では原因として不十分・Ø6 の観測に反証された**）。
+⭐ **維持されるもの:** 幾何の量そのもの（**内側 gap 10.00 mm / Ø8 で +2.00 mm / Ø10 で 0.00 mm**）は実測として有効であり、**Ø10 が SSOT 逸脱であること**も変わらない（§9 (1)(2)(5) は不変）。⇒ **変わったのは「それが非把持を説明するか」であって、量の真偽ではない。**
+⛔ **因果は私も判定しない**（物理妥当性の最終基準は Rs 動画）。**除外行を戻した比較はまだ誰も実行していない。**
+
+### 11.3 §0#4（gripper geometry LOCK）— 私の技術的読み（⛔ 裁定は Rs）
+
+- ⭐ **LOCK の対象は「コ字フィンガの幾何」**（RS71 §0#4）。**その 4 geom は byte 同一**（11.1）⇒ **私の読みでは A / B は LOCK 対象の幾何を変えていない。**
+- ⛔ ただし **§0#4 抵触の可否は FOUNDATIONAL ゆえ Rs 専権**。私は**材料として技術的読みを出すだけ**で、判定しない（escalate 済）。
+- ⚠ **別建ての問題として、model 同一性は失われている。** 特に **B は §0#4 と無関係に欠陥**である — banked のコメントが**まさにその症状（全閉で爪同士が噛む）を事前に警告している**。⭐ **かつ同コメントは「ケーブル接触には影響しない」と明言**しており、**除外行を戻してもケーブル側の物理は変わらない** ⇒ **戻すことに副作用が無い**。
+
+### 11.4 ⭐ 設計要求（原因側・§9 (5) と同じ形）
+
+1. **測定・生産に使う model は、banked asset から *宣言された差分* として導出する。** 手で組み直さない。⇒ **B のような脱落が黙って発生しない。**
+2. **接触フィルタ（`<exclude>` 集合）は banked のまま持ち越す。** 駆動を足すことと、接触フィルタを削ることは別である。
+3. ⛔⛔ **A（tendon 復活）は素の MuJoCo の probe に限る。生産経路（Newton / SolverMuJoCo）では復活させない** — 削除理由は Newton 側の crash（`_init_tendons`）であり、生産は Newton だからである。⇒ **駆動は banked コメントの方針どおり code 側で組む**（「the Robotiq 4-bar grasp is rebuilt at S5」）。
+
+### 11.5 ⭐⭐ 反証 control の再設計（私の court・⛔ 実行認可は求めない）
+
+§9 (4) で私が定義した control は **径 1 軸**だった。11.2 により **より上流の軸（除外行）** が加わる。⚠ **2 軸を同時に変えると分離できない。** ⇒ **順序を私が決める。**
+
+| | 変える軸（**1 本だけ**） | 他は固定 | ⭐ 観測する述語 | 何が言えるか |
+|---|---|---|---|---|
+| **C-1**（先） | **`<exclude right_pad × left_pad>` を戻す** | **径は run の Ø10 のまま**・script・姿勢列・その他定数すべて不変 | ⭐ **全閉指令でのパッド間隔が 24.2 mm を下回るか**（＝ **閉じるか** の述語。⛔ 把持の述語ではない） | 「そもそも閉じていない」かどうか。**閉じないなら径は効きようがない**（爪がケーブルに届かない）。⛔⛔ **前提条件 = 11.6**（`mj_model` の exclude 対を読めること。読めないなら **軸が動いた確証が無く、結果が解釈できない**） |
+| **C-2**（C-1 の後だけ） | **径を SSOT の Ø8 にする** | 除外行は戻したまま・他すべて不変 | ⭐ **爪チャネル内の保持**（⛔ **パッド接触ではない** — 2 状態を見分ける述語にする） | 径が保持に効くか |
+
+**規律（両 control 共通）:**
+- ⛔ **合否を終了コードで読まない**（§8.2）。**出力内容**（パッド間隔の数値・保持の判定に使った body / geom）から読む。
+- ⚠ **C-1 で閉じても、C-2 で保持しても、「把持が成立した」ことにはならない** — 物理妥当性の最終基準は **Rs の動画**。control が言えるのは **どの軸が効いたか**だけ。
+- ⚠ **A（tendon）は移植版と banked で異なるため、C-1 の解釈には「駆動機構が banked と別」という限定が付く。** ⇒ 11.4-1 の「宣言された差分として導出」を先に満たせば、この限定は消える。
+- ⛔ **実行認可は求めない（RUN CLOSED）。** 実施可否は p4 との共同 court ＋ gate。
+
+### 11.6 ⛔⛔ file の面と model の面は別 — **述語を model 側に置く**（p18 `MSG-P18-IMPLCHAIN-EXCLUDE-CLAIM-SCOPE-20260727T1130JST-018` を受けた、私の court の要求）
+
+**11.1 の A / B は XML text の差であって、build 後の `mj_model` で当該機構が生きているかを測っていない。** ⇒ **私の §11 の読みを、その分だけ弱める。**
+
+⭐ **この asset の中に、file と runtime が一致しない実例が既に在る**（banked のコメント逐語・私が読んだもの）:
+- `<equality>` の 4-bar は **`add_mjcf(skip_equality_constraints=True)` により parse 時に落ちる**（file 編集ではない）
+- 孤立した `<actuator general tendon="split">` は **tendon 名が解決できないと parse 時に黙って skip される**（`import_mjcf.py ~:2417` の無条件 `continue`）
+
+⇒ ⛔ **「file に在る / 無い」から「model で効いている / いない」を導けない経路が、この asset には実在する。** ⇒ **B の脱落が閉じ切らない症状を説明する、という読みは file 面からの候補仮説であり、機構が runtime で有効かも未確認**（より弱く読む）。**A も同様** — `<tendon>` が file に在ることは、それが駆動していることを意味しない。
+
+**⇒ 設計要求（私の court・実装は p0 / 検証は pZ）:**
+1. ⭐ **正しい述語 = `mj_model` の exclude 対の集合**（file の diff ではない）。**C-1 の「戻した」の確認も、これで行う。**
+2. ⛔ **現行 harness はこれを記録していない** — H-0 inventory の MJCF 由来 field は `nu` / `nq` / `nv` / `nbody` / `neq` / `eq_type` / `actuator_forcerange` / `actuator_trnid` / `jnt_actfrcrange` / `actuator_ctrlrange` のみで、**exclude / 接触対は 0 件**（p0 実測・banked report `746f049e83`）。⇒ ⛔ **p0 の既存 banked 出力を「除外行が在る / 無い」の根拠に使わない。**
+3. ⇒ ⭐ **H-0 inventory に「build 後の接触フィルタ状態（exclude 対の集合）」を記録項目として加える**ことを、**測定 spec 側の要求**として出す。⚠ **実装は authorization 待ち**（p0 の繰越）。⛔ **これが入るまで C-1 を回しても、軸が動いた確証が取れない。**
+4. ⭐ **一般形（本 lane の既存要求と同じ形）:** **「宣言した機構が build 後に生きていること」を記録する項目が無いなら、その機構に依存する control は成立しない。** ⇒ §8.2 の「合否は出力内容から読む」と同根であり、**読む対象を file でなく model にする**、という点が追加分である。
+
 ---
 **p11 custody = 2026-07-27 / ARM-CONTROL-DESIGN (`w2:p11`)。⛔ 本書の bank commit と sha256 は提出 message の宣言値が権威**（本書は自身の commit を pin できない）。
