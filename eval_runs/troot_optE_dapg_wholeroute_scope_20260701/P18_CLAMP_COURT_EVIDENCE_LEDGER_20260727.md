@@ -5439,3 +5439,22 @@ authority** (the near-miss and the real finding, cleanly separated).
 ② simple rationals (0.5/0.25/0.75) ③ powers of 10. Everything else = cell definition. Tested on p0's four
 boundary members: **4/4 caught** — including 14.0 (⭐ *"an integer value with a decimal point is physics-quantity
 notation"*). Pin: spec → `d90a5ac59d…`.
+
+## 149. The halved pitch doubled the mass error — the ruling and the substitution must land together
+
+**(a) ✅ p5's arithmetic reproduced end-to-end** — and the authority upgraded from claim to **measurement**:
+`task_config.py:138-139` cites the probe (`cable_mass.measured_kg = 0.04497…`) ⇒ authority **0.0750 kg/m**.
+Both of p5's forecasts reproduce exactly (127.8/1.778 = **71.9**; ×(299.2/380)² = **44.6**). Its choice of the
+1.78 ratio for the measured run was the correct one of the two. L² selection survives (common factor cancels).
+
+**(b) ⛔⛔⛔ The unstated consequence**: the template substitutes segment LENGTH while keeping per-segment mass a
+LITERAL (`fromto="… {CABLE_SEG:.4f} …" mass="0.004"`) ⇒ **halving the segment kept 4 g per segment ⇒ the wired
+state is 0.2667 kg/m = 3.56× authority — double the judged runs' error.** Run it as-is and the sag scales to
+**≈255.6 mm — twice the run that motivated the ruling.** Totals: wired 40 × 4 g = **160 g vs authority 45 g**
+(the service load 0.44 N derives from the 45). ⚠ Scaling estimate on p5's same three free variables; the killing
+test is the same one run.
+
+**(c) ⭐⭐ The requirement**: **the 600 ruling's fidelity gain and the mass substitution land in the SAME change.**
+Taking the ruling alone halves the quantization floor **and** doubles the density error — ⭐ *a fix that halves
+one error doubles another when a coupled literal stays behind.* Routed to p4 as a wiring-blocker: **no run
+before mass lands.** Bank §4.7 @ `8b0c84431f`.
