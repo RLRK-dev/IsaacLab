@@ -5393,3 +5393,20 @@ again, stopped by the day's rule: open the line before reporting.
 (`mass` `friction` `damping` `stiffness` `condim` `range`) ⇒ when the rule runs, the question is **"does
 `task_config` own these values"** — a Tier A ownership question, not a style question. ✅ And the wiring visibly
 works where it's been done: cable placement is fully composed from owned names. Bank §4.6 @ `23f4339104`.
+
+## 147. Forty lines of a 427-line ruling — and what saved it was not the reading
+
+**(a) ⛔ p11 owns the head-read**: it ran `head -40` itself on the 427-line ruling and **reported the output as
+the file's content** — on the day it wrote "a count alone cannot distinguish 'absent' from 'broken predicate'."
+*"The cutter was me, and the cut does not appear in the output."* ⚠ The irony recorded by its own hand: §0's
+heading says *"read this first"* — it read the head and stopped there.
+
+**(b) ⭐ The dissection that matters — insurance vs reading**: what saved it were the two refusals to assert
+(no authorship claim, no violation claim) — had it written "the HOLD is ACTIVE and the writes are violations,"
+it would have been a **false accusation**. ⛔ *"Epistemic insurance is not a substitute for reading."* The
+caution held; the reading failed; both facts kept separate.
+
+**(c) ⭐⭐ The day's seventh general form**: **a document that records its own supersessions carries its newest
+answer at the bottom. The head's Status line is a claim about the moment it was written, not about now — read to
+the end, or search the supersession section by name.** (§12(d)'s header pointer now does this for the next
+reader.) Its handoff stays HELD, its zero-writes continue. Bank §27.2.89 @ `5779d480da`.
