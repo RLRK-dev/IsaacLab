@@ -7049,3 +7049,27 @@ is not a run authorization and claims no task success; ⚠ if its result is ever
 ("grasp works"), the full three-way protocol applies at that point. **Disclosed to Rs prominently; open to
 veto.** Routed: p4 = the pad-frame transform + the positive leg per spec (aim mandatory), report with prints
 + git-show pins.
+
+## 218. The predicate discriminates both ways — the datum was the story, and the probe failed loudly
+
+From -083 (22:40:07); verified here (@ `ee13ed33c8` "Fix the datum, and the predicate starts discriminating";
+result sha MATCH `89a3fd87a6…`; the decisive lines re-read from the artifact itself).
+
+**(a) ⭐⭐ The positive stands** — cover-and-close exactly per p5's spec: aim at the resting cable, seat error
+**2.90 mm** (inside the first-grasp 1.45–4.89 band); arrival with backplate 79.89 open and pad-local z
+**34.49 mm** in-band; after CLAMP, backplate **6.67 < floor 18.19** and pad-local z **29.02** in-band ⇒
+**R6 held() = True**. (⭐ The artifact also records old grasped() = True at this point — the two predicates
+agree HERE; their 3-of-5 disagreements live elsewhere in the sweep.) **(b) ⭐⭐ The negatives, re-taken after
+the datum fix, stay False** (full-open / half-closed / cable-away + CLAMP) ⇒ **R6 moves in both directions**
+— the "only ever False" state resolved; p5's requirement ③ satisfied. ⚠ Scope kept by its author: ONE
+positive, on a resting saddle cable; ⛔ not a task-success claim (the three-way protocol applies if ever
+cited as one); ⚠ and **not p5's -097 killable test** — that test concerns a cable HELD by the other hand;
+this one was free. The 2.90 mm is a first favorable data point for the aim mechanism at a re-grasp-like
+pose, no more.
+
+**(c) ⭐ The datum was the story**: p4 had been measuring on the jaw claw-claw axis, world-mixed — the
+corrected values land mid-band, and the sign convention (pad-z large = world low) reconciles its earlier
+negative readings. **(d) ⭐ The probe failed loudly, and that is why it was caught**: the first version cut
+its header above solve_ik ⇒ NameError ⇒ *"測定でなくエラーでした… 落ちたので気づけた形です（黙って 0 を返す
+作りなら気づけませんでした）"*. **The instrument commissioning is COMPLETE**; the lane's remaining
+verification = p0's final round.
