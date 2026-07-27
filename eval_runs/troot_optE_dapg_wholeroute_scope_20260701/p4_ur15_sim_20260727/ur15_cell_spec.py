@@ -438,10 +438,14 @@ GRASP_ATTITUDES = [(y, r) for r in (0.0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.55, 0.6
                                     0.70, 0.75, 0.85, 0.95)
                    for y in (0.0, 0.15, -0.15, 0.30, -0.30)]     # spec §6.4d
 
-# ⛔ FLOAT_Z is the thirteenth and it does NOT move.  Spec §6.4j lists it among the names to
-# bring here, and spec §4 of the clip design refuses to supply it until p5 settles whether the
-# fingers open at the seat.  Two rulings of p5's, pointing opposite ways, so this module keeps
-# refusing (see float_z() below) and the driver keeps declaring its own -- reported, not resolved.
+# The thirteenth.  p5 settled the conflict between their own two rulings by keeping §6.4j and
+# withdrawing the refusal, and the reason is worth carrying: withholding a value does not leave
+# the cell without one -- it makes the driver invent one, which is the second source this whole
+# module exists to prevent.  So the single source holds a provisional value and says so here.
+#
+# ⛔ NOT a settled figure.  It is the fail-closed start: the clip sits on the table.  The ONLY
+# reason to raise it is arm reach (clip design §10-4); nothing else is grounds for moving it.
+FLOAT_Z = 0.0                           # spec §6.4l
 
 # Arm servo -- the spec names these but explicitly declines to judge their values; they belong to
 # the arm-control court.  Carried here only so drivers stop each keeping their own copy.
@@ -455,15 +459,14 @@ CLAMP, HALF, OPEN = 236, 214, 18        # spec §4, latest banked (ur15_steps.py
 # ⛔ Not settled.  The clip design §4 makes float_z follow from a seat height that depends on a
 # step-table decision p5 has not made: whether the fingers open while still down at the seat.
 # Touching this raises rather than silently supplying a number.
-_FLOAT_Z_UNSET = ("float_z is not settled: clip design §4 derives it from the seat height, and "
-                  "P4_FINGER_REACH_BELOW_CABLE_20260727.md §3 shows that height depends on "
-                  "whether STEP 8 opens the fingers at the seat (16.0 mm if not, 35.7 mm if so). "
-                  "That is p5's decision, not this module's default.")
+def float_z() -> float:
+    """How high the whole clip stands off the table [m].
 
-
-def float_z():
-    """Height the whole clip is lifted above the table [m].  Raises until p5 settles it."""
-    raise NotImplementedError(_FLOAT_Z_UNSET)
+    This used to raise.  p5 withdrew that: refusing to supply a value does not leave the cell
+    without one, it makes the driver write its own, and a second source is the failure this
+    module exists to prevent.  Provisional is a NOTE, not an absence -- see FLOAT_Z.
+    """
+    return FLOAT_Z
 
 
 def groove_width() -> float:

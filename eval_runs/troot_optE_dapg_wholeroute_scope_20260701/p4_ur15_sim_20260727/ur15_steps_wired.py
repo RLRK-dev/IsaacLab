@@ -39,7 +39,7 @@ from ur15_cell_spec import (  # noqa: E402
     ARMATURE, CABLE_N, CABLE_R, CABLE_SEG, CLAMP, CLAW_OFFSET, CLIP_BASE_HEIGHT, CLIP_COLLIDE,
     CLIP_FRICTION, CLIP_PARTS, CLIP_SOLREF, DAMP, EFFORT, GRIP_HALF_SPAN, GROOVE_CENTER_Z, HALF,
     C1, C2, CABLE_JOINT_RANGE, CELL_TIMESTEP, CLIP_Y_EVEN, CLIP_Y_ODD, COLUMN_R,
-    COLUMN_HZ, FINGER_RAMP, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
+    COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
     SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, START_HOLD_S, START_RAMP_S, TABLE_HZ, TABLE_Y,
@@ -72,12 +72,8 @@ J6 = list(_spec.ARM_JOINTS)      # the URDF names, in kinematic order
 import os as _os  # noqa: E402
 OLD_SEAT_AIM = _os.environ.get('P4_OLD_SEAT_AIM') == '1'
 
-# How high the whole clip stands off the table.  The authoritative clip is meant to sit on it
-# (float_z = 0), and the module refuses to supply a default, so this is the one number the cell
-# still owes -- see the note in the report: at float_z = 0 the seat is 9 mm above the table and
-# the gripper reaches 20.6 mm below the cable at the release opening, which puts its lowest part
-# under the table.  Reachability is p4's court, so this is measured, not chosen.
-FLOAT_Z = 0.0
+# FLOAT_Z is imported now.  It was declared here because the spec module refused to supply it;
+# p5 withdrew the refusal on the grounds that a withheld value is an invented one.
 GROOVE_Z = seat_z(FLOAT_Z)                 # where the cable centre must end up, world z
 Z_SEAT = GROOVE_Z - CLAW_OFFSET            # the same height expressed at the pinch
 
