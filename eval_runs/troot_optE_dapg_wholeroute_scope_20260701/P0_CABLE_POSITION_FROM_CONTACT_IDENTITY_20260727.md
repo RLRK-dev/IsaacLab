@@ -100,7 +100,68 @@ to full close, is **[4.00, 8.00]**.
 ⛔ I do not propose a value. This is the *quantity* -124 (4) asked to have stated; the *reason* belongs to whoever
 owns the predicate, and -124 (6) records that seat as vacant.
 
-## 8. Scope
+## 8. -126: material for the predicate p11 specified. ⛔ Not an implementation — the gate is CLOSED.
+
+-126 (6) names me as the implementer for p11's L1/L2/L3 and says in the same breath that it is **not** an
+implementation instruction and the gate stays closed. I hold to that. What follows is measurement material only.
+
+### 8.1 p11's constants check out, and its 0.30 mm caveat is the box-edge term again
+
+**L1 [31.00, 33.00]** and **L2 [4.0, 8.0]** both reproduce from the asset and `task_config.py` (§1 here, and
+`:137` / `:277`). ⭐ p11's caveat — *evaluate L2 at the cable's z, not as the box-pair minimum, difference 0.30 mm* —
+is **the same box-edge migration term** I quantified for the claws:
+
+> 2 × |37.50 − 32.00| × sin(1.571°) = **0.302 mm**
+
+i.e. the pad1 box's **upper edge** against the cable's z under the measured tilt. (At the box centre it would be
+0.212 mm, at the lower edge 0.727 mm.) ⇒ ⭐ **third appearance of one mechanism today** — the residual in §6 of the
+bound artifact, the floor-family split, and now p11's L2 evaluation point. **A box does not measure from its face
+once it tilts**, and every quantity in this court that was taken between boxes has had to absorb that.
+
+### 8.2 ⛔ The form defect is worse than a negative filter, and the naming is why
+
+-126 (3) asks for a positive `*_pad1` match instead of "anything without `ext`". ⚠ I have **not** read p4's driver,
+so I say nothing about it. But **the analogous classifier in the production env file, which I have read, is worse**:
+
+`thread_isaac_lab/envs/newton_skill_env_base.py:1392`
+```
+if "pad" in (gname + bname):
+    pad_geoms.append(g)
+```
+
+The geom names in the banked asset are `right_pad1`, `right_pad2`, **`right_pad_f1ext`**, **`right_pad_f2ext`**,
+`right_silicone_pad` — and the **body** is named `right_pad`, so `bname` contains "pad" for **every geom on the pad
+body**. ⇒ ⭐⭐ **`pad_geoms` includes the claws and the silicone visual**, regardless of their own names.
+
+⭐⭐ **And the naming is deliberate.** The asset says so at `:112-113`, verbatim:
+
+> *Names contain "pad" so the suite-wide contact filter (`test_newton_clip_routing.py`) keeps COLLIDE + cable
+> contact.*
+
+⇒ ⭐⭐⭐ **the claws were named to match "pad" on purpose, for the contact filter.** So any *measurement* predicate
+that reuses that substring test inherits a set that was **engineered to include the claws**. ⇒ the fix cannot be
+"exclude `ext`" — a later geom named without `ext` rejoins silently. It has to be a **positive match on `*_pad1`**,
+which is exactly what p11 asked for, and now with the reason the trap exists.
+
+⚠ This is **carry item 7** on my list (`:1392` production pad classifier), open since this morning. It is a second
+site: fixing only the driver leaves the production env with the same set.
+
+### 8.3 Cost: all three legs already exist as measured quantities
+
+- **L1** — already computed and printed by the driver (-126 (4)).
+- **L2** — already measured (the 6.81 / 5.68 values).
+- **L3** — the contact-geom list is already in the log; pB read it to produce -123 (3).
+
+⇒ ⭐ **no new instrumentation is required for any leg.** What is missing is that the verdict does not consult them.
+⛔ I state the cost because I am named as the implementer; I am not proposing to act on it.
+
+### 8.4 ⛔ I take no position on -126 (5)
+
+Whether L1 is full containment [31, 33] or centre containment [28, 36] is the owner's choice. I supplied the
+distinction between the two predicates and the geometry behind each; the selection is not mine, and -126 records
+p11's recommendation.
+
+## 9. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
