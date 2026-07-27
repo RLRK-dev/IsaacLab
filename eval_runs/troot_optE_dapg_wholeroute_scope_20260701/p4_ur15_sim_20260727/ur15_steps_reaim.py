@@ -369,9 +369,20 @@ def clamp_faces(t):
 
 
 def grasped(t):
-    """Clamped = the cable is compressed between the two pad1 faces (bilateral)."""
+    """Clamped = the cable is COMPRESSED between the two pad1 faces, not merely touched by them.
+
+    The touch-only version reported a clamp that Rs could see was not there: the jaw had closed to
+    a 8.4 mm overlap, i.e. the faces had passed through where the cable was, and contacts existed
+    the whole way through.  Contact says the geoms met; only the face gap says whether the cable is
+    still between them.  A O8 cable held with the design's 2 mm/side compression leaves a 4 mm gap
+    (task_config.py:277), so the gap has to be positive, under the cable diameter, and not so small
+    that the faces have swallowed it.
+    """
     pad, _ = clamp_faces(t)
-    return {"L", "R"} <= pad
+    if not {"L", "R"} <= pad:
+        return False
+    gap, _claw = jaw_gaps(t)
+    return 2.0 < gap < 8.0
 
 
 def slot_centre(t, dd=None):
@@ -855,7 +866,9 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                   f"claw min over the run {claw_min[t]:+6.2f} mm"
                   f"{'  <- NEGATIVE: non-conservative for transfer' if claw_min[t] < 0 else ''}")
             print(f"[steps] GRASP {t}: cable touched by pads {sorted(pf) or 'none'} "
-                  f"/ claws {sorted(cf) or 'none'}   clamped={grasped(t)}")
+                  f"/ claws {sorted(cf) or 'none'}   clamped={grasped(t)} "
+                  f"(needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had "
+                  f"closed through the cable)")
             print(f"[steps] GRASP {t}: fingers blocked by {sorted(blk) if blk else 'nothing'}")
             print(f"[steps] GRASP {t}: nearest cable link cab{j} at {dists[j]*1000:5.1f} mm from the "
                   f"pinch, pad separation {sep*1000:5.1f} mm, ctrl={d.ctrl[GIDX[t]]:.0f}, "
