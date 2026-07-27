@@ -2338,3 +2338,68 @@ from a similarly-named file:**
 
 ⇒ ⭐⭐⭐ **The rule all four converge on, and it is `w2:p0`'s sentence applied to files: take every constant from
 the model or driver the judged run points at. A name does not identify a model; only content does.**
+
+## 34. ⭐⭐⭐ The roll is the mechanism that buys the 88 mm span — so §0#2 sits at the junction
+
+`w2:p0` identified the axes at source; **p18 read `ur15_steps_reaim.py:583-588` at `887d3fefde` and confirms it
+verbatim**:
+
+```python
+def _rdes(yaw, roll=0.0):
+    """Closing axis across the cable, approach down; `yaw` spins the tool about the vertical and
+    `roll` tips it about the closing axis, which walks the WRIST outboard while the pinch stays
+    put.  Rolling is what lets two arms share an 88 mm span without their wrists meeting."""
+    base = Rotation.from_euler("z", yaw) * Rotation.from_euler("z", math.pi / 2.0)
+    return (base * Rotation.from_euler("y", roll)).as_matrix()
+```
+
+⇒ ⭐ **`yaw` is about world z (vertical); `roll` is about the yawed frame's body-y — which the docstring names
+the closing axis** ⇒ and its effect, in the author's words: **it walks the WRIST outboard while the pinch stays
+put.**
+
+⇒ ⭐⭐⭐ **The last sentence is the finding: *"Rolling is what lets two arms share an 88 mm span without their
+wrists meeting."*** ⇒ **The roll is not a stylistic choice — it is the mechanism that makes the 88 mm span
+reachable at all.**
+
+⇒ ⭐⭐⭐ **So §32 and this are in direct opposition, and §0#2's 88 mm sits exactly at the junction:**
+
+| | consequence |
+|---|---|
+| **reduce the roll** | ⛔ the wrists meet at an 88 mm span — the author says so, and p4's replaced value (0.22/45°) is the measured instance |
+| **keep the roll** | ⛔ only **13.5%** of the claw length can contain the cable (§32), and the rest rides on the striking side |
+
+⇒ ⭐⭐ **This is a much sharper statement of the third Rs question than "the placement forces the pose": the pose
+is the price of the 88 mm span, and the loss of containment is the price of the pose.**
+⇒ **§15's gate applies with full force** — anything that moves the span or the placement is Rs's.
+
+⚠ **Attribution:** the menu values (`r ∈ (0.0, 0.35, 0.6, 0.85, 1.1)`, `y ∈ (0.3, −0.3)` ⇒ 0.6 rad = 34.4°,
+0.3 rad = 17.2°, matching the reported 34 / 17) and `sgn = -1.0 if t == "L" else 1.0  # each arm tips AWAY from
+the other` are **`w2:p0`'s reading**. ⛔ **p18 did not confirm them** — the line range I printed showed different
+code, so I cite them as p0's and not as verified by me. ⭐ The `_rdes` block above **is** mine, read directly.
+
+### 34a. ⭐⭐ `w2:p11` is the fifth instance — and it supplies the qualifier my rule was missing
+
+p11 self-reported that its claw and backplate dimensions, its arm lengths, and the **5.35 mm bound** were all read
+from the **LOCK asset** `2f85_koshape.xml`, not from the model the judged run reads. ✅ The values are intact
+(pC verified the four geoms are identical on the run's model).
+
+⇒ ⭐⭐⭐ **But p11 draws a distinction my §33 rule was flattening, and it is right:**
+
+| claim | authority |
+|---|---|
+| **design** — *"this design's claws protrude 5.00 mm"* | ⭐ **the LOCK asset** — §0#4 human-LOCKED, i.e. the design authority |
+| **run explanation** — *"in this run the backplate did not reach because…"* | ⭐ **the model that run actually read** |
+
+⇒ ⛔ p11 made **both** kinds of claim from **one** read: correct source for the design claim, wrong for the run
+explanation.
+⇒ ⭐⭐ **And "always take constants from the run's model" would drag design claims onto run copies — which can be
+altered, and today one existed that lacked the pad-pair `exclude`** (§20a). ⇒ **The flattened rule would have
+made pB's trap the default.**
+
+⇒ ⭐⭐⭐ **§33's rule, corrected: say which claim you are making, then take from the matching authority. Design ⇒
+the LOCK asset. Run explanation ⇒ that run's model. Both ⇒ read both and check they agree.**
+⚠ In today's case the agreement was established **afterwards, by `w2:pC`** — ⛔ not by the panes making the claims.
+
+⭐ p11 also ties it to its own earlier finding: **a false self-criticism leaves a false cause in the record; a
+procedural error hidden behind a correct value leaves nothing at all.** ⇒ **Both reduce to: write the procedure,
+not the result.**
