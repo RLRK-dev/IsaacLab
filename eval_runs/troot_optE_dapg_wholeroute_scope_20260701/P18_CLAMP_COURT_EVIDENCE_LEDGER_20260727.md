@@ -6438,7 +6438,9 @@ source correction: -074 said "producer `:101`"; actually task_config `:101`, pro
 The BANK is current and correct — it took p5's -094 edit, which p4 had not yet been told of (my -390 relayed
 the -093 pin); the REPORT's sha + numstat are the previous pin's. Mechanism: a verify-to-commit gap while p5
 edited (or relay numbers standing in for own output). Nothing further to bank; the correction owed is to the
-record only.
+record only. 〔⚠ **Corrected by §195(b)**: the ① citation was RIGHT at its instant — it described
+`1c31c1b416` (21:15:45, a commit -077 never named); the defect was the bundled commit citation +
+sha-without-commit, not staleness. My "outgrown pin" mechanism withdrawn.〕
 
 **(c) ⛔⛔ The head-note confession, verified**: p4's retirement notes said "0.12" on all five siblings — wrong
 for two (cell/route are 0.02) ⇒ *"note が警告している当の欠陥を note 自身がやっていました"* ⇒ all five
@@ -6492,3 +6494,62 @@ quantization halves; hold K and instrument + physics move together, inseparable.
 **"where two quantities are bound by a formula but only one is written as a constant, the formula is enforced
 from only one side."** **(d)** Credit precisioned at p11's request: the two-value stiffness divergence = p11's
 find; the five-file head-note audit = p4's own read (§191(c) so allocated).
+
+## 194. The recount finds five, the exit was already built — and the report procedure fixes itself at the root
+
+**(a) ⛔→✅ p6's recount (-071 @ `7f8874a73f` "Recount the stiffness split and find the fix already in the
+tree")**: a full sweep of all 19 `.py` — cable joints in **five** files, **2-vs-3** (soft: cell/route; stiff:
+steps/reaim/c1seat) ⇒ the first report (reaim-only) AND its own 2-vs-2 both fell short; c1seat = p0's find,
+confirmed. Mechanism owned: *an attribute-order-dependent grep dropped differently-shaped files.*
+**(b) ⭐⭐ The exit already exists in the tree** — p6's find, converging with §193(b) from the control side:
+`ur15_cell_spec.py:53` CABLE_N = _tc.CABLE_SEGMENTS / `:57` CABLE_SEG = _tc.CABLE_SEG_LEN / `:231` **derives
+joint stiffness as EI/CABLE_SEG and prints it** (all three lines re-read here) ⇒ the "stop hardcoding, derive
+from authority" form is **already implemented**; #46's resolution = this path, no invention needed (adoption =
+p4/p5 court). **(c) ⭐ My EI note adopted with its premise measured**: the five hardcode drivers all share
+seg 0.030 (p6 measured) ⇒ per-joint 6× holds *among them*; vs the authority (SEG 0.015, different
+parameterization) it does not ⇒ driver-split = confirmed per-joint / authority-delta = written unconfirmed;
+the EI conversion carried as a relay leg, unreproduced — scope discipline kept.
+
+**(d) ⭐⭐ p4's -078: the RETURN taken as a PROCEDURE fix**: it re-derived its own banked blob (git show
+`691648d445` = `f29a684118…`, blob id `e54e062c46…` — ls-tree re-run here, exact) and named the mechanism as
+it then understood it, fixing the procedure: **bank-report shas henceforth come from
+`git show <commit>:<path> | sha256sum`** — items 4-5 of the same message already use the new form. (⚠ §195(b)
+later corrects the *mechanism* story; the procedure fix survives it and prevents the whole class.)
+**(e) ⭐ The EI rewrite landed** (@ `96ed7206c7` "Compare the cables by EI, not by joint stiffness"; artifact
+sha `adbbeb1d2e…` via git show, MATCH here): judged 0.0036 / soft 0.0006 / current 0.005 ⇒ 1.39× / 8.33×; its
+own 6× / 2.8× retracted as link-length-mixed. **(f) ⚠** The spec moved again on-disk (`c61b03c2…`, p5's -095);
+p4 correctly declined to bank without instruction — the instruction rides §192(d). **(g) ⭐ Rs surface event**:
+Rs asked to view video on a phone; p4 compressed the judgment video (26.7 MB → 1 MB, 960 px, 38.6 s,
+unedited) and sent it, stating plainly that **no video of the current cell exists** (its latest = 16:23,
+before the 19:20–21:27 rebuild) ⇒ awaiting run authorization; nothing was run.
+
+## 195. The delta closes everything — and my RETURN gets corrected: the citation was right, at a commit nobody named
+
+From -397R (21:36:33); pins verified here (delta artifact @ `63c376933c` "Verify the delta: all three landed,
+and the citation was not stale", sha MATCH; `1c31c1b416` re-read: **21:15:45**, "Land p5's placements for the
+eleven sites and the eighteen names", spec blob `41c5b24eae…` — exact).
+
+**(a) ✅ The delta: all three landed and discriminate** — `_plain_coefficient` 0 hits; `*2 *3 *1000.0 /2 *0.5`
+all detected; subscript / range / sum / bare-name free ⇒ *"the 2.0/3.0 asymmetry I reported vanished with the
+set — I had imagined completing the enumeration; removing it is superior: the only form where no new hole
+opens next week."* Template 23→**0**; guard 49→**1** (FLOAT_Z, then frozen). ✅✅ Stack stamps 5/5 with p4's
+md5-minus-line check **independently reproduced** (five md5 values banked) — *"the changed stack sits beside
+the same numbers, in the artifact. The evidence discriminates."*
+
+**(b) ⭐⭐ My §191(b) RETURN corrected — the citation was NOT stale**: p0 resolved both shas in history —
+`41c5b24eae` was the spec at `1c31c1b416` **21:15:45** (a commit -077 never named); `f29a684118` is the spec
+at `691648d445` 21:27:01. ⇒ **p4's ① cited the then-current blob correctly**; the spec moved 11 minutes later,
+*inside the very commit that landed the report's subject*. The real defects: **four items bundled under one
+commit citation while ① landed in another**, and **a sha carried without its commit** — p0's general form (3rd
+of the day): *"41c5b2… alone cannot be resolved to an instant by a later reader; 41c5b2… @ 1c31c1b416 can."*
+My "outgrown pin" framing and offered mechanism are withdrawn (§191(b) tagged); p4's -078 procedure fix
+survives untouched and prevents the class in both directions.
+
+**(c) ⛔ The actionable residue: the spec is DIRTY** — working tree `c61b03c2…` (and the clip doc) match **no
+commit** (git status re-run here: both M) ⇒ a disk reader reads unbanked content; pins from it will not
+reproduce in a clean checkout. Disposition already in flight = §192(d)'s bank instruction to p4.
+**(d) ✅ The EI correction taken with its own diagnosis**: *"I compared a per-joint quantity across
+configurations whose per-joint length differed — the very 'same name, different measurement surface' pattern I
+reported about others today"* — 2.78/16.66 exactly 2× overstated; direction and conclusions survive at
+1.39/8.33. **(e)** Scope kept clean: -077's message body unread (messages are not banked files); FLOAT_Z's
+freeze not judged; no runs. Artifact `P0_DELTA_VERIFICATION_20260727.md` sha MATCH (`fdae8693fc…`).
