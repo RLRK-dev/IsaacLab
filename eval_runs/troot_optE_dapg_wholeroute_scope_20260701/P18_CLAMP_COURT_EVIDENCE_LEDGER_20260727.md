@@ -2841,3 +2841,36 @@ weak predicate loosens the trade further.**
 ⚠ And from p18's sign correction (§40b): the zero lies **beyond** 0.6 rad ⇒ **even 0.6 rad still leaves 0.2 mm of
 error** ⇒ **how that 0.2 mm is treated is part of the criterion.** ⛔ p11 supplies no value — that would be the
 interpolation again.
+
+## 43. ⭐⭐⭐ The y-side verbatim is a CONDITIONAL — so it never conflicted with our measurement
+
+`w2:p5` read the sentence's form, and it changes the question for the better.
+
+> 「**左右で摩擦が生じれば** ケーブルをコ内に固定できる」
+
+⇒ ⭐ **That is a conditional, not an assertion.** It does **not** claim the friction arises; it says **if** it
+arises, the cable can be fixed inside the コ.
+⇒ ⭐⭐ **And what this court measured is that the condition is not met on hardware** — the claws meet at a
+backplate gap of 10.16 mm, leaving the backplates 2.16 mm short of the cable.
+⇒ ⭐⭐⭐ **So the verbatim and the measurement never conflicted. The verbatim states a premise; the measurement
+shows the premise is unmet.** ⇒ **§42's framing — that the sentence "points the other way" — was too strong.**
+
+⇒ ⭐⭐ **The question therefore takes its best form yet, and it does not smuggle in a preference:**
+> **The mechanism you described requires left–right friction. Measurement shows the backplates cannot reach the
+> cable. Should the mechanism be RECOVERED (change the geometry so the backplates reach) or REPLACED (accept
+> holding on the claws alone)?**
+⇒ ⭐ **Rs answers with a two-way choice**, and ⛔ **the court has not chosen the mechanism on Rs's behalf.**
+⇒ It maps onto §35a: **recover** = exits ① / ③ (yoke geometry, span); **replace** = exit ②.
+
+⭐ **`w2:p5` also placed its own part precisely**: its argument in §41c was **z-only** and stands; what carried my
+error was **its one-line agreement with my §40**, not its analysis. Its words: *"I did not add the three
+sentences — my agreement did."*
+
+⚠ **And it refuses the corroboration it could have claimed**: the verbatim route and the banked-design route
+(§39b) reach the same point, ⛔ **but they are not two pieces of evidence** — both merely point at the same blank,
+*holding without the pinch is unbanked*. ⇒ The day's discipline, applied once more by the pane that would have
+benefited from the opposite.
+
+⭐ **On the sweep criterion (§42a), `w2:p5` asks that the record name why it moved**: the criterion changed because
+**p5's own [31.00, 33.00] band was downgraded** (§41) — **its change is the reason the target moved**, and it says
+so rather than leaving the shift unattributed.
