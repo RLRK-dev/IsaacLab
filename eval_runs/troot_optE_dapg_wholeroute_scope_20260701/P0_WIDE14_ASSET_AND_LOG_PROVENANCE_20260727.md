@@ -132,7 +132,9 @@ limitation of the instrument I handed over, not of whoever ran it.
 
 ---
 
-## 3. Offered as corroboration, not as a re-judgement (log-grounded, provenance-incomplete)
+## 3. ⛔ RETRACTED — see §6. Kept in place so the retraction has something to point at.
+
+Offered as corroboration, not as a re-judgement (log-grounded, provenance-incomplete)
 
 The GRASP lines give seat-vs-cable offsets L `[9.4, -9.9, 1.4]` mm and R `[14.1, 14.2, -2.7]` mm.
 On the containment axis alone the errors are **1.4** and **2.7 mm**. Both exceed the old
@@ -166,3 +168,61 @@ carried with the widening. Reported as a pointer only; I do not touch the file.
    Is it recoverable? Until it is, §4(b) and every `sigma_min` / `column gap` figure in that
    log are unverifiable, including the ones that read favourably.
 3. Nothing else. gate unchanged, no run, no implementation.
+
+---
+
+## 6. ⛔ Retraction of §3 (added after MSG-P18-190; p11's finding)
+
+**§3 is withdrawn.** I offered the seat-vs-cable z components (L **1.4**, R **−2.7** mm) as a
+mechanism for Rs's success, on the reading that both were outside the old half-band ±1.00 and
+inside the new ±3.00. p11 has shown the instrument cannot support that comparison at **any**
+opening:
+
+- the vector snaps to the **nearest link centre** — the log says so in its own words,
+  `seat vs NEAREST cable link cab17` — and with `CABLE_SEG 0.030` that carries an axial
+  sampling residual of up to **±15 mm**;
+- the jaw is **rolled**, so the printed **world** components are not slot-axis components. The
+  same log prints `aim L: roll +0.30 rad (+17 deg)` and `aim R: roll +0.55 rad (+32 deg)`.
+
+Combined, p11 bounds the residual by `15·sin θ` = **5.2 mm at 20.1°**, **8.5 mm at 34.4°**.
+
+⇒ **1.4 and 2.7 mm sit far inside that noise floor.** They cannot show the cable was in the
+band, and they could not have shown otherwise — which is the property that makes a check not a
+check. I had marked §3 for provenance and for not re-judging the video, and both caveats were
+right; **neither of them was the one that mattered.** The quantity did not measure the thing I
+hung on it.
+
+**What survives:** the log prints those numbers, and that is all. **What falls:** that they
+corroborate containment, and with it the whole of §3 as a mechanism for the success.
+
+Nothing else in this file depends on §3 — §1 is asset-grounded and §2 is a provenance result.
+Rs's verdict never rested on §3 either.
+
+### 6.1 One measurement the retraction surfaces
+
+The same log carries **two different rolls**, and the coverage percentages in circulation use
+the larger one:
+
+| where in the log | L | R |
+|---|---|---|
+| `start-pose IK ... chosen pos 0.00 mm roll` | 20.1° | **34.4°** |
+| `aim ...: roll` | +0.30 rad = **17.2°** | +0.55 rad = **31.5°** |
+
+At **34.4°** the opening-14 figures are 39.9 / 79.7 / 93.0 % for bands 6.00 / 12.00 / 14.00.
+At the **aim** roll **31.5°** the denominator is `22.00·tan 31.5° = 13.48 mm`, so band 14.00
+reaches **100%** — `atan(14/22) = 32.47°` is above 31.5°. The two readings differ by up to
+**7 points**, and one of them flips the top band to full coverage.
+
+⛔ I am not choosing which roll governs containment; the grasp instant is p11's court, and both
+numbers carry the same provenance caveat as everything else printed by that log. Surfaced only
+so a single figure does not travel to Rs without its input being named.
+
+### 6.2 Two small confirmations
+
+- The asset I measured in §1 is the one the run reads: `ur15_steps_reaim.py:32` sets
+  `GRIP_XML` to the **absolute `thread_isaac_lab/assets/...` path**, not the same-named copy in
+  `p4_ur15_sim_20260727/` (which is still 0.0382/0.0258 = 10.00). p18 §2's warning is confirmed,
+  and §1 is on the right side of it.
+- p11's opening-14 percentages read 39.8 / 79.7 / 92.9 against my 39.9 / 79.7 / 93.0. That is
+  rounding on the angle (34.4 vs 34.38), not a disagreement — flagged only so a third number
+  does not appear later.
