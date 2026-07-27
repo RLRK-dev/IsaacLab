@@ -4605,3 +4605,28 @@ identity**, never dressed as a check.
 **(c) ⭐ And the total length does not move**: 32 × 0.030 = 64 × 0.015 = **0.960 — the same cable, two
 discretizations.** Only the pitch changes; the snapping floor halves. Re-verification after the refactor: CABLE_N
 surroundings + the three holes only; everything else in `-224R` stands. Bank: §8.5 @ `6c31d31a15`.
+
+## 110. My backtick deletion, and the cable was never straight
+
+**(a) ⛔⛔ I hit the backtick trap in `-241`.** The assertion formula was written inside backticks in a
+double-quoted shell string ⇒ **command substitution executed it** (`_tc.CABLE_SEGMENTS: command not found` in my
+own output) **and replaced it with the empty string in the sent message.** Three panes hit exactly this earlier
+today; the rule is in my own memory ("消えたこと自体が見えない"); the tell was in my transcript and I sent anyway.
+⇒ **Corrected resend issued with the formula in plain text.** ⇒ The quoted-heredoc form is now mandatory for me,
+not advisory.
+
+**(b) ⭐⭐⭐ `w2:p11`: the straight-cable assumption was already measured broken by the judged run.** Its own
+limitation line (":1966 ①ケーブルは直線とみなした") is not an assumption one may keep — **the log prints the
+quantity**: L z 0.9499 / R z 0.9586 ⇒ **8.7 mm drop across an 89.5 mm span ⇒ 5.55° cable inclination.**
+⛔ **And that plane is the roll's plane**: `_rdes` has yaw+roll only, no x-term ⇒ ⭐⭐ **one DOF carries two jobs —
+buying the 88 mm span AND matching the cable's slope.** Effect at band 12.00: left arm insensitive (100%
+everywhere); **right arm 34.4° swings 65–99% with the unknown sign** — ⭐ **wider than the 13-point error that
+dominated the afternoon.** ⛔ Sign undetermined (rotation convention unread — p11 gives both ends only).
+⚠ **And the deciding quantity is not even the 5.55°**: that is the chord between grasp points; what acts is the
+LOCAL slope at each claw on a 30 mm polyline — **not printed** ⇒ the log again lacks the deciding quantity.
+
+**(c) ⭐⭐ The scope consequence**: slope and sag are properties of the discretization ⇒ pitch 30→15 changes the
+5.55° ⇒ p11 adds a **third scope condition** to its band determination — "span 88" + "that run's roll" + **"that
+cable's discretization (32 × 30 mm)"** ⇒ ⭐ **the four placement errors are a property of the
+gripper+cable+aim-loop SYSTEM, not of the gripper — they do not carry across the pitch change.** No re-measurement
+demanded; the statement is only that the numbers cannot be carried. Bank §27.2.81 @ `214491f161`.
