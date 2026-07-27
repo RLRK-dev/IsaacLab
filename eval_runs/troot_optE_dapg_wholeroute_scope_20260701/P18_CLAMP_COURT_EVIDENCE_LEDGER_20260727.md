@@ -2611,3 +2611,56 @@ said so.**
 ⇒ ⭐⭐ **The day's theme, one more time and in the most expensive place: a quantity treated as a constraint that
 is actually an artefact of how it was sampled.** The saturated claw channel, the frozen-x error metric, the
 `+0.00` distance — and now a five-point pose menu standing in for a continuum.
+
+## 39. ⭐⭐⭐ The "must float clear" branch is refuted by our own banked record — the escalation collapses
+
+`w2:p0` and `w2:p5` read the banked design independently and reached the same place; **p18 read it directly**
+(`GD-KoShape-Finger.md:94-96`, verbatim):
+
+> `Grip = **COMPOSITE**: lateral flat-pad (pad1) pinch [dominant, −1.06/−1.39] + vertical claw (f1ext/f2ext)`
+> `straddle [−0.7]; **f1ext bottom claw engages under lift load** = the open-bottom catch the V-groove lacked`
+> `(the コ rationale, CPU-supported).`
+
+⇒ ⭐⭐ **In the banked held configuration the cable penetrated the claws by 0.7 mm — it was touching them.** It
+was **not** floating clear inside the slot.
+⇒ ⭐⭐⭐ **And "f1ext bottom claw engages under lift load" is written as the reason コ was chosen over the
+V-groove.** ⇒ **Claw contact is the mechanism, not a failure of it.**
+⇒ ⛔ **So the branch "the cable must float clear" is refuted by our own record, and does not need to go to Rs.**
+
+### 39a. `w2:p5` downgrades its own acceptance band, correctly
+
+p5 derived **[31.00, 33.00]** as *"Ø8 fully inside the mouth"* — i.e. the **floating** condition — and had
+proposed it as a verdict leg (§10d's L1).
+⇒ ⛔ **But the design intends the claws to bite under load** ⇒ **the band would reject the very configurations in
+which the design works.** ⇒ ⭐ **The correct basis is the weak one**, and with `w2:p0`'s number — **100% up to
+roll 39.3°** — the required **34.4° is inside it** ⇒ ⭐⭐ **the roll-versus-88 mm trade disappears.**
+⚠ **p5 keeps the band but changes its use**: [31, 33] remains valid as the geometry of *floating* containment and
+still serves to **exclude non-capture** (e.g. `pad2`-only at 13.5 mm out) — ⛔ **but not as a pass/fail leg.**
+
+### 39b. ⭐⭐⭐ What actually remains — one question, and it is narrower than anything asked today
+
+Both panes narrow it the same way, and it is sharper than "can the claws touch":
+
+> **The banked record shows the cable was held *with* claw contact — under the COMPOSITE grip, whose dominant
+> term is the `pad1` pinch. ⛔ That pinch is unreachable on hardware (the claws meet at a backplate gap of
+> 10.16 mm). So the question is not whether claw contact is permissible, but:**
+> ⭐⭐⭐ **can it hold on the straddle term alone, with the term the banked design calls *dominant* absent?**
+
+⚠ **And the banked retention evidence does not answer it** (`:99-100`, p18 read it):
+> `RETENTION (X+Z load axes) NOW TESTED (CPU): HOLD 200 steps sag 0 (848→850mm) + lateral ±8mm EE wiggle holds`
+> `(no drop). Axial Y = out-of-scope by design…`
+⇒ ⛔ **That test ran under the composite grip — with the pinch present.** ⇒ **Retention without the pinch is not
+banked.** ⇒ It is a **measurable** question, and any PASS from it carries §運用15's non-conservative tag.
+
+⇒ ⭐⭐⭐ **`w2:p5`'s conclusion, which p18 adopts: moving an invariant has not been shown to be necessary.**
+§35a's three exits are required **only if that one question falls "no"**. ⇒ **§38's hold stands, and the
+escalation shrinks from "three premise-level options" to "one physical question, and no premise moves unless it
+fails."**
+
+⚠ **What does not dissolve:** the observed asymmetry — one hand at containment **+0.4 mm** with all four claws
+contacting, the other at **−13.5 mm** with `pad2` only — ⭐ **is now separated from the pose question and belongs
+to positioning**, per p5. ⇒ Rs's *"the pose doesn't match"* is no longer explained *as loss of containment*.
+
+⇒ ⭐ **And this closes a loop from the start of the session**: `GD-KoShape-Finger.md:95` was the day's **first**
+rediscovery — the holding mechanism, found late. It is now doing the work it should have done at the beginning,
+and it is what shrank the escalation.
