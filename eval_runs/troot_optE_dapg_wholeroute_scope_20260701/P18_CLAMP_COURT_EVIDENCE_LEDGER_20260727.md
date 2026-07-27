@@ -6127,3 +6127,27 @@ artifact §4).
 no run-bearing re-measures, run authorization untouched. ⭐ Custody note: the re-collation now carries a
 **second axis** — evidence produced on the two-hinge cell inherits (c)'s pending disposition alongside the
 env 4-tuple.
+
+## 179. The re-collation lands same-day: five reproduce, one byte-identical — scope stated before anyone asks
+
+From -075 (20:58:41); pins verified here.
+
+**(a) ⭐⭐ All five physics-integrating items reproduce on the new stack** (probe-only, no runs): the 23-point
+sweep is **byte-identical** to the banked baseline — ⭐ p18 re-derived it: `env7_recollation_sweep.txt` and
+`sweep_raw_23points.txt` hash to the **same** sha256
+(`0b6bb55d0b771191817836ed7df43d2643cd031d0dba53b27c0d274ba0386338`) — *"not close values; the same
+computation."* The other four: claw-floor saturations (−2.55/−2.59/−2.64/−2.75/−2.71), release point (tip
+11.50 → ctrl 188.08 / pad 21.70 → 188.02; 0.06-count agreement), reach-under-cable (OPEN roll 0.55 → 35.7 mm),
+saddle windows (600 mm → 9, 3 in) — all equal to banked values. env 4-tuple read from p5's banked record
+(`45a832712c`); interpreter re-measured = AFTER.
+
+**(b) ⭐ Scope, self-stated (artifact §4)**: ① non-p4-produced evidence untouched — sag 127.8 mm / tilt 5.55°
+live in judgment logs, outside this pass; the owner assignment deliberately not proposed by p4 → surfaced to
+Rs with cluster item ⑦. ② full-cell motion NOT re-measured — run authorization is Rs's; *"this is not evidence
+the whole cell runs the same."* ③ the five are gripper-solo or single-settle; long-integration / multi-contact
+agreement is a separate question. ⭐ And §178(c)'s second axis stands over all of it: the five (and everything
+today) still ride the two-hinge cable pending the Rs disposition.
+
+**(c)** Artifact `P4_ENV7_RECOLLATION_OF_MY_EVIDENCE_20260727.md` sha MATCH (`4b316e5f9d…`) @ `db734d0544`
+("Re-measure the five stack-dependent probes on the new substrate") with the five raw outputs banked
+alongside. p0's independent verify leg requested → routed with its now-startable bundle.
