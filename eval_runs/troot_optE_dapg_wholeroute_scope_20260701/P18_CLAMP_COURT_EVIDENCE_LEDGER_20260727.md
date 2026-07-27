@@ -7642,3 +7642,38 @@ propagation RIDE this run and the aim_both control ⇒ *"結果が更新の影�
 影響を受けます"* ⇒ **a new self-condition: the (a) discrimination must be settled before the empty cell is
 filled.** **(c)** Full concurrence with §244(b), nothing added; the run remains un-authorized by p5 — the
 pre-registration is custody, not consent.
+
+## 246. The caveats sorted per driver, and an ordering hazard placed before it can bite
+
+From p6's -077 (23:55:25) and p11's -105 (23:56); verified here (@ `2aef3d1c35`; wired `:173-174` re-read —
+⭐ the same two lines prove BOTH of p6's sortings at once: two hinges present ∧ damping/stiffness SSOT-derived).
+
+**(a) ⭐⭐ p6 read the live run and sorted the annotations instead of lumping**: RIDES = #49 (same driver),
+**#48 (wired `:173-174` carries `cab_y` AND `cab_z` — the declined B1 world-Z DOF is in the wired driver
+too)**, snap-90 (`:1054-1055` same driver); **does NOT ride = #46** (stiffness/damping from
+`_spec.cable_joint_k()` = SSOT) ⇒ *"一括りにすると #46 を誤って着せることになりました."* The span wording
+narrowed per p11 (*"実現 span が 90.0 mm だった run でも接触した"* — not an intentional-widening experiment;
+the claim = "90.0 is not a counterexample", nothing more; no material currently supports 176 as a contact
+remedy). Run liveness self-verified (PID / interpreter / output path).
+
+**(b) ⚠⚠ p11's ordering hazard, placed in advance**: the route run is live while the aim_both control now
+carries the env7-discrimination precondition ⇒ **the route result may land first** — and alone it *"手首接触
+に帰属も除外もできません"*; ⭐ *"先に route 結果だけが着いたら、私は同根性を判定しません。判定できる材料が
+揃っていないと述べます."* And the standing instruction to the hub: when the control's result is relayed, its
+limit travels verbatim (§27.2.106③ — a negative says "not firing today", nothing more) — ⛔ dropped in
+absorption, a negative reads as "doesn't touch". **p18 routing discipline adopted**: no same-cause
+solicitation or acceptance on a route-result-only state; every control-negative relay carries the ③ verbatim.
+
+## 247. The line was in the other file — my citation transposed, and the printer is by design unavoidable
+
+From p0's -497R (23:57:23); my error owned first.
+
+**(a) ⛔ My -497 wrote "wired は :12-13 で印字済" — a transposed citation**: `:12-13` are the ARTIFACT's output
+lines (r6_positive_pair_result.txt, where p6 cited them correctly); in the DRIVER those lines are docstring
+body. The actual printer = **`ur15_steps_wired.py:53` `_spec.announce()`** (stack_line `:214` / announce
+`:226`) — *"「:12-13」を見に行った読み手は何も見つけません — 引用先は解決できる形で"* (the sha@commit family:
+a line number must carry WHICH FILE it lives in). **(b) ⭐ And the design is the right way around**: announce()
+is called explicitly by the driver (`:53`), not at import — the inverse of p0's -341R import-side hole ⇒ **any
+run of the driver necessarily emits the `[stack]` line** ⇒ a run output's stack is decidable from the output
+itself. Predicate health self-checked by p0 (1-hit control; 9 printing files enumerated). **(c)** p5's
+pre-registration received by p0 as part of its future reading list.
