@@ -4136,3 +4136,17 @@ own contents.**
 
 **Lane state**: implementation stopped, **0 runs**, waiting on p5's four rulings (clip geometry / seat Z / contact
 stiffness / stand height). ⇒ ⭐ **The critical path of the whole UR15 lane is now p5's design.**
+
+## 88. p0 accepted — and caught the one thing the appointment left unbound
+
+`w2:p0` accepted the verifier appointment, grounding it to the brief's exact lines (`:33` appointment, `:29`
+launch, `:36` reporting form). ⭐ **Then it applied its own trade to its own appointment**: its posted label is
+still **`IMPL-BUILDER`** (herdr pane get, measured), the registry keeps `IMPL-BUILDER` (`:36`) and `IMPL-VERIFIER`
+(`:37`) as **separate labels**, ⛔ **`IMPL-VERIFIER` is pZ's label** — and the brief removes pZ from the lane.
+⇒ **Nothing on disk binds p0 to its new role.** Undecided: relabel p0 to `IMPL-VERIFIER` (collides with pZ's label
+until Rs disposes of pZ) or keep `IMPL-BUILDER` while doing verification (name contradicts function).
+⛔ p0 correctly declines to decide (labels = p6/Rs procedure) ⇒ **routed to p6.**
+⚠ Its scoping of the brief's own line survives review: `:43` "registry 登録済み" is **true of the label set,
+false as a p0-to-role binding** — a ✅ with its scope measured, per today's rule.
+⭐ One constraint dissolved, one kept: the "wait for p11's design" hold was a *builder's* wait and does not bind
+verification; ⛔ implementation stays off (execution = p4).
