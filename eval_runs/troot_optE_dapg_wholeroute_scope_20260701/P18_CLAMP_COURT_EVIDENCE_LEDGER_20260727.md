@@ -3301,3 +3301,56 @@ court has held all day; the corrected wording is dispatched so the panes re-pin 
 ⇒ ⭐ **And the point of the exercise: §51's precision was already in this file, and two instances of the reading
 it corrects were still live below it.** ⇒ **Flagging a hazard does not clear the instances of it that are already
 written down** — the day's shape, on my own record, found by running my own rule against myself.
+
+## 54. ⭐⭐⭐ Rs's column answer couples to the reach analysis — the 34.4° may rest on poses that cannot exist
+
+`w2:p11` made a connection nobody had made, and it reaches the number this court was about to send Rs.
+
+⭐ **If an arm link can pass through the column, the IK and the servo feel no resistance** ⇒ **the trajectory
+executes cleanly and the run's success indicators look better than reality.**
+⇒ ⭐⭐ **A concrete instance of §14's class rule**: *a verdict resting on "the waypoint was reached" is
+non-conservative if the path goes through the column.*
+
+⇒ ⭐⭐⭐ **And p4's reach analysis was produced on the same blind predicate.** The figures that yield *"34.4° is
+required"* — roll 0 ⇒ 158.2 mm, roll 34.4° ⇒ 0.2 mm — come from a solver that **cannot see the column.**
+⇒ ⛔ **If the "reaching" pose penetrates the column, that pose is unavailable on hardware** ⇒ **"34.4° is
+required" may itself stand on an unreachable path.**
+⇒ ⭐⭐ **So the point-in-solid test must be applied not only to the executed trajectory but to the reach poses
+that produced 34.4°.** Same arithmetic, same inputs (each pose's arm-geom world positions).
+⚠ p11 claims **no** penetration — it is a structural point about what the predicate could not see. ⇒ **The same
+shape as §15** (making the yoke real reopens the selection), now landing on the **pose menu**.
+
+⇒ ⭐⭐ **The 34.4° therefore has two independent reasons to be provisional**: §38 (it is the minimum of a
+five-point menu, not of the geometry) and this (the menu was evaluated by a predicate blind to the column).
+⇒ **§38's hold on the escalation is reinforced, not merely maintained.**
+
+### 54a. `w2:p0` made the column test usable on every link — and narrowed its own earlier answer
+
+⛔ Its first radii were measured **from the mesh origin** — upperarm **721**, forearm **569** mm ⇒ the conservative
+inequality fires almost everywhere ⇒ **unusable on the long links** (§32b).
+⭐⭐ Re-measured **about each mesh's own principal axis** they become practical:
+
+| link | radius about its axis | axis length |
+|---|---|---|
+| base | 109.4 | 204 |
+| shoulder | 129.0 | 198 |
+| upperarm | **147.3** | 787 |
+| forearm | **118.2** | 626 |
+| wrist1 / wrist2 / wrist3 | **74.3 / 73.6 / 65.0** | 128 / 127 / 103 |
+
+⇒ ⭐⭐⭐ **Test, in its usable form: distance from the column's axis to the link's axis segment, minus that link's
+radius about its own axis, < 102 mm ⇒ possible penetration.** ⇒ **The numbers are 65–147, so it works on every
+link and the 721/569 problem disappears.** ⇒ Needs only the two endpoint world positions of each link axis —
+**which the driver holds.**
+
+⛔ **And p0 narrowed its own earlier answer**: *"the forearm can also be contained"* weakens. Its bbox
+cross-diagonal 193.0 < 204 said "possible", ⭐ **but its true radius about the principal axis is 118.2 > 102** ⇒
+**a 102 mm column cannot contain it.** ⇒ ⭐ **Only wrist1/2/3 (74.3 / 73.6 / 65.0) are certainly containable.**
+⚠ **Limit p0 states**: 118.2 is the radius of the minimum cylinder **coaxial with the principal axis**; a
+different axis could give less ⇒ *"will not fit"* holds **for the principal axis**, and is **not a complete
+proof.** ⇒ **Narrowed, not closed.**
+
+⭐ **One caveat of p0's is already discharged**: it flags that the column's world-origin / no-rotation premise
+came from the cell file and needs driver-side confirmation (§31's reason). ⇒ **`w2:p11` already confirmed it on
+the judged driver** (`ur15_steps_reaim.py:175-177` — column at `0 0 0` with no quat; stem r 0.102, z 0→1.53;
+foot r 0.215, z 0→0.06). ⇒ **The test can be specified from driver-side constants only.**
