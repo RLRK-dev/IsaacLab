@@ -3440,3 +3440,47 @@ geometric) and §54 (the predicate that produced it cannot see the column).
 ⇒ ⛔ **So "only 13.3% of the claw can straddle" must not travel as settled until 34.4° is settled.**
 ⭐ Its own lesson: it had presented **unconditional geometry and conditional application in one table**, so
 downstream could take both with equal weight ⇒ **it will split the tables.**
+
+## 57. ⛔ §55's "p5 = clean" contradicts §56, which I wrote directly after it
+
+**Cause side: p18.** §55 recorded `w2:p5` as **clean**; §56 records p5's own finding of **five live retracted
+readings** in its file. ⇒ ⛔ **Both are in this ledger, one section apart, and I did not reconcile them.**
+⇒ ⭐ **The day's shape once more — and this time inside the very sections about that shape.**
+
+⭐ **p5 refused the favourable attribution itself, for the third time today**, and states the correct scope:
+- ✅ **Clean on the 2.16 axis** — it never used that figure as lateral play.
+- ⛔ **Five live instances across the whole file** (`-055`): `:37` **H3** (the position↔force framing, retracted),
+  `:38` **H4** (the containment band as a hard constraint, retracted), `:26` (the band's standing), `:77` and
+  `:121` (the 14–26 mm figure as grounds and as the sensitivity table's dominant row, invalid).
+  ⛔⛔ **Two of them in the "hard constraints" section.**
+
+⇒ ⭐ **Corrected result of the self-check round:**
+> **`w2:p5`: clean on one axis, five overall — `w2:p18`: two — `w2:p0`: one, plus three unit caveats and an
+> absence — `w2:p11`: two, the second again the measurement specification.**
+
+⇒ ⭐⭐ **And §55's point survives in a stronger form, as p5 says: the scope of the check determines the count.**
+**p5 would have stopped at "clean" had it run only the 2.16 query.** ⇒ **What separated the four results was not
+care, and not even running a check — it was how wide the check was.**
+
+## 58. ⭐⭐⭐ The IK's collision rejection is structurally blind to the column — and there is a third fail-open
+
+`w2:p0` raised §54's structural claim from suspicion to **established**, at source:
+- `:592-594`, docstring: *"drops the ones that would sit in collision"* ⇒ **the rejection exists**
+- `:666`: `free = [c for c in cands if not c[3]] or cands`
+- the test is `touching()` at `:277-286`, iterating `for i in range(dd.ncon)` ⇒ ⭐⭐ **it stands on the contact
+  list.**
+
+⇒ ⭐⭐⭐ **And `stem`/`foot` generate no contacts at all** ⇒ ⭐⭐ **the IK's collision rejection is, by
+construction, unable to drop a pose that passes through the column.**
+⇒ ⭐ **So `w2:p11`'s "the predicate could not see the column" is no longer a conjecture**: the rejection
+mechanism **exists**, and it is **blind to the column by construction.** ⇒ **§54's request — apply the
+point-in-solid test to the reach poses, not only the trajectory — now has a mechanism behind it, not just a
+worry.**
+
+⚠⚠ **And a third fail-open, in the same line**: `:666`'s **`or cands`** ⇒ ⭐ **if no collision-free candidate
+exists, it falls back to all of them**, and `:675` prints *collision-free 0* while proceeding.
+⇒ ⛔ **Third fail-open recorded today** — the production env's `getattr` default (§25a), its length mismatch
+(§25a), and this. ⚠ p0 notes it **may well be deliberate** (a pose beats no pose) — ⭐ **but "proceeds at zero"
+belongs in the specification rather than in a printed line nobody has to read.**
+⇒ ⭐ p0's outstanding premise is discharged: the column constants were read driver-side by `w2:p11`, so the
+in/out test can be specified from driver constants alone.
