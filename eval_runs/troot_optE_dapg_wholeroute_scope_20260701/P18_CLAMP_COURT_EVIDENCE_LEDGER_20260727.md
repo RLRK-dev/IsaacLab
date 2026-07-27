@@ -3729,3 +3729,59 @@ the angle table only — ⭐ **the wider audit then hit 11 lines**), pB (its fig
 04:06) ⭐⭐ **plus a launcher (PID 4192299) waiting to start the next** ⇒ ⛔ **"zero processes" occurs mid-series**
 ⇒ p5's rule (landed = p4's explicit *"series complete"*, never a process count) was **structurally required, not
 cautious**. ⭐ And the series **grew**: the span-176 run is in flight.
+
+## 70. ⛔ I retract §64(b)'s "decidable in the existing log" — the log's producer is not the file we read
+
+`w2:p0` was **one step from answering it** ("8 solved / 4 collision-free ⇒ mismatch ⇒ the fallback did not fire")
+and stopped, because that reading depends on `ur15_steps_reaim.py:666/675` — ⛔ **and that file did not write this
+log.** Its closed query: the `sigma_min` / column-gap / `WORST` fields in `ur15_wide14.log` are printed by **no
+on-disk `.py`** and **have never existed in any ref's git history** (IsaacLab `.py` + Claudecode + src + Downloads +
+readable `/tmp` + `$HOME/*.py` + `git log --all -S`) — ⭐ **with discriminating power shown**: the same predicate
+has **19 hits** in that log, so the query can find the thing when it is there.
+
+⇒ ⛔ **§64(b) stays OPEN**, and its reason changes from *"the log is needed"* to **"the source that wrote that log
+is needed."** ⇒ ⭐⭐ **Third instance today of the same trap** — a claim grounded in one copy of a file while the
+artefact came from another (§31's five copies; `-161`'s constant). ⚠ **I banked "decidable, no new run required";
+that was mine.**
+⚠ And a consequence p0 names against its own contribution: the column-gap figure is **its instrument**, so
+**whether the run used its corrected form** (solid distance, segment clamp, top-face term) **cannot be confirmed
+while the source is unreadable.**
+
+⭐ **p0 also checked the input nobody else checked**: claw x-width `size 0.011` is **unchanged across all 8 geoms**
+⇒ the 22.00 mm cap in every percentage did not move ⇒ ⭐ **p11's recomputation inputs are confirmed**, and the
+opening-14 arithmetic (15.26 / 39.9 / 32.47 / 93.0) and opening-10 (5.19 / 13.3) reproduce.
+Pin: `P0_WIDE14_ASSET_AND_LOG_PROVENANCE_20260727.md`, `7caec4b557`, sha256 `23afb077a550fa48…`.
+
+## 71. ⭐⭐⭐ The same 13-point trap, caught before it fired
+
+⭐ **`w2:p0`: one band is missing for the 14.00 mm mouth.** p11's inner-faces-±1.00 variant is
+**[26.00, 38.00] = 12.00** ⇒ **100% up to 28.61°, and 79.7% at 34.38°**. The 10.00 mouth got **three** variants
+(2.00 / 8.00 / 10.00); the 14.00 mouth got only **two** (6.00 / 14.00).
+
+⇒ ⚠⚠ **12.00 and 14.00 both parse as "the opening-14 band", and they differ by 13.3 points at 34.38° — exactly
+the size of the 8.00-versus-10.00 error corrected two hours ago (§63).**
+⇒ ⭐⭐⭐ **The identical trap, pre-empted instead of banked.** ⛔ p0 declines to choose (p11's court).
+
+⭐ **And one consequence of the widening nobody else had found**: `ur15_steps_reaim.py:892` reads *"within ±1.0 mm
+of the seat"* — ⛔ **that is the old half-width for a 10.00 mm mouth; for 14.00 it is ±3.0.** ⇒ **a tolerance
+constant in the driver still encodes the superseded geometry.** Pointer to the driver's owner; p0 did not touch it.
+
+## 72. ⛔ Two corrections to my §65 table, and a pin I must un-relay
+
+**(a) ⚠⚠ Custody, urgent — I relayed the wrong pin.** In `-188` I told p4 to bank p5's `aea4792dcab797a8…`.
+⛔ **That version contains a line p5 has since measured to be false.** ⇒ ⭐ **Bank `ae8696772a847703…`**
+(358 lines, **+125 / −0**, append-only, verified by `git diff --numstat`). ⭐ p5 declared all three pin moves today.
+
+**(b) ⛔ p5 corrected its own §17 — inside the section that indexes this very type.** Its line
+*":72 :166 … span 88 → 176"* was **false**: `task_config.py:235 GRIP_HALF_SPAN = 0.044` is unchanged
+(verbatim *"(commanded arm-to-arm span = 88mm)."*), `RS71:24` unchanged, and a closed query for the span-form
+`0.088`/`0.176` under `configs/` + `envs/` returns **0**. ⇒ its `:72`/`:166` needed **no** correction ⇒ affected
+lines **11 → 9**. ⭐ **p5 names the type on itself**: in one table it measured the mouth by opening the asset and
+wrote the span **without opening**, from a relayed verbatim ⇒ ⭐⭐ **authorised ≠ implemented** — written inside the
+section indexing *written ≠ effective*. ⚠ It marks the relay leg: it has not primary-verified that Rs verbatim.
+
+**(c) ⭐ And a real refinement to my §65 table.** I wrote both rows as "recorded in spec: ⛔ no". ⇒ ⛔ **Wrong for
+§0#2**: the spec says 88 and **the code says 88** ⇒ ⭐ **§0#2 is not stale — it agrees with the implementation.**
+What is outstanding there is that **Rs's authorisation is unimplemented**, which is a different thing from a stale
+record. ⇒ ⭐⭐ **Only §0#4 needs the spec surface reflected.**
+⭐ p5 also read `route_executor.py:150` directly ⇒ **independent confirmation** of the guard that raises #45's cost.
