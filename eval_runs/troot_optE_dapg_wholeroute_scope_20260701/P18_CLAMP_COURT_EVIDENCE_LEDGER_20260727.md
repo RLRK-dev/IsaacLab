@@ -6838,7 +6838,12 @@ survey sha MATCH `3e0d7fc557…`; my dispatched path confirmed absent; the Downl
 **(a) ⭐⭐ The survey**: 116 samples / both panels / machine contour-scan + per-candidate eyeballing; numbers
 and logs unread. **Positives = the cable through the clip's SOLID at t=22.00 s and t=35.00 s** — ⭐ which sit
 exactly on the log's C1-fix (STEP9, t=22.0) and C2-push/fix (STEP15/16, t=34.4/36.0): Rs's eyes, the log
-columns, and the frames now agree **three ways, one per clip**. Rejected 6 (two-view failures / ridge
+columns, and the frames now agree **three ways, one per clip**. 〔⚠ **Scope tightened by pC itself (22:13)**:
+the sampling was 10-frame / 0.333 s with only candidates scrutinized ⇒ the survey supports **"at least two
+times", not "exactly two"** — no count, frequency, or duration may be derived from it. ⭐ And the stronger
+direction: pC never read the log, so its two times could not have been aimed at the clamp times — the
+coincidence is unbiased on pC's side; ⛔ but the coincidence CHECK was p18's collation, not pC's act, and this
+was a third read of seen bytes ⇒ **pC's side remains one leg.**〕 Rejected 6 (two-view failures / ridge
 explanations / smoothing); ⭐ **table penetration NOT established** — all 98 machine flags are the cable's
 free end ⇒ the penetration is through the CLIP body; the table surface shows no visual piercing (a
 refinement, not a conflict — p4's seat-link-at-table-height reading concerns the clip's interior).
@@ -6872,3 +6877,26 @@ the next posture choice (*"合否だけだと余裕が 0.1mm なのか 10mm な�
 items accepted from p11's side (the weak band — same direction as its full-containment argument; the
 backplate conversion — p11 hit the 2.40 saturation floor itself, §27.2.74). Routed: p4 (the measurement +
 three-number print spec); p5 (FYI — the R4 loop closes as a printed budget).
+
+## 210. One formula, two provenances — the derived diameter and the measured offset
+
+From p5's -100 (22:13:52); no doc change (its §12-5 was already Ø-parameterized — a reading confirmation).
+
+**(a) ⭐ 8.00 IS derived — with internal evidence**: §12-5 carries BOTH rows, Ø8 → 18.20 and Ø10 → 20.20 ⇒
+*"別に測った数なら Ø10 の行は書けません — 値は Ø に追従します."* And better: CABLE_R is Tier A
+(task_config `:137` = 0.004) ⇒ deriving the threshold as 2×CABLE_R puts it **on the single source** —
+superior to the literal; actively endorsed.
+
+**(b) ⛔⛔ But inside the SAME formula, 10.20 must NOT be derived**: floor = Ø + offset, where **Ø = derived**
+(2×CABLE_R) and **offset = measured** (§12-5's four points, spread 0.05 mm). Deriving it from the geometric
+10.00 **under-floors** — 10.00 is the full-open LIMIT, not the release-region value (the offset is a state
+function, 9.99 → 10.21, §12-12's 23 points). Exact form = **floor = 2×CABLE_R + offset(that gap)**, offset
+drawn from the measurement table; the constant 10.20 is second-best (the §12-11(a) retraction's point: never
+represent a state function by an endpoint or an average). ⭐ **The day's Tier discipline, at term
+granularity: one formula may carry two provenances, and each term keeps its own.**
+
+**(c)** Acknowledgments folded: R4 = the printed budget, accepted; pC's broken-blind declaration received as
+*"the correct form"* — the hand-ID hold continues, the design unblocked (its -098 ■4 unchanged); the 5-point
+sweep received as the empirical backing of the conjunction AND *"私が -099 で自認した「片側しか見ていない
+述語」の実例"*. Routed: p4 (implement the two-provenance floor form); p11 (FYI — its backplate conversion now
+has its exact expression).
