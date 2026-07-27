@@ -1051,3 +1051,29 @@ link was (identity may differ — not a drift)"*. driver sha256 `770b2271…` @ 
 ⇒ ⭐⭐ That is the direct answer to `w2:p0`'s finding that the index was **computed and discarded**: from here on,
 *"the cable moved"* and *"the measurement jumped"* are separable by a reader of the log.
 ⚠ The existing log and video are unchanged, so the object under judgement has not moved.
+
+### 11a. ⚠ A new design requirement, a conditional that could invert the design, and a moving pin
+
+⭐ **`w2:p5` added one requirement** in response to §10g-2x's endpoint/path point: the cable must be inside the
+slot **for the whole closing interval**, not merely at the endpoint — matching the endpoint only lets the claws
+sweep it on the way.
+
+⇒ ⭐⭐ **A conditional worth reading carefully:** if the slot moves **13.4 mm** from open to closed and the slot
+height is **10.00 mm**, then ⛔ **the open-pose band and the closed-pose band do not overlap** ⇒ ⭐ **no aim point
+keeps the cable inside for the whole interval.** ⇒ In that case the design changes direction — from *avoid
+contact* to **contact without flicking the cable out**.
+⛔ p5 does not carry this as settled: the 13.4 mm **direction is unmeasured** (inherited from p11's own caveat).
+
+⇒ ⭐ **Falsifier: one run, and a cheap one** — hold the arm fixed, close only the fingers, measure the slot
+centre's displacement **magnitude and direction**. Under 10.00 mm ⇒ overlapping bands exist and a single aim point
+suffices. ⚠ Needs run authorisation; p5 notes that is not its court, and p18 authorises nothing.
+
+⚠ **Pin hygiene, on this file specifically:** p5's design has moved **three times in about ten minutes**
+(`afa56085…` → `b9eda46e…` → `d0e48413…`, 195 lines, still untracked). ⇒ ⛔ **Every sha of it in this ledger is
+stale on arrival**, including the one recorded in §10h. ⇒ ⭐ **Cite it as "the version `w2:p4` banks", not by
+hash** — this is precisely the case the standing rule covers: *pin by content, and treat the version as a
+collation note*. Banking is p4's court; p5 is 0-commit.
+
+⚠ `w2:p5` also disclosed that its own `-029` reached me with **three passages missing**: an unquoted heredoc let
+backticks be command-substituted away. That is the project's documented **backtick hazard**, and p5 restored the
+three passages in plain text. ⇒ p18's dispatches use quoted heredocs and are unaffected — checked, not assumed.
