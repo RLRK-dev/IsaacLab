@@ -1,0 +1,128 @@
+[steps] nq=97 nu=14 nbody=80 ngeom=131 eq=8  seat links C1=cab21 C2=cab17
+[steps] geoms: 131 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.469,+0.410] y[+0.280,+0.280] z-table[+0.0262,+0.1588] ncon=6
+[steps] measured grasp: L=cab19 [0.1141 0.28   0.9499]  R=cab22 [0.2036 0.28   0.9586]  drop across the span = 8.7 mm
+[steps] start-pose IK L: 8 solved / 4 collision-free / 4 away from a singularity, chosen pos  0.00 mm roll 20.1 deg sigma_min 0.0504 |q|max=1.27 rad
+[steps] start-pose IK R: 13 solved / 3 collision-free / 3 away from a singularity, chosen pos  0.00 mm roll 34.4 deg sigma_min 0.2368 |q|max=3.06 rad
+[steps] STEP1 L arm touching: clear
+[steps] STEP1 R arm touching: clear
+[steps] re-measured after the approach: L=cab18 [0.1084 0.28   0.9475]  R=cab21 [0.1978 0.28   0.9573]
+[steps] STEP1 L: tool err=   2.1mm
+          joint err   = [-0.  0. -0. -0. -0.  0.] mrad
+          act force   = [0. 0. 0. 0. 0. 0.] N.m   (limits [433. 433. 204.  70.  70.  70.])
+          gravity load= [ -61.6 -101.5  -14.4    4.5   -1.1    0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] STEP1 R: tool err=   2.1mm
+          joint err   = [ 0.  0.  0. -0.  0.  0.] mrad
+          act force   = [ 0.  0. -0.  0.  0.  0.] N.m   (limits [433. 433. 204.  70.  70.  70.])
+          gravity load= [82.6 29.7 -8.8  0.1  1.5 -0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] aim L: yaw +0.00 roll +0.30 rad (+17 deg tilt), seat error 1.64 mm
+[steps] aim R: yaw +0.00 roll +0.55 rad (+32 deg tilt), seat error 1.45 mm
+[steps] STEP 2 sigma_min L=0.0880 R=0.2380  column gap L= +117.2 R= +186.1 mm
+[steps] STEP 2 CARRY: L mouth[+0.107 +0.282 +0.197] holds cab19 at (+20.5, -1.6,-47.3) mm | R mouth[+0.198 +0.268 +0.202] holds cab21 at (-11.2,+11.7,-45.3) mm
+[steps] STEP 2 C1 SEAT: nearest point ON THE CABLE (cab19 at 0.41) misses the groove centre by ( -10.8, -70.0, +80.9) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 2 cable上空へ     t=  2.2s L=   2.1mm R=   2.1mm c1[y+0.280 z+0.157] c2[y+0.280 z+0.143] pin=--/-- grip=--
+[steps] STEP3 L: standoff re-aim (y,z only), seat error  2.33 mm
+[steps] STEP3 R: standoff re-aim (y,z only), seat error  4.89 mm
+[steps] STEP 3 sigma_min L=0.0390 R=0.2019  column gap L=  +78.5 R= +186.4 mm
+[steps] STEP 3 CARRY: L mouth[+0.110 +0.288 +0.159] holds cab18 at ( -5.0, -7.7,-14.3) mm | R mouth[+0.198 +0.270 +0.165] holds cab21 at ( -3.9,+10.3, -9.1) mm
+[steps] STEP 3 C1 SEAT: nearest point ON THE CABLE (cab19 at 0.15) misses the groove centre by ( -11.1, -70.0, +79.7) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 3 cableへ下降     t=  6.7s L=   2.1mm R=   2.1mm c1[y+0.280 z+0.156] c2[y+0.280 z+0.142] pin=--/-- grip=--
+[steps] STEP4 L: holding the seated pose, fingers only
+[steps] STEP4 R: holding the seated pose, fingers only
+[steps] STEP4: arms settled to 0.00 mrad at t=3.24s into the step -- fingers may close
+[steps] GRASP L: cable centreline is  9.48 mm from the seat (perpendicular, interpolated on cab17 at 0.83 along it)
+[steps] GRASP L: in the jaw's own axes: along cable  +0.34  closing  -9.12  across the mouth  +2.59 mm (containment wants |across| < 3.00, derived from the asset; the along-cable term does not affect it)
+[steps] GRASP L: seat vs its own PREDICTION [-0.2 -0.4 -0.2] mm (|  0.4|)  cable vs where it was aimed [-2.2 10.7  1.3] mm (| 11.0|)
+[steps] GRASP L: joints vs commanded [0.1 0.3 0.2 0.3 0.3 0.1] mrad -> servo arrived; nearest link is  11.0 mm from where the aimed link was (identity may differ -- not a drift)
+[steps] GRASP L: pad faces  +7.36 mm (design target 4.00 on a O8 cable, task_config.py:277), opposing claws  -2.45 mm, claw min over the run  -2.45 mm  <- NEGATIVE: non-conservative for transfer
+[steps] GRASP L: cable touched by pad1 ['L', 'R'] / claws ['L', 'R'] / pad2-only none   clamped=True (needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had closed through the cable)
+[steps] GRASP L: fingers blocked by ['cab17', 'cab18']
+[steps] GRASP L: nearest cable link cab18 at  31.1 mm from the pinch, pad separation  22.1 mm, ctrl=236, pad geoms touching cable = ['Lg_left_pad1', 'Lg_left_pad_f2ext', 'Lg_right_pad1', 'Lg_right_pad_f2ext']
+[steps] GRASP R: cable centreline is 15.71 mm from the seat (perpendicular, interpolated on cab20 at 0.92 along it)
+[steps] GRASP R: in the jaw's own axes: along cable  -1.42  closing +14.52  across the mouth  +5.83 mm (containment wants |across| < 3.00, derived from the asset; the along-cable term does not affect it)
+[steps] GRASP R: seat vs its own PREDICTION [-0.1 -2.8 -0.3] mm (|  2.8|)  cable vs where it was aimed [ -5.  -13.5   0.7] mm (| 14.4|)
+[steps] GRASP R: joints vs commanded [ 0.4  0.5  0.5  1.4 -1.6 -0. ] mrad -> servo arrived; nearest link is  14.4 mm from where the aimed link was (identity may differ -- not a drift)
+[steps] GRASP R: pad faces  +7.44 mm (design target 4.00 on a O8 cable, task_config.py:277), opposing claws  -2.43 mm, claw min over the run  -2.43 mm  <- NEGATIVE: non-conservative for transfer
+[steps] GRASP R: cable touched by pad1 ['L', 'R'] / claws ['L', 'R'] / pad2-only none   clamped=True (needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had closed through the cable)
+[steps] GRASP R: fingers blocked by ['cab20', 'cab21']
+[steps] GRASP R: nearest cable link cab21 at  29.7 mm from the pinch, pad separation  22.2 mm, ctrl=236, pad geoms touching cable = ['Rg_left_pad1', 'Rg_left_pad_f2ext', 'Rg_right_pad1', 'Rg_right_pad_f2ext']
+[steps] STEP 4 sigma_min L=0.0389 R=0.2011  column gap L=  +78.2 R= +207.2 mm
+[steps] STEP 4 CARRY: L mouth[+0.110 +0.291 +0.148] holds cab18 at ( +5.3, -0.2, +1.4) mm | R mouth[+0.198 +0.265 +0.156] holds cab21 at ( +0.8, +0.9, +2.1) mm
+[steps] STEP 4 C1 SEAT: nearest point ON THE CABLE (cab18 at 0.09) misses the groove centre by ( -32.7, -60.0, +80.3) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 4 cable把持      t= 11.2s L=  13.5mm R=  13.0mm c1[y+0.266 z+0.158] c2[y+0.292 z+0.144] pin=--/-- grip=LR
+[steps] STEP 5 sigma_min L=0.0761 R=0.2655  column gap L= +106.6 R= +174.2 mm
+[steps] STEP 5 CARRY: L mouth[+0.101 +0.300 +0.185] holds cab17 at (-14.2, +3.0, -3.6) mm | R mouth[+0.179 +0.238 +0.197] holds cab21 at ( -1.8, +0.1, +0.1) mm
+[steps] STEP 5 C1 SEAT: nearest point ON THE CABLE (cab17 at 0.72) misses the groove centre by ( -42.4, -51.7,+117.2) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 5 持ち上げ         t= 13.2s L=  13.5mm R=  13.2mm c1[y+0.238 z+0.197] c2[y+0.303 z+0.182] pin=--/-- grip=LR
+[steps] STEP 6 sigma_min L=0.0769 R=0.1946  column gap L= +165.7 R= +256.0 mm
+[steps] STEP 6 CARRY: L mouth[+0.110 +0.358 +0.136] holds cab18 at ( +8.2, -5.2, +3.0) mm | R mouth[+0.191 +0.328 +0.140] holds cab21 at (+12.5, -3.4, -2.7) mm
+[steps] STEP 6 C1 SEAT: nearest point ON THE CABLE (cab18 at 0.72) misses the groove centre by ( -11.6,  -5.5, +71.1) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 6 C1上空へ搬送      t= 16.0s L=  13.5mm R=  13.5mm c1[y+0.325 z+0.137] c2[y+0.367 z+0.138] pin=--/-- grip=LR
+[steps] STEP 7 L: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [  1.3   2.3 -44.4] mm; the old constant said [0,0,+20.9])
+[steps] STEP 7 R: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [ -1.   -6.4 -39.8] mm; the old constant said [0,0,+20.9])
+[steps] STEP 7 sigma_min L=0.0764 R=0.1880  column gap L= +197.5 R= +263.9 mm
+[steps] STEP 7 CARRY: L mouth[+0.104 +0.348 +0.069] holds cab17 at (+13.3, +0.2, +3.2) mm | R mouth[+0.185 +0.337 +0.070] holds cab21 at (-10.7, +8.1, +3.3) mm
+[steps] STEP 7 C1 SEAT: nearest point ON THE CABLE (cab20 at 0.82) misses the groove centre by ( +23.8,  +0.3,  +5.2) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 7 C1へ押し込み      t= 18.8s L=  13.4mm R=  13.4mm c1[y+0.346 z+0.073] c2[y+0.348 z+0.072] pin=--/-- grip=LR
+[steps] STEP 8 L: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [  0.    0.  -45.3] mm; the old constant said [0,0,+20.9])
+[steps] STEP 8 R: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [ -3.1  -5.6 -39.8] mm; the old constant said [0,0,+20.9])
+[steps] STEP 8 sigma_min L=0.1423 R=0.1883  column gap L=  +90.6 R= +237.3 mm
+[steps] STEP 8 CARRY: L mouth[+0.116 +0.369 +0.076] holds cab17 at (+11.4, -5.2, +4.2) mm | R mouth[+0.189 +0.341 +0.080] holds cab19 at ( -1.9,+22.6, +3.5) mm
+[steps] STEP 8 C1 SEAT: nearest point ON THE CABLE (cab17 at 0.71) misses the groove centre by (  -1.1, +12.6, +13.0) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 8 誘導ハンド半保持     t= 20.4s L=  13.5mm R=   2.1mm c1[y+0.353 z+0.051] c2[y+0.364 z+0.080] pin=--/-- grip=--
+[steps] STEP 9 L: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [  3.1   5.6 -39.8] mm; the old constant said [0,0,+20.9])
+[steps] STEP 9 R: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [ -3.1  -5.6 -39.8] mm; the old constant said [0,0,+20.9])
+[steps] STEP 9 sigma_min L=0.1451 R=0.1883  column gap L=  +84.4 R= +237.3 mm
+[steps] STEP 9 CARRY: L mouth[+0.113 +0.364 +0.070] holds cab17 at (+10.6, -5.0, +4.1) mm | R mouth[+0.189 +0.341 +0.080] holds cab19 at ( -6.4,+19.3, +1.0) mm
+[steps] STEP 9 C1 SEAT: nearest point ON THE CABLE (cab17 at 0.81) misses the groove centre by (  -2.6,  +8.2, +10.4) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 9 C1がcable固定   t= 22.0s L=  13.5mm R=   2.1mm c1[y+0.347 z+0.047] c2[y+0.359 z+0.074] pin=--/-- grip=--
+[steps] STEP10 sigma_min L=0.0643 R=0.1979  column gap L= +125.1 R= +230.8 mm
+[steps] STEP10 CARRY: L mouth[+0.111 +0.365 +0.137] holds cab16 at (-12.6, +0.3, +2.4) mm | R mouth[+0.186 +0.336 +0.150] holds cab18 at (-31.4,+26.6,-28.1) mm
+[steps] STEP10 C1 SEAT: nearest point ON THE CABLE (cab19 at 0.28) misses the groove centre by ( +33.8,  +4.9, +28.2) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP10 C1から上昇       t= 24.0s L=  13.4mm R=   2.1mm c1[y+0.333 z+0.061] c2[y+0.364 z+0.134] pin=--/-- grip=--
+[steps] STEP11 sigma_min L=0.0801 R=0.2870  column gap L= +199.4 R= +238.2 mm
+[steps] STEP11 CARRY: L mouth[-0.003 +0.409 +0.136] holds cab15 at ( +4.6, +1.8, -0.5) mm | R mouth[+0.073 +0.380 +0.155] holds cab17 at (-14.6,+19.5,-36.2) mm
+[steps] STEP11 C1 SEAT: nearest point ON THE CABLE (cab20 at 0.62) misses the groove centre by ( -14.7, -16.7, +13.2) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP11 C2上空へ        t= 26.6s L=  13.5mm R=   2.1mm c1[y+0.325 z+0.079] c2[y+0.399 z+0.119] pin=--/-- grip=--
+[steps] STEP12 sigma_min L=0.0802 R=0.2870  column gap L= +199.5 R= +238.2 mm
+[steps] STEP12 CARRY: L mouth[-0.002 +0.409 +0.136] holds cab15 at ( +5.2, -0.5, -1.1) mm | R mouth[+0.073 +0.380 +0.155] holds cab17 at (-14.4,+16.0,-37.7) mm
+[steps] STEP12 C1 SEAT: nearest point ON THE CABLE (cab20 at 0.48) misses the groove centre by ( -18.6, -18.8, +12.3) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP12 左クランプ        t= 28.0s L=  13.5mm R=   2.1mm c1[y+0.319 z+0.077] c2[y+0.396 z+0.117] pin=--/-- grip=L-
+[steps] STEP13 sigma_min L=0.0801 R=0.2553  column gap L= +199.4 R= +240.3 mm
+[steps] STEP13 CARRY: L mouth[-0.003 +0.409 +0.135] holds cab15 at ( +7.6, -0.8, -1.4) mm | R mouth[+0.089 +0.382 +0.152] holds cab17 at (-31.1,+13.6,-41.3) mm
+[steps] STEP13 C1 SEAT: nearest point ON THE CABLE (cab20 at 0.37) misses the groove centre by ( -26.9, -13.4,  -8.4) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP13 右がcable再把持へ  t= 30.2s L=  13.5mm R=   2.1mm c1[y+0.322 z+0.053] c2[y+0.395 z+0.111] pin=--/-- grip=L-
+[steps] STEP14 sigma_min L=0.0801 R=0.2547  column gap L= +199.4 R= +265.3 mm
+[steps] STEP14 CARRY: L mouth[-0.003 +0.409 +0.135] holds cab15 at ( +9.1, -0.9, -1.8) mm | R mouth[+0.087 +0.376 +0.143] holds cab17 at (-28.6,+18.0,-33.8) mm
+[steps] STEP14 C1 SEAT: nearest point ON THE CABLE (cab20 at 0.29) misses the groove centre by ( -28.1, -13.3, -10.1) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP14 両手クランプ       t= 31.8s L=  13.5mm R=  13.4mm c1[y+0.321 z+0.051] c2[y+0.394 z+0.109] pin=--/-- grip=L-
+[steps] STEP15 L: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [  0.4   2.6 -44.4] mm; the old constant said [0,0,+20.9])
+[steps] STEP15 R: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [ -2.2  -7.2 -37.4] mm; the old constant said [0,0,+20.9])
+[steps] STEP15 sigma_min L=0.0871 R=0.2748  column gap L= +232.5 R= +264.8 mm
+[steps] STEP15 CARRY: L mouth[-0.004 +0.397 +0.069] holds cab15 at (+13.0, +0.0, -0.3) mm | R mouth[+0.071 +0.380 +0.074] holds cab17 at ( -3.5,+13.3,-13.4) mm
+[steps] STEP15 C1 SEAT: nearest point ON THE CABLE (cab19 at 0.60) misses the groove centre by ( -29.0,  -7.0, -31.7) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP15 C2へ押し込み      t= 34.4s L=  13.4mm R=  13.5mm c1[y+0.307 z+0.028] c2[y+0.393 z+0.061] pin=--/-- grip=L-
+[steps] STEP16 L: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [  0.    0.  -45.3] mm; the old constant said [0,0,+20.9])
+[steps] STEP16 R: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [ -4.4  -8.  -33.2] mm; the old constant said [0,0,+20.9])
+[steps] STEP16 sigma_min L=0.0874 R=0.2741  column gap L= +235.1 R= +265.9 mm
+[steps] STEP16 CARRY: L mouth[-0.004 +0.400 +0.070] holds cab14 at (-12.8, +0.2, +3.3) mm | R mouth[+0.074 +0.381 +0.070] holds cab17 at ( -2.4,+13.1,-11.8) mm
+[steps] STEP16 C1 SEAT: nearest point ON THE CABLE (cab19 at 0.48) misses the groove centre by ( -29.9,  -4.3, -36.8) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP16 C2固定         t= 36.0s L=  13.4mm R=  13.5mm c1[y+0.306 z+0.022] c2[y+0.394 z+0.058] pin=--/-- grip=L-
+[steps] STEP17 L: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [  0.    0.  -45.3] mm; the old constant said [0,0,+20.9])
+[steps] STEP17 R: aiming the MOUTH at the groove (measured mouth-minus-pinch offset [ -4.4  -8.  -33.2] mm; the old constant said [0,0,+20.9])
+[steps] STEP17 sigma_min L=0.0873 R=0.2752  column gap L= +234.1 R= +246.2 mm
+[steps] STEP17 CARRY: L mouth[-0.004 +0.400 +0.070] holds cab14 at ( -5.6, +0.1, +1.6) mm | R mouth[+0.077 +0.387 +0.078] holds cab16 at (-29.0,+23.2,-18.9) mm
+[steps] STEP17 C1 SEAT: nearest point ON THE CABLE (cab20 at 0.80) misses the groove centre by ( -21.2,  +5.9, -64.7) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP17 解放           t= 37.4s L=  13.4mm R=   2.6mm c1[y+0.350 z+0.005] c2[y+0.424 z+0.048] pin=--/-- grip=--
+[steps] STEP18 sigma_min L=0.0963 R=0.2870  column gap L= +234.2 R= +238.0 mm
+[steps] STEP18 CARRY: L mouth[-0.004 +0.400 +0.135] holds cab14 at ( -5.1, -0.1, +2.6) mm | R mouth[+0.073 +0.379 +0.155] holds cab16 at (-24.0,+34.1,-25.5) mm
+[steps] STEP18 C1 SEAT: nearest point ON THE CABLE (cab20 at 0.69) misses the groove centre by ( -23.9, +14.3, -24.7) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP18 上昇           t= 39.4s L=  13.4mm R=   2.3mm c1[y+0.357 z+0.040] c2[y+0.419 z+0.119] pin=--/-- grip=--
+[steps] WORST L: sigma_min 0.0389 at STEP4 t=11.2s   (a singular pose is sigma_min -> 0)
+[steps] WORST L: column gap    +0.0 mm at STEP2 t=0.1s
+[steps] WORST R: sigma_min 0.1877 at STEP7 t=18.2s   (a singular pose is sigma_min -> 0)
+[steps] WORST R: column gap    +0.0 mm at STEP15 t=34.2s
+[steps] gates: {'grasp': True}
+[steps] wrote /home/rlrk/Downloads/ur15_c1seat.mp4 frames=1158 26940893 bytes
