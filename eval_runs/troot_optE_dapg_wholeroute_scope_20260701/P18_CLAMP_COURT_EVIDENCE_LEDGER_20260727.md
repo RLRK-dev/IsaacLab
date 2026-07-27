@@ -6356,3 +6356,64 @@ was 6× stiffer.** ⇒ p11's measured 5.55° belongs to reaim, not to cell/route
 5.55° carry over.** (Feeds the evidence-annotation list beside the env 4-tuple and the 2-hinge axis.)
 **(d)** Banked at `P11_UR15_DESIGN_DISPOSITION_20260727.md` §27.2.90 @ `925a81bb57`; routed to p5 (as p11
 asked) + p4 (producer of the copies) + p6 (register scope) + the Rs surface (the A/B design requirement).
+
+## 188. p5 takes the correction from the side it had not measured — and two runs become three
+
+From -094 (21:22:46); pin verified here (`f29a684118…`, +18/−0 declared; cumulative vs banked measured
+**+79/−1**).
+
+**(a) ⭐⭐ (a) adopted**: *"私が測っていない側でした"* — the 1-hinge revert discards the arm-controllable half
+(yaw free in every run) and keeps the maxed-out half (roll consumed by reach). ⛔ **The recommendation does not
+flip** — its ground is **premise consistency** (B1 rejected with a price), not "one hinge is better physics";
+⭐ but p11's cost description is the more accurate one and is adopted. **(b) ⛔ Its own "two runs" corrected to
+THREE**: ① 1-hinge ② 2-hinge yaw-fixed ③ 2-hinge yaw-used — without the split, neither the benefit nor the
+cost of the second hinge is measured. The spine survives (B1's value measurable **without touching banked
+results**); the cost is ×1.5. **Rs material = three runs.** **(c) ⚠ (c) adopted as the third
+"neither family is right"**: authoritative K at SEG 0.030 = **0.1667** (p18 re-derived: EI = 0.33333×0.015 =
+0.005; 0.005/0.030) ⇒ reaim 0.12 = **0.72×** / cell·route 0.02 = **0.12×** — both wrong, wrong differently
+(1st = CABLE_R/CABLE_N; 2nd = the old literal mass/stiffness) ⇒ the band's inputs (placement 4.89 / tilt 5.55)
+were measured on the 0.72× side ⇒ §11's inputs are non-current **on joint stiffness too**, beside hinge count.
+**(d)** Request = p4 bank only.
+
+## 189. The register keeps one phenomenon in one row — and declines an unverified unit identification
+
+From p6's -070 (21:22:28), @ `4a73d5c3bb` ("File the stiffness split with the other copy divergences",
+verified).
+
+**(a) ⭐ Disposition = append to #46, no new row**: same phenomenon (same-directory copies diverging from
+authority/each other), **4th instance** after CLIP_H, CABLE_R, mass; a second row would split one phenomenon
+across two registers and drift. #48 stays separate — structural, FOUNDATIONAL, grounded on Rs DECISION B2 —
+cross-referenced. **(b) ⭐ Refinement by its own read: the split is 2-vs-2**, not reaim-alone —
+cell/route = 0.004 / **0.02**; **steps AND reaim** = 0.010 / **0.12** ⇒ stiffness 6× **and damping 2.5×**.
+**(c) ⚠ Authority comparison left OPEN on units**: task_config `:147` parameterizes differently (K =
+0.005/0.015 = 0.333 N·m/rad; `:152` damping 0.01) and ⛔ the driver XML values are not certified same-unit —
+p6 refused to convert (*"converting would create an unverified identification"*): driver split = confirmed;
+authority delta = unconfirmed. (p5's -094 0.72×/0.12× DID make that comparison via its derivation — the unit
+confirmation is the one open leg between the two stances.) **(d)** Carryover condition extended in #46's reuse
+rule to the **three axes** (seg length / hinge count → #48 / joint stiffness); its pin practice re-points after
+p4's bank per the #46 rule.
+
+## 190. p0 audits its own numbers first — the sag can't be pinned, and the model choice doesn't inherit
+
+From -389R (21:23:04); pins verified here (@ `c21fe6067c` "Scope my own sag numbers against p11's stiffness
+finding"; bundle sha now `45ace570a8…` — third pin today: `a2ecc5bd…` → `26d058f5…` → `45ace570a8…`, cite the
+newest).
+
+**(a) ⭐ The split is 4-way by p0's audit** (not 2): cell/route = 0.004/0.02; steps/reaim/**c1seat** =
+0.010/0.12; **wired (current) = CABLE_BEND_DAMPING 0.01 / cable_joint_k() = 0.3333 (SSOT)** ⇒ direction: *"the
+cell will henceforth be STIFFER than either run family that produced today's numbers."* (⚠ c1seat's membership
+= p0's reading, carried by its artifact §5.1 — not re-derived here; a file by my guessed name is absent in the
+driver dir.) **(b) ⛔ And it reaches p0's own sag numbers**: 127.8 mm came from `ur15_wide14.log`, whose
+producing source is **still not on-disk** ⇒ *"which stiffness that run had, I cannot pin — 'steps-family' is
+inference, not reading."* ⇒ the L²-vs-L⁴ **discrimination survives** (same-cable ratio cancels the common
+factor); ⛔ the absolutes 127.8 / 71.9 / 44.6 ride an unpinnable stiffness and **must not carry to the cell**;
+⭐ deeper — L² fits *because* tension dominates ⇒ at the cell's higher stiffness the bending term grows ⇒ **the
+model selection itself was made at one stiffness and must be re-selected at the cell's, not inherited.**
+
+**(c) ⭐ p18 precision note, returned to p0/p5/p6**: p0's "16.7× / 2.8×" are **per-joint K ratios across
+different seg lengths** (0.3333/0.02, 0.3333/0.12 at 15 vs 30 mm) — the physically bending-relevant comparison
+is the **continuum EI_eff = K_joint × SEG**: reaim-family 0.0036, old cell/route 0.0006, wired 0.005 ⇒ **wired
+is 1.39× the judged family and 8.3× the soft family** (this morning's rule again: same constant, different
+measurement surface — per-joint K conflates discretizations). Direction unchanged; magnitudes halve.
+**(d)** p0 confirms its delta scope (`:415` deletion / 11 placements / stack stamps) and endorses the
+set-removal (*"I enumerated boundary members; the form that needs no enumeration is superior"*).
