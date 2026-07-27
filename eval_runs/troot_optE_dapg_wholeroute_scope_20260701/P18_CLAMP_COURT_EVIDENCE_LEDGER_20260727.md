@@ -4352,3 +4352,32 @@ stage stops on contact).** Fixing contact alone still push-throughs the missed a
 same quantity as (b) / (e) substance = this. ⚠ **Pin moved, declared**: clip design doc now `b3954ed7a3d5…`
 (265 lines, §9 append-only) — **p4 must bank the NEW pin**, relayed at once (the `-188/-189` stale-pin trap,
 avoided this time by immediate relay).
+
+## 99. Banks landed (one crossing, benign), the import shortcut, and a measurement that returns a question
+
+**(a) Banks + notes done, with one crossing.** Spec banked (`1838823e16`, sha match `3911551c…`); supersession
+notes on both old briefs (`2097ce0ab9`, +4/−0 each, no renames) — **`-208` closed.** ⚠ **The clip design doc was
+banked at its OLD pin** (`32360b20…`, 226 lines) — p4's bank crossed my `-215`. ⭐ **Benign this time**: p5's move
+was §9 **append-only**, so the old version lands no false lines (unlike `-189`, where the old pin contained a
+measured-false line — the difference between the two cases is exactly *what the superseded version contains*).
+⇒ Follow-up bank of `b3954ed7…` (265) queued with p4.
+
+**(b) ⭐⭐ Tier A strengthens to direct import** (p4 measured): `thread_isaac_lab.configs.task_config` **imports
+cleanly** from the env7 python — no heavy deps. ⇒ For importable quantities, copies and byte-shas become
+unnecessary and **value divergence becomes structurally impossible**; the AST pass then serves its one remaining
+purpose — detecting in-driver redefinition. ⭐ p4 independently confirmed `task_config.py:136 CABLE_SEG_LEN =
+0.015` exists (matches p0's fix (a) — two panes, same repair, one from verification and one from implementation).
+
+**(c) ⭐ The seat measurement came back as three numbers and a question.** Reach below cable centre (gripper-only
+probe, strict 8-corner boxes): CLAMP 236 → 9.7 / 13.6 / **16.0** mm (roll 0 / 0.30 / 0.55); OPEN 18 → 9.4 / 24.6 /
+**35.7**. ⇒ Grasped-state answer = 16.0, ⛔ **but STEP 8 opens the fingers at seat height ⇒ the operative number
+is 35.7** ⇒ ⭐ **"do we open fingers at seat height" must be decided before `float_z` — p5's court.**
+⚠⚠ **And the probe disagrees with p4's own recorded comment** (`ur15_steps.py:66`: at +0.060 open fingers press
+into the table — +60 should leave ~24 mm). p4's conjecture (marked unverified): the probe omits arm links above
+the wrist ⇒ **settling requires a cell-wide measurement.** ⚠ `REST_TOP = TABLE + 150` rests on that same `:66`
+comment ⇒ the spec §4 row inherits the doubt. ⚠ Self-report: the first probe used bounding spheres — ~10 mm
+overestimate on a 1.2 mm plate; three values retracted before use.
+
+**(d)** `TABLE_HX/HY`: p4 holds no grounds (assignment without a comment) ⇒ p5's "weak grounds" self-assessment
+stands as the best available. **Next**: p4 implements the constants module (§6 contract, AST-value guard);
+verification = p0.
