@@ -645,7 +645,64 @@ switched off**, so the proposed arm-to-column sweep works despite the flags — 
 work on the production path. ⭐ The instrument this court spent the day arguing about turns out to be the one tool
 that sees what the physics was told to ignore.
 
-## 17. Scope
+## 17. -143 (1): the closed query, and the class already has a name in this project
+
+### 17.1 ⭐⭐⭐ The rule being adopted is `ABSENT-IN-CODE`, and `CLAUDE.md` already defines it
+
+`CLAUDE.md:198`, read on disk, verbatim:
+
+> *"**第3 bucket = ABSENT-IN-CODE:** 「robust fact」主張は bank 前に mechanism が runtime code で ACTIVE か検証
+> （未 wired = 「wire-then-validate」= premise FALSE、appearance-only ≠ working）"*
+
+⇒ ⭐⭐ **the class rule -143 (1) adopts is the project's own third verdict bucket**, already governing and already
+naming the failure ("appearance-only ≠ working").
+
+⭐⭐⭐ **And RS71 already carries an instance of it — for the clips.** `RS71-System-Spec-SSOT.md:55`, verbatim:
+
+> *"**Collision (⚠ ABSENT-IN-CODE):** the clip boxes are `shape_flags=1` VISIBLE-only — collision is OFF … **the
+> COMMITTED build is still collision-OFF.** NOT a flat "resolved" until committed + robustness-verified."*
+
+⇒ **the clips — the object the whole routing task exists to engage — have collision off in the committed build, and
+the spec says so, with the tag.** ⇒ ⭐ today's stem/foot finding is not a new class. It is **the fourth instance of
+a class this project banked, tagged, and wrote a rule for.**
+
+### 17.2 The enumeration -143 (1) asks for, as far as I can close it read-only
+
+**Disabled pairs — `2f85_koshape.xml`, 7 `exclude` elements (closed count):**
+
+| # | pair | examined today? |
+|---|---|---|
+| 1 | `right_pad` ↔ `left_pad` | ⭐ **yes — the whole claw-interpenetration finding** |
+| 2-5 | `base` ↔ {`left_driver`, `right_driver`, `left_spring_link`, `right_spring_link`} | ⛔ **no** |
+| 6-7 | `{left,right}_coupler` ↔ `{left,right}_follower` | ⛔ **no** |
+
+⇒ ⭐ **one of seven has been looked at.** ⚠ #2-#7 are within-gripper mechanism pairs in a closed 4-bar, so
+suppression there is probably ordinary — but *probably* is what the class rule exists to stop. ⛔ I do not clear
+them; I enumerate them.
+
+**Disabled geoms:**
+
+| where | what | note |
+|---|---|---|
+| p4's cell, **×5 duplicated files** | `floor`, `stem`, `foot` | §16.1-16.2, verified element-wise |
+| production, `newton_skill_env_base.py:1581` | every arm shape whose label lacks "pad" | §16.3 |
+| production, `test_newton_clip_routing.py:855` | arm shapes — comment: *"arm has no collision role"* | same class |
+| production, `test_newton_clip_routing.py:1168`/`:1194` | ⭐⭐ **the CLIPS** — `_clip_collide` defaults to **"0"**, so `shape_flags = 1` VISIBLE-only | ✅ matches RS71:55 |
+
+### 17.3 ⭐ A refinement to -143 / -142 (2)'s discipline, from my own stumble
+
+-142 (2) draws the lesson *"read the element in full before asserting an absence"*, after a line-wise grep gave a
+false 0. ⭐ **I then wrote a "multi-line-safe" check and it also failed** — my pattern was
+`<geom name="(stem|foot)"[^/]*/>`, and `[^/]*` cannot cross the `/` inside `{SHOULDER_HEIGHT/2:.4f}`, so it
+returned **1 per file instead of 2**. Re-done element-wise it gives **2 of 2 collision-disabled in all five
+files**, confirming -143 (1).
+
+⇒ ⭐⭐ **so the lesson is not "join the lines" — it is "parse the element, then test it".** Widening a regex to
+cover the hazard that was just named inherits a fresh one. My first fix addressed the **symptom** p18 had
+described rather than the **shape** of the predicate, which is the same move this court has been correcting all
+day, in the correction itself.
+
+## 18. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
