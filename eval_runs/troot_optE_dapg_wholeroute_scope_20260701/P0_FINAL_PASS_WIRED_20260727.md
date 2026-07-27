@@ -153,6 +153,22 @@ behaviour the code did not have. Here the prose was checked and holds.
 
 **(d) is closed**, on both legs: the print discriminates, and what it says is true.
 
+## 7.2 ✅ Re-verified at the moved pin — `dab09ec05861259911ae3af230e9c2…`, commit `6b6f095387`
+
+§7.1's reproduction was taken at `72359f781d9d…`, which is no longer the module. Re-measured at
+the current pin, all three legs hold:
+
+| | measured |
+|---|---|
+| **the deletion** | `known` now occurs **exactly once** — `:89`, the English word in the end-caps comment, **untouched**. All four code sites (`:356` param, `:373` branch, `:386` construction, `:401` call) are gone |
+| (d) leg 1 — override unset | **0 lines**; `self_check → all sources agree` |
+| (d) leg 2 — override set | **1 line** declaring the override; `k = 1.3333` = `0.02/0.015`; `self_check` **refuses**, citing the producer |
+
+⇒ **(d) survives the pin move**, and the completeness condition I raised was already satisfied —
+including the `:89` hazard, which a string-matched deletion would have taken and which was not
+taken. ⭐ Worth recording that the condition and the fix converged independently: the commit
+predates the message.
+
 ## 8. Guard over every driver, measured
 
 | driver | findings | | driver | findings |
