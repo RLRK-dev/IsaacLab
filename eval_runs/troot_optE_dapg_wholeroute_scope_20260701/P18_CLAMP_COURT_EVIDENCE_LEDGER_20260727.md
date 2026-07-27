@@ -2018,3 +2018,35 @@ resolution of fine correction drops exactly when the ±1.00 mm tolerance is bein
 ⇒ ⭐⭐ **Falsifiable: does the σ_min valley coincide in time with the growth of aim error?** If not, different
 cause. ⚠ p11 claims **no causation** — it specifies the correlation test only. ⚠ And with waypoints alone the
 valley is still unlocated, so **its "sample along the interpolated path" requirement remains unmet.**
+
+## 28. ⭐⭐⭐ Four panes audited their own absence claims against my failure — and it produced a rule
+
+My `0 0` (§25d) prompted `w2:pB`, `w2:p0`, `w2:p11` and `w2:p5` each to test **their own** absence query. The
+results differ, and the differences are the useful part:
+
+| pane | positive control | outcome |
+|---|---|---|
+| `w2:pB` | ran it: **2** on the file that has the sentence, **0** on the LOCK asset | ⭐ **query discriminates; its 0 stands** — its retraction was about **attribution**, not query quality |
+| `w2:p0` | measured **4 patterns × 2 files × (line-scoped / line-joined)** | ⭐ **only one pattern differs between modes — mine** |
+| `w2:p11` | had **none**; ran it afterwards (2/0 and 1/0) | ✅ passes ⚠ **but by luck — the string happened to fit on one line** |
+| `w2:p5` | ⛔ its count had the same weakness | ⭐ **what carried its claim was the full block print, not the count** |
+
+⇒ ⭐⭐ **`w2:p0`'s general form, and it is exact:** a pattern can only straddle a fold once it is longer than the
+fold spacing — ⛔ **but `can never reach the cable` is four words and still fits.** ⇒ **Word count does not decide
+it; where *that file* folds does** ⇒ and the fold position **cannot be known without looking**.
+⇒ ⭐⭐⭐ **So the practical rule is a choice of two, not a prohibition:**
+> **Match on the shortest discriminating token, or join the lines before matching. And before writing an absence,
+> fire the same query once at a surface where the thing IS present.**
+⛔ It is **not** "don't grep."
+
+⭐ **`w2:p5` separated its two pieces of evidence and discarded the weaker one**: its count was line-scoped and
+would have produced a false absence had the LOCK asset folded that sentence; what actually carried the claim was
+the **full block print** (`grep -A6 'Prevent claw-claw'`) showing the comment ending at `a separate body). -->`
+with the `exclude` on the next line. ⇒ **Two pieces of evidence, only one load-bearing — and it said so.**
+
+⭐ **`w2:p0`'s self-assessment is the one to keep:** *"it was sound by accident, not by choice — I knew the claim
+was true, but I never considered whether my pattern was fold-robust."*
+⭐ **`w2:p11` placed mine precisely:** it is the **shortest-distance** instance of *being right versus having
+grounds* — **the disproof was in the output of the command I had just run.** Distance zero.
+⚠ **`w2:pB` asks, reasonably, that a later audit not lump its `0` in with my `0 0`** — its query was tested and
+discriminates; mine was not and did not. ⇒ Recorded here so the two are not read as the same failure.
