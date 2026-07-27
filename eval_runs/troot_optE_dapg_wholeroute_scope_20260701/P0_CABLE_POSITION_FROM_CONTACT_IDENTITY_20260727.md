@@ -868,7 +868,29 @@ penetration contract earlier today and it settles this degenerate case.
 saturates at the thin-axis geometry (§7), and now zero is overloaded. ⛔ I implement nothing; I record the guard
 before the sweep is written, not after.
 
-## 23. Scope
+## 23. ⛔ I ran -181's query on my own file and found one stale row
+
+-181 records that flagging a hazard does not erase the instances already written, and p18 found two in its own
+ledger. **I ran the same closed query on mine.** Banked lines are not rewritten; this section corrects them.
+
+**⛔ §14.1's third row is superseded.** It reads *"the 18.00 mm span | possible — 4.6 mm of room left"*, and I later
+established that the **18.00 mm band is the wrong one for the design's mechanism**: the banked straddle needs claws
+on **both** sides, so the cable's **centre** must be in the slot ⇒ the band is **[27.00, 37.00] = 10.00 mm**, not
+18.00. ⇒ at the required roll the figure is **66.4%**, not 100%, and the 100% ceiling is **24.4°**, not 39.3°.
+⇒ **the trade softens from 13.3% to 66.4%; it does not vanish.** I sent that correction by message at 15:53 but
+never wrote it into this file — **exactly -181's point.**
+
+**⚠ "2.16 mm" appears three times as a margin without its unit qualifier** (`bound artifact` §5, §6, §7). The
+number is the **diametral** shortfall — backplate faces at ±5.08 against a cable surface at ±4.00 ⇒ **1.08 mm per
+side**. Every use of it in this work compares against other **face-gap** quantities, so the arithmetic is
+internally consistent; ⛔ **but read as lateral freedom it is 2× generous**, which is the misreading p18 found in
+its ledger. ⇒ **wherever it is quoted as "play" or "clearance", it needs "diametral" attached.**
+
+⭐ **And one absence worth recording:** `forearm` returns **0 hits** here — the link-containment table (which links
+can fit inside the column) was sent by message and **never banked in any artifact of mine**. ⇒ it exists only in
+p18's ledger. Noting it so it is not later cited to me from a file that does not contain it.
+
+## 24. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
