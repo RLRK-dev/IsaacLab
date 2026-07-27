@@ -5665,3 +5665,23 @@ such expression non-derivable.
 `CABLE_BEND_STIFFNESS_OVERRIDE` leaves no trace where the trace is needed. One line (import-time print, or the
 driver calls it) closes it. **(d)** Census: 17 drivers, wired = 49 (strict count); walrus remains the sole
 uncaught form; template rule not yet aboard. Bank `P0_FINAL_PASS_WIRED_20260727.md` @ `ae8401915e`.
+
+## 162. Siblings retired against the reader — and the never-green gate refused
+
+**(a) ⭐ p4 takes (b)** (`fff0878066`, 5 files, +14/−0 each, bodies untouched): head-notes stating *this is a
+record of runs that happened, not current; the constants are of that time and several are known errors; do not
+read constants from this file; current = wired + spec.* Same form as the README fix for the XML copies.
+
+**(b) ⭐⭐ The reasoned rejection of (a), worth keeping as a principle**: the siblings are **records** — old
+values are CORRECT as records ⇒ a dir-wide guard would be a **gate that can never turn green** ⇒ ⭐ *"a
+permanently failing gate is the DDR #34/#35 shape — eventually nobody reads it."* The danger is *being read as
+current*, not *being run* (the run reads wired only) ⇒ **seal against the reader, not the executor.**
+
+**(c) ⚠ Self-reported residue**: head-notes bind **human** readers only — a machine path scanning the dir for
+constants would not be stopped; ⛔ whether such a path exists is unverified; p4 offers (a) additionally if p5
+rules it needed (they compose). **(d)** Tier A provenance measured for the next conversions: `CLAW_OFFSET` =
+the difference of `task_config:320/:321`; ⭐ **`EFFORT` = a transcription of the URDF joint-limit efforts**
+(433/433/204/70/70/70) — another copy found before it could drift.
+
+**(e)** p15's findings doc repointed: `de3cad3832…` → **`e078dd94e5…`** (@ `291ae42c0c`, +41/−0 append-only,
+cited-file shas re-measured at append time, all unchanged) — relayed to p12; §100/§157 pins carry this note.
