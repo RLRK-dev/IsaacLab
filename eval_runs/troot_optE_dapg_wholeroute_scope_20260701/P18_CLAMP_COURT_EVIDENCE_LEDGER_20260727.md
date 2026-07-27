@@ -5701,3 +5701,51 @@ why it was silent — a declaration placed where nothing guarantees a call is no
 written≠effective. **(c)** (a)(b)(c) correctly halted pending p5's one choice — *"the gap between my strict
 implementation and the ruling is not mine to close quietly"* — with the three Tier A provenances staged
 (CLAW_OFFSET = `:321−:320`; EFFORT/LIMS = the URDF's joint limits — all import/parse-able, no transcription).
+
+## 164. env7 lands under the standing directive — and p5 rules twice against its own forms
+
+From `MSG-P5-P18-ENV7-UPDATED-AND-TWO-DISPOSITIONS-20260727-P5-090` (20:08:03), verified here at 20:15:27.
+
+**(a) ✅ env7 updated (Rs's task, executed by p5)**: **4 packages of 246** — newton 1.2.1→**1.4.0**, mujoco
+3.8.1→**3.10.0**, mujoco-warp 3.8.1→**3.10.0.3**, warp-lang 1.13.0→**1.15.0**; **torch 2.10.0+cu128 / numpy
+2.3.1 unchanged** (⛔ the feared numpy 2.5.0 pull did not happen). Pre-check 20:03:40 = runs 0 / drivers 0;
+smoke 20:06:03 = model load OK (ngeom 32 / nbody 15), newton 1.4.0 / warp 1.15.0, cuda_available True.
+Artifact = `P5_ENV7_UPGRADE_20260727/REPORT.md` sha256
+`ebe3cfd0b5d374f09ad3ec7e67d482942a585c6a401aaf1096ce6d4340de11e6` (machine-compared here = MATCH) + pip_freeze
+BEFORE/AFTER/STAGING + install.log + dryrun_1.txt. ⭐ **p18 re-measured env7's pip freeze at 20:15:27 — all six
+versions match** ⇒ this bank rides an independent re-measure, not agreement. Rollback = the four version pins
+back (full prior state = pip_freeze_BEFORE.txt).
+
+**(b) ⚠ The scope p5 refused to fill**: ① **two dependency conflicts are PRE-EXISTING** — isaacsim-core 6.0.0.0
+wants mujoco-warp==3.5.0.2 / newton[sim]==1.0.0, already unmet at 3.8.1/1.2.1 (*"I widened it; I did not create
+it"*); ⛔ any path importing isaacsim + newton in one process needs checking. ② the dry-run printed **zero**
+conflict lines (grep -c incompatible = 0) ⇒ ⛔ **a dry-run is not a predictor of install output.** ③ staging was
+~10 packages vs 246 ⇒ "staged smoke" proves the package runs *alone*, not that it coexists. GPU-kernel path
+unverified; runs 0; **the invariant re-check is p4's — p5's smoke does not substitute.**
+
+**(c) ⭐ Byproduct**: full-open offset = 85.40 − 75.40 = **10.00 mm** under mujoco 3.10.0 ⇒ p5's
+"the geometric value is the full-open limit" reading (its §12-12) survives the upgrade.
+
+**(d) ⇒ A spec face went stale**: RS71 `:15` verbatim (p18 re-read 20:15) — *"Env: env7 Newton 1.2.1 / mujoco
+3.8.1 SolverMuJoCo, UR15×2 + Robotiq 2F-85."* — is now **false in its version clause**. p5 holds no court there
+and did not touch it ⇒ routed to p6, recommended into the Rs spec-update cluster (③ items now: §0#4 mouth
+10→14; step-table `:1315` 「解放」; this line).
+
+**(e) ⭐⭐ -351 disposition = ACCEPT the strict form.** p5 yields its own 3-class coefficient rule because p4's
+docstring turns p5's lesson against it — verbatim: *"'0.5 is obviously just arithmetic' is the same judgement
+call that let two files disagree about a cable radius"* ⇒ the 3-class rule re-inserts a judgment call **at the
+exact place judgment kept failing today**. p5 also names its own form's holes: the recorded OWNED×1.0375 hole,
+and p0's silent failure (under import-as, owned names become Attributes and an ast.Name-keyed check misreads
+everything as "underivable") ⇒ *"my form is the one that breaks silently."* Adopted with it: **delete the
+vestigial `known` branch + the docstring's derivability-promise line** (promise≠body = the hole-③-v1 shape);
+subscript detection stays; count 49 accepted. ⭐ And one gain named: the strict form moves derivability **from
+inference to declaration** (RX_MID etc. *declared* DERIVED per spec §6.4d) ⇒ provenance improves — not cost only.
+
+**(f) ⭐ -354 disposition = (b) accepted; (a) NOT added.** p4's rejection reason endorsed (§162(b): the siblings
+are records, correct as records; a dir-wide guard is a never-green gate that stops being read). The machine-scan
+residue closes with **one closed query, not a standing gate**: count import/open/read/glob references to the
+five retired filenames **once**; 0 ⇒ closed; found ⇒ fix that path, don't add a guard. ⭐ "A check that cannot
+come out differently is not a check" — applied to the *fix* side.
+
+**(g)** Requests relayed to p4: (i) post-update dump + self_check (ii) strict-form confirmation + the 2
+deletions (iii) the one-time query. p5 authorizes no run; gate unchanged.
