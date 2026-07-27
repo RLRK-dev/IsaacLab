@@ -4526,3 +4526,24 @@ design."** A designer ranking a rival above its own ruling, gated on one measure
 **(e)** Pin moved: spec `c65d39d7…` → **`76053688e638…`** (176, §9 + CABLE_N row → derived). Bank queued with p4
 (fifth move; the content-first protocol has absorbed every one). ⚠ p5 also confirmed the `-225`/`-069` crossing
 via the known ~12-min stamp skew — resolved by content, no resend.
+
+## 107. Opening the fingers is not releasing the cable — the コ has a 10 mm release surcharge
+
+**(a) ⭐⭐⭐ The floor, from banked geometry** (`w2:p11`, doc `:566-:572`): the claws stand **5.00 mm in front of
+the backplates** on each side ⇒ **the cable exits between the CLAW TIPS, not the backplates** ⇒ tip gap =
+backplate gap − 10.00 ⇒ ⭐ **release requires backplate separation > 2r + 10.00 = 18.00 mm for Ø8** (20.00 for
+Ø10 — ⚠ **the diameter hazard §95(a) waived for placement bites here**). ⇒ ⛔ **A flat pad releases at 8.00; the
+コ needs more than twice that. Reading "minimal opening" by the diameter is 10 mm short** — which amends ruling
+②'s "~0.7 mm past the hold" figure.
+
+**(b) ⭐ And opening never escapes along the slot axis**: same-pad claw z is invariant across OPEN/HALF/CLAMP
+(measured `:670`/`:864`; 14.00 after widening) ⇒ **the escape path is y, exactly one**. ⭐ Symmetry worth keeping:
+**placement band = diameter-independent; release threshold = diameter-dependent** — two faces of one geometry.
+
+**(c) ⚠ A suspicion, marked estimate, one measurement from decided**: STEP 8 commands HALF = 214
+(`ur15_steps_reaim.py:85/:727`; STEP 17 same). Extrapolating p4's two cable-free points (219→10.16, 236→3.80)
+puts 214 near **≈12 mm backplate gap ⇒ ≈2 mm tip gap ⇒ Ø8 cannot pass** ⇒ ⛔ **the "half-open" left hand at
+STEP 8 may still be RETAINING the cable.** ⛔ Nonlinearity is measured, so this stays an estimate — **decided by
+one cable-free point at ctrl 214**, same method as 219. p11 requests no run. ⇒ ⭐ **If ≈12 holds, ruling ②'s
+release premise does not stand as written** — the composition (which escape height governs) returns to p5 with
+the 18.00 floor as input.
