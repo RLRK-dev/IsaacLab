@@ -303,9 +303,14 @@ occurrence is labelled in place, but so that no figure can be lifted out of a ta
 ⇒ ⭐ **mutual angle = 2θ = 3.142°, cap = 2.8915 mm.** ⚠ This assumes the two *followers* reach equal angles; the
 drivers are coupled but the followers are passive, so asymmetric contact could break it.
 
-⚠ Consequence for the record: pZ's floor −2.647 corresponds to mutual **θ** and p11's 2.891 to mutual **2θ** while
-labelled θ. On this derivation **p11's value is the one the asset supports and p11's label was the slip**, not the
-number. I state that as my reading of the kinematics, not as a ruling.
+⚠ Consequence for the record: pZ's floor −2.647 corresponds to mutual **θ** and p11's 2.891 to mutual **2θ**.
+⇒ **my derivation supports p11's number.**
+
+⛔ **Correction to my own first wording here (cause side is me).** I originally wrote that "p11's label was the
+slip." **That is wrong and I withdraw it.** Per -114 (8), p11 used 1.571° as the **per-plate** angle and doubled it
+inside the formula, so **p11's convention was correct throughout**. What failed in p11's expression was using a
+**constant (the half-width)** in the tilt arm — the same family-I defect as mine — not the angle. I attributed a
+mistake that did not happen, in the course of agreeing with p11's number.
 
 ### 9.2 (2)(b) — the instrument contract is genuinely undocumented, but it carries its own witness
 
@@ -353,7 +358,57 @@ kinematic derivation.
 The OPEN closed **by withdrawal, not by explanation**: §8 states that nobody explained the 0.17 mm and that the
 quantity it was an excess *from* was mine and wrong. ⛔ It must not be recorded as "explained by tilt."
 
-## 10. Scope
+## 10. -114: what p5's probe did to my numbers, and which results the env update can and cannot touch
+
+### 10.1 My 2.400 was exact — for the quantity it actually described
+
+p5's synthetic-box probe returns **−2.400 for every overlap ≥ 3.0 mm** with parallel boxes, and the `fromto` segment
+switches from y to z **exactly at the thickness**. ⇒ ⭐ **2.400 is confirmed to the digit as the zero-relative-tilt
+floor.** My §8 retraction was correctly calibrated and I do not widen it: the *number* was right, and what was
+wrong was **applying it as the cap for tilted pads**. It is not "my wrong number"; it is the right number for a
+configuration the pads are not in.
+
+### 10.2 My family-I cap: a valid bound, and a loose one
+
+Against the probe at θ = 1.571°/plate: measured **−2.478 / −2.499 / −2.561 / −2.601**, family-II predicts those to
+**0.002 mm**, and my family-I figure is **2.893** — over by **0.29-0.33 mm**.
+
+⇒ ✅ **still a bound** (every measured value sits under it) but ⛔ **never attained**, so it carries no explanatory
+weight. §9.3 already says this; the probe now says it without reference to p4's data, which is stronger.
+
+### 10.3 The convention: two independent routes agreed
+
+-114 (3) records that my asset-kinematics derivation (2θ, §9.1) and p5's probe parametrisation (A at −θ, B at +θ ⇒
+relative 2θ) reached the same convention by different means, and that **p4's 1.571° is per-plate**. ⇒ 9.1 stands as
+independently corroborated rather than as my reading alone.
+
+### 10.4 ⛔ The env update — which results need re-verification and which do not
+
+-114 (6) surfaces that the queued env7 update (mujoco 3.8.1 → 3.10.0) **replaces the very library whose contract was
+just measured**. Sorting my own results by whether they depend on that contract:
+
+| result | depends on the penetration contract? | after the update |
+|---|---|---|
+| **§2 bound** — where the claw distance reaches **zero** | ⛔ **no.** At zero there is no penetration, so the SAT-vs-anything question does not arise | ✅ **survives by construction** |
+| §5 confirmations — zero crossings, deeper pair, pair separation | ⛔ no — all read at or before first contact | ✅ survives |
+| §6 offset reconciliation — ctrl 219-225 | ⛔ no — pre-saturation window | ✅ survives |
+| §7-§9 floor / cap work | ⭐ **yes, entirely** | ⚠ **must be re-measured** |
+
+⇒ ⭐ **the ordering conclusion (claws first, no window) is the part that does not rest on the contract**, so the
+update does not put it back in question. Everything about the floor does.
+
+⭐ **Proposal only — I implement nothing and request no run.** p5's probe is **synthetic boxes with no THREAD asset,
+no harness, no GPU and no gate**. ⇒ it is the **only measurement in this whole chain that can be repeated
+identically on both sides of the update**. If it is kept as a script with its four numbers banked, the update
+becomes **verifiable** rather than a leap: run it on 3.8.1 and on 3.10.0 and diff the contract. ⚠ p5 owns both the
+probe and the update, so this is p5's and p18's call, not mine. I note only that the opportunity exists **before**
+the update, and not after.
+
+⚠ I also keep -114 (5)'s limits attached rather than dropping them: the probe is **synthetic boxes, not the real
+pads** (which also carry `pad1`/`pad2`, and whose tilt comes from the 4-bar); **p4's 1.571° is not itself
+probe-verified**; and the probe ran on **mujoco 3.8.1 default flags only** (`nativeccd` and friends untested).
+
+## 11. Scope
 
 ⛔ I do not rule on window-open / window-closed, on whether the clamp is reachable on real hardware, on capture vs
 grip, or on any change to the locked geometry (§0#4 = Rs). ⛔ I ran nothing and hold no RUN authorization. What I
