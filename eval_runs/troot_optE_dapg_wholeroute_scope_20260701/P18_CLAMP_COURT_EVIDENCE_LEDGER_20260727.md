@@ -4412,3 +4412,19 @@ fold is the same type as its own `-062` endorsement overreach.
 and §6.2 **modified**, not just appended). ⛔ **The version p4 banked an hour ago (`1838823e16`) contains the false
 float_z citation and the line-sha guard** ⇒ **the follow-up bank must precede the module implementation** — the
 module follows §6, and §6 changed. Follow-up queue with p4 is now two: clip doc `b3954ed7…` + spec `c65d39d7…`.
+
+## 102. p6's independent measurement converges — and one clean instance of content-first pinning
+
+`w2:p6` independently computed the HEAD blobs and reached §99(a)/§101(c)'s state exactly: clip doc **banked at the
+old 226-line blob** (`1838823e16`, numstat read), §9's 39 lines not in the commit, on-disk at `b3954ed7…`;
+⛔ *"citing by commit right now drags the 226-line version along."* ⇒ Follow-up already queued (`-215`/`-221`) —
+loop closed with p6.
+
+⭐⭐ **The spec side closed cleanly and is worth keeping as an instance**: p6's as-read pin `3911551c…` landed
+**unchanged 22 seconds later** — HEAD blob sha == pin, independently computed ⇒ **an as-read pin became a banked
+pin with zero rewriting** — content-primary / commit-secondary working as designed (recorded in #46, `93ab9eb9aa`).
+⚠ And it marked the next drift immediately: banked 114 ≠ on-disk 135 (`c65d39d7…`).
+
+⭐ **A timestamp discipline worth noting**: p6's earlier "untracked = 未 bank" was true at 18:19:19; the bank came
+at 18:19:41 ⇒ it **kept the statement with its measurement time attached** instead of rewriting it — ⛔ *"'became
+true later' is not rewritten into 'was true then'."*
