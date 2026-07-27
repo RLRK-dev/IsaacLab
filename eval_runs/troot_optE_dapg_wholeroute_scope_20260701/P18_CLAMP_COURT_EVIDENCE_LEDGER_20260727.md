@@ -7348,3 +7348,32 @@ yet the achieved gap is SMALLER (6.67 < 7.36) — *"素朴な予想と逆向き"
 changed simultaneously ⇒ ⛔ *"原因を 1 つに帰しません"* ⇒ ⭐ which itself REINFORCES (b): an envelope would
 average away exactly this signal. p4's current-cell pair, when it lands, shows the quantity within one cell —
 and §14-2 then narrows from the envelope to the pair (pre-declared).
+
+## 232. The pair arrives labelled — and two arms do not settle
+
+From -086 (23:22:24); verified here (clip bank @ `dfba150c87` = `9959a755…`; pair result sha MATCH
+`23c7c381e4…` @ `60a65b6365` "Take the pair, and find that two arms do not settle"; the artifact's own caveat
+line re-read: *"[pos] settle gate: NOT REACHED in 20 s -- numbers below are from moving arms"*).
+
+**(a) ⭐ The current-cell pair, labels applied at print** (p5's -107 requirement, live): aims L 2.80 / R 2.90;
+closed **L 6.75 / R 6.55** — both past the floor, both in-band, both held True ⇒ **the current-cell pair =
+6.55–6.75 mm** (both arms, one run, one cable). ⛔ The single-arm 6.67 NOT mixed in — a different
+configuration (same arm R: single 6.67 vs dual 6.55) — the mixing ban applied by p4 to its own fresh data.
+
+**(b) ⛔⛔ The heavier finding**: switching from the fixed ramp to the driver's own wait (residual <
+SETTLE_TOL 2.0 mrad), **the two-arm configuration never reaches the gate — 20 s, L 19.6 / R 12.9 mrad —
+while the same posture in single-arm settles to 0.00 mrad.** Adding one arm removes convergence. ⇒ the pair
+is *"動いている腕で測った値"* — the artifact prints the caveat itself, and mid-flight R sat OUT of band
+(42.37) before closing — ⛔ **the driver would not close fingers in this state: not the production closing
+condition.** ⭐ The judged run's own 両手クランプ failure noted as possibly related — ⛔ *"同一原因かは未検証
+（私の測定は静的・判定 run は route 中）・機構主張はしません."*
+
+**(c) ⭐ Court assigned (p4 deferred to p18/p5; decided per the standing seam)**: §200(a)/§201(a) place "腕が
+指令姿勢に到達したか（サーボ・整定・roll/yaw 予算）" in **p11's leg ④** ⇒ **p11 leads the diagnosis** (why
+the second arm removes convergence — candidate axes not prejudged here); p4 = measurement executor on p11's
+requirements; p5 = informed (the route's own closing gate rides this; step-table implications follow the
+diagnosis); p6 = register candidate — ⚠ on a §0#1 DUAL-ARM project, **a settling gate reachable only in
+single-arm is exactly what the register exists to hold**, and it gates the meaning of the authorized route
+run. **(d)** One operational mistake self-declared and fixed (wrong-cwd cp → double pathspec → failed add).
+The static lane is otherwise CLOSED; p5's §14-2 narrowing now weighs the pair's moving-arms caveat (three
+populations: old-cell pair 7.36/7.44; single-arm 6.67; dual moving-arms 6.55–6.75).
