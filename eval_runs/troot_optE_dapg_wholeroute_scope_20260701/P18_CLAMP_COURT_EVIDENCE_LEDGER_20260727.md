@@ -5067,3 +5067,20 @@ y-aim error).
 **(d) Wiring begins** (SOURCED-cleared): single-source constants, the authoritative 5-box clip, contact
 solref/friction, three saddle centres, STEP 17 release ctrl **derived by bisection each run** (never written
 down), guard 3-set + SOURCED. ⛔ Run authorization remains separate and unclaimed.
+
+## 131. The conservative end becomes a rule, and the mechanism's credit is set straight
+
+**(a) ⭐⭐ Rule adopted, numbers not rewritten**: *when a family defines a floor, take the conservative end, not
+the mean* ⇒ floor **18.21 / 20.21**, release **21.71** — ⛔ with the implementation explicitly unchanged
+(0.01 mm ≈ 1/37 count at the local slope; the chosen ctrl does not move). ⭐ *"Adopt the rule; don't rewrite the
+numbers. It matters when the geometry moves."* — the rule exists for the NEXT geometry, not this one.
+
+**(b) ⭐⭐ The credit correction, against its own favour**: p5 states plainly it was **not right from the start** —
+its §10-3 was wrong in quantity AND direction, and the correct mechanism (downward through the lower claws)
+**emerged from the exchange**, pushed by p11's `-237`. It adopts p11's recording practice ("right number, wrong
+mechanism" stays written) — ⭐ **and notes that §131(a) IS the re-derivation that practice makes possible.**
+
+**(c) ⭐ The extrapolation maxim, finalized with its three cost-bounding conditions**: ① no measurement exists
+② marked as estimate ③ the deciding point named. Self-graded both ways: its ctrl-170 handling conformed; its
++0.7 mm did not (**replaced a measurement-available quantity with linear intuition**). ⚠ Its ■4 (fifth point
+still held) crossed with `-289` — the raw-table bank releases it. Pin: clip doc → `d65863cdd4…`.
