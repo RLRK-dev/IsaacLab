@@ -5881,3 +5881,39 @@ line, recorded as custody: **evidence banked in this ledger through §163 is old
 ⛔ must not be collated against old-stack numbers without the axis stated. Owner of the per-item re-collation:
 **proposed = p4** (producer of today's runs; p0 verify leg; pZ out pending Rs) — flagged for Rs confirmation;
 the assignment is neither p6's court nor decided here.
+
+## 170. Three done — and the one-time query finds a real one
+
+From `MSG-P4-P18-THREE-DONE-AND-THE-QUERY-FOUND-A-REAL-ONE-20260727-073` (20:28), commit `6b6f095387` ("Take
+p5's strict reading, and find the one program still reading a retired file"), verified here.
+
+**(a) ✅ (i) post-upgrade invariants ALL HOLD** under mujoco 3.10.0 / warp 1.15.0: module — joint stiffness
+0.33333, cable 40×15 mm, 1.1243 g/seg, 44.97 g total, CLIP_COLLIDE True, self_check pass, clip 5-box cross-lock
+True, groove 15.0 mm, seat_z(0) 0.809; cell build — nq 113 / nu 14 / nbody 88 / ngeom 139 / eq 8, clip geom
+dims + world positions, seat links cab30/cab23 ⇒ **identical to pre-update**. ⚠ Scope stated by p4 itself:
+**build + statics only; GPU kernels unverified** (matching §164(b)).
+
+**(b) ✅ (ii) strict form confirmed + both deletions** — and p4's agreement is its own indictment, kept
+verbatim: the docstring *promised* "numbers derivable from owned names are exempt" and ⛔ **the implementation
+never did it** (the exempting branch was a do-nothing continue) ⇒ deleted the promise, kept the strictness —
+*"code that doesn't keep its promise is the exact defect this contract exists to catch."* Count 49 unchanged
+(⛔ the branch never had effect — so of course); subscript detection continues. §169(a)'s finding: this same
+commit already met p0's four-site condition it had never seen.
+
+**(c) ⛔⛔ (iii) the query returned 1, not 0 — a real live path.** p4's first attempt is the day's lesson again,
+self-reported: it counted **.md mentions**, which does not answer p5's question (paths **code reads**) — the
+query must run in the space the question lives in. Redone .py-only, four paths (import / open / read_text /
+glob+walk), 50,022 files: **`probe_handedness.py` was read_text-ing retired `ur15_steps.py` and exec-ing its
+header** ⇒ left alone it would keep building the old cell (78 mm clip, 32 links, 3.56× mass) and reporting
+handedness about a cell that no longer exists. ⭐ p4 concedes the frame: *"my -071 head-notes cannot stop this
+path — p5's two-option split was right; the range I thought notes could seal was too narrow."* Fix = repoint to
+`ur15_steps_wired.py` (verified here: `probe_handedness.py:28` reads the wired file; retirement note at `:22`),
+re-run: ⭐ **the conclusion survives the rewiring** — wide panel arm L left / near panel right, the two panels
+stay mirrored (matches the banked doc); banked numbers = old-cell, conclusion-only re-confirmed on the new
+cell, so recorded. Post-fix residue = **code paths 0**; what remains are documents quoting the filenames — the
+head-notes' proper jurisdiction. Artifact = `p4_ur15_sim_20260727/retired_file_residue_query.txt` sha256
+machine-compared = MATCH (`698ffa18dc36143efa739b5fee63adbafd9243a1dfde534d6b59013f336f5cd2`).
+
+**(d)** Remaining on p4 = the template-inversion rule (23 sites, started) + p5's three-item bank (§168(d),
+reaches p4 with -363). The lane's run-readiness now hangs on: template sites → p5's bank → p0's re-verification
+(first check = the declaration at the new pin `dab09ec05861…`) → Rs's run authorization.
