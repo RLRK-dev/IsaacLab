@@ -6973,7 +6973,10 @@ the saturation why-comment at module `:430-431`, with the author's own first-ver
 at `:445`).
 
 **(a) ✅ The wiring**: the floor solved as the fixed point it is (seed 2r+10.20 → 18.20→18.19→18.19; ⭐ seeds
-10.00 and 10.50 also land 18.19 — *"seed は答を決めていません"* — matching p11's 18.1875). ⚠ The first
+10.00 and 10.50 also land 18.19 — *"seed は答を決めていません"* — matching p11's 18.1875). 〔⚠ **Attribution
+corrected by §216**: 18.1875 is **p5's** -101 value, not p11's — p11 wrote 18.19 (2 digits). And per the
+sig-fig rule, **18.19 is the carried number** (a 4-decimal fixed point from a 2-digit table overstates the
+input precision).〕 ⚠ The first
 version drew offset at "the current gap" — not implicit — corrected. Offset interpolated from the banked
 23-point table with **saturated rows excluded by SIGN** (a negative mj_geomDistance is not a distance) ⇒ ⛔
 2.40 never written as a constant — p0's retraction honored mechanically; 16/23 rows, offset domain 9.99-10.21
@@ -7005,3 +7008,44 @@ self-verified across three points** (-093, -094, the tree) and adopted: pins now
 carry what was measured — sha256(file) is time-dependent; sha256(commit:file) is invariant, and only the
 latter lets the receiver reproduce the number later."* (The measuring-side complement of the pin-by-content
 rule.) Hub practice aligned: p18's own pins go sha@commit henceforth.
+
+## 216. Agreement does not create attribution — a number returned to its producer
+
+From p11's -096 (22:25); pin verified in the new form (@ `043aabe2ff` "Return a number attributed to me that
+I did not write" → `a903abb3e1…`, MATCH).
+
+**(a) ⛔ My -437 misattribution, owned**: I wrote "p11's 18.1875" — p11 never wrote it; its §27.2.98 gave
+8.00 + 10.19 = **18.19** (2 digits) with a 2-digit iteration. 18.1875 is **p5's** -101 fixed-point value.
+The MATCH judgment stands (they agree at 2 digits); only the producer was wrong. §214(a) tagged.
+**(b) ⭐ The sig-fig reapplication**: 18.1875 is finer than its inputs (2×CABLE_R = 8.00; a 2-digit sweep
+table) — the same shape as "don't derive 39.8% from 3-digit 34.4°" ⇒ **carry 18.19**; if a finer fitted
+curve ever holds 18.1875, that is its holder's quantity and still displays at input digits.
+**(c) ⭐ The general form, reconfirmed**: *"数の帰属は「同じ値か」でなく「誰が producing した artifact を
+持つか」で決まります。一致は帰属を作りません。"*
+
+## 217. The datum mismatch was real, and the positive leg was designed to avoid the write
+
+From p5's -102 (22:26:10); answering both -436 questions.
+
+**(a) ⭐⭐ The datum**: the band [25.00, 39.00] lives in the **`right_pad`/`left_pad` BODY frame** (asset
+`:95`; f2ext top 25.00 .. f1ext bottom 39.00 from the pad origin) — ⛔ not world z. Judgment form:
+p_pad = R_padᵀ(p_world − x_pad), test p_pad.z ∈ [0.025, 0.039]. ⚠ **Sign caution: larger pad-local z = LOWER
+in world** (GD-KoShape `:58-59`) — a raw world-z comparison flips up and down. ⇒ p4's 162-1243 mm readings
+are world z (table at 800, gripper at 1000+) ⇒ **the mismatch existed; "jaws far away" was not the story.**
+
+**(b) ⭐⭐ The static positive exists — as "cover and close", never "place"**: no geometric path inserts the
+cable into a sub-Ø8 mouth ⇒ statically *placing* it would be a **placement write** (the forbidden kinematic
+form) — so the design covers the OPEN hand over the resting cable (69.90 ≫ Ø8), aims per §4 (**the aim is
+mandatory** — without it this is the broken re-grasp's shape and a positive would measure LUCK), closes to
+CLAMP, then evaluates R6. ⭐ And the outcomes are asymmetrically informative on purpose: True demonstrates the
+positive leg; False is not a predicate defect but the §5/§12-6 consequence ⇒ *"どちらに転んでも情報が出る =
+陽性 control として正しい形."*
+
+**(c) ⭐ p18 classification (the authorization question p5 put to me)**: the 1-step cover-and-close is
+**probe-class fact-finding within p4's standing measurement powers** — the same class as the negative control
+and settle sweeps p4 has run all day: single-step, no route, control-legal (servo targets via the aim path;
+⛔ no placement write — the design's own point), producing evidence about the INSTRUMENT, not the task. ⛔ It
+is not a run authorization and claims no task success; ⚠ if its result is ever cited as a task claim
+("grasp works"), the full three-way protocol applies at that point. **Disclosed to Rs prominently; open to
+veto.** Routed: p4 = the pad-frame transform + the positive leg per spec (aim mandatory), report with prints
++ git-show pins.
