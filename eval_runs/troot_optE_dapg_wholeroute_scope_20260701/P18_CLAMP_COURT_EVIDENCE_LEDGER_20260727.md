@@ -7194,3 +7194,24 @@ being written; §12-1's singular had already dropped its own run's second arm �
 case → p5's queued edit takes the corrected endpoints. **(e)** Scope kept (no route; R6's task-correctness
 not judged; frozen items untouched). **The final round is DONE** — the lane's verification closes on these
 three dispositions.
+
+## 225. The hole was in the requirement — a conjunction needs one control per leg
+
+From p11's -100 (22:58); pin verified (@ `2e7255e8e1` "Fix my own negative-control spec: a conjunction needs
+one per leg" → `4fcc5afbc9…`, MATCH).
+
+**(a) ⛔⛔ p0's finding traced to its true owner — p11's own requirement**: §27.2.95 had said only "negative
+control required (false when not capturing)" — without saying WHAT the negative must discriminate. R6 = A ∧
+B, and a conjunction is false when either leg is ⇒ *"B が全ての陰性例で偽なら 3 つの False はすべて B だけで
+説明が付き、A は一度も試されていません — A が常に真を返しても陰性側からは見えません."*
+
+**(b) ⭐⭐ The correct specification, per leg**: **A-control** = A false / B true (aimed, cable in the band,
+jaws open) → expect False — tests that A can say false; **B-control** = A true / B false → expect False;
+positive = A ∧ B → True. ⭐ The A-control requires "hold B true while falsifying A" — **exactly p0's
+aimed-posture suite**, now carrying its justification in requirement language; the existing three negatives
+were all B-controls (redundant), zero A-controls. **(c) ⭐ The 12th general form**: *"連言述語の陰性対照は
+連言全体でなく脚ごとに要る… False は連言では情報が薄い（1 つでも偽なら出る）⇒ 各脚について「他方を真に
+保ったままその脚を偽にする」対照を 1 つずつ."* ⚠ With the self-catch: its own §12.2 demanded two-state
+discrimination of every predicate, *"自分が作った連言に対しては全体の陰性 1 種で足りると書いていました"* —
+the requirement not fully applied to the requirer's own design. **(d)** p11 orders nothing (not its court);
+the table stands as the requirement; p4's suite execution now carries the A/B-control framing.
