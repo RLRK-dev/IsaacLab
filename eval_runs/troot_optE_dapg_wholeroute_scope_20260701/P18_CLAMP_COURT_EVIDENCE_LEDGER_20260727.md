@@ -1359,3 +1359,58 @@ observation, verdict or caveat was altered; new sha `d8a1494d06ea4b8cee9d6dc81fc
 (233 lines), re-frozen pending `w2:p4`'s bank. ⛔ It declines to design the detour while σ_min measurements are
 zero, and pre-states the invariant: **a detour must satisfy its condition over the whole path** — citing today's
 two endpoint-only failures so the same error is not repeated in the fix.
+
+## 15. ⚠⚠ A conditional path from today's finding to a FOUNDATIONAL invariant — flagged, not triggered
+
+`w2:p11` traced where §12–§14 lead, before anyone re-runs anything:
+
+1. `w2:p5` will treat **stem** and **foot** as real obstacles ⇒ their radii (0.102 / 0.215 m) bear directly on
+   **shoulder-region pose selection**.
+2. ⛔ The sweep that adopted the yoke geometry (**spread 0.40 m / tilt 20°**) used a predicate that **could not
+   see those obstacles** — the cylinders generate no contacts.
+3. ⇒ ⭐⭐ **So adding the obstacles is not merely a path constraint: it reopens the yoke-geometry selection
+   itself.** The sweep has to be re-run **with the obstacles present**.
+4. ⇒ ⚠⚠ **And that can reach a foundational premise.** If the adopted point fails with obstacles, the question
+   becomes whether *any* point in the sweep's range survives; if none does, it touches **the 88 mm grasp span and
+   the fixed base positions — `RS71-System-Spec-SSOT.md:24`, §0#2** ⇒ ⛔ **Rs-exclusive** (`prohibited.md:18`).
+
+⛔ **Nothing is established as failing.** p11 does not know the adopted point's margin, nor what the 12 swept
+combinations covered — the handover records only *"0.22 m / 45° interferes; all 12 failed"*
+(`P4_UR15_HANDOVER_TO_IMPL_CHAIN_20260727.md:73`). ⇒ ⭐ Its formulation is the right one: **not "it will fail"
+but "we cannot proceed without checking."**
+
+⇒ ⭐ **p18's gate action, stated so it cannot be skipped by accident:** if that sweep is re-run with obstacles and
+returns a **different** yoke geometry, that result is **not** a routine parameter update — it is a candidate
+**premise change**, and it must reach Rs before it is adopted anywhere. ⛔ Nothing is stopped today, because
+nothing is running toward it; what is recorded is that **the quiet path from "re-run the sweep" to "§0#2 moved"
+is now closed.**
+
+### 15a. The upgrade smoke passed on the real model, and the two 10 mm appear side by side
+
+`w2:p5` loaded the **assembled THREAD gripper model** under both mujoco 3.8.1 and 3.10.0:
+`nq=8 nv=8 njnt=8 ngeom=32 neq=3 nu=1 ntendon=1` — **identical**, and the three `mj_geomDistance` pairs identical.
+⇒ ⭐ The model loads on 3.10.0 and the instrument's values do not move ⇒ **upgrade risk down another notch.**
+⚠ Scope: **load and static distance only** — solver behaviour, contact, and run reproducibility remain unmeasured,
+so the post-upgrade run smoke is still required. ⛔ p5 has not started the upgrade; it waits for p4's explicit
+"series complete", not for process counts.
+
+⭐⭐ **And the same output shows §3's axis hazard on the real model rather than on synthetic boxes:**
+
+| pair | separation | axis |
+|---|---|---|
+| `left_pad1` ↔ `right_pad1` | 85.400 mm | jaw y |
+| `left_pad_f1ext` ↔ `right_pad_f1ext` | 75.400 mm | jaw y — **difference 10.000 mm** = 5.00 protrusion × 2 |
+| `left_pad_f1ext` ↔ `left_pad_f2ext` | **10.000 mm** | **pad-local z** — the mouth height *within one pad* |
+
+⇒ ⭐ **Two 10.000 mm in one output, on different pairs and different axes.** ⇒ And the parallel-face relation
+(claw gap = backplate gap − 10.00) is confirmed on the **assembled model at its default pose**, not just on the
+probe's boxes.
+
+### 15b. My near-miss and p11's morning failure are the same shape
+
+- **p18**: a **line-scoped** `grep` against a geom element that **spans two lines** ⇒ nearly reported a false absence.
+- **p11**: a `grep` that **assumed attribute order** ⇒ dropped the four class-first cases.
+
+⇒ ⭐⭐ **Same shape: the predicate's unit (a line, an attribute order) did not match the object's unit (an
+element).** ⇒ **Discipline: extract the object at its own granularity before asserting absence** — the general
+form of `w2:p12`'s rule, and the third distinct way this failure appeared today.
