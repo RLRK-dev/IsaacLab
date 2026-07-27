@@ -44,7 +44,8 @@ SIDES = {"L": -1.0, "R": +1.0}
 # --- cell layout: the table's clip row runs along X here, the rest row sits nearer the column ---
 TABLE_TOP = 0.80
 TABLE_HX, TABLE_HY = 0.70, 0.20
-CABLE_N, CABLE_SEG, CABLE_R = 32, 0.030, 0.005
+CABLE_N, CABLE_SEG, CABLE_R = 32, 0.030, 0.004  # task_config.py:137 CABLE_RADIUS = 0.004
+                                                # (2f85_koshape.xml:9: the claws wrap the O8 cable)
 REST_Y = 0.28  # S1-S3 equivalent: where the cable starts, OUTSIDE every clip
 CLIP_Y_ODD, CLIP_Y_EVEN = 0.35, 0.40  # staggered, as C1/C3/C5 vs C2/C4 in the table
 C1 = (0.150, CLIP_Y_ODD)   # table :1253 C1 = 0.35 / +0.150
@@ -56,12 +57,16 @@ GRIP_HALF_SPAN = 0.044  # task_config.py:235 @ 843084ae5e47ddc9f17bfe33c2dbc3f46
 
 # pinch-frame Z tiers.  The table's 1.12/1.07/1.05/1.02 are WRIST-FLANGE heights; pinch() below is
 # the fingertip pinch point, so the tiers are re-expressed in the pinch frame (stated, not silent).
+# task_config.py:320 EE_TO_PINCH_CLOSED = 0.2548428289592266 (wrist_3 -> pinch mid)
+# task_config.py:321 EE_TO_PINCH_TIP_CLOSED = 0.27574726696    (wrist_3 -> ko f1ext claw TIP)
+CLAW_OFFSET = 0.27574726696 - 0.2548428289592266  # 20.9 mm from the pinch to the claw tip
+
 Z_HOME = TABLE_TOP + 0.20
 Z_RISE_ROUTE = TABLE_TOP + 0.180
 Z_RISE_REST = TABLE_TOP + 0.230
 # Z_GRASP_REST / Y_GRASP_REST are MEASURED after the settle below, not assumed here.
 CLIP_RISER = 0.040
-Z_SEAT = TABLE_TOP + CLIP_RISER + 0.030 - 0.0258  # groove seat, expressed at the pinch
+Z_SEAT = TABLE_TOP + CLIP_RISER + 0.030 - CLAW_OFFSET  # groove seat, expressed at the pinch
                                                  # (the claw carrying the cable is 25.8 mm above it)
 
 # finger commands (2F-85 tendon actuator, 0 open .. 255 closed) for the table's three states
@@ -69,7 +74,6 @@ CLAMP, HALF, OPEN = 255, 170, 0
 # What actually holds the cable is the ko-shape claw pair, not the pads: at full clamp the pads
 # stop 24.2 mm apart (cable is 10 mm) while the facing f2 claws sit 25.8 mm above the pinch with an
 # 18.0 mm gap.  So the pinch must be driven BELOW the cable by that much, or the claws close on air.
-CLAW_OFFSET = 0.0258
 
 
 def arm_spec():
@@ -324,14 +328,17 @@ def ik(t, target, gain=0.45, lam=0.06, dq_max=0.030, lag=0.35, wrot=0.6):
 
 
 def grasped(t):
-    """True when this gripper's own geoms are in contact with cable geoms on BOTH pads."""
+    """True only when the cable is inside the ko bracket: it must touch a CLAW geom (f1ext/f2ext)
+    on BOTH pads.  Contact with any pad face is not a clamp -- that predicate could not tell the
+    two apart, and reported a grip that Rs could see was not there."""
     hit = set()
     for i in range(d.ncon):
         g1, g2 = d.contact[i].geom1, d.contact[i].geom2
         for a, b in ((g1, g2), (g2, g1)):
             if a in PADG[t] and b in CABG:
                 nm = mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, a) or ""
-                hit.add("L" if "left" in nm else ("R" if "right" in nm else "?"))
+                if "ext" in nm:
+                    hit.add("L" if "left" in nm else ("R" if "right" in nm else "?"))
     return {"L", "R"} <= hit
 
 

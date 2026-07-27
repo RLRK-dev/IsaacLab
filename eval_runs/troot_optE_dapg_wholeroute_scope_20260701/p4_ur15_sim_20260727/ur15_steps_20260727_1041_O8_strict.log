@@ -1,0 +1,42 @@
+[steps] nq=97 nu=14 nbody=80 ngeom=131 eq=8  seat links C1=cab21 C2=cab17
+[steps] geoms: 131 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.469,+0.410] y[+0.280,+0.280] z-table[+0.0262,+0.1588] ncon=6
+[steps] measured grasp: L=cab19 [0.1141 0.28   0.9499]  R=cab22 [0.2036 0.28   0.9586]  drop across the span = 8.7 mm
+[steps] start-pose IK L: 8 solved / 8 collision-free, chosen pos  0.00 mm roll 20.1 deg |q|max=1.27 rad
+[steps] start-pose IK R: 13 solved / 3 collision-free, chosen pos  0.00 mm roll 34.4 deg |q|max=3.06 rad
+[steps] STEP1 L arm touching: clear
+[steps] STEP1 R arm touching: clear
+[steps] re-measured after the approach: L=cab18 [0.1084 0.28   0.9475]  R=cab21 [0.1978 0.28   0.9573]
+[steps] STEP1 L: tool err=   0.1mm
+          joint err   = [-0.  0. -0. -0. -0.  0.] mrad
+          act force   = [0. 0. 0. 0. 0. 0.] N.m   (limits [433. 433. 204.  70.  70.  70.])
+          gravity load= [ -61.6 -101.5  -14.4    4.5   -1.1    0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] STEP1 R: tool err=   0.1mm
+          joint err   = [ 0.  0.  0. -0.  0.  0.] mrad
+          act force   = [ 0.  0.  0.  0. -0.  0.] N.m   (limits [433. 433. 204.  70.  70.  70.])
+          gravity load= [82.6 29.7 -8.8  0.1  1.5 -0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] STEP 2 cable上空へ     t=  2.2s L=   0.1mm R=   0.1mm c1[y+0.280 z+0.157] c2[y+0.280 z+0.143] pin=--/-- grip=--
+[steps] STEP 3 cableへ下降     t=  4.8s L=   0.1mm R=   0.1mm c1[y+0.280 z+0.156] c2[y+0.280 z+0.142] pin=--/-- grip=--
+[steps] GRASP L: fingers blocked by nothing
+[steps] GRASP L: nearest cable link cab18 at  18.3 mm from the pinch, pad separation  24.0 mm, ctrl=255, pad geoms touching cable = none
+[steps] GRASP R: fingers blocked by nothing
+[steps] GRASP R: nearest cable link cab21 at  28.7 mm from the pinch, pad separation  24.0 mm, ctrl=255, pad geoms touching cable = none
+[steps] STEP 4 cable把持      t=  6.8s L=  13.5mm R=  13.5mm c1[y+0.285 z+0.147] c2[y+0.277 z+0.123] pin=--/-- grip=--
+[steps] STEP 5 持ち上げ         t=  8.8s L=  13.5mm R=  13.5mm c1[y+0.274 z+0.212] c2[y+0.284 z+0.213] pin=--/-- grip=--
+[steps] STEP 6 C1上空へ搬送      t= 11.6s L=  13.5mm R=  13.5mm c1[y+0.340 z+0.161] c2[y+0.346 z+0.167] pin=--/-- grip=--
+[steps] STEP 7 C1へ押し込み      t= 14.4s L=   9.8mm R=  10.7mm c1[y+0.352 z+0.063] c2[y+0.343 z+0.076] pin=--/-- grip=--
+[steps] STEP 8 誘導ハンド半保持     t= 16.0s L=   9.6mm R=   6.4mm c1[y+0.349 z+0.064] c2[y+0.342 z+0.071] pin=--/-- grip=--
+[steps] STEP 9 C1がcable固定   t= 17.6s L=   9.6mm R=   6.4mm c1[y+0.347 z+0.064] c2[y+0.342 z+0.071] pin=--/-- grip=--
+[steps] STEP10 C1から上昇       t= 19.6s L=  12.7mm R=   0.1mm c1[y+0.349 z+0.060] c2[y+0.345 z+0.095] pin=--/-- grip=--
+[steps] STEP11 C2上空へ        t= 22.2s L=  12.7mm R=   0.1mm c1[y+0.345 z+0.058] c2[y+0.339 z+0.093] pin=--/-- grip=--
+[steps] STEP12 左クランプ        t= 23.6s L=  13.5mm R=   0.1mm c1[y+0.343 z+0.058] c2[y+0.338 z+0.093] pin=--/-- grip=--
+[steps] STEP13 右がcable再把持へ  t= 25.8s L=  13.5mm R=   0.1mm c1[y+0.343 z+0.057] c2[y+0.339 z+0.092] pin=--/-- grip=--
+[steps] STEP14 両手クランプ       t= 27.4s L=  13.5mm R=  13.5mm c1[y+0.342 z+0.057] c2[y+0.339 z+0.092] pin=--/-- grip=--
+[steps] STEP15 C2へ押し込み      t= 30.0s L=   9.8mm R=  13.5mm c1[y+0.342 z+0.056] c2[y+0.340 z+0.091] pin=--/-- grip=--
+[steps] STEP16 C2固定         t= 31.6s L=   9.7mm R=  13.5mm c1[y+0.342 z+0.055] c2[y+0.340 z+0.091] pin=--/-- grip=--
+[steps] STEP17 解放           t= 33.0s L=   9.6mm R=  14.8mm c1[y+0.342 z+0.054] c2[y+0.340 z+0.090] pin=--/-- grip=--
+[steps] STEP18 上昇           t= 35.0s L=  12.7mm R=   0.1mm c1[y+0.342 z+0.054] c2[y+0.341 z+0.090] pin=--/-- grip=--
+[steps] gates: {'grasp': False}
+[steps] wrote /home/rlrk/Downloads/ur15_steps_c1c2.mp4 frames=1029 24263243 bytes
