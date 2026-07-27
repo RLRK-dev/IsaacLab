@@ -2403,3 +2403,45 @@ the LOCK asset. Run explanation ⇒ that run's model. Both ⇒ read both and che
 ⭐ p11 also ties it to its own earlier finding: **a false self-criticism leaves a false cause in the record; a
 procedural error hidden behind a correct value leaves nothing at all.** ⇒ **Both reduce to: write the procedure,
 not the result.**
+
+## 35. ⭐⭐⭐ The axis matches, so §32's numbers stand unconverted — and the Rs question resolves into three options
+
+`w2:p5` closed the axis question. Its formula needs the component that tips the channel's length (pad-local x)
+into z — **rotation about pad-local y, the jaw's closing direction**. Source says `roll` is about **the closing
+axis**. ⇒ ⭐ **closing axis = pad-local y** (the backplates face each other in y; `pad_box1` y half-width 0.004,
+claw y half-width 0.009 — p5 measured).
+
+⇒ ⭐⭐ And the docstring's *"Closing axis across the cable"* means that **at roll = 0 the claw's length runs
+parallel to the cable** — the 100%-containment pose ⇒ **`roll` *is* the angle between the channel and the cable,
+directly.**
+⇒ ⭐⭐⭐ **So §32's table applies with no conversion: roll 34.4° ⇒ 2.97 mm contained (13.5%); roll 17.2° ⇒
+≈6.5 mm (29.5%).**
+⚠ One premise: **the cable is horizontal** on the table, so the angle is the roll alone. ⛔ **If the cable sags or
+tilts, it gets worse, not better.**
+
+### 35a. The trade, and the three options — all three are Rs's
+
+`w2:p5` confirms this exceeds its court, because **the only way to recover containment is to reduce the roll, and
+that touches §0#2.** Its OPTIONS, stated as options and not a recommendation:
+
+1. **Reduce the roll and prevent the wrist interference some other way** ⇒ yoke geometry ⇒ **Rs**
+2. **Relax the containment requirement** ⇒ i.e. change the holding mechanism away from capture ⇒ **Rs**
+3. **Move the 88 mm span** ⇒ **§0#2** ⇒ **Rs**
+
+⇒ ⭐ **All three are Rs-exclusive, and the court has nothing further it may decide.** ⛔ p5 selects none.
+
+### 35b. A falsifiable prediction connecting the pose to the observed asymmetry
+
+⭐ §30a recorded that the **succeeded** hand had containment **+0.4 mm** with **all four claws** in contact, while
+the **failed** hand had **−13.5 mm** with **`pad2` only**. ⇒ ⭐ Read through §32, that is the shape you would
+expect if **the smaller-roll hand contained the cable and the larger-roll hand did not.**
+⇒ ⭐⭐ **Prediction, and it can come out either way: the hand with the larger roll should be the failed hand.**
+⚠ p5 has **not** checked the per-hand roll against the outcome — that is `w2:p4`'s court — and says so.
+⇒ If it holds, Rs's pose objection and the observed success/failure asymmetry have **one cause**. If not, they are
+separate.
+
+⭐ **p5 also applied §34a to its own claim before being asked**: its 5.19° / 13.5% is a **design claim**, so its
+authority is the **LOCK asset**, and the dimensions it used (claw x half-width 0.011, mouth 10.00, Ø8.00) came
+from there — **the correct source for that kind of claim**. ⇒ And `w2:pC`'s measurement on the run's model
+supplies the second leg. ⛔ **But pC checked the agreement, not p5** — the gap §34a names, acknowledged by the
+pane it applies to.
