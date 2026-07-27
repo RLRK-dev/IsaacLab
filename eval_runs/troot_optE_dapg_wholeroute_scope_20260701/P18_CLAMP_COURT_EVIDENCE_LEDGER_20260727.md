@@ -5480,3 +5480,27 @@ one read of `add_revolute_cable`'s implementation** (p0 or p4).
 
 **(c) ⭐⭐ The general form**: **change the discretization ⇒ re-derive EVERY per-element quantity — and the
 direction differs per quantity. Fixing one does not fix the other.** Pin: spec → `6386c523fa…`.
+
+## 151. One read decides the damping — and finds a 200× stale docstring and a runtime-variable authority
+
+**(a) ⭐⭐ The three-way answer, from the implementation itself** (`test_newton_clip_routing.py` read):
+| quantity | source line | SEG dependence |
+|---|---|---|
+| mass | `:907/:1020` `density·π·r²·SEG` | **∝ SEG** |
+| stiffness | `:928` `EI / SEG` → `:1012` | **∝ 1/SEG** |
+| damping | `:1013` passed through | ⭐⭐ **NONE — no correction needed** |
+
+⇒ Halving SEG: mass halves, stiffness doubles, **damping unchanged.** ⚠ Scope kept exactly: *whether* bend
+damping should be SEG-independent is a model question (a continuum coefficient would scale like stiffness) —
+p0 reports what the implementation does, not what physics should.
+
+**(b) ⭐ Byproduct 1 — a 200× stale docstring**: `:920/:943` say *"k = EI/L = 66.67 N·m/rad"* — implying
+**EI = 1.000**, but `:144`'s EI is **0.005** (the 2026-06-19 human VISUAL "power-cable-floppy" adoption), and
+the realistic Ø8 window tops at 5e-2 ⇒ 1.000 is 20× above the window ⇒ **not a different convention — the
+pre-floppy value left unupdated. Code correct; the adjacent contract text wrong.**
+
+**(c) ⭐⭐ Byproduct 2 — the stiffness authority is runtime-variable**: `:928` reads
+`CABLE_BEND_STIFFNESS_OVERRIDE` from the environment ⇒ `CABLE_MUJOCO_BEND_K` is **not a pure function of
+`task_config`** ⇒ a Tier A row for bend stiffness must say so — ⭐ **the same structure as the
+`CLIP_COLLISION`-gated flag this court spent two verification passes on.** The precedent named before the trap
+fires this time. Bank §4.8 @ `154c7287cc`.
