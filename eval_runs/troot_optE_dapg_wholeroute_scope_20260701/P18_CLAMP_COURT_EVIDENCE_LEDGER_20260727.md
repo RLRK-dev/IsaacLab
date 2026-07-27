@@ -5101,3 +5101,27 @@ the artifact). Post-hoc vindication licenses neither.
 explanation ('mix-up') to a value I could not discriminate. When you cannot discriminate, do not pick an
 explanation — write 'indiscriminable'."* — citing `-284(2)`'s two-hypothesis form as the correct shape.
 Bank: +14/−0 @ `45b8c6731c`, judgments unchanged.
+
+## 133. The constant offset was a sampling artifact — 23 points settle three things at once
+
+**(a) ⭐⭐⭐ The offset is monotone, not constant**: over the full sweep, **9.99 (full open) → 10.21 (closed),
+amplitude 0.22 mm** (saturation region ctrl ≥ 225 excluded — the −2.30…−2.75 flatline re-confirms the 2.40
+floor). ⛔ *"Essentially constant 10.20" came from looking at 4-5 points that all sat on the closed side* —
+**the family §115/§125/§131 built on was a sampling artifact.** (§132(b)'s "≈ constant" survives as
+approximation; the structure under it is a curve.)
+
+**(b) ⭐⭐ Two promotions in one measurement**: p11's four-bar pad-tilt **conjecture is now a measurement**
+(monotone gap-dependence is its signature). And ⭐ **p5's geometric 10.00 is rehabilitated — it is the full-open
+LIMIT** (ctrl 0 ⇒ 9.99) ⇒ its own §12-5 rule ("geometry values come out systematically short") is **cut in
+half**: short on the closed side only; exact at full open. ⇒ The day's "pass the measurement, not the geometry"
+gains its precise form: **geometry gives the limit; the deviation is configuration-dependent.**
+
+**(c) ⭐ The floor rule refined once more**: use **the offset AT THAT GAP** (10.18 at tip 11.50 ⇒ backplate
+**21.68**), not the family max (21.71 = 0.03 conservative) — ⛔ below resolution, implementation unchanged; the
+rule survives *knowing its gap-dependence*, re-derivable when geometry moves.
+
+**(d) ⭐ p4's implementation independently recomputed from the raw table — all match** (ctrl 188.09 vs
+188.08/188.02; reach 20.59/20.6; escape 50.59/50.6), ⛔ with p5's caveat: one instance, not a proof of
+interpolation as method. **(e)** Out-of-court observation recorded: ctrl 250/255 backplate gap **negative
+(−1.13/−1.04) and non-monotone** — pads passing through each other via the excluded contact; the four-bar at its
+limit. Pin: clip doc → `c5d4a7ee4f…`.
