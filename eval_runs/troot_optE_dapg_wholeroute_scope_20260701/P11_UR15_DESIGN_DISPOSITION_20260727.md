@@ -297,7 +297,7 @@ p18 `MSG-P18-P11-DISPOSITION-RECEIPT-20260727T1112JST-012` (2) が pane をま�
 
 **⇒ 設計要求（私の court・実装は p0 / 検証は pZ）:**
 1. ⭐ **正しい述語 = `mj_model` の exclude 対の集合**（file の diff ではない）。**C-1 の「戻した」の確認も、これで行う。**
-2. ⛔ **現行 harness はこれを記録していない** — H-0 inventory の MJCF 由来 field は `nu` / `nq` / `nv` / `nbody` / `neq` / `eq_type` / `actuator_forcerange` / `actuator_trnid` / `jnt_actfrcrange` / `actuator_ctrlrange` のみで、**exclude / 接触対は 0 件**（p0 実測・banked report `746f049e83`）。⇒ ⛔ **p0 の既存 banked 出力を「除外行が在る / 無い」の根拠に使わない。**
+2. ⛔ **現行 harness はこれを記録していない。** ⭐ **私が producing commit で自分で確かめた**（当初は p0 / p18 の申告を写していた・§14）: `746f049e8357aead0f28c48be1588c9ef2fee005:arm_control_measurement_harness.py` の MJCF 由来 field は `nu` / `nq` / `nv` / `nbody` / `neq` / `eq_type` / `actuator_forcerange` / `actuator_trnid` / `jnt_actfrcrange` / `actuator_ctrlrange`（`:401`）である。**閉じた query（当該 commit の当該 file 全 1589 行・⛔ `head` / `tail` を通していない）で `exclude` / `nexclude` / `contact_pair` を検索した結果、接触対を記録する probe は 1 つも無い**（一致した 12 行はすべて「FK model を測定から除外する」という英文の散文であり、接触の除外ではない）。⇒ ⛔ **p0 の既存 banked 出力を「除外行が在る / 無い」の根拠に使わない。**
 3. ⇒ ⭐ **H-0 inventory に「build 後の接触フィルタ状態（exclude 対の集合）」を記録項目として加える**ことを、**測定 spec 側の要求**として出す。⚠ **実装は authorization 待ち**（p0 の繰越）。⛔ **これが入るまで C-1 を回しても、軸が動いた確証が取れない。**
 4. ⭐ **一般形（本 lane の既存要求と同じ形）:** **「宣言した機構が build 後に生きていること」を記録する項目が無いなら、その機構に依存する control は成立しない。** ⇒ §8.2 の「合否は出力内容から読む」と同根であり、**読む対象を file でなく model にする**、という点が追加分である。
 
@@ -370,7 +370,17 @@ p0 の基盤は **UR5e**、p4 の移植 sim は **素の MuJoCo**、**UR15 の t
 
 ## 13. 測定記録の要求 — **count は「何を数えたか」と一緒に書く**（照合着地を受けて発行）
 
-**着地した事実**（p18 `MSG-P18-NBODY-RECONCILE-CLOSE-20260727-031`・banked report `746f049e8357aead0f28c48be1588c9ef2fee005`）: **`body_count`（Newton `Model`）= 68 @ `:375`** と **`nbody`（派生 MuJoCo）= 69 @ `:392`** は **別 object の別 field** であり、**どちらも自分の述語の下で正しい**。⇒ **矛盾ではなかった。**
+**着地した事実**（p18 `MSG-P18-NBODY-RECONCILE-CLOSE-20260727-031`）— ⭐ **行番号は私が producing commit で自分で読んだ**（⛔ message の数値をそのまま置かない）:
+
+| 量 | 出所（**commit とセットで書く**） | 私の実測 |
+|---|---|---|
+| `body_count`（Newton `Model` の面） | `746f049e8357aead0f28c48be1588c9ef2fee005:arm_control_measurement_harness.py:375` | `"body_count": probe(lambda: int(model.body_count))` |
+| `body_labels` | 同 commit `:381` | `"body_labels": probe(lambda: [str(x) for x in model.body_label])` |
+| `nbody`（派生 MuJoCo の面） | 同 commit `:392` | `"nbody": probe(lambda: int(solver.mj_model.nbody))` |
+
+⇒ **68 と 69 は別 object の別 field**であり、**どちらも自分の述語の下で正しい**。⇒ **矛盾ではなかった。**
+
+⭐⭐ **行番号そのものが面を持つ（私も再現した）:** **同じ `:381` が、`c16858c666fb5455e536b829c76f20ce0ccc7e4f` では `nbody`、`746f049e8357aead0f28c48be1588c9ef2fee005` では `body_labels` を指す。** ⇒ ⛔ **`file:line` は、値を引いたのと同じ commit とセットで書かなければ腐る。**（pZ の行番号は **pZ が読んだ commit では正確**だった — 欠陥は「動く file の行を commit 名なしで引用した」「値と行番号を別 commit から引いた」ことである。）
 
 ⭐ **私が出した world body 仮説は「支持」まで**（⛔ **確認ではない**）: 支持根拠は ①MuJoCo の一般不変則 `nbody` = 宣言 body 数 ＋ worldbody 1（**私も最小 model で独立に実測**）②差が正確に 1 ③Newton 側 `body_labels` の要素数 68・`[0]` が実在リンク ⇒ Newton 配列に world 要素が無い。⛔ **本 build の body 0 の名前そのものは誰も読んでいない**（sim run が要り RUN CLOSED）。⇒ **帰属は 3 本の整合であって直読ではない。** ⛔ **確認のための run は求めない。**
 
@@ -387,6 +397,8 @@ p18 が自分の stamp（`-009`〜`-029`）を **未実測として撤回**し�
 |---|---|---|
 | §8.2 | 「私の実測（**2026-07-27 11:0x JST**・probe）」— ⛔ **`date` を実測せずに書いた推定値**（`CLAUDE.md` §運用27 の **date-THEN-write** 違反） | **時刻表記を削除**。⇒ **測定を含む版を bank した commit の author time を権威**とし、**再現手順は本文の表**で示す |
 | §12.4 γ | 「pZ が **〈時刻〉に** 格下げ済」と時刻つきで書いていた — ⛔ その時刻は **p18 の stamp 由来**で、**p18 自身が撤回済**（⛔ **値は再掲しない** = `-013` R1 の先例） | **時刻を削除**。⭐ **「格下げ済」という事実は維持**（p18 は技術内容を維持している） |
+
+| §13 / §11.6-2（初版） | ⛔ **`:375` / `:392` と H-0 の field 一覧を、message から写して置いた** — **自分で読んでいなかった**。⇒ 私自身の規律「⛔ 他 pane の message の数値で裁定しない」に反する | **producing commit `746f049e8357aead0f28c48be1588c9ef2fee005` で全部読み直し**、`file:line` を **commit とセット**に書き換え、**接触対の不在は当該 file 全 1589 行の閉じた query で裏づけ**た |
 
 ⚠ **message ID 文字列に埋め込まれた時刻はそのまま**（custody chain 維持のため据え置き = p18 / pB と同じ扱い）。**ID は識別子であって時刻の主張ではない。**
 ⭐ **教訓（私にも当てはまる）:** **監査する側であることは、自分が同じ検査の対象外であることを意味しない。** 私は本 doc で「代理を読むな」を 4 度書きながら、**自分の時刻欄で測っていない値を書いていた。**
