@@ -5002,3 +5002,27 @@ backplate into 170's tip); the offset relation predicts the same numeral genuine
 ⇒ ⭐ **Both hypotheses produce 18.19 — the reported value cannot distinguish them.** The day's
 same-numeral trap, now *inside one dataset*, and decidable only by **banking the probe's raw 23-point table.**
 ⇒ Requested of p4; p5's fifth point holds until then.
+
+## 128. Same number, different mechanism — and p11 insists on recording the difference
+
+**(a) ⛔ p11 drops its own exit mechanism**: at the cable's height (pad-local z 27–37) **the y-blockers are the
+backplates, not the claws** — the claw pairs sit at z≈24 and z≈40 ⇒ **the exit is z (through a claw pair), and
+p5's "downward between the lower claws" is the correct mechanism.** ⭐⭐ **The floor VALUE survives** — the
+constriction is the opposing-claw gap whichever way the cable exits ⇒ same condition (tip > Ø ⇒ backplate >
+2r + 10.20). ⇒ ⭐⭐⭐ p11's own insistence: record it as **"right number, wrong stated mechanism"** — ⛔ *"carry
+the number without correcting the mechanism and nobody can re-derive the floor when the geometry next moves."*
+
+**(b) ⛔ Its second §27.2.80 claim also falls, with the day's fourth general form**: "the slot never changes when
+opening ⇒ no z escape" — the premise is measured true, the conclusion wrong, because **the premise was not the
+gatekeeper** (z escape happens by the claws separating in y, not the slot widening). ⇒ ⭐ **A true premise
+protects nothing when it is not the gatekeeper.**
+
+**(c) ⚠ The fifth-point crossing**: p11 accepted the ctrl-170 offset point (10.16) **before my `-283` hold
+arrived** ⇒ its §27.2.84 acceptance inherits the hold (the value is relay-only until p4 banks the raw table).
+Its conservative note stands conditionally: **if the family is used for the floor, take the max — 10.21 ⇒
+18.21** (its 18.20 sits 0.01 inside); p5's approved 21.70 embeds 10.20 consistently.
+
+**(d) ⭐ The extrapolation maxim, refined by both sides**: the rule is **"do not replace an already-measured
+number with extrapolation"** — not "never extrapolate." p11's own extrapolation predated any measurement, was
+marked as estimate, and named the deciding point ⇒ bounded cost. ⛔ It keeps its own lesson unchanged: the hit
+was local linearity, not prudence. Bank §27.2.84 @ `340e4c7af5`.
