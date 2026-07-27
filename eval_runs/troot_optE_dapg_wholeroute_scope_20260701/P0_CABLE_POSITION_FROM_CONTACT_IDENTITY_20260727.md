@@ -300,7 +300,80 @@ for **is already constructed, one line away from the predicate that needed it.**
 - doubt **① time alignment** — ⛔ **still live, and now the only one.** Whether the cited contact line is pC's
   instant remains unchecked, and it alone would dissolve the -128 (8) conflict.
 
-## 11. Scope
+## 11. -134 (5): read at the producing commit. The answer is a third option neither hypothesis named.
+
+-134 (5) asks whether `slot vs cable` uses a **fixed link index** or the **nearest link at evaluation time**, and
+says it can be settled by reading. I read it at `e9f93a7556`.
+
+### 11.1 Neither. It is the link nearest a **fixed x**, re-selected every evaluation
+
+```
+:523  def cable_at(x):
+:524      """Centre of the cable link nearest this x.  A link's body origin is the START of its capsule,
+:525      so the material sits half a segment further along the link's own x axis -- targeting the origin
+:526      misses by ~15 mm."""
+:527      C = [d.xpos[b] + d.xmat[b] @ [CABLE_SEG/2, 0, 0]  for b in CAB]
+:529      i = int(np.argmin(np.abs(C[:, 0] - x)))
+:530      return C[i], i
+...
+:535  GL = (float(C1[0] - GRIP_HALF_SPAN), ...)          # frozen at setup
+:842  cw, _ci = cable_at(GL[0] if t == "L" else GR[0])   # the x is the frozen one
+:843  sc_err = (seat_point(t) - cw) * 1000.0
+:845  print(... "slot vs cable, live" ...)
+:849  print(... "cable moved {norm(cw - aim_cable[t])} mm since the aim")
+```
+
+⇒ ⭐⭐ **the x is fixed; the link is chosen fresh by `argmin` at every call; the position is live.** So:
+
+- ⛔ **not** a fixed index — the selected link can change;
+- ⛔ **not** the link in the jaw — nothing references the jaw;
+- ⭐ **the link nearest a frozen x**, which is neither.
+
+⇒ ⭐⭐⭐ **if the cable slides along x, `argmin` hops to a different link, and both prints change discontinuously —
+reporting that "the cable moved" when what changed is *which link is being measured*.** That is a concrete
+mechanism for -134 (5), and it applies to `cable moved since the aim` too, since `:849` reuses the same `cw`.
+
+### 11.2 The magnitude is consistent with a single hop — ⛔ but that is not proof
+
+Link spacing is **`CABLE_SEG = 0.030` = 30 mm** (`:47`). L's printed drift is **25.1 mm** — **less than one
+spacing**. ⇒ ⭐ a single index hop is a **sufficient** explanation and consistent in magnitude. ⛔ It is not
+established; a genuine 25 mm cable movement produces the same number.
+
+### 11.3 ⭐⭐ The discriminator is computed and then discarded
+
+`cable_at` **returns the index** (`:530`), and `:842` throws it away — `_ci`. And `aim_cable[t]` stores **only the
+position** (`:749`, `:768`), never the index. ⇒ ⭐ **comparing the aim-time index with the grasp-time index would
+separate "the cable moved" from "the measurement hopped" outright, and both indices exist at the moment they are
+needed.**
+
+⇒ ⚠ this is -123 (2)'s pattern **one step worse**: there, the discriminating quantity was computed and printed but
+left out of the verdict. Here it is computed and **discarded**. ⛔ On the existing logs the comparison cannot be
+made, because neither index was ever emitted.
+
+### 11.4 ⭐⭐⭐ Two different "nearest cable link" quantities — and the second has the defect the first documents
+
+```
+:823  dists = [norm(d.xpos[b] - pw) for b in CAB]     # reference = the PINCH ; body ORIGINS
+:824  j = int(np.argmin(dists))
+:860  print(... "nearest cable link cab{j} at {dists[j]} mm from the pinch" ...)
+```
+
+against `:842`'s **fixed x** reference using **segment centres**. ⇒ the two differ in **both** the reference point
+**and** whether the half-segment correction is applied.
+
+⭐⭐ And `cable_at`'s own docstring states the size of that omission, verbatim: *"A link's body origin is the START
+of its capsule, so the material sits half a segment further along the link's own x axis — **targeting the origin
+misses by ~15 mm**."* Half a segment is **15.0 mm**, exactly.
+
+⇒ ⭐⭐⭐ **the correction was written, its magnitude was documented, and it was applied in one of the two places.**
+The pinch-referenced number at `:860` — the one a reader uses to judge "was the cable near the jaw" — carries the
+~15 mm bias its neighbour's docstring warns about.
+
+⚠ **Scope.** I read source at `e9f93a7556` only. ⛔ I have not opened the log and have run nothing, so **whether a
+hop actually occurred is not established** — I supply the mechanism and the two checks, not a verdict. Aiming
+choices (p4's question ①) are p5's court.
+
+## 12. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
