@@ -3671,3 +3671,61 @@ and found the figure is **not in it** (message-only) ⇒ **no correction needed.
 substitute**: a reader who opens pC's record directly never sees this file. ⇒ ⭐⭐ **A scope note has to live where
 the number lives.** ⚠ pC's own point stands and belongs in the record: **its visual leg is scoped to the 10.00 mm
 model** — it observed a grasp under the superseded geometry, not the current design.
+
+## 67. ⭐ Six numbers re-derived independently — and three refinements, two of them against the reporter's own work
+
+**(a) ⭐ `w2:p5` re-derived all six percentages from the asset and reproduced every one**, then measured the mouth
+from the file the run actually reads: f1ext `0.0382 → 0.0402`, f2ext `0.0258 → 0.0238` = **2.00 mm outward each**,
+⭐ **y and size unchanged** ⇒ mouth **[25.00, 39.00]**, height **14.00**, centre **32.00**.
+⇒ ⭐⭐ **Three panes (p5, pB, p6) now derive the same geometry from the asset rather than copying a reported
+number** — which is precisely the discipline whose absence produced §63.
+
+**(b) ⛔ My §65 wording is corrected again, by one notch.** The change is **not "unrecorded"**: the working model
+is **committed** (`f11273d5be`, verbatim *"Widen the ko mouth to 14 mm on Rs's instruction"*, 16:25:29) and the
+banked LOCK asset is **clean at its own sha**. ⇒ ⭐ **Correctly: "two tracked assets disagree" + "the spec surface
+is not updated."** ⇒ ⭐ **This changes p6's task from creating a record to resolving a disagreement.**
+
+**(c) ⛔ p5 retracts its own §C, with the scope measured.** Its `-017 §C` called `[28.00, 36.00]` *"centre inside
+the slot"* ⇒ **false**; centre-in-slot is `[27.00, 37.00]` = 10.00, and `[28.00, 36.00]` = 8.00 is a **third**
+predicate (inner faces ±1.00). ⇒ ⭐ **The arithmetic is intact; what was wrong was the attribution** — giving
+p11's interval a width and a meaning it does not have. ⇒ ⭐⭐ **p5's own words: "the identity claim I warned
+others about all day."** ⇒ It credits p0 for declining to choose. ⚠ **I banked it; it reached five panes.**
+
+**(d) ⭐⭐ p5 reports a finding against its own document.** Widening the mouth **broke the containment its Q1 stood
+on**: backplate `pad1 = [18.75, 37.50]` is unchanged while the mouth top is now **39.00** ⇒ ⭐ **the top 1.50 mm of
+the mouth has no backplate behind it.** ⇒ its `:29` (*"the mouth is fully contained in the backplate"*) is **false**,
+and `:52`'s reason is false in general form. ⭐ **The conclusion survives** (the aim point 32.00 and the band
+[29.00, 35.00] are both inside the backplate) ⇒ **reason rewritten to the weaker form, conclusion kept.**
+
+## 68. ⚠ The widening did not touch the shortfall — and two measured numbers need reconciling
+
+**⭐⭐ `w2:p5`: the two are orthogonal axes.** The claws moved **in z only** (y and size unchanged) ⇒ **the
+closing-direction stop at 10.16 mm and the 2.16 mm shortfall (1.08 per side) are not reduced by even 1 mm** by
+Rs's widening. ⛔ p5 declines to say what the video shows (not its court) and offers one observation instead: the
+judged driver's `grasped()` requires **bilateral contact at the pad1 faces** ⇒ **that predicate's relation to the
+2.16 mm is worth checking numerically, separately from the visual.**
+
+⇒ ⚠ **Surfacing the tension, which is mine to surface and not mine to resolve**: p4 measured face separation
+**L +7.36 / R +7.44 mm** in the successful run, and **7.36 < 10.16** — the faces closed past the claw-claw stop.
+⇒ ⭐ **Either the 10.16 stop does not apply in the run's actual configuration, or something else changed.**
+⛔ **Rs's verdict on the video stands** — physical validity is Rs's court and a mechanism I cannot yet explain is
+not a reason to doubt it. ⭐ **But the mechanism by which it succeeded is not established**, and today's whole
+lesson is that an unexplained success is where the next false claim gets in. ⇒ **Reconciliation belongs to the
+measuring court (p4/p0)**; the 10.16 figure should be re-stated with the conditions it was measured under.
+
+## 69. Custody, and three self-scoped ✅
+
+⚠⚠ **Time-sensitive, relayed to `w2:p4`**: p5 moved its document's pin — old `1860ffab9878e831…` (288 lines) →
+new `aea4792dcab797a8…` (332 lines), **+99 / −0, append-only** (verified by `git diff --numstat`), adding §17 which
+lists **11 lines that are no longer current**. ⇒ ⛔ **Banking the old pin would land 11 known-false lines. Bank
+`aea4792d…`.** ⭐ p5 declared the pin move rather than making it silently — the discipline from
+`feedback-pin-by-content-version-is-only-a-collation-note`.
+
+⭐ **Three panes scoped their own ✅ today without being asked**: p11 (2 queries, not the doc), p5 (3 queries =
+the angle table only — ⭐ **the wider audit then hit 11 lines**), pB (its figure is message-only, doc untouched).
+⇒ ⭐⭐ **p5's line: "the rule about writing the scope of a ✅ applies to me the same way."**
+
+⭐ **env7 has NOT landed** (p5, measured 16:39 JST): one run active (PID 14632/14633, `ur15_span176.mp4`, elapsed
+04:06) ⭐⭐ **plus a launcher (PID 4192299) waiting to start the next** ⇒ ⛔ **"zero processes" occurs mid-series**
+⇒ p5's rule (landed = p4's explicit *"series complete"*, never a process count) was **structurally required, not
+cautious**. ⭐ And the series **grew**: the span-176 run is in flight.
