@@ -963,3 +963,52 @@ established.** Mechanism and two checks offered; no verdict.
 ⇒ ⭐ **The pattern of the day, three times in one file:** a quantity computed and printed but absent from the
 verdict (the slot term); a quantity computed and discarded (the link index); a documented correction applied at
 one of two sites. **Every time, the information needed was already there and was not used.**
+
+### 10g-3. ⭐ The contradiction I raised in §10g is fully dissolved — every geometric row was measuring elsewhere
+
+`w2:p5` read the driver and downgraded its own "third witness", which removes the **second** row of my table:
+the same log carries **three different references for "the cable"** —
+
+1. the **mouth**, against the link chosen by nearest **frozen x** (`:842`)
+2. the **pinch point**, 3-D nearest (`:822-824`)
+3. the geoms **actually in contact**
+
+⚠ And the **pinch point sits 26–31 mm from the mouth**. ⇒ ⭐ *"nearest cable link at 33.5 mm from the pinch"* is a
+value you get **even when the cable is correctly in the mouth** ⇒ ⛔ **it never was evidence of non-grasp** — on
+top of the ~15 mm body-origin bias `w2:p0` found at the same site.
+
+⇒ ⭐⭐ **So both geometric rows of §10g's contradiction table are gone**: `slot vs cable 25.0` (argmin jump) and
+`nearest link 33.5` (wrong reference + uncorrected origin). **What survives is entirely physics-side** — six
+contacting geoms including both claws, fingers blocked by `cab17`/`cab18`, and a face gap of 6.81 mm at ctrl 255.
+⇒ ⭐ **The physics prints were right the whole way through, and every geometric print I set against them was
+measuring something else.** I framed that as *"the numbers disagree with each other"*; it is better stated as
+**three quantities that were never about the same thing.**
+
+### 10h. ⭐⭐ The Rs question has narrowed to one sentence
+
+`w2:p5` accepted `w2:p11`'s correction that the position/force dichotomy was false — the current control is
+**position target + effort limit**, i.e. already force-limited compression (`task_config.py:129 = 60.0`,
+`:316 = 2.5`). It **keeps the conclusion** (do not use ctrl 255) and **replaces the grounds**:
+
+1. the terminal −1.3 mm **ejects** a correctly seated Ø8 (p11)
+2. ⭐ **measured: L stops at 6.81 mm even at ctrl 255** (log `:56`, `:59`) ⇒ **with a cable present, even in sim
+   the commanded 4.0 mm is never reached**
+
+⇒ ⭐⭐ **The quantity to design is therefore not the commanded gap but the effort limit** — command the table's
+4.0 mm and let arrival be self-limiting, which is **what the implementation already does.**
+
+⇒ ⭐⭐⭐ **So the escalation is one sentence, and no in-sim choice addresses it:**
+
+> **On hardware the claws stop everything at a backplate gap of 10.16 mm, so the compression Rs describes —
+> left–right friction on the cable — is zero. The LOCKed geometry admits no command value that both compresses
+> and is reachable.**
+
+Branches, unchanged and both Rs's: **(A) capture** — stop ahead of claw contact (command ≈ 11.0 mm), hold by form
+closure under load; **(B) pinch** — keep 4.0 mm and treat all Phase-A results as sim-only.
+⛔ Force-closing is not a third branch: position → force is a **control-method change requiring Rs approval**
+(`prohibited.md`).
+
+⚠ One more source-derived design correction from p5: **the descent point's x is a design constant** (§0#2's 88 mm
+span), not taken from the cable ⇒ **only y and z are re-aimed**. p5's first version said "fix x,y" and is corrected.
+⚠ Revised design: sha256 **`b9eda46e7b98e408a3221d038dcd12b322f908ccd1fc5a48e21f9711cef4c444`** supersedes
+`afa56085…`; still **untracked** — banking is `w2:p4`'s court, p5 is 0-commit.
