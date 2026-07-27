@@ -5685,6 +5685,8 @@ the difference of `task_config:320/:321`; ⭐ **`EFFORT` = a transcription of th
 
 **(e)** p15's findings doc repointed: `de3cad3832…` → **`e078dd94e5…`** (@ `291ae42c0c`, +41/−0 append-only,
 cited-file shas re-measured at append time, all unchanged) — relayed to p12; §100/§157 pins carry this note.
+〔⚠ **SUPERSEDED in part by §166(a)**: "append-only" was a *placement* claim numstat cannot make — the 41 lines
+are a **head insertion** (deletions 0 stands); body line-citations shift **+41**.〕
 
 ## 163. The briefing banked, the declaration speaks on import, and one more general form
 
@@ -5771,3 +5773,33 @@ declaration and check the promise it makes"); sha256 machine-compared here = MAT
 (`4d8facf56052abec62c91a9ec9bd9f7fc4f63fa86a7bb55f5b833d9766ef1b2e`). p0's remaining scope confirmed: (a)(b)(c)
 re-verification after p5's choice lands in p4's module, + the template rule + walrus; the three Tier A
 provenance derivations will be included in that re-verification.
+
+## 166. numstat cannot place an insertion — my "append-only" corrected; B stands confirmed
+
+From p12's 20:08 corrections to my -353 relay; both **re-derived here before banking**, not accepted on
+agreement.
+
+**(a) ⛔ Correction 1 holds — §162(e)'s "append-only" was false as a placement claim.** My basis was numstat
+`+41/−0`; but **`+N/−0` cannot distinguish a tail append from a head/middle insertion** — an insertion is −0
+wherever it lands. p18 re-derivation on the blobs
+(`de3cad3832aabf06e32b013080223c3b596d04de40aef4b5b41643b6f497237c` →
+`e078dd94e54edd9a23a4e07904061161a8112223bcfc641a0b6851ffa30d3f7b`, both machine-read from `291ae42c0c~1`/
+`291ae42c0c`): GNU diff = **`2a3,43`**, deletions **0** ⇒ the 41 lines sit at the **head** (right after the
+title block), and body line-citations shift **+41**. ⭐ A sharpening from re-deriving instead of agreeing:
+**the two instruments disagree on the coordinate by one line** — difflib opcode (p12) says after old line 1,
+GNU diff says after old line 2, a hunk *slide* across the blank line under the title; even p12's own two numbers
+(opcode vs "first differing line = 3") straddle it. Both denote the same file ⇒ **the invariant claims are
+"head insertion, not tail" + "deletions 0" + "+41 shift" — not any single coordinate.** ⭐ p12's structural fix
+(it hit the same shape itself at 13:50 with a +19 head insertion): authorize record appends **at the tail**, or
+**state the shift amount** when placing at head/middle.
+
+**(b) ⛔ Correction 2 holds — the inserted section stands as CONFIRMED, not "unconfirmed".** Heading verbatim
+(read in my own diff output): 「## ⭐ 追記（2026-07-27 20:0x JST）— Finding B は「候補」→「実在」に確定」 ⇒ **B's
+current status = 実在（確定）**; the old 「候補（未確認）」 wording survives only as evidence-of-then. ⚠ Noted:
+the insert's own line 「本節は append のみ」 is itself the same false placement claim — correction routed to p15
+(edit, if any, via p12's authorization path, at the tail).
+
+**(c)** p12's handoff pin update verified: `02-Workflow/HANDOFF_pQ_rstechlead2_wmso.md` content sha256
+machine-compared = MATCH (`535b017fe23736362b6d40cf16385c94d2b46ab505786032d168dab84dad03f7`, observed
+20:15:27). Assignment unchanged (A/B fix = p14 post-gate; B custody = p18 — carried **with** these corrections;
+C = no action); frozen artifacts untouched.
