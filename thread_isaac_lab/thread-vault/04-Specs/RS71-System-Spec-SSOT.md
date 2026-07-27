@@ -12,7 +12,7 @@ tags: [spec, SSOT, R-S7.1, option-E, arm, clip, table, cable, gripper, pipeline]
 **Purpose (human directive 2026-06-19):** every component spec recorded in ONE findable place to stop drift.
 This doc is the **single entry point** for the component specs; it records the design/geometry spec + points to
 the impl. **Numeric param SSOT = `thread_isaac_lab/configs/task_config.py`. Goal/phase SSOT = `04-Specs/SOMA.md`.**
-Env: env7 Newton 1.2.1 / mujoco 3.8.1 SolverMuJoCo, UR5e×2 + Robotiq 2F-85. HEAD `7afa84b463`.
+Env: env7 Newton 1.2.1 / mujoco 3.8.1 SolverMuJoCo, UR15×2 + Robotiq 2F-85. HEAD `7afa84b463`.
 
 ---
 
@@ -20,7 +20,7 @@ Env: env7 Newton 1.2.1 / mujoco 3.8.1 SolverMuJoCo, UR5e×2 + Robotiq 2F-85. HEA
 
 These are the project's INVIOLABLE premises. A design OPTION that would change ANY of them is NOT a design tradeoff — it is a premise change reserved to human-Rs (`prohibited.md:18`「指示された方針・手法を独自判断で変更しない…報告のみ…rs判断を待つ」). On touching one: **STOP → BLOCKED_FOR_USER (Rs確認) → run the §運用2 [VERIFY] 5体 debate BEFORE any build/probe.** Generative-design produces OPTIONS + ESCALATIONS, never a silent method-swap. (Landed 2026-06-21 after the single-arm 重大事故; `feedback-vault-check-on-handoff` 6th instance; surfaced every session by `.claude/hooks/handoff_grounding_gate.sh` + auto-L3 per `CLAUDE.md` §0.)
 
-1. **DUAL-ARM** — the cable is held + manipulated by BOTH arms (UR5e × 2) in EVERY motion; neither arm is dropped/parked to make it single-arm. "asymmetric route/hook OK" = both arms doing DIFFERENT motions, NOT single-arm. [`CLAUDE.md:396` project identity; §1; §6 `:52`]
+1. **DUAL-ARM** — the cable is held + manipulated by BOTH arms (UR15 × 2) in EVERY motion; neither arm is dropped/parked to make it single-arm. "asymmetric route/hook OK" = both arms doing DIFFERENT motions, NOT single-arm. [`CLAUDE.md:396` project identity; §1; §6 `:52`]
 2. **GRASP SPAN / FIXED BASES** — 88 mm two-EE grasp span on the cable; bases fixed at Y = ∓0.35. [§1; `task_config.py:21-22` / `:235`]
 3. **CONTROL = DiffIK only** — DifferentialIKController; JT-IK abandoned; no kinematic teleport / forced placement. [`CLAUDE.md` DiffIK §; `prohibited.md`]
 4. **GRIPPER GEOMETRY LOCKED** — the active finger DESIGN is **コ-shape** (human-DECIDED 2026-06-20; BANKED 2026-06-21 CPU building-block, Rs source-GO); its geometry is human-LOCKED. The former **◇ V-groove (gripper pad `vgu`/`vgl` diamond) is DISCARDED as a design reference** (human 2026-06-21, wording 2026-06-22) — no longer a retained/locked reference. ✅ records-vs-code RESOLVED 2026-06-23 (commit `85315bbec6`; committed asset = `2f85_koshape.xml` = コ). ⚠ cable pos/pose-random = DEPLOY requirement (Rs 2026-06-24, **SOMA L38 SUPERSEDED**). 検証履歴 + robustness 現況 (GPU cg-screening / held-rate / IC-robust / yaw-tol / sag / re-grasp gap / pending) = **§0-A (verbatim 移設 2026-07-12)**. (Scope = the *gripper* ◇ only; the *clip* V-groove `GROOVE_CENTER_Z`/`cable_in_groove` is a separate active object, untouched.) [§5; `06-Knowledge/GD-KoShape-Finger.md`]
@@ -41,7 +41,7 @@ Premise (正) = §0 #4。本節はその検証履歴・robustness 現況の詳�
 
 ---
 
-## 1. ARM (UR5e × 2)
+## 1. ARM (UR15 × 2)
 - **Bases:** `ROBOT_LEFT_BASE` (0.0, −0.35, 0.80) / `ROBOT_RIGHT_BASE` (0.0, +0.35, 0.80) [`task_config.py:21-22`] — 0.70 m apart, on the table plane (z=TABLE_HEIGHT).
 - **IK:** DifferentialIK, `IK_ITERATIONS = 100`, `ik_move_both` = ONE `solve_ik_dual` [`newton_routing_utils.py:74`].
 - **Collision-avoidance (dual-arm):** EE-EE safety spheres `COLLISION_SPHERE_RADII` (0.035 + 0.035 = 70 mm + 10 mm margin), `COLLISION_WEIGHT = 5.0` [`newton_routing_utils.py:147/165`] → achieved arm-to-arm floored ~80.5 mm (**measured/empirical**; mechanism = 70mm sphere + 10mm margin) **by design** (NOT under-convergence / NOT a real pad collision).

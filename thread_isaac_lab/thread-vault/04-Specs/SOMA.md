@@ -71,7 +71,7 @@ Cosserat-rod premise unless a later reviewed source establishes otherwise.
 
 ## Option-E 基盤入替トラック（S-series）— 現状（観測 2026-06-18）
 
-設計 SSOT: `06-Knowledge/GD-S2A-ControlledDelivery.md`（banked, rs承認 2026-06-14）。env7 Newton mujoco / UR5e+Robotiq 2F-85 への基盤入替（PhysX/Franka・env6 VBD とは別 track）。**retention 機構 = lip-cage form-closure**（grip は brief・非 load-bearing assist、GD-S2A §3:83）。
+設計 SSOT: `06-Knowledge/GD-S2A-ControlledDelivery.md`（banked, rs承認 2026-06-14）。env7 Newton mujoco / UR15+Robotiq 2F-85 への基盤入替（PhysX/Franka・env6 VBD とは別 track）。**retention 機構 = lip-cage form-closure**（grip は brief・非 load-bearing assist、GD-S2A §3:83）。
 
 | node | 内容 | status | 根拠 |
 |------|------|--------|------|

@@ -273,7 +273,7 @@ CCは対策案や推奨を出す前に、該当スキルをロードし、プロ
 
 ## Project Identity
 
-THREAD — Dual-arm cable manipulation (UR5e × 2, segmented cable, clip routing).
+THREAD — Dual-arm cable manipulation (UR15 × 2, segmented cable, clip routing).
 Repository: Isaac Lab fork with `thread_isaac_lab/`.
 
 ## GPU
