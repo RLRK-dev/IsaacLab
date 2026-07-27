@@ -16,6 +16,14 @@
 >
 > **5. ⛔ memory dir の HOLD（部分解除・2026-07-27 13:44）**: `MEMORY.md` = **解除**（書込可）／⛔**topic file・handoff file・名指しされた carry は凍結継続**。⇒ **私の carry**（`reference-codex-pane-long-dispatch-paste-mode-2026-07-18.md`・pN が採否未裁定として別途 HOLD）は **凍結のまま・編集も revert もしない**（baseline sha256 `47f09d3282d3aba78f48c9b7da4f61445634a25adfde42ecb18577f37b164513`）。⚠**本 handoff は carry と名指ししていないので HOLD 対象外**（ゆえに本追記は可）。
 >
+> **6. ⭐ lane に実装/検証 pane が付いた（2026-07-27 18:1x・Rs 起動）**: **p14 = IMPL-BUILDER2（実装）** / **p15 = IMPL-VERIFIER2（p14 の実装を独立検証）**。体制 = **p12 まとめ / p16 設計軸 / p14 実装 / p15 検証**。brief = `IMPL_BUILDER2_ROLE_BRIEF_p14_20260727.md`・`IMPL_VERIFIER2_ROLE_BRIEF_p15_20260727.md` @ `124b8cad70`（私が全文照合 = 訂正なし）。⛔**両名は待機・self-start なし**（gate CLOSED）。⚠registry `nest_role_labels.txt:41-42` が束ねるのは**役割名**で pane ID ではない（pane ID で grep すると 0 件・実測）。
+>
+> **7. ⭐⭐ 着地済み D1 実装に findings 2 件（p15 提出・私が独立確認済・⛔fix は gate 開放後）**: 記録 = `WMSO_D1_IMPL_STATIC_FINDINGS_IMPLVERIFIER2_20260727.md` / 内容 sha256 `de3cad3832aabf06e32b013080223c3b596d04de40aef4b5b41643b6f497237c`（観測 2026-07-27 19:53:23 JST・照合 commit `9e9832a652`）。⚠**対象は pN が 2026-07-19 に PASS-CLOSE した面**（`57ed32b27a`）。
+>   - **A（実在・中／潜在）**: `contracts.py` の `SkillLifecycleContract` フィールドと `ROOT_REQUIRED_FIELDS` は**今日 19 件で完全一致**だが、**その一致を守る検査が無い** ⇒ **改名 drift が静かに通る**（件数のみの test + payload を定数自身から生成する test では弁別できない = **検証集合を検証対象から作る**型）。⭐**私の独立確認**: `dataclasses.fields` / 集合等値の**5 通りの綴り**で `wmso/d1` 全 py を走査 ⇒ **hit 0** ⇒ 不在は成立。修正案 = 集合等値 1 行。
+>   - **B（⭐候補 → 私が確定）**: `contracts.py:21` 逐語 `_HEX64 = re.compile(r"^[0-9a-f]{64}$")` ＋ `.match()` ⇒ **末尾改行 1 個を受理**。⭐**実測（`wmso/d1` を実行せず、同じ pattern 文字列を standalone で評価）**: `"a"*64` → True ／ **`"a"*64+"\n"` → True（欠陥）** ／ `"a"*65` → False ／ `""` → False ／ **`"\n\n"` 付き → False**（＝改行 1 個だけが通る）／ **`fullmatch` なら末尾改行 → False**（修正が効く）。通過点 **12 箇所**（`contracts.py` `__post_init__` 9 + `harness.py` manifest 検査 3）。露出は低（内部 hash は `hexdigest` 由来で改行なし）だが **hash 検証の guard が文書どおりの強さを持っていない**。
+>   - ⛔**pN の PASS-CLOSE と矛盾するとは主張しない**（pN の step-5 がどの述語を対象にしたか未確認）。**custody の扱い = 私 + p18（+ Rs）**。
+>   - 振り分け = **A・B の fix = gate 開放後に p14** ／ **B は evidence 面（hash 検証）に触るので p18 へ custody 通知** ／ C（命名のみ）= action なし。
+>
 > ⛔**gate は不変**（下記の 20:2x 節が現況）。**Rs 判断待ち 2 件**: ①**open-11 の前提 = A / B**（⭐証拠は **A 寄り** — design doc `:33`/`:172` が「縮小の可否は Rs 判断」と明記し、pS・pY が独立に A。B の支えは**私が書いた** routing doc `:43` のみ）②**移動③ B1 再選定 draft の起動可否**（**L2** = Pre-mortem + 5 体 debate）。
 
 > ## ⭐⭐ B1 — **D-3 は候補へ復帰（pS 設計軸 PASS）／Rs 判断待ち 0／次 = 再選定 draft**（2026-07-21 20:2x）
