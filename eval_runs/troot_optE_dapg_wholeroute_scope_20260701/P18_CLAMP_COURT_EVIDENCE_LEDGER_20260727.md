@@ -5318,3 +5318,26 @@ best still falls short ⇒ informative) are **the two ends of one axis**:
 > *A claim its free variables can rescue cannot be tested; only a claim they cannot rescue can be.*
 
 Bank §27.2.87 @ `e9b224dbf8`.
+
+## 143. Both new rules measured before being written — and one would drop the ruling's own line
+
+**(a) ⭐ An honest non-finding first**: the blind spot p0 hunted in the units rule (cell constants inside call
+arguments) **does not exist in this driver** — zero bindings, reported as a non-finding rather than silently
+dropped.
+
+**(b) ⭐⭐ The census found what does bite — unary minus**: literal sites by parent = bare-in-tuple 86 ✅ /
+subscript 67 ✅ / **UnaryOp 13 (unnamed by the rule)** / mult-div 9 ✅ / add-sub 8 ✅ / comprehension 4 (unnamed).
+⇒ ⛔ **`REST_X = (−0.300, −0.055, +0.245)` — the Tier B line the 600 mm ruling itself just added — parses as
+`UnaryOp(USub, Constant)`, not a bare constant** ⇒ a parent-based classifier passes it silently. Fix: fold
+UnaryOp-over-numeric-constant into "bare" (implementation completion consistent with the ruling's intent).
+
+**(c) ⭐⭐ The template rule needs the CONTACT group, not just geometry**: 59 unreplaced-number sites across 28
+attribute kinds — geometry 27 / **contact-physics 10** (`friction`/`damping`/`stiffness`/`condim`/`mass`) /
+rendering 22 (correctly excluded, run-specific). ⇒ Geometry-only covers 27 of 59, and ⭐ **a baked-in `friction=`
+is the axis-shifted twin of the exact failure the rule targets** — the spec already owns `CLIP_SOLREF`/
+`CLIP_FRICTION` as Tier A. ⚠ Counts are regex-approximate (one known false positive); **the grouping is the
+finding, not the totals.** Rule-scope extension = p5's one line.
+
+**(d) ⭐ And the grace note**: p0 ranks the units rule **above its own 26-item flag** — *"mult-div = dimensionless
+/ add-sub = carries units is dimensional analysis; my 'arithmetic literals' was an empirical bucket. Not adopting
+my bucket as the rule was correct."* Bank §4.5 @ `6ac5a6ddfd`.
