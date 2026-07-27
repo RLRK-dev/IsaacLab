@@ -1414,3 +1414,55 @@ probe's boxes.
 ⇒ ⭐⭐ **Same shape: the predicate's unit (a line, an attribute order) did not match the object's unit (an
 element).** ⇒ **Discipline: extract the object at its own granularity before asserting absence** — the general
 form of `w2:p12`'s rule, and the third distinct way this failure appeared today.
+
+## 16. ⭐⭐⭐ The yoke has no geometry — and that corrects §14's rule at its root
+
+`w2:p5` ran a closed query over every scene-building file at the banked commit:
+`ur15_cell.py` holds a `YOKE_SPREAD` constant and `column.add_frame(...)` — **a frame, not a body**;
+`ur15_yoke_video.py` has **add_frame 2 / add_body 0 / geoms named "yoke" 0**.
+
+⇒ ⭐⭐ **The Y-yoke exists only as a coordinate frame that offsets the shoulder positions. It has no body and no
+geom.**
+
+⇒ ⛔⛔ **So arm-to-yoke interference cannot be detected by any means at all:**
+
+| structure | in the model | contacts? | distance measurable? |
+|---|---|---|---|
+| `stem` / `foot` | geometry present, **collision disabled** | ⛔ no | ⭐ **yes** — `mj_geomDistance` ignores the filter |
+| **yoke** | ⛔ **no geometry** | ⛔ no | ⛔ **no — there is nothing to measure against** |
+
+⇒ ⭐ **The GATED yoke geometry (spread 0.40 m / tilt 20°) could never have been checked against the yoke itself.**
+⛔ Not *"it fails"* — **the check was impossible in principle.**
+⚠ p5 records without reconciling: this scene's constant is **`YOKE_SPREAD = 0.22`**, a different value from the
+GATED item's 0.40.
+
+### 16a. ⛔ This corrects the class rule I adopted in §14 — cause side: p18
+
+My enumeration was *"every geom with `contype`/`conaffinity` zero, plus every `exclude` body pair"*.
+⇒ ⛔ **That query cannot find the yoke, because a thing with no geometry leaves no row to find.**
+
+⇒ ⭐ **Third leg, required:** **structures that exist in the design but not in the model.**
+⇒ ⭐⭐ And the enumeration's **starting point** has to change: it must begin from the **design-side parts list**,
+not from the model. Started from the model, this class is missed **in principle**, not by oversight.
+
+⇒ ⭐⭐⭐ **General form, and it is the strongest version of today's recurring shape:
+absence cannot be enumerated from the side of the absence.**
+⇒ Today's smaller instances were all the same thing seen through a narrower window — a truncated display treated
+as the line, a per-line grep treated as the element, a `grep -c` treated as the fact. ⛔ Each time the query's
+own blind spot was invisible **inside the query's output.**
+
+### 16b. Measurements that arrived with it
+
+⭐ **`w2:p4`: the arm does not penetrate the column at the sampled times.** Minimum arm-to-column distance over
+STEP 2–8 is **+85 mm to +258 mm — all positive.** ⇒ So §12's concern, **for the column specifically, is not
+firing at those instants.** ⛔ Between samples is unmeasured, and the class rule (§14, as corrected) still stands
+regardless: the detector is absent whether or not this instance fires.
+
+⭐⭐ **`w2:p4`: σ_min measured, and the asymmetry is large.** Left arm **0.0381** at STEP 3–4 against right
+**0.2188** ⇒ **the left arm is 5.7× closer to a singularity.** ⚠ Between waypoints unmeasured, so the valley's
+location is not established — which is exactly the sampling `w2:p11` said would be insufficient.
+
+⭐ **`w2:p4` set out its predicate's lineage for `w2:pB`:** ① contact only ⇒ ② + face gap 2–8 mm ⇒ ③ + **the
+contact must be on `pad1`**. ⛔ ① is true even while the jaw passes through the cable; ⛔ ② still counts `pad2`
+contact, i.e. outside the コ. ⇒ All four Rs-judged videos agree with ③ — ⛔ **but p4 states plainly that this is
+calibration, not verification**: repaired on those four and scored on those four, three of which are failures.
