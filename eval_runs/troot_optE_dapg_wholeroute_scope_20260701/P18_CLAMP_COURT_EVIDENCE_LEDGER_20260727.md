@@ -1466,3 +1466,69 @@ location is not established — which is exactly the sampling `w2:p11` said woul
 contact must be on `pad1`**. ⛔ ① is true even while the jaw passes through the cable; ⛔ ② still counts `pad2`
 contact, i.e. outside the コ. ⇒ All four Rs-judged videos agree with ③ — ⛔ **but p4 states plainly that this is
 calibration, not verification**: repaired on those four and scored on those four, three of which are failures.
+
+## 17. ⛔⛔⛔ The class already has a name in this project, and I re-invented it
+
+`w2:p0` found it and p18 verified both citations on disk.
+
+⭐⭐⭐ **The rule I "adopted" in §14 is `CLAUDE.md:198`'s third bucket — `ABSENT-IN-CODE`**, verbatim:
+> 第3 bucket = ABSENT-IN-CODE: 「robust fact」主張は bank 前に mechanism が runtime code で ACTIVE か検証
+> （未 wired =「wire-then-validate」= premise FALSE、appearance-only ≠ working）
+
+⇒ ⛔ **`CLAUDE.md` is auto-loaded every session. I formulated as a new rule something already governing, in a
+file in my own context.** ⇒ **The day's fourth rediscovery of banked knowledge, and the sharpest.**
+
+⭐⭐⭐ **And `RS71-System-Spec-SSOT.md:55` already carries an instance — about the clip**, verbatim:
+> **Collision (⚠ ABSENT-IN-CODE):** the clip boxes are `shape_flags=1` VISIBLE-only — collision is OFF
+> (`test_newton_clip_routing.py:958` intent comment / `:971` flag; %3-audit-confirmed ROBUST — not re-enabled …)
+
+⇒ ⛔ **The very object this whole task is about — the clip — has collision OFF in the committed build**, audited
+and recorded. ⇒ ⭐ Today's `stem`/`foot` is **not a new class: it is the fourth instance of a class this project
+has already banked, tagged, and written the rule for.**
+
+⭐ **`w2:p0`'s enumeration, which shows how little of it we had looked at:** `2f85_koshape.xml` carries **7
+`exclude` pairs**, not one — ① `right_pad`/`left_pad` (the only one examined today), ②–⑤ base with the left and
+right `driver` / `spring_link`, ⑥⑦ `coupler` with `follower`. ⚠ ②–⑦ are *probably* ordinary suppressions inside
+the closed-loop mechanism — ⛔ **and "probably" is exactly what the rule exists to stop**, so p0 enumerates them
+without clearing them. Collision-disabled geoms: p4's three cell surfaces × 5 files; the production arm shapes
+(`:1581`, `test_newton_clip_routing.py:855`); ⭐⭐ **and the clip** (`:1168 _clip_collide` default 0 ⇒ `:1194`
+VISIBLE-only).
+
+⭐ **`w2:p0` also reports that its own multi-line-safe check failed** — its pattern's `[^/]*` could not cross the
+`/` inside `{SHOULDER_HEIGHT/2:.4f}`, returning 1 per file instead of 2. Redone element-wise it confirms all five.
+⇒ ⭐⭐ **The lesson is not "join the lines" but "parse the element, then test."** Widening a regex around a
+just-named hazard **inherits a new hole** — p0 made the same move **inside the correction itself**.
+
+## 18. ⛔⛔⛔ In the production env the two arms do not collide with each other
+
+`w2:p11` read it on disk; p18 verified the range: `mj_left_ss = proto.shape_count` (`:1560`) is taken **before**
+the arms are added and `mj_arm_se` (`:1573`) **after both**, so `for si in range(mj_left_ss, mj_arm_se)` covers
+**both arms' shapes** ⇒ every non-`pad` shape on **either** arm has `COLLIDE` cleared.
+
+⇒ ⭐⭐⭐ **This hits the yoke geometry's justification directly.** Spread 0.40 m was adopted **because at
+0.22 m / 45° the two arms' wrists and upper arms interfere** — ⛔ **and that interference cannot occur in the
+production env.** ⇒ **The phenomenon that justified the geometry does not exist in the world that geometry runs
+in.**
+⇒ ⭐ **So the transfer tag attaches not only to run verdicts but to the geometry's justification**, and further:
+**a policy trained in the production env can freely exploit arm-to-arm penetration.**
+⛔ Neither p11 nor p18 calls the design wrong — the comment carries its grounds (*probe-proven, F4c*). The claim
+is only that **the detector is not on that path.**
+
+⭐ **`w2:p11` narrowed its own earlier claim first**, which is what made this credible: p4's sweep **did** detect
+arm-arm interference, which a contact-based sweep could not have under these flags ⇒ **the sweep was probably not
+contact-based** ⇒ ⛔ "it could not have seen the yoke" is **too strong**, and my §14b(b) took that too-strong
+version. ⇒ ⭐ The question narrows to **whether the yoke's geom was in that sweep's query set** — and §15's gate
+holds unchanged under the narrowed form.
+
+### 18a. ⭐ The highest-value unresolved check in the whole session
+
+`w2:p11` half-resolved p0's reservation: on the **`:1392`** side the claws' geom names are `right_pad_f1ext` /
+`right_pad_f2ext` — they **contain `pad`** (`2f85_koshape.xml:116-117`) ⇒ they enter `pad_geoms` and **keep
+COLLIDE**; the asset `:112-113` says the names were built that way on purpose. ⚠ **The `:1580` side — the Newton
+`shape_label` — remains unverified**, and p11 declines to assert.
+
+⇒ ⚠⚠ **Why it matters more than anything else open:** if the claws do **not** fall in the pad set there, then in
+the production env **the claws do not collide with the cable at all** ⇒ ⛔ **the capture mechanism — holding the
+cable inside the コ — is void on the production path.**
+⇒ ⭐ p11 judges this the single highest-value thing to check, and p18 concurs: it is cheap, it is a read, and it
+decides whether the approach works in the environment that actually matters.
