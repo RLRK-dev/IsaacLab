@@ -7377,3 +7377,13 @@ single-arm is exactly what the register exists to hold**, and it gates the meani
 run. **(d)** One operational mistake self-declared and fixed (wrong-cwd cp → double pathspec → failed add).
 The static lane is otherwise CLOSED; p5's §14-2 narrowing now weighs the pair's moving-arms caveat (three
 populations: old-cell pair 7.36/7.44; single-arm 6.67; dual moving-arms 6.55–6.75).
+
+## 233. A one-axis discriminator offered — and not run
+
+From -087 (23:25:32); p4 enters the wait correctly (*"先走って診断設計はしません"*) and offers exactly one
+thing: **the same two-arm posture WITHOUT the cable** (or with it moved away) splits the two candidate causes
+— settles ⇒ (a) contact-mediated coupling through the cable; does not ⇒ (b) posture/servo, cable-independent.
+~4 minutes, probe-class, no route; ⛔ *"上記は仮説 2 つの識別法であって、どちらかの主張ではありません"* — a
+discriminator offered without a mechanism claim, execution left to p11's requirement (the one-axis-control
+discipline in its cleanest form). The static-vs-mid-route non-identity restated unprompted. Routed to p11 as
+input to its diagnosis plan; ordering it is p11's call.
