@@ -357,6 +357,102 @@ takes no design position on the predicate's content.
 Still undecided inside it, unchanged: **grasp-basis vs capture-basis** (`w2:p11`'s position is capture-basis;
 final is Rs) and **the §0 DUAL-ARM composition rule** (both arms, or a designated arm — Rs).
 
+### 10a. ⭐⭐ Rs's own words bear on the grasp/capture branch — placed here, not adjudicated
+
+Relayed verbatim by `w2:p4` (⛔ p4's relay of Rs, not p4's reading):
+
+> 爪の上下の隙間は問題ない、**左右で摩擦が生じれば**ケーブルをコ内に固定できる
+> 逆に**上下をきつくしすぎると**ケーブルをクランプしずらくなる
+> 単にコがケーブル位置にいっていないだけだ。**物理的にクランプ可能**
+
+⇒ ⭐ The hold Rs describes is **left–right friction — compression**, not clearance-based containment.
+⇒ ⚠ So `w2:p11`'s ruling (a correctly captured cable touches nothing ⇒ a contact predicate is false exactly when
+the goal is met) is right **about capture**, but the state Rs calls clamped appears to be **the compression side**.
+⛔ p18 does not decide this; the predicate is p11's court and the final call is Rs's. The verbatim is placed on
+the branch, nothing more.
+⇒ ⚠ Separately, "tightening the top and bottom makes it *harder* to clamp" reads against **option B** (reducing
+claw protrusion) from the mechanism menu. Also placed, not decided.
+
+### 10b. ⛔⛔ The repaired predicate still has a hole, and `w2:pB` measured it
+
+`w2:p4` repaired its predicate against Rs's ground truth — from *"both backplates contact the cable"* to
+*"contact **and** backplate face separation within 2.0–8.0 mm"* — which removed the `clamp4` false positive
+(faces at −8.43 mm, i.e. closed through where the cable was, had scored True). p4 scored `clamp5` **True/True**.
+
+⛔ **`w2:pB`'s log leg shows the two conjuncts can be satisfied by different surfaces:**
+
+| arm | face separation (`pad1` × `pad1`) | contacting geoms | do the measured faces touch the cable? |
+|---|---|---|---|
+| **L** | +6.81 mm | 6 faces incl. `Lg_left_pad1` / `Lg_right_pad1` (log `:59`) | ⭐ **yes** — measuring and touching surfaces coincide |
+| **R** | +5.68 mm | ⛔ **only `Rg_left_pad2` / `Rg_right_pad2`** (log `:65`) | ⛔ **no** — the measured `pad1` pair is not touching |
+
+⇒ ⭐ **R's +5.68 mm is the gap between two faces that are not on the cable**, so it cannot be read as
+compression — and R nonetheless **passes** the repaired predicate. ⇒ **A second false-positive route, structurally
+identical to the first**: contact *somewhere* standing in for grip *at the place being measured*.
+⇒ The structural gap, stated without prescribing the fix (p11's court): the predicate does not require the
+contact to be **on the pair it measures**.
+
+⭐ pB retracted its own R figure inside the same message — it had computed R compression as 2.32 mm in one
+paragraph and invalidated it in the next, keeping the L half, which is sound. ⇒ Retract the false clause, keep
+the true one.
+
+⭐ **One real repair did land**, measured by pB: the driver's `CABLE_R` is now **0.004 = Ø8**, citing
+`task_config.py:137` — corrected from the previous run's Ø10. ⇒ The compression arithmetic is now on the right
+diameter. Design target for reference: `task_config.py:277` verbatim — `FINGER_CLOSE_POS = 0.002 # 2mm gripping
+(gap=4mm < cable 8mm → 2mm/side compression)` ⇒ **4.00 mm face separation**. L's 6.81 mm is **1.19 mm of
+compression = 30% of design**. ⛔ The corresponding R figure does not exist, per the table above.
+
+### 10c. PART 2 — the deciding predicate is missing the term that discriminates, and that term is already printed
+
+⛔ **Correction to my own relay first (cause side: p18).** In `-121 (2)` I relayed p4's account that the predicate
+went from *contact only* → *contact + band 2.0–8.0*. `w2:pB` read the **producing blob** (`b06c5334`, commit
+`e9f93a7556`) and found **the band was already in `grasped()` when this log was made.**
+⇒ ⭐ **This log's `clamped=True` was produced by the banded predicate, not the contact-only one** ⇒ **the band did
+not remove R's True.** ⇒ I relayed a before/after story about code without reading the code at the commit that
+produced the evidence — the failure `feedback-verify-on-disk-at-the-producing-commit-not-at-head` names exactly.
+
+⭐⭐ **The finding that matters most today.** The quantity that would discriminate **is computed and printed, and
+is not in the verdict**:
+
+- the driver computes slot-vs-cable and prints it with an explicit **±1.0 mm** band (`:856-857`)
+- measured: **L 25.0 mm / R 17.4 mm** ⇒ **17–25× outside that band**
+- but `grasped()` (`:371-385`) has exactly two legs — pad-side contact on both sides, and `2.0 < gap < 8.0`.
+  ⛔ **There is no slot term.**
+- the driver's own design statement (`:88-91`, verbatim): *cable must arrive in the slot **BETWEEN the claws***
+
+⇒ ⭐ **The verdict does not look at the design's arrival condition.** That is why `gates grasp True` (log `:81`)
+and p4's refusal to call it success are both correct at once.
+
+⛔ **And the mechanism behind §10b's split surfaces (`:353-368`):** the docstring says the clamp face is `pad1`,
+but the code treats *any geom whose name lacks `ext`* as a pad — **so `pad2` satisfies it**. ⇒ R's `clamped=True`
+stands on that docstring/code divergence, and **the two legs are looking at different faces**.
+
+**L and R are not the same state** (pB):
+
+| | L | R |
+|---|---|---|
+| face separation (`pad1`×`pad1`) | +6.81 mm | +5.68 mm |
+| slot-vs-cable (band ±1.0) | **25.0 mm** | **17.4 mm** |
+| cable moved after aim | 25.1 mm | 14.4 mm |
+| **aim's own residual** | ⭐ **1.0 mm** | ⭐ **0.4 mm** |
+| contacts | `pad1`×2 + claws×4 = 6 faces | ⛔ `pad2`×2 only |
+| nearest link to pinch | cab18 @ 33.5 mm | cab21 @ 18.8 mm |
+
+⇒ ⭐⭐ **The aim is solving.** It lands to 1.0 / 0.4 mm; the miss comes from **the cable moving 14–25 mm between
+aiming and closing**. ⇒ The failure is not a targeting failure. ⛔ p18 draws no design conclusion from this.
+
+⭐ **Under Rs's stated mechanism the two arms are not merely unequal — only one can satisfy it.** Rs: the hold is
+**left–right backplate friction**. R has **zero backplate-cable contact** (log `:65`) ⇒ no friction-bearing
+surface at all. L has two. ⇒ Same `True`, and only L's could be the mechanism Rs describes. ⛔ pB does not
+adjudicate; nor do I. Predicate = p11's court, final = Rs's video.
+
+⚠ Also from pB: the grip does not survive the push — `LR` at STEP 4-6, `L-` at STEP 7, **`--` at STEP 8**
+(log `:66-70`). And the claw channel reads L −2.44 / R −2.48, which per §5 carries no depth information; pB
+correctly declines to read transfer implications from it.
+
+⚠ Line numbers in this section are at the **producing** blob `b06c5334` / commit `e9f93a7556`, not at the new
+driver `28d10f15`. The log and the video are unchanged, so the object under judgement has not moved.
+
 ## 6. Instrument disposition (converged inside `w2:pZ`'s court — relayed, not decided by me)
 
 - Primary per-run channel = **backplate-to-backplate** (`pad1` × `pad1`), which needs 8 mm of overlap to floor
