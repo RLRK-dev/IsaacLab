@@ -348,10 +348,22 @@ it did.
 failed; §6's tilt-free part held while the fitted part failed; now §7's mechanism holds as a bound while its shape
 fails. **The tilt-free / bound-shaped parts survive; the parts that carry a fitted or assumed parameter do not.**
 
-⭐ **A second, independent route to 9.1, free.** My θ-cap is 2.6463 and p5's floor at ctrl 239 is 2.61 — only
-**0.0363 mm** of headroom left. ⇒ **if the floor rises past 2.6463 at any higher ctrl, mutual-θ is refuted and only
-2θ survives.** If p4 already has points beyond ctrl 239, that settles 9.1 with no new run, independently of my
-kinematic derivation.
+⛔⛔ **VOID — and the defective inference is mine, not the pane that relayed it.** I wrote here that "if the floor
+rises past 2.6463 at any higher ctrl, mutual-θ is refuted and only 2θ survives," and offered it as a free second
+route to 9.1. **It is not a test.** p5 measured past the half-width and found **no ceiling at all** (overlap 8.00 →
+2.617, 9.00 → 2.645, 10.00 → 2.672, 12.00 → 2.727, 14.00 → 2.782, 16.00 → 2.837): under the **θ** convention the
+floor **exceeds 2.6463 at about 9.05 mm of overlap by prediction**. ⇒ the exceedance is what θ *predicts*, so it
+cannot refute θ. No length of sweep rescues it.
+
+⚠ p18 has taken cause side for publishing it as an open route. **I decline that division: the inference was mine.**
+And the diagnosis is sharper than "a bad test":
+
+⭐ **I built the discriminator out of the number of a model I had just refuted — in the adjacent section of this
+same file.** §9.3's own table says family I is "⛔ refuted" as an explanation of the trend. A refuted model's value
+cannot discriminate anything; its number is not a threshold, it is an artefact. This is the exact error the court
+had already named in -092 C (*"both arithmetics come from the same refuted model"*), and I committed it **while
+writing the refutation on the page above**. Having the refutation in hand was not enough; I did not ask the one
+question that would have caught it — **can this test come out the other way?**
 
 ### 9.4 -110 (1) — agreed, and my artifact already says it that way
 
@@ -373,8 +385,21 @@ configuration the pads are not in.
 Against the probe at θ = 1.571°/plate: measured **−2.478 / −2.499 / −2.561 / −2.601**, family-II predicts those to
 **0.002 mm**, and my family-I figure is **2.893** — over by **0.29-0.33 mm**.
 
-⇒ ✅ **still a bound** (every measured value sits under it) but ⛔ **never attained**, so it carries no explanatory
-weight. §9.3 already says this; the probe now says it without reference to p4's data, which is stronger.
+⇒ ⛔ **never attained**, so it carries no explanatory weight.
+
+⚠ **And it is a bound only inside the band that was measured** (-116 (5), reproduced here): p5's series past the
+half-width rises at **0.0275 mm of floor per mm of overlap**, so **2.6463 is exceeded at ≈9.07 mm of overlap and
+2.8915 at ≈17.98 mm**. ⇒ ⛔ **neither is a bound in general.** Quoted without the band, "still a bound" becomes a
+false claim, so I attach the band to it here rather than leaving the qualifier in a neighbouring message.
+
+⚠ **Two different things in this file are called a bound. They must not be conflated:**
+
+- **the contact bound (§2)** — on the **backplate gap at which the claws first touch** (≥ 8.188 mm). Geometric,
+  **contract-free**, and unaffected by everything in this section, because at first contact there is no penetration.
+- **the floor bound (§7-§10)** — on the **reported penetration depth** (2.6463 / 2.8915). Contract-dependent,
+  never attained, and **band-limited** as above.
+
+⇒ -116 (5)'s scope limit applies to the **second** only. It does not reach §2.
 
 ### 10.3 The convention: two independent routes agreed
 
@@ -399,10 +424,21 @@ update does not put it back in question. Everything about the floor does.
 
 ⭐ **Proposal only — I implement nothing and request no run.** p5's probe is **synthetic boxes with no THREAD asset,
 no harness, no GPU and no gate**. ⇒ it is the **only measurement in this whole chain that can be repeated
-identically on both sides of the update**. If it is kept as a script with its four numbers banked, the update
-becomes **verifiable** rather than a leap: run it on 3.8.1 and on 3.10.0 and diff the contract. ⚠ p5 owns both the
-probe and the update, so this is p5's and p18's call, not mine. I note only that the opportunity exists **before**
-the update, and not after.
+identically on both sides of the update**. If it is kept as a script with its numbers banked, the update becomes
+**verifiable** rather than a leap: run it on 3.8.1 and on 3.10.0 and diff the contract.
+
+⭐⭐ **Already done — and my "the opportunity exists only before the update" was wrong about the timing** (-116 (1)):
+p5 did not wait for the update. It ran the same probe against staging (`env_isaaclab7_latest`, **mujoco 3.10.0**)
+and **all 15 points are identical to 3.8.1** — overlap 5.93 → −2.561 on both, parallel ≥3.00 → −2.400 on both.
+⇒ ⭐ **the env7 update is neutral with respect to this instrument's contract.**
+
+⇒ ⭐ and the wider point is not mine but worth carrying: the bucket I labelled *"dies with the version by
+definition"* **did not die in fact**. A definitional argument said it must be re-measured; the measurement said it
+did not change. That is the whole case for measuring rather than reasoning about it.
+
+⚠ Scope of that neutrality, kept attached: what was tested is **`mj_geomDistance`'s box-box penetration convention
+only**. Solver behaviour, contact, and run reproducibility are **separate axes and untested** — a post-update smoke
+is still required for those.
 
 ⚠ I also keep -114 (5)'s limits attached rather than dropping them: the probe is **synthetic boxes, not the real
 pads** (which also carry `pad1`/`pad2`, and whose tilt comes from the 4-bar); **p4's 1.571° is not itself
