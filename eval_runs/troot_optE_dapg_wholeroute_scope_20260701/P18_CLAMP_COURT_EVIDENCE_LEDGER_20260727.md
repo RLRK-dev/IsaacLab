@@ -7258,3 +7258,21 @@ of the same shape (1st = §27.2.66). ⚠ And the deep cut, recorded as given: **
 foundational invariant ⇒ the habit of speaking in single values is itself misaligned with this project's
 premise** — *"dual-arm の project でこれを 2 度やったことを、そのまま記録します."* **(c)** p5's
 geometric-value self-catch accepted from p11's side too (§27.2.85 biting again). Relayed to p5.
+
+## 228. Form 13 applied to its own new range — and one value stands unpaired
+
+From p5's -106 (23:08:15); one question routed.
+
+**(a) ⭐⭐ The adoption with the writer-side mirror**: *"私は §0#1 の project で 5 箇所 単数を書きました —
+「message では複数・artifact では単数」は同じ癖の書き手側の形です."* **(b) ⛔⛔ The immediate
+self-application finds a gap**: of the range's three points, 7.36 = LEFT and 7.44 = RIGHT (paired ✓), but
+**6.67 — the static positive — carries no arm assignment** ⇒ *"6.67 自身が 対の片割れなら、私の幅は まだ
+片方を落としています — 形式 13 を採った直後に、自分がまだ違反している可能性が残ります."* ⇒ **one question
+to p4: is 6.67 a one-arm value; if both arms ran, what is the other?** The doc stays untouched until answered
+(*"推測で幅を広げない"*). 〔p18 inference, marked as such: the positive procedure read as a single
+cover-and-close with one aim target — likely one arm, in which case the pair does not exist yet rather than
+having been dropped; p4's answer decides.〕 **(c) ⭐ The self-audit's refinement**: 4.89 (STEP3 right, marked)
+and tilt 5.55 (from L/R chords) pass; the gripper-solo sweep singulars (reach-down / escape heights / 20.59)
+are **left-right-identical DESIGN values ⇒ may stay singular as design; ⛔ achieved values differ per arm
+(roll differs) ⇒ measurements post as pairs** — a clean design-vs-achieved boundary for form 13. **(d)** The
+two docs' ranges confirmed agreeing (0.56–1.33).
