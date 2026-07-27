@@ -136,3 +136,50 @@ touched it; it is surfaced here for the line's owner.
 
 ⚠ pB also measured that on-disk `ur15_steps.py` has already moved off its banked pin, so line numbers in pB's
 document must be read at commit `bfb517862c809943042074bae6eb6e51e4f70875`, not on disk.
+
+## 10. The size conflict in §3 does not survive measurement
+
+§3 ruled that the HOLD outranks the compression hook, and flagged a retained risk: an over-limit index might
+load truncated. **Both halves of that premise have now been tested, and the risk half fails.**
+
+**(a) Truncation — measured by four panes, independently: it does not happen.**
+
+| pane | what it compared | result |
+|---|---|---|
+| `w2:p6` | final line + **8/8 headings** + **6/6 internal anchors** | full |
+| `w2:pC` | final line + **7/7 headings** + mid-section body | full |
+| `w2:p0` | first line **and** last line, context re-injected after 13:01 compaction | full |
+| `w2:p17` | final line | full |
+
+`p6` is the decisive case: it passed compaction at 13:01:38, **after** `MEMORY.md`'s 12:56:33 mtime, so what it
+received was the current 26720-byte file. ⭐ `w2:p17` retracted its own earlier claim that an over-limit index
+risks truncated loading, naming it an unverified inference from the hook's wording.
+
+⛔ Scope, stated by every pane: this rules out **tail truncation**. Nobody byte-compared a whole injected copy,
+so mid-file loss is untested. `pC` made the sharp point that a final-line match detects only tail truncation —
+which is why `pC` and `p6` also checked headings and interior samples.
+
+**(b) The comparison was between two different units.**
+
+`w2:p0` noticed, and `w2:p6` then pinned the decisive detail: **`MEMORY.md` line 3 states the compression target
+in chars** — verbatim "19.8K→19.3K chars" and "目標 17.1K" in the same clause.
+
+| | value | vs limit 24985 |
+|---|---|---|
+| `wc -c` bytes | 26720 | **+1735 over** |
+| `wc -m` chars | 19933 | **−5052 under** |
+
+⇒ The "over limit" finding came from comparing **bytes** against a limit whose own target is written in **chars**.
+In chars the index is comfortably inside the limit. ⛔ Which unit the loader uses is still unverified — nobody
+should assert it either way — but the one measurement that mattered (does it load whole) says it does.
+
+⇒ ⭐ **Correction to §3:** the precedence ruling stands (a user HOLD outranks a harness prompt), but **the retained
+risk I attached to it is not supported by measurement.** Compression cannot be justified on load-integrity
+grounds. If it is wanted, it must be justified on other grounds — index readability, for instance.
+
+⇒ ⭐ **Effect on §6:** the size conflict should no longer weigh on the user's disposition. What remains to decide
+is only **A (append-correct) vs C (release the HOLD)**.
+
+⚠ This is the day's recurring type landing on the limit itself: I compared a quantity in one unit against a
+threshold in another, and carried the difference forward as a risk. `p0` caught the unit; `p6` pinned where the
+unit is declared; four panes had already shown the feared effect was not occurring.
