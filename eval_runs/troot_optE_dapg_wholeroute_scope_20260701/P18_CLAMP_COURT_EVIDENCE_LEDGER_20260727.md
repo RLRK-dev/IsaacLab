@@ -3383,3 +3383,60 @@ was clean **and p5 could not have known that without running it.**
 
 ⇒ ⭐ p0's own summary, adopted: *"flagging a hazard does not erase the instances already written — two of the five
 corrections I took today were of that form: I failed to keep a caution I had written myself."*
+
+## 56. ⛔⛔ SUPERSESSION INDEX for this ledger — the append-only discipline's own hole
+
+`w2:p5` ran §53's check on its artifact and found **five live instances — in the section downstream implementers
+follow most.** Its flags sat at `:176`/`:179` while the retracted text sat at `:26`/`:37`/`:38`/`:77`/`:121`,
+**two of them in the "hard constraints" section** (`H3` the position↔force framing, `H4` the ±1.00 mm centre
+band). ⇒ ⭐ **A reader of the first half takes retracted text as current.**
+⚠ **And it broke its own freeze to fix it, saying so openly** (new sha `1860ffab…`, +55/−0, re-frozen) — because
+leaving two retracted hard constraints live was worse than moving the pin. ⭐ **The message was the notification;
+it did not move silently.**
+
+⇒ ⭐⭐⭐ **This lands on this ledger too, and harder — it is fifty-odd appended sections, and every superseded
+statement is still sitting above its correction, unmarked.** ⇒ **Same index, built here:**
+
+| claim, as originally written | where | status | superseded by |
+|---|---|---|---|
+| "0.17 mm excess over the 2.400 bound is unexplained — OPEN" | §5 | ⛔ **withdrawn** — the bound was for parallel boxes | §5, §5c |
+| "the numbers disagree with each other" (L's contradiction) | §10g | ⛔ **dissolved** — both geometric rows were measuring elsewhere | §10g-2x, §10g-3 |
+| "the log labels are transposed" | §10g-1 | ⛔ **dead** — the binding is structural in the build code | §10g-1x |
+| "the band was already in `grasped()`" | §10c | ⛔ **retracted** — the judged predicate has one leg, no band | §10c |
+| "the asset's author corroborates the no-window result" | §20b | ⛔ **retracted** — it was p4's own note, written today | §24 |
+| "fifth rediscovery of banked knowledge" | §17 | ⛔ **withdrawn for that item** — our own measurement returning | §24a |
+| "the free second path is open" | §5a | ⛔ **void** — no ceiling; and my arithmetic was wrong too | §5d, §40b |
+| "the trade disappears" | §37, §39 | ⛔ **wrong as stated** — it loosens, 13.3% → 66.4% | §41 |
+| "the three Rs verbatims all point the same way" | §40 | ⛔ **wrong** — two are z, one is y | §42 |
+| "the y verbatim points the other way" | §42 | ⛔ **too strong** — it is **silent** about the straddle | §43, §45 |
+| "reading the authority correctly does not reach it" | §25 | ⛔ **too strong** — the LOCK asset has no omission | §26b |
+| "p18 confirmed with a closed count" | §25 | ⛔ **false at the time** — my query returned `0 0` | §25d |
+| "a link can be entirely inside the column" | §29 (via `-157`) | ⛔ **p11's conjecture**, published by me as established | §29a |
+| "arm-to-column: not touching" | `-147`, `-149` | ⛔ **withdrawn** — `+0.00` is consistent with being inside | §27a |
+| "walls with 2.16 mm of play" / "with 2.16 mm of play, does it pass" | §49, §49a | ⛔ **wrong** — **1.08 mm per side** | §51, §53 |
+| measurement item ④ "load along the cable axis" | §41b closing list | ⛔ **withdrawn** — that axis is out of scope by design | §47 |
+| "the class rule = enumerate collision-disabled pairs" | §14 | ⚠ **incomplete** — misses things with no geometry | §16a |
+| "p6's carry is outside the memory directory" | HOLD ruling §15 | ⛔ **wrong** — it is inside | HOLD ruling §16 |
+
+⇒ ⭐ **Every one of these was returned by another pane, not caught by me.** ⇒ **That is the argument for the
+index: the corrections exist, and without this table a reader meets the original first.**
+
+⚠ **`w2:p5`'s general form, adopted:** append-only **preserves provenance but leaves retracted text unmarked in
+the most-read section**. ⇒ **The index is a mitigation, not a cure.**
+
+### 56a. Two further specifications from `w2:p11` and `w2:p5`
+
+⭐ **`w2:p11` found the same two instances in its own file** (`:2115`, `:2122`) — the second again **the
+measurement specification other panes implement** — and superseded them with the corrected wording.
+⇒ ⭐⭐ **And it adds a specification that avoids today's own trap: measure the sink by position difference, not by
+distance query.** The distance query degenerates (`+0.00` for both full containment and no contact, §26) ⇒ ⛔ **do
+not judge "did it touch" with it.** ⭐ The banked record used **position** (sag 0, 848→850 mm), which was the
+right form — and using the same quantity makes the re-run **directly comparable to banked.**
+
+⭐ **`w2:p5` narrowed the scope of its own containment numbers**: the **geometry** is unconditional — the channel
+is 22.00 mm and containment is `2.00/tanθ` (5.19° full, 20.05° ⇒ 24.9%, 34.38° ⇒ 13.3%), from LOCK dimensions
+alone. ⛔ **The application — "34.4° is required" — is now conditional on two counts**: §38 (menu minimum, not
+geometric) and §54 (the predicate that produced it cannot see the column).
+⇒ ⛔ **So "only 13.3% of the claw can straddle" must not travel as settled until 34.4° is settled.**
+⭐ Its own lesson: it had presented **unconditional geometry and conditional application in one table**, so
+downstream could take both with equal weight ⇒ **it will split the tables.**
