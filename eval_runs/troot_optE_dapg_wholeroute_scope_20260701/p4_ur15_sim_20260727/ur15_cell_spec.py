@@ -21,7 +21,10 @@ other was never going to work.
   Tier C -- run-specific (output path, resolution, choreography, cameras).  Deliberately absent;
             drivers vary these on purpose.
 
-Call `guard()` from a driver to fail loudly if that driver has redefined anything here.
+Call `guard()` from a driver to fail loudly if that driver has redefined anything here.  guard()
+checks NAMES only -- whether a driver has taken ownership of something that belongs here.  Whether
+the values still agree with their sources is `self_check()`, a separate question; for the Tier A
+figures it cannot fail, because they are imported rather than copied.
 """
 
 from __future__ import annotations
@@ -43,7 +46,6 @@ from thread_isaac_lab.configs import task_config as _tc  # noqa: E402
 
 TABLE_TOP = _tc.TABLE_HEIGHT                    # task_config.py:20
 CABLE_R = _tc.CABLE_RADIUS                      # task_config.py:137
-CABLE_N = _tc.CABLE_SEGMENTS                    # task_config.py:135
 CABLE_SEG = _tc.CABLE_SEG_LEN                   # task_config.py:136 -- the variable, not the
                                                 # comment the spec §3 cited; same value, and it
                                                 # cannot drift away from its own source
@@ -55,9 +57,33 @@ GROOVE_CENTER_Z = _tc.GROOVE_CENTER_Z           # task_config.py:226 == TABLE + 
 # and the clip is a static geom so it takes the same friction triple as the table.
 CLIP_SOLREF = (-_tc.MUJOCO_CONTACT_KE, -_tc.MUJOCO_CONTACT_KD)     # task_config.py:168-169
 CLIP_FRICTION = tuple(_tc.MUJOCO_CABLE_TABLE_FRICTION)             # task_config.py:180
-CLIP_COLLIDE = True    # clip design §6-A: newton_skill_env_base.py:1908 / :1925 are unconditional
 
 _ENV_BASE = pathlib.Path(_REPO, "thread_isaac_lab/envs/newton_skill_env_base.py")
+
+
+def _clip_collides_in_source():
+    """Does the env build its clips with collision on, unconditionally?
+
+    Read rather than transcribed.  A written-down True says what someone believed when they typed
+    it; this says what the source does now.  The env sets `shape_flags[idx] = 0x6` -- COLLIDE
+    together with BROADPHASE -- with no flag or environment variable in front of it, which is the
+    thing worth carrying over.  If that ever becomes conditional this returns False and the cell
+    stops claiming otherwise.
+    """
+    tree = ast.parse(_ENV_BASE.read_text())
+    unconditional = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Assign):
+            continue
+        for t in node.targets:
+            if (isinstance(t, ast.Subscript) and isinstance(t.value, ast.Attribute)
+                    and t.value.attr == "shape_flags"):
+                unconditional.append(isinstance(node.value, ast.Constant)
+                                     and node.value.value == 0x6)
+    return bool(unconditional) and all(unconditional[:2])   # the two clip builders, C1 and C2
+
+
+CLIP_COLLIDE = _clip_collides_in_source()   # clip design §6-A
 
 
 def _clip_parts_from_source():
@@ -108,6 +134,15 @@ TILT = math.pi / 2.0 - math.radians(20.0)  #          88 mm span; 0.40/20deg cle
 TABLE_HX, TABLE_HY = 0.70, 0.20         # spec §4 -- ⚠ weak grounds, and spec §7 asked whether p4
                                         #            had better: it does not.  The driver line
                                         #            carries no measurement comment at all.
+
+# The cable's total length is a cell dimension, and p5's ruling ① leaves it where it is while
+# adopting the SSOT's step: take the 15 mm link, derive the count, and do not resize the cell.
+# 32 x 30 mm and 64 x 15 mm are the same 960 mm of cable at two discretisations -- so this is a
+# fidelity change and a halving of the instrument's quantisation floor, not a different cable.
+# ⚠ It is not free: 64 joints bend more easily than 32 and cost twice the computation.
+CABLE_TOTAL = 0.960                     # spec §4 (ruling ①: cell dimensions unchanged)
+CABLE_N = int(round(CABLE_TOTAL / CABLE_SEG))   # DERIVED -- see the note in self_check
+
 REST_Y = 0.28                           # spec §4
 REST_X = (-0.34, -0.14, 0.24)           # spec §4 -- "saddles kept clear of both 88 mm grasp spans"
 REST_TOP = TABLE_TOP + 0.150            # spec §4 -- "at +0.060 the open fingers press into the
@@ -168,8 +203,22 @@ def _module_level_assignments(path):
     names = {}
     tree = ast.parse(pathlib.Path(path).read_text())
     for node in tree.body:
-        targets = node.targets if isinstance(node, ast.Assign) else (
-            [node.target] if isinstance(node, ast.AnnAssign) else [])
+        targets = []
+        if isinstance(node, ast.Assign):
+            targets = node.targets
+        elif isinstance(node, (ast.AnnAssign, ast.AugAssign)):
+            targets = [node.target]
+        elif isinstance(node, (ast.For, ast.AsyncFor)):
+            targets = [node.target]
+        elif isinstance(node, (ast.With, ast.AsyncWith)):
+            targets = [i.optional_vars for i in node.items if i.optional_vars]
+        elif isinstance(node, (ast.Import, ast.ImportFrom)):
+            # `from x import CABLE_R` and `import y as CABLE_R` bind the name just as an assignment
+            # does, and reading it back from the wrong module is exactly how a second copy starts.
+            for a in node.names:
+                names[(a.asname or a.name).split(".")[0]] = node.lineno
+        elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            names[node.name] = node.lineno
         for t in targets:
             for leaf in ast.walk(t):
                 if isinstance(leaf, ast.Name):
@@ -206,10 +255,20 @@ def self_check():
         problems.append(
             f"seat_z(0) is {seat} but task_config.GROOVE_CENTER_Z is {GROOVE_CENTER_Z}; the two "
             f"ways of expressing the same height disagree.")
-    if abs(CABLE_N * CABLE_SEG - 0.600) > 1e-9:
+    # ⛔ `CABLE_N * CABLE_SEG == CABLE_TOTAL` is NOT a check -- CABLE_N is derived from those two,
+    # so it holds by construction and would report nothing whatever went wrong.  p0 caught that.
+    # The claim worth making lives at the source, where the SSOT binds the count and the step
+    # INDEPENDENTLY and they can therefore still disagree with each other.
+    ssot_total = _tc.CABLE_SEGMENTS * _tc.CABLE_SEG_LEN
+    if abs(ssot_total - 0.600) > 1e-9:
         problems.append(
-            f"{CABLE_N} links of {CABLE_SEG} m is {CABLE_N * CABLE_SEG:.3f} m, and "
-            f"task_config.py:135 says the cable is 0.600 m.")
+            f"task_config binds {_tc.CABLE_SEGMENTS} segments and a {_tc.CABLE_SEG_LEN} m step, "
+            f"which is {ssot_total:.3f} m, but task_config.py:135 states 0.600 m. The SSOT's two "
+            f"bindings have drifted apart.")
+    if abs(CABLE_N * CABLE_SEG - CABLE_TOTAL) > 0.5 * CABLE_SEG:
+        problems.append(
+            f"{CABLE_N} links of {CABLE_SEG} m is {CABLE_N * CABLE_SEG:.3f} m, more than half a "
+            f"link away from the cell's {CABLE_TOTAL} m -- the rounding in the derivation is off.")
     return problems
 
 
