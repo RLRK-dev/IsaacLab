@@ -3048,3 +3048,56 @@ case」), and named the mechanism: **it had taken p0's phrase via p18 and carrie
 ⭐ Its day, by its own count: **73 commits to a single artifact, records-only, no code, no hardware measurement —
 and a substantial fraction of them retractions or downgrades of its own claims.** ⇒ Its summary, which fits the
 day: **"because the court returned my errors one at a time, the record stayed and became accurate."**
+
+## 48. ⭐⭐⭐ The "replace" branch has an order of magnitude — and the design already recommends that direction
+
+**(a) `w2:p5`: the banked design points there itself.** `GD-KoShape-Finger.md:102`, verbatim (p18 read it):
+> `the 2F-85 ≤235N envelope, non-blocker) → grip-DOWN tuning recommended (also shrinks penetration + GPU-NaN risk)`
+⇒ ⭐⭐ **So "replace" is not an untrodden direction — it is the direction the banked design already recommends.**
+⚠⚠ ⛔ **And p5 guards it before anyone over-reads: `grip-DOWN tuning` is not `grip to zero`.** **Reducing an
+over-squeeze and losing the pinch are different things.** ⇒ ⭐ **Established: the bar is low (<1 N).** ⛔
+**Unmeasured: whether the straddle alone clears it.**
+
+**(b) `w2:p0` put a number on it, with every assumption declared.**
+⭐ First a precision: **the straddle's share is not wholly unmeasured** — the banked record holds **both
+penetrations** (pad1 pinch **−1.06 / −1.39 mm**, claw straddle **−0.70 mm**). ⇒ **What is unmeasured is the
+force, not the penetration.**
+⭐⭐ And the conversion constant is banked too (`:92`, verbatim): `Committed MUJOCO_PAD_SOLREF=[−65789,−2105.3]`
+⇒ MuJoCo's negative solref is **direct (stiffness, damping)** ⇒ **K = 65 789 N/m**.
+
+⭐⭐⭐ Read as a linear spring (**p18 recomputed all of it**):
+
+| term | penetration | force |
+|---|---|---|
+| pinch, CLOSED | 1.06 mm | 69.7 N |
+| pinch, LIFTED | 1.39 mm | 91.4 N |
+| ⭐ **claw straddle** | **0.70 mm** | ⭐ **46.1 N** |
+| composite | | **115.8 – 137.5 N** |
+
+⇒ ⭐ **The composite brackets the banked 76–153 N/arm from inside** ⇒ **the reading's order of magnitude checks
+out against an independently reported number.**
+⇒ ⭐⭐ **So the straddle alone computes to ≈46 N against a stated lift requirement of <1 N — about 46×.**
+⇒ ⭐ **That puts a magnitude on §47's inference** that losing the pinch may cost far less than feared.
+
+⛔ **p0's four undischarged assumptions, carried verbatim in substance:** ① reading solref as a linear spring
+② one contact point per term ③ the claws sharing the pad's solref (**the constant is named `PAD_SOLREF`**)
+④ per-arm versus per-contact accounting. ⇒ ⭐ **It is an estimate, and p0 explicitly does not claim "the straddle
+suffices."** ⇒ **Carry it to Rs as an order of magnitude with its assumptions attached.**
+
+### 48a. Final form of the question for Rs
+
+> **The mechanism you described requires left–right friction. Measurement shows the backplates cannot reach the
+> cable — the claws meet at a backplate gap of 10.16 mm, leaving them 2.16 mm short. Should the mechanism be
+> RECOVERED (change the geometry so they reach) or REPLACED (accept holding on the claws alone)?**
+
+**What travels with it, so "replace" is not judged by its wording alone:**
+- ⭐ the composite grip is measured at **76–153 N/arm where lifting needs <1 N** — the design calls this
+  **over-squeeze** and **recommends grip-DOWN tuning** (`:101-102`);
+- ⭐ **the axial (drag) axis is already out of scope by design**, delegated downstream to the clip-pin (`:100`) —
+  and that is the axis on which the pinch, not the straddle, is the load-bearing term;
+- ⭐ the straddle alone **estimates** to ≈46 N (≈46× the stated need) — ⛔ **an estimate on four declared
+  assumptions, not a measurement**;
+- ⛔ and **grip-DOWN tuning is not grip-to-zero**: the bar being low is established; the straddle clearing it is
+  not.
+
+⇒ ⛔ **p18 selects neither branch, and no pane has.**
