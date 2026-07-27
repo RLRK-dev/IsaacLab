@@ -7490,3 +7490,27 @@ moves from "because dual-arm" to "because unsettled at this posture"; the measur
 non-production either way. ⚠ p5's pattern, self-named: *"2 条件が同時に違うとき、目立つ方（腕の本数）を
 原因と呼びました"* — the salience trap, its last instance today. **(c)** p4's bank hold RELEASED with the
 corrected pin.
+
+## 239. The arms are pressing on each other — the cable had nothing to do with it
+
+From -088 (23:40:04); verified here (bank @ `28826852a8`; control @ `19be103d74` — the commit subject IS the
+finding; result sha MATCH `cdb8461db0…`; the decisive lines and `:592 other=None` re-read).
+
+**(a) ⛔ The -086 framing withdrawn by its author**: p4 re-read its own artifact (`:21-33`) — both arms settle
+at STEP1 ⇒ *"また私が「場面をまたいで比べた」形です."* **(b) ⭐⭐⭐ The control killed one hypothesis to the
+last digit and the instruments named the cause**: A (cable present) L 19.60 / R 12.90 mrad; B (cable moved
+600 mm, same model, same nq) **L 19.60 / R 12.90 — identical to the last digit, forces identical** ⇒ ⛔ the
+cable is irrelevant. And the free instruments p11 demanded did their job: **`touching ['R_wrist_1_link']` /
+`['L_wrist_1_link']` — the arms are in mutual contact**, the servo holding a steady-state error against it
+(shoulder-lift −196 / −129 N·m), saturated all False.
+
+**(c) ⭐⭐ The structural root, scoped precisely**: p4 cannot yet say the DRIVER's grasp postures touch (its
+probe used a default posture; the driver explores GRASP_ATTITUDES via aim_both) — ⛔ but **both paths share
+`solve_ik(..., other=None)` (`:592`, re-read): neither puts the partner arm in the collision filter** — the
+partner-blind aim is structural, not incidental. Next move proposed (p11's call, pre-classified probe-class):
+the same control VIA aim_both — does the menu-chosen posture also touch? ~4 min.
+
+**(d) ⚠⚠ The byproduct, recorded without adjudication**: **this cell's grasp span = 90.0 mm** (the GL/GR
+design x-difference) vs §0#2's 88 mm — a 2.0 mm discrepancy on a FOUNDATIONAL constant (itself pending #45's
+88→176) → routed to p5 (design provenance: where does 90.0 come from?) and p6 (register: the #45-adjacent
+complex).
