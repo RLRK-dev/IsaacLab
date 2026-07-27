@@ -26,6 +26,8 @@ sys.path.insert(0, "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_sco
                    "p4_ur15_sim_20260727")
 import ur15_cell_spec as S   # noqa: E402
 
+print(f"[stack] {S.stack_line()}")   # which substrate this was measured on -- byte identity alone cannot say
+
 XML = "/home/rlrk/IsaacLab/thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml"
 m = mujoco.MjSpec.from_file(XML).compile()
 d = mujoco.MjData(m)

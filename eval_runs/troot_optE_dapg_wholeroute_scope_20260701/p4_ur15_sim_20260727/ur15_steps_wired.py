@@ -38,7 +38,12 @@ OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "/home/rlrk/Downloads/ur15_step
 from ur15_cell_spec import (  # noqa: E402
     ARMATURE, CABLE_N, CABLE_R, CABLE_SEG, CLAMP, CLAW_OFFSET, CLIP_BASE_HEIGHT, CLIP_COLLIDE,
     CLIP_FRICTION, CLIP_PARTS, CLIP_SOLREF, DAMP, EFFORT, GRIP_HALF_SPAN, GROOVE_CENTER_Z, HALF,
-    KP_ARM, KP_WRI, KVR, LIMS, OPEN, REST_TOP, REST_X, REST_Y, R_DES,
+    C1, C2, CABLE_JOINT_RANGE, CELL_TIMESTEP, CLIP_Y_EVEN, CLIP_Y_ODD, COLUMN_R,
+    COLUMN_HZ, FINGER_RAMP, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
+    KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
+    REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
+    SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, START_HOLD_S, START_RAMP_S, TABLE_HZ, TABLE_Y,
+    Z_HOME, Z_RISE_REST, Z_RISE_ROUTE,
     SHOULDER_HEIGHT, SIDES, TABLE_HX, TABLE_HY, TABLE_TOP, TILT, YOKE_SPREAD, guard,
     seat_z,
 )
@@ -63,13 +68,6 @@ J6 = list(_spec.ARM_JOINTS)      # the URDF names, in kinematic order
 # was copied rather than read.  The joint limits had been rounded on the way across -- ±6.283 for
 # ±6.283185307179586 -- so the driver was sampling and unwrapping inside a range very slightly
 # narrower than the robot's own.
-CLIP_Y_ODD, CLIP_Y_EVEN = 0.35, 0.40
-C1 = (0.150, CLIP_Y_ODD)
-C2 = (0.040, CLIP_Y_EVEN)
-
-Z_HOME = TABLE_TOP + 0.20
-Z_RISE_ROUTE = TABLE_TOP + 0.180
-Z_RISE_REST = TABLE_TOP + 0.230
 
 import os as _os  # noqa: E402
 OLD_SEAT_AIM = _os.environ.get('P4_OLD_SEAT_AIM') == '1'
@@ -101,14 +99,9 @@ Z_SEAT = GROOVE_Z - CLAW_OFFSET            # the same height expressed at the pi
 # Rs: the clamp is too fast, halve it.  Stepping the command shut the jaw in 0.544 s (149.2 mm/s
 # of face travel, measured with probe_close_time.py on this model).  Ramping the command over
 # 0.75 s gives 1.084 s (74.9 mm/s) -- half the speed, measured, not estimated.
-FINGER_RAMP = 0.75
 # The measured worst was 0.0381 on the hand Rs watched swing around; the other arm never went
 # below 0.1884 on the same trajectory, so 0.12 keeps what that arm already does and refuses what
 # the other one did.  Candidates below it are dropped unless nothing else reaches.
-SIGMA_FLOOR = 0.0   # the 0.12 floor starved the solver: it picked poses the servos could not
-                    # hold, the arms never settled, the gate never released the fingers and the
-                    # jaw stayed 80 mm open.  Ranking, not rejection, is the way to do this.
-SETTLE_TOL = 0.002   # rad; the arm must be this close to its command before the jaw moves
 # What holds the cable, per the banked ko design (GD-KoShape-Finger.md:95): the grip is COMPOSITE,
 # "lateral flat-pad (pad1) pinch [dominant] + vertical claw (f1ext/f2ext) straddle".  The claws do
 # NOT pinch -- they pass above and below the cable (f1ext BELOW, f2ext ABOVE, cable between them,
@@ -161,13 +154,17 @@ def rest_xml(i, cx):
     h = REST_TOP - TABLE_TOP
     return f"""
     <body name="S{i}" pos="{cx} {REST_Y} {TABLE_TOP}">
-      <geom name="S{i}_post" type="box" size="0.014 0.014 {h/2:.4f}" pos="0 0 {h/2:.4f}" material="rest"/>
-      <geom name="S{i}_la" type="box" size="0.014 0.004 0.006" pos="0 -0.012 {h+0.006:.4f}" material="rest"/>
-      <geom name="S{i}_lb" type="box" size="0.014 0.004 0.006" pos="0  0.012 {h+0.006:.4f}" material="rest"/>
+      <geom name="S{i}_post" type="box" size="{REST_POST_HALF} {REST_POST_HALF} {h/2:.4f}" pos="0 0 {h/2:.4f}" material="rest"/>
+      <geom name="S{i}_la" type="box" size="{REST_POST_HALF} {REST_LIP_HY} {REST_LIP_HZ}" pos="0 {-REST_LIP_DY} {h+REST_LIP_HZ:.4f}" material="rest"/>
+      <geom name="S{i}_lb" type="box" size="{REST_POST_HALF} {REST_LIP_HY} {REST_LIP_HZ}" pos="0 {REST_LIP_DY} {h+REST_LIP_HZ:.4f}" material="rest"/>
     </body>"""
 
 
 def cable_xml():
+    # CABLE_JOINT_RANGE is None when the spec says "as the producer has it", which is
+    # unlimited -- so the attribute is absent rather than set wide.
+    _RANGE = "" if CABLE_JOINT_RANGE is None else \
+        f' range="{CABLE_JOINT_RANGE[0]} {CABLE_JOINT_RANGE[1]}"'
     x0 = -CABLE_SEG * CABLE_N / 2.0
     z0 = REST_TOP + CABLE_R
     s = f'\n    <body name="cab0" pos="{x0:.4f} {REST_Y} {z0:.4f}">\n      <freejoint name="cable_free"/>\n'
@@ -176,8 +173,8 @@ def cable_xml():
     for i in range(1, CABLE_N):
         pad = "  " * dep
         s += pad + f'      <body name="cab{i}" pos="{CABLE_SEG:.4f} 0 0">\n'
-        s += pad + f'        <joint name="cab{i}_y" type="hinge" axis="0 1 0" range="-1.2 1.2" damping="{_spec.CABLE_BEND_DAMPING:.5f}" stiffness="{_spec.cable_joint_k():.5f}"/>\n'
-        s += pad + f'        <joint name="cab{i}_z" type="hinge" axis="0 0 1" range="-1.2 1.2" damping="{_spec.CABLE_BEND_DAMPING:.5f}" stiffness="{_spec.cable_joint_k():.5f}"/>\n'
+        s += pad + f'        <joint name="cab{i}_y" type="hinge" axis="0 1 0"{_RANGE} damping="{_spec.CABLE_BEND_DAMPING:.5f}" stiffness="{_spec.cable_joint_k():.5f}"/>\n'
+        s += pad + f'        <joint name="cab{i}_z" type="hinge" axis="0 0 1"{_RANGE} damping="{_spec.CABLE_BEND_DAMPING:.5f}" stiffness="{_spec.cable_joint_k():.5f}"/>\n'
         s += pad + f'        <geom name="cab{i}_g" type="capsule" fromto="0 0 0 {CABLE_SEG:.4f} 0 0" size="{CABLE_R}" mass="{_spec.cable_seg_mass():.6f}" material="cable" friction="{_spec.CABLE_FRICTION[0]} {_spec.CABLE_FRICTION[1]} {_spec.CABLE_FRICTION[2]}" condim="{_spec.CABLE_CONDIM}"/>\n'
         dep += 1
     for i in range(CABLE_N - 1, 0, -1):
@@ -193,7 +190,7 @@ def link_at(x):
 SEAT1, SEAT2 = link_at(C1[0]), link_at(C2[0])
 world = f"""<mujoco model="ur15_steps">
   <compiler angle="radian"/>
-  <option timestep="0.002" integrator="implicitfast" cone="elliptic"/>
+  <option timestep="{CELL_TIMESTEP:.6g}" integrator="implicitfast" cone="elliptic"/>
   <visual>
     <headlight ambient="0.45 0.45 0.45" diffuse="0.75 0.75 0.75" specular="0.2 0.2 0.2"/>
     <global offwidth="1600" offheight="900"/><map znear="0.02"/>
@@ -209,13 +206,13 @@ world = f"""<mujoco model="ur15_steps">
     <material name="cable" rgba="0.95 0.95 0.97 1"/>
   </asset>
   <worldbody>
-    <geom name="floor" type="plane" size="6 6 0.1" material="gridmat" pos="0 0 0" contype="0" conaffinity="0"/>
+    <geom name="floor" type="plane" size="{FLOOR_HALF} {FLOOR_HALF} {FLOOR_SPACING}" material="gridmat" pos="0 0 0" contype="0" conaffinity="0"/>
     <body name="column" pos="0 0 0">
-      <geom name="stem" type="cylinder" size="0.102 {SHOULDER_HEIGHT/2:.4f}" pos="0 0 {SHOULDER_HEIGHT/2:.4f}" material="col"/>
-      <geom name="foot" type="cylinder" size="0.215 0.03" pos="0 0 0.03" material="col"/>
+      <geom name="stem" type="cylinder" size="{COLUMN_R} {COLUMN_HZ:.4f}" pos="0 0 {COLUMN_HZ:.4f}" material="col"/>
+      <geom name="foot" type="cylinder" size="{PEDESTAL_R} {PEDESTAL_HZ}" pos="0 0 {PEDESTAL_HZ}" material="col"/>
     </body>
-    <body name="table" pos="0 {(REST_Y+CLIP_Y_EVEN)/2:.3f} 0">
-      <geom name="table_top" type="box" size="{TABLE_HX} {TABLE_HY} 0.02" pos="0 0 {TABLE_TOP-0.02:.4f}" material="table"/>
+    <body name="table" pos="0 {TABLE_Y:.3f} 0">
+      <geom name="table_top" type="box" size="{TABLE_HX} {TABLE_HY} {TABLE_HZ}" pos="0 0 {TABLE_TOP-TABLE_HZ:.4f}" material="table"/>
     </body>
     {clip_xml("C1", *C1)}
     {clip_xml("C2", *C2)}
@@ -243,7 +240,8 @@ for tag, sign in SIDES.items():
     wf = cell.body(f"{tag}_wrist_3_link").add_frame(pos=[0, 0, 0], quat=[float(qt_[3]), float(qt_[0]), float(qt_[1]), float(qt_[2])])
     wf.attach_body(g.body("base_mount"), f"{tag}g_", "")
 
-kps = np.array([KP_ARM] * 3 + [KP_WRI] * 3)
+# by joint name rather than by a count of three: the gain follows which joint it is
+kps = np.array([KP_WRI if "wrist" in j else KP_ARM for j in J6])
 for tag in SIDES:
     for i, j in enumerate(J6):
         a = cell.add_actuator()
@@ -530,7 +528,7 @@ def slot_after_close(t, qarm, ctrl_g):
     for k, i in enumerate(AIDX[t]):
         sc.ctrl[i] = qarm[k]
     sc.ctrl[GIDX[t]] = ctrl_g
-    for _ in range(2500):
+    for _ in range(int(SETTLE_S / m.opt.timestep)):
         mujoco.mj_step(m, sc)
     return seat_point(t, sc)
 
@@ -554,7 +552,7 @@ def seat_offset(t, qarm):
     for k, i in enumerate(AIDX[t]):
         sc.ctrl[i] = qarm[k]
     sc.ctrl[GIDX[t]] = CLAMP
-    for _ in range(2500):
+    for _ in range(int(SETTLE_S / m.opt.timestep)):
         mujoco.mj_step(m, sc)
     return seat_point(t, sc) - pinch_open
 
@@ -595,9 +593,6 @@ def aim_slot_at(t, cable_w, prev_q, seed, pose_only=None, fix_x=None, pose_rd=No
     return w, tgt, float(np.linalg.norm(land))
 
 
-GRASP_ATTITUDES = [(y, r) for r in (0.0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.55, 0.60, 0.65,
-                                    0.70, 0.75, 0.85, 0.95)
-                   for y in (0.0, 0.15, -0.15, 0.30, -0.30)]
 
 
 def aim_both(cl, cr, prev_q, seed):
@@ -801,8 +796,8 @@ gL, iL = cable_at(C1[0] - GRIP_HALF_SPAN)
 gR, iR = cable_at(C1[0] + GRIP_HALF_SPAN)
 GL = (float(C1[0] - GRIP_HALF_SPAN), float(gL[1]), float(gL[2]))
 GR = (float(C1[0] + GRIP_HALF_SPAN), float(gR[1]), float(gR[2]))
-Z_GRASP_REST = float(0.5 * (gL[2] + gR[2]))
-Y_GRASP_REST = float(0.5 * (gL[1] + gR[1]))
+Z_GRASP_REST = float(np.mean([gL[2], gR[2]]))
+Y_GRASP_REST = float(np.mean([gL[1], gR[1]]))
 print(f"[steps] measured grasp: L=cab{iL} {np.round(gL,4)}  R=cab{iR} {np.round(gR,4)}  "
       f"drop across the span = {abs(gL[2]-gR[2])*1000:.1f} mm")
 
@@ -978,8 +973,10 @@ for _round in range(3):
 q0 = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
 for t in SIDES:
     d.ctrl[GIDX[t]] = OPEN
-RAMP = 4000
-for s_ in range(RAMP + 3000):
+# ⚠ durations, not step counts: at the producer's timestep 4000 steps is 0.83 s, not the
+# 8 s this ramp was measured at.
+RAMP = int(START_RAMP_S / m.opt.timestep)
+for s_ in range(RAMP + int(START_HOLD_S / m.opt.timestep)):
     f = min(1.0, s_ / RAMP)
     for t in SIDES:
         qc = (1.0 - f) * q0[t] + f * START[t]
@@ -1007,7 +1004,7 @@ for t in SIDES:
 # ---- STEP table 2-18.  (step, name, L target, R target, Lfinger, Rfinger, seconds, gate) ----
 LX1, RX1 = C1[0] - GRIP_HALF_SPAN, C1[0] + GRIP_HALF_SPAN
 LX2, RX2 = C2[0] - GRIP_HALF_SPAN, C2[0] + GRIP_HALF_SPAN
-RX_MID = 0.5 * (C1[0] + C2[0])  # table :1283 "R-hand Y はクリップ間中点"
+RX_MID = float(np.mean([C1[0], C2[0]]))  # table :1283 "R-hand Y はクリップ間中点"
 
 def mouth_clear(t="L", dd=None):
     """Clear opening between the two claw inner faces [m], read off the model."""
@@ -1045,7 +1042,7 @@ def release_ctrl(clearance=None, lo=120.0, hi=255.0):
         sc.ctrl[:] = d.ctrl
         for t in SIDES:
             sc.ctrl[GIDX[t]] = c
-        for _ in range(2500):
+        for _ in range(int(SETTLE_S / m.opt.timestep)):
             mujoco.mj_step(m, sc)
         return mujoco.mj_geomDistance(m, sc, g1, g2, 1.0, None)
 
@@ -1118,7 +1115,7 @@ if _os.environ.get("P4_RELEASE_ONLY") == "1":
     for _c in (214.0, 197.5, _r, 18.0):
         _sc = mujoco.MjData(m); _sc.qpos[:] = d.qpos; _sc.ctrl[:] = d.ctrl
         for _t in SIDES: _sc.ctrl[GIDX[_t]] = _c
-        for _ in range(2500): mujoco.mj_step(m, _sc)
+        for _ in range(int(SETTLE_S / m.opt.timestep)): mujoco.mj_step(m, _sc)
         _g = mujoco.mj_geomDistance(m, _sc, CLAWG["L"][0], CLAWG["L"][2], 1.0, None) * 1000
         print(f"[rel] ctrl {_c:6.1f} -> claw tips {_g:6.2f} mm apart"
               f"{'   <- solved release' if abs(_c-_r)<0.05 else ''}")

@@ -1,3 +1,4 @@
+[stack] newton 1.4.0 / mujoco 3.10.0 / mujoco-warp 3.10.0.3 / warp-lang 1.15.0
   ctrl   roll    deepest below the cable           reached by   exact?
  CLAMP   0.00                     9.7 mm      right_pad_f1ext      yes
  CLAMP   0.30                    13.6 mm      right_pad_f1ext      yes

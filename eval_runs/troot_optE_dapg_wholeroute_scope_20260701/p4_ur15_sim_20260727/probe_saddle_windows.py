@@ -11,7 +11,12 @@ Nothing here places a saddle.  It reports the free intervals; choosing from them
 """
 
 import mujoco
+import pathlib as _pl, sys as _sys
+_sys.path.insert(0, str(_pl.Path(__file__).parent))
+import ur15_cell_spec as _cellspec  # noqa: E402
 import numpy as np
+
+print(f"[stack] {_cellspec.stack_line()}")   # which substrate this was measured on -- byte identity alone cannot say
 
 XML = "/home/rlrk/IsaacLab/thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml"
 m = mujoco.MjSpec.from_file(XML).compile()

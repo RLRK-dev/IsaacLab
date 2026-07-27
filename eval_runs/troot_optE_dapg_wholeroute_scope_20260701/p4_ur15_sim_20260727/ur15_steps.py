@@ -1,9 +1,14 @@
 """⚠ RETIRED RECORD -- this file is what ran on 2026-07-27, not what runs now.
 
 Its cell constants are the ones that were in force when it ran, and several are known wrong:
-the cable is 32 links of 30 mm at mass="0.004" and stiffness="0.12" (3.56x too heavy and 64%
-too soft once the link is the SSOT's 15 mm), and the clip is a 78 mm block with 64 mm of solid
-under a notch instead of the env's 30 mm V-groove.
+the cable is 32 links of 30 mm at mass="0.004" with a joint stiffness of "0.12" (3.56x too heavy,
+and against the SSOT-derived 0.33333 for a 15 mm link it is 64% too soft), and the clip is a 78 mm
+block with 64 mm of solid under a notch instead of the env's 30 mm V-groove.
+
+⚠ CORRECTED 2026-07-27 21:2x: this note said 0.12 for every file it was stamped on, and the
+files DISAGREE -- ur15_steps*.py use 0.12/damping 0.010 while ur15_cell.py and ur15_route.py
+use 0.02/0.004, six times softer.  One note describing five files is the same defect the note
+is warning about (found by w2:p11).
 
 ⛔ Do not read constants out of this file.  The live driver is `ur15_steps_wired.py`, and every
 cell constant it uses comes from `ur15_cell_spec.py`, which imports the repo SSOT.

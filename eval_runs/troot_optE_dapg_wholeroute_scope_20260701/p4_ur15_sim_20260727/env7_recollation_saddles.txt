@@ -1,3 +1,4 @@
+[stack] newton 1.4.0 / mujoco 3.10.0 / mujoco-warp 3.10.0.3 / warp-lang 1.15.0
 gripper half-extent across the cable axis, closed, counting only the parts that
 reach down to the cable or below: 36.6 mm  (widest: geom10)
 a saddle centre must stay 50.6 mm from any hand centre

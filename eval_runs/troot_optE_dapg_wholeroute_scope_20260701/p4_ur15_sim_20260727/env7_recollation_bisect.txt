@@ -1,3 +1,4 @@
+[stack] newton 1.4.0 / mujoco 3.10.0 / mujoco-warp 3.10.0.3 / warp-lang 1.15.0
 groove width read from the clip table: 15.00 mm
 cable 8.00 mm -> it can sit up to 3.50 mm off the groove centre
 => claw tips must clear 11.50 mm  (p5 states 11.50)

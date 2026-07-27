@@ -100,6 +100,70 @@ EFFORT = tuple(e for e, _, _ in _arm_limits_from_urdf())            # ur15_mj.ur
 LIMS = tuple((lo, hi) for _, lo, hi in _arm_limits_from_urdf())     # ur15_mj.urdf <limit lower/upper>
 
 
+# --- how finely the producer integrates, and how finely this cell does ------------------------
+# p5 spec §6.4j: the timestep is Tier A, and running coarser than the producer has to be a
+# declared choice rather than something a template happened to say.  This cell was running 9.6x
+# coarser, which p5 names as one candidate for today's cable-through-clip.
+
+_PRODUCER = pathlib.Path(_REPO, "thread_isaac_lab/scripts/test_newton_clip_routing.py")
+
+
+def _arithmetic(node):
+    """Evaluate a numeric expression made only of literals and + - * /.
+
+    The producer writes `DT = 1.0 / 480.0`, which `ast.literal_eval` refuses -- it is arithmetic,
+    not a literal.  Copying the quotient across would defeat the point of reading the file, so
+    this walks the two-operand expression instead.  Anything richer raises rather than guesses.
+    """
+    if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
+        return node.value
+    if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.USub, ast.UAdd)):
+        v = _arithmetic(node.operand)
+        return -v if isinstance(node.op, ast.USub) else v
+    if isinstance(node, ast.BinOp):
+        a, b = _arithmetic(node.left), _arithmetic(node.right)
+        for op, fn in ((ast.Add, lambda: a + b), (ast.Sub, lambda: a - b),
+                       (ast.Mult, lambda: a * b), (ast.Div, lambda: a / b)):
+            if isinstance(node.op, op):
+                return fn()
+    raise RuntimeError(f"{ast.dump(node)[:60]} is not plain arithmetic; read it by hand")
+
+
+def _producer_sim_dt() -> float:
+    """The producer's solver step [s]: its own frame dt divided by the SSOT's substep count.
+
+    ⚠ The two halves live in DIFFERENT files, and I had them in one.  `DT = 1.0 / 480.0` is the
+    producer's (test_newton_clip_routing.py:123); `SIM_SUBSTEPS = 10` is task_config.py:101, which
+    the producer IMPORTS (:111) and divides by at :124.  I cited both to the producer, which is
+    the kind of citation that survives because the number it produces happens to be right.
+    """
+    tree = ast.parse(_PRODUCER.read_text())
+    dt = None
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and len(node.targets) == 1 \
+                and isinstance(node.targets[0], ast.Name) and node.targets[0].id == "DT":
+            dt = _arithmetic(node.value)
+    if dt is None:
+        raise RuntimeError(f"{_PRODUCER.name} no longer defines DT at module level; this cell "
+                           f"will not guess its step")
+    return dt / _tc.SIM_SUBSTEPS
+
+
+PRODUCER_SIM_DT = _producer_sim_dt()   # test_newton_clip_routing.py:123 / task_config.py:101
+
+# The cell follows it.  Keeping the old coarse step would be allowed -- p5 §6.4j says a coarse
+# run has to be an EXPLICIT choice -- but there was never a measurement behind 0.002, and the one
+# thing known about it is that it is the deviation p5 lists as a candidate cause.  Deviating needs
+# a reason; following the producer does not.
+CELL_TIMESTEP = PRODUCER_SIM_DT
+
+# The producer places NO limit on a cable bend joint (test_newton_clip_routing.py:1004-1017,
+# add_joint_revolute with no limit_lower/limit_upper).  This cell wrote ±1.2 rad, which p5 ruled
+# is a limit invented here: authority has none, so neither does the cell.  None means the template
+# emits no range attribute at all, which is MuJoCo's unlimited.
+CABLE_JOINT_RANGE = None
+
+
 # --- cable physics: per-element quantities, DERIVED from the discretisation -------------------
 # Halving the link length changes every one of these, and not all in the same direction.  The
 # wiring landed the shorter link while the driver still wrote a literal mass and a literal joint
@@ -138,6 +202,25 @@ def bend_ei_in_force() -> tuple:
     raw = _os_env.get("CABLE_BEND_STIFFNESS_OVERRIDE", "")
     return (float(raw), "CABLE_BEND_STIFFNESS_OVERRIDE") if raw else (CABLE_BEND_EI,
                                                                       "task_config.py:144")
+
+
+# The four packages whose versions decide what a measurement means.  p0's point, and it is a
+# sharp one: my re-collation showed the output files were byte-identical, which proves the file
+# did not change and says nothing about whether anything was re-run.  A copy would look the same.
+# So every probe prints this, and then the output itself carries which substrate produced it.
+STACK_PACKAGES = ("newton", "mujoco", "mujoco-warp", "warp-lang")
+
+
+def stack_line() -> str:
+    """One line naming the substrate this measurement was taken on."""
+    from importlib import metadata
+    out = []
+    for name in STACK_PACKAGES:
+        try:
+            out.append(f"{name} {metadata.version(name)}")
+        except metadata.PackageNotFoundError:
+            out.append(f"{name} ABSENT")
+    return " / ".join(out)
 
 
 def announce():
@@ -277,6 +360,24 @@ REST_X = (-0.300, -0.055, +0.245)       # spec §4 -- placed by p5 inside the fr
                                         #            three had one outside the shorter cable and
                                         #            one five millimetres into the right hand's
                                         #            zone.  These are saddle CENTRES.
+TABLE_HZ = 0.02                         # spec §6.4j -- table top half-thickness, new here
+
+# The scenery, placed by spec §6.4j.  None of these is new: each was a literal in the driver's XML
+# where no name check could see it, and they are moved with what the driver knew about them.
+FLOOR_HALF = 6.0                        # spec §6.4j -- ground plane half extent; the plane is
+FLOOR_SPACING = 0.1                     #               non-colliding, so this is what you see,
+                                        #               but `size` is geometry and stays checked
+COLUMN_R = 0.102                        # spec §6.4j -- the shared column both arms stand on
+COLUMN_HZ = SHOULDER_HEIGHT / 2         # half-height, because MuJoCo cylinders take one.
+                                        # The halving lives here: under the strict form a
+                                        # driver cannot write /2, and this is where the
+                                        # derivations are supposed to be anyway.
+PEDESTAL_R, PEDESTAL_HZ = 0.215, 0.03   # spec §6.4j -- its foot
+
+REST_POST_HALF = 0.014                  # spec §6.4j -- saddle post, square in plan
+REST_LIP_HY, REST_LIP_HZ = 0.004, 0.006  # spec §6.4j -- the two lips that capture the cable
+REST_LIP_DY = 0.012                     # spec §6.4j -- how far each lip sits off centre
+
 REST_TOP = TABLE_TOP + 0.150            # spec §4 -- "at +0.060 the open fingers press into the
                                         #            table".  ⚠ p4's own gripper-only measurement
                                         #            (36 mm of reach below the cable with the
@@ -297,6 +398,50 @@ SIDES = {"L": -1.0, "R": +1.0}           # spec §6.4f -- the sign convention, l
 R_DES = ((0.0, -1.0, 0.0),
          (1.0, 0.0, 0.0),
          (0.0, 0.0, 1.0))                # spec §6.4f -- the reference attitude
+
+# --- the thirteen names spec §6.4j says to move here, less one ---------------------------------
+# p5: "already OWNED in §6.4d, so just move them into the spec module".  Each keeps what the
+# driver knew about it, because that provenance is the only thing that makes them not-invented.
+
+CLIP_Y_ODD, CLIP_Y_EVEN = 0.35, 0.40    # spec §6.4d -- the two clip rows
+C1 = (0.150, CLIP_Y_ODD)                # spec §6.4d -- first clip, on the near row
+C2 = (0.040, CLIP_Y_EVEN)               # spec §6.4d -- second clip, on the far row
+
+Z_HOME = TABLE_TOP + 0.20               # spec §6.4d -- where the arms wait
+Z_RISE_ROUTE = TABLE_TOP + 0.180        # spec §6.4d -- carry height between clips
+Z_RISE_REST = TABLE_TOP + 0.230         # spec §6.4d -- clearance over the saddle row
+
+# Choreography timings.  ⚠ These are DURATIONS, and the driver used to hold three of them as step
+# counts, which stopped meaning the same thing the moment the timestep moved: 4000 steps was 8 s
+# at the old 0.002 and is 0.83 s at the producer's.  Seconds survive a change of substrate; step
+# counts silently do not.
+SETTLE_S = 5.0                          # spec §6.4d -- was `range(2500)` at dt 0.002
+START_RAMP_S = 8.0                      # spec §6.4d -- was `RAMP = 4000`
+START_HOLD_S = 6.0                      # spec §6.4d -- was the `+ 3000` after it
+
+FINGER_RAMP = 0.75                      # spec §6.4d -- "stepping the command shut the jaw in
+                                        #   0.544 s (149.2 mm/s); ramping over 0.75 s gives
+                                        #   1.084 s (74.9 mm/s) -- half the speed, measured"
+SETTLE_TOL = 0.002                      # spec §6.4d -- rad; the arm must be this close to its
+                                        #   command before the jaw is allowed to move
+SIGMA_FLOOR = 0.0                       # spec §6.4d -- "the 0.12 floor starved the solver: it
+                                        #   picked poses the servos could not hold, so the arms
+                                        #   never settled and the jaw stayed 80 mm open.  Ranking,
+                                        #   not rejection, is the way to do this."
+
+# Grasp attitude candidates: yaw x roll, coarse near upright and finer where the claws engage.
+TABLE_Y = (REST_Y + CLIP_Y_EVEN) / 2    # the table is centred between the saddle row
+                                        # and the far clip row.  Defined after both,
+                                        # since a spec module is read top to bottom.
+
+GRASP_ATTITUDES = [(y, r) for r in (0.0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.55, 0.60, 0.65,
+                                    0.70, 0.75, 0.85, 0.95)
+                   for y in (0.0, 0.15, -0.15, 0.30, -0.30)]     # spec §6.4d
+
+# ⛔ FLOAT_Z is the thirteenth and it does NOT move.  Spec §6.4j lists it among the names to
+# bring here, and spec §4 of the clip design refuses to supply it until p5 settles whether the
+# fingers open at the seat.  Two rulings of p5's, pointing opposite ways, so this module keeps
+# refusing (see float_z() below) and the driver keeps declaring its own -- reported, not resolved.
 
 # Arm servo -- the spec names these but explicitly declines to judge their values; they belong to
 # the arm-control court.  Carried here only so drivers stop each keeping their own copy.
@@ -358,7 +503,11 @@ RETIRED = {"CLIP_H", "GROOVE_W", "CLIP_RISER"}
 # than an input.
 TIER_C = {"OUT", "W", "H", "FPS", "HOLD_S", "WAY", "STEPS", "SEED",
           "CAM", "CAM2", "RENDERER", "FRAMES",
-          "frames", "log", "n", "claw_min", "col_min", "sig_min"}
+          "frames", "log", "n", "claw_min", "col_min", "sig_min",
+          # p5 §6.4j: these are in spec §6.4d as DERIVED and are free.  I had reported them as
+          # absent from §6.4d, which was a bad read of my own -- they are on its line 195, in the
+          # DERIVED row rather than the TIER-C row I was looking at.
+          "cam", "cam2", "render_every"}
 
 _SPEC_MODULE = "ur15_cell_spec"
 
@@ -405,28 +554,15 @@ def _module_level_bindings(path):
     return out
 
 
-# Coefficients that carry no unit: a literal in a multiplication or division is arithmetic if it
-# is one of these and a hidden length otherwise.  Spec §6.4d, in the combined form p5 settled on:
-# p5's dimensional rule alone lets `OWNED * 1.0375` through, and p0's small-set rule alone has no
-# principle behind it, so a factor has to pass BOTH -- be in a multiplication AND be plain.
-_PLAIN_FRACTIONS = frozenset({0.5, 0.25, 0.75})
-
-
-def _plain_coefficient(value, written_as_int):
-    """Is this multiplier plain -- a count, a simple fraction, or a unit conversion?
-
-    Written-as-int matters: `2` is a count of something, `2.0` is a measurement someone happened
-    to write as two.  The spelling is the only signal available, and it is the author's own.
-    """
-    if written_as_int:
-        return True
-    x = abs(float(value))
-    if x in _PLAIN_FRACTIONS:
-        return True
-    if x > 0.0:
-        e = math.log10(x)
-        return abs(e - round(e)) < 1e-12       # a power of ten: mm to m and back
-    return False
+# ⛔ There is no set of excused coefficients.  p5's final ruling (spec §6.4h as landed): the fix
+# for a set with holes in it is not a better set -- it is no set.  Two versions of this module
+# carried one (mine by size and spelling, then the combined form with p0), and each time the
+# boundary members moved: `2` free but `2.0` caught, `1000.0` free but `1.0375` caught.  A rule
+# whose answer depends on how a number is spelled is a rule that will be wrong quietly.
+#
+# So a literal in a multiplication or division is classified like any other.  What survives is
+# only what counts rather than measures: bare 0 and 1, and integers used as indices, in range(),
+# or in comparisons.
 
 
 def _counting_position(node, parent):
@@ -457,8 +593,10 @@ def _unowned_literals(node):
 
       * added or subtracted -> the literal has the same unit as what it is added to, so it is a
         cell constant.  `TABLE_TOP + 0.2` is a height and gets caught.
-      * multiplied or divided -> plain coefficients pass, anything else is a length in disguise.
-      * index, `range()`, comparison -> integers there are counting.
+      * multiplied or divided -> also classified.  p5's final ruling removed the excused-factor
+        set rather than repairing it; a driver that wants a half writes it as a name.
+      * bare 0 and 1 anywhere, and integers used as an index, in `range()`, or in a comparison
+        -> counting, not measuring.
     """
     value = getattr(node, "value", None)
     if value is None:
@@ -478,11 +616,13 @@ def _unowned_literals(node):
         up = parent.get(here)
         if isinstance(up, ast.UnaryOp) and isinstance(up.op, (ast.USub, ast.UAdd)):
             here, up = up, parent.get(up)
-        if isinstance(leaf.value, int) and _counting_position(here, parent):
+        # p5 §6.4j, one step wider than the three counting positions: a bare integer 0 or 1 is
+        # exempt wherever it stands.  It closes the false positive on `sum(1 for ...)` and it is
+        # safe for the reason p5 gives -- no cell dimension is exactly 0 or 1, while an integer
+        # cell quantity like CABLE_N = 40 is neither, so it still gets caught.
+        if isinstance(leaf.value, int) and leaf.value in (0, 1):
             continue
-        if isinstance(up, ast.BinOp) and isinstance(up.op, (ast.Mult, ast.Div, ast.FloorDiv,
-                                                            ast.Pow)) \
-                and _plain_coefficient(leaf.value, isinstance(leaf.value, int)):
+        if isinstance(leaf.value, int) and _counting_position(here, parent):
             continue
         out.append(leaf.value)
     return out
