@@ -61,12 +61,17 @@
 | `TABLE_TOP` | `task_config.py:20 TABLE_HEIGHT` | 0.80 | ✅ 全 driver 一致 |
 | `CABLE_R` | `task_config.py:137 CABLE_RADIUS` | **0.004** | ⛔ `cell`/`route` が 0.005 |
 | `CABLE_N` | `task_config.py:135 CABLE_SEGMENTS` | **40** | ⛔ `steps*` が 32 |
-| `CABLE_SEG` | `task_config.py:135` コメント "40 segments × 15mm" | **0.015** | ⛔ 全 driver が 0.030 |
+| `CABLE_SEG` | **`task_config.py:136 CABLE_SEG_LEN`** (⭐ 実定数 ・import 可) | **0.015** | ⛔ 全 driver が 0.030 |
 | `GRIP_HALF_SPAN` | `task_config.py:235` | **0.044** | ✅ (`steps*` のみ定義) |
 | クリップ 5 箱 | `newton_skill_env_base.py:1858-1864` | 兄弟文書 §3 の回転形 | ⛔ 全 driver が自作 |
 | クリップ接触 | `:1918-1921` + `task_config.py:187` | `solref="-40000 -400"` `friction="1.0 0.005 0.005"` | ⛔ 未指定 (MuJoCo 既定) |
 | クリップ衝突 | `newton_skill_env_base.py:1908` `:1925` | **ON** (`0x6`) | 兄弟文書 §6-A |
-| 着座 | `task_config.py:226 GROOVE_CENTER_Z` | `TABLE + float_z + 0.009` | ⛔ p4 は `+0.070` を定数保持 |
+| **未浮上の着座** | `task_config.py:226 GROOVE_CENTER_Z` | `TABLE + 0.009` | ⛔ p4 は `+0.070` を定数保持 |
+| **浮上量** | `newton_skill_env_base.py:1897` `:1923` (`target_clip_float_z`) | 未確定 (兄弟文書 §4) | ⛔ p4 は `CLIP_RISER` で別に持つ |
+
+⚠⚠ **着座の 2 行は分けなければなりません (w2:p0 指摘 ・私の誤りでした)**: `GROOVE_CENTER_Z` の定義に **浮上項は入っていません** (`task_config.py` 全体で `float_z` の閉じた query = **0 件**)。浮上はクリップの**設置位置**側に掛かります (`newton_skill_env_base.py:1897` 逐語 `TABLE_HEIGHT + dz + target_clip_float_z`)。
+⇒ ⭐ **浮上した後の着座 = `GROOVE_CENTER_Z + target_clip_float_z`** ・⛔ **`GROOVE_CENTER_Z` 単独はもう着座ではありません。**
+⇒ ⭐⭐ **これが罠です**: 定数の**名前は「座」のまま**で、クリップだけ動きます。⇒ 浮かせた cell で `GROOVE_CENTER_Z` を挿入目標に使うコードは **黙って外します**。
 | グリッパ幾何 | `_ur15_2f85_koshape_actuated.xml` | 資産が正 | ✅ 全 driver が同一絶対パス |
 
 ⛔ **Tier A を driver 内に literal で書くことを禁じます。** ⭐ 理由 = 本日 4 回、同じ量の複数コピーが判断を狂わせました (`YOKE_SPREAD` / 帯 8.00 対 10.00 / 旧 XML copy / `CLIP_H`)。
@@ -98,7 +103,9 @@
 ## §6 実装契約 (⭐ 作るのは w2:p4 ・本書は形だけ定めます)
 
 1. driver dir に **module 1 個** (例 `ur15_cell_spec.py`)。全 driver は先頭で **そこからのみ** cell 定数を取る。
-2. **Tier A** = 可能なら `thread_isaac_lab.configs.task_config` を import。⚠ import が重い/不可なら **生成した写し + 照合 guard** (SSOT の当該行の sha を持ち、ずれたら **失敗**する) — ⛔ **写すだけで guard 無しは不可** (それが今の状態です)。
+2. **Tier A** = 可能なら `thread_isaac_lab.configs.task_config` を import。⚠ import が重い/不可なら **生成した写し + 照合 guard**。
+   ⛔ **写すだけで guard 無しは不可** (それが今の状態です)。
+   ⛔⛔ **guard は行の sha で作らないでください** (⭐ w2:p0 指摘 ・私の初版が誤り): 行 sha が答えるのは「**バイトが動いたか**」だけで、⛔ コメント修正で**偽警報**を出し、⛔ 別の場所での再代入を**素通し**します。⇒ ⭐ **§6.4 の AST pass で SSOT 側の値を評価し、値どうしを比べる。** ⇒ byte-sha は **通知**へ降格 (失敗させない)。
 3. **Tier B** = 本 spec の値を module に直書きし、各行に **本 spec の節番号**を付す。
 4. **guard** (安い ・run 不要): driver 内に Tier A/B の名前の **再定義**が在れば **失敗**する検査。⭐ 本書 §1 と同じ AST 抽出で書けます (grep では取りこぼします)。
 5. ⛔ **driver が新しい cell 定数を必要としたとき、自分で定義しない** — 本 spec に足す (w2:p4 の brief 規則① と対)。
@@ -112,3 +119,17 @@
 - ⛔ **`CLAMP`/`OPEN`/`HALF` と PD gains の値を判定していません** (別 court)。
 - ⛔ **`CABLE_SEG` を 0.015 に変えろ、とは言っていません** — §2 のとおり全長と対で決まる量です。⭐ 言えるのは「30 mm は SSOT と食い違い、計器の床を 2 倍にしている」まで。
 - ⚠ 本書は **値の一覧であって、cell が正しく建つことの検証ではありません。** 単一化した後に 1 run 通すことが要ります。
+
+---
+
+## §8 改訂 1 (w2:p0 の敵対的検証を受けて ・実装前 ・3 件とも私が on-disk で確認して採用)
+
+| # | 私の初版 | 直し | 私の誤りの型 |
+| --- | --- | --- | --- |
+| ① | `CABLE_SEG` の出所を `:135` の**コメント** "40 segments × 15mm" とした | ⭐ **`:136 CABLE_SEG_LEN = 0.015`** = import 可能な**実定数**が 1 行下に在った | ⛔ **1 行読んで止めた** — 同じ block を数え上げなかった |
+| ② | 着座の Tier A 行に `TABLE + float_z + 0.009` と書き `task_config.py:226` を根拠にした | ⭐ **2 行に分割** — `:226` に浮上項は無い (`float_z` の閉じた query = **0 件**)。浮上は `newton_skill_env_base.py:1897`。⇒ 浮上後の座 = `GROOVE_CENTER_Z + target_clip_float_z` | ⛔⛔ **引用先に存在しないものを引用した** — 私が終日 他者に指摘してきた型 |
+| ③ | guard を「SSOT の当該行の sha」で作れとした | ⭐ **AST で値を評価して 値どうしを比較**。byte-sha は通知へ降格 | ⛔ **識別性の無い述語** — コメント修正で偽警報・別所再代入を素通し |
+
+⭐ **①③ は結論を変えず、②は Tier A の行を 1 つ増やしました。** ⛔ どれも実装前に見つかったので、書き換えの費用はゼロです。
+
+⭐ **併せて記録**: w2:p0 は自身の「権威 env は衝突 OFF」を撤回されました (2 つの build 経路を 1 語に畳んでいた) ⇒ ⭐ 本 spec の Tier A「クリップ衝突 = ON」(`newton_skill_env_base.py:1908` `:1925` ・committed で無条件) は敵対的検証を生き残りました。⚠ 私はこれを「私が正しかった」でなく「**2 つの経路が逆の既定を持つ**」という事実として持ちます (兄弟文書 §6-A)。
