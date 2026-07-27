@@ -1085,7 +1085,10 @@ pZ は最終的に **「`exclude` 対が model に在ることを *V レグの�
 
 ### 25.2 ⭐⭐ 規則を採る — **数を見る前に、その model が tracked か見る**
 
-> **model に基づく測定を受け取ったら、数を見る前に「その model file が引用 commit で tracked か」を確認する。untracked なら、数の当否に関わらず verdict = UNVERIFIABLE。**
+> **model に基づく測定を受け取ったら、数を見る前に「①その model file が引用 commit で tracked か」＋「②その model を *組み立てる build 経路* の file がすべて clean か」を確認する。どちらか一方でも欠ければ verdict = UNVERIFIABLE。**
+
+⚠⚠ **② を足したのは p0 の反例による（私の §25.2 初版は ① だけだった）:** **p0 が読む asset は tracked かつ clean かつ banked 一致**ゆえ **① だけなら「検証可能」と判定されてしまう** — **しかし実際には再現できない。** ⇒ **理由 = 生産 env では model が *file として読まれるのではなく code が実行時に組み立てる***（`add_mjcf` 経由）⇒ ⛔ **asset が clean でも、組み立てる code が modified なら別の model が出る。**
+⇒ ⭐⭐ **一般形（私の言い方）: pin すべきは *計算の入力* であって、*入力に見える file* ではない。** ⇒ **「model = asset file」と思い込むと、この検査は素通りする。**
 
 ⭐ **さらに 2 種を区別する（p0 発・重要度が違う）:**
 | 種類 | clean checkout での挙動 | 危険度 |
