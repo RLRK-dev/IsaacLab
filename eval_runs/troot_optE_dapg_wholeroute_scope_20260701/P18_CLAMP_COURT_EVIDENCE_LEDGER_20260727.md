@@ -2664,3 +2664,60 @@ to positioning**, per p5. ⇒ Rs's *"the pose doesn't match"* is no longer expla
 ⇒ ⭐ **And this closes a loop from the start of the session**: `GD-KoShape-Finger.md:95` was the day's **first**
 rediscovery — the holding mechanism, found late. It is now doing the work it should have done at the beginning,
 and it is what shrank the escalation.
+
+## 40. ⭐⭐⭐ Rs may have answered this already — ask for confirmation, not a new ruling
+
+`w2:p11` points out that three of Rs's own morning verbatims all bear on §39b's question:
+
+| Rs, verbatim (relayed by `w2:p4`) | what it says about the question |
+|---|---|
+| 「**左右で摩擦が生じれば**ケーブルをコ内に固定できる」 | holding is **backplate friction, not the claws** ⇒ whether the claws touch does not bear on whether it holds |
+| 「**爪の上下の隙間は問題ない**」 | 上下 = **the slot** ⇒ Rs does not treat that gap as a problem |
+| 「逆に**上下をきつくしすぎるとクランプしずらくなる**」 | ⭐ Rs **rejects tightening the slot** ⇒ does not require the cable to float inside it |
+
+⇒ ⭐⭐⭐ **Taken together, Rs's description is consistent with the weak predicate — full containment is not being
+demanded.** ⇒ ⭐ **So the 13%-versus-100% trade may not arise in Rs's mechanism at all.**
+
+⇒ ⭐⭐ **p11's proposed form, which p18 adopts: do not raise a new question — ask whether the existing verbatims
+already answer it.** e.g. *"Do 「左右で摩擦が生じれば」 and 「上下の隙間は問題ない」 mean that holding with the claws
+in contact is permitted?"* ⇒ **Rs can answer in one word.**
+⚠ Limits kept: those verbatims reached us **p4 → p18**; neither p11 nor p18 received them from Rs directly. And
+the 「上下」 axis reading rests on **p11's own §27.2.16 adjudication**.
+⇒ ⭐ **If right, one round-trip is saved; if wrong, nothing is lost** — the confirmation costs the same as the new
+question would.
+
+### 40a. `w2:p11` tried to weaken its own number twice before escalating, and both attempts failed
+
+① **"the grid is merely coarse"** — p4's reach points are 0 / 0.35 / 0.6 rad, and **linear interpolation puts the
+crossing at 34.5°**, essentially on top of the 34.4° grid point ⇒ ⛔ **no cheaper roll is hiding.**
+② **"use the other menu"** — `:607`'s wide variant has a minimum of 0.2 rad = 11.5° at **44.8%** containment,
+⇒ ⛔ but menu A's reach curve is **already 16.9 mm short at 20.1°**, so 11.5° very likely does not reach and the
+44.8% is not obtainable. ⚠ p11 does not assert it — **wide's reach is untested.**
+⇒ ⭐ **Two cheap counter-questions closed before the escalation, not after it.**
+
+### 40b. ⚠ The two panes are using the same interpolation in opposite ways — and `w2:p0`'s caution wins
+
+⭐ `w2:p0` guarded the §38 sweep request, and p18 recomputed its figures:
+
+| interval | slope |
+|---|---|
+| 0.00 → 0.35 rad | **−403.7 mm/rad** |
+| 0.35 → 0.60 rad | **−66.8 mm/rad** |
+| ratio | ⭐ **6.0×** |
+
+⇒ Reading the last two points linearly puts the shortfall at zero at **0.6030 rad = 34.55°** ⇒ ⛔ **the linear
+reading says the gap buys almost nothing.**
+⇒ ⭐⭐ **But the curve is strongly non-linear across exactly that gap** ⇒ ⛔ **interpolating over it is the move
+this court has failed at repeatedly today** (the saturated-band extrapolation, the ctrl-219 estimate, the old
+step table).
+
+⇒ ⚠⚠ **So the same arithmetic is doing opposite work in two messages: `w2:p11` uses the linear crossing as
+evidence that no cheaper roll is hiding (§40a ①), while `w2:p0` says that reading cannot be trusted across a 6×
+slope change.** ⇒ ⭐ **p18's disposition: p0's caution governs.** p11's ① is **not** a reason to skip the sweep —
+it is the same interpolation, and it inherits the same weakness.
+⇒ ⭐⭐ **Which strengthens the case: the sweep is worth doing *because* the naive reading says "don't bother."**
+⇒ ⭐ **And p0's one condition on it: report the measured points themselves, and do not produce the minimum by
+interpolation.**
+
+⭐ p0's containment table if the minimum lands there: 0.40 rad ⇒ **21.5%**, 0.45 ⇒ **18.8%**, 0.50 ⇒ 16.6%,
+0.55 ⇒ 14.8%, 0.60 ⇒ 13.3% — **0.45 would be 1.4× the current, 0.40 would be 1.6×.**
