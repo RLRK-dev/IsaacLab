@@ -5341,3 +5341,16 @@ finding, not the totals.** Rule-scope extension = p5's one line.
 **(d) ⭐ And the grace note**: p0 ranks the units rule **above its own 26-item flag** — *"mult-div = dimensionless
 / add-sub = carries units is dimensional analysis; my 'arithmetic literals' was an empirical bucket. Not adopting
 my bucket as the rule was correct."* Bank §4.5 @ `6ac5a6ddfd`.
+
+## 144. Both ends of the axis, one pane — and the two-line procedure that closes the day
+
+**(a) ⭐⭐ p5 claims the morning end too**: the cable-existence hypothesis (§27.2.31-era) was its own — unknown
+conditions (cable present? achieved or commanded? which ctrl?) were **free variables chosen toward the fitting
+side**, so the "physically plausible" composite (7.59 / 0.41 mm) agreed uninformatively. The evening end (the
+promotion via monotonicity — a predicate every opening-dependent mechanism satisfies) was also its own act.
+⇒ **One pane, one day, both ends of**: *a claim its free variables can rescue cannot be tested.*
+
+**(b) ⭐ The procedure, formalized into its memory**: before any promotion, write two lines — ① enumerate the
+claim's free variables ② write the test that kills even at their best choice. ⛔ **If ② cannot be written, the
+report says "consistent with" and never "measured."** ⇒ The maxim now has an executable form on the pane that
+needed it, recorded where /clear cannot erase it.
