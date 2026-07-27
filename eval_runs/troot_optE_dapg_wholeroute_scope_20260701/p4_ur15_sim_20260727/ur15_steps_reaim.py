@@ -83,6 +83,10 @@ Z_SEAT = TABLE_TOP + CLIP_RISER + 0.030 - CLAW_OFFSET  # groove seat, expressed 
 # slightly misplaced cable is simply missed.  The gaps above stay as the measured reference for
 # what a command corresponds to geometrically; they are not the command to grip with.
 CLAMP, HALF, OPEN = 255, 214, 18
+# Rs: the clamp is too fast, halve it.  Stepping the command shut the jaw in 0.544 s (149.2 mm/s
+# of face travel, measured with probe_close_time.py on this model).  Ramping the command over
+# 0.75 s gives 1.084 s (74.9 mm/s) -- half the speed, measured, not estimated.
+FINGER_RAMP = 0.75
 # What holds the cable, per the banked ko design (GD-KoShape-Finger.md:95): the grip is COMPOSITE,
 # "lateral flat-pad (pad1) pinch [dominant] + vertical claw (f1ext/f2ext) straddle".  The claws do
 # NOT pinch -- they pass above and below the cable (f1ext BELOW, f2ext ABOVE, cable between them,
@@ -356,16 +360,26 @@ def clamp_faces(t):
     The clamp face is pad1 on BOTH pads (banked GD-KoShape-Finger.md:95: the flat-pad pinch is the
     dominant contact).  The claws straddle the cable rather than pinch it, so claw contact is
     RECORDED but not required -- requiring it would reject a real pad clamp.
+
+    pad2 is reported SEPARATELY and never counts.  It is the lower box, pad-local z 0 to 18.75,
+    entirely below the slot at 27 to 37 -- a cable touching only pad2 is held below the ko, not in
+    it.  Rs watched a run where one hand had pad1 plus all four claws and the other had pad2 alone,
+    and called it one hand succeeding; the predicate had called it two.
     """
-    pad, claw = set(), set()
+    pad, low, claw = set(), set(), set()
     for i in range(d.ncon):
         g1, g2 = d.contact[i].geom1, d.contact[i].geom2
         for a, b in ((g1, g2), (g2, g1)):
             if a in PADG[t] and b in CABG:
                 nm = mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, a) or ""
                 side = "L" if "_left_" in nm else ("R" if "_right_" in nm else "?")
-                (claw if "ext" in nm else pad).add(side)
-    return pad, claw
+                if "ext" in nm:
+                    claw.add(side)
+                elif nm.endswith("pad2"):
+                    low.add(side)      # the LOWER pad box: below the ko slot entirely
+                else:
+                    pad.add(side)      # pad1: the face that spans the slot
+    return pad, low, claw
 
 
 def grasped(t):
@@ -378,7 +392,7 @@ def grasped(t):
     (task_config.py:277), so the gap has to be positive, under the cable diameter, and not so small
     that the faces have swallowed it.
     """
-    pad, _ = clamp_faces(t)
+    pad, _low, _claw = clamp_faces(t)
     if not {"L", "R"} <= pad:
         return False
     gap, _claw = jaw_gaps(t)
@@ -706,7 +720,7 @@ RX_MID = 0.5 * (C1[0] + C2[0])  # table :1283 "R-hand Y はクリップ間中点
 STEPS = [
     (2, "cable上空へ", (GL[0], GL[1], Z_RISE_REST), (GR[0], GR[1], Z_RISE_REST), OPEN, OPEN, 2.2, None),
     (3, "cableへ下降", GL, GR, OPEN, OPEN, 4.5, None),
-    (4, "cable把持", GL, GR, CLAMP, CLAMP, 3.5, "grasp"),
+    (4, "cable把持", GL, GR, CLAMP, CLAMP, 4.5, "grasp"),
     (5, "持ち上げ", (GL[0], GL[1], Z_RISE_REST), (GR[0], GR[1], Z_RISE_REST), CLAMP, CLAMP, 2.0, None),
     (6, "C1上空へ搬送", (LX1, C1[1], Z_RISE_ROUTE), (RX1, C1[1], Z_RISE_ROUTE), CLAMP, CLAMP, 2.8, None),
     (7, "C1へ押し込み", (LX1, C1[1], Z_SEAT), (RX1, C1[1], Z_SEAT), CLAMP, CLAMP, 2.8, None),
@@ -792,11 +806,22 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                             quiet=True, re_max=0.30, wide=True)
     prev = w
     q_from = {t: qcmd[t].copy() for t in SIDES}
-    d.ctrl[GIDX["L"]], d.ctrl[GIDX["R"]] = lf, rf
+    g_from = {"L": float(d.ctrl[GIDX["L"]]), "R": float(d.ctrl[GIDX["R"]])}
+    g_to = {"L": lf, "R": rf}
     steps = int(secs / m.opt.timestep)
     ramp = int(0.72 * steps)
+    fing = max(1, int(FINGER_RAMP / m.opt.timestep))
+    # On the grasp step the arm finishes moving BEFORE the fingers start.  Overlapping them made
+    # the outcome depend on how fast the jaw happened to shut: the run that clamped did so with the
+    # command stepped, and slowing the close to half speed -- which is what Rs asked for -- moved
+    # the arm further before the faces met and lost the seat.  Going there, then clamping, is both
+    # what the step table says and the only version that does not depend on that race.
+    hold = int(0.55 * steps) if gate == "grasp" else 0
     for s_ in range(steps):
         f = 0.5 - 0.5 * math.cos(math.pi * min(1.0, s_ / ramp))  # smooth start and stop
+        gf = 0.0 if s_ < hold else min(1.0, (s_ - hold) / fing)
+        for t in SIDES:
+            d.ctrl[GIDX[t]] = g_from[t] + gf * (g_to[t] - g_from[t])
         for t in SIDES:
             qcmd[t] = (1.0 - f) * q_from[t] + f * w[t]
             for k, i in enumerate(AIDX[t]):
@@ -850,23 +875,34 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             # Where the slot ACTUALLY ended up relative to the cable, live.  The aim loop predicts
             # this on scratch data; printing both tells us whether the descent is disturbing the
             # cable or the servos are simply not arriving.
-            cw, _ci = cable_at(GL[0] if t == "L" else GR[0])
-            sc_err = (seat_point(t) - np.asarray(cw)) * 1000.0
+            # Measure against the link the hand is actually near, not the link nearest an x
+            # measured at STEP 1.  The old version compared the seat with whatever piece of cable
+            # happened to sit at a fixed x, so once the cable slid along its own axis the
+            # comparison changed identity rather than reporting motion -- one hand printed a 25 mm
+            # miss while holding the cable on all six ko surfaces.  Those numbers are retracted.
+            sp = seat_point(t)
+            _cc = np.array([np.array(d.xpos[b]) + np.array(d.xmat[b]).reshape(3, 3)
+                            @ np.array([CABLE_SEG / 2, 0, 0]) for b in CAB])
+            _ci = int(np.argmin(np.linalg.norm(_cc - sp, axis=1)))
+            cw = _cc[_ci]
+            sc_err = (sp - cw) * 1000.0
             qerr = (np.array([d.qpos[a] for a in QADR[t]]) - w[t]) * 1000.0
-            print(f"[steps] GRASP {t}: slot vs cable, live {np.round(sc_err,1)} mm "
-                  f"(|{np.linalg.norm(sc_err):5.1f}| mm; the band is +-1.0)")
+            print(f"[steps] GRASP {t}: seat vs NEAREST cable link cab{_ci}, live "
+                  f"{np.round(sc_err,1)} mm (|{np.linalg.norm(sc_err):5.1f}| mm; "
+                  f"containment wants the cable centre within +-1.0 mm of the seat)")
             print(f"[steps] GRASP {t}: joints vs commanded {np.round(qerr,1)} mrad "
                   f"-> {'servo did not arrive' if np.abs(qerr).max() > 5 else 'servo arrived'}; "
-                  f"cable moved {np.linalg.norm(np.asarray(cw) - aim_cable[t])*1000:5.1f} mm "
-                  f"since the aim")
+                  f"nearest link is {np.linalg.norm(np.asarray(cw) - aim_cable[t])*1000:5.1f} mm "
+                  f"from where the aimed link was (identity may differ -- not a drift)")
             padg, clawg = jaw_gaps(t)
-            pf, cf = clamp_faces(t)
+            pf, lf, cf = clamp_faces(t)
             print(f"[steps] GRASP {t}: pad faces {padg:+6.2f} mm (design target 4.00 on a "
                   f"O8 cable, task_config.py:277), opposing claws {clawg:+6.2f} mm, "
                   f"claw min over the run {claw_min[t]:+6.2f} mm"
                   f"{'  <- NEGATIVE: non-conservative for transfer' if claw_min[t] < 0 else ''}")
-            print(f"[steps] GRASP {t}: cable touched by pads {sorted(pf) or 'none'} "
-                  f"/ claws {sorted(cf) or 'none'}   clamped={grasped(t)} "
+            print(f"[steps] GRASP {t}: cable touched by pad1 {sorted(pf) or 'none'} "
+                  f"/ claws {sorted(cf) or 'none'} / pad2-only {sorted(lf) or 'none'} "
+                  f"  clamped={grasped(t)} "
                   f"(needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had "
                   f"closed through the cable)")
             print(f"[steps] GRASP {t}: fingers blocked by {sorted(blk) if blk else 'nothing'}")
