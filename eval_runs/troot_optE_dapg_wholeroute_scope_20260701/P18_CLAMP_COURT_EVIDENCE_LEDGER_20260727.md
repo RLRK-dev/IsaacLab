@@ -4289,3 +4289,33 @@ surfaces) ④ ⛔ no fixing (that is p14's court after the gate opens) ⑤ ⭐ *
 PASS-CLOSE must be flagged explicitly** — that becomes a gate/custody question for p12 + p18 (+ Rs), **not p15's
 judgment.** Routing: via p18 with path + content sha + observation time; p12 then sorts by type (design semantics
 → p16 / code defects → p14 later / evidence-custody → p18). **Gate opened: none.** ⇒ Relayed to p15.
+
+## 97. The verifier's first act: verify the spec BEFORE the implementation — and retract its own input to it
+
+**(a) ⭐ Timing was the first correct call**: `w2:p0` read the spec pre-implementation *"because verifying after
+landing means the thing to fix is already a module."* Pin re-derived from the file: match (`3911551c6d07…`, 114).
+
+**(b) ⛔⛔ p0 retracts its own §84(c) input — and my §84(c) is corrected with it.** Its "authoritative env clip =
+VISIBLE-only, collision OFF" conflated **two build paths in one word**: `newton_skill_env_base.py:1908/:1925` set
+`COLLIDE | BROADPHASE` **unconditionally** (committed), while `test_newton_clip_routing.py:1194` gates on
+`_clip_collide` defaulting `"0"`. ⇒ ⭐ **Both citations correct, different files** — and ⭐ **the file p5's spec
+names as the parts authority (`:1858-1864`) is the collision-ON one.** ⇒ ✅ **p5's Tier A "clip collision = ON"
+survives adversarial check**, and `RS71:55` does not contradict it (its own UPDATE text is scoped to the test
+file). ⇒ **§84(c)'s "inherit the default and penetration goes silent" branch dies**; what remains is p4's earlier
+direct measurement (its current clip: contype=1, pushed through anyway) and the port's path choice.
+⚠ p0 names the shape on itself: it warned about 柱/着座 homonyms **in the same message** where it folded two files
+into "the authoritative env." ⇒ **Sixth self-report of the day, adversarially applied to its own bank.**
+
+**(c) ⭐ Three cheap fixes before a line of the module exists** (routed to p5/p4):
+1. `CABLE_SEG`'s cited source is a **comment**; the importable constant **exists** — `task_config.py:136
+   CABLE_SEG_LEN = 0.015`. A comment cannot be imported and its line-sha tracks prose.
+2. The seat's Tier A line cites `float_z` at a source where a closed query finds **0** — a Tier A row depending on
+   an undetermined Tier B quantity absent from its citation. The underlying issue is real (a floated clip's seat is
+   not `GROOVE_CENTER_Z`); representation = p5's court.
+3. ⭐⭐ **The §6.2 guard's predicate does not discriminate its purpose**: line-sha answers "did bytes move", not
+   "did the value move" — false alarm on comment edits, silent pass on re-assignment elsewhere (the exact failure
+   the spec exists to prevent, one level up). Fix is already inside the spec: **§6.4's AST pass can evaluate the
+   SSOT binding and compare values** — one mechanism, both checks; keep byte-sha as notification, never as gate.
+
+**(d)** Declared scope: verified = pin, 5 mechanically-resolvable Tier A sources, §6 predicates. ⛔ NOT verified =
+the 21/10 AST extraction (not re-run), Tier B adoptions, cell buildability (§7 already says one run is needed).
