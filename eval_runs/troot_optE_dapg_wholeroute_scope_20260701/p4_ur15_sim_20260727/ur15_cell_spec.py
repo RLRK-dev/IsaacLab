@@ -452,6 +452,17 @@ def self_check():
     return problems
 
 
+
+# Speak on IMPORT, not only when run as a script.  The thing worth leaving a trace of is a run
+# that used the override, and a run imports this module rather than executing it -- p0 measured
+# that the declaration was silent exactly in the case it exists for.
+if _os_env.get("CABLE_BEND_STIFFNESS_OVERRIDE"):
+    print(f"[cell] ⚠ CABLE_BEND_STIFFNESS_OVERRIDE = "
+          f"{_os_env['CABLE_BEND_STIFFNESS_OVERRIDE']!r} is in force: the cable's bend EI does "
+          f"NOT come from task_config.py:144, and this cell's joint stiffness follows the "
+          f"override. self_check() will refuse while it is set.")
+
+
 if __name__ == "__main__":
     print(f"Tier A: TABLE_TOP={TABLE_TOP} CABLE_R={CABLE_R} CABLE_N={CABLE_N} "
           f"CABLE_SEG={CABLE_SEG} GRIP_HALF_SPAN={GRIP_HALF_SPAN}")
