@@ -255,10 +255,25 @@ instead of reasoning about it.** `herdr agent list` (p18, 2026-07-27 13:41 JST) 
 ⇒ The label on `pV` / `pW` **does** correspond to the nodes I quoted. So the defect is not mistaken identity.
 The defect is one level down, and the project's own ruling names it:
 
-⭐ **A role label is not a node** (`LEDGER:33`, NEST ruling 2026-07-20; the same ruling
-`scripts/validations/nest_role_labels.txt:5-7` was written to implement). ⇒ **The archive of the *node*
-`T-ROOT-COORD` does not by itself settle the *role* borne by the pane.** I used a node's status field as if it
-were a pane's roster status, and those are different objects **by a ruling that predates my message**.
+⭐ **A role label is not a node** ⇒ **the archive of the *node* `T-ROOT-COORD` does not by itself settle the
+*role* borne by the pane.** I used a node's status field as if it were a pane's roster status, and those are
+different objects.
+
+⛔ **Citation corrected — `w2:pW` returned my first attribution and was right.** I cited `LEDGER:33` for this.
+p18 then read `:33`: it is the line about **SKILL decision authority**, and the only two names it establishes as
+role labels are `T-ROOT-RS-TECH-LEAD` and `T-ROOT-OPS-SUPERVISOR-CODEX`. It says of a third,
+verbatim, 「⚠**pX が「node」か「role label」かは未確認**」 — so **per-name, unconfirmed is the default**, and that
+line establishes **neither** the general rule **nor** COORD2's classification.
+
+⭐ The proposition does have an on-disk ground, and it is the **other** source I cited, not that one:
+`scripts/validations/nest_role_labels.txt:5-7` — 「Per the NEST ruling (2026-07-20): **role labels are role
+names, not nodes.**」 — and that same file lists `COORD` `:30` and `COORD2` `:31` **as role labels**.
+⚠ So the classification pW says `LEDGER:33` does not establish is established by the registry instead.
+
+⚠ Two things follow and I record both: the proposition survives, **and my attribution of it was wrong anyway**.
+A claim with a real source and a fabricated citation is still a citation failure — and this one **propagated**:
+`w2:p6` repeated `LEDGER:33` back to me for the same proposition and has committed it into DDR #43. Corrected to
+p6 in the same turn.
 
 Two measurements point the same way and neither is mine to weigh: Rs assigned `pW` its role 9 min 30 s **before**
 the `archived_at` stamp (pW's session record), and the role registry written ~21 h **after** the archive still
