@@ -2874,3 +2874,56 @@ benefited from the opposite.
 ⭐ **On the sweep criterion (§42a), `w2:p5` asks that the record name why it moved**: the criterion changed because
 **p5's own [31.00, 33.00] band was downgraded** (§41) — **its change is the reason the target moved**, and it says
 so rather than leaving the shift unattributed.
+
+## 44. ⭐⭐ The pass criterion, specified — and the sweep is required under either choice
+
+`w2:p0` read what p4's "reach error" actually is (`887d3fefde:912-913`; **p18 confirmed verbatim**):
+`le = np.linalg.norm(pinch("L") - tgt["L"]) * 1000`
+⇒ ⭐ **a 3-D Euclidean distance between the pinch point and the target, in mm — not a containment quantity.**
+The 158.2 / 16.9 / 0.2 figures are all that.
+
+⇒ ⭐⭐ **So the pass criterion is a threshold on that error**, and the containment predicate enters only through
+**how much slack exists along the slot axis**: full containment ⇒ half-width **±1.00 mm**; **straddle ⇒ ±5.00 mm**.
+⇒ ⭐ **Today's downgrade moves the threshold 1.00 → 5.00**, and `w2:p5` asked that the record name **its own
+[31, 33] downgrade as the reason the target moved** (§43).
+
+⇒ ⭐⭐⭐ **And the two existing anchors give the same verdict under either threshold**: 0.35 rad's **16.9 mm fails
+both**; 0.60 rad's **0.2 mm passes both**. ⇒ ⭐ `w2:p11`'s concern (a criterion chosen after the fact) is right in
+principle, but ⭐⭐ **for the measured points the outcome does not depend on the choice** ⇒ **the sweep is required
+either way, and its necessity cannot be argued away by picking a threshold.**
+
+⚠ **One refinement from p0, and it matters**: the error is a **3-D norm** while the tolerance lives on the **slot's
+height axis alone** ⇒ a 5 mm 3-D error could be entirely harmful, or entirely along the cable axis and harmless.
+⇒ ⭐ **The correct criterion decomposes the error into pad-local z** — the same decomposition `w2:p5` asked for
+and p0 identified (§35) ⇒ ⭐ **applying ±5.00 mm to the raw 3-D norm is the conservative reading.**
+
+### 44a. ⭐⭐⭐ `w2:p11` failed to apply the distinction it had itself supplied
+
+⛔ p11 retracts its three-verbatim summation — and identifies the worst part itself: **it was p11 who gave p18
+that very separation this morning**, in `-033 §3`: *"Rs's two sentences are both about z and say nothing about
+the y protrusion"* — which p18 accepted and recorded (§30's correction).
+⇒ ⛔ **Three and a half hours later it put the y sentence in the same bundle as the z ones.**
+⇒ ⭐⭐ **Third instance today of summing orthogonal axes** — the two ~10 mm quantities (§3), p18's reading of
+option B (corrected *by p11*), and now p11's own.
+⇒ ⭐⭐⭐ **Its rule, and it is the sharpest form of the day's recurring lesson: apply the distinction you produced
+to your own next argument first. A rule you hand someone else binds you from the moment you hand it over.**
+
+### 44b. p11's mechanism table and Rs's verbatim name the same quantity — so its prediction leans the other way
+
+⭐ p11's analysis: the **friction** component requires normal force, and at 2.00 mm clearance that force is **0**
+⇒ **the straddle cannot supply friction.** ⭐ Rs's verbatim also names the mechanism **friction** (「左右で**摩擦**が
+生じれば」).
+⇒ ⭐⭐⭐ **So p11's prediction now leans toward "the straddle alone cannot hold"** — the mechanism analysis and
+Rs's own word point at the same quantity.
+⛔ **It remains a prediction**, falsifiable by the axial-load test p11 itself specified (§41b).
+
+⚠⚠ **And p11 ran the direction check on itself:** this prediction falls on the **"the trade is real and the
+escalation is needed"** side — the **work-opening** direction. ⇒ Having erred once today in the **closing**
+direction (§41a), it applies the same severity to the opening one ⇒ **keeps it as a prediction and does not carry
+it as settled.** ⇒ ⭐ **Symmetric scepticism, which is what §41a's lesson actually demands.**
+
+⚠ **A small apparent disagreement, reconciled:** p11 calls the two routes (banked design / Rs verbatim)
+*genuinely independent*, while `w2:p5` (§43) says they are **not two pieces of evidence**. ⇒ ⭐ **Both are right
+about different things, and p11 says so in the same message**: the routes are **independent ways of reaching the
+same question**, but they share **no evidence about the answer** — they point at the same blank. ⇒ **Independent
+question-finding, not independent corroboration.**
