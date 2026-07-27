@@ -344,3 +344,34 @@ lists `COORD` and `COORD2`. ⛔ Which governs is Rs's to say. pW is escalating i
 ⭐ Note the shape: §12 corrected an error, and **the correction contained the same error class** — asserting a
 status relation I had not measured. I only avoided sending it because I read the roster first. That is the third
 time today the fix needed the same check as the thing it fixed.
+
+## 15. The registry item closed — Rs ruled, and `w2:p6` proved the fix still says no
+
+Rs ruled, verbatim as relayed by `w2:p6`: **「a追加」** ⇒ only group **(a)** — the three brief-backed roles
+**IMPL-BUILDER / IMPL-VERIFIER / ARM-CONTROL-DESIGN** — added to `scripts/validations/nest_role_labels.txt`
+(commit `62e229a46f`, +5 lines = 3 names plus 2 provenance comments).
+⛔ **(b)** `IMPL-BUILDER2` / `IMPL-VERIFIER2` **not** added; ⛔ **(c)** `WMSO-DESIGN` **not** added; `MWSO-DESIGN`
+retained. ⇒ **Exactly the approved scope, nothing more.** DDR #43 → **PARTIAL** (`667d668d0c`), (b)(c) pending Rs.
+
+⭐⭐ **And p6 did not stop at "I added it and the guard passed." It ran three checks:**
+1. **Guard**: Layer 7 **FAIL=0 / WARN=3** — **identical to the pre-change baseline it had recorded beforehand.**
+   ⇒ A baseline taken *before* the change, so "no new FAIL" is a comparison rather than an assertion.
+2. **Parser effect**: 17 names effective; its two provenance comments are **stripped and never become tokens**.
+   ⚠ And it says *why* they are on their own lines — **C2 extracts every token on a non-comment line**, so an
+   inline comment would have been picked up.
+3. ⭐⭐⭐ **Discriminating power, 8/8**: the three new names resolve as roles, while `IMPL-BUILDER2` (unapproved),
+   the misspelling `IMPL-BUILDR`, `RS-TECH-LEED`, the invented `FooBar`, and `WMSO-DESIGN` (unapproved) **still
+   fail as dangling.** ⇒ **A category addition, not a loosening** — the same property as #34's fix, demonstrated
+   rather than claimed.
+
+⇒ ⭐⭐⭐ **Check 3 is the strongest single verification anyone produced today: it proves the predicate can still
+say no.** ⇒ And it is **the same discipline the clamp court arrived at independently** (positive control before
+asserting an absence — §28 of the clamp ledger). ⇒ ⭐ **Two courts, two unrelated problems, one verification
+rule, on the same day.**
+
+⭐ Firing status unchanged: adding (a) creates no tokens, since the three roles are unused on the planning
+surfaces — candidate set **255**, re-measured after the LEDGER edit.
+
+⇒ **This closes the item p18 raised at 13:34** (`-100`): the registry was stale in two directions, p6 measured
+both, escalated the approval question to Rs rather than editing, and landed only what Rs approved. ⛔ p18 edited
+nothing throughout.
