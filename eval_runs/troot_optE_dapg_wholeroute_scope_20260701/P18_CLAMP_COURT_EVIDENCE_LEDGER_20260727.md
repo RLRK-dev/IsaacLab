@@ -2798,3 +2798,46 @@ the straddle is good at — a test that cannot come out differently.**
 ⇒ ⭐ **So the premise under §40's confirmation question is a notch stronger than "it rests on p11's adjudication."**
 ⚠ ⛔ **p5 has not received the verbatim from Rs directly either** — the provenance remains a relay, and p5's
 contribution is the conditional reading: *if that sentence is true, 上下 is the slot.*
+
+## 42. ⛔⛔ §40 summed sentences across two orthogonal axes — cause side: p18
+
+`w2:p0` caught it. **The three Rs verbatims do not all point the same way: two are about z, one is about y.**
+
+| verbatim | axis | what it says |
+|---|---|---|
+| 「爪の**上下**の隙間は問題ない」 | **pad-local z** (slot height) | ✅ full containment is not required |
+| 「逆に**上下**をきつくしすぎるとクランプしずらくなる」 | **pad-local z** | ✅ same — and rejects narrowing the slot |
+| ⛔⛔ 「**左右で摩擦が生じれば**ケーブルをコ内に固定できる」 | **y — the jaw's closing direction** | ⛔ **names the holding mechanism as left-right friction = the backplate pinch** |
+
+⇒ ⛔⛔ **The third one is the term today's no-window result made unreachable.** ⇒ ⭐⭐ **It does not permit
+straddle-only holding — it points the other way.**
+⇒ ⛔ **So §40's "taken together they are consistent with the weak predicate" is wrong.** The z pair says *full
+containment is not required*; the y sentence says *holding is backplate friction*. **I added them across
+orthogonal axes.**
+
+⇒ ⭐ **The open question is on the y side, and the confirmation question narrows once more:**
+> ⛔ not *"may the claws be in contact?"* — the z pair already answers that —
+> ⭐⭐⭐ but **"regarding the holding you described as 『左右で摩擦が生じれば』, can the コ hold when the backplates
+> cannot reach the cable?"**
+⇒ **The z-side needs no confirmation. Only the y-side question remains** — and it is the same question §39b
+reached from the banked design, arrived at independently through the verbatims.
+
+⚠ **p0 names the shape, and it is its own §3 finding returning:** *two quantities on orthogonal axes summed as
+if they were one* — the two ~10 mm values in the morning, **and now Rs's own sentences.** ⇒ **The same two axes
+this court spent the whole afternoon separating.**
+
+### 42a. ⭐⭐ The sweep needs its pass criterion written *first*
+
+`w2:p11`: **the pass condition for "reaches" changed today.** Its [31.00, 33.00] band was downgraded (§41), and
+the weak predicate is now the right basis ⇒ ⛔ **so "the minimum reaching roll" depends on how the criterion is
+set** ⇒ ⭐⭐ **write the criterion before the sweep — choosing it afterwards lets the criterion be picked to fit
+the result.**
+
+⭐ **Only two measured anchors exist, and nothing else may be said without interpolating:**
+**0.35 rad ⇒ 16.9 mm error; 0.60 rad ⇒ 0.2 mm.** ⇒ With the criterion fixed, whether either passes is decidable
+**without interpolation**; if neither does, measure between them.
+⇒ ⭐ **Direction only:** a looser criterion needs a smaller roll and yields more containment ⇒ **the move to the
+weak predicate loosens the trade further.**
+⚠ And from p18's sign correction (§40b): the zero lies **beyond** 0.6 rad ⇒ **even 0.6 rad still leaves 0.2 mm of
+error** ⇒ **how that 0.2 mm is treated is part of the criterion.** ⛔ p11 supplies no value — that would be the
+interpolation again.
