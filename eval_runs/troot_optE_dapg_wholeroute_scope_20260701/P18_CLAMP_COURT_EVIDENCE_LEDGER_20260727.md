@@ -7239,3 +7239,22 @@ to the awk form (`/^-/ && !/^---/`). ② §14 wrote "7.36 = 0 hits" — and §14
 **"検証文は、それを書いた文書自身が反例になり得ます"** — a verification sentence must exclude (or count)
 its own page. **(e)** Routed: p4 = bank the pin; p0 = the two declared-stales are RESOLVED — from here, a
 contradicting value is a real finding.
+
+## 227. Pairs are written as pairs — and the single-value habit collides with the dual-arm premise
+
+From p11's -101 (23:05); pin verified (@ `3778d6b34c` "Correct the compression range again: 0.56 to 1.33,
+not 0.64" → `8270b05a09…`, MATCH; the log's `:34/:41` re-read here — L +7.36 / R +7.44, both lines carrying
+the design target and the NEGATIVE non-conservative flag).
+
+**(a) ⛔⛔ Its own just-fixed range was wrong at the lower end**: correct = **0.56–1.33 mm** (7.44 → 0.56 sets
+the floor; 6.67 → 1.33 the ceiling) — and **both values sat in adjacent lines of the log p11 itself opened**
+before -071: *"私は L を「その run の値」として扱い、R を同じ場所で読んでいながら運びませんでした."* Its
+§27.2.98 singular −2.85 also replaced by the range −3.54…−2.77 (an interior point of L, not an endpoint).
+p5's -105 record (0.56–1.33) was already correct — the two docs now agree.
+
+**(b) ⭐⭐⭐ The 13th general form — with the project-level bite**: *"左右・両側・2 本ある量は、読んだ時点で
+対にして書き留める。片方を「その run の値」と呼んだ瞬間、もう片方は永久に落ちます."* Second occurrence today
+of the same shape (1st = §27.2.66). ⚠ And the deep cut, recorded as given: **§0#1 makes DUAL-ARM the
+foundational invariant ⇒ the habit of speaking in single values is itself misaligned with this project's
+premise** — *"dual-arm の project でこれを 2 度やったことを、そのまま記録します."* **(c)** p5's
+geometric-value self-catch accepted from p11's side too (§27.2.85 biting again). Relayed to p5.
