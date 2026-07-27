@@ -4899,3 +4899,40 @@ the guard exempts imports originating from the spec module, or ⭐ the spec mand
 (`spec.CABLE_R`). Routed to p5 (contract) + p4 (implementation). ⚠ p5's one-rule is NOT yet in this version —
 that re-verification remains for the next commit. Earlier measurement stands: the rule catches the 10 misses
 10/10. Bank rev2 @ `ccf872195f`.
+
+## 123. p6: the Ø10 is current state, the step table still says 「解放」, and a sixth self-catch
+
+**(a) ⛔ My `-266(2)` past tense is upgraded**: Ø10 is **not history** — `ur15_cell.py:42` and `ur15_route.py:43`
+carry **0.005 today, tracked and clean** (p6 read all four drivers individually; steps/reaim = 0.004 citing the
+SSOT). ⇒ **2 of 4 committed drivers still hold the thick cable**; what retires it is the wiring, not the passage
+of time. Recorded in #46 as **current state**.
+
+**(b) ⚠ The canonical step table has not moved**: `RL-Routing-Design.md:1315` still reads 「解放」 (clean, last
+touched 07-11) while the ruling says *both hands past the crossing*. ⇒ **Decision moved, record didn't — same
+class as #44.** 07-Design is CC read-only ⇒ ⭐ **the pending-spec-update cluster for Rs now has two members:
+RS71 §0#4 (mouth 10→14) and the step table `:1315` (解放 → 離脱 ctrl).** #47 stays PENDING accordingly.
+
+**(c) ⚠ p6's sixth checker defect, self-caught before writing**: its tuple-extraction picked the FIRST element
+(CABLE_N) as "the radius" for all four files ⇒ noticed by **plausibility** — *"40 cannot be a radius"* — and
+re-measured with the correct form. ⇒ ⭐ A sanity bound on the VALUE caught what the pattern could not.
+
+**(d) ✅ Its separation ruled correct**: the 600 mm ruling is about **cable length (N=40)** and does not touch
+**#45 (grasp span 176 reachability)** — different axes. Confirmed; no correction.
+
+## 124. The contract completes: SOURCED as a class, and the broken check must be shown to fail
+
+**(a) ⭐⭐ p5's decision = option ①, written as a CLASS, not an exception**: **SOURCED** — an `ImportFrom` whose
+module is the spec **is constitutively the single source itself** ⇒ *satisfies* ownership rather than violating
+it. ⛔ ImportFrom of OWNED/RETIRED names from **any other module = FAIL** (a second source). Enumerated: from-spec
+✅ SOURCED / import-as + literal-free assignment ✅ DERIVED / literal reassignment after import ⛔ / from-other ⛔.
+⇒ ⭐⭐ **The guard now confirms provenance positively ("taken from the source"), not just negatively ("did not
+rewrite").** Option ② rejected: cost disproportionate AND it has its own hole (`X = spec.CABLE_R; X = 0.005`).
+⭐ One real hole closed cheap: **`import *` from the spec must FAIL** (AST cannot enumerate the bindings).
+⚠ One limitation recorded, not extended: function-scope shadowing is outside the module-level domain.
+
+**(b) ⭐⭐ The discipline p5 attached to hole ③**: the broken predicate was the one verifying **its own Tier A
+"collision ON"** ⇒ **the fact stands** (p5 read `:1908/:1925` itself — an independent leg) **but the check was
+validated by its own bug** (*a gate validated under the bug is validated by the bug* — the banked 07-15 lesson,
+cited by name). ⇒ ⭐ **Requirement: after the scene.+all() fix, the predicate must be shown to FAIL on p0's two
+counterfactual sources** — the regression-test-fails-without-the-fix discipline, with the counterfactuals already
+built. Pin: spec → `e47fc3bc10…`. **Wiring cleared.**
