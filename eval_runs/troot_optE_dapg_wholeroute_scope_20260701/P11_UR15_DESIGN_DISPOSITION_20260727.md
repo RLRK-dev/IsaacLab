@@ -1762,6 +1762,22 @@ pZ は自説（pristine 土台由来）を **自分の実測で反証**した（
 ⇒ ⭐ **爪は *physics には在り、FK/IK モデルには無い*。** ⇒ **運動学は同一なので IK 解は正しい**（資産の主張どおり・geom のみで body/joint を足さない）。
 ⇒ ⛔ **しかし: FK/IK モデル上で行う *幾何的な検査*（クリアランス・干渉・経路の余裕）は、爪を見ることができない。** ⇒ ⭐⭐ **私の §27.2.30（特異点・経路）で経路を設計するとき、FK/IK 側で余裕を測ると 爪の 5.00 mm 突出が抜け落ちる。** ⇒ **経路の検査は physics 側の model で行うこと。**
 
+### 27.2.36 ✅ **p0 の残した細部を閉じ、⛔ 機構の *既定値の向き* を設計要求として挙げる**
+
+**(a) ✅ p0 の `_visual` 懸念を閉じる（私の実読）:** **既定 geom 名は `f"{body_name}_geom_{n}{'_visual' if just_visual else ''}"`（`import_mjcf.py:597`）ゆえ pad body 上の無名 visual geom は `pad` に一致し得る** — ⇒ ⛔ **しかし その geom は生成されない。**
+- **資産の `class="visual"` は `type="mesh"`**（`2f85_koshape.xml:53-54` 逐語 `<geom type="mesh" contype="0" conaffinity="0" group="2"/>`）
+- **importer 逐語（`:264`）= `If False, geometries of type "mesh" are ignored`**・**`:850` が `parse_meshes` で生成を gate**
+- **生産経路は `parse_meshes=False`**（`test_newton_clip_routing.py:205` / `:220`・`:190` は「`parse_meshes=False` reproduce the S1-derived production index」と記す）
+⇒ ⭐ **mesh geom は作られない ⇒ 既定名を貰う visual geom が存在しない ⇒ COLLIDE を保持する visual geom も存在しない。**
+⚠ **射程: 私が読んだのは `test_newton_clip_routing.py` の当該 2 箇所。`newton_skill_env_base.py:1564` の呼び出しが同じ関数を通ることは *推定*（`ROBOTIQ_STRIPPED_XML` を同 file から import している `:81`）で、私は呼び出し鎖を実行して確かめていない。**
+
+**(b) ⛔⛔ 設計要求として挙げる — この機構の既定値は *fail-open* である。**
+**`:1576` 逐語 = `_labels = list(getattr(proto, "shape_label", []) or [])`**
+⇒ ⛔ **属性名が変われば `_labels` は空 ⇒ 全 `lbl` が `""` ⇒ `"pad" not in ""` は真 ⇒ *pad を含め全 shape の COLLIDE が落ちる*。** ⇒ ⭐⭐ **例外でなく *既定値* で、把持の機構全体が黙って無効になる。**（p5 の指摘・私も逐語を確認した。）
+⇒ ⭐⭐⭐ **本 repo は 同じ問いに *fail-closed* の型を既に持っている: `newton_route_env.py:283` 逐語「A flag-OFF build has 0 such actuators -> raises」** ⇒ **同 file は `:441` 以降 複数の `raise ValueError` で flag の前提を守っている。**
+⇒ ⭐ **設計要求: 機構の起動が lookup に依存するなら、lookup の失敗は *raise* であって *全解除* であってはならない。** ⇒ **姉妹 file に型が在るので、これも発明ではなく *既存の型に揃える* 話。**
+⚠ **⛔ 私は code を変更しない**（実装は p0 / landing は p4）。⇒ **要求として置くだけ。**
+
 ### 27.3 ⭐ p16 の finding への裁定（p18 -088 E が私に振ったもの）
 
 **凍結 D1.1-B v13 `:332` の `grasp_span_error` が `RS71:24` の 88 mm を参照基準として明示引用**している件。
