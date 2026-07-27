@@ -6735,3 +6735,41 @@ via p4's print requirement.
 authorization untouched; if R6's predicate ever feeds an RL-env success condition, the design gate applies at
 that point); p11 = the concrete structure its ④⑤ requirements attach to (settling / servo / inter-hand gates
 per phase); hand-ID still waits on pC's blind leg.
+
+## 204. The green tick gets its boundary — written from the row's own grounds
+
+From p6's -072 (22:01:04); verified here (@ `847438ca81` "Scope the re-grasp tick to the substrate it was
+taken on"; the LEDGER `:64` row re-read with the note in place).
+
+**(a) ✅ No new register — three tests, three noes**: banked-premise touch (RS71's re-grasp content = the
+gripper geometry at `:26/:40`, untouched — p6 read); gate/premise movement (none — the remedy is design-side);
+new carryover condition (none — **#46's three-axis rule already gates the run's outbound numbers**).
+**(b) ⭐⭐ The one needed treatment, done**: LEDGER `:64`'s 「C1→C2 re-grasp 🟢 WORKING — Rs-confirmed
+2026-07-01」 stands, per its own grounds, on `test_newton_clip_routing.py` — the env7 **Newton** driver — and
+⛔ **does not cover the UR15 cell's re-grasp**; it also presupposes Y-span 88 mm, itself pending under #45.
+The scope now sits inside the row, written from the row's own grounds, no new facts ⇒ **"a pass carries its
+scope", planning-surface edition** — the borrowable green is no longer borrowable.
+
+## 205. The requirements land — and the predicate gains its second conjunct
+
+From p11's -091 (22:02); pins verified here (@ `7fa6f71ee5` "Give the control requirement for each re-grasp
+phase", doc sha MATCH `08bd57b35d…`).
+
+**(a) ⭐⭐ R1-R6 requirements in one pass** (highlights): R1 judged at the claw-tip with the working-point
+offset (69.90 ✅ no change; arm-in-posture re-check flagged unmeasured); R2 gated on the OTHER hand's hold
+**under the R6 predicate** + stillness-judged settling (not fixed time); R3 = slot center onto the cable,
+acceptance = band 12.00 ⊕ placement error **as overlap, not product**; instrument = interpolate to the
+centerline (⛔ nearest-link snapping would contaminate convergence with half-pitch·sin), print pad-local y and
+z **separately**; R3's fixed x makes any x-mismatch appear as z error (the 5.55° tilt) ⇒ the z-correction must
+own that authority; **R4's "unnecessary" is CONDITIONED on R3's z authority sufficing** — else descent
+returns; R5 targets the band (not the old 2-8 window), close speed riding step duration; **R6 = a
+conjunction**: ① claw-tip < Ø (no escape) **② cable center inside the slot** (it is in) — ⛔ ① alone is true
+on EMPTY jaws, the same hole grasped() had in the other direction; negative control required.
+
+**(b) ⛔ Deliberately left open, named**: the R3 acceptance threshold (% effective length — formula ready, the
+number comes from the drag load ⇒ **p5/Rs**); the substrate's close-speed ceiling (PhysX conventions not
+carried — the mixing prohibition self-applied again); ⚠ conditional Rs item: if the claws ever become solid,
+R5 becomes a *capture* phase and that (A)(B)(C) choice is Rs's. **(c) ⭐ Its own -089 narrowed by p5's ruling,
+and accepted**: three missing phases → **one** (R3); descent absorbed into R3's z correction, conditionally.
+**(d)** Routed: p5 = the R6 conjunction (a design delta on its claw-tip-only predicate) + the unset threshold;
+p4 = R3 structure + instrument prints implementable now, **R6's final form waits on p5's one ruling**.
