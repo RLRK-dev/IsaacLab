@@ -208,10 +208,20 @@ the larger one:
 | `start-pose IK ... chosen pos 0.00 mm roll` | 20.1° | **34.4°** |
 | `aim ...: roll` | +0.30 rad = **17.2°** | +0.55 rad = **31.5°** |
 
-At **34.4°** the opening-14 figures are 39.9 / 79.7 / 93.0 % for bands 6.00 / 12.00 / 14.00.
-At the **aim** roll **31.5°** the denominator is `22.00·tan 31.5° = 13.48 mm`, so band 14.00
-reaches **100%** — `atan(14/22) = 32.47°` is above 31.5°. The two readings differ by up to
-**7 points**, and one of them flips the top band to full coverage.
+| roll used | denominator `22.00·tan θ` | band 6.00 | band 12.00 | band 14.00 |
+|---|---|---|---|---|
+| 34.4° (start-pose IK, R) | 15.064 mm | 39.8% | 79.7% | 92.9% |
+| **31.5° (aim, R)** | **13.482 mm** | **44.5%** | **89.0%** | **100.0%** |
+| 20.1° (start-pose IK, L) | 8.051 mm | 74.5% | 100.0% | 100.0% |
+| 17.2° (aim, L) | 6.810 mm | 88.1% | 100.0% | 100.0% |
+
+Between the two R readings the figures move by up to **9.3 points** (band 12.00), and the top
+band flips to full coverage — `atan(14/22) = 32.47°` sits above 31.5° but below 34.4°.
+
+⚠ Correcting my own line in this same section: **39.9 / 93.0 are the 34.38° values, not the
+34.4° ones**; at 34.4° they are **39.8 / 92.9**, which is where p11's figures land. And my
+first phrasing said the readings differ "by up to 7 points" — that was the band-14.00 gap
+(7.1); the largest is band 12.00 at 9.3.
 
 ⛔ I am not choosing which roll governs containment; the grasp instant is p11's court, and both
 numbers carry the same provenance caveat as everything else printed by that log. Surfaced only
