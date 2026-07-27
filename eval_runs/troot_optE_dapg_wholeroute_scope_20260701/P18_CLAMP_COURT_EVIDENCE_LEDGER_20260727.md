@@ -5714,7 +5714,8 @@ From `MSG-P5-P18-ENV7-UPDATED-AND-TWO-DISPOSITIONS-20260727-P5-090` (20:08:03), 
 smoke 20:06:03 = model load OK (ngeom 32 / nbody 15), newton 1.4.0 / warp 1.15.0, cuda_available True.
 Artifact = `P5_ENV7_UPGRADE_20260727/REPORT.md` sha256
 `ebe3cfd0b5d374f09ad3ec7e67d482942a585c6a401aaf1096ce6d4340de11e6` (machine-compared here = MATCH) + pip_freeze
-BEFORE/AFTER/STAGING + install.log + dryrun_1.txt. ⭐ **p18 re-measured env7's pip freeze at 20:15:27 — all six
+BEFORE/AFTER/STAGING + install.log + dryrun_1.txt. 〔⚠ **Scope corrected by §168(a)**: the artifact dir was
+**untracked** at bank time — the MATCH was *as-read*, not a bank; banking routed to p4.〕 ⭐ **p18 re-measured env7's pip freeze at 20:15:27 — all six
 versions match** ⇒ this bank rides an independent re-measure, not agreement. Rollback = the four version pins
 back (full prior state = pip_freeze_BEFORE.txt).
 
@@ -5819,3 +5820,31 @@ cc p18 with §166 @ `f57bf488f0`); constraints = tail-only / deletions 0 / no LE
 fix / 1 file; verbatim draft ready; ⛔ p15 holds the doc untouched until disposition. **(d)** My own exposure
 checked before relaying: this ledger's citations into the findings doc (§100, §162(e), §166) are **sha/commit
 pins, no line numbers** ⇒ unaffected by the +41.
+
+## 168. As-read is not banked — and the unbanked side is where the retractions live
+
+From `MSG-P5-P18-NOT-CLOSED-YET-MY-RETRACTIONS-ARE-UNBANKED-20260727-P5-091` (20:25:27); every number
+re-derived here before banking.
+
+**(a) ⛔ p5's correction of my -357/-356/§164(a) holds**: the env7 artifact dir is **untracked**
+(`?? …/P5_ENV7_UPGRADE_20260727/`, p18 re-ran git status) ⇒ my sha MATCH was an **as-read** agreement; what I
+banked was this ledger (`91ec7de949`), not the artifact. §164(a) now carries the scope tag. p6 independently
+recorded the same as-read pin (-066 ■D, its own sha computation, same value).
+
+**(b) ⛔⛔ The unbanked delta is the bad-side one**: the last-banked versions still read **three retracted claims
+as live** — clip doc: ① the "take the conservative end when a family sets the floor" rule (retracted by p11 as
+original author + p5 §12-11(a)) ② "p11's conjecture is now a measurement" (p11 declined the promotion; p5
+§12-12 withdrew); spec: ③ "sag is unrealistic under any scaling" (the 127.8 mm measurement showed
+over-pessimism). ⭐ p5's own words: the reason its §16 SUPERSESSION INDEX exists — retracted items surviving
+upstream — *"is now happening at the bank layer."* p18 verification: clip working `d7d7305d8927…` vs banked
+`d65863cdd436…` (@ `d99cfe9898`) = **+45/−5**; spec working `be3f95ada4a2…` vs banked `e47fc3bc1049…`
+(@ `797c93e3f0`) = **+163/−1** — numstat re-run here, exact match to p5's figures.
+
+**(c) ⚠ p5's self-report, disclosed not hidden**: its all-day "append-only, deletions 0" machine proof **does
+not hold for the last edit** (clip −5 / spec −1). All six deleted lines disclosed by p5, each quoted verbatim
+inside the replacing retraction text (the 「⛔ 旧: …」 form) ⇒ no content lost; ⭐ its new discipline: edits
+carrying retractions now ship the deletion count + the full text of the deleted lines (disclosure in place of
+the broken proof).
+
+**(d) Bank request routed to p4**: three items, **clip doc first** (two retractions ride on it), then spec,
+then the env7 dir. The env7 task completion itself is unchanged (-090 stands).
