@@ -6799,3 +6799,76 @@ court**; held "conditionally unnecessary". **(d)** Routed: p4 — implement in f
 print; R6 conjunction with the backplate conversion; bank the clip pin `e8e280f896…`). ⭐ **The re-grasp
 design loop is CLOSED at the design layer**; remaining = implementation (p4), per-posture z-headroom
 (p11/p4), the drag-load margin (measurement → Rs), and the blind visual leg (pC).
+
+## 207. R3 lands with the ruling's evidence attached — and the crossed pin closes itself
+
+From p4's -081 (22:06:47, crossing -420); verified here (@ `c7c799c150` "Give the re-grasp an aim, and
+measure the predicate that will judge it"; the banked clip blob = `e8e280f896…` = the -099 pin — the cross
+resolves itself; `aim_slot_at(fix_x=…)` at `:557/:572-573`, the "regrasp" gate at `:1190` — re-read).
+
+**(a) ✅ The precision line, resolved as an UNDER-report**: the penetration report covered BOTH clips
+(C1_riser cab19 18.2/13.6/8.3; C2_riser cab16 11.3/8.9/9.8 with the statement at `:31` per p18's grep — p4
+cites `:34`, a blank line here: ±3 citation drift, substance exact). What was actually missing = a
+**quantity**: the seat-link ending at table +4.0 mm was reported for neither clip — the detector measures
+"mm into the box", the log's columns measure "where the height ended": different surfaces. p4's lesson
+verbatim: *"撤回・自己申告にも射程の測定が要る — 過小申告も過大申告と同じ欠陥です."*
+
+**(b) ✅ R3 landed as ruled**: STEP13 measures the cable at RX_MID, corrects y,z only (fix_x = RX_MID — the
+first-grasp §4-Q2 mechanism, no invention); prints the residual (comparable to 1.45–4.89) + the applied y/z
+separately (the R4-return discriminator). ⭐ p11's instrument requirements verified **already satisfied** —
+cable_perp interpolates along segments (docstring citing the half-pitch residual); the jaw-axes decomposition
+prints the three components separately: *"reported as confirmation, not implementation."*
+
+**(c) ⭐⭐ R6 held unwired per instruction — and the ruling's evidence taken first**: a 5-point sweep on THIS
+cell (2 s settle/point): ctrl 214 → claw 1.81 / held True / grasped False (the "released" error side);
+ctrl 236 → claw **−2.59 / held True / grasped True** — ⛔ **claws interpenetrating 2.6 mm still count as
+"holding"**; 3 of 5 points disagree between the predicates ⇒ the claw-tip-only form's lower-bound-only
+weakness is **measured, not argued** — empirical confirmation of the conjunction p5 adopted in the crossing
+-099. ⚠ One question raised and routed to p5: p4 derived the 8.00 threshold from 2×CABLE_R — *"if p5's 8.00
+was a separately measured number, it reverts to a carried number."* **(d)** The crossed pin: p4 verified
+`315b5828…`, the file moved before its commit, and **the git-show procedure caught it in the act** — what was
+banked IS `e8e280f896…`, the -099 content p18 had already verified ⇒ no return needed; the loop closed by the
+procedure working as designed. R6 wiring = GO under the crossed -099/-420.
+
+## 208. The visual leg returns with two positives at the right times — and my dispatch carried a dead path
+
+From pC (22:08:49); verified here (@ `ecd32bb171` "Add pC physical-validity survey for ur15_wide14.mp4",
+survey sha MATCH `3e0d7fc557…`; my dispatched path confirmed absent; the Downloads file = the pinned bytes).
+
+**(a) ⭐⭐ The survey**: 116 samples / both panels / machine contour-scan + per-candidate eyeballing; numbers
+and logs unread. **Positives = the cable through the clip's SOLID at t=22.00 s and t=35.00 s** — ⭐ which sit
+exactly on the log's C1-fix (STEP9, t=22.0) and C2-push/fix (STEP15/16, t=34.4/36.0): Rs's eyes, the log
+columns, and the frames now agree **three ways, one per clip**. Rejected 6 (two-view failures / ridge
+explanations / smoothing); ⭐ **table penetration NOT established** — all 98 machine flags are the cable's
+free end ⇒ the penetration is through the CLIP body; the table surface shows no visual piercing (a
+refinement, not a conflict — p4's seat-link-at-table-height reading concerns the clip's interior).
+
+**(b) ⛔ My dispatch error, owned — and the pin saved it**: -405 pointed at
+`p4_ur15_sim_20260727/ur15_wide14.mp4`, which does not exist (re-checked; the dir's only mp4 is
+`media/ur15_steps_c1c2_20260727_0850.mp4`); pC resolved the intent via the **sha pin** to
+`~/Downloads/ur15_wide14.mp4` (bytes = pin, re-verified here) — content-first pinning rescuing a wrong path.
+
+**(c) ⭐⭐ The blind declared broken, by the analyst itself**: the same bytes had crossed pC twice today under
+other names (the ur15_c1 / ur15_pentest reads) ⇒ *"独立した 2 回目の確認として数えないでください"* — the
+survey stands as a third read of a seen file, honestly scoped. Hand-ID remains without a fresh independent
+visual; the mechanism is hand-independent (§201(d)), so nothing blocks on it.
+
+## 209. The z-margin is a budget with three printed numbers — and IK may not testify about solids
+
+From p11's -092 (22:10); pins verified here (@ `f49796cfb8` "Set the z-margin policy: a budget with two
+measured terms", doc sha MATCH `edea674b8e…`).
+
+**(a) ⭐ The policy**: R4 returns iff **required > available** — a budget comparison, neither side a constant
+(⛔ *"どちらかを定数に置いた瞬間、比較は成立しなくなります"*). required = the cable's z offset at the re-grasp
+x (⚠ 8.7 mm was the first-grasp span's value, not this x's); available = the tool's z mobility at that
+posture = p4's measurement. **(b) ⭐⭐⭐ available is a function of posture, and roll owns the posture** — reach
+already consumed roll (`:585-586`) ⇒ **measure the headroom at the actually-used roll**, never the nominal
+posture — the working-point rule's second application. **(c) ⛔ IK may not testify about solids**: its
+collision rejection rides the contact list, blind to contype=0 pillars/table (§27.2.64) ⇒ an IK-derived "free
+z" can contain paths through solids; back it with the solid-distance geometry (§59(c)); ⚠ and if the `:666`
+fallback fired, the posture never passed rejection at all. **(d) ⭐ Print three numbers, not a verdict**:
+required / available (working-point, geometry-backed) / difference — the sign decides R4; the magnitude feeds
+the next posture choice (*"合否だけだと余裕が 0.1mm なのか 10mm なのかが消えます"*). **(e)** p5's two -099
+items accepted from p11's side (the weak band — same direction as its full-containment argument; the
+backplate conversion — p11 hit the 2.40 saturation floor itself, §27.2.74). Routed: p4 (the measurement +
+three-number print spec); p5 (FYI — the R4 loop closes as a printed budget).
