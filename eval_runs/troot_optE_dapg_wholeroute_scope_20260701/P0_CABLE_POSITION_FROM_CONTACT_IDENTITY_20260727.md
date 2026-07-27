@@ -484,7 +484,50 @@ be widened past that.
 ⚠ Scope: source read only, at `887d3fefde`. I ran nothing, and I am not the designated verifier; this is material
 about a defect I raised, not a verification verdict. ⛔ I propose no change.
 
-## 14. Scope
+## 14. ⛔ -138 (3)/(4): the comparand is 2.00 mm, not 10.00 mm — flagged before the run is authorised
+
+-138 (3) reasons that if the slot moves **13.4 mm** between open and closed and the slot is **10.00 mm** high, the
+open-pose and closed-pose bands do not overlap. ⇒ ⛔ **the 10.00 mm is the wrong quantity to compare against.**
+
+What must overlap is not the slot with itself, but the **cable-centre band** with itself:
+
+| predicate on the cable | admissible centre positions | width | bands overlap iff |
+|---|---|---|---|
+| **fully inside the slot** = **not struck by a claw** | **[31.00, 33.00]** | **2.00 mm** | **Δ < 2.00 mm** |
+| merely overlapping the slot span | [23.00, 41.00] | 18.00 mm | Δ < 18.00 mm |
+
+⭐ The two rows of the first line are the **same band** because **the claws bound the slot**: escaping f2ext needs
+centre ≥ 31.00 and escaping f1ext needs centre ≤ 33.00. ⇒ **p5's requirement — the cable inside for the whole
+closing motion — is exactly that 2.00 mm band.**
+
+### 14.1 The conclusion holds, and by far more than stated
+
+| Δ = 13.4 mm against | verdict |
+|---|---|
+| the **2.00 mm** band | ⛔ **impossible — short by 11.4 mm, i.e. 6.7× the band** |
+| p18's 10.00 mm | would read as short by only 3.4 mm — **understates it by 8 mm** |
+| the 18.00 mm span | ⭐ **possible — 4.6 mm of room left** |
+
+⇒ ⭐⭐ **so the design does not automatically invert.** It inverts **only if** the requirement is full containment
+throughout. Under the weaker requirement — the cable never leaves the claws' span, contact permitted — a window
+still exists, 4.6 mm wide. **Which requirement applies is p5's and p11's call; the arithmetic is not.**
+
+### 14.2 ⛔⛔ The proposed falsifier would return the wrong answer
+
+-138 (4) proposes: fix the arm, close the fingers, measure the slot-centre displacement — *"10.00 mm 未満なら重なる
+帯が在り、狙い点 1 点で足りる"*. ⇒ ⛔ **with a 10.00 mm threshold that test answers "the bands overlap" for every Δ
+between 2.00 and 10.00, where they do not.** ⭐ **It cannot come out right across an 8 mm span of the very
+quantity it measures.**
+
+⇒ ⭐ **the threshold must be 2.00 mm** (or 18.00 mm if the weaker predicate is chosen). The measurement itself is
+the right measurement — only the number it is compared against is wrong. **I raise this before the run is
+authorised, not after.**
+
+⚠ Everything here is conditional on Δ = 13.4 mm being real and directed along the slot's z. p11 flagged the
+direction as unmeasured; §12.1 grounds the **frame** from the vault but **not the displacement**. ⛔ I do not
+propose a value, a predicate, or a run.
+
+## 15. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
