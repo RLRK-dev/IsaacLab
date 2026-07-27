@@ -4630,3 +4630,38 @@ LOCAL slope at each claw on a 30 mm polyline — **not printed** ⇒ the log aga
 cable's discretization (32 × 30 mm)"** ⇒ ⭐ **the four placement errors are a property of the
 gripper+cable+aim-loop SYSTEM, not of the gripper — they do not carry across the pitch change.** No re-measurement
 demanded; the statement is only that the numbers cannot be carried. Bank §27.2.81 @ `214491f161`.
+
+## 111. The falsifier fired: ruling ① is now the condition for the band's margin — and three more supersessions
+
+**(a) ⛔ p5 retracted its §10-3 by 10 mm and adopted p11's floor from its own re-derivation** (backplate inner
+−6.6 / claw inner −11.6 pad-local ⇒ 5.0 proud ⇒ release = **18.00 mm** at Ø8; "+0.7 mm" was the flat-pad reading
+⇒ correct figure **+10.6 from CLAMP 7.36**). Outer width at release = **44.0 vs mouth 22.0** ⇒ §5 strengthens.
+⭐ Diameter dependence now bites this ruling ⇒ **the CABLE_R 0.005/0.004 divergence attaches here.**
+⭐ Frames separated: pad-local claw z invariant (p11) AND `:189`'s 13.4 mm world-z (four-bar rotation) **both
+hold — do not mix.**
+
+**(b) ⭐ Release re-ruling: bounds only, no assignment.** Escape height ∈ **[46.0, 65.7)**, drop ∈ [37.0, 56.7);
+⛔ no interpolation (the §10-3 error WAS linear intuition). ⇒ ⭐⭐ **The curve upgrades from useful to
+cannot-rule-without; the single reading point = backplate gap 18.00** (+ ctrl 214 for the HALF suspicion).
+
+**(c) ⭐⭐⭐ The falsifier p5 armed at `-064` fired on p11's measurement.** Threshold: slope 4.23° (= 1.11/15).
+Measured: **5.55°.** At pitch 0.030 ⇒ slot-axis leakage **1.45 mm > margin 1.11** ⇒ ⛔ **at the current pitch,
+aim-point selection alone eats the band's margin.** At 0.015 ⇒ **0.73 < 1.11** ⇒ inside. ⇒ ⭐⭐ **Ruling ① is not
+instrument hygiene — it is what makes band 12.00's margin exist.** Scopes kept: chord proxies local slope
+(unprinted); 0.73 is "at the current sag"; p5 has not read the log.
+⛔ **And the omitted cost is now written** (spec §9-3, third item): pitch change invalidates the four placement
+points (system property, §110c) ⇒ **executing ruling ① requires re-measuring them.**
+
+**(d) ⭐⭐ Guard contract answered — THREE sets, not one** (p0's hole 1 resolved at the contract level):
+**OWNED** (redefinition fails) / **RETIRED** — CLIP_H, GROOVE_W, CLIP_RISER: **definition itself fails,
+value-independent** / **TIER-C** (free) / ⭐⭐ **anything else ⇒ FAIL** — fail-closed, prompting a spec addition,
+**catching constants invented tomorrow** (enumeration cannot keep up). ⭐ General form: *ownership checks answer
+"did you rewrite my value" and can in principle never see "did you keep what should have been discarded."*
+
+**(e) Supersessions accepted from p0's three items — including one of mine**: float_z reason replaced (the old
+reason cited the question ruling ② dissolved); ⛔ **"default 0" RETRACTED** — fail-closed initial state = "the
+reason to float is not yet measured", **not a decided value** (recording 0 as decided would hide later raises as
+revisions) ⇒ **my §104(d) "defaults to 0" is superseded**; the direction (try the clip on the table; the riser
+may go) survives as direction, not as a recorded default. **REST_TOP demoted to "ungrounded"** — `:66` is a lower
+bound (>60), not a derivation of 150; "weak" was understated. REST_Y/X separated (constraint-grounded, values
+underived). New pins: clip doc `cbe7056fac…` (343), spec `498beac18d…` (207) — bank ×2 with p4.
