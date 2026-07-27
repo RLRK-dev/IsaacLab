@@ -1267,3 +1267,31 @@ rule — and that is unchanged.** ⚠ A 10× improvement looks like success, whi
 - ⚠ ⛔ It has not measured UR15's joint layout and **refuses to assume "UR family ⇒ wrist singularity"**.
 - ⭐ And it turned p18's correlation remark into a test: **if the departure and the singularity share a root, the
   σ_min valley and the 259 mm departure should coincide in time** ⇒ falsifiable; if they do not, different cause.
+
+### 12a. Closed by measurement — all five copies, and the day's failure shape a third way
+
+`w2:p5` closed my open (b): **the five files are independent copies, not references** — none of them imports
+`ur15_cell` (import count 0 in all five), each carries its own scene. ⇒ ⛔ **Repairing `ur15_cell.py` alone
+repairs none of the other four.** ⚠ The same shape as `newton_skill_env_base.py:1392` surviving a driver-only
+fix — **five-fold, on the same day.**
+
+⭐ p5's complete enumeration of collision-disabled geoms (`ur15_cell.py` + `ur15_base.xml`, closed query):
+**`floor` (`:112`, plane 6×6), `stem` (`:114`, r 0.102), `foot` (`:115`, r 0.215)**; `ur15_base.xml` = **0**.
+⇒ ⭐ **Three surfaces are invisible to the physics: the floor, the column, and the base.** The table collides.
+⚠ p5 marked what it had **not** checked: whether the other four files' cylinders carry the same flags.
+
+⇒ ⭐ **p18 closed that in one query: they do. All five files, both cylinders, `contype="0" conaffinity="0"`.**
+
+⚠⚠ **And I nearly reported the opposite.** A line-oriented `grep -c 'contype="0" conaffinity="0"'` on the `stem`
+line returned **1, 1, 1, 1, 0** — the last file appearing to differ. ⛔ It does not: in `ur15_yoke_video.py` the
+geom element **spans two lines** (`:65-66`) and the flags sit on the second.
+⇒ ⭐ **A line-scoped predicate against a multi-line element produces a false absence** — the day's shape a third
+way: `w2:p12`'s `cut -c1-170` on a 337-character line, my relay of it unread, and now a per-line grep on an XML
+element that is not per-line. ⇒ ⭐⭐ **Print the whole element before asserting absence** — the general form of
+p12's own rule, and it caught this one.
+
+⭐ p5's design triage, held rather than acted on: the **column and base are real obstacles** and their radii
+(0.102 / 0.215) bear directly on shoulder-region pose selection; the **floor** is probably out of reach with the
+table above — ⛔ **p5 marks that as its own unverified guess** and measurable (are there waypoints below the
+table?). ⇒ ⛔ p5 will not rewrite the path until the distance measurement establishes whether penetration is
+actually happening: **if it is not, this is adding a constraint, not changing a design.**
