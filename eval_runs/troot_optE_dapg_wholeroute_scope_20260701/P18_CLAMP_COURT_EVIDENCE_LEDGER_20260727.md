@@ -192,8 +192,36 @@ half-width (θ = 1.571°/plate):
 |---|---|---|---|---|---|---|
 | returned | −2.617 | −2.645 | −2.672 | −2.727 | −2.782 | −2.837 |
 
-⇒ **2.6463 is crossed at overlap ≈ 9.0 mm under the θ convention itself.** ⇒ ⛔ **Exceeding it refutes nothing,
-so the path has no discriminating power** — and I published it as a live route to a decision.
+⛔ **My reasoning here was wrong, and `w2:p11` returned it with the arithmetic. Same verdict, different reason.**
+I wrote that 2.6463 is crossed at overlap ≈ 9.0 mm "under the θ convention itself". That crossing happens under
+the **per-plate** reading (1.571° per plate ⇒ 0.02742 rad), **not** under the relative reading the cap belongs to.
+Under the relative reading (per-plate 0.7855°) the floor at overlap 9.053 is **2.524**, and 2.6463 is reached only
+at **overlap 18.0 mm — full overlap, backplate −7.89 mm, i.e. the plates passing through each other.**
+⇒ I compared the two conventions using **different formulas** — family I's constant arm for one and family II for
+the other. p0's original cap was a family-I number; what survived was family II.
+
+⇒ ⭐ **The path is still void, for two better reasons:**
+1. **The cap is unreachable under its own convention** — it needs the plates to interpenetrate completely.
+2. ⭐⭐ **The existing four points already decide it.** The two conventions differ by a factor of two in the tilt
+   term **at every overlap**, so no threshold is needed:
+
+| overlap | relative-reading predicts | per-plate reading predicts | measured |
+|---|---|---|---|
+| 2.932 | 2.440 | **2.479** | 2.47 |
+| 3.680 | 2.450 | **2.499** | 2.49 |
+| 5.923 | 2.481 | **2.561** | 2.56 |
+| 7.418 | 2.501 | **2.601** | 2.61 |
+
+⇒ **The convention was settled before anyone proposed a test for it.** No sweep extension, no threshold.
+
+⭐ p11's own diagnosis of its part is the sharper general form, and it is not the one I had been repeating:
+**it computed how many counts would make the test usable, when the question was whether the test was already
+answered.** ⇒ Not only *"could this come out otherwise?"* but *"has it already come out?"*
+
+⛔ And `w2:p0` declined my apportionment of the blame, with a diagnosis sharper than mine: it used, as its
+discriminator, **a number from the model it had refuted in the adjacent section** — its own table says "family I:
+refuted as an explanation" one paragraph above where its value is installed as a threshold. ⇒ *A refuted model's
+numbers are wreckage, not thresholds.*
 ⚠ `w2:p0` offered it as its own kinematic reading and marked it as such; **I am the one who wrote it into the
 ledger as an open path without asking whether it could come out either way.** That is the same failure I had
 already recorded three times today, committed while writing the record of it.
@@ -239,10 +267,21 @@ the contract.
 (15/15). So the bucket that "dies by definition" **did not die in fact** — which is exactly why it had to be
 measured rather than reasoned about. ⚠ Both p0 and p11 wrote before seeing that result; p18 relayed it.
 
-⚠ **Bound claims need their range attached.** `w2:p0` keeps its family-I values as bounds (all measured points
-sit 0.29–0.33 mm below 2.893). That holds **inside the measured overlap band only**: by p18's arithmetic on p5's
-series, the θ value 2.6463 is crossed at overlap ≈ 9.0 mm and the 2θ value 2.8915 at overlap ≈ 18.0 mm. ⇒ Neither
-is a bound in general.
+⚠ **Bound claims need their range attached — but only one of the two things called "bound" here.**
+`w2:p0` kept its family-I values as bounds; by p18's arithmetic on p5's series the θ value 2.6463 is crossed at
+overlap ≈ 9.0 mm and the 2θ value 2.8915 at ≈ 18.0 mm (p0 recomputed independently: 9.07 and 17.98 at
+0.0275 mm per mm of overlap). ⇒ Neither is a bound in general.
+
+⛔ **Scope correction, from p0: this restriction reaches only the floor bound, not the contact bound.** Two
+different objects were both being called "bound":
+
+| | what it is | depends on the contract? |
+|---|---|---|
+| **contact bound** (p0 §2) | backplate gap **8.188 mm** at which the claws first touch — pure geometry, **first contact so no penetration exists** | ⛔ **no** |
+| **floor bound** (§7–§10) | the reported penetration depth 2.6463 / 2.8915 — never reached, band-limited | ⭐ yes |
+
+⇒ ⭐ My range caveat applies to the second only. **The contact bound — and with it the no-window ordering — is
+untouched by it, and untouched by the version question.**
 
 ⛔ **`w2:p11` computed exactly the number that voids the second path, and read it as enabling the path.**
 p11 finds the floor reaches 2.6463 at overlap 9.053 mm ⇒ backplate 1.057 ⇒ **ctrl ≈ 243.4**, notes p4's sweep
