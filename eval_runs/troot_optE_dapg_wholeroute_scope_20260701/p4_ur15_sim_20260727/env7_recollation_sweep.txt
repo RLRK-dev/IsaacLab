@@ -1,0 +1,33 @@
+ ctrl   pad1 gap   claw gap     reach@roll 0.00   reach@roll 0.30   reach@roll 0.55
+    0      85.19      75.20                 9.4              25.4              37.1
+   18      79.92      69.90                 9.4              24.6              35.7  <- OPEN
+   40      73.17      63.13                 9.4              23.7              34.0
+   60      66.78      56.72                 9.5              22.7              32.3
+   80      60.17      50.09                 9.5              21.8              30.6
+  100      53.37      43.27                 9.5              20.8              28.8
+  120      46.39      36.27                 9.5              19.8              27.0
+  140      39.26      29.13                 9.6              18.8              25.2
+  160      32.02      21.86                 9.6              17.7              23.3
+  170      28.35      18.19                 9.6              17.2              22.3
+  180      24.67      14.50                 9.6              16.6              21.4
+  190      20.97      10.79                 9.6              16.1              20.4
+  200      17.25       7.06                 9.6              15.6              19.5
+  205      15.39       5.19                 9.6              15.3              19.0
+  210      13.52       3.32                 9.6              15.0              18.5
+  214      12.03       1.82                 9.6              14.8              18.1  <- HALF
+  219      10.16      -0.05                 9.6              14.5              17.6
+  225       7.92      -2.30                 9.6              14.2              17.0
+  230       6.05      -2.52                 9.7              13.9              16.5
+  236       3.80      -2.59                 9.7              13.6              16.0  <- CLAMP
+  240       2.30      -2.64                 9.7              13.4              15.6
+  250      -1.13      -2.75                 9.7              12.9              14.7
+  255      -1.04      -2.71                 9.6              12.9              14.7
+
+-- the release point p11 asks for: the pad gap whose CLAW gap is 8.00 mm (a O8 cable) --
+claw gap crosses 8.00 mm between ctrl 190 and 200: ctrl ~ 197.5, pad gap ~ 18.19 mm
+    reach below the cable at roll 0.00 = 9.6 mm
+    reach below the cable at roll 0.30 = 15.7 mm
+    reach below the cable at roll 0.55 = 19.7 mm
+
+-- and at ctrl 214 exactly (p11's suspicion that HALF does not release) --
+pad1 gap 12.03 mm, claw tips 1.82 mm apart  -> a O8 cable CANNOT pass between the claws

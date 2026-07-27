@@ -1,0 +1,14 @@
+  ctrl   roll    deepest below the cable           reached by   exact?
+ CLAMP   0.00                     9.7 mm      right_pad_f1ext      yes
+ CLAMP   0.30                    13.6 mm      right_pad_f1ext      yes
+ CLAMP   0.55                    16.0 mm      right_pad_f1ext      yes
+  HALF   0.00                     9.6 mm      right_pad_f1ext      yes
+  HALF   0.30                    14.8 mm      right_pad_f1ext      yes
+  HALF   0.55                    18.1 mm      right_pad_f1ext      yes
+  OPEN   0.00                     9.4 mm       left_pad_f1ext      yes
+  OPEN   0.30                    24.6 mm      right_pad_f1ext      yes
+  OPEN   0.55                    35.7 mm      right_pad_f1ext      yes
+
+reading: a cable held at this height above the table leaves the lowest part of the
+gripper just touching it, so the minimum safe cable centre is this plus a margin.
+p5 section 4: float_z = (cable centre height) - 9.0 mm

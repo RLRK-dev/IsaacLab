@@ -1,0 +1,15 @@
+groove width read from the clip table: 15.00 mm
+cable 8.00 mm -> it can sit up to 3.50 mm off the groove centre
+=> claw tips must clear 11.50 mm  (p5 states 11.50)
+
+claw tips clear 11.50    -> ctrl  188.08   pad  21.68 mm   tips  11.50 mm
+pad faces reach 21.70    -> ctrl  188.02   pad  21.70 mm   tips  11.52 mm
+
+the two agree to 0.06 ctrl counts  (p5's interpolation said about 188)
+
+reach below the cable at the release command:
+    roll 0.00:    9.6 mm
+    roll 0.30:   16.2 mm
+    roll 0.55:   20.6 mm
+(for comparison the sweep gave 19.7 mm at roll 0.55 for the old 18.19 mm crossing,
+ and 35.7 mm at full open)

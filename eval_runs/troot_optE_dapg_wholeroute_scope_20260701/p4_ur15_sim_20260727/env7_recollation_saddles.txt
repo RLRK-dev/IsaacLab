@@ -1,0 +1,19 @@
+gripper half-extent across the cable axis, closed, counting only the parts that
+reach down to the cable or below: 36.6 mm  (widest: geom10)
+a saddle centre must stay 50.6 mm from any hand centre
+
+  C2 left    hand at    -4.0 mm  blocks [  -54.6,   +46.6]
+  C2 right   hand at   +84.0 mm  blocks [  +33.4,  +134.6]
+  re-grasp   hand at   +95.0 mm  blocks [  +44.4,  +145.6]
+  C1 left    hand at  +106.0 mm  blocks [  +55.4,  +156.6]
+  C1 right   hand at  +194.0 mm  blocks [ +143.4,  +244.6]
+
+SSOT 600 mm (40 x 15): cable spans [-300, +300] mm
+    free for a saddle: [ -300.0,   -54.6]  width  245.4 mm  -> fits 8 saddle(s)
+    free for a saddle: [ +244.6,  +300.0]  width   55.4 mm  -> fits 1 saddle(s)
+    total saddles that fit: 9  -> three saddles FIT
+
+the cell's 960 mm: cable spans [-480, +480] mm
+    free for a saddle: [ -480.0,   -54.6]  width  425.4 mm  -> fits 15 saddle(s)
+    free for a saddle: [ +244.6,  +480.0]  width  235.4 mm  -> fits 8 saddle(s)
+    total saddles that fit: 23  -> three saddles FIT
