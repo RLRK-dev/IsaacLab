@@ -6685,3 +6685,53 @@ the aim residual**, so the next authorized run carries the discriminator.
 **(d) ⚠ The hand-identification caution held open**: the step table's re-grasper is RIGHT (STEP13); Rs said
 LEFT; p4's geometric mapping says no conflict — p5 still correctly holds: ⛔ **hand identity waits for the
 visual side (pC, in flight, blind)**; the mechanism argument is hand-independent either way.
+
+## 202. The gap that wasn't — and a negation that carries its grounds
+
+From p11's -090 (21:54); verified here (@ `0a008d4496` "Check the split for a gap on my axis and report that
+there is none", doc sha MATCH `cf3d6eb10d…`; the interpolation lines `:828/:843` re-read).
+
+**(a) ✅ The split has no gap**: the suspected orphan — "how FAST to close" (a control quantity on its face) —
+dissolves on reading the implementation: `:828` takes g_from at step start; `:843` interpolates
+d.ctrl = g_from + gf·(g_to − g_from) with gf the step-progress rate ⇒ no command jumps, and closing speed is
+**determined by step duration** (the 1.6 / 2.2 s of STEPS), not an independent parameter ⇒ structurally
+already p5's court. **(b) ⭐ The form worth keeping**: *"疑いだけを投げると受け手は在ると仮定して作業します"*
+— the flip side of "a pass carries its scope": **a negation carries its grounds** — suspected, measured, found
+none, said "none" with the measurement attached. **(c) ⚠ One input handed to p5**: because speed rides
+duration, shortening STEP14 speeds the close and changes contact tracking ⇒ **duration is not a timing-only
+quantity** when p5 writes STEP12-14 — the decision p5's, the input p11's. ⚠ Boundary discipline kept
+unprompted: the PhysX-side finger-speed conventions (/diffik-trajectory) do NOT carry to this substrate as-is
+— only the shape of the concern does (the substrate-mixing prohibition self-applied). **(d)** -408(2)'s
+consequence agreed; no run requested; the p5-first order held.
+
+## 203. The candidate withdrawn for something stronger — there is no aim to contaminate
+
+From p5's -098 (21:55:35); verified here (clip pin MATCH `315b5828…`, +43/−0; the wired driver re-read —
+`:1003` RX_MID = mean of the clip x's with its table-`:1283` comment; STEP13/14 rows both target (RX_MID,
+C2[1], Z_RISE_ROUTE); no cable_at / aim_slot_at in the re-grasp path — line numbers sit ±10 from p5's
+citations across the concurrent FLOAT_Z driver edit; the substance is unchanged and **triply grounded**: p5's
+read, p11's §200 read, the log's print absence §201(c)).
+
+**(a) ⛔⛔ The -097 candidate withdrawn — its premise was false**: *"狙いが汚染されているのではなく、狙いが
+在りません"* — STEP13's target is RX_MID, a pure design constant (the clip midpoint); STEP14 closes at the
+same point, tag "regrasp"; the closed query finds every cable-measuring call on the first-grasp side. **The
+re-grasp closes at a geometric midpoint and never looks at the cable.**
+
+**(b) ⭐⭐⭐ The mechanism, named**: STEP12→13 moves at constant height along x — the CABLE AXIS — so the open
+コ **slides along the cable** (the by-design しごき mode); the cable never exits the open コ ⇒ *"掴み直す対象
+が存在しません"* — and with the claws 69.90 mm apart the cable may sit anywhere in a ~70 mm window when
+STEP14 closes ⇒ **the failure mechanism = closing on a y-position that is neither constrained nor measured.**
+
+**(c) ⭐⭐ The remedy is a correction, not an invention** (clip doc §13-3): R1 open ✅ sufficient / R2 axial
+move ✅ as-is / **R3 re-aim ⛔ MISSING** — measure the cable at the new x, correct **y,z only**, x stays the
+design constant / R4 descend — unnecessary / R5 close ✅ as-is / **R6 verdict ⛔ replace** with the claw-tip
+predicate (grasped() errs both ways). ⭐ R3 is verbatim the phase p5 already ruled for the FIRST grasp (§4 Q2:
+*"standoff で 1 回だけ狙い直す・x は狙い直さない・再評価するのは y と z だけ"*) ⇒ **the fix = correcting the
+absence of an existing ruling at this step.** R6's thresholds = the §12-5 floors as-is (release and grasp are
+the same constriction). The post-R3 test = §201(c)'s residual comparison — runs on the next authorized run
+via p4's print requirement.
+
+**(d)** Routed: p4 = bank + implement R3/R6 (⚠ building ≠ running — this responds to Rs's own verdict; run
+authorization untouched; if R6's predicate ever feeds an RL-env success condition, the design gate applies at
+that point); p11 = the concrete structure its ④⑤ requirements attach to (settling / servo / inter-hand gates
+per phase); hand-ID still waits on pC's blind leg.
