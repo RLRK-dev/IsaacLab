@@ -91,3 +91,48 @@ Plus: the §3 size conflict, and (per `pC`) where a ruling like this one should 
 
 This file records a routing/gate ruling and its grounds. It takes no design position, flips no gate, authorises
 no run, and changes no status. Numbers attributed to other panes are their measurements unless marked as mine.
+
+---
+
+## 7. Correction — the scope wording did not cover the file I used as grounds
+
+**Cause side: p18.** `w2:p5` found that §1's conclusion and its grounds sit on different surfaces.
+
+I wrote the directive as *"stop all writes **under the memory directory**"*, and used `w2:p5`'s carry as grounds
+for the scope being wider than `MEMORY.md`. But p5's carry file is
+`thread_isaac_lab/thread-vault/02-Workflow/HANDOFF_p5_vtdesign.md` — **in the repo, untracked, not under the
+memory directory at all** (p18 measured: 105852 bytes, mtime 2026-07-26 21:19, `git ls-files` → untracked).
+
+⇒ **The wording did not cover the very file it was argued from.** Same shape as the day's recurring type: the
+surface I measured and the surface I concluded about were different.
+
+**Corrected directive:** the HOLD covers **the memory directory in full, plus any file a pane has named as its
+carry**, wherever that file lives. p5 has kept its handoff frozen regardless of the wording, which is right —
+the freeze comes from the original user disposition, not from my phrasing.
+
+## 8. The queued env update is a spec-surface event, not only a venv event
+
+`w2:p5` measured that `RS71-System-Spec-SSOT.md:15` itself records the environment (p18 confirmed, verbatim):
+
+> `Env: env7 Newton 1.2.1 / mujoco 3.8.1 SolverMuJoCo, UR15×2 + Robotiq 2F-85. HEAD `7afa84b463`.`
+
+⇒ The queued update to newton 1.4.0 / mujoco 3.10.0 **makes this spec line false the moment it runs.**
+So the update touches a spec surface, not just a virtualenv. p5 does not hold that line's court and has not
+touched it; it is surfaced here for the line's owner.
+
+⚠ Two further measurements on the same line: it does **not** name `mujoco_warp` or `warp-lang` (the same omission
+`w2:p0` disclosed in its own provenance — different surface, same shape), and its `HEAD` pin `7afa84b463` is
+**already stale** (p18 measured current HEAD well past it; the shared branch moves continuously).
+
+## 9. Two quantities that must not be cross-compared
+
+`w2:pB` flagged a collision risk before anyone hit it:
+
+- pB's banked **24.0 mm** = distance between the two pad **body origins** (`mjOBJ_BODY`, `Lg_left_pad` / `Lg_right_pad`)
+- p4's new **−1.3 mm** = **geom face** separation via `mj_geomDistance`
+
+⇒ Both can hold at `ctrl=255` simultaneously, because the pad geoms are offset from their body origins.
+⛔ **Neither refutes the other. Do not put them in the same column.**
+
+⚠ pB also measured that on-disk `ur15_steps.py` has already moved off its banked pin, so line numbers in pB's
+document must be read at commit `bfb517862c809943042074bae6eb6e51e4f70875`, not on disk.
