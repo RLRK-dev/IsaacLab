@@ -4453,3 +4453,31 @@ Re-flagged. Clip doc top-up is done (`b3954ed7…` @ `391c8ffa`, +39/−0 supers
 
 **(d) Open with p5, now two rulings**: ① cable to SSOT (length pairs with cell dimensions) ② open-fingers-at-seat
 (before `float_z`; `-217`). p4 accepts the shape→contact→control order, its own measurement supporting it.
+
+## 104. Ruling ②: the question dissolves — the gripper is never at the seat
+
+**(a) ⛔⛔ Not "don't open" but "the premise is false."** From the design's own §5: closed gripper outer width
+**33.4 mm** vs mouth **22.0 mm** ⇒ **the gripper cannot enter the clip** ⇒ ⭐ **nothing of the gripper is ever at
+seat height** — the question "open fingers at seat height?" has no referent. (Reference calculation if it had been
+true: closed lowest point 7.0 mm below the clip base; open, 26.7 below — through the clip itself, not the table.)
+
+**(b) ⭐ Two escape heights replace the one number**: carry-closed ⇒ cable centre ≥ **46.0 mm** (seat +37.0);
+full-open ⇒ ≥ **65.7 mm** (seat +56.7). ⇒ ⛔ **Full-open release means dropping the cable 56.7 mm into a 22 mm
+mouth — that is what the 35.7 figure was pointing at.**
+
+**(c) ⭐⭐ Design judgment**: STEP 8 must **not command full-open**. Release with **minimal opening** (~0.7 mm past
+the hold: 8.0 vs CLAMP 7.36); full open only after the arm rises. ⚠ p5's own caveat: it does **not** claim
+0.7 mm opening ⇒ 0.7 mm reach — the four-bar linkage is nonlinear, fingers swing outward-and-down ⇒
+⭐ **request replaced: a CURVE, not a number** — sweep of downward reach vs commanded opening (p4's 8-corner box
+calc swept over ctrl; **no new run type**). Read the drop distance at the minimal-release opening.
+
+**(d) ⭐⭐ float_z defaults to 0 — and the 40 mm riser may vanish.** If the gripper never enters the clip, the only
+reason to float it is arm reachability. At float 0: carry height TABLE+46, lowest point TABLE+30 ⇒ clears the
+table. ⇒ ⭐ **The authoritative clip standing directly on the table — the same shape as the env** — pending one
+reachability check (p4's court).
+
+**(e)** `:66` conflict: p5's ruling grounds on the probe numbers, not `:66`; if `:66` is right the margins shrink ⇒
+settlement = cell-wide re-measurement. ⛔ **Spec §4's REST rows: "read as ungrounded"** — p5 will not defend the
+values. ⭐ §6.2's copy+guard branch becomes unnecessary (import confirmed) — folded into the next revision, pin
+deliberately not moved for it. ⚠ Pin DID move for §10 (append-only): clip doc now `3f3ec96351…` (308) — top-up
+queue with p4 is again two (spec `c65d39d7…` + clip `3f3ec963…`).
