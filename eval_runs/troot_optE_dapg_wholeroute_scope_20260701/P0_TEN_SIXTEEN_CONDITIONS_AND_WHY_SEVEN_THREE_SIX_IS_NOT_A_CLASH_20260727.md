@@ -148,6 +148,36 @@ And the success run sits between the two: face gap **7.36** ⇒ geometric overla
 past the floor, read as **2.45**. The no-load destination is **3.80**, so a jaw travelling there
 was stopped by the Ø8.00 cable at 7.36 = **0.64 mm of compression**.
 
+### 2.5 The asset that explains the mechanism is **not** the asset under LOCK
+
+p11 quotes `:164-165`:
+
+> Without this line the opposing claws jam at -0.07mm while pad1 is still 9.98mm open, so the
+> flat pads can never reach the cable.
+
+That comment is in the **ported** `_ur15_2f85_koshape_actuated.xml` only. Closed count on both
+files for both strings:
+
+| | `"9.98"` | `"never reach"` |
+|---|---|---|
+| `_ur15_2f85_koshape_actuated.xml` | **1** (`:164`) | **1** (`:165`) |
+| `2f85_koshape.xml` (banked LOCK) | **0** | **0** |
+
+⇒ my earlier closed count of **0** on the LOCK file was correct, and it was correct *about that
+file*. The explanation exists, in the other one. The comment even names its own origin —
+*"Restored from the banked LOCK design 2f85_koshape.xml:176"* — so **whoever did the port wrote
+down the reason the LOCK never carried.**
+
+⚠ Consequence for the disposition question: the two tracked assets differ, and Rs is to decide
+which is the LOCK reference. If the LOCK asset is chosen, **this annotation is not in it** —
+the `<exclude>` line is, but the sentence explaining that it is what lets the flat pads reach
+the cable is not. Carrying the line without the sentence is how the mechanism gets rediscovered
+a fourth time.
+
+Its number is pre-widening: **9.98** against p4's measured **10.16** (0.18 mm apart, the same
+quantity — already recorded at `P0_CABLE_POSITION_FROM_CONTACT_IDENTITY_20260727.md:814`). The
+widening moved the claws in z only, so it remains the y-axis stop.
+
 ---
 
 ## 3. The consequence p18 asked me to cross with p5's observation
