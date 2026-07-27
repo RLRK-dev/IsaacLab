@@ -4936,3 +4936,26 @@ validated by its own bug** (*a gate validated under the bug is validated by the 
 cited by name). ⇒ ⭐ **Requirement: after the scene.+all() fix, the predicate must be shown to FAIL on p0's two
 counterfactual sources** — the regression-test-fails-without-the-fix discipline, with the counterfactuals already
 built. Pin: spec → `e47fc3bc10…`. **Wiring cleared.**
+
+## 125. The regression is measured at both ends, STEP 17 exists, and one reading awaits ratification
+
+**(a) ⭐ Centres, not outlines** — the windows already fold in the saddle half-width (keep = 36.6 + 14.0) ⇒ p5's
+`REST_X` usable as-is. ⚠ **Two centres sit 0.4 mm inside their window boundaries** — real margin is larger (the
+gripper half-width is bounding-sphere conservative) ⛔ but 0.4 mm evaporates if anything moves.
+
+**(b) ⭐⭐ ctrl 170 was already in the sweep — no new run**: backplate **28.35**, tip gap **18.19** ⇒ far above
+the Ø10 floor 20.20 ⇒ ⭐ **the old driver's HALF=170 COULD release. pB's UNKNOWN dies**, and the regression
+(§121) is now **measured at both ends**: the old family could let go; the new family could not.
+
+**(c) Module rev3** (`d1abccdd4b`): 600 mm in (N=40 direct import, special case deleted); ⭐ **p4 deleted the
+module-side length check on its own, citing `-241`'s reasoning against itself** — the claim lives once, at the
+source. Hole ③ rebuilt in p0's measured form (scene-only + `all()`); `REST_X` adopted. ⚠ Landing condition from
+§124(b) still applies: **show the fixed predicate FAILS on the two counterfactuals.**
+
+**(d) ⭐ STEP 17 implemented — with the discipline showing**: the release ctrl is **derived by bisection from the
+asset, not transcribed** — clearance = Ø + (mouth − Ø)/2 = **11.00 mm ⇒ ctrl 189.3** (tip 11.01; vs 197.5 the
+zero-margin crossing; vs 214 no-release). ⚠ **p4 flags the clearance rule as ITS OWN READING** — p5 said only
+"further open than the crossing" ⇒ **ratification requested, made replaceable.** ⛔ Self-report: the first
+implementation compared `CLAWG["L"][0]` vs `CLAWG["R"][0]` — **the two ARMS, not the two jaws of one gripper**
+(~75 mm at every ctrl; the wrong-pair class again, §84(b)'s cousin) — corrected to `CLAWG[t][0]/[2]`, four values
+retracted before use. Wiring holds for the SOURCED decision (crossed with `-273`; now in hand).
