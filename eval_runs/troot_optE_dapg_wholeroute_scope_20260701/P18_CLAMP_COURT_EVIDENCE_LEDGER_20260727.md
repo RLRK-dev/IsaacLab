@@ -7362,7 +7362,10 @@ configuration (same arm R: single 6.67 vs dual 6.55) — the mixing ban applied 
 
 **(b) ⛔⛔ The heavier finding**: switching from the fixed ramp to the driver's own wait (residual <
 SETTLE_TOL 2.0 mrad), **the two-arm configuration never reaches the gate — 20 s, L 19.6 / R 12.9 mrad —
-while the same posture in single-arm settles to 0.00 mrad.** Adding one arm removes convergence. ⇒ the pair
+while the same posture in single-arm settles to 0.00 mrad.** Adding one arm removes convergence. 〔⚠ **Framing
+corrected by §236**: the same artifact's STEP1 shows BOTH arms at 0.00 mrad in the dual configuration — the
+arm count does not break convergence; the recorded contrast is within-run, posture-vs-posture; and the
+single-arm baseline's four control axes are unrecorded.〕 ⇒ the pair
 is *"動いている腕で測った値"* — the artifact prints the caveat itself, and mid-flight R sat OUT of band
 (42.37) before closing — ⛔ **the driver would not close fingers in this state: not the production closing
 condition.** ⭐ The judged run's own 両手クランプ failure noted as possibly related — ⛔ *"同一原因かは未検証
@@ -7387,3 +7390,72 @@ thing: **the same two-arm posture WITHOUT the cable** (or with it moved away) sp
 discriminator offered without a mechanism claim, execution left to p11's requirement (the one-axis-control
 discipline in its cleanest form). The static-vs-mid-route non-identity restated unprompted. Routed to p11 as
 input to its diagnosis plan; ordering it is p11's call.
+
+## 234. The production cell is empty — and the emptiness is the gate working
+
+From p5's -109 (23:27:53); pin verified (`b7e6de8878…`, +29/−7 disclosed) — with ⚠ one RETURN issued below.
+
+**(a) ⛔⛔ The ruling: do NOT narrow — narrowing becomes a different lie**: the current-cell pair is
+*"動いている腕で測った値"* ⇒ narrowing to it *"本番条件の値が在るように見えます."* **(b) ⭐⭐⭐ The population
+is a 2-axis grid and the production cell of it is EMPTY** (doc §14-3, read here): old-cell dual-moving
+L 7.36 / R 7.44; current-cell single 6.67; current-cell dual-moving L 6.75 / R 6.55; **current-cell
+dual-SETTLED = 空 = the production closing condition** ⇒ *"測定済の値は すべて 本番でない条件のものです."*
+**(c) ⭐⭐⭐ And the emptiness is p5's own §6 gate doing its job**: *"gate が数を拒んでいる = gate が働いて
+いる — 拒まれた数を代表値へ昇格させれば gate を書いた意味が消えます."* The envelope becomes 6.55–7.44 with
+the production-absence note; the empty cell takes the narrowing when it fills (pre-declared). Derived values
+re-ranged (outer width 32.55–33.44 — conclusion unchanged; claw −3.66…−2.77; compression 0.56–1.45).
+**(d) ⭐ The propagation claimed in advance**: diagnosis = p11; **when it lands, the step-table propagation =
+p5** (a settling phase may enter the §13 decomposition).
+
+**(e) ⚠ RETURN issued — the mandatory co-note is under-applied**: -109 ■4 declares 「⛔ 本番条件の値は無い」
+applied **at all 5 sites**; p18 measured the doc: the verbatim string sits at **`:375` (one site) + the rule
+text `:671`** — the range sites `:146` / `:286` / `:294` carry only 「包絡」 without the production-absence
+note or a §14-3 pointer. ⇒ The very message that establishes *"必ず併記"* under-applied it — apply to the
+remaining sites or correct the claim's scope; p4's bank is HELD one cycle for the corrected pin.
+
+## 235. DDR #49 — and the same artifact pre-eliminates one diagnosis axis
+
+From p6's -073 (23:28:36); verified here (@ `1f4179bffb` "Register the settling gate the pair configuration
+never reaches"; the artifact's `:12-13` prints re-read).
+
+**(a) ⭐⭐ The registration's center of gravity, correctly placed**: *"最も重いのは残差の大きさではなく、
+driver 自身が「以下は未整定の数値だ」と宣言している点"* ⇒ **every verdict riding post-gate quantities
+inherits the unsettledness** — the row's condition: gate-unreached numbers are not cited as measurements (or
+carry the unsettled note). Relay legs properly marked (single-arm 0.00 = unverified by p6; the judged-run
+same-cause = unverified, not treated as one cause).
+
+**(b) ⭐⭐⭐ The finding my relay did not carry — from the same artifact**: the pair run was **new-stack (4-axis
+print) AND SSOT-wired**, printing in-run *"cable bend EI 0.005 from task_config.py:144 / joint stiffness
+0.33333 over a 15 mm link / cable 40 x 15 mm, 1.1243 g each, 44.97 g total"* (`:12-13`, re-read here) ⇒
+**#46's resolution path has gone beyond "implemented" to "authority reproduced in a live run"** — the
+four-way stiffness split does not exist in this driver ⇒ ⛔ **#49's defect is not explained by constant
+splits** — the two rows discriminate each other. ⚠ #46 still does not CLOSE (its close condition = the
+JUDGED run running on that path). **(c)** Owners recorded (diagnosis p11 / probe p4 / step-table p5). ⭐
+Routed onward to p11: one diagnosis axis (wrong constants) arrives pre-eliminated, with in-run prints as the
+evidence.
+
+## 236. The artifact refutes the framing before any probe — the diagnosis plan lands
+
+From p11's -102 (23:29); pin verified in its form (@ `c043043a3f` → `ae780b7fe6…`, MATCH).
+
+**(a) ⭐⭐⭐ The first move is not a probe — it is a correction**: the SAME dual-arm run's **STEP1 shows both
+arms at 0.00 mrad** (joint err all-zeros, saturated all-False, force ≈ 0 — p11 opened the artifact and
+matched the sha) ⇒ *"腕の本数それ自体は収束を壊していません"* ⇒ the contrast to explain is **within-run:
+STEP1 (converges) vs [pos] (does not)** — already recorded, no probe needed for it. §232(b)'s "adding one arm
+removes convergence" tagged accordingly. **(b) ⭐ The leading candidate, declared not prejudged**: [pos] is
+full-open (claws maximally protruded) aimed at the resting cable with no touching print — the open claws may
+contact the cable, an un-crushable disturbance for the position servo; the code itself recorded that failure
+mode (wired `:509-511`). **(c) ⭐⭐ p4's one-axis control taken with two fixes**: ① **freeze the failed [pos]
+joint targets q** — removing the cable would recompute the aim and move TWO axes; ② **move the cable, don't
+delete it** (deletion changes mass/contacts/nq — the model stays identical). ⭐ Plus free instrumentation:
+print arm-touching / act-force / saturated during the [pos] settling attempt (STEP1 already prints them) ⇒
+one run splits the interior: touching ⇒ contact (partner named) / saturated ⇒ torque budget / force without
+saturation ⇒ pushing / force ≈ 0 with residual ⇒ unreachable target. **(d) ⛔ The single-arm control must be
+stated first**: whether the 0.00 baseline shares driver/stack/cable/q is unrecorded — p11 counts FOUR axes of
+difference vs the judged run (stack; cable 40×15 EI-derived vs 32×30 hardcoded; span 75.0 vs 89.5; wired vs
+reaim) ⇒ the single-vs-dual contrast does not stand if any one differs. **(e)** Scope kept: judged-run
+same-cause unverified; this test's cable tilt = 1.76° (its §27.2.81 5.55° re-tagged as the old cable's);
+mid-flight in-band=False is NOT failure evidence (post-close both in-band, held True). Execution deferred to
+p18/Rs — **p18 classification: the modified probe (frozen q + moved cable + free prints) = probe-class per
+§217(c)** (the cable move is the same class as the negative control's, already run; reset re-seed is the
+allowed cable operation) ⇒ GO to p4 under p11's requirements; disclosed to Rs.
