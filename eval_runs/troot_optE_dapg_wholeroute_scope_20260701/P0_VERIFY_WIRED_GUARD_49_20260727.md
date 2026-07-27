@@ -206,6 +206,47 @@ same-name-different-thing findings, caught by opening the line instead of trusti
 `x0 = -CABLE_SEG * CABLE_N / 2.0`, `z0 = REST_TOP + CABLE_R`, and
 `pos="{x0:.4f} {REST_Y} {z0:.4f}"` — the cable's placement is now built entirely from owned names.
 
+## 4.7 The cable mass — p5's arithmetic verified, and one consequence they did not state
+
+The authority is real and measured, not asserted. `task_config.py:138-139` verbatim:
+
+> *Cable mass MODEL-TRUTH = 44.97 g (~45.0 g): capsule volume × ρ=1100 → 1.1243 g/seg × 40
+> [measured: `s5_p1_probe_rev7_result.json gates.cable_mass.measured_kg = 0.04497085511684418`]*
+
+⇒ authoritative linear density = 1.1243 g / 15 mm = **0.0750 kg/m**.
+
+| configuration | mass per segment | segment | linear density | vs authority |
+|---|---|---|---|---|
+| before the ruling | 0.004 (literal) | 0.030 | 0.1333 kg/m | **1.78×** |
+| **now, as wired** | 0.004 (literal) | **0.015** | **0.2667 kg/m** | **3.56×** |
+
+Both of p5's ratios reproduce, and **p5 used the right one**: 1.78× is the configuration the
+measured 127.8 mm was taken in, and sag ∝ linear density at fixed span and tension, so
+127.8 / 1.778 = **71.9 mm** — p5's ~72. Their second figure also reproduces:
+71.9 × (299.2/380)² = **44.6 mm** — p5's ~45.
+
+### ⭐⭐ The consequence: the seg-halving doubled the error
+
+The template substitutes the segment length but keeps the per-segment mass as a literal —
+`:168` `fromto="0 0 0 {CABLE_SEG:.4f} 0 0" … mass="0.004"`. Halving the segment while holding the
+mass per segment **doubles the mass per metre**. So as currently wired the cable is 3.56× too
+heavy rather than 1.78×, and a run would show roughly
+
+**127.8 × (3.556/1.778) = 255.6 mm of sag** — twice the sag of the run that produced the 127.8.
+
+⇒ **the 600 mm ruling's fidelity gain and the mass substitution have to land in the same change.**
+Taken alone, the ruling improves the quantisation floor from 15.0 to 7.5 mm and simultaneously
+doubles the linear-density error. Total cable mass as wired is 40 × 4 g = **160 g** against the
+authority's **45 g**, whose service load `:141` puts at 0.44 N.
+
+⚠ The 255.6 mm is a scaling estimate on the same three free variables p5 named, not a measurement,
+and it inherits the provenance caveat on the source log. The falsifier is the same single run p5
+already specified — mass restored, same span.
+
+✅ And my L² selection stands for the reason p5 gives: both the measured value and the baseline it
+was compared against came from the same heavy cable, so choosing between L² and L⁴ was a ratio
+question and the common factor cancels.
+
 ## 5. Scope
 
 **Did**: re-derive both pins; read the guard; reproduce the 49; classify the reasons; prove the
