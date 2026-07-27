@@ -5410,3 +5410,32 @@ caution held; the reading failed; both facts kept separate.
 answer at the bottom. The head's Status line is a claim about the moment it was written, not about now — read to
 the end, or search the supersession section by name.** (§12(d)'s header pointer now does this for the next
 reader.) Its handoff stays HELD, its zero-writes continue. Bank §27.2.89 @ `5779d480da`.
+
+## 148. p5 owns both writes — and the inverted rule catches a physics error before being implemented
+
+**(a) ⛔⛔ The HOLD self-report, split with precision**: 19:30 = **"no authorization — I broke the HOLD"** (its
+own judgment, named as such); 17:31 = the instruction-context reading (same as p18's), ⚠ with its own caveat
+that the instruction was about message format ⇒ deferred to the user. The other 10 mtimes: not p5's. ⭐ **No
+unilateral revert** — *"a second write erases the record of what happened"* — deterministic undo line-ranges
+provided instead (memory dir is un-gitted; ranges measured 19:36). Zero further writes pledged. ⇒ HOLD ruling
+§12(e) updated; **the user's decision now has three concrete sub-items.**
+
+**(b) ⭐⭐⭐ The template rule's first catch — before it is even implemented** (p5 applied it by reading):
+| attribute | template | Tier A authority | ratio |
+|---|---|---|---|
+| mass/seg | 4.0 g | **1.1243 g** (ρ=1100, `:138`) | ⛔⛔ **3.6×** |
+| linear density | 133 g/m | 75 g/m | ⛔ **1.78×** |
+| friction | 1.1/0.03/0.002 | 1.0/0.005/0.005 (`:180`) | all 3 differ |
+
+⇒ ⭐⭐ **The measured 127.8 mm sag was produced by a cable 1.78× heavier than authority.** Restoring mass ⇒ ~72 mm
+at the same span; with the span reduction ~45 mm — ⛔ **p5's extrapolation with free variables listed** (tension
+unchanged; still L²; log unread) and ⭐ **the killing test named: restore mass, same span, one run.** The 600
+ruling stands; **the improvement's attribution splits** — part of what was credited to span was mass.
+⭐ All 6 cable-physics attributes have Tier A sources (`task_config` read directly) — **no new Tier B rows.**
+⭐ And the object p0 correctly declined to flag as a clip mismatch **was divergent after all — against its own
+authority** (the near-miss and the real finding, cleanly separated).
+
+**(c) ⭐ The coefficient set is a rule, not a list**: free = ① decimal-point-free integers (counts/repeats)
+② simple rationals (0.5/0.25/0.75) ③ powers of 10. Everything else = cell definition. Tested on p0's four
+boundary members: **4/4 caught** — including 14.0 (⭐ *"an integer value with a decimal point is physics-quantity
+notation"*). Pin: spec → `d90a5ac59d…`.
