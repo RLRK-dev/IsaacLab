@@ -117,7 +117,70 @@ was a discrepancy *from* was wrong.
    is moot. ⭐ This is pZ's own rule — *verify the instrument can represent the value before explaining a
    discrepancy* — applied one level up, to the instrument's contract rather than its range.
 
-### 5b. A discriminator nobody has used yet
+### 5c. ⭐⭐ SUPERSEDES 5a — both remaining items closed by measurement, within the hour
+
+**(1) The instrument's contract is no longer an assumption.** `w2:p5` probed it directly in mujoco 3.8.1 with two
+synthetic boxes of the claws' dimensions (⛔ **not a THREAD run** — no asset, harness, GPU or gate; it needed no
+run authorisation and asked for none):
+
+| y overlap | returned | `fromto` direction |
+|---|---|---|
+| 0.50 / 1.00 / 2.00 mm | **−0.50 / −1.00 / −2.00** | **y** |
+| 3.00 / 5.00 / 5.93 / 7.42 mm | **−2.400 every time** | **z (+2.40)** |
+
+⇒ ⭐ **Minimum-translation semantics confirmed, and the y→z switch happens exactly at the plate thickness —
+visible in the instrument's own output.** ⇒ `w2:pZ`'s premise (3), the item I had put at the top of the stack,
+is **measured**. ⚠ Both p5 and `w2:p0` first read the docs and found the same single sentence
+(`mujoco.h:628`, identical in the Python `__doc__`): *"Return smallest signed distance between two geoms…"* —
+⛔ **the penetration case is documented nowhere.** The reservation was justified; it is now discharged by probe,
+not by doc.
+
+**(2) The two families are discriminated, on synthetic boxes, before touching p4's data.** At θ = 1.571° per
+plate:
+
+| overlap | probe returned | family II predicts | family I predicts |
+|---|---|---|---|
+| 2.93 | −2.478 | −2.480 | −2.893 |
+| 3.68 | −2.499 | −2.501 | −2.893 |
+| 5.93 | −2.561 | −2.563 | −2.893 |
+| 7.42 | −2.601 | −2.603 | −2.893 |
+
+⇒ ⭐ **Family II matches to 0.002 mm; family I is out by 0.29–0.33 mm.** ⛔ The floor is **not constant** once
+tilted — it grows with overlap. ⚠ p5 notes the 0.002 mm residual is same-sign and same-size on every row ⇒ a
+second-order term remains, and p5 claims nothing finer than 0.002 mm.
+
+**(3) The tilt convention is settled, and two independent derivations agree.** `w2:p0` derived it from the asset
+kinematics: the left chain's `left_driver:128` / `left_spring_link:142` carry `quat 0 0 0 1` (180° about z) while
+every joint has `axis 1 0 0`, and `equality:200` couples them 1:1 ⇒ equal joint angles rotate the two pads
+**oppositely** about world x ⇒ **relative angle = 2θ**, θ being the per-plate angle. p5's probe was parametrized
+the same way (A at −θ, B at +θ) and what fitted was `t + overlap × radians(θ)` — **half the relative angle**.
+⇒ ⭐ **The two agree: relative = 2 × per-plate, and p4's 1.571° is a per-plate angle**, so p5's use of it was
+convention-correct. (The forms coincide: `(overlap/2)·sin 2θ ≈ overlap·θ` at these angles.)
+
+⇒ ⭐⭐ **Refined disposition (p18).** The two propositions are different and both are now settled, in opposite
+directions — recording them separately, not collapsing them:
+
+- **"There was a 0.17 mm excess over an upper bound" — WITHDRAWN.** The bound was miscomputed. Nothing explains
+  an excess that did not exist, and no account should be written as if something did.
+- **"What is the datum −2.57?" — EXPLAINED.** It is the moving floor at overlap 5.923 (predicted 2.561–2.563,
+  0.007–0.009 mm from the datum), and the explanation was tested against a probe of the instrument that
+  **could have refuted it and did not**.
+
+⛔ **What is still not established, and must travel with the above:** p5's probe used **synthetic boxes**, not
+the real pads (which also carry `pad1`/`pad2`, and whose tilt comes from the four-bar linkage); **p4's 1.571°
+itself was not validated** by the probe; and the probe covers **mujoco 3.8.1 with default flags only**
+(`nativeccd` and friends untested). ⇒ **Applying this to p4's sweep still requires p4's recomputation from raw.**
+
+⚠ **A coupling nobody has flagged: the queued env7 upgrade replaces the library whose contract was just
+measured.** newton 1.4.0 / mujoco **3.10.0** would move `mj_geomDistance` out from under every number in this
+section, and the pane holding this measurement (`w2:p5`) is the pane that performs the upgrade. ⇒ The probe
+should be re-run on 3.10.0 before these numbers are relied on afterwards. Surfaced, not directed.
+
+⭐ **A free second path, from `w2:p0`, still open:** the θ-convention cap 2.6463 has only 0.0363 mm of headroom at
+ctrl 239. If p4's sweep has points above 239 whose floor exceeds 2.6463, the θ reading is refuted and 2θ stands
+alone — deciding it independently of p0's kinematic derivation, with no new run.
+
+### 5b. The discriminator that did the work
 
 The four formulas are **not the same formula**. They split into two families with different predictions:
 
@@ -134,6 +197,20 @@ p4's independent measurement, overlap from the offset relation) — which is the
 
 ⚠ p5 states its own limits and p18 preserves them: p5 worked from **p18's relayed numbers, not p4's raw**, so a
 recomputation from raw is required; and p5 claims **the form, not the coefficient**. ⛔ p18 adds no number here.
+
+⛔ **Correction (p18) — I misattributed the cause of `w2:p11`'s +0.32 mm miss, in dispatch `-110`.** I wrote that
+p11 mistook the tilt convention. p11 returned it and is right: it used 1.571° **as the per-plate angle and
+doubled it inside its own formula**, so its 2.891 sits on p0's 3.142° row — **convention-correct**. Its miss came
+from **using a constant arm (half-width) where the actual overlap belongs**. ⚠ And p0's kinematic derivation puts
+2θ on the asset-supported side, so **p11's number was the better-founded of the two**; what failed was the shape
+of the formula, not its angle. ⭐ p11 then recomputed p5's form independently — zero free parameters, all four
+points within 0.01 mm — and **retracted its own formula in favour of it**.
+
+⭐ Both `w2:p11` and `w2:p0` draw the same contrast, and it is the day's most useful one: p11's earlier
+cable-present fit put **one free parameter on one number and could not come out otherwise**; this form puts
+**zero free parameters on four numbers** and then survived a synthetic-box probe built to break it.
+**Same word "agreement", different epistemic objects.** p0 marks its own position precisely: its formula is
+**refuted as an explanation, intact as a bound** — all four points lie under its 2.6463 / 2.8915 caps.
 
 ## 9. Custody — `w2:pZ` left this court on Rs's direct instruction, and three corrections would have evaporated
 

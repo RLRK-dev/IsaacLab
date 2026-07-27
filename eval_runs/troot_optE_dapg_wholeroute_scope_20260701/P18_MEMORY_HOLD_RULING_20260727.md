@@ -275,6 +275,36 @@ A claim with a real source and a fabricated citation is still a citation failure
 `w2:p6` repeated `LEDGER:33` back to me for the same proposition and has committed it into DDR #43. Corrected to
 p6 in the same turn.
 
+## 13. Correction — "absent from the file" is not "absent from the owner's knowledge"
+
+**Cause side: p18.** In `-109` I routed the UR15 premise change to `w2:p12` and justified it with:
+
+> p12's handoff contains **0** occurrences of `UR15` (`grep -c`) ⇒ the owner of the frozen artifact does not know
+> the premise changed.
+
+⛔ **The predicate does not discriminate.** "The word is not in the handoff" is equally consistent with *the owner
+does not know* and *the owner knows but has not written it onto a surface that is frozen or on hold*.
+**It was the second.** p12 reports it measured the UR15 change on disk at 12:56 and measured DDR #41's substance
+itself at 13:09 — including the frozen `v13:332` line verbatim, both citation sources, and that
+`task_config.py:21-22` / `:235` still agree with `§0#2` (Y = ∓0.35, `GRIP_HALF_SPAN` = 0.044) — and **sent both
+to my pane**. ⇒ Nothing in `-109` §(2)(3)(4) was new to p12; it matched p12's own measurements.
+
+⇒ ⭐ The aggravating part is not the wrong conclusion, it is **where the disproof was**: in my own inbox, from the
+very pane I was making the absence claim about. I asserted an absence about a sender without checking what the
+sender had sent me.
+
+⭐ **What survives:** p12 states the routing *judgement* was right — the owner belonged on the path — and that it
+was genuinely off the path for a reason on its side: it had measured the change but had **not written it to any
+surface that survives `/clear`**. It has now (`02-Workflow/HANDOFF_pQ_rstechlead2_wmso.md`, content sha256
+`818988fc38320c4d4f29d64126ab000802c2bb58612bf3b85d27ec37e19c5730`, observed 13:50:34 JST, collation commit
+`ae9aa0e1b3`), recording DDR #41 as not-fired plus its firing condition and the one exposed line.
+⚠ p12 verified against §11's table that this handoff is **not** a named carry and so is not under HOLD. Confirmed.
+
+⚠ **This is the same shape as §12, §12a, and the `LEDGER:33` citation — four times in one session, and the
+project's memory already carries it as a ⭐⭐⭐ lesson with 14+ prior instances.** The invariant I keep breaking:
+**a null result is only evidence if the query could have come out otherwise.** ⛔ Recording it here rather than in
+the memory topic file because that file is still frozen under §11 — the memory write waits on the user's answer.
+
 Two measurements point the same way and neither is mine to weigh: Rs assigned `pW` its role 9 min 30 s **before**
 the `archived_at` stamp (pW's session record), and the role registry written ~21 h **after** the archive still
 lists `COORD` and `COORD2`. ⛔ Which governs is Rs's to say. pW is escalating it.
