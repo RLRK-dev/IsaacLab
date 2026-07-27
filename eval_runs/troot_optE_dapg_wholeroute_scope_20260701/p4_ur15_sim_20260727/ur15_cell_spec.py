@@ -470,13 +470,23 @@ def offset_at(pad_gap_mm: float) -> float:
     return pad_gap_mm - claw_from_backplate(pad_gap_mm)
 
 
-def release_floor(pad_gap_mm: float) -> float:
-    """The BACKPLATE gap at which a cable can leave [mm] = 2 x CABLE_R + offset(that gap).
+def release_floor(seed_offset_mm: float = 10.20) -> float:
+    """The BACKPLATE gap at which a cable can leave [mm].
 
-    p5 -100's exact form.  Comparing at the backplate is what makes it measurable: the claw-tip
-    channel saturates near closure and this one does not.
+    p11 -094: the definition is IMPLICIT -- the floor is the gap where the tips are exactly one
+    cable-diameter apart, and the offset has to be evaluated AT that gap, not at wherever the jaw
+    happens to be:
+
+        floor = 2 x CABLE_R + offset(floor)
+
+    Written the explicit way it looks like it needs a gap you do not have yet.  It converges at
+    once because the offset only moves 0.22 mm across the whole range: seeded at 2r + 10.20 it
+    goes 18.20 -> 18.19 -> 18.19.  The seed does not decide the answer; the fixed point does.
     """
-    return 2.0 * CABLE_R * 1000.0 + offset_at(pad_gap_mm)
+    floor = 2.0 * CABLE_R * 1000.0 + seed_offset_mm
+    for _ in range(3):
+        floor = 2.0 * CABLE_R * 1000.0 + offset_at(floor)
+    return floor
 
 
 def claw_from_backplate(pad_gap_mm: float) -> float:

@@ -675,8 +675,14 @@ def held(t, dd=None):
     `grasped()` answers neither: p5 showed it says held when the claws have closed through each
     other and released when the cable is still surrounded by them.
     """
-    pad = jaw_gaps(t, dd)[0]
-    return pad < _spec.release_floor(pad) and cable_in_mouth(t, dd)[0]
+    # ⚠ WHY the conversion is here and not everywhere (p11 -094(2)).  The two phases are not the
+    # same case.  At RELEASE the floor sits at a backplate gap of 18.19 mm, where the claw-tip
+    # channel still reads honestly -- converting there is insurance.  At CAPTURE the jaw is at a
+    # backplate gap around 7 mm with the tips about -2.9 mm, which is INSIDE the saturated band:
+    # read directly it comes back -2.6 whatever the truth is.  So the conversion is mandatory here
+    # and optional there, and anyone tempted to simplify this back to a direct tip reading should
+    # know it silently stops discriminating exactly where this predicate is used.
+    return jaw_gaps(t, dd)[0] < _spec.release_floor() and cable_in_mouth(t, dd)[0]
 
 
 def jaw_gaps(t, dd=None):
