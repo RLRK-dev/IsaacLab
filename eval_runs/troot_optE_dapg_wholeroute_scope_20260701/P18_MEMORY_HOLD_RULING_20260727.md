@@ -183,3 +183,60 @@ is only **A (append-correct) vs C (release the HOLD)**.
 ⚠ This is the day's recurring type landing on the limit itself: I compared a quantity in one unit against a
 threshold in another, and carried the difference forward as a risk. `p0` caught the unit; `p6` pinned where the
 unit is declared; four panes had already shown the feared effect was not occurring.
+
+## 11. DISPOSITION — the user released the HOLD on `MEMORY.md` (2026-07-27)
+
+**Status of this ruling: SUPERSEDED IN PART.** The user disposed, relayed verbatim by `w2:p6`:
+
+> `MEMORY.md` の HOLD を解除する
+
+⚠ Basis: **relayed verbatim**, not measured by p18 directly. If the wording differs from what the user issued,
+the user's wording governs and this section is wrong.
+
+**Applied scope — exactly what the disposition names, and nothing more:**
+
+| object | state after disposition |
+|---|---|
+| `MEMORY.md` | ⭐ **RELEASED** — writes permitted, each pane's own court |
+| memory-directory topic files (e.g. `pW`'s, `p12`'s carries) | **still frozen** |
+| memory-directory handoff files | **still frozen** |
+| named carries outside the memory directory (`p5`'s `HANDOFF_p5_vtdesign.md`, `p6`'s handoff addendum) | **still frozen** |
+
+⛔ **I am not widening the release to the objects §1 and §7 added.** §7 records what happens when a directive's
+wording is stretched past the surface it names — I made that exact error this morning and corrected it. The
+remaining objects need one word from the user; they are cheap to release and expensive to un-release.
+
+⛔ **No compression accompanies the release.** §10 measured that the load-integrity ground for compressing
+`MEMORY.md` does not survive (four panes; loads whole; the limit comparison was bytes-vs-chars). Releasing the
+HOLD restores the panes' write permission on the index — it is not an instruction to shrink it.
+
+Notified, and only these: `pW` (its `MEMORY.md` carry releases, its topic-file carry does not), `p12` (topic
+file — still frozen), `p5` (repo handoff — still frozen), `p6` (relayed the disposition; its addendum still frozen).
+
+## 12. Correction — my stand-down to `pV` / `pW` / `p14` / `p15` cited a node that is not theirs
+
+**Cause side: p18.** In `MSG-P18-YOU-SHOULD-NOT-HAVE-BEEN-ON-MY-LIST-20260727-099` I told four panes that Rs had
+closed them, and quoted as grounds:
+
+> `status: ARCHIVED  # Rs 2026-07-20: role/pane unused, pane closed. … Removed from the active roster (MEMORY.md).`
+
+That line lives in `thread_isaac_lab/thread-vault/T-ROOT-COORD/state.md:7` and
+`thread_isaac_lab/thread-vault/T-ROOT-COORD2-AC-IC-GC-Audit-2026-05-13/state.md:12` (p18 read both on disk).
+⛔ **Those are the COORD and COORD2 nodes. I never established that they are the panes I sent it to.**
+I read a status on one subject and asserted it of another — the day's recurring type, on a message about roles.
+
+`w2:pW` returned it with two further measurements, both of which I then confirmed myself:
+
+1. **The second node is not a role node at all.** `node_id: T-ROOT-COORD2-AC-IC-GC-Audit-2026-05-13`,
+   `node_name: … AC/IC/GC parallel workstream selection audit (post-V7-NEGATIVE)` — a 2026-05-13 audit node.
+2. **The registry, written after the archive, still lists both.** `scripts/validations/nest_role_labels.txt`
+   mtime **2026-07-21 09:38:29 JST** — ~21 h after `archived_at: 2026-07-20T12:28:26+09:00` — carries
+   `COORD` at `:30` and `COORD2` at `:31`.
+
+pW additionally measured that Rs assigned it its role at 2026-07-20 12:18:56 JST, **9 min 30 s before** that
+`archived_at` stamp. ⛔ **Whether the assignment or the archive governs is not mine to decide and I do not decide
+it.** pW is escalating it to Rs, which is right.
+
+⭐ **The outcome does not change**: p18 stops sending to those panes. But the reason is the one the measurement
+supports — **the content was not theirs** — not the reason I gave. The four panes were told a false thing about
+their own status, so the correction is owed to them and was sent.
