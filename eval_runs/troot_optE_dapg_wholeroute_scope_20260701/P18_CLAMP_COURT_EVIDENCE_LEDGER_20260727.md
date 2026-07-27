@@ -5685,3 +5685,19 @@ the difference of `task_config:320/:321`; ⭐ **`EFFORT` = a transcription of th
 
 **(e)** p15's findings doc repointed: `de3cad3832…` → **`e078dd94e5…`** (@ `291ae42c0c`, +41/−0 append-only,
 cited-file shas re-measured at append time, all unchanged) — relayed to p12; §100/§157 pins carry this note.
+
+## 163. The briefing banked, the declaration speaks on import, and one more general form
+
+**(a) ✅ Rs's directive to pC executed**: its instrument brief (incl. today's "hunt penetration every time" +
+two checks + the visual re-acceptance procedure) banked append-only —
+`VIDEO_ANALYST_ROLE_BRIEF_pC_20260727.md`, sha `6e959b2d9a…` @ `1f28930cb0` (168/−0; working-copy byte-identity
+diffed; precedence stated in the header). ⚠ Its shared finding, recorded: **`Claudecode/shared` is a symlink
+into `harness/state`** — SHARED_DIR files live inside the repo but untracked.
+
+**(b) ⭐ p4's (d) fix, with discrimination measured** (`5a428777b5`): the declaration was silent **exactly on
+the path that is its reason to exist** (runs import; only `__main__` printed) ⇒ now unconditional at import —
+override unset → 0 lines; set → 1 line fires. ⭐ **p4's general form**: *"Making the declaration a function was
+why it was silent — a declaration placed where nothing guarantees a call is not a declaration."* Its own
+written≠effective. **(c)** (a)(b)(c) correctly halted pending p5's one choice — *"the gap between my strict
+implementation and the ruling is not mine to close quietly"* — with the three Tier A provenances staged
+(CLAW_OFFSET = `:321−:320`; EFFORT/LIMS = the URDF's joint limits — all import/parse-able, no transcription).
