@@ -102,6 +102,55 @@ not sufficient condition. The residue after a fix should be re-measured rather t
   catching.
 - `strict=False` is documented as a loud-printing wait rather than a pass. ✅
 
+## 4.5 The two new rules, measured before they are implemented (MSG-P18-310)
+
+### The units rule — the gap I went looking for is not there
+
+I expected **call arguments** to escape a rule phrased as *multiplication/division = dimensionless,
+addition/subtraction = carries units* — `math.radians(20.0)` puts a real cell constant in neither.
+Measured: **0 bindings** in the wired driver have their only unclassified literals in call
+arguments. The gap does not occur here. Reported as a non-finding.
+
+⭐ What the census does show is that the two named kinds are a small minority. Every numeric
+literal site among the module-level bindings, by immediate syntactic parent:
+
+| parent | count | rule says |
+|---|---|---|
+| bare inside a tuple/list/dict | **86** | bare literal — in scope ✅ |
+| subscript | 67 | excluded ✅ |
+| **unary (a negated literal)** | **13** | ⚠ **not named** |
+| mul / div | 9 | dimensionless ✅ |
+| add / sub | 8 | carries units ✅ |
+| comprehension (`GeneratorExp` / `DictComp`) | 4 | ⚠ **not named** |
+| call argument | 1 | ⚠ not named — but harmless here |
+| comparison | 1 | excluded ✅ |
+
+⇒ **the negated case is the one that matters**: `REST_X = (-0.300, -0.055, +0.245)` is a **Tier B
+value**, and each of its entries parses as `UnaryOp(USub, Constant)`, not as a bare constant. An
+implementation that classifies by immediate parent will not see them as bare literals. Folding
+`UnaryOp` over a numeric constant into the bare case fixes it; leaving it out loses the very row
+the 600 mm ruling just added.
+
+### The template rule — the attribute list has to be wider than "geometric"
+
+Counting XML attributes in the wired driver that carry a number the f-string does not substitute:
+**59 sites across 28 distinct attributes**.
+
+| group | attributes | sites |
+|---|---|---|
+| geometric | `pos` 11, `size` 8, `fromto` 2, `axis` 2, `anchor` 2, `range` 2 | **27** |
+| **contact / physics** | `friction` 2, `damping` 2, `stiffness` 2, `condim` 2, `mass` 2 | **10** |
+| rendering / viewer | `rgba` 6, `ambient`, `diffuse`, `specular`, `offwidth`, `offheight`, `znear`, `width`, `height`, `texrepeat`, `reflectance`, `rgb1`, `rgb2`, `timestep`, `contype`, `conaffinity`, `type` | 22 |
+
+⇒ a geometry-only list covers **27 of 59**. The **contact group is the one worth adding**: the
+cell spec already owns `CLIP_SOLREF` and `CLIP_FRICTION` at Tier A, so a `friction=` or
+`stiffness=` baked into a template is the same failure the rule exists to catch, one axis over.
+The rendering group is genuinely run-specific and can stay out.
+
+⚠ My attribute scan is a regex — it strips `{…}` and looks for a remaining digit — so the counts
+are indicative, and at least one (`type`) is a false positive from a digit inside a non-numeric
+value. The grouping is the point, not the exact totals.
+
 ## 5. Scope
 
 **Did**: re-derive both pins; read the guard; reproduce the 49; classify the reasons; prove the
