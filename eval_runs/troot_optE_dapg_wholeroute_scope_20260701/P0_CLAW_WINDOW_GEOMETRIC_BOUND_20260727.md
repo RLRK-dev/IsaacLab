@@ -286,7 +286,74 @@ occurrence is labelled in place, but so that no figure can be lifted out of a ta
 
 ⛔ They are never the same number and must not share a column.
 
-## 9. Scope
+## 9. -110: the convention settled from the asset, the instrument contract checked, and my formula split again
+
+### 9.1 (2)(a) — the mutual angle is **2θ**, and the asset alone settles it
+
+-110 (2)(a) puts the θ-vs-2θ convention in p4's and my court. It is decidable **read-only**:
+
+- `left_driver` (`:128`) and `left_spring_link` (`:142`) carry `quat="0 0 0 1"` = **180° about z**;
+- every joint has `axis="1 0 0"` = **local x** (`:39`);
+- ⇒ after that 180°, the left chain's local x points along **world −x**, so equal joint angles — and the equality at
+  `:200` couples the two drivers **1:1** (`polycoef="0 1 0 0 0"`) — produce **opposite** rotations about world x;
+- ⇒ the two pads' **relative** rotation is **2θ**;
+- ⇒ and a box is **invariant** under a 180° rotation about its own z, so the mirror itself contributes **nothing**
+  to the box-to-box relative orientation.
+
+⇒ ⭐ **mutual angle = 2θ = 3.142°, cap = 2.8915 mm.** ⚠ This assumes the two *followers* reach equal angles; the
+drivers are coupled but the followers are passive, so asymmetric contact could break it.
+
+⚠ Consequence for the record: pZ's floor −2.647 corresponds to mutual **θ** and p11's 2.891 to mutual **2θ** while
+labelled θ. On this derivation **p11's value is the one the asset supports and p11's label was the slip**, not the
+number. I state that as my reading of the kinematics, not as a ruling.
+
+### 9.2 (2)(b) — the instrument contract is genuinely undocumented, but it carries its own witness
+
+I checked the installed MuJoCo rather than assuming. **The only documentation that exists locally is one sentence**,
+identical in the C header and in the bindings:
+
+> `mujoco.h:628` — *"Return smallest signed distance between two geoms and optionally segment from geom1 to geom2."*
+
+(the same string is the `doc=` field of the `mj_geomDistance` `FunctionDecl` in `mujoco/introspect/functions.py`,
+and the Python `__doc__`.) ⇒ ⛔ **nothing states what "smallest signed distance" means once the geoms
+interpenetrate.** -110 (2)(b) is confirmed: all four floor formulas rest on an undocumented reading.
+
+⭐ **But the function returns `fromto` — a 6-vector holding the segment from geom1 to geom2.** That segment is the
+**witness of what the number measured**: at a penetrating configuration its two endpoints say directly whether the
+returned value is a thin-axis minimum translation or something else. ⇒ **the contract is observable, not merely
+assumable**, and it needs **no new run** if the sweep already captured `fromto` (it is the optional 6th argument).
+⇒ offered to p4's court; I am not requesting a run.
+
+### 9.3 (3) — my formula survives as a bound and fails as an explanation. Third time today.
+
+-110 (3) separates two families and lets p5's data discriminate. Mine is in family I (tilt term ∝ the constant
+half-width), so **my floor is constant in closure**. p5's measured floor **rises**: ctrl 227 → 2.47, 229 → 2.49,
+235 → 2.56, 239 → 2.61.
+
+| | verdict |
+|---|---|
+| as an **explanation** of the trend | ⛔ **refuted** — a constant cannot produce a monotone rise |
+| as a **bound** | ✅ **intact** — all four measured values sit below both my caps (2.6463 / 2.8915) |
+
+⇒ I withdraw the explanatory reading of §7-§8 and keep the bound. p5's family fits with **zero free parameters** and
+reproduces the old datum at ctrl 235 to **0.01 mm**; mine does not compete with that and should not be quoted as if
+it did.
+
+⭐ **This is the third time today the same split has appeared in my own work**: §2's bound held while §3's magnitude
+failed; §6's tilt-free part held while the fitted part failed; now §7's mechanism holds as a bound while its shape
+fails. **The tilt-free / bound-shaped parts survive; the parts that carry a fitted or assumed parameter do not.**
+
+⭐ **A second, independent route to 9.1, free.** My θ-cap is 2.6463 and p5's floor at ctrl 239 is 2.61 — only
+**0.0363 mm** of headroom left. ⇒ **if the floor rises past 2.6463 at any higher ctrl, mutual-θ is refuted and only
+2θ survives.** If p4 already has points beyond ctrl 239, that settles 9.1 with no new run, independently of my
+kinematic derivation.
+
+### 9.4 -110 (1) — agreed, and my artifact already says it that way
+
+The OPEN closed **by withdrawal, not by explanation**: §8 states that nobody explained the 0.17 mm and that the
+quantity it was an excess *from* was mine and wrong. ⛔ It must not be recorded as "explained by tilt."
+
+## 10. Scope
 
 ⛔ I do not rule on window-open / window-closed, on whether the clamp is reachable on real hardware, on capture vs
 grip, or on any change to the locked geometry (§0#4 = Rs). ⛔ I ran nothing and hold no RUN authorization. What I
