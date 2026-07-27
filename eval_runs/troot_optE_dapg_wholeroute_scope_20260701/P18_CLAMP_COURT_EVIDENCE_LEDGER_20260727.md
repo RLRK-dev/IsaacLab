@@ -1820,3 +1820,62 @@ valley's location is still not established.
 ⭐ p4 also notes its driver runs **one model, the one with claws**, and has no separate FK/IK model ⇒ its σ_min
 and column distances are measured on the clawed model. ⚠ And σ_min is **kinematic only**, so the claws do not
 affect its value either way.
+
+## 25. The decisive comment is in only one of the two models — and reading the authority correctly does not reach it
+
+⭐ `w2:p5` measured, and p18 confirmed with a closed count: the sentence *"Without this line … 9.98 mm open"*
+appears **0 times in `2f85_koshape.xml`** (the banked LOCK asset, whose comment ends after three lines) and
+**once in `_ur15_2f85_koshape_actuated.xml`**.
+
+⇒ ⭐⭐ p5 had been reading the **LOCK asset as the authority, exactly as §0#4 requires** — ⛔ **and the answer
+sentence is not in that file.** ⇒ **A continuation of "a name does not identify a model": a design-decisive note
+can live in only one of two models, so you can follow the authority rule correctly and still not reach the
+information.** ⚠ In this case what it would have reached was p4's own transcription (§24), so nothing was lost —
+but the structural gap is real and will not always be harmless.
+
+### 25a. `w2:p11` narrowed my second fail-open entrance, and connected it to the env axis
+
+⛔ **My "needs no rename at all" was too strong.** `newton/_src/sim/builder.py:5544`, verbatim:
+`self.shape_label.append(label or f"shape_{shape}")` ⇒ ⭐ **the builder appends exactly one label per shape**, so
+**length equality is structural** ⇒ `si < len(_labels)` is **always true in newton 1.2.1** ⇒ ⭐ **the second
+entrance is a latent guard, not a live hole.** It needs a **length break**, which the current builder prevents.
+
+⇒ ⚠⚠ **But the equality is held by the installed package, not by our code** ⇒ **a version change can change the
+guarantee — and the queued env7 upgrade replaces exactly that.** ⚠ `w2:p5` confirmed 1.4.0 keeps the same
+**labelling** rule; **length equality is a separate question.**
+
+⇒ ⭐⭐ **Requirement (`w2:p11`, cheap and fail-closed): add one assertion to the upgrade smoke — after import,
+`len(shape_label) == shape_count`, or that no pad shape's label is empty.** ⇒ It makes *"is the mechanism ACTIVE"*
+a **build-time question asked automatically**, instead of a human one asked once. ⇒ That is `CLAUDE.md:198`
+discharged by the build rather than by memory.
+
+⚠ **A third narrow path**, noticed by p11 while reading: the builder's default label is `shape_{n}`, which
+**does not contain `pad`** ⇒ **any importer path that passes no label would drop COLLIDE even on a pad shape.**
+⭐ The current MJCF path always passes a geom name (or `{body}_geom_{n}`), so it does not fire — **safe now,
+version-dependent.**
+
+### 25b. `w2:p0` reproduced the bound independently and refined how to use it
+
+✅ Reproduced from the asset: backplate front y **−6.60** vs claw front y **−11.60** ⇒ **dy 5.00**; backplate z
+envelope **[0.00, 37.50]** vs `f1ext` **[37.00, 39.40]** ⇒ **1.90 over the top**; `f2ext` **[24.60, 27.00]` is
+entirely inside ⇒ **contributes 0**; claws and backplate share x half-width 11.0 ⇒ **dx = 0** ⇒
+**|(5.00, 1.90, 0)| = 5.3488 mm.**
+
+⇒ ⭐ **How to write it, so the asymmetry cannot be misread:** **> 5.35 ⇒ CLEAR**; **≤ 5.35 ⇒ UNDECIDED, not NG.**
+⇒ ⭐ **And the bound is set by `f1ext` alone**, so it holds **only while the claw positions are LOCKed** — valid
+while §0#4 stands, and it moves if they ever do.
+
+### 25c. ⛔ `w2:p5` retracted its own process count — the disproof was inside its own output
+
+p5 reported at 15:13 and 15:16 that **2 env7 runs were active**. ⇒ ⛔ **The true count is 0.** Its `pgrep` was
+matching **its own shell** — the bracket trick covered its own pattern, but another argument on the same command
+line matched.
+⇒ ⛔⛔ **The `ps` section of the same output showed no rows at all, and it read only the count line beneath it.**
+⇒ ⭐ **The day's shape at the shortest distance yet: not a neighbouring line, not a loaded file, not its own diff
+— its own output, two lines apart.**
+
+⭐ **Corrected state:** env7 runs have been **0 since 15:05**, quiet for over ten minutes; p5's backstop monitor
+fired at 15:15:34 and was the thing that was right. Last log `run_1455_diag.log` (15:05).
+⛔ **p5 still declines to call the series complete** — last time a new run began 20 s after quiet — and instead
+asks `w2:p4` the direct question. ⚠ **Standing user instruction, verbatim as relayed: 「測定が landed したら
+env7 を更新して」** ⇒ so on p4's confirmation p5 performs the upgrade, re-checking 0 runs immediately beforehand.
