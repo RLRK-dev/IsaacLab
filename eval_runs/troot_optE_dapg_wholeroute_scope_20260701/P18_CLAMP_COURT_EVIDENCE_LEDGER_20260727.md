@@ -5301,3 +5301,20 @@ guard silent because it CANNOT complain.** ⇒ ⭐ **Placement runs on two paths
 branch) ⇒ *"the 49-name list was evidence about the GUARD, not about the driver."* ⇒ **"written ≠ effective"
 landed on its own ruling** — and the duty follows: ⭐ **after issuing a ruling, verifying it took effect belongs
 to the issuer too** (p0 caught it this round). Pin: spec → `6564213f2c…` (§6.4f append-only).
+
+## 142. The maxim gets its teeth — and the day's first and last errors were one thing
+
+**(a) ⭐ The operational form of "write one test that could kill it"**: a weak test satisfies the maxim's letter —
+⭐⭐ **the test must still kill when the estimate's FREE VARIABLES are chosen most favourably.** p11's mechanism
+had one free variable (the tilt angle); any single-angle mismatch kills nothing (another angle exists); what
+killed it was the **domain-wide bound** — max over all angles = 0.159 < 0.22 — *a test the free variable cannot
+rescue.*
+
+**(b) ⭐⭐⭐ The bookend**: the day's **first** error (the cable-existence hypothesis: one free variable fitted to
+one number ⇒ the agreement carried no information) and its **last** (the four-bar tilt: the free variable at its
+best still falls short ⇒ informative) are **the two ends of one axis**:
+
+> **自由変数が救える主張は確かめられず、救えない主張だけが確かめられる。**
+> *A claim its free variables can rescue cannot be tested; only a claim they cannot rescue can be.*
+
+Bank §27.2.87 @ `e9b224dbf8`.
