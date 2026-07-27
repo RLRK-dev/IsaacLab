@@ -1117,3 +1117,61 @@ discriminator is now **visible**; `:895-896` no longer asserts motion it cannot 
    half-segment bias is still on it. ⭐ `-137` told the court not to use that number — ⛔ **but an instruction is
    not a guard.**
 ⇒ ⭐ **Correct scope: "repaired with respect to the reported slot quantity."** Not a general fix.
+
+### 11c. ⛔⛔ My falsifier could not have answered correctly — caught by two panes before it reached Rs
+
+I wrote the test as *"under 10.00 mm the bands overlap and one aim point suffices"*. **The threshold is 2.00 mm.**
+`w2:p11` and `w2:p0` reached it independently.
+
+⇒ What must overlap is **not the slot height** but the **containment band of the cable centre**: Ø8 fully inside a
+10.00 mm slot ⇒ centre band **[31.00, 33.00] = ±1.00 mm** ⇒ the open-pose band `[c−1, c+1]` and the closed-pose
+band `[c+t−1, c+t+1]` overlap **iff |t| < 2.00 mm**. ⇒ **3 mm of travel already destroys the single aim point.**
+
+⇒ ⛔⛔ **So my test would answer "the bands overlap" for every displacement between 2.00 and 10.00 mm, when they
+do not** — ⭐ `w2:p0`'s phrasing: *a test that cannot give the right answer across an 8 mm range of the very
+quantity it measures.* ⇒ **The measurement was right; only the number I compared it against was wrong.**
+⇒ ⚠ **Third time today I published a check without asking whether it could come out either way** (the "free
+second path", the pinch-distance row, and now this) — and this one was on its way to Rs.
+
+⭐ **Two corrections that make the escalation sound:**
+
+1. **`w2:p11`: the window is too wide.** Claw tips only reach the cable's y-extent at backplate gap
+   `2 × (4.00 + 5.00) = 18.00 mm` ⇒ **the constraint bites only over backplate gap [10.16, 18.00] — the last
+   7.84 mm of the close.** ⇒ Measure the slot-centre displacement **inside that window**, not across the whole
+   13.4 mm of travel. ⇒ ⭐ **Total travel of 13.4 mm is compatible with success if in-window displacement is
+   < 2.00 mm.** ⚠ Assumes the cable is y-centred.
+2. ⭐⭐ **`w2:p11`: the condition depends only on |t|, so direction is irrelevant.** ⇒ **The unmeasured sign of the
+   13.4 mm is not needed** — p5 held the conditional back citing p11's own caveat, and **that caveat does not
+   apply to this question.**
+
+⭐ **`w2:p0` adds two things that change how the escalation should be put:**
+- **Full containment and "not struck by the claws" are the same band** — the claws bound the slot, so clearing
+  `f2ext` needs centre ≥ 31.00 and clearing `f1ext` needs ≤ 33.00. ⇒ p5's whole-interval requirement **is** the
+  2.00 mm band.
+- ⇒ The conclusion is **far stronger than stated**: 13.4 mm against a 2.00 mm band is **short by 11.4 mm = 6.7×
+  the band**. ⚠ Against 10.00 mm it reads as "3.4 mm short" — **an 8 mm understatement**.
+- ⭐⭐ ⛔ **But the design does not invert automatically.** Under the weaker requirement — cable stays within the
+  claws' span, contact permitted — the centre tolerance is **[23.00, 41.00] = 18.00 mm wide**, and 13.4 mm leaves
+  **4.6 mm of room.** ⇒ **Inversion follows only if whole-interval *full containment* is required**, and which
+  requirement to adopt is `w2:p5`'s and `w2:p11`'s call, not arithmetic's.
+⚠ p0's scope: all of it conditional on the 13.4 mm being real and along the slot's z. It grounded the **frame**
+from vault (`GD-KoShape-Finger.md:58-59`), **not the displacement**.
+
+### 11d. ⭐⭐ The attribution conflict is closed — `w2:pC` retracted, `w2:p4` was right
+
+pC redid the azimuth math and found its own sign error: az 250 / el −16 ⇒ forward (−0.329, −0.903, −0.276) ⇒
+**screen-right = (−0.940, +0.342, 0)**, i.e. world **−x**. Projecting the grasp points (L x = 0.1141 /
+R x = 0.2036) gives L −0.107 > R −0.191 ⇒ **L is on screen-right.** ⛔ In `-128` pC had taken screen-right as
+`+x`.
+
+⭐ **And pC then checked it a second way that does not use the log's labels at all**: pixel change between
+STEP 7 (`grip=L-`, f534) and STEP 8 (L departs to 259.3 mm, f582), compared across the close-up's two halves —
+**right 39.12 vs left 22.10** ⇒ the arm that moved is on **screen-right** ⇒ that arm is L. **Calculation and video
+agree.**
+
+⇒ ⭐ **Corrected reading of STEP 4 — the observation is unchanged, only the names swap:** **L (screen-right) =
+cable inside the opening; R (screen-left) = outside.**
+⇒ ⭐⭐ **So pC's observation and log-L now describe the same arm** — the one with six contacting geoms including
+both claws and the jaw held at 6.81 mm. ⛔ pC notes, correctly, that agreement is not proof; the verdict is Rs's.
+⇒ **§10f is closed: the disagreement was a sign error in a projection axis, and the physics was consistent
+throughout.**
