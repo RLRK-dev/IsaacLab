@@ -4051,3 +4051,34 @@ filename only** and replaced it with full paths (`084d2acf6e`, +15/−0).
 **verify_sha == banked_sha ⇒ Phase A detail design is landed.** ⭐⭐ **And the rule paid off in practice: my
 instruction named the superseded sha, and because p5 and p4 both held the pin by content, the right content
 landed anyway.**
+
+## 84. ⛔ Over-retraction corrected: the band was never aimed at the clip — and two words now name two things each
+
+**(a) ⛔ My relay of p4's `-056` swept the band into the wrong-target bucket. `w2:p0` shows it does not belong
+there.** The four numbers that settled band 12.00 (aim L 1.64 / R 1.45; STEP3 L 2.33 / R 4.89 — log `:20/:21/:24/:25`)
+come from **STEP 2 "cable上空へ" / STEP 3 "cableへ下降" = the cable-approach stage**; **C1 first appears at STEP 6/7.**
+⇒ ⭐ **The band determination never touched clip geometry.** What WAS aimed at the wrong target = the 60 mm offset
+and the floor re-aim (push-in stage) only. ⇒ **§79's settlement stands.** ⭐ p0's own framing: the "do not
+over-retract" rule I posted at `-095` applies to me here.
+
+**(b) ⚠⚠ Homonym guard — "柱" and "着座" each name two different things as of today.**
+- **柱** ①the cell mast (r 102, z 0–1530; the in/out instrument; the arm at −1.3 mm inside it) ②p4's self-made
+  clip's 40 mm riser (the cable penetrated it 18.2 mm). ⇒ Merging them turns **two penetrations into one** and
+  credits one repair with the other's fix.
+- **着座** ①the log's "seat error" = distance to the **aim point in the jaw** — all four §79 numbers are this —
+  ②the clip's **seating-surface height** (the "61 mm difference" of `-056`). ⇒ ⭐ **The same-numeral trap (§63,
+  §65), word edition — same day.**
+
+**(c) ⭐⭐ One check that belongs BEFORE p5 shapes the clip** (p0's banked fact, offered without claiming the
+answer): in the authoritative env the clip is **VISIBLE-only, collision OFF by default** — `RS71:55` marks it
+ABSENT-IN-CODE; `test_newton_clip_routing.py:1168/:1194` `_clip_collide` default `"0"` (p0 bank
+`P0_CABLE_POSITION_FROM_CONTACT_IDENTITY_20260727.md:660-665/:690`). ⚠ Meanwhile **p4's self-made clip DOES
+collide** — 3–4 clip×cable contacts existed during the penetration and **the position servo pushed through anyway**
+(`-056`). ⇒ ⭐ **The two substrates differ on this axis, and both fail differently**: inherit the authoritative
+default and penetration goes silent (no contacts at all); keep collision on and the servo still pushes through
+unless the drive respects contact. ⇒ ⭐⭐ **The collision flag is a design input of the port, not an incidental.**
+⛔ Whether the UR15 cell inherits the default is unmeasured — p0 states the check, not the answer.
+
+**(d) ✅ p0's self-audit, scoped before being asked**: of its six banked artifacts, **zero claim anything about the
+UR15 cell's clip geometry** (queries clip / C1 / groove / 着座; hits were filenames, the authoritative env's
+collision flags, and message IDs) ⇒ `-195R` retracts none of its lines.
