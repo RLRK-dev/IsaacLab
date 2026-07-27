@@ -1967,3 +1967,54 @@ messages and in this ledger ⇒ **retro-identifiable after the upgrade** ⇒ ⛔
 ⭐ `w2:p5` appended to the banked design again with **36 added / 0 deleted** — new sha256
 `137fa9dfc8e21dd64f61586014d0edf1d5e4d9494ec8922e816d55f8bfa91c60` (269 lines), **re-frozen**, banking is p4's.
 ⭐ env7 runs remain **0 since 15:05**; p5 still declines to call the series complete and waits on p4's answer.
+
+## 27. ⭐⭐⭐ Accepting a criticism of yourself unchecked is the same error as accepting praise unchecked
+
+`w2:p11` verified the provenance itself — LOCK asset at `85315bbec6`: **0 occurrences**; the actuated model has
+**one commit, `a3fbd7d7e4`, today 12:47:15** — and retracts its own §27.2.38.
+⇒ ⛔⛔ **Its "fifth rediscovery" and its "I would have finished at 09:00 had I read that sentence" are factually
+wrong: at 09:00 the sentence did not exist.**
+
+⇒ ⭐⭐⭐ **p11's lesson, and it is the sharpest epistemic result of the session:**
+> **I accepted a claim against myself without checking where it came from. That is the same error as accepting a
+> claim in my favour without checking. The direction is irrelevant; only the verification is.**
+⚠ And it names why the guard failed: **it was leaning toward harsh self-criticism, so its ordinary scepticism did
+not engage.** ⇒ ⭐ **Self-criticism is not free — a mistaken one leaves a false causal claim in the record.**
+
+⇒ ⛔ **p18 did the same thing and amplified it.** I accepted p11's self-report unverified, banked it in §22, and
+built §23's framing on it. ⇒ ⭐ **Second instance today of "the second source was a copy of the first"** — the
+first being three panes converging on one datum with one free parameter (§4). ⇒ **Verify independence at the
+source before counting anything as corroboration.**
+
+⭐ **What p11 keeps, correctly separated:** **§27.2.18 stands** — the LOCK asset's `:173-175` **is** a genuine
+prior record, banked **2026-06-23**, and p11 **did** quote only its second half in the morning ⇒ **the third
+rediscovery is not withdrawn.** Only today's comment is. ⭐ **And the general rule** (*a workaround's "without
+this line" describes hardware*) **survives as a rule** — ⛔ this simply is not an instance of it.
+
+### 27a. ⛔⛔ The column-penetration question is OPEN, and both instruments we would reach for are blind
+
+`w2:p11` applied §26's degenerate band to the actual geometry, and it reverses the reassurance p18 relayed:
+
+- the column is a cylinder of **r = 0.102 m**, and the arm has links **thinner than that**
+- ⇒ ⭐ **a configuration with a link entirely inside the column is geometrically possible**
+- ⇒ ⛔ **and that configuration returns `+0.00`**
+
+⇒ ⛔⛔ **So "worst = +0.0 mm on both arms" must not be read as "just barely clear." It is equally consistent with
+the link being inside the column.** ⇒ p18 relayed the reassuring reading in `-147`/`-149`; **that reading is
+withdrawn.**
+⚠ And the obvious fallback fails too: **settling it by contact record cannot work, because the cylinder is
+`contype=0` and generates no contacts** ⇒ **the contact record is empty either way.**
+⇒ ⭐ **What would actually decide it: a point-in-solid test, or a probe with the collision flag temporarily
+restored.** ⛔ p18 authorises and requests nothing; recorded so the gap is not mistaken for a clean result.
+
+⭐ **Third instance today of the session's instrument theme** — *a value the instrument cannot represent, returned
+as though it were a measurement*: the saturated claw channel (§5), the penetration contract (§26), and this.
+
+### 27b. A falsifiable link between σ_min and the positioning failure
+
+`w2:p11` notes that the low value (**left 0.0381**) occurs at **STEP 4 — the grasping moment** — and that this can
+be mechanically connected to the miss: **at low σ_min a small EE motion demands large joint motion, so the
+resolution of fine correction drops exactly when the ±1.00 mm tolerance is being demanded.**
+⇒ ⭐⭐ **Falsifiable: does the σ_min valley coincide in time with the growth of aim error?** If not, different
+cause. ⚠ p11 claims **no causation** — it specifies the correlation test only. ⚠ And with waypoints alone the
+valley is still unlocated, so **its "sample along the interpolated path" requirement remains unmet.**
