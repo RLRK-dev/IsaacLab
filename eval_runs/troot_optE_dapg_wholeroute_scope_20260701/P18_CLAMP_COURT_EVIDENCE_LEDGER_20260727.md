@@ -1589,3 +1589,62 @@ its own version is the worse one: the three earlier rediscoveries sat *next to a
 this rule sits in **a file loaded into every session**. ⭐ And it points at the disposition template already in
 `RS71:55`: **audit → confirm ROBUST → record "not re-enabled"** ⇒ **`stem`/`foot` should ride that template; no
 new disposition needs inventing.**
+
+## 20. ⭐⭐⭐ The model states the court's central finding in its own comment — and a provenance trap
+
+`w2:pB` found both; **p18 verified every number.**
+
+### 20a. Two same-named files, differing by exactly the line that matters
+
+| file | size | `<exclude>` pairs | pad pair present? | sha256 |
+|---|---|---|---|---|
+| `thread_isaac_lab/assets/…/_ur15_2f85_koshape_actuated.xml` | 10907 | **7** | ⭐ **yes** (`:166`) | `1966631e…` |
+| `eval_runs/…/p4_ur15_sim_20260727/_ur15_2f85_koshape_actuated.xml` | 10422 | **6** | ⛔ **no** | `c2d65167…` |
+
+⭐ **The driver reads the assets one** — the producing blob's `:32` pins it absolutely:
+`GRIP_XML = "/home/rlrk/IsaacLab/thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml"`
+
+⇒ ⛔⛔ **The copy sitting next to the log is not the model the run used, and the single difference is the one line
+that permits claw-claw crossing.** ⇒ ⭐ **Auditing the copy yields the opposite conclusion — "the claws cannot
+cross."** Recorded as a provenance trap: **a same-named file beside the evidence, differing only where it decides
+the argument.**
+
+### 20b. ⭐⭐⭐ The asset says it, in the comment above that line
+
+`_ur15_2f85_koshape_actuated.xml:161-165`, verbatim (p18 read it):
+
+> `Restored from the banked LOCK design 2f85_koshape.xml:176. Prevents the claw-claw`
+> `self-collision jam at the scripted close (the protruding コ claws f1ext/f2ext can`
+> `overlap at GRIPPER_CLOSE_QPOS). Cable contact is UNAFFECTED (the cable is a separate`
+> `body). **Without this line the opposing claws jam at -0.07mm while pad1 is still 9.98mm**`
+> `**open, so the flat pads can never reach the cable.**`
+
+⇒ ⭐⭐⭐ **That is the no-window result, written by the asset's author, with a number.** The court derived it from
+geometry across the whole afternoon and measured the claw zero-crossing at **pad1 = 10.16 mm**; the comment says
+**9.98 mm** — **0.18 mm apart**, plainly the same phenomenon. ⛔ p18 does not reconcile the difference (different
+conditions: the comment describes the jam point with the exclude removed).
+
+⇒ ⭐ **Fifth rediscovery of the day, and it settles the strongest form:** the sim reaches a pad1 gap under 10 mm
+**only because the exclude removes claw-claw contact**, and the model says so where the exclude is defined.
+⇒ ⭐⭐ **It corroborates the Rs escalation from the author's side rather than from our measurement** — the A/B
+branch rests on exactly this sentence.
+
+⭐ pB corrected two things of its own on the way: it had cut its own `grep` with `head -5` and asserted about the
+whole block from the cut view (**its second instance today**), and it had cited the run-dir copy as "the model the
+banked run read". ⇒ Its **conclusion survives re-verification against the file the run actually reads** (no
+collision-disabling on any pad geom — the only disabled item is the visual mesh at `:42`; the exclude is
+pad-to-pad, not pad-to-cable ⇒ **contact 0 still means neither touching nor penetrating**), and the claw z-gap of
+10.00 mm holds on that file too.
+
+### 20c. The discriminating frame is ready, and it carries a third candidate
+
+`w2:pC` delivered `~/Downloads/pC_WHICH_CYLINDER_f130.png` (f130, t = 4.33 s, wide panel): **A = the thick white
+cylinder** (running through the table down to the floor), **B = the thin white tube = the cable**; ⭐ **A is about
+25× B's diameter.** ⚠ pC separates its sourcing: it read Ø8 itself (`task_config.py:137`), while the column radius
+0.102 is a quotation it has **not** verified. ⛔ It does not assert which Rs meant — it made the question
+answerable at a glance.
+
+⭐ **And an unasked-for observation that opens a third possibility:** in that frame **the thick cylinder passes
+through the table plate down to the floor.** With `contype=0` no interference is generated, and it may well be
+intentional — ⛔ pC judges nothing. ⇒ ⭐ **So Rs's 「円柱のもぶつかっている」 might mean the column against the
+table, not the arm against the column** — and the same single frame settles that too.
