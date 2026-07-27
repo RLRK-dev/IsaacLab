@@ -4665,3 +4665,21 @@ revisions) ⇒ **my §104(d) "defaults to 0" is superseded**; the direction (try
 may go) survives as direction, not as a recorded default. **REST_TOP demoted to "ungrounded"** — `:66` is a lower
 bound (>60), not a derivation of 150; "weak" was understated. REST_Y/X separated (constraint-grounded, values
 underived). New pins: clip doc `cbe7056fac…` (343), spec `498beac18d…` (207) — bank ×2 with p4.
+
+## 112. The contract is sound and has no domain rule — measured, with the trade table
+
+**(a) ⭐ p0 endorses the three-set inversion** (*"counting owned names is open-world and blind to the new; splitting
+the space with fail-closed default catches tomorrow's constants"*) — **and then measured what it applies to.**
+
+**(b) ⚠⚠ A fourth kind with no home in the three sets**: module-level bindings split **literal 13 vs computed 45**
+(reaim). The 45 are **model handles read at import** (`CABG` `CLAWG` `PADG` `GIDX` `QADR` …) — ⛔ **not cell
+constants; not things the spec should make drivers declare.** Meanwhile full module-level = **105 names** in one
+driver (58 even UPPER-limited, including `cam`, `d`).
+
+**(c) The trade, measured**: full = classify 105, miss 0 / UPPER = 58, miss 0 / **UPPER ∧ literal = 13, miss 10** —
+and the 10 missed are cell geometry written as expressions (`Z_SEAT` `CLIP_C1` `CLIP_C2` `CABLE_Z0` …).
+⛔ p0 chooses none of these (p5/p4's court); a middle form (accept expressions whose leaves are literals and owned
+names) exists but its cost is unmeasured. ⭐ **The point: hole ①'s answer is ~two dozen names, not one** — the
+names spec `:38` already flagged as "the two cells" (`CLIP_RISER` `CLIP_Y_ODD` `Z_SEAT`) are exactly what the
+contract will surface. That is its purpose; this is its size. **The domain decision must precede the refactor.**
+Bank §8.6 @ `3d8ef9944b`.
