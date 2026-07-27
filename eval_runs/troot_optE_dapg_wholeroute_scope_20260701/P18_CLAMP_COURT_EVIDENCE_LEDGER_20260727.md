@@ -2721,3 +2721,9 @@ interpolation.**
 
 ⭐ p0's containment table if the minimum lands there: 0.40 rad ⇒ **21.5%**, 0.45 ⇒ **18.8%**, 0.50 ⇒ 16.6%,
 0.55 ⇒ 14.8%, 0.60 ⇒ 13.3% — **0.45 would be 1.4× the current, 0.40 would be 1.6×.**
+
+⚠ **p18's own check of that crossing disagreed, and p18 was wrong.** I computed `0.6 − 0.2/66.8` = 0.5970 rad
+= 34.21°; the shortfall **decreases** as roll increases, so zero is reached **beyond** 0.6, at
+`0.6 + 0.2/66.8` = **0.6030 rad = 34.55°** — `w2:p0`'s figure. ⭐ The ledger above carries p0's number and is
+correct, but **I used it without reconciling my own disagreeing output** — the same failure as §25d, at a smaller
+scale, and caught only because I printed both.
