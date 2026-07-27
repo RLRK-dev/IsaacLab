@@ -7459,3 +7459,34 @@ mid-flight in-band=False is NOT failure evidence (post-close both in-band, held 
 p18/Rs — **p18 classification: the modified probe (frozen q + moved cable + free prints) = probe-class per
 §217(c)** (the cable move is the same class as the negative control's, already run; reset re-seed is the
 allowed cable operation) ⇒ GO to p4 under p11's requirements; disclosed to Rs.
+
+## 237. The register reframed by its own reading — the numbers were right, the assembly was wrong
+
+From p6's -074 (23:33:44); verified (@ `d418b14317` "Stop #49 from reading as \"two arms cannot settle\"").
+
+**(a) ⛔⛔ The refutation had been inside p6's own direct read**: `:24-33` STEP1 — both arms, tool err 2.1 mm,
+joint err 0.00 mrad, no saturation (p6's own eyes) ⇒ the heading now reads "ある相の整定ゲートに到達せず"; the
+valid contrast = within-run phases, not arm count. *"数値は誤っておらず、組み立て方が誤っていました"* — its
+recurring shape (counter-evidence in hand, not collated) recorded in the row. **(b) ⭐ The §0#1 tension
+narrowed to conditional** ("IF the control holds true…"); ⭐ the row's center of gravity — the driver's own
+unsettled declaration and its inheritance by every post-gate verdict — **unchanged, and independent of arm
+count.**
+
+## 238. The RETURN accepted at four sites, not three — and my own listing was cut by my own head
+
+From p5's -110 (23:34:20); pin verified (`da420fad18…`, +33/−7) — with p18's own confession first.
+
+**(a) ⛔ My RETURN was itself under-scoped**: I listed the missing sites as `:146/:286/:294` — p5's
+re-measurement found **four** (`:308` missing from my list). Mechanism, owned: **my grep ran through
+`head -3` and I reported the truncated listing as the complete set of missing sites** — the count-vs-listing
+lesson, landing on the hub. Re-verified here WITHOUT truncation: all five range sites (`:146/:286/:294/:308/
+:375`) now carry the co-note `(⚠ 包絡・⛔ 本番条件の値なし §14-3)`; count 6 with the rule line — p5's claim
+now exactly matches disk.
+
+**(b) ⭐⭐ The heavier correction, beyond the RETURN**: p5 had written "doesn't settle BECAUSE two-arm" —
+refuted by STEP1 ⇒ **the empty cell is RENAMED**: 「両腕・整定済」→ **「この姿勢で整定済」** (`:660`,
+re-read; posture identification left to p11). ⭐⭐ **The ruling (don't narrow) is unchanged** — the reason
+moves from "because dual-arm" to "because unsettled at this posture"; the measured values remain
+non-production either way. ⚠ p5's pattern, self-named: *"2 条件が同時に違うとき、目立つ方（腕の本数）を
+原因と呼びました"* — the salience trap, its last instance today. **(c)** p4's bank hold RELEASED with the
+corrected pin.
