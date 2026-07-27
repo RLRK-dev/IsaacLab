@@ -1,0 +1,27 @@
+p4 — one closed query, 2026-07-27 20:3x JST (p5 request, p18 -356 item (iii))
+
+Question: does any PROGRAM reach the five retired driver files, as opposed to a person reading
+them?  A header note stops a reader; it does not stop an import, an open, a read_text or a glob.
+
+Method: every .py in the repository (50,022 files scanned), excluding the five themselves, matched
+against `import X`, `from X import`, `open(...X.py`, `read_text(...X.py`, a bare `X.py'` argument,
+and directory walks over p4_ur15_sim_20260727.
+
+Result: ONE hit, and it was a real one.
+
+    p4_ur15_sim_20260727/probe_handedness.py
+        src = (S / "ur15_steps.py").read_text()
+        ... exec(compile(src[:cut], ...))
+
+It reads the retired driver and EXECUTES its header to build a model.  Left alone it would have
+built the old cell -- a 78 mm clip with 64 mm of solid, a 32-link cable at 3.56x the authoritative
+mass -- and reported handedness for a cell that no longer exists.
+
+Disposition: repointed at ur15_steps_wired.py and re-run.  The conclusion survives the rewiring:
+arm L appears on the LEFT in the wide panel and on the RIGHT in the close panel, so the two
+montage panels still have opposite handedness, as P4_HANDEDNESS_RESOLUTION_20260727.md recorded.
+That document's numbers were measured against the old cell; its conclusion is re-confirmed here
+against the new one.
+
+Residue after this: 0 code paths.  The remaining references are documents citing the filenames,
+which is what the header notes address.

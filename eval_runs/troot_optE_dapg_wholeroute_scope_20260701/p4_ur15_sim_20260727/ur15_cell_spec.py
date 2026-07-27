@@ -353,26 +353,24 @@ def _module_level_bindings(path):
     return out
 
 
-def _has_bare_literal(node, known):
-    """Does this value expression contain a number that does not come from a name we know about?
+def _has_bare_literal(node):
+    """Does this value expression contain a number written into it?
 
-    p5's single rule for scope: a driver may bind whatever it likes as long as the value is
-    derived from names that already have an owner.  The moment a bare number appears, the binding
-    is carrying a constant of its own and has to say which set it belongs to.
+    p5 took the strict reading, and the reason is worth keeping: my first version's docstring
+    promised to exempt numbers "derivable from owned names", and the code never did it -- the
+    branch that was supposed to was a `continue` that did nothing.  A promise the code does not
+    keep is the same defect this whole contract exists to catch, so the promise goes rather than
+    the strictness.
 
-    Small arithmetic factors are not exempted -- that was tempting, but "0.5 is obviously just
-    arithmetic" is the same judgement call that let two files disagree about a cable radius.
+    So: any numeric literal at all, and the binding has to say which of the three sets it is in.
+    No exemption for small arithmetic factors either -- "0.5 is obviously just arithmetic" is the
+    same judgement call that let two files disagree about a cable radius.
     """
     value = getattr(node, "value", None)
     if value is None:
         return False
-    for leaf in ast.walk(value):
-        if isinstance(leaf, ast.Constant) and isinstance(leaf.value, (int, float)) \
-                and not isinstance(leaf.value, bool):
-            return True
-        if isinstance(leaf, ast.Name) and leaf.id not in known:
-            continue
-    return False
+    return any(isinstance(leaf, ast.Constant) and isinstance(leaf.value, (int, float))
+               and not isinstance(leaf.value, bool) for leaf in ast.walk(value))
 
 
 def guard(driver_path, strict=True):
@@ -383,7 +381,6 @@ def guard(driver_path, strict=True):
     list raises.
     """
     bindings = _module_level_bindings(driver_path)
-    known = set(_OWNED) | RETIRED | TIER_C | set(bindings)
     bad = []
     for name, (line, kind, node) in sorted(bindings.items()):
         if name == "*":
@@ -398,7 +395,7 @@ def guard(driver_path, strict=True):
             bad.append((name, line, f"owned by {_SPEC_MODULE} but imported from somewhere else, "
                                     f"which is how a second copy starts"))
         elif kind == "assign" and name not in _OWNED and name not in TIER_C \
-                and _has_bare_literal(node, known):
+                and _has_bare_literal(node):
             bad.append((name, line, "carries a number of its own and belongs to none of the three "
                                     "sets: add it to the p5 spec, or derive it from names that "
                                     "are already owned"))

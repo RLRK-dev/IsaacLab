@@ -19,9 +19,15 @@ sys.argv = ["ur15_steps.py", "/dev/null"]
 # Build the cell exactly as the driver does, but stop before it starts stepping: import the driver
 # as a module up to the point the model exists.  Simplest reliable way is to re-run its model build
 # here, so read the pieces we need out of a fresh exec of the header.
-src = (S / "ur15_steps.py").read_text()
+# ⛔ This used to read ur15_steps.py, which is now a RETIRED RECORD: it would have
+# built the old cell -- a 78 mm clip and a 32-link cable at 3.6x the mass -- and
+# reported handedness for a cell that no longer exists.  A header note does not stop
+# a program, and p5 was right to ask for the query that found this.
+# ⚠ The banked result (P4_HANDEDNESS_RESOLUTION_20260727.md) WAS measured against
+# that old cell.  Re-run this to say whether the answer survives the rewiring.
+src = (S / "ur15_steps_wired.py").read_text()
 cut = src.index("# ---- start pose:")
-ns: dict = {}
+ns: dict = {"__file__": str(S / "ur15_steps_wired.py")}  # the guard call needs it
 exec(compile(src[:cut], "ur15_header", "exec"), ns)
 
 m, d, PAD, SIDES = ns["m"], ns["d"], ns["PAD"], ns["SIDES"]
