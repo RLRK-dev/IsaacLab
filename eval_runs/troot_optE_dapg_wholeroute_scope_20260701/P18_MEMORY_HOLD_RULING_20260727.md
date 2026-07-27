@@ -2,7 +2,7 @@
 
 **Author:** `w2:p18` T-ROOT-OPS-SUPERVISOR (routing / evidence gate).
 **Issued:** 2026-07-27 (JST, `date`-measured at write time; see commit author time for the authoritative stamp).
-**Status:** ACTIVE until the user issues a disposition.
+**Status:** ACTIVE until the user issues a disposition. ⚠ **SUPERSEDED IN PART — see §11 (MEMORY.md released) and §12 (lessons-task authorization + pending widening question). Do not cite this line without them.**
 
 ## 0. Why this file exists (read this first)
 
@@ -398,3 +398,30 @@ because **it is inside the memory directory and only `MEMORY.md` was released.**
 ⚠ **I had confused it with `w2:p5`'s**, which is the repo-side one (`02-Workflow/HANDOFF_p5_vtdesign.md`, §7).
 ⇒ The user's open question — whether the release covers the memory directory's topic and handoff files — governs
 p6's file too.
+
+## 12. DISPOSITION HISTORY UPDATE (2026-07-27 19:3x) — the lessons instruction, and writes made under it
+
+**(a) A second user instruction created a task-scoped authorization I failed to record here.** After §11, the
+user instructed p18 directly: 「教訓をまとめて記憶」 (~16:3x JST) — an explicit instruction from the HOLD's
+issuer to record the day's lessons into memory. **p18's reading (a reading, not a ruling)**: task-scoped
+authorization for lesson-recording writes, overriding the HOLD for that task only.
+⛔ **This disposition was not appended here at the time — that omission is p18's and is what §12 repairs.**
+
+**(b) Writes under the memory directory after §11 (13:44), as measured by p11 (`ls -lat`, 19:31:45) and
+attributed where p18 knows the author:**
+| file | mtime | author |
+|---|---|---|
+| `MEMORY.md` | 16:40 | p18 — **released surface (§11), compliant** |
+| 4 new lesson files (`a-pass-must-carry…`, `agreement-is-not-rederivation…`, `do-not-promote-a-spec-line…`, `before-escalating-a-tradeoff…`) | 16:38–16:54 | p18 — new files, under (a) |
+| `feedback-a-predicate-that-cannot-discriminate…` (topic, HELD) | edits 16:xx + **19:30** | 16:xx = p18 under (a); **19:30 = observed, not attributed by p18** (p5 declared "memory 追記済" at `-083`; attribution awaits p5's own statement) |
+| `feedback-append-datetime…` | 17:31 | **observed, not attributed** |
+
+**(c) What remains HELD, unchanged**: topic files + handoff files + the named carries (§11's table). The widening
+question — 「解除は topic / handoff file に及ぶか」 — **remains the user's pending decision**, re-raised with
+p11's concrete cost: its handoff is its only cross-session carrier; a /clear during the freeze loses today's
+pins. ⛔ p18 does not widen the release; (a) covered the lessons task only.
+
+**(d) Reading note for this file**: the header `Status: ACTIVE` and §1's full-directory wording are
+**SUPERSEDED IN PART by §11 and qualified by §12** — this file corrects by appending; do not cite the head
+without the tail. (p11's `-084` quoted `:5/:23/:34` and reported "no release artifact found" — the release
+artifact is §11 of the same file. Its refusal to assert beyond its measurements held.)
