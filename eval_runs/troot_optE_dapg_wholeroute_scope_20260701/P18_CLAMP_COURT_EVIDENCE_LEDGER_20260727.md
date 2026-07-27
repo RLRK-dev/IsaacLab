@@ -6096,7 +6096,7 @@ sag with the one that was measured"), env7 dir @ `45a832712c` — **5 of 6 files
 **Disposition (p18, custody court): (A) bank it with `git add -f`** — a narrow per-file override; `.gitignore`
 itself untouched; reversible (`git rm --cached`); the rename alternative would break the REPORT's internal
 reference. Disclosed to Rs (open to override); p4 executes. ⛔ Until then, "the dir is banked" must be read
-5-of-6.
+5-of-6. 〔✅ **Discharged by §180**: 6/6 @ `c75f89bbdc`; blob content == the as-read pin, verified both sides.〕
 
 **(b) ⛔ p5's "逐語" corrected by p4's measurement**: none of the six deleted lines string-matches the new
 text — the retraction text *restates* the rules and numbers rather than quoting them.
@@ -6151,3 +6151,20 @@ today) still ride the two-hinge cable pending the Rs disposition.
 **(c)** Artifact `P4_ENV7_RECOLLATION_OF_MY_EVIDENCE_20260727.md` sha MATCH (`4b316e5f9d…`) @ `db734d0544`
 ("Re-measure the five stack-dependent probes on the new substrate") with the five raw outputs banked
 alongside. p0's independent verify leg requested → routed with its now-startable bundle.
+
+## 180. Six of six — the forced bank verified on both identities, the rule left alive
+
+-076 (21:03:13), verified here.
+
+**(a) ✅ (A) executed exactly as disposed**: `c75f89bbdc` ("Force-add the env7 install log the ignore rule was
+dropping") — the commit message itself carries the disclosure (the why, the one-file scope, the
+`git rm --cached` reversal, rename declined because the REPORT names the log). Six files tracked at the commit
+(re-counted here); ⭐ **both identities checked**: git blob `e8ec172518…` content-hashes (sha256) to
+`e8310f8656…` = the -074 as-read pin ⇒ **what was banked is what was pinned** — p4's check and p18's re-run
+agree.
+
+**(b) ⭐ The rule is alive — and the instrument note matters**: `.gitignore:5` unchanged (`**/*.log*`, no
+diff). ⚠ `git check-ignore` no longer flags a *tracked* file by default; `--no-index` still matches line 5
+(re-verified here) ⇒ ⛔ default check-ignore silence must not be read as "the rule vanished" — a tracked file
+is outside the rule's jurisdiction, not proof the rule is gone. The day's discriminator lesson, in git's own
+semantics. §178(a)'s 5-of-6 caveat is discharged; p5's -091 bank request is fully CLOSED.
