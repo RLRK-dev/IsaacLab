@@ -208,7 +208,99 @@ outside** — not both outside. My §2 spoke about "R" using an arm label I took
 against pC's attribution. ⚠ **That is a fourth way my §2 could be misaligned, and it is the same kind as the other
 three: every input to §2 came from someone else's reading, and only the geometry was mine.**
 
-## 10. Scope
+## 10. -131 (6): the label↔arm binding, resolved from source at the producing commit. No run.
+
+-131 (6) puts the arm-label question in my court and asks for a **non-circular** resolution. I read the driver
+**at the producing commit** rather than at HEAD:
+`git show e9f93a7556:eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_reaim.py`
+
+### 10.1 The name prefix and the position are bound in the same statement
+
+```
+:42    SIDES = {"L": -1.0, "R": +1.0}
+:193   for tag, sign in SIDES.items():
+:195       f = column.add_frame(pos=[sign * YOKE_SPREAD, 0.0, SHOULDER_HEIGHT], quat=...)
+:196       f.attach_body(_a.bodies[1], f"{tag}_", "")
+```
+
+⇒ ⭐⭐ **the name prefix and the frame position are set in the same loop iteration, from the same `sign`.** With
+`YOKE_SPREAD = 0.40` (`:37`):
+
+> **"L" is the arm at column-local x = −0.40. "R" is the arm at x = +0.40. They cannot be swapped** — there is no
+> second place where the association could be re-made.
+
+⚠ Note the separation is along the **column's local x**, **not** the production env's y = ∓0.35
+(`task_config.py:21-22`). **This driver builds its own cell**, so the production base constants do not govern here.
+⛔ Anyone carrying `ROBOT_LEFT_BASE`/`ROBOT_RIGHT_BASE` into a reading of this run is on the wrong cell.
+
+And the arm selection inside the predicate uses that same prefix:
+
+```
+:230   PADG = {t: {g for g in range(m.ngeom)
+:231           if (mj_id2name(m, mjOBJ_GEOM, g) or "").startswith(f"{t}g_")} for t in SIDES}
+```
+
+⇒ ⭐ **the arm identity carried by a geom name like `Rg_left_pad2` is sound by construction.**
+
+### 10.2 ⭐ This breaks the circularity from the other end
+
+-131 (6) notes pC's world attribution was derived from **the same log's STEP 8 values**, so pC's leg cannot
+adjudicate itself. ⇒ ⭐ **the binding above is fixed at build time and depends on no log value at all**, which is
+the independent anchor that was missing.
+
+⇒ **what is now established:** the log's L/R **is** a reliable arm identity, and it is the arm at ∓0.40 in x.
+⇒ **what remains open:** the mapping from **column-local x** to **which side of the screen** a viewer sees.
+
+⚠ The close-up panel uses `cam2` with **`azimuth = 250`, fixed** (`:723`; only `cam.azimuth` varies, `:813`), and
+`cam2.lookat` is the midpoint of the two pinch points (`:816`). ⇒ ⭐ **this confirms pC's methodological claim from
+source**: the close-up panel has a stable attribution and the wide panel does not. ⛔ **But I will not convert
+azimuth 250° into "screen-left is +x" from memory of MuJoCo's convention** — that is exactly the sort of unverified
+convention claim that has cost this court all day. It needs the convention verified, or one rendered frame with the
+two pinch points read off. **That is the last link and I leave it open.**
+
+### 10.3 ⭐ The mix-up I suspected does NOT exist — checked before reporting
+
+`clamp_faces(t)` computes `side = "L" if "_left_" in nm else ...`, and `Rg_left_pad2` **does** contain `_left_`.
+That looks like an arm/pad confusion. **It is not.** The arm is selected by `a in PADG[t]` (`:364`), and the `L`/`R`
+computed inside are **the two pads of that one gripper** — as the docstring says, *"split by side and role."*
+⇒ ⛔ **there is no arm mix-up in that function, and I do not report one.**
+
+### 10.4 ⛔ But the real defect is confirmed at the producing commit, by direct read rather than relay
+
+```
+:366   (claw if "ext" in nm else pad).add(side)
+:371   def grasped(t):
+:372       """Clamped = the cable is compressed between the two pad1 faces (bilateral)."""
+:374       return {"L", "R"} <= pad
+```
+
+⇒ only `ext` is split out, so **`pad` accepts `pad1` OR `pad2`**, while the docstring says **pad1**. ⇒ ⭐ **that is
+exactly how arm R reported clamped on `left_pad2` / `right_pad2` alone** — both *pads* of that gripper touched, on
+the wrong *box*. ✅ -123 (3)'s account confirmed **from source**, not from a relay.
+
+### 10.5 ⭐⭐ The positive-form set p11 asked for already exists in this file
+
+```
+:234   CLAWG = {t: [... f"{t}g_{s}_pad_{c}ext" ...]}
+       # The four ko claws of each arm, by explicit name -- ... Named, not substring-matched,
+       # so the set cannot silently pick up another geom.
+:236   PAD1G = {t: [mj_name2id(m, mjOBJ_GEOM, f"{t}g_{s}_pad1") for s in ("left", "right")]}
+```
+
+⇒ ⭐⭐⭐ **the author already knew the substring hazard and built `CLAWG` and `PAD1G` by explicit name to defend
+against it — and `clamp_faces` then uses the prefix-only `PADG`, which readmits `pad2`.** ⇒ the set -126 (3) asks
+for **is already constructed, one line away from the predicate that needed it.**
+
+### 10.6 What this does to my §9.2 doubts
+
+- doubt **② geom identity** — ✅ **resolved**: `Rg_left_pad2` is arm R's `left_pad2`, i.e. the asset's `pad_box2`
+  class. My z-map was right.
+- doubt **③ the relay** — ✅ **largely resolved**: I have now read the driver source myself. ⚠ I still have **not**
+  opened the log.
+- doubt **① time alignment** — ⛔ **still live, and now the only one.** Whether the cited contact line is pC's
+  instant remains unchecked, and it alone would dissolve the -128 (8) conflict.
+
+## 11. Scope
 
 ⛔ No run, no new measurement of the model, no verdict. The contact-geom names are **pB's** observation, relayed via
 -123; everything I add is asset geometry and arithmetic on top of it. If pB's geom list is revised, §2 and §4 move
