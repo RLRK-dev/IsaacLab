@@ -5563,3 +5563,40 @@ it: **don't recompute in your head; run the thing.**
 (0.2949/0.8294 = 36%; capsule-based it would read 26%) — correct on its natural basis, arithmetic checking end
 to end (0.8294 × 40 = 33.2 ≈ the retired "32 g"). ⇒ **Recorded so nobody "corrects" a right comment later** —
 the inverse of the day's stale-docstring finding, and just as worth writing down. Bank §4.9 @ `13446820c2`.
+
+## 155. Hole ③ closed 11/11 — with a semantic hoist and a trap inside the checker itself
+
+**(a) ⭐⭐ Closed** (`ad7952511d`, module sha `df0c7bca17…`): 11/11 counterfactuals caught, 0 misses (output
+banked). **(b) ⭐ The finding en route**: a naive ancestor walk turns `CLIP_COLLIDE` False — all 4 sites live
+inside `if add_target_clip:` — ⛔ **a "do we build it" condition, not a "does it collide" condition**; naive
+False would be *"a loud wrong answer."* p5's one-line hoist implemented semantically: **walk up to the
+shape-building construct; only `if`s BETWEEN count as real conditions.** **(c) ⛔⛔ The day's trap inside the
+checker**: the counterfactual script held a **copy of the predicate** and kept reporting 4 misses after the
+module closed them — *"the copy keeps agreeing with itself while the body moves"* — fixed to call the module's
+real predicate. **(d)** Loud declaration implemented (EI source, derived K, masses, clip-collision read;
+self-check refuses to pass while an override is set).
+
+## 156. The stuck inputs: remote Enter cannot submit, proxy delivery can
+
+Rs's instruction 「メッセージの最後にEnterを入れ忘れないように」 prompted a sweep: **three panes held
+unsubmitted directives in their input boxes** (p5: env7 update; p0: final-pass request; p14: env7-smoke
+permission). ⛔ **Remote submission failed by every key route** (send-keys Enter/Return, focus+Enter, pane run) —
+composition state suspected. ⭐ **Proxy delivery via the proven pipeline worked**: agent-send + Enter flushed
+each box (all three now empty), delivering Rs's verbatim text with a proxy note and a dedupe warning.
+⇒ **Discipline adopted: after every send, read the pane and confirm the input box is empty.**
+
+## 157. p12's disposition: B is real — settled without running a line
+
+**(a) ⭐⭐ B upgraded candidate → REAL, without the execution p15 declined**: p12 evaluated **the pattern string
+itself, standalone** — `"a"*64+"\n"` → True (⛔ defect confirmed); ⭐ its own refinement: only a SINGLE trailing
+newline passes (`"\n\n"` → False); `fullmatch` fixes it. ⇒ *"Evaluate the pattern, not the module"* — the
+measurement that needed no gate. **(b)** A independently confirmed by a discriminating query (5 spellings × all
+py = 0 ⇒ no set-equality check exists) ⇒ real, latent. **(c) Sorting**: A/B fixes → p14 after gate; C none;
+⭐ **B = custody notification to p18** — it touches evidence surfaces (**12 pass-points incl. 3 manifest hash
+checks**): until fixed, a hash pinned with a trailing newline would collate as valid through those paths.
+⚠ p18's own ledger practice compares raw `sha256sum` output, not those functions — unaffected; **WMSO-lane
+evidence flows carry the weakness until the gate opens.** **(d) The open question, held jointly (p12+p18, Rs if
+needed)**: A and B survived on a PASS-CLOSEd surface — **whether the closed leg's predicate set ever contained
+them is undetermined**; nobody claims pN erred. ⭐ And a general rule issued to p15: read-only in-memory
+measurement ≠ implementation under CLOSED — with three conditions (exact command+interpreter; rc via bare
+`python3`, not `isaaclab.sh -p` which can return rc=0 under a traceback; import side-effect check).
