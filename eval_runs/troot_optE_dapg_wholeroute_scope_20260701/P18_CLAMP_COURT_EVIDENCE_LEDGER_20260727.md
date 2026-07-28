@@ -10072,4 +10072,50 @@ PROSPECTIVELY. Value = measurement side. **(e)** The instrument line UNIFIED: p1
 separately (folded into -619 to p4). **(f)** Ratification STATE: resolved at both ends pending p4's
 edits — value 5.73 stays as coded; owed = rationale rewrite (physical form), the "0.2 is smallest"
 correction, the H annotation, the one instrument print. p5's doc edits START, grounded in the
-opening-16 world (t14's banked log confirms the premise).
+opening-16 world (t14's banked log confirms the premise). ⚠ (f) SUPERSEDED by §347 (p11 -135, crossed
+in flight — sent 16:09:23, BEFORE this section's 16:09:44 commit): the ratification did NOT close; p11
+withdrew 5.73° and moved to 0.05 rad under a discriminability bound. The drafted "closed" relays
+(m618-620) were caught UNSENT and discarded — no propagation.
+
+## 347. The ratifiers cross in flight — the tighter bound binds, and the log cannot name the toucher
+
+From p11's -135 (16:09:23 — CROSSING p5's -134 by one minute and predating §346's commit). Pin verified:
+§27.2.135 @ `2155dc76fe` sha `a0ad59bbcb…` ✓; 3 added headers = the declared section + its internal A/B
+part-headers (declared structure, no undeclared content).
+
+**(a) ⛔⛔ The 5.73° ratification WITHDRAWN, and the split reframed**: not purpose LAYERS but two UPPER
+BOUNDS on one quantity — table contact gives τ < 0.183 rad (10.5°), discriminability gives τ < 0.10 rad
+— and the tighter binds ⇒ p5's side binds. Table contact = why the check EXISTS, not what sets the
+value. 5.73° = 0.10 rad = the menu value ITSELF = outside the discriminable range ⇒ p11's own
+"strict >" condition was a patch applied to an out-of-range value. **(b) ⭐⭐ The unified form**
+(proposed to p5, routed -621): τ must satisfy **r_max < τ < 0.10 rad** (r_max = tool-angle residual
+under vertical command, unmeasured — supplied by the SAME instrument line as p5's residual print and
+p11's pass-print); **τ = 0.05 rad ratified conditional on r_max < 0.05**; three-branch readout: r_max <
+0.05 ⇒ holds / 0.05 ≤ r_max < 0.10 ⇒ interval non-empty but margin thins (a solution-side warning, not
+a threshold) / r_max ≥ 0.10 ⇒ interval EMPTY = vertical indistinguishable from the neighbour ⇒
+formulation rebuild (p5's naming accepted). Both still reject menu-as-rationale; p11 takes p5's NUMBER
+with a stronger reason (a hard discriminability bound, not "stated purpose unimplemented"). ⚠ THE STATE:
+the two ratifiers have SWAPPED positions in flight (p5 -134 → 5.73 under table contact; p11 -135 → 0.05
+conditional); the unified form incorporates p5's number, p5's residual condition, and p5's
+rebuild-naming ⇒ p5's response is the closing move. p5's H-annotation survives on the physical leg (the
+0.183-rad bound depends on H). INTERIM: the coded 5.73 (t16+) sits formally unratified again; the ~2×
+physical margin is the interim safety argument; **the pass-print now GATES the value** (r_max decides
+the branch) — p4's owed list updated accordingly (-622).
+
+**(c) The STEP13 disposition (p11's B)**: the survival leg OPENED (first non-same-config repetition —
+something finally sits on §27.2.126 ③); HOW MUCH it filled = decided by "is f2ext in the contact
+pair" (changed geometry in the contacting geometry = meaningful survival; not = repetition in
+disguise). General-form correction accepted into §27.2.126 ④: information is bought only by change IN A
+QUANTITY THE HYPOTHESIS IS SENSITIVE TO. The indirect change noted (step-7 vertical forcing alters the
+prev/near history into STEP13 — log-visible); still NOT "structural" — the deciding change = STEP13's
+own target (RX_MID) or seed; settle-gate causality unmeasured; survival ≠ cause, unmixed.
+
+**(d) ⭐⭐ Desk finding — the instrument cannot answer B6 as posed**: `touching()` @ `3f5c7630ac`
+`:320-330` DISCARDS the near side by construction — `:327` `other = g2 if a1 else g1` keeps only the
+geom NOT belonging to arm t ⇒ the R-side touching geometry is never named in the log. Half the
+criterion IS answerable: the TOUCHED side ['L_forearm_link','L_wrist_1_link'] contains no pad/claw ⇒
+the changed geometry is NOT the touched one. The TOUCHER side needs a one-line collection extension
+(keep both names) + a future run — p4's court (-622); p11's "no run needed, the log has it" corrected
+on that leg (-623); the survival-strength verdict SUSPENDED until the near-side name exists. **(e)**
+Non-claims kept: no run demanded / contact pair not guessed / 5.73 not called p4's error (p11 took it
+too) / no causality claim.
