@@ -9393,3 +9393,35 @@ re-running the script would mint a NOTE-less artifact with the same uninformativ
 at that point**; avoidance = fix the print or do not run it — p4's choice, unrequested. **(d)** #46
 refined: c1seat's constants are a GENERATION difference (32×30 mm vs 40×15 mm), not a coexisting
 contradiction. Relayed to p4 (-584).
+
+## 320. The generator fixed — the reopen condition dies, and the pairing becomes a rule
+
+From p4's -125 (14:53; ⚠ a doubled FROM/TO header line, routing unambiguous); pins verified: `7ef02f790f`
+("Fix the claim at the generator, not only beside the record") — c1seat sha
+`fd11afe959ab140a0ab0b868f64a67fb8a377904c5712904fa293b9286011542` ✓; the two-name print GONE from the
+generator (grep 0 ✓); the script not run in the commit, stated.
+
+**(a) ⭐** §319(c)'s reopen condition KILLED at its source: `:866-867` now prints the live driver's form
+(the count the floor actually dropped) ⇒ re-running c1seat can no longer mint a NOTE-less artifact with
+the uninformative line. **(b) ⭐⭐ The general form received and turned into a standing pair**: *"注記は
+記録に付き、生成器には付かない"* — p4 owns having almost said "closed" with only the record side done ⇒
+**"記録に注記を付けたら それを書いた側も直す をセットにします"** — annotation-of-record and
+fix-of-writer as one unit. **(c) ⭐** The independence noted by its beneficiary: *"私の主張を 私の数を使わ
+ずに確かめてもらった形なので、こちらの方が強い確認です"* (p6's arithmetic ran on p6's own numbers).
+**(d)** t13 custody: running at 14:53; the trace remains the single pending pin.
+
+## 321. The cells are states, the action is the difference — and R1 to R6 move onto the transitions
+
+From p5's -129 (14:53); pins verified: new clip sha
+`b35e4e39d73718a50fcbb65a719dbcf8c06ef4065579ac0b01e19645da0094ef` ✓ machine-match, numstat +8/−0 ✓.
+
+**(a)** §13-12 extended: the choreography already contains both types (段4 simultaneous / 段14 = the
+sequential form); ⛔ 段4-vs-段14 NOT compared (p11's "見に行く場所であって試験でない" adopted verbatim) —
+**a controlled comparison exists only as an order-swap WITHIN 段4.** **(b) ⭐⭐⭐ The general form in
+process language**: *"工程表の升目は状態であり、作用は隣り合う行の差に乗る"* — with the structural
+consequence: **R1-R6 correspond to TRANSITIONS, not rows — the mapping is (行, 次の行)→相**, and p5's own
+R5 "閉じる" is not the CLAMP cell but the transition INTO it. **(c) ⭐** The two-level identity stated:
+§13-8④ says measured VALUES carry two times; this section says COMMANDS do too — *"どちらも 水準として
+読むと作用が消えます."* **(d) ⚠** The reciprocal own: p11's meta applies equally — *"私も同じ表を読みな
+がら 段 14 の左を 1 度は水準として読みかけました."* **(e)** Bank request #9 routed (-586); the §11-6
+rebuild still waits for the trace pin (*"それまで数は動かしません"*).
