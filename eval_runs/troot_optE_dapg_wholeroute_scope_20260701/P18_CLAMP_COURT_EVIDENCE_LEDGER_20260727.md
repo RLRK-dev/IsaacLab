@@ -9869,7 +9869,8 @@ dropped). Implementation = p4 (routed -605).
 inheritance path exits at `:1633 continue` BEFORE the seating check `:1641` (verified — the same
 inheritance surface as packet (ii)). Non-firing basis (verified): `aimed = {}` per step `:1437`; aim
 runs only on steps 2-5 `:1495` and 13 `:1443`; `_seating` detects Z_SEAT targets `:1591-1594` (steps
-7/15 per p11's step-table read) ⇒ {2,3,4,5,13} ∩ {7,15} = ∅. ⭐⭐ The hazard is FUTURE-side: extending
+7/15 per p11's step-table read 〔corrected by p11's own -148: the seating set is {7,8,9,15,16,17};
+the ∅ intersection with aim steps SURVIVES the correction〕) ⇒ {2,3,4,5,13} ∩ {7,15} = ∅. ⭐⭐ The hazard is FUTURE-side: extending
 the aim to seating steps — exactly where p5's R3/§13-3 heads — would SILENTLY drop the vertical
 requirement: a guard correct today, wrong the day an already-planned change lands. ⭐ Prescription
 (p11's court, design only): move the requirement to the USE site — after both paths merge and w[t] is
@@ -10868,7 +10869,9 @@ CANDIDATE specifically (its condition r_max < 0.05 is unmet — p4's careful wor
 midpoint rule derives **τ = 5.37°**. ⚠ p11's middle-branch asymmetry note (§350(b): the optimum
 sits toward r_max, i.e. stricter than the midpoint, because false stops are audible and blindness
 is silent) **NOW ACTIVATES** — the branch it was reserved for has been entered (routed -670). p4
-passes numbers, chooses nothing. **(b) ⭐⭐⭐ The structural find — two readings of one line
+passes numbers, chooses nothing. 〔(a)'s branch placement SUPERSEDED by §388 (p11 -148):
+5.0 is excluded from r_max under EITHER reading ⇒ r_max ≈ 0.1° ⇒ NOT the middle branch; τ = 2.86°
+lives, pending the trace and the population confirmation.〕 **(b) ⭐⭐⭐ The structural find — two readings of one line
 disagree**: verbatim "fingers **5.0 deg** off straight down (pinch->mouth [+0.000 -0.087 -0.996])
 … **tool axis 0.0 deg** off vertical" ⇒ the tool axis is PERFECTLY vertical while the mouth
 direction tilts 5.0° ⇒ **a tool-axis check would have PASSED with the fingers 5° tilted** — the
@@ -10957,3 +10960,32 @@ nothing fixed in the comparison" (the one-axis discipline, self-applied). **(c)*
 candidates 44 → 130; the 16 mm cutoff split lands simultaneously and offsets in DIRECTION — ⛔ "I
 do not assume they cancel; the next run's duration decides." **(d)** t17 at STEP13 (17:28); t18
 cargo = P2 + P5 + both guards + the saturation fixes + the cutoff split + C + banks #12-15.
+
+## 388. Five degrees is not r_max — either reading excludes it, and the desk answers the decider
+
+From p11's -148 (17:29; version fab643fda7, all direct-read); pin verified: §27.2.147 @ `279aab1853`
+sha `dc6e3abe1e…` ✓. **(a)** p11 kills its own first suspicion (STEP9 IS a seating step commanding
+vertical — :1784/:1710/:1300) and corrects its own earlier read: the seating set is {7,8,9,15,16,17},
+not {7,15} — §349(c) tagged; the ∅ intersection with aim steps SURVIVES the correction.
+**(b) ⭐⭐⭐ The dichotomy that decides τ regardless**: the solve lands PERFECTLY vertical in the
+quantity it DRIVES (tool axis 0.0°); only the checked quantity (pinch→mouth) tilts 5.0°. If the
+offset is jaw-state geometry ⇒ not a solve residual ⇒ ⛔ not r_max material; if it is a real
+requirement violation ⇒ absorbing it into the threshold is CIRCULAR (the check swallows the very
+thing it must catch) ⇒ ⛔ not r_max material. **EITHER WAY 5.0 ∉ r_max ⇒ r_max comes from the
+achieved group (0.0-0.1°) ⇒ the middle branch does NOT fire ⇒ τ = 0.05 rad (2.86°) LIVES** —
+§383(a) tagged; my m670/m671 relays carried the superseded premise, corrected this wave (-679/-681).
+**(c) ⭐ THE DESK ANSWERS THE DECIDER**: STEP8 (grip tuple HALF, OPEN — verified `:1299`) read
+L 0.1° / R 0.0° in p4's -157 verbatims ⇒ **by p11's own criterion (STEP8 ~0 kills), the jaw-state
+hypothesis DIES** — and the kill is STRONGER than requested: STEP8 and STEP9 share the IDENTICAL L
+target (LX1, C1[1], Z_SEAT) AND the identical L jaw (HALF), yet read 0.1° vs 5.0° ⇒ nothing in the
+commanded geometry differs; what does differ (solve instance / warm start / the pinC1 gate at STEP9)
+= p11/p4's court. **(d)** The current state named: the interim 5.73° absorbs a known, computable
+offset into tolerance ⇒ blind to up to 5° of REAL deviation ("tolerance doing calibration's job" —
+the §27.2.144 family). The source-fix menu (p11's court, routed -680): (a) target the MOUTH direction
+at seating steps / (b) evaluate at the commanded jaw state and fold the difference into the target /
+⛔ (c) absorb by tolerance — rejected. **(e) ⚠ The honest consequence carried loud**: under
+τ = 2.86° a run can STOP at STEP9 — "not a defect; the check doing its job; what gets fixed is
+STEP9's pose or the source, never the threshold." **(f)** My own: §383 banked the middle-branch
+placement without asking WHAT POPULATES r_max — the same population question p5 raised (-146) from
+the circularity side; the two arrive at one place: **r_max = achieved-vertical residuals only,
+post-completion, population-pure.**
