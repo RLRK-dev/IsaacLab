@@ -8704,3 +8704,35 @@ alone — co-report the R3→R5 displacement ② the approach phase needs a GATE
 the table does not stop (the §13-8① shape again) ③ R3's measurement is taken immediately before the
 motion that consumes it (#16's CURRENCY dimension on the time axis). ⛔ Approach speed / path / posture
 design = p11's court. **(e)** Bank request #4 routed (-543).
+
+## 287. t11 lands: the inspection fires on the inherited pose — three instruments, one step, one arm
+
+From p4's -103 (13:5x); pins verified: `128a75cce3` ("Land the traced run, and ask where the mouth is when
+the aim is taken") — run_t11.txt `01df1c08228403bdc4b32651f652a07c5b08650ab9930483f426adbd9542157c` ✓,
+sigma_trace_t11.txt `0081e1ab…` ✓ (9456 samples), seat_vs_mouth raw present in the same commit; producing
+code = `21e62e426a` — the σ-caution commit is NOT in this run, stated up front, and the trace header
+accordingly carries no caution line: provenance exact. **Regime FIRST, per discipline**: a FAILED run
+(gates both False; the right's late posture non-representative — mouth y=−0.591, cable 1011 mm away) — all
+readings within-run only.
+
+**(a) ⭐⭐⭐ The (i) inspection FIRED — the latent defect is latent no more**: 3 of 15 inheritances, ALL
+at STEP13 right — `:187-189` verbatim ×3: *"inherited aim pose, arm-to-arm check = ['L_forearm_link',
+'L_wrist_1_link'] (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)"* ⇒ **a posture solved
+with `other=None`, inherited past the route's partner check, IS in contact with the partner arm — at the
+failed step.** The scope traveled inside the string, as designed (§271(b)). **(b) ⭐⭐ Three instruments,
+one step, one arm**: the (i) contact (STEP13 R) + the rad/m maximum 9.438 (t=28.7416 s) + the column entry
+−25.8 mm (t=29.1 s) — with R's σ minimum 0.0037 at the same step (`:271-272` re-read ✓). **(c) ⭐⭐ The
+bar quantity DISAGREES with σ**: rad/m L median 3.2 / p95 9.6 / max 12.0 vs R 2.8 / 3.7 / 9.4 ⇒ **joint
+motion per tool metre is HIGHER for L across the board** — σ said the opposite (L uniformly < 0.12, R
+median 0.2007); and R's σ-minimum moment carries rad/m only 7.277 ⇒ **σ overstates the danger severalfold
+there** ⇒ the #50 caution ("RANKING ONLY — never an absolute bar") empirically vindicated; ⛔ #49/#50 stay
+separate. **(d)** The L/R comparison valid within-construction; ⛔ no generalization from a failed run
+(p11's (e), held by p4 unprompted). **(e) ⭐ NEW, separate item (input to p11's court)**: **the aim targets
+the PINCH CENTRELINE; the ko mouth is the CLAW MIDPOINT** — seat_point's own docstring says up to 21 mm
+apart; measured (jaw open, near cable): L 1.40 / R 14.69 mm, tool-axis R (−0.18, −13.05, +6.74) — the same
+order as the run's closing miss +14.29. ⛔ Caveats carried by p4: the probe's aim error differs from the
+run's (L 32.74 / R 2.90); servo residuals 55.7 / 23.9 mrad = UNSETTLED ⇒ not the run's posture values; ⛔
+causal direction undetermined (four-bar mechanism vs blocked-fingers consequence) — a separation probe
+RUNNING, result to follow; raw = `seat_vs_mouth.txt`, same commit. **(f) ✅ The packet's (i) leg is IN** —
+§267(f)'s frame + this result: the ONE decision packet is assemblable and is surfaced to Rs at this
+checkpoint ("we inspected; here is the result").
