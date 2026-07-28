@@ -13374,3 +13374,34 @@ the 0.22/45 pair): the left arm's reach question is now CONCRETE. **(d) The gate
 launched again**: pB (m798 — the five readings as claims-to-break PLUS validating the
 new instruments themselves), the video leg spawned (blind; colors present this run).
 ⛔ No verdict before both legs; this desk states none.
+
+## 477. p5 unties the centre from the clip — the invariant is the span, and the window will be measured
+
+From p5's -169 (02:53). **(a) Pins and measurements verified**: doc sha 48154e0c…1a65a
+MATCH (machine), +55/−0 over bank #29, new §24 → **bank #30 @ 40676a0d45**; the three
+code sites desk-read verbatim (task_config.py:235 GRIP_HALF_SPAN = 0.044 with
+"commanded" already in its comment; ur15_cell_spec.py:454-455 C1 = (0.150, y 0.35);
+ur15_steps_wired.py:1055-1058 gL/gR = cable_at(C1[0] ∓ GRIP_HALF_SPAN) — the centre
+bound to C1 exactly as ruled). p5 re-derived p4's cab27/cab32 from the pitch (match)
+and adds the precision: the GRASPED link spacing is 75 mm vs the COMMANDED 88 mm span
+(15 mm-pitch quantization floor, not a defect) — say "commanded" when claiming 88.
+**(b) ⭐⭐⭐ The three rulings**: (1) UNTIE the grasp-pair centre from C1; make it an
+explicit design variable — ⛔ §0#2 untouched: **the invariant is the 88 mm SPAN, never
+"centred on C1"** — the :1055 line is a design decision that entered undeclared. (2) The
+threshold is MEASURED, not derived; only the direction is ruled (−x; the trade is
+asymmetric — left at 0 candidates is already on the floor). ⛔ "does the hand's x exceed
+the column radius" is the WRONG QUANTITY (the column is at y=0, the cable at y 0.35-0.40
+— the hand never enters the column; what fails is the ARM'S PATH) — the family's
+responds-to-a-different-fact form, caught at design time. The instrument EXISTS and just
+became discriminating (the or-cands repair): per-side collision-free candidate counts ⇒
+SWEEP the centre, one solve per value, NO route run; desired output = the max centre x
+at which the left arm keeps ≥1 candidate. (3) The centre is a PER-STEP variable
+(grasping is one event; seating is per-clip) — the grasp step does not inherit C1's
+centre; centre 0.0 (L −0.044 / R +0.044, right hand nearly above C2) offered as a
+starting point, expressly NOT a ruling. **(c) Upstream NAMED, not ruled**: both clips
+at +x with shoulders at ∓0.22 ⇒ the task is one-sided; if the sweep shows the left
+window excludes C1, the options (move clips / per-clip role swap / move mounting) are
+NOT p5's court — same face as the look∧reach escalation; p5 will raise ONE line to Rs
+when the sweep result lands. **(d)** Routed: p4 (m801 — the sweep, solve-only), p6
+(m802 — rows incl. the §0#2 boundary statement), p5 (m803 — bank sha). The sweep needs
+no run authorization (static solves, the probe class already in use).
