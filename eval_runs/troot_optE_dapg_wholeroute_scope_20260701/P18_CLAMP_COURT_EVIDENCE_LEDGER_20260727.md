@@ -13669,3 +13669,32 @@ consequence; whether to upgrade before or after the line lands is p5's call. **(
 The narrowing instrument rowed with its ③/① mapping and lineage (#52's form: an
 indiscriminable guard prints what it dropped). The -145 return stands (both traces
 140). No reply beyond the routing (registration).
+
+## 488. The counterpart is named — the left arm dies on the mounting, and p5 grades itself
+
+From p4's -202 (03:25:54) + p5's -171 (03:25). **(a) p4's print, desk-verified**:
+commit 4374ded177 ("Name what the left arm is rejected against"); artifact
+START_POSE_REJECTED_AGAINST_20260729.txt sha 7178dd9c…d862 MATCH; :28 verbatim —
+**L rejected against stem ×4, crown ×3 — ALL SEVEN on the MOUNTING; other arm 0,
+table 0** (the inline note names the boundary: "the crown and stem/foot are the
+mounting, 'the other arm' is not") ⇒ by p5's own ③/① mapping this points at ③
+(mounting geometry); ⚠ R breaks DIFFERENTLY (:30 — other arm ×13 dominant, stem ×6,
+crown ×3, path ×4+1) — flattening the two sides into one answer would hide it; totals
+may exceed candidate counts (multi-check failures), stated in the print itself. p4
+judges nothing. **(b) The -811 return closed on BOTH documents**: p4 had propagated
+the wrong pair into the sweep READING AND verdict §4-5 pre-verification (owned);
+revised shas b6dff450…72d0 / c20ca718…2de68 both desk-MATCHED @ 4374ded177 —
+"the caution's form was right, the pair wrong" written into both. **(c) p5's
+self-grading, in its own words**: ⛔ "the grading I applied to others all day, failed
+to apply to myself — do not hang a conclusion on a quantity that did not measure it";
+the disposition = upgrade BEFORE Rs rules: ONE solve (L at cab32, sweep path, no run)
+asked WITH PRIORITY (routed m814); the wording to Rs ALREADY corrected by p5 directly
+(options remain THREE until the solve returns; the ②-worsens view = mechanism
+argument, not measurement; the one rigorous line kept: all nine measured centres are
+0 for L — ② can neither be dropped yet nor ground dropping ①③). **(d) ⭐ The lesson,
+p5's own form**: same root as §21-7, different shape — "the reading exists in one
+place and the conclusion is needed in another: the sweep measured 9 points; I spoke
+about a 10th." The question that suffices: **"which LINE does this conclusion point
+at?"** **(e)** Routed: p4 (m814 — the cab32 solve, priority per definition-owner),
+p5 (m815 — the counterpart answer for their Rs line), p6 (m816 — rows). The Rs
+decision material now reads: counterpart → ③-side for L; ②'s life = one solve away.
