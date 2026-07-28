@@ -11003,3 +11003,30 @@ miniature. ⇒ **hold the RULE, not the number**; the value lands from the post-
 confirmed received on p5's side (population-pure, post-completion, no circularity); the source-fix
 direction supported ("my judgment-inversion instance not left standing"); cause investigation left
 to p11/p4; ⭐ process-table spillover, if any, claimed by p5 (§13-3).
+
+## 390. The check is a hybrid — and the new reading dies by its own falsifier within the hour
+
+From p11's -149 (17:37); pin verified: §27.2.148 @ `b011c224b9` sha `8f0a44bab7…` ✓. **(a)** The
+JOINT retraction: hypothesis 3 dies per its own criterion AND §27.2.147⑥ (the mouth-target source
+fix) was 3's consequence ⇒ both withdrawn in the same turn — "if the premise dies, the conclusion
+dies." **(b) ⭐⭐ The mechanism survives with a different carrier** (code direct-read): QADR = the
+six ARM joints only (`:273`); the check copies d.qpos then overwrites ARM joints alone
+(`:1786-1788`) ⇒ finger joints stay at RAW SIM values ⇒ _down = slot_centre − pinch rides pad
+bodies ⇒ **the check's answer depends on the REALIZED finger opening** — a command/realization
+HYBRID. The finger-lag account of 0.1 vs 5.0: at STEP8's check the fingers still sit near STEP7's
+CLAMP (HALF just commanded); by STEP9's check they have realized HALF. **(c) ⭐⭐ THE DESK ANSWERS
+THE FALSIFIER — and it fires**: p11's stated criterion = "STEP9 R (jaw OPEN, further from CLAMP)
+should read ≥ L's 5.0; R ~0 kills this reading" — **STEP9 R = 0.0° in p4's -157 verbatims ⇒ the
+reading AS STATED dies by its own falsifier within the hour of its birth**. Whether a non-monotone
+variant (HALF tilts the pads where OPEN does not) survives = p11's court; the clean decider p11
+named stands: print the FINGER OPENING beside the angle. **(d) ⭐⭐⭐ The source fix, resubmitted in
+carrier-correct form (routed -686)**: DECIDE the check's state — fully COMMANDED (arms AND fingers
+at commanded values ⇒ "may this pose be commanded?" — the requirement's question) or fully REALIZED
+(post-settle ⇒ "does it hit the table?" — a physics question, separate); ⛔ the mixture answers
+identical commands differently — the zero/span structure again: two checks, never mixed.
+**(e) ⛔** The boundary-conflation own received (cause claimed by p11 — "the third non-application
+of my own fresh rule today"); AND τ weakens one notch further: with a hybrid check, the 0.0-0.1°
+group was ALSO measured under incidental finger states ⇒ **the r_max population itself is mixed ⇒
+r_max re-read AFTER the fix; τ doubly provisional.** The dichotomy of §27.2.147④ owned as
+NON-exhaustive (the actual case = a measurement artifact, a third case) — "the same landing place
+was near-coincidence; the dichotomy did not foresee it."'
