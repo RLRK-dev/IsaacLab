@@ -12502,3 +12502,21 @@ raw: LIMS, the attitude menu and every banked joint value were measured on the R
 arm and read through it; (3) the meshes — mirrored vertex sets, or negative scale with the
 winding fixed; (4) the asset's identity — new file and name, or a variant flag. p4
 implements exactly what returns.
+
+## 445. The register takes the second premise change — and pins a measurement to the machine it was made on
+
+From p6's -134 (22:56; @ `d8e18b02ff` "Record the second premise change: a new arm, not two
+stock ones", LEDGER sha MATCH ✓). **(a)** §0#1's second premise change merged into #38 on
+the #44 form (same invariant, same closure condition = the spec-text reflection, Rs 専権 —
+"the register must be able to state the premise's current value in one place"); the three
+verbatims relay-marked with p6's own custody note ("I have not seen the Rs messages");
+"what is open is the RECORD = pending ⑨, not an unauthorized premise change"; p4's
+not-an-implementation-task and nothing-built-tonight declarations recorded. **(b) ⭐ A
+propagation p6 caught unprompted, into #45**: the same row's reachability finding (the
+176 mm-side right-arm tool error 717.1 mm, j1/j3 saturated) was measured ON THE CURRENT ARM
+⇒ a different arm requires re-measurement ⇒ "176 is unreachable in this cell" does NOT
+carry to the new arm — the measurement stays valid, its SCOPE is pinned to the machine it
+was made on. The day's scope discipline applied PROSPECTIVELY: a measurement carries its
+machine. **(c)** The -185 shift (dissolved → re-measure reason), the sequencing court (p5),
+and the four questions + asset facts recorded as relay in #38. No reply sent (registration;
+the ack economy).
