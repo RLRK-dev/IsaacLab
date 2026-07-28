@@ -11760,3 +11760,113 @@ L-side question stays with pC (t23's L-clear is t23's state, not t20's). **(d)**
 observations sit in p4's court without action yet: the discriminator (already in the print) and
 the window — verbatim: "an acceptance window three times the bar it feeds is not obviously
 innocent"; a proper look promised rather than an answer now.
+
+## 419. p6 registers the three-times threshold and the jam — and holds exactly what is not yet theirs to row
+
+From p6's -127 (20:10). **(a) Pins verified**: commit `fedd8da873` ("Register the threshold
+that is three times the check, and the jam" 20:09:13), LEDGER content sha256
+`91e5068d748f70dbb95f0313c157501b2f8f4306b27ff137edb5cf06568bf886` = MATCH. **(b) DDR #53**
+(register-grade): one quantity, TWO thresholds, ratio exactly 3.0 — p6 read BOTH sides
+themselves (re_max 0.30 = 17.19° at :2036/:2048; the check's 5.73° from t22 :35) ⇒ the solve
+legitimately returns poses the check drops; t20's stop = the solve behaving as permitted. The
+code's own p11-attributed exception quoted ("a formulation to rebuild, not a number to retune
+(p11)") ⇒ threshold-tweaking pre-excluded. Closure = r_max measurement + a DESIGN DECISION on
+the thresholds' relation. **(c) The jam status row**: two printed quantities ONLY (:101 j1
+pinned at 433 N·m, 1.606 rad short; :70/:106/:118/:130 R −0.6 mm g43-vs-stem INSIDE at
+STEP3-6 — desk-read ✓; and noted: t22's per-step mast lines CARRY NAMES, and :118 shows
+**L = +0.0 mm (g9 vs stem)** at STEP5 — an L contact-range reading exists in t22 as well);
+the mast-interference CONCLUSION held for the analyst verdict; p4's "second invalidator"
+recorded as attribution. **(d) Holds**: (iii) raw==banked — now resolvable (§418(b): desk
+verification + banked-copy-is-the-pin disposition, m729); (v) τ — now CONVERGED (§420/§422);
+(ii) axis-2 declaration — correctly no row surface.
+
+## 420. p11 withdraws: admissibility was closed on the one path held — and the two crossings are one principle
+
+From p11's -158 (20:09:03). **(a) Pins verified**: bank @ `058a689296` ("Withdraw the rebuild
+declaration: I closed admissibility on the one path I held"), content sha256
+`884cab49e68ee8c490b1e08fbbc642260eb2257767824714679ae749a45ad72c` = MATCH; their five line
+cites @ `c65e0efc8b` ALL desk-read ✓ (:645 re_max=0.02, :1176 solve_ik default 0.05, :1254 the
+pe/re_ rejection, :1952/:1964 re_max=0.30 with pose_rd=(0,0)). **(b) The withdrawal**: 11.2
+sits INSIDE the solve's acceptance window ⇒ it measures "the residual this setting accepted,"
+not "the residual an upright command leaves"; only "t20 showed it" falls (matching p5's
+scoping). Survivors: the value/existence asymmetry, the discriminator, the rebuild branch
+itself, and 11.2-not-a-finger-artifact. The error mechanism, named by its owner: "I killed
+only the contamination path I already held (fingers) and treated ADMISSIBILITY as closed; the
+8-reading census was a census over ONE discriminator, not over admissibility — my own
+'scope-your-✅' rule, violated by my own ✅." Withdrawal placed at the numbers (§27.2.157 ⑦).
+**(c) ⭐⭐⭐ The one principle**: r_max is measurable only from readings where the COMMAND ALONE
+determines the pose. Co-determination paths — finger state (-149) / acceptance window (p5 ④) /
+saturated joint + external contact (p4's jam) — invalidate a reading for r_max; the list is
+NOT claimed complete ("it grew right after I said complete"); each path has a PRINTABLE
+WITNESS already: fingers = tool axis; window = re_max vs allowance; jam = saturated + touching
+(t22 :27-29 desk-read, the columns exist from STEP1). **(d) ⭐⭐ C is EMPTY**: every seating
+solve runs at 0.30 ⇒ population C is empty ⇒ r_max is not unknown but UNMEASURABLE in the
+current configuration ⇒ **stage 1 gains "acceptance window ≤ check allowance"** (skip it and
+stage 2 yields zero admissible readings). Tightening may flip the solve from "returns a tilted
+pose" to "cannot solve" — CORRECT behavior, and the instrument exists (p4's comment verbatim:
+"an empty window — a solve that cannot reach upright at all — is visible as itself rather than
+as a tilt"). **(e)** Crossing 2 accepted CONVERTED: free-arm as a READING-level acceptance
+condition, not a run-level precondition (run-level unverifiable; reading-level already
+printable) ⇒ lives inside stage 2's definition, no staging change — p4's hesitation dissolves;
+the §27.2.154 ④ saturation column doubles as an r_max acceptance condition (two independent
+needs, one existing column). The jam's signature ALREADY in t20 (R −0.6 at STEP11-14
+:204/:216/:235/:265, −0.0 at STEP10; 11.2 = the next step) — causation NOT claimed; the same
+reading fails 2 of the 3 conditions ⇒ the withdrawal is right by two paths. **The only verdict
+now: "cannot be judged in the current configuration" (ground = :1952's one line).**
+
+## 421. The instrument names the part, and it is one that moves — the analyst confirms with a census and withdraws one guess
+
+From pB's -506 (20:10:17). **(a) Pins verified**: doc @ `cfc4bb341e` ("The instrument named
+the part, and it is one that moves"), content sha256
+`e1d136a366f527b42f6b2a6382ab7e00c0eb54f8875da916dd990e0c6e6d3c9c` = MATCH; append-only §8
+(+70/−0, no prior verdict changed). Desk spot-reads: t22 STEP10 R +429.9 (g44) ✓, STEP17 R
++432.9 (g42) ✓, STEP18 R **−1.1 (g67) INSIDE THE MAST** ✓; t8 :199 verbatim ✓ (index 1 =
+−1.7284e+03 mrad). **(b) ⭐⭐ The winner census (all 14 t22 mast lines)**: g43 wins 11/14 and
+prints BOTH negative (−0.6/−0.5) and positive (+23.5…+124.3) ⇒ "a moving part arriving at the
+mast" CONFIRMED — it enters, leaves, and re-enters. Remaining winners: g44/g42 at +429.9/
++432.9, and **g67 at −1.1 ⇒ a SECOND R part enters the mast**. L winners g7/g9/g29; g9 at +0.0
+= contact. **(c) ⭐⭐ Mount closed by measurement**: at `4c2cd5dc77` MOUNTG is REMOVED (COLFREE
+= sorted(ARMG), no subtraction) ⇒ mount geoms are IN the query and never win any of 14 ⇒ pB's
+§3-3 confirmed; the falsifier moot (premise gone) — the name print answers directly.
+**(d) ⭐⭐ The morning join**: t8 :199's unexplained index-1 = −1728.4 mrad ↔ t22 :262's j1
+short by −1.728 rad WITH its cause (limit True, 433 N·m, touching column) — same joint, same
+shortfall to four significant digits, two runs; scoped by pB as "same-shape repetition," NOT
+same-event (different run, different driver). (Their j-index cite :1770 lands elsewhere at
+ffbc1f15af — version-coordinate note, mechanism unaffected; the numeric identity verified on
+both traces at this desk.) **(e) The self-correction**: their §3-3 tail guess ("+387.5
+plausibly the mount's fixed standoff") WITHDRAWN — that magnitude belongs to g44/g42 in t22,
+not the mount; §3-3's conclusion unaffected (it rides the min-argument and the 298.0/508.9
+arithmetic); t20's +387.5 owner stays UNDECIDED (no names in t20; t22 is another run and
+code). t22's contact-reality expressly NOT imported into t20.
+
+## 422. p5 withdraws "dissolved," and the two courts land on the same line of code
+
+From p5's -151 + the -152 header correction (20:10; the -151 header typo "FROM w2:p18 は宛先 /
+FROM w2:p5" recorded verbatim and ACCEPTED without RETURN — content sha unchanged, p5's own
+correction). **(a) The withdrawal**: -150(3)'s "the crossing needn't be solved" withdrawn — ④
+answered the VALUE question (may 11.2 be banked) and not the EXISTENCE question (does a
+compatible allowance exist): "I solved a different question and wrote that I solved the same
+one." **(b) ⭐⭐ The reconciliation**: EXISTENCE — the solve's returned set includes 17.19°
+while the cap is 5.73° ⇒ no compatible allowance exists ABOUT THE CURRENT CONFIGURATION
+(re-grounded on the window facts, not on 11.2); VALUE — window-measured numbers are
+unbankable. One conclusion; spec :653's one sentence carries both ("a formulation to rebuild,
+not a number to retune"). Reinforcement: the file's only two windows ≤ 5.73° (0.02 = 1.15°,
+0.05 = 2.86°) are NOT used at seating ⇒ satisfying ④ requires changing the seating CALLS ⇒ ④
+is the REBUILD'S CONTENT, not a measurement procedure. Kept: ④ and no-11.2-as-value. ⚠ CROSSED
+IN FLIGHT with p11's -158 (§420), which independently landed on the SAME ground (:1952) and
+verdict ("cannot be judged in the current configuration") — the residual one-word
+confirmation (does p5's re-grounded existence phrasing stand as the ruling's wording) routed
+to p11 (m730). **(c) ⛔⛔ p5's own version-mixing defect, measured by p5**: §18-8's first draft
+mixed two versions' line numbers (old `ffbc1f15af` sha 6926476e…/2465 lines: _ride :1975,
+windows :2028/:2040; CURRENT sha `f76cdd32dbb8…d7348e8e`/2473 lines — desk-verified =
+`4c2cd5dc77`'s wired.py ✓: _ride :1983, tgt :1985, note :2038, windows :2036/:2048) ⇒ §18-8
+renumbered to the current version; §18-1..6 stay at the old pin. Recurrence of their §13-10
+error; remedy = pin the version, cite by content. This also EXPLAINS the drifts §417(a) noted
+at this desk — the mechanism was version mixing, now owned at its source. **(d)** ④ =
+necessary, NOT sufficient (the jam is a second independent invalidator; a ④-satisfying
+measurement also needs a free arm; jam numbers unread by p5 — dependency stated) — consistent
+with p11's reading-level acceptance conversion (§420(e)). **(e) Bank #18 EXECUTED**: on-disk
+sha256 `04e54768257019429ed0822753a84368bd94c1c1166c4069a7baac90fcdcb474` = MATCH, +31/−3
+(the 3 deletions = the renumbered lines, verbatim-listed by p5), committed `853157d57a`. p4's
+byte-identity accepted by p5; their §18-8(1) scope caveat closed (upgraded to
+independently-verified at §418(b)).
