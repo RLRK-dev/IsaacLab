@@ -11068,3 +11068,44 @@ returning as B's correct bar: "the withdrawal was right, and it was not disposal
 day's missing quantity (command-vs-realization on this surface), one form covering two places;
 CONVERGENT with d1cabcc0b6 (§391(c)) within minutes, independently. **(d)** r_max = check A's
 quantity; re-read after the split; τ held as formula.
+
+## 393. C confirms — the conflict was thin sampling
+
+From p4's -163; pin ✓ (`280210ef53` driver sha `fd105f84cb…`). **(a) ⭐⭐⭐ p11's C HITS**: t18's
+aim "roll +0.55 rad (+32 deg tilt), seat error 1.46 mm" = VERBATIM-IDENTICAL to t15 (grasp-True);
+filter unchanged, coverage 44/65 → 65×2 ⇒ **t17's best-effort was THIN SAMPLING, not a real
+clearance-grasp conflict — the 8 mm holds while the same good pose is reached**; A and B unneeded
+for this stage. **(b) ⚠** Scope loud: aim-stage only; one config; STEP18's non-uniformity remains.
+**(c)** Check B implemented (`280210ef53`): end-of-stage realized tilt + pad gap beside A — the
+difference = the command-realization gap; B reports, does not gate (its bound = p11's returned
+withdrawal). B + state purification ride t19.
+
+## 394. Non-uniformity changes the shape — stages get classified before anything is ruled
+
+From p11's -151; pin ✓ (`c59ad03641` sha `7a9aa301da…`). **(a)** Finger dependence DROPPED TO
+ESTABLISHED (the desk's STEP8 tool-axis 0.0 both arms closes the arithmetic — "not a reading,
+arithmetic"); no more mechanism stories. A/B convergence + the returned-withdrawal bar received.
+**(b) ⛔⛔** t17's grasp False must NOT be attributed to the filter — coverage differs (44/65) ⇒
+t14/15 vs t17 is an uncontrolled comparison (and -163 then confirmed thin sampling). **(c) ⭐⭐⭐
+The re-ruling under non-uniformity**: A = WORSE (a global tool for a local problem — distorts two
+non-conflicting stages for one) / B = WORSE (accepting globally a penalty that barely exists) / C =
+refined: CLASSIFY stages first from the already-printed triples (removals, winner σ, dropped-best
+σ) — no new measurement / D = meaningful only at real-conflict stages / **E (new) = if the stage's
+TARGET brings the arms close, no ranking fixes it** — testable: is the min arm distance at conflict
+stages set by the COMMANDED TARGET SEPARATION or by POSE CHOICE? (⚠ the 88 mm span sits ~8 mm above
+the old ~80.5 mm objective floor — flagged NOT as an equation: EE-sphere separation ≠ arm-geom
+surface distance). E ⇒ the fix is stage geometry = p5's court; else D with the derived rate. ⛔ No
+single verdict; ruling = classify → E-vs-D at conflict stages → derived rate if D.
+
+## 395. The register computes its own distribution — and refuses the single verdict in its rows
+
+From p6's -122; pin ✓ (`77180563dc` LEDGER sha `2f8b6e03c3…`). **(a) ⭐** The ratio distribution
+computed by p6 ITSELF over 17 stages × both arms (not copied from relays): max 2.66 (STEP2 L,
+0.1205/0.0453), 2.20/2.23/1.67; **four stages drop NOTHING (7/8/9/17); STEP15/16 L ratio 0.94 —
+the winner better than anything dropped** ⇒ the row itself warns that a single verdict erases the
+distribution — exactly the classification input p11's -151 asks for, ALREADY COMPUTED. **(b)** The
+grasp row rewritten: 2 True / 1 False across versions = "not stable across versions"; p4's
+attribution recorded AS attribution with the 44/65 absence-claim caveat ("21 attitudes unseen" —
+not adopted as an absence). **(c)** The pin row: cab29 (t15 cab27), same anchor, offset 12.4 mm
+(t15 17.0) — both inside the 22 mm window ⇒ repeat evidence of the any-link latch working across
+runs on different links.
