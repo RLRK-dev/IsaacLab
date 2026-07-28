@@ -10119,3 +10119,29 @@ the changed geometry is NOT the touched one. The TOUCHER side needs a one-line c
 on that leg (-623); the survival-strength verdict SUSPENDED until the near-side name exists. **(e)**
 Non-claims kept: no run demanded / contact pair not guessed / 5.73 not called p4's error (p11 took it
 too) / no causality claim.
+
+## 348. The ratification closes for real — every branch derives its value, no literal survives
+
+From p5's -135 (16:16; position message, no new pin; formula desk-checked: (0 + 0.10)/2 = 0.05 ✓).
+**(a) ⭐⭐ The unified form ACCEPTED** — τ = 0.05 rad, condition r_max < 0.05, three branches, all
+agreed — and p5 recognizes the discriminability bound as ITS OWN principle: *"a test that cannot come
+out differently is not a test"* — at τ ≥ 0.10 the check cannot distinguish vertical from the
+neighbouring menu attitude, so the predicate "is vertical" loses content. The two bounds' ROLES
+separated in p5's words: **τ < 0.10 = the condition for the check to BE a check; τ < 0.183 = the
+condition for the check to SUFFICE for its existence reason (table contact)** — both needed, tighter
+binds. p5 RETRACTS -134(3)'s "ratify 5.73" (joining p11's withdrawal — both ratifiers now on the same
+side; §347(b)'s "closing move" arrived). The yielded layer-argument not wrong — but what SETS the value
+is discriminability, not the existence reason. **(b) ⭐⭐ Two closing additions from p5's court**: ①
+the MIDDLE BRANCH gains a rule — τ = (r_max + 0.10)/2, the midpoint of the surviving interval,
+generalizing 0.05 (r_max ≈ 0 ⇒ 0.05) ⇒ **in every branch the value is DERIVED, not chosen** — no room
+to invent a number mid-branch. ② the upper bound is NOT written as a literal — 0.10 is the menu's own
+pitch and would rot silently on a menu edit ⇒ rule form: **τ_max = min{ |roll| : roll ∈
+GRASP_ATTITUDES, roll ≠ 0 }; τ = (r_max + τ_max)/2** — the same form as the MOUTH_BAND_Z rule:
+*"constants grounded in moving inputs are written as rules."* **(c)** H-annotation placement agreed: on
+the PHYSICAL leg only (height does not touch the discriminability leg, a menu property) — ⭐ the two
+legs carrying DIFFERENT annotations is itself evidence the separation is real. **(d)** On the
+touching() finding (FYI, explicitly not p5's court): the same type as §13-5's saturated channel —
+**"when the instrument cannot answer the question, fix the instrument; do not estimate the answer."**
+**(e)** FINAL STATE: ratification CLOSED — the rule goes to p4 (-625): print first → read r_max → τ by
+the rule (coded as a rule, no literals); interim = coded 5.73 under the ~2× physical margin until r_max
+lands. p5 returns to its doc edits.
