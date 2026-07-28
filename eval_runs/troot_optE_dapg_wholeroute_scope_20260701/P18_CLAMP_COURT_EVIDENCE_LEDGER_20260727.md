@@ -10211,4 +10211,63 @@ surface form, applied forward). **(d)** p5's fix-the-instrument principle endors
 granularity named as its concrete (both sides AND geom, or the fixed instrument still cannot answer).
 **(e)** Non-claims: no implementation by p11 / no r_max prediction / no yaw-axis judgment / no
 opposition to the midpoint. Both guards routed to p4 BEFORE implementation (-628) and shared to p5
-(-627).
+(-627). 〔Superseded in part by §351(b): guard ① was already implemented CONVERGENTLY before arrival;
+guard ② remains the one outstanding piece.〕
+
+## 351. Rs approves the second stage — the packet's decision lands, and the retention holds
+
+From p4's -139 (16:2x). **(a) ⭐⭐ Rs APPROVED (ii)** — verbatim custody (p4 -139): 「相手の腕から一定
+距離以内に入る姿勢は選ばないようにして」 (16:1x JST, answered right after p4 explicitly framed it as a
+control-method change requiring Rs approval) ⇒ **pending item ① UNLOCKS** — the packet's decision,
+open since the (i)/(ii) split, is DECIDED; the countermeasure to the STEP13 inherited-pose
+concentration goes live. Implementation verified @ `fab643fda7` ("Stop choosing poses that crowd the
+other arm, and code the allowance as a rule"): the grasp solve receives the partner's CURRENT joints
+(was other=None — no partner in scratch, clearance in-principle unmeasurable); candidates within
+ARM_CLEARANCE of the partner are excluded (`:1139`); no-other calls do not measure and do NOT silently
+pass (`:1128` comment); the "partner's CURRENT pose" honesty note in-code. ⚠ **clearance = 8.0 mm
+(cable Ø) FLAGGED by p4 as a design judgment** — derived only as far as "a cell dimension, not a round
+number"; scale review = p11/p5 (routed -631/-632). Spec sha full-64 machine-match ✓; ⚠ the driver sha
+AS TRANSMITTED is **62 characters** — "f1" dropped at positions 21-22; computed here =
+`6ebd379488aa33c974f9f1406401ceeb0bd0746bc5d031d6772a6779412f78d4`; the commit-form pin is unambiguous;
+re-declaration asked (-630) — the partial-hash class, on the transmit side this time.
+
+**(b) ⭐ The rule CODED** — chronology verified (75d16d54a0 16:09 → f1b9321771 16:16 → fab643fda7
+16:21; my literal-5.73 read was the FIRST commit's mid-state): at `fab643fda7` the spec holds
+`VERTICAL_TOL_INTERIM_DEG = 5.73` beside `VERTICAL_TOL_DEG = vertical_tol_deg()` DERIVED ("the single
+source holds a provisional value and says so"); guard ① (raise on r_max ≥ τ_max → "formulation rebuild
+(p11)") in by p4's declaration — **implemented CONVERGENTLY before p11's -137 arrived**; ⚠ τ_max
+computed = 5.73° = the interim EXACTLY ⇒ p11's cap-not-under-cap objection confirmed by arithmetic; the
+pass-print is LIVE with a margin term (`:1816`). ⛔ OUTSTANDING = **guard ② only** (τ_max roll-based by
+p4's own declaration; the tilt(a) form crossed with the implementation — routed -630; p5's doc carries
+the same roll form, routed -632). **(c)** Homework verified: MOUTH_BAND_Z = derived `mouth_band_z()`
+per p5's verbatim rule (`75d16d54a0` `:454`); the 2-leg rationale + H annotation; 0.2→0.10 corrected;
+the 0°-sweep point; ⭐ touching() @ `f1b9321771` — BOTH ends, near side at **GEOM granularity**
+(`GNAME[near]`, comment citing -622(6)) ⇒ p11's granularity requirement satisfied on the side that
+decides the f2ext question ⇒ **B6 becomes answerable from the next positive on**. **(d) ⭐ Rs
+instruction #5**: 「ロボット全体がみえない」— the wide camera's lookat/distance now derive from the
+model's own centre/extent (hand-placed values had cropped the arms); `f1b9321771`. **(e) ⭐⭐ t15
+mid-run: THE RETENTION ENGAGED** — verbatim "C1 RETAINED cab27 at t=20.40s (the link actually in the
+groove; the build-time guess was cab30)"; pin=C1 holds thereafter; after the lift the C1 cable stays at
+table+10 mm (previously ~150 mm) ⇒ Rs's observed symptom 「ケーブルがクリップ付近で盛り上がってしまう」
+RESOLVED in-run — the any-link latch + activation-instant anchor recompute did it (the build-time guess
+cab30 would have missed; the actual groove link was cab27). Trace pinned after completion. ⚠ t15 does
+NOT contain the two newest commits.
+
+## 352. The doc lands and a claim flips on its last digit — kept, twice-annotated
+
+From p5's -136 (16:22). **(a)** The -132(4) list fully LANDED (§16 new + 5 reflections); numstat +68/−7
+with all 7 deletions disclosed and preserved as old-new juxtapositions; new content sha `b6743620ac…` —
+**bank request routed to p4 (-630, bank #10)**. **(b) ⭐⭐ The truth flip on the last digit**: closed
+queries surfaced 4 live stales, one FLIPPING truth — old "the right exceeds 4.93 in all 7 runs" → at
+the new threshold 5.93, 5.91 (6 runs) no longer exceeds; only 6.93 (1 run) does ⇒ "all 7" now FALSE.
+⚠ And p5 does NOT write "the right became safe": the margin is 0.02 mm — below any resolution claim p5
+holds; the sign turns on the LAST DIGIT; §11-6's projection error keeps signs undetermined regardless —
+**the 7/7 → 1/7 flip itself STRENGTHENS the no-sign-revival ruling** (a threshold moved a sentence's
+truth without moving the world). The line KEPT with both overturnings beside it (① projection ②
+threshold). **(c)** §16 all asset-derived, matching the three-way convergence (§335); the
+one-plate-two-changes note; the invariant/variable split; the wrong-guess disclosure; the
+no-3.7-preservation claim. **(d)** Rules in the doc: MOUTH_BAND_Z min/max interior; τ = (r_max +
+τ_max)/2 with τ_max = min nonzero ROLL — ⚠ the roll form predates guard ② (crossed in flight); the
+tilt(a) form supersedes; one cheap edit next cycle (routed -632). §11-6's print verbatim 3.00 KEPT with
+4.00 beside (#17's third class, instanced inside p5's own doc); R3's precondition + the guard-path
+general form landed in §13-9.
