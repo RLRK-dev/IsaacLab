@@ -9016,3 +9016,43 @@ same name, same number — the role change is invisible in a diff)**. **(e) ⚠ 
 reports the same count under two meanings — not ③ (the number is current): **a report living on with the
 withdrawn mechanism's wording**; fix = p4's court, proposal only. **(f)** Non-acts kept: no constants
 changed, no register writes, no σ-implementation touch, no runs.
+
+## 301. The ratification comes with its own query — and a condition that marks its own expiry
+
+From p5's -125 (14:24); the applicant's spec comment re-read at `368e43b04f` `:630-635` ✓ (the rationale
+and the flagged-for-ratification wording exactly as p4 described).
+
+**(a) ⭐⭐ TIER-C RATIFIED — by p5's own closed query, not the applicant's rationale**: all occurrences of
+the three names read (VIDEO_QUALITY = writer construction + final mimwrite; LIVE_OUT = an output path,
+OUT's kin; _live = the writer object, append/close/sentinel only) ⇒ none touch `m` / `d` / `mj_step` /
+cell quantities ⇒ TIER-C, same family as OUT/W/H/FPS. **(b) ⭐ The condition that marks its own expiry**:
+*"記録が stepping を変えないこと"* — currently satisfied (append_data is I/O only, no sync, no sleep); a
+future real-time sync CUTS the TIER-C basis ⇒ reclassification. The ratification carries its own
+invalidation trigger, in writing. **(c) ⭐** The fail-closed clause's FIRST live firing: a new constant
+appeared, the guard refused it as unclassified, it went to CLASSIFICATION instead of silent addition —
+*"設計どおりに動いています."* **(d) ⚠** One redundancy (not an error): cam / cam2 / render_every sit in
+TIER_C but are DERIVED under §6.4d — both "free", harmless doubling; cleanup = p4's choice. **(e)** The
+§11-6 acknowledgment: "safe" unclaimed on both sides; the budget rebuild WAITS for the trace pin —
+*"それまで数を動かしません."*
+
+## 302. Custody of A — and the sibling defect fixed with its history in the comment
+
+From p4's -115 (14:24); pins verified: `5718746442` ("Record what A meant, and stop printing one number
+under two names") — FOUR_CORRECTIONS sha
+`edaab2c1bf160fe4fab989239e388488f414f5145debfa3d102c7aafb3894e76` ✓; the two-option verbatim present ✓;
+the fixed print verified at `:1082-1083` 〔my first grep returned 0 — the phrase spans an f-string line
+break ("it ranks, it does " / "not exclude") — the cannot-discriminate class a third time, caught by
+reading the area BEFORE declaring absence〕.
+
+**(a) ⭐⭐ Rs instruction A in custody, done right**: the verbatim table extended (#14/#15/#16), and —
+*"単独の「A」は何も指さない"* — p4's own two-option text quoted VERBATIM beside it (A = 走りながら書く・
+測定は打ち切らない / B = 把持失敗で早期打ち切り) ⇒ the referent resolvable forever. **(b) ⚠ The honest
+flag, surfaced to Rs**: the live file lands at `~/Downloads/ur15_live.mp4` — the SAME directory Rs checks
+for submissions; name-distinguishable but confusable ⇒ if Rs rules 「置き場所を分けよ」, p4 complies; the
+submission rule itself unchanged (#9/#12 alive; the live file is not a submission — the ledger's
+"提出規則不変" stands). **(c) ⭐** The sibling defect FIXED in the same commit, its history in the comment
+(*"p11 -120(1) found it; I had written it"*): the print now reports what the floor ACTUALLY removed —
+*"floor {SIGMA_FLOOR} removed {N} of them (it ranks, it does not exclude)"* — zero while the floor is
+zero, unreadable as a second filter. **(d) ⭐** The -120(2) prescription ADOPTED: 0.12 not re-measured;
+axis to rad/m first, then a level means something — the envelope plan to be written in that order. **(e)**
+Provenance kept: NOT t12's producing code (t12 = `b92b7b823a`); t12's trace remains the one pending item.
