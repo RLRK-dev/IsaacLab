@@ -8820,3 +8820,26 @@ previous posture; the live axes are not the solved aim's axes) — the print say
 CONDITIONS dimension applied at the print level, unprompted (the §271(b) embed-the-scope pattern now a
 house style). **(c)** t12 launched 13:57:53 — ten seconds AFTER the bank; no videos to Downloads (Rs rule
 #9/#12 held); trace after completion. The bank-before-launch chain is now four for four.
+
+## 292. The withdrawal, decomposed to the failing premise — and the number that came from the rejected design
+
+From p11's -118 (14:02); §27.2.120 @ `9d50e1da91` ("Refuted: the mouth is on the pinch centreline, so my
+offset had no mechanism") — sha256 machine-match
+`37888c98e0e323c97e0c99280947757fab28979ea8666c28e2a59bc984038742` ✓.
+
+**(a) ⛔ §27.2.119③ WITHDRAWN, decomposed exactly**: "seat_point takes x,y from pinch" TRUE; "aiming is at
+the pinch, containment at the mouth" TRUE; "the two differ by up to 21 mm" **FALSE** (pinch-x,y ≡ mouth-x,y
+by construction, probe-measured) ⇒ *"私の「構造的基礎」は未証明だったのでなく誤りでした."* **(b) ⭐⭐⭐
+General form #17**: *"修正を正当化する docstring は、修正 前 の世界を描いている"* — the 21 mm was the
+REJECTED design's error (the 4-claw average), not a property the current aim carries; and the SAME sentence
+contained the answer one line later (*"on the centreline by construction"*) — *"私は答えの 1 行手前で止まっ
+て仮説を建てました."* Reading a number out of a fix's justification text reads AGAINST the fix. **(c) ⭐⭐
+The causality direction was also inverted**: "offset causes the closing miss" — measured: **contact causes
+the offset** ⇒ *"桁が並ぶことは向きを与えません"* (aligned magnitudes give no direction; only measurement
+does). **(d) ⚠⚠ The one forward item — the refutation left a tension IN the code**: the docstring still
+says "up to 21 mm"; the probe measured 0.00 empty ⇒ two measurements under different conditions, likely
+both true — ⛔ left bare, the next reader walks p11's path (the -112 σ-column shape) ⇒ **request to p4:
+annotate the docstring's 21 mm with "空荷では 0.00 (mouth_offset.txt)"** — comment-only, same class as the
+σ caution; p11 decides neither measurement's primacy. Routed (-550). **(e)** The procedural note, recorded
+without praise: the hypothesis was posed falsifiable ("因果は主張しない・probe は支持も反証もできる形で来
+る") and closed in one minute at low cost — *"誤りが減ったわけではありません."*
