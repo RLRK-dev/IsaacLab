@@ -32,7 +32,13 @@ TIMEOUT_S = 240
 def one(centre: float, log: Path):
     env = dict(os.environ, GRASP_CENTRE_X=f"{centre:.6f}")
     with log.open("wb") as fh:
-        p = subprocess.Popen([PY, "-u", "ur15_steps_wired.py"], cwd=HERE,
+        # ⛔ env=env.  It was built on the line above and then not passed, so every point ran
+        # the driver's default centre and the sweep measured one configuration eight times.  I
+        # had already blamed a duplicate target computation for this -- that duplicate is real
+        # and is fixed, but it was NOT what produced these rows, and finding *a* defect is not
+        # the same as finding *the* defect.  The self-check below is what refused the second
+        # attempt and sent me back here.
+        p = subprocess.Popen([PY, "-u", "ur15_steps_wired.py"], cwd=HERE, env=env,
                              stdout=fh, stderr=subprocess.STDOUT, start_new_session=True)
         got, t0 = {}, time.time()
         while time.time() - t0 < TIMEOUT_S:
@@ -72,6 +78,19 @@ def main() -> int:
         rows.append((c, L, R, hl))
         print(f"{c:12.3f}  {str(L[0]):>8s} {str(L[1]):>7s}  {str(R[0]):>8s} {str(R[1]):>7s}   {hl}",
               flush=True)
+
+    # ⛔ Does this sweep vary anything?  The first attempt returned eight identical rows because a
+    # SECOND copy of the target computation still read C1's x and silently won.  Eight identical
+    # rows are what a working sweep of a flat landscape looks like AND what a sweep that never
+    # moved looks like, so the run is refused unless the held links actually differ.
+    distinct = {hl for _, _, _, hl in rows}
+    moved = sum(1 for c, *_ in rows if abs(c - rows[0][0]) > 1e-12)
+    if moved and len(distinct) == 1:
+        raise RuntimeError(
+            f"the centre was swept over {len(rows)} values and the links held never changed "
+            f"({distinct.pop()}).  That is not a flat landscape, it is a sweep that did not move: "
+            f"a centre 210 mm away cannot hold the same 15 mm cable link.  Refusing to report "
+            f"numbers that would read as eight measurements of eight configurations.")
 
     ok = [c for c, L, R, _ in rows if L[1] is not None and L[1] >= 1]
     out = [

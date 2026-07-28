@@ -1642,11 +1642,19 @@ print(f"[steps] Tier A cross-check: {len(_spec.cross_check_measurable({}))} meas
 for t in SIDES:
     print(f"[steps] STEP1 {t} arm touching: {sorted(touching(t, d)) or 'clear'}")
 qt = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
-gL, iL = cable_at(C1[0] - GRIP_HALF_SPAN)
-gR, iR = cable_at(C1[0] + GRIP_HALF_SPAN)
+# ⛔ THE SECOND COPY.  This re-measures the pair after the approach, because the cable settles --
+# and it read C1[0] while the first copy read GRASP_CENTRE_X, so the later one silently won and
+# the centre variable did nothing at all.  I found it only because the sweep returned eight
+# identical rows and the "centre moved" line never printed; had I reported those rows they would
+# have read as a measurement of eight configurations that were all the same one.  This file
+# already carries a comment about a duplicate whose second copy had no guard (see the arm-pair
+# minimum): same shape, and the fix is the same -- one source for the centre, used by both.
+gL, iL = cable_at(GRASP_CENTRE_X - GRIP_HALF_SPAN)
+gR, iR = cable_at(GRASP_CENTRE_X + GRIP_HALF_SPAN)
 GL = (float(gL[0]), float(gL[1]), float(gL[2]))
 GR = (float(gR[0]), float(gR[1]), float(gR[2]))
-print(f"[steps] re-measured after the approach: L=cab{iL} {np.round(gL,4)}  R=cab{iR} {np.round(gR,4)}")
+print(f"[steps] re-measured after the approach: L=cab{iL} {np.round(gL,4)}  R=cab{iR} {np.round(gR,4)}"
+      f"   (centre x={GRASP_CENTRE_X:+.4f})")
 for t in SIDES:
     qa = np.array([d.qpos[a] for a in QADR[t]])
     af = np.array([d.actuator_force[i] for i in AIDX[t]])

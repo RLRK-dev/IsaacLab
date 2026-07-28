@@ -1,0 +1,50 @@
+GRASP-CENTRE SWEEP -- collision-free start poses per arm, by where the pair sits
+instrument: the driver's own start-pose IK line, with the silent or-cands fallback
+            separated out (before that fix, 'none cleared' and 'all cleared' printed
+            the same number and this sweep could not have been read)
+method    : the real driver, once per centre, GRASP_CENTRE_X set, stopped as soon as it
+            has printed both lines.  No reimplementation of the solve.
+⚠ span    : 88 mm COMMANDED; the links actually taken sit 75 mm apart, because the cable
+            is 15 mm segments and the nearest link is what gets held.
+
+centre x [m]  L solved  L free  R solved  R free   held links
+       0.150         7       0        17       2   L=cab27 R=cab32
+       0.100         6       0        16       2   L=cab23 R=cab29
+       0.050         7       0        15       1   L=cab20 R=cab26
+       0.000         6       0        14       0   L=cab17 R=cab22
+      -0.050         9       0        15       0   L=cab13 R=cab19
+      -0.100        12       0        15       0   L=cab10 R=cab16
+      -0.150        14       0        14       0   L=cab7 R=cab12
+      -0.200        14       0        14       0   L=cab3 R=cab9
+      -0.250        13       0        15       0   L=cab0 R=cab6
+
+⛔ LEFT ARM keeps ZERO collision-free candidates at every centre swept.
+⛔ Not a verdict and not a recommendation: where the pair should sit is p5's call.
+
+--------------------------------------------------------------------------------------------
+READING -- written by p4 AFTER the run, not produced by the sweep.  Measurements above; this
+block is interpretation and is marked so the two cannot be confused.
+
+1. There is NO upper bound to report.  p5 asked for the highest centre x at which the left arm
+   keeps at least one collision-free start pose.  Across the whole cable -- +0.150 down to
+   -0.250, which is every centre the 40-link cable can carry a 88 mm commanded span at -- the
+   left arm keeps ZERO.  The quantity p5 asked for does not exist in this cell.
+
+2. Moving the centre toward -x, the direction ruled, does not buy the left arm anything and
+   costs the right arm what it had: R goes 2, 2, 1, 0, 0, 0, 0, 0, 0.  Past centre 0.000 both
+   arms are at zero together.  ⚠ The ruling's premise was that the left was already at the
+   floor and only the right could pay; the measurement agrees with the premise and shows the
+   trade does not exist.
+
+3. ⭐ It is PLACEMENT, not reach (p6's wording correction, and this is direct evidence for it).
+   The left arm's SOLVED count RISES as the centre moves away -- 7, 6, 7, 6, 9, 12, 14, 14, 13 --
+   while its collision-free count stays at zero.  More solutions exist and all of them collide.
+   An arm that could not reach would run out of solutions; this one runs out of clear ones.
+
+4. ⛔ Comparisons only within this table.  p6: the collision-free predicate changed between t42
+   and t43 (mast geom set, ngeom 139 -> 140), so counts from different drivers are not the same
+   quantity.  Every row here came from one driver in one sitting.
+
+5. ⛔ Not a recommendation.  Where the pair should sit, and whether the upstream options p5
+   named (moving a clip, swapping the arms' roles, changing the mounting) should be opened, is
+   p5's call and Rs's to settle.  This table is the number p5 asked for and nothing more.
