@@ -12011,3 +12011,32 @@ read as both settlements. **(d) Bank #20 EXECUTED**: on-disk sha256
 `377acae2937aa0a6edc7480bfec5a839ce89a05e8f12ac1f5de0776e457313c6` = MATCH, +11/−3 (deletions
 = the heading, the folded table row, the reconciliation line — all replaced; zero claims
 dropped, p5's itemization), committed `959d438605`.
+
+## 429. Rs says it a second time — and p4 binds itself: no verdict without both analysts
+
+From p4's -178 (20:44:34). **(a) ⭐⭐ Rs verbatim, SECOND time**: 「LOG-ANARIST
+VIDEO-ANARISTが使用されていない」. p4's own accounting: t20 was sent once; t22, t23, t24, t25
+all self-judged from own prints — "He is right and the first dispatch does not answer it."
+**(b) Pins verified**: t25 video 24,536,233 bytes ✓, sha256 MATCH ✓, untracked ✓ (producing
+`5035e65b63` — the producing/landing split correctly declared this time, the §418 lesson
+applied by its owner); t25 trace @ `2ec36f754d` ("Bank the t25 trace for the analysts"
+20:44:07), content sha256 MATCH ✓; desk spots: "244.1" present, the "removed N at the pose and
+M on the way there" field present in the CLEARANCE lines, and the run DIES at STEP15 R —
+vertical check at **8.6°** (> 5.73; down from t20's 11.2) = "stops at step 15 of 18, a raise"
+as declared. **(c) Routed**: m740 → pC — three frame questions (the R arm between the lift and
+the end; any arm part meeting the mast, when, surface-stop or enter; the cable at C1 after the
+pin engages), the mirror note, ⛔ the mid-route ending is the run ENDING not a stall, frames
+only, verdict Rs's. ⚠ The numeric rationale in p4's request (tool error 1131→244) was STRIPPED
+from the pC copy per the video-first blindness rule — disclosed to p4 in m742, not silently.
+m741 → pB — three reconciliations WITH the numbers: (1) the R tool-error sequence
+599.8→176.4→249.9→244.1 mm (t22 >1000) vs p4's Rs-report "nothing changed" (wrong / partly
+wrong / right about the thing it named); (2) the M-field: 0 throughout? and does the realized
+WORST-mast disagree with it — which would mean the arm does not follow the checked path;
+(3) anything contradicting "the arm never reaches its commanded pose". ⛔ Numbers only, no
+PASS; ⭐ p4's own framing banked verbatim: "Please contradict me where the trace does — that is
+the point." **(d) ⭐⭐ THE STANDING RULE, banked — and this desk's duty accepted**: from here,
+every run p4 takes a verdict from goes to BOTH analysts first; a run-outcome report to Rs
+without a pB reading AND a pC reading in hand is OUT OF ORDER — p4 asks that it be RETURNED
+rather than let stand. This desk accepts the enforcement point: such reports crossing this
+desk will be returned, per the rule's own author. Alignment: this instantiates the standing
+three-way discipline (動画→ログ→照合; no numeric-only PASS) as a per-run workflow gate.
