@@ -10145,3 +10145,70 @@ touching() finding (FYI, explicitly not p5's court): the same type as §13-5's s
 **(e)** FINAL STATE: ratification CLOSED — the rule goes to p4 (-625): print first → read r_max → τ by
 the rule (coded as a rule, no literals); interim = coded 5.73 under the ~2× physical margin until r_max
 lands. p5 returns to its doc edits.
+
+## 349. The crossing closes on merits — the check's origin decides its job, and the interim carries an expiry
+
+From p11's -136 (16:17:47 — written BEFORE m624's arrival, crossing p5's -135 acceptance; the two
+CONVERGE at 0.05, and -136 supplies the ground that closes the crossing BY ARGUMENT, as it says
+crossings must close). Pin verified: §27.2.136 @ `e7fecda4d0` sha `749b83b502…` ✓; 3 headers = the
+declared section + internal A/B parts (the -135 pattern). ⚠ Minor cite-offset: p11's ":318-328 / :325"
+for touching() sits 2 lines off in BOTH candidate versions (:320-330 / :327 at `8e4852e767` AND
+`3f5c7630ac` — both checked); the verbatim anchors (the docstring; `other = g2 if a1 else g1`) are
+exact — content pinned, numbers slipped.
+
+**(a) ⭐⭐ The merits**: the check can carry two jobs — J1 physical (do not hit the table; tilt < 0.183
+rad ⇒ 5.73° suffices) / J2 verification (detect whether the vertical command TOOK; discriminate the
+smallest tilt a solution can return ⇒ < 0.10 rad strictly). WHICH job is settled by the check's own
+ORIGIN (§27.2.133(c), p11's own established fact): the merge-point check exists to CATCH
+inheritance-bypassed poses — and bypassed poses are aim_slot_at(..., pose_rd=(yaw, roll)) products =
+MENU VALUES, smallest nonzero 0.10 rad ⇒ **τ = 0.10 rad is blind to exactly the cheapest instance the
+check was built to catch** ⇒ τ = 0.05. Flagged honestly as NOT a restatement: -135's ground was
+abstract discriminability; this one is anchored in what the check actually catches, and does not depend
+on the layer question. **(b) ⭐⭐⭐ The interim gains an expiry**: coded 5.73 is J1-safe (~1.8×) but
+J2-blind, and J2 is unneeded only while inheritance cannot fire at seating steps — the very condition
+measured in §27.2.133(c) ({2,3,4,5,13} ∩ {7,15} = ∅) ⇒ **the interim's safety expiry and the
+inheritance hazard's latency expire on the SAME DAY: the moment aim reaches seating steps, 5.73 turns
+from a safe interim into a blind check.** Routed: p4 as an interim-condition annotation beside H
+(-628); p5 as an R3-precondition sharpening (-627). r_max branches stand; τ = 0.05 stays conditional
+until the pass-print supplies r_max. **(c) ⛔ B6's premise owned by p11**: "the answer is in the log"
+was said without reading the producing code — touching() never promised the near side (docstring
+verbatim: "What this arm is in contact with, other than itself.") ⇒ p11 assumed a field the function
+explicitly does not hold; the delivery-surface lesson, second instance, on p11's own count.
+**(d) ⭐ The extension requirement sharpened — GEOM, not body**: the function stores geom_bodyid → BODY
+names (geom name only as fallback) ⇒ adding the near side at body granularity still cannot say whether
+f2ext was in the pair (the plate inside the pad body vanishes) ⇒ the one-line extension must be BOTH
+SIDES and GEOM-GRANULARITY — supersedes -622⑥'s looser phrasing; routed -628. **(e) ⚠ Expectation set
+in advance**: even with the near-side name the verdict barely moves — a 2 mm change against a
+forearm/wrist-scale contact pair survives under any hypothesis ⇒ the leg barely fills either way; the
+DECIDING change remains STEP13's own target (RX_MID) or seed (-135 ⑨). The extension supported anyway:
+a report that says "what I touched" but not "with which part of me" expresses half the question.
+**(f)** Non-claims: no run / p5's position not spoken for (and p5 had in fact ALREADY accepted — the
+convergence is real, not proxied) / no pair guess / no causality.
+
+## 350. Two guards before the rule is coded — a derivation must be able to say "no value"
+
+From p11's -137 (16:19:41 — the post-crossing receipt: -624 and -136 crossed; the conclusions arrived
+independently at the same place). Pin verified: §27.2.137 @ `89c91bce4a` sha `a37bf8ffb9…` ✓, one
+header ✓. Receipt: τ = 0.05 / r_max condition / three branches — CLOSED accepted; p5's identification
+of the bound with its own principle endorsed; the role separation adopted.
+
+**(a) ⭐⭐ Guard ① — the formula must be able to refuse**: fed r_max ≥ 0.10, τ = (r_max + 0.10)/2
+returns τ ≥ 0.10 — silently producing an INVALID value exactly when the interval is empty ⇒ the coded
+form must be `if r_max >= τ_max: raise (formulation rebuild) / else: τ = (r_max + τ_max)/2`. Named as
+the THIRD instance today of one shape: the non-discriminating predicate, the tautological guard, and
+now a formula that always returns a number. **(b) ⚠ The midpoint's asymmetry noted, adoption not
+blocked**: the midpoint is optimal at equal error costs, and the costs here differ — a false stop is
+expensive but AUDIBLE; blindness passes bypassed poses SILENTLY ⇒ the asymmetric optimum sits toward
+r_max (the strict side). At r_max ≈ 0 the two coincide (0.05) ⇒ remember it only if the middle branch
+is ever entered. **(c) ⭐⭐ Guard ② — the bound must live on the check's own measurement surface**:
+written as "roll ≠ 0" the rule has a hole — GRASP_ATTITUDES are (yaw, roll) PAIRS with yaw ∈ (0.0,
+±0.15, ±0.30) (`:560-562` ✓), and whether yaw tilts the tool off vertical is exactly what the rule
+should NOT need to know ⇒ **τ_max = min{ tilt(a) : a ∈ GRASP_ATTITUDES, tilt(a) > 0 }, where tilt(a)
+is THE QUANTITY THE CHECK MEASURES** (the pinch→mouth angle from world −z) — correct whether yaw tilts
+or not, and correct under future menu DOF. The principle: roll is a PARAMETER, tilt is the CHECK'S
+quantity — identifying them turns a parameter-space hole into a bound hole (the same-measurement-
+surface form, applied forward). **(d)** p5's fix-the-instrument principle endorsed; -136(d)'s geom
+granularity named as its concrete (both sides AND geom, or the fixed instrument still cannot answer).
+**(e)** Non-claims: no implementation by p11 / no r_max prediction / no yaw-axis judgment / no
+opposition to the midpoint. Both guards routed to p4 BEFORE implementation (-628) and shared to p5
+(-627).
