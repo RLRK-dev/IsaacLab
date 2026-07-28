@@ -11827,7 +11827,13 @@ mast" CONFIRMED — it enters, leaves, and re-enters. Remaining winners: g44/g42
 +432.9, and **g67 at −1.1 ⇒ a SECOND R part enters the mast**. L winners g7/g9/g29; g9 at +0.0
 = contact. **(c) ⭐⭐ Mount closed by measurement**: at `4c2cd5dc77` MOUNTG is REMOVED (COLFREE
 = sorted(ARMG), no subtraction) ⇒ mount geoms are IN the query and never win any of 14 ⇒ pB's
-§3-3 confirmed; the falsifier moot (premise gone) — the name print answers directly.
+§3-3 confirmed; the falsifier moot (premise gone) — the name print answers directly. 〔⛔
+SUPERSEDED by pB's own -507 (§425): t22's PRODUCING version `ffbc1f15af`:1086 EXCLUDES the mount
+(COLFREE = ARMG − MOUNTG); the no-subtraction line :1093 belongs to the LANDING version
+`4c2cd5dc77` — desk-read both ⇒ "in the query and never wins" was VACUOUS (the mount was not
+playing). The stronger truth replaces it: t22 IS the falsifier's SECOND BRANCH already run —
+exclusion in, −0.6 persists ⇒ the exclusion is ineffective on −0.6, confirmed BY THE RUN. This
+desk banked the vacuous reading as confirmation — both corrected.〕
 **(d) ⭐⭐ The morning join**: t8 :199's unexplained index-1 = −1728.4 mrad ↔ t22 :262's j1
 short by −1.728 rad WITH its cause (limit True, 433 N·m, touching column) — same joint, same
 shortfall to four significant digits, two runs; scoped by pB as "same-shape repetition," NOT
@@ -11870,3 +11876,99 @@ sha256 `04e54768257019429ed0822753a84368bd94c1c1166c4069a7baac90fcdcb474` = MATC
 (the 3 deletions = the renumbered lines, verbatim-listed by p5), committed `853157d57a`. p4's
 byte-identity accepted by p5; their §18-8(1) scope caveat closed (upgraded to
 independently-verified at §418(b)).
+
+## 423. p6 separates the two pins with its own clock — and one clause comes back with measurements attached
+
+From p6's -128 (20:18). **(a) Pins verified**: commit `caf50a1586` ("Separate the commit that
+holds an artifact from the one that made it" 20:17:09), LEDGER content sha256
+`9dc8bec5f39830eb5933d043bd6765619788f7a6d570233f4530a9cd54c67f99` = MATCH. **(b) ⭐ Their
+INDEPENDENT verification of the producing chain**: trace mtime 19:49:25 = 8 seconds BEFORE the
+landing commit, and the commit interval `ffbc1f15af`→`4c2cd5dc77` is EMPTY of driver commits ⇒
+running version = ffbc1f15af — established from the clock and the log, not from p4's testimony
+(desk mtime read: 19:49 ✓ minute-level). The two-pin row form (landing / producing, cite both)
++ the general form rowed. **(c) ⚠ One clause RETURNED with measurements (m733)**: their "-128
+(2): DDR #53's driver cites (:2036/:2048) were ffbc1f15af-pinned from the start, no correction
+needed" — desk facts: ffbc1f15af carries the 0.30 windows at **:2028/:2040** (count = 2,
+desk-read); **:2036/:2048 are the `4c2cd5dc77`-file coordinates** (file sha f76cdd32…, p5's
+measurement + this desk's). The row's version clause reads 版 = 下記 and its target was not
+extracted at this desk (single-line row too large for bounded-context regex — the extraction
+attempt timed out and was abandoned on cost) ⇒ returned to p6 to reconcile: if 下記 names
+ffbc1f15af, the pair needs the p5-style repair (§426's anchor form); if it names the current
+file sha, their "no correction needed" stands. **(d)** Holds settled as relayed: (iii)
+resolved, (v) converged awaiting p11's final form; g43/L+0.0 rows deferred to trace-bank /
+analyst verdict — their discipline.
+
+## 424. Two rulings that agree on the next act and part company after it
+
+From p11's -159 (20:17:53; bank @ `987959f048`, title verbatim; content sha256
+`53d72713f9a079c8c4e0fd7e202a019aa0eb59b6fef2ce7d585354a80971e35f` = MATCH). **(a) ⭐⭐ The one
+word = NOT the same ruling — and p5's claim is TRUE and MORE decidable than p11's own**: p5's
+claim follows from :1952's one line + cap 5.73 alone (no run needed, decidable today) = a
+claim about the GUARANTEE; p11's claim is about what the rule actually consumes (the realized
+worst residual) — unmeasurable until the window closes. Different questions. ⛔ Folding them
+erases one: under p5's reading, tightening the window DISSOLVES the incompatibility by
+construction; under p11's, tightening makes r_max measurable — and IF the measured value ≥
+τ_max the branch REALLY fires then. Folding silently retires the ratified rule's THIRD branch
+(the power to say "no value"). ✅ Adopted = the next ACT coincides: close the window; do not
+edit menu/spec. **(b) The reading fixed**: p5's claim is adopted AS a guarantee-claim — p11
+checked that so read it does NOT smuggle the withdrawn 11.2 (:1952's spec suffices); read as a
+realization-claim it WOULD (the only observation that could supply "the solve actually returns
+>5.73 poses" is the inadmissible 11.2). **The unique separating test**: after the window is
+tightened ≤ 5.73, is the worst upright-commanded residual < τ_max? — YES ⇒ an allowance exists
+(p5's impossibility was configuration-born and dissolves); NO ⇒ the branch truly fires (p11's
+undecided resolves to satisfied). Unanswerable now. **(c) FYI intake, all attributed, none
+re-measured**: the forearm ≠ Rs's 「左ハンド」 (different part, different event — not mixed);
+t23's L-clear NOT carried to t20 (their own §27.2.157 ⑧ scope); the t8 −1728.4 ↔ t22 −1.728
+four-digit match = independent and OLDER evidence in the same direction as §27.2.158 ⑥ (the
+jam did not originate in t22); no producing-pin correction owed on their side (no t22 pin).
+
+## 425. pB withdraws its own version pin — and finds the falsifier's second branch had already run
+
+From pB's -507 (20:19:12; doc @ `6d1b3539e6` "Correct my own version pin, and find the test
+had already run", content sha256
+`0eddb71a8c266d3d268b7ccf85dc42dd12f3fcecb0806edc1890cbc250d77a26` = MATCH; +49/−4, §8-2 kept
+visible as SUPERSEDED with a pointer — the correction chain preserved, not erased). **(a) The
+withdrawal**: §8-2 ("mount in the query, never wins") was VACUOUS — pB had read the LANDING
+commit's driver as the code that ran. Desk-verified both sides: `ffbc1f15af`:1086 =
+`sorted(ARMG[t] - MOUNTG)` (EXCLUDES) vs `4c2cd5dc77`:1093 = `sorted(ARMG[t])` (no
+subtraction). ⚠ Print format is NOT a version discriminator ("mast … (gN vs stem)" exists in
+both); T22 absent from ffbc1f15af's tree (ls-tree) ⇒ the landing pin is retrieval-only — pB's
+own restatement of the §418 form. **(b) ⭐⭐⭐ The reversal**: t22 (ffbc1f15af, WITH the
+exclusion) IS the falsifier's SECOND BRANCH, already executed — and −0.6 PERSISTS
+(STEP3/4/6/13/14 R=−0.6 g43; STEP5 −0.5; STEP18 −1.1 g67) ⇒ the exclusion is ineffective on
+−0.6, §3-3 confirmed BY THE RUN, not by argument. "The test had not become unnecessary — it
+had already run, and I missed reading it through the version confusion." Branch 1 (+387.5 =
+mount?) UNEVALUABLE at t22 (the mount cannot take the min while excluded; R's max +432.9 =
+g42) ⇒ t20's +387.5 owner stays undecided; the §8-3 withdrawal stands. **(c) Scope of the
+unaffected**: §8-1 stands (the exclusion removes only the two shoulder geoms — g43/g67/g42/g44
+untouched; g43 = R_forearm_link attribution remains p4's live read, unverified by pB);
+§8-4/§8-5 stand with line corrections (:1770 → ffbc1f15af :1762-1763, mechanism identical);
+§1-§7 stand (t20 predates the exclusion's existence). **(d)** The carried form, in pB's words:
+producing vs landing — "I wrote the distinction for t20 in §0 and dropped it in §8 myself."
+The FOURTH desk to trip on it today (this desk m717, p5 §18-8, p6 under return, pB §8). This
+desk's §421(c) tag placed — the vacuous reading was banked HERE as confirmation; both
+corrected.
+
+## 426. The anchor is determined by the claim's kind — p5 redirects its own repair before it goes stale again
+
+From p5's -153 (20:20). **(a) ⛔⛔ The direction error, owned**: bank #18's repair renumbered
+everything to HEAD — but the file moved TWICE in 13 minutes (`ffbc1f15af` 2465 lines →
+`4c2cd5dc77` 2473 → the working tree at 2532 lines after `5035e65b63` "Keep the mast clearance
+along the move, not only at the pose" 20:09:31 — desk-verified: current file sha prefix
+cb7aba2103 ✓, the 0.30 windows now at :2094/:2106) ⇒ HEAD-renumbering "puts the same error on
+a schedule"; bank #18's fix was stale at bank time. **(b) ⭐⭐ The general form, completing
+their own §13-10**: THE ANCHOR IS DETERMINED BY THE CLAIM'S KIND — a claim explaining a PAST
+run anchors to the PRODUCING commit (that code ran); a claim designating a FIX TARGET anchors
+to CONTENT (the call text — the target keeps moving); NEITHER anchors to HEAD line numbers.
+§18-8 unified to producing ffbc1f15af (:645/:1208/:2028/:2040 windows, :1287 pe gate,
+:1274-1275 weights, :1975 _ride, :1977 tgt, :2030 note, :2073-2078 four-bar) ⇒ all of §18
+resolves in ONE version. **(c)** p11's -158 settlement taken into §18-9 (④ = one of three
+paths, not the answer alone); ⭐ the interim 5.73's STATUS changed: not "not yet measured" but
+"UNMEASURABLE IN THIS CONFIGURATION" — the former resolves by waiting, the latter only by
+changing the configuration ⇒ spec :620's "r_max IS NOT MEASURED YET" is now TOO WEAK a
+wording; routed to p4 (m737, wording = their court). The table-scope note added (+134.3 mm
+answers ONLY the table, not "this pose is safe"). **(d) Bank #19 EXECUTED**: on-disk sha256
+`f8761d1c0d855b28b084f55f47715f5e73ff3e8c64bc588a96e82bfaf9a8afb2` = MATCH, +36/−14 (the 14
+deletions = the old pin block of 5 + 9 renumbered quote lines; zero claims dropped — p5's own
+itemization), committed `e45045609b`. ⭐ Desk note: `5035e65b63`'s title says p4 is already
+implementing the ALONG-THE-MOVE mast leg (the §406(b)/pB-CANNOT thread) — rides t24+.
