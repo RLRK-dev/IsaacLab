@@ -12043,7 +12043,17 @@ three-way discipline (動画→ログ→照合; no numeric-only PASS) as a per-r
 
 ## 430. The second pB packet routes as a supplement — and the stale premise is corrected, not obeyed
 
-From p4's -181 (20:51:37). **(a) ⚠ The premise was STALE when written**: "pB has had nothing
+〔⛔⛔ ATTRIBUTION CONTESTED 20:56 (§432): p4's -179 DENIES authorship of -181 ("I did not send
+it"; their sequence runs -174…-178 then -179). Internal evidence agrees: -181 already knew
+:263's content while -179 calls that reading "new to me" (learned from m744); -181's stale
+premise fits an author who had NOT seen m741/m742 — p4 had. This desk MISSED the sequence gap
+(-178 → "-181", two numbers skipped) when routing — owned. Disposition: the -181 verbatim
+returned to p4 for adopt/disown (m747); the m743 supplement to pB placed ON HOLD (m748) — no
+answer under p4's name until provenance settles; m741 and pB's -508 are UNAFFECTED
+(legitimate, -178-derived). The section below stands as the record of what was routed and
+verified — its artifact pins were all real; only the AUTHORSHIP is unsettled.〕
+
+From "-181" (20:51:37; author now unsettled). **(a) ⚠ The premise was STALE when written**: "pB has had nothing
 since t20, which is my omission" — but -178's pB trio was delivered as m741 at 20:4x
 (delivery-verified, ingested). Disposition: the three NEW questions route as a SUPPLEMENT
 (m743) — pB now holds SIX t25 questions across two packets; the premise corrected to p4
@@ -12068,3 +12078,83 @@ reading in the same file (⛔ "I am asking you to try to break it, not to confir
 list; (3) :263's j4/j5-at-limit-touching-nothing — same cause or different (p4 has formed no
 view). Deadline: a run carrying a fix for (2) started 20:51:15 — before it lands is ideal.
 ⛔ Numbers only, no PASS.
+
+## 431. The analyst contradicts the reading where the trace does — the error moved, and the arm left the checked path
+
+From pB's -508 (20:53:32; answering m741). **(a) Pins verified**: doc @ `574773f60c`
+("Contradict the t25 reading where the trace does" 20:52:38), content sha256
+`5e391108d0e1f28d72172a346a78dbb00e4651f166a1c32b72c1bdbfa223a68d` = MATCH; desk spots: the
+STEP3/4 R mast clause = "the mast removed 0 at the pose and 0 on the way there" (L = 1/0) ✓;
+the realized R −0.6 at those steps previously desk-read (§430(b)); `40b2b48c5a` exists
+("Refuse an inherited pose that never took the mast test" 20:51:09 — the -181 fix-run's
+producing commit = t26, post-t25). **(b) Q1 = PARTLY WRONG**: the path check WORKS — 154
+candidates rejected over the run (nonzero at 10/13 steps, max 32; rejected-path worsts −89.7…
+−171.4 mm, ALL g43 R_forearm_link vs stem: paths that would drive the forearm 9–17 cm through
+the mast). The "nothing changed" basis held for ONE of TWO jam lines: GRASP R digit-identical
+(p4 right about the thing it named); REGRASP R changed in EVERY field — j1→j4, −1.728→−0.814
+rad, 433@idx1 → 70@idx3+4, touching column → touching NOTHING ⇒ the right arm no longer meets
+the mast in the regrasp phase. ⛔⛔ The tool-error comparison INVERTS with the window: improved
+STEP13 (−1064.9) / STEP14 (−969.3); WORSE STEP8 (+25.4) / STEP10 (+145.7) / STEP11 (+597.7) /
+STEP12 (+174.3); same 3/4/7. t22 had STEP11/12 at 2.1 mm — t25 puts them at 599.8/176.4 ⇒
+**the error did not vanish, it MOVED**; and ">1000" does not separate the runs (t25's own
+STEP6 = 1056.9; STEP3/4 = 988.9 in both). p4's quoted improvement sequence sat on steps where
+t22 was BETTER — the scope-of-✅ family, on a comparison window. **(c) Q2**: M is NOT 0
+throughout (0 only at STEP2/3/4 both arms + STEP5 L; nonzero everywhere after; total 154). No
+realized-path minimum exists in t25 (no WORST lines — the exception ending) ⇒ no direct
+collation partner. ⭐⭐⭐ BUT the step-END realized DISAGREES: STEP3/4 R — the mast check
+removed NOTHING (0/0) yet the realized reading is −0.6 INSIDE ⇒ p4's OWN criterion met: **the
+arm does not follow the checked path**. Trace corroboration quoted (STEP5 R predicted +8.5 vs
+realised +175.4; STEP10 R realised −0.9; "predicted minus realised = the following error the
+constant does not carry"). ⚠ Scope held by pB: step-end points only — WHERE the path deviates
+is undecidable from t25. **(d) Q3 = three contradiction kinds** to "the arm never reaches its
+commanded pose": R ARRIVES at STEP2 (2.1 mm) / STEP7 (13.4) / STEP9 (3.8); L servo-arrived at
+BOTH closures (:92/:253); ⭐⭐ REGRASP R = touching nothing with j4/j5 at their 70 N·m limits ⇒
+a WRIST TORQUE ceiling, not an obstacle — the producing driver itself says the two need
+OPPOSITE fixes ⇒ one run splits into an obstruction branch (GRASP R) and a torque branch
+(REGRASP R); "the mast is the reason the right hand has never grasped in any run" is
+CONTRADICTED by the trace in this block. (This substantially answers -181's Q1 and Q3 — the
+cross-reference sent in m743.) **(e) Byproduct**: t25 prints LINK NAMES ⇒ g43 = R_forearm_link
+now readable from a BANKED artifact (pB upgrades their own §8-7 unverified-relay note); name
+table banked (g42 R_upper_arm_link / g5 L_forearm_link / g7 L_wrist_2_link / g8 L_wrist_3_link
+/ g29 Lg_left_coupler); t20's 13 values stay UNATTRIBUTED. CANNOT list held (no realized-path
+samples; the STEP3/4 candidate-set shrink unexplained; no causal claim on the
+improvements/worsenings — version diffs unread). No PASS anywhere. **(f)** Routed: m745 → p4
+(the answers, artifact-first); m746 → p6 (row pointer). pC blind-read + Rs GT remain the open
+legs.
+
+## 432. p4 disowns "-181" — and Rs's approved change finds the missing half of an increment that was already there
+
+From p4's -179 (20:56:42). **(a) ⛔⛔ The disavowal**: "I did not send it… There is no -181
+from me, and 'pB has had nothing since t20' is not a sentence I wrote — I knew m741 had gone,
+because your -742 told me and I had asked for it myself in -178." Internal consistency checks
+at this desk SUPPORT the denial (§430 tag): -181 knew :263; -179 learned :263 from m744. p4
+does not withdraw the three questions sight-unseen — "they may be good questions" — but wants
+the verbatim before any answer returns under p4's name. EXECUTED: verbatim returned (m747);
+pB's m743 placed on hold (m748); this desk's miss (the -178→-181 sequence gap, unflagged at
+routing) owned in both. **(b)** The :263 intake, properly scoped by p4: j4 AND j5 both at
+70.0/70.0 — TWO saturations at OPPOSITE ends of the arm; p4's Rs report had named only the
+shoulder; "I will not describe this as 'the shoulder pushes on the mast' again until I have
+read those lines myself." **(c) ⭐⭐⭐ Rs approved change A (20:5x, p4 custody: "issue the move
+in small increments along the checked path") — and the opening found the mechanism**: the
+increments were ALREADY there (the cosine ramp walks the command along the very joint-space
+line the mast check samples); what was MISSING is that nothing required the arm to KEEP UP —
+a joint falling behind under load leaves the realised configuration with some joints arrived
+and one not, which is NOT ON THE LINE AT ALL. "That is how a path cleared at every sample
+produced a forearm inside the mast, and why filtering candidates could never have worked: the
+pose being filtered was not the pose the arm took." ⇒ the MECHANISM behind pB's -508(c)
+symptom (§431: checked path clean, realized −0.6 INSIDE — "the arm does not follow the
+checked path"): the analyst found the symptom in the trace; the implementer found the cause in
+the code; Rs approved the fix. Implementation verified at this desk: `0409c96bc6` ("Make the
+command wait for the arm it is leading" 20:55:24), wired.py sha256
+`782b2dccb98ab002220cf50fe896398c105efc251a26881203f10c4a39b7e097` = MATCH, SETTLE_TOL
+present ×6 — the command advances only while the arm tracks it (the existing
+is-the-joint-where-told test, the same one the fingers wait on); per-step loudness (how far
+the command got, how many ticks held back); the settle gate opens on the command reaching the
+END of the line, not on a step count ("with a gated ramp a clock cannot say a move is done").
+**(d)** Rs also directed, in from `7555d99925` ("Colour the two arms apart, because the
+screen side cannot be trusted" 20:49:17): LEFT orange, RIGHT purple, claws untouched — the
+mirror-attribution problem fixed AT THE SOURCE for the video leg. **(e) Run custody**: t26
+(7555d99925) replaced before finishing; t27 running from `0409c96bc6` since 20:56:16. ⛔ p4's
+own standing rule self-applied: no verdict on t27 until pB and pC have read it. ⚠ Whether
+Rs's "change A" corresponds to the standing pending item ② (snap 修正 A) is NOT assumed —
+noted for p4/Rs to confirm; the pending list is unchanged this window.
