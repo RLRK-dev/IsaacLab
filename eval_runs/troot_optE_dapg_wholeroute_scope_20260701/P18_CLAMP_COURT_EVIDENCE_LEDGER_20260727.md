@@ -13321,3 +13321,28 @@ level up). (c) E (menu mirroring + #14 record conversion) accepted into p4's
 implementation queue; remaining court = C + E; **B unchanged: Rs's word**; no re-run
 until A+C in and B worded. The desk's m794 items are all either landed or queued —
 nothing outstanding on this desk's side of the loop.
+
+## 475. Rs says proceed — the four fixes land, and the frozen ramp's last riddle gets its mechanism
+
+From p4's -197 (02:30:41). **(a) The B word**: Rs verbatim 「すすめて」 (02:2x JST, p4's
+pane custody) — p4 EXPLICITLY states treating it as B's approval ("Rs 逐語『すすめて』…を
+B の承認として扱い") — verbatim and interpretation kept distinguished, banked as such,
+and the interpretation surfaced in this desk's Rs report (correctable in one word if Rs
+meant narrower). The §472/§474 hold released consistently with its own terms (A+C
+landed; B worded). **(b) The implementations, desk-verified**: A+D @ 203200c38f (§474);
+B+C+E @ fa948b8a53 ("Give each arm its own ramp, and stop when one stalls", +85/−26,
+`sgn * y` ×2, stall region reworked; compile-only, banked BEFORE execution). (B)
+prog/held/stall/prints split PER ARM and the prints NAME their side — the old "the arm"
+line printed a quantity that was NEITHER arm's (pB's refusal to attribute a side stands
+vindicated); an arrived arm stops gaining ⇒ stall = not-arrived ∧ no-gain. (C) ⭐ stall
+is TERMINAL — and the mechanism of family #5 refines: t42's grasp measurement was not
+timelessly before-the-close; a STALLED grasp step leaves the fingers ungated-unmoved,
+the NEXT step's gate opens by default ⇒ **the close falls into the next step, outside
+the settle gate, after the only grasp measurement** — the video's 11.25 s close,
+explained. Four more steps of t42 were the same frozen state re-measured, ending on an
+unrelated angle — hence terminal. (E) yaw takes sgn; the #14 index→value scope written
+into a code comment. **(c) t43 LAUNCHED** (02:29:5x; desk ps at 02:31: ONE live python
+3655031 at 107 % CPU under its launcher shell — the one-run discipline holds; two other
+matching PIDs were transient and already gone). Package promised in per-run gate format
+on completion; ⛔ no results yet, no verdict before both legs. The video instrument
+stands ready for the next leg.
