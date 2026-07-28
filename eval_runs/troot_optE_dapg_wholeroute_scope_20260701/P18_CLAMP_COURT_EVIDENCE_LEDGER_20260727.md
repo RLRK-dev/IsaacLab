@@ -13042,8 +13042,113 @@ boundary; p4: on this asset the interval identity holds no matter what the build
 routed to p5 as convention-#2 status material (their court: "limit-half = vacuously true
 on symmetric ranges" is a scope note, not a verification). **(d)** #38's remaining work
 is now ONE WORD: p4 adds "on_yoke" to the denominator (§462(b)); ② executed, ③ rowed,
-① ruled + confirmed ⇒ p6 closes at their discretion when the word lands. **(e)** p4's
+① ruled + confirmed ⇒ p6 closes at their discretion when the word lands. [CORRECTED §467
+2026-07-29: loose phrasing — what closes is the ASSET ACCEPTANCE; #38 itself (a premise
+change) closes only on Rs's spec reflection (pending ⑤⑨). Caught by p6 -140.] **(e)** p4's
 in-progress item held to discipline: the home-pose column-contact probe found ITS OWN
 instrument mismatch (6 geoms/arm vs the trace's 38) mid-measurement — fixing before
 reporting numbers; nothing banked. Routed: p4 (m787 — supersedes m782's hold), p6
 (m788), p5 (m789).
+
+## 464. The blind video leg lands — an empty grab, a motionless cable, and a run that died before its breach
+
+The t42 video read completed (video-analyst subagent, §453(c) instrument switch; blind —
+path + minimal scene + colors only, no numerics/steps/outcomes; strip disclosed in the
+artifact header). **Artifact**: P18_T42_BLIND_VIDEO_READ_20260729.md @ 05069d885e, sha
+a54733c9…4858. **(a) Key visual findings** (instrument's, at its stated confidences):
+orange(L) moves 0-8 s, stops ~2 cable-diameters short of the cable end, NEVER actuates
+claws, holds still 8 s; purple(R) completely still 11.2 s (71 % of video), then its ONLY
+action (11.25-11.8 s) = claw close + wrist rotation = **EMPTY GRAB** — the cable sat
+BELOW the lower claw's outer face, outside the jaw, and moved 0 px during the close;
+cable motionless the ENTIRE video ("strong evidence no meaningful contact force was ever
+applied"); no penetration/teleport/NaN/table-breach VISIBLE (orange's height vs table
+honestly declared undecidable — occluded in all three views); side-panel camera DRIFT
+detected and compensated (static overhead used as motion reference); physically
+PLAUSIBLE, task-wise both arms failed; struggling arm: by reach = ORANGE, by stall-time
+= purple. **(b) Desk reconciliation notes for the verdict owner** (desk analysis, no
+verdict): (1) the visible purple CLOSE (11.25-11.8 s) vs pB(iii) "fingers never even
+closed (ctrl=18 full-open at the GRASP print)" — the print is one tick, the close is
+later; reconcile via the trace's per-step sim times (p4). (2) "no breach visible" vs
+:156/:157 (−84.2/−27.5 below table) is CONSISTENT under p5's -162 reading: those are
+COMMANDED-state readings at the STEP7 check where the run STOPPED, pre-execution — and
+it SHARPENS the missing-goal-check finding: had R's ANGLE not tripped, nothing stood
+between L's commanded −84.2 mm and execution. (3) Consistencies: cable 0 px ↔ grip=--
+whole run + "nothing seated it"; both arms failing ↔ the frozen shared ramp (§458);
+arms never touch ↔ ARM-TO-ARM +56.3 mm; orange's one visible move (0-8 s) ≈ the STEP1
+window where L jammed (:31). **(c) ⇒ BOTH t42 legs are now banked (pB §458 + video
+§464) — the verdict gate is OPEN; verdict = p4.** t25's video read still in flight.
+
+## 465. p4 measures the start pose — the cell's home is exonerated, and the mirror ends at yaw
+
+From p4's -193 (00:56:10; static, no run, no verdict). **(a) Pins verified**: commit
+dfb8dc1bde ("Measure the start pose, and find the mirror ends at yaw", 00:55:36);
+artifact HOME_POSE_SYMMETRY_20260729.txt sha 87bde87b…739a MATCH; key numbers desk-read
+(:17/:19/:24/:26 = shoulders +60.10 BOTH, forearms +113.77 BOTH; :32/:34 exact-mirror
+readback; :57 pad-swap 0.000 vs 98.600 "THE OTHER NAME (the pads swap sides)"; :69 yaw
+17.2/roll 17.2 → IDENTICAL world vectors both arms, ⛔ NO (0.5910)); trace :26-:31
+structure verbatim (:27/:28 start-pose IK choices; :29 pinch-mouth drop; :31 STEP1 L
+touching). **(b) ⭐⭐ pB's break-2 NARROWED, the supplied cell EXONERATED**: in the HOME
+pose no arm is inside the mast (all 6 corresponding links exact mirrors, 0.0000 mm;
+physics arm-column contacts 0) — the −0.8 mm/column contact belongs to the START-POSE
+IK's COMMANDED pose (:27/:28, two lines below home), not to the cell's HOME_POSE ⇒ the
+§458/§453-era "home pose already in contact" reading (and this desk's m780 row (v) relay)
+CORRECTS to: the DRIVER's start-pose solve chose the contacting pose. Routed: p6 (row
+(v)), pB (their §9.2 — p4 measured what pB marked undecidable, narrowing not refuting).
+**(c) p5's -162 hypothesis answered**: at (0,0) BOTH arms command approach [0,0,−1],
+exact mirrors — "L −z, R non−z" does NOT hold. **(d) ⭐⭐⭐ But the mirror ENDS AT YAW**:
+the pads SWAP world sides (closing axis reversed; absorbed at yaw=0, any roll stays
+mirrored), and at yaw≠0 BOTH arms are commanded the IDENTICAL world approach where
+mirroring requires an opposite x-sign (17.2°/17.2° → same [+0.0873 −0.2823 −0.9553],
+diff 0.5910). Whether the attitude menu SHOULD be mirrored = design question, p5's
+court — routed (m791). Claw vertical order preserved on all 4 hands. **(e) The R-34.4°
+reattribution, cite corrected at this desk**: R's tilt is the START-POSE IK's CHOSEN
+roll (trace :28 verbatim "17 solved / 2 collision-free / … roll 34.4 deg" vs L's
+"6 / 6 / roll 0.0") and R REACHED it — the claim is TRUE but p4's cite ":113-114" is
+WRONG (those lines show GRASP R non-arrival); the correct lines are :32 ("STEP1 R arm
+touching: clear") and :39 ("STEP1 R: tool err= 2.1mm") — returned to p4. This narrows
+BOTH prior readings (pB's "parked by the frozen command" and p5's commanded-frame
+suspicion) for the START pose: R stood where the start solve commanded. The L/R solve
+asymmetry (6/6/0.0 vs 17/2/34.4) sits on the same surface as (d); causation unclaimed.
+
+## 466. p5 names the green line's obligation — satisfied by symmetry, not verified
+
+From p5's -165/-166 (00:56-57). **(a) Bank #27 DONE** @ 70e9ec3f03; content sha
+6df53d66…8400 MATCH (machine), +15/−0 over bank #26, satisfied-by-symmetry present
+(new §21-5). **(b) The disposition**: convention #2's limit half is NOT "unverified"
+(reads as residual danger) and NOT "verified" — it is **SATISFIED-BY-SYMMETRY**: on
+0-symmetric ranges the requirement has no content and cannot be broken; p4's "only the
+axis half was discriminated" stands as the accurate claim. **(c) The guard** (one word,
+same line, no new mechanism): the standing check must ITSELF declare whether the source
+ranges are 0-symmetric — symmetric → "satisfied (vacuous)", asymmetric →
+"discriminating" — so the day the check starts meaning something is VISIBLE instead of
+staying identically green. Routed to p4 for the artifact's next regeneration. **(d) ⭐⭐⭐
+The general form, third of its family today**: **a green line must say whether it could
+have been red.** The family: ① τ drawn from the population it judges = always-true
+(§18-2); ② the vertical check passes while its goal fails (§23-1); ③ the inversion
+check cannot fail on symmetric ranges — three forms ("doesn't fail" / "doesn't fail
+when it should" / "cannot fail"), all IDENTICALLY GREEN in output. p5 records that only
+③ was caught by its own maker unprompted (p4's -192 disclosure, commended). **(e)**
+p5's own process fix declared: sha computed in the send command twice today ⇒ sha-first,
+then compose (-166).
+
+## 467. The word lands, the acceptance closes — and the register says which thing closed
+
+From p4's -194 (00:57:15) + p6's -140 (00:58). **(a) p4's one word, desk-verified**:
+commit 38678f5946 ("Name the table the acceptance denominator counts on"); artifact sha
+c5229911…2b61 MATCH, blob 3c9640b8… MATCH; the DENOMINATOR now names the ON-YOKE table
+(joints_on_yoke_rad, never joints_tuned_rad; 48 = position quantities on the on-yoke
+lattice, a different question from the 47 R-formula pairs) and CARRIES the stock caveat
+into the artifact ("if rephrased as lands-on-published-positions, state stock's 322.5 mm
+handling before the run") so a future rephrase cannot drop it; -192's sha 54677a07…
+superseded, disclosed by p4 (wording-only change; numbers unchanged 48/48, 0/48). No
+tuned leg added, per the ruling. **(b) p6's terminology correction, verified**: commit
+068ad2c245 ("Close the acceptance, keep the row open, and say which is which"); LEDGER
+sha 9ba5c6c5…d86a MATCH; the :142 HONEST-SCOPE verbatim entered by p6's OWN artifact
+read. The distinction: the three points close the NEW ASSET'S ACCEPTANCE — #38 itself
+(a robot premise change) closes only on the SPEC-surface reflection = Rs 専権 = pending
+⑤⑨. ⛔ This desk's own loose phrasing ("#38 closes") in §462(d)-§463(d), m787/m788, and
+the 00:41 Rs report is OWNED and tagged (§463(d)). **(c) State**: acceptance ①②③ all
+satisfied as substance (① ruling + field confirmation; ② executed, satisfied-by-symmetry
+language + self-declaring guard pending p4's next regeneration; ③ rowed + caveat
+carried). #38 remains OPEN on ⑤⑨ (Rs). p6's -140 predates -194 by seconds — the
+word-done update routed (m792).
