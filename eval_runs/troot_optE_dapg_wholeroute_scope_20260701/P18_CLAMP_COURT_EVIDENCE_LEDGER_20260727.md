@@ -12520,3 +12520,55 @@ was made on. The day's scope discipline applied PROSPECTIVELY: a measurement car
 machine. **(c)** The -185 shift (dissolved → re-measure reason), the sequencing court (p5),
 and the four questions + asset facts recorded as relay in #38. No reply sent (registration;
 the ack economy).
+
+## 446. Mirror first — the pair lives, the note instructs, and the four conventions land
+
+From p5's -157 (22:57). **(a) Pins**: doc on-disk sha256
+`7fa7afc62f1653b7dd8e177456ebf7f977f7b85d0f351947451d49be69e9e488` = MATCH → **bank #23
+EXECUTED @ `c66d52a252`** (+86/−2; the 2 deletions = §20-4's spread/band lines corrected to
+the half-offset convention, zero claims dropped); desk spots: the :1170 print converts TILT
+back to 20° ✓ (the 70/20 complement claim); the mount's x-sign-flip form previously
+desk-verified (§439(a)). **(b) ⭐⭐ The order (their court, ruled): MIRROR FIRST** — the -185
+failure predicate is interleave, and the folding DIRECTION changes under mirroring ⇒
+re-measuring (spread, tilt) on the current right-handed pair would be invalidated by the
+mirror ("a number carries the configuration it was taken in"). Sequence: conventions →
+mirrored arm → re-measure spread × tilt AT the 88 mm span → crown. ⚠ One speculation,
+marked: interleave may be the SYMPTOM of both arms folding the same way — a mirrored pair
+swings elbows symmetrically outward ⇒ the mirror may SOLVE the very constraint blocking the
+spread. Unmeasured, said so. **(c) ⭐⭐⭐ The reconciliation**: (i) no unit misread — 70° and
+20° are complement representations of one tilt (:1170); (ii) YOKE_SPREAD IS the half-offset
+— p5's own first writing corrected (recommendation now: YOKE_SPREAD = 0.160); (iii) the
+note is TWO POINTS, not a boundary — and its own words ("measured as a pair, so the two
+cannot be separated") are precisely the warning NOT to attribute the failure to 0.22 alone
+⇒ 0.160 is neither refuted NOR supported by the note; (iv) p4's static-vs-motion point
+FULLY conceded ("my own general form used correctly against me") ⇒ **the conclusion is not
+"0.22 expired" — 0.22 lives, and what governs is the note's INSTRUCTION: move the spread
+only with the tilt, re-measured as a pair** — p4's (3) the correct consequence. (v) Their
+own -156 probe design CORRECTED: 1-step re-solve suffices for arm-arm clearance but NOT for
+interleave — the test is 2-D (spread × tilt) AT the 88 mm span (§0#2, the note's own
+condition); still cheap (a pose property ⇒ one IK per point, no route run; readout =
+existing arm_pair_min / touching). (vi) ⚠ The photo's authority BOUNDED: authoritative
+about how it LOOKS, silent about whether it REACHES — if no point satisfies both the look
+and non-crossing at 88 mm, that is a COLLISION between Rs's image directive and §0#2, ⛔
+pre-declared as NOT p5's to resolve by picking a number. (vii) ⭐ A freedom the two points
+never measured, NAMED: z-yaw and y-offset were zero at both points — a re-measure could
+include a third coordinate at the same cost (unverified, offered as naming only).
+**(d) The four answers**: (1) mirror plane = x = 0 — not a choice but the plane the MOUNT
+already uses (position x-sign-flipped, attitude ±TILT about y); any other plane splits the
+arm's mirror from the mount's. (2) ⭐⭐ Joint sign convention = PRESERVE — "put the sign
+where it can be checked once, not where it must be remembered every time"; banked values
+keep their meaning; side-blind code paths unchanged; all six axes "0 0 1" ⇒ an enumerable
+6-line flip. ⛔⛔ ATOMICITY: the axis flip and the limit flip ([lo,hi] → [−hi,−lo]) in the
+SAME place — one without the other = a silently asymmetric range. (3) Meshes = bake
+MIRRORED VERTEX SETS; ⛔ negative scale REFUSED (winding/normals flip, hulls can invert —
+mj_geomDistance / column_gap / arm_pair_min are all mesh-derived ⇒ silent contamination of
+the cell's judgments); verification = volume identity + mirrored COM, two checks, not
+eyeballing. The exact inertia rule (sharpening §444(d)): x=0 mirror ⇒ Ixy, Ixz flip; Iyz,
+Ixx, Iyy, Izz unchanged; COM x flips — enumerable, checkable. (4) Asset identity = NEW
+FILE, NEW NAME — a variant flag makes one path emit two physically different robots and
+every banked "measured on the UR15 asset" number ambiguous about WHICH machine (the day's
+provenance failure, avoided by construction); ur15_mj.urdf stays byte-unchanged; ⚠ a scope
+note ON the new asset: this machine does not exist — numbers measured on it are sim-only
+and do not transfer to a real UR15 (not an objection to Rs's decision; the same treatment
+as the t30 pre-declaration). **(e)** Routed: the package → p4 (m765); the register → p6
+(m766).
