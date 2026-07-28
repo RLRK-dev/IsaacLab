@@ -1053,10 +1053,29 @@ def cable_at(x):
     return C[i], i
 
 
-gL, iL = cable_at(C1[0] - GRIP_HALF_SPAN)
-gR, iR = cable_at(C1[0] + GRIP_HALF_SPAN)
-GL = (float(C1[0] - GRIP_HALF_SPAN), float(gL[1]), float(gL[2]))
-GR = (float(C1[0] + GRIP_HALF_SPAN), float(gR[1]), float(gR[2]))
+# ⭐ p5 -169(1): the grasp pair's CENTRE is its own design variable, not C1's x.
+#
+# It used to read C1[0] on both lines, so the pair was pinned over the first clip -- a design
+# decision that entered without ever being declared as one.  The foundational premise fixes the
+# SPAN at 88 mm commanded; it says nothing about where along the cable that span sits.  With the
+# centre at C1 the left arm has to fold across the mast to reach x = +0.106, and t43 measured the
+# consequence: not one of its seven start poses cleared the mast or the path to it.
+#
+# ⚠ p5 -169(3): the centre is a PER-STEP variable.  Grasping happens once; seating happens per
+# clip.  So a later step's clip does not set this one's centre, and this constant is the grasp
+# step's own.  ⚠ The commanded span is 88 mm; the links actually taken are 75 mm apart, because
+# the cable is 15 mm segments and the nearest link is what gets held -- when quoting 88, say
+# "commanded".
+# Default keeps today's behaviour exactly (C1[0]); GRASP_CENTRE_X overrides it for the sweep p5
+# asked for, so the sweep measures this driver rather than a copy of it.
+GRASP_CENTRE_X = float(os.environ.get("GRASP_CENTRE_X", C1[0]))
+if abs(GRASP_CENTRE_X - C1[0]) > 1e-12:
+    print(f"[steps] ⚠ grasp centre moved off C1: x={GRASP_CENTRE_X:+.4f} m "
+          f"(C1 is at {C1[0]:+.4f}); span unchanged at {2*GRIP_HALF_SPAN*1000:.0f} mm commanded")
+gL, iL = cable_at(GRASP_CENTRE_X - GRIP_HALF_SPAN)
+gR, iR = cable_at(GRASP_CENTRE_X + GRIP_HALF_SPAN)
+GL = (float(GRASP_CENTRE_X - GRIP_HALF_SPAN), float(gL[1]), float(gL[2]))
+GR = (float(GRASP_CENTRE_X + GRIP_HALF_SPAN), float(gR[1]), float(gR[2]))
 Z_GRASP_REST = float(np.mean([gL[2], gR[2]]))
 Y_GRASP_REST = float(np.mean([gL[1], gR[1]]))
 print(f"[steps] measured grasp: L=cab{iL} {np.round(gL,4)}  R=cab{iR} {np.round(gR,4)}  "
