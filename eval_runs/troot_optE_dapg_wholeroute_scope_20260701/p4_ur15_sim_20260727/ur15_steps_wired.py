@@ -119,11 +119,15 @@ Z_SEAT = GROOVE_Z
 # point live, because the four-bar tilts the pads as they close.
 
 
-def arm_spec():
-    x = (S / "ur15_base.xml").read_text()
+def arm_spec(tag="L"):
+    """The arm for one side.  ⭐ Rs: the two arms in his reference are mirror images of each other,
+    and p5 confirmed two identical right-handed arms cannot generally take that pose -- so the
+    right side loads the mirrored build rather than a second copy of the left."""
+    src = "ur15_base.xml" if tag == "L" else "ur15_base_mirrored.xml"
+    x = (Path(__file__).parent / src).read_text()
     for j in J6:
         x = re.sub(rf'(<joint[^>]*name="{j}")', rf'\1 armature="{ARMATURE}" damping="{DAMP}"', x)
-    p = S / "_arm_only.xml"
+    p = S / f"_arm_only_{tag}.xml"
     p.write_text(x)
     return mujoco.MjSpec.from_file(str(p))
 
@@ -254,7 +258,7 @@ column = cell.body("column")
 for tag, sign in SIDES.items():
     q = Rotation.from_euler("xyz", [0.0, sign * TILT, 0.0]).as_quat()
     f = column.add_frame(pos=[sign * YOKE_SPREAD, 0.0, SHOULDER_HEIGHT], quat=[float(q[3]), float(q[0]), float(q[1]), float(q[2])])
-    _a = arm_spec()
+    _a = arm_spec(tag)
     f.attach_body(_a.bodies[1], f"{tag}_", "")
     g = mujoco.MjSpec.from_file(GRIP_XML)
     Rt = Rotation.from_euler("xyz", [0, -np.pi / 2, -np.pi / 2]) * Rotation.from_euler("xyz", [np.pi / 2, 0, np.pi / 2])
