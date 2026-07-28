@@ -688,6 +688,12 @@ ARM_CLEARANCE = 2.0 * CABLE_R
 # inside a step that lasts two.
 PIN_SETTLE_S = 0.1 * PREDICT_S
 
+# The band either end of a two-point calibration has to clear.  Half a degree: far enough below
+# the menu's smallest tilt that a working construction never trips it, far enough above zero that
+# a collapsed one always does.  Used symmetrically -- the upright attitude must come back under
+# it, and a tilted attitude must come back over it.
+TILT_CAL_DEG = 0.5
+
 VERTICAL_TOL_INTERIM_DEG = 5.73
 VERTICAL_TOL_DEG = vertical_tol_deg()
 

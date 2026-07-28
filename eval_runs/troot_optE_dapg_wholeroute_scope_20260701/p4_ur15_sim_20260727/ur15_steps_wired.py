@@ -43,7 +43,7 @@ from ur15_cell_spec import (  # noqa: E402
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
-    ARM_CLEARANCE, ARM_PAIR_CUTOFF, PIN_SETTLE_S, PREDICT_S, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
+    ARM_CLEARANCE, ARM_PAIR_CUTOFF, PIN_SETTLE_S, PREDICT_S, TILT_CAL_DEG, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
     VERTICAL_TOL_DEG,
     START_HOLD_S, START_RAMP_S,
     TABLE_HZ, TABLE_Y,
@@ -1027,15 +1027,29 @@ def attitude_tilt_deg(yaw, roll):
 def vertical_cap_deg():
     """The smallest non-zero tilt the attitude menu can produce, in degrees."""
     tilts = [attitude_tilt_deg(y, r) for y, r in _spec.GRASP_ATTITUDES]
-    # A construction that cannot even reproduce its own zero is not measuring what it claims.
-    # The upright entry has to come back upright, and if it does not, every other number this
-    # returns is suspect -- so it is checked here rather than trusted.
+    # ⛔ TWO checks, and the second is the one that matters -- p11 -144 caught that the first alone
+    # passes the exact bug it was written for.  With the rotation inverted every attitude came out
+    # flat, so the upright one came out flat too and the zero check was satisfied: a dead
+    # instrument reproduces its zero perfectly.  A calibration needs both ends.
+    #
+    # Same shape as the pin's two readings, which is where this belongs: engagement is the zero,
+    # a step later is the span.  Here the zero is the upright entry and the span is every entry
+    # that asks for a tilt.  Neither says tilt must EQUAL roll -- the two differ by a couple of
+    # degrees and should -- only that a non-zero input produces a non-zero output.
     upright = [attitude_tilt_deg(y, r) for y, r in _spec.GRASP_ATTITUDES if abs(r) < 1e-9]
-    if upright and min(upright) > 0.5:
+    if upright and max(upright) > TILT_CAL_DEG:
         raise RuntimeError(
-            f"the attitude with zero roll comes out {min(upright):.2f} deg off vertical, so this "
+            f"the attitude with zero roll comes out {max(upright):.2f} deg off vertical, so this "
             f"is not turning attitudes into the tilt the check reads -- the cap it would produce "
             f"would be a number about the arithmetic, not about the cell")
+    tilted = [attitude_tilt_deg(y, r) for y, r in _spec.GRASP_ATTITUDES if abs(r) >= 1e-9]
+    if tilted and min(tilted) < TILT_CAL_DEG:
+        raise RuntimeError(
+            f"an attitude that asks for a tilt comes back {min(tilted):.2f} deg off vertical, "
+            f"which is flat.  A construction that turns every attitude into the same answer is "
+            f"not measuring attitude at all -- an inverted rotation, a scale of zero and a "
+            f"collapsed sign all look like this, and the zero check cannot tell them apart "
+            f"because they all reproduce the zero")
     nz = [x for x in tilts if x > 1e-6]
     if not nz:
         raise RuntimeError("no menu attitude tilts the jaw at all, so the vertical check has "
