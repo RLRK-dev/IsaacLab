@@ -8319,3 +8319,79 @@ START pose (`:1055-1056`) AND the step loop (`:1442-1444`) pass the partner — 
 13:1x (driver dirty again — p4's next-trace edits presumed in flight; bank-before-launch binds). The B
 re-target row-motion was still HELD for p11's ruling — only the fact side fixed 〔p11's -110 crossed it in
 flight; resolved in -526〕.
+
+## 270. The inheritance is the #14 form — p5's preview, held until its own bank lands
+
+From p5's -116 (13:16); **no artifact yet BY DESIGN** — the doc is pinned (`a7aa1ecc…`) with the bank in
+flight (-523 → p4), so the addition is ANNOUNCED, not written: the pin-protection discipline held a second
+time.
+
+**(a) ⭐** p5 re-read `:1439-1441` independently (the third independent source read after p4 -094 and p11
+-110, plus the hub's own): the inheritance SOURCE (`:601-603`) is `other=None`; the skipped route solve
+(`:1442-1444`) is other-carrying ⇒ the bypass confirmed from the process-design side. **(b) ⭐⭐ The
+generalization claimed for its court**: the inheritance is the SAME FORM as §15/#14 — *"ある相で計算された
+値が、計算されたときの条件を持たずに 次の相で消費される"* ⇒ their §13-8 ③ (record settle-status by name)
+self-graded INSUFFICIENT: **inherited values must carry their provenance conditions** (here: *"他腕を見ずに
+解いた"*) — the consumer side currently can neither see nor inspect that. To be added to §13-8 AFTER the
+bank lands. **(c)** Court line held: no choice among (i)/(ii) (p11's court); p5 adds only *"表が相にまた
+がって何を運ぶか."* **(d) Hub routing**: the relay to p11 WAITS for the banked addition (a preview travels
+nowhere — checkpoint discipline); no dispatch on -116; p5 waits only for the bank-landed one-liner, which
+arrives via p4 → hub → p5.
+
+## 271. p5's documents land, and the next measurement launches with the inspection aboard
+
+From p4's -096 (13:16:18); all three pins verified: `e441763d5c` ("Land p5's two documents") — both content
+shas re-derived here, EXACT match to p5's pins (clip `a7aa1ecc…` / spec `f76d06a3…`); `21e62e426a` ("Measure
+what the inherited pose skips, and the quantity the bar needs") — driver content sha `69fad3472a111eff3e047
+6e81903556d28cbf7ad9ec46f45d86e5ae9ecc67b2e` ✓, launched 13:16 AFTER the bank (**bank-before-launch kept, a
+second time**).
+
+**(a) ⭐** p5's wait closes for real: the -523 routing complete; the one-liner relayed (-527). **(b) ⭐⭐
+The (i) inspection is LIVE with its scope IN the string** — verified in the banked code at `:1459`:
+`'not on the other arm' (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)` ⇒ the §267(d)
+guard is enforced at the PRINT level: the sentence itself refuses the "clear of everything" reading.
+**(c)** The §27.2.110 bar quantity added as trace column 5 (translation-block ‖Δq‖/‖Δx‖ [rad/m]; the σ
+column retained for selection/envelope analysis); summaries median / p95 / max per arm. ⛔ (ii) untouched.
+**(d)** Expected-fail declared IN ADVANCE (current code does not fix grasping, per §252) ⇒ the artifact will
+carry "not a healthy-path distribution" — the §266(c) caveat institutionalized.
+
+## 272. The starvation has a mechanism — and the bar becomes a per-arm derivation
+
+From p11's -111 (13:16); §27.2.113 @ `d21bab9cea` ("The starvation now has a mechanism: the bar sat above
+one arm's whole range") — sha256 machine-match
+`6c67a2abc9292986fc1ebb1ec30a9d8ca81140f156cd231a87a93489f4b2454e` ✓.
+
+**(a) ✅** §27.2.108②(a)'s empirical leg acknowledged (endpoints 0.19-0.29 / valley 0.0037 — *"順位付けた
+量と落ちた量が別の場所に在る」が数で示されました"*). **(b) ⭐⭐⭐ The in-code history closes**: *"the
+0.12 floor starved the solver"* (cell_spec — cited `:539` = the d16c877ecd-era position; current `:542`
+after the rework, content unchanged) — L's whole path sits below 0.12 (max 0.1123) ⇒ the hard floor was an
+everything-falls threshold FOR L ⇒ **the starvation was neither accident nor bug but a design accident: the
+bar sat above one arm's reachable range.** ⭐ General form #15: *"bar を片方の腕の数から選ぶと、もう片方を
+丸ごと落とす。bar は選んで両腕に当てるのでなく、各腕が実際に取り得る範囲から導く"* — and under §0#1
+DUAL-ARM, **a single bar is not a default; it is a choice requiring proof.** **(c) ⭐⭐ The reconciliation
+— p4's finding survives p11's own critique**: mixed units break ABSOLUTE thresholds (σ ≥ 0.12 has no
+physical meaning), but L and R share the same wrist_jac construction ⇒ the scale factor is common ⇒
+RELATIVE comparison is valid ⇒ "L uniformly lower than R" SURVIVES; "L below 0.12" does not survive as a
+physical claim — only the bar falls. **(d) ⭐** The per-arm question is to be POSED ON THE NEW QUANTITY: on
+rad/m the two arms are physically comparable and "does one bar suffice?" becomes decidable for the first
+time; p4's ordering endorsed — and the rad/m column is ALREADY live (§271(c), crossed in flight). **(e) ⚠**
+Scope kept: t10 is a failed run ⇒ (b)(c) are inferences about THIS distribution; healthy-run reconfirmation
+required; ⛔ no "L always low" generalization.
+
+## 273. #49's hold released — the register carries the frame, on commit-form pins
+
+From p6's -105 (13:17); commit `ac081382e4` ("Release 49's hold: the target is the grasp aim and its
+inheritance") — LEDGER sha256 machine-match
+`30ad315fc474b3af7de5308bd873a4088be4adb5eabdc02a427335d1d248a5bf` ✓.
+
+**(a) ⭐** The row now carries the ruling: the target re-read ADOPTED (grasp aim + inheritance); the basis
+refined to "unchecked path BRANCH (inheritance)"; the two stages with their classes — (i) report-only, not a
+control-method change, no Rs approval, **run-boarding = p18's court noted in the row**; (ii) Rs-approval
+class; the five-point packet frame in the owner column; and (i)'s scope (`:320-321` contact-based, arm-arm
+only, contype=0 invisible — "not touching" ≠ "clear of everything"). **(b) ⭐ p6's own source leg, not
+relayed**: `:947-951` partner-qpos into scratch + `:1020` `hit = bool(touching(t, sc))` ⇒ the route
+selector really judges on a world where the partner exists; `:1439-1440` skips solve_ik entirely so `:1443`
+is never reached — *"機構は在るが その姿勢には適用されない"*, concurred. **(c) ⭐⭐ Pins migrated from
+as-read to COMMIT form unprompted**: the four sites at `1ad8abce40` (`:602` / `:1055-1056` / `:1443` /
+`:1439-1440`; driver sha `bd34a749…` = §262(c)'s bank; 1629 lines), recounted against the earlier as-read
+positions. **(d)** The σ trace held as packet material without a register row, concurred.
