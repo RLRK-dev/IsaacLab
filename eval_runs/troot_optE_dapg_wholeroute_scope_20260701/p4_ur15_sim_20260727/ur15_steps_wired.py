@@ -1162,6 +1162,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # measure against, and a clearance of "no other arm" would read as infinite -- so the
         # near-miss test says so rather than passing silently.
         hit = bool(touching(t, sc))
+        _by_clearance = False
         near_far_arm = None
         if other is not None:
             _o = "R" if t == "L" else "L"
@@ -1173,6 +1174,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
             if near_far_arm < ARM_CLEARANCE:
                 hit = True
                 _clear_dropped += 1
+                _by_clearance = True
         # Manipulability of this candidate.  The solver had no notion of a singularity at all --
         # it ranked candidates by position error and by staying near the previous pose, so a
         # configuration that has lost a direction could win, and did: Rs saw two runs in a row
@@ -1181,7 +1183,8 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
             sc.qpos[_a] = qw[_k]
         mujoco.mj_forward(m, sc)
         sv = sigma_min(t, sc)
-        cands.append((qw, pe, re_, hit, abs(POSES[_try % len(POSES)][1]), sv, near_far_arm))
+        cands.append((qw, pe, re_, hit, abs(POSES[_try % len(POSES)][1]), sv, near_far_arm,
+                      _by_clearance))
     free = [c for c in cands if not c[3]] or cands
     if not free:
         raise RuntimeError(f"no IK solution for {t} at {tgt}")
@@ -1196,12 +1199,19 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     def _cost(c):
         _short = max(0.0, SIGMA_GOOD - c[5]) / SIGMA_GOOD      # 0 when well conditioned, ->1 at 0
         return 2.0 * c[4] + float(np.linalg.norm(c[0] - ref)) + SIGMA_PENALTY * _short
-    q, pe, re_, hit, roll, sv, nfa = min(pool, key=_cost)
+    q, pe, re_, hit, roll, sv, nfa, _bc = min(pool, key=_cost)
+    # p11 -139: the conditioning of the candidates the clearance threw away is already computed --
+    # sv is taken for every candidate, including the rejected ones, and then dropped on the floor.
+    # Printing the best of them beside the winner's turns that into the one comparison that is
+    # actually controlled: same state, same candidate set, the only difference being the filter.
+    # Across runs it would not be, because four other things changed.
+    _drop_sv = [c[5] for c in cands if c[7]]
     # p5 -137 / p11 -138, prints (1) and (3): say how many candidates the clearance removed -- the
     # same instrument as the floor's "how many did it remove", for the same reason -- and what
     # clearance the pose that WON was predicted to have.  A rejection count of zero and a rejection
     # count of forty look identical from a pose alone.
-    CLEARANCE_REPORT[t] = (_clear_dropped, len(cands), nfa)
+    CLEARANCE_REPORT[t] = (_clear_dropped, len(cands), nfa, sv,
+                           max(_drop_sv) if _drop_sv else None)
     if not quiet:
         # ⛔ This line used to report len(well) as "away from a singularity", beside len(free) as
         # "collision-free".  With the floor at zero those are the SAME candidates -- sigma is never
@@ -2067,11 +2077,14 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     _pred_txt = []
     for t in SIDES:
         if t in CLEARANCE_REPORT:
-            _dr, _kept, _nfa = CLEARANCE_REPORT[t]
-            _pred_txt.append(
-                f"{t}: clearance removed {_dr} of {_dr + _kept} candidates, winner predicted "
-                f"{_nfa*1000:+7.1f} mm" if _nfa is not None else
-                f"{t}: no far arm in that solve, so no clearance was measured")
+            _dr, _kept, _nfa, _wsv, _dsv = CLEARANCE_REPORT[t]
+            if _nfa is None:
+                _pred_txt.append(f"{t}: no far arm in that solve, so no clearance was measured")
+            else:
+                _pred_txt.append(
+                    f"{t}: clearance removed {_dr} of {_dr + _kept} candidates, winner predicted "
+                    f"{_nfa*1000:+7.1f} mm, winner sigma {_wsv:.4f} vs best dropped "
+                    + (f"{_dsv:.4f}" if _dsv is not None else "none dropped"))
     print(f"[steps] STEP{num:2d} ARM-TO-ARM: closest {_pairmin*1000:+7.1f} mm ({_pairwho})"
           f"{'  <- TOUCHING OR THROUGH' if _pairmin <= 0 else ''}"
           f"   along the move {step_gap_path*1000:+7.1f} mm"
