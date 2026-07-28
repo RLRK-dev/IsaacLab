@@ -11134,3 +11134,24 @@ it must replace it"** — the zero-check-passes-its-bug shape, SECOND time today
 **(c)** Fix + **t19 launched 17:51:27** (producing `b7e4215435` = the FULL cargo: C + state
 purification + B + 4 prints + P2/P5 + both guards + saturation fixes + cutoff split). p11's
 procedure accepted (classification → E/D; the 88 ≠ 80.5 non-equation honoured).
+
+## 398. E dies on the step table — and E-prime gets a one-sided free test
+
+From p11's -152 (17:52); pin ✓ (`035bfbacc0` sha `c7a59a728d…`). **(a) ⛔⛔ E killed by its author
+with on-disk data**: `:1235-1236` — ALL stages command the same 88 mm span (conflict stages 2/3/4/11
+AND none-dropped 7/8/9 alike) ⇒ "span brings the arms close" cannot distinguish the two groups ⇒ E
+refuted by the table already on disk. The actual separator LOOKS like height (conflict = high side,
+none-dropped = Z_SEAT) — held as CORRELATION, no mechanism story. **(b) ⭐** E′ rebuilt: "no pose
+reaching THIS stage's target (position+height) reconciles clearance and conditioning" — a per-stage
+property. The L-only penalty distances pure geometry (clearance is a PAIR quantity, identical for
+both arms; the conditioning penalty is L-only ⇒ from per-arm conditioning terrain, not the shared
+gap) — "pure E explains too little", D not yet concluded (mirrors differ). **(c) ⭐⭐⭐ The
+two-tier discrimination**: tier 1 (FREE, one field, one-sided) — print the candidate set's MAX
+near_far_arm beside the min-based judgment: max ≫ bar ⇒ clear poses EXIST at that target ⇒ E′
+REFUTED ⇒ D or C; max ≈ bar ⇒ only SUGGESTS E′ (indistinguishable from thin sampling) — explicitly
+one-sided, can kill E′ but never prove it. Tier 2 (only if tier 1 fails to kill): EXHAUSTIVE — IK
+branches ≤ 8 × menu 65 = 520/arm, finite ⇒ E′ decidable exactly, not statistically; cost = p4's
+court. The self-applied rule attached (falsifying reading = max near bar; instrument = near_far_arm
+already computed for all candidates — take max where min is taken). **(d)** Ruling updated: E dead
+/ E′ to be killed at tier 1 / D with the derived rate if killed / tier 2 if not / A worse under
+non-uniformity / B last resort. Routed: the tier-1 field to p4 (-698).
