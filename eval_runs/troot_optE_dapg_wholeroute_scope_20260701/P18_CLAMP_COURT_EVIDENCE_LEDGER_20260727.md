@@ -11972,3 +11972,42 @@ answers ONLY the table, not "this pose is safe"). **(d) Bank #19 EXECUTED**: on-
 deletions = the old pin block of 5 + 9 renumbered quote lines; zero claims dropped — p5's own
 itemization), committed `e45045609b`. ⭐ Desk note: `5035e65b63`'s title says p4 is already
 implementing the ALONG-THE-MOVE mast leg (the §406(b)/pB-CANNOT thread) — rides t24+.
+
+## 427. The return accepted with all three versions in hand — and the row stops writing line numbers alone
+
+From p6's -129 (20:29). **(a) Pins verified**: commit `0e68c39444` ("Fix 53's citation: the
+lines and the hash came from different versions" 20:28:40), LEDGER content sha256
+`c01c29ee124c21f7f771c885398e932c716a818e0db5bc0b3f27d1a339eee3d7` = MATCH; the repaired row's
+tokens desk-checked (:2028 / :2036 / :2094 / vertical_tol_deg / VERTICAL_TOL_INTERIM_DEG each
+present). **(b) The resolution**: the RETURN accepted — "訂正不要" was wrong; p6 read all
+THREE versions directly (ffbc1f15af :2028/:2040, 6926476e…, 2465 lines / 4c2cd5dc77
+:2036/:2048, f76cdd32…, 2473 / current 5035e65b63 :2094/:2106, cb7aba2103…, 2532 — the
+three-desk measurement now closed by the third desk). Mechanism named: lines read at 20:07
+(the 4c2cd5dc77 file) while the sha was taken at 19:48 (ffbc1f15af) — the file moved in
+between. **(c) The repair = the §426 anchor form applied**: #53 now cites BY CONTENT
+(re_max=0.30) with a three-version correspondence table, and notes the VALUE is invariant
+across all three; the spec side (worktree dirty, uncommittable) cited by NAME
+(vertical_tol_deg / VERTICAL_TOL_INTERIM_DEG = 5.73) + as-read sha + time — correct as-read
+discipline. **(d)** Third same-type recurrence on their desk today, counted by them (-114 →
+-119 → now); the row now carries "以後この row では行番号を単独で書かない"; their standing
+practice going forward = version and line ALWAYS in the same clause.
+
+## 428. p5 unfolds its own table — permission had been written as measurement
+
+From p5's -154 (20:29). **(a) The catch, their own**: §18-9's table wrote "the solve's
+returned set includes up to 17.19°" — but 17.19 is what is PERMITTED, not what was RETURNED;
+the only known return is t20's single 11.2 ⇒ "許可を実測として書いていました" — permission
+written as measurement (the day's quantity-confusion family, a new face). Table split into
+THREE rows: guarantee (p5's — cannot be guaranteed) / realization (p11's — undecidable today)
+/ value (④ — unbankable); the reconciliation form corrected from 「存在宣言 ⇒」 to
+「保証の不成立 ⇒」; the heading corrected with a note. **(b)** Full agreement with -159 on
+what folding loses (the third branch retires; "the spec permits bad poses" ≠ "the solve
+actually produces them"); the separating test taken in UNDER P11'S NAME (p5 does not measure);
+:1952 not cited (unread by p5 — dependency honesty). **(c) ⭐ The §17 landing**: p4's
+`5035e65b63` ("Keep the mast clearance along the move, not only at the pose") = p5's §17
+general form (an endpoint margin says nothing about the path) implemented for a DIFFERENT pair
+(arm↔mast); ⚠ the arm↔arm path leg remains UNMEASURED — noted so one implementation is not
+read as both settlements. **(d) Bank #20 EXECUTED**: on-disk sha256
+`377acae2937aa0a6edc7480bfec5a839ce89a05e8f12ac1f5de0776e457313c6` = MATCH, +11/−3 (deletions
+= the heading, the folded table row, the reconciliation line — all replaced; zero claims
+dropped, p5's itemization), committed `959d438605`.
