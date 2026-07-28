@@ -613,15 +613,35 @@ GRASP_ATTITUDES = [(y, r) for r in (0.0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.55, 0.6
 #                      a lower seat, a different attitude -- the bound has to be derived again.
 #                      It is not a property of this number.
 #
-# and the value between them: tau = (r_max + tau_max) / 2, where r_max is the largest tool-angle
-# residual the solve actually achieves when it is commanded upright.  If r_max ever reaches
-# tau_max the interval is empty and the formulation has to be rebuilt rather than retuned.
+# and the value between them: tau = (r_max + tau_max) / 2, where r_max is the largest residual the
+# solve actually achieves when it is commanded upright.  If r_max ever reaches tau_max the interval
+# is empty and the formulation has to be rebuilt rather than retuned.
 #
-# ⚠ r_max IS NOT MEASURED YET.  The run prints it now -- that print is the input to this rule and
-# had to come first.  Until it exists the value stays at 5.73 degrees, which both ratifiers accept
-# as an interim on the grounds that the physical margin is about twofold.  ⛔ 5.73 degrees IS 0.10
-# rad, so it sits ON the identifiability cap rather than under it: it is a placeholder, and the
-# rule below is what it will be replaced by.
+# ⛔ This line said "tool-angle residual", and that is the wrong quantity.  The check reads the
+# angle of the PINCH-TO-MOUTH vector off straight down -- where the fingers point -- and the tool
+# axis is a different reading that can disagree with it: one measured step had the fingers 5.0 deg
+# off while the tool axis was 0.0.  A cap and a residual quoted in two different quantities is the
+# same failure as comparing a constant across two measurement surfaces, so the name is corrected
+# here rather than left as a stand-in.  The cap side (see vertical_tol_deg) already says this.
+#
+# ⚠ r_max IS NOT MEASURED YET, and there are now two independent reasons, not one:
+#   (1) the population.  p11 -155 and p5's ratified rule converged: r_max counts only the readings
+#       that were CONSTRAINED upright when they were made -- the solved seating branch -- and the
+#       inherited branch is judged but never counted.
+#   (2) the arming.  p11 -156: a gate that raises cannot report its own residual.  The run stops at
+#       the first reading over the bar, so a completed run can only ever contain readings under it,
+#       and the census is truncated rather than measured.  Measuring needs a pass that reports
+#       without raising, which does not exist yet.
+#   ⛔ Consequently every tilt figure taken so far is dead for this purpose, including the 11.2 that
+#      ended a run.
+# ⚠ And a third, which is mine to report: the right arm is currently jammed against the mast with
+#   joint 1 at its force limit, arriving up to 99 degrees short of command.  Its poses are where a
+#   saturated servo stopped, not where the solver aimed, so they are not readings of this quantity
+#   at all.  Stage 2 needs a free arm as well as a fixed instrument.
+# Until r_max exists the value stays at 5.73 degrees, which both ratifiers accept as an interim on
+# the grounds that the physical margin is about twofold.  ⛔ 5.73 degrees IS 0.10 rad, so it sits ON
+# the identifiability cap rather than under it: it is a placeholder, and the rule below is what it
+# will be replaced by.
 
 
 def vertical_tau_max_deg():
