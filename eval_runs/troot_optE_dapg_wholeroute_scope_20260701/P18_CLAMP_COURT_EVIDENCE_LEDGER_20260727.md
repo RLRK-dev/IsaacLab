@@ -11618,3 +11618,44 @@ POPULATION (which readings count). p5 adds no conditional to §18 until the bran
 confirmed — now answerable in one write. **(e)** Routed: the answer + facts → p5 (m721) and
 p4 (m720, raw==banked confirmation their court); the census + the dead-number interaction →
 p11 (m722).
+
+## 415. The identity closes, the axis is declared absent — and the machine under the numbers is jammed
+
+From p4's -176 (19:57:16). **(a) Pins**: t22 trace `T22_RUN_TRACE_20260728.txt` on-disk sha256
+`a6bc06a4cb841fee3e1437d509fd95b6d1d05c23b6b2f2d11cec8486dd066867` = MATCH, tracked, last
+touched by `4c2cd5dc77` ("Drop an exclusion whose reason was refuted, and name the part"
+19:49:33 — the mount exclusion DROPPED on pB's §410(c) refutation, and the name print landed).
+raw==banked: p4 declares BYTE-IDENTITY (both sha256 = d2cd4bcc…), read same-turn; this desk
+verified the BANKED side long since ✓ but could NOT locate `run_t20.log` under the p4 dir (find
+returned only the mp4) ⇒ banked as p4's declared read, path requested (non-blocking; the
+confirmation was p4's court by design). ⚠ Provenance question OPEN (asked, m727): -175 said t22
+runs from `ffbc1f15af` (started 19:19:49); -176 pins t22's producing code as `4c2cd5dc77`
+(committed 19:49:33, nine seconds before t23's 19:49:42 start) — which version produced the
+banked t22 trace, or was the ffbc1f15af t22 replaced? The WHY-IT-DID-NOT-ARRIVE/touching prints
+suggest the later code; not resolved silently. **(b) ⭐ Axis 2 declared ABSENT by the
+implementer**: no non-destructive measuring pass exists in the A/B split — "I would rather say
+so than have the form recorded as met." What exists: the print PRECEDES the raise ⇒ the
+tripping step reports its own residual; every later step is never reached — "exactly p11's
+truncation, and one surviving reading is not a population." New work, to be built in p11's
+stated order, no flag bolted onto the armed pass. The ABSENT-IN-CODE discipline applied to
+one's own machinery. **(c) ⭐⭐ THE JAM — a second, independent invalidator of today's numbers**:
+t22, BOTH closures, joint j1 AT its 433.0 N·m limit (limit flag True) while touching
+['column (via g43)'], short of command by −1.606 rad (GRASP, :101) and −1.728 rad (REGRASP,
+:262) = the declared 92°/99°; end-of-run WORST verbatim :341 "WORST R: mast -24.5 mm at g43 vs
+stem, STEP13 t=29.1s <- INSIDE THE MAST" — all three lines desk-read. Consequence as declared:
+those poses are where a SATURATED SERVO stopped, not where the solver aimed ⇒ even with the
+instrument fixed and the gate unarmed, r_max from a run in this state measures a JAMMED machine
+⇒ stage 2 needs a FREE ARM as well as a fixed instrument (p4 expressly not claiming a staging
+change — p11's court whether to fold it in). **(d) Desk observations (materials)**: g43 threads
+through t20 STEP10 (ARM REACH −135.8, §409(e)) and t22 (the jamming part; t23 runs to resolve
+g43 to a link NAME); the t22 WORST (STEP13 t=29.1s, −24.5) ECHOES t8's (STEP13 t=29.1s, −25.8,
+pB doc :179) — the same motion appears to drive R into the mast at the same step across runs;
+"touching [...]" is a CONTACT-list read ⇒ arm↔column CONTACT exists at t22 (a t22-side answer
+to §410(f)'s collidability item; the t20 side stands UNVERIFIED as banked); the WORST suffix
+now reads "INSIDE THE MAST" (p6's column→mast find, live). t22 ran to COMPLETION (end-of-run
+sigma/dq prints + the WORST line present). **(e)** spec :616-617 accepted by p4, queued behind
+the mast (Rs directing live); t23 running from `4c2cd5dc77` since 19:49:42. Routed: p11 (m723 —
+axis-2 absent + the free-arm precondition), p5 (m724 — identity closed per p4 + the jam as
+second invalidator + the jammed-pose population question), pB (m725 FYI — jam pins, g43 thread,
+t8 echo, the falsifier's premise changed by the exclusion drop), p6 (m726 — row materials),
+p4 (m727 — receipt + the two provenance asks).
