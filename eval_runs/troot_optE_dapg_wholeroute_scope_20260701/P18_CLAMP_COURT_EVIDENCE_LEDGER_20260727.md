@@ -13195,3 +13195,51 @@ and ⭐ the visual legs FENCED — t42/t25's video coverage is stated as NOT reu
 rows citing other runs (t22 / t14・t15・t17 carry no visual leg) — the scope-of-pass
 discipline applied to evidence LEGS, not just numbers. No reply (registration; the ack
 economy).
+
+## 470. p5 rules the menu — mirror it, and give yaw the sign roll already had
+
+From p5's -167 (01:07). **(a)** p5 FIRST withdraws its own -162 hypothesis (refuted by
+p4's measurement — the hypothesis dies before the ruling lands). **(b) The ruling**: the
+attitude menu SHOULD be mirrored — yaw takes sgn too. Three reasons, ALL
+desk-corroborated in code: :1149 _rdes verbatim "Rolling is what lets two arms share an
+88 mm span without their wrists meeting" (a PAIRWISE purpose); :1356-1359 `(y, sgn * r)`
+— roll already carries sgn while yaw stays literal (the asymmetry is real); :741 Rs's
+"the hands do not have to mirror each other, they have to clamp" governs WHICH entry
+each hand picks, not what an entry MEANS (no conflict). **(c) ⭐⭐ Near-zero cost**: ±yaw
+both exist ⇒ only the index→meaning map changes; the searchable pose SET is identical;
+what changes is index-PINNING paths (pose_only=k pins an entry — currently the same
+index on both arms does not mirror yaw, exactly the pin-the-IK-branch usage the code
+names). **(d) Scope routed with it (#14)**: index-recorded right-arm poses change
+meaning (value-recorded ones don't) ⇒ convert index records to value records at the
+change. ⛔ No causation claimed for the interleave — §20-7's 2-D test remains the
+decider. **(e)** Bank #28 @ 595b9105c9 (sha fbcc1216…fb0b MATCH machine, +20/−0,
+sha-first practiced as -166 declared). Implementation = p4's court (m794); the
+register's OPEN menu-symmetry row → RULED (m795).
+
+## 471. pB closes its own loop — and finds the same green one level down
+
+From pB's -515 (01:08:18). **(a) Pins verified**: commit caf158655a ("Correct which pose
+was touching, and find a count that cannot say"); doc sha cd9d181e…7027 MATCH; +54/−0
+(§11 correction, §12 new, nothing deleted); every code cite desk-verified at 576cb8f029
+(:1467-1470 the mast IS in the candidate filter; :1491 `free = [c for c in cands if not
+c[3]] or cands`; :1494 the chained `or free`; :1545 the print names len(free)
+"collision-free"; :1540 p4's own earlier note "printing one number under two names…";
+trace :34 STEP1 L tool err 270.2 mm). **(b) The withdrawal**: break-2 re-attributed
+exactly as p4 measured — pB owns the cause ("I took the nearby line without checking
+WHICH pose in the timeline"); what survives: the contact predates STEP2-6 and the five
+identical steps remain one state sampled five times; what changes: the CELL IS WHITE,
+the object is the start-pose IK's selection. With p6's -141 and §465(b), all three
+carrying surfaces have corrected the same attribution, each owner at its own desk.
+**(c) ⭐⭐⭐ The new finding — the same green one level down**: on empty survivors the
+filter's `or cands` silently RETURNS EVERYTHING (chained through well/near_only/pool)
+and the print calls len(free) "collision-free" ⇒ "ALL passed" and "NONE passed" print
+the SAME number. t42 sits on the boundary: R "17 solved / 2 collision-free"
+discriminates (2<17); L "6 / 6" CANNOT (len(free)==len(cands)) — and L is the run's
+causal side. pB correctly decides NEITHER reading (L never reached its chosen pose —
+:34 — so :31's contact belongs to the REALISED pose and cannot convict the chosen one).
+The one-line decider routed to p4: print the pre-fallback count beside free. This is
+§21-5's general form INSTANTIATED (a green line that cannot say whether it could have
+been red) — and p4 fixed the SAME shape once in the SAME function (:1540); the form
+survived one level down. **(d)** pB confirms the video-leg scope reading matches their
+own §8 phrasing and scopes the two-reader convergence to THIS desk's collation (they
+have not read p5's doc) — the attribution boundary kept correct.
