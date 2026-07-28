@@ -39,7 +39,7 @@ from ur15_cell_spec import (  # noqa: E402
     ARMATURE, CABLE_N, CABLE_R, CABLE_SEG, CLAMP, CLAW_OFFSET, CLIP_BASE_HEIGHT, CLIP_COLLIDE,
     CLIP_FRICTION, CLIP_PARTS, CLIP_SOLREF, DAMP, EFFORT, GRIP_HALF_SPAN, GROOVE_CENTER_Z, HALF,
     C1, C2, CABLE_JOINT_RANGE, CELL_TIMESTEP, CLAW_RELEASE_GAP, CLIP_Y_EVEN,
-    BRANCH_R, CLIP_Y_ODD, COLUMN_R, FORK_HEIGHT,
+    CLIP_Y_ODD, COLUMN_R, CROWN_R, CROWN_ZC,
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
@@ -158,24 +158,16 @@ def clip_xml(name, cx, cy):
 
 
 def yoke_xml():
-    """The two branches of the Y, from the top of the stem out to each shoulder.
+    """The crown: one rounded head carrying both arm mounts.  Rs's reference, p5 bank #22.
 
-    Rs asked for this shape after seeing that the arm bases stood 298 mm clear of the column with
-    nothing between them -- the arms were mounted on an invisible coordinate offset.  ⛔ That gap is
-    where the right forearm had been travelling, so this is not scenery: it is material the arm now
-    has to go around, and every mast reading taken before it existed was a reading of a cell that
-    was missing its support.
-
-    One capsule per side, ending exactly on the shoulder the arm attaches to, so the branch meets
-    the mount rather than stopping near it.  Both numbers come from p5 (bank #21); neither is
-    derived here.
+    ⛔ Not a fork.  bank #21's branches bridged shoulders that stayed 800 mm apart, and Rs said
+    plainly, on being shown it, that this is not the shape -- the reference has both mounts sitting
+    on a single head barely wider than the column.  So the shoulders come in and the branches go.
+    ⚠ A capsule, not a plate: p5 specified a round primitive, and a flat one would hand the
+    distance queries a corner the reference does not have.
     """
-    out = []
-    for tag, sign in SIDES.items():
-        out.append(
-            f'<geom name="yoke_{tag}" type="capsule" size="{BRANCH_R}" '
-            f'fromto="0 0 {FORK_HEIGHT} {sign * YOKE_SPREAD} 0 {SHOULDER_HEIGHT}" material="col"/>')
-    return "\n      ".join(out)
+    return (f'<geom name="crown" type="capsule" size="{CROWN_R}" '
+            f'fromto="{-YOKE_SPREAD} 0 {CROWN_ZC} {YOKE_SPREAD} 0 {CROWN_ZC}" material="col"/>')
 
 
 def rest_xml(i, cx):
@@ -1150,7 +1142,7 @@ def _rdes(yaw, roll=0.0):
 # exact failure this file already has a name for: an instrument reporting a fault to nobody.
 # p5 flagged it before I wrote the geometry; it is here because of that, not because I checked.
 COLG = [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n)
-        for n in ("stem", "foot") + tuple(f"yoke_{t}" for t in SIDES)]
+        for n in ("stem", "foot", "crown")]   # p6 #54(2): the crown is new mast material
 assert all(g >= 0 for g in COLG), "a mast geom name did not resolve -- an instrument would be blind"
 COLB = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "column")
 # ⛔ An exclusion stood here and its reason was wrong.  I argued that each arm's first body is a

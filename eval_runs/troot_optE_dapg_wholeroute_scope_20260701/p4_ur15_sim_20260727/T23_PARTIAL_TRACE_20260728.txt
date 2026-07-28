@@ -1,0 +1,229 @@
+[cell] cable bend EI in force: 0.005 N.m^2 from task_config.py:144
+[cell] -> joint stiffness 0.33333 N.m/rad over a 15 mm link
+[cell] cable 40 x 15 mm, 1.1243 g each, 44.97 g total
+[cell] clip collision read from the env source: True
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:268: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  m = cell.compile()
+[steps] nq=113 nu=14 nbody=88 ngeom=139 eq=8  seat links C1=cab30 C2=cab23
+[steps] geoms: 139 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.300,+0.285] y[+0.280,+0.280] z-table[+0.1486,+0.1559] ncon=13
+[steps] measured grasp: L=cab27 [0.1125 0.28   0.9486]  R=cab32 [0.1875 0.28   0.9509]  drop across the span = 2.3 mm
+[steps] start-pose IK L: 8 solved / 2 collision-free / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll 20.1 deg sigma_min 0.0422 |q|max=1.38 rad
+[steps] start-pose IK R: 13 solved / 3 collision-free / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll 34.4 deg sigma_min 0.2368 |q|max=3.06 rad
+[steps] measured pinch->mouth drop: L -41.6 mm  R -36.6 mm
+[steps] Tier A cross-check: 0 measurable values (CLAW_OFFSET excluded -- the cell measures pinch->mouth, which is a different vector)
+[steps] STEP1 L arm touching: clear
+[steps] STEP1 R arm touching: clear
+[steps] re-measured after the approach: L=cab26 [0.0986 0.28   0.9488]  R=cab32 [0.1886 0.28   0.951 ]
+[steps] STEP1 L: tool err=   2.1mm
+          joint err   = [-0.  0. -0.  0. -0. -0.] mrad
+          act force   = [ 0. -0.  0. -0.  0.  0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [-64.3 -96.5 -13.2   4.   -1.    0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] STEP1 R: tool err=   2.1mm
+          joint err   = [-0.  0.  0. -0.  0.  0.] mrad
+          act force   = [ 0. -0.  0.  0. -0. -0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [82.6 29.7 -8.8  0.1  1.5 -0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] vertical check: allowance 5.73 deg, cap 5.73 deg (the smallest non-zero tilt the attitude menu can make, measured as pinch->mouth against world -z, not as a roll); the allowance is an interim until a run reports the worst residual an upright command actually leaves
+[steps] arm geom sets: L=38 R=38, DISJOINT  (a shared geom would read as zero distance between the arms at every step)
+[steps] watch along here while it runs: /home/rlrk/Downloads/ur15_live.mp4
+[steps] watch-along file opened with the starting frame; it stays on that frame until the attitude search finishes and the arms begin to move
+[steps] release opening solved from the asset: ctrl 186.7 (claw tips reach 12.00 mm = cable 8.0 plus the 4.00 mm the cable can sit off centre)
+[steps] aim L: yaw +0.00 roll +0.30 rad (+17 deg tilt), seat error 1.00 mm
+[steps] aim R: yaw +0.00 roll +0.55 rad (+32 deg tilt), seat error 1.46 mm
+[steps] STEP 2 sigma_min L=0.0760 R=0.2403  mast L=+97.8 mm (g7 on L_wrist_2_link vs stem) R=+180.2 mm (Rg_left_pad_f1ext vs stem)
+[steps] STEP 2 ARM REACH: L  20.7 mm below the mouth (Lg_left_pad_f1ext), +176.8 mm vs the table | R  41.0 mm below the mouth (geom57), +161.7 mm vs the table
+[steps] STEP 2 AS REALISED: L 11.5 deg off straight down, pads +79.89 mm | R 34.4 deg off straight down, pads +79.89 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 2 ARM-TO-ARM: closest +0.0 mm (8 <-> 45)  <- TOUCHING OR THROUGH   along the move -62.6 mm (13 <-> 69 at t=1.05s)   worst so far -62.6 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 2 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 1 of 20 candidates, 18 of them roomy, winner sigma 0.0760 (best survivor 0.0869) vs best dropped 0.1205; the mast removed 12 | R: the winning pose cleared the whole 16 mm search radius; clearance removed 18 of 55 candidates, 17 of them roomy, winner sigma 0.2403 (best survivor 0.3005) vs best dropped 0.2542; the mast removed 6 ; realised at rest +0.0 mm (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 2 CARRY: L mouth[+0.098 +0.282 +0.198] holds cab26 at ( -6.5, -1.9,-48.7) mm | R mouth[+0.189 +0.269 +0.203] holds cab33 at ( +7.5,+11.1,-51.3) mm
+[steps] STEP 2 C1 SEAT: nearest point ON THE CABLE (cab29 at 0.68) misses the groove centre by (  -3.7, -70.0,+140.3) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 2 C1 GATE: cab30 at [+0.151 +0.280 +0.149] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 2 C2 GATE: cab23 at [+0.046 +0.280 +0.150] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 2 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 2 cable上空へ     t=  2.2s L=   2.1mm R=   2.1mm c1[y+0.280 z+0.149] c2[y+0.280 z+0.150] pin=--/-- grip=--
+[steps] STEP3 L: standoff re-aim (y,z only), seat error  1.72 mm
+[steps] STEP3 L: that residual in the jaw's own axes (PREDICTED close): along cable  -0.40  closing  +1.58  across the mouth  +0.55 mm
+[steps] STEP3 L: and in world [ -0.40  -1.33  -1.02] mm (same vector, no frame of its own -- compare the two arms here)
+[steps] STEP3 L: closing axis in world [-0.000 -0.948 -0.317]  across-mouth axis [+0.000 +0.317 -0.948]
+[steps] STEP3 L: the aim ASSUMED the cable at [+0.0986 +0.2800 +0.9488] running along world x (x held, y and z re-aimed); cab26 ACTUALLY runs [+1.000 -0.000 -0.006] =  0.4 deg off that axis (neighbours: cab25  1.0, cab27  0.3 deg)
+[steps] STEP3 R: standoff re-aim (y,z only), seat error  1.43 mm
+[steps] STEP3 R: that residual in the jaw's own axes (PREDICTED close): along cable  -0.03  closing  +1.20  across the mouth  -0.78 mm
+[steps] STEP3 R: and in world [ -0.03  -0.65  +1.28] mm (same vector, no frame of its own -- compare the two arms here)
+[steps] STEP3 R: closing axis in world [-0.000 -0.864 +0.503]  across-mouth axis [+0.000 -0.503 -0.864]
+[steps] STEP3 R: the aim ASSUMED the cable at [+0.1886 +0.2800 +0.9510] running along world x (x held, y and z re-aimed); cab32 ACTUALLY runs [+0.999 -0.000 +0.050] =  2.9 deg off that axis (neighbours: cab31  2.5, cab33  3.1 deg)
+[steps] STEP3: if the cable had rotated rigidly, these residuals would need x-y -0.44 deg and x-z +1.50 deg; the links measure  0.4 and  2.9 deg off world x, with x-y components -0.0000 and -0.0000
+[steps] STEP3 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP3 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP3 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP3 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP3 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP3 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP 3 sigma_min L=0.0376 R=0.2059  mast L=+73.3 mm (g7 on L_wrist_2_link vs stem) R=-0.6 mm (g43 on R_forearm_link vs stem)   <- INSIDE THE MAST
+[steps] STEP 3 ARM REACH: L  25.6 mm below the mouth (Lg_left_pad_f1ext), +135.0 mm vs the table | R 281.0 mm below the mouth (geom42),  +73.0 mm vs the table
+[steps] STEP 3 AS REALISED: L 17.2 deg off straight down, pads +79.89 mm | R 52.2 deg off straight down, pads +79.89 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 3 ARM-TO-ARM: nothing within the 176 mm search radius at rest   along the move +0.0 mm (13 <-> 65 at t=2.21s)   worst so far -62.6 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 3 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 0 of 2 candidates, 2 of them roomy, winner sigma 0.0376 (best survivor 0.0376) vs best dropped none dropped; the mast removed 1 | R: the winning pose cleared the whole 16 mm search radius; clearance removed 1 of 3 candidates, 1 of them roomy, winner sigma 0.2310 (best survivor 0.2310) vs best dropped 0.2004; the mast removed 0 ; realised at rest beyond the search radius (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 3 CARRY: L mouth[+0.099 +0.287 +0.161] holds cab27 at ( +7.1, -7.1,-11.9) mm | R mouth[+0.459 -0.662 +0.354] holds cab39 at (-173.4,+942.4,-198.3) mm
+[steps] STEP 3 C1 SEAT: nearest point ON THE CABLE (cab29 at 0.68) misses the groove centre by (  -3.7, -70.0,+140.3) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 3 C1 GATE: cab30 at [+0.151 +0.280 +0.149] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 3 C2 GATE: cab23 at [+0.046 +0.280 +0.150] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 3 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 3 cableへ下降     t=  6.7s L=   2.1mm R= 988.9mm c1[y+0.280 z+0.149] c2[y+0.280 z+0.150] pin=--/-- grip=--
+[steps] STEP4 L: holding the seated pose, fingers only
+[steps] STEP4 R: holding the seated pose, fingers only
+[steps] STEP4 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP4 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP4 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP4 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP4 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP4 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] GRASP L: cable centreline is 11.98 mm from the seat (perpendicular, interpolated on cab26 at 0.52 along it)
+[steps] GRASP L: in the jaw's own axes: along cable  -0.07  closing  +1.60  across the mouth +11.88 mm (containment wants |across| < 4.00, derived from the asset; the along-cable term does not affect it)
+[steps] GRASP L: seat vs its own PREDICTION [-0.  -3.3 10.8] mm (| 11.3|)  cable vs where it was aimed [ 0.3  0.  -0. ] mm (|  0.3|)
+[steps] GRASP L: joints vs commanded [-0.  0. -0.  0.  0. -0.] mrad -> servo arrived; nearest link is   0.3 mm from where the aimed link was (identity may differ -- not a drift)
+[steps] GRASP L: pad faces +79.89 mm (design target 4.00 on a O8 cable, task_config.py:277), opposing claws +69.87 mm, claw min over the run +69.87 mm
+[steps] GRASP L: cable touched by pad1 none / claws none / pad2-only none   clamped=False (needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had closed through the cable)
+[steps] GRASP L: fingers blocked by nothing
+[steps] GRASP L: nearest cable link cab27 at  42.1 mm from the pinch, pad separation  93.3 mm, ctrl=18, pad geoms touching cable = none
+[steps] GRASP R: cable centreline is 961.85 mm from the seat (perpendicular, interpolated on cab39 at 1.00 along it)
+[steps] GRASP R: in the jaw's own axes: along cable +911.44  closing  +3.59  across the mouth -307.27 mm (containment wants |across| < 4.00, derived from the asset; the along-cable term does not affect it)
+[steps] GRASP R: seat vs its own PREDICTION [ 248.8 -932.   204.3] mm (|986.1|)  cable vs where it was aimed [112.4   0.    5.4] mm (|112.5|)
+[steps] GRASP R: joints vs commanded [-1.2000e+00 -1.6063e+03 -0.0000e+00 -0.0000e+00  0.0000e+00 -0.0000e+00] mrad -> servo did not arrive; nearest link is 112.5 mm from where the aimed link was (identity may differ -- not a drift)
+[steps] GRASP R: WHY IT DID NOT ARRIVE -- worst joint j1 short by -1.606 rad; act force [ 12.3 433.    0.5   0.   -0.    0. ] N.m of (433.0, 433.0, 204.0, 70.0, 70.0, 70.0); at its limit = [np.False_, np.True_, np.False_, np.False_, np.False_, np.False_]; gravity load [-66.6 -31.2 -12.    1.7  -2.5  -0. ] N.m; touching ['column (via g43 on R_forearm_link)']
+[steps] GRASP R: pad faces +79.89 mm (design target 4.00 on a O8 cable, task_config.py:277), opposing claws +69.87 mm, claw min over the run +69.86 mm
+[steps] GRASP R: cable touched by pad1 none / claws none / pad2-only none   clamped=False (needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had closed through the cable)
+[steps] GRASP R: fingers blocked by nothing
+[steps] GRASP R: nearest cable link cab39 at 968.3 mm from the pinch, pad separation  93.3 mm, ctrl=18, pad geoms touching cable = none
+[steps] STEP 4 sigma_min L=0.0376 R=0.2059  mast L=+73.3 mm (g7 on L_wrist_2_link vs stem) R=-0.6 mm (g43 on R_forearm_link vs stem)   <- INSIDE THE MAST
+[steps] STEP 4 ARM REACH: L  25.6 mm below the mouth (Lg_left_pad_f1ext), +135.0 mm vs the table | R 281.0 mm below the mouth (geom42),  +73.0 mm vs the table
+[steps] STEP 4 AS REALISED: L 17.2 deg off straight down, pads +79.89 mm | R 52.2 deg off straight down, pads +79.89 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 4 ARM-TO-ARM: nothing within the 176 mm search radius at rest   nothing within the radius during the move   worst so far -62.6 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 4 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 0 of 2 candidates, 2 of them roomy, winner sigma 0.0376 (best survivor 0.0376) vs best dropped none dropped; the mast removed 1 | R: the winning pose cleared the whole 16 mm search radius; clearance removed 1 of 3 candidates, 1 of them roomy, winner sigma 0.2310 (best survivor 0.2310) vs best dropped 0.2004; the mast removed 0 ; realised at rest beyond the search radius (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 4 CARRY: L mouth[+0.099 +0.287 +0.161] holds cab27 at ( +7.1, -7.1,-11.9) mm | R mouth[+0.459 -0.662 +0.354] holds cab39 at (-173.4,+942.4,-198.3) mm
+[steps] STEP 4 C1 SEAT: nearest point ON THE CABLE (cab29 at 0.68) misses the groove centre by (  -3.7, -70.0,+140.3) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 4 C1 GATE: cab30 at [+0.151 +0.280 +0.149] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 4 C2 GATE: cab23 at [+0.046 +0.280 +0.150] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 4 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 4 cable把持      t= 11.2s L=   2.1mm R= 988.9mm c1[y+0.280 z+0.149] c2[y+0.280 z+0.150] pin=--/-- grip=--
+[steps] STEP5 L: arm in contact with the cable at t=0.48s -- ['cab25 (via Lg_left_pad_f1ext)']
+[steps] STEP 5 sigma_min L=0.0732 R=0.2039  mast L=+0.0 mm (g9 on Lg_base_mount vs stem) R=-0.5 mm (g43 on R_forearm_link vs stem)   <- INSIDE THE MAST
+[steps] STEP 5 ARM REACH: L  13.6 mm below the mouth (Lg_left_pad_f1ext), +172.8 mm vs the table | R 227.3 mm below the mouth (geom42),  +64.3 mm vs the table
+[steps] STEP 5 AS REALISED: L 11.5 deg off straight down, pads  +6.89 mm | R 51.6 deg off straight down, pads  +3.79 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 5 ARM-TO-ARM: nothing within the 176 mm search radius at rest   nothing within the radius during the move   worst so far -62.6 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 5 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 2 of 21 candidates, 16 of them roomy, winner sigma 0.0732 (best survivor 0.0892) vs best dropped 0.1223; the mast removed 10 | R: the winning pose cleared the whole 16 mm search radius; clearance removed 19 of 56 candidates, 13 of them roomy, winner sigma 0.2389 (best survivor 0.2922) vs best dropped 0.2743; the mast removed 4 ; realised at rest beyond the search radius (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 5 CARRY: L mouth[+0.100 +0.289 +0.186] holds cab27 at ( +4.3, -0.0, -2.8) mm | R mouth[+0.529 -0.588 +0.292] holds cab39 at (-248.5,+862.2,-140.4) mm
+[steps] STEP 5 C1 SEAT: nearest point ON THE CABLE (cab31 at 0.75) misses the groove centre by ( +24.4, -69.2,+166.1) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 5 C1 GATE: cab30 at [+0.149 +0.283 +0.179] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 5 C2 GATE: cab23 at [+0.045 +0.293 +0.180] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 5 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 5 持ち上げ         t= 13.2s L=  13.5mm R= 921.2mm c1[y+0.283 z+0.179] c2[y+0.293 z+0.180] pin=--/-- grip=L-
+[steps] STEP6 L: arm in contact with the cable at t=0.00s -- ['cab25 (via Lg_left_pad1)', 'cab25 (via Lg_right_pad1)', 'cab26 (via Lg_left_pad1)', 'cab26 (via Lg_right_pad1)', 'cab27 (via Lg_left_pad1)', 'cab27 (via Lg_right_pad1)']
+[steps] STEP 6 sigma_min L=0.1059 R=0.2481  mast L=+200.0 mm (g29 on Lg_left_coupler vs stem) R=-0.6 mm (g43 on R_forearm_link vs stem)   <- INSIDE THE MAST
+[steps] STEP 6 ARM REACH: L  10.6 mm below the mouth (Lg_right_pad_f1ext), +125.0 mm vs the table | R 320.7 mm below the mouth (geom42),  +79.1 mm vs the table
+[steps] STEP 6 AS REALISED: L  0.0 deg off straight down, pads  +6.66 mm | R 63.0 deg off straight down, pads  +3.79 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 6 ARM-TO-ARM: nothing within the 176 mm search radius at rest   nothing within the radius during the move   worst so far -62.6 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 6 CLEARANCE: L: clearance removed 2 of 38 candidates, winner predicted +9.5 mm, winner sigma 0.1061 (best survivor 0.1061) vs best dropped 0.0850; 31 candidates cleared the whole 16 mm search radius, widest inside it +15.6 mm; the mast removed 16 | R: clearance removed 25 of 60 candidates, winner predicted +9.5 mm, winner sigma 0.2702 (best survivor 0.2802) vs best dropped 0.2636; 7 candidates cleared the whole 16 mm search radius, widest inside it +10.7 mm; the mast removed 4 ; realised at rest beyond the search radius (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 6 CARRY: L mouth[+0.106 +0.350 +0.136] holds cab27 at ( +0.5, +0.1, +0.2) mm | R mouth[+0.386 -0.704 +0.400] holds cab39 at (-123.6,+974.6,-242.8) mm
+[steps] STEP 6 C1 SEAT: nearest point ON THE CABLE (cab27 at 0.48) misses the groove centre by ( -36.6,  -0.2,+128.8) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 6 C1 GATE: cab30 at [+0.149 +0.343 +0.146] -> fails on z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 6 C2 GATE: cab23 at [+0.051 +0.349 +0.114] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 6 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 6 C1上空へ搬送      t= 16.0s L=  13.5mm R=1079.9mm c1[y+0.343 z+0.146] c2[y+0.349 z+0.114] pin=--/-- grip=L-
+[steps] STEP 7 L: aiming the CABLE at the C1 floor (pinch->mouth [  0.    0.  -44.3], mouth->cable [-0.  0.  0.] mm; rest height 9.0 mm above the table; the old constant said [0,0,+20.9])
+[steps] STEP 7 R: aiming the CABLE at the C1 floor (pinch->mouth [ -1.4  -9.  -32.4], mouth->cable [ -86.5  953.8 -242.2] mm; rest height 9.0 mm above the table; the old constant said [0,0,+20.9])
+[steps] STEP7 R: fingers  0.0 deg off straight down (pinch->mouth [+0.000 +0.000 -1.000]), allowance 5.73 deg -- margin +5.73; tool axis  0.0 deg off vertical; pinch->mouth  30.9 mm with the pads  +3.79 mm apart at the COMMANDED opening 236; lowest point geom42 at  +78.6 mm vs the table
+[steps] STEP7 L: fingers  0.0 deg off straight down (pinch->mouth [+0.001 -0.000 -1.000]), allowance 5.73 deg -- margin +5.69; tool axis  0.1 deg off vertical; pinch->mouth  30.9 mm with the pads  +4.33 mm apart at the COMMANDED opening 236; lowest point Lg_left_pad_f1ext at   -0.1 mm vs the table
+[steps] STEP7 L: arm in contact with the cable at t=0.00s -- ['cab26 (via Lg_left_pad1)', 'cab26 (via Lg_right_pad1)', 'cab27 (via Lg_left_pad1)', 'cab27 (via Lg_right_pad1)']
+[steps] STEP 7 sigma_min L=0.0803 R=0.1385  mast L=+200.1 mm (g29 on Lg_left_coupler vs stem) R=+73.1 mm (g43 on R_forearm_link vs stem)
+[steps] STEP 7 ARM REACH: L  10.6 mm below the mouth (Lg_left_pad_f1ext),   -0.1 mm vs the table <- THROUGH THE TABLE | R 160.7 mm below the mouth (geom42),  +78.6 mm vs the table
+[steps] STEP 7 AS REALISED: L  0.1 deg off straight down, pads  +6.60 mm | R  0.0 deg off straight down, pads  +3.79 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 7 ARM-TO-ARM: nothing within the 176 mm search radius at rest   nothing within the radius during the move   worst so far -62.6 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 7 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 4 of 36 candidates, 28 of them roomy, winner sigma 0.0803 (best survivor 0.0803) vs best dropped 0.0761; the mast removed 21 | R: the winning pose cleared the whole 16 mm search radius; clearance removed 0 of 27 candidates, 27 of them roomy, winner sigma 0.1384 (best survivor 0.2566) vs best dropped none dropped; the mast removed 7 ; realised at rest beyond the search radius (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 7 CARRY: L mouth[+0.106 +0.350 +0.011] holds cab27 at ( +1.2, -0.0, +1.4) mm | R mouth[+0.282 -0.595 +0.239] holds cab39 at ( +5.2,+940.4,-235.0) mm
+[steps] STEP 7 C1 SEAT: nearest point ON THE CABLE (cab29 at 0.84) misses the groove centre by (  +0.1,  -0.4,  +2.5) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 7 C1 GATE: cab30 at [+0.152 +0.350 +0.011] -> fails on contact   (links whose geometry alone would qualify: [29, 30, 31])
+[steps] STEP 7 C2 GATE: cab23 at [+0.047 +0.349 +0.009] -> fails on y,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 7 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 7 C1へ押し込み      t= 18.8s L=  11.8mm R=  13.4mm c1[y+0.350 z+0.011] c2[y+0.349 z+0.009] pin=--/-- grip=L-
+[steps] STEP 8 L: aiming the CABLE at the C1 floor (pinch->mouth [ -0.4  -0.1 -42.8], mouth->cable [-0.  -0.   1.3] mm; rest height 9.0 mm above the table; the old constant said [0,0,+20.9])
+[steps] STEP 8 R: aiming the CABLE at the C1 floor (pinch->mouth [ -0.    0.  -44.3], mouth->cable [  20.2  939.9 -235.8] mm; rest height 9.0 mm above the table; the old constant said [0,0,+20.9])
+[steps] STEP8 R: fingers  0.1 deg off straight down (pinch->mouth [+0.002 +0.002 -1.000]), allowance 5.73 deg -- margin +5.60; tool axis  0.1 deg off vertical; pinch->mouth  31.0 mm with the pads +79.89 mm apart at the COMMANDED opening 18; lowest point geom42 at  +81.8 mm vs the table
+[steps] STEP8 L: fingers  4.1 deg off straight down (pinch->mouth [+0.000 -0.072 -0.997]), allowance 5.73 deg -- margin +1.60; tool axis  0.3 deg off vertical; pinch->mouth  30.6 mm with the pads +10.65 mm apart at the COMMANDED opening 214; lowest point Lg_left_pad_f1ext at   -0.3 mm vs the table
+[steps] STEP8 L: arm in contact with the cable at t=0.00s -- ['cab26 (via Lg_left_pad1)', 'cab26 (via Lg_right_pad1)', 'cab27 (via Lg_left_pad1)', 'cab27 (via Lg_right_pad1)']
+[steps] STEP 8 sigma_min L=0.0809 R=0.1498  mast L=+201.1 mm (g29 on Lg_left_coupler vs stem) R=+23.5 mm (g43 on R_forearm_link vs stem)
+[steps] STEP 8 ARM REACH: L  11.3 mm below the mouth (Lg_left_pad_f1ext),   -0.3 mm vs the table <- THROUGH THE TABLE | R 174.5 mm below the mouth (geom42),  +81.8 mm vs the table
+[steps] STEP 8 AS REALISED: L  4.2 deg off straight down, pads +10.43 mm | R  0.1 deg off straight down, pads +79.88 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 8 ARM-TO-ARM: nothing within the 176 mm search radius at rest   nothing within the radius during the move   worst so far -62.6 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 8 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 4 of 33 candidates, 25 of them roomy, winner sigma 0.0811 (best survivor 0.0811) vs best dropped 0.0769; the mast removed 17 | R: the winning pose cleared the whole 16 mm search radius; clearance removed 0 of 22 candidates, 22 of them roomy, winner sigma 0.1499 (best survivor 0.1499) vs best dropped none dropped; the mast removed 4 ; realised at rest beyond the search radius (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 8 CARRY: L mouth[+0.105 +0.352 +0.011] holds cab27 at ( +1.8, +0.4, -1.5) mm | R mouth[+0.175 -0.590 +0.256] holds cab31 at ( -7.8,+942.4,-247.4) mm
+[steps] STEP 8 C1 SEAT: nearest point ON THE CABLE (cab29 at 0.86) misses the groove centre by (  -0.0,  +2.6,  +0.3) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 8 C1 GATE: cab30 at [+0.152 +0.353 +0.009] -> PASS   (links whose geometry alone would qualify: [29, 30, 31])
+[steps] STEP 8 C2 GATE: cab23 at [+0.047 +0.350 +0.008] -> fails on y,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 8 PENETRATION: cab30 is 0.1 mm INSIDE C1 C1_0   (clip-cable contacts now: 1)
+[steps] STEP 8 誘導ハンド半保持     t= 20.4s L=   9.8mm R=   2.1mm c1[y+0.353 z+0.009] c2[y+0.350 z+0.008] pin=--/-- grip=L-
+[steps] STEP 9 L: aiming the CABLE at the C1 floor (pinch->mouth [ -0.    0.1 -37. ], mouth->cable [ 0.1 -1.9 -1.6] mm; rest height 9.0 mm above the table; the old constant said [0,0,+20.9])
+[steps] STEP 9 R: aiming the CABLE at the C1 floor (pinch->mouth [  1.1   0.1 -44. ], mouth->cable [  -2.3  942.4 -247.6] mm; rest height 9.0 mm above the table; the old constant said [0,0,+20.9])
+[steps] STEP9 R: fingers  0.0 deg off straight down (pinch->mouth [-0.000 -0.000 -1.000]), allowance 5.73 deg -- margin +5.73; tool axis  0.0 deg off vertical; pinch->mouth  31.0 mm with the pads +79.89 mm apart at the COMMANDED opening 18; lowest point geom42 at  +82.9 mm vs the table
+[steps] STEP9 L: fingers  4.4 deg off straight down (pinch->mouth [+0.001 -0.076 -0.997]), allowance 5.73 deg -- margin +1.36; tool axis  0.4 deg off vertical; pinch->mouth  30.6 mm with the pads  +0.00 mm apart at the COMMANDED opening 214; lowest point Lg_left_pad_f1ext at   -0.4 mm vs the table
+[steps] STEP9 L: arm in contact with the cable at t=0.00s -- ['cab26 (via Lg_right_pad_f1ext)']
+[steps] C1 RETAINED cab29 at t=20.40s (the link actually in the groove; the build-time guess was cab30)
+[steps] C1 PIN RESIDUAL at engagement  0.000 mm (the two anchors as world points -- anything here is a distance the cable would be pulled); anchor sits   +0.0 mm from the groove centre along the cable's own axis
+[steps] C1 PIN RESIDUAL after 720 steps  0.054 mm
+[steps] STEP 9 sigma_min L=0.0816 R=0.1512  mast L=+201.6 mm (g29 on Lg_left_coupler vs stem) R=+28.6 mm (g43 on R_forearm_link vs stem)
+[steps] STEP 9 ARM REACH: L  11.4 mm below the mouth (Lg_left_pad_f1ext),   -0.4 mm vs the table <- THROUGH THE TABLE | R 184.6 mm below the mouth (geom42),  +82.9 mm vs the table
+[steps] STEP 9 AS REALISED: L  4.5 deg off straight down, pads +11.99 mm | R  0.0 deg off straight down, pads +79.89 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 9 ARM-TO-ARM: nothing within the 176 mm search radius at rest   nothing within the radius during the move   worst so far -62.6 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 9 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 3 of 32 candidates, 26 of them roomy, winner sigma 0.0824 (best survivor 0.0824) vs best dropped 0.0781; the mast removed 18 | R: the winning pose cleared the whole 16 mm search radius; clearance removed 0 of 23 candidates, 23 of them roomy, winner sigma 0.1511 (best survivor 0.1511) vs best dropped none dropped; the mast removed 9 ; realised at rest beyond the search radius (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 9 CARRY: L mouth[+0.104 +0.353 +0.011] holds cab27 at ( +2.6, -1.0, -1.7) mm | R mouth[+0.195 -0.593 +0.268] holds cab31 at (-28.3,+945.8,-258.6) mm
+[steps] STEP 9 C1 SEAT: nearest point ON THE CABLE (cab29 at 0.87) misses the groove centre by (  -0.1,  +2.9,  +0.3) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 9 C1 GATE: cab30 at [+0.152 +0.353 +0.009] -> PASS   (links whose geometry alone would qualify: [29, 30, 31])
+[steps] STEP 9 C2 GATE: cab23 at [+0.047 +0.349 +0.007] -> fails on y,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 9 PENETRATION: cab30 is 0.1 mm INSIDE C1 C1_0   (clip-cable contacts now: 1)
+[steps] STEP 9 C1がcable固定   t= 22.0s L=   7.2mm R=   2.1mm c1[y+0.353 z+0.009] c2[y+0.349 z+0.007] pin=C1/-- grip=L-
+[steps] STEP10 L: arm in contact with the cable at t=0.00s -- ['cab27 (via Lg_right_pad_f1ext)']
+[steps] STEP10 sigma_min L=0.1058 R=0.3237  mast L=+199.1 mm (g29 on Lg_left_coupler vs stem) R=+387.5 mm (g41 on R_shoulder_link vs stem)
+[steps] STEP10 ARM REACH: L  10.6 mm below the mouth (Lg_right_pad_f1ext), +124.9 mm vs the table | R  60.9 mm below the mouth (geom42), +129.4 mm vs the table
+[steps] STEP10 AS REALISED: L  0.0 deg off straight down, pads +12.03 mm | R 32.7 deg off straight down, pads +79.89 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP10 ARM-TO-ARM: closest +9.8 mm (5 <-> 43)   along the move +0.0 mm (6 <-> 43 at t=23.46s)   worst so far -62.6 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP10 CLEARANCE: L: clearance removed 3 of 38 candidates, winner predicted +9.8 mm, winner sigma 0.1061 (best survivor 0.1061) vs best dropped 0.0873; 27 candidates cleared the whole 16 mm search radius, widest inside it +14.9 mm; the mast removed 9 | R: clearance removed 29 of 64 candidates, winner predicted +9.8 mm, winner sigma 0.2851 (best survivor 0.3015) vs best dropped 0.2713; 5 candidates cleared the whole 16 mm search radius, widest inside it +9.8 mm; the mast removed 4 ; realised at rest +9.8 mm (predicted minus realised = the following error the constant does not carry)
+[steps] STEP10 CARRY: L mouth[+0.106 +0.350 +0.136] holds cab23 at ( -1.7, -2.2, +2.6) mm | R mouth[+0.476 +0.673 +0.190] holds cab39 at (-204.4,-319.2,-187.6) mm
+[steps] STEP10 C1 SEAT: nearest point ON THE CABLE (cab31 at 0.84) misses the groove centre by ( +19.7,  -0.1, +19.5) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP10 C1 GATE: cab30 at [+0.152 +0.349 +0.050] -> fails on z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP10 C2 GATE: cab23 at [+0.104 +0.348 +0.138] -> fails on x,y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP10 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP10 C1から上昇       t= 24.0s L=  13.6mm R= 417.5mm c1[y+0.349 z+0.050] c2[y+0.348 z+0.138] pin=C1/-- grip=L-
+[steps] STEP11 L: arm in contact with the cable at t=0.00s -- ['cab22 (via Lg_left_pad_f2ext)', 'cab24 (via Lg_left_pad_f1ext)']
+[steps] STEP11 sigma_min L=0.0963 R=0.2870  mast L=+234.1 mm (g29 on Lg_left_coupler vs stem) R=+238.2 mm (Rg_left_pad_f1ext vs stem)
+[steps] STEP11 ARM REACH: L  10.6 mm below the mouth (Lg_right_pad_f1ext), +125.0 mm vs the table | R  50.4 mm below the mouth (geom57), +105.4 mm vs the table
+[steps] STEP11 AS REALISED: L  0.0 deg off straight down, pads +12.11 mm | R 43.0 deg off straight down, pads +79.89 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP11 ARM-TO-ARM: closest +27.1 mm (5 <-> 43)   along the move -0.0 mm (5 <-> 43 at t=24.79s)   worst so far -62.6 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP11 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 8 of 48 candidates, 27 of them roomy, winner sigma 0.0964 (best survivor 0.0964) vs best dropped 0.2068; the mast removed 9 | R: the winning pose cleared the whole 16 mm search radius; clearance removed 32 of 72 candidates, 7 of them roomy, winner sigma 0.2872 (best survivor 0.3047) vs best dropped 0.2850; the mast removed 9 ; realised at rest +27.1 mm (predicted minus realised = the following error the constant does not carry)
+[steps] STEP11 CARRY: L mouth[-0.004 +0.400 +0.136] holds cab17 at ( +3.6, -0.5, -0.5) mm | R mouth[+0.073 +0.380 +0.156] holds cab20 at (-36.0, +9.2,-42.9) mm
+[steps] STEP11 C1 SEAT: nearest point ON THE CABLE (cab30 at 0.42) misses the groove centre by (  +3.4,  +1.7,  +7.8) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP11 C1 GATE: cab30 at [+0.148 +0.353 +0.019] -> fails on z   (links whose geometry alone would qualify: [31])
+[steps] STEP11 C2 GATE: cab23 at [+0.069 +0.378 +0.083] -> fails on x,y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP11 PENETRATION: cab29 is 0.8 mm INSIDE C1 C1_2   (clip-cable contacts now: 1)
+[steps] STEP11 C2上空へ        t= 26.6s L=  13.5mm R=   2.1mm c1[y+0.353 z+0.019] c2[y+0.378 z+0.083] pin=C1/-- grip=L-
+[steps] STEP12 L: arm in contact with the cable at t=0.00s -- ['cab15 (via Lg_right_pad1)', 'cab15 (via Lg_right_pad_f2ext)', 'cab17 (via Lg_left_pad1)', 'cab17 (via Lg_left_pad_f1ext)']
+[steps] STEP12 sigma_min L=0.0963 R=0.2870  mast L=+235.0 mm (g29 on Lg_left_coupler vs stem) R=+238.2 mm (Rg_left_pad_f1ext vs stem)
+[steps] STEP12 ARM REACH: L  10.6 mm below the mouth (Lg_right_pad_f1ext), +125.0 mm vs the table | R  50.4 mm below the mouth (geom57), +105.4 mm vs the table
+[steps] STEP12 AS REALISED: L  0.0 deg off straight down, pads  +6.80 mm | R 43.0 deg off straight down, pads +79.89 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP12 ARM-TO-ARM: closest +27.1 mm (5 <-> 43)   along the move +0.0 mm (9 <-> 49 at t=26.61s)   worst so far -62.6 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP12 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 6 of 43 candidates, 26 of them roomy, winner sigma 0.0964 (best survivor 0.1064) vs best dropped 0.1503; the mast removed 7 | R: the winning pose cleared the whole 16 mm search radius; clearance removed 30 of 67 candidates, 6 of them roomy, winner sigma 0.2872 (best survivor 0.3047) vs best dropped 0.3060; the mast removed 4 ; realised at rest +27.1 mm (predicted minus realised = the following error the constant does not carry)
+[steps] STEP12 CARRY: L mouth[-0.004 +0.400 +0.136] holds cab16 at ( -6.0, +0.0, +2.8) mm | R mouth[+0.073 +0.380 +0.156] holds cab20 at (-31.3,+14.5,-45.8) mm
+[steps] STEP12 C1 SEAT: nearest point ON THE CABLE (cab30 at 0.15) misses the groove centre by (  +3.3,  +1.4,  +8.0) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP12 C1 GATE: cab30 at [+0.151 +0.352 +0.018] -> fails on z   (links whose geometry alone would qualify: [31])
+[steps] STEP12 C2 GATE: cab23 at [+0.074 +0.383 +0.080] -> fails on x,y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP12 PENETRATION: cab29 is 1.2 mm INSIDE C1 C1_2   (clip-cable contacts now: 2)
+[steps] STEP12 左クランプ        t= 28.0s L=  13.5mm R=   2.1mm c1[y+0.352 z+0.018] c2[y+0.383 z+0.080] pin=C1/-- grip=L-
+[steps] STEP13 R: re-grasp re-aim (y,z only, x fixed at RX_MID), seat error  7.00 mm  (first grasp measured 1.45-4.89 mm)
+[steps] STEP13 R: correction applied  y -20.44 mm  z -92.47 mm (x held at RX_MID by ruling; a large or clipped z is the R4 signal)

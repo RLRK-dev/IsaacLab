@@ -347,7 +347,18 @@ _CLIP_PARTS_PER_SPEC = [
 # --------------------------------------------------------------------------------------------
 
 SHOULDER_HEIGHT = 0.37 + 0.58 * 2.0     # spec §4 -- all five driver files already agreed
-YOKE_SPREAD = 0.40                      # spec §4 -- "0.22/45deg made the two arms interleave at an
+YOKE_SPREAD = 0.16                      # p5 bank #22 -- shoulders at +/-0.160, the crown reading
+                                        # of Rs's reference.  ⛔ WAS 0.40, and that value carried
+                                        # its own measurement: "0.22/45deg made the two arms
+                                        # interleave at an 88 mm span".  0.160 is BELOW the 0.22
+                                        # that already failed, so this is knowingly inside a band
+                                        # a measurement warned about.  Rs directed the shape three
+                                        # times -- photograph, video, and again on seeing it was
+                                        # not built -- so it is built, and the interleave question
+                                        # is re-measured rather than argued.  p5 m760: the note is
+                                        # two points, not a boundary, and governs "do not separate
+                                        # the pair", which the re-measurement must honour.
+_YOKE_SPREAD_SUPERSEDED = 0.40          # spec §4 -- "0.22/45deg made the two arms interleave at an
 TILT = math.pi / 2.0 - math.radians(20.0)  #          88 mm span; 0.40/20deg clears the rest row
                                         #            and both clips" (measured, and measured as a
                                         #            pair, so the two cannot be separated)
@@ -378,9 +389,13 @@ COLUMN_R = 0.102                        # spec §6.4j -- the shared column both 
 # column's own silhouette, which is why it is exactly half the column radius.
 # ⚠ p5 did not answer strength: each branch is a 0.4 m cantilever, and p5 states plainly that the
 # margin is already at or below zero, so no branch exists that does not spend some of it.
-FORK_HEIGHT = 1.130                     # p5 bank #21 -- where the single mast ends
-BRANCH_R = COLUMN_R / 2                 # p5 bank #21 -- silhouette-preserving maximum
-COLUMN_HZ = FORK_HEIGHT / 2             # half-height, because MuJoCo cylinders take one.
+# ⛔ bank #21's fork (1.130 / r 0.051) is RETIRED with scope: it was the case-A answer, branches
+# bridging shoulders that stayed 800 mm apart.  Rs's reference is a crown -- both mounts sitting on
+# one rounded head -- so there are no branches at all.  The numbers below are p5 bank #22.
+CROWN_R = 0.160                         # p5 bank #22 -- crown radius, >= the shoulder half-offset
+CROWN_Z0 = 1.330                        # p5 bank #22 -- where the crown's underside sits
+CROWN_ZC = CROWN_Z0 + CROWN_R           # its axis, so the underside lands exactly on CROWN_Z0
+COLUMN_HZ = CROWN_Z0 / 2             # half-height, because MuJoCo cylinders take one.
                                         # ⛔ Was SHOULDER_HEIGHT/2.  The stem stopped at exactly
                                         # shoulder height, which is why a fork drawn from its top
                                         # would have been two horizontal spars and not a Y at all.
