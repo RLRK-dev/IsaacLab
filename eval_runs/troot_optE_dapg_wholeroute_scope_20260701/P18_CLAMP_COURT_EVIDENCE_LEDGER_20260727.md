@@ -13520,3 +13520,54 @@ L 10 solved / 0 collision-free AND R 15 solved / 0 collision-free — one point,
 window claims (numbers to arrive as an artifact after the sweep). ⛔ This desk notes
 without judging: at that point BOTH sides read zero — the sweep's shape, not this
 single point, will carry the design question.
+
+## 482. The register downgrades its own closure — and turns the broken denominator into a repair formula
+
+From p6's -144 (03:10:52). **(a) Pins verified**: commit 0eda34ac48 ("Correct my own
+closure, and apply the denominator advisory"); LEDGER sha 208a343e…dbb9 MATCH; 245
+lines; row | 59 | present; the #54 correction's target commit 77cfd640b9 ("Build the
+crown Rs pointed at, and bring the shoulders in", 07-28 23:05:28) EXISTS;
+run_t17.txt located (run_logs_20260728/). **(b) The downgrade, cause owned**: #56 β
+RESOLVED → PARTIAL — p6 counted "sites" as code LINES, not CALL SITES: the print is
+guarded by `not quiet`, three of four solve_ik calls are quiet=True (aim :721,
+per-step :2222/:2235) and the start-pose call only prints from the 3rd pass ⇒ what
+closed is the start-pose solve alone; per-step fallbacks stay silent; remaining
+condition = a fallback trace even on quiet paths (pB's (a) stands). **(c) ⭐⭐ Row #59
+— the denominator becomes RECOVERABLE**: p6 source-confirmed the mechanism
+independently (:1458-1461 lacks a continue — a dropped candidate is counted in
+_clear_dropped AND appended) and proved it from caps (per-step cap 44, run_t17.txt:44
+prints "of 65"); ⭐ true denominator = printed − removed ⇒ the HISTORICAL record is
+repairable by arithmetic, not merely flagged (t17 L "14 of 33" → 14/19 = 73.7 % vs
+42.4 % as printed; direction constant — real rejection rates are always HIGHER than
+printed). **(d) The advisory executed and fenced**: closed query over all 245 rows
+(every N/M fraction + every "removed" hit) — ONE hit (#49's "14/33"), corrected; the
+other three fractions are different objects; p6's own "N solved / M collision-free"
+cites are outside the defect; scope expressly limited to THEIR register (other panes'
+docs and banked verdicts = their owners'). (i)(ii)(iii) re-recorded as SELF-DERIVED
+(not relay). **(e) The fifth same-shape, self-named**: #54's crown registration landed
+at 77cfd640b9 (07-28 23:05) — fa948b8a53 was the version p6 READ, not the version it
+ENTERED ⇒ ② was already satisfied at t42's time ("writing the read version as the
+landed version" — 5th of the day, their count). No reply (registration).
+
+## 483. The t43 video leg lands — 66 frames of drift, and the gate opens on a run that ended by its own rule
+
+The t43 blind read completed (same instrument/protocol; strip disclosed). **Artifact**:
+P18_T43_BLIND_VIDEO_READ_20260729.md @ 237a7e5549, sha e319f3ae…efa21. **(a) Key
+findings** (instrument's): measured length 2.200 s / ALL 66 frames extracted; NO
+discrete event occurs — both arms in slow monotonic drift (orange: slight descent +
+claw tilt, never approaching the cable, claws closed-empty, no open/close ever;
+purple: correctly ON the cable but claws FULL-OPEN and fixed, wrist rotating without
+converging to a grasp pose); cable motionless all 66 frames (no meaningful force);
+grasp FAILED both arms; physics PLAUSIBLE (no penetration/teleport/divergence/loss);
+two honest unresolved flags (orange elbow/upper-arm vs purple link adjacency; purple
+lower-claw vs cable geometric contact — viewpoint-limited, not dismissed as
+projection); video ends mid-motion at f66. **(b) Desk reconciliation notes (no
+verdict)**: the 2.200 s IS the run — STEP2's 2.2 s allotment ended by the NEW stall
+terminal (§475(b)C; trace :52) — the instrument's "request a longer render" reframes
+as "the run itself ended here by design"; purple's continuous wrist rotation ↔ the
+per-arm ramp letting R advance to 71.5 % (§476(b)(ii)); orange's near-stillness ↔ L
+held 10560/10560; the elbow-adjacency flag sits beside the arm-to-arm instrument's
+scope (arms-only, posts/table invisible — banked §458-era) — a numeric follow-up
+listed for p4. **(c) ⇒ BOTH t43 legs banked (pB §478 + video §483) — the t43 verdict
+gate is OPEN; verdict = p4** (their declared order: sweep first — the gate does not
+rush them). Routed m806.
