@@ -1039,6 +1039,8 @@ def _rdes(yaw, roll=0.0):
 
 
 COLG = [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n) for n in ("stem", "foot")]
+CLEARANCE_REPORT = {}   # per arm: (candidates the clearance removed, candidates kept,
+                        #           the clearance the winning pose was predicted to have)
 
 
 def wrist_jac(t, dd=None):
@@ -1078,6 +1080,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     solution that converges, wraps it to the nearest branch, drops the ones that would sit in
     collision, and returns the one closest to `near` (so the servo move stays short)."""
     sc = mujoco.MjData(m)
+    _clear_dropped = 0
     if other is not None:
         for t2 in SIDES:
             if t2 != t:
@@ -1169,6 +1172,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
                         m, sc, _ga, _gb, ARM_PAIR_CUTOFF, None))
             if near_far_arm < ARM_CLEARANCE:
                 hit = True
+                _clear_dropped += 1
         # Manipulability of this candidate.  The solver had no notion of a singularity at all --
         # it ranked candidates by position error and by staying near the previous pose, so a
         # configuration that has lost a direction could win, and did: Rs saw two runs in a row
@@ -1177,7 +1181,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
             sc.qpos[_a] = qw[_k]
         mujoco.mj_forward(m, sc)
         sv = sigma_min(t, sc)
-        cands.append((qw, pe, re_, hit, abs(POSES[_try % len(POSES)][1]), sv))
+        cands.append((qw, pe, re_, hit, abs(POSES[_try % len(POSES)][1]), sv, near_far_arm))
     free = [c for c in cands if not c[3]] or cands
     if not free:
         raise RuntimeError(f"no IK solution for {t} at {tgt}")
@@ -1192,7 +1196,12 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     def _cost(c):
         _short = max(0.0, SIGMA_GOOD - c[5]) / SIGMA_GOOD      # 0 when well conditioned, ->1 at 0
         return 2.0 * c[4] + float(np.linalg.norm(c[0] - ref)) + SIGMA_PENALTY * _short
-    q, pe, re_, hit, roll, sv = min(pool, key=_cost)
+    q, pe, re_, hit, roll, sv, nfa = min(pool, key=_cost)
+    # p5 -137 / p11 -138, prints (1) and (3): say how many candidates the clearance removed -- the
+    # same instrument as the floor's "how many did it remove", for the same reason -- and what
+    # clearance the pose that WON was predicted to have.  A rejection count of zero and a rejection
+    # count of forty look identical from a pose alone.
+    CLEARANCE_REPORT[t] = (_clear_dropped, len(cands), nfa)
     if not quiet:
         # ⛔ This line used to report len(well) as "away from a singularity", beside len(free) as
         # "collision-free".  With the floor at zero those are the SAME candidates -- sigma is never
@@ -1380,6 +1389,7 @@ sig_where = {t: "" for t in SIDES}
 col_where = {t: "" for t in SIDES}
 claw_min = {t: 1e9 for t in SIDES}
 arm_gap_min = 1e9   # closest the two arms come to each other over the whole run
+arm_gap_path = 1e9  # ... including BETWEEN the poses that were checked, not only at them
 # (step, arm, t, sigma_min, dq/dx) at every sample.  ⛔ sigma_min is for RANKING and envelope
 # comparison only -- it mixes units, so no absolute threshold can live on it; the bar goes on the
 # rad/m column.  Written here as well as in the file header because a caution that travels apart
@@ -1862,6 +1872,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 f"can also arrive by inheritance, which does not pass through the solve."
             )
     prev = w
+    step_gap_path = 1e9      # the smallest arm-to-arm gap reached DURING this step's move
     q_from = {t: qcmd[t].copy() for t in SIDES}
     g_from = {"L": float(d.ctrl[GIDX["L"]]), "R": float(d.ctrl[GIDX["R"]])}
     g_to = {"L": lf, "R": rf}
@@ -1947,6 +1958,16 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 cg = column_gap(t2)
                 if cg < col_min[t2]:
                     col_min[t2], col_where[t2] = cg, f"STEP{num} t={n*m.opt.timestep:.1f}s"
+            # p5 -137 / p11 -138, print (2): the clearance is enforced on the poses that were
+            # solved, and the arms travel between them.  Endpoints are silent about the path, so
+            # the smallest gap reached WHILE moving is tracked here rather than inferred from the
+            # two ends of each move.
+            _pp = 1e9
+            for _ga in ARMG["L"]:
+                for _gb in ARMG["R"]:
+                    _pp = min(_pp, mujoco.mj_geomDistance(m, d, _ga, _gb, ARM_PAIR_CUTOFF, None))
+            arm_gap_path = min(arm_gap_path, _pp)
+            step_gap_path = min(step_gap_path, _pp)
         if n % 20 == 0:
             # pZ CLAMP-1 v0.3a: the question is whether the PATH to the grip passed through a
             # configuration the real hardware cannot reach, so track the minimum over the window,
@@ -2040,10 +2061,26 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                     f"{mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, _ga) or _ga}"
                     f" <-> {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, _gb) or _gb}")
     arm_gap_min = min(arm_gap_min, _pairmin)
+    # (4) the realised clearance, beside (3) the predicted one: their difference IS the following
+    # error the constant is currently missing, so printing them apart would leave it to be
+    # reconstructed.  (2) rides along, because a pair that only meets mid-move is invisible here.
+    _pred_txt = []
+    for t in SIDES:
+        if t in CLEARANCE_REPORT:
+            _dr, _kept, _nfa = CLEARANCE_REPORT[t]
+            _pred_txt.append(
+                f"{t}: clearance removed {_dr} of {_dr + _kept} candidates, winner predicted "
+                f"{_nfa*1000:+7.1f} mm" if _nfa is not None else
+                f"{t}: no far arm in that solve, so no clearance was measured")
     print(f"[steps] STEP{num:2d} ARM-TO-ARM: closest {_pairmin*1000:+7.1f} mm ({_pairwho})"
           f"{'  <- TOUCHING OR THROUGH' if _pairmin <= 0 else ''}"
-          f"   worst so far {arm_gap_min*1000:+7.1f} mm"
+          f"   along the move {step_gap_path*1000:+7.1f} mm"
+          f"   worst so far {min(arm_gap_min, arm_gap_path)*1000:+7.1f} mm"
           f"   ⚠ measured between the two arms only; posts, table and cable are not in this")
+    if _pred_txt:
+        print(f"[steps] STEP{num:2d} CLEARANCE: " + " | ".join(_pred_txt)
+              + f" ; realised at rest {_pairmin*1000:+7.1f} mm"
+              + " (predicted minus realised = the following error the constant does not carry)")
     print(f"[steps] STEP{num:2d} CARRY: " + " | ".join(carry))
     _stx, _sty, _stz = seat_tolerances()
     print(f"[steps] STEP{num:2d} C1 SEAT: nearest point ON THE CABLE (cab{_k1} at {_u1:.2f}) misses "

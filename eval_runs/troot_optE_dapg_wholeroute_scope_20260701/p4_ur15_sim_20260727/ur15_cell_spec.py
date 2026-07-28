@@ -662,10 +662,22 @@ def vertical_tol_deg(r_max_deg=None, cap_deg=None):
 # How close the two arms may come before a pose is rejected.  Rs, 2026-07-28, approving the
 # change: do not choose a pose that comes within a set distance of the other arm.
 #
-# One cable diameter.  ⚠ THE CHOICE OF SCALE IS A DESIGN CALL AND IS FLAGGED, not settled: what
-# is derived here is only that the clearance should be a real dimension of this cell rather than a
-# round number, and the cable is the smallest thing that has to be able to pass between two parts
-# of this machine.  If p11 or p5 name a different scale, this reads from that instead.
+# One cable diameter, and ⛔ READ IT AS WHAT IT IS: a lower bound for the CABLE to pass between
+# two parts of this machine.  It is not a bound on collision.  The bound that would settle
+# collision has to carry the pose residual, the bulge of the path between two checked poses, and
+# the mesh's own margin -- none of which is measured, and all of which point the same way, so the
+# collision bound is plausibly LARGER than this.  Do not cite this number as having decided that
+# question (p5 -137, p11 -138, converged independently).
+#
+# ⛔ It is NOT raised on that suspicion either, and both reviews are explicit about why: a
+# clearance set above what the arms actually need starves the solver of poses, which is the same
+# failure the singularity floor produced -- see the record beside SIGMA_FLOOR below.  The way out
+# is a measurement, not a bigger guess.
+#
+# The form it will take once the missing term exists:
+#     ARM_CLEARANCE = 2.0 * CABLE_R + <following error at the arm-to-arm surface>
+# and the run now prints the predicted and realised clearances side by side, whose difference is
+# that term.
 ARM_CLEARANCE = 2.0 * CABLE_R
 
 VERTICAL_TOL_INTERIM_DEG = 5.73
@@ -739,7 +751,7 @@ RETIRED = {"CLIP_H", "GROOVE_W", "CLIP_RISER"}
 # than an input.
 TIER_C = {"OUT", "W", "H", "FPS", "HOLD_S", "WAY", "STEPS", "SEED",
           "CAM", "CAM2", "RENDERER", "FRAMES",
-          "frames", "log", "n", "claw_min", "col_min", "sig_min", "arm_gap_min",
+          "frames", "log", "n", "claw_min", "col_min", "sig_min", "arm_gap_min", "arm_gap_path",
           # p5 §6.4j: these are in spec §6.4d as DERIVED and are free.  I had reported them as
           # absent from §6.4d, which was a bad read of my own -- they are on its line 195, in the
           # DERIVED row rather than the TIER-C row I was looking at.
