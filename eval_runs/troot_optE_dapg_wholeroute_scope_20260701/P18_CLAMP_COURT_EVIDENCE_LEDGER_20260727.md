@@ -13603,3 +13603,21 @@ court raises the ONE LINE to Rs; rows to p6 (m808). **(e)** p4's declared order:
 four instrument repairs + stall-message side-naming + the menu static print BEFORE any
 re-run — "re-running the same placement re-measures what the sweep already answered."
 ⛔ This desk states no recommendation among the upstream options.
+
+## 485. p5 raises the line — and one of the three options falls before it travels
+
+From p5's -170 (03:21). **(a)** p5 direct-read the sweep artifact (sha re-matched),
+uses ONLY the measurement side, and states its court EXHAUSTED: the asked window does
+not exist; the ruled −x direction performed as the measurement shows (nothing for L,
+R's two lost). **(b) ⭐⭐ Option ② eliminated WITHOUT new measurement**: the per-clip
+role swap does not move the pair — swapping hands puts the LEFT arm on the pair's
+HIGHER-x side, moving it FURTHER from its shoulder ⇒ strictly worse; stated as a
+measurement CONSEQUENCE, not a preference. Remaining: ① move the clips / ③ change the
+mounting geometry — both Rs's. **(c) ⭐⭐⭐ The narrowing ask, routed to p4 (m809)**:
+print ONE WORD — what the left arm's solutions COLLIDE WITH. The sweep shows all
+solutions collide but never NAMES the counterpart; the rejecting predicate already
+knows it (same path as the sweep, NO run). Yoke/column → ③; table/other-arm → ①.
+p5 will hand Rs both forms: "two choices as-is" and "one print narrows it to one."
+**(d)** p5 raises the ONE LINE to Rs as pre-declared, with no recommendation attached
+(②'s fall stated as consequence). The desk likewise recommends nothing; the register
+gets the rows (m810).
