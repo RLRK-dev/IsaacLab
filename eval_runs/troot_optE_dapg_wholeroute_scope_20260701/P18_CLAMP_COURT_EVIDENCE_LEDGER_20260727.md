@@ -13771,3 +13771,39 @@ cost ONE solve): **ask FIRST "what is the minimum instrument that upgrades the
 grade?" — had that question come first, the correction round-trip would not have
 existed.** Rowed to p6 (m820); no reply to p5 (the separator print flows on
 arrival).
+
+## 493. The register bounds the true swap — at most two, possibly zero
+
+From p6's -148 (03:34:07). **(a) Pins verified**: commit 246f54eaf4 ("Take the
+measurement that replaced the argument, and bound what it left"); LEDGER sha
+fa503108…b810 MATCH; artifact direct-read by p6 (23 lines, figures all matched).
+**(b)** The row's condition satisfied (extrapolation → measurement); the
+scope-above-the-numbers ordering itself rowed as correct form; ②'s formal death left
+to p5's court (which §492 then recorded). **(c) ⚠ The upper bound (not a ruling)**:
+the other-arm events number 2, so even a TRUE swap (never measured — what was
+measured is the pair-moved placement) could free AT MOST 2 candidates — and possibly
+0, since the breakdown is events, not a partition. p4's mast-9-independent argument
+untouched. The candidate-level bound derived from the event-level count — the -147
+note doing forward work.
+
+## 494. The far end answers "both" — and one pose stands between ① and ③
+
+From p4's -204 (03:34:56). **(a) Pins verified**: commit 7d2fcea331 ("Print the far
+end, and report that it does not separate cleanly"); artifact
+FAR_END_REJECTED_AGAINST_20260729.txt sha 1ad63529…00e3 MATCH; :7/:10/:25 verbatim.
+**(b) ⚠⚠ The separator returns BOTH**: at centre −0.250 (L hand cab0), L = 13 solved
+/ 0 collision-free — the other arm ×13, stem ×9, crown ×3 (R also 15/0). The counting
+property stated: pose and other-arm checks run INDEPENDENTLY (one pose appears under
+two names; 25 events on 13 candidates). The decomposition: **the other arm rejects
+13/13 (NEW — 0/7 at the near end); the mast rejects 12/13 (not new)** — and since the
+mast check does not reference the other arm, those 12 stand regardless ⇒ **removing
+the other arm entirely leaves exactly ONE far-end candidate clear of the mounting**
+(the same subtraction at the near end: ZERO of 7). **(c)** p4's reading, fenced from
+measurement in the artifact: direction ③ — the mounting stops nearly everything at
+both ends — but "nearly" is not "all": one mounting-clearing pose exists at the far
+end that does not exist at the near end. ⛔ Whether ONE candidate is a WINDOW or
+ROUNDING NOISE is a design judgment — p4 declines it; ①/③ = p5's court → Rs. p4
+returns to instrument repairs as declared. **(d)** Routed: p5 (m821 — the decision
+material now COMPLETE: near-end counterpart, cab32 measurement, far-end
+decomposition; their Rs line finalizes), p6 (m822 — rows incl. the
+one-pose-between-①-and-③ state).
