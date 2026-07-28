@@ -7491,7 +7491,7 @@ non-production either way. ⚠ p5's pattern, self-named: *"2 条件が同時に�
 原因と呼びました"* — the salience trap, its last instance today. **(c)** p4's bank hold RELEASED with the
 corrected pin.
 
-## 239. The arms are pressing on each other — the cable had nothing to do with it 〔⚠ SCOPE corrected by §251(e): the mutual contact is a property of the probe's direct call at the default posture; on the driver's own aim path both arms settle 0.00 mrad, touching clear (aimboth.txt @ `9388c4e6dd`). The measurement stands; the attribution to the driver path does not. Structure (`other=None`) remains.〕
+## 239. The arms are pressing on each other — the cable had nothing to do with it 〔⚠ SCOPE narrowed twice: (1) §251(d) — at the aim_both menu-selected posture both arms settle 0.00 mrad, touching clear (aimboth.txt @ `9388c4e6dd`), so the contact is not universal; (2) §258 — BOTH legs are driver-machinery selections (r6_positive `:44` aim_slot_at seeds 41/42 fix_x vs aim_both menu seed 30) ⇒ "probe default posture vs driver path" is a FALSE dichotomy and the settle failure has NO currently-verified cause. The measurement here stands; structure (`other=None`) remains.〕
 
 From -088 (23:40:04); verified here (bank @ `28826852a8`; control @ `19be103d74` — the commit subject IS the
 finding; result sha MATCH `cdb8461db0…`; the decisive lines and `:592 other=None` re-read).
@@ -7535,7 +7535,7 @@ five-copy danger inside one file. **(d) ⭐ The remedy, designed and HELD**: res
 design; span returns to 88.0 and the question dissolves. ⛔ **Execution after Rs** — the runs that ran at 90.0
 remain fact, and the existing measurements (placement error / tilt / band) were taken UNDER 90.0.
 
-## 241. The driver's own rationale is refuted — and the missing mechanism already exists in production
+## 241. The driver's own rationale is refuted — and the missing mechanism already exists in production 〔⚠ (b)'s "refuted" WITHDRAWN by p11 §27.2.109 (banked §254): the wrists met at the PROBE's default posture, not on the driver's aim path — aimboth (§251(d)) shows the driver's own postures settle touching-clear. Correct form: "holds today on the driver path; unchecked in general." (c)'s production-mechanism finding stands; the latent structure (`other=None`) stands.〕
 
 From p11's -103 (23:45); pin verified (@ `2f8985d936` "The wrists meet, which refutes the reason the driver
 gives for rolling" → `d3298f6071…`, MATCH; the `:885` docstring and task_config `:237-241` re-read here).
@@ -7654,7 +7654,10 @@ too)**, snap-90 (`:1054-1055` same driver); **does NOT ride = #46** (stiffness/d
 `_spec.cable_joint_k()` = SSOT) ⇒ *"一括りにすると #46 を誤って着せることになりました."* The span wording
 narrowed per p11 (*"実現 span が 90.0 mm だった run でも接触した"* — not an intentional-widening experiment;
 the claim = "90.0 is not a counterexample", nothing more; no material currently supports 176 as a contact
-remedy). Run liveness self-verified (PID / interpreter / output path).
+remedy) 〔⚠ the contact-at-90.0 leg WITHDRAWN by p11 §27.2.109 (§254): a probe-posture measurement, not
+driver-path — the surviving 176 statement is §251(d)'s a-fortiori form (no contact fires on the driver path
+today; still nothing supports 176 as a contact remedy)〕. Run liveness self-verified (PID / interpreter /
+output path).
 
 **(b) ⚠⚠ p11's ordering hazard, placed in advance**: the route run is live while the aim_both control now
 carries the env7-discrimination precondition ⇒ **the route result may land first** — and alone it *"手首接触
@@ -7723,7 +7726,9 @@ costs about as much as a 1.5 rad joint move… the weight is a first setting to 
 **My reading 〔inference, p4 to confirm〕**: the RETRACTED part = only the aim-path unit-mix that crashed t9;
 `d16c877ecd` STANDS in the tree.
 
-**(b) ⭐ The landed ranking did not remove the traversal**: t8 ran AFTER it (video 09:33 > commit 09:02) and
+**(b) ⭐ The landed ranking did not remove the traversal**: t8 ran AFTER it (video 09:33 > commit 09:02)
+〔⚠ downgraded by §255(c): 9/13 logs' producing code is not in git; t8 is "not inconsistent with"
+d16c877ecd, no stronger — a start-time inference, not a code pin〕 and
 still ends `WORST L: sigma_min 0.0381 at STEP4 t=11.2s` / `WORST R: sigma_min 0.0037 at STEP13 t=28.7s` with
 `column gap -25.8 mm <- INSIDE THE COLUMN` and `gates: {'grasp': False, 'regrasp': False}`. Mechanism question
 = p11's court, not mine.
@@ -7792,7 +7797,8 @@ self-halt (12:10) by minutes — tension surfaced to Rs; dissolved in practice b
 9388c4e6dd, verified here: `[ab] L: joint err max 0.00 mrad (gate 2.0) | touching clear` / `[ab] R: 0.00 mrad
 | touching clear`, seat errors 1.63 / 1.49 mm ⇒ **on the driver's own aim path both arms settle and do not
 touch** ⇒ the -088 "arms touch each other" was a property of the probe's direct call at the DEFAULT posture,
-not of the driver path (**§239 header tagged**). Scope carried exactly per §27.2.106③: *"「今日は発火して
+not of the driver path (**§239 header tagged**) 〔⚠ narrowed by §258: the [pos] leg is ALSO driver machinery
+(aim_slot_at seeds 41/42) — the class dichotomy fails; the settle failure's cause is unverified〕. Scope carried exactly per §27.2.106③: *"「今日は発火して
 いない」まで"* — `solve_ik(..., other=None)` stays partner-blind; other targets/seeds can touch; the env7
 discrimination precondition rides this control too (new stack only, old-stack comparison not run). The
 §246(b) ordering discipline is SATISFIED — the control landed before any same-cause solicitation; its answer:
@@ -7847,7 +7853,8 @@ carries collision avoidance as an objective term (`task_config.py:237-241`); con
 objective layer; the two COMPETE (avoiding collision folds the arms; folding degrades conditioning) ⇒
 *"片方だけ入れるともう片方の悪化を誰も見ません"* ⇒ **one design decision to Rs, both control-method changes
 = Rs-approval class**. The aim_both result (§251(d)) travels in the same packet as urgency material: no arm
-contact fires on today's driver path. **(f)** Court boundary proposed: mechanism + which-terms-exist = p11 /
+contact fires on today's driver path 〔⚠ frame fixed by §254(d) per p11 -107④: the negative LOWERS urgency;
+B's basis = the UNCHECKED structure (`other=None` `:925`/`:602`), not observed contact〕. **(f)** Court boundary proposed: mechanism + which-terms-exist = p11 /
 weight VALUES = measured, implementation side / acceptance bar = p5 (process) or Rs (§0); plus the
 discipline: never touch weights when the mechanism is elsewhere. **(g)** Scope hygiene kept: p11 does NOT
 assert that Rs's visual 「左が特異点を通る」, the σ 0.0381, and the column gap −25.8 INSIDE (§27.2.64 shape)
@@ -7855,3 +7862,179 @@ are one event — three observations, not folded into one cause. **(h) Effect on
 condition (§251(a)) is MET by this disposition — the committed code is design-court-ratified as mechanism;
 resumption is p4's call under Rs #13 すすめろ, with the stated expectation that the current ranking does not
 address the STEP4 σ; the FIX rides the ONE Rs packet after path-σ measurement.
+
+## 253. Restart, measurement-scoped — verified live, and routed nowhere near Downloads
+
+From p4's -092 (12:34, the 1-line report my -507 requested); liveness verified 12:34:04 — **PID 4088028**
+`env_isaaclab7/bin/python -u ur15_steps_wired.py …/ur15_t10_scratch.mp4` (t10; nohup; log `run_t10.log`;
+both in p4's session scratch area). **(a)** Scope declared: ⛔ no design touch, ⛔ no weight touch; purpose =
+exactly the measurement §252(d)(i) requires (the path-σ bar derives from measurement, not a round number) —
+a full (step, arm, time, σ) trace to `sigma_trace.txt`, print-only, behavior unchanged. Expectation carried:
+the current ranking does not fix the STEP4 σ. All four -507 relay points acknowledged back verbatim
+(限定追認 / two mechanisms / ONE Rs packet with aim_both aboard / the |roll| correction). **(b)** Video
+routing compliant with Rs #9/#12 (両方とも成功した動画のみ提出): output to the working area; **Downloads
+unchanged at check** (newest still t7 04:47 / t8 09:33). ⚠ Standing note for the next checkpoint: when
+sigma_trace is REPORTED it must land in the repo bank — a /tmp scratch path is not a submittable artifact
+(expected per p4's run_logs practice). **(c)** No dispatch on this notification — checkpoint-only discipline;
+the trace's landing is the next checkpoint.
+
+## 254. Two claims withdrawn before the packet moves — and the frame goes with them
+
+From p11's -107 (12:34); §27.2.109 (`:3183`) @ `a9c3d1cf96` ("Withdraw two claims: the wrists clear on the
+path the driver actually uses") — sha256 machine-match `6bfc9d3f709d7d3357e54d26bc52f822dc3b18f04c24c2e1f909
+bea9160cd453` ✓; p11 read `aimboth.txt` itself before withdrawing.
+
+**(a) ⛔ Withdrawal 1 — §27.2.106① "the driver's own rationale refuted by measurement"**: the `:885`
+sentence is a claim about postures the driver actually MAKES; the wrists met at the probe's DEFAULT posture ⇒
+*"私は「反証された」と書きましたが反証していません"*. Correct form: *"driver の今日の姿勢では成立している。
+ただし誰も検査していないので他の目標で成立する保証は無い"* — §241 header tagged 〔⚠ further narrowed by
+§258: "driver の今日の姿勢" = the aim_both MENU posture specifically; the failed [pos] posture also came from
+driver machinery (aim_slot_at)〕. **(b) ⛔ Withdrawal 2 —
+§27.2.106⑤ "span 90.0 でも手首は触れている"**: same scope defect ⇒ not material for "widening still
+touches" — §246(a) tagged; the surviving 176 statement is §251(d)'s a-fortiori form. **(c) ✅ What remains,
+source-read**: `:925`/`:602` both `other=None` ⇒ no aim path puts the partner in the collision filter ⇒ the
+defect is REAL AS LATENT STRUCTURE; the aim_both negative says "not firing today", nothing more.
+
+**(d) ⚠⚠ The Rs-packet frame, fixed before it moves (p11 ④, ADOPTED — it corrects my -506(3) looseness)**:
+"urgency 材料として同梱" could be read as urgency-RAISING. Fixed frame: **the aim_both result is a NEGATIVE
+and LOWERS urgency; B's basis = the unchecked structure, not observed contact** — *"その枠で上げないと、Rs
+には「接触を測った」と逆に読まれ得ます"*. §252(e) tagged; the packet carries the structure-basis wording.
+
+**(e) ⭐⭐⭐ p11's owned error-shape, exact (general form #14)**: the scope note was IN THE SAME MESSAGE —
+my -484(2) verbatim (*"driver の把持姿勢が触れるかは未検証 (probe は既定姿勢…)"*) was read before -103 was
+written, and the conclusion still crossed it: *"射程注記は読んだかどうかでは守られない。結論を書く直前に
+「この数はどの配置で取られたか」を 1 行 書き写すこと。注記を受け取ることと注記を効かせることは別です."* —
+the same shape p11 returned to other panes all day, stepped in with the note in hand. **Hub adoption**: my
+relays of measurement-backed conclusions restate the configuration line. **(f)** Forwards: p4 / p5 (p11's
+request) + p6 (hub judgment — the withdrawn span wording sat in the register via -077).
+
+## 255. The numeric leg lands: the right hand measured air, three outcomes not five, and code that is not in git
+
+From pB's -504R (12:35:35); `PB_RUNLOGS_20260728_NUMERIC_LOGANALYST_20260728.md` @ `1b0183fd0a` ("Read the 13
+banked logs and separate the numbers from what they measure") — sha256 machine-match, computed from `git
+show` (64 chars): `4f60edbf3fe5e95c8673cfc6f1f9be13694baa0755923989752e028863411ac5` = pB's claim ✓ 〔a
+hand-retyped comparison string first produced a false NOMATCH here by dropping two characters — pins are
+COMPUTED, never retyped; the false alarm was mine, not pB's〕; 316 lines; spot-verified
+here: `:37-48` compile census, `:147` clamped=False/pad1-none, `:208-212` QACC. All five commissioned items
+answered; ⛔ no numeric verdict issued (discipline held — collation waits for pC + Rs GT).
+
+**(a) p4-claim grading**: 9/10 legs correct — GRASP L `+6.80` 5/5; GRASP R = `+16.27` in t6 (`run_t6.txt:69`)
+— matches §249(d). **(b) ⭐⭐⭐ THE FINDING — the repeated numbers measure AIR on the right side**:
+REGRASP R `+3.79` identical across all 6 reaching runs AND all 6 `clamped=False`, zero contact, nearest cable
+**42.8–1102.3 mm away** ⇒ the right jaw closed on air; GRASP R `+16.23/+16.27`: all 5 `clamped=False`, `pad1
+none` ⇒ **the right hand never grasped at the backplate in ANY run; only the left hand grasps.** 〔⚠ Tension
+with Rs's visual 「左がクランプできていない」 = L/R-attribution collation material for pC's world-frame leg +
+Rs GT; NOT folded here (§254(e) discipline: these numbers were taken at GRASP/REGRASP steps in the sim's
+side-labels).〕 The "systematic repetition" is the repetition of a design-constant closure in air — the same
+shape as the §230-era re-grasp finding (closes at a constant, never measures the cable). **(c) ⭐⭐
+Producing-code census**: the compile()-warning line = 4 kinds {257, 258, 266, 267} across 13 logs; closed
+query over all 18 referenced commits: **258 and 266 appear in NONE ⇒ 9 runs' producing code is not in git —
+unrecoverable**; hard on the negative side only (t8/t9 = "not inconsistent with" d16c877ecd) ⇒ §249(b)
+tagged. **(d) Independence**: t4/t7 byte-identity independently confirmed (pB's own sha256); log delta = 30
+contact-print lines, numeric lines all identical; **t3 = t4 numerically identical as well** ⇒ the 5 completed
+runs = **3 independent outcomes {t3=t4=t7}, {t6}, {t8}** — counting t3/t4/t7 separately triple-counts one
+run (pC's sample accounting rides this at collation; pC stays blind meanwhile). **(e) Termination
+re-readings**: t1 = NameError; t2 = no cause in log (not even attributable to external kill); **t5 = QACC
+divergence FIRST** (`run_t5.txt:192` "Nan, Inf or huge value in QACC at DOF 31 … Time = 48.34") with no-IK
+as downstream symptom; **t9 = the cable FLEW (lateral ~9 m, downward ~20 m; the target followed it to
++20.6 m)** ⇒ ⛔ neither t5 nor t9's "no IK solution" is a reachability event. 〔⚠ Tension with p4's -091 ①
+account ("unit-mix → unreachable best → target −3.5 m"): the unit-mix may still be the ROOT (bad aim →
+violent sweep → cable explosion) but the banked CHAIN differs — reconciliation = p4's court with pB §5 as
+input; §251(a) holds p4's statement as custody, not verified mechanism.〕 **(f) Settle-print coverage (#49
+axis)**: the gate prints at STEP4 only (t3/t4/t7/t8 = 0.00, t6 = 1.20 mrad; 8 logs no print); STEP13/14
+regrasp phases have NO settle gate ⇒ reachedness not statable from logs there; block-servo check: 4/26
+blocks unreached (t5 GRASP R −789.1 / t8 REGRASP R −1728.4 / t9 GRASP L +10.9 / t9 GRASP R +9.4 mrad) —
+arms-only, fingers unchecked. **(g)** gates lines exist in 5 logs only, all `{'grasp': False, 'regrasp':
+False}`. **(h)** reg_C = reg_A byte-identical except the variant line ⇒ "ineffective" vs "not applied"
+undecidable from logs; discriminator written at artifact §3-3, execution = p4's court. **(i) ⚠ Hub note on
+t10**: the running measurement (start 12:33:33, ps lstart) now rides a DIRTY driver (`M` at 12:38 check) —
+the sigma-trace code state must be banked at report time or t10 becomes the 10th unpinnable run (routed to
+p4 in -510).
+
+## 256. p5: the boundary already existed, the weight is not a physical quantity, and promises belong in the register
+
+From p5's -113 (12:37); p5 read p11's §27.2.108 lines (`:3178`/`:3171`) directly.
+
+**(a) Boundary CONCURRED as an existing rule, not a new one**: spec `:188` already splits "name = spec /
+value = measurement lane" (SIGMA_FLOOR OWNED Tier B, *"値は arm-control"*; CLAMP/HALF/OPEN name-only). ⛔ The
+in-code *"Flagged for p5"* (`:536`) is TOO BROAD — requested correction: classify SIGMA_GOOD / SIGMA_PENALTY
+on the same row as sibling SIGMA_FLOOR (routed to p4; comment-level, behavior unchanged). **(b) A live defect
+in p5's own court**: guard contract `:135` (literal-bearing module bindings must be OWNED/RETIRED/TIER-C) —
+closed query over the spec: 2 sigma hits, both SIGMA_FLOOR ⇒ **SIGMA_GOOD/SIGMA_PENALTY unclassified = the
+guard FAILS under the current contract**; p5 will classify, will not set values. Honest limits recorded: the
+function-local `2.0` (and implicit `1.0`) escape a module-binding contract, and the flag is inconsistent with
+its own formula (three weights, one flagged) — p5's answer: none of the three is p5's; p5's scope = whether
+the resulting posture is runnable per the step table.
+
+**(c) ⭐⭐⭐ The envelope observation — §252(d)(iii) becomes EXECUTABLE without a sweep**: with the pool
+fixed, `_cost(c) = A_c + P·B_c` (A = 2|roll|+‖q−ref‖; B = max(0, 1−sv/G) ∈ [0,1]) is LINEAR in P ⇒ the
+argmin is the lower envelope of a line family ⇒ the winner is piecewise-constant in P, ≤ |pool|−1 switches,
+winner's B monotone ⇒ **measurement = ONE run dumping (A_c, B_c); report ① the interval containing 3.0 ②
+the winner count.** Wide interval ⇒ 3.0 is INERT in this cell ⇒ the flag closes with no value chosen; near a
+crossing ⇒ a live design number needing owner + criterion. And the two constants are NOT independent: if the
+whole pool sits below G, P drops from the argmin and only the RATIO P/G (= 25.0) matters (conditional — pool
+composition unmeasured; the 0.0381 was the OLD selector's winner, not the pool). **(d) ⭐⭐ The unit
+finding**: `wrist_jac` (`:920`) stacks translation rows [m/rad] with rotation rows [1] ⇒ **σ is mixed-unit ⇒
+any σ threshold or weight is scale-dependent (mm vs m changes winners) ⇒ σ is not a physical quantity to
+measure; measurable = the selection and its consequences** — p11's refusal-to-approve is right in form, and
+the "measurement" content narrows to the envelope + downstream amplification (consistent with §252(d)(i)).
+**(e) ⭐⭐ The discipline finding (p5's "most important")**: `cell_spec:526-527` records in the file's own
+words that ranking was PROMISED beside SIGMA_FLOOR and never written; `:536-537` now promises *"to be
+measured against"* — **the same shape** ⇒ promises go to the REGISTER (DDR) with owner and deadline-
+condition, not comments ⇒ registration request routed to p6 (-513) with proposed content (owner: measurement
+= implementation lane; disposition = p11; deadline-condition = before the ONE Rs packet moves or before any
+weight change; precedent = `:526-527`). **(f) ② check**: nothing falls on p5's side from the withdrawals
+(their own "両腕構成だから" attribution was already self-withdrawn at CLIP_DETAIL `:659-661`); the empty
+cell's name stays "settled-at-this-posture"; the §14-3 self-condition (env7 discrimination before filling)
+remains unmet ⇒ p5 stays HELD. p5's doc bank still awaits p4 (content sha `da420fad18…`, re-flagged in -510).
+
+## 257. The visual leg, blind: a pad inside the post at the same second in two different runs
+
+From pC's reply to -504 (12:43:14); `UR15_WIRED_T3T4T6T7T8_VIDEO_LEG_pC_20260728.md` @ `882abc8180` ("Add pC
+video leg for the five ur15_wired runs") — sha256 machine-match
+`1883d67faedbf5d4bbd0eac432cc54c453d354fd23d58e277bedeeb955c7b51b` ✓; 146 lines; both PNG products exist
+(`~/Downloads/pC_WIRED_PAD_INTO_POST_f900.png` / `pC_WIRED_T8_DEPARTURE.png`, mtime 12:39). Method: 4
+entities × 40 frames @ 1 s + close single-frame inspection; edge-line checks on every color-separable body
+pair, candidates vetted one by one; ⛔ blind HELD (no numbers / logs / other-pane claims; driver read only
+for camera settings and L/R target definitions). ⛔ NO VERDICT issued — physical validity = Rs.
+
+**(a) ⭐ Positive 1 — the claw's red pad ENTERS the wooden post**: signature reproduced at the SAME frame
+(f900 / t=30.00 s) in t4 AND t6, with the pad-absent rows showing a uniform post face (= no edge, measured);
+⚠ two-view corroboration not achieved (identification impossible from the second view). t4 and t6 are
+DIFFERENT trajectories per §255(d) ⇒ a same-schedule-time recurrence across trajectories (the step schedule
+is duration-fixed — consistency note, not a cause claim). **(b) ⭐ Positive 2 — t8's departure**: at
+t=27-29 s both arms leave the work area and do not return; end state = the cable left on the table. **(c)**
+Not found (noise level 1-6 px in all 4): cable×clip, cable×post; no breakdown / explosion / post-or-clip
+movement; table penetration not established. **(d) Sample accounting declared**: t8 is pixel-identical to t4
+up to f780 (26.0 s) ⇒ t8's first 26 s is NOT an independent sample (with t7≡t4, independent samples < 4) —
+converging with §255(d)'s numeric independence census from the blind side. **(e)** The wide-cam wobble
+independently measured: t3 statics swing 40.5 px vs 0.2-1.7 px in t4/t6/t8 ⇒ t3's wide view unusable for
+attribution (matches §248(c)'s camera custody). **(f) ⛔ L/R attribution PROVISIONAL** — standing on ONE leg
+only (driver cam2 azimuth=250 + LX/RX definitions; the log leg was not takeable blind) ⇒ the pB × pC × Rs
+collation must carry this caveat when joining §255(b)'s right-hand finding with Rs's 「左」 verdicts — the
+join happens at the hub; pC stays blind.
+
+## 258. p6 narrows the withdrawal from the source: both legs are driver machinery — the settle failure has no verified cause
+
+From p6's -101 (12:43); register commit `65d027ad66` ("Withdraw the contact attribution from the driver
+path") — LEDGER content sha256 machine-match `367e1be1745e521e8a383d74f533b691596cd23f527140ed1e802338cfd989
+06` ✓; guard FAIL=0 WARN=2 (both known). Register reflected per -509: #49 = attribution withdrawal + the
+ONE-packet form + *"本行の相の原因は未確定"* on the PENDING label; #45 = same tag (the "nothing supports
+176" conclusion unchanged — strengthened).
+
+**(a) ⭐⭐⭐ The two source points p6 ADDED, both re-verified here**: **(i) the control did not run the
+phase in question** — `aimboth.txt` has ZERO `[pos]` lines (grep count 0 ✓); the settle gate lives in
+`r6_positive.py:53-65` (4 s ramp + 20 s wait against SETTLE_TOL ✓). **(ii) the failed leg is ALSO the
+driver's machinery** — `r6_positive.py:44` calls `aim_slot_at(T, c, q_now[T], seed=41+(T=="R"),
+fix_x=x_design)` ✓: the [pos] posture is a driver aim product (seeds 41/42, design-x fixed), while the clear
+control used aim_both's MENU search (seed 30) ⇒ **"probe default posture vs driver path" is a FALSE
+DICHOTOMY — two different driver-side posture selections** ⇒ ⛔ *"整定ゲート未到達には いま検証済みの原因が
+無い."* §239's tag rewritten; §251(d) and §254(a) annotated; p4's -091 ④ wording needs restatement = RETURN
+item ⑤ (-510). ⚠ Open question flagged for p4 (inference): the route runs' settle-relevant step appears to
+use the aim_slot_at family (t9's aim prints) — if so, the clear control tested a DIFFERENT selector than the
+routes use. **(b)** The Rs-packet frame survives INTACT — strengthened: §254(d) already moved B's basis to
+"unchecked structure", and with the cause unverified nothing in the packet leans on an exonerated-path
+reading. **(c)** p6's live-run observation converges with §255(i): PID 4088028 live; the per-driver caveat
+sorting re-verified BY CONTENT at MOVED line numbers (hinges `:183-184` / GL,GR `:1093-1094` — the dirty
+driver shifted lines; content-pinning wins again); driver dirty +20/−1 ⇒ t10's artifacts cannot pin to a
+commit until the code is banked.
