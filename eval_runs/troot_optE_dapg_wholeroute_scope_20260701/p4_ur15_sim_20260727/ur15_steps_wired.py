@@ -291,7 +291,13 @@ CLIPG = {c: {g for g in range(m.ngeom)
 print(f"[steps] nq={m.nq} nu={m.nu} nbody={m.nbody} ngeom={m.ngeom} eq={m.neq}  seat links C1=cab{SEAT1} C2=cab{SEAT2}")
 
 TOOLB = {t: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, f"{t}g_base") for t in SIDES}
-GNAME = {g: (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or f"g{g}") for g in range(m.ngeom)}
+# ⛔ An unnamed geom used to print as "g43", which names nothing a reader can act on -- and the one
+# part jamming the right arm against the mast came out exactly that way, for a whole run.  The
+# arm's link geoms carry no name of their own in the URDF, but their BODY does, so the body is what
+# goes out beside the number when the geom itself is anonymous.
+GNAME = {g: (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g)
+             or f"g{g} on {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, m.geom_bodyid[g]) or 'an unnamed body'}")
+         for g in range(m.ngeom)}
 
 
 def _own_bodies(prefix):
@@ -1075,15 +1081,16 @@ def _rdes(yaw, roll=0.0):
 
 COLG = [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n) for n in ("stem", "foot")]
 COLB = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "column")
-# Each arm is attached to the mast, so its first body is a CHILD of the column body and its geoms
-# sit inside the mast by construction -- that is the mount, not a crash.  MuJoCo already ignores
-# those contacts (a body and its parent are filtered by default); the distance query does not know
-# it.  So the same exclusion is derived from the model here rather than written as a list of link
-# names, which would go quiet the day a link is renamed.
-MOUNTG = {g for g in range(m.ngeom) if m.body_parentid[m.geom_bodyid[g]] == COLB}
-# Held as a list, once: this is walked for every IK candidate of every solve, and rebuilding a set
-# difference in there is work that buys nothing.
-COLFREE = {t: sorted(ARMG[t] - MOUNTG) for t in SIDES}
+# ⛔ An exclusion stood here and its reason was wrong.  I argued that each arm's first body is a
+# child of the column body, so its geoms sit inside the mast by construction and the reading should
+# skip them.  pB measured it: those are the shoulder-link geoms, and that body sits 508.9 mm from
+# the stem surface whatever the pose.  Nothing of the mount is inside the mast, so the exclusion
+# had nothing to remove -- and it could not have explained the -0.6 mm.  t22 shows it did not: the
+# reading is still -0.6 mm, on a geom the exclusion kept.  The parent-child contact filtering I
+# cited is real; it simply was not what the number was about.
+# So every arm geom is measured.  An unjustified filter on a measurement can only hide a reading.
+# Held as a list, once: this is walked for every IK candidate of every solve.
+COLFREE = {t: sorted(ARMG[t]) for t in SIDES}
 CLEARANCE_REPORT = {}   # per arm: (candidates the clearance removed, candidates kept,
                         #           the clearance the winning pose was predicted to have)
 
@@ -1113,10 +1120,11 @@ def column_gap(t, dd=None, want_who=False, cutoff=None):
     the pair can collide -- and here the two differ: the arm's mount is inside the mast and its
     contacts are filtered, while everything past the mount does collide.
 
-    ⛔ The bolted-on geoms are excluded (MOUNTG), or the answer would be a constant that never
-    moves and says nothing.  Rs, 2026-07-28, watching the run: "the left hand is slamming into the
-    cylinder" -- so the name of the part comes out with the number.  Twenty runs reported this as a
-    bare figure, and a bare figure cannot say whether a hand arrived or a mount never left."""
+    Rs, 2026-07-28, watching the run: "the left hand is slamming into the cylinder" -- so the name
+    of the part comes out with the number.  Twenty runs reported this as a bare figure, and a bare
+    figure cannot say whether a hand arrived or a mount never left.  (It was the arm: pB refuted
+    the mount reading from the trace itself -- a permanent overlap cannot read +387.5 mm at one
+    step -- and the named reading confirms a link that moves.)"""
     dd = dd if dd is not None else d
     best, who = 1e9, None
     for g in COLFREE[t]:
