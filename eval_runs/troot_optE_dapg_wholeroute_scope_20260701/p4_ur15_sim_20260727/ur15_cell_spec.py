@@ -347,7 +347,11 @@ _CLIP_PARTS_PER_SPEC = [
 # --------------------------------------------------------------------------------------------
 
 SHOULDER_HEIGHT = 0.37 + 0.58 * 2.0     # spec §4 -- all five driver files already agreed
-YOKE_SPREAD = 0.22                      # Rs's reference, 4th instruction: match the figure
+YOKE_SPREAD = 0.106                     # Rs: make it identical.  p5's HARD LOWER BOUND (shoulder-
+                                        # link envelope + the approved clearance): the mounts as
+                                        # close as the arms physically allow, which is what the
+                                        # reference shows -- a head about 1.6 column diameters wide.
+                                        # ⛔ Below the 0.22 the note failed at, knowingly.
                                         # of Rs's reference.  ⛔ WAS 0.40, and that value carried
                                         # its own measurement: "0.22/45deg made the two arms
                                         # interleave at an 88 mm span".  0.160 is BELOW the 0.22
@@ -392,7 +396,12 @@ COLUMN_R = 0.102                        # spec §6.4j -- the shared column both 
 # ⛔ bank #21's fork (1.130 / r 0.051) is RETIRED with scope: it was the case-A answer, branches
 # bridging shoulders that stayed 800 mm apart.  Rs's reference is a crown -- both mounts sitting on
 # one rounded head -- so there are no branches at all.  The numbers below are p5 bank #22.
-CROWN_R = 0.160                         # p5 bank #22 -- crown radius, >= the shoulder half-offset
+# ⛔ Was 0.160, and Rs put the render beside the reference and said they are not the same.  He is
+# right and this is the largest reason why: at 0.160 with the mounts 0.22 apart the capsule is
+# 0.76 m wide and 0.32 m tall -- a mushroom cap sitting on the post.  In the reference the head is
+# barely wider than the column itself.  p5's own floor is spread/2, so that is what it takes: the
+# smallest head that still reaches both mounts.
+CROWN_R = YOKE_SPREAD / 2               # p5 bank #22 floor -- the head only has to reach the mounts
 CROWN_Z0 = 1.330                        # p5 bank #22 -- where the crown's underside sits
 CROWN_ZC = CROWN_Z0 + CROWN_R           # its axis, so the underside lands exactly on CROWN_Z0
 COLUMN_HZ = CROWN_Z0 / 2             # half-height, because MuJoCo cylinders take one.
