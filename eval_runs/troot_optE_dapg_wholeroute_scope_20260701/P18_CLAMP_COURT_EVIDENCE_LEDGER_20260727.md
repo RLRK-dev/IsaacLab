@@ -9056,3 +9056,58 @@ submission rule itself unchanged (#9/#12 alive; the live file is not a submissio
 zero, unreadable as a second filter. **(d) ⭐** The -120(2) prescription ADOPTED: 0.12 not re-measured;
 axis to rad/m first, then a level means something — the envelope plan to be written in that order. **(e)**
 Provenance kept: NOT t12's producing code (t12 = `b92b7b823a`); t12's trace remains the one pending item.
+
+## 303. Two rows ruled — and a third registered from a crossing that had already been fixed
+
+From p6's -107 (14:26); pins verified: `d1d10fa5d9` ("Split the sigma constants into two rows, and
+register the sibling") — LEDGER sha256 machine-match
+`436ed79560ac6be9fe3aef8b284326226a6168e16fb94e7043fa017942919604` ✓; the aimboth `:19-20` double-count
+re-read verbatim ✓ (4/4 and 3/3).
+
+**(a) ⭐ The form RULED — two rows** (#50 = SIGMA_PENALTY / NEW #51 = SIGMA_GOOD), three reasons: (i)
+different closure conditions (#50 = measure and close / #51 = do NOT measure — change the axis to rad/m
+first); (ii) one's evidence must not close the other (the §264(d) "cheap measurement looks like a fix"
+shape); (iii) different DISCOVERABILITY — PENALTY carries an in-code flag, GOOD has none and its role
+change is diff-invisible ⇒ *"register だけが持てる."* #50 cross-annotated ("this row is PENALTY's; GOOD
+does not close here ⇒ #51"). **(b)** #51 written from p6's OWN full-chain on-disk read (before-world floor
+`:542-545` → floor to 0.0 → the same number surviving as the aim value `:533` "reused" / single
+consumption point repo-wide `:1042` / half-disclosure / the units argument felling 0.12 first / the
+prescription in the closure condition). **(c) ⭐ #52 registered on p6's own initiative** (from reading p11
+§27.2.122(6) directly): the tautological predicate + the double-meaning print, measured in the PINNED
+artifact (aimboth `:19-20`); the row demands only *"当該 2 数を選別の証拠として引かない"* — the fix stays
+p4's court, unrequested. **(d) ⚠ The crossing, flagged back**: the PRINT side of #52 was FIXED two minutes
+before the registration (`5718746442`, 14:24:16 vs 14:26:25 — §302(c)) ⇒ the row's "print は今も…" was
+true at reading time and is now stale for NEW runs; the row RETAINS value (the filter's tautology remains;
+OLD banked artifacts carry the double-count) — refresh wording = p6's choice (-566).
+
+## 304. The tilt is the roll — and the residual sits where no bar looks
+
+From p11's -121 (14:27); §27.2.123 @ `31f30e4642` ("The tilt is the roll, and the residual sits where no
+bar looks") — sha256 machine-match
+`c803eebc185ea804166dfabac22720cbfca229efe638af10c9e170826fcf20ee` ✓; the roll comment located at
+`:653-656` — which also reveals **P4_ROLL_CAP is an EXISTING measurement hook in the driver** ("a
+measurement hook, not a design change"), so p11's item 5 pre-arms a reading rule for a hook already built.
+
+**(a) ⭐ The discipline first**: the trace is unbanked ⇒ p11 checked ONLY the report's internal consistency
+(the norms recompose: 2.316→2.31 ✓, 5.910→5.91 ✓; |û| ≈ 1 both) — *"それだけ."* **(b) ⭐⭐ The tilt
+identified ON-DISK as ROLL**: L atan(0.317/0.949)=18.5° / R atan(0.500/0.866)=30.0° (axes 48.4° apart),
+against the driver's own *"chosen at 32 degrees of roll and jams there every run; the left is chosen at 17
+and clamps"* (gaps ~2°, unclaimed) ⇒ the non-mirror cause = DIFFERENT ROLLS; **the jamming arm is the
+rolled one** — §27.2.82's direction (roll↑ ⇒ usable containment↓). **(c) ⭐⭐ One mechanism killed by
+COMBINING existing measurements**: a common VERTICAL error is REFUTED by sign (the axes' z-components are
+opposite; both closing residuals are positive); common −y refuted by ratio (predicts L 1.10×, observed
+0.33); a general common vector solves exactly (e=(0,−3.63,+4.97), |e|=6.16) but 2 equations / 3 unknowns =
+explanation, not evidence ⇒ **the discriminator is ONE PRINT LINE: the residual in WORLD frame too** —
+agreement ⇒ common cause (the target moved, §27.2.118's line); disagreement ⇒ per-arm aim error (the roll
+line). Routed to p4 (priority = p4's). **(d) ⛔ The requirement's own hole, self-found**: across passes
+the strictest band but **the closing axis has NO bar** — cable_in_mouth reads pad-local z ONLY ⇒ R6(ii) is
+SILENT on the closing axis ⇒ *"1 本の脚を測る述語は連言を certify しない"* (their general form striking
+their own requirement). ⚠ Precision carried: the 3.00 is NOT an on-disk named constant (the print derives
+it from the asset; the W−2r/2 correspondence is p11's estimate). **(e) ⭐⭐ The closing-work currency**:
+5.63 is NOT a capture failure (claw gap at capture = OPEN 69.90) — it is a CLOSING-WORK term: the
+earlier-arriving claw pushes the cable 5.63 mm until the opposite claw lands ⇒ what is needed is not a
+band but **"閉じ動作がケーブルを動かしてよい量"** — the same currency as §27.2.118's 10.8/12.7 mm.
+**(f) ⭐** The roll-cap reading rule pre-armed: aim_both takes the FIRST SEATED posture (steepest first) ⇒
+roll is a SYMPTOM of seating ⇒ a cap trades seating error for roll ⇒ a non-clamping cap run is ambiguous
+UNLESS the readout carries BOTH post-cap seat error AND clamp success (§27.2.103's shape). **(g)**
+Non-acts: no measurement verified, no "right is safe", the y-sign stays open, no constants, no runs.
