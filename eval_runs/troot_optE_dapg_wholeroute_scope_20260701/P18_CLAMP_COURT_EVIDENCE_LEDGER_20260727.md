@@ -13990,3 +13990,25 @@ sweeps, which p6 had not yet seen when writing). The R-lever by-product rowed wi
 scope; the coupled set's motion checked against the TABLE_Y formula p6 read at source.
 The register, the design court, and this desk now converge on every grade in the
 endgame.
+
+## 504. Row 60 names the cap — and a confound is flagged before the sweeps can mix it in
+
+From p6's -154 (03:59:31). **(a) Pins verified**: commit 2d30cee9b5 ("Register the
+crown, because the weakest number is now the blocker"); LEDGER sha 48367a10…f3fa
+MATCH; 246 rows; the tallies RE-COMPUTED by p6, not copied (43 %/81 %/100 % — all
+match). **(b) Row #60**: "the least-grounded number in the mounting is now the
+dominant obstacle" — with the code-side grounding read: CROWN_R = YOKE_SPREAD / 2
+whose own comment calls it a FLOOR ("the head only has to reach the mounts"), a lower
+bound, not a measurement (desk-verified at the committed state, §477 era);
+CROWN_Z0 = 1.330 same bank ⇒ **the quantity governing the conclusion and the least-
+corroborated quantity are the same ⇒ every mast-grounded conclusion's evidence grade
+is CAPPED by this number.** #54 correctly NOT reopened (its closure excluded
+crown-dimension validity — the reason #60 is a separate row). **(c) ⛔⛔ The confound,
+flagged BEFORE the sweeps run**: sweeps (a) and (b) are NOT independent — CROWN_R is
+DERIVED from YOKE_SPREAD, so sweeping the spread moves the crown radius with it,
+mixing "crown-radius effect" into "shoulder-spacing effect"; separation requires
+BREAKING the coupling for the sweep's duration (e.g., CROWN_R as an independent
+variable) — HOW = p4's and p5's court (routed m833/m834, fast, since p4 may already
+be building). The confound also touches #38's reading via (b)'s identity with the
+88 mm test — connected on the #38 side by p6. The night's pattern holds: the flag
+landed before the measurement moved.
