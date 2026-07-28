@@ -12264,3 +12264,35 @@ Their observation, banked: the VERBATIM ARRAY beside the wrong interpretation is
 the record re-countable — "配列を逐語で引く価値がここに出た形" (quote the raw vector, not
 only its reading; the reading died, the vector saved the row). No replies sent to either —
 the pure-ack economy announced to Rs, applied.
+
+## 437. Rs finds the hole the colours revealed — the arms stand on nothing, and the yoke's two numbers go to p5
+
+From p4's -182 (21:16:27; ⭐ numbering SKIPS -181 per the quarantine — the counter-table
+discipline adopted by its subject). **(a) ⭐⭐ Rs verbatim ×2 (p4 custody)**: 「アームのベースが
+支柱から離れている」 and 「動画のようにY字状にしたい '/home/rlrk/Downloads/
+UR15_production_line_v15_20260728.mp4'」 (the reference exists — desk ls, 39.7 MB). The chain
+worth noting: Rs's own colour directive (§432(d)) → Rs catches the modelling hole on the
+coloured video. **(b) The hole, measured by p4 BEFORE answering**: the column carries exactly
+two geoms (stem/foot); shoulders at x=±400 mm, z=1530 mm; stem surface at x=±102 mm ⇒ 298 mm
+of EMPTY SPACE each side — the arms hang on an invisible coordinate offset. Desk-verified
+anchors: COLUMN_R = 0.102 (spec §6.4j) and PEDESTAL_R/HZ = 0.215/0.03 in the cell spec ✓.
+⭐ The SAME 298 mm appeared at §410(c) as pB's refutation arithmetic (attach-frame → stem =
+298.0) — then it meant "the mount is NOT inside the mast"; now it means "the yoke that should
+occupy this space is missing." One number, two readings, both true. **(c) ⛔ The scope
+narrowing, p4's own**: that 298 mm is exactly where the right forearm has been travelling ⇒
+EVERY mast result reported this evening — including t27's "zero mast entries" under the
+tracking gate (unverdicted, per the standing rule) — is a result about a cell whose
+supporting structure is MISSING. Readings not withdrawn; their scope now stated narrower.
+(Downstream note: once the yoke exists as collision geometry, the mast-in-filter obstacle
+set (Rs item ⑦) and the clearance accounting change — the courts will meet it when the
+numbers land.) **(d) The request routed (m752)**: the geometry is p5's court — p4 supplies
+the measured, fixed anchors (shoulder (±0.400, 0, 1.530) m; stem r 0.102, z 0→1.530; foot r
+0.215 hz 0.030; mount tilt 70°) and asks for the TWO numbers that are design: (1) the FORK
+HEIGHT (the stem currently rises exactly to shoulder height ⇒ without a fork the branches
+would be horizontal — no Y; the fork must come down); (2) the BRANCH SECTION (radius or
+section). ⚠ Both become COLLISION GEOMETRY — cell geometry, not scenery; and the explicit
+question: one capsule per side, or something the arm can pass through. p4 will implement
+exactly what returns and fills neither number. **(e) Run custody**: t28 running from
+`d002664980` ("Bound the command's lead by what the clearance allows, not by the settling
+test" 21:09:37 — the derived tracking tolerance); no verdict until pB and pC read it, now
+with the (c) caveat attached — p4's standing rule, self-applied again.
