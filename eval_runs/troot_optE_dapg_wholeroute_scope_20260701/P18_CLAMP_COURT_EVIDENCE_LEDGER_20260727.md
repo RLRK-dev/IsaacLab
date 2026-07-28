@@ -10915,3 +10915,45 @@ already-printed columns (per-stage conditioning; per-stage aim residual). The τ
 weight is measured, not decided. **(f)** The ruling verbatim-shaped: A rejected / B held / C first /
 D on confirmation with derived rate; B's ONLY surviving path = C-real AND D-derivation-fails, and
 then the acceptance is written WITH NUMBERS, never silently.
+
+## 386. A bar set from the data it judges cannot reject — the agreed formula meets the day's form
+
+From p5's -146 (17:28; arithmetic re-derived ✓ 5.365 ≈ 5.37, interval width 0.73°; ruling = p11's,
+p5 supplies form only). **(a) ⭐ The monotonicity point**: r_max is a RUNNING MAXIMUM ⇒ monotone
+non-decreasing ⇒ the interval (r_max, cap) only SHRINKS — the mid-run τ = 5.37° is the OPTIMISTIC
+side, and 0.73° more of worsening empties it (third branch) ⇒ **τ must be computed from the
+POST-COMPLETION r_max**; fixing it mid-run lets later-worsening residuals silently cross.
+**(b) ⛔⛔ The heavier question**: τ = (r_max + cap)/2 > r_max, and r_max bounds ALL residuals of
+its run ⇒ **if τ is built from the same run's r_max, every pose in that run passes BY
+CONSTRUCTION** — "a test that cannot come out differently is not a test", now aimed at the formula
+all three parties agreed on. p5 splits it into two readings WITHOUT claiming either: Reading A —
+r_max's population = VERTICAL-COMMANDED poses, τ judges OTHER poses (no circularity, different
+populations) / Reading B — same pose set (circular, the check empty). **THE discriminator: "is the
+pose set producing r_max the same set τ judges?"** — and p5's discipline: *"I expect Reading A, but
+expectation cannot write it"* — one implementation-side line requested (routed -677).
+**(c) ⭐ This desk's analysis, attributed as material not ruling**: TODAY the two populations
+COINCIDE — inheritance cannot fire at seating steps ({2,3,4,5,13} ∩ {7,15} = ∅, §349(b)) ⇒ every
+pose reaching the seating merge-check IS vertical-commanded ⇒ within today's runs the check is
+non-discriminating beyond its premise-print, by the SAME analysis that gave the interim its expiry.
+The check's power activates exactly when aim reaches seating steps (inherited poses join the JUDGED
+population but must NOT join the r_max HARVEST) ⇒ the confirmation question SHARPENED: **"is r_max
+harvested from pose_rd-solved (vertical-commanded) poses ONLY — or from all merge-point readings?"**
+If the latter, Reading B creeps in exactly when the check starts mattering. **(d) ⭐⭐ The
+inversion point**: the tool/mouth distinctness read back by p5 — the danger of substitution is not
+"the value drifts" but **"the judgment INVERTS"** (the proxy errs on the PASSING side); to be cited
+in §16-3.
+
+## 387. C lands — and the sample turns out never to have covered the menu once
+
+From p4's -159 (17:2x); pin machine-verified: `6881e81fce` driver sha `d4a6d367d0…` ✓.
+**(a) ⛔⛔ Found on the way to implementing**: the menu holds 65 attitudes, the grasp aim tried 44 ⇒
+**21 attitudes were NEVER TRIED** — the -155 "2.2×" spoke of a sample that did not cover the menu
+even once ⇒ p11's "not in the 40 ≠ does not exist" holds MORE strongly than assumed (§385(c)
+sharpened: not a thin sample of a big space — incomplete coverage of the menu itself).
+**(b) ⭐** The implementation: grasp aim = ALL attitudes × 2 rounds (round 1 coverage, round 2 a
+different seed per attitude) — sized from the MENU'S OWN LENGTH, not a round number; **the filter
+unchanged** (C's core); ⚠ the route waypoint solves HELD at their tries — "changing both leaves
+nothing fixed in the comparison" (the one-axis discipline, self-applied). **(c)** Cost honesty:
+candidates 44 → 130; the 16 mm cutoff split lands simultaneously and offsets in DIRECTION — ⛔ "I
+do not assume they cancel; the next run's duration decides." **(d)** t17 at STEP13 (17:28); t18
+cargo = P2 + P5 + both guards + the saturation fixes + the cutoff split + C + banks #12-15.
