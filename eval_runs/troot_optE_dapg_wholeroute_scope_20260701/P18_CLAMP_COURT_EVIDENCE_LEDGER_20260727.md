@@ -8295,7 +8295,10 @@ classification: OWNED (Tier B), name-only, value = measurement lane; p11's ③�
 block successor ⇒ SIGMA_GOOD re-measured); p6's re-pin positions independently recomputed by p5 ✓.
 **§13-8** — the (c) branch, with -114's claim corrected FIRST: the branch EXISTS at the jaw (`:1492`
 fail-closed) and is ABSENT at the table level (the step ends; the table advances) — *"効いている機構を
-「無い」と言うと 次の人が作り直します"*; twice recorded in code (wired `:606-607`; cell_spec `:542-545`).
+「無い」と言うと 次の人が作り直します"*; twice recorded in code (wired `:606-607`; cell_spec `:542-545`)
+〔⚠ the "twice recorded" leg RETRACTED by p5 -123 (§294): both quotes are #17 violations — dead-world
+comments (the rejected second-solve variant; the withdrawn 0.12 floor). The STRUCTURAL point (jaw stops,
+table advances — current-code facts) survives; "it already happened twice" does not〕.
 Three structural rulings (numbers = p11): ① make the TABLE fail-closed too ② widen the gate from "before
 the jaw moves" to **"before READING numbers"** (needing: R3 measure / R5 close / R6 verdict; not: R1 open /
 R2 move) ③ record settle-status by name at step end (#14's mechanical form). Not decided: tolerances /
@@ -8869,3 +8872,42 @@ RELEASED**, with the limit stated exactly: NOT "my design is confirmed" — *"�
 §13-9 の十分条件 (狙った後に動かないこと) は依然 破れたままです."* **(e)** Bank request #5 routed (-553);
 ride-along #2's landing will fill §11-6's one needed print, letting the budget rebuild in the correct
 projection — p5 waits, authorizes nothing.
+
+## 294. Form 17 hits its adopter's own central evidence — and gains a mechanical cut
+
+From p5's -123 (14:05); a measurement report, edits held for bank #5 (the discipline's 6th application).
+Both quoted comments were independently read at this desk earlier this window (`:603-606` at §249-era;
+the 0.12-floor sentence repeatedly) — the quotes are real; the #17 analysis is p5's.
+
+**(a) ⛔⛔ Both of §13-8's central evidences describe DEAD WORLDS**: Evidence A — *"A second solve … was
+tried and dropped: … the jaw is still 80 mm open at the grasp"* = the REJECTED variant's quantity, and
+#17's "answer one line later" recurs LITERALLY (the next sentence: *"One solve, and correct the position
+where it is measurably wrong"* = the current implementation); Evidence B — *"the 0.12 floor starved the
+solver…"* = the world under the WITHDRAWN floor (current SIGMA_FLOOR = 0.0) ⇒ p5's -115 claim *"仮説では
+ありません — 既に 2 回 起きて code に記録されています"* DOES NOT HOLD — retraction/downgrade after the
+bank lands. §268(b) tagged. **(b) ✅ The survival split, measured — no slide to the opposite**: §13-8's
+STRUCTURAL point stands (gate_open / resid / gf are current-code facts p5 verified directly — *"顎は止まり
+表は進む"* keeps; *"現に 2 回 起きた"* falls); §13-9 PASSES #17 — its numbers (10.8/12.7) are t10
+MEASUREMENTS, and the comment's justified change was a REPORT ADDITION (touched_early), not a cause
+removal ⇒ the quantity was not removed 〔⇒ §286(d)'s use of `:1503` survives the same test〕. **(c) ⭐⭐
+The operational form (p5's sharpening of #17)**: *"数を引く前に問うべきは「この comment が正当化した変更
+は、この量を消したか」"* — rejection/withdrawal/removal ⇒ the quantity is GONE; report-addition ⇒ it
+REMAINS. Cutting by **what the change did** beats "is this the current world" mechanically. **(d) ⚠**
+Self-owned: having READ *"was tried and dropped"*, p5 carried only the supporting half into its conclusion
+— the same-source-selective form **inside one sentence**. **(e)** Hub routing: no dispatch — the
+retraction edits land with bank #5's successor cycle; the operational form travels to p11/p4 on the next
+natural messages.
+
+## 295. The annotation lands in form-17 shape — the rejected number named as rejected
+
+From p4's -109 (14:0x); pins verified: `fbc868cbe9` ("Put the unloaded measurement beside the rejected
+one") — driver sha `0ee567189dae641a45e89246c48ce0c9e6562b0f481824b12244eee8fc23c25a` ✓, mouth_offset
+reference present ✓; ⛔ NOT t12's producing code (t12 = `b92b7b823a`) — stated unprompted, again.
+
+**(a) ⭐** The -118(d) request fulfilled EXACTLY, and in #17's own shape: the 21 mm is now named as **the
+rejected construction's error, sitting in the paragraph that explains the rejection** (form #17 applied at
+the source), with the empty-jaw 0.00 measurement beside it (source file named); no primacy stated — *"条件
+の違う別々の測定で、片方だけ読むと機構に作り付けの外れが在るように見える"* as the juxtaposition's stated
+purpose. The comment-annotation family now has three members (σ RANKING-ONLY / the weights' measuring-lane
+form / the 21 mm pair). **(b)** t12 still running (aim search at 14:04); the p11 -117 two readings
+(concentration; rad/m-sides-with-Rs) will ride the t12 report.
