@@ -1575,8 +1575,10 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 tgt[t] = np.array([c[0], c[1], float(tgt[t][2])])
     # Aim the MOUTH at the groove, not the pinch.  Detect the seat steps by their commanded
     # height rather than by number, so C1 and C2 are covered by the same line.
+    _seating = set()
     for t in SIDES:
         if abs(float(tgt[t][2]) - Z_SEAT) < 1e-9 and not OLD_SEAT_AIM:
+            _seating.add(t)
             off = seat_offset(t, prev[t])
             _clip = "C1" if abs(float(tgt[t][1]) - C1[1]) < 1e-9 else "C2"
             # where the cable is sitting inside the mouth right now, measured
@@ -1615,6 +1617,28 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                       f"{_tch or 'not on the other arm'} (⚠ arm-to-arm ONLY -- posts and table are "
                       f"invisible to this test)")
                 w[t] = aimed[t]
+                continue
+            # Rs, 2026-07-28, watching the run: "when descending to a clip, all fingers have to
+            # point straight down, so they do not hit the table."  A tilted jaw puts its lower
+            # claw out sideways and down -- at 32 degrees the arm's lowest point sat 48.5 mm below
+            # its own mouth, which was 25.5 mm THROUGH the table while the mouth was still 23 mm
+            # above it.  Upright, the claws hang under the mouth instead of swinging beneath it.
+            # Nothing is invented for this: (0, 0) is already the first entry of the attitude menu,
+            # and pose_rd is the existing way to name one attitude instead of searching.
+            if t in _seating:
+                try:
+                    w[t] = solve_ik(t, tgt[t], tries=44, iters=260, seed=num * 10 + (t == "R"),
+                                    near=prev[t], warm=prev[t],
+                                    other=w["R" if t == "L" else "L"],
+                                    quiet=True, re_max=0.30, wide=True, pose_rd=(0.0, 0.0))
+                except RuntimeError as exc:
+                    # ⛔ Do not fall back to a tilted attitude.  The requirement is the point; a
+                    # silent tilt would put the fingers back through the table and report success.
+                    raise RuntimeError(
+                        f"STEP{num} {t}: no IK solution with the fingers vertical, which is what "
+                        f"the descent to a clip requires.  Tilting instead is not a fallback here "
+                        f"-- it is the thing that drove the claws through the table.  ({exc})"
+                    ) from exc
                 continue
             w[t] = solve_ik(t, tgt[t], tries=44, iters=260, seed=num * 10 + (t == "R"),
                             near=prev[t], warm=prev[t], other=w["R" if t == "L" else "L"],
@@ -1760,7 +1784,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     low = []
     for t in SIDES:
         sc_ = slot_centre(t)
-        worst_, who_ = -1e9, ""
+        worst_, who_, bot_ = -1e9, "", 0.0
         for g_ in ARMG[t]:
             c_ = np.array(d.geom_xpos[g_])
             if int(m.geom_type[g_]) == int(mujoco.mjtGeom.mjGEOM_BOX):
@@ -1770,9 +1794,16 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             else:
                 bot = c_[2] - float(m.geom_rbound[g_])
             if sc_[2] - bot > worst_:
-                worst_, who_ = sc_[2] - bot, (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g_)
-                                              or f"geom{g_}")
-        low.append(f"{t} {worst_*1000:5.1f} mm below the mouth ({who_})")
+                worst_, who_, bot_ = sc_[2] - bot, (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM,
+                                                                     g_) or f"geom{g_}"), bot
+        # Rs, 2026-07-28: the fingers must not hit the table on the way to a clip.  "Below the
+        # mouth" cannot answer that -- it is measured from a mouth that is itself moving down.
+        # The table is what the requirement is about, so the height above the table is what the
+        # line reports, and a negative number means the arm is THROUGH it.
+        _clear = (bot_ - TABLE_TOP) * 1000.0
+        low.append(f"{t} {worst_*1000:5.1f} mm below the mouth ({who_}), "
+                   f"{_clear:+6.1f} mm vs the table"
+                   f"{' <- THROUGH THE TABLE' if _clear < 0 else ''}")
     print(f"[steps] STEP{num:2d} ARM REACH: " + " | ".join(low))
     print(f"[steps] STEP{num:2d} CARRY: " + " | ".join(carry))
     _stx, _sty, _stz = seat_tolerances()
