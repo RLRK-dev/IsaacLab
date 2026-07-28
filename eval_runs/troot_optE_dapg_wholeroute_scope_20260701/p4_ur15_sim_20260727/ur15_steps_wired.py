@@ -1919,8 +1919,16 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
         for _k3, _a3 in enumerate(QADR[t]):
             _sv.qpos[_a3] = w[t][_k3]
         mujoco.mj_forward(m, _sv)
-        _down = slot_centre(t, _sv) - pinch(t, _sv)
-        _down = _down / max(1e-12, float(np.linalg.norm(_down)))
+        # ⚠ The jaw's own state is part of this reading and has to be visible in it.  The scratch
+        # copies the LIVE qpos and overwrites only the arm joints, so the fingers are wherever the
+        # run has them -- open at one step, squeezed on a cable at the next.  The four-bar moves
+        # the mouth relative to the pinch as that changes, so two steps with the same arm pose and
+        # the same commanded jaw can still read different tilts.  Printing the vector's LENGTH and
+        # the pad gap beside the angle is what lets that be seen instead of deduced.
+        _mv = slot_centre(t, _sv) - pinch(t, _sv)
+        _mlen = float(np.linalg.norm(_mv)) * 1000.0
+        _mpad, _mclaw = jaw_gaps(t, _sv)
+        _down = _mv / max(1e-12, float(np.linalg.norm(_mv)))
         _off = math.degrees(math.acos(min(1.0, max(-1.0, float(-_down[2])))))
         # p11/p5 -614(3), three prints, because the tolerance is being argued over a number
         # nobody has measured yet.  (1) the angle prints on PASS as well as on failure, so the
@@ -1946,7 +1954,8 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
         print(f"[steps] STEP{num} {t}: fingers {_off:4.1f} deg off straight down "
               f"(pinch->mouth [{_down[0]:+.3f} {_down[1]:+.3f} {_down[2]:+.3f}]), "
               f"allowance {VERTICAL_TOL_DEG:4.2f} deg -- margin {VERTICAL_TOL_DEG - _off:+5.2f}; "
-              f"tool axis {_tres:4.1f} deg off vertical; lowest point {_who3} at "
+              f"tool axis {_tres:4.1f} deg off vertical; pinch->mouth {_mlen:5.1f} mm with the "
+              f"pads {_mpad:+6.2f} mm apart; lowest point {_who3} at "
               f"{(_lowest - TABLE_TOP)*1000:+6.1f} mm vs the table")
         if _off > VERTICAL_TOL_DEG:
             raise RuntimeError(
