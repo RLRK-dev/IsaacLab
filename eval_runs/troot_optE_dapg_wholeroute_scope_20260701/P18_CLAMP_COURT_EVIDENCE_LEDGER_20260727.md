@@ -9340,7 +9340,10 @@ live variable") — bank #8 COMPLETE (sha `dcf220e4…` ✓). The world lines ar
 
 **(a) ✅** The ① precision accepted and RESTATED by p4: *"「閉じました」と言うべきでありませんでした ⇒
 「NOTE を出した・判定は p6」と言い直します."* **(b) ⭐⭐⭐ The discriminator's first answer — PER-ARM
-dominates**: STEP3 in world — L [−1.28, −1.62, −1.04] / R [−0.41, −5.75, +1.29] mm ⇒ the dominant y is
+dominates** 〔⚠ OVER-READ — corrected by §322 (p11 -126): "不一致 ⇒ 腕ごと" is invalid (a rigid cable
+rotation from ONE cause also produces disagreement; antisymmetry is not a test at n=2) — the same data
+admits a one-common-cause account (translation 3.8 mm + rotation 3.1°); the split returns to OPEN with a
+new one-line discriminator〕: STEP3 in world — L [−1.28, −1.62, −1.04] / R [−0.41, −5.75, +1.29] mm ⇒ the dominant y is
 same-signed but **3.5× different in magnitude** — a moved target would give the SAME vector; it does not ⇒
 p11's -121(3) two lines split: **the per-arm line (roll) leads at the aim surface; the common line is
 bounded at ~1.6 mm**. p4's own decomposition check: the closing-axis projections (1.87×û_L → (0,−1.77,
@@ -9425,3 +9428,45 @@ R5 "閉じる" is not the CLAMP cell but the transition INTO it. **(c) ⭐** The
 読むと作用が消えます."* **(d) ⚠** The reciprocal own: p11's meta applies equally — *"私も同じ表を読みな
 がら 段 14 の左を 1 度は水準として読みかけました."* **(e)** Bank request #9 routed (-586); the §11-6
 rebuild still waits for the trace pin (*"それまで数は動かしません"*).
+
+## 322. The discriminator cannot tell a turned cable from two wrong arms
+
+From p11's -126 (14:54); §27.2.128 @ `4166763dd3` ("My discriminator cannot tell a turned cable from two
+wrong arms") — sha256 machine-match
+`84f3a44c39972b19cee8873ac0cc57e85c8285ff06854d538aa859df80c03def` ✓.
+
+**(a) ✅** The report's chain closed by p11's own arithmetic (norms 2.312/5.907, projections +1.867/+5.627
+— all recompose ✓; p4's numbers not doubted). **(b) ⛔⛔ The -121 discriminator UNDERDETERMINED, owned**:
+"不一致 ⇒ 腕ごと" does NOT hold — the mean/difference split maps to cable TRANSLATION / cable
+ROTATION-BENDING, not common/per-arm; a rigid rotation from ONE cause makes the two arms' errors disagree;
+**with n=2 points any pair decomposes into mean + antisymmetric — antisymmetry is not a test** ⇒ "一致 ⇒
+共通原因" survives; its converse falls: *"計器は正しく、そこからの私の推論が強すぎました (測っていない
+ことを測った量にぶら下げた)"* — the 07-26 form, self-applied. §317(b) tagged. **(c) ⭐⭐ The one-cause
+sufficiency check (explicitly NOT a cause claim)**: the grasp points sit 88 mm apart along x (`:917-920`
+re-read); the difference vector is nearly perpendicular to the cable axis = a rotation/bending shape;
+rigid rotation about the midpoint: θ = 2.41/44 = 0.055 rad = **3.1°** ⇒ *"「ケーブルが 3.8mm 並進し 3.1°
+回った」だけで両腕の誤差が再現し、腕ごとの狙い誤差はゼロでよい."* **(d) ⭐ The two readings reconciled
+(not a contradiction)**: p4's "~1.6" = the component-wise SHARED vector ("what is identically in both");
+the least-squares single common vector = the mean **3.78 mm** ("what one common cause can explain") —
+different questions, both valid; ⚠ neither kills the roll line (roll answers "why the mouth misses"; this
+answers "where the cable is" — compatible). **(e) ⭐⭐ The observation that DECIDES (one line, no
+decomposition)**: print the cable's own centreline pose (one point + direction) AT THE SAME INSTANT beside
+the position the aim assumed — assumption vs object compared directly; no n=2 degeneracy; rides the
+residual-printing run. Routed to p4 (-587).
+
+## 323. Today's measurements in one place — with what they cannot say, and one section already crossed
+
+From p4's -127 (14:55); pins verified: `10833f4ded` ("Put today's measurements in one place, with what
+they cannot say") — sha256 machine-match
+`ccd02b8528c15a915eaeaffa359b6f431ae15c1afd71b0a2bfd46634ebb2cd7d` ✓.
+
+**(a) ⭐** The consolidation: ① the grasp-instant jaw-axis components + the fixed-hand census (6 runs, 0
+exceptions) ② the aim-instant components + the world-print verdict ③ the 5.63 → 14.29 stack-up (~8.7 mm
+between aim and grasp) ④ STEP13's three instruments ⑤ the σ/rad-per-m rank inversion ⑥ four killed
+hypotheses (three of them p4's own) — with the fleet's corrections incorporated IN THE TEXT (the
+rate-kill, the non-independence, corroboration-not-proof, the rejected-design 21 mm), and the final
+section = *"私が言えないこと"* (no design position). **(b) ⚠ The crossing, flagged**: section ② carries
+"腕ごと・共通でない" — written before p11's -126 landed (14:54:47 vs 14:55:15, seconds apart) ⇒ that
+verdict is now OVER-READ per §322 (the split returns to OPEN) ⇒ a supplement cycle on ② = p4's court,
+flagged in -587 with the NEW discriminator as the ride candidate. **(c)** t13's trace stays the pending
+pin; the artifact contains no t13 trace numbers (only the world print from the live output, stated).
