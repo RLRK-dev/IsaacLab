@@ -1506,10 +1506,19 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 # ones this aim will hold.  p11 -116(1): the surface is the prediction, and it is
                 # named here so nobody reads it as the closing moment itself.
                 _ax = jaw_axes_after_close(t, wq, CLAMP)
-                _r3 = _ax @ (np.asarray(c, dtype=float) - aim_seat[t]) * 1000.0
+                _w3 = (np.asarray(c, dtype=float) - aim_seat[t]) * 1000.0
+                _r3 = _ax @ _w3
                 print(f"[steps] STEP3 {t}: that residual in the jaw's own axes (PREDICTED close): "
                       f"along cable {_r3[0]:+6.2f}  closing {_r3[1]:+6.2f}  "
                       f"across the mouth {_r3[2]:+6.2f} mm")
+                # p11 -121(1): the jaw-frame split cannot tell two different stories apart, because
+                # the two arms hold different attitudes and each frame rotates with its own.  In
+                # world they are comparable: if both arms miss the same way, the thing they aim at
+                # moved; if they miss differently, each arm's own aim is off and the roll gap is
+                # the candidate.  One line, and the two lines stop being confounded.
+                print(f"[steps] STEP3 {t}: and in world "
+                      f"[{_w3[0]:+6.2f} {_w3[1]:+6.2f} {_w3[2]:+6.2f}] mm "
+                      f"(same vector, no frame of its own -- compare the two arms here)")
                 # p11 -116(3): the two arms' closing axes came out with opposite signs, which is
                 # either a real difference or a mirrored convention in the asset.  Printing the
                 # world direction of each settles it by inspection rather than by argument.
