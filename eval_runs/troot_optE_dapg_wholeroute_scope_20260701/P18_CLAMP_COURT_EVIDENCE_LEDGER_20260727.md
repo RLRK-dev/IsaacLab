@@ -14149,3 +14149,25 @@ never read as "same object throughout". Relayed to p4 (m841). **(c)** p5's credi
 attribution recorded: the ruling was issued WITHOUT knowing the implementation
 actually had the confound — the catch belongs to p6's flag, which landed before one
 row was contaminated.
+
+## 511. Sweep (a) answers — the crown owes the left arm nothing, and costs the right arm half
+
+From p4's -208 (04:17:02). **(a) Pins verified**: commit 90b1944d44 ("Take the crown
+away, and find the column underneath it"); artifact CROWN_RADIUS_SWEEP_20260729.txt
+sha 9eee4265…bb39 MATCH; the table desk-read, per-radius rejected-against lines
+included; (b)'s header already carries "⛔ CROWN_R PINNED at 0.110" + p5's scope line
+— the ruling implemented before the grid ran. **(b) ⭐⭐ The answer**: L free = 0 at
+EVERY radius (none→0.110); with the crown removed the rejections MOVE TO THE STEM
+(stem ×4 + crown ×3 → stem ×6) ⇒ **the crown contributes ZERO to the left arm's
+block**. The RIGHT arm mirrors it: free 4 at none/thin radii, **2 at the current
+0.110 only** ⇒ the current crown HALVES the right arm's candidates while giving the
+left nothing. The naming-vs-necessity split (§507) now carries its full-table proof;
+#60's scope confirmed by-arm (left never depended on the crown; right does). **(c)
+⚠ The design-vindicating observation**: the 88 mm arm-closest reading is NON-MONOTONE
+in radius (+9.6, +9.6, 0.0 CONTACT, 0.0 CONTACT, +26.2) — the crown changes WHICH
+start pose WINS, so the arm-pair reading is NOT a pure function of spread/tilt —
+p5's 2-sheet design is correct BECAUSE of this coupling, now shown empirically.
+**(d) The §505(d) note resolved by the artifact itself**: with the crown geometry
+removed, geom indices SHIFT — "g5 on L_forearm_link" at crown-off is the forearm
+under renumbering ⇒ part NAMES are the stable identifiers across model variants;
+ids are per-instance. (b) runs (24 points); routed p5 (m842), p6 (m843).
