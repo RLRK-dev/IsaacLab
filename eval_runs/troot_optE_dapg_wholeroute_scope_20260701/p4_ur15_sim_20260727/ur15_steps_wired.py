@@ -256,7 +256,11 @@ world = f"""<mujoco model="ur15_steps">
 cell = mujoco.MjSpec.from_file(str(S / "_steps_world.xml"))
 column = cell.body("column")
 for tag, sign in SIDES.items():
-    q = Rotation.from_euler("xyz", [0.0, sign * TILT, 0.0]).as_quat()
+    # ⛔ NOT sign * TILT any more.  That sign mirrored the right MOUNT, back when both arms were
+    # identical copies.  The right ARM is the mirror now, so keeping the sign mirrors that side
+    # twice, and two mirrors are no mirror at all.  It showed instantly: the arms crossed over each
+    # other in an X above the head.  The mirror lives in the arm; the mount stops doing it too.
+    q = Rotation.from_euler("xyz", [0.0, -sign * TILT, 0.0]).as_quat()
     f = column.add_frame(pos=[sign * YOKE_SPREAD, 0.0, SHOULDER_HEIGHT], quat=[float(q[3]), float(q[0]), float(q[1]), float(q[2])])
     _a = arm_spec(tag)
     f.attach_body(_a.bodies[1], f"{tag}_", "")
