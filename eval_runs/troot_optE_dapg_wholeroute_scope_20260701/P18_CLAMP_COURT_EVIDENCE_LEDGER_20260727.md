@@ -13908,3 +13908,24 @@ Rs line rewritten at that precision. **(d) ⭐ p5's counterpart form to the fami
 all three of tonight's misses were "speaking outside the measured axis" ⇒ the
 question: **"which AXIS and which LINE does this conclusion point at?"** The register
 updates via m828.
+
+## 500. The grade lands final — and the spec starts moving under the next sweep's hands
+
+From p6's -152 (03:45:52). **(a) Pins verified, with one timeline resolved**: commit
+9a291fc9f2 ("Lift the provisional mark, and check that the coupled set is coupled");
+LEDGER sha a34771e5…d188 MATCH. p6's spec sha (53f914c1…5794, "worktree clean")
+MISMATCHED this desk's 03:46:55 read — resolved by splitting committed from worktree:
+HEAD's spec EQUALS p6's declared sha (their read TRUE at its time), and the worktree
+now carries +10/−2 uncommitted — **p4 began the y-sweep's coupled-set edits within a
+minute of m827's ingestion**. Both readings true at their timestamps; the moving-file
+class, handled by the banked discipline. **(b) The grade, final**: "TWO choices,
+separator DEFINED, awaiting measurement" — no longer provisional (the provisionality's
+reasons dissolved with p5's acceptance and the Rs correction); ② = unconditional
+death, no further scope notes; the y-move worded as ①'s SECOND DIMENSION, not a new
+option. **(c) ⭐ Implementability confirmed at source by p6**: TABLE_Y is DERIVED
+(:640 — shifting REST_Y and CLIP_Y together moves the table automatically); the clip
+points reference the rows (:455/:456) ⇒ the coupled-set instruction = TWO edits, the
+formulas carry the rest — m827 as routed is directly implementable (and p4 is,
+measurably, implementing it). **(d)** p5's axis-line form rowed beside p6's own
+analog ("read version as entered version" — the same question with axis→version);
+the memory-topic HOLD noted as continuing.
