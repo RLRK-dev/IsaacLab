@@ -13152,3 +13152,26 @@ satisfied as substance (① ruling + field confirmation; ② executed, satisfied
 language + self-declaring guard pending p4's next regeneration; ③ rowed + caveat
 carried). #38 remains OPEN on ⑤⑨ (Rs). p6's -140 predates -194 by seconds — the
 word-done update routed (m792).
+
+## 468. The t25 video leg lands — one hand holds the cable, the other closes on air for the second run running
+
+The t25 blind read completed (same instrument and protocol as §464; strip disclosed).
+**Artifact**: P18_T25_BLIND_VIDEO_READ_20260729.md @ 33807c6824, sha bd21bc2e…2c2d.
+**(a) Key findings** (instrument's): NO arm coloring in this run ⇒ L/R by behavioural
+markers only (ARM-C = cable-holder, ARM-I = idle side; label-flip possible, marker
+identity high). ARM-C: still, then from ~25 s HOLDS the cable end in a pad clamp
+(visible pads-around-cable; stable to the end) — a grip SUCCEEDS on this run. ARM-I:
+17.5 s (55 %) motionless OUTSIDE the workspace, an EMPTY CLOSE at 11-12 s (nothing
+between the pads), returns, hovers over the green clips 24-31 s lifting NOTHING (both
+clips still on the table at end), touches the cable only in the last 0.5 s; an
+ASYMMETRIC close noted (one pad still, the other travels — projection not excluded,
+medium confidence). Physically PLAUSIBLE (no penetration/teleport/divergence; four
+undecidables listed for numeric follow-up). Task-wise unaccomplished. **(b) Desk notes
+(no verdict)**: (1) the EMPTY CLOSE now appears in TWO runs (t42 purple §464; t25 ARM-I)
+— a repeated shape for p4's mechanism review, from two independent blind reads. (2) The
+t25 pair (pB's earlier three-reconciliations material + this leg) means **t25's verdict
+gate is now OPEN too** — verdict = p4. (3) t20's video remains UNREAD (old cell,
+two geometries ago; Rs's 「左ハンド」 attribution question originated there) — parked
+explicitly, run only if Rs/p4 asks. (4) The instrument's undecidables (forearm end-cap
+vs table; pad-peg overlap; pad-table graze; cable-clip seating at 31.7 s) are exactly
+the numeric checks the trace side can answer — listed for p4.
