@@ -640,7 +640,7 @@ def aim_slot_at(t, cable_w, prev_q, seed, pose_only=None, fix_x=None, pose_rd=No
     # far-arm test, which is how a pose sitting on the other arm's forearm survived to be commanded.
     # The far arm's CURRENT joints are what it is given: where that arm will be later is not known
     # here, and pretending otherwise would trade a blind test for a confident wrong one.
-    w = solve_ik(t, tgt, tries=44, iters=260, seed=seed, near=prev_q, warm=prev_q,
+    w = solve_ik(t, tgt, tries=None, iters=260, seed=seed, near=prev_q, warm=prev_q,
                  other=np.array([d.qpos[a] for a in QADR["R" if t == "L" else "L"]]),
                  quiet=True, re_max=0.02, wide=True, pose_only=pose_only,
                  pose_rd=pose_rd)
@@ -1169,7 +1169,14 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # branches -- 20.1 deg of roll on one and 34.4 on the other -- and only one could seat the
         # cable in its slot.
         POSES = [POSES[pose_only % len(POSES)]]
-    for _try in range(tries):
+    # p11 -147 (C): before deciding whether the clearance and the ranking really compete, find out
+    # whether the answer is just thin sampling.  Measured: the menu holds 65 attitudes and tries
+    # was 44, so the search did not complete ONE pass over it -- twenty-one attitudes were never
+    # tried at all, and "the best surviving candidate was worse" was said about a sample that had
+    # not seen the whole menu.  None means every attitude twice: once for coverage, twice so each
+    # gets a second seed.  Not a round number; the menu's own length.
+    n_try = tries if tries is not None else 2 * len(POSES)
+    for _try in range(n_try):
         RD = _rdes(*POSES[_try % len(POSES)])
         # warm-start EVERY tool pose from the previous waypoint before trying random
         # restarts, else the solver keeps handing back a different branch each STEP
