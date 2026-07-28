@@ -1015,7 +1015,11 @@ def attitude_tilt_deg(yaw, roll):
     v = slot_centre("L") - pinch("L")
     v_tool = np.array(d.xmat[TOOLB["L"]]).reshape(3, 3).T @ v
     v_tool = v_tool / max(1e-12, float(np.linalg.norm(v_tool)))
-    world = (_rdes(yaw, roll) @ AXFIX["L"]).T @ v_tool
+    # ⛔ NOT transposed.  The IK drives the tool until (RD @ AXFIX) @ Rt.T is the identity, so at
+    # the pose this attitude asks for, Rt IS RD @ AXFIX -- and a vector in the tool frame reaches
+    # world by that matrix, not by its inverse.  With the transpose the cap printed 0.00 degrees
+    # for every attitude in the menu, which is what sent me back to this line.
+    world = (_rdes(yaw, roll) @ AXFIX["L"]) @ v_tool
     world = world / max(1e-12, float(np.linalg.norm(world)))
     return math.degrees(math.acos(min(1.0, max(-1.0, float(-world[2])))))
 
@@ -1023,6 +1027,15 @@ def attitude_tilt_deg(yaw, roll):
 def vertical_cap_deg():
     """The smallest non-zero tilt the attitude menu can produce, in degrees."""
     tilts = [attitude_tilt_deg(y, r) for y, r in _spec.GRASP_ATTITUDES]
+    # A construction that cannot even reproduce its own zero is not measuring what it claims.
+    # The upright entry has to come back upright, and if it does not, every other number this
+    # returns is suspect -- so it is checked here rather than trusted.
+    upright = [attitude_tilt_deg(y, r) for y, r in _spec.GRASP_ATTITUDES if abs(r) < 1e-9]
+    if upright and min(upright) > 0.5:
+        raise RuntimeError(
+            f"the attitude with zero roll comes out {min(upright):.2f} deg off vertical, so this "
+            f"is not turning attitudes into the tilt the check reads -- the cap it would produce "
+            f"would be a number about the arithmetic, not about the cell")
     nz = [x for x in tilts if x > 1e-6]
     if not nz:
         raise RuntimeError("no menu attitude tilts the jaw at all, so the vertical check has "
