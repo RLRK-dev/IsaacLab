@@ -43,7 +43,9 @@ from ur15_cell_spec import (  # noqa: E402
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
-    SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, START_HOLD_S, START_RAMP_S, TABLE_HZ, TABLE_Y,
+    PREDICT_S, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
+    START_HOLD_S, START_RAMP_S,
+    TABLE_HZ, TABLE_Y,
     Z_HOME, Z_RISE_REST, Z_RISE_ROUTE,
     SHOULDER_HEIGHT, SIDES, TABLE_HX, TABLE_HY, TABLE_TOP, TILT, YOKE_SPREAD, guard,
     seat_z,
@@ -76,7 +78,15 @@ OLD_SEAT_AIM = _os.environ.get('P4_OLD_SEAT_AIM') == '1'
 # FLOAT_Z is imported now.  It was declared here because the spec module refused to supply it;
 # p5 withdrew the refusal on the grounds that a withheld value is an invented one.
 GROOVE_Z = seat_z(FLOAT_Z)                 # where the cable centre must end up, world z
-Z_SEAT = GROOVE_Z - CLAW_OFFSET            # the same height expressed at the pinch
+# A SENTINEL, not a height.  A step that carries this z is one whose target is computed from
+# measurement further down (`aiming the CABLE at the floor`): the pinch-to-mouth offset is read
+# per arm and per pose there, and this number never reaches an arm.
+# ⛔ It used to be GROOVE_Z - CLAW_OFFSET, which reads like the seat height expressed at the pinch
+# and is not: CLAW_OFFSET is wrist->claw-tip minus wrist->pinch (+20.9 mm), while the drop this
+# needs is pinch->mouth, measured here at -44.4 / -39.8 mm.  Two different vectors, one numeral's
+# worth of resemblance.  Harmless only because the override always fires -- which is a latent
+# fault, not a safe design.
+Z_SEAT = GROOVE_Z
 
 # Finger commands for the table's three states.  The table and task_config speak in an opening per
 # side [m] with the face gap stated as twice that (task_config.py:274/276/277: OPEN 0.04, HALF
@@ -535,7 +545,7 @@ def slot_after_close(t, qarm, ctrl_g):
     for k, i in enumerate(AIDX[t]):
         sc.ctrl[i] = qarm[k]
     sc.ctrl[GIDX[t]] = ctrl_g
-    for _ in range(int(SETTLE_S / m.opt.timestep)):
+    for _ in range(int(PREDICT_S / m.opt.timestep)):
         mujoco.mj_step(m, sc)
     return seat_point(t, sc)
 
@@ -559,7 +569,7 @@ def seat_offset(t, qarm):
     for k, i in enumerate(AIDX[t]):
         sc.ctrl[i] = qarm[k]
     sc.ctrl[GIDX[t]] = CLAMP
-    for _ in range(int(SETTLE_S / m.opt.timestep)):
+    for _ in range(int(PREDICT_S / m.opt.timestep)):
         mujoco.mj_step(m, sc)
     return seat_point(t, sc) - pinch_open
 
@@ -614,7 +624,14 @@ def aim_both(cl, cr, prev_q, seed):
     got = {}
     for t, c in (("L", cl), ("R", cr)):
         best, chosen = None, None
-        for (yaw, roll) in GRASP_ATTITUDES:
+        # ⚠ P4_ROLL_CAP: a measurement hook, not a design change.  The right hand's attitude is
+        # chosen at 32 degrees of roll and jams there every run; the left is chosen at 17 and
+        # clamps.  Selection asks only where the SEAT lands, never whether the cable can enter the
+        # mouth -- so capping the roll asks whether that is the difference.  Unset, nothing changes.
+        _cap = _os.environ.get("P4_ROLL_CAP")
+        _menu = ([a for a in GRASP_ATTITUDES if abs(a[1]) <= float(_cap)] if _cap
+                 else GRASP_ATTITUDES)
+        for (yaw, roll) in _menu:
             try:
                 r = aim_slot_at(t, c, prev_q[t], seed=seed + (t == "R"), pose_rd=(yaw, roll),
                                 fix_x=GL[0] if t == "L" else GR[0])
@@ -760,8 +777,8 @@ def seat_legs(clip, cx, cy, link):
                 for c in (d.contact[i] for i in range(d.ncon)))
     others = [k for k, b in enumerate(CAB)
               if abs(np.array(d.xpos[b])[0] - cx) < 0.022
-              and abs(np.array(d.xpos[b])[1] - cy) < GROOVE_W / 2.0
-              and abs(np.array(d.xpos[b])[2] - (TABLE_TOP + CLIP_RISER + 0.030)) < 0.006]
+              and abs(np.array(d.xpos[b])[1] - cy) < _spec.groove_width() / 2.0
+              and abs(np.array(d.xpos[b])[2] - GROOVE_Z) < 0.006]
     return legs, touch, p, others
 
 
@@ -1018,7 +1035,13 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     near_only = [c for c in well if np.abs(c[0] - ref).max() <= 1.2] or \
                 [c for c in well if np.abs(c[0] - ref).max() <= 2.2]
     pool = near_only or well
-    q, pe, re_, hit, roll, sv = min(pool, key=lambda c: 2.0 * c[4] + float(np.linalg.norm(c[0] - ref)))
+    # The singularity now RANKS, which is what the note beside SIGMA_FLOOR promised and never did.
+    # A candidate that has lost a direction pays for it; none is forbidden, so the solver cannot be
+    # starved the way the hard floor starved it.
+    def _cost(c):
+        _short = max(0.0, SIGMA_GOOD - c[5]) / SIGMA_GOOD      # 0 when well conditioned, ->1 at 0
+        return 2.0 * c[4] + float(np.linalg.norm(c[0] - ref)) + SIGMA_PENALTY * _short
+    q, pe, re_, hit, roll, sv = min(pool, key=_cost)
     if not quiet:
         print(f"[steps] start-pose IK {t}: {len(cands)} solved / {len(free)} collision-free / "
               f"{len(well)} away from a singularity, chosen pos {pe*1000:5.2f} mm "
@@ -1046,6 +1069,22 @@ for s_ in range(RAMP + int(START_HOLD_S / m.opt.timestep)):
         for k, i in enumerate(AIDX[t]):
             d.ctrl[i] = qc[k]
     mujoco.mj_step(m, d)
+# ⛔ Before anything moves: does every Tier A value the cell can measure agree with the cell?
+# CLAW_OFFSET is carried as +20.9 mm and this cell measures about -44 mm at the same quantity.
+# The driver has been PRINTING that disagreement ("the old constant said [0,0,+20.9]") since the
+# offset was first measured, and a print stopped nothing.  This raises.
+_measured_offsets = {t: float(seat_offset(t, np.array([d.qpos[a] for a in QADR[t]]))[2])
+                     for t in SIDES}
+print(f"[steps] measured pinch->mouth drop: " +
+      "  ".join(f"{t} {_measured_offsets[t]*1000:+.1f} mm" for t in SIDES))
+# ⛔ CLAW_OFFSET is NOT compared here, and the reason matters more than the check: it is
+# wrist->claw-tip minus wrist->pinch, while what this cell measures is pinch->mouth.  Comparing
+# them would fail on two different quantities that happen to be lengths -- the same mistake this
+# check exists to prevent, made by the check itself.  So the measurable set is empty today, and
+# saying so is better than filling it with a comparison that does not hold.
+print(f"[steps] Tier A cross-check: {len(_spec.cross_check_measurable({}))} measurable values "
+      f"(CLAW_OFFSET excluded -- the cell measures pinch->mouth, which is a different vector)")
+
 for t in SIDES:
     print(f"[steps] STEP1 {t} arm touching: {sorted(touching(t, d)) or 'clear'}")
 qt = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
@@ -1354,7 +1393,11 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
         for t, c in (("L", cl), ("R", cr)):
             if num == 2:
                 pass   # handled once, for both hands together, just below
-            elif num == 3:
+            elif num == 3 and not _os.environ.get("P4_NO_STANDOFF_REAIM"):
+                # ⚠ P4_NO_STANDOFF_REAIM: a measurement hook.  The single-shot probe -- aim once,
+                # drive there, close -- clamps BOTH hands in this cell at 21.7 mm.  The run, which
+                # differs by aiming again here at the standoff, jams the right hand at 30.4.  So
+                # the hook asks whether this re-aim is the difference.  Unset, nothing changes.
                 # p5 §4: re-aim ONCE here, at the standoff, BEFORE anything touches the cable --
                 # and only in y and z.  After this the descent is vertical and nothing is aimed
                 # again: chasing the cable once contact has started is what diverged.
@@ -1414,10 +1457,31 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # commanded joint is within SETTLE_TOL of where it was told to be, so the half-speed close Rs
     # asked for cannot be undone by the arm still drifting through it.
     gate_open = gate != "grasp"
+    touched_early = set()   # arms that hit the cable before the fingers were allowed to move
+    touched_any = set()     # and arms that touch it at all during this step
     opened_at = 0
     for s_ in range(steps):
         f = 0.5 - 0.5 * math.cos(math.pi * min(1.0, s_ / ramp))  # smooth start and stop
+        # ⛔ EVERY step, not only the grasp.  I first put this inside `if not gate_open:`, which
+        # is False for every step whose gate is not "grasp" -- so the check that exists to watch
+        # the DESCENT never ran on the descent, and its silence proved nothing.  Same defect as
+        # the ones it was built to catch.
+        for t2 in SIDES:
+            _hit = {g for g in touching(t2, d) if g.startswith("cab")}
+            if _hit and t2 not in touched_early and not gate_open:
+                touched_early.add(t2)
+                print(f"[steps] ⛔ STEP{num} {t2}: arm touched the cable BEFORE the fingers moved "
+                      f"-- {sorted(_hit)}")
+            elif _hit and t2 not in touched_any:
+                touched_any.add(t2)
+                print(f"[steps] STEP{num} {t2}: arm in contact with the cable at "
+                      f"t={s_*m.opt.timestep:.2f}s -- {sorted(_hit)}")
         if not gate_open:
+            # ⛔ The approach must not disturb what it is approaching.  In the first run of the
+            # rebuilt cell the cable moved 10-13 mm between being aimed at and being closed on,
+            # and one jaw then jammed on it two steps later -- the failure surfaced far from its
+            # cause.  Touching the cable with the arm before the fingers move is the cause, so it
+            # is reported HERE, at the step that does it.
             resid = max(float(np.abs(np.array([d.qpos[a] for a in QADR[t2]]) - w[t2]).max())
                         for t2 in SIDES)
             if s_ > ramp and resid < SETTLE_TOL:
@@ -1459,10 +1523,17 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 _p, _c = jaw_gaps(t)
                 claw_min[t] = min(claw_min[t], _c)
         if n % render_every == 0:
-            cam.azimuth = 108 + 14.0 * np.sin(n * 0.0007)
+            # ⛔ The wide camera used to swing +-14 degrees continuously here.  Rs, watching the
+            # video to judge whether a hand clamps: the left panel wobbles, and that gets in the
+            # way of judging.  It served no measurement purpose -- a moving viewpoint cannot make
+            # a grip easier to see, only harder -- and making the evidence judge-fit is the job of
+            # whoever produces it, which is me.  The camera is fixed now.
             renderer.update_scene(d, camera=cam)
             a_img = renderer.render()
-            cam2.lookat[:] = 0.5 * (pinch("L") + pinch("R"))
+            # The close panel follows the hands, which it has to in order to stay on them, but it
+            # is smoothed so it drifts instead of jittering between frames.
+            _want = 0.5 * (pinch("L") + pinch("R"))
+            cam2.lookat[:] = _want if n <= render_every else (0.85 * np.array(cam2.lookat) + 0.15 * _want)
             renderer.update_scene(d, camera=cam2)
             frames.append(np.hstack([a_img, renderer.render()]))
     # The same block for the first grasp AND for the re-grasp.  It used to fire only at the first:
@@ -1480,7 +1551,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
            f"grip={'L' if held('L') else '-'}{'R' if held('R') else '-'}")   # R6 conjunction
     print(f"[steps] STEP{num:2d} sigma_min L={sigma_min('L'):.4f} R={sigma_min('R'):.4f}"
           f"  column gap L={column_gap('L'):+7.1f} R={column_gap('R'):+7.1f} mm")
-    gc1 = np.array([C1[0], C1[1], TABLE_TOP + CLIP_RISER + 0.030])
+    gc1 = np.array([C1[0], C1[1], GROOVE_Z])
     _d1, _q1, _k1, _u1 = cable_perp(gc1)
     miss1 = (_q1 - gc1) * 1000.0
     carry = []

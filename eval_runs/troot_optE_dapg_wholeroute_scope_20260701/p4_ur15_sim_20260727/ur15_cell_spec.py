@@ -505,6 +505,14 @@ def claw_from_backplate(pad_gap_mm: float) -> float:
     return pad_gap_mm - offs[-1]
 
 SETTLE_S = 5.0                          # spec §6.4d -- was `range(2500)` at dt 0.002
+
+# How long a scratch PREDICTION settles.  Not the same question as SETTLE_S: that is what the run
+# waits before it lets the fingers move, and it stays.  This is how long the attitude search has to
+# simulate to find out where a jaw would land -- and measured (probe_prediction_settle.py) the
+# answer stops moving at 1.5 s: identical to the 5 s answer to four decimal places, with 1.0 s
+# already within a tenth of a micron.  The search runs this 130 times, so settling for 5 s was
+# costing eleven minutes an iteration and buying nothing.
+PREDICT_S = 1.5                         # measured, not chosen
 START_RAMP_S = 8.0                      # spec §6.4d -- was `RAMP = 4000`
 START_HOLD_S = 6.0                      # spec §6.4d -- was the `+ 3000` after it
 
@@ -513,6 +521,21 @@ FINGER_RAMP = 0.75                      # spec §6.4d -- "stepping the command s
                                         #   1.084 s (74.9 mm/s) -- half the speed, measured"
 SETTLE_TOL = 0.002                      # spec §6.4d -- rad; the arm must be this close to its
                                         #   command before the jaw is allowed to move
+# Pose selection and the singularity.  The floor below was set to 0.0 with a recorded reason --
+# "the 0.12 floor starved the solver ... ranking, not rejection, is the way to do this" -- and the
+# ranking was never written: the selector computes each candidate's smallest singular value, PRINTS
+# it, and then orders candidates by roll and joint travel only.  So a pose that has lost a
+# direction can win, and did: Rs saw the arm swing through a singularity two runs running, and the
+# grasp step runs at 0.0381, a third of the floor that used to apply.
+#
+# These two put it into the ranking instead of back into a filter, so a well-conditioned pose is
+# preferred without any pose being forbidden.
+SIGMA_GOOD = 0.12                       # the withdrawn floor, reused as the value to aim for
+SIGMA_PENALTY = 3.0                     # ⚠ MINE, not measured: chosen so that falling to half of
+                                        # SIGMA_GOOD costs about as much as a 1.5 rad joint move.
+                                        # Flagged for p5 -- the shape is the fix, the weight is a
+                                        # first setting to be measured against.
+
 SIGMA_FLOOR = 0.0                       # spec §6.4d -- "the 0.12 floor starved the solver: it
                                         #   picked poses the servos could not hold, so the arms
                                         #   never settled and the jaw stayed 80 mm open.  Ranking,
@@ -813,6 +836,15 @@ def guard(driver_path, strict=True):
             bad.append((name, line, "carries a number of its own and belongs to none of the three "
                                     "sets: add it to the p5 spec, or derive it from names that "
                                     "are already owned"))
+    # Retired names get checked for USE as well as for definition.  Checking only definitions is
+    # a check that cannot fail in the direction that matters: I removed CLIP_RISER's definition,
+    # verified nothing defined it, and left three places still reading it -- which is a NameError
+    # the moment that line runs, and the first run found it in its first minute of choreography.
+    used = {n.id: n.lineno for n in ast.walk(ast.parse(pathlib.Path(driver_path).read_text()))
+            if isinstance(n, ast.Name) and n.id in RETIRED}
+    for name, line in sorted(used.items()):
+        bad.append((name, line, "retired, and still READ here: the cell spec carries the clip "
+                                "geometry now, so this raises NameError when the line runs"))
     for line, attr, value, literal in template_literals(driver_path):
         bad.append((f'{attr}="{value}"', line,
                     f"{literal} is written into the XML this driver builds.  The templates are "
@@ -824,6 +856,33 @@ def guard(driver_path, strict=True):
         raise RuntimeError(f"{pathlib.Path(driver_path).name} does not satisfy the cell-constant "
                            f"contract:\n  {detail}")
     return bad
+
+
+def cross_check_measurable(measured: dict, tol_mm: float = 1.0):
+    """Every Tier A value the running cell can measure for itself, checked against it.
+
+    ⛔ This exists because of a failure of mine on 2026-07-27.  CLAW_OFFSET had been measured that
+    day as -44.4 / -39.8 mm and found wrong at +20.9; hours later I put +20.9 back into this module
+    because task_config carries it -- reasoning that a value with an authoritative source belongs
+    in Tier A.  Having a source and being right are different properties, and nothing here was
+    checking the second one.
+
+    So: pass in what the cell measures, keyed by the name it corresponds to, and a disagreement
+    raises.  A note in a log does not stop anything; this does.
+    """
+    owned = {"CLAW_OFFSET": CLAW_OFFSET}
+    bad = []
+    for name, meas_m in measured.items():
+        if name not in owned:
+            continue
+        diff_mm = abs(owned[name] - meas_m) * 1000.0
+        if diff_mm > tol_mm:
+            bad.append(f"{name}: this module carries {owned[name]*1000:+.2f} mm, the cell measures "
+                       f"{meas_m*1000:+.2f} mm -- {diff_mm:.2f} mm apart")
+    if bad:
+        raise RuntimeError("a Tier A value disagrees with what the cell measures:\n  "
+                           + "\n  ".join(bad))
+    return sorted(measured)
 
 
 def self_check():
