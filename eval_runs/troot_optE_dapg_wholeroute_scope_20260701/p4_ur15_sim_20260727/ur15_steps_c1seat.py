@@ -863,8 +863,14 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     pool = near_only or well
     q, pe, re_, hit, roll, sv = min(pool, key=lambda c: 2.0 * c[4] + float(np.linalg.norm(c[0] - ref)))
     if not quiet:
+        # Same wording defect the live driver carried, fixed here too (p18 -584): with the floor at
+        # zero these two counts are the SAME candidates, because sigma is never negative, so the
+        # second label announced a filter that had not run.  Left alone, any re-run of this script
+        # would mint a fresh artifact carrying the claim again -- the note beside the old log is
+        # attached to the record, not to the thing that produces records.
         print(f"[steps] start-pose IK {t}: {len(cands)} solved / {len(free)} collision-free / "
-              f"{len(well)} away from a singularity, chosen pos {pe*1000:5.2f} mm "
+              f"floor {SIGMA_FLOOR:.2f} removed {len(free) - len(well)} of them (it ranks, it does "
+              f"not exclude), chosen pos {pe*1000:5.2f} mm "
               f"roll {math.degrees(roll):4.1f} deg sigma_min {sv:.4f} |q|max={np.abs(q).max():.2f} rad")
     return q
 
