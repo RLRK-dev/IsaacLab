@@ -8468,7 +8468,9 @@ one word of p5's") — sha256 machine-match
 L 2.33 / aim R 1.45 / STEP3 R 4.89** ⇒ the left has TWO samples ⇒ correctly "**under-sampled** (2 per
 arm)", not unmeasured. **(b) ⛔⛔ And p5's core stands — owned by its own target**: p11 carried margin
 6.00−4.89 = 1.11 and true margin +0.04 as SINGLE numbers; re-drawn per arm: **L worst 2.33 → margin 3.67 →
-+2.60 mm** / **R worst 4.89 → margin 1.11 → +0.04 mm** ⇒ *"予算は「ほぼ尽きている」のでなく、右腕でほぼ
++2.60 mm** / **R worst 4.89 → margin 1.11 → +0.04 mm** 〔⚠ the same cross-axis subtraction — §286(b)'s
+projection correction reaches these margins too; the per-arm SPLIT survives as form, the arithmetic does
+not〕 ⇒ *"予算は「ほぼ尽きている」のでなく、右腕でほぼ
 尽きていて左腕には余裕が在ります"* — the AUTHOR of form #15 carried its own margin as one number: the
 THIRD instance of the two-sided-quantity-as-one shape (band width / compression / now margin), *"⚠ DUAL-ARM
 の project で 3 度."* **(c) ⭐ The consequence refined**: what decides is NOT a left measurement (the left
@@ -8487,7 +8489,10 @@ sha `28a9618b…` ✓, the -532 bank request complete; the STEP3 census spot-ver
 run; the seven-log census: **L = 2.31 mm (t9: 0.52) / R = 5.91-6.93 mm** ⇒ (i) "left unmeasured" falls a
 second, independent time; (ii) p5's feared direction INVERTS — the measured left is ~3.6 mm BETTER than the
 right; (iii) ⛔⛔ **the right EXCEEDS 4.89 in every banked log — 5.91 / 6.93 > the 4.93 threshold p11 named
-minutes earlier ⇒ the budget is ALREADY NEGATIVE on the right** — routed to p5's court. ⚠ Scope carried by
+minutes earlier ⇒ the budget is ALREADY NEGATIVE on the right** 〔⚠ projection corrected by §286(b): the
+subtraction put a 3D-NORM error against the containment-AXIS half-band — the "negative" conclusion does not
+survive; correct-projection state = across IN-band at GRASP-time (both arms), R3-time unprinted =
+undetermined〕 — routed to p5's court. ⚠ Scope carried by
 p4: all FAILED-run values; producing code recoverable only for t10; ⚠ hub note: the census's t10 leg rides
 the UNBANKED run_t10 log (the banked trace has no STEP3 lines — grep 0 here) ⇒ the finding stands on the
 six banked logs alone; the t10 leg is as-read until its log banks 〔⚠ WRONG — corrected by p4 -099 (§280):
@@ -8564,7 +8569,9 @@ arms; L 2.31×6 / 0.52×1; R 5.91×6 / 6.93×1). ⚠ A 0.02 source difference ke
 its author**: per-arm budgets L +2.62 (and +4.41 at 0.52) / R **−0.98 and −2.00** ⇒ the right exceeds 4.93
 in ALL SEVEN runs ⇒ *"予算は右で既に負。「+0.04 で事実上ゼロ」ではありませんでした"* — and the single
 4.89 was NEITHER arm's value (measured L 2.31 / R 5.91), its "worst-of-4" scope note itself UNDERSTATING
-the right (actual worst 6.93). **(c) ⭐⭐⭐ #14 applied to its own measurement**: ① all failed-run values
+the right (actual worst 6.93) 〔⚠ retracted by its author in §286(b): the subtraction itself was
+cross-axis (3D norm vs containment-axis band) — neither "negative" nor "safe"; undetermined in the correct
+projection until the R3-time across is printed〕. **(c) ⭐⭐⭐ #14 applied to its own measurement**: ① all failed-run values
 ② the 7 runs contain only TWO distinct values per arm ⇒ **seven runs are not seven samples** —
 under-sampling counts by DISTINCT CONFIGURATIONS, not runs; the claim stops at *"banked された全構成で超え
 ていた"*, never "右は必ず 5.91 を超える". **(d) The edit, disclosed to the line**: §11-2 rewritten per-arm
@@ -8631,3 +8638,69 @@ SAME run? **NO** — L 0.52 sits in t9 (`run_t9.txt:46`; its R = 5.91 at `:47`),
 2.31); both read verbatim at `823ddf963e` earlier this window (§248(b) / §278(a) verifications) ⇒ the
 "one arm improves while the other worsens" trade-off configuration has NO instance in the banked set.
 **(f)** The 0.02 non-harmonization now mutual — both sides keep it as a source difference, unforced.
+
+## 285. The aim converges and the target moves — provenance gains its second dimension
+
+From p11's -116 (13:45); §27.2.118 @ `8ab91fa65e` ("The aim converges and the target moves; provenance
+needs a time as well as conditions") — sha256 machine-match
+`738bc1fcaa0f14f5033402170aa39b4da6df0d0a4178a1f36d5f2c0eaba8c159` ✓. ⚠ One citation corrected here:
+"slot_after_close … (:429)" — `:429` is `grasped()` (at both d16c877ecd and 21e62e426a); the definition is
+**`:531`**, whose docstring verifies the substance VERBATIM (*"Run on a THROWAWAY MjData -- the live arms
+are never written to"*) — the claim survives at the correct address (p11's own resolvable-citation rule,
+applied back).
+
+**(a) ⛔ §27.2.117③ self-corrected**: "the right's 5.91 is chaseable via aim convergence" pointed at the
+SMALLER term — the aim CONVERGES (0.3 / 4.7 mm); **the TARGET moves** ⇒ better convergence cannot catch a
+moved target. ⚠ No cross-surface arithmetic: 5.91 (STEP3 seat-vs-cable 3D magnitude) and 12.7 (cable
+displacement since aim-time) are DIFFERENT measurement surfaces — only *"第 2 項は第 1 項と同等以上"*
+(p4's form) is said. **(b) ⭐⭐⭐ General form #16**: **provenance has TWO dimensions — CONDITIONS (under
+what premises computed; plugged by p5 §13-8 + §27.2.112) and CURRENCY (still valid at consumption time;
+opened here)** — aimed[t]'s inheritance and the aim-time cable position are two manifestations of one
+disease (one lacks conditions, the other lacks a timestamp) ⇒ cross-phase values carry BOTH *"どの条件で"*
+and *"いつの"*; either alone leaves the value uninspectable to the next phase. **(c) ⭐⭐ R3 acceptance
+amended (§27.2.95 supplement)**: evaluate acceptance against the **CLOSE-TIME cable position** — perfect
+convergence to an aim-time target means nothing if the target moved by close-time; slot_after_close is a
+throwaway-model PREDICTION (`:531`), not the achieved world (§27.2.69's measure-achievement-not-prediction
+shape); p4 already measures the needed quantity — the acceptance predicate goes on that decomposition.
+**(d) ⭐ The band re-read UPWARD**: the slot axis (the band's own axis) is IN-band for BOTH arms — the 3D
+magnitude exceeded the band mostly via the CLOSING component ⇒ §27.2.116's downgrade narrows to "the
+UPPER-BOUND METHOD cannot certify" (a 3D magnitude counts axis-irrelevant components), NOT "off the band's
+axis" — with the decomposition available, judge by COMPONENT. **(e) ⚠ Signs not read**: L −9.05 / R +14.29
+may reflect mirror closing-axis conventions ⇒ the two closing axes' world directions must be verified
+before reading drift — unverified, so unread (flagged to p4 as a verifiable item). **(f) ✅** p4's
+instrument-limit declaration supported: *"測定側が自分の計器の射程を先に宣言された形で、今日 court が求めて
+きた形そのものです."*
+
+## 286. The budget subtracted the wrong projection — the author retracts its own headline, and R3 gains a precondition
+
+From p5's -120 (13:47); pins verified: new clip working-tree sha
+`27507abed4464364fd330dad3572fc446f9aeaac8012a8de6de243fbbf8c2ee5` ✓ machine-match, numstat +48/−5 ✓ (the
+five deleted lines fully disclosed, including the *"予算は右で既に負"* line). Source checks: the cause
+sentence located here at **wired `:1503`** (*"rebuilt cell the cable moved 10-13 mm between being aimed at
+and being closed on"*) — p5's ":1481-1485" cite covers the `touched_early` DETECTOR (its comment verbatim
+at `:1482` *"arms that hit the cable before the fingers were allowed to move"*): sentence and detector both
+real at split addresses 〔the hour's second benign line-cite slip, same shape as §285's :429→:531 —
+substance verified, address corrected〕; t10 `:60` verbatim ✓ (*"STEP4 L: arm in contact with the cable at
+t=3.79s -- ['cab27']"*).
+
+**(a)** The three band fixes DONE (`:348` design-choice heading / `:354` source column / §13-6 dependency
+sentence — *"私は帯を経験量として扱っていました"*). **(b) ⛔⛔ THE DEEPER RETRACTION (§11-6 new)**: the
+budget's second term had the WRONG PROJECTION — a 3D-NORM placement error (5.91 / 6.93) was subtracted from
+the HALF-BAND, a containment-AXIS quantity; the t10 decomposition shows **across IN-band for both arms**
+(L +1.04 / R −0.74) with the excess in CLOSING, which is not the containment axis ⇒ *"「右で予算が負」は
+成立しません (誤った射影での計算)"* AND *"「だから安全」でもありません"* — the only correctly-projected
+measurement is GRASP-time across; the budget's time point is R3, whose across is UNPRINTED ⇒ verdict =
+**undetermined in the correct projection**. *"測った量に それが測っていない結論をぶら下げていたのは 私で
+す"* — the 07-26 form, self-applied. §277(b) / §278(a)(iii) / §281(b) tagged. ⚠ closing +14.29 NOT
+dismissed — irrelevant to containment, relevant to R6① (claw-tip gap): *"軸ごとに効く述語が違う."*
+**(c) ⭐ The one print needed**: STEP3's aim residual decomposed in the jaw axes (along / closing / across)
+— p4 already implements this decomposition at GRASP; emit it ONE STEP EARLIER; no run authorized
+(ride-along candidate #2, routed -543). **(d) ⭐⭐⭐ §13-9 NEW — R3's sufficient condition**: the arms
+arrive as predicted; the cable moves 10.8 / 12.7 mm between aim and close, and **the cause is already named
+in the driver** (`:1503`; the arm touches the cable before the fingers move — t10 `:60` shows it at
+t=3.79 s) ⇒ **R3 requires: the cable must not move between R3 and R5's close — currently BROKEN in the
+cell** ⇒ *"R3 の後で崩れる分は R3 では直りません."* Three consequences: ① R3 pass/fail is NOT judgeable
+alone — co-report the R3→R5 displacement ② the approach phase needs a GATE — `touched_early` detects but
+the table does not stop (the §13-8① shape again) ③ R3's measurement is taken immediately before the
+motion that consumes it (#16's CURRENCY dimension on the time axis). ⛔ Approach speed / path / posture
+design = p11's court. **(e)** Bank request #4 routed (-543).
