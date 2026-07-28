@@ -1278,12 +1278,23 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     # actually controlled: same state, same candidate set, the only difference being the filter.
     # Across runs it would not be, because four other things changed.
     _drop_sv = [c[5] for c in cands if c[7]]
+    # p11 -152, one field: is there any pose with room, or is this step's target the problem?
+    # ⚠ The literal maximum is NOT available and saying so is the point.  The decision loop
+    # searches a radius of twice the clearance, so a candidate with plenty of room comes back as
+    # None -- "further than 16 mm", not a distance.  Reporting a max over the ones that ARE inside
+    # that radius would be a maximum over the crowded candidates only, which is the opposite of
+    # what the question asks.  So the count of candidates that cleared the whole search radius is
+    # what goes out: many of them means poses with room exist, which is the one-sided refutation
+    # p11 wants, and it is stronger than a max because it does not depend on where they sit.
+    _roomy = sum(1 for c in cands if c[6] is None)
+    _inside = [c[6] for c in cands if c[6] is not None]
     # p5 -137 / p11 -138, prints (1) and (3): say how many candidates the clearance removed -- the
     # same instrument as the floor's "how many did it remove", for the same reason -- and what
     # clearance the pose that WON was predicted to have.  A rejection count of zero and a rejection
     # count of forty look identical from a pose alone.
     CLEARANCE_REPORT[t] = (_clear_dropped, len(cands), nfa, sv,
-                           max(_drop_sv) if _drop_sv else None)
+                           max(_drop_sv) if _drop_sv else None,
+                           _roomy, max(_inside) if _inside else None)
     if not quiet:
         # ⛔ This line used to report len(well) as "away from a singularity", beside len(free) as
         # "collision-free".  With the floor at zero those are the SAME candidates -- sigma is never
@@ -2231,14 +2242,21 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     _pred_txt = []
     for t in SIDES:
         if t in CLEARANCE_REPORT:
-            _dr, _kept, _nfa, _wsv, _dsv = CLEARANCE_REPORT[t]
+            _dr, _kept, _nfa, _wsv, _dsv, _rm, _mx = CLEARANCE_REPORT[t]
             if _nfa is None:
-                _pred_txt.append(f"{t}: no far arm in that solve, so no clearance was measured")
+                _pred_txt.append(
+                    f"{t}: the winning pose cleared the whole {ARM_DECIDE_CUTOFF*1000:.0f} mm "
+                    f"search radius; clearance removed {_dr} of {_dr + _kept} candidates, "
+                    f"{_rm} of them roomy, winner sigma {_wsv:.4f} vs best dropped "
+                    + (f"{_dsv:.4f}" if _dsv is not None else "none dropped"))
             else:
                 _pred_txt.append(
                     f"{t}: clearance removed {_dr} of {_dr + _kept} candidates, winner predicted "
                     f"{_nfa*1000:+7.1f} mm, winner sigma {_wsv:.4f} vs best dropped "
-                    + (f"{_dsv:.4f}" if _dsv is not None else "none dropped"))
+                    + (f"{_dsv:.4f}" if _dsv is not None else "none dropped")
+                    + f"; {_rm} candidates cleared the whole {ARM_DECIDE_CUTOFF*1000:.0f} mm "
+                      f"search radius"
+                    + (f", widest inside it {_mx*1000:+6.1f} mm" if _mx is not None else ""))
     _worst = min(arm_gap_min, arm_gap_path)
     print(f"[steps] STEP{num:2d} ARM-TO-ARM: "
           + (f"closest {_pairmin*1000:+7.1f} mm ({_pairwho})"
