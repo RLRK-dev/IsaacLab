@@ -522,6 +522,14 @@ def seat_point(t, dd=None):
     straight into the cable on the way down and knocked it 20-30 mm out of reach before the jaw
     closed.  The pinch is the midpoint of the two pad bodies, so it is on the centreline by
     construction; only the height has to come from the claws.
+
+    ⚠ The 21 mm above is the error of the REJECTED construction, in a paragraph written to explain
+    why it was rejected -- it is not a residual the aim carries.  The offset this function's own
+    output has from the mouth, measured with nothing in the jaws at every opening from clamped to
+    fully open, is 0.00 mm laterally on both arms (run_logs_20260728/mouth_offset.txt).  Two
+    measurements of different things, both true; read either without the other and the mechanism
+    looks like it has a built-in miss that it does not have.  Which one bears on a given question
+    is not settled here.
     """
     dd = dd if dd is not None else d
     p_w = pinch(t, dd)
