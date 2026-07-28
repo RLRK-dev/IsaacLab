@@ -559,28 +559,6 @@ SETTLE_TOL = 0.002                      # spec §6.4d -- rad; the arm must be th
 # menu.  The requirement is about the table.  Tying a limit to how finely someone happened to
 # sample attitudes is the same error as putting a bar on a quantity that has no units.
 #
-# The unified form, from p11.  Two separate things fix it, and they were being mixed:
-#
-#   why it exists  -- an allowance bigger than this puts the arm's lowest point through the table
-#                     at seat height.  ⚠ That tilt is derived from the claw-tip height H at the
-#                     lowest point of the descent; measured today it lands between 10.5 and 14.6
-#                     degrees depending on where the lowest point is taken.  If H drops -- a longer
-#                     claw, a lower seat, a different attitude -- the bound has to be derived
-#                     again.  It is not a property of this number.
-#   its hard cap   -- the allowance must stay BELOW the menu's smallest non-zero roll, 0.10 rad,
-#                     or a pose one menu entry away from vertical passes the check and the check
-#                     stops distinguishing anything.  So r_max < tau < 0.10 rad, where r_max is
-#                     the largest residual the solve actually achieves when commanded upright.
-#
-# ⛔ NOT RATIFIED.  p5 accepted 5.73; p11 then withdrew its own acceptance of the same number,
-# because 5.73 degrees IS 0.10 rad and therefore sits on the cap rather than under it.  p11's
-# candidate is 0.05 rad (2.86 degrees), conditional on r_max coming in below it.
-#
-# ⭐ Which is why the pass-time angle print matters more than the value: r_max is the thing that
-# decides between the branches, and nobody has measured it yet.  Left at 5.73 in the meantime --
-# the physical margin is about twofold, and no one has asked for it to change before the
-# measurement exists.
-VERTICAL_TOL_DEG = 5.73
 
 # How far out to look when measuring how close the two arms come.  mj_geomDistance stops looking
 # past its cutoff and returns the cutoff, so this only has to be larger than any separation worth
@@ -618,6 +596,68 @@ TABLE_Y = (REST_Y + CLIP_Y_EVEN) / 2    # the table is centred between the saddl
 GRASP_ATTITUDES = [(y, r) for r in (0.0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.55, 0.60, 0.65,
                                     0.70, 0.75, 0.85, 0.95)
                    for y in (0.0, 0.15, -0.15, 0.30, -0.30)]     # spec §6.4d
+
+# The ratified form is a RULE, not a number (p5 and p11, converged 2026-07-28).  Two separate
+# things fix it, and they were being mixed:
+#
+#   identifiability -- what makes the check a check.  It has to stay BELOW the smallest non-zero
+#                      roll the attitude menu offers, or a pose one menu entry away from vertical
+#                      passes and the check stops telling anything apart.  That bound is computed
+#                      from the menu below, never written down: a literal would go quiet the day
+#                      someone adds a finer entry.
+#   the table       -- why the limit exists at all.  An allowance past the tilt at which the arm's
+#                      lowest point reaches the table at seat height puts the claws through it.
+#                      ⚠ That tilt is derived from the claw-tip height H at the LOWEST point of
+#                      the descent; measured today it lands between 10.5 and 14.6 degrees
+#                      depending on where the lowest point is taken.  If H drops -- a longer claw,
+#                      a lower seat, a different attitude -- the bound has to be derived again.
+#                      It is not a property of this number.
+#
+# and the value between them: tau = (r_max + tau_max) / 2, where r_max is the largest tool-angle
+# residual the solve actually achieves when it is commanded upright.  If r_max ever reaches
+# tau_max the interval is empty and the formulation has to be rebuilt rather than retuned.
+#
+# ⚠ r_max IS NOT MEASURED YET.  The run prints it now -- that print is the input to this rule and
+# had to come first.  Until it exists the value stays at 5.73 degrees, which both ratifiers accept
+# as an interim on the grounds that the physical margin is about twofold.  ⛔ 5.73 degrees IS 0.10
+# rad, so it sits ON the identifiability cap rather than under it: it is a placeholder, and the
+# rule below is what it will be replaced by.
+
+
+def vertical_tau_max_deg():
+    """The identifiability cap: the menu's smallest non-zero roll, in degrees."""
+    rolls = [abs(r) for _y, r in GRASP_ATTITUDES if abs(r) > 0.0]
+    if not rolls:
+        raise RuntimeError("GRASP_ATTITUDES offers no non-zero roll, so there is nothing for the "
+                           "vertical check to be distinguishable from")
+    return math.degrees(min(rolls))
+
+
+def vertical_tol_deg(r_max_deg=None):
+    """tau = (r_max + tau_max) / 2, or the interim placeholder while r_max is unmeasured."""
+    cap = vertical_tau_max_deg()
+    if r_max_deg is None:
+        return VERTICAL_TOL_INTERIM_DEG
+    if r_max_deg >= cap:
+        raise RuntimeError(
+            f"the solve's worst upright residual is {r_max_deg:.2f} deg and the menu's cap is "
+            f"{cap:.2f} deg, so there is no allowance that both admits the poses this solver "
+            f"returns and excludes the next attitude.  That is a formulation to rebuild, not a "
+            f"number to retune (p11)")
+    return 0.5 * (r_max_deg + cap)
+
+
+# How close the two arms may come before a pose is rejected.  Rs, 2026-07-28, approving the
+# change: do not choose a pose that comes within a set distance of the other arm.
+#
+# One cable diameter.  ⚠ THE CHOICE OF SCALE IS A DESIGN CALL AND IS FLAGGED, not settled: what
+# is derived here is only that the clearance should be a real dimension of this cell rather than a
+# round number, and the cable is the smallest thing that has to be able to pass between two parts
+# of this machine.  If p11 or p5 name a different scale, this reads from that instead.
+ARM_CLEARANCE = 2.0 * CABLE_R
+
+VERTICAL_TOL_INTERIM_DEG = 5.73
+VERTICAL_TOL_DEG = vertical_tol_deg()
 
 # The thirteenth.  p5 settled the conflict between their own two rulings by keeping §6.4j and
 # withdrawing the refusal, and the reason is worth carrying: withholding a value does not leave

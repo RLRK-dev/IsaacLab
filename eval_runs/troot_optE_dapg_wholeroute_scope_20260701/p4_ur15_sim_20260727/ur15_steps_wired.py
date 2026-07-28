@@ -43,7 +43,7 @@ from ur15_cell_spec import (  # noqa: E402
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
-    ARM_PAIR_CUTOFF, PREDICT_S, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
+    ARM_CLEARANCE, ARM_PAIR_CUTOFF, PREDICT_S, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
     VERTICAL_TOL_DEG,
     START_HOLD_S, START_RAMP_S,
     TABLE_HZ, TABLE_Y,
@@ -633,8 +633,16 @@ def aim_slot_at(t, cable_w, prev_q, seed, pose_only=None, fix_x=None, pose_rd=No
     # 0.30 rad -- 17 degrees -- that vector can swing ~9 mm, nine times the containment band, and
     # that is the whole of the miss on the hand that failed: 13.5 mm off along the containment
     # axis while the hand that held was 0.4 mm off.
+    # Rs, 2026-07-28: do not choose a pose that comes within a set distance of the other arm.
+    # This solve is where the grasp poses come from, and it ran blind -- other=None, so the far arm
+    # was not in the scratch data at all and no clearance could have been measured even in
+    # principle.  The pose it returned is then inherited into a route step, past the route's own
+    # far-arm test, which is how a pose sitting on the other arm's forearm survived to be commanded.
+    # The far arm's CURRENT joints are what it is given: where that arm will be later is not known
+    # here, and pretending otherwise would trade a blind test for a confident wrong one.
     w = solve_ik(t, tgt, tries=44, iters=260, seed=seed, near=prev_q, warm=prev_q,
-                 other=None, quiet=True, re_max=0.02, wide=True, pose_only=pose_only,
+                 other=np.array([d.qpos[a] for a in QADR["R" if t == "L" else "L"]]),
+                 quiet=True, re_max=0.02, wide=True, pose_only=pose_only,
                  pose_rd=pose_rd)
     # A second solve with the offset re-measured at the solved pose was tried and dropped: it moves
     # the target far enough that the solver hands back an arm the servos cannot reach inside the
@@ -1112,7 +1120,24 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         mujoco.mj_forward(m, sc)
         if float(np.linalg.norm(tgt - pinch(t, sc))) > 0.002:
             continue
+        # Rs, 2026-07-28, approving the change this had been waiting for: do not choose a pose
+        # that comes within a set distance of the other arm.  Contact was the only test before,
+        # and "not touching" covers a millimetre as happily as a metre -- which is how a pose
+        # resting on the far arm's forearm kept being selected and reported as clear.
+        # ⚠ Only when the far arm is IN this scratch data.  With other=None there is nothing to
+        # measure against, and a clearance of "no other arm" would read as infinite -- so the
+        # near-miss test says so rather than passing silently.
         hit = bool(touching(t, sc))
+        near_far_arm = None
+        if other is not None:
+            _o = "R" if t == "L" else "L"
+            near_far_arm = 1e9
+            for _ga in ARMG[t]:
+                for _gb in ARMG[_o]:
+                    near_far_arm = min(near_far_arm, mujoco.mj_geomDistance(
+                        m, sc, _ga, _gb, ARM_PAIR_CUTOFF, None))
+            if near_far_arm < ARM_CLEARANCE:
+                hit = True
         # Manipulability of this candidate.  The solver had no notion of a singularity at all --
         # it ranked candidates by position error and by staying near the previous pose, so a
         # configuration that has lost a direction could win, and did: Rs saw two runs in a row
