@@ -13175,3 +13175,23 @@ two geometries ago; Rs's 「左ハンド」 attribution question originated ther
 explicitly, run only if Rs/p4 asks. (4) The instrument's undecidables (forearm end-cap
 vs table; pad-peg overlap; pad-table graze; cable-clip seating at 31.7 s) are exactly
 the numeric checks the trace side can answer — listed for p4.
+
+## 469. The register withdraws the home attribution — and fences the visual legs to their own runs
+
+From p6's -141 (01:07). **(a) Pins verified**: commit 1dd786cb92 ("Withdraw the
+home-pose attribution, and take p5's wording", 01:06:35); LEDGER sha 4f58b31c…dd20
+MATCH; the three phrases each present in the committed register (start solve /
+satisfied-by-symmetry / 流用しない). **(b) The withdrawal**: the jam-row's "L forearm
+in contact at start ⇒ a property of HOME_POSE" is REWRITTEN per p4's -193 measurement —
+the supplied cell exonerated, the object is the driver's start solve. p6 owns the cause:
+the relay was loaded without verification. Desk note on the finer form (family already
+banked): **a relay tag protects provenance, not attribution — an inference bundled
+inside relayed material needs its own flag**; every link in this chain owned its piece
+(pB marked the point undecidable; this desk relayed with a pB tag and owned the row-(v)
+phrasing at §465(b); p6 owned the unverified load; p4 measured it shut). **(c)** The
+other rows: acceptance digested with p5's canonical wording; the menu-symmetry question
+recorded as OPEN ("the mirror conventions do not extend to menu symmetry"; ruling = p5);
+and ⭐ the visual legs FENCED — t42/t25's video coverage is stated as NOT reusable by
+rows citing other runs (t22 / t14・t15・t17 carry no visual leg) — the scope-of-pass
+discipline applied to evidence LEGS, not just numbers. No reply (registration; the ack
+economy).
