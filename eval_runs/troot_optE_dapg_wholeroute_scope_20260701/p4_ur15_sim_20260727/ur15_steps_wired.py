@@ -43,7 +43,7 @@ from ur15_cell_spec import (  # noqa: E402
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
-    PREDICT_S, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
+    PREDICT_S, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY, VERTICAL_TOL_DEG,
     START_HOLD_S, START_RAMP_S,
     TABLE_HZ, TABLE_Y,
     Z_HOME, Z_RISE_REST, Z_RISE_ROUTE,
@@ -1628,9 +1628,16 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 # aim has no value for is the DIRECTION -- it holds x fixed and re-aims y and z, so
                 # it treats the cable as lying along world x.  If the cable has turned, that shows
                 # up here and nowhere else in this print.
+                # p11 -132(ii): the reader should not have to hold the world residuals in mind
+                # and do the arithmetic in the right order.  If the cable had rotated rigidly, the
+                # antisymmetric half of the two arms' residuals would be that rotation crossed
+                # with the half-separation, so the angle it implies is computable here -- and
+                # printed beside the angle actually measured, on the same line.  Same shape as the
+                # tautological filter's "how many did it remove": say the number that decides it.
                 _lk = CAB[_aim_link[t]]
                 _dir = np.array(d.xmat[_lk]).reshape(3, 3)[:, 0]
                 _turn = math.degrees(math.acos(min(1.0, abs(float(_dir[0])))))
+                _turn_by[t], _dir_by[t] = _turn, _dir
                 _neigh = []
                 for _o in (-1, 1):
                     _j = _aim_link[t] + _o
@@ -1642,6 +1649,16 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                       f"cab{_aim_link[t]} ACTUALLY runs [{_dir[0]:+.3f} {_dir[1]:+.3f} "
                       f"{_dir[2]:+.3f}] = {_turn:4.1f} deg off that axis "
                       f"(neighbours: {', '.join(_neigh) or 'none'} deg)")
+                _pred_w[t] = _w3
+                if len(_pred_w) == len(SIDES):
+                    _anti = 0.5 * (_pred_w["L"] - _pred_w["R"])
+                    _half = GRIP_HALF_SPAN * 1000.0
+                    print(f"[steps] STEP3: if the cable had rotated rigidly, these residuals "
+                          f"would need x-y {math.degrees(math.atan2(_anti[1], _half)):+5.2f} deg "
+                          f"and x-z {math.degrees(math.atan2(-_anti[2], _half)):+5.2f} deg; "
+                          f"the links measure {_turn_by['L']:4.1f} and {_turn_by['R']:4.1f} deg "
+                          f"off world x, with x-y components "
+                          f"{_dir_by['L'][1]:+.4f} and {_dir_by['R'][1]:+.4f}")
             elif num == 4:
                 # p5 §4: hold.  The clamp step is the fingers closing, not the arm moving.
                 aimed[t], tgt[t] = grasp_pose[t][0], grasp_pose[t][1]
@@ -1651,6 +1668,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # Aim the MOUTH at the groove, not the pinch.  Detect the seat steps by their commanded
     # height rather than by number, so C1 and C2 are covered by the same line.
     _seating = set()
+    _pred_w, _turn_by, _dir_by = {}, {}, {}
     for t in SIDES:
         if abs(float(tgt[t][2]) - Z_SEAT) < 1e-9 and not OLD_SEAT_AIM:
             _seating.add(t)
@@ -1718,6 +1736,32 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             w[t] = solve_ik(t, tgt[t], tries=44, iters=260, seed=num * 10 + (t == "R"),
                             near=prev[t], warm=prev[t], other=w["R" if t == "L" else "L"],
                             quiet=True, re_max=0.30, wide=True)
+    # p11 -132(i): the vertical requirement was enforced where the pose is SOLVED, and the
+    # inherited branch leaves before that point.  Today the two sets do not overlap, so nothing
+    # slipped through -- but that is a fact about which steps inherit, not a property of the
+    # check, and the day an aim is extended to a seat step it would go quiet without anything
+    # looking wrong.  So the requirement is checked where both branches have arrived, against the
+    # pose that will actually be commanded, and by measurement rather than by which code path ran.
+    # "Fingers straight down" is read as the pinch-to-mouth vector pointing along world -z: that
+    # is the thing the fingers do, and it can be measured on any pose however it was obtained.
+    for t in _seating:
+        _sv = mujoco.MjData(m)
+        _sv.qpos[:] = d.qpos
+        for _k3, _a3 in enumerate(QADR[t]):
+            _sv.qpos[_a3] = w[t][_k3]
+        mujoco.mj_forward(m, _sv)
+        _down = slot_centre(t, _sv) - pinch(t, _sv)
+        _down = _down / max(1e-12, float(np.linalg.norm(_down)))
+        _off = math.degrees(math.acos(min(1.0, max(-1.0, float(-_down[2])))))
+        print(f"[steps] STEP{num} {t}: fingers {_off:4.1f} deg off straight down "
+              f"(pinch->mouth [{_down[0]:+.3f} {_down[1]:+.3f} {_down[2]:+.3f}])")
+        if _off > VERTICAL_TOL_DEG:
+            raise RuntimeError(
+                f"STEP{num} {t}: the descent to a clip requires the fingers straight down, and "
+                f"this pose has them {_off:.1f} deg off it, past the {VERTICAL_TOL_DEG:.1f} deg "
+                f"this check allows.  Reported here rather than at the solve, because the pose "
+                f"can also arrive by inheritance, which does not pass through the solve."
+            )
     prev = w
     q_from = {t: qcmd[t].copy() for t in SIDES}
     g_from = {"L": float(d.ctrl[GIDX["L"]]), "R": float(d.ctrl[GIDX["R"]])}

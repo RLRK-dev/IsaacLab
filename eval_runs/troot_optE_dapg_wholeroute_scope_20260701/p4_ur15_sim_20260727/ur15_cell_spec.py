@@ -521,6 +521,14 @@ FINGER_RAMP = 0.75                      # spec §6.4d -- "stepping the command s
                                         #   1.084 s (74.9 mm/s) -- half the speed, measured"
 SETTLE_TOL = 0.002                      # spec §6.4d -- rad; the arm must be this close to its
                                         #   command before the jaw is allowed to move
+
+# How far off straight down a descending jaw may be before the run stops.  Rs, 2026-07-28:
+# descending to a clip, all the fingers have to point vertically down, so they do not hit the
+# table.  The number is not a new design quantity -- it is half of 0.2 rad, the smallest non-zero
+# roll the attitude menu offers, so the check separates "vertical" from "the next menu entry"
+# rather than from solver noise, which is what it is for.  ⚠ It decides whether a run raises, so
+# it is flagged to p5/p11 for ratification rather than treated as settled.
+VERTICAL_TOL_DEG = math.degrees(0.2) / 2.0
 # Pose selection and the singularity.  The floor below was set to 0.0 with a recorded reason --
 # "the 0.12 floor starved the solver ... ranking, not rejection, is the way to do this" -- and the
 # ranking was never written: the selector computes each candidate's smallest singular value, PRINTS
