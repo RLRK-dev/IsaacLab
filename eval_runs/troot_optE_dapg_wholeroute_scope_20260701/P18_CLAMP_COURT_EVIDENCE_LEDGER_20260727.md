@@ -8843,3 +8843,29 @@ annotate the docstring's 21 mm with "空荷では 0.00 (mouth_offset.txt)"** —
 σ caution; p11 decides neither measurement's primacy. Routed (-550). **(e)** The procedural note, recorded
 without praise: the hypothesis was posed falsifiable ("因果は主張しない・probe は支持も反証もできる形で来
 る") and closed in one minute at low cost — *"誤りが減ったわけではありません."*
+
+## 293. Content-anchored — after measuring the drift twice in four minutes
+
+From p5's -122 (14:04); pins verified: new clip working-tree sha
+`f3cb1ed7c354a61da89c411ed0be71514539de72d9b849fd6e821dbe2f7e8f4f` ✓ machine-match, numstat +44/−14 ✓ (the
+14 deletions fully disclosed, replaced in-section with content anchors); one moved anchor spot-verified
+(`gate_open` at `:1526` in the current tree ✓ — matching p5's 13:59 measurement).
+
+**(a) ⭐⭐ The drift measured TWICE**: the same anchors re-pulled by content at 13:55 and 13:59 moved a
+UNIFORM +41 lines in four minutes (1485→1526 / 1443→1484 / 1499→1540 / 1513→1554 / 1517→1558) —
+consistent with `b92b7b823a`'s ride-along landing ⇒ line-number re-pointing rejected as a remedy;
+**§13-10 NEW: driver references are CONTENT-primary (verbatim fragments), line numbers demoted to
+14:00-observed collation notes.** The discriminator is *"その file を今 誰かが編集しているか"* — not file
+type: banked logs stay line-numbered (immutable). Closed query: ZERO bare stale line numbers remain outside
+§13-10's intentional record. The worst property recorded verbatim: the stale range points at *"p5 §6:
+settling is a GATE, not a delay"* — plausible other content, unnoticeable (*"空を指せば気づけるのに"*).
+Self-owned: the artifact discipline (content-sha pins) had never been applied to in-doc code references.
+**(b)** The (i) firing recorded in §13-8: *"構造上の懸念"* → *"観測済の事象"* (using the hub-banked
+verbatim); the three-instrument convergence correctly declined as not p5's court. **(c) ⭐ #16 reflected —
+condition ④ added** with the two-faces reasoning: ①②③ answer only "how it was made"; a correctly-made
+value can still be STALE at consumption ⇒ §13-9 is exactly the ④-missing case; §13-9③ ("measure just
+before the consuming motion") is ④'s time-axis form — one requirement, two faces. **(d) ⭐ §4-Q2's HOLD
+RELEASED**, with the limit stated exactly: NOT "my design is confirmed" — *"落ちたのは反証候補 1 本であり、
+§13-9 の十分条件 (狙った後に動かないこと) は依然 破れたままです."* **(e)** Bank request #5 routed (-553);
+ride-along #2's landing will fill §11-6's one needed print, letting the budget rebuild in the correct
+projection — p5 waits, authorizes nothing.
