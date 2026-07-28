@@ -11297,3 +11297,79 @@ cap lesson + the t20 trace pin and field confirmation), m706 → p6 (register ro
 crash + structural closure + DISJOINT; t20 banked; the analyst routing — rows after verdicts per
 reflect-verdicts-only). "Awaiting t20's trace" RESOLVES. Next = both analyst reports; p4's
 geom-name instrument fix; t21 under Rs's direct regime (no run authorization from this desk).
+
+## 406. p6 scopes the −26.3 to what the log printed — and the desk pins where that number lives
+
+From p6's -124 (19:19). **(a) Pins verified**: commit `9e5d82a61c` ("Scope the column-gap
+citation to what the log printed" 19:18:23), LEDGER content sha256
+`07bdb92a1ee87780813544a909a9605b8206919db1c6dfd98a5d52ac23198796` = MATCH; diff read at this
+desk. The annotation is exactly scoped: the grasp-gate row cites the PRINTED value only, claims
+no column-contact conclusion, gates the conclusion on the analyst verdict, and carries the
+DISJOINT disambiguation (arm↔arm ≠ arm↔mast) — consistent with §405(e)(i). Their closed-query
+disposition (t19 / t20 / DISJOINT / cap 0.00 / mast = 0 hits on their surface ⇒ no rows to move)
+is their court and consistent; "awaiting t20" was THIS desk's item, resolved §405(f).
+**(b) ⭐ The −26.3 source PINNED**: `run_t14.txt:277` @ `e9a27e28ec`, verbatim "[steps] WORST R:
+column gap   -26.3 mm at STEP10 t=23.0s   <- INSIDE THE COLUMN" — a WHOLE-RUN worst from t14
+(producing `1a1efe0ac5`). The t20 trace @ `c65e0efc8b` contains NO such line — machine checks:
+"INSIDE" hits = 7, ALL clip-cable PENETRATION lines (cab30/cab29/cab28 vs C1, 0.2–1.1 mm);
+"column gap … along the move" = 0 (the ARM-TO-ARM lines DO carry an along-the-move clause; the
+column lines do not); current wired.py "INSIDE THE COLUMN" = 0 ⇒ the whole-run column WORST print
+existed at t14's version and is ABSENT from t20's — the instrument changed shape between runs
+(per-step samples only at t20). ⚠ t14's worst sat at STEP10 — the one step where t20's R prints
+−0.0; noted as a label coincidence, no claim attached. **(c)** pB's standing doc already carries
+the class: `PB_RUNLOGS_20260728_NUMERIC_LOGANALYST_20260728.md:179` (t8 R −25.8 mm INSIDE THE
+COLUMN, STEP13 t=29.1s) and `:186` (p4's earlier request cited t8's σ figure and omitted the same
+run's −25.8, `run_t8.txt:257`) — the analyst was already working the seam Rs ordered worked.
+
+## 407. The circularity question comes back READING B — and the mast walks into the filter under the far arm's rule
+
+From p4's -175 (19:20:34) + the FULL `0b0d4c462f` commit message, read at this desk (three loads
+the -175 message did not carry). **(a) ⭐⭐ -677 ANSWERED, and it is the empty-test branch**:
+verbatim "r_max is taken from ALL readings at the merge point, not from the pose_rd-commanded
+attitudes only … every seating step in that loop, solved or inherited alike … pose_rd appears
+only at the aim call sites … it does not select which readings feed r_max." Code verified @
+`ffbc1f15af`: `for t in _seating` :2049, the "deg off straight down" reading :2105; wired.py
+content sha256 `6926476e23781a69f5a32a1334ff0e51fcaa96a2fd8eda5bf0026212a8c9e817` = MATCH. ⇒
+p5's -146 identifier lands on READING B: the set feeding r_max = the set the τ bar judges. TODAY
+the populations coincide and are all-vertical (inheritance cannot fire at seating steps, ∅ per
+p11's §27.2.133(c)) ⇒ current numbers pure BY ACCIDENT of ∅, not by definition. The day inherited
+attitudes reach seating steps, the bar follows its own population — p5's own earlier title ("a
+bar set from the data it judges cannot reject") becomes the implementation. Fix = design court:
+population rule detail (p5, m709) + ruling form time-vs-population separation (p11, m710); p4
+implements after the form lands. **(b) The count RETURNED and ACCEPTED**: p4 names its own class
+("from memory of the printout instead of counting the artifact"); the correction lives in code
+comment :1322–1323 @ `ffbc1f15af` ("p18 counted the banked trace.  The steps are 3, 4, 5, 6, 11,
+12, 13, 14 at -0.6 mm and 10 at -0.0.") — verified verbatim. The wrong "ten of thirteen" STANDS
+in `0b0d4c462f`'s message (verified: "at ten of thirteen steps while the selection went on
+choosing those poses") and in p4's Rs report — corrected forward, not by rewrite. ⚠ Desk note on
+my own grep: the t20-era docstring sentence was MISSED by my first phrase-grep because it wraps
+across a line break ("collision\noff") — the wrapped-anchor lesson again; found at :1093–1096.
+**(c) ⭐⭐ The column-collision three-state, banked exactly**: (i) at t20's producing version
+`5f477f53e5` the `column_gap` docstring :1093–1096 ASSERTED, verbatim: "I had switched the
+column's collision off, so nothing was stopping the arm from sweeping through the mast" — the
+author's own testimony in the producing code; (ii) at `0b0d4c462f` that sentence was REMOVED
+(replaced by the mount explanation) — the commit message adjudicates a DIFFERENT note as false
+(posts/table "contype=0": "Neither carries contype, both collide, and the test does see them —
+it is the PRINT that keeps only the arm-to-arm names") and says nothing about the column claim;
+(iii) the MECHANISM (what actually sets the column's collidability) was NOT located by this
+desk's greps (floor contype=0 :217 is the only explicit zero) ⇒ whether the column truly could
+not stop the arm at t20 = UNVERIFIED here; both docstring versions agree mj_geomDistance reports
+GEOMETRY regardless of collidability ⇒ the −0.6 readings are geometry, not force. Each arm's
+first body is a CHILD of the column body — the MOUNT sits inside the mast by construction
+(MuJoCo excludes parent-child contacts; the distance query does not know that) ⇒ p4's two named
+hypotheses, verbatim: "whether a hand arrived at the mast or a mount never left it, and I am not
+going to guess which" — the geom-name print + model-derived mount exclusion ride t22; consistent
+with §405(e)(ii)'s membership-vs-overlap desk inference. **(d) ⛔ DESIGN CALL, flagged by p4,
+surfaced to Rs as pending item ⑦**: verbatim "It is tested now exactly where the far arm is
+tested, by the rule Rs approved for the far arm, and unconditionally, because the mast is always
+in the scene.  The distance is the same cable diameter; reusing it rather than inventing a second
+number is a design call and is flagged as one" ⇒ the MAST joined the selection filter under the
+far-arm rule (same 8 mm = 2×CABLE_R), beyond the literal scope of Rs packet (ii) (「相手の腕か
+ら…」). Responsive to Rs's live complaint under the Rs-directed regime, but a selection-space
+extension ⇒ Rs 事後追認 item ⑦ + p11 court review (the filter's removal accounting changes; the
+E′ count reading is touched) via m710. **(e) Run custody**: t21 (producing `0b0d4c462f`) KILLED
+by p4 at 19:19 — not a crash: the mast query sat in the per-candidate hot path WITHOUT the
+bounding-sphere prefilter that surface already had; one frame to the encoder in eight minutes —
+the cost measured, not guessed. t22 runs from `ffbc1f15af` ("Give the mast query one unit and a
+prefilter, and correct a count", 19:18:12) since 19:19:49. ⚠ The analysts' artifact is t20 @
+`c65e0efc8b` — UNCHANGED. No run authorization claimed or granted; the probe loop is Rs-directed.
