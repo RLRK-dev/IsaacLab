@@ -12694,7 +12694,10 @@ From p6's -136 (23:56; @ `4a7ddd6491` "Land the settled pair, and the reference 
 acceptance test", LEDGER sha MATCH ✓). **(a) ⭐ p6's own source check, banked**: the supplied
 reference's pair (0.22, 45°) is the very side the working cell's comment names as
 INTERLEAVING at the 88 mm span (ur15_cell_spec.py:350-351, desk-verified §442(a)) — while
-the working cell runs (0.40, 20°) ⇒ **p5's pre-declared escalation condition (the look ∧
+the working cell runs (0.40, 20°) [CORRECTED §454 2026-07-29: stale at bank time —
+YOKE_SPREAD=0.22 landed at 6572a1ad50 (23:48:15, 8 min BEFORE this bank); 0.40 survives
+only as _YOKE_SPREAD_SUPERSEDED (:364 @ 576cb8f029); t42 RAN on (0.22, 45°). Caught by
+p4 -189] ⇒ **p5's pre-declared escalation condition (the look ∧
 88 mm non-crossing) is now LIVE MATERIAL, not a hypothesis**. p6 expressly judges neither
 the solution's existence nor adoption (judgment = p5; escalation target = Rs). Desk note on
 the standing reconciliation: p5's -159(c) mirroredness argument (the note measured
@@ -12704,7 +12707,80 @@ decide; both sides now sit in the register without adjudication. **(b)** The two
 withdrawals rowed (p4's eyeball 0.106; p5's crown-only §20-4); #38 takes the two-surface
 reaffirmation, the four effective conventions, and ⭐ the ACCEPTANCE TEST as a closure
 condition (47 L/R pairs, the one-line check, "preserved-I-think" eliminated); the two opens
-recorded without judgment (the stereo head — needed before the clamp re-run; the
+recorded without judgment (the stereo head — needed before the clamp re-run [RESOLVED
+§453 2026-07-29: Rs 「予定だが今は保留」⇒ not added now; custody = p4 handoff @
+d9f772190f]; the
 R-formula-as-solver = control method, Rs approval domain); the package shas correctly
 attributed as THIS desk's measurements (p6 has not fetched the package). No reply sent
 (registration; the ack economy).
+
+## 453. p4 resumes under a coordination directive — and the video court turns out to be a mislabeled door
+
+From p4's -188 (00:09, 07-29) + this desk's measurements (00:12-00:17 JST). **(a) Pins
+verified**: the handoff @ d9f772190f ("Bank the p4 handoff for the supplied-cell session",
+00:04:38 ✓, 35 lines desk-read); t42 alive at my 00:12:18 read (PID 3029690, etime 20:21,
+env_isaaclab7 ✓, log 155 lines mid-STEP 7 — independent of p4's 00:08:54 numbers); the
+mirrored-build load line verbatim at the working tree's :126 ("ur15_base.xml" if L else
+"ur15_base_mirrored.xml") ✓. Rs 00:07 to p4, verbatim (p4 custody, visible in p4's pane
+buffer at my peek): 「T-ROOT-OPS-SUPERVISORと連携してすすめて」. **(b) Two state changes
+from the handoff**: (1) ⭐ THE STEREO HEAD IS DECIDED — Rs verbatim 「予定だが今は保留」 ⇒
+not added now, addition remains planned; custody = the handoff itself; §452(b) tagged
+RESOLVED; the pending-decision list drops it. (2) ⚠ The acceptance test reported 10/10
+PASS (L banked values → mirrored arm → exact mirror landing, x-sum 1e-16) — a real
+measurement whose DENOMINATOR is not stated against p5's 47-pair definition (§451(c));
+the scope line (which 10; is 10 the full testable population?) routed to p4; #38's closure
+row waits on it. Also received: the mirror artifacts named (ur15_mj_mirrored.urdf /
+ur15_base_mirrored.xml / ur15_mirror_meshes/, sim-only scope), crown COLG-registered
+(DDR #54② evidence expected in the run package), colors L orange / R purple, the
+one-run-at-a-time practice, p4's own discipline notes. **(c) ⭐⭐ The mislabeled door**:
+asked to remind pC (ask (b)), this desk peeked the pane FIRST — w2:pC (label
+VIDEO-ANALYST, nest_role_labels.txt:25) is occupied by p4's PREVIOUS session (agent
+session b952db35… = the very scratchpad p4 cites for run_t42.log; the buffer shows driver
+edits + the 20:52:41 Rs report; idle at "new task?"). The pane list shows NO live
+video-analyst anywhere ⇒ this desk's t20/t25 video requests, "delivered to pC," were
+delivered INTO P4-OLD'S QUEUE and died with its session — the video court has been
+unstaffed all window. This is the video-side mechanism behind Rs's twice-made "analysts
+unused" observation. General form banked: **a pane label is not the occupant — deliver to
+the ROLE by verifying who is behind the door (peek before the first send of a session);
+a delivery confirmation proves ingestion at the pane, not arrival at the role.**
+Disposition: the video leg switches to the project's own independent instrument (the
+video-analyst subagent, Code-A/B/C-independent per its charter) for t42 and t25,
+disclosed to p4 and Rs; restaffing the pane is Rs's call. **(d) The per-run gate format
+returned** (ask (a)): ONE package message per run to p18 — run id / producing commit +
+worktree-vs-commit statement / artifact paths + full sha256 (trace, video) / claim-free;
+this desk fans out pB (numerics, the sender's readings passed as claims-to-break) and the
+video leg (BLIND — numeric anchors and outcome language stripped, the strip disclosed);
+verdict only after both readings bank; out-of-order verdicts RETURN (p4's own standing
+rule). m771's possible loss to the restart noted to p4 (content = §450-452 + one flag:
+R-formula-as-solver = Rs approval domain — p4's normal-solve implementation is
+unaffected).
+
+## 454. t42 ends inside the gate it was built to hit — and the register's "will run" was already "ran"
+
+From p4's -189 (00:16). **(a) Pins verified at this desk (00:17:30 JST)**: trace sha
+178479bf83…c6cf MATCH and mp4 1583297c4c…531c MATCH (machine-compared; the FIRST trace
+compare tripped on this desk's own retyped constant — §405(b)'s class, 4th incident,
+caught in-turn by a paste-once redo); producing commit 576cb8f029 ("Start from the cell's
+home pose", 23:51:27 = 30 s before t42's 23:51:57 start) and worktree==commit for
+driver+spec re-measured EMPTY-DIFF at 00:17:30; the four -189 trace cites all found
+verbatim (STALLED ×5 = STEPs 2-6; INSIDE THE MAST ×5; :49 seat error 117.96 "nothing
+seated it; best effort"; the stop = RuntimeError STEP7 R "41.5 deg off … past the 5.7
+deg", driver :2284, traceback = trace tail). The t25 video re-measured now:
+95d4544dc972d2070077ccb789d98bed601becd421cd67a1b51ff6ede10c3181 (prefix matches the
+banked note; this row is the first FULL record at this desk). Runs alive after exit: 0 ✓.
+**(b) ⭐⭐ The correction VERIFIED and tagged at §452(a)**: YOKE_SPREAD=0.22 landed at
+6572a1ad50 (23:48:15) — EIGHT MINUTES before §452 was banked — and 0.40 survives only as
+_YOKE_SPREAD_SUPERSEDED (:364; TILT :365 = 45°) ⇒ the register's "working cell runs
+(0.40, 20°)" was stale at write time, and **t42 RAN on the supplied pair (0.22, 45°) with
+the mirrored right arm** — the escalation condition is not "live material for a future
+run"; the run has happened on that side. Neither p6 nor this desk re-measured the source
+at bank time. General form: **a register row about "what runs now" carries a timestamped
+source read, not a carried-forward clause** — the same records-must-match-fact leg as
+unqualified RUNNING. Routed: p5 (judge — with the note that t42's arm-to-arm prints are
+route-run evidence, NOT the 2-D workspace test the design named), p6 (their -136 row,
+their court). **(c) The gate LAUNCHED**: pB gets the package + p4's (i)-(iv) as
+claims-to-break, including p4's own ⚠ that (ii)(iii) may be settle-contaminated if (i)
+holds (DDR #49's shape) and that the stop surface is DDR #53's shape; the video leg runs
+BLIND on t42_live + t25_live via the subagent instrument (§453(c)); p4 holds verdicts
+until both bank. ⛔ This desk states no verdict; the trace lines quoted here are existence
+checks, not readings.
