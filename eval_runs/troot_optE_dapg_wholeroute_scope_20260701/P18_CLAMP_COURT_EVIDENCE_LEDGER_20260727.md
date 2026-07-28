@@ -11155,3 +11155,16 @@ court. The self-applied rule attached (falsifying reading = max near bar; instru
 already computed for all candidates — take max where min is taken). **(d)** Ruling updated: E dead
 / E′ to be killed at tier 1 / D with the derived rate if killed / tier 2 if not / A worse under
 non-uniformity / B last resort. Routed: the tier-1 field to p4 (-698).
+
+## 399. Tier one lands as a count, not a max — the field's own cutoff would have inverted it
+
+From p4's -167 (17:5x); pin ✓ (`6dff67c8bf` driver sha `8249541e7b…`). **(a) ⚠ The requested MAX
+cannot be printed honestly**: the cutoff split (p11's own -146② design) makes the judgment loop
+search only 16 mm ⇒ candidates with room return None (no distance) ⇒ a max over in-radius candidates
+= **the max among the CROWDED ones — the question inverted**. The implementer caught the interaction
+between two of the requester's designs (the field and the cutoff) before it shipped. **(b) ⭐** The
+substitute, STRONGER: **the COUNT of candidates entirely beyond the 16 mm radius** — many ⇒ clear
+poses EXIST ⇒ the one-sided E′ refutation, independent of where they sit; the in-radius max attached
+for all-crowded stages; one-sidedness preserved as specified. **(c)** If tier 2 is ever chosen: widen
+the cutoff temporarily at measurement time only (offered, awaiting instruction). t19 running (aim L
+done); this rides t20.
