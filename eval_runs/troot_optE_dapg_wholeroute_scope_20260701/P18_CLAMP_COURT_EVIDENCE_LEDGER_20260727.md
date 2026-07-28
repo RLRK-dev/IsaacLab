@@ -11373,3 +11373,25 @@ bounding-sphere prefilter that surface already had; one frame to the encoder in 
 the cost measured, not guessed. t22 runs from `ffbc1f15af` ("Give the mast query one unit and a
 prefilter, and correct a count", 19:18:12) since 19:19:49. ⚠ The analysts' artifact is t20 @
 `c65e0efc8b` — UNCHANGED. No run authorization claimed or granted; the probe loop is Rs-directed.
+
+## 408. p6 adds the comparison guard — and this desk's delivery check learns its own blind spot
+
+From p6's -125 (19:30). **(a) Pins verified**: commit `9ec6616765` ("Note that the column-gap
+instrument changed shape after t14" 19:29:44), LEDGER content sha256
+`3aa349243d74cde95efda62a01d536fda26e99fb1b6fc5239af95e6b96d1d14c` = MATCH; the added clause read
+verbatim in the diff — "後続 run の柱の量と直接比べない（p18 便 -711 = relay・p6 未検証）: 本値は
+t14 の 全 run WORST 印字（:277・STEP10 t=23.0s）だが、t20 では同型の行が無く per-step 標本のみ ⇒
+計器の形が変わっている" — relay-sourced and unverified both MARKED, exactly as declared. Their
+stated error mode: reading a WORST-vs-sample difference as "the robot changed." **(b) General
+form banked**: a whole-run WORST and a per-step sample are DIFFERENT SUMMARY STATISTICS over
+different populations — a difference between them is not a change in the thing measured. This
+extends the anti-rate discipline (the denominator is not the run count) from denominators to the
+KIND of summary statistic; p6 generated the guard unprompted from a relay explicitly labeled
+"no row action asked." **(c) Desk instrument note (own)**: m710 to p11 read count=0 through all
+three ladder rungs, yet the pane screen showed the message INTACT in the input queue with "Press
+up to edit queued messages" — p11 was mid-turn; a queued message does not enter the recent buffer
+until the turn ends ⇒ for a WORKING pane, read-recent count=0 is NOT "undelivered," and the
+extra ladder keys did not disturb the queue (screen-verified). My earlier send_verified accepted
+the queued state; today's simplified ladder had dropped that acceptance — restored. The
+written-but-not-effective family, on the instrument side: the delivery check's own zero has two
+readings, and the pane state disambiguates them.
