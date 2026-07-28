@@ -2219,9 +2219,12 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # cannot say how close cannot say it is getting worse.  So: the smallest signed distance
     # between any geom of one arm and any geom of the other, and the pair it belongs to.
     _pairmin, _pairwho = arm_pair_min(d, want_who=True)
+    # ⛔ There were TWO of these, and the second had no guard.  I added the guarded form and left
+    # the original sitting under it, so the run crashed on the first step where nothing was within
+    # the search radius -- the exact case the guard was written for.  A guard placed BESIDE the
+    # thing it guards is not a guard; it has to replace it.
     if _pairmin is not None:
         arm_gap_min = min(arm_gap_min, _pairmin)
-    arm_gap_min = min(arm_gap_min, _pairmin)
     # (4) the realised clearance, beside (3) the predicted one: their difference IS the following
     # error the constant is currently missing, so printing them apart would leave it to be
     # reconstructed.  (2) rides along, because a pair that only meets mid-move is invisible here.
