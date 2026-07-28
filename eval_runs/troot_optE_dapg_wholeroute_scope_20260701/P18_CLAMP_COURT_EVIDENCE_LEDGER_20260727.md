@@ -7963,7 +7963,10 @@ in-code *"Flagged for p5"* (`:536`) is TOO BROAD — requested correction: class
 on the same row as sibling SIGMA_FLOOR (routed to p4; comment-level, behavior unchanged). **(b) A live defect
 in p5's own court**: guard contract `:135` (literal-bearing module bindings must be OWNED/RETIRED/TIER-C) —
 closed query over the spec: 2 sigma hits, both SIGMA_FLOOR ⇒ **SIGMA_GOOD/SIGMA_PENALTY unclassified = the
-guard FAILS under the current contract**; p5 will classify, will not set values. Honest limits recorded: the
+guard FAILS under the current contract** 〔⚠ self-corrected by p5 -115 (§268(a)): the driver IMPORTS the
+names (ImportFrom `:46`, zero module-level rebinding) = SOURCED = ownership satisfied — the guard does NOT
+fail; classification fixes a would-be misdiagnosis, not a failure. p5 owned the form: concluded without
+reading its own contract's domain (`:111`)〕; p5 will classify, will not set values. Honest limits recorded: the
 function-local `2.0` (and implicit `1.0`) escape a module-binding contract, and the flag is inconsistent with
 its own formula (three weights, one flagged) — p5's answer: none of the three is p5's; p5's scope = whether
 the resulting posture is runnable per the step table.
@@ -8226,3 +8229,93 @@ block alone; rotation separate as a dimensionless condition number; 0.12 stackin
 p5 doc bank landed) — zero matching LEDGER rows; judged lane-internal: **the register keeps planning rows,
 not a news feed.** **(d)** Sequencing note: -103 preceded my -109 relay — the #49/#50 "deadline-only, not
 content" separation reaches p6 in -522; row annotation = p6's judgment.
+
+## 266. The path trace lands: two regimes, and the dip the steps hid
+
+From p4's -095 (13:1x); pins verified: `00d7b16201` ("Trace the singularity along the path, and find the dip
+the steps hid"), artifact `8b95fb7c…` ✓ machine-match, raw `sigma_trace_t10.txt` `c6e03482…` ✓, producing
+code = `1ad8abce40` (banked BEFORE launch — §262(c)'s rule kept). Key numbers spot-verified in the banked
+artifact (`:17-18`, `:20`, `:27-28`, `:31`, `:35-36`).
+
+**(a) ⭐⭐ Regime FIRST (per §264(c)) — and the answer splits by arm**: **L: 100% of the path (4728/4728)
+below 0.12** (min 0.0381 / median 0.0805 / max **0.1123**) ⇒ a 0.12 bar rejects L's ENTIRE trajectory; **R:
+0.2% below** (10/4728; min **0.0037** / median 0.2007 / max 0.2871) ⇒ ⛔ no independent two-constant
+reporting, and the regime determination itself is PER-ARM — *"1 つの bar で両方は語れません."*
+**(b) ⭐⭐⭐ The hidden dip — §252(c)(i) now has its empirical leg**: R's worst **0.0037 at STEP13
+t=28.73 s** (re-grasp) while the SAME step's median is **0.2171** ⇒ never visible in per-step records (every
+previously reported R value was 0.19-0.29); L is no dip — **chronically low** (STEP3/4/5 min AND median
+0.038-0.047). The waypoint-vs-path separation is measured, not only argued. **(c)** Discipline carried:
+correlation only (no cause claim); no bar value proposed — ⛔ this trace is NOT the §27.2.110 quantity (the
+next trace adds the translation block; measurement-only; bank-before-launch); ⚠ t10 is a FAILED run (cable
+> 1 m at STEP15) ⇒ not a healthy-path distribution; the #50-is-not-#49 rule acknowledged.
+
+## 267. B disposed: the safe path is bypassed by inheritance — and the packet frame completes
+
+From p11's -110 (13:09); §27.2.112 @ `4491841249` ("Dispose B: the target is the grasp aim, and the safe
+path is bypassed by inheritance") — sha256 machine-match
+`13be3065f253871775c73f003373d3d1c9f7e2766c43e446424150f0ba8995b3` ✓. Source verified here at `1ad8abce40`:
+`:947-951` `if other is not None:` poses the partner INTO the scratch model before `touching(t, sc)` ⇒
+passing `other` means the collision judgment runs on a world where the partner exists ✓; `:321` the
+touching() scope docstring ✓.
+
+**(a) ✅ The re-target ADOPTED** (p4's -094 reading ratified): blind = the grasp aim path; the route step
+checks the partner. **(b) ⭐⭐⭐ And the route's safety is BYPASSED BY INHERITANCE** (`:1439-1441`): `if t
+in aimed:` reuses the aim solution — solve_ik never runs, the `other=` line is never reached ⇒ **"the
+mechanism exists and is not applied to those postures"** ⇒ #49's basis sharpens: an unchecked BRANCH, not an
+unchecked structure. **(c) ⭐⭐⭐ The class split — inspection vs selection-change**: **(i) report-only**
+(pose the inherited posture + partner in scratch, run touching(), PRINT) = ✅ NOT a control-method change ⇒
+no Rs approval needed — and it answers exactly what aim_both could not (is the FAILED phase touching?);
+**(ii) acting on it** (reject / re-solve / fallback) = the posture selection changes = ⛔ Rs-approval class.
+**The packet presents the two SEPARATELY, (i) first** — Rs receives "we inspected; here is the result", not
+"approve a change on unchecked structure" (the §27.2.92 shape: printing kills the silence). **(d) ⚠ (i)'s
+scope guarded**: touching() is contact-based (`:321`) — sees the partner arm; ⛔ NOT the contype=0 posts /
+table (§27.2.64) ⇒ an arm-arm inspection, not general clearance — "not touching" ≠ "clear of everything".
+**(e)** Non-judgments kept: (ii) adoption = Rs / implementation = p4 / whether (i) rides a run = p18.
+**Hub disposition on that last**: (i) is measurement-only (print), the run cadence is already Rs-directed
+(§248(d)), bank-before-launch + git-show reporting bind ⇒ **(i) may ride p4's next measurement run** — no
+new run authorization created. **(f) ✅ THE PACKET FRAME IS COMPLETE**: basis = unchecked branch
+(inheritance, not structure) / the negative lowers urgency (aim_both silent on the failed phase) / #50 =
+deadline-only linkage / target = grasp aim path + inheritance path / action = two stages ((i) no-approval
+inspection FIRST, (ii) the Rs decision).
+
+## 268. p5 lands three, corrects two of its own — and my §256(b) goes stale with it
+
+From p5's -115 (13:10); the bank self-verified by p5 FIRST (28826852a8 sha match + porcelain 0 — no relay
+trusted). Working-tree pins verified here: clip `a7aa1ecc…` ✓ machine-match, spec `f76d06a3…` ✓, numstat
++50/−0 and +22/−0 ✓; `wired:1492` `gf = 0.0 if not gate_open …` ✓ (the jaw's fail-closed).
+
+**(a) ⛔⛔ -113(3) self-corrected — the guard does NOT fail**: the driver takes the three names by
+ImportFrom (`:46`) with zero module-level rebinding (closed query) = SOURCED = ownership SATISFIED under
+their §6.4b ⇒ what remains is DIAGNOSIS, not catch (§6.4a would misname a rebinding "newly invented
+constant" instead of "overwrote a spec value") ⇒ classification exists to fix the misdiagnosis. p5 owns the
+form: *"述語の域を測らずに述語の結果を主張する"* — its own contract's domain (`:111`) unread. §256(b)
+tagged. **(b) The three deliverables (0-commit; bank via p4 requested)**: **§6.4n** — DDR #50
+classification: OWNED (Tier B), name-only, value = measurement lane; p11's ③⑤ woven in (*"2 つの名前が 1
+つの実効量を符号化する状態は、本 module が防ぐために在る「同じ量に 2 つの出所」と同じ形"*; translation-
+block successor ⇒ SIGMA_GOOD re-measured); p6's re-pin positions independently recomputed by p5 ✓.
+**§13-8** — the (c) branch, with -114's claim corrected FIRST: the branch EXISTS at the jaw (`:1492`
+fail-closed) and is ABSENT at the table level (the step ends; the table advances) — *"効いている機構を
+「無い」と言うと 次の人が作り直します"*; twice recorded in code (wired `:606-607`; cell_spec `:542-545`).
+Three structural rulings (numbers = p11): ① make the TABLE fail-closed too ② widen the gate from "before
+the jaw moves" to **"before READING numbers"** (needing: R3 measure / R5 close / R6 verdict; not: R1 open /
+R2 move) ③ record settle-status by name at step end (#14's mechanical form). Not decided: tolerances /
+waits / servo (`:622` = p11), retry (control action), cause. **§15** — the #14 table (number-family ×
+configuration × not-covered), and writing it EXPOSED p5's own unverified: the 0.2 mm smoke-vs-sweep
+difference attributed to "posture definition" with ZERO same-posture old/new comparison ⇒ un-discriminated
+⇒ joins ■2; every sweep-derived number flagged gripper-only / no-cable / single-posture / **OLD stack**
+(19:12 < upgrade 20:05). **(c)** §264's ④⑥② acknowledged back.
+
+## 269. p6 annotates the separation — and corrects a relay it had trusted
+
+From p6's -104 (13:10); commit `30c46320c2` ("Separate 50 from 49, and count the blind call sites") —
+LEDGER sha256 machine-match `3e47b66fa1569df3770a8319631d1ad32fe4fb0fbe0fe6c56300559beb3f2ba7` ✓.
+
+**(a) ⭐** The #49/#50 separation annotated on BOTH rows with p11 verbatim (*"行が誤読を作る側なので入れ
+る"*) + the three measurement conditions + the route-② qualification + "gates by deadline only" in the
+GATES/FOUNDATIONAL columns. **(b) ⛔ Self-correction**: #49 had carried "solve_ik(other=None) は両経路" —
+p6's OWN unverified relay; source-counted THREE call sites: blind = the aim path only (`:601-603`); the
+START pose (`:1055-1056`) AND the step loop (`:1442-1444`) pass the partner — conditional on the
+`:1439-1441` inheritance ("the step sees the partner" holds only when solve_ik actually runs); as-read
+13:1x (driver dirty again — p4's next-trace edits presumed in flight; bank-before-launch binds). The B
+re-target row-motion was still HELD for p11's ruling — only the fact side fixed 〔p11's -110 crossed it in
+flight; resolved in -526〕.
