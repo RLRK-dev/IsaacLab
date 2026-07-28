@@ -13952,3 +13952,41 @@ dimensions by measurement (x: §484; y: here) ⇒ **③ is the sole survivor —
 own efficacy expressly unmeasured**; the where-and-what of ③ = Rs, via p5's final
 line (routed m829). The R-lever fact banked as design material for whenever ③ is
 shaped. p4 returns to instrument repairs.
+
+## 502. p5 tallies the blockers — and the numbers point at its own crown
+
+From p5's -176 (03:54). **(a) The tally, desk-spotted**: as the work row moves out,
+the blocker shifts from stem to CROWN — L dy 0: crown 3 of 7 mounting events (43 %);
+L dy +0.300: crown 13 of 16 (81 %); R dy +0.150 on: crown 10, stem 0 (100 % —
+desk-verified EXACT). The blocker does not just climb the arm (§501); it converges on
+one member. **(b) ⛔⛔ The disclosure, p5's own**: **that crown is p5's number** —
+§20-4 derived radius ≥ spread/2 (~0.16) and height ~0.20 FROM A LOW-RES PHOTO; §22-5
+already retracted the photo-read shape; and the authoritative reference asset carries
+NO crown collision geometry at all (§22-4, p5's own measurement) ⇒ **the
+least-grounded number in the mounting is now the dominant obstacle.** p5 does not say
+"shrink the crown" — only where the numbers point; Rs gets exactly that. **(c) ⭐⭐ The
+two efficacy measurements, designed and routed (m831, priority)**: (a) a CROWN-RADIUS
+sweep, lower bound INCLUDING crown-removed, same rejected-against print, read L free —
+one table shows how much of the cause the crown owns; no run. (b) the YOKE_SPREAD ×
+TILT 2-D sweep — ⭐ THE SAME sweep as §20-7(e)'s long-pending 88 mm interleave test:
+wire TWO readouts (L free AND the 88 mm-span crossing) and **one sweep closes two open
+items** (⚠ it re-measures the spec-:350-353 pair face, pair-unseparated — stated).
+**(d)** p5's Rs line: ③ sole survivor / efficacy unmeasured / the two sweeps / and
+the crown's provenance disclosed. The register rows via m832.
+
+## 503. The register finds what nobody claimed — the mounting alone fells every candidate at every y
+
+From p6's -153 (03:54:52). **(a) Pins verified**: commit 128bdc8333 ("Row the negative
+separator, and keep 'only left' apart from 'works'"); LEDGER sha 379bc673…82b8 MATCH.
+**(b) ⭐ The unclaimed derivation**: at ALL SEVEN y-offsets the mast event count EQUALS
+the candidate count (7/8/14/16/16/16/16 — tallied per line) ⇒ with the one-label-per-
+check structure (§497), **the mounting ALONE fells every candidate at every y** —
+removing the arm-vs-arm term entirely leaves L at zero across the sweep; ①'s
+y-dimension death is arm-term-independent, the same shape as cab32's. **(c) The grade,
+correctly split**: "③ is the ONLY one" kept apart from "③ WORKS" — survivor by
+elimination, efficacy unmeasured, p4's fence verbatim, and the register names the next
+needed thing: the measurement of a mounting that frees the left arm (= §502(c)'s two
+sweeps, which p6 had not yet seen when writing). The R-lever by-product rowed with
+scope; the coupled set's motion checked against the TABLE_Y formula p6 read at source.
+The register, the design court, and this desk now converge on every grade in the
+endgame.
