@@ -559,13 +559,34 @@ SETTLE_TOL = 0.002                      # spec §6.4d -- rad; the arm must be th
 # menu.  The requirement is about the table.  Tying a limit to how finely someone happened to
 # sample attitudes is the same error as putting a bar on a quantity that has no units.
 #
-# The right form, from p11: the allowance is whatever keeps the arm's lowest point above the table
-# at seat height -- a tilt the cell itself decides, measured at 10.5 to 14.6 degrees depending on
-# where the lowest point is taken.  ⚠ The VALUE below is NOT ratified: p5 rejects 5.73 as letting
-# the adjacent case through, p11 accepts it for today and targets 2.86.  Both accept 2.86.  It is
-# left where it is until the two agree on the basis, and the run now prints the angle it actually
-# achieves so the decision is made on a measurement instead of on a preference.
+# The unified form, from p11.  Two separate things fix it, and they were being mixed:
+#
+#   why it exists  -- an allowance bigger than this puts the arm's lowest point through the table
+#                     at seat height.  ⚠ That tilt is derived from the claw-tip height H at the
+#                     lowest point of the descent; measured today it lands between 10.5 and 14.6
+#                     degrees depending on where the lowest point is taken.  If H drops -- a longer
+#                     claw, a lower seat, a different attitude -- the bound has to be derived
+#                     again.  It is not a property of this number.
+#   its hard cap   -- the allowance must stay BELOW the menu's smallest non-zero roll, 0.10 rad,
+#                     or a pose one menu entry away from vertical passes the check and the check
+#                     stops distinguishing anything.  So r_max < tau < 0.10 rad, where r_max is
+#                     the largest residual the solve actually achieves when commanded upright.
+#
+# ⛔ NOT RATIFIED.  p5 accepted 5.73; p11 then withdrew its own acceptance of the same number,
+# because 5.73 degrees IS 0.10 rad and therefore sits on the cap rather than under it.  p11's
+# candidate is 0.05 rad (2.86 degrees), conditional on r_max coming in below it.
+#
+# ⭐ Which is why the pass-time angle print matters more than the value: r_max is the thing that
+# decides between the branches, and nobody has measured it yet.  Left at 5.73 in the meantime --
+# the physical margin is about twofold, and no one has asked for it to change before the
+# measurement exists.
 VERTICAL_TOL_DEG = 5.73
+
+# How far out to look when measuring how close the two arms come.  mj_geomDistance stops looking
+# past its cutoff and returns the cutoff, so this only has to be larger than any separation worth
+# reporting -- it is a search radius, not a limit on anything.  A tenth of the grasp span is well
+# past the range where two arms are "close".
+ARM_PAIR_CUTOFF = 4.0 * GRIP_HALF_SPAN
 # Pose selection and the singularity.  The floor below was set to 0.0 with a recorded reason --
 # "the 0.12 floor starved the solver ... ranking, not rejection, is the way to do this" -- and the
 # ranking was never written: the selector computes each candidate's smallest singular value, PRINTS
@@ -666,7 +687,7 @@ RETIRED = {"CLIP_H", "GROOVE_W", "CLIP_RISER"}
 # than an input.
 TIER_C = {"OUT", "W", "H", "FPS", "HOLD_S", "WAY", "STEPS", "SEED",
           "CAM", "CAM2", "RENDERER", "FRAMES",
-          "frames", "log", "n", "claw_min", "col_min", "sig_min",
+          "frames", "log", "n", "claw_min", "col_min", "sig_min", "arm_gap_min",
           # p5 §6.4j: these are in spec §6.4d as DERIVED and are free.  I had reported them as
           # absent from §6.4d, which was a bad read of my own -- they are on its line 195, in the
           # DERIVED row rather than the TIER-C row I was looking at.

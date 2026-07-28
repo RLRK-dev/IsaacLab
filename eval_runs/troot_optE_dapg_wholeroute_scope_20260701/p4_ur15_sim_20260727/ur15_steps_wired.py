@@ -43,7 +43,8 @@ from ur15_cell_spec import (  # noqa: E402
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
-    PREDICT_S, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY, VERTICAL_TOL_DEG,
+    ARM_PAIR_CUTOFF, PREDICT_S, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
+    VERTICAL_TOL_DEG,
     START_HOLD_S, START_RAMP_S,
     TABLE_HZ, TABLE_Y,
     Z_HOME, Z_RISE_REST, Z_RISE_ROUTE,
@@ -325,8 +326,13 @@ def touching(t, dd):
         a1, a2 = g1 in ARMG[t], g2 in ARMG[t]
         if a1 != a2:
             other = g2 if a1 else g1
+            near = g1 if a1 else g2
             ob = m.geom_bodyid[other]
-            out.add(mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, ob) or GNAME[other])
+            # p18 -622(6): the near side used to be dropped, so a contact could be reported without
+            # saying which of THIS arm's parts made it -- and the open question about STEP13 is
+            # precisely whether a claw plate is one of them.  Both ends are named now.
+            out.add(f"{mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, ob) or GNAME[other]}"
+                    f" (via {GNAME[near]})")
     return out
 
 
@@ -1287,8 +1293,13 @@ VIDEO_QUALITY = 8
 renderer = mujoco.Renderer(m, height=H, width=W)
 cam = mujoco.MjvCamera()
 cam.type = mujoco.mjtCamera.mjCAMERA_FREE
-cam.lookat[:] = [0.15, 0.30, TABLE_TOP + 0.06]
-cam.distance, cam.elevation = 1.35, -22
+# Rs, 2026-07-28: the whole robot is not in shot.  The framing was a hand-picked lookat and
+# distance chosen when the interesting part was the gripper, and it cropped the arms.  Both now
+# come from the model's own estimate of how big the scene is, so the frame holds if the cell
+# changes: mjModel carries a centre and an extent for exactly this, and a distance of about three
+# extents puts the whole of it inside a 45-degree field with room to spare.
+cam.lookat[:] = m.stat.center
+cam.distance, cam.elevation = 3.0 * m.stat.extent, -22
 cam2 = mujoco.MjvCamera()
 cam2.type = mujoco.mjtCamera.mjCAMERA_FREE
 cam2.distance, cam2.elevation, cam2.azimuth = 0.40, -16, 250
@@ -1312,6 +1323,7 @@ col_min = {t: 1e9 for t in SIDES}     # worst approach to the column over the wh
 sig_where = {t: "" for t in SIDES}
 col_where = {t: "" for t in SIDES}
 claw_min = {t: 1e9 for t in SIDES}
+arm_gap_min = 1e9   # closest the two arms come to each other over the whole run
 # (step, arm, t, sigma_min, dq/dx) at every sample.  ⛔ sigma_min is for RANKING and envelope
 # comparison only -- it mixes units, so no absolute threshold can live on it; the bar goes on the
 # rad/m column.  Written here as well as in the file header because a caution that travels apart
@@ -1951,6 +1963,24 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                    f"{_clear:+6.1f} mm vs the table"
                    f"{' <- THROUGH THE TABLE' if _clear < 0 else ''}")
     print(f"[steps] STEP{num:2d} ARM REACH: " + " | ".join(low))
+    # Rs, 2026-07-28: the arms look like they are hitting each other, and even when they are not
+    # they are too close.  Everything measuring this so far has been a yes/no -- touching() returns
+    # a set of contacts, so "clear" covers a millimetre and a metre alike, and a warning that
+    # cannot say how close cannot say it is getting worse.  So: the smallest signed distance
+    # between any geom of one arm and any geom of the other, and the pair it belongs to.
+    _pairmin, _pairwho = 1e9, ""
+    for _ga in ARMG["L"]:
+        for _gb in ARMG["R"]:
+            _dd = mujoco.mj_geomDistance(m, d, _ga, _gb, ARM_PAIR_CUTOFF, None)
+            if _dd < _pairmin:
+                _pairmin, _pairwho = _dd, (
+                    f"{mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, _ga) or _ga}"
+                    f" <-> {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, _gb) or _gb}")
+    arm_gap_min = min(arm_gap_min, _pairmin)
+    print(f"[steps] STEP{num:2d} ARM-TO-ARM: closest {_pairmin*1000:+7.1f} mm ({_pairwho})"
+          f"{'  <- TOUCHING OR THROUGH' if _pairmin <= 0 else ''}"
+          f"   worst so far {arm_gap_min*1000:+7.1f} mm"
+          f"   ⚠ measured between the two arms only; posts, table and cable are not in this")
     print(f"[steps] STEP{num:2d} CARRY: " + " | ".join(carry))
     _stx, _sty, _stz = seat_tolerances()
     print(f"[steps] STEP{num:2d} C1 SEAT: nearest point ON THE CABLE (cab{_k1} at {_u1:.2f}) misses "
