@@ -9696,7 +9696,7 @@ claw-tip reach 11.00 → **12.00 mm**; off-centre allowance 3.00 → **4.00 mm**
 |across| <" 3.00 → **4.00 (next-run confirm)**. In-log verbatim VERIFIED for t13 (banked): `:36` "release
 opening solved from the asset: ctrl 189.3 (claw tips reach 11.00 mm = cable 8.0 plus the 3.00 mm the
 cable can sit off centre)" ✓ byte-matched; the t14 line (ctrl 186.7 / 12.00 / 4.00) is p4-reported — t14
-running, log unbanked. **(b) ⭐⭐ The recomputation owed sits in p5's court**: p5's budget-table HALF-BAND
+running, log unbanked 〔resolved §345(c): now read in the BANKED t14 log `:36` ✓〕. **(b) ⭐⭐ The recomputation owed sits in p5's court**: p5's budget-table HALF-BAND
 is grounded on the opening ⇒ 14.00 → 16.00 moves the half-band ⇒ the residuals (L +2.62 / R −2.00) and
 "the placement error that zeroes the residual = 4.93" need recomputation. p4 explicitly declines to
 derive (does not hold p5's derivation) and passes measured values only. ⚠ UNAFFECTED: the -119 seat-gate
@@ -9967,3 +9967,82 @@ recovery-respects-its-path form honoured inside the authorized §0#5 mechanism);
 azimuth matched to the wide camera so L/R agree on panels 1 and 3; only the close-up stays mirrored.
 **(f)** t15 launched 15:48:41 producing `3f5c7630ac` — CONVERGES with p6's independent process
 measurement (15:48:39; 2 s spawn-vs-script delta).
+
+## 343. The rule in one line, and a ratification that read the menu first
+
+From p5's -133 (16:00). **(a) ⭐ The MOUTH_BAND_Z rule delivered verbatim** (p5's court):
+`lo = min(f1ext.pos.z, f2ext.pos.z) + size_z / hi = max(f1ext.pos.z, f2ext.pos.z) − size_z` — the
+mutually facing surfaces of the same pad's two plates (interior-face rule). min/max so the rule survives
+a future plate-order swap; interior faces because R6(ii) tests the cable CENTRE against the mouth
+(§13-5②'s weak form) ⇒ the surfaces actually facing the cable are the band's edges; the far-face
+alternative REJECTED with its reason — it would count a centre inside the plate's own thickness as "in
+the band". Current-asset value (0.0230, 0.0390); the RULE, not the value, goes to implementation
+(agreeing with p4's intent). Routed -614. **(b) ⛔⛔ The 5.73° tolerance NOT ratified as-is — because
+p5 read the menu**: GRASP_ATTITUDES' rolls (0.0, 0.10, 0.20, …) ⇒ smallest nonzero = 0.10 rad, NOT
+0.20 — VERIFIED here @ `5013fb8aa3` cell_spec `:560-562`; and the constant `:531` `VERTICAL_TOL_DEG =
+math.degrees(0.2) / 2.0` = 5.7296°, its ratification flag in-comment ✓ (p4's declared process matches
+the code). ⇒ 5.73° = 0.10 rad = the FIRST nonzero menu item EXACTLY ⇒ the neighbouring attitude PASSES
+a check whose stated purpose is to separate vertical FROM that neighbour — the basis's number is wrong
+AND the purpose unimplemented. Conservativity argued in the right direction: a run-stopping check is
+conservative when NARROWER. **(c) ⭐⭐ The conditional ratification**: 0.05 rad (2.86°) = half the TRUE
+smallest nonzero roll ⇒ RATIFIED at that value; 5.73° refused. ⚠ One attached condition: menu
+separation gives only the UPPER bound — the LOWER bound is the tool-angle residual actually achieved at
+a vertical-commanded pose, UNMEASURED ⇒ p4 asked to PRINT one such residual; if it exceeds 0.05 rad the
+formulation itself fails and the separation basis rebuilds from residuals — p11's court (routed -615).
+Reference kept as a non-assertion: t10's joint residuals (0.1-0.3 mrad) are a DIFFERENT quantity from
+tool angle. **(d)** Bank #9 double-confirmed by p5's own re-derivation ⇒ p5's doc edits START. p5's own
+own: -130's rule was written mid-derivation, not as a standalone conclusion line — henceforth one
+standalone line. (The compression pair complete: my relay dropped the rule; p5's format buried it —
+both sides fixed.)
+
+## 344. The second ratifier splits the question — value today, basis never, target later
+
+From p11's -134 (16:01; version STATED = `abff8d6c25` with worktree-match noted — the §341 discipline
+adopted on first use). Pin verified: §27.2.134 @ `adfae3d606` sha `d0fe83a451…` ✓, one new header ✓.
+**(a)** The same factual correction as p5's, INDEPENDENTLY: menu smallest nonzero roll = 0.10 rad
+(§343(b)'s verification covers both); plus the boundary refinement — a tolerance EQUAL to a menu value
+puts a legal attitude ON the boundary, where > vs >= decides ⇒ tolerances belong BETWEEN menu values.
+**(b) ⭐ The value bounded physically**: from p4's one measured point (32° → 48.5 below mouth, mouth 23
+above table; the 25.5 penetration reproduced ✓) the table-contact tilt = 14.6° (zero intercept) or
+10.5° (9.7 mm roll-0 intercept, sweep_raw_23points) — desk-recomputed ✓ (d(θ)=73.2·sinθ+9.7 model gives
+10.47°) ⇒ 5.73° carries ~2× and 2.86° ~4× margin; both fail-safe. **(c) ⛔ The basis refused in CLASS,
+not just in number**: "a fraction of a menu value" is a property of the SEARCH MENU, not of the TABLE —
+menu edits would move the tolerance without reason, table changes would not move it = the
+SIGMA_GOOD=0.12 form (a number warranted by the wrong question). Physical wording supplied: "below the
+tilt at which the arm's lowest point reaches the table at seating height." **(d) ⭐ The three-part
+verdict**: ① VALUE 5.73° ratified TODAY, conditional on strict > (boundary legal — safe under the ~2×
+physical margin) ② the basis wording → the physical form, plus correcting the "0.2 is smallest"
+description ③ TARGET 2.86° (between menu values), tightened once (e)'s data lands. ⚠ DIVERGES from
+p5's -133 (refuse 5.73 / ratify 0.05 rad): the split sits at the PURPOSE layer — under menu-separation
+(p4's stated purpose) the neighbour passing kills 5.73; under table-contact (p11's physical basis) the
+neighbour clears the table and may pass. Both REJECT the menu basis ⇒ the reconciliation lives at the
+basis level, is p5↔p11's to close, and is routed CROSSWISE (-615/-616), not harmonized here.
+**(e) ⭐ Two cheap measurements**: ① print the angle ON PASS too (margin becomes observation — the
+self-reporting form again); overlaps p5's residual-print condition: one instrument line, two consumers
+② one sweep point at 0° tilt closes 10.5–14.6 to one number. **(f) ⚠ The 49.4 reading (p11's lane)**:
+49.4 rad/m = 0.0494 rad/mm = 2.83° of joints per mm of EE; the direction EXPECTED (t14 forces vertical
+on seating steps — the selector lost the attitude freedom it used for conditioning) ⛔ NOT established
+(one run, changed config, no control); the cheap control named: same config, pose_rd unfixed on seating
+steps only. Framed explicitly as NOT an objection to the Rs directive — the trade became measurable:
+table margin and containment bought, seating-step conditioning paid. **(g)** Non-claims: no run / no
+implementation by p11 / no objection to Rs / 49.4 not proof of degradation.
+
+## 345. The inspection comes back positive in the changed configuration — the event survives
+
+From p6's -116 (16:03). Pins verified: LEDGER @ `fff23292d6` sha `68ed65b75b…` ✓; run_t14.txt `:193-195`
+@ `e9a27e28ec` read here — three byte-identical lines "STEP13 R: inherited aim pose, arm-to-arm check =
+['L_forearm_link', 'L_wrist_1_link']" ✓; 15 prints, sort -u = STEP13 R contact + STEP3/4 not-on-other-
+arm ✓ (p5's counting form: ONE event, not a rate). **(a) ⭐⭐ What this adds to the packet**: t13's one
+event REPRODUCES in t14 with the SAME signature — same (step, arm), same contact pair — under a CHANGED
+configuration (claw +2 mm, vertical poses forced) ⇒ the "survival-under-change unverified" leg of the
+(i) result begins to fill: the phenomenon is not config-fragile; two configurations, one signature. ⛔
+Causality with the unsettled gates UNMEASURED (p6's own scope); disposition = p11 (routed -615),
+decision = Rs — the pending item ① gains this datum in this checkpoint's report. **(b)** The register
+row for the first PASS carries its OWN scope: NUMERIC LEG ONLY, not a verdict — the predicate checks
+face compression (stronger than contact-only) but its own docstring records that the contact version
+once reported a grasp Rs could see wasn't there ⇒ the visual leg cannot be skipped (rule #9/#12
+territory). Co-facts kept on the row: C1/C2 gates not achieved; cab38 into C1 by 0.3 mm; WORST R column
+gap −26.3 INSIDE; sigma_min 0.0006; regrasp False. **(c) ⭐** Log-grounded: t14 ran at opening 16.00
+(`:36` ctrl 186.7 / tips 12.00 / off-centre 4.00 — read here in the banked log, closing §331(a)'s
+caveat) ⇒ **the first grasp-gate PASS happened WITH Rs's +2 mm in effect.** p11's rad/m axis debuts in
+the same banked run (L max 12.0 / R max 49.4).
