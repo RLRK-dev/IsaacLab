@@ -1914,11 +1914,29 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # "Fingers straight down" is read as the pinch-to-mouth vector pointing along world -z: that
     # is the thing the fingers do, and it can be measured on any pose however it was obtained.
     for t in _seating:
+        # p11 -149: this check was reading a MIXED state.  QADR is the six arm joints only, so
+        # overwriting them left the fingers at whatever the live sim had -- and the mouth's
+        # direction depends on where the four-bar is.  The same commanded pose therefore got two
+        # different answers at STEP8 and STEP9, and the r_max drawn from it was drawn from a
+        # mixture.
+        #
+        # The state is chosen, not mixed.  This check asks "may this pose be COMMANDED?", which is
+        # the requirement Rs stated, so it evaluates the fully commanded state: the arm at the
+        # solved joints and the fingers driven to this step's own command, settled the same way the
+        # aim settles its prediction.  The other question -- whether the arm ACTUALLY clears the
+        # table once everything has moved -- is a different question with its own reading, and the
+        # per-step table clearance answers that one.
         _sv = mujoco.MjData(m)
         _sv.qpos[:] = d.qpos
+        _sv.qvel[:] = 0.0
+        _sv.ctrl[:] = d.ctrl
         for _k3, _a3 in enumerate(QADR[t]):
             _sv.qpos[_a3] = w[t][_k3]
-        mujoco.mj_forward(m, _sv)
+        for _k3, _i3 in enumerate(AIDX[t]):
+            _sv.ctrl[_i3] = w[t][_k3]
+        _sv.ctrl[GIDX[t]] = lf if t == "L" else rf
+        for _ in range(int(PREDICT_S / m.opt.timestep)):
+            mujoco.mj_step(m, _sv)
         # ⚠ The jaw's own state is part of this reading and has to be visible in it.  The scratch
         # copies the LIVE qpos and overwrites only the arm joints, so the fingers are wherever the
         # run has them -- open at one step, squeezed on a cable at the next.  The four-bar moves
@@ -1955,7 +1973,8 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
               f"(pinch->mouth [{_down[0]:+.3f} {_down[1]:+.3f} {_down[2]:+.3f}]), "
               f"allowance {VERTICAL_TOL_DEG:4.2f} deg -- margin {VERTICAL_TOL_DEG - _off:+5.2f}; "
               f"tool axis {_tres:4.1f} deg off vertical; pinch->mouth {_mlen:5.1f} mm with the "
-              f"pads {_mpad:+6.2f} mm apart; lowest point {_who3} at "
+              f"pads {_mpad:+6.2f} mm apart at the COMMANDED opening "
+              f"{(lf if t == 'L' else rf):.0f}; lowest point {_who3} at "
               f"{(_lowest - TABLE_TOP)*1000:+6.1f} mm vs the table")
         if _off > VERTICAL_TOL_DEG:
             raise RuntimeError(
