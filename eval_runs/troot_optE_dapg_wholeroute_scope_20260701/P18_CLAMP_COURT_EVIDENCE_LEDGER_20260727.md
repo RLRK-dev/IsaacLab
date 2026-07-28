@@ -10922,7 +10922,10 @@ then the acceptance is written WITH NUMBERS, never silently.
 ## 386. A bar set from the data it judges cannot reject — the agreed formula meets the day's form
 
 From p5's -146 (17:28; arithmetic re-derived ✓ 5.365 ≈ 5.37, interval width 0.73°; ruling = p11's,
-p5 supplies form only). **(a) ⭐ The monotonicity point**: r_max is a RUNNING MAXIMUM ⇒ monotone
+p5 supplies form only). 〔⛔ SUPERSEDED 07-28 19:4x by p5's own -148 (§411): the feeding r_max
+(0.1 and 5.0 alike) came from the MIXED-STATE instrument (t17, pre-fix) — not a measurement; ALL
+τ numerics here (5.365/5.37) DO-NOT-BANK; interim 5.73 governs; spec :620 "r_max IS NOT MEASURED
+YET" stands.〕 **(a) ⭐ The monotonicity point**: r_max is a RUNNING MAXIMUM ⇒ monotone
 non-decreasing ⇒ the interval (r_max, cap) only SHRINKS — the mid-run τ = 5.37° is the OPTIMISTIC
 side, and 0.73° more of worsening empties it (third branch) ⇒ **τ must be computed from the
 POST-COMPLETION r_max**; fixing it mid-run lets later-worsening residuals silently cross.
@@ -10998,7 +11001,9 @@ From p5's -147 (17:35, relay-requested to p11/p4). **(a) ⭐ The arithmetic guar
 BRANCH BOUNDARY (0.05 rad), NOT the computed τ — with r_max ≈ 0.1° the formula gives τ = (0.1 +
 5.73)/2 = **2.915°** (desk ✓). Banking "2.86 as τ" seats the bar on the boundary instead of the
 midpoint — 0.05° apart, but a DIFFERENT ORIGIN: the day's same-numeral-not-same-quantity form in
-miniature. ⇒ **hold the RULE, not the number**; the value lands from the post-completion r_max.
+miniature. ⇒ **hold the RULE, not the number**; the value lands from the post-completion r_max. 〔⛔
+SUPERSEDED 07-28 19:4x by p5's -148 (§411): r_max ≈ 0.1 RETRACTED (mixed-state instrument, t17
+pre-fix) ⇒ 2.915 falls with it; no τ numeric is banked; interim 5.73 governs.〕
 §388(b) precision-tagged; my report line corrected to Rs this checkpoint. **(b)** Reading A
 confirmed received on p5's side (population-pure, post-completion, no circularity); the source-fix
 direction supported ("my judgment-inversion instance not left standing"); cause investigation left
@@ -11291,7 +11296,10 @@ reading (the persistent-negative side in the TRACE is R) — why p4's question i
 pC's panel attribution is load-bearing. (iv) §403(c) said count + survivor-best ride t20 —
 CONFIRMED on-disk: all 13 steps print removal counts, cleared-radius counts, winner sigma AND
 best-survivor sigma (e.g. STEP7 R winner 0.1108 vs best survivor 0.3082 — the ranking-leg
-separator visibly non-degenerate). p11's E′/D/cost-weight material exists. **(f)** The §404
+separator visibly non-degenerate). p11's E′/D/cost-weight material exists. 〔⚠ SCOPE added 19:4x
+on p11's -155(b) ask, beside the numbers as asked: ALL these E′ figures are from the MAST-LESS
+filter — the mast entered the filter only at t21/t22 (§407(d)); read removal counts with that
+scope.〕 **(f)** The §404
 relays deferred at the context boundary EXECUTED: m705 → p11 (structural closure + the two-sets
 cap lesson + the t20 trace pin and field confirmation), m706 → p6 (register rows: t19 same-family
 crash + structural closure + DISJOINT; t20 banked; the analyst routing — rows after verdicts per
@@ -11315,7 +11323,12 @@ column gap   -26.3 mm at STEP10 t=23.0s   <- INSIDE THE COLUMN" — a WHOLE-RUN 
 "column gap … along the move" = 0 (the ARM-TO-ARM lines DO carry an along-the-move clause; the
 column lines do not); current wired.py "INSIDE THE COLUMN" = 0 ⇒ the whole-run column WORST print
 existed at t14's version and is ABSENT from t20's — the instrument changed shape between runs
-(per-step samples only at t20). ⚠ t14's worst sat at STEP10 — the one step where t20's R prints
+(per-step samples only at t20). 〔⛔ CORRECTED 19:4x (§410(e)): the WORST print EXISTS in the
+t20-era driver (:2345 @ c65e0efc8b — reworded, so my suffix-literal grep missed it); t20 DIED at
+STEP15 R (vertical-check RuntimeError) BEFORE the end-of-run print — the run is INCOMPLETE; the
+instrument did not change. Wrong-space absence query, this desk's error. The comparison bar
+STANDS with the corrected reason: a whole-run worst vs a step-end instantaneous from an
+incomplete run.〕 ⚠ t14's worst sat at STEP10 — the one step where t20's R prints
 −0.0; noted as a label coincidence, no claim attached. **(c)** pB's standing doc already carries
 the class: `PB_RUNLOGS_20260728_NUMERIC_LOGANALYST_20260728.md:179` (t8 R −25.8 mm INSIDE THE
 COLUMN, STEP13 t=29.1s) and `:186` (p4's earlier request cited t8's σ figure and omitted the same
@@ -11395,3 +11408,124 @@ extra ladder keys did not disturb the queue (screen-verified). My earlier send_v
 the queued state; today's simplified ladder had dropped that acceptance — restored. The
 written-but-not-effective family, on the instrument side: the delivery check's own zero has two
 readings, and the pane state disambiguates them.
+
+## 409. p11 reads t20: E′ dead against the arm-pair filter, the cost flat where σ pays — and the redirect to the L column
+
+From p11's -155 (19:32:24). **(a) Pins verified**: their bank @ `0abee5d94b` ("Read t20 myself:
+the filter did not take the conditioning, the cost did"), P11 doc content sha256
+`2f56a2a6f9e550983ae014dbf9f79c5fbd913e4989f5290098fc2deed6a07df0` = MATCH; desk spot-reads all
+land: the one-sided cost :1305-1307 (`_short = max(0.0, SIGMA_GOOD − c[5])/SIGMA_GOOD` — flat
+above SIGMA_GOOD; the adjoining comment even cites p11 -154), the no-cap comparison :2036, the
+%+7.1f column format :2222, the −135.8 line :193 verbatim ("R 140.0 mm below the mouth (geom43),
+-135.8 mm vs the table <- THROUGH THE TABLE"), the 4.2°/3.5° same-command pair :158/:174, the
+seating set {7,8,9,15,16,17} consistent with §349(c). **(b) E′ verdict as banked (their reading,
+their numbers)**: 26 readings — removal-zero ×9; removal-present-but-best-dropped-worse ×14;
+Δ_filter>0 ×3 ⇒ E′ ("no pose reconciles clearance AND conditioning") REJECTED against the
+ARM-PAIR filter; decisive STEP7 R (removed 0 of 27, winner σ 0.1108 vs best survivor 0.3082):
+what forgoes conditioning is the COST, not the filter — the one-sided shortfall is exactly flat
+above SIGMA_GOOD ⇒ a 2.78× better condition number earns credit 0. ⛔ k REFUSED, the reason
+banked as the discipline: extending the gradient upward would hand 0.3082 a −4.7 m credit; the
+trace does not measure what σ buys; SIGMA_PENALTY 3.0 is theirs and unmeasured — no weight from
+data that does not measure the tradeoff. ⚠ Scope: the MAST-LESS filter (annotation now beside
+the numbers, §405(e)(iv)). **(c) Rulings banked**: the (b)-ruling = POPULATION SEPARATION —
+r_max from poses COMMANDED upright only; the gate judges ALL seating-step poses; TIME separation
+REJECTED ("today's ∅-accidental purity is exactly the evidence of the danger"). Mast review: the
+FORM (unconditional, at the merge point) SUPPORTED; the 8 mm's meaning ("the cable passes") does
+NOT transfer to the mast ⇒ accepted as INTERIM, expressly NOT recorded as justified — material
+for Rs item ⑦. ⚠ This ruling and p5's -148 input (§411(d)) CONVERGE independently (p11 ruled
+19:32; p5 wrote 19:37, each to this desk, not to each other). **(d) The redirect**: Rs's word is
+「左」; the returned-count emphasis was the R column (p11 counts identically: −0.6 ×8, −0.0 at
+STEP10). L reads +0.0 at STEP 3 and 5 — %+7.1f with negatives representable ⇒ not a floor ⇒
+within <0.05 mm of the mast. Ask (a) — put the L readings before the analysts — was OVERTAKEN by
+pB's own -505 (§410): the analyst found the L column unprompted and banked it with a
+sign-preservation measurement; two DIFFERENT derivations (format-representability vs measured
+rounding) of the same reading — convergence at the derivation level. pC stays deliberately BLIND
+(video-first); arm attribution lands with pC's panel-attributed read; the columns meet at
+reconciliation. **(e) The vertical-check coverage finding (theirs, banked)**: the proxy passed
+with margins +5.69/+1.50/+2.23 while the same lines read −0.1/−0.3/−0.5 mm vs the table (<1 mm =
+contact tolerance); the largest excursion −135.8 mm (R STEP10, THROUGH THE TABLE) falls where
+the check does not run (STEP10 ∉ _seating); the same command (HALF=214) realizes 4.2° and 3.5°
+⇒ the -149 purification is necessary, NOT sufficient. allowance 5.73 = its own upper bound and
+the cap absent from the comparison :2036 ⇒ §404(d)'s cap fix touches NO t20 verdict — confirmed
+at this desk: the 5f477f53e5→c65e0efc8b driver delta is EXACTLY the cap function's 18 lines
+(input-side selection), nothing else.
+
+## 410. The log analyst refutes both offered readings — and two of this desk's claims fall with them
+
+From pB's -505 (19:34:21). **(a) Pins verified**: artifact @ `eccedd2f94` ("Read the t20 mast
+gap, and refute both readings it was offered" 19:33:20), content sha256
+`ecd6d358deb7277df82588a527e40be02363ea73f2ac52522b8a8eb1f8abd428` = MATCH; desk spot-reads: the
+t20 tail IS a RuntimeError at STEP15 R (the vertical check, 11.2° vs the 5.7 allowance — the
+raise message states its own design: "the pose can also arrive by inheritance, which does not
+pass through the solve"); column_gap :1105-1110 = min over ARMG×COLG via mj_geomDistance with
+distmax 1.0 m (the 1000 mm sentinel mechanics as stated); MOUNTG :1083 @ `ffbc1f15af` = geoms
+whose body's parent is the column body; the 5f→c65 driver delta = the cap function only ⇒ pB's
+version-robustness claim CONFIRMED. **(b) ⭐⭐ Both offered readings refuted BY THE TRACE**: (i)
+permanent-overlap — a permanently overlapping geom in the query forces min ≤ 0 at every step; R
+reaches +387.5 (STEP8) and L +202.1 (STEP9) ⇒ no permanent overlapper IN THE QUERY (scope: >1 m
+/ unevaluable pairs return 1000 and cannot lower the min; parts outside the query not covered).
+(ii) instrument-floor — the same function printed −26.3 at t14:277 ⇒ −0.6 is not a floor.
+Remaining hypothesis: a MOVING part arriving at the mast; WHICH part — not in the trace (no
+names on column lines; want_who rides t22). **(c) ⭐⭐ The mount rationale REFUTED (measured)**:
+the base mesh is a worldbody-direct geom (not attached); MOUNTG = the two shoulder_link geoms;
+attach-frame origin → stem surface = 298.0 mm; shoulder body origin → stem surface = 508.9 mm,
+attitude-invariant ⇒ `0b0d4c462f`'s "its geoms sit inside the mast by construction" DOES NOT
+HOLD ⇒ excluding MOUNTG cannot remove the −0.6, and reading the negatives as "the mount" would
+SILENCE a real interference. Falsifier (one rerun): post-exclusion R max > +387.5 ⇒ +387.5 was
+the mount (the floor rose); −0.6 persists ⇒ the exclusion is ineffective on it. ⚠ t22 RUNS with
+that exclusion — routed to p4 (m714) BEFORE t22's prints get interpreted; the inference to
+guard against: "−0.6 gone, so it was the mount." **(d) The R/L structure**: R's −0.6 ×8 spans
+SEVEN different hand poses (Δx 283 / Δy 196 / Δz 182 mm) ⇒ the min's owner does not move with
+the hand-moving joints — and is NOT the mount (c) ⇒ named only by the rerun. L's +199.4 ×4
+(STEP11-14) = the same hand point (pose-explained). Rs's sighting candidate on the numeric side
+= L's +0.0 ×2 (STEP3,5), outside within <0.05 mm (sign preserved: −0.04 → "−0.0", +0.04 →
+"+0.0", measured by pB); t14 shows the SAME L/R asymmetry (WORST L +0.0 / WORST R −26.3) across
+two runs. ⛔ Same-event = not the numeric court; pC blind-read pending; Rs GT final.
+**(e) ⛔⛔ This desk's TWO corrections**: (i) "t20 完走" (m705/m706 and the 19:2x Rs report) —
+FALSE: t20 died at STEP15 R (the vertical check fired; R STEP14 tool error 1067.4 mm). The
+trace's arrival and bank stand; completeness was this desk's ADDITION — p4 never claimed it.
+(ii) §406(b) "the instrument changed shape between runs" — FALSE MECHANISM: the WORST print
+exists (:2345); the run died before the end-of-run print. The absence query ran in the wrong
+space (the suffix literal "INSIDE THE COLUMN" — since reworded — instead of the print itself):
+the "absence denominator from the predicate's own space" lesson recurred at this desk, the same
+day as the wrapped-anchor miss (§407(b)). The comparison bar SURVIVES with the corrected reason
+— pB §7(b) sets the same bar: a whole-run worst vs a step-end instantaneous from an INCOMPLETE
+run. Corrections routed: p6 (m717 — their guard clause's reason; their relay-derived mark did
+its job), p11 (m715), Rs (this window's report). **(f)** The CANNOT-settle list banked as the
+rerun's instrument spec (pair names / contact-vs-geometry / shoulder angle / collidability — 4
+items); provenance notes (traceback source-drift recorded, not judged). No PASS anywhere in the
+artifact — as briefed.
+
+## 411. p5 retracts the 0.1 — r_max is not measured, and the population rule arrives as R-r_max
+
+From p5's -148 (19:37). **(a) Pins verified**: bank #15 landing self-checked by p5 (committed ==
+worktree @ `2f833655f9`); the retraction's legs verified at this desk: t17 :164 verbatim
+("STEP 9 L: aiming the CABLE at the C1 floor" — a seating step), :167 verbatim (fingers 5.0° off
+straight down / tool axis 0.0° off vertical / lowest point −6.6 mm vs the table); inherited
+steps in t17 = {3,4,13} EXACTLY, STEP9 count 0 ⇒ STEP9 L was a SOLVED branch; spec :616-617
+(the "largest tool-angle residual … commanded upright" PROXY wording) and :620 ("⚠ r_max IS NOT
+MEASURED YET") verbatim; driver anchors :1987 (inherited branch, report-only), :2023 (solved
+seating branch), :2083 (`_off` = the check's own quantity). **(b) ⛔ The retraction, banked**:
+r_max = 0.1 is NOT a measurement. Dropping 5.0 for "tool axis 0.0" is a reason in the WRONG
+QUANTITY (the check reads fingers-off-down); the CORRECT exclusion — the mixed-state instrument
+p11's -149 named (t17 predates the :2105-2111 three-field fix) — drops 0.1 and 5.0 TOGETHER ⇒
+spec :620 stands: r_max NOT MEASURED YET; interim 5.73 governs; τ numerics (2.915/2.865/5.365)
+DO-NOT-BANK — supersession tags placed inline at §386 and §389. **(c) ⭐ The form (rule R-r_max),
+banked as p5's design**: r_max is taken ONLY from readings whose pose had verticality
+CONSTRAINED at creation — "the verticality being judged must never be an input to the judging
+value." In this driver: solved seating branches only (:2023-2036, pose_rd=(0.0,0.0), failure
+raises); inherited branches (:1987-2015) are JUDGED but never COUNTED. Riders: (1) the quantity
+is the check's own `_off` (:2083) — spec :616-617's "tool-angle residual" is a proxy; correction
+routed to p4 (the cap side already fixed :647-648, the r_max side stale); (2) re-measure on any
+configuration move (claw 2 mm / seat height / attitude menu / re_max); (3) at bank time print
+counted and inherited tallies side by side (inherited MUST be 0) and a one-word branch tag at
+:2105 (solved-upright / inherited) — today the population takes a two-line cross-match to read.
+**(d) The ruling input (expressly NOT a ruling)**: time separation alone FREEZES class
+contamination (yesterday's inherited 4.0 ⇒ τ 4.87 ⇒ today's 4.5 passes); population separation
+alone satisfies the floor ⇒ if one: POPULATION — independently convergent with p11's -155
+ruling (§409(c)); time separation demoted to a re-measure condition; the residual
+self-reference (commanded-upright poses that still miss) is bounded and visible (:2086-2088 /
+:653) — "not airtight," said so. **(e) Bank #16 EXECUTED**: P5_UR15_CLIP_DETAIL_DESIGN_20260727.md
+on-disk sha256 `96507866d85ca11e84772ee71c2b24ca2cefd5d0a26a42df0e74b1046b5c7a12` = MATCH with
+the declaration, +90/−0 (new §18 + §16-3), committed `45b539a901`. Asks routed: spec :616-617
+correction → p4 (m714); the form and riders → p4 (m714); the ruling input → p11 (m715).
