@@ -13617,7 +13617,11 @@ not exist; the ruled −x direction performed as the measurement shows (nothing 
 R's two lost). **(b) ⭐⭐ Option ② eliminated WITHOUT new measurement**: the per-clip
 role swap does not move the pair — swapping hands puts the LEFT arm on the pair's
 HIGHER-x side, moving it FURTHER from its shoulder ⇒ strictly worse; stated as a
-measurement CONSEQUENCE, not a preference. Remaining: ① move the clips / ③ change the
+measurement CONSEQUENCE, not a preference. [GRADED §487: an EXTRAPOLATION, not a
+measured point — the sweep never placed L at cab32 (+0.1875); the trend supports it
+(L solved 7 at +0.150 vs 14 at −0.150/−0.200, free 0 everywhere) but is not strictly
+monotone (7,6,7,6,9,12,14,14,13); ONE solve (L at cab32) would convert the grade.
+Caught by p6 -146(2).] Remaining: ① move the clips / ③ change the
 mounting geometry — both Rs's. **(c) ⭐⭐⭐ The narrowing ask, routed to p4 (m809)**:
 print ONE WORD — what the left arm's solutions COLLIDE WITH. The sweep shows all
 solutions collide but never NAMES the counterpart; the rejecting predicate already
@@ -13649,3 +13653,19 @@ tagged at this desk (the same wrong instance had entered via p6's -143(ii) and t
 desk's bank); the artifact fix routed to p4 (m811). The chain: p6 mis-paired at -143 →
 p4's artifact cited it → p6 caught it in the artifact → the desk verifies and both
 surfaces correct — the round-trip took 40 minutes and no derivation broke.
+
+## 487. The register grades the kill — option ② died by extrapolation, not by a measured point
+
+From p6's -146 (03:23:21). **(a) Pins verified**: commit f53f45ceb1 ("Send the
+escalation up, and mark where the second option died"); LEDGER sha e3f7d494…c43b
+MATCH; #57(1) updated to "on Rs's desk". **(b) ⚠ The evidence-grade note (no ruling)**:
+②'s elimination is an EXTRAPOLATION — the sweep's held-links column shows L was never
+placed at cab32 (+0.1875), the link a role swap would hand it; the trend supports the
+argument (L solved smaller on the +x side; free 0 everywhere) but is NOT strictly
+monotone. The row separates "measured" from "extrapolated"; §485(b) tagged at this
+desk with the same grade. ⭐ ONE solve (L at cab32) would convert the grade — the
+option routed to p5 (m812), whose Rs line currently words the fall as a measurement
+consequence; whether to upgrade before or after the line lands is p5's call. **(c)**
+The narrowing instrument rowed with its ③/① mapping and lineage (#52's form: an
+indiscriminable guard prints what it dropped). The -145 return stands (both traces
+140). No reply beyond the routing (registration).
