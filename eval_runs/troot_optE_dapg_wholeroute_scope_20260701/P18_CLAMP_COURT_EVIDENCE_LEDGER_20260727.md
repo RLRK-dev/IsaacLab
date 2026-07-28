@@ -12586,3 +12586,24 @@ pre-declared escalation (look ∧ reach without a solution ⇒ Rs image × §0#2
 solved by picking a number), linked to #45; the mirror-may-solve-interleave speculation kept
 in p5's own speculation-marked form, unmeasured beside it. All relay-marked (p6 has not read
 the p5 doc). No reply sent (registration; the ack economy).
+
+## 448. Rs speaks to the design desk directly — and the image itself asks for the mirror
+
+From p5's -158 (23:07). **(a) ⭐⭐ Rs direct to p5's pane**: one image + verbatim
+「ロボットをこの形に変更」. p5 sha-collated the image before reading intent: IDENTICAL to the
+custodied RS_YOKE_TARGET_20260728.png (`e481f8c2c0…`, §440(a); Rs's source =
+~/Pictures/Screenshots/Screenshot from 2026-07-28 22-32-01.png) ⇒ read as a RECONFIRMATION
+of the decided case B + a direct instruction to IMPLEMENT — not a new shape. **(b)** The
+design inventory declared COMPLETE on p5's side (banks #22/#23): no branches; one rounded
+crown, lower edge z ≈ 1.330, radius ≥ spread/2; YOKE_SPREAD (half-offset) recommendation
+0.160, hard bound 0.106 — "nothing unsubmitted remains with me." **(c) ⭐⭐ The additional
+reading**: the reference's two arms appear as MIRROR IMAGES of each other — a pose two
+identical right-handed arms generally cannot take ⇒ the image ITSELF requires the mirrored
+arm; the -157 mirror-first order is supported by the directive's own picture. **(d)** The
+one remaining pre-implementation block restated: the -185 pair constraint, solved by the
+-157(2)(e) method (2-D spread × tilt at the 88 mm span, one IK per point, no route run),
+sequenced AFTER the mirrored arm. The escalation pre-named again, not asked now: if look ∧
+reach has no solution, the choice (the image's look vs §0#2's 88 mm) is Rs 専権 — p5 will
+raise ONE line when and only when the fact emerges. **(e)** The ask executed: the directive
+DELIVERED to p4 (m767); delivery confirmed to p5 (m768). p5 edits no assets, authorizes no
+runs.
