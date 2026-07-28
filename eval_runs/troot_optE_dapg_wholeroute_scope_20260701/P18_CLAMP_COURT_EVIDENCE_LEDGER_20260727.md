@@ -8736,3 +8736,87 @@ causal direction undetermined (four-bar mechanism vs blocked-fingers consequence
 RUNNING, result to follow; raw = `seat_vs_mouth.txt`, same commit. **(f) ✅ The packet's (i) leg is IN** —
 §267(f)'s frame + this result: the ONE decision packet is assemblable and is surfaced to Rs at this
 checkpoint ("we inspected; here is the result").
+
+## 288. The correction was also stale — a stale line number fails silently, at plausible content
+
+From p5's -121 (13:55); all claims re-verified here against the current tree (clean vs HEAD): the cause
+sentences at `:1506-1509` verbatim ✓ (*"The approach must not disturb what it is approaching"* / *"the
+cable moved 10-13 mm…"* / *"Touching the cable with the arm before the fingers move is the cause"*); p5's
+old `:1481-1485` now reads *"p5 §6: settling is a GATE, not a delay…"* — plausible OTHER content ✓; the
++25 shift spot-confirmed (gate_open `:1485`, gf `:1517`) ✓.
+
+**(a) ⛔ My own relay owned**: the ":1503" I sent in -544 was measured at `21e62e426a` via git show — TRUE
+AT ITS COMMIT — but the relay clause carried the line number BARE, without its version ⇒ stale on arrival
+in the moving tree (now `:1506`). The resolvable-citation rule needs the VERSION in the SAME CLAUSE as the
+line number, not merely in the verifying context. **(b) ⭐⭐⭐ The meta-finding, with a live example**:
+*"動く file の stale な行番号は 大声で失敗せず、もっともらしい別の箇所を指します"* — p5's own stale range
+now lands on a REAL, relevant-looking note (the settling-GATE remark): a reader following it finds
+plausible text and cannot notice the error — **silent mis-resolution, not absence**. **(c)** The census: 9
+driver anchors in p5's doc, 5 stale (all ≥ ~`:1440`, uniformly +25ish — consistent with the (i) landing),
+4 alive. **(d) ⭐⭐ The remedy (p5's court, next cycle)**: code references inside DOCS become CONTENT
+anchors (verbatim fragments); line numbers demote to timestamped collation notes — p5 had applied this to
+artifacts but not to in-doc code references: *"同じ穴です."* **(e)** Adoptions for the next cycle: ① the
+(i) firing recorded as the EMPIRICAL PROOF of §13-8's inheritance claim (using the hub-banked verbatim)
+② #16's currency dimension → §13-8 gains condition ④ *"いつ測られたか"* (their court, accepted). **(f)**
+§4-Q2 held pending the pinch-vs-mouth probe; the bank routing unchanged (-543).
+
+## 289. The separation says contact — p4 kills its own hypothesis by reading the code
+
+From p4's -105 (13:5x); pins verified: `b1a7b20dc5` ("Withdraw the negative-budget call, and state R3 as a
+sufficient condition") — p5's -120 bank complete, sha `27507abe…` ✓; `7f824351fd` ("Separate the mouth
+offset from the jam, and lose the hypothesis") — `mouth_offset.txt` sha
+`6b9713e3973b2640f56e4c2240f5a446d604a15ad5148536df1a7215df0f733a` ✓.
+
+**(a) ⭐⭐ The separation probe answers (b) — CONTACT**: with nothing in the jaw, driving the command from
+clamped to fully open, the mouth stays ON the pinch centreline at every opening, both arms — tool-axis
+(0.00, 0.00, +31.99) mm, lateral 0.00. **(b) ⛔⛔ -103 item 7 WITHDRAWN by its author**: "the aim targets
+outside the mouth" does not hold — R's 14.69 mm was the RESULT of the jaw touching the cable in that
+posture: downstream of the jam, not upstream. Items 3/4/5 (the STEP13 three-instrument convergence, the
+rad/m–σ disagreement) are separate measurements and STAND. **(c) ⭐** Independent corroboration from the
+code itself: the aim never targets the open-posture mouth — seat_offset's docstring (*"the four-bar moves
+the mouth ~13 mm between open and closed"*) simulates the CLOSED seat ⇒ the item was compensated by
+design: *"私は自分の仮説を、コードを読んで殺しました."* **(d) ⚠** The surviving observation (a number,
+not a hypothesis): probe v1's L 1.40 / R 14.69 under (b) reads as "in that posture R's jaw was touching
+and L's barely" — the same direction as the run's `fingers blocked by ['cab31','cab32','cab33']`. **(e)**
+Ride-along #2 (STEP3 jaw-axis 3-component residual) + the closing-axis world-direction check: to be
+implemented, banked BEFORE launch, bank line sent first — the discipline now fully self-administering.
+
+## 290. p11's corroboration lands one second before its hypothesis dies — and the bar quantity sides with Rs
+
+From p11's -117 (13:56); §27.2.119 @ `f2dd508b28` ("The check fired, the bar quantity inverted sigma, and
+the 21 mm may be the same 21 mm") — sha256 machine-match
+`947251270b1740b3d55536ac3618705612c946bc05f25131181ed57d40ac4794` ✓. ⚠ The literal crossing: this bank is
+timestamped 13:56:15; p4's refuting probe bank (`7f824351fd`) is 13:56:16 — one second apart.
+
+**(a) ✅ The packet basis confirmed changed**: "unchecked branch" → "inspected result"; (ii) stays Rs's.
+⚠ Precision carried: 3/15 is "3 of the inheritances", ALL at STEP13 right — **the information is the
+CONCENTRATION, not the frequency.** **(b) ⭐⭐⭐ The rad/m inversion sides with Rs's visual verdict**:
+σ's run-worst = R 0.0037 @STEP13 (naive 1/σ ≈ 270) but that same instant's rad/m = 7.277; L's typical
+p95/max (9.6 / 12.0) EXCEEDS R's worst instant ⇒ σ says "R's moment is the run's worst", rad/m says "L is
+routinely worse than that" — the RANKING inverts, and **Rs's verdict was 「左が特異点を通る」: rad/m
+points at the arm Rs named; σ pointed at the other one.** ⚠ Corroboration, not proof (Rs = a specific
+visual event; rad/m = run medians) — §27.2.110's replacement now empirically vindicated AND aligned with
+the human ground truth. **(c) The structural reading, dissolved in flight**: p11's "the 21 mm may be the
+same two points" (seat_point takes x,y from pinch, z from claws — §27.2.97's fix chose the centreline and
+discarded the mouth; the numbers align on one axis: −9.05/+14.29, 14.69, 12.7) was posed with the causality
+explicitly open and the probe named as its judge — **and the probe (§289(a)) answers: the mouth IS on the
+centreline when empty (lateral 0.00) ⇒ pinch-x,y ≡ mouth-x,y by construction ⇒ the introduced-offset
+mechanism does not exist; the 14.69 was contact-downstream.** The reading dies exactly the way p11 built
+it to die. **(d) ✅** The :531 correction accepted (*"行が動いても content で追える、という私自身の理由が
+そのまま効きました"*); p5's independent arrival at the projection error acknowledged.
+
+## 291. Ride-along #2 banked before launch — with its measurement surface named in the print
+
+From p4's -107 (13:57); pins verified: `b92b7b823a` ("Give the aim residual its three components, and name
+the closing axis") — driver content sha
+`ee3cbf4ae3f86d58dc8947c423db16b4fadff4b606ecb6c1d82222b0b9f2ad4c` ✓; "PREDICTED close" present ×2 in the
+banked code ✓; guard PASS (0 names / 0 template literals, p4-reported).
+
+**(a)** Contents = p11 -116's #4 (STEP3 aim residual in jaw axes: along / closing / across) + #3 (each
+arm's closing and transverse axes' WORLD directions), print-only, measurement and commands unchanged.
+**(b) ⭐⭐ The measurement surface declared IN the print**: both seat and axes come from the throwaway
+close-SIMULATION the aim already runs — ⛔ NOT the live jaw (at that instant the arm still holds its
+previous posture; the live axes are not the solved aim's axes) — the print says **PREDICTED close**: #16's
+CONDITIONS dimension applied at the print level, unprompted (the §271(b) embed-the-scope pattern now a
+house style). **(c)** t12 launched 13:57:53 — ten seconds AFTER the bank; no videos to Downloads (Rs rule
+#9/#12 held); trace after completion. The bank-before-launch chain is now four for four.
