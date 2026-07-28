@@ -13782,7 +13782,10 @@ scope-above-the-numbers ordering itself rowed as correct form; ②'s formal deat
 to p5's court (which §492 then recorded). **(c) ⚠ The upper bound (not a ruling)**:
 the other-arm events number 2, so even a TRUE swap (never measured — what was
 measured is the pair-moved placement) could free AT MOST 2 candidates — and possibly
-0, since the breakdown is events, not a partition. p4's mast-9-independent argument
+0, since the breakdown is events, not a partition. [SUPERSEDED §497: p6's own
+re-derivation replaces the bound with the EXACT value 0 — the code allows at most one
+label per candidate per check, so mast events = distinct mast-rejected candidates;
+at cab32 mast 9 = candidates 9 ⇒ a true swap frees ZERO.] p4's mast-9-independent argument
 untouched. The candidate-level bound derived from the event-level count — the -147
 note doing forward work.
 
@@ -13823,3 +13826,52 @@ all five of the day's version-mix-ups were preventable by ONE command — "git l
 before writing the read version as the entered version." ⚠ Their memory-topic-file
 HOLD continues (MEMORY.md only released); the lesson writes the turn the HOLD lifts —
 a standing item outside this desk's gift.
+
+## 496. p5 rules the endgame — one is rounding, one is inert, one remains — and the desk returns a single question
+
+From p5's -174 (03:38). **(a)** p5 direct-read the far-end artifact, RE-RAN the
+decomposition arithmetic (correct), and added :11 — the far end fails BOTH arms
+(R 15/0 all put back; desk re-spotted). **(b) ⭐⭐⭐ Ruling (1): the 1/13 candidate is
+NOT a window** — four measurement-grounded reasons: (i) it clears the mounting but
+falls to the OTHER ARM, which §0#1 makes mandatory — a candidate open only without
+the mandatory arm is not open; (ii) it does not reach the work (hands at x
+−0.29/−0.20 vs clips at +0.150/+0.040); (iii) it is one START pose, silent on every
+later step; (iv) measured availability is 0 at all nine centres and 0 for BOTH arms
+at the far end. ⇒ 1/13 is decomposition rounding. **(c) ⭐⭐⭐ Ruling (2): ① (move the
+clips) is INERT** — the sweep already covered every centre the 40-link cable can
+carry the commanded span at; clips set SEATING targets, and execution dies at the
+START pose, a stage clips do not enter. With ② dead by measurement (§492), **③
+(change the mounting) is the one remaining choice**; p5's final line to Rs: "no path
+except changing the mounting; WHERE (outrigger/crown/column) = Rs's judgment," no
+recommendation. Scope carried (3rd time, self-noted): counterparts identified at 2
+of 9 centres (both ends agree: 7/7 and 12/13 mounting); middle 7 have counts only;
+the spread-0.40→0.22 mechanism conjecture marked UNMEASURED. **(d) ⚠ THE DESK'S ONE
+QUESTION, returned to p5 before the line finalizes (m823 — evidence-grade, not
+design)**: ruling (2)'s stated basis is the sweep's X-AXIS at FIXED y — the grasp
+line sits at y=0.28 (desk-measured in both end artifacts) and the sweep never varied
+it; option ① as named ("move the clips") includes moving the WORK ROW in Y (away
+from the column at y=0), a dimension the inertness argument does not visibly cover.
+If clip-y is fixed by spec/process constraint, one scope word in the Rs line closes
+it; if not, ①'s death may need its own one-solve. p5's court entirely; the register
+notified that ①'s grade awaits p5's answer (m824).
+
+## 497. The bound becomes zero — and the separator's own power gets its scope
+
+From p6's -150 (03:39:05). **(a) Pins verified**: commit c06276c1c8 ("Replace my
+bound with the exact number the code allows"); LEDGER sha 4d0f01fe…6674 MATCH; the
+structural claim desk-spotted (column_gap(want_who=True) returns the nearest SINGLE
+(best, who) — one label per candidate per check; path check exclusive with the pose
+check). **(b) ⭐⭐ The exact value**: mast events = DISTINCT mast-rejected candidates ⇒
+at cab32, mast 9 = candidates 9 ⇒ ALL candidates fall on the mounting ⇒ **a true swap
+frees ZERO** (the -148 "at most 2" was loose only because it allowed an intra-mast
+double-count the code forbids); §493 tagged SUPERSEDED at this desk. ②'s death no
+longer depends on the arm-vs-arm term at all. Far end: mast 12 of 13 ⇒ p4's "exactly
+ONE" now stands on STRUCTURE, not assumption; near end 7 = 7 ⇒ 0. **(c) ⚠ The flag
+(p6's, no ruling — judgment p5)**: the separator does NOT fully divide ① from ③ —
+the arm-to-arm spacing is itself a mounting quantity (YOKE_SPREAD) ⇒ the other-arm
+term MOVES when ③ moves; what the print separates is only "does the mounting ALONE
+block." Convergent in spirit with this desk's y-question (§496(d)): the ①/③ mapping
+was over-crisp in both directions. Both items joined to the pending m823 to p5 — the
+final Rs line absorbs or answers them; ③'s standing as sole survivor is not
+disturbed by either (the flag if anything STRENGTHENS ③'s reach: even the other-arm
+rejections are ③-movable).
