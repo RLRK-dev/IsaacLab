@@ -13698,3 +13698,40 @@ about a 10th." The question that suffices: **"which LINE does this conclusion po
 at?"** **(e)** Routed: p4 (m814 — the cab32 solve, priority per definition-owner),
 p5 (m815 — the counterpart answer for their Rs line), p6 (m816 — rows). The Rs
 decision material now reads: counterpart → ③-side for L; ②'s life = one solve away.
+
+## 489. p5 counts the lines this time — and designs the print that separates ① from ③
+
+From p5's -172 (03:30). **(a)** p5 direct-read the counterpart artifact (sha
+re-matched; desk re-spotted :25 — the measured centre IS the sweep's +0.150 row,
+L=cab27/R=cab32) and adds the sharp observation: all seven rejections are ONE geom
+(g6, the left forearm). **(b) ⛔ The self-applied grade, in real time**: "I just called
+an extrapolation a measurement, so this time I count the lines: ONE line measured,
+NINE lines needed" — "the mounting blocks everywhere" is NOT yet sayable; only the
+counts (0) are known for the other eight centres. **(c) ⭐⭐⭐ The separator, designed
+and routed (m817)**: the same rejected-against print at the sweep's OPPOSITE END
+(centre −0.250, left hand cab0; no run, one solve). If stem/crown THERE TOO — the
+left arm cannot clear its own mounting even on its own side ⇒ ① (move clips) falls BY
+MEASUREMENT and the choice narrows to ③. If other-arm/table there — the blocker
+changes with centre ⇒ ① lives. Bundled with the cab32 solve as the two priority
+prints. **(d)** The mechanism conjecture properly graded by its author (⛔ marked
+NOT-measurement for Rs): spread 0.40→0.22 moved the left shoulder 180 mm toward the
+column — maybe why the forearm meets the stem; unmeasured. R's different breakage
+kept un-flattened. p5's line to Rs: "the mounting is the answer's side, but one
+centre measured; one more print can drop ①."
+
+## 490. The register counts the events, not the candidates — and puts option ② back on the table
+
+From p6's -147 (03:30:00). **(a) Pins verified**: commit 52d88d8e99; LEDGER sha
+a2b3aaed…9258 MATCH; artifact direct-read by p6 (sha re-matched, 31 lines); their
+-145 return marked closed after re-measuring BOTH revised docs and reading the
+correction text. **(b) ⚠ The counting note (not a ruling)**: the rejected-against
+breakdown counts REJECTION EVENTS, not a partition of candidates — R: 15 rejected
+(17 solved − 2 free) vs breakdown total 27 (13+6+3+2+2+1) ⇒ one candidate can fail
+against several counterparts; "the other arm ×13" must not be read as "13
+candidates" (p4's own totals-may-exceed note, now quantified). L's 7 equals its
+candidate count, but agreement is not proof of partition. ⭐ What survives counting-
+method-independence: the SET claim — neither the other arm nor the table EVER
+appears among L's counterparts. **(c)** Option ② restored to the register as one of
+THREE (p5's self-admission + the Rs-wording fix + the pending cab32 solve rowed;
+"eliminated" will not be written until the solve returns). The register and this
+desk now carry the same grades on every live item.
