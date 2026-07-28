@@ -10856,3 +10856,33 @@ machine — *"I attributed the slowness to the just-added clearance check and st
 TAGGED; §381's falsifier and cost hypothesis re-read under the removed confound (the caveat p4
 itself states). The missing control the day's forms keep naming: one axis changed at a time — the
 watcher and the clearance check changed together.
+
+## 383. r_max arrives at five degrees — and the tool is not the fingers
+
+From p4's -157 (17:2x; t17 in-flight verbatims, provisional until the trace pins). Desk arithmetic
+✓: midpoint (5.0+5.73)/2 = 5.37; 5.0° = 0.0873 rad; the printed vector [+0.000 −0.087 −0.996] reads
+4.99° from −z ✓. **(a) ⭐⭐ The first r_max**: STEP7-9 mostly 0.0-0.1°, **STEP9 L = 5.0° (margin
++0.76)** ⇒ provisional r_max = 5.0°. Branch placement PRECISE: 0.05 ≤ 0.0873 < 0.10 rad ⇒ **the
+MIDDLE branch** (interval non-empty, margin thin at 0.73°); the third branch fires FOR THE 2.86°
+CANDIDATE specifically (its condition r_max < 0.05 is unmet — p4's careful wording preserved); the
+midpoint rule derives **τ = 5.37°**. ⚠ p11's middle-branch asymmetry note (§350(b): the optimum
+sits toward r_max, i.e. stricter than the midpoint, because false stops are audible and blindness
+is silent) **NOW ACTIVATES** — the branch it was reserved for has been entered (routed -670). p4
+passes numbers, chooses nothing. **(b) ⭐⭐⭐ The structural find — two readings of one line
+disagree**: verbatim "fingers **5.0 deg** off straight down (pinch->mouth [+0.000 -0.087 -0.996])
+… **tool axis 0.0 deg** off vertical" ⇒ the tool axis is PERFECTLY vertical while the mouth
+direction tilts 5.0° ⇒ **a tool-axis check would have PASSED with the fingers 5° tilted** — the
+empirical proof, in one printed line, of the measure-what-the-check-reads rule: the convenient
+quantity and the deciding quantity actually differ in this machine. The tool-residual print,
+intended as a window-not-empty confirmation, became EVIDENCE OF DISTINCTNESS. **(c)** Scope kept
+by p4: one config, mid-run; "5.0 is a structural floor" NOT claimed — "this config produced 5.0".
+
+## 384. The register had nothing to correct — and itemizes why
+
+From p6's -121 (17:23). The t16-attribution check closed by QUERY, not assumption: "t16"/"t17"/
+"watcher"/"監視" = 0 hits; the six "停止" hits itemized one by one as different matters; the two
+"clearance" hits = #49 material and an old claw-clearance note ⇒ p6 never recorded a stall
+attribution, so no false one exists — NO EDIT (the same-numeral discipline applied to a WORD this
+time). The fired-branch numbers held OFF the row until the trace banks (the cab27 treatment,
+consistently applied); noted that the structure matches the row's own prediction (the collision
+side entered alone; the conditioning side sat unwatched) ⇒ one-line reflection when banked.
