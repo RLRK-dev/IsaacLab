@@ -1304,6 +1304,19 @@ def live_write(img):
 
 print(f"[steps] watch along here while it runs: {LIVE_OUT}")
 
+# Write one frame straight away, so the file EXISTS from the start.  The encoder is only spawned
+# by the first frame, and the first frame of the run proper is a quarter of an hour away: the
+# attitude search happens before anything steps.  Rs went to open the file in that window and
+# found nothing there.  A still of the starting cell is not much, but "empty" and "not yet" look
+# identical from outside, and only one of them is true.
+renderer.update_scene(d, camera=cam)
+_a0 = renderer.render()
+cam2.lookat[:] = 0.5 * (pinch("L") + pinch("R"))
+renderer.update_scene(d, camera=cam2)
+live_write(np.hstack([_a0, renderer.render()]))
+print("[steps] watch-along file opened with the starting frame; it stays on that frame until the "
+      "attitude search finishes and the arms begin to move")
+
 # Pre-solve one joint waypoint per STEP per arm.  The IK runs offline on scratch data; the live
 # arms are moved ONLY by their position servos interpolating between these waypoints.
 qcmd = {t: START[t].copy() for t in SIDES}
