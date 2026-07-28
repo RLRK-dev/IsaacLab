@@ -9877,3 +9877,93 @@ decided, on seating steps CHECK the attitude is vertical and raise otherwise, in
 produced the pose (the verify-absence-at-the-sink form). Implementation = p4 (routed -605); p5 informed
 (-607, the R3 premise). **(d)** Non-claims kept: no run / no code fix by p11 / no t13 revival / the flip
 not stated as fact.
+
+## 339. A third version is already running — the authorized pin, and a camera that knows the lesson
+
+From p6's -115 (15:52). **(a)** Pins verified: LEDGER @ `dda1981095` sha `314be7b694…` ✓; `3f5c7630ac`
+(15:48:22 "Retain the link that is in the clip, and add the view from above") wired sha `e30e489ad4…` /
+1946 lines ✓; wired versions between `8e4852e767` and `3f5c7630ac` = exactly one step ⇒ p6's
+three-version count for the file is EXACT (`1a1efe0ac5` → `8e4852e767` → `3f5c7630ac`, 32 minutes). p6's
+process measurement: a run started 15:48:39, 17 s after the commit ⇒ producing code `3f5c7630ac` —
+bank-before-launch HOLDS. ⚠ Unclaimed at this desk: whether t14 completed cleanly, and the new run's
+name — p4's report pending. **(b)** The #49 caution row landed: confirm a result's producing version
+FIRST; three versions pinned side by side. **(c) ⭐ What `3f5c7630ac` actually is (my diff read)**: ①
+the cell_spec 4-liner is NOT the MOUTH_BAND_Z fix (still owed) — it registers cam3 in the recording
+tier, its comment reading "cam3 is the top-down view **Rs asked for on 2026-07-28**" — a THIRD Rs direct
+instruction today, custody = the code comment pending p4's verbatim report 〔count corrected §342(e):
+「なおせ」precedes it — cam3 is the FOURTH〕. ② the wired changes
+implement **the clip-retention pin**: mujoco eq data written and gated (`eq_obj2id` / `eq_data[3:6]` /
+`not d.eq_active[EQ[_cn]]` behind a gate check) — the subject names exactly the authorized §0#5
+exception, the ONE kinematic mechanism with standing authorization; design details await p4's report. ③
+⭐⭐ the new camera BUILDS IN the -131 lesson, in code: "Its azimuth matches the WIDE camera's on
+purpose, so left and right mean the same thing in panel one and panel three. They do NOT in panel two:
+the close-up looks from azimuth 250" — the attribution flip became a design input; §329(b)'s mapping
+stays layout-scoped and the new layout ships with its mapping DECLARED. **(d)** p6 adds nothing on the
+`:1597` comment; judgment stays with p4/p11.
+
+## 340. The held floor does not move — the guess was wrong, the tag was right — and R3 gains a precondition
+
+From p5's -132 (15:51). **(a) ⭐** -131's held item RESOLVED by opening the derivation: escape floor =
+Ø + offset; offset = backplate-gap − claw-tip-gap (opposing pads = CLOSING axis), Ø = cable diameter ⇒
+both closing-axis ⇒ **escape floors 18.20/20.20 UNCHANGED**; the escape judgment (claw-tip gap ≥ 8.00)
+also closing-axis ⇒ unchanged — two items JOIN the invariant set. p5's own direction guess ("floor moves
+down") was WRONG, and cost nothing: it had been tagged a guess, never banked as more. **(b) ⛔ Two
+moving columns p5 itself found in §12-1** (self-reported, previously unrouted): downward reach (19.7 …)
+and escape height (30 + reach) reference the claw's mouth-axis position ⇒ they MOVE. The §12-1 ruling
+"minimum-open escape needs only 3.7 mm above carry height" is a DIFFERENCE claim ⇒ preserved only if
+both rows shift EQUALLY — ⚠ not guaranteed: the rows live at different attitudes and a mouth-axis shift
+projects to world z attitude-dependently (the same reason L +1.9 / R +1.6 differ) ⇒ **preserving 3.7
+needs measured reach at BOTH attitudes; p5 claims nothing now.** **(c) ⭐⭐ The guard-path general
+form** (p5's court, same root as §13-8): the inheritance continue skips not only the solve but THE
+CHECKS ATTACHED TO IT ⇒ "a guard placed on a path is correct only while that path is the only road to
+use" — with a bypass, guards belong at the use site. R3's extension to seating steps now carries
+**"use-site vertical check landed" as a PRECONDITION** (no extension proposal until met); today's
+non-firing goes into §13-8 as "correct now ≠ correct". **(d)** The bank-#9-gated edit list finalized;
+the single need stays bank #9's landing (open with p4).
+
+## 341. The version rule lands as a second instance of an old form — and the luck is named
+
+From p11's -133 (15:52; ⚠ the header's FROM field reads "w2:p18" — a typo self-evident from the message
+ID and content; noted, not returned). Pin verified: §27.2.99 APPENDED in place @ `c2f1822276` sha
+`3afc6842ef…` ✓, new headers 0 ✓. **(a)** The version-on-line-cites rule adopted into the EXISTING
+§27.2.99 (pin from commit, not working tree) as a second instance of one form: file:line is
+time-dependent for the same reason sha256(file) is. **(b) ⭐⭐ The decomposition of why it worked
+anyway**: ① content was quoted (code blocks) — content crossed the drift; ② the offset was uniformly
++13, so the version self-identified — and ② is NAMED AS LUCK: had the edit fallen inside the quoted
+range, the offset would be non-uniform and no anchor would resolve. "It worked" is not read as "this
+suffices". **(c)** Going forward: the version in the same clause; content primary, version secondary
+(collation becomes confirmation, not luck) — file:line → file:line @ commit, the same move as
+sha256(file) → sha256(commit:file).
+
+## 342. The grasp gate passes for the first time — and the value comes back asking for its rule
+
+From p4's -137 (15:5x). **(a) ⭐⭐ t14 COMPLETE — the grasp gate's FIRST PASS**, verified: `e9a27e28ec`
+("The grasp gate passes for the first time") — run_t14.txt sha `15cf5a6a5ff0…` ✓; gates verbatim in-log
+`:278` "gates: {'grasp': True, 'regrasp': False}" ✓; producing code `1a1efe0ac5` as expected; sigma
+trace banked alongside. The right hand 16.23 mm stuck → **6.69 mm clamped=True** (left 6.71). The
+vertical directive's effect: ZERO unsolvable steps; carry-phase table margin +120 mm (t13 had −25.5
+penetration); seating steps −0.3/−0.4 mm only. ⚠ Unresolved: regrasp FAIL; retention not engaging (→
+(e)③); R rad/m worst **49.4 @ STEP15** (~6×) — the conditioning lane's next datum (routed to p11).
+**(b)** Bank #9 LANDED (late by p4's own word): `7d3564f529` — P5_UR15_CLIP_DETAIL_DESIGN sha
+`b35e4e39d7…` ✓ = exactly the value p5 waited on ⇒ **p5's doc-edit gate OPEN** (routed -611).
+**(c) ⛔ MOUTH_BAND_Z comes back as a RULE question**: p4 declines to choose between two face-rules that
+COINCIDE on the supplied number but DIVERGE after the move — interior faces ⇒ (0.0230, 0.0390) vs
+blue-far-face ⇒ (0.0206, 0.0390) — and asks for the RULE, to implement it asset-derived (immune to the
+next claw move). ⭐ MY OWN in this: p5's -130 DID state the rule ("f2ext pos z 0.0218 ⇒ 内面 0.0230" =
+interior faces, banked §333(a)) — my -599 relayed the VALUE without its derivation ⇒ the ambiguity p4
+faced is partly my compression; the rule-confirmation routed back to p5 (-611), the ruling stays p5's.
+**(d) ⭐** p11's two prescriptions BOTH ADOPTED: `5013fb8aa3` — wired sha `773c8d6b37…` ✓ — (i) the
+vertical check at the MERGE POINT as a MEASUREMENT of the commanded pose (pinch→mouth vector along world
+−z), path-independent; tolerance 0.2/2 rad = 5.73° = half the menu's smallest nonzero roll (separates
+"vertical vs the neighbouring menu item", not solver noise) — ⛔ a run-stopping value, submitted for
+p5/p11 RATIFICATION (routed -611/-612); (ii) the predicted angle printed on the SAME LINE as the
+measured. ⛔ `5013fb8aa3` is NOT in t15 (t16 onward). **(e) ⭐ Rs direct instructions #3 and #4**
+(custody = p4 -137): ③「なおせ」(the retention) — latch changed to "did ANY link seat"; the critical
+mechanics: connect-eq anchors live per body frame and the cable-side anchor referenced a build-time link
+⇒ re-pointing alone would activate an UNSATISFIED constraint = pulling the cable = teleport ⇒ **anchors
+RECOMPUTED at the activation instant so the constraint enters exactly satisfied — nothing moves** (the
+recovery-respects-its-path form honoured inside the authorized §0#5 mechanism); banked `3f5c7630ac`
+(§339's diff read confirmed). ④「今後は真上からも観察できるよう3カメラ映像にして」— the third panel,
+azimuth matched to the wide camera so L/R agree on panels 1 and 3; only the close-up stays mirrored.
+**(f)** t15 launched 15:48:41 producing `3f5c7630ac` — CONVERGES with p6's independent process
+measurement (15:48:39; 2 s spawn-vs-script delta).
