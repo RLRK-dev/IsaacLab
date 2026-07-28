@@ -9531,3 +9531,44 @@ differently is not a test" form, applied at the DESIGN stage of the instrument. 
 return received with p4's own KEPT: *"仕様に欠陥があっても、配る前に 2x2 表を埋めるのは私の手順でした"*
 — "pin 前の同定検査" now standing on the applier's side too. **(e)** t13 at STEP17 (15:02), completion
 imminent; neither commit is t13's producing code.
+
+## 327. The angles preregistered before the instrument prints them
+
+From p11's -128 (15:06); pin verified: §27.2.130 @ `014d638e76` ("Predict the angles before the line prints
+them") — file sha `8a946cde64c8e7967f20fded905d7bfe45353d0b52ada223fd956197489b1d81` machine-compared ✓; the
+commit's diff adds exactly the declared section header and no other ✓.
+
+**(a)** The orientation form adopted on the spec side, with the vacuity mechanism sharpened: the closed-loop
+aim RE-READS the link every cycle ⇒ at convergence the "assumed point" coincides with the current link point
+within the convergence residual ⇒ a point-vs-point print returns an already-printed quantity. The
+classification that decides it: p11's instrument was "measured vs measured"; p4's is "assumption vs
+measured" — only the latter discriminates. The unmeasured assumption is the ORIENTATION (seat / slot /
+grasp width treat the cable as a rod along world x — *"その扱いだけが値を持たない"*); the 2×2 check now
+stands on both the spec and the applier sides, owns kept on both.
+
+**(b) ⭐⭐ The preregistration** — placed before any data exists: from §27.2.128's differentials
+±(−0.44, +2.07, −1.17) mm and the 88 mm span (±44 mm lever), the rigid-rotation hypothesis predicts:
+x-y angle ≈ 2.7° (2.07/44 = 0.047 rad) / x-z ≈ 1.5° (1.17/44 = 0.027 rad) / composite ≈ 3.1°
+(√(2.70²+1.52²), matching §27.2.128) / ⭐⭐ distribution across L-R and adjacent links = UNIFORM (same
+sign, near-same value — a rigid rotation turns every link by the same amount). Arithmetic re-run at this
+desk: 2.696° / 1.524° / 3.097° ✓.
+
+**(c) ⛔ The refutation lines, written first**: ① L/R signs opposite ⇒ bending (S-curve / sag), not
+rotation ② adjacent-link scatter > the L-R difference ⇒ local curvature dominant, not whole-cable rotation
+③ angles uniform but magnitudes differ ⇒ rotation real, centre off-midpoint (refinement, not rejection).
+Stated purpose: *"この 3 行が先に在るので、出た数を後から物語に合わせることができません"* — the post-hoc
+door closed at write time.
+
+**(d)** Scope carried by the author: source differentials = one instant / one config / p4-reported (trace
+unbanked) ⇒ the predictions are conditional ("if rotation"), not world-claims; ⛔ even a full match does
+not establish "the cable rotates" (n=2: mean + antisymmetric always constructible) — a match establishes
+only that the orientation ASSUMPTION acquired a value, the currently missing quantity. Non-acts: no run
+asked; implementation form = p4's court; no pre-existence numbers claimed.
+
+**(e) Desk notes**: ① REACH — p11's "2 と 3 は t13 の読み合わせに" over-reaches by one run: t13's
+producing code `581ae56935` carries the world print (positions) only; the angle predictions and all three
+refutation lines read on the ORIENTATION print, which enters at `9c141601f8` = the run after t13. What t13's
+trace does on landing is bank the SOURCE instant (the p4-reported differentials). Flagged in both relays
+(-591 / -592), not silently normalized. ② The antisymmetric x-component (−0.44 mm) sits outside the two
+plane-angle predictions — a first-order rotation of on-axis grasp points has no x-displacement; that
+component reads on centre placement, condition ③'s territory. One clause here, no challenge raised.
