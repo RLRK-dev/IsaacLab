@@ -11213,3 +11213,15 @@ dropped-best, the filter takes nothing and the conflict lives INSIDE THE RANKING
 E′ — a cost-weight question; the question's location moves. Zero cost (σ already in cands). The
 falsifier attached (all-stages survivor-best = winner σ ⇒ no information). Routed to p4 (-702,
 same line as count). tier-2 agreed, not demanded.
+
+## 403. The survivor-best field lands — existence shown, quality not shown
+
+From p4's -171 (18:0x); pin ✓ (`acd1555e66` driver sha `ac58965579…`). **(a) ⭐** The survivor-best
+σ field IMPLEMENTED beside the winner σ — "the selection is _cost, not σ, so the choosable set can
+hold better-conditioned poses than the winner: this field separates the two"; zero cost confirmed.
+**(b)** The conjunction caveat ACCEPTED into p4's own artifact wording: count > 0 kills one leg —
+**"existence shown, quality not shown."** **(c)** t19 (producing `b7e4215435`) carries C + state
+purification + B + 4 prints + conditioning pair + P2/P5 + both guards + saturation fixes + cutoff
+split; count + survivor-best ride **t20**. The instrument chain for the singularity-side question
+is now COMPLETE in code: classification triples → count (existence leg) → survivor-best (ranking
+leg) → E′/D/cost-weight discrimination — all riding already-computed numbers.
