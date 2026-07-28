@@ -347,7 +347,16 @@ _CLIP_PARTS_PER_SPEC = [
 # --------------------------------------------------------------------------------------------
 
 SHOULDER_HEIGHT = 0.37 + 0.58 * 2.0     # spec §4 -- all five driver files already agreed
-YOKE_SPREAD = 0.22                      # Rs's supplied cell, ur15-dual-arm-cell.md:
+# ⭐ p5 -176(4): the three mounting numbers get env overrides so option 3 can be MEASURED rather
+# than argued.  Defaults are the built values, so the cell is unchanged unless a sweep sets one.
+# ⚠ CROWN_R_OVERRIDE accepts the literal "none", which removes the crown geometry entirely -- the
+# lower bound p5 asked to include, and the only way to read how much of the blockage is the crown
+# and how much is the column underneath it.
+_YOKE_SPREAD_OVERRIDE = _os_module.environ.get("YOKE_SPREAD_OVERRIDE")
+_TILT_DEG_OVERRIDE = _os_module.environ.get("TILT_DEG_OVERRIDE")
+CROWN_R_OVERRIDE = _os_module.environ.get("CROWN_R_OVERRIDE")
+YOKE_SPREAD = float(_YOKE_SPREAD_OVERRIDE) if _YOKE_SPREAD_OVERRIDE else 0.22
+# Rs's supplied cell, ur15-dual-arm-cell.md:
                                         # yoke_spread_m 0.22, yoke_angle_deg 45.  ⛔ My 0.106 was
                                         # a number I read off a screenshot by eye; this one is
                                         # the cell's own definition, so mine is discarded.
@@ -362,7 +371,8 @@ YOKE_SPREAD = 0.22                      # Rs's supplied cell, ur15-dual-arm-cell
                                         # two points, not a boundary, and governs "do not separate
                                         # the pair", which the re-measurement must honour.
 _YOKE_SPREAD_SUPERSEDED = 0.40          # spec §4 -- "0.22/45deg made the two arms interleave at an
-TILT = math.pi / 2.0 - math.radians(45.0)  #          88 mm span; 0.40/20deg clears the rest row
+TILT = math.pi / 2.0 - math.radians(float(_TILT_DEG_OVERRIDE) if _TILT_DEG_OVERRIDE
+                                        else 45.0)  #          88 mm span; 0.40/20deg clears the rest row
                                         #            and both clips" (measured, and measured as a
                                         #            pair, so the two cannot be separated)
 TABLE_HX, TABLE_HY = 0.70, 0.20         # spec §4 -- ⚠ weak grounds, and spec §7 asked whether p4
@@ -407,7 +417,9 @@ COLUMN_R = 0.102                        # spec §6.4j -- the shared column both 
 # 0.76 m wide and 0.32 m tall -- a mushroom cap sitting on the post.  In the reference the head is
 # barely wider than the column itself.  p5's own floor is spread/2, so that is what it takes: the
 # smallest head that still reaches both mounts.
-CROWN_R = YOKE_SPREAD / 2               # p5 bank #22 floor -- the head only has to reach the mounts
+CROWN_R = (0.0 if (CROWN_R_OVERRIDE or "").lower() == "none"
+           else float(CROWN_R_OVERRIDE) if CROWN_R_OVERRIDE else YOKE_SPREAD / 2)
+# p5 bank #22 floor -- the head only has to reach the mounts
 CROWN_Z0 = 1.330                        # p5 bank #22 -- where the crown's underside sits
 CROWN_ZC = CROWN_Z0 + CROWN_R           # its axis, so the underside lands exactly on CROWN_Z0
 # The cell's own home pose, left arm, from ur15-dual-arm-cell.md.  ⭐ The right arm takes the same

@@ -170,6 +170,15 @@ def yoke_xml():
     ⚠ A capsule, not a plate: p5 specified a round primitive, and a flat one would hand the
     distance queries a corner the reference does not have.
     """
+    # ⚠ CROWN_R = 0 means the crown is REMOVED, which is the lower bound p5 asked the radius
+    # sweep to include.  A zero-radius capsule is not a small crown, it is a degenerate solid, so
+    # the geom is omitted rather than shrunk to nothing -- and the omission is announced, because
+    # an instrument that silently stops measuring a part reads exactly like a part that is clear.
+    if CROWN_R <= 0.0:
+        print("[steps] ⚠ CROWN REMOVED (CROWN_R=0): the yoke head is not in this cell at all, so "
+              "no mast reading can name it.  This is the sweep's lower bound, not a cell anyone "
+              "proposed building.")
+        return ""
     return (f'<geom name="crown" type="capsule" size="{CROWN_R}" '
             f'fromto="{-YOKE_SPREAD} 0 {CROWN_ZC} {YOKE_SPREAD} 0 {CROWN_ZC}" material="col"/>')
 
@@ -1174,9 +1183,18 @@ def _rdes(yaw, roll=0.0):
 # else, so a yoke that is not named here is a yoke every mast instrument silently ignores -- the
 # exact failure this file already has a name for: an instrument reporting a fault to nobody.
 # p5 flagged it before I wrote the geometry; it is here because of that, not because I checked.
-COLG = [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n)
-        for n in ("stem", "foot", "crown")]   # p6 #54(2): the crown is new mast material
-assert all(g >= 0 for g in COLG), "a mast geom name did not resolve -- an instrument would be blind"
+_MASTNAMES = ("stem", "foot", "crown")   # p6 #54(2): the crown is new mast material
+COLG = [g for g in (mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n) for n in _MASTNAMES)
+        if g >= 0]
+_MISSING = [n for n in _MASTNAMES if mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n) < 0]
+# ⛔ The assert stays for every name EXCEPT a crown that this cell was told to remove.  A missing
+# name is normally an instrument going blind; a crown removed on purpose is the one case where
+# the part really is not there, and it is announced above rather than absorbed here.
+assert not [n for n in _MISSING if not (n == "crown" and CROWN_R <= 0.0)], \
+    f"a mast geom name did not resolve -- an instrument would be blind: {_MISSING}"
+if _MISSING:
+    print(f"[steps] ⚠ mast set is {len(COLG)} of {len(_MASTNAMES)} parts; {_MISSING} absent by "
+          f"construction, so no rejection can be attributed to it in this run")
 COLB = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "column")
 # ⛔ An exclusion stood here and its reason was wrong.  I argued that each arm's first body is a
 # child of the column body, so its geoms sit inside the mast by construction and the reading should
@@ -1610,6 +1628,24 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     return q
 
 
+# ⭐ p5 -176(4b): the 88 mm interleave test, wired to the same sweep as the clearance count.
+# The pair constraint in the spec comment (:350-353) says 0.22/45 made the two arms interleave at
+# an 88 mm span and 0.40/20 did not.  That was measured once and has been argued about since; it
+# is the same question the mounting sweep asks, so it is read out here instead of separately.
+# ⚠ Measured at the two arms' chosen START poses for the commanded span -- not at some later step
+# -- because that is the configuration the span constraint is about, and it is the one every
+# point of the sweep has.
+def _interleave_report(dd):
+    _g, _who = arm_pair_min(dd, want_who=True)
+    print(f"[steps] 88mm-SPAN INTERLEAVE: arms closest "
+          + (f"{_g*1000:+.1f} mm ({_who})" if _g is not None else
+             f"nothing within the {ARM_PAIR_CUTOFF*1000:.0f} mm search radius")
+          + (f"   <- TOUCHING OR THROUGH" if _g is not None and _g <= 0 else "")
+          + f"   spread {YOKE_SPREAD:.3f} tilt {math.degrees(math.pi/2 - TILT):.1f} deg"
+          + f"   crown r {CROWN_R:.3f}"
+          + ("   ⚠ commanded span, not the links actually held" ))
+
+
 # Rs: start from home.  The cell ships one, so the arms begin in the pose its own drawings show
 # instead of at the zero configuration, which for this mounting is arms crossed.
 for _t4 in SIDES:
@@ -1624,6 +1660,17 @@ for _round in range(3):
     for t in SIDES:
         START[t] = solve_ik(t, GRASP1[t], tries=24, near=START[t],
                             other=START["R" if t == "L" else "L"], quiet=(_round < 2))
+
+# Both arms placed at the poses just solved for the commanded span, on a throwaway state, and the
+# gap between them read there.  The live d is not written: the interleave question is about the
+# configuration, not about what the servos manage to reach.
+_sci = mujoco.MjData(m)
+_sci.qpos[:] = d.qpos
+for _t6 in SIDES:
+    for _k6, _a6 in enumerate(QADR[_t6]):
+        _sci.qpos[_a6] = START[_t6][_k6]
+mujoco.mj_forward(m, _sci)
+_interleave_report(_sci)
 
 # ---- STEP 1: the arms REACH the start pose by servo motion; no state is written ----
 q0 = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
