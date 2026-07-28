@@ -550,6 +550,27 @@ def slot_after_close(t, qarm, ctrl_g):
     return seat_point(t, sc)
 
 
+def jaw_axes_after_close(t, qarm, ctrl_g):
+    """The jaw's own frame at the pose `qarm` once the fingers have closed to `ctrl_g`.
+
+    Measurement only.  Same throwaway simulation slot_after_close uses, so the axes and the seat
+    it predicts belong to the same instant; reading jaw_axes live instead would return the frame
+    of the pose the arm is leaving, not the one the aim just solved.
+    """
+    sc = mujoco.MjData(m)
+    sc.qpos[:] = d.qpos
+    sc.qvel[:] = 0.0
+    sc.ctrl[:] = d.ctrl
+    for k, a in enumerate(QADR[t]):
+        sc.qpos[a] = qarm[k]
+    for k, i in enumerate(AIDX[t]):
+        sc.ctrl[i] = qarm[k]
+    sc.ctrl[GIDX[t]] = ctrl_g
+    for _ in range(int(PREDICT_S / m.opt.timestep)):
+        mujoco.mj_step(m, sc)
+    return jaw_axes(t, sc)
+
+
 def seat_offset(t, qarm):
     """seat(closed) - pinch(open), for arm `t` held at `qarm`.  Both are rigidly attached to the
     tool, and the IK fixes the tool orientation, so this vector is constant in world for any pose
@@ -1415,6 +1436,26 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 aim_seat[t] = slot_after_close(t, wq, CLAMP)
                 print(f"[steps] STEP3 {t}: standoff re-aim (y,z only), seat error "
                       f"{mag*1000:5.2f} mm")
+                # p11 -116(4): a scalar seat error cannot say which way the budget is spent, and
+                # the band the containment budget is measured along is the across-the-mouth axis
+                # alone.  So give the same three components the GRASP print gives, one step
+                # earlier -- at the aim, before anything has touched the cable.
+                # ⚠ Taken on the PREDICTED close, not on a live jaw: the axes and the seat both
+                # come from the same throwaway simulation slot_after_close runs, because at this
+                # instant the arm is still at the previous pose and its live axes are not the
+                # ones this aim will hold.  p11 -116(1): the surface is the prediction, and it is
+                # named here so nobody reads it as the closing moment itself.
+                _ax = jaw_axes_after_close(t, wq, CLAMP)
+                _r3 = _ax @ (np.asarray(c, dtype=float) - aim_seat[t]) * 1000.0
+                print(f"[steps] STEP3 {t}: that residual in the jaw's own axes (PREDICTED close): "
+                      f"along cable {_r3[0]:+6.2f}  closing {_r3[1]:+6.2f}  "
+                      f"across the mouth {_r3[2]:+6.2f} mm")
+                # p11 -116(3): the two arms' closing axes came out with opposite signs, which is
+                # either a real difference or a mirrored convention in the asset.  Printing the
+                # world direction of each settles it by inspection rather than by argument.
+                print(f"[steps] STEP3 {t}: closing axis in world "
+                      f"[{_ax[1][0]:+.3f} {_ax[1][1]:+.3f} {_ax[1][2]:+.3f}]  "
+                      f"across-mouth axis [{_ax[2][0]:+.3f} {_ax[2][1]:+.3f} {_ax[2][2]:+.3f}]")
             elif num == 4:
                 # p5 §4: hold.  The clamp step is the fingers closing, not the arm moving.
                 aimed[t], tgt[t] = grasp_pose[t][0], grasp_pose[t][1]
