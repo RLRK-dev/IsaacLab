@@ -43,7 +43,7 @@ from ur15_cell_spec import (  # noqa: E402
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
-    ARM_CLEARANCE, ARM_PAIR_CUTOFF, PIN_SETTLE_S, PREDICT_S, TILT_CAL_DEG, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
+    ARM_CLEARANCE, ARM_DECIDE_CUTOFF, ARM_PAIR_CUTOFF, PIN_SETTLE_S, PREDICT_S, TILT_CAL_DEG, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
     VERTICAL_TOL_DEG,
     START_HOLD_S, START_RAMP_S,
     TABLE_HZ, TABLE_Y,
@@ -1102,7 +1102,7 @@ def column_gap(t, dd=None):
     return best * 1000.0
 
 
-def arm_pair_min(dd, ta="L", tb="R", want_who=False):
+def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
     """Smallest signed distance between any geom of arm `ta` and any of arm `tb` [m].
 
     ⚠ Written this way for speed, and the speed matters: the naive form is 38x38 = 1444 distance
@@ -1115,16 +1115,23 @@ def arm_pair_min(dd, ta="L", tb="R", want_who=False):
     answer is identical to the exhaustive form; only the work is smaller.
     """
     # ARMG holds sets -- numpy cannot index with one, and the first run said so immediately.
+    cut = ARM_PAIR_CUTOFF if cutoff is None else cutoff
     ga, gb = np.fromiter(sorted(ARMG[ta]), int), np.fromiter(sorted(ARMG[tb]), int)
     pa = np.asarray(dd.geom_xpos)[ga]
     pb = np.asarray(dd.geom_xpos)[gb]
     ra = np.asarray(m.geom_rbound)[ga]
     rb = np.asarray(m.geom_rbound)[gb]
     sep = np.linalg.norm(pa[:, None, :] - pb[None, :, :], axis=2) - ra[:, None] - rb[None, :]
-    best, who = ARM_PAIR_CUTOFF, ""
-    for ia, ib in zip(*np.where(sep < ARM_PAIR_CUTOFF)):
-        dv = mujoco.mj_geomDistance(m, dd, int(ga[ia]), int(gb[ib]), ARM_PAIR_CUTOFF, None)
-        if dv < best:
+    # ⛔ None, not the cutoff, when nothing is within range.  Returning the cutoff made the report
+    # read "+176.0 mm" with an empty pair name, which is the cutoff wearing a distance's clothes --
+    # the same saturation the claw-tip reading has, and the same way of hiding it.  A caller that
+    # wants a number for a comparison can substitute one knowingly; the reader gets told.
+    best, who = None, ""
+    for ia, ib in zip(*np.where(sep < cut)):
+        dv = mujoco.mj_geomDistance(m, dd, int(ga[ia]), int(gb[ib]), cut, None)
+        if dv >= cut:
+            continue
+        if best is None or dv < best:
             best = dv
             if want_who:
                 who = (f"{mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, int(ga[ia])) or ga[ia]}"
@@ -1222,8 +1229,14 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         _by_clearance = False
         near_far_arm = None
         if other is not None:
-            near_far_arm = arm_pair_min(sc, t, "R" if t == "L" else "L")
-            if near_far_arm < ARM_CLEARANCE:
+            # p11 -146: this loop only ever asks whether anything is under the clearance, so it
+            # can search a radius just wider than the clearance instead of the reporting radius.
+            # Nothing it DECIDES changes -- a pair beyond the small radius is beyond the clearance
+            # by construction -- and the far pairs stop being measured.  The reported minimum
+            # still uses the wide radius, because that one is read as a distance.
+            near_far_arm = arm_pair_min(sc, t, "R" if t == "L" else "L",
+                                        cutoff=ARM_DECIDE_CUTOFF)
+            if near_far_arm is not None and near_far_arm < ARM_CLEARANCE:
                 hit = True
                 _clear_dropped += 1
                 _by_clearance = True
@@ -1936,7 +1949,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 f"can also arrive by inheritance, which does not pass through the solve."
             )
     prev = w
-    step_gap_path = 1e9      # the smallest arm-to-arm gap reached DURING this step's move
+    step_gap_path, step_gap_who = 1e9, ""   # smallest arm-to-arm gap DURING this step's move
     q_from = {t: qcmd[t].copy() for t in SIDES}
     g_from = {"L": float(d.ctrl[GIDX["L"]]), "R": float(d.ctrl[GIDX["R"]])}
     g_to = {"L": lf, "R": rf}
@@ -2063,9 +2076,13 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             # solved, and the arms travel between them.  Endpoints are silent about the path, so
             # the smallest gap reached WHILE moving is tracked here rather than inferred from the
             # two ends of each move.
-            _pp = arm_pair_min(d)
-            arm_gap_path = min(arm_gap_path, _pp)
-            step_gap_path = min(step_gap_path, _pp)
+            _pp, _pw = arm_pair_min(d, want_who=True)
+            if _pp is not None:
+                # and WHERE, because a path minimum that disagrees with both endpoints is either a
+                # real transient or a broken instrument, and a bare number cannot say which.
+                if _pp < step_gap_path:
+                    step_gap_path, step_gap_who = _pp, f"{_pw} at t={n*m.opt.timestep:.2f}s"
+                arm_gap_path = min(arm_gap_path, _pp)
         if n % 20 == 0:
             # pZ CLAMP-1 v0.3a: the question is whether the PATH to the grip passed through a
             # configuration the real hardware cannot reach, so track the minimum over the window,
@@ -2151,6 +2168,8 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # cannot say how close cannot say it is getting worse.  So: the smallest signed distance
     # between any geom of one arm and any geom of the other, and the pair it belongs to.
     _pairmin, _pairwho = arm_pair_min(d, want_who=True)
+    if _pairmin is not None:
+        arm_gap_min = min(arm_gap_min, _pairmin)
     arm_gap_min = min(arm_gap_min, _pairmin)
     # (4) the realised clearance, beside (3) the predicted one: their difference IS the following
     # error the constant is currently missing, so printing them apart would leave it to be
@@ -2166,11 +2185,17 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                     f"{t}: clearance removed {_dr} of {_dr + _kept} candidates, winner predicted "
                     f"{_nfa*1000:+7.1f} mm, winner sigma {_wsv:.4f} vs best dropped "
                     + (f"{_dsv:.4f}" if _dsv is not None else "none dropped"))
-    print(f"[steps] STEP{num:2d} ARM-TO-ARM: closest {_pairmin*1000:+7.1f} mm ({_pairwho})"
-          f"{'  <- TOUCHING OR THROUGH' if _pairmin <= 0 else ''}"
-          f"   along the move {step_gap_path*1000:+7.1f} mm"
-          f"   worst so far {min(arm_gap_min, arm_gap_path)*1000:+7.1f} mm"
-          f"   ⚠ measured between the two arms only; posts, table and cable are not in this")
+    _worst = min(arm_gap_min, arm_gap_path)
+    print(f"[steps] STEP{num:2d} ARM-TO-ARM: "
+          + (f"closest {_pairmin*1000:+7.1f} mm ({_pairwho})"
+             f"{'  <- TOUCHING OR THROUGH' if _pairmin <= 0 else ''}"
+             if _pairmin is not None else
+             f"nothing within the {ARM_PAIR_CUTOFF*1000:.0f} mm search radius at rest")
+          + (f"   along the move {step_gap_path*1000:+7.1f} mm ({step_gap_who})"
+             if step_gap_who else "   nothing within the radius during the move")
+          + (f"   worst so far {_worst*1000:+7.1f} mm" if _worst < 1e8 else
+             "   nothing within the radius yet, this run")
+          + "   ⚠ measured between the two arms only; posts, table and cable are not in this")
     if _pred_txt:
         print(f"[steps] STEP{num:2d} CLEARANCE: " + " | ".join(_pred_txt)
               + f" ; realised at rest {_pairmin*1000:+7.1f} mm"

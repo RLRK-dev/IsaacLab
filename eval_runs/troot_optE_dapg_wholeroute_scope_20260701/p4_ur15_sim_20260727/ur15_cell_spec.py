@@ -692,6 +692,13 @@ PIN_SETTLE_S = 0.1 * PREDICT_S
 # the menu's smallest tilt that a working construction never trips it, far enough above zero that
 # a collapsed one always does.  Used symmetrically -- the upright attitude must come back under
 # it, and a tilted attitude must come back over it.
+# The radius the DECISION loop searches.  It only ever asks whether anything is under the
+# clearance, so anything beyond this is beyond the clearance by construction and nothing it
+# decides changes -- only the far pairs stop being measured.  Twice the clearance leaves room for
+# the question to stay meaningful if the clearance is ever raised.  ⚠ The REPORTED minimum keeps
+# the wide radius, because that one is read as a distance rather than as a yes or no.
+ARM_DECIDE_CUTOFF = 2.0 * ARM_CLEARANCE
+
 TILT_CAL_DEG = 0.5
 
 VERTICAL_TOL_INTERIM_DEG = 5.73
