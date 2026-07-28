@@ -13473,7 +13473,12 @@ solvability was never lost (§476(c) tagged; this desk's 02:48 Rs report used th
 word — corrected in the next report). (ii) ⛔ cross-run guard: t42's and t43's
 collision-free counts are NOT the same quantity — the rejecting predicate changed
 between runs (crown added to COLG; ngeom 139→140) and the print format too; attribute
-no delta to the spread. (iii) the yaw print is NOT evidence of the mechanism (±symmetric
+no delta to the spread. [CORRECTED §486: the INSTANCE was wrong — t42 and t43 share
+the predicate (both traces' :20 identical incl. ngeom=140, desk-measured; the crown
+landed 77cfd640b9 at 23:05, BEFORE t42); the 139→140 delta belongs to aimboth(old
+cell)→t43. The guard's FORM stands for cross-DRIVER comparisons; t42↔t43 count
+comparisons are legitimate — which p6's own "t42's 6/6 was a fallback" derivation
+depends on, and keeps. Caught by p6 -145(3).] (iii) the yaw print is NOT evidence of the mechanism (±symmetric
 candidate set; §476(b)(iv) tagged — diff shows the mechanism, outcome unshown).
 (iv) R also did not complete (71.5 % is the value at the moment L's stop ended the
 step). **(d) The authority note, correctly placed**: p5's "§0#2 untouched" is rowed as
@@ -13621,3 +13626,26 @@ p5 will hand Rs both forms: "two choices as-is" and "one print narrows it to one
 **(d)** p5 raises the ONE LINE to Rs as pre-declared, with no recommendation attached
 (②'s fall stated as consequence). The desk likewise recommends nothing; the register
 gets the rows (m810).
+
+## 486. The register rows the sweep — and returns one wrong pair before it breaks a derivation
+
+From p6's -145 (03:21:50). **(a) Pins verified**: commit a576f87b92 ("Record a sweep
+that found nothing, which is the answer"); LEDGER sha 00f1a1a7…9ab0 MATCH; sweep and
+verdict direct-read by p6 (shas re-matched; 50/106 lines). **(b) Rows**: #57's closing
+conditions updated ((1) left p5's court for Rs; (2) now FARTHER than when written —
+unsatisfiable at any centre unless the placement changes); the sweep's numbers noted
+OUTSIDE #59's defect (neither solved nor free is a summed list length); the sweep
+artifact's measurement/READING in-file separation itself rowed as citable form; the
+t43 verdict rowed (2nd per-run-gate-compliant in the lane); the table-check-unverified
+consistency kept; one of the three re-run holds linked to #56's remaining condition —
+no nagging. **(c) ⛔ THE RETURN, desk-confirmed decisive**: the sweep READING's lines
+44-46 attach p6's cross-run caution to the WRONG PAIR — "t42→t43, ngeom 139→140" —
+but both traces' :20 are IDENTICAL (ngeom=140; nq/nu/nbody/eq all equal,
+desk-measured); the 139→140 delta belongs to aimboth (the old cell) → t43. The
+caution's FORM is right (cross-driver counts are not one quantity); only the pair is
+wrong — and left standing it would break p6's OWN derivation ("t42's 6/6 was a
+fallback" depends on t42≡t43 predicates, which the measurement now AFFIRMS). §479(c)(ii)
+tagged at this desk (the same wrong instance had entered via p6's -143(ii) and this
+desk's bank); the artifact fix routed to p4 (m811). The chain: p6 mis-paired at -143 →
+p4's artifact cited it → p6 caught it in the artifact → the desk verifies and both
+surfaces correct — the round-trip took 40 minutes and no derivation broke.
