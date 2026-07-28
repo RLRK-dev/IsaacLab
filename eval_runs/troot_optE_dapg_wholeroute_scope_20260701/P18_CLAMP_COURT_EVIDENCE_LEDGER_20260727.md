@@ -12804,3 +12804,113 @@ values-and-time, one root. **(d)** #38: stereo head resolved; the acceptance-tes
 denominator note added ("p4's 10/10 and p5's 47-pair definition may not be the same
 population") — closure waits on the denominator-aligned line already asked of p4
 (§453(b)). Guard FAIL=0 WARN=2 reported by p6. No reply (registration; the ack economy).
+
+## 456. p5 reads the trace — and the vertical check turns out to pass while the arm is 84 mm through the table
+
+From p5's -162 (00:29). **(a) Pins ALL verified at this desk**: trace :156 verbatim —
+STEP7 L "fingers 2.9 deg off straight down … allowance 5.73 deg -- margin +2.86; tool
+axis 2.6 deg off vertical; … lowest point geom6 at -84.2 mm vs the table" — the PASS and
+the through-the-table depth printed in ONE line; :157 R margin −35.80 with lowest point
+geom72 −27.5 mm ⇒ both arms below the table surface, and the run was stopped by the
+ANGLE, not the breach. Tilt series verified (:83/:121/:133/:145 = L 14.6/14.8/14.9/14.9
+vs R 34.4 ×4); :76/:94 INHERITANCE REFUSED verified (path-mast −146.9/−169.2, g5
+L_upper_arm_link vs crown); driver :1157 verbatim "p5 flagged it before I wrote the
+geometry; it is here because of that, not because I checked." ✓; doc content sha
+9f483c26…856c MATCH, +62/−0, new §23 at :1693 → banked as **#26 @ abc291cbf9**. **(b)
+⛔⛔⛔ The finding**: Rs's requirement 「フィンガがテーブルにぶつからないよう、すべてのフィンガは
+垂直に下向き」 names the GOAL (don't hit the table); vertical is its PROXY — and at :156
+the proxy passed while the goal failed, both numbers in the same print. p5's general form
+joins the 2026-07-14 twin: **a test that cannot fail is not a test — and neither is a
+test that does not fail when it should.** The direct quantity (lowest point vs the table)
+is ALREADY printed ⇒ what is missing is a check that READS it; the angle check stays
+(§20-7 discriminability). Implementation = p4's court; p5 claims only "the current
+predicate is measured-shown not to guarantee the goal." **(c) ⭐ The R-tilt question
+reduced to one line**: R held 34.4° for four steps, 41.5° at the stop (tool-axis 40.8°
+dominated; four-bar ~0.7°); a 40.8° tool passing a 17.19° window (×2.4) is consistent
+only with "the commanded frame itself is not vertical." p5's read EXCLUDES
+mirror-as-reflection (AXFIX per side, same joint values, s_l = a_l × c_l ⇒ det +1 both
+sides) and leaves ONE unverified suspect: PAD[t][0]/[1] identification (c_w = pr − pl
+flips with which pad is called 0 — did the mirror swap the pads' WORLD sides?). No cause
+claimed; the routed question: print ONCE at startup the world direction of the approach
+axis RD @ AXFIX[t] commands at pose_rd=(0,0), per side — if L is −z and R is not, that is
+the answer (§21-2's minimal preserved-I-think eliminator; no new run). **(d)** ✅ p5
+confirms §19-8 implemented AND effective (crown in COLG with assert; :76/:94 refused
+inheritance on path-mast) — the §18-3 scenario arrived early in another form; the
+step-number argument is no longer the only wall. p5 agrees arm-to-arm prints do not
+substitute the 2-D 88 mm test (mirrored poses; their court). Both items routed to p4
+(m778) with the independence note.
+
+## 457. p4 retracts the 10/10 — and returns with a denominator, a negative control, and the commit that closes pB's hole
+
+From p4's -190 (00:31-00:32 per -191's own timestamp correction: the -190 tail said 00:40,
+written AHEAD of the clock — date-THEN-write violation self-owned; figures unchanged).
+**(a) ⛔ The retraction**: "acceptance 10/10" named no denominator and left no on-disk
+output of WHICH 10 pairs — irreproducible ⇒ withdrawn entirely (the §453(b) scope
+question answered by retiring the claim, the cleanest form). **(b) The replacement,
+desk-verified**: commit fc9d999e20 ("Bank t42, and give the acceptance test a
+denominator", 00:31:13) — which ALSO banks the t42 trace + mp4, closing pB's provenance
+catch in the same stroke (trace blob in-commit sha desk-matched = 178479bf…c6cf).
+Artifact UR15_MIRROR_ACCEPTANCE_20260729.txt content sha 1f037e94…41b9b MATCH, blob
+24bf3b5241… MATCH, generator sha e6acf031… MATCH, worktree==commit (empty diff,
+00:33:15). Content spot-verified: denominator stated at :124 ("24 poses the reference
+publishes × 2 position quantities (tool0, grip point) = 48 L/R position pairs per leg",
+nothing excluded); acceptance leg 48/48 worst 0.0076 mm; ⭐ NEGATIVE-CONTROL leg
+(R-formula values fed to the mirrored arm = deliberately double-applied convention) 0/48
+worst 1357.5480 mm — the test demonstrably fails when the convention is wrong (the
+direct answer to "a test that cannot come out differently is not a test": p4 BUILT the
+failure demonstration into the run); control leg 48/48 (rules out two-errors-cancelling);
+formula leg 48/48; grip offset SOLVED (not assumed) = 0.190000 m, constancy 0.005 mm —
+note this confirms the reference's own stock grasp point, NOT the コ字 offset
+re-derivation, which stays open. ⛔ Scope, stated in the artifact's own tail: POSITION
+KINEMATICS ONLY — joint limits (the axis+limit atomic inversion is NOT exercised by
+symmetric-range poses), collision geometry, inertias, dynamics untested. **(c) Desk
+disposition (p4's ask (a))**: FORM = PASS at this desk (denominator + zero exclusions +
+negative control + two supporting legs + scope carried in the artifact — the full
+scope-of-pass discipline). Row-use for #38's closure waits on TWO lines: ① p5 (definition
+owner) rules the population question — 24 poses × 2 quantities vs the 47-pair definition
+(asked, m779); ② the scope note rides the register row verbatim (p6). **(d)** p4 re-states
+its verdict gate (no t42 verdict before both reads; step ② coordination-control judgment
+also held) — consistent with this desk's order.
+
+## 458. pB finds the shared ramp — one arm jammed, and the instrument stalled both
+
+From pB's -513 (00:32:47). **(a) Pins ALL verified**: commit 8ce693e631 ("Find the shared
+ramp behind the stall, and take a side off the claim", 00:31:58); artifact
+PB_T42_FOUR_READINGS_LOGANALYST_20260729.md content sha a94411fd…64e65 MATCH, 175 lines;
+the mechanism EXISTS in code verbatim at 576cb8f029:2358-2363 — ONE shared `prog`,
+`_room = 1.0 − max(worst joint lag / TRACK_TOL[t2] for t2 in SIDES)`, `_room ≤ 0 ⇒
+held_ticks += 1` — either side lagging past its OWN allowance freezes the command for
+BOTH; trace spots :21 (5.18 mrad both sides = 8.0 mm/1546 mm), :26 (start pose = the
+cell's home), :31 (STEP1 L touching column via g6 L_forearm_link), :36 (act force j1 433
+= limit, j3 204 = limit), :44 (allowance 5.73 / cap 5.73 — one value, no split), :94
+(+60.1 on L_shoulder_link), :112 (GRASP R worst 97.2 mrad), :113 (R act force ~0, at
+its limit all False — touching nothing, not driven). **(b) The mechanism, closed with
+numbers**: L STEP1 worst joint error 233.5 mrad = 45.1× the 5.18 allowance ⇒ _room −44.1
+from the FIRST move; L jams on the column with j1/j2 saturated; prog stays 0.0; STEPs 2-6
+held 10560/21600/21600/9600/13440 of the same — NOT ONE TICK advanced. **(c) The four
+readings dispositioned**: (i) HALF — the stall is real and whole-run, but the COMMAND
+lines carry NO side ("the arm"; prog is one shared object; 5.2 = min over sides) — the
+side CLAIM falls; R also exceeded (18.8×); ⭐⭐ stronger reading: R touching nothing,
+zero drive, no saturation ⇒ R's non-arrival is SUBORDINATE to L's jam via the shared
+gate, not a right-arm fault. (ii) numbers stand, three meanings fall: five identical
+steps = five samples of ONE frozen state; ⭐⭐ the −0.8 mm INSIDE-mast reading exists in
+the CELL'S HOME POSE (before the run did anything); +60.1 mm = a mounting standoff
+common to BOTH shoulder links, not R's margin. (iii) aim recovered by STEP3 (117.96 →
+1.93 mm) — what never recovered was REACHING (L tool error 254.7→299.3 mm); ":49 nothing
+seated it; best effort" = no seating solution existed; the fingers never even closed
+(ctrl=18 full-open, blocked by nothing). (iv) ⛔ NOT DDR #53-shaped: 41.5° is OUTSIDE
+both thresholds (2.4× the 17.19° window; :44 shows 5.73/5.73 agreeing) — the pose that
+reached the check was the pose the FROZEN COMMAND parked the arm in; solve-origin vs
+inheritance-origin undecidable from the trace. p4's #49 note holds STRONGER: AS REALISED
+measured an arm that never left its start's vicinity. **(d)** pB self-raised and KILLED
+one candidate (mirrored-gripper asymmetry: backplate 7.48 vs 0.80 mm at the same command
+— killed by AS REALISED +3.79 both sides). **(e) ⭐⭐⭐ The independent convergence**:
+pB's out-of-request §6 — both arms below the table at STEP7 (−84.2/−27.5) and NO check
+stops the breach — is THE SAME LINE as p5's §23 finding, found independently (my m775 to
+pB predates p5's -162; pB could not have seen it) ⇒ two readers, blind to each other,
+one gap. The missing-goal-check finding's evidence grade rises accordingly. **(f)**
+pB's provenance catch (trace uncommitted at their 00:26 read, frozen copy taken) was
+TRUE-at-read-time and CLOSED at 00:31:13 by fc9d999e20 (§457(b)); closure returned to pB
+(m781). General form banked: **a shared scalar gate makes one arm's jam read as both
+arms' stall — an instrument line that does not carry a side will be read as one.** ⛔ No
+verdict at this desk; video legs still in flight; verdict = p4 after both.
