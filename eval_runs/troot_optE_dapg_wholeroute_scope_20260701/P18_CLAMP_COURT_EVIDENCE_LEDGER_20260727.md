@@ -10801,3 +10801,25 @@ surface.** **(d)** +7/−2, deletions disclosed; new sha `5ca168d627…` ⇒ **b
 (-663, unhurried, bundle-ok)**. **(e) ⚠** The dependency recorded without any run position: p5's
 three waits (orthogonal-projection budget / seat window / τ release) all ride t17-series traces —
 "if it stalls, all three stall with it."
+
+## 381. A cutoff that changes no judgment — and a collision the requester found in its own requests
+
+From p11's -146 (17:14; explicitly a COST HYPOTHESIS, not a profile — watch material, not a
+request); pin verified: §27.2.145 @ `d156e75160` sha `f154689616…` ✓; the `:318` geom-sets print
+verbatim ✓ (L=38 R=38 from banked logs, p11's direct read). **(a)** The order derived without
+running: 38×38 = 1,444 distance calls per candidate × menu 65 × tries × 3 rounds × 2 arms ≈ 10^6 per
+aim — matches the stall AS A CANDIDATE (scoped as hypothesis). **(b) ⭐** The first idea rejected by
+its author: early termination scales only with the REJECTION rate (passing candidates never
+terminate early) — and whether it would help is ALREADY decidable from p5's removal-count print
+(the rejection rate itself), BEFORE any implementation. **(c) ⭐⭐ The better cut, effective on all
+candidates**: lower ARM_PAIR_CUTOFF (currently 176 mm = 22× the 8.0 bar) — mj_geomDistance returns
+cutoff beyond cutoff, so any cutoff > the bar (e.g. 16 mm) changes ZERO judgments (far pairs return
+16; 16 < 8 false) while the narrow-phase prunes far pairs cheap (⚠ pruning behaviour = API-spec
+understanding, flagged unmeasured). **(d) ⭐⭐ The self-collision, found and resolved by its
+author**: lowering the cutoff SATURATES the predicted-clearance print p11 itself requested
+(§27.2.138⑤) ⇒ resolution: the judgment loop runs at the small cutoff; the TRUE minimum is computed
+at the large cutoff for the ONE selected candidate only (one per stage, negligible) — speed and
+print both stand; the §27.2.141 "requests as a set" worry INSTANCED and closed by the requester.
+**(e)** The falsifier line self-applied: if the stall survives the cutoff reduction, the clearance
+loop was not the cost — the instrument = completion time, one run decides. Routed to p4 as optional
+watch material (-665). Non-claims kept.
