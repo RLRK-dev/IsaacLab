@@ -34,7 +34,7 @@ pinch, slot_centre, jaw_gaps = ns["pinch"], ns["slot_centre"], ns["jaw_gaps"]
 CABG, ARMG, CLAWG = ns["CABG"], ns["ARMG"], ns["CLAWG"]
 
 ARMS = ("L", "R")
-OPEN, CLOSE = ns["OPEN"], ns["CLOSE"]
+OPEN, CLAMP = ns["OPEN"], ns["CLAMP"]   # spec §4: 18 is open, 236 is clamped
 
 
 def touching_cable(t):
@@ -69,7 +69,7 @@ report("as built")
 
 # open in steps, holding each for long enough that the four-bar stops moving
 for frac in (0.25, 0.5, 0.75, 1.0):
-    cmd = CLOSE + frac * (OPEN - CLOSE)
+    cmd = CLAMP + frac * (OPEN - CLAMP)
     for t in ARMS:
         d.ctrl[ns["GIDX"][t]] = cmd
     for _ in range(int(1.5 / m.opt.timestep)):
@@ -78,7 +78,7 @@ for frac in (0.25, 0.5, 0.75, 1.0):
 
 # and back closed, to see whether the offset follows the opening or sticks
 for t in ARMS:
-    d.ctrl[ns["GIDX"][t]] = CLOSE
+    d.ctrl[ns["GIDX"][t]] = CLAMP
 for _ in range(int(2.0 / m.opt.timestep)):
     mujoco.mj_step(m, d)
-report("closed")
+report("clamped")
