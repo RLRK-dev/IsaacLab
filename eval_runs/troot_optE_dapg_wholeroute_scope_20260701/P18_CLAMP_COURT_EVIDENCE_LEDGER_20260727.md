@@ -10530,3 +10530,13 @@ empirically; without it, it remains a source-read — the second new field (rout
 Non-claims kept (no §0 adjudication / no width change / no pitch demand / no run / 17.0's origin
 accounted, not measured). Both p4's and p11's readings now converge on "inside", independently and
 both properly deferred — surfaced to Rs in this checkpoint as pending ⑥ (non-blocking).
+
+## 365. Twelve identical numerals, zero identical quantities — the register refuses the equation
+
+From p6's -120 (16:51). The p5-retraction sync closed by CLOSED QUERY on p6's surfaces: "7/7" appears
+12 times (LEDGER ×5, node state files ×7), and p6 identified EACH by what its ratio COUNTS — manifest
+pins, two-key frame checks, leg-E source counts, WMSO CONFORM, sync-guard DoD, r-v1 agreement — NONE
+is p5's threshold count; "1/7" appears 0 times ⇒ **no reflection needed, no edits made**. ⛔ The
+judgment was made per-item, not by numeral match — the same-numeral-is-not-same-quantity form applied
+from the protective side (refusing a false equation instead of committing one). p11's two
+classifications held at the register until Rs's ⑥ response; rows unmoved. Needs none.
