@@ -10886,3 +10886,32 @@ attribution, so no false one exists — NO EDIT (the same-numeral discipline app
 time). The fired-branch numbers held OFF the row until the trace banks (the cab27 treatment,
 consistently applied); noted that the structure matches the row's own prediction (the collision
 side entered alone; the conditioning side sat unwatched) ⇒ one-line reflection when banked.
+
+## 385. Neither A nor B — the ruling adds two options and derives what it refuses to choose
+
+From p11's -147 (17:24; the ruling rides the STRUCTURE — "both examples well above parity" — not
+the exact in-flight ratios); pin verified: §27.2.146 @ `4e48e73274` sha `990417780d…` ✓, 7 headers =
+declared section + internal parts 0-5 ✓. **(a)** The contamination received with a procedure
+lesson: p11's cost hypothesis postdated the stop and did not cause it — but pointed the same way;
+**"before attributing cost to code, look at what else runs on the machine"** — the falsifier would
+have reached the right answer through one unnecessary run; looking at the environment first needs
+none. **(b) ⛔ A REJECTED ON PRINCIPLE**: a weight says "enough conditioning buys enough closeness"
+— but inside clearance lies a non-negotiable part (contact, zero gap), and ONE weight cannot
+distinguish margin from contact ⇒ **ranking can be a soft preference, never a hard constraint** (σ's
+scalelessness only secondary). **(c) ⛔ B HELD, premise unestablished**: the data shows no
+clear-and-well-conditioned pose IN THE 40-CANDIDATE SAMPLE — not that none exists; the space is
+hundreds (IK branches ≤8 × menu 65) vs tries 26 ⇒ real competition vs sampling artifact
+UNSEPARATED ⇒ a permanent 2.2× acceptance cannot precede that separation. **(d) ✅ C FIRST — the
+separation is cheap**: on ONE grasp stage, raise tries (or scatter seeds) with the FILTER UNCHANGED
+and watch the surviving best σ: improves ⇒ artifact ⇒ neither A nor B needed / unmoved ⇒ real ⇒
+(e). The requester rule self-applied (falsifying reading = winner σ unmoved at large tries;
+instrument = the winner σ already printed). Rides the next run — routed -674. **(e) ⭐⭐ D, the
+shape held in reserve**: HARD FLOOR (contact, gap > 0 — non-negotiable) + a SLOPE on the margin
+(0 → ARM_CLEARANCE): 6 mm clear and well-conditioned beats 9 mm badly-conditioned, 0 mm beats
+nothing — restoring the property A broke (safety is not traded). ⭐⭐⭐ The exchange rate DERIVED,
+not chosen: σ → rad/m (ruled) → conditioning's COST read as "the EE error the arm cannot cancel" =
+mm ⇒ both sides in mm, the weight becomes 1 — and the conversion comes from the CORRELATION of two
+already-printed columns (per-stage conditioning; per-stage aim residual). The τ form again: the
+weight is measured, not decided. **(f)** The ruling verbatim-shaped: A rejected / B held / C first /
+D on confirmation with derived rate; B's ONLY surviving path = C-real AND D-derivation-fails, and
+then the acceptance is written WITH NUMBERS, never silently.
