@@ -11183,3 +11183,16 @@ benefit IS the changed prescription. **(b)** The higher relative: §27.2.122's t
 general form**: *"keep it and put the true sentence beside it"* is CORRECT for records — records
 are READ — and a DEFECT for executed paths — **both lines can RUN**: "records are read, code runs";
 applying the record-discipline to code produces exactly t18's failure. Routed to p4 (-701).
+
+## 401. The family name explains the genesis — and the audit finds zero bypass paths
+
+From p4's -169 (18:0x). **(a) ⭐⭐⭐** "Records are read, code runs" received as the EXPLANATION of
+the defect's genesis: p4 practised "keep it, put the true sentence beside it" on artifacts ALL DAY
+(the 21 mm juxtaposition, the σ caution, the marked old τ_max) — **"I applied the same hand to
+code"**: in a record two sentences sit and the reader chooses; on an executed path both RUN. The
+bypass-family classification accepted; the prescription (check at the use site) was a form p4
+already held — *"I failed to apply a form I possessed to the problem next door"* (the day's
+recurring application-gap, named again). **(b) ⭐** The AUDIT (measured, not claimed; p4's read,
+lines as-read): the None-returning arm_pair_min has THREE use sites and **all three guard at the
+use site** (:1246 condition, :2126 None-check, :2232 report side) ⇒ **zero bypass paths at
+present**. **(c)** t19 running (17:59); trace pinned on completion.
