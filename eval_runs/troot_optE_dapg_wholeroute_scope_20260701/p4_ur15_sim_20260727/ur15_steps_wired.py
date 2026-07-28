@@ -1437,6 +1437,27 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     for _round in range(3):
         for t in SIDES:
             if t in aimed:          # already solved by the closed-loop aim; do not re-solve
+                # (i) p11 -110, REPORT ONLY -- this changes no choice and no motion.  The aim that
+                # produced this pose ran with other=None, so it never saw the far arm; inheriting
+                # it here skips the route solve, and with it the far-arm check the route solve
+                # does.  So put the inherited pose and the far arm into scratch and say what the
+                # arms would be touching.
+                # ⚠ SCOPE: touching() sees ARM-TO-ARM contact only.  The posts and the table are
+                # contype=0 to it, so "clear" here means "not on the other arm" -- NOT "clear of
+                # everything".
+                _sc2 = mujoco.MjData(m)
+                _sc2.qpos[:] = d.qpos
+                for _k2, _a2 in enumerate(QADR[t]):
+                    _sc2.qpos[_a2] = aimed[t][_k2]
+                _far = "R" if t == "L" else "L"
+                if _far in aimed:
+                    for _k2, _a2 in enumerate(QADR[_far]):
+                        _sc2.qpos[_a2] = aimed[_far][_k2]
+                mujoco.mj_forward(m, _sc2)
+                _tch = sorted(g for g in touching(t, _sc2) if g.startswith(("L_", "R_", "Lg", "Rg")))
+                print(f"[steps] STEP{num} {t}: inherited aim pose, arm-to-arm check = "
+                      f"{_tch or 'not on the other arm'} (⚠ arm-to-arm ONLY -- posts and table are "
+                      f"invisible to this test)")
                 w[t] = aimed[t]
                 continue
             w[t] = solve_ik(t, tgt[t], tries=44, iters=260, seed=num * 10 + (t == "R"),
@@ -1514,7 +1535,14 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 # p11 -106 (3): the bar for a path-sigma test has to come from measurement, not
                 # from a round number.  So trace it -- every sample, per arm, with the step it
                 # falls in.  ⛔ Measurement only: nothing here changes what the arms do.
-                sigma_trace.append((num, t2, n * m.opt.timestep, sv))
+                # p11 -108: the bar is not on sigma but on the translational block's
+                # ||dq||/||dx|| [rad/m] -- how much joint motion a metre of tool motion costs.
+                # It is 1/sigma of that block, so it is taken from the same decomposition.
+                _jp = np.zeros((3, m.nv))
+                mujoco.mj_jacBody(m, d, _jp, None, TOOLB[t2])
+                _sv3 = np.linalg.svd(_jp[:, VADR[t2]], compute_uv=False)
+                _amp = float(1.0 / max(_sv3[-1], 1e-12))       # rad per metre, worst direction
+                sigma_trace.append((num, t2, n * m.opt.timestep, sv, _amp))
                 if sv < sig_min[t2]:
                     sig_min[t2], sig_where[t2] = sv, f"STEP{num} t={n*m.opt.timestep:.1f}s"
                 cg = column_gap(t2)
@@ -1615,15 +1643,19 @@ imageio.mimwrite(str(OUT), frames, fps=FPS, quality=8, macro_block_size=None)
 # hand p11 the path, not a summary of it
 _tr = S / "sigma_trace.txt"
 with open(_tr, "w") as _f:
-    _f.write("step arm t_s sigma_min\n")
-    for _st, _a, _t, _sv in sigma_trace:
-        _f.write(f"{_st} {_a} {_t:.4f} {_sv:.6f}\n")
+    _f.write("step arm t_s sigma_min dq_per_dx_rad_per_m\n")
+    for _st, _a, _t, _sv, _am in sigma_trace:
+        _f.write(f"{_st} {_a} {_t:.4f} {_sv:.6f} {_am:.3f}\n")
 print(f"[steps] sigma trace: {len(sigma_trace)} samples -> {_tr}")
 for _a in SIDES:
     _v = [x[3] for x in sigma_trace if x[1] == _a]
+    _w = [x[4] for x in sigma_trace if x[1] == _a]
     if _v:
         _v2 = sorted(_v)
         print(f"[steps] sigma {_a}: min {min(_v):.4f}  p5 {_v2[len(_v2)//20]:.4f}  "
               f"median {_v2[len(_v2)//2]:.4f}  max {max(_v):.4f}  over {len(_v)} samples")
+        _w2 = sorted(_w)
+        print(f"[steps] dq/dx {_a}: median {_w2[len(_w2)//2]:8.1f}  p95 "
+              f"{_w2[int(len(_w2)*0.95)]:8.1f}  max {max(_w):8.1f} rad/m")
 
 print(f"[steps] wrote {OUT} frames={len(frames)} {OUT.stat().st_size} bytes")
