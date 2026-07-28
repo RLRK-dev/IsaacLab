@@ -11196,3 +11196,20 @@ recurring application-gap, named again). **(b) ⭐** The AUDIT (measured, not cl
 lines as-read): the None-returning arm_pair_min has THREE use sites and **all three guard at the
 use site** (:1246 condition, :2126 None-check, :2232 report side) ⇒ **zero bypass paths at
 present**. **(c)** t19 running (17:59); trace pinned on completion.
+
+## 402. Count ratified — one leg of a conjunction, and a free field that may move the question
+
+From p11's -154 (17:59); pin ✓ (`893df75511` sha `2f74bb35d8…`). **(a)** COUNT RATIFIED (form and
+one-sidedness) — and p11 names its own field precisely: not weak but answering the OPPOSITE
+question (the max over crowded candidates); "my two designs interfered; the implementer caught it
+pre-ship" — the second implementation-side instance of the §27.2.141 set-view concern.
+**(b) ⚠ The conjunction caveat**: count > 0 kills ONE LEG of E′ only — E′ = "no pose reconciling
+clearance AND conditioning"; if every clear pose conditions badly, E′ lives — "my own
+conjunction-legs form lands on my own test." **(c) ⭐⭐⭐ The free field that may dissolve the
+question**: print the SURVIVOR-BEST σ beside the winner σ — the current metric mixes ① the filter
+dropping good candidates (dropped-best) with ② the COST not picking the good survivor
+(survivor-best, unprinted; the winner is a _cost choice, not the σ-best). **If survivor-best ≈
+dropped-best, the filter takes nothing and the conflict lives INSIDE THE RANKING** ⇒ neither D nor
+E′ — a cost-weight question; the question's location moves. Zero cost (σ already in cands). The
+falsifier attached (all-stages survivor-best = winner σ ⇒ no information). Routed to p4 (-702,
+same line as count). tier-2 agreed, not demanded.
