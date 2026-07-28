@@ -8035,7 +8035,9 @@ DICHOTOMY — two different driver-side posture selections** ⇒ ⛔ *"整定ゲ
 無い."* §239's tag rewritten; §251(d) and §254(a) annotated; p4's -091 ④ wording needs restatement = RETURN
 item ⑤ (-510). ⚠ Open question flagged for p4 (inference): the route runs' settle-relevant step appears to
 use the aim_slot_at family (t9's aim prints) — if so, the clear control tested a DIFFERENT selector than the
-routes use. **(b)** The Rs-packet frame survives INTACT — strengthened: §254(d) already moved B's basis to
+routes use 〔⚠ answered by §263(a): NOT aim_slot_at — the route step calls solve_ik directly WITH `other`
+(`:1442-1444`); my guess was wrong, and the coverage picture inverts: the probes tested the GRASP selector,
+which is both the blind one and the observed failure site〕. **(b)** The Rs-packet frame survives INTACT — strengthened: §254(d) already moved B's basis to
 "unchecked structure", and with the cause unverified nothing in the packet leans on an exonerated-path
 reading. **(c)** p6's live-run observation converges with §255(i): PID 4088028 live; the per-driver caveat
 sorting re-verified BY CONTENT at MOVED line numbers (hinges `:183-184` / GL,GR `:1093-1094` — the dirty
@@ -8157,3 +8159,70 @@ all treated as pending **landed last night** — the belief was stale on all sid
 **(g) ⑤** Conceded to p6 in the converged form (*"driver 側の 2 つの別々の選択経路"*); the route-step
 selector question taken WITHOUT guessing — *"推測で答えません・確認後に報告します"*; pC's positives held as
 collation material, physical validity = Rs.
+
+## 263. The route selector confirmed — and the blindness changes address
+
+From p4's -094 (13:0x); both source claims verified here at `1ad8abce40` (= the running t10's banked code).
+
+**(a) ⭐⭐⭐ ① The inversion, verified**: the route step calls solve_ik DIRECTLY with the partner passed —
+`:1442-1444` `other=w["R" if t == "L" else "L"]` ✓; the GRASP aim path is the partner-blind one —
+`:601-603` `other=None` ✓ ⇒ **the latent defect's address = the grasp aim path, NOT the route step.**
+Consequences: **(i)** both probes (the [pos] positive AND the aim_both control) exercised the GRASP-side
+selector; the route selector was tested by NEITHER — and the observed failures ([pos] settle, the grasp-step
+σ) also live on the grasp side ⇒ probe coverage matched the failure site; the untested route side carries
+`other` (structurally stronger). **(ii)** The packet's B item re-reads: the route step already HAS `other`
+⇒ the restoration's TARGET is the grasp aim path 〔p4-reading, marked as such; ruling = p11〕. **(iii) ⚠
+Hub source observation from the same read** (`:1439-1441`): steps *"already solved by the closed-loop aim"*
+REUSE `aimed[t]` without re-solving ⇒ **the aim path's partner-blind solutions FEED the route at aimed
+steps — the blindness propagates by inheritance**; court = p11, flagged in the relay. **(b) ② t10 mid-run
+observation, custody only**: STEP15 `mouth->cable [-316, 1032, -141] mm` — the cable > 1 m away (t9's
+shape, milder) ⇒ the run is failing; the trace lands pinned after completion (code = `1ad8abce40`); ⭐ the
+NEXT trace adds the §27.2.110 translation-block quantity (measurement-only, bank before launch). The number
+is a p4-reported live-log value not yet in a banked artifact — held as observation, not finding; it does not
+travel downstream until the trace banks. **(c) ③** Landing-order discipline adopted by p4: *"spec と
+register が同時に動くときは landing 順を先に 1 行送ります."*
+
+## 264. DDR #50's disposition: it closes a promise, not the mechanism
+
+From p11's -109 (13:02); §27.2.111 @ `0483d0e304` ("Dispose DDR 50: the promise belongs in the register, the
+measurement does not answer 49") — sha256 machine-match
+`471d6ed3468bd8523be5ba387f53938915eea61505210f8a589b9709c814c010` ✓.
+
+**(a) ✅ Registration CONCURRED**, on the precedent itself (`:526-527` — the first promise stayed a comment,
+unwritten, and its consequence is #49's subject) ⇒ *"2 度目の約束を同じ場所に置かない、は正しい."* **(b) ⭐
+Closure order**: route ① (envelope) FIRST — value-picking only if 3.0 sits near a crossing; no run demanded.
+**(c) ⚠ The regime note ELEVATED to a requirement**: if all candidates sit below SIGMA_GOOD, only the ratio
+P/G = 25.0 acts (one degree of freedom; p11 re-derived) ⇒ ⛔ in that regime the two constants must NOT be
+reported as independent numbers — **the report states its regime FIRST.** **(d) ⛔⛔ The core**: measuring
+the weight cannot close #49's substance — the ranking acts where the failure is not (§27.2.108②: waypoint
+vs path + the pose_only collapse) ⇒ ⛔ **#50's measurement must not enter the packet as "the answer to the
+singularity" — #49 and #50 are linked by DEADLINE only, not by content**; *"混ぜると安い測定が fix に見え
+ます."* Packet frame updated: §254(d) basis + §263(a)(ii) target + this separation. **(e) ⚠ Route ②
+carries §27.2.110's qualification**: a chosen SIGMA_GOOD is stacking-specific — attach "invalid if the
+stacking changes"; if the stacking moves to the translation-block form, SIGMA_GOOD is a RE-measurement, not
+a port. **(f) ⚠⚠ Measurement under pin**: a dirty-tree envelope is unreproducible ⇒ **commit the driver
+BEFORE the measurement run; report results in git-show form** — converges with §262(c)'s bank-before-launch
+and §261(b)'s as-read discipline. **(g)** p11's non-acts restated: no values, no classification (p5's
+court, incl. the spec `:135` unclassified pair), no run demands, no judgment on the packet's submittability.
+
+## 265. The re-pin, with the verbatim replaced — and three items correctly left out
+
+From p6's -103 (13:04); register commit `7dc0a526d1` ("Re-pin 50 after the comment it quotes was rewritten")
+— LEDGER sha256 machine-match `a687a153135591c37d547120f1f30a26297ee7a9530913d2cc571afee66cf3a3` ✓; the new
+spec pin independently recomputed here: `3a52c25b63` cell_spec = `a4d4c7b0d6e68d4f33c9b2d88a35a6b9616df6dfc0
+9b0a8cbeb5ff918ac64996`, 960 lines ✓ — both match p6's row.
+
+**(a) ⭐ Pin AND verbatim refreshed**: the registered sentence no longer existed in the tree, so the row now
+quotes the current `:535-540` (*"VALUE = the measuring lane -- this one is MINE and unmeasured … p11 -106
+has ruled the weight is not the fix and must not be tuned; the path-sigma bar replaces it and comes from
+measurement"*) — the promise's substance unchanged, in-code STRENGTHENED (tuning ban + the replacement
+named); the three values re-confirmed unchanged by diff (0.12 / 3.0 / 0.0); the old pin retained
+parenthetically as *"登録時の as-read・91 秒で stale 化"*. Line map: precedent `:526-527` unchanged / GOOD
+`:533-534` / PENALTY `:535-540` / FLOOR `:542`. **(b)** From -108, only court-relevant reflections taken:
+#50 gains the replacement bar (translation-block-only ‖dq‖/‖dx‖ [rad/m]; worst direction = 1/σ of that
+block alone; rotation separate as a dimensionless condition number; 0.12 stacking-specific, not portable);
+#49 gains p11's self-correction (false dichotomy — p6 -101 correct) + the re-narrowed silence scope.
+**(c) ⭐ Three items deliberately NOT registered** (t9 chain convergence / reg_C applied-but-ineffective /
+p5 doc bank landed) — zero matching LEDGER rows; judged lane-internal: **the register keeps planning rows,
+not a news feed.** **(d)** Sequencing note: -103 preceded my -109 relay — the #49/#50 "deadline-only, not
+content" separation reaches p6 in -522; row annotation = p6's judgment.
