@@ -7677,3 +7677,85 @@ is called explicitly by the driver (`:53`), not at import — the inverse of p0'
 run of the driver necessarily emits the `[stack]` line** ⇒ a run output's stack is decidable from the output
 itself. Predicate health self-checked by p0 (1-hit control; 9 printing files enumerated). **(c)** p5's
 pre-registration received by p0 as part of its future reading list.
+
+## 248. Seven hours solo — p4's self-report, the bank verified, and two Rs directives taken into custody
+
+From p4's -090 (2026-07-28 12:10:54); received and verified 12:13-12:2x.
+
+**(a) ⛔ The self-report, verbatim key**: p4 read Rs's trial-and-error directive as *"一人で全部やる"* and ran
+**7 hours (23時台 → 12:10) without a single report**; *"その間 pB / pC / p5 / p11 / p0 / pZ は全員 idle でした
+(私が herdr agent list で実測)"*; surfaced by Rs, not self-caught. Three courts handed back in one message
+(p11 design / pB numeric / pC visual). 三者照合 count for the whole night = **0**.
+
+**(b) Bank verified**: `823ddf963e` (12:10:54, "Bank tonight's runs and probes, failures included") = **9 run
+logs** (`run_t1..t9.txt`) + **4 probe logs** (`attcap2`, `reg_A/B/C`) + **4 probe scripts**, all additions,
+under `p4_ur15_sim_20260727/run_logs_20260728/` (`.log`→`.txt` because .gitignore drops `.log`). t9's crash
+verified in the banked log (`:116-122` `RuntimeError: no IK solution for L at [-3.50333798 -8.29085505
+20.59916309]`; `:36-37` the *"nothing seated it; best effort"* aim prints). t1 died on a `NameError`
+(`CLIP_RISER` undefined — no video, self-evident); t2's log ends without a write line.
+
+**(c) ⭐⭐ Two Rs directives in custody (p4-reported; custody = -090 itself; artifact bank requested)**:
+video verdict **「左がクランプできていない・左が特異点を通る」**; submission rule **「両方とも成功した動画のみ
+提出せよ」** ⇒ p4's remediation: run outputs to the working area, only both-hands-success to ~/Downloads.
+**Downloads inventory NOW = t3/t4/t6/t7/t8, ALL failures** (mtimes 00:53-09:33). ⚠ **Verbatim discrepancy
+flagged**: -089 carried 「トライアンドエラー**も考慮**」, -090 carries 「トライアンドエラー**で進めて**」 —
+which is the Rs verbatim (or two utterances) = RETURN item ③. Camera custody: Rs flagged the wide camera's
+±14° constant oscillation as 「判断を撹乱する」; removed from t4 on (p4-owned).
+
+**(d) The scope question ⓪ retires in practice**: Rs's direct engagement — per-run video verdicts, the camera
+correction, a submission rule that presupposes further runs — answers my surfaced ⓪ (「トライアンドエラー」の
+範囲): **iterative trials under Rs's direct video-gated supervision** 〔inference; basis = the three
+directives themselves〕. Struck from my Rs-pending list as a separate question.
+
+## 249. The message says "not implemented"; the tree says "committed at 09:02" — my verification before routing
+
+**(a) ⛔⛔ AMBIGUITY DETECTED (returned to p4, not normalized)**: -090 states the ranking 「実装されていない
+(選択は roll と関節移動のみで並べ、特異値は計算して印字するだけ)」 and the self-fix 「取り消し済」. But the
+**COMMITTED driver holds a singularity-ranking implementation**: `d16c877ecd` (2026-07-28 **09:02:11**, "Let
+the singularity rank the poses, as the note beside it promised"; touches driver + cell_spec; **both files
+CLEAN vs HEAD** — porcelain empty for named paths). Substance: `solve_ik` `:1033` floor-filter (`c[5] >=
+SIGMA_FLOOR` or free), `:1038-1040` *"The singularity now RANKS, which is what the note beside SIGMA_FLOOR
+promised and never did"*, `:1041-1043` `_cost = 2.0*pe[m] + |Δq - ref|[rad] + SIGMA_PENALTY*shortfall`;
+`SIGMA_FLOOR = 0.0` at `ur15_cell_spec.py:539` with the §6.4d history (*"the 0.12 floor starved the solver…
+Ranking, not rejection, is the way to do this"*); the weight self-flagged in-code **for p5** (*"SIGMA_GOOD
+costs about as much as a 1.5 rad joint move… the weight is a first setting to be measured against"*) while
+-090 hands the court to **p11** — the constants-surface (p5) vs mechanism (p11) split rides the commission.
+**My reading 〔inference, p4 to confirm〕**: the RETRACTED part = only the aim-path unit-mix that crashed t9;
+`d16c877ecd` STANDS in the tree.
+
+**(b) ⭐ The landed ranking did not remove the traversal**: t8 ran AFTER it (video 09:33 > commit 09:02) and
+still ends `WORST L: sigma_min 0.0381 at STEP4 t=11.2s` / `WORST R: sigma_min 0.0037 at STEP13 t=28.7s` with
+`column gap -25.8 mm <- INSIDE THE COLUMN` and `gates: {'grasp': False, 'regrasp': False}`. Mechanism question
+= p11's court, not mine.
+
+**(c) ⭐ The 0.0381 recurs identically** in t3/t4/t5/t7/t8 (git grep at `823ddf963e`) but **NOT t6**: t6's
+`WORST L: sigma_min 0.0000 at STEP4 t=8.3s` (an exact-singular print), `R 0.0024 at STEP13` ⇒ -090's band
+claim "全区間 0.038-0.10" does not cover t6. **(d) Pad-faces spot-check**: `+16.23` ∧ `+6.80` both present in
+t3/t4/t7/t8; **t6 = GRASP R `+16.27` / L `+6.80`** ⇒ "同一値で再現" holds at 4/5 on the 16.23 side; precise
+characterization = pB's numeric leg (claims travel labeled as p4-claims, 写すな).
+
+**(e) ⭐⭐ t4/t7 VIDEOS ARE BYTE-IDENTICAL**: sha256 both `8235d726bdc56e5de308fb4c1595dfa2c519750830a746dc09
+659c4b755e5880` (18863599 bytes; mtimes 02:44 vs 04:47); **each log's own write line claims frames=1182 /
+18863599 bytes**; the logs themselves differ (234 vs 264 lines) ⇒ consistent with a deterministic, byte-exact
+trajectory reproduction with a print-only code delta 〔inference — attribution + mechanism = RETURN item ②〕.
+For the visual leg they count as **ONE sample**. Full pins for pC: t3 `50e4e06506dbc95db8ef82a2471430853be4dd
+cd8644b4375b9f7f2bdb833249` / t4≡t7 `8235d726…5880` (above) / t6 `7d9a5318258365f527626b67182e631372bd6a4ae3
+e35360b77792a5f36761eb` / t8 `e74e0ee87477ac4c56f53930738bdb45ffab02153214e13523b80cca92f7ebff`.
+
+**(f) ⚠ aim_both control unaccounted**: started 23:48 per -089; none of the 4 banked probes is it. The
+ordering hazard (§246(b)) and p5's env7-discrimination precondition (§245(b)) still RIDE it = RETURN item ④.
+
+## 250. Three courts started; the returns travel with them
+
+**(a) p11** (-502): design court within the existing ARM-CONTROL-DESIGN grant (no new authority act) —
+singularity-handling design + **disposition of `d16c877ecd`** (ratify / redesign / revert) + relation to the
+held collision-objective restoration (B, Rs-approval class). **(b) pB** (-503): numeric leg over the 13
+banked logs — settle-gate reachedness per run (#49 axis), repetition/systematicity (independent re-derivation,
+claims labeled), per-run WORST-sigma table, t5/t9 termination causes, all gates lines. **(c) pC** (-504):
+visual leg, blind — 5 videos by path+sha; instrument notes only (t3 wide-cam oscillation Rs-flagged; t4≡t7 =
+one sample; t5/t9 crashed, no video). **(d) p4** (-505): ACK + 4 RETURN items (① retraction-scope wording vs
+the committed `d16c877ecd` ② t4/t7 attribution ③ Rs verbatim custody incl. the -089/-090 discrepancy ④
+aim_both disposition). **(e)** Rs surfaced: self-report + courts + pending-list update (snap A / collision B /
+singularity design now in p11's court / env7 old-stack discriminator still ready / both-success-only rule in
+force; ⓪ retired per §248(d)). Preflight WARNs this session: 972 uncommitted shared-tree changes (expected on
+this branch), stale harness locks >1h, env_isaaclab6 venv absent (Option-E lane uses env_isaaclab7) — noted.
