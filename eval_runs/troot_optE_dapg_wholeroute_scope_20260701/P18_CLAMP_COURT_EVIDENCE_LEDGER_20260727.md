@@ -10271,3 +10271,93 @@ no-3.7-preservation claim. **(d)** Rules in the doc: MOUTH_BAND_Z min/max interi
 tilt(a) form supersedes; one cheap edit next cycle (routed -632). §11-6's print verbatim 3.00 KEPT with
 4.00 beside (#17's third class, instanced inside p5's own doc); R3's precondition + the guard-path
 general form landed in §13-9.
+
+## 353. The proxy named a third time — and the clearance carries two requirements on one number
+
+From p5's -137 (16:31; both spec verbatims verified @ `fab643fda7` `:650` "How close the two arms may
+come before a pose is rejected" / `:655` "the smallest thing that has to be able to pass between two
+parts of this machine" ✓). **(a) ⭐⭐ The tilt-ization accepted with the error class NAMED**: p5 took
+τ_max from the menu's ROLL COLUMN while the check reads TILT — *"I used a menu column as a proxy for
+the measured quantity"* — the THIRD same-form today (① §11-6's 3D norm for the containment axis ②
+R6②'s across-only certification ③ this). Common form banked: **write the bar in the very quantity the
+predicate reads; do not substitute a nearby one.** And the dividend observed: the rule-form made the
+fix one line. **(b) ⭐⭐ The clearance review (p5's view; no value set)**: p4's basis is FUNCTIONAL
+(the cable = the smallest thing that must pass) ⇒ 8.0 = Ø is a VALID lower bound for cable passage —
+but the STATED purpose is collision avoidance ⇒ **one number carries two requirements and satisfies
+one**: two lower bounds on one quantity, the LARGER binds (the vertical-tolerance structure, mirrored);
+the collision bound = pose residual + PATH BULGE + mesh margin, UNMEASURED. The heaviest term: the
+check evaluates SOLVED poses but the arm travels BETWEEN them — endpoint clearance says nothing about
+the path ⇒ measure the minimum inter-arm distance actually achieved between consecutive checked poses
+(the recovery-path principle again). **(c) ⚠⚠ The cost changed with Rs's approval**: report-only →
+FILTER ⇒ a harmless bar becomes a STARVATION RISK — the SIGMA_FLOOR history itself ⇒ apply #15 (bars
+derive from what the arm can take) and **print the removal count — reusing the σ-floor instrument, no
+new mechanism**. **(d)** p5's verdict: keep 8.0 as INTERIM (a real bound from a real requirement); ⛔
+rewrite the annotation — "a cable-passage lower bound; the collision lower bound is unmeasured and may
+be larger"; do not let it read as having settled collision; neither raise nor lower — the two
+measurements decide.
+
+## 354. The redeclaration, the second guard, and the retention gate in the banked log
+
+From p4's -141 (16:3x); ALL pins machine-verified: driver @ `2a08328dee` sha `c56f4da08a…` ✓; bank #10
+in the SAME commit — P5 doc sha `b6743620ac…` ✓ (the request exact); t15 trace @ `aaeafdab97` —
+run_t15.txt sha `d9ec9a0c86…` ✓, gates verbatim in-log `:280` ✓. **(a)** The driver sha REDECLARED at
+64 chars = my computed value exactly; p4 records the partial-hash lesson on its side — the §351(a)
+transmit defect CLOSED. **(b) ⭐ Guard ② IMPLEMENTED** (`2a08328dee`): the cap derived in THE QUANTITY
+THE CHECK READS — each menu (yaw, roll) converted through the check's own reading (pinch→mouth vs
+world −z; no IK needed, the commanded attitude is direct); min nonzero = cap (`cap_deg` comment `:647`
+"the smallest non-zero tilt the attitude menu can produce, measured in the same [way]"); ⭐ the old
+roll version KEPT MARKED — readable as the error class it was ("measured the convenient quantity, not
+the deciding one"); ⭐ at run start BOTH allowance and cap PRINT — the judge's numbers on record
+BEFORE any pose is judged. The -137 guard chain is now FULLY LANDED. **(c) ⭐⭐ t15 trace banked — the
+retention gate holds for the first time**: "gates: {'grasp': True, 'pinC1': 't=20.40s cab27
+seat=[0.133 0.3487 0.8089] anchor=[0.15 0.35 0.809]', 'regrasp': False}" — retarget = the ACTUAL
+groove link cab27 (not build-guess cab30); the anchor recomputed at activation ⇒ no pull-in. ⚠ pinC2
+absent (C2 not reached); regrasp still False; R rad/m worst 49.4 unchanged. **(d)** t16 launched
+16:27:03, producing `fab643fda7` (the Rs-approved clearance + the whole-robot camera aboard);
+`2a08328dee` rides t17+.
+
+## 355. The second clearance review converges from a different decomposition
+
+From p11's -138 (16:31:38; version STATED = fab643fda7, all direct-read); pin verified: §27.2.138 @
+`3672900fb3` sha `3224e4d345…` ✓, one header ✓; the cited lines verified here (`:1131-1139` exclusion,
+`:657` ARM_CLEARANCE = 2.0*CABLE_R, `:567` ARM_PAIR_CUTOFF = 4.0*GRIP_HALF_SPAN ✓). **(a)** Three
+supports FIRST: the constant is a rule (2.0·CABLE_R — today's τ form); no-other says so rather than
+silently passing (fail-closed, verbatim `:1129-1130`); the instrument is SOUND for this bar (the
+§27.2.74 mj_geomDistance saturation is negative-side; +8.0 is in the valid domain). **(b) ⛔ The
+quantity differs from the constraint's question, in three axes**: (i) PLACE — min distance anywhere on
+the arms vs the width where the CABLE passes: one constant, two jobs (the SIGMA_GOOD form —
+CONVERGING INDEPENDENTLY with p5's -137(b), same minute) (ii) TENSE — selection-time predicted pose vs
+realized following (the §27.2.118 form; p5's path-vs-endpoint, from the other side) (iii) BUDGET —
+zero margin for tracking error. **(c) ⭐⭐ The main point = (iii) stated exactly**: the cell's measured
+command-vs-realization gaps are mm-order (seat residual 2.31/5.91; aim convergence 0.3/4.7; cable
+movement 10.8/12.7) — ⚠ NONE on the arm-to-arm surface (p5's… p11's own same-surface rule invoked on
+itself) ⇒ NOT "8.0 is insufficient"; what stands: **a constant whose tracking-error term is zero is
+undefended at the very order this machine loses between command and realization — the unmeasuredness
+itself is the conclusion.** **(d) ⭐ The form proposed** (rule, τ treatment): ARM_CLEARANCE = (what
+occupies the gap) + (tracking error on THAT surface); term 1 = 2.0·CABLE_R ✓; term 2 = unmeasured ⇒
+cheap pair: print ① predicted clearance at selection ② realized clearance after settling — the
+difference IS term 2; the constant becomes DERIVED. **(e) ⚠ Interim = do NOT raise** — with the
+codebase's own verbatim (`:542-545` "the 0.12 floor starved the solver: it picked poses the servos
+could not hold"): "bigger because safer" is NOT safer here; keep 8.0, add the prints, derive. Job
+separation (i) deferred until a cable-region definition exists. The spec's invitation answered: "not a
+different ruler — the same ruler plus an unmeasured second term." 〔The two reviews CONVERGE: keep-8.0
+/ not-collision-settled / measure-then-derive / rule-form — four cheap prints consolidated to p4
+(-634).〕
+
+## 356. Half the packet landed by Rs's direct hand — and the other half sits where nobody watches
+
+From p6's -117 (16:32); pins verified: LEDGER @ `ea751a6b83` sha `f02f77533e…` ✓. **(a) ⭐⭐ The
+register's key observation**: #49's Rs-pending content SWAPPED — Rs approved the COLLISION side of
+(ii) directly, without the packet (p6 diff-read the landing independently ✓). Against p11's
+§27.2.108(4) ("do not split them — both compete in the same objective; enter one alone and nobody
+watches the other degrade"): **the collision side is now IN, and the singularity side sits exactly in
+the 'nobody watches' position** — with R's rad/m worst 49.4 @ STEP15 already on record and t16's
+filter now reshaping candidate selection. p6 does NOT judge (Rs exercising Rs's own prerogative, not a
+discipline breach — p11's advice bound OUR submission etiquette, not Rs); the row's pending moved to:
+p11's decision whether to review the singularity side under the new clearance + the ARM_CLEARANCE bank
+decision (review in progress). Routed to p11 prominently (-635). **(b)** The grasp-gate row gains a
+preemptive note: the clip GATE reads a BUILD-TIME link (`:198` SEAT1 = link_at(C1[0]); the authorized
+pin the same `:232-233`) but t14's own line prints "links whose geometry alone would qualify: none" ⇒
+the failing conjunct is NOT explained by wrong-link selection — banked as gate-diagnosis material.
+**(c)** Version notes: the 3 commits absent from t15 recorded; the t15 interim (cab27) held OFF the
+row until the trace banks — and it HAS now banked (`aaeafdab97`, §354(c)) ⇒ p6 can row it (-637).
