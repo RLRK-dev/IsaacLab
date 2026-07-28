@@ -347,7 +347,7 @@ _CLIP_PARTS_PER_SPEC = [
 # --------------------------------------------------------------------------------------------
 
 SHOULDER_HEIGHT = 0.37 + 0.58 * 2.0     # spec §4 -- all five driver files already agreed
-YOKE_SPREAD = 0.16                      # p5 bank #22 -- shoulders at +/-0.160, the crown reading
+YOKE_SPREAD = 0.22                      # Rs's reference, 4th instruction: match the figure
                                         # of Rs's reference.  ⛔ WAS 0.40, and that value carried
                                         # its own measurement: "0.22/45deg made the two arms
                                         # interleave at an 88 mm span".  0.160 is BELOW the 0.22
@@ -359,7 +359,7 @@ YOKE_SPREAD = 0.16                      # p5 bank #22 -- shoulders at +/-0.160, 
                                         # two points, not a boundary, and governs "do not separate
                                         # the pair", which the re-measurement must honour.
 _YOKE_SPREAD_SUPERSEDED = 0.40          # spec §4 -- "0.22/45deg made the two arms interleave at an
-TILT = math.pi / 2.0 - math.radians(20.0)  #          88 mm span; 0.40/20deg clears the rest row
+TILT = math.pi / 2.0 - math.radians(45.0)  #          88 mm span; 0.40/20deg clears the rest row
                                         #            and both clips" (measured, and measured as a
                                         #            pair, so the two cannot be separated)
 TABLE_HX, TABLE_HY = 0.70, 0.20         # spec §4 -- ⚠ weak grounds, and spec §7 asked whether p4
