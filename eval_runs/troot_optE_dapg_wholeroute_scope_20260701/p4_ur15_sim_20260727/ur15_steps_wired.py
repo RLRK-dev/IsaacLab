@@ -280,6 +280,10 @@ for _b in cell.bodies:
         _b.gravcomp = 1.0
 
 m = cell.compile()
+# Rs asked twice to see the whole robot while a run was still in its attitude search, which writes
+# no frames for several minutes.  The cell exists the instant it compiles, so it is written out
+# here and anything can render it without waiting for -- or disturbing -- the run.
+(S / "_steps_cell_full.xml").write_text(cell.to_xml())
 d = mujoco.MjData(m)
 AN = [mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_ACTUATOR, i) for i in range(m.nu)]
 AIDX = {t: [AN.index(f"{t}_{j}_act") for j in J6] for t in SIDES}
