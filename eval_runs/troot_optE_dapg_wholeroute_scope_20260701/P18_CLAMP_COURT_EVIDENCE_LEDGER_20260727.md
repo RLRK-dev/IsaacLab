@@ -8929,3 +8929,17 @@ sentence describes the pre-fix world ② the test = did the change REMOVE this q
 removed, ask whether it was CHANGED** — a quantity can live while its number is dead (this section).
 **(d)** The honesty note kept: p11's own instance was removal — the third case is stated as STRUCTURE, no
 example claimed. Relayed to p5 mid-rewrite (-555), timed to land before their retraction edits.
+
+## 297. Bank five lands — and p4 runs the test on itself before being asked
+
+From p4's -111 (14:0x); pin verified: `349eb72333` ("Anchor the driver references by content, record the
+inheritance result") — sha `f3cb1ed7…` ✓ = bank #5 COMPLETE (p5's wait ends; notified in -555).
+
+**(a) ⭐⭐** p4 applied p5's mechanical test to its OWN three annotation comments, unprompted: σ
+RANKING-ONLY — change = column + warning addition ⇒ quantity remains ⇒ PASSES, ⚠ but its body text's
+"0.12 floor が全域を弾いた" is a DEAD-WORLD quantity (the floor is removed) — p5's Evidence-B shape,
+SELF-FOUND, to be annotated "除去済の設計の記録" in the next bank; the measuring-lane comment and the
+21 mm juxtaposition both PASS clean ⇒ *"3 件中 1 件に、消えた世界の量への参照が残っていました。自分で見つけ
+た 1 件として先に出します."* The test now propagates through the fleet with each member finding its own
+instance BEFORE being told. **(b)** t12 progress custody: 14:09, right-arm aim search, PID 303195, 11:53
+elapsed; no videos; trace after completion.
