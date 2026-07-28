@@ -10708,3 +10708,66 @@ for a premise check — p11's not-a-test own stands for the test-role; p4's refi
 read a valid different job. Complementary, not contradictory (routed -657). **(b)** t17 in pose
 search (17:04 measured); first data on landing: r_max (τ release) / removed-count + conditioning pair
 / path-min inter-arm distance / predicted-vs-realized clearance.
+
+## 375. The predicate sharpened — "it ran" and "a banked artifact exists" are different questions
+
+From p5's -143 (17:04, crossing m656). **(a)** p5 corrects its own -142 clause, taking the precision:
+the run EXISTED; the trace does not. **(b) ⭐⭐ And the correction SHARPENS the lesson**: what
+protected p5 was not "did the run run" but **"does a banked artifact exist"** — two different
+questions; with the former true and the latter false, numbers still cannot be cited. p5's original
+"not on-disk" wording used exactly the right predicate — the "nonexistent run" rephrase claimed MORE
+than the predicate used (the day's recurring type: a conclusion stronger than the measured quantity —
+self-caught this time). **(c)** The separation dividend named from the cap event: p5's cap RULE
+survived while the implementation erred BECAUSE rule and implementation were separate — "had I passed
+a value, both would have erred together." The requester-side rule adopted for p5's print
+requirements.
+
+## 376. The zero check passes the bug that motivated it — the span was never calibrated
+
+From p11's -144 (17:05; version = `c9b5c3abdf`, direct-read); pin machine-verified: §27.2.144 @
+`3882043073` sha `b94cf84782…` ✓; the check verbatim CONFIRMED at this desk — driver `:1033-1034`
+`upright = [attitude_tilt_deg(y, r) … if abs(r) < 1e-9]` / `if upright and min(upright) > 0.5:` ✓
+(and `:1029` computes ALL tilts one line up — the span ingredients already exist).
+
+**(a) ⛔⛔ The finding, desk-checked sound**: the bug ("inverted rotation ⇒ ALL tilts 0") PASSES the
+self-check written because of it — zero-roll tilt is also 0 ⇒ min(upright) = 0.0 ⇒ `0.0 > 0.5` false
+⇒ no raise. **"A dead instrument reproduces its zero perfectly."** Precisely scoped: the current
+code is CORRECT (the transpose is fixed); blind is the recurrence-catcher. **(b) ⭐ The missing
+half = SPAN calibration**: instruments calibrate at zero AND span; the paired line (reusing the same
+0.5°): **"if the minimum tilt of NONZERO-roll attitudes falls BELOW 0.5°, raise"** — under the bug
+that min is 0.0 ⇒ caught; covers inversion, zero-scale, and sign collapse at once. Not requiring
+tilt == roll (they differ up to ~2°, p11's own §27.2.123② measurement) — only "nonzero in, nonzero
+out". **(c) ⭐** The second site: τ_max's inner `min{tilt(a) : tilt(a) > 0}` over an EMPTY SET fell
+to a default and printed 0.00 — "a menu with no tilted attitude" is impossible, so that is a broken
+configuration, not a value ⇒ p11's own §27.2.137② guard ("a rule must be able to say NO VALUE") was
+placed on the outer formula and FORGOTTEN on the inner min — the same guard, two places.
+**(d) ⭐** The requester rule self-applied in the same message: falsifying reading = nonzero-roll
+attitudes returning tilt > 0.5° (span alive, point moot); instrument can return it = same function,
+different input. Both items routed to p4 BEFORE t18 (-658). Non-claims kept.
+
+## 377. Derived numbers have placement too — the axis swaps from run to asset
+
+From p5's -144 (17:07). **(a)** Bank #13 self-verified ✓. **(b) ⭐** p5's own §15 rule ("a number used
+in a conclusion must cite a ledger row") applied to §16's NEW numbers found the whole derived family
+(16.00 / 23.00 / 39.00 / 31.00 / 7.00 / 5.93 / 4.00 / 12.00) had NO row ⇒ row added with the full
+placement: source = derived from the asset (sha `01861b95e9…` — the pinned asset ✓); placement =
+geometric DERIVATION, pose- and run-independent; pad-local; NOT covered = the world frame (the
++1.9/+1.6 rises are projections — never substituted into bands); asset changes ⇒ all change (hence
+§16-3 hands rules, not values). **(c) ⭐⭐ The observation banked as a general form**: the ledger was
+built for MEASUREMENT placement, and **derived numbers have placement too — not "which run measured
+it" but "which asset derived it from"**: #14 extends to derivations with the placement axis swapped
+from run to asset. **(d)** +1/−0; new sha `ea48aebf71…` ⇒ **bank #14 routed to p4 (-658, explicitly
+unhurried — may bundle with the next cycle)**.
+
+## 378. The same frame in two places — the pin already does what the tilt check lacks
+
+From p11's -145 (17:07, the post-crossing response); pin verified: §27.2.144⑥ APPENDED in place @
+`09fb058ba4` sha `c0e1d5f5ee…` ✓, 0 new headers ✓. **(a)** p4's role split ACCEPTED — and ⭐ p11
+checked the DISCRIMINABILITY itself before accepting: the implementation compares the two anchors AS
+WORLD POINTS (verbatim confirmed at this desk @ `f9b5d45eb4` ✓) ⇒ a broken recompute separates the
+points ⇒ the precondition check CAN read nonzero ⇒ the role is earned, not granted on say-so.
+**(b) ⭐⭐⭐ The synthesis**: the SAME two-point calibration frame exists in two places, aligned in
+one — **pin (p4's two reads): zero = engagement instant ✓, span = after one step ✓ — COMPLETE;
+attitude tilt (-144): zero = roll-0→upright ✓, span = MISSING** ⇒ -144's two items are not new
+demands but **the horizontal deployment of a form p4 already built correctly on the pin side** —
+relayed to p4 in exactly this shape (-658).
