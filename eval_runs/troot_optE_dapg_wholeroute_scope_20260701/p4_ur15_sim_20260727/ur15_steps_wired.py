@@ -1213,6 +1213,9 @@ STEPS = [
 ]
 
 FPS, W, H = 30, 1600, 900
+# One encoder setting for both writes.  The watch-along file and the finished file are the
+# same run seen at two moments, so they must not be able to drift into looking different.
+VIDEO_QUALITY = 8
 renderer = mujoco.Renderer(m, height=H, width=W)
 cam = mujoco.MjvCamera()
 cam.type = mujoco.mjtCamera.mjCAMERA_FREE
@@ -1238,6 +1241,47 @@ aim_cable = {}                       # where the cable was when the aim was comp
 aim_seat = {}                        # where the aim predicted the seat would end up
 render_every = max(1, int(round(1.0 / (FPS * m.opt.timestep))))
 gates = {}
+
+# A file that can be opened while the run is still going (Rs, 2026-07-28).  A normal mp4 puts its
+# index at the end, so it is unplayable until the writer closes -- which is the whole problem this
+# is here to fix.  Fragmenting it means each chunk carries its own index and a player can start on
+# what has arrived so far.  The name is stable on purpose: the same file can stay open across runs
+# rather than having to be found again each time.
+import imageio.v2 as _iio                                                            # noqa: E402
+
+LIVE_OUT = Path.home() / "Downloads" / "ur15_live.mp4"
+LIVE_OUT.parent.mkdir(parents=True, exist_ok=True)
+# Fragmenting alone is not enough and I checked rather than assumed: with only the movflags, a
+# reader 4 seconds in still got "moov atom not found" and 28 bytes, because the encoder was
+# holding everything in its own buffer.  It needs to be told to flush, and to cut a fragment on a
+# fixed wall of time; with both, a reader partway through gets a real duration back.  Half a
+# second of keyframe spacing and of fragment length, taken from FPS so they stay half a second if
+# the frame rate ever changes.
+_live = _iio.get_writer(str(LIVE_OUT), fps=FPS, quality=VIDEO_QUALITY, macro_block_size=None,
+                        output_params=["-g", str(max(1, FPS // 2)),
+                                       "-movflags", "frag_keyframe+empty_moov+default_base_moof",
+                                       "-flush_packets", "1",
+                                       "-frag_duration", str(500 * 1000)])
+
+
+def live_write(img):
+    """Append one frame to the watch-along file.  Never let it take the run down with it.
+
+    If the encoder dies -- disk full, ffmpeg gone -- the run still has to finish, because the
+    measurements are the thing that cannot be re-made cheaply.  So this reports once and then
+    stays quiet rather than raising.
+    """
+    global _live
+    if _live is None:
+        return
+    try:
+        _live.append_data(img)
+    except Exception as exc:                                     # noqa: BLE001 -- see docstring
+        print(f"[steps] watch-along file stopped: {exc!r}; the run and the final video continue")
+        _live = None
+
+
+print(f"[steps] watch along here while it runs: {LIVE_OUT}")
 
 # Pre-solve one joint waypoint per STEP per arm.  The IK runs offline on scratch data; the live
 # arms are moved ONLY by their position servos interpolating between these waypoints.
@@ -1622,6 +1666,13 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             cam2.lookat[:] = _want if n <= render_every else (0.85 * np.array(cam2.lookat) + 0.15 * _want)
             renderer.update_scene(d, camera=cam2)
             frames.append(np.hstack([a_img, renderer.render()]))
+            # Rs, 2026-07-28: watch it WHILE it runs.  The finished file is only written when the
+            # loop ends, half an hour later, and the log says the run has failed about ten minutes
+            # in -- so the wait bought nothing and cost the feedback it was supposed to carry.
+            # This writes a second, fragmented file as the frames arrive, which is playable before
+            # the run is over.  The finished file below is untouched, so what gets judged at the
+            # end is the same artifact in the same format it has always been.
+            live_write(frames[-1])
     # The same block for the first grasp AND for the re-grasp.  It used to fire only at the first:
     # Rs watched the re-grasp fail in the video while the log had nothing to say about it beyond
     # `grip=L-`, because the one part that fails was the one part with no measurement.  p18 cleared
@@ -1689,10 +1740,13 @@ for t in SIDES:
     print(f"[steps] WORST {t}: column gap {col_min[t]:+7.1f} mm at {col_where[t]}"
           f"{'   <- INSIDE THE COLUMN' if col_min[t] < 0 else ''}")
 print(f"[steps] gates: {gates}")
+if _live is not None:
+    _live.close()
+    print(f"[steps] watch-along file closed: {LIVE_OUT} {LIVE_OUT.stat().st_size} bytes")
 import imageio.v2 as imageio  # noqa: E402
 
 OUT.parent.mkdir(parents=True, exist_ok=True)
-imageio.mimwrite(str(OUT), frames, fps=FPS, quality=8, macro_block_size=None)
+imageio.mimwrite(str(OUT), frames, fps=FPS, quality=VIDEO_QUALITY, macro_block_size=None)
 # hand p11 the path, not a summary of it
 _tr = S / "sigma_trace.txt"
 with open(_tr, "w") as _f:
