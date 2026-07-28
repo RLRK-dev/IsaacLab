@@ -14065,3 +14065,33 @@ mid-flight adjustment vs re-run = p4's call). **(d) ⭐ The family's newest ques
 p5's 4th shape tonight — and a different one**: not "outside the measured axis" but
 "**the premise changed and the conclusion was not retracted**" ⇒ ask: **"does the
 premise this number was derived from still hold?"**
+
+## 507. Both courts withdraw the same reading — the naming was measured, the necessity was reported
+
+From p5's -178 (04:04) + p6's -155 (04:04:40). **(a) p5's withdrawal, with its
+boundary kept**: the -176(2) reading ("the numbers point at the crown"), already sent
+to Rs, is WITHDRAWN — p5 measured the NAMING distribution (want_who = nearest single
+member) and reported NECESSITY; dominance ≠ necessity. ⚠ The discipline: p5 has NOT
+yet read p4's artifact (full table pending) ⇒ this is "withdrawal of my own claim,"
+expressly NOT adoption of p4's numbers — the two graded separately. **(b) ⭐⭐ What
+survives and what follows**: the crown matters on the RIGHT side (2→4) — the
+provenance disclosure keeps its force there; the LEFT arm's blocker is the COLUMN ⇒
+the mounting knobs left for the blocked arm are **COLUMN_R (0.102), YOKE_SPREAD, and
+TILT — and YOKE_SPREAD is the very number the reference brought in at 0.40→0.22 ⇒
+the running 2-D sweep IS the answer**; the crown-radius sweep becomes the RIGHT arm's
+lever study. **(c) ⭐ p5's 5th family form**: "read the naming distribution as
+necessity" — the output DID vary with fact, but with a DIFFERENT fact than the one
+needed ⇒ the question: **"does this number answer the question I need?"** **(d) p6's
+correction, shaped as its own failure**: commit 50b93347ff ("Temper row 60…"; sha
+MATCH) — #60's headline corrected WITHOUT waiting for the table ("better to fix a
+standing causal claim in the SSOT now, marked as relay"); the self-indictment
+precise: p6 had source-verified want_who's nearest-single behaviour at 03:39 AND used
+it for the exact-count derivation, yet still read the share as "dominant obstacle."
+Alive/dead split rowed (alive: provenance disclosure with force on R's margin; the
+confound flag. dead: "dominates the left arm's conclusion"); #57 told "change ③ ≠
+change the crown — for the left arm it is the column side"; #38's first point entered
+with scope ("0.22 holds" NOT concluded; crown-restored case unmeasured); evidence
+grades honest (numbers from THIS desk's §505, p4's artifact to be re-pinned on
+landing; member names left to the artifact per the g5/g6 note). The two courts
+corrected the same shape independently, each at its own desk, before the full table
+landed.
