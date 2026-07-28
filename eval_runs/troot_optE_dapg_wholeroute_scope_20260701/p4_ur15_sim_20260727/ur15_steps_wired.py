@@ -2089,11 +2089,29 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                         _sc2.qpos[_a2] = aimed[_far][_k2]
                 mujoco.mj_forward(m, _sc2)
                 _tch = sorted(g for g in touching(t, _sc2) if g.startswith(("L_", "R_", "Lg", "Rg")))
+                # ⛔ Reporting was not enough.  Of the seven steps that ended with the forearm
+                # inside the mast, three are steps where R INHERITS this pose -- and inheriting
+                # skips the route solve, and with it both mast tests the route solve runs.  A pose
+                # that never took a test is not clear, it is untested, and printing beside it says
+                # neither.  So the same two tests run here, and from the arm's CURRENT joints,
+                # because that is the move the arm is actually about to make.  A failure sends the
+                # step to the solver, which has the filters, instead of being narrated at.
+                _icg, _icw = column_gap(t, _sc2, want_who=True, cutoff=ARM_DECIDE_CUTOFF)
+                _ipg, _ipw = path_mast_min(t, _sc2,
+                                           np.array([d.qpos[_a] for _a in QADR[t]]),
+                                           np.asarray(aimed[t]), cutoff=ARM_DECIDE_CUTOFF)
+                _ibad = ((_icg is not None and _icg < ARM_CLEARANCE)
+                         or (_ipg is not None and _ipg < ARM_CLEARANCE))
                 print(f"[steps] STEP{num} {t}: inherited aim pose, arm-to-arm check = "
                       f"{_tch or 'not on the other arm'} (⚠ arm-to-arm ONLY -- posts and table are "
-                      f"invisible to this test)")
-                w[t] = aimed[t]
-                continue
+                      f"invisible to this test); mast at the pose {gap_mm(_icg)}"
+                      + (f" ({_icw})" if _icw else "")
+                      + f", on the way there {gap_mm(_ipg)}"
+                      + (f" ({_ipw})" if _ipw else "")
+                      + ("   <- INHERITANCE REFUSED, solving this step instead" if _ibad else ""))
+                if not _ibad:
+                    w[t] = aimed[t]
+                    continue
             # Rs, 2026-07-28, watching the run: "when descending to a clip, all fingers have to
             # point straight down, so they do not hit the table."  A tilted jaw puts its lower
             # claw out sideways and down -- at 32 degrees the arm's lowest point sat 48.5 mm below
