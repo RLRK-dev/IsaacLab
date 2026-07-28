@@ -12607,3 +12607,83 @@ reach has no solution, the choice (the image's look vs §0#2's 88 mm) is Rs 専�
 raise ONE line when and only when the fact emerges. **(e)** The ask executed: the directive
 DELIVERED to p4 (m767); delivery confirmed to p5 (m768). p5 edits no assets, authorizes no
 runs.
+
+## 449. Rs supplies the cell itself — and the mirror turns out to be a formula, the crown a misread
+
+From p5's -159 (23:48). **(a) Pins verified**: the package at ~/Downloads/ur15-dual-arm-cell
+(urdf/glb/json/md/meshes/views) — all three declared shas desk-matched (urdf 7f6828df8e… /
+json 20ac0935c7… / md 0783285b62…); md verbatims desk-read ("exact kinematic mirror";
+"angled Y yoke over a rotating column"); json yoke_angle 45.0 ✓ (spread 0.22 ✓ §450); doc
+sha for the bank — see §451's one-bank resolution. Rs direct to p5 ×2: 「これをもとにして」
++ 「フィンガはコ字形を維持して」. **(b) ⭐⭐⭐ The finding**: the reference's mirror is NOT a
+new machine — the URDF's two arms are IDENTICAL right-handed UR15s (same axis "0 0 1", same
+base.dae), differing only in mount transform (±0.220, ∓45°); "exact kinematic mirror" refers
+to JOINT VALUES, closed-form: **R = (−j1, π−j2, −j3, π−j4, −j5, −j6)** — p5 machine-checked
+against ALL 47 pose vectors: 0 mismatches, max error 1e-6, limits respected, tool0
+x-sign-flip corroborated. ⛔ NOT shown: that our solver can USE the rule (it maps between
+solutions; using it = the right arm solves by mapping from the left = a DIFFERENT solving
+method ⇒ touches the control method ⇒ Rs approval domain, §0#3 — flagged by p5, held);
+interleave, self-collision, singularities unshown. **(c) ⭐⭐ The reconciliation advanced**:
+the reference is BUILT at (0.22, 45°) — the exact pair the spec note recorded as
+interleaving ⇒ the note's measurement was NON-mirrored arms, the reference poses are
+MIRRORED ⇒ the note does not apply to the reference (mirroredness = another inseparable
+coordinate); ⛔ but 88 mm non-crossing is NOT shown by the pose table (single-arm
+reachability, not simultaneous margins) ⇒ the 2-D 88 mm test REMAINS, now in mirrored
+poses. Consistency: shoulder 1.53 and column r 0.102 identical to ours. **(d) ⛔ p5 retracts
+§20-4**: "no branches, crown only" was WRONG — the authoritative asset says "angled Y yoke";
+the cause named (shape read from a low-res photo, declared ±0.3 diameters at the time) ⇒
+the photo-reading RETIRES when the authoritative asset arrives. What lives: the §19 branch
+FORM with the reference's values — spread 0.22 / 45° / **fork height 1.31** (= 1.53 − 0.22,
+1:1); FORK_HEIGHT 1.130 → 1.31. ⛔ The reference carries NO yoke collision geometry ⇒ the
+mast-query yoke body is OURS to make. **(e)** コ字 kept per Rs (the reference's stock 2F-85
+NOT adopted); ⚠ grip_point_offset 0.19 is stock-pad-based ⇒ re-derive with our claws if
+using the pose table. The other adoptable values recorded (stereo head transform, base yaw,
+cell pitch, envelope, process pose names). p5's (7) escalation — "the reference shows the
+same symmetry without a new machine; raised as INPUT, the judgment is Rs's" — was OVERTAKEN
+by Rs's direct answers (§450/§451).
+
+## 450. The cell lands on p4's desk too — and Rs answers the escalation before it finishes forming
+
+From p4's -187 (23:49:01) + Rs DIRECT to this desk (verbatim, my custody):
+**「『新しい腕を作る』は既にご決定済み」**. **(a)** Rs supplied the same cell to p4 with
+instructions to work WITH p5 on it. p4's four: (1) ⭐ **-185 SETTLED by the cell's own
+definition**: yoke_spread_m 0.22 / yoke_angle 45° (json desk-read ✓) — "the pair is not a
+warning against this cell; it IS this cell"; a third data point outranking the screenshot
+reading; ⛔ p4's eyeball-derived 0.106 WITHDRAWN ("I got it by eye off an image while the
+definition existed in a file"). (2) ⭐ The mirror decision confirmed by the md; the left
+base = Ry(−45°) at x=−0.22 ⇒ mount AND arm both mirror. ⚠ p4's self-catch, banked verbatim:
+**"the mounting in the driver was correct all along and I changed it four times: the shape
+Rs kept rejecting was the HOME POSE, not the mounting"** — at zero joints that mounting
+genuinely crosses the arms; the cell's home values give Rs's arch immediately; rendered and
+checked at `6572a1ad50` ("Take the cell's own mounting, and find the shape was a pose",
+23:48:15 ✓) BEFORE saying so — "the discipline I broke twice today," applied. (3) ⛔ The
+cell does NOT load as physics (mjMINVAL on left_shoulder) ⇒ a geometry-and-pose SOURCE:
+mounting, stem extent, the 24 poses from it; masses/inertias/damping stay OURS. (4) ⚠ Two
+questions to p5's court: the EE conflict (stock 2F-85 vs Rs's コ字 directive — p5 had
+already answered: keep コ字, re-derive the 0.19 offset) and **the STEREO HEAD: in scope or
+not?** — needed before Rs's stated next (run the cable clamp on this cell) re-runs the
+route against the new mounting. **(b)** Rs's direct line to this desk ANSWERS p5's -159(7)
+escalation: the input reached Rs and **the decision STANDS** — the reference informs the
+implementation; it does not reopen the premise.
+
+## 451. The decision reaffirmed on every surface — and the reference becomes the acceptance test
+
+From p5's -160/-161 (23:50). **(a)** Rs verbatim to p5's pane as well: 「『新しい腕を作る』は
+既にご決定済み」 ⇒ p5 withdraws the reconsideration request to p4 ("着手して構いません");
+§22-2 remains as record only ("a path considered and not taken"). **(b) ⭐⭐ §21's four
+conventions TAKE EFFECT** (x=0 / sign-preserve with axis-limit atomicity / baked mirrored
+vertices, no negative scale / new file new name). **(c) ⭐⭐⭐ The reference's role CHANGES:
+it becomes the new asset's ACCEPTANCE TEST** — 47 verified L/R pairs ⇒ feed the LEFT arm's
+banked joint values to the mirrored arm; the tool must land on the reference's RIGHT tool
+positions ⇒ "sign convention preserved" becomes a TESTABLE one-liner — "'preserved, I
+think' is eliminated." The R-formula is what a NON-mirrored machine needs for mirrored
+poses; after the mirror machine exists, same-values-symmetric-poses replaces it — that
+difference is what the test watches. Mount values, stereo head, pitch, envelope are
+arm-mirror-independent; fork 1.31; the yoke collision body ours; コ字 + offset re-derivation
+carried. **(d) The one-bank resolution, with the race disclosed**: p5's -161 supplied the
+sha its -160 omitted (owned as a discipline slip): d01c3a903c… = §22 + §22-8 in ONE state
+(+94 over bank #23). At this desk the -159 sha (c2d9022ace…) verified MATCH, and within the
+SAME script invocation (<1 s later) the commit captured +94 lines — p5's §22-8 write landed
+between the check and the add. Resolution: `git show 939fdb90b0` blob sha = d01c3a903c… =
+EXACTLY the -161 declaration ⇒ **`939fdb90b0` IS banks #24+#25 combined**, as p5 asked; the
+committed state is the bank; the as-read check is recorded as the race's before-picture.
