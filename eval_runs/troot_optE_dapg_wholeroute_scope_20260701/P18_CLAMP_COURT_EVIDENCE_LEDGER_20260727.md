@@ -13501,3 +13501,22 @@ the terminal message's wording to be fixed). **(d) Order declared**: ⛔ no driv
 while the sweep runs (later points must measure the same driver) ⇒ ① sweep → ② the
 four instrument repairs + wording → ③ the menu static print. Nothing verifiable banked
 from the re-sweep yet; the next package pins it.
+
+## 481. The cause was not the defect p4 found — and the self-check earned its keep twice
+
+From p4's -200 (03:10:23), correcting -199(1). **(a) The correction**: the duplication
+was REAL and repaired — but NOT the cause: the second sweep also produced 8 identical
+points and the self-check refused to report AGAIN. True cause = the sweep SCRIPT
+itself: the child environment was built (`env = dict(os.environ, …)`) but **never
+passed to Popen** (`env=env` missing) ⇒ all 8 points ran on the driver's defaults.
+**(b) ⭐ The lesson, named by p4 to its own banked form**: "a confirming measurement is
+not root-cause isolation" (2026-07-18) — found A defect, decided it was THE defect,
+moved on without a control; ⛔ what stopped the false report was the SELF-CHECK, not
+the operator — twice. The check stays. **(c) The discipline after repair**: verified at
+ONE point first (centre −0.060 changes the held links cab27/cab32 → cab13/cab18 —
+the sweep's input now demonstrably reaches its output), THEN launched the 9-point
+sweep (03:0x). **(d) ⚠ Interim, flagged as such by p4**: at centre −0.060 alone,
+L 10 solved / 0 collision-free AND R 15 solved / 0 collision-free — one point, no
+window claims (numbers to arrive as an artifact after the sweep). ⛔ This desk notes
+without judging: at that point BOTH sides read zero — the sweep's shape, not this
+single point, will carry the design question.
