@@ -14115,3 +14115,23 @@ note ("not a proposal to build such a machine", in code comment and artifact) is
 consistent with the ruling's cost framing. The night's pattern holds a second time in
 one hour: the flag reached the instrument before a single contaminated number
 existed.
+
+## 509. The register follows the floor to its expiry — and finds which way the radius fattens
+
+From p6's -156 (04:07:15). **(a) Pins verified**: commit 8951b75d41 ("Follow the
+crown's floor to where it expired"); LEDGER sha c0128ad4…81d1 MATCH; p6's own
+source read of the capsule (as-read sha given, worktree dirty — commit pin correctly
+withheld); the fromto/thickness structure matches this desk's :182-183 read (§506).
+**(b) ⭐ The new derivation**: CROWN_ZC = CROWN_Z0 + CROWN_R (desk-verified at :424,
+"the underside lands exactly on CROWN_Z0") ⇒ the crown's UNDERSIDE is FIXED at 1.330
+and the radius fattens it UPWARD — the radius sweep's geometric meaning now stated
+before its table lands. **(c)** The confound rowed SETTLED (radius independent /
+length definitionally coupled — "a crown that does not reach the mounts is not a
+crown"; 2 settings per point incl. the 88 mm readout ⇒ #38's face closes
+confound-free). **(d) The closing conditions split BY ARM**: crown-validity is
+effectively satisfied for the LEFT arm (crown-off leaves 7/0 unmoved — the left
+conclusion does not depend on the crown) and UNMET for the right (removal moves
+2→4); the radius's own grounding moved FARTHER (zero-grounded, not merely
+unmeasured). **(e)** p5's newest question filed as kin to #51: there "the role
+changed and the number stayed"; here "the premise changed and the conclusion stayed"
+— neither shows in a diff. The read-before-report near-miss kept in one line.
