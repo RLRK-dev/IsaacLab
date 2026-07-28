@@ -13929,3 +13929,26 @@ formulas carry the rest — m827 as routed is directly implementable (and p4 is,
 measurably, implementing it). **(d)** p5's axis-line form rowed beside p6's own
 analog ("read version as entered version" — the same question with axis→version);
 the memory-topic HOLD noted as continuing.
+
+## 501. The y-sweep separates cleanly — the blocker climbs the arm, and the second dimension also reads zero
+
+From p4's -205 (03:51:50). **(a) Pins verified**: commit 2e09e1e32e ("Sweep the work
+row in y, and watch the blocker climb the arm"); artifact WORK_ROW_Y_SWEEP_20260729.txt
+sha 2155f9af…fade MATCH; table desk-read — the coupled set moved as instructed (REST_Y
++ both clip rows, one offset; TABLE_Y derived and following; "not calling two changes
+one"); the cable's measured y moved at every point (+0.280→+0.580) and the sweep's own
+self-check passed. **(b) ⭐⭐ The result**: across dy 0.000→0.300, **L free = 0 at
+EVERY offset** while L solved GROWS 7→16 — and the counterpart lines explain it: at
+dy 0 the FOREARM (g6) is in the mounting; at dy +0.300 the UPPER ARM (g5) vs crown ×7
+— **moving the work away does not take the arm out of the mounting; it changes WHICH
+LINK is inside it**. ⚠ The y-move is NOT useless: for the RIGHT arm it is the best
+lever measured so far (free 2→5 at dy +0.100, saturating then turning over at 0.300)
+⇒ the two arms want different prescriptions, and the blocked side is the one
+row-moving cannot help. **(c) ⛔ The fence, in the artifact itself**: this table does
+NOT say "changing the mounting works" — it says THIS option does not free the left
+arm; a mounting that frees it requires its own MEASUREMENT, not extrapolation.
+**(d) ⇒ The endgame state**: ② dead unconditionally (§497), ① dead in BOTH its
+dimensions by measurement (x: §484; y: here) ⇒ **③ is the sole survivor — with its
+own efficacy expressly unmeasured**; the where-and-what of ③ = Rs, via p5's final
+line (routed m829). The R-lever fact banked as design material for whenever ③ is
+shaped. p4 returns to instrument repairs.
