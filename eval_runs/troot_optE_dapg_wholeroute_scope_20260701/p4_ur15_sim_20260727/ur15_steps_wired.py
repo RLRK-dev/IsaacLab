@@ -1074,6 +1074,13 @@ def _rdes(yaw, roll=0.0):
 
 
 COLG = [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n) for n in ("stem", "foot")]
+COLB = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "column")
+# Each arm is attached to the mast, so its first body is a CHILD of the column body and its geoms
+# sit inside the mast by construction -- that is the mount, not a crash.  MuJoCo already ignores
+# those contacts (a body and its parent are filtered by default); the distance query does not know
+# it.  So the same exclusion is derived from the model here rather than written as a list of link
+# names, which would go quiet the day a link is renamed.
+MOUNTG = {g for g in range(m.ngeom) if m.body_parentid[m.geom_bodyid[g]] == COLB}
 CLEARANCE_REPORT = {}   # per arm: (candidates the clearance removed, candidates kept,
                         #           the clearance the winning pose was predicted to have)
 
@@ -1097,17 +1104,24 @@ def sigma_min(t, dd=None):
     return float(np.linalg.svd(wrist_jac(t, dd), compute_uv=False)[-1])
 
 
-def column_gap(t, dd=None):
-    """Closest signed distance from this arm's geoms to the yoke column, in mm.  Negative means the
-    arm is inside the column.  mj_geomDistance is a geometry query, so it reports this whether or
-    not the pair can collide -- which matters here because I had switched the column's collision
-    off, so nothing was stopping the arm from sweeping through the mast."""
+def column_gap(t, dd=None, want_who=False):
+    """Closest signed distance from this arm's geoms to the yoke mast, in mm.  Negative means the
+    arm is inside the mast.  mj_geomDistance is a geometry query, so it reports this whether or not
+    the pair can collide -- and here the two differ: the arm's mount is inside the mast and its
+    contacts are filtered, while everything past the mount does collide.
+
+    ⛔ The bolted-on geoms are excluded (MOUNTG), or the answer would be a constant that never
+    moves and says nothing.  Rs, 2026-07-28, watching the run: "the left hand is slamming into the
+    cylinder" -- so the name of the part comes out with the number.  Twenty runs reported this as a
+    bare figure, and a bare figure cannot say whether a hand arrived or a mount never left."""
     dd = dd if dd is not None else d
-    best = 1e9
-    for g in ARMG[t]:
+    best, who = 1e9, None
+    for g in ARMG[t] - MOUNTG:
         for c in COLG:
-            best = min(best, mujoco.mj_geomDistance(m, dd, g, c, 1.0, None))
-    return best * 1000.0
+            d_ = mujoco.mj_geomDistance(m, dd, g, c, 1.0, None)
+            if d_ < best:
+                best, who = d_, f"{GNAME[g]} vs {GNAME[c]}"
+    return (best * 1000.0, who) if want_who else best * 1000.0
 
 
 def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
@@ -1179,6 +1193,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     collision, and returns the one closest to `near` (so the servo move stays short)."""
     sc = mujoco.MjData(m)
     _clear_dropped = 0
+    _col_dropped = 0
     if other is not None:
         for t2 in SIDES:
             if t2 != t:
@@ -1281,6 +1296,20 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
                 hit = True
                 _clear_dropped += 1
                 _by_clearance = True
+        # Rs, 2026-07-28, watching the run: "the left hand is slamming into the cylinder."  The
+        # mast was never in this filter.  It was MEASURED every step and printed as "column gap",
+        # and it read negative at ten steps of thirteen while the selection went on choosing those
+        # poses -- an instrument reporting a fault to nobody.  So the mast is now tested exactly
+        # where the far arm is tested, and by the same rule Rs approved for the far arm.
+        # ⚠ Unconditional, unlike the far arm: the mast is always in the scene, so there is no
+        # case where it is absent from the scratch data and nothing to measure.
+        # The distance is the same one -- a cable diameter, the smallest thing that has to fit
+        # between two parts of this machine.  Reusing it rather than inventing a second number is
+        # a design call and is flagged as one; it is not derived that the two should be equal.
+        _cg = column_gap(t, sc)
+        if _cg < ARM_CLEARANCE * 1000.0:
+            hit = True
+            _col_dropped += 1
         # Manipulability of this candidate.  The solver had no notion of a singularity at all --
         # it ranked candidates by position error and by staying near the previous pose, so a
         # configuration that has lost a direction could win, and did: Rs saw two runs in a row
@@ -1335,7 +1364,8 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     # count of forty look identical from a pose alone.
     CLEARANCE_REPORT[t] = (_clear_dropped, len(cands), nfa, sv,
                            max(_drop_sv) if _drop_sv else None,
-                           _roomy, max(_inside) if _inside else None, _pool_sv)
+                           _roomy, max(_inside) if _inside else None, _pool_sv,
+                           _col_dropped)
     if not quiet:
         # ⛔ This line used to report len(well) as "away from a singularity", beside len(free) as
         # "collision-free".  With the floor at zero those are the SAME candidates -- sigma is never
@@ -1919,9 +1949,14 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 # it here skips the route solve, and with it the far-arm check the route solve
                 # does.  So put the inherited pose and the far arm into scratch and say what the
                 # arms would be touching.
-                # ⚠ SCOPE: touching() sees ARM-TO-ARM contact only.  The posts and the table are
-                # contype=0 to it, so "clear" here means "not on the other arm" -- NOT "clear of
-                # everything".
+                # ⚠ SCOPE: the LINE below is arm-to-arm only -- it keeps the names beginning L_,
+                # R_, Lg, Rg and drops the rest -- so "clear" here means "not on the other arm",
+                # NOT "clear of everything".
+                # ⛔ The earlier note gave the wrong reason: it said the posts and the table were
+                # contype=0 and therefore invisible.  They are not; neither carries contype, so
+                # both collide and touching() does see them.  It is this print that narrows, and a
+                # note that blames the scene for what the filter does will send the next reader to
+                # the wrong file.
                 _sc2 = mujoco.MjData(m)
                 _sc2.qpos[:] = d.qpos
                 for _k2, _a2 in enumerate(QADR[t]):
@@ -2161,9 +2196,10 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 sigma_trace.append((num, t2, n * m.opt.timestep, sv, _amp))
                 if sv < sig_min[t2]:
                     sig_min[t2], sig_where[t2] = sv, f"STEP{num} t={n*m.opt.timestep:.1f}s"
-                cg = column_gap(t2)
+                cg, cgw = column_gap(t2, want_who=True)
                 if cg < col_min[t2]:
-                    col_min[t2], col_where[t2] = cg, f"STEP{num} t={n*m.opt.timestep:.1f}s"
+                    col_min[t2] = cg
+                    col_where[t2] = f"{cgw}, STEP{num} t={n*m.opt.timestep:.1f}s"
             # p5 -137 / p11 -138, print (2): the clearance is enforced on the poses that were
             # solved, and the arms travel between them.  Endpoints are silent about the path, so
             # the smallest gap reached WHILE moving is tracked here rather than inferred from the
@@ -2218,8 +2254,11 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
            f"c1[y{p1[1]:+.3f} z{p1[2]-TABLE_TOP:+.3f}] c2[y{p2[1]:+.3f} z{p2[2]-TABLE_TOP:+.3f}] "
            f"pin={'C1' if d.eq_active[EQ['C1']] else '--'}/{'C2' if d.eq_active[EQ['C2']] else '--'} "
            f"grip={'L' if held('L') else '-'}{'R' if held('R') else '-'}")   # R6 conjunction
+    _cgl, _cwl = column_gap("L", want_who=True)
+    _cgr, _cwr = column_gap("R", want_who=True)
     print(f"[steps] STEP{num:2d} sigma_min L={sigma_min('L'):.4f} R={sigma_min('R'):.4f}"
-          f"  column gap L={column_gap('L'):+7.1f} R={column_gap('R'):+7.1f} mm")
+          f"  column gap L={_cgl:+7.1f} ({_cwl}) R={_cgr:+7.1f} ({_cwr}) mm"
+          f"{'   <- INSIDE THE MAST' if min(_cgl, _cgr) < 0 else ''}")
     gc1 = np.array([C1[0], C1[1], GROOVE_Z])
     _d1, _q1, _k1, _u1 = cable_perp(gc1)
     miss1 = (_q1 - gc1) * 1000.0
@@ -2288,13 +2327,14 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     _pred_txt = []
     for t in SIDES:
         if t in CLEARANCE_REPORT:
-            _dr, _kept, _nfa, _wsv, _dsv, _rm, _mx, _psv = CLEARANCE_REPORT[t]
+            _dr, _kept, _nfa, _wsv, _dsv, _rm, _mx, _psv, _cdr = CLEARANCE_REPORT[t]
+            _mast = f"; the mast removed {_cdr}"
             if _nfa is None:
                 _pred_txt.append(
                     f"{t}: the winning pose cleared the whole {ARM_DECIDE_CUTOFF*1000:.0f} mm "
                     f"search radius; clearance removed {_dr} of {_dr + _kept} candidates, "
                     f"{_rm} of them roomy, winner sigma {_wsv:.4f} (best survivor {_psv:.4f}) vs best dropped "
-                    + (f"{_dsv:.4f}" if _dsv is not None else "none dropped"))
+                    + (f"{_dsv:.4f}" if _dsv is not None else "none dropped") + _mast)
             else:
                 _pred_txt.append(
                     f"{t}: clearance removed {_dr} of {_dr + _kept} candidates, winner predicted "
@@ -2302,7 +2342,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                     + (f"{_dsv:.4f}" if _dsv is not None else "none dropped")
                     + f"; {_rm} candidates cleared the whole {ARM_DECIDE_CUTOFF*1000:.0f} mm "
                       f"search radius"
-                    + (f", widest inside it {gap_mm(_mx)}" if _mx is not None else ""))
+                    + (f", widest inside it {gap_mm(_mx)}" if _mx is not None else "") + _mast)
     _worst = min(arm_gap_min, arm_gap_path)
     print(f"[steps] STEP{num:2d} ARM-TO-ARM: "
           + (f"closest {gap_mm(_pairmin)} ({_pairwho})"
