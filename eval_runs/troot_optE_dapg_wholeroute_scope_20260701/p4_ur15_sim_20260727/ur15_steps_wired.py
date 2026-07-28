@@ -999,6 +999,37 @@ def _wrap(q):
     return q
 
 
+def attitude_tilt_deg(yaw, roll):
+    """How far off straight down a jaw commanded to (yaw, roll) would point [deg].
+
+    p11 -137: the cap has to be derived in the quantity the CHECK measures, not in the parameter
+    the menu is written in.  The menu is (yaw, roll) pairs, and whether a given yaw also tips the
+    jaw is a fact about this wrist, not something a rule should have to know.  So each entry is
+    turned into the thing the check reads -- the direction pinch-to-mouth points -- and the cap is
+    the smallest non-zero tilt any entry produces.
+
+    No IK: the commanded tool orientation IS the attitude, so the direction follows from it
+    directly.  The pinch-to-mouth vector is read once in the tool's own frame from the model as it
+    stands, which is where it is constant.
+    """
+    v = slot_centre("L") - pinch("L")
+    v_tool = np.array(d.xmat[TOOLB["L"]]).reshape(3, 3).T @ v
+    v_tool = v_tool / max(1e-12, float(np.linalg.norm(v_tool)))
+    world = (_rdes(yaw, roll) @ AXFIX["L"]).T @ v_tool
+    world = world / max(1e-12, float(np.linalg.norm(world)))
+    return math.degrees(math.acos(min(1.0, max(-1.0, float(-world[2])))))
+
+
+def vertical_cap_deg():
+    """The smallest non-zero tilt the attitude menu can produce, in degrees."""
+    tilts = [attitude_tilt_deg(y, r) for y, r in _spec.GRASP_ATTITUDES]
+    nz = [x for x in tilts if x > 1e-6]
+    if not nz:
+        raise RuntimeError("no menu attitude tilts the jaw at all, so the vertical check has "
+                           "nothing it could fail to distinguish and the cap is undefined")
+    return min(nz)
+
+
 def _rdes(yaw, roll=0.0):
     """Closing axis across the cable, approach down; `yaw` spins the tool about the vertical and
     `roll` tips it about the closing axis, which walks the WRIST outboard while the pinch stays
@@ -1398,6 +1429,13 @@ def live_write(img):
         print(f"[steps] watch-along file stopped: {exc!r}; the run and the final video continue")
         _live = None
 
+
+# p11 -137 / p5: the cap, measured in the quantity the check reads.  Printed at the start so the
+# allowance and the thing that bounds it are both on the record before any pose is judged by them.
+print(f"[steps] vertical check: allowance {VERTICAL_TOL_DEG:4.2f} deg, "
+      f"cap {vertical_cap_deg():4.2f} deg (the smallest non-zero tilt the attitude menu can make, "
+      f"measured as pinch->mouth against world -z, not as a roll); the allowance is an interim "
+      f"until a run reports the worst residual an upright command actually leaves")
 
 print(f"[steps] watch along here while it runs: {LIVE_OUT}")
 

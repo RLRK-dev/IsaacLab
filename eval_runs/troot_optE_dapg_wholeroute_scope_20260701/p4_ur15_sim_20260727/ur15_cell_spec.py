@@ -625,7 +625,15 @@ GRASP_ATTITUDES = [(y, r) for r in (0.0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.55, 0.6
 
 
 def vertical_tau_max_deg():
-    """The identifiability cap: the menu's smallest non-zero roll, in degrees."""
+    """⛔ SUPERSEDED, kept so its error is legible.  The menu's smallest non-zero ROLL.
+
+    p11 -137: this derives the cap in the parameter the menu happens to be written in, and the
+    check measures a tilt.  Whether a given yaw also tips the jaw is a fact about the wrist, and a
+    rule that reads roll cannot see it.  The cap now comes from the driver, which turns each menu
+    entry into the tilt it actually produces -- see attitude_tilt_deg there.  Same error in kind as
+    tying the limit to menu spacing in the first place: measuring the convenient quantity rather
+    than the deciding one.
+    """
     rolls = [abs(r) for _y, r in GRASP_ATTITUDES if abs(r) > 0.0]
     if not rolls:
         raise RuntimeError("GRASP_ATTITUDES offers no non-zero roll, so there is nothing for the "
@@ -633,9 +641,13 @@ def vertical_tau_max_deg():
     return math.degrees(min(rolls))
 
 
-def vertical_tol_deg(r_max_deg=None):
-    """tau = (r_max + tau_max) / 2, or the interim placeholder while r_max is unmeasured."""
-    cap = vertical_tau_max_deg()
+def vertical_tol_deg(r_max_deg=None, cap_deg=None):
+    """tau = (r_max + cap) / 2, or the interim placeholder while r_max is unmeasured.
+
+    `cap_deg` is the smallest non-zero tilt the attitude menu can produce, measured in the same
+    quantity the check reads.  The driver supplies it because that measurement needs the model.
+    """
+    cap = cap_deg if cap_deg is not None else vertical_tau_max_deg()
     if r_max_deg is None:
         return VERTICAL_TOL_INTERIM_DEG
     if r_max_deg >= cap:
