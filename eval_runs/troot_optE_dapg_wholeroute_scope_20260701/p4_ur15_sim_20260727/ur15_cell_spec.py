@@ -811,6 +811,12 @@ TIER_C = {"OUT", "W", "H", "FPS", "HOLD_S", "WAY", "STEPS", "SEED",
           # cam3 is the top-down view Rs asked for on 2026-07-28.  Same tier and same reason as
           # the other two: it says how a run is recorded and never reaches the model.
           "cam", "cam2", "cam3", "render_every",
+          # ARM_TINT is the two colours Rs asked for on 2026-07-28 so the arms can be told apart in
+          # the video.  Tier C by the same reading as the cameras: it says how a run is RECORDED --
+          # geom_rgba is a display attribute and reaches no dynamic quantity -- so it cannot
+          # disagree with the asset.  ⚠ It does touch the model, unlike the cameras, which is why
+          # it is called out rather than slipped in beside them.
+          "ARM_TINT",
           # The watch-along file Rs asked for on 2026-07-28, and the one encoder setting its
           # writer shares with the finished one.  Tier C by the same reading as OUT/W/H/FPS: they
           # say how a run is recorded, and carry no cell geometry -- nothing here can disagree

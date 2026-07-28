@@ -320,6 +320,21 @@ def _own_bodies(prefix):
 
 ARMB = {t: _own_bodies(f"{t}_") | _own_bodies(f"{t}g_") for t in SIDES}
 ARMG = {t: {g for g in range(m.ngeom) if m.geom_bodyid[g] in ARMB[t]} for t in SIDES}
+# Rs, 2026-07-28: "make the left and right arm plainly distinguishable in the video."
+# The two arms were the same colour, and every camera angle is a fresh chance to mix them up -- the
+# close-up view is mirrored, so screen-left there is the RIGHT arm, and I have already reported one
+# observation to the wrong arm because of it.  Colour travels with the arm through every panel and
+# every mirror, so it settles the question no matter which view is being read.
+# ⛔ The gripper geoms are left alone on purpose: Rs reads the claws by colour already -- blue is
+# the upper claw, red the lower -- and recolouring those would break a reference in use.
+ARM_TINT = {"L": (0.95, 0.55, 0.10, 1.0),      # left arm: orange
+            "R": (0.65, 0.25, 0.85, 1.0)}      # right arm: purple
+for _t in SIDES:
+    for _g in ARMG[_t] - PADG[_t]:
+        m.geom_rgba[_g] = ARM_TINT[_t]
+print("[steps] arm colours: LEFT arm = ORANGE, RIGHT arm = PURPLE "
+      "(claws keep blue = upper, red = lower).  Use the colour, not the side of the screen: the "
+      "close-up panel is mirrored.")
 _unnamed = sum(1 for g in range(m.ngeom) if not mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g))
 print(f"[steps] geoms: {m.ngeom} total, {_unnamed} unnamed; arm geom sets L={len(ARMG['L'])} R={len(ARMG['R'])}")
 
