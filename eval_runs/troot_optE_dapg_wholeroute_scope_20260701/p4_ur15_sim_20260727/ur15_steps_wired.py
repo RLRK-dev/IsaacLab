@@ -1115,10 +1115,9 @@ def sigma_min(t, dd=None):
 
 
 def column_gap(t, dd=None, want_who=False, cutoff=None):
-    """Closest signed distance from this arm's geoms to the yoke mast, in mm.  Negative means the
-    arm is inside the mast.  mj_geomDistance is a geometry query, so it reports this whether or not
-    the pair can collide -- and here the two differ: the arm's mount is inside the mast and its
-    contacts are filtered, while everything past the mount does collide.
+    """Closest signed distance from this arm's geoms to the yoke mast [m].  Negative means the arm
+    is inside the mast.  mj_geomDistance is a geometry query, so it reports this whether or not the
+    pair can collide.
 
     Rs, 2026-07-28, watching the run: "the left hand is slamming into the cylinder" -- so the name
     of the part comes out with the number.  Twenty runs reported this as a bare figure, and a bare
@@ -1148,6 +1147,50 @@ def column_gap(t, dd=None, want_who=False, cutoff=None):
     if best > 1e8:
         return (None, None) if want_who else None
     return (best, who) if want_who else best
+
+
+def path_mast_min(t, sc, q_from, q_to, cutoff=None):
+    """Smallest mast gap reached anywhere ALONG the joint-space move from q_from to q_to [m].
+
+    The endpoint test cannot see this, and the run showed exactly that: at STEP3 the mast rejected
+    none of the right arm's candidates -- every commanded pose was clear -- and the arm still ended
+    up 0.6 mm inside the stem, because the FOREARM sweeps through the mast on the way there and
+    jams.  Joint 1 then sits at its whole 433 N.m pushing on the column and arrives 92 degrees
+    short.  A pose the arm never reaches is not made safe by being clear.
+
+    Sample count is derived, not chosen: it is the travel of the fastest-moving geom divided by the
+    mast's own radius, so no sample-to-sample step can carry a part clean through the obstacle.
+    ⚠ That bounds tunnelling THROUGH the mast; it does not promise to catch a graze that begins and
+    ends between two samples.  The bound is the obstacle's size because the obstacle is what is
+    being tunnelled through -- nothing here is tuned.
+
+    ⛔ Writes into `sc` and leaves it at q_to, which is where every caller wants it anyway.  Uses
+    mj_kinematics rather than mj_forward: this needs geom poses, not contacts, and the full solve
+    would cost far more for nothing.
+    """
+    q_from, q_to = np.asarray(q_from, float), np.asarray(q_to, float)
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_from[_k]
+    mujoco.mj_kinematics(m, sc)
+    p0 = np.asarray(sc.geom_xpos)[COLFREE[t]].copy()
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    travel = float(np.linalg.norm(np.asarray(sc.geom_xpos)[COLFREE[t]] - p0, axis=1).max())
+    n = max(1, int(math.ceil(travel / COLUMN_R)))
+    best, who = 1e9, None
+    for i in range(1, n):        # the two ends are tested by the caller's own endpoint reading
+        q = q_from + (q_to - q_from) * (i / n)
+        for _k, _a in enumerate(QADR[t]):
+            sc.qpos[_a] = q[_k]
+        mujoco.mj_kinematics(m, sc)
+        g_, w_ = column_gap(t, sc, want_who=True, cutoff=cutoff)
+        if g_ is not None and g_ < best:
+            best, who = g_, f"{w_} at {i}/{n} along the move"
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    return (None, None) if best > 1e8 else (best, who)
 
 
 def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
@@ -1220,6 +1263,10 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     sc = mujoco.MjData(m)
     _clear_dropped = 0
     _col_dropped = 0
+    _path_dropped = 0
+    _worst_path = (1e9, None)
+    # Where the arm actually is when this solve runs -- the start of every candidate's move.
+    _q_now = np.array([d.qpos[a] for a in QADR[t]])
     if other is not None:
         for t2 in SIDES:
             if t2 != t:
@@ -1342,6 +1389,17 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         if _cg is not None and _cg < ARM_CLEARANCE:
             hit = True
             _col_dropped += 1
+        else:
+            # ⛔ And the same distance along the WAY there.  The endpoint test passed every one of
+            # the right arm's candidates at STEP3 and the arm still ended 0.6 mm inside the stem:
+            # the forearm crosses the mast mid-move, jams, and the pose is never reached.  A
+            # candidate whose path goes through the mast is not a candidate.
+            _pg, _pw = path_mast_min(t, sc, _q_now, qw, cutoff=ARM_DECIDE_CUTOFF)
+            if _pg is not None and _pg < ARM_CLEARANCE:
+                hit = True
+                _path_dropped += 1
+                if _pg < _worst_path[0]:
+                    _worst_path = (_pg, _pw)
         # Manipulability of this candidate.  The solver had no notion of a singularity at all --
         # it ranked candidates by position error and by staying near the previous pose, so a
         # configuration that has lost a direction could win, and did: Rs saw two runs in a row
@@ -1397,7 +1455,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     CLEARANCE_REPORT[t] = (_clear_dropped, len(cands), nfa, sv,
                            max(_drop_sv) if _drop_sv else None,
                            _roomy, max(_inside) if _inside else None, _pool_sv,
-                           _col_dropped)
+                           _col_dropped, _path_dropped, _worst_path)
     if not quiet:
         # ⛔ This line used to report len(well) as "away from a singularity", beside len(free) as
         # "collision-free".  With the floor at zero those are the SAME candidates -- sigma is never
@@ -2377,8 +2435,9 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     _pred_txt = []
     for t in SIDES:
         if t in CLEARANCE_REPORT:
-            _dr, _kept, _nfa, _wsv, _dsv, _rm, _mx, _psv, _cdr = CLEARANCE_REPORT[t]
-            _mast = f"; the mast removed {_cdr}"
+            _dr, _kept, _nfa, _wsv, _dsv, _rm, _mx, _psv, _cdr, _pdr, _wp = CLEARANCE_REPORT[t]
+            _mast = (f"; the mast removed {_cdr} at the pose and {_pdr} on the way there"
+                     + (f" (worst path {gap_mm(_wp[0])}, {_wp[1]})" if _wp[1] else ""))
             if _nfa is None:
                 _pred_txt.append(
                     f"{t}: the winning pose cleared the whole {ARM_DECIDE_CUTOFF*1000:.0f} mm "
