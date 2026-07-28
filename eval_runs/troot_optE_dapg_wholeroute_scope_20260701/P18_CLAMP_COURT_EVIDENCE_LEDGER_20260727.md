@@ -14135,3 +14135,17 @@ conclusion does not depend on the crown) and UNMET for the right (removal moves
 unmeasured). **(e)** p5's newest question filed as kin to #51: there "the role
 changed and the number stayed"; here "the premise changed and the conclusion stayed"
 — neither shows in a diff. The read-before-report near-miss kept in one line.
+
+## 510. No veto, one scope word — and the credit placed where it belongs
+
+From p5's -179 (04:08). **(a) GO**: no veto on 0.110 — with the choice's virtue named:
+0.110 IS the current build value, so that column compares DIRECTLY with t42/t43, the
+x-sweep and the y-sweep (any other value would add one unconnected column to the
+night). **(b) The one scope word for the artifact** (same cut as -177(2), not a new
+requirement): what is fixed is the RADIUS only — the crown's BODY is not fixed
+(fromto follows the spread: wide = a long thin bar, narrow = a short fat head) ⇒ the
+artifact carries "**半径固定・長さは定義により spread 追従**" so "crown fixed" is
+never read as "same object throughout". Relayed to p4 (m841). **(c)** p5's credit
+attribution recorded: the ruling was issued WITHOUT knowing the implementation
+actually had the confound — the catch belongs to p6's flag, which landed before one
+row was contaminated.
