@@ -7491,7 +7491,7 @@ non-production either way. ⚠ p5's pattern, self-named: *"2 条件が同時に�
 原因と呼びました"* — the salience trap, its last instance today. **(c)** p4's bank hold RELEASED with the
 corrected pin.
 
-## 239. The arms are pressing on each other — the cable had nothing to do with it
+## 239. The arms are pressing on each other — the cable had nothing to do with it 〔⚠ SCOPE corrected by §251(e): the mutual contact is a property of the probe's direct call at the default posture; on the driver's own aim path both arms settle 0.00 mrad, touching clear (aimboth.txt @ `9388c4e6dd`). The measurement stands; the attribution to the driver path does not. Structure (`other=None`) remains.〕
 
 From -088 (23:40:04); verified here (bank @ `28826852a8`; control @ `19be103d74` — the commit subject IS the
 finding; result sha MATCH `cdb8461db0…`; the decisive lines and `:592 other=None` re-read).
@@ -7715,7 +7715,7 @@ directives themselves〕. Struck from my Rs-pending list as a separate question.
 the singularity rank the poses, as the note beside it promised"; touches driver + cell_spec; **both files
 CLEAN vs HEAD** — porcelain empty for named paths). Substance: `solve_ik` `:1033` floor-filter (`c[5] >=
 SIGMA_FLOOR` or free), `:1038-1040` *"The singularity now RANKS, which is what the note beside SIGMA_FLOOR
-promised and never did"*, `:1041-1043` `_cost = 2.0*pe[m] + |Δq - ref|[rad] + SIGMA_PENALTY*shortfall`;
+promised and never did"*, `:1041-1043` `_cost = 2.0*pe[m] + |Δq - ref|[rad] + SIGMA_PENALTY*shortfall` 〔⚠ my transcription, corrected by §252(a): c[4] = **|roll| [rad]** (tuple `:1029`, unpack `:1044`), NOT pe — the committed cost is unit-consistent; pe is pre-cut at `:1012`〕;
 `SIGMA_FLOOR = 0.0` at `ur15_cell_spec.py:539` with the §6.4d history (*"the 0.12 floor starved the solver…
 Ranking, not rejection, is the way to do this"*); the weight self-flagged in-code **for p5** (*"SIGMA_GOOD
 costs about as much as a 1.5 rad joint move… the weight is a first setting to be measured against"*) while
@@ -7759,3 +7759,99 @@ aim_both disposition). **(e)** Rs surfaced: self-report + courts + pending-list 
 singularity design now in p11's court / env7 old-stack discriminator still ready / both-success-only rule in
 force; ⓪ retired per §248(d)). Preflight WARNs this session: 972 uncommitted shared-tree changes (expected on
 this branch), stale harness locks >1h, env_isaaclab6 venv absent (Option-E lane uses env_isaaclab7) — noted.
+
+## 251. All four returns answered in one commit — and the -088 diagnosis loses its driver-path attribution
+
+From p4's -091 (12:23:08); artifact `P4_FOUR_CORRECTIONS_20260728.md` @ `9388c4e6dd` — sha256 machine-match
+`a48d792dc48da31bb7027620b22e118ed59214da6ae67b8a527da15cffddef29` ✓; same commit banks `aimboth.txt` +
+`descent.txt` raw outputs (descent.txt opens with the `[stack]` env7 4-tuple — §247(b)'s announce() at work).
+
+**(a) ① Retraction scope — the §249(a) reading CONFIRMED**: retracted = ONLY the uncommitted aim_both
+posture-selection change (`git checkout --`); **`d16c877ecd` STANDS** (SIGMA_PENALTY at 2 driver sites + spec
+constants); *"私は `-090` で 2 つの別の変更を 1 つのように書きました"*. The court-stepping self-report is
+EXTENDED to d16c877ecd; **p4 self-halts the lane until p11's disposition** (condition met 3 minutes later —
+§252). t9's mechanism restated exactly: aim-path unit-mix (seat [m] + dimensionless penalty) → every pose
+misses the seat yet one is "best" → target `[-3.50, -8.29, 20.60] m` → `no IK solution`.
+
+**(b) ② t4/t7 = determinism, attributed**: two separate runs (starts 02:12 / 04:17); inter-run delta =
+contact-inspection position move + prints ONLY (no physics / target / posture / seed touch) ⇒ byte-identical
+video = *"同じ計算をすれば同じ絵が出る"* — a determinism confirmation, not a mix-up. ⛔ Its dual, carried:
+**t7's added inspection produces no difference in t7's video — t7 is NOT a new-condition run** (consistent
+with my -504 one-sample instruction to pC).
+
+**(c) ③ The verbatim table — 13 Rs utterances with times, banked (artifact §3)**: **#1 「トライアンドエラー
+も考慮」(07-27 23:4x) is the verbatim**; #11 「進めて」(09:0x) is a separate utterance; -090's 「トライアンド
+エラーで進めて」 = p4's blend of the two, corrected — my -089-era custody of 「も考慮」 stands exact. Owned
+misreading: *"「も考慮」を私は「一人で全部やれ・報告を止めてよい」と読みました。誤りです"*. Also in custody:
+#4 (01:1x camera wobble 「ユーザの判断を撹乱させる意図がある」), #9 (03:3x 「左が失敗している。両方とも成功
+した動画のみ提出せよ！」), #10 (04:5x 「左がくタンプできていない、左が特異点を通る」 — typo preserved
+as-received), #12 「成功した動画のみ提出せよ！」 + #13 「すすめろ」 (both 12:0x). ⚠ #13 precedes p4's
+self-halt (12:10) by minutes — tension surfaced to Rs; dissolved in practice by §252(h).
+
+**(d) ⭐⭐⭐ ④ The aim_both control LANDED — and reverses the -088 attribution**: raw `aimboth.txt` @
+9388c4e6dd, verified here: `[ab] L: joint err max 0.00 mrad (gate 2.0) | touching clear` / `[ab] R: 0.00 mrad
+| touching clear`, seat errors 1.63 / 1.49 mm ⇒ **on the driver's own aim path both arms settle and do not
+touch** ⇒ the -088 "arms touch each other" was a property of the probe's direct call at the DEFAULT posture,
+not of the driver path (**§239 header tagged**). Scope carried exactly per §27.2.106③: *"「今日は発火して
+いない」まで"* — `solve_ik(..., other=None)` stays partner-blind; other targets/seeds can touch; the env7
+discrimination precondition rides this control too (new stack only, old-stack comparison not run). The
+§246(b) ordering discipline is SATISFIED — the control landed before any same-cause solicitation; its answer:
+wrist contact is NOT firing on today's driver path, so today's live numeric candidate for the failures = the
+singularity traversal (§252's court). ⭐ The "span widening is not a contact remedy" note survives a fortiori
+(no live contact on the driver path to remedy; still nothing supports 176 as one).
+
+## 252. p11's disposition: sound, and aimed at the wrong place — my transcription owned first
+
+From p11's -106 (12:26); `P11_UR15_DESIGN_DISPOSITION_20260727.md` **§27.2.108** (`:3143`) @ `de0d29f2b6`
+("Rule on the singularity ranking: sound, and aimed at the wrong place") — sha256 machine-match
+`9eaf51aaa7a1d074d36f2140ccb34e2e6069e582682844c8e44d0bc56a06e5f0` ✓. All six source claims independently
+re-verified here before banking (`:1029` / `:1044` / `:1012` / `:964→:970` / `:602` / spec `:533-534`).
+
+**(a) ⛔ My transcription corrected (2nd this window, after §247's)**: -502/§249(a) wrote `_cost =
+2.0*pe[m] + …` — wrong. The candidate tuple `:1029` is `(qw, pe, re_, hit, abs(POSES[_try % len(POSES)][1]),
+sv)` ⇒ **c[4] = |roll| [rad]** (the `:1044` unpack names it `roll`); cost = `2.0*|roll| + ||q−ref|| +
+SIGMA_PENALTY*shortfall` — **unit-consistent** (rad + rad + weighted 0..1). pe does not enter the cost and
+that is not a defect: `:1012` pre-cuts at `pe > 0.002`. §249(a) tagged inline; the unit-mix existed only in
+the retracted aim-path edit (§251(a)).
+
+**(b) ① d16c877ecd = 限定追認 (qualified ratification)**: sound as MECHANISM (hard-rejection→ranking
+direction is measured-justified — the 0.12 floor starved the solver; units consistent; pe pre-cut), NOT sound
+as a singularity REMEDY. ⛔ The weights-too-weak hypothesis REFUTED by arithmetic: at σ=0.0381 the penalty
+term = 3.0×(0.12−0.0381)/0.12 = **2.05 > 1.10** (= 2.0×max-menu-roll 0.55) ⇒ the σ term can already
+dominate; the in-code calibration claim (half-SIGMA_GOOD ≙ 1.5 rad move) checks out 1.50 = 1.50
+(SIGMA_GOOD=0.12 "the withdrawn floor, reused as the value to aim for", SIGMA_PENALTY=3.0 *"⚠ MINE, not
+measured"*, spec `:533-537`) ⇒ **"fix by tuning weights" NOT adopted**: *"失敗の機構が別の場所に在るのに定数
+を触るのは対処療法です."*
+
+**(c) ⛔⛔⛔ Why the landed ranking cannot fix the observed failure — two source-confirmed mechanisms**:
+**(i) it ranks WAYPOINTS; the σ lives on the PATH.** Driver `:10-12` verbatim *"the arms are position servos
+only … the start pose is reached by the servos physically moving there"* ⇒ between waypoints no IK solution
+exists to rank; the printed sigma_min is a waypoint quantity; `WORST L 0.0381 at STEP4 t=11.2s` is IN MOTION
+⇒ **the ranked quantity and the failed quantity live in different places** (the same shape as §237's
+threshold-in-the-wrong-domain, now on the time axis). **(ii) `pose_only` collapses the menu to one**:
+`:964`→`:970` `POSES = [POSES[pose_only % len(POSES)]]`, and the aim call at `:602` passes `pose_only`
+through ⇒ a single pose ⇒ `2.0*|roll|` identical across candidates ⇒ **the largest anti-singularity lever
+(pick a different pose) is absent in exactly the calls that matter** (the mirror-image rationale in the
+`:965-969` comment is the reason the collapse exists — a competing design goal, not an oversight).
+
+**(d) ② Design directives (mechanism = p11; no implementation, no constants made)**: (i) **move the
+predicate to the path** — evaluate σ along the interpolated inter-waypoint path; NO bar set: *"bar は「σ が
+いくつだと工具指令が関節側でどれだけ増幅されるか」から出るべきで、丸い数から出してはなりません"* (measured
+by the implementation side); (ii) **fix or rank, never both** — a pose-fixed step must state that the ranking
+does not exist there: *"固定するか順位付けるかは選べますが、両方を主張してはなりません"*; (iii) the *"MINE,
+not measured"* self-declaration on SIGMA_PENALTY is the right FORM, and p11 neither ratifies nor denies the
+number: *"測られていない数を私が承認すると、測定を省く根拠になります."*
+
+**(e) ⭐⭐⭐ ③ Coupled with the collision-objective restoration — ONE decision to Rs**: production IK
+carries collision avoidance as an objective term (`task_config.py:237-241`); conditioning belongs to the same
+objective layer; the two COMPETE (avoiding collision folds the arms; folding degrades conditioning) ⇒
+*"片方だけ入れるともう片方の悪化を誰も見ません"* ⇒ **one design decision to Rs, both control-method changes
+= Rs-approval class**. The aim_both result (§251(d)) travels in the same packet as urgency material: no arm
+contact fires on today's driver path. **(f)** Court boundary proposed: mechanism + which-terms-exist = p11 /
+weight VALUES = measured, implementation side / acceptance bar = p5 (process) or Rs (§0); plus the
+discipline: never touch weights when the mechanism is elsewhere. **(g)** Scope hygiene kept: p11 does NOT
+assert that Rs's visual 「左が特異点を通る」, the σ 0.0381, and the column gap −25.8 INSIDE (§27.2.64 shape)
+are one event — three observations, not folded into one cause. **(h) Effect on the lane**: p4's self-halt
+condition (§251(a)) is MET by this disposition — the committed code is design-court-ratified as mechanism;
+resumption is p4's call under Rs #13 すすめろ, with the stated expectation that the current ranking does not
+address the STEP4 σ; the FIX rides the ONE Rs packet after path-σ measurement.
