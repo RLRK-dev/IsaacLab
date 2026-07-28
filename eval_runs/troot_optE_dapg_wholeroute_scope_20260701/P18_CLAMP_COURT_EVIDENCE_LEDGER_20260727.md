@@ -8964,3 +8964,25 @@ floor, REUSED as the value to aim for"*: the floor mechanism was withdrawn and r
 value-measurement-lane. Judgment declined (measurement lane + p11's court) — routed (-559); it sharpens
 DDR #50's closure question: even without the stacking change, 0.12 may need re-measurement as a ③ number.
 **(d)** Bank request #6 routed (-558). p4's self-found instance acknowledged as ①-type by p5.
+
+## 299. The decomposition settles three questions live — and a directive makes the run watchable
+
+From p4's -113 (14:1x); pins verified: `0740825d14` — bank #6 COMPLETE (sha `25687fbd…` ✓); `368e43b04f`
+("Write a file that can be watched while the run is still going") — driver sha `4c241994…` ✓, the three
+TIER_C additions at spec `:635` ✓ (`LIVE_OUT`, `_live`, `VIDEO_QUALITY`); ⛔ neither is t12's producing
+code (t12 = `b92b7b823a`), stated.
+
+**(a) ⚠ Rs instruction A in custody, verbatim PENDING**: the live-viewable-video implementation cites
+"Rs 指示 A (走行中に見られる動画)" without the utterance — verbatim + time requested from p4 (-562); the
+both-success-only Downloads rule unaffected (t12 videos still unsubmitted). The TIER_C classification
+(rationale: "how the run is recorded; doesn't reach the model", same family as OUT/W/H/FPS) is p5's court
+— ratification request routed (-560). **(b) ⭐⭐ #4 answers LIVE (p4-reported from the running t12; pin
+arrives with the trace bank)**: STEP3 L seat 2.31 → along −1.28 / closing +1.87 / **across +0.48**; R
+seat 5.91 → along −0.37 / **closing +5.63** / **across +1.76** ⇒ the residual sits almost entirely on the
+CLOSING axis; the across components are INSIDE the 3.00 band for both arms ⇒ **p5's projection retraction
+is confirmed by DIRECT measurement — the projected number is 1.76, not 5.91.** ⛔ And the no-safe guard
+held by p4: the band measures one axis; the jam lives on closing +5.63. **(c) ⭐ #3 answers too**: closing
+axes in world — L [−0.000, −0.949, −0.317], R [−0.006, −0.866, +0.500] ⇒ **NOT mirror conventions** (both
+close toward −y; the difference is TILT, the z-sign) ⇒ the -101 "cable-displacement y-signs opposite"
+puzzle is NOT explained by the closing axes — a separate entity, still open. **(d)** t12 at STEP8 (14:18);
+the remaining question = does the STEP13 concentration reproduce; trace after completion.
