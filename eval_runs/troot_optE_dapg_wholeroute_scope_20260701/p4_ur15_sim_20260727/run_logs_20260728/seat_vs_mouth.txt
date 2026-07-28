@@ -1,0 +1,35 @@
+[steps] STEP1 L arm touching: clear
+[steps] STEP1 R arm touching: clear
+[steps] re-measured after the approach: L=cab26 [0.0986 0.28   0.9488]  R=cab32 [0.1886 0.28   0.951 ]
+[steps] STEP1 L: tool err=   2.1mm
+          joint err   = [-0.  0. -0. -0. -0.  0.] mrad
+          act force   = [ 0.  0.  0.  0.  0. -0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [ -61.6 -101.5  -14.4    4.5   -1.1    0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] STEP1 R: tool err=   2.1mm
+          joint err   = [-0.  0.  0. -0.  0.  0.] mrad
+          act force   = [ 0.  0.  0.  0. -0. -0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [82.6 29.7 -8.8  0.1  1.5 -0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] release opening solved from the asset: ctrl 189.3 (claw tips reach 11.00 mm = cable 8.0 plus the 3.00 mm the cable can sit off centre)
+[svm] L: aim seat error 32.74 mm
+[svm] R: aim seat error  2.90 mm
+
+[svm] L: servo residual  55.69 mrad
+[svm] L: pinch      [+0.0751 +0.2282 +0.9773]
+[svm] L: seat_point [+0.0751 +0.2282 +0.9454]  <- what the aim targets
+[svm] L: slot_centre[+0.0741 +0.2272 +0.9454]  <- where the ko mouth is
+[svm] L: slot_centre - seat_point = ( -1.01, -0.97, +0.00) mm   |xy| =  1.40 mm
+[svm] L:   cable is  34.72 mm from seat_point
+[svm] L:   cable is  35.73 mm from slot_centre
+[svm] L:   in the tool's axes that residual is ( +0.94, -1.03, +0.06) mm
+
+[svm] R: servo residual  23.86 mrad
+[svm] R: pinch      [+0.1919 +0.3138 +0.9880]
+[svm] R: seat_point [+0.1919 +0.3138 +0.9595]  <- what the aim targets
+[svm] R: slot_centre[+0.1936 +0.2992 +0.9595]  <- where the ko mouth is
+[svm] R: slot_centre - seat_point = ( +1.69,-14.59, +0.00) mm   |xy| = 14.69 mm
+[svm] R:   cable is  44.42 mm from seat_point
+[svm] R:   cable is  30.17 mm from slot_centre
+[svm] R:   in the tool's axes that residual is ( -0.18,-13.05, +6.74) mm
+
