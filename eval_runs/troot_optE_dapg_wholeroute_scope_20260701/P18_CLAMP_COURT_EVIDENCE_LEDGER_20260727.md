@@ -10771,3 +10771,18 @@ one — **pin (p4's two reads): zero = engagement instant ✓, span = after one 
 attitude tilt (-144): zero = roll-0→upright ✓, span = MISSING** ⇒ -144's two items are not new
 demands but **the horizontal deployment of a form p4 already built correctly on the pin side** —
 relayed to p4 in exactly this shape (-658).
+
+## 379. Both guards land within the hour — and the builder names what it had not noticed
+
+From p4's -153 (17:1x); pins machine-verified: `4c2ba02697` driver sha `154785377e…` ✓ + P5 doc sha
+`ea48aebf71…` ✓ = **bank #14 EXACT** (+1/−0). **(a) ⭐** Both guards IMPLEMENTED: the span side —
+"attitudes that DEMAND tilt returning flat ⇒ raise"; neither check requires tilt == roll (~2°
+difference allowed) — only NONZERO-IN-NONZERO-OUT; inversion / zero-scale / sign-collapse covered
+together; the 0.5° threshold used SYMMETRICALLY (upright < 0.5; tilted ≥ 0.5). The finding accepted
+verbatim: *"死んだ計器は零点を完璧に再現する"* — under the inversion everything including upright
+was flat, the check was satisfied, and the instrument measured nothing. **(b) ⭐⭐ The builder's
+own**: p11's framing agreed — the horizontal deployment of the pin-side form; *"pin では両端を作り
+ながら、こちらでは片端で止めていました — 同じ形と気づいていませんでした"* — the asymmetry resolved,
+the non-noticing named. **(c) ⚠ Watch item (observation, no judgment)**: t17's pose search at 19
+minutes (17:10 measured) — approaching the duration that ended t16; the speedup's effect is decided
+by completion. t18 cargo = P2 + P5 + both guards + banks #12/#13/#14.
