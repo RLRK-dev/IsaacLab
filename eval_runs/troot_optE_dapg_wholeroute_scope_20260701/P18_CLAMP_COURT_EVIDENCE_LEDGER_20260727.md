@@ -8572,3 +8572,62 @@ under-sampling counts by DISTINCT CONFIGURATIONS, not runs; the claim stops at *
 lines FULLY DISCLOSED (the old 6-row table + 2 conclusion lines), content preserved in §11-5③ as
 restatement — declared as such, not verbatim. Bank request #3 routed to p4 (-538). **(e)** p11's
 margin-split own acknowledged; the 0.02 stays a source difference.
+
+## 282. p5's closed query on its own band citations — two sites lean empirical, held until the bank
+
+From p5's -119 (13:39); the three key lines spot-verified here in the current tree (`:348` heading verbatim
+*"(全項が mm ・全項が実測)"*, `:354` the source column, `:657` the dependency sentence) — all as cited.
+
+**(a) The closed query** (8 terms, 6 hits): ⛔ **2 sites lean on the collapsed empirical support** — `:348`
+*"全項が実測"* is FALSE for the half-band (a design-CHOSEN value); `:657` treats the band as depending on
+hinge-count / stiffness / link-length (dependencies only an empirical quantity has). ⚠ 1 wording tightening
+(`:354` → the "設計として選んだ帯・右腕の実測はそれを満たしていない" form). ✅ 3 unaffected (`:378`
+symmetry axis / `:638` R6 weak band, scope-noted / `:654` the formula itself). **(b) ⭐ The self-guard**:
+*"予算は右で既に負"* = the SUFFICIENT condition for band satisfaction is unmet — ⛔⛔ NOT "the right is out
+of band" (upper-bound asymmetry, written into §11-5 for the READER — p11's "scope notes protect the reader,
+not the writer" applied to itself deliberately). **(c)** Edits held until the bank lands (the discipline's
+4th application — unblocked minutes later by §283(a)). **(d)** Court lines kept: band widening untouched
+(§0#4 Rs-exclusive); aim-loop convergence = p11; p5 holds the step-table side (*"§13 の R3 狙い直しが 右で
+何を要求するか"*).
+
+## 283. The doc lands, and a bigger term sits next to the aim — with the L/R mapping's second leg
+
+From p4's -101 (13:39); pins verified: `af52c7a337` ("Split the standoff budget per arm, and let the raw
+logs correct it") — sha `992a7732…` ✓, cycle-3 bank complete (the wait-end line relayed, -540); the four
+decomposition lines re-read VERBATIM at the banked `run_t10.txt` `:62-63` / `:70-71` ✓. Full-sha practice
+adopted by p4 going forward.
+
+**(a) ⭐⭐⭐ The measurement (instrument-bounded; no design position taken)**: in the jaw's own axes the
+ACROSS-MOUTH term is INSIDE the containment band for BOTH arms (L +1.04 / R −0.74; want |across| < 3.00);
+what is out is the CLOSING direction (L −9.05 / R +14.29). And the second decomposition: **the arms arrive
+on their own predictions (L |0.3| / R |4.7| mm) while the CABLE sits 10.8 / 12.7 mm from where it was when
+the aim was taken** (y-components opposite-signed +10.4 / −10.8). p4's stated limit: *"右の置き誤差 5.91
+の隣に、同程度以上の項 (12.7) が在る"* — whether aim-convergence alone closes it is NOT judged (*"私の計器
+はその二択を判定していません"*); the band asymmetry held as specified. 〔Hub cross-note, court = p11/p5: a
+cable position consumed at grasp-time but measured at aim-time is ANOTHER cross-phase inherited value — the
+§268/§276 provenance form appearing on the data path itself.〕 **(b) ⭐⭐ The L/R mapping's SECOND leg**
+(the leg pC could not take blind): wide camera azimuth unset = default 90° ⇒ screen-right = world +x; L
+mouth x = +0.100 / R x = +0.189 (t10 STEP4 CARRY) ⇒ **screen-left = instrument-L ⇒ Rs's 「左」 =
+instrument L.** Both attribution legs now sit AT THE HUB for the three-way collation — pC stays blind;
+§257(f)'s caveat discharges at collation, not by pC. **(c)** t11 progress custody: 13:39 STEP10 t=24.0 s
+(t10 ended at 29.1 s).
+
+## 284. Determinism retires p11's own ask — and the hub answers the question it left open
+
+From p11's -115 (13:40); §27.2.117 @ `dab7269fd5` ("Take seven-runs-is-not-seven-samples, and retire the
+measurement I asked for") — sha256 machine-match
+`20d91a35f6e2a27f2bac113ecd13d1e6ff42c245133819bbee7157785c5ea868` ✓.
+
+**(a) ✅** p5's refinement ADOPTED (p11 too had counted points/runs). **(b) ⭐⭐ §27.2.116 moved BOTH
+ways**: weaker — the census is not a distribution either (TWO values, not a range; treating 5.91-6.93 as a
+range was excess); ⭐⭐⭐ stronger — **6/7 identical to 0.01 mm is not scatter ⇒ the right's placement
+error is the aim's CONVERGENCE TARGET, not bad luck.** **(c) ✅** Robust under either value: R=5.91 → −0.98
+after slope; R=6.93 → −2.00 ⇒ the downgrade does not depend on the choice. **(d) ⭐⭐⭐ The -113 ask
+RETIRED by its own author**: *"同じ構成をもう 1 本走らせても 5.91 が出るだけで情報が増えません"* — only
+configuration-CHANGED measurements move it. The design weight: *"決定論的な誤差は直せる・確率的な誤差は
+予算を積むしかない"* ⇒ the right's 5.91 is chaseable ⇒ **R3 (§27.2.95) turns from a requirement into an
+effective handle.** **(e) ⚠ The posed question — answered from custody**: were L 0.52 and R 6.93 in the
+SAME run? **NO** — L 0.52 sits in t9 (`run_t9.txt:46`; its R = 5.91 at `:47`), R 6.93 sits in t5 (its L =
+2.31); both read verbatim at `823ddf963e` earlier this window (§248(b) / §278(a) verifications) ⇒ the
+"one arm improves while the other worsens" trade-off configuration has NO instance in the banked set.
+**(f)** The 0.02 non-harmonization now mutual — both sides keep it as a source difference, unforced.
