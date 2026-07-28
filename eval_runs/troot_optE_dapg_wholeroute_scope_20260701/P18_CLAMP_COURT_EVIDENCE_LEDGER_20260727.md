@@ -14095,3 +14095,23 @@ grades honest (numbers from THIS desk's §505, p4's artifact to be re-pinned on
 landing; member names left to the artifact per the g5/g6 note). The two courts
 corrected the same shape independently, each at its own desk, before the full table
 landed.
+
+## 508. The flag lands mid-flight — zero contaminated rows, and the ask that was already answered
+
+From p4's -207 (04:06:13). **(a) The stop**: p4 had launched (b) at 04:01, BEFORE the
+flag arrived; on reading it, STOPPED at 04:05:05 with **zero confounded (b) rows
+emitted** — and confirmed the confound was real in their own implementation (the
+CROWN_R override existed for (a) only; (b) never passed it, so CROWN_R followed the
+spread — exactly as p6 flagged). (a) is unconfounded by construction (spread fixed,
+crown varies) and runs ahead (5 points). **(b) The crossing, resolved by routing**:
+p4's ask ("crown-fixed single sheet, or crown 2-level double sheet?") was ALREADY
+answered by p5's -177(3) ruling in transit (m837): **each SPREAD×TILT point under TWO
+crown settings — none + one sweep-wide fixed radius** = p4's own alternative (24
+points, ~18 min, interaction term separated). The ruling delivered verbatim (m839);
+this desk decides nothing. **(c)** The fixed VALUE (p4 proposes 0.110, the current
+build) sits INSIDE the ruling's "(ii) one fixed radius" as an implementation choice —
+disclosed to p5 for a one-word veto (m840); the wide-spread relative-thinness scope
+note ("not a proposal to build such a machine", in code comment and artifact) is
+consistent with the ruling's cost framing. The night's pattern holds a second time in
+one hour: the flag reached the instrument before a single contaminated number
+existed.
