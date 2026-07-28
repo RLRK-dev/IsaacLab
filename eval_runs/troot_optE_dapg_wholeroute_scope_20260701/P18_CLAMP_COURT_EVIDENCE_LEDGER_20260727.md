@@ -12385,3 +12385,39 @@ it and find out than have a number invented for it." **(e) Run custody**: t30 ru
 case-A yoke ⇒ its mast numbers describe a cell that will not exist — declared BEFORE any
 verdict (the standing rule's spirit extended to scope); the tracking-gate reading is
 yoke-independent and survives; p4 will mark any t30 report explicitly.
+
+## 441. No branches — a crown. And the cost can be measured without building anything
+
+From p5's -156 (22:44). **(a) Pins verified**: doc on-disk sha256
+`19ced53bb91f68366bbc32c3e6a0010bc4a61830f75bb10b5a416b271853383d` = MATCH → **bank #22
+EXECUTED @ `848d91408e`** (+77/−0, new §20); p5 independently re-verified all three image
+shas against this desk's routed values ✓; desk arithmetic re-checks: 0.2038 + 0.008 = 0.212
+✓, static gaps 0.800−0.204 = 0.596 → 0.320−0.204 = 0.116 ✓. **(b) (a)-answer**: p4's reading
+structurally CORRECT, numerically slightly narrow (p5 reads base spacing 1.5–2 column
+diameters vs p4's 1–1.5); ⛔ precision declared like an instrument: automatic contour
+extraction FAILED (bright background) ⇒ the ratios are EYE reads, ±0.3 diameters, no mm
+taken from the photo. **(c) ⭐⭐⭐ (b)-answer: NO BRANCHES SURVIVE — the mounts sit on a
+CROWN**: one rounded primitive (capsule/ellipsoid, expressly NOT a flat plate — the case-A
+plate was itself a deviation), crown lower edge z ≈ 1.330, crown radius ≥ 0.160, shoulder
+height 1.530 unchanged; **YOKE_SPREAD = 0.320 m (shoulders ±0.160)**. The dimensional anchor
+is NOT the photograph but p5's OWN ASSET measurement: ur15_mj.urdf read in mujoco (geometry
+query, no run) — shoulder_link bounding box 0.1479 × 0.2038 × 0.2619 ⇒ two side-by-side +
+the approved ARM_CLEARANCE 8 mm ⇒ HARD lower bound YOKE_SPREAD ≥ 0.212 (±0.106); ±0.160
+sits 108 mm above the bound, not on it; band = 0.212 … 0.41. ⚠ Anisotropy honesty: the
+shoulder cross-section (0.148 × 0.204) could lower the bound to ±0.078 depending on
+orientation × the 70° tilt — not unique, so the CONSERVATIVE ±0.106 taken. ⛔ Bank #21's
+case-A numbers (fork 1.130 / branch r 0.051) RETIRED FOR CASE B — kept with scope tags as
+the case-A answer, not deleted. **(d) ⭐⭐ (c)-answer: NOT "build it to find out" — the cost
+is measurable WITHOUT building**: the 18/55 does NOT transfer (removal counts are properties
+of the candidate DISTRIBUTION, which IK rebuilds from the new bases); but the arm-to-arm
+margin depends ONLY on where the shoulders ARE, not on what supports them — the yoke enters
+the MAST query, never the arm↔arm query ⇒ move the base x, re-solve ONE step, read the
+EXISTING CLEARANCE prints. Zero new mechanism, no yoke required. ⭐ THE ORDER: measure the
+cost FIRST, build the crown AFTER (an excessive cost moves the spread, and the crown radius
+with it). What geometry alone already says: each shoulder moves 240 mm inward; the static
+shoulder-skin budget shrinks 0.596 → 0.116 m — 480 mm gone before anything moves.
+**(e) ⛔⛔ The risk, NAMED**: ARM_CLEARANCE became a FILTER under Rs packet (ii) ⇒ if
+removals approach the candidate count, it is not protection but STARVATION — the
+SIGMA_FLOOR history itself ⇒ ALWAYS print removals beside candidate counts. ✅ p5 joins p4's
+non-invention principle verbatim — "the same refusal to invent; only, this one can be known
+without building." Routed: the full answer → p4 (m758); the register updates → p6 (m759).
