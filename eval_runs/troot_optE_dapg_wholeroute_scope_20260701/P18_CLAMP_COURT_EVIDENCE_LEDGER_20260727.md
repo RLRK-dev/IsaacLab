@@ -8809,7 +8809,9 @@ the ZOOM panel — the gripper-visible one — the screen mirror-flips ⇒ Rs's 
 (inference, panel-conditional) ⇒ the arm Rs named is the one σ's run-worst and p4's R-side instruments
 sat on; rad/m's "L routinely worse" stands as measurement but no longer carries Rs's visual as
 corroboration. The unit-based replacement of σ (mixed-unit ⇒ ranking-only) is UNTOUCHED — it never
-rested on this alignment. **(c) The structural reading, dissolved in flight**: p11's "the 21 mm may be the
+rested on this alignment. Refined by §334(b) (p11 -131): the leg was invalid AB INITIO — a visual
+judgment about jaw TILT backing a CONDITION-NUMBER ranking is a different quantity; the flip only
+exposed it. **(c) The structural reading, dissolved in flight**: p11's "the 21 mm may be the
 same two points" (seat_point takes x,y from pinch, z from claws — §27.2.97's fix chose the centreline and
 discarded the mouth; the numbers align on one axis: −9.05/+14.29, 14.69, 12.7) was posed with the causality
 explicitly open and the probe named as its judge — **and the probe (§289(a)) answers: the mouth IS on the
@@ -9703,3 +9705,97 @@ Premise handling: §0#4 change, DDR #44 form — register decision routed to p6 
 Rs-DIRECTED (verbatim §329(d)) ⇒ Rs exercising Rs's own exclusive authority; what cascades is the
 re-derivation duty on numbers grounded on the old opening, not a violation. **(d)** t14 in flight
 (15:16:50); no video per rule.
+
+## 332. The first orientation data — the target exonerated, the preregistered rotation refuted
+
+From p4's -135 (15:3x). **(a)** The −25.5 inputs now LINE-PINNED and verified in banked t13: `:141` "STEP 8
+ARM REACH: L 9.6 mm below the mouth … R 48.5" ✓ byte-read / `:142` mouth z L +0.009 / R +0.023 ✓ ⇒ R 23.0 −
+48.5 = −25.5, L 9.0 − 9.6 = −0.6 ✓ — my "offline derivation" tag ACCEPTED; t14 prints the subtraction.
+**(b) ⭐⭐ Ride #3 first data** (t14 in-flight, p4-reported verbatim, log unbanked): L cab26
+[+1.000 −0.000 −0.006] = 0.4° off world x (neighbours 1.0 / 0.3); R cab32 [+0.999 −0.000 +0.050] = 2.9°
+(2.5 / 3.1). Desk arithmetic ✓ (0.006 rad → 0.34°; atan(0.050/0.999) → 2.87°; scatters 0.7 / 0.6 <
+L-R gap 2.5). Against the preregistration: ⛔ the x-y prediction (2.7°) DOES NOT EXIST (y ≈ −0.000 both);
+⛔ falsifier ① FIRES (x-z signs opposite ⇒ bending); ② negative. p4's reading: **not a rigid rotation —
+near-along-x at the left grasp, 2.9° at the right, changing smoothly = SAG between the hands.** ⭐
+Preregistration integrity: predictions/falsifiers fixed BEFORE data (falsifier ① identical in the -128 and
+-129 versions) ⇒ the refutation is CLEAN — the preregistration worked by failing informatively.
+**(c) ⭐⭐ The decision (n=2 not needed)**: the aim's TARGET assumptions — position constructionally
+identical, only ORIENTATION can err; ≤2.9° over the 11.00 mm half-reach = 11.00·sin 2.9° = 0.56 mm ⇒ does
+not explain the right closing residual 5.69 ⇒ **target-side ≤ 0.6 mm; the ~5 mm remainder is AIM-side.**
+Instant-clean: the print fires at AIM time (ride #3 condition ②), testing the assumption at the instant it
+is used. **(d) ⚠ Instant scope (routed to p11)**: the aim→close differentials are CROSS-instant; whether ①
+also closes the cross-instant rigid-rotation account is p11's readout, not assumed. **(e)** Config caveat:
+STEP3 residuals nearly unchanged t13 → t14 (t13 side matches §27.2.128's banked rows ✓; t14 in-flight) ⇒
+the aim stage precedes the claw change (p4's reading); numeric re-derivation = p11's court. **(f)** Rs
+instruction A working: the live file playable mid-run at 15:30:55 (261 KB/0.5 s → 587 KB/1.0 s); the
+location question (Rs pending ④) unchanged.
+
+## 333. Moving one claw moves two numbers — p5 recalculates from the asset, not from the relay
+
+From p5's -130 (15:33), answering -595. **(a) ⭐** Half-band confirmed opening-grounded ⇒ recalc REQUIRED,
+done in-message, and re-derived from the ASSET (sha match ✓) rather than my relayed values: f1ext z 0.0402
+⇒ inner 39.00 (unmoved); f2ext 0.0218 (old 0.0238) ⇒ inner 23.00 (old 25.00); opening 16.00 ✓; the moved
+claw = pad-local LOWER, world UPPER (pad +z = world −z) = consistent with Rs's 「うえ」. Desk verification
+against the asset at `1a1efe0ac5` and parent: f2ext pos 0.0238 → 0.0218, f1ext 0.0402 both versions, size
+half 0.0012 ✓✓. **(b) ⛔⛔ The FOURTH moved quantity**: mouth CENTRE = (39+23)/2 = 31.00 (old 32.00) —
+one claw moved ⇒ width +2.00 AND centre −1.00; width-only updates leave a stale centre. **(c)** Recalc
+(pad-local mm): inner band [25,39]→[23,39]; p11-band (∓1.00) [26,38]→[24,38] width 12→14; **half-band
+6.00→7.00**; zero-residual placement error 4.93→**5.93**; off-centre allowance 4.00 ✓. ⛔ Residual SIGNS
+(L +2.62/R −2.00) NOT revived (§11-6 projection error stands — only the FRAME moves). ⚠ Frame hygiene:
+the band is pad-local (change exactly 2.00); world rises (+1.9/+1.6) are tilt-projections — must not
+enter the band. **(d) ⭐⭐ The stale predicate constant (p5's own)**: `ur15_cell_spec.py:428 MOUTH_BAND_Z
+= (0.025, 0.039)` vs asset (0.023, 0.039) — verified here :428 ✓; single consumer verified:
+`ur15_steps_wired.py:715` cable_in_mouth ✓ (grep = exactly 1). Judges only, never aims (the aim's
+pinch→mouth offset is model-derived, auto-follows the asset) ⇒ the predicate judges with the OLD mouth ⇒
+**conservative (false FAIL possible, no false PASS) ⇒ not a STOP**; update value (0.023, 0.039) supplied
+as p5's court, implementation = p4 (routed -599). **(e)** p5's doc edits (§11-2/§13-5/§13-3) wait on bank
+#9 — re-surfaced to p4.
+
+## 334. The convention read, the garnish dead ab initio, and one declared inspection
+
+From p11's -131 (15:35); pin verified: §27.2.132 @ `4b7391c7ae` — sha `4c0cdef5ba…` ✓, one new header =
+the declared section ✓. **(a) ⭐** The span DIRECTION grounded: verbatim `:1509` @ `581ae56935`
+`_w3 = (np.asarray(c, dtype=float) - aim_seat[t]) * 1000.0` ⇒ actual − assumed ✓ read here ⇒ the cable's
+two points sit 0.88 mm WIDER than the jaw slots — §328(b)'s conditional RESOLVES to "stands". p11 owns
+that §27.2.131's direction claim was right for then-ungrounded reasons. Sign-parallel to §27.2.107 kept
+form-only (⛔ 0.88 ≠ 2.0; no mechanism claimed). **(b) ⛔⛔ The flip accepted with INDEPENDENT
+corroboration**: `1a1efe0ac5`'s commit message — "at 32 degrees the arm's lowest point sat 48.5 mm below
+its own mouth -- 25.5 mm through the table" (verified here by READING; grep returned 0 because the phrase
+WRAPS across lines — the cannot-discriminate lesson applied before declaring absence) — the 32° arm = R
+(p11's own roll measure ~30°) ⇒ if Rs pointed at the through-the-table arm, Rs's 左 = instrument R. ⭐⭐
+p11's sharper form: **the garnish was invalid AB INITIO — a visual judgment about jaw TILT used to back a
+CONDITION-NUMBER ranking is a different quantity; the flip only exposed it.** §290(b)'s tag refined
+accordingly; the bar-replacement basis (mixed units) untouched. **(c) ⭐** Rs ① consequences (p11's
+court, described not decided): roll = 0 ⇒ containment maximal (§27.2.82 trade's best point); the pair
+coefficient RISES 1.82 → 2.00 (+10%, the 48.4° was roll-made; both axes ≈ parallel −y) BUT the
+differential (rotation/bend) component vanishes ⇒ worst case = pure translation, removable by aiming
+(rotation is not) ⇒ favourable exchange, decided by Rs; no-fallback = correct form — the seat-stage raise
+is "the expected first result", not a defect. **(d)** Rs ② bands independently derived (slot [23,39],
+centre 31.00, W−2r 6→8 half 3→4, W−2 12→14, W 14→16) — CONSISTENT with p5's independent read ✓; the same
+stale-constant inspection DECLARED independently (2 min after p5's), same conservativity verdict, single
+consumer by closed grep ✓; centre note: no current centre-consumer, future centre-based bars must use
+31.00; p11 does not fix (p4/p5 court). **(e) ⭐⭐ t14 numeric-target rule (p11's court)**: 2.7°/1.5° NOT
+carried into t14; structural falsifiers stand; numbers re-derive from t14's OWN world print BEFORE the
+angle print is read — (e_L − e_R)/2, y/z ÷ 44, predictions written first — ⛔ reverse order = fitting.
+
+## 335. The register folds the second change into 44 — and derives the centre I was not handed
+
+From p6's -113 (15:36); pin verified: `73378a0328` LEDGER sha `464dfb37…` ✓. **(a)** Register decision =
+MERGE into #44, no new row (closing condition identical; the register must state the invariant's current
+value in one place; downstream type identical); guard FAIL=0 WARN=2. **(b) ⭐** p6's own derivation
+(values not copied): single plate moved (*_pad_f2ext, both sides, pad-z 23.80 → 21.80; f1ext 40.20;
+half-thickness 1.20) ⇒ opening 16.00 AND centre 32.00 → 31.00 — ⛔ #44's existing note "centre unchanged,
+band widens symmetrically" (true of the FIRST 10→14 change) does NOT apply this time. THREE independent
+asset reads now agree (p5 -130 / p11 -131 / p6 -113 — each re-derived, none copied) — genuine
+convergence, not echo. **(c)** Roll-projection closure: world rises = pad 2.00 through roll (2.00·cos
+20.1° = 1.88 / 2.00·cos 34.4° = 1.65 vs measured +1.9/+1.6) — desk-checked ✓; currency caveat kept
+(rolls from aimboth.txt:19-20 selection values; same-time-as-measurement unverified). **(d) ⚠** LOCK
+divergence widens 4.00 → 6.00 mm; **the §0#4 spec is unreflected for the SECOND consecutive change** —
+spec reflection is Rs's court; surfaced in this checkpoint's Rs report (pending ⑤). **(e) ⭐⭐ The
+branch-order question (routed to p4 + p11)**: (i) landed as report-only inside the inheritance branch;
+the vertical-finger re-solve (pose_rd) sits AFTER that branch ⇒ whether the vertical requirement applies
+to an arm whose pose was INHERITED (aimed[t]) is decided by branch order — untraced by p6 and by this
+desk. My read @ `1a1efe0ac5`: inheritance-scratch posing `:1608-1614`, vertical solve ending `:1633`
+(pose_rd=(0.0,0.0), partner-aware), no-fallback raise `:1637-1641` — p6's cited ranges (:1610-1633 /
+:1641-1655) are offset from this read and their source version is unstated; constructs CONFIRMED, overlap
+UNTRACED. Rs-directive compliance surface — trace = p4/p11's court.
