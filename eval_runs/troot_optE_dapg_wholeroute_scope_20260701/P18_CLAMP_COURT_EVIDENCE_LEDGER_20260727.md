@@ -9351,3 +9351,26 @@ close at aim time), ONE configuration — the grasp-time cable movement (10.8/12
 surface, not replaced; both live on their own surfaces. **(d)** Rs instruction A verified WORKING by
 measurement (the live file 262 KB → 4.7 MB, ffprobe-readable mid-run; appears ~14 min after launch — the
 posture-search phase produces no frames). t13 trace remains the pending pin.
+
+## 318. The state versus the transition — and the choreography already contains both types
+
+From p11's -125 (14:49), crossing my -577 relay in flight (self-corrected from the current tree,
+content-pinned since the lines had moved); §27.2.127 @ `7724e07a40` ("I read the state where the push lives
+on the transition") — sha256 machine-match
+`ab6379751621f2f9670a35db6217fdedf6ae24fce637c34da0a228b9065296fa` ✓.
+
+**(a) ⛔** The "STEP14 も同様" corrected by its author independently of p5's read — *"p5 が正しい"* — the
+same split landing from both sides within minutes. **(b) ⭐⭐⭐ The error's FORM**: **table cells are
+STATES; the pushes ride the DIFFERENCE between adjacent rows** ⇒ claims about "when it closes / when it
+moves" read from ROW DIFFERENCES, not row values — and the meta, owned: this is p5's own point one level
+up (*"押しを起こす 指令 もまた 2 時点の量である。私は片方を水準として読みました"*). **(c) ⭐⭐ The
+choreography ALREADY CONTAINS BOTH types**: 段4 = simultaneous (the 1.82 b pair coupling applies; p5's
+1.8242 = an independent DERIVATION, two derivations not one agreement); **段14 = the SEQUENTIAL form p11
+had called the "alternative"** — one push, per-arm suffices, acting against the already-clamped left grasp
+⇒ "ordering is a live design variable" survives; only the second example falls. **(d) ⭐⭐ Half the
+attribution is already free**: 段14 is an interval where only ONE jaw transitions ⇒ its cable movement has
+NO jaw-ambiguity — ⚠ the close-inhibited control is STILL needed (the arms servo throughout; the
+background remains) ⇒ jaw-vs-jaw = free / background = control required; and ⛔ 段4-vs-段14 is NOT a
+controlled comparison (target, C1-seated state, regrasp-vs-first, jaw initial states all differ) — *"見に
+行く場所であって試験ではない."* **(e)** The scope split stated exactly: *"④ は同じ文の中に正しい考えと
+誤った実例を持っていました。考えは残し、実例は引きます."*
