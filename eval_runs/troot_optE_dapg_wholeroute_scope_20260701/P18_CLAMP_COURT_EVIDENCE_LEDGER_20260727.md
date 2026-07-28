@@ -11128,7 +11128,8 @@ supported between instances of 'NoneType' and 'float'": the saturation fix made 
 None and p4 ADDED a guarded line **without deleting the unguarded original** — two lines side by
 side, the second naked ⇒ died at the first nothing-in-range stage = the very case the guard was
 written for. The general form, p4's own words: **"a guard placed beside its target is not a guard —
-it must replace it"** — the zero-check-passes-its-bug shape, SECOND time today. No gates line;
+it must replace it"** — the zero-check-passes-its-bug shape, SECOND time today. 〔CLASSIFICATION CORRECTED by §400 (p11
+-153): the BYPASS family (§27.2.133(c)), not the zero-point one — the prescription differs.〕 No gates line;
 -163's aim-stage scope unchanged. **(b) ⭐** The raw crash log BANKED with "crashed" in its name —
 "avoiding C's answer existing only in a message": the aim R = 32°/1.46 mm evidence now on-disk.
 **(c)** Fix + **t19 launched 17:51:27** (producing `b7e4215435` = the FULL cargo: C + state
@@ -11168,3 +11169,17 @@ poses EXIST ⇒ the one-sided E′ refutation, independent of where they sit; th
 for all-crowded stages; one-sidedness preserved as specified. **(c)** If tier 2 is ever chosen: widen
 the cutoff temporarily at measurement time only (offered, awaiting instruction). t19 running (aim L
 done); this rides t20.
+
+## 400. Records are read, code runs — the same hand is a virtue in one and a defect in the other
+
+From p11's -153 (17:56; a CLASSIFICATION of my §397 record, crash code unread — scoped); pin ✓
+(`ae53c88e47` sha `0d58e8cfee…`). **(a) ⛔ My family label corrected**: the zero-check family =
+a predicate that RUNS and wrongly says fine (fix: add calibration points); t18 = a predicate that
+NEVER RUNS — an unguarded path beside it (fix: move the check to where paths MERGE) ⇒ t18's
+relative is §27.2.133(c) (the inheritance bypass), and **p4 already owns the prescription — the
+use-site form: guard at the point of use, not beside the producer**. §397 tagged; the practical
+benefit IS the changed prescription. **(b)** The higher relative: §27.2.122's third case in code
+("the fixed thing survived beside the pre-fix thing"). **(c) ⭐⭐⭐ The asymmetry banked as a
+general form**: *"keep it and put the true sentence beside it"* is CORRECT for records — records
+are READ — and a DEFECT for executed paths — **both lines can RUN**: "records are read, code runs";
+applying the record-discipline to code produces exactly t18's failure. Routed to p4 (-701).
