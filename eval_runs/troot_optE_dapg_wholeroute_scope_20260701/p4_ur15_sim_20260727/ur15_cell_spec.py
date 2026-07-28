@@ -624,7 +624,12 @@ GRASP_ATTITUDES = [(y, r) for r in (0.0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.55, 0.6
 # same failure as comparing a constant across two measurement surfaces, so the name is corrected
 # here rather than left as a stand-in.  The cap side (see vertical_tol_deg) already says this.
 #
-# ⚠ r_max IS NOT MEASURED YET, and there are now two independent reasons, not one:
+# ⛔ r_max CANNOT BE MEASURED IN THIS CONFIGURATION.  It is not that the reading is pending and
+# will arrive: every seating solve accepts a pose within 0.30 rad = 17.19 degrees, three times the
+# allowance the check then applies, so not one solve in the run qualifies for the population the
+# ratified rule defines.  The set is empty, and waiting produces nothing.  Something has to change
+# before the quantity exists at all.  (p5 -153 corrected my "not measured yet", which read as a
+# schedule when it is a structural fact.)  The reasons, all three independent:
 #   (1) the population.  p11 -155 and p5's ratified rule converged: r_max counts only the readings
 #       that were CONSTRAINED upright when they were made -- the solved seating branch -- and the
 #       inherited branch is judged but never counted.
@@ -634,7 +639,14 @@ GRASP_ATTITUDES = [(y, r) for r in (0.0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.55, 0.6
 #       without raising, which does not exist yet.
 #   ⛔ Consequently every tilt figure taken so far is dead for this purpose, including the 11.2 that
 #      ended a run.
-# ⚠ And a third, which is mine to report: the right arm is currently jammed against the mast with
+# ⭐ What the run has to report once the acceptance window is brought under the allowance (p11
+# -159): the deciding quantity is whether the WORST residual among upright-commanded solves comes
+# out below tau_max.  Below it, an allowance exists and today's impossibility was the configuration
+# rather than the formulation.  At or above it, the rebuild branch fires for real instead of on a
+# number that was never admissible.  Either way it is one comparison on a population that is no
+# longer empty, which is the whole point of fixing the window first.
+#
+# ⚠ And a third reason, which is mine to report: the right arm is currently jammed against the mast with
 #   joint 1 at its force limit, arriving up to 99 degrees short of command.  Its poses are where a
 #   saturated servo stopped, not where the solver aimed, so they are not readings of this quantity
 #   at all.  Stage 2 needs a free arm as well as a fixed instrument.
