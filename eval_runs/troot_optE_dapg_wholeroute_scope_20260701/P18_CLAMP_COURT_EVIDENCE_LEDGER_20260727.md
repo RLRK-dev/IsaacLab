@@ -8490,7 +8490,10 @@ right; (iii) ⛔⛔ **the right EXCEEDS 4.89 in every banked log — 5.91 / 6.93
 minutes earlier ⇒ the budget is ALREADY NEGATIVE on the right** — routed to p5's court. ⚠ Scope carried by
 p4: all FAILED-run values; producing code recoverable only for t10; ⚠ hub note: the census's t10 leg rides
 the UNBANKED run_t10 log (the banked trace has no STEP3 lines — grep 0 here) ⇒ the finding stands on the
-six banked logs alone; the t10 leg is as-read until its log banks. **(b) ⭐** The σ why-not comment
+six banked logs alone; the t10 leg is as-read until its log banks 〔⚠ WRONG — corrected by p4 -099 (§280):
+run_t10.txt IS banked at the same `00d7b16201` (sha `c55222ee…` computed here; STEP3 `:46-47` verbatim); my
+grep tested the TRACE file, whose step column carries no "STEP3" string — a predicate that could not
+discriminate, generalized anyway: the hub's miss #2 within the hour〕. **(b) ⭐** The σ why-not comment
 IMPLEMENTED at BOTH surfaces (trace header + code), verbatim *"sigma_min: RANKING ONLY -- mixed units,
 never an absolute bar. Bar goes on dq_per_dx_rad_per_m."* + the 0.12-exceeded-one-arm's-range fact in the
 code — §275(b)'s guard landed within the hour; the running process untouched; banks before the next run.
@@ -8500,3 +8503,72 @@ own miss, owned**: t9's STEP3 lines (L 0.52 / R 5.91) were READ AT THIS DESK at 
 the refuting numbers were in context when §276 banked "the left was never measured": an absence claim
 accepted without its closed query, by the desk that enforces closed queries. The correction cascade cost
 three messages; a 30-second grep would have cost none.
+
+## 279. The census breaks the band's empirical basis — and the author applies the same knife to itself
+
+From p11's -114 (13:34); §27.2.116 @ `82268c3549` ("The census breaks the empirical basis of my band, not
+the band itself") — sha256 machine-match
+`d939476d263182e63261ec00a5963d9d3250bc7eefbdbd58dc8477d88d8c51f2` ✓.
+
+**(a) ⛔ The per-band re-derivation** (slope consumption 1.07 included): band 6.00 — nothing certifiable;
+**band 12.00 (the adopted one) — 4.89 → +0.04 ✅ / 5.91 → certifies but −0.98 after slope / 6.93 → NOT
+certifiable (6.93 > half-band 6.00)**; band 14.00 (the deviation boundary) — even where 6.93 certifies, the
+slope leaves −1.00. Certifying 6.93 needs band ≥ 13.86 ≈ the boundary itself. **(b) ⛔ §27.2.73's
+empirical basis COLLAPSED** ("12.00 is the only band satisfying all 4 points") — the TWO GEOMETRIC grounds
+stand (6.00 demands claws that do nothing; 14.00 subtracts tolerance from the boundary itself) ⇒ **the band
+CHOICE is unchanged; the claim "measurement supports it" is withdrawn**: *"12.00 は設計として選んだ帯で
+あり、右腕の実測はそれを満たしていません."* **(c) ⭐⭐⭐ The upper-bound asymmetry honored BOTH ways**:
+the residual is an upper bound on the containment component ⇒ bound > half-band = UNDETERMINED, not
+violation ⇒ ⛔ "the right arm is out of band" is NOT claimed — the same asymmetry that saved the
+certification when the seat datum moved (§27.2.97) now cuts the other way: *"救われた分だけ、崩れません."*
+**(d) ⭐⭐ The design pressure MOVES**: widening the band = §0#4 human-LOCKED (Rs-exclusive) and
+insufficient anyway (14.00 still goes negative) ⇒ the binding quantity is **the right arm's placement
+error** — the aim-loop convergence court (aim_slot_at), the substance of R3's requirement (§27.2.95);
+p11's stated limit: *"右腕の置き誤差が 6.00 を下回らない限り、私が採択した帯は測定で支えられない."*
+**(e) ⭐ The same-source discipline**: the failed-run caveat cannot be applied by direction — the band
+certification came from the SAME failed-run four points ⇒ *"同じ出所を、支持のときだけ採って否定のときに
+捨てません."* **(f) ⭐⭐ The form (kin to #14)**: p11's own §27.2.73 scope note ("4 点は分布ではない。
+成功率を主張しない") was right, and it just bit its own author ⇒ *"射程注記は書いた本人の結論を守りません。
+守るのは読み手であって書き手ではありません."*
+
+## 280. The t10 leg was banked all along — the hub's second miss, and the caution lands with its numbers
+
+From p4's -099 (13:3x); verified here: `00d7b16201`'s full file list includes **run_t10.txt** (my earlier
+read stopped at the two named files); its sha256
+`c55222ee5c72a187c7c72d85c83188b205b4588428c13285a38fabdca89a8f29` — completing the message's truncated
+cite by computation; STEP3 `:46-47` verbatim (L 2.31 / R 5.91) ✓. The σ caution banked at `6662f46fc0`
+("Keep the caution with the numbers it is about"; content sha `02a4e98c…` ✓; "RANKING ONLY" present;
++13/−1, comment + output header only) — ⛔ NOT t11's producing code (t11 = `21e62e426a`, pre-comment):
+provenance separation held unprompted.
+
+**(a) ⛔⛔ My §278(a) caveat WITHDRAWN — miss #2**: the census stands on ALL SEVEN banked legs
+(t3/t4/t5/t7/t8/t9/t10; t6 carries no STEP3 print — an earlier code version). My grep tested the trace file
+— whose step column is bare integers, so "STEP3" CANNOT occur there — and I generalized its 0 into "the log
+is unbanked": a predicate that could not discriminate, used as evidence, within the hour of owning miss #1.
+§278(a) tagged. **(b)** p4 concurs with p11's -113 (*"p11 の言い方の方が正確"* on 過少標本) — the
+two-lane convergence stated by both sides. **(c)** t11 progress, custody only: 13:32 at STEP5 t=13.2 s
+(t10 ran to 29.1 s); trace after completion. **(d) ⚠** One truncated sha in the message (`c55222ee5c72a187
+c7c72d85...`) — completed here by computation; noted, not returned (the pin resolves via commit + path).
+
+## 281. p5 reads the raw logs itself — the retraction, the per-arm rewrite, and seven runs that are two samples
+
+From p5's -118 (13:35); bank self-verified by p5 first (916913f144 sha match). Pins verified here: new clip
+working-tree sha `992a773281c013271b3790ac4128e43155051672ae5816ab2af7bd35aa5c67d4` ✓ machine-match;
+numstat +42/−8 ✓.
+
+**(a) ⭐⭐ The adjudication discipline held**: ⛔ *"回送された数では裁定せず、生 log を自分で開きました"*
+— a closed query over all 18 files in the directory; the census independently reproduced (7 files, both
+arms; L 2.31×6 / 0.52×1; R 5.91×6 / 6.93×1). ⚠ A 0.02 source difference kept UNharmonized: p5's L 2.31
+(tonight's logs) vs the relayed 2.33 (p11's earlier banked four points) — *"どちらにも寄せません"*
+(different occasions, both real — no forced reconciliation). **(b) ⛔⛔ The -117 conclusion RETRACTED by
+its author**: per-arm budgets L +2.62 (and +4.41 at 0.52) / R **−0.98 and −2.00** ⇒ the right exceeds 4.93
+in ALL SEVEN runs ⇒ *"予算は右で既に負。「+0.04 で事実上ゼロ」ではありませんでした"* — and the single
+4.89 was NEITHER arm's value (measured L 2.31 / R 5.91), its "worst-of-4" scope note itself UNDERSTATING
+the right (actual worst 6.93). **(c) ⭐⭐⭐ #14 applied to its own measurement**: ① all failed-run values
+② the 7 runs contain only TWO distinct values per arm ⇒ **seven runs are not seven samples** —
+under-sampling counts by DISTINCT CONFIGURATIONS, not runs; the claim stops at *"banked された全構成で超え
+ていた"*, never "右は必ず 5.91 を超える". **(d) The edit, disclosed to the line**: §11-2 rewritten per-arm
+(L +2.62 / R −2.00); §11-5 NEW (the correction in full); §11-4's overturned paragraph marked; the 8 deleted
+lines FULLY DISCLOSED (the old 6-row table + 2 conclusion lines), content preserved in §11-5③ as
+restatement — declared as such, not verbatim. Bank request #3 routed to p4 (-538). **(e)** p11's
+margin-split own acknowledged; the 0.02 stays a source difference.
