@@ -368,7 +368,14 @@ TILT = math.pi / 2.0 - math.radians(45.0)  #          88 mm span; 0.40/20deg cle
 TABLE_HX, TABLE_HY = 0.70, 0.20         # spec §4 -- ⚠ weak grounds, and spec §7 asked whether p4
                                         #            had better: it does not.  The driver line
                                         #            carries no measurement comment at all.
-REST_Y = 0.28                           # spec §4
+# ⭐ p5 -175(2): the work row moves as ONE SET or not at all.  REST_Y is a single word that
+# places both the cable and the saddle posts, and the clip rows and the table sit at fixed
+# offsets from it -- so shifting any one of them alone would be changing two things and calling
+# it one.  WORK_ROW_DY shifts REST_Y and the two clip rows by the SAME amount; TABLE_Y is derived
+# from them further down and follows by construction rather than by a second edit.
+# Default 0.0, so the cell is byte-identical unless the sweep sets it.
+WORK_ROW_DY = float(_os_module.environ.get("WORK_ROW_DY", "0.0"))
+REST_Y = 0.28 + WORK_ROW_DY             # spec §4
 REST_X = (-0.300, -0.055, +0.245)       # spec §4 -- placed by p5 inside the free windows this
                                         #            cell was measured to have; the previous
                                         #            three had one outside the shorter cable and
@@ -451,7 +458,8 @@ R_DES = ((0.0, -1.0, 0.0),
 # p5: "already OWNED in §6.4d, so just move them into the spec module".  Each keeps what the
 # driver knew about it, because that provenance is the only thing that makes them not-invented.
 
-CLIP_Y_ODD, CLIP_Y_EVEN = 0.35, 0.40    # spec §6.4d -- the two clip rows
+CLIP_Y_ODD, CLIP_Y_EVEN = 0.35 + WORK_ROW_DY, 0.40 + WORK_ROW_DY   # spec §6.4d -- the two clip rows,
+                                        # shifted with REST_Y so the spacing is untouched
 C1 = (0.150, CLIP_Y_ODD)                # spec §6.4d -- first clip, on the near row
 C2 = (0.040, CLIP_Y_EVEN)               # spec §6.4d -- second clip, on the far row
 
