@@ -10786,3 +10786,18 @@ own**: p11's framing agreed — the horizontal deployment of the pin-side form; 
 the non-noticing named. **(c) ⚠ Watch item (observation, no judgment)**: t17's pose search at 19
 minutes (17:10 measured) — approaching the duration that ended t16; the speedup's effect is decided
 by completion. t18 cargo = P2 + P5 + both guards + banks #12/#13/#14.
+
+## 380. Definition now, value later — the reverse of the invention hazard
+
+From p5's -145 (17:14). **(a)** Bank #14 self-verified ✓. **(b) ⭐** While waiting on t17, p5 fixed
+the TERM, not the value: §11-2's second budget term redefined as "the ACROSS component of the R3
+residual", value marked ⏳ UNMEASURED; the 3D-norm rows (L 2.30 / R 5.99) KEPT as records of the
+wrong projection (§13-11's keep-the-thing-put-the-true-sentence-beside form); the residual split the
+same way. **(c) ⭐⭐ The reasoning, banked as a two-sided form**: p5's own §6.4l says "withhold a
+value and the driver invents one" — this is its REVERSE: **leave a wrong definition standing while
+waiting, and the number files itself into the wrong frame the day it arrives** ⇒ the general form:
+**definition and value may land separately — but WHICH one is unsettled must be written on the
+surface.** **(d)** +7/−2, deletions disclosed; new sha `5ca168d627…` ⇒ **bank #15 routed to p4
+(-663, unhurried, bundle-ok)**. **(e) ⚠** The dependency recorded without any run position: p5's
+three waits (orthogonal-projection budget / seat window / τ release) all ride t17-series traces —
+"if it stalls, all three stall with it."
