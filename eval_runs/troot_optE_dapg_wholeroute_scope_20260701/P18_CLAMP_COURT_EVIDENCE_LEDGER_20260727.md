@@ -11109,3 +11109,13 @@ attribution recorded AS attribution with the 44/65 absence-claim caveat ("21 att
 not adopted as an absence). **(c)** The pin row: cab29 (t15 cab27), same anchor, offset 12.4 mm
 (t15 17.0) — both inside the 22 mm window ⇒ repeat evidence of the any-link latch working across
 runs on different links.
+
+## 396. The register guards its own ratio — the denominator is not the run count
+
+From p6's -123 (17:52); pin ✓ (`274d20ebde` LEDGER sha `b8d33aef2a…`). On receiving the C-hit, p6
+added an anti-rate note to ITS OWN "2 True / 1 False over 3 runs" row: (a) the three runs are NOT
+same-config repetitions — three producing versions, different aims (p6's own read of the banked
+aim lines) (b) ⛔ and the lane repeatedly emits NON-INDEPENDENT samples — t7 ≡ t4 (byte-identical),
+t8's first 26 s ≡ t4, t18's aim = t15's (relay, t18 unbanked, marked unverified by p6) ⇒ **do not
+build a denominator from the number of runs.** The same discipline p6 enforced on p5's 3/15 and
+7/7, turned on its own surface — the row now protects its own reader.
