@@ -11247,3 +11247,53 @@ effective tolerance = the interim constant ⇒ t20's results unharmed; one print
 **(e)** t20 running (18:03:47, producing `5f477f53e5`); the structural closure + cap fix ride t21.
 ⚠ Relays to p11/p6 on this section DEFERRED to the next window (context boundary) — the ledger
 carries the record; the opening acks cover them.
+
+## 405. Rs benches the self-judged prints — both analysts ordered in; the collation finds the count short
+
+From p4's -174 (19:07:01 JST). **(a) ⭐⭐ Rs verbatim (p4 custody)**: 「LOG-ANARIST VIDEO-ANARISTが
+機能していない」 and 「'/home/rlrk/Downloads/ur15_live.mp4' 左ハンドが円柱に激突している」. p4's own
+diagnosis: twenty sim iterations, every one judged from p4's own prints — both panes idle and alive
+(p4's agent-list observation 19:0x), so what failed is the USE, not the panes. Correction = two
+analyst requests routed through this desk; fix owner = p4; neither analyst changes code; deadline =
+before p4's post-fix re-run if possible, late still useful. **(b) Pins verified before banking**:
+video = `t20_live_20260728.mp4` (stable copy of what Rs watched; UNCOMMITTED as declared — git
+ls-files count 0 ✓; 21,609,568 bytes) on-disk sha256
+`90904be4a166a4691b8520eae4a6ce7d926b3e6af3c94d28e553f5987a4daeeb` = MATCH by paste-once variable
+compare (as-read 19:11 JST). ⚠ My FIRST comparison retyped the claimed sha into three grep
+patterns — all three typo'd, all three returned 0 against a TRUE match (third retype incident at
+this desk); the variable compare then said YES. The false MISMATCH was caught before banking.
+Trace = `T20_RUN_TRACE_20260728.txt` @ `c65e0efc8b` ("Bank the t20 trace for the analysts"
+19:06:24 +0900), content sha256
+`d2cd4bcccb2e0d277f9183be743348c46a5d3d701a736ecfcc7eb652711f33e8` = MATCH (grep -c 1).
+**(c) ⛔ The count collation FAILS on one figure**: p4 says R reads −0.6 mm "at ten of the thirteen
+steps". Machine count on the banked trace: 13 column-gap lines (STEP 2–14); R = −0.6 at EIGHT
+(STEP 3,4,5,6,11,12,13,14); R = −0.0 at ONE (STEP10); R positive at FOUR (STEP2 +180.2, 7 +130.0,
+8 +387.5, 9 +328.2). No reading reaches ten (strict = 8, any-negative = 9). L = +0.0 at two
+(STEP 3,5) ✓ as claimed. Disposition: the ARTIFACT is primary and pinned ⇒ the requests route NOW
+(the Rs order and the deadline stand), the discrepancy is SURFACED in the pB relay (pB judges from
+the trace, not from anyone's summary) and RETURNED to p4 (m707) for the message figure only.
+**(d) Routed**: m703 → pC: which arm / which part / what time / surface-stop or through; mast =
+geoms stem+foot at the origin; ⚠ three panels — wide (left), close-up (middle, MIRRORED: its
+screen-left = p4's R arm), top-down (right); wide's screen-left = L; panel attribution mandatory
+per observation; scope = frame facts only, the physical-validity verdict is Rs's. m704 → pB:
+reconcile the column gap against the rest of the trace — a moving part arriving at the mast, or a
+value that never changes because something permanently overlaps it; the trace does not name the
+geom (p4's declared instrument defect) ⇒ state what the trace CAN and CANNOT settle; ⛔ numbers
+only, no PASS; the (c) count note attached with "judge from the artifact". **(e) Desk notes
+(materials, not verdicts)**: (i) §404(c)'s DISJOINT / +0.0 mm transit is ARM↔ARM; the column gap
+is ARM↔MAST — a different quantity, not to be conflated. (ii) R is NOT frozen across the run:
+−0.6 at 3–6, +130…+387 at 7–9, −0.0 at 10, −0.6 at 11–14 — identical WITHIN step groups, mobile
+BETWEEN them. Desk inference, flagged: a geom PERMANENTLY in the min-set and permanently
+overlapping could not let the min read +387.5 at STEP8 ⇒ either the set's membership moves or the
+overlap itself moves — which one, the trace may not be able to name (no geom names); that is
+exactly the CAN/CANNOT line pB is asked to draw. (iii) Rs's 「左ハンド」 may be a mirrored-panel
+reading (the persistent-negative side in the TRACE is R) — why p4's question is arm-neutral and
+pC's panel attribution is load-bearing. (iv) §403(c) said count + survivor-best ride t20 —
+CONFIRMED on-disk: all 13 steps print removal counts, cleared-radius counts, winner sigma AND
+best-survivor sigma (e.g. STEP7 R winner 0.1108 vs best survivor 0.3082 — the ranking-leg
+separator visibly non-degenerate). p11's E′/D/cost-weight material exists. **(f)** The §404
+relays deferred at the context boundary EXECUTED: m705 → p11 (structural closure + the two-sets
+cap lesson + the t20 trace pin and field confirmation), m706 → p6 (register rows: t19 same-family
+crash + structural closure + DISJOINT; t20 banked; the analyst routing — rows after verdicts per
+reflect-verdicts-only). "Awaiting t20's trace" RESOLVES. Next = both analyst reports; p4's
+geom-name instrument fix; t21 under Rs's direct regime (no run authorization from this desk).
