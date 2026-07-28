@@ -827,8 +827,9 @@ def seat_legs(clip, cx, cy, link):
 def seated(clip, cx, cy, link):
     """Groove interior in all three axes AND the seated link touching the groove floor."""
     p = np.array(d.xpos[CAB[link]])
-    inside = (abs(p[0] - cx) < 0.022 and abs(p[1] - cy) < _spec.groove_width() / 2.0
-              and abs(p[2] - GROOVE_Z) < 0.006)
+    _tx, _ty, _tz = seat_tolerances()
+    inside = (abs(p[0] - cx) < _tx and abs(p[1] - cy) < _ty
+              and abs(p[2] - GROOVE_Z) < _tz)
     if not inside:
         return False, p
     for i in range(d.ncon):
@@ -836,6 +837,52 @@ def seated(clip, cx, cy, link):
         if (g1 in CLIPG[clip] and g2 in CABG) or (g2 in CLIPG[clip] and g1 in CABG):
             return True, p
     return False, p
+
+
+def seated_any(clip, cx, cy):
+    """The link that is ACTUALLY in this clip right now, or None.
+
+    Rs, 2026-07-28, watching the cable lift back out of the clip it had reached: fix it.
+
+    The clip retention asked whether ONE named link was seated -- the link that happened to sit at
+    the clip's x when the model was built.  The cable slides along its own axis while it is carried,
+    so by the time it arrives a different link occupies the groove.  The run showed that plainly:
+    the cable centre was 0.5 mm from the groove centre and touching the clip at six contacts, while
+    the gate reported failure because the link it was watching had moved 15 mm away.  With the gate
+    false the retention never engaged, so the cable came back up with the arms.
+
+    The question the clip is really asking is whether ANY of the cable is seated in it, which is
+    what this returns.  The predicate per link is unchanged.
+    """
+    for k in range(len(CAB)):
+        ok, p = seated(clip, cx, cy, k)
+        if ok:
+            return k, p
+    return None, None
+
+
+def pin_to(clip, link):
+    """Point this clip's retention at `link`, holding it where it is at this instant.
+
+    ⛔ The anchor has to be recomputed, and this is the whole safety of the change.  A connect
+    stores an anchor in EACH body's frame, and the second one was computed at compile time from
+    where the ORIGINAL link happened to be.  Retargeting the constraint without rewriting it would
+    activate a constraint that is not satisfied -- and MuJoCo would fix that by dragging the cable
+    to where the stale anchor says it should be.  That is a teleport, and it is exactly what this
+    project forbids everywhere except this one authorised pin.
+
+    So the clip-side anchor is read as a world point, and the cable-side anchor is written as that
+    same world point in the new link's CURRENT frame.  The constraint is then exactly satisfied at
+    the instant it turns on, and nothing moves because of it.
+    """
+    e = EQ[clip]
+    cb = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, clip)
+    anchor_world = np.array(d.xpos[cb]) + np.array(d.xmat[cb]).reshape(3, 3) @ m.eq_data[e][:3]
+    b = CAB[link]
+    local = np.array(d.xmat[b]).reshape(3, 3).T @ (anchor_world - np.array(d.xpos[b]))
+    m.eq_obj2id[e] = b
+    m.eq_data[e][3:6] = local
+    return anchor_world
 
 
 # ---- settle the cable on its saddles, then MEASURE where it actually is ----
@@ -1245,6 +1292,19 @@ cam.distance, cam.elevation = 1.35, -22
 cam2 = mujoco.MjvCamera()
 cam2.type = mujoco.mjtCamera.mjCAMERA_FREE
 cam2.distance, cam2.elevation, cam2.azimuth = 0.40, -16, 250
+# Rs, 2026-07-28: a third view, from straight above.  Two things it settles that the other two
+# cannot: whether a claw is over the groove or beside it, and how much of the cable has slid along
+# its own axis -- both of which are motions in the plane this looks down on.
+# ⚠ Its azimuth matches the WIDE camera's on purpose, so left and right mean the same thing in
+# panel one and panel three.  They do NOT in panel two: the close-up looks from azimuth 250, so
+# world +x runs to the LEFT there, and a hand that is on the right in the wide view appears on the
+# left in the close-up.  That mirroring cost most of an afternoon of mis-attributed reports.
+# Elevation is 89 degrees rather than 90 because a camera looking exactly down has no defined
+# right, and the frame would be free to spin.
+cam3 = mujoco.MjvCamera()
+cam3.type = mujoco.mjtCamera.mjCAMERA_FREE
+cam3.lookat[:] = [0.15, 0.30, TABLE_TOP]
+cam3.distance, cam3.elevation, cam3.azimuth = 0.95, -89, 90
 
 frames, log, n = [], [], 0
 sig_min = {t: 1e9 for t in SIDES}     # worst manipulability over the whole run
@@ -1313,7 +1373,9 @@ renderer.update_scene(d, camera=cam)
 _a0 = renderer.render()
 cam2.lookat[:] = 0.5 * (pinch("L") + pinch("R"))
 renderer.update_scene(d, camera=cam2)
-live_write(np.hstack([_a0, renderer.render()]))
+_b0 = renderer.render()
+renderer.update_scene(d, camera=cam3)
+live_write(np.hstack([_a0, _b0, renderer.render()]))
 print("[steps] watch-along file opened with the starting frame; it stays on that frame until the "
       "attitude search finishes and the arms begin to move")
 
@@ -1710,16 +1772,17 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             qcmd[t] = (1.0 - f) * q_from[t] + f * w[t]
             for k, i in enumerate(AIDX[t]):
                 d.ctrl[i] = qcmd[t][k]
-        if gate == "pinC1" and not d.eq_active[EQ["C1"]]:
-            ok, pp = seated("C1", *C1, SEAT1)
-            if ok:
-                d.eq_active[EQ["C1"]] = 1
-                gates["pinC1"] = f"t={n*m.opt.timestep:.2f}s seat={np.round(pp,4)}"
-        if gate == "pinC2" and not d.eq_active[EQ["C2"]]:
-            ok, pp = seated("C2", *C2, SEAT2)
-            if ok:
-                d.eq_active[EQ["C2"]] = 1
-                gates["pinC2"] = f"t={n*m.opt.timestep:.2f}s seat={np.round(pp,4)}"
+        for _cg, _cc, _cn in (("pinC1", C1, "C1"), ("pinC2", C2, "C2")):
+            if gate == _cg and not d.eq_active[EQ[_cn]]:
+                _lk, pp = seated_any(_cn, *_cc)
+                if _lk is not None:
+                    _aw = pin_to(_cn, _lk)
+                    d.eq_active[EQ[_cn]] = 1
+                    gates[_cg] = (f"t={n*m.opt.timestep:.2f}s cab{_lk} seat={np.round(pp, 4)} "
+                                  f"anchor={np.round(_aw, 4)}")
+                    print(f"[steps] {_cn} RETAINED cab{_lk} at t={n*m.opt.timestep:.2f}s "
+                          f"(the link actually in the groove; the build-time guess was "
+                          f"cab{SEAT1 if _cn == 'C1' else SEAT2})")
         mujoco.mj_step(m, d)
         n += 1
         if n % 40 == 0:
@@ -1761,7 +1824,9 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             _want = 0.5 * (pinch("L") + pinch("R"))
             cam2.lookat[:] = _want if n <= render_every else (0.85 * np.array(cam2.lookat) + 0.15 * _want)
             renderer.update_scene(d, camera=cam2)
-            frames.append(np.hstack([a_img, renderer.render()]))
+            _b_img = renderer.render()
+            renderer.update_scene(d, camera=cam3)
+            frames.append(np.hstack([a_img, _b_img, renderer.render()]))
             # Rs, 2026-07-28: watch it WHILE it runs.  The finished file is only written when the
             # loop ends, half an hour later, and the log says the run has failed about ten minutes
             # in -- so the wait bought nothing and cost the feedback it was supposed to carry.

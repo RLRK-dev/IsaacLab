@@ -625,7 +625,9 @@ TIER_C = {"OUT", "W", "H", "FPS", "HOLD_S", "WAY", "STEPS", "SEED",
           # p5 §6.4j: these are in spec §6.4d as DERIVED and are free.  I had reported them as
           # absent from §6.4d, which was a bad read of my own -- they are on its line 195, in the
           # DERIVED row rather than the TIER-C row I was looking at.
-          "cam", "cam2", "render_every",
+          # cam3 is the top-down view Rs asked for on 2026-07-28.  Same tier and same reason as
+          # the other two: it says how a run is recorded and never reaches the model.
+          "cam", "cam2", "cam3", "render_every",
           # The watch-along file Rs asked for on 2026-07-28, and the one encoder setting its
           # writer shares with the finished one.  Tier C by the same reading as OUT/W/H/FPS: they
           # say how a run is recorded, and carry no cell geometry -- nothing here can disagree
