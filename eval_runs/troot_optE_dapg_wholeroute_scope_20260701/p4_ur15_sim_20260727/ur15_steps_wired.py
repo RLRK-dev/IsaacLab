@@ -1198,7 +1198,8 @@ sig_min = {t: 1e9 for t in SIDES}     # worst manipulability over the whole run
 col_min = {t: 1e9 for t in SIDES}     # worst approach to the column over the whole run
 sig_where = {t: "" for t in SIDES}
 col_where = {t: "" for t in SIDES}
-claw_min = {t: 1e9 for t in SIDES}   # minimum opposing-claw gap over the whole run, per arm
+claw_min = {t: 1e9 for t in SIDES}
+sigma_trace = []   # (step, arm, t, sigma_min) at every sample -- p11's path-sigma evidence   # minimum opposing-claw gap over the whole run, per arm
 grasp_pose = {}                      # the STEP3 descent solution, reused verbatim at STEP4
 aim_cable = {}                       # where the cable was when the aim was computed
 aim_seat = {}                        # where the aim predicted the seat would end up
@@ -1510,6 +1511,10 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
         if n % 40 == 0:
             for t2 in SIDES:
                 sv = sigma_min(t2)
+                # p11 -106 (3): the bar for a path-sigma test has to come from measurement, not
+                # from a round number.  So trace it -- every sample, per arm, with the step it
+                # falls in.  ⛔ Measurement only: nothing here changes what the arms do.
+                sigma_trace.append((num, t2, n * m.opt.timestep, sv))
                 if sv < sig_min[t2]:
                     sig_min[t2], sig_where[t2] = sv, f"STEP{num} t={n*m.opt.timestep:.1f}s"
                 cg = column_gap(t2)
@@ -1607,4 +1612,18 @@ import imageio.v2 as imageio  # noqa: E402
 
 OUT.parent.mkdir(parents=True, exist_ok=True)
 imageio.mimwrite(str(OUT), frames, fps=FPS, quality=8, macro_block_size=None)
+# hand p11 the path, not a summary of it
+_tr = S / "sigma_trace.txt"
+with open(_tr, "w") as _f:
+    _f.write("step arm t_s sigma_min\n")
+    for _st, _a, _t, _sv in sigma_trace:
+        _f.write(f"{_st} {_a} {_t:.4f} {_sv:.6f}\n")
+print(f"[steps] sigma trace: {len(sigma_trace)} samples -> {_tr}")
+for _a in SIDES:
+    _v = [x[3] for x in sigma_trace if x[1] == _a]
+    if _v:
+        _v2 = sorted(_v)
+        print(f"[steps] sigma {_a}: min {min(_v):.4f}  p5 {_v2[len(_v2)//20]:.4f}  "
+              f"median {_v2[len(_v2)//2]:.4f}  max {max(_v):.4f}  over {len(_v)} samples")
+
 print(f"[steps] wrote {OUT} frames={len(frames)} {OUT.stat().st_size} bytes")
