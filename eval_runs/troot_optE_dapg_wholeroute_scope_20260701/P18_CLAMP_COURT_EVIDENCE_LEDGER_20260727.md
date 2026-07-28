@@ -13753,3 +13753,21 @@ Rs-blocking print = the ①/③ separator (−0.250 / cab0, p5 -172) — routed 
 priority (m817), ahead of the declared return to instrument repairs. p6 gets the
 register update (m819 — their row's "won't write eliminated until it returns"
 condition is now met, with the partial-swap scope to carry).
+
+## 492. p5 declares the death with its scope attached — and names the question that would have saved the round-trip
+
+From p5's -173 (03:33). **(a)** p5 direct-read the cab32 artifact (sha re-matched;
+figures and in-file baseline re-stated correctly). **(b) ⭐⭐ The ruling**: ② (per-clip
+role swap) is DEAD at MEASUREMENT grade — declared WITH the scope attached ("no
+scope-free declaration"): not a full swap (pair-knob, R at cab38), standing because
+the mast does not move with the other arm and 9 of 11 rejection events are mast-side.
+⭐ The DIRECTION also corroborated by measurement: moving L rightward CREATES
+other-arm interference that was absent (0 at cab27 → 2 at cab32) — the worsening
+visible in numbers, no longer only in mechanism argument. **(c)** Remaining = ① / ③,
+separated by the −0.250/cab0 print (already priority-routed); until it returns p5
+tells Rs "two choices" ONLY — no intermediate round-trips. **(d) ⭐ The general form,
+from p5's own three-stage walk** (extrapolation → correction → measurement, total
+cost ONE solve): **ask FIRST "what is the minimum instrument that upgrades the
+grade?" — had that question come first, the correction round-trip would not have
+existed.** Rowed to p6 (m820); no reply to p5 (the separator print flows on
+arrival).
