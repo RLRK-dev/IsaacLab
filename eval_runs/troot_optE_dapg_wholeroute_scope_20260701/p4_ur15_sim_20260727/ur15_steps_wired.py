@@ -329,6 +329,20 @@ ARMG = {t: {g for g in range(m.ngeom) if m.geom_bodyid[g] in ARMB[t]} for t in S
 # the upper claw, red the lower -- and recolouring those would break a reference in use.
 ARM_TINT = {"L": (0.95, 0.55, 0.10, 1.0),      # left arm: orange
             "R": (0.65, 0.25, 0.85, 1.0)}      # right arm: purple
+# How far the command may run ahead of the arm before it has to wait.
+# ⛔ NOT SETTLE_TOL.  That is the answer to "has this joint ARRIVED at a stationary target", and
+# using it against a MOVING one asks a servo never to lag, which no servo does: the first run with
+# the gate spent 65-75% of every step held back and the command reached 29-48% of the way.  The
+# bound that belongs here comes from what the gate protects.  The command is only trustworthy while
+# the arm stays near the path that was cleared, so the arm may lag by as much as leaves it inside
+# the clearance -- a joint error of dq displaces a part by at most reach * dq, so the bound is the
+# clearance divided by the reach.  Nothing is chosen: both terms already exist and both are
+# measured.
+# Reach is the fully-extended chain -- the sum of the link offsets -- so it is an upper bound on
+# the true lever and the tolerance it yields is the tight side of exact.  ⚠ It includes the mount
+# offset, which makes it slightly larger still, and therefore the bound slightly tighter.
+ARM_REACH = {t: float(sum(float(np.linalg.norm(m.body_pos[b])) for b in ARMB[t])) for t in SIDES}
+TRACK_TOL = {t: ARM_CLEARANCE / ARM_REACH[t] for t in SIDES}
 for _t in SIDES:
     for _g in ARMG[_t] - PADG[_t]:
         m.geom_rgba[_g] = ARM_TINT[_t]
@@ -2255,9 +2269,11 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # ⛔ NOT `held`: that name is already a function in this file, and the step summary calls it.
     held_ticks = 0
     for s_ in range(steps):
-        _lag = max(float(np.abs(np.array([d.qpos[a] for a in QADR[t2]]) - qcmd[t2]).max())
-                   for t2 in SIDES)
-        if _lag < SETTLE_TOL:
+        # Each arm against its own bound, because reach differs and a single max would hold the
+        # shorter arm to the longer arm's tolerance.
+        _lagging = any(float(np.abs(np.array([d.qpos[a] for a in QADR[t2]]) - qcmd[t2]).max())
+                       > TRACK_TOL[t2] for t2 in SIDES)
+        if not _lagging:
             prog = min(1.0, prog + dprog)
         else:
             held_ticks += 1
@@ -2430,7 +2446,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # printed like a finished one would be the worst of both changes.
     print(f"[steps] STEP{num:2d} COMMAND: reached {prog*100:5.1f}% of the way to the solved pose"
           + (f", held back on {held_ticks} of {steps} ticks because the arm was more than "
-             f"{SETTLE_TOL*1000:.1f} mrad behind" if held_ticks else ", never held back")
+             f"{min(TRACK_TOL.values())*1000:.1f} mrad behind" if held_ticks else ", never held back")
           + ("" if prog >= 1.0 else "   <- THE MOVE DID NOT FINISH"))
     print(f"[steps] STEP{num:2d} sigma_min L={sigma_min('L'):.4f} R={sigma_min('R'):.4f}"
           f"  mast L={gap_mm(_cgl)} ({_cwl}) R={gap_mm(_cgr)} ({_cwr})"
