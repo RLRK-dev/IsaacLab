@@ -368,7 +368,23 @@ FLOOR_HALF = 6.0                        # spec §6.4j -- ground plane half exten
 FLOOR_SPACING = 0.1                     #               non-colliding, so this is what you see,
                                         #               but `size` is geometry and stays checked
 COLUMN_R = 0.102                        # spec §6.4j -- the shared column both arms stand on
-COLUMN_HZ = SHOULDER_HEIGHT / 2         # half-height, because MuJoCo cylinders take one.
+# The yoke.  Rs, 2026-07-28, watching the run: "the arm base is off the column", then "make it
+# Y-shaped like the video".  He was right that nothing was there: the column carried stem and foot
+# and the shoulders hung 298 mm away on an invisible coordinate offset, so the arms were mounted on
+# nothing and that empty space is exactly where the right forearm had been travelling.
+# ⛔ Both numbers are p5's, from bank #21, and neither is mine to move.  p5 derived them from the
+# anchors alone with no free parameter: the fork has to come down because the stem currently rises
+# to exactly shoulder height, and the branch radius is the largest that keeps the fork inside the
+# column's own silhouette, which is why it is exactly half the column radius.
+# ⚠ p5 did not answer strength: each branch is a 0.4 m cantilever, and p5 states plainly that the
+# margin is already at or below zero, so no branch exists that does not spend some of it.
+FORK_HEIGHT = 1.130                     # p5 bank #21 -- where the single mast ends
+BRANCH_R = COLUMN_R / 2                 # p5 bank #21 -- silhouette-preserving maximum
+COLUMN_HZ = FORK_HEIGHT / 2             # half-height, because MuJoCo cylinders take one.
+                                        # ⛔ Was SHOULDER_HEIGHT/2.  The stem stopped at exactly
+                                        # shoulder height, which is why a fork drawn from its top
+                                        # would have been two horizontal spars and not a Y at all.
+                                        # It ends at the fork now and the branches carry on.
                                         # The halving lives here: under the strict form a
                                         # driver cannot write /2, and this is where the
                                         # derivations are supposed to be anyway.

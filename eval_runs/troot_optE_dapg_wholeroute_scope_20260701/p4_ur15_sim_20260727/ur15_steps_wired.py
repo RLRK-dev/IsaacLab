@@ -39,7 +39,7 @@ from ur15_cell_spec import (  # noqa: E402
     ARMATURE, CABLE_N, CABLE_R, CABLE_SEG, CLAMP, CLAW_OFFSET, CLIP_BASE_HEIGHT, CLIP_COLLIDE,
     CLIP_FRICTION, CLIP_PARTS, CLIP_SOLREF, DAMP, EFFORT, GRIP_HALF_SPAN, GROOVE_CENTER_Z, HALF,
     C1, C2, CABLE_JOINT_RANGE, CELL_TIMESTEP, CLAW_RELEASE_GAP, CLIP_Y_EVEN,
-    CLIP_Y_ODD, COLUMN_R,
+    BRANCH_R, CLIP_Y_ODD, COLUMN_R, FORK_HEIGHT,
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
@@ -157,6 +157,27 @@ def clip_xml(name, cx, cy):
 {spacer}{parts}    </body>"""
 
 
+def yoke_xml():
+    """The two branches of the Y, from the top of the stem out to each shoulder.
+
+    Rs asked for this shape after seeing that the arm bases stood 298 mm clear of the column with
+    nothing between them -- the arms were mounted on an invisible coordinate offset.  ⛔ That gap is
+    where the right forearm had been travelling, so this is not scenery: it is material the arm now
+    has to go around, and every mast reading taken before it existed was a reading of a cell that
+    was missing its support.
+
+    One capsule per side, ending exactly on the shoulder the arm attaches to, so the branch meets
+    the mount rather than stopping near it.  Both numbers come from p5 (bank #21); neither is
+    derived here.
+    """
+    out = []
+    for tag, sign in SIDES.items():
+        out.append(
+            f'<geom name="yoke_{tag}" type="capsule" size="{BRANCH_R}" '
+            f'fromto="0 0 {FORK_HEIGHT} {sign * YOKE_SPREAD} 0 {SHOULDER_HEIGHT}" material="col"/>')
+    return "\n      ".join(out)
+
+
 def rest_xml(i, cx):
     """Saddle: a post with two lips so the cable is captured instead of rolling off."""
     h = REST_TOP - TABLE_TOP
@@ -218,6 +239,7 @@ world = f"""<mujoco model="ur15_steps">
     <body name="column" pos="0 0 0">
       <geom name="stem" type="cylinder" size="{COLUMN_R} {COLUMN_HZ:.4f}" pos="0 0 {COLUMN_HZ:.4f}" material="col"/>
       <geom name="foot" type="cylinder" size="{PEDESTAL_R} {PEDESTAL_HZ}" pos="0 0 {PEDESTAL_HZ}" material="col"/>
+      {yoke_xml()}
     </body>
     <body name="table" pos="0 {TABLE_Y:.3f} 0">
       <geom name="table_top" type="box" size="{TABLE_HX} {TABLE_HY} {TABLE_HZ}" pos="0 0 {TABLE_TOP-TABLE_HZ:.4f}" material="table"/>
@@ -1123,7 +1145,13 @@ def _rdes(yaw, roll=0.0):
     return (base * Rotation.from_euler("y", roll)).as_matrix()
 
 
-COLG = [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n) for n in ("stem", "foot")]
+# ⛔ The branches MUST be in this list.  column_gap and path_mast_min both walk COLG and nothing
+# else, so a yoke that is not named here is a yoke every mast instrument silently ignores -- the
+# exact failure this file already has a name for: an instrument reporting a fault to nobody.
+# p5 flagged it before I wrote the geometry; it is here because of that, not because I checked.
+COLG = [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n)
+        for n in ("stem", "foot") + tuple(f"yoke_{t}" for t in SIDES)]
+assert all(g >= 0 for g in COLG), "a mast geom name did not resolve -- an instrument would be blind"
 COLB = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "column")
 # ⛔ An exclusion stood here and its reason was wrong.  I argued that each arm's first body is a
 # child of the column body, so its geoms sit inside the mast by construction and the reading should
