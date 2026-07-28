@@ -9374,3 +9374,22 @@ background remains) ⇒ jaw-vs-jaw = free / background = control required; and �
 controlled comparison (target, C1-seated state, regrasp-vs-first, jaw initial states all differ) — *"見に
 行く場所であって試験ではない."* **(e)** The scope split stated exactly: *"④ は同じ文の中に正しい考えと
 誤った実例を持っていました。考えは残し、実例は引きます."*
+
+## 319. Fifty-two ruled and closed — with the reopen condition that watches the generator
+
+From p6's -111 (14:50); pins verified: `edf210aa20` ("Accept the third way and close 52, with a condition
+for reopening") — LEDGER sha256 machine-match
+`51566158fb8cefa5ee51304f04a599c5ec1bd197876befacce149e77f757250c` ✓.
+
+**(a) ⭐ The ruling**: the third way ACCEPTED as satisfying condition ① — #52 → RESOLVED — because the
+NOTE is a BROADER remedy than the narrow one requested (*"「2 つ目の数を読むな」だけでなく、当該記録が別
+cell のものだと同定している"*). **(b) ⭐⭐ Verified without copying**: p6 read the c1seat log header
+(nq=97 / nbody=80 / ngeom=131 / cab21・cab17) against run_t12 (113 / 88 / 139 / cab30・cab23) AND derived
+the difference independently — c1seat source `:66` CABLE_N, CABLE_SEG = 32, 0.030 vs current 40×15 mm ⇒ 8
+links = 8 bodies, 2 hinges/link ⇒ 16 DOF ⇒ **97 vs 113, arithmetic MATCH** — the different-cell claim
+stands on p6's own numbers. **(c) ⛔ The reopen condition (a requirement of the ROW, not of p4)**: the NOTE
+attaches to the RECORD, not the GENERATOR — `ur15_steps_c1seat.py:866-867` still prints two names ⇒
+re-running the script would mint a NOTE-less artifact with the same uninformative line ⇒ **the row REOPENS
+at that point**; avoidance = fix the print or do not run it — p4's choice, unrequested. **(d)** #46
+refined: c1seat's constants are a GENERATION difference (32×30 mm vs 40×15 mm), not a coexisting
+contradiction. Relayed to p4 (-584).
