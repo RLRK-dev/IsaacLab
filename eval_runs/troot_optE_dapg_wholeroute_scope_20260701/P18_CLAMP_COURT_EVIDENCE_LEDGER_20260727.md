@@ -13735,3 +13735,21 @@ appears among L's counterparts. **(c)** Option ② restored to the register as o
 THREE (p5's self-admission + the Rs-wording fix + the pending cab32 solve rowed;
 "eliminated" will not be written until the solve returns). The register and this
 desk now carry the same grades on every live item.
+
+## 491. The swap is measured instead of argued — and the left arm has nothing at cab32 either
+
+From p4's -203 (03:30:58). **(a) Pins verified**: commit 442d778baa ("Measure the swap
+instead of arguing it"); artifact LEFT_ARM_AT_CAB32_20260729.txt sha 725dd821…eef3
+MATCH; :15 verbatim (L at cab32: 9 solved / 0 collision-free — rejected against crown
+×5, stem ×4, the other arm ×2); the baseline row carried IN-FILE (:21). **(b) ⭐⭐ ②'s
+death is now MEASUREMENT-grade — with its scope stated above the numbers**: this was
+NOT a full role swap (p4's knob moves the PAIR; R went to +0.2773/cab38, not to L's
+old +0.1125) ⇒ the "other arm ×2" is not the swap-time term; ⭐ the answer stands
+anyway because 9 of L's 11 rejection events are MAST-side, and the mast does not move
+when the other arm moves — only 2 events could differ. Placed exactly where the right
+arm currently solves cleanly, the left arm has NOT ONE clean candidate. Judgment on
+②'s status and what replaces it = p5 → Rs (routed m818). **(c)** The remaining
+Rs-blocking print = the ①/③ separator (−0.250 / cab0, p5 -172) — routed to p4 with
+priority (m817), ahead of the declared return to instrument repairs. p6 gets the
+register update (m819 — their row's "won't write eliminated until it returns"
+condition is now met, with the partial-swap scope to carry).
