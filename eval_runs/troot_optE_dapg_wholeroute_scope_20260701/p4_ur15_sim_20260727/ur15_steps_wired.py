@@ -1199,7 +1199,11 @@ col_min = {t: 1e9 for t in SIDES}     # worst approach to the column over the wh
 sig_where = {t: "" for t in SIDES}
 col_where = {t: "" for t in SIDES}
 claw_min = {t: 1e9 for t in SIDES}
-sigma_trace = []   # (step, arm, t, sigma_min) at every sample -- p11's path-sigma evidence   # minimum opposing-claw gap over the whole run, per arm
+# (step, arm, t, sigma_min, dq/dx) at every sample.  ⛔ sigma_min is for RANKING and envelope
+# comparison only -- it mixes units, so no absolute threshold can live on it; the bar goes on the
+# rad/m column.  Written here as well as in the file header because a caution that travels apart
+# from its numbers does not travel.
+sigma_trace = []   # minimum opposing-claw gap over the whole run, per arm
 grasp_pose = {}                      # the STEP3 descent solution, reused verbatim at STEP4
 aim_cable = {}                       # where the cable was when the aim was computed
 aim_seat = {}                        # where the aim predicted the seat would end up
@@ -1643,6 +1647,14 @@ imageio.mimwrite(str(OUT), frames, fps=FPS, quality=8, macro_block_size=None)
 # hand p11 the path, not a summary of it
 _tr = S / "sigma_trace.txt"
 with open(_tr, "w") as _f:
+    # ⛔ WHY THE sigma_min COLUMN MUST NOT BECOME A BAR (p11 -112).  It is kept for ranking and
+    # for envelope work, where comparing two arms of identical construction is valid because the
+    # scale factors cancel.  It CANNOT carry an absolute threshold: the Jacobian block it comes
+    # from mixes radians and metres, so a number like "sigma >= 0.12" is a quantity nobody has.
+    # That is not hypothetical -- the 0.12 floor that used to sit here was above one arm's ENTIRE
+    # range, so it rejected every pose that arm could reach.  The bar belongs on the rad/m column.
+    _f.write("# sigma_min: RANKING ONLY -- mixed units, never an absolute bar.  Bar goes on"
+             " dq_per_dx_rad_per_m.\n")
     _f.write("step arm t_s sigma_min dq_per_dx_rad_per_m\n")
     for _st, _a, _t, _sv, _am in sigma_trace:
         _f.write(f"{_st} {_a} {_t:.4f} {_sv:.6f} {_am:.3f}\n")
