@@ -39,7 +39,7 @@ from ur15_cell_spec import (  # noqa: E402
     ARMATURE, CABLE_N, CABLE_R, CABLE_SEG, CLAMP, CLAW_OFFSET, CLIP_BASE_HEIGHT, CLIP_COLLIDE,
     CLIP_FRICTION, CLIP_PARTS, CLIP_SOLREF, DAMP, EFFORT, GRIP_HALF_SPAN, GROOVE_CENTER_Z, HALF,
     C1, C2, CABLE_JOINT_RANGE, CELL_TIMESTEP, CLAW_RELEASE_GAP, CLIP_Y_EVEN,
-    CLIP_Y_ODD, COLUMN_R, COLUMN_STEM_BOTTOM, CROWN_R, CROWN_ZC,
+    CLIP_Y_ODD, COLUMN_R, COLUMN_STEM_BOTTOM, CROWN_R, CROWN_ZC, HOME_POSE,
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
@@ -1549,6 +1549,15 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     return q
 
 
+# Rs: start from home.  The cell ships one, so the arms begin in the pose its own drawings show
+# instead of at the zero configuration, which for this mounting is arms crossed.
+for _t4 in SIDES:
+    for _k4, _a4 in enumerate(QADR[_t4]):
+        d.qpos[_a4] = HOME_POSE[_k4]
+    for _k4, _i4 in enumerate(AIDX[_t4]):
+        d.ctrl[_i4] = HOME_POSE[_k4]
+mujoco.mj_forward(m, d)
+print(f"[steps] start pose = the cell's home, both arms: {np.round(HOME_POSE, 4)}")
 START = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
 for _round in range(3):
     for t in SIDES:

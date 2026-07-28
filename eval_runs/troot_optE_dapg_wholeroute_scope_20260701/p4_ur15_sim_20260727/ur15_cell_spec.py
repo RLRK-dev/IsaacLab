@@ -403,6 +403,13 @@ COLUMN_R = 0.102                        # spec §6.4j -- the shared column both 
 CROWN_R = YOKE_SPREAD / 2               # p5 bank #22 floor -- the head only has to reach the mounts
 CROWN_Z0 = 1.330                        # p5 bank #22 -- where the crown's underside sits
 CROWN_ZC = CROWN_Z0 + CROWN_R           # its axis, so the underside lands exactly on CROWN_Z0
+# The cell's own home pose, left arm, from ur15-dual-arm-cell.md.  ⭐ The right arm takes the same
+# values: it is the exact kinematic mirror and its sign convention was preserved when it was built,
+# so a joint value means the mirrored motion on that side.
+# ⛔ This is the pose the reference figure shows.  Four times I changed the MOUNTING to chase that
+# shape; the mounting was right and this was the missing part.  At zero joints the same mounting
+# crosses the arms over each other.
+HOME_POSE = (-3.1521, -0.2867, 2.4674, -1.3953, 1.5634, -1.5782)
 COLUMN_STEM_BOTTOM = 0.37               # supplied cell: the stem starts on the bellows, not the floor
 COLUMN_STEM_H = 1.16                    # supplied cell: 0.37 -> 1.53
 COLUMN_HZ = COLUMN_STEM_H / 2             # half-height, because MuJoCo cylinders take one.
