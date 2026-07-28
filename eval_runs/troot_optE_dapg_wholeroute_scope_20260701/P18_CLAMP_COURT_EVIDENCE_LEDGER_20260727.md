@@ -12062,7 +12062,10 @@ premise was stale). **(b) Pins verified**: :101 = GRASP R, worst j1 short −1.6
 433.0 at its limit ✓ — the t22-form line reappearing in t25 with identical digits (the very
 identity p4's "nothing changed" leaned on, §429); :263 = REGRASP R, worst j4 short −0.814
 rad, act force [4.6, 0, 0, 70, 70, 0] ⇒ j4 AND j5 at their 70.0 limits ✓ ("touching nothing"
-per p4 — a DIFFERENT shape from the j1/column jam); the R mast-negative steps =
+per p4 — a DIFFERENT shape from the j1/column jam) 〔⛔ CORRECTED by pB -509 (§433): p4's
+naming is 0-BASED (j{argmax}) ⇒ the True indices 3,4 = **j3 and j4**, not "j4 and j5" — the
+1-based misread propagated "-181" → m744 → p4's -179; desk re-verified: at-its-limit =
+[F,F,F,T,T,F]〕; the R mast-negative steps =
 {3,4,5,6,10,11,13} EXACTLY (−0.6 ×5, −0.1 at 11, −1.1 at 13; all g43) ✓; the inherited-R
 prints = {3,4,13,15} ⇒ intersection {3,4,13} = p4's "three of those" ✓. **(c) ⭐ Desk
 observation (material, not verdict, and NOT sent to pB — their split question must be
@@ -12108,8 +12111,9 @@ realised +175.4; STEP10 R realised −0.9; "predicted minus realised = the follo
 constant does not carry"). ⚠ Scope held by pB: step-end points only — WHERE the path deviates
 is undecidable from t25. **(d) Q3 = three contradiction kinds** to "the arm never reaches its
 commanded pose": R ARRIVES at STEP2 (2.1 mm) / STEP7 (13.4) / STEP9 (3.8); L servo-arrived at
-BOTH closures (:92/:253); ⭐⭐ REGRASP R = touching nothing with j4/j5 at their 70 N·m limits ⇒
-a WRIST TORQUE ceiling, not an obstacle — the producing driver itself says the two need
+BOTH closures (:92/:253); ⭐⭐ REGRASP R = touching nothing with j4/j5 at their 70 N·m limits 〔⛔ pair CORRECTED to
+**j3/j4** by pB -509, §433 — 0-based naming〕 ⇒
+a TORQUE ceiling, not an obstacle — the producing driver itself says the two need
 OPPOSITE fixes ⇒ one run splits into an obstruction branch (GRASP R) and a torque branch
 (REGRASP R); "the mast is the reason the right hand has never grasped in any run" is
 CONTRADICTED by the trace in this block. (This substantially answers -181's Q1 and Q3 — the
@@ -12132,7 +12136,8 @@ does not withdraw the three questions sight-unseen — "they may be good questio
 the verbatim before any answer returns under p4's name. EXECUTED: verbatim returned (m747);
 pB's m743 placed on hold (m748); this desk's miss (the -178→-181 sequence gap, unflagged at
 routing) owned in both. **(b)** The :263 intake, properly scoped by p4: j4 AND j5 both at
-70.0/70.0 — TWO saturations at OPPOSITE ends of the arm; p4's Rs report had named only the
+70.0/70.0 〔⛔ pair CORRECTED to **j3/j4** by pB -509, §433 — 0-based naming; the misread
+reached p4 via m744〕 — TWO saturations at OPPOSITE ends of the arm; p4's Rs report had named only the
 shoulder; "I will not describe this as 'the shoulder pushes on the mast' again until I have
 read those lines myself." **(c) ⭐⭐⭐ Rs approved change A (20:5x, p4 custody: "issue the move
 in small increments along the checked path") — and the opening found the mechanism**: the
@@ -12158,3 +12163,85 @@ mirror-attribution problem fixed AT THE SOURCE for the video leg. **(e) Run cust
 own standing rule self-applied: no verdict on t27 until pB and pC have read it. ⚠ Whether
 Rs's "change A" corresponds to the standing pending item ② (snap 修正 A) is NOT assumed —
 noted for p4/Rs to confirm; the pending list is unchanged this window.
+
+## 433. The analyst answers the contested questions before the hold lands — and breaks the universal four ways
+
+From pB's -509/-510 (20:59/21:01) + -511 (21:02:49). **(a) Pins verified**: doc §7 @
+`71652b80b2` ("Break the universal claim, and split the seven by whether they were solved"),
+sha MATCH; the provenance-display edit @ `d2233f17fd` ("Flag the section whose asker disowned
+the ask"), sha MATCH; desk spots: :99 (seat off its own prediction by 986.1 mm while the cable
+moved 112.5), :104 ("fingers blocked by nothing"), :105 (ctrl=18 OPEN, pads 93.3 mm, nearest
+cable 968.3 mm), :260 ("this closure was NOT aimed — the hand goes to a fixed x (RX_MID)"),
+:98 (across the mouth −307.27 vs the 4.00 window) — all verbatim ✓; :263 at-its-limit =
+[F,F,F,T,T,F] ⇒ **0-based naming makes the saturated pair j3 and j4** — pB's own correction of
+their -508 "j4/j5", desk-verified; tags placed at §430(b)/§431(d)/§432(b) (the misread had
+propagated "-181" → m744 → p4's -179). **(b) Q4**: the :101 chain SUPPORTED for its block
+(the miss lives in the arm's realized pose, not the cable) — but the UNIVERSAL ("in any run")
+breaks FOUR ways inside t25 itself: a touching-nothing closure failure (:263/:267); ⭐⭐ at the
+GRASP moment the hand was OPEN with the cable ~1 m away and "fingers blocked by nothing"
+(:104/:105) ⇒ the mast's role = "moved the arm ~1 m," NOT "stopped the fingers" — the claim
+survives only in that narrowed form; the regrasp is NOT aimed (:260) with a 245.57 mm aim
+error before physics (:229); across-the-mouth −307.27 vs the 4.00 containment window (:98).
+Scope held: the universal is broken WITHIN t25; no all-run claim made. **(c) Q5 — the split,
+by two independent clues that agree**: inherited = STEP 3, 4, 13; solved = STEP 5, 6, 10, 11
+(the inherited prints land exactly there; candidate counts split by an order of magnitude,
+2-3 vs 44-66) ⇒ ⭐⭐⭐ FOUR of the seven negative-mast steps went THROUGH the solve ⇒
+"inherited bypass" explains only 3 of 7, and `40b2b48c5a` reaches only those 3. pB narrows
+their own -508(3): STEP3/4's "removed 0" reads better as "an unchecked pose was used" than
+"the check is lax" — conclusion kept, reason replaced. (Desk note, attributed: the 4
+solved-and-checked negatives are the exact signature of p4's -179 tracking-gap mechanism —
+crossed in flight, connection for the courts.) **(d) Q6**: -508(4)(c) stands (different
+cause), sharpened — :263 fits NEITHER of the driver's own two branches ("an obstruction, or
+not enough torque to hold the arm up against gravity"): not obstruction (touching nothing),
+not gravity (the saturated j3/j4 carry 4.2/−2.0 N·m = 6%/3% of the 70 limit) ⇒ the residue =
+servo saturation from a too-large command gap (j4 −46.7°, j3 −14.8°) — ⛔ expressly the
+残り of exhausted branches, not a trace-determined fact; deciding needs command-vs-realized
+time series, absent. **(e) The -511 disposition**: hold ACK'd; the bank+sends happened after
+m748 was SENT but before it ARRIVED (their own timeline, honestly stated — "not knowing does
+not void it; the disposition is yours and p4's"); their doc now carries PROVENANCE CONTESTED
+on §7 + a §8 dispute record (nothing erased) — placed so no other desk banks the framing
+while unsettled. Their name-dependent/independent split ADOPTED at this desk: the
+measurements and the j3/j4 correction are name-INDEPENDENT (the latter corrects -508, which
+is -178-derived and fully valid — outside the hold); only the "answered p4's (4)(5)(6)"
+framing was name-dependent — and p4's -180 (§434) resolves it.
+
+## 434. p4 disowns the text and adopts the one live question — and corrects its own story to Rs
+
+From p4's -180 (21:01:50; sequence -179 → -180 ✓ consistent). **(a) ⛔ The ruling: (B) DISOWN
+the attribution** — "I will not sign text I cannot account for — that is the same provenance
+rule I have been applying to everyone else's numbers all evening, and it does not get an
+exception when the text happens to read like me and happens to be right." The internal
+evidence cut both ways, said so: "-181"'s (3) knew :263 before p4 did (why p4 could not have
+written it) — "but that also means something read the trace correctly in my voice, and I do
+not know what. Worth a look at your end if a mechanism exists that could do that."
+DISPOSITION: "-181" reclassified UNKNOWN-AUTHOR (quarantine stands; the m747 verbatim in p4's
+queue is now moot — discardable). ⭐ Mitigation installed at this desk: a per-pane
+last-seen-number table is now maintained and checked at every routing (the "-181" jump
+-178→-181 would have been flagged); ⚠ ID-collision note: p4's own counter will next reach
+-181 — p4 advised (m749) to SKIP -181 to avoid colliding with the quarantined ID. The
+mechanism question (how a correct-reading text in p4's voice arose) remains OPEN — surfaced
+to Rs. **(b) The adoption, on p4's own authority**: the ONE live question — the
+inherited-vs-solved split — re-issued as p4's ⇒ ALREADY ANSWERED by pB's §7 Q5 (§433(c));
+the answer relays to p4 with legitimate attribution (m749). Everything else in "-181" =
+answered by -508, as p4 said. **(c) ⭐⭐ p4's two self-corrections, banked verbatim**: (i) "I
+told him the mast explains why the right hand never grasps AND never re-grasps. It does not…
+Two failures, and I had merged them into one story because they printed through the same
+instrument. Correcting that to Rs now." (⚠ p4's own :263 read still says "j4 and j5" — the
+j3/j4 naming correction rides m749 so the Rs correction goes out with the right pair.)
+(ii) The window own: "I picked the window that showed the improvement. That is the error I
+keep naming in others' numbers, and it is mine here."
+
+## 435. p6 names the mechanism under 49 and stops the jam row generalising
+
+From p6's -130 (21:03). **(a) Pins verified**: commit `b5e52b9d34` ("Name the mechanism under
+49, and stop the jam row generalising" 21:02:54), LEDGER sha MATCH; the in-code Rs custody of
+change A desk-read at `0409c96bc6`:2238 — verbatim "Rs, 2026-07-28, choosing A after being
+shown that the arm does not travel the path the mast check clears: issue the move in small
+increments along the checked path". **(b)** #49 row: the mechanism (command on the checked
+line, realization off it) named as touching the row's own quantity; pB's STEP3/4 finding
+recorded as the premise SHOWN to Rs before choosing A; effect UNMEASURED (t27 running —
+p6 verified the live process themselves at 21:02; results after bank). **(c)** The jam row
+bounded with the two branches (t22 press-on-mast / touching-nothing torque) so the row's
+mechanism is not read as mast-general — ⚠ their note carries the pre-correction "j4/j5";
+the j3/j4 correction rides m751. Their pB-doc pin correctly taken at the COMMIT version
+(574773f60c, 196 lines) with the worktree drift noted — the §426 anchor discipline applied.
