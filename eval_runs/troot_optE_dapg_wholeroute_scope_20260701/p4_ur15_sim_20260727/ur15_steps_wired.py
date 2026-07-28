@@ -2235,8 +2235,33 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     touched_early = set()   # arms that hit the cable before the fingers were allowed to move
     touched_any = set()     # and arms that touch it at all during this step
     opened_at = 0
+    # Rs, 2026-07-28, choosing A after being shown that the arm does not travel the path the mast
+    # check clears: issue the move in small increments along the checked path.
+    #
+    # ⭐ The increments were already here -- the cosine below has always walked the command along
+    # the straight joint-space line from q_from to w, which is the same line path_mast_min samples.
+    # What was missing is that nothing required the ARM to keep up with it.  The command marched on
+    # regardless, so when joint 1 fell behind under load the realised configuration was one where
+    # some joints had arrived and one had not, and that configuration is not on the line at all.
+    # It is how a cleared path produced a forearm 0.6 mm inside the mast.
+    #
+    # So the command advances only while the arm is actually tracking it.  The bound is SETTLE_TOL,
+    # already the file's answer to "is this joint where it was told to be" -- the same test the
+    # fingers wait on, for the same reason -- rather than a second number invented here.
+    # ⚠ If the arm cannot track, progress stops instead of the command running away, and the step
+    # ends short.  That is reported below, not swallowed: a move that did not finish must not read
+    # like one that did.
+    prog, dprog = 0.0, 1.0 / max(1, ramp)
+    # ⛔ NOT `held`: that name is already a function in this file, and the step summary calls it.
+    held_ticks = 0
     for s_ in range(steps):
-        f = 0.5 - 0.5 * math.cos(math.pi * min(1.0, s_ / ramp))  # smooth start and stop
+        _lag = max(float(np.abs(np.array([d.qpos[a] for a in QADR[t2]]) - qcmd[t2]).max())
+                   for t2 in SIDES)
+        if _lag < SETTLE_TOL:
+            prog = min(1.0, prog + dprog)
+        else:
+            held_ticks += 1
+        f = 0.5 - 0.5 * math.cos(math.pi * prog)      # smooth start and stop
         # ⛔ EVERY step, not only the grasp.  I first put this inside `if not gate_open:`, which
         # is False for every step whose gate is not "grasp" -- so the check that exists to watch
         # the DESCENT never ran on the descent, and its silence proved nothing.  Same defect as
@@ -2259,7 +2284,10 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             # is reported HERE, at the step that does it.
             resid = max(float(np.abs(np.array([d.qpos[a] for a in QADR[t2]]) - w[t2]).max())
                         for t2 in SIDES)
-            if s_ > ramp and resid < SETTLE_TOL:
+            # ⛔ Was "s_ > ramp": with the command gated on the arm keeping up, the ramp no longer
+            # finishes at a fixed step count, so a clock reading cannot say the move is done.
+            # The move is done when the command has reached the far end of the line.
+            if prog >= 1.0 and resid < SETTLE_TOL:
                 gate_open, opened_at = True, s_
                 print(f"[steps] STEP{num}: arms settled to {resid*1000:.2f} mrad at "
                       f"t={s_*m.opt.timestep:.2f}s into the step -- fingers may close")
@@ -2397,6 +2425,13 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     _cgl, _cwl = column_gap("L", want_who=True)
     _cgr, _cwr = column_gap("R", want_who=True)
     _inside = [v for v in (_cgl, _cgr) if v is not None and v < 0]
+    # ⛔ Loud when the move did not finish.  The command is now gated on the arm tracking it, so a
+    # step can end with the command part-way along the line -- and a part-finished move that
+    # printed like a finished one would be the worst of both changes.
+    print(f"[steps] STEP{num:2d} COMMAND: reached {prog*100:5.1f}% of the way to the solved pose"
+          + (f", held back on {held_ticks} of {steps} ticks because the arm was more than "
+             f"{SETTLE_TOL*1000:.1f} mrad behind" if held_ticks else ", never held back")
+          + ("" if prog >= 1.0 else "   <- THE MOVE DID NOT FINISH"))
     print(f"[steps] STEP{num:2d} sigma_min L={sigma_min('L'):.4f} R={sigma_min('R'):.4f}"
           f"  mast L={gap_mm(_cgl)} ({_cwl}) R={gap_mm(_cgr)} ({_cwr})"
           f"{'   <- INSIDE THE MAST' if _inside else ''}")
