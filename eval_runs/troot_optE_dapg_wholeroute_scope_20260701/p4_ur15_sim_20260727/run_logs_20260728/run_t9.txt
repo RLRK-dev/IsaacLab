@@ -1,0 +1,122 @@
+[cell] cable bend EI in force: 0.005 N.m^2 from task_config.py:144
+[cell] -> joint stiffness 0.33333 N.m/rad over a 15 mm link
+[cell] cable 40 x 15 mm, 1.1243 g each, 44.97 g total
+[cell] clip collision read from the env source: True
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:267: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  m = cell.compile()
+[steps] nq=113 nu=14 nbody=88 ngeom=139 eq=8  seat links C1=cab30 C2=cab23
+[steps] geoms: 139 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.300,+0.285] y[+0.280,+0.280] z-table[+0.1486,+0.1559] ncon=13
+[steps] measured grasp: L=cab27 [0.1125 0.28   0.9486]  R=cab32 [0.1875 0.28   0.9509]  drop across the span = 2.3 mm
+[steps] start-pose IK L: 8 solved / 4 collision-free / 4 away from a singularity, chosen pos  0.00 mm roll 20.1 deg sigma_min 0.0504 |q|max=1.27 rad
+[steps] start-pose IK R: 13 solved / 3 collision-free / 3 away from a singularity, chosen pos  0.00 mm roll 34.4 deg sigma_min 0.2368 |q|max=3.06 rad
+[steps] measured pinch->mouth drop: L -42.6 mm  R -37.4 mm
+[steps] Tier A cross-check: 0 measurable values (CLAW_OFFSET excluded -- the cell measures pinch->mouth, which is a different vector)
+[steps] STEP1 L arm touching: clear
+[steps] STEP1 R arm touching: clear
+[steps] re-measured after the approach: L=cab26 [0.0986 0.28   0.9488]  R=cab32 [0.1886 0.28   0.951 ]
+[steps] STEP1 L: tool err=   2.1mm
+          joint err   = [-0.  0. -0. -0. -0.  0.] mrad
+          act force   = [ 0.  0.  0.  0.  0. -0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [ -61.6 -101.5  -14.4    4.5   -1.1    0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] STEP1 R: tool err=   2.1mm
+          joint err   = [-0.  0.  0. -0.  0.  0.] mrad
+          act force   = [ 0.  0.  0.  0. -0. -0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [82.6 29.7 -8.8  0.1  1.5 -0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] release opening solved from the asset: ctrl 189.3 (claw tips reach 11.00 mm = cable 8.0 plus the 3.00 mm the cable can sit off centre)
+[steps] aim L: yaw +0.30 roll +0.20 rad (+11 deg tilt), seat error 2.72 mm   <- nothing seated it; best effort
+[steps] aim R: yaw +0.00 roll +0.55 rad (+32 deg tilt), seat error 1.50 mm
+[steps] STEP 2 sigma_min L=0.0871 R=0.2403  column gap L= +112.3 R= +180.2 mm
+[steps] STEP 2 ARM REACH: L  19.7 mm below the mouth (Lg_left_pad_f1ext) | R  40.2 mm below the mouth (geom57)
+[steps] STEP 2 CARRY: L mouth[+0.097 +0.282 +0.197] holds cab26 at ( -5.6, -1.6,-47.8) mm | R mouth[+0.189 +0.268 +0.202] holds cab33 at ( +7.5,+11.7,-50.5) mm
+[steps] STEP 2 C1 SEAT: nearest point ON THE CABLE (cab29 at 0.68) misses the groove centre by (  -3.7, -70.0,+140.3) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 2 C1 GATE: cab30 at [+0.151 +0.280 +0.149] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 2 C2 GATE: cab23 at [+0.046 +0.280 +0.150] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 2 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 2 cable上空へ     t=  2.2s L=   2.1mm R=   2.1mm c1[y+0.280 z+0.149] c2[y+0.280 z+0.150] pin=--/-- grip=--
+[steps] STEP3 L: standoff re-aim (y,z only), seat error  0.52 mm
+[steps] STEP3 R: standoff re-aim (y,z only), seat error  5.91 mm
+[steps] STEP 3 sigma_min L=0.0574 R=0.2004  column gap L=  +95.6 R= +188.9 mm
+[steps] STEP 3 ARM REACH: L  19.6 mm below the mouth (Lg_left_pad_f1ext) | R  36.4 mm below the mouth (geom57)
+[steps] STEP 3 CARRY: L mouth[+0.093 +0.272 +0.154] holds cab26 at ( -1.9, +8.3, -5.3) mm | R mouth[+0.190 +0.280 +0.160] holds cab33 at ( +6.2, -0.1, -8.2) mm
+[steps] STEP 3 C1 SEAT: nearest point ON THE CABLE (cab29 at 0.68) misses the groove centre by (  -3.7, -70.0,+140.3) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 3 C1 GATE: cab30 at [+0.151 +0.280 +0.149] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 3 C2 GATE: cab23 at [+0.046 +0.280 +0.150] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 3 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 3 cableへ下降     t=  6.7s L=  15.0mm R=   9.3mm c1[y+0.280 z+0.149] c2[y+0.280 z+0.150] pin=--/-- grip=--
+[steps] STEP4 L: holding the seated pose, fingers only
+[steps] STEP4 R: holding the seated pose, fingers only
+[steps] GRASP L: cable centreline is 15.12 mm from the seat (perpendicular, interpolated on cab26 at 0.26 along it)
+[steps] GRASP L: in the jaw's own axes: along cable  +4.01  closing -12.29  across the mouth  +7.83 mm (containment wants |across| < 3.00, derived from the asset; the along-cable term does not affect it)
+[steps] GRASP L: seat vs its own PREDICTION [ -4.1 -14.4   5.4] mm (| 15.9|)  cable vs where it was aimed [-3.6  0.   0. ] mm (|  3.6|)
+[steps] GRASP L: joints vs commanded [ 2.2 10.9  8.3 -0.  -0.  -0. ] mrad -> servo did not arrive; nearest link is   3.6 mm from where the aimed link was (identity may differ -- not a drift)
+[steps] GRASP L: pad faces +79.89 mm (design target 4.00 on a O8 cable, task_config.py:277), opposing claws +69.87 mm, claw min over the run +69.87 mm
+[steps] GRASP L: cable touched by pad1 none / claws none / pad2-only none   clamped=False (needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had closed through the cable)
+[steps] GRASP L: fingers blocked by nothing
+[steps] GRASP L: nearest cable link cab26 at  39.5 mm from the pinch, pad separation  93.3 mm, ctrl=18, pad geoms touching cable = none
+[steps] GRASP R: cable centreline is 18.63 mm from the seat (perpendicular, interpolated on cab32 at 0.63 along it)
+[steps] GRASP R: in the jaw's own axes: along cable  +0.68  closing  +9.83  across the mouth +15.82 mm (containment wants |across| < 3.00, derived from the asset; the along-cable term does not affect it)
+[steps] GRASP R: seat vs its own PREDICTION [ 1.2 10.8  9.9] mm (| 14.7|)  cable vs where it was aimed [2.  0.  0.1] mm (|  2.0|)
+[steps] GRASP R: joints vs commanded [ 2.4  9.4  4.   4.5 -0.  -0. ] mrad -> servo did not arrive; nearest link is   2.0 mm from where the aimed link was (identity may differ -- not a drift)
+[steps] GRASP R: pad faces +79.89 mm (design target 4.00 on a O8 cable, task_config.py:277), opposing claws +69.87 mm, claw min over the run +69.87 mm
+[steps] GRASP R: cable touched by pad1 none / claws none / pad2-only none   clamped=False (needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had closed through the cable)
+[steps] GRASP R: fingers blocked by nothing
+[steps] GRASP R: nearest cable link cab33 at  39.8 mm from the pinch, pad separation  93.3 mm, ctrl=18, pad geoms touching cable = none
+[steps] STEP 4 sigma_min L=0.0575 R=0.2004  column gap L=  +95.6 R= +188.9 mm
+[steps] STEP 4 ARM REACH: L  19.6 mm below the mouth (Lg_left_pad_f1ext) | R  36.4 mm below the mouth (geom57)
+[steps] STEP 4 CARRY: L mouth[+0.093 +0.272 +0.154] holds cab26 at ( -1.8, +8.3, -5.3) mm | R mouth[+0.190 +0.280 +0.160] holds cab33 at ( +6.1, -0.1, -8.3) mm
+[steps] STEP 4 C1 SEAT: nearest point ON THE CABLE (cab29 at 0.68) misses the groove centre by (  -3.7, -70.0,+140.3) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 4 C1 GATE: cab30 at [+0.151 +0.280 +0.149] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 4 C2 GATE: cab23 at [+0.046 +0.280 +0.150] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 4 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 4 cable把持      t= 11.2s L=  14.9mm R=   9.2mm c1[y+0.280 z+0.149] c2[y+0.280 z+0.150] pin=--/-- grip=--
+[steps] STEP5 R: arm in contact with the cable at t=0.48s -- ['cab31']
+[steps] STEP5 L: arm in contact with the cable at t=0.63s -- ['cab27']
+[steps] STEP 5 sigma_min L=0.0776 R=0.2376  column gap L= +101.8 R= +193.3 mm
+[steps] STEP 5 ARM REACH: L  12.6 mm below the mouth (Lg_left_pad_f1ext) | R  30.1 mm below the mouth (geom42)
+[steps] STEP 5 CARRY: L mouth[+0.097 +0.289 +0.185] holds cab26 at ( -1.4, -0.1, -0.3) mm | R mouth[+0.189 +0.255 +0.192] holds cab33 at ( +2.2, -0.3, -0.4) mm
+[steps] STEP 5 C1 SEAT: nearest point ON THE CABLE (cab26 at 0.69) misses the groove centre by ( -44.2, -60.8,+178.8) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 5 C1 GATE: cab30 at [+0.150 +0.271 +0.197] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 5 C2 GATE: cab23 at [+0.052 +0.285 +0.174] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 5 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 5 持ち上げ         t= 13.2s L=  13.5mm R=  13.3mm c1[y+0.271 z+0.197] c2[y+0.285 z+0.174] pin=--/-- grip=LR
+[steps] STEP6 L: arm in contact with the cable at t=0.00s -- ['cab25', 'cab26', 'cab27']
+[steps] STEP6 R: arm in contact with the cable at t=0.00s -- ['cab31', 'cab32', 'cab33']
+[steps] STEP 6 sigma_min L=0.0769 R=0.1945  column gap L= +165.7 R= +256.3 mm
+[steps] STEP 6 ARM REACH: L  12.6 mm below the mouth (Lg_left_pad_f1ext) | R  16.8 mm below the mouth (geom57)
+[steps] STEP 6 CARRY: L mouth[+0.110 +0.358 +0.136] holds cab27 at ( +2.0, -1.7, +2.7) mm | R mouth[+0.191 +0.329 +0.140] holds cab33 at ( +6.3, -0.5, +0.9) mm
+[steps] STEP 6 C1 SEAT: nearest point ON THE CABLE (cab28 at 1.00) misses the groove centre by ( -10.8,  -7.1,+130.0) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 6 C1 GATE: cab30 at [+0.153 +0.338 +0.140] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 6 C2 GATE: cab23 at [+0.055 +0.365 +0.143] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 6 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 6 C1上空へ搬送      t= 16.0s L=  13.5mm R=  13.4mm c1[y+0.338 z+0.140] c2[y+0.365 z+0.143] pin=--/-- grip=LR
+[steps] STEP 7 L: aiming the CABLE at the C1 floor (pinch->mouth [  1.3   2.3 -44.4], mouth->cable [2.8 5.1 2.8] mm; rest height 9.0 mm above the table; the old constant said [0,0,+20.9])
+[steps] STEP 7 R: aiming the CABLE at the C1 floor (pinch->mouth [ -1.   -6.4 -39.8], mouth->cable [ -2.2 -14.6   1. ] mm; rest height 9.0 mm above the table; the old constant said [0,0,+20.9])
+[steps] STEP7 L: arm in contact with the cable at t=0.00s -- ['cab25', 'cab26', 'cab27']
+[steps] STEP7 R: arm in contact with the cable at t=0.00s -- ['cab31', 'cab32', 'cab33']
+[steps] STEP 7 sigma_min L=0.0806 R=0.2244  column gap L= +193.1 R= +387.4 mm
+[steps] STEP 7 ARM REACH: L   9.7 mm below the mouth (Lg_left_pad_f1ext) | R  21.9 mm below the mouth (geom71)
+[steps] STEP 7 CARRY: L mouth[+0.102 +0.344 +0.009] holds cab39 at (+3607.5,+8651.2,-19762.7) mm | R mouth[+0.890 +0.485 -0.378] holds cab39 at (+2819.4,+8510.2,-19375.1) mm
+[steps] STEP 7 C1 SEAT: nearest point ON THE CABLE (cab39 at 1.00) misses the groove centre by (+3561.1,+8634.8,-19751.6) mm (gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)
+[steps] STEP 7 C1 GATE: cab30 at [+3.694 +9.089 -19.849] -> fails on x,y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 7 C2 GATE: cab23 at [+3.679 +9.161 -19.924] -> fails on x,y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 7 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 7 C1へ押し込み      t= 18.8s L=   9.3mm R= 790.9mm c1[y+9.089 z-19.849] c2[y+9.161 z-19.924] pin=--/-- grip=--
+[steps] STEP 8 L: aiming the CABLE at the C1 floor (pinch->mouth [ -0.    0.  -38.1], mouth->cable [  3609.4   8640.8 -19752.1] mm; rest height 9.0 mm above the table; the old constant said [0,0,+20.9])
+[steps] STEP 8 R: aiming the CABLE at the C1 floor (pinch->mouth [ -0.3  -0.1 -35. ], mouth->cable [  2846.8   8494.4 -19364.5] mm; rest height 9.0 mm above the table; the old constant said [0,0,+20.9])
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py", line 1453, in <module>
+    w[t] = solve_ik(t, tgt[t], tries=44, iters=260, seed=num * 10 + (t == "R"),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py", line 1044, in solve_ik
+    raise RuntimeError(f"no IK solution for {t} at {tgt}")
+RuntimeError: no IK solution for L at [-3.50333798 -8.29085505 20.59916309]
