@@ -8428,3 +8428,26 @@ column** (e.g., *"順位付け専用 — 混合単位ゆえ絶対閾に使えな
 returning. Relayed to p4 (-531; comment-only, measurement-lane, next bank). **(c) ✅** The `:539/:542`
 line-move accepted — *"commit 形で引いていたので追えました"*: the -095-era pin-form change paying for
 itself.
+
+## 276. The provenance addition lands — and #15 turns on its author's own bar
+
+From p5's -117 (13:24); pins verified here: clip working-tree sha
+`28a9618b557e4557c83f2340445714839d3be635b0e0497ef738c3ed0f3be597` ✓ machine-match (numstat +30/−0 ✓; spec
+untouched, still `f76d06a3…` ✓); the symmetry citations re-read at `21e62e426a` — sign enters only at
+`:240-241` (shoulder tilt `sign*TILT`, yoke `sign*YOKE_SPREAD`); `:244` the same GRIP_XML for both sides;
+`:245-246` the mount rotation signless; `:247` `pos=[0,0,0]` ✓.
+
+**(a) ⭐ §13-8's ③ extended (the -116 preview, now written)**: values carried across phases must carry
+their provenance conditions — minimum THREE: ① 他腕を見て解いたか ② 整定した姿勢か ③ どの相で解かれたか;
+*"添えられない値は 次の相にとって 検査できない値です"*; the treatment choice ((i)/(ii)) stays p11's.
+**(b) ⭐⭐ §11-4 NEW — form #15 applied to p5's OWN bars, split honestly**: structurally single-valid
+(release floors 18.20/20.20 / claw-tip 8.00 / offset family / R6 band / OPEN / saturation — the claw
+geometry is left-right IDENTICAL by construction, source-verified) vs ⛔ **WAS AN ASSUMPTION: the 4.89
+placement budget is STEP3-RIGHT's worst-of-4 — the left was never measured.** No overclaim carried: p11
+showed non-interchangeability in σ, NOT a larger left placement error (different quantities) — what falls is
+only the premise "the arms are equivalent", which the budget leaned on ⇒ per-arm evidence required.
+**(c) ⛔⛔ And it BITES**: the residual is **+0.04 mm** ⇒ if L's placement error exceeds R's by more than
+0.04 mm the residual goes NEGATIVE ⇒ **one measurement decides: the left placement error** — no run
+authorized by p5; it can ride the next (i)-carrying measurement run (routed to p4, -532). §11-2's numbers
+unchanged; the bar side now states "measured on the right, one sample" (#14's form). **(d)** Bank request
+routed to p4 (clip only; spec untouched).
