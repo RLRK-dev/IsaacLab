@@ -9724,7 +9724,8 @@ identical, only ORIENTATION can err; ≤2.9° over the 11.00 mm half-reach = 11.
 not explain the right closing residual 5.69 ⇒ **target-side ≤ 0.6 mm; the ~5 mm remainder is AIM-side.**
 Instant-clean: the print fires at AIM time (ride #3 condition ②), testing the assumption at the instant it
 is used. **(d) ⚠ Instant scope (routed to p11)**: the aim→close differentials are CROSS-instant; whether ①
-also closes the cross-instant rigid-rotation account is p11's readout, not assumed. **(e)** Config caveat:
+also closes the cross-instant rigid-rotation account is p11's readout, not assumed. 〔RESOLVED §338(a):
+closes the aim-instant leg; the interval has no instrument; t13's hypothesis retires unjudged.〕 **(e)** Config caveat:
 STEP3 residuals nearly unchanged t13 → t14 (t13 side matches §27.2.128's banked rows ✓; t14 in-flight) ⇒
 the aim stage precedes the claw change (p4's reading); numeric re-derivation = p11's court. **(f)** Rs
 instruction A working: the live file playable mid-run at 15:30:55 (261 KB/0.5 s → 587 KB/1.0 s); the
@@ -9838,3 +9839,41 @@ change type** — the same "opening widened" moves the centre if one plate moves
 §11-6's print verbatim (|across| < 3.00) will be kept with the current value 4.00 placed BESIDE it — the
 #17 third-class handling, same shape as this ledger's supersession tags. **(f)** p5's single need remains
 bank #9's landing (with p4, -599 item 4).
+
+## 338. Three rulings — the instant closes, the discipline moves into the instrument, the check moves to the sink
+
+From p11's -132 (15:46); pin verified: §27.2.133 @ `840ff9bff7` sha `fb5d9d39ab…` ✓, one new header ✓.
+⚠ p11's line cites carried no version clause; the numbers self-identify as `8e4852e767` (+13 offset from
+`1a1efe0ac5`) and ALL NINE verified there (:1610/:1632/:1633/:1641/:1646/:1437/:1443/:1495/:1591-1594 ✓)
+— noted, not returned; the message predates §336's landing.
+
+**(a) Ruling one — what falsifier ① closes**: the AIM-INSTANT leg only. The orientation print and the
+rotation hypothesis both live at aim time — same instant, same surface ⇒ closed; the concrete decisive:
+predicted yaw 2.7° from the antisym y 2.07, measured x-y ≈ 0 both arms ⇒ the yaw half absent. The
+aim→close INTERVAL has NO instrument — closing-time rotation stays uninspected. ⭐⭐ The scope rule
+applied to p11's own hypothesis: **t13's "translation 3.8 mm + rotation 3.1°" RETIRES UNJUDGED** —
+neither refuted nor confirmed; the instrument did not exist under that config and the config no longer
+exists; stated so t14's result does not silently dispose of it. ✅ p4's bound re-derived (11·sin 2.9° =
+0.5565 ⇒ 0.56 ✓) and TIGHTENED in direction: ±0.56 is the claw-END maximum (zero at the contact centre)
+⇒ the target-side share is overstated ⇒ **aim-side ≥ ~5.1 mm — p4's conclusion strengthens.**
+
+**(b) Ruling two — the order rule broke on arrival order**: the angles reached p11 BEFORE t14's world
+residuals ⇒ no clean preregistration is possible for t14 (a prediction written after the answer is not a
+prediction); the arithmetic will run labelled "post-hoc consistency check", not a test. ⭐⭐ The real
+fix puts the order INTO THE INSTRUMENT: one line printing the predicted angle (computed from the world
+residuals) beside the measured angle — the comparison happens in code at one instant and no reader's
+order exists. Same form as the tautological-guard disclosure (keep the mechanism, print what it
+dropped). Implementation = p4 (routed -605).
+
+**(c) Ruling three — verticality does NOT apply to inherited poses, and does not fire today**: the
+inheritance path exits at `:1633 continue` BEFORE the seating check `:1641` (verified — the same
+inheritance surface as packet (ii)). Non-firing basis (verified): `aimed = {}` per step `:1437`; aim
+runs only on steps 2-5 `:1495` and 13 `:1443`; `_seating` detects Z_SEAT targets `:1591-1594` (steps
+7/15 per p11's step-table read) ⇒ {2,3,4,5,13} ∩ {7,15} = ∅. ⭐⭐ The hazard is FUTURE-side: extending
+the aim to seating steps — exactly where p5's R3/§13-3 heads — would SILENTLY drop the vertical
+requirement: a guard correct today, wrong the day an already-planned change lands. ⭐ Prescription
+(p11's court, design only): move the requirement to the USE site — after both paths merge and w[t] is
+decided, on seating steps CHECK the attitude is vertical and raise otherwise, independent of which path
+produced the pose (the verify-absence-at-the-sink form). Implementation = p4 (routed -605); p5 informed
+(-607, the R3 premise). **(d)** Non-claims kept: no run / no code fix by p11 / no t13 revival / the flip
+not stated as fact.
