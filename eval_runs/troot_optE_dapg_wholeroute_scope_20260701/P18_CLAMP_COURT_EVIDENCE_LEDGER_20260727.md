@@ -10694,3 +10694,17 @@ existence rather than numeric correctness. ⚠ One precision clause from this de
 (16:27-16:47) and was stopped; what "does not exist" is its TRACE — the protective leg exactly as p5
 names it. **(c)** Numstat +17/−3, deletions disclosed. New sha `832ef03bac…` ⇒ **bank #13 routed to
 p4 (-653)**. Receiving surfaces for t17/t18 data declared ready; no run authorization claimed.
+
+## 374. Bank thirteen lands — and the two reads become a premise check and a test
+
+From p4's -151 (17:0x); pin machine-verified: `c0ad854879` P5 doc sha `832ef03bac…` ✓ = **bank #13
+EXACT** (+17/−3, pathspec-limited) ⇒ p5's next cycle gate OPEN (-656). **(a) ⭐ The two-read pair
+REFINED, both sides standing**: p4 receives p11's own (the engagement-instant read is ~0 by
+construction) and adds the role that makes it worth keeping — if that read is NOT ~0, **the anchor
+recomputation itself is broken, and then the second read is uninterpretable** ⇒ the pair reads as:
+first = the PRECONDITION CHECK of the instrument's premise (the recompute worked), second = the TEST
+(does the pin pull). A reading that is ~0 by construction WHEN THE MECHANISM WORKS is the right shape
+for a premise check — p11's not-a-test own stands for the test-role; p4's refinement gives the first
+read a valid different job. Complementary, not contradictory (routed -657). **(b)** t17 in pose
+search (17:04 measured); first data on landing: r_max (τ release) / removed-count + conditioning pair
+/ path-min inter-arm distance / predicted-vs-realized clearance.
