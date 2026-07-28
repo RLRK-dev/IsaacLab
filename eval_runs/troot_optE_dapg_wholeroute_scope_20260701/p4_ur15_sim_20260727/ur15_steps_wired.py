@@ -1480,8 +1480,9 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                   f"- aim residual {abs(mag)*1000:5.2f} - claw half {_claw_half:5.2f} x sin(tilt "
                   f"{np.degrees(_tilt):4.1f} deg) -> {'clears' if _margin > 0 else 'DOES NOT CLEAR'}")
     if num in (2, 3, 4, 5):   # grasp steps: aim at where the cable IS, right now
-        cl, _ = cable_at(GL[0])
-        cr, _ = cable_at(GR[0])
+        cl, _icl = cable_at(GL[0])
+        cr, _icr = cable_at(GR[0])
+        _aim_link = {"L": _icl, "R": _icr}
         if num == 2:
             got = aim_both(cl, cr, prev, seed=30)
             for t, c in (("L", cl), ("R", cr)):
@@ -1538,6 +1539,34 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 print(f"[steps] STEP3 {t}: closing axis in world "
                       f"[{_ax[1][0]:+.3f} {_ax[1][1]:+.3f} {_ax[1][2]:+.3f}]  "
                       f"across-mouth axis [{_ax[2][0]:+.3f} {_ax[2][1]:+.3f} {_ax[2][2]:+.3f}]")
+                # p11 -126(5) / -127(2): compare what the aim assumed about the target against the
+                # target itself, so the comparison does not have to be inferred from two arms.
+                # Its three conditions, and how each is met here:
+                #   same frame   -- both sides are world, printed as world.
+                #   same instant -- `c` came from cable_at a few lines up, on this same d, and
+                #                   nothing has stepped since; aim_slot_at and slot_after_close
+                #                   both work on throwaway copies.
+                #   the assumed side is the variable the aim USED -- `c` is passed verbatim, the
+                #                   same object handed to aim_slot_at.  Nothing is recomputed.
+                # The point is not the informative half: cable_at returns the link centre, so the
+                # aim's point IS the link's point by construction and the two must agree.  What the
+                # aim has no value for is the DIRECTION -- it holds x fixed and re-aims y and z, so
+                # it treats the cable as lying along world x.  If the cable has turned, that shows
+                # up here and nowhere else in this print.
+                _lk = CAB[_aim_link[t]]
+                _dir = np.array(d.xmat[_lk]).reshape(3, 3)[:, 0]
+                _turn = math.degrees(math.acos(min(1.0, abs(float(_dir[0])))))
+                _neigh = []
+                for _o in (-1, 1):
+                    _j = _aim_link[t] + _o
+                    if 0 <= _j < len(CAB):
+                        _nd = np.array(d.xmat[CAB[_j]]).reshape(3, 3)[:, 0]
+                        _neigh.append(f"cab{_j} {math.degrees(math.acos(min(1.0, abs(float(_nd[0]))))):4.1f}")
+                print(f"[steps] STEP3 {t}: the aim ASSUMED the cable at [{c[0]:+.4f} {c[1]:+.4f} "
+                      f"{c[2]:+.4f}] running along world x (x held, y and z re-aimed); "
+                      f"cab{_aim_link[t]} ACTUALLY runs [{_dir[0]:+.3f} {_dir[1]:+.3f} "
+                      f"{_dir[2]:+.3f}] = {_turn:4.1f} deg off that axis "
+                      f"(neighbours: {', '.join(_neigh) or 'none'} deg)")
             elif num == 4:
                 # p5 §4: hold.  The clamp step is the fingers closing, not the arm moving.
                 aimed[t], tgt[t] = grasp_pose[t][0], grasp_pose[t][1]
