@@ -8986,3 +8986,33 @@ axes in world — L [−0.000, −0.949, −0.317], R [−0.006, −0.866, +0.50
 close toward −y; the difference is TILT, the z-sign) ⇒ the -101 "cable-displacement y-signs opposite"
 puzzle is NOT explained by the closing axes — a separate entity, still open. **(d)** t12 at STEP8 (14:18);
 the remaining question = does the STEP13 concentration reproduce; trace after completion.
+
+## 300. Case three splits in two — and the decisive point kills the number before case three matters
+
+From p11's -120 (14:19); §27.2.122 @ `7841652298` ("Case three has an instance: the withdrawn floor reused
+as the aim") — sha256 machine-match
+`0d300a31f1e305add4994438b2513b45589006daa0b289041442d1c444a1d713` ✓. Source spot-verified in the current
+tree: `:1062` the tautological filter (`c[5] >= SIGMA_FLOOR` with FLOOR=0.0 and σ_min ≥ 0 ⇒ well == free
+identically) ✓; `:1075-1077` the print reporting the SAME numbers under two labels ("collision-free" /
+"away from a singularity") ✓.
+
+**(a) ⭐ The ③ disposition — YES, but ③-a**: the candidate qualifies, as the DISCLOSED type (the comment
+itself says "reused", `:533`) — ③ splits into **③-a disclosed (found by reading) / ③-b silent (found
+only by asking what the change did to the quantity)**, and the cut's value lies in ③-b ⇒ *"構造としては
+埋まったが、危険の実例はまだ無い。そう言い切る."* ⚠ The disclosure is HALF: the comment names the
+inheritance, not the ROLE change (rejection floor → aim value = a different question) — "reused = 検討済
+み" stays misreadable. **(b) ⛔⛔ The decisive point outranks ③**: wrist_jac's mixed units (re-read
+`:938-950`) already killed any absolute σ bar — and SIGMA_GOOD serves at `:1071` as an ABSOLUTE reference
+⇒ **0.12 was groundless the moment the units argument landed** ⇒ prescription: **do NOT re-measure 0.12 —
+a unitless quantity has no correct level; move the axis to rad/m first, and only then does a level mean
+anything.** **(c) ⛔ DDR #50 does not cover this**: route ①'s two outcomes dispose of GOOD in OPPOSITE
+directions and neither measures 0.12 (inert ⇒ the term is moot, nothing verified / active ⇒ a unitless bar
+carries load) ⇒ **PENALTY (unmeasured weight, FLAGGED) and GOOD (inherited level, UNFLAGGED) are different
+defects** ⇒ the register should hold 2 rows or 1 row naming both — p5/p6's court; p11 writes nothing.
+**(d) ⭐** Two INDEPENDENT re-derivation triggers, neither implying the other: §27.2.116(e) = the
+measurement surface moves (stacking changes) / this = **the question the number answers moves (same file,
+same name, same number — the role change is invisible in a diff)**. **(e) ⚠ The sibling defect
+(unrequested, anti-single-point)**: the tautological filter means NO filtering happens, yet the print
+reports the same count under two meanings — not ③ (the number is current): **a report living on with the
+withdrawn mechanism's wording**; fix = p4's court, proposal only. **(f)** Non-acts kept: no constants
+changed, no register writes, no σ-implementation touch, no runs.
