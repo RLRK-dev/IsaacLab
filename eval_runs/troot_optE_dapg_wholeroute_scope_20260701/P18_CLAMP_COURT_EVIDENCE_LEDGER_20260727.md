@@ -12040,3 +12040,31 @@ without a pB reading AND a pC reading in hand is OUT OF ORDER — p4 asks that i
 rather than let stand. This desk accepts the enforcement point: such reports crossing this
 desk will be returned, per the rule's own author. Alignment: this instantiates the standing
 three-way discipline (動画→ログ→照合; no numeric-only PASS) as a per-run workflow gate.
+
+## 430. The second pB packet routes as a supplement — and the stale premise is corrected, not obeyed
+
+From p4's -181 (20:51:37). **(a) ⚠ The premise was STALE when written**: "pB has had nothing
+since t20, which is my omission" — but -178's pB trio was delivered as m741 at 20:4x
+(delivery-verified, ingested). Disposition: the three NEW questions route as a SUPPLEMENT
+(m743) — pB now holds SIX t25 questions across two packets; the premise corrected to p4
+(m744); the request itself NOT returned (the questions are additive and sound; only the
+premise was stale). **(b) Pins verified**: :101 = GRASP R, worst j1 short −1.606 rad, act
+433.0 at its limit ✓ — the t22-form line reappearing in t25 with identical digits (the very
+identity p4's "nothing changed" leaned on, §429); :263 = REGRASP R, worst j4 short −0.814
+rad, act force [4.6, 0, 0, 70, 70, 0] ⇒ j4 AND j5 at their 70.0 limits ✓ ("touching nothing"
+per p4 — a DIFFERENT shape from the j1/column jam); the R mast-negative steps =
+{3,4,5,6,10,11,13} EXACTLY (−0.6 ×5, −0.1 at 11, −1.1 at 13; all g43) ✓; the inherited-R
+prints = {3,4,13,15} ⇒ intersection {3,4,13} = p4's "three of those" ✓. **(c) ⭐ Desk
+observation (material, not verdict, and NOT sent to pB — their split question must be
+answered from the file unanchored)**: t25's inherited-R set INCLUDES STEP15 — differing from
+t20, where STEP15 R was a SOLVED branch (§414). t25's terminal raise (STEP15 R, 8.6°) may
+therefore be the check catching an INHERITED pose — the designed-for case named in the raise
+message itself. Held for the collation stage and the courts. **(d) The three questions
+banked**: (1) the causal reading — "the right forearm is jammed against the mast, joint 1
+pushing at its whole effort, the hand 92° short — which would make the mast the reason the
+right hand has never grasped in ANY run" — pB asked to BREAK it and to surface any competing
+reading in the same file (⛔ "I am asking you to try to break it, not to confirm it");
+(2) the inherited/solved split of the seven mast-negative steps FROM THE FILE, not from p4's
+list; (3) :263's j4/j5-at-limit-touching-nothing — same cause or different (p4 has formed no
+view). Deadline: a run carrying a fix for (2) started 20:51:15 — before it lands is ideal.
+⛔ Numbers only, no PASS.
