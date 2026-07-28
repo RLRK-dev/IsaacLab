@@ -1087,7 +1087,8 @@ def arm_pair_min(dd, ta="L", tb="R", want_who=False):
     dropped by one vectorised comparison, and only the survivors are measured properly.  The
     answer is identical to the exhaustive form; only the work is smaller.
     """
-    ga, gb = ARMG[ta], ARMG[tb]
+    # ARMG holds sets -- numpy cannot index with one, and the first run said so immediately.
+    ga, gb = np.fromiter(sorted(ARMG[ta]), int), np.fromiter(sorted(ARMG[tb]), int)
     pa = np.asarray(dd.geom_xpos)[ga]
     pb = np.asarray(dd.geom_xpos)[gb]
     ra = np.asarray(m.geom_rbound)[ga]
