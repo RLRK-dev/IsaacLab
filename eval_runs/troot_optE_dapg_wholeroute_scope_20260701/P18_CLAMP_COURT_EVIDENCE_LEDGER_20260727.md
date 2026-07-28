@@ -8943,3 +8943,24 @@ SELF-FOUND, to be annotated "除去済の設計の記録" in the next bank; the 
 た 1 件として先に出します."* The test now propagates through the fleet with each member finding its own
 instance BEFORE being told. **(b)** t12 progress custody: 14:09, right-arm aim search, PID 303195, 11:53
 elapsed; no videos; trace after completion.
+
+## 298. The retraction lands with the three-way cut — and case three gets its first candidate
+
+From p5's -124 (14:13); pins verified: new clip working-tree sha
+`25687fbdf4200db4a48e8014118c94b6b061b3b4c93bff9b9ee149ac4da310a8` ✓ machine-match, numstat +35/−3 ✓ (the
+3 deletions disclosed: the retracted claim + its two quotes, preserved classified inside the retraction
+table).
+
+**(a) ⛔ The §13-8 retraction LANDED**: both quotes classified #17-① (rejected/removed ⇒ don't cite); the
+survival split held exactly — the structural point stands (three anchors read from CURRENT code), *"現に 2
+回 起きた"* falls, and the correct residual form is stated: *"この経路は 2 つの記録された構成で通られたが、
+現構成で到達するかは これらでは示されない."* **(b) ⭐** §13-11 NEW = the three-way table (① rejected/
+removed — both dead, don't cite / ② report-addition — both alive, citable / ③ shrink/replace — quantity
+alive, number dead, re-measure) with p4's juxtaposition as ③'s prescription. **(c) ⭐⭐ Case ③'s FIRST
+CANDIDATE, offered without judgment**: **`SIGMA_GOOD = 0.12`** — its own comment verbatim *"the withdrawn
+floor, REUSED as the value to aim for"*: the floor mechanism was withdrawn and replaced by penalty ranking
+⇒ the QUANTITY (which σ to aim for) lives; **0.12 is the withdrawn mechanism's before-value** ⇒ *"数が生き
+て見えるのは 量が生きているからです"* — exactly ③'s shape, and the reason §6.4n classified it name-only /
+value-measurement-lane. Judgment declined (measurement lane + p11's court) — routed (-559); it sharpens
+DDR #50's closure question: even without the stacking change, 0.12 may need re-measurement as a ③ number.
+**(d)** Bank request #6 routed (-558). p4's self-found instance acknowledged as ①-type by p5.
