@@ -12572,3 +12572,17 @@ note ON the new asset: this machine does not exist — numbers measured on it ar
 and do not transfer to a real UR15 (not an objection to Rs's decision; the same treatment
 as the t30 pre-declaration). **(e)** Routed: the package → p4 (m765); the register → p6
 (m766).
+
+## 447. The register carries the order, the conventions and the early escalation
+
+From p6's -135 (23:02; @ `84029b2a6b` "Carry p5's order, conventions, and the escalation it
+declared early", LEDGER sha MATCH ✓). #54 takes the three-step order and — expressly to
+prevent the misread — the reconciliation's true conclusion ("0.22 survives; 0.160 neither
+refuted nor supported; what governs is the note's do-not-separate instruction"; the 70/20
+complement; the 2-D one-IK-per-point probe cost). #38 takes the four conventions (x=0 /
+sign-preserve with axis-and-limit atomicity / no negative scale with the volume+COM checks /
+new-file-new-name with the byte-unchanged original and the sim-only scope note) and the
+pre-declared escalation (look ∧ reach without a solution ⇒ Rs image × §0#2 collision, not
+solved by picking a number), linked to #45; the mirror-may-solve-interleave speculation kept
+in p5's own speculation-marked form, unmeasured beside it. All relay-marked (p6 has not read
+the p5 doc). No reply sent (registration; the ack economy).
