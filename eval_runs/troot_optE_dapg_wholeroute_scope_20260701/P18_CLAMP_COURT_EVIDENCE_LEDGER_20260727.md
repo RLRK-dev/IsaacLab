@@ -9230,7 +9230,9 @@ pair level** — said by the author of the SAME composition error (§27.2.82, ow
 SIMULTANEOUS by the table's default, not by choice**: STEP4 (and STEP14) command CLAMP, CLAMP — the two
 pushes are simultaneous and coupled through the cable ⇒ **the ORDER is a live design variable** (close one
 first, and the second push works against an already-clamped grasp); no preference claimed; step order =
-p5's court. **(e)** The determinism response: the reproduction strengthens §27.2.108's disposition
+p5's court 〔⚠ split by §316 (p5's table read, hub-verified): STEP4 = truly simultaneous (both transition);
+STEP14 = the left is CLAMP since STEP12 — only the RIGHT transitions ⇒ same command PAIR, different
+TRANSITION; the 1.82b pair coupling applies at STEP4 only〕. **(e)** The determinism response: the reproduction strengthens §27.2.108's disposition
 ("designable, not retry-reducible") 〔the "同じ 3/15" phrasing predates -127; the one-event precision
 travels in -572〕.
 
@@ -9306,3 +9308,26 @@ retirement, with deference stated. **(c) ⚠ The hub's precision on ①**: p4 wr
 but p6's condition named print-fix OR retirement; the NOTE is a THIRD way ⇒ **the closure ruling belongs
 to p6** (routed as a disposition question, -576), not to the applicant. **(d)** The control-design wait
 kept: CLAMP simultaneity = p5's court; p4 implements after instruction. t13 custody: aim search at 14:42.
+
+## 316. Step four and step fourteen are not the same case — the table read splits my own relay
+
+From p5's -128 (14:45); verified here: the STEPS table at `581ae56935` `:1212-1214` — STEP12 `CLAMP, OPEN`
+/ STEP13 `CLAMP, OPEN` / STEP14 `CLAMP, CLAMP` ✓ (the left commands CLAMP continuously from 12 ⇒ only the
+RIGHT transitions at 14); new clip sha `dcf220e4ea4eec4e30565eb177a05d16c114a523b480db933384f82a759f3160`
+✓, numstat +33/−1 ✓ (the one deleted line = the old "実証されました" sentence, disclosed).
+
+**(a) ⛔⛔ The bundling corrected — and it rode MY relay**: p11's -123(4) said STEP14 "も同様", my -575
+carried it ⇒ p5 read the table: **STEP4 = truly simultaneous (both jaws transition); STEP14 = one
+transition (the right)** — *"指令の対としては同じでも 遷移としては違う"* ⇒ the pair coupling (1.82 b)
+applies at STEP4 ONLY; STEP14 has one push and per-arm suffices. §311(d) tagged. **(b) ⭐** The pair bound
+INDEPENDENTLY re-derived (2·cos(48.4°/2) = 1.8242 — matching p11's 1.82), and the court line drawn in
+p5's own terms: **containment (R6①②) = per-jaw; displacement (R6④) = per-cable** (one cable, two coupled
+pushes) — ⛔ per-arm scalars do not add up to the pair. **(c) ⭐⭐ The connection**: ordering separates the
+two pushes IN TIME ⇒ **ordering is simultaneously a push-REDUCER and a push-MEASURER** (the same run
+satisfies p11's close-inhibited-control requirement). **(d) ⭐ §13-12 NEW (ordering)**: the live variable
+is STEP4 (14 resolved); ⛔ the current state is NOT "undecided" — *"検討されていない既定も決定です"* (the
+table already decides STEP4 simultaneous, as a default, not a design); the measurable form = STEP4
+simultaneous vs one-side-first, one run each, displacement compared. No adoption; no run authorized.
+**(e) ⚠** A replacement lesson self-owned: the §13-8 rewrite momentarily DROPPED the scope line (the three
+instruments ≠ p5's court) — caught and restored: *"numstat の削除 1 が「言い換え」なのか「消失」なのかを
+中身で見る必要があります."* **(f)** Bank request #8 routed (-578).
