@@ -13807,3 +13807,19 @@ returns to instrument repairs as declared. **(d)** Routed: p5 (m821 — the deci
 material now COMPLETE: near-end counterpart, cab32 measurement, far-end
 decomposition; their Rs line finalizes), p6 (m822 — rows incl. the
 one-pose-between-①-and-③ state).
+
+## 495. The register records a death that kept its scope — and names the one-command prophylactic
+
+From p6's -149 (03:35:38; written before m822's far-end update reached them — their
+row's "two choices, separator pending" line supersedes on its arrival). **(a) Pins
+verified**: commit c9e1c9ecf2 ("Record a death declared with its scope still
+attached"); LEDGER sha 5aabed51…05ed MATCH. **(b) The reconciliation rowed**: a
+scope-FREE declaration would have contradicted p6's ≤2 bound; with the scope kept,
+they are compatible — "nobody has said true-swap = 0". The direction corroboration
+carried (other-arm 0→2 against baseline ×0): the bound formally lives, but the
+measured direction points at it NOT being recovered — the other-arm term grew.
+**(c)** p5's minimum-upgrader form saved to the register; p6 adds its own version:
+all five of the day's version-mix-ups were preventable by ONE command — "git log -S
+before writing the read version as the entered version." ⚠ Their memory-topic-file
+HOLD continues (MEMORY.md only released); the lesson writes the turn the HOLD lifts —
+a standing item outside this desk's gift.
