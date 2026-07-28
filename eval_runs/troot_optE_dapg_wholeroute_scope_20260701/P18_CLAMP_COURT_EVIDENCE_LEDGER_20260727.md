@@ -11225,3 +11225,25 @@ purification + B + 4 prints + conditioning pair + P2/P5 + both guards + saturati
 split; count + survivor-best ride **t20**. The instrument chain for the singularity-side question
 is now COMPLETE in code: classification triples → count (existence leg) → survivor-best (ranking
 leg) → E′/D/cost-weight discrimination — all riding already-computed numbers.
+
+## 404. The fourth crash closes the class structurally — and the cap was two sets wearing one name
+
+From p4's -173 (18:0x); pin ✓ (`7a00650c95` driver sha `89a7fe5c1b…`). **(a) ⛔** t19 died — the
+FOURTH same-family crash (NoneType*int at the CLEARANCE formatting line): p4 had guarded the
+ARM-TO-ARM line and left its neighbour open; the -169 audit covered the three JUDGMENT sites, not
+the FORMATTING side (the audit's own scope named). **(b) ⭐⭐ Individual guards ABANDONED — closed
+STRUCTURALLY**: all arm-distance formatting now passes through ONE function; nothing else multiplies
+by 1000 ⇒ **"absence has a spelling, and callers cannot forget it"** — the per-site whack-a-mole
+replaced by a single choke point; audited by a fallible grep, scope stated (1 remaining hit = a
+different, non-None quantity). **(c) ⭐⭐** The startup check ANSWERS a §382 question: the arms'
+geom sets are DISJOINT ⇒ the "+0.0 mm during motion" is NOT a shared-geom artifact (pair 8↔78 at
+t=2.22 s, endpoints outside 176 mm) ⇒ **a real transient stands**; "the arms really touched" NOT yet
+claimed — geom names next. **(d) ⛔ cap 0.00 AGAIN, with both calibration ends silent** — the cause
+a new form: **one function defined the same set TWO WAYS** — calibration selected members by INPUT
+(the attitude REQUESTS roll) while the cap selected by OUTPUT (tilt > 1e-6) ⇒ an upright item leaked
+through the output gate on numeric noise and became the cap's minimum; the calibration watched a
+DIFFERENT set, so neither end fired. Fix: the cap now selects by the REQUESTING side too. Scope: the
+effective tolerance = the interim constant ⇒ t20's results unharmed; one print line wrong.
+**(e)** t20 running (18:03:47, producing `5f477f53e5`); the structural closure + cap fix ride t21.
+⚠ Relays to p11/p6 on this section DEFERRED to the next window (context boundary) — the ledger
+carries the record; the opening acks cover them.
