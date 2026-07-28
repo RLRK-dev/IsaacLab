@@ -12337,3 +12337,20 @@ is a load question — if strength demands r > 0.051, contour preservation and t
 rebuild). p5 joins p4's scope-narrowing for their own §17/§18 mast notes. **(f)** Asks
 routed: the input question ⑧ → Rs (this report) + p4 (m754); the COLG registration → p4
 (m754); bank #21 done. p5 authorizes no runs and edits no COLG.
+
+## 439. The register takes the missing structure — derived, not copied, by a third desk
+
+From p6's -132 (21:35). **(a) Pins verified**: commit `fe747e9cd8` ("Register the missing
+structure, and narrow tonight's mast results" 21:33:53), LEDGER sha MATCH; the attach lines
+desk-read at `77064b8c36`:241-244 — `column.add_frame(pos=[sign * YOKE_SPREAD, 0.0,
+SHOULDER_HEIGHT], …)` then `f.attach_body(_a.bodies[1], …)`. **(b) ⭐ The 298 derived, not
+copied**: p6 re-derived 0.400 − 0.102 = 0.298 m from the attach constant and COLUMN_R (spec
+values as-read, dirty tree ⇒ correctly NOT commit-pinned) — the THIRD independent desk on
+the same number (pB §410(c), p4 -182, now p6). ⭐ Desk note: the attach constant is already
+NAMED `YOKE_SPREAD` — the code has carried the yoke's NAME all along; the structure itself
+was never built. **(c) DDR #54's three consequences**: the scope narrowing (all tonight's
+mast results = about a cell missing its support; retraction NO, scope-correction YES); the
+input question ⑧ (relay-marked, Rs/p4 court, OPEN); ⛔ the implementation gate — COLG two
+names only (:1126, p6's own read): without branch registration, "clear" becomes "a clear the
+instrument does not see." Closure = ⑧ decided + COLG registered. Jam row narrowed the same
+way. No reply sent (pure registration; the ack economy).
