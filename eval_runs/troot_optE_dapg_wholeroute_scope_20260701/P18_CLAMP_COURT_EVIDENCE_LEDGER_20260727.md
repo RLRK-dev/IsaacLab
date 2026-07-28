@@ -9798,4 +9798,43 @@ to an arm whose pose was INHERITED (aimed[t]) is decided by branch order — unt
 desk. My read @ `1a1efe0ac5`: inheritance-scratch posing `:1608-1614`, vertical solve ending `:1633`
 (pose_rd=(0.0,0.0), partner-aware), no-fallback raise `:1637-1641` — p6's cited ranges (:1610-1633 /
 :1641-1655) are offset from this read and their source version is unstated; constructs CONFIRMED, overlap
-UNTRACED. Rs-directive compliance surface — trace = p4/p11's court.
+UNTRACED. Rs-directive compliance surface — trace = p4/p11's court. 〔Offset RESOLVED at §336: p6 read
+`8e4852e767`, 13 lines later than `1a1efe0ac5` — one structure, two versions.〕
+
+## 336. The version stated and pinned into the row — thirteen lines apart, one structure
+
+From p6's -114 (15:44), answering -602's ask. **(a)** Version = `8e4852e767` (15:19:17 "Open the
+watch-along file at the start, not at the first movement") — the file's HEAD, not `1a1efe0ac5`. All pins
+machine-verified here: LEDGER @ `8b446975c1` sha `6928df1ff…` ✓; wired @ `8e4852e767` sha `6c75385c47…` /
+1881 lines ✓; wired @ `1a1efe0ac5` sha `9716c6ef7e…` / 1868 lines ✓ (13-line delta); anchors @
+`1a1efe0ac5`: `if t in aimed:` `:1597`, `if t in _seating:` `:1628` ✓. Exactly ONE commit sits between
+(git log count 1), committed 15:19:17 — AFTER t14's 15:16:50 launch ⇒ **t14's producing code remains
+`1a1efe0ac5`**; `8e4852e767` (the watch file opens at start) rides the NEXT run. §335(e)'s offset note
+resolves: same structure, two versions, 13 inserted lines. **(b)** p6 owns the miss in the form this desk
+carries it — line numbers without the version in the same clause; the register row now pins BOTH
+versions. **(c)** Desk observation for the branch-order trace (data, not judgment): at `1a1efe0ac5` the
+aimed-check `:1597` PRECEDES the seating-check `:1628`, and `:1597`'s own comment reads "already solved
+by the closed-loop aim; do not re-solve" — the vertical requirement lives in a re-solve. Whether the
+aimed branch exits before `:1628` is the one untraced link; trace stays with p4/p11 (-599/-600).
+
+## 337. What the claw move does not touch — the cut that stops over-invalidation
+
+From p5's -131 (15:45), sent EARLY "so other panes do not invalidate down to the floors" — the downgrade
+default applied prospectively. **(a) ⭐** The axis grounded in the code's own words, verified here @
+`1a1efe0ac5` `:491-492`: "z_hat runs from one claw of a pad to the other, i.e. across the mouth … y_hat
+runs from one pad to the other, the closing direction" ✓ — the moved geom changed z ONLY ⇒ the move is
+along the MOUTH axis, not the CLOSING axis. **(b) ✅ Unchanged** (opposing-pad gap = closing-axis
+quantity, constructionally invariant): the offset family (9.99→10.21), OPEN's 79.92/69.90, the saturation
+floor 2.40, the claw-contact crossing 10.16 — none needs invalidating. **(c) ⛔ Changed** (mouth-axis or
+centre-referenced): inner band [23,39]; half-band 7.00; centre 31.00; off-centre allowance 4.00; release
+claw-tip reach 12.00 — ⭐ whose +1.00 is CONSISTENT with the centre's 1.00 move (p4's asset-derived table
+and p5's centre analysis triangulate). **(d) ⚠ One HELD, not asserted**: the escape floors 18.20/20.20
+derive from "the cable slips past the lower claw pair" ⇒ possibly mouth-axis-referencing ⇒ kept OUT of
+the unchanged list; p5 opens the derivation in the post-bank-#9 edit cycle. Direction guessed (floor
+likely DOWN — wider claws slip easier) and TAGGED as a guess, not computed. **(e) ⭐** p6's
+symmetric-widening point checked against p5's own docs by CLOSED QUERY (4 hits, all different quantities)
+⇒ nothing broken there. General form banked: **a note belongs to THAT ONE IMPLEMENTATION, not to the
+change type** — the same "opening widened" moves the centre if one plate moves and not if two do. And
+§11-6's print verbatim (|across| < 3.00) will be kept with the current value 4.00 placed BESIDE it — the
+#17 third-class handling, same shape as this ledger's supersession tags. **(f)** p5's single need remains
+bank #9's landing (with p4, -599 item 4).
