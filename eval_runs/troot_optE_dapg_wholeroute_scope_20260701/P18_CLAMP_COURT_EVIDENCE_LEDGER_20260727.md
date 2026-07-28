@@ -13365,10 +13365,16 @@ EMPTY; the one unmeasured link = the joint vectors, which neither run prints.]
 (ii) the per-arm ramp frees the healthy arm: R 71.5 %, never held (t42 same step:
 0.0 %), tool err 3.6 vs 10.4 mm; the print NAMES its side. (iii) stall is terminal: 68
 lines, the last words are the JAM (t42 ran four more steps of frozen state and ended on
-an unrelated angle). (iv) the mirrored menu shows: aim L yaw +0.15 (t42: −0.15).
+an unrelated angle). (iv) the mirrored menu shows: aim L yaw +0.15 (t42: −0.15). [CORRECTED §479: the trace
+LINE is not evidence of the mechanism — the candidate set is ±symmetric, so +0.15 could
+appear pre-fix (an indiscriminable predicate is not evidence, p6 -143(iii)); the
+mechanism is shown by the fa948b8a53 DIFF, and its OUTCOME-effect stays unshown (pB
+-516(iv)).]
 (v) ⛔ the table-breach check DID NOT FIRE ⇒ recorded by p4 as UNVERIFIED, not passed —
 the green-line discipline practiced at the first opportunity. **(c) ⭐⭐⭐ The cause
 narrows to geometry**: L 0/7 collision-free (R 2/17) ⇒ not control — REACHABILITY.
+[WORD CORRECTED §479: "PLACEMENT", not reachability — 7 solutions EXIST and all collide;
+solvability was never lost (p6 -143(i)); same routing, narrower word.]
 p4's flagged INFERENCE (not verdict): :25 puts BOTH grasp points right of the column
 (L=cab27 x=+0.1125, R=cab32 x=+0.1875; cable spans x[−0.300, +0.285]) ⇒ the left arm
 reaches ACROSS the column. Grasp-pair placement = the process table = p5's court —
@@ -13443,3 +13449,55 @@ p4 (m804 — the four instrument fixes + the (iv) path to showing the mirror), p
 rows + a register advisory: any row citing historical "X of Y candidates" percentages
 carries an inflated denominator). No reply to pB (registration; the §476 tag is the
 response). Video leg still in flight; verdict after both.
+
+## 479. The register rules on its own rows — and corrects two of this desk's words
+
+From p6's -143 (03:02:37). **(a) Pins verified**: commits ee5e0eaf19 ("Untie the grasp
+centre in the register, and separate 88 from 75") + 60b105ad07 ("Close the disclosure
+leg, and say what the disclosure found"); LEDGER sha 2fbca9ae…b9fe MATCH; 244 lines;
+rows | 57 | and | 58 | present; guard 0/0. **(b) The four judgments (p6's court)**:
+#56 β = CLOSE **at the first site only** — the floor's `or free` (second site) still
+prints "removed 0" on fallback, DORMANT while SIGMA_FLOOR = 0.0, reactivating the
+moment the floor rises (a conditional close whose condition aligns with the standing
+⛔ SIGMA_FLOOR-must-not-be-re-armed rule — the dormancy is durable unless Rs re-arms);
+the implementation EXCEEDED the ask (the count itself became len(_strict)). #54 = CLOSE
+(crown in COLG, in-code marker, assert; scope limited to the silently-absent-member
+risk — crown dimensions and the yoke-pair re-measure stay outside). #55 = relay
+resolved by p6's own trace read, and STRENGTHENED: the counterexample stands in ONE
+line — L PASSES the proxy (margin +2.86) while 84.2 mm below the table (R fails the
+proxy too, so only L discriminates). New rows: #57 (the left start pose = best among
+ALL-REJECTED candidates) / #58 (grasped 75 mm vs commanded 88 mm — p6 re-derived the
+arithmetic, not copied). **(c) Four corrections landing on THIS desk's banks**:
+(i) 配置 (placement), not 到達性 (reachability) — 7 solutions EXIST and all collide;
+solvability was never lost (§476(c) tagged; this desk's 02:48 Rs report used the broad
+word — corrected in the next report). (ii) ⛔ cross-run guard: t42's and t43's
+collision-free counts are NOT the same quantity — the rejecting predicate changed
+between runs (crown added to COLG; ngeom 139→140) and the print format too; attribute
+no delta to the spread. (iii) the yaw print is NOT evidence of the mechanism (±symmetric
+candidate set; §476(b)(iv) tagged — diff shows the mechanism, outcome unshown).
+(iv) R also did not complete (71.5 % is the value at the moment L's stop ended the
+step). **(d) The authority note, correctly placed**: p5's "§0#2 untouched" is rowed as
+P5'S ARGUMENT, not established fact — scope determination = Rs. No reply (registration).
+
+## 480. p4 catches its own sweep lying still — and refuses the strong conclusion it almost handed over
+
+From p4's -199 (03:04:19). **(a) ⛔⛔ The self-catch**: the FIRST sweep was INVALID —
+all 8 points identical (L 7/0, R 17/2, held links unchanged) because the grasp-target
+computation lives in TWO places and only one (:1071 family) took the centre variable;
+:1645 silently re-read C1[0] and overwrote. Moving the centre 210 mm while 15 mm links
+stay fixed is physically impossible output — and it WOULD HAVE READ as the strong
+conclusion "left has zero candidates at ALL centres," aimed straight at an Rs
+escalation (clips / roles / mounting). ⭐ Caught by an ABSENCE: the "centre moved"
+print never appeared — the numbers alone would not have told. Numbers DISCARDED,
+unreported. **(b) The repair**: both sites unified to one source; the sweep now
+carries its own discriminability check — **"if the centre was swept but the held links
+show one kind, refuse to report and die"** — p5's one question ("what would have had
+to differ?") asked OF THE SWEEP ITSELF; family = duplicated-computation /
+partial-application, the same shape as pB's (a)/(b) and the one-site yaw. Re-running
+(03:0x). **(c)** pB -516 accepted by p4 in full; p4's own -198 wordings corrected
+((ii) never-held ≠ free tracking, 71.5 % = cutoff not ceiling; (iv) narrowed to the
+sign-flip fact, proof deferred to a non-(0,0) winner or a startup menu print; (iii)
+the terminal message's wording to be fixed). **(d) Order declared**: ⛔ no driver edits
+while the sweep runs (later points must measure the same driver) ⇒ ① sweep → ② the
+four instrument repairs + wording → ③ the menu static print. Nothing verifiable banked
+from the re-sweep yet; the next package pins it.
