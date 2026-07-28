@@ -2319,7 +2319,17 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     prog, dprog = 0.0, 1.0 / max(1, ramp)
     # ⛔ NOT `held`: that name is already a function in this file, and the step summary calls it.
     held_ticks = 0
-    for s_ in range(steps):
+    # Rs, 2026-07-28: I had reported "it will not finish in the same time" as a trade-off, and he
+    # answered that no time limit had been set.  He was right -- the seconds are a number in this
+    # table, not a requirement, and I had quoted something I could change as though it constrained
+    # me.  So the step ends when its WORK is done: the command at the end of the checked path, the
+    # arms settled on it, the fingers finished.  The seconds stay only as a stall guard.
+    # ⭐ This is the file's own rule applied one level out -- settling is already a gate rather
+    # than a delay for the fingers, and now the step ends the same way.
+    # The guard needs no new number: if the command has gained nothing in a whole step's worth of
+    # ticks, it is not going to, and the run says so instead of grinding to the cap in silence.
+    s_, _last_gain, _last_prog, _stalled = 0, 0, 0.0, False
+    while True:
         # Each arm against its own bound, because reach differs and a single max would hold the
         # shorter arm to the longer arm's tolerance.
         # ⛔ NOT an on/off gate.  A servo following a moving reference carries a steady lag that
@@ -2461,6 +2471,17 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             for t in SIDES:
                 _p, _c = jaw_gaps(t)
                 claw_min[t] = min(claw_min[t], _c)
+        s_ += 1
+        if prog > _last_prog + 1e-12:
+            _last_prog, _last_gain = prog, s_
+        _settled = max(float(np.abs(np.array([d.qpos[a] for a in QADR[t2]]) - w[t2]).max())
+                       for t2 in SIDES) < SETTLE_TOL
+        _fingers_done = gate_open and (s_ - opened_at) >= fing
+        if prog >= 1.0 and _settled and _fingers_done:
+            break
+        if s_ - _last_gain >= steps:
+            _stalled = True
+            break
         if n % render_every == 0:
             # ⛔ The wide camera used to swing +-14 degrees continuously here.  Rs, watching the
             # video to judge whether a hand clamps: the left panel wobbles, and that gets in the
@@ -2503,9 +2524,12 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # ⛔ Loud when the move did not finish.  The command is now gated on the arm tracking it, so a
     # step can end with the command part-way along the line -- and a part-finished move that
     # printed like a finished one would be the worst of both changes.
-    print(f"[steps] STEP{num:2d} COMMAND: reached {prog*100:5.1f}% of the way to the solved pose"
-          + (f", held back on {held_ticks} of {steps} ticks because the arm was more than "
+    print(f"[steps] STEP{num:2d} COMMAND: reached {prog*100:5.1f}% of the way to the solved pose "
+          f"in {s_ * m.opt.timestep:6.1f}s ({s_ / max(1, steps):4.2f}x the {secs:.1f}s the table "
+          f"allots -- the table no longer ends the step)"
+          + (f", held back on {held_ticks} of {s_} ticks because the arm was more than "
              f"{min(TRACK_TOL.values())*1000:.1f} mrad behind" if held_ticks else ", never held back")
+          + ("   <- STALLED: no progress for a whole step's worth of ticks" if _stalled else "")
           + ("" if prog >= 1.0 else "   <- THE MOVE DID NOT FINISH"))
     print(f"[steps] STEP{num:2d} sigma_min L={sigma_min('L'):.4f} R={sigma_min('R'):.4f}"
           f"  mast L={gap_mm(_cgl)} ({_cwl}) R={gap_mm(_cgr)} ({_cwr})"
