@@ -10361,3 +10361,90 @@ pin the same `:232-233`) but t14's own line prints "links whose geometry alone w
 the failing conjunct is NOT explained by wrong-link selection — banked as gate-diagnosis material.
 **(c)** Version notes: the 3 commits absent from t15 recorded; the t15 interim (cab27) held OFF the
 row until the trace banks — and it HAS now banked (`aaeafdab97`, §354(c)) ⇒ p6 can row it (-637).
+
+## 357. The singularity review opens as one printed field — the discarded numbers already exist
+
+From p11's -139 (16:37); pin verified: §27.2.139 @ `ef772c9c3e` sha `f610e956ec…` ✓, one header ✓.
+**(a)** Procedure CLOSED first: no objection to Rs's direct approval — §27.2.108(4) bound OUR
+submission etiquette, not Rs; and the danger does not depend on who caused it: the approval did not
+create the hazard, it left a state where nobody carries the packet's both-halves ⇒ **the remedy is
+OBSERVATION, not procedure.** **(b) ⭐** The interaction mechanism CAN exist, not claimed: the filter
+drops arms-close poses; two arms taking targets 88 mm apart may trend "stretched from outside" (bad
+conditioning) vs "folded in close" (good conditioning, arms close) ⇒ IF good conditioning lives on the
+close side, clearance and conditioning point opposite ways. Claimable: the two criteria are not
+independent; the sign is unknown; measuring is cheap. **(c) ⭐⭐ The measurement — no new run, no new
+instrument**: DESK-VERIFIED @ `fab643fda7` — in the selection loop, hit = touching()+clearance, THEN
+`sv = sigma_min(t, sc)` and `cands.append((…, hit, …, sv))` ⇒ **every dropped candidate's conditioning
+is computed, stored in cands, and thrown away** (the touching-near-side form again). Needed = ONE
+FIELD: "best conditioning among clearance-dropped candidates" printed beside "the selected candidate's
+conditioning" — riding the same line as p5's removal-count print. **(d) ⭐ Within-run, non-negotiable**:
+49.4 @ STEP15 is t14 = PRE-filter baseline, NOT filter evidence; t14↔t16 differ in four things
+(uncontrolled — the trap named repeatedly today); the within-run comparison (dropped-best vs selected)
+is controlled BY CONSTRUCTION — same state, same candidate set, the filter the only difference.
+**(e) ⭐ The branches named BEFORE the number**: ≈ equal ⇒ weak coupling, the packet's second half not
+urgent / greatly different ⇒ the criteria compete directly and a structural fact surfaces — **a hard
+filter cannot trade with a ranked objective**; options (A) clearance into the cost by weight (returns
+to the SIGMA_PENALTY unmeasured-weight problem) or (B) filter stays hard, conditioning takes the
+remainder (explicit acceptance of degradation) — both design decisions, p11's court, NOT chosen until
+the number exists. **(f)** Direct answer: the review IS needed; form = one field + the named branches;
+no run; no design reopening now. Non-claims kept.
+
+## 358. The doc aligns to the code — and availability is named as no ground of correctness
+
+From p5's -138 (16:38). **(a)** Bank #10 SELF-verified by p5 (2a08328dee, sha match — two banks
+landed). **(b) ⭐** The tilt-ization LANDED in doc, aligned to p4's implementation
+(vertical_tol_deg(r_max_deg, cap_deg)); cap = "the smallest nonzero tilt the menu can produce,
+measured in the very quantity the check reads"; p5's roll version stays in code as fallback, doc marks
+it a PROXY; the third branch recorded as hard error (verbatim "a formulation to rebuild, not a number
+to retune") ⇒ the rebuild p5 named cannot be silently dodged. ⛔⛔ The error class landed BY NAME with
+its three instances (norm-for-containment-axis / R6②'s one-component certification / cap-from-roll-
+column) and the common form; ⭐ plus one more self-recognition: **all three proxies were chosen because
+the substitute was AT HAND — availability is not a ground of correctness.** **(c)** §17 new = the
+ARM_CLEARANCE scale review in-doc (the -137 view, landed; p11's independent convergence acknowledged).
+**(d)** Numstat +42/−1; the one deleted line = the old τ_max rule, fully disclosed and preserved as a
+MARKED error. New content sha `21970e9b91d22381b744031b4f505cd1314dfa7761beaacf288ec7db23f3db9e` ⇒
+**bank #11 routed to p4 (-638)**.
+
+## 359. The verdict lands whole — four prints, one honest annotation, and the first selection shift
+
+From p4's -143 (16:3x); pins machine-verified: `91bf4d52c7` driver sha `10134ec758…` ✓ / spec sha
+`a593e7a1b2…` ✓ (guard PASS); the print content present in the diff (removed/kept/predicted/realized/
+during-motion terms ✓). **(a)** The annotation rewritten as both reviews asked (p4-declared under the
+pinned sha): 8.0 = the cable-passage lower bound, NOT the collision bound; the collision side carries
+pose residual + path bulge between checked poses + mesh margin — all unmeasured, all the same
+direction ⇒ may be larger; ⛔ and the DO-NOT-RAISE reason kept in the reviewers' own terms (excess
+clearance starves the solver — the singularity floor's failure, same form; **the exit is measurement,
+not bigger guessing**); the future form `ARM_CLEARANCE = 2.0*CABLE_R + <tracking error on the arm-arm
+surface>` written in. **(b) ⭐ All four prints**: ① removed AND kept counts (0-removed vs 40-removed
+indistinguishable from the winner alone — the floor-instrument form) ② the minimum inter-arm distance
+reached DURING MOTION ③ the winner's predicted clearance ④ the realized clearance after settling —
+③④ on the SAME LINE ("the difference IS the tracking error; separating them makes the reader
+reconstruct it"). **(c)** ⚠ t16 (fab643fda7) does not carry this commit (t17+) — but t16 is the FIRST
+run with the clearance filter, and the selection has ALREADY shifted: verbatim "aim L: ... seat error
+1.00 mm" vs 1.63 mm through t15 ⇒ the partner-aware solve is choosing different poses (in-flight
+observation, trace unbanked). **(d)** p6's gate note received on p4's side too: retention succeeded on
+cab27 while the clip GATE stays a separate predicate — compatible, both stand. ⚠ p11's ONE FIELD
+(§357(c)) postdates this commit — its carrier line (print ①) now exists; the field request rides -638.
+
+## 360. The pin's first engage becomes a row — with two flags left standing, unjudged
+
+From p6's -118 (16:40); pins verified: LEDGER @ `b7a6f6d93d` sha `5ef1b5afa0…` ✓. The mechanism cites
+verified ACROSS versions (⚠ p6's message carries no version clause — the -114 lesson recurring,
+gently noted -640): `:232` connect declaration @ `3f5c7630ac`+ ✓; pin_to `:880-897` @ `3f5c7630ac` ✓;
+the retarget block `:1929-1937` (seated_any `:1931`) lands at **`91bf4d52c7`** = HEAD ✓. **(a) ⭐** The
+row: clip-retention pin (§0#5 authorized exception) FIRST ENGAGE — numeric leg only, not a verdict;
+the mechanism source-verified by p6 independently: build-time inactive equality → seated_any re-picks
+the link ACTUALLY seated → pin_to reads the clip-side anchor as a world point and REWRITES the
+cable-side anchor in the new link's current frame ⇒ the constraint enters exactly satisfied, nothing
+moves (the docstring itself names and avoids the teleport: "without the rewrite MuJoCo would drag the
+cable — forbidden except this one case"). Origin = Rs's 「なおせ」 (in-code custody): the old form
+watched one build-time link while the cable slid axially — cable centre 0.5 mm off groove centre with
+6 contacts, and the gate stayed false. **(b) ⚠⚠ Two flags STANDING, unjudged (routed to p11, Rs
+surface noted)**: ① the retention point is NOT the groove centre — seat vs anchor differ 17.0 mm in x
+(0.133 vs 0.15), inside the seat predicate's 22 mm x-allowance (the axial-offset family again) ②
+**the retarget is a RUNTIME MODEL change (m.eq_obj2id), not a state write — whether that sits INSIDE
+the §0#5 authorization is p11/Rs's judgment**, not p6's or this desk's. **(c)** The grasp-gate row
+gains t15's True with EXEMPLARY restraint: two runs, two producing versions, both passed — and p6 does
+NOT write "survived change" because whether the version delta touches the grasp path is unverified
+(the f2ext-criterion discipline, self-applied). The clearance convergence entered #49 as
+relay-explicit material, marked not-banked.
