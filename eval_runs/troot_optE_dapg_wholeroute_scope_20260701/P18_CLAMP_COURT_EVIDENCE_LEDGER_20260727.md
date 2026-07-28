@@ -13243,3 +13243,36 @@ been red) — and p4 fixed the SAME shape once in the SAME function (:1540); the
 survived one level down. **(d)** pB confirms the video-leg scope reading matches their
 own §8 phrasing and scopes the two-reader convergence to THIS desk's collation (they
 have not read p5's doc) — the attribution boundary kept correct.
+
+## 472. The first full-gate verdict — TASK FAIL, PHYSICS PLAUSIBLE, and a defect only the overlay could see
+
+From p4's -195 (01:09:34). **(a) Pins verified**: commit 916e154ca1 ("Give t42 its
+verdict, and say what I got wrong", 01:09:07); verdict sha fcf66088…68a MATCH; the
+verdict's own pin table re-lists all five leg/trace shas correctly; desk full-read done
+(earlier grep tokens missed because the file writes "TASK: FAIL."/"PHYSICS: PLAUSIBLE."
+— token-shape, resolved by reading). p4 read BOTH legs' artifacts directly, recomputing
+the three shas. **(b) The verdict**: TASK FAIL (neither arm grasped; cable 0 px; stop =
+STEP7 R vertical check) / PHYSICS PLAUSIBLE (no collapse of any kind) ⇒ a
+control-and-targeting failure, not a model failure — the separation that directs the
+fix. Conservatism: neither (the run never reached where the question applies). The
+chain (§2) carries each link on a non-p4 reader or a pointable measurement — including
+the NEW fact desk-verified verbatim: **:2348-2349, the comment ABOVE the shared ramp,
+states the per-arm intent ("Each arm against its own bound…") while the code beneath
+shares one _room — the defect is self-documented as an intent-implementation
+contradiction.** **(c) ⭐⭐⭐ The overlay defect (§3-1), family member #5**: the GRASP
+block prints inside STEP4 (ends t=11.2 s, :129); the video's only close is 11.25-11.8 s
+— AFTER ⇒ ctrl=18 / pad 93.3 / clamped=False were measured with the hand still OPEN ⇒
+**the containment check cannot report a success** — the inverse polarity of the
+cannot-fail family (a check that cannot come out POSITIVE); log alone reads "not closed
+yet", video alone reads "whiffed" — only the two legs together place the print BEFORE
+the motion. The per-run gate's first catch that neither instrument could make alone.
+**(d) Four self-errors owned in §4** (ramp-froze ≠ arm-stationary — the arm moved ~6.5 s
+pressed against the crown; #53-shape withdrawn; the :113-114 cite corrected to :32/:39
+crediting this desk; five-samples-not-five-evidences). **(e) The court table (§5)**:
+A (table-breach check) + C (measure grasp AFTER the close) = p4's court, starting;
+D (the start-pose solve returns a jamming pose — measure first); E (yaw mirror) = p5's
+court — ALREADY ANSWERED by -167/§470 (p4 had not yet seen it; closed in m794);
+⚠ **B (split the ramp per arm) touches the Rs-approved follow-control ("A") ⇒ HELD FOR
+RS'S WORD** — surfaced in this desk's report as a new pending decision. ⛔ No re-run
+until A+C are in and B has its word (p4's own stop: a re-run now would re-measure the
+same frozen ramp). t25's verdict remains unissued (gate open, p4's queue).
