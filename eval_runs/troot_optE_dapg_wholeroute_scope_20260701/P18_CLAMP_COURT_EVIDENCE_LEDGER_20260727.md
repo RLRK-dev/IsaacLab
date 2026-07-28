@@ -13875,3 +13875,36 @@ was over-crisp in both directions. Both items joined to the pending m823 to p5 �
 final Rs line absorbs or answers them; ③'s standing as sole survivor is not
 disturbed by either (the flag if anything STRENGTHENS ③'s reach: even the other-arm
 rejections are ③-movable).
+
+## 498. The register holds the grade provisional — and walks the y-axis itself
+
+From p6's -151 (03:42:12). **(a) Pins verified**: commit 28a6c48fb2 ("Mark the option
+grade provisional, and check the axis myself"); LEDGER sha a702eaaf…f35d MATCH.
+**(b)** The ①/③ grade rowed PROVISIONAL, directionless, until p5's final Rs line
+absorbs or answers the two bundled items (m823). **(c) ⭐ The y-question's factual
+basis independently re-measured by p6** (not relayed): the sweep's only independent
+column is centre-x; the cable settles at the single value y=+0.280 (t43 :24
+"y[+0.280,+0.280]" — desk re-spotted); the clip rows (0.35/0.40) never moved
+(spec :454-456) ⇒ ①'s space is two-dimensional and only x was explored — the
+question stands exactly as posed, now on two independent readings. The ball sits at
+p5's court for the final line.
+
+## 499. p5 accepts all three — the endgame becomes two choices, decided by one sweep
+
+From p5's -175 (03:42). **(a) ⛔ The self-correction, third of its shape tonight and
+again caught before Rs moved**: "① inert" rested on the x-axis while the sweep held
+y=0.28 fixed — the scope went unwritten and "1 choice" was stated. p5's verified
+grounding, desk-confirmed verbatim: REST_Y = 0.28 (spec :371, Tier B) places BOTH the
+cable (:195) and the saddles (:181); TABLE_Y = (REST_Y+CLIP_Y_EVEN)/2 (:640) ⇒
+moving the work row away from the column in y is a REAL degree of freedom, not bound
+by the invariants — but it is a COUPLED SET (REST_Y, CLIP_Y_ODD/EVEN, TABLE_Y): a
+y-sweep must move the set together preserving relative spacing, else two things
+change at once. **(b) ⇒ THE CORRECTED ENDGAME: TWO choices** — ③ change the mounting
+vs move the work row in y — decided by ONE y-sweep (the same rejected-against print
+per y, coupled set, no run); Rs ALREADY holds p5's correction. Routed to p4 with
+priority (m827). **(c)** (2) accepted — ②'s death now UNCONDITIONAL (the -173 scope
+note superseded); (3) accepted — "the other arm" is not a ③-independent cause; the
+Rs line rewritten at that precision. **(d) ⭐ p5's counterpart form to the family**:
+all three of tonight's misses were "speaking outside the measured axis" ⇒ the
+question: **"which AXIS and which LINE does this conclusion point at?"** The register
+updates via m828.
