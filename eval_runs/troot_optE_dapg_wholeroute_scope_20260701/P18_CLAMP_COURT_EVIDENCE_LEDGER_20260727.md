@@ -8719,7 +8719,8 @@ accordingly carries no caution line: provenance exact. **Regime FIRST, per disci
 readings within-run only.
 
 **(a) ⭐⭐⭐ The (i) inspection FIRED — the latent defect is latent no more**: 3 of 15 inheritances, ALL
-at STEP13 right — `:187-189` verbatim ×3: *"inherited aim pose, arm-to-arm check = ['L_forearm_link',
+at STEP13 right 〔⚠ precision by §309: the 3 prints are byte-identical = ONE event printed thrice, not a
+rate〕 — `:187-189` verbatim ×3: *"inherited aim pose, arm-to-arm check = ['L_forearm_link',
 'L_wrist_1_link'] (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)"* ⇒ **a posture solved
 with `other=None`, inherited past the route's partner check, IS in contact with the partner arm — at the
 failed step.** The scope traveled inside the string, as designed (§271(b)). **(b) ⭐⭐ Three instruments,
@@ -9130,7 +9131,9 @@ From p4's -117 (14:3x); pins verified: `79665f5362` ("Land the second traced run
 deterministic") — run_t12 sha `4a6baea1…` ✓, trace `a9e1be55…` (stated), producing code `b92b7b823a`;
 **the 3/15 numerator re-derived here** (grep: 15 inheritance prints, 3 carrying `L_forearm_link` ✓).
 
-**(a) ⭐⭐⭐ The STEP13 concentration REPRODUCES**: 3/15, all STEP13 right, the same two partner bodies ⇒
+**(a) ⭐⭐⭐ The STEP13 concentration REPRODUCES**: 3/15, all STEP13 right, the same two partner bodies
+〔⚠ precision by §309: one event printed thrice; "reproduces" = instrument-addition invariance, the weak
+sense — not independent reproduction〕 ⇒
 *"偶発的な姿勢ではなく この choreography の固定的性質です"* — the packet's (i) result is now REPRODUCIBLE,
 not a one-run observation. **(b) ⭐** Determinism cross-confirmed from p4's side: t12's aggregates ALL
 match t11 (quartiles, WORST lines, gates, frames, bytes); the traces line-identical except the caution
@@ -9177,3 +9180,75 @@ unmeasured). **(c) ⭐** The 3.00 precision reflected — AND a prophylactic sel
 (口 14.00 − Ø)/2 = 3.00 as a HEIGHT (z) quantity, a DIFFERENT AXIS from the print's across ⇒ *"同じ数字が
 2 か所に在り、同一かは 私は確認していません (両者を等号で結んでいません)"* — the same-numeral discipline
 applied before anyone asked. **(d)** Bank request #7 routed (-568).
+
+## 309. Three-of-fifteen is not a rate — one event, printed three times
+
+From p5's -127 (14:37); their counting re-verified mechanically here: the 3 contact lines collapse to **ONE
+unique string** in BOTH t11 and t12 (`sort -u` = 1 each) ✓.
+
+**(a) ⛔⛔ The rate-reading killed**: the 3 non-empty prints are byte-identical ⇒ **3/15 is not "occurred
+three times independently" — it is ONE EVENT (STEP13, right, the same link pair) printed three times**; the
+denominator 15 counts inspection CALLS, not distinct situations ⇒ the correct sentence: *"15 回の検査呼び
+出しのうち 非空は STEP13 右の 1 事象のみ・それが 3 回印字された"* — ⛔ NOT "occurs at 20%". §287(a) and
+§306(a) tagged 〔and owned here: my §287 verification OUTPUT displayed the three identical lines — I saw
+the identity and did not read it as one-event-thrice〕. **(b) ⚠ Reproducibility rescoped the same way**:
+t11 ≡ t12 shows only **INSTRUMENT-ADDITION INVARIANCE** (adding prints changed nothing) — the runs share
+one configuration ⇒ NOT independent reproduction (the "7 runs ≠ 7 samples" reason) ⇒ p5 accepts "再現性
+つき" only in the weak sense. **(c)** The §13-8 form after the bank: *"観測済・計器追加に不変 (t11 = t12)
+・⛔ ただし 1 事象であって率ではない."* Counted BEFORE writing, to keep relayed numbers out of the doc.
+
+## 310. Fifty-two reframed: the tautology is the correct state — with a written closing condition
+
+From p6's -109 (14:37); pins verified: `3109a8dec3` ("Reframe 52: the tautology is the correct state, not
+a defect") — LEDGER sha `010553da…` ✓.
+
+**(a)** The row moved OFF "述語修正待ち": the tautology is not a defect to fix (the floor withdrawn; σ
+cannot carry an absolute bar); what needed fixing was the silence, and it was fixed; ⛔ SIGMA_FLOOR
+non-rearm recorded (return on rad/m = #51's prescription). **(b) ⭐ The closing condition, explicit**: ①
+the second site's silence resolved (c1seat `:866-867` print fixed OR the file retired) + ② non-rearm
+recorded (done) ⇒ CLOSE; the predicates dropped from the residue; ⚠ the old-artifact reading note SURVIVES
+closure (a property of the time point — it does not expire). **(c)** The general form kept IN the row
+("print what it dropped — deletion loses the mechanism, silence loses the reader"), and the leg-wise
+status split adopted after p11's (1).
+
+## 311. The budget does not compose — and the simultaneity of the closes is a design variable
+
+From p11's -123 (14:37); §27.2.125 @ `b77537de6f` ("Two scalar budgets do not certify a pair 48 degrees
+apart") — sha `2bf9470e…` ✓; the CLAMP, CLAMP step line verified at t13's producing code `581ae56935:1204`
+✓ (`(4, "cable把持", GL, GR, CLAMP, CLAMP, 4.5, "grasp")` — the current tree has since shifted:
+content-anchor effect, the cite resolves at its version).
+
+**(a) ✅** p5's snapshot-limit precision ADOPTED over p11's own formulation. **(b) ⚠ The two-time
+DIFFERENCE does not attribute**: the interval contains ALL causes (the cable already moves 10.8/12.7 mm at
+the AIM stage) ⇒ a raw difference bills the close for motion it did not cause ⇒ requirement = **a control
+with the same interval/duration/servo commands and the close INHIBITED** (§27.2.103 applied to interval
+quantities). **(c) ⭐⭐ Two per-arm scalar budgets do not certify the pair**: the axes are 48.4° apart —
+allowing each arm budget b, the rigid-composition bound is |b·û_L + b·û_R| = **1.82 b** ⇒ both arms
+"within budget" while the cable moves 1.82 b ⚠ (soft-cable caveat: the two pushes act 88 mm apart ⇒ the
+span bends — the failure's SHAPE changes, not its size) ⇒ **the budget must be stated as a vector / at the
+pair level** — said by the author of the SAME composition error (§27.2.82, owned). **(d) ⭐ The closes are
+SIMULTANEOUS by the table's default, not by choice**: STEP4 (and STEP14) command CLAMP, CLAMP — the two
+pushes are simultaneous and coupled through the cable ⇒ **the ORDER is a live design variable** (close one
+first, and the second push works against an already-clamped grasp); no preference claimed; step order =
+p5's court. **(e)** The determinism response: the reproduction strengthens §27.2.108's disposition
+("designable, not retry-reducible") 〔the "同じ 3/15" phrasing predates -127; the one-event precision
+travels in -572〕.
+
+## 312. The copy was half a millimetre looser than the gate — one definition now feeds three readers
+
+From p4's -119 (14:37); pins verified: `f5281089dc` — bank #7 COMPLETE (sha `0cb46a2d…` ✓); `14677678e5`
+("Read the gate's tolerances from the gate, not from a copy of them") — WIRED driver sha `dcb11a48…` ✓,
+`seat_tolerances()` at `:793` with call sites `:812`/`:1749` ✓; ⚠ **c1seat is UNCHANGED at this commit**
+(sha still `1067f0dc…`, the two-name print still present — grep 1) ⇒ #52's closing condition ① remains
+OPEN; what was fixed is a NEWLY-FOUND, different defect in wired.
+
+**(a) ⭐⭐ The find**: the seat-gate print said *"gate wants |dx|<22 |dy|<8 |dz|<6"* while the actual gate
+reads `groove_width()/2` = **7.5 mm** ⇒ the printed 8 was 0.5 mm LOOSER than the gate ⇒ *"|dy| = 7.8 mm の
+ケーブルは、落ちた理由を説明する その 1 行の中で「gate の内側」と描かれる"* — a report describing a gate
+that never existed (#17's family, in a live report line). **(b) ⭐** The remedy = ONE definition
+(`seat_tolerances`): the gate, the all-link scan, and the report read the SAME expression; y follows the
+asset's groove width so all three move together if the groove changes; ⛔ no comparison values changed
+(x/z were already these numbers; y is now WRITTEN as what was always measured). **(c)** SIGMA_FLOOR
+non-rearm accepted; the `:1062` tautology treated as the correct state. **(d)** t13 custody: still in
+posture search at 14:37 (no frames yet — the live file appears only once motion starts); neither new
+commit is t13's producing code (t13 = `581ae56935`).
