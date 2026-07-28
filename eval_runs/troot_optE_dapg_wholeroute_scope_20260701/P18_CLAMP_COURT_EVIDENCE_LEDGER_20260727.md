@@ -13276,3 +13276,48 @@ court — ALREADY ANSWERED by -167/§470 (p4 had not yet seen it; closed in m794
 RS'S WORD** — surfaced in this desk's report as a new pending decision. ⛔ No re-run
 until A+C are in and B has its word (p4's own stop: a re-run now would re-measure the
 same frozen ramp). t25's verdict remains unissued (gate open, p4's queue).
+
+## 473. p5 folds the five into one question — "what would have had to differ?"
+
+From p5's -168 (01:15). **(a)** Bank #29 @ 6b403678c4 (sha 66a3341e…6f12 MATCH machine,
++21/−0, sha-first). **(b) The unification**: p5 widens its own §21-5 (owned as too
+narrow — #5 is red, #4 is a green/red collapse, neither "could have been red" covers
+them). ⭐⭐⭐ ONE question generates all five: **"What would have had to differ for this
+reading to come out different?" — if unanswerable, the reading is not varying with the
+fact it targets.** Four forms: ALWAYS-PASS (① τ-from-own-population, ③ inversion-limit
+on symmetric ranges) / ALWAYS-FAIL (⑤ GRASP measured before the close) / TWO OPPOSITE
+WORLDS COLLAPSE TO ONE OUTPUT (④ `or cands` fallback) / RESPONDS TO A DIFFERENT FACT
+(② the vertical check passes on angle, blind to −84.2 mm). **(c) Two operational notes
+rowed with it**: (i) #4's form is findable IN ADVANCE — any `A or B` empty-restore robs
+every downstream count of the power to report "was empty" ⇒ wherever a fallback exists,
+print the pre-fallback count alongside (generalizes pB's one-site ask to the whole
+:1491/:1494/:1496-1498 chain and any future ones); (ii) #5 was invisible to EITHER leg
+alone — **an instrument's blindness can itself be invisible to one leg** ⇒ the two-leg
+discipline is not formality; it discriminated here, on its first full run through the
+gate. Reply = bank confirmation only (m797); p4/p6 pick the widened form up from doc
+and ledger at their next natural sync.
+
+## 474. The register splits the blind instruments by leg — and p4 lands two of the fixes the same minute
+
+From p6's -142 (01:16) + p4's -196 (01:16:16). **(a) p6 verified**: commit ae02b39f9e
+("Record the first verdict, the intent the code contradicts, and two blind instruments");
+LEDGER sha 2c277aa4…38c8 MATCH; row `| 56 |` present; :2348-2349 verbatim IN the row
+from p6's OWN source read. DDR #56 = the two cannot-report-success instruments,
+registered SPLIT BY LEG from birth (α = grasp measured before the close, relay-tagged;
+β = the or-cands collapse, p6 source-verified, closing condition = "print one line when
+the fallback fired"; the :1494 SIGMA_FLOOR sibling noted) — the #52 lesson (a one-line
+conjunction where only one leg moved) applied prospectively. The menu ruling reflected
+into #38. **(b) p4's implementation, desk-verified**: commit 203200c38f ("Read the goal
+quantity, and stop counting rejects as passes", +50/−2, compile-checked, ⛔ NOT run) —
+(A) the table-breach check reads the FINGERS' OWN BOX CORNERS (exact), not the arm's
+bounding-sphere numbers (which would under-report and stop runs falsely); the angle
+check KEPT (it fails on different facts — not re-proxied); threshold = the table
+surface, zero margin, with the exception text pre-empting the loosen-the-check move
+("legitimately needing to touch is a design-table conversation"). (D-print) :1499 now
+`free = _strict or cands` with the strict count printed and the fallback announced
+LOUDLY — "all passed" and "none passed" no longer share a number. p4 source-confirmed
+pB's §12 themselves and owned the irony (:1538-1544 records fixing the same shape one
+level up). (c) E (menu mirroring + #14 record conversion) accepted into p4's
+implementation queue; remaining court = C + E; **B unchanged: Rs's word**; no re-run
+until A+C in and B worded. The desk's m794 items are all either landed or queued —
+nothing outstanding on this desk's side of the loop.
