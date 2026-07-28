@@ -10540,3 +10540,42 @@ is p5's threshold count; "1/7" appears 0 times ⇒ **no reflection needed, no ed
 judgment was made per-item, not by numeral match — the same-numeral-is-not-same-quantity form applied
 from the protective side (refusing a false equation instead of committing one). p11's two
 classifications held at the register until Rs's ⑥ response; rows unmoved. Needs none.
+
+## 366. The requester audits its own requests — one retired, and the ledger answers the sum
+
+From p11's -141 (16:50); pin verified: §27.2.141 @ `607ed6e090` sha `d1e2784344…` ✓ machine-grep, one
+header ✓. **(a) ⭐⭐ The form self-applied**: each request was individually legitimate and the SUM was
+never looked at — the same form p11 aimed at others all day (counting verifications, not set
+coverage); dangers named: same quantity under two names / prints burying signal / arrival-order
+serving instead of blockage-order. **(b)** Inventory: landed 4 (orientation print / predicted-beside-
+measured / use-site check / both-side geom contact) — all confirmed; priorities on the pending by
+WHAT IS BLOCKED: P1 pass-angle print (τ = 0.05 is ratified CONDITIONAL on this alone) / P2 engagement
+residual (the §0#5 continuing condition, live at Rs ⑥) / P3 best-dropped conditioning (opens the A/B
+branch) / P4 predicted-realized pair (term-2; 8.0 interim safe) / P5 axial difference (gates nothing
+yet). **(c) ⛔⛔ One WITHDRAWN**: the 0°-tilt sweep point — requested to pin the table-contact bound,
+but p11's own §27.2.136 ruled that bound does not SET τ (menu-separation binds; table contact = the
+existence reason) ⇒ refining it moves τ by nothing ⇒ retired, the §27.2.117 form (when your own later
+conclusion retires your own request, retire it); re-request condition stated (τ becoming table-bound).
+**(d) ⭐ THIS DESK'S RECONCILIATION against the implementation ledger** (the sum, answered): P1 is
+ALREADY ABOARD t16 — the margin print `:1816` entered at `fab643fda7` = t16's producing code ⇒ the
+r_max datum arrives WITH t16's trace, no further implementation needed; P3 and P4 are CODED
+(`3afe3fcac8` / `91bf4d52c7`), riding t17; **the genuinely outstanding set = P2 and P5 only** (both
+already requested, -642); the withdrawn sweep point struck from p4's list (-647). Five pending
+becomes two. **(e)** The discipline adopted: "one line, nearly free" must carry WHICH number it is and
+WHAT it unblocks — "free is the line, not the attention."
+
+## 367. The bookkeeping fixed with both stages kept — and the reciprocal check named
+
+From p5's -140 (16:52). **(a)** Bank #11 self-verified ✓; the fix cycle complete: §11-2 inputs →
+post-move (L 2.30 / R 5.99, opening 16.00; pre-move kept beside; residual R −0.06 with the sign
+UNDETERMINED caveat explicit); ⭐⭐ the correction recorded in TWO STAGES, both kept (① the threshold
+moved ② ①'s comparison was config-mixed — retracted); §11-5 config-tagged with the confusion named;
+§15 gains the split-by-config row (14.00 = 2.31/5.91; 16.00 = 2.30/5.99; ⛔ do not mix; t16+ not
+landed); the general form landed. **(b)** Closed query: live mixed-config claims = 0 (the two
+remaining mentions ARE the correction records). Numstat +19/−7, deletions disclosed. New sha
+`6bd30405b7…` ⇒ **bank #12 routed to p4 (-647)**. **(c) ⭐ The reciprocal check named**: p5 answers my
+§361(c) own with its own verify-list entry — "when either the bar or the measurement is updated, is
+the other from the same config?" — and states the orthogonality exactly: ⛔ **sha-and-verbatim
+collation does not catch this (both were correct quotes of correct values)** — the check lives on a
+different axis than pin verification. **(d)** The window stays: 22 mm = p5's court, unmoved; the
+axial print will be received into §4-series when it lands.
