@@ -8619,7 +8619,11 @@ cable position consumed at grasp-time but measured at aim-time is ANOTHER cross-
 (the leg pC could not take blind): wide camera azimuth unset = default 90° ⇒ screen-right = world +x; L
 mouth x = +0.100 / R x = +0.189 (t10 STEP4 CARRY) ⇒ **screen-left = instrument-L ⇒ Rs's 「左」 =
 instrument L.** Both attribution legs now sit AT THE HUB for the three-way collation — pC stays blind;
-§257(f)'s caveat discharges at collation, not by pC. **(c)** t11 progress custody: 13:39 STEP10 t=24.0 s
+§257(f)'s caveat discharges at collation, not by pC. ⚠ The CONCLUSION half SUPERSEDED by §329(b) (p4
+-131): the azimuth-90 ⇒ screen-right=+x geometry is the WIDE panel's and stands; the video's ZOOM panel
+(cam2 azimuth 250, the gripper-visible one) mirror-flips ⇒ on it screen-left = instrument R ⇒ "Rs's 「左」
+= instrument L" holds only if Rs watched the wide panel — p4's -131 reads the opposite as the consistent
+case. **(c)** t11 progress custody: 13:39 STEP10 t=24.0 s
 (t10 ended at 29.1 s).
 
 ## 284. Determinism retires p11's own ask — and the hub answers the question it left open
@@ -8800,7 +8804,12 @@ p95/max (9.6 / 12.0) EXCEEDS R's worst instant ⇒ σ says "R's moment is the ru
 routinely worse than that" — the RANKING inverts, and **Rs's verdict was 「左が特異点を通る」: rad/m
 points at the arm Rs named; σ pointed at the other one.** ⚠ Corroboration, not proof (Rs = a specific
 visual event; rad/m = run medians) — §27.2.110's replacement now empirically vindicated AND aligned with
-the human ground truth. **(c) The structural reading, dissolved in flight**: p11's "the 21 mm may be the
+the human ground truth. ⚠ (b)'s ALIGNMENT LEG SUPERSEDED by §329(b)-(c) (p4 -131 frame correction): on
+the ZOOM panel — the gripper-visible one — the screen mirror-flips ⇒ Rs's 「左」 = instrument R
+(inference, panel-conditional) ⇒ the arm Rs named is the one σ's run-worst and p4's R-side instruments
+sat on; rad/m's "L routinely worse" stands as measurement but no longer carries Rs's visual as
+corroboration. The unit-based replacement of σ (mixed-unit ⇒ ranking-only) is UNTOUCHED — it never
+rested on this alignment. **(c) The structural reading, dissolved in flight**: p11's "the 21 mm may be the
 same two points" (seat_point takes x,y from pinch, z from claws — §27.2.97's fix chose the centreline and
 discarded the mouth; the numbers align on one axis: −9.05/+14.29, 14.69, 12.7) was posed with the causality
 explicitly open and the probe named as its judge — **and the probe (§289(a)) answers: the mouth IS on the
@@ -9613,3 +9622,84 @@ antisymmetric x 0.44 is not explained by any angle ⇒ read separately as an axi
 data (c cancelling is measurement-independent), and the next run has not run — hands stay bound before
 data; the only legitimate time for the fix is now. **(e)** Non-acts: no run asked; no cause claimed for
 the 0.88; not the same number as §27.2.107; implementation = p4's court.
+
+## 329. t13 banked — and the frame correction that flips the attribution
+
+From p4's -131 (15:1x). **(a)** t13 BANKED and verified: `8de66495e5` ("Land the third traced run, and the
+first watch-along one") — run_t13.txt sha `f3716bd353…` ✓ / sigma_trace_t13.txt sha `a9e1be5505…` ✓
+machine-compared; producing code `581ae56935` (as expected, §327(e)①); gates in-log `:280` {'grasp': False,
+'regrasp': False} ✓; "aggregation t11/t12-consistent" = p4's reading of the banked trace.
+
+**(b) ⛔⛔ The attribution flip**: p4 corrects its own -101(3). "screen-left = instrument L" was computed on
+the WIDE panel (azimuth 90 ⇒ screen-right = +x — §283(b)'s geometry, which stands). The live video's ZOOM
+panel — the gripper-visible one — is cam2 azimuth 250 ⇒ screen-right = (−0.940, +0.342, 0) ≈ −x ⇒
+**instrument R (+x grasp) appears screen-LEFT on the zoom panel**. ⇒ IF Rs watched the zoom panel
+(inference, panel-conditional — p4 frames it so), Rs's 「左」 = instrument R. Consistency evidence FOR the
+inference: the instruments' complaints all sat on R — starvation, the STEP13 singular instant, post
+contact, tilt 32° vs 17°, now table penetration −25.5 vs −0.6 mm — while Rs kept saying 「左」; under the
+zoom mapping these become the SAME arm and the standing contradiction dissolves. Tags planted at §283(b)
+and §290(b); my past Rs reports carried the wide-panel attribution and the rad/m-sides-with-Rs framing ⇒
+corrected explicitly in this checkpoint's Rs report. ⚠ Era scope: the ledger's older screen-mappings
+(§§ near lines 648/1173/6570) belong to earlier camera configs / drivers and are NOT retagged — the
+correction is scoped to the wired-era two-panel live video.
+
+**(c) What the flip moves and what it does not**: MOVES — "Rs's 「左」 = instrument L" attributions and
+§290(b)'s alignment garnish (σ's run-worst R @STEP13 and p4's R-side instruments now sit on Rs's named
+arm; rad/m's "L routinely worse" stands as measurement, minus the Rs corroboration). DOES NOT MOVE — the
+σ→rad/m bar replacement (unit argument: σ mixed-unit ⇒ ranking-only — never rested on the alignment); the
+σ-vs-rad/m disagreement data; the (i) inspection result and packet (ii) basis (world/instrument frame,
+screen-free).
+
+**(d) ⭐ Rs direct instructions ×2, verbatim custody = p4 -131** (implementation `1a1efe0ac5` "Keep the
+fingers vertical on the way down to a clip, and measure the table"; asset sha `01861b95e9…` ✓):
+①「クリップに下降する場合は、フィンガがテーブルにぶつからないよう、すべてのフィンガは垂直に下向きである
+必要がある」(15:1x JST) — seat-stage pose fixed straight-down by NAMING the pose-menu head (0,0) via
+pose_rd, no new values; ⛔ no tilt fallback (insoluble ⇒ raise with reason). ②「青い爪（コの上側）を2mm
+うえに移動」+「それでいい」— claw asset moved; ⚠ world rise ≠ 2.0 (tool tilted; measured L +1.9 /
+R +1.6 mm). ⇒ **§0#4 gripper-geometry premise CHANGED by Rs's own hand** (DDR #44 form); cascade routed:
+p5 (§331), p11 (-596), p6 register decision (-597). ⭐ This CLOSES the 15:14 Rs-report observation: the
+transient input-box text "コの開口が 14.0mm → 16.0mm…" was p4's real in-progress report of this
+Rs-directed change — "実変更の証拠なし" superseded; no unrouted change existed.
+
+**(e)** New instrument: the reach print gains HEIGHT ABOVE TABLE (negative = penetration) — "mm below the
+mouth" cannot answer the table question because the mouth itself descends. The t13 numbers (R −25.5 mm @C1
+/ L −0.6) are p4's OFFLINE derivation from t13 data — ⛔ NOT in the banked log (grep 0) — same order as the
+tilt 32° vs 17°. **(f)** t14 LAUNCHED 15:16:50 on `1a1efe0ac5`; ⛔ no video (rule #9/#12 compliant);
+ancestry verified: `9c141601f8` IS an ancestor ⇒ **t14 carries ride #3's orientation print**. ⚠ p11's own
+"1 構成" scope clause now bites: the numeric targets (2.7°/1.5°) derive from t13-config data; pose + claw
+changed for t14 ⇒ the structural falsifiers (signs / uniformity / axial-separate) read as-is, the numeric
+targets re-derive from t14's own world print (routed to p11, -596).
+
+## 330. The direction yields to the convention — and an inventory declared without self-start
+
+From p11's -130 (15:21); pin verified: §27.2.131 ② corrected IN PLACE @ `5d00f70bc8` — file sha
+`24109a86…` ✓ machine-compared, added headers 0 ✓. **(a)** p11 owns the direction over-claim my m594(2)
+flagged: "0.88 mm 離れている" carried a direction that rides the print convention (actual−assumed vs
+assumed−actual), custody = t13's trace ⇒ claimable now is |0.88| only; the direction waits for the
+convention. ⭐ Desk note: **t13's trace BANKED at `8de66495e5` while -130 was in flight** ⇒ the convention
+p11 waits on is now READABLE (producing code `581ae56935` + banked trace); finalization = p11's court,
+pointed there in -596. **(b)** Nothing withdrawn on p11's side toward my §327(e)② own: "x outside the two
+plane angles" survives as the pointer that triggered the algebra; only the territory assignment was wrong.
+**(c) FYI inventory, explicitly non-self-start**: §27.2.118 (the aim converges while the cable moves
+10.8/12.7 mm) + §27.2.128 (one common cause — translation 3.8 mm + rotation 3.1° — can reproduce both
+arms' errors) are direct INPUTS to the approach-design sufficiency condition "the cable must not move
+between R3 and R5" that p5's §13-9 named as p11's court. p11 will not start without a request — banked as
+inventory, not tasking.
+
+## 331. What the two millimetres moved downstream — three asset-derived numbers, one recomputation owed
+
+From p4's -133 (15:2x). **(a) ⭐ The +2 mm claw move shifts THREE asset-DERIVED quantities** (one code
+path derives them from the asset; no constants hand-rewritten): mouth_clear 14.00 → **16.00 mm**; release
+claw-tip reach 11.00 → **12.00 mm**; off-centre allowance 3.00 → **4.00 mm**; containment band "want
+|across| <" 3.00 → **4.00 (next-run confirm)**. In-log verbatim VERIFIED for t13 (banked): `:36` "release
+opening solved from the asset: ctrl 189.3 (claw tips reach 11.00 mm = cable 8.0 plus the 3.00 mm the
+cable can sit off centre)" ✓ byte-matched; the t14 line (ctrl 186.7 / 12.00 / 4.00) is p4-reported — t14
+running, log unbanked. **(b) ⭐⭐ The recomputation owed sits in p5's court**: p5's budget-table HALF-BAND
+is grounded on the opening ⇒ 14.00 → 16.00 moves the half-band ⇒ the residuals (L +2.62 / R −2.00) and
+"the placement error that zeroes the residual = 4.93" need recomputation. p4 explicitly declines to
+derive (does not hold p5's derivation) and passes measured values only. ⚠ UNAFFECTED: the -119 seat-gate
+tolerances (x 22 / y half-groove 7.5 / z 6) are GROOVE-side — a different axis from the opening. **(c)**
+Premise handling: §0#4 change, DDR #44 form — register decision routed to p6 (-597). The change is
+Rs-DIRECTED (verbatim §329(d)) ⇒ Rs exercising Rs's own exclusive authority; what cascades is the
+re-derivation duty on numbers grounded on the old opening, not a violation. **(d)** t14 in flight
+(15:16:50); no video per rule.
