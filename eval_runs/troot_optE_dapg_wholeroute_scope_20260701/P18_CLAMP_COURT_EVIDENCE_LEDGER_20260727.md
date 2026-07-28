@@ -14190,3 +14190,21 @@ recorded vindication**: (iii) is exactly why the crown sweep was designed as its
 axis — assuming monotonicity would have landed at 0.05/0.08, which CONTACT;
 **"knowing the direction suffices" fails for non-monotone quantities.** No asks;
 (b) awaited; the register gets the synthesis with the (b) cycle.
+
+## 513. The register pulls a two-row proof out of the same table
+
+From p6's -157 (04:20:33). **(a) Pins verified**: commit 744a1f62af ("Row sweep (a),
+and pull the cleanest demonstration out of it"); LEDGER sha fe94a818…ccee MATCH;
+artifact direct-read (32 lines, all figures matched). **(b) ⭐⭐ The two-row proof**:
+comparing the ADJACENT rows none vs 0.020 — all three OUTCOMES identical (L 0 / R 4 /
+arms +9.6) while the crown's NAMING share jumps 0 → 3/7 = 43 % ⇒ **the share moves
+without moving a single outcome** — "the first thing hit" and "the thing that
+matters" separated inside one table, two rows apart; the cleanest demonstration of
+the §507 correction, and it was sitting in the data already. **(c) The rows**: the
+crown-off breakdown counted (mast events 7 = candidates 7 — the COLUMN alone fells
+everything even with no crown); #38 takes the 5 points with the RADIUS-CONDITIONAL
+phrasing ("do not write '0.22 holds/fails' without naming the crown radius");
+display-precision discipline applied (+0.0 recorded as "contact, or < 0.05 mm" — the
+raw value is not held); the geom renumbering saved (part names stable, ids
+per-variant). All grades and dispositions across the three desks now identical;
+(b)'s 24-point table is the sole outstanding measurement.
