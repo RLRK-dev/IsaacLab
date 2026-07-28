@@ -1050,11 +1050,19 @@ def vertical_cap_deg():
             f"not measuring attitude at all -- an inverted rotation, a scale of zero and a "
             f"collapsed sign all look like this, and the zero check cannot tell them apart "
             f"because they all reproduce the zero")
-    nz = [x for x in tilts if x > 1e-6]
-    if not nz:
-        raise RuntimeError("no menu attitude tilts the jaw at all, so the vertical check has "
-                           "nothing it could fail to distinguish and the cap is undefined")
-    return min(nz)
+    # ⛔ The cap is min(tilted), NOT min over everything that came back non-zero.  Those are two
+    # different sets and I had defined them two different ways inside one function: the
+    # calibration selected by the INPUT (the attitude asked for a roll) and the cap selected by
+    # the OUTPUT (the tilt came back above 1e-6).  The upright entries leak through the second
+    # one on numerical noise -- a few thousandths of a degree -- so the cap came out 0.00 while
+    # the calibration, looking at the other set, saw nothing wrong and stayed quiet.
+    #
+    # Which is the same failure as measuring the convenient quantity instead of the deciding one,
+    # one level down: the cap is about attitudes that ASK for a tilt, so it selects on the ask.
+    if not tilted:
+        raise RuntimeError("no menu attitude asks for a tilt, so the vertical check has nothing "
+                           "it could fail to distinguish and the cap is undefined")
+    return min(tilted)
 
 
 def _rdes(yaw, roll=0.0):
