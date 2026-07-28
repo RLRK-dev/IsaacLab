@@ -11609,7 +11609,10 @@ p5's two-term mechanism is REAL and desk-verified (:2073-2078 verbatim — the f
 the mouth as the jaw state changes; "two steps with the same arm pose and the same commanded
 jaw can still read different tilts") but is NOT needed to explain 11.2. And :277 shows
 mouth→cable = [2.9, 957.6, −226.5] mm — the R aim target sat ~0.96 m away in y ⇒ the solved
-pose is a best-effort toward a FAR target (echoes pB's STEP14 tool-error 1067.4 mm). The
+pose is a best-effort toward a FAR target (echoes pB's STEP14 tool-error 1067.4 mm). 〔⚠
+RE-LOADED per p5's -150(d), §417(d): the 1 m sits in the TARGET — mouth→cable is measured
+BEFORE the solve (:1983) and folded into the target (:1985) ⇒ "the cable that should be grasped
+is 1 m away," not "the solve missed by 1 m."〕 The
 untangling — target pathology vs menu/linkage pathology — belongs to p4/p5/p11.
 **(d) ⭐ The self-narrowing, banked**: p5's rule population = seating branches ⇒ it INHERITS
 _seating's domain holes; the −135.8 THROUGH THE TABLE (STEP10) sits outside the check's
@@ -11659,3 +11662,68 @@ axis-2 absent + the free-arm precondition), p5 (m724 — identity closed per p4 
 second invalidator + the jammed-pose population question), pB (m725 FYI — jam pins, g43 thread,
 t8 echo, the falsifier's premise changed by the exclusion drop), p6 (m726 — row materials),
 p4 (m727 — receipt + the two provenance asks).
+
+## 416. A dead number can open the question; only a live one can close it — and the discriminator was already printed
+
+From p11's -157 (19:59:03). **(a) Pins verified**: bank @ `b0eb57d8ac` (title IS the slogan),
+content sha256 `ce39a523a13e226db0c5fd988326a38adf1db5b679da493c6f55c08f885afbb3` = MATCH;
+:2027-2028 desk-read — `_tool = np.array(_sv.xmat[TOOLB[t]]).reshape(3, 3)` ⇒ the tool axis
+comes from the tool BODY's xmat, not through pinch()/slot_centre() (no finger mixing); the
+8-pair census COMPLETED at this desk: 7L 0.0/0.1, 7R 0.0/0.0, 8L 4.2/0.3, 8R 0.1/0.1, 9L
+3.5/0.8, 9R 0.0/0.0, 15L 0.1/0.1, 15R 11.2/11.2 — finger-dominated {8L, 9L}, arm-side {15R},
+small-agreeing 5 ⇒ the classification is machine-confirmed and is a CENSUS, not a sample.
+**(b) The intersection answered**: placing a bar needs a VALUE; declaring that the bar cannot
+stand needs only EXISTENCE. τ consumes r_max's value ⇒ dead numbers cannot feed it (-156 ③
+stands); the rebuild branch r_max ≥ τ_max is an inequality, fired by one lower bound ⇒ the
+CONDITION can be declared while 11.2 is neither banked as r_max nor used for τ. Slogan banked.
+Authorized = RE-DERIVATION only — no menu/spec edits until stage-2 live numbers. Conservatism
+direction stated: false-fire = a cheap re-derivation (not a run); miss = shipping a bar that
+does not exist ⇒ tilt toward opening. **(c) ⭐⭐ The discriminator**: _off ≈ tool-axis ⇒
+arm-side (lives as an existence/lower-bound claim); _off ≫ tool-axis ⇒ finger-dominated
+(dead). Zero cost, already printed. This NARROWS -156 ③ by p11's own hand ("I erased too
+much"): finger-dominated readings die; arm-corroborated readings live as lower bounds. p5's
+t17 5.0/0.0 exclusion lands finger-dominated by the same column (⛔ t17 values not re-read by
+p11 — dependency stated). Byproduct: tool 0.3/0.8 bounds carrier (a) (solve differences)
+within 1° ⇒ 4.2 unexplained ⇒ carrier (b), jaw obstruction, dominates §27.2.154 ⑥.
+**(d) The form updates to THREE axes** (p5's upstream principle absorbed): axis 0 COVERAGE →
+axis 1 population → axis 2 arming; the 4-stage order unchanged; −135.8 (STEP10) = an axis-0
+instance. The lone censoring-escapee (terminal 11.2, upright-commanded per the :277 aim line;
+the inheritance census {3,4,13} rests on this desk's measurement — dependency stated) says the
+bar cannot stand; the one LIVE refutation path = the corrected cap exceeding 11.2 — p11 waits
+and requests nothing. **(e) ⚠ CROSSED within one minute by p5's -150 rider ④ (§417)**: the
+17.19° acceptance window removes 11.2 from population C INDEPENDENT of staging ⇒ the -157
+declaration's premise (11.2 as a lower bound on the RULE's population) is contested; p5's own
+scoping — "the rebuild branch did not vanish; only 't20 showed it' fell." Reconciliation =
+p11's court (m723): the existence claim may survive as a statement about the CURRENT machine
+while ④ scopes the rule's population — both readings routed verbatim, neither adjudicated here.
+
+## 417. The seating solve accepts three times what the check allows — the window, not the check, wrote t20's ending
+
+From p5's -150 (20:00; expressly observations, nothing authorized). **(a) Pins verified — at
+the WORKING TREE (= `4c2cd5dc77`, 2473 lines; p5's line cites land there, NOT at c65e0efc8b —
+version noted)**: :1295 verbatim "if pe > 0.002 or re_ > re_max:" (position hard-gated 2 mm;
+attitude a soft term — the 0.6 weights :1282-1284 desk-read); windows re_max = 0.02 (:651,
+aim) / 0.05 (:1216, module default) / **0.30 at BOTH seating sites (:2036, :2048)** = 1.15° /
+2.86° / **17.19°**; the "⛔ Do not fall back to a tilted attitude…" note at :2038 (a few lines
+from p5's cite; content verbatim), with the Rs verbatim custody comment at :2024-2028
+("Rs, 2026-07-28, watching the run: when descending to a clip, all fingers have to point
+straight down…"); the _ride mechanism at :1983/:1985 (p5 cited :1975/:1977 — small drift,
+mechanism EXACT: `_ride = cable_perp(seat_point(t))[1] − seat_point(t)`; `tgt[t] = want − off
+− _ride` — measured BEFORE the solve, folded into the target). Doc on-disk sha256
+`5683c62e6b8bf05599111138f1aeb8d89555c9a2f33b0be0c23a03f85725ef46` = MATCH → **bank #17
+EXECUTED @ `1a49bd6fdd`** (+56/−0, new §18-8). **(b) ⭐⭐ The finding**: the ONE step family
+where Rs's verticality requirement applies carries the LOOSEST attitude window in the file
+(6× the default, 15× the aim; 3× the check's 5.73°) — while the adjacent note forbids exactly
+that fallback; re_max = 0.30 accepts the tilt SILENTLY (the raise fires only when no candidate
+passes at all) ⇒ t20's stop was NOT a check malfunction: the solve behaved as permitted, and
+the merge-point check caught what the window let through. **(c) Rider ④ added to R-r_max**:
+r_max only from solves whose acceptance window ≤ the check's allowance ⇒ 11.2 is NOT in C —
+the reason ("taken under a 17.19° window") independent of staging, dead-or-alive immaterial;
+⛔ the rebuild branch NOT declared gone — only "t20 showed it" fell; §18-6's warning stands.
+Crossing with -157 routed (§416(e)). **(d) Their own -149 implication corrected — and this
+desk's §414(c) phrasing RE-LOADED with it** (inline tag placed): 957.6 mm is not a solve
+residual; the cable that should be grasped is 1 m away (consistent with STEP14 R 1067.4 and
+the §415 jam/no-grasp thread — the analysts' court). **(e) The pass dimension named in §18-8**:
+an ARMED run's r_max is a LOWER BOUND, not a maximum (t20 stopped at STEP15 R; STEP16/17 never
+measured). Asks executed: (a) bank #17 above; (b) the window facts → p4 as OBSERVATION (m727 —
+p5 directs no change); (c) rider ④ + the pass dimension → p11 (m723).
