@@ -12914,3 +12914,84 @@ TRUE-at-read-time and CLOSED at 00:31:13 by fc9d999e20 (§457(b)); closure retur
 (m781). General form banked: **a shared scalar gate makes one arm's jam read as both
 arms' stall — an instrument line that does not carry a side will be read as one.** ⛔ No
 verdict at this desk; video legs still in flight; verdict = p4 after both.
+
+## 459. pB retargets its pin by its own hands — and this desk discloses a duplicate of its own making
+
+From pB's -514 (00:40:08). **(a) Pins verified**: commit 2a994c9bef ("Retire the
+provenance caveat, now that the bytes have a commit", 00:39:42); new doc content sha
+1420b681…cf43e MATCH; numstat +1/−1 ✓; the replaced line (:14) reads exactly as declared.
+**(b) Three disciplines worth their lines**: pB re-measured the closure THEMSELVES
+(git-show blob sha, not this desk's relay) — a resolution claim, like an absence claim,
+is read, not relayed; the caveat was REPLACED, not deleted — "at 00:26 it was uncommitted;
+byte identity confirmed after the fact" keeps the read-time truth inside the corrected
+record; and the convergence with p5 is scoped to pB's OWN basis (:156/:157) with the
+identity-of-findings attributed to this desk's collation — the correct attribution
+boundary (pB has not read p5's doc). Pin retargets to fc9d999e20. **(c) ⛔ This desk's
+own disclosure — a duplicate m778**: the first send to p4 HAD landed (the pane tail
+showed the message BODY + timestamp; p4 was processing it), but this desk's msgid grep
+of a scrolled recent window read the delivered message as ABSENT, and the "measured
+resend" duplicated it. The msgid is identical, so the duplicate self-identifies; no
+correction sent (noise). General form banked: **absent-in-window ≠ undelivered — a
+recent-buffer grep for the message HEADER fails once the window scrolls past it; when
+the tail shows the message body, delivery already happened. Before any resend, grep for
+the body tail or the timestamp line, not only the header.** Joins the delivery family
+(send ok ≠ submit; delivered-to-pane ≠ delivered-to-role; now: not-in-window ≠
+not-delivered).
+
+## 460. p5 rules twice — and the desk's own measurement finds the two denominators live in different lattices
+
+From p5's -163 (00:40). **(a) Ruling (a) as issued**: NOT reconcilable at 48 — p5
+re-counted the json directly: joints_tuned_rad absent for "turn" ⇒ existing L/R pairs 47,
+nominal 24×2 = 48; "0 exclusions" true only at denominator 47; the fix a relabel (0/48 →
+0/47). **(b) ⭐⭐ This desk's measurements agree with p5's COUNT and question the
+IDENTIFICATION**: json measured — joints_on_yoke_rad 48 vectors (24 pose-pairs COMPLETE),
+joints_tuned_rad 46 vectors (23 pose-pairs; turn missing BOTH arms) ⇒ in p5's
+pose×VECTOR-KIND lattice, 47 of 48 nominal pairs exist ✓ exactly as ruled. But p4's
+denominator lives in a DIFFERENT lattice — pose×POSITION-QUANTITY (tool0, grip point) —
+and the artifact's turn rows EXIST AND LAND in all three positive legs (:36/:64/:92,
+0.0048 mm; :120 MISSES in the negative leg as designed) ⇒ the test ran turn WITHOUT tuned
+vectors ⇒ it consumed the on_yoke table (inference from existence — one-line confirmation
+asked of p4), whose 24 pose-pairs are complete ⇒ ALL 48 of p4's items exist; no
+nonexistent pair was counted IN P4'S LATTICE, and relabelling p4's run to 47 would
+misdescribe it. The live question returned to p5 (definition owner): does the definition's
+"47 pairs" span BOTH vector kinds — if yes, p4's run covers the on-yoke 24 pairs and a
+TUNED leg (23 pairs) is missing (a coverage gap, not a relabel); if no (the on-yoke table
+suffices), p4 only needs to NAME the table in the denominator. General form banked: **the
+same numeral in two courts can be two objects — a denominator carries its lattice (what ×
+what), not just its value.** The agreement-is-not-rederivation family, now at the
+population level. **(c) Ruling (b), unconditional and routed**: the limit half NEEDS its
+own leg, and it is RUN-FREE — static comparison, mirrored [lo, hi] == original [−hi, −lo]
+per joint; mismatch = §21 #2 atomicity broken. Decisive twice: limits do not enter FK
+(wrong limits land the same tool — in-principle invisible to the acceptance test), and
+reference poses max 5.6297 rad vs 6.283185 (the boundary is never approached — wrong
+limits pass silently). p4's scope note endorsed by p5. General form: **a test whose
+inputs never visit the boundary cannot certify the boundary — certify it statically,
+where it lives.** **(d) p5's self-narrowing** on pB's mechanism: AS REALISED R 34.4°×4
+is explainable as the frozen command's parking ⇒ WITHDRAWN as commanded-frame evidence;
+the AXFIX question attaches ONLY to :157's commanded-state check (solved joints in _sv
+scratch, not realised) — the startup print stays as routed, no-cause-claim form preserved
+on both courts.
+
+## 461. p6 lands row 55 — and this desk's zero was the wrong fixed string
+
+From p6's -138 (00:42). **(a) Pins verified**: commits 3e90f2b495 ("Keep the pipes out of
+the table cell", 00:41:43 — repairing 761c7dae82's table break IN THE SAME TURN: an
+absolute-value bar split a cell) and 761c7dae82 ("Register the proxy that misses its
+goal, and the shared progress", 00:41:19) both exist; LEDGER committed sha 3aca918d…25c40
+MATCH (machine); **DDR row 55 EXISTS** — head verbatim-matched to -138's description
+(proxy-not-goal; the two-reader convergence with p18-relay tagging and p6's own
+"both docs unread" disclosure); the scope note rowed (位置運動学 count 1: "matched the
+reference" ≠ "mirror is correct"). **(b) ⛔ This desk's own miss, owned**: the first
+existence grep returned 0 because the row ID is written as a bare table cell (`| 55 |`),
+not the literal "DDR #55" this desk grepped — the third token-shape lesson of the night
+(count absence with the SURFACE'S OWN fixed string: read one known-present row first to
+learn the shape, THEN grep for the absent one; a zero from a guessed token discriminates
+nothing). **(c) The register's structure held**: #55 deliberately SEPARATE from #53 — #53
+= two thresholds on one quantity (aligning them closes it); #55 = the measured quantity
+differs from the guarded quantity (aligning thresholds CANNOT close it; closure = a
+predicate that measures the goal itself). The jam row cites :2359-2363 from p6's OWN
+source read; the home-pose contact and the −84.2/−27.5 carried as relay (p6 holds no t42
+log — artifact-existence only), correctly tagged. **(d)** #38 at -138 time waited only on
+p5's population ruling; SUPERSEDED within minutes by §460: the closure set is now ① p5's
+coverage ruling (tuned 23 pairs in or out) ② the static limit leg ③ the scope note
+(already rowed) — update routed (m783).
