@@ -163,12 +163,19 @@ def main() -> int:
         out.append("")
 
     out.append("DENOMINATOR, stated so it cannot be read as more than it is:")
-    out.append(f"  {len(poses)} poses the reference publishes x 2 position quantities "
+    out.append(f"  Every leg is driven from the ON-YOKE table: the joint values consumed are")
+    out.append(f"  joints_on_yoke_rad, never joints_tuned_rad.  Naming the table is the whole")
+    out.append(f"  point -- 48 counts position quantities on the on-yoke grid, and it is a")
+    out.append(f"  different question from the 47 that counts R-formula pairs (p5 -164).")
+    out.append(f"  {len(poses)} on-yoke poses the reference publishes x 2 position quantities "
                f"(tool0, grip point) = {len(poses) * 2} L/R position pairs per leg.")
     resid = [k for k, p in poses.items() if p["left"].get("retarget_residual_m")]
     out.append(f"  Nothing is excluded: all {len(poses) * 2} are compared on every leg.  "
                f"{len(resid)} pose ({resid}) carries a non-zero on-yoke-vs-tuned residual in the "
                f"reference, which this test does not measure and does not relax for.")
+    out.append(f"  ⚠ p5's caveat, carried forward: if this test is ever restated as 'does the arm "
+               f"reach the position the reference PUBLISHES for the task', that {resid} residual "
+               f"stops being irrelevant and its disposition has to be stated before the run.")
     out.append("  The test leg IS the acceptance test.  Control says whether my mounting and FK "
                "reproduce the reference at all -- without it, a passing test leg could be two "
                "errors cancelling.  Formula is the reference's own non-mirrored route, and its "

@@ -121,8 +121,13 @@ turn                          357.6791     643.3237   MISSES
 -- negative: 0/48 position pairs land within 1.0 mm (worst 1357.5480 mm at connector_insert)
 
 DENOMINATOR, stated so it cannot be read as more than it is:
-  24 poses the reference publishes x 2 position quantities (tool0, grip point) = 48 L/R position pairs per leg.
+  Every leg is driven from the ON-YOKE table: the joint values consumed are
+  joints_on_yoke_rad, never joints_tuned_rad.  Naming the table is the whole
+  point -- 48 counts position quantities on the on-yoke grid, and it is a
+  different question from the 47 that counts R-formula pairs (p5 -164).
+  24 on-yoke poses the reference publishes x 2 position quantities (tool0, grip point) = 48 L/R position pairs per leg.
   Nothing is excluded: all 48 are compared on every leg.  1 pose (['stock']) carries a non-zero on-yoke-vs-tuned residual in the reference, which this test does not measure and does not relax for.
+  ⚠ p5's caveat, carried forward: if this test is ever restated as 'does the arm reach the position the reference PUBLISHES for the task', that ['stock'] residual stops being irrelevant and its disposition has to be stated before the run.
   The test leg IS the acceptance test.  Control says whether my mounting and FK reproduce the reference at all -- without it, a passing test leg could be two errors cancelling.  Formula is the reference's own non-mirrored route, and its size is the difference the mirrored asset removes.
   ⛔ What this does NOT cover: joint LIMITS (the sign convention is checked here by where the tool lands, and the atomic axis-and-limit inversion is not exercised by poses that all sit inside symmetric ranges), collision geometry, inertias, and anything dynamic.  This is a kinematics-of-position test.
 
