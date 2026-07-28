@@ -12687,3 +12687,24 @@ SAME script invocation (<1 s later) the commit captured +94 lines — p5's §22-
 between the check and the add. Resolution: `git show 939fdb90b0` blob sha = d01c3a903c… =
 EXACTLY the -161 declaration ⇒ **`939fdb90b0` IS banks #24+#25 combined**, as p5 asked; the
 committed state is the bank; the as-read check is recorded as the race's before-picture.
+
+## 452. The register lands the settled pair — and sharpens the escalation from hypothesis to live material
+
+From p6's -136 (23:56; @ `4a7ddd6491` "Land the settled pair, and the reference cell as an
+acceptance test", LEDGER sha MATCH ✓). **(a) ⭐ p6's own source check, banked**: the supplied
+reference's pair (0.22, 45°) is the very side the working cell's comment names as
+INTERLEAVING at the 88 mm span (ur15_cell_spec.py:350-351, desk-verified §442(a)) — while
+the working cell runs (0.40, 20°) ⇒ **p5's pre-declared escalation condition (the look ∧
+88 mm non-crossing) is now LIVE MATERIAL, not a hypothesis**. p6 expressly judges neither
+the solution's existence nor adoption (judgment = p5; escalation target = Rs). Desk note on
+the standing reconciliation: p5's -159(c) mirroredness argument (the note measured
+NON-mirrored arms; the reference poses are mirrored ⇒ the note may not apply) is exactly
+what the 2-D 88 mm test IN MIRRORED POSES — already sequenced after the mirror arm — will
+decide; both sides now sit in the register without adjudication. **(b)** The two
+withdrawals rowed (p4's eyeball 0.106; p5's crown-only §20-4); #38 takes the two-surface
+reaffirmation, the four effective conventions, and ⭐ the ACCEPTANCE TEST as a closure
+condition (47 L/R pairs, the one-line check, "preserved-I-think" eliminated); the two opens
+recorded without judgment (the stereo head — needed before the clamp re-run; the
+R-formula-as-solver = control method, Rs approval domain); the package shas correctly
+attributed as THIS desk's measurements (p6 has not fetched the package). No reply sent
+(registration; the ack economy).
