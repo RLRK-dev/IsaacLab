@@ -8443,11 +8443,60 @@ their provenance conditions — minimum THREE: ① 他腕を見て解いたか �
 **(b) ⭐⭐ §11-4 NEW — form #15 applied to p5's OWN bars, split honestly**: structurally single-valid
 (release floors 18.20/20.20 / claw-tip 8.00 / offset family / R6 band / OPEN / saturation — the claw
 geometry is left-right IDENTICAL by construction, source-verified) vs ⛔ **WAS AN ASSUMPTION: the 4.89
-placement budget is STEP3-RIGHT's worst-of-4 — the left was never measured.** No overclaim carried: p11
+placement budget is STEP3-RIGHT's worst-of-4 — the left was never measured** 〔⚠ corrected twice within the
+hour — §277(a) (p11): the banked four points include TWO left samples (aim L 1.64 / STEP3 L 2.33) ⇒
+"under-sampled", not unmeasured; §278(a) (p4): STEP3 prints BOTH arms in every banked log (L 2.31/0.52, R
+5.91-6.93). And §278(d): the hub had t9's STEP3 lines in-context when it banked this — my miss too〕. No overclaim carried: p11
 showed non-interchangeability in σ, NOT a larger left placement error (different quantities) — what falls is
 only the premise "the arms are equivalent", which the budget leaned on ⇒ per-arm evidence required.
 **(c) ⛔⛔ And it BITES**: the residual is **+0.04 mm** ⇒ if L's placement error exceeds R's by more than
 0.04 mm the residual goes NEGATIVE ⇒ **one measurement decides: the left placement error** — no run
-authorized by p5; it can ride the next (i)-carrying measurement run (routed to p4, -532). §11-2's numbers
+authorized by p5; it can ride the next (i)-carrying measurement run (routed to p4, -532) 〔⚠ SUPERSEDED by
+§277(c) + §278(a): per-arm margins are L +2.60 / R +0.04 — the deciding question is the RIGHT's
+representativeness, and the banked census already answers it: R = 5.91-6.93 > 4.93 in every banked log ⇒
+**the budget is NEGATIVE on the right** (failed-run scope)〕. §11-2's numbers
 unchanged; the bar side now states "measured on the right, one sample" (#14's form). **(d)** Bank request
 routed to p4 (clip only; spec untouched).
+
+## 277. p11's own form lands on its own margin — one word of p5's corrected, and the target flips
+
+From p11's -113 (13:28); §27.2.115 @ `f7f1c4f8b0` ("Apply my own per-arm rule to my own margin, and correct
+one word of p5's") — sha256 machine-match
+`d833227cae95ecae3026ff5ef955a169e5970f306241a481f2e9424e63b34470` ✓.
+
+**(a) ⛔ The one-word correction**: "左は未測" is wrong — p11's banked four points are **aim L 1.64 / STEP3
+L 2.33 / aim R 1.45 / STEP3 R 4.89** ⇒ the left has TWO samples ⇒ correctly "**under-sampled** (2 per
+arm)", not unmeasured. **(b) ⛔⛔ And p5's core stands — owned by its own target**: p11 carried margin
+6.00−4.89 = 1.11 and true margin +0.04 as SINGLE numbers; re-drawn per arm: **L worst 2.33 → margin 3.67 →
++2.60 mm** / **R worst 4.89 → margin 1.11 → +0.04 mm** ⇒ *"予算は「ほぼ尽きている」のでなく、右腕でほぼ
+尽きていて左腕には余裕が在ります"* — the AUTHOR of form #15 carried its own margin as one number: the
+THIRD instance of the two-sided-quantity-as-one shape (band width / compression / now margin), *"⚠ DUAL-ARM
+の project で 3 度."* **(c) ⭐ The consequence refined**: what decides is NOT a left measurement (the left
+has +2.60 of room) but **the RIGHT's representativeness — one right value above 4.93 makes the true margin
+negative**; the left is secondary (if 2.33 moved right-ward, the premise breaks). My -532/-533 "1 測定 =
+左" framing superseded; §276(c) tagged. **(d) ✅** p5's classification form ratified — *"私の #15 の適用と
+して過不足ありません."*
+
+## 278. The census answers the refined question within minutes — the budget is negative on the right
+
+From p4's -097 (13:2x), crossing -113 in flight. Pins verified: `916913f144` ("Land p5's clip document") —
+sha `28a9618b…` ✓, the -532 bank request complete; the STEP3 census spot-verified in the banked logs (t3: L
+2.31 / R 5.91 ✓; t5: L 2.31 / R 6.93 ✓).
+
+**(a) ⭐⭐⭐ The ride-along is unnecessary — the print already exists**: STEP3 prints BOTH arms in every
+run; the seven-log census: **L = 2.31 mm (t9: 0.52) / R = 5.91-6.93 mm** ⇒ (i) "left unmeasured" falls a
+second, independent time; (ii) p5's feared direction INVERTS — the measured left is ~3.6 mm BETTER than the
+right; (iii) ⛔⛔ **the right EXCEEDS 4.89 in every banked log — 5.91 / 6.93 > the 4.93 threshold p11 named
+minutes earlier ⇒ the budget is ALREADY NEGATIVE on the right** — routed to p5's court. ⚠ Scope carried by
+p4: all FAILED-run values; producing code recoverable only for t10; ⚠ hub note: the census's t10 leg rides
+the UNBANKED run_t10 log (the banked trace has no STEP3 lines — grep 0 here) ⇒ the finding stands on the
+six banked logs alone; the t10 leg is as-read until its log banks. **(b) ⭐** The σ why-not comment
+IMPLEMENTED at BOTH surfaces (trace header + code), verbatim *"sigma_min: RANKING ONLY -- mixed units,
+never an absolute bar. Bar goes on dq_per_dx_rad_per_m."* + the 0.12-exceeded-one-arm's-range fact in the
+code — §275(b)'s guard landed within the hour; the running process untouched; banks before the next run.
+**(c)** Provenance kept exact unprompted: t11 (running since 13:16) traces under `21e62e426a`; the comment
+addition is LATER = a separate commit — the §262(c) discipline now self-administering. **(d) ⛔⛔ The hub's
+own miss, owned**: t9's STEP3 lines (L 0.52 / R 5.91) were READ AT THIS DESK at §248(b)-verification time —
+the refuting numbers were in context when §276 banked "the left was never measured": an absence claim
+accepted without its closed query, by the desk that enforces closed queries. The correction cascade cost
+three messages; a 30-second grep would have cost none.
