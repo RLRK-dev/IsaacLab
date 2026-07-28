@@ -8395,3 +8395,36 @@ is never reached — *"機構は在るが その姿勢には適用されない"*
 as-read to COMMIT form unprompted**: the four sites at `1ad8abce40` (`:602` / `:1055-1056` / `:1443` /
 `:1439-1440`; driver sha `bd34a749…` = §262(c)'s bank; 1629 lines), recounted against the earlier as-read
 positions. **(d)** The σ trace held as packet material without a register row, concurred.
+
+## 274. A condition updated, not a status — the register keeps pace with the bank
+
+From p6's -106 (13:22); commit `acc0df249b` ("Note that the driver is banked and the check carries its own
+scope") — LEDGER sha256 machine-match `fc095a7a37d5d20da65e1d98a71b47935bbe54d71bc010056f5041a732d020aa` ✓;
+the `+36/−4` driver delta at `21e62e426a` re-derived here by diff-tree ✓ (the earlier §258(c) "+20/−1" was
+the 12:38 as-read snapshot of the same moving tree — both true at their times).
+
+**(a)** Unprompted but correct: the #49 row's "driver dirty ⇒ artifacts can't pin" was a 12:38-scoped
+CONDITION — updated: after `21e62e426a` (13:16:16) the worktree is clean ⇒ runs launched after it CAN pin
+to a commit = exactly the form §264(f) (p11 §27.2.111(6)) requires of the measurement. The (i)
+implementation at `:1457-1460` with its embedded scope verbatim also recorded — the row's scope note now
+exists on the code side too. **(b) ⭐** Discipline kept both ways: ⛔ no timeless RUNNING written to the
+surface — the row says only "results not landed; next motion = (i) results land or Rs rules (ii)"; and the
+update is framed as a CONDITION change, not a status report. No requests; no self-start.
+
+## 275. Two lessons hardened in code — and a guard placed before the bar can creep back
+
+From p11's -112 (13:22); §27.2.114 @ `c466497435` ("Note two lessons hardened in code, and guard the sigma
+column") — sha256 machine-match
+`89558d7a85d769b606e1eb5a1cf36853769bc3b69f1d6cddafc2f76dc1ff5ea9` ✓.
+
+**(a) ⭐⭐** Two general forms strengthened BY IMPLEMENTATION: (i) the scope in the print string (`:1459`)
+— *"注記は別 file に置くと落ちますが、印字文に在れば数と一緒にしか動けません"*; (ii) p5's provenance-on-
+inherited-values preview = form #14 applied to DATA FLOW, not prose ⇒ §27.2.112②'s inheritance hole gets
+plugged from the runtime side AND the design side. **(b) ⚠⚠ The forward guard**: the σ column retained
+"for selection/envelope" is correct (relative comparison valid, §27.2.113③) — ⛔ but a σ column sitting in
+a trace invites the next person to reattach a "σ >= 0.12"-form bar ⇒ **write WHY-NOT-A-BAR next to the σ
+column** (e.g., *"順位付け専用 — 混合単位ゆえ絶対閾に使えない"*) — the §27.2.98 shape INVERTED: there
+"why needed" kept a mechanism from being removed; here "why it must not be used" keeps a threshold from
+returning. Relayed to p4 (-531; comment-only, measurement-lane, next bank). **(c) ✅** The `:539/:542`
+line-move accepted — *"commit 形で引いていたので追えました"*: the -095-era pin-form change paying for
+itself.
