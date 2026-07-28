@@ -86,9 +86,14 @@ swapping the arms' roles, changing the mounting — is p5's call and Rs's to set
    was not the defect. What caught me was not noticing: it was the self-check I had added, which
    refuses to report when the centre moves and the links held do not. Finding *a* defect is not
    finding *the* defect, and I did not take a control before concluding.
-5. ⛔ **Cross-driver count comparison.** t42's and t43's collision-free counts are not the same
-   quantity (the mast geom set changed between them, ngeom 139 → 140). Only the sweep's own rows,
-   all from one driver in one sitting, are comparable.
+5. ⚠ **Cross-driver count comparison — and then the correction to the correction.** I accepted
+   that t42's and t43's collision-free counts were not the same quantity because the mast geom
+   set had changed (ngeom 139 → 140). ⛔ The pair was wrong: both traces print `ngeom=140`, and
+   the crown entered the set on 07-28 23:05, before t42. The 139 → 140 step belongs to an earlier
+   cell. So **t42 and t43 are comparable**, and reading t42's "6 of 6" as the all-put-back case
+   does not depend on an assumption. The habit stands — counts from drivers whose predicate
+   differs are not one quantity — but it did not apply here, and I had propagated it into two
+   documents before it was checked.
 
 ---
 

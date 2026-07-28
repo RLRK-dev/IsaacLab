@@ -41,9 +41,14 @@ block is interpretation and is marked so the two cannot be confused.
    while its collision-free count stays at zero.  More solutions exist and all of them collide.
    An arm that could not reach would run out of solutions; this one runs out of clear ones.
 
-4. ⛔ Comparisons only within this table.  p6: the collision-free predicate changed between t42
-   and t43 (mast geom set, ngeom 139 -> 140), so counts from different drivers are not the same
-   quantity.  Every row here came from one driver in one sitting.
+4. ⛔ Comparisons only within this table -- as a habit, not because of the case first cited.
+   ⚠ CORRECTED: I wrote that the predicate changed between t42 and t43 (ngeom 139 -> 140).  The
+   pair was wrong: both traces print ngeom=140, and the crown entered the mast set on 07-28
+   23:05, before t42.  The 139 -> 140 step belongs to an earlier cell, not to t42 -> t43.  So
+   t42 and t43 ARE comparable, and the reading that t42's "6 of 6 collision-free" was the
+   all-put-back case does not rest on an assumption -- it rests on the same predicate.  The
+   caution itself stands: counts from drivers whose predicate differs are not one quantity, and
+   every row here came from one driver in one sitting.
 
 5. ⛔ Not a recommendation.  Where the pair should sit, and whether the upstream options p5
    named (moving a clip, swapping the arms' roles, changing the mounting) should be opened, is

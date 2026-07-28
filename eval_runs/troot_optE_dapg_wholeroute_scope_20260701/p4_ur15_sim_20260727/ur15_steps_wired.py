@@ -1359,6 +1359,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     collision, and returns the one closest to `near` (so the servo move stays short)."""
     sc = mujoco.MjData(m)
     _clear_dropped = 0
+    _blame = {}          # what each rejected candidate was rejected AGAINST, by name
     _col_dropped = 0
     _path_dropped = 0
     _worst_path = (1e9, None)
@@ -1478,6 +1479,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
                 hit = True
                 _clear_dropped += 1
                 _by_clearance = True
+                _blame["the other arm"] = _blame.get("the other arm", 0) + 1
         # Rs, 2026-07-28, watching the run: "the left hand is slamming into the cylinder."  The
         # mast was never in this filter.  It was MEASURED every step and printed as "column gap",
         # and it read negative at EIGHT steps of thirteen -- nine counting the one that read
@@ -1494,10 +1496,15 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # The decision only ever asks whether anything is under the clearance, so it searches a
         # radius just wider than the clearance -- p11's cutoff split, the same one the far-arm test
         # takes.  Nothing it decides changes; the far pairs stop being measured.
-        _cg = column_gap(t, sc, cutoff=ARM_DECIDE_CUTOFF)
+        # ⭐ p5 -170(3): name the part.  The rejection already knows what it is rejecting against,
+        # and the answer picks the branch of an open Rs decision -- the yoke or the column say
+        # "mounting geometry", the other arm or the table say "clip placement".  So the
+        # counterpart comes out with the count instead of being inferred from it.
+        _cg, _cw = column_gap(t, sc, want_who=True, cutoff=ARM_DECIDE_CUTOFF)
         if _cg is not None and _cg < ARM_CLEARANCE:
             hit = True
             _col_dropped += 1
+            _blame[_cw or "mast"] = _blame.get(_cw or "mast", 0) + 1
         else:
             # ⛔ And the same distance along the WAY there.  The endpoint test passed every one of
             # the right arm's candidates at STEP3 and the arm still ended 0.6 mm inside the stem:
@@ -1507,6 +1514,8 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
             if _pg is not None and _pg < ARM_CLEARANCE:
                 hit = True
                 _path_dropped += 1
+                _blame[f"{_pw or 'mast'} (on the way)"] = \
+                    _blame.get(f"{_pw or 'mast'} (on the way)", 0) + 1
                 if _pg < _worst_path[0]:
                     _worst_path = (_pg, _pw)
         # Manipulability of this candidate.  The solver had no notion of a singularity at all --
@@ -1535,6 +1544,13 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
               f"clearance or its path, so all {len(cands)} were put back and the choice below is "
               f"made among poses that were all rejected -- read the next line's 'collision-free' "
               f"as 'none'")
+    if not quiet and _blame:
+        # One line, named parts, because the answer decides which of two options is even on the
+        # table.  ⚠ The counts sum to more than the candidate count when a pose is rejected on
+        # more than one test; each entry is "rejections against this part", not "poses".
+        _b = ", ".join(f"{k} x{v}" for k, v in sorted(_blame.items(), key=lambda kv: -kv[1]))
+        print(f"[steps] start-pose IK {t}: rejected against -- {_b}"
+              f"   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)")
     well = [c for c in free if c[5] >= SIGMA_FLOOR] or free   # drop the near-singular ones
     ref = np.zeros(6) if near is None else np.asarray(near)
     near_only = [c for c in well if np.abs(c[0] - ref).max() <= 1.2] or \
