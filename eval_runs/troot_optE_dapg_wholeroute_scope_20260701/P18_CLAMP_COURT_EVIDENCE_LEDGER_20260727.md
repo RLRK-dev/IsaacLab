@@ -9572,3 +9572,44 @@ trace does on landing is bank the SOURCE instant (the p4-reported differentials)
 (-591 / -592), not silently normalized. ② The antisymmetric x-component (−0.44 mm) sits outside the two
 plane-angle predictions — a first-order rotation of on-axis grasp points has no x-displacement; that
 component reads on centre placement, condition ③'s territory. One clause here, no challenge raised.
+⚠ ②'s territory clause SUPERSEDED by §328(a) — the centre cancels from the antisymmetric part (p11
+-129): centre placement produces common-mode x, not antisymmetric x; the surviving reading is axial.
+
+## 328. The centre cancels from the antisymmetric part — falsifier three rewritten by algebra before the data
+
+From p11's -129 (15:16); pin verified: §27.2.131 @ `e78fe5e174` — file sha
+`8fef692bcb43db1ec23bbe401d4f57cbf39d3e962f5c9825e06985ab15c788ac` machine-compared ✓; diff adds the
+declared section only ✓. The reach correction accepted with the cause owned on p11's side; both commits
+DIRECT-READ there (`581ae56935` = t13, positions / `9c141601f8` = next run, orientation) — the predictions
+stand, the run they read on moves one later.
+
+**(a) ⭐⭐ The algebra that redraws the territory — and refutes my §327(e)②**: for a rigid rotation θ
+about ANY centre c, the antisymmetric component (δ_L − δ_R)/2 = θ × (−44,0,0); the c-term is
+point-independent, hence common-mode — it CANCELS from the difference. And θ × (−44,0,0) =
+(0, −44·θz, +44·θy): the x-component is IDENTICALLY zero. ⇒ antisymmetric x = −0.44 mm cannot be produced
+by a rigid rotation about any centre, on-axis or off. ⛔ My §327(e)② ("reads on centre placement") is
+WRONG — centre placement produces COMMON x, not antisymmetric x; the direction of my note (x outside the
+two plane angles) survives, the territory assignment does not. Tagged above; my m592 carried the error to
+p11, who caught it by algebra. Desk re-run: both steps verified ✓.
+
+**(b)** The surviving reading is AXIAL: the grasp points sit 0.88 mm (±0.44) further apart than the aim
+assumes. Desk re-check from §27.2.128's own rows: L (−1.28,−1.62,−1.04), R (−0.41,−5.75,+1.29) ⇒ (L−R)/2 =
+(−0.435, +2.065, −1.165) → (−0.44, +2.07, −1.17) ✓; with L at −44 / R at +44 (the aim's GL x =
+C1[0]−GRIP_HALF_SPAN, a design constant — span exactly 88 in the aim), δ_R,x − δ_L,x = +0.88 ⇒ "farther
+apart" ✓ under the actual-minus-assumed print convention (the convention itself rides t13's unbanked
+trace; the clause stands or flips with that custody, the |0.88| does not). Form-parallel flagged WITH its
+non-identity: §27.2.107's link snapping (design 88 → realised 90.0, +2.0 mm) is the same FAMILY — "the
+span the aim assumes is not the span obtained" — ⛔ not the same number (node snapping vs seating
+residual).
+
+**(c) ⛔⛔ Falsifier ③ withdrawn and replaced** (was "uniform angles, differing magnitude ⇒ centre
+off-midpoint"; the antisymmetric part does not depend on the centre, so a centre cannot explain a
+magnitude). Corrected list: ① L/R signs opposite ⇒ bending ② adjacent-link scatter > L-R difference ⇒
+local curvature dominant ③ uniform but magnitude ≠ 2.7°/1.5° ⇒ the rigid rotation itself is inadequate
+for the inter-grasp interval, or the printed link direction differs from the chord ④ NEW: the
+antisymmetric x 0.44 is not explained by any angle ⇒ read separately as an axial term.
+
+**(d) ⭐ Why rewriting a preregistration is repair, not fitting**: the reason is pure algebra using ZERO
+data (c cancelling is measurement-independent), and the next run has not run — hands stay bound before
+data; the only legitimate time for the fix is now. **(e)** Non-acts: no run asked; no cause claimed for
+the 0.88; not the same number as §27.2.107; implementation = p4's court.
