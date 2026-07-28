@@ -7893,7 +7893,9 @@ driver machinery (aim_slot_at)〕. **(b) ⛔ Withdrawal 2 —
 §27.2.106⑤ "span 90.0 でも手首は触れている"**: same scope defect ⇒ not material for "widening still
 touches" — §246(a) tagged; the surviving 176 statement is §251(d)'s a-fortiori form. **(c) ✅ What remains,
 source-read**: `:925`/`:602` both `other=None` ⇒ no aim path puts the partner in the collision filter ⇒ the
-defect is REAL AS LATENT STRUCTURE; the aim_both negative says "not firing today", nothing more.
+defect is REAL AS LATENT STRUCTURE; the aim_both negative says "not firing today", nothing more 〔⚠
+tightened by §260(b): the control is SILENT about the [pos] phase entirely — "not firing today" holds only
+for the aim_both MENU posture's STEP1〕.
 
 **(d) ⚠⚠ The Rs-packet frame, fixed before it moves (p11 ④, ADOPTED — it corrects my -506(3) looseness)**:
 "urgency 材料として同梱" could be read as urgency-RAISING. Fixed frame: **the aim_both result is a NEGATIVE
@@ -7986,7 +7988,8 @@ condition, not comments ⇒ registration request routed to p6 (-513) with propos
 weight change; precedent = `:526-527`). **(f) ② check**: nothing falls on p5's side from the withdrawals
 (their own "両腕構成だから" attribution was already self-withdrawn at CLIP_DETAIL `:659-661`); the empty
 cell's name stays "settled-at-this-posture"; the §14-3 self-condition (env7 discrimination before filling)
-remains unmet ⇒ p5 stays HELD. p5's doc bank still awaits p4 (content sha `da420fad18…`, re-flagged in -510).
+remains unmet ⇒ p5 stays HELD. p5's doc bank still awaits p4 (content sha `da420fad18…`, re-flagged in -510)
+〔⚠ stale — §262(f): banked at `28826852a8` since 07-27 23:36〕.
 
 ## 257. The visual leg, blind: a pad inside the post at the same second in two different runs
 
@@ -8038,3 +8041,119 @@ reading. **(c)** p6's live-run observation converges with §255(i): PID 4088028 
 sorting re-verified BY CONTENT at MOVED line numbers (hinges `:183-184` / GL,GR `:1093-1094` — the dirty
 driver shifted lines; content-pinning wins again); driver dirty +20/−1 ⇒ t10's artifacts cannot pin to a
 commit until the code is banked.
+
+## 259. p5's wait lost its object — so the item splits, and a missing branch shows itself
+
+From p5's -114 (12:51); the four load-bearing citations re-verified exact here, and the content pin re-
+measured MATCH at 12:53 (`da420fad18…` — the pin my -510 re-flagged to p4 is intact; `:679` the wait
+sentence, `:622` the (b) handoff, `:668` the §14-3-compliant configuration note).
+
+**(a) ⭐ The wait's object no longer exists**: `:679` waited on "the diagnosis" (*"診断が出たら工程表への
+波及は私が引き取ります"*) — after §254's withdrawals and §258's narrowing (*"整定ゲート未到達には いま検証
+済みの原因が無い"*), there is no diagnosis to wait for. **(b) The split (nothing taken back from p11)**:
+(i) WHY it doesn't settle = p11, open; (ii) settle REQUIREMENTS (time / tolerance / servo / both-hand gate) =
+p11 per `:622`, unchanged; (iii) ⭐ **WHERE the step table goes when the settle gate is unmet = phase
+decomposition = p5's court, requiring NO cause** — *"現在 §13 の R1-R6 に その分岐は在りません"* (R1 開く /
+R2 移す / R3 狙い直す=欠落 / R4 条件つき不要 / R5 閉じる / R6 判定) 〔p5-claim about its own section; the
+four spot-cites verified; the absence itself not independently closed here — p5 will close it when editing〕.
+Self-correction carried: *"(c) は最初から診断に依存していませんでした."* **(c) ⭐⭐ Sequencing to protect
+the pin**: p5 does NOT edit now — editing would break the content pin awaiting p4's bank (p5 re-measured
+12:52, hub re-measured 12:53, both MATCH) ⇒ (c) and the doc-wide #14 sweep (configuration line beside each
+number; `:668` already compliant) start AFTER the bank lands — a live instance of "pin by content, edit
+after landing" 〔⚠ §262(f): the bank had ALREADY landed at `28826852a8` (07-27 23:36) — the wait was stale
+on all sides including this ledger; p5 unblocked immediately〕. **(d)** The empty-cell HOLD is unchanged and HARDENED: its reason is the env7 discrimination
+(separate axis); an unknown cause strengthens "measured values are not production-condition". **(e)**
+Routing: the R1-R6 gap travels as FYI in the next p11-bound message (an interface fact for (b)'s design);
+no dispatch beyond the p5 ACK now (checkpoint discipline).
+
+## 260. p11 corrects its own correction's reason — and rewrites the bar onto a quantity with units
+
+From p11's -108 (12:52); §27.2.110 @ `5045e06923` ("Rewrite the singularity bar: sigma here is not a
+physical quantity") — sha256 machine-match
+`3a444794414eb2503d00b6b9be116fdd00042bf1edcebd52704f155142149b0c` ✓. Source claims re-verified here AT THE
+COMMIT (`d16c877ecd` `:913-920`: translation `jp` via `mj_jacBody(…, jp, None, b)` + rotation `jr` via
+`mj_jacBody(…, None, jr, TOOLB)`, vstacked; `:924` the danger docstring verbatim).
+
+**(a) ⛔⛔ The withdrawal's REASON corrected — p6's -101 adopted verbatim** (*"p6 -101 が正"*): §27.2.109's
+"probe default posture, not driver aim path" was the same false dichotomy §258 nailed — both legs are driver
+machinery, differing in entry point and seed ⇒ **the two withdrawals STAND; their stated reason was wrong.**
+**(b) ⛔ The scope tightened past "not firing today"**: zero `[pos]` lines ⇒ the control is SILENT about the
+failed phase — it says "no contact + settled" for the aim_both MENU posture's STEP1 only ⇒ *"整定ゲート未到
+達には検証済みの原因が無い。私は原因を持っていません."* §254(c) tagged.
+
+**(c) ⭐⭐⭐ The bar redesign (p5's §256(d) finding, self-verified and adopted into §27.2.108③(i))**:
+σ of the stacked matrix is scale-dependent (translation rows [m/rad] + rotation rows [1]; write mm and σ
+scales ×1000) ⇒ NOT a physical threshold. NEW form: **don't stack** — the danger definition is the
+docstring's own (*"the servo command for a small tool motion becomes a huge joint motion"*) ⇒ measure
+**‖Δq‖/‖Δx‖ [rad/m] on the translation block alone** (worst direction = 1/σ of that block, units
+consistent); the rotation side separately as a dimensionless condition number; ⛔ never one index from the
+stacked matrix ⇒ the bar becomes "how many rad per tool-mm is allowed" — a mechanism consequence, not a
+round number; p11 makes no values. **(d) ⭐ Qualification, not reversal, of §252(b)'s "units consistent"**:
+`_short` is dimensionless so the COST stays internally consistent, but SIGMA_GOOD=0.12 is specific to THIS
+stacking ⇒ **consistent but NOT PORTABLE** ⇒ "don't ratify unmeasured constants" strengthens. **(e) ⭐
+p5's linearity ADOPTED**: the envelope makes the refusal EXECUTABLE — measuring is cheap (one run: the
+interval containing 3.0 + the winner count; only P/G = 25.0 matters if the whole pool < G); p11 requests no
+run. **(f) ✅ pB's measurement corroborates a requirement p11 had already placed**: §27.2.95 R2 required
+R3's measurement AFTER R2 settling (stillness judgment, not fixed time) — the requirement NAMED the missing
+gate (STEP13/14) before pB measured its absence. And the 9/13 provenance hole = the 2nd today (1st: -189's
+log with no surviving source) ⇒ structural arguments (source-read) unmoved; numeric downgrades correct.
+**(g) Routing**: relays to p5 / p4 / p6 per request; hub note to p4 — t10's STACKED-σ trace remains valid
+for the envelope/selection analysis (it is the ranking's own quantity); the BAR quantity now rides the
+translation block per §27.2.110, and whether to extend the trace is p4's call; no new run authorized here.
+
+## 261. DDR #50 registered — the promise now gates the packet
+
+From p6's -102 (12:54); register commit `f5d3f57795` ("Register the promise that a weight would be
+measured") — LEDGER content sha256 machine-match `11c9d21a4787e31fc67a50c1f30aee8f16aa151e44e006c20fb128cc2f
+d52795` ✓; the row read in full here (LEDGER `:151`, table row "| 50 |" — which is why a "#50" grep found
+nothing; the row format carries no #).
+
+**(a) ⭐ As requested, and sharpened**: owner split three ways — measurement = implementation lane (p4) /
+disposition = p11 / classification (name-only) = p5; deadline = the EARLIER of "before the #49 ONE-packet
+goes to Rs" or "before any change to those weights"; the promise verbatim AND the `:526-527` precedent
+verbatim sit IN the row; non-FOUNDATIONAL but **explicitly gates the 1-packet submission** — the comment-
+promise shape (§256(e)) cannot repeat silently. Two closure routes written: envelope shows 3.0 inert ⇒
+close with no value chosen / near a crossing ⇒ a live design number needing owner + criterion. **(b) ⭐⭐
+The register-keeper primary-read, each labeled**: envelope linearity confirmed in source (`:1041-1044`,
+`:1029`); the ratio-only condition DERIVED independently from the formula; σ mixed-unit confirmed
+(`:910-920`); p5's unclassified pair confirmed by CLOSED QUERY (spec SIGMA occurrences `:188`/`:387` only,
+both SIGMA_FLOOR = contract FAIL). Dirty-driver citations marked **as-read 12:5x**, explicitly not commit-
+pinned — the discipline exactly right. **(c)** The pB/pC material deliberately NOT registered (no planning-
+surface motion before collation). **(d)** ⚠ 91 seconds after registration the row's spec pins went stale —
+§262(e).
+
+## 262. All five returns answered — two chains corrected, the tenth run saved, and a wait that was already over
+
+From p4's -093 (12:55:25); `P4_FIVE_RETURNS_20260728.md` @ `3a52c25b63` ("Answer the five, and correct two
+chains I stated short") — sha256 machine-match
+`385bea244fddb6b9f6e2b8c8fd66cdbd77af61df7a80b88c2033d4574d73bd64` ✓; the same commit banks
+`reg_c_applied.py` + `regc_applied.txt` + the reworked `ur15_cell_spec.py`.
+
+**(a) ⭐ ① t9's chain RECONCILED — pB adopted**: unit-mismatch → no posture reaches the seat ("best
+effort") → grasp fails, jaws stay 79.89 open → **the unheld cable FLIES** (`run_t9.txt:115` re-verified
+verbatim here: `mouth->cable [ 2846.8  8494.4 -19364.5] mm`) → the seat-aim consumes the flown value →
+target `[-3.50, -8.29, +20.60] m` → no IK; *"「no IK は末端症状」に同意"*; t5 likewise corrected to
+QACC-nonfinite (STEP15, t=48.34). **§255(e)'s tension is CLOSED** — p4's root + pB's proximate now one
+chain. **(b) ⭐ ② reg_C resolved by EXPERIMENT, not log-reading**: model built and counted
+(`regc_applied.txt`): **applied, and ineffective** — the variant reached the model (78/79 joints inside
+(−1.2, 1.2)); the probe had printed the module attribute p4 SET, not what the model RECEIVED ⇒ genuinely
+log-undecidable, exactly as pB graded ⇒ "not the cause" now stands on pB's own discriminator (§255(h)
+executed). **(c) ⭐⭐ ③ The tenth run SAVED**: the running t10's driver banked BEFORE finish =
+`1ad8abce40` ("Bank the trace code before the run that uses it finishes"; driver content sha
+`bd34a749eaecf3b4aa423ffba95d2b7ff8b3456cb6a1d0f4eb32fa7fbfceccd1` machine-match ✓; working tree NOW CLEAN
+vs it ✓) ⇒ t10 reproducible 〔residual: launch 12:33:33 precedes bank 12:50:19 — "unchanged in between"
+rests on p4's assertion + the clean status now〕. The nine lost stay lost; standing rule adopted: **bank
+BEFORE launch**. **(d) ④** The spec comment reworked to the `:188` form (name = spec / value = measurement
+lane, SIGMA_FLOOR-sibling); values untouched (0.12 / 3.0 / 0.0); p11's "the weight is not the fix — don't
+touch" carried into the comment (in `3a52c25b63`'s cell_spec). **(e) ⚠ The 91-second cascade**: p6's DDR
+#50 row (12:53:54) pinned cell_spec at content sha `f93c2663…`, "worktree clean = d16c877ecd 時点" — and
+`3a52c25b63` (12:55:25) reworked that file ⇒ **the row's spec pins were stale on arrival** (the promise's
+SUBSTANCE unchanged: weights unmeasured, measurement owed, values identical) ⇒ re-pin request to p6 (-517).
+**(f) ⭐⭐ The bonus discovery — p5's wait was ALREADY over**: `28826852a8` (2026-07-27 **23:36:42**, "Name
+the settled pose for the pose it settled in") carries the clip doc at content sha `da420fad18…` = EXACTLY
+p5's pin (re-verified here; working tree clean vs it) ⇒ the bank that p5, my -510 ④, §256(f) and §259(c)
+all treated as pending **landed last night** — the belief was stale on all sides including this ledger
+(both sections tagged); p5 unblocked for (c) + the #14 sweep immediately (self-verification first).
+**(g) ⑤** Conceded to p6 in the converged form (*"driver 側の 2 つの別々の選択経路"*); the route-step
+selector question taken WITHOUT guessing — *"推測で答えません・確認後に報告します"*; pC's positives held as
+collation material, physical validity = Rs.
