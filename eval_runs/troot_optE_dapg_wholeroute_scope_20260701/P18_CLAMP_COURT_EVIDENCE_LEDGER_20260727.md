@@ -12472,3 +12472,33 @@ form now working PREVENTIVELY: "tonight's distribution computations were possibl
 this print exists." Starvation judgment expressly left to p11/the implementation lane. No
 reply sent (registration; the ack economy) — the -185 collision (§442) reached p6 via the
 thread it already tracks.
+
+## 444. Rs directs a new arm — a §0 premise change, exercised by its owner and registered as such
+
+From p4's -186 (22:51:31). **(a) ⭐⭐ Rs verbatim ×2 (p4 custody)**: the question 「UR15 を元に
+新たに作成できないか？」 and the directive 「新しい腕を作る」. The order of events banked: p4
+answered honestly BEFORE the directive — a mirrored UR15 "is a machine that does not exist,"
+the real-cell alternative is a 180° rotational mount, and p4 RECOMMENDED the rotational
+mount first; Rs then directed the new arm. The reference-over-argument pattern again, this
+time with the counter-recommendation on record. **(b) ⛔ REGISTERED AS A PREMISE CHANGE, not
+an implementation task**: RS71 §0 #1 names UR15 × 2 (and Rs corrected the robot to UR15 in
+person on 07-27); a mirrored variant is a DIFFERENT MACHINE ⇒ the foundational-invariant
+path — Rs 専権, NOW EXERCISED by its owner. p4's words: "my part is to record it as such
+rather than to quietly build a robot the spec does not name." The recording follows the #44
+form (a §0 premise moved by Rs's own hand; the SPEC TEXT update remains Rs-exclusive —
+04-Specs is CC read-only) ⇒ **new pending item ⑨: §0 の spec 反映（新しい腕）** — joins ⑤
+as a loud spec-update-awaited flag. ⛔ Nothing is being built tonight on p4's own reading.
+**(c) ⚠ The -185 collision does NOT dissolve**: a mirrored right arm changes which way the
+arms FOLD ⇒ it may change the interleave answer — "a reason to re-measure it, not to treat
+the collision as withdrawn." The §442 reconciliation and the mirror design are now COUPLED;
+sequencing = p5's court. **(d) The asset facts, pinned so nobody derives from memory**:
+UR15_MIRROR_ASSET_FACTS_20260728.txt sha256 MATCH ✓ (tracked; desk spots: 6 joint axes all
+"0 0 1" ✓; mesh-only geometry; the sign-flipping inertia products non-zero on shoulder
+(iyz 0.008805), upper_arm (ixz −0.032135), forearm and all three wrists ⇒ "not a matter of
+negating a few positions"). **(e) The four design questions to p5 (m762; p4 chooses none)**:
+(1) the mirror plane (x = 0 obvious for this cell — but SAY it); (2) ⚠ THE quietly-breaking
+one — is the joint SIGN convention preserved (positive j1 = the mirrored motion) or left
+raw: LIMS, the attitude menu and every banked joint value were measured on the RIGHT-HANDED
+arm and read through it; (3) the meshes — mirrored vertex sets, or negative scale with the
+winding fixed; (4) the asset's identity — new file and name, or a variant flag. p4
+implements exactly what returns.
