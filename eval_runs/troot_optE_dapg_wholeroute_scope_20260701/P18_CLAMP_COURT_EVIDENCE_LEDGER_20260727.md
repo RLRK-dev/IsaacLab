@@ -12995,3 +12995,55 @@ log — artifact-existence only), correctly tagged. **(d)** #38 at -138 time wai
 p5's population ruling; SUPERSEDED within minutes by §460: the closure set is now ① p5's
 coverage ruling (tuned 23 pairs in or out) ② the static limit leg ③ the scope note
 (already rowed) — update routed (m783).
+
+## 462. p5 dissolves the lattice question — two denominators, two claims, no gap
+
+From p5's -164 (00:49) + p6's -139 (00:50). **(a) The ruling**: p5's 47 IS cross-kind —
+but it is the denominator of the R-FORMULA claim (a mount-independent relation between L
+and R joint vectors, where both kinds legitimately count), NOT the acceptance test's
+population; p4's 48 verifies the published position quantities, and that lattice is
+COMPLETE ⇒ the two answer DIFFERENT questions; neither relabels the other; **p5 withdraws
+-163(a)** ("unfit as a description of p4's run — as this desk noted"). **(b) No coverage
+gap either, desk-corroborated**: the file publishes ONE position set per pose-arm
+(tool0_position_m ×48 measured; retarget_residual ×46, tracking exactly where tuned
+vectors exist) ⇒ no published positions exist for a second-kind leg; added coverage would
+be a NEW self-computed-FK leg — UNDEFINED, not un-run. Disposition = add ONE WORD
+(on_yoke) to the denominator; p4's one-line field confirmation kept for the record.
+**(c) ⚠ The stock caveat banked**: stock's retarget residual is 0.3225 m — harmless in
+p4's symmetric form (it cancels both sides) but if the test's form ever changes to "lands
+on the PUBLISHED tool position", stock misses by exactly that at that one point ⇒ any
+change of test form must state stock's handling. **(d) p6's -139 verified**: commit
+27f1e78f47 ("Rebuild 38's closing set around the leg that costs nothing", 00:49:19);
+LEDGER sha 26a676e9…2e58 MATCH; the static-limit-leg row present; the row-ID convention
+stated (table cell "| 55 |"; "#55" only in self-references) — matching §461(b). General
+form: **when two courts' denominators disagree, first ask WHAT CLAIM each denominator
+belongs to — a count is owned by its claim, and two claims can share one file without
+sharing a population.**
+
+## 463. p4 answers in one breath — the field confirmed, the leg executed, and its dead half disclosed
+
+From p4's -192 (00:51:10). **(a) Comms closed**: all queued sends ACKed (-778 dupe
+discarded; m782 read via the pointer file — p4's measured sha of that file MATCHES this
+desk's bytes 0f4a5d3b…4056 ✓); no input-box residue on p4's side. **(b) Field CONFIRMED,
+desk-corroborated**: all 4 legs read joints_on_yoke_rad ONLY (generator :106 control-side
+offset solve, :139 leg body — desk grep: tuned 0 hits, on_yoke exactly those two lines) ⇒
+the §460 inference is now p4's stated fact; the 48 items all exist. p4's contingency
+("if p5 rules tuned coverage needed, denominator 46") is MOOT — p5's -164 had already
+dissolved it (§462: undefined, not un-run). **(c) ⭐⭐ Ruling (b) EXECUTED with its dead
+half disclosed**: commit e5fe3f258e ("Add the limit leg the landing legs are blind to");
+artifact sha 54677a07…5b66 MATCH, blob a32dd826… MATCH; all 6 joints [lo,hi] == stock
+[−hi,−lo] AND all 6 axes inverted. ⛔⭐ The self-disclosure, verbatim in the artifact
+(:142): every stock range is symmetric about zero ⇒ [−hi,−lo] IS [lo,hi] ⇒ **the limit
+half CANNOT fail on these assets** — so p4 did not write it as a green line ("a check
+that cannot fail looks identical to a check that passed"). What discriminates TODAY is
+the axis half alone; the limit half stands armed for the day a range goes asymmetric.
+This is the vacuity layer BELOW p5's ruling-(b) reasoning (p5: the poses never visit the
+boundary; p4: on this asset the interval identity holds no matter what the build did) —
+routed to p5 as convention-#2 status material (their court: "limit-half = vacuously true
+on symmetric ranges" is a scope note, not a verification). **(d)** #38's remaining work
+is now ONE WORD: p4 adds "on_yoke" to the denominator (§462(b)); ② executed, ③ rowed,
+① ruled + confirmed ⇒ p6 closes at their discretion when the word lands. **(e)** p4's
+in-progress item held to discipline: the home-pose column-contact probe found ITS OWN
+instrument mismatch (6 geoms/arm vs the trace's 38) mid-measurement — fixing before
+reporting numbers; nothing banked. Routed: p4 (m787 — supersedes m782's hold), p6
+(m788), p5 (m789).
