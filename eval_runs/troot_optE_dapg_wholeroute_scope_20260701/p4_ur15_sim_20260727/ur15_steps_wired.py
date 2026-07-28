@@ -790,6 +790,18 @@ def cable_in_clip_solid(dd=None):
     return worst[0] * 1000.0, worst[1], worst[2], worst[3], n_touch
 
 
+def seat_tolerances():
+    """The three half-widths the seat gate tests against, in metres: (x, y, z).
+
+    One definition, because the number a report gives for a gate has to be the number the gate
+    used.  It was written out twice -- once here and once in the line that explains a failure --
+    and the two had already drifted: the explanation said 8 mm across the groove while the gate
+    was using half the groove width, 7.5 mm.  A cable 7.8 mm off would have been described as
+    inside a gate that rejects it, in the very sentence meant to say why it failed.
+    """
+    return 0.022, _spec.groove_width() / 2.0, 0.006
+
+
 def seat_legs(clip, cx, cy, link):
     """Each conjunct of seated(), separately, so a false gate says which leg is false.
 
@@ -797,17 +809,18 @@ def seat_legs(clip, cx, cy, link):
     and the cable can slide along its own axis -- in which case a seated cable would still read
     as not seated, and that is an identity error rather than a placement one.
     """
+    _tx, _ty, _tz = seat_tolerances()
     p = np.array(d.xpos[CAB[link]])
-    legs = {"x": abs(p[0] - cx) < 0.022,
-            "y": abs(p[1] - cy) < _spec.groove_width() / 2.0,
-            "z": abs(p[2] - GROOVE_Z) < 0.006}
+    legs = {"x": abs(p[0] - cx) < _tx,
+            "y": abs(p[1] - cy) < _ty,
+            "z": abs(p[2] - GROOVE_Z) < _tz}
     touch = any((c.geom1 in CLIPG[clip] and c.geom2 in CABG)
                 or (c.geom2 in CLIPG[clip] and c.geom1 in CABG)
                 for c in (d.contact[i] for i in range(d.ncon)))
     others = [k for k, b in enumerate(CAB)
-              if abs(np.array(d.xpos[b])[0] - cx) < 0.022
-              and abs(np.array(d.xpos[b])[1] - cy) < _spec.groove_width() / 2.0
-              and abs(np.array(d.xpos[b])[2] - GROOVE_Z) < 0.006]
+              if abs(np.array(d.xpos[b])[0] - cx) < _tx
+              and abs(np.array(d.xpos[b])[1] - cy) < _ty
+              and abs(np.array(d.xpos[b])[2] - GROOVE_Z) < _tz]
     return legs, touch, p, others
 
 
@@ -1733,10 +1746,12 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
         low.append(f"{t} {worst_*1000:5.1f} mm below the mouth ({who_})")
     print(f"[steps] STEP{num:2d} ARM REACH: " + " | ".join(low))
     print(f"[steps] STEP{num:2d} CARRY: " + " | ".join(carry))
+    _stx, _sty, _stz = seat_tolerances()
     print(f"[steps] STEP{num:2d} C1 SEAT: nearest point ON THE CABLE (cab{_k1} at {_u1:.2f}) misses "
           f"the groove centre by "
           f"({miss1[0]:+6.1f},{miss1[1]:+6.1f},{miss1[2]:+6.1f}) mm "
-          f"(gate wants |dx|<22 |dy|<8 |dz|<6 AND clip-cable contact)")
+          f"(gate wants |dx|<{_stx*1000:.0f} |dy|<{_sty*1000:.1f} |dz|<{_stz*1000:.0f} mm, "
+          f"read from the gate itself, AND clip-cable contact)")
     for _clip, _c, _lk in (("C1", C1, SEAT1), ("C2", C2, SEAT2)):
         _legs, _touch, _pp, _oth = seat_legs(_clip, _c[0], _c[1], _lk)
         _fail = [k for k, v in _legs.items() if not v] + ([] if _touch else ["contact"])
