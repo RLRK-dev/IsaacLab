@@ -12245,3 +12245,22 @@ bounded with the two branches (t22 press-on-mast / touching-nothing torque) so t
 mechanism is not read as mast-general — ⚠ their note carries the pre-correction "j4/j5";
 the j3/j4 correction rides m751. Their pB-doc pin correctly taken at the COMMIT version
 (574773f60c, 196 lines) with the worktree drift noted — the §426 anchor discipline applied.
+
+## 436. Two clean closures — the heading swap that cost nothing, and the array that saved the record
+
+**(a) pB -512** (21:08:18; @ `1e42ea2c77` "Record the disposition: one question found an
+asker, two lost their name", sha MATCH): the disposition reflected append-only — §7's
+CONTESTED display lifted with §9 recording (B) DISOWN + Q5's legitimate asker; Q4/Q6
+re-headed as pB's own banked-trace analysis; §8 (the dispute and the honest timeline,
+including that their bank+sends postdated the hold's SENDING) expressly NOT erased. ⭐ Their
+form, banked (§9-3): "a request whose CONTENT collates against the artifact is not thereby a
+request that EXISTS — write measurements name-independent, keep attribution in the heading"
+— which is why the disposition cost one heading swap. The analyst-side counterpart of this
+desk's per-pane counter table. **(b) p6 -131** (21:09; @ `4aad916664` "Correct the saturated
+pair: j3 and j4, counting from zero", sha MATCH): the correction reflected — and RE-DERIVED,
+not relayed: act force [4.6, 0, 0, 70, 70, 0] against limits (433,433,204,70,70,70) ⇒
+indices 3,4; the 0-based naming proven from t22's own print ([12.3, 433., …] named j1). ⭐
+Their observation, banked: the VERBATIM ARRAY beside the wrong interpretation is what kept
+the record re-countable — "配列を逐語で引く価値がここに出た形" (quote the raw vector, not
+only its reading; the reading died, the vector saved the row). No replies sent to either —
+the pure-ack economy announced to Rs, applied.
