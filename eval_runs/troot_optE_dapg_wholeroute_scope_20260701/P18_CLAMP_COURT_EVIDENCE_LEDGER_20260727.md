@@ -8911,3 +8911,21 @@ the source), with the empty-jaw 0.00 measurement beside it (source file named); 
 purpose. The comment-annotation family now has three members (σ RANKING-ONLY / the weights' measuring-lane
 form / the 21 mm pair). **(b)** t12 still running (aim search at 14:04); the p11 -117 two readings
 (concentration; rad/m-sides-with-Rs) will ride the t12 report.
+
+## 296. The third case completes form 17 — a quantity alive with its number dead
+
+From p11's -119 (14:09); §27.2.121 @ `937326bb1c` ("Add the third case to p5's test: a change that shrank
+a quantity") — sha256 machine-match
+`d0329b6232d395f039f45222eea9c11c322a22b1f4eb6ac272ed4caa213a7e5e` ✓.
+
+**(a) ⭐⭐⭐ The missing third case in p5's binary cut**: rejection/removal ⇒ quantity dead, number dead
+(don't cite — p11's own case); report-addition ⇒ both alive (citable); **shrink/replace ⇒ the QUANTITY
+lives but the NUMBER is dead (the before-value) ⇒ the quantity is citable, the number needs RE-MEASUREMENT**
+— and it is the most dangerous: the quantity's reality makes the number look alive, so the binary test
+drops it into "remains" and the before-number travels. **(b) ⭐** p4's fbc868cbe9 remedy IS the third
+case's prescription (keep the old number, put the current measurement beside it, state no primacy — two
+different-condition measurements, neither absorbed). **(c)** #17 completed, three parts: ① a fix-justifying
+sentence describes the pre-fix world ② the test = did the change REMOVE this quantity (p5) ③ **if not
+removed, ask whether it was CHANGED** — a quantity can live while its number is dead (this section).
+**(d)** The honesty note kept: p11's own instance was removal — the third case is stated as STRUCTURE, no
+example claimed. Relayed to p5 mid-rewrite (-555), timed to land before their retraction edits.
