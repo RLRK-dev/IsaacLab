@@ -425,7 +425,33 @@ CLAW_RELEASE_GAP = 2.0 * CABLE_R        # clip design §12-5 / §12-6
 
 # The mouth band, pad-local z [m]: the cable's centre has to be inside the jaw's mouth, not merely
 # between the claw tips.  Clip design §13 (p5 -099), the weak form of the conjunction.
-MOUTH_BAND_Z = (0.025, 0.039)           # clip design §13-3 R6(ii)
+#
+# Derived, not written.  It was a pair of literals and it went stale the moment Rs moved a claw --
+# twice over, because the value supplied to replace it was read before the same move.  p5's rule:
+# the band runs between the two plates' INNER faces, and min/max rather than first/second so it
+# survives the two being listed in either order.  The far faces were rejected: they would count a
+# cable centred inside the thickness of a plate as inside the mouth.
+GRIP_XML_PATH = pathlib.Path(
+    _REPO, "thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml")
+
+
+def mouth_band_z(model=None):
+    """(lo, hi) pad-local z of the mouth interior [m], read from the asset."""
+    import xml.etree.ElementTree as _E
+    root = _E.parse(GRIP_XML_PATH).getroot()
+    zs, half = [], None
+    for g in root.iter("geom"):
+        n = g.get("name") or ""
+        if n.endswith(("_pad_f1ext", "_pad_f2ext")) and n.startswith("left"):
+            zs.append(float(g.get("pos").split()[2]))
+            half = float(g.get("size").split()[2])
+    if len(zs) != 2 or half is None:
+        raise RuntimeError(f"{GRIP_XML_PATH} no longer has exactly two left-pad claw plates; the "
+                           f"mouth band cannot be derived and will not be guessed")
+    return min(zs) + half, max(zs) - half
+
+
+MOUTH_BAND_Z = mouth_band_z()           # clip design §13-3 R6(ii) -- derived above
 
 # The claw-tip reading saturates once the two tips overlap, so a claw gap cannot be read directly
 # near closure.  p5's route: measure at the BACKPLATE, which does not saturate, and convert with
@@ -524,11 +550,22 @@ SETTLE_TOL = 0.002                      # spec §6.4d -- rad; the arm must be th
 
 # How far off straight down a descending jaw may be before the run stops.  Rs, 2026-07-28:
 # descending to a clip, all the fingers have to point vertically down, so they do not hit the
-# table.  The number is not a new design quantity -- it is half of 0.2 rad, the smallest non-zero
-# roll the attitude menu offers, so the check separates "vertical" from "the next menu entry"
-# rather than from solver noise, which is what it is for.  ⚠ It decides whether a run raises, so
-# it is flagged to p5/p11 for ratification rather than treated as settled.
-VERTICAL_TOL_DEG = math.degrees(0.2) / 2.0
+# table.
+#
+# ⛔ MY FIRST RATIONALE WAS WRONG TWICE and both are recorded because the second is the one that
+# matters.  I wrote "half of 0.2 rad, the smallest non-zero roll the attitude menu offers": the
+# menu's smallest non-zero roll is 0.10 (GRASP_ATTITUDES below), so the number was wrong -- and
+# the KIND was wrong, which p5 and p11 caught independently.  Menu spacing is a property of the
+# menu.  The requirement is about the table.  Tying a limit to how finely someone happened to
+# sample attitudes is the same error as putting a bar on a quantity that has no units.
+#
+# The right form, from p11: the allowance is whatever keeps the arm's lowest point above the table
+# at seat height -- a tilt the cell itself decides, measured at 10.5 to 14.6 degrees depending on
+# where the lowest point is taken.  ⚠ The VALUE below is NOT ratified: p5 rejects 5.73 as letting
+# the adjacent case through, p11 accepts it for today and targets 2.86.  Both accept 2.86.  It is
+# left where it is until the two agree on the basis, and the run now prints the angle it actually
+# achieves so the decision is made on a measurement instead of on a preference.
+VERTICAL_TOL_DEG = 5.73
 # Pose selection and the singularity.  The floor below was set to 0.0 with a recorded reason --
 # "the 0.12 floor starved the solver ... ranking, not rejection, is the way to do this" -- and the
 # ranking was never written: the selector computes each candidate's smallest singular value, PRINTS

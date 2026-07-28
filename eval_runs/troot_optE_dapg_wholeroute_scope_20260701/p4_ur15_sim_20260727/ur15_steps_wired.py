@@ -1753,8 +1753,32 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
         _down = slot_centre(t, _sv) - pinch(t, _sv)
         _down = _down / max(1e-12, float(np.linalg.norm(_down)))
         _off = math.degrees(math.acos(min(1.0, max(-1.0, float(-_down[2])))))
+        # p11/p5 -614(3), three prints, because the tolerance is being argued over a number
+        # nobody has measured yet.  (1) the angle prints on PASS as well as on failure, so the
+        # margin is observed rather than inferred from the absence of a stop.  (2) the tool's own
+        # orientation residual against the vertical it was commanded, so an empty window -- a
+        # solve that cannot reach upright at all -- is visible as itself rather than as a tilt.
+        # (3) the arm's lowest point at this upright pose, which turns the 10.5-to-14.6 degree
+        # range into one number measured on the pose actually used.
+        _lowest, _who3 = 1e9, ""
+        for _g3 in ARMG[t]:
+            _c3 = np.array(_sv.geom_xpos[_g3])
+            if int(m.geom_type[_g3]) == int(mujoco.mjtGeom.mjGEOM_BOX):
+                _R3 = np.array(_sv.geom_xmat[_g3]).reshape(3, 3)
+                _b3 = min((_c3 + _R3 @ (np.array(k) * m.geom_size[_g3]))[2]
+                          for k in [(a, b, c2) for a in (-1, 1) for b in (-1, 1) for c2 in (-1, 1)])
+            else:
+                _b3 = _c3[2] - float(m.geom_rbound[_g3])
+            if _b3 < _lowest:
+                _lowest, _who3 = _b3, (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, _g3)
+                                       or f"geom{_g3}")
+        _tool = np.array(_sv.xmat[TOOLB[t]]).reshape(3, 3)
+        _tres = math.degrees(math.acos(min(1.0, max(-1.0, float(-_tool[2, 2])))))
         print(f"[steps] STEP{num} {t}: fingers {_off:4.1f} deg off straight down "
-              f"(pinch->mouth [{_down[0]:+.3f} {_down[1]:+.3f} {_down[2]:+.3f}])")
+              f"(pinch->mouth [{_down[0]:+.3f} {_down[1]:+.3f} {_down[2]:+.3f}]), "
+              f"allowance {VERTICAL_TOL_DEG:4.2f} deg -- margin {VERTICAL_TOL_DEG - _off:+5.2f}; "
+              f"tool axis {_tres:4.1f} deg off vertical; lowest point {_who3} at "
+              f"{(_lowest - TABLE_TOP)*1000:+6.1f} mm vs the table")
         if _off > VERTICAL_TOL_DEG:
             raise RuntimeError(
                 f"STEP{num} {t}: the descent to a clip requires the fingers straight down, and "
