@@ -1353,15 +1353,27 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     rg = np.random.default_rng(seed)
     cands = []
     sgn = -1.0 if t == "L" else 1.0   # each arm tips AWAY from the other
+    # ⭐ p5 -167: the sign belongs on the YAW as well, not on the roll alone.  Rolling exists to
+    # let two arms share an 88 mm span without their wrists meeting (:1149), which is a statement
+    # about the PAIR -- and a menu entry that mirrors in roll but not in yaw hands the two arms
+    # attitudes that are not mirror images of each other the moment the yaw is non-zero.  I
+    # measured that separately on the built cell: at yaw 0 every roll stays an exact mirror pair,
+    # and at yaw 17.2 deg both arms are commanded the SAME world approach, +x on both sides where
+    # a mirror wants opposite signs (HOME_POSE_SYMMETRY_20260729.txt §5).  The menu set is
+    # unchanged in size and the +-yaw entries were already there, so this costs nothing.
+    # ⚠ It DOES change what an entry INDEX means on the right arm.  Anything that recorded a right
+    # arm pose as a menu index rather than as a (yaw, roll) value now names a different attitude;
+    # such records have to be re-read as values before they are used again.
     POSES = [(0.0, sgn * r) for r in (0.0, 0.35, 0.6, 0.85, 1.1)] + \
-            [(y, sgn * r) for r in (0.35, 0.6, 0.85) for y in (0.3, -0.3)]
+            [(sgn * y, sgn * r) for r in (0.35, 0.6, 0.85) for y in (0.3, -0.3)]
     if wide:  # per-STEP waypoints get a bigger pose menu so a CONTINUOUS branch survives
-        POSES = POSES + [(y, sgn * r) for r in (0.2, 0.5, 0.75, 1.0) for y in (0.15, -0.15, 0.5, -0.5)]
+        POSES = POSES + [(sgn * y, sgn * r)
+                         for r in (0.2, 0.5, 0.75, 1.0) for y in (0.15, -0.15, 0.5, -0.5)]
     if pose_rd is not None:
         # An explicit (yaw, roll) rather than a menu entry.  Rs, on the second hand: it is only
         # just clamping -- adjust the attitude.  The coarse menu steps roll by 0.25 rad, which is
         # 14 degrees of tilt on a mouth 10 mm tall, so the ladder below is what "adjust" needs.
-        POSES = [(pose_rd[0], sgn * pose_rd[1])]
+        POSES = [(sgn * pose_rd[0], sgn * pose_rd[1])]   # p5 -167: the sign is on both, see above
     elif pose_only is not None:
         # Both hands must present the ko the same way to the cable.  Fixing the menu entry and
         # letting only `sgn` differ makes the two solutions mirror images: same yaw, same roll
@@ -2379,9 +2391,16 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
         if _r3 > ARM_REACH[_t3]:
             ARM_REACH[_t3] = _r3
             TRACK_TOL[_t3] = ARM_CLEARANCE / _r3
-    prog, dprog = 0.0, 1.0 / max(1, ramp)
+    # ⭐ ONE ramp per arm.  The comment below this block has always said "each arm against its own
+    # bound, because reach differs"; the code took a max over both sides and advanced a single
+    # command ramp with it, so the arm that fell behind froze the OTHER arm's command too.  t42 is
+    # what that costs: the left forearm jammed on the crown at STEP1, and the right arm -- clear,
+    # unsaturated, every actuator at zero force -- then sat still for 11.2 s waiting on a ramp it
+    # was not holding back.  pB -513 found the mechanism; the intent was already written here.
+    # Rs approved the split 2026-07-29.
+    prog, dprog = {t: 0.0 for t in SIDES}, 1.0 / max(1, ramp)
     # ⛔ NOT `held`: that name is already a function in this file, and the step summary calls it.
-    held_ticks = 0
+    held_ticks = {t: 0 for t in SIDES}
     # Rs, 2026-07-28: I had reported "it will not finish in the same time" as a trade-off, and he
     # answered that no time limit had been set.  He was right -- the seconds are a number in this
     # table, not a requirement, and I had quoted something I could change as though it constrained
@@ -2391,7 +2410,9 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # than a delay for the fingers, and now the step ends the same way.
     # The guard needs no new number: if the command has gained nothing in a whole step's worth of
     # ticks, it is not going to, and the run says so instead of grinding to the cap in silence.
-    s_, _last_gain, _last_prog, _stalled = 0, 0, 0.0, False
+    s_, _stalled = 0, False
+    _last_gain = {t: 0 for t in SIDES}
+    _last_prog = {t: 0.0 for t in SIDES}
     while True:
         # Each arm against its own bound, because reach differs and a single max would hold the
         # shorter arm to the longer arm's tolerance.
@@ -2404,12 +2425,13 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
         # between.  The lag then settles AT the bound instead of running past it, which is the
         # property that was wanted: the arm stays within a clearance of the path that was checked.
         # Same tolerance, same clearance, no new number.
-        _room = 1.0 - max(float(np.abs(np.array([d.qpos[a] for a in QADR[t2]]) - qcmd[t2]).max())
-                          / TRACK_TOL[t2] for t2 in SIDES)
-        if _room <= 0.0:
-            held_ticks += 1
-        prog = min(1.0, prog + dprog * max(0.0, _room))
-        f = 0.5 - 0.5 * math.cos(math.pi * prog)      # smooth start and stop
+        _room = {t2: 1.0 - float(np.abs(np.array([d.qpos[a] for a in QADR[t2]]) - qcmd[t2]).max())
+                 / TRACK_TOL[t2] for t2 in SIDES}
+        for t2 in SIDES:
+            if _room[t2] <= 0.0:
+                held_ticks[t2] += 1
+            prog[t2] = min(1.0, prog[t2] + dprog * max(0.0, _room[t2]))
+        f = {t2: 0.5 - 0.5 * math.cos(math.pi * prog[t2]) for t2 in SIDES}   # smooth start/stop
         # ⛔ EVERY step, not only the grasp.  I first put this inside `if not gate_open:`, which
         # is False for every step whose gate is not "grasp" -- so the check that exists to watch
         # the DESCENT never ran on the descent, and its silence proved nothing.  Same defect as
@@ -2435,7 +2457,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             # ⛔ Was "s_ > ramp": with the command gated on the arm keeping up, the ramp no longer
             # finishes at a fixed step count, so a clock reading cannot say the move is done.
             # The move is done when the command has reached the far end of the line.
-            if prog >= 1.0 and resid < SETTLE_TOL:
+            if min(prog.values()) >= 1.0 and resid < SETTLE_TOL:
                 gate_open, opened_at = True, s_
                 print(f"[steps] STEP{num}: arms settled to {resid*1000:.2f} mrad at "
                       f"t={s_*m.opt.timestep:.2f}s into the step -- fingers may close")
@@ -2443,7 +2465,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
         for t in SIDES:
             d.ctrl[GIDX[t]] = g_from[t] + gf * (g_to[t] - g_from[t])
         for t in SIDES:
-            qcmd[t] = (1.0 - f) * q_from[t] + f * w[t]
+            qcmd[t] = (1.0 - f[t]) * q_from[t] + f[t] * w[t]
             for k, i in enumerate(AIDX[t]):
                 d.ctrl[i] = qcmd[t][k]
         for _cg, _cc, _cn in (("pinC1", C1, "C1"), ("pinC2", C2, "C2")):
@@ -2535,15 +2557,21 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 _p, _c = jaw_gaps(t)
                 claw_min[t] = min(claw_min[t], _c)
         s_ += 1
-        if prog > _last_prog + 1e-12:
-            _last_prog, _last_gain = prog, s_
+        for t2 in SIDES:
+            if prog[t2] > _last_prog[t2] + 1e-12:
+                _last_prog[t2], _last_gain[t2] = prog[t2], s_
         _settled = max(float(np.abs(np.array([d.qpos[a] for a in QADR[t2]]) - w[t2]).max())
                        for t2 in SIDES) < SETTLE_TOL
         _fingers_done = gate_open and (s_ - opened_at) >= fing
-        if prog >= 1.0 and _settled and _fingers_done:
+        if min(prog.values()) >= 1.0 and _settled and _fingers_done:
             break
-        if s_ - _last_gain >= steps:
-            _stalled = True
+        # ⭐ Per arm: an arm that has already arrived stops gaining, so a shared "last gain" would
+        # call the finished side stalled.  Only an arm that is BOTH short of the end and not
+        # gaining is stalled.
+        _stalled_sides = [t2 for t2 in SIDES
+                          if prog[t2] < 1.0 and s_ - _last_gain[t2] >= steps]
+        if _stalled_sides:
+            _stalled = _stalled_sides
             break
         if n % render_every == 0:
             # ⛔ The wide camera used to swing +-14 degrees continuously here.  Rs, watching the
@@ -2587,13 +2615,20 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # ⛔ Loud when the move did not finish.  The command is now gated on the arm tracking it, so a
     # step can end with the command part-way along the line -- and a part-finished move that
     # printed like a finished one would be the worst of both changes.
-    print(f"[steps] STEP{num:2d} COMMAND: reached {prog*100:5.1f}% of the way to the solved pose "
-          f"in {s_ * m.opt.timestep:6.1f}s ({s_ / max(1, steps):4.2f}x the {secs:.1f}s the table "
-          f"allots -- the table no longer ends the step)"
-          + (f", held back on {held_ticks} of {s_} ticks because the arm was more than "
-             f"{min(TRACK_TOL.values())*1000:.1f} mrad behind" if held_ticks else ", never held back")
-          + ("   <- STALLED: no progress for a whole step's worth of ticks" if _stalled else "")
-          + ("" if prog >= 1.0 else "   <- THE MOVE DID NOT FINISH"))
+    # ⭐ Per arm, and named.  The old line said "the arm was more than 5.2 mrad behind" about a
+    # quantity that belonged to neither arm: one shared ramp, one shared held count, and a
+    # tolerance printed as the min over both sides.  pB could not attribute the stall to a side
+    # from this line, and was right not to.  Each side now reports its own.
+    for t2 in SIDES:
+        print(f"[steps] STEP{num:2d} COMMAND {t2}: reached {prog[t2]*100:5.1f}% of the way to the "
+              f"solved pose in {s_ * m.opt.timestep:6.1f}s ({s_ / max(1, steps):4.2f}x the "
+              f"{secs:.1f}s the table allots -- the table no longer ends the step)"
+              + (f", held back on {held_ticks[t2]} of {s_} ticks because THIS arm was more than "
+                 f"{TRACK_TOL[t2]*1000:.1f} mrad behind its own command"
+                 if held_ticks[t2] else ", never held back")
+              + ("   <- STALLED: no progress for a whole step's worth of ticks"
+                 if _stalled and t2 in _stalled else "")
+              + ("" if prog[t2] >= 1.0 else "   <- THE MOVE DID NOT FINISH"))
     print(f"[steps] STEP{num:2d} sigma_min L={sigma_min('L'):.4f} R={sigma_min('R'):.4f}"
           f"  mast L={gap_mm(_cgl)} ({_cwl}) R={gap_mm(_cgr)} ({_cwr})"
           f"{'   <- INSIDE THE MAST' if _inside else ''}")
@@ -2717,6 +2752,30 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
           f"   (clip-cable contacts now: {_ptouch})")
     print("[steps] " + row)
     log.append(row)
+    # ⭐ A stalled step ends the run, after everything above has been printed.
+    #
+    # t42 stalled at STEP2 and the run carried on through STEP3, 4, 5 and 6, each of them
+    # re-measuring the same frozen configuration and printing it as if it were a new observation --
+    # five samples of one state, which is exactly how pB had to read them.  Then it stopped at
+    # STEP7 for an unrelated check, so the trace's last word was about an angle rather than about
+    # the jam that had decided everything four steps earlier.
+    #
+    # ⛔ It matters most on the grasp step.  The finger gate opens only when the command has
+    # reached the end of its line (see above), so a grasp step that stalls never lets its fingers
+    # move -- and the NEXT step's gate is open by default, so the jaw then closes there, outside
+    # any settle gate, after the only grasp measurement has already been taken on an open hand.
+    # That is the close the video caught at 11.25 s in t42, one step late and onto nothing.
+    if _stalled:
+        raise RuntimeError(
+            f"STEP{num} {'/'.join(_stalled)}: the command stopped advancing for a whole step's "
+            f"worth of ticks and the move did not finish"
+            + (f" -- and this is the {gate} step, whose fingers are gated on the command "
+               f"arriving, so they never moved; the close would have happened in the NEXT step "
+               f"with its gate open by default, after this step's grasp measurement had already "
+               f"been taken on an open hand" if gate in ("grasp", "regrasp") else "")
+            + f".  Everything above this line is the state at the stall.  Continuing would "
+              f"re-measure this same configuration once per remaining step, which is what the "
+              f"previous run did.")
 
 for t in SIDES:
     print(f"[steps] WORST {t}: sigma_min {sig_min[t]:.4f} at {sig_where[t]}"
