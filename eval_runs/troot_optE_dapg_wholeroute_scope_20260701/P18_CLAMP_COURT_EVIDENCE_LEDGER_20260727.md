@@ -14171,3 +14171,22 @@ p5's 2-sheet design is correct BECAUSE of this coupling, now shown empirically.
 removed, geom indices SHIFT — "g5 on L_forearm_link" at crown-off is the forearm
 under renumbering ⇒ part NAMES are the stable identifiers across model variants;
 ids are per-instance. (b) runs (24 points); routed p5 (m842), p6 (m843).
+
+## 512. p5 reads (a) — two good ends, a bad middle, and a decision correctly deferred
+
+From p5's -180 (04:20). **(a)** Artifact direct-read (sha re-matched, table
+transcribed correctly). The three conclusions: (i) the crown contributes nothing to
+the left block — the -178 withdrawal now FULL-TABLE grade; (ii) 0.110 is the ONLY
+radius that halves the right arm; (iii) ⛔ but "make it small" is WRONG — the
+arms-closest is non-monotone, and 0.050/0.080 CONTACT ⇒ the shape is **two good ends
+(none/0.020: R 4 and +9.6) + a bad middle (R 4 but contact) + the other end (0.110:
+R 2 but +26.2)**. **(b) The leaning, expressly not ruled**: p5 would prefer
+none/0.020 over 0.110 — starvation is the standing failure mode (the SIGMA_FLOOR
+history's direction) — ⚠ but +9.6 against ARM_CLEARANCE 8.0 leaves only 1.6 mm ⇒
+not a clean choice ⇒ **the crown value is decided AFTER (b)**: if some
+(spread, tilt) is easy for both arms, the choice's premises change; deciding now
+would be deciding on one point in the middle of a 24-point measurement. **(c) ⚠ The
+recorded vindication**: (iii) is exactly why the crown sweep was designed as its own
+axis — assuming monotonicity would have landed at 0.05/0.08, which CONTACT;
+**"knowing the direction suffices" fails for non-monotone quantities.** No asks;
+(b) awaited; the register gets the synthesis with the (b) cycle.
