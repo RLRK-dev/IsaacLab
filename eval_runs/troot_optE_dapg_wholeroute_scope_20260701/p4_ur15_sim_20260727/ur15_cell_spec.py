@@ -680,6 +680,14 @@ def vertical_tol_deg(r_max_deg=None, cap_deg=None):
 # that term.
 ARM_CLEARANCE = 2.0 * CABLE_R
 
+# How long to wait before reading the pin's constraint residual a second time [s].  Long enough
+# for the solver to have acted on it, short enough that the arms have not moved on: a tenth of the
+# prediction window the aim already uses for the same reason.  ⚠ In SECONDS -- the step count
+# depends on the model's own timestep, which this module cannot see, so the driver converts.  The
+# first version divided by the producer's dt instead and came out at six seconds of wall clock
+# inside a step that lasts two.
+PIN_SETTLE_S = 0.1 * PREDICT_S
+
 VERTICAL_TOL_INTERIM_DEG = 5.73
 VERTICAL_TOL_DEG = vertical_tol_deg()
 
@@ -751,7 +759,7 @@ RETIRED = {"CLIP_H", "GROOVE_W", "CLIP_RISER"}
 # than an input.
 TIER_C = {"OUT", "W", "H", "FPS", "HOLD_S", "WAY", "STEPS", "SEED",
           "CAM", "CAM2", "RENDERER", "FRAMES",
-          "frames", "log", "n", "claw_min", "col_min", "sig_min", "arm_gap_min", "arm_gap_path",
+          "frames", "log", "n", "claw_min", "col_min", "sig_min", "arm_gap_min", "arm_gap_path", "PIN_SETTLE_STEPS",
           # p5 §6.4j: these are in spec §6.4d as DERIVED and are free.  I had reported them as
           # absent from §6.4d, which was a bad read of my own -- they are on its line 195, in the
           # DERIVED row rather than the TIER-C row I was looking at.

@@ -43,7 +43,7 @@ from ur15_cell_spec import (  # noqa: E402
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
-    ARM_CLEARANCE, ARM_PAIR_CUTOFF, PREDICT_S, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
+    ARM_CLEARANCE, ARM_PAIR_CUTOFF, PIN_SETTLE_S, PREDICT_S, SETTLE_S, SETTLE_TOL, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
     VERTICAL_TOL_DEG,
     START_HOLD_S, START_RAMP_S,
     TABLE_HZ, TABLE_Y,
@@ -1425,6 +1425,8 @@ col_where = {t: "" for t in SIDES}
 claw_min = {t: 1e9 for t in SIDES}
 arm_gap_min = 1e9   # closest the two arms come to each other over the whole run
 arm_gap_path = 1e9  # ... including BETWEEN the poses that were checked, not only at them
+_pin_watch = []     # clips whose retention has just engaged, waiting for a second reading
+PIN_SETTLE_STEPS = max(1, int(PIN_SETTLE_S / m.opt.timestep))
 # (step, arm, t, sigma_min, dq/dx) at every sample.  ⛔ sigma_min is for RANKING and envelope
 # comparison only -- it mixes units, so no absolute threshold can live on it; the bar goes on the
 # rad/m column.  Written here as well as in the file header because a caution that travels apart
@@ -1969,11 +1971,48 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                     d.eq_active[EQ[_cn]] = 1
                     gates[_cg] = (f"t={n*m.opt.timestep:.2f}s cab{_lk} seat={np.round(pp, 4)} "
                                   f"anchor={np.round(_aw, 4)}")
+                    # P2 (p11 -141, the one that matters while §0#5 is open): the whole claim
+                    # that this pin does not teleport anything rests on the constraint being
+                    # ALREADY SATISFIED when it turns on.  That is checkable in one line -- the
+                    # two anchors are the same world point or they are not -- so it is checked
+                    # rather than asserted, at the instant of engagement and again after the
+                    # solver has had a step to act.  A residual here is a distance the cable would
+                    # be pulled.
+                    _e = EQ[_cn]
+                    _cb = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, _cn)
+                    _a1 = (np.array(d.xpos[_cb])
+                           + np.array(d.xmat[_cb]).reshape(3, 3) @ m.eq_data[_e][:3])
+                    _bb = int(m.eq_obj2id[_e])
+                    _a2 = (np.array(d.xpos[_bb])
+                           + np.array(d.xmat[_bb]).reshape(3, 3) @ m.eq_data[_e][3:6])
+                    _res0 = float(np.linalg.norm(_a1 - _a2))
+                    # P5: where the anchor sits along the cable's own axis relative to the groove
+                    # centre.  The pin holds the point it was given; if that point is off along x
+                    # the cable is held beside the groove rather than in it, and the seat gate and
+                    # the pin would be talking about different places.
+                    _axial = float(_a1[0] - _cc[0])
                     print(f"[steps] {_cn} RETAINED cab{_lk} at t={n*m.opt.timestep:.2f}s "
                           f"(the link actually in the groove; the build-time guess was "
                           f"cab{SEAT1 if _cn == 'C1' else SEAT2})")
+                    print(f"[steps] {_cn} PIN RESIDUAL at engagement {_res0*1000:6.3f} mm "
+                          f"(the two anchors as world points -- anything here is a distance the "
+                          f"cable would be pulled); anchor sits {_axial*1000:+6.1f} mm from the "
+                          f"groove centre along the cable's own axis")
+                    _pin_watch.append((_cn, n))
         mujoco.mj_step(m, d)
         n += 1
+        for _cn2, _n0 in list(_pin_watch):
+            if n - _n0 >= PIN_SETTLE_STEPS:
+                _e2 = EQ[_cn2]
+                _cb2 = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, _cn2)
+                _p1 = (np.array(d.xpos[_cb2])
+                       + np.array(d.xmat[_cb2]).reshape(3, 3) @ m.eq_data[_e2][:3])
+                _b2 = int(m.eq_obj2id[_e2])
+                _p2 = (np.array(d.xpos[_b2])
+                       + np.array(d.xmat[_b2]).reshape(3, 3) @ m.eq_data[_e2][3:6])
+                print(f"[steps] {_cn2} PIN RESIDUAL after {PIN_SETTLE_STEPS} steps "
+                      f"{float(np.linalg.norm(_p1 - _p2))*1000:6.3f} mm")
+                _pin_watch.remove((_cn2, _n0))
         if n % 40 == 0:
             for t2 in SIDES:
                 sv = sigma_min(t2)
