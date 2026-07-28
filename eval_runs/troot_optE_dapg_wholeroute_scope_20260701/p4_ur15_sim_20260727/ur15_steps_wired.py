@@ -1072,8 +1072,16 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         return 2.0 * c[4] + float(np.linalg.norm(c[0] - ref)) + SIGMA_PENALTY * _short
     q, pe, re_, hit, roll, sv = min(pool, key=_cost)
     if not quiet:
+        # ⛔ This line used to report len(well) as "away from a singularity", beside len(free) as
+        # "collision-free".  With the floor at zero those are the SAME candidates -- sigma is never
+        # negative, so the comparison keeps everything -- and printing one number under two names
+        # said a filter had run when none had.  It was wording left over from the hard floor after
+        # the floor itself was withdrawn (p11 -120(1) found it; I had written it).  So the count
+        # printed now is how many the floor actually removed, which is zero while it is zero and
+        # cannot be read as a second filter.  The singularity ranks; it does not exclude.
         print(f"[steps] start-pose IK {t}: {len(cands)} solved / {len(free)} collision-free / "
-              f"{len(well)} away from a singularity, chosen pos {pe*1000:5.2f} mm "
+              f"floor {SIGMA_FLOOR:.2f} removed {len(free) - len(well)} of them (it ranks, it does "
+              f"not exclude), chosen pos {pe*1000:5.2f} mm "
               f"roll {math.degrees(roll):4.1f} deg sigma_min {sv:.4f} |q|max={np.abs(q).max():.2f} rad")
     return q
 
