@@ -13346,3 +13346,31 @@ into a code comment. **(c) t43 LAUNCHED** (02:29:5x; desk ps at 02:31: ONE live 
 matching PIDs were transient and already gone). Package promised in per-run gate format
 on completion; ⛔ no results yet, no verdict before both legs. The video instrument
 stands ready for the next leg.
+
+## 476. t43 answers in one run — every new instrument speaks, and the cause narrows to a place, not a control
+
+From p4's -198 (02:45:26). **(a) Pins verified**: commit 99d45e2114 ("Bank t43: the
+instruments answer in one run"); trace sha 0d93cbc4…6ab1 MATCH, mp4 7e08abab…82fdc
+MATCH; 68 lines (t42: 161); producing fa948b8a53 with worktree==commit re-measured; the
+six cited lines verbatim (:25/:27/:28/:50/:52/:53) and the terminal RuntimeError
+(driver :2769). **(b) ⭐⭐ The instruments' first outing**: (i) the D-print DISCRIMINATES
+immediately — :27 announces LOUDLY "NOT ONE of 7 candidates cleared the clearance or
+its path, so all 7 were put back", :28 prints "7 solved / 0 collision-free (⛔ 0 — all 7
+put back)" ⇒ family #4's collapse is repaired, and the repaired line's first reading is
+ZERO: the left arm has NO collision-free start candidate. t42's "6/6" thereby READS as
+the all-put-back side (discriminated now; not re-proven for t42 — p4's own precision).
+(ii) the per-arm ramp frees the healthy arm: R 71.5 %, never held (t42 same step:
+0.0 %), tool err 3.6 vs 10.4 mm; the print NAMES its side. (iii) stall is terminal: 68
+lines, the last words are the JAM (t42 ran four more steps of frozen state and ended on
+an unrelated angle). (iv) the mirrored menu shows: aim L yaw +0.15 (t42: −0.15).
+(v) ⛔ the table-breach check DID NOT FIRE ⇒ recorded by p4 as UNVERIFIED, not passed —
+the green-line discipline practiced at the first opportunity. **(c) ⭐⭐⭐ The cause
+narrows to geometry**: L 0/7 collision-free (R 2/17) ⇒ not control — REACHABILITY.
+p4's flagged INFERENCE (not verdict): :25 puts BOTH grasp points right of the column
+(L=cab27 x=+0.1125, R=cab32 x=+0.1875; cable spans x[−0.300, +0.285]) ⇒ the left arm
+reaches ACROSS the column. Grasp-pair placement = the process table = p5's court —
+routed (m799) with the note that this touches the escalation material (look ∧ reach on
+the 0.22/45 pair): the left arm's reach question is now CONCRETE. **(d) The gate
+launched again**: pB (m798 — the five readings as claims-to-break PLUS validating the
+new instruments themselves), the video leg spawned (blind; colors present this run).
+⛔ No verdict before both legs; this desk states none.
