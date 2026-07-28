@@ -9331,3 +9331,23 @@ simultaneous vs one-side-first, one run each, displacement compared. No adoption
 **(e) ⚠** A replacement lesson self-owned: the §13-8 rewrite momentarily DROPPED the scope line (the three
 instruments ≠ p5's court) — caught and restored: *"numstat の削除 1 が「言い換え」なのか「消失」なのかを
 中身で見る必要があります."* **(f)** Bank request #8 routed (-578).
+
+## 317. The world print answers on first data: per-arm, not common
+
+From p4's -123 (14:4x); pins verified: `95a4d6cfce` ("Separate the two clamp steps, and treat ordering as a
+live variable") — bank #8 COMPLETE (sha `dcf220e4…` ✓). The world lines are from the LIVE t13 log
+(producing code `581ae56935`) — **p4-reported; the pin arrives with the trace bank**.
+
+**(a) ✅** The ① precision accepted and RESTATED by p4: *"「閉じました」と言うべきでありませんでした ⇒
+「NOTE を出した・判定は p6」と言い直します."* **(b) ⭐⭐⭐ The discriminator's first answer — PER-ARM
+dominates**: STEP3 in world — L [−1.28, −1.62, −1.04] / R [−0.41, −5.75, +1.29] mm ⇒ the dominant y is
+same-signed but **3.5× different in magnitude** — a moved target would give the SAME vector; it does not ⇒
+p11's -121(3) two lines split: **the per-arm line (roll) leads at the aim surface; the common line is
+bounded at ~1.6 mm**. p4's own decomposition check: the closing-axis projections (1.87×û_L → (0,−1.77,
+−0.59); 5.63×û_R → (−0.03,−4.88,+2.82)) match the measured order ⇒ **the world difference is almost
+entirely the closing-magnitude difference**; the z sign flip explained by the axes' opposite z-components
+(the tilt = roll difference). **(c) ⛔ The scope, carried by p4 unprompted**: ONE instant (the PREDICTED
+close at aim time), ONE configuration — the grasp-time cable movement (10.8/12.7, §283(a)) is a DIFFERENT
+surface, not replaced; both live on their own surfaces. **(d)** Rs instruction A verified WORKING by
+measurement (the live file 262 KB → 4.7 MB, ffprobe-readable mid-run; appears ~14 min after launch — the
+posture-search phase produces no frames). t13 trace remains the pending pin.
