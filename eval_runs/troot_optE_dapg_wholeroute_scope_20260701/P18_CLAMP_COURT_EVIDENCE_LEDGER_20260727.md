@@ -12354,3 +12354,34 @@ input question ⑧ (relay-marked, Rs/p4 court, OPEN); ⛔ the implementation gat
 names only (:1126, p6's own read): without branch registration, "clear" becomes "a clear the
 instrument does not see." Closure = ⑧ decided + COLG registered. Jam row narrowed the same
 way. No reply sent (pure registration; the ack economy).
+
+## 440. Rs answers the input question with a photograph and a video — the objection overruled by reference, not argument
+
+From p4's -183/-184 (22:34/22:35). **(a) Pins verified**: Rs target PNG sha256 MATCH ✓;
+as-built PNG sha256 MATCH ✓ (both working-tree, declared uncommitted); the v16 frame PNG
+exists (723,899 bytes; no declared sha — desk as-read prefix 394740183e19…); the v16 video
+in ~/Downloads at EXACTLY the declared 39,636,625 bytes ✓; `06e8213aac` ("Build the yoke Rs
+asked for, and put it in front of the instrument" 21:40:56) — ⭐ the title's second half
+shows the §438(d) COLG registration was heeded IN THE SAME COMMIT as the build.
+**(b) ⭐⭐ Rs verbatim ×2**: 「この形にしたい」 (the photograph, sent AFTER the case-A yoke was
+built) and 「これにあわせて」 (the v16 video). p4's practice banked: RENDERED the as-built and
+placed it beside the target rather than describing either — then asked p5 to READ the
+reference rather than take p4's word. **(c) The reading (p4's, offered as observation)**:
+Rs's shape = a compact fork just under the two bases, short branches, the column dominating;
+the v16 frame sharper still — ONE thick column on a floor plate, a short dark top section,
+BOTH arms mounted there, bases ~1–1.5 column diameters apart, NOT four; no long splayed
+fork. Geometry forces the implication: with shoulders fixed 800 mm apart, compact can only
+mean FLATTER, not shorter; short AND steep requires the bases closer ⇒ **case B — the input
+p4 recommended against and Rs declined IN WORDS; "a picture is a better statement of intent
+than my paraphrase was." ⇒ item ⑧ = DECIDED (case B), by reference stated twice — "my
+objection was overruled by the reference rather than by argument, which is the right way
+round."** **(d) Routed to p5 (m756)**: (a) confirm/deny p4's reading of the images; (b)
+derive from the reference — YOKE_SPREAD, fork height, and whether branches survive at all or
+the mounts sit on a CROWN (p4 sets none of them); (c) the cost at the Rs-approved arm-to-arm
+clearance — with p4's data point (at ±0.400 the clearance ALREADY removed 18 of 55
+candidates at one step; halving the spacing worsens it unestimably) and the explicit
+permission: if the honest answer is "it must be measured," SAY THAT — "I would rather build
+it and find out than have a number invented for it." **(e) Run custody**: t30 runs the
+case-A yoke ⇒ its mast numbers describe a cell that will not exist — declared BEFORE any
+verdict (the standing rule's spirit extended to scope); the tracking-gate reading is
+yoke-independent and survives; p4 will mark any t30 report explicitly.
