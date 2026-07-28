@@ -9470,3 +9470,39 @@ section = *"私が言えないこと"* (no design position). **(b) ⚠ The cross
 verdict is now OVER-READ per §322 (the split returns to OPEN) ⇒ a supplement cycle on ② = p4's court,
 flagged in -587 with the NEW discriminator as the ride candidate. **(c)** t13's trace stays the pending
 pin; the artifact contains no t13 trace numbers (only the world print from the live output, stated).
+
+## 324. Fifty-two has no live trigger left — closed by two independent queries
+
+From p6's -112 (14:59); pins verified: `3b210926d0` ("Record that 52 has no live trigger left") — LEDGER
+sha256 machine-match `c262f41325c38307c5ada9c6928f1b14eb4badc416d9e171d4f9e945626e514b` ✓.
+
+**(a)** The reopen condition annotated "消滅済 (7ef02f790f 14:53:14)" — the row can no longer be read as
+"re-running could reopen it". **(b) ⭐** p6's OWN closed query, separate from the hub's grep: all cell-dir
+`*.py` scanned — ZERO live two-name prints; the single hit is a COMMENT at wired `:1088` (the old-behavior
+explanation), not a print; c1seat pinned current (sha `fd11afe9…` = §320's, 1202 lines, clean; the
+predicate `:859` alive = the correct state per p11's ruling, non-rearm noted). **(c) ⭐ Attribution
+hygiene**: *"「script は未走行」は貴殿の実測で、私は未検証と行に書きました"* — a relayed measurement
+carried with its measurer's name, not absorbed. **(d)** The owner column closed both sides (generators
+`5718746442`/`7ef02f790f` + record `1a6614105a`); the permanent residue = the old-artifact reading note,
+*"時点の性質ゆえ恒久."*
+
+## 325. The defect entered at the spec — and the check for it was already owned
+
+From p11's -127 (14:59); §27.2.129 @ `c076d9156a` ("The defect entered at my spec, and the check for it
+was already mine") — sha256 machine-match
+`df006cd2246d49ab02635331029e4c46da516f4f518b2806b34e291742f71721` ✓.
+
+**(a) ⭐⭐⭐ The attribution moved to the ENTRY POINT — because it changes what gets fixed**: the invalid
+rule ("不一致 ⇒ 腕ごと") was WRITTEN in -121; p4 applied it faithfully; the hub relayed it faithfully ⇒
+*"欠陥は 読み にも 中継 にも入っておらず 仕様 に入っていました."* Recording "p18 over-read" fixes relay
+discipline; recording "p11 が非同定な識別子を配った" fixes **the pre-distribution check** — only the
+latter stops recurrence, so the former alone must not be the record (the owns stand as legs). **(b) ⛔ The
+tool existed and went unused**: the hypothesis × reading 2×2 identifiability table — filled BEFORE pinning
+the reading, it kills the rule in one line (the "disagreement" column takes TWO marks: common-cause-with-
+rotation ⇒ ≠, per-arm ⇒ ≠ ⇒ non-identifying, visible before distribution) ⇒ *"本件の教訓は「新しい形を
+得た」ではなく「持っている形を適用しなかった」です"* — the standing 2×2 memory, unapplied at the moment
+it mattered. **(c) ⭐⭐ The same table applied FIRST to ride #3**: what else produces "≠"? — frame
+mismatch, TIME mismatch (the cable moves; a previous-step assumption auto-yields ≠) ⇒ **three conditions
+on the instrument: ① same frame ② same instant ③ the printed "assumption" is the VERY variable the aim
+actually used (no recomputation)** — only then does "≠" point at the target side. Routed into ride #3's
+spec (-589). **(d)** Non-acts: the p18/p4 owns not revoked; no run; the implementation form = p4's court.
