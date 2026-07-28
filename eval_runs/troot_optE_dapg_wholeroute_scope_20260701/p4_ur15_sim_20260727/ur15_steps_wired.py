@@ -1081,6 +1081,9 @@ COLB = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "column")
 # it.  So the same exclusion is derived from the model here rather than written as a list of link
 # names, which would go quiet the day a link is renamed.
 MOUNTG = {g for g in range(m.ngeom) if m.body_parentid[m.geom_bodyid[g]] == COLB}
+# Held as a list, once: this is walked for every IK candidate of every solve, and rebuilding a set
+# difference in there is work that buys nothing.
+COLFREE = {t: sorted(ARMG[t] - MOUNTG) for t in SIDES}
 CLEARANCE_REPORT = {}   # per arm: (candidates the clearance removed, candidates kept,
                         #           the clearance the winning pose was predicted to have)
 
@@ -1104,7 +1107,7 @@ def sigma_min(t, dd=None):
     return float(np.linalg.svd(wrist_jac(t, dd), compute_uv=False)[-1])
 
 
-def column_gap(t, dd=None, want_who=False):
+def column_gap(t, dd=None, want_who=False, cutoff=None):
     """Closest signed distance from this arm's geoms to the yoke mast, in mm.  Negative means the
     arm is inside the mast.  mj_geomDistance is a geometry query, so it reports this whether or not
     the pair can collide -- and here the two differ: the arm's mount is inside the mast and its
@@ -1116,12 +1119,27 @@ def column_gap(t, dd=None, want_who=False):
     bare figure, and a bare figure cannot say whether a hand arrived or a mount never left."""
     dd = dd if dd is not None else d
     best, who = 1e9, None
-    for g in ARMG[t] - MOUNTG:
+    for g in COLFREE[t]:
         for c in COLG:
+            # Same exact prefilter as the arm-to-arm query, and here for the same reason: this
+            # runs for every IK candidate of every solve, and the unfiltered form is what once
+            # made a run take hours.  Two geoms cannot be closer than the gap between their
+            # bounding spheres, so a pair already past the cutoff cannot lower the minimum.
+            if cutoff is not None and (
+                    float(np.linalg.norm(dd.geom_xpos[g] - dd.geom_xpos[c]))
+                    - m.geom_rbound[g] - m.geom_rbound[c]) >= cutoff:
+                continue
             d_ = mujoco.mj_geomDistance(m, dd, g, c, 1.0, None)
             if d_ < best:
                 best, who = d_, f"{GNAME[g]} vs {GNAME[c]}"
-    return (best * 1000.0, who) if want_who else best * 1000.0
+    # ⛔ None, not the cutoff, when nothing is in range -- the cutoff wearing a distance's clothes
+    # is the failure this instrument already had once, at the arm-to-arm surface.
+    # ⛔ Metres, like the arm-to-arm query, so that BOTH gaps format through gap_mm and nothing
+    # multiplies one of them by a thousand at a call site.  This used to return mm, and the mixed
+    # pair of units is what put a bare "* 1000" in four different places.
+    if best > 1e8:
+        return (None, None) if want_who else None
+    return (best, who) if want_who else best
 
 
 def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
@@ -1298,16 +1316,22 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
                 _by_clearance = True
         # Rs, 2026-07-28, watching the run: "the left hand is slamming into the cylinder."  The
         # mast was never in this filter.  It was MEASURED every step and printed as "column gap",
-        # and it read negative at ten steps of thirteen while the selection went on choosing those
-        # poses -- an instrument reporting a fault to nobody.  So the mast is now tested exactly
+        # and it read negative at EIGHT steps of thirteen -- nine counting the one that read
+        # exactly zero -- while the selection went on choosing those poses: an instrument
+        # reporting a fault to nobody.  (I first wrote ten, from memory of the printout rather
+        # than from a count of it; p18 counted the banked trace.  The steps are 3, 4, 5, 6, 11,
+        # 12, 13, 14 at -0.6 mm and 10 at -0.0.)  So the mast is now tested exactly
         # where the far arm is tested, and by the same rule Rs approved for the far arm.
         # ⚠ Unconditional, unlike the far arm: the mast is always in the scene, so there is no
         # case where it is absent from the scratch data and nothing to measure.
         # The distance is the same one -- a cable diameter, the smallest thing that has to fit
         # between two parts of this machine.  Reusing it rather than inventing a second number is
         # a design call and is flagged as one; it is not derived that the two should be equal.
-        _cg = column_gap(t, sc)
-        if _cg < ARM_CLEARANCE * 1000.0:
+        # The decision only ever asks whether anything is under the clearance, so it searches a
+        # radius just wider than the clearance -- p11's cutoff split, the same one the far-arm test
+        # takes.  Nothing it decides changes; the far pairs stop being measured.
+        _cg = column_gap(t, sc, cutoff=ARM_DECIDE_CUTOFF)
+        if _cg is not None and _cg < ARM_CLEARANCE:
             hit = True
             _col_dropped += 1
         # Manipulability of this candidate.  The solver had no notion of a singularity at all --
@@ -1724,6 +1748,23 @@ def grasp_diagnostics(gate, w, aim_seat, aim_cable, gates):
               f"-> {'servo did not arrive' if np.abs(qerr).max() > 5 else 'servo arrived'}; "
               f"nearest link is {np.linalg.norm(np.asarray(cw) - aim_cable[t])*1000:5.1f} mm "
               f"from where the aimed link was (identity may differ -- not a drift)")
+        if np.abs(qerr).max() > 5:
+            # "The servo did not arrive" has been printed at both R closures of every run, always
+            # on the same joint and always by 80-90 degrees, and the line never said WHY.  The IK
+            # clips its solution to the URDF limits and the actuator's range IS those limits, so
+            # the command is reachable on paper: something is stopping the arm.  Two things can,
+            # and they need opposite fixes -- an obstruction, or not enough torque to hold the arm
+            # up against gravity -- so both are read here rather than argued about.
+            # ⛔ touching() unfiltered on purpose: the mast, the table and the cable are exactly
+            # the candidates, and the arm-to-arm print upstairs would hide all three.
+            _af = np.array([d.actuator_force[i] for i in AIDX[t]])
+            _sat = np.abs(_af) >= np.array(EFFORT) * 0.999
+            _worst = int(np.argmax(np.abs(qerr)))
+            print(f"[steps] {gate.upper()} {t}: WHY IT DID NOT ARRIVE -- worst joint j{_worst} "
+                  f"short by {qerr[_worst]/1000.0:+.3f} rad; act force {np.round(_af,1)} N.m "
+                  f"of {EFFORT}; at its limit = {list(_sat)}; gravity load "
+                  f"{np.round([d.qfrc_bias[v] for v in VADR[t]],1)} N.m; "
+                  f"touching {sorted(touching(t, d)) or 'nothing'}")
         padg, clawg = jaw_gaps(t)
         pf, lf, cf = clamp_faces(t)
         print(f"[steps] {gate.upper()} {t}: pad faces {padg:+6.2f} mm (design target 4.00 on a "
@@ -2197,7 +2238,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 if sv < sig_min[t2]:
                     sig_min[t2], sig_where[t2] = sv, f"STEP{num} t={n*m.opt.timestep:.1f}s"
                 cg, cgw = column_gap(t2, want_who=True)
-                if cg < col_min[t2]:
+                if cg is not None and cg < col_min[t2]:
                     col_min[t2] = cg
                     col_where[t2] = f"{cgw}, STEP{num} t={n*m.opt.timestep:.1f}s"
             # p5 -137 / p11 -138, print (2): the clearance is enforced on the poses that were
@@ -2256,9 +2297,10 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
            f"grip={'L' if held('L') else '-'}{'R' if held('R') else '-'}")   # R6 conjunction
     _cgl, _cwl = column_gap("L", want_who=True)
     _cgr, _cwr = column_gap("R", want_who=True)
+    _inside = [v for v in (_cgl, _cgr) if v is not None and v < 0]
     print(f"[steps] STEP{num:2d} sigma_min L={sigma_min('L'):.4f} R={sigma_min('R'):.4f}"
-          f"  column gap L={_cgl:+7.1f} ({_cwl}) R={_cgr:+7.1f} ({_cwr}) mm"
-          f"{'   <- INSIDE THE MAST' if min(_cgl, _cgr) < 0 else ''}")
+          f"  mast L={gap_mm(_cgl)} ({_cwl}) R={gap_mm(_cgr)} ({_cwr})"
+          f"{'   <- INSIDE THE MAST' if _inside else ''}")
     gc1 = np.array([C1[0], C1[1], GROOVE_Z])
     _d1, _q1, _k1, _u1 = cable_perp(gc1)
     miss1 = (_q1 - gc1) * 1000.0
@@ -2382,8 +2424,10 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
 for t in SIDES:
     print(f"[steps] WORST {t}: sigma_min {sig_min[t]:.4f} at {sig_where[t]}"
           f"   (a singular pose is sigma_min -> 0)")
-    print(f"[steps] WORST {t}: column gap {col_min[t]:+7.1f} mm at {col_where[t]}"
-          f"{'   <- INSIDE THE COLUMN' if col_min[t] < 0 else ''}")
+    print(f"[steps] WORST {t}: mast "
+          + (f"{gap_mm(col_min[t])} at {col_where[t]}"
+             f"{'   <- INSIDE THE MAST' if col_min[t] < 0 else ''}"
+             if col_min[t] < 1e8 else "never came within the search radius this run"))
 print(f"[steps] gates: {gates}")
 if _live is not None:
     _live.close()
