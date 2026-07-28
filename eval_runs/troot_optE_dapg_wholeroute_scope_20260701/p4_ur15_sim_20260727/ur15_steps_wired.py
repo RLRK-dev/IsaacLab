@@ -1075,6 +1075,35 @@ def column_gap(t, dd=None):
     return best * 1000.0
 
 
+def arm_pair_min(dd, ta="L", tb="R", want_who=False):
+    """Smallest signed distance between any geom of arm `ta` and any of arm `tb` [m].
+
+    ⚠ Written this way for speed, and the speed matters: the naive form is 38x38 = 1444 distance
+    calls, and it runs for every IK candidate of every solve.  It made a run take hours.
+
+    The prefilter is exact rather than approximate.  Two geoms cannot be closer than the gap
+    between their bounding spheres, so any pair whose centres are farther apart than
+    cutoff + rbound + rbound is already past the cutoff and cannot lower the minimum.  Those are
+    dropped by one vectorised comparison, and only the survivors are measured properly.  The
+    answer is identical to the exhaustive form; only the work is smaller.
+    """
+    ga, gb = ARMG[ta], ARMG[tb]
+    pa = np.asarray(dd.geom_xpos)[ga]
+    pb = np.asarray(dd.geom_xpos)[gb]
+    ra = np.asarray(m.geom_rbound)[ga]
+    rb = np.asarray(m.geom_rbound)[gb]
+    sep = np.linalg.norm(pa[:, None, :] - pb[None, :, :], axis=2) - ra[:, None] - rb[None, :]
+    best, who = ARM_PAIR_CUTOFF, ""
+    for ia, ib in zip(*np.where(sep < ARM_PAIR_CUTOFF)):
+        dv = mujoco.mj_geomDistance(m, dd, int(ga[ia]), int(gb[ib]), ARM_PAIR_CUTOFF, None)
+        if dv < best:
+            best = dv
+            if want_who:
+                who = (f"{mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, int(ga[ia])) or ga[ia]}"
+                       f" <-> {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, int(gb[ib])) or gb[ib]}")
+    return (best, who) if want_who else best
+
+
 def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=None, other=None, re_max=0.05, wide=False, pose_only=None, pose_rd=None):
     """Damped least-squares IK for position AND tool orientation on scratch MjData.  Keeps every
     solution that converges, wraps it to the nearest branch, drops the ones that would sit in
@@ -1165,12 +1194,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         _by_clearance = False
         near_far_arm = None
         if other is not None:
-            _o = "R" if t == "L" else "L"
-            near_far_arm = 1e9
-            for _ga in ARMG[t]:
-                for _gb in ARMG[_o]:
-                    near_far_arm = min(near_far_arm, mujoco.mj_geomDistance(
-                        m, sc, _ga, _gb, ARM_PAIR_CUTOFF, None))
+            near_far_arm = arm_pair_min(sc, t, "R" if t == "L" else "L")
             if near_far_arm < ARM_CLEARANCE:
                 hit = True
                 _clear_dropped += 1
@@ -1972,10 +1996,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             # solved, and the arms travel between them.  Endpoints are silent about the path, so
             # the smallest gap reached WHILE moving is tracked here rather than inferred from the
             # two ends of each move.
-            _pp = 1e9
-            for _ga in ARMG["L"]:
-                for _gb in ARMG["R"]:
-                    _pp = min(_pp, mujoco.mj_geomDistance(m, d, _ga, _gb, ARM_PAIR_CUTOFF, None))
+            _pp = arm_pair_min(d)
             arm_gap_path = min(arm_gap_path, _pp)
             step_gap_path = min(step_gap_path, _pp)
         if n % 20 == 0:
@@ -2062,14 +2083,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # a set of contacts, so "clear" covers a millimetre and a metre alike, and a warning that
     # cannot say how close cannot say it is getting worse.  So: the smallest signed distance
     # between any geom of one arm and any geom of the other, and the pair it belongs to.
-    _pairmin, _pairwho = 1e9, ""
-    for _ga in ARMG["L"]:
-        for _gb in ARMG["R"]:
-            _dd = mujoco.mj_geomDistance(m, d, _ga, _gb, ARM_PAIR_CUTOFF, None)
-            if _dd < _pairmin:
-                _pairmin, _pairwho = _dd, (
-                    f"{mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, _ga) or _ga}"
-                    f" <-> {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, _gb) or _gb}")
+    _pairmin, _pairwho = arm_pair_min(d, want_who=True)
     arm_gap_min = min(arm_gap_min, _pairmin)
     # (4) the realised clearance, beside (3) the predicted one: their difference IS the following
     # error the constant is currently missing, so printing them apart would leave it to be
