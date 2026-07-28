@@ -1271,6 +1271,13 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     def _cost(c):
         _short = max(0.0, SIGMA_GOOD - c[5]) / SIGMA_GOOD      # 0 when well conditioned, ->1 at 0
         return 2.0 * c[4] + float(np.linalg.norm(c[0] - ref)) + SIGMA_PENALTY * _short
+    # p11 -154, and it separates two things the earlier pair was mixing.  The winner is chosen by
+    # _cost, not by conditioning, so the set the selector COULD have chosen from may hold a better
+    # conditioned pose than the one it took.  Printing the best in that set beside the winner's
+    # says which of two different problems this is: the filter removing good candidates, or the
+    # cost passing over a good survivor.  If the best survivor is about as good as the best the
+    # filter dropped, the filter took nothing and the competition is inside the ranking.
+    _pool_sv = max(c[5] for c in pool)
     q, pe, re_, hit, roll, sv, nfa, _bc = min(pool, key=_cost)
     # p11 -139: the conditioning of the candidates the clearance threw away is already computed --
     # sv is taken for every candidate, including the rejected ones, and then dropped on the floor.
@@ -1294,7 +1301,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     # count of forty look identical from a pose alone.
     CLEARANCE_REPORT[t] = (_clear_dropped, len(cands), nfa, sv,
                            max(_drop_sv) if _drop_sv else None,
-                           _roomy, max(_inside) if _inside else None)
+                           _roomy, max(_inside) if _inside else None, _pool_sv)
     if not quiet:
         # ⛔ This line used to report len(well) as "away from a singularity", beside len(free) as
         # "collision-free".  With the floor at zero those are the SAME candidates -- sigma is never
@@ -2242,17 +2249,17 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     _pred_txt = []
     for t in SIDES:
         if t in CLEARANCE_REPORT:
-            _dr, _kept, _nfa, _wsv, _dsv, _rm, _mx = CLEARANCE_REPORT[t]
+            _dr, _kept, _nfa, _wsv, _dsv, _rm, _mx, _psv = CLEARANCE_REPORT[t]
             if _nfa is None:
                 _pred_txt.append(
                     f"{t}: the winning pose cleared the whole {ARM_DECIDE_CUTOFF*1000:.0f} mm "
                     f"search radius; clearance removed {_dr} of {_dr + _kept} candidates, "
-                    f"{_rm} of them roomy, winner sigma {_wsv:.4f} vs best dropped "
+                    f"{_rm} of them roomy, winner sigma {_wsv:.4f} (best survivor {_psv:.4f}) vs best dropped "
                     + (f"{_dsv:.4f}" if _dsv is not None else "none dropped"))
             else:
                 _pred_txt.append(
                     f"{t}: clearance removed {_dr} of {_dr + _kept} candidates, winner predicted "
-                    f"{_nfa*1000:+7.1f} mm, winner sigma {_wsv:.4f} vs best dropped "
+                    f"{_nfa*1000:+7.1f} mm, winner sigma {_wsv:.4f} (best survivor {_psv:.4f}) vs best dropped "
                     + (f"{_dsv:.4f}" if _dsv is not None else "none dropped")
                     + f"; {_rm} candidates cleared the whole {ARM_DECIDE_CUTOFF*1000:.0f} mm "
                       f"search radius"
