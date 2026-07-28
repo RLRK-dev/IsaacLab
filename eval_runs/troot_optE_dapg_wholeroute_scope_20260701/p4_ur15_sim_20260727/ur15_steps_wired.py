@@ -1488,9 +1488,22 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         sv = sigma_min(t, sc)
         cands.append((qw, pe, re_, hit, abs(POSES[_try % len(POSES)][1]), sv, near_far_arm,
                       _by_clearance))
-    free = [c for c in cands if not c[3]] or cands
+    # ⛔ The fallback below is a SILENT one, and it makes two opposite worlds print the same
+    # number: "every candidate cleared" and "not one candidate cleared, so all of them were put
+    # back" both leave len(free) == len(cands).  t42's left arm printed 6 solved / 6 collision-free
+    # and then arrived inside the crown -- which is exactly what the second world looks like from
+    # outside.  pB -515 found it; the comment at the print below fixed this same shape one level
+    # up and stopped there.  The strict count is kept so the two can never share a number again.
+    _strict = [c for c in cands if not c[3]]
+    _fell_back = not _strict
+    free = _strict or cands
     if not free:
         raise RuntimeError(f"no IK solution for {t} at {tgt}")
+    if _fell_back and not quiet:
+        print(f"[steps] ⛔ start-pose IK {t}: NOT ONE of {len(cands)} candidates cleared the "
+              f"clearance or its path, so all {len(cands)} were put back and the choice below is "
+              f"made among poses that were all rejected -- read the next line's 'collision-free' "
+              f"as 'none'")
     well = [c for c in free if c[5] >= SIGMA_FLOOR] or free   # drop the near-singular ones
     ref = np.zeros(6) if near is None else np.asarray(near)
     near_only = [c for c in well if np.abs(c[0] - ref).max() <= 1.2] or \
@@ -1542,7 +1555,8 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # the floor itself was withdrawn (p11 -120(1) found it; I had written it).  So the count
         # printed now is how many the floor actually removed, which is zero while it is zero and
         # cannot be read as a second filter.  The singularity ranks; it does not exclude.
-        print(f"[steps] start-pose IK {t}: {len(cands)} solved / {len(free)} collision-free / "
+        print(f"[steps] start-pose IK {t}: {len(cands)} solved / {len(_strict)} collision-free"
+              f"{f' (⛔ 0 -- all {len(cands)} put back)' if _fell_back else ''} / "
               f"floor {SIGMA_FLOOR:.2f} removed {len(free) - len(well)} of them (it ranks, it does "
               f"not exclude), chosen pos {pe*1000:5.2f} mm "
               f"roll {math.degrees(roll):4.1f} deg sigma_min {sv:.4f} |q|max={np.abs(q).max():.2f} rad")
@@ -2280,6 +2294,40 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
               f"pads {_mpad:+6.2f} mm apart at the COMMANDED opening "
               f"{(lf if t == 'L' else rf):.0f}; lowest point {_who3} at "
               f"{(_lowest - TABLE_TOP)*1000:+6.1f} mm vs the table")
+        # ⛔ The goal quantity, finally read.  Rs, watching a run: the fingers must not hit the
+        # table, which is why they point straight down.  The angle above is the MEANS; the line
+        # above already computed the END and printed it -- and t42 printed a passing angle
+        # (margin +2.86) on the same line as 84.2 mm BELOW the table, and stopped for the angle on
+        # the other arm instead.  Two readers found that line independently.  So the end is
+        # checked here too; the angle check stays, because they fail on different things and one
+        # is not a proxy for the other.
+        #
+        # ⚠ Measured on the FINGERS, not on the whole arm.  The lowest point printed above walks
+        # every arm geom and falls back to the bounding SPHERE for meshes, which sits far below
+        # any real surface -- gating on that number would stop runs for geometry that is nowhere
+        # near the table.  The pads and claws are boxes, so their corners are exact, and they are
+        # also what Rs's sentence is about.  The arm-wide figure stays a report.
+        _fl, _flw = 1e9, ""
+        for _g4 in CLAWG[t] + PAD1G[t]:
+            _c4 = np.array(_sv.geom_xpos[_g4])
+            _R4 = np.array(_sv.geom_xmat[_g4]).reshape(3, 3)
+            _b4 = min((_c4 + _R4 @ (np.array(k) * m.geom_size[_g4]))[2]
+                      for k in [(a, b, c2) for a in (-1, 1) for b in (-1, 1) for c2 in (-1, 1)])
+            if _b4 < _fl:
+                _fl, _flw = _b4, (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, _g4)
+                                  or f"geom{_g4}")
+        print(f"[steps] STEP{num} {t}: fingers' own lowest corner {_flw} at "
+              f"{(_fl - TABLE_TOP)*1000:+6.1f} mm vs the table (exact, box corners; the arm-wide "
+              f"figure above uses a bounding sphere for meshes and reads lower than any surface)")
+        if _fl < TABLE_TOP:
+            raise RuntimeError(
+                f"STEP{num} {t}: this pose puts the fingers {(TABLE_TOP - _fl)*1000:.1f} mm BELOW "
+                f"the table ({_flw}).  The descent points them straight down so they clear the "
+                f"table; a pose that is already through it has defeated the reason for the "
+                f"attitude, whatever the attitude reads.  ⚠ Threshold is the table surface "
+                f"itself, with no allowance: if a step legitimately needs to touch the table, "
+                f"that is a design call and belongs in the table, not in a slackened check here."
+            )
         if _off > VERTICAL_TOL_DEG:
             raise RuntimeError(
                 f"STEP{num} {t}: the descent to a clip requires the fingers straight down, and "
