@@ -1,0 +1,78 @@
+HOME-POSE SYMMETRY PROBE -- the start pose that t42 never left
+model    : /tmp/claude-1000/-home-rlrk-IsaacLab/b952db35-19a6-4bca-8043-e6731b3f2141/scratchpad/meshpool/_as_built_t42.xml   (t42's own as-built cell, read not rebuilt)
+pose     : both arms at HOME_POSE = (-3.1521, -0.2867, 2.4674, -1.3953, 1.5634, -1.5782)
+arm geoms: L=38  R=38
+
+1. LINK FRAMES: is R the mirror of L about x=0?  (x_R + x_L = 0, y and z equal)
+   shoulder_link                L[-0.3746 +0.0000 +1.6846]  R[+0.3746 +0.0000 +1.6846]   mirror error   0.0000 mm
+   upper_arm_link               L[-0.3746 +0.0000 +1.6846]  R[+0.3746 +0.0000 +1.6846]   mirror error   0.0000 mm
+   forearm_link                 L[-0.9432 +0.0065 +1.3749]  R[+0.9432 +0.0065 +1.3749]   mirror error   0.0000 mm
+   wrist_1_link                 L[-0.4361 -0.1790 +1.2834]  R[+0.4361 -0.1790 +1.2834]   mirror error   0.0000 mm
+   wrist_2_link                 L[-0.3000 -0.1800 +1.2834]  R[+0.3000 -0.1800 +1.2834]   mirror error   0.0000 mm
+   wrist_3_link                 L[-0.3000 -0.1800 +1.1400]  R[+0.3000 -0.1800 +1.1400]   mirror error   0.0000 mm
+   -> worst mirror error over all paired links: 0.0000 mm at 
+
+2. MAST DISTANCE (mj_geomDistance to stem/foot/crown; negative = inside)
+   L: closest 6 of 38 arm geoms
+         +60.10 mm   geom4                  on L_shoulder_link        vs crown
+         +90.07 mm   geom8                  on L_wrist_2_link         vs crown
+        +113.77 mm   geom6                  on L_forearm_link         vs crown
+        +130.96 mm   geom5                  on L_upper_arm_link       vs crown
+        +131.03 mm   geom7                  on L_wrist_1_link         vs crown
+        +164.53 mm   geom9                  on L_wrist_3_link         vs crown
+   R: closest 6 of 38 arm geoms
+         +60.10 mm   geom42                 on R_shoulder_link        vs crown
+         +90.07 mm   geom46                 on R_wrist_2_link         vs crown
+        +113.77 mm   geom44                 on R_forearm_link         vs crown
+        +130.96 mm   geom43                 on R_upper_arm_link       vs crown
+        +131.03 mm   geom45                 on R_wrist_1_link         vs crown
+        +164.53 mm   geom47                 on R_wrist_3_link         vs crown
+
+3. THE TRACE LINE, CHECKED
+   L closest = +60.10 mm on L_shoulder_link   R closest = +60.10 mm on R_shoulder_link
+   the two sides report the SAME link: True
+   L's winning link is L_shoulder_link at +60.10 mm; its counterpart R_shoulder_link reads +60.10 mm
+   difference between the mirrored links: 0.00 mm
+
+4. CONTACTS AT THE HOME POSE (what the physics itself reports)
+   cab0_g                 <-> S1_post                 dist -0.000 mm
+   cab0_g                 <-> S1_post                 dist -0.000 mm
+   cab15_g                <-> S2_post                 dist -0.000 mm
+   cab15_g                <-> S2_post                 dist -0.000 mm
+   cab16_g                <-> S2_post                 dist -0.000 mm
+   cab16_g                <-> S2_post                 dist -0.000 mm
+   cab17_g                <-> S2_post                 dist -0.000 mm
+   cab17_g                <-> S2_post                 dist -0.000 mm
+   cab35_g                <-> S3_post                 dist -0.000 mm
+   cab35_g                <-> S3_post                 dist -0.000 mm
+   cab36_g                <-> S3_post                 dist -0.000 mm
+   cab36_g                <-> S3_post                 dist -0.000 mm
+   cab37_g                <-> S3_post                 dist -0.000 mm
+   cab37_g                <-> S3_post                 dist -0.000 mm
+5. THE COMMANDED ATTITUDE, PER SIDE (p5's question, no run)
+   L: pad bodies in world  left[-0.0631 +0.2319 +2.6241]  right[-0.0631 +0.1333 +2.6240]
+      closing axis (right-left) in world [+0.0006 -1.0000 -0.0005]   approach (pinch->tool) [-0.7275 -0.0008 +0.6862]   det(AXFIX) = +1.0000
+   R: pad bodies in world  left[+0.0631 +0.1333 +2.6240]  right[+0.0631 +0.2319 +2.6241]
+      closing axis (right-left) in world [+0.0006 +1.0000 +0.0005]   approach (pinch->tool) [+0.7275 -0.0008 +0.6862]   det(AXFIX) = +1.0000
+   which right-side pad is the mirror of the LEFT arm's LEFT pad?  distance to R's left pad   98.600 mm | to R's right pad    0.000 mm  ->  ⛔ THE OTHER NAME (the pads swap sides)
+   closing axis, mirrored L vs measured R: M@cL [-0.0006 -1.0000 -0.0005]  vs  cR [+0.0006 +1.0000 +0.0005]   ⛔ OPPOSED
+   approach axis, mirrored L vs measured R: M@aL [+0.7275 -0.0008 +0.6862]  vs  aR [+0.7275 -0.0008 +0.6862]   aligned
+   L: pose_rd=(0,0) commands approach in world [-0.0000 +0.0000 -1.0000]  (straight down)
+   R: pose_rd=(0,0) commands approach in world [-0.0000 -0.0000 -1.0000]  (straight down)
+   are the two commanded attitudes mirrors of each other?  worst element difference 0.000000  ->  yes
+   the same question at the rolls the menu actually asks for:
+         yaw    roll           L approach (world)           R approach (world)   mirrored?
+         0.0     0.0   [-0.0000 +0.0000 -1.0000]   [-0.0000 -0.0000 -1.0000]   yes
+         0.0    17.2   [-0.0000 -0.2955 -0.9553]   [-0.0000 -0.2955 -0.9553]   yes
+         0.0   -17.2   [-0.0000 +0.2955 -0.9553]   [-0.0000 +0.2955 -0.9553]   yes
+         0.0    31.5   [-0.0000 -0.5227 -0.8525]   [-0.0000 -0.5227 -0.8525]   yes
+        17.2    17.2   [+0.0873 -0.2823 -0.9553]   [+0.0873 -0.2823 -0.9553]   ⛔ NO (0.5910)
+
+6. CLAW UP/DOWN, PER SIDE (f1ext must be BELOW f2ext -- the ko grip's own rule)
+   Lg_left_pad: f1ext z=+0.9771  f2ext z=+0.9955  -> f1 is BELOW f2
+   Lg_right_pad: f1ext z=+0.9771  f2ext z=+0.9955  -> f1 is BELOW f2
+   Rg_left_pad: f1ext z=+0.9771  f2ext z=+0.9955  -> f1 is BELOW f2
+   Rg_right_pad: f1ext z=+0.9771  f2ext z=+0.9955  -> f1 is BELOW f2
+   (at the home pose, in world z; the tool is not vertical here, so this reads the built order of the claws, not the grasp attitude)
+
+⛔ SCOPE: one pose per section, geometry only.  No dynamics, no run, no verdict, and no statement about which mounting pair the cell should use.  §5's last row is a MEASUREMENT that the two sides stop being mirrors once yaw is non-zero; whether the menu SHOULD mirror is a design question and not decided here.
