@@ -14012,3 +14012,28 @@ variable) — HOW = p4's and p5's court (routed m833/m834, fast, since p4 may al
 be building). The confound also touches #38's reading via (b)'s identity with the
 88 mm test — connected on the #38 side by p6. The night's pattern holds: the flag
 landed before the measurement moved.
+
+## 505. The crown comes off and the column steps forward — the tally named the nearest, not the necessary
+
+From p4's -206 (04:01:08; a leading single point — the full table follows, ~12 min).
+**(a) ⭐⭐ The inversion**: with the crown's geometry REMOVED ENTIRELY (p5's asked
+lower-bound point), the left arm reads **7 solved / 0 collision-free — the STEM takes
+over** (stem ×6, other arm ×1, path 1); the right arm IMPROVES (free 2→4) ⇒ **the
+crown matters to the RIGHT arm and not to the left; the left arm's blocker is the
+COLUMN.** **(b) The distinction that changes the consequence**: the y-sweep tally
+measured "what share of rejections NAME the crown"; it never measured "does removing
+the crown let poses through" — and the naming is want_who's NEAREST single member
+(§497) ⇒ **dominant in the tally ≠ necessary for the block: the crown's 81 % was the
+share of first-contact namings, with the stem standing behind it.** #60's provenance
+disclosure keeps its force for the RIGHT arm; its causal reading for the left is
+tempered. No judgment issued by p4 or this desk. **(c) ⭐ The first interleave point
+lands**: the 88 mm readout is WIRED (both arms at command-span start poses, throwaway
+state, arm_pair_min) — at (spread 0.220 / tilt 45.0 / crown OFF): **arms closest
++9.6 mm, no crossing** — the FIRST measured point ever on the §20-7(e)/#38 question
+(one point, crown-off condition; the pair-constraint re-measure arrives as the full
+table: crown-radius 5 pts + spread 4 × tilt 3, both readouts at every point,
+RUNNING). **(d) Desk notes for the package check**: the message's "g5 on
+L_forearm_link" mixes the earlier geom naming (g5 = upper arm, g6 = forearm) — the
+artifact line decides; and whether (b)'s points hold CROWN_R fixed or derived (the
+m833/m834 confound flag crossed the launch) is to be read from the table's per-point
+crown-r column, which the +9.6 line already carries.
