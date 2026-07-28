@@ -11635,7 +11635,10 @@ confirmation was p4's court by design). ⚠ Provenance question OPEN (asked, m72
 runs from `ffbc1f15af` (started 19:19:49); -176 pins t22's producing code as `4c2cd5dc77`
 (committed 19:49:33, nine seconds before t23's 19:49:42 start) — which version produced the
 banked t22 trace, or was the ffbc1f15af t22 replaced? The WHY-IT-DID-NOT-ARRIVE/touching prints
-suggest the later code; not resolved silently. **(b) ⭐ Axis 2 declared ABSENT by the
+suggest the later code; not resolved silently. 〔RESOLVED by -177 (§418): t22 producing =
+`ffbc1f15af` (measured chain: commit 19:18:12 → launch 19:19:51 → log last write 19:47:51 →
+`4c2cd5dc77` at 19:49:33, AFTER the run) — `4c2cd5dc77` is where the trace LANDED. ⛔ And this
+desk's "suggest the later code" was WRONG: the WHY print exists at ffbc1f15af (grep = 1).〕 **(b) ⭐ Axis 2 declared ABSENT by the
 implementer**: no non-destructive measuring pass exists in the A/B split — "I would rather say
 so than have the form recorded as met." What exists: the print PRECEDES the raise ⇒ the
 tripping step reports its own residual; every later step is never reached — "exactly p11's
@@ -11727,3 +11730,33 @@ the §415 jam/no-grasp thread — the analysts' court). **(e) The pass dimension
 an ARMED run's r_max is a LOWER BOUND, not a maximum (t20 stopped at STEP15 R; STEP16/17 never
 measured). Asks executed: (a) bank #17 above; (b) the window facts → p4 as OBSERVATION (m727 —
 p5 directs no change); (c) rider ④ + the pass dimension → p11 (m723).
+
+## 418. Contains is not produced — p4 moves its own pin, and the part inside the mast has a name
+
+From p4's -177 (20:07:08). **(a) The correction, verified**: t22 producing = `ffbc1f15af`, NOT
+`4c2cd5dc77` — measured chain (p4's, times desk-confirmed): ffbc1f15af committed 19:18:12; t22
+launched 19:19:51; log last written 19:47:51; 4c2cd5dc77 committed 19:49:33 — AFTER the run, so
+it cannot have produced it; it is where the trace LANDED (and it changed the driver, so
+wired.py@4c2cd5dc77 is NOT the code that ran). The collapsed distinction, named by its owner:
+"the commit that CONTAINS a trace is not the commit that PRODUCED it, and on this branch those
+differ BY DESIGN because I bank the artifact after the run" — the
+verify-at-the-producing-commit family. The three jam readings are unaffected (same bytes).
+Correct pins: t21 = `0b0d4c462f` (killed) / t22 = `ffbc1f15af` (completed) / t23 = `4c2cd5dc77`
+(launched 19:49:42, running). ⛔ This desk's own: §415(a)'s "the prints suggest the later code"
+was WRONG — the WHY print exists at ffbc1f15af (grep = 1); inline tag placed. Downstream
+corrections routed: pB (m728 — read t22 against ffbc1f15af), p6 (m729 — their material carried
+the landing pin without the distinction). **(b) The raw log, closed**: at the declared
+session-scratchpad path (`/tmp/...b952db35.../scratchpad/run_t20.log`, mtime 18:27:43), sha256
+= MATCH at this desk ⇒ raw==banked now INDEPENDENTLY verified — upgraded from p4's declaration.
+⚠ /tmp is non-durable ⇒ the BANKED copy @ `c65e0efc8b` is THE provenance pin; the raw treated
+as gone (p4's own disposition). Both m727 asks CLOSED. **(c) ⭐⭐ The part named**: g43 =
+**R_forearm_link** — "The right FOREARM is what is inside the mast, not the hand"; t23 live
+print quoted: "mast R=-0.6 mm (g43 on R_forearm_link vs stem)"; left nearest = L_wrist_2_link
+at +73.3 mm, CLEAR. Status: p4's live read of a RUNNING t23 — the trace is not yet banked;
+recorded as report, to be pinned when the trace lands. Coherence notes (materials): a forearm
+pressed by a saturated j1 sits still across wrist motions — consistent with pB's §410(d) (the
+min's owner does not move with the hand-moving joints) and with the §415 jam; the t20-video
+L-side question stays with pC (t23's L-clear is t23's state, not t20's). **(d)** Both standing
+observations sit in p4's court without action yet: the discriminator (already in the print) and
+the window — verbatim: "an acceptance window three times the bar it feeds is not obviously
+innocent"; a proper look promised rather than an answer now.
