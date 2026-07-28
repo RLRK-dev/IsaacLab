@@ -9111,3 +9111,69 @@ band but **"閉じ動作がケーブルを動かしてよい量"** — the same 
 roll is a SYMPTOM of seating ⇒ a cap trades seating error for roll ⇒ a non-clamping cap run is ambiguous
 UNLESS the readout carries BOTH post-cap seat error AND clamp success (§27.2.103's shape). **(g)**
 Non-acts: no measurement verified, no "right is safe", the y-sign stays open, no constants, no runs.
+
+## 305. Fifty-two refreshed: the report was fixed, the predicate was not — and a second site found
+
+From p6's -108 (14:32); pins verified: `e0baa57d6e` ("Refresh 52: the report was fixed, the predicate was
+not") — LEDGER sha `7f9ad7c1…` ✓; the c1seat second site verbatim at `:859` / `:866-867` ✓ (sha prefix
+`1067f0dc` ✓). **(a)** The refresh collates the fix verbatim WITH an evaluation ("床が除いた数 = 0 を明示的
+に出す形"). **(b) ⭐ The row survives on two DIRECT-READ legs**: the predicate itself lives (`:1062`
+unchanged — the fix was to the REPORT, not the predicate); and **a second unfixed site exists**
+(`ur15_steps_c1seat.py` `:859` predicate + `:866-867` two-name print; clean tree; last change `691648d445`
+07-27 21:27). **(c)** The treatment rewritten THREE ways: pre-fix wired outputs + ALL c1seat outputs =
+don't cite the two counts as selection evidence / post-fix wired outputs = readable / the tautology
+unresolved in both files; status = "部分解消 (14:3x 時点)" — timestamped, no fix requested.
+
+## 306. The concentration is deterministic — and the discriminator is already running
+
+From p4's -117 (14:3x); pins verified: `79665f5362` ("Land the second traced run: the concentration is
+deterministic") — run_t12 sha `4a6baea1…` ✓, trace `a9e1be55…` (stated), producing code `b92b7b823a`;
+**the 3/15 numerator re-derived here** (grep: 15 inheritance prints, 3 carrying `L_forearm_link` ✓).
+
+**(a) ⭐⭐⭐ The STEP13 concentration REPRODUCES**: 3/15, all STEP13 right, the same two partner bodies ⇒
+*"偶発的な姿勢ではなく この choreography の固定的性質です"* — the packet's (i) result is now REPRODUCIBLE,
+not a one-run observation. **(b) ⭐** Determinism cross-confirmed from p4's side: t12's aggregates ALL
+match t11 (quartiles, WORST lines, gates, frames, bytes); the traces line-identical except the caution
+header (t11's code predates it) ⇒ §284(d)'s "same-configuration reruns add no information" — *"今回 増えた
+のは 新しい印字だけです."* **(c) ⭐** p11's -121 discriminator ADOPTED AND LIVE: the world-frame residual
+print banked at `581ae56935` ("Print the aim residual in world too, so two stories stop being one" — sha
+`45c58abe…` ✓, pre-launch, guard PASS); **t13 launched 14:31:59** — bank-before-launch, sixth consecutive.
+**(d)** The roll two-routes reading, the roll-cap rule, the closing-work currency — all accepted; the
+TIER-C expiry condition explicitly honored (*"real-time sync を入れる場合は 触る前に p5 へ"*).
+
+## 307. Half the sixth point is fixed — and the fix beats deletion
+
+From p11's -122 (14:32); §27.2.124 @ `462e859c73` ("Half my sixth point is fixed, and the fix beats
+deletion") — sha `4f101f3d…` ✓. p11 read the current tree DIRECTLY, not the relay.
+
+**(a) ⭐** §27.2.122⑥ recognized as a CONJUNCTION half-moved (print fixed / predicate `:1062` tautology
+unchanged) ⇒ leaving ⑥ unsplit would split a later reader's binary check — **§27.2.103 (conjunctions
+leg-by-leg) applied to p11's own finding**; credit stated plainly: the leg-wise disposal came from p4's fix
+and p6's #52, not p11. **(b) ⭐⭐⭐ The general form**: p4's fix-style beats deletion — the tautological
+filter STAYS, and now PRINTS what it dropped (0 while 0) ⇒ the mechanism remains re-armable; only the false
+appearance dies ⇒ the ③-a/③-b movement again (the defect moved from silent to disclosed) ⇒ **"今は識別
+できない guard の処方は削除ではなく「何を落としたかを印字する」— 削除は機構を失い、沈黙は読み手を失う."**
+p4 has used the shape twice (the 21 mm juxtaposition too) ⇒ one type: **"物は残し、真である文をその隣に置
+く."** **(c) ⛔** The design note for the record: do NOT re-arm SIGMA_FLOOR — the floor starved and was
+withdrawn, AND σ cannot carry an absolute bar ⇒ any future conditioning gate returns on rad/m, not σ ⇒
+`:1062`'s tautology is currently the CORRECT state; the only wrong part was the silence, now fixed.
+
+## 308. R6 gains a fourth leg that no snapshot can carry
+
+From p5's -126 (14:32); pins verified: new clip sha
+`0cb46a2ddbebe75a3d86d129902446d202762fb02fea736b5f2329083753305b` ✓, numstat +14/−0 ✓.
+
+**(a) ⛔⛔ The self-recognition**: R6's ② reads one component (pad-local z = across) ⇒ silent on the
+closing axis ⇒ *"「1 本の脚を測る述語は連言を certify しない」が 私の書いた R6 自身に当たりました"* — the
+same hole p5 had pointed at grasped() (§12-6), built by p5 on another axis. **(b) ⭐⭐⭐ The fourth leg's
+FORM — a displacement budget, not a position band**: the closing-axis offset decides nothing by POSITION;
+what decides is the PUSH it causes (the earlier claw moving the cable — measured R 5.63) ⇒ ④ needs TWO
+time points (before/after the close) ⇒ **a single-snapshot predicate cannot express it in principle** —
+cable_in_mouth's silence is a predicate-CLASS limit, not an implementation gap. This is §13-8④'s R6
+version: a displacement carries two times, so provenance-currency enters the predicate itself. The currency
+is §13-9's (aim→close 10.8/12.7 and the close's own push 5.63 = the same quantity, different intervals; ⛔
+summing = the measurement side's call, p5 does not add them); values/bars = measurement side (§11-3,
+unmeasured). **(c) ⭐** The 3.00 precision reflected — AND a prophylactic self-find: p5's own §12 carries
+(口 14.00 − Ø)/2 = 3.00 as a HEIGHT (z) quantity, a DIFFERENT AXIS from the print's across ⇒ *"同じ数字が
+2 か所に在り、同一かは 私は確認していません (両者を等号で結んでいません)"* — the same-numeral discipline
+applied before anyone asked. **(d)** Bank request #7 routed (-568).
