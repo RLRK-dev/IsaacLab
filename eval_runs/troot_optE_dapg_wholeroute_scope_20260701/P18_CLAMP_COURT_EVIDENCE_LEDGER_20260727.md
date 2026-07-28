@@ -11119,3 +11119,18 @@ aim lines) (b) ⛔ and the lane repeatedly emits NON-INDEPENDENT samples — t7 
 t8's first 26 s ≡ t4, t18's aim = t15's (relay, t18 unbanked, marked unverified by p6) ⇒ **do not
 build a denominator from the number of runs.** The same discipline p6 enforced on p5's 3/15 and
 7/7, turned on its own surface — the row now protects its own reader.
+
+## 397. t18 dies on the guard's unguarded twin — and the crash log banks the C answer anyway
+
+From p4's -165 (17:5x); pins ✓ (`b7e4215435` driver sha `e380a34066…`; `1fb464203a`
+run_t18_crashed.txt sha `6d3990528e…`). **(a) ⛔⛔** t18 died at STEP3 — "TypeError: '<' not
+supported between instances of 'NoneType' and 'float'": the saturation fix made arm_pair_min return
+None and p4 ADDED a guarded line **without deleting the unguarded original** — two lines side by
+side, the second naked ⇒ died at the first nothing-in-range stage = the very case the guard was
+written for. The general form, p4's own words: **"a guard placed beside its target is not a guard —
+it must replace it"** — the zero-check-passes-its-bug shape, SECOND time today. No gates line;
+-163's aim-stage scope unchanged. **(b) ⭐** The raw crash log BANKED with "crashed" in its name —
+"avoiding C's answer existing only in a message": the aim R = 32°/1.46 mm evidence now on-disk.
+**(c)** Fix + **t19 launched 17:51:27** (producing `b7e4215435` = the FULL cargo: C + state
+purification + B + 4 prints + P2/P5 + both guards + saturation fixes + cutoff split). p11's
+procedure accepted (classification → E/D; the 88 ≠ 80.5 non-equation honoured).
