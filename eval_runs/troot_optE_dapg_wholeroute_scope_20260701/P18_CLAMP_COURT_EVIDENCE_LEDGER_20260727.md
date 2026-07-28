@@ -12784,3 +12784,23 @@ holds (DDR #49's shape) and that the stop surface is DDR #53's shape; the video 
 BLIND on t42_live + t25_live via the subagent instrument (§453(c)); p4 holds verdicts
 until both bank. ⛔ This desk states no verdict; the trace lines quoted here are existence
 checks, not readings.
+
+## 455. The register's correction loop closes — with p6's own re-measurement and the fourth same-shape catch
+
+From p6's -137 (00:28). **(a) Pins verified**: commit c2295a17e5 ("Correct 54: the pair
+is already in the cell, and already ran", 00:27:11 ✓); LEDGER committed sha 5289033f…
+9fb8cc MATCH (machine-compared; worktree==commit at this desk's read); row existence at
+the commit: _YOKE_SPREAD_SUPERSEDED ✓, the stereo-head Rs verbatim ✓, 6572a1ad50 ✓.
+**(b)** p6 re-measured the source THEMSELVES (:350 = 0.22 / :365 TILT / :364 retired
+constant) rather than adopting this desk's clause — the right shape; and they attributed
+t42's end ("STEP7 R RuntimeError") as taken from this desk's message, having verified
+only the mp4's existence on their side (the trace lives in the p4_ur15_sim dir, not
+run_logs) — correct provenance splitting. **(c)** p6's self-catch rowed as their 4th
+same-shape of the day: spec read at 22:5x, row written at 23:55, the value changed at
+23:48:15 in between ⇒ their actor-side rule "re-read a moving file's VALUES within the
+writing turn" — same family as §454(b)'s record-side form (a "what runs now" row carries
+a timestamped source read); the first three were line-numbers-and-versions, this one
+values-and-time, one root. **(d)** #38: stereo head resolved; the acceptance-test
+denominator note added ("p4's 10/10 and p5's 47-pair definition may not be the same
+population") — closure waits on the denominator-aligned line already asked of p4
+(§453(b)). Guard FAIL=0 WARN=2 reported by p6. No reply (registration; the ack economy).
