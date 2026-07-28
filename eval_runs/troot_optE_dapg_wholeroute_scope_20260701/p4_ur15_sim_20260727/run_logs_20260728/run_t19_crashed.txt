@@ -1,0 +1,77 @@
+[cell] cable bend EI in force: 0.005 N.m^2 from task_config.py:144
+[cell] -> joint stiffness 0.33333 N.m/rad over a 15 mm link
+[cell] cable 40 x 15 mm, 1.1243 g each, 44.97 g total
+[cell] clip collision read from the env source: True
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:268: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  m = cell.compile()
+[steps] nq=113 nu=14 nbody=88 ngeom=139 eq=8  seat links C1=cab30 C2=cab23
+[steps] geoms: 139 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.300,+0.285] y[+0.280,+0.280] z-table[+0.1486,+0.1559] ncon=13
+[steps] measured grasp: L=cab27 [0.1125 0.28   0.9486]  R=cab32 [0.1875 0.28   0.9509]  drop across the span = 2.3 mm
+[steps] start-pose IK L: 8 solved / 4 collision-free / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll 20.1 deg sigma_min 0.0504 |q|max=1.27 rad
+[steps] start-pose IK R: 13 solved / 3 collision-free / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll 34.4 deg sigma_min 0.2368 |q|max=3.06 rad
+[steps] measured pinch->mouth drop: L -41.6 mm  R -36.6 mm
+[steps] Tier A cross-check: 0 measurable values (CLAW_OFFSET excluded -- the cell measures pinch->mouth, which is a different vector)
+[steps] STEP1 L arm touching: clear
+[steps] STEP1 R arm touching: clear
+[steps] re-measured after the approach: L=cab26 [0.0986 0.28   0.9488]  R=cab32 [0.1886 0.28   0.951 ]
+[steps] STEP1 L: tool err=   2.1mm
+          joint err   = [-0.  0. -0. -0. -0.  0.] mrad
+          act force   = [ 0.  0.  0.  0.  0. -0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [ -61.6 -101.5  -14.4    4.5   -1.1    0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] STEP1 R: tool err=   2.1mm
+          joint err   = [-0.  0.  0. -0.  0.  0.] mrad
+          act force   = [ 0.  0.  0.  0. -0. -0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [82.6 29.7 -8.8  0.1  1.5 -0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] vertical check: allowance 5.73 deg, cap 0.00 deg (the smallest non-zero tilt the attitude menu can make, measured as pinch->mouth against world -z, not as a roll); the allowance is an interim until a run reports the worst residual an upright command actually leaves
+[steps] watch along here while it runs: /home/rlrk/Downloads/ur15_live.mp4
+[steps] watch-along file opened with the starting frame; it stays on that frame until the attitude search finishes and the arms begin to move
+[steps] release opening solved from the asset: ctrl 186.7 (claw tips reach 12.00 mm = cable 8.0 plus the 4.00 mm the cable can sit off centre)
+[steps] aim L: yaw +0.00 roll +0.30 rad (+17 deg tilt), seat error 1.62 mm
+[steps] aim R: yaw +0.00 roll +0.55 rad (+32 deg tilt), seat error 1.46 mm
+[steps] STEP 2 sigma_min L=0.0871 R=0.2403  column gap L= +112.3 R= +180.2 mm
+[steps] STEP 2 ARM REACH: L  20.7 mm below the mouth (Lg_left_pad_f1ext), +176.8 mm vs the table | R  41.0 mm below the mouth (geom57), +161.7 mm vs the table
+[steps] STEP 2 AS REALISED: L 11.5 deg off straight down, pads +79.89 mm | R 34.4 deg off straight down, pads +79.89 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 2 ARM-TO-ARM: closest    +0.0 mm (11 <-> 67)  <- TOUCHING OR THROUGH   along the move    +0.0 mm (11 <-> 77 at t=0.01s)   worst so far    +0.0 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 2 CLEARANCE: L: no far arm in that solve, so no clearance was measured | R: no far arm in that solve, so no clearance was measured ; realised at rest    +0.0 mm (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 2 CARRY: L mouth[+0.097 +0.281 +0.198] holds cab26 at ( -5.7, -1.4,-48.7) mm | R mouth[+0.189 +0.269 +0.203] holds cab33 at ( +7.5,+11.1,-51.3) mm
+[steps] STEP 2 C1 SEAT: nearest point ON THE CABLE (cab29 at 0.68) misses the groove centre by (  -3.7, -70.0,+140.3) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 2 C1 GATE: cab30 at [+0.151 +0.280 +0.149] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 2 C2 GATE: cab23 at [+0.046 +0.280 +0.150] -> fails on y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 2 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 2 cable上空へ     t=  2.2s L=   2.1mm R=   2.1mm c1[y+0.280 z+0.149] c2[y+0.280 z+0.150] pin=--/-- grip=--
+[steps] STEP3 L: standoff re-aim (y,z only), seat error  2.30 mm
+[steps] STEP3 L: that residual in the jaw's own axes (PREDICTED close): along cable  -1.28  closing  +1.86  across the mouth  +0.45 mm
+[steps] STEP3 L: and in world [ -1.28  -1.62  -1.02] mm (same vector, no frame of its own -- compare the two arms here)
+[steps] STEP3 L: closing axis in world [-0.000 -0.948 -0.317]  across-mouth axis [+0.000 +0.317 -0.948]
+[steps] STEP3 L: the aim ASSUMED the cable at [+0.0986 +0.2800 +0.9488] running along world x (x held, y and z re-aimed); cab26 ACTUALLY runs [+1.000 -0.000 -0.006] =  0.4 deg off that axis (neighbours: cab25  1.0, cab27  0.3 deg)
+[steps] STEP3 R: standoff re-aim (y,z only), seat error  1.43 mm
+[steps] STEP3 R: that residual in the jaw's own axes (PREDICTED close): along cable  -0.03  closing  +1.20  across the mouth  -0.78 mm
+[steps] STEP3 R: and in world [ -0.03  -0.65  +1.28] mm (same vector, no frame of its own -- compare the two arms here)
+[steps] STEP3 R: closing axis in world [-0.000 -0.864 +0.503]  across-mouth axis [+0.000 -0.503 -0.864]
+[steps] STEP3 R: the aim ASSUMED the cable at [+0.1886 +0.2800 +0.9510] running along world x (x held, y and z re-aimed); cab32 ACTUALLY runs [+0.999 -0.000 +0.050] =  2.9 deg off that axis (neighbours: cab31  2.5, cab33  3.1 deg)
+[steps] STEP3: if the cable had rotated rigidly, these residuals would need x-y -0.64 deg and x-z +1.50 deg; the links measure  0.4 and  2.9 deg off world x, with x-y components -0.0000 and -0.0000
+[steps] STEP3 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP3 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP3 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP3 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP3 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP3 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test)
+[steps] STEP 3 sigma_min L=0.0377 R=0.2059  column gap L=   +0.0 R=   -0.6 mm
+[steps] STEP 3 ARM REACH: L  25.6 mm below the mouth (Lg_left_pad_f1ext), +135.0 mm vs the table | R 281.0 mm below the mouth (geom42),  +73.0 mm vs the table
+[steps] STEP 3 AS REALISED: L 17.2 deg off straight down, pads +79.89 mm | R 52.2 deg off straight down, pads +79.89 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 3 ARM-TO-ARM: nothing within the 176 mm search radius at rest   along the move    +0.0 mm (8 <-> 78 at t=2.22s)   worst so far    +0.0 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py", line 2255, in <module>
+    f"{t}: the winning pose cleared the whole {ARM_DECIDE_CUTOFF*1000:.0f} mm "
+                       ^^^^^^^^^^^^^
+TypeError: unsupported operand type(s) for *: 'NoneType' and 'int'

@@ -1139,6 +1139,32 @@ def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
     return (best, who) if want_who else best
 
 
+def arm_sets_disjoint():
+    """Names of any geom claimed by BOTH arms.  Empty is the only healthy answer.
+
+    A shared geom would read as zero distance between the arms forever, which is exactly the
+    "+0.0 mm along the move" the path sampler reported at a step whose endpoints were beyond the
+    search radius.  That reading is either a real transient or this -- and one grep settles which,
+    so it is checked at startup instead of being wondered about later.
+    """
+    both = set(ARMG["L"]) & set(ARMG["R"])
+    return sorted(mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or f"geom{g}" for g in both)
+
+
+def gap_mm(x, absent="beyond the search radius"):
+    """Format an arm-gap reading in mm, or say it was not measured.
+
+    ⛔ Every arm-gap value can be absent -- arm_pair_min returns None when no pair is inside the
+    search radius, which is a real and common state, not an error.  I guarded that at the sites I
+    happened to be editing and missed the others, and runs died on it FOUR times in an afternoon:
+    each fix protected one line and left its neighbours open.  Individual guards were not working.
+
+    So the formatting goes through here and nothing else multiplies one of these by a thousand.
+    The absence has a spelling, and a caller cannot forget to give it one.
+    """
+    return absent if x is None else f"{x * 1000.0:+.1f} mm"
+
+
 def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=None, other=None, re_max=0.05, wide=False, pose_only=None, pose_rd=None):
     """Damped least-squares IK for position AND tool orientation on scratch MjData.  Keeps every
     solution that converges, wraps it to the nearest branch, drops the ones that would sit in
@@ -1548,6 +1574,11 @@ print(f"[steps] vertical check: allowance {VERTICAL_TOL_DEG:4.2f} deg, "
       f"cap {vertical_cap_deg():4.2f} deg (the smallest non-zero tilt the attitude menu can make, "
       f"measured as pinch->mouth against world -z, not as a roll); the allowance is an interim "
       f"until a run reports the worst residual an upright command actually leaves")
+
+_shared = arm_sets_disjoint()
+print(f"[steps] arm geom sets: L={len(ARMG['L'])} R={len(ARMG['R'])}, "
+      f"{'DISJOINT' if not _shared else f'⛔ SHARED: {_shared}'}"
+      f"  (a shared geom would read as zero distance between the arms at every step)")
 
 print(f"[steps] watch along here while it runs: {LIVE_OUT}")
 
@@ -2259,25 +2290,25 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
             else:
                 _pred_txt.append(
                     f"{t}: clearance removed {_dr} of {_dr + _kept} candidates, winner predicted "
-                    f"{_nfa*1000:+7.1f} mm, winner sigma {_wsv:.4f} (best survivor {_psv:.4f}) vs best dropped "
+                    f"{gap_mm(_nfa)}, winner sigma {_wsv:.4f} (best survivor {_psv:.4f}) vs best dropped "
                     + (f"{_dsv:.4f}" if _dsv is not None else "none dropped")
                     + f"; {_rm} candidates cleared the whole {ARM_DECIDE_CUTOFF*1000:.0f} mm "
                       f"search radius"
-                    + (f", widest inside it {_mx*1000:+6.1f} mm" if _mx is not None else ""))
+                    + (f", widest inside it {gap_mm(_mx)}" if _mx is not None else ""))
     _worst = min(arm_gap_min, arm_gap_path)
     print(f"[steps] STEP{num:2d} ARM-TO-ARM: "
-          + (f"closest {_pairmin*1000:+7.1f} mm ({_pairwho})"
+          + (f"closest {gap_mm(_pairmin)} ({_pairwho})"
              f"{'  <- TOUCHING OR THROUGH' if _pairmin <= 0 else ''}"
              if _pairmin is not None else
              f"nothing within the {ARM_PAIR_CUTOFF*1000:.0f} mm search radius at rest")
-          + (f"   along the move {step_gap_path*1000:+7.1f} mm ({step_gap_who})"
+          + (f"   along the move {gap_mm(step_gap_path)} ({step_gap_who})"
              if step_gap_who else "   nothing within the radius during the move")
-          + (f"   worst so far {_worst*1000:+7.1f} mm" if _worst < 1e8 else
+          + (f"   worst so far {gap_mm(_worst)}" if _worst < 1e8 else
              "   nothing within the radius yet, this run")
           + "   ⚠ measured between the two arms only; posts, table and cable are not in this")
     if _pred_txt:
         print(f"[steps] STEP{num:2d} CLEARANCE: " + " | ".join(_pred_txt)
-              + f" ; realised at rest {_pairmin*1000:+7.1f} mm"
+              + f" ; realised at rest {gap_mm(_pairmin)}"
               + " (predicted minus realised = the following error the constant does not carry)")
     print(f"[steps] STEP{num:2d} CARRY: " + " | ".join(carry))
     _stx, _sty, _stz = seat_tolerances()
