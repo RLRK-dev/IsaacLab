@@ -186,6 +186,45 @@ def main() -> int:
                f"{tally['negative'][0]}/{tally['negative'][1]} (it must land 0, "
                f"or the test is not reading the convention).")
 
+    # --- the limit leg, which the position legs cannot see -----------------------------------
+    # p5 -163, unconditional: joint LIMITS do not enter FK, so no amount of tool-landing evidence
+    # touches them, and the reference's poses reach |q| = 5.63 rad against a 6.283 rad limit --
+    # they never come near it, so a wrong limit passes in silence.  Convention #2 says the axis
+    # and the limit inverted together, atomically; that is exactly [lo, hi] -> [-hi, -lo].
+    out.append("")
+    out.append("=== LEG limit (static, no FK): mirrored [lo,hi] must equal the stock [-hi,-lo] ===")
+    out.append("    ⛔ Position legs are blind here: limits are not in the kinematics, and the")
+    out.append("    reference's largest |joint| is far inside the range, so a wrong limit is silent.")
+    lim_ok, lim_n = True, 0
+    for asset_pair in (("ur15_base.xml", "ur15_base_mirrored.xml"),):
+        a = mujoco.MjModel.from_xml_path(str(HERE / asset_pair[0]))
+        b = mujoco.MjModel.from_xml_path(str(HERE / asset_pair[1]))
+        out.append(f"  {asset_pair[0]}  vs  {asset_pair[1]}")
+        for name in J6:
+            ja, jb = a.joint(name), b.joint(name)
+            lo_a, hi_a = float(ja.range[0]), float(ja.range[1])
+            lo_b, hi_b = float(jb.range[0]), float(jb.range[1])
+            want = (-hi_a, -lo_a)
+            ok = abs(lo_b - want[0]) < 1e-9 and abs(hi_b - want[1]) < 1e-9
+            ax_a, ax_b = a.jnt_axis[ja.id], b.jnt_axis[jb.id]
+            ax_ok = bool(np.allclose(ax_b, -ax_a))
+            sym = abs(lo_a + hi_a) < 1e-9
+            lim_ok &= ok and ax_ok
+            lim_n += 1
+            out.append(f"    {name:22s} stock[{lo_a:+.6f} {hi_a:+.6f}] -> want"
+                       f"[{want[0]:+.6f} {want[1]:+.6f}]  got[{lo_b:+.6f} {hi_b:+.6f}]  "
+                       f"{'ok' if ok else 'MISMATCH'}; axis {'inverted' if ax_ok else 'NOT INVERTED'}"
+                       f"{'   ⚠ range is symmetric, so this row would also pass unchanged'
+                          if sym else ''}")
+    sym_all = all(abs(float(a.joint(n).range[0]) + float(a.joint(n).range[1])) < 1e-9 for n in J6)
+    out.append(f"  -- limit: {'all ' + str(lim_n) + ' joints consistent' if lim_ok else 'MISMATCH'}"
+               f" (axis inversion checked alongside, which is the other half of the atomic pair)")
+    if sym_all:
+        out.append("  ⚠ HONEST SCOPE: every stock range is symmetric about zero, so [-hi,-lo] "
+                   "equals [lo,hi] and this leg CANNOT fail on these assets.  It is a standing "
+                   "check for the day a range is not symmetric -- today it confirms the axes are "
+                   "inverted and records that the limits had nothing asymmetric to preserve.")
+
     text = "\n".join(out) + "\n"
     (HERE / "UR15_MIRROR_ACCEPTANCE_20260729.txt").write_text(text)
     print(text)

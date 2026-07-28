@@ -127,3 +127,16 @@ DENOMINATOR, stated so it cannot be read as more than it is:
   ⛔ What this does NOT cover: joint LIMITS (the sign convention is checked here by where the tool lands, and the atomic axis-and-limit inversion is not exercised by poses that all sit inside symmetric ranges), collision geometry, inertias, and anything dynamic.  This is a kinematics-of-position test.
 
 RESULT: PASS -- acceptance leg 48/48, and the negative leg lands 0/48 (it must land 0, or the test is not reading the convention).
+
+=== LEG limit (static, no FK): mirrored [lo,hi] must equal the stock [-hi,-lo] ===
+    ⛔ Position legs are blind here: limits are not in the kinematics, and the
+    reference's largest |joint| is far inside the range, so a wrong limit is silent.
+  ur15_base.xml  vs  ur15_base_mirrored.xml
+    shoulder_pan_joint     stock[-6.283190 +6.283190] -> want[-6.283190 +6.283190]  got[-6.283190 +6.283190]  ok; axis inverted   ⚠ range is symmetric, so this row would also pass unchanged
+    shoulder_lift_joint    stock[-6.283190 +6.283190] -> want[-6.283190 +6.283190]  got[-6.283190 +6.283190]  ok; axis inverted   ⚠ range is symmetric, so this row would also pass unchanged
+    elbow_joint            stock[-3.141590 +3.141590] -> want[-3.141590 +3.141590]  got[-3.141590 +3.141590]  ok; axis inverted   ⚠ range is symmetric, so this row would also pass unchanged
+    wrist_1_joint          stock[-6.283190 +6.283190] -> want[-6.283190 +6.283190]  got[-6.283190 +6.283190]  ok; axis inverted   ⚠ range is symmetric, so this row would also pass unchanged
+    wrist_2_joint          stock[-6.283190 +6.283190] -> want[-6.283190 +6.283190]  got[-6.283190 +6.283190]  ok; axis inverted   ⚠ range is symmetric, so this row would also pass unchanged
+    wrist_3_joint          stock[-6.283190 +6.283190] -> want[-6.283190 +6.283190]  got[-6.283190 +6.283190]  ok; axis inverted   ⚠ range is symmetric, so this row would also pass unchanged
+  -- limit: all 6 joints consistent (axis inversion checked alongside, which is the other half of the atomic pair)
+  ⚠ HONEST SCOPE: every stock range is symmetric about zero, so [-hi,-lo] equals [lo,hi] and this leg CANNOT fail on these assets.  It is a standing check for the day a range is not symmetric -- today it confirms the axes are inverted and records that the limits had nothing asymmetric to preserve.
