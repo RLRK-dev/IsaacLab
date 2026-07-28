@@ -9909,7 +9909,11 @@ both closing-axis ⇒ **escape floors 18.20/20.20 UNCHANGED**; the escape judgme
 also closing-axis ⇒ unchanged — two items JOIN the invariant set. p5's own direction guess ("floor moves
 down") was WRONG, and cost nothing: it had been tagged a guess, never banked as more. **(b) ⛔ Two
 moving columns p5 itself found in §12-1** (self-reported, previously unrouted): downward reach (19.7 …)
-and escape height (30 + reach) reference the claw's mouth-axis position ⇒ they MOVE. The §12-1 ruling
+and escape height (30 + reach) reference the claw's mouth-axis position ⇒ they MOVE. ⚠ (b)'s variable
+classification OVERBROAD per p5's own -141 (§368): decided by CATEGORY (references the mouth axis) not
+MECHANISM (is it determined by the moved part?) — the moved claw (f2ext) is the world-UPPER prong; the
+lowest point is the unmoved f1ext ⇒ closed/min-open downward reach and escape height are INVARIANT;
+full-open UNDETERMINED (four-bar rotation); the three-way split supersedes. The §12-1 ruling
 "minimum-open escape needs only 3.7 mm above carry height" is a DIFFERENCE claim ⇒ preserved only if
 both rows shift EQUALLY — ⚠ not guaranteed: the rows live at different attitudes and a mouth-axis shift
 projects to world z attitude-dependently (the same reason L +1.9 / R +1.6 differ) ⇒ **preserving 3.7
@@ -10579,3 +10583,65 @@ the other from the same config?" — and states the orthogonality exactly: ⛔ *
 collation does not catch this (both were correct quotes of correct values)** — the check lives on a
 different axis than pin verification. **(d)** The window stays: 22 mm = p5's court, unmoved; the
 axial print will be received into §4-series when it lands.
+
+## 368. The forms turned on their author's doc — three findings, one in the classification itself
+
+From p5's -141 (16:55; audit only, edits gated on bank #12 — which has since landed, §370(d)). p5 ran
+today's eight general forms against its OWN doc by closed query and found three, ⛔ three of the eight
+having been broken by their author after landing. **(a)** Finding A: §10/§12-1 tables present
+PRE-MOVE values as current, config-untagged — quantities p5 itself placed in §16's variable set.
+**(b)** Finding B: §12-9's `11.00 = Ø + (14.00 − Ø)/2` is stale arithmetic (current mouth 16.00 ⇒
+12.00, matching p4's derived value). **(c) ⛔⛔ Finding C — the heaviest, an error in §16's own
+classification**: downward-reach/escape-height were classed VARIABLE by CATEGORY ("references the
+mouth axis") without looking at the MECHANISM — from the asset (values verified at this desk
+repeatedly): the moved claw f2ext is the world-UPPER prong; the lowest point is the UNMOVED f1ext ⇒
+**closed/min-open downward reach is INVARIANT** unless the moved claw is the lowest point; ⚠
+full-open NOT claimed (the four-bar rotates the pad; vertical order unguaranteed) ⇒ the correct
+THREE-way split: closed/min-open invariant (mechanism) / full-open undetermined / centre-band-
+allowance-release variable. §340(b) tagged. **(d) ⭐⭐ The general form**: **invariant/variable
+classification is decided by mechanism, not category — ask "is the quantity DETERMINED BY the moved
+part", not "does it reference it"** — category-classification over-included exactly where the day's
+three proxies under-included: the same axis, opposite side. Fix list gated on bank #12 (now open).
+
+## 369. The inventory was ungrounded — an absence claim built from the outbox
+
+From p11's -142 (16:55); pin verified: §27.2.142 @ `daf3b5ccf4` sha `f67161de71…` ✓ machine-grep.
+**(a) ⛔⛔ The own**: P1 was ALREADY in the tree when the inventory listed it pending — p11 then
+direct-read `:1814-1818` @ `fab643fda7` (the print fires unconditionally BEFORE the raise ⇒ prints on
+pass ✓; the same line also carries "lowest point … vs the table"). The error form named: **"not yet
+in" was written from the absence of a RECEIPT — an absence claim built from p11's own outbox, not
+from the tree** — the inverse of p11's own rule; the authoritative source of what is implemented is
+the CODE, never the send log. **(b) ⭐⭐ The heavier second-order point**: an inventory meant to
+REDUCE the implementer's load can RAISE it when built on unverified state (it sends them re-checking
+finished work) — "load-reducing proposals are not exempt from grounding rules; they are where the
+rules bind most, because they direct someone else's labor." **(c)** The withdrawal holds with a
+BETTER-instrument bonus: the per-stage lowest-point-vs-table print at actually-used poses supersedes
+the sweep curve p11 had asked for — withdrawn, need met. **(d)** The discipline line added to
+§27.2.141⑤: "when counting the state of what others build, read the tree; my send log is not a
+progress record." Scope honesty kept: P1 self-read; P3/P4 held as hub-reported.
+
+## 370. t16 stopped by the implementer — an exact pre-exclusion, and the last two fields land
+
+From p4's -147 (16:5x, STOP-headed); ALL pins machine-verified: `c8442a4cdc` driver sha
+`feb079e249…` ✓; `f9b5d45eb4` driver sha `9c7e18b661…` ✓ + P5 doc sha `6bd30405b7…` ✓ = **bank #12
+EXACT**. **(a) ⛔⛔ The run event, surfaced**: t16 was STOPPED by p4 mid-run — the clearance check ran
+38×38 = 1444 pairwise distances per candidate and the pose search had not finished at 20 minutes (14
+min baseline; 1-2 h projected) ⇒ p4 added a speedup and relaunched as t17 (16:51:12, producing
+`c8442a4cdc`). ⇒ **t16 has NO trace; r_max arrives with t17** — my -647/-648/-649 carried the t16
+premise and are corrected this wave (-650/-651). The stop is REPORTED loudly by p4 itself and banked
+here with its reasoning; surfaced to Rs in this checkpoint (the stopped run was a stalled probe under
+Rs's direct supervision regime, not a training process; visibility, not a violation claim).
+**(b) ⭐** The speedup declared EXACT, not approximate: pairs whose centre distance exceeds cutoff +
+both bounding radii are PROVABLY beyond cutoff — dropped in one vector comparison, the rest measured
+properly; "the answer is identical, only the work shrinks"; all three call sites share ONE function
+(no same-quantity-measured-differently drift). One launch failure en route (ARMG set vs numpy
+indexing) caught at launch and fixed in `c8442a4cdc`. **(c) ⭐⭐ P2 implemented as a CHECK, not a
+claim**: "this pin does not pull" depends entirely on the constraint being satisfied at activation ⇒
+both anchors' world-point identity printed at ENGAGEMENT and after the solver's FIRST STEP — the
+residual = "the distance the cable is pulled" = **the very quantity §0#5's question asks**.
+**(d) ⭐** P5 implemented same commit: the anchor's CABLE-AXIAL distance from the groove centre —
+"retaining beside the groove, not in it" becomes visible if the seat gate and the pin talk about
+different places. Bank #12 landed same commit. The 0°-sweep stays implemented but ⛔ NOT used as
+grounds for τ (the withdrawal honoured in role, not by deletion). **(e)** t17 carries: clearance +
+full camera + 3 panels + pass-angle print (r_max) + 4 prints + conditioning field + speedup; P2/P5 +
+bank #12 ride t18.
