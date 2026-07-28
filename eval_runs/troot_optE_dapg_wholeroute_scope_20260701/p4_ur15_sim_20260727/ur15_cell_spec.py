@@ -530,11 +530,14 @@ SETTLE_TOL = 0.002                      # spec §6.4d -- rad; the arm must be th
 #
 # These two put it into the ranking instead of back into a filter, so a well-conditioned pose is
 # preferred without any pose being forbidden.
-SIGMA_GOOD = 0.12                       # the withdrawn floor, reused as the value to aim for
-SIGMA_PENALTY = 3.0                     # ⚠ MINE, not measured: chosen so that falling to half of
-                                        # SIGMA_GOOD costs about as much as a 1.5 rad joint move.
-                                        # Flagged for p5 -- the shape is the fix, the weight is a
-                                        # first setting to be measured against.
+SIGMA_GOOD = 0.12                       # spec: the withdrawn floor, reused as the value to aim
+                                        #   for.  VALUE = the measuring lane, as SIGMA_FLOOR
+SIGMA_PENALTY = 3.0                     # spec: the weight on falling short of it.  VALUE = the
+                                        #   measuring lane -- ⚠ this one is MINE and unmeasured,
+                                        #   set so half of SIGMA_GOOD costs about a 1.5 rad joint
+                                        #   move.  p11 -106 has ruled the weight is not the fix
+                                        #   and must not be tuned; the path-sigma bar replaces it
+                                        #   and comes from measurement.
 
 SIGMA_FLOOR = 0.0                       # spec §6.4d -- "the 0.12 floor starved the solver: it
                                         #   picked poses the servos could not hold, so the arms
