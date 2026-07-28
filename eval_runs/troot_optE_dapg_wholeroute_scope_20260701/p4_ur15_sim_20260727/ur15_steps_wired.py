@@ -2322,12 +2322,20 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     for s_ in range(steps):
         # Each arm against its own bound, because reach differs and a single max would hold the
         # shorter arm to the longer arm's tolerance.
-        _lagging = any(float(np.abs(np.array([d.qpos[a] for a in QADR[t2]]) - qcmd[t2]).max())
-                       > TRACK_TOL[t2] for t2 in SIDES)
-        if not _lagging:
-            prog = min(1.0, prog + dprog)
-        else:
+        # ⛔ NOT an on/off gate.  A servo following a moving reference carries a steady lag that
+        # grows with speed, so if the ramp asks for more speed than the arm has, the lag sits above
+        # the bound forever and an on/off gate never advances again: t29 and t30 crawled to 20-42%
+        # and stopped, which is not the arm being careful, it is the gate deadlocked.
+        # The command advances at the rate the lag leaves room for -- full speed when the arm is
+        # keeping up, nothing at all when it has fallen the whole tolerance behind, proportional
+        # between.  The lag then settles AT the bound instead of running past it, which is the
+        # property that was wanted: the arm stays within a clearance of the path that was checked.
+        # Same tolerance, same clearance, no new number.
+        _room = 1.0 - max(float(np.abs(np.array([d.qpos[a] for a in QADR[t2]]) - qcmd[t2]).max())
+                          / TRACK_TOL[t2] for t2 in SIDES)
+        if _room <= 0.0:
             held_ticks += 1
+        prog = min(1.0, prog + dprog * max(0.0, _room))
         f = 0.5 - 0.5 * math.cos(math.pi * prog)      # smooth start and stop
         # ⛔ EVERY step, not only the grasp.  I first put this inside `if not gate_open:`, which
         # is False for every step whose gate is not "grasp" -- so the check that exists to watch
