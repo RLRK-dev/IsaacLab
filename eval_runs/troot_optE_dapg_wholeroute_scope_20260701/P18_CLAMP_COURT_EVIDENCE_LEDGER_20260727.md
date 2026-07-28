@@ -10264,7 +10264,9 @@ the new threshold 5.93, 5.91 (6 runs) no longer exceeds; only 6.93 (1 run) does 
 holds; the sign turns on the LAST DIGIT; §11-6's projection error keeps signs undetermined regardless —
 **the 7/7 → 1/7 flip itself STRENGTHENS the no-sign-revival ruling** (a threshold moved a sentence's
 truth without moving the world). The line KEPT with both overturnings beside it (① projection ②
-threshold). **(c)** §16 all asset-derived, matching the three-way convergence (§335); the
+threshold). ⚠ (b) RETRACTED by p5's own -139 (§361): the 7/7 → 1/7 flip was a CONFIG-MIXING artifact
+— the new threshold was compared against pre-move measurements; post-move R = 5.99 > 5.93 ⇒ the right
+exceeds within BOTH configs. The no-sign-revival ruling stands on the projection error alone. **(c)** §16 all asset-derived, matching the three-way convergence (§335); the
 one-plate-two-changes note; the invariant/variable split; the wrong-guess disclosure; the
 no-3.7-preservation claim. **(d)** Rules in the doc: MOUTH_BAND_Z min/max interior; τ = (r_max +
 τ_max)/2 with τ_max = min nonzero ROLL — ⚠ the roll form predates guard ② (crossed in flight); the
@@ -10448,3 +10450,83 @@ gains t15's True with EXEMPLARY restraint: two runs, two producing versions, bot
 NOT write "survived change" because whether the version delta touches the grasp path is unverified
 (the f2ext-criterion discipline, self-applied). The clearance convergence entered #49 as
 relay-explicit material, marked not-banked.
+
+## 361. The flip retracted — a new bar was compared against old measurements
+
+From p5's -139 (16:44), self-caught by recount; DESK-VERIFIED in the banked logs: t13 (pre-move) 2.31 /
+5.91 ✓; t14 & t15 (post-move) 5.99 ✓ (t15 also 2.30 ✓). **(a) ⛔⛔ The -136 claim falls**: "at 5.93 the
+5.91 runs no longer exceed" compared the NEW bar (moved by the claw change) against OLD-config
+measurements — but the same change moved the measurement too (R 5.91 → 5.99) ⇒ 5.99 > 5.93: the right
+EXCEEDS post-move as well. Within-config both ways: pre 4.93 vs 5.91 (0.98 over); post 5.93 vs 5.99
+(0.06 over) ⇒ **the 7/7 → 1/7 flip was a config-mixing ARTIFACT — retracted** (§352(b) tagged). The
+no-sign-revival ruling STANDS on the projection error alone — a bookkeeping error, not a sign result.
+**(b) ⭐⭐ The general form** (p5's court): when a premise change moves BOTH the bar and the
+measurement, comparison ACROSS the change is meaningless — valid comparison lives only INSIDE a
+configuration; practical form: **updating a bar obliges recounting, in the same turn, every measurement
+the same change moved.** p5 names its own recurrence: #14 and §13-11's third class, both p5's own,
+both broken one cycle later. **(c) ⛔ My own desk note**: §352(b) banked the cross-config comparison
+without flagging the config axis — sha and verbatim were checked, "does this comparison cross a premise
+change?" was not; it joins this desk's verify list. **(d)** p5 correctly holds the relayed t16
+"1.63→1.00" as unverifiable until the trace lands; the fix list waits on bank #11 — which has now
+LANDED (§362) ⇒ p5's cycle is open.
+
+## 362. The field is coded, the bank lands, and the implementer reads its own boundary — then defers
+
+From p4's -145 (16:4x); pins machine-verified: `3afe3fcac8` driver sha `f161587040…` ✓ / P5 doc sha
+`21970e9b91…` ✓ = **bank #11 EXACT**. **(a) ⭐** The one field ADDED: print ① now carries the winner's
+conditioning beside the best-dropped conditioning; p4 confirms the dropped sv "was already computed and
+discarded — just picked up"; the control scope IN-COMMENT (within-run controlled; run-to-run
+4-changes-uncontrolled). Rides t17. **(b) ⭐ p4's reading of the §0#5 flag, properly deferred**: the
+exception = the clip-retention pin; what changed = WHICH link it retains — not the pin's existence, not
+a new mechanism; the prohibition's substance = forced placement ignoring physics, and the
+activation-instant recompute means NOTHING MOVES — the change runs AWAY from forced placement; ⚠ the
+OLD form could activate a build-time-link anchor while that link sat 15 mm off the groove — CLOSER to a
+pull-in than the new form. p4 reads "inside" and does NOT self-adjudicate — follows p11/Rs, reverts on
+NO. **(c)** t16 completing; the 4 prints + field ride t17.
+
+## 363. Recited from one snapshot — and the row now teaches its own reader
+
+From p6's -119 (16:45); pins verified: LEDGER @ `865d0f9e82` sha `f6aec4c9c2…` ✓; the single-snapshot
+recite VERIFIED @ `3afe3fcac8` (sha = p4's -145 claim = my machine check, 2157 lines ✓): `:897`
+`m.eq_obj2id[e] = b` ✓ / seated_any `:1941` ✓ / RETAINED print `:1947` ✓. **(a)** p6 owns the -114-form
+recurrence and re-takes ALL cites from ONE declared snapshot. **(b) ⭐** The measured observation
+institutionalized IN THE ROW: the file moves by the MINUTE — twice while p6 wrote (91bf → 3afe), and
+p6's first pin_to cite `:880` became an EMPTY LINE in the newer version ⇒ the row itself now says
+"read cites only with their version". Content anchors all stood — no claim corrections needed.
+**(c)** The singularity-review material held for #49 until landing; flags/Rs-listing acknowledged.
+
+## 364. The two flags classified — an uncontrolled axis made visible, and a pin more faithful than its guess
+
+From p11's -140 (16:45); pin verified: §27.2.140 @ `d8779b6648` sha `94cfb85155…` ✓ (3 headers =
+declared + internal ①/② parts); the pitch chain verified here (cell_spec `:57` → task_config.py `:136`
+CABLE_SEG_LEN = 0.015 ⇒ half-pitch 7.5 mm ✓ ⇒ 17.0 exceeds it ✓).
+
+**(a) ⭐⭐ Flag ① classified — not a defect, an UNCONTROLLED QUANTITY plus the bar hiding it**: p11
+first checked and DISCARDED its own snapping hypothesis (max half-pitch 7.5 < 17.0 ⇒ ~9.5 mm residual
+is something else). The residual's identity: grasp x is a DESIGN value while the groove receives the
+link physics placed ⇒ the anchor tracks where the cable actually is ⇒ **17.0 mm is a MEASUREMENT of
+the cable's axial position error at C1** — the THIRD same-story today (span excess 0.88 / inter-aim
+movement 10.8-12.7 / axial 17.0): **the cable's axial position is controlled nowhere.** The seat
+window (22 mm) passes it ⇒ the wide window keeps the axis invisible. Advice: do NOT narrow the window
+(width = p5's court; narrowing controls nothing) — PRINT the axial quantity (anchor − groove centre,
+already computed): one more field (routed -642). ⚠ The half-pitch floor stays: finer than 7.5 mm can
+only be bought by lowering the pitch, and pitch moves bending stiffness (EI = K·L; a surface where K
+is hardcoded halves silently) — "buying precision with pitch" SELLS stiffness.
+
+**(b) ⭐⭐ Flag ② classified — INSIDE, by predicate**: the criterion placed first — what §0#5's
+prohibited items share is **"a mechanism creating motion that physics did not create"**. Application:
+nothing moves at engagement (recompute, exactly-satisfied entry — p6 source-verified) / the clip
+retains the CABLE (cab30 → cab27 = another cable link, the authorized object itself) / the target
+never leaves the cable. ⇒ p11 reads INSIDE — and stronger: **the retarget makes the pin MORE
+faithful** — retaining the build-time guess would constrain a link NOT in the groove, pinning the
+cable where physics did not put it: THAT is closer to the kinematic trick. ⛔ §0 is Rs's; p11 gives a
+reading, does not close. Rs directed the RESULT (「なおせ」), not the mechanism ⇒ a mechanism-level
+confirmation to Rs has value, NON-blocking. ⭐ Said in advance: **there is no conservative fallback
+here** — reverting = the less-faithful guess; the true alternative (retention by contact) = the
+fidelity boundary RS71 §4 banked as unreachable ⇒ "revert when in doubt" is unavailable, explicitly.
+⭐ ONE continuing condition: "nothing moves at engagement" is numerically checkable (constraint
+residual / cable displacement at engagement) ⇒ while that line prints, the inside-reading holds
+empirically; without it, it remains a source-read — the second new field (routed -642). **(c)**
+Non-claims kept (no §0 adjudication / no width change / no pitch demand / no run / 17.0's origin
+accounted, not measured). Both p4's and p11's readings now converge on "inside", independently and
+both properly deferred — surfaced to Rs in this checkpoint as pending ⑥ (non-blocking).
