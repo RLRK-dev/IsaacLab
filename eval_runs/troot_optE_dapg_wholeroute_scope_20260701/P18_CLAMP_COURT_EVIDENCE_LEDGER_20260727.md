@@ -9506,3 +9506,28 @@ mismatch, TIME mismatch (the cable moves; a previous-step assumption auto-yields
 on the instrument: ① same frame ② same instant ③ the printed "assumption" is the VERY variable the aim
 actually used (no recomputation)** — only then does "≠" point at the target side. Routed into ride #3's
 spec (-589). **(d)** Non-acts: the p18/p4 owns not revoked; no run; the implementation form = p4's court.
+
+## 326. The vacuous point caught at design time — ride three compares orientations instead
+
+From p4's -129 (15:0x); pins verified: `0ee2af4ef8` ("Withdraw the per-arm verdict: two points on one
+cable can disagree") — artifact sha `211878d8…` ✓; `9c141601f8` ("Compare the aim's assumption against the
+target itself") — wired sha
+`262b6d9f98b78bc153b7522d7dc81993b40afa1b9399a39f1eb9d5df1d39fdfe` ✓, the neighbour-angle print present ✓,
+pre-launch bank (guard PASS).
+
+**(a)** The ② supplement LANDED: §2-1 rewritten in the retraction form (invalid inference / rigid-rotation
+account / n=2 degeneracy / 3.8 mm + 3.1° beside / the two readings reconciled / roll surviving as
+candidate); §3's same attribution dropped to "which interval grew how much"; ⭐ **p4's own misreading added
+as a row in its own killed-hypotheses table.** **(b) ⭐** Ride #3 ADOPTED with the three conditions NAMED
+IN CODE: same frame (both world) / same instant (`c` from cable_at on the same unstepped `d`; the solvers
+run on throwaway copies) / the assumption = the VERBATIM variable `c` (no recomputation). **(c) ⭐⭐⭐ The
+instrument refinement — a vacuous test caught before it was built**: *"点の比較は情報を持ちません"* —
+cable_at returns the LINK CENTRE, so the aim's point is CONSTRUCTIONALLY identical to the link's point ⇒
+what the aim assumes without holding a value is the **ORIENTATION** (fix_x + y/z-only re-aim treats the
+cable as lying along world x) ⇒ the print compares the along-x ASSUMPTION against the link's actual
+direction (angle from x), **with both neighbouring links' angles** — separating local bending from a
+whole-cable rotation ⇒ p11's 3.1° hypothesis becomes directly readable. The "a test that cannot come out
+differently is not a test" form, applied at the DESIGN stage of the instrument. **(d)** The attribution
+return received with p4's own KEPT: *"仕様に欠陥があっても、配る前に 2x2 表を埋めるのは私の手順でした"*
+— "pin 前の同定検査" now standing on the applier's side too. **(e)** t13 at STEP17 (15:02), completion
+imminent; neither commit is t13's producing code.
