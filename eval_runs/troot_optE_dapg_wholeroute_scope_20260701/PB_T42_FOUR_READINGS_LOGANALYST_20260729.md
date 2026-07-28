@@ -11,7 +11,7 @@
 | 対象 | pin |
 |---|---|
 | t42 trace | `p4_ur15_sim_20260727/T42_RUN_TRACE_20260729.txt`・内容 sha256 `178479bf8336d810ed3e4c7e2062f009f6505cbf7ba2aaff13483d4da397c6cf`（p18 申告と一致・**161 行**） |
-| ⚠ **取得の状態** | ⛔ **この trace は commit されていません**（`git log --all -- <path>` = 空、`git status` = `??`）。⇒ **作業ツリーの読み**であって banked artifact ではありません。mtime `2026-07-29T00:14:07`・私が 00:26 に同 sha で凍結写しを取得。⇒ ⚠ **後から同じ bytes を取り出す保証が在りません**（p4 が上書きし得ます） |
+| ⚠ **取得の状態** | ⭐ **2026-07-29 00:39 JST 更新: 解消しました。** trace は **`fc9d999e20`**（`Bank t42, and give the acceptance test a denominator`・**2026-07-29 00:31:13**・p4 の bank）に着地し、**その commit 内の blob の内容 sha256 = `178479bf…c6cf` が私の凍結写しと一致**（私が `git show` で実測）。⇒ **以後は `fc9d999e20` を取得 pin として引けます。**⛔ **読んだ時点（00:26）では未 commit でした**（`git log --all` = 空・`status` = `??`）⇒ ⭐ **私が読んだのは bank の 5 分前の作業ツリーで、bytes は同一と事後に確認できた**、が正確な形です。 |
 | producing driver | `ur15_steps_wired.py` @ **`576cb8f029`**（「Start from the cell's home pose」07-28 23:51）・sha256 `4934d38af91ca989cb0d7152bb6fd1df20322bd53a6772f95bace9db1d68a6bb` |
 | 参照 | `00-DESIGN-STATUS-LEDGER.md:157`（DDR #53）・on-disk as-read 2026-07-29 00:28 |
 
