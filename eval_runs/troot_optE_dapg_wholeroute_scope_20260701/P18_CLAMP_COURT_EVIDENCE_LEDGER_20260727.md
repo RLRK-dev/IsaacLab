@@ -11529,3 +11529,92 @@ self-reference (commanded-upright poses that still miss) is bounded and visible 
 on-disk sha256 `96507866d85ca11e84772ee71c2b24ca2cefd5d0a26a42df0e74b1046b5c7a12` = MATCH with
 the declaration, +90/−0 (new §18 + §16-3), committed `45b539a901`. Asks routed: spec :616-617
 correction → p4 (m714); the form and riders → p4 (m714); the ruling input → p11 (m715).
+
+## 412. The reason clause lands with its own find — and the version clause breaks in my relay, not my ledger
+
+From p6's -126 (19:49). **(a) Pins verified**: commit `bd74a95143` ("Fix the reason under a
+guard that was right for the wrong cause" 19:48:32), LEDGER content sha256
+`317700597ce647255f28da32a6a75a5dde9a5bff1324a563863e72e117a769cd` = MATCH; the WORST print at
+`ffbc1f15af` :2425-2427 desk-read ✓ (2465 lines ✓); p6 replaced the reason clause (conclusion
+unchanged), marking "t20 incomplete" as this desk's measurement, unverified by them — correct
+custody. **(b) ⛔ My m717 broke the version clause**: I wrote "現 driver に現存（:2345）" — :2345
+is the `c65e0efc8b` coordinate (my §406/§410 tags carried the version correctly); the CURRENT
+driver holds the print at :2425-2427. The ledger held the rule; the RELAY dropped it — "line
+cites carry the version in the same clause" applies to every surface a number crosses, not just
+the durable one. (Micro-note: p6 called current :2345 a tilt comment; desk-read shows
+`_real = []` — a nearby-line slip on their side, no weight; their claim ":2345 is not the WORST
+print now" is TRUE.) **(c) ⭐ Their real find**: the print's WORD changed column → mast (:2427,
+desk-read verbatim "WORST {t}: mast ") ⇒ word-based collation must check the version — their
+original "instrument changed shape" was in effect pointing at a REAL word change that was not
+the reason t20 lacks the line. Rowed on their surface. **(d) ⭐ Their self-caught false
+positive, banked as a form**: `grep -c "5.37"` returned 2 on their surface — the unescaped dot
+matched any character; fixed-string recount: 5.37 / 2.86 / 5.73 all 0 ⇒ the retraction
+materials are NOT on their surface, nothing to do; and their 8.0 mm is ARM_CLEARANCE (arm↔arm),
+not the mast 8 mm — the same-numeral-not-same-quantity guard applied by its own author. Form:
+COUNT ABSENCE WITH FIXED STRINGS — an unescaped dot makes the absence check see things that are
+not there (the discriminating-predicate family, regex flavor).
+
+## 413. The form closes: an armed gate cannot report the residual it is waiting for
+
+From p11's -156 (19:49:16). **(a) Pins verified**: their bank @ `d910c08e55` ("Close the form:
+an armed gate cannot report the residual it is waiting for"), content sha256
+`c41fc626b3a080040fb78250c61af3b2f613d5f8724d130392ae7c407fb1d186` = MATCH; trace :35 verbatim ✓
+("…the allowance is an interim until a run reports the worst residual an upright command
+actually leaves"); the tilt census MACHINE-MATCHED at this desk: the commanded-check prints in
+t20 number exactly 8 — 0.0×3 / 0.1×2 / 3.5 / 4.2 / 11.2, the last being the raise that ended
+the run. **(b) ⭐⭐ The discovery, banked**: p5's "residual self-reference" is CENSORING — r_max
+is defined to come from a run (:35), but :2036 raises the moment a reading exceeds the bar,
+ending the run ⇒ a COMPLETED run can only contain readings ≤ τ ⇒ "τ > r_max" is a tautology —
+a test that cannot come out differently, one level up from the cap's version. t20 IS the form:
+the one reading that would have informed r_max (11.2°) exists only as the run-killer, never as
+a completed-run residual. The recorded plan cancels itself. ⛔ t20 is unusable for r_max under
+ANY population choice. **(c) ⭐⭐ The final form = two orthogonal axes + a strict order**: axis 1
+POPULATION separation (r_max from upright-COMMANDED poses only; the gate judges all
+seating-step poses — fixes the category error); axis 2 ARMING separation (the measuring pass
+reports and does not raise — fixes the censoring; p5's demoted time-separation absorbed as the
+second axis; the A/B split already cut means no new mechanism). Neither axis alone closes it.
+Order, strict: (1) fix the instrument (the same-command-two-readings state) → (2) measure
+DISARMED → (3) derive τ by the ratified rule, including the power to say "no value" → (4) arm,
+with a startup assert allowance < cap. ⛔ Every number measured before stage 1 is dead. ✅
+do-not-bank τ numerics + interim 5.73 continue; ⛔ 5.73 is its own upper bound ⇒ NOT a final
+candidate — interim USE and candidate STATUS are not to be mixed. **(d) Receipts banked**: p5's
+retraction agreed (right reason = the mixed-state instrument, dropping 0.1 and 5.0 together);
+this desk's t17 measurement (inherited {3,4,13}, STEP9 = 0) STRENGTHENS their §27.2.154 ⑥
+(inheritance off the hook ⇒ same command, no inheritance, different readings) — ⚠ dependency
+stated plainly: p11 did not re-measure t17, the attribution rests on THIS desk's measurement;
+the t20-incomplete correction accepted, and it is itself evidence for (b) — the gate ended the
+run, and that ending censored the sample. **(e)** Routed: p4 (m720 — implementation court with
+pZ; the standing question: does a non-destructive/report-only pass already exist? if yes, axis
+2 reads as ALREADY THERE), p5 (m721 — their §18 rule = axis 1; the pass dimension (armed vs
+measuring) now needs naming in the detail — the measuring pass must be report-only).
+
+## 414. p5's rule meets t20 within minutes — and the branch question it demanded a word for is answered from the bank
+
+From p5's -149 (19:51; expressly not a request; no run authorized). **(a) Their reading
+verified**: the pB-doc :184 quote matches the tail this desk read (§410(a)); seating-check
+steps {7,8,9,15,16,17} (their t17 closed query, STEP10 = 0 lines) consistent with §349(c) and
+§409(e). **(b) ⭐⭐ Their §6 question ANSWERED at this desk from the banked trace** (closed
+query on `c65e0efc8b`): inheritance prints in t20 = 15 lines, steps {3,4,13} EXACTLY (STEP3 ×6,
+STEP4 ×6, STEP13 ×3); STEP15 = ZERO inherit lines; positive evidence: :277 "[steps] STEP15 R:
+aiming the CABLE at the C2 floor (…)" — the aim/solve path ran ⇒ **STEP15 R = SOLVED branch**.
+Caveat stated: this is the BANKED trace; raw==banked identity is p4's to confirm (the trace
+does end in the full traceback, a complete-stdout feature). Consequence per p5's own
+just-banked rule: a solved-branch 11.2 enters population C, and 11.2 ≥ cap 5.73 ⇒ spec :653's
+raise (desk-read :650-655 — the rebuild branch p5 quoted) — ⚠ INTERACTING with p11's -156
+order: t20 predates stage 1 ⇒ 11.2 is a DEAD number for r_max estimation; whether the REBUILD
+condition can be deemed fired by a dead number is a p5×p11 reconciliation, not this desk's
+call. **(c) The STEP15 R facts, banked plainly**: :279 verbatim — _off 11.2 AND tool axis 11.2
+(both) ⇒ THIS reading is tool-side dominated, unlike t17 STEP9 L (5.0 / 0.0 = linkage-only);
+p5's two-term mechanism is REAL and desk-verified (:2073-2078 verbatim — the four-bar moves
+the mouth as the jaw state changes; "two steps with the same arm pose and the same commanded
+jaw can still read different tilts") but is NOT needed to explain 11.2. And :277 shows
+mouth→cable = [2.9, 957.6, −226.5] mm — the R aim target sat ~0.96 m away in y ⇒ the solved
+pose is a best-effort toward a FAR target (echoes pB's STEP14 tool-error 1067.4 mm). The
+untangling — target pathology vs menu/linkage pathology — belongs to p4/p5/p11.
+**(d) ⭐ The self-narrowing, banked**: p5's rule population = seating branches ⇒ it INHERITS
+_seating's domain holes; the −135.8 THROUGH THE TABLE (STEP10) sits outside the check's
+coverage ⇒ COVERAGE (which steps are checked) is a separate and UPSTREAM question from
+POPULATION (which readings count). p5 adds no conditional to §18 until the branch question is
+confirmed — now answerable in one write. **(e)** Routed: the answer + facts → p5 (m721) and
+p4 (m720, raw==banked confirmation their court); the census + the dead-number interaction →
+p11 (m722).
