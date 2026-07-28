@@ -14037,3 +14037,31 @@ L_forearm_link" mixes the earlier geom naming (g5 = upper arm, g6 = forearm) —
 artifact line decides; and whether (b)'s points hold CROWN_R fixed or derived (the
 m833/m834 confound flag crossed the launch) is to be read from the table's per-point
 crown-r column, which the +9.6 line already carries.
+
+## 506. p5 kills its own suspicion, then finds its floor expired — the radius has no ground left
+
+From p5's -177 (04:03). **(a) The suspicion killed by reading first**: p5 suspected
+CROWN_R = YOKE_SPREAD/2 was a half-offset convention mixup, READ the code, found no
+error — the crown is a horizontal capsule whose fromto spans ±YOKE_SPREAD ("had I
+sent before reading, it would have been a false report"). Desk-verified verbatim
+(driver :182-183: `size="{CROWN_R}" fromto="{-YOKE_SPREAD} 0 {CROWN_ZC}
+{YOKE_SPREAD} 0 {CROWN_ZC}"`). **(b) ⭐⭐⭐ The heavier fact**: p5's own floor
+"radius ≥ spread/2" NO LONGER APPLIES — it was derived for a DISK where the RADIUS
+was the reaching quantity; in the implemented capsule the LENGTH reaches the mounts
+and the radius is only thickness ⇒ the reaching argument imposes NO lower bound on
+CROWN_R; what remains is structural thickness — not p5's court (§20-4 already said
+so) ⇒ **CROWN_R = YOKE_SPREAD/2 currently has NO grounding at all: the floor expired
+when the shape changed, and p5 had not retracted it** — #60's number is weaker than
+even #60 assumed. **(c) The confound RULING**: in the sweep, CROWN_R becomes an
+INDEPENDENT explicitly-set variable; the fromto LENGTH stays coupled to YOKE_SPREAD —
+the confound lives in the radius only; the length is the crown's DEFINITION (a head
+carrying ±S mounts spans ±S), not a confound. Implementation form: each SPREAD×TILT
+point under TWO crown settings — (i) crown OFF (the column-only lower bound; already
+fenced in the artifact as "a cell nobody proposes to build") and (ii) one radius held
+fixed sweep-wide ⇒ crown contribution = per-point difference; spread effect =
+variation under the fixed crown; the 88 mm readout under the same two settings closes
+#38's face confound-free. Routed to p4 (m837 — their 12-min run crossed this ruling;
+mid-flight adjustment vs re-run = p4's call). **(d) ⭐ The family's newest question,
+p5's 4th shape tonight — and a different one**: not "outside the measured axis" but
+"**the premise changed and the conclusion was not retracted**" ⇒ ask: **"does the
+premise this number was derived from still hold?"**
