@@ -12296,3 +12296,44 @@ exactly what returns and fills neither number. **(e) Run custody**: t28 running 
 `d002664980` ("Bound the command's lead by what the clearance allows, not by the settling
 test" 21:09:37 — the derived tracking tolerance); no verdict until pB and pC read it, now
 with the (c) caveat attached — p4's standing rule, self-applied again.
+
+## 438. p5 reads the video before inventing a Y — and returns the input question with the numbers attached
+
+From p5's -155 (21:28). **(a) Pins verified**: doc on-disk sha256
+`01fcb065436f3ea44c7e53b09ac41f5b5573b08871e690132751222214ae3a20` = MATCH → **bank #21
+EXECUTED @ `9196bf0756`** (+124/−0, new §19 with the six geometric-design outputs); the code
+claims verified BY CONTENT at the current driver (now `77064b8c36`, 2639 lines — moved again
+since p5's read; their line numbers drifted, the content stands): COLG :1126 = geoms
+`("stem", "foot")` ONLY ✓; `path_mast_min` :1196 ✓, wired at :1441 (selection) and :2129 ✓;
+the fork upper bound re-derived at this desk: 1.530 − 0.400/tan 60° = 1.299 ✓.
+**(b) ⭐⭐ The video does not show the assumed shape** (p5 read frame 132, 12-frame montage,
+5× zoom, before designing): ONE column on a bellows base with a FLAT CROWN carrying both
+arms side by side — the Y is made by the ARMS opening from a common top, NOT by a forked
+column; the base spacing ≈ the column diameter, not this cell's 800 mm. ⇒ "bridge the 298 mm
+with branches" is NOT the video's solution; the video's solution = don't create the gap
+(bring the shoulders to the column top). ⚠ Shoulder x = ±0.400 was handed to p5 as a FIXED
+anchor ⇒ p5 names the INPUT question and returns it instead of silently choosing: **keep
+±0.400 and bridge, or move the shoulders per the video — an input choice, Rs/p4's court**
+(→ Rs pending item ⑧). The requested work NOT withheld — the numbers below are the
+keep-±0.400 case. (The banked lesson "ask if the input is the owner's to change before
+trading" applied by the design desk itself.) **(c) ⭐⭐ The two numbers (keep-case)**: FORK
+HEIGHT = **1.130 m**; BRANCH SECTION = round, r = **0.051 m = COLUMN_R/2**. Derivation from
+anchors alone, zero new free parameters: contour-preserving fork requires r/cos β ≤ 0.102 ⇒
+r = 0.102 admits NO fork (β = 0); r = 0.051 = the largest radius with one; β ≤ 60° ⇒ h ≤
+1.299 (desk ✓); h = 1.130 makes the rise 1:1 (1.530 − 1.130 = 0.400 = the half-span) — the
+highest unambiguous Y in the window [0.84, 1.299] ⇒ new material only ABOVE z = 1.160; below
+it the profile — and every mast measurement made against it — is unchanged. One capsule per
+side suffices. **(d) ⛔⛔⛔ The implementation-critical line**: COLG holds exactly TWO geom
+names — column_gap AND path_mast_min walk the same list ⇒ adding branch capsules WITHOUT
+registering their names makes every mast instrument silently EXCLUDE the new material — the
+code's own named failure ("an instrument reporting a fault to nobody"). Passability:
+unanswerable today (no instrument prints the wedge-crossing height), BUT the test already
+exists — register the branches into path_mast_min's list and the selection answers it with
+ZERO new mechanism. **(e) The governing facts, held**: the current margins are already ≤ 0
+(L +0.0; R −26.3 t14 / −0.6 t20) ⇒ NO nonzero-radius branch avoids reducing margins — the
+trade table has no H3-satisfying row; ranking by "lowest height at which new material
+appears." STRENGTH expressly not answered (r = 0.051 is geometry; a UR15 cantilevered 0.4 m
+is a load question — if strength demands r > 0.051, contour preservation and the ranking
+rebuild). p5 joins p4's scope-narrowing for their own §17/§18 mast notes. **(f)** Asks
+routed: the input question ⑧ → Rs (this report) + p4 (m754); the COLG registration → p4
+(m754); bank #21 done. p5 authorizes no runs and edits no COLG.
