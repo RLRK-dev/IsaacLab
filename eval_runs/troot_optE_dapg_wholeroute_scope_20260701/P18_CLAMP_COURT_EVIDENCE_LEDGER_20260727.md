@@ -11030,3 +11030,41 @@ group was ALSO measured under incidental finger states ⇒ **the r_max populatio
 r_max re-read AFTER the fix; τ doubly provisional.** The dichotomy of §27.2.147④ owned as
 NON-exhaustive (the actual case = a measurement artifact, a third case) — "the same landing place
 was near-coincidence; the dichotomy did not foresee it."'
+
+## 391. t17 lands — the clearance costs the grasp, and the conflict is not uniform
+
+From p4's -161 (17:4x); pins machine-verified: `24f9180e13` run_t17.txt sha `94240173d3…` ✓ (gates
+verbatim in-log: grasp False ✓); `d1cabcc0b6` driver sha `2d4adf9876…` ✓. **(a) ⛔⛔ t17 complete —
+the grasp gate FALLS BACK to False** (t14/t15 True). The mechanism in the aim: "aim R: yaw -0.30
+roll +0.95 rad (+54 deg tilt), seat error 7.63 mm <- nothing seated it; best effort" (t15: 32°,
+1.46 mm) ⇒ STEP3 R standing 19.47 mm (t15: 5.91) ⇒ both jaws stayed at 79.89 mm — **no pose
+satisfying the 8 mm clearance could seat it; the right arm fell to best effort.** ⚠ NOT a
+conclusion: the search covered 44 of 65 attitudes ⇒ **t18 (with C, full coverage) launched
+17:38:38** (producing 24f9180e13). The pin retargeted to cab29 (t15: cab27) — the any-link latch
+generalizing across runs. **(b) ⭐ The conflict is NON-UNIFORM** (first 4-print harvest): STEP15 L
+winner σ 0.1058 vs dropped-best 0.0994 and STEP16 L 0.1079 vs 0.1013 — the winner BETTER; STEP18 L
+0.0961 vs 0.1839 — worse ⇒ "a single verdict on the filter erases this non-uniformity"; A/B/C/D
+read over the DISTRIBUTION. **(c) ⭐** The check state CHOSEN (implementing -149's split): fully
+COMMANDED — arms at solved joints, fingers DRIVEN to the stage's own commanded value and settled;
+"does it hit the table" = the separate per-stage clearance print; finger opening + pad gap printed
+beside the angle. **(d)** r_max population mixed — agreed; re-read after the fix; t18 lacks
+d1cabcc0b6 ⇒ state-pure r_max from t19.
+
+## 392. No rescue — the split is forced by arithmetic, and a withdrawal returns as the right bar
+
+From p11's -150 (17:42, crossing -161 CONVERGENTLY); pin verified: §27.2.149 @ `1de89b2e2a` sha
+`c45ae878cc…` ✓. **(a)** The stated reading dies on all four points; the non-monotone variant NOT
+taken — "a rescue hypothesis with zero on-disk backing; 3 of 4 points are 0.0 — a mechanism story
+on one point is overfitting." Established vs not, UNJOINED: the hybrid is a code fact justifying
+the fix regardless; what the 5.0° IS stays open — no third story. **(b) ⭐⭐ The desk answers the
+condition — and the argument RUNS**: p11's arithmetic (mouth = f(arm+fingers); tool = f(arm only))
+needed STEP8's tool axis ≈ 0 — **READ FROM THE BANKED t17 LOG: STEP8 tool axis = 0.0° BOTH ARMS**
+(verbatim) ⇒ both stages' arm-side identically vertical ⇒ **the 4.9° mouth difference can only
+come from the finger joints — forced, not hypothesized**; WHICH state makes WHICH tilt = the
+ordered field's job. **(c) ⭐⭐⭐ The A/B split formalized — and p4 had already built A**: check A
+"may this pose be commanded?" (arms AND fingers commanded; gate; bar = τ) / check B "did reality
+stay in tolerance?" (settled; report; **bar = the table-contact bound p11 WITHDREW in §27.2.141 —
+returning as B's correct bar: "the withdrawal was right, and it was not disposal"**); A − B = the
+day's missing quantity (command-vs-realization on this surface), one form covering two places;
+CONVERGENT with d1cabcc0b6 (§391(c)) within minutes, independently. **(d)** r_max = check A's
+quantity; re-read after the split; τ held as formula.
