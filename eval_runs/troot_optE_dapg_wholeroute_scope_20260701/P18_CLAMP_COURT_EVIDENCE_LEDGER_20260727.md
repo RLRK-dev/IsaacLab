@@ -12421,3 +12421,54 @@ removals approach the candidate count, it is not protection but STARVATION — t
 SIGMA_FLOOR history itself ⇒ ALWAYS print removals beside candidate counts. ✅ p5 joins p4's
 non-invention principle verbatim — "the same refusal to invent; only, this one can be known
 without building." Routed: the full answer → p4 (m758); the register updates → p6 (m759).
+
+## 442. The constant refuses to move — a measured pair is already sitting where bank #22 wants to write
+
+From p4's -185 (22:48:43). **(a) The STOP, verified verbatim**: opening YOKE_SPREAD to
+change it, p4 found `ur15_cell_spec.py`:350-353 @ `58af8c0c1e` (desk-read, exact): YOKE_SPREAD
+= 0.40 and TILT = π/2 − 20°, annotated — "0.22/45deg made the two arms interleave at an 88 mm
+span; 0.40/20deg clears the rest row and both clips" (measured, and measured as a PAIR, so
+the two cannot be separated). **(b) The three points banked**: (1) ⛔ a half-offset of 0.22
+was ALREADY TRIED AND FAILED for exactly the reason under discussion — and YOKE_SPREAD is
+the half-offset (pos = sign·YOKE_SPREAD, §439(a)) ⇒ bank #22's 0.160 sits BELOW a measured
+failure; p4 flags possible unit misreading (the quoted spec §4 not at hand) — asking, not
+building. (2) Bank #22's bound is STATIC (bounding box + clearance); "interleave" is a
+MOTION failure the static bound cannot see ⇒ 0.212 satisfied does not answer the measured
+objection — "a bound on one thing quoted against a question about another," the evening's
+own distinction. (3) The pair was measured TOGETHER ⇒ moving the spread while holding TILT
+splits an unsplittable pair — re-measuring BOTH would be required. **(c) ⭐ Desk note
+(material)**: the note's "88 mm span" is the §0 #2 FOUNDATIONAL grasp span — the interleave
+constraint is tied to the WORKING geometry (dual-EE at 88 mm), which the reference video's
+stations may not perform; any reconciliation must hold AT the working span, not merely at
+rest. Not adjudicated here. **(d) The disposition, p4's**: NOT overruling bank #22 ("the
+asset arithmetic looks right; the crown reading is clearly better than mine") — it COLLIDES
+with an in-file measurement; p5 to reconcile rather than p4 pick; if the resolution is
+"0.22 predates something and no longer binds," name WHICH something. Meanwhile — p5's own
+measure-first advice — the cost measurement runs at ±0.160 as a PROBE, not a landed cell:
+spread changed, nothing banked, existing CLEARANCE prints read, the result to be reported
+WITH the contradiction still open ("if the arms interleave the run will show it"). ⭐ p5's
+starvation-print ask CONFIRMED already satisfied ("clearance removed 18 of 55 candidates"
+is the existing format). **(e)** Routed: the collision + reconcile ask → p5 (m760); receipt
+→ p4 (m761). The DEFER-RECON form working as designed: the constant was opened, the
+register IN THE FILE spoke, the build stopped.
+
+## 443. The register closes one condition and re-arms the other for the crown
+
+From p6's -133 (22:50). **(a) Pins verified**: commit `bfd7aec8b8` ("Close 54's first
+condition, and restate the second for the crown" 22:49:05), LEDGER sha MATCH; the COLG
+hardening desk-read at `06e8213aac` — :1148 "⛔ The branches MUST be in this list.
+column_gap and path_mast_min both walk COLG and nothing" + :1154 `assert all(g >= 0 …), "a
+mast geom name did not resolve -- an instrument would be blind"`. **(b)** #54: condition ①
+CLOSED (⑧ = case B, decided by the references); the crown design recorded as relay with the
+bank #21 retirement noted (the row's own first version had cited those numbers — p6
+tracking its own citations); ⭐ condition ② RESTATED rather than closed: the 2-name fixed
+COLG is GONE — replaced by the must-list comment + a resolve-or-die assert ⇒ "silently
+blind" became "fails loudly if unresolved" — the correct structural remedy for the row's
+named danger; ⛔ but the CROWN is a different part ⇒ "register the crown geoms" is the new
+②. The measure-then-build order recorded. **(c)** #49: the starvation risk appended
+(ARM_CLEARANCE hard-rejects — the same shape that retracted SIGMA_FLOOR), with the remedy
+noted as ALREADY PRESENT (:2587 removed-X-of-X+Y, :1166 CLEARANCE_REPORT) — the #52 general
+form now working PREVENTIVELY: "tonight's distribution computations were possible because
+this print exists." Starvation judgment expressly left to p11/the implementation lane. No
+reply sent (registration; the ack economy) — the -185 collision (§442) reached p6 via the
+thread it already tracks.
