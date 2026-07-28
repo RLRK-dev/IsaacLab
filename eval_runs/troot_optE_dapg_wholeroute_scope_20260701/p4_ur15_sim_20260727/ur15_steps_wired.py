@@ -2197,6 +2197,22 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                    f"{_clear:+6.1f} mm vs the table"
                    f"{' <- THROUGH THE TABLE' if _clear < 0 else ''}")
     print(f"[steps] STEP{num:2d} ARM REACH: " + " | ".join(low))
+    # p11 -150 B, and the other half of the pair whose A is the gate.  The gate reads the state
+    # about to be COMMANDED, at solve time; this reads what the arms and fingers actually ended up
+    # in, at the end of the step.  Their difference is the commanded-to-realised gap itself, which
+    # neither reading can report alone -- and mixing them, which is what the check used to do,
+    # reports neither.  ⚠ Reported, not gated: nothing stops because of this line, and the bound
+    # it would be gated against -- how far the arm may tilt before it reaches the table -- is not
+    # this pane's to set.
+    _real = []
+    for t in SIDES:
+        _rv = slot_centre(t) - pinch(t)
+        _rn = _rv / max(1e-12, float(np.linalg.norm(_rv)))
+        _rt = math.degrees(math.acos(min(1.0, max(-1.0, float(-_rn[2])))))
+        _rp, _ = jaw_gaps(t)
+        _real.append(f"{t} {_rt:4.1f} deg off straight down, pads {_rp:+6.2f} mm")
+    print(f"[steps] STEP{num:2d} AS REALISED: " + " | ".join(_real)
+          + "   (the gate read the commanded state at solve time; this is what the step ended in)")
     # Rs, 2026-07-28: the arms look like they are hitting each other, and even when they are not
     # they are too close.  Everything measuring this so far has been a yes/no -- touching() returns
     # a set of contacts, so "clear" covers a millimetre and a metre alike, and a warning that
