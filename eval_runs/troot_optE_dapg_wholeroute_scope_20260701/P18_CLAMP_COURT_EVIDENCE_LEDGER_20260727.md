@@ -10645,3 +10645,52 @@ different places. Bank #12 landed same commit. The 0°-sweep stays implemented b
 grounds for τ (the withdrawal honoured in role, not by deletion). **(e)** t17 carries: clearance +
 full camera + 3 panels + pass-angle print (r_max) + 4 prints + conditioning field + speedup; P2/P5 +
 bank #12 ride t18.
+
+## 371. The cap printed zero — and the print-first order paid its first dividend
+
+From p4's -149 (17:0x); pin machine-verified: `c9b5c3abdf` driver sha `ad3373a6ae…` ✓, the self-check
+content present ✓. **(a) ⛔ The error, owned by p4 with its mechanism**: t17's verbatim "vertical
+check: allowance 5.73 deg, cap 0.00 deg" — every menu attitude read tilt 0 because the attitude→tilt
+conversion applied the rotation INVERTED (IK drives the tool until (RD @ AXFIX) @ Rt.T = identity ⇒
+at the commanded attitude Rt = RD @ AXFIX ⇒ tool vectors map to world by THAT matrix; p4 had applied
+the transpose). **(b) ⭐** The fix carries a SELF-CHECK: if the roll-0 menu item does not map back to
+upright, RAISE — "a configuration that cannot reproduce its own zero point is not measuring the
+claimed quantity; its cap would be a number about the arithmetic, not about the cell" (the
+identifiability family, applied to the instrument's own zero). **(c) ⭐ Scope precision**: t17 LIVES —
+the tolerance actually in force is the INTERIM constant 5.73, not the rule ⇒ t17's results valid; the
+error was that one line; r_max, the 4 prints, and the conditioning field are unaffected.
+**(d) ⭐⭐ The meta-point, p4's own words**: what caught it was "the judge's numbers printed before
+any pose is judged" — the cap sat on the record at launch and the zero was seen five minutes later ⇒
+the print-first prescription's FIRST measured dividend. t18 cargo = P2 + P5 + bank #12 + this fix.
+
+## 372. Three not-a-tests bundled to one root — and the requester-side rule lands
+
+From p11's -143 (17:01); pin verified: §27.2.143 @ `6518cb57e4` sha `f701e84a34…` ✓ machine-grep, one
+header ✓. **(a)** P2/P5's landing confirmed by p11's DIRECT READ (commit title "Check that the pin
+pulls nothing, rather than asserting it"; "A residual here is a distance the cable would be pulled")
+— the remaining-two now zero on p11's own reading. **(b) ⛔⛔ The own**: §27.2.140⑧'s continuation
+condition ("the residual immediately after engagement") was NOT a test — the anchors are recomputed
+AT engagement so that instant's residual is ~0 BY CONSTRUCTION ⇒ p11 set a reading that could not
+come out differently — the very form it aimed at others all day; p4's SECOND read (after a solver
+step) is what made it a test. **(c) ⭐⭐ Three bundled, one root**: ① the point-comparison print
+(vacuous) ② the disagreement⇒per-arm discriminator (non-identifying) ③ the engagement-instant
+residual (~0 by construction) — the root: **measurements written from "what do I want to know",
+never from "what can the instrument return"**; and the tool was p11's own 2×2, used in §27.2.129③
+and unused two sections later ⇒ the gap is APPLICATION, not knowledge. **(d) ⭐ The mechanical fix
+(procedure, not mindset)**: every measurement request must carry IN THE SAME CLAUSE: "which reading
+would falsify this — and can the instrument return that reading?"; if the line cannot be written,
+the request is not sent. The requester-side dual of the rule-must-refuse guard. **(e)** Freshness
+kept: §27.2.142⑤'s "t16 trace" reread as t17.
+
+## 373. The audit fixes land — and the on-disk leg protects where the value check could not
+
+From p5's -142 (17:02). **(a)** Bank #12 self-verified ✓; -141's three findings LANDED: §16-2 gains a
+THIRD column (undetermined) with downward-reach/escape moved there mechanism-grounded; §10/§12-1
+config-tagged (numbers kept); §12-9's 11.00 with 12.00 beside (matches p4's measured value); the
+mechanism-over-category form landed. **(b) ⭐⭐ The observation banked in p5's words**: the held
+number (1.63→1.00) belonged to a run whose trace will never exist — *"what I was checking was the
+VALUE; what protected me was the ON-DISK leg"* — the same rule, effective through run-record
+existence rather than numeric correctness. ⚠ One precision clause from this desk: t16 RAN
+(16:27-16:47) and was stopped; what "does not exist" is its TRACE — the protective leg exactly as p5
+names it. **(c)** Numstat +17/−3, deletions disclosed. New sha `832ef03bac…` ⇒ **bank #13 routed to
+p4 (-653)**. Receiving surfaces for t17/t18 data declared ready; no run authorization claimed.
