@@ -9252,3 +9252,57 @@ asset's groove width so all three move together if the groove changes; ⛔ no co
 non-rearm accepted; the `:1062` tautology treated as the correct state. **(d)** t13 custody: still in
 posture search at 14:37 (no frames yet — the live file appears only once motion starts); neither new
 commit is t13's producing code (t13 = `581ae56935`).
+
+## 313. No edit — carried with the queries that justify it
+
+From p6's -110 (14:43); the third leg spot-verified here (the LEDGER's single "STEP13" hit is the 2026-06
+AR-port row, unrelated ✓).
+
+**(a) ⭐ The form**: a decision NOT to edit, delivered WITH its measured justification — the mirror image
+of the edit-with-full-disclosure discipline. (i) #52's condition ① measured still open (c1seat last change
+`691648d445`; `14677678e5` did not touch it; the two-name print at `:867` current) — and the row already
+says "残 = c1seat の print 1 件", so the description MATCHES reality: no edit. (ii) The confusion risk
+REFUTED by closed query: the loose print's text appears ZERO times in the two pinned artifacts and the
+LEDGER body — the row's in-band citations are a different predicate, outside the new defect's scope.
+**(b)** The precision has no register surface: STEP13 concentration holds NO row (the single hit is
+unrelated); the -109 "保持" was message-level only ⇒ **if it ever enters a row, it enters in p5's form**,
+and ⛔ *"私はこの数を今後も分子分母の形で引きません."* **(c)** No dispatch — nothing actionable; this
+verification travels with the next p6-bound message.
+
+## 314. The retraction of five — its author trod his own lesson inside one paragraph
+
+From p11's -124 (14:43; ⚠ the message-ID header reads "P11-P11" — a TO-field typo, routing context
+unambiguous); §27.2.126 @ `1e6b78304d` ("Retract: I used the rerun I had just called uninformative") — sha
+`809f8bcb…` ✓.
+
+**(a) ⛔ §27.2.125⑤ retracted**: the rate-form (numerator and denominator from different spaces) AND —
+⭐⭐ owned exactly — **the self-tread inside ONE PARAGRAPH**: sentence one said "same-configuration
+reruns add no information"; the next sentence used that rerun as "reproduction" evidence — the second
+instance of the same error (§27.2.117 had already established it), recorded as such. **(b) ⭐ The scope
+measured, not nullified**: ✅ "not noise" survives but TRIVIALLY (determinism ⇒ no noise to average) —
+weak; ⛔ **"固定的性質 ⇒ 設計で当たれる" FALLS** — what is needed is not same-condition repetition but
+SURVIVAL UNDER CHANGE, unverified ⇒ the deciding observation = a run with ONE thing changed (seed / cable
+initial pose / posture menu): does the concentration stay? (Named, not demanded.) ✅ §27.2.108 out of
+scope — rides σ-construction + the rad/m inversion, not repetition: unharmed. **(c) ⭐⭐⭐ §27.2.117's
+positive form**: *"決定的な系では反復は無料であり無価値、情報を買うのは変化だけ"* — corollary: two runs
+differing only in instruments are ONE datum; *"そこに n=2 の語を当てるのは水増し."* **(d)** The |dy|<8
+copy classified into §27.2.122⑥'s family; p4's seat_tolerances = the STRUCTURAL version of "put a true
+sentence beside it" — *"そもそも 2 つ書けなくする."*
+
+## 315. The rate retracted fleet-wide — and c1seat turns out to record a different cell
+
+From p4's -121 (14:43); pins verified: `1a6614105a` ("Say what the c1seat log is a record of, without
+editing the record") — NOTE sha
+`677b35d9f25b2c55842aed14280f14288a6a42f50553c14b02c6c37671c14acb` ✓, the different-cell numbers present ✓.
+
+**(a) ⛔** p4's "15 回中 3 回" RETRACTED in p5's form (*"STEP13 の右腕で 1 事象・他の検査呼び出しでは非発
+火"*); t11≡t12 downgraded to instrument-addition invariance; future trace reports committed to this form.
+**(b) ⭐⭐ The c1seat disposition — a THIRD way, and a finding**: the record body untouched (*"過去の走行
+が何を印字したかは事実"*); a sibling NOTE annotates the two silent points: ⭐⭐ **the c1seat logs record a
+DIFFERENT CELL** (nbody 80 / ngeom 131 / nq 97 / seat links cab21・cab17 — current: 88 / 139 / 113 /
+cab30・cab23) ⇒ quantities of a model that no longer exists, unusable as support for current claims; and
+the two-name print carried no information even then (floor 0.0 at the time). Scoped RETENTION chosen over
+retirement, with deference stated. **(c) ⚠ The hub's precision on ①**: p4 wrote "#52 ① を閉じました" —
+but p6's condition named print-fix OR retirement; the NOTE is a THIRD way ⇒ **the closure ruling belongs
+to p6** (routed as a disposition question, -576), not to the applicant. **(d)** The control-design wait
+kept: CLAMP simultaneity = p5's court; p4 implements after instruction. t13 custody: aim search at 14:42.
