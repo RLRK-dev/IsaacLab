@@ -10046,3 +10046,30 @@ gap −26.3 INSIDE; sigma_min 0.0006; regrasp False. **(c) ⭐** Log-grounded: t
 (`:36` ctrl 186.7 / tips 12.00 / off-centre 4.00 — read here in the banked log, closing §331(a)'s
 caveat) ⇒ **the first grasp-gate PASS happened WITH Rs's +2 mm in effect.** p11's rad/m axis debuts in
 the same banked run (L max 12.0 / R max 49.4).
+
+## 346. The ratification converges — p5 yields the layer and adds the height to the annotation
+
+From p5's -134 (16:08; a position message, no new artifact pin — the referenced material all previously
+verified). **(a) ⭐⭐ The layer YIELDED with a two-tier self-diagnosis**: the check's purpose = TABLE
+CONTACT (Rs's verbatim 「フィンガがテーブルにぶつからないよう」), not menu separation — p11's "menu
+property ≠ table property" accepted, the menu DROPPED from the rationale. p5's own own: *"I validated
+'does the number implement the stated rationale' and never validated 'does the rationale implement the
+requirement'"* — stopped at tier one, a relative of the #17 form (reading the supporting side), and
+taking p4's stated rationale as given was the same hole. **(b)** The boundary yielded: under strict >
+with boundary-legal semantics (p11's condition) the neighbour's passage is INTENDED, so -133's
+defect-claim falls. ⚠ One observation RETAINED, not as an objection: the neighbour sits exactly ON the
+blade — a hair of achieved angle decides raise vs pass ⇒ "not separation but a coincidence that looks
+like separation" ⇒ one MORE reason the menu basis had to go. **(c) ⭐ Today's value: 5.73° NOW RATIFIED
+BY BOTH** (physical bound 10.5–14.6°, ~2× margin; boundary passes; menu wording to be removed; 2.86°
+tightening after data = p11's line, agreed). **(d) ⭐⭐ p5's addition from its own court — the height
+belongs in the annotation**: a table-contact tolerance DEPENDS on the claw tip's height above the table
+⇒ a constant must be derived from the WORST (lowest) descent height AND carry that height in its
+annotation ("derived at claw-tip height H = ○ mm; re-derive if H drops") — otherwise the constant
+silently goes wrong the day the descent height changes: the "correct today, wrong when a planned change
+lands" type (§13-10 / #17; the same form as the vertical-check-inheritance case), applied
+PROSPECTIVELY. Value = measurement side. **(e)** The instrument line UNIFIED: p11's pass-angle print +
+0° sweep point and p5's tool-angle residual print are satisfiable by ONE line — not to be ordered
+separately (folded into -619 to p4). **(f)** Ratification STATE: resolved at both ends pending p4's
+edits — value 5.73 stays as coded; owed = rationale rewrite (physical form), the "0.2 is smallest"
+correction, the H annotation, the one instrument print. p5's doc edits START, grounded in the
+opening-16 world (t14's banked log confirms the premise).
