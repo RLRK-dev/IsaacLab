@@ -13359,6 +13359,9 @@ its path, so all 7 were put back", :28 prints "7 solved / 0 collision-free (⛔ 
 put back)" ⇒ family #4's collapse is repaired, and the repaired line's first reading is
 ZERO: the left arm has NO collision-free start candidate. t42's "6/6" thereby READS as
 the all-put-back side (discriminated now; not re-proven for t42 — p4's own precision).
+[UPGRADED §478 2026-07-29: pB -516(i) RE-PROVES it from t42's own lines — same winner
+(the sign-invariant (0,0) entry, 4 scalars matched), same model ⇒ t42's strict set was
+EMPTY; the one unmeasured link = the joint vectors, which neither run prints.]
 (ii) the per-arm ramp frees the healthy arm: R 71.5 %, never held (t42 same step:
 0.0 %), tool err 3.6 vs 10.4 mm; the print NAMES its side. (iii) stall is terminal: 68
 lines, the last words are the JAM (t42 ran four more steps of frozen state and ended on
@@ -13405,3 +13408,38 @@ NOT p5's court — same face as the look∧reach escalation; p5 will raise ONE l
 when the sweep result lands. **(d)** Routed: p4 (m801 — the sweep, solve-only), p6
 (m802 — rows incl. the §0#2 boundary statement), p5 (m803 — bank sha). The sweep needs
 no run authorization (static solves, the probe class already in use).
+
+## 478. pB reads t43 — four of five hold, and the repair turns out to print in one place of four
+
+From pB's -516 (03:00:39). **(a) Pins verified**: commit 38120c0d1d ("Read t43: four of
+five readings hold, and the repair prints in one place of four"); doc sha b81bebcc…e1e3
+MATCH; pB self-verified the trace/producing pins (driver blob triple-matched). ⭐ The
+(b) refutation CORROBORATED INDEPENDENTLY at this desk: the banked traces contain
+"of 55" ×5, "of 64" ×4, "of 66" ×2 — denominators above the try-cap 54, impossible
+without double-counting; t42's own max (49) sat under the cap, hiding the defect.
+**(b) The five dispositions**: (i) HOLDS and UPGRADED — t42's empty strict set is
+RE-PROVEN from t42's own lines (§476 tagged); unmeasured link = the joint vectors
+(neither run prints them). (ii) facts hold, two READINGS break: "never held back" ≠
+free tracking (R averaged ~2.5 mrad lag, re-derived); 71.5 % is the CUTOFF from L's
+stall, not a ceiling (needed ~3.1 s, given 2.2 s). (iii) facts hold; the stop's REASON
+TEXT no longer covers the right arm — "re-measuring the same configuration" was true of
+both arms in t42 but only of L in t43 (R was advancing; the next step would be a NEW
+state). (iv) ⭐ the yaw-mirroring's EFFECT is UNSHOWN this run: L's winner is the one
+sign-invariant menu entry (0,0), and every L quantity matches t42 to 0.01 mm — only the
+aim print's sign moved ⇒ showing the mirror needs a non-(0,0) winner (or a static menu
+print). (v) HOLDS — "passed" written nowhere; untested-not-passed confirmed on both
+surfaces. **(c) ⭐⭐ Four new-instrument findings** (pB's cites, desk-corroborated where
+refutable): (a) the repaired count prints at ONE of FOUR solve_ik sites (start pose
+:1590); aim :721 / seating :2222 / per-step :2235 remain quiet=True — **the per-step
+solve that produced the historical mast jams is still fully silent**; (b) "clearance
+removed X of Y": Y = X + total (unconditional append :1501, print :2709) ⇒ Y
+DOUBLE-COUNTS removals — every historical "X of Y candidates" denominator is inflated
+(effective 26/38 = 68 % printed as 26/64 = 41 %); (c) the same line sometimes reports
+the AIM solve, not the step solve, with no field saying which; (d) "best dropped"
+excludes the mast rejections in its own sentence (:1543). Side notes: the stall
+condition does NOT falsely stop an arrived arm; the side-named prints are per-arm in
+code but value-indistinguishable while both tolerances equal 5.18. **(d) Routed**:
+p4 (m804 — the four instrument fixes + the (iv) path to showing the mirror), p6 (m805 —
+rows + a register advisory: any row citing historical "X of Y candidates" percentages
+carries an inflated denominator). No reply to pB (registration; the §476 tag is the
+response). Video leg still in flight; verdict after both.
