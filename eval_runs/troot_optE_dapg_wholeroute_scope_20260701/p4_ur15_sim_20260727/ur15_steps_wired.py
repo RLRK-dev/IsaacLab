@@ -39,7 +39,7 @@ from ur15_cell_spec import (  # noqa: E402
     ARMATURE, CABLE_N, CABLE_R, CABLE_SEG, CLAMP, CLAW_OFFSET, CLIP_BASE_HEIGHT, CLIP_COLLIDE,
     CLIP_FRICTION, CLIP_PARTS, CLIP_SOLREF, DAMP, EFFORT, GRIP_HALF_SPAN, GROOVE_CENTER_Z, HALF,
     C1, C2, CABLE_JOINT_RANGE, CELL_TIMESTEP, CLAW_RELEASE_GAP, CLIP_Y_EVEN,
-    CLIP_Y_ODD, COLUMN_R, CROWN_R, CROWN_ZC,
+    CLIP_Y_ODD, COLUMN_R, COLUMN_STEM_BOTTOM, CROWN_R, CROWN_ZC,
     COLUMN_HZ, FINGER_RAMP, FLOAT_Z, FLOOR_HALF, FLOOR_SPACING, GRASP_ATTITUDES,
     KP_ARM, KP_WRI, KVR, LIMS, OPEN, PEDESTAL_HZ, PEDESTAL_R, REST_LIP_DY,
     REST_LIP_HY, REST_LIP_HZ, REST_POST_HALF, REST_TOP, REST_X, REST_Y, R_DES,
@@ -233,7 +233,7 @@ world = f"""<mujoco model="ur15_steps">
   <worldbody>
     <geom name="floor" type="plane" size="{FLOOR_HALF} {FLOOR_HALF} {FLOOR_SPACING}" material="gridmat" pos="0 0 0" contype="0" conaffinity="0"/>
     <body name="column" pos="0 0 0">
-      <geom name="stem" type="cylinder" size="{COLUMN_R} {COLUMN_HZ:.4f}" pos="0 0 {COLUMN_HZ:.4f}" material="col"/>
+      <geom name="stem" type="cylinder" size="{COLUMN_R} {COLUMN_HZ:.4f}" pos="0 0 {COLUMN_STEM_BOTTOM + COLUMN_HZ:.4f}" material="col"/>
       <geom name="foot" type="cylinder" size="{PEDESTAL_R} {PEDESTAL_HZ}" pos="0 0 {PEDESTAL_HZ}" material="col"/>
       {yoke_xml()}
     </body>
@@ -256,11 +256,13 @@ world = f"""<mujoco model="ur15_steps">
 cell = mujoco.MjSpec.from_file(str(S / "_steps_world.xml"))
 column = cell.body("column")
 for tag, sign in SIDES.items():
-    # ⛔ NOT sign * TILT any more.  That sign mirrored the right MOUNT, back when both arms were
-    # identical copies.  The right ARM is the mirror now, so keeping the sign mirrors that side
-    # twice, and two mirrors are no mirror at all.  It showed instantly: the arms crossed over each
-    # other in an X above the head.  The mirror lives in the arm; the mount stops doing it too.
-    q = Rotation.from_euler("xyz", [0.0, -sign * TILT, 0.0]).as_quat()
+    # Back to sign * TILT, which the supplied cell confirms: its left base is Ry(-45 deg) at
+    # x = -0.22, and it states the right arm is the exact kinematic mirror.  So BOTH the mount and
+    # the arm mirror -- the thing I kept "fixing" was never wrong.  What was missing is the home
+    # pose: at zero joints this mounting really does cross the arms, and the arch only appears once
+    # the cell's own home values are loaded.  I changed the mounting four times to chase a shape
+    # that was a pose all along.
+    q = Rotation.from_euler("xyz", [0.0, sign * TILT, 0.0]).as_quat()
     f = column.add_frame(pos=[sign * YOKE_SPREAD, 0.0, SHOULDER_HEIGHT], quat=[float(q[3]), float(q[0]), float(q[1]), float(q[2])])
     _a = arm_spec(tag)
     f.attach_body(_a.bodies[1], f"{tag}_", "")

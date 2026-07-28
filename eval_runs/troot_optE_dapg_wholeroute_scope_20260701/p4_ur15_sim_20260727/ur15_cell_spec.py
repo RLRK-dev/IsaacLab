@@ -347,11 +347,10 @@ _CLIP_PARTS_PER_SPEC = [
 # --------------------------------------------------------------------------------------------
 
 SHOULDER_HEIGHT = 0.37 + 0.58 * 2.0     # spec §4 -- all five driver files already agreed
-YOKE_SPREAD = 0.106                     # Rs: make it identical.  p5's HARD LOWER BOUND (shoulder-
-                                        # link envelope + the approved clearance): the mounts as
-                                        # close as the arms physically allow, which is what the
-                                        # reference shows -- a head about 1.6 column diameters wide.
-                                        # ⛔ Below the 0.22 the note failed at, knowingly.
+YOKE_SPREAD = 0.22                      # Rs's supplied cell, ur15-dual-arm-cell.md:
+                                        # yoke_spread_m 0.22, yoke_angle_deg 45.  ⛔ My 0.106 was
+                                        # a number I read off a screenshot by eye; this one is
+                                        # the cell's own definition, so mine is discarded.
                                         # of Rs's reference.  ⛔ WAS 0.40, and that value carried
                                         # its own measurement: "0.22/45deg made the two arms
                                         # interleave at an 88 mm span".  0.160 is BELOW the 0.22
@@ -404,7 +403,9 @@ COLUMN_R = 0.102                        # spec §6.4j -- the shared column both 
 CROWN_R = YOKE_SPREAD / 2               # p5 bank #22 floor -- the head only has to reach the mounts
 CROWN_Z0 = 1.330                        # p5 bank #22 -- where the crown's underside sits
 CROWN_ZC = CROWN_Z0 + CROWN_R           # its axis, so the underside lands exactly on CROWN_Z0
-COLUMN_HZ = CROWN_Z0 / 2             # half-height, because MuJoCo cylinders take one.
+COLUMN_STEM_BOTTOM = 0.37               # supplied cell: the stem starts on the bellows, not the floor
+COLUMN_STEM_H = 1.16                    # supplied cell: 0.37 -> 1.53
+COLUMN_HZ = COLUMN_STEM_H / 2             # half-height, because MuJoCo cylinders take one.
                                         # ⛔ Was SHOULDER_HEIGHT/2.  The stem stopped at exactly
                                         # shoulder height, which is why a fork drawn from its top
                                         # would have been two horizontal spars and not a Y at all.
