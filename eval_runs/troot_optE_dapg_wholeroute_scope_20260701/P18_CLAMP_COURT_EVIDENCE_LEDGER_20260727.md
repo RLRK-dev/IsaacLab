@@ -13571,3 +13571,35 @@ scope (arms-only, posts/table invisible — banked §458-era) — a numeric foll
 listed for p4. **(c) ⇒ BOTH t43 legs banked (pB §478 + video §483) — the t43 verdict
 gate is OPEN; verdict = p4** (their declared order: sweep first — the gate does not
 rush them). Routed m806.
+
+## 484. The t43 verdict and the sweep that found nothing to report — the question moves upstream
+
+From p4's -201 (03:17:32). **(a) Pins ALL verified**: verdict @ fc2f70ea6b ("Give t43
+its verdict: the failure moved, and so did the question"), sha f76111fa…3aba MATCH;
+sweep @ eb22582d13 ("Sweep the grasp centre, and find no window to report"), sha
+ef788fae…bd83 MATCH, blob e58c3248… MATCH; both legs' artifacts direct-read by p4
+(shas recomputed). The sweep artifact is desk-read: instrument stated (the driver's own
+start-pose line WITH the or-cands fallback separated — "before that fix … this sweep
+could not have been read"), method = the REAL driver once per centre (no
+reimplementation), the 75/88 commanded-span note carried, and measurement vs READING
+explicitly fenced in the file itself. **(b) The verdict**: TASK FAIL / PHYSICS
+PLAUSIBLE — with ⭐ "the instruments worked as built" recorded SEPARATELY from the
+verdict (t43 was run to make failure READABLE, and it closed one open item in one
+run). Five self-retractions in §4 (mirror-"works" withdrawn; never-held/cutoff;
+到達性→配置; the sweep's cause misattribution — concluded without a control; cross-run
+counts not one quantity). Table check: UNVERIFIED (did not fire). **(c) ⭐⭐⭐ The
+sweep's answer — THE QUANTITY ASKED FOR DOES NOT EXIST**: across every centre the
+40-link cable can carry an 88 mm commanded span at (+0.150 → −0.250, 9 points), the
+LEFT arm keeps ZERO collision-free start candidates. The ruled −x direction buys L
+nothing and costs R what it had (R free: 2,2,1,0,0,0,0,0,0 — both zero from centre
+0.000 on); the ruling's premise (left already at the floor) AGREED with the
+measurement, and the trade turned out not to exist. ⭐ Direct evidence for PLACEMENT
+over reach: L's SOLVED count RISES with distance (7→14) while free stays 0 — the arm
+does not run out of solutions, it runs out of CLEAN ones. **(d) ⇒ p5's PRE-DECLARED
+ESCALATION CONDITION IS MET** (§477(c): "if the sweep shows the left window excludes
+C1" — it excludes every centre): the upstream options (move clips / per-clip role swap
+/ mounting geometry) are Rs's to choose among; the fact routed to p5 (m807), whose
+court raises the ONE LINE to Rs; rows to p6 (m808). **(e)** p4's declared order: the
+four instrument repairs + stall-message side-naming + the menu static print BEFORE any
+re-run — "re-running the same placement re-measures what the sweep already answered."
+⛔ This desk states no recommendation among the upstream options.
