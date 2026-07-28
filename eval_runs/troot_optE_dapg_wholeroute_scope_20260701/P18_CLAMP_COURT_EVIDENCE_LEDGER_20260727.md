@@ -10627,7 +10627,10 @@ From p4's -147 (16:5x, STOP-headed); ALL pins machine-verified: `c8442a4cdc` dri
 EXACT**. **(a) ⛔⛔ The run event, surfaced**: t16 was STOPPED by p4 mid-run — the clearance check ran
 38×38 = 1444 pairwise distances per candidate and the pose search had not finished at 20 minutes (14
 min baseline; 1-2 h projected) ⇒ p4 added a speedup and relaunched as t17 (16:51:12, producing
-`c8442a4cdc`). ⇒ **t16 has NO trace; r_max arrives with t17** — my -647/-648/-649 carried the t16
+`c8442a4cdc`). ⚠ ATTRIBUTION CORRECTED by p4's own -155(5) (§382(e)): the stall's MAIN cause was
+p4's completion-watch loop consuming 99.5% CPU on the shared machine — the clearance attribution was
+wrong; killing the watcher un-stalled t17 mid-run (intervention evidence). The stop decision rode a
+misattribution, self-caught. ⇒ **t16 has NO trace; r_max arrives with t17** — my -647/-648/-649 carried the t16
 premise and are corrected this wave (-650/-651). The stop is REPORTED loudly by p4 itself and banked
 here with its reasoning; surfaced to Rs in this checkpoint (the stopped run was a stalled probe under
 Rs's direct supervision regime, not a training process; visibility, not a violation claim).
@@ -10822,4 +10825,34 @@ at the large cutoff for the ONE selected candidate only (one per stage, negligib
 print both stand; the §27.2.141 "requests as a set" worry INSTANCED and closed by the requester.
 **(e)** The falsifier line self-applied: if the stall survives the cutoff reduction, the clearance
 loop was not the cost — the instrument = completion time, one run decides. Routed to p4 as optional
-watch material (-665). Non-claims kept.
+watch material (-665). Non-claims kept. 〔⚠ Contamination caveat added by §382(e): the stall's main
+cause was the watch loop — all stall-cost inferences re-read with that confound removed.〕
+
+## 382. The named branch fires at first data — and the stall confesses a different cause
+
+From p4's -155 (17:1x); pins machine-verified: `7e95666339` driver sha `983abfc855…` ✓; `2f833655f9`
+P5 doc sha `5ca168d627…` ✓ = **bank #15 EXACT**. The clearance data = t17 in-flight verbatims (log
+unbanked until landing).
+
+**(a) ⭐⭐ The pre-named branch FIRES**: "STEP3 L: clearance removed 10 of 40 candidates, winner
+sigma 0.0368 vs best dropped 0.0810" / STEP5 L: 10 of 29, 0.0732 vs 0.1223 / R: 28 of 60, 33 of 70.
+Desk-recomputed ratios: **2.20× and 1.67×** (⚠ p4's "2.2倍" headline covers the first pair; both
+substantially exceed parity ⇒ the LARGE-DIFFERENCE branch fires either way) ⇒ **the hard filter IS
+trading with the ranked objective** — A (weight into cost) vs B (explicit acceptance) is now a LIVE
+decision with numbers, p11's court (routed -667); p4 explicitly does not choose. Scope kept:
+within-run, same candidate set = controlled as specified; rejection rates 25-47% also supply the
+early-termination question's input. **(b) ⛔ Two print defects found and fixed by p4 in its own
+instrument**: ① the cutoff PRINTED AS A DISTANCE ("closest +176.0 mm ()" — the search radius
+returned as a reading, pair name empty) — p4's own naming: **"the same saturation as the claw-tip
+reading, hidden the same way"** ⇒ now returns None and SAYS SO in words; ② "worst so far" watched a
+never-updated variable ⇒ fixed; ③ a path-min of +0.0 mm on a stage whose endpoints sit at 79.9 mm —
+real transient vs instrument fault undecidable from the bare number ⇒ now records WHICH PAIR and
+WHEN (fix-the-instrument, applied). **(c) ⭐** The cutoff split ADOPTED exactly as p11 designed:
+judgment loop at 16 mm (2× clearance), reporting at 176 mm — zero judgment changes by construction.
+**(d)** Bank #15 landed. **(e) ⛔⛔ The stall's cause corrected by its owner**: p4's own
+completion-watch loop (`read -t N < /dev/zero`) consumed **99.5% CPU for 15 minutes** on the shared
+machine — *"I attributed the slowness to the just-added clearance check and stopped a run on that"*
+— after killing the watcher, t17 advanced STEP2 → STEP9 rapidly (intervention evidence). §370(a)
+TAGGED; §381's falsifier and cost hypothesis re-read under the removed confound (the caveat p4
+itself states). The missing control the day's forms keep naming: one axis changed at a time — the
+watcher and the clearance check changed together.
