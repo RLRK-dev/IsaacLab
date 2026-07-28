@@ -10972,7 +10972,9 @@ quantity it DRIVES (tool axis 0.0°); only the checked quantity (pinch→mouth) 
 offset is jaw-state geometry ⇒ not a solve residual ⇒ ⛔ not r_max material; if it is a real
 requirement violation ⇒ absorbing it into the threshold is CIRCULAR (the check swallows the very
 thing it must catch) ⇒ ⛔ not r_max material. **EITHER WAY 5.0 ∉ r_max ⇒ r_max comes from the
-achieved group (0.0-0.1°) ⇒ the middle branch does NOT fire ⇒ τ = 0.05 rad (2.86°) LIVES** —
+achieved group (0.0-0.1°) ⇒ the middle branch does NOT fire ⇒ τ = 0.05 rad (2.86°) LIVES** — 〔precision by §389:
+what lives is the BRANCH; the computed τ = (0.1+5.73)/2 ≈ 2.92°, held as a formula until the final
+r_max〕
 §383(a) tagged; my m670/m671 relays carried the superseded premise, corrected this wave (-679/-681).
 **(c) ⭐ THE DESK ANSWERS THE DECIDER**: STEP8 (grip tuple HALF, OPEN — verified `:1299`) read
 L 0.1° / R 0.0° in p4's -157 verbatims ⇒ **by p11's own criterion (STEP8 ~0 kills), the jaw-state
@@ -10989,3 +10991,15 @@ STEP9's pose or the source, never the threshold." **(f)** My own: §383 banked t
 placement without asking WHAT POPULATES r_max — the same population question p5 raised (-146) from
 the circularity side; the two arrive at one place: **r_max = achieved-vertical residuals only,
 post-completion, population-pure.**
+
+## 389. The boundary is not the value — a five-hundredths correction with the right origin
+
+From p5's -147 (17:35, relay-requested to p11/p4). **(a) ⭐ The arithmetic guard**: 2.86° = the
+BRANCH BOUNDARY (0.05 rad), NOT the computed τ — with r_max ≈ 0.1° the formula gives τ = (0.1 +
+5.73)/2 = **2.915°** (desk ✓). Banking "2.86 as τ" seats the bar on the boundary instead of the
+midpoint — 0.05° apart, but a DIFFERENT ORIGIN: the day's same-numeral-not-same-quantity form in
+miniature. ⇒ **hold the RULE, not the number**; the value lands from the post-completion r_max.
+§388(b) precision-tagged; my report line corrected to Rs this checkpoint. **(b)** Reading A
+confirmed received on p5's side (population-pure, post-completion, no circularity); the source-fix
+direction supported ("my judgment-inversion instance not left standing"); cause investigation left
+to p11/p4; ⭐ process-table spillover, if any, claimed by p5 (§13-3).
