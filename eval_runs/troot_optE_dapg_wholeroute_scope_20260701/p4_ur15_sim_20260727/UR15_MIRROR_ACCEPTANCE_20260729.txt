@@ -1,0 +1,129 @@
+UR15 MIRRORED-ARM ACCEPTANCE TEST vs Rs's supplied reference cell
+reference : /home/rlrk/Downloads/ur15-dual-arm-cell/ur15-dual-arm-cell.json
+asset     : ur15_base_mirrored.xml  (mirrored build) / ur15_base.xml (left)
+mounting  : YOKE_SPREAD=0.22  TILT=45.0000 deg  SHOULDER_HEIGHT=1.5299999999999998  (imported from ur15_cell_spec, not retyped)
+lands if within 1.0 mm of the reference's published position
+
+grip offset solved in the tool frame from the reference's own LEFT grip points:
+  v_local = [+0.000001 +0.000001 +0.190000] m   |v| = 0.190000 m vs the reference's stated 0.19 m
+  worst deviation of any one pose from that constant = 0.0052 mm (a constant offset is what makes it a rigid tool point)
+
+=== LEG control: stock arm on the LEFT mount driven by the LEFT joint values, compared to the reference's LEFT positions ===
+pose                      tool0 err mm  grip err mm   verdict
+home                            0.0046       0.0047   lands
+stock_high                      0.0064       0.0053   lands
+stock                           0.0032       0.0049   lands  <- the reference's own on-yoke-vs-tuned residual here is 322.5 mm; it is not a tolerance on this test and this row is held to the same 1.0 mm
+housing_load_high               0.0056       0.0023   lands
+connector_insert_high           0.0059       0.0027   lands
+main_route_high                 0.0076       0.0064   lands
+branch_route_high               0.0047       0.0053   lands
+clip_seat_high                  0.0031       0.0027   lands
+strain_relief_high              0.0042       0.0049   lands
+cover_place_high                0.0063       0.0049   lands
+latch_press_high                0.0068       0.0051   lands
+electrical_test_high            0.0045       0.0032   lands
+vision_inspect_high             0.0039       0.0045   lands
+housing_load                    0.0052       0.0051   lands
+connector_insert                0.0028       0.0057   lands
+main_route                      0.0054       0.0046   lands
+branch_route                    0.0040       0.0027   lands
+clip_seat                       0.0054       0.0051   lands
+strain_relief                   0.0065       0.0051   lands
+cover_place                     0.0013       0.0057   lands
+latch_press                     0.0071       0.0053   lands
+electrical_test                 0.0058       0.0044   lands
+vision_inspect                  0.0037       0.0052   lands
+turn                            0.0048       0.0053   lands
+-- control: 48/48 position pairs land within 1.0 mm (worst 0.0076 mm at main_route_high)
+
+=== LEG test: MIRRORED arm on the RIGHT mount driven by the LEFT joint values, compared to the reference's RIGHT positions ===
+pose                      tool0 err mm  grip err mm   verdict
+home                            0.0046       0.0054   lands
+stock_high                      0.0064       0.0064   lands
+stock                           0.0032       0.0035   lands  <- the reference's own on-yoke-vs-tuned residual here is 322.5 mm; it is not a tolerance on this test and this row is held to the same 1.0 mm
+housing_load_high               0.0056       0.0030   lands
+connector_insert_high           0.0059       0.0031   lands
+main_route_high                 0.0076       0.0060   lands
+branch_route_high               0.0047       0.0063   lands
+clip_seat_high                  0.0031       0.0037   lands
+strain_relief_high              0.0042       0.0061   lands
+cover_place_high                0.0063       0.0052   lands
+latch_press_high                0.0068       0.0040   lands
+electrical_test_high            0.0045       0.0029   lands
+vision_inspect_high             0.0039       0.0058   lands
+housing_load                    0.0052       0.0045   lands
+connector_insert                0.0028       0.0070   lands
+main_route                      0.0054       0.0061   lands
+branch_route                    0.0040       0.0043   lands
+clip_seat                       0.0054       0.0062   lands
+strain_relief                   0.0065       0.0036   lands
+cover_place                     0.0013       0.0059   lands
+latch_press                     0.0071       0.0052   lands
+electrical_test                 0.0058       0.0052   lands
+vision_inspect                  0.0037       0.0051   lands
+turn                            0.0048       0.0036   lands
+-- test: 48/48 position pairs land within 1.0 mm (worst 0.0076 mm at main_route_high)
+
+=== LEG formula: stock arm on the RIGHT mount driven by the RIGHT joint values, compared to the reference's RIGHT positions ===
+pose                      tool0 err mm  grip err mm   verdict
+home                            0.0045       0.0052   lands
+stock_high                      0.0067       0.0067   lands
+stock                           0.0033       0.0032   lands  <- the reference's own on-yoke-vs-tuned residual here is 322.5 mm; it is not a tolerance on this test and this row is held to the same 1.0 mm
+housing_load_high               0.0050       0.0031   lands
+connector_insert_high           0.0060       0.0031   lands
+main_route_high                 0.0076       0.0061   lands
+branch_route_high               0.0045       0.0065   lands
+clip_seat_high                  0.0032       0.0032   lands
+strain_relief_high              0.0044       0.0057   lands
+cover_place_high                0.0063       0.0051   lands
+latch_press_high                0.0069       0.0042   lands
+electrical_test_high            0.0051       0.0030   lands
+vision_inspect_high             0.0036       0.0062   lands
+housing_load                    0.0057       0.0043   lands
+connector_insert                0.0026       0.0072   lands
+main_route                      0.0049       0.0057   lands
+branch_route                    0.0041       0.0046   lands
+clip_seat                       0.0058       0.0061   lands
+strain_relief                   0.0065       0.0032   lands
+cover_place                     0.0017       0.0062   lands
+latch_press                     0.0074       0.0051   lands
+electrical_test                 0.0057       0.0057   lands
+vision_inspect                  0.0036       0.0052   lands
+turn                            0.0047       0.0034   lands
+-- formula: 48/48 position pairs land within 1.0 mm (worst 0.0076 mm at main_route_high)
+
+=== LEG negative: MIRRORED arm on the RIGHT mount driven by the RIGHT joint values, compared to the reference's RIGHT positions ===
+pose                      tool0 err mm  grip err mm   verdict
+home                          664.6702     933.3698   MISSES
+stock_high                    749.5479    1018.2474   MISSES
+stock                         941.6289    1227.9894   MISSES  <- the reference's own on-yoke-vs-tuned residual here is 322.5 mm; it is not a tolerance on this test and this row is held to the same 1.0 mm
+housing_load_high             687.8632     919.2818   MISSES
+connector_insert_high         789.0150    1018.2340   MISSES
+main_route_high               665.3812     891.0203   MISSES
+branch_route_high             615.7876     834.3770   MISSES
+clip_seat_high                631.8533     848.3869   MISSES
+strain_relief_high            628.0764     848.4759   MISSES
+cover_place_high              505.4479     707.1377   MISSES
+latch_press_high              654.0861     876.8818   MISSES
+electrical_test_high          615.7481     834.3859   MISSES
+vision_inspect_high           385.3869     565.6571   MISSES
+housing_load                  979.2955    1258.6057   MISSES
+connector_insert             1088.8733    1357.5480   MISSES
+main_route                    958.1342    1230.2849   MISSES
+branch_route                  902.3361    1173.7413   MISSES
+clip_seat                     918.5832    1187.7870   MISSES
+strain_relief                 917.8904    1187.8790   MISSES
+cover_place                   794.6333    1046.4857   MISSES
+latch_press                   940.9598    1216.2488   MISSES
+electrical_test               904.6387    1173.8240   MISSES
+vision_inspect                672.1220     905.0083   MISSES
+turn                          357.6791     643.3237   MISSES
+-- negative: 0/48 position pairs land within 1.0 mm (worst 1357.5480 mm at connector_insert)
+
+DENOMINATOR, stated so it cannot be read as more than it is:
+  24 poses the reference publishes x 2 position quantities (tool0, grip point) = 48 L/R position pairs per leg.
+  Nothing is excluded: all 48 are compared on every leg.  1 pose (['stock']) carries a non-zero on-yoke-vs-tuned residual in the reference, which this test does not measure and does not relax for.
+  The test leg IS the acceptance test.  Control says whether my mounting and FK reproduce the reference at all -- without it, a passing test leg could be two errors cancelling.  Formula is the reference's own non-mirrored route, and its size is the difference the mirrored asset removes.
+  ⛔ What this does NOT cover: joint LIMITS (the sign convention is checked here by where the tool lands, and the atomic axis-and-limit inversion is not exercised by poses that all sit inside symmetric ranges), collision geometry, inertias, and anything dynamic.  This is a kinematics-of-position test.
+
+RESULT: PASS -- acceptance leg 48/48, and the negative leg lands 0/48 (it must land 0, or the test is not reading the convention).
