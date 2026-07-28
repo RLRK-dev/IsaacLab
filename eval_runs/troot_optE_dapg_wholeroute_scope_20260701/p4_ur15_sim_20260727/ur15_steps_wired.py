@@ -338,14 +338,29 @@ ARM_TINT = {"L": (0.95, 0.55, 0.10, 1.0),      # left arm: orange
 # the clearance -- a joint error of dq displaces a part by at most reach * dq, so the bound is the
 # clearance divided by the reach.  Nothing is chosen: both terms already exist and both are
 # measured.
-# Reach is the fully-extended chain -- the sum of the link offsets -- so it is an upper bound on
-# the true lever and the tolerance it yields is the tight side of exact.  ⚠ It includes the mount
-# offset, which makes it slightly larger still, and therefore the bound slightly tighter.
-ARM_REACH = {t: float(sum(float(np.linalg.norm(m.body_pos[b])) for b in ARMB[t])) for t in SIDES}
+# ⛔ Reach is the LEVER -- how far the farthest part sits from the shoulder the joints turn about.
+# I first wrote it as the sum of every link offset in the chain, which is not a lever at all: it
+# adds the mount offset and the gripper's internal links and every segment regardless of which way
+# it points, and it came out at 3.6 m for an arm that does not reach half that.  The tolerance it
+# produced, 2.2 mrad, was indistinguishable from the settling bound it was meant to replace, and
+# the moves went on stalling.  A wrong measurement dressed as a derivation is worse than an
+# admitted guess, because it looks settled.
+# So it is measured against the shoulder the arm actually pivots on, and kept as a running maximum
+# over the poses the run really visits -- the lever grows when the arm extends, and a bound taken
+# from a folded pose would be too loose exactly when the arm is longest.
+_SHOULDER = {t: np.array([SIDES[t] * YOKE_SPREAD, 0.0, SHOULDER_HEIGHT]) for t in SIDES}
+def _measure_reach(t, dd=None):
+    dd = dd if dd is not None else d
+    return float(max(np.linalg.norm(np.asarray(dd.geom_xpos)[g] - _SHOULDER[t]) for g in ARMG[t]))
+ARM_REACH = {t: _measure_reach(t) for t in SIDES}
 TRACK_TOL = {t: ARM_CLEARANCE / ARM_REACH[t] for t in SIDES}
 for _t in SIDES:
     for _g in ARMG[_t] - PADG[_t]:
         m.geom_rgba[_g] = ARM_TINT[_t]
+print(f"[steps] tracking bound: L reach {ARM_REACH['L']*1000:.0f} mm -> lag allowed "
+      f"{TRACK_TOL['L']*1000:.2f} mrad | R reach {ARM_REACH['R']*1000:.0f} mm -> "
+      f"{TRACK_TOL['R']*1000:.2f} mrad  (clearance {ARM_CLEARANCE*1000:.1f} mm / reach; "
+      f"re-measured each step as the arm extends)")
 print("[steps] arm colours: LEFT arm = ORANGE, RIGHT arm = PURPLE "
       "(claws keep blue = upper, red = lower).  Use the colour, not the side of the screen: the "
       "close-up panel is mirrored.")
@@ -2265,6 +2280,14 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # ⚠ If the arm cannot track, progress stops instead of the command running away, and the step
     # ends short.  That is reported below, not swallowed: a move that did not finish must not read
     # like one that did.
+    # The lever grows as the arm extends, so the bound is re-measured at each step rather than
+    # fixed at whatever pose the model happened to load in.  Running maximum: a tolerance may
+    # tighten as the arm reaches further, never loosen because it folded up again.
+    for _t3 in SIDES:
+        _r3 = _measure_reach(_t3)
+        if _r3 > ARM_REACH[_t3]:
+            ARM_REACH[_t3] = _r3
+            TRACK_TOL[_t3] = ARM_CLEARANCE / _r3
     prog, dprog = 0.0, 1.0 / max(1, ramp)
     # ⛔ NOT `held`: that name is already a function in this file, and the step summary calls it.
     held_ticks = 0
