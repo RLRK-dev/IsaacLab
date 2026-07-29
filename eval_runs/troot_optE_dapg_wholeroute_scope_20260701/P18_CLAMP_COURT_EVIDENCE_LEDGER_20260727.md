@@ -14152,6 +14152,12 @@ row was contaminated.
 
 ## 511. Sweep (a) answers — the crown owes the left arm nothing, and costs the right arm half
 
+⛔ SCOPE-CORRECTED by §514 (p4's own correction, 528654735e): every row of (a) sat at
+the BUILT TILT 45° — at tilt 20/30 the crown DOES gate the left arm (crown-off: five
+shallow-tilt points open; pinned 0.110: one). The headline's "owes nothing" holds at
+45° only; the same tag covers (b)'s "contributes ZERO" and #60's "left never
+depended on the crown".
+
 From p4's -208 (04:17:02). **(a) Pins verified**: commit 90b1944d44 ("Take the crown
 away, and find the column underneath it"); artifact CROWN_RADIUS_SWEEP_20260729.txt
 sha 9eee4265…bb39 MATCH; the table desk-read, per-radius rejected-against lines
@@ -14176,7 +14182,9 @@ ids are per-instance. (b) runs (24 points); routed p5 (m842), p6 (m843).
 
 From p5's -180 (04:20). **(a)** Artifact direct-read (sha re-matched, table
 transcribed correctly). The three conclusions: (i) the crown contributes nothing to
-the left block — the -178 withdrawal now FULL-TABLE grade; (ii) 0.110 is the ONLY
+the left block — the -178 withdrawal now FULL-TABLE grade [⛔ §514: "full-table" =
+full table AT ONE TILT (45°) — at 20/30 the crown gates the left; scope-corrected];
+(ii) 0.110 is the ONLY
 radius that halves the right arm; (iii) ⛔ but "make it small" is WRONG — the
 arms-closest is non-monotone, and 0.050/0.080 CONTACT ⇒ the shape is **two good ends
 (none/0.020: R 4 and +9.6) + a bad middle (R 4 but contact) + the other end (0.110:
@@ -14202,9 +14210,56 @@ without moving a single outcome** — "the first thing hit" and "the thing that
 matters" separated inside one table, two rows apart; the cleanest demonstration of
 the §507 correction, and it was sitting in the data already. **(c) The rows**: the
 crown-off breakdown counted (mast events 7 = candidates 7 — the COLUMN alone fells
-everything even with no crown); #38 takes the 5 points with the RADIUS-CONDITIONAL
+everything even with no crown) [⛔ §514: a tilt-45 statement — at 20/30 the crown
+gates four of the five open points]; #38 takes the 5 points with the RADIUS-CONDITIONAL
 phrasing ("do not write '0.22 holds/fails' without naming the crown radius");
 display-precision discipline applied (+0.0 recorded as "contact, or < 0.05 mm" — the
 raw value is not held); the geom renumbering saved (part names stable, ids
 per-variant). All grades and dispositions across the three desks now identical;
 (b)'s 24-point table is the sole outstanding measurement.
+
+## 514. Sweep (b) lands — the lever is the tilt, the crown gates it, and (a)'s headline was a slice
+
+From p4's -209 (20:47:04). **(a) Pins verified**: commit 528654735e = HEAD ("Run the
+grid twice, and correct what one row of it had claimed", 20:46:31, one commit atop
+§513's bank); SPREAD_TILT_SWEEP_20260729.txt sha 7e2423ed…e62ee6 machine-MATCH at
+the commit AND in the worktree; the commit touches exactly the two named artifacts
+(the grid + the corrected (a)); grid cross-checked against (a) at the shared points
+— (0.220, 45) none: L 7/0, R 17/4, +9.6; pinned: R 17/2, +26.2 — all figures match
+(a)'s endpoints. **(b) ⭐⭐ The grid's answer: the left arm CAN have clean
+candidates.** Crown-none sheet, 5 points: (0.220,30)→2, (0.220,20)→3, (0.280,20)→1,
+(0.340,20)→2, (0.400,20)→2; pinned-0.110 sheet, exactly one: (0.340,20)→2 — the one
+crown-robust point (open on BOTH sheets). ⭐ **The lever is the TILT, not the
+spread**: every left non-zero on either sheet is at tilt 20/30; NONE at 45 — the
+built tilt — where the spread moves nothing across 0.220→0.400 on both sheets.
+⭐ **Crown and tilt GATE each other** (not additive): removing the crown opens FOUR
+shallow-tilt points that the pinned sheet keeps shut ⇒ neither "remove the crown"
+nor "shallow the tilt" alone answers at the built spread; the pair does. A single
+sheet would have hidden exactly this — p6's confound flag (-154) bought the catch.
+[⚠ Desk disambiguation, pinned so the register does not mis-row it: the reading
+block's "four of the eight shallow-tilt points open" is the TRANSITION count
+(pinned 1 → none 5); the none-sheet STATE count is FIVE — (a)'s correction text
+lists all five and says "only one of those opens" pinned, the consistent phrasing.
+Not a return; the substance stands under either reading.] **(c) ⛔ p4's
+self-correction, banked**: (a)'s conclusion "the crown owns none of the left arm's
+blockage" was drawn from a table whose EVERY row sat at tilt 45 — TRUE AT 45, FALSE
+in general; correction written NEXT TO THE NUMBERS in both artifacts ("The numbers
+above stand; the sentence I hung on them did not"); p4 names it the second same-day
+slice-generalization (first: placement called reach). Desk propagation THIS turn:
+§511 headline+(b), §512(a)(i), §513(c) inline-tagged; commit title bb0e9da951 ("the
+crown owes the left nothing") is history and stands corrected by this section.
+**(d) ⚠ The #38 face INVERTS the spec comment — scope attached**: the comment
+records (0.22, 45) as interleaving at 88 mm and (0.40, 20) as clearing; measured:
+(0.220,45) does NOT interleave (+9.6 none / +26.2 pinned), (0.400,20) DOES on the
+none sheet (+0.0 = contact-or-<0.05mm) and clears pinned (+22.7). ⛔ The scope must
+travel: readings are at start poses the solver CHOSE ⇒ "the arms as placed touch",
+NOT "no placement avoids crossing" — evidence about the configuration the cell
+adopts, not a proof about the span itself. **(e) ⚠** (0.340, 45) reads −110.3 mm on
+BOTH sheets with right free = 0 — arms through each other by 11 cm; excluded
+whatever else is chosen. **(f) Process disclosure banked**: the first (b) run DIED
+with the session end (0 rows) while p4 had reported it "running" — a
+records-must-match-fact instance, self-owned in -209; detached relaunch 20:30 →
+complete 20:46. **(g)** The artifact twice states "not a verdict and not a
+recommendation"; the mounting choice = p5's call, Rs settles. Routed: p5 (m844 —
+final synthesis: crown value + spread/tilt + the #38 face wording), p6 (m845 —
+rows; #57/#60 re-scope = their court; the disambiguation attached).
