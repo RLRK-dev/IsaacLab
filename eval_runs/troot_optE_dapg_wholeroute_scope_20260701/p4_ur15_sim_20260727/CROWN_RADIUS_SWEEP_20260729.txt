@@ -30,3 +30,15 @@ per point, stopped after the start-pose lines.  No route run, no reimplementatio
 ⛔ Not a verdict and not a recommendation.  Both tables are the numbers p5 asked
    for; which mounting to take, and whether the pair constraint still binds, are
    p5's call and Rs's to settle.
+
+--------------------------------------------------------------------------------------------
+⛔ CORRECTED by the spread x tilt grid (SPREAD_TILT_SWEEP_20260729.txt), added 2026-07-29 20:4x.
+
+Every row of this table was taken at the built tilt of 45 degrees, and I reported its result --
+"the crown owns none of the left arm's blockage" -- as a property of the crown.  It is a property
+of the crown AT 45 DEGREES.  The grid shows that with the crown removed the left arm keeps clear
+poses at tilt 30 and 20: 2 at (0.220, 30), 3 at (0.220, 20), 1 at (0.280, 20), 2 at (0.340, 20),
+2 at (0.400, 20).  With the crown pinned at 0.110 only one of those opens.
+
+So the crown does own part of it -- just not at the tilt this table happened to be taken at.  The
+numbers above stand; the sentence I hung on them did not.
