@@ -14176,7 +14176,10 @@ p5's 2-sheet design is correct BECAUSE of this coupling, now shown empirically.
 **(d) The §505(d) note resolved by the artifact itself**: with the crown geometry
 removed, geom indices SHIFT — "g5 on L_forearm_link" at crown-off is the forearm
 under renumbering ⇒ part NAMES are the stable identifiers across model variants;
-ids are per-instance. (b) runs (24 points); routed p5 (m842), p6 (m843).
+ids are per-instance. (b) runs (24 points) [⛔ §514(f): -208's claim as of 04:17 —
+that run DIED with p4's session (0 rows); the banked table is the 20:30 re-run's.
+Tagged per p6's -158 discipline: relayed process state carries whose observation
+and when]; routed p5 (m842), p6 (m843).
 
 ## 512. p5 reads (a) — two good ends, a bad middle, and a decision correctly deferred
 
@@ -14263,3 +14266,82 @@ complete 20:46. **(g)** The artifact twice states "not a verdict and not a
 recommendation"; the mounting choice = p5's call, Rs settles. Routed: p5 (m844 —
 final synthesis: crown value + spread/tilt + the #38 face wording), p6 (m845 —
 rows; #57/#60 re-scope = their court; the disambiguation attached).
+
+## 515. p5's synthesis — one point of twenty-four, and a counter that was NOT the forged one
+
+From p5's -181 (21:00). **(a) ⚠ The ID, resolved first**: "-181" is a number this
+desk once quarantined — but that was **p4's** counter (§430-432: p4's -179
+disavowal, UNKNOWN-AUTHOR, the skip binds p4's sequence alone). p5 ran -180 → -181:
+legitimate, sequential, no gap. Authentication: the doc §25 EXISTS in the shared
+tree at the pinned sha (below), interlocks with p5's -174/-178/-180, and answers
+m844 six minutes after delivery; the pane-echo leg read EMPTY — NON-DISCRIMINATING
+(file-dispatch hygiene keeps bodies off-screen; §459's lesson applied in the
+correct direction: absence-in-window is not absence). Grade: AUTHENTICATED.
+**(b) Pins verified**: P5_UR15_CLIP_DETAIL_DESIGN_20260727.md worktree sha
+5b52ac89…07dc machine-MATCH; diff vs 40676a0d45 (bank #30) = +69/−0; banked as
+**#31 @ a60bde4f86**. **(c) ⭐⭐⭐ The synthesis, desk-re-derived**: the three
+columns p4 reported separately, multiplied — pass = L free ≥ 1 ∧ R free ≥ 1 ∧ no
+interleave. Interleave-no rows mechanically re-extracted: FIVE (:26/:31/:38/:40/
+:49); their L free = 0/1/0/0/0 ⇒ **exactly ONE point of 24 passes:
+(crown none, 0.280, 20)** — L 1, R 4 (= the table maximum), +22.7 mm = 2.8×
+ARM_CLEARANCE 8.0. The pinned-0.110 sheet has NO passing point (its only L ≥ 1,
+(0.340,20), interleaves) ⇒ **0.110 FALSIFIED by measurement** — it closes the only
+pass. p5's -174 distinction honoured: a door one candidate wide that is actually
+OPEN is a window — a narrow one. **(d) ⭐⭐ The escalation condition met in its
+sharpest form**: tilt 45 — the REFERENCE's value (spec :359-360 quotes
+ur15-dual-arm-cell.md yoke_angle_deg 45.0; current default at :375-376) — is
+uniformly dead for the left arm (8/8 rows zero), while the left lives only at
+20/30; 20 is the value the reference REPLACED. "The look (45) and the left arm's
+reach (20/30) do not coexist" is now a table fact, not a forecast. **(e) The crown
+value: NOT decided — delegated to ONE measurement**: sweep the crown radius
+(none/0.020/0.050/0.080/0.110) AT (0.280, 20); output = the largest radius that
+keeps the pass. p5 refuses to import (a)'s mid-radii — (a) sat wholly on tilt 45,
+and importing it would be the same slice-generalization p4 walked into twice today
+and p5 once at -178. Ask routed to p4 (m846); static solve-probe class, no route
+run. **(f) ⚠ Desk finding, minor**: p5's cite "spec :350-353" for the pair note
+DRIFTED — those lines hold the -176(4) override comment block; the note's
+operative text sits at :364-365 + :374-378 ("measured, and measured as a pair");
+spec untouched since 90b1944d44 (no diff to HEAD) ⇒ a citation slip, not file
+movement. Content CONFIRMED verbatim: the note records (0.22,45) interleaving at
+88 mm and (0.40,20) clearing — measured in (b) as reproducing at NEITHER point
+((0.220,45) no-interleave on both sheets; (0.400,20) crown-dependent). Spec
+wording = p4's court; routed as findings only. **(g)** The unmeasured list banked
+(§25-5: the pass point's neighbourhood — spread ±0.02, tilt 15/25 — before
+building; crown mid-radii at tilt 20; start poses ≠ paths; (0.340,45) excluded).
+p5 delivers the Rs line THEMSELVES (§25-6 form banked; not relayed as this desk's
+words). Routed: p4 (m846), p5 (m847 — with p6's scope below), p6 (m848).
+
+## 516. The register finds the THIRD re-scope — option ①'s grave is also on the 45° slice
+
+From p6's -158 (21:02:12). **(a) Pins verified**: register @ a6f1a8c925, sha
+b0f6e35a…5a87 machine-MATCH, 246 lines; p6's independent re-verification of the
+grid and the (a)-shared points noted. **(b) ⛔⛔ The third re-scope — p6's own
+find, desk-CONFIRMED on all four numbers**: the x-sweep's own-centre row (+0.150,
+artifact :11) and the y-sweep's dy-0.000 row (:8) BOTH read L 7/0, R 17/2 —
+identical to the grid's pinned (0.220, 45) row (:38) ⇒ the three sweeps'
+baselines are the SAME cell = the tilt-45 / crown-0.110 slice ⇒ **"① is dead in
+both dimensions" is a 45°-slice statement — clip/work-row placement was never
+re-measured at any other tilt — and "③ is the sole survivor" stands on the same
+slice.** p6 does not re-rule; the scope routed to p5 (m847). The asymmetry
+preserved: the synthesis's POSITIVE leg — (0.280,20) passes at the CURRENT clip
+placement — is untouched; the scope hits ①'s KILL, not ③'s existence proof.
+**(c) Register work banked**: #57/#60 re-scoped; state/transition counts split
+correctly (state 5/1, transition 4, both-sheet point (0.340,20)); p4's "four of
+eight open" recorded as the transition phrasing. **(d) ⭐⭐ #38 discipline extended
+TWICE**: (i) name the radius AND the spread AND the tilt — grounded in the
+pinned-sheet 0.220 column flipping no→YES→no across 45/30/20 (desk-verified
+:38/:39/:40); (ii) **"three names are still not enough"**: the arms-closest
+column is measured at the solver's WINNER pose, and where L free = 0 the winner
+is best-of-REJECTED (the #56β put-back structure) ⇒ at **18 of 24 points** the
+arm-gap sits on a pose the clearance check rejected (L-zero rows 7 none-sheet +
+11 pinned-sheet; the 2 R-zero rows are among them) — desk-recounted, 18 and 2
+both CONFIRMED ⇒ the column cannot ground 88 mm-span claims at those points.
+This sharpens §514(d)'s "solver-chosen pose" scope into a structural count.
+**(e) The vanished first run**: rowed inside #38 as a record-hygiene correction,
+not a new DDR row (not a pending dependency); p6 self-owns their register's
+"全表 RUNNING" — relayed state written while the run was already dead — and lands
+the discipline: **"another pane's process state: do not write it without your own
+observation; if you write it, attach whose observation and when."** Applied at
+THIS desk the same turn: §511's closing "(b) runs" line inline-tagged to §514(f).
+p6's 要るもの=なし answered with a verification report (m848 — loop closure with
+the four-number and 18/2 recounts, not a bare ACK).
