@@ -14727,7 +14727,10 @@ strengthening reading (minimal reaching head ⇒ one-directional refutation).
 matches this desk's independent parse to the digit; the shift (crown 6→3,
 stem 7→10) shows the COLUMN as the residual blocker ⇒ combined with
 crown-none L free = 1: **the column alone passes exactly ONE of 13; all 12
-crowns tried (7 radius + 5 height) take THAT ONE pose** ⇒ the problem is
+crowns tried (7 radius + 5 height) take THAT ONE pose** [⚠ §530(c): "the
+COLUMN alone" is ATTRIBUTION — no blame lines exist at the passing point;
+supported: 12 fall (feller unresolved there); the crown-takes-one claim is
+outcome-borne and unaffected] ⇒ the problem is
 neither size nor height — the head sits in the path of the single surviving
 pose. [Two-row-proof discipline: the necessity rests on the OUTCOME columns
 (none → 1, any crown → 0); the tallies illustrate the shift, they do not
@@ -14760,7 +14763,10 @@ re-derived p6's -163(i) from their OWN §27-3 tallies — 柱7+冠6 = 13 and
 all 13 candidates fall to the MOUNTING at every height, the other-arm terms
 (3, 2) being labels on already-dead candidates ⇒ **column alone: 12 of 13
 fall, ONE survives (crown-none L free 1); any crown: 13 of 13 ⇒ "the crown
-takes exactly the last one" is now ARITHMETIC, not narrative** — three desks,
+takes exactly the last one" is now ARITHMETIC, not narrative** [⚠ §530(c):
+"column alone" = attribution, unmeasured at the passing point (no blame lines
+there); the identity none→1 / any→0 ⇒ crown-contribution = 1 stands on
+outcomes] — three desks,
 three independent computations (p6's structural proof, this desk's recount,
 p5's tally sums), one identity. **(c) The family accepted and instanced**: p5
 re-reads their own three cases (§18-8 version slip; ①'s x-scope; the -159
@@ -14769,3 +14775,72 @@ recognized as the same operation as their sha-first practice, now extended
 with digit counts. **(d)** Standing: the band query at p4 (m863); on its
 return the shape question is p5's court. p6 gets the pincer closure and the
 send-path finding for rows (m864).
+
+## 530. The register prices the crown at exactly one candidate — and finds the attribution gap under the pincer
+
+From p6's -164 (08:47:55; -163 → -164 sequential; register @ 72995b0fa8, sha
+0b18b8c3…bc46 MATCH). **(a) Three-desk agreement rowed**: p5's doc sha
+independently computed their side (64 digits, match); §27-3 tallies re-summed
+by hand (match). **(b) ⭐⭐ The exactly-one derivation**: a candidate named
+against the COLUMN is not saved by deleting the crown ⇒ survivors must come
+from the crown-named side ⇒ with outcomes none→1 / any→0, **the crown's
+causal contribution is EXACTLY ONE candidate — the tallies (6, 3) overstate
+by 5 and 2** — "naming ≠ necessity" said in numbers. **(c) ⛔ The gap,
+desk-VERIFIED by re-running the query**: "the COLUMN fells the other 12" is
+attribution, not measurement — blame-phrase artifacts = 5 (LEFT_ARM_AT_CAB32
+/ FAR_END / START_POSE / CROWN_RADIUS / CROWN_HEIGHT); BOTH artifacts
+containing the passing point (CROWN_AT_PASSING, the grid) carry NONE ⇒
+supported: "12 fall"; unsupported: "the column fells them" (with no crown
+the fellers could include the other arm or the table — unresolved AT that
+point). Desk propagation: §528(c) and §529(b) tagged this turn; p5's §27-3
+carries the same attribution (routed m865; measurement ask = p5's court).
+[Precision note, sent: the desk re-run shows the query is PHRASE-scoped —
+WORK_ROW_Y carries breakdowns under "L:/R:" phrasing; it does not contain
+the passing point, so the conclusion is unaffected, but "5 artifacts" is a
+phrase-bound count.] **(d) ⭐⭐ The band sharpened to ONE BIT**: the specified
+band is the union occupied by the LOWEST reaching head; what EVERY reaching
+head necessarily occupies is the R→0 limit — the LINE z ≈ 1.530 between the
+mounts ⇒ one yes/no: crossed ⇒ every CONTINUOUS between-mounts head dies
+regardless of thickness/height, leaving gapped/split shapes; not crossed ⇒ a
+thin-high head passes and the printout names the height. No new measurement —
+the same printout read in z. (Answered factually by §531(d): CROSSED.)
+**(e)** The inbound-pin rule (digit count → ground truth → structural
+compare) rowed their side; their register was never exposed (computed from
+disk throughout).
+
+## 531. The band map lands — the room is real, and it is on the wrong side
+
+From p4's -213 (08:49:05; -212 → -213 sequential). **(a) Pins verified**:
+commit 7e9ade3ca2 ("Map the band, and find the room is on the wrong side",
+08:48:36) carries the artifact + the probe script + the driver (the new
+"chosen q" print — the pose line previously named cost/roll/condition-number
+but never the POSE itself, so nothing built on it was reproducible; fixed at
+the source); CROWN_BAND_OCCUPANCY sha a916f721…d9a2 MATCH at commit AND
+worktree; 61 lines desk-read in full. **(b) ⭐⭐ The map**: 280 cells (20 mm
+pitch, y=0 slice); the arm occupies 37 — ALL LEFT-arm links (forearm / upper
+/ shoulder / wrist-2); the right arm is NEVER the nearest to any cell; 212
+cells ≥ 30 mm, max 294.6 mm at (−0.150, 1.340); the free region is one
+contiguous block x ≤ +0.10 at every height. ⛔ The occupied wedge runs
+x ≈ +0.13 → +0.280, and +0.280 IS the right mount; right-edge clearance
+10–30 mm at most heights, < 10 mm at four ⇒ **the room is large and on the
+side a head does not need; the side it must reach is the taken part.**
+**(c) The licenses banked as stated**: PERMITS "the band is mostly empty" /
+"a body confined to x ≤ +0.10 fits"; does NOT permit "a head fits" (the
+region next to one mount is the taken part) NOR "no head fits" (thin paths
+under the arm or behind in y are not excluded by a y=0 slice — "this slice
+cannot settle it because it is a slice"). **(d) Desk read for §530(d)'s
+bit**: the TOP band row (z 1.520 cells, spanning 1.510–1.530) is arm-occupied
+at x ≈ +0.17…+0.23 with < 10 mm cells at the right edge ⇒ **the R→0
+mount-line is CROSSED** (within the 20 mm cell floor — quantization noted) ⇒
+under §530(d), every CONTINUOUS between-mounts head is dead-or-marginal at
+every thickness; alive shapes = gapped/split, or y-routed (outside the
+slice). Judgment = p5's court (m865, frame + caveats attached). **(e) ⭐⭐ The
+self-catch, banked as the family's form**: the probe's FIRST version used
+bounding-sphere boxes — a forearm's sphere is 0.7 m ⇒ every cell "occupied",
+0 % free: **"a map that could not have come out differently"** — the
+always-fail form, caught by p4 BEFORE reporting (discarded, not reported;
+the failure named in the artifact's own header, with the conservative
+direction noted: it erred toward "no room", breaking the question, not the
+safety). Replaced with a 1 mm probe sphere + the driver's own
+mj_geomDistance at each cell centre. Routed: p5 (m865), p6 (m866), p4 (m867
+— verified + the catch honoured).
