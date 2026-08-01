@@ -14608,3 +14608,39 @@ its correction was in flight ("a doc mid-correction is not cited") — the
 correction LANDED as bank #34 @ fe09776b5f (doc sha 8d5502ba…3b9f) one minute
 after their message; release condition sent (m858). #60's subject widened: the
 ungrounded crown numbers are HEIGHT as well as radius.
+
+## 525. Raise the head until it reaches — and it closes anyway
+
+From p4's -212 (08:28:28; -211 → -212 sequential). **(a) Pins verified**: commit
+2fba2dfd67 ("Raise the head until it reaches, and watch it close anyway",
+08:27:58) carries the height table + the corrected radius-at-pass artifact + the
+driver + the spec (CROWN_Z0_OVERRIDE at :427-428, derivation comment :421-424;
+the existing CROWN_R override takes precedence, so the radius sweep stays
+reproducible unchanged); CROWN_HEIGHT_SWEEP sha 6019adba…f57a MATCH at commit
+AND worktree; corrected CROWN_AT_PASSING sha a77ca8eb…64e2 MATCH worktree, diff
+vs 4cd3dd645f PROSE-ONLY (measurement rows untouched; the old clause quoted
+inside the correction block — "the sentence claimed a resolution the sweep does
+not have") ⇒ §519(a)'s pin 4b505566… SUPERSEDED-BY-CORRECTION, content-pinned
+rows identical. **(b) ⭐⭐ The answer**: ALL FIVE reaching heads FAIL, and every
+one fails on the SAME condition — L free = 0 at every Z0 (1.330→1.510); R free
+= 4 throughout; at the two highest undersides the arms are not even touching
+(+8.9) ⇒ not arm-arm, not the right arm — the left arm's clearance alone.
+Mounting (0.280, 20) in header and every row, per the confirmed interpretation.
+**(c) ⭐⭐ The escape hatch removed**: the radius sweep could be answered "those
+small heads carried nothing" (a 5 mm top sat 190 mm under the mounts); here
+every head reaches BY CONSTRUCTION (R = (1.530−Z0)/2, top ≡ 1.530 in the
+table) and the answer does not change — down to a 10 mm bar raised to 1.510.
+The combined measured state at this mounting: **the left arm has ONE clear
+start pose with no crown, and NONE with any crown tried — thin or thick, low
+or high, reaching or not.** **(d) ⚠ The standing scope**: the cross-section was
+NEVER swept — both tables scale/move the same capsule; "no crown passes" is
+true OF THE CROWNS TRIED (the artifact's own words, §26-4's position). [Desk
+note: the rejected-against lines still name crown ×3 even at the thinnest
+reaching head — read under the two-row proof, naming ≠ necessity; the outcome
+columns carry the result.] [Cosmetic, noted not returned: the height file
+carries an empty "(a)" section header — script-template scaffolding whose
+mounting line belongs to the 8-row table in CROWN_AT_PASSING_MOUNTING; pin
+with care.] **(e)** p5's tension is now measured on two of its three axes:
+radius DEAD, height DEAD, SHAPE unmeasured (+ the neighbourhood ±0.02 /
+tilt 15,25). Routed: p5 (m859 — the answer + the remaining-hope reduction),
+p6 (m860 — rows + the supersession + the two cautions).
