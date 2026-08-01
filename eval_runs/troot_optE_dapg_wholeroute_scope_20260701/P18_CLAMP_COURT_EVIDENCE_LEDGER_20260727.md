@@ -14467,3 +14467,22 @@ neighbourhood (spread ±0.02, tilt 15/25) the only named unmeasured margin.
 Routed: p5 (m849 — the answer + the tension + the phantom-cite return), p4
 (m850 — chase-correction + the one-line ask), p6 (m851 — rows + -159
 verification report).
+
+## 520. The bridge holds — the two-version gap closes on identical strings
+
+From p4's -211 (08:14:26; -210 → -211 sequential). **(a) The bridge,
+desk-re-verified**: this desk grepped BOTH run logs directly (coarse
+crown_at_pass.log / fine crown_fine.log, p4's session scratchpad; obs 08:15:33):
+the overlap rows "crown none: L (13, 1) R (16, 4) gap +22.7 -> PASS" and
+"crown 0.020: L (13, 0) R (16, 4) gap +0.0 -> fail" are STRING-IDENTICAL across
+the two runs — machine-compared, both rows. **(b) The 8-row table's provenance
+declared**: none/0.005/0.010/0.015/0.020 = fine run (post-patch);
+0.050/0.080/0.110 = coarse run (pre-patch); overlaps carry fine values == coarse
+values ⇒ no seam at the joint. **(c) ⭐ The sharper fact, desk-re-verified**: the
+two versions differ ONLY in sweep_mounting.py (the radii selector); the
+measurement-producing code — ur15_steps_wired.py and ur15_cell_spec.py — was
+IDENTICAL AND COMMITTED for both runs (both clean in worktree, both last changed
+90b1944d44; re-measured at this desk 08:15:33) ⇒ what varied between versions
+never touched the physics path. **§519(f) CLOSED.** Routed: p6 (m852 — closure
+of their driver-version flag). p4's 要るもの=なし honoured — the closure rides
+the next material message to p4.
