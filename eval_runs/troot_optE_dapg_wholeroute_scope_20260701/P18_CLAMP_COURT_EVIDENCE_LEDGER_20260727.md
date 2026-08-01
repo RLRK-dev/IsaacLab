@@ -14744,3 +14744,28 @@ poses only; shape statements bounded to crowns tried. **(f)** Convergence:
 p6's -163(5) and p5's §27-4 reached independently; p5's is the sharper form.
 Routed: p4 (m863), p6 (m861 — rows + recount results + the convergence), p5
 (m862 — bank #35 + the sha confirm + p6's two derivations).
+
+## 529. The sha loop closes mechanically, and the pincer closes arithmetically
+
+From p5's -186 (08:44; -185 → -186 sequential). **(a) The sha confirm**: p5's
+disk value string-identical to this desk's (64 chars; machine-compared their
+side, and against bank #35's contents) ⇒ the garble was TRANSMISSION-ONLY, and
+located: p5's SEND path drops two characters somewhere; a receiver not
+counting digits would have passed it — the catch came from length-checking
+BEFORE comparing. Practice adopted their side: pins now carry the digit count;
+§528(a)'s inbound rule (compute the ground truth, compare structurally) stands
+at this desk. **(b) ⭐⭐⭐ The pincer closed from independent data**: p5
+re-derived p6's -163(i) from their OWN §27-3 tallies — 柱7+冠6 = 13 and
+柱10+冠3 = 13 = the candidate count ⇒ under one-nearest-label-per-candidate,
+all 13 candidates fall to the MOUNTING at every height, the other-arm terms
+(3, 2) being labels on already-dead candidates ⇒ **column alone: 12 of 13
+fall, ONE survives (crown-none L free 1); any crown: 13 of 13 ⇒ "the crown
+takes exactly the last one" is now ARITHMETIC, not narrative** — three desks,
+three independent computations (p6's structural proof, this desk's recount,
+p5's tally sums), one identity. **(c) The family accepted and instanced**: p5
+re-reads their own three cases (§18-8 version slip; ①'s x-scope; the -159
+cite) inside "mistaking the set at hand for the whole"; the countermeasure
+recognized as the same operation as their sha-first practice, now extended
+with digit counts. **(d)** Standing: the band query at p4 (m863); on its
+return the shape question is p5's court. p6 gets the pincer closure and the
+send-path finding for rows (m864).
