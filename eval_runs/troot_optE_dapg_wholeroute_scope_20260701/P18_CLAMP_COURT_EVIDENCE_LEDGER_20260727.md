@@ -14678,3 +14678,69 @@ seen" preserved as the worse side of the version-mix-up axis. Routed: p5
 (m859 REVISED pre-send — the height answer + both returns + the race
 resolution in ONE message), p6 (m860 REVISED — the -162 disposition + the
 race note).
+
+## 527. The register withdraws its own half, unifies the family, and finds the mounting alone suffices
+
+From p6's -163 (08:36:33; -162 → -163 sequential; register @ 5c9cb0ef14, sha
+a6d9ed35…817d MATCH). **(a) The half-withdrawal**: return-①'s "0.100 never
+swept" withdrawn on their OWN artifact read (height row 1 measured, blocks);
+supported statement updated to the two-measured-points form; the uniqueness
+defect and return ② stand. **(b) ⭐⭐ The family UNIFIED (third same-day
+instance)**: "mistaking the set at hand for the whole" — (1) the version read
+≠ the version landed; (2) the axis measured ≠ the axis claimed; (3) the
+artifact set read ≠ the set existing at write time. One countermeasure shape:
+immediately before writing the claim, ONE command against the current whole
+(git log -S / the table's columns / latest commit + mtime). **(c) ⭐⭐ Their
+derivation, desk-VERIFIED at all five rows**: mast events = 13 = candidate
+count at EVERY height (desk recount from the rejected-against lines: mast
+13/13/13/13/13; other-arm 3/3/2/3/2) ⇒ the MOUNTING ALONE fells all 13
+candidates at every height; the other-arm term is redundant — consistent with
++8.9 no-touch at the top two. **(d) ⭐ The reading**: blocking is nearly
+INSENSITIVE to the crown's size and position (radius ×10, underside +180 mm →
+L free 0 throughout) yet fully SENSITIVE to its existence (none → 1 pose) ⇒
+the next measurement should be a DIFFERENT SHAPE, not another size; and height
+moves a NON-BINDING quantity (arm-gap 0→+8.9 while L free stays 0) — the
+work-row-y shape again. [Converged independently with p5's §27 (§528); p5's
+form is sharper — inspect the one pose before shaping anything.] **(e) The pin
+re-collation**: CROWN_AT_PASSING old→new re-pinned; numstat 7/2 — NOT
+append-only this time (deletions in the prose; the 8-row table region
+diff-empty = byte-identical; this desk's "prose-only" and their "not
+append-only" are the same fact cut differently); standing rule added: THIS
+lane's artifacts are pinned assuming the prose moves. The two minor cautions
+rowed under the two-row proof.
+
+## 528. p5's tally narrows it to one pose — and the next step is a look, not a sweep
+
+From p5's -185 (08:37; -184 → -185 sequential). **(a) Pins, with one garble**:
+doc DISK sha fbed108948f848966d5abb2d7f0b52aff783c350b7dfc108fa5b671bb85a3b03
+(computed at this desk); ⚠ the MESSAGE's sha string arrived 62 chars with a
+6–8 char middle window mangled — prefix, suffix, +58/−0 numstat, and
+true-deletions 0 all match exactly ⇒ banked on the DISK value, one-line
+confirm asked of p5 (m862); the sha-retype lesson applied to INBOUND pins:
+when the string cannot be trusted, compute the ground truth and compare
+structurally. Banked **#35 @ 82a790975f**. **(b) The correction executed**:
+§27-1 lands the uniqueness fix (half-line, lower end 0.100, built-0.110
+existence proof; §26 kept, corrected not deleted) and ADOPTS the
+strengthening reading (minimal reaching head ⇒ one-directional refutation).
+**(c) ⭐⭐⭐ The tally, desk-verified EXACT**: p5's rejection breakdown (Z0
+1.330: stem 7 / crown 6 / other 3; Z0 1.510: stem 10 / crown 3 / other 2)
+matches this desk's independent parse to the digit; the shift (crown 6→3,
+stem 7→10) shows the COLUMN as the residual blocker ⇒ combined with
+crown-none L free = 1: **the column alone passes exactly ONE of 13; all 12
+crowns tried (7 radius + 5 height) take THAT ONE pose** ⇒ the problem is
+neither size nor height — the head sits in the path of the single surviving
+pose. [Two-row-proof discipline: the necessity rests on the OUTCOME columns
+(none → 1, any crown → 0); the tallies illustrate the shift, they do not
+carry the claim.] **(d) ⭐⭐ The pivot — a QUERY, not a sweep**: for the
+passing point's surviving pose, print where each left-arm link crosses the
+crown band (x ∈ [−0.280, +0.280], z ∈ [1.33, 1.53]); unused regions decide by
+INSPECTION whether any head fits — none fits ⇒ the shape hope dies (leaving
+the neighbourhood ±0.02 / tilt 15,25); one fits ⇒ the head's shape is
+DETERMINED. Sweeping shapes would be expensive guesswork against a
+now-identified single constraint. Routed to p4 (m863, band verbatim; static
+query class, no run). **(e) Scope carried**: 0.140 unmeasured (12/12 zeros,
+no non-monotone mechanism observed — but unmeasured is unmeasured); start
+poses only; shape statements bounded to crowns tried. **(f)** Convergence:
+p6's -163(5) and p5's §27-4 reached independently; p5's is the sharper form.
+Routed: p4 (m863), p6 (m861 — rows + recount results + the convergence), p5
+(m862 — bank #35 + the sha confirm + p6's two derivations).
