@@ -143,6 +143,30 @@ def main() -> int:
     out.append(f"largest clearance anywhere in the band: {clear.max()*1000:.1f} mm, at "
                f"x={X0 + (0.5 + int(np.argmax(clear) % nx)) * CELL:+.3f} "
                f"z={Z0 + (0.5 + int(np.argmax(clear) // nx)) * CELL:.3f}")
+    # ---- the mount-to-mount line, at 2 mm, because a 20 mm cell cannot answer a line -------
+    # p6 -164(4) sharpened the band question to one bit: does this pose cross the line every
+    # reaching head must occupy?  The map above says the top ROW is crossed, but its top row is
+    # 20 mm tall and the line is a line -- a row can be occupied at 1.515 and clear at 1.530.
+    # So the line itself is walked at 2 mm.
+    out.append("")
+    out.append("THE MOUNT-TO-MOUNT LINE (y=0), walked at 2 mm -- the 20 mm cell above cannot")
+    out.append("answer a question about a line, and this is the line every reaching head occupies.")
+    for zline in (1.530, 1.525, 1.520, 1.510):
+        prof, worst, wx = [], 1e9, None
+        for i in range(int(round((X1 - X0) / 0.002)) + 1):
+            xx = X0 + i * 0.002
+            d.mocap_pos[0] = [xx, 0.0, zline]
+            mujoco.mj_forward(m, d)
+            best = min(mujoco.mj_geomDistance(m, d, pg, g, 1.0, None)
+                       for t in ("L", "R") for g in armg[t])
+            prof.append((xx, best))
+            if best < worst:
+                worst, wx = best, xx
+        hit = [x for x, v in prof if v <= 0.0]
+        out.append(f"  z={zline:.3f}: nearest approach {worst*1000:+7.1f} mm at x={wx:+.3f}"
+                   + (f"   ⛔ CROSSED over x in [{min(hit):+.3f}, {max(hit):+.3f}] "
+                      f"({len(hit)} of {len(prof)} samples inside the arm)"
+                      if hit else "   clear along the whole line"))
     out.append("⛔ Not a verdict.  What the free region can carry, if anything, is p5's call.")
     text = "\n".join(out) + "\n"
     (HERE / "CROWN_BAND_OCCUPANCY_20260802.txt").write_text(text)
