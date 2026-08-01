@@ -1625,6 +1625,11 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
               f"floor {SIGMA_FLOOR:.2f} removed {len(free) - len(well)} of them (it ranks, it does "
               f"not exclude), chosen pos {pe*1000:5.2f} mm "
               f"roll {math.degrees(roll):4.1f} deg sigma_min {sv:.4f} |q|max={np.abs(q).max():.2f} rad")
+        # ⭐ The winning joint vector itself.  Everything downstream is a property of THIS pose,
+        # and the line named its cost, its roll and its conditioning but not the pose -- so
+        # nothing that used it could be reproduced without re-running the solve.
+        print(f"[steps] start-pose IK {t}: chosen q = [" +
+              " ".join(f"{v:+.6f}" for v in q) + "] rad")
     return q
 
 

@@ -1,0 +1,61 @@
+CROWN BAND OCCUPANCY -- the one surviving pose, at (crown none, spread 0.280, tilt 20)
+band: x [-0.280, +0.280]  z [1.330, 1.530]   cell 20 mm
+poses: the driver's own chosen start poses, printed by it and fed back in --
+  L q = [-0.100947, 0.995789, 1.570038, 0.341132, 1.335156, -0.342917]
+  R q = [1.632079, -0.021987, 1.913694, 0.410246, 0.446266, -2.229218]
+measured: a 1 mm probe sphere at each cell centre on the plane y=0, and the driver's
+  own mj_geomDistance to the nearest arm geom.  The symbol is that real clearance.
+⛔ The first version of this probe used bounding-sphere boxes and reported 0% free --
+  a forearm's bounding sphere is 0.7 m across, so every cell was 'occupied' and the
+  map could not have come out differently.  That version was discarded, not reported.
+⚠ This is a slice at y=0.  A head has thickness; the clearance quoted is the radius of
+  a sphere that fits at that cell, which bounds what a thicker body can do there.
+
+# = the arm is in the cell   l/r = under 10 mm to the left/right arm
+L/R = 10-30 mm   + = 30 mm or more of room
+
+        0.20.20.20.20.10.10.10.10.10.00.00.00.00.00.00.00.00.00.00.10.10.10.10.10.20.20.20.2
+z 1.520   +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  L  l  #  #  #  #  l  L 
+z 1.500   +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  L  l  #  #  #  #  #  L 
+z 1.480   +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  L  L  #  #  #  #  #  L 
+z 1.460   +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  L  l  #  #  #  #  L 
+z 1.440   +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  L  l  #  #  #  #  L 
+z 1.420   +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  L  L  #  #  #  #  l 
+z 1.400   +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  L  l  #  #  #  l 
+z 1.380   +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  L  l  #  #  #  l 
+z 1.360   +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  L  L  #  #  #  l 
+z 1.340   +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  L  l  #  #  l 
+
+LINKS that were ever the nearest thing to a cell: L_forearm_link, L_shoulder_link, L_upper_arm_link, L_wrist_2_link
+
+CELLS: 280 in the band.  37 have an arm in them.  230 have 10 mm or more of room, 212 have 30 mm or more.
+largest clearance anywhere in the band: 294.6 mm, at x=-0.150 z=1.340
+⛔ Not a verdict.  What the free region can carry, if anything, is p5's call.
+
+--------------------------------------------------------------------------------------------
+READING -- p4, after the run.  Measurement above; this block is interpretation.
+
+1. ⭐ There IS room, and it is not marginal.  212 of the 280 cells have 30 mm or more of
+   clearance, and the largest is 294.6 mm at x -0.150, z 1.340.  The free region is one
+   contiguous block covering roughly x <= +0.10 at every height in the band.
+
+2. ⭐ Everything that occupies the band is the LEFT arm -- forearm, upper arm, shoulder and
+   wrist 2.  The right arm was never the nearest thing to any cell.  So the band is not shared
+   between two arms fighting over it; one arm crosses it, and it crosses on the far side from
+   its own mount.
+
+3. ⛔ THE OBSTRUCTION SITS EXACTLY WHERE A HEAD HAS TO REACH.  The occupied wedge runs from
+   about x +0.13 to the band's right edge at +0.280 -- and +0.280 is the RIGHT MOUNT.  A head
+   that spans both mounts has to arrive there, and at the right edge the clearance is 10-30 mm
+   for most heights and under 10 mm at four of them.  The free block is large and it is on the
+   wrong side.
+
+4. ⇒ What this does and does not license.  It licenses saying the band is mostly empty and that
+   a body confined to x <= +0.10 would fit.  It does NOT license saying a head fits, because a
+   head is defined by reaching both mounts and the region next to one mount is the taken part.
+   ⚠ Nor does it license the opposite: a shape that reaches the right mount along a thin path --
+   under the arm, or behind it in y -- is not excluded by this slice, and this slice cannot
+   settle it because it is a slice.
+
+5. ⛔ Not a verdict.  Whether a shape can be drawn through what is free is p5's call; what is
+   reported here is where the free part is and which part of it a head cannot use.
