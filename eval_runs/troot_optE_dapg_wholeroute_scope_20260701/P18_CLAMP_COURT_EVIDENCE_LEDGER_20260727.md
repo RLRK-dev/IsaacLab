@@ -14439,7 +14439,10 @@ and worktree; the (a)-file restore machine-verified (worktree CROWN_RADIUS… ==
 banked @ 528654735e == fa74c84a…722f, p4's claimed value). **(b) ⭐⭐ The answer
 to p5's delegated measurement**: NO largest passing radius exists — only "none"
 passes; 0.005 already fails ⇒ the boundary lies in (0, 0.005] m, below the
-cable's own radius ("below anything that is a head"). **(c) ⭐⭐ The two failures
+cable's own radius ("below anything that is a head") [⛔ §522(b): "below the
+cable's own RADIUS" p6-RETURNED — CABLE_RADIUS 0.004 was never swept, the
+crossing may lie in (0.004, 0.005]; the data supports "below the cable DIAMETER
+0.008" and "only 0 shown to pass"; conclusion unchanged]. **(c) ⭐⭐ The two failures
 SEPARATE** (finer than the pass column): the left arm's single clear pose is
 GONE at r = 0.005 while the arms are still +8.9 mm apart; arm-arm contact only
 starts at r = 0.010 ⇒ the crown closes this mounting by TAKING THE LEFT ARM'S
@@ -14486,3 +14489,81 @@ IDENTICAL AND COMMITTED for both runs (both clean in worktree, both last changed
 never touched the physics path. **§519(f) CLOSED.** Routed: p6 (m852 — closure
 of their driver-version flag). p4's 要るもの=なし honoured — the closure rides
 the next material message to p4.
+
+## 521. The synthesis turns inward — the blocking radius was never free, and the number that fixed it was eyeballed
+
+From p5's -183 (08:17; -182 → -183 sequential). **(a) Pins verified**: doc sha
+72791b0d…701c MATCH; +69/−0 vs 367e945d4a; banked **#33 @ 2d3b9c53b4**; §26
+desk-read in full [§26-1 carries the artifact's "ケーブル半径より細い" clause —
+later corrected via §522(b), routed m854]. **(b) ⭐⭐⭐ The overdetermination,
+arithmetic desk-checked**: crown underside FIXED at CROWN_Z0 = 1.330 (spec :423,
+verbatim "p5 bank #22 -- where the crown's underside sits"), axis = Z0 + R
+(:424), top = 1.330 + 2R; the mount sits at 1.530 (= SHOULDER_HEIGHT :349 =
+0.37 + 0.58×2) ⇒ a mount-reaching head requires R = 0.100 EXACTLY (desk: (1.530
+− 1.330)/2 = 0.100; 0.005's top = 1.340, 190 mm short; 0.080 → 1.490; 0.110 →
+1.550) ⇒ **the radius sweep's 0.005–0.080 measured objects that never reach the
+mount; the only "head" is ≈0.100, and it blocks** ⇒ fixing Z0 determined the one
+carriable head, and that head takes the left arm's last clean pose — the radius
+was never a free variable. **(c) ⛔ The chain owned**: Z0 = 1.330 is p5's OWN
+eyeballed number (§20-4: the photo's crown height read as "one column diameter
+≈ 0.20 m"; 1.530 − 0.20) ⇒ eyeball-0.20 → carriable-R pinned to 0.100 → 0.100
+takes the pose — #60's "least-grounded number" now has its concrete causal
+path. **(d) ⭐⭐ The next measurement re-parameterized — HEIGHT, not radius, zero
+new mechanism**: sweep CROWN_Z0 with R DEPENDENT, R = (1.530 − Z0)/2; ladder
+1.330(0.100 current)/1.380(0.075)/1.430(0.050)/1.470(0.030)/1.510(0.010) —
+every point a head that actually reaches (desk-checked, all five pairs). The
+coupling DISTINCTION banked: R-to-spread = confound (mixes two effects, cut at
+§20-7); R-to-Z0 = the physical requirement "the head reaches" — a correct
+parameterization that excludes non-heads from the sweep. **(e) ⛔ The unswept
+axes named**: HEIGHT and CROSS-SECTION SHAPE both photo-fixed at §20-4, never
+swept — every measurement so far varied only the thickness of one shape at one
+height; p5 REMANDS their own "not a plate" ruling (an appearance/instrument
+argument, not grounds against measured blocking) — a flattened head could carry
+while intruding less, UNMEASURED. **(f) Menu addition RATIFIED**: the specified
+output was a boundary; five points can only bracket it ⇒ the 0.005/0.010/0.015
+additions were execution, not deviation — and produced the finding that
+separated pose-loss from collision. **(g) The cite corrected + a family
+addition**: §25-7's "-159" → "w2:p6 -158 + w2:p18 m847"; recorded as WORSE than
+a line slip (a line number points at the wrong place in an existing file; a
+message number pointed at nothing) ⇒ **"citations point only at things seen."**
+**(h) §26-7 to Rs (p5's words, banked not relayed as this desk's)**: the one
+passing point is grounded; no head sits on it; within everything measured, NO
+buildable mounting exists; hope remains in exactly two unmeasured places (head
+height/cross-section; the pass point's neighbourhood ±0.02 / tilt 15,25); tilt
+45 stays zero throughout. Routed: p4 (m853 — the height sweep, with this desk's
+INTERPRETATION note that the mounting = (0.280,20) as in the radius sweep, p5
+to veto if wrong; the Z0-override implementation note, -176(4) pattern; §520's
+closure and §522's clause fix riding along), p5 (m854), p6 (m855).
+
+## 522. The register returns one clause — the boundary undershoots the diameter, not provably the radius
+
+From p6's -160 (08:19:05; -159 → -160 sequential). **(a) Pins verified**:
+register @ eb136d5c31, sha f503c233…b0b MATCH; the CABLE_RADIUS chain
+desk-re-read (task_config.py:137 = 0.004; ur15_cell_spec.py:52 imports it with
+the :137 comment — exact). **(b) ⛔ The returned clause, desk-CONFIRMED and its
+propagation owned**: the artifact's ":20-21 …below the cable's own radius" is
+NOT data-supported — 0.004 was never swept, so the crossing may lie in
+(0.004, 0.005]; the data supports "below the cable DIAMETER 0.008" and "the
+only radius SHOWN to pass is 0". Conclusion unchanged (real heads ≫ 5 mm).
+The clause had travelled FIVE surfaces before the return: the artifact, §519(b)
+[now tagged], m849 to p5, the 08:14 Rs report, and p5's §26-1 (banked #33) ⇒
+fix routed to p4 (m853, artifact wording = their court), correction to p5
+(m854, §26-1 = theirs), owned to Rs in the next report. Desk lesson banked:
+**this desk sha-verified and digit-checked the TABLE yet relayed the prose
+clause unread against the config — verify the CLAIM, not just the sha.**
+**(c) Flag-closures banked, with the narrowed general form**: "an uncommitted
+version running" ≠ "the measurement was made by uncommitted code" — separate
+WHICH file in the running set produces the measurement (their 08:16:53
+re-measurement agrees with this desk's 08:15:33). **(d) ⭐⭐ The pin
+re-collation**: their own CROWN_RADIUS pin pointed at the OLD version
+(9eee4265… @ 90b1944d44); current banked = fa74c84a… @ 528654735e; append-only
+⇒ the cited measurement rows are byte-identical BUT only the new version
+carries the tilt-45 correction block ⇒ "follow the commit pin alone and you
+land on the uncorrected side" — "pin by content, version as collation note"
+applied to their own register, rowed at #38/#60. [⚠ Desk precision note, SENT
+not returned: the append measures 12/0 by numstat; their "+9 lines" counts
+non-blank lines — true under its rule, but the row should carry the
+machine-reproducible form or name the rule.] **(e) #60 re-limited**: "(2)
+satisfied for the left arm" now expressly TILT-45-ONLY (at 20, a 5 mm crown
+takes the left arm's only pose); (1) answered with permitted-radius 0 ⇒ the
+tension handed to p5 matches §519(g)/§521(h).
