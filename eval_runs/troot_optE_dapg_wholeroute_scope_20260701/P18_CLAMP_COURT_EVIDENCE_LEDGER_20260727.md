@@ -14567,3 +14567,44 @@ machine-reproducible form or name the rule.] **(e) #60 re-limited**: "(2)
 satisfied for the left arm" now expressly TILT-45-ONLY (at 20, a 5 mm crown
 takes the left arm's only pose); (1) answered with permitted-radius 0 ⇒ the
 tension handed to p5 matches §519(g)/§521(h).
+
+## 523. The mounting confirmed, the clause corrected in place — and two symmetric form-records
+
+From p5's -184 (08:24; -183 → -184 sequential). **(a) The interpretation
+CONFIRMED**: the height sweep runs at (spread 0.280, tilt 20) — the same
+mounting as the radius sweep; no RETURN; the header-explicit requirement stands
+for p4. p5's own gap recorded: §26-3 relied on inheritance from the preceding
+delegation — **"a sweep spec should read standalone."** Confirmation relayed to
+p4 (m857 — closes the veto window opened in m853). **(b) The clause corrected,
+desk-verified**: doc sha 8d5502ba…3b9f MATCH; +4/−1 vs 2d3b9c53b4; the one
+deleted line is the pre-correction clause, preserved VERBATIM inside the
+correction note (dropped claims: 0); the correction re-derives from p5's own
+read of task_config.py:137 (0.004 inside (0, 0.005], unswept ⇒ above-or-below
+undecided ⇒ only the DIAMETER comparison is supported). Banked **#34 @
+fe09776b5f**. **(c) The two form-records now symmetric**: p5's "I sha-verified
+the table but never put the prose clause against the config — the thing
+verified and the thing quoted differed" = this desk's §522(b) lesson, each
+owned independently by the desk that carried the clause. The five-surface
+propagation is now corrected at every surface: artifact (p4 queued, m853),
+§519(b) (tagged), m849 (superseded by m854), the 08:14 Rs report (corrected in
+the 08:23 report), §26-1 (this bank).
+
+## 524. The register proves its own surface clean — by query, not by memory
+
+From p6's -161 (08:24:49; -160 → -161 sequential; register @ 2c43fb41a8, sha
+db88ef60…4231 MATCH). **(a) The count note closed**: their "+9" was a non-blank
+count with the rule unstated; both counts recomputed on their side (numstat 12;
+the 3 = blank lines); #38/#60 now carry the numstat form with the other rule
+named. **(b) ⭐ The exclusion done right**: their register's absence from the
+five propagated surfaces established by CLOSED QUERY, not recall — three
+fixed-string searches over the full register (ケーブル半径より下 /
+ケーブル半径未満 / below the cable's own radius), hits = 2 quotes inside #60's
+correction note, asserted claims = 0. The absence claim carries its query, its
+scope, and its result. **(c) The family named**: the clause and the line-count
+are the same defect class — digits and shas can match while the PARAPHRASE
+attached to them needs its own verification; both sides' lessons rowed
+symmetrically. **(d) Their pin-hold and its release**: §26 held un-pinned while
+its correction was in flight ("a doc mid-correction is not cited") — the
+correction LANDED as bank #34 @ fe09776b5f (doc sha 8d5502ba…3b9f) one minute
+after their message; release condition sent (m858). #60's subject widened: the
+ungrounded crown numbers are HEIGHT as well as radius.
