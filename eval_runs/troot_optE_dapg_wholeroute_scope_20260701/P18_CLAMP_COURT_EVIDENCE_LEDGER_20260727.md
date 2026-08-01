@@ -14254,7 +14254,11 @@ crown owes the left nothing") is history and stands corrected by this section.
 **(d) ⚠ The #38 face INVERTS the spec comment — scope attached**: the comment
 records (0.22, 45) as interleaving at 88 mm and (0.40, 20) as clearing; measured:
 (0.220,45) does NOT interleave (+9.6 none / +26.2 pinned), (0.400,20) DOES on the
-none sheet (+0.0 = contact-or-<0.05mm) and clears pinned (+22.7). ⛔ The scope must
+none sheet (+0.0 = contact-or-<0.05mm) and clears pinned (+22.7) [⛔ §517: the
+(0.220,45) readings sit on REJECTED-pose winners (L free 0 both sheets — §516(d)
+structure) ⇒ p5 withdrew the note-negation; and the note predates the crown (first
+crown 77cfd640b9) ⇒ the comparison is UNREPRODUCIBLE, not an inversion. The numbers
+stand; the inversion headline does not]. ⛔ The scope must
 travel: readings are at start poses the solver CHOSE ⇒ "the arms as placed touch",
 NOT "no placement avoids crossing" — evidence about the configuration the cell
 adopts, not a proof about the span itself. **(e) ⚠** (0.340, 45) reads −110.3 mm on
@@ -14304,7 +14308,10 @@ operative text sits at :364-365 + :374-378 ("measured, and measured as a pair");
 spec untouched since 90b1944d44 (no diff to HEAD) ⇒ a citation slip, not file
 movement. Content CONFIRMED verbatim: the note records (0.22,45) interleaving at
 88 mm and (0.40,20) clearing — measured in (b) as reproducing at NEITHER point
-((0.220,45) no-interleave on both sheets; (0.400,20) crown-dependent). Spec
+((0.220,45) no-interleave on both sheets; (0.400,20) crown-dependent) [⛔ §517: the
+(0.220,45) leg is ungrounded (rejected-pose winner) and the note's cell had no
+crown (first crown 77cfd640b9) — disposition now UNREPRODUCIBLE; same consequence,
+different reason]. Spec
 wording = p4's court; routed as findings only. **(g)** The unmeasured list banked
 (§25-5: the pass point's neighbourhood — spread ±0.02, tilt 15/25 — before
 building; crown mid-radii at tilt 20; start poses ≠ paths; (0.340,45) excluded).
@@ -14345,3 +14352,118 @@ observation; if you write it, attach whose observation and when."** Applied at
 THIS desk the same turn: §511's closing "(b) runs" line inline-tagged to §514(f).
 p6's 要るもの=なし answered with a verification report (m848 — loop closure with
 the four-number and 18/2 recounts, not a bare ACK).
+
+## 517. Resume after three and a half days — p5's three corrections survive verification, and the sweep was running after all
+
+From p5's -182 (08:01, 2026-08-02; -181 → -182 sequential). **(a) The gap,
+measured**: branch tip still c985277ba5 (07-29 21:08) at this desk's 08:02 read —
+zero commits, zero new artifacts across 3.5 days; this desk was down the same span
+(nothing processed between the 07-29 21:09 report and this resume). **(b) Pins
+verified**: doc worktree sha 92004228…21e5 MATCH; +30/−0 vs a60bde4f86; banked
+**#32 @ 367e945d4a**. **(c) ⭐⭐ The three corrections, each desk-verified**:
+**(i) "① is dead" WITHDRAWN** — the ①-sweeps sat on the 45° slice where ALL FOUR
+measured variables (spread, grasp-x, work-row-y, crown) are zero ⇒ an always-fail
+instrument (§21-7 family form 1 recognized in the register's own catch, §516(b));
+correct statement: "at 45, four variables inert (measured); at 20/30, clips and
+work-row UNMEASURED". The Rs question unchanged: ① cannot save 45 (x AND y
+measured 0 there); ① is a POST-decision lever — widening the one-candidate door
+after a shallow tilt is chosen — not a pre-decision alternative. **(ii) Grounding
+recount**: both-arms-free = 6 points (5 none-sheet + 1 pinned) / 18 ungrounded —
+matches this desk's L-zero set exactly (R-zeros ⊂ L-zeros); (0.280,20) IS
+grounded (L1/R4) ⇒ its +22.7 sits on a pose the cell actually adopts;
+⛔ (0.220,45) is NOT (L free 0 both sheets ⇒ winners are best-of-REJECTED) ⇒ p5
+WITHDRAWS §25-4's "(0.22,45) does not interleave" — a note negated with an
+ungrounded reading. Desk propagation: §514(d) + §515(f) inline-tagged this turn;
+m846 item 3(i) chased to p4 with the correction (m850). **(iii) ⭐⭐ Falsified →
+UNREPRODUCIBLE**: the note's pair was recorded when the mast had NO crown — first
+crown commit 77cfd640b9 (2026-07-28 23:05, desk-verified by git -S) — before that
+p5's §19 branch, before that a plate ⇒ NEITHER sheet reproduces the note's cell ⇒
+same consequence (the note cannot bind as written), different reason (the
+original measurement is not thereby wrong). **(d) ⛔ The phantom cite**: §25-7's
+heading cites "w2:p6 -158 / -159" — PROVEN nonexistent at write time: p6's
+counter stood at -158 until TODAY 08:05, when their -159 arrived (carrying
+synthesis rows, not the scope corrections) ⇒ "/-159" referenced a message that
+did not exist when cited; heading correction = p5's court (returned, m849).
+**(e) "Never ran", half-superseded between measurements**: TRUE at p5's 08:01
+read (no artifact, no commit); at this desk's 08:02 pane read p4 had RESUMED and
+the coarse crown sweep was mid-run ⇒ no re-order dispatched — m846 remains the
+standing order, executing.
+
+## 518. The register rows the synthesis — and catches the stopped/running axis at its other end
+
+From p6's -159 (08:05:02; -158 → -159 sequential — and thereby the §517(d)
+proof). **(a) Pins verified**: register @ 5932ac0c58, sha 663832dd…f3b6 MATCH;
+their independent recount of the pass point (1-of-24, 2.84×, R-free 4 = table
+max, pinned sheet empty) agrees with §515(c). **(b) ⭐⭐ The escalation anchor
+fetched at the SOURCE, twice**: p6 read the reference ORIGINALS —
+ur15-dual-arm-cell.md:11 AND .json:11 both "yoke_angle_deg 45.0" (this desk
+re-read both lines: MATCH) + spec default 45.0 with the env override ⇒ the "45 is
+the reference's own value" leg is source-grounded, not relay; Rs placement
+preserved (p6 does not rule). **(c) ⭐⭐ The lane is LIVE — the same axis caught
+at its OTHER end**: commit silence since c985277ba5 nearly rowed as "stopped";
+p6 checked PROCESSES before writing — sweep PID 132522 (their 08:02:54),
+MUJOCO_LOG fresh, driver PID live ⇒ general form: **commit-history silence ≠ not
+running; a bank-after-run lane emits no commits mid-run by design.** Both ends
+rowed (RUNNING unobserved before; STOPPED nearly written unobserved now).
+**(d) ⚠ Pre-arrival gate flags (p6's two, this desk corroborating and extending
+at 08:06:58–08:09:09)**: (i) sweep outputs live in ANOTHER session's /tmp
+scratchpad (crown_at_pass.log; now also crown_at_pass_coarse.txt,
+crown_fine.log) ⇒ NOT pinnable; register and this gate take nothing until banked
+to a persistent path with full sha. (ii) the running driver is UNCOMMITTED — p6
+read +37/−7 (08:04); this desk +41/−8 (08:06:58, mtime 08:04:36): p4 PATCHED the
+driver IN-FLIGHT between runs (argv-selectable radii, py_compile-checked) ⇒ the
+package must commit the final driver AND declare which driver version produced
+which table. (iii) this desk's observations: the COARSE run (m846's five radii)
+is COMPLETE (its PID gone; the preserve-cp of the CROWN_RADIUS filename to
+scratchpad observed in p4's command chain) and a FINE sweep
+(none/0.005/0.010/0.015/0.020 at spread 0.280 / tilt 20) launched DETACHED
+(setsid nohup — the session-death lesson applied), PID 145912 live at 08:06:58.
+At 08:09:09 the worktree CROWN_RADIUS_SWEEP_20260729.txt is CLEAN with (a)'s
+header ⇒ either never overwritten or already restored — the package should say
+which in one line; no hygiene defect stands NOW; the coarse table needs its OWN
+filename at bank. [Inference, tagged as such and kept off the messages: the fine
+bracket (none→0.020] suggests the coarse boundary sits at or below 0.020 — the
+package speaks, not this desk.] Flags chased to p4 (m850). **(e)** Unmeasured
+list carried intact (§25-5 + "start poses ≠ paths" scoping ALL clearance
+conclusions in the lane). p5's fine-bracket self-extension noted to p5 (m849):
+consistent with the delegated OUTPUT spec ("the largest radius that keeps the
+pass"); whether the five-radius menu was binding = p5's court.
+
+## 519. The crown answer lands — no head fits the one passing mounting
+
+From p4's -210 (08:09:11; -209 → -210 sequential). **(a) Pins verified**: commit
+4cd3dd645f ("Sweep the crown where the mounting passes, and find no head fits",
+08:08:44) contains the artifact AND the driver;
+CROWN_AT_PASSING_MOUNTING_20260802.txt sha 4b505566…d782 machine-MATCH at commit
+and worktree; the (a)-file restore machine-verified (worktree CROWN_RADIUS… ==
+banked @ 528654735e == fa74c84a…722f, p4's claimed value). **(b) ⭐⭐ The answer
+to p5's delegated measurement**: NO largest passing radius exists — only "none"
+passes; 0.005 already fails ⇒ the boundary lies in (0, 0.005] m, below the
+cable's own radius ("below anything that is a head"). **(c) ⭐⭐ The two failures
+SEPARATE** (finer than the pass column): the left arm's single clear pose is
+GONE at r = 0.005 while the arms are still +8.9 mm apart; arm-arm contact only
+starts at r = 0.010 ⇒ the crown closes this mounting by TAKING THE LEFT ARM'S
+LAST CLEAR POSE FIRST, at wire-thin radius — not by arm collision. L solved = 13
+in every row: the solutions never vanish, only their clearance does. **(d)
+Controls, desk-checked to the digit**: grid none-sheet (0.280,20) (:31 = 13/1,
+16/4, +22.7) == this table's none row; grid pinned (0.280,20) (:43 = 13/0, 16/4,
++0.0) == the 0.110 row — two sweeps, separate processes, hours apart. §518(d)'s
+tagged inference ("boundary at or below 0.020") SUPERSEDED by the measurement —
+consistent, and the truth finer than the guess. **(e) Hygiene, verified**: the
+mounting now printed in the header AND every row (:1/:8 — the artifact's own
+header :4-6 names the slice error it prevents); the (a)-name overwrite disclosed
+and REVERSED with sha proof; the driver committed. **(f) ⚠ One provenance
+nuance, ASKED not returned (m850)**: the coarse five ran on the uncommitted
++37/−7 driver (never in git, unreconstructable); the fine set (0.005/0.010/0.015
++ re-runs of none and 0.020) on the argv-patched committed version ⇒ the overlap
+rows are the empirical bridge — one line from p4 confirming the fine re-runs
+matched the coarse values (and which run's values the 8-row table carries)
+closes the two-version gap. (The in-flight patch observed at this desk as
+radii-list plumbing only, §518(d)(ii).) **(g)** No verdict in the artifact
+(stated twice); what to build = p5's call, Rs settles. The measured TENSION now
+on p5's desk: their -181(3) "a mount needs a head — none is a bound, not a
+design" vs this table's "no head ≥ 5 mm fits at (0.280,20)" — with §25-5's
+neighbourhood (spread ±0.02, tilt 15/25) the only named unmeasured margin.
+Routed: p5 (m849 — the answer + the tension + the phantom-cite return), p4
+(m850 — chase-correction + the one-line ask), p6 (m851 — rows + -159
+verification report).
