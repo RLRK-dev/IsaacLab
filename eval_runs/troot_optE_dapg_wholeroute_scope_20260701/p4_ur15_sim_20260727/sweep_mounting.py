@@ -65,18 +65,51 @@ def main() -> int:
            "per point, stopped after the start-pose lines.  No route run, no reimplementation.", ""]
 
     # ---------------- (a) crown radius ----------------
+    # ⛔ WHERE the table was taken is part of the table.  The first crown sweep was run entirely
+    # at the built tilt of 45 and I reported its result as a property of the crown; the grid then
+    # showed it was a property of that row.  So the mounting this sweep sits on is read from the
+    # environment and printed in the header AND on every line -- a radius column with no tilt
+    # beside it is the shape of the mistake, not just how it was written up.
+    _sp = os.environ.get("YOKE_SPREAD_OVERRIDE", "0.220 (built default)")
+    _ti = os.environ.get("TILT_DEG_OVERRIDE", "45 (built default)")
     out.append("(a) CROWN RADIUS.  'none' removes the geometry entirely -- the lower bound p5")
-    out.append("    asked to include.  Default is 0.110 = YOKE_SPREAD/2.")
-    out.append(f"{'crown r':>9s}  {'L solved':>8s} {'L free':>7s}  {'R solved':>8s} {'R free':>7s}"
-               f"   arms closest [mm]")
-    radii = ["none", "0.020", "0.050", "0.080", "0.110"] if which in ("a", "both") else []
+    out.append(f"    asked to include.  ⛔ TAKEN AT spread={_sp}, tilt={_ti} deg -- every row")
+    out.append("    below is that mounting with only the radius moving.  Nothing here is a")
+    out.append("    property of the crown in general.")
+    out.append("    PASS = L free >= 1 AND R free >= 1 AND the arms not interleaving.")
+    out.append(f"{'crown r':>9s} {'spread':>7s} {'tilt':>5s}  {'L solved':>8s} {'L free':>7s}  "
+               f"{'R solved':>8s} {'R free':>7s}   {'arms closest [mm]':>17s}  PASS?")
+    # radii may be given on the command line after the "a" selector, so the boundary can be
+    # resolved without re-running the coarse pass.
+    _extra = [v for v in sys.argv[2:]] if len(sys.argv) > 2 else []
+    radii = (_extra or ["none", "0.020", "0.050", "0.080", "0.110"]) if which in ("a", "both") else []
+    _passing = []
     for r in radii:
-        cnt, why, gap, who = one({"CROWN_R_OVERRIDE": r}, tmp / f"crown_{r}.log")
+        cnt, why, gap, who = one({"CROWN_R_OVERRIDE": r}, tmp / f"crown_{r}_{_sp}_{_ti}.log")
         L, R = cnt.get("L", (None, None)), cnt.get("R", (None, None))
-        out.append(f"{r:>9s}  {str(L[0]):>8s} {str(L[1]):>7s}  {str(R[0]):>8s} {str(R[1]):>7s}"
-                   f"   {gap}")
+        try:
+            _clear = float(gap) > 0
+        except ValueError:
+            _clear = True          # nothing within the search radius = not interleaving
+        _pass = bool(L[1] and R[1] and _clear)
+        if _pass:
+            _passing.append(r)
+        out.append(f"{r:>9s} {_sp[:7]:>7s} {_ti[:5]:>5s}  {str(L[0]):>8s} {str(L[1]):>7s}  "
+                   f"{str(R[0]):>8s} {str(R[1]):>7s}   {gap:>17s}  "
+                   f"{'PASS' if _pass else 'fail'}")
         out.append(f"           L rejected against: {why.get('L', '-')}")
-        print(f"crown {r}: L {L}  R {R}  gap {gap}", flush=True)
+        print(f"crown {r}: L {L}  R {R}  gap {gap}  -> {'PASS' if _pass else 'fail'}", flush=True)
+    if radii:
+        out.append("")
+        if _passing:
+            _num = [x for x in _passing if x != "none"]
+            out.append(f"⭐ PASSING radii at this mounting: {_passing}")
+            out.append(f"   -> largest radius that keeps all three conditions: "
+                       f"{max(_num, key=float) if _num else 'none (only with the crown removed)'}")
+            out.append(f"   ⚠ largest SWEPT, not a boundary: the limit lies between it and the "
+                       f"next value up, which failed.")
+        else:
+            out.append("⛔ No radius at this mounting keeps all three conditions.")
     out.append("")
 
     # ---------------- (b) spread x tilt, with the interleave readout ----------------

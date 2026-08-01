@@ -1,0 +1,38 @@
+CROWN RADIUS AT THE ONE PASSING MOUNTING -- spread 0.280, tilt 20 deg
+p5 -181(3).  PASS = L free >= 1 AND R free >= 1 AND the arms not interleaving.
+method: the real driver, once per radius, stopped after the start-pose lines.  No route run.
+⛔ Every row is that mounting with ONLY the radius moving.  Nothing here is a property of the
+   crown in general -- the previous crown table was taken entirely at tilt 45 and I reported its
+   result as one, which the grid then had to correct.
+
+ crown r   L solved  L free   R solved  R free   arms closest [mm]   PASS?
+    none         13       1         16       4              +22.7    PASS
+   0.005         13       0         16       4               +8.9    fail
+   0.010         13       0         16       4               +0.0    fail
+   0.015         13       0         16       4               +0.0    fail
+   0.020         13       0         16       4               +0.0    fail
+   0.050         13       0         16       4               +0.0    fail
+   0.080         13       0         16       3               +0.0    fail
+   0.110         13       0         16       4               +0.0    fail
+
+ANSWER TO THE QUESTION ASKED
+  There is no largest passing radius.  Only "none" passes.  The largest radius swept that keeps
+  all three conditions is zero -- the crown removed -- and the boundary lies in (0, 0.005] m,
+  below the cable's own radius and below anything that is a head.
+
+TWO CONTROLS, both from the separately-run 24-point grid, both reproduced exactly here:
+  - grid, crown-none sheet at (0.280, 20): L (13,1) R (16,4) +22.7   <- this table's "none" row
+  - grid, pinned sheet   at (0.280, 20): L (13,0) R (16,4)  +0.0   <- this table's "0.110" row
+  Two sweeps run hours apart, same numbers to the digit.
+
+⭐ THE TWO FAILURES SEPARATE, and the finer reading is worth more than the pass column:
+  - the LEFT ARM's single clear pose is gone by r = 0.005, while the arms are still 8.9 mm apart.
+  - the arms only start TOUCHING at r = 0.010.
+  So the crown does not close this mounting by making the arms collide with each other; it closes
+  it by taking the left arm's last clear pose first, at a radius small enough to be a wire.
+
+⚠ SCOPE, carried from the grid: the interleave column is read at the start poses the solver
+  CHOSE.  It says "the arms as placed touch", not "no placement clears".  And L solved stays at
+  13 in every row -- the solutions do not disappear, only their clearance does.
+
+⛔ Not a verdict and not a recommendation.  What to build is p5's call and Rs's to settle.
