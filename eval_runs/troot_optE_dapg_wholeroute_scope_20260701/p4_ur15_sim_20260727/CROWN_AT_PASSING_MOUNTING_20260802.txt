@@ -17,8 +17,13 @@ method: the real driver, once per radius, stopped after the start-pose lines.  N
 
 ANSWER TO THE QUESTION ASKED
   There is no largest passing radius.  Only "none" passes.  The largest radius swept that keeps
-  all three conditions is zero -- the crown removed -- and the boundary lies in (0, 0.005] m,
-  below the cable's own radius and below anything that is a head.
+  all three conditions is zero -- the crown removed -- and the boundary lies in (0, 0.005] m.
+  ⛔ CORRECTED (p6 -160, 2026-08-02).  This line first said the boundary lies "below the cable's
+  own radius".  The data does not carry that: the cable's radius is 0.004 m and 0.004 was never
+  swept, so the crossing can sit anywhere in (0.004, 0.005].  What the eight rows do support is
+  that the boundary is below the cable's DIAMETER of 0.008 m, and that zero is the only radius
+  demonstrated to pass.  The conclusion is unchanged -- a real head is far above either figure --
+  but the sentence claimed a resolution the sweep does not have.
 
 TWO CONTROLS, both from the separately-run 24-point grid, both reproduced exactly here:
   - grid, crown-none sheet at (0.280, 20): L (13,1) R (16,4) +22.7   <- this table's "none" row

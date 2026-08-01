@@ -112,6 +112,45 @@ def main() -> int:
             out.append("⛔ No radius at this mounting keeps all three conditions.")
     out.append("")
 
+    # ---------------- (c) crown HEIGHT, radius derived so the head reaches the mounts -------
+    if which == "c":
+        out.append("(c) CROWN HEIGHT.  p5 §26-3: CROWN_Z0 is swept and the RADIUS FOLLOWS, as")
+        out.append("    R = (SHOULDER_HEIGHT - CROWN_Z0)/2, so the head's top lands exactly on")
+        out.append("    the mounts at every point.  ⛔ This is what the radius sweep was NOT:")
+        out.append("    there a 5 mm head had its top 190 mm below the mounts and was carrying")
+        out.append("    nothing.  Each row here is a head that actually reaches.")
+        out.append(f"    ⛔ TAKEN AT spread={_sp}, tilt={_ti} deg.")
+        out.append("    PASS = L free >= 1 AND R free >= 1 AND the arms not interleaving.")
+        out.append(f"{'Z0 [m]':>7s} {'R [m]':>6s} {'top':>6s}  {'L solved':>8s} {'L free':>7s}  "
+                   f"{'R solved':>8s} {'R free':>7s}   {'arms closest [mm]':>17s}  PASS?")
+        _pass_z = []
+        for z0 in (_extra or ["1.330", "1.380", "1.430", "1.470", "1.510"]):
+            cnt, why, gap, who = one({"CROWN_Z0_OVERRIDE": z0}, tmp / f"z_{z0}_{_sp}_{_ti}.log")
+            L, R = cnt.get("L", (None, None)), cnt.get("R", (None, None))
+            _r = (1.530 - float(z0)) / 2.0
+            try:
+                _clear = float(gap) > 0
+            except ValueError:
+                _clear = True
+            _pass = bool(L[1] and R[1] and _clear)
+            if _pass:
+                _pass_z.append(z0)
+            out.append(f"{z0:>7s} {_r:6.3f} {float(z0)+2*_r:6.3f}  {str(L[0]):>8s} "
+                       f"{str(L[1]):>7s}  {str(R[0]):>8s} {str(R[1]):>7s}   {gap:>17s}  "
+                       f"{'PASS' if _pass else 'fail'}")
+            out.append(f"           L rejected against: {why.get('L', '-')}")
+            print(f"Z0 {z0} (R {_r:.3f}): L {L} R {R} gap {gap} -> "
+                  f"{'PASS' if _pass else 'fail'}", flush=True)
+        out.append("")
+        out.append(f"⭐ PASSING heights: {_pass_z or 'none'}")
+        if _pass_z:
+            out.append(f"   -> lowest passing underside (fattest head that still passes): "
+                       f"{min(_pass_z, key=float)}  = R {(1.530-float(min(_pass_z, key=float)))/2:.3f}")
+        out.append("⛔ Not a verdict.  What to build is p5's call and Rs's to settle.")
+        (HERE / "CROWN_HEIGHT_SWEEP_20260802.txt").write_text("\n".join(out) + "\n")
+        print("written")
+        return 0
+
     # ---------------- (b) spread x tilt, with the interleave readout ----------------
     out.append("(b) YOKE_SPREAD x TILT, with the 88 mm interleave read at every point.")
     out.append("    ⛔ TWO SHEETS (p5 -177(3)): every point is run with the crown REMOVED and")

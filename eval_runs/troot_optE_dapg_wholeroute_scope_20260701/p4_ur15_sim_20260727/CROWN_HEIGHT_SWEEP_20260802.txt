@@ -1,0 +1,57 @@
+MOUNTING SWEEPS -- p5 -176(4).  Same path as the other sweeps: the real driver, once
+per point, stopped after the start-pose lines.  No route run, no reimplementation.
+
+(a) CROWN RADIUS.  'none' removes the geometry entirely -- the lower bound p5
+    asked to include.  ⛔ TAKEN AT spread=0.280, tilt=20 deg -- every row
+    below is that mounting with only the radius moving.  Nothing here is a
+    property of the crown in general.
+    PASS = L free >= 1 AND R free >= 1 AND the arms not interleaving.
+  crown r  spread  tilt  L solved  L free  R solved  R free   arms closest [mm]  PASS?
+
+(c) CROWN HEIGHT.  p5 §26-3: CROWN_Z0 is swept and the RADIUS FOLLOWS, as
+    R = (SHOULDER_HEIGHT - CROWN_Z0)/2, so the head's top lands exactly on
+    the mounts at every point.  ⛔ This is what the radius sweep was NOT:
+    there a 5 mm head had its top 190 mm below the mounts and was carrying
+    nothing.  Each row here is a head that actually reaches.
+    ⛔ TAKEN AT spread=0.280, tilt=20 deg.
+    PASS = L free >= 1 AND R free >= 1 AND the arms not interleaving.
+ Z0 [m]  R [m]    top  L solved  L free  R solved  R free   arms closest [mm]  PASS?
+  1.330  0.100  1.530        13       0        16       4                +0.0  fail
+           L rejected against: g6 on L_forearm_link vs crown x5, g6 on L_forearm_link vs stem x4, the other arm x3, g8 on L_wrist_2_link vs stem x2, g6 on L_forearm_link vs crown at 4/6 along the move (on the way) x1, g7 on L_wrist_1_link vs stem x1
+  1.380  0.075  1.530        13       0        16       4                +0.0  fail
+           L rejected against: g6 on L_forearm_link vs stem x5, the other arm x3, g8 on L_wrist_2_link vs stem x3, g6 on L_forearm_link vs crown x3, g5 on L_upper_arm_link vs stem at 3/6 along the move (on the way) x1, g7 on L_wrist_1_link vs stem x1
+  1.430  0.050  1.530        13       0        16       4                +0.0  fail
+           L rejected against: g6 on L_forearm_link vs stem x5, g8 on L_wrist_2_link vs stem x3, g6 on L_forearm_link vs crown x3, the other arm x2, g5 on L_upper_arm_link vs stem at 3/6 along the move (on the way) x1, g7 on L_wrist_1_link vs stem x1
+  1.470  0.030  1.530        13       0        16       4                +8.9  fail
+           L rejected against: g6 on L_forearm_link vs stem x5, the other arm x3, g8 on L_wrist_2_link vs stem x3, g6 on L_forearm_link vs crown x3, g5 on L_upper_arm_link vs stem at 3/6 along the move (on the way) x1, g7 on L_wrist_1_link vs stem x1
+  1.510  0.010  1.530        13       0        16       4                +8.9  fail
+           L rejected against: g6 on L_forearm_link vs stem x5, g8 on L_wrist_2_link vs stem x3, g6 on L_forearm_link vs crown x3, the other arm x2, g5 on L_upper_arm_link vs stem at 3/6 along the move (on the way) x1, g7 on L_wrist_1_link vs stem x1
+
+⭐ PASSING heights: none
+⛔ Not a verdict.  What to build is p5's call and Rs's to settle.
+
+--------------------------------------------------------------------------------------------
+READING -- p4, after the run.  Measurements above; this block is interpretation.
+
+1. Every height fails, and every one of them fails on the SAME condition: the left arm keeps
+   zero clear start poses at all five.  The right arm keeps four throughout, and at the two
+   highest undersides the arms are not even touching (+8.9 mm) -- so the failure is not the arms
+   meeting each other and it is not the right arm.  It is the left arm's clearance, alone.
+
+2. ⭐ This is the sharper form of the radius result, and it removes that result's escape hatch.
+   The radius sweep could be answered with "those small heads were not carrying anything" -- and
+   correctly, since a 5 mm head's top sat 190 mm below the mounts.  Here every head reaches the
+   mounts by construction, R = (1.530 - Z0)/2, and the answer does not change: a head that
+   actually spans from its underside to the mounts closes the left arm at every height swept,
+   down to a 10 mm radius raised to 1.510.
+
+3. ⇒ Taken with the radius sweep, what has now been measured at this mounting is: the left arm
+   has one clear start pose with no crown present, and none with any crown that was tried --
+   thin or thick, low or high, reaching or not.
+
+4. ⚠ What is NOT covered.  The cross-section was not swept: every point here is the same capsule,
+   only scaled and moved.  p5's §26-4 says the shape has never been swept either, and nothing in
+   these two tables speaks to a head of a different form -- a plate, a yoke with a gap, anything
+   that is not a round bar between the mounts.  ⛔ "No crown passes" is true of the crowns tried.
+
+⛔ Not a verdict and not a recommendation.  What to build is p5's call and Rs's to settle.

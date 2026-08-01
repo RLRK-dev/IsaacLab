@@ -417,10 +417,20 @@ COLUMN_R = 0.102                        # spec §6.4j -- the shared column both 
 # 0.76 m wide and 0.32 m tall -- a mushroom cap sitting on the post.  In the reference the head is
 # barely wider than the column itself.  p5's own floor is spread/2, so that is what it takes: the
 # smallest head that still reaches both mounts.
+# ⭐ p5 §26-3: the height is the free variable and the RADIUS FOLLOWS IT.  The head's top is
+# CROWN_Z0 + 2R, and a head whose top does not reach the mounts at SHOULDER_HEIGHT is not
+# carrying anything -- which is what the radius sweep was actually made of: at r = 0.005 the top
+# sat 190 mm below the mounts.  So when CROWN_Z0_OVERRIDE is set, R is derived as
+# (SHOULDER_HEIGHT - CROWN_Z0) / 2 and every point of that sweep is a head that reaches.
+# ⚠ Precedence: an explicit CROWN_R_OVERRIDE still wins, so the earlier radius sweep is
+# reproducible unchanged.  With neither set, nothing moves: R = YOKE_SPREAD / 2 as built.
+CROWN_Z0_OVERRIDE = _os_module.environ.get("CROWN_Z0_OVERRIDE")
+CROWN_Z0 = float(CROWN_Z0_OVERRIDE) if CROWN_Z0_OVERRIDE else 1.330
 CROWN_R = (0.0 if (CROWN_R_OVERRIDE or "").lower() == "none"
-           else float(CROWN_R_OVERRIDE) if CROWN_R_OVERRIDE else YOKE_SPREAD / 2)
+           else float(CROWN_R_OVERRIDE) if CROWN_R_OVERRIDE
+           else (SHOULDER_HEIGHT - CROWN_Z0) / 2.0 if CROWN_Z0_OVERRIDE
+           else YOKE_SPREAD / 2)
 # p5 bank #22 floor -- the head only has to reach the mounts
-CROWN_Z0 = 1.330                        # p5 bank #22 -- where the crown's underside sits
 CROWN_ZC = CROWN_Z0 + CROWN_R           # its axis, so the underside lands exactly on CROWN_Z0
 # The cell's own home pose, left arm, from ur15-dual-arm-cell.md.  ⭐ The right arm takes the same
 # values: it is the exact kinematic mirror and its sign convention was preserved when it was built,
