@@ -14501,7 +14501,10 @@ verbatim "p5 bank #22 -- where the crown's underside sits"), axis = Z0 + R
 (:424), top = 1.330 + 2R; the mount sits at 1.530 (= SHOULDER_HEIGHT :349 =
 0.37 + 0.58×2) ⇒ a mount-reaching head requires R = 0.100 EXACTLY (desk: (1.530
 − 1.330)/2 = 0.100; 0.005's top = 1.340, 190 mm short; 0.080 → 1.490; 0.110 →
-1.550) ⇒ **the radius sweep's 0.005–0.080 measured objects that never reach the
+1.550) [⛔ §526: "EXACTLY" is the equality echo, p6-returned — reaching is an
+INEQUALITY (top ≥ mount ⇒ R ≥ 0.100, a HALF-LINE; the built cell carries at
+0.110, top 1.550). The equality belongs to the SWEEP's minimal-head design,
+not to the requirement] ⇒ **the radius sweep's 0.005–0.080 measured objects that never reach the
 mount; the only "head" is ≈0.100, and it blocks** ⇒ fixing Z0 determined the one
 carriable head, and that head takes the left arm's last clean pose — the radius
 was never a free variable. **(c) ⛔ The chain owned**: Z0 = 1.330 is p5's OWN
@@ -14644,3 +14647,34 @@ with care.] **(e)** p5's tension is now measured on two of its three axes:
 radius DEAD, height DEAD, SHAPE unmeasured (+ the neighbourhood ±0.02 /
 tilt 15,25). Routed: p5 (m859 — the answer + the remaining-hope reduction),
 p6 (m860 — rows + the supersession + the two cautions).
+
+## 526. The register returns the equality — carriable is a half-line, and a race resolves one sub-claim
+
+From p6's -162 (08:30:26; -161 → -162 sequential; register @ b5db4a5b76, sha
+2e629de7…ce5a MATCH). **(a) The pin release**: §26 re-pinned after their OWN
+re-measurement of bank #34 (sha, −1/+4, verbatim preservation — all confirmed
+their side). **(b) ⛔ Return ①, desk-CONFIRMED, with a RACE note**: "reaches"
+is an INEQUALITY — CROWN_Z0 + 2R ≥ SHOULDER_HEIGHT ⇒ R ≥ 0.100, a HALF-LINE,
+not a point (the built cell itself carries at R = 0.110, top 1.550 = 20 mm
+above the mounts — desk arithmetic) ⇒ §26-2's "R = 0.100 ただ 1 つ" and
+§26-7's "担げる唯一の半径 0.100" fail on UNIQUENESS, and §521(b)'s "requires
+R = 0.100 EXACTLY" echoed the same defect (tagged this turn). ⚠ THE RACE:
+-162 (08:30:26) was written before p6 ingested the height table (-212 landed
+08:28:28; m860 not yet delivered) — its sub-claim "0.100 was never swept" was
+true OF THE RADIUS SWEEP but is ALREADY CLOSED by CROWN_HEIGHT row 1 (Z0
+1.330, R 0.100, top 1.530: L free 0, fail) ⇒ the supported statement is now:
+**the carriable half-line R ≥ 0.100 has TWO measured points — 0.100 (height
+row 1) and 0.110 (radius sweep) — and BOTH block; the cell-rule natural head
+at this mounting, R = YOKE_SPREAD/2 = 0.140 (top 1.610), remains UNMEASURED**
+(return ②, standing; desk arithmetic checked). Main conclusion untouched
+(0.005 already takes the left arm's pose). **(c) ⭐ The strengthening reading
+banked**: R = (SHOULDER − Z0)/2 is each height's MINIMAL reaching head = the
+least-blocking candidate ⇒ if THAT blocks, the height is dead — a strong
+one-directional refutation; the equality in the sweep is deliberate design
+(spec :424 verbatim confirmed), distinct from the equality-as-requirement
+defect. **(d)** #60 now three subjects (radius, height, cross-section); the
+causal chain and p5's shape-remand rowed; "citations point only at things
+seen" preserved as the worse side of the version-mix-up axis. Routed: p5
+(m859 REVISED pre-send — the height answer + both returns + the race
+resolution in ONE message), p6 (m860 REVISED — the -162 disposition + the
+race note).
