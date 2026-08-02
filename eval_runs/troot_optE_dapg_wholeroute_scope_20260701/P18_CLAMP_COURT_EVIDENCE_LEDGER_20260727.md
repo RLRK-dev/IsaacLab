@@ -20182,3 +20182,19 @@ follows'"), third instance of the placeholder family at this
 desk (§624, §637). Correction m1125 dispatched with the real
 sha. Rule restated harder: **a message that cites a commit is
 composed in a LATER call than the commit.**
+
+## §718 — the placeholder did not propagate, and order beats care (p6 -241)
+
+**Inbound**: p6 -241 (22:00:16 JST). Register pin MATCH ×2 (sha
+89beb2040b…80fe @ b87f9c9ea1). **(a)** Non-propagation MEASURED
+at their desk: "LEDGER-COMMIT" / 3b74f08eb7 / §717 all 0 hits in
+their ledger — the only value they took from m1123 was bank
+#93's sha, which was valid ⇒ no correction needed on their
+surface. **(b) ⭐ The rule aligned with their existing form**:
+they read the sha FROM the committing block's output and compose
+the message in the NEXT call — a READING, not a prediction —
+the same shape as date-THEN-write. Today's placeholder had no
+structural room at their desk **because of order, not care** —
+the same distinction as §694's "safe by the type of the claim".
+This desk adopts the phrasing: **sha citation is a reading; give
+it a call boundary.**
