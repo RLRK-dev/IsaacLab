@@ -1719,6 +1719,31 @@ for _round in range(3):
         START[t] = solve_ik(t, GRASP1[t], tries=int(os.environ.get("START_TRIES", "24")),
                             near=START[t],
                             other=START["R" if t == "L" else "L"], quiet=(_round < 2))
+        # ⛔ Without this the L-vs-final-R check below cannot be read.  If the right arm does not
+        # move between rounds, "the left arm is still clear against the FINAL right pose" and "the
+        # final right pose IS the one it was already checked against" produce the identical line --
+        # a test that cannot come out differently.  Behind the same flag, so default output is
+        # unchanged.
+        if os.environ.get("EXTRA_L_ROUND"):
+            print(f"[steps] round {_round} {t}: q = [" +
+                  " ".join(f"{v:+.6f}" for v in START[t]) + "]")
+
+# ⭐ EXTRA_L_ROUND -- the one leg of the conjunction that was being taken on trust.
+# SIDES iterates L then R, so the FINAL left pose was cleared against the round-1 right arm while
+# the final right pose was cleared against the final left.  The interleave below covers the pair
+# at its ENDPOINT, but the left arm's "on the way" checks ran against a right arm that has since
+# moved -- so a PASS said the arms are clear where they end up, not that the left arm's approach
+# is clear of where the right arm ends up.  This re-solves the LEFT arm once more with `other` set
+# to the FINAL right pose, using the driver's own predicate rather than a re-implementation of it.
+# ⛔ START is NOT overwritten: this reports, it does not change the run.  solve_ik seeds its own
+# generator, so the extra solve leaks no randomness into what follows.  Default off.
+if os.environ.get("EXTRA_L_ROUND"):
+    _lq = solve_ik("L", GRASP1["L"], tries=int(os.environ.get("START_TRIES", "24")),
+                   near=START["L"], other=START["R"], quiet=False, label="L-vs-FINAL-R")
+    _same = float(np.abs(np.asarray(_lq) - np.asarray(START["L"])).max())
+    print(f"[steps] L-vs-FINAL-R: the pose this solve chose differs from the one the run uses by "
+          f"{_same:.6f} rad at its largest joint "
+          f"({'the same pose' if _same < 1e-3 else '⚠ A DIFFERENT POSE'})")
 
 # Both arms placed at the poses just solved for the commanded span, on a throwaway state, and the
 # gap between them read there.  The live d is not written: the interleave question is about the

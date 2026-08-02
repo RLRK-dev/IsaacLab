@@ -127,6 +127,50 @@ that the left arm's approach is clear of where the right arm ends up.
 at the end of each round, so the round-to-round movement is visible, and re-run the path check for
 L against the final R. Small, and it is the only part of the conjunction currently taken on trust.
 
+### ⛔ Run 1 was void — and I nearly reported it as a pass
+
+`EXTRA_L_ROUND=1` re-solves the left arm once more with `other` set to the **final** right pose,
+using the driver's own predicate (`ur15_steps_wired.py:1731-1746`; `START` is not overwritten, so
+the run is unchanged). At both witnesses it returned **the identical count and the identical
+pose**:
+
+| centre | original solve (vs round-1 R) | vs FINAL R | chosen pose differs by |
+|---|---|---|---|
+| −0.150 | 140 solved / 15 clear | 140 / 15 | **0.000000 rad** |
+| −0.200 | 138 solved / 31 clear | 138 / 31 | **0.000000 rad** |
+
+That reads as "the left arm is clear against the final right pose". ⛔ **It is not evidence**: if
+the right arm never moved between rounds, "clear against the final R" and "clear against the R it
+was already checked against" print exactly the same line. A test that cannot come out differently
+is not a test, and I could not tell which it was — because the other half of my own proposal, the
+per-round pose print, was not implemented.
+
+**With the print in** (same flag, `:1727-1729`), at both centres:
+
+```
+round 0 L … round 1 L … round 2 L   max |q − round0| = 0.000000, 0.000000
+round 0 R … round 1 R … round 2 R   max |q − round0| = 0.000000, 0.000000
+```
+
+⇒ **Neither arm moves after round 0.** The test was void, as suspected.
+
+### ⭐ What the void test does settle, and what it does not
+
+1. **At these two witnesses the §c caveat evaporates** — not because the left arm was re-tested,
+   but because **there is no stale partner**: the pose it was cleared against and the pose it ends
+   up beside are the same object. The conjunction at −0.150 and −0.200, which is what the current
+   recommendation rests on, is clean on all three legs.
+2. ⛔ **The general concern is NOT closed.** It needs a point where the poses *do* move between
+   rounds, and whether such a point exists is unmeasured. §c stands as written for the grid at
+   large.
+3. ⚠ **A narrower observation, stated at its own width:** round 0 solves the left arm against the
+   **home** right arm and rounds 1–2 against the solved one — different partners — and the left
+   arm returned the same pose each time. So at these centres the partner does not decide the left
+   arm's *chosen pose*. It does **not** follow that the partner leaves the survivor *set* alone:
+   rounds 0 and 1 are quiet, so their counts were never printed.
+4. The three-round loop therefore does no work after round 0 here — three solves for one result.
+   That is the loop converging, not a defect; recorded because the cost is real.
+
 ---
 
 ## (d) The `NOT MEASURED` row cannot tell a cap from a crash
