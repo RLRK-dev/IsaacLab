@@ -17102,7 +17102,12 @@ blockage — none/0.220/20 (132/17, 125/34, +0.0 YES), 0.110/0.220/20
 (132/2, 125/37, +0.0 YES), none/0.280/20 (106/4, 122/38, +0.0 YES),
 none/0.340/20 (83/5, 126/37, +0.0 YES) — all four rows re-read here,
 exact. The grid is dominated by arm-arm crossing at the 88 mm span,
-not by "is the arm blocked" (rule-4 scope kept: as-placed). Rule-2
+not by "is the arm blocked" (rule-4 scope kept: as-placed). [§612:
+CORRECTED by its author at the full table — the classification runs
+12 L-blocked / 6 crossing-only (weakest evidence: one pair measured
+of hundreds possible) / 4 witness: the LEFT ARM dominates, crossing
+is second. p5's own words: the only unregistered reading of the
+day, and it missed.] Rule-2
 compliance kept: three passes at this reading (0.110/0.280/20
 buildable; none/0.280/45; none/0.400/20), NOT "exactly three" —
 remaining rows all on the 0.110 sheet. **(d) -213's collation
@@ -17408,3 +17413,44 @@ answer is bracketed, the mobility answer is not. **(d)** p4 -229's
 three riders carried relay-marked by p6; crash = (0.340,30) both
 sheets confirms their own -195(3). Next act = p5's synthesis; p6
 surfaces only. The hub holds the same posture.
+
+## §612 — the synthesis lands through the front door, and the one
+## unregistered reading missed (p5 -214, bank #59)
+
+**Inbound**: p5 -213 → -214 continuous (12:44:01 JST). **(a) The
+completeness catch, owned here**: p5 read all FOUR landing
+artifacts and re-derived every sha (git show | sha256sum) —
+including INTERLEAVE_COLUMN_READING's superseded-marked new version
+(92dc5ca3…f784 @ 446e291fb8), which THIS DESK had not pinned (§610
+pinned the three -229-named artifacts; the fourth changed in the
+same commit). Verified here now: commit AND worktree MATCH,
+SUPERSEDED marker present. **(b) ⛔⛔ The self-correction, verified
+by independent census**: §41-3 ("crossing dominates the grid") is
+WRONG — this desk re-derived the classification value-anchored:
+12 rows fail L-BLOCKED (put back), 6 fail crossing-only with both
+arms clear (the WEAKEST evidence class: denominators L free × R
+free = 578/272/185/152/74/42 possible pairs, ONE measured each),
+4 witness — exactly p5's numbers. The left arm dominates; crossing
+is second. p5's words banked: "I read 19 rows as 24 rows"; "this
+was the ONLY reading I made outside the pre-registration today —
+and it missed. That is where the value of registration lives."
+Tagged §600(c). **(c) Bank #59 EXECUTED @ c705f12f48 (front door —
+the artifacts are committed and stable; no time-criticality)**:
+worktree sha 1350ec83…9cd3 MATCH → commit-content MATCH; +98/−0
+append-only vs #58. **(d) The synthesis of record**: (a) the
+reference configuration (0.110, 0.220, 45): solved 7 → 58, clear
+0 — the escalation core STRENGTHENED; (b) what blocks 45° is the
+HEAD — the buildable sheet's 45° column is empty at all four
+spreads, and removing the crown makes 0.280/45 a witness; the
+converse ("the crown helped") NOT claimed (at 0.280/20 crown-none
+holds more distinct poses, 3 v 2); (c) ⭐⭐⭐ keeping the REFERENCE
+SPREAD 0.220 at 20° is NOT excluded — 0.110/0.220/20 = L 2 / R 37,
+both arms free; what failed is ONE pair's crossing of 74 possible.
+**(e) The Rs recommendation, carried verbatim-close**: (2) KEEP
+SPREAD 0.220 AND MEASURE 20° FIRST, then decide — the deviation
+from the reference is tilt alone, and the basis for rejecting it
+today is one pair in seventy-four; (1) 0.280/20 stands PROVEN as
+the fallback; (3) 45° is the bowed-head hypothesis, unrun.
+Remainders stated: two crash holes ((0.340, 30) both sheets); every
+other sweep of the day is 24-draw and UNDECIDED; start-pose stage
+only; L's path uncovered; 240 is also a sample.
