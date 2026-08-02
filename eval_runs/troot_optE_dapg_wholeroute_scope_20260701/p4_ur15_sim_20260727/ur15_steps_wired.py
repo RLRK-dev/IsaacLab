@@ -1452,7 +1452,16 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         for k, a in enumerate(QADR[t]):
             sc.qpos[a] = q[k]
         for _ in range(iters):
-            mujoco.mj_forward(m, sc)
+            # ⛔ kinematics only, NOT mj_forward.  Two reasons, and the first is a crash:
+            # mj_forward here segfaults at spread 0.340 / tilt 30 -- deterministic, 37 s, three
+            # runs of three, with a finite in-limits joint vector (checked), so the fault is in
+            # the collision stage on an INTERMEDIATE pose.  Nothing in this loop reads contacts:
+            # mj_jacBody wants cdof, pinch() and xmat want kinematics, and `touching` runs after
+            # convergence on a full mj_forward at :1483.  Second, collision detection was running
+            # 240 tries x 300 iterations per arm per round for nothing.
+            # ⚠ Verified result-identical before adoption: SEGFAULT_AT_SPREAD0340_TILT30_20260802.md
+            mujoco.mj_kinematics(m, sc)
+            mujoco.mj_comPos(m, sc)
             Js = []
             for b in PAD[t]:
                 jp = np.zeros((3, m.nv))

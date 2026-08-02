@@ -37,10 +37,12 @@ ILV = re.compile(r"88mm-SPAN INTERLEAVE: arms closest ([-+\d.]+) mm \(([^)]*)\)|
 # R = None, gap = "?" -- rows that look like measurements and are truncations.  The wait breaks
 # as soon as the interleave line appears, so a generous cap costs nothing on a fast point and is
 # the only thing between a slow point and a silently half-filled table.
-# ⚠ 900 was not enough either, and the reason is worth keeping: the cost of a point is not the
-# draw count alone.  At spread 0.340 the two arms bring far more geom pairs inside the pair
-# cutoff, the exact prefilter drops fewer of them, and every candidate costs more -- so one point
-# ran past fifteen minutes without printing its first count while its neighbours took five.
+# ⛔ WITHDRAWN, and left here as the correction: I raised this to 2400 believing a point had run
+# past fifteen minutes, and wrote a physical reason for it (wider spread -> more geom pairs inside
+# the cutoff -> costlier candidates).  Neither was measured.  The point had SEGFAULTED in 37 s,
+# and the "fifteen minutes" came from the error text, which interpolated this constant instead of
+# the elapsed time.  The cap has never fired.  It stays as insurance against a genuinely slow
+# point, and it is not evidence about any point.  See SEGFAULT_AT_SPREAD0340_TILT30_20260802.md.
 TIMEOUT_S = int(os.environ.get("SWEEP_TIMEOUT_S", "2400"))
 # The draw count is part of the table's identity, not a detail of how it was run: a 24-draw grid
 # and a 240-draw grid have the same shape and different numbers.  It goes in the file name.
@@ -92,7 +94,7 @@ def one(env_extra: dict, log: Path, reuse_after: float = 0.0):
             return ({m[0]: (int(m[1]), int(m[2])) for m in CNT.findall(_t)},
                     {m[0]: m[1] for m in WHY.findall(_t)},
                     mm.group(1) if mm and mm.group(1) else "beyond radius",
-                    (mm.group(2) if mm and mm.group(2) else "") + " [reused]")
+                    (mm.group(2) if mm and mm.group(2) else "") + " [reused]", "reused")
     env = dict(os.environ, **{k: str(v) for k, v in env_extra.items()})
     with log.open("wb") as fh:
         p = subprocess.Popen([PY, "-u", "ur15_steps_wired.py"], cwd=HERE, env=env,
@@ -102,16 +104,28 @@ def one(env_extra: dict, log: Path, reuse_after: float = 0.0):
             if "88mm-SPAN INTERLEAVE" in log.read_text(errors="replace"):
                 break
             time.sleep(2.0)
-        if p.poll() is None:
+        # ⛔ How the wait ended, measured, not inferred from what is missing.  The row used to say
+        # "no interleave line within {TIMEOUT_S}s" whichever way a point failed -- and the one
+        # point that ever failed had segfaulted in 37 s, so the row named a cap that was never
+        # reached.  A caller cannot tell "no line yet" from "no line ever"; only this can.
+        _rc, _el = p.poll(), time.time() - t0
+        if _rc is None:
             os.killpg(os.getpgid(p.pid), signal.SIGKILL)
             p.wait(timeout=30)
+            how = f"cap {TIMEOUT_S}s reached at {_el:.0f}s"
+        elif _rc < 0:
+            how = f"killed by signal {-_rc} after {_el:.1f}s"
+        elif _rc > 0:
+            how = f"exited {_rc} after {_el:.1f}s"
+        else:
+            how = f"finished in {_el:.1f}s"
     txt = log.read_text(errors="replace")
     cnt = {m[0]: (int(m[1]), int(m[2])) for m in CNT.findall(txt)}
     why = {m[0]: m[1] for m in WHY.findall(txt)}
     mm = ILV.search(txt)
     gap = mm.group(1) if mm and mm.group(1) else ("beyond radius" if mm else "?")
     who = mm.group(2) if mm and mm.group(2) else ""
-    return cnt, why, gap, who
+    return cnt, why, gap, who, how
 
 
 def main() -> int:
@@ -137,9 +151,11 @@ def main() -> int:
     # ⛔ ...and the draw count is in EVERY name, (a) and (c) included.  The banked 24-draw tables
     # keep the names they were pinned under; a re-run at another count lands beside them instead
     # of on top of them.  A generator overwriting a pinned artifact has happened here once.
+    # ⛔ OUT_TAG so a re-run under a changed driver lands beside the banked table instead of on
+    # top of it.  Overwriting a pinned artifact with its own generator has happened here once.
     _out_path = HERE / ({"a": "CROWN_RADIUS_SWEEP", "b": "SPREAD_TILT_SWEEP",
                          "c": "CROWN_HEIGHT_SWEEP"}.get(which, "MOUNTING_SWEEPS")
-                        + f"_TRIES{TRIES}.txt")
+                        + f"_TRIES{TRIES}{os.environ.get('OUT_TAG', '')}.txt")
 
     def _flush():
         _out_path.write_text("\n".join(out) + "\n")
@@ -165,14 +181,14 @@ def main() -> int:
     radii = (_extra or ["none", "0.020", "0.050", "0.080", "0.110"]) if which in ("a", "both") else []
     _passing = []
     for r in radii:
-        cnt, why, gap, who = one({"CROWN_R_OVERRIDE": r}, tmp / f"crown_{r}_{_sp}_{_ti}.log",
-                                 _reuse)
+        cnt, why, gap, who, how = one({"CROWN_R_OVERRIDE": r},
+                                      tmp / f"crown_{r}_{_sp}_{_ti}.log", _reuse)
         L, R = cnt.get("L", (None, None)), cnt.get("R", (None, None))
         _trunc, _clear = _truncated(L, R, gap), _separated(L, R, gap)
         _pass = (not _trunc) and bool(L[1] and R[1] and _clear)
         _v = "PASS" if _pass else ("-- NOT MEASURED --" if _trunc else "fail")
         if _trunc:
-            _missed.append(f"crown r {r}")
+            _missed.append(f"crown r {r}  ({how})")
         if _pass:
             _passing.append(r)
         out.append(f"{r:>9s} {_sp[:7]:>7s} {_ti[:5]:>5s}  {str(L[0]):>8s} {str(L[1]):>7s}  "
@@ -207,15 +223,15 @@ def main() -> int:
                    f"{'R solved':>8s} {'R free':>7s}   {'arms closest [mm]':>17s}  PASS?")
         _pass_z = []
         for z0 in (_extra or ["1.330", "1.380", "1.430", "1.470", "1.510"]):
-            cnt, why, gap, who = one({"CROWN_Z0_OVERRIDE": z0}, tmp / f"z_{z0}_{_sp}_{_ti}.log",
-                                     _reuse)
+            cnt, why, gap, who, how = one({"CROWN_Z0_OVERRIDE": z0},
+                                          tmp / f"z_{z0}_{_sp}_{_ti}.log", _reuse)
             L, R = cnt.get("L", (None, None)), cnt.get("R", (None, None))
             _r = (1.530 - float(z0)) / 2.0
             _trunc, _clear = _truncated(L, R, gap), _separated(L, R, gap)
             _pass = (not _trunc) and bool(L[1] and R[1] and _clear)
             _v = "PASS" if _pass else ("-- NOT MEASURED --" if _trunc else "fail")
             if _trunc:
-                _missed.append(f"Z0 {z0}")
+                _missed.append(f"Z0 {z0}  ({how})")
             if _pass:
                 _pass_z.append(z0)
             out.append(f"{z0:>7s} {_r:6.3f} {float(z0)+2*_r:6.3f}  {str(L[0]):>8s} "
@@ -275,9 +291,9 @@ def main() -> int:
             # things moving.  ⚠ At the wide end that head is thinner RELATIVE to the spread than
             # the cell's own rule would make it -- that is the price of isolating the variable,
             # and it is not a proposal about how to build one.
-            cnt, why, gap, who = one({"YOKE_SPREAD_OVERRIDE": spread, "TILT_DEG_OVERRIDE": tilt,
-                                      "CROWN_R_OVERRIDE": crown},
-                                     tmp / f"st_{crown}_{spread}_{tilt}.log", _reuse)
+            cnt, why, gap, who, how = one({"YOKE_SPREAD_OVERRIDE": spread,
+                                           "TILT_DEG_OVERRIDE": tilt, "CROWN_R_OVERRIDE": crown},
+                                          tmp / f"st_{crown}_{spread}_{tilt}.log", _reuse)
             L, R = cnt.get("L", (None, None)), cnt.get("R", (None, None))
             # ⛔ A truncated point gets a row that cannot be mistaken for a measurement, and the
             # grid CARRIES ON.  The first version raised here, which kept the table honest and
@@ -285,9 +301,9 @@ def main() -> int:
             # lost run.  Refusing to REPORT a truncation and refusing to CONTINUE are different
             # things, and only the first was ever the requirement.
             if _truncated(L, R, gap):
-                _missed.append(f"crown {crown} spread {spread} tilt {tilt}")
-                out.append(f"{crown:>6s} {spread:>7s} {tilt:>5s}   -- NOT MEASURED: no interleave "
-                           f"line within {TIMEOUT_S}s (L={L[0]} R={R[0]}) --")
+                _missed.append(f"crown {crown} spread {spread} tilt {tilt}  ({how})")
+                out.append(f"{crown:>6s} {spread:>7s} {tilt:>5s}   -- NOT MEASURED: {how}, no "
+                           f"interleave line (L={L[0]} R={R[0]}) --")
                 _flush()
                 print(f"crown {crown} spread {spread} tilt {tilt}: NOT MEASURED", flush=True)
                 continue
