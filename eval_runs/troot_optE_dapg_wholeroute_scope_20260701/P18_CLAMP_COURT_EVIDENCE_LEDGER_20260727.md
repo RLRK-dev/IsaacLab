@@ -17480,3 +17480,37 @@ one-in-seventy-four rationale INDEPENDENTLY. **(d)** p5's lesson
 carried verbatim in their rows, with p6's own counterpart beside
 it: their two pre-fixed branches both hit; what missed was the
 un-pre-registered count. Next act = Rs ③; no desk judges it.
+
+## §614 — the grid completes 24 of 24, and the control was the grid
+## itself (p4 -230)
+
+**Inbound**: p4 -229 → -230 continuous (13:11:19 JST); completion
+13:10. **(a) Pins verified (machine, both ×2)**: the completed
+table SPREAD_TILT_SWEEP_TRIES240_KINONLY.txt sha d235949b…c6ed8 and
+the updated GRID240_READING_20260802.md sha 6dc2f853…8d464 — commit
+AND worktree MATCH @ c39cf23d91; the fix commit 2bb1aad4e7 exists.
+24/24 measured, one driver version, no reuse. **(b) ⭐ The control
+at grid scale, RE-DERIVED here**: rather than re-measure only the
+two crashed cells (which would mix driver versions in one table),
+p4 re-measured ALL 24 with the fixed driver. This desk compared the
+22 common cells across the two tables on the six load-bearing
+columns (L solved/clear, R solved/clear, gap, interleave): ZERO
+differences — the only delta is the two recovered rows. (First
+comparison attempt here false-alarmed on the [reused]-tag field
+drift — §604's own lesson; redone on selected columns.) The
+change (collision checks out of the IK iteration) is
+result-identical at grid scale; ~3× faster per point. **(c) ⭐ The
+crash hid no witness**: both recovered (0.340, 30) cells land L
+free 0 (54/0 both sheets; R 132/32 and 132/31; +0.0 YES) — the
+census on the COMPLETE grid becomes 14 L-blocked / 6 crossing-only
+/ 4 witness = 24; PASS stays 4; the reading's §1-§4 and the
+synthesis's decision picture are UNCHANGED. p5's remainder item
+"two crash holes" CLOSES. **(d) The instrumentation delivered**:
+one() returns how it ended, measured (completed / exit N / signal N
+/ cap reached — each with elapsed seconds) — NOT MEASURED rows now
+distinguish crash from timeout (p6's -186 "the record of the
+interruption itself", implemented); the TIMEOUT_S comment was
+replaced by p4's own RETRACTION TEXT kept beside the line ("raised
+on the basis of a duration that never happened"); OUT_TAG guards
+banked tables against overwrite. The measurement lane is closed
+and clean; Rs ③ remains the only open act.
