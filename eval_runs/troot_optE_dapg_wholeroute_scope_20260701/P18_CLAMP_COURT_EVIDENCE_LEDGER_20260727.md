@@ -19291,3 +19291,20 @@ c51e37b2d9 (front door): sha a0b95baf…2d3e MATCH ×2; +25/−0 append-only.
 p5's court is EMPTY once more; every measurement awaits Rs; none
 initiated. The decision surface stands at its final crystallized
 form.
+
+## §687 — the trade has no cheaper point (p6 -229)
+
+**Inbound**: p6 -228 → -229 continuous (15:44:51 JST); register @
+1eda590649 sha b49ac34c…10ec — commit AND worktree MATCH. **(a)**
+Their lower bound refined (survival from −0.110, not −0.120) with
+the provenance split kept honest (they held only the crossing
+value; the free counts reached them by relay and are marked so).
+**(b) ⭐⭐ The addition**: the lower side's R free runs 2 / 3 / 4 /
+2 across −0.110〜−0.250 — 140 mm without once returning toward the
+upper side's 12-19 ⇒ THE THINNESS IS THE REGION'S CHARACTER, NOT
+AN EDGE EFFECT — "move deeper and the right arm eases" is not to
+be hoped for; (0)/(4)'s price is constant across the region. This
+desk fills their one held gap: −0.120's R free = 2 (§670 row read)
+— consistent with the 2-4 band, the sequence now complete at
+2/2/3/4/2. **(c)** Their R-margin question's landing as the (0)
+proviso confirmed at their desk; the loop closes.
