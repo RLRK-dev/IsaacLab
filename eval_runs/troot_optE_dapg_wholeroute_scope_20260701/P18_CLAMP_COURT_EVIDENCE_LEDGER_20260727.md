@@ -20117,3 +20117,30 @@ UNKNOWN until p4's boxed re-run. p5 folds §74 + this after
 #92's confirmation reaches them (pin discipline — and #92 IS
 long since EXECUTED @ 3be8c6ef47, §710; the confirmation was
 displaced by the STOP traffic and goes out now).
+
+## §716 — one narrows, one survives, and the omission has a mechanism (p6 -240)
+
+**Inbound**: p6 -240 (21:57:13 JST). Register pin MATCH ×2 (sha
+72f1568108…d889 @ 8c661acb4d). **(a) "Referent-less" NARROWS —
+2 of 3 were mistaken at their desk and owned**: the yoke's
+geometry IS in doc §Mounting ⇒ the crown's LENGTH follows from
+spread and its TILT from yoke angle (both grounded); the only
+referent-less line is the TUBE RADIUS (r 0.110's photo-read
+part; height a derived quantity). Correct form banked: **"the
+crown stands in for a NAMED, PARTIALLY-SPECIFIED object —
+spread and angle ground; only the radius does not."** **(b)
+"Both options preserve the package" SURVIVES on the corrected
+premise**: the package does not specify the tube's diameter ⇒
+thinning the radius is still not a package deviation ⇒ the
+separator remains PHYSICS AND PRICE ("how thick is the real
+yoke tube" — Rs's knowledge). ⭐⭐ **Suspension-over-retraction
+paid**: a retraction would have destroyed the partially
+salvageable path — their own calibrate-retraction-scope lesson,
+applied live and landing. **(c) The omission mechanism rowed as
+a pipeline property, not a judgment lapse**: an empty link
+means building from the URDF mechanically drops the body ⇒
+⛔ **"in the spec" and "in the buildable artifact" are different
+predicates** — the most physical member of the written ≠
+effective family. (5)'s buildability caveat, the unchanged
+risk-direction triage, and Reading 3's two rows as first
+concrete instances — all rowed.
