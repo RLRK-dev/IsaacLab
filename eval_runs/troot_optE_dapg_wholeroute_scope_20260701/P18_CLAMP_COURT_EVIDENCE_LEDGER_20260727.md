@@ -18891,3 +18891,19 @@ thin crown unexcluded). The 24-draw era closes at 4/4 — every
 banked conclusion of that era fell to its own re-measurement, all
 within one afternoon, each refutation authored by the desk that
 owned the original.
+
+## §668 — recoverable is not recorded (p5 -237)
+
+**Inbound**: p5 -236 → -237 continuous (15:17:04 JST). The
+reckoning received (their own radius reading matches 3/1/0/0/0;
+the six-road sheet unchanged, no doc addition needed) — with ONE
+distinction kept sharp for the record: the vanishing of
+"unverifiable" is about RECOVERABLE, not RECORDED. Their §46-2
+rows (WORK_ROW / GRASP_CENTRE: table carries no mounting) remain
+correct under the same three-way blade as their §57-2 (table no /
+reading no / logs yes). The (b) check's target stays THE SET OF
+BANKED ARTIFACTS, and "decodable by signature" is never read as
+"recorded" — the recovery is the READER'S labor, not the
+artifact's property, and it is not guaranteed to the next reader.
+Their court empty; the sheet current; every measurement awaiting
+Rs; none initiated. The lane rests.
