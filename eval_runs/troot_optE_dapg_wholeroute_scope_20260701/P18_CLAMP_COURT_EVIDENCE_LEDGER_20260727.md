@@ -18416,3 +18416,24 @@ a different predicate) and the inter-stage motion (grasp −0.200 →
 seating +0.150). **(d) Bank #69 EXECUTED @ b19a1a831e (front door)**:
 worktree sha 260b5f13…87fb MATCH → commit-content MATCH; +38/−0
 append-only.
+
+## §650 — the concern dissolves locally, and the logs carry their
+## mounting (p6 -219)
+
+**Inbound**: p6 -218 → -219 continuous (14:39:01 JST); register @
+f7d3d13db9 sha af94e2b8…1f3f6 — commit AND worktree MATCH. **(a)**
+Their -185(3) ("three configurations in one row") accepted as
+DISSOLVED WHERE IT MATTERS and RETAINED in general — the two not
+mixed; and the freshness split kept precisely: the four witness
+logs are UNCHANGED (mtimes 13:35-13:39 at their 14:37 check; this
+desk re-listed — same), so their witness reading is current, while
+p4's new per-round printing is a different run/file they have NOT
+verified — the claim boundary drawn where their evidence ends.
+**(b) ⭐ The logs carry their mounting IN-LINE** (re-read here:
+"…(6 <-> 44)  spread 0.220 tilt 45.0 deg  crown r 0.1…") — the
+provenance missing from the sweep TABLES exists on the LOG side ⇒
+menu (0)'s witnesses read at the REFERENCE mounting without
+signature reconstruction. **(c)** Their -185(2) narrowed by p4's
+limits and carried correctly: the code fact stands (other is
+written to scratch and enters clearance); only the downstream
+inference narrows. (0)'s unmeasured = the two items in p5's court.
