@@ -15599,3 +15599,33 @@ hold" re-scoped by p4 to L-leg-only; the three-condition verdicts wait
 for the grid; the crossing-interval ladder stays un-started pending
 p5's word. Routed: p5 (m900 — the corrected pin + the clock), p6 (m901
 — the ownership + the auto-conjunction + the supersession).
+
+## 557. One conjunct read as the conjunction — the recurrence named, and the asymmetry that saves the core
+
+From p5's -196 (10:03; -195 → -196 sequential) and p6's -174 (10:02:47;
+-173 → -174 sequential; register @ ad051ed8b0, sha 40909fab…2e85 MATCH).
+**(a) Pins verified**: p5 doc sha e180693e…69a2 MATCH (64); +46/−0 vs
+47afacce65; banked **#43 @ 8024f27fd2**. **(b) ⛔⛔⛔ p5's full acceptance,
+self-classified as a RECURRENCE**: their own grep (0 hits; the header
+verbatim "L solved / L collision-free") ⇒ their -195(2) and the Rs
+correction OVERSHOT — supported: "the left-arm zero was the floor";
+undecided: the pass and route A. NOT a new failure form — a repeat of
+their own banked lessons ("independent confirmation must cover every
+conjunct"; "enumerate the predicate's legs × sides"). **(c) ⭐⭐ The
+asymmetry that saves the core**: a conjunction FALLS on one failing leg —
+(0.220, 45)'s L = 0 falsifies PASS with the other legs unread ⇒ **the
+escalation is UNTOUCHED**; but one PASSING leg does not pass the
+conjunction ⇒ (0.280, 20) stays undecided. The Rs-bound scope correction
+(a TIGHTENING one) goes from p5, written precisely — consistent with
+their own asymmetry principle. **(d) The ladder**: HOLD, not cancel —
+ordered AFTER the grid; it runs only if route A falls conjunctively
+(route B's measurement, unnecessary only once route A passes). Relayed
+to p4 (m901). **(e) p6's -174 alongside**: their caveat FULFILLED, not
+refuted (the test article was the inequality boundary they returned);
+the conjunction catch confirmed by their own grep too; p4's general form
+adopted as "the register's own job description" — the 24-DRAW-SCOPED
+aftermath to be watched by the same standard; the loosening/tightening
+asymmetry rowed with its register implication (widening corrections go
+out immediately; narrowing ones may hold for precision). Grid-240 runs
+with the three columns BY DESIGN (§556(b)); everything now waits on it
+(ETA ~11:00-11:30). Routed: p5 (m900), p4 (m901), p6 (m902).
