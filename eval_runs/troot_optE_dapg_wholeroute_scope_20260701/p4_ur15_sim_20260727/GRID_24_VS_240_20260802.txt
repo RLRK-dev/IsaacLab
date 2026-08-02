@@ -1,0 +1,68 @@
+24 DRAWS vs 240 DRAWS, point by point -- p5 §31 asked at grid scale
+⛔ The tables are comparable: between them the driver changed only in prints, in a
+   refactor with identical values, and in the swept variable.  The clearance
+   predicate, the menu values, the seeding and the targets are untouched.
+⚠ A zero at 24 draws can be 'none exists' or 'none found'.  Only the bigger sample
+   separates them, and it separates them for four points and not for twelve.
+
+point                    Lfree24 Lfree240  Rfree24 Rfree240    gap24  gap240
+crown  none  spread 0.220  tilt 45       0        3        4       14     +9.6    +0.0   <- ZERO WAS THE SAMPLE
+crown  none  spread 0.220  tilt 30       2        8        3       34     +0.0    +0.0
+crown  none  spread 0.220  tilt 20       3       17        3       34     +0.0    +0.0
+crown  none  spread 0.280  tilt 45       0        4        3        8     +0.0   +11.9   <- ZERO WAS THE SAMPLE
+crown  none  spread 0.280  tilt 30       0        0        4       31     +0.0    +0.0
+crown  none  spread 0.280  tilt 20       1        4        4       38    +22.7    +0.0
+crown  none  spread 0.340  tilt 45       0        0        0       15   -110.3   +34.5
+crown  none  spread 0.340  tilt 30       0       --        3       --     +0.0      --   <- not measured at 240 (the driver segfaults)
+crown  none  spread 0.340  tilt 20       2        5        3       37     +0.0    +0.0
+crown  none  spread 0.400  tilt 45       0        0        1        5     +0.0    +0.0
+crown  none  spread 0.400  tilt 30       0        0        1       26     +0.0   +21.5
+crown  none  spread 0.400  tilt 20       2        8        2       34     +0.0   +17.2
+crown 0.110  spread 0.220  tilt 45       0        0        2       19    +26.2   +26.2
+crown 0.110  spread 0.220  tilt 30       0        0        3       35     +0.0    +0.0
+crown 0.110  spread 0.220  tilt 20       0        2        4       37     +9.6    +0.0   <- ZERO WAS THE SAMPLE
+crown 0.110  spread 0.280  tilt 45       0        0        2       16     +0.0    +0.0
+crown 0.110  spread 0.280  tilt 30       0        0        4       31     +0.0    +0.0
+crown 0.110  spread 0.280  tilt 20       0        5        4       30     +0.0   +14.7   <- ZERO WAS THE SAMPLE
+crown 0.110  spread 0.340  tilt 45       0        0        0       10   -110.3    +0.0
+crown 0.110  spread 0.340  tilt 30       0       --        3       --     +0.0      --   <- not measured at 240 (the driver segfaults)
+crown 0.110  spread 0.340  tilt 20       2        2        3       34     +0.0   +15.3
+crown 0.110  spread 0.400  tilt 45       0        0        1        5     +0.0    +0.0
+crown 0.110  spread 0.400  tilt 30       0        0        2       27     +0.0   +21.5
+crown 0.110  spread 0.400  tilt 20       0        0        2       32    +22.7   +21.5
+
+LEFT-ARM ZEROS: 16 of 22 comparable points at 24 draws, 12 at 240.
+  ⭐ 4 zero(s) were the SAMPLE, not the cell:
+       crown  none  spread 0.220  tilt 45
+       crown  none  spread 0.280  tilt 45
+       crown 0.110  spread 0.220  tilt 20
+       crown 0.110  spread 0.280  tilt 20
+  ⛔ 12 stayed zero at ten times the sample:
+       crown  none  spread 0.280  tilt 30
+       crown  none  spread 0.340  tilt 45
+       crown  none  spread 0.400  tilt 45
+       crown  none  spread 0.400  tilt 30
+       crown 0.110  spread 0.220  tilt 45
+       crown 0.110  spread 0.220  tilt 30
+       crown 0.110  spread 0.280  tilt 45
+       crown 0.110  spread 0.280  tilt 30
+       crown 0.110  spread 0.340  tilt 45
+       crown 0.110  spread 0.400  tilt 45
+       crown 0.110  spread 0.400  tilt 30
+       crown 0.110  spread 0.400  tilt 20
+
+ALL THREE LEGS at one witness pair, at 240 draws: 4
+     crown  none  spread 0.280  tilt 45   L free 4  R free 8  gap +11.9 mm
+     crown  none  spread 0.400  tilt 20   L free 8  R free 34  gap +17.2 mm
+     crown 0.110  spread 0.280  tilt 20   L free 5  R free 30  gap +14.7 mm
+     crown 0.110  spread 0.340  tilt 20   L free 2  R free 34  gap +15.3 mm
+
+THE BUILT CELL -- crown 0.110, spread 0.220, tilt 45 (sweep_mounting.py's own
+defaults for spread and tilt; the crown follows as YOKE_SPREAD/2):
+     24 draws : L 7 solved / 0 clear   R 17/2   gap +26.2
+     240 draws: L 58 solved / 0 clear   R 132/19   gap +26.2
+  ⇒ The left arm's zero at the built cell is NOT a sampling artifact: the solved
+     count grows eight-fold and the clear count stays at zero.
+
+⛔ Not a verdict.  A PASS is a witness; a fail is not a refutation (the interleave
+   is read at one pose pair out of N x M).  Which mounting to build is p5's call.

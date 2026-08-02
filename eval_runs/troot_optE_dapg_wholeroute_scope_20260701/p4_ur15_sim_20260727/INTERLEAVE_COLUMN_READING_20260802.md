@@ -71,6 +71,12 @@ to which two rejected poses overlap, which is not a fact about the mounting.
 
 ## 3. The pair the spec comment records
 
+> ⛔ **SUPERSEDED by `GRID240_READING_20260802.md` §3a.** At 240 draws both halves of the pair
+> **reproduce** on rows that are readable: (0.220, 45) interleaves, (0.400, 20) clears by 17.2 mm.
+> The contradiction below was a property of a 24-draw pose pair, not of the mounting. The section
+> is kept as written because the reasoning about *readability* is what the rest of this document
+> rests on — only its conclusion about the comment is withdrawn.
+
 The comment records **(0.22, 45) as interleaving** at an 88 mm span and **(0.40, 20) as clearing**.
 
 - **(0.22, 45)** — L put back on both sheets. ⇒ **The banked table cannot answer it.**
