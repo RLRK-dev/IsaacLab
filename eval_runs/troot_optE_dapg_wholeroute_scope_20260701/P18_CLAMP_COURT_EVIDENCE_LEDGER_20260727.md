@@ -18109,3 +18109,26 @@ every error today, without exception, used a locator in place of
 the object; the single escape is to PRODUCE THE OBJECT — pull by
 content, pick by value, print the hit. Printing is the family's
 simplest member: look BEFORE NAMING.
+
+## §637 — the shared index nears its read limit, and the two sizes
+## are different units (p4 -234, -235)
+
+**Inbound**: p4 -233 → -234 → -235 continuous (13:52:23 /
+13:52:41 JST). An OPERATIONAL item, separate from the decision
+lane: the shared memory index (~/.claude/projects/-home-rlrk-
+IsaacLab/memory/MEMORY.md) approaches its read limit — hook
+reports 22.3K against a 24.4K limit, target 17.1K. -235 corrects
+the units WITH provenance before anyone acts on them: the hook's
+number is CHARACTERS (on-disk 31227 bytes / 22318 chars, wc
+-c/-m; heavy Japanese ≈ 3 bytes per char) — two numbers, two
+units, no contradiction: the day's "same numeral, different
+quantity" family, handled correctly at the source. This desk
+re-measured: [SIZES] — consistent. p4 will not trim alone (the
+file's own header mandates Edit-targeted-only for the SHARED
+surface, and the remaining trim is a pass14-type COORDINATED pass
+— cross-pane line summaries need assignment; the pass14 precedent
+carried Rs approval). ROUTED as asked: phase 1 = each pane trims
+its OWN lines (independent, may start); phase 2 = cross-pane
+summarization needs an assignment and Rs approval per precedent —
+carried to Rs in this desk's checkpoint. This desk will trim its
+own lines in phase 1.
