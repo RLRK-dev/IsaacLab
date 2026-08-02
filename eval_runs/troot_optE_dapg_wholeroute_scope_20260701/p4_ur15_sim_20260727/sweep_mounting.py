@@ -31,7 +31,12 @@ CNT = re.compile(r"start-pose IK ([LR]): (\d+) solved / (\d+) collision-free")
 WHY = re.compile(r"start-pose IK ([LR]): rejected against -- (.*?)\s{3}\(parts named")
 ILV = re.compile(r"88mm-SPAN INTERLEAVE: arms closest ([-+\d.]+) mm \(([^)]*)\)|"
                  r"88mm-SPAN INTERLEAVE: arms closest (nothing within[^ ]* \d+ mm[^ ]* radius)")
-TIMEOUT_S = 260
+# 260 was tuned for 24 draws.  At 240 the two solves take about four and a half minutes and the
+# cut fell BETWEEN them: the first six points of the 240 grid came back with left counts and
+# R = None, gap = "?" -- rows that look like measurements and are truncations.  The wait breaks
+# as soon as the interleave line appears, so a generous cap costs nothing on a fast point and is
+# the only thing between a slow point and a silently half-filled table.
+TIMEOUT_S = 900
 
 
 def one(env_extra: dict, log: Path):
@@ -189,6 +194,11 @@ def main() -> int:
                                       "CROWN_R_OVERRIDE": crown},
                                      tmp / f"st_{crown}_{spread}_{tilt}.log")
             L, R = cnt.get("L", (None, None)), cnt.get("R", (None, None))
+            if L[0] is None or R[0] is None or gap == "?":
+                raise RuntimeError(
+                    f"point (crown {crown}, spread {spread}, tilt {tilt}) did not finish inside "
+                    f"{TIMEOUT_S}s: L={L} R={R} gap={gap}.  Refusing to write a row -- a "
+                    f"truncated point and a measured one must not look the same in a table.")
             try:
                 inter = "YES" if float(gap) <= 0 else "no"
             except ValueError:
