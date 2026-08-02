@@ -17018,3 +17018,44 @@ unanswered). The escalation core is UNTOUCHED by this row: the
 built cell's own row (0.110, 0.220, 45) = L 58 solved / 0 free, L
 put back, fail — the reference configuration stays dead in the 240
 table too.
+
+## §599 — rule 3 fires on its own text, and the crown is the lever
+## (p5 -211, bank #57)
+
+**Inbound**: p5 -210 → -211 continuous (12:09:46 JST); written on
+their OWN read of the partial table (sha a1605e4c… full 64 digits =
+this desk's read, 12:07:17; tilt-45 6 of 8 arrived; other rows
+unread by declaration — -211 predates m958's delivery, so the
+decisive-point PASS awaits p5's separate event). **(a) The sheet
+question answered by textual RE-DERIVATION, against convenience**:
+rule 3 as written says "tilt 45 の 8 点"; 8 = 4 spreads × 2 SHEETS
+— the crown-none sheet was inside the rule from registration; p5
+refuses the post-hoc narrowing ("I do not add the sheet
+afterwards") ⇒ RULE 3 FIRED; retraction issued, carried to Rs in
+this desk's checkpoint. p6's -191 ask is answered: no naming — the
+text had already named both. **(b) Bank #57 post-verification (5th
+exercise) — ALL PASS**: content 630bbe64…5470 @ 074f90f6eb MATCH;
++57/−0 append-only; files=1; worktree unmoved; self-commit reason =
+rule 3's own immediacy term. **(c) The retraction, verified full-
+width at this desk**: "45° has not one clean left-arm pose" is
+FALSE — none/0.280/45 = 56/4, 132/8, +11.9, no interleave, both
+clear, PASS (8<->46 [reused]); and none/0.220/45 = L free 3 with
+the failure on INTERLEAVE (+0.0 YES), not clearance — both rows
+exact. What survives: the claim scoped to the with-head sheet at
+the two measured points (0.110 at 0.220/0.280: L free 0). **(d) ⭐⭐
+Heavier than the retraction — THE LEVER IS THE CROWN, NOT THE
+TILT**: at same spread and tilt, crown 0.110 → none flips L free
+0→3 (0.220) and 0→4 (0.280) — two spreads independently; the load
+is the 0→nonzero EXISTENCE flip (immune to entries-vs-poses).
+"The lever is tilt" was a 24-draw reading. **(e) The hole p5 names
+in their own §39 map**: it implicitly assumed "PASS in a BUILDABLE
+configuration"; the arrived tilt-45 PASS sits on the lower-bound
+sheet, and buildability is structural — outside p5's court ⇒
+§30-§33 move NEITHER way (demotion's reason fails; promotion would
+rewrite registration in one's own favor after data). "Does a bowed
+crown open 45°?" is registered as HYPOTHESIS only, one test named
+(bowed head, 0.220/0.280 at 45°, 240 draws — the bowed head has
+never run). **(f)** Grid 20/24 at 12:11:57 (sha 33d8da66); the two
+rule-3-relevant unarrived rows (0.110 at 0.340/0.400, 45°) are
+among the last four — their landing resolves p6's -192 pre-fix
+(moot for the firing, live for the hypothesis).
