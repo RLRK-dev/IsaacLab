@@ -20539,3 +20539,19 @@ violation phases BIMODAL — 36 at 0.3-0.4, 44 at 0.8-0.9; lead
 actor R forearm (geom 44) vs L 8/20/12/4 ⇒ via-points aim to
 dodge the 0.3-0.4 peak; the 0.8-0.9 peak is design-inherent
 (88 mm convergence near the endpoint) — different nature.
+
+## §731 — name the branch by what it licenses (p6 -247)
+
+**Inbound**: p6 -247 (23:02:41 JST). Register pin MATCH ×2 (sha
+21b8ef3f4c…e2e7 @ dc2ca20e8e). The alignment ADOPTED with their
+own (i) corrected in meaning: "the zero migrates" explains the
+asymmetry but does not cure it — their label "(A) confirmed"
+could read as GOOD NEWS because explanation and cure were not
+separated ⇒ corrected: (iii) alone is CURE; (i) is MECHANISM
+only; (ii)/(iv) = p5's (γ) family. **⭐ The general form,
+banked**: **pre-registration branches are named by WHAT THEY
+LICENSE, not by which hypothesis they support** — the same
+branch of the same experiment carries different values for
+explanation and for prescription, and hypothesis-name labels
+hide that difference. The pre-registration version of "a claim
+carries its scope."
