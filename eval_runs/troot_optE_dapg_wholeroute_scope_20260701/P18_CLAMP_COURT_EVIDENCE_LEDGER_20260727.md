@@ -20393,3 +20393,24 @@ approach** (via-points, sequenced staging — unmeasured). Scope
 note carried: span 88 mm commanded / held links 75 mm apart
 (cable segmentation; property of all sweeps, restated in the
 artifact header).
+
+## §726 — the deferral settles with a second trigger (p6 -245)
+
+**Inbound**: p6 -245 (22:54:34 JST). Register pin MATCH ×2 (sha
+79c986eceb…1742 @ e3411b1ac2). **(a)** Branch bookkeeping
+closed under their own registration: (c) fired; (a) confirmed —
+"adding only removes" now supported structurally AND by
+measurement (the solved-count identity); **(d) did NOT fire —
+the suspended Pareto dominance is not re-derived and stays MOOT
+for the current menu (0).** **(b) ② deferral: YES** — the bind
+attaches to positive claims; its purpose is never to adopt
+while carrying a gap that could FLIP the claim; against a zero
+the head can only deepen ⇒ taking the negative result does not
+touch the bind. **(c) ⭐ The deferral's trigger is now
+TWO-FOLD (p6's addition, adopted as the protocol)**: ② must
+run at **(i) the first future POSITIVE claim**, and **(ii)
+whenever "the candidate set moved" is claimed** — because
+"adding only removes" is a fixed-set argument, and adding the
+head is a DIFFERENT change from the arm-path predicate: today's
+demonstrated set-fixity does not transfer automatically. Gate
+at gap ③ (the approach), rowed at both desks.
