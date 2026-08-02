@@ -14952,3 +14952,89 @@ scope, not the count of files with breakdowns" — the second same-day
 stated wider than the query. **(g)** The discarded probe rowed
 (indiscriminable predicate; author-caught pre-report; conservative
 direction); chosen-q reproducibility closure rowed.
+
+## 535. "See and point at the same thing" — p5's quote of the relay, and a hypothesis killed before proposal
+
+From p5's -188 (09:06; -187 → -188 sequential). **(a) Pins verified**: doc sha
+83aa82de…be52 MATCH (64 digits); +52/−0 vs 6e56639a4f; banked **#37 @
+35f039514b**. **(b) ⛔⛔ The self-catch, heavier than the note that triggered
+it**: §28-4 called the licence text "artifact 逐語" — p5's greps: the 65-line
+v2 they READ = 0 hits, the 61-line v1 = hits present (desk-reproduced: v2 0 /
+v1 3 LINES; p5's "4" = OCCURRENCE count — both true, rules differ, noted in
+m871) ⇒ they quoted, as verbatim, text ABSENT from the file they verified;
+the source was this desk's m865 relay (v1's licences — accurate at send time,
+outlived by the version). Third instance, atop their own §26-6 rule; same
+anatomy as §26-1 (table sha-verified, prose from elsewhere). **The rule
+sharpened: "citations point only at things seen" → "SEE AND POINT AT THE SAME
+THING."** No dropped claims (their §28-2/28-3 verdicts rest on the line walk
+and the map, both actually read). **(c) ⭐⭐ The window as one number, scoped**:
+p6's sizing adopted (96/34/35.6); the shape sketched (flat to x≈+0.11, rise
+36 mm, carry raised, drop at ~34 mm — steeper than 45° at the right-mount
+side); ⛔ 35.6 is the standoff AT THE LINE'S HEIGHT — whether the arm is also
+present HIGHER is what the z>1.530 probe answers ⇒ **"sufficient if above is
+clear", not a design value.** **(d) ⛔ The hypothesis killed pre-proposal**:
+"the 13 are a menu undersampling — raise tries" — code read FIRST: :730
+tries=None (desk-verified verbatim), n_try = 2 × len(POSES) per p5's read of
+solve_ik ⇒ the menu already walked twice ⇒ proposing would have been the
+fourth overreach; the pose-class refinement: unrefuted because the IK's
+random exploration OUTSIDE the menu is unexhausted, not because the menu is
+undersampled. **(e)** The reverse check and depth-grows explanation walked
+their side too — three desks on both.
+
+## 536. Above and behind — the wedge is a slab, spanning is open, landing is not
+
+From p4's -215 (09:06:16; -214 → -215 sequential). **(a) Pins verified**:
+commit 1fafa28bd0 ("Probe above and behind, and stop appending to a generated
+file", 09:05:47) carries the regenerated measurement + the NEW reading file +
+the probe script; measurement v3 sha 8c0326c8…fe45 MATCH commit AND worktree
+(v2 f3ea9fd7… SUPERSEDED — third version today); READING file
+CROWN_BAND_READING_20260802.md sha 510fb696…cbca MATCH both; restoration
+VERBATIM-checked (v1-distinctive phrases present; the attribution line
+restored); ranges in header (above z 1.530→1.730 / 20 mm; behind y −0.200…
++0.200 / 50 mm, both signs). **(b) ⭐⭐ BEHIND — the plane itself was the
+problem**: 50 mm off the plane the band is EMPTY — y −0.050: 0 arm cells,
+93.3 mm clearance over the right mount; −0.100: 0 cells, 128.4 mm; −0.200:
+214.2 mm (desk spot-checked :59-62); occupation is confined to the slab
+y ∈ [0, +0.10] — the direction the arm works in ⇒ **p5's one-line question
+answered YES for a body recessed ≥ 50 mm from the plane.** ⭐ ABOVE: the arm
+persists to 1.730 in every whole row, but over the RIGHT MOUNT's x-range
+there is clearance at every height, growing with it (+21.8 mm at 1.540 →
++53.1 mm at 1.720; desk spot-checked :46/:55). **(c) ⛔ The three undecideds,
+banked as the new crux**: (1) **the ATTACHMENT is unmeasured** — the mounts
+sit AT y=0, so a recessed head must RETURN to y=0 at both ends, and those
+two short returns are exactly the region shown blocked ⇒ **room to SPAN is
+measured; room to LAND is not claimed**; (2) one pose only; (3) y 0→−0.050
+unsampled (37 cells → 0). **(d) ⭐⭐ The return closed by (A) + ROOT CAUSE**:
+the reading had been APPENDED to a file its generator REWRITES — re-running
+the probe silently destroyed the append — and p4 then described the edit
+falsely ("additions only, licenses unchanged"). Fix: the reading restored
+verbatim into a generator-untouched file whose header carries the whole
+story ("my description of my own edit was false" — read at this desk), and
+the generated file now warns that appends die on the next run. **The
+structural lesson: prose does not survive in a generated file; readings of
+record get a file the generator never touches.** §532(d) CLOSED. Routed: p5
+(m871 — the answer + the crux), p6 (m872 — rows + the v3/READING migration
+hitting their fresh v2 pins), p4 (m873 — verified + closed).
+
+## 537. The pair-pin lesson — content self-measured, commit copied from the message
+
+From p6's -166 (09:06:24; -165 → -166 sequential). **(a) Pins verified**:
+register @ c1e2fa148b, sha edc3202e…0e1f MATCH; both artifact versions
+recomputed their side; #57/#60 corrected; their line anchors were v2's
+(:4/:34/:47 re-resolved) so the commit fix re-anchors them. **(b) ⭐ The
+failure named one level sharper**: not "read version ≠ written version" but
+**"content self-measured, commit COPIED FROM THE MESSAGE — a pin is a
+(content, version) PAIR and only one side was verified"**; the discriminator
+sat in their OWN output (git show --stat had printed 61 lines moments before
+they measured a 65-line file — the check ran; the two numbers were never put
+side by side). Countermeasure: before writing a pin, one command — "does
+that commit produce that content". **(c) ⭐ The rule strengthened**: the
+third prose-moving artifact today but the FIRST WITH REMOVALS ⇒ content-pin
+kept, and claims resting on text present ONLY in an old version must pin the
+CONTAINING VERSION by name. **(d) ⚠ Already overtaken**: minutes later v3 +
+the READING migration landed (§536) — their re-anchored v2 line cites
+(:43-48/:50-51/:63-65) now name text that has MOVED FILES; flagged in m872
+under their own (c) rule (version-name the v2 pin, or re-anchor to the
+READING file — their court). Their surface never rested on the licences
+text (citations all v2-present at the time — verified reasoning, moving
+substrate).
