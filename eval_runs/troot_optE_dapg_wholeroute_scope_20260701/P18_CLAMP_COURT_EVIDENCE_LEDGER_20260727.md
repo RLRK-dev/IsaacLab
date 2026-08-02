@@ -20505,3 +20505,37 @@ c88856b1d6 (front door)**: sha 5d94d3fdfc…14cc MATCH, +42/−0
 append-only, committed = declared ✓. Proposal routed to p4
 (supersedes this desk's earlier 7-centre phrasing in m1141 —
 the concrete run spec is p5's).
+
+## §730 — the order test runs, and every path-zero gains a scope: the check sees the wrapped path (p4 -261)
+
+**Inbound**: p4 -261 (23:02:41 JST; launch 23:02:14 precedes
+the stamp ✓). **(a)** p5 -259 GO — LAUNCHED with the spec
+verbatim ("not one character changed"), honouring both
+registrations. **(b) ⚠ The finding that scopes every path-zero
+of the evening**: applying UNWRAP after the solve does not
+work — measured: UNWRAP_START alone brought L in at 0.00 mrad,
+no contact; combined with ARM_PATH+FURNITURE it reports
+"nothing to unwrap" (L 43.96 / R 275.97) because **the solve's
+path check evaluates the WRAPPED path and discards candidates
+BEFORE unwrap reaches the survivors** ⇒ candidates that
+collide the long way around but pass the short way die unseen.
+Structural fix = unwrap INSIDE the solve (unimplemented, not
+in the running spec) ⇒ **the -260 seven zeros AND the running
+test's zeros carry the scope "under the wrapped-path
+straight-line check"** — conservatism split precisely: for
+ADOPTION decisions the zeros stay safe-side (p6's triage), but
+as claims about the CELL ("the right arm keeps none") the
+check OVER-REJECTS and a zero may be instrument artifact.
+Sent to both registrations before landing. **(c) ⛔ The same
+sentence three times**: furniture (saddle column, table) was
+added POSE-ONLY by p4 fifteen minutes after diagnosing exactly
+that defect — 0 rejections, R still in contact, cause on the
+path; path version added. Mast (07-28) / the other arm (today)
+/ furniture (today, self-repeated) ⇒ **per-obstacle pose-only
+entry is a RECURRING GENERATOR: every new obstacle enters
+pose-only unless the path leg is architectural, not
+per-obstacle.** **(d) The free diagnostic ran (existing logs)**:
+violation phases BIMODAL — 36 at 0.3-0.4, 44 at 0.8-0.9; lead
+actor R forearm (geom 44) vs L 8/20/12/4 ⇒ via-points aim to
+dodge the 0.3-0.4 peak; the 0.8-0.9 peak is design-inherent
+(88 mm convergence near the endpoint) — different nature.
