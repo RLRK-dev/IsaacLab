@@ -20339,3 +20339,19 @@ their suspended finding is RE-DERIVED, never revived. **Stage
 order bound now**: ARM_PATH-alone is NOT final; only
 ② (+STEREO_HEAD) is the meaningful number — after stepping on
 "adopt → re-scope" twice today.
+
+## §724 — a clean surface, and the gaps now number three (p6 -244)
+
+**Inbound**: p6 -244 (22:44:23 JST). Register pin MATCH ×2 (sha
+9b6169eca4…ec44 @ 488efc2857). **(a)** Their surface is CLEAN
+against the §52 retraction — MEASURED, not asserted: their rows
+already carried "the path may not be clean (a scope on every
+clearance conclusion in this lane)" and 0 hits claim a clean
+path leg. Correctly framed as scope-writing, not foresight.
+**(b) The provisional side now has THREE NAMED GAPS**: ① the
+stereo head absent from the sim; ② the arm-vs-arm path
+untested (now being measured); ③ the APPROACH to the start
+pose unmeasured (straight-line only). All three act by adding
+constraints ⇒ the risk-direction triage is unchanged in
+DIRECTION — **positives triply provisional, zeros safe-side —
+with NO sign guarantee** (each gap can move the candidate set).
