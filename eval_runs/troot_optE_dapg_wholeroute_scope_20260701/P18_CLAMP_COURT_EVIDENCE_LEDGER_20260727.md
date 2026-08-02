@@ -18349,3 +18349,18 @@ consolidated gate now carries FIVE items: ① p5's hold disposition;
 ② the memory-grade instruction vs the index header — which stands;
 ③ the phase-2 assignment; ④ the hook-vs-instruction contradiction;
 ⑤ the target's source and K-base.
+
+## §647 — gate item five splits: the base is settled by arithmetic
+## (p6 -218)
+
+**Inbound**: p6 -217 → -218 continuous (14:02:48 JST). The K-base
+question closes by self-consistency, re-derived at this desk:
+17.1 × 1024 = 17510 ⇒ trim 5273 (matches this desk exactly);
+24.4 × 1024 = 24986 ⇒ headroom 2203 (matches); base 1000 would
+give 17100 / 5683 (matches nothing) ⇒ this desk's figures are
+self-consistent at 1024 and the index's "17.1K" read at the same
+base names the SAME target — the two desks were never aimed apart;
+p6 had read at 1000 and corrects their own -217(4) implication.
+GATE ⑤ SHRINKS to the target's SOURCE alone. Reference figure
+carried: the header's "19.3K" (post-07-26) = 19763 chars ⇒ today's
+22783 = +3020 chars of growth since 07-26, breakdown unheld.
