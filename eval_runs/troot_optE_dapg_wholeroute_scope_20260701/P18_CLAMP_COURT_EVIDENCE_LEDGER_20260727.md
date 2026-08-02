@@ -15629,3 +15629,53 @@ asymmetry rowed with its register implication (widening corrections go
 out immediately; narrowing ones may hold for precision). Grid-240 runs
 with the three columns BY DESIGN (§556(b)); everything now waits on it
 (ETA ~11:00-11:30). Routed: p5 (m900), p4 (m901), p6 (m902).
+
+## 558. The reading rules, banked before the data — with the clock to prove it
+
+From p5's -197 (10:07; -196 → -197 sequential). **(a) Pins + the temporal
+proof**: doc sha 243996fc…80d4 MATCH (64); +22/−0 vs 8024f27fd2; banked
+**#44 @ acb7f736dc, committed 10:08:14 WITH THE GRID PROCESSES STILL
+RUNNING (2 live at the same desk measurement)** ⇒ the pre-registration
+is provably PRE — its commit precedes the grid's producing commit by
+construction. **(b) ⭐⭐⭐ The seven rules fixed before arrival**: (1)
+pass = the conjunction only, no single column verdicts; (2) the COUNT
+of passers is a 240-draw property — report existence and which points,
+never "exactly N"; (3) ANY tilt-45 point passing conjunctively ⇒ the
+escalation is wrong ⇒ immediate retraction to Rs; (4) the interleave
+column stays "as placed", never "any placement"; (5) (0.280,20) passing
+with the 0.110 crown ⇒ route B demotes to a record (not deleted); (6)
+route A passing ⇒ the ladder retires, failing ⇒ it runs; (7) even a
+full 240 grid stays 24-scoped on paths, pose-class exhaustiveness, and
+structural viability — "pass" means a START-POSE pass. **(c) ⭐⭐⭐ The
+stated reason, banked as the week's unification**: SEVEN same-family
+corrections this week (naming-as-necessity / summary-as-verbatim /
+correct-hypothesis-wrong-site / region-as-point / line-as-body /
+one-conjunct-as-conjunction / version-mixing) — common form: **"reading
+the quantity at hand as the quantity needed"** — and after the data
+arrives the reading would FIT THE RESULT ⇒ the reading goes in front of
+the data; not caution, a structural remedy. **(d)** Their version note
+(v1 pin correct as-read; v2 named alongside for the next reader) rowed.
+Routed: p5 (m903 — the bank with its clock), p6 (m904 — the
+pre-registration as register practice + the seven-fold unification).
+
+## 559. The return was a restoration — the code had the inequality first
+
+From p6's -175 (10:08:07; -174 → -175 sequential; register @ fda6df4750,
+sha 6ccb0f9f…3cd8 MATCH). **(a)** v2 measured their side (67 lines,
+18/1, numbers unchanged) — fifth same-shape, the rule already standing.
+**(b) ⛔ The provenance correction of their OWN credit**: the inequality
+is P4's — spec :419 ("smallest head that still reaches both mounts") and
+:421 ("a head whose top does not reach the mounts … is not carrying
+anything") were committed at 2fba2dfd67 (08:27), 40 minutes BEFORE p6's
+-162 (desk-verified verbatim) ⇒ p6 RETURNED, did not establish; v2's
+"I had established the inequality myself" (p4's words) is CORRECT.
+**(c) ⭐⭐ The better find, banked as a new family form**: p5's §26-2
+equality CONTRADICTED the very code comment it described — the return
+was "a restoration of the code's own reading" ⇒ **"a design doc's
+statement drifts from the code it describes — and the drifted side gets
+banked while the code stays silent."** **(d)** The conjunction
+asymmetry rowed with the two-directional observation (their catch both
+ADDED undecidedness and PROTECTED the settled side); the grid's running
+state recorded their side as p5-relayed-unobserved, to be verified at
+the artifact — no timeless RUNNING. Nothing routed onward (all parties
+current).
