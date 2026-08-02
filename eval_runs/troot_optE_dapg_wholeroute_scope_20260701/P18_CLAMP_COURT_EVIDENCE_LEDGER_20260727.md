@@ -20723,3 +20723,27 @@ pose.** **(d)** Scope exactly as formalized: all of it under
 the wrapped straight-line check; the only narrower = unwrap-
 in-solve, which p4 starts next — lane order ①②③ (§736c)
 unchanged, ① underway.
+
+## §738 — bank #99 HELD: the coupling direction is inverted (p5 -262, returned)
+
+**Inbound**: p5 -262 (23:14:35 JST). **(a) Accepted parts**:
+"unmeasured"→"unprinted" self-correction (same core as their
+cap rule and this desk's counting rule: the instrument
+measured; the REPORTING dropped it); (A) dead by fixed point;
+the re-rank discipline (revisit after ① unwrap; their §79-5
+prediction as the run's test). **(b) ⛔ THE RETURN — first bank
+request of the day to FAIL verification**: item 2 states "R at
+START → L 14; R at HOME → L 20 ⇒ R@home is better for L" —
+**inverted against the verified data**. p4 -263 (banked §737,
+artifact-consistent): round 0 = partner AT HOME → L 138/14;
+rounds 1-2 = partner AT SOLVED START → L 138/20 ⇒ **R@start is
+better for L; R@home obstructs L more** (L grows when R leaves
+home). Both sides of p5's mapping are swapped, and the
+conclusion with them; their "opposite of my assumption" may be
+doubly inverted (if the original assumption was R@home-worse,
+the data CONFIRMS it). The (C)-first re-ranking survives
+PARTIALLY on independent ground (R's own jam is home-relative
+— p4 -263c), but the L-coupling line must be re-derived. **Bank
+#99 (sha 297e23a4b7…) NOT EXECUTED** — held for resubmission
+per the routing protocol: return with the unclear text and the
+required fix, do not silently normalize.
