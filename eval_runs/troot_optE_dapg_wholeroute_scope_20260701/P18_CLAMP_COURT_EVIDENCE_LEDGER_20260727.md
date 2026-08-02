@@ -18650,7 +18650,12 @@ re-print first. **(b)** The trade shape held with their scopes:
 the crossover between 0.150 and 0.200 is 50 mm unsampled; L free 1
 is ONE pose (thin); the mounting UNRECORDED in the artifact — the
 (b)-defect's third instance — identified as the built mounting by
-signature, marked INFERENCE at §46-3's grade. **(c) Their relay
+signature, marked INFERENCE at §46-3's grade. [§661: NARROWED by
+p5 -233 with closed queries — the TABLE and READING lack it, but
+the per-point LOGS carry the mounting in-line ⇒ "third (b)
+instance" was an overstatement, the signature identification
+unnecessary, and the record lives one artifact over; the (b) check
+runs against the BANKED SET, not the one cited file.] **(c) Their relay
 discipline, and this desk's own grade corrected by measurement**:
 p5 refuses "witness" from the TABLE (no crossing column — two legs
 only, until they read the logs). This desk's §657 "three-leg" had
@@ -18689,3 +18694,30 @@ margin-of-two fulfillment read directly at their desk
 rule confirmed load-bearing in the field, and their standing
 consequence adopted: NO listing-absence claims on rows with R free
 ≥ 40.
+
+## §661 — the hold closes on its own reading, the overstatement
+## narrows, and seven evaluations decide a row (p5 -233, bank #75)
+
+**Inbound**: p5 -232 → -233 continuous (14:56:33 JST). **(a) The
+two-leg hold CLOSED at their own reading**: the READING and the
+per-point logs read directly (the interleave lines quoted verbatim
+in their message, matching this desk's §659(c) reads) ⇒ road (4)
+holds 3-leg witnesses at dy 0.200 (+34.5) and 0.250 (+29.5); 0.300
+fails on contact. **(b) Their own claim NARROWED by method**:
+"the mounting is unrecorded" re-measured with closed queries —
+table 0 / reading 0 / LOGS: PRESENT in-line ⇒ the "(b)-defect's
+third instance" was an OVERSTATEMENT (the record exists one
+artifact over; summaries drop it); the signature identification
+unnecessary; and the method self-catch banked: the original
+absence claim ran WITHOUT a closed query ("the answer was right,
+the method wrong" — their §47 discipline broken by its author,
+then repaired). Protocol refined: the (b) check runs against the
+BANKED ARTIFACT SET, not the one cited file. Tagged §659(b). **(c)
+⭐⭐⭐ The cheapest decisive check of the investigation**: dy 0.300
+= L free 7 × R free 1 = SEVEN pairs, one measured ⇒ seven distance
+evaluations decide the row that holds the MOST left-arm poses; the
+per-row cap check holds there (max 7 < 40) and fails at dy 0.150
+(R 41) — THE CONDITION DIFFERS ROW BY ROW, exactly as item 6
+requires. **(d) Bank #75 EXECUTED @ 67908da70c (front door)**:
+worktree sha 271ede86…8ce4 MATCH → commit-content MATCH; +47/−0
+append-only.
