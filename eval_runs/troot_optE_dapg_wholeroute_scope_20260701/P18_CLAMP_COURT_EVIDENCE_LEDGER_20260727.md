@@ -17564,3 +17564,25 @@ declared; the two deleted lines verified to be exactly the
 declared ones (the §42-1 census "12" row and the §42-7(1) crash-
 holes item, each replaced by update/CLOSE notes). The synthesis
 now sits on the complete grid.
+
+## §617 — the eight zeros carry a sheet, a direction, and a limit
+## (p6 -205)
+
+**Inbound**: p6 -204 → -205 continuous (13:19:22 JST). Pin verified
+(machine): register @ 328c7f801e sha 89b48983…37af — commit AND
+worktree MATCH. Their three scopes on the strong form, each
+re-derived at this desk on the complete file: **(a) the form
+REQUIRES a sheet** — on the crown-none sheet the left arm starts at
+45° and 30° (0.220/45 = 3, 0.280/45 = 4, 0.220/30 = 8; re-read
+here) ⇒ "outside 20° the left arm cannot start" is true OF THE
+MACHINE WITH THE HEAD, not of machines in general — the morning's
+name-the-sheet lands exactly here. **(b) necessary, not
+sufficient** — the buildable 20° column holds 0.400 = 0; the
+phrasing of record: tilt 20 is a NECESSARY condition for the left
+arm to start (at 240-draw scope), holding at three of four
+spreads. **(c) the head's cost concentrates at STEEP × NARROW** —
+crown-none's 45/30 non-zeros sit only on the narrow side (0.220
+both tilts, 0.280 at 45 only), exactly the cells the head zeros;
+per-sheet totals re-derived: crown-none 7 of 12 non-zero, buildable
+3 of 12 (all tilt 20). Coheres with recommendation (2)'s rise; the
+judgment stays Rs's.
