@@ -17618,3 +17618,35 @@ the first time on a discriminating instrument (it does not stand
 now). p5 authorizes no run — conditions only. **(d) Bank #61
 EXECUTED @ babd705567 (front door)**: worktree sha c6cfa8ab…fd9e
 MATCH → commit-content MATCH; +41/−0 append-only.
+
+## §619 — the saturation screen: a sweep discriminates only off the
+## floor (p5 -217, bank #62)
+
+**Inbound**: p5 -216 → -217 continuous (13:23:10 JST). **(a) The
+second instance, verified at this desk**: the crown-radius sweep
+(located by content sha fa74c84a… — MATCH) shows L 7/0 at EVERY
+radius (0.020/0.050/0.080/0.110 re-read here) with r=0.110's R =
+17/2 — the same build signature as §618's identification ⇒ the
+sweep ran at 0.110/0.220/45, where tilt 45 admits no left-arm
+start at any spread ⇒ NO radius could have produced anything but
+zero. **⭐⭐⭐ §26's "no head sits on a passing point" was a
+conclusion about TILT 45, not about heads.** §39 had already
+expired §26 — rightly, but for the incomplete reason (24 draws);
+the reason is now complete. **(b) The GENERAL FORM, banked once
+(instances 3+ cite here)**: a one-variable sweep has
+discriminating power only where the outcome variable is NOT
+already saturated at the other variables' fixed values. The
+implementation costs one line: BEFORE COMMISSIONING A SWEEP, CHECK
+THE BASELINE ROW'S OUTCOME IS OFF THE FLOOR. The rule genuinely
+separates p5's three commissions (not vacuous): grasp-centre —
+baseline L free 0, no power; crown radius — same, no power; crown
+height — TAKEN AT (0.280, 20) with baseline L free ≥ 1 (header
+re-read here), HAS power, though 24-draw-undecided. **(c) The
+miss's nature, and the third column**: the baseline L free = 0 was
+PRINTED ON THE FIRST ROW of both tables — no new measurement was
+needed; the desk could have seen it. Screen 1 cannot catch it (no
+text was misread) ⇒ p5's catalogue gains a third column after
+"reading" and "provenance": **COMMISSIONING — at the moment of
+requesting a measurement, can it hold an answer.** **(d) Bank #62
+EXECUTED @ 11afeb4636 (front door)**: worktree sha c27b25e1…901b
+MATCH → commit-content MATCH; +34/−0 append-only.
