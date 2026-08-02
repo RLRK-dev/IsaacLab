@@ -15133,4 +15133,7 @@ the count matters (a 1-wide door stays 1-wide). Parallel with the descent
 probe per p5. Routed to p4 (m877). **(d) Scope carried**: §30's conclusions
 unaffected (different measurements); the proposal concerns the POSE CLASS
 and may — not must — dissolve the shape question; all start-pose still.
-Routed: p4 (m877), p5 (m878 — bank), p6 (m879 — rows).
+Routed: p4 (m877 — first send TRUE-UNDELIVERED: idle pane, no body, no queue
+marker, while m873/m874 sat delivered in the same window; ONE measured
+resend 09:25, confirmed — the §459 ladder executed to the letter), p5
+(m878 — bank), p6 (m879 — rows).
