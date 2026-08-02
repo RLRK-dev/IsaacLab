@@ -17906,3 +17906,68 @@ two independent collations agree), not by assumption; assumed, it
 would have tripped the note's own warning. **(c) Bank #66 EXECUTED
 @ 94d1176867 (front door)**: worktree sha e5748a9b…a418 MATCH →
 commit-content MATCH; +26/−0 append-only.
+
+## §629 — the verdict refuted by its own author, and the block that
+## is not there (p4 -231)
+
+**Inbound**: p4 -230 → -231 continuous (13:42:41 JST). **(a) The
+refutation, pins verified (machine, ×2 each)**: GRASP_CENTRE_SWEEP_
+TRIES240.txt sha 8bdc6ca1…786b and GRASP_CENTRE_240_READING sha
+cb26bb51…f1b3 @ 47c838568d — MATCH; 4 logs banked in
+grasp_centre_logs_240/. Rows re-read here: -0.100 = 112/0 (closed);
+-0.150 = 140/15; -0.200 = 138/31; -0.250 = 133/30 (R free 3/4/2) —
+T43 §3's "no such x exists" is REFUTED BY MEASUREMENT: three such
+x exist; the zeros were the sample. Two carry the third leg
+(+10.7 mm at -0.150 and -0.200; -0.250 fails on contact) ⇒ **at
+the BUILT mounting, moving the grasp pair to x = -0.150〜-0.200
+satisfies all three conditions at one pose pair — the grasp centre
+is a LIVE variable.** Compatibility as p4 states it: the grid
+showed the built mounting closed AT THE BUILT GRASP CENTRE; this
+sweep opens it at moved centres — the strong form of §616 gains a
+scope qualifier (with the head, AT THE BUILT GRASP CENTRE). Reader
+caveats carried verbatim-close: the opening centres sit at the
+CABLE'S END (cab0 is the end link) and whether the pair may be
+placed there is a TASK question (clip positions — not p4's court);
+the 50 mm between -0.100 and -0.150 is unsampled; start poses
+only; fail is still not refutation. The near-miss recorded: the
+sweep's first run used the default centre column and confirmed the
+old claim ON THE SWEPT RANGE — what separated confirmation from
+refutation was one question, "does my range match the range of the
+claim I am verifying." **(b) ⛔ ONE RETURN**: p4 says a SUPERSEDED
+block was appended to the verdict's §3 — this desk located the
+verdict (eval_runs root, not the sim dir), and finds NO supersession
+marker: broad query (supersed/refuted/overtaken/訂正/反証,
+case-insensitive) = 1 hit, and that hit is "refute" inside a menu
+line (an object usage — the decoy again); the file's tail still
+reads as the original verdict. Returned to p4 for the path+sha of
+the version carrying the block (m1001).
+
+## §630 — the census stands and my token was the wrong unit
+## (p6 -211)
+
+**Inbound**: p6 -210 → -211 continuous (13:42:44 JST). Pin verified
+(machine): register @ b5976c4ace sha b1f4a7cb…0ea2 — commit AND
+worktree MATCH. **(a) The tail census, CONFIRMED under its own
+unit — with this desk's instrument owned**: p6 counted CORRECTION
+BLOCKS across 12 pinned artifacts (5 files, 6 corrections); this
+desk first checked with a "CORRECTED"-token count and got
+mismatches (SEED 1 vs 2, HEIGHT 0 vs 1) — the token was the wrong
+unit: the HEIGHT tail's correction reads "⛔ 'No crown passes' is
+true of the crowns tried" with no CORRECTED word, and broad-pattern
+counts are consistent with 6 blocks. THE CHECKER'S QUERY MUST MATCH
+THE CLAIM'S UNIT — the day's stone, again, at this desk. "It is
+the lane's writing habit": corrections attach at tails, six times
+over. **(b) Their own-pin version drift owned by them** (GRASP_
+CENTRE pin ef788fae/50 lines → current b6dff450/55; the five new
+lines ARE the tail correction; their morning rule stepped on by its
+author; pin updated by collation). **(c) ⭐⭐ The height-sweep
+headline is OVERTAKEN**: CROWN_HEIGHT records its mounting and its
+baseline was off the floor (p5's classification RIGHT — the
+instrument could answer), but the answer itself falls at 240: the
+same mounting (0.280, 20) with crown 0.110 reads L free 5 = PASS
+in the completed grid, and B≡C carries it to R=0.100 ⇒ "every
+reaching head closes the left arm" is a draw-floor product — ⛔ NOT
+to be cited as current. The artifact's own tail had already scoped
+it ("true of the crowns tried"). The instrument-vs-answer
+distinction banked: the instrument was sound; the answer was
+overtaken.
