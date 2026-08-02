@@ -18842,3 +18842,24 @@ identified by the 106/122 signature as (0.280, 20) — INFERENCE
 grade, kept. **(d) Bank #77 EXECUTED @ 35f508836b (front door)**:
 worktree sha abe8695c…32d5 MATCH → commit-content MATCH; +44/−0
 append-only.
+
+## §666 — the sheet stays current under its own rule (p5 -236,
+## bank #78)
+
+**Inbound**: p5 -235 → -236 continuous (15:14:17 JST). The
+"current sheet" declaration turned on its author: leaving §59
+unreflected would create staleness at the very desk that hunted it
+in others all day — so the sheet updated minimally. **Road (5)
+created**: 45° with a THIN crown (none / 0.020) — not excluded
+(one measured pair of 42 and of 14, both-clear class); its
+remainder = the 56 pair-separations + structure (out of court).
+**Road (3) explicated** as "the bowed head" and DEMOTED to next
+candidate should (5) fall, with the one-line correction under the
+table that "45° has only the bowed head" was wrong. The check
+table now carries thin-crown 56 + height 546 — total ≈ 1912. p6's
+decoder received as a like-for-like option, not initiated. **Bank
+#78 EXECUTED @ ed54478b28 (front door)**: worktree sha 6e7a8255…353c
+MATCH → commit-content MATCH; +7/−1, the one deleted line verified
+to be the old road-(3) row (replaced by (5) + explicated (3)),
+declared. The sheet of record now holds SIX roads:
+(0)(1)(2)(4)(5)(3).
