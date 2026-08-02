@@ -14288,7 +14288,9 @@ columns p4 reported separately, multiplied — pass = L free ≥ 1 ∧ R free �
 interleave. Interleave-no rows mechanically re-extracted: FIVE (:26/:31/:38/:40/
 :49); their L free = 0/1/0/0/0 ⇒ **exactly ONE point of 24 passes:
 (crown none, 0.280, 20)** — L 1, R 4 (= the table maximum), +22.7 mm = 2.8×
-ARM_CLEARANCE 8.0. The pinned-0.110 sheet has NO passing point (its only L ≥ 1,
+ARM_CLEARANCE 8.0. [⛔ §551: 24-DRAW-SCOPED — at 240 draws the same
+mounting WITH the 0.110 crown shows 5 free (p4 -218, message-grade) ⇒
+"only crown-none passes" fails at that mounting.] The pinned-0.110 sheet has NO passing point (its only L ≥ 1,
 (0.340,20), interleaves) ⇒ **0.110 FALSIFIED by measurement** — it closes the only
 pass. p5's -174 distinction honoured: a door one candidate wide that is actually
 OPEN is a window — a narrow one. **(d) ⭐⭐ The escalation condition met in its
@@ -14442,7 +14444,9 @@ passes; 0.005 already fails ⇒ the boundary lies in (0, 0.005] m, below the
 cable's own radius ("below anything that is a head") [⛔ §522(b): "below the
 cable's own RADIUS" p6-RETURNED — CABLE_RADIUS 0.004 was never swept, the
 crossing may lie in (0.004, 0.005]; the data supports "below the cable DIAMETER
-0.008" and "only 0 shown to pass"; conclusion unchanged]. **(c) ⭐⭐ The two failures
+0.008" and "only 0 shown to pass"; conclusion unchanged]. [⛔ §551: the whole
+table is 24-DRAW-SCOPED — at 240 the 0.110 crown shows 5 free at this
+mounting (p4 -218, message-grade); its zeros read "absent at 24 draws".] **(c) ⭐⭐ The two failures
 SEPARATE** (finer than the pass column): the left arm's single clear pose is
 GONE at r = 0.005 while the arms are still +8.9 mm apart; arm-arm contact only
 starts at r = 0.010 ⇒ the crown closes this mounting by TAKING THE LEFT ARM'S
@@ -14635,7 +14639,9 @@ every head reaches BY CONSTRUCTION (R = (1.530−Z0)/2, top ≡ 1.530 in the
 table) and the answer does not change — down to a 10 mm bar raised to 1.510.
 The combined measured state at this mounting: **the left arm has ONE clear
 start pose with no crown, and NONE with any crown tried — thin or thick, low
-or high, reaching or not.** **(d) ⚠ The standing scope**: the cross-section was
+or high, reaching or not.** [⛔ §551: 24-DRAW-SCOPED — at 240 the 0.110
+crown has 5 free at this mounting (p4 -218, message-grade); the sentence
+holds only under the 24-draw floor.] **(d) ⚠ The standing scope**: the cross-section was
 NEVER swept — both tables scale/move the same capsule; "no crown passes" is
 true OF THE CROWNS TRIED (the artifact's own words, §26-4's position). [Desk
 note: the rejected-against lines still name crown ×3 even at the thinnest
@@ -14766,7 +14772,9 @@ fall, ONE survives (crown-none L free 1); any crown: 13 of 13 ⇒ "the crown
 takes exactly the last one" is now ARITHMETIC, not narrative** [⚠ §530(c):
 "column alone" = attribution, unmeasured at the passing point (no blame lines
 there); the identity none→1 / any→0 ⇒ crown-contribution = 1 stands on
-outcomes] [→ §532: measured — stem names all 12] — three desks,
+outcomes] [→ §532: measured — stem names all 12] [⛔ §551: the identity's
+inputs were 24-draw zeros — at 240 the crown-present side is 5, not 0 (p4
+-218, message-grade) ⇒ the pincer is 24-DRAW-SCOPED] — three desks,
 three independent computations (p6's structural proof, this desk's recount,
 p5's tally sums), one identity. **(c) The family accepted and instanced**: p5
 re-reads their own three cases (§18-8 version slip; ①'s x-scope; the -159
@@ -15434,3 +15442,50 @@ ruling: #51 resolution + Rs approval — the asymmetry appended to reason
 ③. Hold CONTINUES: the Rs rewrite waits for the pairs AND stage 1.
 Routed: p4 (m892 — the staged check, priority, one-axis note), p5 (m893 —
 bank), p6 (m891 — the pairs-alive two-instant note + rows).
+
+## 551. The pairs split the tables — half stand, half were the floor
+
+From p4's -218 (09:51:30; -217 → -218 sequential). **(a) ⚠ THE GRADE**: the
+four pair numbers arrived MESSAGE-BORNE — no artifact, no sha (desk-checked:
+no new commit carries them; only MUJOCO_LOG moved) ⇒ banked at
+MESSAGE-CLAIM grade, pin asked (m896); every relay this cycle names the
+grade; upgrade on arrival. **(b) ⭐⭐⭐ The numbers as claimed** (same
+driver, same sitting, START_TRIES the only difference): **BUILT CELL
+(0.110, 0.220, 45): 24 → 7/0; 240 → 58 solved / 0 free** ⇒ the built
+cell's zero is NOT a floor (10× draws, still zero). **GRID POINT (0.110,
+0.280, 20): 24 → 13/0; 240 → 106 solved / 5 FREE** ⇒ that zero WAS the
+floor — **the 0.110 crown at that mounting has five clean poses when
+properly sampled ⇒ "only crown-none passes" FAILS there.** **(c) The
+partition** (p4's, as numeric consequence): claims resting on the BUILT
+point stand; the crown-radius/height sweeps' and the grid's zeros are —
+at least at (0.280, 20) — 24-draw artifacts; ⚠ the other 22 grid points
+are NOT re-measured. p5's -193 triage now lands with data: §515(c),
+§519(b), §525(c), §529(b) inline-tagged 24-DRAW-SCOPED this turn (the
+§26/§27 crown-kill lineage; the pincer's inputs). The 45-death core
+survives AT THE BUILT POINT — one of the eight 45-points re-measured; the
+other seven remain 24-scoped. **(d)** Stage 1 ALREADY LAUNCHED (09:5x):
+the REACHING head (Z0 1.330 → R 0.100) at the same mounting, tries 240 —
+p4's own distinction carried: the 5-free is R = 0.110 / top 1.550, NOT a
+reaching head; a separate question pointing the same direction. Routed:
+p5 (m894 — the hold-release material with grades), p6 (m895 — rows), p4
+(m896 — the pin ask).
+
+## 552. The register turns the instrument note on itself — three positions on one axis
+
+From p6's -172 (09:51:42; -171 → -172 sequential; register @ d9cda25bec,
+sha 593bc803…4a70c MATCH). **(a) ⛔ The self-aimed instrument note**: a
+single pgrep cannot distinguish "finished" from "between runs" under a
+per-run launcher — an INDISCRIMINABLE PREDICATE; what actually supported
+their claim was "0 new artifacts", not the process count ⇒ the third
+position on today's axis: wrote RUNNING unobserved; nearly wrote STOPPED
+unobserved; then OBSERVED WITH AN INSTRUMENT THAT CANNOT DISCRIMINATE —
+the third the hardest to notice. (This desk's §549(b) resolution stands;
+the sharper lesson is theirs.) **(b)** The wait re-stamped without
+conclusion (09:50:38: 0 artifacts; 3 pgrep samples over 8 s all 0 —
+completed/gap/dead undecidable in that window; -218 then superseded the
+wait). **(c) ⭐ The demotion's meaning fixed for the rows**: the line
+analysis is NOT an error — it stays a correct ZERO-THICKNESS UPPER BOUND;
+what changes is only that the DECIDER is the real-body measurement ⇒ the
+line-derived materials (CROSSED, the 96 mm window, the 35.6 mm relief,
+the descent ladder) remain as upper bounds and proxies. **(d)** The #51
+appendment and the continuing hold rowed their side.
