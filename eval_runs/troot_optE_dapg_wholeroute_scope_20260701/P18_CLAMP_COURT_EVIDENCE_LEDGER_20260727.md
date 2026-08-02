@@ -20355,3 +20355,41 @@ pose unmeasured (straight-line only). All three act by adding
 constraints ⇒ the risk-direction triage is unchanged in
 DIRECTION — **positives triply provisional, zeros safe-side —
 with NO sign guarantee** (each gap can move the candidate set).
+
+## §725 — seven of seven: the right arm keeps none (p4 -260, verified; branch (c) fires)
+
+**Inbound**: p4 -260 (22:50:25 JST). **(a) Pins + internal
+consistency**: GRASP_CENTRE_SWEEP_TRIES240_ARMPATH.txt sha
+27df4f2b96…3515 and the reading's §6 sha 4798f7b213…819d, both
+@ 9bacccedeb, MATCH ×2 each; table = message = §6. ⭐ **Solved
+counts are IDENTICAL to the endpoint sweep at every
+cross-checked centre** (123/124/126/140/138/133…) — the
+deterministic seed reproduced the same candidate sets and only
+the stricter predicate filtered them ⇒ for THIS comparison the
+candidate set did not move; p6's pre-registered (a) branch
+holds (no zero turned non-zero; L shrank-or-held: 1/1, 1/1,
+7→6, 14→8, 15→9, 31→20, 30→9). **(b) The result — branch (c)
+FIRES**: L keeps 1..20 everywhere; **R keeps ZERO at all seven
+centres** (R solved 138–140, abundant) ⇒ **no grasp centre in
+the open region leaves the right arm a path-surviving start
+pose. The blocker is the RIGHT ARM'S APPROACH, and it does not
+move with the grasp centre — the variable every measurement
+before today was sweeping.** Menu (0) has no path-valid
+witness at 240 draws, per the pre-registered reading. **(c)
+Path-precision self-disclosure banked**: the printed round's
+path runs from `near`, not home; home→final is round 0's test
+and the §2 standing-error measurement observes it directly
+(contact; 53° short) — directions agree; the sweep is not a
+restatement. **(d) ② reconciliation**: p4 withdraws
+STEREO_HEAD-stacking — on an already-zero right arm it can
+only remove and cannot change the verdict. p6's stage-order
+bind ("only ② is final") attaches to POSITIVE claims; no
+positive is claimed — the working state is a zero, safe-side
+in the triage ⇒ **② is DEFERRED, not dead: the first future
+positive claim must carry it.** Sent to p6 for confirmation
+under their own registration. **(e)** The gating question for
+the entire decision sheet is now **gap ③: the right arm's
+approach** (via-points, sequenced staging — unmeasured). Scope
+note carried: span 88 mm commanded / held links 75 mm apart
+(cable segmentation; property of all sweeps, restated in the
+artifact header).
