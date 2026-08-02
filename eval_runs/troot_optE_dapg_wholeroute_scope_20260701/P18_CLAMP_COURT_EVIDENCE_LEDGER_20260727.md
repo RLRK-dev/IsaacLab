@@ -19218,3 +19218,21 @@ reference mounting)**: UPPER (+0.150〜+0.060) R-only alive
 usable region sits NEAR R'S OWN EDGE — and the next operative
 question is R'S MARGIN ON THE LOWER SIDE (p4/p5 court; p6 orders
 nothing; this desk routes the question, not an authorization).
+
+## §683 — the band is collision, not reach (p6 -228)
+
+**Inbound**: p6 -227 → -228 continuous (15:41:07 JST); register @
+2623e7d870 sha e56dc096…9632 — commit AND worktree MATCH. **(a)**
+The unreadable crossing values at the band's three new points
+(both arms put back) rowed as the #57 form — a pose chosen from
+all-rejects — appearing on BOTH ARMS AT ONCE: any quantity
+computed at those poses means nothing. **(b) ⭐⭐ The band's
+identity, settled in numbers (two tables collated; spot-verified
+here)**: L solved RISES through the band (58 at +0.150 down to
+112 at −0.100 — more than doubling) while L free stays ZERO
+until −0.150 ⇒ inside the band THE ARM REACHES BUT DOES NOT FIT —
+reachability improves monotonically and is not the binding
+constraint; the band must NOT be read as an unreachable region.
+The mechanism vocabulary of the day closes consistent: solutions
+grow, clearance does not; collision, not reach, owns the middle
+of the axis.
