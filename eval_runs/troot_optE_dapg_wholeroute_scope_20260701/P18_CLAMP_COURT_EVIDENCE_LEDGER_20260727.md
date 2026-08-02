@@ -18721,3 +18721,29 @@ per-row cap check holds there (max 7 < 40) and fails at dy 0.150
 requires. **(d) Bank #75 EXECUTED @ 67908da70c (front door)**:
 worktree sha 271ede86…8ce4 MATCH → commit-content MATCH; +47/−0
 append-only.
+
+## §662 — one current surface supersedes every menu (p5 -234,
+## bank #76)
+
+**Inbound**: p5 -233 → -234 continuous (14:59:06 JST). The options
+moved three times in an hour, so p5 issued ONE CURRENT SHEET that
+supersedes every prior menu table — banked as the decision surface
+of record. **The five roads with their grades**: (0) grasp centre
+−0.150/−0.200 — 3-leg witness +10.7, THE ONLY ROAD CLEAN THROUGH
+THE PATH LEG, witness thick (15-31 poses); (4) work row
++0.200/+0.250 — 3-leg witness +34.5/+29.5, path leg unexamined,
+thin (L = 1); (1) 20° at 0.280 — 3-leg +14.7; (2) 20° at 0.220 —
+not excluded, one pair of 74; (3) 45° with a new head — never run.
+(0) and (4) differ in KIND: no machine change. **The cheap checks
+in one table**: dy 0.300 all-pairs = 7 (cap PASS); (2) = 74; all
+six weak rows = 1303; seating predicate = a few solves; chain =
+240/stage and regrades every zero of the day. All await Rs; p5
+initiates none. **The common unmeasured, one line**: all start
+poses; seating unmeasured on every road; 240 is also a sample
+(four zeros moved today); structure out of court. **The
+recommendation**: unchanged with more grounds — (0) one step
+ahead; its remainder equals (4)'s, so EITHER choice leads to the
+same next measurement; and seven distance evaluations could turn
+(4) thick — the day's cheapest single move. **Bank #76 EXECUTED @
+5c3890f6c3 (front door)**: worktree sha b223da1b…f847 MATCH →
+commit-content MATCH; +38/−0 append-only.
