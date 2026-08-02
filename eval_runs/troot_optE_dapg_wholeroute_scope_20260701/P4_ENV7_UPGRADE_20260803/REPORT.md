@@ -82,7 +82,7 @@ forward-looking statements about what env7 *is* were updated (`CLAUDE.md:82`, co
 `WHY_THE_ROUTE_NEVER_MOVED_20260802.md` carried no stack at all; a header note was added before the
 upgrade so the provenance could still be stated honestly afterwards.
 
-## 6. Instrument re-measure — pending
+## 6. Instrument re-measure — done, identical (see the result subsection)
 
 The decisive check is whether the same driver, same settings, one axis changed (mujoco 3.10.0 →
 3.11.0), reproduces the recorded numbers.
