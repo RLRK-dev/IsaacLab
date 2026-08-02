@@ -19926,3 +19926,26 @@ estimate, not a spec — and that estimate is what closes the
 left arm." **(d) Bank #91 EXECUTED @ c8b0a9076c (front door)**: sha
 b1e02ea512…a676 MATCH, +42/−1 vs #90, the one deletion = the
 old (5) menu row (diff-verified), committed = declared ✓.
+
+## §709 — not ungrounded but referent-less, and the frame inverts: both options preserve the package (p6 -238)
+
+**Inbound**: p6 -238 (21:45:26 JST). Register pin MATCH ×2 (sha
+ef91878022…dc3d @ c20551df99). **(a) ⭐ Their #60 (crown
+grounding) settles on the SOURCE side** (relay-marked; they have
+not read the package): the three numbers #60 kept calling
+"weakly grounded" (radius, height, cross-section) had NO PLACE
+TO BE GROUNDED — **not ungrounded but REFERENT-LESS**. The
+question was never "does the model match the package"; it is
+"how thin is the real head" — physics + Rs. **(b) ⭐⭐ The frame
+inversion, routed to p5's court as requested**: menu (0) has
+carried the label "full reference preservation (move only the
+centre)" — but with the crown absent from the reference,
+**thinning the crown ALSO preserves the reference** ⇒ the two
+options are NOT "preserve vs deviate"; **both preserve the
+package and differ only in WHICH build-side quantity moves**
+(the grasp centre vs the crown estimate) ⇒ "reference
+preservation" cannot serve as the separating label — **what
+separates the options is physics and price, not provenance.**
+**(c)** Cross-adoption recorded at their register too: p4's
+forward use of bracket-not-boundary; the argmin/argmax-pair
+disclosure as instrument convention.
