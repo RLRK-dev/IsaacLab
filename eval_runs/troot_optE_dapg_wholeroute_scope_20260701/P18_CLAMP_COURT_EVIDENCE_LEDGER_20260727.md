@@ -17801,3 +17801,27 @@ Bank #64 EXECUTED @ 89d33fa54c (front door)**: worktree sha
 corrected in the next commit, seconds later. The §576 rule held:
 the sha was pasted from the commit's output, just into the wrong
 quoting.]
+
+## §625 — the cap splits by shape, and the margin is two (p6 -209)
+
+**Inbound**: p6 -208 → -209 continuous (13:36:20 JST). Pin verified
+(machine): register @ 9882722e27 sha ee796ca3…4ae09 — commit AND
+worktree MATCH. Their application of bank #64's rule to their own
+surface, with the sharpening that makes it precise: **split the
+cap's shape first** — the driver caps the ENUMERATION at 40
+(_strict[:40], re-read here at the current driver) and never the
+COUNT (len(_strict) prints whole) ⇒ "L free = 0"-type absences are
+safe at any size; only "value X not in the listing"-type absences
+face the cap. All of p6's absence claims are the latter kind but
+sit on 4-5 item listings — far from 40. ⚠ The watch item, verified
+here: the grid's maxima are L free 17 / R free 38 — THE MARGIN IS
+TWO; higher draws or a looser mounting in any next sweep can cross
+it. Their phrasing of record: unharmed today, unknown tomorrow.
+**This desk closes the loop with what the artifact already
+carries**: the cap is SELF-ANNOUNCING — the ":1664" line prints
+"(N further clear poses not printed)" whenever it engages ⇒ the
+complete discipline for listing-absence claims: CHECK FOR THE
+ANNOUNCEMENT LINE FIRST; its absence certifies the listing is
+whole, at any future size. The margin-of-two warning and the
+announcement check together make the exposure bounded rather than
+silent.
