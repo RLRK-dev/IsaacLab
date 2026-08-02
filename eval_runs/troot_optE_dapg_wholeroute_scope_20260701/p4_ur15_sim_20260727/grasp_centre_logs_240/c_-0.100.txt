@@ -1,0 +1,45 @@
+[cell] cable bend EI in force: 0.005 N.m^2 from task_config.py:144
+[cell] -> joint stiffness 0.33333 N.m/rad over a 15 mm link
+[cell] cable 40 x 15 mm, 1.1243 g each, 44.97 g total
+[cell] clip collision read from the env source: True
+[steps] ⚠ the cell-constant contract is not satisfied yet: 3 names
+[steps] ⚠ each needs a home in the p5 spec; running non-strict while that is decided
+[steps]     _SHOULDER            line   388  carries a number of its own and belongs to none of the three
+[steps]     _bad                 line  1693  carries a number of its own and belongs to none of the three
+[steps]     _nz                  line  1699  carries a number of its own and belongs to none of the three
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:301: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  m = cell.compile()
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:305: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  (S / "_steps_cell_full.xml").write_text(cell.to_xml())
+[steps] nq=113 nu=14 nbody=88 ngeom=140 eq=8  seat links C1=cab30 C2=cab23
+[steps] tracking bound: L reach 1546 mm -> lag allowed 5.18 mrad | R reach 1546 mm -> 5.18 mrad  (clearance 8.0 mm / reach; re-measured each step as the arm extends)
+[steps] arm colours: LEFT arm = ORANGE, RIGHT arm = PURPLE (claws keep blue = upper, red = lower).  Use the colour, not the side of the screen: the close-up panel is mirrored.
+[steps] geoms: 140 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.300,+0.285] y[+0.280,+0.280] z-table[+0.1486,+0.1559] ncon=14
+[steps] ⚠ grasp centre moved off C1: x=-0.1000 m (C1 is at +0.1500); span unchanged at 88 mm commanded
+[steps] measured grasp: L=cab10 [-0.1424  0.28    0.9523]  R=cab16 [-0.0524  0.28    0.9536]  drop across the span = 1.3 mm
+[steps] attitude menu: 27 entries per arm; entry i on R is the negation of entry i on L in both components -> YES
+[steps] attitude menu, first 8 (yaw, roll) in rad:  L(+0.00,-0.00)/R(+0.00,+0.00)  L(+0.00,-0.35)/R(+0.00,+0.35)  L(+0.00,-0.60)/R(+0.00,+0.60)  L(+0.00,-0.85)/R(+0.00,+0.85)  L(+0.00,-1.10)/R(+0.00,+1.10)  L(-0.30,-0.35)/R(+0.30,+0.35)  L(+0.30,-0.35)/R(-0.30,+0.35)  L(-0.30,-0.60)/R(+0.30,+0.60)
+[steps] attitude menu: 22 of 27 entries have a non-zero yaw -- those are the ones the sign can be seen on; on the other 5 it is invisible either way, which is why a single trace line could not settle this
+[steps] start pose = the cell's home, both arms: [-3.1521 -0.2867  2.4674 -1.3953  1.5634 -1.5782]
+[steps] ⛔ start-pose IK L: NOT ONE of 112 candidates cleared the clearance or its path, so all 112 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ start-pose IK R: NOT ONE of 139 candidates cleared the clearance or its path, so all 139 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ start-pose IK L: NOT ONE of 112 candidates cleared the clearance or its path, so all 112 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ start-pose IK R: NOT ONE of 139 candidates cleared the clearance or its path, so all 139 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ start-pose IK L: NOT ONE of 112 candidates cleared the clearance or its path, so all 112 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] start-pose IK L: rejected against -- the other arm x90, g6 on L_forearm_link vs stem x53, g6 on L_forearm_link vs crown x29, g5 on L_upper_arm_link vs crown at 3/6 along the move (on the way) x9, g5 on L_upper_arm_link vs stem at 3/6 along the move (on the way) x8, g9 on L_wrist_3_link vs crown at 5/9 along the move (on the way) x6, g9 on L_wrist_3_link vs crown at 3/6 along the move (on the way) x2, g8 on L_wrist_2_link vs stem at 5/8 along the move (on the way) x1, g9 on L_wrist_3_link vs crown at 4/8 along the move (on the way) x1, g7 on L_wrist_1_link vs stem x1, g8 on L_wrist_2_link vs stem x1, g30 on Lg_left_coupler vs crown at 4/7 along the move (on the way) x1   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)
+[steps] start-pose IK L: 112 solved / 0 collision-free (⛔ 0 -- all 112 put back) / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll  0.0 deg sigma_min 0.1409 |q|max=2.19 rad
+[steps] start-pose IK L: chosen q = [-0.541506 +0.944070 +2.193970 -0.858738 +1.943852 -0.402133] rad
+[steps] ⛔ start-pose IK R: NOT ONE of 139 candidates cleared the clearance or its path, so all 139 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] start-pose IK R: rejected against -- the other arm x139, g44 on R_forearm_link vs stem x49, g43 on R_upper_arm_link vs crown x22, g47 on R_wrist_3_link vs crown at 6/10 along the move (on the way) x18, g44 on R_forearm_link vs crown x12, g43 on R_upper_arm_link vs crown at 5/8 along the move (on the way) x9, g43 on R_upper_arm_link vs crown at 4/7 along the move (on the way) x7, g43 on R_upper_arm_link vs stem at 6/9 along the move (on the way) x4, g43 on R_upper_arm_link vs stem at 7/10 along the move (on the way) x4, g44 on R_forearm_link vs crown at 7/9 along the move (on the way) x3, g43 on R_upper_arm_link vs crown at 6/9 along the move (on the way) x2, g43 on R_upper_arm_link vs stem at 5/7 along the move (on the way) x2, g43 on R_upper_arm_link vs crown at 5/9 along the move (on the way) x1, Rg_left_pad_f1ext vs stem x1   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)
+[steps] start-pose IK R: 139 solved / 0 collision-free (⛔ 0 -- all 139 put back) / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll 20.1 deg sigma_min 0.1340 |q|max=2.31 rad
+[steps] start-pose IK R: chosen q = [-1.049042 +1.029753 +2.075892 -1.519429 +2.314483 +1.661811] rad
+[steps] 88mm-SPAN INTERLEAVE: arms closest -131.9 mm (6 <-> 44)   <- TOUCHING OR THROUGH   spread 0.220 tilt 45.0 deg   crown r 0.110   ⚠ commanded span, not the links actually held

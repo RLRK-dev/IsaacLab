@@ -1,0 +1,28 @@
+GRASP-CENTRE SWEEP -- collision-free start poses per arm, by where the pair sits
+START_TRIES = 240 draws per solve.  ⚠ A survivor count of zero from 24 draws does not mean no clear pose exists -- four of sixteen such zeros in the mounting grid became non-zero at 240 (GRID_24_VS_240_20260802.txt).
+instrument: the driver's own start-pose IK line, with the silent or-cands fallback
+            separated out (before that fix, 'none cleared' and 'all cleared' printed
+            the same number and this sweep could not have been read)
+method    : the real driver, once per centre, GRASP_CENTRE_X set, stopped as soon as it
+            has printed both lines.  No reimplementation of the solve.
+⚠ span    : 88 mm COMMANDED; the links actually taken sit 75 mm apart, because the cable
+            is 15 mm segments and the nearest link is what gets held.
+
+centre x [m]  L solved  L free  R solved  R free   held links
+       0.150        58       0       132      19   L=cab27 R=cab32
+       0.120        56       0       133      17   L=cab25 R=cab30
+       0.090        55       0       132      14   L=cab23 R=cab28
+       0.060        55       0       132      12   L=cab21 R=cab26
+       0.030        56       0       133       0   L=cab19 R=cab24
+       0.000        55       0       137       0   L=cab17 R=cab22
+      -0.030        75       0       139       0   L=cab15 R=cab20
+      -0.060        90       0       140       0   L=cab13 R=cab18
+      -0.100       112       0       139       0   L=cab10 R=cab16
+      -0.150       140      15       139       3   L=cab7 R=cab12
+      -0.200       138      31       139       4   L=cab3 R=cab9
+      -0.250       133      30       140       2   L=cab0 R=cab6
+
+LEFT ARM keeps >=1 collision-free candidate at centre x in [-0.25, -0.2, -0.15]
+  -> highest swept centre x with a left-arm candidate: -0.150 m
+  ⚠ this is the highest value SWEPT, not a boundary: the true upper bound lies between -0.150 and the next value up that failed.
+⛔ Not a verdict and not a recommendation: where the pair should sit is p5's call.

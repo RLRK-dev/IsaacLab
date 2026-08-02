@@ -1,0 +1,71 @@
+[cell] cable bend EI in force: 0.005 N.m^2 from task_config.py:144
+[cell] -> joint stiffness 0.33333 N.m/rad over a 15 mm link
+[cell] cable 40 x 15 mm, 1.1243 g each, 44.97 g total
+[cell] clip collision read from the env source: True
+[steps] ⚠ the cell-constant contract is not satisfied yet: 3 names
+[steps] ⚠ each needs a home in the p5 spec; running non-strict while that is decided
+[steps]     _SHOULDER            line   388  carries a number of its own and belongs to none of the three
+[steps]     _bad                 line  1693  carries a number of its own and belongs to none of the three
+[steps]     _nz                  line  1699  carries a number of its own and belongs to none of the three
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:301: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  m = cell.compile()
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:305: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  (S / "_steps_cell_full.xml").write_text(cell.to_xml())
+[steps] nq=113 nu=14 nbody=88 ngeom=140 eq=8  seat links C1=cab30 C2=cab23
+[steps] tracking bound: L reach 1546 mm -> lag allowed 5.18 mrad | R reach 1546 mm -> 5.18 mrad  (clearance 8.0 mm / reach; re-measured each step as the arm extends)
+[steps] arm colours: LEFT arm = ORANGE, RIGHT arm = PURPLE (claws keep blue = upper, red = lower).  Use the colour, not the side of the screen: the close-up panel is mirrored.
+[steps] geoms: 140 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.300,+0.285] y[+0.280,+0.280] z-table[+0.1486,+0.1559] ncon=14
+[steps] ⚠ grasp centre moved off C1: x=-0.2500 m (C1 is at +0.1500); span unchanged at 88 mm commanded
+[steps] measured grasp: L=cab0 [-0.2924  0.28    0.9538]  R=cab6 [-0.2024  0.28    0.9517]  drop across the span = 2.0 mm
+[steps] attitude menu: 27 entries per arm; entry i on R is the negation of entry i on L in both components -> YES
+[steps] attitude menu, first 8 (yaw, roll) in rad:  L(+0.00,-0.00)/R(+0.00,+0.00)  L(+0.00,-0.35)/R(+0.00,+0.35)  L(+0.00,-0.60)/R(+0.00,+0.60)  L(+0.00,-0.85)/R(+0.00,+0.85)  L(+0.00,-1.10)/R(+0.00,+1.10)  L(-0.30,-0.35)/R(+0.30,+0.35)  L(+0.30,-0.35)/R(-0.30,+0.35)  L(-0.30,-0.60)/R(+0.30,+0.60)
+[steps] attitude menu: 22 of 27 entries have a non-zero yaw -- those are the ones the sign can be seen on; on the other 5 it is invisible either way, which is why a single trace line could not settle this
+[steps] start pose = the cell's home, both arms: [-3.1521 -0.2867  2.4674 -1.3953  1.5634 -1.5782]
+[steps] start-pose IK L: rejected against -- g6 on L_forearm_link vs stem x62, the other arm x27, g6 on L_forearm_link vs crown x23, g5 on L_upper_arm_link vs stem at 3/6 along the move (on the way) x3, g5 on L_upper_arm_link vs crown at 3/6 along the move (on the way) x2, g8 on L_wrist_2_link vs crown at 3/6 along the move (on the way) x2, g6 on L_forearm_link vs stem at 4/6 along the move (on the way) x1   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)
+[steps] start-pose IK L: 133 solved / 30 collision-free / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll 20.1 deg sigma_min 0.1245 |q|max=2.41 rad
+[steps] start-pose IK L: clear #0: q = [+1.704797 -0.209768 +2.408501 -1.247836 +0.815467 +1.800335] sigma 0.1245
+[steps] start-pose IK L: clear #1: q = [+1.960942 -0.212780 +2.485984 -1.608152 +1.239786 +2.378016] sigma 0.1334
+[steps] start-pose IK L: clear #2: q = [+0.170839 -2.852943 -2.354774 -2.164170 -0.913815 -2.603137] sigma 0.1495
+[steps] start-pose IK L: clear #3: q = [+1.704797 -0.209768 +2.408501 -1.247836 +0.815467 +1.800335] sigma 0.1245
+[steps] start-pose IK L: clear #4: q = [+0.227689 -3.042339 -2.482079 -1.450884 -0.817743 +2.954918] sigma 0.1113
+[steps] start-pose IK L: clear #5: q = [+1.790796 -0.266347 +2.410506 -1.198712 +0.960151 +2.140088] sigma 0.1432
+[steps] start-pose IK L: clear #6: q = [+1.960942 -0.212780 +2.485984 -1.608152 +1.239786 +2.378016] sigma 0.1334
+[steps] start-pose IK L: clear #7: q = [+0.170839 -2.852943 -2.354774 -2.164170 -0.913815 -2.603137] sigma 0.1495
+[steps] start-pose IK L: clear #8: q = [+1.800212 -0.093236 +2.506698 -1.816365 +0.975760 +2.075114] sigma 0.1160
+[steps] start-pose IK L: clear #9: q = [+1.704797 -0.209768 +2.408501 -1.247836 +0.815467 +1.800335] sigma 0.1245
+[steps] start-pose IK L: clear #10: q = [+2.192263 -0.168117 +2.472227 -1.817689 +1.628824 +2.527931] sigma 0.1303
+[steps] start-pose IK L: clear #11: q = [+1.861889 -0.323365 +2.386909 -1.074401 +1.077379 +2.449115] sigma 0.1602
+[steps] start-pose IK L: clear #12: q = [-0.048563 -2.917876 -2.482475 -1.550917 -1.275029 +2.791642] sigma 0.1351
+[steps] start-pose IK L: clear #13: q = [-0.027401 -2.860672 -2.453506 -1.747568 -1.240239 +3.121109] sigma 0.1461
+[steps] start-pose IK L: clear #14: q = [-0.048563 -2.917876 -2.482475 -1.550917 -1.275029 +2.791642] sigma 0.1351
+[steps] start-pose IK L: clear #15: q = [-0.369758 -2.765384 -2.341543 -1.996617 -1.829204 +2.874097] sigma 0.1649
+[steps] start-pose IK L: clear #16: q = [-0.027401 -2.860672 -2.453506 -1.747568 -1.240239 +3.121109] sigma 0.1461
+[steps] start-pose IK L: clear #17: q = [+2.192263 -0.168117 +2.472227 -1.817689 +1.628824 +2.527931] sigma 0.1303
+[steps] start-pose IK L: clear #18: q = [+1.861889 -0.323365 +2.386909 -1.074401 +1.077379 +2.449115] sigma 0.1602
+[steps] start-pose IK L: clear #19: q = [-0.048563 -2.917876 -2.482475 -1.550917 -1.275029 +2.791642] sigma 0.1351
+[steps] start-pose IK L: clear #20: q = [+1.861889 -0.323365 +2.386909 -1.074401 +1.077379 +2.449115] sigma 0.1602
+[steps] start-pose IK L: clear #21: q = [+0.170839 -2.852943 -2.354774 -2.164170 -0.913815 -2.603137] sigma 0.1495
+[steps] start-pose IK L: clear #22: q = [+2.192263 -0.168117 +2.472227 -1.817689 +1.628824 +2.527931] sigma 0.1303
+[steps] start-pose IK L: clear #23: q = [-0.041348 -2.804157 -2.413496 -1.947736 -1.263159 -2.857263] sigma 0.1600
+[steps] start-pose IK L: clear #24: q = [-0.048563 -2.917876 -2.482475 -1.550917 -1.275029 +2.791642] sigma 0.1351
+[steps] start-pose IK L: clear #25: q = [+0.395441 -3.025106 -2.269009 -2.265944 -0.509326 -2.548844] sigma 0.0822
+[steps] start-pose IK L: clear #26: q = [+2.192263 -0.168117 +2.472227 -1.817689 +1.628824 +2.527931] sigma 0.1303
+[steps] start-pose IK L: clear #27: q = [+1.790796 -0.266347 +2.410506 -1.198712 +0.960151 +2.140088] sigma 0.1432
+[steps] start-pose IK L: clear #28: q = [+0.225133 -2.938904 -2.418675 -1.847306 -0.822114 -2.924417] sigma 0.1237
+[steps] start-pose IK L: clear #29: q = [+2.192263 -0.168117 +2.472227 -1.817689 +1.628824 +2.527931] sigma 0.1303
+[steps] start-pose IK L: chosen q = [+1.704797 -0.209768 +2.408501 -1.247836 +0.815467 +1.800335] rad
+[steps] start-pose IK R: rejected against -- the other arm x67, g44 on R_forearm_link vs stem x57, g43 on R_upper_arm_link vs crown x18, g46 on R_wrist_2_link vs crown at 7/11 along the move (on the way) x14, g43 on R_upper_arm_link vs crown at 7/10 along the move (on the way) x10, g43 on R_upper_arm_link vs stem x9, g43 on R_upper_arm_link vs crown at 5/8 along the move (on the way) x8, g43 on R_upper_arm_link vs crown at 6/9 along the move (on the way) x6, g44 on R_forearm_link vs crown at 8/10 along the move (on the way) x4, g43 on R_upper_arm_link vs crown at 8/11 along the move (on the way) x4, g44 on R_forearm_link vs crown x2, g43 on R_upper_arm_link vs crown at 6/8 along the move (on the way) x2, g44 on R_forearm_link vs crown at 7/9 along the move (on the way) x1   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)
+[steps] start-pose IK R: 140 solved / 2 collision-free / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll 63.0 deg sigma_min 0.1811 |q|max=2.44 rad
+[steps] start-pose IK R: clear #0: q = [+1.147339 +0.667653 +0.863695 +1.282808 +1.644663 -2.438719] sigma 0.1811
+[steps] start-pose IK R: clear #1: q = [+1.147339 +0.275029 +1.655688 -2.258156 -1.644663 +0.702874] sigma 0.2754
+[steps] start-pose IK R: chosen q = [+1.147339 +0.667653 +0.863695 +1.282808 +1.644663 -2.438719] rad
+[steps] 88mm-SPAN INTERLEAVE: arms closest +0.0 mm (Lg_right_pad_f1ext <-> 50)   <- TOUCHING OR THROUGH   spread 0.220 tilt 45.0 deg   crown r 0.110   ⚠ commanded span, not the links actually held

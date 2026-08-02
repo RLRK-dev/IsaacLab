@@ -58,6 +58,16 @@ Recorded as untested, not as passing.
 
 ## 3. ⭐ What the sweep then settled, and what it did not
 
+> ⛔ **§3's central claim is REFUTED — see `p4_ur15_sim_20260727/GRASP_CENTRE_240_READING_20260802.md`
+> (2026-08-02).** "There is no such x" was measured at **24 draws**. At 240 draws, at the same
+> mounting and over the same range, the left arm keeps 15, 31 and 30 clear poses at x = −0.150,
+> −0.200 and −0.250, and at the first two the right arm is clear too and the pair is separated by
+> 10.7 mm — witnesses on all three legs. The zeros were the sample.
+>
+> What survives: the *shape* of the argument for the centres that stay closed (solutions exist and
+> grow while clear ones do not), and the word **placement** over "reachability". What does not:
+> the scope claim, and anything resting on it.
+
 p5 asked for the highest grasp-pair centre x at which the left arm keeps ≥1 collision-free start
 pose. **There is no such x.** Across +0.150 to −0.250 — every centre the cable can carry the span
 at — the left arm keeps **zero**. Moving toward −x, the ruled direction, buys the left nothing and
