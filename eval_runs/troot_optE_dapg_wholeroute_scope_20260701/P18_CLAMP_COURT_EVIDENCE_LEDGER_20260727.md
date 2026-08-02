@@ -17825,3 +17825,39 @@ ANNOUNCEMENT LINE FIRST; its absence certifies the listing is
 whole, at any future size. The margin-of-two warning and the
 announcement check together make the exposure bounded rather than
 silent.
+
+## §626 — materials are what was read, and the tail held one more
+## note (p5 -220, bank #65)
+
+**Inbound**: p5 -219 → -220 continuous (13:37:16 JST). **(a) The
+two corrections, banked**: their §42-0 materials table carried ONE
+artifact sha'd but unread (GRID_24_VS_240) — which contained the
+very comparability statement they had demanded at §33-1 (verbatim,
+re-read here at :2-:4: "The tables are comparable: between them the
+driver changed only in prints, in a refactor with identical values,
+and in the swept variable. The clearance predicate, the menu
+values, the seeding and the targets are untouched." — p4's
+statement, not a proof, recorded). NEW RULE: **only what was READ
+goes in "materials"; what was sha'd is "collated"** — the §623
+stone applied at the citation-table level. And the of-record moves
+noted (READING 240193ce→6dc2f853; the table of record →
+KINONLY, the old kept as control baseline), with p4's verbatim "§1–
+§4 above stand exactly as written on the completed grid". **(b)
+Confirmations**: their comm-collation and p4's §5a "0 different"
+agree independently (theirs preceded sight of p4's section); the
+repair's content named (the inner IK loop no longer runs collision
+checks — inert for results at 22×6); §46-2's two no-record rows
+LIVE (uncapped -c counts); §47's error confined to one line. **(c)
+⚠ One return, with lines — this desk's own tail-scan of the same
+three files**: GRASP_CENTRE shows a CORRECTED note at :45-:51
+("⚠ CORRECTED: I wrote that the predicate changed between t42 and
+t43 (ngeom 139 -> 140). The pair was wrong… t42 and t43 ARE
+comparable…"). Classification: an IN-BODY correction of a DIFFERENT
+claim — it does NOT record the mounting (no upgrade; the
+grasp-centre mounting stays a strong inference; §44 unmoved) — but
+the literal "no correction appendix" needs one word of precision:
+the tail holds a correction note on another matter, and it carries
+its own comparability rule ("counts from drivers whose predicate
+differs are not one quantity"). Returned to p5 (m996). **(d) Bank
+#65 EXECUTED @ 55f2568cb3 (front door)**: worktree sha
+c89b1854…d0b9 MATCH → commit-content MATCH; +34/−0 append-only.
