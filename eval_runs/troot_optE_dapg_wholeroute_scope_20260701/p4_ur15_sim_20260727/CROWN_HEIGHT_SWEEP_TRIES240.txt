@@ -1,0 +1,36 @@
+MOUNTING SWEEPS -- p5 -176(4).  Same path as the other sweeps: the real driver, once
+per point, stopped after the start-pose lines.  No route run, no reimplementation.
+START_TRIES = 240 draws per solve.  ⚠ The draw count is part of what the table
+says: 24 draws gave survivor counts that were a property of the sample, not the cell
+(p5 §31).  It is in the file name so two grids cannot share one path.
+
+
+(a) CROWN RADIUS.  'none' removes the geometry entirely -- the lower bound p5
+    asked to include.  ⛔ TAKEN AT spread=0.280, tilt=20 deg -- every row
+    below is that mounting with only the radius moving.  Nothing here is a
+    property of the crown in general.
+    PASS = L free >= 1 AND R free >= 1 AND the arms not interleaving.
+  crown r  spread  tilt  L solved  L free  R solved  R free   arms closest [mm]  PASS?
+
+(c) CROWN HEIGHT.  p5 §26-3: CROWN_Z0 is swept and the RADIUS FOLLOWS, as
+    R = (SHOULDER_HEIGHT - CROWN_Z0)/2, so the head's top lands exactly on
+    the mounts at every point.  ⛔ This is what the radius sweep was NOT:
+    there a 5 mm head had its top 190 mm below the mounts and was carrying
+    nothing.  Each row here is a head that actually reaches.
+    ⛔ TAKEN AT spread=0.280, tilt=20 deg.
+    PASS = L free >= 1 AND R free >= 1 AND the arms not interleaving.
+ Z0 [m]  R [m]    top  L solved  L free  R solved  R free   arms closest [mm]  PASS?
+  1.330  0.100  1.530       106       5       122      31               +14.7  PASS   [gap on: both clear]
+           L rejected against: g6 on L_forearm_link vs stem x50, g6 on L_forearm_link vs crown x28, the other arm x11, g8 on L_wrist_2_link vs stem x11, g7 on L_wrist_1_link vs stem x5, g5 on L_upper_arm_link vs stem x2, g6 on L_forearm_link vs crown at 4/6 along the move (on the way) x1, g5 on L_upper_arm_link vs crown x1, g6 on L_forearm_link vs crown at 5/8 along the move (on the way) x1
+  1.380  0.075  1.530       106       4       122      30                +0.0  fail   [gap on: both clear]
+           L rejected against: g6 on L_forearm_link vs stem x63, g8 on L_wrist_2_link vs stem x15, the other arm x13, g6 on L_forearm_link vs crown x11, g7 on L_wrist_1_link vs stem x6, g5 on L_upper_arm_link vs stem x2, g5 on L_upper_arm_link vs stem at 3/6 along the move (on the way) x1, g6 on L_forearm_link vs crown at 5/8 along the move (on the way) x1
+  1.430  0.050  1.530       106       5       122      31                +0.0  fail   [gap on: both clear]
+           L rejected against: g6 on L_forearm_link vs stem x63, g8 on L_wrist_2_link vs stem x16, the other arm x14, g6 on L_forearm_link vs crown x8, g7 on L_wrist_1_link vs stem x6, g6 on L_forearm_link vs crown at 8/10 along the move (on the way) x2, g5 on L_upper_arm_link vs stem x2, g5 on L_upper_arm_link vs stem at 3/6 along the move (on the way) x1, g6 on L_forearm_link vs crown at 5/8 along the move (on the way) x1
+  1.470  0.030  1.530       106       5       122      31                +0.0  fail   [gap on: both clear]
+           L rejected against: g6 on L_forearm_link vs stem x63, g8 on L_wrist_2_link vs stem x16, the other arm x11, g6 on L_forearm_link vs crown x8, g7 on L_wrist_1_link vs stem x6, g6 on L_forearm_link vs crown at 8/10 along the move (on the way) x2, g5 on L_upper_arm_link vs stem x2, g5 on L_upper_arm_link vs stem at 3/6 along the move (on the way) x1, g6 on L_forearm_link vs crown at 5/8 along the move (on the way) x1
+  1.510  0.010  1.530       106       4       122      29                +0.0  fail   [gap on: both clear]
+           L rejected against: g6 on L_forearm_link vs stem x63, g8 on L_wrist_2_link vs stem x16, the other arm x13, g6 on L_forearm_link vs crown x8, g7 on L_wrist_1_link vs stem x6, g6 on L_forearm_link vs crown at 8/10 along the move (on the way) x2, g5 on L_upper_arm_link vs stem x2, g5 on L_upper_arm_link vs stem at 3/6 along the move (on the way) x1, g6 on L_forearm_link vs stem at 5/8 along the move (on the way) x1
+
+⭐ PASSING heights: ['1.330']
+   -> lowest passing underside (fattest head that still passes): 1.330  = R 0.100
+⛔ Not a verdict.  What to build is p5's call and Rs's to settle.
