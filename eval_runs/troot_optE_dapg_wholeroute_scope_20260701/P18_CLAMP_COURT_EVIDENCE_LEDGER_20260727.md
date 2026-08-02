@@ -15845,7 +15845,10 @@ the in-code comment "260 was tuned for 24 draws…"; and an overrunning
 point now raises RuntimeError instead of writing a row — p4's stated
 reason verbatim: 切り捨てと測定が表の上で同じ見た目になってはならない
 (p18 reading: the -172 indiscriminable-predicate rule applied at
-write time). Restart 10:30:55; alive at 10:36:58 (presence-only:
+write time). [§573 tag: the raise ALSO aborted the whole run — a
+blast radius beyond the requirement, flagged by no desk at banking;
+superseded by refuse-row-and-continue @ 5fa4b70966.] Restart
+10:30:55; alive at 10:36:58 (presence-only:
 sweep_mounting.py PID 654234 + ur15_steps_wired.py PID 667267).
 **(d) Reference under p4's own guard (⛔ not rows)**: the discarded
 run's L column at crown-none read 3 / 17 / 4 free at points that were
@@ -16019,7 +16022,9 @@ byte-identical to SPREAD_TILT_SWEEP_TRIES24_20260729.txt — content
 sha 7e2423ed…2ee6 @ 378a5b5cfa, this desk machine-verified commit
 AND worktree MATCH (p4 also cmp'd byte-identity); at landing the old
 path is restored from git and the 240 table gets its OWN name, so
-path pins survive on both sides. (a)/(c) except-sites to be aligned
+path pins survive on both sides. [§573: superseded — the draw count
+now lives in the output filename (_TRIES240); the banked path is
+never touched; no restore needed.] (a)/(c) except-sites to be aligned
 to (b)'s refusal at package time; driver untouched mid-run. **(b) ⛔
 p4's THIRD hole — inside the running sheet**: section (b)'s gap /
 interleave columns print identically whether both arms stand in
@@ -16042,7 +16047,8 @@ named 24-draw-era logs, so an unreached point could read as a
 measurement — mtime below the floor is refused as NOT REACHED. **(d)
 Package-time note registered**: the driver prints its draw count
 nowhere — a point log alone cannot say 24 vs 240 (mtime is the only
-discriminator today); the driver is deliberately untouched mid-run
+discriminator today); [§573: discharged for TABLES — header and
+filename now carry TRIES; point-log side still open] the driver is deliberately untouched mid-run
 because it restarts per point — editing mid-flight would split the
 grid into front/back halves of different versions. **(e) Lane
 state**: 5/24 rows at 10:56 (p4), 0 truncations; this desk counts 7
@@ -16145,3 +16151,49 @@ rows at 11:04, 0 truncations. **(f) Conditional relay HELD as
 asked**: items (c)-(d) go to p5 ONLY if p5 cites the banked table's
 interleave column — watch set at this desk. -223 also corroborates
 §571(c)(i): 106/4 is the crown-NONE side.
+
+## §573 — the refusal's blast radius: run 2 aborts at point 8, and
+## the third start reuses seven (p4 -224)
+
+**Inbound**: p4 -223 → -224 continuous (11:13:27 JST). **(a) The
+abort**: run 2 stopped at point 8/24 (crown none / spread 0.340 /
+tilt 30) — the truncation refusal FIRED CORRECTLY, but the raise
+ended the sweep, and because the table was written once at the end,
+the 7 measured rows died with it. p4's separation of requirements:
+"do not report a truncation" ≠ "do not continue the run" — only the
+former was ever required. **(b) Ownership across three desks**:
+§566(c) banked the raise approvingly at this desk (content-verified,
+called it the -172 rule at write time); p6 found it section-local
+(§568); NO desk flagged that raise-semantics abort the run — the
+blast radius exceeded the requirement and stayed invisible until a
+slow point tripped it live. Tagged inline at §566(c). **(c) Fix v3
+CONTENT-VERIFIED @ 5fa4b70966** (sha 3189a18b…28f8, commit AND
+worktree MATCH): a truncated point now emits a row that cannot be
+read as a measurement and the grid CONTINUES (:66 _truncated helper,
+:78 PASS-guard, :171 _trunc/_clear both computed — and the except-
+ValueError conflation sites are GONE, grep count 0, which closes
+§568(b) across ALL sections, beyond the (b)-only ask); the table is
+rewritten per point (partial progress durable); TIMEOUT_S env-
+overridable, default 2400 (:44); and the draw count enters the table
+HEADER (:129 "The draw count is part of what the table…" — the
+WHERE-discipline extended to draws) and the output FILENAME (:142
+_TRIES{TRIES}.txt). **(d) The cost-model correction (banked as
+record)**: cost is not a function of draw count alone — at spread
+0.340 both arms can stand inside the pair cutoff, more geom pairs
+survive the strict prefilter, and each candidate costs more; the
+neighbor point took 5 min, this one had no first count at 15. Cap
+900 → 2400. The old-draw-count-constants family gains a refinement:
+rescaling a constant LINEARLY in draws is also a model, and geometry
+breaks it. **(e) Supersessions**: -222's restore-and-rename plan is
+UNNECESSARY — output lands at SPREAD_TILT_SWEEP_TRIES240.txt
+directly and the banked 24-draw path is never touched (tagged
+§570(a)); §572(d)'s draw-count note discharged for tables; point-log
+naming in /tmp is still old-style at 11:14:23 — whether NEW point
+logs carry TRIES is unobserved (p4 said 全 file 名; held open,
+matters only at package verification). **(f) State**: restarted
+11:12:47 (third start); the 7 points measured since 10:30:55 are
+REUSED from logs under a mandatory mtime floor (below-floor refused
+— the §572 stale-log guard working at reuse time); 17 points remain;
+numbers arrive bundled at completion; run alive at 11:14:23 (PID
+787189). ETA moves right of every prior band (0.340-class points can
+run 15+ min); the package speaks when it lands.
