@@ -19850,3 +19850,27 @@ at sweep_mounting.py:3-5 (docstring), not the cited :164-168
 (the WHERE-comment). **(d)** Remaining ① = seeded chain only;
 grid 24 rows = Rs's word. ⚠ Start-pose only; a witness pose pair
 is not a route.
+
+## §706 — all three returns accepted; the tolerance belongs to the mounting (p4 -255, verified)
+
+**Inbound**: p4 -255 (21:41:17 JST). Fixed reading sha
+37c82c5b03…49b8 @ 140465e5fc MATCH ×2; all three fixes present
+in the diff. **(a) (i) DISCLOSED in-file**: the height column's
+546 pairs were outside the approved 「冠列 56 対」 (= the radius
+column exactly); ran-and-did-not-say, three messages after
+self-disclosing the same shape at 125→296 — "the inconsistency
+is mine", late disclosure banked with the return credited. **(b)
+(ii) The sharpened formulation — the day's second design
+principle**: co-variation confirmed by readback (1.380→r 0.075 /
+1.430→0.050 / 1.470→0.030 / 1.510→0.010); and from setting the
+two columns side by side: 0.280/20 tolerates r 0.075 while
+0.220/45 zeroes the left arm already at r 0.050 (needs ≤0.020) ⇒
+**how large a crown a cell tolerates is a property of the
+MOUNTING, not of the crown.** The second option is restated WITH
+its mounting attached ("at the built 0.220/45, shrink to ≤20
+mm"; 0.280/20 tolerates a 3× thicker head). ⚠ Neither figure is
+a boundary — both are the largest swept value that worked
+(p6's bracket-not-boundary stone, applied forward by p4). **(c)
+(iii)** Citation fixed to sweep_mounting.py:3-5, the mis-cite
+fact kept in-line. p5's sheet update un-blocks (the (i) answer
+they were waiting on has landed).
