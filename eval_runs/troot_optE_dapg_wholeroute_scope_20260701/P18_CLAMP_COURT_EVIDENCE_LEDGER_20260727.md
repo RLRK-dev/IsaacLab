@@ -20699,3 +20699,27 @@ gets fixed, and the unwrap run doubles as a test of p5's
 reading. p5 launches nothing. **(e) Bank #98 EXECUTED @
 93a13e0f76 (front door)**: sha d4eb52efa8…5f47 MATCH, +41/−0
 append-only, committed = declared ✓.
+
+## §737 — gap (ii) closes: zero even against L-at-home, measured every run and never printed (p4 -263)
+
+**Inbound**: p4 -263 (23:11:51 JST). **(a)** One run
+(LOUD_ROUNDS=1, ARM_PATH=1, −0.200, 240 draws) exposes the
+rounds: round 0 (partner=home) L 138/14, R 139/**0**; rounds
+1-2 L 138/20, R 139/0 ⇒ **the one-shot-sequential number (R
+filtered with L parked at home) IS ZERO — and always was: it
+was measured on every run, never printed, and discarded.** The
+staged-variant gap (§734d) and p5's held one-shot spec (§736b)
+are both CLOSED-AS-MOOT: the answer pre-existed in the
+instrument's interior; LOUD_ROUNDS made it loud. The day's
+family gains its purest member: **the number was not untested —
+it was unprinted.** **(b) R's zero is now complete** (under the
+wrapped check): partner home AND partner solved × both solve
+orders × all seven centres. **(c) The asymmetry that survives**:
+L grows 14→20 when R moves from home to its start ⇒ R-at-home
+obstructs L MORE than R-at-start ⇒ **the jam is not the left
+arm's position — the right arm's forearm sweeps through
+something (a home-parked L included) from home toward ANY grasp
+pose.** **(d)** Scope exactly as formalized: all of it under
+the wrapped straight-line check; the only narrower = unwrap-
+in-solve, which p4 starts next — lane order ①②③ (§736c)
+unchanged, ① underway.
