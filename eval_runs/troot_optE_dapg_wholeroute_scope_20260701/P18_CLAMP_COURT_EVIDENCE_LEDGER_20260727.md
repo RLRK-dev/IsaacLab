@@ -14998,7 +14998,10 @@ restored); ranges in header (above z 1.530→1.730 / 20 mm; behind y −0.200…
 +0.200 / 50 mm, both signs). **(b) ⭐⭐ BEHIND — the plane itself was the
 problem**: 50 mm off the plane the band is EMPTY — y −0.050: 0 arm cells,
 93.3 mm clearance over the right mount; −0.100: 0 cells, 128.4 mm; −0.200:
-214.2 mm (desk spot-checked :59-62); occupation is confined to the slab
+214.2 mm (desk spot-checked :59-62) [⛔ §541: the "over the right mount"
+values are WEDGE-BESTS — the probe scans x ∈ [0.130, 0.280] (source
+:181/:213) — NOT at-mount values; the at-mount landing column reads L×5 /
+l×5 = 10–30 / <10 mm]; occupation is confined to the slab
 y ∈ [0, +0.10] — the direction the arm works in ⇒ **p5's one-line question
 answered YES for a body recessed ≥ 50 mm from the plane.** ⭐ ABOVE: the arm
 persists to 1.730 in every whole row, but over the RIGHT MOUNT's x-range
@@ -15048,7 +15051,9 @@ substrate).
 From p5's -189 (09:14; -188 → -189 sequential). **(a) Pins verified**: doc
 sha fe76328e…f519 MATCH (64); +73/−0 vs 35f039514b; banked **#38 @
 6c2881dac9**; the 68.8 figure desk-confirmed (v3 :63 — the y=0 row's best
-over the right mount). **(b) ⭐⭐⭐ The equivalence broken by measurement**:
+over the right mount) [⛔ §541: the NUMBER was confirmed, its SEMANTICS
+misread — it is the best over the 150 mm wedge x ∈ [0.130, 0.280], not the
+value at the mount's x; the range-best-read-as-point-value form]. **(b) ⭐⭐⭐ The equivalence broken by measurement**:
 BEHIND opens (0 arm cells at −0.050/−0.100/−0.200; the 100 mm slab
 y [0,+0.10] is ALL the occupation there is; right-mount best 68.8 → 93.3 →
 128.4 → 214.2), ABOVE does not (arm to 1.730; whole-row min WORSENS with
@@ -15064,7 +15069,10 @@ over a 560 mm span; the direction natural (−y retreats AWAY from the work —
 table and cable at y +0.28…+0.40; +y also opens from +0.150 but lies
 inside the workspace). **(d) The landing crux, read finer**: left mount
 FREE (y=0 occupation is only x +0.150…+0.246; the left edge + at all
-heights); the right mount has ROOM (best 68.8 at y=0) ⇒ **what is blocked
+heights); the right mount has ROOM (best 68.8 at y=0) [⛔ §541: 68.8 is the
+WEDGE-best, not the at-mount value — the map's rightmost column reads L×5 /
+l×5 ⇒ the landing is open but NARROW, 1–4 × ARM_CLEARANCE 8 mm; the
+inside-not-mount conclusion stands on the # positions] ⇒ **what is blocked
 is not the mount but the 96 mm INSIDE it**; the RETURN PATH y (0, −0.050)
 is the one unsampled piece. **(e) ⭐ The one small measurement left**:
 sample y = −0.010/−0.020/−0.030/−0.040 at both mounts' x — if the return
@@ -15088,7 +15096,8 @@ designing)**: above = no arch path within 200 mm (whole-row min worsens
 the blocker sits INSIDE, not over, the mount; behind = empty from 50 mm
 back ⇒ **the descent question quantified: "at z = 1.530, can y return
 50 mm within the 34 mm of x?" (slope ≈ 1.5; desk 1.47)** — the endpoint has
-room (68.8 at y = 0). Two unmeasured, named: the recess LOWER BOUND
+room (68.8 at y = 0) [⛔ §541: wedge-best, not at-mount; the at-mount column
+is 10–30 mm up top, <10 mm below]. Two unmeasured, named: the recess LOWER BOUND
 (nothing sampled between 0 and −0.050) and the COMBINED recessed-AND-raised
 (each probe is a 1-D slice). **(c) ⛔ The citation moved — TWICE**: p6
 corrects p5's -188(4) — :730 is the AIM solve (tries=None, true of the line
@@ -15128,7 +15137,10 @@ proposal, routed**: RAISE THE SEEDS — the start-pose solve's tries 24 → 240
 (same path, no run, static-probe class); read (a) does L free exceed 1, and
 (b) does any NEW clean pose avoid crossing the line x [+0.150,+0.246] /
 z 1.530. **The leverage is the largest available: ONE non-crossing clean
-pose dissolves the entire head problem (no bow needed)** — and even then
+pose dissolves the entire head problem (no bow needed)** [⚠ §541: p6
+tempers — non-crossing is NECESSARY, not sufficient (the line is the
+zero-thickness limit; a real head has thickness and bow) ⇒ a hit REPOSES
+the question rather than dissolving it] — and even then
 the count matters (a 1-wide door stays 1-wide). Parallel with the descent
 probe per p5. Routed to p4 (m877). **(d) Scope carried**: §30's conclusions
 unaffected (different measurements); the proposal concerns the POSE CLASS
@@ -15137,3 +15149,38 @@ Routed: p4 (m877 — first send TRUE-UNDELIVERED: idle pane, no body, no queue
 marker, while m873/m874 sat delivered in the same window; ONE measured
 resend 09:25, confirmed — the §459 ladder executed to the letter), p5
 (m878 — bank), p6 (m879 — rows).
+
+## 541. The wedge-best was not the mount — a range value read as a point, five surfaces deep
+
+From p6's -168 (09:26:35; -167 → -168 sequential; register @ c7c775e785, sha
+8f7ad394…595b MATCH). **(a) ⛔ The heavy correction, desk-CONFIRMED at
+source**: "68.8 mm at the right mount's x even at y=0" was a MISREAD — the
+probe defines WEDGE = (0.130, 0.280) (source :181, comment verbatim "the x
+range the right mount sits in"; the best-scans start at WEDGE[0], :193/:213)
+⇒ every "over the right mount" figure (68.8 / 93.3 / 128.4 / 214.2) is the
+BEST CELL IN A 150 mm RANGE, not the value at the mount's x. The actual
+landing values sit in the map's RIGHTMOST COLUMN: L×5 (10–30 mm) top, l×5
+(<10 mm) bottom ⇒ **the landing is open but NARROW — 1 to 4 ×
+ARM_CLEARANCE 8 mm.** The inside-not-mount conclusion is UNAFFECTED (it
+stands on the # positions). Propagation owned and tagged THIS turn:
+§536(b), §538(a)(d), §539(b) at this desk; p5's §30-3/§30-4 rely on the
+same number (routed m880); the desk's m874/m875 context lines and the
+09:11/09:20 Rs reports carried it (corrected in the next report). The form
+is p6's own second case, named in their row: "a range best read as a point
+value" — and this desk's §538(a) "desk-confirmed" confirmed the NUMBER
+while inheriting its misread SEMANTICS: **checking the digit is not
+checking the meaning.** **(b) ⚠ The (b)-reading tempered (routed with
+(a))**: "not crossing the line" is NECESSARY, not sufficient — the line is
+the zero-thickness limit set; a real head has thickness and bow ⇒ a
+non-crossing pose REPOSES the shape question rather than dissolving it;
+§540(c) tagged. **(c) The family form rowed with their own two cases**:
+"not 'didn't check' but 'checked a different thing' — more dangerous for
+carrying the feel of having checked." **(d) Observed states**: the seeds
+probe unstarted at their 09:24:58 (driver still tries=24, checked by
+content); CROWN_BAND v4 seen uncommitted at their read — and COMMITTED at
+62ceb8718f ("Measure the descents, and let the silent solves speak",
+09:25:22) by this desk's 09:28 check ⇒ the DESCENT package (m874's answer)
+is imminent; v4 (78 lines, 6cc15ed7…) will be verified against the package
+pins, not read ahead. Their numbers-at-commit / prose-at-READING split
+held through a fourth version. Routed: p5 (m880 — both corrections), p6
+(m881 — verification + this desk's ownership).
