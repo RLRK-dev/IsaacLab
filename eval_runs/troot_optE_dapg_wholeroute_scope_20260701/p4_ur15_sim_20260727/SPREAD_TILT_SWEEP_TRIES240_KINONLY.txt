@@ -1,0 +1,76 @@
+MOUNTING SWEEPS -- p5 -176(4).  Same path as the other sweeps: the real driver, once
+per point, stopped after the start-pose lines.  No route run, no reimplementation.
+START_TRIES = 240 draws per solve.  ⚠ The draw count is part of what the table
+says: 24 draws gave survivor counts that were a property of the sample, not the cell
+(p5 §31).  It is in the file name so two grids cannot share one path.
+
+
+(a) CROWN RADIUS.  'none' removes the geometry entirely -- the lower bound p5
+    asked to include.  ⛔ TAKEN AT spread=0.220 (built default), tilt=45 (built default) deg -- every row
+    below is that mounting with only the radius moving.  Nothing here is a
+    property of the crown in general.
+    PASS = L free >= 1 AND R free >= 1 AND the arms not interleaving.
+  crown r  spread  tilt  L solved  L free  R solved  R free   arms closest [mm]  PASS?
+
+(b) YOKE_SPREAD x TILT, with the 88 mm interleave read at every point.
+    ⛔ TWO SHEETS (p5 -177(3)): every point is run with the crown REMOVED and
+    again with it PINNED at 0.110.  CROWN_R is normally derived as YOKE_SPREAD/2,
+    so a single sheet would drag the crown along with the spread and could not
+    separate 'wider shoulders helped' from 'a fatter head hurt'.
+    ⚠ PINNED MEANS THE RADIUS ONLY.  The crown's LENGTH follows the spread by
+    definition -- the capsule runs from -spread to +spread -- so a pinned radius
+    is not a pinned object: wide spread gives a long thin bar, narrow spread a
+    short fat head.  'The crown was held fixed' must not be read as 'the same
+    body was present throughout'. (p5 -179(2))
+    ⚠ On the pinned sheet the wide end leaves a head thinner relative to the
+    spread than the cell's own rule gives -- the cost of isolating the variable,
+    not a proposal about how to build one.
+    ⚠ The spec comment records (0.22, 45) as interleaving at an 88 mm span and
+    (0.40, 20) as clearing.  That pair is re-measured here, not argued, and both
+    readouts are taken at every combination so neither can be lifted off a point
+    that was measured for the other.
+    ⭐ 'gap on' names the poses the interleave was measured at.  When an arm has no
+    clear candidate the driver puts them all back and chooses among rejected
+    poses, so the gap on that row is the distance between arms at a configuration
+    that is not usable.  PASS = all three legs at ONE witness pair.
+ crown  spread  tilt  L solved  L free  R solved  R free    arms closest [mm]       interleaving?         gap on  ALL THREE?
+  none   0.220    45        58       3       132      14                 +0.0                 YES     both clear  fail  (6 <-> 43)
+  none   0.220    30        53       8       120      34                 +0.0                 YES     both clear  fail  (5 <-> 78)
+  none   0.220    20       132      17       125      34                 +0.0                 YES     both clear  fail  (15 <-> 51)
+  none   0.280    45        56       4       132       8                +11.9                  no     both clear  PASS  (8 <-> 46)
+  none   0.280    30        55       0       124      31                 +0.0                 YES     L put back  fail  (5 <-> 47)
+  none   0.280    20       106       4       122      38                 +0.0                 YES     both clear  fail  (6 <-> 46)
+  none   0.340    45        66       0       133      15                +34.5                  no     L put back  fail  (11 <-> 67)
+  none   0.340    30        54       0       132      32                 +0.0                 YES     L put back  fail  (8 <-> 71)
+  none   0.340    20        83       5       126      37                 +0.0                 YES     both clear  fail  (11 <-> 69)
+  none   0.400    45        94       0       139       5                 +0.0                 YES     L put back  fail  (17 <-> 49)
+  none   0.400    30        55       0       132      26                +21.5                  no     L put back  fail  (8 <-> 46)
+  none   0.400    20        63       8       134      34                +17.2                  no     both clear  PASS  (11 <-> 67)
+ 0.110   0.220    45        58       0       132      19                +26.2                  no     L put back  fail  (12 <-> 50)
+ 0.110   0.220    30        53       0       120      35                 +0.0                 YES     L put back  fail  (6 <-> Rg_left_pad2)
+ 0.110   0.220    20       132       2       125      37                 +0.0                 YES     both clear  fail  (40 <-> Rg_left_pad_f1ext)
+ 0.110   0.280    45        56       0       132      16                 +0.0                 YES     L put back  fail  (27 <-> 50)
+ 0.110   0.280    30        55       0       124      31                 +0.0                 YES     L put back  fail  (6 <-> 48)
+ 0.110   0.280    20       106       5       122      30                +14.7                  no     both clear  PASS  (7 <-> 46)
+ 0.110   0.340    45        66       0       133      10                 +0.0                 YES     L put back  fail  (9 <-> 50)
+ 0.110   0.340    30        54       0       132      31                 +0.0                 YES     L put back  fail  (8 <-> 47)
+ 0.110   0.340    20        83       2       126      34                +15.3                  no     both clear  PASS  (7 <-> 46)
+ 0.110   0.400    45        94       0       139       5                 +0.0                 YES     L put back  fail  (18 <-> 70)
+ 0.110   0.400    30        55       0       132      27                +21.5                  no     L put back  fail  (9 <-> 47)
+ 0.110   0.400    20        63       0       134      32                +21.5                  no     L put back  fail  (9 <-> 47)
+
+⭐ PASSING points -- all three legs at one witness pair: 4
+     crown none spread 0.280 tilt 45  L free 4  R free 8  gap +11.9 mm
+     crown none spread 0.400 tilt 20  L free 8  R free 34  gap +17.2 mm
+     crown 0.110 spread 0.280 tilt 20  L free 5  R free 30  gap +14.7 mm
+     crown 0.110 spread 0.340 tilt 20  L free 2  R free 34  gap +15.3 mm
+
+⛔ A PASS is a WITNESS and a fail is NOT a refutation.  The interleave is read
+   at ONE pair of poses, the chosen one.  With N clear poses on one arm and M
+   on the other there are N x M pairs and exactly one was measured, so a
+   touching row says the chosen pair touches -- not that the mounting has no
+   pair that clears.  Reading = INTERLEAVE_COLUMN_READING_20260802.md.
+
+⛔ Not a verdict and not a recommendation.  Both tables are the numbers p5 asked
+   for; which mounting to take, and whether the pair constraint still binds, are
+   p5's call and Rs's to settle.
