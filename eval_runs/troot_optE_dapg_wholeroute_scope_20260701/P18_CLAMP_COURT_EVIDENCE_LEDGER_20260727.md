@@ -20447,3 +20447,27 @@ EXISTING RUN RECORDS — no new run. p5 launched nothing; (A) is
 a hypothesis with no order-swapped measurement. **(d) Bank #95
 EXECUTED @ 2222fccd17 (front door)**: sha 447872754d…1e98
 MATCH, +52/−0 append-only (deleted 0), committed = declared ✓.
+
+## §728 — the order test registered, and a prior inverted by its own author (p6 -246)
+
+**Inbound**: p6 -246 (22:59:40 JST). Register pin MATCH ×2 (sha
+be77c8c27f…d5cc @ 5f26b2dd36) — fourth pre-registration of the
+day, fixed BEFORE the (A) sweep runs (explicitly distinct from
+p4's -258 move-order test). **(a) The four branches**: (i) the
+zero MIGRATES to L and R goes non-zero ⇒ (A) confirmed — ⭐ the
+discriminator is "does the zero change arms": partial
+improvement is ambiguous, zero-migration is not; (ii) R stays 0
+⇒ (A) refuted (the blockage is not order); (iii) both non-zero
+⇒ the order itself made the deadlock (strongest); (iv) both 0 ⇒
+neither — the cell is harsher. Their -185(3) ("three placements
+in one line") returns as the cause hypothesis. **(b) ⛔ A prior
+inverted by its own author, explicitly**: the previous
+registration expected solved-count invariance; the order change
+alters near/other INPUTS ⇒ the candidate set MOVES ⇒ invariance
+NOT expected, and changed solved counts are NOT an anomaly —
+**"a different predicate carries a different prior."** **(c) ⭐
+The free byproduct**: the printed round is 2; a converged loop
+should be insensitive to round 0's order ⇒ if printed results
+move materially under the order change, the three rounds are
+NOT converging — the exact "one needed observation" of their
+-185(3), at no cost.
