@@ -100,3 +100,39 @@ plane.
    a head clear of this pose is not thereby clear of the task.
 3. **The step between 0 and −0.050 is unresolved** — 37 cells to 0 in one 50 mm jump, unsampled
    in between.
+
+---
+
+## Reading 4 — the return path (p5 §30)
+
+**Ranges adopted** (p5 gave the four y values only): x within ±30 mm of each mount at 5 mm, z
+across the band at 10 mm. y extended to −0.050 as a fifth point, so the trend has an endpoint at
+the stand-off the shape proposal uses.
+
+| y | left mount min / best | right mount min / best |
+|---|---|---|
+| −0.010 | +77.3 / +226.7 mm | **+2.1** / +60.9 mm |
+| −0.020 | +77.3 / +227.1 | +10.9 / +64.7 |
+| −0.030 | +77.3 / +228.0 | +19.7 / +69.6 |
+| −0.040 | +77.3 / +229.1 | +28.5 / +74.7 |
+| −0.050 | +77.3 / +230.3 | +37.4 / +79.1 |
+
+1. ⭐ **Nothing is negative.** The arm does not reach into the return layer beside either mount at
+   any of the four values p5 named. The two descents an arched head would make are not blocked.
+
+2. **The left mount is not the question**: its minimum is +77.3 mm and does not move with y at all
+   — over this range the nearest thing to it is invariant, so the arm is simply not near it.
+
+3. ⭐ **The right mount is the tight one and it tightens toward the plane**: +2.1 mm at y −0.010,
+   +19.7 at −0.030, +37.4 at −0.050. ⚠ That minimum is over a box 60 mm wide in x, and the box's
+   inner half (x from +0.250) lies inside the occupied wedge, which starts around +0.13. So the
+   2.1 mm is at the inner edge of the sampled box, not at the mount itself — the number is the
+   worst point a descent could pass through if it came down at the box's inside, not the room
+   available at the mount.
+
+4. ⇒ What this licenses: a descent at y −0.030 or beyond has tens of millimetres everywhere in
+   the sampled box on both sides. A descent hugging the plane at y −0.010 passes within about two
+   millimetres of the arm somewhere in that box. ⛔ It does not license a clearance figure for
+   the head itself, which has thickness this probe does not model: the probe is a 1 mm sphere.
+
+5. ⚠ Still one pose, as before. This is the surviving start pose only.

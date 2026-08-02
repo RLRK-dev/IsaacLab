@@ -214,6 +214,30 @@ def main() -> int:
                     best = v
         out.append(f"{yy:7.3f}  {ncon:14d} {nroom:14d}  {best*1000:26.1f} mm"
                    + ("   ⛔ blocked at the mount" if best <= 0 else ""))
+    # ---- the return path: the thin layer beside each mount, p5 §30 --------------------------
+    # ⚠ RANGES ADOPTED (p5 gave the four y values only): x within +-30 mm of each mount at 5 mm,
+    # z across the band at 10 mm.  A head that stands off at y -0.050 has to come back to y = 0 at
+    # each end, and this is the layer those two returns pass through.
+    out.append("")
+    out.append("THE RETURN PATH beside each mount (x within +-30 mm of the mount at 5 mm,")
+    out.append("z across the band at 10 mm) -- the layer an arched head descends through")
+    out.append(f"{'y [m]':>7s}  {'left mount: min / best':>26s}  {'right mount: min / best':>26s}")
+    for yy in (-0.010, -0.020, -0.030, -0.040, -0.050):
+        cell = []
+        for mx in (-0.280, +0.280):
+            lo, hi = 1e9, -1e9
+            for i in range(13):
+                xx = mx - 0.030 + i * 0.005
+                for iz in range(21):
+                    d.mocap_pos[0] = [xx, yy, Z0 + iz * 0.010]
+                    mujoco.mj_forward(m, d)
+                    v = min(mujoco.mj_geomDistance(m, d, pg, g, 1.0, None)
+                            for t in ("L", "R") for g in armg[t])
+                    lo, hi = min(lo, v), max(hi, v)
+            cell.append(f"{lo*1000:+9.1f} / {hi*1000:+9.1f}")
+        out.append(f"{yy:7.3f}  {cell[0]:>26s}  {cell[1]:>26s}"
+                   + ("" if "-" not in cell[0].split("/")[0] and "-" not in cell[1].split("/")[0]
+                      else "   ⛔ the arm reaches into this layer somewhere beside a mount"))
     out.append("")
     out.append("⛔ Not a verdict.  What the free region can carry, if anything, is p5's call.")
     text = "\n".join(out) + "\n"

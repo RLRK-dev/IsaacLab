@@ -730,7 +730,7 @@ def aim_slot_at(t, cable_w, prev_q, seed, pose_only=None, fix_x=None, pose_rd=No
     w = solve_ik(t, tgt, tries=None, iters=260, seed=seed, near=prev_q, warm=prev_q,
                  other=np.array([d.qpos[a] for a in QADR["R" if t == "L" else "L"]]),
                  quiet=True, re_max=0.02, wide=True, pose_only=pose_only,
-                 pose_rd=pose_rd)
+                 pose_rd=pose_rd, label="aim")
     # A second solve with the offset re-measured at the solved pose was tried and dropped: it moves
     # the target far enough that the solver hands back an arm the servos cannot reach inside the
     # step, so the arm never settles, the settle gate never releases the fingers, and the jaw is
@@ -1371,7 +1371,31 @@ def gap_mm(x, absent="beyond the search radius"):
     return absent if x is None else f"{x * 1000.0:+.1f} mm"
 
 
-def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=None, other=None, re_max=0.05, wide=False, pose_only=None, pose_rd=None):
+def pose_menu(t, wide=False):
+    """The attitude menu for arm `t`, as (yaw, roll) pairs.
+
+    ⭐ p5 -167: the sign belongs on the YAW as well as the roll.  Rolling exists to let two arms
+    share an 88 mm span without their wrists meeting, which is a statement about the PAIR -- and a
+    menu that mirrors one and not the other hands the two arms attitudes that are not mirror
+    images of each other the moment the yaw is non-zero.
+    ⚠ An entry INDEX therefore names a different attitude on the right arm than it did before the
+    sign was added; a right-arm pose recorded as an index has to be re-read as a value.
+
+    ⛔ Lifted out of solve_ik so it can be PRINTED without running a solve.  The change above was
+    reported as demonstrated on the strength of a trace line reading yaw +0.15 where it had read
+    -0.15 -- and p6 was right that a plus-minus symmetric set prints that either way, so the line
+    was no evidence at all.  The menu itself is the evidence, and now it can be shown.
+    """
+    sgn = -1.0 if t == "L" else 1.0
+    menu = [(0.0, sgn * r) for r in (0.0, 0.35, 0.6, 0.85, 1.1)] + \
+           [(sgn * y, sgn * r) for r in (0.35, 0.6, 0.85) for y in (0.3, -0.3)]
+    if wide:  # per-STEP waypoints get a bigger pose menu so a CONTINUOUS branch survives
+        menu = menu + [(sgn * y, sgn * r)
+                       for r in (0.2, 0.5, 0.75, 1.0) for y in (0.15, -0.15, 0.5, -0.5)]
+    return menu
+
+
+def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=None, other=None, re_max=0.05, wide=False, pose_only=None, pose_rd=None, label="start-pose"):
     """Damped least-squares IK for position AND tool orientation on scratch MjData.  Keeps every
     solution that converges, wraps it to the nearest branch, drops the ones that would sit in
     collision, and returns the one closest to `near` (so the servo move stays short)."""
@@ -1391,22 +1415,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     rg = np.random.default_rng(seed)
     cands = []
     sgn = -1.0 if t == "L" else 1.0   # each arm tips AWAY from the other
-    # ⭐ p5 -167: the sign belongs on the YAW as well, not on the roll alone.  Rolling exists to
-    # let two arms share an 88 mm span without their wrists meeting (:1149), which is a statement
-    # about the PAIR -- and a menu entry that mirrors in roll but not in yaw hands the two arms
-    # attitudes that are not mirror images of each other the moment the yaw is non-zero.  I
-    # measured that separately on the built cell: at yaw 0 every roll stays an exact mirror pair,
-    # and at yaw 17.2 deg both arms are commanded the SAME world approach, +x on both sides where
-    # a mirror wants opposite signs (HOME_POSE_SYMMETRY_20260729.txt §5).  The menu set is
-    # unchanged in size and the +-yaw entries were already there, so this costs nothing.
-    # ⚠ It DOES change what an entry INDEX means on the right arm.  Anything that recorded a right
-    # arm pose as a menu index rather than as a (yaw, roll) value now names a different attitude;
-    # such records have to be re-read as values before they are used again.
-    POSES = [(0.0, sgn * r) for r in (0.0, 0.35, 0.6, 0.85, 1.1)] + \
-            [(sgn * y, sgn * r) for r in (0.35, 0.6, 0.85) for y in (0.3, -0.3)]
-    if wide:  # per-STEP waypoints get a bigger pose menu so a CONTINUOUS branch survives
-        POSES = POSES + [(sgn * y, sgn * r)
-                         for r in (0.2, 0.5, 0.75, 1.0) for y in (0.15, -0.15, 0.5, -0.5)]
+    POSES = pose_menu(t, wide)
     if pose_rd is not None:
         # An explicit (yaw, roll) rather than a menu entry.  Rs, on the second hand: it is only
         # just clamping -- adjust the attitude.  The coarse menu steps roll by 0.25 rad, which is
@@ -1557,8 +1566,13 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     free = _strict or cands
     if not free:
         raise RuntimeError(f"no IK solution for {t} at {tgt}")
-    if _fell_back and not quiet:
-        print(f"[steps] ⛔ start-pose IK {t}: NOT ONE of {len(cands)} candidates cleared the "
+    # ⛔ NOT gated on `quiet`.  pB -516(a): the disclosure reached one of the four solve sites,
+    # and the three it missed are the ones that run quiet -- including the per-step solve that
+    # produced the mast jam this whole line of work started from.  A fault report that only
+    # speaks when the caller asked for chatter is a fault report nobody hears.  The counts stay
+    # quiet; the "none of them cleared" line does not.
+    if _fell_back:
+        print(f"[steps] ⛔ {label} IK {t}: NOT ONE of {len(cands)} candidates cleared the "
               f"clearance or its path, so all {len(cands)} were put back and the choice below is "
               f"made among poses that were all rejected -- read the next line's 'collision-free' "
               f"as 'none'")
@@ -1567,7 +1581,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # table.  ⚠ The counts sum to more than the candidate count when a pose is rejected on
         # more than one test; each entry is "rejections against this part", not "poses".
         _b = ", ".join(f"{k} x{v}" for k, v in sorted(_blame.items(), key=lambda kv: -kv[1]))
-        print(f"[steps] start-pose IK {t}: rejected against -- {_b}"
+        print(f"[steps] {label} IK {t}: rejected against -- {_b}"
               f"   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)")
     well = [c for c in free if c[5] >= SIGMA_FLOOR] or free   # drop the near-singular ones
     ref = np.zeros(6) if near is None else np.asarray(near)
@@ -1593,7 +1607,11 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     # Printing the best of them beside the winner's turns that into the one comparison that is
     # actually controlled: same state, same candidate set, the only difference being the filter.
     # Across runs it would not be, because four other things changed.
-    _drop_sv = [c[5] for c in cands if c[7]]
+    # ⛔ pB -516(d): this read c[7], which is "dropped by the ARM test", while the sentence it
+    # feeds names the mast rejections in the same breath.  A candidate the mast removed was not
+    # counted as dropped at all, so "best dropped" could report the conditioning of a set that
+    # excluded most of what was actually thrown away.  c[3] is "rejected by anything".
+    _drop_sv = [c[5] for c in cands if c[3]]
     # p11 -152, one field: is there any pose with room, or is this step's target the problem?
     # ⚠ The literal maximum is NOT available and saying so is the point.  The decision loop
     # searches a radius of twice the clearance, so a candidate with plenty of room comes back as
@@ -1620,7 +1638,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # the floor itself was withdrawn (p11 -120(1) found it; I had written it).  So the count
         # printed now is how many the floor actually removed, which is zero while it is zero and
         # cannot be read as a second filter.  The singularity ranks; it does not exclude.
-        print(f"[steps] start-pose IK {t}: {len(cands)} solved / {len(_strict)} collision-free"
+        print(f"[steps] {label} IK {t}: {len(cands)} solved / {len(_strict)} collision-free"
               f"{f' (⛔ 0 -- all {len(cands)} put back)' if _fell_back else ''} / "
               f"floor {SIGMA_FLOOR:.2f} removed {len(free) - len(well)} of them (it ranks, it does "
               f"not exclude), chosen pos {pe*1000:5.2f} mm "
@@ -1628,7 +1646,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # ⭐ The winning joint vector itself.  Everything downstream is a property of THIS pose,
         # and the line named its cost, its roll and its conditioning but not the pose -- so
         # nothing that used it could be reproduced without re-running the solve.
-        print(f"[steps] start-pose IK {t}: chosen q = [" +
+        print(f"[steps] {label} IK {t}: chosen q = [" +
               " ".join(f"{v:+.6f}" for v in q) + "] rad")
     return q
 
@@ -1650,6 +1668,22 @@ def _interleave_report(dd):
           + f"   crown r {CROWN_R:.3f}"
           + ("   ⚠ commanded span, not the links actually held" ))
 
+
+# ⭐ The attitude menu, printed rather than inferred.  p6 -143(ii): the trace line that was
+# offered as proof of the yaw mirroring is printable either way by a plus-minus symmetric set, so
+# it proved nothing.  This shows the entries themselves, and checks the property directly: entry i
+# on the right arm must be the negation of entry i on the left, in BOTH components.
+_mL, _mR = pose_menu("L", wide=True), pose_menu("R", wide=True)
+_bad = [(i, a, b) for i, (a, b) in enumerate(zip(_mL, _mR))
+        if abs(a[0] + b[0]) > 1e-12 or abs(a[1] + b[1]) > 1e-12]
+print(f"[steps] attitude menu: {len(_mL)} entries per arm; entry i on R is the negation of entry i "
+      f"on L in both components -> {'YES' if not _bad else f'⛔ NO, {len(_bad)} entries differ'}")
+print("[steps] attitude menu, first 8 (yaw, roll) in rad:  " + "  ".join(
+    f"L({a[0]:+.2f},{a[1]:+.2f})/R({b[0]:+.2f},{b[1]:+.2f})" for a, b in zip(_mL[:8], _mR[:8])))
+_nz = [i for i, a in enumerate(_mL) if abs(a[0]) > 1e-12]
+print(f"[steps] attitude menu: {len(_nz)} of {len(_mL)} entries have a non-zero yaw -- those are "
+      f"the ones the sign can be seen on; on the other {len(_mL)-len(_nz)} it is invisible either "
+      f"way, which is why a single trace line could not settle this")
 
 # Rs: start from home.  The cell ships one, so the arms begin in the pose its own drawings show
 # instead of at the zero configuration, which for this mounting is arms crossed.
@@ -2317,7 +2351,8 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                     w[t] = solve_ik(t, tgt[t], tries=44, iters=260, seed=num * 10 + (t == "R"),
                                     near=prev[t], warm=prev[t],
                                     other=w["R" if t == "L" else "L"],
-                                    quiet=True, re_max=0.30, wide=True, pose_rd=(0.0, 0.0))
+                                    quiet=True, re_max=0.30, wide=True, pose_rd=(0.0, 0.0),
+                                    label=f"STEP{num} seating")
                 except RuntimeError as exc:
                     # ⛔ Do not fall back to a tilted attitude.  The requirement is the point; a
                     # silent tilt would put the fingers back through the table and report success.
@@ -2329,7 +2364,7 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
                 continue
             w[t] = solve_ik(t, tgt[t], tries=44, iters=260, seed=num * 10 + (t == "R"),
                             near=prev[t], warm=prev[t], other=w["R" if t == "L" else "L"],
-                            quiet=True, re_max=0.30, wide=True)
+                            quiet=True, re_max=0.30, wide=True, label=f"STEP{num} per-step")
     # p11 -132(i): the vertical requirement was enforced where the pose is SOLVED, and the
     # inherited branch leaves before that point.  Today the two sets do not overlap, so nothing
     # slipped through -- but that is a fact about which steps inherit, not a property of the
@@ -2795,18 +2830,23 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     _pred_txt = []
     for t in SIDES:
         if t in CLEARANCE_REPORT:
+            # ⛔ pB -516(b): the denominator used to be _dr + _kept, and _kept is already the
+            # FULL candidate count -- every candidate is appended to `cands`, dropped or not.
+            # So the dropped were counted twice and every rejection rate printed at about half
+            # its size: 26 of 38 went out as 26 of 64, 68% reading as 41%.  It is in every
+            # banked trace this file has produced.
             _dr, _kept, _nfa, _wsv, _dsv, _rm, _mx, _psv, _cdr, _pdr, _wp = CLEARANCE_REPORT[t]
             _mast = (f"; the mast removed {_cdr} at the pose and {_pdr} on the way there"
                      + (f" (worst path {gap_mm(_wp[0])}, {_wp[1]})" if _wp[1] else ""))
             if _nfa is None:
                 _pred_txt.append(
                     f"{t}: the winning pose cleared the whole {ARM_DECIDE_CUTOFF*1000:.0f} mm "
-                    f"search radius; clearance removed {_dr} of {_dr + _kept} candidates, "
+                    f"search radius; clearance removed {_dr} of {_kept} candidates, "
                     f"{_rm} of them roomy, winner sigma {_wsv:.4f} (best survivor {_psv:.4f}) vs best dropped "
                     + (f"{_dsv:.4f}" if _dsv is not None else "none dropped") + _mast)
             else:
                 _pred_txt.append(
-                    f"{t}: clearance removed {_dr} of {_dr + _kept} candidates, winner predicted "
+                    f"{t}: clearance removed {_dr} of {_kept} candidates, winner predicted "
                     f"{gap_mm(_nfa)}, winner sigma {_wsv:.4f} (best survivor {_psv:.4f}) vs best dropped "
                     + (f"{_dsv:.4f}" if _dsv is not None else "none dropped")
                     + f"; {_rm} candidates cleared the whole {ARM_DECIDE_CUTOFF*1000:.0f} mm "
@@ -2862,15 +2902,19 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     # That is the close the video caught at 11.25 s in t42, one step late and onto nothing.
     if _stalled:
         raise RuntimeError(
-            f"STEP{num} {'/'.join(_stalled)}: the command stopped advancing for a whole step's "
-            f"worth of ticks and the move did not finish"
+            f"STEP{num} {'/'.join(_stalled)}: THIS arm's command stopped advancing for a whole "
+            f"step's worth of ticks and its move did not finish"
+            + (f" (the other arm was still advancing, at "
+               f"{100*prog['R' if _stalled[0] == 'L' else 'L']:.1f}% -- the ramps are per arm now, "
+               f"so this is one arm stalling and not the run freezing)"
+               if len(_stalled) == 1 else " (both arms)")
             + (f" -- and this is the {gate} step, whose fingers are gated on the command "
                f"arriving, so they never moved; the close would have happened in the NEXT step "
                f"with its gate open by default, after this step's grasp measurement had already "
                f"been taken on an open hand" if gate in ("grasp", "regrasp") else "")
             + f".  Everything above this line is the state at the stall.  Continuing would "
-              f"re-measure this same configuration once per remaining step, which is what the "
-              f"previous run did.")
+              f"re-measure the stalled arm's configuration once per remaining step, which is "
+              f"what the run before the per-arm split did.")
 
 for t in SIDES:
     print(f"[steps] WORST {t}: sigma_min {sig_min[t]:.4f} at {sig_where[t]}"

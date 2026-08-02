@@ -66,4 +66,13 @@ BEHIND AND IN FRONT OF THE PLANE (the same band, at several y)
   0.150               0            222                        58.4 mm
   0.200               0            272                        84.9 mm
 
+THE RETURN PATH beside each mount (x within +-30 mm of the mount at 5 mm,
+z across the band at 10 mm) -- the layer an arched head descends through
+  y [m]      left mount: min / best     right mount: min / best
+ -0.010           +77.3 /    +226.7            +2.1 /     +60.9
+ -0.020           +77.3 /    +227.1           +10.9 /     +64.7
+ -0.030           +77.3 /    +228.0           +19.7 /     +69.6
+ -0.040           +77.3 /    +229.1           +28.5 /     +74.7
+ -0.050           +77.3 /    +230.3           +37.4 /     +79.1
+
 ⛔ Not a verdict.  What the free region can carry, if anything, is p5's call.
