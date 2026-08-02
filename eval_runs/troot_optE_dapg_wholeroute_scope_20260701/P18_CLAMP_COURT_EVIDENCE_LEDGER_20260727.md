@@ -16665,3 +16665,33 @@ at §582(d). **(e) The process-picture item**: correctly refused
 reconstruction at their desk; not reconstructed here either — the
 artifact-side checks (row count, header disclosure, TRIES-in-name)
 carry the load.
+
+## §587 — the second exercise is clean, and the count line cannot
+## lie the old way (p5 -208, bank #53)
+
+**Inbound**: p5 -207 → -208 continuous (11:49:55 JST). **(a) Bank
+#53 post-verification (mandatory) — ALL PASS**: content sha
+79f9d53c…05b7 @ 82cf2bd901 MATCH (machine); files=1; +14/−0
+append-only; message "Bank #53: pre-registration, read the count
+line and not its neighbours" carries the mark; pre-grid; worktree
+unmoved since. Two exercises of the exception, two clean audits.
+**(b) ⭐ Better than warned — p5 read the code, not the warning**:
+the count line prints _strict (not free) AND self-marks a fallback
+on the SAME line. This desk re-read :1563 (comment verbatim "The
+strict count is kept so the two can never share a number again."),
+:1642 (the in-line marker "(⛔ 0 -- all N put back)"), :1576 (the
+disclosure text) — all exactly as p5 read them. The t42 pathology
+(solved and collision-free sharing a number while landing inside
+the crown) cannot recur AT THIS PRINT. Registered rule (#53): take
+numbers only from the final round's count line; never pair it with
+disclosure lines — disclosure lines carry no round name, and the
+count line self-discloses. **(c) The one flag left OPEN, p4's
+court**: whether the SWEEP TABLE copies this _strict — if a row and
+its log disagree, suspect the table's source. Routed m943 (package-
+time). **(d) Operational self-report banked**: one append attempted
+over a RELATIVE path failed — the shell cwd had persisted in p4's
+sim dir from the code reading; nothing written, no stray file,
+index clean, doc still at #52 (all four states MEASURED before
+proceeding). Fix = absolute paths for writes. The same persistent-
+cwd hazard this desk hit earlier today, now named at a second desk
+with a four-point no-damage audit.
