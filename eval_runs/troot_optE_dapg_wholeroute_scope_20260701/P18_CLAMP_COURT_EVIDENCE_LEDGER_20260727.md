@@ -18596,3 +18596,45 @@ The doc-reflection hold was correct in form and already moot: #72
 landed at 44fb02ac89 minutes before; items 6/7 fold into §54-5
 in-place on their confirmation (method conditions kept in one
 place for the user of the method).
+
+## §657 — the second banked zero falls, and the cap prophecy is
+## fulfilled with its announcement working (p4 -243)
+
+**Inbound**: p4 -242 → -243 continuous (14:49:14 JST). **(a) Pins
+verified (machine, ×2 each)**: WORK_ROW_Y_SWEEP_TRIES240.txt sha
+46f0d8fd…31b1 and WORK_ROW_240_READING sha 97b7c32c…3d55 @
+35752c6424; 4 logs banked. Rows re-read here: dy 0.200 = L 151/1,
+R 135/5; 0.250 = 142/1, 136/3; 0.300 = 136/7, 138/1 — the 24-draw
+"zero at every offset" FALLS: **dy 0.200 (+34.5 mm) and 0.250
+(+29.5 mm) are three-leg witnesses** — the move-the-work-row road
+was not dead either. ⚠ The arms TRADE (L opens as R closes; the
+window sits between the trends, not at the ends); whether the row
+may move ~200 mm is a TASK question, outside p4's court. **(b) ⭐⭐
+The -242 cap warning fulfilled ten minutes later, and SEEN because
+the announcement exists**: dy 0.150 reads R clear 41 — over the 40
+cap — and the driver printed "(1 further clear poses not printed)"
+(line re-read here) ⇒ the all-pairs costing (#71) is exact FOR THE
+GRID and already incomplete at one point of THIS sweep; the
+measure-both-maxima-first protocol was not hypothetical. The
+gate-sharing rule (p6 -210, routed as m999 — p4's cite "-999"
+resolves to that routing) is load-bearing in the field. **(c)**
+The chain spec (N=240 seeded) received; run held for Rs ③.
+
+## §658 — the fold lands and the court empties (p5 -230, -231,
+## bank #73)
+
+**Inbound**: p5 -229 → -230 → -231 continuous (14:49:14 /
+14:49:55 JST; -231 a crossing note — the fold was already in
+-230). **(a) Bank #73 EXECUTED @ d9ddffdff8 (front door)**:
+worktree sha 1460c282…5986 MATCH → commit-content MATCH; +6/−0
+(§54-5 insertion, zero deletions, declared). Items 6/7 in place:
+the BOTH-SIDED cap condition with the owned bad form ("the 17 was
+in my own table and my condition sentence did not use it") and the
+measure-both-first protocol; the STATIC-witness scope (crossing
+leg only; the path leg for arbitrary pairs is "examined against a
+DIFFERENT partner"; results written in two named parts). **(b) ⭐
+The court declared EMPTY**: the three specifications — the seating
+predicate, the chain with its pre-registered sampler reading, the
+all-pairs with its conditions — are all delivered, all awaiting
+Rs authorization, none to be initiated by p5. The design lane's
+work is, by its own accounting, complete pending Rs.
