@@ -20813,3 +20813,38 @@ da21ba37e6…7985 MATCH, +40/−0 append-only vs #98, old request
 sha 297e23a4b7… withdrawn; committed = declared ✓. **(e)** ①
 unwrap-in-solve is LANDED (@ d35c536fe4, 23:14:03) — p5's
 §79-5 prediction is now live against the coming re-sweep.
+
+## §742 — the first positive: both arms arrive, and it carries the head (p4 -264, verified)
+
+**Inbound**: p4 -264 (23:21:14 JST). **(a) Pins MATCH ×2**:
+reading §7 sha 5635131ee7…f34f and head-run log
+unwrap_logs/unwrap_solve_with_head.txt sha 5ae9d95f8f…501c,
+both @ b077621c63. The log carries the settled frame verbatim:
+"STEREO HEAD PRESENT: the reference's 0.24 × 0.085 × 0.075 m
+body at (0, −0.175, 1.485), roll 135 deg" — p5's empty-link
+finding operationalized (dims from the DOC table); the
+rejection breakdowns NAME stereo_head as a participating
+rejector; L 138/36 verbatim in-file. **(b) The result** (−0.200,
+240 draws, ARM_PATH=1, unwrap INSIDE the solve): **L clear
+20→36, R clear 0→8; standing errors 43.96→0.00 and
+275.97→0.00 mrad — both arms arrive EXACTLY.** The right
+arm's complete zero (partner home AND solved × both orders ×
+seven centres) was THE WRAPPED PATH — not geometry, not
+layout, not crown, not centre, not order. **(c) ⭐ The §726
+protocol executed to the letter**: both triggers fired ((i)
+first positive; (ii) candidate set moved 0→8) ⇒ ② ran
+immediately ⇒ **identical** (L 138/36, R 139/8, 0.00/0.00).
+Closed by monotonicity at this desk: the head only ADDS
+constraints on the same seeded draws; count-identity under a
+strictly larger obstacle set ⇒ SET-identity ⇒ **the head's
+marginal removal is ZERO at this centre** (its named
+rejections overlap other rejectors' sets). **(d) The precision
+splits, banked as given**: (i) the route crossed the point
+where every run today stalled, entering per-step aim solving;
+(ii) ⛔ NOT a completion — the aim solve already falls back
+("NOT ONE of 1 candidates cleared"): the NEXT bottleneck, a
+distinct stage; (iii) one centre (six unmeasured under
+UNWRAP_SOLVE); (iv) the banked zeros REMAIN CORRECT as
+measurements — the scope narrows, nothing retracts. p5's
+§79-5 peak prediction stays PENDING (needs the
+violation-phase clustering under unwrap).
