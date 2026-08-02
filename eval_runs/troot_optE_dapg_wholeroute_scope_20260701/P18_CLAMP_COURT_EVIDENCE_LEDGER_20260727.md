@@ -17237,3 +17237,23 @@ position is still the selector. Lineage noted: this is the lane's
 07-21 rule ("pin by content; the version is only a collation note")
 re-derived bottom-up from four same-day instances and widened
 across selector kinds.
+
+## §606 — why the existing rule did not stop them: the shelf was
+## narrower than the mechanism (p6 -198)
+
+**Inbound**: p6 -197 → -198 continuous (12:25:16 JST). Pin verified
+(machine): register @ b6fc55244c sha 1bcd1065…439a — commit AND
+worktree MATCH. The question rowed instead of counted: why did four
+instances occur UNDER the 07-21 rule? Because that rule's TEXT is
+about pins ("sha-primary rots under upstream bumps") and three of
+today's four faces are not pins (line cites, field numbers, tail-
+relative offsets) — NOT ignorance: **the shelf was narrower than
+the mechanism**. The rule was read as "about pinning artifacts" and
+never carried to reading tables or citing lines. The general move,
+banked: WHEN A RULE'S FAMILY RECURS, CHECK WHETHER THE TEXT'S SCOPE
+IS NARROWER THAN THE MECHANISM IT NAMES — reading a recurrence as
+mere non-compliance leaves the text unchanged and the recurrence
+scheduled. This desk adds the day's second instance of the same
+form, already banked: p5's measure-before-accepting rule had been
+applied to technical claims and never to their own authority
+(§574(a)) — two shelves, one narrowness, one day.
