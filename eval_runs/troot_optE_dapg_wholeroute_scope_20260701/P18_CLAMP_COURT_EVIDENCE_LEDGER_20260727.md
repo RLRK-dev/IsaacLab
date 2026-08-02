@@ -16695,3 +16695,48 @@ index clean, doc still at #52 (all four states MEASURED before
 proceeding). Fix = absolute paths for writes. The same persistent-
 cwd hazard this desk hit earlier today, now named at a second desk
 with a four-point no-damage audit.
+
+## §588 — (b) closes by measurement and the counts invert: the head
+## removes choices (p4 -227)
+
+**Inbound**: p4 -226 → -227 continuous (11:50:53 JST). ⚠ The
+header's FROM/TO line arrived INVERTED ("FROM w2:p18 / TO w2:p4");
+msgid, counter continuity, and content identify p4 as sender —
+noted, not returned. **(a) Pins verified (machine)**: PACKAGE_NOTES
+§(b) update sha e85cedca…fc62 @ e204f94c95 — commit AND worktree
+MATCH; seed240_sources/ banked with the three source logs
+(tries240.txt 09:31 = A crown-none / rt_grid_240.txt 09:50 = B
+crown 0.110 / stage1.txt 09:56 = C real head), all three carrying
+"106 solved" (checked here); names and times match what this desk
+had observed as candidates in p4's session dir. **(b) ⭐⭐ THE
+INVERSION**: printed ENTRY counts A=4 / B=5 / C=5; DISTINCT POSES
+A=4 (3 at 1e-3 rad tolerance) / B=2 / C=2 — four of B's five
+entries are ONE pose to the last digit (sigma 0.0338), reached from
+four seeds. The left arm holds 2 distinct clear start poses WITH a
+head and 3-4 WITHOUT: **the head REDUCES choices; it does not add
+them.** The 4→5 "paradox" behind §578's same-set refutation
+dissolves at the pose level — entries are draws, poses are doors,
+and by doors the direction is monotone as physics expects. STILL
+OPEN: the exact solved identity (106=106=106) — no explanation
+built, per the -206 rule. **(c) B ≡ C at this predicate**:
+identical survivor sets, identical sigmas (0.0338/0.0381),
+interleave both +14.7 mm, same geom pair (7<->46) — the fixed 0.110
+crown and the real reaching head are THE SAME OBSTACLE for
+left-arm start poses; ⚠ scope = this predicate, this mounting
+(0.280, 20) only. Consequence: the crown-0.110 sheet proxies the
+real head AT THIS POINT with measured equivalence; other mountings
+stay unmeasured. **(d) Reproducibility, and the reuse mechanism
+validated**: A's 240 ran twice independently (09:31 direct; 11:00
+via the sweep, 90 min apart) — 4 shared poses, 0 differences.
+**(e) The lookalike hazard, concrete**: /tmp/mounting_sweep/
+crown_0.110_0.280_20.log and z_1.330_0.280_20.log are 24-DRAW
+points wearing the same cell names — the exact hazard the TRIES-in-
+name discipline addresses; the true sources now live under version
+control. **(f) One attribution returned, gently**: -227 corrects
+"the two logs your -939 named" — the SENT m939 names no B/C log at
+all (machine grep: 0 hits for either path; verbatim it says B/C
+source logs are "貴殿 bookkeeping・当卓は割当てない", and names
+only st_none_0.280_20.log for A1). Hazard note kept; attribution
+corrected with the verbatim. Section scope as p4 states: left arm,
+start poses, (0.280, 20), 240 draws. Grid 14/24 at 11:5x
+(message-grade).
