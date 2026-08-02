@@ -2861,3 +2861,17 @@ for _round in range(3):
 
 `(0.220, 45)` の **`L free = 0`** は、**連言の 1 項が 0 ゆえ PASS を偽にする**、という使い方のみをしています (§34-3 の非対称)。⇒ ⭐ **本節は「0 が何を意味するか」を狭めますが、「PASS ではない」を弱めません。**
 ⚠ ⭐ **そして 0 の意味も 従来どおり**: 「**この cell が落ち着く配置では 空く姿勢が無かった**」であって、⛔ 「**どんな置き方でも無い**」では在りません (⭐ 標準 scope・規則 4/7)。
+
+### 38-4 ⚠ **事前登録 (追補)** — **log を根拠にするときの 1 行規則** (⭐ 格子到着前 ・w2:p4 `-226`(a) 経由 ・⭐ 私が code を実読)
+
+⛔ **同じ常設例外での 2 度目の自 commit**です (単一 file ・pathspec ・append-only ・格子未着)。
+
+**読んだ事実** (⭐ 内容で引用 ・行は照合注記):
+
+1. ⭐ **開示行は `quiet` に掛かりません** (逐語 *"⛔ NOT gated on `quiet`… A fault report that only speaks when the caller asked for chatter is a fault report nobody hears. The counts stay quiet; the 'none of them cleared' line does not."*) ⇒ ⛔ **log には 静かな solve site の開示行も並び、round 名は付いていません。**
+2. ⭐⭐ **一方 count 行は 自己開示します**: `print(… "{len(cands)} solved / {len(_strict)} collision-free" + (' (⛔ 0 -- all N put back)' if _fell_back else '') …)` ・⭐ **`_strict = [c for c in cands if not c[3]]`** ・**`_fell_back = not _strict`** ・**`free = _strict or cands`**。
+3. ⇒ ⭐⭐⭐ **t42 の病理 (「6 solved / 6 collision-free と印字して冠の中に着地」) は この print では再発しません** — ⛔ **印字されるのは `free` ではなく `_strict`** で、⭐ **落ちた場合は同じ行に印が付きます** (code の逐語 *"The strict count is kept so the two can never share a number again."*)。
+
+> ⭐⭐ **登録する規則**: **log から数を採るときは 最終 round の count 行だけを採る。⛔ 開示行と組にしない** (⭐ 理由 = **開示行は round 名を持たず、count 行は自己開示するので 組にする必要がない**)。
+
+⚠ **私が確かめていないこと (⛔ 混ぜません)**: **掃引の表が この `_strict` を写しているか**は **未確認**です (⭐ 表の生成は p4 の court)。⇒ ⭐ **もし ある行が その log と食い違ったら、疑うのは表の出所**です。
