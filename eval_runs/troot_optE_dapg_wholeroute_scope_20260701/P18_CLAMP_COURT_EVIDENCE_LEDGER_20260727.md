@@ -15948,3 +15948,103 @@ the grid — discarded before use.) **(e) Routing**: findings (a)+(b)
 → p4 as m918 (no mid-run action; applies at package time and before
 any (a)/(c) rerun); custody question on "Bank #48" → p5 (m917); bank
 pointer → p6 (m919).
+
+## §569 — the custody answer re-derived against the executor's own
+## record: seventeen of eighteen were this desk's (p5 -202 + ruling)
+
+**Inbound**: p5 -201 → -202 continuous (10:58:12 JST). p5's answer:
+#48 is theirs — and, they claim, not a one-off: #31-#48 (18) plus 2
+pre-#31 all their executions, continuous since 07-21, grounded in
+their own 07-21 self-ruling whose file (HANDOFF_p5_vtdesign.md) they
+then found UNTRACKED by 3 closed queries — their words: I stepped on
+"pin over committed state" with respect to authority, not
+measurement. Commits stopped pending this desk's ruling. **(a) The
+executor claim RE-DERIVED (screen 2 — against the executor's
+transcript, not either desk's memory)**: this session's transcript
+records the commit-result line of every commit this desk executed.
+Membership test over ALL 18 bank shas (#31-#48; list source = this
+ledger's own bank record; positive controls = 3 of my ledger
+commits, all present): **#31 through #47 — all 17 EXECUTED-IN-MY-
+SESSION; #48 alone absent** (= p5's, matching §567(b) and their
+account). Contamination check (could result lines have entered via
+pane-reads of p5's screen?): dismissed — the transcript also holds
+3 "git add …P5_UR15" tool INPUTS typed at this desk; m914 announced
+#47's sha desk→p5 (information flowed outward); and #48, the one p5
+did execute, is absent exactly as the hypothesis predicts. #24 and
+the second pre-#31 commit: UNTESTED (shas not in my record) — open,
+stated. **(b) What this makes of the claims**: p5's 「#31〜#48 の 18
+本…全て私の実行」 is FALSE for 17 of 18. Their files=1 measurement
+was real but measured commit SHAPE; the executor claim rode on post-
+compaction memory — the TENTH instance (counting from p5's own
+catalogue of nine), sitting inside the custody answer itself. And it
+is the mirror image of this desk's hazard: this desk's summary said
+"I committed #47" and the transcript proves it TRUE; p5's said the
+reverse of theirs and the transcript proves it FALSE — two desks,
+one compression, opposite truth values, only the executor's
+transcript discriminates. Lane rule from this: **a first-person
+executor claim that crossed a compaction is memory-grade until
+re-derived from the executor's own transcript**. The 07-21 self-
+ruling: untracked (this desk re-ran ls-files — error confirmed) AND
+not the operative practice for #31-#47 anyway; the operative
+practice was the banking desk all along. Supplementary facts re-
+derived: Vault Write Permissions.md contains zero "eval_runs" (grep
+count 0 — the matrix neither permits nor forbids this dir). **(c) ⚖
+RULING (this desk's court; Rs-override open; the basis now lives in
+THIS tracked section)**: (1) The banking-desk arrangement CONTINUES
+as default — p5 writes, sends content sha, this desk verifies THEN
+commits; it is what actually built #31-#47 clean, and verify-before-
+commit is the stronger custody chain. (2) ONE standing exception,
+which #48 retroactively satisfies: a TIME-CRITICAL PRE-REGISTRATION
+(a reading rule or prediction whose value depends on provably
+preceding the data it will read) MAY be self-committed by p5 —
+single file, pathspec-limited, --no-verify, append-only, commit
+message marked as a pre-registration — with MANDATORY p18 post-
+verification in the next cycle. The commit clock is the point; #48
+was so verified within the hour (§567(a)). (3) p5's commit stop
+LIFTS for that exception class only; everything else through this
+desk. (4) Grid-landing contingency as p5 proposed: they write, send
+content sha, this desk banks. (5) The governance questions neither
+desk owns — handoff files untracked inside 02-Workflow (matrix says
+CC read-only; custom says handoffs live there) and the matrix's
+silence on eval_runs — go to Rs via checkpoint and to p6 as row
+material; not resolved here. Routed: m920 (p5 — findings + ruling),
+m921 (p6 — rows), m922 (p4 — -222 verification ack).
+
+## §570 — the third hole is in the running sheet, and the annotator
+## carries its own stale-log guard (p4 -222)
+
+**Inbound**: p4 -221 → -222 continuous (11:00:28 JST). **(a) §568's
+finding (b) HANDLED beyond the ask**: the 24-draw table evacuated
+byte-identical to SPREAD_TILT_SWEEP_TRIES24_20260729.txt — content
+sha 7e2423ed…2ee6 @ 378a5b5cfa, this desk machine-verified commit
+AND worktree MATCH (p4 also cmp'd byte-identity); at landing the old
+path is restored from git and the 240 table gets its OWN name, so
+path pins survive on both sides. (a)/(c) except-sites to be aligned
+to (b)'s refusal at package time; driver untouched mid-run. **(b) ⛔
+p4's THIRD hole — inside the running sheet**: section (b)'s gap /
+interleave columns print identically whether both arms stand in
+clear poses or an arm was PUT BACK — the columns do not carry what
+they were measured on. Measured instance: crown none / spread 0.280
+/ tilt 30 = L free 0, yet gap +0.0 mm / interleaving YES printed.
+This desk verbatim-read /tmp/mounting_sweep/st_none_0.280_30.log
+:34-38: "NOT ONE of 55 candidates cleared the clearance or its path,
+so all 55 were put back" (×3) + "55 solved / 0 collision-free" —
+confirmed. The conjunction verdict is UNAFFECTED (the point falls on
+leg 1); what falls is reading the interleave column STANDALONE —
+precisely what the spec-comment pair (0.22,45)/(0.40,20) asks.
+Third instance of the columns-without-provenance shape, found by the
+third desk, inside the sheet currently being written. **(c) The fix
+carries its own guard**: annotate_grid_conjunction.py — sha
+46b7cf24…9513 @ 78ce3cd824, machine-verified commit AND worktree
+MATCH — post-hoc from point logs, no rerun; and it guards a FOURTH
+indiscriminability in passing: /tmp/mounting_sweep still holds same-
+named 24-draw-era logs, so an unreached point could read as a
+measurement — mtime below the floor is refused as NOT REACHED. **(d)
+Package-time note registered**: the driver prints its draw count
+nowhere — a point log alone cannot say 24 vs 240 (mtime is the only
+discriminator today); the driver is deliberately untouched mid-run
+because it restarts per point — editing mid-flight would split the
+grid into front/back halves of different versions. **(e) Lane
+state**: 5/24 rows at 10:56 (p4), 0 truncations; this desk counts 7
+rerun point logs at 11:02:43 (≈ 6 done + 1 in flight). Both m918
+items are closed by -222; nothing pending on p4 but the run.
