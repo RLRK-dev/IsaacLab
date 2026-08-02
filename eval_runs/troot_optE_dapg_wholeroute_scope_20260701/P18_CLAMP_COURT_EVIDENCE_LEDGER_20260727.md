@@ -20056,3 +20056,64 @@ candidate set itself (their morning 4-vs-5), so the sign is not
 guaranteed and re-measurement decides; only the RISK DIRECTION
 is claimable. **(c)** The rotation flag rowed at their register;
 frame settlement before the re-run.
+
+## §714 — the frame settles, and they are NOT the same object (p4 -257, verified)
+
+**Inbound**: p4 -257 (21:52:52 JST). **(a) Box frame settled —
+this desk's flag accepted**: local-frame box turned by the joint
+rpy (standard URDF reading); recomputed world AABB x ±0.1200 /
+y −0.2316..−0.1184 / z 1.4284..1.5416 = this desk's §712
+values; top +11.6 mm ABOVE the mounting line. Assumption made
+explicit (body_size_m as link-local; world-aligned reading would
+restore the old values, Δy 14 / Δz 19 mm). The y-band margin is
+18 mm, not 32. **(b) Identification = NO — three independent
+differences, all verified here**: (i) WIDTH — built crown is a
+capsule 2×0.220 + 2×0.110 = **0.66 m** (arithmetic ✓; same form
+as spec :415-418's "0.160 ⇒ 0.76 m wide" — line read, exists)
+vs head 0.24 m; (ii) POSITION — crown on y = 0, head at y =
+−0.175 (URDF ✓); (iii) the reference doc lists them as separate
+items (doc :3 "angled Y yoke … and a stereo head between the
+arms"; §Stereo head its own table) ⇒ **the crown is the YOKE's
+stand-in; the stereo head is a separate solid (a sensor).** (5)'s
+≤20 mm is a number about the yoke stand-in — no contradiction
+with the head's 240 mm. **Nuance added at this desk**: doc
+§Mounting carries yoke_angle 45 / yoke_spread 0.22 (read here) ⇒
+the crown's referent GEOMETRY lives in the package; its TUBE
+RADIUS does not (no yoke-radius row) — the radius remains the
+photo-read part. **(c) (5)'s new caveat (p4's own court,
+disclosed)**: r ≤0.020 means a 40 mm-thick bar 480 mm wide, far
+from the doc's "head barely wider than the column" (column r
+0.102, dia 0.204 ✓); and spec :410-411 (read, exists): each
+branch is a 0.4 m cantilever with strength margin ALREADY ≤0 ⇒
+**geometry opens at ≤20 mm; buildability is a separate,
+unanswered question.** **(d)** Re-run proceeding under the
+settled frame.
+
+## §715 — the second NO, and the empty link: frame without body (p5 -255, verified)
+
+**Inbound**: p5 -255 (21:53:28 JST). **(a) Independent
+convergence**: p5 computed the rotated head AABB THEMSELVES —
+x ±0.120 / y [−0.2316, −0.1184] / z [1.4284, 1.5416] — equal to
+this desk's §712 computation and p4's -257 recomputation ⇒
+**three desks, three independent computations, one AABB**; and
+their NO rests on different evidence than p4's (crown bar on
+y=0 spanning x ±0.330 vs head's pulled-back small box; the
+§712c dimensional echo explained: different quantities of
+different objects sharing a height band). **(b) §72-4 narrowed
+by its author**: "no crown in the package" is TRUE about the
+crown but INCOMPLETE — the package holds a DIFFERENT solid p5
+did not model; the query was a WORD ("crown"), never "is there
+any solid at that height" — their §47 lesson recurring, owned.
+**(c) ⭐⭐⭐ The mechanism (verified here from §712's own URDF
+read)**: `<link name="stereo_head"/>` is an EMPTY LINK — no
+visual, no collision; the 240×85×75 body exists ONLY in the
+doc's table ⇒ **whoever builds from the URDF gets the frame and
+not the body — the mechanical reason for the omission**; the
+re-run's box must take its dimensions from the DOC table. **(d)
+Impact split**: y −0.050 (the §30 bow) is 68 mm clear of the
+head; CROWN_BAND Reading 3's y −0.150/−0.200 rows are INSIDE
+the head — concretely refuted; (0)/(4)/(5) witness impact
+UNKNOWN until p4's boxed re-run. p5 folds §74 + this after
+#92's confirmation reaches them (pin discipline — and #92 IS
+long since EXECUTED @ 3be8c6ef47, §710; the confirmation was
+displaced by the STOP traffic and goes out now).
