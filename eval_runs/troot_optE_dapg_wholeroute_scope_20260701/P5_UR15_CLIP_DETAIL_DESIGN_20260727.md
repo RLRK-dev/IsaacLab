@@ -2875,3 +2875,30 @@ for _round in range(3):
 > ⭐⭐ **登録する規則**: **log から数を採るときは 最終 round の count 行だけを採る。⛔ 開示行と組にしない** (⭐ 理由 = **開示行は round 名を持たず、count 行は自己開示するので 組にする必要がない**)。
 
 ⚠ **私が確かめていないこと (⛔ 混ぜません)**: **掃引の表が この `_strict` を写しているか**は **未確認**です (⭐ 表の生成は p4 の court)。⇒ ⭐ **もし ある行が その log と食い違ったら、疑うのは表の出所**です。
+
+### 38-5 ⚠ **事前登録 (追補 2)** — **未担保は「経路」・`NOT MEASURED` は「時間切れ」ではない** (⭐ 格子到着前 ・w2:p4 `-227` を私が実読)
+
+⛔ **常設例外での 3 度目**です (単一 file ・pathspec ・append-only ・格子未着 ・素材 = `PACKAGE_NOTES_COURT_ITEMS_20260802.md` sha256 `fbd11ef8b065fca42893d9e72ad1df76cb5dda8cfcac364a62fe5398e185abb6` ・⭐ 私が実測 ・64 桁 ・⚠ 未 tracked ゆえ content で pin)。
+
+**1. ⛔⛔ §38-2(2) を 置換します — 未担保は 私が書いたものより 重い。**
+
+私は「⛔ 担保されないのは **L の選択が最終対にとって最良か**」と書きました ⇒ ⭐ **p4 の方が precise で、しかも悪い形**です:
+
+> 逐語: *"⛔ **What is left uncovered: L's *path* clearance against the final R.** The 'on the way' checks (the ones that print `at 5/9 along the move`) ran against the round-1 R, and the interleave measures the endpoint only."*
+
+⇒ ⭐ **終点は二重に担保**されます (**R 列** + **交差列**) ⇒ 私の §38-2(1) は有効。
+⇒ ⛔⛔ **未担保は 経路**です — **PASS 行が言うのは「両腕が 終わる場所で 空いている」であって、⛔「左腕の 近づき方が、右腕の 終わる場所を 避けている」では在りません。**
+⇒ ⭐ **重さが違います**: 「選択が最良でない」は最適性の話ですが、**経路の衝突は 失敗**です。⚠ 観測 1 点で閉じます (round ごとに `START[t]` を印字 + L の経路判定を最終 R に対して再実行 ・p4 が名指し済)。
+
+**2. ⛔⛔ `NOT MEASURED` 行を「時間切れ」と読みません。**
+
+> 逐語: *"The row currently reads `-- NOT MEASURED: no interleave line within 2400s --` whether the cap was reached or the child was killed by a signal — and for `(none, 0.340, 30)` it was a **SIGSEGV at 37 s**"*
+
+⇒ ⭐⭐ **登録する規則**: **`NOT MEASURED` は「測っていない」以上を意味しない。⛔ 上限到達と読み替えない ・⛔ 落ちた点を「難しい点」と読み替えない。** ⭐ **経過時間と終了状態が 行に載るまで、その点は 未測のまま持つ。**
+⚠ **これは 私の §38-4 と同じ形**です — **区別できない述語は証拠ではない**、の 3 例目 (⭐ 1 = 開示行と count 行 ・2 = 切り捨てと測定 ・3 = 上限と crash)。
+
+**3. ⭐ 規則 2 の言い方を 1 語 直します。**
+
+p4 が **A0 ≡ A1** (90 分離れた 2 独立 run ・差 0) を示し、種は決定的です ⇒ ⭐ **同じ設定なら 同じ生存集合。**
+⇒ ⛔ **ゆえに「別の標本」とは 振り直しのことでは無く、`START_TRIES` が違うこと**です。
+⇒ ⭐⭐ **規則 2 は「数は draw の性質」でなく「数は *draw 数* の性質」と読む**のが正確です (⭐ 私の元の言い方は、乱数の揺れを含意していました)。
