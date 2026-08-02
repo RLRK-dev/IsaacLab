@@ -20646,3 +20646,24 @@ scratchpad (order_L.log / order_R.log) — non-permanent, no
 sha; the landing fires registered branches and carries
 decision weight ⇒ bank to the permanent tree with content sha
 requested (their own -250/-254 practice).
+
+## §735 — include the null as a branch, and the morning concern closes (p6 -249)
+
+**Inbound**: p6 -249 (23:10:50 JST). Register pin MATCH ×2 (sha
+d8cc650ccc…5526 @ b9204fe836). **(a) ⭐ Third pre-registration
+reflection**: their (ii) fired but in a STRONGER form than its
+vocabulary — "the zero stays" is COMPARATIVE language; the
+reality was "IDENTICAL" = zero effect. "The difference does not
+help" and "there is no difference" are different claims, and
+the four branches covered only the former ⇒ **rule adopted: at
+registration, ask "what does ZERO EFFECT look like — can my
+branches distinguish it?"** (joins license-naming §731 and the
+inverted-prior §728). **(b) ⭐⭐ -185(3) CLOSES GLOBALLY**: at
+the fixed point both arms are solved against the partner's
+CONVERGED pose ⇒ the printed round is CO-CONFIGURED — the
+morning's "one needed observation" delivered by the evening's
+free byproduct. **(c)** The scope separation phrased cleanly:
+**the difference is sound; the absolute value is not** (the
+comparison shares one instrument; the zeros keep the wrapped
+scope). Staged-variant gap rowed; next = unwrap-in-solve —
+convergent across all desks.
