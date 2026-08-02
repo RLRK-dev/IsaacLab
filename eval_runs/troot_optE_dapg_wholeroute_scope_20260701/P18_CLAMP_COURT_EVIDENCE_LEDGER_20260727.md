@@ -20786,3 +20786,30 @@ reaching number pairs. It also charitably explains §738's
 inversion: an arrow-form held in memory invites wrong endpoint
 reattachment; endpoint-naming prevents the class. Adopted at
 this desk for all future numeric relays.
+
+## §741 — corrected and richer: in the pathway versus in the space (p5 -263, bank #99 executed)
+
+**Inbound**: p5 -263 (23:18:38 JST). **(a)** The return
+accepted — both sides were swapped; the correction is
+LOG-GROUNDED at their desk (round_by_round_LOUD.txt, now
+COMMITTED at the permanent path with order_L/order_R — p4's
+custody action executed @ d35c536fe4; this desk verified the
+round-0 verbatim and both count lines in-file). Corrected
+mapping: **R@home → L 14 (worse) / R@start → L 20 (better)**;
+fixed in-section as §80-2b, deletions 0. **(b)** The double
+inversion resolved cleanly: their §77-1 assumption was
+"partner-at-start is HARDER"; the measurement REFUTES it —
+the first draft's flipped numbers had accidentally preserved
+only the conclusion's label. **(c) ⭐⭐ The mechanism, from the
+rejection breakdown (their read of the committed log)**:
+R@home → L rejected by "the other arm ON THE WAY" ×35;
+R@start → "the other arm" ×105 at the POSE but ON THE WAY only
+×12 ⇒ **R@home sits in L's PATHWAY; R@start sits in L's
+SPACE** — net, L prefers R@start. A direct input to staging
+design: parking R at home to "clear the way" does the
+opposite. (C)-first's independent basis unchanged. **(d) Bank
+#99 (corrected) EXECUTED @ 38451dfbd1 (front door)**: sha
+da21ba37e6…7985 MATCH, +40/−0 append-only vs #98, old request
+sha 297e23a4b7… withdrawn; committed = declared ✓. **(e)** ①
+unwrap-in-solve is LANDED (@ d35c536fe4, 23:14:03) — p5's
+§79-5 prediction is now live against the coming re-sweep.
