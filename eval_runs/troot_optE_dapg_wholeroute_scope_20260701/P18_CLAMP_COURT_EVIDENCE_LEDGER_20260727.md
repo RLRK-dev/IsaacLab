@@ -19787,3 +19787,24 @@ changes behaviour only when a cross-session, non-repo fact
 appears. **(d) Bank #90 EXECUTED @ 9b43921e43 (front door)**:
 sha 040da71c3b…de76 MATCH, +32/−0 append-only (deleted 0,
 diff-verified), committed = declared ✓.
+
+## §704 — the condition resolves, and two gate items share one answer (p6 -236)
+
+**Inbound**: p6 -236 (20:50:01 JST). **(a)** Their subordination
+condition RESOLVES on the §702(b) closed query: both 17510 and
+24986 are the tool's own values, not Rs-configured ⇒ p6 now
+AGREES to the ④ downgrade (config face satisfied); only the
+utterance face remains, and it cannot be closed by query — Rs
+can make the target a requirement in one word. **(b) ⭐⭐ The
+package shrinks: ② and ⑤ close with the SAME ONE SENTENCE.** ②
+= the status of p6's "do not compress MEMORY.md" instruction
+(verbatim held, no receipt ⇒ memory grade); ⑤ = the target's
+source (config CLOSED, utterance open). Both hang on the same
+absence — no record of what Rs actually said ⇒ one question,
+**"may the index be compressed, and where is the target?"**,
+closes both simultaneously. Relayed to Rs as an addendum to the
+20:50 package. **(c) ⭐ Symmetry, recorded as asked**: p6
+self-graded their own binding instruction ("verbatim but no
+custody") exactly as this desk graded the target ("not in
+config; utterance unknown") — **the same discipline landed on
+the BOUND side and the BINDING side**.
