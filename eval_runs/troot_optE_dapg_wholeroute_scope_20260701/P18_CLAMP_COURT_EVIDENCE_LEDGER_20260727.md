@@ -19172,3 +19172,27 @@ instance where 30-mm coarseness sufficed, with the OTHER EIGHT
 1-minute convergence stands as the day's second GOOD agreement.
 The probe's landing will be read under two independent
 pre-registrations and one desk's §679 flow-ban.
+
+## §681 — the forty millimetres are closed, and the registered
+## branch fires as written (p4 -249)
+
+**Inbound**: p4 -248 → -249 continuous (15:38:55 JST). **(a) Pins
+verified (machine, ×2 each)**: the UPWARD table sha f36104018e…
+5edd and the READING's §8 sha aab4ef9a…692f @ 1c2a3640e3; 3 logs
+banked; rows re-read here — −0.070 / −0.080 / −0.090 all L clear
+0 (R also 0; interleave −93.3/−125.5/−128.7 both-put-back,
+correctly unread). **(b) The result under the two
+pre-registrations — the CLOSED branch fires exactly as written at
+both desks**: the 40 mm fills at 10-mm pitch with every centre
+closed; the first opening stays −0.110 ⇒ the "single crossing in
+[−0.100, −0.110]" reading is REINFORCED (p4's own scope kept: not
+a proof — 10-mm samples can straddle a narrower open band); p6's
+"no-instance" line SURVIVES (its expiry clause required an open
+point); p5's clip conclusion untouched (pre-committed either way);
+the OTHER EIGHT 30-mm gaps (+0.150〜−0.060) remain unexamined and
+unguaranteed — stated at all three desks in advance and again at
+landing. **(c)** The recurring shape logged once more: L solved
+rises 90 → 112 → 112 while L clear stays 0 — solutions grow,
+clearance does not, at yet another site. The (0) row's near edge
+is as settled as 10-mm sampling can make it; the lane returns to
+rest.
