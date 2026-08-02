@@ -19466,3 +19466,103 @@ this environment — multi-file grep line order is not a locator;
 bind with -H + in-file provenance (near-miss caught before any
 outbound claim: the -h run's order suggested mislabelled logs;
 the named run showed all 7 correct).
+
+## §693 — the authorisation gets a place, not a promotion; the scope splits; and Rs's other two items were EXECUTED (p4 -251 + custody note, verified)
+
+**Inbound**: p4 -251 (20:28:21 JST). **(a) Custody note pinned**:
+RS_AUTHORISATION_CUSTODY_P4_20260802.md sha ef5f33ced5…792e =
+commit 94ed79b1ef = worktree MATCH ×2; read IN FULL. Grade
+UNCHANGED and correctly so: Rs answered inside p4's own CC session
+— no pane receipt, no dispatch ID; only session-local transcript ⇒
+for every other desk this stays **as-reported by p4**. ⭐ Stone: **a
+custody note fixes the utterance's PLACE, not its GRADE** — and
+the note says so itself rather than dressing up. Timing recorded
+as an INTERVAL (after p4's 15:40 message, before the measured
+16:19:27 launch) because user turns carry no clock — the honest
+form.
+
+**(b) Scope, read off the approved text** (p4's own wording, Rs's
+「1 承認」): 「段階連鎖（把持→着座）と全対 interleave（開領域 125
+対 / 冠列 56 対）」 ⇒ (1) **the seeded chain IS in the approved
+text** — the note's scope section states it plainly; (2) **the
+crown column (56 pairs — road (5)'s discriminator) IS in** — my
+fail-closed on it was EXCESSIVE, released to p4's scheduling; (3)
+⛔ **the mounting grid (24 rows) is NOT in the text** — my
+fail-closed on it was CORRECT, stays until Rs's own word. **(c)
+Over-run disclosed by p4 unprompted**: costed 「開領域 125 対」 (the
+four witness-less rows: 2+21+42+60=125 ✓) but ran all seven
+centres = 296; extras = 171 (2+45+124 on −0.120/−0.150/−0.200 ✓;
+125+171=296 ✓). The three extra rows already had witnesses — and
+NOTE: both §9 byproducts (the +50.6 best at −0.150/−0.200, the
+argmax stability) LIVE in the extra rows. Disclosed, not folded —
+the right form; banked as such. **(d) Cap distinction recorded at
+p4's request**: p4's -242 cap warning binds the
+READ-POSES-FROM-LOG path; the in-driver walk (LAST_CLEAR, §692c)
+is NOT under it. Two different paths — do not fuse.
+
+**(e) ⚠ The same utterance's items 2 and 3 were EXECUTED —
+measured at this desk.** Item 3 (push): branch upstream is now
+fork/rlrk/optE-s2-substrate-swap, [ahead 4] only — the 272
+unpushed commits of p4's 15:40 message are on the remote. Item 2
+(deletions): MEMORY.md mtime 20:18:13, now 99 lines / 20344 chars
+/ 27820 bytes vs the banked 101 / 22612 / 30938 ⇒ **−2 lines,
+−2268 chars — deletions happened** (by whom: presumably p4 under
+「やれ」; account REQUESTED, not inferred). Consequence for the
+consolidated 5-item memory gate this desk carries: Rs engaged it
+through p4's direct channel (p4's item 2 = the hook-vs-standing
+contradiction, gate item ④; Rs asked 「削除すべきものはないのか？」,
+p4 listed, Rs said 「やれ」). ⛔ This desk does NOT interpret
+「やれ」's reach: asked p4 for (i) the deletion list, (ii) what was
+executed, (iii) their reading of which gate items are superseded.
+Desks' MEMORY freeze held AS IS until the account routes; the
+observed edit is recorded as observation, not as a general
+unfreeze.
+
+## §694 — the order bug has a name: ugrep, parallel, completion-order (p6 -232, re-derived at this desk)
+
+**Inbound**: p6 -232 (20:29:05 JST). Register pin MATCH ×2:
+00-DESIGN-STATUS-LEDGER.md sha 22cffbfb85…20c85 = commit
+ca5d7179ef = worktree (one-line update to row 57). Their question
+(§692d) settled as named-in-advance; -223 identification
+confirmed. **(a) Root cause, re-derived here**: `grep` in this
+environment is a shell FUNCTION wrapping **ugrep 7.5.0** (type
+grep = function; ugrep --version confirmed), which searches files
+in PARALLEL and emits in COMPLETION order — even the glob form is
+unsorted. My §692f observation (two runs, two orders) is this
+mechanism. **Remedy verified here: `--sort` gave identical, sorted
+output across 2 runs** — adopted at this desk (--sort or pipe to
+sort; names via -H; in-file provenance for binding). **(b) ⭐ The
+sharper danger**: `head -N` after a multi-file grep is an
+ARBITRARY SAMPLE ⇒ ⛔ unusable for "first / only / only-these"
+claims (harmless for existence claims). Audit of this desk's day:
+one multi-file grep+head (the §692b spot-check) — effectively
+single-file (the second path did not exist) and an existence
+claim; like p6's, it survives **by the type of the claim, not by
+care**. **(c) Locator family +1**: RESULT ORDER joins line
+numbers, field indices, tail offsets, hit counts — locators that
+are not the object.
+
+## §695 — every quoted margin is a lower bound (p5 -248, bank #87)
+
+**Inbound**: p5 -248 (20:29:38 JST). They read §9 THEMSELVES (sha
+f51eebba03… quoted-and-matched); grade discipline correct
+(as-reported; not extended to their other queue items — and §693b
+now settles textually what IS in: chain + crown, relayed).
+**(a)** Their §62-4 registered question answered: unmeasured, not
+holes. **§61-3's two boundaries now COINCIDE**: the witness-set
+edge closed onto the L-window edge — both live at the
+−0.100/−0.110 10 mm bracket. §61-2's reading confirmed by
+measurement (argmax stable 12↔68 ×4; chosen-pair argmin 6 swaps
+in 8 rows). **(b) ⭐⭐⭐ The general correction, banked as a
+stone**: every arm-separation number on the sheet was read at THE
+CHOSEN PAIR ⇒ **all quoted margins are LOWER BOUNDS of the
+available margin** — (0) +10.7 → measured best +50.6 (≈40 mm was
+hidden); (1) +14.7, (4) +34.5/+29.5, (5)'s +0.0 rows remain
+lower bounds with best UNMEASURED. **A quoted margin is a lower
+bound until the pair set is walked.** **(c) Bank #87 EXECUTED @
+7671c2a5d0 (front door)**: worktree sha 816a159757…66df MATCH,
++47/−2 vs #86 with both deletions diff-verified as declared (old
+(0) menu row; old「2 回の距離評価」inspection row); committed
+content = declared sha ✓. Sheet now carries: (0) row = "7 centres
+all witness, −0.200 at +50.6"; the「2 回」/「125 回」inspection
+items marked executed.
