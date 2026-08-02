@@ -17794,5 +17794,10 @@ questions**: (a) is the baseline off the floor; (b) are the fixed
 variables recorded; (c) WAS THE ARTIFACT READ TO ITS TAIL —
 corrections attach at the tail (the four-day-old confession was at
 the tail; CROWN_BAND_READING exists for the same reason). **(d)
-Bank #64 EXECUTED @ [C64] (front door)**: worktree sha
+Bank #64 EXECUTED @ 89d33fa54c (front door)**: worktree sha
 13040756…19aa MATCH → commit-content MATCH; +41/−0 append-only.
+[The sha in this line was first written as a literal placeholder
+"[C64]" — a quoted heredoc did not expand the variable; caught and
+corrected in the next commit, seconds later. The §576 rule held:
+the sha was pasted from the commit's output, just into the wrong
+quoting.]
