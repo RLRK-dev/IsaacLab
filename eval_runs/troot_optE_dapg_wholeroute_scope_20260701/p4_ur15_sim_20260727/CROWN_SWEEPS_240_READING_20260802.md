@@ -35,7 +35,7 @@ grasp-centre and work-row sweeps.
 ## 2. Crown RADIUS — ⛔ not a re-run, because the banked table cannot say where it was taken
 
 `CROWN_RADIUS_SWEEP_20260729.txt` has **no `TAKEN AT` line** — that header was added after it, in
-response to this exact failure (`sweep_mounting.py:73-77`: the first crown sweep ran entirely at
+response to this exact failure (`sweep_mounting.py:164-168`: the first crown sweep ran entirely at
 one tilt and I reported its result as a property of the crown). Its point logs have since been
 overwritten. ⇒ **Its mounting is not recoverable from the artifact or from any surviving log**, so
 nothing can be re-run against it like-for-like. What follows is a **new measurement at a named
