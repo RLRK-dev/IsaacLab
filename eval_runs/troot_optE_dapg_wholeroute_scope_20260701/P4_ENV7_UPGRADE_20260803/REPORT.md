@@ -113,9 +113,10 @@ changed (`postupgrade_run.log`):
 
 Both arms also read `touching: nothing` and no joint at a limit, as on 3.10.0.
 
-⚠ `postupgrade_run.log` is banked here **with the run still in flight** (it had reached the per-step
-aim solves at commit time). The four quantities above are read from lines already written and final;
-the tail of the file is not. A follow-up commit lands the completed log.
+⚠ *(superseded)* `postupgrade_run.log` was first banked with the run in flight. The run has since
+finished — 06:22:51 → 06:42:15, **exit 1**, 385 lines — and the completed log is banked. The four
+quantities above are unchanged by the rest of the run; they are start-pose quantities, printed
+before the first step. §8 records what the rest of the run showed.
 
 ⇒ **The instrument's reading did not move.** The clearance and arm-to-arm path tests return the same
 candidate sets and the same standing errors under `mujoco` 3.11.0 as under 3.10.0.
@@ -155,3 +156,67 @@ is **+12 / −0 / 0 changed** — pure addition, exactly the block `82e845e80c` 
 *"say what rejected it"*. It never said anything, because the file it changed stopped parsing. The
 commit was banked without running it — the label was read and the thing itself was never opened,
 which is the one error form the 08-02 handoff names as running through the whole session.
+
+---
+
+## 8. What the same run also showed — the route, not the upgrade
+
+⚠ **This section is about the route, not about mujoco 3.11.0.** It is recorded here only because
+this run produced it; the route's own record is `p4_ur15_sim_20260727/`. Nothing here is attributed
+to the upgrade.
+
+The run doubles as the handoff's "next task #1" (measure where the aim solves are stuck).
+
+### 8.1 The aim solves are stuck against the mounting, not mainly against the other arm
+
+86 fallback lines. Rejections, after stripping each line's explanatory tail before splitting:
+
+| rejected against | count |
+|---|---|
+| `g43 on R_upper_arm_link` vs **crown** | **65** |
+| **the other arm** | 39 |
+| `g6 on L_forearm_link` vs **stem** | 10 |
+| various, on the way (forearm/pads/coupler vs stem or crown) | ~7 |
+
+And the solves are as cramped as the handoff predicted: `NOT ONE of 1 candidates` ×52,
+`NOT ONE of 2 candidates` ×80. With one or two candidates, any added test turns a cramped option
+into none.
+
+⇒ ⭐ The dominant obstacle at the aim poses is **the crown against the right upper arm**, not the
+other arm. That is a different target from the one the start-pose work was aimed at.
+
+### 8.2 ⛔ The route now advances — but STEP 2 advances THROUGH the other arm
+
+| | STEP 2 | STEP 3 |
+|---|---|---|
+| L reached | **100.0%**, never held back | 30.4%, held back |
+| R reached | **100.0%**, never held back | 49.7% |
+| arm-to-arm at the pose | +17.5 mm | **−0.9 mm ← TOUCHING OR THROUGH** |
+| arm-to-arm **along the move** | **−171.2 mm** (30 ↔ 65 at t=8.34 s) | −1.0 mm |
+
+Negative is penetration — the driver's own marker (`<- TOUCHING OR THROUGH`) appears at −0.9 mm.
+
+⛔ **So STEP 2's "100.0%, never held back" is a statement about the tracking gate, not about
+clearance.** The gate measures whether the arm followed its command; it does not measure whether
+the path was free. The arms passed **171 mm through each other** during a step that reported
+complete success.
+
+⇒ The same sentence the 08-02 handoff found four times holds again, one layer in:
+**a pose the arm reaches is not made valid by the gate opening.**
+
+### 8.3 Where it stopped
+
+STEP 3, deliberately: the driver raised
+
+> `STEP3 L: THIS arm's command stopped advancing for a whole step's worth of ticks and its move did
+> not finish (the other arm was still advancing, at 49.7% …)`
+
+with the arms at −0.9 mm. ⚠ Note also that STEP 3 works from an **inherited aim pose**, and its
+arm-to-arm check states in its own output that *"posts and table are invisible to this test"* — so
+the furniture and path tests added on 08-02 are **not** applied at that pose.
+
+### 8.4 ⛔ Not claimed here
+
+Physical validity is not asserted. Per CLAUDE.md the physical-validity verdict needs the video leg
+and Rs; this section reports what the instrument printed. `~/Downloads/ur15_live.mp4` was written by
+the run and has not been read by anyone.
