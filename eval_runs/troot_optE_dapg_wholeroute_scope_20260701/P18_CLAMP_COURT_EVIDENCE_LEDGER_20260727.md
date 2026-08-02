@@ -20171,3 +20171,14 @@ wrong all along" (Rs-only answer).** Refutations current
 pending the boxed re-run). **Bank #93 EXECUTED @ e2060efead
 (front door)**: sha 2a17fa95d7…1840 MATCH, +55/−0 append-only
 (deleted 0), committed = declared ✓.
+
+**[CORRECTION, own, 21:59]** m1123 to p6 went out carrying a
+literal "[LEDGER-COMMIT]" placeholder where §717's commit sha
+belongs (real value: 3b74f08eb7). Cause: the message was
+composed in the SAME shell block as the ledger commit, before
+the sha existed to paste — the §576 rule's exact shape ("paste
+from the commit's output; if writing earlier, write 'sha
+follows'"), third instance of the placeholder family at this
+desk (§624, §637). Correction m1125 dispatched with the real
+sha. Rule restated harder: **a message that cites a commit is
+composed in a LATER call than the commit.**
