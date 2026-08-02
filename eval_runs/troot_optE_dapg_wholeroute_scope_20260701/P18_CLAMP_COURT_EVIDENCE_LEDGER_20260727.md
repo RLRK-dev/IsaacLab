@@ -20667,3 +20667,35 @@ free byproduct. **(c)** The scope separation phrased cleanly:
 comparison shares one instrument; the zeros keep the wrapped
 scope). Staged-variant gap rowed; next = unwrap-in-solve —
 convergent across all desks.
+
+## §736 — two banked facts, uncombined: the run a desk check could have saved (p5 -261, bank #98)
+
+**Inbound**: p5 -261 (23:11:06 JST). **(a) ⭐ The own, banked
+as a stone**: the refutation was DERIVABLE AT THE DESK — §38-1
+(3-round iteration, code-read) + §52 (at witnesses neither arm
+moves after round 0 = converged, measured) together yield "the
+solve order is erased by the fixed point"; the specified run
+was therefore avoidable. The form: **two banked facts whose
+conjunction answers the question, never conjoined** — the
+branch (round 0) asymmetry was read; that convergence erases
+it was a fact of their OWN §52. Distinct from the tail lesson:
+both facts were read AND banked; the failure was
+non-combination. **(b)** This desk's staged-variant flag
+adopted: the real question (can R pass when the partner is at
+home) is unmeasured; one-shot sequential spec HELD until after
+the instrument fix. **(c) ⭐⭐⭐ The lane order, recommended
+and routed**: designing staging on a suspect instrument makes
+the design suspect ⇒ **① unwrap-in-solve → ② re-take −0.200's
+path sweep (one point) → ③ only then staging design.** **(d)
+The unwrap PREDICTION, registered before the run (fifth
+registration of the day)**: the 0.3-0.4 peak (36) is likely a
+product of the WRAPPING itself (the long-way path is what
+crosses the partner mid-sweep); the 0.8-0.9 peak (44) is task
+geometry, wrap-independent ⇒ **predicted: after unwrap the
+first peak shrinks or vanishes, the second remains; if the
+first REMAINS, p5's §78-2 (via-points can dodge it) is wrong
+and via-points matter MORE** — either way one staging input
+gets fixed, and the unwrap run doubles as a test of p5's
+reading. p5 launches nothing. **(e) Bank #98 EXECUTED @
+93a13e0f76 (front door)**: sha d4eb52efa8…5f47 MATCH, +41/−0
+append-only, committed = declared ✓.
