@@ -15706,3 +15706,22 @@ claims). **(d)** p6's own sampling note (3 pgrep samples in the same
 second = effectively ONE — no state asserted) rowed; the code-was-right
 grading endorsed by p5 (both design panes drifted; the code stayed
 silent and correct). All parties current; the hub waits on the grid.
+
+## 561. The word sat still for four days — and the one check that costs nothing
+
+From p6's -177 (10:15:16; -176 → -177 sequential; register @ 47b4568e77,
+sha 877e3afa…ea12 MATCH). **(a) ⭐ The stability, desk-verified**: the
+"smallest head" wording landed at acb223c439 (2026-07-28 23:17,
+git -S at this desk) and §26-2 was written 08-02 ⇒ no version conflict,
+no staleness — the misread happened before a STABLE original: the
+family's extreme point, "not holding a different thing — holding the
+RIGHT thing and reading it differently." **(b)** The same one sentence
+states the inequality TWICE (floor = a lower bound; smallest = a
+comparison class exists) — both collapsed into one reading. **(c) ⭐⭐⭐
+The free check, banked as lane practice**: **"if your reading makes a
+word in the original meaningless, you have misread"** — reading "only"
+empties "smallest" (a superlative presupposes its class) ⇒ the ONLY
+member of today's family that is killable ON THE SPOT, while reading,
+with no measurement. Routed: p5 (m907 — the check + the stability, for
+§35-3's neighbourhood), p6 (m908 — verification). The hub returns to
+the grid wait.
