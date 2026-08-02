@@ -17532,3 +17532,35 @@ cells read L 54 / R 132 on BOTH sheets — held open, unexplained,
 no story. **(c)** Their -186 requirement stands implemented;
 OUT_TAG rowed as the -180(b) extension. The measurement lane is
 CLOSED at every desk; the one open act is Rs ③.
+
+## §616 — the control verified thrice over, and outside twenty
+## degrees the left arm cannot start (p5 -215, bank #60)
+
+**Inbound**: p5 -214 → -215 continuous (13:16:29 JST). **(a) The
+control now stands THREE-DESK verified, each with a different
+instrument**: p4 re-ran all 24 with the fixed driver (the control
+IS the grid); this desk diffed the six load-bearing columns
+(§614(b)); p5 collated comm -3 over 6 measurement + 3 mounting
+columns, accepting no relay — old 22 rows vs KINONLY 24, the only
+difference the two recovered rows ⇒ 22 common cells identical.
+Their precision kept: KINONLY is a DIFFERENT RUN with a changed
+inner loop, not the same grid continued; and the result is "an
+instrument change under which no output moved at 22 points" — the
+closest evidence yet to their §33-1 shared-candidate-set
+requirement, NOT a proof of it. **(b) The recovered rows re-read
+verbatim at their desk** (both L free 0; +0.0 YES) — census
+14/6/4/0 now derived at three desks; their §42-1 correction
+STRENGTHENS (14 v 6). **(c) ⭐⭐⭐ The stronger form for Rs, column-
+verified here**: cutting the buildable sheet by tilt — 45° = L
+free 0 at ALL FOUR spreads; 30° = L free 0 at ALL FOUR (this desk
+re-read the completed column: 0/0/0/0); 20° = L free ≥ 1 at three
+of four (2/5/2/0). Not "some 20° points pass" but "OUTSIDE 20° THE
+LEFT ARM CANNOT START" — eight zeros. Scope kept: L free 0 means
+not-found-at-240-draws. Recommendation (2)'s standing RISES (L
+free 2 exists at 0.220/20; the sole failure is one pair of 74).
+**(d) Bank #60 EXECUTED @ 87b9d22a29 (front door)**: worktree sha
+5553d3a9…b315 MATCH → commit-content MATCH; +55/−2 exactly as
+declared; the two deleted lines verified to be exactly the
+declared ones (the §42-1 census "12" row and the §42-7(1) crash-
+holes item, each replaced by update/CLOSE notes). The synthesis
+now sits on the complete grid.
