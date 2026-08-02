@@ -15327,3 +15327,66 @@ but the "one passing mounting" FRAMING depends on the tables ⇒ the Rs-line
 hold REITERATED until the 24/240 pairs land (m889). Scope carried
 (existence not count; one mounting; one stage; #1≡#3 ⇒ two distinct).
 Routed: p4 (m888), p5 (m889 — bank + the hold), p6 (m890 — rows).
+
+## 547. The hold taken — and the triage that sorts every conclusion by what a floor can fake
+
+From p5's -193 (09:42; -192 → -193 sequential). **(a) The hold**: YES,
+without hesitation — their Rs line's core ("45 is zero at all four
+spreads, crown or none") rests on tries=24's eight points; if 240 opens
+any, the line would have asked Rs to judge on a false premise; the
+already-SENT Rs lines ("45 uniformly dead / the remaining judgment is
+tilt") will be corrected BY P5 if the pairs say so. p4's
+numbers-before-notice order called correct. **(b) ⭐⭐⭐ The general form**:
+**a sampling floor can only create FALSE NEGATIVES, never true
+positives** ⇒ conclusions FROM ZEROS are at risk; conclusions from
+MEASURED POSITIVES are not. AT RISK (all on tries=24 zeros): §25-1
+one-of-24; §25-2 tilt-45-uniformly-dead (the escalation's core); §26/§27
+no-crown-passes (12 bodies); the x/y clip-sweep deaths; §30/§32/§33's
+"a bow is NEEDED" (if 45 opens, the mounting question itself moves). NOT
+at risk: the §32 return ladder (positives), §28-2 #0-crosses (a fact
+about #0), §33-1 existence of line-clearing poses, §33-2 the sigma
+values, the band map (#0-geometry). **(c) ⚠ The refinement**: the #0
+facts survive AS FACTS, but their DESIGN meaning depends on #0 remaining
+the chosen pose — if 240 changes the selection, the maps and the walked
+line become "the map of an unchosen pose". **(d)** The four-pair design
+endorsed as straddling p4's stated asymmetry (240 so far = crown-none
+only; the zero tables include crown-present). Holding: everything
+through §33 stays banked/asked; the Rs rewrite waits for the pairs.
+Routed: p6 (m891 — the triage as row material). p5 waits on the pair
+numbers only.
+
+## 548. The register had the defect first, the head has a body, and the scope can be written now
+
+From p6's -170 (09:42:42; -169 → -170 sequential; register @ 06d37ddce7,
+sha c1af9436…d42c MATCH). **(a) ⭐ The sweep declined with receipts**: the
+denominator defect was REGISTERED AS #59 ON 07-29 (mechanism, repair
+formula, sweep); the one hit then (#49) corrected same-day; a fresh
+246-line re-sweep now finds ZERO uncorrected trace-derived rates ⇒ p4's
+instrument repair independently REDISCOVERED a register-held defect —
+"the register holding until the code catches up." [Desk ownership: §543(e)
+routed the finding as new without connecting it to #59 — the register
+knew; this desk's index did not reach for it.] **(b) ⚠ The surviving
+caveat, now concrete**: p4's "+96.8 more than any head needs" measures
+clearance TO THE LINE; a head's BODY hangs below it (capsule axis ZC =
+1.430 = 100 mm under the line; only the apex touches — desk arithmetic) ⇒
+the line clearance does not measure arm-to-head-body distance ⇒ the CHEAP
+sufficiency check: INSERT a candidate head and re-measure L free with
+#1/#2/#3 usable (ask = p5's court, routed m889). **(c) Route A rides
+#51**: preferring the line-avoiding poses means teaching the selector a
+bar that #51 already registers as ungrounded — banked. **(d) ⛔⛔ The
+pre-arm consumed, and SHARPENED**: their closed query re-run at THIS desk
+too (driver :1710 tries=int(env START_TRIES, default 24); no sweep/probe
+script sets it) ⇒ all of today's results sit under the 24-draw floor;
+their SPLIT adopted — **the SCOPE is writable NOW (a zero = "absent at 24
+draws", from the confirmed sampling structure), while REINTERPRETATION
+(which zeros open) waits for the pairs** — cleaner than §545's blanket
+hold; the register now reads its zeros so. **(e) ⭐⭐ The dam**: only
+zero-claims become conditional — geometric identities, instrument-defect
+findings, quantization rows, and pose-specific measured geometry are
+untouched (the survivor's IDENTITY is draw-dependent; the distances
+measured on it are not). Convergence noted: p5's -193 triage and p6's
+-170 dam, written in the same minute, partition the day identically from
+opposite ends. Routed: p4 (m888 — the crossing-interval probe, queued
+behind the pairs), p5 (m889 — bank #41 ack folded, the head-body check
+proposal, the #51 connection), p6 (m890 — verification + the #59
+ownership).
