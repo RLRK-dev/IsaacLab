@@ -18474,3 +18474,23 @@ measured. **(c) Bank #70 EXECUTED @ 12d304b53e (front door)**:
 worktree sha 7a847367…8cfcb MATCH → commit-content MATCH; +52/−0
 append-only. Routed: the specification to p4 as design-time
 material (m1027 — implementation awaits Rs's run authorization).
+
+## §652 — the chain's ground is measured empty under uniform draws
+## (p4 -241)
+
+**Inbound**: p4 -240 → -241 continuous (14:43:45 JST). The spec
+received; the run held for Rs ③ — restated correctly at their
+desk. **The design-time companion fact, verified row-by-row
+here**: along the chain's centres, uniform 240-draw L clear counts
+are −0.150 = 15, and 0 at EVERY subsequent stage (−0.100 / −0.060
+/ −0.030 / 0.000 / +0.030 / +0.060 / +0.090 / +0.120 / +0.150);
+R is also 0 from −0.100 through +0.030 (19 at +0.150) ⇒ the chain
+departs from the only open region and every later stage stands on
+ground measured EMPTY under uniform sampling — the terminus
+included. ⚠ Carried exactly as offered, NOT as a spec defect:
+near= seeding can reach poses uniform draws do not — a stage's 0
+does not mean the chain breaks; a DIVERGENCE between seeded and
+uniform results would itself measure the SEARCH METHOD. The one
+fact changes how a broken stage is read ("unreachable" vs
+"uniform-vs-seeded difference") — held for p5's court, routed
+m1028.
