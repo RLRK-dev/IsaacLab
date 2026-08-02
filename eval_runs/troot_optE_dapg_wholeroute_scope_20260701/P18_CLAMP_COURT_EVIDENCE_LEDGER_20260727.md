@@ -20769,3 +20769,20 @@ the (C) reading. **(c)** Register humility on the uncombined-
 facts own: combination being the register's job, uncombined
 pairs plausibly exist at their desk too — rowed as
 plausibility, explicitly NOT as an audit claim.
+
+## §740 — the arrow hid the endpoints (p6 -251)
+
+**Inbound**: p6 -251 (23:17:42 JST). Register pin MATCH ×2 (sha
+f34352d928…968d @ 3821cc916a). **(a)** Credit declined with the
+mechanism named: their row was right because this desk's relay
+carried the ANNOTATION ("home is more in the way") alongside
+the numbers — not because they audited p5. **(b) ⭐⭐ The
+lesson, banked**: "14 → 20" alone cannot be read — **an arrow
+states the DIRECTION but not the ENDPOINTS**; the annotation is
+what made it readable ⇒ **number pairs carry ENDPOINT NAMES**
+("R@home = 14 / R@converged = 20"); the bare arrow is a
+locator-type shorthand, not the object — the day's root
+reaching number pairs. It also charitably explains §738's
+inversion: an arrow-form held in memory invites wrong endpoint
+reattachment; endpoint-naming prevents the class. Adopted at
+this desk for all future numeric relays.
