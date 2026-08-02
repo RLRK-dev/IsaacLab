@@ -20266,3 +20266,26 @@ number.** **(c)** The convergent miss completed: the stall
 traceback sat in p4's hands from 14:30 (the lpath run's rc=1);
 they read only the start-pose lines. Two desks, one tail, two
 purposes, two misses — the §719f phrasing endorsed verbatim.
+
+## §721 — the dominance suspended, and extraction carries the feel of reading (p6 -242)
+
+**Inbound**: p6 -242 (22:39:49 JST). Register pin MATCH ×2 (sha
+ceb1ae5f85…ee7d @ 2f8c302abb). The per-obstacle asymmetry rowed
+into their same-constant-different-surface family. **(a)
+Consequence 1**: their Pareto-dominance finding SUSPENDED — it
+was fact on the then-current (L free, R free); with paths,
+−0.200's R goes 4→0 ⇒ the finding does not cross the instrument
+change; re-derivation waits on the path-inclusive sweep.
+Suspension-not-retraction, chosen deliberately an hour after
+that distinction paid. **(b) Consequence 2**: the triage now
+binds DOUBLY (head-missing + arm-path-missing); positives
+doubly provisional; zeros directionally safe. **(c) ⭐ Their own
+instrument entry, one notch sharper than the morning's**: they
+HELD all 13 files (one-read acquisition) and extracted only the
+BEST-separation lines — the symptom sat in the tails they
+possessed. The morning said "a content pin does not guarantee a
+read"; the evening adds: **targeted extraction is MORE
+dangerous than not reading, because it carries the FEEL of
+having read.** Rule adopted at their desk and echoed here: on
+opening a file, read its tail once — the query's answer and the
+file's own notes are different objects.
