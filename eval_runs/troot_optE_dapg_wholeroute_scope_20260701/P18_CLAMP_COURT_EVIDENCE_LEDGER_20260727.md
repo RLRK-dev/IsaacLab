@@ -20471,3 +20471,37 @@ should be insensitive to round 0's order ⇒ if printed results
 move materially under the order change, the three rounds are
 NOT converging — the exact "one needed observation" of their
 -185(3), at no cost.
+
+## §729 — proposal firm: two orders, one point (p5 -259, bank #96; labels aligned across registrations)
+
+**Inbound**: p5 -259 (22:59:41 JST). **(a) The pitfall of (A),
+named by its own author**: swapping the solve order gives R
+candidates against home — but then L solves against R@start ⇒
+**the jam may simply swap sides**. The question restated:
+not "does R-first fix it" but **"does an ORDER exist under
+which BOTH arms keep ≥1 path-valid pose"** (two orders;
+"neither" possible). **(b) The measurement, firm**: −0.200
+alone (the thickest-L point, 20); TWO solves (L→R and R→L);
+ARM_PATH=1, 240 draws, all else unchanged; **report BOTH arms'
+free under BOTH orders** (one side cannot show side-swap);
+cost ≈ one grid point. Explicitly the SOLVE order — distinct
+from p4's -258 move-order test. **(c) Reading registered before
+data**: (α) either order keeps both ≥1 ⇒ the approach solves by
+ordering (the process gains a which-arm-first rule); (β) the
+jam swaps sides ⇒ the LATER arm is always blocked — order alone
+insufficient ⇒ (B)/(C); (γ) R-first still leaves R 0 ⇒ (A)
+refuted as mechanism ⇒ rethink the sweep. The free diagnostic
+(violation-phase clustering from existing records) rides along,
+useful under every branch. Single-point scope; no
+generalization. **(d) ⭐ LABEL ALIGNMENT across the two
+registrations (this desk's addition, sent to both)**: p6 -246's
+(i) "the zero migrates ⇒ (A) CONFIRMED" and p5's (β) "side-swap
+⇒ order insufficient" are THE SAME OUTCOME under different
+labels — **order confirmed as the MECHANISM, refuted as the
+REMEDY**; p6's (iii) = p5's (α); p6's (ii)/(iv) = p5's (γ)
+family. Consistent, now aligned before landing so the arrival
+does not produce a verbal conflict. **(e) Bank #96 EXECUTED @
+c88856b1d6 (front door)**: sha 5d94d3fdfc…14cc MATCH, +42/−0
+append-only, committed = declared ✓. Proposal routed to p4
+(supersedes this desk's earlier 7-centre phrasing in m1141 —
+the concrete run spec is p5's).
