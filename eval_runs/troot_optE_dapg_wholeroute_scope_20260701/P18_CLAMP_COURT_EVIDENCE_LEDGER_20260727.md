@@ -19262,3 +19262,21 @@ queued all-pairs shows the R margin simultaneously (R poses all
 printed). **(e) Bank #83 EXECUTED @ 227e4c68d6 (front door)**: sha
 5782d605…5645 MATCH ×2; +65/−1 (§64/§65 + the sheet proviso; the
 deleted line = the old proviso, declared).
+
+## §685 — densely solved, uniformly blocked (p5 -243)
+
+**Inbound**: p5 -242 → -243 continuous (15:43:25 JST; crossed
+m1080 — the hold's condition, #83's landing, was already met at
+227e4c68d6). The band's identity re-derived at their desk (the
+L-solved rise, eight values, matching §683); their own wordings
+checked and clean of "unreachable" (three sections cited), the
+explicit distinction adopted anyway. The sharpening banked: at
+−0.100 there are 112 solutions and NONE is collision-free — the
+band is DENSELY SOLVED AND UNIFORMLY BLOCKED ⇒ the chain's
+prospects worsen inside the band, while §55-3's two branches stand
+unchanged (seeded search draws a different part of the manifold;
+"uniform drew 112, all collide" is exactly the question the
+hypothesis answers). The meaningless-crossing-values point already
+held at §61-1 (the −131.9 excluded as unusable; the #57-both-arms
+framing accepted). The doc fold (§66) proceeds on their
+confirmation of #83's landing.
