@@ -16141,7 +16141,12 @@ opposite of the comment; p4 does not claim the comment wrong
 (different poses; the comment's conditions unseen). [§575: SHEET-
 scoped — the +0.0 YES row is the crown-NONE sheet; the crown-0.110
 sheet at the same point reads +22.7 no, the comment's direction; not
-citable as a mounting-point property — the built cell has a head.] **(d) ⛔ The
+citable as a mounting-point property — the built cell has a head.]
+[§610: p4 -229 supersedes further — the reversal was a 24-DRAW
+POSE-PAIR property; at 240 both halves of the comment REPRODUCE on
+readable rows ((0.220,45) crosses, (0.400,20) separates +17.2); the
+gap column tracks chosen pairs, not cells. SUPERSEDED marked in
+p4's own artifact.] **(d) ⛔ The
 instrument limit that SURVIVES the 240 grid**: interleave is
 measured at the ONE chosen pair — separated rows are witnesses
 (sound); non-separated rows are NOT refutations of the mounting
@@ -17330,3 +17335,51 @@ question (the reference cell's yoke_angle_deg 45.0 vs left-arm
 mobility) is nearly complete; neither p6 nor this desk answers it
 — it is carried. The LAST row's reading pre-fixed by p6: non-0 ⇒
 tilt 20 = 4/4; 0 ⇒ one exception at the widest spread.
+
+## §610 — the grid lands: it corrects both ways (p4 -229)
+
+**Inbound**: p4 -228 → -229 continuous (12:37:28 JST); landing
+12:33:41. **(a) Pins verified (machine, all three ×2)**: the final
+table SPREAD_TILT_SWEEP_TRIES240.txt sha 79bd0df6…442d, the
+reading GRID240_READING_20260802.md sha 240193ce…1bf7, and the
+24-vs-240 comparison GRID_24_VS_240_20260802.txt sha 5db4fb35…2aff
+— each commit AND worktree MATCH @ 446e291fb8. Final shape,
+re-read here: 24 data rows = 22 measured + 2 NOT MEASURED (both
+sheets' (0.340, 30) — the crash binds to the MOUNTING); 4 PASS
+rows; the footer legend itself discloses "2 point(s) were NOT
+MEASURED" (this desk's first count said 3 — the grep caught the
+LEGEND line; the data-row filter this desk adopted at §604 was
+applied to the PASS count and not to this one; self-caught within
+seconds). **(b) The last row resolves p6's pre-fix by its second
+branch**: 0.110/0.400/20 = 63 solved / 0 free, L put back, +21.5
+no, fail — tilt 20 is NOT 4/4; the widest spread is the one
+exception. The crown×tilt image gains a boundary: with the
+buildable head, the left arm starts clear at tilt 20 for spreads
+0.220-0.340, and nowhere at 30 or 45. **(c) ⭐ The correction runs
+BOTH ways (p4's framing, banked verbatim-close)**: (i) the BUILT
+CELL's zero is REAL — solved grew 7 → 58 (×8) and L clear stayed
+0: a property of the cell, not the sample; the original argument
+(solutions exist and grow, clear stays zero ⇒ placement, not
+reach) is STRENGTHENED at this point. (ii) BUT 4 of the 16 zeros
+were SAMPLE artifacts (3/4/2/5 at 240) — and the day's OTHER
+sweeps (GRASP_CENTRE / WORK_ROW_Y / CROWN_RADIUS / CROWN_HEIGHT)
+all ran at 24 draws and all conclude from zero columns ⇒ NOT
+refuted but UNDECIDED; any decision resting on a single point of
+those tables requires that point at 240 first. **(d) ⭐ Four
+witness points, two on the buildable sheet**: none(0.280,45)
++11.9 / none(0.400,20) +17.2 / 0.110(0.280,20) +14.7 /
+0.110(0.340,20) +15.3 — "that two arms can start clear WITH a
+head is measured, not argued" (not at the built mounting). The
+non-claim kept on the record: "the crown helped" is NOT said —
+fail is not refutation, and at (0.280,20) crown-none holds MORE
+distinct poses (3 v 2); sayable = a witness was found with the
+head and not found without, at that point. **(e) p4's
+self-correction of -223 §3**: the spec-comment reversal was a
+24-draw pose-pair property — at 240 both halves REPRODUCE;
+SUPERSEDED marked in INTERLEAVE_COLUMN_READING, correction placed
+in GRID240_READING §3a; the gap column moves (+0.0→+11.9,
+-110.3→+0.0) because the chosen pair changes, not the cell.
+Tagged §572(c). **(f) Next steps registered (p4)**: driver fix
+with the recorded control → re-measure the two crash cells →
+regenerate the table → NOT MEASURED rows carry measured elapsed +
+exit. The package now passes to p5's synthesis.
