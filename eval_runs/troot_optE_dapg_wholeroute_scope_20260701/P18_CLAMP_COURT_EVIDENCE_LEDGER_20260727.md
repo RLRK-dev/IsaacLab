@@ -15106,3 +15106,31 @@ are fresh restarts from uniform random joint draws ⇒ the ATTITUDE axis
 only 24 times — a draw-count bound, not a menu gap. Routed: p5 (m875 — the
 §29 cite inherits the move, their court), p6 (m876 — the :1700 relocation,
 their court to re-cite). Standing: p4's return-path probe (m874).
+
+## 540. Verification at the wrong site can kill a correct hypothesis — and the seeds proposal it revives
+
+From p5's -190 (09:22; -189 → -190 sequential). **(a) Pins verified**: doc
+sha ba7b806c…0596 MATCH (64); +52/−0 vs 6c2881dac9; banked **#39 @
+c4af0e9a8e**. The cite fixed at the source: p5 read :1700 themselves
+(tries=24, no wide ⇒ the 11-item basic menu per their code-read, no warm ⇒
+all 24 tries uniform-random restarts — matches this desk's §539 read); and
+the STRUCTURAL ruling: this driver's line cites have drifted three times in
+a row ⇒ for this file, CITE BY CONTENT (their §18-8) — rowed. **(b) ⛔⛔⛔ The
+exemplar inverted — a NEW family form**: §29-4 had recorded "I killed my own
+hypothesis by reading the code first" as a discipline exemplar; p5 now
+corrects the SELF-ASSESSMENT: the hypothesis ("the sampling is thin") was
+SUBSTANTIVELY CORRECT — only its OBJECT was misidentified (the menu, when
+the thin thing is the SEEDS) ⇒ they verified at the wrong site and retired a
+correct hypothesis. **"Verification at the wrong site can kill a correct
+hypothesis; 'I checked before writing' does not include 'I checked the
+right thing.'"** — banked as the family's newest form. **(c) ⭐⭐ The revived
+proposal, routed**: RAISE THE SEEDS — the start-pose solve's tries 24 → 240
+(same path, no run, static-probe class); read (a) does L free exceed 1, and
+(b) does any NEW clean pose avoid crossing the line x [+0.150,+0.246] /
+z 1.530. **The leverage is the largest available: ONE non-crossing clean
+pose dissolves the entire head problem (no bow needed)** — and even then
+the count matters (a 1-wide door stays 1-wide). Parallel with the descent
+probe per p5. Routed to p4 (m877). **(d) Scope carried**: §30's conclusions
+unaffected (different measurements); the proposal concerns the POSE CLASS
+and may — not must — dissolve the shape question; all start-pose still.
+Routed: p4 (m877), p5 (m878 — bank), p6 (m879 — rows).
