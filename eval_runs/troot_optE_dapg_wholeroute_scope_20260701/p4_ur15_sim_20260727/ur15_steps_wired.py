@@ -1646,6 +1646,13 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # ⭐ The winning joint vector itself.  Everything downstream is a property of THIS pose,
         # and the line named its cost, its roll and its conditioning but not the pose -- so
         # nothing that used it could be reproduced without re-running the solve.
+        # ⭐ Every survivor, not only the winner.  p5 §31 asks whether any CLEAR pose avoids the
+        # mount-to-mount line, which cannot be asked of a set that was never printed.
+        for _k, _c in enumerate(_strict[:40]):
+            print(f"[steps] {label} IK {t}: clear #{_k}: q = [" +
+                  " ".join(f"{v:+.6f}" for v in _c[0]) + f"] sigma {_c[5]:.4f}")
+        if len(_strict) > 40:
+            print(f"[steps] {label} IK {t}: ({len(_strict) - 40} further clear poses not printed)")
         print(f"[steps] {label} IK {t}: chosen q = [" +
               " ".join(f"{v:+.6f}" for v in q) + "] rad")
     return q
@@ -1697,7 +1704,11 @@ print(f"[steps] start pose = the cell's home, both arms: {np.round(HOME_POSE, 4)
 START = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
 for _round in range(3):
     for t in SIDES:
-        START[t] = solve_ik(t, GRASP1[t], tries=24, near=START[t],
+        # ⭐ p5 §31: the seeds, not the menu, were the thin part -- 24 uniform draws in a
+        # six-dimensional joint space.  START_TRIES raises it so the question "is the survivor
+        # set really of size one, or is the sample" can be answered.  Default unchanged.
+        START[t] = solve_ik(t, GRASP1[t], tries=int(os.environ.get("START_TRIES", "24")),
+                            near=START[t],
                             other=START["R" if t == "L" else "L"], quiet=(_round < 2))
 
 # Both arms placed at the poses just solved for the commanded span, on a throwaway state, and the

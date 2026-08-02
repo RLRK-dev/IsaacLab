@@ -136,3 +136,47 @@ the stand-off the shape proposal uses.
    the head itself, which has thickness this probe does not model: the probe is a 1 mm sphere.
 
 5. ⚠ Still one pose, as before. This is the surviving start pose only.
+
+---
+
+## Reading 5 — ⭐⭐ raise the seeds and the line stops being crossed (p5 §31)
+
+**Adopted**: `START_TRIES=240` against the built 24, same mounting (crown none, spread 0.280,
+tilt 20), everything else untouched. Every clear pose is printed now, not only the winner.
+
+**(a) The survivor set was the sample, not the cell.**
+
+| tries | L solved | L collision-free |
+|---|---|---|
+| 24 (built) | 13 | **1** |
+| 240 | 106 | **4** |
+
+**(b) Three of the four do not cross the line.** Each pose walked along z = 1.530, y = 0, at 2 mm:
+
+| pose | sigma | the mount-to-mount line |
+|---|---|---|
+| #0 | 0.0745 | **CROSSES** over x [+0.150, +0.246], 27.6 mm inside |
+| #1 | 0.0112 | clear — worst **+96.8 mm** |
+| #2 | 0.0381 | clear — worst **+105.5 mm** |
+| #3 | 0.0112 | clear — worst +96.8 mm |
+
+⭐ **#0 is the pose everything before this was measured on.** It was the only survivor of 24 draws,
+and it is the one that crosses. So "the surviving pose crosses the line" — mine, in Reading 2 —
+was true of that pose and is not a property of the cell.
+
+⇒ **The head problem as posed dissolves at this mounting**: clear start poses exist that leave the
+line free by nearly 100 mm, which is more room than any head needs.
+
+### ⚠ Three things to carry with that, and p5 asked for the second
+
+1. **The door is two wide, not three.** #1 and #3 differ in the fourth decimal of every joint —
+   the same pose found twice. Distinct line-free poses: **2**.
+2. ⭐ **The line-free poses are the worst conditioned of the four.** sigma 0.0112 and 0.0381
+   against #0's 0.0745. The poses that avoid the line are the ones nearest a singularity, and the
+   solver's cost function penalises exactly that — so it would have to be told to prefer them.
+3. **4 is a property of 240 draws, not of the cell**, in the same way 1 was a property of 24.
+   A different count or seed gives a different set. What is now established is existence, not
+   count: at least two clear poses avoid the line.
+
+⛔ Still one mounting and one step. Not a verdict; what to do with a door two wide and poorly
+conditioned is p5's call.
