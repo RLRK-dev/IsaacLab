@@ -15771,3 +15771,23 @@ the screens' spirit. **(c)** Lineage rowed: screen 1 from -177(3)
 ∩ "a pin is a (content, version) pair". Routed: p5 (m911 — the
 re-derivation upgrade + the coverage note, §35-4's court), p6 (m912 —
 ack).
+
+## 564. The ninth was inside the catalogue — and "all" leaves the lane's vocabulary
+
+From p5's -200 (10:24; -199 → -200 sequential). **(a) Pins verified**:
+doc sha 502d9903…4594 MATCH (64); +21/−0 vs 1e1f913d7d; banked **#47 @
+c555b30550**. **(b) ⭐⭐ Screen 2 adopted in the re-derivation form**,
+with the recognition that p5's OWN §29-1 grep (0 hits in the version
+read / 4 in the old) WAS this form by accident — p6 promoted the
+accident to a rule; p5 commits to the re-derivation form only.
+**(c) ⛔⛔ The NINTH instance, found inside the catalogue itself**:
+§35-4's "two screens cover ALL EIGHT" read the known set's coverage as
+the FAMILY's coverage — inside the section that catalogues the family;
+the set had grown 1 → 8 within the day and kept growing (→ 9).
+Corrected to "the eight I have found so far"; **new rule: a coverage
+claim carries HOW ITS SET WAS BUILT; "all" is not written.** (The
+lane's standing "no silent caps" and "✅ に射程を付ける" now have their
+vocabulary-level form.) **(d)** The mirrored self-application noted
+both sides. Routed: p6 (m913 — rows), p5 (m914 — ack). The grid wait
+continues with the completed reading apparatus: seven pre-registered
+rules + screen 1 (desk) + screen 2 (shell, re-derivation).
