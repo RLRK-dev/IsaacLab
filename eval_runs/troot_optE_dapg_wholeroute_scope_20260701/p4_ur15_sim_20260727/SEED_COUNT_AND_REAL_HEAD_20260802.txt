@@ -1,0 +1,50 @@
+SEED COUNT AND THE REAL HEAD -- 24 vs 240 draws, and p5 §33-1 stage 1
+p4, 2026-08-02.  Same driver, same sitting, START_TRIES the only difference within each pair.
+⛔ Every sweep banked before today ran at the built tries=24.  §31 showed 24 was a sampling
+   floor at one mounting; these pairs ask whether it was a floor at the mountings whose zeros
+   the conclusions rest on.
+
+PART 1 -- THE PAIRS
+  mounting                                    tries   L solved   L collision-free
+  built     crown 0.110  spread 0.220  tilt 45    24          7                  0
+  built     crown 0.110  spread 0.220  tilt 45   240         58                  0
+  grid      crown 0.110  spread 0.280  tilt 20    24         13                  0
+  grid      crown 0.110  spread 0.280  tilt 20   240        106                  5
+
+PART 2 -- STAGE 1: the real reaching head (p5 §33-1)
+  CROWN_Z0 = 1.330, radius DERIVED as (1.530 - 1.330)/2 = 0.100, so the head's top lands exactly
+  on the mounts.  Mounting spread 0.280, tilt 20.  START_TRIES = 240.
+    L: 106 solved / 5 collision-free
+  the survivors:
+    #0 #1 #2 #4  q = [+1.005559 +0.621216 +1.606125 +0.103156 +0.317078 +0.386874]  sigma 0.0338
+    #3           q = [+1.140126 +0.416080 +1.845414 -0.556151 +0.433782 +1.581307]  sigma 0.0381
+  ⇒ 5 survivors, 2 DISTINCT poses.
+
+READING (p4; the numbers are above)
+
+1. ⭐ THE ANSWER TO STAGE 1 IS >0.  A straight head that actually reaches both mounts, at the
+   built radius, leaves the left arm two distinct clear start poses.  By p5's own criterion the
+   arch is not needed: route A stands with a real head in place.
+
+2. ⭐⭐ AND THE ZEROS SPLIT IN TWO.  The built cell keeps zero at ten times the draws -- 58
+   solutions, none clear -- so its zero is geometry.  The grid point does not: 0 at 24 draws and
+   5 at 240.  ⇒ The crown-radius and crown-height tables, and the 24-point grid, were all taken
+   at 24 draws, and at least at (0.280, 20) their zero was the sample.  "Only 'none' passes" does
+   not hold at that mounting.
+
+3. ⛔ WHAT I GOT WRONG, and it is the same shape twice in one day.  I wrote in Reading 5 that
+   "Reading 2 was a property of pose #0, not of the cell".  I did not then carry that reasoning
+   to the tables, which rest on the same 24 draws -- p5's §31 finding applied to them the moment
+   it was made, and I reported two more sweeps before seeing it.  Scoping a claim to its slice is
+   not finished when the slice is named; it is finished when everything standing on the slice has
+   been re-read.
+
+4. ⚠ SCOPE.
+   - 22 of the 24 grid points are NOT re-measured.  Two were.
+   - 5 survivors is 2 distinct poses; the duplicate count is not a count of doors.
+   - The distinct pose [+1.140126 ...] is also clear with the crown REMOVED (it was #2 there).
+     One pose survives both, which is stronger than either result alone.
+   - 240 is not "enough" any more than 24 was.  What is established is existence.
+   - One mounting, one step, one arm's clearance.
+
+⛔ Not a verdict.  What follows from a head that fits is p5's call and Rs's to settle.
