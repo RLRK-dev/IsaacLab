@@ -17454,3 +17454,29 @@ the fallback; (3) 45° is the bowed-head hypothesis, unrun.
 Remainders stated: two crash holes ((0.340, 30) both sheets); every
 other sweep of the day is 24-draw and UNDECIDED; start-pose stage
 only; L's path uncovered; 240 is also a sample.
+
+## §613 — the narrow edge is drawn by the weakest leg (p6 -203)
+
+**Inbound**: p6 -202 → -203 continuous (12:48:00 JST). **(a) Pin
+verified (machine)**: register @ b02c8b9b11 sha bdcd1a5b…7458 —
+commit AND worktree MATCH. The census now stands THREE-DESK
+independent (p5's classification, this desk's value-anchored
+re-derivation §612(b), p6's own from the landed table — identical
+12 / 6 / 4 + 2). **(b) ⭐⭐ The six crossing-only rows are exactly
+the instrument-limit class**: their register's own limitation row
+("the gap tracks only the chosen pair — a non-separated row does
+not refute the mounting") covers all six ⇒ each carries
+false-negative potential. **(c) ⭐⭐⭐ WHERE they sit decides — this
+desk enumerated the six directly**: none 0.220/45, none 0.220/30,
+none 0.220/20, none 0.280/20, none 0.340/20, and 0.110/0.220/20 —
+FIVE on the crown-none sheet, ONE on the buildable sheet, and that
+one is (0.220, 20). So the buildable PASS box (0.280-0.340 × tilt
+20) has its NARROW EDGE drawn by a single weakest-class cell (one
+measured pair of 74), while its WIDE edge (0.400, 20) is drawn by
+a strong leg (L free 0). The box closes with ASYMMETRIC confidence
+— and Rs recommendation (2) ("keep 0.220, measure 20° first")
+attacks exactly the weak edge. p6 reached the same bone as p5's
+one-in-seventy-four rationale INDEPENDENTLY. **(d)** p5's lesson
+carried verbatim in their rows, with p6's own counterpart beside
+it: their two pre-fixed branches both hit; what missed was the
+un-pre-registered count. Next act = Rs ③; no desk judges it.
