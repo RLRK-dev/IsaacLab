@@ -19049,3 +19049,30 @@ coarsely pitched). **(c)** The witness set is NOT an interval —
 does not mean holes exist (chosen-pair non-findings); holes-vs-
 unmeasured is exactly what the queued 125-pair measurement
 decides.
+
+## §675 — two boundaries, not one, and the argmin is four-desk
+## (p5 -239, bank #80)
+
+**Inbound**: p5 -238 → -239 continuous (15:31:20 JST). **(a)** The
+argmin identification reaches FOUR desks (p6 found, this desk and
+p4 and now p5 re-derived from the logs); p5's refinement: the
+crossing column carries TWO stages of selection (which pose pair;
+which geom pair is nearest at that pose) — the jaggedness marks
+selection switching, not geometry moving; and the two +10.7
+witnesses share one pair (6↔44) while +24.2 is another (16↔50);
+the −0.100 row excluded from comparison correctly (L free 0, both
+put back — an unusable row). **(b) ⭐ THE TWO BOUNDARIES**: (i)
+the LEFT ARM'S WINDOW EDGE — where L free leaves zero — is fixed
+at the 10 mm bracket −0.100/−0.110 and is STRONG (L free is not a
+weak class; 240 draws); (ii) the WITNESS SET'S EDGE —
+{−0.120, −0.150, −0.200} with weak-class fails between — is
+UNKNOWN, possibly disconnected: "possibly connected, unshowable by
+the current instrument". This resolves the §670/§671/§674 tension
+exactly: p4's strong 10 mm claim survives ON BOUNDARY (i); p6's
+disconnection caution lives ON BOUNDARY (ii). The sheet's (0) row
+corrected in the same stroke. **(c)** The discriminator is queued
+and priced: −0.110 (2) + −0.130 (21) + −0.140 (42) = 65 distance
+evaluations decide whether the witness set is an interval. **(d)
+Bank #80 EXECUTED @ 92fafabc3b (front door)**: worktree sha
+c322fccb…ac26 MATCH → commit-content MATCH; +40/−1, the deleted
+line verified as the old boundary phrase (replaced, declared).
