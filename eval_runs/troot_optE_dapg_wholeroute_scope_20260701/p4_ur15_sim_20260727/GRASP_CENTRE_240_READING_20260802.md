@@ -108,10 +108,20 @@ gap between −0.100 (closed) and −0.150 (open), at 240 draws, same built moun
 | −0.140 | 137 | **14** | 3 | +0.0 | no witness found |
 
 1. ⭐ **The left arm is open at every bisected centre**, including −0.110 — the point immediately
-   adjacent to −0.100, which is measured closed. ⇒ **The boundary is between −0.100 and −0.110**,
-   a 10 mm interval, not the 50 mm §1 could bound it to.
+   adjacent to −0.100, which is measured closed. ⛔ **I first wrote that as "the boundary is
+   between −0.100 and −0.110, a 10 mm interval". That is an overclaim** and p6 returned it
+   (`-247`): calling it a *boundary* assumes the left-arm-clear predicate is monotone in the
+   centre, and nothing here establishes that. What is measured is narrower — **the nearest sampled
+   closed centre and the nearest sampled open centre are 10 mm apart.** A bracket between sample
+   points, not a boundary.
+   ⚠ The same caution runs the other way: the nine closed centres above −0.100 were sampled at 30
+   and 50 mm steps, so without monotonicity an open centre could sit between two of them
+   unsampled.
 2. ⭐ **−0.120 is a witness**, 30 mm closer to the built centre than the nearest one previously
-   known. The witness set is now **−0.120, −0.150, −0.200**.
+   known. The witness set is now **−0.120, −0.150, −0.200**. ⚠ **It is not an interval**: −0.130
+   and −0.140 sit between two witnesses and are not witnesses themselves. ⛔ Which does *not* mean
+   the set has holes — those rows are "no witness found at the chosen pair", and the 125-pair
+   measurement in point 4 is what would say whether they are holes or unmeasured.
 3. ⚠ **The interleave is not monotone** across the open region: +0.0, +24.2, +0.0, +0.0, +10.7,
    +10.7, +0.0 from −0.110 to −0.250. Nothing in the cell moves between those rows except the
    grasp centre; what changes is **which pose pair gets chosen**. This is §4 of the grid reading
@@ -121,3 +131,29 @@ gap between −0.100 (closed) and −0.150 (open), at 240 draws, same built moun
    measurement p5 costed (`bank #71`) applied here.
 
 ⛔ Still start-pose only, and still not a recommendation.
+
+## 7. ⭐ Why the interleave column is jagged — p6's identification, re-derived
+
+p6 (`-247`) traced the non-monotone column to the **argmin switching**: the closest pair of geoms
+is not the same pair from one centre to the next. Re-derived here from the point logs rather than
+taken on their word — **six distinct closest pairs across eight centres**:
+
+| centre | arms closest | the pair |
+|---|---|---|
+| −0.100 | −131.9 mm | 6 ↔ 44 |
+| −0.110 | +0.0 | 8 ↔ 45 |
+| **−0.120** | **+24.2** | **16 ↔ 50** — occurs at this centre only |
+| −0.130 | +0.0 | 12 ↔ Rg_left_pad2 |
+| −0.140 | +0.0 | 41 ↔ 52 |
+| −0.150 | +10.7 | 6 ↔ 44 |
+| −0.200 | +10.7 | 6 ↔ 44 |
+| −0.250 | +0.0 | Lg_right_pad_f1ext ↔ 50 |
+
+⇒ The column is **not a continuous quantity being sampled**. It is a minimum over a set whose
+argmin changes, so **interpolating between two of its rows, or bracketing a crossing in it, is not
+a valid operation**. The +24.2 mm at −0.120 is that centre's own pair; it says nothing about
+−0.115 or −0.125.
+
+⚠ This is the same shape as everything else in this file — a number that looks like a function of
+the swept variable and is not. It is also why point 1 above had to be weakened: a bisection assumes
+the thing being bisected is monotone, and neither column here has been shown to be.
