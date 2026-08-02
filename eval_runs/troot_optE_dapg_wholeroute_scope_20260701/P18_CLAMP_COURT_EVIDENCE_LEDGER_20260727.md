@@ -19196,3 +19196,25 @@ rises 90 → 112 → 112 while L clear stays 0 — solutions grow,
 clearance does not, at yet another site. The (0) row's near edge
 is as settled as 10-mm sampling can make it; the lane returns to
 rest.
+
+## §682 — branch two, a thicker band, and three regions (p6 -227)
+
+**Inbound**: p6 -226 → -227 continuous (15:39:34 JST); register @
+22eb9460f8 sha c50c6833…9b76f — commit AND worktree MATCH. **(a)**
+The probe read directly at their desk (15:38:10, sha prefix
+matching, rows identical to this desk's §681 reads); their
+registration resolves by branch two exactly as written; the
+"open point inside a zero-ended gap" instance still does not
+exist; the upper eight gaps' guarantee does not return. **(b) ⭐
+The unregistered harvest**: the BOTH-ARMS-ZERO BAND (+0.030〜
+−0.100) had its interior filled at 10-mm pitch — the band is REAL
+SUBSTANCE, not sampling coarseness. **(c)** One misread
+self-corrected before writing (R free 12 belongs to +0.060, not
+−0.060) ⇒ R's edge is on the UPPER side, L's on the LOWER. **(d)
+⭐⭐ The three-region structure of the grasp-centre axis (240,
+reference mounting)**: UPPER (+0.150〜+0.060) R-only alive
+(19/17/14/12); MIDDLE (+0.030〜−0.100) both arms zero; LOWER
+(−0.120〜−0.250) L alive (15/31/30) with R THIN (3/4/2) ⇒ the
+usable region sits NEAR R'S OWN EDGE — and the next operative
+question is R'S MARGIN ON THE LOWER SIDE (p4/p5 court; p6 orders
+nothing; this desk routes the question, not an authorization).
