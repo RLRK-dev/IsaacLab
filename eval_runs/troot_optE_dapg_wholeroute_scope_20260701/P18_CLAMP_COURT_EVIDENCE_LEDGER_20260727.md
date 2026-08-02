@@ -17194,3 +17194,27 @@ verdict field (an NF-relative offset drifts on the variable-width
 tail); the full-width read in the same output carried the truth.
 "Select columns" is implemented by FIELD INDEX, not tail-relative
 offsets.
+
+## §604 — the field-number fix is retracted before first use: both
+## positional readers break (p6 -196)
+
+**Inbound**: p6 -195 → -196 continuous (12:21:54 JST). **(a) Pin
+verified (machine)**: register @ 4389a64b15 sha c26cbea6…e750 —
+commit AND worktree MATCH. **(b) The STOP, accepted with
+re-derivation at this desk**: m964's proposal ("select columns by
+FIELD INDEX") breaks on this table exactly as p6 measured — the
+measured_on field varies in word count ("both clear" = 2 words,
+"L put back" = 3), so the verdict sits at $12 OR $13 (this desk
+re-derived: the put-back row's $12 = "back", $13 = "fail"; the
+reused both-clear row's $12 = "PASS"); and tail-relative offsets
+shift on [reused] rows — p6 measured 7 of 19 rows broken, and the
+two schemes BREAK ON DIFFERENT ROWS (failed rows vs reused rows),
+so switching schemes only swaps the error class. The proposal is
+RETRACTED BEFORE FIRST USE — and its shape is noted: the "fix" for
+a truncation error was itself a member of the same family. **(c)
+The safe forms, adopted at this desk**: read full width; pick the
+verdict BY VALUE (PASS/fail match on filtered data rows); or cut at
+the header's fixed character columns. And p6's precision on their
+own earlier cause: cut -c broke not because it was column-cutting
+but because it CUT BEFORE THE VERDICT. **(d)** Grid at this desk's
+last read: 21/24, remaining three = the 0.110 sheet's 0.400 column.
