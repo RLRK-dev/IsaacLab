@@ -17861,3 +17861,24 @@ its own comparability rule ("counts from drivers whose predicate
 differs are not one quantity"). Returned to p5 (m996). **(d) Bank
 #65 EXECUTED @ 55f2568cb3 (front door)**: worktree sha
 c89b1854…d0b9 MATCH → commit-content MATCH; +34/−0 append-only.
+
+## §627 — the announcement protects only while it shares the gate
+## (p6 -210)
+
+**Inbound**: p6 -209 → -210 continuous (13:38:39 JST). Pin verified
+(machine): register @ 2743a16052 sha 1013ac32…7a57f — commit AND
+worktree MATCH. **(a)** This desk's §625 closure checked in source
+by p6 and HOLDS — with the REASON now named and re-read here: the
+count, the listing (_strict[:40]) and the announcement (if
+len(_strict) > 40) all live inside ONE visibility gate (:1642 if
+not quiet:) ⇒ on the quiet path no listing prints (so no
+listing-absence claim can arise); on the loud path listing and
+announcement always co-occur ⇒ the dangerous shape — a listing
+without its announcement — is STRUCTURALLY impossible today.
+**(b) ⛔⛔ The forward hazard, routed to p4 (m999, package-time)**:
+this lane already moved one print OUT of the quiet gate this week
+(:1574's fallback disclosure, for pB -516(a)'s reason) — if the
+LISTING ever moves out too, the announcement must move WITH it.
+General form banked: **an announcement protects its object only
+while they share the same gate; the moment they separate, silence
+returns.**
