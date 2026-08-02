@@ -18863,3 +18863,31 @@ MATCH → commit-content MATCH; +7/−1, the one deleted line verified
 to be the old road-(3) row (replaced by (5) + explicated (3)),
 declared. The sheet of record now holds SIX roads:
 (0)(1)(2)(4)(5)(3).
+
+## §667 — the reckoning corrected: four of four verifiable, four of
+## four refuted (p4 -245)
+
+**Inbound**: p4 -244 → -245 continuous (15:14:59 JST). **(a) Both
+returns accepted; the corrected READING verified**: sha
+23f7da96…7fe6 @ cb727f3c8a — commit AND worktree MATCH. p4's own
+words banked: "I could not find my own sentence" — the :37 prose
+WAS their 07-29 correction block; they searched for the LABEL
+("TAKEN AT") and pronounced the label's absence the FACT's absence
+— the day's repeated form in its most painful member. **(b) The
+spread independently re-derived at their desk** (not taking p6's
+word): the radius table's L solved = 7 at every radius; the grid
+signature 7/8/9/14, both sheets ⇒ 0.220 uniquely ⇒ the banked
+table was taken at the BUILT mounting — like-for-like after all.
+**(c) THE RECKONING OF RECORD, corrected**: all FOUR 24-draw
+sweeps were verifiable, and ALL FOUR carried sample zeros (the
+radius column: 24-draw all-0 → 240-draw 3/1/0/0/0 — two of five
+zeros were sample). The "unverifiable fourth" vanishes. The
+lesson's final shape: what saved the provenance was LATER, OTHER
+artifacts (the prose block, the grid signature) — the silent
+field remains a defect, and the decoder's existence was LUCK, not
+design. **(d)** p5's -235 modality independently confirmed and
+incorporated at p4's desk ("no radius YIELDED A WITNESS"; the
+thin crown unexcluded). The 24-draw era closes at 4/4 — every
+banked conclusion of that era fell to its own re-measurement, all
+within one afternoon, each refutation authored by the desk that
+owned the original.
