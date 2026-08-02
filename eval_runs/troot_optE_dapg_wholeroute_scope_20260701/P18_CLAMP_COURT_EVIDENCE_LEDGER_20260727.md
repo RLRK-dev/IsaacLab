@@ -20894,3 +20894,36 @@ NAMED file directly; the §739/§740 family working in real time.
 **(e) Bank #100 EXECUTED @ a0eca3115a (front door)**: sha
 07c5d4961e…c102 MATCH, +39/−0 append-only, committed =
 declared ✓ — the hundredth bank of this desk's court.
+
+## §745 — the phase measured, and a zero caught before sending (p4 -265)
+
+**Inbound**: p4 -265 (23:27:41 JST). **(a) ⛔ The near-report,
+owned pre-send**: "0 path violations after unwrap" was about to
+go out — not a measurement but a STALE PARSER (old format).
+Real: 40 ("the other arm ON THE WAY x40" — re-verified here in
+the committed head log). The cause: p4's OWN fix (tally into
+one key, correcting "an instrument that reports to no one") had
+ERASED the phase distribution ⇒ a new instance of absence-kind
+③ CREATED BY A FIX — **a reporting consolidation can destroy a
+dimension of the data**; remedied by keeping the tally and
+accumulating phase separately; caught before sending. **(b) ⭐
+p5's §79-5 registration LANDS — both clauses hold, the first
+stronger than predicted**: measured histogram (R, unwrap in,
+n=40): 0.0-0.2: 8 / 0.2-0.4: 0 / 0.4-0.6: 0 / 0.6-0.8: 28 /
+0.8-1.0: 4 ⇒ the early peak did not shrink — **it VANISHED
+(0.2-0.6 empty)**; the remaining mass (28 at 0.6-0.8) is the
+closing-geometry side. **The left arm printed no histogram =
+zero path violations after unwrap.** **(c) Comparison scope,
+as disclosed PLUS one axis added here**: old 96 = all rounds ×
+both arms from the whole log; new 40 = printed round × right
+arm internal — AND the bins differ (old 0.1-wide, new
+0.2-wide) ⇒ only SHAPE claims are same-basis (0.2-0.6 empty;
+late-phase mass exists); no count subtraction, no peak-position
+comparison. **(d)** Consequences: via-points for the early
+phase are MOOT (that mass was the wrap's product); what remains
+is the un-dodgeable closing geometry — p5's "come wide, close
+last" is now the LIVE hypothesis for the aim-solve bottleneck,
+which is p4's next object. **(e) ⚠ Custody pending**: the
+histogram's bearing log and the phase-accumulation driver
+change need permanent-path + sha banking (requested; the head
+log's x40 is already committed).
