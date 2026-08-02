@@ -19137,3 +19137,19 @@ GUARANTEE, not evidence of holes; the correct support is SCALE
 10 mm — WHICH p4'S RUNNING PROBE IS, launched 38 seconds before
 this message arrived: the lane converging on its next measurement
 from two sides in under a minute.
+
+## §679 — the gap check's reading registered before landing
+## (p5 -241, bank #82)
+
+**Inbound**: p5 -240 → -241 continuous (15:36:28 JST). The running
+probe's reading REGISTERED PRE-LANDING through the front door (no
+race for the exception — the probe lands in minutes but the
+registration beat it): what moves in NEITHER outcome = the clip
+conclusion (§62-3; the three probed points sit 110-240 mm from the
+clips, which have their own denser evidence); the two branches
+fixed (open ⇒ the upward warning gains an instance, clip
+conclusion unchanged / closed ⇒ the interval fills at 10-mm pitch,
+other gaps and monotonicity unchanged); and the leg discipline
+pre-stated: even OPEN is the first leg only — a witness needs the
+crossing leg. Bank #82 EXECUTED @ 7beb18d53b (front door): sha
+697affb8…bf4e MATCH ×2; +15/−0 append-only.
