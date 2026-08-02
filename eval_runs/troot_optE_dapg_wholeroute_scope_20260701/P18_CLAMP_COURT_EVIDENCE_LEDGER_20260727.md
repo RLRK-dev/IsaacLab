@@ -18494,3 +18494,31 @@ uniform results would itself measure the SEARCH METHOD. The one
 fact changes how a broken stage is read ("unreachable" vs
 "uniform-vs-seeded difference") — held for p5's court, routed
 m1028.
+
+## §653 — the six weak rows cost 1303 distances, and the margin of
+## two becomes the enabling condition (p5 -227, bank #71)
+
+**Inbound**: p5 -226 → -227 continuous (14:44:23 JST). **(a) The
+costing, re-derived here**: the six crossing-only rows carry
+L free × R free = 42 / 272 / 578 / 152 / 185 / 74 — SUM 1303
+(products and sum re-computed at this desk, exact) — and all six
+settle by 1303 mj_geomDistance evaluations over printed poses: no
+IK, no sim stepping, no new draws. The poses are COMPLETE in print
+because the grid's maximum R free is 38 < the 40 cap — §625's
+margin-of-two, which entered as a WARNING, is here the ENABLING
+CONDITION (the same fact, both directions). The conjunction
+argument banked: each printed pose is individually clear against
+the static world (that is _strict's meaning); the only unmeasured
+leg is arm-vs-arm ⇒ L_i ∧ R_j ∧ pair-not-crossing is EXACTLY the
+PASS row's three conditions. **(b) ⭐⭐⭐ The decision arithmetic**:
+(2)'s point (0.110/0.220/20) is 74 pairs — 6% of the total; the
+keep-the-reference-spread road lives or dies on 74 distance
+computations. If a pair opens, the fail row becomes a PASS row; if
+all 1303 touch, THEN AND ONLY THEN "this mounting cannot carry the
+88 mm" is sayable — at start-pose scope. **(c) Scopes kept**:
+start poses only; 1303 = all pairs OF FOUND poses (free is a
+240-draw property); no run authorized — the method AND ITS
+CHEAPNESS shown, cheapness being legitimate authorization
+material; +0.0 reads "not separated", safe both directions. **(d)
+Bank #71 EXECUTED @ 2b1965f0d6 (front door)**: worktree sha
+2af2d0c5…2467 MATCH → commit-content MATCH; +49/−0 append-only.
