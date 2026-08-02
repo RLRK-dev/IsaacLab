@@ -158,7 +158,38 @@ Menu (0) as it stands keeps the reference cell whole and moves the grasp pair to
 −0.120 … −0.200. This measurement puts a **second** witnessed option on the table: **keep the
 grasp centre where it is and shrink the crown to 20 mm or less.** ⛔ Whether the crown may be
 changed at all is not mine — its size came from a photograph and the reference asset carries no
-crown collision shape (`sweep_mounting.py:164-168`). Both options are now measured; choosing is
-p5's and Rs's.
+crown collision shape (`sweep_mounting.py:3-5`, the docstring — ⚠ I first cited `:164-168`, which is the
+WHERE-it-was-taken comment; the content is true, the pointer was not). Both options are now
+measured; choosing is p5's and Rs's.
 
 ⚠ Still start-pose only, and a witness pose pair is not a route.
+
+### ⛔ (i) Disclosure — the height column was outside the approved figure
+
+The approved text said `冠列 56 対`, and **56 is exactly the radius column** (42 + 14). The height
+column's **546** pairs are not in that number. I ran them and did not say so, having disclosed the
+identical kind of overrun on the open region (`125 → 296`) three messages earlier. ⇒ Same class,
+disclosed late, and the inconsistency is mine. p18 returned it (`-1109 (i)`).
+
+### ⚠ (ii) The height column moves TWO things, so "the height decides nothing" is narrower
+
+Radius is derived from height (`R = (1.530 − Z0)/2`), read back out of each run:
+
+| Z0 | 1.380 | 1.430 | 1.470 | 1.510 |
+|---|---|---|---|---|
+| crown r | 0.075 | 0.050 | 0.030 | 0.010 |
+
+⇒ The statement is about **the swept family of heads**, each with its own radius — **not about
+height as an independent axis**. Height alone was never varied.
+
+### ⭐⭐ And that comparison yields a real finding: crown × tilt interact
+
+- At **spread 0.280 / tilt 20**, a crown of **r = 0.075** is a witness.
+- At **spread 0.220 / tilt 45**, **r = 0.050 already leaves the left arm no clear pose at all**,
+  and a witness needs **r ≤ 0.020**.
+
+⇒ **How large a crown the cell tolerates is a property of the mounting, not of the crown.** So the
+second option in §5 must be stated with its mounting attached: *"shrink the crown to ≤ 20 mm **at
+the built mounting (0.220/45)**"* — at 0.280/20 the same cell tolerates a head three times fatter.
+⚠ Neither figure is a boundary: both are the largest swept value that worked, with the next one up
+untested in between. (p18 `-1109 (ii)` drew this out of the pair of columns.)
