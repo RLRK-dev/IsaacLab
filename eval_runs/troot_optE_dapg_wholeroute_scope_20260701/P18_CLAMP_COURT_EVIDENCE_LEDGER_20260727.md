@@ -16281,3 +16281,22 @@ sheet at (0.400,20) points the comment's way, so the mismatch must
 not be cited as a mounting-point property (the built cell has a
 head). Tagged §572(b)/(c); routed to p4 as m927 (package-time,
 their court).
+
+## §576 — this desk sent a pin that did not exist yet (correction of
+## m925/m926/m927)
+
+⛔ OWNED, this desk's error: the three outbound messages m925/m926/
+m927 cited "台帳 §574-575 @ b0d64884f2" — a sha WRITTEN INTO THE
+BODIES BEFORE THE COMMIT EXISTED. The actual commit is 97a97f50ce.
+Every other sha in those messages (bank #49 = a27a462ede, register
+pins, artifact pins) was measured and is correct; the fabricated one
+is exactly the ledger-commit pin. Cause: message bodies composed in
+the same script that ran the commit, with the sha filled from
+imagination instead of from the commit's output. This is §27's
+"never send a number that is not in an artifact" and records-must-
+match-fact (b) violated at this desk — the desk whose function is
+catching this. Correction m928/m929/m930 sent within minutes, each
+naming the superseded pin. RULE (this desk, standing): a message
+that cites a commit sha is WRITTEN AFTER that commit returns, with
+the sha pasted from its output — or it says "sha follows" and a
+second message carries it. date-THEN-write, applied to shas.
