@@ -183,6 +183,28 @@ def yoke_xml():
             f'fromto="{-YOKE_SPREAD} 0 {CROWN_ZC} {YOKE_SPREAD} 0 {CROWN_ZC}" material="col"/>')
 
 
+def stereo_head_xml():
+    """The reference cell's stereo head, which this cell has never had.
+
+    ⛔ `~/Downloads/ur15-dual-arm-cell/` declares it and this cell does not model it in any form:
+    URDF `:13-18` gives link `stereo_head`, fixed to `cell_base` at xyz (0, -0.175, 1.485) with
+    rpy (2.356194, 0, 0) = roll 135 deg.  The URDF link is EMPTY -- no visual, no collision -- so
+    the only statement of its size is the package's own doc, §Stereo head:
+    `body_size_m = [0.24, 0.085, 0.075]`.  ⚠ Which frame that box is expressed in is not written
+    down; taken here as the link frame, the URDF convention, so the joint's rpy orients it.
+
+    ⚠ A missing obstacle makes success EASIER than reality -- the wrong direction.  Every clear
+    count in this investigation was measured without it.  Default OFF so those results stay
+    reproducible; `STEREO_HEAD=1` puts it in.
+    """
+    if not os.environ.get("STEREO_HEAD"):
+        return ""
+    print("[steps] ⭐ STEREO HEAD PRESENT: the reference's 0.24 x 0.085 x 0.075 m body at "
+          "(0, -0.175, 1.485), roll 135 deg.  ⚠ This cell's default is WITHOUT it.")
+    return ('<geom name="stereo_head" type="box" size="0.12 0.0425 0.0375" '
+            'pos="0 -0.175 1.485" euler="2.356194 0 0" material="col"/>')
+
+
 def rest_xml(i, cx):
     """Saddle: a post with two lips so the cable is captured instead of rolling off."""
     h = REST_TOP - TABLE_TOP
@@ -244,7 +266,7 @@ world = f"""<mujoco model="ur15_steps">
     <body name="column" pos="0 0 0">
       <geom name="stem" type="cylinder" size="{COLUMN_R} {COLUMN_HZ:.4f}" pos="0 0 {COLUMN_STEM_BOTTOM + COLUMN_HZ:.4f}" material="col"/>
       <geom name="foot" type="cylinder" size="{PEDESTAL_R} {PEDESTAL_HZ}" pos="0 0 {PEDESTAL_HZ}" material="col"/>
-      {yoke_xml()}
+      {yoke_xml()}{stereo_head_xml()}
     </body>
     <body name="table" pos="0 {TABLE_Y:.3f} 0">
       <geom name="table_top" type="box" size="{TABLE_HX} {TABLE_HY} {TABLE_HZ}" pos="0 0 {TABLE_TOP-TABLE_HZ:.4f}" material="table"/>
@@ -1183,14 +1205,19 @@ def _rdes(yaw, roll=0.0):
 # else, so a yoke that is not named here is a yoke every mast instrument silently ignores -- the
 # exact failure this file already has a name for: an instrument reporting a fault to nobody.
 # p5 flagged it before I wrote the geometry; it is here because of that, not because I checked.
-_MASTNAMES = ("stem", "foot", "crown")   # p6 #54(2): the crown is new mast material
+# ⛔ The stereo head belongs here for exactly the reason stated above: a part the mast instruments
+# are not told about is a part they are blind to, and this cell was blind to this one entirely
+# until 2026-08-02.  Adding the geom without adding the NAME would have restored the obstacle to
+# the picture and not to the measurement.
+_MASTNAMES = ("stem", "foot", "crown", "stereo_head")   # p6 #54(2): the crown is new mast material
 COLG = [g for g in (mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n) for n in _MASTNAMES)
         if g >= 0]
 _MISSING = [n for n in _MASTNAMES if mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n) < 0]
 # ⛔ The assert stays for every name EXCEPT a crown that this cell was told to remove.  A missing
 # name is normally an instrument going blind; a crown removed on purpose is the one case where
 # the part really is not there, and it is announced above rather than absorbed here.
-assert not [n for n in _MISSING if not (n == "crown" and CROWN_R <= 0.0)], \
+_EXCUSED = {"crown": CROWN_R <= 0.0, "stereo_head": not os.environ.get("STEREO_HEAD")}
+assert not [n for n in _MISSING if not _EXCUSED.get(n)], \
     f"a mast geom name did not resolve -- an instrument would be blind: {_MISSING}"
 if _MISSING:
     print(f"[steps] ⚠ mast set is {len(COLG)} of {len(_MASTNAMES)} parts; {_MISSING} absent by "
@@ -1308,6 +1335,52 @@ def path_mast_min(t, sc, q_from, q_to, cutoff=None):
     return (None, None) if best > 1e8 else (best, who)
 
 
+def path_arm_min(t, sc, q_from, q_to, cutoff=None):
+    """Smallest gap to the OTHER ARM reached anywhere along the joint-space move [m].
+
+    ⛔ This did not exist, and the same docstring one function up says why it had to.  The mast got
+    a path test because "the FOREARM sweeps through the mast on the way there and jams ... a pose
+    the arm never reaches is not made safe by being clear".  The other arm never got one: it was
+    tested at the candidate pose and nowhere else.
+
+    Measured consequence, 2026-08-02: both arms sweep about 250 degrees from home to their start
+    poses, pass through each other on the way, and arrive in contact -- the right arm 53 degrees
+    short of its own command.  The tracking gate then requires each arm to be within 5.18 mrad of
+    that command, so it never opens and every STEP reports 0.0% held on every tick.  Endpoint-clear
+    poses, no clear way to reach them.
+
+    Sample count derived the same way as the mast's, with the other arm's own smallest bounding
+    radius as the obstacle size, so no sample-to-sample step can carry a part clean through it.
+    ⚠ Same limit as the mast's: it bounds tunnelling, not a graze between two samples.
+    """
+    tb = "R" if t == "L" else "L"
+    q_from, q_to = np.asarray(q_from, float), np.asarray(q_to, float)
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_from[_k]
+    mujoco.mj_kinematics(m, sc)
+    _mine = np.fromiter(sorted(ARMG[t]), int)
+    p0 = np.asarray(sc.geom_xpos)[_mine].copy()
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    travel = float(np.linalg.norm(np.asarray(sc.geom_xpos)[_mine] - p0, axis=1).max())
+    _r = float(np.asarray(m.geom_rbound)[np.fromiter(sorted(ARMG[tb]), int)].min())
+    n = max(1, int(math.ceil(travel / max(_r, 1e-4))))
+    best, who = 1e9, None
+    for i in range(1, n):        # the ends are the caller's own endpoint reading
+        q = q_from + (q_to - q_from) * (i / n)
+        for _k, _a in enumerate(QADR[t]):
+            sc.qpos[_a] = q[_k]
+        mujoco.mj_kinematics(m, sc)
+        g_, w_ = arm_pair_min(sc, t, tb, want_who=True, cutoff=cutoff)
+        if g_ is not None and g_ < best:
+            best, who = g_, f"{w_} at {i}/{n} along the move"
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    return (None, None) if best > 1e8 else (best, who)
+
+
 def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
     """Smallest signed distance between any geom of arm `ta` and any of arm `tb` [m].
 
@@ -1404,7 +1477,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     collision, and returns the one closest to `near` (so the servo move stays short)."""
     sc = mujoco.MjData(m)
     _clear_dropped = 0
-    _blame = {}          # what each rejected candidate was rejected AGAINST, by name
+    _blame, _blame_eg = {}, {}          # what each rejected candidate was rejected AGAINST, by name
     _col_dropped = 0
     _path_dropped = 0
     _worst_path = (1e9, None)
@@ -1519,6 +1592,22 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
                 _clear_dropped += 1
                 _by_clearance = True
                 _blame["the other arm"] = _blame.get("the other arm", 0) + 1
+            # ⛔ ARM_PATH: the same test ALONG the move, which the mast has had since 07-28 and the
+            # other arm never did.  Default OFF because it changes what counts as clear, and every
+            # count measured before 2026-08-02 was taken without it.
+            elif near is not None and os.environ.get("ARM_PATH"):
+                _pg, _pw = path_arm_min(t, sc, near, qw, cutoff=ARM_DECIDE_CUTOFF)
+                if _pg is not None and _pg < ARM_CLEARANCE:
+                    hit = True
+                    _clear_dropped += 1
+                    _by_clearance = True
+                    # ⛔ ONE key, not one per sample.  Keying by the full "who at i/n" string
+                    # splits the tally into dozens of singletons, every one of which falls below
+                    # the printed cut -- so the cause fires, rejects everything, and appears
+                    # nowhere in the summary.  An instrument reporting a fault to nobody, again.
+                    _k9 = "the other arm ON THE WAY"
+                    _blame[_k9] = _blame.get(_k9, 0) + 1
+                    _blame_eg.setdefault(_k9, _pw)
         # Rs, 2026-07-28, watching the run: "the left hand is slamming into the cylinder."  The
         # mast was never in this filter.  It was MEASURED every step and printed as "column gap",
         # and it read negative at EIGHT steps of thirteen -- nine counting the one that read
@@ -1595,7 +1684,8 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # One line, named parts, because the answer decides which of two options is even on the
         # table.  ⚠ The counts sum to more than the candidate count when a pose is rejected on
         # more than one test; each entry is "rejections against this part", not "poses".
-        _b = ", ".join(f"{k} x{v}" for k, v in sorted(_blame.items(), key=lambda kv: -kv[1]))
+        _b = ", ".join(f"{k} x{v}" + (f" (e.g. {_blame_eg[k]})" if k in _blame_eg else "")
+                       for k, v in sorted(_blame.items(), key=lambda kv: -kv[1]))
         print(f"[steps] {label} IK {t}: rejected against -- {_b}"
               f"   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)")
     well = [c for c in free if c[5] >= SIGMA_FLOOR] or free   # drop the near-singular ones
@@ -1801,13 +1891,60 @@ for t in SIDES:
 # ⚠ durations, not step counts: at the producer's timestep 4000 steps is 0.83 s, not the
 # 8 s this ramp was measured at.
 RAMP = int(START_RAMP_S / m.opt.timestep)
-for s_ in range(RAMP + int(START_HOLD_S / m.opt.timestep)):
-    f = min(1.0, s_ / RAMP)
-    for t in SIDES:
-        qc = (1.0 - f) * q0[t] + f * START[t]
-        for k, i in enumerate(AIDX[t]):
-            d.ctrl[i] = qc[k]
-    mujoco.mj_step(m, d)
+# ⛔ DIAGNOSTIC, default off.  Both arms sweep ~250 degrees from home to their start poses AT THE
+# SAME TIME, and the clearance test that cleared those poses checked each arm's path against the
+# other arm held STILL at its final pose -- never against the other arm moving.  Measured result:
+# they arrive in contact (L upper arm vs R wrist 1 and 3) with the right arm 53 degrees short of
+# its command, which closes the tracking gate for every step that follows.
+# SEQUENTIAL_START=1 moves them one at a time instead, to see whether the collision is the cause.
+if os.environ.get("SEQUENTIAL_START"):
+    print("[steps] ⚠ SEQUENTIAL_START: the arms reach their start poses ONE AT A TIME "
+          "(diagnostic; the built choreography moves them together)")
+    # ⭐ SEQUENTIAL_START="R" moves the right arm first.  The prediction being tested: each
+    # arm's path was cleared against the OTHER ARM AT HOME (round 0 of the solve, where
+    # `near` and `other` are both the home pose), so whichever arm goes FIRST should arrive
+    # -- its check was valid, the partner really is at home -- and whichever goes SECOND
+    # should jam, because its check was against a partner that has since left home.
+    _order = ["R", "L"] if os.environ.get("SEQUENTIAL_START") == "R" else list(SIDES)
+    for _tS in _order:
+        for s_ in range(RAMP + int(START_HOLD_S / m.opt.timestep)):
+            f = min(1.0, s_ / RAMP)
+            qc = (1.0 - f) * q0[_tS] + f * START[_tS]
+            for k, i in enumerate(AIDX[_tS]):
+                d.ctrl[i] = qc[k]
+            mujoco.mj_step(m, d)
+else:
+    for s_ in range(RAMP + int(START_HOLD_S / m.opt.timestep)):
+        f = min(1.0, s_ / RAMP)
+        for t in SIDES:
+            qc = (1.0 - f) * q0[t] + f * START[t]
+            for k, i in enumerate(AIDX[t]):
+                d.ctrl[i] = qc[k]
+        mujoco.mj_step(m, d)
+# ⛔ The standing error of the servo, measured where it matters: the ramp that drives every STEP
+# advances only while each arm is within TRACK_TOL of ITS OWN command, so if the arm cannot hold
+# its command to that tolerance while STANDING STILL, the gate can never open and every step
+# reports 0.0% held on every tick.  That is exactly what STEP 2 does.  This prints the quantity
+# the gate compares, at the pose the route starts from, before any step runs.
+_hold_err = {t: float(np.abs(np.array([d.qpos[a] for a in QADR[t]])
+                             - np.array([d.ctrl[i] for i in AIDX[t]])).max()) for t in SIDES}
+for _t9 in SIDES:
+    _qn = np.array([d.qpos[a] for a in QADR[_t9]])
+    _cn = np.array([d.ctrl[i] for i in AIDX[_t9]])
+    _pj = _qn - _cn
+    _lim = np.array([[m.jnt_range[m.dof_jntid[v]][0], m.jnt_range[m.dof_jntid[v]][1]]
+                     for v in VADR[_t9]])
+    _at_lim = [j for j in range(6)
+               if min(abs(_qn[j] - _lim[j][0]), abs(_lim[j][1] - _qn[j])) < 1e-3]
+    print(f"[steps] STANDING ERROR {_t9}: {_hold_err[_t9]*1000:.2f} mrad at rest vs TRACK_TOL "
+          f"{TRACK_TOL[_t9]*1000:.2f} mrad -> "
+          + ("⛔ THE RAMP GATE CANNOT OPEN (room <= 0 before anything moves)"
+             if _hold_err[_t9] >= TRACK_TOL[_t9] else
+             f"gate opens with {100*(1-_hold_err[_t9]/TRACK_TOL[_t9]):.0f}% of the tolerance free"))
+    print(f"[steps] STANDING ERROR {_t9} per joint [mrad]: "
+          + " ".join(f"j{j}={_pj[j]*1000:+.1f}" for j in range(6))
+          + (f"   ⛔ AT ITS LIMIT: {_at_lim}" if _at_lim else "   (no joint at a limit)")
+          + f"   touching: {sorted(touching(_t9, d)) or 'nothing'}")
 # ⛔ Before anything moves: does every Tier A value the cell can measure agree with the cell?
 # CLAW_OFFSET is carried as +20.9 mm and this cell measures about -44 mm at the same quantity.
 # The driver has been PRINTING that disagreement ("the old constant said [0,0,+20.9]") since the
