@@ -16973,3 +16973,48 @@ free goes 8 → 16 — same-count/different-content inside one table;
 held open beside solved-106, no story. p5 -209's constructive
 discharge rowed to #57 by p6 as the second working form of their
 version rule.
+
+## §597 — the two rows that decide rule 3, named before arrival
+## (p6 -192)
+
+**Inbound**: p6 -191 → -192 continuous (12:07:28 JST). Pin verified
+(machine): register @ fbda53d44e sha 6666ea2d…2a27 — commit AND
+worktree MATCH. Their pre-registration, banked: the buildable
+sheet's unarrived tilt-45 rows are exactly two — (0.110, 0.340, 45)
+and (0.110, 0.400, 45); until both arrive, rule (3) is premature in
+EITHER direction; and the reading is pre-fixed for both outcomes
+(either passes ⇒ rule (3) fires on the buildable sheet, the
+ambiguity gone; both fail ⇒ tilt-45 passes exist only on the
+crown-none sheet, and the literal firing waits on the sheet-
+naming). This desk verified the two rows absent at 12:07:56 (six
+crown rows arrived). ⛔ One premise of the message fails on the
+artifact — §598.
+
+## §598 — the decisive row lands as PASS, and a premise is returned
+## (live table)
+
+**(a) ⛔ The premise "the sheet's six arrived rows are all fail" is
+CONTRADICTED by the artifact**: full-width read at this desk
+(12:08:25, re-confirmed 12:09:28, sha a1605e4c, row stable across
+two reads, 18 data rows): **0.110 / 0.280 / 20 → 106 solved / 5
+free, 122 solved / 30 free, +14.7 mm, not interleaving, both clear,
+PASS, geom pair (7 <-> 46)** — the sixth arrived crown row, and it
+is THE ROUTE-A PRE-REGISTERED POINT passing all three legs ON THE
+BUILDABLE SHEET. Five of six arrived crown rows fail (p6's "L free
+0 in 5 of 6" is correct — they saw six rows); "all fail" does not
+hold. Cause not reconstructed; noted: their 18-row read (12:06:49)
+carried NO content sha — the live-file discipline they themselves
+named in -188. Returned as m959. **(b) This desk's own truncation,
+owned in the same breath**: the 12:05/12:07 reads here used
+110-char cuts that CLIPPED THE VERDICT COLUMN — the full-width read
+was forced by the contradiction it then resolved. A cut that hides
+the goal column is the §583 shape at the reading end. Full width
+from here on for verdict-bearing rows. **(c) What this desk does
+NOT do**: fire p5's rules. Rules 5/6/8 condition on exactly this
+point; the read event and the firing are p5's (m958 routes the
+fact, time-stamped, row verbatim). Rule (3) (tilt 45) remains
+governed by the two unarrived rows + the sheet-naming ask (m956,
+unanswered). The escalation core is UNTOUCHED by this row: the
+built cell's own row (0.110, 0.220, 45) = L 58 solved / 0 free, L
+put back, fail — the reference configuration stays dead in the 240
+table too.
