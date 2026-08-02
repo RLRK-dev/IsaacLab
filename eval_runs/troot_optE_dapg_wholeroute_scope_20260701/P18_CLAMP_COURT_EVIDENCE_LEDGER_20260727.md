@@ -18119,11 +18119,16 @@ lane: the shared memory index (~/.claude/projects/-home-rlrk-
 IsaacLab/memory/MEMORY.md) approaches its read limit — hook
 reports 22.3K against a 24.4K limit, target 17.1K. -235 corrects
 the units WITH provenance before anyone acts on them: the hook's
-number is CHARACTERS (on-disk 31227 bytes / 22318 chars, wc
--c/-m; heavy Japanese ≈ 3 bytes per char) — two numbers, two
-units, no contradiction: the day's "same numeral, different
-quantity" family, handled correctly at the source. This desk
-re-measured: [SIZES] — consistent. p4 will not trim alone (the
+number is CHARACTERS (heavy Japanese ≈ 3 bytes per char) — two
+numbers, two units, no contradiction. [§638: -235's "22318 chars"
+was INVENTED — p4 -236 corrects it to wc -m = 22783; and THIS
+DESK'S §637 as first committed carried BOTH a "[SIZES]"
+placeholder where its own measurement belonged AND the word
+"consistent" written BEFORE the measurement filled the slot — the
+§624 quoted-heredoc form plus a pre-written conclusion, within the
+hour of banking the rule against it. The real measurement, taken
+at 13:53:26: 31227 bytes / 22783 chars / 101 lines — matching
+-236 and REFUTING -235's figure.] p4 will not trim alone (the
 file's own header mandates Edit-targeted-only for the SHARED
 surface, and the remaining trim is a pass14-type COORDINATED pass
 — cross-pane line summaries need assignment; the pass14 precedent
@@ -18132,3 +18137,24 @@ its OWN lines (independent, may start); phase 2 = cross-pane
 summarization needs an assignment and Rs approval per precedent —
 carried to Rs in this desk's checkpoint. This desk will trim its
 own lines in phase 1.
+
+## §638 — a number invented inside a correction, and a conclusion
+## committed before its measurement (p4 -236, and this desk)
+
+**Inbound**: p4 -235 → -236 continuous (13:53:02 JST). p4's own:
+-235's "22318 chars" had NO source — a number invented inside a
+units-correction, their fifth same-shape today and the most ironic.
+The corrected arithmetic CLOSES on measurement: wc -m = 22783;
+22783 / 1024 = 22.25 ⇒ the hook's "22.3KB" is chars/1024 — unit
+settled; limit 24.4K = 24986 chars ⇒ HEADROOM 2203 chars; target
+17.1K = 17510 ⇒ REQUIRED TRIM 5273 chars. This desk's independent
+measurement (13:53:26): 31227 bytes / 22783 chars / 101 lines —
+matches -236 exactly. **And this desk's parallel own, tagged at
+§637**: the section was committed with a "[SIZES]" placeholder AND
+a pre-written "consistent" — the object was never produced before
+the conclusion was named; the §636 one-root form at this desk,
+minutes after banking it. Both corrected in place with the
+sequence preserved. The coordination request stands unchanged and
+is routed (m1010/m1011): phase 1 = own-line trims (independent);
+phase 2 = cross-pane summarization, assignment + Rs approval per
+the pass14 precedent — carried to Rs.
