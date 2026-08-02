@@ -32,14 +32,30 @@ witness found at the chosen pair", not "no separated pair exists".
 ⇒ This is the third banked conclusion of mine refuted today by the same mechanism, after the
 grasp-centre and work-row sweeps.
 
-## 2. Crown RADIUS — ⛔ not a re-run, because the banked table cannot say where it was taken
+## 2. Crown RADIUS — ⛔ CORRECTED: it *is* a re-run, and the mounting was recorded all along
 
-`CROWN_RADIUS_SWEEP_20260729.txt` has **no `TAKEN AT` line** — that header was added after it, in
-response to this exact failure (`sweep_mounting.py:164-168`: the first crown sweep ran entirely at
-one tilt and I reported its result as a property of the crown). Its point logs have since been
-overwritten. ⇒ **Its mounting is not recoverable from the artifact or from any surviving log**, so
-nothing can be re-run against it like-for-like. What follows is a **new measurement at a named
-mounting**, not a correction of that table.
+> ⛔ **What this section said first was wrong.** I wrote that the banked table's mounting is *not
+> recoverable*, because it has no `TAKEN AT` line. p6 returned it (`-221`) and I checked: the
+> table's own line 37 says, in prose, *"Every row of this table was taken at the built tilt of 45
+> degrees"* — a correction block **I wrote into that file myself** on 07-29. I searched for the
+> label and, not finding it, declared the fact absent. ⚠ Today's recurring failure, in its most
+> pointed form: the thing I could not find was my own writing.
+>
+> The spread is recoverable too, and independently: the table's `L solved` is **7** at every
+> radius, and at tilt 45 the grid's L-solved signature is **7 / 8 / 9 / 14** for spreads
+> 0.220 / 0.280 / 0.340 / 0.400 — on *both* crown sheets, so 7 identifies **0.220** uniquely
+> (`SPREAD_TILT_SWEEP_TRIES24_20260729.txt`, re-derived here, not taken on p6's word).
+>
+> ⇒ The banked table was taken at **spread 0.220, tilt 45 — the built mounting**, which is exactly
+> where the measurement below was run. **It is like-for-like after all.**
+>
+> ⚠ The lesson survives but changes shape: what rescued the provenance was a *different* artifact
+> written later (the prose block, and the grid's signature), not the table's own field. A silent
+> field is still the defect — `TAKEN AT` exists because of it — and a decoder existing elsewhere is
+> luck, not design.
+
+`sweep_mounting.py:164-168` records why the header was added: the first crown sweep ran entirely at
+one tilt and I reported its result as a property of the crown.
 
 **At the built mounting (spread 0.220, tilt 45), 240 draws:**
 
@@ -69,10 +85,26 @@ mounting**, not a correction of that table.
 | grasp centre | no centre keeps a clear left pose | ⛔ **refuted** — 3 open, 2 are witnesses |
 | work row y | no offset keeps a clear left pose | ⛔ **refuted** — 3 open, 2 are witnesses |
 | crown height | no height passes | ⛔ **refuted** — the tallest head passes |
-| crown radius | (conclusion not stated; mounting not recorded) | **not comparable**; new measurement above |
+| crown radius | left arm zero at every radius | ⛔ **refuted** — 2 of 5 zeros were the sample |
 
-⇒ **Three of the three testable conclusions were refuted.** The fourth could not be tested because
-the artifact does not record the conditions it was taken under.
+⇒ **All four were testable, and all four had sampling zeros.** The radius column at 24 draws read
+0 at every radius; at 240 it reads **3, 1, 0, 0, 0**.
+
+| radius | L clear @24 | **@240** |
+|---|---|---|
+| none | 0 | **3** |
+| 0.020 | 0 | **1** |
+| 0.050 | 0 | 0 |
+| 0.080 | 0 | 0 |
+| 0.110 | 0 | 0 |
+
+### ⚠ And the fails here are the *weak* kind (p5 `-235`)
+
+On the two radius rows where the left arm is clear, **both** arms are — so the interleave was read
+at 1 pair out of 42 and 1 out of 14. On the four failing height rows, 4 pairs out of **546**.
+⇒ **A thin crown at 45° is not excluded**; it was not measured. p5 costs the decision at 56
+distance evaluations for the radius column. ⛔ "No radius gives a witness" is what the table
+supports; "no radius works" is not.
 
 ## 4. Limits
 
