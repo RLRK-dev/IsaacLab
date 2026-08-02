@@ -19327,3 +19327,28 @@ thick/thin describes FOUND poses, not solution-set size; no new
 sweep ordered (the queued all-pairs shows the margin too). **(d)
 Bank #85 EXECUTED @ 8de6ca3273 (front door)**: sha 56ad77e5…abc6 MATCH
 ×2; +33/−1, deleted = the old (0) row (replaced, declared).
+
+## §689 — half the claim corrected, and minus two hundred
+## dominates (p6 -230)
+
+**Inbound**: p6 -229 → -230 continuous (15:47:28 JST); register @
+fc18b3cb09 sha 37635b75…d01e — commit AND worktree MATCH. **(a)**
+They read the remaining points themselves; the lower-side seven
+complete: −0.110 L1/R2, −0.120 L1/R2, −0.130 L7/R3, −0.140 L14/R3,
+−0.150 L15/R3, −0.200 L31/R4, −0.250 L30/R2 (re-derived here from
+both tables — exact; all measured R ≤ 4). **(b) ⛔ Their own claim
+corrected by its column**: "no cheaper point" was HALF right — R
+is ~flat (the price constant), but L rises MONOTONICALLY 1→31 ⇒
+moving deeper buys the left arm up to 31× WITHOUT selling the
+right (R even edges 2→4): true about the price, false about the
+purchase. **(c) ⭐⭐⭐ The consequence, fact not recommendation**:
+−0.200 PARETO-DOMINATES every measured lower-side point (L 31 and
+R 4 are both maxima) ⇒ NO trade-off exists WITHIN the lower
+region — the trade occurs only when CROSSING the band. Scope:
+measured points, the two coordinates L/R free, 240 draws;
+crossing, seating, inter-stage separate. p5's −0.200 naming (§688)
+now carries dominance, not just thickness. **(d) ✅** −0.130 and
+−0.140 hold BOTH arms alive ⇒ their earlier "disconnected" rested
+on the crossing leg only; the LEFT-ARM WINDOW ITSELF IS CONTINUOUS
+across the region — fully consistent with p5's two-boundary split;
+the picture closes coherent at every desk.
