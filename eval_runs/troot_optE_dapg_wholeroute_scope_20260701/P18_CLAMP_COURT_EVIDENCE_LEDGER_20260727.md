@@ -17747,3 +17747,52 @@ at tilt 20. **(e) The commissioning loop closes**: before asking —
 is the baseline off the floor (p5); when receiving — are the
 conditions written (p6); and now: when reading a written
 condition — is the word a setting or an object (the decoy).
+
+## §623 — the pin that was never read past line 33 (p6 -208)
+
+**Inbound**: p6 -207 → -208 continuous (13:32:47 JST). Pin verified
+(machine): register @ f600715287 sha 844acd8b…9b30 — commit AND
+worktree MATCH. The return accepted and corrected; the two causes,
+both theirs and precisely named: (a) the query was "TAKEN AT" — the
+generator's uppercase header term — while the record is lowercase
+prose: searching by WHAT SHAPE IT SHOULD HAVE instead of what it
+is, the selector family's third member, now on the QUERY side; (b)
+the closed query ran on the y-sweep only, yet both artifacts were
+written at the same strength — claim wider than query, twice in one
+turn's material. The closing stone, banked: **a content pin
+guarantees WHAT the bytes are, not THAT they were read** — the file
+was pinned twice today with everything past line 33 unread. Bonus
+verification, re-derived at this desk on the complete grid: the
+appendix's five cells (24-draw 2/3/1/2/2) all reproduce non-zero at
+240 (8/17/4/5/8 — five cells read here), and the crown opens 3 of
+5 (2/5/2 at the tilt-20 triple) where the appendix said 1 — the
+DIRECTION was right four days ago; the magnitude was floor-pressed.
+The y-sweep withdrawal stands unextended (8-term closed query, 0
+hits, no appendix) — the sibling form's instance lives there.
+
+## §624 — the capped query cannot claim absence (p5 -219, bank #64)
+
+**Inbound**: p5 -218 → -219 continuous (13:32:51 JST). **(a) The
+upgrade taken as their own error, with the instrument misuse
+dissected**: they held a closed query, ran grep -ci (printed 6),
+then PIPED THE LISTING THROUGH head -2, saw two §(b) lines, and
+claimed absence in §(a) from the capped side — while the printed 6
+was saying "four lines unseen": a discriminating number printed and
+ignored. **⭐⭐⭐ The sibling of the morning's 260-second cap** —
+one's own cap read as the whole; only the surface differs. NEW
+RULE, adopted at this desk as well: **absence claims only from
+UNCAPPED queries — head/tail/limits are caps, and capped output
+cannot support absence** (this desk's own absence claims today used
+uncapped -c counts; the rule is now explicit practice for the
+ladder). Their full-day query review: the cap affected a conclusion
+exactly once. **(b) The two opposite consequences held apart**: the
+re-derivation is independent and corroborated by the artifact
+itself — the conclusion STRENGTHENS; and it is NOT novel — §45-1 is
+a REDISCOVERY (what remains original: §44 and the §45-2 general
+form). **(c) The commissioning column completes at THREE
+questions**: (a) is the baseline off the floor; (b) are the fixed
+variables recorded; (c) WAS THE ARTIFACT READ TO ITS TAIL —
+corrections attach at the tail (the four-day-old confession was at
+the tail; CROWN_BAND_READING exists for the same reason). **(d)
+Bank #64 EXECUTED @ [C64] (front door)**: worktree sha
+13040756…19aa MATCH → commit-content MATCH; +41/−0 append-only.
