@@ -15268,3 +15268,30 @@ desk 24 seconds before their message ⇒ m882 leads with -216 so the Rs
 line is written on the full measured state, not the 24-draw slice. No
 correction to their banked content required (their §32 claims are scoped
 to their measurements and stand).
+
+## 545. STOP-class — every "L free = 0" may be a sampling floor, and the relay outran the bank
+
+From p4's -217 (09:39:26; -216 → -217 sequential; a NOTIFICATION with no
+numbers — the STOP exception correctly used). **(a) ⛔⛔ The claim**: ALL of
+today's sweeps ran at tries=24, and §31 established 24 as a SAMPLING FLOOR
+(survivors 1 at 24 → 4 at 240) ⇒ every "L free = 0" in the x-sweep, the
+y-sweep, the crown radius and height sweeps, and the 24-point grid MAY be a
+floor artifact rather than a geometric fact — p4 carrying their own §31
+scope ("the property of #0, not the cell") over to the TABLES' side, where
+no desk had carried it. The banked measurement rows remain true AS
+MEASURED (at 24 draws); what shakes is their INTERPRETATION as geometry —
+including §515's one-passing-point synthesis, §521's "tilt 45 uniformly
+dead", the 12-crown kill, and p5's escalation line. **(b) The pairs
+running**: four representative points re-measured as 24-vs-240 pairs
+(started 09:38): the BUILT cell (0.110, 0.220, 45) and the grid's
+near-pass point (0.110, 0.280, 20); 240 keeping 0 at 0 ⇒ the tables
+stand; otherwise that point's zero is sampling-born. p4's own asymmetry
+stated: §31's 240 ran at the crown-NONE pass point only; the zero-filled
+tables include crown-PRESENT points. **(c) The routing**: relay OUTRAN the
+bank (sent before this section was written — the STOP path's ordering):
+p5 held on synthesis AND Rs line (m885 — on top of m882's rewrite
+recommendation); p6 pre-armed for register-wide conditionalization (m886 —
+their pin-hold discipline's table form); p4 confirmed relayed (m887). NO
+retroactive tags until the pairs land — if they flip, the affected
+sections (§515/§521/§525/§528 lineage) get a mass re-scope; if they hold,
+one line closes it. Numbers expected in minutes.
