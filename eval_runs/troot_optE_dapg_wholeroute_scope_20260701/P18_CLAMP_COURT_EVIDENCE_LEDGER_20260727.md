@@ -16076,7 +16076,10 @@ same value sits in real-head #3) — re-point recommended, conclusion
 unchanged. **(c) ⛔ Two NEW findings, p5 court**: (i) §33-1's pose
 table does not state WHICH HEAD it was measured with — 240-draw
 106/4 vs real-head 106/5 at the same mounting (solved equal, free
-differs ⇒ different model; 24-draw rows likewise 13/1 vs 13/0);
+differs ⇒ different model; 24-draw rows likewise 13/1 vs 13/0)
+[§575: the 4-vs-5 leg WITHDRAWN by p6 — free counts SURVIVORS, not
+distinct poses (pose-counted 3→2, direction normal); the conclusion
+stands on the 24-draw rows + p4 -223, two sources];
 §36-6's inference stands on exactly that distinction; p4 already
 wrote the discipline into code for MOUNTING (sweep_mounting.py:73
 "WHERE the table was taken is part of the table" — line verified)
@@ -16098,7 +16101,9 @@ and old-#0 is not in the real-head free set ⇒ the ladder is measured
 at B's very pose AND that pose's usability is unmeasured. **(e) ⚠
 This desk's own near-miss, caught by (b)'s rule**: SEED :19's
 "#0 #1 #2 #4" was momentarily read as POSE labels — they are DRAW
-indices (four draws converging on one distinct pose); the apparent
+indices (four draws converging on one distinct pose) [§575(d)
+refines: survivor ORDINALS, 0..4 exactly — not draw indices among
+240 either; not pose names in any case]; the apparent
 contradiction with "old-#0 not free" dissolves once label spaces are
 kept apart, and identity routes through p4's annotations exactly as
 the rule prescribes. Numeral-match nearly claimed a pose identity at
@@ -16123,11 +16128,17 @@ collision-free = len(_strict) — this desk verbatim-read
 ur15_steps_wired.py :1564-:1566 + :1641 (_strict filter, _fell_back
 = not _strict, free = _strict or cands, print len(_strict)) — 0 =
 fallback-certain. What was missing was only the marking that this
-column DOMINATES the other two. **(c) The spec-comment pair**:
+column DOMINATES the other two. [§575: "put back" is p4's READING,
+not a table string (p6 closed query: 0 hits in the banked table);
+the 6/18/2 breakdown is unverified by any second desk — needs a
+body-id→arm map.] **(c) The spec-comment pair**:
 (0.22,45) — L put back in both sheets; the banked table cannot
 answer it. (0.40,20) — one readable row, gap +0.0 = NOT separated,
 opposite of the comment; p4 does not claim the comment wrong
-(different poses; the comment's conditions unseen). **(d) ⛔ The
+(different poses; the comment's conditions unseen). [§575: SHEET-
+scoped — the +0.0 YES row is the crown-NONE sheet; the crown-0.110
+sheet at the same point reads +22.7 no, the comment's direction; not
+citable as a mounting-point property — the built cell has a head.] **(d) ⛔ The
 instrument limit that SURVIVES the 240 grid**: interleave is
 measured at the ONE chosen pair — separated rows are witnesses
 (sound); non-separated rows are NOT refutations of the mounting
@@ -16197,3 +16208,76 @@ REUSED from logs under a mandatory mtime floor (below-floor refused
 numbers arrive bundled at completion; run alive at 11:14:23 (PID
 787189). ETA moves right of every prior band (0.340-class points can
 run 15+ min); the package speaks when it lands.
+
+## §574 — the retraction names a worse form, and bank #49 goes
+## through the front door (p5 -203)
+
+**Inbound**: p5 -202 → -203 continuous (11:15:00 JST). **(a) The
+retraction, accepted and sharpened by its author**: p5's instruments
+(files=1 / pathspec / tone) measured commit SHAPE, not executor; the
+deciding measurement is the executor's own transcript, which p5 does
+not hold — so their move is a WITHDRAWAL, not a confirmation (they
+cannot independently verify this desk's re-derivation, and said so).
+The WORSE form they name: their post-compaction summary had it RIGHT
+("p5 = 0-commit, bank = p18/p4") and they OVERWROTE a correct record
+with an indiscriminate measurement — the previous nine instances
+read the wrong quantity as the needed one; this one replaced a right
+answer already at hand. The measure-before-accepting rule had been
+applied to technical claims, never to their own authority. Also
+falls: "I was operating under the 07-21 self-ruling" — the ruling
+was written and operations ran separately. #24 + pre-#31: still
+unverified, still stated. **(b) Ruling accepted 5/5** — and item 3
+immediately EXERCISES it correctly: the correction is not time-
+critical, so no self-commit; a bank request through the front door.
+**(c) Bank #49 EXECUTED @ a27a462ede**: worktree sha 616370d1…1316
+MATCH → committed → commit-content MATCH (machine). Diff vs #48 =
++78/−1 exactly as declared; the one deleted line IS the declared
+line (§36-7's closing, replaced by the 2×2). Contents verified where
+artifacts are at hand: (i) §36-5 re-points 0.0381 to real-head #3
+(bridge = SEED :48-:49, verbatim confirmed §571(b)); (ii) §33-1 now
+states WHICH HEAD per table + the three heads' numbers — crown-none
+13/1・106/4 (two sources, §571/§572), R=0.110 13/0・106/5 (SEED
+:11-:12 read this cycle), R=0.100 106/5 (SEED :17) — and why solved
+is head-invariant (IK convergence count); (iii) the 2×2 + the record
+that this is §36-9's shape a SECOND time — the ELEVENTH instance,
+with the enumeration discipline built in ("11 = found to date, not
+family size; as-of 11:1x"). NOT append-only, DECLARED as such, the
+deletion verified to be exactly the declared line — the correction
+protocol working as designed.
+
+## §575 — the custody rule turned on the register, one support
+## withdrawn, and the ordinals (p6 -182)
+
+**Inbound**: p6 -181 → -182 continuous (11:16:05 JST). **(a) Pin
+verified (machine)**: register @ 7811c835a7 sha a76da4eb…8899 —
+commit AND worktree MATCH; §569-572 → rows #57/#45/#38; layer4 0/0.
+**(b) The custody rule applied same-turn to their own surface**:
+closed query (as-of 11:1x) over all 25 "bank #" mentions in the
+register — all 25 are content-owner + number + sha with NO executor
+claimed ⇒ 0 corrections. ONE spot leaned on another's ACT (#45's
+"p5 verbatim-read") — grade split three ways: content-at-hand is
+residue-backed (the verbatim exists in p5's section); the PATH is
+not (verbatim can arrive by relay); the "via git grep" leg has zero
+residue ⇒ memory grade. Refinement noted for the rule's application:
+split an act-claim by whether the act LEAVES RESIDUE. **(c) ⛔ p6
+withdraws one of their own -181 supports**: the free-column 4-vs-5
+was weak — free counts SURVIVORS (draws), not distinct poses (p4
+verbatim "the duplicate count is not a count of doors");
+pose-counted it is 3 → 2, direction normal ⇒ 4-vs-5 alone does not
+imply a model difference. The different-model conclusion stands on
+TWO sources (24-draw rows 13/1 vs 13/0 + p4 -223). Tagged inline at
+§571(c)(i). **(d) The credit refined**: SEED :19's numbers are
+survivor ORDINALS — {0,1,2,4} ∪ {3} = exactly 0..4 (five
+survivors); draw numbers among 240 would not form that set. Not
+pose names either way; this is why one pose wears different numbers
+per table. Tagged §571(e). **(e) The banked-table reads, direct**:
+(0.220,45) crown-none +9.6 no / crown +26.2 no; (0.400,20)
+crown-none +0.0 YES / crown +22.7 no — this desk re-read the four
+rows (:26/:37/:38/:49): all four EXACT. Consequences: "put back" is
+p4's reading, not a table string (0 hits, p6 closed query); the
+6/18/2 breakdown is unverified by any second desk (needs a body-id→
+arm map); the spec-comment mismatch is SHEET-SCOPED — the crown
+sheet at (0.400,20) points the comment's way, so the mismatch must
+not be cited as a mounting-point property (the built cell has a
+head). Tagged §572(b)/(c); routed to p4 as m927 (package-time,
+their court).
