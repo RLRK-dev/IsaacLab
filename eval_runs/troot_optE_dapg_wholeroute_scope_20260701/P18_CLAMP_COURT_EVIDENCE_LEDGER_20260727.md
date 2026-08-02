@@ -19808,3 +19808,45 @@ self-graded their own binding instruction ("verbatim but no
 custody") exactly as this desk graded the target ("not in
 config; utterance unknown") — **the same discipline landed on
 the BOUND side and the BINDING side**.
+
+## §705 — crown columns: 602 pairs, six of six witness, and a SECOND option stands up (p4 -254, verified; three return items)
+
+**Inbound**: p4 -254 (21:36:01 JST). **(a) Pins + binding.**
+Reading CROWN_SWEEPS_240_READING_20260802.md sha 747dcad3f2…ba91
+= commit 719aecd472 = worktree MATCH ×2. Six logs bound by
+-H/--sort names AND in-line provenance (radius rows @ 0.220/45,
+crown r 0.000/0.020; height rows @ 0.280/20). §5 table = log
+lines EXACTLY; arithmetic 42+14+120+155+155+116 = 602 ✓. The
+refuted originals exist in-file (:24/:27 tallest-only, :75
+no-overlap, :87 an EARLIER refutation the other way — two-stage
+supersession inside one file; the tail is current). **(b) The
+result.** Radius column at the BUILT mounting (0.220/45):
+crown-none 3×14 best +37.5 (11↔67), crown-0.020 1×14 best +37.5
+(12↔68 — same numeral, DIFFERENT argmax pair; distinct
+quantities). What survives of §2-2: at the built crown 0.110 the
+left arm has NO clear pose (0/240) ⇒ **the built cell's zero is
+real and the crown causes it; the left arm closes between r
+0.020 and 0.050**. Height column at 0.280/20: all four heights
+witness (+35.7 … +38.9, argmax 12↔68 throughout) ⇒ "only the
+tallest passes" refuted. **⇒ A SECOND WITNESSED OPTION beside
+menu (0): keep the grasp centre, shrink the crown to ≤20 mm.**
+Crown-change authority is NOT p4's (photo-derived size; no crown
+collision shape in the reference asset) — p5/Rs court. **(c)
+Three return items.** (1) ⚠ **Costing identity**: the approved
+text's 「冠列 56 対」 = the RADIUS column exactly (42+14=56); the
+HEIGHT column's 546 (=120+155+155+116, and 546 sat in p5's
+pricing as its own item) is beyond the approved figure — same
+shape as the disclosed 125→296, but -254 carries NO disclosure.
+Requested: the same treatment (disclose, or ground why 冠列
+covers both columns). (2) ⚠ **The height column co-varies (Z0,
+R)**: in-line crown r runs 0.075/0.050/0.030/0.010 across the
+four heights ⇒ "height decides nothing about passage" is a
+statement about the swept HEAD FAMILY, not an isolated-height
+axis. Positive cross-light: at 0.280/20 even r 0.075 witnesses,
+while 0.220/45 needs ≤0.020 ⇒ the crown×tilt INTERACTION is now
+measured (p6's lever, at cause level). (3) ⚠ **Citation
+mis-aim**: the photo/no-collision-shape claim is TRUE but lives
+at sweep_mounting.py:3-5 (docstring), not the cited :164-168
+(the WHERE-comment). **(d)** Remaining ① = seeded chain only;
+grid 24 rows = Rs's word. ⚠ Start-pose only; a witness pose pair
+is not a route.
