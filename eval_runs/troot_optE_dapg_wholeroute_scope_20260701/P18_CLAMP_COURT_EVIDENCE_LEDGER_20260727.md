@@ -17593,7 +17593,11 @@ judgment stays Rs's.
 **Inbound**: p5 -215 → -216 continuous (13:19:57 JST). **(a) The
 self-application, verified at this desk**: applying p4's "other
 sweeps are 24-draw and undecided" to their own court, p5 found
-their §24-3 grasp-centre sweep RAN AT TILT 45 — identified by a
+their §24-3 grasp-centre sweep RAN AT TILT 45 [§621: for THIS
+artifact the identification is a STRONG INFERENCE (unique within
+the grid), not a record — the file carries no mounting statement;
+p5 -218 splits the column and holds the conclusion because the
+inference supported only a WITHDRAWAL] — identified by a
 four-number match, re-derived here: the sweep's centre +0.150 row
 reads 7 / 0 / 17 / 2 (GRASP_CENTRE_SWEEP_20260729.txt, located BY
 CONTENT SHA b6dff450… — the file matches), and the banked 24-draw
@@ -17629,7 +17633,10 @@ radius (0.020/0.050/0.080/0.110 re-read here) with r=0.110's R =
 17/2 — the same build signature as §618's identification ⇒ the
 sweep ran at 0.110/0.220/45, where tilt 45 admits no left-arm
 start at any spread ⇒ NO radius could have produced anything but
-zero. **⭐⭐⭐ §26's "no head sits on a passing point" was a
+zero. [§622: for the RADIUS sweep this is a RECORD, not an
+inference — the artifact's own 07-29 correction appendix states
+"Every row of this table was taken at the built tilt of 45
+degrees" (:37).] **⭐⭐⭐ §26's "no head sits on a passing point" was a
 conclusion about TILT 45, not about heads.** §39 had already
 expired §26 — rightly, but for the incomplete reason (24 draws);
 the reason is now complete. **(b) The GENERAL FORM, banked once
@@ -17679,3 +17686,64 @@ numbered options (①②③) with undefined referents are retired,
 OPTIONS ARE CALLED BY WORDS. Recommendation (2)'s three supports
 restated: one-of-74, the weak edge, and the convergence of two
 open measurements on 0.110/0.220/20.
+
+## §621 — the recorded column and the inferred column are split,
+## and an inference may retract but not assert (p5 -218, bank #63)
+
+**Inbound**: p5 -217 → -218 continuous (13:27:22 JST; the header's
+FROM/TO arrived inverted and was self-corrected inline — noted).
+**(a) The third column becomes TWO questions**: (a) is the
+baseline outcome off the floor; (b) does the artifact RECORD what
+it fixed. p5's four-artifact survey re-derived here (grep counts):
+WORK_ROW_Y tilt 0 / spread 0 / TAKEN-AT 0; GRASP_CENTRE 0 / 0 / 0;
+CROWN_RADIUS TAKEN-AT 0 (but see §622 — an appendix records it in
+prose); CROWN_HEIGHT recorded ("TAKEN AT spread=0.280, tilt=20 deg
+-- every row"). **(b) The self-finding**: their §45-2 mounting
+column had mixed records and inferences without distinction. The
+inference's grade stated in full: the 4-number signature is unique
+WITHIN the 24-row grid, but a mounting outside the grid cannot be
+excluded ⇒ "ran at tilt 45" rewritten as STRONG INFERENCE for the
+grasp-centre sweep. **(c) ⭐⭐⭐ The direction principle, banked**:
+the conclusion HOLDS because the inference was used to WITHDRAW
+their own claim (conservative side); an inference of the same
+strength would NOT be used to ESTABLISH one. Same-shape self-check
+run and clean (no "grasp-centre is dead" line exists in their
+doc). Tagged §618(a). **(d) Bank #63 EXECUTED @ 203eae9427 (front
+door)**: worktree sha 6ee9815e…ae60 MATCH → commit-content MATCH;
++36/−0 append-only.
+
+## §622 — the query closes with its decoy, and the artifact had
+## already confessed (p6 -207)
+
+**Inbound**: p6 -206 → -207 continuous (13:27:40 JST). **(a) Pin
+verified (machine)**: register @ 4a4f46680b sha 47107168…df41 —
+commit AND worktree MATCH. **(b) Their own basis widened, then
+guarded**: the y-sweep's "no mounting" had been written from ONE
+word (tilt) — claim wider than query, self-caught; closed with all
+terms (tilt/TILT/spread/SPREAD/YOKE/TAKEN — all 0). And the decoy
+found: crown = 16 hits, ALL as the collision PARTNER in blame
+lines, none as a setting ⇒ **the existence of a word is not the
+existence of provenance; the adjudicating query must exclude
+object-name usages**. **(c) ⛔ The same blade cuts back on
+CROWN_RADIUS — a return, with the lines**: p6's -207(3) said its
+mounting is "not written, reconstructed by signature" — but this
+desk's classification of the 6 tilt/spread hits finds the
+artifact's own CORRECTION APPENDIX (added 07-29 20:4x, :35-:43):
+":37 Every row of this table was taken at the built tilt of 45
+degrees" and ":43 the crown does own part of it -- just not at the
+tilt this table happened to be taken at" ⇒ the mounting IS
+recorded (in prose, not a TAKEN-AT header), and — the larger find
+— **p4 had already written today's key insight into the artifact's
+tail four days ago**: the tilt-45 confound was confessed at :43 on
+07-29. p5's §26 re-attribution stands as an independent
+re-derivation CORROBORATED by the artifact's own appendix; the
+record/inference split shifts to records 2 (HEIGHT by header,
+RADIUS by appendix) / inference 1 (GRASP_CENTRE). Tagged §619(a).
+**(d) The caveat strengthened, decisively**: the invalidation of
+the 24-draw sweeps has TWO reasons — the draw floor AND the
+tilt-45 saturation — and the grid proves more draws do NOT restore
+power ⇒ the fix is the MOUNTING, not the draw count; recommission
+at tilt 20. **(e) The commissioning loop closes**: before asking —
+is the baseline off the floor (p5); when receiving — are the
+conditions written (p6); and now: when reading a written
+condition — is the word a setting or an object (the decoy).
