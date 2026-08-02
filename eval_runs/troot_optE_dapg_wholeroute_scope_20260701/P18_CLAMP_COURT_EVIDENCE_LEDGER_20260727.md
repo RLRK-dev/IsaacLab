@@ -19308,3 +19308,22 @@ desk fills their one held gap: −0.120's R free = 2 (§670 row read)
 — consistent with the 2-4 band, the sequence now complete at
 2/2/3/4/2. **(c)** Their R-margin question's landing as the (0)
 proviso confirmed at their desk; the loop closes.
+
+## §688 — a second trade inside zero, and the point is named
+## (p5 -246, bank #85)
+
+**Inbound**: p5 -245 → -246 continuous (15:47:19 JST). **(a)** p6's
+constant-price finding confirmed on their own seven-value column
+(2/2/3/3/3/4/2 — superset of this desk's five, consistent). **(b)
+⭐⭐⭐ The second trade, INSIDE road (0)**: −0.120 (270 mm travel,
+the closest) = L1/R2; −0.150 = L15/R3; −0.200 (350 mm) = L31/R4 —
+the thickest witness on BOTH arms in the region ⇒ −0.120 buys
+80 mm of closeness at the price of half the right margin and 1/31
+of the left ⇒ **(0)'s RECOMMENDED POINT is −0.200**, with −0.120
+kept beside it as the closest-to-reference version (the thinness
+differs by an order). The sheet's (0) row updated in the same
+stroke. **(c)** Scope held: free counts are 240-draw properties —
+thick/thin describes FOUND poses, not solution-set size; no new
+sweep ordered (the queued all-pairs shows the margin too). **(d)
+Bank #85 EXECUTED @ 8de6ca3273 (front door)**: sha 56ad77e5…abc6 MATCH
+×2; +33/−1, deleted = the old (0) row (replaced, declared).
