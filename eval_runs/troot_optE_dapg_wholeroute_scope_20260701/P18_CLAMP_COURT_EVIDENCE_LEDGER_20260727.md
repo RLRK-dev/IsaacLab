@@ -18771,7 +18771,14 @@ overtaken. **(c) ⛔ The FOURTH could not be re-verified — the
 provenance lesson made flesh**: the banked radius table records no
 mounting (the TAKEN AT header exists BECAUSE of this exact
 failure) and the point logs were overwritten ⇒ the original
-mounting is UNRECOVERABLE from artifact and logs alike. The
+mounting is UNRECOVERABLE from artifact and logs alike. [§664: TOO
+STRONG — p6 -221 decodes it: the tilt is in the artifact's own
+prose (:37) and the spread by the solved-count signature, UNIQUE
+among the swept spreads (L solved at tilt 45 = 7/8/9/14, identical
+both sheets — re-verified here); a like-for-like rerun IS possible.
+The lesson SHARPENS rather than falls: the decoder is a LATER,
+OTHER artifact — the silence was saved by others' records, not its
+own.] The
 replacement measurement NAMES its mounting (built 0.220/45): the
 left arm closes between radius 0.020 and 0.050 (3/1/0 — column
 re-read here), and NO radius yields a witness at that mounting —
@@ -18784,4 +18791,54 @@ not record its own conditions. No 24-draw pending remains. The
 decision sheet (§662) stands unchanged: the height result
 reinforces road (1)'s mounting picture; the radius result closes
 the radius axis at the built mounting (the 45° exit remains the
-bow hypothesis alone).
+bow hypothesis alone). [§665: OVERSTATED at this desk and in the
+15:08 Rs note — p5 re-grades the failing rows: the top two radius
+rows (none L3/R14, 0.020 L1/R14 — re-read here) are the WEAK
+both-clear class, 1 measured pair of 42 and of 14 ⇒ A THIN CROWN
+IS NOT EXCLUDED at 45°; 56 evaluations decide it; the 45° exit is
+NOT (3)-only.]
+
+## §664 — the fourth case is decodable after all (p6 -221)
+
+**Inbound**: p6 -220 → -221 continuous (15:10:17 JST); register @
+46c3143ed9 sha 3d64039a…a915 — commit AND worktree MATCH. **The
+return accepted with re-derivation**: "the mounting is
+unrecoverable" was too strong — the TILT lives in the artifact's
+own prose (:37), and the SPREAD decodes by the solved-count
+signature, UNIQUE among the swept spreads: L solved at tilt 45 =
+7 / 8 / 9 / 14 across 0.220/0.280/0.340/0.400, identical on BOTH
+sheets (this desk re-derived all eight values — exact) ⇒ the
+radius table's 7 names spread 0.220 uniquely (scope: within the
+four swept spreads) ⇒ a like-for-like rerun IS possible; p4's
+"could not re-verify" softens to "did not, but can". **The lesson
+sharpened, not dropped**: the decoder is a LATER, DIFFERENT
+artifact — the silent table was saved by others' records, not its
+own; without a decoder the same silence is truly fatal — the
+TAKEN-AT header's origin story stands. Tagged §663(c).
+
+## §665 — the thin crown is not excluded (p5 -235, bank #77)
+
+**Inbound**: p5 -234 → -235 continuous (15:10:30 JST). **(a) This
+desk's relay weakened one notch, correctly**: "no radius works" /
+"other heights don't" was the WRONG modality — the artifacts say
+"no radius YIELDED A WITNESS" / "only the reaching head WAS A PASS
+ROW". The failing thin-crown rows are the WEAK both-clear class
+(none = L3/R14, 0.020 = L1/R14 — rows re-read here): 1 measured
+pair of 42 and of 14 ⇒ **A THIN CROWN IS NOT EXCLUDED AT 45° — 56
+distance evaluations decide it**; the height sweep's four fails
+likewise measure 4 pairs of 546. This desk's 15:08 Rs line ("the
+45° exit is (3) alone, settled") was the overstated form — owned,
+tagged §663(d), corrected to Rs. **(b) The sheet updates**: road
+(3) is no longer the only 45° head candidate — the THIN CROWN is a
+cheaper live one (no new geometry; the bow still never run);
+whether r = 0.020 BUILDS is out of p5's court (but far more
+buildable than none). The all-pairs targets grow: +56 (radius) +
+546 (height) ⇒ total ≈ 1912 pairs across all queued checks. **(c)**
+The prediction-confirmed note banked: the height reading moved
+exactly as p5's §45-2 classification predicted (instrument sound,
+answer overtaken) — the classification's first confirmed
+prediction. The height sweep's mounting: absent from the table,
+identified by the 106/122 signature as (0.280, 20) — INFERENCE
+grade, kept. **(d) Bank #77 EXECUTED @ 35f508836b (front door)**:
+worktree sha abe8695c…32d5 MATCH → commit-content MATCH; +44/−0
+append-only.
