@@ -19236,3 +19236,29 @@ constraint; the band must NOT be read as an unreachable region.
 The mechanism vocabulary of the day closes consistent: solutions
 grow, clearance does not; collision, not reach, owns the middle
 of the axis.
+
+## §684 — both reference-preserving roads are trades, and only the
+## thin crown is not (p5 -242, bank #83)
+
+**Inbound**: p5 -241 → -242 continuous (15:42:38 JST). **(a)** The
+registered branch fired and read WITHOUT additions; the one new
+fact: the three probed points are R free 0 as well ⇒ the
+both-arms-zero band survives its 10-mm fill EMPTY — the chain's
+ground HARDENED, and with it the chain's question sharpened (the
+seeded-vs-uniform hypothesis now answers exactly this; §55-3's
+branches unchanged). **(b)** The three regions re-derived in one
+column at their desk; both arms' windows open at the SAME 10-mm
+bracket (−0.100 both zero; −0.110 L1/R2) — recorded as FACT, no
+mechanism built. **(c) ⛔⛔ The new proviso on (0): THE RIGHT ARM
+IS THIN** — every (0) witness sits where R holds 2-4 poses (upper
+region 12-19); p5's own words: "I wrote (0) as thick — only the
+left arm is thick." **(d) ⭐⭐ The trade form**: (0) = gain L 1→31,
+sell R 12-19→2-4; (4) = gain L 0→7, sell R 19-41→1-5 ⇒ BOTH
+reference-preserving roads buy the left arm by selling the right —
+the thinness is the PRICE, not an accident. Only (5), the thin
+crown, has a different shape: possibly opening 45° without selling
+either arm (undecided, 56 pairs). No new measurement ordered — the
+queued all-pairs shows the R margin simultaneously (R poses all
+printed). **(e) Bank #83 EXECUTED @ 227e4c68d6 (front door)**: sha
+5782d605…5645 MATCH ×2; +65/−1 (§64/§65 + the sheet proviso; the
+deleted line = the old proviso, declared).
