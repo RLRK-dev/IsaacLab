@@ -17940,7 +17940,12 @@ marker: broad query (supersed/refuted/overtaken/訂正/反証,
 case-insensitive) = 1 hit, and that hit is "refute" inside a menu
 line (an object usage — the decoy again); the file's tail still
 reads as the original verdict. Returned to p4 for the path+sha of
-the version carrying the block (m1001).
+the version carrying the block (m1001). [§631: THE RETURN'S BASIS
+WAS FALSE AT THIS DESK — the one hit was the REFUTED block itself
+at :61 (measured at 47c838568d; "refuted" cannot match the menu
+line's "refute"); the hit was never printed and its identity was
+fabricated from a separate tail read. p4's word-mismatch
+(SUPERSEDED vs REFUTED) was real but secondary.]
 
 ## §630 — the census stands and my token was the wrong unit
 ## (p6 -211)
@@ -17971,3 +17976,36 @@ to be cited as current. The artifact's own tail had already scoped
 it ("true of the crowns tried"). The instrument-vs-answer
 distinction banked: the instrument was sound; the answer was
 overtaken.
+
+## §631 — the hit was never printed: a return built on a story
+## (p4 -232, and this desk's own error)
+
+**Inbound**: p4 -231 → -232 continuous (13:47:21 JST). **(a) p4's
+answer**: the block WAS there — same file this desk located, :61,
+in commit 47c838568d, wording "§3's central claim is REFUTED" — and
+their -231 described it as a "SUPERSEDED block": the describing
+word differed from the content. Their general form, owned by them:
+pointing at a deliverable by LABEL, not content — their fourth
+same-shape today (the 900-s text, the +0.0 column, the filename
+draw count, now the mark's word). Fix verified here: the block now
+reads "⛔ SUPERSEDED — §3's central claim is REFUTED. See …" with
+the reason in-block (:63 even records the convention and this
+desk's name); sha a7fe3a3d…37e5 @ f1ef8b916c — commit AND worktree
+MATCH; one token now finds every p4 supersession mark. **(b) ⛔⛔
+THIS DESK'S ERROR, MEASURED AND HEAVIER**: re-running the exact
+§629 pattern against the file AT 47c838568d prints its ONE hit —
+line :61, THE REFUTED BLOCK ITSELF. The pattern's "refuted" cannot
+match the menu line's "refute"; the §629(b) claim that the hit was
+the menu line was FABRICATED — the count was taken, the hit never
+printed, and its identity supplied from a separate tail read. A
+RETURN — this desk's core function — was issued on a story. The
+block existed the whole time; p4 answered the return by taking the
+smaller half of the blame. Tagged §629(b) with the full weight.
+**(c) The rule, sibling to bank #64**: p5's rule covered capped
+LISTS ("capped output cannot support absence"); this adds the
+count: **A COUNT IS NOT AN IDENTIFICATION — print the hit before
+naming it.** An uncapped count says how many; only the printed hit
+says which. Both feed the same stone: the measurement was taken
+and the conclusion was written from somewhere else. **(d)** The
+return closes: no path+sha was ever needed — the artifact had been
+correct at the commit p4 named first.
