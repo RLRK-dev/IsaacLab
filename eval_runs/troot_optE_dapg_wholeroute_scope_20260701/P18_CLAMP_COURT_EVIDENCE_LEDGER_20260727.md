@@ -19990,3 +19990,45 @@ problem was a MODEL ERROR from the start. Only Rs can answer
 (hardware and photo are with Rs). Doc reflection HELD by p5
 until #92 landed (pin-freeze discipline applied by the pin's
 own author); folds in as their §74 next.
+
+## §712 — STOP-class: the reference has a solid the sim cell does not (p4 -256, verified; rotation flag added; possible identification surfaced)
+
+**Inbound**: p4 -256 (21:47:54 JST). **(a) Verified at this
+desk**: URDF ur15-dual-arm-cell.urdf carries link `stereo_head` +
+fixed joint `stereo_head_mount`, parent cell_base, origin xyz
+(0, −0.175, 1.485), **rpy (2.356194, 0, 0) — ROLL 135° about x**
+(p4 quoted one value; the triple read here). Doc §Stereo head:
+pitch_below_horizontal 45°, baseline 0.176, **body_size_m [0.24,
+0.085, 0.075]** — a 240×85×75 mm SOLID; doc :3 "a stereo head
+between the arms". Sim spec: stereo/head_mount = 0 hits;
+"camera" = 3 hits, ALL recording-commentary (Tier C notes) ⇒
+p4's absence claim is wrong in letter (grep 0 does not survive
+the camera term) but **VERIFIED in substance: no stereo head is
+modeled**. **(b) ⚠ ROTATION FLAG (this desk's addition)**: p4's
+box extents are axis-aligned (y −0.2175..−0.1325, z
+1.4475..1.5225). If body_size_m is a LOCAL-frame box, the 135°
+roll rotates it: world y ±0.0566 ⇒ −0.2316..−0.1184, z
+1.4284..1.5416 ⇒ **the corner would poke ABOVE the mounting
+line (1.542 > 1.530) and 14 mm closer to the work line than p4's
+figure** — the (a) "y bands do not overlap" likelihood weakens;
+which frame body_size_m lives in must be settled before the
+re-run. **(c) ⚠ OPEN IDENTIFICATION QUESTION (surfaced, not
+asserted)**: the built crown (cylinder r 0.110, top at z 1.530,
+at the mast top) and the reference stereo head (box at the mast
+top, half-width 0.24/2 = **0.120**, top ≈1.523 unrotated /
+≈1.542 rotated) sit in the same place with echoing dimensions ⇒
+**is p5's photo-read crown a model OF the stereo head?** If yes:
+the crown was never referent-less (§709 twist — the referent
+existed under ANOTHER NAME; the locator "crown" was not the
+object again), and (5) "thin to ≤20 mm" would contradict a real
+240 mm-wide solid — for p5/p4 confirmation and Rs. **(d)
+Conservatism**: the missing obstacle is NON-CONSERVATIVE (makes
+success easier) ⇒ §15: affected witnesses need high-fidelity
+confirmation before transfer. p4's CROWN_BAND §Reading 3
+("escape ≥50 mm behind the plane is free ⇒ yes") is REFUTED —
+that space is the stereo head's. **(e) Routing ruling on (ii)**:
+the one-witness re-run WITH the head box = probe-class (the
+day's sweeps varied the cell model freely; this one RESTORES a
+reference element) ⇒ in-class GO from this desk, flagged to Rs;
+the box's frame question (b) to be settled first. Cell-spec
+IMPLEMENTATION stays report-only (Rs/p5 court), as p4 held it.
