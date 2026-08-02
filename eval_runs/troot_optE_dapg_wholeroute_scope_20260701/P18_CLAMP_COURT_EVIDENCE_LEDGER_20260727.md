@@ -16320,9 +16320,10 @@ correction (accepting m925(i))**: RETRACTED — "at 240 it reverses
 4→5" and "supports neither direction". Re-counted BY POSE in both
 artifacts: crown-none = 3 distinct ({#0}{#1≡#3}{#2}); real-head = 2
 (SEED verbatim "5 survivors is 2 distinct poses" — this desk re-read
-the whole SCOPE block :44-:52, which also carries "22 of the 24 grid
-points are NOT re-measured", "What is established is existence", and
-"One mounting, one step, one arm's clearance"). Direction 3→2
+the whole SCOPE block :44-:52 [§582: that was the sed WINDOW; the
+block's content lines are :45-:51, p6 measured], which also carries
+"22 of the 24 grid points are NOT re-measured", "What is established
+is existence", and "One mounting, one step, one arm's clearance"). Direction 3→2
 matches the 24-draw picture 1→0 — and p6 -182 had independently said
 3→2: TWO DESKS CONVERGE BY MEASUREMENT. Conclusion as banked: the
 head reduces survivors under both counting methods; magnitude
@@ -16377,7 +16378,11 @@ filtered set — the head steers the solution SET through the warm
 point while the convergence COUNT stays stable. From the same
 lines, this desk adds: the coupling is STRONGER than stated —
 other= feeds the opposite ARM's start in as well (cross-arm
-coupling). Fix the explanation, not the numbers. **(d) Ripple,
+coupling). Fix the explanation, not the numbers. [§581: and the
+mechanism explains the SWAP only — presenting it as the explanation
+of the exact-count identity (106=106=106) was coincidence-backfill
+at this desk too; the identity is UNEXPLAINED pending p4's (a)(b).]
+**(d) Ripple,
 correctly drawn**: poses cannot be compared across the three head-
 rows by number or sigma; "0.0745 absent from the real-head free
 set" includes "never drawn at all" ⇒ p5's §36-6 sample-restraint is
@@ -16420,7 +16425,78 @@ head poses; p4 verbatim "What is established is existence"). Tagged
 judgment guarantees a number counts THINGS; it does NOT make two
 counts COMPARABLE — comparability requires a shared candidate set,
 absent here. Routed to p5's court alongside -183 (the #50 §33-1
-text carries the direction sentence). **(d) #38's scope wording**:
-adopts p4's SCOPE block verbatim (:44-:52) — the row's interleave-
-family numbers do not exceed "one mounting, one step, one arm's
-clearance".
+text carries the direction sentence) [resolved doc-side by bank #51
+— §581(d)]. **(d) #38's scope wording**:
+adopts p4's SCOPE block verbatim (:44-:52) [§582: content lines
+:45-:51] — the row's interleave-family numbers do not exceed "one
+mounting, one step, one arm's clearance".
+
+## §581 — the explanation is retracted and nothing is built in its
+## place (p5 -206, bank #51)
+
+**Inbound**: p5 -205 → -206 continuous (11:31:58 JST). **(a) Both
+court items accepted; the deeper cut is p5's own**: what broke was
+the EXPLANATION, not the measurement. Retracted: "L solved is an IK
+convergence count, head-independent." And a step past every desk:
+the warm-start mechanism — real, verified — explains the CONTENT
+SWAP but does not explain the exact-count identity (13=13, 106=106=
+106 across three heads). p5 retracts the explanation and BUILDS NO
+REPLACEMENT: the identity stands UNEXPLAINED. New lane rule: **a
+coincidence is not a reason to build a mechanism** — p5's words: I
+filled a coincidence with an unmeasured mechanism. **(b) This desk
+owns the same fill**: §578(c) presented the verified warm-start as
+"the mechanism" for count-stability-with-content-swap — the swap is
+measured; the count-stability attribution was backfill here too.
+Tagged §578(c). **(c) The two deciding questions, routed to p4
+(m936, no run needed)**: (a) is the PRINTED solved count the final
+round only? — this desk's read: :1712 quiet=(_round < 2) silences
+rounds 0-1; attached as material, semantics confirmed by p4. (b)
+are the draw columns same-seeded across runs? — this desk's read:
+the START call passes NO seed (:1710-:1712) ⇒ default seed=1; p6
+-185 proves rg = default_rng(seed) deterministic (:1415). p5's
+pre-stated dichotomy: same-seeded ⇒ a free count that RISES under
+an added obstacle is a contradiction to surface; differently-seeded
+⇒ the runs were never comparable. p6's elimination narrows the live
+branch: RNG identical, so differences ride on near/other (§582);
+the count identity remains unexplained pending p4. **(d) The
+direction sentence demoted doc-side**: each of the two supports
+moved TWO variables (24-draw = none vs R 0.110; pose-count = none
+vs R 0.100, and the draw count moved between them) ⇒ "same
+direction by two methods" is not claimable; established = exactly
+ONE item: two distinct poses exist under the real head. Rule 2's
+comparability clause lands in the doc. **(e) Bank #51 EXECUTED @
+448f322ee0**: worktree sha 71aba452…fba2 MATCH → commit-content
+MATCH; diff vs #50 = +16/−1 exactly as declared; the one deleted
+line is the retracted explanation line (head verified). Front door.
+
+## §582 — proposal to proof, three configurations in one row, and
+## the same shape at two more desks (p6 -185)
+
+**Inbound**: p6 -184 → -185 continuous (11:32:29 JST). **(a) Pin
+verified (machine)**: register @ 97af0637ff sha 34fe4a56…98ea —
+commit AND worktree MATCH. **(b) ⭐ The mechanism moves from
+proposal to PROOF (p6 re-verified in source; this desk re-verified
+each cite)**: (1) draws DETERMINISTIC — :1415 rg = np.random.
+default_rng(seed), seed defaulted to 1 at the START call ⇒
+identical restart sequences across runs ⇒ BY ELIMINATION the
+survivor-set differences ride on near/other alone. (2) The cross-
+arm coupling is load-bearing: other is WRITTEN into scratch state
+(:1414 sc.qpos[a] = other[k]) and used in candidate-rejection
+clearance — L's collision-free count is CONDITIONED on R's pose
+(the far-arm test of the Rs 07-28 directive, :723-:727). **(c) ⛔
+The conjunction's legs are not co-configured**: SIDES = {"L": -1.0,
+"R": +1.0} (ur15_cell_spec.py:471, verbatim re-read) puts L first ⇒
+in the printed round, L is measured against round-1's R, R against
+round-2's L, and the interleave reads both at round 2 — THREE
+configurations inside one table row. Effect size UNREPORTED: the
+round-to-round START delta would settle materiality and is not
+printed ⇒ ONE observation needed (p4 court for the observation; p5
+court for whether the conjunction reading takes a caveat pending
+it; p6 changes no rules; neither does this desk). **(d) The same
+shape at two more desks, same hour**: p6 self-corrects #38's SCOPE
+range — ":44-52" was written BY EYE; the measured content lines are
+:45-:51. This desk did the same: §577(b)/§580(d) wrote ":44-:52",
+which was the sed WINDOW displayed here, not the block's measured
+extent — both tagged; m932 had propagated the same range to p6,
+corrected in m938. The §576/§579 rule as extended covers RANGES:
+pasted from measurement or not written.
