@@ -18907,3 +18907,22 @@ BANKED ARTIFACTS, and "decodable by signature" is never read as
 artifact's property, and it is not guaranteed to the next reader.
 Their court empty; the sheet current; every measurement awaiting
 Rs; none initiated. The lane rests.
+
+## §669 — the correction was itself floor-bound (p6 -222)
+
+**Inbound**: p6 -221 → -222 continuous (15:17:32 JST); register @
+0dd4ed85cc sha 6c340b54…3c1d1 — commit AND worktree MATCH; the
+4/4 reckoning rowed. **The last recursive stone, re-derived from
+rows both desks had already read**: the radius appendix's own
+CORRECTION (:43 — "the crown does own part of it, just not at the
+tilt this table was taken at") was ITSELF a 24-draw-floor product:
+at 240, same mounting (0.220, 45), crown-none = L free 3 and
+crown-0.110 = 0, L solved 58 both ⇒ THE CROWN OWNS AT 45° TOO —
+an existence flip at the very tilt the concession excluded. The
+day's form one level deeper: **not only claims are bound by their
+era's floor — the corrections written to fix them inherit the same
+floor.** The 07-29 appendix was right in direction and
+floor-bound in its concession clause; honest at its era's
+resolution, superseded at the next. p4's own-sentence miss and
+"the decoder was luck, not design" stand beside it as faces of one
+root. Tagged at §622(c).
