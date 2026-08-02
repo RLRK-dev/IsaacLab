@@ -26,7 +26,14 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 PY = "/home/rlrk/env_isaaclab7/bin/python"
 PAT = re.compile(r"start-pose IK ([LR]): (\d+) solved / (\d+) collision-free")
-TIMEOUT_S = 240
+# ⚠ 240 was tuned for 24 draws.  At 240 draws a point takes about a hundred seconds with the
+# collision detection out of the IK loop, and considerably longer with it in -- and a cut that
+# falls between the two arms' solves writes a row that reads as a measurement.  The wait breaks
+# as soon as both counts are in, so a generous cap costs nothing on a fast point.
+TIMEOUT_S = int(os.environ.get('SWEEP_TIMEOUT_S', '2400'))
+# The draw count is part of the table's identity: a zero from 24 draws and a zero from 240 are
+# different claims.  It goes in the file name so the two cannot share a path.
+TRIES = os.environ.get('START_TRIES', '24')
 
 
 def one(centre: float, log: Path):
@@ -71,10 +78,19 @@ def main() -> int:
     rows = []
     print(f"{'centre x [m]':>12s}  {'L solved':>8s} {'L free':>7s}  {'R solved':>8s} {'R free':>7s}"
           f"   held links")
+    missed = []
     for c in centres:
         got, held = one(c, tmp / f"c_{c:+.3f}.log")
         L, R = got.get("L", (None, None)), got.get("R", (None, None))
         hl = (f"L=cab{held.group(1)} R=cab{held.group(3)}" if held else "-")
+        # ⛔ A point that did not finish is NOT a row of numbers.  Printing str(None) in the count
+        # columns puts a truncation and a measurement in the same shape, which is the defect this
+        # whole morning was about -- so it is recorded as missing and the sweep carries on.
+        if L[0] is None or R[0] is None:
+            missed.append(c)
+            rows.append((c, L, R, hl))
+            print(f"{c:12.3f}  -- NOT MEASURED (L={L[0]} R={R[0]}) --", flush=True)
+            continue
         rows.append((c, L, R, hl))
         print(f"{c:12.3f}  {str(L[0]):>8s} {str(L[1]):>7s}  {str(R[0]):>8s} {str(R[1]):>7s}   {hl}",
               flush=True)
@@ -93,6 +109,7 @@ def main() -> int:
             f"numbers that would read as eight measurements of eight configurations.")
 
     ok = [c for c, L, R, _ in rows if L[1] is not None and L[1] >= 1]
+    rows = [r for r in rows if r[1][0] is not None]   # truncated points carry no numbers
     out = [
         "GRASP-CENTRE SWEEP -- collision-free start poses per arm, by where the pair sits",
         "instrument: the driver's own start-pose IK line, with the silent or-cands fallback",
@@ -118,7 +135,14 @@ def main() -> int:
     else:
         out.append("⛔ LEFT ARM keeps ZERO collision-free candidates at every centre swept.")
     out.append("⛔ Not a verdict and not a recommendation: where the pair should sit is p5's call.")
-    (HERE / "GRASP_CENTRE_SWEEP_20260729.txt").write_text("\n".join(out) + "\n")
+    if missed:
+        out.append("")
+        out.append(f"⛔ {len(missed)} centre(s) NOT MEASURED: {missed} -- nothing above is a "
+                   f"statement about the sweep as a whole.")
+    out.insert(1, f"START_TRIES = {TRIES} draws per solve.  ⚠ A survivor count of zero from 24 "
+                  f"draws does not mean no clear pose exists -- four of sixteen such zeros in "
+                  f"the mounting grid became non-zero at 240 (GRID_24_VS_240_20260802.txt).")
+    (HERE / f"GRASP_CENTRE_SWEEP_TRIES{TRIES}.txt").write_text("\n".join(out) + "\n")
     print("\n".join(out[-4:]))
     return 0
 
