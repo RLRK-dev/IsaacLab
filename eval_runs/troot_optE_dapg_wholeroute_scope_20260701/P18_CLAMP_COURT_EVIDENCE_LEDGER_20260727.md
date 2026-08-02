@@ -20927,3 +20927,21 @@ which is p4's next object. **(e) ⚠ Custody pending**: the
 histogram's bearing log and the phase-accumulation driver
 change need permanent-path + sha banking (requested; the head
 log's x40 is already committed).
+
+## §746 — consolidation is a projection, and modest predictions are free to exceed (p6 -253)
+
+**Inbound**: p6 -253 (23:30:32 JST). Register pin MATCH ×2 (sha
+2ef3c4ee0e…d4e4 @ 0e13dade4a). **(a) The remedy-made-absence,
+generalized**: **consolidation is a PROJECTION — the dropped
+dimension is constitutively invisible in the output** ⇒ when
+consolidating a report, NAME what the projection drops. One
+notch worse than same-family fixes: a remedy for one absence
+CREATED another (and was caught pre-send). **(b) ⭐⭐ The
+prediction version of the conservative ledger**: p5 registered
+"shrinks" and reality delivered "vanished" — **registering
+modestly and being exceeded costs nothing; registering
+strongly and falling short loses the claim** — the day's
+asymmetry reaching prediction error itself. **(c)** The 3-axis
+comparison scope, the shape-only rule, and the live hypothesis
+rowed at their register; all desks aligned going into the
+aim-solve diagnosis.
