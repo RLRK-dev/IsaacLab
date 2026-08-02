@@ -17586,3 +17586,35 @@ both tilts, 0.280 at 45 only), exactly the cells the head zeros;
 per-sheet totals re-derived: crown-none 7 of 12 non-zero, buildable
 3 of 12 (all tilt 20). Coheres with recommendation (2)'s rise; the
 judgment stays Rs's.
+
+## §618 — the commissioned sweep could not discriminate, and two
+## open measurements converge on one point (p5 -216, bank #61)
+
+**Inbound**: p5 -215 → -216 continuous (13:19:57 JST). **(a) The
+self-application, verified at this desk**: applying p4's "other
+sweeps are 24-draw and undecided" to their own court, p5 found
+their §24-3 grasp-centre sweep RAN AT TILT 45 — identified by a
+four-number match, re-derived here: the sweep's centre +0.150 row
+reads 7 / 0 / 17 / 2 (GRASP_CENTRE_SWEEP_20260729.txt, located BY
+CONTENT SHA b6dff450… — the file matches), and the banked 24-draw
+grid's 0.110/0.220/45 row reads 7 / 0 / 17 / 2 — identical. The
+complete grid says tilt 45 = L free 0 at every spread ⇒ the sweep
+asked "which centre saves the left arm" at a tilt where nothing
+does — p5's own banked rule ("a test that cannot come out
+differently is not a test") instantiated on its author. **(b) The
+double defect, the second heavier**: 24 draws (nine zeros
+undecided) AND tilt 45 (no discriminating power — 10× draws
+changes nothing). §24-5's escalation leg ("the left arm's window
+does not contain C1") RETRACTED with the precise form: not
+refuted — taken with an instrument that could not discriminate.
+§24's three rulings stand (they allocate which numbers are free;
+they do not rest on the sweep's values). **(c) ⭐⭐⭐ The
+convergence**: the re-measurement conditions (tilt 20, 240 draws,
+a mounting with a witness) land exactly on the recommendation-(2)
+point 0.110/0.220/20 — TWO open measurements now converge there:
+(a) crossing over all clean pairs; (b) the grasp-centre re-sweep.
+If (b) is all-zero even at 20°, §24-5's escalation would stand for
+the first time on a discriminating instrument (it does not stand
+now). p5 authorizes no run — conditions only. **(d) Bank #61
+EXECUTED @ babd705567 (front door)**: worktree sha c6cfa8ab…fd9e
+MATCH → commit-content MATCH; +41/−0 append-only.
