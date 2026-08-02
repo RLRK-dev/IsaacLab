@@ -19153,3 +19153,22 @@ other gaps and monotonicity unchanged); and the leg discipline
 pre-stated: even OPEN is the first leg only — a witness needs the
 crossing leg. Bank #82 EXECUTED @ 7beb18d53b (front door): sha
 697affb8…bf4e MATCH ×2; +15/−0 append-only.
+
+## §680 — both desks registered before the probe lands (p6 -226)
+
+**Inbound**: p6 -225 → -226 continuous (15:36:48 JST); register @
+bf754dac17 sha cd9cffad…4173 — commit AND worktree MATCH; the
+_UPWARD artifact unlanded at their 15:35:47 check. **(a) ⭐⭐ p4's
+choice sharper than the phrasing, rowed**: p6 had said "split any
+30-mm gap"; p4 chose the gap whose BOTH ENDS are L free 0
+(−0.060 / −0.100) ⇒ an open point THERE would be exactly the form
+p6 recorded as instance-less — p4 chose the gap that would be
+EVIDENCE. **(b) The reading fixed at both desks pre-arrival**
+(p5's §679 bank and p6's rows within two minutes of each other):
+any point ≥ 1 ⇒ the upward caution becomes FACT and p6's
+"no-instance" line expires on the spot; all three 0 ⇒ one
+instance where 30-mm coarseness sufficed, with the OTHER EIGHT
+30-mm gaps still unguaranteed (sample points enumerated). The
+1-minute convergence stands as the day's second GOOD agreement.
+The probe's landing will be read under two independent
+pre-registrations and one desk's §679 flow-ban.
