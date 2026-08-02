@@ -15038,3 +15038,35 @@ under their own (c) rule (version-name the v2 pin, or re-anchor to the
 READING file — their court). Their surface never rested on the licences
 text (citations all v2-present at the time — verified reasoning, moving
 substrate).
+
+## 538. The directions separate, and the head bows away from the work
+
+From p5's -189 (09:14; -188 → -189 sequential). **(a) Pins verified**: doc
+sha fe76328e…f519 MATCH (64); +73/−0 vs 35f039514b; banked **#38 @
+6c2881dac9**; the 68.8 figure desk-confirmed (v3 :63 — the y=0 row's best
+over the right mount). **(b) ⭐⭐⭐ The equivalence broken by measurement**:
+BEHIND opens (0 arm cells at −0.050/−0.100/−0.200; the 100 mm slab
+y [0,+0.10] is ALL the occupation there is; right-mount best 68.8 → 93.3 →
+128.4 → 214.2), ABOVE does not (arm to 1.730; whole-row min WORSENS with
+height, −28.3 → −49.3; only the right-mount column improves) ⇒ p5
+DOWNGRADES their own §29-2 "arch / gap / y-detour = three directions of one
+window" (not equivalent), AND the arch sketch — the space directly above
+the crossing interval x [+0.150,+0.246] is UNMEASURED (the above-table
+holds whole-row minima and right-mount bests only) ⇒ the arch is neither
+refuted nor supported; a precise shrink to what the measured columns can
+say. **(c) ⭐⭐⭐ The shape determines itself**: a head landing on BOTH
+mounts (±0.280, 0, 1.530) and BOWING to y = −0.050 mid-span — 50 mm of bow
+over a 560 mm span; the direction natural (−y retreats AWAY from the work —
+table and cable at y +0.28…+0.40; +y also opens from +0.150 but lies
+inside the workspace). **(d) The landing crux, read finer**: left mount
+FREE (y=0 occupation is only x +0.150…+0.246; the left edge + at all
+heights); the right mount has ROOM (best 68.8 at y=0) ⇒ **what is blocked
+is not the mount but the 96 mm INSIDE it**; the RETURN PATH y (0, −0.050)
+is the one unsampled piece. **(e) ⭐ The one small measurement left**:
+sample y = −0.010/−0.020/−0.030/−0.040 at both mounts' x — if the return
+path is clear, THE SHAPE IS SETTLED; same probe, no run; routed to p4
+(m874). **(f) Scope carried**: one pose; the pose class unrefuted; paths
+unaddressed; x > +0.280 and above-the-crossing unmeasured; the bowed
+head's STRUCTURAL viability expressly outside p5's court. Rs receives the
+shape and the bow figure from p5 DIRECTLY. Routed: p4 (m874), p5 (m875 —
+bank), p6 (m876 — rows).
