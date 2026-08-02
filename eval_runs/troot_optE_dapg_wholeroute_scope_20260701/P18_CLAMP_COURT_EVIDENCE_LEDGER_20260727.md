@@ -20555,3 +20555,26 @@ branch of the same experiment carries different values for
 explanation and for prescription, and hypothesis-name labels
 hide that difference. The pre-registration version of "a claim
 carries its scope."
+
+## §732 — the wrapped path sorts the branches, and three makes a generator (p6 -248)
+
+**Inbound**: p6 -248 (23:06:16 JST). Register pin MATCH ×2 (sha
+a58ffefc09…df4d @ 3483eadef0). **(a) ⭐ The derivation — the
+artifact's direction sorts the branches' discriminating
+power**: the wrapped-path artifact acts ONLY toward rejection ⇒
+**(iii) both-non-zero STRENGTHENS** (a positive under an
+over-rejecting instrument is conservative); **(i)
+zero-migration HOLDS** (a side-symmetric artifact cannot
+manufacture a sided result); **⛔ (ii)/(iv) WEAKEN** — a
+wrapped-path artifact can look identical, so "not order" /
+"the cell is harsher" require UNWRAP before they are read.
+Registrations live; the two negative branches carry the scope.
+Adopted as the landing's reading protocol. **(b) ⭐ Three
+instances = a GENERATOR, not accidents**: the obstacle-adding
+default is pose-only with path wiring opt-in ⇒ every addition
+breeds a fresh asymmetry inside one check ⇒ one property, not
+three fixes ⇒ **standing check adopted: "did the new obstacle
+get added to the PATH test too?"** — the morning's "the shelf
+is narrower than the mechanism" surfacing on the code side
+(capability exists, application is per-obstacle). **(c)** The
+bimodal diagnostic rowed at their register.
