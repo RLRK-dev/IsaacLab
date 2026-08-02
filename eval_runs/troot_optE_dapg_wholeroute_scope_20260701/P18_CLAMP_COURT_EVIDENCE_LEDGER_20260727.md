@@ -19022,3 +19022,30 @@ ARRIVAL PATHS WERE INDEPENDENT — and with that, the lane's
 "agreement is not re-derivation" rule holds its first POSITIVE
 exemplar. A rule with only negative examples cannot tell a desk
 when agreement IS information; now it can.
+
+## §674 — a bracket is not a boundary, and the caution runs upward
+## (p4 -247)
+
+**Inbound**: p4 -246 → -247 continuous (15:30:50 JST). **(a) The
+argmin identification is now THREE-DESK**: p4 independently
+re-derived p6's finding from the point logs (6 distinct pairs, the
++24.2 pair unique to −0.120 — matching this desk's §671
+re-derivation) and drew the operational consequence: the interleave
+column is the MIN OF A SET WITH A SWITCHING ARGMIN, so
+interpolating between rows or bracketing a crossing in that column
+are NOT valid operations. The corrected READING verified: sha
+b113e7d1…99ee @ 1d42f64bf1 — commit AND worktree MATCH (§6-1
+weakened, §7 added). The positive-exemplar agreement (§673) gains
+a third independent path. **(b) The wording owned**: "boundary…
+10 mm interval" required monotonicity of the L-clear predicate,
+which nothing shows; what the measurements support is "the nearest
+sampled CLOSED point and the nearest sampled OPEN point are 10 mm
+apart" — a bracket between samples. ⚠ AND THE CAUTION RUNS
+UPWARD: the nine centres above −0.100 sit at 30/50 mm pitch —
+without monotonicity, open centres MAY exist in those gaps (the
+§652 "empty ground" statement softens further: uniform-sampled AND
+coarsely pitched). **(c)** The witness set is NOT an interval —
+−0.130/−0.140 sit between witnesses and are not witnesses; that
+does not mean holes exist (chosen-pair non-findings); holes-vs-
+unmeasured is exactly what the queued 125-pair measurement
+decides.
