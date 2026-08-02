@@ -19387,3 +19387,82 @@ the two-boundary split unchanged; scopes stated (measured points,
 two coordinates, 240-draw property). **(d) Bank #86 EXECUTED @
 9eab3eb457 (front door)**: sha c10c7d85…ab85 MATCH ×2; +32/−0
 append-only.
+
+## §692 — ALL PAIRS ran: 296 pairs, a witness at every open centre, the window's witness set is CONTIGUOUS (p4 -250, verified)
+
+**Inbound**: p4 -250 (20:19:39 JST; verified 20:25 JST). Rs
+authorisation is **as-reported by p4** (message + commit message
+"Rs authorised the all-pairs interleave" + reading §9 "Rs
+authorised the measurement p5 costed (bank #71)") — verbatim
+custody is NOT at this desk; tagged inference, propagated with the
+tag.
+
+**(a) Pins — all MATCH.** Reading
+GRASP_CENTRE_240_READING_20260802.md content sha f51eebba03…b5db
+= commit 856ae8f253 = worktree (variable equality ×2). §9 (+38
+lines) matches -250's every number. Same commit banks 7 logs
+(allpairs_logs/ap_-0.110 … ap_-0.250.txt) + driver +38. Driver
+sha d12a212bf2… commit = worktree MATCH.
+
+**(b) Arithmetic + binding.** Σ L_free × R_free over the seven
+open centres = 1×2 + 1×2 + 7×3 + 14×3 + 15×3 + 31×4 + 30×2 =
+2+2+21+42+45+124+60 = **296** ✓. Per-row counts freshly re-read
+from the banked tables (main sweep −0.200 = 31/4; BOUNDARY −0.110
+= 1/2, −0.130 = 7/3) ✓. Each ap log bound to its centre TWICE:
+grep -H filename binding AND in-line provenance ("grasp centre
+moved off C1: x=-0.1100 … -0.2500" — the logs carry their
+mounting, §684's lesson used forward). All 7 log result lines =
+§9 table exactly.
+
+**(c) Driver path verified** (:1765-:1795): walk is over
+LAST_CLEAR — filled at :1579 from the FULL `_strict` list,
+UNCONDITIONAL (outside the quiet gate; comment cites pB -516(a)),
+so the [:40] print cap does NOT bind the walk ⇒ **preflight
+answer for the queued grid/crown application: the 578-denominator
+cells will not be silently capped**. ⛔ No IK, no draws in the
+block ✓ (poses are the solve's cleared set; `mj_kinematics`
+in-walk — the segfault lesson's fix form). None-from-search-radius
+→ +inf (best possible separation, cannot lose to a measured
+number) — handled. L=0 cells will self-announce "none -- no clear
+pose on one arm".
+
+**(d) The result.** A separated pair exists at **7 of 7** open
+centres. The four rows that read "+0.0 = no witness found at the
+chosen pair" each have one: −0.110 by +24.2 (16↔50), −0.130 by
++44.0, −0.140 by +50.6, −0.250 by +44.8 mm ⇒ **the witness set is
+contiguous over −0.110 … −0.250 — the gaps were UNMEASURED, NOT
+HOLES** (p6's non-contiguity question, answered by the
+discriminator p4's §6-2 named in advance). Byproducts: (i) the
+chosen pair is systematically not the best (+10.7 vs +50.6 at
+−0.150/−0.200) — the size of what the single-pair column hid, now
+measured; (ii) at the best pair the argmax geom-pair is STABLE
+(12↔68 at four consecutive centres) where the chosen-pair column
+switched argmin six times in eight rows ⇒ **the jaggedness
+belonged to the choice, not the geometry — p6's -223
+identification, confirmed by measurement** (another positive
+exemplar for the agreement rule: independent derivation first,
+measurement after).
+
+**(e) Consequences.** (1) The two-boundary split (§675) collapses
+to ONE open edge: the witness-set edge question is CLOSED
+(contiguous); only the L-window edge (10 mm bracket −0.100/−0.110)
+remains. (2) The queued "65-pair discriminator" and "cheapest
+single = −0.110's 2" items are SUPERSEDED — the full 296 ran. (3)
+p5's pre-registered gap-check reading (§63, bank #82 — registered
+before landing) now FIRES; the reading is p5's to issue, relayed
+with pins. (4) Road (0) @ −0.200 gains: BEST separation +50.6 mm,
+witness set contiguous under it. (5) ⚠ Scope unchanged: start-pose
+only; a witness pose pair is not a route (§9 point 5); the
+asymmetry is closed FOR THIS REGION ONLY — grid/crown fails are
+still "no witness found"; whether the same authorisation covers
+that application is AMBIGUOUS in -250 ("残りの queue") → asked
+back, fail-closed until answered.
+
+**(f) Notes.** Numeral coincidence: −0.110's best +24.2 (16↔50)
+vs −0.120's chosen-pair +24.2 (banked earlier) — distinct
+quantities sharing a numeral; do not fuse. Instrument: two greps
+over the same 7-file glob returned DIFFERENT output orders in
+this environment — multi-file grep line order is not a locator;
+bind with -H + in-file provenance (near-miss caught before any
+outbound claim: the -h run's order suggested mislabelled logs;
+the named run showed all 7 correct).
