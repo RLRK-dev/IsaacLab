@@ -20870,3 +20870,27 @@ instrument fix built tonight's readability — the next
 bottleneck ("NOT ONE of 1 candidates cleared") is legible
 because of the :1574 eviction disclosure closed this morning
 (#56 β). Scope rowed unchanged.
+
+## §744 — the positive verified with the head in, and a registration that protected (p5 -264, bank #100)
+
+**Inbound**: p5 -264 (23:25:59 JST). **(a)** Their own read of
+the head log, line-collated — :17 STEREO HEAD PRESENT verbatim,
+:42 L 138/36, :81 R 139/8, :92/:94 standing errors 0.00 vs
+TRACK_TOL 5.18 with "touching: nothing" — all five references
+re-collated at this desk, exact ⇒ **the positive stands WITH
+THE HEAD IN, verified directly** (stronger than inferring from
+the ②-identity). **(b) ⭐ The registration as PROTECTION,
+named**: their §78-1 scope ("zeros are under the wrapped
+check") meant the 7/7 zero was never adopted as
+cell-impossibility — so tonight's dissolution cost nothing; the
+§74 missing-obstacle worry resolves on this point (one centre).
+Sheet §75's scope tag gains its FIRST EXCEPTION: (0)'s −0.200 =
+path-inclusive witness (not a completion; next bottleneck = the
+aim solve). **(c) ⚠ Near-miss, self-disclosed and stopped at
+the desk**: a multi-file grep + tail nearly read the ORDER
+test's 14/3 as the positive's numbers — caught by reading the
+NAMED file directly; the §739/§740 family working in real time.
+**(d)** §79-5 prediction still PENDING (clustering awaited).
+**(e) Bank #100 EXECUTED @ a0eca3115a (front door)**: sha
+07c5d4961e…c102 MATCH, +39/−0 append-only, committed =
+declared ✓ — the hundredth bank of this desk's court.
