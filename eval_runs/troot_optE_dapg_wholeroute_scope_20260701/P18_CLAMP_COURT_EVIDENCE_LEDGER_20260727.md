@@ -18638,3 +18638,54 @@ predicate, the chain with its pre-registered sampler reading, the
 all-pairs with its conditions — are all delivered, all awaiting
 Rs authorization, none to be initiated by p5. The design lane's
 work is, by its own accounting, complete pending Rs.
+
+## §659 — item six hits in forty minutes, a fourth road opens, and
+## this desk's relay upgrades to artifact (p5 -232, bank #74)
+
+**Inbound**: p5 -231 → -232 continuous (14:52:56 JST). **(a) Their
+item 6 field-hit**: R free 41 > 40 at dy 0.150, read by them — the
+"holds today, not tomorrow" clause written at 14:46 landed within
+40 minutes; the all-pairs on THIS row requires a raised cap and a
+re-print first. **(b)** The trade shape held with their scopes:
+the crossover between 0.150 and 0.200 is 50 mm unsampled; L free 1
+is ONE pose (thin); the mounting UNRECORDED in the artifact — the
+(b)-defect's third instance — identified as the built mounting by
+signature, marked INFERENCE at §46-3's grade. **(c) Their relay
+discipline, and this desk's own grade corrected by measurement**:
+p5 refuses "witness" from the TABLE (no crossing column — two legs
+only, until they read the logs). This desk's §657 "three-leg" had
+carried the crossing values at MESSAGE grade; verified NOW at the
+artifacts: WORK_ROW_240_READING :21-:22 marks 0.200/+34.5 and
+0.250/+29.5 as witness rows, and the logs carry the interleave
+lines verbatim (+34.5 mm (12<->68), +29.5 mm (7<->44), mounting
+in-line "spread 0.220 tilt 45.0") — upgraded to artifact-verified;
+the lines and paths sent to p5 so their two-leg hold can close on
+their own reading (m1040). **(d) ⭐⭐ The fourth road, carried
+verbatim-close for Rs**: (4) keep the MACHINE entirely as the
+reference and move the WORK (cable and clips) 200-300 mm from the
+pillar — (0) and (4) both look like the reference and PAY
+DIFFERENTLY ((0) = process, grasping at the cable's end; (4) =
+cell dimensions, the work farther away). **(e) Bank #74 EXECUTED @
+0a198f6e9b (front door)**: worktree sha 308774ef…fd8fc MATCH →
+commit-content MATCH; +51/−0 append-only.
+
+## §660 — the margin of two closes in ten minutes, and the
+## coupling signs its name in the data (p6 -220)
+
+**Inbound**: p6 -219 → -220 continuous (14:53:05 JST); register @
+3734aea5c1 sha 938533ec…b204 — commit AND worktree MATCH. **(a)**
+The second refutation confirmed at their desk (36 lines read);
+their own earlier grading surpassed by reality ("not unmeasured —
+measures out if you measure") ⇒ the option they restored holds
+witnesses IN BOTH DIMENSIONS (x and y), with the leg-count
+honesty kept (table = two legs theirs; the third = this desk's log
+verification). **(b) ⭐⭐ The coupling's data-side signature**: R's
+top rejection reason is verbatim "the other arm", rising
+monotonically 94 → 124 → 128 → 135 with dy — the other= coupling
+found in CODE at -185(2) now signs its name in DATA (p4's width
+limit kept: not claiming it picks the chosen pose). **(c)** The
+margin-of-two fulfillment read directly at their desk
+(y_+0.150.txt:80, the announcement line verbatim) — their gate
+rule confirmed load-bearing in the field, and their standing
+consequence adopted: NO listing-absence claims on rows with R free
+≥ 40.
