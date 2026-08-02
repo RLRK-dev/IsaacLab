@@ -15390,3 +15390,47 @@ opposite ends. Routed: p4 (m888 — the crossing-interval probe, queued
 behind the pairs), p5 (m889 — bank #41 ack folded, the head-body check
 proposal, the #51 connection), p6 (m890 — verification + the #59
 ownership).
+
+## 549. The wait is stamped from two instants — and the gap between runs explains them both
+
+From p6's -171 (09:46:49; -170 → -171 sequential; register @ a0e3f2c58a,
+sha 52d8f1e3…5ccf MATCH). **(a)** Dispositions recorded their side (the
+crossing ladder → p4 after the pairs; the head-body check → p5); both out
+of their court, no prompting. The wait stamped, not timeless: at THEIR
+09:46:16 — no pairs landed, 0 new artifacts, **0 running processes**.
+**(b) ⭐ The two-instant resolution**: at THIS desk's 09:47:36 — **PID
+487480 (ur15_steps_wired.py) RUNNING, MUJOCO_LOG fresh** ⇒ the 4-run
+sequence launches each run as its own process, so BETWEEN runs pgrep finds
+nothing — p6 sampled a gap, this desk sampled mid-run; both observations
+true at their instants, and the stamp discipline is exactly what kept
+"0 processes" from reading as "died" (the (b)-run precedent). The pairs
+are ALIVE; no nudge needed; p6 told (m891) so their wait-stamp does not
+sit as possibly-dead. **(c)** Both registers now read today's zeros
+identically ("absent at 24 draws") — the misread window during the wait
+closed from both ends.
+
+## 550. The real head replaces the proxy line — and the check rides the same axis as the pairs
+
+From p5's -194 (09:47; -193 → -194 sequential). **(a) Pins verified**: doc
+sha 53103bf9…8888 MATCH (64); +6/−1 vs 9a850e49f6 — the deleted line is the
+pre-correction clause, preserved VERBATIM in the correction note (dropped
+claims 0); banked **#42 @ 47afacce65**. **(b) ⛔ The §33-1 correction,
+family case 4**: "the line clearance exceeds any head's need" WITHDRAWN —
+the line is the zero-thickness limit; a real head's body occupies z
+1.330–1.530 with only the apex at the line (ZC = 1.430, desk-checked) ⇒
+"I again used a measurement of ONE object for a conclusion about ANOTHER."
+**(c) ⭐⭐ The two-stage check, routed as PRIORITY (m892)**: Stage 1 —
+insert the STRAIGHT reaching head (Z0 1.330 / R 0.100), same mounting
+(0.280, 20), L free at tries=240: **> 0 ⇒ NO BOW NEEDED (route A works
+with the real head); 0 ⇒ the bow is needed**, then Stage 2 — the bowed
+head (y −0.050), same measurement. **The check SUBSUMES the line
+analysis** — the line was a proxy; once stage 1 returns, §28-2/§33-1's
+line arguments demote to "records of a proxy". **(d) ⭐ The one-axis
+instruction**: this check and the running 24/240 pairs are the SAME SHAPE
+(the crown tables were all tries=24; the right test is crown-present ×
+240) — not two jobs but one axis (draw count); stage 1 connects naturally
+to p4's four points. **(e)** Route A's exit cost updated into the (B)
+ruling: #51 resolution + Rs approval — the asymmetry appended to reason
+③. Hold CONTINUES: the Rs rewrite waits for the pairs AND stage 1.
+Routed: p4 (m892 — the staged check, priority, one-axis note), p5 (m893 —
+bank), p6 (m891 — the pairs-alive two-instant note + rows).
