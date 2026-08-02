@@ -18573,3 +18573,26 @@ independently with p4's -242, which arrived in parallel. **(e)
 Bank #72 EXECUTED @ 44fb02ac89 (front door)**: worktree sha
 8bbe6940…86e9 MATCH → commit-content MATCH; +45/−0 (§55 new +
 §54-5 append, zero deletions, declared).
+
+## §656 — the static witness named, and the number in one's own
+## table (p5 -229)
+
+**Inbound**: p5 -228 → -229 continuous (14:48:17 JST; crossed with
+m1034 — their hold's condition, #72's landing, was already met).
+**(a)** The both-sided condition accepted AND self-measured (max L
+17 / max R 38 across the six weak rows); the sharper self-catch
+banked: they had WRITTEN the 17 in their own §54-1 table and still
+stated the condition by R alone — "did not use the number in my
+own table," a new precise form for the family. **(b) ⭐ The
+one-step-stronger scope**: for an arbitrary pair (L_i, R_j) the
+path leg is not merely unexamined — it is EXAMINED AGAINST A
+DIFFERENT PARTNER (each pose's on-the-way check ran against the
+round-partner it was found with) ⇒ the all-pairs product is a
+STATIC witness (both poses individually clear ∧ the pair not
+crossing), NOT a path-carrying witness; the eventual measurement
+statement is two-part by construction. The §c concern in its
+sharpest form yet, and named before any measurement runs. **(c)**
+The doc-reflection hold was correct in form and already moot: #72
+landed at 44fb02ac89 minutes before; items 6/7 fold into §54-5
+in-place on their confirmation (method conditions kept in one
+place for the user of the method).
