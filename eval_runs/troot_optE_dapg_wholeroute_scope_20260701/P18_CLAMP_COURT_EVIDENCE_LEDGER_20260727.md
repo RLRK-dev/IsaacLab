@@ -18940,7 +18940,12 @@ re-read here (−0.110 = 123/1, −0.120 = 124/1, −0.130 = 126/7).
 centre than the previously nearest; the witness set is now
 −0.120 / −0.150 / −0.200. The left arm opens at −0.110 (neighbor
 of the closed −0.100) ⇒ THE BOUNDARY LIVES IN THE TEN-MILLIMETRE
-INTERVAL −0.100〜−0.110, not fifty. **(c) The two notes carried**:
+INTERVAL −0.100〜−0.110, not fifty. [§671: SCOPED by p6 -223 — that
+is a bracketing of SAMPLE POINTS, not of a boundary; the WITNESS
+set is possibly disconnected along the centre axis (present at
+−0.120, absent −0.130/−0.140, back at −0.150), and the splitting
+points are all +0.0 weak-class — "possibly connected, unshowable
+by the current instrument"; the queued all-pairs read decides.] **(c) The two notes carried**:
 (i) interleave is NOT monotone across the open region (+0.0 /
 +24.2 / +0.0 / +0.0 / +10.7 / +10.7 / +0.0 with nothing moving but
 the centre) — the chosen-pair mechanism appearing as a jagged
@@ -18950,3 +18955,54 @@ all-pairs costing applied to the open region. **(d)** Start poses
 only; NOT a recommendation; pair placement stays p5's court. The
 probes ran in the established free class (start-pose solve probes,
 as all day); the two QUEUED measurements remain queued.
+
+## §671 — the jaggedness is the argmin, and the bisection loses its
+## premise (p6 -223)
+
+**Inbound**: p6 -222 → -223 continuous (15:27:12 JST); register @
+8601e7f25e sha 9fc02dac…b639 — commit AND worktree MATCH. **(a)
+The identification, re-derived here across all eight logs**: the
+closest-pair sequence is (6<->44) / (8<->45) / (16<->50) /
+(12<->Rg_left_pad2) / (41<->52) / (6<->44) / (6<->44) /
+(Lg_right_pad_f1ext<->50) — SIX distinct pairs over eight centres,
+the +24.2 pair (16<->50) appearing nowhere else ⇒ the
+non-monotonicity is neither noise nor physics: THE MIN'S ARGMIN
+MOVES — the mobile version of their "the gap tracks only the
+chosen pair". **(b) The structural consequence**: by the crossing
+predicate the witness set is present at −0.120, absent at
+−0.130/−0.140, back at −0.150 ⇒ possibly DISCONNECTED along the
+centre axis; "the boundary" may not exist as one point, and the
+10-mm interval brackets SAMPLE POINTS, not a boundary — §670(b)
+tagged. **(c) Their own rule applied against their own finding**:
+the three splitting points are all +0.0 weak-class ⇒ not
+refutations ⇒ the correct sentence is "possibly connected,
+unshowable by the current instrument" — and the deciding
+measurement is ALREADY QUEUED (the all-pairs read of the +0.0
+points decides connected-vs-islands).
+
+## §672 — two desks explain one jaggedness, and the cheapest test
+## is two evaluations (p5 -238, bank #79)
+
+**Inbound**: p5 -237 → -238 continuous (15:27:48 JST; crossed p6
+-223 by 36 seconds). **(a)** Both artifacts read at their desk;
+the three legs confirmed via the READING (the table lacks a
+crossing column — the §57-2 blade applied unprompted); witness
+set {−0.120, −0.150, −0.200}, the nearest now 270 mm from the
+built centre; the 125-pair count independently re-derived, exact.
+**(b) ⭐ The convergence**: p5's independent reading — "geometry
+flipping every 10 mm is implausible; the non-monotone column is
+the direct appearance of measuring ONE chosen pair of N×M; the
+crossing-column fails carry almost no information; the all-pairs
+is the only way to read this column" — meets p6's argmin
+identification from the other side; §54's motivation is now
+measurement-backed twice. **(c) ⭐⭐⭐ The cheapest test updates:
+7 → 2** — the all-pairs at −0.110 (just inside the sampled edge,
+currently witness-less, max(L,R) = 14 < 40 passes the per-row
+check); a pass moves the window another 10 mm toward the build.
+**(d) Bank #79 EXECUTED @ 84005b6401 (front door)**: worktree sha
+fea3db72…edef MATCH → commit-content MATCH; +50/−2, the two
+deleted lines verified as the old (0) row and the old
+cheapest-test row (both replaced, declared). The sheet's (0) row
+now reads 3 witnesses / 270 mm / 10-mm boundary — p6's -223
+connectivity scope (sample-points, not boundary) routed to p5 for
+the wording, their call.
