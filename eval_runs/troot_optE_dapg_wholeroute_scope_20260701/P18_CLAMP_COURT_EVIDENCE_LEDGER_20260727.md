@@ -20198,3 +20198,52 @@ structural room at their desk **because of order, not care** —
 the same distinction as §694's "safe by the type of the claim".
 This desk adopts the phrasing: **sha citation is a reading; give
 it a call boundary.**
+
+## §719 — the route never moved: every witness of the day is an ENDPOINT witness (p4 -258, verified)
+
+**Inbound**: p4 -258 (22:35:18 JST). **(a) Pins + internal
+consistency, all verified**: artifact
+WHY_THE_ROUTE_NEVER_MOVED_20260802.md sha adccc51e60…00e1 @
+05aecc4b73 MATCH ×2 (driver pinned in-artifact @ 3474e3ab2c —
+log confirms "Check the path to the other arm, not just the
+pose at the end of it"). Arithmetic: TRACK_TOL 8/1546 = 5.18
+mrad ✓; R standing error 929.31 mrad = 53.2° ✓ (the "j0 53°
+short"); the −0.200 baseline row (L 138/31, R 139/4) = the
+banked sweep row EXACTLY ✓. Implementation exists and is
+committed: path_arm_min :1338, ARM_PATH gate :1598 (default
+off — preserves comparability), STEREO_HEAD :198/:1219. **(b)
+The finding**: the route gate (each arm within 5.18 mrad of its
+own command) never opened — the arms JAM against each other en
+route (contact readout L_upper_arm ↔ R_wrist_1/3; no joint at a
+limit). Cause: a PER-OBSTACLE ASYMMETRY inside one clearance
+check — the mast is tested at the pose AND along the move
+(07-28 fix), the OTHER ARM at the pose only; both arms sweep
+~250° from home (L 274°, R 244°) and pass through each other.
+Orderings do not save it (L-first → R jams 94°; R-first →
+worse). p4's prediction that the first mover arrives was WRONG,
+and the miss is what pointed at the path test — credited. **(c)
+⛔ The re-grade**: with the missing test ON at −0.200: L 31→20,
+**R 4→0 (all 139 put back; "the other arm ON THE WAY")** ⇒
+**every witness banked today — seven centres, crown columns,
+296+602 all-pairs — is a statement about POSES; at the one
+centre asked WITH paths, the right arm has no clear start at
+all.** NOT "the cell is impossible" — "the question was never
+posed; posed once, it answered zero." Pose-level results STAND
+as pose statements (calibrated re-grade, not nullification).
+**(d) Unknowns, enumerated**: one centre only; straight-line
+joint-space path only (another route may pass; the test cannot
+say); sampling bounds tunnelling not grazing; the stereo head
+is STILL not in the default cell. **(e) Risk direction**: the
+SECOND non-conservative gap of the evening (a missing test made
+clear-counts optimistic) — p6's triage now applies twice over:
+positives doubly provisional, zeros directionally safe. The
+queued seeded chain (grasp→seating) PRESUPPOSES arrivable
+starts ⇒ gated behind this; the grid question's value shifts
+(endpoint-grid vs path-grid). **(f) ⚠ Lane observation, owned
+INCLUDING this desk**: the symptom was in plain text all day —
+the ap_*.txt tails end in the STEP2 stall RuntimeError, and
+this desk PRINTED that text during §692 verification (tail of
+ap_-0.200/-0.110) and read past it to the ALL-PAIRS line.
+**Reading a tail for your query is not reading the tail** — the
+file's last words carried the next discovery, unasked. The
+morning's seam rule, one more time, at every desk.
