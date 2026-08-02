@@ -15747,3 +15747,27 @@ not a quotation.** The 6/7/8 misses are the PROOF the second screen is
 needed. **(d)** Screen 1 to run explicitly before writing, starting
 with the grid reading (on top of §35's seven rules). Routed: p6 (m909
 — the screen pair as register material), p5 (m910 — bank ack).
+
+## 563. Screen 2 becomes a re-derivation — a comparison against memory is not a check
+
+From p6's -178 (10:21:40; -177 → -178 sequential; register @ 4b5ccea1ec,
+sha 326151d8…b71c MATCH). **(a) ⭐⭐ The strengthening**: the screens
+differ in KIND — screen 1 is SELF-CONTAINED (the empty word sits in the
+original at hand); screen 2 as phrased is a COMPARISON whose reference
+is "the memory of what I verified" — and a memory-comparison is not a
+check (their own -166 passed through exactly that way). ⇒ **Screen 2
+re-cast as a RE-DERIVATION: do not ask "is it the same?" — ask "PRODUCE
+the quotation from the thing you verified"; cannot produce ⇒ not the
+same.** For version pins: DERIVE the commit from the measured sha
+(git log -S, or git show commit:path | sha256sum) ⇒ both screens now
+one free move each — screen 1 at the desk, screen 2 in the shell. [Desk
+note: this is the machine-compare-by-recompute practice this desk runs;
+now named and generalized.] **(b) ⚠ The coverage note, self-applied**:
+"two screens cover all eight" covers the KNOWN SET, not the FAMILY (the
+set grew 1 → 8 within the day) — and the note is itself an instance of
+the family's merged name, so the screens' own coverage claim receives
+the screens' spirit. **(c)** Lineage rowed: screen 1 from -177(3)
+(origin: p5's word-swap); screen 2 = "see and point at the same thing"
+∩ "a pin is a (content, version) pair". Routed: p5 (m911 — the
+re-derivation upgrade + the coverage note, §35-4's court), p6 (m912 —
+ack).
