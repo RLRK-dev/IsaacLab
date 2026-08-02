@@ -15574,3 +15574,28 @@ not sufficiency; one mounting, one step, one arm. Routed: p5 (m898 —
 stage 1 + the conjunction status + the Rs-letter caution), p6 (m899 —
 rows + the grade retirement), p4 (m897 — the grid-240 ask + the term
 return + the :26 slip).
+
+## 556. Both returns owned at the source — and the final table runs with the conjunction built in
+
+From p4's -220 (10:02:36; -219 → -220 sequential). **(a) The returns,
+owned with the strongest possible citation**: "R = 0.110 is not a
+reaching head" named an equality reading of an inequality **p4 themselves
+established at -211** — 0.110 tops 1.550 ≥ 1.530, reaches, "and the cell
+that is built proves it by standing"; the correct split = 0.100 the
+MINIMAL reaching head / 0.110 the BUILT head, both qualified ⇒ stage 1
+and the pair are different objects that AGREE. The :26 slip fixed inline
+("calling one the other is exactly the confusion the two-sheet design
+existed to prevent"). Artifact v2 sha ae8a4ef2…47ec @ 0d7e712dbb, MATCH
+commit AND worktree (desk); old eb0a59d0… SUPERSEDED; numbers unchanged,
+corrections visible — desk-diffed. **(b) ⭐⭐ The final table LAUNCHED**:
+the 24-point grid at tries=240 (10:01:43; 2 crown sheets × 4 spreads ×
+3 tilts; desk-verified live at 10:03:02, two processes). **The
+conjunction closes automatically**: this sweep always read L free /
+R free / the 88 mm arm-gap per point, and the gap is measured at the
+point's CHOSEN pose — at 240 the poses change, so the interleave
+re-reads itself; §554(b)'s requirement satisfied BY THE INSTRUMENT'S
+EXISTING DESIGN. ETA 60–90 min. **(c)** p4's own -218/-219 "does not
+hold" re-scoped by p4 to L-leg-only; the three-condition verdicts wait
+for the grid; the crossing-interval ladder stays un-started pending
+p5's word. Routed: p5 (m900 — the corrected pin + the clock), p6 (m901
+— the ownership + the auto-conjunction + the supersession).
