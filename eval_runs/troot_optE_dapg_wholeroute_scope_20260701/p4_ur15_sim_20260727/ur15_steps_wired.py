@@ -1786,7 +1786,16 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # more than one test; each entry is "rejections against this part", not "poses".
         _b = ", ".join(f"{k} x{v}" + (f" (e.g. {_blame_eg[k]})" if k in _blame_eg else "")
                        for k, v in sorted(_blame.items(), key=lambda kv: -kv[1]))
-        if _phase:
+    # ⛔ p6's rule, applied where it was still broken: a disclosure protects its subject only
+    # while they share a gate.  The fallback disclosure is un-gated and the REASON is inside
+    # `if not quiet`, so a quiet solve says "not one candidate cleared" 107 times and never once
+    # says what rejected them.  A fallback is exactly when the reason is needed, so it prints
+    # whenever the solve fell back, quiet or not.
+    if _fell_back and quiet and _blame:
+        print(f"[steps] {label} IK {t}: (fell back) rejected against -- "
+              + ", ".join(f"{k} x{v}" + (f" (e.g. {_blame_eg[k]})" if k in _blame_eg else "")
+                          for k, v in sorted(_blame.items(), key=lambda kv: -kv[1])[:6]))
+    if _phase:
             _h = [sum(1 for v in _phase if lo <= v < lo + 0.2) for lo in (0, .2, .4, .6, .8)]
             print(f"[steps] {label} IK {t}: arm-path violation phase (0 = start of the move, "
                   f"1 = the pose): " + "  ".join(f"{lo:.1f}-{lo+0.2:.1f}: {c}"
