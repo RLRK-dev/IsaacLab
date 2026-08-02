@@ -16048,3 +16048,100 @@ grid into front/back halves of different versions. **(e) Lane
 state**: 5/24 rows at 10:56 (p4), 0 truncations; this desk counts 7
 rerun point logs at 11:02:43 (≈ 6 done + 1 in flight). Both m918
 items are closed by -222; nothing pending on p4 but the run.
+
+## §571 — three findings verified, two opened, and this desk nearly
+## numeral-matched a draw index (p6 -181)
+
+**Inbound**: p6 -180 → -181 continuous (11:03:20 JST). **(a) Pins
+verified (machine)**: register @ 61b0bb370c sha 1e0f046d…352a —
+commit AND worktree MATCH; SEED artifact sha ae8a4ef2e62f…, 67 lines
+— both exactly as claimed; layer4 0/0 (message-claim). bank #48 →
+rows #57/#45; custody correctly left to this desk's court (ruled
+§569 in parallel). **(b) p5's three -201 findings CONFIRMED by p6
+from materials, spot-anchored here**: 0.0745 = zero hits in the
+real-head survival table (closed query; absence independently
+confirmed §567(a) — 0.0745 lives today only in the 07-28
+sigma_trace logs); the 0.0381 IDENTITY rests on p4's ANNOTATION, not
+numeral match — SEED :48-:49 verbatim-read: "The distinct pose
+[+1.140126 ...] is also clear with the crown REMOVED (it was #2
+there). One pose survives both…"; and one citation stands on the
+weaker of two grounds (0.0381 cited from headless §33-1 while the
+same value sits in real-head #3) — re-point recommended, conclusion
+unchanged. **(c) ⛔ Two NEW findings, p5 court**: (i) §33-1's pose
+table does not state WHICH HEAD it was measured with — 240-draw
+106/4 vs real-head 106/5 at the same mounting (solved equal, free
+differs ⇒ different model; 24-draw rows likewise 13/1 vs 13/0);
+§36-6's inference stands on exactly that distinction; p4 already
+wrote the discipline into code for MOUNTING (sweep_mounting.py:73
+"WHERE the table was taken is part of the table" — line verified)
+but not yet for HEAD. The §33-1-side 106/4 was not located by this
+desk's doc grep, but is now independently corroborated by p4 -223's
+fresh crown-NONE point (106/4) — two sources; the labeling gap
+stands regardless. (ii) §36-7's one-line closing collides with
+§36-4's own finding in the same section — zone :2698-:2716 read:
+the closing (「(B) の売り…頭が模型に無い状態で取られた数に載って
+います」→「(A) は測って…」) is real, §36-8 already withholds any
+verdict; the correct form is a 2×2 (A: membership+sigma measured
+real-head / landing unmeasured at #1/#2; B: ladder measured at its
+pose / bowed-head L-free + crossing y-ladder + structural viability
+unmeasured). Folded to one line it re-enters the "own recommendation
+auto-wins" shape — in reverse. **(d) p6 scopes their own claim (not
+a withdrawal)**: the ladder inputs +2.1 / 0.88 are old-label pose
+#0's; their "≈16.7 mm retreat reaches ARM_CLEARANCE" is #0-limited;
+and old-#0 is not in the real-head free set ⇒ the ladder is measured
+at B's very pose AND that pose's usability is unmeasured. **(e) ⚠
+This desk's own near-miss, caught by (b)'s rule**: SEED :19's
+"#0 #1 #2 #4" was momentarily read as POSE labels — they are DRAW
+indices (four draws converging on one distinct pose); the apparent
+contradiction with "old-#0 not free" dissolves once label spaces are
+kept apart, and identity routes through p4's annotations exactly as
+the rule prescribes. Numeral-match nearly claimed a pose identity at
+this desk, same hour, one desk over from where the rule was written.
+**(f) Progress collation**: p6 extrapolates 5.8 min/point ⇒
+completion ≈ 12:5x — upper end of the prior band, consistent with
+this desk's log count.
+
+## §572 — six readable rows of twenty-four, and a limit the 240 grid
+## does not remove (p4 -223)
+
+**Inbound**: p4 -222 → -223 continuous (11:07:24 JST). **(a) Pins
+verified (machine)**: INTERLEAVE_COLUMN_READING_20260802.md sha
+cb963aa0…4d76 @ 97a9213c61 — commit AND worktree MATCH;
+probe_geomdistance_sign.py sha 50c7847e…4fb0 @ same commit — commit
+AND worktree MATCH. **(b) The banked table's interleave column
+re-read**: 6 of 24 rows standalone-readable; 18 measured with an arm
+PUT BACK; 2 rows (0.340/45, both sheets) with BOTH arms put back —
+their -110.3 mm measures how much two rejected poses overlap, not
+the mounting. The discriminator was in the table all along: printed
+collision-free = len(_strict) — this desk verbatim-read
+ur15_steps_wired.py :1564-:1566 + :1641 (_strict filter, _fell_back
+= not _strict, free = _strict or cands, print len(_strict)) — 0 =
+fallback-certain. What was missing was only the marking that this
+column DOMINATES the other two. **(c) The spec-comment pair**:
+(0.22,45) — L put back in both sheets; the banked table cannot
+answer it. (0.40,20) — one readable row, gap +0.0 = NOT separated,
+opposite of the comment; p4 does not claim the comment wrong
+(different poses; the comment's conditions unseen). **(d) ⛔ The
+instrument limit that SURVIVES the 240 grid**: interleave is
+measured at the ONE chosen pair — separated rows are witnesses
+(sound); non-separated rows are NOT refutations of the mounting
+(only of the chosen pair; of N×M clear pairs exactly 1 is measured,
+and more draws LOWER the measured fraction). All-pairs measurement
+unimplemented; banked as a documented limitation. Interaction noted:
+p5's pre-registered rule (4) already scopes interleave to "as
+placed", so route A's conjunction leg stays correctly read; the
+limit binds MOUNTING-level design conclusions. And the +0.0
+semantics are now measured: mj_geomDistance returns +0.000 for
+center-coincident boxes even at 100 mm overlap; negatives are
+minimum-translation, not depth (true 120 mm → -80 mm) ⇒ YES/no
+verdicts safe both directions; negative mm NOT quotable as depth.
+**(e) Reproducibility + progress + an incidental**: the current
+run's st_none_0.280_20.log :35 = "106 solved / 4 collision-free" —
+exact match with the 07-29 240-draw single point (this desk read the
+line); the same line self-describes the floor as dormant ("floor
+0.00 removed 0 of them (it ranks, it does no[t remove])") —
+consistent with the standing SIGMA_FLOOR dormancy constraint. 6/24
+rows at 11:04, 0 truncations. **(f) Conditional relay HELD as
+asked**: items (c)-(d) go to p5 ONLY if p5 cites the banked table's
+interleave column — watch set at this desk. -223 also corroborates
+§571(c)(i): 106/4 is the crown-NONE side.
