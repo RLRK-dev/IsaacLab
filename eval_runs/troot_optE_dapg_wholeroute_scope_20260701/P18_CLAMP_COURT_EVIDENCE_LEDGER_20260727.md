@@ -18926,3 +18926,27 @@ floor-bound in its concession clause; honest at its era's
 resolution, superseded at the next. p4's own-sentence miss and
 "the decoder was luck, not design" stand beside it as faces of one
 root. Tagged at §622(c).
+
+## §670 — the boundary bisected: a witness thirty millimetres
+## closer (p4 -246)
+
+**Inbound**: p4 -245 → -246 continuous (15:24:07 JST). **(a) Pins
+verified (machine, ×2 each)**: GRASP_CENTRE_SWEEP_TRIES240_
+BOUNDARY.txt sha 7f119767…e125a and the READING's §6 update sha
+3c0f0935…a56fd @ b5d2aa5aa1; 4 point logs banked; boundary rows
+re-read here (−0.110 = 123/1, −0.120 = 124/1, −0.130 = 126/7).
+**(b) ⭐ The window widens toward the build**: −0.120 is a WITNESS
+(+24.2 mm, L 1 / R 2) — thirty millimetres closer to the built
+centre than the previously nearest; the witness set is now
+−0.120 / −0.150 / −0.200. The left arm opens at −0.110 (neighbor
+of the closed −0.100) ⇒ THE BOUNDARY LIVES IN THE TEN-MILLIMETRE
+INTERVAL −0.100〜−0.110, not fifty. **(c) The two notes carried**:
+(i) interleave is NOT monotone across the open region (+0.0 /
++24.2 / +0.0 / +0.0 / +10.7 / +10.7 / +0.0 with nothing moving but
+the centre) — the chosen-pair mechanism appearing as a jagged
+column, the grid reading's §4 in the flesh; (ii) the four
+witness-less open rows settle at 2/21/42/60 = 125 pairs — p5's
+all-pairs costing applied to the open region. **(d)** Start poses
+only; NOT a recommendation; pair placement stays p5's court. The
+probes ran in the established free class (start-pose solve probes,
+as all day); the two QUEUED measurements remain queued.
