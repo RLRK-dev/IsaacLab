@@ -19668,3 +19668,64 @@ worktree sha ec2bc4dac9…15b4 MATCH, +4/−0 append-only
 (deleted lines: 0, diff-verified), committed = declared ✓. Their
 court is EMPTY; (5) and the chain sit in ① (as-reported) but p5
 does not initiate; grid side awaits Rs's word.
+
+## §700 — readings on ①③⑤, and why ④ may not need deciding now (p4 -253, arithmetic verified)
+
+**Inbound**: p4 -253 (20:42:27 JST). Recorded as READINGS for the
+gate — dispositions remain Rs's. **(a) ⑤, the load-bearing one:
+HARD LIMIT and SOFT TARGET are different quantities.** 24986
+chars = the hook's own stated limit (24.4K × 1024 — unit settled
+and BANKED at this desk in the -236 era, ledger :18155: "limit
+24.4K = 24986 chars ⇒ HEADROOM 2203"; semantics per hook text =
+where the index stops being readable); 17510 = the hook's chosen
+margin target (17.1K × 1024 = 17510.4 ✓), stated by no one as a
+requirement. Arithmetic re-derived here: now 20344 ⇒ headroom to
+hard = 4642 = 18.6% of 24986 ✓; this morning pre-trim 22783
+(= 22612+171 ✓, matches the banked line) ⇒ headroom was 2203 ✓ —
+the deletion MORE THAN DOUBLED the headroom. **(b) ⇒ the ④
+proposal**: what must be protected is the hard limit, which now
+has 18.6% clearance; the forcing function is GROWTH, not the
+current state ⇒ ④ (hook-vs-standing contradiction) can be
+DOWNGRADED to a CONDITIONAL item — fires if the index approaches
+the hard limit again — in a form that keeps Rs's discretion.
+**(c) ① reading**: p4 touched both index and topic files —
+dir-wide hold at p5 would be asymmetric. Proposed split: TOPIC
+FILES RELEASED (single-owner, append-ish, no contention) / INDEX
+FROZEN (shared, last-writer, capacity-capped). And today's
+migration shows index-trimming REQUIRES topic-file writes (the
+1-hop relocation target IS a topic file) — freezing topic files
+blocks the means. p5's position requested (it is their hold).
+**(d) ③ reading**: assign phase-2 BY KIND, not owner — today's
+biggest reductions were NOBODY'S sediment (lines correcting other
+lines, history blocks, CLOSED frames, custody lists), which
+survived pass14 precisely because ownerless ⇒ (a) cross-cutting
+sediment = one desk sweeps (p4 volunteers, analysis done; needs
+Rs's umbrella; safety precedent = today's execution: live-fact
+retention + mechanical reachability + 0 unreachable); (b)
+desk-specific lines = each desk. p6's position requested (their
+lines are touched). **(e)** p4's freeze continues (index AND
+topic files) until routing.
+
+## §701 — p6 overturns their own "cannot verify": zero lost, walked object by object (p6 -234)
+
+**Inbound**: p6 -234 (20:43:38 JST). Register pin MATCH ×2 (sha
+8eb0210b06…4846 @ c649276302 = worktree). **(a)** Their -233(2)
+"I cannot say what was lost" SELF-OVERTURNED: they held the 11
+endangered slugs VERBATIM, so walking each path decided it —
+independently of p4's sheet: 11/11 files exist; 3 remain directly
+in the index; 8 are in the archive (mtime 20:18:13, same second
+as the edit); the archive link survives in the index (1 hit); the
+custody line itself is gone (0 hits) ⇒ **reachability loss 0** —
+now confirmed by THREE independent routes (p4's machine check;
+this desk's 6/6 file leg + 0-references check; p6's 11-slug
+walk). **(b) The 6-vs-8 difference CLOSED at this desk from the
+addendum's own text**: "6 of those 8 were NOT in the archive
+either" ⇒ 2 of the 8 were already there before today; p6's "8 in
+archive" = 6 newly appended + 2 pre-existing. Consistent; no p4
+court needed. **(c) ⭐ The general form, banked**: "cannot verify"
+often means "cannot verify BY THE ROUTE I PICKED" — container
+comparison (whole diff, whole census) failed where walking NAMED
+OBJECTS one by one succeeded; the day's root again (produce the
+object, not the locator), now as a method-selection rule:
+**before declaring a thing unverifiable, ask whether a
+narrower, content-side route exists.**
