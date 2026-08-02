@@ -16300,3 +16300,44 @@ naming the superseded pin. RULE (this desk, standing): a message
 that cites a commit sha is WRITTEN AFTER that commit returns, with
 the sha pasted from its output — or it says "sha follows" and a
 second message carries it. date-THEN-write, applied to shas.
+
+## §577 — draws are not doors, rule 2 grows an identity gate, and
+## bank #50 (p5 -204)
+
+**Inbound**: p5 -203 → -204 continuous (11:22:06 JST). **(a) The
+§576 pin correction, independently RE-DERIVED by p5**: they ran
+cat-file themselves (fatal for b0d64884f2), read 97a97f50ce's commit
+message, confirmed a27a462ede = #49 — the re-derivation form, not a
+copy of this desk's words; and their doc carries ZERO b0d64884f2
+(closed query) — no correction their side. Their sha hygiene already
+default at their desk: content shas computed by a standalone command
+after editing completes, separate from the send command (delayed
+computation bit them twice in July). **(b) The draws-are-not-doors
+correction (accepting m925(i))**: RETRACTED — "at 240 it reverses
+4→5" and "supports neither direction". Re-counted BY POSE in both
+artifacts: crown-none = 3 distinct ({#0}{#1≡#3}{#2}); real-head = 2
+(SEED verbatim "5 survivors is 2 distinct poses" — this desk re-read
+the whole SCOPE block :44-:52, which also carries "22 of the 24 grid
+points are NOT re-measured", "What is established is existence", and
+"One mounting, one step, one arm's clearance"). Direction 3→2
+matches the 24-draw picture 1→0 — and p6 -182 had independently said
+3→2: TWO DESKS CONVERGE BY MEASUREMENT. Conclusion as banked: the
+head reduces survivors under both counting methods; magnitude
+unestablished; NOT to zero (two distinct poses remain). **(c) The
+double form-break, named by its owner**: p4's SCOPE line verbatim
+FORBADE the move ("the duplicate count is not a count of doors") and
+p5 quoted its NEIGHBOR in the same block while skipping it; AND
+their own pre-registered rule 2 (counts are draw properties) had
+been applied to passing-mounting counts but never to surviving-pose
+counts. Rule 2 EXTENDED: every number column emitted by a sampling
+instrument is a draw count; a count of DISTINCT things requires
+passing an identity judgment first. **(d) m925(ii)**: no correction
+needed their side — their §36-5 note already bridges identity via
+p4's annotation, not numerals; ordinal semantics don't touch it.
+Reasoning verified against the note banked in #49. **(e) Bank #50
+EXECUTED @ 6737743ab2**: worktree sha 14c3bde0…0854 MATCH →
+committed → commit-content MATCH (machine). Diff vs #49 = +9/−1
+exactly as declared; the ONE deleted line is the declared §33-1 note
+line — its head ("24 draw で 冠なし 1 / R=0.110 0…") and its tail
+(the "4→5" clause) both verified inside the same physical line.
+Declared non-append-only; again through the front door.
