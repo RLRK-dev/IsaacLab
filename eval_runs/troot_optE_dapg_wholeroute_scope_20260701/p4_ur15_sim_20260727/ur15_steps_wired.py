@@ -1618,6 +1618,21 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         if pe > 0.002 or re_ > re_max:
             continue
         qw = _wrap(np.array([sc.qpos[a] for a in QADR[t]]))
+        # ⭐ UNWRAP_SOLVE -- the same arm, the short way round, decided BEFORE the path tests.
+        # _wrap puts the answer in a principal range; the ramp then drives linearly from `near` to
+        # that number, which for a base joint near +/-pi means almost a full turn the wrong way.
+        # Applying the unwrap AFTER the solve (UNWRAP_START) cannot help: the candidates whose
+        # WRAPPED path collides are already discarded, so the shorter path never gets tested.
+        # Here the shift happens first, so every path test below sees the path the arm will take.
+        # ⛔ Only where the shifted value stays inside the joint's range.
+        if os.environ.get("UNWRAP_SOLVE") and near is not None:
+            _ref = np.asarray(near, float)
+            for _j in range(6):
+                _k = round((_ref[_j] - qw[_j]) / (2 * math.pi))
+                if _k:
+                    _c = qw[_j] + _k * 2 * math.pi
+                    if LIM[_j, 0] <= _c <= LIM[_j, 1]:
+                        qw[_j] = _c
         for k, a in enumerate(QADR[t]):
             sc.qpos[a] = qw[k]
         mujoco.mj_forward(m, sc)
