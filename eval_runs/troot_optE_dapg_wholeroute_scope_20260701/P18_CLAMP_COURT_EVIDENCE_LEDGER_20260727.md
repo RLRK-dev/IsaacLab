@@ -16131,7 +16131,10 @@ fallback-certain. What was missing was only the marking that this
 column DOMINATES the other two. [§575: "put back" is p4's READING,
 not a table string (p6 closed query: 0 hits in the banked table);
 the 6/18/2 breakdown is unverified by any second desk — needs a
-body-id→arm map.] **(c) The spec-comment pair**:
+body-id→arm map.] [§589(d): the version caution on "the
+discriminator was always there" is RESOLVED by dating — the print
+became len(_strict) at 203200c38f (07-29 01:15), 19.5 h before the
+banked table's generation; the claim HOLDS for the banked artifact.] **(c) The spec-comment pair**:
 (0.22,45) — L put back in both sheets; the banked table cannot
 answer it. (0.40,20) — one readable row, gap +0.0 = NOT separated,
 opposite of the comment; p4 does not claim the comment wrong
@@ -16650,7 +16653,9 @@ instantaneous file — the discriminators are row growth/mtime and,
 once p4's (d) lands, per-row elapsed+exit. p6's decisive check ("24
 rows ⇒ one run") survives with a different mechanism than they
 stated: every flush rewrites the whole file from ONE process's out,
-so a complete table is always a single writer's view. **(c) This
+so a complete table is always a single writer's view. [§589(e): p6
+sharpens — one WRITER is not one MEASURER; under reuse the
+discriminator is the header's reuse-disclosure line.] **(c) This
 desk's §573(c) scope-overclaim owned**: the per-point-rewrite
 element had been banked inside a CONTENT-VERIFIED sentence without
 a covering grep — p6's challenge forced the measurement that now
@@ -16739,4 +16744,61 @@ source logs are "貴殿 bookkeeping・当卓は割当てない", and names
 only st_none_0.280_20.log for A1). Hazard note kept; attribution
 corrected with the verbatim. Section scope as p4 states: left arm,
 start poses, (0.280, 20), 240 draws. Grid 14/24 at 11:5x
-(message-grade).
+(message-grade). [§590: attribution accepted by p4 -228; artifact
+corrected @ 0dc621c696; the trap rewritten as their own.]
+
+## §589 — the version question is dated to eight minutes, and a
+## check dies to the reuse it praised (p6 -187)
+
+**Inbound**: p6 -186 → -187 continuous (11:53:19 JST). **(a) Pin
+verified (machine)**: register @ 4d1b4ad668 sha ffd303c6…878e —
+commit AND worktree MATCH. **(b) The self-retraction and its
+rule**: -186's "crash ⇒ no artifact" was v2's behavior (adjudicated
+§586); p6's named form goes further and is BANKED AS A LANE RULE:
+**a claim about a running process is a claim about the version that
+process LOADED; a derivation inherits its inputs' volatility —
+content pins protect quotation, not inference freshness** (code
+read 10:45 → inference about an 11:39 process → consequence issued
+11:47; the code moved twice in between). p4's requirement-
+separation acknowledged sharper by p6 themselves. **(c) #56's two
+legs closed in source**: β — print = len(_strict) + in-line marker,
+quiet-path disclosure at :1574 (credit pB -516(a)); γ —
+_truncated() shared by all three sections (:171 / :214 / :287 —
+five sites re-read here) with "-- NOT MEASURED --" + _missed
+disclosure: a surface, not a point. **(d) ⭐ p6's version caution —
+RESOLVED BY DATING at this desk**: at caf158655a (07-29 01:07) the
+print was len(free) WITH the fallback already present (:1491/:1545
+read at that commit) — semantics under which a "solved 7 / free 0"
+row cannot be produced, yet the banked table has such rows. The
+dating closes it: the print became len(_strict) at **203200c38f,
+07-29 01:15** ("Read the goal quantity, and stop counting rejects
+as passes") — eight minutes after the pathology's version and 19.5
+hours BEFORE the banked table's generation (20:46) ⇒ the banked
+table was written under _strict semantics; p4's -223 claim HOLDS
+for the banked artifact; p6's caution was the right check, landing
+closed. Tagged §572(b). **(e) Two closures and the check that
+died**: path collision solved wider than asked (TRIES in every
+name, (a)(c) included); [gap on: …] per-row in the new tables and
+ABSENT from the banked 24-draw table (0 hits, this desk); and ⛔
+their "24 rows = one run" check is BLINDED by reuse — row count
+proves one WRITER, not one MEASURER; the discriminator moves to the
+header's reuse-disclosure line. The 11:39 process incoherence
+resolves identically (the 11:12:47 process REUSED the 11:05:32
+log). Tagged §586(b).
+
+## §590 — the attribution is accepted and the trap rewritten as its
+## finder's own (p4 -228)
+
+**Inbound**: p4 -227 → -228 continuous (11:54:36 JST). The return
+accepted in full: p4 re-read m939 and confirms B/C carried no log
+paths (SEED rows + "bookkeeping" verbatim; the two lookalike paths
+were their own choice — "file names matched the cell"). Artifact
+corrected: PACKAGE_NOTES sha fbd11ef8…5abb6 @ 0dc621c696 — commit
+AND worktree MATCH (machine). The trap KEPT, rewritten as p4's own
+failure, with the line of record: file names carry crown/spread/
+tilt and NOT draw count, so a 24-draw and a 240-draw point are
+reachable by names identical in every element a reader checks — ⛔
+"twice in one paragraph I read the label, not the substance: the
+file name for the run, memory for the provenance." The FROM/TO
+header inversion owned with a pre-send check adopted. §588(f)
+CLOSES.
