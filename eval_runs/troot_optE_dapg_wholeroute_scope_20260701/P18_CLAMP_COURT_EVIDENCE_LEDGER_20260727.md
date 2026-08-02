@@ -16918,3 +16918,58 @@ live-file caution now sits in the register as the DIFFERENCE OF TWO
 READS (11:54:27 = 15 rows / 8d54aa27 vs 11:57:56 = 16 rows /
 5ce662b2 — one row in 3 min 29 s), a demonstration rather than a
 claim. 8 points remain; solved-106 held open at both desks.
+
+## §595 — the map that retires its author's sections either way,
+## and registration closes (p5 -210, bank #56)
+
+**Inbound**: p5 -209 → -210 continuous (12:03:48 JST). **(a) Bank
+#56 post-verification (4th exercise) — ALL PASS**: content sha
+cba08ba5…00a1e @ 738784a146 MATCH (machine); message "Bank #56:
+pre-registration, what the grid retires either way"; +21/−0
+append-only; files=1; pre-landing (p5 measured PID 787189 alive at
+12:03; this desk re-measured 2 procs + 17 data rows at 12:04:16);
+worktree unmoved. **(b) The content — a SUPERSESSION MAP built to
+destroy its author's own discretion**: rule 5 extended to the whole
+doc, so that after seeing the grid p5 CANNOT retire inconvenient
+sections and keep convenient ones. The point is the two OUTCOME-
+INDEPENDENT items: (1) §25/§26/§27 expire under PASS and FAIL alike
+— the 24-draw grid retires either way, and a new grid returning the
+same answer does NOT restore the old grid's evidentiary basis. (2)
+§33-3's B-adoption REASONS are already broken independently of the
+grid (§36-6): the grid decides whether the bow is NEEDED, not
+whether the stated reasons were right — the reasons get rewritten
+under either outcome. **(c) What the map does NOT decide, stated**:
+which mounting to adopt; the 20-vs-45 tilt choice (Rs's decision);
+paths; structural viability. **(d) Registration CLOSES pre-
+landing**: rules 1-8 + screens 1/2 + §38's three corrections + this
+map — the reading apparatus is complete and frozen by its author
+before the data lands.
+
+## §596 — before rule 3 fires, name the sheet (p6 -191)
+
+**Inbound**: p6 -190 → -191 continuous (12:04:29 JST). **(a) Pin
+verified (machine)**: register @ 625def4b07 sha e491cd41…6ebc —
+commit AND worktree MATCH. **(b) The table facts, re-read at this
+desk (12:05:13, sha c54bcd10, 17 data rows — no advance since p6's
+12:02:46 read)**: PASS rows = 2, BOTH crown-none — none/0.280/45
+(L 56/4, R 132/8, +11.9 no, both clear) and none/0.400/20 (L 63/8,
+R 134/34, +17.2 no, both clear); the SAME MOUNTING with the head,
+0.110/0.280/45 = L 56/0 (L put back), R 132/16, +0.0 YES, fail —
+two legs down. The (a)-header's "the lower bound" declaration is in
+the artifact. **(c) The firing question — ROUTED, not resolved
+here**: rule (3) as pre-registered ("any tilt-45 point passing
+conjunctively ⇒ immediate escalation retraction to Rs") does not
+name a SHEET; its literal trigger is present in the partial table
+on the crown-none sheet only, while the with-head row at the same
+mounting fails. p6 asks exactly one thing before the rule fires:
+NAME THE SHEET. p6 declines to reinterpret the rule; so does this
+desk — p5's court. Timing: ~7 points remain; if an amendment is the
+answer it must land PRE-LANDING to be a pre-registration; whether
+an ambiguity-resolution passes through the #56 closure is ALSO
+p5's call (the exception class exists for time-critical reading
+corrections). **(d) A third same-shape instance, held open**:
+across the two sheets at (0.280,45), R solved 132 = 132 while R
+free goes 8 → 16 — same-count/different-content inside one table;
+held open beside solved-106, no story. p5 -209's constructive
+discharge rowed to #57 by p6 as the second working form of their
+version rule.
