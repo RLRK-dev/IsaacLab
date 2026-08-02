@@ -1531,7 +1531,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     collision, and returns the one closest to `near` (so the servo move stays short)."""
     sc = mujoco.MjData(m)
     _clear_dropped = 0
-    _blame, _blame_eg = {}, {}          # what each rejected candidate was rejected AGAINST, by name
+    _blame, _blame_eg, _phase = {}, {}, []          # what each rejected candidate was rejected AGAINST, by name
     _col_dropped = 0
     _path_dropped = 0
     _worst_path = (1e9, None)
@@ -1701,6 +1701,13 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
                     _k9 = "the other arm ON THE WAY"
                     _blame[_k9] = _blame.get(_k9, 0) + 1
                     _blame_eg.setdefault(_k9, _pw)
+                    # ⛔ The phase, kept separately.  Keying the tally once made the cause visible
+                    # and made its DISTRIBUTION invisible -- and the distribution is the whole
+                    # diagnostic (does the early peak shrink and the late one remain?).  It cannot
+                    # be read back out of a single key, so it is accumulated rather than inferred.
+                    _mm9 = re.search(r" at (\d+)/(\d+) along the move", _pw or "")
+                    if _mm9:
+                        _phase.append(int(_mm9.group(1)) / int(_mm9.group(2)))
         # Rs, 2026-07-28, watching the run: "the left hand is slamming into the cylinder."  The
         # mast was never in this filter.  It was MEASURED every step and printed as "column gap",
         # and it read negative at EIGHT steps of thirteen -- nine counting the one that read
@@ -1779,6 +1786,12 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # more than one test; each entry is "rejections against this part", not "poses".
         _b = ", ".join(f"{k} x{v}" + (f" (e.g. {_blame_eg[k]})" if k in _blame_eg else "")
                        for k, v in sorted(_blame.items(), key=lambda kv: -kv[1]))
+        if _phase:
+            _h = [sum(1 for v in _phase if lo <= v < lo + 0.2) for lo in (0, .2, .4, .6, .8)]
+            print(f"[steps] {label} IK {t}: arm-path violation phase (0 = start of the move, "
+                  f"1 = the pose): " + "  ".join(f"{lo:.1f}-{lo+0.2:.1f}: {c}"
+                                                 for lo, c in zip((0, .2, .4, .6, .8), _h))
+                  + f"   n={len(_phase)}")
         print(f"[steps] {label} IK {t}: rejected against -- {_b}"
               f"   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)")
     well = [c for c in free if c[5] >= SIGMA_FLOOR] or free   # drop the near-singular ones
