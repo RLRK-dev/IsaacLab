@@ -43,7 +43,14 @@ conflict set on any install, so a line appearing in this log is not evidence tha
 caused it.
 
 ⛔ The standing caveat is unchanged: **any path importing `isaacsim` and `newton` in one process
-needs checking.** This upgrade widens that gap; it does not open it.
+needs checking.** ⛔ **CORRECTED 2026-08-03 07:0x — "widens, does not open" is FALSE for the newton
+edge.** `newton-1.4.0.dist-info/METADATA:76-77` declares `mujoco~=3.10.0` and
+`mujoco-warp~=3.10.0,>=3.10.0.2` under `extra == "sim"`. Both were SATISFIED before this upgrade and
+are VIOLATED after. pip printed nothing because newton is installed as the base distribution, so the
+resolver never evaluated the `sim` extra — and auditing only pip stdout treated that silence as
+safety. `SolverMuJoCo` now emits a RuntimeWarning on every construction (`solver_mujoco.py:559`,
+reproduced live). newton 1.4.0 IS the latest upstream release, so no newton supports mujoco 3.11:
+"upgrade everything to latest" produced a mutually incompatible set. Escalated to Rs.
 
 ## 3. The dry-run again failed to predict the install
 
@@ -118,13 +125,48 @@ finished — 06:22:51 → 06:42:15, **exit 1**, 385 lines — and the completed 
 quantities above are unchanged by the rest of the run; they are start-pose quantities, printed
 before the first step. §8 records what the rest of the run showed.
 
-⇒ **The instrument's reading did not move.** The clearance and arm-to-arm path tests return the same
-candidate sets and the same standing errors under `mujoco` 3.11.0 as under 3.10.0.
+### ⛔ WITHDRAWN 2026-08-03 07:0x — this section over-claimed, and the L3 panel broke it
 
-⚠ **Scope of this ✅.** It covers the start-pose solve at grasp centre **−0.200**, `START_TRIES=240`,
-`UNWRAP_SOLVE=1 ARM_PATH=1`, on this driver and this mounting. It does **not** cover the other six
-grasp centres, the crown/mast sweeps, the clamp-window probes, or any quantity measured by a
-different instrument. Those 31 artifacts keep their recorded stack (§5) and are not re-derived here.
+The sentence that stood here — *"The instrument's reading did not move. The clearance and arm-to-arm
+path tests return the same candidate sets and the same standing errors"* — **is false as written.**
+Raised by the numerical/measurement challenger; every point below reproduced by me before accepting.
+
+**What actually held** (the table above is correct as far as it goes): the four quoted quantities are
+identical, and independently the 44 clear-candidate joint vectors are byte-identical.
+
+**What actually moved**, in the same two logs, lines away from the four I quoted:
+
+| quantity | baseline 3.10.0 | 3.11.0 |
+|---|---|---|
+| arm-to-arm closest **pair** (`arm_pair_min` → `mj_geomDistance`) | `16 ↔ 70` | **`20 ↔ 66`** |
+| cable link held after the approach | `L=cab4 / R=cab10` | **`L=cab3 / R=cab9`** (≈11 mm) |
+| standing-error per-joint residual signs | — | **3 of 12 flipped** |
+
+⇒ The arm-to-arm test **is the test the withdrawn sentence named**, and its own output changed.
+The honest claim is the narrower one: **the candidate set did not move; the settled physics state
+did.**
+
+**And two of the four quantities could not have moved.** The 240 draws come from
+`np.random.default_rng(seed)` (`ur15_steps_wired.py:1545`) — bit-identical across any mujoco build by
+construction. The IK inner loop excludes collision by design (`:1585`, *"⛔ kinematics only, NOT
+mj_forward … Nothing in this loop reads contacts"*), so `solved` is FK + Jacobian only. Only
+`collision-free` exercises `mj_geomDistance`. **Four ✅ were roughly one real test**, and the query
+beside it disagreed.
+
+⚠ **The log does not record its own instrument.** `grep -c '3.11.0' postupgrade_run.log` → **0**; no
+version banner at all. "Measured on 3.11.0" is inferred from mtime ordering in a shared tree — the
+same defect this report flags in the 08-02 baseline at §5, repeated in its replacement. The only
+in-band evidence that a different mujoco ran is incidental: the attach-warning text changed from
+`impratio: parent has 1` to `parent has 1 (default)`.
+
+⚠ **`premeasured_on_3.10.0.txt` is not closed either.** Built with `-maxdepth 1`; without it the
+window holds **67** files, not 31 — including `unwrap_logs/phase_histogram.txt`, **the very baseline
+compared against above**.
+
+⚠ **Scope of what survives.** Start-pose solve at grasp centre −0.200, `START_TRIES=240`,
+`UNWRAP_SOLVE=1 ARM_PATH=1`, this driver, this mounting. It does not cover the other six grasp
+centres, the crown/mast sweeps, or the clamp-window probes. And "one axis changed" was wrong: the
+driver also differs from the baseline revision `5dcd1d4e81` by +12 print-only lines.
 
 ## 7. ⛔ A blocker found on the way, unrelated to the upgrade
 
