@@ -19076,3 +19076,64 @@ evaluations decide whether the witness set is an interval. **(d)
 Bank #80 EXECUTED @ 92fafabc3b (front door)**: worktree sha
 c322fccb…ac26 MATCH → commit-content MATCH; +40/−1, the deleted
 line verified as the old boundary phrase (replaced, declared).
+
+## §676 — monotonicity is not unshown but false, and the clips
+## survive the coarse pitch (p5 -240, bank #81)
+
+**Inbound**: p5 -239 → -240 continuous (15:33:36 JST). **(a)** The
+bracket wording taken and SHARPENED: monotonicity of L free is not
+merely unshown — it is FALSE (the column runs 1/1/7/14/15/31/30,
+dropping at the end; re-derived at this desk across both tables,
+exact) ⇒ the "window edge" also becomes a BRACKET (width 10 mm
+unchanged; its meaning changed). **(b)** The upward caution taken —
+with the CLIPS carved out by pitch-counting: C1 = +0.150 is a
+DIRECT sample (0 mm distance); C2 = +0.040 is flanked at 10/20 mm
+by two zeros ⇒ "the window contains neither clip" escapes the
+30-mm-pitch weakness; the precise sentence banked: at the clip
+positions and their 10-20 mm neighborhoods, no clean left-arm pose
+was found at 240 draws. **(c)** The witness set marked
+NON-INTERVAL; holes-vs-unmeasured decided by 65 + 60 = 125 queued
+pairs. **(d) Bank #81 EXECUTED @ 46c0a63020 (front door)**: sha
+bfe87ec4…a989 MATCH ×2; +36/−1, deleted line = the old window-edge
+line (replaced, declared).
+
+## §677 — the split accepted, and the remaining half under test
+## (p4 -248)
+
+**Inbound**: p4 -247 → -248 continuous (15:33:51 JST). **(a)** The
+two-boundary split accepted with the compatibility stated: the
+endpoint reads are strong (L free is a strong class); what was
+doubted is UNIQUENESS of the transition — the exact statement of
+record: "a transition exists in that 10-mm interval, width 10 mm;
+whether it is the only one is unknown." **(b) ⭐ The unknown under
+direct test NOW**: −0.070 / −0.080 / −0.090 at 240 draws, built
+mounting, OUT_TAG=_UPWARD protecting the banked tables — the
+direct test of their own §6-correction caution; open ⇒ the window
+moves nearer the build; closed ⇒ the one-transition reading
+reinforced (not proven). Launched 15:33:25 (~5 min; process
+presence re-checked here). **(c) The record kept**: the run's
+first attempt NEVER LAUNCHED — the persistent cwd sat at repo root
+and the script was not found (instant exit, caught by READING THE
+LOG, not assumed) — the day's THIRD desk bitten by cwd
+persistence, self-caught; relaunched and measured live.
+
+## §678 — the noon distinction, one level down (p6 -225)
+
+**Inbound**: p6 -224 → -225 continuous (15:34:03 JST); register @
+b3810952b7 sha 8ceade1c…ea84 — commit AND worktree MATCH. **(a)**
+Their claim narrowed under the split, exactly: the
+"boundary-may-not-exist" caution READS LIMITED to the witness
+edge; the window edge stands (L free = a count class with no +0.0
+resolution problem). **(b) ⭐⭐ The form named**: the split IS their
+noon "two boxes" distinction (L-free region vs conjunction region)
+applied to EDGES — the same distinction one level down resolved a
+two-desk tension, because it points at a PREDICATE difference, not
+an opinion difference. **(c) The upward caution's support made
+precise**: no instance exists of "a witness hidden in an empty
+gap" (−0.120 sits in the transition zone) ⇒ the caution is LOSS OF
+GUARANTEE, not evidence of holes; the correct support is SCALE
+(structure appeared at 10-mm pitch; the upper side is 3× coarser)
+⇒ the minimal discriminating move = split one upper 30-mm gap at
+10 mm — WHICH p4'S RUNNING PROBE IS, launched 38 seconds before
+this message arrived: the lane converging on its next measurement
+from two sides in under a minute.
