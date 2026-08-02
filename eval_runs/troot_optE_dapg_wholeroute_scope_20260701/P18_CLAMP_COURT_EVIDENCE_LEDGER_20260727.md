@@ -15853,3 +15853,98 @@ run's L column at crown-none read 3 / 17 / 4 free at points that were
 (L ∧ R ∧ non-interleave) is UNDECIDABLE there (R and interleave were
 never produced). The reading apparatus (p5's seven pre-registered
 rules, screens 1-2) is unchanged; it now awaits the rerun package.
+
+## §567 — a trigger where the screens cannot see: three desks, one
+## shape, and rule 8 lands before the grid (p5 -201)
+
+**Inbound**: p5 -200 → -201 continuous (10:48:42 JST). **(a) Pin
+verified (machine)**: P5 doc content sha 57f74f49…3b45 @ 9dab074f7d —
+commit AND worktree MATCH; vs bank #47 = +106/−0 append-only. Cites
+verbatim-confirmed: §36 heading (:2622), the 3-substantive tally
+(:2655), the 0.0112→0.0381 clause (:2695), left-leg-only scope
+(:2714), rule 8 (:2717). Sigma spot-check against p4's
+SEED_COUNT_AND_REAL_HEAD_20260802.txt: :19 = poses #0/#1/#2/#4 sigma
+0.0338, :20 = pose #3 sigma 0.0381 — the real-head free set is
+exactly {0.0338 ×4, 0.0381 ×1}, and neither 0.0745 nor 0.0112 appears
+in that artifact: p5's "0.0745 is absent" holds on the artifact too.
+**(b) ⚠ CUSTODY OPEN**: 9dab074f7d is titled "Bank #48 — a note that
+was right stopped being an identity / rule 8 before the grid lands"
+(authored 10:47:57, 45 s before -201). It CONTINUES this desk's bank
+numbering but is NOT this desk's commit; the shared git identity
+cannot attribute it. Content collation PASS, append-only, and the
+PRE-GRID timing of rule 8 is now independently established by the
+commit clock regardless of who executed. Question routed to p5
+(m917): who committed, and is this a one-off for timing or a change
+to the 0-commit arrangement. Recorded, not normalized. **(c) The
+adoption**: time-closure lands as a §36-1 RULE appendment (not a
+catalogue record): state how the set was built AND as-of when. p5
+verified #45 themselves — worktree row + git grep at 00f499a55d, the
+re-derivation form. **(d) ⭐ Three desks, one shape**: p4's
+old-draw-count constants (START_TRIES 24 / wait 260 s), p6's 「既存」,
+p5's 「依然 1 姿勢」 — a set description closed at writing time goes
+indeterminate the moment the denominator moves. Screens 1/2 cannot
+catch it (it breaks between one's own annotation and one's own later
+conclusion, not between an original and a reading) ⇒ p5 installs a
+TRIGGER, not a screen: when a measurement moves a denominator,
+re-read every past sentence that pointed at that set by count or
+definite article. **(e) The trigger's own yield (closed query, as-of
+10:4x; 14 hits, 3 substantive)**: ① the descent ladder (+2.1 / slope
+0.88) is pose #0's ladder = the very pose route B takes (§33-3
+verbatim 「条件最良の #0 を使う」) — understated for B,
+non-transferable to A; #1/#2 landings unmeasured. ② route A was
+priced by its worst selectable element (0.0112) while line-clearing
+#2 sits at 0.0381 one section up — 3.4× overpriced. ③ ⛔ heaviest:
+the real-head 240-draw free set carries no 0.0745, so route (A)'s
+"ranking change (Rs approval)" cost was a product of the HEADLESS
+model — there is nothing to overturn; scope held to p4's verbatim
+"240 is not enough any more than 24 was" (this is NOT a proof pose
+#0 died). ④ route B's unmeasured items = 3, not 1 — the bowed head
+has never run. **(f) Rule 8, pre-registered in both directions**:
+conjunction passes at (0.280,20) ⇒ route A's conditioning is
+reported as 0.0381 (real head), 0.0112 unused, ranking-cost
+withdrawn; R or interleave fails ⇒ (A) falls and route B returns
+carrying its 3 unmeasured items. No verdict issued — all left-arm
+legs; the conjunction decides.
+
+## §568 — correct as a point, incomplete as a surface: p6 walks the
+## running lane (p6 -180)
+
+**Inbound**: p6 -179 → -180 continuous (10:49:22 JST). **(a) Pin
+verified (machine)**: register @ 4c0030fd2a sha 70ad8cf2…eb31 —
+commit AND worktree MATCH. m916's two items → rows #57/#56; guard
+layer-4 0/0; audit PASS + 2 standing WARN (C1 map stale / C2b SOMA:82
+dangling — unrelated; SOMA is Rs-exclusive). p6 independently
+content-verified 69db0d1864 AND verified this desk's "no cost at fast
+points" in code: the wait breaks on the 88mm-SPAN INTERLEAVE line,
+2.0 s poll — this desk re-read :32/:49-:51 and confirms. **(b) ⛔
+Finding (a), court p4 — the refusal guard is section-local**:
+sweep_mounting.py :97 and :138 (sections (a) crown radius / (c)
+crown height) still read except ValueError: _clear = True; the raise
+sits at :198 inside section (b) only (this desk verbatim-read :95-
+:144, :198, :204). The except conflates "nothing within the search
+radius" (legitimate — the :98 comment) with "the line never printed"
+(truncation), so in (a)/(c) a cut point lands AS A VERDICT — PASS if
+L and R printed, fail if cut before R. Dormant NOW (argv = b, both
+desks measured), armed the moment (a)/(c) rerun at 240 draws. p6's
+phrase of record: 点として正しく、面として未完. **(c) ⚠ Finding (b),
+court p4 — path collision**: the 240 grid writes to the same
+filename as the 24-draw table (SPREAD_TILT_SWEEP_20260729.txt); on
+landing, the path stops pointing at the pinned table (content pin
+7e2423ed… @ 528654735e survives; path references die). This desk
+re-measured the old table: mtime 07-29 20:46:06, unchanged — which
+also artifact-confirms the discarded run banked nothing. **(d) Lane
+measurements**: p6's own — completed points 307 s / 332 s (both
+exceed the old 260 cap from point 1); START_TRIES=240 read from
+/proc/654234/environ; ETA extrapolated to 24 points = 12:3x-12:5x
+(⛔ flagged as extrapolation); the three banked tables carry 0 None /
+0 "?" gaps (closed query) — no truncation was ever banked; restart-
+time 20 s spread (p4's 10:30:55 vs ps start 10:30:35) held as two
+measurement surfaces, not a contradiction. This desk's own (10:53:
+48): run cwd = p4 sim dir; per-point logs live in /tmp/
+mounting_sweep/, current open log = st_none_0.280_30.log — the run
+has advanced into the 0.280 spread column. (A first fd-derived
+"points started: 15" readout counted p4's session scratchpad, not
+the grid — discarded before use.) **(e) Routing**: findings (a)+(b)
+→ p4 as m918 (no mid-run action; applies at package time and before
+any (a)/(c) rerun); custody question on "Bank #48" → p5 (m917); bank
+pointer → p6 (m919).
