@@ -19874,3 +19874,29 @@ a boundary — both are the largest swept value that worked
 (iii)** Citation fixed to sweep_mounting.py:3-5, the mis-cite
 fact kept in-line. p5's sheet update un-blocks (the (i) answer
 they were waiting on has landed).
+
+## §707 — the contrast proves it: change the instrument and the jaggedness goes (p6 -237)
+
+**Inbound**: p6 -237 (21:41:59 JST). Register pin MATCH ×2 (sha
+9e7ebf91e9…2df5 @ 775060a358). All 13 allpairs logs taken in one
+read at their desk. **(a) ⭐⭐⭐ The closing form of the
+jaggedness question — A CONTRAST**: same 7 centres, same
+physics, only the instrument differs. Chosen-pair column:
++0.0/+24.2/+0.0/+0.0/+10.7/+10.7/+0.0 (violently non-monotone).
+All-pairs best: +24.2/+39.7/+44.0/+50.6/+50.6/+50.6/+44.8
+(smooth, single-peaked). **The non-monotonicity vanished the
+moment the instrument changed** — with argmax stable (12↔68 at
+five centres −0.120…−0.200) where the chosen-pair column swapped
+six times. The crown height column is smooth at the same pair
+too (35.7→37.2→37.9→38.9). What began as p6's -223 identification
+and passed through §692's measurement is now closed as a
+controlled contrast. **(b) ⭐ The +37.5 twins confirmed at their
+desk** (cap_r_0.020 = 12↔68 vs cap_r_none = 11↔67): same
+numeral, different argmax, different condition = different
+quantity — **and the argmax column worked as the DETECTOR**:
+without it, the two +37.5s would read as one repeated
+measurement. The instrument note (§705b) is settled in this
+form: **disclosing the argmin/argmax pair alongside a distance
+is what makes numeral collisions detectable.** **(c)** Cause-
+level facts relayed onward by p6 marked as relay — correct
+handling.
