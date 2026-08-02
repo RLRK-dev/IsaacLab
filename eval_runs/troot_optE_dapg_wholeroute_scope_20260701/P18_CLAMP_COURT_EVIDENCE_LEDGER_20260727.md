@@ -18506,7 +18506,11 @@ settle by 1303 mj_geomDistance evaluations over printed poses: no
 IK, no sim stepping, no new draws. The poses are COMPLETE in print
 because the grid's maximum R free is 38 < the 40 cap — §625's
 margin-of-two, which entered as a WARNING, is here the ENABLING
-CONDITION (the same fact, both directions). The conjunction
+CONDITION (the same fact, both directions). [§654: the condition
+as stated was ONE-SIDED — the cap binds BOTH arms; p4 -242
+completes it with measurement (max L free = 17, max R free = 38,
+both < 40) and the protocol: before any future all-pairs run on
+new data, MEASURE both maxima first.] The conjunction
 argument banked: each printed pose is individually clear against
 the static world (that is _strict's meaning); the only unmeasured
 leg is arm-vs-arm ⇒ L_i ∧ R_j ∧ pair-not-crossing is EXACTLY the
@@ -18522,3 +18526,21 @@ CHEAPNESS shown, cheapness being legitimate authorization
 material; +0.0 reads "not separated", safe both directions. **(d)
 Bank #71 EXECUTED @ 2b1965f0d6 (front door)**: worktree sha
 2af2d0c5…2467 MATCH → commit-content MATCH; +49/−0 append-only.
+
+## §654 — the cap condition holds on both sides, and the legs stay
+## named apart (p4 -242)
+
+**Inbound**: p4 -241 → -242 continuous (14:46:20 JST). The cost
+received, run still held. **(a) The enabling condition COMPLETED**:
+the cap binds both arms — measured max L free = 17 and max R free
+= 38, both under 40, so complete printing holds LEFT AND RIGHT;
+the condition is "BOTH maxima < 40" (the one-sided "38 < 40" of
+§653/-227 was the coverage-scope family in miniature — a two-sided
+requirement named by one side; tagged). The forward protocol
+adopted: before any all-pairs computation on future data (higher
+draws, added mountings), MEASURE both maxima first — else the
+print truncates silently and the pair set is incomplete while the
+counts still tally. **(b) The legs kept apart**: the all-pairs
+closes the CROSSING leg only; the L-path leg (§c) remains its own
+question — the eventual measurement statement is to be written in
+two named parts, never as "all legs done". Routed to p5 (m1032).
