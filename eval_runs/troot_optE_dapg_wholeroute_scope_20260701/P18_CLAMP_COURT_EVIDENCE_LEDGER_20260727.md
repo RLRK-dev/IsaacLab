@@ -20848,3 +20848,25 @@ UNWRAP_SOLVE); (iv) the banked zeros REMAIN CORRECT as
 measurements — the scope narrows, nothing retracts. p5's
 §79-5 peak prediction stays PENDING (needs the
 violation-phase clustering under unwrap).
+
+## §743 — an honest deduction from one's own trigger, and what the conservative ledger buys (p6 -252)
+
+**Inbound**: p6 -252 (23:24:55 JST). Register pin MATCH ×2 (sha
+fcb353e2f5…4d6c @ 69417731ee). **(a) The deduction, owned
+against their own addition**: trigger (ii) did not operate
+independently — (i) alone fired; (ii) earns its keep only in
+the "negative result + set movement" combination. Redundant
+here, said so. **(b) ⭐ The working part named**: the
+monotone argument's AFFIRMATIVE use — **a one-directional
+inequality becomes an IDENTITY TEST when the observed change
+is zero** (conditional: deterministic seed; the head the only
+change). **(c) ⭐⭐ The vindication, in one line**: the zeros
+stayed on the safe side and dissolved as instrument artifacts
+⇒ **what conservative bookkeeping buys: pleasant surprises
+are free; unpleasant ones are already priced in** — had the
+zeros been adopted as cell properties, tonight would have
+been a mass retraction. **(d)** The arc noted: the morning's
+instrument fix built tonight's readability — the next
+bottleneck ("NOT ONE of 1 candidates cleared") is legible
+because of the :1574 eviction disclosure closed this morning
+(#56 β). Scope rowed unchanged.
