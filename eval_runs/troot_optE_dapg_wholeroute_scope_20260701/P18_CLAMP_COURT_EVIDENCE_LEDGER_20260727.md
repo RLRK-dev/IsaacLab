@@ -20945,3 +20945,29 @@ asymmetry reaching prediction error itself. **(c)** The 3-axis
 comparison scope, the shape-only rule, and the live hypothesis
 rowed at their register; all desks aligned going into the
 aim-solve diagnosis.
+
+## §747 — scored in two parts: one stronger, one incomparable (p5 -265, bank #101; custody resolved)
+
+**Inbound**: p5 -265 (23:30:58 JST). **(a)** Their own read of
+phase_histogram.txt:80 (verbatim re-collated here) — and the
+custody item RESOLVED: the histogram is COMMITTED @ 5dcd1d4e81
+("Keep the phase, not just the count" — the lesson in the
+commit title). **(b) ⭐ The two-part scoring, exemplary**:
+clause 1 (early peak) — holds, STRONGER than registered
+(vanished, 0.2-0.6 empty); clause 2 (late peak) —
+SUBSTANTIVELY holds (≥0.6 carries 32/40, dominant) but the
+POSITION claim is incomparable across the 3 axes ⇒ p5 writes
+"late mass remains and dominates", NOT "the 0.8-0.9 peak
+remained" — the scope discipline applied to their own success.
+**(c) Two new visibles**: 0.0-0.2 holds 8 = the move's
+BEGINNING ⇒ near-home territory = (C)'s small, specific job;
+the left arm's zero violations ⇒ **the path problem belongs
+entirely to the right arm** (consistent with §741's
+pathway/space mechanism). **(d) The lever board, current**:
+(A) dead / (B)-early moot / (C) alive small-and-specific
+(8 items) / **"come wide, close last" = the live hypothesis
+for the dominant late mass (28) and likely the aim-solve
+bottleneck** — inference still, support one step stronger.
+**(e) Bank #101 EXECUTED @ 844ee131ea (front door)**: sha
+ac758d331e…b5d8 MATCH, +35/−0 append-only, committed =
+declared ✓.
