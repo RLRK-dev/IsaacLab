@@ -14976,7 +14976,11 @@ clear", not a design value.** **(d) ⛔ The hypothesis killed pre-proposal**:
 "the 13 are a menu undersampling — raise tries" — code read FIRST: :730
 tries=None (desk-verified verbatim), n_try = 2 × len(POSES) per p5's read of
 solve_ik ⇒ the menu already walked twice ⇒ proposing would have been the
-fourth overreach; the pose-class refinement: unrefuted because the IK's
+fourth overreach [⛔ §539: :730 is the AIM solve — the 13-candidate producer
+is the START-POSE solve, desk-located at :1700 (tries=24, no wide ⇒ menu 11,
+no warm) after p6's own correcting cite ":1675" drifted 25 lines; 24/11 ≈
+2.18 cycles — the conclusion survives on the right site; this desk had
+verified the LINE's property without verifying the line was the producer]; the pose-class refinement: unrefuted because the IK's
 random exploration OUTSIDE the menu is unexhausted, not because the menu is
 undersampled. **(e)** The reverse check and depth-grows explanation walked
 their side too — three desks on both.
@@ -15070,3 +15074,35 @@ unaddressed; x > +0.280 and above-the-crossing unmeasured; the bowed
 head's STRUCTURAL viability expressly outside p5's court. Rs receives the
 shape and the bow figure from p5 DIRECTLY. Routed: p4 (m874), p5 (m875 —
 bank), p6 (m876 — rows).
+
+## 539. Re-anchored by kind, the descent sized — and a citation correction that itself needed correcting
+
+From p6's -167 (09:15:59; -166 → -167 sequential; register @ f2109735e6, sha
+ef01a0d9…a975 MATCH). **(a) The re-anchoring, BY KIND**: numbers → v3 (69
+lines @ 1fafa28bd0), prose → the READING file (102 lines); the safety basis
+desk-CONFIRMED — the four line-walk rows are diff-EMPTY between v2 and v3
+(machine-checked) ⇒ identical numbers across versions; the
+generator-untouched lesson rowed their side. **(b) ⭐⭐ The descent sized (no
+designing)**: above = no arch path within 200 mm (whole-row min worsens
+−28.3 → −49.3) while the right mount's x-column clears at every height ⇒
+the blocker sits INSIDE, not over, the mount; behind = empty from 50 mm
+back ⇒ **the descent question quantified: "at z = 1.530, can y return
+50 mm within the 34 mm of x?" (slope ≈ 1.5; desk 1.47)** — the endpoint has
+room (68.8 at y = 0). Two unmeasured, named: the recess LOWER BOUND
+(nothing sampled between 0 and −0.050) and the COMBINED recessed-AND-raised
+(each probe is a 1-D slice). **(c) ⛔ The citation moved — TWICE**: p6
+corrects p5's -188(4) — :730 is the AIM solve (tries=None, true of the line
+but not the producer); the 13 came from the START-POSE solve, which p6
+cited as ":1675 (tries=24, wide unspecified ⇒ menu 11)"; ⚠ this desk
+located the ACTUAL line at **:1700** (:1675 is the menu-mirror check — the
+correcting message itself drifted 25 lines, the very form it corrects).
+Substance FULLY verified at :1700 (tries=24, near/other only, NO wide, NO
+warm) ⇒ 24/11 ≈ 2.18 menu cycles — "the menu is exhausted" survives on the
+right site; §535(d) tagged, this desk owning that it verified the line's
+PROPERTY without verifying the line was the PRODUCER. **(d) ⭐ The
+pose-class refinement, sharpened again**: no warm at :1700 ⇒ all 24 tries
+are fresh restarts from uniform random joint draws ⇒ the ATTITUDE axis
+(menu) is exhausted; the unexhausted axis is the 6-D joint space sampled
+only 24 times — a draw-count bound, not a menu gap. Routed: p5 (m875 — the
+§29 cite inherits the move, their court), p6 (m876 — the :1700 relocation,
+their court to re-cite). Standing: p4's return-path probe (m874).
