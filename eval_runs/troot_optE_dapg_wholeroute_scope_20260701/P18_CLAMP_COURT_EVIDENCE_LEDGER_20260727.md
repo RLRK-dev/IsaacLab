@@ -15449,13 +15449,18 @@ From p4's -218 (09:51:30; -217 → -218 sequential). **(a) ⚠ THE GRADE**: the
 four pair numbers arrived MESSAGE-BORNE — no artifact, no sha (desk-checked:
 no new commit carries them; only MUJOCO_LOG moved) ⇒ banked at
 MESSAGE-CLAIM grade, pin asked (m896); every relay this cycle names the
-grade; upgrade on arrival. **(b) ⭐⭐⭐ The numbers as claimed** (same
+grade; upgrade on arrival. [→ §555: the pin ARRIVED @ 6e0cafc370
+(SEED_COUNT_AND_REAL_HEAD_20260802.txt, sha eb0a59d0…aa25, desk-verified,
+table matches -218 to the digit) — grade RETIRED.] **(b) ⭐⭐⭐ The numbers as claimed** (same
 driver, same sitting, START_TRIES the only difference): **BUILT CELL
 (0.110, 0.220, 45): 24 → 7/0; 240 → 58 solved / 0 free** ⇒ the built
 cell's zero is NOT a floor (10× draws, still zero). **GRID POINT (0.110,
 0.280, 20): 24 → 13/0; 240 → 106 solved / 5 FREE** ⇒ that zero WAS the
 floor — **the 0.110 crown at that mounting has five clean poses when
-properly sampled ⇒ "only crown-none passes" FAILS there.** **(c) The
+properly sampled ⇒ "only crown-none passes" FAILS there.** [⚠ §554:
+PRECISION — the pass is a 3-condition conjunction; only the L-leg was
+re-read (R free and interleave at the NEW poses unread) ⇒ the claim LOST
+ITS SUPPORT there; the point's pass/fail is UNDECIDED, not flipped.] **(c) The
 partition** (p4's, as numeric consequence): claims resting on the BUILT
 point stand; the crown-radius/height sweeps' and the grid's zeros are —
 at least at (0.280, 20) — 24-draw artifacts; ⚠ the other 22 grid points
@@ -15466,7 +15471,11 @@ survives AT THE BUILT POINT — one of the eight 45-points re-measured; the
 other seven remain 24-scoped. **(d)** Stage 1 ALREADY LAUNCHED (09:5x):
 the REACHING head (Z0 1.330 → R 0.100) at the same mounting, tries 240 —
 p4's own distinction carried: the 5-free is R = 0.110 / top 1.550, NOT a
-reaching head; a separate question pointing the same direction. Routed:
+reaching head; a separate question pointing the same direction. [⛔ §554:
+TERM RETURNED — reaching is the INEQUALITY (§526); R 0.110 tops 20 mm
+OVER the mounts and REACHES (the built cell is the proof); the true
+distinction is the MINIMAL reaching head (0.100) vs the BUILT head
+(0.110).] Routed:
 p5 (m894 — the hold-release material with grades), p6 (m895 — rows), p4
 (m896 — the pin ask).
 
@@ -15489,3 +15498,79 @@ what changes is only that the DECIDER is the real-body measurement ⇒ the
 line-derived materials (CROSSED, the 96 mm window, the 35.6 mm relief,
 the descent ladder) remain as upper bounds and proxies. **(d)** The #51
 appendment and the continuing hold rowed their side.
+
+## 553. Loosening corrections do not wait — and the escalation came out stronger
+
+From p5's -195 (09:56; -194 → -195 sequential). **(a) ⭐⭐ The hold refined,
+with a NEW asymmetry principle**: the final synthesis and its bank stay
+HELD (no ruling on relayed message-grade values), BUT one letter goes to
+Rs NOW, marked message-grade — two constraints p5 placed before Rs are
+about to relax OPTIMISTICALLY, and **leaving a false NARROWNESS before
+the decision-maker is itself harm ⇒ constraint-LOOSENING corrections do
+not wait; tightening ones can.** **(b) ⭐⭐⭐ The reading of the split**:
+the REFERENCE CELL'S OWN configuration is 0-free at 24 AND 240 ⇒ **the
+escalation is STRONGER** — weakened: "45 uniformly dead" (7 of 8 points
+still 24-scoped); strengthened: "the reference's own configuration is
+dead, at 10× draws" — the exact point for Rs. The (0.280,20) result
+breaks the crown-kill premise and with it §30–§33's bow-necessity; p4's
+oversize note read as STRENGTHENING (even a head 20 mm over the mounts
+left five poses). "Exactly 1 of 24" stays 24-scoped. **(c)** The line
+analysis REGRADED, not withdrawn ("upper bound / proxy"). **(d) ⭐⭐ The
+highest-value ask, routed**: RE-RUN THE 24-POINT GRID AT 240 (m897) —
+without it no correct final synthesis exists. Stage 1 = a separate point
+on the same draw axis. p5's Rs letter goes DIRECTLY from p5,
+message-grade named inside it.
+
+## 554. The pass is a conjunction — the point did not flip, it became undecided
+
+From p6's -173 (09:56:22; -172 → -173 sequential; register @ caa51784e4,
+sha 5d9a91c5…113b MATCH; message-grade mirrored their side, 09:55:34
+zero-artifact re-check). **(a) ⭐⭐ The split AS evidence**: same
+instrument, same 10×, two points answering OPPOSITELY ⇒ the built zero is
+not merely un-floored — the tilt-45 kill and "the lever is tilt" SURVIVE
+10× draws (one point; 240 also finite). **(b) ⚠⚠ The catch nobody made**:
+(0.280, 20) did NOT become a pass — the pass is a THREE-condition
+conjunction (L ≥ 1 ∧ R ≥ 1 ∧ non-interleave); at 24 draws the point read
+L 0 / R 4 / interleave YES; only the L-leg was re-read at 240, and the
+interleave is measured AT THE SOLVER-CHOSEN POSE, which changes with the
+draws ⇒ **2 of 3 conditions unread at the new poses ⇒ the point's
+pass/fail is UNDECIDED, not flipped.** Desk ownership: -218's and this
+desk's relays (m894/m895, the 09:55 Rs report) said "不成立" —
+overshooting from "lost its support" to "refuted"; §551(b)(d) tagged this
+turn, corrected in every onward message and the next Rs report. **(c) ⛔
+The term returned**: "R = 0.110 is not a reaching head" is WRONG —
+reaching is the INEQUALITY (§526; the built cell tops 1.550 and CARRIES)
+⇒ the true distinction is "the MINIMAL reaching head (0.100) vs the
+BUILT head (0.110)"; the retired equality-reading resurfaced in -218 and
+in §551(d) [tagged]; routed to p4 (m897). **(d)** The 22 unre-measured
+carried.
+
+## 555. Stage 1 answers >0 — the bow is unnecessary, on the left-arm leg
+
+From p4's -219 (09:57:44; -218 → -219 sequential). **(a) Pins verified —
+and §551's grade UPGRADED**: SEED_COUNT_AND_REAL_HEAD_20260802.txt sha
+eb0a59d0…aa25 MATCH commit (6e0cafc370) AND worktree; 50 lines desk-read;
+PART 1 reproduces -218's four pair rows TO THE DIGIT (7/0, 58/0, 13/0,
+106/5) ⇒ message-grade retired. **(b) ⭐⭐⭐ Stage 1**: the MINIMAL
+reaching head (Z0 1.330, R derived 0.100, apex exactly on the mounts) at
+(0.280, 20), tries 240 — verbatim `L: 106 solved / 5 collision-free`;
+survivors = 2 DISTINCT poses (4 duplicate one q; sigmas 0.0338 / 0.0381);
+⭐ the pose [+1.140126 …] is ALSO clear with the crown REMOVED (that
+run's #2) ⇒ one pose survives WITH AND WITHOUT the head — stronger than
+either alone. **By p5's own criterion (> 0): the bow is NOT needed;
+route A stands with a real head in place — ON THE LEFT-ARM LEG** [⚠
+§554(b) applies in full: no "R free"/interleave line exists in the
+artifact (desk-grepped); the pass conjunction is 1-of-3 read at the new
+poses; p4's own :48 scope "one arm's clearance" says the same]. **(c) ⭐⭐
+The ownership, in the artifact's own words**: "Scoping a claim to its
+slice is not finished when the slice is named; it is finished when
+everything standing on the slice has been re-read" — the second
+same-shape in p4's day, self-named. **(d) Desk finds, minor**: :26 "at
+the built radius" contradicts :15's derived R = 0.100 (built = 0.110) —
+a prose slip inside the reading, routed (m897); the crossing-interval
+ladder's status question (moot if route A?) relayed to p5 (m898).
+**(e)** Scope carried: 2 of 24 re-measured; 240 establishes existence,
+not sufficiency; one mounting, one step, one arm. Routed: p5 (m898 —
+stage 1 + the conjunction status + the Rs-letter caution), p6 (m899 —
+rows + the grade retirement), p4 (m897 — the grid-240 ask + the term
+return + the :26 slip).
