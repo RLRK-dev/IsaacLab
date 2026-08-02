@@ -1786,16 +1786,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # more than one test; each entry is "rejections against this part", not "poses".
         _b = ", ".join(f"{k} x{v}" + (f" (e.g. {_blame_eg[k]})" if k in _blame_eg else "")
                        for k, v in sorted(_blame.items(), key=lambda kv: -kv[1]))
-    # ⛔ p6's rule, applied where it was still broken: a disclosure protects its subject only
-    # while they share a gate.  The fallback disclosure is un-gated and the REASON is inside
-    # `if not quiet`, so a quiet solve says "not one candidate cleared" 107 times and never once
-    # says what rejected them.  A fallback is exactly when the reason is needed, so it prints
-    # whenever the solve fell back, quiet or not.
-    if _fell_back and quiet and _blame:
-        print(f"[steps] {label} IK {t}: (fell back) rejected against -- "
-              + ", ".join(f"{k} x{v}" + (f" (e.g. {_blame_eg[k]})" if k in _blame_eg else "")
-                          for k, v in sorted(_blame.items(), key=lambda kv: -kv[1])[:6]))
-    if _phase:
+        if _phase:
             _h = [sum(1 for v in _phase if lo <= v < lo + 0.2) for lo in (0, .2, .4, .6, .8)]
             print(f"[steps] {label} IK {t}: arm-path violation phase (0 = start of the move, "
                   f"1 = the pose): " + "  ".join(f"{lo:.1f}-{lo+0.2:.1f}: {c}"
@@ -1803,6 +1794,18 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
                   + f"   n={len(_phase)}")
         print(f"[steps] {label} IK {t}: rejected against -- {_b}"
               f"   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)")
+    # ⛔ p6's rule, applied where it was still broken: a disclosure protects its subject only
+    # while they share a gate.  The fallback disclosure is un-gated and the REASON is inside
+    # `if not quiet`, so a quiet solve says "not one candidate cleared" 107 times and never once
+    # says what rejected them.  A fallback is exactly when the reason is needed, so it prints
+    # whenever the solve fell back, quiet or not.
+    # ⚠ Restored to indent 4 here (2026-08-03): `82e845e80c` inserted this block INSIDE the
+    # `if not quiet and _blame:` body above, which both ended that body early and left `if _phase:`
+    # with a 12-space body and an 8-space sibling -- the file has not parsed since 23:56 on 08-02.
+    if _fell_back and quiet and _blame:
+        print(f"[steps] {label} IK {t}: (fell back) rejected against -- "
+              + ", ".join(f"{k} x{v}" + (f" (e.g. {_blame_eg[k]})" if k in _blame_eg else "")
+                          for k, v in sorted(_blame.items(), key=lambda kv: -kv[1])[:6]))
     well = [c for c in free if c[5] >= SIGMA_FLOOR] or free   # drop the near-singular ones
     ref = np.zeros(6) if near is None else np.asarray(near)
     near_only = [c for c in well if np.abs(c[0] - ref).max() <= 1.2] or \
