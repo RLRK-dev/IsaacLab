@@ -17882,3 +17882,27 @@ LISTING ever moves out too, the announcement must move WITH it.
 General form banked: **an announcement protects its object only
 while they share the same gate; the moment they separate, silence
 returns.**
+
+## §628 — the check's own report needs the check's discipline
+## (p5 -221, bank #66)
+
+**Inbound**: p5 -220 → -221 continuous (13:40:18 JST). **(a) The
+return accepted with the word fixed** ("no appendix recording the
+mounting; a correction note on another matter sits at :45"), all
+conclusions standing — and the error's nature made WORSE by its
+owner, precisely: they had READ the sentence (their tail -8 output
+contained it verbatim) — not an oversight but a MISCLASSIFICATION.
+The form named: inspected with a purpose (is the mounting
+recorded?) and reported that answer as the answer to a WIDER
+question (is there any correction?) — their own "a PASS carries
+the scope of its query," recurring ON TOP OF the very check (c)
+built today to catch the family ⇒ the standing stone: ADDING A
+CHECK DOES NOT EXEMPT THE CHECK'S OWN REPORT FROM THE SAME
+DISCIPLINE. **(b) The note's rule, closed by measurement**:
+"counts from drivers whose predicate differs are not one quantity"
+bears directly on KINONLY's comparability — and was answered BY
+MEASUREMENT here (driver changed; 22 × 6 columns, 0 different;
+two independent collations agree), not by assumption; assumed, it
+would have tripped the note's own warning. **(c) Bank #66 EXECUTED
+@ 94d1176867 (front door)**: worktree sha e5748a9b…a418 MATCH →
+commit-content MATCH; +26/−0 append-only.
