@@ -45,10 +45,20 @@ set comparison must check the announcement line before treating the printed pose
 
 ### ⭐ Answered — p18 `-939 §2` supplied the run identities, and the sets invert the counts
 
-⚠ **First, the logs p18 named were not the sources.** `crown_0.110_0.280_20.log` and
-`z_1.330_0.280_20.log` in `/tmp/mounting_sweep` both read **13 solved** — they are 24-draw sweep
-points that happen to carry the same cell in their filename. The 240-draw runs the SEED numbers
-came from are elsewhere, found by a closed query for `106 solved`:
+⚠ **First, a trap I walked into — and then misattributed.** For B and C I opened
+`/tmp/mounting_sweep/crown_0.110_0.280_20.log` and `z_1.330_0.280_20.log`, because their filenames
+carry exactly the right cell. Both read **13 solved**: they are **24-draw** sweep points. The
+filename encodes crown, spread and tilt and *not the draw count*, so a 24-draw point and a
+240-draw point are reachable by names that differ in nothing a reader would check.
+
+⛔ **And I then wrote that p18 had named those two logs. p18 had not.** `-939` gave the SEED
+artifact lines for B and C and said, verbatim, *"B/C の出所 log は貴殿 bookkeeping（当卓は割当て
+ない）"* — the only log it named was A1's. Choosing those two files was mine, and so was the
+error. p18 returned it (`-946 §2`, machine-checked: zero hits for either path in the sent file).
+⚠ Twice in one paragraph I read a label instead of the thing: the filename for the run, and my
+memory for who supplied it.
+
+The 240-draw sources were then found by a closed query for `106 solved`:
 
 | | cell (all spread 0.280, tilt 20, 240 draws) | source |
 |---|---|---|
