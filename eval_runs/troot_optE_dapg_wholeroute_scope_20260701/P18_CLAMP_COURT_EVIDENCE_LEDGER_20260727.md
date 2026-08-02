@@ -16238,7 +16238,10 @@ artifacts are at hand: (i) §36-5 re-points 0.0381 to real-head #3
 states WHICH HEAD per table + the three heads' numbers — crown-none
 13/1・106/4 (two sources, §571/§572), R=0.110 13/0・106/5 (SEED
 :11-:12 read this cycle), R=0.100 106/5 (SEED :17) — and why solved
-is head-invariant (IK convergence count); (iii) the 2×2 + the record
+is head-invariant (IK convergence count) [§578: this explanation
+conflicts with its own cited numbers — same COUNT is not same SET
+(4→5 under an added obstacle is impossible on one set); fix routed
+to p5]; (iii) the 2×2 + the record
 that this is §36-9's shape a SECOND time — the ELEVENTH instance,
 with the enumeration discipline built in ("11 = found to date, not
 family size; as-of 11:1x"). NOT append-only, DECLARED as such, the
@@ -16323,7 +16326,11 @@ points are NOT re-measured", "What is established is existence", and
 matches the 24-draw picture 1→0 — and p6 -182 had independently said
 3→2: TWO DESKS CONVERGE BY MEASUREMENT. Conclusion as banked: the
 head reduces survivors under both counting methods; magnitude
-unestablished; NOT to zero (two distinct poses remain). **(c) The
+unestablished; NOT to zero (two distinct poses remain). [§580:
+direction DEMOTED by p6's self-caveat — an across-sample comparison
+(and the two countings also moved the head value, 0.110 vs 0.100);
+grade = consistent-with-monotone, not measured-decrease; not-to-zero
+stands as existence.] **(c) The
 double form-break, named by its owner**: p4's SCOPE line verbatim
 FORBADE the move ("the duplicate count is not a count of doors") and
 p5 quoted its NEIGHBOR in the same block while skipping it; AND
@@ -16341,3 +16348,79 @@ exactly as declared; the ONE deleted line is the declared §33-1 note
 line — its head ("24 draw で 冠なし 1 / R=0.110 0…") and its tail
 (the "4→5" clause) both verified inside the same physical line.
 Declared non-append-only; again through the front door.
+
+## §578 — the explanation conflicts with its numbers: same count is
+## not same set, and the mechanism is the warm start (p6 -183)
+
+**Inbound**: p6 -182 → -183 continuous (11:24:17 JST). **(a) Pin
+verified (machine)**: register @ 2bd57c543f sha 8acc052c…ada6 —
+commit AND worktree MATCH; bank #49 → #57, p6's three items closed
+doc-side. TIMING: -183 analyzes the #49-state doc; bank #50 landed
+in parallel and is addressed by -184 (§580). **(b) ⛔ The finding
+(p5 court)**: the §33-1 explanation — "13 and 106 are identical
+across heads because L solved is an IK convergence count, head-
+independent" — IMPLIES a head-invariant candidate set, which the
+cited numbers refute: crown-none frees 4 while crown-0.110 frees 5
+at 240 draws, and adding an obstacle to ONE set can only remove ⇒
+5 ≤ 4, false. The contents differ too: crown-none survivor sigmas
+{0.0745, 0.0112, 0.0381, 0.0112} (CROWN_BAND_READING :158-:161, sha
+2d997d2f…, rows re-read at this desk) vs real-head {0.0338 ×4,
+0.0381} — and 0.0338 appears NOWHERE in the crown-none reading
+(closed query, 0 hits, this desk). A pose present under the
+stricter model and absent under the loosest = different draws, not
+head physics. **(c) ⭐ The mechanism, VERIFIED at the exact site**:
+ur15_steps_wired.py :1704-:1711 — START[t] = solve_ik(t, GRASP1[t],
+tries=START_TRIES, near=START[t], other=START[opposite], …) inside
+for _round in range(3): each round's start solve WARM-STARTS from
+the previous round's START, itself chosen from the collision-
+filtered set — the head steers the solution SET through the warm
+point while the convergence COUNT stays stable. From the same
+lines, this desk adds: the coupling is STRONGER than stated —
+other= feeds the opposite ARM's start in as well (cross-arm
+coupling). Fix the explanation, not the numbers. **(d) Ripple,
+correctly drawn**: poses cannot be compared across the three head-
+rows by number or sigma; "0.0745 absent from the real-head free
+set" includes "never drawn at all" ⇒ p5's §36-6 sample-restraint is
+necessary AND sufficient. Tagged §574(c)(ii); routed to p5 (m933).
+
+## §579 — m931 wrote :46 from memory; the doors line is :47
+## (p5 -205)
+
+**Inbound**: p5 -204 → -205 continuous (11:25:04 JST). p5 RE-DERIVED
+the collation (not copying this desk's words): SEED :45 = "4. ⚠
+SCOPE." / :46 = "22 of the 24…" / :47 = the doors line. This desk's
+m931 wrote ":46 飛ばし" — a line number WRITTEN FROM MEMORY into a
+message instead of pasted from the measurement: the §576 family,
+milder form (line number, not sha). MACHINE CHECK: the ledger
+carries no ":46" anywhere in §577 (closed grep; all five :46 hits
+in the file are other contexts) — the error lived in m931 only. The
+correct number is :47, exactly as p5's doc already has it (no fix
+their side; their doc also carries the verbatim, so content
+survives line drift). §576's rule extends explicitly: LINE NUMBERS,
+like shas, are pasted from measurement output or not written.
+Owned; corrected to p5 in m933.
+
+## §580 — p6 turns the caveat on their own count: consistent with
+## monotone, not measured to decrease (p6 -184)
+
+**Inbound**: p6 -183 → -184 continuous (11:26:31 JST). **(a) Pin
+verified (machine)**: register @ c6c9090310 sha 2ab11ded…dacb —
+commit AND worktree MATCH; §577 / bank #50 → #57 / #38. **(b) ⚠⚠
+The self-application**: 3-vs-2 is an ACROSS-SAMPLES comparison
+exactly as 4-vs-5 was, and -183's mechanism binds it equally. The
+reason 4-vs-5 fell was "different sets", not "wrong direction" —
+and that reason survives into 3-vs-2 ⇒ a direction that matches
+intuition does not validate the comparison. Grade corrected:
+"CONSISTENT WITH MONOTONE", not "measured to decrease".
+Compounding: the two counting comparisons moved TWO variables at
+once (24-draw pair = R 0.110; 240-draw stage-1 = R 0.100). What
+stands ESTABLISHED is existence — not-to-zero (two distinct real-
+head poses; p4 verbatim "What is established is existence"). Tagged
+§577(b). **(c) ⭐ p6's clause for rule 2's extension**: an identity
+judgment guarantees a number counts THINGS; it does NOT make two
+counts COMPARABLE — comparability requires a shared candidate set,
+absent here. Routed to p5's court alongside -183 (the #50 §33-1
+text carries the direction sentence). **(d) #38's scope wording**:
+adopts p4's SCOPE block verbatim (:44-:52) — the row's interleave-
+family numbers do not exceed "one mounting, one step, one arm's
+clearance".
