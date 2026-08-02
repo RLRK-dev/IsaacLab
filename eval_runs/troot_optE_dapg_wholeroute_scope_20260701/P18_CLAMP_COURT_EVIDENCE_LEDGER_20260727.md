@@ -16621,7 +16621,11 @@ configured" is true, "the pair's clearance unexamined" is NOT.
 Uncovered: whether L's SELECTION is best for the final pair — which
 composes with p4's -226 item into a clean decomposition: endpoint
 pair clearance COVERED (via R's leg); L's PATH vs final R UNCOVERED
-(p4); L's SELECTION optimality UNCOVERED (p5). **(c) The rules**:
+(p4); L's SELECTION optimality UNCOVERED (p5) [§593: p5 -209
+supersedes their own framing — the uncovered leg is L's PATH vs
+final R (a path collision is a failure, not a suboptimality);
+endpoints doubly covered by the R and interleave columns]. **(c)
+The rules**:
 rule 1 unchanged (no single-column verdicts). PASS's meaning
 corrected in ONE line: "the configuration this cell actually
 settles into has both arms mutually clear at the required
@@ -16838,3 +16842,79 @@ Self-correction**: the [gap on: …] field records pose provenance
 (both clear / L put back), not geom pairs — p4's 18-row
 classification became a COLUMN; "put back is not an artifact word"
 remains true of the BANKED 24-draw table (v3 introduced the word).
+
+## §592 — the artifact dates the code: the technique distilled by
+## its second user (p6 -189)
+
+**Inbound**: p6 -188 → -189 continuous (11:58:23 JST). **(a) Pin**:
+register @ 4cfa051316 sha 4ef88aa4…1258 — commit MATCH; the
+worktree had ADVANCED by this desk's read at 11:59:14 (f75aac38…),
+resolved minutes later when -190's own commit cd328de876 landed
+carrying EXACTLY that sha (§594): the "mismatch" was the next row
+being written — §591's live-file discipline, applied to the
+register itself. **(b) ⭐ The technique, banked with one
+precision**: p6 distills this desk's §589(d) move as "THE ARTIFACT
+DATES THE CODE" — a row unproducible under one version's semantics
+(free = _strict or cands ⇒ len(free) never 0 while solved > 0; the
+banked "solved 7 / free 0" row) pins the generating version WITHOUT
+timestamps or mtimes: artifact→code back-inference, not
+code→artifact prediction. p6 re-derived the row themselves.
+Precision kept: this desk's actual sequence used BOTH the
+impossible-row argument AND git-log dating; p6's distillation
+isolates the timestamp-free core — the stronger form. **(c)** Their
+framing: the constructive complement of their own morning rule —
+"derivations inherit input volatility" states the problem; this
+states what to do instead.
+
+## §593 — the version-match is measured while it can be, and two
+## banks land (p5 -209)
+
+**Inbound**: p5 -208 → -209 continuous (11:59:06 JST). **(a) ⭐
+p6's rule discharged CONSTRUCTIVELY at p5's desk — and re-derived
+at this one**: p5 measured, while the process lives: launch
+11:12:47 (ps lstart, PID 787189); ur15_steps_wired.py mtime
+09:26:04 and ur15_cell_spec.py 08:23:47 — both BEFORE launch; both
+files porcelain-clean; driver content sha 576bda62…34f9. Argument
+on record: any write advances mtime (even a same-content rewrite),
+so mtime < launch implies no post-launch write; the per-point child
+processes (PIDs observed by p5) load the same bytes. This desk
+RE-DERIVED all four quantities at 12:00:14 — launch Sun Aug 2
+11:12:47; mtimes 09:26:04 / 08:23:47; sha prefix 576bda621d744960;
+porcelain 0 — 4/4 MATCH. Consequence: every desk's code-reads
+about the running grid are reads of the LOADED bytes, for THIS run;
+scope = this run only, re-measure next run. **(b) Bank #54
+post-verification (3rd exercise) — ALL PASS**: content
+55661d17…97bb8 @ dc62b64d93 MATCH; message "Bank #54: pre-
+registration, the path is the uncovered leg"; +27/−0 append-only;
+files=1; pre-landing. Content: their §38-2(2) superseded by p4's
+-226(c) form — the uncovered leg is L's PATH vs final R, not L's
+selection optimality (a path collision is a failure, not a
+suboptimality; endpoints doubly covered by the R and interleave
+columns) [tagged §585(b)]; NOT MEASURED is not read as timeout (the
+37-s SIGSEGV = the third indiscriminable-predicate example); rule 2
+read as "counts are properties of the draw COUNT". **(c) Bank #55
+EXECUTED @ 1c4038d2fb (front door)**: worktree sha ed3882b8…edce
+MATCH → commit-content MATCH; +36/−0 vs #54, zero deletions.
+Contents: the count inversion folded into §33-1 (A 4 rows / 4
+distinct (3 at 1e-3 rad), B 5/2, C 5/2 — the head reduces choices;
+their draws≠doors completed by measurement); ⛔ the demotion
+resolved NOT by "obtaining a shared candidate set" but by
+"comparing AS SETS at the same mounting and draw count" —
+COMPARABILITY IS BUILT, NOT FOUND; B≡C scope-limited, with the one
+three-way common pose (sigma 0.0381, q [+1.140126…]); rule 2 gains
+a THRESHOLD clause (a distinct-count carries its tolerance — strict
+4 vs 3 at 1e-3 rad; their earlier "crown-none = 3" had not stated
+one); solved-106 held unexplained — only non-randomness settled, no
+story built.
+
+## §594 — the caveat carries its own demonstration (p6 -190)
+
+**Inbound**: p6 -189 → -190 continuous (11:59:20 JST). Pin verified
+(machine): register @ cd328de876 sha f75aac38…f110 — commit AND
+worktree MATCH — and this commit IS the sha this desk had seen as
+drift at 11:59:14 (§592(a)): the mismatch was the next row being
+written, closed by its own landing. §591 → #57 as ONE line: the
+live-file caution now sits in the register as the DIFFERENCE OF TWO
+READS (11:54:27 = 15 rows / 8d54aa27 vs 11:57:56 = 16 rows /
+5ce662b2 — one row in 3 min 29 s), a demonstration rather than a
+claim. 8 points remain; solved-106 held open at both desks.
