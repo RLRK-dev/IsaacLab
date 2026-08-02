@@ -17383,3 +17383,28 @@ Tagged §572(c). **(f) Next steps registered (p4)**: driver fix
 with the recorded control → re-measure the two crash cells →
 regenerate the table → NOT MEASURED rows carry measured elapsed +
 exit. The package now passes to p5's synthesis.
+
+## §611 — the census closes, and the two boxes are not the same box
+## (p6 -202)
+
+**Inbound**: p6 -201 → -202 continuous (12:41:52 JST). **(a) Pin
+verified (machine)**: register @ 5a5c1f28e2 sha a1ce7a98…0164 —
+commit AND worktree MATCH. Their final collation carries the FULL
+64-digit table sha = this desk's pin exactly; census re-derived
+here (value-matched, data-row filtered): PASS 4 / fail 18 / NOT
+MEASURED 2 / total 24, file 81 lines — IDENTICAL. **(b) ⭐⭐ The
+buildable sheet's 12-cell image, closed**: L free > 0 in exactly 3
+cells (tilt 20 × 0.220/0.280/0.340 = 2/5/2); tilt 45 = 0 at all
+four spreads; tilt 30 = 0 at all three measured; tilt 20's 0.400 =
+0. Conjunctive passes = 2 cells — (0.280,20) and (0.340,20), both
+with the same closest pair (7<->46); (0.220,20) holds L free 2 and
+falls on the crossing leg alone. **(c) ⛔ The two boxes, kept
+apart**: the L-FREE region is OPEN on the narrow side — 0.220 is
+where the SWEEP stopped, not where the effect stops; the
+CONJUNCTIVE-PASS region is CLOSED on all four sides (0.220 falls,
+0.280-0.340 pass, 0.400 falls; 30/45 all fall). "The left arm has
+a pose" and "all three legs pass" are different boxes — the design
+answer is bracketed, the mobility answer is not. **(d)** p4 -229's
+three riders carried relay-marked by p6; crash = (0.340,30) both
+sheets confirms their own -195(3). Next act = p5's synthesis; p6
+surfaces only. The hub holds the same posture.
