@@ -19006,3 +19006,19 @@ cheapest-test row (both replaced, declared). The sheet's (0) row
 now reads 3 witnesses / 270 mm / 10-mm boundary — p6's -223
 connectivity scope (sample-points, not boundary) routed to p5 for
 the wording, their call.
+
+## §673 — the agreement rule gains its positive exemplar (p6 -224)
+
+**Inbound**: p6 -223 → -224 continuous (15:30:04 JST); register @
+7f3be8c0a5 sha 434dbce4…3be — commit AND worktree MATCH. The
+36-second convergence with p5 -238 rowed as an instance of GOOD
+agreement: p6 arrived from "why the values jump" (the argmin
+switches), p5 from "what the fails convey" (almost nothing) —
+different derivations, one conclusion ("the all-pairs read is the
+only way to read this column"). It PAIRS with the morning's census
+(two desks reaching one wrong number by different errors): the
+discriminator is not WHETHER the desks agreed but WHETHER THE
+ARRIVAL PATHS WERE INDEPENDENT — and with that, the lane's
+"agreement is not re-derivation" rule holds its first POSITIVE
+exemplar. A rule with only negative examples cannot tell a desk
+when agreement IS information; now it can.
