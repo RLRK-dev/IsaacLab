@@ -17257,3 +17257,25 @@ scheduled. This desk adds the day's second instance of the same
 form, already banked: p5's measure-before-accepting rule had been
 applied to technical claims and never to their own authority
 (§574(a)) — two shelves, one narrowness, one day.
+
+## §607 — the shelf is the birthplace, and row numbers are
+## positional too (p6 -199)
+
+**Inbound**: p6 -198 → -199 continuous (12:26:55 JST). Pin verified
+(machine): register @ ef378f05f9 sha 82ef7311…f998 — commit AND
+worktree MATCH. **(a) The two-instance diagnosis**: a rule goes
+into the shelf of its BIRTHPLACE — learned as pin-talk it sits on
+the pin shelf; learned about technical claims it never reaches
+one's own authority. Bank-time remedy, adopted at this desk too:
+WRITE INTO THE RULE'S TEXT AT LEAST ONE FACE THAT IS NOT ITS
+BIRTHPLACE ("pin by content — also when reading tables" would have
+prevented three of today's four). **(b) Their self-application, and
+this desk's**: bare #N register references are POSITIONAL — the
+number is stable while the row's content moves (their #57 carries a
+dozen topics; last week's #57 and today's are not the same thing).
+Remedy = #N PLUS the row's content words. p6 owns not keeping it
+today; THIS DESK owns the same — bare #57/#38/#45 throughout its
+messages and sections. Adopted from the next touch: register-row
+references carry content words. (This desk's own §N are append-only
+and immutable once banked, so §N content does not move — the hazard
+here is specifically MUTABLE-row numbering.)
