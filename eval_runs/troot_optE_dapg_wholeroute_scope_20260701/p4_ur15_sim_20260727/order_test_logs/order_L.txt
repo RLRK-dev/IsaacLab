@@ -1,0 +1,96 @@
+[cell] cable bend EI in force: 0.005 N.m^2 from task_config.py:144
+[cell] -> joint stiffness 0.33333 N.m/rad over a 15 mm link
+[cell] cable 40 x 15 mm, 1.1243 g each, 44.97 g total
+[cell] clip collision read from the env source: True
+[steps] ⚠ the cell-constant contract is not satisfied yet: 10 names
+[steps] ⚠ each needs a home in the p5 spec; running non-strict while that is decided
+[steps]     _EXCUSED             line  1244  carries a number of its own and belongs to none of the three
+[steps]     _SHOULDER            line   435  carries a number of its own and belongs to none of the three
+[steps]     _bad                 line  1867  carries a number of its own and belongs to none of the three
+[steps]     _nz                  line  1873  carries a number of its own and belongs to none of the three
+[steps]     size="0.12 0.0425 0.0375" line   204  0.12 is written into the XML this driver builds.  The templa
+[steps]     size="0.12 0.0425 0.0375" line   204  0.0425 is written into the XML this driver builds.  The temp
+[steps]     size="0.12 0.0425 0.0375" line   204  0.0375 is written into the XML this driver builds.  The temp
+[steps]     pos="0 -0.175 1.485" line   204  -0.175 is written into the XML this driver builds.  The temp
+[steps]     pos="0 -0.175 1.485" line   204  1.485 is written into the XML this driver builds.  The templ
+[steps]     euler="2.356194 0 0" line   204  2.356194 is written into the XML this driver builds.  The te
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:323: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  m = cell.compile()
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:327: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  (S / "_steps_cell_full.xml").write_text(cell.to_xml())
+[steps] nq=113 nu=14 nbody=88 ngeom=140 eq=8  seat links C1=cab30 C2=cab23
+[steps] tracking bound: L reach 1546 mm -> lag allowed 5.18 mrad | R reach 1546 mm -> 5.18 mrad  (clearance 8.0 mm / reach; re-measured each step as the arm extends)
+[steps] arm colours: LEFT arm = ORANGE, RIGHT arm = PURPLE (claws keep blue = upper, red = lower).  Use the colour, not the side of the screen: the close-up panel is mirrored.
+[steps] geoms: 140 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.300,+0.285] y[+0.280,+0.280] z-table[+0.1486,+0.1559] ncon=14
+[steps] ⚠ grasp centre moved off C1: x=-0.2000 m (C1 is at +0.1500); span unchanged at 88 mm commanded
+[steps] measured grasp: L=cab3 [-0.2474  0.28    0.9524]  R=cab9 [-0.1574  0.28    0.952 ]  drop across the span = 0.4 mm
+[steps] ⚠ mast set is 3 of 4 parts; ['stereo_head'] absent by construction, so no rejection can be attributed to it in this run
+[steps] attitude menu: 27 entries per arm; entry i on R is the negation of entry i on L in both components -> YES
+[steps] attitude menu, first 8 (yaw, roll) in rad:  L(+0.00,-0.00)/R(+0.00,+0.00)  L(+0.00,-0.35)/R(+0.00,+0.35)  L(+0.00,-0.60)/R(+0.00,+0.60)  L(+0.00,-0.85)/R(+0.00,+0.85)  L(+0.00,-1.10)/R(+0.00,+1.10)  L(-0.30,-0.35)/R(+0.30,+0.35)  L(+0.30,-0.35)/R(-0.30,+0.35)  L(-0.30,-0.60)/R(+0.30,+0.60)
+[steps] attitude menu: 22 of 27 entries have a non-zero yaw -- those are the ones the sign can be seen on; on the other 5 it is invisible either way, which is why a single trace line could not settle this
+[steps] start pose = the cell's home, both arms: [-3.1521 -0.2867  2.4674 -1.3953  1.5634 -1.5782]
+[steps] ⛔ start-pose IK R: NOT ONE of 139 candidates cleared the clearance or its path, so all 139 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ start-pose IK R: NOT ONE of 139 candidates cleared the clearance or its path, so all 139 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] start-pose IK L: rejected against -- the other arm x105, g6 on L_forearm_link vs stem x66, g6 on L_forearm_link vs crown x22, the other arm ON THE WAY x12 (e.g. 8 <-> 47 at 34/36 along the move), g5 on L_upper_arm_link vs crown at 3/6 along the move (on the way) x8, g8 on L_wrist_2_link vs stem at 4/7 along the move (on the way) x6, g8 on L_wrist_2_link vs stem x1, g5 on L_upper_arm_link vs stem at 4/6 along the move (on the way) x1   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)
+[steps] start-pose IK L: 138 solved / 20 collision-free / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll 20.1 deg sigma_min 0.1393 |q|max=2.92 rad
+[steps] start-pose IK L: clear #0: q = [+0.198493 -2.968048 -2.366914 -2.056167 -0.901229 -2.571888] sigma 0.1254
+[steps] start-pose IK L: clear #1: q = [+0.350019 -3.046430 -2.213197 -2.522660 -0.675485 -2.189828] sigma 0.1096
+[steps] start-pose IK L: clear #2: q = [+0.198493 -2.968048 -2.366914 -2.056167 -0.901229 -2.571888] sigma 0.1254
+[steps] start-pose IK L: clear #3: q = [+2.192359 -0.203295 +2.413064 -1.525041 +1.737740 +2.749184] sigma 0.1348
+[steps] start-pose IK L: clear #4: q = [+2.046025 -0.025090 +2.481090 -1.969124 +1.499513 +2.459586] sigma 0.1089
+[steps] start-pose IK L: clear #5: q = [+2.192359 -0.203295 +2.413064 -1.525041 +1.737740 +2.749184] sigma 0.1348
+[steps] start-pose IK L: clear #6: q = [+2.046025 -0.025090 +2.481090 -1.969124 +1.499513 +2.459586] sigma 0.1089
+[steps] start-pose IK L: clear #7: q = [+1.717288 -0.205369 +2.380006 -1.112749 +1.002236 +2.305744] sigma 0.1361
+[steps] start-pose IK L: clear #8: q = [+0.350019 -3.046430 -2.213197 -2.522660 -0.675485 -2.189828] sigma 0.1096
+[steps] start-pose IK L: clear #9: q = [+2.046025 -0.025090 +2.481090 -1.969124 +1.499513 +2.459586] sigma 0.1089
+[steps] start-pose IK L: clear #10: q = [+1.717288 -0.205369 +2.380006 -1.112749 +1.002236 +2.305744] sigma 0.1361
+[steps] start-pose IK L: clear #11: q = [+0.350019 -3.046430 -2.213197 -2.522660 -0.675485 -2.189828] sigma 0.1096
+[steps] start-pose IK L: clear #12: q = [+1.717288 -0.205369 +2.380006 -1.112749 +1.002236 +2.305744] sigma 0.1361
+[steps] start-pose IK L: clear #13: q = [+0.198493 -2.968048 -2.366914 -2.056167 -0.901229 -2.571888] sigma 0.1254
+[steps] start-pose IK L: clear #14: q = [+2.046025 -0.025090 +2.481090 -1.969124 +1.499513 +2.459586] sigma 0.1089
+[steps] start-pose IK L: clear #15: q = [-0.047954 -2.916621 -2.426189 -1.820971 -1.267361 -2.862609] sigma 0.1393
+[steps] start-pose IK L: clear #16: q = [+2.307697 -0.016382 +2.406276 -2.038735 +1.940524 +2.545273] sigma 0.1236
+[steps] start-pose IK L: clear #17: q = [+2.046025 -0.025090 +2.481090 -1.969124 +1.499513 +2.459586] sigma 0.1089
+[steps] start-pose IK L: clear #18: q = [+0.269757 -3.068711 -2.419779 -1.750753 -0.795748 -2.874652] sigma 0.0971
+[steps] start-pose IK L: clear #19: q = [+2.046025 -0.025090 +2.481090 -1.969124 +1.499513 +2.459586] sigma 0.1089
+[steps] start-pose IK L: chosen q = [-0.047954 -2.916621 -2.426189 -1.820971 -1.267361 -2.862609] rad
+[steps] ⛔ start-pose IK R: NOT ONE of 139 candidates cleared the clearance or its path, so all 139 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] start-pose IK R: rejected against -- g44 on R_forearm_link vs stem x60, the other arm ON THE WAY x47 (e.g. 44 <-> 12 at 14/45 along the move), the other arm x37, g43 on R_upper_arm_link vs crown x22, g43 on R_upper_arm_link vs crown at 5/8 along the move (on the way) x13, g46 on R_wrist_2_link vs crown at 7/11 along the move (on the way) x9, g43 on R_upper_arm_link vs crown at 7/10 along the move (on the way) x7, g43 on R_upper_arm_link vs crown at 6/9 along the move (on the way) x5, g43 on R_upper_arm_link vs crown at 6/10 along the move (on the way) x4, g44 on R_forearm_link vs crown at 7/9 along the move (on the way) x3, g47 on R_wrist_3_link vs crown at 6/10 along the move (on the way) x3, g46 on R_wrist_2_link vs crown at 6/10 along the move (on the way) x3, g44 on R_forearm_link vs crown x2, g43 on R_upper_arm_link vs stem at 6/8 along the move (on the way) x2, g43 on R_upper_arm_link vs stem x1, g44 on R_forearm_link vs crown at 8/10 along the move (on the way) x1   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)
+[steps] start-pose IK R: 139 solved / 0 collision-free (⛔ 0 -- all 139 put back) / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll 20.1 deg sigma_min 0.1410 |q|max=2.30 rad
+[steps] start-pose IK R: chosen q = [-1.249461 +1.051827 +1.978396 -1.625909 +2.299246 +1.391785] rad
+[steps] 88mm-SPAN INTERLEAVE: arms closest +34.4 mm (12 <-> 68)   spread 0.220 tilt 45.0 deg   crown r 0.110   ⚠ commanded span, not the links actually held
+[steps] STANDING ERROR L: 43.96 mrad at rest vs TRACK_TOL 5.18 mrad -> ⛔ THE RAMP GATE CANNOT OPEN (room <= 0 before anything moves)
+[steps] STANDING ERROR L per joint [mrad]: j0=-6.8 j1=+10.4 j2=+33.2 j3=+44.0 j4=-14.1 j5=-1.6   (no joint at a limit)   touching: ['R_wrist_2_link (via g7 on L_wrist_1_link)', 'R_wrist_2_link (via g8 on L_wrist_2_link)', 'S1 (via Lg_left_pad_f1ext)']
+[steps] STANDING ERROR R: 275.97 mrad at rest vs TRACK_TOL 5.18 mrad -> ⛔ THE RAMP GATE CANNOT OPEN (room <= 0 before anything moves)
+[steps] STANDING ERROR R per joint [mrad]: j0=-5.5 j1=-225.7 j2=-276.0 j3=-30.6 j4=-13.8 j5=+0.0   (no joint at a limit)   touching: ['L_wrist_1_link (via g46 on R_wrist_2_link)', 'L_wrist_2_link (via g46 on R_wrist_2_link)']
+[steps] measured pinch->mouth drop: L -39.0 mm  R -32.9 mm
+[steps] Tier A cross-check: 0 measurable values (CLAW_OFFSET excluded -- the cell measures pinch->mouth, which is a different vector)
+[steps] STEP1 L arm touching: ['R_wrist_2_link (via g7 on L_wrist_1_link)', 'R_wrist_2_link (via g8 on L_wrist_2_link)', 'S1 (via Lg_left_pad_f1ext)']
+[steps] STEP1 R arm touching: ['L_wrist_1_link (via g46 on R_wrist_2_link)', 'L_wrist_2_link (via g46 on R_wrist_2_link)']
+[steps] re-measured after the approach: L=cab3 [-0.2462  0.28    0.9521]  R=cab9 [-0.1563  0.28    0.9518]   (centre x=-0.2000)
+[steps] STEP1 L: tool err=  42.2mm
+          joint err   = [ -6.8  10.4  33.2  44.  -14.1  -1.6] mrad
+          act force   = [  68.7 -103.  -204.   -52.3   17.2    2. ] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [-36.2  46.5 -49.2  -5.6   1.    0. ] N.m
+          saturated   = [np.False_, np.False_, np.True_, np.False_, np.False_, np.False_]
+[steps] STEP1 R: tool err= 380.2mm
+          joint err   = [  -5.5 -225.7 -276.   -30.6  -13.8    0. ] mrad
+          act force   = [ 55.5 433.  204.   36.5  16.4   0. ] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [ 15.2 -51.1  20.8   0.7  -0.8   0. ] N.m
+          saturated   = [np.False_, np.True_, np.True_, np.False_, np.False_, np.False_]
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py", line 2275, in <module>
+    f"cap {vertical_cap_deg():4.2f} deg (the smallest non-zero tilt the attitude menu can make, "
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py", line 1194, in vertical_cap_deg
+    raise RuntimeError(
+RuntimeError: the attitude with zero roll comes out 1.23 deg off vertical, so this is not turning attitudes into the tilt the check reads -- the cap it would produce would be a number about the arithmetic, not about the cell

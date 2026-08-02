@@ -379,6 +379,31 @@ def _own_bodies(prefix):
 
 ARMB = {t: _own_bodies(f"{t}_") | _own_bodies(f"{t}g_") for t in SIDES}
 ARMG = {t: {g for g in range(m.ngeom) if m.geom_bodyid[g] in ARMB[t]} for t in SIDES}
+# ⛔ The third obstacle class the start-pose selector never had.  It clears a candidate against the
+# mast, and since 2026-08-02 against the other arm -- and against nothing else.  With the arms'
+# paths unwrapped the left arm arrives at 0.00 mrad touching nothing, and the right arm arrives
+# touching S2: a SADDLE POST.  Neither the saddles nor the table were ever in a clearance test.
+# ⚠ The clips and the cable are deliberately NOT here.  They are what the arm is going to reach
+# for; forbidding a clearance to them would forbid the task.
+FURNG = [g for g in range(m.ngeom)
+         if (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or "").startswith(("S", "table_"))
+         and (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or "")[1:2].isdigit()
+         or (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or "") == "table_top"]
+
+
+def furniture_gap(t, dd, want_who=False, cutoff=None):
+    """Smallest distance from arm `t` to the saddles and the table [m], or None if nothing near."""
+    cut = ARM_DECIDE_CUTOFF if cutoff is None else cutoff
+    best, who = None, ""
+    ga = np.fromiter(sorted(ARMG[t]), int)
+    for gb in FURNG:
+        for gaa in ga:
+            v = mujoco.mj_geomDistance(m, dd, int(gaa), int(gb), cut, None)
+            if v < cut and (best is None or v < best):
+                best = v
+                who = (f"{GNAME[gaa]} vs "
+                       f"{mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, gb)}")
+    return (best, who) if want_who else best
 # Rs, 2026-07-28: "make the left and right arm plainly distinguishable in the video."
 # The two arms were the same colour, and every camera angle is a fresh chance to mix them up -- the
 # close-up view is mirrored, so screen-left there is the RIGHT arm, and I have already reported one
@@ -1335,6 +1360,35 @@ def path_mast_min(t, sc, q_from, q_to, cutoff=None):
     return (None, None) if best > 1e8 else (best, who)
 
 
+def path_furniture_min(t, sc, q_from, q_to, cutoff=None):
+    """Smallest gap to the saddles and table anywhere along the move [m]. Same form as the others."""
+    q_from, q_to = np.asarray(q_from, float), np.asarray(q_to, float)
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_from[_k]
+    mujoco.mj_kinematics(m, sc)
+    _mine = np.fromiter(sorted(ARMG[t]), int)
+    p0 = np.asarray(sc.geom_xpos)[_mine].copy()
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    travel = float(np.linalg.norm(np.asarray(sc.geom_xpos)[_mine] - p0, axis=1).max())
+    _r = float(np.asarray(m.geom_rbound)[np.fromiter(FURNG, int)].min()) if FURNG else 0.05
+    n = max(1, int(math.ceil(travel / max(_r, 1e-4))))
+    best, who = 1e9, None
+    for i in range(1, n):
+        q = q_from + (q_to - q_from) * (i / n)
+        for _k, _a in enumerate(QADR[t]):
+            sc.qpos[_a] = q[_k]
+        mujoco.mj_kinematics(m, sc)
+        g_, w_ = furniture_gap(t, sc, want_who=True, cutoff=cutoff)
+        if g_ is not None and g_ < best:
+            best, who = g_, f"{w_} at {i}/{n} along the move"
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    return (None, None) if best > 1e8 else (best, who)
+
+
 def path_arm_min(t, sc, q_from, q_to, cutoff=None):
     """Smallest gap to the OTHER ARM reached anywhere along the joint-space move [m].
 
@@ -1595,7 +1649,31 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
             # ⛔ ARM_PATH: the same test ALONG the move, which the mast has had since 07-28 and the
             # other arm never did.  Default OFF because it changes what counts as clear, and every
             # count measured before 2026-08-02 was taken without it.
-            elif near is not None and os.environ.get("ARM_PATH"):
+            elif os.environ.get("FURNITURE"):
+                # ⛔ The saddles and the table, at the pose.  Third obstacle class; same shape as
+                # the first two, found the same way -- by the arm arriving in contact with
+                # something the selector had never been told about.
+                _fg, _fw = furniture_gap(t, sc, want_who=True, cutoff=ARM_DECIDE_CUTOFF)
+                if _fg is not None and _fg < ARM_CLEARANCE:
+                    hit = True
+                    _clear_dropped += 1
+                    _by_clearance = True
+                    _blame["the furniture"] = _blame.get("the furniture", 0) + 1
+                    _blame_eg.setdefault("the furniture", _fw)
+                elif near is not None and os.environ.get("ARM_PATH"):
+                    # ⛔ And ALONG the move.  I added the furniture at the pose only -- repeating,
+                    # within the hour, the exact defect I had just diagnosed for the other arm.
+                    # The pose test rejected nothing and the arm still arrived touching a saddle,
+                    # which is the same sentence a third time.
+                    _fp, _fpw = path_furniture_min(t, sc, near, qw, cutoff=ARM_DECIDE_CUTOFF)
+                    if _fp is not None and _fp < ARM_CLEARANCE:
+                        hit = True
+                        _clear_dropped += 1
+                        _by_clearance = True
+                        _blame["the furniture ON THE WAY"] = \
+                            _blame.get("the furniture ON THE WAY", 0) + 1
+                        _blame_eg.setdefault("the furniture ON THE WAY", _fpw)
+            if not hit and near is not None and os.environ.get("ARM_PATH"):
                 _pg, _pw = path_arm_min(t, sc, near, qw, cutoff=ARM_DECIDE_CUTOFF)
                 if _pg is not None and _pg < ARM_CLEARANCE:
                     hit = True
@@ -1807,14 +1885,26 @@ for _t4 in SIDES:
 mujoco.mj_forward(m, d)
 print(f"[steps] start pose = the cell's home, both arms: {np.round(HOME_POSE, 4)}")
 START = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
+# ⭐ p5 -259: the solve order itself.  SIDES inserts L then R, so in round 0 the LEFT arm is
+# filtered against the right arm AT HOME while the RIGHT arm is filtered against a left arm that
+# has just moved -- so the right arm's home-to-start leg is never tested against the cell it
+# actually crosses.  SOLVE_ORDER=R swaps it.  ⚠ p5's own trap, named in the proposal: swapping may
+# only swap which arm is blocked, so the question is whether ANY order keeps both arms >= 1.
+_SOLVE_ORDER = ["R", "L"] if os.environ.get("SOLVE_ORDER") == "R" else list(SIDES)
 for _round in range(3):
-    for t in SIDES:
+    for t in _SOLVE_ORDER:
         # ⭐ p5 §31: the seeds, not the menu, were the thin part -- 24 uniform draws in a
         # six-dimensional joint space.  START_TRIES raises it so the question "is the survivor
         # set really of size one, or is the sample" can be answered.  Default unchanged.
         START[t] = solve_ik(t, GRASP1[t], tries=int(os.environ.get("START_TRIES", "24")),
                             near=START[t],
-                            other=START["R" if t == "L" else "L"], quiet=(_round < 2))
+                            other=START["R" if t == "L" else "L"],
+                            # ⛔ Rounds 0 and 1 are silent, so the count for "this arm
+                            # filtered against the other arm AT HOME" -- round 0 -- is
+                            # measured and then overwritten without ever being printed.
+                            # p18 -1151(ii): that is a separate measurement, and it costs
+                            # a print, not a run design.
+                            quiet=(_round < 2) and not os.environ.get("LOUD_ROUNDS"))
         # ⛔ Without this the L-vs-final-R check below cannot be read.  If the right arm does not
         # move between rounds, "the left arm is still clear against the FINAL right pose" and "the
         # final right pose IS the one it was already checked against" produce the identical line --
@@ -1890,6 +1980,33 @@ for t in SIDES:
     d.ctrl[GIDX[t]] = OPEN
 # ⚠ durations, not step counts: at the producer's timestep 4000 steps is 0.83 s, not the
 # 8 s this ramp was measured at.
+# ⭐ UNWRAP_START -- the same pose, the short way round.  solve_ik wraps its answer into a
+# principal range, and the ramp then interpolates linearly from home to that wrapped number: for a
+# base joint sitting near -pi that means driving almost a full turn the WRONG way.  Measured here:
+# the left base joint travels 274 deg where 86 would do, the right 244 where 116 would do, and that
+# sweep is what carries the two arms through each other (see WHY_THE_ROUTE_NEVER_MOVED_20260802.md).
+# A joint is periodic, so q and q +/- 2pi are the same arm; only the path between differs.
+# ⛔ Only applied where the shifted value stays inside the joint's own range -- a shorter path that
+# leaves the range is not a path.  Default off; the pose at the end is unchanged either way.
+if os.environ.get("UNWRAP_START"):
+    for _tU in SIDES:
+        _lim = np.array([[m.jnt_range[m.dof_jntid[v]][0], m.jnt_range[m.dof_jntid[v]][1]]
+                         for v in VADR[_tU]])
+        _new = START[_tU].copy()
+        for _j in range(6):
+            _k = round((q0[_tU][_j] - START[_tU][_j]) / (2 * math.pi))
+            _cand = START[_tU][_j] + _k * 2 * math.pi
+            if _k and _lim[_j][0] <= _cand <= _lim[_j][1]:
+                _new[_j] = _cand
+        _moved = [f"j{j} {math.degrees(START[_tU][j] - q0[_tU][j]):+.0f} -> "
+                  f"{math.degrees(_new[j] - q0[_tU][j]):+.0f} deg"
+                  for j in range(6) if abs(_new[j] - START[_tU][j]) > 1e-9]
+        print(f"[steps] UNWRAP_START {_tU}: travel "
+              f"{math.degrees(np.abs(START[_tU] - q0[_tU]).max()):.0f} -> "
+              f"{math.degrees(np.abs(_new - q0[_tU]).max()):.0f} deg"
+              + (f"   ({', '.join(_moved)})" if _moved else "   (nothing to unwrap)"))
+        START[_tU] = _new
+
 RAMP = int(START_RAMP_S / m.opt.timestep)
 # ⛔ DIAGNOSTIC, default off.  Both arms sweep ~250 degrees from home to their start poses AT THE
 # SAME TIME, and the clearance test that cleared those poses checked each arm's path against the
