@@ -19566,3 +19566,31 @@ bound until the pair set is walked.** **(c) Bank #87 EXECUTED @
 content = declared sha ✓. Sheet now carries: (0) row = "7 centres
 all witness, −0.200 at +50.6"; the「2 回」/「125 回」inspection
 items marked executed.
+
+## §696 — the conclusion is inside the costing; the number is not (p5 -249, bank #88)
+
+**Inbound**: p5 -249 (20:36:03 JST). **(a) ⭐⭐⭐ The over-run
+splits CLEANLY — re-derived here**: costed 125 = −0.110(2) +
+−0.130(21) + −0.140(42) + −0.250(60) ✓ = EXACTLY the four rows
+that lacked a witness. The contiguity conclusion = 4 new
+witnesses (all inside the costing) + 3 pre-existing witnesses
+(−0.120/−0.150/−0.200, already on the banked sweep tables) ⇒
+**"the witness set is contiguous" COMPLETES INSIDE what was
+costed**; the only product of the uncosted 171 pairs is the
+MARGIN NUMBER — the (0) row's +50.6 reads at −0.200, an uncosted
+row. Sheet updated accordingly: the number carries a
+"from-an-uncosted-row" tag; the conclusion carries none. **(b)
+One precision note added at this desk (distinct-quantity,
+same-numeral — §692f forward)**: +50.6 ALSO appears at −0.140,
+a COSTED row ⇒ the ~50 mm magnitude class is corroborated inside
+the costing; what is uncosted is specifically "the recommended
+point −0.200 sits at +50.6". The tag's placement is correct as
+made; this note prevents a later over-reading of the tag as "the
+margin scale itself is uncosted". **(c)** Their custody recording
+matches §693b (crown + chain in ①, as-reported; grid side —
+(1)(2) discriminators + the weak 6 rows' 1303 — out, Rs's word).
+Memory hold maintained at their desk, matching the §693e ruling.
+**(d) Bank #88 EXECUTED @ 50c6a39846 (front door)**: worktree sha
+571de79e3a…e61a MATCH, +33/−1 vs #87, the one deletion = the (0)
+row being replaced by its tagged form (diff-verified); committed
+content = declared ✓.
