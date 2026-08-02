@@ -1,0 +1,23 @@
+GRASP-CENTRE SWEEP -- collision-free start poses per arm, by where the pair sits
+START_TRIES = 240 draws per solve.  ⚠ A survivor count of zero from 24 draws does not mean no clear pose exists -- four of sixteen such zeros in the mounting grid became non-zero at 240 (GRID_24_VS_240_20260802.txt).
+instrument: the driver's own start-pose IK line, with the silent or-cands fallback
+            separated out (before that fix, 'none cleared' and 'all cleared' printed
+            the same number and this sweep could not have been read)
+method    : the real driver, once per centre, GRASP_CENTRE_X set, stopped as soon as it
+            has printed both lines.  No reimplementation of the solve.
+⚠ span    : 88 mm COMMANDED; the links actually taken sit 75 mm apart, because the cable
+            is 15 mm segments and the nearest link is what gets held.
+
+centre x [m]  L solved  L free  R solved  R free   held links
+      -0.110       123       1       140       0   L=cab9 R=cab15
+      -0.120       124       1       139       0   L=cab9 R=cab14
+      -0.130       126       6       138       0   L=cab8 R=cab14
+      -0.140       137       8       139       0   L=cab7 R=cab13
+      -0.150       140       9       139       0   L=cab7 R=cab12
+      -0.200       138      20       139       0   L=cab3 R=cab9
+      -0.250       133       9       140       0   L=cab0 R=cab6
+
+LEFT ARM keeps >=1 collision-free candidate at centre x in [-0.25, -0.2, -0.15, -0.14, -0.13, -0.12, -0.11]
+  -> highest swept centre x with a left-arm candidate: -0.110 m
+  ⚠ this is the highest value SWEPT, not a boundary: the true upper bound lies between -0.110 and the next value up that failed.
+⛔ Not a verdict and not a recommendation: where the pair should sit is p5's call.

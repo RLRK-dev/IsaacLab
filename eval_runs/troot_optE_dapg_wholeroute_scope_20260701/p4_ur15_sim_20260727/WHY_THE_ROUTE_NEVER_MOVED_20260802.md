@@ -93,3 +93,40 @@ now been asked once, the answer was zero.
 4. ⚠ **The stereo head is still not in the default cell** (`STEREO_HEAD=1`, §
    `RS_AUTHORISATION_CUSTODY_P4_20260802.md`), so these counts are still measured without an
    obstacle the reference declares.
+
+---
+
+## 6. ⭐⭐ The whole open region, with the path test in — the right arm keeps nothing
+
+`GRASP_CENTRE_SWEEP_TRIES240_ARMPATH.txt`, `ARM_PATH=1`, same mounting, 240 draws:
+
+| centre x [m] | L solved / clear | **R solved / clear** |
+|---|---|---|
+| −0.110 | 123 / 1 | 140 / **0** |
+| −0.120 | 124 / 1 | 139 / **0** |
+| −0.130 | 126 / 6 | 138 / **0** |
+| −0.140 | 137 / 8 | 139 / **0** |
+| −0.150 | 140 / 9 | 139 / **0** |
+| −0.200 | 138 / 20 | 139 / **0** |
+| −0.250 | 133 / 9 | 140 / **0** |
+
+⇒ **Not one grasp centre in the open region leaves the right arm a start pose that survives an
+arm-to-arm path test.** The left arm keeps between 1 and 20; the right arm keeps none, everywhere.
+
+⇒ The blocker is **the right arm's approach**, and it does not move with the grasp centre — which
+is what every measurement before today was varying.
+
+### ⚠ Precisely which path this tests
+
+The solve runs three rounds with `near` = the previous round's pose, so the path tested in the
+**printed** round is from that pose, not from home. The physically travelled path — **home → final
+start pose** — is the one round 0 tests, and it is the one the standing-error measurement (§2)
+observes directly: the arms arrive **in contact**, the right arm 53° short. ⇒ The sweep and the
+physical measurement agree in direction; the sweep is not a restatement of it.
+
+### ⛔ What is NOT worth running next, and why
+
+Adding the stereo head (`STEREO_HEAD=1`) on top of this can only remove candidates from counts that
+are **already zero** on the right arm. It cannot change the verdict, so it is not the next
+measurement. It becomes worth running again if the right arm's approach is changed and starts
+keeping poses.
