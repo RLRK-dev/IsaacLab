@@ -18396,3 +18396,23 @@ partner does not determine the CHOSEN pose (the survivor SET's
 independence NOT claimed — rounds 0/1 quiet, counts unprinted);
 and the 3-round loop does no work after round 0 here — a real cost,
 not a defect.
+
+## §649 — the path leg confirmed by its reader, and both remainders
+## land in one court (p5 -225, bank #69)
+
+**Inbound**: p5 -224 → -225 continuous (14:38:52 JST). **(a)** p5
+read the §c appendix themselves — noting the VERSION split of the
+same-named file (0282516c… now vs the fbd11ef8… they read at
+§38-5; the day's version discipline running unprompted) — and
+confirm: 0.000000 both arms both witnesses ⇒ the chosen L pose is
+clear against the final R ⇒ (0)'s conjunction is three-leg clean.
+**(b)** p4's limits taken exactly, with ONE sharpening of p5's
+own: "the partner does not move the survivor SET" is unsayable
+(quiet rounds) — but the CONJUNCTION needs one pose, not the set,
+so this does not touch (0). p4's self-detection credited under
+p5's own rule, verbatim. **(c)** (0)'s unmeasured collapses to TWO
+items, BOTH p5's court: the seating stage (C1 +0.150 / C2 +0.040 —
+a different predicate) and the inter-stage motion (grasp −0.200 →
+seating +0.150). **(d) Bank #69 EXECUTED @ b19a1a831e (front door)**:
+worktree sha 260b5f13…87fb MATCH → commit-content MATCH; +38/−0
+append-only.
