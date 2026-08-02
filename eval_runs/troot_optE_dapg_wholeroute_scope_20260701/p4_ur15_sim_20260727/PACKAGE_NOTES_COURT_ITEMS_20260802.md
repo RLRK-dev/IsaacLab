@@ -43,13 +43,46 @@ directly:
 At 240 draws a survivor count above 40 is reachable — the right arm has already printed 38 — so a
 set comparison must check the announcement line before treating the printed poses as the whole set.
 
-⛔ **What I need to run it**: the exact identity of the two runs being compared — cell (crown /
-spread / tilt), `START_TRIES`, and the log or commit each count came from. Counts alone cannot be
-compared across cells, and I will not name p5's numbers from memory.
+### ⭐ Answered — p18 `-939 §2` supplied the run identities, and the sets invert the counts
 
-⚠ Note in advance: if the two runs differ in the **head** as well as the draw count, then a
-difference in the sets is expected and settles nothing — that comparison would need one variable
-moved at a time.
+⚠ **First, the logs p18 named were not the sources.** `crown_0.110_0.280_20.log` and
+`z_1.330_0.280_20.log` in `/tmp/mounting_sweep` both read **13 solved** — they are 24-draw sweep
+points that happen to carry the same cell in their filename. The 240-draw runs the SEED numbers
+came from are elsewhere, found by a closed query for `106 solved`:
+
+| | cell (all spread 0.280, tilt 20, 240 draws) | source |
+|---|---|---|
+| **A0** | crown removed | `scratchpad/tries240.log` (09:31) |
+| **A1** | crown removed | `/tmp/mounting_sweep/st_none_0.280_20.log` (11:00, this grid) |
+| **B** | crown pinned 0.110 | `scratchpad/rt_grid_240.log` (09:50) |
+| **C** | real reaching head, Z0 1.330 / r 0.100 | `scratchpad/stage1.log` (09:56) |
+
+**The counts, compared as sets.**
+
+| | printed entries | distinct poses (exact) | distinct at 1e-3 rad |
+|---|---|---|---|
+| A (crown removed) | 4 | 4 | **3** |
+| B (crown 0.110) | 5 | **2** | **2** |
+| C (real head) | 5 | **2** | **2** |
+
+1. ⭐ **"5 beats 4" is an artifact of counting entries.** Four of B's five printed entries are the
+   *same pose*, byte-identical to the last digit (sigma 0.0338), reached from four different
+   seeds. C is the same. ⇒ With the head in, the left arm has **two** distinct clear start poses;
+   with it removed, **three**. The head **removes** an option; it does not add one.
+2. ⭐ **B and C are indistinguishable here.** Identical survivor sets, identical sigmas
+   (0.0338, 0.0381), and both interleave lines read **+14.7 mm at the same geom pair (7 ↔ 46)**.
+   ⇒ For the left arm's start pose at this mounting, a pinned 0.110 crown and the real reaching
+   head are the same obstacle. ⚠ For *this* predicate at *this* mounting — not in general.
+3. **One pose is common to all three cells** — sigma 0.0381,
+   `q = [+1.140126 +0.416080 +1.845414 −0.556151 +0.433782 +1.581307]`. It is the only survivor A
+   shares with B and C: the pose that does not care whether the head is there.
+4. **A0 vs A1: identical, 4 shared and 0 differences** — two independent runs ninety minutes
+   apart, one launched directly and one through the sweep. ⇒ Reproducible, and the grid's reuse
+   mechanism is validated against a run that never used it.
+
+⚠ **Scope.** Left arm, start pose, spread 0.280 / tilt 20, 240 draws. The distinct-pose counts are
+properties of that draw count — though A0 ≡ A1 shows the draw is deterministic given the seed, so
+"a different sample" here means a different `START_TRIES`, not a different roll.
 
 ---
 
