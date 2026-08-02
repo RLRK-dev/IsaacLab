@@ -116,3 +116,49 @@ supports; "no radius works" is not.
    convert those into real negatives.
 4. **Both crown sweeps are single-mounting columns.** §1 is 0.280/20 and §2 is 0.220/45; neither is
    a statement about the crown in general — which is the mistake §2 exists to record.
+
+
+---
+
+## 5. ⭐⭐ ALL PAIRS on both crown columns — every row with two clear arms is a witness
+
+Rs authorised this (`RS_AUTHORISATION_CUSTODY_P4_20260802.md`; the crown column was named in the
+approved text). Driver's own `arm_pair_min` over every clear L × R pair, no IK and no draws.
+Logs: `allpairs_logs/`.
+
+| column | row | clear L × R | pairs | chosen pair | **BEST pair** |
+|---|---|---|---|---|---|
+| radius @ 0.220/45 | **none** | 3 × 14 | 42 | +0.0 | **+37.5 mm** |
+| radius @ 0.220/45 | **0.020** | 1 × 14 | 14 | +0.0 | **+37.5 mm** |
+| height @ 0.280/20 | 1.380 | 4 × 30 | 120 | +0.0 | **+35.7 mm** |
+| height @ 0.280/20 | 1.430 | 5 × 31 | 155 | +0.0 | **+37.2 mm** |
+| height @ 0.280/20 | 1.470 | 5 × 31 | 155 | +0.0 | **+37.9 mm** |
+| height @ 0.280/20 | 1.510 | 4 × 29 | 116 | +0.0 | **+38.9 mm** |
+
+**602 pairs. A separated pair exists in 6 of 6.**
+
+### ⛔ Two of my own readings in this file are refuted
+
+1. **§2 point 2 said "No radius gives a witness at this mounting… the two conditions do not overlap
+   anywhere on this column."** They overlap at both rows where the left arm is clear. ⇒ **At the
+   built mounting, with the crown removed or at 20 mm, all three legs hold** — 3 clear left poses,
+   14 clear right, and a pair separated by 37.5 mm.
+   ⚠ What still stands: at the built crown of **0.110** the left arm has **no** clear pose at all
+   (L clear 0 at 240 draws), so there is no pair to evaluate. **The built cell's zero is still
+   real — and it is the crown that causes it.** The left arm closes between radius 0.020 and 0.050
+   (§2 point 1), and below that the mounting works.
+2. **§1 said the tallest head is the one that passes, and it is the only one.** ⛔ **All four other
+   heights are witnesses too** (+35.7 … +38.9 mm). So the height decides **nothing** about passage
+   here: §1's mechanism ("the height decides which pose pair gets chosen") was right, and the
+   consequence I drew from it was wrong. Every head in the swept range has a separated pair.
+
+### ⭐ What this adds to the standing recommendation
+
+Menu (0) as it stands keeps the reference cell whole and moves the grasp pair to
+−0.120 … −0.200. This measurement puts a **second** witnessed option on the table: **keep the
+grasp centre where it is and shrink the crown to 20 mm or less.** ⛔ Whether the crown may be
+changed at all is not mine — its size came from a photograph and the reference asset carries no
+crown collision shape (`sweep_mounting.py:164-168`). Both options are now measured; choosing is
+p5's and Rs's.
+
+⚠ Still start-pose only, and a witness pose pair is not a route.
