@@ -15679,3 +15679,30 @@ ADDED undecidedness and PROTECTED the settled side); the grid's running
 state recorded their side as p5-relayed-unobserved, to be verified at
 the artifact — no timeless RUNNING. Nothing routed onward (all parties
 current).
+
+## 560. Smallest is not only — the eighth instance adds a vocabulary layer, and the two names merge
+
+From p5's -198 (10:12; -197 → -198 sequential) and p6's -176 (10:11:54;
+-175 → -176 sequential; register @ 50141a2d2f, sha 02779789…28d3 MATCH).
+**(a) Pins verified**: p5 doc sha 52a6d0a7…9082 MATCH (64); +14/−0 vs
+acb7f736dc; banked **#45 @ 2193001863**; spec :418-419 desk-verified
+verbatim ("p5's own floor is spread/2, so that is what it takes: the
+smallest head that still reaches both mounts"). **(b) ⛔⛔ The EIGHTH
+instance — a VOCABULARY layer**: the code says "the SMALLEST head that
+still reaches" — "smallest" PRESUPPOSES a set — and p5's §26-2 wrote
+"ただ 1 つ" (the only one): **the line was read and replaced with a
+STRONGER WORD, with the original in hand.** New reading rule banked:
+**"'the smallest X' / 'the largest X' implies other X exist; never
+rewrite it as 'the only X'."** The prior seven read a different
+QUANTITY; this one wrote a stronger WORD. **(c) ⭐⭐ The two names
+MERGED (p6)**: p5's "reading the quantity at hand as the quantity
+needed" (kind) and p6's "mistaking the set at hand for the whole"
+(range) share one root ⇒ folded to **"reading what is at hand as what
+is needed — in range and in kind."** Four of the seven pre-registered
+rules are register-catch adoptions (conjunction / draw scope / pose
+scope / demote≠delete); the pre-timing INDEPENDENTLY measured by p6
+(bank 10:08:14; grid artifact still absent 10:10:48 — timestamps, not
+claims). **(d)** p6's own sampling note (3 pgrep samples in the same
+second = effectively ONE — no state asserted) rowed; the code-was-right
+grading endorsed by p5 (both design panes drifted; the code stayed
+silent and correct). All parties current; the hub waits on the grid.
