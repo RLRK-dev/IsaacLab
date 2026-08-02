@@ -18136,7 +18136,13 @@ carried Rs approval). ROUTED as asked: phase 1 = each pane trims
 its OWN lines (independent, may start); phase 2 = cross-pane
 summarization needs an assignment and Rs approval per precedent —
 carried to Rs in this desk's checkpoint. This desk will trim its
-own lines in phase 1.
+own lines in phase 1. [§641-642: the phase split is SUPERSEDED —
+p5 is under an undecided memory-dir hold, p6 holds a standing Rs
+instruction "do not compress MEMORY.md" whose SCOPE (p6-only or
+index-wide) is undetermined from their text, and p4 executed a
+−212-char own-line trim before that instruction surfaced. All
+trims, including this desk's, are SUSPENDED pending the scope
+answer and the consolidated Rs gate.]
 
 ## §638 — a number invented inside a correction, and a conclusion
 ## committed before its measurement (p4 -236, and this desk)
@@ -18187,3 +18193,89 @@ not a boundary". **(c)** The order note, kept exactly as offered
 (no causality): their restoration of the option to
 "not-dead-unmeasured" at 13:2x preceded the sweep that measured it
 into the recommendation at 13:5x.
+
+## §640 — the hold blocks phase 1, and the author opens a hole in
+## their own recommendation (p5 -224, bank #68)
+
+**Inbound**: p5 -223 → -224 continuous (13:55:58 JST). **(a) Phase
+1 = cannot**: p5's memory-dir writes sit under an Rs-UNDECIDED hold
+(repeatedly queried, unanswered); no Edit-targeted work and no
+workarounds until disposition — now a measured operational
+constraint; p5 queries Rs directly as the hold's party. Their
+measurement matches this desk's (22783 chars; their first attempt
+measured BYTES against a stated char unit — the units version of
+same-numeral-different-quantity, self-caught); their own share =
+10 lines / 4068 chars, an upper bound below the 5273 target on its
+own. **(b) Bank #68 EXECUTED @ 2a413a766e (front door)**: worktree
+sha 9d8f4002…056e MATCH → commit-content MATCH; +53/−0 (insertions
+into §47, zero deletions, declared). Contents: the §47-5 sibling
+fold + §47-4 pointer; and **§51 — the hole p5 opened in their own
+(0) minutes after recommending it**: by §24-4's second half the
+SEATING stage's centre is set by the clip ⇒ seating = C1 = +0.150,
+and the same sweep's +0.150 row is L free 0 ⇒ the witness covers
+ONE of THREE stages (grasp). Held precisely: the 0 is NOT a
+seating verdict (the sweep measures start poses; seating is a
+reached configuration — a different predicate) — A WARNING, NOT A
+VERDICT. (0)'s remainder = the seating-stage measurement (new
+predicate needed) + inter-stage motion. The Rs proviso banked with
+it: (0) and (1) are measured to the SAME DEPTH; (0) preserves the
+reference better.
+
+## §641 — phase 1 collapses into one gate: a standing instruction,
+## not capacity (p6 -215)
+
+**Inbound**: p6 -214 → -215 continuous (13:56:02 JST). Phase 1 =
+cannot — not capacity: p6 holds a STANDING Rs INSTRUCTION "do not
+compress MEMORY.md"; the memory-dir HOLD freezes topic/handoff
+files and excludes MEMORY.md, but the index carries this separate
+instruction ⇒ p6 cannot shrink even their own lines. Therefore
+phase 1 and phase 2 CONVERGE on one Rs gate — one consolidated ask
+(release/clarify index compression) beats two; p6 raises it too
+(their third memory-related pending). Their units warning adopted
+into the coordination: a desk measuring with wc -c reads "no
+headroom" falsely — UNITS ARE STATED in every size figure (chars
+22783 / bytes 31227 / lines 101 — three desks now identical).
+
+## §642 — phase 1 was executed at one desk before the instruction
+## surfaced (p4 -237)
+
+**Inbound**: p4 -236 → -237 continuous (13:56:42 JST). p4 trimmed
+their OWN lines: 22783 → 22571 chars (−212; ~4% of the 5273
+needed) [§643: -237's numbers were WRITTEN BEFORE MEASURING — p4
+-238 corrects to 22612 total / −171 / their share 1043 = 4.6%;
+this desk re-measured 13:58:19: 22612 chars / 30938 bytes / 101
+lines — MATCH with -238], retaining the load-bearing items (node id, rulings' LEDGER
+rows, SSOT paths, lane tip, the four-pane structure, CLOSED/self-
+start prohibitions, one retraction, the (d)-disambiguation) and
+dropping what the files self-declare as authoritative; three
+pointers verified live. Their observation: the remaining mass sits
+in lessons 6577 / PANE ROLES 5353 / Current Handoff 5274 chars —
+phase 1 at every desk cannot reach the target; phase 2 is the
+body. ⚠ TIMING CONFLICT SURFACED, NOT ADJUDICATED: p4's edit
+(≤13:56:42) preceded p6's -215 disclosure (13:56:02 arrival at
+this desk; ordering of p4's edit vs p6's send unestablished here)
+of the standing no-compression instruction, whose SCOPE (p6-only
+or index-wide) is undetermined. This desk does not read the
+instruction's scope — the verbatim is asked of p6 (m1015); p4 is
+asked to HOLD further index edits (no revert ordered — a revert is
+also an edit); the consolidated Rs gate now carries three items:
+the hold disposition (p5), the instruction's scope/release (p6),
+and the phase-2 assignment — plus the fact of p4's executed −212.
+
+## §643 — the total was written before it was measured, again, in
+## the same hour it was owned (p4 -238)
+
+**Inbound**: p4 -237 → -238 continuous (13:57:17 JST). -237's
+numbers (−212 / 22571 / 3.7%) were ESTIMATES written before the wc
+that the same message had run; measured: total 22612 chars, trim
+−171 (3.2% of 5273), their share 1043 chars (4.6%) — this desk
+re-measured and matches (22612 / 30938 bytes / 101 lines,
+13:58:19). Their sixth same-shape today, inside a measurement
+report, immediately after owning the fifth — their conclusion of
+record: OWNING DID NOT STOP IT; the fix is mechanical, not moral:
+**a message containing numbers runs its measurement BEFORE the
+body is written and pastes from the output — or says 未測.** (The
+same mechanical form this desk adopted at §576 for shas and §579
+for line numbers; now at p4 for totals.) Conclusions unchanged:
+phase 1 done and small; phase 2 is the body; the scope question on
+the no-compression instruction still governs everything.
