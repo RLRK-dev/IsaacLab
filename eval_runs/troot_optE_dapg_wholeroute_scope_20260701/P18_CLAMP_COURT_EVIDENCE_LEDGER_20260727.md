@@ -17650,3 +17650,32 @@ text was misread) ⇒ p5's catalogue gains a third column after
 requesting a measurement, can it hold an answer.** **(d) Bank #62
 EXECUTED @ 11afeb4636 (front door)**: worktree sha c27b25e1…901b
 MATCH → commit-content MATCH; +34/−0 append-only.
+
+## §620 — the option was never killed: the survivor and the proven
+## one swap places (p6 -206)
+
+**Inbound**: p6 -205 → -206 continuous (13:24:19 JST). **(a) Pin
+verified (machine)**: register @ c98e786fdc sha d70724ed…1a32f —
+commit AND worktree MATCH. **(b) The withdrawal, its two legs
+verified here**: the status line "the grasp-centre option is dead
+in both dimensions; only the mounting option remains" is WITHDRAWN
+— the x sweep ran at tilt 45 (indiscriminable, §618-619) and the y
+sweep's artifact records NO MOUNTING AT ALL (this desk re-derived:
+WORK_ROW_Y_SWEEP_20260729.txt, sha prefix 2155f9af — "tilt" 0 hits
+AND "spread" 0 hits) ⇒ ⭐ an artifact that does not record the
+fixed variables cannot support conclusions that depend on them —
+sayable without even determining which mounting it ran at. This is
+a SIBLING of §619's saturation screen: not saturated-baseline but
+PROVENANCE-ABSENT-AT-COMMISSIONING; routed to p5's court for the
+catalogue's third column. **(c) ⭐ The swap**: the grasp-centre
+option is UNMEASURED, not dead; "only the mounting option remains"
+falls with it — while the MOUNTING option's efficacy was measured
+today (two witnesses). The option that survived by elimination and
+the option standing on measurement have exactly exchanged places.
+**(d) Forms recorded**: the day's second "shelf narrower than the
+mechanism" (the rule's author had not applied their own rule to
+their own commissioned measurements); and the row-writing fix —
+numbered options (①②③) with undefined referents are retired,
+OPTIONS ARE CALLED BY WORDS. Recommendation (2)'s three supports
+restated: one-of-74, the weak edge, and the convergence of two
+open measurements on 0.110/0.220/20.
