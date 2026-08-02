@@ -20414,3 +20414,36 @@ whenever "the candidate set moved" is claimed** — because
 head is a DIFFERENT change from the arm-path predicate: today's
 demonstrated set-fixity does not transfer automatically. Gate
 at gap ③ (the approach), rowed at both desks.
+
+## §727 — the order may be the whole story (p5 -258, bank #95; the premise code-verified)
+
+**Inbound**: p5 -258 (22:55:35 JST). Their own read of the
+ARMPATH table completes the solved-identity to 7/7 (adds
+−0.140's 137). **(a) The court moves**: the blocker is
+orthogonal to the day's swept variable; mechanism = home→start;
+neither mounting, work row, nor crown is a function of it —
+p5 PREDICTS (tagged inference, unmeasured) the other roads
+share the blocker ⇒ **gate ③ "the approach" = PROCESS DESIGN =
+p5's court** (their mandate), execution p4's. **(b) ⭐⭐⭐
+Hypothesis (A) — the cheapest: THE SOLVE ORDER.** Code-verified
+at this desk: SIDES = {"L", "R"} insertion order
+(ur15_cell_spec.py:471), chain `for _round in range(3): for t
+in SIDES` (:1810-1817) ⇒ in round 0, **L solves against
+R-at-HOME; R solves against the JUST-SOLVED L already at its
+start** ⇒ R's home→start leg has NEVER been tested against
+L-at-home — and the result matches the asymmetry (first-in-the-
+loop L keeps 1..20; second R keeps 0). ⚠ **DISTINCTION
+(this desk's flag, sent to both)**: p4's -258 ordering test
+was the MOVE order with poses from the OLD solve chain — (A)
+changes the SOLVE order (R's candidates filtered pose+path
+against L-home) with the matching move order; **untested,
+distinct from what was tried.** Instrument change = one
+iteration order; no new geometry. **(c)** Also with existing
+instruments: (B) via-points (near is the segment start), (C)
+move home itself. **⭐ The FREE diagnostic**: the path test
+already records violation positions (i/n, _blame_eg) ⇒
+clustering violations by sweep phase locates via-points FROM
+EXISTING RUN RECORDS — no new run. p5 launched nothing; (A) is
+a hypothesis with no order-swapped measurement. **(d) Bank #95
+EXECUTED @ 2222fccd17 (front door)**: sha 447872754d…1e98
+MATCH, +52/−0 append-only (deleted 0), committed = declared ✓.
