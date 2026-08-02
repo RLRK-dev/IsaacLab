@@ -1,7 +1,19 @@
 # Why the route never moved — and what it does to today's results
 
-**Driver** `ur15_steps_wired.py` @ `3474e3ab2c`. All measurements at `START_TRIES=240`, grasp
-centre −0.200, the built mounting.
+**Driver** `ur15_steps_wired.py` @ `3474e3ab2c` for §1–§6. All measurements at `START_TRIES=240`,
+grasp centre −0.200, the built mounting.
+
+⚠ **Two corrections to this header, made 2026-08-03 06:2x (records only; no measurement changed).**
+
+1. **The sha above does not cover §7.** `UNWRAP_SOLVE` does not exist at `3474e3ab2c` (grep = 0 hits);
+   it lands in `d35c536fe4` (23:14). §7's table was therefore measured at `d35c536fe4` or later —
+   the driver's tip that evening was `82e845e80c`. §1–§6 remain correctly pinned at `3474e3ab2c`.
+2. **The stack was not recorded, and it is about to change.** Everything in this document was
+   measured on **newton 1.4.0 / mujoco 3.10.0 / mujoco-warp 3.10.0.3 / warp-lang 1.15.0**. `mujoco`
+   is the instrument here (`mj_geomDistance`, the path tests), and env7 is being moved to mujoco
+   3.11.0 / mujoco-warp 3.11.0 on Rs's instruction — see
+   `../P4_ENV7_UPGRADE_20260803/REPORT.md`. These numbers stay true **as measured**; they are not
+   restated for the new stack unless re-run there.
 
 ---
 

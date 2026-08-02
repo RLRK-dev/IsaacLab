@@ -1,0 +1,40 @@
+Requirement already satisfied: newton in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (1.4.0)
+Requirement already satisfied: mujoco in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (3.10.0)
+Collecting mujoco
+  Using cached mujoco-3.11.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (232 kB)
+Requirement already satisfied: mujoco-warp in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (3.10.0.3)
+Collecting mujoco-warp
+  Using cached mujoco_warp-3.11.0-py3-none-any.whl.metadata (9.4 kB)
+Requirement already satisfied: warp-lang in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (1.15.0)
+Requirement already satisfied: absl-py in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (from mujoco) (2.3.1)
+Requirement already satisfied: etils[epath] in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (from mujoco) (1.13.0)
+Requirement already satisfied: glfw in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (from mujoco) (2.10.0)
+Requirement already satisfied: numpy in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (from mujoco) (2.3.1)
+Requirement already satisfied: pyopengl in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (from mujoco) (3.1.10)
+Requirement already satisfied: fsspec in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (from etils[epath]->mujoco) (2025.12.0)
+Requirement already satisfied: importlib_resources in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (from etils[epath]->mujoco) (6.5.2)
+Requirement already satisfied: typing_extensions in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (from etils[epath]->mujoco) (4.12.2)
+Requirement already satisfied: zipp in /home/rlrk/env_isaaclab7/lib/python3.12/site-packages (from etils[epath]->mujoco) (3.23.0)
+Downloading mujoco-3.11.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (18.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.9/18.9 MB 4.8 MB/s  0:00:04
+Downloading mujoco_warp-3.11.0-py3-none-any.whl (2.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 7.2 MB/s  0:00:00
+Installing collected packages: mujoco, mujoco-warp
+  Attempting uninstall: mujoco
+    Found existing installation: mujoco 3.10.0
+    Uninstalling mujoco-3.10.0:
+      Successfully uninstalled mujoco-3.10.0
+  Attempting uninstall: mujoco-warp
+    Found existing installation: mujoco-warp 3.10.0.3
+    Uninstalling mujoco-warp-3.10.0.3:
+      Successfully uninstalled mujoco-warp-3.10.0.3
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+isaacsim-core 6.0.0.0 requires filelock==3.20.0, but you have filelock 3.25.2 which is incompatible.
+isaacsim-core 6.0.0.0 requires mujoco==3.5.0, but you have mujoco 3.11.0 which is incompatible.
+isaacsim-core 6.0.0.0 requires mujoco-warp==3.5.0.2, but you have mujoco-warp 3.11.0 which is incompatible.
+isaacsim-core 6.0.0.0 requires newton[sim]==1.0.0, but you have newton 1.4.0 which is incompatible.
+Successfully installed mujoco-3.11.0 mujoco-warp-3.11.0
+
+[notice] A new release of pip is available: 26.0.1 -> 26.2
+[notice] To update, run: /home/rlrk/env_isaaclab7/bin/python -m pip install --upgrade pip
