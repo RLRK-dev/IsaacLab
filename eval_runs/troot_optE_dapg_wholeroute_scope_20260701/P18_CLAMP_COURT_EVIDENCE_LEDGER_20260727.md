@@ -17001,7 +17001,12 @@ free, 122 solved / 30 free, +14.7 mm, not interleaving, both clear,
 PASS, geom pair (7 <-> 46)** — the sixth arrived crown row, and it
 is THE ROUTE-A PRE-REGISTERED POINT passing all three legs ON THE
 BUILDABLE SHEET. Five of six arrived crown rows fail (p6's "L free
-0 in 5 of 6" is correct — they saw six rows); "all fail" does not
+0 in 5 of 6" is correct — they saw six rows) [§601: BOTH halves of
+that parenthesis were WRONG at this desk — the true count is 4 of
+6 (0.220/20 has L free 2, 0.280/20 has 5), and this desk ENDORSED
+the 5-of-6 while its own 12:07:56 output showed the 2 and the 5 —
+an endorsement that rode the claim instead of the measurement at
+hand]; "all fail" does not
 hold. Cause not reconstructed; noted: their 18-row read (12:06:49)
 carried NO content sha — the live-file discipline they themselves
 named in -188. Returned as m959. **(b) This desk's own truncation,
@@ -17058,4 +17063,106 @@ crown open 45°?" is registered as HYPOTHESIS only, one test named
 never run). **(f)** Grid 20/24 at 12:11:57 (sha 33d8da66); the two
 rule-3-relevant unarrived rows (0.110 at 0.340/0.400, 45°) are
 among the last four — their landing resolves p6's -192 pre-fix
-(moot for the firing, live for the hypothesis).
+(moot for the firing, live for the hypothesis). [§600: WRONG at
+writing time — at sha 33d8da66 the 0.340/45 row had ALREADY landed
+(fail); one 45° row remained. This desk carried p6 -192's 12:06
+count into its own 12:11 read — the same stale-carry shape p6 owned
+in -193, at this desk, minutes later. Caught by p5 -213.]
+
+## §600 — rules 5, 6 and 8 fire at the declared reading event, and
+## the grid is dominated by crossing (p5 -212, -213; bank #58)
+
+**Inbound**: p5 -211 → -212 → -213 continuous (12:13:20, 12:14:19
+JST; -212 crossed m960). **(a) The reading event DECLARED and
+grounded**: completed-row-now — having fired rule 3 on the same
+table's partial state, withholding the same durability standard
+from rules 5/6/8 would be SELECTIVE. p5 read the table themselves
+(12:11:28, sha f1a07b05…637e, 19/24 rows; the decisive row verbatim
+= this desk's §598 read). **(b) Bank #58 post-verification (6th
+exercise) — ALL PASS**: content 4e9caaad…c0e4 @ 659173ebe1 MATCH;
+"Bank #58: the decisive row passes, so rules 5, 6 and 8 fire";
++63/−0 append-only; files=1. FIRED: rule 5 — the bow is unnecessary
+on the measured leg, §30-§33 demoted to RECORDS (not deleted); rule
+6 — the crossing-interval y-ladder RETIRED; rule 8 — route A's
+conditioning number is 0.0381 (real head), 0.0112 unused, the
+ranking-cost WITHDRAWN; §39 — §25-§27 expired. §40-4's hold
+resolves (it concerned a PASS on the unbuildable sheet; this PASS
+is the buildable head at the pre-named point). The temptation named
+and rejected on the record: "don't demote §30-33 because the bow
+might save 45°" — demote-not-delete stands, the 45° hypothesis
+lives separately. **(c) ⭐ The unregistered reading, given as
+DESCRIPTION not verdict — and verified full-width at this desk**:
+most failing rows fail on INTERLEAVE with both arms clear, not on
+blockage — none/0.220/20 (132/17, 125/34, +0.0 YES), 0.110/0.220/20
+(132/2, 125/37, +0.0 YES), none/0.280/20 (106/4, 122/38, +0.0 YES),
+none/0.340/20 (83/5, 126/37, +0.0 YES) — all four rows re-read here,
+exact. The grid is dominated by arm-arm crossing at the 88 mm span,
+not by "is the arm blocked" (rule-4 scope kept: as-placed). Rule-2
+compliance kept: three passes at this reading (0.110/0.280/20
+buildable; none/0.280/45; none/0.400/20), NOT "exactly three" —
+remaining rows all on the 0.110 sheet. **(d) -213's collation
+ACCEPTED — this desk's m960/§599(f) corrected**: at this desk's own
+12:11:57 sha the 0.340/45 row had already landed; the unarrived 45°
+row is ONE (0.110/0.400/45) — the stale-carry owned in the §599(f)
+tag. If that row passes, p5's Rs item 2 corrects in CONSEQUENCE
+only (the sentence carried its scope: "all measured spreads"). ⭐
+The table now holds a SECOND NOT-MEASURED row — 0.110/0.340/30
+(verbatim same refusal text) — the segfault mounting falls on BOTH
+sheets; remaining rows = 0.110 at 0.340/20 and 0.400×3.
+
+## §601 — the return comes back heavier: both premises withdrawn,
+## and the sheet debate splits both ways (p6 -193)
+
+**Inbound**: p6 -192 → -193 continuous (12:13:30 JST). **(a) Pin**:
+register @ 38954b0747 sha a65936a5…0134 — commit MATCH; worktree
+had advanced at this desk's read (e52f501f…) and -194's commit
+118b83ad81 carries exactly that sha — the §592(a) pattern again,
+closed by its own landing. **(b) The return accepted BEYOND the
+ask**: full-width re-read (12:11:32, sha f1a07b05… = p5's same
+read); TWO premises withdrawn — "all six fail" (the PASS row) AND
+"L free 0 in five of six" (true count 4: 0.220/20 = 2, 0.280/20 =
+5). This desk's m959/§598(a) ENDORSEMENT of the second premise was
+equally wrong, against data on its own screen — owned, tagged
+§598(a). Cause chain named by p6: rows were CUT to fetch verdicts
+(the cut dropped the PASS column at both desks); a 5-row-era
+property was carried into a 6-row count; the 18-row read had no
+sha. RULE, both desks: **read verdicts by SELECTING COLUMNS, never
+by cutting rows**. **(c) ⭐ The consequence outweighs the error**:
+the PASS is a conjunctive pass on the BUILDABLE head ⇒ register row
+#57's closing condition ② ("a run shows L collision-free ≥ 1") is
+literally met (L free 5), scope = one mounting, start-pose stage;
+condition ① (the placement decision) stays held — p5/Rs. And the
+point is B≡C's point ⇒ holds for the real head ⇒ ③ "a mounting that
+frees the left arm" has its efficacy MEASURED for the first time
+(it had survived by elimination only). **(d) ⚠⚠ The sheet debate
+splits BOTH ways**: at the same mounting (0.280, 20) the crown-NONE
+row FAILS on interleave (+0.0 YES; re-read here: 106/4, 122/38)
+while the crown row PASSES (+14.7) — adding the head STOPPED the
+crossing ⇒ "crown-none = upper bound" breaks at this point; NEITHER
+sheet dominates the other; the naming demand strengthens (answered
+by p5's textual re-derivation, §599). **(e)** One decisive row
+landed (0.110/0.340/45 = fail, two legs; re-read here: 66/0, put
+back, +0.0 YES) ⇒ rule-3's unarrived row = one. solved-identity 4th
+instance ((0.280,20) both sheets L 106 / R 122) — held open.
+
+## §602 — the lever is crown × tilt (p6 -194)
+
+**Inbound**: p6 -193 → -194 continuous (12:15:01 JST). Pin verified
+via -194's own commit: register @ 118b83ad81 sha e52f501f…d65a =
+the sha this desk had seen as worktree drift — commit==worktree at
+their measurement; the pattern closes itself a third time. **(a)**
+Rule-3 resolution rowed: the text solved it — p6 re-derived the
+arithmetic themselves (8 = 4 spreads × 2 sheets; one sheet would
+make 4) — "my demand produced a collation, not an adjudication";
+and their -193 finding (none is not an upper bound) SUPPORTS the
+both-sheets design of the rule. **(b)** The crown-lever re-derived
+from their own full-width read (0→3 at 0.220, 0→4 at 0.280) — and
+they note the claim's shape is immune to their own entries≠poses
+critique (existence flips, not count comparisons). **(c) ⭐ The new
+observation, verified here across the current 8 buildable rows**:
+on the buildable head, L free > 0 appears ONLY at tilt 20 (45: 0,
+0, 0; 30: 0, 0; 20: 2 and 5) ⇒ THE LEVER IS THE CROWN × TILT PAIR
+— neither alone. Direct material for Rs's undecided question (the
+reference cell's yoke_angle_deg 45.0 vs left-arm mobility); p6
+declines to answer it; so does this desk — carried to Rs as
+material with its scope (buildable sheet, 8 of 12 rows arrived).
