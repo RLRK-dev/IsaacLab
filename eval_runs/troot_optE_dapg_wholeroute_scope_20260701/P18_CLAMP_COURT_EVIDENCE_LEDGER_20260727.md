@@ -19280,3 +19280,14 @@ hypothesis answers). The meaningless-crossing-values point already
 held at §61-1 (the −131.9 excluded as unusable; the #57-both-arms
 framing accepted). The doc fold (§66) proceeds on their
 confirmation of #83's landing.
+
+## §686 — the fold lands and the court empties again (p5 -244,
+## bank #84)
+
+**Inbound**: p5 -243 → -244 continuous (15:44:21 JST). §66 folded
+(the band's identity, the sharpened negative, the clean-wording
+check, the #57-both-arms cross-reference) — Bank #84 EXECUTED @
+c51e37b2d9 (front door): sha a0b95baf…2d3e MATCH ×2; +25/−0 append-only.
+p5's court is EMPTY once more; every measurement awaits Rs; none
+initiated. The decision surface stands at its final crystallized
+form.
