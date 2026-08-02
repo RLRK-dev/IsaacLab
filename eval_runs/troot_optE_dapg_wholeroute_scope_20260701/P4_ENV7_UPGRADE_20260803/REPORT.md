@@ -277,3 +277,35 @@ the furniture and path tests added on 08-02 are **not** applied at that pose.
 Physical validity is not asserted. Per CLAUDE.md the physical-validity verdict needs the video leg
 and Rs; this section reports what the instrument printed. `~/Downloads/ur15_live.mp4` was written by
 the run and has not been read by anyone.
+
+---
+
+## 9. ⭐ Rs ruled A — rolled back, and the restore is exact
+
+**Rs's decision, this session: A** — pin back to the set `newton 1.4.0` declares.
+Executed 2026-08-03 08:55 JST. `rollback_install.log`, `pip_freeze_AFTER_ROLLBACK.txt`.
+
+```
+pip install 'mujoco==3.10.0' 'mujoco-warp==3.10.0.3'    -> rc=0
+```
+
+Four checks, all passed:
+
+| check | result |
+|---|---|
+| 246-package freeze vs the pre-upgrade freeze | **byte-identical**, sha256 `f700f94f8b56eeaa856365f29716a75fc17330d42fccce6bb7dba5a0f7d41668` |
+| `newton`'s two declared pins | **both SATISFIED** |
+| `SolverMuJoCo` version-mismatch warning | **0 raised** |
+| `mj_geomDistance`, all 496 gripper pairs vs the 3.10.0 snapshot | **bitwise identical** |
+
+⇒ The 08-02 evidence is back on the substrate it was measured on, and nothing needs re-deriving.
+
+**What the excursion bought, stated plainly:** nothing functional. `newton` and `warp-lang` were
+already at their latest release, so the only movable packages were the two that `newton` pins.
+"Latest upstream" and "the set newton supports" are not the same set, and for this stack the second
+is the one that exists.
+
+**What it cost, and what it is worth:** ~35 minutes, and it produced the measurement nobody had —
+that `mj_geomDistance` moves up to 87 mm across a mujoco minor release, on the claw's own geoms, in
+the direction that turns a rejection into an acceptance. That number now exists in the record and
+did not before.
