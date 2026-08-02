@@ -15184,3 +15184,87 @@ is imminent; v4 (78 lines, 6cc15ed7…) will be verified against the package
 pins, not read ahead. Their numbers-at-commit / prose-at-READING split
 held through a fourth version. Routed: p5 (m880 — both corrections), p6
 (m881 — verification + this desk's ownership).
+
+## 542. The descents are clear at the mounts — and the crossing interval is still not sampled
+
+From p6's -169 (09:33:19; -168 → -169 sequential; register @ 308397d0bc, sha
+903b73d0…9293 MATCH; v4 full sha 6cc15ed7…bc32 MATCH at 62ceb8718f, their
+3-minute version gap absorbed by pin-at-commit). **(a) ⭐⭐ The descent
+answer**: the RETURN PATH table is positive at every sample — left mount
++77.3 constant (nothing near); right mount +2.1 → +10.9 → +19.7 → +28.5 →
++37.4 (desk-read READING :114-118) ⇒ p5's §30-3 crux OPENED at the mounts.
+Their interpolation desk-checked: ARM_CLEARANCE 8.0 reached at ≈16.7 mm of
+recess, slope 0.88 mm/mm ⇒ the 50 mm bow carries 3× margin FOR THE DESCENT.
+**(b) ⛔⛔ The gap that did NOT close**: the return-path boxes sit at the
+mounts (right: x +0.250→+0.310) and EXCLUDE the blocking wedge
+(+0.150→+0.246) ⇒ the CROSSING INTERVAL's y-resolution is still 50 mm; and
+if the bow is parabolic (deepest mid-span), the crossing interval gets only
+≈25 mm of recess, not 50 (desk: 50×(1−(0.198/0.28)²) ≈ 25) ⇒ descent
+sufficiency at the mounts does NOT imply sufficiency at the crossing
+interval (different x, different links). The same probe at the crossing
+interval's x settles it — surfaced, ask = p5's court. [⚠ Written 17 s
+before -216's seeds result; whether the bow route stays live is now p5's
+weighing — §543.] **(c)** The instrument improved in the correction's
+direction (the new tables print min AND best — the wedge-best misread
+structurally prevented); this desk's "checked the digit, inherited the
+meaning" preserved as the family's third case.
+
+## 543. The seeds verdict — the line was never the cell's
+
+From p4's -216 (09:33:36; -215 → -216 sequential). **(a) Pins verified**:
+commit c6bcc2e283 ("Raise the seeds, and find the line was never the
+cell's", 09:32:51) = READING + driver; READING sha 2d997d2f…c1f1 MATCH
+commit AND worktree; Reading 4/5 desk-read (:114-177). **(b) ⭐⭐⭐ The
+leverage worked**: START_TRIES 24 → 240 ⇒ solved 13 → 106, **L free 1 → 4**;
+walking z=1.530 at 2 mm under each: **#1 +96.8 / #2 +105.5 / #3 +96.8 mm
+worst clearance — only #0 crosses; and #0 IS the pose every prior
+measurement sat on** (the sole survivor of 24 draws) ⇒ p4's own Reading 2
+("the surviving pose crosses the line") was TRUE OF THAT POSE, not of the
+cell — the pose-property-mistaken-for-cell-property form, caught by
+measurement ⇒ **at this mounting the shape problem AS POSED dissolves**
+(line clearance exceeds any head's need). **(c) ⚠ The three co-reads
+banked**: (1) the door is 2 wide, not 3 or 4 — #1 ≡ #3 to 4 decimals; (2)
+⭐ the line-avoiding poses are the WORST-conditioned (sigma 0.0112/0.0381
+vs #0's 0.0745) ⇒ **the cost function punishes exactly the poses that
+avoid the line — selecting them needs explicit instruction** [standing
+note: any selection/cost change is DESIGN (p5) + Rs approval, and must
+keep SIGMA_FLOOR dormant]; (3) 4 is a property of 240 draws as 1 was of
+24 — EXISTENCE established, not count. **(d) The descents (Reading 4)**:
+positive everywhere; the minima sit at the box's INNER edge (wedge side),
+not at the mount; the 1 mm probe carries no head thickness — banked as
+stated. **(e) ⭐⭐ The instrument findings**: (a-repair) the three quiet
+fallback sites now loud — **aim solves repeatedly falling to full-put-back
+made VISIBLE for the first time**; (b-repair) the rejection-rate
+denominator DOUBLE-COUNTED dropped — "26/38 (68 %)" had printed as "26/64
+(41 %)" — present in ALL banked traces [register impact = p6's court,
+m883]; (d-repair) best-dropped saw only arm-check victims; ⭐ the menu
+static print PROVES the yaw mirroring (27 entries/arm, entry-i sign-flip
+in both components = YES, 22/27 nonzero yaw — the 5 zero-yaw entries are
+why a single trace line could never settle it) — p4's withdrawn claim now
+replaced by proof.
+
+## 544. p5's design rule lands 24 seconds late — fifty millimetres covers a 29 mm head, at the mounts
+
+From p5's -191 (09:34; -190 → -191 sequential; written WITHOUT sight of
+-216). **(a) Pins verified**: doc sha 330c9c42…9f52 MATCH (64); +72/−0 vs
+c4af0e9a8e; banked **#40 @ 9918b2eb8f**; their version-pins for what they
+read (v4 + READING, both 64-digit) match this desk's. **(b) The two
+corrections executed at source**: the wedge ("私が領域を問い、点として
+読みました" — I asked about a region and read it as a point — the form
+named); the necessary-not-sufficient adopted. **(c) ⭐⭐ The design rule,
+desk-re-derived to ≤0.1 mm**: the ladder's differences 8.8/8.8/8.8/8.9 ⇒
+linear 0.88 mm/mm; required recess ≈ 10 + (8.0 + head_radius − 2.1)/0.88 ⇒
+r=5: 22.4 / r=10: ~28 / r=20: ~39.4 / **r=29: ~49.6 / r=30: 50.7** ⇒ **the
+§30 bow of 50 mm suffices for a head radius up to 29 mm (58 mm thick), AT
+THE MOUNTS** — with p5's own scope: the +2.1 is box-inner-edge
+(conservative), the probe is a 1 mm sphere (round-section approximation),
+one pose, in-range interpolation only. [⚠ §542(b)'s crossing-interval gap
+applies: the rule's ladder is the MOUNTS' x — the crossing interval has no
+y-ladder of its own.] **(d) ⛔ The sequencing catch (this desk's routing
+duty)**: p5's stated next step — "Rs へ『形が決まった・残るのは tilt』を直接
+出す" — predates -216: the seeds result (2 distinct line-avoiding poses
+EXIST; the shape problem as posed dissolves; the co-reads) reached this
+desk 24 seconds before their message ⇒ m882 leads with -216 so the Rs
+line is written on the full measured state, not the 24-draw slice. No
+correction to their banked content required (their §32 claims are scoped
+to their measurements and stand).
