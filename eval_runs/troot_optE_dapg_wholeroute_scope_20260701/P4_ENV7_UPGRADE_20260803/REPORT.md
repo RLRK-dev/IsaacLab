@@ -22,9 +22,12 @@ upstream の最新へ上げる"**.
 246 → 246. `torch==2.10.0+cu128` and `numpy==2.3.1` unchanged — the pull that was feared on 07-27
 did not happen this time either.
 
-- `pip_freeze_BEFORE.txt` (246 pkgs, sha256 `f700f94f8b56eeaa856365f29716a75f…`)
+- `pip_freeze_BEFORE.txt` (246 pkgs, sha256 `f700f94f8b56eeaa856365f29716a75fc17330d42fccce6bb7dba5a0f7d41668` (full — a truncated hash is not a pin))
 - `pip_freeze_AFTER.txt` (246 pkgs)
-- `install.log` — rc=0, 06:19:34–06:19:41 JST
+- `install.log` — ends `Successfully installed mujoco-3.11.0 mujoco-warp-3.11.0` (`:37`).
+  ⚠ **The file carries no exit code and no timestamps** — the `rc=0` and the 06:19:34–06:19:41 window
+  reported earlier came from my shell, not from this artifact, and the run log's own `rc=` convention
+  was not applied here. Corroboration is external: `mujoco-3.11.0.dist-info` mtime 06:19:40.
 - `dryrun.txt` — the plan, taken before the install
 
 **Rollback** (full prior state, not just the two pins):
@@ -78,9 +81,21 @@ reads the same — §5.
 clearance tests, the arm-to-arm path test. Replacing it replaces the thing that produced the
 numbers.
 
-**31 artifacts** written in `p4_ur15_sim_20260727/` on 2026-08-02 were measured on **mujoco 3.10.0 /
-mujoco-warp 3.10.0.3 / newton 1.4.0 / warp-lang 1.15.0** — the closed list is
-`premeasured_on_3.10.0.txt` (built by mtime window, not by recall).
+⛔ **CORRECTED — the count was 31 and the denominator came from the wrong space.** The first list
+asked "written on 2026-08-02" when the predicate is "measured on the old instrument". mujoco became
+3.10.0 at **2026-07-27 20:05** and stopped being it at **2026-08-03 06:19**; over that window,
+recursively and excluding `__pycache__`, the directory holds **189 files**, not 31 — including
+`unwrap_logs/phase_histogram.txt`, the very baseline §6 compares against. `premeasured_on_3.10.0.txt`
+is rebuilt on the instrument's own window:
+
+```
+find …/p4_ur15_sim_20260727 -type f ! -path '*__pycache__*' \
+     -newermt '2026-07-27 20:05' ! -newermt '2026-08-03 06:19'
+```
+
+⚠ The list is by mtime, so it mixes outputs with the `.py` sources that produced them; a source
+file's mtime is not a measurement date. Read it as "files touched while the instrument was 3.10.0",
+not as "189 measurements".
 
 ⛔ Those numbers stay **true as measured**. They are not restated for 3.11.0, and their version
 clauses are **not** rewritten — rewriting a measurement's recorded stack falsifies the record. Only
