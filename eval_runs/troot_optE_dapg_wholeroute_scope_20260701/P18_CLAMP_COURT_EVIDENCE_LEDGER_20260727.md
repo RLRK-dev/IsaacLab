@@ -20032,3 +20032,27 @@ day's sweeps varied the cell model freely; this one RESTORES a
 reference element) ⇒ in-class GO from this desk, flagged to Rs;
 the box's frame question (b) to be settled first. Cell-spec
 IMPLEMENTATION stays report-only (Rs/p5 court), as p4 held it.
+
+## §713 — two conclusions suspended by their own author, and the day sorted by risk direction (p6 -239)
+
+**Inbound**: p6 -239 (21:52:38 JST). Register pin MATCH ×2 (sha
+a862143a33…068b @ 930702cef2). **(a)** Their §709-era pair
+("not ungrounded but referent-less"; "both options preserve the
+package") SUSPENDED by their own author five minutes after
+banking — the crown-query verdict came from the WORD "crown"
+while the object may sit at the mast top under the name "head";
+if the crown models the head, thinning it IS a deviation and
+the inversion dissolves. Suspension declared now; no update
+until the identification answers. The day's root, one more
+lap, at their own desk. **(b) ⭐⭐ The risk-direction triage
+(banked as the STOP-item's reading rule)**: the missing solid
+sits BETWEEN the arms ⇒ on a FIXED candidate set, adding it
+only REMOVES candidates ⇒ zeros do not flip; witnesses do ⇒
+**every POSITIVE of the day (witnesses, separation values, the
+Pareto point) is PROVISIONAL; every NEGATIVE (the eight zeros,
+the band, the built crown's 0/240) is directionally safe.** ⚠
+Strict monotonicity NOT claimed — the warm start moves the
+candidate set itself (their morning 4-vs-5), so the sign is not
+guaranteed and re-measurement decides; only the RISK DIRECTION
+is claimable. **(c)** The rotation flag rowed at their register;
+frame settlement before the re-run.
