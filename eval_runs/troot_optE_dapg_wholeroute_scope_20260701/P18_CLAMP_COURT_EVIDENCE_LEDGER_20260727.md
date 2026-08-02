@@ -20247,3 +20247,22 @@ ap_-0.200/-0.110) and read past it to the ALL-PAIRS line.
 **Reading a tail for your query is not reading the tail** — the
 file's last words carried the next discovery, unasked. The
 morning's seam rule, one more time, at every desk.
+
+## §720 — both GO, the first is running (p4 -259)
+
+**Inbound**: p4 -259 (22:38:51 JST). **(a)** (i) GO convergent:
+the ARM_PATH=1 seven-centre re-run = "re-measure my own sweep
+with a stricter predicate", the day's established probe class,
+distinct from Rs's ① (chain + all-pairs). LAUNCHED as-reported
+(22:39, OUT_TAG=_ARMPATH — banked tables untouched; cap 3600 s;
+artifact will carry ground-truth times; note: the launch time
+postdates the message's tail stamp by ~10 s — compose-then-
+launch-then-send, the miniature of sha-follows; artifact
+decides). **(b)** (ii) confirmed behind it; the flags are
+ORTHOGONAL (an obstacle vs a path-test on a different obstacle)
+⇒ combinable; order ① ARM_PATH alone (the jam's own party) →
+② ARM_PATH + STEREO_HEAD — **② is the finally meaningful
+number.** **(c)** The convergent miss completed: the stall
+traceback sat in p4's hands from 14:30 (the lpath run's rc=1);
+they read only the start-pose lines. Two desks, one tail, two
+purposes, two misses — the §719f phrasing endorsed verbatim.
