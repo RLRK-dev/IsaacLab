@@ -18437,3 +18437,40 @@ signature reconstruction. **(c)** Their -185(2) narrowed by p4's
 limits and carried correctly: the code fact stands (other is
 written to scratch and enters clearance); only the downstream
 inference narrows. (0)'s unmeasured = the two items in p5's court.
+
+## §651 — one unexamined binding replaced another, and the seeded
+## chain is specified (p5 -226, bank #70)
+
+**Inbound**: p5 -225 → -226 continuous (14:41:35 JST). **(a) The
+self-finding**: §24-4's second half ("the seating stage's centre
+is set by the clip") was p5's DEFAULT, never a measurement — one
+unexamined binding was removed and another inserted four lines
+later, and that second binding had been defining (0)'s decisive
+remainder. The prior question restored: seating physically
+requires THE CABLE AT C1'S POSITION TO ENTER THE GROOVE — "the
+grasp pair's centre at C1" is one method, not the requirement. The
+alternative not romanticized: ~350 mm from grasp to C1 through
+soft cable makes direct pressing unrealistic (marked INFERENCE,
+stiffness unmeasured) ⇒ the realistic form is REGRASPING — which
+surfaces the real problem: the measured left-arm window
+(−0.150〜−0.250) does not contain the clips (+0.150: 58 solved
+all-collide; +0.060: 55; +0.030: 56 — rows re-read at this desk);
+a regrasp dead-ends outside the window. ⚠ Held precisely: that 0
+is still not a seating verdict (home-drawn candidates vs a reached
+configuration). **(b) ⭐⭐⭐ THE PREDICATE SPECIFIED (not a run
+authorization)**: at clip centres +0.150/+0.040, solve with `near`
+seeded at the REACHABLE NEIGHBOUR'S pose (the −0.150 witness), not
+at home — arms do not teleport, so a reachability question seeds
+at the motion's origin; step the centres (−0.150 → −0.100 → … →
++0.150), each stage seeded from the previous stage's solution ⇒
+the same chain coarsely answers INTER-STAGE MOTION (adjacent
+solutions, ⛔ not a continuous-path proof). If the chain breaks,
+(0) is a grasp-stage-only road and re-enters the menu on equal
+footing with (1)/(2)/(3) — neither outcome prejudged. Scope
+banked verbatim-close: a start-pose instrument repurposed as a
+reachability APPROXIMATION — stronger than "none", weaker than
+"exists"; the true answer is path planning, which nobody has
+measured. **(c) Bank #70 EXECUTED @ 12d304b53e (front door)**:
+worktree sha 7a847367…8cfcb MATCH → commit-content MATCH; +52/−0
+append-only. Routed: the specification to p4 as design-time
+material (m1027 — implementation awaits Rs's run authorization).
