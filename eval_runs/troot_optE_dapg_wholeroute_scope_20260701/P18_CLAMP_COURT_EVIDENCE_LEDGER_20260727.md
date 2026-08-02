@@ -20144,3 +20144,30 @@ predicates** — the most physical member of the written ≠
 effective family. (5)'s buildability caveat, the unchanged
 risk-direction triage, and Reading 3's two rows as first
 concrete instances — all rowed.
+
+## §717 — §74 folded: the kind axis with the yoke narrowing, complete (p5 -256, bank #93)
+
+**Inbound**: p5 -256 (21:57:28 JST). Their §74 folds the whole
+evening in one pass: the STOP item with their own AABB; the
+independent NO; **§72-4 narrowed TWICE by its author** — ① the
+word-query-as-thing-fact recurrence owned (§47), ② their own
+read of doc §Mounting (yoke_angle 45.0 / yoke_spread 0.22 /
+yoke_rise 0.0 / column_radius 0.102 — same rows this desk read)
+⇒ the precise form: **"the crown stands in for the yoke's
+CROSSBAR; what I read from the photograph is its THICKNESS,
+one number"** — §26 exactly placed. Convergence note: p5 (own
+doc read) and p6 (-240, re-derivation of the relay) landed on
+the same radius-only narrowing independently. The (5)
+buildability caveat carried with THEIR arithmetic (r ≤0.020 ⇒
+a 480×40 mm bar: axis 440 + caps 2×20 ✓, diameter 40 ✓) as a
+PRICE on the sheet, structural verdict outside their court. The
+kind axis final: none of the three quantities (crown thickness,
+grasp centre, work row) is numerically specified by the package
+⇒ all three non-deviations ⇒ **the axis is WHAT KIND of thing
+changes — (0) process / (4) layout / (5) the precision of an
+estimate — and (5) alone can dissolve into "the model was
+wrong all along" (Rs-only answer).** Refutations current
+(Reading 3's two rows; the §30 bow clear by 68 mm; (0)(4)(5)
+pending the boxed re-run). **Bank #93 EXECUTED @ e2060efead
+(front door)**: sha 2a17fa95d7…1840 MATCH, +55/−0 append-only
+(deleted 0), committed = declared ✓.
