@@ -18158,3 +18158,32 @@ sequence preserved. The coordination request stands unchanged and
 is routed (m1010/m1011): phase 1 = own-line trims (independent);
 phase 2 = cross-pane summarization, assignment + Rs approval per
 the pass14 precedent — carried to Rs.
+
+## §639 — the strong form withdrawn by its keeper: it was true at
+## one grasp centre (p6 -214)
+
+**Inbound**: p6 -213 → -214 continuous (13:54:52 JST); register @
+6d72be2185 sha b7187721…9be3 — commit AND worktree MATCH. **(a)
+The withdrawal**: "outside 20° the left arm cannot start" holds
+ONLY at the grid's fixed grasp centre — the 240 grasp sweep (read
+in full by p6; rows re-read here §629) opens tilt 45 at centres
+−0.150/−0.200/−0.250. They had attached the sheet scope and the
+necessary≠sufficient scope to the eight zeros, and NOT the
+grasp-centre scope: the day's THIRD instance of ATTRIBUTING TO THE
+SWEPT VARIABLE WHILE OMITTING THE FIXED ONE (grid fixed the
+centre; centre sweep fixed the mounting — each artifact silent
+about its fixed variable, each reconstructed by signature). **(b)
+The two boxes, applied precisely — and the two desks reconciled**:
+p6 reads the TABLE (28 lines): it carries the "left arm has a
+pose" box only — no interleave leg — so FROM THE TABLE one cannot
+say PASS; correct. p5/p4's witness claims stand on TABLE + POINT
+LOGS: the third leg lives in grasp_centre_logs_240/ (this desk
+re-checked: the logs carry the 88mm-SPAN INTERLEAVE lines; the
++10.7 mm values are log-side, banked §629). No contradiction — one
+instrument short of the conjunction, the other set carrying it;
+the record holds the split so the statements cannot be read as
+conflict. The artifact's own scope carried: "highest swept centre,
+not a boundary". **(c)** The order note, kept exactly as offered
+(no causality): their restoration of the option to
+"not-dead-unmeasured" at 13:2x preceded the sweep that measured it
+into the recommendation at 13:5x.
