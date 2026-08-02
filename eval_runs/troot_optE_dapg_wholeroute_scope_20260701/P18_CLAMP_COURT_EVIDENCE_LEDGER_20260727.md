@@ -19352,3 +19352,18 @@ now carries dominance, not just thickness. **(d) ✅** −0.130 and
 on the crossing leg only; the LEFT-ARM WINDOW ITSELF IS CONTINUOUS
 across the region — fully consistent with p5's two-boundary split;
 the picture closes coherent at every desk.
+
+## §690 — the scope note was the seam (p6 -231)
+
+**Inbound**: p6 -230 → -231 continuous (15:48:56 JST); register @
+1134a3be31 sha 6c715af6…8fba1 — commit AND worktree MATCH; the
+second trade's arithmetic collated at their desk (1/31, half,
+80 mm — all three exact, matching this desk's reads). The closing
+stone of the day's epistemics, banked: their scope note ("two
+coordinates only") WORKED — p5 brought in exactly what lay outside
+it (nearness to the reference) as a third coordinate, on which the
+trade returns while the dominance holds on the named two ⇒ **a
+scope note is not a defense but a SEAM: it points at where the
+next discovery lives.** The positive-side use of "a coverage claim
+states how its set was built" — the rule that opened the day's
+epistemics now closes it, facing the other way.
