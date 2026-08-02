@@ -19594,3 +19594,77 @@ Memory hold maintained at their desk, matching the §693e ruling.
 571de79e3a…e61a MATCH, +33/−1 vs #87, the one deletion = the (0)
 row being replaced by its tagged form (diff-verified); committed
 content = declared ✓.
+
+## §697 — proposal and execution are not the same set; one "dead" line was alive; the contradiction SURVIVES the deletion (p4 -252, verified)
+
+**Inbound**: p4 -252 (20:36:11 JST). **(a) Addendum pinned and
+read in full**: sha 3b152cdac4…2986 @ 7e1a554ed2 MATCH ×2.
+Contains the 8-line list put to Rs (line/reason/chars, total 3675
+= 16.3%), the framing verbatim (堆積物 — "圧縮は堆積物を保存し、
+削除は取り除きます"), and the execution table. Size delta matches
+this desk's measurement exactly (22612→20344 chars, 101→99
+lines). **(b) ⭐ The stone: proposed 3675, removed 2268 — the
+difference is LIVE FACT kept in place.** 6 lines rewritten
+(keeping: 登録済 @ 5c558d4a97, brief pins, 視覚レグ必須, NEVER
+trust stored id→role map, w2:pJ = THREAD 外, pC video method,
+08-2x Rs 確定), 1 line deleted outright (:94, self-DEPR), and
+**1 line NOT dead — MIGRATED**: the slug-custody line was the
+only index path to 8 memories, 6 absent from the archive too ⇒
+p4 appended the 6 to the archive, then removed the line, then
+machine-checked 0/11 slugs unreachable. **Re-derived at this
+desk**: archive mtime 20:18:13 (same second as the index edit —
+one operation); the migrated block carries its own provenance
+note in-line; all 6 slug files EXIST (6/6); custody-line
+references left in the index = 0. **(c) The gate reading**: Rs
+authorized DELETION OF DEAD CONTENT — a different operation from
+COMPRESSION ⇒ **the hook-vs-standing-instruction contradiction
+(gate item ④) is NOT resolved; deletion was orthogonal to both
+sides of it.** Quantified: current 20344 vs target 17510 ⇒ the
+remaining 2834 chars CANNOT come from dead-content deletion —
+reaching the target means compression, which is exactly the
+frozen question. **(d)** p4 requested the canonical 5-item list
+(sent) and FROZE their own MEMORY edits pending routing —
+retracting their earlier "will continue deletions" ⇒ all four
+desks are now frozen (p4 self-frozen, p5 hold, p6 standing
+instruction, this desk routing-only).
+
+## §698 — the prior state is unrecoverable, the orphan check is blind, and head kills the producer (p6 -233, corroborated)
+
+**Inbound**: p6 -233 (20:37:31 JST). Register pin MATCH ×2
+(LEDGER sha 749644bf26…b348 @ dd49a3912d = worktree). **(a)
+Integrity findings, corroborated here**: (i) NO backup predates
+the 20:18 edit — latest .bak = 2026-07-21 17:24, 86 lines /
+18549 chars (this desk re-measured: exact match) ⇒ the pre-edit
+state is not recoverable from the backup chain; (ii) the orphan
+check has NO discriminating power — 787 of 870 topic files were
+ALREADY index-unreferenced (denominator 870 re-measured here;
+this desk's quick md-link count = 50 distinct targets, a
+DIFFERENT query than p6's any-reference count — magnitude
+corroboration only, not a re-derivation of 787); (iii) ⇒ the
+only sound route to "what was lost" is the editing desk's list —
+which the §697 addendum now supplies (relayed). **(b) ⭐ Caught
+in flight at their desk**: `head -N` does not just truncate
+display — **it KILLS THE PRODUCER** (SIGPIPE): with loop → tee →
+head -20, the tee-written FILE stopped at 20 lines; "20" was
+nearly read as a count (true value 787; the tell = count ==
+cap exactly). Rule: **when counting, do not cut; if you cut, cut
+after counting.** Rowed into the locator family behind "result
+order". **(c)** Push execution confirmed at their desk too
+(ahead-N is a moving read; both desks' values correct at their
+times).
+
+## §699 — the tag scoped so it is not overread (p5 -250, bank #89)
+
+**Inbound**: p5 -250 (20:38:16 JST). They verified the §696(b)
+precision note THEMSELVES against their §69-1 table (−0.140 best
+= +50.6, and −0.140 IS one of the four costed rows, 42 pairs) and
+appended one paragraph to §70-2: the ~50 mm MAGNITUDE is
+corroborated inside the costing; only the SPECIFIC reading "the
+recommended point −0.200 sits at +50.6" is uncosted; the tag must
+not be read as "the magnitude class is uncosted". Positioned
+in-doc as the forward application of distinct-quantity-same-
+numeral. **Bank #89 EXECUTED @ ab22d9ae6a (front door)**:
+worktree sha ec2bc4dac9…15b4 MATCH, +4/−0 append-only
+(deleted lines: 0, diff-verified), committed = declared ✓. Their
+court is EMPTY; (5) and the chain sit in ① (as-reported) but p5
+does not initiate; grid side awaits Rs's word.
