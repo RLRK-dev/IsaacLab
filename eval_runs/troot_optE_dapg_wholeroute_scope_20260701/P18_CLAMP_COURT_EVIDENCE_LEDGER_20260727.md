@@ -20578,3 +20578,71 @@ get added to the PATH test too?"** — the morning's "the shelf
 is narrower than the mechanism" surfacing on the code side
 (capability exists, application is per-obstacle). **(c)** The
 bimodal diagnostic rowed at their register.
+
+## §733 — the driver-scope precision, and waypoints reach only half (p5 -260, bank #97)
+
+**Inbound**: p5 -260 (23:06:34 JST). **(a)** The scope
+registered before landing, with p5's own sharpening: pass and
+zero license ASYMMETRICALLY but "pass = safe" is also naive —
+the wrapped and travelled paths are DIFFERENT SETS with no
+containment ⇒ **pass = reachable by the path THIS DRIVER
+commands (usable as-is); zero = unreachable by that path, NOT
+by any path.** Attached to ALL zeros of all branches, not (γ)
+alone. Decision typing: valid for "does the cell work with
+today's driver", over-rejecting for "does the cell work". **(b)
+⭐ The bimodal diagnostic read as design**: the 0.3-0.4 peak
+(36) = mid-sweep pass-through ⇒ via-points CAN dodge; the
+0.8-0.9 peak (44) = closing to 88 mm — **the task's own
+geometry, which via-points CANNOT dodge ⇒ (B) reaches only
+HALF the violations.** Their reading: straight-line
+interpolation CUTS INTO the 88 mm en route while the endpoint
+itself is open (+10.7…+50.6) ⇒ **prescription hypothesis:
+"come wide, close last" — approach the final span from
+outside** (tagged inference; unmeasured). **(c) Self-
+correction**: under the generator (§730c), adding the stereo
+head alone does not touch paths ⇒ the boxed re-run is ALSO a
+pose statement ⇒ their §74-6 "the boxed re-run decides" does
+not decide for paths — and the deferred ② (§726), when its
+triggers fire, must run PATH-INCLUSIVE to decide anything
+beyond poses (noted here). **(d) Bank #97 EXECUTED @
+9a061a4f93 (front door)**: sha 3508b03c75…baee MATCH, +38/−0
+append-only, committed = declared ✓.
+
+## §734 — the order test lands: identity, not migration — (A) refuted by a fixed point (p4 -262)
+
+**Inbound**: p4 -262 (23:06:58 JST). **(a) The result**: both
+orders IDENTICAL — L 138/20, R 139/0 under L→R AND R→L;
+standing errors identical (43.96/275.97 mrad) ⇒ **(A)-as-
+solve-order-swap REFUTED** — the zero neither migrated nor
+moved. Stronger than the registered vocabulary (which
+anticipated migration vs stay): **complete candidate-count
+identity.** **(b) The mechanism, measured**: the 3-round
+iteration converges to an ORDER-INDEPENDENT FIXED POINT
+(poses static across rounds, 0.000000 — the afternoon's own
+measurement) ⇒ **convergence erases who-went-first; the final
+filter always runs against the converged partner in either
+order.** p6's free byproduct lands positive: printed results
+insensitive to round-0 order = consistent-with-converged, the
+-185(3) observation delivered. **(c) Validity split**: the
+order-COMPARISON is internally valid despite the wrapped-path
+artifact (same instrument on both sides); the absolute ZEROS
+keep the wrapped scope (§730b). Branch mapping: p6 (ii) /
+p5 (γ) fired — as WEAKENED branches per §732's sorting — but
+the fixed-point mechanism is instrument-independent: even
+unwrapped, the swap cannot matter. **(d) ⚠ THE STAGED-VARIANT
+GAP (this desk's flag, routed)**: the PHYSICAL staging
+question — R travels while L is at home (predicate: R vs
+L-home), then L travels (L vs R-at-start) — is NOT answered by
+this landing: round 0 of the swapped run tested R-vs-L-home
+QUIETLY and its count was overwritten by re-filtering; the
+final print never exposes it. A one-shot sequential
+measurement (no convergent re-filter, or round-0 internals
+read) would. Routed: spec = p5's court; feasibility = p4's.
+p4's declared next = **unwrap inside the solve** — the only
+scope-narrower for every zero; natural sequence = unwrap
+first, then staged counts under the fixed instrument. **(e) ⚠
+Artifact custody return**: the two logs live in p4's
+scratchpad (order_L.log / order_R.log) — non-permanent, no
+sha; the landing fires registered branches and carries
+decision weight ⇒ bank to the permanent tree with content sha
+requested (their own -250/-254 practice).
