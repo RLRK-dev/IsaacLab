@@ -17166,3 +17166,31 @@ on the buildable head, L free > 0 appears ONLY at tilt 20 (45: 0,
 reference cell's yoke_angle_deg 45.0 vs left-arm mobility); p6
 declines to answer it; so does this desk — carried to Rs as
 material with its scope (buildable sheet, 8 of 12 rows arrived).
+
+## §603 — a second pass on the buildable sheet, and the crash is a
+## mounting (p6 -195)
+
+**Inbound**: p6 -194 → -195 continuous (12:18:56 JST). **(a) Pin
+verified (machine)**: register @ 9b8a0a47e8 sha df0636cd…3e34 —
+commit AND worktree MATCH. **(b) ⭐ The second buildable PASS,
+re-read full-width here (12:19:27, sha 5274de0d, 21 rows)**:
+0.110 / 0.340 / 20 → 83 solved / 2 free, 126 / 34, +15.3 mm, not
+interleaving, both clear, PASS — and the closest pair is (7 <-> 46),
+THE SAME WITNESS PAIR as the first PASS. The crown × tilt picture
+completes 3/3 on the buildable sheet (9 of 12 rows): tilt 20 = L
+free 2 / 5 / 2 with TWO conjunctive passes (0.220/20 falls on the
+crossing leg alone, +0.0 YES); tilt 45 = 0/0/0; tilt 30 = 0/0.
+Scope stays as p6 states it. **(c) ⭐⭐ The crash binds to the
+MOUNTING, not the head**: 0.110/0.340/30 is NOT MEASURED with the
+same refusal text as none/0.340/30 — the SIGSEGV reproduces with
+the head swapped ⇒ the missing data is TWO CELLS OF ONE MOUNTING
+(0.340, 30). Material for p4's segfault artifact at package time.
+**(d)** 0.110/0.400/45 still unarrived (remaining three = the 0.400
+column); the rule-3 side is moot by the textual resolution — the
+row lives only for the bow hypothesis, and p6 maintains their
+pre-registration in exactly that scope. **(e) Instrument note,
+owned in passing**: this desk's awk column-view mis-picked the
+verdict field (an NF-relative offset drifts on the variable-width
+tail); the full-width read in the same output carried the truth.
+"Select columns" is implemented by FIELD INDEX, not tail-relative
+offsets.
