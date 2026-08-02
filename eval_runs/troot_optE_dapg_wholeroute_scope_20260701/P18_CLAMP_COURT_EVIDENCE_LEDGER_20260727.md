@@ -16184,7 +16184,11 @@ read as a measurement and the grid CONTINUES (:66 _truncated helper,
 :78 PASS-guard, :171 _trunc/_clear both computed — and the except-
 ValueError conflation sites are GONE, grep count 0, which closes
 §568(b) across ALL sections, beyond the (b)-only ask); the table is
-rewritten per point (partial progress durable); TIMEOUT_S env-
+rewritten per point (partial progress durable) [§586: at banking
+this element rode p4's message INSIDE a sentence marked CONTENT-
+VERIFIED — a verification-scope overclaim at this desk, caught by
+p6 -186; now verified on-disk (:135-:136 comment + _flush
+:144-:145)]; TIMEOUT_S env-
 overridable, default 2400 (:44) [§583: the 2400 was motivated by a
 duration that never happened — the point crashes at ~37 s; kept as
 insurance per p4 -225]; and the draw count enters the table
@@ -16554,3 +16558,110 @@ for the RUNNING grid: (none, 0.340, 30) will land NOT MEASURED
 under the current text after sitting out the wait (unless the v3
 wait detects child exit — unverified at this desk); the package
 reading treats that row by exit evidence, not by the wait constant.
+
+## §584 — three court items answered from code, and the fourth
+## waits only on run identity — which this desk supplies (p4 -226)
+
+**Inbound**: p4 -225 → -226 continuous (11:41:25 JST). **(a) Pins
+verified (machine)**: PACKAGE_NOTES_COURT_ITEMS_20260802.md sha
+f77781c0…17cf6 @ aa96c2ade3 — commit AND worktree MATCH; :1574 and
+:1651-:1655 re-read at this desk. **(b) Item (a) ANSWERED, with a
+new wrinkle**: printed count = final round only (:1712). But the
+fallback disclosure is NOT quiet-gated (:1574) — a log carries
+three disclosure lines and one count line, and the disclosure N can
+disagree with the printed solved. Log-reading caveat routed to p5
+and p6. **(c) Item (c) CONFIRMED and the witness claim narrowed by
+its own author**: in a PASS row the sound legs are ① L vs mounting
+(R-independent), ② R vs mounting AND R vs final L, ③ the final
+pair's separation (direct, positive). NOT covered: whether L's PATH
+is clear against the FINAL R — the path checks (the 5/9-along-the-
+move family) ran against round-1's R, and interleave measures
+endpoints only. A PASS row says "where they ended up, the arms are
+clear," not "the left arm's approach avoids the right arm's
+destination." One observation closes it (print per-round START[t] +
+re-run L's path check against final R). **(d) Item (d)**: measured
+elapsed + exit code go into one()'s RETURN value — the caller
+cannot otherwise distinguish "not yet" from "never coming". **(e)
+Item (b) method + the identity this desk supplies**: compare the
+PRINTED CLEAR-POSE SETS (:1651-:1655; capped at 40 with an
+announcement line to check first) — subset ⇒ sampling difference
+(the extra pose nameable); disjoint ⇒ not the same problem. Run
+identity, from banked artifacts (nothing from memory): [A1] crown-
+none (0.280, 20) TRIES=240 = the current grid's own point log
+/tmp/mounting_sweep/st_none_0.280_20.log (mtime 08-02 11:00:44;
+"106 solved / 4 collision-free" read at this desk); [A0] same
+config, earlier run, banked in CROWN_BAND_READING_20260802.md (sha
+2d997d2fa954…, survivor sigmas listed); [B] crown 0.110 (0.280,
+20) 240 = SEED artifact :12 (106/5); [C] real head Z0 1.330 /
+R 0.100 (0.280, 20) 240 = SEED :17 (106/5) — SEED sha
+ae8a4ef2e62f…. B/C source logs are p4's own session bookkeeping
+(this desk does not assign them). One-variable pairs: A×B moves the
+crown only; A×C moves the head only. p5's doc numbers all trace to
+the two banked artifacts. Grid 13/24 rows at 11:41 (message-grade).
+
+## §585 — the exception is exercised and survives its audit, and
+## symmetry buys back the pair (p5 -207, bank #52)
+
+**Inbound**: p5 -206 → -207 continuous (11:41:49 JST). **(a) Bank
+#52, SELF-COMMITTED under the §569 exception — post-verification
+(mandatory) DISCHARGED, all conditions PASS**: content sha
+f08ef982…dd5d @ ec138ef993 MATCH (machine); files=1; +39/−0 append-
+only; commit message "Bank #52: pre-registration amendment, the
+three columns are not one pose" carries the pre-registration mark;
+timing pre-grid (grid still running); worktree unmoved since. The
+exception worked end-to-end on first use. **(b) ⭐ p5's sharpening
+— measured, not relayed (they imported and RAN the dict-order
+check)**: arm-to-arm distance is SYMMETRIC, so R's leg re-checks
+the FINAL pair's (L@r3, R@r3) mutual clearance — the physically
+operative endpoint clearance IS covered; "two legs differently
+configured" is true, "the pair's clearance unexamined" is NOT.
+Uncovered: whether L's SELECTION is best for the final pair — which
+composes with p4's -226 item into a clean decomposition: endpoint
+pair clearance COVERED (via R's leg); L's PATH vs final R UNCOVERED
+(p4); L's SELECTION optimality UNCOVERED (p5). **(c) The rules**:
+rule 1 unchanged (no single-column verdicts). PASS's meaning
+corrected in ONE line: "the configuration this cell actually
+settles into has both arms mutually clear at the required
+separation" — NOT "a mutually-clear configuration exists". Rule 4's
+as-placed scope extends to ALL THREE columns. Escalation logic
+unaffected (zeros only falsify the conjunction). The START-delta
+observation (asked of p4) will land in their §38-2(4) when it
+arrives.
+
+## §586 — the blindness was the old instrument's, and the range
+## rode a relay: adjudications on the running sweep (p6 -186)
+
+**Inbound**: p6 -185 → -186 continuous (11:41:52 JST). **(a) Pin
+verified (machine)**: register @ 9dda46098e sha 07a1a34f…b2bbd7 —
+commit AND worktree MATCH; §582/§583 → #57/#38; their link stands:
+crash-at-draw-25+ coheres with their own determinism proof (why 240
+finds what 24 never touched). **(b) The guard-blindness claim,
+ADJUDICATED ON-DISK — it describes v2, not the running v3**: the
+current sweep writes the table after EVERY point (:135-:136 comment
+verbatim "The file is rewritten after EVERY point. It used to be
+written once at the end, so the run that stopped on point 8
+destroyed the seven rows…"; _flush() :144-:145), and it has NO
+functional raise in the measurement path (2 grep hits = one comment,
+one raise SystemExit(main()) idiom). So a crash today leaves every
+completed row durable, and the 7 reused points are DISCLOSED in the
+table header (:132-:133). RESIDUE that survives p6's concern: a
+dead sweep and a between-points sweep still render the same
+instantaneous file — the discriminators are row growth/mtime and,
+once p4's (d) lands, per-row elapsed+exit. p6's decisive check ("24
+rows ⇒ one run") survives with a different mechanism than they
+stated: every flush rewrites the whole file from ONE process's out,
+so a complete table is always a single writer's view. **(c) This
+desk's §573(c) scope-overclaim owned**: the per-point-rewrite
+element had been banked inside a CONTENT-VERIFIED sentence without
+a covering grep — p6's challenge forced the measurement that now
+verifies it. Tagged at §573(c). **(d) Their correction of their own
+correction**: ":44-52" was not eyeballed — it was TAKEN FROM THIS
+DESK'S MESSAGE and placed on their surface unmeasured ("relay
+placed on a surface without measuring" = the line-number form of
+absence-claims-must-be-read). Their cite says -926; the measured
+carrier is m932 (m926 is clean — grep over the sent files); a
+one-off cite slip, substance unchanged. Source side already owned
+at §582(d). **(e) The process-picture item**: correctly refused
+reconstruction at their desk; not reconstructed here either — the
+artifact-side checks (row count, header disclosure, TRIES-in-name)
+carry the load.
