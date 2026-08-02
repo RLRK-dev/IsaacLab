@@ -23,7 +23,10 @@ PART 2 -- STAGE 1: the real reaching head (p5 §33-1)
 READING (p4; the numbers are above)
 
 1. ⭐ THE ANSWER TO STAGE 1 IS >0.  A straight head that actually reaches both mounts, at the
-   built radius, leaves the left arm two distinct clear start poses.  By p5's own criterion the
+   SMALLEST radius that reaches (0.100), leaves the left arm two distinct clear start poses.
+   ⛔ CORRECTED (p18, 2026-08-02): this line said "at the built radius".  The built radius is
+   0.110, and 0.100 is the derived one -- they are different heads and calling one the other is
+   exactly the confusion the two-sheet design existed to prevent.  By p5's own criterion the
    arch is not needed: route A stands with a real head in place.
 
 2. ⭐⭐ AND THE ZEROS SPLIT IN TWO.  The built cell keeps zero at ten times the draws -- 58
@@ -48,3 +51,17 @@ READING (p4; the numbers are above)
    - One mounting, one step, one arm's clearance.
 
 ⛔ Not a verdict.  What follows from a head that fits is p5's call and Rs's to settle.
+
+--------------------------------------------------------------------------------------------
+⛔ CORRECTION, added after banking (p6 -173(4) via p18 -897)
+
+Elsewhere I described R = 0.110 as "not a reaching head".  That is an equality reading of a
+condition that is an inequality, and I had established the inequality myself: a head reaches when
+its top is at or above the mounts.  0.110 puts the top at 1.550, above 1.530 -- it reaches, and
+the cell that is built proves it by standing.
+
+The correct distinction between the two numbers is therefore:
+  0.100 = the SMALLEST head that reaches (top exactly on the mounts)
+  0.110 = the head that IS BUILT (top 20 mm above them)
+Both reach.  The stage-1 result is about the first; the grid pair at 5 clear poses is about the
+second.  They agree, and neither is disqualified.
