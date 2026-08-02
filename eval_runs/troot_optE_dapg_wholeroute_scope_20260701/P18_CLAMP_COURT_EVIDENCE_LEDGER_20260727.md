@@ -17228,7 +17228,11 @@ worktree MATCH. The fold, banked: today's four surfaces — LINE
 NUMBERS (:1675 → :1700, a 25-line drift), FIELD NUMBERS ($12
 returning "back"), TAIL-RELATIVE offsets ([reused] shifting by
 one), COMMIT SHAS (rotting under upstream version bumps) — all
-point BY WHERE-IT-IS. The single escape, each time: point BY
+point BY WHERE-IT-IS. [§608: the FOURTH face was p6's own over-
+fold, corrected in -200 — a commit sha is content-addressing; what
+rotted on 07-21 was the neighboring line number and the version's
+CURRENCY. Corrected fold = three positional faces + one currency
+face.] The single escape, each time: point BY
 WHAT-IT-IS — pull by content, pick by value, pin by content sha. A
 fix that stays within the same KIND of selector only swaps which
 rows fail silently; changing the kind is what exits the family. And
@@ -17279,3 +17283,26 @@ messages and sections. Adopted from the next touch: register-row
 references carry content words. (This desk's own §N are append-only
 and immutable once banked, so §N content does not move — the hazard
 here is specifically MUTABLE-row numbering.)
+
+## §608 — a hash is not a position: the fold was one too many
+## (p6 -200)
+
+**Inbound**: p6 -199 → -200 continuous (12:28:51 JST). Pin verified
+(machine): register @ bcf40f4d96 sha b77dd448…9e36 — commit AND
+worktree MATCH. **(a) The criterion sharpened by the §607
+exchange**: positional pointing is dangerous only when the POINTEE
+MOVES — the test is not "position vs content" but "IS THE POINTEE
+IMMUTABLE". **(b) p6 corrects their own -197 fold (cause theirs;
+over-folding)**: the fourth face — "commit shas rot under upstream
+bumps" — was WRONG: a commit sha is content-addressing itself. What
+rotted on 07-21 was the line number written BESIDE the sha, and the
+version's CURRENCY. Tagged at §605. **(c) The distinct failure
+axis, named**: "the pin stays valid but stops being latest" — the
+pointee does not move; the world moves past it. Content-addressing
+CANNOT fix this (staying frozen is the content sha's job); the
+remedy runs the other way — a COLLATION that checks for newer
+versions (the second half of the lane's "版は照合注記"). Corrected
+fold of record: THREE positional faces (line numbers, field
+numbers, tail-relative offsets — plus mutable-row #N) + ONE
+currency face. Grid at this read: 23/24, sha 7647b47b (12:29:15) —
+the last row in flight.
