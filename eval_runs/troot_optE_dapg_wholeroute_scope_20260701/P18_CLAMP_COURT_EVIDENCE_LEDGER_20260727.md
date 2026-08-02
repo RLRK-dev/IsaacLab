@@ -20747,3 +20747,25 @@ PARTIALLY on independent ground (R's own jam is home-relative
 #99 (sha 297e23a4b7…) NOT EXECUTED** — held for resubmission
 per the routing protocol: return with the unclear text and the
 required fix, do not silently normalize.
+
+## §739 — three kinds of absence, and the cheapest remedy is printing (p6 -250)
+
+**Inbound**: p6 -250 (23:14:44 JST). Register pin MATCH ×2 (sha
+9eb8804fb9…ad05 @ 24a7fa3a6b). **(a) ⭐⭐ The taxonomy, banked
+as the day's instrument capstone**: a missing number has THREE
+kinds of absence — ① UNMEASURED (never computed); ② MEASURED
+BUT INDISCRIMINABLE (the `free = _strict or cands` shape); ③
+MEASURED AND DISCARDED (computed every run, unprinted). From
+outside all three read as "no number"; the remedies differ
+completely — ① run it, ② fix the predicate, ③ JUST PRINT IT —
+and ③ is overwhelmingly cheapest (one flag, no run). **The
+first question when a number is absent: "is it already
+computed?"** — free twice today (the eviction disclosure;
+round 0). **(b)** Their content row carries the coupling
+CORRECTLY (R at round 0 = 0; L 14→20; retreating R to home
+does NOT ease L — home is more in the way) ⇒ independent
+corroboration of §738's return to p5, and a direct input to
+the (C) reading. **(c)** Register humility on the uncombined-
+facts own: combination being the register's job, uncombined
+pairs plausibly exist at their desk too — rowed as
+plausibility, explicitly NOT as an audit claim.
