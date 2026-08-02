@@ -179,3 +179,41 @@ pitch keeps zero clear left poses**, and the first open one is −0.110.
 2. ⚠ **The rest of the closed region is still coarse.** From +0.150 to −0.060 the pitch is 30 mm,
    so the same caution applies there and is untested.
 3. The familiar shape again: L solved rises (90 → 112 → 112) while L clear stays at zero.
+
+---
+
+## 9. ⭐⭐ ALL PAIRS — every open centre is a witness, and the set is contiguous
+
+Rs authorised the measurement p5 costed (`bank #71`). It is wired into the driver itself
+(`ALL_PAIRS=1`, `ur15_steps_wired.py`): the solve stashes the poses it actually cleared, and the
+block walks **every** L × R pair through the driver's own `arm_pair_min`. ⛔ No IK, no draws — the
+poses are the ones the solve above already cleared. Logs: `allpairs_logs/`.
+
+| centre | clear L × R | pairs | chosen pair | **BEST pair** | argmax |
+|---|---|---|---|---|---|
+| −0.110 | 1 × 2 | 2 | +0.0 | **+24.2 mm** | 16 ↔ 50 |
+| −0.120 | 1 × 2 | 2 | +24.2 | **+39.7 mm** | 12 ↔ 68 |
+| −0.130 | 7 × 3 | 21 | +0.0 | **+44.0 mm** | 12 ↔ 68 |
+| −0.140 | 14 × 3 | 42 | +0.0 | **+50.6 mm** | 12 ↔ 68 |
+| −0.150 | 15 × 3 | 45 | +10.7 | **+50.6 mm** | 12 ↔ 68 |
+| −0.200 | 31 × 4 | 124 | +10.7 | **+50.6 mm** | 12 ↔ 68 |
+| −0.250 | 30 × 2 | 60 | +0.0 | **+44.8 mm** | Lg_right_pad_f1ext ↔ 50 |
+
+**296 pairs. A separated pair exists at 7 of 7.**
+
+1. ⭐⭐ **Every open centre is a witness.** The four rows that read "+0.0 — no witness found" at the
+   chosen pair each have one: −0.110 by 24.2 mm, −0.130 by 44.0, −0.140 by 50.6, −0.250 by 44.8.
+   ⇒ **The witness set is contiguous over −0.110 … −0.250**, and p6's non-contiguity question is
+   answered: those were **unmeasured, not holes** (§6 point 2 said the 296-pair measurement is what
+   would tell them apart — it did).
+2. ⭐ **The chosen pair is systematically not the best one.** +10.7 against +50.6 at −0.150 and
+   −0.200. That is expected — the solver ranks candidates by cost and conditioning, not by how far
+   the two arms end up from each other — but it is now measured rather than assumed, and it is the
+   size of the gap the single-pair column was hiding.
+3. **At the best pair the argmax is stable**: `12 ↔ 68` at four consecutive centres, where the
+   *chosen*-pair column switched argmin six times in eight rows (§7). The jaggedness was a property
+   of the choice, not of the geometry.
+4. ⛔ **The asymmetry is now closed for this region only.** Everywhere else in this investigation a
+   fail is still "no witness found". The same measurement over the mounting grid and the crown
+   columns is the remaining queue.
+5. ⚠ Still **start-pose only**, and a witness pose pair is not a route.

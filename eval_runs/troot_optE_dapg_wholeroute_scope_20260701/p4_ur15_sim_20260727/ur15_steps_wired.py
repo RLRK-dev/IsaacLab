@@ -1371,6 +1371,9 @@ def gap_mm(x, absent="beyond the search radius"):
     return absent if x is None else f"{x * 1000.0:+.1f} mm"
 
 
+LAST_CLEAR = {}   # side -> the q vectors that cleared, from the most recent solve for it
+
+
 def pose_menu(t, wide=False):
     """The attitude menu for arm `t`, as (yaw, roll) pairs.
 
@@ -1571,6 +1574,9 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     # outside.  pB -515 found it; the comment at the print below fixed this same shape one level
     # up and stopped there.  The strict count is kept so the two can never share a number again.
     _strict = [c for c in cands if not c[3]]
+    # ⭐ The clear set itself, kept so the all-pairs interleave can be read off the poses
+    # this solve actually cleared -- rather than re-deriving them somewhere else.
+    LAST_CLEAR[t] = [np.asarray(c[0]) for c in _strict]
     _fell_back = not _strict
     free = _strict or cands
     if not free:
@@ -1755,6 +1761,38 @@ for _t6 in SIDES:
         _sci.qpos[_a6] = START[_t6][_k6]
 mujoco.mj_forward(m, _sci)
 _interleave_report(_sci)
+
+# ⭐ ALL_PAIRS -- the measurement that turns "no witness found" into an answer.  The interleave
+# above is read at ONE pair of poses, the chosen one, so a touching row says the chosen pair
+# touches and NOT that the mounting has no pair that clears.  With N clear poses on one arm and M
+# on the other there are N x M pairs; this walks all of them with the driver's own arm_pair_min.
+# ⛔ No IK and no draws: the poses are the ones the solve above already cleared.
+if os.environ.get("ALL_PAIRS"):
+    _L, _R = LAST_CLEAR.get("L", []), LAST_CLEAR.get("R", [])
+    _best, _who2, _n = None, "", 0
+    _ap = mujoco.MjData(m)
+    _ap.qpos[:] = d.qpos
+    for _qi in _L:
+        for _k7, _a7 in enumerate(QADR["L"]):
+            _ap.qpos[_a7] = _qi[_k7]
+        for _qj in _R:
+            for _k8, _a8 in enumerate(QADR["R"]):
+                _ap.qpos[_a8] = _qj[_k8]
+            mujoco.mj_kinematics(m, _ap)
+            _g2, _w2 = arm_pair_min(_ap, want_who=True)
+            _n += 1
+            # None = nothing within the search radius = the arms are far apart, which is the best
+            # possible separation and must not lose to a measured number.
+            if _g2 is None:
+                _best, _who2 = float("inf"), "beyond the search radius"
+            elif _best is None or _g2 > _best:
+                _best, _who2 = _g2, _w2
+    print(f"[steps] ALL-PAIRS INTERLEAVE: {len(_L)} clear L x {len(_R)} clear R = {_n} pairs "
+          f"evaluated; BEST separation "
+          + ("none -- no clear pose on one arm" if not _n else
+             ("beyond the search radius" if _best == float("inf") else f"{_best*1000:+.1f} mm"))
+          + (f" ({_who2})" if _n and _best != float("inf") else "")
+          + f"   -> {'A SEPARATED PAIR EXISTS' if _n and _best > 0 else 'no separated pair among these'}")
 
 # ---- STEP 1: the arms REACH the start pose by servo motion; no state is written ----
 q0 = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
