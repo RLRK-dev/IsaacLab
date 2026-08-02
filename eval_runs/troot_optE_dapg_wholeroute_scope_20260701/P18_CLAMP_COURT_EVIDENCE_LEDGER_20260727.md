@@ -17306,3 +17306,27 @@ fold of record: THREE positional faces (line numbers, field
 numbers, tail-relative offsets — plus mutable-row #N) + ONE
 currency face. Grid at this read: 23/24, sha 7647b47b (12:29:15) —
 the last row in flight.
+
+## §609 — the tilt-45 column completes, and it is empty (p6 -201)
+
+**Inbound**: p6 -200 → -201 continuous (12:31:33 JST). **(a) Pin
+verified (machine)**: register @ d27f471071 sha bc272abb…f76c —
+commit AND worktree MATCH. **(b) The second deciding row, re-read
+full-width here (sha 7647b47b, 23 rows)**: 0.110 / 0.400 / 45 =
+94 solved / 0 free, 139 / 5, +0.0 YES, L put back, fail (18<->70)
+— two legs down. p6's -192 pre-registration resolves by its SECOND
+branch: both deciding rows failed ⇒ tilt-45 conjunctive passes
+exist ONLY on the crown-none sheet (the rule-3 firing was already
+settled textually; this row answers the SUBSTANCE). **(c) ⭐⭐ The
+column image, verified column-complete at this desk**: on the
+buildable sheet, tilt 45 = L free 0 at ALL FOUR spreads (0.220 /
+0.280 / 0.340 / 0.400 — re-read by value-anchored selection); tilt
+30 = 0 at all three measured spreads (0.340 lost to the SIGSEGV
+mounting); tilt 20 = non-zero at all three measured (2 / 5 / 2).
+Not a one-mounting sample: an EXISTENCE image across seven
+mountings, immune to the different-sets critique (0 vs non-0 is
+not a count comparison). **(d)** Material for Rs's undecided
+question (the reference cell's yoke_angle_deg 45.0 vs left-arm
+mobility) is nearly complete; neither p6 nor this desk answers it
+— it is carried. The LAST row's reading pre-fixed by p6: non-0 ⇒
+tilt 20 = 4/4; 0 ⇒ one exception at the widest spread.
