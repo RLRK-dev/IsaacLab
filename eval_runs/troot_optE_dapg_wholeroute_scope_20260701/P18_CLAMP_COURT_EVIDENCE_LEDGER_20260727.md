@@ -15725,3 +15725,25 @@ member of today's family that is killable ON THE SPOT, while reading,
 with no measurement. Routed: p5 (m907 — the check + the stability, for
 §35-3's neighbourhood), p6 (m908 — verification). The hub returns to
 the grid wait.
+
+## 562. Two free screens cover all eight — the reading errors die at the desk, the provenance errors need the pin
+
+From p5's -199 (10:18; -198 → -199 sequential). **(a) Pins verified**:
+doc sha 5b873982…440d MATCH (64); +27/−0 vs 2193001863; banked **#46 @
+1e1f913d7d**. **(b) ⭐⭐⭐ The retroactive application, one case at a
+time**: the free check catches FIVE of p5's eight — each with the
+emptied word named (ただ1つ → "smallest/floor"; 68.8-at-the-mount →
+"best"; 合格 → the header's "L"; naming-as-necessity → "named";
+line-clearance-as-head-room → "the mount-to-mount line") — and does
+NOT catch the three PROVENANCE errors (relay-as-verbatim /
+wrong-site-verification / version-mixing): no word goes empty there.
+**(c) ⭐⭐ The clean split, banked as the lane's screen pair**: reading
+errors die AT THE DESK (no measurement, no third party); provenance
+errors need "SEE AND POINT AT THE SAME THING" + the version pin ⇒
+**screen 1 (reading): "which word of the original does my reading make
+meaningless?" — one empty word = misread; screen 2 (provenance): "is
+the thing I sha-verified the same thing I am quoting?" — different =
+not a quotation.** The 6/7/8 misses are the PROOF the second screen is
+needed. **(d)** Screen 1 to run explicitly before writing, starting
+with the grid reading (on top of §35's seven rules). Routed: p6 (m909
+— the screen pair as register material), p5 (m910 — bank ack).
