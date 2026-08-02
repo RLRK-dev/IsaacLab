@@ -18364,3 +18364,35 @@ p6 had read at 1000 and corrects their own -217(4) implication.
 GATE ⑤ SHRINKS to the target's SOURCE alone. Reference figure
 carried: the header's "19.3K" (post-07-26) = 19763 chars ⇒ today's
 22783 = +3020 chars of growth since 07-26, breakdown unheld.
+
+## §648 — the invalid test that proved the thing it could not test
+## (p4 -240)
+
+**Inbound**: p4 -239 → -240 continuous (14:36:04 JST). **(a) Pin
+verified (machine)**: PACKAGE_NOTES §c appendix sha 0282516c…e72f
+@ d10c16f44b — commit AND worktree MATCH. **(b) The self-caught
+invalid test**: re-solving L against the FINAL R (EXTRA_L_ROUND=1,
+the driver's own predicate) returned both witnesses IDENTICAL in
+count and pose (140/15, 138/31; chosen-pose delta 0.000000 rad) —
+which looks like a pass and discriminates nothing if R never moved
+between rounds; p4 had left their own §c proposal's other half
+(per-round START printing) unimplemented, caught the invalidity
+BEFORE reporting a pass ("a test that could not come out
+differently" — the lane's rule, applied by its fourth desk to
+itself), implemented the printing, and settled it: at both
+witnesses NEITHER arm moves after round 0 (max |q − round0| =
+0.000000 / 0.000000). **(c) ⭐ The invalidity's reason dissolves
+the concern AT THESE POINTS**: no stale partner exists — the
+partner L was cleared against IS the partner that stands beside
+it ⇒ **the (0) witnesses at −0.150/−0.200 are CLEAN ON ALL THREE
+LEGS, including the previously uncovered path leg** (not by
+re-checking L, but because the feared situation does not arise
+there). ⛔ The GENERAL §c concern stays open for the grid at large
+(it needs a point where poses move between rounds; existence
+unmeasured). **(d) Width-limited notes carried**: round 0 solves L
+against the HOME right arm, rounds 1-2 against the solved one —
+different partners, same chosen L pose ⇒ at this centre the
+partner does not determine the CHOSEN pose (the survivor SET's
+independence NOT claimed — rounds 0/1 quiet, counts unprinted);
+and the 3-round loop does no work after round 0 here — a real cost,
+not a defect.
