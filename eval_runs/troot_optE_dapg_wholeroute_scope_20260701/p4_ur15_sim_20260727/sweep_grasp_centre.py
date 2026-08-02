@@ -142,7 +142,9 @@ def main() -> int:
     out.insert(1, f"START_TRIES = {TRIES} draws per solve.  ⚠ A survivor count of zero from 24 "
                   f"draws does not mean no clear pose exists -- four of sixteen such zeros in "
                   f"the mounting grid became non-zero at 240 (GRID_24_VS_240_20260802.txt).")
-    (HERE / f"GRASP_CENTRE_SWEEP_TRIES{TRIES}.txt").write_text("\n".join(out) + "\n")
+    # ⛔ OUT_TAG so a partial re-run (a boundary bisection, say) lands beside the banked
+    # table instead of overwriting a pinned artifact with a subset of its own rows.
+    (HERE / f"GRASP_CENTRE_SWEEP_TRIES{TRIES}{os.environ.get('OUT_TAG', '')}.txt").write_text("\n".join(out) + "\n")
     print("\n".join(out[-4:]))
     return 0
 

@@ -90,3 +90,34 @@ swept"*. That sentence is true of what it swept and would have been read as conf
 The banked 24-draw table covers **+0.150 … −0.250**, and the three centres that open are all in the
 part the shorter list left out. ⇒ The scope check — does my range match the range of the claim I am
 testing? — is the only thing that stood between a confirmation and a refutation.
+
+---
+
+## 6. ⭐ The boundary, bisected — the window is wider and closer in than §1 said
+
+§1 swept in 50 mm steps and reported −0.150 as "the highest swept centre with a left-arm
+candidate", with the explicit warning that it is a swept value and not a boundary. Bisecting the
+gap between −0.100 (closed) and −0.150 (open), at 240 draws, same built mounting
+(`GRASP_CENTRE_SWEEP_TRIES240_BOUNDARY.txt`; point logs in `grasp_centre_logs_240/`):
+
+| centre x [m] | L solved | L clear | R clear | arms closest | all three legs |
+|---|---|---|---|---|---|
+| −0.110 | 123 | **1** | 2 | +0.0 | no witness found |
+| **−0.120** | 124 | **1** | 2 | **+24.2 mm** | **witness** |
+| −0.130 | 126 | **7** | 3 | +0.0 | no witness found |
+| −0.140 | 137 | **14** | 3 | +0.0 | no witness found |
+
+1. ⭐ **The left arm is open at every bisected centre**, including −0.110 — the point immediately
+   adjacent to −0.100, which is measured closed. ⇒ **The boundary is between −0.100 and −0.110**,
+   a 10 mm interval, not the 50 mm §1 could bound it to.
+2. ⭐ **−0.120 is a witness**, 30 mm closer to the built centre than the nearest one previously
+   known. The witness set is now **−0.120, −0.150, −0.200**.
+3. ⚠ **The interleave is not monotone** across the open region: +0.0, +24.2, +0.0, +0.0, +10.7,
+   +10.7, +0.0 from −0.110 to −0.250. Nothing in the cell moves between those rows except the
+   grasp centre; what changes is **which pose pair gets chosen**. This is §4 of the grid reading
+   showing up as a jagged column rather than as an argument.
+4. **The four "no witness found" rows are cheap to settle**: 2, 21, 42 and 60 pairs, of which one
+   each was measured — **125 pairs in total** for the whole open region. That is the all-pairs
+   measurement p5 costed (`bank #71`) applied here.
+
+⛔ Still start-pose only, and still not a recommendation.
