@@ -130,3 +130,59 @@ Adding the stereo head (`STEREO_HEAD=1`) on top of this can only remove candidat
 are **already zero** on the right arm. It cannot change the verdict, so it is not the next
 measurement. It becomes worth running again if the right arm's approach is changed and starts
 keeping poses.
+
+---
+
+## 7. ⭐⭐⭐ The blocker was the path REPRESENTATION, and both arms now arrive
+
+`solve_ik` wraps its answer into a principal range. The ramp then interpolates linearly from the
+previous pose to that wrapped number, so a base joint sitting near ±π is driven **almost a full
+turn the wrong way** — 274° where 86° would do, 244° where 116° would do. That sweep is what
+carried the arms through each other and through the furniture.
+
+⚠ **Unwrapping after the solve does not work**, and measuring that is what located the fix:
+`UNWRAP_START` (applied to the chosen pose) took the left arm to 0.00 mrad on its own, and did
+nothing at all when combined with the path tests — *"nothing to unwrap"* — because the candidates
+whose **wrapped** path collides had already been discarded. The shorter path was never tested.
+
+`UNWRAP_SOLVE` shifts each candidate by the multiple of 2π nearest the previous pose **before** the
+path tests run, so every path test sees the path the arm will actually take (only where the shifted
+value stays inside the joint's range).
+
+**Measured at grasp centre −0.200, 240 draws, ARM_PATH on:**
+
+| | path test, unwrap after | **unwrap inside the solve** |
+|---|---|---|
+| L clear | 20 | **36** |
+| **R clear** | **0** | **8** |
+| L standing error | 43.96 mrad | **0.00 — gate 100% free** |
+| **R standing error** | **275.97 mrad** | **0.00 — gate 100% free** |
+
+⇒ **Both arms reach their start poses exactly.** The right arm's zero — which held against a left
+arm at home, at its solved pose, in both solve orders, and at all seven grasp centres — was **the
+wrapped path**, not the geometry, the placement, the crown, the grasp centre or the solve order.
+
+### ⭐ It carries the stereo head, as the deferral protocol requires
+
+p6's condition: the first **positive** claim must carry the reference's stereo head, and so must
+any claim that the candidate set moved. Both apply here (0 → 8). Run with `STEREO_HEAD=1`
+(`unwrap_logs/unwrap_solve_with_head.txt`):
+
+| | without the head | **with it** |
+|---|---|---|
+| L | 138 / 36 | 138 / **36** |
+| R | 139 / 8 | 139 / **8** |
+| standing error | 0.00 / 0.00 | **0.00 / 0.00** |
+
+**Identical.** The obstacle the cell was missing does not touch this result.
+
+### What is now true, and what is not
+
+1. ⭐ **The route has passed the point where every run today stopped.** It is past the start-pose
+   reach and into the per-step aim solves.
+2. ⛔ **It is not finished, and the aim solves are already falling back** (`NOT ONE of 1 candidates
+   cleared`). Passing the first blocker is not completing the route, and nothing here says it will.
+3. ⚠ **One grasp centre.** −0.200 only; the other six are unmeasured under `UNWRAP_SOLVE`.
+4. ⚠ The zeros banked earlier today remain correct **as measured** — they were zeros under the
+   wrapped straight line, which is the scope p18 formalised. This narrows that scope; it does not
+   retract the measurements.
