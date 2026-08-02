@@ -27,7 +27,14 @@ HERE = Path(__file__).resolve().parent
 PY = "/home/rlrk/env_isaaclab7/bin/python"
 CNT = re.compile(r"start-pose IK ([LR]): (\d+) solved / (\d+) collision-free")
 WHY = re.compile(r"start-pose IK ([LR]): rejected against -- (.*?)\s{3}\(parts named")
-TIMEOUT_S = 240
+# ⚠ 240 was tuned for 24 draws.  A cap that falls between the two arms' solves writes a row
+# that reads as a measurement; the wait breaks as soon as both counts are in, so a generous
+# cap costs nothing on a fast point.
+TIMEOUT_S = int(os.environ.get('SWEEP_TIMEOUT_S', '2400'))
+# A zero from 24 draws and a zero from 240 are different claims -- the draw count goes in the
+# file name.  (The grasp-centre sweep's 24-draw zeros turned out to be the sample at three of
+# its centres; GRASP_CENTRE_240_READING_20260802.md.)
+TRIES = os.environ.get('START_TRIES', '24')
 
 
 def one(dy: float, log: Path):
@@ -57,13 +64,19 @@ def main() -> int:
     dys = [float(v) for v in sys.argv[1:]] or [0.00, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30]
     tmp = Path("/tmp/work_row_y_sweep")
     tmp.mkdir(parents=True, exist_ok=True)
-    rows, out = [], []
+    rows, out, missed = [], [], []
     print(f"{'dy [m]':>7s} {'row y':>7s}  {'L solved':>8s} {'L free':>7s}  {'R solved':>8s} "
           f"{'R free':>7s}")
     for dy in dys:
         cnt, why, ry = one(dy, tmp / f"y_{dy:+.3f}.log")
         L, R = cnt.get("L", (None, None)), cnt.get("R", (None, None))
         rows.append((dy, L, R, why.get("L", "-"), why.get("R", "-"), ry))
+        # ⛔ A point that did not finish is not a row of numbers: str(None) in the count columns
+        # gives a truncation the shape of a measurement.
+        if L[0] is None or R[0] is None:
+            missed.append(dy)
+            print(f"{dy:7.3f} {ry or '?':>7s}  -- NOT MEASURED (L={L[0]} R={R[0]}) --", flush=True)
+            continue
         print(f"{dy:7.3f} {ry or '?':>7s}  {str(L[0]):>8s} {str(L[1]):>7s}  {str(R[0]):>8s} "
               f"{str(R[1]):>7s}", flush=True)
 
@@ -102,7 +115,11 @@ def main() -> int:
     else:
         out.append("⛔ The LEFT arm keeps ZERO collision-free candidates at every offset swept.")
     out.append("⛔ Not a verdict.  Which option to take is p5's call and Rs's to settle.")
-    (HERE / "WORK_ROW_Y_SWEEP_20260729.txt").write_text("\n".join(out) + "\n")
+    if missed:
+        out.append(f"⛔ {len(missed)} offset(s) NOT MEASURED: {missed}")
+    out.insert(1, f"START_TRIES = {TRIES} draws per solve.  ⚠ A zero from 24 draws does not mean "
+                  f"no clear pose exists.")
+    (HERE / f"WORK_ROW_Y_SWEEP_TRIES{TRIES}.txt").write_text("\n".join(out) + "\n")
     print("\n".join(out[-3:]))
     return 0
 
