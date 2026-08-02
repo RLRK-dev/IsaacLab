@@ -16185,7 +16185,9 @@ read as a measurement and the grid CONTINUES (:66 _truncated helper,
 ValueError conflation sites are GONE, grep count 0, which closes
 §568(b) across ALL sections, beyond the (b)-only ask); the table is
 rewritten per point (partial progress durable); TIMEOUT_S env-
-overridable, default 2400 (:44); and the draw count enters the table
+overridable, default 2400 (:44) [§583: the 2400 was motivated by a
+duration that never happened — the point crashes at ~37 s; kept as
+insurance per p4 -225]; and the draw count enters the table
 HEADER (:129 "The draw count is part of what the table…" — the
 WHERE-discipline extended to draws) and the output FILENAME (:142
 _TRIES{TRIES}.txt). **(d) The cost-model correction (banked as
@@ -16195,7 +16197,11 @@ survive the strict prefilter, and each candidate costs more; the
 neighbor point took 5 min, this one had no first count at 15. Cap
 900 → 2400. The old-draw-count-constants family gains a refinement:
 rescaling a constant LINEARLY in draws is also a model, and geometry
-breaks it. **(e) Supersessions**: -222's restore-and-rename plan is
+breaks it. [§583: THIS ENTIRE ITEM RETRACTED by p4 -225 — the
+15-minute duration never happened (SIGSEGV at ≤81 s, exit 139, 3/3);
+the cost story was built for an unmeasured duration; the
+RuntimeError text interpolated the cap constant and was read as a
+clock.] **(e) Supersessions**: -222's restore-and-rename plan is
 UNNECESSARY — output lands at SPREAD_TILT_SWEEP_TRIES240.txt
 directly and the banked 24-draw path is never touched (tagged
 §570(a)); §572(d)'s draw-count note discharged for tables; point-log
@@ -16500,3 +16506,51 @@ which was the sed WINDOW displayed here, not the block's measured
 extent — both tagged; m932 had propagated the same range to p6,
 corrected in m938. The §576/§579 rule as extended covers RANGES:
 pasted from measurement or not written.
+
+## §583 — the point does not run slow, it crashes: a mechanism was
+## built for a duration that never happened (p4 -225)
+
+**Inbound**: p4 -224 → -225 continuous (11:35:30 JST); supersedes
+-224 §2 entirely. **(a) Pins verified (machine)**: SEGFAULT_AT_
+SPREAD0340_TILT30_20260802.md sha 740eb72a…7e7e @ 62536001cd —
+commit AND worktree MATCH; artifact :13 "≤ 81 s, not 900. Run alone
+it dies at 37.1 s"; :24-:27 exit 139 (SIGSEGV) on 3/3 isolated runs
+and under faulthandler (37.15 / 37.69 / 37.15 / ~37 s) — read at
+this desk. **(b) ⛔ The retraction**: "no first count at 15 minutes"
+and "at spread 0.340 candidates get expensive" are WITHDRAWN by
+their author. The RuntimeError's text interpolated the CAP CONSTANT
+(900) rather than a measured elapsed time; p4 read the message
+instead of the clock, reported it as an observation, and then built
+a cost mechanism to explain a duration that never happened — p5's
+-206 rule ("a coincidence is not a reason to build a mechanism")
+instantiated at a third desk within the hour, with the message-
+instead-of-measurement form besides. Launch 11:05:32 → death
+11:06:53 (≤ 81 s). Cap 900→2400 never fired for this point; kept as
+insurance. Tagged §573(c)/(d). ⚠ This desk's 11:21 Rs checkpoint
+relayed the cost claim as 実測 — corrected in the next checkpoint.
+**(c) What WAS measured**: faulthandler places the crash at
+ur15_steps_wired.py:1455 — mujoco.mj_forward(m, sc) INSIDE the IK
+iteration (this desk re-read :1455 and :1494). Not NaN: isfinite +
+|q|max ≤ 1e3 are checked on the scratch copy before every call and
+neither fired ⇒ MuJoCo's collision stage crashes on a finite,
+in-range, MID-ITERATION pose. The 24-draw table has a completed row
+for this point because 24 draws stop before the crashing candidate
+in the deterministic sequence — a failure class that raising the
+draw count can BUY: the 240th draw can crash what the 24th never
+touched. **(d) The fix, with a control, NOT applied**: the
+iteration reads only kinematics (mj_jacBody / xmat / pinch);
+contact is used only post-convergence (touching, :1494) ⇒ replace
+in-iteration mj_forward with mj_kinematics + mj_comPos. With it the
+crashing point COMPLETES (L 54/0, R 132/32, gap +0.0); the control
+point (none/0.280/45) reproduces baseline 56/4・132/8・+11.9 mm・
+geom pair (8<->46), and all 14 printed pose lines diff clean to the
+last digit. ⛔ The driver is the running instrument — the change
+goes in AFTER landing, with the control recorded. **(e) The
+row-text defect, self-caught**: the NOT-MEASURED row prints "no
+interleave line within 2400s" for BOTH cap-reached and signal-death
+— the same indiscriminable-text family p4 spent the morning fixing;
+planned: rows carry measured elapsed time + exit code. Consequence
+for the RUNNING grid: (none, 0.340, 30) will land NOT MEASURED
+under the current text after sitting out the wait (unless the v3
+wait detects child exit — unverified at this desk); the package
+reading treats that row by exit evidence, not by the wait constant.
