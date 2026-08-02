@@ -20289,3 +20289,53 @@ dangerous than not reading, because it carries the FEEL of
 having read.** Rule adopted at their desk and echoed here: on
 opening a file, read its tail once — the query's answer and the
 file's own notes are different objects.
+
+## §722 — "I concluded about an instrument that did not exist" (p5 -257, bank #94; this desk's carry owned)
+
+**Inbound**: p5 -257 (22:41:11 JST). Driver docstring verbatim
+verified here (:1341 "⛔ This did not exist…", :1347 "…pass
+through each other on the way, and arrive in contact"). **(a)
+§52 RETRACTED — the purest instance of their family**: from X
+(neither arm moved after round 0 ⇒ the POSE check used the true
+final partner) they concluded Y (the PATH leg is clean) — but X
+is about the pose check's partner and Y is about a check that
+DID NOT EXIST. Their own gate ("what measurement decides this,
+and can I measure it") was never asked of "does a path check
+against the other arm exist". Their §38-5 adoption of p4's
+frame also wrong, adopted unverified, written twice — owned.
+**(b) ⚠ THIS DESK'S CARRY, OWNED**: the §688-689-era report to
+Rs carried "(0) path-leg clean at the witnesses via the
+0.000000-rad finding" — this desk relayed p5's §52 conclusion
+to Rs as part of the recommendation's support. The MEASUREMENT
+(0.000000 rad, partner did not move) was real; its SCOPE was
+partner-correctness of the pose check, never a path. Corrected
+to Rs in this checkpoint. **(c) The calibration**: all
+witnesses stand as POSE statements; reachability = a new,
+almost entirely unmeasured column. **The zero's scope stated
+exactly**: the check tests a STRAIGHT-LINE joint-space move
+from home ⇒ "no pose reachable going straight" ≠ "no path
+exists" ⇒ via-points and sequenced arm staging are UNTRIED ⇒
+the question shifts from "is the cell dead" to **"the start
+pose needs an APPROACH — and no approach has been measured"**
+(unmeasured, not conjectured). **(d)** Their rule (c) extended:
+read the tails of EVERY file the run emitted, not only the
+files you cite. Sheet rows all carry scope tags. **(e) Bank #94
+EXECUTED @ f7ab373206 (front door)**: sha 39403f5392…9810
+MATCH, +44/−0 append-only (deleted 0), committed = declared ✓.
+
+## §723 — the reading fixed before the sweep lands, third of the day (p6 -243)
+
+**Inbound**: p6 -243 (22:41:37 JST). Register pin MATCH ×2 (sha
+cdceafe47d…140e @ 7432529664). Pre-registration of the
+ARM_PATH sweep's reading, BEFORE landing: **(a)** zeros staying
+zero is the expectation; a zero turning non-zero is NOT noise
+but evidence the CANDIDATE SET MOVED (warm start — the morning
+4-vs-5 treatment applies). **(b)** Witnesses shrink or vanish;
+the question is **"does any centre keep both arms ≥1 with paths
+included?"** **(c)** If none: menu (0) has no path-valid
+witness at 240 draws — the option's standing materially
+changes. **(d)** If some: dominance REOPENS on the new column —
+their suspended finding is RE-DERIVED, never revived. **Stage
+order bound now**: ARM_PATH-alone is NOT final; only
+② (+STEREO_HEAD) is the meaningful number — after stepping on
+"adopt → re-scope" twice today.
