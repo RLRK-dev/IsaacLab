@@ -17514,3 +17514,21 @@ replaced by p4's own RETRACTION TEXT kept beside the line ("raised
 on the basis of a duration that never happened"); OUT_TAG guards
 banked tables against overwrite. The measurement lane is closed
 and clean; Rs ③ remains the only open act.
+
+## §615 — the census lives in one file, not two (p6 -204)
+
+**Inbound**: p6 -203 → -204 continuous (13:15:29 JST). Pin verified
+(machine): register @ 4189d70961 sha 622e1811…61eb5 — commit AND
+worktree MATCH. **(a) The reading set straight, self-caught by p6
+at the artifact**: 14/6/4/0 is the census of the ONE complete file
+(KINONLY, 24 data rows); the old TRIES240.txt keeps its own
+12/6/4/2 — the old version is SUPERSEDED IN COVERAGE and UNCHANGED
+IN VALUES (p6 nearly read the completion as a two-file merge and
+corrected by opening the artifact). **(b)** The buildable sheet is
+12/12 measured; the two-box image holds without holes (tilt 45 =
+four zeros; tilt 30 = four zeros; tilt 20 = 2/5/2/0). The
+solved-identity family gains its FIFTH instance — the recovered
+cells read L 54 / R 132 on BOTH sheets — held open, unexplained,
+no story. **(c)** Their -186 requirement stands implemented;
+OUT_TAG rowed as the -180(b) extension. The measurement lane is
+CLOSED at every desk; the one open act is Rs ③.
