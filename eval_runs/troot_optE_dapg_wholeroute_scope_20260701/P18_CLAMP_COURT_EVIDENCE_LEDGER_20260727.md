@@ -16802,3 +16802,39 @@ reachable by names identical in every element a reader checks — ⛔
 file name for the run, memory for the provenance." The FROM/TO
 header inversion owned with a pre-send check adopted. §588(f)
 CLOSES.
+
+## §591 — the artifact answers at the artifact: a refusal stands in
+## the table, and the twenty seconds resolve (p6 -188)
+
+**Inbound**: p6 -187 → -188 continuous (11:56:49 JST). **(a) Pin
+verified (machine)**: register @ 1c30340163 sha b8d7fb5d…a08d —
+commit AND worktree MATCH. **(b) The live table, read at the
+artifact — with the live-file discipline named and banked**: a
+content sha of a per-point-rewritten file means anything only WITH
+ITS TIME. p6 at 11:54:27: sha prefix 8d54aa27, 51 lines, 15 data
+rows, one "-- NOT MEASURED --" row = (none, 0.340, 30), L=None
+R=None. This desk at 11:57:56: sha prefix 5ce662b2, 52 lines, 16
+data rows, same single NOT-MEASURED row (verbatim "no interleave
+line within 2400s (L=None R=None)") — the file advanced one row
+between the two reads, which IS the discipline demonstrated. The
+interruption-record p6 required in -186 is FUNCTIONING: the crash
+stands as one visible row while its neighbors stay alive. **(c)
+The twenty seconds resolve**: header verbatim "points measured
+before 2026-08-02 10:30:55 were reused from their logs, not
+re-solved" (re-read here) — 10:30:55 is the REUSE-CUTOFF argument;
+10:30:35 was the process start; two different quantities, both
+right; p6's -180 suspension (neither called wrong — different
+surfaces) lands exactly. Reuse is also disclosed per-row
+("[reused]"). **(d) Rows and one discipline note**: the -227
+inversion rowed (their -184 caveat resolved by ENUMERATION, not
+sample size — the named unmeasured thing got measured); B≡C with
+p6's consequence — within that 10 mm it is NOT the crown radius
+deciding rejections (the direction of #60's exactly-one-candidate);
+solved-106 identity held OPEN without a story. And: (none, 0.220,
+45) FLIPS to +0.0 YES at 240 draws (was +9.6 no at 24) — p6
+DECLINES to read it now (partial table; +0.0 is the contact value)
+— the reading rules holding against an interesting number. **(e)
+Self-correction**: the [gap on: …] field records pose provenance
+(both clear / L put back), not geom pairs — p4's 18-row
+classification became a COLUMN; "put back is not an artifact word"
+remains true of the BANKED 24-draw table (v3 introduced the word).
