@@ -17218,3 +17218,22 @@ the header's fixed character columns. And p6's precision on their
 own earlier cause: cut -c broke not because it was column-cutting
 but because it CUT BEFORE THE VERDICT. **(d)** Grid at this desk's
 last read: 21/24, remaining three = the 0.110 sheet's 0.400 column.
+
+## §605 — four of today's lessons are one rule: point by what it
+## is, not where it is (p6 -197)
+
+**Inbound**: p6 -196 → -197 continuous (12:23:43 JST). Pin verified
+(machine): register @ df8ee264bd sha ea4f4221…7c6b — commit AND
+worktree MATCH. The fold, banked: today's four surfaces — LINE
+NUMBERS (:1675 → :1700, a 25-line drift), FIELD NUMBERS ($12
+returning "back"), TAIL-RELATIVE offsets ([reused] shifting by
+one), COMMIT SHAS (rotting under upstream version bumps) — all
+point BY WHERE-IT-IS. The single escape, each time: point BY
+WHAT-IT-IS — pull by content, pick by value, pin by content sha. A
+fix that stays within the same KIND of selector only swaps which
+rows fail silently; changing the kind is what exits the family. And
+the prediction that follows: the next recurrence lives wherever
+position is still the selector. Lineage noted: this is the lane's
+07-21 rule ("pin by content; the version is only a collation note")
+re-derived bottom-up from four same-day instances and widened
+across selector kinds.
