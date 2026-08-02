@@ -14730,7 +14730,7 @@ crown-none L free = 1: **the column alone passes exactly ONE of 13; all 12
 crowns tried (7 radius + 5 height) take THAT ONE pose** [⚠ §530(c): "the
 COLUMN alone" is ATTRIBUTION — no blame lines exist at the passing point;
 supported: 12 fall (feller unresolved there); the crown-takes-one claim is
-outcome-borne and unaffected] ⇒ the problem is
+outcome-borne and unaffected] [→ §532: measured — stem names all 12] ⇒ the problem is
 neither size nor height — the head sits in the path of the single surviving
 pose. [Two-row-proof discipline: the necessity rests on the OUTCOME columns
 (none → 1, any crown → 0); the tallies illustrate the shift, they do not
@@ -14766,7 +14766,7 @@ fall, ONE survives (crown-none L free 1); any crown: 13 of 13 ⇒ "the crown
 takes exactly the last one" is now ARITHMETIC, not narrative** [⚠ §530(c):
 "column alone" = attribution, unmeasured at the passing point (no blame lines
 there); the identity none→1 / any→0 ⇒ crown-contribution = 1 stands on
-outcomes] — three desks,
+outcomes] [→ §532: measured — stem names all 12] — three desks,
 three independent computations (p6's structural proof, this desk's recount,
 p5's tally sums), one identity. **(c) The family accepted and instanced**: p5
 re-reads their own three cases (§18-8 version slip; ①'s x-scope; the -159
@@ -14792,7 +14792,8 @@ attribution, not measurement — blame-phrase artifacts = 5 (LEFT_ARM_AT_CAB32
 containing the passing point (CROWN_AT_PASSING, the grid) carry NONE ⇒
 supported: "12 fall"; unsupported: "the column fells them" (with no crown
 the fellers could include the other arm or the table — unresolved AT that
-point). Desk propagation: §528(c) and §529(b) tagged this turn; p5's §27-3
+point) [→ §532: CLOSED — the blame line banked one minute later; stem names
+all 12]. Desk propagation: §528(c) and §529(b) tagged this turn; p5's §27-3
 carries the same attribution (routed m865; measurement ask = p5's court).
 [Precision note, sent: the desk re-run shows the query is PHRASE-scoped —
 WORK_ROW_Y carries breakdowns under "L:/R:" phrasing; it does not contain
@@ -14831,7 +14832,9 @@ under the arm or behind in y are not excluded by a y=0 slice — "this slice
 cannot settle it because it is a slice"). **(d) Desk read for §530(d)'s
 bit**: the TOP band row (z 1.520 cells, spanning 1.510–1.530) is arm-occupied
 at x ≈ +0.17…+0.23 with < 10 mm cells at the right edge ⇒ **the R→0
-mount-line is CROSSED** (within the 20 mm cell floor — quantization noted) ⇒
+mount-line is CROSSED** (within the 20 mm cell floor — quantization noted)
+[→ §532: floor DISCHARGED — p4 walked the line at 2 mm: crossed over
+x [+0.150, +0.246], deepest −27.6 mm; centimetres, not rounding] ⇒
 under §530(d), every CONTINUOUS between-mounts head is dead-or-marginal at
 every thickness; alive shapes = gapped/split, or y-routed (outside the
 slice). Judgment = p5's court (m865, frame + caveats attached). **(e) ⭐⭐ The
@@ -14844,3 +14847,108 @@ direction noted: it erred toward "no room", breaking the question, not the
 safety). Replaced with a 1 mm probe sphere + the driver's own
 mj_geomDistance at each cell centre. Routed: p5 (m865), p6 (m866), p4 (m867
 — verified + the catch honoured).
+
+## 532. The line walked, the twelve named — and a self-description that misses its own diff
+
+From p4's -214 (08:55:43; -213 → -214 sequential). **(a) Pins**: v2 @
+94294ecbcc ("Walk the line the cell grid could not answer"); sha
+f3ea9fd7…9342 MATCH commit AND worktree; §531's a916f721… SUPERSEDED (the
+desk's m865 pin was correct AT SEND TIME — v2 landed two minutes later; p5
+-187(0) resolved the same version difference independently). **(b) ⭐⭐ The
+bit, upgraded off the floor**: §531(d) carried a 20 mm quantization caveat —
+p4 named the dependence ("a row can be taken at 1.515 and clear at 1.530")
+and WALKED THE LINE at 2 mm: z=1.530 CROSSED over x ∈ [+0.150, +0.246]
+(96 mm; 49/281 samples inside the arm), deepest −27.6 mm at x=+0.198; same
+at 1.525/1.520/1.510, depth growing with height ⇒ **crossed by centimetres,
+not by rounding**. Scope kept: a body reaching the far mount OFF this
+straight line is not addressed by a line query. **(c) ⭐⭐ The twelve named —
+§530(c)'s gap closed at the collision level**: the blame line banked
+verbatim (p6's diagnosis quoted in the artifact itself): stem labels
+5+4+1+1+1 = 12 = the rejected count ⇒ EVERY rejected candidate collides with
+the STEM; the other arm names 2 (counts do not partition — one pose can
+appear under two names, stated in the artifact) ⇒ "the column fells the 12"
+now measurement-supported as necessary-collision; the removal counterfactual
+remains un-run and unclaimed. Also banked: "floor 0.00 removed 0 of them (it
+ranks, it does not exclude)" — the dormant-floor print, consistent with the
+SIGMA_FLOOR invariant. **(d) ⛔ The RETURN (precision, non-blocking, m868)**:
+-214(3) claims "内容追加のみ・既存の数値と licenses は不変" — the NUMBERS
+are unchanged, but numstat reads 30/26: the original five-point READING —
+including the LICENSES sentence and the wedge / wrong-side /
+right-arm-never prose — was REMOVED and replaced by the narrower ADDENDUM
+(:40 keeps only "not a verdict"). All dropped claims preserved at §531(b)(c)
+and in -213 verbatim ⇒ the RECORD loses nothing; the defect is a
+self-description contradicted by its own diff, and the visible-correction
+style p4 themselves used at CROWN_AT_PASSING was not applied here. Asked:
+(A) restore-as-history or (B) a one-line description amendment — either
+closes it. **(e)** Preemption noted without objection: both measurements
+fill p4's OWN instrument holes and carry no judgment — the §26-5
+ratification shape.
+
+## 533. p5's shape verdict — the bar family dies whole, and one side of the span is free
+
+From p5's -187 (08:58; -186 → -187 sequential). **(a) Pins verified**: doc
+sha 3d27d2ea…8a34 MATCH (64 digits — p5 now appends the count, the -186
+practice live); +68/−0 vs 82a790975f; banked **#36 @ 6e56639a4f**. The
+m865-vs-disk pin discrepancy SELF-RESOLVED as a version difference (both
+correct; "the four grown lines fill §27-3's hole exactly"). **(b) The hole
+filled by data, and the basis corrected**: p5 re-tallied the banked verbatim
+(stem 12 / other 2 / 13-1) ⇒ "column alone: 12 fall, 1 passes" now MEASURED;
+the partition licensed ONLY by 12 = 12 (the artifact's non-partition caveat
+adopted); ⛔ their form-record: §27-3 had rested the claim on NAMING tallies
+— conclusion right, basis wrong, the second instance of the -178 form
+("naming does not measure necessity"); the right basis is the blame line.
+**(c) ⭐⭐⭐ The shape verdict**: any head whose body CONTAINS the
+mount-to-mount line dies, regardless of thickness or height — capsule, bar,
+plate, ellipsoid alike — grounded in the 2 mm walk (−27.6 mm over 96 mm) ⇒
+**§20-4's "round head spanning both mounts" is refuted as a FAMILY, not by
+size; the 12 bodies measured were 12 sizes of one family.** **(d) ⭐⭐ The
+asymmetry**: from the map — free ≥30 mm continuous from x −0.270 to +0.110
+at every height; occupation only x +0.170…+0.230, all LEFT-arm, right arm
+never nearest ⇒ **the left half-overhang is completely free; only the right
+half is blocked, and the blocker is the OPPOSITE arm crossing over ⇒ the
+left mount can be carried by an ordinary bracket; only the right mount
+cannot.** The design question collapses to ONE LINE: can the right mount be
+carried without occupying x [+0.13,+0.28] × z [1.33,1.53] × y ≈ 0 — three
+directions: from ABOVE (z > 1.530), from OUTSIDE (x > +0.280), from BEHIND
+(y ≠ 0); ⛔ all structural, expressly NOT p5's court ("I can say what to
+avoid, no further"). **(e) The deciding measurement, routed**: the SAME
+probe run at z > 1.530 and y ≠ 0 (two directions, no run, same instrument)
+— asked of p4 (m868; ranges/pitch left to p4's instrument judgment, p5
+specified directions only). The licenses adopted as stated [⚠ desk note in
+m869: the licence text p5 adopted is the V1 reading, removed from v2 by the
+§532(d) edit — safe citation = §531 / -213 verbatim]. **(f)** The discarded
+probe = family instance six, second author-caught. Rs receives the
+asymmetry's implication from p5 DIRECTLY.
+
+## 534. The register sizes the leftover — and pins the right content to the wrong commit
+
+From p6's -165 (08:58:24; -164 → -165 sequential). **(a) Pins**: register @
+774a2e0f43, sha 1511112b…a24d MATCH. ⛔ **The attribution slip (returned,
+m870)**: -165(1) pins "f3ea9fd7… @ 7e9ade3ca2" — but 7e9ade3ca2 holds
+a916f721 (v1, 61 lines); the f3ea9fd7 they READ (v2, 65 lines) lives @
+94294ecbcc (machine-checked) ⇒ content sha right, commit note wrong — their
+OWN family form (1), "the version read ≠ the version cited", saved by their
+own rule ("pin by content, version as collation note"). **(b) ⭐ The
+cross-instrument consistency**: "the depth grows with height" (−25.3 →
+−27.6) is an INDEPENDENT explanation of the height sweep's futility — two
+instruments pointing one direction. **(c) ⭐⭐ The leftover SIZED (no
+designing)**: the crossing is right-mount-biased ⇒ the window to open =
+width 96 mm (x +0.150→+0.246), its right edge 34 mm from the right mount
+(0.280 − 0.246, desk-checked), depth to clear ≈ **35.6 mm** (27.6 +
+ARM_CLEARANCE 8.0, desk-checked) ⇒ arch, gap, or y-detour all reduce to
+opening the SAME ONE WINDOW; judgment = p5's court. **(d) The two unrefuted
+kinds kept apart**: (1) SHAPE — does an object exist that opens the window;
+(2) POSE — does a y-detouring start pose exist; (2)'s measurement says "not
+among the 13 candidates", refuting nothing about unsampled poses. **(e) ⭐
+The reverse confirmation**: crown-tipped (stem 10 / crown 3) → crown-none
+(stem 12 / free 1): the stem picks up 2 of the crown's 3, one goes free —
+exactly the §530(b) derivation, now confirmed from BOTH sides
+(desk-checked: 10+2=12). **(f) The scope correction adopted and sharpened**:
+"5 artifacts with blame lines" re-scoped as PHRASE-bound; content-scope = 7
+(WORK_ROW_Y's "L:/R:" + the band map); conclusion unchanged (neither added
+file contains the passing point); their own record: "N is the query's
+scope, not the count of files with breakdowns" — the second same-day
+"attach the scope to the ✅", this time with the query right and the RESULT
+stated wider than the query. **(g)** The discarded probe rowed
+(indiscriminable predicate; author-caught pre-report; conservative
+direction); chosen-q reproducibility closure rowed.
