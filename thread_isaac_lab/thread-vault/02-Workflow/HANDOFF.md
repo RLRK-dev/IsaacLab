@@ -1,115 +1,112 @@
-# RS-TECH-LEAD handoff — 2026-07-17 06:49 JST (chunk CLOSE + pin (a)(b) Rs GO — fresh session entry)
+## 前セッション完了: 2026-08-02 23:57 JST (p4 / UR15 sim・route 不動の根因除去)
 
-## 本 session = 完了・close 可 (2026-07-17 06:49 JST、RS-TECH-LEAD %12 / w2:p4)。次 session entry = 下記「次にやるべきこと」3
+⛔ 全 sha・全 log path・全経緯は **p4 正本**（上記）と、repo の
+`eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/WHY_THE_ROUTE_NEVER_MOVED_20260802.md`
+が正。以下は次セッションが最初の 5 分で必要とするものだけ。
 
-⚠ **各 pane は自分の per-pane handoff を読め**。**%12 正本 = `handoff-cc-rstechlead-w1build-2026-07-12.md`**
-(全 arc の時系列 CURRENT STATE)。本 file = shared last-writer の要約。
-〔訂正 note: 21:23 版の「I0-b collector 起草済・未 bank / supervisor 未着手」は同日 21:5x-23:4x の I0-b build
-arc で supersede 済 — pN records-fix 指摘どおり本版で訂正。旧版 = git `3cc7a9f181`〕
+### 何が起きていたか
+route は **1 歩も進んでいなかった**（全 step「0.0%・全 tick 保留」）。追従門は各腕が自分の命令から
+**5.18 mrad 以内**であることを要求し、実測の静止誤差は **L 18.14 / R 929.31 mrad**、**両腕は接触**していた。
+⇒ 原因 = **経路の表し方**。`solve_ik` は答えを主値域へ丸め、ramp はその値へ直線補間するので、基部関節が
+±π 付近だと**ほぼ一周逆向き**（274°/244°）に回り、途中で両腕が噛む。
+
+### 何を直したか（全て既定 off の env flag・commit 済）
+- `UNWRAP_SOLVE=1` — **unwrap を解きの中（経路検査の前）へ**。⚠ 解いた後の unwrap は効かない
+  （丸めた経路で落ちた候補は既に捨てられている）。実測: **右腕 clear 0→8・静止誤差 L/R とも 0.00 mrad・両腕が正確に到達**
+- `ARM_PATH=1` — もう一方の腕への**経路**検査（従来は姿勢のみ）
+- `FURNITURE=1` — 鞍柱・テーブル（従来は**検査そのものが無かった**）
+- `STEREO_HEAD=1` — 参照 cell に在り sim に無かった 240×85×75 mm の実体。⭐ 入れても結果は**完全同一**
+
+### 次にやること（1 が最初）
+1. **aim 解きの詰まりを測る**（走らせたが log が出ず未取得）:
+   `cd ~/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727 && UNWRAP_SOLVE=1 ARM_PATH=1 GRASP_CENTRE_X=-0.200 START_TRIES=240 /home/rlrk/env_isaaclab7/bin/python -u ur15_steps_wired.py > /tmp/aim.log 2>&1 &`
+   → `grep "fell back) rejected against" /tmp/aim.log`
+   ⭐ aim 解きは候補が **1〜2 個**しかない（`pose_only` で姿勢固定）。私が足した経路検査が乗ると
+   「1 つの窮屈な選択肢」が「ゼロ」に変わり得る — 理由行がそれを言うはず
+2. 6 中心を `UNWRAP_SOLVE=1` で掃く（−0.110 … −0.250、−0.200 以外）
+3. push（**未 push 94 commit**・共有 branch なので Rs の一言待ち）
+
+### 状態
+- **走行中プロセス: なし**（23:55 実測）／未 commit = `MUJOCO_LOG.TXT` のみ
+- ⚠ **MEMORY.md は 4 卓凍結中**（hook「圧縮せよ」vs Rs standing「圧縮するな」= Rs gate 第 4 項）
+- ⛔ 設計判断（取付点・把持中心・冠寸法）は **p5 → Rs の court**。私は測定と計器修正のみ
+- ⛔ pane 間 message は全て **`w2:p18` 経由**
+
+### ⭐ Rs 指摘（本日）
+**「問で停滞している」** — 測るたびに問いを増やし、本題の走行が止まっていた。**議論より実行**。
+実際、止めて走らせたその日のうちに根因に届いた。
+
+### ⭐ 本日一貫していた形
+**「腕が到達しない姿勢は、clear であることでは安全にならない」**（driver 自身の docstring）。
+マスト（07-28 に修正済）→ もう一方の腕 → 家具 → 経路の表し方、と **4 回**同じ文が出た。
+私の誤りも 1 形だった: **label を読んで実体を見ない**（上限定数の文面 / gap の列 / file 名の draw 数 /
+印の語 / 自分の parser の「0 件」）。
+
+---
+
+## 前セッション完了: 2026-07-21 01:40 JST (p4 RS-TECH-LEAD / w2:p4)
+
+⚠ 本 file = LAST-WRITER 共有面。**p4 正本 = `handoff_cc_p4_rstechlead_control_method_20260719.md`（全 sha・全 verdict・全 arc はそちらが正）**。他 pane は各 per-pane file（MEMORY.md「Current Handoff」節）。
 
 ### Context
-- タスク: **fork-B substrate node** (`…-P2-trainer-envbuild-substrate-forkB`、IN_PROGRESS) の **I0 実装 phase**
-  + **pin node gate ② 再走** (並行 leg、招集済・未着手)
-- Phase: I0-a/I0-b = **CLOSE** (pN readback PASS 07-17 00:0x) / **gate ② 再走 = chain 走破**: leg1 /reward-design
-  PASS (`1b59f23c44`+probe v2 訂正 `60368e6228`) → leg2 p5 CONFORM (§S2 `4589563ab4`) → **leg3 /pre-check =
-  BLOCK〔訓練批准〕** (単一 ep 述語=clean・SRG probe=可) → **I3/I4 の p5 裁定 = §S3 banked (`d807d077b8`)** →
-  ⭐**I3/I4 実装 = bank 済 `dfbddb4777` (05:1x、Rs「A着手」04:3x)**: L3 chain 遵守 (L-TRIAGE→[VERIFY] 3-lens
-  panel [CC2/CC3/CC6 全て非 BLOCK、refinement 11 件 fold]→rule-check→実装→leg 全 PASS)。record =
-  `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` ([RESULT] 表 + staged-hunk 検査開示 + pN HOLD 対応 §)。
-  ⭐**two-key 結果 (05:2x-05:5x)**: p5 delta verify = **CONFORM PASS bank `2298cb0d27`** → **pN = 二層**
-  (mechanism PASS / **evidence-bank HOLD B1-B3**) → p5 §S3.5a 訂正 10 件目 (exact-landed 9/10、bar 9/9 —
-  design CONFORM 維持) + pN readback R1/R2 → **不可分 bank `2dbc21d178`** → **B1-B3 対応 bank `bb82ae7a76`**
-  (B1 = disposition (b): V5 recording-fields leg を chunk acceptance 外へ・route_executor pin-fields land
-  = (a)(b) precondition / B2 = pre-commit clean / B3 = probe leg E closure) → **exact-landed 再生成 bank
-  `85958627e3`** (worktree@bb82ae7a76、closure git status=[]・全 leg PASS) → **pN readback 依頼済 05:55**。
-  → **pN 最終判定 06:0x = B1-B3 CLOSE・HOLD LIFT・FENCE OPEN GO** → **/pre-check 再走 = 完・bank
-  `6ec126b1bb`** (verifier = Opus 切替 [同 tier 529×3・doc 記載]): **BLOCK〔訓練批准〕継続 = carry I1/I2
-  起因のみ・I3/I4 欠陥ゼロ・⭐新規 ISSUE2 = route_executor pin-fields は (a)(b) と bundle land 必須 (先行
-  禁止) + dirty tree 訓練起動禁止・verifier「§S 意味論 sub-claim = 批准可能」** → ⭐**p5 §S4 = GRANT
-  〔scoped〕bank `a366622159` (06:2x)**: §S run-hygiene (:333) 解除 (committed-HEAD lineage 限定・単一
-  episode 意味論限定・歴史 artifact 遡及編集なし)。**⛔存続 3 本**: reward-valid/training-ready 禁止
-  ((a)(b)+bundle land+(d) まで、pN 規律不触) / dirty tree 訓練起動禁止 / bundle land 順序。→ ⭐⭐**pN 最終
-  verdict 06:3x = (i) 再走 evidence ACCEPT/PASS (ii) §S4 readback PASS (scope 分割 CONCUR) (iii) 面 2602ebfc11
-  内容 PASS ⇒ gate② I3/I4 chunk = 全鍵 CLOSE**。land 後 exact-landed 10/10 = binding (pN)。p6 へ record-only
-  flip (「readback 受付中」→PASS) + LEDGER:58 reconcile 依頼済 (06:36)。
-- two-key = pN (OPS-SUP-CODEX、evidence 軸) + p5 (VT-DESIGN、設計軸)。**OPS-SUP 役割 = pN (p1 でない)**
+- **タスク（Rs 裁定 A・2026-07-21 01:0x）**:「**43 ステップ表の動作をロボットアームとコントローラで実現すること**」
+- **DoD（Rs 指定）**:「**ロボットアーム、ハンド、フィンガを描画した動画**」。数値のみの報告は受入にならない
+- **Phase**: **[CHECK] 完了**（基線 c67-c69 bank・pY PASS）。⛔`[CHANGE]` / `RUN` は**未開錠**
+- **robot 確定**: **UR5e ×2 + Robotiq 2F-85**（Rs 明示）
+- 参照 SSOT: `RS71-System-Spec-SSOT.md` §0 / LEDGER §35 + DDR#25/#31/#32 / `task_config.py` / p5 charter v2.30
 
 ### Vault SSOT checked（banked design 接地）
-- banked SSOT: `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/FORKB_D0_RULINGS_VTDESIGN_20260716.md`
-  **v1.9** (§N-2-RESOLUTION + §B4-DISPOSITION) + `FORKB_D1_SPEC_RSTECHLEAD_20260716.md` v0.3 +
-  `RLENV_PIN_DESIGN_VTDESIGN_20260715.md` v1.13 + charter (APPROVED) +
-  `I0B_BUILD_RSTECHLEAD_20260716.md` (I0-b build 記録: 事前登録 legs + OUTCOME v1/v2/v3 + CHECK-6 + HOLD 対応)
-- 次セッションは narrative でなく **banked doc 群**を ground truth に (§運用4)
+- **banked design SSOT** = `RS71-System-Spec-SSOT.md` §0 — **banked mechanism = DiffIK-only / no-kinematic-trick、唯一の例外 = clip-retention pin**
+- ⭐**`RS71:28` に 2026-07-15 Rs 逐語が banked**:「クリップのみ pin を RL env に恒久配線しろ」「**CLIP-RETENTION ONLY — this authorizes no other kinematic exception**」（pY 発見）
+- ⇒ 次セッションは **handoff narrative でなくこの banked design を ground truth にする**
 
-### 完了タスク (時系列)
-1. authorize_clip_pin 実装+検証 (`399faa51ec`) — Rs 当初タスク
-2. ENV-MULTIWORLD freeze 根因二重確定 → charter 上程 → **Rs fork B 採択** → D0 6/6 → D1 CONFORM 7/7 →
-   E0 two-key PASS → **N=4 確定** → **I0-a CLOSE** (flip+tripwire)
-3. **I0-b 実装 bank**: collector finalize + supervisor 新規 + 機構 leg (`1d95b7bf6e`+`8ae825c954`+`84ade184a4`)
-   — K200 pause / organic / K_fail 連鎖 / lever = PASS、L4 = same-seed PASS + diff-seed inert (N-2 拡張)、
-   L5 = 9/9 (宣言 4)
-4. **CHECK-6 衝突 → Rs 裁定 A + pN 条件 → typed exact-shape 例外** (`a9a26249fb`→`d3ad0dbf5f`、self-test 13/13)
-5. **p5 裁定 2 本 bank**: v1.8 §N-2-RESOLUTION (`2a7ac33d87`、channel-conditioned standing rule +
-   INIT_XY_NOISE=appearance-only) / v1.9 §B4-DISPOSITION (`10ea8dbe35`、(a) ADOPT + 4 pin)
-6. **pN HOLD B1-B4 → 全対応 bank** (`6cf3dc0015`: B2 preflight fail-closed+LAUNCH_ABORT / B3 marker OR 検出) →
-   **v3 legs 5/5 PASS @ landed bytes** (`525afa8435`) → **pN 再判定 = PASS-WITH-RECORDS-FIX** (独立 287 assertions
-   errors=0、唯一の残 = 本 file の stale 記載 → 本版で訂正)
-7. **gate② chain 走破 + I3/I4 実装 bank** (`1b59f23c44`→`4589563ab4`→`60368e6228`/`ccd285b9b6`→`d807d077b8`→
-   **`dfbddb4777`**): 3-lens [VERIFY] panel 非 BLOCK (refinement 11 fold) / legs 全 PASS (tests 10/10・probe
-   ALL_PASS・V6 反転・81-cell positive control) / foreign hunk 2 件は選択 stage で除外・開示 (B2 教訓の実施)
+### 完了タスク（本セッション）
+1. SKILL admissibility 棚卸 **c54-c56**（pN PASS ×3 / pQ 引用 2/2 / p6 反映 + **DDR#31** 起票）
+2. SKILL 分解能 材料 **c57-c66**（pN/pY PASS / pQ 精緻化 2 件 受入 / **DDR#32** 登録）
+3. SKILL 所管の routing 訂正 **c60**（Rs 裁定「SKILL は pX が決める」）
+4. 43 step controller 実現の基線 **c67-c69**（pY PASS）
+5. `02-Workflow/HANDOFF.md` の旧前提 3 箇所を裁定 B へ訂正（p6 要請）
 
 ### 未完了・中断タスク
-- **gate ② 完了条件 (chain 再開点)**: ①I3 実装 ✅ + ②I4 実装 ✅ = **bank 済 `dfbddb4777`** (§S3.1/S3.2 の
-  bar 全充足: escape = identity dx [MISS ∨ >60mm]・obs[57] 不変・`_crossing_x_dev` 消費者ゼロ [grep 対称差∅
-  + standing test 化]・fixture 3 本 REJECT unit test 化・canonical 対称差∅・**81-cell positive control**
-  [feed 側 straddle 総数 0、per-cell seat_k 25..34]・ROUTE_C2_SIDE_FROM_PIN=−1 [canonical 313 frame 接地]) →
-  **残 = ③pin (a) witness per-episode reset + (b) eq clear on reset** (leg3 Issue 1 = banked 残作業; 前提 =
-  pin は既成着座の【保持】装置、seat f2428 ≺ onset f2544; ⚠識別子永続 coupling = RLENV_PIN_DESIGN §21.11.1
-  pointer 注記済 [I3 の escape が identity を読む ⇒ identity null 化は偽 −10]) **④(d) containment** (authorize
-  失敗を episode-scope へ、leg3 Issue 2、設計 = p5) → 〔p5 delta verify・pN HOLD 解除・/pre-check 再走・
-  §S4 scoped 解除 = **全て済** (Phase 行が正)〕→ **残 = ③④ のみ → gate② 完了判定 (reward-valid/
-  training-ready 解禁はそこ)**。⚠C2 margin 3.183/3.5mm = DR-ON 日の MED design tension (bar 不動、§S3.2)
-- FM3/FM4 著者 claim 未決着 (manifest 呼びかけ中)
-- pin-1 (v1.9) = trainer-ingest spec への binding carry (⛔truncated_by→time_out 写像禁止、"" 分岐 fail-loud)
-- trainer contention leg (§8) = 初回 trainer bring-up 時
+- **腕の actuator/DiffIK 駆動** — 未着手。理由 = **ブロッカー: p5 の `physics_step` class 裁定**が書換対象行そのものを扱う。難易度 **complex**
+- **指の servo 化** — 未着手。理由 = 待ち。⚠**忠実 actuation が未実装**と判明し単純載せ替えでは済まない。難易度 **moderate**
+- **Franka 由来の完全削除**（Rs 指示）— census 途中。理由 = 時間切れ + 設計判断待ち（`EE_TO_FINGERTIP` consumer 約 40・割付は `/geometric-design` 強制ゲート）。難易度 **complex**
+- **`02-Workflow/HANDOFF.md` の commit** — 保留。理由 = 判断待ち（Findings 参照）
 
-### Findings (全て banked、仮説なし)
-- **§S = §S4 で scoped 解除 (06:2x、`a366622159`)**: swept FM3/FM4+I3/I4 の意味論 = committed-HEAD lineage・
-  単一 episode で批准済 ⇒ 将来 run の exposure 宣言不要 (歴史 artifact は遡及編集しない — I0-b の §S
-  exposure field は当時の事実として残置)。⛔存続 = reward-valid/training-ready 禁止 ((a)(b)+bundle+(d)
-  まで) + dirty tree 訓練起動禁止
-- **N-2 = v1.8 で解決**: seed→data channel は env に不在 (両 drive mode 実測、INIT_XY_NOISE=appearance-only)。
-  channel-conditioned standing rule 化 (primary = trainer/(d) policy stochasticity、⛔DR を N-2 のために ON しない)
-- **B4 = v1.9 (a) ADOPT**: termination_reason "" = 未測定 sentinel (taxonomy 着地まで)、truncated_by 3 値 additive、
-  pin-3 = LEDGER loud 記載済 (p6 `879813d856`、Rs veto 可)
+### Findings
+- ⭐**43 step 経路は腕も指も kinematic**。`wet_run_full_sequence.py` は `gripper_dynamic` 未設定（閉クエリ 0 hit）⇒ 既定 `False` ⇒ `physics_step` else 枝 `phys_jq[:n]` で**全 DOF 毎 substep 上書き**。Rs 観察「フィンガは kinematic で実現していた」は**実測 TRUE**
+- ⭐⭐**MJCF gripper actuator は死んでいる**。`2f85_koshape.xml:191-193` 逐語「orphaned `<actuator ... tendon="split">` is **SILENTLY skipped at parse**（verified live newton 1.0.0）」／4-bar `<equality>` も drop ／「**NOT a faithful gripper**」。`task_config.py:337`「**faithful actuated close is deferred**」⇒ **「指 servo は実証済み」は over-claim・撤回済**（5 箇所訂正）。型 = §運用15 第3 bucket **ABSENT-IN-CODE / wire-then-validate**
+- ⭐**腕は asset に 6 position actuator を持つが build で意図的に無効**。`ur5e.xml:124-130`（size3 = kp2000/kd400/±150N·m、size1 = kp500/kd100/±28N·m）。しかし `newton_route_env.py:280-282` 逐語「every `negative_dofs`（**non-driver: arm**）carries **NO servo ke** — **A blanket-wired build fails here**」⇒ **腕を wire すると既存テストが FAIL**。テストの扱いも設計判断
+- ⭐**Franka 由来の残存**: `franka|panda` 参照 約 170 file（大半 PhysX 期 legacy）。**code 自身が stale と申告する 7 件**が要注意。特に `EE_TO_FINGERTIP=0.220`（**Franka 値**）が `GRASP_Z`/`PUSH_Z` を決め、`newton_approach_cable_mujoco_env.py:195` 逐語「**stale Franka GRASP_Z=1.025** で指先が机に 40mm めり込む」。正 = `EE_TO_PINCH_CLOSED=0.2548` / `TIP_CLOSED=0.2757` / `OPEN=0.2609`（差 約 56mm）
+- ⚠**census の構造的な穴**: Franka 由来は **grep で見つかるのはラベルのある分だけ**。由来コメントを失った値は文字列検索で原理的に不可視 ⇒ **実測による再導出**が要る
+- ⚠**`02-Workflow/HANDOFF.md` に未 commit の全面書換**（2026-07-20 08:09 起点）。HEAD 115 行 vs 作業ツリー 56 行 = **+50/−109** ⇒ **commit すると 59 行の正味削除も landing する**
+- ⚠**vault guard = FAIL 3**（dangling node-id `T-ROOT-OPS-SUPERVISOR` / `-CODEX` / `T-ROOT-RS-TECH-LEAD`）。出所は `log.md` の 2026-05-24 履歴で**私の編集とは無関係**
 
-### State Snapshot (2026-07-17 06:52 実測)
-- git: ⭐**`7640695d9a` まで push 済** (Rs「push」06:5x → fork へ 21 commits `36d71222a1..7640695d9a`、
-  push 後 0 unpushed 実測)。本 chunk の全 bank (I3/I4 `dfbddb4777` / CLAUDE.md §27 `c1dd6f569b` / §S3.5
-  `2298cb0d27` / §S3.5a `2dbc21d178` / B1-B3 `bb82ae7a76` / exact-landed probe `85958627e3` / 再走 OUTCOME
-  `6ec126b1bb` / §S4 `a366622159` / HANDOFF 系 / p6 面反映) = **remote 同期済**。〔本 push-state 行の commit
-  のみ後続 push で追従〕ambient dirty ~740 file = standing residue 不変 (⛔ staged hunk 検査 hard step —
-  本 arc で 2 回実施: foreign 2 hunk [route_env_config comment-only] + route_executor pin-fields [5 hunk、
-  `_prepare_recording` 内] を除外・開示済)。GPU: 常駐プロセスなし。
-- pre-check log = `logs/pre-check-log.jsonl` 追記済 (gitignored、ローカル)。
+### 変更したファイル（このセッション）
+- `eval_runs/.../SKILL_ADMISSIBILITY_INVENTORY_RSTECHLEAD_20260720.md` — 9 skill の admissibility 棚卸。意図 = (d) 残作業を「どの skill が selectable になるか」で表現
+- `eval_runs/.../SKILL_GRANULARITY_MATERIALS_RSTECHLEAD_20260720.md` — 分解能の材料 v1.9。意図 = 設計を導出せず測れる量だけ提供
+- `eval_runs/.../STEP43_CONTROLLER_REALIZATION_BASELINE_RSTECHLEAD_20260721.md` — 裁定 A の基線 + DoD + 裁定 B。意図 = 着手前の現在地固定
+- `thread-vault/02-Workflow/HANDOFF.md` — 旧前提 3 箇所を裁定 B へ。意図 = **歴史記述を消さず読み替え注記**（書換は記録を嘘にする）
+- memory: `project-sim-is-reality-no-kinematic-20260719`（pin 例外復活）/ `project-p4-purpose-build-the-skills-wmso-selects-2026-07-20`（新規）/ `project-skill-unit-vector-composition-direction-2026-07-20`（新規）/ `feedback-absence-claims-need-closed-query-…-2026-07-18`（追補）
+
+### State Snapshot
+- probe `pd1-arm-pd` HEAD = **`183c1bb5dc`（c69）**・**tree clean**
+- **未 push = 31 commit**（`412f37ec10..HEAD`）。**source 変更 0**（`eval_runs/` docs のみ）。push 先 = **`fork`**（⛔`origin` は公開上流ゆえ不使用）
+- **Layer 8 census = `LAYER8_FAIL=35` / `WARN=0`**（不変）
+- 実行中プロセス **なし**。ハーネス **未起動**
 
 ### 次にやるべきこと
-1. `引き継ぎ確認` → 本 file + %12 正本 + `GATE2_I3I4_IMPL_RSTECHLEAD_20260717.md` + GATE2_RERUN doc
-   「leg 3 再走 OUTCOME」§ + ruling §S3.5a/§S4 を read
-2. 〔済 06:3x〕pN readback = PASS ⇒ **gate② I3/I4 chunk = CLOSE**。p6 の record-only flip + LEDGER:58
-   reconcile の着地を確認
-3. **pin (a)(b) 実装 chunk = fresh session — ⭐Rs GO landed (2026-07-17 06:4x、Rs「1」= 選択肢① 採択)**:
-   次 session の entry task。開始手順 (banked、順序厳守) = §21.11.1 + identity-persistence coupling
-   readback → **route_executor pin-fields 差分の著者 claim + producer-unbanked〔Rs 待ち〕関係特定 →
-   ⭐(a)(b) と同一 landing に bundle (先行 land 禁止、ISSUE2/§S4.3-3)** → scope prereg → prior-art →
-   実装 → **exact-landed 10/10 再走 (pN binding)**。⛔それまで dirty tree からの訓練起動禁止 (§S4.3-1)。
-   two-key = p5 (設計軸: (a)(b) verify 宣言済) + pN (evidence 軸)。⚠dispatch 時は composer 空確認 +
-   受信 verify (defensive-flush 更新版、memory 固定済)
-4. (d) containment = p5 設計待ち → 着地後 gate② 完了判定 (reward-valid/training-ready 解禁はここ)
-5. fork-B node V0 acceptance (移管 leg + trainer contention) = trainer bring-up 時
+1. ⛔**self-start しない。** 待ちが 4 本:
+   - **p5** — `physics_step` class 裁定（**腕の実装をブロック**）
+   - **pX SKILL-DESIGN** — 分解能・単位ベクトル（SKILL は pX 所管）
+   - **Rs** — (a) `[CHANGE]`/`RUN` 開錠 (b) 所管境界 p5/pS/pQ×pX (c) 単位ベクトル化の詳細 (d) `HANDOFF.md` commit 可否
+   - **pY** — 裁定 B 逐語の 1 行確認を Rs へ照会中（**非 blocking**）
+2. 開錠後の順序 = **指の servo 化 → 動画 → 腕の actuator/DiffIK**（腕は p5 裁定が前提）
+3. Franka 削除は **census（ラベル分）＋ 実測再導出（ラベル無し分）の 2 本立て**。`task_config.py` は L3 かつ `/geometric-design` 強制ゲート
 
-### 重要な文脈 (規律教訓 — 全て pN/p5 verify が捕捉・記録済)
-- ①add 前 staged hunk 検査 ②主張=同 turn command 出力 ③計器の正対照 (コピー test≠配線 test、self-test は
-  production filter を source) ④timestamp = date 実測 ⑤**handoff は二系統 — memory 側だけ直して vault 側
-  (本 file) を忘れた (pN records-fix、本版で訂正)** ⑥dispatch は 1 コマンド (`send && send-keys Enter`)
-- fork A = dormant / E-1・真 E-2 = S8 まで MOOT / pin (a)(b)(d) = fork B 単純化設計済・実装は gate 後
+### 重要な文脈
+- ⭐**裁定 B は新規の逸脱でなく banked spec への復帰**（`RS71:28` の 2026-07-15 逐語と一致・07-19 の側が outlier）。pY 発見
+- ⭐**SKILL の決定権は pX**。私は「その動作を実現する制御側」のみ。43 step 表そのもの（分割・step 内容）は触らない
+- ⭐**cross-lane 引用は path + sha256 + commit を必ず併記**（本 lane の artifact は `probe/pd1-arm-pd` にのみ在る）
+- ⚠**本セッションで自分の over-claim を 2 回捕捉**（servo 実証済み / D0 draft を現行として引用）。いずれも **comment を読んで wired を確認しなかった**型。**指摘は欠陥クラスの標本 ⇒ bank 前に doc 全体へ機械 sweep**
+- pane 構成が動いた: **`w2:pY` = T-ROOT-OPS-SUPERVISOR**（pN は credit 切れ 2026-07-25 12:24 まで）／**`w2:pX` = SKILL-DESIGN**（新規）
