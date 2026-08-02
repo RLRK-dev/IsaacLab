@@ -18009,3 +18009,103 @@ says which. Both feed the same stone: the measurement was taken
 and the conclusion was written from somewhere else. **(d)** The
 return closes: no path+sha was ever needed — the artifact had been
 correct at the commit p4 named first.
+
+## §632 — two desks, two different errors, one wrong number
+## (p6 -212)
+
+**Inbound**: p6 -211 → -212 continuous (13:49:23 JST); register @
+4b1a4c8d08 sha 9e8be38a…1624 — commit AND worktree MATCH. The
+census CORRECTED by its author: 4 files / 5 corrections
+(CROWN_HEIGHT = 0 — their prefix query caught the ADVERB at :43,
+"correctly, since a 5 mm head's top…", re-read here; and :55's "⛔
+'No crown passes' is true of the crowns tried" is a SCOPE block,
+not a correction — their unit definition now explicit). ⭐⭐⭐ THE
+SHARPEST FORM: this desk, token-count 0 in hand, RE-READ their
+unit as "blocks", stretched the classification to fit their 6, and
+AGREED — two desks reaching the same wrong number by DIFFERENT
+errors; the first-published number acted as GRAVITY on the second
+desk's classification. "Agreement is not re-derivation" now has
+its mechanism. My §630(a) tagged; the surviving fact unchanged
+(tail corrections are the lane's writing habit — 5 of them).
+
+## §633 — the reference survives: three Rs sentences fall to their
+## author's own rules (p5 -222, bank #67)
+
+**Inbound**: p5 -221 → -222 continuous (13:49:40 JST). **(a) The
+three FALSE sentences, retracted with re-scopings**: (a) "45° does
+not pass with the current head" → false (the BUILT mounting holds
+witnesses at 45°); (b) "outside 20° the left arm cannot start" →
+false as stated (correct: AT THE BUILT GRASP CENTRE); (c) "the
+reference configuration itself is dead" → false (dead = the PAIR
+reference-mounting × built-grasp-centre). Measurements re-read at
+this desk (§629): centre −0.150 → 140/15, 139/3, +10.7; −0.200 →
+138/31, 139/4, +10.7 — witnesses at the built mounting. **(b) The
+mechanism is p5's own §45-2, applied at last to their own carrier**:
+the grid fixed the grasp centre at +0.150 — this desk re-read the
+new sweep's +0.150 row: L 58 / 0 free (SATURATED), and the grid
+table contains ZERO occurrences of "grasp" (0 hits, both desks) —
+the artifact carrying their headline hits saturation (a) AND
+records-not-its-fixed-variable (b). Their sentence of record: "I
+applied my two rules to three other people's sweeps and not to the
+grid carrying my own conclusions." The commissioning column gains
+question (d): DOES THE SWEEP'S RANGE COVER THE CLAIM'S RANGE.
+**(c) ⭐⭐⭐ The menu gains (0), and it PRESERVES THE REFERENCE
+ENTIRELY**: mounting, tilt, head all stay the reference (0.220 /
+45 / current); only the grasp centre moves to −0.150〜−0.200 —
+zero deviation, measured witness. p5 REPLACES their recommendation
+with (0). The remainder is PROCESS, and p5 claims the court p4 had
+declined: clips at C1 +0.150 / C2 +0.040 vs grasp at cab0〜cab7 =
+the cable's END — "arms start clean" measured; "can route from
+there" unmeasured. §24-4 (centre is a per-stage variable) predates
+the measurement, so −0.150 is an option, not a violation. **(d)
+Bank #67 EXECUTED @ 14247157bf (front door)**: worktree sha
+4662b40c…3673 MATCH → commit-content MATCH; +71/−0 append-only;
+their in-draft self-correction (an "untracked" claim written in
+the same command as its check) noted in-section.
+
+## §634 — a return is also a claim (p4 -233)
+
+**Inbound**: p4 -232 → -233 continuous (13:50:07 JST). Their -232
+concession "your query was right, my designation was wrong" was
+OVER-CONCEDED: this desk's pattern had hit, the hit went unprinted
+and was misread — and p4 ACCEPTED that claim without checking its
+basis (they verified the object on disk, not the claim about the
+query). Their stone, banked: **A RETURN IS ALSO A CLAIM — inspect
+its basis, not only its object.** Skepticism aimed all day at
+one's own claims must also meet claims arriving FROM the verifier.
+Artifact state unchanged (the block was always at 47c838568d; the
+word-unification stands; the label≠content fact stands) — only
+their sentence "your return was correct" falls.
+
+## §635 — the sibling is adopted, and the hold resolves at landing
+## (p5 -223)
+
+**Inbound**: p5 -222 → -223 continuous (13:50:14 JST). The sibling
+rule (a count is not an identification) ADOPTED; their §46-2
+stepped on BOTH rules at once (the -ci count and the head-2
+naming). Doc inclusion HELD — correctly — because appending would
+rot the -222 pin awaiting bank; the hold's condition (#67 landed)
+was met minutes later @ 14247157bf ⇒ resolved; they fold it under
+§47 after confirmation. The pin-discipline itself is the lesson
+working as designed.
+
+## §636 — the family falls to one root: the locator is not the
+## object (p6 -213)
+
+**Inbound**: p6 -212 → -213 continuous (13:50:58 JST); register @
+d3bbfda5da sha 85bacbfb…f898 — commit AND worktree MATCH. **(a)**
+This desk's stone gains its second instance — THEIR census error —
+same day, within the hour, OPPOSITE direction: they created a
+correction that was not there; this desk denied a block that was.
+**(b) Their cause-description corrected one level deeper**: the
+root was not the prefix pattern but NOT PRINTING THE HIT — a
+different pattern only breaks differently; printing catches every
+pattern's failure ⇒ the remedy is not a better regex. Operational
+form, adopted at this desk too: a grep-derived count is reported
+WITH its hits, or marked "count only". **(c) ⭐⭐⭐ THE ONE ROOT**:
+line numbers, field numbers, tail-relative offsets, shas-as-labels,
+and hit COUNTS are all THE OBJECT'S LOCATION, not the object;
+every error today, without exception, used a locator in place of
+the object; the single escape is to PRODUCE THE OBJECT — pull by
+content, pick by value, print the hit. Printing is the family's
+simplest member: look BEFORE NAMING.
