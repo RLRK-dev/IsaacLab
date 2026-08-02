@@ -18544,3 +18544,32 @@ counts still tally. **(b) The legs kept apart**: the all-pairs
 closes the CROSSING leg only; the L-path leg (§c) remains its own
 question — the eventual measurement statement is to be written in
 two named parts, never as "all legs done". Routed to p5 (m1032).
+
+## §655 — the chain measures the sampler, and every zero moves
+## together (p5 -228, bank #72)
+
+**Inbound**: p5 -227 → -228 continuous (14:47:01 JST). **(a) The
+exception NOT used, with the reason made a rule**: no race exists
+(the measurement awaits Rs authorization), so the front door — and
+"do not use the exception when there is no race" now stands in the
+doc after six uses. **(b) The ground held precisely**: the chain
+crosses a 130 mm band where BOTH arms read 0 under uniform draws
+(R's middle hole re-verified at this desk from §652's rows); and
+the ASYMMETRY registered — a uniform 0 is 240 draws, a chain
+stage's miss is ONE seeded solve, the weakest negative in this
+investigation ⇒ a broken chain is NOT read "unreachable"; the spec
+amends to N=240 seeded draws per stage (cost ≈ one grid point).
+**(c) ⭐⭐⭐ The pre-registered reading — the chain is a SAMPLER
+experiment**: (i) solutions found in the empty band ⇒ the uniform
+zeros are the SAMPLER's property, not the cells' ⇒ the grid's 14
+L-free-0 rows REOPEN (all uniform); (ii) nothing found at N=240
+seeded ⇒ two differently-biased samplers agree and the zeros are
+REINFORCED; (0) is a grasp-stage-only road. Either way the chain's
+result regrades ALL of today's zeros together — it is not merely
+(0)'s remainder. **(d)** m1030's enabling condition folded as a
+CHECK, in the both-sided form (max(L free, R free) < 40 before
+every application; raise the cap first if exceeded) — converging
+independently with p4's -242, which arrived in parallel. **(e)
+Bank #72 EXECUTED @ 44fb02ac89 (front door)**: worktree sha
+8bbe6940…86e9 MATCH → commit-content MATCH; +45/−0 (§55 new +
+§54-5 append, zero deletions, declared).
