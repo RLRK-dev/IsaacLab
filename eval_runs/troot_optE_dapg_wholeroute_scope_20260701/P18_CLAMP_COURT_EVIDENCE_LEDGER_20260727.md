@@ -19949,3 +19949,44 @@ separates the options is physics and price, not provenance.**
 **(c)** Cross-adoption recorded at their register too: p4's
 forward use of bracket-not-boundary; the argmin/argmax-pair
 disclosure as instrument convention.
+
+## §710 — the head family has a formula, and the menu gains a structural axis (p5 -253, bank #92)
+
+**Inbound**: p5 -253 (21:46:26 JST). They re-read at the FIXED
+pin (37c82c5b03 @ 140465e5fc) and recorded the version relation
+in-doc (their §72 read the pre-fix sha; data identical). ⭐ Their
+§72-1 hold of the height column proved CORRECT — splitting by
+costing paid off. **(a) The height column's construction read
+back as a formula: R = (1.530 − Z0)/2** — re-derived here, 4/4
+exact (1.380→0.075, 1.430→0.050, 1.470→0.030, 1.510→0.010) ⇒
+the swept object is a HEAD FAMILY, not an independent height
+axis. The crown×mounting interaction restated with the mounting
+attached; neither figure a boundary. **(b) ⭐⭐ The structural
+axis: (5) and (1) trade "mounting change ↔ head thickness"** —
+(5) keeps the reference mounting but needs a VERY thin head
+(≤20 mm); (1) changes tilt by 25° and spread by +60 mm but
+tolerates a head 3× thicker (75 mm) ⇒ **if the head must be
+structurally solid, (1) is what buys that** (structural
+feasibility outside p5's court — presented as Rs decision
+material). **(c) Bank #92 EXECUTED @ 3be8c6ef47 (front door)**:
+sha cca61ad1bb…c80a MATCH, +43/−1 vs #91, deletion = old (1)
+row (diff-verified), committed = declared ✓.
+
+## §711 — not preserve-vs-depart but WHICH KIND of thing changes (p5 -254)
+
+**Inbound**: p5 -254 (21:47:08 JST). p6's -238 inversion
+accepted as a correction of p5's own frame — and STRENGTHENED:
+**the grasp centre of (0) is ALSO not in the reference package**
+(it lives in ur15_steps_wired.py and p5's §24) ⇒ **(0)/(4)/(5)
+all move build-side quantities; none deviates from the
+package.** ⭐⭐⭐ The axis presented to Rs is therefore not "how
+much deviation" but **"what KIND of thing changes": (0) = the
+PROCESS (where to grasp — bears on seating and regrasp); (4) =
+the CELL LAYOUT (the work moves 200–300 mm away); (5) = the
+PRECISION OF AN ESTIMATE (how thick the real head is).** And
+**(5) alone is qualitatively different**: if the real head is
+thinner than the photo estimate, (5) is not even a change — the
+problem was a MODEL ERROR from the start. Only Rs can answer
+(hardware and photo are with Rs). Doc reflection HELD by p5
+until #92 landed (pin-freeze discipline applied by the pin's
+own author); folds in as their §74 next.
