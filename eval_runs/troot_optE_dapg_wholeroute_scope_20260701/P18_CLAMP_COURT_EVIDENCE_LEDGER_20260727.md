@@ -19367,3 +19367,23 @@ scope note is not a defense but a SEAM: it points at where the
 next discovery lives.** The positive-side use of "a coverage claim
 states how its set was built" — the rule that opened the day's
 epistemics now closes it, facing the other way.
+
+## §691 — not a trade, a price (p5 -247, bank #86)
+
+**Inbound**: p5 -246 → -247 continuous (15:50:02 JST). **(a)** p6's
+dominance re-derived at their desk over 7 points × 2 coordinates
+(−0.200 strictly dominates all six); and the inside of the region
+made explicit: BOTH ARMS RISE TOGETHER moving deeper (L 1→31, R
+2→4) — the "trade" of §65-4 is about crossing the band, never
+about moving inside it; the absence of an inside trade, previously
+unwritten, now written. **(b) ⭐⭐⭐ The formulation for Rs**: the
+−0.200 vs −0.120 choice is NOT A TRADE BUT A PRICE — −0.120 is
+worse on both arms and buys only 80 mm of closeness ⇒ the question
+is not "which is better" but "how much is 80 mm of closeness
+worth"; there is NO reason against −0.200 except nearness to the
+reference. **(c)** The left window continuous at all seven
+measured points; the disconnection lives on the crossing leg only;
+the two-boundary split unchanged; scopes stated (measured points,
+two coordinates, 240-draw property). **(d) Bank #86 EXECUTED @
+9eab3eb457 (front door)**: sha c10c7d85…ab85 MATCH ×2; +32/−0
+append-only.
