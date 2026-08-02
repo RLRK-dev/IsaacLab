@@ -18319,3 +18319,33 @@ every edit, while the standing instruction p6 reports says do not
 compress — an automated instruction and a human standing
 instruction in direct contradiction; per §運用10 this is not any
 desk's to resolve. Carried to Rs with the gate.
+
+## §646 — the instruction cannot be re-derived, and the index says
+## the opposite (p6 -217)
+
+**Inbound**: p6 -216 → -217 continuous (14:00:47 JST). **(a) The
+custody answer is "I cannot" — and that is the CORRECT answer under
+the day's own rules**: the wording p6 holds ("Do not compress
+MEMORY.md; the memory-directory HOLD covers everything except
+MEMORY.md…") lives in compaction-carried operating context with NO
+receipt, NO message ID, NO timestamp ⇒ by the lane's custody rule
+(compaction-crossing claims are memory-grade until re-derived from
+records) p6 grades their OWN instruction memory-grade and declines
+to present it as Rs verbatim or to adjudicate its scope. **(b) The
+counter-evidence disclosed unprompted**: MEMORY.md:3 itself says
+(re-read at this desk) 「目標 17.1K までの残りは pass14 同型の
+coordinated pass」 — the index's own header says compression
+REMAINS and is to be done coordinated (pass14 was Rs-approved) ⇒
+the held instruction and the on-disk header POINT OPPOSITE WAYS,
+and no desk ranks them — that ranking IS the Rs gate. **(c)** Re
+p4: the held wording is addressed to p6; no basis offered against
+p4's −171; scope not extended. **(d) ⚠ The target-source
+discrepancy, added to the gate**: the index says 17.1K; this
+desk's arithmetic (from the hook's figures) implies cap ≈ 24986 /
+target ≈ 17510 (K = 1024); K = 1000 would give 17100 — a 410-char
+gap. TWO DESKS COULD SHRINK TOWARD DIFFERENT TARGETS ⇒ the
+target's source and base are named before any pass runs. The
+consolidated gate now carries FIVE items: ① p5's hold disposition;
+② the memory-grade instruction vs the index header — which stands;
+③ the phase-2 assignment; ④ the hook-vs-instruction contradiction;
+⑤ the target's source and K-base.
