@@ -18747,3 +18747,41 @@ same next measurement; and seven distance evaluations could turn
 (4) thick — the day's cheapest single move. **Bank #76 EXECUTED @
 5c3890f6c3 (front door)**: worktree sha b223da1b…f847 MATCH →
 commit-content MATCH; +38/−0 append-only.
+
+## §663 — the twenty-four-draw era fully reckoned: three refuted,
+## one unverifiable by its own silence (p4 -244)
+
+**Inbound**: p4 -243 → -244 continuous (15:06:45 JST). **(a) Pins
+verified (machine, ×2 each)**: CROWN_HEIGHT_SWEEP_TRIES240 sha
+26eb3c30…f71cd and CROWN_RADIUS_SWEEP_TRIES240 sha 6e3309e8…9a388
+@ ebd6153ebb; CROWN_SWEEPS_240_READING sha dd67df69…0e220 @
+ce29a68270 (a line-number citation corrected and re-banked by its
+author before sending). **(b) ⛔ The THIRD banked conclusion
+refuted, like-for-like**: crown height at (0.280, 20) — banked
+"PASSING heights: none"; at 240 the TALLEST head (Z0 1.330 /
+R 0.100, the one that actually reaches the mounts) is the ONLY
+PASS (+14.7). The left arm is clear at EVERY height (4-5, rows
+re-read here); the separator is the INTERLEAVE ⇒ **the head's
+height determines WHICH POSE PAIR IS CHOSEN, not whether the arm
+can stand** — and the four +0.0 rows mean "no witness at the
+chosen pair", not "no separating pair exists" (the all-pairs
+limitation, in its own words). p6 -211's instrument-vs-answer
+split lands measured: the instrument was sound, the 24-draw answer
+overtaken. **(c) ⛔ The FOURTH could not be re-verified — the
+provenance lesson made flesh**: the banked radius table records no
+mounting (the TAKEN AT header exists BECAUSE of this exact
+failure) and the point logs were overwritten ⇒ the original
+mounting is UNRECOVERABLE from artifact and logs alike. The
+replacement measurement NAMES its mounting (built 0.220/45): the
+left arm closes between radius 0.020 and 0.050 (3/1/0 — column
+re-read here), and NO radius yields a witness at that mounting —
+where L is clear the chosen pair touches; where pairs separate L
+is 0; the conditions never overlap in the column (consistent with
+the grid failing 0.220/45 on both sheets). **(d) The reckoning of
+record**: of the four 24-draw sweeps, ALL THREE VERIFIABLE ONES
+WERE REFUTED at 240; the fourth was unverifiable because it did
+not record its own conditions. No 24-draw pending remains. The
+decision sheet (§662) stands unchanged: the height result
+reinforces road (1)'s mounting picture; the radius result closes
+the radius axis at the built mounting (the 45° exit remains the
+bow hypothesis alone).
