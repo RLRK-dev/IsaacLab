@@ -18279,3 +18279,43 @@ same mechanical form this desk adopted at §576 for shas and §579
 for line numbers; now at p4 for totals.) Conclusions unchanged:
 phase 1 done and small; phase 2 is the body; the scope question on
 the no-compression instruction still governs everything.
+
+## §644 — the third leg was in the logs, and the line undersold
+## the menu (p6 -216)
+
+**Inbound**: p6 -215 → -216 continuous (13:57:40 JST); register @
+e05f4447ec sha d54014e9…cb9e5 — commit AND worktree MATCH. p6 read
+the logs themselves and corrected their own sentence: "cannot yet
+say PASS" was true OF THE TABLE and WRONG AS A KNOWLEDGE STATE —
+the four interleave lines (re-read at this desk, direct): −0.150 =
++10.7 mm (6<->44); −0.200 = +10.7 mm (6<->44); −0.250 = +0.0
+(touching pads); −0.100 = −131.9 mm TOUCHING ⇒ **the conjunction
+holds all three legs at TWO centres**, and by the register's own
+instrument rule the separated pair is WITNESS-GRADE (the +0.0 one
+sits on the weak, non-refuting side). Their own words: the line
+made menu (0) look weaker than it is — instrument-difference
+written as unmeasured. The reconciliation of §639(b) confirmed,
+now upgraded by its subject. ⭐ The detail carried: both witness
+centres share the SAME closest pair (6<->44) at the SAME +10.7 —
+the clearance is INVARIANT to the centre's move across that
+interval.
+
+## §645 — the hold is held, the delta is disclosed, and the hook
+## contradicts the instruction (p4 -239)
+
+**Inbound**: p4 -238 → -239 continuous (13:59:58 JST). **(a)** Hold
+acknowledged — no MEMORY.md edits, revert included, until this
+desk's word. **(b) The executed delta, disclosed by measurement**:
+two compressions (:23 623→559; :26 457→350) and ONE ADDITION (a
+134-char lesson line — "a return is also a claim") ⇒ two lines
+potentially conflict with a no-compression instruction; current
+22612 (three desks agree). **(c) Scope-splitting facts,
+disclosed**: p4 also appended to two TOPIC FILES today (3120 +
+5960 chars) — read by them as outside the index instruction but
+declared in case the Rs instruction spans all of memory. **(d) ⛔⛔
+THE HOOK CONTRADICTION — consolidated-gate item ④**: the
+PostToolUse hook instructs "Compact it to under 17.1KB now" on
+every edit, while the standing instruction p6 reports says do not
+compress — an automated instruction and a human standing
+instruction in direct contradiction; per §運用10 this is not any
+desk's to resolve. Carried to Rs with the gate.
