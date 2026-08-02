@@ -157,3 +157,25 @@ a valid operation**. The +24.2 mm at −0.120 is that centre's own pair; it says
 ⚠ This is the same shape as everything else in this file — a number that looks like a function of
 the swept variable and is not. It is also why point 1 above had to be weakened: a bisection assumes
 the thing being bisected is monotone, and neither column here has been shown to be.
+
+## 8. The 40 mm above the window, at 10 mm pitch — closed all the way
+
+§6 point 1 warned that without monotonicity an open centre could hide between the 30–50 mm samples
+above −0.100. That gap is now filled (`GRASP_CENTRE_SWEEP_TRIES240_UPWARD.txt`, same mounting,
+240 draws; p6 `-225` proposed the same probe independently):
+
+| centre x [m] | L solved | L clear | R clear | arms closest |
+|---|---|---|---|---|
+| −0.070 | 90 | **0** | 0 | −93.3 mm (both put back) |
+| −0.080 | 112 | **0** | 0 | −125.5 mm (both put back) |
+| −0.090 | 112 | **0** | 0 | −128.7 mm (both put back) |
+
+With −0.060 and −0.100 already measured closed, **every centre from −0.060 to −0.100 at 10 mm
+pitch keeps zero clear left poses**, and the first open one is −0.110.
+
+1. ⭐ **No second transition hides in that 40 mm at this resolution.** The reading that the window's
+   upper edge is a single crossing in [−0.100, −0.110] is strengthened — ⛔ not proved: 10 mm
+   sampling can still step over a narrower open band.
+2. ⚠ **The rest of the closed region is still coarse.** From +0.150 to −0.060 the pitch is 30 mm,
+   so the same caution applies there and is untested.
+3. The familiar shape again: L solved rises (90 → 112 → 112) while L clear stays at zero.
