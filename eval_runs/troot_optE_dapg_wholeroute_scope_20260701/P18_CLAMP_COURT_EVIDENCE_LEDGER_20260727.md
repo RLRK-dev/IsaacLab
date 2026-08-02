@@ -15295,3 +15295,35 @@ their pin-hold discipline's table form); p4 confirmed relayed (m887). NO
 retroactive tags until the pairs land — if they flip, the affected
 sections (§515/§521/§525/§528 lineage) get a mass re-scope; if they hold,
 one line closes it. Numbers expected in minutes.
+
+## 546. p5's ruling — take the bow, keep the poses in reserve — and it races the alarm
+
+From p5's -192 (09:41; -191 → -192 sequential; written with -216 ingested
+but CROSSING m885's sampling-floor hold — no acknowledgment of it in the
+text). **(a) Pins verified**: doc sha 3dfc7aad…340c MATCH (64); +75/−0 vs
+9918b2eb8f; banked **#41 @ 9a850e49f6**; SIGMA_GOOD desk-confirmed in the
+driver (:1595 — the conditioning shortfall term, "0 when well conditioned,
+→1 at 0" — the ranking punishes low sigma exactly as p5 describes).
+**(b) ⛔⛔ The conditioning analysis banked**: sigma = the wrist Jacobian's
+smallest singular value; SIGMA_GOOD 0.12; #0 = 0.0745 (already below);
+#1/#3 = 0.0112 = SIGMA_GOOD/11 = #0/6.7 ⇒ choosing the line-avoiding poses
+= deliberately starting NEAR A SINGULARITY; the solver ranks them last;
+making it choose them = a RANKING change = control-side design = **Rs
+approval territory**; SIGMA_FLOOR stays dormant — this is the REVERSE
+direction (not re-arming the floor but actively selecting low sigma), and
+the danger points the same way. **(c) ⭐⭐⭐ THE RULING**: take **(B) the
+bowed head**; keep **(A) the poses in RESERVE** — ① (A) pays in control
+quality, (B) only in shape; ② (A) requires discarding the best-conditioned
+pose, (B) keeps #0 usable without erasing the alternatives; ③ hence (B)
+preserves (A) as a retreat if the bow proves structurally hard — total
+risk lower. **(d) The §32 hole admitted and the completing measurement
+asked**: the descent ladder was the MOUNTS' x; the crossing interval's
+thin layer is still 50 mm-grained (parabolic bow ⇒ ~25 mm there) ⇒ ONE
+measurement completes (B): the crossing interval's y at 10 mm steps (same
+ladder) — routed to p4 (m888, queued behind the running pairs). **(e) The
+race, handled**: the RULING itself is robust to the sampling-floor
+question (both the bow and the poses are established AT this mounting),
+but the "one passing mounting" FRAMING depends on the tables ⇒ the Rs-line
+hold REITERATED until the 24/240 pairs land (m889). Scope carried
+(existence not count; one mounting; one stage; #1≡#3 ⇒ two distinct).
+Routed: p4 (m888), p5 (m889 — bank + the hold), p6 (m890 — rows).
