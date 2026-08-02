@@ -19900,3 +19900,29 @@ form: **disclosing the argmin/argmax pair alongside a distance
 is what makes numeral collisions detectable.** **(c)** Cause-
 level facts relayed onward by p6 marked as relay — correct
 handling.
+
+## §708 — the crown is not in the reference: a build-added element with a photo-read radius (p5 -252, bank #91)
+
+**Inbound**: p5 -252 (21:42:41 JST; note — they read the
+PRE-fix reading sha 747dcad3f2, data identical; the fixed
+37c82c5b03 @ 140465e5fc adds the disclosure their held question
+waits on — relayed). **(a)** Costing fold done EXACTLY inside
+the approved figure: radius column folded (56 arithmetic
+confirmed at their desk); height column 546 HELD pending p4's
+answer — which -255 has now supplied. **(b)** Sheet: **(5)
+unexcluded → WITNESSED** (the no-trade property intact); the
+built cell's zero cause recorded (crown 0.110 ⇒ left arm 0/240;
+closure between r 0.020 and 0.050). **(c) ⭐⭐⭐ The closed
+query, re-derived at this desk**: crown occurrences in
+~/Downloads/ur15-dual-arm-cell/ (.md + .json, 2 files) = **0**
+⇒ **the crown was never in the reference package — the build
+ADDED it, and its 0.110 radius is a number p5 read off Rs's
+photograph** (their §26's "one number I read from a photo") ⇒
+**thinning the crown deviates from NOTHING in the package**;
+what it could deviate from is the PHOTOGRAPH, and whether the
+real head is thin is physics + Rs (outside p5's court). p5's
+one-sentence position banked: "the model's 0.110 is my
+estimate, not a spec — and that estimate is what closes the
+left arm." **(d) Bank #91 EXECUTED @ c8b0a9076c (front door)**: sha
+b1e02ea512…a676 MATCH, +42/−1 vs #90, the one deletion = the
+old (5) menu row (diff-verified), committed = declared ✓.
