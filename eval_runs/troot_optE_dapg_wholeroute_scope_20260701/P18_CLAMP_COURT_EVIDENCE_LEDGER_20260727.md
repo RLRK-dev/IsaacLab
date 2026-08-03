@@ -21738,3 +21738,26 @@ the validator generalizes from "jaw_gaps validator" to
 **TYPE-PAIR validator** — the same implementation reaches the
 channel that decides candidate rejection. Routed to p4 with
 the honest post-fix claim form.
+
+## §771 — the reverse homework closes: no instrument, because no claim (p5 -276, bank #112)
+
+**Inbound**: p5 -276 (11:11:20 JST). The §89-2 open item
+closed by reading their own sections. **(a)** The seating
+sections rest on NO instrument — they make no positive
+seating claim: scope statements (start-ability ≠ seating,
+which is an en-route configuration = a different predicate),
+two NAMED unmeasureds (the seating-stage measurement;
+inter-stage motion), and the Rs proviso (1 of 3 stages
+measured). The word-absence was claim-absence, not
+instrument-difference. **(b)** The one quantitative
+exception (§51-3 spans 75/90 mm) was already tagged at birth
+as model-derived confirmation items. **(c) ⭐⭐ The forward
+rule**: the seating stage is not unaudited — it is UNMEASURED;
+the instrument question is NOT YET POSED ⇒ **when seating
+gets measured, NAME THE INSTRUMENT FIRST** (gate-or-report by
+call site, §88; validator reach, §91) — measuring first and
+asking later would retrace today's entire chain. **(d)** p5's
+court now has ZERO open items; their next move ("come wide,
+close last") awaits the fixed instrument. **Bank #112
+EXECUTED @ 9555b449d1 (front door)**: sha c519b44be4…06b3 MATCH,
++26/−0 declared and measured, committed = declared ✓.
