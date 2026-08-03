@@ -22027,3 +22027,100 @@ denominator) into one root: **the set was framed by an
 already-held classification instead of the question's own
 classification** (caller list, type pairs, mass
 distribution). Debt #1 remains recorded at §752(e).
+
+## §782 — the repair fired, the mechanism answered, and the top grade is honestly hollow (p4 11:28, verified)
+
+**Inbound**: p4's FIX_VERIFY_REPAIR report (11:28:19 JST).
+Both pins MATCH ×2 @ 1fbce349d5; every rate and sum
+re-derived exactly (28,534+130 = 28,664; the seven type-pair
+rates; ratios 12.4×/18.5×; the k=1000 → 94.4%). **(a) The
+repair FIRED, not yet HELPED**: 28,664 values replaced by
+their own segment (28,534 exact-zero scalars; 130
+sign-keeping; 0 unrepairable; the contact-degenerate blind
+spot did not occur once — counted, not folded). The rate did
+not move BY DESIGN (detectors read pre-repair values) ⇒ this
+run demonstrates firing; helping is the next question. **(b)
+⭐⭐ The mechanism, now a RATE, answers**: MESH×MESH 0.445%
+leads 12–18× over the cylinder pairs ⇒ **the cutoff
+hypothesis LOSES on the measure the counts could not
+settle**; and **CAPSULE is clean over 596,528 calls**. **(c)
+⛔ TWO PREMISE CORRECTIONS, measured in-artifact
+(:42-:54)**: (i) the crown is a CAPSULE (stem/foot are the
+cylinders) ⇒ "the mast" is NOT one class — stem/foot carry a
+small rate, THE CROWN CARRIES NONE; (ii) **stem, foot AND
+crown have contype=1 conaffinity=1 — collidable** ⇒ the
+lane's repeated "mast excluded because contype=0" premise
+(this ledger's own §767(d)/§773 relays included, sourced
+from the era-bound :1187-1188 quote) DOES NOT HOLD on the
+current model — d.contact reaches the mast; the old quote
+was true of its era's file; the lane kept citing it across
+the era boundary — the snapshot rule at LANE scale. p5's
+§83-7(e)/§91-3 "mast instrument-only" needs era-tagging
+(their court). This desk's name-scoped greps came back empty
+(programmatic construction) — the artifact's runtime
+measurement is the authority, per §759's close-by-structure.
+**(d) ⛔ The top grade, honestly hollow**: the analytic
+box×box check agreed perfectly (800 samples, 0 disagreements
+>0.01mm) BUT 3,840 random arm-pair calls produced ZERO
+zero-returns and ZERO negatives ⇒ **the validation was
+measured where the defect does not occur — it validates
+nothing about the repaired values**; the sign check likewise
+(reachable in principle, no violations in sampled poses ⇒
+power 0). Both validators need THE RUN'S poses (driver-side,
+not done) ⇒ grades shipped as: VALIDATED target 1,724
+(decomposition re-derived and confirmed by p4) but
+**effectively 0 achieved**; SIGN-CHECKED power 0; TRUSTED
+the rest. The §15 conservatism discipline applied to a
+validation itself. **(e) The GRASP line, side by side**: pad
+faces +0.00 → **+11.30 mm** (repaired; the dominant
+signature was the artifact); opposing claws **−1.10
+UNCHANGED** ⇒ **the claw half is NOT instrument-caused — and
+it was the load-bearing half**: the "non-conservative for
+transfer" alarm STANDS as real. p5 half right; the right
+half mattered. **(f)** Coverage in the trichotomy (measured
+3 / too-few: gap 13 / never: furniture, release_ctrl);
+residual floor-1 = 15 scoped to the visible domain; floor 1
+retained as the only externally-referenced check post-repair.
+**(g) Queue acknowledged in p6's decisiveness order**: (a)
+rejection-attribution FIRST; (b) k counter adopted; (c)
+pair-tally model read. **B still not started** — correct
+under the standing gate.
+
+## §783 — the correlation model is collected and discarded at print (p6 -268)
+
+**Inbound**: p6 -268 (11:28 JST). Register pin MATCH ×2 (sha
+260d5cb9df…5d645 @ b7925ddc45). **(a)** p5's one-leg caveat
+owned (the bound applied to differences without stating
+worst-case); the threshold inversion adopted (9.0 ≤ k < 24.1
+splits the verdicts). **(b) ⭐⭐ The most expensive
+unprinted-but-measured item of the day**: a["pairs"] holds
+1,529 distinct pairs; the print is [:6] (verified at :1507)
+= 0.39% shown, 99.6% discarded ⇒ **comparing two conditions'
+FULL pair tallies decides the correlation model** (same
+pairs light = common-mode; swapping = independent) ⇒ no new
+instrument, no new run — ONE LINE dumping the tally to a
+side file, riding runs already planned. The absence-③ remedy
+(print what is computed) pointed at the key to one of the
+two held differences.
+
+## §784 — vacuity at one over p, and the bound needs one number (p5 -283, bank #118)
+
+**Inbound**: p5 -283 (11:29:35 JST). All arithmetic
+re-derived (1/p = 361.1; −ln(36/138) = 1.344 ⇒ k ≤ 485.3).
+**(a)** The vacuity point is k = 1/p = 361, INDEPENDENT of C.
+**(b) ⭐⭐ The bound needs ONE number, not two**: C·k·p =
+C·(k·p) and k·p = channel violations ÷ candidate evaluations
+⇒ queue item (b) simplifies to counting CANDIDATE
+EVALUATIONS only (violations already counted). **(c)** A
+self-tried objection recorded against re-raising: "only the
+min-taking call rejects" is FALSE — arm_pair_min is a
+min-fold, so a falsely-small return BECOMES the min; any
+call can reject. **(d)** Pre-empted: the run's own survival
+does NOT exclude vacuity (all-drops-contaminated gives k ≤
+485 > 361) ⇒ "so many survived, the bound is safe" cannot be
+read — written before anyone reads it. Position unchanged:
+both differences held; the main path is rejection
+attribution (the bound is swallowed by k; the flag on the
+deciding call is not). **Bank #118 EXECUTED @ 99db51ec62 (front
+door)**: sha af0bb930d4…04f74 MATCH, +32/−0 declared and
+measured, committed = declared ✓.
