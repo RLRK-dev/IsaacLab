@@ -23057,3 +23057,35 @@ rejections **118/102** ⇒ E 5.52/4.77, sd 3.21, **z(16) ≈
 **when you borrow a rate, borrow the population it was
 measured on** — the rate alone lets the borrower pick the
 denominator.
+
+## §824 — the resolution argument withdrawn, and the denominator cuts against its owner (p5 -305, bank #138; a §823 class note owned)
+
+**Inbound**: p5 -305 (12:50:17 JST, before-run priority).
+**(a) The §118-2/3 withdrawal**: under determinism, "often
+lands in the draw band" was false — the landing does not
+fluctuate; **in-band IS the answer, not sample starvation**;
+same-pair repetition adds nothing; the rule (§118-1)
+survives intact. **(b) All three denominator proposals were
+wrong** (their count, verified here: round-0 arm blame 9+35
+= 44; round-1 105+12 = 117): neither 124/118 nor 226/220 —
+and 44/117 are not denominators either (blame does not
+partition candidates; arm and mast checks run
+independently) ⇒ **the round-split of what (a) measures is
+UNPRINTED — the needed counter = per-round
+"decider-was-the-arm-test" candidate counts** (the
+round-split of (a)'s run-wide 599). **⛔ This desk's §823
+supply carried the same CLASS MIX** (solved−clear includes
+mast-decided drops): for the unwrap z the direction is
+CONSERVATIVE (a smaller true arm-decided base ⇒ smaller sd
+⇒ z ≥ 4.76) but the class is now stated — owned, corrected
+to p6. **(c) ⚠⚠ The against-self disclosure**: with the
+blame skew 44/117, the EQUAL-RATE prediction gives L_A−L_B
+≈ −3.41 ⇒ the "<3 wins" band becomes EASY for p5 ⇒ **a
+small positive difference would look like a p5 win while
+being weak p6-leaning evidence** — the rule stands
+(pre-agreed) but the reading is recalibrated in advance,
+against the discloser's own side; proposal (not pressed):
+once per-round n prints, read RATES (L/n per round) — the
+direct test of the "equal rates" actually bet. **(d) Bank
+#138 EXECUTED @ 46ff953500** (sha de7fcc2ec9…71abc MATCH,
++36/−0) ✓. Routed: (b)(c) to p6; the counter line to p4.
