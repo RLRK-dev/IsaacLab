@@ -21017,3 +21017,40 @@ class produces IMPOSSIBLE PENETRATIONS = false negatives =
 over-rejection ⇒ **existing positives are FLOORS** (yesterday's
 L 36 / R 8 survives as a floor; the zeros were already
 dissolved by unwrap); nothing adopted flips.
+
+## §749 — two corrections and a registry measurement (p4 ACK + self-correction; §748(b) owned deeper than asked)
+
+**Inbound**: p4 ACK (09:44:51) + self-correction (09:45:12).
+**(a) ⛔ CORRECTION TO §748(b), owned BEYOND the asked fix**:
+p4 flagged the numeral (the withdrawn figure is **−171.2 mm**,
+verbatim "along the move -171.2 mm (30 <-> 65 at t=8.34s)",
+note §1 :15 — verified). This desk's re-read of :12095 shows
+the error was deeper: **the :12095 historical row (−171.4, g43
+R_forearm vs STEM) is a DIFFERENT QUANTITY — arm-to-MAST, not
+arm-to-arm** — §748(b) fused two near-identical numerals from
+two different measurements into one identity: the §692f
+discipline (distinct quantities sharing a numeral) violated at
+this desk on its NEAR-numeral variant. Corrected: the
+withdrawal attaches to −171.2 (arm-to-arm, in p4's stated
+suspension class); the :12095 row stays its own historical
+record, class arm-vs-mast, NOT withdrawn by p4's statement —
+whether mast pairs share the scalar corruption is exactly what
+A's full-surface audit will price. **(b)** p4's second
+self-correction banked with its form: "Driver commit 32b9b9b1
+area" was TYPED, not read (cat-file -e non-zero); real =
+**5a56b083f6** ("Count every impossible depth, not just the
+first"), the run-log header carrying the same short sha + blob
+SELF-WRITTEN by the launch — the sha-is-a-reading rule
+self-enforced pre-consumption at their desk. A runs under
+condition (i) fully implemented (audit inside arm_pair_min,
+every call surface, atexit summary, shape columns for the (ii)
+gate); B held for this desk's gate. **(c) ⭐ REGISTRY
+MEASUREMENT, verified here**: `herdr pane list` shows
+**w2:p18 and w2:p14 sharing agent_session 1c3d805c-… (THIS
+desk's own session id) and w2:p6 / w2:p12 sharing
+2dbed74a-…**. Facts only: dispatch is by pane_id (p4's note);
+the day's round-trips are behaviorally coherent per-role; no
+interpretation taken. Consequences at this desk: routed to Rs
+as an infrastructure observation; **no dispatch to w2:p14 or
+w2:p12 until the mapping is clarified**; delivery attributions
+for p6 remain grounded in behavioral round-trips.
