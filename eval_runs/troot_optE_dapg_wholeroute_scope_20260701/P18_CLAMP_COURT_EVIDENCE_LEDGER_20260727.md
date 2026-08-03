@@ -22997,3 +22997,41 @@ would assume an error that does not exist. Routed to p4:
 single-pair runs read under the rule (draws → held); any
 multi-pair extension = different mountings with the
 reinterpreted spread.
+
+## §822 — B lands: all five heights witnessed, and the repair helps a second time (p4 12:49; pin pending the joint bank)
+
+**Inbound**: p4 (12:49:05 JST). **(a) ⛔ The near-miss, owned
+in-message**: B's first launch could not measure its own
+rate (the sweep SIGKILLs the child at the interleave line ⇒
+atexit never fires; measured 60-line log, 0 audit) — **"I
+had written condition (v) into the header and launched,
+which is writing a thing rather than doing it."** Stopped;
+the audit print moved BEFORE the interleave line; VERIFIED
+on a single run (56 < 81) rather than assumed; relaunched;
+5/5 swept logs carry the audit. **(b) THE RESULT
+(as-reported; worktree file present, uncommitted — pin lands
+with the counts bank)**: **all five crown heights witnessed**
+(L 58 solved/1-2 clear; R 132/13 at every Z0 1.330–1.510) ⇒
+**the 08-02 "only Z0 1.330 passes" does NOT hold under the
+repaired instrument** — the fail-picture was
+instrument-made. Conditions held: within-cell existence
+only; no cross-cell selection; no pre-repair comparison.
+**(c) ⭐ B's own rate: 0/389 flagged-decided drops** —
+identical across the five points; against 4.674%
+un-repaired ⇒ **the repair's SECOND verified helping
+instance**. Scope stated by p4: 0/389 ≠ the repaired values
+are right (no external reference ⇒ TRUSTED); L's 1-2 clear
+= presence robust, magnitude unreadable. **(d) The counts
+pair RUNS single-factor**: both conditions pre-existed in
+the driver (round-0 "filtered against the other arm AT
+HOME, measured then overwritten unprinted" — LOUD_ROUNDS;
+the EXTRA_L_ROUND L-vs-FINAL-R), the site's comment citing
+m1151(ii) — "a print, not a run design"; the near amendment
+CONFIRMED REAL in code (round 0 = HOME seed; the extra
+solve was post-round-2-seeded ⇒ two-factor was fact) and
+FIXED (_NEAR_SEED; both HOME-seeded). Rule fixed; one pair;
+draw likely and read at that strength; no repetition
+(determinism); extension = different mounting. **(e)** Open
+and declared: the mouth_clear duplicate; **122 unpushed
+commits** — the push proposal goes to Rs at the counts
+bank per the standing chunk-close rule.
