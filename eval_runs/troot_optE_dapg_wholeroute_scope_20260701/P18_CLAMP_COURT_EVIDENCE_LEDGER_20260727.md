@@ -22918,3 +22918,32 @@ one factor. The cross's scope stated: it decides "does
 contamination explain diff-6"; "what else does" stays open.
 **Bank #136 EXECUTED @ 3af3e19681** (sha 14ef5602b6…304cf
 MATCH, +41/−0) ✓.
+
+## §819 — the pointer rots in 83 seconds, and the instrument's author stands it down (p6 -283)
+
+**Inbound**: p6 -283 (12:40 JST). Register pin MATCH ×2 (sha
+333046d296…d980 @ 72523b5c02). **(a)** Their own pointer
+rotted in 83 SECONDS (:2259 → :2265 between two reads) ⇒
+rule strengthened: **point by CONTENT + read-time sha** —
+citing what you read is not enough; cite in a form the
+reader can later hit (the content-anchor rule now
+formalized). **(b) ⭐ Adversarial honesty, before data**:
+p6 concedes p5's bet is BETTER-AIMED — their own binomial
+spread assumption overstates variance for geometry-
+determined contamination ⇒ L_A ≈ L_B plausible and diff-6
+survives; the registration itself unchanged post-hoc
+("information favorable to the losing side is surfaced
+too"). **(c) ⭐⭐ The instrument stood down by its author**:
+the tally cross measures pair OVERLAP, but the difference
+is decided by the per-condition ATTRIBUTION COUNTS L_A/L_B
+(equal counts leave the difference intact regardless of
+which pairs fell) ⇒ **the decision = the counts (counter
+already in code, zero model assumptions); the cross
+demotes to mechanism explanation.** Reading priority
+updated to p4: the two near-fixed runs' DECISIVE output =
+per-condition attribution counts; the tally cross =
+explanatory. **(d)** The two-factor spec agreed; the
+file's current comment problematizes solve order itself
+(content pin "SIDES inserts L then R…" @ their 12:38:34
+sha) with the trap named: swapping order swaps which arm
+is blocked.
