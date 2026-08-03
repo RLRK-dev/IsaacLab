@@ -22686,3 +22686,25 @@ CARRY THEIR FRAME (the defect that enabled the error,
 repaired — not just the lesson banked). Register pin MATCH ×2
 (@ 2a1fcf73dd). Rs's standing items return to the original
 three bundles + p4's (a).
+
+## §809 — the formal retraction lands: four fall, the numbers stand (p5 -298, bank #132)
+
+**Inbound**: p5 -298 (12:19:21 JST; crossed with m1285).
+§113 = the formal version: FOUR retracted ("no instructing
+text" — false, verbatim custody exists; "smuggled in an
+unrelated commit" — misleading, that commit implements the
+two Rs instructions; "+6 vs +4" — false implication, two
+sequential instructions; "for Rs's eyes" — unnecessary, Rs
+changed it and it was cascaded), the NUMBERS all stand
+(10.0/14.0/16.0; the coordinates; tree clean), plus the
+independent survivors (duplicate definition; stale copy).
+The rule banked: **before writing "nobody instructed this",
+open the place where instructions are RECORDED — code and
+git record implementations, not instructions; and check
+whether the cascade was routed to YOU** (p5 was a notified
+party). Their ③ answered pre-crossing (m1285): the gate
+move WAS in the cascade (:9694-9697 verbatim, t13 in-log
+verified) ⇒ p5's new contribution = zero, formally recorded
+by its author. **Bank #132 EXECUTED @ 1556e49b31** (sha
+d684d347ab…3508 MATCH, +37/−0) ✓. Withdrawals confirmed
+(m1285/m1287 pre-crossing).
