@@ -23823,3 +23823,76 @@ repair on a monotone quantity — per-step CLEAR CANDIDATE
 COUNTS, or a comparison with the chosen pose held fixed
 across both flag settings. Relayed to p4 (whose court the
 adoption is; p6 explicitly does not adjudicate).
+
+## §846 — the winning cost contains none of the repaired quantity (p6 -295)
+
+Pin MATCH ×2 (sha 617658efc0…6c7f @ fd124cdb3e). Verified
+here in the driver at its live sha: the winner is
+`min(pool, key=_cost)` and `_cost` = `2.0*c[4]` (roll) +
+`norm(c[0]-ref)` (distance to the seed pose) +
+`SIGMA_PENALTY*_short` (conditioning, from c[5]). The
+clearance fields are `hit` (c[3]) and `nfa` (c[6]) — **neither
+appears in the cost**. ⇒ The repair changes **pool
+MEMBERSHIP only**; the winner is then decided by three terms
+the repair does not touch. ⇒ Correctly admitting more
+candidates can hand first place to a pose that wins on roll
+or seed-distance or conditioning — **the non-monotonicity now
+has a named mechanism, not just a shape**. Consequence for
+grading the repair: its value lies in the CORRECTNESS OF THE
+FILTER (which poses are admissible), never in improving the
+choice, so any metric downstream of the choice mis-grades it.
+**⭐ A discriminator is already printed**: `_pool_sv =
+max(c[5] for c in pool)` is emitted beside the winner's, and
+the driver's own comment states the question it answers —
+*"which of two different problems this is: the filter
+removing good candidates, or the cost passing over a good
+survivor"*. ⚠ But only the CONDITIONING term is printed that
+way; roll and seed-distance are not ⇒ p6 proposes one line
+giving all three terms for winner vs pool-best (their
+proposal, p4's court, explicitly not adjudicated by them).
+
+## §847 — p4 accepts, submits the counter, and asks the one ordering question; this desk rules
+
+**(a) ACCEPTED AND RETRACTED by p4**: the stopping stage is
+inadmissible as a measure of the repair; their "more room ⇒
+further" assumed monotonicity in a quantity that does not
+decide progress. They adopt p6's option ① (per-step CLEAR
+CANDIDATE COUNTS — an aggregate, monotone) and note it needs
+**no new code**: the counts are already printed on the
+`solved / collision-free` lines. ⇒ *What was missing was not
+an instrument but the discipline of comparing on that
+quantity.* **⭐ Their own summary, banked**: all three of
+their readings today — mast dominance, single-factoring, the
+stopping stage — **were the same error: a conclusion hung on
+a quantity that did not decide it.**
+**(b) IMPLEMENTATION @ 94a11dfce1**, +40 lines, one file —
+verified here: three print sites (**sole** = one candidate
+one vote, ordering-free, untruncated; **any** = blame-shaped,
+printed alongside so the difference is visible;
+**multiplicity** = parts rejecting one candidate, without
+which the sole row would speak for a column it cannot
+represent); the per-ARM snapshot `_asn, _asl` now sits
+**inside** `for t in _SOLVE_ORDER:` (the old both-arms
+snapshot is kept alongside, not rewritten); AST top-level
+statements 272, matching their claim. **⭐ Mechanism of the
+over-count identified by them from the source**: the mast
+test runs UNCONDITIONALLY, regardless of `hit`, so
+candidates already decided elsewhere still collect mast
+blame — **that is where "mast dominant" came from**.
+**(c) ⛔ THEIR OWN UNVERIFIED ITEM, disclosed**: the prints
+have never been executed — "written but not seen".
+**(d) THIS DESK'S ORDERING RULING** (they asked; the
+question is ordering, not authorization): **run the print
+check FIRST, and it does not need Rs.** It falls in the
+class p4 has run freely all day — static solve probes
+(today's counts run, the depth audits, the repair control).
+Conditions: (i) it is an INSTRUMENT CHECK, not a
+measurement — its numbers enter no table and no comparison,
+and it is banked labelled as such; (ii) run it at a
+deliberately small tries setting so its numbers cannot be
+mistaken for a result; (iii) the −0.200 measurement run
+remains Rs's call, unchanged. Rationale: an authorized
+measurement must not be an instrument's first outing — if
+the print fails, the authorized run yields nothing and has
+to be requested again; and "written but not seen" is exactly
+today's shape one level up (appearance is not working).
