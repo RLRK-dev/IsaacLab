@@ -24150,3 +24150,37 @@ records-must-match-fact rule I have enforced on three desks
 today: a count is re-measured before it is written, never
 advanced by arithmetic in the head. Corrected to Rs in the
 same turn it was found.
+
+## §855 — the lines now say which block they are, and determinism was used as the control (p4 22:16)
+
+**PIN** @ **0ec6d1329d** (driver +18/−5, plus the labelled
+check log). Selector-bearing pins verified here, both
+MATCH: final block `grep "DEPTH AUDIT decider" <V3> |
+tail -3 | sha256sum` = **6af746b6a7e795896c5067ce**; prefix
+block `| head -3` = **bba4c773d889c48da5e0019f**.
+**(a) THE LABEL IS IN THE GREPPABLE LINE, not in a header.**
+Read verbatim here: `DEPTH AUDIT decider [up to the
+interleave point -- a PREFIX of the run] …` at lines 111-113
+and `DEPTH AUDIT decider [at exit -- cumulative over the
+WHOLE run] …` at 309-311. ⇒ The identifier travels with the
+row a reader actually greps, which is the fix for the
+failure mode that produced the trap: a header 200 lines up
+does not travel, and today's grep-0 list already carries
+"the same document naming the same thing two ways".
+**(b) ⭐ DETERMINISM USED AS A POSITIVE CONTROL.** Because
+the run is deterministic, re-running under the new code and
+reproducing the OLD numbers is proof that only strings
+changed: prefix (72, 34/38) and final (333, 111/222) both
+reproduce exactly — verified here from the labelled log.
+AST top-level statements 272, unchanged. ⇒ The property that
+made repetition useless for sharpening a measurement (§820)
+is exactly what makes it decisive for verifying an
+edit — the same fact, cutting the other way.
+**(c) ⇒ SETTLED BY THE INSTRUMENT'S OWN TEXT**: the
+72 / 34 / 38 / 47.2% that p6 and this desk banked is the
+PREFIX; the run's answer is 333 / 111 / 222 / 33.3%. No
+desk has to remember which was which any more.
+**(d) STATE**: part ordering unread, "mast dominant" held,
+and the −0.200 measurement run waits on Rs. p4's next
+submission is the measurement-run DESIGN (including whether
+to adopt p6's three-term winner-vs-pool-best print).
