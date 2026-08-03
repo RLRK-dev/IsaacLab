@@ -22887,3 +22887,12 @@ mixtures, not conditions ⇒ BOTH keys required. B's spec is
 now COMPLETE (routed): §756 flags + REPAIR ON + restated
 question + within-cell-only + caveat grades + OWN attribution
 rate + direction + unmeasured notes.
+
+**[CORRECTION, own, 12:36]** §817(b) wrote ":2202 verified"
+— the same call's read showed a DIFFERENT line there (the
+driver moved again). Seventh write-before-read instance. The
+STRUCTURAL fact (the three-round loop) is true and was
+verified in the §727 era; the current line is re-located by
+the grep above this note. Rule reinforced once more:
+moving-surface citations are STRUCTURE-anchored, and "verified"
+is written only after the check returns — in a later call.
