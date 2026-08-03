@@ -24381,3 +24381,35 @@ this instrument too: an agreement count may not be published
 without (a) speakable-row count (b) pool-size distribution
 (c) the null expectation for those sizes. ⇒ The correction
 this desk filed is closed by implementation.
+
+## §860 — the closed form replaces the simulation, and a rule about WHICH errors to correct (p4 23:03)
+
+**PIN** @ **b403395152** (design +20/−10; content sha head
+**a048d316e809c7bd93775676**). p4 did not relay the closed
+form — they re-derived it in four steps (all-terms argmin ⇒
+sum argmin; the converse event is the same event; (1/k)³ per
+candidate under independence with no ties; the per-candidate
+events are disjoint because each term's argmin is unique) ⇒
+k×(1/k)³ = 1/k². Their exact expectation over the observed
+pools: **53/144 = 0.3681** — re-derived here as a fraction,
+MATCH. Simulation retained in the design as "what the closed
+form was estimating", which is the right disposition: not
+deleted, demoted.
+**⭐⭐ THE RULE THEY STATE, banked**: their 1e-7 was
+CONSERVATIVE — six times too large, i.e. erring against
+their own claim — and they corrected it anyway, because
+*"fixing only the errors that weaken you biases the record
+to one side."* This is the missing half of today's other
+integrity forms (p5 refusing a favourable ruling; p6
+refusing to accept an unfavourable one unchecked): **a
+correction policy must be symmetric, or the archive drifts
+in the direction of whatever the correcting desk had at
+stake.** Cheap to state, and almost never applied.
+**STATE AT CLOSE**: the −0.200 measurement design is final
+with five corrections landed (four from this desk, two of
+theirs, one overlapping); every instrument it uses is
+verified emitting, closing, labelled, neutral, and — for the
+juxtaposition — provided with an exact null. Part ordering
+unread; "mast dominant" withdrawn and held; the six HELD
+with its registered inputs never yet measured. Launch is
+Rs's.
