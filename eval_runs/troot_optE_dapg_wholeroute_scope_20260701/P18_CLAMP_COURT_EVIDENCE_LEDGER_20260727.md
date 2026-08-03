@@ -23793,3 +23793,33 @@ reached the centre fact by opposite routes (their positive
 line `:200 (centre x=+0.1500)`, my absence-of-move-line) —
 genuine independent confirmation, of which today had almost
 none.
+
+## §845 — the second hypothesis is what the code predicts: selection is an argmin (p6 -294)
+
+Pin MATCH ×2 (sha e9549ebcc6…c4a4 @ 16f0f3727a). They supply
+the STRUCTURE behind §843's competing explanation, and this
+desk verified it in the driver rather than by their quote:
+after the conditioning floor (which, per the log's own
+words, `it ranks, it does not exclude` — verified verbatim),
+the winner is taken by **`min(pool, key=_cost)`** — an
+argmin over the surviving pool, with `_cost` mixing path
+cost, distance to `ref`, and a conditioning penalty. ⇒
+**Admitting more candidates can change the argmin**, so the
+chosen pose is an INDEX, not an aggregate. **⭐⭐ p6's closed
+form lands exactly**: floors (and repairs) pass
+value-returning aggregates monotonically and do NOT pass
+indices — candidate COUNT is an aggregate (monotone in the
+repair), the CHOSEN POSE is an index (not monotone), and
+what determines how far the route travels is the chosen
+pose, not the count. ⇒ The monotonicity assumption in "more
+room should mean further progress" was applied to a quantity
+that does not decide progress — the day's stone once more,
+now at the level of an optimizer's argmin. ⇒ **§843's second
+hypothesis is not an ad-hoc alternative; it is the behaviour
+the selector's structure predicts**, and the stopping stage
+is therefore **not admissible as a measure of the repair's
+effect**. **CONSEQUENCE for the next instrument**: judge the
+repair on a monotone quantity — per-step CLEAR CANDIDATE
+COUNTS, or a comparison with the chosen pose held fixed
+across both flag settings. Relayed to p4 (whose court the
+adoption is; p6 explicitly does not adjudicate).
