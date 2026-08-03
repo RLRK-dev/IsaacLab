@@ -21630,3 +21630,54 @@ co-failure is invisible; the only test with an EXTERNAL
 reference frame is floor 1 (centres and radii) ⇒ the
 retention rationale generalizes beyond the fifteen, under
 the stated visibility limit.
+
+## §767 — the fix eats its own detector, and the dirtiest channel owns the exact reference (p5 -274, bank #110)
+
+**Inbound**: p5 -274 (11:05:57 JST). **(a) ⭐⭐ The
+consumption**: the §83-3 two-direction detector (|dv| vs
+|fromto|) goes EMPTY at the fix — post-repair the value IS
+fromto-derived, so the comparison degenerates to "the new
+value vs what it replaced" ⇒ **the instrument that measured
+the contamination is consumed by the cure**; floor 2 empty
+post-fix, floor 1 tight-pairs-only ⇒ no strong independent
+check without a THIRD quantity. **(b) The two references
+that bypass mj_geomDistance**: ① d.contact (bidirectional on
+sign; collision-enabled pairs only — mast excluded by
+contype=0); ② ⭐⭐ jaw_gaps is ALL box×box (xml :47/:96
+verbatim, both re-verified) ⇒ an ANALYTIC independent
+reference is available — p5 claims "independent" only,
+flagging OBB-exactness as mathematics, not their
+measurement. **(c) ⭐⭐⭐ The closure: the DIRTIEST channel is
+the one that CAN carry an exact external reference** —
+jaw_gaps: highest rate, box×box, and the bearer of today's
+dominant-signature +0.00 ⇒ validating the repaired jaw
+values against the analytic box-box distance EXITS the
+circle of measuring the replacement with the replaced.
+Validator NAMED by p5; execution/order routed to p4 as a
+recommendation on the repair reading (sample the printed
+GRASP pairs; no restart implied). **(d)** Neither validator
+reaches the mast (mesh×cylinder, contype=0) ⇒ the mast stays
+instrument-only after the fix — §83-7(e)'s conclusion by a
+second route. **(e) Bank #110 EXECUTED @ 6f835642d1 (front
+door)**: sha 8c0c2e0758…1f53 MATCH, +37/−0 declared and
+measured, committed = declared ✓.
+
+## §768 — a stopped comparison can be restated (p6 -262)
+
+**Inbound**: p6 -262 (11:06 JST). Register pin MATCH ×2 (sha
+e5c61f677a…c06e @ 20f82d7f99). p5's taxonomy collated
+against the sheet in the flesh (6/6 consistent); "witnessed
+choice" checked and NOT flagged — the next two sentences
+define it in place (the coined-term rule applied by reading
+the object first). **(a) ⭐⭐ The return (p5's court)**: halt
+≠ discard — at least one halted row survives RESTATED AS
+EXISTENCE: +50.6 halts as an ARGMAX (comparison) but the
+NUMBER lives as a FLOOR — the contamination direction
+(28,572/28,632 over-rejection; scalar ≤ truth) makes the
+measured minimum an understatement ⇒ **"the margin here is
+AT LEAST 50.6 mm" stands (modulo the 60-in-10M leak).**
+"Best" falls; "SUFFICIENT" remains — if Rs needs margin
+adequacy rather than ranking, the row still answers. The
+calibrate-retraction stone, today applied ACROSS desks to
+another's halt; suggestion routed: one existence-restatement
+line per halted row.
