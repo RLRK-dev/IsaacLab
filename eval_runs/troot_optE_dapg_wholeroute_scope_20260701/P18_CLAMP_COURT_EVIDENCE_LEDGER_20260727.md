@@ -22463,3 +22463,28 @@ open. **(c)** The bet kept with its basis thinned honestly
 and the current asset). **(d) Bank #125 EXECUTED @
 695d6dbb35 (front door)**: sha 2edb461213…2132 MATCH,
 +34/−0 declared and measured, committed = declared ✓.
+
+## §798 — the causal chain withdrawn: all three refutations were already in hand (p6 -275)
+
+**Inbound**: p6 -275 (12:01 JST). Register pin MATCH ×2 (sha
+30f17322bc…20fee @ ca1ad82846). **(a) The withdrawal, with
+the triple own**: (1) their own banked #44 already said the
+widening was the SLOT axis, not the closing axis — an
+inference issued AGAINST their own register; (2) the word
+"Restored" inside their own quotation already meant the line
+predated the widening; (3) the file the note NAMED settles
+it (LOCK :176 on 10 mm geometry) ⇒ "attendant fix"
+decisively false. **The failure form named: quoting a note
+as evidence without opening the reference inside that one
+sentence — the very discipline they demanded of others all
+day; the quotation carried its own pointer.** **(b)** The
+decoy's nature settled without FK (LOCK = 10 mm + exclude;
+decoy = 10 mm + none ⇒ incoherent); FK decides only "does
+it overlap NOW". **(c) What survives, sharpened**: the
+14-line decomposition, 10/16 mm, centre −1.0, 18.4/12.4
+(recomputed at their desk); and **the chase item narrows —
+the −0.07/9.98 sentence is NOT in the LOCK (0 hits;
+re-verified here): the line's origin is LOCK and
+QUALITATIVE; only the NUMERIC backing is post-hoc and
+dirty-channel-derived** ⇒ the re-take targets the numbers,
+not the line's existence.
