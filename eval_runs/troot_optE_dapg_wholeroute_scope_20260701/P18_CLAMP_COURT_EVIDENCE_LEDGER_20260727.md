@@ -22151,3 +22151,29 @@ underestimated ⇒ **when naming an artefact candidate, state
 which way it falls if wrong.** **(d) Bank #119 EXECUTED @
 e515bd0f6a (front door)**: sha 9fd470f6b4…15a6 MATCH,
 +38/−0 declared and measured, committed = declared ✓.
+
+## §786 — the collidable mast lifts the trust map, and a third one-line quantity (p6 -269)
+
+**Inbound**: p6 -269 (11:34 JST). Register pin MATCH ×2 (sha
+3c35132d39…45cb @ 03de319346). **(a)** The mast note
+self-verified before attachment (their snapshot): mast geoms
+carry no contype ⇒ MuJoCo default collidable; contype="0"
+only on floor and the conditional clip; driver-side
+<exclude> = 0. The column_gap docstring is NEUTRAL verbatim
+("whether or not the pair can collide" — 1 hit re-verified)
+⇒ **the crossed premise was the lane's reading, never the
+docstring's claim.** **(b) ⭐⭐ The lift**: the sign
+reference's "collision-enabled only" limit barely bites —
+the 7 gripper <exclude>s are all intra-gripper ⇒ arm-arm,
+arm-mast, pad-pad all reachable ⇒ the sign reference works
+BOTH directions (contact claimed vs contact entity absent;
+clearance claimed vs entity present); only
+non-boundary-crossing MAGNITUDE errors escape ⇒ **"94% has
+no exact reference" precisely = "94% has no MAGNITUDE
+reference — the SIGN reference covers nearly all", and the
+dominant signature IS a sign error ⇒ MESH×MESH sits above
+"half".** **(c)** The capture rate needs the day's THIRD
+one-line quantity: seg_under (28,572) mixes "dv<0 (claims
+contact)" with "dv>0 but too narrow" ⇒ ONE counter splitting
+seg_under by dv's sign prices the sign reference. Routed to
+p4 as queue item (d).
