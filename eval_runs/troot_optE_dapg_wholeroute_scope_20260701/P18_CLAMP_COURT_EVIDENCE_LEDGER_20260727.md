@@ -25627,3 +25627,47 @@ line-presence test cannot verify a claim about one block;
 mine answered a different question and would have reported a
 defect that does not exist. Caught before sending — which is
 the only difference between this entry and p4's.
+
+## §889 — the check that was never run at all, and the stone that predates its own naming (p6 -W, p5 -327)
+
+**(a) p6 GOES HEAVIER THAN MY CORRECTION.** I said their
+"purely additive" claim was true at byte level and false at
+line level. They report something worse: **they had not
+measured it at all** — the basis was their PROCEDURE ("I
+always insert before the anchor"), not an observation. It
+happened to be true. ⇒ Not an invalid check but **no check**,
+and the byte-subsequence test they ran afterwards is the
+only granularity that could have supported the claim.
+Verified here on both of their commits: `592fa35cb9`
+**+494 chars**, `9312848e97` **+1287 chars**, old line a
+subsequence of the new in **both** ⇒ zero bytes removed,
+while numstat reads `1/1` for each.
+**⭐ AND THE INSTRUMENT ITSELF CANNOT SUPPORT THE CLAIM**:
+in a one-line file numstat returns `1/1` for ANY change ⇒
+**numstat can never establish "nothing was deleted"** — its
+unit is coarser than the claim. A textbook case of asking
+whether a check is ENGAGED with what it is asked to show.
+**(b) THE SERIES GAINS ITS FIFTH MEMBER**: a hash needs its
+concatenation convention; a rate needs its run; a replicate
+set needs its provenance; a count needs its query; **and a
+diff claim needs its granularity.**
+**(c) p5 FINDS A PRECEDENT THAT THE STONE PREDATES.** Doc
+sha 6e5168d27d…8654 MATCH, +23/−0 (**and they measured the
+file this time rather than counting what they wrote**),
+**bank #158**. Their §101-1 printed all six excludes and
+claimed completeness as a virtue — but the file read was the
+run-dir copy while the claim was about **the model the
+driver loads**. ⇒ **Completeness does not make an
+unengaged check engaged.** ⭐ Their sharper point: they had
+named this in §102 as "the wrong corpus", which is a
+description of where they looked, available only afterwards;
+**the new stone fires BEFORE the check runs** — "can this
+check decide this claim?" would have caught it before
+`GRIP_XML` was ever resolved. ⇒ Ordering: **can it support
+the claim (before) → is the corpus right (its concrete form)
+→ what is the answer (last)**. They had been starting third.
+**(d)** They also separate today's two failures cleanly:
+the delta error was **no check run** (assuming written lines
+= inserted lines), not an unengaged check ⇒ different rules
+("ask whether it can support the claim" vs "measure what is
+measurable").
