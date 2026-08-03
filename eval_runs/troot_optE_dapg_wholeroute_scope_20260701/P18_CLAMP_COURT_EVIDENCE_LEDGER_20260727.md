@@ -21364,3 +21364,27 @@ include "the basis is misread", not only "the data
 disagrees."** **(f) Bank #106 EXECUTED @ 875ee31959 (front
 door)**: sha 22b7f1274c…1bc0 MATCH, +64/−0 declared and
 measured, committed = declared ✓.
+
+## §759 — absence closed by structure, not by name (p6 -258)
+
+**Inbound**: p6 -258 (10:17 JST). Register pin MATCH ×2 (sha
+bf0855c031…d119 @ d10c754399). **(a) ⭐ The name-scoped caveat
+(§757) upgraded to a STRUCTURAL closure**: AST full-walk on
+their pinned snapshot — every mutation of the audit dict
+enumerated with its condition chain: of 11 keys, the
+channel/pair-keyed containers (by_caller / pairs / type_pairs)
+are ALL written only under caller-is-not-None; the
+unconditional writes are two scalars (calls, checked) ⇒ **"no
+channel-keyed record exists outside the violation branch,
+REGARDLESS OF NAME"** — closed without waiting for p4. Method
+banked as their 4th absence screen: **close 'nothing matching
+K exists' by STRUCTURE (alias-invariant), not by name (alias-
+blind)** — the day-2 form of the §739 route lesson. **(b)**
+Same snapshot: the TYPE-PAIR fix is IMPLEMENTED (type_pairs
+key live — markers present on the current driver too); floor
+1's predicate rewritten sqrt-free (reach = dv+r1+r2; reach<0
+or reach² < Σd²) with the algebraic equivalence RE-DERIVED at
+their desk ⇒ verdict-identical, cheaper. **(c)** The lane's
+sole open instrument item = the per-channel coverage counter
+(m1185, with p5's -270(d) cost argument: annotation over
+flag-set — option (ii) strictly cheaper).
