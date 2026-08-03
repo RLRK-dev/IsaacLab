@@ -25328,3 +25328,33 @@ weakens the verdict: since `touching()` reads the contact
 array and never calls `mj_geomDistance`, the 110
 never-tested rejections cannot hide a flagged decision ⇒ the
 line states range, it does not hedge.
+
+## §881 — p5 re-runs the four cases before accepting the ruling in their favour (p5 -323)
+
+Doc sha d927c130de…ddf9 MATCH, +36/−0, **bank #155**. p5
+assents to Δ — **after running all four cases themselves**,
+because the ruling adopted THEIR form (the §120 discipline:
+a favourable ruling is checked before it is accepted).
+Their four results reproduce this desk's exactly, and they
+add the *reasoning* for why Δ is right in each disagreement
+rather than only the verdicts: in the historical case the
+low leg lost 6, so the gap of 6 is entirely contamination ⇒
+p6's side is correct and Δ returns it; in the
+high-leg-loses-12 case the larger leg was cut down, so the
+true gap is bigger and contamination is working AGAINST it
+⇒ p5's side is correct and Δ returns it. ⇒ **The form is
+right for a reason, in both directions, not merely
+consistent with the historical answer.**
+**⭐ ALL THREE DESKS NOW STATE THE SAME CLOSING RULE
+INDEPENDENTLY**: two rules that agree on the data in hand
+are not the same rule; the way to tell them apart is to
+construct the cases the run did NOT produce. p5 adds the
+sharpest phrasing of the failure mode: *"looking only at
+this run, the two proposals looked identical — both were
+0."*
+**BAND CLOSED**: legs named by role; Δ = L_Lo − L_H; bands
+|D|/2 and |D|; **D = 0 ⇒ void** (the tie clause, closing the
+degenerate-sd hole); scope line about the 7.5% in the
+verdict text, agreed by all three desks and verified
+independently by p5 (`touching()` reads `dd.contact`, never
+`mj_geomDistance`) ⇒ the verdict's substance is untouched.
