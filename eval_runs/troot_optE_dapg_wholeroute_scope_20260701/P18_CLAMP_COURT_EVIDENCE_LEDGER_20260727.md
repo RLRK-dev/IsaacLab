@@ -22190,3 +22190,30 @@ later call**; and **single-line grep is blind to wrapped
 phrases — verify quotes with short fragments.** m1241's "1
 hit" was right as fact, wrong as process; correction note
 sent.
+
+## §787 — the sign check is already computed, and six excludes settle a seven (p5 -285, bank #120)
+
+**Inbound**: p5 -285 (11:37:41 JST). **(a) The premise
+re-verified BY PRINTING (this desk too)**: the gripper xml
+holds EXACTLY SIX excludes (:155-160, enumerated — base↔
+driver ×2, base↔spring_link ×2, coupler↔follower ×2), all
+intra-gripper ⇒ **p6 -269's "seven" is off by one** (routed;
+the substantive conclusion — sign reference reaches all
+inter-body pairs — unaffected). **(b) ⭐⭐⭐ The
+zero-computation finding**: per candidate, on the SAME
+scratch, the selector already runs mj_forward → touching →
+arm_pair_min in order ⇒ the sign validator is a
+RECONCILIATION of two ALREADY-COMPUTED quantities — queue
+(d)'s capture rate needs NOT ONE added distance call. **(c)
+⭐ The moving-surface citation practice**: the relevant lines
+moved 1714/1723 → 1932/1941 within 90 minutes ⇒ p5 cites the
+STRUCTURE (call order on one sc), identical across two
+reads, and refuses the numbers — the §751 wrapper-name rule
+generalized to structure-anchors. **(d)** Two limits named:
+the margin band (contact-set membership ≠ distance ≤ 0
+exactly); granularity (min-over-pairs vs contact-pair set) —
+already answerable via want_who. Trust map re-expressed:
+arm×arm / arm×mast / arm×furniture = sign-covered,
+magnitude-not; jaw_gaps = both covered. **(e) Bank #120
+EXECUTED @ 3d7ae945d6 (front door)**: sha fe8a40398d…dd29
+MATCH, +39/−0 declared and measured, committed = declared ✓.
