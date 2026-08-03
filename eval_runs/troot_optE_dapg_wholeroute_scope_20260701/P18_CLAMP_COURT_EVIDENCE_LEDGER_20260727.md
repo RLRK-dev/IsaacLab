@@ -20971,3 +20971,49 @@ bottleneck** — inference still, support one step stronger.
 **(e) Bank #101 EXECUTED @ 844ee131ea (front door)**: sha
 ac758d331e…b5d8 MATCH, +35/−0 append-only, committed =
 declared ✓.
+
+## §748 — the instrument contradicts itself, and the sequencing ruling: A → B → C (p4 2026-08-03 consultation, Rs-instructed)
+
+**Inbound**: p4 sequencing request (09:38:36 JST, new-day
+format). **(a) Verified**: note sha d794cd059a…cb6c and run log
+sha cb265c3aec…f939, both @ 65b38e2eb1, MATCH ×2. Log :390
+latch verbatim — **mj_geomDistance returned −62.3 mm between
+geoms 27/64 whose bounding spheres total 44.0 mm; the same
+call's fromto segment is 69.2 mm; centres 84.8 mm apart** —
+arithmetic re-derived: minimum possible distance 84.8−44.0 =
++40.8 ⇒ −62.3 is geometrically impossible; the scalar is wrong,
+the segment right, the pair untouching. :412/:435 show the
+corrupt class in live use (−62.3 at STEP 4; −47.6 at STEP 5 —
+the once-per-run latch means rate UNMEASURED, n≥1 only). §5
+basis solid (env propagation to children; reuse_after has 0
+call sites — no silent table reuse). Independent corroboration
+EXISTS on disk: the morning env7-upgrade L3 panel (ROLLED BACK;
+pip freezes + L3_PANEL_DECIDE.md; substrate lens measured the
+mechanism; :44 "collision-free exercises mj_geomDistance"; :154
+routes a mujoco-version premise question toward Rs). **(b)
+Withdrawal recorded as supersession**: p4's −171.4 mm figure
+(this ledger :12095's historical row, R_forearm-vs-stem
+path-penetration) is WITHDRAWN by its author — suspended with
+the whole along-the-move arm-to-arm class, both directions.
+**(c) THE RULING (this desk, as the Rs-instructed consultee):
+A → B → C.** Reasons: (1) the lane's own settled principle —
+§736c "designing on a suspect instrument makes the design
+suspect"; B's PASS/fail column is decided by exactly the
+suspect channel; (2) A is one run and PRICES everything after
+it — the conservative ledger's cheapest purchase; (3) the
+counter-argument fails on routing facts: the mounting court is
+NOT blocked on the crown table (Rs's ③ decision already waits
+on the instrument story per the standing reports), and a table
+born suspended adds no decision value; (4) A's widened latch is
+the day's absence-③ remedy (print what is computed). **Two
+conditions attached**: A should latch at EVERY arm_pair_min
+call site (pose AND along-the-move) so the rate covers both
+classes — p4's court to accept; B is GATED on A's outcome
+(bounded/localizable rate ⇒ B with documented exclusion; broad
+corruption ⇒ fix first, and the mujoco-version question routes
+to Rs). C last (cost unknown, instrument-mediated). **(d)
+Interim reading direction, sent to all desks**: the corrupt
+class produces IMPOSSIBLE PENETRATIONS = false negatives =
+over-rejection ⇒ **existing positives are FLOORS** (yesterday's
+L 36 / R 8 survives as a floor; the zeros were already
+dissolved by unwrap); nothing adopted flips.
