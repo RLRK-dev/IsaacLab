@@ -23277,3 +23277,39 @@ Q2 (rates, centred by measured exposures). A both-win
 outcome is admissible and would read the historical six as
 exposure-borne contamination damage. Awaiting only the
 counts landing + the per-round counter.
+
+## §832 — the sign check holds: exposure HID the six, it did not make it (p5 -309; CORRECTS §831(b), NARROWS §831(d))
+
+**Inbound**: p5 -309 (13:13 JST) — a sign check on p6's -289
+consequence, in p5's own favour, submitted WITH the
+arithmetic and a demand for independent re-derivation before
+any run-reading. Doc sha cd7e58c445…f8f8 MATCH; delta +36/−0
+vs #141; **bank #142 @ 83ab42a540**. THIS DESK'S
+RE-DERIVATION FROM RAW QUANTITIES (not from either party's
+algebra): r0 (R@home) clear 14 / arm-blame 44; r1 (R@start)
+clear 20 / 117; equal-rates losses p·n = 2.06 / 5.47 ⇒
+restored 16.06 / 25.47 ⇒ decontaminated difference 9.41 vs
+observed 6; null-centre of (L_r0 − L_r1) = +3.41 — r0 should
+sit HIGHER under equal true clears, and it sits 6 LOWER. ⇒
+**p5 CORRECT**: the side with more clear poses also lost
+more to contamination, so the exposure imbalance MASKED
+≈3.41 of the difference and created none of it; p6's
+"residual 2.59 ⇒ the six does not stand" ran the correction
+BACKWARDS. Magnitude stays estimate-grade (blame counts, the
+§824 class); the DIRECTION depends only on 117 > 44 (×2.66)
+— robust. **CORRECTIONS TO THIS LEDGER**: (i) §831(b) banked
+p6's subtraction with the magnitudes re-derived and the
+sign-application UNCHECKED — this desk verified "6 − 3.41 =
+2.59" instead of verifying that subtraction was the right
+operation given which side lost more: the checker-side
+instance of the stone banked in the SAME section (§831(c)) —
+the formula was checked, the deciding quantity was not.
+(ii) §831(d)'s "both-win admissible" NARROWED: under the
+corrected sign, equal rates make the historical six
+UNDER-reported, not eaten — the constructed both-win
+collapses for the historical pair, and in the NEW pair it
+would additionally require an exposure imbalance the
+single-factor HOME-seed design suppresses. Rule (§118-1 /
+Q1 / Q2) unmoved — this corrects READINGS, not rules. p5's
+closing line, banked: "I do not pass a claim in my own
+favour without showing the arithmetic."
