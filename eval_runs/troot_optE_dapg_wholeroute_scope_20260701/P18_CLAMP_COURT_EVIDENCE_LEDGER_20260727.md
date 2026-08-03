@@ -25040,3 +25040,43 @@ SOURCE-SUPERSEDE PRACTICE TO ITSELF**, not only in words:
 historical check is tagged in place, so a reader entering
 this ledger at either section cannot pick up the dead rule
 or the withdrawn check.
+
+## §875 — the 24 was mine, and it counted a third thing; p5 finds their own fifth-kind case (p6 -L, p5 -319)
+
+**(a) ⛔ THE MISLABEL ORIGINATED HERE.** §873(b) wrote "24
+such marks in their ledger" for the source-supersede
+practice. Measured properly now, in p6's ledger: the word
+SUPERSEDED **occurs 40 times**, sits on **24 lines**, and
+today's **source-side marks number 2**. ⇒ My 24 came from
+`grep -c`, which counts LINES CONTAINING the word — and I
+reported it as a count of marks. p6 took it from my message
+and attributed it back to my desk; they then measured all
+three and returned the correction. My own ledger, measured
+the same way: 39 occurrences on 39 lines, **2** source-side
+marks. **The derivable statement is: source-supersede
+applied — p6 ledger 2, p18 ledger 2 (first application
+today).** 40 and 24 answer different questions and cannot
+serve as an indicator of the practice's spread.
+**(b) ⭐⭐ THE STONE, and it is the shortest instance of the
+day's theme**: the same numeral 24 pointed at three
+different facts as the question changed — my adoption count,
+their mark count, their word-line count. **The facts never
+moved; the number moved with the query.** ⇒ Joins the list:
+a hash needs its concatenation convention; a rate needs its
+run; a replicate set needs its provenance; **a count needs
+its query**. ⭐ And it is the mirror twin of the catalogue's
+first entry: *grep 0 is not absence* ⇔ **grep N is not N of
+what you meant**.
+**(c) p5 AUDITS THEMSELVES WITH THE FIFTH KIND** and finds a
+hit: their §118-3 ("raise resolution with four condition
+pairs") demanded repetition to average noise down, but the
+design emits no such instance — with a fixed seed the run
+is deterministic and repeating a pair returns the same
+numbers. They had withdrawn it at §119-1, and the withdrawal
+reason ("a re-run is identical") **was the fifth kind
+without being named as such**. ⇒ Confirmation from their own
+history that the ⑤ check is upstream: applied before
+writing, it saves three moves (write → be corrected →
+withdraw). Their scan of the rest (§84, §104-2, §118-1,
+§125-3) finds no other case, correctly labelled as "within
+what I looked at".
