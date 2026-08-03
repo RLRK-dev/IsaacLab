@@ -24249,3 +24249,49 @@ authorising that this run can confirm one side and is
 nearly unable to confirm the other. That is not a reason to
 withhold it — it is the pre-registered statement of what it
 can settle.
+
+## §857 — the driver is neutral (measured), every flagged call was the RIGHT arm, and my own power projection inherited the same defect (p4 22:33)
+
+**PIN** @ **ac5e92271e**, `DRIVER_NEUTRALITY_CHECK_20260803.txt`.
+**(a) CORRECTION 2 CLOSED BY MEASUREMENT.** Current driver
+(decider counter + per-arm snapshot + labels), default centre,
+counts-run flags ⇒ the four reference values reproduce
+EXACTLY: ROUND0 112/2, ROUND1 114/1, ROUND2 114/1,
+L-vs-FINAL-R 24/0 (all read here from the artifact). ⇒ The
+three changes move nothing the run decides; **"one factor
+moved" is now measured, not argued.**
+**(b) ⭐⭐ WHAT THE SPLIT REVEALED: every flagged call was
+the RIGHT arm.** Per-arm rows read here and re-added:
+round 0 L 21/0 + R 91/2; round 1 L 24/0 + R 90/1; round 2
+L 24/0 + R 90/1 ⇒ **left 0/69 = 0.00%**, right 4/271 =
+1.48%; per-round totals 112/114/114 with flagged 2/1/1,
+matching the un-split rows exactly. ⇒ In the run every
+argument of the past nine hours stood on, **not one
+contamination-decided candidate belonged to the left arm** —
+and the registered pair is left-arm on BOTH sides.
+**(c) ⛔ MY §856(3) INHERITED THE SAME DEFECT — corrected
+here.** My power projection used p = 2/112 = 1.79%, which
+p4 has now shown is 100% right-arm; the matched-population
+rate for a left-only pair is **0/69 = 0%**, with a
+rule-of-three upper bound of 3/69 = **4.35%**. Even AT the
+upper bound with n_A = n_B = 24: E[ΔL] = 0.00, sd = 1.44 ⇒
+**6 sits 4.15 sd away** (re-derived here, MATCH), further
+than the 2.7-3.1 sd I reported. ⇒ p4's number supersedes
+mine, and my error is the same family they name as their
+fourth of the day: **a rate borrowed across the very
+boundary the question is about.** I flagged that rates carry
+their run and their population, then borrowed one across
+arms in the correction that was meant to protect the run.
+**(d) SCOPE, HELD BY p4 AND ENDORSED HERE**: this is the
+DEFAULT centre and an instrument-check authorisation; the
+per-arm numbers only decompose an already-banked
+measurement. No verdict is taken from it, "mast dominant"
+stays withdrawn, part ordering stays unread. **(e) WHAT IT
+MEANS FOR THE PENDING RUN, stated as a prior and not a
+result**: if the left-arm flagged rate at −0.200 resembles
+the 0/69 measured at the default centre, the registered
+question is answerable in one direction only — the six could
+not be a contamination artifact — which is p5's side, and it
+would be settled on measured left-only data rather than on a
+band. Rs should have that in front of them with the
+authorisation request.
