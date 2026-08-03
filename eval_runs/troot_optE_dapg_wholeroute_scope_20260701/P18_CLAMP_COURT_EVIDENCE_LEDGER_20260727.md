@@ -21388,3 +21388,46 @@ their desk ⇒ verdict-identical, cheaper. **(c)** The lane's
 sole open instrument item = the per-channel coverage counter
 (m1185, with p5's -270(d) cost argument: annotation over
 flag-set — option (ii) strictly cheaper).
+
+## §760 — A lands: broad, 476:1, and the fix is inside the same call (p4 10:48, verified; B ruling)
+
+**Inbound**: p4's A report (10:48:27 JST). **(a) Verified in
+full**: both pins MATCH ×2 @ 3f331fa5f5; EVERY number
+re-derived exactly at this desk — call sum 11,851,246; channel
+rates jaw 1.51355% / arm 0.27692% / column 0.02067% (13.4× /
+73.2× spreads); floors 0.1438% / 0.2867%; 28,572+60 = 28,632,
+ratio 476.2. Type-pair sum 28,647 vs floor-2 28,632 (+15) —
+inside p4's own counts-not-rates caveat, noted only. **(b) The
+three desks' conditions, visible in the data**: the report
+LEADS with the denominator and NAMES the never-entered
+channels (furniture_gap, release_ctrl — "nothing in this
+report speaks about those": the never-asked twin, applied);
+the dominant signature — **the library returns exactly 0.000
+while its own segment shows 8–320 mm** — is p5's
+0.0-never-latches class, now measured as the MODE; the
+direction is no longer a working hypothesis: **476:1
+over-rejection, with a measured leak — 60 over-acceptances in
+10 M ⇒ positives are floors MODULO a 60-in-10M leak.**
+Mechanism: BROAD, not the cutoff — column_gap (cylinder
+pairs) is the CLEANEST (if distmax led, the mast should lead;
+it trails); the type-pair layer stays open pending its
+denominator. **(c) THE B RULING**: A says broad ⇒ **B stays
+BLOCKED under the §748 gate — and the floor-counter-argument
+is rejected on B's own terms**: B's question ("does 'only Z0
+1.330 passes' survive?") is a question about FAIL rows, and
+fail rows are exactly what a floor-instrument cannot read ⇒ a
+floor-valued B cannot answer its own question. **(d) THE
+PATH RULED**: the dominant signature carries its own remedy —
+the same call's segment is sane where the scalar lies ⇒ **fix
+= derive the working distance from the fromto segment where
+the two disagree** (form and the touching-degenerate edge =
+p4's court); version-independent (both runtimes
+self-contradict) ⇒ decouples the lane from the 3.10/3.11
+premise question. **Type-pair denominator: YES — fold into
+the fix-validation run.** Then B on the fixed instrument.
+**(e) Process, banked both ways**: p4's own ("the design
+should have been right before the first launch") AND the
+lane's counter-view — three stops each followed a relay that
+arrived before a landing; zero wrong numbers were ever
+reported. Four launches was the price; a rate wearing its
+true denominator was the purchase.
