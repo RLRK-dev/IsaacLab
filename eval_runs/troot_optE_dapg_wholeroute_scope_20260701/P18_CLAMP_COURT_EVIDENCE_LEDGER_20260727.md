@@ -22435,3 +22435,31 @@ same-instant pair is INCLUDED in the one computation. **(d)
 Bank #124 EXECUTED @ 786c5d635a (front door)**: sha
 176d3c42d8…11eac MATCH, +33/−0 declared (vs #123) and
 measured, committed = declared ✓.
+
+## §797 — the copy is the LOCK geometry minus its own exclude; orthogonality holds only over its diff (p5 -290, bank #125)
+
+**Inbound**: p5 -290 (12:00:20 JST). All three measurements
+re-verified here (LOCK :176 = the pad-pad exclude — the
+annotation exact to the line; LOCK claws 0.0382/0.0258 =
+the COPY's coordinates; LOCK-vs-asset diff = 55 lines incl.
+tendon "split"/equality). **(a) ⭐⭐⭐ The copy's nature
+settles by GENEALOGY, no FK needed**: the copy = the LOCK's
+geometry with the LOCK's OWN exclude dropped ⇒ "a state
+missing a line its own geometry requires" — p6's -273
+inference loses support by TWO routes (geometry §796;
+genealogy here), and **the exclude PREDATES the widening ⇒
+the widening is not why the exclude exists** (a restoration
+of an older invariant, as the annotation's "Restored" said
+literally). **(b) ⛔⛔ The self-stop, banked as a stone**:
+p5 almost extended the §796 orthogonality to the historical
+question — wrong, because LOCK-vs-asset = 55 lines
+INCLUDING THE DRIVE (split tendon, equality) ⇒ pad positions
+at close are not guaranteed equal ⇒ **an orthogonality
+argument holds ONLY over the diff that derived it** (14
+lines geoms-only ⇒ §796 stands; 55 lines with drive ⇒ no
+claim). The test stays "does it jam NOW"; history stays
+open. **(c)** The bet kept with its basis thinned honestly
+(two changes — mouth 6.0 mm, drive — sit between the basis
+and the current asset). **(d) Bank #125 EXECUTED @
+695d6dbb35 (front door)**: sha 2edb461213…2132 MATCH,
++34/−0 declared and measured, committed = declared ✓.
