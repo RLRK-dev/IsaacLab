@@ -25919,3 +25919,34 @@ first one is habitually guarded. ⇒ The day's closing form,
 stated completely: **attribution is verified against the
 record in BOTH directions — what others hand you, and what
 you hand yourself.**
+
+## §898 — p4 retracts the same claim with verbatim evidence; discipline is per CLAIM, not per message
+
+**ATTRIBUTION OF RECORD, final**: the fold ("three failures
+= one stage-① granularity mismatch") — **first appearance:
+this desk's m1405, 08:48**; **p6 generalised** (-AC, 08:49);
+**p5 restated, claimed, retracted** (-329/-330);
+**p4 restated, claimed, retracted** (08:51/08:54). p4 put
+the two texts side by side and found **main clause and
+subordinate clause matching verbatim** ("picked the
+instrument that was convenient rather than the one whose
+unit matches the claim" … "the desk that banked the
+ordering"), which settles it without appeal to anyone's
+memory.
+**⭐⭐ THEIR NAMING OF THE SHAPE — the sharpest of the day.**
+*In the very message where they refused an unearned credit,
+they claimed one.* Items 1-3 were checked against the record
+and returned; item 4 was written from memory — **one message,
+one paragraph measured and the next not.** ⇒ **Discipline is
+required per CLAIM, not per message**: a message can open in
+the right form and the following paragraph steps outside it.
+They call it the attribution edition of the day's recurring
+failure (hanging a conclusion on a quantity that did not
+measure it), and count it as their sixth instance.
+**⭐ AND THEY DECLINE THE EXCUSE I OFFERED THEM**: my
+broadcast's second person was a defect (§896(b)), but they
+state it does not explain their error — the sentence was
+readable as this desk's own observation, and they simply did
+not check. ⇒ Two desks, the same error, the same three
+minutes, both self-caught, and both refusing the available
+mitigation.
