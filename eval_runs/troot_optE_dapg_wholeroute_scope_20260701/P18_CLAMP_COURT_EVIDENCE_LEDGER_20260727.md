@@ -23682,3 +23682,52 @@ verdict stands in either direction; the six is HELD; the
 required instrument is unchanged — per-round, per-ARM
 attribution at grasp centre −0.200. The registration remains
 open, which is where it was before the counts run.
+
+## §842 — the repair control is a NON-comparison, and p4 caught it before reading it (p4 21:31)
+
+**(a) §838's three grounds independently re-confirmed by
+p4** at their own files, and **their own doc's claim
+retracted**: `"Single-factoring, as required ... the
+opponent pose is the only remaining difference"` is FALSE —
+opponent pose AND population (both-arms vs L-only) differ ⇒
+two factors. Also retracted: the "4.7× imbalance" they had
+offered as a property of the data — it is an artifact of
+counting two different populations. They verified the
+snapshot's placement structurally (the line after
+`_snap_n, _snap_l = …` is `for t in _SOLVE_ORDER:`), the
+L-only ceiling 57 < 112, and that EXTRA_L_ROUND calls
+`solve_ik("L", …)` exactly once. Registered pair = READING B
+confirmed from header :4-5 on both desks.
+
+**(b) ⛔ THE CONTROL PROVES NOTHING — verified here.** The
+surface numbers look decisive: fallbacks **137 → 71**, aim-R
+fallbacks **61 → 0**. Closed queries on both logs (this
+desk, independent): `aim IK R` occurrences **OFF 122 / ON
+0** ⇒ **the repair-ON run never solved the right arm at
+all**; the zero is an ABSENCE OF SOLVES, not an absence of
+failures. `aim IK L` **OFF 91 / ON 130** ⇒ even the left
+arm's population differs. STEP mentions: OFF {2,3,4,5,6},
+ON {2} (p4 wrote OFF {1,3,4,5,6} / ON {1,2}; the sets differ
+only in how STEP 1 prints — the substance, that ON stopped
+early and OFF ran to 6, holds on both readings). Mechanism:
+changing the flag changes which poses are accepted ⇒ where
+the arms go ⇒ which paths are taken ⇒ **one run's number is
+not the other run's same quantity**. Banked as evidence of
+"attempt and trap", NOT as a result (their commit
+073282b98f, 288 lines, verified single-file).
+⇒ **The aim wall is neither confirmed nor cleared.** The
+mast-dominance question stays held, as does the six.
+
+**(c) ⭐ THE STANDING CONDITION they propose, adopted into
+this desk's reading discipline**: *take a comparison only on
+the matched part of two populations — reconcile reached
+steps and solve counts FIRST, and if they do not match,
+produce no number.* Today's 137 vs 71 exists only because
+that check was not run before the subtraction.
+**(d) THE DAY'S SHAPE, third layer**: the quantity that
+decides carries its basis (blame vs decider), its run
+(+0.150 vs −0.200), its population (both-arms vs L-only) —
+and now its **reachability** (a run that stopped earlier
+cannot be differenced against one that went further). Each
+layer was found by a different desk, and each was found by
+the desk whose own claim it destroyed.
