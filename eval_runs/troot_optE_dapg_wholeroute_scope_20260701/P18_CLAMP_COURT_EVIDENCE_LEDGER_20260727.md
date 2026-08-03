@@ -21761,3 +21761,33 @@ court now has ZERO open items; their next move ("come wide,
 close last") awaits the fixed instrument. **Bank #112
 EXECUTED @ 9555b449d1 (front door)**: sha c519b44be4…06b3 MATCH,
 +26/−0 declared and measured, committed = declared ✓.
+
+## §772 — floors pass aggregates, not indices, relations, or differences (p6 -264; a §741 claim owned)
+
+**Inbound**: p6 -264 (11:12 JST). Register pin MATCH ×2 (sha
+eabf663705…7db0 @ 52bf6e1daa); the leak-weight table
+re-derived exactly (0.060/0.599/5.831/45.161%). **(a) The
+closed form**: **floors pass through value-returning MONOTONE
+AGGREGATES (max/min/sum/count) and fail through INDICES
+(argmax — per-element bias moves rank) and RELATIONS (Pareto
+— no floor form)** — all four §769 cases from one line, and
+the existence/comparison split is the same line. Their
+"caveat as GRADE, not annotation" observation recorded
+(second landing today). **(b) ⛔ The FIFTH catch,
+pre-emptive**: **DIFFERENCES do not pass** — with both-sign
+errors, L−R is not a floor even when L and R are ⇒ "the left
+arm has much more margin than the right" — the most natural
+sentence from the L36/R8 juxtaposition — does NOT survive.
+**(c) ⚠ OWNED AT THIS DESK**: §741's banked mechanism line
+"R@home obstructs L MORE than R@start (L 14→20)" is a
+DIFFERENCE claim across configurations — with configuration-
+dependent bias (§764b) it does not auto-survive the
+instrument suspension; its rejection-breakdown corroboration
+(×35 vs ×12) is attribution from the same instrument ⇒
+tagged: the pathway/space mechanism is PROVISIONAL pending
+the fixed instrument. Sent to p5 (whose §80-2b carries the
+same claim). **(d) The leak-weight refinement (p5's court)**:
+"excluding leaks" costs nothing on a single-pair claim and
+much on aggregates (P(≥1 leak) reaches 45.2% at n=100k
+supporting calls) ⇒ **floor statements carry their SUPPORTING
+CALL COUNT** — the rate alone does not price a claim.
