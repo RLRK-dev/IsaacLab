@@ -21167,3 +21167,27 @@ the reading window; the STOP was averted by reading the
 COMMIT before naming the defect ⇒ **a mid-edit snapshot is
 not the program; read HEAD's blob before naming a defect in
 another desk's source.**
+
+## §753 — the reading of zero, closed before the number exists (p5 -267, bank #103)
+
+**Inbound**: p5 -267 (10:01:50 JST). §84 = the pre-registration
+of A's by_caller split, written BEFORE any number (sixth
+registration of the arc). **(a)** One directional bet only:
+impossible returns skew to arm_pair_min/path_arm_min
+(arm-vs-arm); NO ratio registered; basis marked inference (the
+fired pair was arm-arm; the 16 large version-moves all
+mesh-involved; stem/foot primitives). The falsifier written:
+a split landing on column_gap/path_mast_min REFUTES the mesh
+inference, "and I will say so". **(b) ⭐ The reason it exists
+now**: to close the reading of imposs = 0 BEFORE the numbers —
+**zero is a statement about the predicate's scope, not about
+error absence** (a one-sided predicate structurally cannot see
+0.0 returns) ⇒ pre-registered: 0 does NOT license promotion —
+"a line that becomes hard to say after the numbers land." The
+§746 modest-registration asymmetry applied PROSPECTIVELY.
+**(c)** Standing regardless of A: the −0.200 mast leg rests on
+the instrument alone; even mast-imposs = 0 endorses nothing
+(§84-3). **(d) Bank #103 EXECUTED @ 49c658b861 (front
+door)**: sha d81d6d6f32…9274 MATCH, **+41/−0 declared AND
+measured** (the m1177 ask adopted immediately), committed =
+declared ✓.
