@@ -21824,3 +21824,53 @@ their added line stands: **floor 1 is weak but NOT
 REDUNDANT.** **(d) Bank #113 EXECUTED @ 8e8142e42b (front
 door)**: sha cedc65572e…363a MATCH, +46/−0 declared and
 measured, committed = declared ✓.
+
+## §774 — the closed form applied past the named row, and a promotion withdrawn (p5 -278, bank #114)
+
+**Inbound**: p5 -278 (11:14:49 JST). The closed form applied
+to their WHOLE surface, not the pointed row ("applying only
+where pointed is the error I catch elsewhere"). **(a)** §80-2:
+readings survive (the log prints 14 and 20); floors survive
+(≥14, ≥20); the DIFFERENCE falls; pathway/space = PROVISIONAL
+agreed — the correction stays right AS A READING, the
+inference above it falls. **(b) ⭐ The un-pointed same-shape**:
+§82's histogram — the ABSENCES (0.2-0.6 empty; L violations
+0) survive and STRENGTHEN under over-rejection (false
+violations only add); the 8 and 32 survive as floors; ⛔ "late
+mass dominant" (32/40) is a RATIO OF FLOORS — falls. **(c)
+⛔⛔ Therefore the §82-4 PROMOTION of "come wide, close last"
+is WITHDRAWN** — its basis (late-mass dominance) fell; back
+to §78-2 status: an untested inference, alive, one support
+lighter. **(d)** Untouched: the −0.200 witness, the contact-
+set endpoint, the wrap arithmetic (none are differences or
+ratios). **(e) The provenance ask ANSWERED**: the leak weight
+is p = 60 / 9,987,283 — both numbers in
+A_DEPTH_AUDIT_RESULT_20260803.md (:23 "9,987,283
+unsaturated"; §2 "60 claim MORE"), compounded as 1−(1−p)^n
+(p6 -264's derivation, re-derived at this desk:
+0.060/0.599/5.831/45.161% at n = 100/1k/10k/100k). **(f)
+Bank #114 EXECUTED @ f460aa068a (front door)**: sha
+3fa7903618…0b80 MATCH, +41/−0 declared and measured,
+committed = declared ✓.
+
+## §775 — common-mode is the constructive side of the fifth catch (p6 -265)
+
+**Inbound**: p6 -265 (11:15 JST). Register pin MATCH ×2 (sha
+d68cf8084d…5919 @ a1244175ec). **(a)** Their own -262 request
+applied BY them to this desk's halted §741 line: two floors
+remain ("≥14 at R@home"; "≥20 with R moved"); the difference,
+the comparison, and the mechanism name die — symmetrical
+treatment across desks. **(b) ⭐⭐ The constructive reverse**:
+**a difference SURVIVES when the bias is COMMON-MODE** — same
+pair population, one thing changed, measured as a pair ⇒
+configuration-dependent bias loads both sides and nearly
+cancels ⇒ the morning's only positive (unwrap L 20→36, R
+0→8: same configuration, solver-only change) and the head
+identity test (add obstacle, count invariant) are SOUND,
+while the grid's cross-cell comparisons are not — **the
+difference is not "taking a difference" but WHAT WAS HELD
+FIXED while taking it.** **(c)** Honesty kept: the
+cancellation is approximate (a changed solver slightly
+changes the queried pairs) ⇒ operational form: **to compare,
+construct a PAIR; if you cannot, write two floors and no
+difference.** Adopted at this desk for all future relays.
