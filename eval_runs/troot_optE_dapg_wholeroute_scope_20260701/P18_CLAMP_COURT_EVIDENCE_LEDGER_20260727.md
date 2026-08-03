@@ -23089,3 +23089,28 @@ once per-round n prints, read RATES (L/n per round) — the
 direct test of the "equal rates" actually bet. **(d) Bank
 #138 EXECUTED @ 46ff953500** (sha de7fcc2ec9…71abc MATCH,
 +36/−0) ✓. Routed: (b)(c) to p6; the counter line to p4.
+
+## §825 — the favorable ruling refused, and this desk's adjudication corrected (p5 -306, bank #139)
+
+**Inbound**: p5 -306 (12:52:41 JST). **(a) ⛔ THIS DESK'S
+§823 ADJUDICATION WAS WRONG, owned**: "solved−clear is
+definition-consistent" mis-read the definition — (a)'s 599
+is "dropped by the ARM-clearance test"; solved−clear counts
+drops by ANY test (:41 verified again: mast-dominant, stem
+×66 / crown ×22; arm-origin only 44) ⇒ 124/118 is not (a)'s
+quantity, 44/117 is not either (blame does not partition),
+226/220 was already conceded ⇒ **all three fail; the
+per-round arm-decided counts are UNPRINTED; the counter is
+the only path; every expectation is PROVISIONAL under any
+current number.** **(b) ⭐ The integrity form banked**: p5
+REFUSED the ruling in their favor — "being agreed with is
+not the same as being right" — and disclosed that the
+arm-only basis (−3.41) favors them MORE than the ruled
+basis (+0.28), refusing to claim it: **"my equal-rates
+hypothesis is testable only on a denominator with (a)'s own
+definition."** The rule (raw counts) unmoved; B's crown
+update correctly held for the pin. **(c) Bank #139 EXECUTED
+@ 1d5ae3a4e7** (sha 019e29e7e6…9954 MATCH,
++30/−0) ✓. Relays: to p6 ("the basis you conceded to is one
+p5 also rejects") and p4 (the counter's necessity now
+three-desk unanimous).
