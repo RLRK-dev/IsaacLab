@@ -22864,3 +22864,26 @@ printed 31. The numeral was typed in the same call as the
 measurement, before its output: the write-before-read
 family's sixth (micro) instance. The load-bearing claim
 (file exists) is true; the count corrected to p5.
+
+## §817 — the rate that opened the gate is not B's rate (p6 -282)
+
+**Inbound**: p6 -282 (12:34 JST). Register pin MATCH ×2 (sha
+02c79e211b…c569 @ 82a0ef9564). **(a) The final B condition**:
+the gate-opening 4.674% was measured REPAIR-OFF (header
+verbatim re-read: "attribution is measured against the
+instrument as it stands") ⇒ B running REPAIR-ON is a
+DIFFERENT instrument ⇒ **B must not cite 4.674% as its own
+caveat — the free remedy: keep the attribution counter ON in
+B's run so B's OWN rate is measured in the same run and the
+caveat points at its own instrument.** The third instance of
+"a claim belongs to the version that produced it" (version →
+mechanism → repair on/off). **(b)** The two tally one-liners
+are COMPLEMENTARY: p6's two conditions = the cross's two
+sides; p5's round key = each side well-defined — :2202
+verified (`for _round in range(3)`): one run mixes three
+non-exchangeable rounds (the arc's FIRST discovery, closing
+its own loop) ⇒ comparing mixed aggregates compares
+mixtures, not conditions ⇒ BOTH keys required. B's spec is
+now COMPLETE (routed): §756 flags + REPAIR ON + restated
+question + within-cell-only + caveat grades + OWN attribution
+rate + direction + unmeasured notes.
