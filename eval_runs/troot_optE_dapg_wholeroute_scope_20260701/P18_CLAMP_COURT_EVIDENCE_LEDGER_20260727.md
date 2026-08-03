@@ -24522,3 +24522,73 @@ m1374/m1375 **07:43 JST**. **RULE, fixed**: the timestamp is
 appended by a separate command after the quoted heredoc,
 never written inside it — and the last line is read back
 before sending, the same way sha lines are.
+
+## §864 — p6 assents to the invariant form and corrects how this desk justified it; rulings on two objections (p6 -A, 07:45)
+
+**(a) ⛔ MY §862 FRAMING CORRECTED, adopt verbatim:
+"reproduction is a consistency check, not a derivation."**
+I wrote that D/2 and D reproducing 3 and 6 shows the rule was
+rewritten rather than moved. p6 is right that this is a
+ONE-POINT FIT: `D − 3` and `3(D/6)^k` reproduce it equally
+well, so reproduction cannot select the form. The actual
+warrant is different and better: **the thresholds were always
+proportions of the quantity to be explained** — D is all of
+it, D/2 is half, and 3 / 6 are those proportions evaluated at
+D = 6. On that ground the rewriting stands; on mine it did
+not.
+**(b) OBJECTION 1 — ADOPTED.** The floor `|D| < 3` is the
+one clause still not in invariant form, and its 3 is
+numerically the OLD p5/draw boundary (D/2 at D = 6) wearing a
+different role. The floor belongs to the resolution axis, so
+an absolute value is right, but it needs its OWN production
+rule and must not inherit the band's number. **Proposed rule
+(for both parties' assent, not imposed)**: the test is void
+unless `|D| ≥ 2 · sd(ΔL)`, the sd computed from the run's own
+measured left-arm rate and per-arm n — same unit as D
+(candidates), and it says what the floor is FOR: the effect
+to be attributed must exceed the attribution instrument's own
+noise. Number after the run; rule now.
+**(c) OBJECTION 2 — ADOPTED CONDITIONALLY, and it cuts both
+parties.** p6 argues that at `L_A = L_B = 0` Q1 is also
+untested, since raw and rate differences are both zero and
+the two positions coincide; they refuse the win the rule
+would hand p5, symmetrically to p5 refusing theirs. ⇒ **This
+desk rules: neither p5's "Q1 is mine" nor p6's "Q1 untested"
+can be declared in advance.** Zero-vs-zero means
+"contamination decided nothing", which IS an answer to
+Q1 — *provided* the exposure and rate were large enough that
+contamination would have shown had it existed. If they were
+not, it is silence. The discriminator is the run's own power,
+which both parties already agreed is computed after the run
+and before the verdict. ⇒ The 0-0 case is DEFERRED to that
+computation, not decided now.
+**(d) OBJECTION 3 (my sd figure) — ADOPTED as a rule, with
+its magnitude corrected.** p6 is right that I should not have
+written `sd ≈ 1.44` before the run, and right that a bare
+figure does not carry its inputs. **The inputs behind
+4.15, stated as required**: p = 3/69 = **4.348%**
+(rule-of-three upper bound on the left-arm rate),
+n_A = n_B = **24**, E = 1.043 each, ΔE = 0, sd = **1.4446**,
+z = 6/1.4446 = **4.153**. ⭐ p6 reconstructed a DIFFERENT
+input set (p = 1.099%, ΔE = 1.297, sd = 1.1325) that lands on
+the same 4.153 — which proves their point more sharply than
+the objection did: **the same figure is reachable from
+unrelated inputs.** ⚠ One correction to their demonstration:
+the ~20× swing depends on their reconstruction's asymmetric
+n; with the inputs actually used (symmetric n = 24), moving
+the rate from 1.099% to 4.674% moves z from 8.26 to 4.01 —
+a factor ~2, not ~20. Direction right, magnitude
+reconstruction-specific. ⇒ Standing: **power is written as a
+rule now and as a number only from the run's own rate and n.**
+**(e) SCOPE NOTE — CORRECT, adopted.** Verified here:
+`b403395152`'s DIFF contains 0 occurrences of "unwrap" while
+the FILE at that commit contains 5 ⇒ a commit pins a file
+STATE, not the provenance of its lines. The authorisation's
+scope is therefore **"the design file as of b403395152"**
+(content sha a048d316e809c7bd93775676), never "the changes
+in that commit". §861 is amended accordingly.
+**(f)** p6 confirms Q1 transfers to the re-measured
+difference: their registration was about raw-vs-centred, not
+about the number 6, so it is definable on whatever difference
+the run measures. Both parties' registrations therefore
+survive the re-measurement.
