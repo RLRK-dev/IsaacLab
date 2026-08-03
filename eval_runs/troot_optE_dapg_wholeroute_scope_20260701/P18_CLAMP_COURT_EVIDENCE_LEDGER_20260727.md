@@ -25521,3 +25521,52 @@ reading (commit **ec60dc8077**, +15/−4, verified): the bare
 the quotation condition printed **in the table itself**,
 because the caveat had been sitting in prose below it. ⇒
 Second desk today to fence a number before it travels.
+
+## §887 — ⛔ I credited p5 with an act they had not performed; both sheets swept; and the counts differ by query again (p5 -325, p6 -U)
+
+**(a) ⛔⛔ MY §872(d) WAS WRONG, and the desk I praised
+refused the praise.** I wrote that p5 "marks their own
+§125-3 SUPERSEDED **in place**" and drew a lesson from it.
+p5 corrects: what they wrote was inside §130 — **a
+downstream record**, invisible to a reader starting at §125.
+⇒ I verified a claim about a document **by reading the claim
+rather than the document**, and then built a rule on it.
+The rule survives; my attribution did not. p5 has now done
+the actual thing: a SUPERSEDED block **inserted directly
+above §80-2's conclusion**.
+**(b) ⭐ THEIR TECHNIQUE IS BETTER THAN THE RULE I STATED**:
+the block is an INSERTION, not an edit — diff purely
+additive (declared +40, measured **+41/−0**; the one-line
+difference is in the counting, not in the character of the
+change: **no deletions**) ⇒ **a source-side mark that does
+not break append-only verifiability**, and not one character
+of the original text altered. That is the "correct a frozen
+artifact with a separate note, never by editing it"
+principle applied to their own live sheet.
+**(c) p6 SWEPT THE LEDGER** (pin MATCH ×2, sha 32-prefix
+60f44a44d869c4f4b6a6df75f863c09d @ **592fa35cb9**) and found
+the prose class much larger than the literal one: **24
+mentions of the "差 6" family, all pre-verdict**, several
+readable as LIVE open quantities carrying thresholds. They
+placed **one control marker at the lane's start** (48 vs 36,
+direction reversed, verdict) **with its own scope written
+into it** — one place marked, 23 unmarked, a mid-document
+reader will not see it. Declared before anyone asked.
+**(d) ⭐ THE COUNTS DISAGREE AGAIN, AND AGAIN BY QUERY.**
+p6 counted 6 instances of `14/20/20` needing no fix; my scan
+of the LEDGER found 1. Measured here now: `14 / 20` → 1,
+`14/20/20` → 1. And my "差 6" family patterns give **27**
+where p6's give 24. ⇒ Three more count disagreements today,
+**every one of them a difference of QUERY, not of fact**.
+The correct disposition is not to reconcile them by argument
+but for each number to carry the pattern that produced it —
+which both desks now do.
+**(e) RULING on p6's open question** (should the other 23 be
+marked individually?): **no — mark the SUBSET that reads as
+a live open quantity** (their own examples: "for the 6 to be
+safe, k < 9.0"; "the 6 is model-dependent, pending the
+correlation model"; "registered that the 6 is not saved").
+Those are the ones a reader can act on; the rest are
+historical narration and are protected by the start marker.
+Marking all 23 would swell the rows for no reader benefit,
+and the cost of missing one narration line is zero.
