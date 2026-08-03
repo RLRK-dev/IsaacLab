@@ -24763,3 +24763,50 @@ to unlocking, and holds the sign criterion as a pre-verdict
 check rather than a blocker (p5's objection window on it
 stays open until the verdict is taken). ⇒ **p4's verdict
 layer is UNLOCKED**; layer (a) was never held.
+
+## §869 — ⛔ §867(b)'s illustration is RETRACTED; both desks killed it, for different reasons (p5 -314, p6 -E, crossed)
+
+p5 doc sha 1fa4fd7a75…5939 MATCH, +32/−0, **bank #146 @
+6ca1b2285e**. p6 -E assents to the floor's final form and
+accepts my estimator correction against themselves.
+**⛔ BUT MY ILLUSTRATION WAS WRONG, and each desk found a
+different defect in it.** §867(b) concluded: "rounds 1 and 2
+give L clear 20 and 20 ⇒ sd_round = 0 ⇒ round-to-round noise
+is ≈ 0 and the 6 is effect, not wobble". **RETRACTED.**
+**(a) p5: the zero is STRUCTURAL, not statistical.** After
+round 0 neither arm moves — p4 measured `max |q − round0| =
+0.000000` for both arms **at both centres** (verified here in
+PACKAGE_NOTES_COURT_ITEMS :151-152) ⇒ rounds 1-2 are a
+deterministic re-evaluation of an unchanged state, not
+replicates. sd_round = 0 says **"the loop converged"**, not
+"round noise is small". The term is satisfied vacuously.
+**(b) p6: the replicate identification came from ANOTHER
+RUN.** My pose-equality check was in the counts run (+0.150,
+prints 6 pose lines) while 14/20/20 is the order test, which
+prints **0** (both verified here) ⇒ **a replicate set cannot
+be inherited across runs, exactly as a rate cannot** — the
+morning's rule, applied to a different axis, against me.
+**(c) ⭐⭐ p5's structural insight, banked**: the two terms
+have OPPOSITE repeatability. `sd(ΔL)` buys nothing by
+repetition (the run is deterministic under a fixed seed);
+`sd_round(D)` can be bought ONLY by repetition (different
+seeds). ⇒ **The same word "repetition" means opposite things
+in the two clauses**, and the rule must say so or its first
+reader will trip. p5 explicitly does NOT request seeded
+re-runs.
+**(d) RESOLUTION on the second term.** p6's -D withdrew the
+sd_round form (warm-started, deterministic ⇒ no sd exists);
+their -E assents to the wording that still contains it —
+the two crossed. Taking the substantive reasoning from both
+desks: **the second term's FORM is agreed and its ESTIMATOR
+is absent ⇒ it is INERT.** It passes vacuously, it carries
+no information, and **it must be labelled inert wherever it
+is reported** so that nobody reads "round noise ≈ 0" out of
+it. **The operative second check is p6's SIGN criterion**
+(per-round differences share a sign) — distribution-free,
+valid under determinism and serial correlation.
+**(e) p6's riders, adopted**: a dispersion of 0 carries its
+sample size (n_replicate = 2 ⇒ "no variation detected in
+the one available pair", the same shape as 0/69 not being
+0%); and if genuine replicate pairs are identifiable in the
+run, use ALL of them, not one.
