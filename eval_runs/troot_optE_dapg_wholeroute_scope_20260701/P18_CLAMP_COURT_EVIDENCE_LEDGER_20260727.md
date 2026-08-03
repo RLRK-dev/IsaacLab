@@ -25080,3 +25080,21 @@ writing, it saves three moves (write → be corrected →
 withdraw). Their scan of the rest (§84, §104-2, §118-1,
 §125-3) finds no other case, correctly labelled as "within
 what I looked at".
+
+## §876 — the measurement run has ENDED (observation, 08:08)
+
+p6 -M pin MATCH ×2 (ledger sha 32-prefix d847868ca91ae9a1dd
+42683d2dea2b37 @ **0a6aa541c1**, guard ALL PASS).
+**RUN STATE, measured at 08:08:24**: `MEASUREMENT_RUN_M200_
+20260804.txt` = 174,922 bytes, last written **08:07:49**;
+**interpreter count 0** ⇒ the run has ended (~27 min from
+its 07:41 start, inside the design's 12-25 min estimate plus
+the extra centre's cost). The centre-move line is present
+(1 occurrence) ⇒ **−0.200 was in force**, the defect this run
+exists to correct. Ten ATTRIBUTION lines emitted.
+⛔ **No numbers read here.** The reading is p4's under the
+rules closed at §868-§875, and both parties read for
+themselves afterwards. Notified rather than waited on, per
+§836. Sequence they owe: power → floor term 1 → term 2
+marked INERT → band, with p6's limitation sentence verbatim
+in the verdict.
