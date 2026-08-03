@@ -103,3 +103,59 @@ training run, not a sweep, and not a production launch.
 
 ⛔ Nothing is asked of p18 or p6 except correction of this design. **The launch is Rs's**, and this
 document exists so that the decision is made against a written run rather than a described one.
+
+---
+
+# Amendment, 2026-08-03 22:2x — three corrections from p18 -1367, all accepted
+
+The sections above are left as written. What they got wrong is corrected here rather than edited away.
+
+## A-1 ⛔ The 6 was measured without unwrap, and this run uses it — so this run re-measures the difference
+
+**Load-bearing, and it changes what the band is applied to.** The −0.200 order test the 6 came from ran
+**without** `UNWRAP_SOLVE`: L clear **14 / 20 / 20**, R **0** in all three rounds. The banked unwrap table
+at the *same* centre and the *same* 240 draws reads **L 20 → 36 / R 0 → 8**. My §2 command sets
+`UNWRAP_SOLVE=1`.
+
+⇒ **This run will not reproduce 14 / 20 / 20, and it is not supposed to.** Therefore the observed
+difference the band is applied to is **the difference this run measures**, at −0.200 and under unwrap —
+not the historical 6. §2 is amended: the run's first output is the re-measured per-round clear counts,
+and the difference is derived from those.
+
+⇒ ⛔ **A question for the parties, to be answered before the run, not after**: do the two registrations
+move to the re-measured difference, or do they stay attached to the 6 they were placed on? That is
+**not mine to decide** and I take no position. It is raised now because this is today's stone pointed
+forward — *a quantity carries the run it was measured in*, and the 6's run is not this run.
+
+## A-2 "One factor moved" is being measured, not argued
+
+§2 asserts a single factor against a driver that has itself moved since the counts run — the decider
+counter (`94a11dfce1`), the per-arm snapshot, the scope label (`0ec6d1329d`). Each was argued
+behaviour-neutral and the label carries a determinism control, but argument is the weaker form.
+
+Launched at **22:22:38** on the current driver, default centre, the counts run's flags:
+`DRIVER_NEUTRALITY_CHECK_20260803.txt`. Neutral means the attribution totals reproduce —
+**n = 112 / 114 / 114 with L = 2 / 1 / 1, and the extra left-arm solve 24 with L = 0**. A match is
+evidence about the *driver*; it measures nothing about the cell and enters no table.
+
+## A-3 The power belongs before Rs's decision, not before the verdict
+
+§4 rule 4 put power before the verdict. That is too late for the person deciding whether to authorise.
+Recomputed here from the only measured rate available (2/112 = 1.786% at the default centre), for
+plausible exposures:
+
+| n_A | n_B | E[L_A − L_B] | sd | 6 in sd |
+|---|---|---|---|---|
+| 100 | 24 | 1.36 | 1.49 | **3.12** |
+| 112 | 36 | 1.36 | 1.63 | **2.86** |
+| 120 | 50 | 1.25 | 1.74 | **2.73** |
+
+⇒ **6 sits 2.7–3.1 sd above the equal-rate centre** (one-sided ≈ 0.002). So, stated before authorisation:
+
+- ✅ This run **can** decide the "the contamination difference is small" side. It has ample power there.
+- ⛔ This run **essentially cannot produce** the ≥6 side, unless the true rate at −0.200 is far higher
+  than the default centre's. A result below 6 is therefore **weak evidence against ≥6**, not a refutation.
+
+⚠ This is not a reason to withhold the run. It is a reason Rs should know which side it can settle
+before paying for it — and it is the §820 property (repetition cannot sharpen a deterministic run)
+applied in advance instead of discovered afterwards.
