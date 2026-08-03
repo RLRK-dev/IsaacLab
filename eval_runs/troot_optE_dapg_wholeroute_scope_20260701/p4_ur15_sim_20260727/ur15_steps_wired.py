@@ -2215,6 +2215,12 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
 # point of the sweep has.
 def _interleave_report(dd):
     _g, _who = arm_pair_min(dd, want_who=True)
+    # ⭐ p18/p6 20260803-1304: the sweep breaks on the interleave line and SIGKILLs the
+    # child, so atexit never runs and the audit would never reach a swept log.  B has to
+    # measure ITS OWN attribution rate -- the 4.674% belongs to the un-repaired instrument
+    # and cannot be lent to a run whose values are repaired.  Printed BEFORE the line the
+    # sweep watches for, so it is in the file whichever way the child is ended.
+    _depth_audit_report()
     print(f"[steps] 88mm-SPAN INTERLEAVE: arms closest "
           + (f"{_g*1000:+.1f} mm ({_who})" if _g is not None else
              f"nothing within the {ARM_PAIR_CUTOFF*1000:.0f} mm search radius")
@@ -2250,6 +2256,12 @@ for _t4 in SIDES:
 mujoco.mj_forward(m, d)
 print(f"[steps] start pose = the cell's home, both arms: {np.round(HOME_POSE, 4)}")
 START = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
+# ⭐ p5 -303 via p18 20260803-1306: round 0 seeds `near` from HOME, and the L-vs-FINAL-R solve
+# below seeds it from the post-round-2 pose.  Comparing those two counts therefore varies TWO
+# factors -- the opponent pose AND the near seed -- so a residual could not be attributed to the
+# opponent.  Kept here so the extra solve can be given the same seed round 0 had, making the
+# comparison single-factor.
+_NEAR_SEED = {t: START[t].copy() for t in SIDES}
 # ⭐ p5 -259: the solve order itself.  SIDES inserts L then R, so in round 0 the LEFT arm is
 # filtered against the right arm AT HOME while the RIGHT arm is filtered against a left arm that
 # has just moved -- so the right arm's home-to-start leg is never tested against the cell it
@@ -2257,6 +2269,14 @@ START = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
 # only swap which arm is blocked, so the question is whether ANY order keeps both arms >= 1.
 _SOLVE_ORDER = ["R", "L"] if os.environ.get("SOLVE_ORDER") == "R" else list(SIDES)
 for _round in range(3):
+    # ⭐ p5 -305 via p18 20260803-1310/1323.  The audit counters accumulate module-wide, so ONE
+    # printed total cannot separate the conditions: round 0 -- the arm filtered against the other
+    # arm AT HOME -- and the L-vs-FINAL-R re-solve land in the same number, which is what the first
+    # counts run returned.  Snapshotting at the interval boundaries splits them at zero cost and
+    # with no model assumption.  n = rejections whose decider was the arm test; L = those decided by
+    # a call the floors had flagged.  The blame tally cannot substitute: it counts reasons, not
+    # candidates, so it does not divide the candidates the verdict is made of.
+    _snap_n, _snap_l = _DEPTH_AUDIT["rej_total"], _DEPTH_AUDIT["rej_flagged"]
     for t in _SOLVE_ORDER:
         # ⭐ p5 §31: the seeds, not the menu, were the thin part -- 24 uniform draws in a
         # six-dimensional joint space.  START_TRIES raises it so the question "is the survivor
@@ -2279,6 +2299,11 @@ for _round in range(3):
             print(f"[steps] round {_round} {t}: q = [" +
                   " ".join(f"{v:+.6f}" for v in START[t]) + "]")
 
+    if os.environ.get("LOUD_ROUNDS"):
+        print(f"[steps] ROUND {_round} ATTRIBUTION: n = "
+              f"{_DEPTH_AUDIT['rej_total'] - _snap_n} candidates decided by the arm test, "
+              f"L = {_DEPTH_AUDIT['rej_flagged'] - _snap_l} of them by a flagged call")
+
 # ⭐ EXTRA_L_ROUND -- the one leg of the conjunction that was being taken on trust.
 # SIDES iterates L then R, so the FINAL left pose was cleared against the round-1 right arm while
 # the final right pose was cleared against the final left.  The interleave below covers the pair
@@ -2289,8 +2314,12 @@ for _round in range(3):
 # ⛔ START is NOT overwritten: this reports, it does not change the run.  solve_ik seeds its own
 # generator, so the extra solve leaks no randomness into what follows.  Default off.
 if os.environ.get("EXTRA_L_ROUND"):
+    _xn, _xl = _DEPTH_AUDIT["rej_total"], _DEPTH_AUDIT["rej_flagged"]
     _lq = solve_ik("L", GRASP1["L"], tries=int(os.environ.get("START_TRIES", "24")),
-                   near=START["L"], other=START["R"], quiet=False, label="L-vs-FINAL-R")
+                   near=_NEAR_SEED["L"], other=START["R"], quiet=False, label="L-vs-FINAL-R")
+    print(f"[steps] L-vs-FINAL-R ATTRIBUTION: n = "
+          f"{_DEPTH_AUDIT['rej_total'] - _xn} candidates decided by the arm test, "
+          f"L = {_DEPTH_AUDIT['rej_flagged'] - _xl} of them by a flagged call")
     _same = float(np.abs(np.asarray(_lq) - np.asarray(START["L"])).max())
     print(f"[steps] L-vs-FINAL-R: the pose this solve chose differs from the one the run uses by "
           f"{_same:.6f} rad at its largest joint "

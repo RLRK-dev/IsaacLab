@@ -1,0 +1,25 @@
+# start 2026-08-03 12:39:02 JST  (relaunch -- the first attempt could not measure its own rate)
+# B -- 3-table GO, p18 1299 + 1304.  Merged conditions:
+#  (i)   question = WHICH CROWN VALUES ARE WITNESSED.  The fail-survival form is one B cannot
+#        answer: contamination runs 476:1 toward over-rejection, so a surviving candidate is
+#        trustworthy and an absent one is not.
+#  (ii)  GEOMDIST_REPAIR=1 -- fail cells rise to TRUSTED.  ⚠ NOT validated: the repaired values
+#        have no external reference, and the box-box agreement was measured at poses where no
+#        defect occurs.
+#  (iii) OUTPUT IS EXISTENCE WITHIN A CELL ONLY.  Inter-cell selection is closed.
+#  (iv)  ⛔ NOT COMPARABLE WITH ANY PRE-REPAIR TABLE.  REPAIR changes what counts as clear,
+#        exactly as FURNITURE=1 would have.
+#  (v)   ⭐ B measures ITS OWN rejection-attribution rate.  The 4.674% belongs to the
+#        un-repaired instrument and cannot be lent to a repaired run (p6).  The audit now
+#        prints BEFORE the interleave line, verified 56 < 81 on a single run, because the
+#        sweep SIGKILLs the child on that line and atexit would never have run.
+# flags: UNWRAP_SOLVE=1 ARM_PATH=1 GEOMDIST_REPAIR=1  (FURNITURE off, per §756)
+# stack: newton 1.4.0 / mujoco 3.10.0 / mujoco-warp 3.10.0.3 / warp-lang 1.15.0
+# driver blob: 6014bb8a7678d231d589894416c07d5a4078e2d4
+Z0 1.330 (R 0.100): L (58, 1) R (132, 13) gap +9.9 -> PASS
+Z0 1.380 (R 0.075): L (58, 1) R (132, 13) gap +9.9 -> PASS
+Z0 1.430 (R 0.050): L (58, 1) R (132, 13) gap +9.9 -> PASS
+Z0 1.470 (R 0.030): L (58, 2) R (132, 13) gap +9.9 -> PASS
+Z0 1.510 (R 0.010): L (58, 2) R (132, 13) gap +9.9 -> PASS
+written
+rc=0 end 12:44:52
