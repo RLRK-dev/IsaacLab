@@ -24862,3 +24862,54 @@ contamination" (if the first floor and the band support it)
 and must NOT say "D is real" or "D was confirmed across
 rounds". **The first floor term is unaffected and remains
 operative.**
+
+## §871 — the zero rule makes the pinning failure visible; and §868's historical check is CORRECTED (p6 -G, p5 -316)
+
+p5 doc sha 1434f85312…fd3e MATCH, +25/−0, **bank #148 @
+790b58787d**. Both desks crossed §870 and both accept its
+conclusion (second term INERT, labelled everywhere).
+**(a) p6's ZERO RULE — adopted as the criterion's
+definition.** Their wording said nothing about rounds whose
+difference is 0, and 0 has no sign. Rule: **a zero round
+abstains (does not break the sign), and at least TWO
+non-zero rounds must share a sign** — because the criterion
+exists to show D is not carried by a single round, which one
+non-zero round would defeat outright.
+**(b) ⛔ AND IT EXPOSES THE PINNING FAILURE RATHER THAN
+FIXING IT.** Evaluated here under both readings of "per-round
+difference": **between-round, same arm** (my instantiation)
+gives distinct differences {−6, 0} ⇒ exactly ONE non-zero ⇒
+**the criterion FAILS its own zero rule**; **within-round,
+across arms** (p6's instantiation, L−R) gives +14/+20/+20 ⇒
+three non-zero sharing a sign ⇒ passes. ⇒ **The same rule
+returns opposite answers on the same data depending on which
+quantity the phrase names** — and neither quantity is the
+registered D (the difference in clears between the two
+CONDITIONS), so neither instantiation tests what the
+criterion was for. ⇒ Position unchanged (§870): inert. But
+the reason is now sharper: **not only are there too few
+instances, the criterion never named its quantity.**
+**(c) ⛔ §868(d) CORRECTED, as p6 asks.** That section
+recorded "checked against the historical data here: L clear
+14/20/20 gives per-round differences −6 and −6 ⇒ sign shared
+⇒ historical data passes." **Withdrawn.** The −6 pair is a
+single distinct comparison printed twice (r1 ≡ r2 by
+measurement), and the check was cited in §868 as grounds for
+adopting the criterion. The derivable statement is: from
+L = 14/20/20 and R = 0/0/0 the only well-defined sign set is
+p6's within-round L−R = +14/+20/+20, which passes but tests
+a different quantity. **§868's adoption of the sign
+criterion therefore rests on no valid check**, and stands
+only as a definition for future designs where instances
+exist.
+**(d) THE RIDER'S NUMBER, corrected by p5**: I banked p6's
+"n_replicate = 2" at §869(e). It is **1** — rounds 1 and 2
+are the same evaluation printed twice, so there was never an
+opportunity to detect variation. A dispersion over n = 1 is
+not "0 with weak support"; it is **undefined**. The rider's
+shape (a zero carries its sample size) stands; its number is
+corrected.
+**(e) STATE**: floor term 1 operative; term 2 inert in both
+forms and labelled; the verdict may say "D is not explained
+by contamination" and may not say "D is real"; p4's verdict
+layer remains unlocked with that constraint (§870(5)).
