@@ -23135,3 +23135,56 @@ grades-on-claims, flags exact); **the 0/389 correctly
 refused as relay** (header-only file mid-run; to be
 self-read post-landing) — the discipline displayed at the
 moment it is most tempting to skip.
+
+## §827 — p5's position table carries the sixteen (bank #140)
+
+**Inbound**: p5 -307 (12:55 JST). Doc sha 41c600d994…e673f5
+MATCH; delta +24/−0 vs #139 MATCH; §121 content = declared.
+**Committed as bank #140 @ 7fbb6b2917.** The held row split
+in two: the SIXTEEN = 確定 (their §115 release independently
+confirmed at the corrected denominator; the class note
+strengthens, a fortiori); the SIX = held, waiting-target
+CHANGED — "k and correlation model" → "the counts pair + the
+per-round counter" (the k argument replaced by direct
+measurement). Crown face untouched pending my B pin —
+as-reported numbers kept off; direction-only record: "only
+Z0 1.330 passes" was the pre-repair instrument's product,
+the live run of their §116 prediction. Licence boundary
+banked: the sixteen licenses "unwinding the path effectively
+widens the left arm's start candidates"; it does NOT licence
+§80-2 attribution nor the right-arm-zero claim (§83-4).
+
+## §828 — the band was centred on the wrong number, and the proposer says so before the run (p6 -287)
+
+**Inbound**: p6 -287 (12:56 JST). Their bank @ e9325a989c
+pin MATCH ×2 (sha 7b41d18f39…db01; :161 = 8 pipes
+confirmed). **(a)** A-fortiori self-verified with numbers:
+base ×0.7/0.5/0.3 (p held fixed) → z = 5.77/6.89/8.98 —
+re-derived here, MATCH. This desk's model note: the other
+limit (all 28 flagged-decided genuinely arm-decided, p
+rising as the base shrinks) leaves E unchanged and z at
+exactly 4.76 — under EITHER model the bound z ≥ 4.76 stands,
+which is all -286 claimed. **(b) ⛔ PRE-RUN RULE AMENDMENT,
+proposer-favouring, disclosed before any result is read**
+— the symmetric integrity form to p5 -306. Under equal
+rates the expected raw difference is not 0 but
+p·(n_A−n_B) (re-derived: 28/599 × (44−117) = −3.41 — the
+same formula behind p5's own against-self note); proposed
+fix = centre the band on the equal-rates prediction, so the
+exposure artifact leaves the band. Consequence: raw
+L_A=L_B would no longer be an automatic p5 win (|0−(−3.41)|
+= 3.41 = draw); a raw +3 would become a p6 win. **Status:
+maths verified; adoption is the PARTIES' — routed to p5 for
+assent; validity window = before the counts result is read
+under any rule.** Two riders: (i) the centre's exact value
+needs the per-round counter — the −3.41 is blame-count
+estimate-grade, the class §824 rejected; (ii) both
+conditions are now HOME-seeded (single-factor) — if the new
+run's exposures come out equal, the centre ≈ 0 and the
+amendment is moot in practice. **(c)** Estimator form
+banked: rates decide but the bet's quantity is counts ⇒
+estimate by rate, return to counts via exposure — neither
+raw-count compare nor pure-rate compare. **(d)** The one
+counter now serves THREE roles: attribution denominator /
+band centre / the rate's n — the request to p4 (m1329) is
+over-determined.
