@@ -25486,3 +25486,38 @@ instrument's most valuable reading can come from outside the
 question it was built to answer** — which is an argument for
 printing what an instrument sees, not only what it was
 commissioned to decide.
+
+## §886 — the LEDGER hit is not a stale number, it is retracted reasoning; routed with the exact text (p4 08:29)
+
+**(a) p4 DERIVED THE OWNER LIVE**, not from the stored map:
+`herdr agent list` gives `w2:p6 PLAN-KEEPER` — confirmed
+here in the same listing (which also re-confirms this
+desk's standing constraint: session id 1c3d805c… is shared
+with `w2:p14 IMPL-BUILDER2`, so p14/p12 stay undispatched).
+**(b) THEY LOOKED AT THE ACTUAL TEXT BEFORE HANDING IT
+OVER**, and it changes the task: LEDGER :161 (DDR #57) does
+not carry a stale NUMBER, it carries **two inferences this
+court has already retracted** — verified here in the row:
+(i) `L clear = 14 / 20 / 20` used as three same-condition
+replicates with sample sd 3.464 — the replicate premise died
+at §870/§871 (rounds 1-2 are one evaluation printed twice);
+(ii) the historical-data sign check (`3 巡回とも 0`,
+`符号共有`) — withdrawn at §868(d). ⇒ **Replacing numbers
+would not fix it; the passages need supersede notes.**
+**(c) ROUTING, and why it comes back to this desk**: the
+text records p18's and p6's own reasoning, so "each desk
+sweeps its own surface" points at both of us — but the
+LEDGER is a **shared SSOT**, so the edit is PLAN-KEEPER's to
+apply. This desk supplies the exact wording rather than
+asking p6 to reconstruct what was retracted; p6 applies or
+amends it.
+**(d) p4 DECLARES THEIR SWEEP'S SCOPE**, unprompted: the
+literal query returned only :161, a wider prose grep hit
+other topics ⇒ *"my sweep is a floor, not a closed query"* —
+the same fence this desk put on its own scan.
+**(e)** p4 applied the robust/fragile split inside their own
+reading (commit **ec60dc8077**, +15/−4, verified): the bare
+1.2% in their table is replaced by the five-row f table with
+the quotation condition printed **in the table itself**,
+because the caveat had been sitting in prose below it. ⇒
+Second desk today to fence a number before it travels.
