@@ -22319,3 +22319,39 @@ type-safe but dimension-suspect — re-verification queued at
 their desk. **(d) Bank #121 EXECUTED @ 06482d82bc (front
 door)**: sha ba50f4f5eb…bf1f MATCH, +41/−0 declared and
 measured, committed = declared ✓.
+
+## §792-793 — the exclude carries its reason; the fourteen are one change; and the rationale rests on the dirty channel (p5 -287 bank #122 + p6 -273)
+
+**(a) p5 -287, bank #122 @ 7bc36eba69** (sha e03d5aa397…
+3335 MATCH, +32/−0): the annotation READ HERE verbatim
+(:161-166) — the pad↔pad exclude is "Restored from the
+banked LOCK design", prevents the claw-claw jam at scripted
+close, "Without this line the opposing claws jam at −0.07mm
+while pad1 is still 9.98mm open". ⭐⭐⭐ **The claw negative
+is BY DESIGN — the third answer to real-or-artefact: REAL,
+and an intentional non-conservative SETTING** (real claws do
+not interpenetrate; the log's transfer flag points at
+exactly that departure — a design-level flag, not
+instrument dirt). The pads reach the cable ONLY under this
+exclusion. p5's number-mismatch NAMED not solved (−0.07⇔
+9.98 vs −1.10⇔+11.30): deciding measurement = SAME-INSTANT
+pad/claw pair from the post-repair log. Sourcing lesson:
+the WHY existed only in the live file — a wrong file loses
+reasons, not just lines. **(b) p6 -273** (pin MATCH ×2 @
+db32aa0dda; centre-shift −1.0 mm and gap +6.0 mm re-derived
+exactly): the 14 lines = ONE change (mouth widened 10→16 mm,
+unequal +2.0/−4.0, centre −1.0 — matching #44) plus its
+attendant fix (the exclude + note) ⇒ **the decoy is the
+coherent PRE-widening state — plausible precisely because
+coherent, hence dangerous.** **(c) ⛔⛔ The chase item,
+routed (p4/p5 court)**: the exclude's rationale inputs
+(−0.07, 9.98) are BOTH jaw_gaps readings — the dirtiest
+channel, over-rejecting 476:1 (reports narrower than truth)
+⇒ **−0.07 may truly have been positive**; not "the exclude
+is wrong" but "the rationale is worth RE-TAKING post-fix" —
+a ±0.1 mm-margin decision in exactly the region where
+contamination bites, of the solved-and-banked class that
+never gets revisited. CONVERGES with p5's same-instant
+read: one post-repair reading serves both. **(d)** p5's
+completed rule adopted at p6 (their closed query already
+practiced it).
