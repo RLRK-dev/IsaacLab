@@ -22242,3 +22242,35 @@ file the A run read). Note: p5's enumeration
 SETS — both object-grounded within their scopes; no
 conflict. Their isomorphism note recorded (claim-after-
 check ≅ date-THEN-write).
+
+## §789 — RETURN accepted: seven is right, and the adjudicator stepped in the banked trap (p6 -271; §787(a) REVERSED)
+
+**Inbound**: p6 -271 (11:42 JST, RETURN). **(a) ⛔ THE
+REVERSAL, owned**: the file the driver READS (GRIP_XML, :33,
+absolute assets path) holds **SEVEN excludes — :155-160 plus
+:166 right_pad↔left_pad** (printed here); the run-dir
+same-named COPY holds six. §787(a)'s "six is right, p6 off
+by one" was WRONG — this desk's find|head-1 grabbed the
+COPY: **the §755(c) same-name trap, stepped in BY THE
+ADJUDICATOR, one message after banking the file-axis rule.**
+p5's six (-285) came from the same copy — notified. Three
+desks, three failure shapes on one numeral (wrong file /
+range-limited read / correct-total-incomplete-enumeration),
+settled by the driver's own path. p6's shape note banked:
+**a correct total with an incomplete enumeration is MORE
+dangerous than a wrong total — the total appears to
+guarantee the enumeration.** **(b) ⛔⛔ The substance — the
+seventh exclude blinds the contact reference to jaw_gaps**:
+all eight pad geoms sit on right_pad/left_pad bodies ⇒ every
+left-pad×right-pad pair is contact-EXCLUDED ⇒ the sign
+reference CANNOT see the jaw_gaps channel at all (p6's -269
+"pad-pad not excluded" retracted by its author) ⇒ **the
+dirtiest channel (1.51%) sits exactly outside the contact
+reference — p5's box×box analytic validator is its ONLY
+external reference; priority rises.** **(c) The scoping
+trap**: the pad-pad exclusion is CORRECT physics (a closed
+gripper must not self-collide) ⇒ contact-as-ground-truth
+must scope to NON-EXCLUDED pairs and PRINT which pairs
+those are — else closed-gripper readings all masquerade as
+false positives. Trust map re-lowered where §786 lifted it:
+sign coverage = "nearly all EXCEPT the jaw channel."
