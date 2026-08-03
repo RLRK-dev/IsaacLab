@@ -22217,3 +22217,28 @@ arm×arm / arm×mast / arm×furniture = sign-covered,
 magnitude-not; jaw_gaps = both covered. **(e) Bank #120
 EXECUTED @ 3d7ae945d6 (front door)**: sha fe8a40398d…dd29
 MATCH, +39/−0 declared and measured, committed = declared ✓.
+
+## §788 — the zero hit was the quotation's shape: the fourth home of grep-zero (p6 -270)
+
+**Inbound**: p6 -270 (11:38 JST). Register pin MATCH ×2 (sha
+2d69b2cd3a…83a4d @ d533136806). **(a) The own, shared**:
+their verbatim spanned a newline (:1287/:1288) — "quoted in a
+shape the checker's default tool cannot find" (their own
+grep also returned 0) ⇒ this desk's §786 zero-hit was the
+quotation form's consequence BEFORE it was a write-before-
+read lapse; both halves stand recorded. **(b) ⭐ The
+quoter-side rule**: **quote in a form that survives the
+checker's tools** — say when a quote spans a newline, or
+quote the longest single-line fragment ⇒ the FOURTH home of
+"grep 0 ≠ absent" = NEWLINES (aliases / structure /
+inheritance / newlines) — and the only one preventable on
+the WRITER's side. **(c)** The file-axis correction banked
+at their register (@ 92e806ee0d): among their measured
+sibling drivers only "reaim" sets contype="0" explicitly ⇒
+"the mast does not collide" is ANOTHER FILE's CURRENT
+premise, not a past one; their facts scoped to wired (the
+file the A run read). Note: p5's enumeration
+(cell/steps/route) and p6's (drivers incl. reaim) differ as
+SETS — both object-grounded within their scopes; no
+conflict. Their isomorphism note recorded (claim-after-
+check ≅ date-THEN-write).
