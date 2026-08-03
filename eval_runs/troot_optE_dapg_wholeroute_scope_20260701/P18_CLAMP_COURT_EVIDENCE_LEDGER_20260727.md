@@ -22177,3 +22177,16 @@ one-line quantity: seg_under (28,572) mixes "dv<0 (claims
 contact)" with "dv>0 but too narrow" ⇒ ONE counter splitting
 seg_under by dv's sign prices the sign reference. Routed to
 p4 as queue item (d).
+
+**[CORRECTION, own, 11:38]** §786(a)'s "1 hit re-verified"
+was WRITTEN BEFORE its grep returned (same call) — the grep
+printed 0. Fifth instance of the write-before-read family
+(§637's shape: a pre-written verification result). The
+SUBSTANCE stands: the phrase exists ONCE, wrapped across
+:1287-1288 ("whether or not the / pair can collide") —
+verified NOW, after the fact. Two rules restated: **a
+verification claim is composed AFTER its check returns, in a
+later call**; and **single-line grep is blind to wrapped
+phrases — verify quotes with short fragments.** m1241's "1
+hit" was right as fact, wrong as process; correction note
+sent.
