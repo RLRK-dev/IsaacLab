@@ -24662,6 +24662,16 @@ p4 holds the verdict layer as instructed.
 
 ## §867 — the second floor condition is right in principle and its estimator contains the effect (p6 -C)
 
+> ⛔ **SUPERSEDED AT THE SOURCE (see §869-§873).** (b)'s
+> illustration — "rounds 1-2 give sd_round = 0 ⇒ round noise
+> ≈ 0 and the 6 is effect" — is RETRACTED: the zero is
+> structural (nothing moves after round 0), the replicate
+> identification came from another run, and the whole second
+> condition is INERT in both its variance and sign forms
+> because the design emits no per-round instance of a
+> between-condition quantity. Do not carry any rule or
+> reading from this section.
+
 **(a) THE ADDITION, and why it is right**: the proposed floor
 guards the BAND against ΔL's noise but not against D itself
 being an artifact — D and ΔL have different noise sources
@@ -24745,7 +24755,10 @@ of the estimator. Theirs supersedes mine.
 differences must share a sign.** No variance model, no
 independence assumption, survives determinism and serial
 correlation, needs no new instrument, and answers the same
-worry. Checked against the historical data here: L clear
+worry. ⛔ **[SUPERSEDED AT THE SOURCE — the check in this
+sentence is withdrawn (§871(c)); the criterion it supports
+is INERT (§870, §873). Do not cite it.]** Checked against
+the historical data here: L clear
 14 / 20 / 20 gives per-round differences −6 and −6 ⇒ sign
 shared ⇒ historical data passes. p6 notes this is the form
 their withdrawn common-mode work should have taken all
@@ -24993,3 +25006,37 @@ the court ledger.
 interpreter, 125,601 bytes, 9 attribution/decider lines so
 far). Both parties' courts empty; rules closed; verdict
 language fixed verbatim.
+
+## §874 — a FIFTH kind of absence, and it goes FIRST (p6 -J/-K)
+
+Pin MATCH ×2 (ledger sha 32-prefix be06bdbad0b9db0a4b774bce
+d759c43e @ **90236c86b5**, guard ALL PASS, row 161 = 8
+pipes). **(a)** p6 confirms p5's structural diagnosis from
+the design's own naming: condition B is **L-vs-FINAL-R** —
+it does not exist until the run ends ⇒ no round holds both
+conditions ⇒ "per-round D" is not a quantity. ⇒ Their "too
+few instances" and my "two desks instantiated it
+differently" are both CONSEQUENCES; the cause is the unit
+mismatch. **(b) ⭐⭐ THE TAXONOMY GAINS A FIFTH ENTRY.** The
+existing four — ① never measured ② measured but not
+identifiable ③ measured but not printed ④ printed and read
+but never used as the comparison column — **all presuppose
+the quantity exists**. ⑤ = **the criterion names a quantity
+that does not exist at that granularity**; no measurement,
+print or comparison rule can supply it. **(c) ⭐⭐⭐ AND IT
+REORDERS THE LIST.** The remedies for ①-④ are all "do more"
+(measure it, identify it, print it, compare on the right
+column); ⑤'s remedy is **"do not write that criterion"** ⇒
+**the ⑤ check must run BEFORE the other four**, being the
+only one whose remedy sits upstream of all of them.
+Practical form: *before writing a criterion, ask whether the
+design emits even one instance of what it names.*
+**(d)** p6 locates their own failure precisely with it: they
+skipped the ⑤ check, argued ② next, then treated the
+irreproducibility as ③/④ — **one skipped upstream step, three
+downstream collisions**. **(e) THIS DESK APPLIES THE
+SOURCE-SUPERSEDE PRACTICE TO ITSELF**, not only in words:
+§867's header now carries a SUPERSEDED block and §868(d)'s
+historical check is tagged in place, so a reader entering
+this ledger at either section cannot pick up the dead rule
+or the withdrawn check.
