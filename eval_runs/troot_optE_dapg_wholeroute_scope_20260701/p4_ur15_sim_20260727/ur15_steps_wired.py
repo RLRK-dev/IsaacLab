@@ -1438,7 +1438,14 @@ def path_arm_min(t, sc, q_from, q_to, cutoff=None):
 
 _DEPTH_AUDIT = {"calls": 0, "checked": 0, "neg": 0, "below_lower": 0, "seg_disagree": 0,
                 "seg_over": 0, "seg_under": 0, "by_caller": {}, "pairs": {}, "type_pairs": {},
-                "chan": {}, "chan_viol": {}, "rows": []}
+                "chan": {}, "chan_viol": {}, "rows": [],
+                "type_all": {}, "repaired": 0, "repair_zero": 0, "repair_signed": 0,
+                "unrepairable": 0, "bound_informative": 0}
+# ⭐ p18 ruling 20260803-1191(ii): the repair, behind a flag and OFF by default.  Everything added
+# to this driver so far only printed; this one CHANGES THE VALUE the clearance tests act on, so it
+# is opt-in and the runs that use it say so in their header.  Comparability with every earlier run
+# survives because the default path is untouched.
+_GEOMDIST_REPAIR = bool(os.environ.get("GEOMDIST_REPAIR"))
 _SEG_SCRATCH = np.zeros(6)   # reused; the wrapper always asks for the segment
 
 
@@ -1469,8 +1476,23 @@ def _depth_audit_report():
     _missed = sorted(_known - _ran)
     print(f"[steps] DEPTH AUDIT channels NOT exercised this run: {_missed if _missed else 'none'}"
           + ("  <- the rate below says nothing about these" if _missed else ""))
+    # ⭐ p6 via p18, 20260803-1198(ii): "asked and clean" and "asked too few times to tell" are not
+    # the same claim, and a 0/13 reads like the first while being the second.  At the arm channel's
+    # own rate a channel needs about 1081 calls before a clean sheet means anything at 95%; below
+    # that, silence is sample size.  Three classes, so the reader is not left to infer which.
+    _thin = [f"{co.co_name}:{co.co_firstlineno} ({n} calls)"
+             for co, n in a["chan"].items() if a["chan_viol"].get(co, 0) == 0 and n < 1081]
+    _measured = [f"{co.co_name}:{co.co_firstlineno}"
+                 for co, n in a["chan"].items() if a["chan_viol"].get(co, 0) or n >= 1081]
+    print(f"[steps] DEPTH AUDIT coverage -- MEASURED: {_measured or 'none'} | "
+          f"ASKED BUT TOO FEW TIMES TO TELL: {_thin or 'none'} | NEVER ASKED: {_missed or 'none'}")
+    _bi = max(a["bound_informative"], 1)
     print(f"[steps] DEPTH AUDIT floor 1 (below the bounding-sphere gap): {a['below_lower']} "
-          f"({100.0 * a['below_lower'] / ck:.4f}% of unsaturated)")
+          f"({100.0 * a['below_lower'] / ck:.4f}% of unsaturated) -- but its DENOMINATOR is the "
+          f"{a['bound_informative']} calls whose spheres were apart enough for the bound to say "
+          f"anything ({100.0 * a['bound_informative'] / ck:.2f}% of unsaturated), giving "
+          f"{100.0 * a['below_lower'] / _bi:.4f}% within that visible domain.  Outside it the bound "
+          f"is vacuous and a clean sheet from floor 1 is not evidence.")
     print(f"[steps] DEPTH AUDIT floor 2 (scalar disagrees with its own segment): {a['seg_disagree']} "
           f"({100.0 * a['seg_disagree'] / ck:.4f}%) -- {a['seg_over']} claiming MORE room than the "
           f"segment (over-acceptance), {a['seg_under']} claiming LESS (over-rejection)")
@@ -1483,11 +1505,21 @@ def _depth_audit_report():
     print(f"[steps] DEPTH AUDIT localisation: {len(a['pairs'])} distinct geom pairs; top pairs = "
           + ", ".join(f"{p[0]}<->{p[1]} x{c}"
                       for p, c in sorted(a["pairs"].items(), key=lambda kv: -kv[1])[:6]))
-    print("[steps] DEPTH AUDIT mechanism (counts by sorted geom-type pair -- mesh x mesh is arm "
-          "against arm, mesh x primitive is arm against the stem and foot): "
-          + ", ".join(
-              "x".join(mujoco.mjtGeom(t).name.replace("mjGEOM_", "") for t in tk) + f" {c}"
-              for tk, c in sorted(a["type_pairs"].items(), key=lambda kv: -kv[1])))
+    # ⭐ Rates now, not counts (p18 1191(iii)): every unsaturated call is counted against its own
+    # type pair, so the mechanism read no longer measures how often each pair happens to be asked.
+    print("[steps] DEPTH AUDIT mechanism -- violations / calls per geom-type pair (mesh x mesh is "
+          "arm against arm, cylinder x mesh is arm against the stem and foot): "
+          + " | ".join(
+              "x".join(mujoco.mjtGeom(t).name.replace("mjGEOM_", "") for t in tk)
+              + f" {a['type_pairs'].get(tk, 0)}/{n} ({100.0 * a['type_pairs'].get(tk, 0) / n:.5f}%)"
+              for tk, n in sorted(a["type_all"].items(), key=lambda kv: -kv[1])))
+    if _GEOMDIST_REPAIR:
+        print(f"[steps] DEPTH AUDIT repair ACTIVE: {a['repaired']} values replaced by their own "
+              f"segment ({a['repair_zero']} where the scalar was exactly zero, "
+              f"{a['repair_signed']} keeping the scalar's sign), {a['unrepairable']} left alone "
+              f"because the segment was degenerate too")
+    else:
+        print("[steps] DEPTH AUDIT repair OFF -- values reported by the library were used unchanged")
     print("[steps] DEPTH AUDIT: the rows below are ILLUSTRATIVE, capped at twelve.  Read the "
           "mechanism off the counters above, not off them.")
     for caller, pr, dv_mm, seg_mm, bnd_mm, ctr_mm, cut_mm in a["rows"]:
@@ -1562,6 +1594,13 @@ def _mj_geom_distance_audited(model, dd, g1, g2, cut, ft=None):
     i1, i2 = int(g1), int(g2)
     caller = None
 
+    # ⭐ p18 20260803-1191(iii): the type-pair DENOMINATOR, counted on every unsaturated call, so the
+    # mechanism read stops being a count comparison one level down from the channel rates.
+    _t1 = int(model.geom_type[i1])
+    _t2 = int(model.geom_type[i2])
+    _tall = (_t1, _t2) if _t1 <= _t2 else (_t2, _t1)
+    a["type_all"][_tall] = a["type_all"].get(_tall, 0) + 1
+
     # ⭐ Floor 2 (p6 via p18, ruling 20260803-1174): the old check was ONE-SIDED, so a call claiming
     # MORE clearance than there is -- the direction that accepts a colliding pose -- was invisible.
     # The segment the same call returns is a second reading of the same quantity, and in the healthy
@@ -1592,8 +1631,16 @@ def _mj_geom_distance_audited(model, dd, g1, g2, cut, ft=None):
     dx = dd.geom_xpos[i1, 0] - dd.geom_xpos[i2, 0]
     dy = dd.geom_xpos[i1, 1] - dd.geom_xpos[i2, 1]
     dz = dd.geom_xpos[i1, 2] - dd.geom_xpos[i2, 2]
-    reach = dv + model.geom_rbound[i1] + model.geom_rbound[i2]
-    if reach < 0.0 or reach * reach < dx * dx + dy * dy + dz * dz:
+    # ⭐ p6 via p18 20260803-1204(i): floor 1 only SAYS anything where the two bounding spheres are
+    # apart.  Where they overlap the bound is negative and vacuous, so a clean sheet from floor 1
+    # over such pairs is not evidence.  Counting the informative calls gives the residual its own
+    # denominator instead of letting it borrow the whole population's.
+    _rsum = model.geom_rbound[i1] + model.geom_rbound[i2]
+    _c2 = dx * dx + dy * dy + dz * dz
+    if _c2 > _rsum * _rsum:
+        a["bound_informative"] += 1
+    reach = dv + _rsum
+    if reach < 0.0 or reach * reach < _c2:
         a["below_lower"] += 1
         if caller is None:
             caller = _audit_caller()
@@ -1615,8 +1662,30 @@ def _mj_geom_distance_audited(model, dd, g1, g2, cut, ft=None):
         # from mesh x primitive (arm against the cylinder stem and foot), and that separation is the
         # mechanism test: a cutoff artefact should show on the primitives, a mesh-collision defect
         # on the meshes.
-        tkey = tuple(sorted((int(model.geom_type[i1]), int(model.geom_type[i2]))))
-        a["type_pairs"][tkey] = a["type_pairs"].get(tkey, 0) + 1
+        a["type_pairs"][_tall] = a["type_pairs"].get(_tall, 0) + 1
+
+    # ⭐ The repair (p18 1191(ii)).  The dominant signature is a scalar of exactly 0.000 beside a
+    # segment reporting 8 to 320 mm, and the segment side is the sane one, so the segment becomes the
+    # working value.  Sign is the part the segment cannot give, and it is settled by measurement, not
+    # by preference: at |dv| < 0.1 mm the segments in this cell run 0.0000 to 0.0008 mm, so a LARGE
+    # segment is incompatible with contact -- a zero scalar beside one is a failure to compute, not a
+    # touch.  Hence: zero scalar and a real segment  ->  positive distance of that length; non-zero
+    # scalar  ->  keep its sign, take the segment's magnitude; degenerate segment  ->  nothing to
+    # repair from, leave the scalar alone and count it.  ⚠ Version-independent: both runtimes
+    # self-contradict, so this decouples the lane from the 3.10 / 3.11 question rather than choosing
+    # a side of it.
+    if _GEOMDIST_REPAIR and caller is not None and abs(seg2 - dv * dv) > 1e-12:
+        _seg = seg2 ** 0.5
+        if _seg < 1e-6:
+            a["unrepairable"] += 1
+        elif dv == 0.0:
+            a["repaired"] += 1
+            a["repair_zero"] += 1
+            dv = _seg
+        else:
+            a["repaired"] += 1
+            a["repair_signed"] += 1
+            dv = _seg if dv > 0.0 else -_seg
         if len(a["rows"]) < 12:      # a dozen worked examples; the rest are counted
             a["rows"].append((
                 caller, key, dv * 1000.0, seg2 ** 0.5 * 1000.0,
