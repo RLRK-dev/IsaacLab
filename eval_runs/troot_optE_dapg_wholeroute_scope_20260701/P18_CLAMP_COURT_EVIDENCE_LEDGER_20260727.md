@@ -22708,3 +22708,47 @@ verified) ⇒ p5's new contribution = zero, formally recorded
 by its author. **Bank #132 EXECUTED @ 1556e49b31** (sha
 d684d347ab…3508 MATCH, +37/−0) ✓. Withdrawals confirmed
 (m1285/m1287 pre-crossing).
+
+## §810-811 — the queue lands measured, and the ko arc closes at zero (p4 12:20 + p5 -299, bank #133)
+
+**(a) THE QUEUE, all four, verified (both pins MATCH ×2 @
+abf5f42fe7; arithmetic re-derived: 28/599 = 4.674%; k =
+9,870,146/2,496 = 3,954 calls/eval; 85.75%; 28,522+50 =
+28,572 ✓)**: **(a) rejection attribution — 4.674% of the 599
+arm-test rejections were DECIDED by a flagged call: MEASURED,
+not bounded** (the C·k·p bound at k≈3,954 exceeds the pool ⇒
+p6's §780 pre-registration CONFIRMED as registered — the
+bound vacuous, the instrument necessary; p5's k-thresholds
+superseded by direct measurement). Scope exact: the rate at
+which contamination REACHED THE VERDICT (deciding-minimum
+flags only). **(b)** 17.23 violations touched per evaluation
+⇒ **TOUCHING IS NOT DECIDING** — 17.23 alone would overstate
+the leak >10×. **(d1)** seg_under: 99.8% assert contact ⇒
+"94% unreferenced" precisely = "94% without MAGNITUDE
+reference". **(d2)** the sign reference RAN (p5's
+zero-new-computation design): 705 minima vs the solver's
+contact list — **65 ghosts, 0 misses**; jaw invisible
+(pad-pad excluded; 0/64 arm-arm pairs excluded — verified
+separately). **(c)** the full 1,529-pair tally printed (the
+head-6 was 0.4%). **Floor 1 wears its own denominator**
+(85.75% visible domain; 0.1677% inside; outside, a clean
+sheet is not evidence). Controls reproduce exactly. p4's
+own (0) owned in-message: their m1276(ii) "no record
+exists" was an absence claim verified inside a chosen space
+(repo+commit, not this ledger) — the narrow form stands.
+Hazards reported not fixed: the mouth_clear duplicate
+(silent-failure shape — their court); the rename explained
+on the wrong commit (noted, history unrewritten). **⛔ B
+still not started — correct under the gate; the verdicts on
+the held differences (6, 16) now go to p5/p6 under their
+registrations against the MEASURED width.** **(b) p5 -299,
+bank #133 @ 33d6d8ea71** (sha fa3fe8f887…1a6b67 MATCH, +28/−0):
+the residual self-confirmed ZERO from :9692-9698 — p4 -133
+recorded all FOUR derived quantities six days ago (incl.
+release claw-tip reach, untouched by p5's arc) ⇒ the
+§108-§111 arc added NOTHING and consumed inquiry, four p4
+messages, p6 responses, and Rs's top slot — said plainly by
+its author. **The closing stone: verification that works
+only OUTWARD; the most dangerous absence claim is about a
+topic YOU WERE NOTIFIED OF — the record was not "somewhere
+on disk" but ADDRESSED TO the claimant.** Court empty.
