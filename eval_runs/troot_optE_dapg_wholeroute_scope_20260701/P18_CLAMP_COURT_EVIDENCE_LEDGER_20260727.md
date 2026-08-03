@@ -21499,3 +21499,79 @@ TWO populations: the 0.000-mode (dv≥0, invisible to floor 1;
 the fix cures it) and the floor-1-only 15 (the fix cannot
 reach) — the same knot as (b). All three additions relayed to
 p4 as fix-run design inputs.
+
+## §763 — the interlocking corrections: a gate consumer, a retracted exposure, and a second blind spot (p4 10:57 + p5 -272, bank #108)
+
+**Inbound**: p4 (10:57:37) and p5 -272 (10:57:47),
+interlocking. **(a) §761(d) CORRECTED both ways — the stone
+survives STRONGER**: p4's closed query (verified: :886 held()
+"jaw_gaps(t,dd)[0] < release_floor AND cable_in_mouth"; :583
+"2.0 < gap < 8.0"; 7+ sites) shows jaw_gaps feeds BOOLEANS —
+"report not gate" was wrong AS A TOTAL CLAIM; a wrong value
+there FLIPS whether holding is recorded. BUT the audit's
+call-site split (915+1+1+1 = 918 ✓ exhaustive) shows the
+damage LANDED 915/918 on the reporting path; held() was hit
+ONCE in 11.85M. Both in the record; neither cancels. The
+per-consumer stone strengthens: jaw_gaps has BOTH consumer
+types, so its contamination wears BOTH signatures. The +0.00
+IS jaw_gaps()[0] — the capture predicate's own input, not a
+bystander. **(b) p5's retraction of their own exposure**:
+grepping their OWN sheet, §51-§53 contain none of the three
+words — §88-4's "the numbers my seating/holding sections
+read" was FALSE; no jaw_gaps exposure on their surface; the
+interim tag has no target. What survives their correction:
+the dirtiest-channel fact, the artefact-candidate reading,
+the re-read request, the per-consumer stone (all
+consumer-independent). The REVERSE homework opened honestly:
+what instrument DO their seating sections rest on —
+UNIDENTIFIED, not guessed. Third same-shape today, named as
+a rule: **"grep X before writing 'my X uses Y'"** — the set
+written from the image instead of the object, where the
+third instance skipped the cheapest check (their own file).
+**(c) The fix's SECOND blind spot (p4, said before landing)**:
+repair replaces a disagreeing scalar with its own segment;
+at GENUINE CONTACT the segment is degenerate too (measured:
+|dv|<0.1mm ⇒ segments 0.0000–0.0008 mm) — nothing to repair
+from; left alone, counted separately. Jaw readings AT contact
+are exactly that case. Two named blind spots now: the
+fifteen (§762) and the contact-degenerate class — both
+COUNTED, neither folded. **(d)** The fix run is IN FLIGHT
+carrying GEOMDIST_REPAIR=1 + the type-pair denominator; the
+before/after = DEPTH_AUDIT_V4 (repair OFF) vs
+FIX_VERIFY_REPAIR (repair ON) at identical flags, GRASP
+lines side by side. **(e) Bank #108 EXECUTED @ 3f733a03b7
+(front door)**: sha 241c6bfbd1…8725 MATCH, +41/−0 declared
+and measured, committed = declared ✓ (the sheet's word
+counts now 5/4 — §89's own quotations added atop §88's
+3/3/1, arithmetic-consistent).
+
+## §764 — a floor does not survive a comparison (p6 -260)
+
+**Inbound**: p6 -260 (10:58 JST). Register pin MATCH ×2 (sha
+4b79f6490c…07ba3 @ b7824c3e23; the 1080/1081 note = one
+quantity, two roundings, flagged against future
+double-counting). **(a)** p5's per-consumer stone adopted
+WITH an instance from their own withdrawn material: L free =
+0 was a GATE output (a floor = no information) yet was read
+as a CELL PROPERTY, entered the register, and dissolved
+under unwrap — the crossing happened, today, at their desk.
+**(b) ⭐⭐ The extension, one level up**: **a floor survives
+within a cell but NOT across a comparison.** Floor-ness
+requires the consumer's decision to be MONOTONE in the
+measured quantity; a gate is monotone; a two-cell comparison
+is not (true 40/36 with under-rates 20%/5% ⇒ measured 32/34,
+REVERSED). And the bias is a function of THE SWEPT
+CONFIGURATION itself (spread/tilt/crown change the
+approaching geoms, the type-pair mix, the exposure) ⇒ common
+bias preserves order; configuration-dependent bias does not.
+⇒ **"positives are floors" licenses "this mounting allows ≥N
+poses" but NEVER "this mounting beats that one" — and the
+grid's purpose is exactly the latter.** No upper bound
+either: per-call rates do not bound per-cell candidate loss
+(one violating call can kill one candidate; 27,332 violating
+calls vs tens of candidates). **(c) OPERATIONAL RULING
+ADOPTED**: after the fix lands, **the grid and every
+cross-cell comparison need RE-RUNNING, not correction** — a
+comparison cannot be repaired by flooring. The six-road
+sheet's COMPARATIVE rows inherit this; its within-cell
+existence rows stand as floors.
