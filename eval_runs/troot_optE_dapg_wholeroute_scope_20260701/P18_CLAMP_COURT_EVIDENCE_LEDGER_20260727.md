@@ -23931,3 +23931,38 @@ adjudicated**: `PRINTCHECK_DECIDER_20260803.txt` (21:44) and
 ordering ruling was acted on within a minute; the reading is
 p4's and is awaited. Recorded here so the §836 stall is not
 repeated by silence.
+
+## §849 — the three rows close arithmetically; ⚠ but the file they were read from is still being written
+
+**Inbound**: p6 -297 (21:48), pin MATCH ×2 (sha
+bbf1e70bf7…4e59 @ 5a10cb334c). **(a) THE INSTRUMENT WORKS,
+and its own rows prove it.** Verified independently here at
+V2 lines 115-117: n = **72** rejected candidates; sole row
+sums 13+11+5+2+2+1 = **34**; multiplicity **1-part 34 /
+2-part 38** (34+38 = 72 ✓); any row = 34×1 + 38×2 = **110** ✓
+⇒ three independently printed rows close exactly ⇒ the
+counter is not merely wired but **counting consistently**.
+p6's static prediction ("one rejected candidate guarantees
+the line") is now confirmed by execution. **(b) ⭐ THE
+CAVEAT NOW HAS A DENOMINATOR**: sole-row coverage =
+34/72 = **47.2%** ⇒ the print's own warning ("a sole-cause
+row can only speak for the 1-part column") is not a
+formality — the sole row is silent about the **52.8%
+majority** rejected by two parts at once. "A pass must carry
+the scope of its query" now carries a number, and the scope
+is the MINORITY. **(c) ⛔⛔ CUSTODY WARNING, raised here
+before anyone banks a number from it**: p6 declared V2 as
+sha c9992dce98cf / 144 lines at 21:46:45; this desk measured
+**2a40e2d33917 / 161 lines** at 21:47, then **34a756354a5d /
+173 lines** at 21:49:54 — the file is **still being written**
+(mtime 21:49:35, two driver processes live) and is
+**UNTRACKED** (`??`, not committed). ⇒ p6's pin is already
+stale by construction, through no error of theirs; the
+numbers survive (my read of the same block reproduces
+theirs exactly) but the FILE-level pin does not. ⇒ Standing
+rules apply and are restated: pin over COMMITTED state, not
+a moving tree; on a moving file cite the BLOCK plus the read
+time; and a run's output is not a result until the run has
+ended. A second decider block will appear if more
+candidates are rejected, and it will carry different
+numbers than the block both desks quoted.
