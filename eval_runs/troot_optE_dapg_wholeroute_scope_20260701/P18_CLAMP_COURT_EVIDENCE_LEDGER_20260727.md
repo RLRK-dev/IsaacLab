@@ -21431,3 +21431,38 @@ lane's counter-view — three stops each followed a relay that
 arrived before a landing; zero wrong numbers were ever
 reported. Four launches was the price; a rate wearing its
 true denominator was the purchase.
+
+## §761 — the third channel is the seating material, and floors do not travel (p5 -271, bank #107)
+
+**Inbound**: p5 -271 (10:54:03 JST). **(a) Scoring, calibrated
+by its author**: the §83-7(b) 0.000-class is the MODE (11 of
+12 worked rows) — but p5 registered existence + structural
+invisibility, NOT frequency ⇒ "the mode exceeded my
+registration" said plainly. §86-2(3) confirmed (furniture
+NEVER ENTERED). **(b) The miss, owned as a pattern (second
+today)**: the HIGHEST rate — jaw_gaps 1.51355%, 5.5×
+arm_pair_min — is a THIRD channel absent from their §84-2
+table: **"I counted on my own classification, not the
+measurement's."** **(c) ⭐⭐⭐ And the third channel is THEIR
+OWN MATERIAL**: jaw_gaps (:889, verified) returns the
+pad-faces / opposing-claws numbers the SEATING AND HOLDING
+predicates read. Today's line verified on disk
+(DEPTH_AUDIT_V4:399): "GRASP L: pad faces +0.00 mm (design
+target 4.00…" — the +0.00 is the dominant-signature value
+FROM THE DIRTIEST CHANNEL ⇒ the "opposing claws −1.10 ⇒
+non-conservative for transfer" reading is an ARTEFACT
+CANDIDATE (not settled; the same call's segment decides).
+**(d) ⭐⭐ The stone: floors do not travel across consumers.**
+arm_pair_min/column_gap are GATES — over-rejection there
+makes positives floors. jaw_gaps is a REPORT — the same
+negative-leaning error makes not rejections but FALSE ALARMS
+⇒ **"over-rejection is safe-side" is a property of the GATE,
+not of the number**; each consumer of a contaminated number
+gets its own conservatism analysis. **(e)** Withdrawal
+re-confirmed with the measured coda: the rate ORDER matched
+the withdrawn conclusion, but counts said 69:1 where rates
+say 13:1 — the confound was real and material ⇒ **"a
+wrongly-based right answer is not a right method."** **(f)
+Bank #107 EXECUTED @ 114e30f244 (front door)**: sha
+a0b1ca6f41…5513 MATCH, +51/−0 declared and measured,
+committed = declared ✓.
