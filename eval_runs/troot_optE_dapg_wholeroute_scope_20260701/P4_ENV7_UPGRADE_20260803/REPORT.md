@@ -255,8 +255,33 @@ Negative is penetration — the driver's own marker (`<- TOUCHING OR THROUGH`) a
 
 ⛔ **So STEP 2's "100.0%, never held back" is a statement about the tracking gate, not about
 clearance.** The gate measures whether the arm followed its command; it does not measure whether
-the path was free. The arms passed **171 mm through each other** during a step that reported
-complete success.
+the path was free. That much stands.
+
+⛔ **CORRECTED — "the arms passed 171 mm through each other" was over-claimed and is withdrawn.**
+The −171.2 mm is a reading, and I reported it as a fact about the arms without checking it could be
+one. What is established:
+
+- The pair is `Lg_left_coupler` ↔ `Rg_right_silicone_pad`, bounding radii 33.5 and 22.0 mm.
+  **Two convex shapes cannot overlap more deeply than their bounding spheres together — 55.5 mm.**
+  −171.2 mm is over three times that, so it is not a penetration depth.
+- But I could not reproduce an impossible return anywhere: **0 in 143,626 distance calls across 60
+  poses**, and **0 in 4,000 poses swept on that exact pair** (which never came closer than +28.7 mm).
+- The geom-id mapping is read from `_steps_cell_full.xml`, written by that run via `to_xml()`. Left
+  ids land on `Lg_*` bodies and right ids on `Rg_*`, so the ordering is consistent by side — but not
+  proven identical to the runtime model.
+
+⇒ **Unresolved.** The number cannot be a penetration depth and cannot be reproduced as an artifact.
+The driver's own docstring anticipated exactly this: *"a path minimum that disagrees with both
+endpoints is either a real transient or a broken instrument, and a bare number cannot say which."*
+⛔ Until it is settled, **no conclusion about STEP 2's physical validity rests on this number** — in
+either direction. STEP 3's −0.9 / −1.0 mm are *within* the bound and remain plausible as real light
+contact.
+
+**Discriminator added to the driver** so the next run answers it instead of the next reader guessing:
+`arm_pair_min` now checks each returned depth against the two bounding radii and, the first time one
+exceeds it, prints the distance, the bound, the `fromto` segment the same call reports, and the
+centre separation. A segment whose length disagrees with the distance is the instrument's signature.
+Print-only; it decides nothing.
 
 ⇒ The same sentence the 08-02 handoff found four times holds again, one layer in:
 **a pose the arm reaches is not made valid by the gate opening.**

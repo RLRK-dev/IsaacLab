@@ -1435,6 +1435,9 @@ def path_arm_min(t, sc, q_from, q_to, cutoff=None):
     return (None, None) if best > 1e8 else (best, who)
 
 
+_IMPOSSIBLE_DEPTH_SEEN = []   # one-shot latch for the bound check inside arm_pair_min
+
+
 def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
     """Smallest signed distance between any geom of arm `ta` and any of arm `tb` [m].
 
@@ -1464,6 +1467,23 @@ def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
         dv = mujoco.mj_geomDistance(m, dd, int(ga[ia]), int(gb[ib]), cut, None)
         if dv >= cut:
             continue
+        # ⚠ Two convex shapes cannot overlap more deeply than their bounding spheres together, so a
+        # depth past that sum is the instrument talking, not the arms.  The docstring above already
+        # says a path minimum disagreeing with both endpoints is "either a real transient or a broken
+        # instrument, and a bare number cannot say which" -- this is the discriminator it was missing.
+        # Printed once, with the segment the SAME call reports: a fromto whose length disagrees with
+        # the returned distance is the signature.  Decides nothing; only speaks.
+        _bnd = float(m.geom_rbound[int(ga[ia])] + m.geom_rbound[int(gb[ib])])
+        if dv < -_bnd and not _IMPOSSIBLE_DEPTH_SEEN:
+            _IMPOSSIBLE_DEPTH_SEEN.append(1)
+            _ft = np.zeros(6)
+            _re = mujoco.mj_geomDistance(m, dd, int(ga[ia]), int(gb[ib]), cut, _ft)
+            print(f"[steps] ⛔ mj_geomDistance returned {_re * 1000:.1f} mm between geom "
+                  f"{int(ga[ia])} and {int(gb[ib])}, whose bounding spheres total only "
+                  f"{_bnd * 1000:.1f} mm -- no convex pair can overlap that deeply.  Its own segment "
+                  f"is {np.linalg.norm(_ft[3:] - _ft[:3]) * 1000:.1f} mm long and their centres are "
+                  f"{np.linalg.norm(dd.geom_xpos[int(ga[ia])] - dd.geom_xpos[int(gb[ib])]) * 1000:.1f} mm "
+                  f"apart.  Read every arm-to-arm path number in this run with that in mind.")
         if best is None or dv < best:
             best = dv
             if want_who:
