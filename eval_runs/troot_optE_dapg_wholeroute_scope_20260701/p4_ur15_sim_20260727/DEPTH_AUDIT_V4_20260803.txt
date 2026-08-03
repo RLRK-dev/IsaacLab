@@ -1,0 +1,499 @@
+# start 2026-08-03 10:20:37 JST
+# p18 rulings folded: 1170(i) 1174 floors / 1178 caller+line / 1183 type-pair / 1185 channel
+#   denominator / 1189 option (ii) + per-channel RATE (not counts)
+# flags: UNWRAP_SOLVE=1 ARM_PATH=1 -- p18 1189: option (ii) is strictly cheaper because it
+#   does NOT change what the run tests.  FURNITURE is deliberately OFF; the denominator will
+#   name furniture_gap as a channel this run never entered, and the rate claims nothing there.
+# stack: newton 1.4.0 / mujoco 3.10.0 / mujoco-warp 3.10.0.3 / warp-lang 1.15.0
+# driver blob: f4099c29e6023226dc24c53b6faa23bc1d3f232b
+[cell] cable bend EI in force: 0.005 N.m^2 from task_config.py:144
+[cell] -> joint stiffness 0.33333 N.m/rad over a 15 mm link
+[cell] cable 40 x 15 mm, 1.1243 g each, 44.97 g total
+[cell] clip collision read from the env source: True
+[steps] ⚠ the cell-constant contract is not satisfied yet: 11 names
+[steps] ⚠ each needs a home in the p5 spec; running non-strict while that is decided
+[steps]     _EXCUSED             line  1245  carries a number of its own and belongs to none of the three
+[steps]     _SEG_SCRATCH         line  1442  carries a number of its own and belongs to none of the three
+[steps]     _SHOULDER            line   436  carries a number of its own and belongs to none of the three
+[steps]     _bad                 line  2106  carries a number of its own and belongs to none of the three
+[steps]     _nz                  line  2112  carries a number of its own and belongs to none of the three
+[steps]     size="0.12 0.0425 0.0375" line   205  0.12 is written into the XML this driver builds.  The templa
+[steps]     size="0.12 0.0425 0.0375" line   205  0.0425 is written into the XML this driver builds.  The temp
+[steps]     size="0.12 0.0425 0.0375" line   205  0.0375 is written into the XML this driver builds.  The temp
+[steps]     pos="0 -0.175 1.485" line   205  -0.175 is written into the XML this driver builds.  The temp
+[steps]     pos="0 -0.175 1.485" line   205  1.485 is written into the XML this driver builds.  The templ
+[steps]     euler="2.356194 0 0" line   205  2.356194 is written into the XML this driver builds.  The te
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:324: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  m = cell.compile()
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:328: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  (S / "_steps_cell_full.xml").write_text(cell.to_xml())
+[steps] nq=113 nu=14 nbody=88 ngeom=140 eq=8  seat links C1=cab30 C2=cab23
+[steps] tracking bound: L reach 1546 mm -> lag allowed 5.18 mrad | R reach 1546 mm -> 5.18 mrad  (clearance 8.0 mm / reach; re-measured each step as the arm extends)
+[steps] arm colours: LEFT arm = ORANGE, RIGHT arm = PURPLE (claws keep blue = upper, red = lower).  Use the colour, not the side of the screen: the close-up panel is mirrored.
+[steps] geoms: 140 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.300,+0.285] y[+0.280,+0.280] z-table[+0.1486,+0.1559] ncon=14
+[steps] ⚠ grasp centre moved off C1: x=-0.2000 m (C1 is at +0.1500); span unchanged at 88 mm commanded
+[steps] measured grasp: L=cab3 [-0.2474  0.28    0.9524]  R=cab9 [-0.1574  0.28    0.952 ]  drop across the span = 0.4 mm
+[steps] ⚠ mast set is 3 of 4 parts; ['stereo_head'] absent by construction, so no rejection can be attributed to it in this run
+[steps] attitude menu: 27 entries per arm; entry i on R is the negation of entry i on L in both components -> YES
+[steps] attitude menu, first 8 (yaw, roll) in rad:  L(+0.00,-0.00)/R(+0.00,+0.00)  L(+0.00,-0.35)/R(+0.00,+0.35)  L(+0.00,-0.60)/R(+0.00,+0.60)  L(+0.00,-0.85)/R(+0.00,+0.85)  L(+0.00,-1.10)/R(+0.00,+1.10)  L(-0.30,-0.35)/R(+0.30,+0.35)  L(+0.30,-0.35)/R(-0.30,+0.35)  L(-0.30,-0.60)/R(+0.30,+0.60)
+[steps] attitude menu: 22 of 27 entries have a non-zero yaw -- those are the ones the sign can be seen on; on the other 5 it is invisible either way, which is why a single trace line could not settle this
+[steps] start pose = the cell's home, both arms: [-3.1521 -0.2867  2.4674 -1.3953  1.5634 -1.5782]
+[steps] start-pose IK L: rejected against -- the other arm x81, g6 on L_forearm_link vs stem x66, g6 on L_forearm_link vs crown x22, g5 on L_upper_arm_link vs stem at 4/6 along the move (on the way) x1   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)
+[steps] start-pose IK L: 138 solved / 36 collision-free / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll 48.7 deg sigma_min 0.1348 |q|max=4.09 rad
+[steps] start-pose IK L: clear #0: q = [-4.496335 -0.075032 +2.484074 -1.697326 +1.105166 -4.025082] sigma 0.1097
+[steps] start-pose IK L: clear #1: q = [-6.084693 -2.968048 -2.366914 -2.056167 -0.901229 -2.571888] sigma 0.1254
+[steps] start-pose IK L: clear #2: q = [-5.999820 -3.182614 -2.473322 -1.354857 -0.775505 -3.277519] sigma 0.0820
+[steps] start-pose IK L: clear #3: q = [-5.933166 -3.046430 -2.213197 -2.522660 -0.675485 -2.189828] sigma 0.1096
+[steps] start-pose IK L: clear #4: q = [-5.747458 -3.316470 -2.005020 -3.041822 -0.376181 -1.757969] sigma 0.0680
+[steps] start-pose IK L: clear #5: q = [-4.653937 -0.142780 +2.389620 -1.196949 +0.872295 -4.314219] sigma 0.1157
+[steps] start-pose IK L: clear #6: q = [-4.496335 -0.075032 +2.484074 -1.697326 +1.105166 -4.025082] sigma 0.1097
+[steps] start-pose IK L: clear #7: q = [-6.084693 -2.968048 -2.366914 -2.056167 -0.901229 -2.571888] sigma 0.1254
+[steps] start-pose IK L: clear #8: q = [-4.090827 -0.203295 +2.413064 -1.525041 +1.737740 -3.534001] sigma 0.1348
+[steps] start-pose IK L: clear #9: q = [-4.237160 -0.025090 +2.481090 -1.969124 +1.499513 -3.823599] sigma 0.1089
+[steps] start-pose IK L: clear #10: q = [-4.090827 -0.203295 +2.413064 -1.525041 +1.737740 -3.534001] sigma 0.1348
+[steps] start-pose IK L: clear #11: q = [-4.237160 -0.025090 +2.481090 -1.969124 +1.499513 -3.823599] sigma 0.1089
+[steps] start-pose IK L: clear #12: q = [-4.565897 -0.205369 +2.380006 -1.112749 +1.002236 -3.977441] sigma 0.1361
+[steps] start-pose IK L: clear #13: q = [-0.057855 -3.041044 -2.482848 -1.425646 -1.282329 -3.497548] sigma 0.1152
+[steps] start-pose IK L: clear #14: q = [-0.032262 -2.980585 -2.460622 -1.619375 -1.243701 -3.165680] sigma 0.1253
+[steps] start-pose IK L: clear #15: q = [-0.057855 -3.041044 -2.482848 -1.425646 -1.282329 -3.497548] sigma 0.1152
+[steps] start-pose IK L: clear #16: q = [-5.933166 -3.046430 -2.213197 -2.522660 -0.675485 -2.189828] sigma 0.1096
+[steps] start-pose IK L: clear #17: q = [-0.416113 -2.857505 -2.340768 -1.914850 +4.422529 -3.444462] sigma 0.1513
+[steps] start-pose IK L: clear #18: q = [-0.032262 -2.980585 -2.460622 -1.619375 -1.243701 -3.165680] sigma 0.1253
+[steps] start-pose IK L: clear #19: q = [-4.237160 -0.025090 +2.481090 -1.969124 +1.499513 -3.823599] sigma 0.1089
+[steps] start-pose IK L: clear #20: q = [-4.565897 -0.205369 +2.380006 -1.112749 +1.002236 -3.977441] sigma 0.1361
+[steps] start-pose IK L: clear #21: q = [-0.057855 -3.041044 -2.482848 -1.425646 -1.282329 -3.497548] sigma 0.1152
+[steps] start-pose IK L: clear #22: q = [-5.933166 -3.046430 -2.213197 -2.522660 -0.675485 -2.189828] sigma 0.1096
+[steps] start-pose IK L: clear #23: q = [-4.653937 -0.142780 +2.389620 -1.196949 +0.872295 -4.314219] sigma 0.1157
+[steps] start-pose IK L: clear #24: q = [-4.565897 -0.205369 +2.380006 -1.112749 +1.002236 -3.977441] sigma 0.1361
+[steps] start-pose IK L: clear #25: q = [-6.084693 -2.968048 -2.366914 -2.056167 -0.901229 -2.571888] sigma 0.1254
+[steps] start-pose IK L: clear #26: q = [-4.237160 -0.025090 +2.481090 -1.969124 +1.499513 -3.823599] sigma 0.1089
+[steps] start-pose IK L: clear #27: q = [-0.047954 -2.916621 -2.426189 -1.820971 -1.267361 -2.862609] sigma 0.1393
+[steps] start-pose IK L: clear #28: q = [-0.057855 -3.041044 -2.482848 -1.425646 -1.282329 -3.497548] sigma 0.1152
+[steps] start-pose IK L: clear #29: q = [-3.975488 -0.016382 +2.406276 -2.038735 +1.940524 -3.737912] sigma 0.1236
+[steps] start-pose IK L: clear #30: q = [-5.816166 -3.158023 -2.245836 -2.283562 -0.492951 -2.403689] sigma 0.0631
+[steps] start-pose IK L: clear #31: q = [-4.237160 -0.025090 +2.481090 -1.969124 +1.499513 -3.823599] sigma 0.1089
+[steps] start-pose IK L: clear #32: q = [-4.653937 -0.142780 +2.389620 -1.196949 +0.872295 -4.314219] sigma 0.1157
+[steps] start-pose IK L: clear #33: q = [-6.013428 -3.068711 -2.419779 -1.750753 -0.795748 -2.874652] sigma 0.0971
+[steps] start-pose IK L: clear #34: q = [-4.237160 -0.025090 +2.481090 -1.969124 +1.499513 -3.823599] sigma 0.1089
+[steps] start-pose IK L: clear #35: q = [-5.747458 -3.316470 -2.005020 -3.041822 -0.376181 -1.757969] sigma 0.0680
+[steps] start-pose IK L: chosen q = [-4.090827 -0.203295 +2.413064 -1.525041 +1.737740 -3.534001] rad
+[steps] start-pose IK R: arm-path violation phase (0 = start of the move, 1 = the pose): 0.0-0.2: 8  0.2-0.4: 0  0.4-0.6: 0  0.6-0.8: 28  0.8-1.0: 4   n=40
+[steps] start-pose IK R: rejected against -- g44 on R_forearm_link vs stem x60, the other arm ON THE WAY x40 (e.g. 44 <-> 6 at 21/27 along the move), g43 on R_upper_arm_link vs crown x22, the other arm x20, g43 on R_upper_arm_link vs crown at 5/8 along the move (on the way) x13, g43 on R_upper_arm_link vs crown at 7/10 along the move (on the way) x7, g43 on R_upper_arm_link vs crown at 6/9 along the move (on the way) x5, g43 on R_upper_arm_link vs crown at 6/10 along the move (on the way) x4, g44 on R_forearm_link vs crown x2, g43 on R_upper_arm_link vs stem at 6/8 along the move (on the way) x2, Rg_left_pad1 vs stem at 7/9 along the move (on the way) x1, g72 on Rg_left_follower vs stem at 9/11 along the move (on the way) x1, g68 on Rg_left_coupler vs stem at 9/11 along the move (on the way) x1, g43 on R_upper_arm_link vs stem x1, g78 on Rg_left_pad vs stem at 8/10 along the move (on the way) x1   (parts named; the crown and stem/foot are the mounting, 'the other arm' is not)
+[steps] start-pose IK R: 139 solved / 8 collision-free / floor 0.00 removed 0 of them (it ranks, it does not exclude), chosen pos  0.00 mm roll 20.1 deg sigma_min 0.2160 |q|max=5.41 rad
+[steps] start-pose IK R: clear #0: q = [-5.410581 +0.335521 +2.086520 -3.283349 -1.324988 +0.344403] sigma 0.2160
+[steps] start-pose IK R: clear #1: q = [-5.241184 +0.388056 +1.415425 -5.731147 +1.440549 -2.688354] sigma 0.2406
+[steps] start-pose IK R: clear #2: q = [-5.241184 +0.388056 +1.415425 -5.731147 +1.440549 -2.688354] sigma 0.2406
+[steps] start-pose IK R: clear #3: q = [-5.068333 +0.224243 +1.725427 -2.276198 -1.580724 +0.724574] sigma 0.2795
+[steps] start-pose IK R: clear #4: q = [-5.241184 +0.257822 +2.027622 -3.071518 -1.440549 +0.453239] sigma 0.2464
+[steps] start-pose IK R: clear #5: q = [-5.445986 +0.322066 +2.054544 -3.136205 -1.303847 +0.575799] sigma 0.2231
+[steps] start-pose IK R: clear #6: q = [-5.410581 +0.335521 +2.086520 -3.283349 -1.324988 +0.344403] sigma 0.2160
+[steps] start-pose IK R: clear #7: q = [-5.241184 +0.388056 +1.415425 -5.731147 +1.440549 -2.688354] sigma 0.2406
+[steps] start-pose IK R: chosen q = [-5.410581 +0.335521 +2.086520 -3.283349 -1.324988 +0.344403] rad
+[steps] 88mm-SPAN INTERLEAVE: arms closest +0.0 mm (16 <-> 70)   <- TOUCHING OR THROUGH   spread 0.220 tilt 45.0 deg   crown r 0.110   ⚠ commanded span, not the links actually held
+[steps] STANDING ERROR L: 0.00 mrad at rest vs TRACK_TOL 5.18 mrad -> gate opens with 100% of the tolerance free
+[steps] STANDING ERROR L per joint [mrad]: j0=+0.0 j1=-0.0 j2=-0.0 j3=+0.0 j4=+0.0 j5=+0.0   (no joint at a limit)   touching: nothing
+[steps] STANDING ERROR R: 0.00 mrad at rest vs TRACK_TOL 5.18 mrad -> gate opens with 100% of the tolerance free
+[steps] STANDING ERROR R per joint [mrad]: j0=+0.0 j1=-0.0 j2=-0.0 j3=+0.0 j4=+0.0 j5=-0.0   (no joint at a limit)   touching: nothing
+[steps] measured pinch->mouth drop: L -29.2 mm  R -41.6 mm
+[steps] Tier A cross-check: 0 measurable values (CLAW_OFFSET excluded -- the cell measures pinch->mouth, which is a different vector)
+[steps] STEP1 L arm touching: clear
+[steps] STEP1 R arm touching: clear
+[steps] re-measured after the approach: L=cab4 [-0.237   0.3181  0.8039]  R=cab10 [-0.1513  0.3455  0.8043]   (centre x=-0.2000)
+[steps] STEP1 L: tool err=   2.1mm
+          joint err   = [ 0. -0. -0.  0.  0.  0.] mrad
+          act force   = [ 0.  0.  0. -0. -0. -0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [-28.7 -50.2  36.8   3.3   2.2   0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] STEP1 R: tool err=   2.1mm
+          joint err   = [ 0. -0. -0.  0.  0. -0.] mrad
+          act force   = [ 0.  0.  0. -0. -0.  0.] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))
+          gravity load= [-61.6 -85.6   6.1  -4.3  -1.    0. ] N.m
+          saturated   = [np.False_, np.False_, np.False_, np.False_, np.False_, np.False_]
+[steps] vertical check: allowance 5.73 deg, cap 5.73 deg (the smallest non-zero tilt the attitude menu can make, measured as pinch->mouth against world -z, not as a roll); the allowance is an interim until a run reports the worst residual an upright command actually leaves
+[steps] arm geom sets: L=38 R=38, DISJOINT  (a shared geom would read as zero distance between the arms at every step)
+[steps] watch along here while it runs: /home/rlrk/Downloads/ur15_live.mp4
+[steps] watch-along file opened with the starting frame; it stays on that frame until the attitude search finishes and the arms begin to move
+[steps] release opening solved from the asset: ctrl 186.7 (claw tips reach 12.00 mm = cable 8.0 plus the 4.00 mm the cable can sit off centre)
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x2, g6 on L_forearm_link vs stem x1
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1, g6 on L_forearm_link vs stem x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x2, g6 on L_forearm_link vs stem x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x2, g6 on L_forearm_link vs stem x1
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1, g6 on L_forearm_link vs stem x1
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- g6 on L_forearm_link vs stem x1
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x2
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- g6 on L_forearm_link vs stem x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- g6 on L_forearm_link vs stem x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- g6 on L_forearm_link vs stem x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK L: (fell back) rejected against -- the other arm x1
+[steps] aim L: yaw +0.15 roll +0.65 rad (+37 deg tilt), seat error 9.79 mm   <- nothing seated it; best effort
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g44 on R_forearm_link vs stem at 1/2 along the move (on the way) x1, the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- the other arm x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g43 on R_upper_arm_link vs crown x1
+[steps] aim R: yaw +0.30 roll +0.40 rad (+23 deg tilt), seat error 8.99 mm   <- nothing seated it; best effort
+[steps] STEP 2 COMMAND L: reached 100.0% of the way to the solved pose in    7.4s (3.36x the 2.2s the table allots -- the table no longer ends the step), never held back
+[steps] STEP 2 COMMAND R: reached 100.0% of the way to the solved pose in    7.4s (3.36x the 2.2s the table allots -- the table no longer ends the step), never held back
+[steps] STEP 2 sigma_min L=0.1619 R=0.2022  mast L=+60.1 mm (g4 on L_shoulder_link vs crown) R=+33.8 mm (g44 on R_forearm_link vs crown)
+[steps] STEP 2 ARM REACH: L  34.7 mm below the mouth (geom34), +166.2 mm vs the table | R  10.4 mm below the mouth (Rg_right_pad_f1ext), +186.5 mm vs the table
+[steps] STEP 2 AS REALISED: L 28.7 deg off straight down, pads +79.89 mm | R  0.0 deg off straight down, pads +79.89 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 2 ARM-TO-ARM: closest +0.0 mm (26 <-> 50)  <- TOUCHING OR THROUGH   along the move -53.0 mm (18 <-> 68 at t=4.42s)   worst so far -53.0 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 2 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 17 of 37 candidates, 19 of them roomy, winner sigma 0.1620 (best survivor 0.1620) vs best dropped 0.1567; the mast removed 7 at the pose and 1 on the way there (worst path +0.0 mm, g8 on L_wrist_2_link vs stem at 3/4 along the move) | R: the winning pose cleared the whole 16 mm search radius; clearance removed 14 of 35 candidates, 32 of them roomy, winner sigma 0.2022 (best survivor 0.2915) vs best dropped 0.2926; the mast removed 6 at the pose and 1 on the way there (worst path +0.0 mm, g44 on R_forearm_link vs stem at 1/3 along the move) ; realised at rest +0.0 mm (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 2 CARRY: L mouth[-0.232 +0.322 +0.201] holds cab5 at ( +1.9, -0.6,-197.0) mm | R mouth[-0.150 +0.350 +0.197] holds cab11 at ( +5.3, -1.0,-192.9) mm
+[steps] STEP 2 C1 SEAT: nearest point ON THE CABLE (cab29 at 0.97) misses the groove centre by ( -20.0, +73.0,  -2.7) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 2 C1 GATE: cab30 at [+0.130 +0.423 +0.006] -> fails on y,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 2 C2 GATE: cab23 at [+0.029 +0.397 +0.009] -> PASS   (links whose geometry alone would qualify: [23, 24, 25])
+[steps] STEP 2 PENETRATION: cab24 is 0.7 mm INSIDE C2 C2_2   (clip-cable contacts now: 6)
+[steps] STEP 2 cable上空へ     t=  7.4s L=   2.2mm R=   2.1mm c1[y+0.423 z+0.006] c2[y+0.397 z+0.009] pin=--/-- grip=--
+[steps] ⛔ aim IK L: NOT ONE of 1 candidates cleared the clearance or its path, so all 1 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] STEP3 L: standoff re-aim (y,z only), seat error 16.17 mm
+[steps] STEP3 L: that residual in the jaw's own axes (PREDICTED close): along cable  -3.95  closing  +8.53  across the mouth +13.23 mm
+[steps] STEP3 L: and in world [ -2.03 +11.53 -11.23] mm (same vector, no frame of its own -- compare the two arms here)
+[steps] STEP3 L: closing axis in world [-0.023 -0.216 -0.976]  across-mouth axis [+0.156 +0.964 -0.216]
+[steps] STEP3 L: the aim ASSUMED the cable at [-0.2376 +0.3195 +0.8039] running along world x (x held, y and z re-aimed); cab4 ACTUALLY runs [+0.952 +0.305 -0.000] = 17.8 deg off that axis (neighbours: cab3 17.8, cab5 17.7 deg)
+[steps] ⛔ aim IK R: NOT ONE of 2 candidates cleared the clearance or its path, so all 2 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] aim IK R: (fell back) rejected against -- g44 on R_forearm_link vs crown at 4/6 along the move (on the way) x1
+[steps] STEP3 R: standoff re-aim (y,z only), seat error 10.13 mm
+[steps] STEP3 R: that residual in the jaw's own axes (PREDICTED close): along cable  +0.21  closing  -2.23  across the mouth  +9.84 mm
+[steps] STEP3 R: and in world [ +0.65  -1.53  -9.95] mm (same vector, no frame of its own -- compare the two arms here)
+[steps] STEP3 R: closing axis in world [+0.275 -0.884 +0.378]  across-mouth axis [+0.108 -0.362 -0.926]
+[steps] STEP3 R: the aim ASSUMED the cable at [-0.1518 +0.3467 +0.8039] running along world x (x held, y and z re-aimed); cab10 ACTUALLY runs [+0.955 +0.297 +0.004] = 17.3 deg off that axis (neighbours: cab9 17.4, cab11 17.1 deg)
+[steps] STEP3: if the cable had rotated rigidly, these residuals would need x-y +8.44 deg and x-z +0.84 deg; the links measure 17.8 and 17.3 deg off world x, with x-y components +0.3054 and +0.2974
+[steps] STEP3 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g4 on L_shoulder_link vs crown), on the way there +60.1 mm (g4 on L_shoulder_link vs crown at 1/3 along the move)
+[steps] STEP3 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g42 on R_shoulder_link vs crown), on the way there +60.1 mm (g42 on R_shoulder_link vs crown at 1/3 along the move)
+[steps] STEP3 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g4 on L_shoulder_link vs crown), on the way there +60.1 mm (g4 on L_shoulder_link vs crown at 1/3 along the move)
+[steps] STEP3 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g42 on R_shoulder_link vs crown), on the way there +60.1 mm (g42 on R_shoulder_link vs crown at 1/3 along the move)
+[steps] STEP3 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g4 on L_shoulder_link vs crown), on the way there +60.1 mm (g4 on L_shoulder_link vs crown at 1/3 along the move)
+[steps] STEP3 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g42 on R_shoulder_link vs crown), on the way there +60.1 mm (g42 on R_shoulder_link vs crown at 1/3 along the move)
+[steps] STEP 3 COMMAND L: reached 100.0% of the way to the solved pose in    9.5s (2.12x the 4.5s the table allots -- the table no longer ends the step), never held back
+[steps] STEP 3 COMMAND R: reached 100.0% of the way to the solved pose in    9.5s (2.12x the 4.5s the table allots -- the table no longer ends the step), never held back
+[steps] STEP 3 sigma_min L=0.2110 R=0.2616  mast L=+60.1 mm (g4 on L_shoulder_link vs crown) R=+60.1 mm (g42 on R_shoulder_link vs crown)
+[steps] STEP 3 ARM REACH: L  51.6 mm below the mouth (geom34),  -24.1 mm vs the table <- THROUGH THE TABLE | R  31.3 mm below the mouth (geom58),   -6.9 mm vs the table <- THROUGH THE TABLE
+[steps] STEP 3 AS REALISED: L 54.0 deg off straight down, pads +70.40 mm | R 33.1 deg off straight down, pads +74.12 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 3 ARM-TO-ARM: closest +33.0 mm (16 <-> 50)   along the move +0.0 mm (Lg_right_pad2 <-> 50 at t=7.45s)   worst so far -53.0 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 3 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 0 of 1 candidates, 1 of them roomy, winner sigma 0.2105 (best survivor 0.2105) vs best dropped 0.2105; the mast removed 0 at the pose and 0 on the way there | R: clearance removed 0 of 2 candidates, winner predicted +10.8 mm, winner sigma 0.2616 (best survivor 0.2616) vs best dropped 0.2616; 0 candidates cleared the whole 16 mm search radius, widest inside it +10.8 mm; the mast removed 0 at the pose and 1 on the way there (worst path -125.6 mm, g44 on R_forearm_link vs crown at 4/6 along the move) ; realised at rest +33.0 mm (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 3 CARRY: L mouth[-0.238 +0.330 +0.028] holds cab5 at ( +6.7, -6.4,-23.6) mm | R mouth[-0.148 +0.335 +0.024] holds cab11 at ( +2.9,+14.4,-20.5) mm
+[steps] STEP 3 C1 SEAT: nearest point ON THE CABLE (cab30 at 0.07) misses the groove centre by ( -18.4, +72.2,  -2.7) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 3 C1 GATE: cab30 at [+0.131 +0.422 +0.006] -> fails on y,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 3 C2 GATE: cab23 at [+0.029 +0.397 +0.009] -> PASS   (links whose geometry alone would qualify: [23, 24, 25])
+[steps] STEP 3 PENETRATION: cab24 is 0.7 mm INSIDE C2 C2_2   (clip-cable contacts now: 6)
+[steps] STEP 3 cableへ下降     t= 16.9s L=   7.5mm R=   4.8mm c1[y+0.422 z+0.006] c2[y+0.397 z+0.009] pin=--/-- grip=--
+[steps] STEP4 L: holding the seated pose, fingers only
+[steps] STEP4 R: holding the seated pose, fingers only
+[steps] STEP4 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g4 on L_shoulder_link vs crown), on the way there beyond the search radius
+[steps] STEP4 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g42 on R_shoulder_link vs crown), on the way there beyond the search radius
+[steps] STEP4 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g4 on L_shoulder_link vs crown), on the way there beyond the search radius
+[steps] STEP4 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g42 on R_shoulder_link vs crown), on the way there beyond the search radius
+[steps] STEP4 L: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g4 on L_shoulder_link vs crown), on the way there beyond the search radius
+[steps] STEP4 R: inherited aim pose, arm-to-arm check = not on the other arm (⚠ arm-to-arm ONLY -- posts and table are invisible to this test); mast at the pose +60.1 mm (g42 on R_shoulder_link vs crown), on the way there beyond the search radius
+[steps] STEP4: arms settled to 0.16 mrad at t=3.42s into the step -- fingers may close
+[steps] STEP4 R: arm in contact with the cable at t=3.89s -- ['cab9 (via Rg_right_pad_f1ext)']
+[steps] STEP4 L: arm in contact with the cable at t=4.21s -- ['cab3 (via Lg_left_pad_f1ext)']
+[steps] GRASP L: cable centreline is 11.46 mm from the seat (perpendicular, interpolated on cab4 at 0.30 along it)
+[steps] GRASP L: in the jaw's own axes: along cable  +2.59  closing +10.88  across the mouth  -2.52 mm (containment wants |across| < 4.00, derived from the asset; the along-cable term does not affect it)
+[steps] GRASP L: seat vs its own PREDICTION [-3.9  9.2 -2.7] mm (| 10.4|)  cable vs where it was aimed [-0.2 -8.8 -0.8] mm (|  8.8|)
+[steps] GRASP L: joints vs commanded [-0.1 -0.   0.2  0.2  0.6  0. ] mrad -> servo arrived; nearest link is   8.8 mm from where the aimed link was (identity may differ -- not a drift)
+[steps] GRASP L: pad faces  +0.00 mm (design target 4.00 on a O8 cable, task_config.py:277), opposing claws  -1.10 mm, claw min over the run  -1.11 mm  <- NEGATIVE: non-conservative for transfer
+[steps] GRASP L: cable touched by pad1 none / claws none / pad2-only none   clamped=False (needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had closed through the cable)
+[steps] GRASP L: fingers blocked by ['Lg_right_follower', 'table']
+[steps] GRASP L: nearest cable link cab4 at  29.7 mm from the pinch, pad separation  41.1 mm, ctrl=236, pad geoms touching cable = none
+[steps] GRASP R: cable centreline is 18.55 mm from the seat (perpendicular, interpolated on cab10 at 0.50 along it)
+[steps] GRASP R: in the jaw's own axes: along cable  -0.06  closing +14.20  across the mouth +11.93 mm (containment wants |across| < 4.00, derived from the asset; the along-cable term does not affect it)
+[steps] GRASP R: seat vs its own PREDICTION [0.2 0.5 2.1] mm (|  2.1|)  cable vs where it was aimed [  4.1 -13.    2.2] mm (| 13.8|)
+[steps] GRASP R: joints vs commanded [-0.1  0.2  0.7  1.9 -2.  -0.1] mrad -> servo arrived; nearest link is  13.8 mm from where the aimed link was (identity may differ -- not a drift)
+[steps] GRASP R: pad faces  +5.36 mm (design target 4.00 on a O8 cable, task_config.py:277), opposing claws  +7.27 mm, claw min over the run  -7.47 mm  <- NEGATIVE: non-conservative for transfer
+[steps] GRASP R: cable touched by pad1 none / claws ['L', 'R'] / pad2-only none   clamped=False (needs both pads AND a 2-8 mm face gap; touch alone passed on a jaw that had closed through the cable)
+[steps] GRASP R: fingers blocked by ['cab10', 'cab11', 'cab9', 'table']
+[steps] GRASP R: nearest cable link cab11 at  35.0 mm from the pinch, pad separation  47.6 mm, ctrl=236, pad geoms touching cable = ['Rg_left_pad_f1ext', 'Rg_right_pad_f1ext']
+[steps] STEP 4 COMMAND L: reached 100.0% of the way to the solved pose in   11.1s (2.48x the 4.5s the table allots -- the table no longer ends the step), held back on 9921 of 53520 ticks because THIS arm was more than 5.2 mrad behind its own command
+[steps] STEP 4 COMMAND R: reached 100.0% of the way to the solved pose in   11.1s (2.48x the 4.5s the table allots -- the table no longer ends the step), held back on 22430 of 53520 ticks because THIS arm was more than 5.2 mrad behind its own command
+[steps] STEP 4 sigma_min L=0.2097 R=0.2609  mast L=+60.1 mm (g4 on L_shoulder_link vs crown) R=+60.1 mm (g42 on R_shoulder_link vs crown)
+[steps] STEP 4 ARM REACH: L  35.7 mm below the mouth (geom34),  -23.3 mm vs the table <- THROUGH THE TABLE | R  28.8 mm below the mouth (geom58),  -12.9 mm vs the table <- THROUGH THE TABLE
+[steps] STEP 4 AS REALISED: L 44.4 deg off straight down, pads  +0.00 mm | R 37.0 deg off straight down, pads  +5.36 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 4 ARM-TO-ARM: closest +38.8 mm (16 <-> 50)   along the move -62.3 mm (27 <-> 64 at t=23.98s)   worst so far -62.3 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 4 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 0 of 1 candidates, 1 of them roomy, winner sigma 0.2105 (best survivor 0.2105) vs best dropped 0.2105; the mast removed 0 at the pose and 0 on the way there | R: clearance removed 0 of 2 candidates, winner predicted +10.8 mm, winner sigma 0.2616 (best survivor 0.2616) vs best dropped 0.2616; 0 candidates cleared the whole 16 mm search radius, widest inside it +10.8 mm; the mast removed 0 at the pose and 1 on the way there (worst path -125.6 mm, g44 on R_forearm_link vs crown at 4/6 along the move) ; realised at rest +38.8 mm (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 4 CARRY: L mouth[-0.237 +0.336 +0.012] holds cab5 at ( +9.1,-22.8, -9.1) mm | R mouth[-0.148 +0.334 +0.016] holds cab11 at ( +7.2, +2.0, -9.7) mm
+[steps] STEP 4 C1 SEAT: nearest point ON THE CABLE (cab30 at 0.18) misses the groove centre by ( -16.6, +71.8,  -3.0) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 4 C1 GATE: cab30 at [+0.131 +0.421 +0.006] -> fails on y,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 4 C2 GATE: cab23 at [+0.029 +0.397 +0.009] -> PASS   (links whose geometry alone would qualify: [23, 24, 25])
+[steps] STEP 4 PENETRATION: cab24 is 0.8 mm INSIDE C2 C2_2   (clip-cable contacts now: 3)
+[steps] STEP 4 cable把持      t= 28.1s L=  11.7mm R=  11.9mm c1[y+0.421 z+0.006] c2[y+0.397 z+0.009] pin=--/-- grip=-R
+[steps] ⛔ STEP5 per-step IK L: NOT ONE of 36 candidates cleared the clearance or its path, so all 36 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] STEP5 per-step IK L: (fell back) rejected against -- the other arm x17, the other arm ON THE WAY x14 (e.g. 6 <-> 44 at 7/21 along the move), g6 on L_forearm_link vs stem x9, g8 on L_wrist_2_link vs stem at 2/3 along the move (on the way) x1, g9 on L_wrist_3_link vs stem x1, g6 on L_forearm_link vs crown x1
+[steps] ⛔ STEP5 per-step IK R: NOT ONE of 34 candidates cleared the clearance or its path, so all 34 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] STEP5 per-step IK R: (fell back) rejected against -- the other arm ON THE WAY x18 (e.g. 47 <-> 16 at 7/16 along the move), the other arm x15, g44 on R_forearm_link vs stem at 1/3 along the move (on the way) x4, g44 on R_forearm_link vs stem x2, g44 on R_forearm_link vs stem at 2/3 along the move (on the way) x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ STEP5 per-step IK R: NOT ONE of 34 candidates cleared the clearance or its path, so all 34 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] STEP5 per-step IK R: (fell back) rejected against -- the other arm ON THE WAY x18 (e.g. 47 <-> 16 at 7/16 along the move), the other arm x15, g44 on R_forearm_link vs stem at 1/3 along the move (on the way) x4, g44 on R_forearm_link vs stem x2, g44 on R_forearm_link vs stem at 2/3 along the move (on the way) x1, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ STEP5 per-step IK R: NOT ONE of 34 candidates cleared the clearance or its path, so all 34 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] STEP5 per-step IK R: (fell back) rejected against -- the other arm ON THE WAY x18 (e.g. 47 <-> 16 at 7/16 along the move), the other arm x15, g44 on R_forearm_link vs stem at 1/3 along the move (on the way) x4, g44 on R_forearm_link vs stem x2, g44 on R_forearm_link vs stem at 2/3 along the move (on the way) x1, g43 on R_upper_arm_link vs crown x1
+[steps] STEP5 L: arm in contact with the cable at t=0.00s -- ['cab3 (via g35 on Lg_left_follower)', 'cab4 (via g35 on Lg_left_follower)']
+[steps] STEP5 R: arm in contact with the cable at t=0.00s -- ['cab10 (via Rg_left_pad_f1ext)', 'cab10 (via Rg_right_pad_f1ext)', 'cab11 (via Rg_right_pad_f1ext)', 'cab9 (via Rg_left_pad_f1ext)', 'cab9 (via Rg_right_pad_f1ext)']
+[steps] STEP 5 COMMAND L: reached 100.0% of the way to the solved pose in    9.3s (4.65x the 2.0s the table allots -- the table no longer ends the step), never held back
+[steps] STEP 5 COMMAND R: reached 100.0% of the way to the solved pose in    9.3s (4.65x the 2.0s the table allots -- the table no longer ends the step), never held back
+[steps] STEP 5 sigma_min L=0.1572 R=0.1915  mast L=+60.1 mm (g4 on L_shoulder_link vs crown) R=+21.0 mm (g44 on R_forearm_link vs crown)
+[steps] STEP 5 ARM REACH: L  13.4 mm below the mouth (Lg_left_pad_f1ext), +172.7 mm vs the table | R  16.4 mm below the mouth (Rg_left_pad_f1ext), +175.0 mm vs the table
+[steps] STEP 5 AS REALISED: L 11.5 deg off straight down, pads  +3.79 mm | R 16.7 deg off straight down, pads  +1.85 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 5 ARM-TO-ARM: closest +0.0 mm (12 <-> 70)  <- TOUCHING OR THROUGH   along the move -47.6 mm (Lg_left_pad1 <-> 65 at t=29.48s)   worst so far -62.3 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 5 CLEARANCE: L: the winning pose cleared the whole 16 mm search radius; clearance removed 19 of 36 candidates, 17 of them roomy, winner sigma 0.1574 (best survivor 0.1614) vs best dropped 0.1572; the mast removed 10 at the pose and 0 on the way there | R: the winning pose cleared the whole 16 mm search radius; clearance removed 33 of 34 candidates, 16 of them roomy, winner sigma 0.1919 (best survivor 0.2902) vs best dropped 0.3165; the mast removed 3 at the pose and 6 on the way there (worst path -134.7 mm, g44 on R_forearm_link vs stem at 1/3 along the move) ; realised at rest +0.0 mm (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 5 CARRY: L mouth[-0.230 +0.319 +0.186] holds cab5 at (+14.3,-22.5,+19.4) mm | R mouth[-0.148 +0.334 +0.191] holds cab10 at ( -9.9, +3.6, -9.6) mm
+[steps] STEP 5 C1 SEAT: nearest point ON THE CABLE (cab33 at 0.56) misses the groove centre by ( -15.1, +93.5, +13.1) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 5 C1 GATE: cab30 at [+0.085 +0.433 +0.038] -> fails on x,y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 5 C2 GATE: cab23 at [-0.007 +0.409 +0.083] -> fails on x,y,z,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 5 PENETRATION: clear   (clip-cable contacts now: 0)
+[steps] STEP 5 持ち上げ         t= 37.4s L=  13.9mm R=  13.9mm c1[y+0.433 z+0.038] c2[y+0.409 z+0.083] pin=--/-- grip=-R
+[steps] ⛔ STEP6 per-step IK L: NOT ONE of 24 candidates cleared the clearance or its path, so all 24 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] STEP6 per-step IK L: (fell back) rejected against -- the other arm x21, g6 on L_forearm_link vs stem x7, g8 on L_wrist_2_link vs stem at 3/8 along the move (on the way) x1, g6 on L_forearm_link vs crown x1
+[steps] ⛔ STEP6 per-step IK R: NOT ONE of 36 candidates cleared the clearance or its path, so all 36 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] STEP6 per-step IK R: (fell back) rejected against -- the other arm x33, g44 on R_forearm_link vs stem x5, the other arm ON THE WAY x3 (e.g. 44 <-> 6 at 10/40 along the move), g44 on R_forearm_link vs stem at 3/8 along the move (on the way) x2, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ STEP6 per-step IK L: NOT ONE of 24 candidates cleared the clearance or its path, so all 24 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] STEP6 per-step IK L: (fell back) rejected against -- the other arm x24, g6 on L_forearm_link vs stem x7, g8 on L_wrist_2_link vs stem at 3/8 along the move (on the way) x1, g6 on L_forearm_link vs crown x1
+[steps] ⛔ STEP6 per-step IK R: NOT ONE of 36 candidates cleared the clearance or its path, so all 36 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] STEP6 per-step IK R: (fell back) rejected against -- the other arm x33, g44 on R_forearm_link vs stem x4, the other arm ON THE WAY x3 (e.g. 44 <-> 6 at 10/40 along the move), g44 on R_forearm_link vs stem at 3/8 along the move (on the way) x2, g43 on R_upper_arm_link vs crown x1
+[steps] ⛔ STEP6 per-step IK L: NOT ONE of 24 candidates cleared the clearance or its path, so all 24 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] STEP6 per-step IK L: (fell back) rejected against -- the other arm x24, g6 on L_forearm_link vs stem x7, g6 on L_forearm_link vs crown x1
+[steps] ⛔ STEP6 per-step IK R: NOT ONE of 36 candidates cleared the clearance or its path, so all 36 were put back and the choice below is made among poses that were all rejected -- read the next line's 'collision-free' as 'none'
+[steps] STEP6 per-step IK R: (fell back) rejected against -- the other arm x33, g44 on R_forearm_link vs stem x4, the other arm ON THE WAY x3 (e.g. 44 <-> 6 at 10/40 along the move), g44 on R_forearm_link vs stem at 3/8 along the move (on the way) x2, g43 on R_upper_arm_link vs crown x1
+[steps] STEP6 L: arm in contact with the cable at t=0.00s -- ['cab2 (via g31 on Lg_left_coupler)', 'cab2 (via g35 on Lg_left_follower)']
+[steps] STEP6 R: arm in contact with the cable at t=0.00s -- ['cab10 (via Rg_left_pad_f1ext)', 'cab10 (via Rg_right_pad_f1ext)', 'cab9 (via Rg_left_pad_f1ext)', 'cab9 (via Rg_right_pad_f1ext)']
+[steps] STEP 6 COMMAND L: reached  57.3% of the way to the solved pose in   25.8s (9.20x the 2.8s the table allots -- the table no longer ends the step), held back on 23962 of 123636 ticks because THIS arm was more than 5.2 mrad behind its own command   <- STALLED: no progress for a whole step's worth of ticks   <- THE MOVE DID NOT FINISH
+[steps] STEP 6 COMMAND R: reached 100.0% of the way to the solved pose in   25.8s (9.20x the 2.8s the table allots -- the table no longer ends the step), never held back
+[steps] STEP 6 sigma_min L=0.1566 R=0.1774  mast L=+60.1 mm (g4 on L_shoulder_link vs crown) R=+60.1 mm (g42 on R_shoulder_link vs crown)
+[steps] STEP 6 ARM REACH: L  14.1 mm below the mouth (Lg_left_pad_f1ext), +146.2 mm vs the table | R  10.7 mm below the mouth (Rg_right_pad_f1ext), +125.9 mm vs the table
+[steps] STEP 6 AS REALISED: L 12.5 deg off straight down, pads  +3.79 mm | R  0.2 deg off straight down, pads  +3.79 mm   (the gate read the commanded state at solve time; this is what the step ended in)
+[steps] STEP 6 ARM-TO-ARM: closest -0.4 mm (6 <-> 44)  <- TOUCHING OR THROUGH   along the move -33.6 mm (18 <-> 66 at t=43.48s)   worst so far -62.3 mm   ⚠ measured between the two arms only; posts, table and cable are not in this
+[steps] STEP 6 CLEARANCE: L: clearance removed 24 of 24 candidates, winner predicted -115.3 mm, winner sigma 0.1417 (best survivor 0.1417) vs best dropped 0.1840; 0 candidates cleared the whole 16 mm search radius, widest inside it -24.9 mm; the mast removed 8 at the pose and 0 on the way there | R: clearance removed 36 of 36 candidates, winner predicted -115.3 mm, winner sigma 0.1781 (best survivor 0.3087) vs best dropped 0.3087; 2 candidates cleared the whole 16 mm search radius, widest inside it +13.5 mm; the mast removed 5 at the pose and 2 on the way there (worst path -138.4 mm, g44 on R_forearm_link vs stem at 3/8 along the move) ; realised at rest -0.4 mm (predicted minus realised = the following error the constant does not carry)
+[steps] STEP 6 CARRY: L mouth[-0.001 +0.374 +0.160] holds cab20 at ( -3.4,+20.8,-152.2) mm | R mouth[+0.196 +0.348 +0.137] holds cab29 at (-88.6,+124.1,-130.2) mm
+[steps] STEP 6 C1 SEAT: nearest point ON THE CABLE (cab26 at 0.75) misses the groove centre by ( -70.8,+102.9,  -1.4) mm (gate wants |dx|<22 |dy|<7.5 |dz|<6 mm, read from the gate itself, AND clip-cable contact)
+[steps] STEP 6 C1 GATE: cab30 at [+0.119 +0.480 +0.006] -> fails on x,y,contact   (links whose geometry alone would qualify: none)
+[steps] STEP 6 C2 GATE: cab23 at [+0.033 +0.421 +0.009] -> fails on y   (links whose geometry alone would qualify: none)
+[steps] STEP 6 PENETRATION: cab22 is 0.1 mm INSIDE C2 C2_0   (clip-cable contacts now: 3)
+[steps] STEP 6 C1上空へ搬送      t= 63.1s L= 113.2mm R=  12.7mm c1[y+0.480 z+0.006] c2[y+0.421 z+0.009] pin=--/-- grip=--
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py", line 3480, in <module>
+    raise RuntimeError(
+RuntimeError: STEP6 L: THIS arm's command stopped advancing for a whole step's worth of ticks and its move did not finish (the other arm was still advancing, at 100.0% -- the ramps are per arm now, so this is one arm stalling and not the run freezing).  Everything above this line is the state at the stall.  Continuing would re-measure the stalled arm's configuration once per remaining step, which is what the run before the per-arm split did.
+[steps] DEPTH AUDIT: 11851246 calls, 9987283 unsaturated, 50702 negative
+[steps] DEPTH AUDIT channels exercised -- violations / calls (rate): arm_pair_min:1634 27332/9870146 (0.27692%) | column_gap:1285 397/1920435 (0.02067%) | jaw_gaps:889 918/60652 (1.51355%) | gap:2381 0/13 (0.00000%)
+[steps] DEPTH AUDIT channels NOT exercised this run: ['furniture_gap', 'release_ctrl']  <- the rate below says nothing about these
+[steps] DEPTH AUDIT floor 1 (below the bounding-sphere gap): 14362 (0.1438% of unsaturated)
+[steps] DEPTH AUDIT floor 2 (scalar disagrees with its own segment): 28632 (0.2867%) -- 60 claiming MORE room than the segment (over-acceptance), 28572 claiming LESS (over-rejection)
+[steps] DEPTH AUDIT by call surface: arm_pair_min<-<module>:3251 x24800, arm_pair_min<-path_arm_min:1430 x2309, jaw_gaps<-<module>:3263 x915, column_gap<-<module>:3243 x340, arm_pair_min<-solve_ik:1856 x211, column_gap<-path_mast_min:1355 x48, column_gap<-solve_ik:1930 x9, arm_pair_min<-<module>:3396 x8, arm_pair_min<-_interleave_report:2091 x4, jaw_gaps<-grasp_diagnostics:2652 x1, jaw_gaps<-held:886 x1, jaw_gaps<-<module>:3387 x1
+[steps] DEPTH AUDIT localisation: 1529 distinct geom pairs; top pairs = 76<->62 x432, 16<->50 x328, 16<->51 x328, 17<->50 x328, 17<->51 x328, 74<->60 x319
+[steps] DEPTH AUDIT mechanism (counts by sorted geom-type pair -- mesh x mesh is arm against arm, mesh x primitive is arm against the stem and foot): MESHxMESH 21458, BOXxMESH 5068, BOXxBOX 1724, CYLINDERxMESH 330, CYLINDERxBOX 67
+[steps] DEPTH AUDIT: the rows below are ILLUSTRATIVE, capped at twelve.  Read the mechanism off the counters above, not off them.
+[steps] DEPTH AUDIT row: column_gap<-solve_ik:1930 geom 8<->1 returned 0.000 mm, its own segment 320.662, Sum-r 700.6, centres 450.8, cutoff 1000.0
+[steps] DEPTH AUDIT row: column_gap<-path_mast_min:1355 geom 6<->1 returned 165.495 mm, its own segment 165.495, Sum-r 937.9, centres 786.8, cutoff 1000.0
+[steps] DEPTH AUDIT row: column_gap<-solve_ik:1930 geom 8<->1 returned 0.000 mm, its own segment 258.051, Sum-r 700.6, centres 439.6, cutoff 1000.0
+[steps] DEPTH AUDIT row: arm_pair_min<-path_arm_min:1430 geom 6<->48 returned 0.000 mm, its own segment 108.352, Sum-r 402.8, centres 127.7, cutoff 16.0
+[steps] DEPTH AUDIT row: arm_pair_min<-path_arm_min:1430 geom 6<->49 returned 0.000 mm, its own segment 108.352, Sum-r 402.8, centres 127.7, cutoff 16.0
+[steps] DEPTH AUDIT row: arm_pair_min<-path_arm_min:1430 geom 40<->48 returned 0.000 mm, its own segment 22.284, Sum-r 75.9, centres 44.0, cutoff 16.0
+[steps] DEPTH AUDIT row: arm_pair_min<-path_arm_min:1430 geom 40<->49 returned 0.000 mm, its own segment 22.284, Sum-r 75.9, centres 44.0, cutoff 16.0
+[steps] DEPTH AUDIT row: column_gap<-solve_ik:1930 geom 8<->1 returned 0.000 mm, its own segment 322.266, Sum-r 700.6, centres 454.0, cutoff 1000.0
+[steps] DEPTH AUDIT row: arm_pair_min<-path_arm_min:1430 geom 44<->30 returned 0.000 mm, its own segment 8.851, Sum-r 382.5, centres 280.2, cutoff 16.0
+[steps] DEPTH AUDIT row: arm_pair_min<-path_arm_min:1430 geom 44<->31 returned 0.000 mm, its own segment 8.851, Sum-r 382.5, centres 280.2, cutoff 16.0
+[steps] DEPTH AUDIT row: arm_pair_min<-path_arm_min:1430 geom 44<->20 returned 0.000 mm, its own segment 20.332, Sum-r 385.6, centres 271.1, cutoff 16.0
+[steps] DEPTH AUDIT row: arm_pair_min<-path_arm_min:1430 geom 44<->21 returned 0.000 mm, its own segment 20.332, Sum-r 385.6, centres 271.1, cutoff 16.0
+rc=1 end 10:45:40

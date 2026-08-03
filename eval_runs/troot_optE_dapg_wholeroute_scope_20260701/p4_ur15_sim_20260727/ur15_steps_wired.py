@@ -1436,42 +1436,199 @@ def path_arm_min(t, sc, q_from, q_to, cutoff=None):
     return (None, None) if best > 1e8 else (best, who)
 
 
-_DEPTH_AUDIT = {"calls": 0, "neg": 0, "imposs": 0, "by_caller": {}, "pairs": {}, "rows": []}
+_DEPTH_AUDIT = {"calls": 0, "checked": 0, "neg": 0, "below_lower": 0, "seg_disagree": 0,
+                "seg_over": 0, "seg_under": 0, "by_caller": {}, "pairs": {}, "type_pairs": {},
+                "chan": {}, "chan_viol": {}, "rows": []}
+_SEG_SCRATCH = np.zeros(6)   # reused; the wrapper always asks for the segment
 
 
 def _depth_audit_report():
-    """What the bound check inside arm_pair_min saw, printed even when the run ends by raising.
+    """What the wrapper saw, printed even when the run ends by raising.
 
-    p18 ruling 20260803-1170 gates the crown re-sweep on this: a rate that is bounded or localised
-    (one pair type, or an artefact of the cutoff) can be documented as an exclusion and worked
-    around; broad contamination has to be fixed first.  So the shape is reported, not just the count.
+    p18's ruling gates the crown re-sweep on the SHAPE, not just the count: a rate that is bounded or
+    localised can be documented as an exclusion; broad contamination has to be fixed first.  Both
+    directions are reported separately, because over-acceptance and over-rejection do not carry the
+    same consequence for a clearance test.
     """
     a = _DEPTH_AUDIT
     if not a["calls"]:
         return
-    print(f"[steps] DEPTH AUDIT: {a['calls']} distance calls, {a['neg']} negative, "
-          f"{a['imposs']} geometrically impossible "
-          f"({100.0 * a['imposs'] / max(a['neg'], 1):.2f}% of negatives, "
-          f"{100.0 * a['imposs'] / a['calls']:.4f}% of calls)")
-    if not a["imposs"]:
-        print("[steps] DEPTH AUDIT: none -- every negative was within its pair's bounding radii")
+    ck = max(a["checked"], 1)
+    print(f"[steps] DEPTH AUDIT: {a['calls']} calls, {a['checked']} unsaturated, {a['neg']} negative")
+    # The denominator, printed before any rate: which channels this run actually asked.  A channel
+    # absent from this list was never entered, and no statement about it is supported either way.
+    # Rate, not count.  arm_pair_min runs per candidate and column_gap over a handful of geoms, so
+    # raw counts compare call volume rather than mechanism (p5 -270(c)).
+    print("[steps] DEPTH AUDIT channels exercised -- violations / calls (rate): "
+          + " | ".join(
+              f"{co.co_name}:{co.co_firstlineno} {a['chan_viol'].get(co, 0)}/{n} "
+              f"({100.0 * a['chan_viol'].get(co, 0) / n:.5f}%)"
+              for co, n in sorted(a["chan"].items(), key=lambda kv: -kv[1])))
+    _known = {"arm_pair_min", "column_gap", "furniture_gap", "jaw_gaps", "gap", "release_ctrl"}
+    _ran = {co.co_name for co in a["chan"]}
+    _missed = sorted(_known - _ran)
+    print(f"[steps] DEPTH AUDIT channels NOT exercised this run: {_missed if _missed else 'none'}"
+          + ("  <- the rate below says nothing about these" if _missed else ""))
+    print(f"[steps] DEPTH AUDIT floor 1 (below the bounding-sphere gap): {a['below_lower']} "
+          f"({100.0 * a['below_lower'] / ck:.4f}% of unsaturated)")
+    print(f"[steps] DEPTH AUDIT floor 2 (scalar disagrees with its own segment): {a['seg_disagree']} "
+          f"({100.0 * a['seg_disagree'] / ck:.4f}%) -- {a['seg_over']} claiming MORE room than the "
+          f"segment (over-acceptance), {a['seg_under']} claiming LESS (over-rejection)")
+    if not (a["below_lower"] or a["seg_disagree"]):
+        print("[steps] DEPTH AUDIT: clean -- every unsaturated call agreed with its own segment "
+              "exactly and no negative fell below its pair's bounding-sphere gap")
         return
     print("[steps] DEPTH AUDIT by call surface: "
           + ", ".join(f"{k} x{v}" for k, v in sorted(a["by_caller"].items(), key=lambda kv: -kv[1])))
-    _tp = {int(mujoco.mjtGeom(m.geom_type[g]).value) for pr in a["pairs"] for g in pr}
-    print(f"[steps] DEPTH AUDIT localisation: {len(a['pairs'])} distinct geom pairs, "
-          f"geom types involved = "
-          + "/".join(sorted(mujoco.mjtGeom(t).name.replace("mjGEOM_", "") for t in _tp))
-          + "; top pairs = "
+    print(f"[steps] DEPTH AUDIT localisation: {len(a['pairs'])} distinct geom pairs; top pairs = "
           + ", ".join(f"{p[0]}<->{p[1]} x{c}"
                       for p, c in sorted(a["pairs"].items(), key=lambda kv: -kv[1])[:6]))
-    for caller, pr, re_mm, bnd_mm, seg_mm, ctr_mm, cut_mm in a["rows"]:
-        print(f"[steps] DEPTH AUDIT row: {caller} geom {pr[0]}<->{pr[1]} returned {re_mm:.1f} mm, "
-              f"bound {bnd_mm:.1f}, its own segment {seg_mm:.1f}, centres {ctr_mm:.1f}, "
+    print("[steps] DEPTH AUDIT mechanism (counts by sorted geom-type pair -- mesh x mesh is arm "
+          "against arm, mesh x primitive is arm against the stem and foot): "
+          + ", ".join(
+              "x".join(mujoco.mjtGeom(t).name.replace("mjGEOM_", "") for t in tk) + f" {c}"
+              for tk, c in sorted(a["type_pairs"].items(), key=lambda kv: -kv[1])))
+    print("[steps] DEPTH AUDIT: the rows below are ILLUSTRATIVE, capped at twelve.  Read the "
+          "mechanism off the counters above, not off them.")
+    for caller, pr, dv_mm, seg_mm, bnd_mm, ctr_mm, cut_mm in a["rows"]:
+        print(f"[steps] DEPTH AUDIT row: {caller} geom {pr[0]}<->{pr[1]} returned {dv_mm:.3f} mm, "
+              f"its own segment {seg_mm:.3f}, Sum-r {bnd_mm:.1f}, centres {ctr_mm:.1f}, "
               f"cutoff {cut_mm:.1f}")
 
 
 atexit.register(_depth_audit_report)
+
+
+_MJ_GEOM_DISTANCE_RAW = mujoco.mj_geomDistance
+
+
+def _audit_caller():
+    """Two frames, because one collapses the distinction condition (i) exists to draw.
+
+    ⭐ p18 ruling 20260803-1178: with the audit inside arm_pair_min, one frame up was that function's
+    caller and the pose checks separated from the along-the-move sampling.  Moving the audit into the
+    wrapper silently reassigned that frame to arm_pair_min itself, so both surfaces began reporting
+    under one label -- the measurement condition (i) was imposed to obtain, quietly gone.
+
+    ⭐ p5 gave the split a second job: stem and foot are cylinder primitives, so arm-against-mast is
+    mesh x primitive while arm-against-arm is mesh x mesh.  Which column lights up therefore says
+    which mechanism is at work -- a cutoff artefact would show on the mast, a mesh-collision defect
+    on the arms.  The split is the discriminator, not just an attribution.
+
+    ⛔ Names alone are not enough, and the first audit run proved it rather than my predicting it:
+    it reported both violations under "<module>", because this driver's control flow is largely
+    module-level and the surfaces that matter are not separate functions.  A name-only label would
+    have collapsed the two arm surfaces again, one fix later.  So the label carries the CALL SITE's
+    line number, which separates them whatever the enclosing scope happens to be called.
+    """
+    f = sys._getframe(2)          # 0 = here, 1 = the wrapper, 2 = the channel it was called from
+    up = f.f_back
+    if up is None:
+        return f.f_code.co_name
+    return f"{f.f_code.co_name}<-{up.f_code.co_name}:{up.f_lineno}"
+
+
+def _mj_geom_distance_audited(model, dd, g1, g2, cut, ft=None):
+    """mj_geomDistance with the bound check attached, wrapping the library call itself.
+
+    ⭐ p18 ruling 20260803-1173 fixed the scope: whether the MAST pairs share the contamination is
+    priced by this audit.  The check first sat inside arm_pair_min, which compares arm against arm
+    only -- one of six functions that ask this question.  column_gap (the mast), furniture_gap (the
+    saddles and the table), jaw_gaps, gap and release_ctrl were all outside it, so a rate read off
+    that version would have been an arm-to-arm rate wearing a whole-instrument label.
+
+    Wrapping the library function rather than editing each call site is deliberate: it covers every
+    caller by construction, including any this file gains later, and "did I miss one?" becomes a
+    question about one line instead of eight.  Pure pass-through -- the returned value is the
+    library's own, unchanged.
+    """
+    seg = _SEG_SCRATCH if ft is None else ft   # the segment costs nothing: measured identical returns
+    dv = _MJ_GEOM_DISTANCE_RAW(model, dd, g1, g2, cut, seg)
+    a = _DEPTH_AUDIT
+    a["calls"] += 1
+    # ⭐ p18/p6 20260803-1185: instrumenting every call site is not measuring every class.  The
+    # violation counters only fill on a violation, so "this channel ran and was clean" and "this
+    # channel was never asked" print the same -- nothing.  With the flags this run uses, the
+    # furniture channel is never entered at all, and without this line the rate would carry a
+    # whole-instrument label over a pose-and-arm-path measurement.  Unconditional, so it is a
+    # DENOMINATOR: it counts the channel whether or not anything is wrong with it.  Keyed by the
+    # caller's code object, which is one attribute read; names are resolved at report time.
+    # Measured cost: 360 ns per call, about 2.9 s over the 8.1 M calls the last run made.
+    _co = sys._getframe(1).f_code
+    a["chan"][_co] = a["chan"].get(_co, 0) + 1
+    if dv >= cut:
+        return dv          # saturated -- the library is saying "past the cutoff", not measuring
+    a["checked"] += 1
+    i1, i2 = int(g1), int(g2)
+    caller = None
+
+    # ⭐ Floor 2 (p6 via p18, ruling 20260803-1174): the old check was ONE-SIDED, so a call claiming
+    # MORE clearance than there is -- the direction that accepts a colliding pose -- was invisible.
+    # The segment the same call returns is a second reading of the same quantity, and in the healthy
+    # case the two agree EXACTLY: measured over 3910 separated and 203 penetrating pairs, the largest
+    # |‖seg‖ - |dv|| was 0.0000 mm.  So any disagreement at all is the signature, and its SIGN says
+    # which way the instrument erred.  Compared squared, to skip a square root on the common path.
+    sx = seg[3] - seg[0]
+    sy = seg[4] - seg[1]
+    sz = seg[5] - seg[2]
+    seg2 = sx * sx + sy * sy + sz * sz
+    if abs(seg2 - dv * dv) > 1e-12:
+        a["seg_disagree"] += 1
+        caller = _audit_caller()
+        if dv > 0.0 and dv * dv > seg2:
+            a["seg_over"] += 1      # scalar claims more room than the segment shows
+        else:
+            a["seg_under"] += 1     # scalar claims less room -- the -62.3 vs 69.2 shape
+
+    if dv < 0.0:
+        a["neg"] += 1
+
+    # ⭐ Floor 1, and NOT gated on dv < 0 (p18 ruling 20260803-1178).  Gating it on negatives was
+    # wrong twice over: the bound is centre separation minus the two radii, which is often POSITIVE,
+    # and a 0.0 return sits above every negative gate while still being below such a bound -- which
+    # is exactly the reading the L3 panel measured as self-contradicted on both runtimes.  Compared
+    # without a square root: dv < |c| - r1 - r2  is  dv + r1 + r2 < |c|, and squaring is safe once
+    # the left side is known non-negative.
+    dx = dd.geom_xpos[i1, 0] - dd.geom_xpos[i2, 0]
+    dy = dd.geom_xpos[i1, 1] - dd.geom_xpos[i2, 1]
+    dz = dd.geom_xpos[i1, 2] - dd.geom_xpos[i2, 2]
+    reach = dv + model.geom_rbound[i1] + model.geom_rbound[i2]
+    if reach < 0.0 or reach * reach < dx * dx + dy * dy + dz * dz:
+        a["below_lower"] += 1
+        if caller is None:
+            caller = _audit_caller()
+
+    if caller is not None:
+        a["by_caller"][caller] = a["by_caller"].get(caller, 0) + 1
+        # ⭐ p18/p5 20260803-1189 (c): counted against the SAME key as the denominator, so the
+        # channel comparison can be a rate.  As raw counts it is not a mechanism test at all --
+        # arm_pair_min runs per candidate and column_gap over a handful of geoms, so the arm column
+        # would tower over the mast column on call volume alone and say nothing about which
+        # collision path is misbehaving.  violations / calls, per channel, is the comparison.
+        a["chan_viol"][_co] = a["chan_viol"].get(_co, 0) + 1
+        key = (i1, i2)
+        a["pairs"][key] = a["pairs"].get(key, 0) + 1
+        # ⭐ p18 20260803-1183 (i): keyed by the sorted TYPE PAIR, not by a union of the types seen.
+        # The union cannot answer the question it is asked -- the pads are box, mesh and sphere at
+        # once, and the panel's flip landed on a box pad, so "which types were involved" is true of
+        # everything and decides nothing.  The pair is what separates mesh x mesh (arm against arm)
+        # from mesh x primitive (arm against the cylinder stem and foot), and that separation is the
+        # mechanism test: a cutoff artefact should show on the primitives, a mesh-collision defect
+        # on the meshes.
+        tkey = tuple(sorted((int(model.geom_type[i1]), int(model.geom_type[i2]))))
+        a["type_pairs"][tkey] = a["type_pairs"].get(tkey, 0) + 1
+        if len(a["rows"]) < 12:      # a dozen worked examples; the rest are counted
+            a["rows"].append((
+                caller, key, dv * 1000.0, seg2 ** 0.5 * 1000.0,
+                float(model.geom_rbound[i1] + model.geom_rbound[i2]) * 1000.0,
+                float(((dd.geom_xpos[i1, 0] - dd.geom_xpos[i2, 0]) ** 2
+                       + (dd.geom_xpos[i1, 1] - dd.geom_xpos[i2, 1]) ** 2
+                       + (dd.geom_xpos[i1, 2] - dd.geom_xpos[i2, 2]) ** 2) ** 0.5) * 1000.0,
+                float(cut) * 1000.0))
+    return dv
+
+
+mujoco.mj_geomDistance = _mj_geom_distance_audited
 
 
 def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
@@ -1503,33 +1660,9 @@ def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
         dv = mujoco.mj_geomDistance(m, dd, int(ga[ia]), int(gb[ib]), cut, None)
         if dv >= cut:
             continue
-        # ⚠ Two convex shapes cannot overlap more deeply than their bounding spheres together, so a
-        # depth past that sum is the instrument talking, not the arms.  The docstring above already
-        # says a path minimum disagreeing with both endpoints is "either a real transient or a broken
-        # instrument, and a bare number cannot say which" -- this is the discriminator it was missing.
-        # ⭐ p18 ruling 20260803-1170 condition (i): the audit covers EVERY call of this function, so
-        # the rate spans both classes -- the pose checks and the along-the-move sampling -- rather
-        # than whichever one happened to fire first.  Attribution is by calling frame, which costs
-        # nothing on the common path because it is only read when a violation is found.
-        _A = _DEPTH_AUDIT
-        _A["calls"] += 1
-        if dv < 0.0:
-            _A["neg"] += 1
-            _bnd = float(m.geom_rbound[int(ga[ia])] + m.geom_rbound[int(gb[ib])])
-            if dv < -_bnd:
-                _A["imposs"] += 1
-                _caller = sys._getframe(1).f_code.co_name
-                _A["by_caller"][_caller] = _A["by_caller"].get(_caller, 0) + 1
-                _key = (int(ga[ia]), int(gb[ib]))
-                _A["pairs"][_key] = _A["pairs"].get(_key, 0) + 1
-                if len(_A["rows"]) < 12:      # a dozen worked examples; the rest are counted
-                    _ft = np.zeros(6)
-                    _re = mujoco.mj_geomDistance(m, dd, _key[0], _key[1], cut, _ft)
-                    _A["rows"].append((
-                        _caller, _key, _re * 1000.0, _bnd * 1000.0,
-                        float(np.linalg.norm(_ft[3:] - _ft[:3])) * 1000.0,
-                        float(np.linalg.norm(dd.geom_xpos[_key[0]] - dd.geom_xpos[_key[1]])) * 1000.0,
-                        float(cut) * 1000.0))
+        # The bound check used to sit here.  It moved to the wrapper installed beside _DEPTH_AUDIT,
+        # because here it saw arm-against-arm only -- one of the six functions that ask this
+        # question, and not the one p18's ruling 20260803-1173 names (the mast).  See there.
         if best is None or dv < best:
             best = dv
             if want_who:
