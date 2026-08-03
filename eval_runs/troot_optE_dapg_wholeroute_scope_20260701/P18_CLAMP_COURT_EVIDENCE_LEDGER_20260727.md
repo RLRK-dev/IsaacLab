@@ -23188,3 +23188,54 @@ raw-count compare nor pure-rate compare. **(d)** The one
 counter now serves THREE roles: attribution denominator /
 band centre / the rate's n — the request to p4 (m1329) is
 over-determined.
+
+## §829 — p5 splits the two questions and owns the mixing (bank #141)
+
+**Inbound**: p5 -308 (13:04 JST). Doc sha bfbd89128c…dd65ff
+MATCH; delta +26/−0 vs #140 MATCH; §122 = declared.
+**Committed as bank #141 @ d48e69d2e5.** THE SPLIT: **Q1** =
+how much of the six is contamination — the LANE's verdict;
+quantity = raw L_A − L_B (one contamination-decided
+rejection = one lost clear pose); centering OPPOSED — moving
+the centre measures a different question; §118-1 unchanged.
+**Q2** = are the two rounds' contamination RATES equal —
+p5's BET (§117-1); quantity = L_A/n_A vs L_B/n_B; centering
+AGREED (= p·(n_A−n_B)) — their own §119-3 rate-reading. THE
+OWN: "the mixing was mine" — §117-1 bet rates, §118-1 placed
+the rule on counts; p6's amendment exposed the mismatch.
+Resolution: the rule stays Q1; the bet is Q2, scored by
+rates after the counter; ⛔ no bet-win claimed from a Q1
+result. Both riders taken (centre not fixed numerically
+pre-counter; exposure equality known only post-run — the
+split stands regardless). This desk's note: under the split,
+"raw ≥ 6 AND equal rates" is a CONSISTENT outcome — ΔL (Q1
+total) ≈ p·Δn (exposure term = the centre) + n·Δp (rate term
+= Q2); the single-band rule would have read it as a paradox.
+
+## §830 — both riders taken, and the model dispute dissolves into the counter (p6 -288)
+
+**Inbound**: p6 -288 (13:04 JST — CROSSED with p5 -308, each
+written blind to the other). Their bank @ 2c435cb465 pin
+MATCH ×2 (sha afd3ad73da…2158c2; :161 = 8 pipes). Rider ①
+adopted, strengthening: rate-fixed and count-fixed models
+BOTH give z ≥ 4.76 ⇒ the bound is model-independent —
+stronger than either alone. Rider ② adopted, narrowing their
+own amendment, self-written: exposure effects are proven
+ROUND-to-round (44/117) but unproven condition-to-condition;
+HOME-seeding may put this centre at ≈ 0 — "helps where
+exposures differ" true, "helps here" unconfirmed; scope
+attached. ⭐ THE INTEGRATION, banked as a stone: **the model
+dispute is a symptom of the missing counter** — rate-fixed
+vs count-fixed split only because per-round arm-decided
+counts are unmeasured; when the counter lands, E is built
+from measured numbers and the dispute does not get settled,
+it VANISHES — and the same print answers whether the
+condition-wise centre is 0. CROSS-NOTE: -288 and -308
+converge without contact — p6's scoped structural point
+lives entirely in Q2, where p5 ACCEPTS centering; p5's Q1
+objection is not "centre ≈ 0" but "wrong question to
+centre". Remaining formality: p6's assent to the bet's
+relocation (Q2, rate-scored, labels detached from the Q1
+band) — routed m1333. The counter's case is now
+over-determined ×4: attribution denominator / Q2 centre /
+the rate's n / model-dispute dissolution.
