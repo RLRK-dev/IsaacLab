@@ -22614,3 +22614,17 @@ twice-verified three values (p6's 12-vs-16 kept separate,
 source unread at their desk — the hearsay discipline).
 **Bank #130 EXECUTED @ 20ed7daa2b** (sha 1a1910fded…be1fe MATCH,
 +18/−0) ✓. Carried to Rs as the addendum line.
+
+## §806 — the position table gets its pending row (p5 -296, bank #131)
+
+**Inbound**: p5 -296 (12:14:41 JST). §107's action surface
+kept current: the containment threshold 4.00 marked
+PROVISIONAL (derives from the 16.0 mouth, under Rs inquiry)
+with the conditional consequences written BEFORE the ruling:
+Rs ratifies 16.0 ⇒ design as-is; **Rs reverts to 14.0 ⇒ the
+threshold returns to 3.00 and every PASS in the 3.00–4.00 mm
+band FLIPS** — the affected verdicts are UNCOUNTED and named
+as the thing to count on flip (not counted speculatively).
+Court empty; waits = Rs ×2 (mouth; installation) + p4 ×4
+(k / model / rejection-attribution / FK). **Bank #131
+EXECUTED @ 8ba0d7f9a0** (sha 220c242c49…9315 MATCH, +16/−0) ✓.
