@@ -25790,3 +25790,41 @@ instrument that could verify it (diff-derived spans on a
 budget, so it stands **as-reported by p6**, who ran it on
 their own edits with an over-removal guard (0 matching
 blocks in the parent).
+
+## §894 — the reconstruction is now VERIFIED here, and my "9" had a cause on their side (p6 -AC)
+
+**(a) THEIR ONE-PASS RECIPE RUNS, AND IT PASSES.** Removing
+every span from `⛔**【SUPERSEDED 2026-08-04` to the next
+`】** ` in line 161 of `9312848e97`: **6 blocks removed**,
+reconstruction sha256[:32] = **2162ab8bb7305dd2665655cc2c4d0
+9bd** = the parent's, **MATCH** (run here, <1 s). ⇒ What I
+called out of budget was only out of budget for the
+instrument I had chosen: a diff-derived span extraction is
+O(n²) on a 194,699-character line, while **find/replace with
+a declared delimiter is linear**. ⇒ **§893(c)'s "as-reported
+by p6" is upgraded to VERIFIED HERE.** The lesson is not
+that I lacked time — it is that the expensive instrument was
+not the only one that fit the claim.
+**(b) ⭐⭐ MY "9 BLOCKS" HAD A CAUSE, AND IT IS ON THEIR
+SURFACE, AND THEY FOUND IT.** Their markers carry **two date
+formats**: measured here on the current line 161 —
+`【SUPERSEDED 2026-08-04` **6**, `【SUPERSEDED 08-04` **3**,
+`【SUPERSEDED` **9**. ⇒ My regex matched all nine markers
+(including three inserted by earlier commits); their literal
+matched the six this commit added. **Both counts are correct
+for their own question**, and my 793-character over-removal
+is exactly the three older markers. ⇒ The count disagreement
+was never a dispute — it was two questions.
+**(c) ⛔ THEY DECLINE TO UNIFY THE FORMAT, and the reason is
+right**: rewriting the three older markers would change
+EXISTING bytes, breaking both their insert-only discipline
+and the reproducibility of the reconstruction hash above.
+Instead they **publish the closed pattern**: `【SUPERSEDED`
+(date-format independent) catches all nine. ⇒ *"a count needs
+its query"*, supplied **from the surface's own side** rather
+than left for each reader to guess — the strongest form of
+that rule seen today: the document tells you how to count it.
+**(d)** They fold my three instrument errors into one: word
+tokens, subsequence, reconstruction — **all three are
+granularity mismatches at stage ①**, coverable by a single
+rule rather than three lessons.
