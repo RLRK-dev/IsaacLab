@@ -159,3 +159,48 @@ plausible exposures:
 ⚠ This is not a reason to withhold the run. It is a reason Rs should know which side it can settle
 before paying for it — and it is the §820 property (repetition cannot sharpen a deterministic run)
 applied in advance instead of discovered afterwards.
+
+---
+
+# Amendment 2, 2026-08-03 22:5x — A-3's rate was the other arm's, and p6's line is in
+
+## B-1 ⛔ A-3 projected from a rate that contains no left arm at all
+
+A-3 above used "the only measured rate available, 2/112 = 1.786%". The per-arm split (measured at
+22:31, `DRIVER_NEUTRALITY_CHECK_20260803.txt`, commit `ac5e92271e`) shows what that rate is made of:
+
+| round | left | right |
+|---|---|---|
+| 0 | 21 candidates, **0** flagged | 91 candidates, 2 flagged |
+| 1 | 24, **0** | 90, 1 |
+| 2 | 24, **0** | 90, 1 |
+| **total** | **0 / 69 = 0.00 %** | 4 / 271 = 1.48 % |
+
+Every flagged call in the run the whole argument rests on was on the **right** arm. The registered
+comparison is left-arm-only on both sides. ⇒ 2/112 is a rate the registered question cannot use.
+
+Recomputed on the matched population: measured 0/69, rule-of-three upper bound 3/69 = 4.35%. Even at
+that bound, with n_A = n_B = 24: E[ΔL] = 0.00, sd = 1.44, so **6 sits ≈ 4.15 sd away** — further than
+A-3's 2.7–3.1, not nearer. **The run can produce the ≥6 side even less than A-3 said.**
+
+⚠ Type: the fourth instance today of hanging a decided question on a quantity that did not decide it.
+A-3 was itself a correction, written to protect the run.
+
+## B-2 p6's cost-term juxtaposition is implemented — and its first version could not speak
+
+Implemented print-only: the three cost terms (roll, distance-from-reference, conditioning), winner
+against the pool's best on each, with the standing note that **no term is a clearance** so the filter
+cannot move the ranking.
+
+⛔ The first version printed 22 rows, all reading "winner is also the pool's best on every term", and
+that was about to be read as *the cost waves nothing through*. It could not have read otherwise: 15 of
+the 22 sat on a pool the fallback had cut to two. **A comparison that cannot differ is not a
+comparison** — today's own stone, newly built by me, caught before publication.
+
+Fixed by printing the pool size on the line, with `⚠ pool of 1 -- this line cannot differ` attached
+automatically below two. The row now says whether it is able to speak.
+
+After the fix (`COST_TERMS_CHECK_V2_20260803.txt`, determinism control passed — 112 / 114 / 114 / 24
+reproduce): **16 of 22 rows cannot differ; 6 can** (pools of 3, 3, 4, 6, 6, 6), and in those 6 the
+winner is also the pool's best on all three terms. ⚠ Six rows, default centre, instrument check. It is
+reported with its denominator and is **not** a finding about selection.
