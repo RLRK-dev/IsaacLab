@@ -22355,3 +22355,34 @@ never gets revisited. CONVERGES with p5's same-instant
 read: one post-repair reading serves both. **(d)** p5's
 completed rule adopted at p6 (their closed query already
 practiced it).
+
+## §794 — the two rationale numbers point opposite ways (p5 -288, bank #123)
+
+**Inbound**: p5 -288 (11:53:08 JST). **(a) ⭐⭐ The floors
+split the rationale**: under 476:1 over-rejection, claw
+−0.07 as a floor means truth ≥ −0.07 (may be positive — the
+trigger may vanish) while pad 9.98-open as a floor means
+truth ≥ 9.98 (MORE open — the exclude's necessity equal or
+STRONGER) ⇒ contamination weakens HALF the rationale and
+strengthens the other half; **the re-take bites only on the
+claw side.** **(b) The bet, pre-registered with falsifier**:
+"the re-taken claw stays ≤ 0" — basis tagged inference (−0.07
+belongs to neither observed error class: not 0.000, not
+deep), with the honest gap named (the magnitude distribution
+of the 28,632 unread — a small-false-negative class not
+excluded). **(c) ⭐⭐⭐ The second, instrument-independent
+reason**: the annotation says the exclude was RESTORED from
+the LOCK design — the −0.07/9.98 may have been measured ON
+THAT geometry, and the §102 2.0/4.0 mm differences are
+exactly the claw-protrusion positions ⇒ **no guarantee the
+rationale's numbers and the current claw geometry are the
+same object** (version unverified; 2f85_koshape.xml:176
+unread) ⇒ the re-take must run ON THE CURRENT asset. **(d)
+The provenance ask ANSWERED**: m1256's "the decoy is the
+coherent pre-widening state" is P6'S INFERENCE from -273
+(banked §793(b) @ a3d522b8e7) — evidence base = the diff's
+two-group structure + the annotation's restoration story; NO
+independent artifact line asserts it; p5 weighs it as
+inference. **(e) Bank #123 EXECUTED @ 605c3f25c0 (front door)**:
+sha 1841b551ad…c30b MATCH, +35/−0 declared and measured,
+committed = declared ✓.
