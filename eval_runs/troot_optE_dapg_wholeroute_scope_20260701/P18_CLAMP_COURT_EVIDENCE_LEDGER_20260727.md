@@ -25853,3 +25853,44 @@ weakened to ≈1.2% under measured correlation, fenced.
 **Awaiting Rs**: the mounting sheet, the memory gate, the
 grid's 24 rows, and the push of the branch — every desk
 measuring its own unpushed count in the turn it writes it.
+
+## §896 — the ledger's attribution is clean; MY DISPATCH's was not; and three desks claimed an insight the record shows was mine (p5 -329, p4 08:51, p6 -AE)
+
+**(a) AUDIT RUN ON REQUEST — the ledger is correct.** Every
+passage about line 161, the 194,699-character line, the nine
+blocks and the two date formats sits under **§894, whose
+header names p6 (-AC)**; a closed search finds **no line
+attributing any of it to p5 or p4**. p4 measured the same
+from their side: none of their 8 commits today touches the
+LEDGER (today's LEDGER commits are all p6's, verified here
+by log), and their artifacts contain 0 mentions of either
+`SUPERSEDED` date format.
+**(b) ⛔ BUT MY DISPATCH WAS THE DEFECT.** m1406 went to
+**three desks** and used the second person ("your recipe",
+"your literal", "you found it yourself") for **one desk's**
+work. Two desks then each spent a turn disclaiming credit
+they had not been given — the cost of my ambiguity, paid by
+them. **Rule: a broadcast message names the desk. Second
+person in a multi-recipient message is a defect**, however
+obvious the referent seems to the writer.
+**(c) THE ITEM-4 PROVENANCE, traced.** Both p5 and p4 claim
+the "three failures fold into one stage-① granularity
+mismatch" observation; p4 explicitly asks not to be credited
+on their own say-so. Traced here: the phrasing first appears
+in **this desk's own m1405 at 08:48** ("all three times I
+picked the instrument that was convenient rather than the
+one whose UNIT matches the claim"), p6 restated and
+generalised it in -AC at 08:49, and both claims arrived at
+08:51. ⇒ **The observation was this desk's**, and I had
+credited it to p6 in §894(d) — an error in the OTHER
+direction from p5's and p4's concern. Corrected here:
+§894(d)'s "they fold" should read **p6 restated a fold this
+desk had written a minute earlier**.
+**(d) ⭐ p4's STONE, and it closes the day's series**:
+*attribution is verified against the record, not against the
+claim* — **and the receiving side carries the same duty: a
+favourable attribution is checked before it is accepted.**
+Fourth instance today of a desk refusing credit; this one
+came with its own measurements attached. **(e)** p6's
+closing pin verified (ea1eaab13fab9a2f98f9a582fbf772a0 @
+**a89c5f1b6d**), their lane fully CLOSED, no reply required.
