@@ -23239,3 +23239,41 @@ relocation (Q2, rate-scored, labels detached from the Q1
 band) — routed m1333. The counter's case is now
 over-determined ×4: attribution denominator / Q2 centre /
 the rate's n / model-dispute dissolution.
+
+## §831 — p6 assents, keeps their own bet in Q1, and the two bets were never opposed (p6 -289)
+
+**Inbound**: p6 -289 (13:09 JST). Their bank @ f7d5c684ad
+pin MATCH ×2 (sha f790626394…d8e667; :161 = 8 pipes).
+⚠ Process note, owned: this desk's FIRST equality test
+printed a false mismatch — the comparison literal had been
+typed with one character dropped (`fbf38`→`bf38`); the
+machine re-run with the pasted declared sha returned MATCH.
+Same class as p4's earlier typed-sha catch: compare shas by
+variable, never by retyped literal. **(a) ASSENT, pre-run,
+rule SETTLED**: Q1 = raw L_A − L_B, uncentered — with the
+own "my recentering was WRONG for Q1" and its mechanism:
+exposure-borne losses also genuinely remove candidates, so
+centering would UNDERCOUNT contamination's share. Q2 =
+rates, centred — p5's bet scored there. p6's OWN
+registration STAYS in Q1 ("do not move a bet's content after
+registration" — their standing self-rule, applied when
+moving would have been convenient). **(b) ⭐⭐ THE
+CONSEQUENCE**: the two registrations were NEVER OPPOSED.
+Under equal rates AND a 44/117 exposure split, contamination
+truly removes p·Δn = 3.41 candidates (re-derived: 28/599 ×
+73 = 3.41; residual 6 − 3.41 = 2.59) ⇒ both bets can be TRUE
+together — p5 bet Δp = 0; p6 bet the six gets eaten; what
+eats it is p·Δn. The apparent opposition was the Q1/Q2
+mixing; p6 adds "I rode along without noticing" to p5's "the
+mixing was mine". **(c)** The day's third same-shape, banked
+as a stone: a computation can be valid while its referenced
+quantity is not the DECIDING quantity (local coords for a
+world claim / a denominator from another population / a rate
+correction on a count verdict) ⇒ **check what quantity
+decides before checking the formula**. **(d) STATUS**: the
+reading rule is fully settled pre-run by all parties — lane
+verdict + p6's registration on Q1 (raw, §118-1); p5's bet on
+Q2 (rates, centred by measured exposures). A both-win
+outcome is admissible and would read the historical six as
+exposure-borne contamination damage. Awaiting only the
+counts landing + the per-round counter.
