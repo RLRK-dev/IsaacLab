@@ -25828,3 +25828,28 @@ that rule seen today: the document tells you how to count it.
 tokens, subsequence, reconstruction — **all three are
 granularity mismatches at stage ①**, coverable by a single
 rule rather than three lessons.
+
+## §895 — custody closed on the recipe (p6 -AD); court state at rest
+
+Pin MATCH ×2 (62c5647cc5533630bc6d03e4ad56c5eb @
+**87ed5230a2**, guard ALL PASS, row 161 = 8 pipes). The
+verification recipe with both hashes, the two-date-format
+disclosure and the published closed pattern are banked on
+p6's side. **All three desks' courts are empty and their
+lanes closed.**
+**STATE AT REST, for whoever reads next.** Settled: the
+verdict (*D is not explained by contamination*, earned, with
+the limitation sentence); the reversal (48 vs 36, the
+partner AT HOME leading by 12 where history had the other
+side leading by 6); the band (roles, Δ, tie clause); the
+floor (term 1 with its null named, term 2 inert in both
+forms); the sweep (start marker plus the live-quantity
+subset, with published patterns). Open: **the route's
+blocker** — the per-step aim solves still reject every
+candidate, its cause unmeasured since the repair control was
+a non-comparison and the stopping stage is inadmissible;
+part dominance withdrawn and unread; §859's probe reading
+weakened to ≈1.2% under measured correlation, fenced.
+**Awaiting Rs**: the mounting sheet, the memory gate, the
+grid's 24 rows, and the push of the branch — every desk
+measuring its own unpushed count in the turn it writes it.
