@@ -1440,7 +1440,10 @@ _DEPTH_AUDIT = {"calls": 0, "checked": 0, "neg": 0, "below_lower": 0, "seg_disag
                 "seg_over": 0, "seg_under": 0, "by_caller": {}, "pairs": {}, "type_pairs": {},
                 "chan": {}, "chan_viol": {}, "rows": [],
                 "type_all": {}, "repaired": 0, "repair_zero": 0, "repair_signed": 0,
-                "unrepairable": 0, "bound_informative": 0}
+                "unrepairable": 0, "bound_informative": 0, "last_flagged": False,
+                "cand_evals": 0, "rej_total": 0, "rej_flagged": 0,
+                "seg_under_contact": 0, "seg_under_narrow": 0,
+                "sign_checked": 0, "sign_ghost": 0, "sign_missed": 0}
 # ⭐ p18 ruling 20260803-1191(ii): the repair, behind a flag and OFF by default.  Everything added
 # to this driver so far only printed; this one CHANGES THE VALUE the clearance tests act on, so it
 # is opt-in and the runs that use it say so in their header.  Comparability with every earlier run
@@ -1504,7 +1507,9 @@ def _depth_audit_report():
           + ", ".join(f"{k} x{v}" for k, v in sorted(a["by_caller"].items(), key=lambda kv: -kv[1])))
     print(f"[steps] DEPTH AUDIT localisation: {len(a['pairs'])} distinct geom pairs; top pairs = "
           + ", ".join(f"{p[0]}<->{p[1]} x{c}"
-                      for p, c in sorted(a["pairs"].items(), key=lambda kv: -kv[1])[:6]))
+                      for p, c in sorted(a["pairs"].items(), key=lambda kv: -kv[1])))
+    # ⭐ p6 via p18 20260803-1235(c): the [:6] head was throwing away 99.6% of the tally, and the
+    # model read (common-mode versus independent) needs the whole distribution, not its crown.
     # ⭐ Rates now, not counts (p18 1191(iii)): every unsaturated call is counted against its own
     # type pair, so the mechanism read no longer measures how often each pair happens to be asked.
     print("[steps] DEPTH AUDIT mechanism -- violations / calls per geom-type pair (mesh x mesh is "
@@ -1520,6 +1525,19 @@ def _depth_audit_report():
               f"because the segment was degenerate too")
     else:
         print("[steps] DEPTH AUDIT repair OFF -- values reported by the library were used unchanged")
+    print(f"[steps] DEPTH AUDIT seg_under split: {a['seg_under_contact']} asserted CONTACT "
+          f"(dv <= 0, answerable by the contact list), {a['seg_under_narrow']} merely too narrow "
+          f"(dv > 0, a magnitude error the contact list cannot speak to)")
+    print(f"[steps] DEPTH AUDIT sign reference: {a['sign_checked']} minima cross-checked against "
+          f"the solver's own contact list -- {a['sign_ghost']} asserted contact the solver does not "
+          f"record (ghost), {a['sign_missed']} asserted clearance over a pair the solver IS "
+          f"contacting (miss).  ⚠ bounds neither way: contacts live inside the margin band only, "
+          f"and the list is per pair while the minimum is one pair.")
+    print(f"[steps] DEPTH AUDIT rejection attribution: of {a['rej_total']} candidates dropped by "
+          f"the arm-clearance test, {a['rej_flagged']} were dropped by a call the floors had "
+          f"flagged ({100.0 * a['rej_flagged'] / max(a['rej_total'], 1):.3f}%) -- measured, not "
+          f"bounded.  Candidate evaluations: {a['cand_evals']}; violations per evaluation = "
+          f"{(a['below_lower'] + a['seg_disagree']) / max(a['cand_evals'], 1):.2f}")
     print("[steps] DEPTH AUDIT: the rows below are ILLUSTRATIVE, capped at twelve.  Read the "
           "mechanism off the counters above, not off them.")
     for caller, pr, dv_mm, seg_mm, bnd_mm, ctr_mm, cut_mm in a["rows"]:
@@ -1618,6 +1636,14 @@ def _mj_geom_distance_audited(model, dd, g1, g2, cut, ft=None):
             a["seg_over"] += 1      # scalar claims more room than the segment shows
         else:
             a["seg_under"] += 1     # scalar claims less room -- the -62.3 vs 69.2 shape
+            # ⭐ (d) p6 via p18 20260803-1242: split by what the scalar was CLAIMING, because the
+            # two halves are answerable by different references.  A scalar at or below zero asserts
+            # contact, which the contact list can contradict outright; a positive-but-too-narrow one
+            # is a magnitude error and the contact list has nothing to say about it.
+            if dv <= 0.0:
+                a["seg_under_contact"] += 1
+            else:
+                a["seg_under_narrow"] += 1
 
     if dv < 0.0:
         a["neg"] += 1
@@ -1645,6 +1671,7 @@ def _mj_geom_distance_audited(model, dd, g1, g2, cut, ft=None):
         if caller is None:
             caller = _audit_caller()
 
+    a["last_flagged"] = caller is not None
     if caller is not None:
         a["by_caller"][caller] = a["by_caller"].get(caller, 0) + 1
         # ⭐ p18/p5 20260803-1189 (c): counted against the SAME key as the denominator, so the
@@ -1713,6 +1740,8 @@ def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
     answer is identical to the exhaustive form; only the work is smaller.
     """
     # ARMG holds sets -- numpy cannot index with one, and the first run said so immediately.
+    _DEPTH_AUDIT["_ret_flagged"] = False
+    _DEPTH_AUDIT["_ret_pair"] = None
     cut = ARM_PAIR_CUTOFF if cutoff is None else cutoff
     ga, gb = np.fromiter(sorted(ARMG[ta]), int), np.fromiter(sorted(ARMG[tb]), int)
     pa = np.asarray(dd.geom_xpos)[ga]
@@ -1734,6 +1763,10 @@ def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
         # question, and not the one p18's ruling 20260803-1173 names (the mast).  See there.
         if best is None or dv < best:
             best = dv
+            # ⭐ p6 via p18 20260803-1232: the MINIMUM is what the clearance test compares, so the
+            # only call whose contamination can flip a candidate is the one that produced it.
+            _DEPTH_AUDIT["_ret_flagged"] = _DEPTH_AUDIT["last_flagged"]
+            _DEPTH_AUDIT["_ret_pair"] = (int(ga[ia]), int(gb[ib]))
             if want_who:
                 who = (f"{mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, int(ga[ia])) or ga[ia]}"
                        f" <-> {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, int(gb[ib])) or gb[ib]}")
@@ -1834,6 +1867,9 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     # gets a second seed.  Not a round number; the menu's own length.
     n_try = tries if tries is not None else 2 * len(POSES)
     for _try in range(n_try):
+        # ⭐ (b) p5 -283, simplified to one number: violations per candidate EVALUATION, so k and p
+        # never have to be separated and the leak is quoted in the unit decisions are made in.
+        _DEPTH_AUDIT["cand_evals"] += 1
         RD = _rdes(*POSES[_try % len(POSES)])
         # warm-start EVERY tool pose from the previous waypoint before trying random
         # restarts, else the solver keeps handing back a different branch each STEP
@@ -1924,7 +1960,28 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
             # still uses the wide radius, because that one is read as a distance.
             near_far_arm = arm_pair_min(sc, t, "R" if t == "L" else "L",
                                         cutoff=ARM_DECIDE_CUTOFF)
+            # ⭐ (d2) p5 -285: the selector has already run mj_forward on this scratch and
+            # arm_pair_min over it, so the contact list and the winning pair are both in hand and
+            # this costs no distance call.  A scalar asserting contact where the solver records none
+            # is a ghost; clearance asserted over a pair the solver IS contacting is a miss.
+            # ⚠ Two limits, noted rather than hidden: contacts only exist inside the margin band, and
+            # the list is per geom pair while the minimum is one pair, so this bounds neither way.
+            _rp = _DEPTH_AUDIT.get("_ret_pair")
+            if _rp is not None and near_far_arm is not None:
+                _DEPTH_AUDIT["sign_checked"] += 1
+                _incon = any((sc.contact.geom1[_i], sc.contact.geom2[_i]) in
+                             (_rp, (_rp[1], _rp[0])) for _i in range(sc.ncon))
+                if near_far_arm <= 0.0 and not _incon:
+                    _DEPTH_AUDIT["sign_ghost"] += 1
+                elif near_far_arm > 0.0 and _incon:
+                    _DEPTH_AUDIT["sign_missed"] += 1
             if near_far_arm is not None and near_far_arm < ARM_CLEARANCE:
+                # ⭐ (a) The measurement p6 asked for: not "how many candidates COULD have been
+                # dropped wrongly" -- that bound is vacuous at 1,444 pairs per call -- but how many
+                # WERE dropped by a call the floors had already flagged.
+                _DEPTH_AUDIT["rej_total"] += 1
+                if _DEPTH_AUDIT.get("_ret_flagged"):
+                    _DEPTH_AUDIT["rej_flagged"] += 1
                 hit = True
                 _clear_dropped += 1
                 _by_clearance = True
