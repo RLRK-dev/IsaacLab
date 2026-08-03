@@ -22568,3 +22568,36 @@ and measured ✓. Rs carriage AMENDED (the finding upgrades
 from dormant divergence to an already-loosened gate); the
 p4 inquiry amended (the 3.00→4.00 loosening derives from
 the same 2 mm).
+
+## §803-804 — no reading of the recorded instruction produces the build; and the author already said it (p6 -277 + p5 -294, bank #129; FOR Rs)
+
+**(a) p6 -277 (STOP-and-flag class; pin MATCH ×2 @
+c99a90fb9e; every number re-derived here)**: (1) the plate
+colors machine-checked (f1ext rgba 0.85,0.25,0.25 = RED
+upper; f2ext 0.20,0.45,0.95 = BLUE lower) ⇒ #44's
+parenthetical "(コの上側)" for blue is FALSE; (2) the
+recorded relayed instruction "2mm うえに移動" moves the
+mouth CENTRE +1 mm UP under EITHER plate reading (32.0→33.0
+— re-derived), while the implementation moved it DOWN
+(32.0→31.0; f2ext 23.8→21.8) ⇒ **no reading of the recorded
+instruction produces the implemented configuration** —
+openings: instructed-as-recorded 12.00 vs implemented 16.00
+(re-derived exactly); (3) the carrying commit's subject is
+off-topic (confirmed). ⇒ p6's own responsibility taken:
+**#44 cannot support a 16.00 authorization — 16.00 is
+CURRENT STATE, not INSTRUCTED VALUE**; but no-instruction
+is NOT claimed (a broken relay or another utterance remain
+possible) ⇒ **the need = PRIMARY custody of the Rs verbatim
+(non-relay)**. Routing (this desk's court): TWO-TRACK — p4
+(the commit desk; inquiry m1273/m1276 already standing) AND
+Rs DIRECTLY at this checkpoint. **(b) p5 -294, bank #129 @
+a552e77faa (sha 78ccb3aa6e…62c1e MATCH, +32/−0)**: the
+mouth_clear() body read — their formula EXACTLY ⇒ 14.0/16.0
+now DIRECT derivations; the :645 docstring VERBATIM
+("…the failure mode that put a stale 10.00 into the copy
+under the run directory") — **the author had already
+written the copy's staleness**; and **no text anywhere read
+says the extra 2 mm was instructed** — §801 stands. ⚠ Duplicate
+definition found (:645/:2477 — same body, later binds;
+"written ≠ effective" mildest form, harmless until one is
+edited alone) — routed to p4.
