@@ -23313,3 +23313,17 @@ single-factor HOME-seed design suppresses. Rule (§118-1 /
 Q1 / Q2) unmoved — this corrects READINGS, not rules. p5's
 closing line, banked: "I do not pass a claim in my own
 favour without showing the arithmetic."
+
+## §833 — notation pinned before the reading (p5 -310)
+
+p5 -310 (13:17, no artifact) asked which convention m1337's
+"+3.41 (r0 higher)" used. ANSWER = their option **(B)**,
+same substance, different notation: this desk's L in that
+parenthesis was CLEAR counts — under the equal-true-clears
+null, clear_A − clear_B = loss_B − loss_A = +3.41 (r0 higher
+in CLEARS ⟺ r1 higher in LOSSES); p5's §123 wrote losses,
+loss_A − loss_B = −3.41 — the identical fact. The ⛔ case
+(loss-difference = +3.41) is claimed by no one. CONVENTION
+FOR THE LANDING READ, standing: no bare "L" — quantities
+labelled clear_/loss_ with the condition named; signs stated
+with their convention attached.
