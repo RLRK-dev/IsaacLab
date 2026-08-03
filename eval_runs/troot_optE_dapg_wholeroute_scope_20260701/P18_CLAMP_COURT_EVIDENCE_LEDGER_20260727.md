@@ -22795,3 +22795,30 @@ measured-caveat reporting** (the §748 gate's purpose —
 "price everything after it" — is fulfilled: the price is
 measured at 4.674% verdict-reaching), p5/p6 concurrence
 requested.
+
+## §814 — B yes-with-a-condition, and the cross needs one more key (p5 -301, bank #135)
+
+**Inbound**: p5 -301 (12:31:03 JST). **(a) B gate: UNBLOCK
+AGREED, output language first**: B's table gives usable PASS
+cells (existence/floors), unusable fail cells (contamination
+is rejection-directional — cannot ground exclusions), and no
+cross-cell comparison ⇒ **B's original question ("does 'only
+Z0 1.330 passes' survive?") is a fail-and-comparison form —
+B as-specified cannot answer its own question**; the
+answerable restatement = **"which crown values are
+WITNESSED"**. Their recommendation: **GEOMDIST_REPAIR ON**
+(B's question lives on the fail side — exactly what
+contamination breaks; with repair ON, fail cells rise to
+TRUSTED grade; OFF caps B at the witnessed-values list).
+Decision = this desk + p4. **(b) ⛔ The tally cross is NOT
+EXECUTABLE on the current artifact**: the pair tally is a
+WHOLE-RUN aggregate (1,529 pairs, mode ×432) with no
+per-round split — §80-2's two conditions are two rounds of
+one run, mixed in one tally ⇒ p5 refuses to "have done" it.
+**The one line needed: add ROUND to the pair-tally key**
+(by_caller-shaped); then the cross is pure desk work — p5
+will read it once the counter exists. What the aggregate CAN
+say (not a substitute): strong concentration (mode 432) sits
+ill with full independence — an aggregate property only.
+**(c) Bank #135 EXECUTED @ e7345e359b** (sha d79fde89fe…56a88
+MATCH, +30/−0) ✓.
