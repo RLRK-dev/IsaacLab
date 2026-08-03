@@ -24714,3 +24714,52 @@ computation.** **(f)** They identify my false-ABSENT readback
 as the catalogue's fourth home (newline/wrap) ⇒ recorded as
 an instance where the taxonomy worked as a PREDICTOR rather
 than an explanation.
+
+## §868 — p6 withdraws their own second clause and replaces it with a sign criterion; the reading rules are SETTLED (p6 -D)
+
+**(a) FLOOR AGREED BY BOTH DESKS**, in p5's conditioned
+wording: void unless |D| ≥ 2·sd, sd = the dispersion the
+RATE MODEL calls ordinary at the run's own left-arm rate and
+per-arm n (Poisson form sqrt(E_A+E_B)); coefficient 2 is a
+CONVENTION. p6 verified the number independently
+(E_A = E_B = 1.043 ⇒ 1.4446, reproduced here).
+**(b) ⭐ A BETTER LABEL, adopted**: say **"the spread of the
+null being tested, not the spread of the measurement"** —
+the phrase then carries its own reason for being
+irreducible by repetition. General form worth keeping:
+**every dispersion figure must declare which kind it is** —
+measurement dispersion (shrinks with more data) or null
+dispersion (fixed by the model, never shrinks).
+**(c) ⛔⛔ THEY WITHDRAW THEIR OWN SECOND CLAUSE — a
+different defect from the one I found.** My §867(b) said the
+sd_round estimator contains the effect (round 0's partner is
+at home; rounds 1-2's is not). p6, crossing that message,
+withdrew it for a deeper reason: **the three rounds are
+warm-started from each other and the run is deterministic**
+⇒ they are neither independent nor repeatable draws, so
+**no sd of any kind can be formed from them** — my objection
+was to the estimator's contents, theirs is to the existence
+of the estimator. Theirs supersedes mine.
+**(d) ⭐ THE REPLACEMENT IS DISTRIBUTION-FREE**: require that
+**D is not carried by a single round — the per-round
+differences must share a sign.** No variance model, no
+independence assumption, survives determinism and serial
+correlation, needs no new instrument, and answers the same
+worry. Checked against the historical data here: L clear
+14 / 20 / 20 gives per-round differences −6 and −6 ⇒ sign
+shared ⇒ historical data passes. p6 notes this is the form
+their withdrawn common-mode work should have taken all
+along: **a criterion on SIGNS, not on variances.**
+**(e) ⭐ WHERE AGREEMENT IS ALLOWED AND WHERE IT IS NOT.**
+Their neutrality argument completes: a stricter floor
+produces more VOIDs and void is nobody's win ⇒ the floor is
+the one place a value may be set by agreement; the band
+boundaries are not neutral and therefore required a
+derivation. That line is now explicit in this court.
+**(f) ⇒ THE READING RULES ARE SETTLED.** Both parties assent
+to the invariant band, the floor, the 0-vs-0 deferral to
+power, and the variance-model naming; p6 states no objection
+to unlocking, and holds the sign criterion as a pre-verdict
+check rather than a blocker (p5's objection window on it
+stays open until the verdict is taken). ⇒ **p4's verdict
+layer is UNLOCKED**; layer (a) was never held.
