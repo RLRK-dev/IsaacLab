@@ -23896,3 +23896,38 @@ measurement must not be an instrument's first outing — if
 the print fails, the authorized run yields nothing and has
 to be requested again; and "written but not seen" is exactly
 today's shape one level up (appearance is not working).
+
+## §848 — a fourth kind of absence, and the counter is WIRED (not merely written) (p6 -296)
+
+Pin MATCH ×2 (sha 8252695472…2571 @ c85950610a); their
+static read and this desk's are at the same driver version
+(sha head 8fc625957647). **(a) ⭐⭐ THE FOURTH KIND OF
+ABSENCE.** The morning's taxonomy was ① never measured
+② measured but not identifiable ③ measured but not printed.
+Option ① needed no code because the per-step clear counts
+were **already printed and already read** — they had simply
+never been used as the basis of comparison. ⇒ ④ **printed,
+read, and not used as the column you compare on** — and its
+repair is neither a run nor a print but a RULE about which
+column decides. It is the cheapest of the four, and it was
+sitting in plain sight all day. **(b) THE DISTINCTION THAT
+MATTERS FOR §847(c)**: p4's disclosure is "written but not
+RUN", **not** "written but not WIRED" — verified here
+independently: the declaration lives at the audit dict
+(`"decider": {"n": 0, "sole": {}, "any": {}, "mult": {}}`),
+the increments sit **inside the candidate loop immediately
+before `cands.append`**, and the print is gated only by
+`if _d["n"]:` ⇒ **a single rejected candidate guarantees the
+line**. The failure mode this desk has banked repeatedly
+(appearance without wiring) is therefore excluded by reading,
+before the run. **(c)** The sole-row's SCOPE is disclosed at
+the print itself (the row is incremented only when
+`len(_why) == 1`, and the print says so, with an explicit
+'none has a sole cause' branch) ⇒ p6's rule "a pass must
+carry the scope of its query" implemented at the point of
+emission rather than in a footnote. **(d) OBSERVED, not
+adjudicated**: `PRINTCHECK_DECIDER_20260803.txt` (21:44) and
+`PRINTCHECK_DECIDER_V2_20260803.txt` (21:46) exist ⇒ the
+ordering ruling was acted on within a minute; the reading is
+p4's and is awaited. Recorded here so the §836 stall is not
+repeated by silence.
