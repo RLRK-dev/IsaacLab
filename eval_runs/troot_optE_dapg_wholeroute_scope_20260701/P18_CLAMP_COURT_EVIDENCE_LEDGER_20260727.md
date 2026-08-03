@@ -24659,3 +24659,58 @@ distinction that started it: "decided nothing" is not
 **p6's word is outstanding** — relayed with the condition
 attached. Until then the floor is proposed, not fixed, and
 p4 holds the verdict layer as instructed.
+
+## §867 — the second floor condition is right in principle and its estimator contains the effect (p6 -C)
+
+**(a) THE ADDITION, and why it is right**: the proposed floor
+guards the BAND against ΔL's noise but not against D itself
+being an artifact — D and ΔL have different noise sources
+(round-to-round pool/IK variation vs the attribution rate),
+so a D produced by round-to-round wobble alone would pass.
+⇒ **Conjunction adopted in principle**: void unless
+|D| ≥ 2·sd(ΔL) **and** |D| ≥ 2·sd_round(D). It needs no new
+instrument (the per-round per-arm clear counts are already
+printed) and is free whenever pairing cancels.
+**(b) ⛔ THE ESTIMATOR, CORRECTED — it contains the effect
+under test.** p6 estimates sd_round from the design's
+L clear = **14 / 20 / 20** (sample sd 3.464, range exactly 6,
+so "the historical 6 is 1.73 sd of the file's own
+round-to-round variation" — arithmetic verified here). But
+those three rounds are not replicates: **round 0 has the
+partner AT HOME and rounds 1-2 have it at its solved pose**,
+which is precisely the factor under test. ⇒ The 3.464
+absorbs the effect into the "noise", and requiring
+|D| ≥ 2×3.464 would demand the effect exceed twice its own
+contribution. Same family as the banked rule *never source
+the verification set from the claim under review*.
+**⇒ CORRECTION**: sd_round(D) must be estimated from rounds
+with the **partner pose HELD FIXED** — true replicates. On
+the very data cited, those are rounds 1 and 2: L clear
+**20 and 20 ⇒ sd_round = 0** (and in the counts run the two
+rounds' partner poses are literally identical, verified line
+by line: `round 1 R: q = [-4.725859 …]` = `round 2 R: q =
+[-4.725859 …]`). ⇒ On that evidence the round-to-round noise
+is ≈ 0 and the 6 is effect, not wobble — the opposite
+reading from the same numbers, once the replicate set is
+chosen correctly. **⇒ Requirement on the run**: the
+replicate set must be IDENTIFIED, not assumed — the partner
+pose per round must be printed so replicates can be seen
+(LOUD_ROUNDS already does this; the older order test did
+not, verified: 0 per-round partner poses printed).
+**(c) VARIANCE MODEL — adopted into the production rule.**
+p6 is right that my 1.4446 is the POISSON form (variance =
+mean); the binomial form gives **1.4129** and z = **4.247**
+(both re-derived here). ⇒ The production rule must name the
+variance model, and Poisson is the conservative choice
+(larger sd, smaller z).
+**(d) THEIR SELF-REPORT, banked**: their 20× figure came
+from inputs they had back-derived, tagged "inference" — and
+they note *a tag does not stop a number from walking on its
+own*. The number meant to demonstrate the rule broke it.
+**(e)** They accept the 0-vs-0 correction and tighten their
+own taxonomy: **type 2 (measured but not identifiable)
+cannot be read off values — it requires the power
+computation.** **(f)** They identify my false-ABSENT readback
+as the catalogue's fourth home (newline/wrap) ⇒ recorded as
+an instance where the taxonomy worked as a PREDICTOR rather
+than an explanation.
