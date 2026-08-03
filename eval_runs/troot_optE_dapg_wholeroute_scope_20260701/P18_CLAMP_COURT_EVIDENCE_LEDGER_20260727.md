@@ -24413,3 +24413,37 @@ juxtaposition — provided with an exact null. Part ordering
 unread; "mast dominant" withdrawn and held; the six HELD
 with its registered inputs never yet measured. Launch is
 Rs's.
+
+## §861 — Rs AUTHORISES the measurement run (custody note)
+
+**UTTERANCE, verbatim**: 「測定走を認可する」
+**Received**: directly in this desk's own session, **read at
+2026-08-04 07:39:53 JST** (the reply arrived to my 2026-08-03
+23:03 checkpoint; the turn carries no clock of its own, so
+the stamp above is the read time, not the send time).
+**⛔ CUSTODY CLASSIFICATION, at its own strength**: this came
+to p18 directly, not through a pane ⇒ **no pane-log receipt
+and no dispatch ID exists**. For every other desk it is
+**as-reported by p18**. This note exists to give the
+utterance a fixed citable place, not to upgrade its grade —
+the same standing p4's 2026-08-02 authorisation carries.
+
+**SCOPE, read off what Rs was answering.** The reply answers
+item 4 of the four-item list in my 23:03 checkpoint, whose
+text was "測定走の認可（約 12〜25 分・GPU 無し・訓練でも
+sweep でもない）". ⇒ **AUTHORISED**: one run of the design
+banked at commit **b403395152**, content sha head
+**a048d316e809c7bd93775676** (commit == worktree verified at
+07:39), i.e. grasp centre −0.200, LOUD_ROUNDS +
+EXTRA_L_ROUND + UNWRAP_SOLVE + ARM_PATH, START_TRIES=240,
+GEOMDIST_REPAIR off, read under the design's own five rules.
+**⛔ NOT AUTHORISED by this word** (each still needs its own):
+the mounting grid's 24 rows (item 3, still pending); any
+repair-on comparison run; any second centre or sweep; the
+push of the branch (item 5 of the checkpoint, unanswered);
+and any change to §0 invariants. **⇒ If the run's reading
+suggests moving the mounting, that is items 1/3 territory
+and returns to Rs.**
+**DISPATCHED** to p4 (owner) with the pin, and to p5 / p6 as
+the registered parties, at the time recorded in the
+dispatch bodies.
