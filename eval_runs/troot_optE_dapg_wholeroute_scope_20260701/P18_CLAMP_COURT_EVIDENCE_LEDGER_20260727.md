@@ -23731,3 +23731,65 @@ and now its **reachability** (a run that stopped earlier
 cannot be differenced against one that went further). Each
 layer was found by a different desk, and each was found by
 the desk whose own claim it destroyed.
+
+## §843 — both runs ended the same way; the one comparable quantity points the wrong way (p4 21:33)
+
+**Verified here**: each log has exactly 1 traceback and 1
+exception; both are the same predicate — `THIS arm's command
+stopped advancing for a whole step's worth of ticks and its
+move did not finish` — OFF raising at **STEP6 L**, ON at
+**STEP2 L**. ⇒ Normal termination at the known STEP stall,
+not a crash; 21:29:35 was that end. **THE ONE RUN-LEVEL
+COMPARABLE QUANTITY** (the flag is the only intentional
+difference at run level, even though downstream populations
+diverge): the stopping stage — **repair-ON stops four steps
+EARLIER**. **⚠ THE DIRECTION.** p4 reports the repair only
+ever adds room: audit verbatim (cumulative, line 272)
+`repair ACTIVE: 518 values replaced by their own segment
+(516 where the scalar was exactly zero, 2 keeping the
+scalar's sign)`, and floor 2 `0 claiming MORE room …, 518
+claiming LESS` ⇒ pre-repair the instrument under-reported
+room, so the repair yields MORE acceptances. They flag that
+"more acceptance yet stops earlier" is unexplained and
+explicitly decline to assert a cause. **⭐ THIS DESK ADDS
+THE COMPETING EXPLANATION, so it is on record before the
+next instrument**: "more acceptance ⇒ travels further" is
+NOT licensed — a larger accepted set changes WHICH pose is
+chosen, and tracking quality is not monotone in clearance;
+a newly-admitted pose can be worse for the follower gate.
+⇒ The earlier stall is explainable WITHOUT a second gate,
+so "the tracking gate is what stops it" remains one
+hypothesis among two, and the next instrument must
+discriminate them rather than assume the first.
+**Conversion key CONFIRMED LIVE**: the ON run printed
+`arm_pair_min:1717 column_gap:1272 jaw_gaps:876 gap:2528` —
+exactly §835's post-unification values. **⚠ This desk's own
+near-miss, recorded**: I first read the repair line under
+`head -3` and was one step from reporting a mismatch (11 vs
+p4's 518); the untruncated read shows an interval line (11)
+and the cumulative line (518/516/2), so p4's quote is exact.
+Same truncation class as the fallback's `[:6]` — caught
+before it was sent, which is the only reason it is a note
+and not a correction.
+
+## §844 — there is no correctly-scoped rate at all (p6 -293)
+
+Pin MATCH ×2 (sha 55c889bdc6…7b0c @ aea1c1382d). They accept
+the power-figure provenance point and then **strengthen it
+past it**: the exposure n_B = 24 is ARM-ONLY, while every
+borrowable rate is BOTH-ARMS — 4/364 mixes four intervals of
+which three span both arms, and 2/112 is round 0, already
+established as both-arms. The only arm-only datum is 0/24
+itself, which is the thing under test ⇒ **circular**. ⇒ The
+power argument has no admissible input: not a weak test, a
+test **whose inputs do not exist**. This is §838(ii)'s defect
+reappearing on the RATE side rather than the count side, and
+it makes "no verdict in either direction" firmer rather than
+softer. **⇒ Requirement added to the pending counter**: it
+must also emit the **arm-only attribution rate** — split by
+round × arm — so that counts and rates finally share one
+population. **⭐ Recorded, and rare**: p6 and this desk
+reached the centre fact by opposite routes (their positive
+line `:200 (centre x=+0.1500)`, my absence-of-move-line) —
+genuine independent confirmation, of which today had almost
+none.
