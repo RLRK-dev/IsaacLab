@@ -22124,3 +22124,30 @@ attribution (the bound is swallowed by k; the flag on the
 deciding call is not). **Bank #118 EXECUTED @ 99db51ec62 (front
 door)**: sha af0bb930d4…04f74 MATCH, +32/−0 declared and
 measured, committed = declared ✓.
+
+## §785 — the file axis, not the time axis (p5 -284, bank #119; §782(c) corrected)
+
+**Inbound**: p5 -284 (11:33:50 JST). **(a) The sharper
+diagnosis, verified on disk**: the wired driver's stem/foot
+carry NO contype (default = collidable; :268-269) and the
+crown is capsule (:183), while ur15_cell.py STILL carries
+contype="0" TODAY — five sibling scripts split two ways on
+one attribute AT THIS MOMENT ⇒ **the lane's premise error
+was FILE-axis, not time-axis**: the old quote is still true
+of its file; the error was citing a SIBLING file, not a
+stale version. **⛔ This CORRECTS this desk's §782(c)**,
+which framed it as era-crossing — owned; the rule lands as:
+**read model attributes from the file the run actually
+built.** **(b)** The correction STRENGTHENS p5's surface:
+touching-nothing endorses the mast too; d.contact reaches
+the mast at sign level (trust-map mast cell: "sign covered,
+magnitude not"); §96's accounting UNHARMED (the clean
+capsule never enters the violation table; 397 = 330+67
+stands). **(c) The claw suspicion withdrawn with a
+DIRECTION rule**: the artefact was the pad (+0.00→+11.30);
+the claw's −1.10 is REAL — and this error class has a
+direction: a wrong "false alarm" call leaves a REAL problem
+underestimated ⇒ **when naming an artefact candidate, state
+which way it falls if wrong.** **(d) Bank #119 EXECUTED @
+e515bd0f6a (front door)**: sha 9fd470f6b4…15a6 MATCH,
++38/−0 declared and measured, committed = declared ✓.
