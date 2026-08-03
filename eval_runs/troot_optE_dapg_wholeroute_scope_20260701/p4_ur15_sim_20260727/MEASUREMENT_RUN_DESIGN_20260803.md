@@ -211,18 +211,28 @@ p18 (-1369) raises the right objection: the cost is a **sum**, so its argmin cor
 term's argmin, and at pools of 3–6 the expected number of disagreements might be ≈ 0 even if the cost
 does wave good survivors through — in which case 6/6 says nothing.
 
-Computed rather than assumed. Null = the three term-vectors independent across candidates,
-200 000 draws per pool size, seed 20260803:
+Computed rather than assumed, and then reduced to a closed form by p18 (-1370), which is the better
+artifact — no seed, no draw count, reproducible with pencil.
 
-| pool k | P(sum's argmin is also all three terms' argmin) | P(disagree) |
-|---|---|---|
-| 2 | 0.2522 | 0.75 |
-| 3 | 0.1123 | 0.89 |
-| 4 | 0.0627 | 0.94 |
-| 6 | 0.0279 | 0.97 |
+**Derivation** (re-traced here, not relayed): a candidate that is the argmin of all three terms is
+necessarily the argmin of their sum, so the event is exactly "some candidate wins all three". For a
+given candidate that has probability (1/k)³ under independence with continuous values; the events for
+different candidates are disjoint because each term's argmin is unique; so
 
-Over the observed pools [3, 3, 4, 6, 6, 6] the null expects **0.37 agreements out of 6**, and
-P(6 of 6) ≈ 1e-7.
+    P(the sum's argmin is also all three terms' argmin) = k · (1/k)³ = **1/k²**
+
+| pool k | 1/k² exact | my Monte-Carlo (200 000 draws, seed 20260803) | P(disagree) |
+|---|---|---|---|
+| 2 | 0.2500 | 0.2522 | 0.75 |
+| 3 | 0.1111 | 0.1123 | 0.89 |
+| 4 | 0.0625 | 0.0627 | 0.94 |
+| 6 | 0.0278 | 0.0279 | 0.97 |
+
+Over the observed pools [3, 3, 4, 6, 6, 6] the null expects **53/144 = 0.368 agreements out of 6**.
+
+⛔ **Correction to my own first figure.** I wrote P(6 of 6) ≈ 1e-7. Exactly it is
+∏1/k² = **1/60 466 176 = 1.65 × 10⁻⁸**, about six times smaller — so the claim it supports is
+strengthened, not weakened.
 
 ⇒ **The objection's premise does not hold at these sizes.** Disagreement is the *overwhelmingly*
 likely outcome under independence (75–97 %), so the comparison **is** able to differ from k = 2
