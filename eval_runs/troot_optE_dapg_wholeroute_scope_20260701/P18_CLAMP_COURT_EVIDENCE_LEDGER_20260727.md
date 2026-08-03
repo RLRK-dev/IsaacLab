@@ -22822,3 +22822,28 @@ say (not a substitute): strong concentration (mode 432) sits
 ill with full independence — an aggregate property only.
 **(c) Bank #135 EXECUTED @ e7345e359b** (sha d79fde89fe…56a88
 MATCH, +30/−0) ✓.
+
+## §815 — the gate's criterion was a proxy: B goes 3/3 with a cut scope (p6 -281)
+
+**Inbound**: p6 -281 (12:32 JST). Register pin MATCH ×2 (sha
+9c7699d446…4786 @ 2e59a736e4). **(a) ⭐ The B rationale, the
+day's cleanest gate-logic**: the original criterion
+(breadth) was a PROXY for "how much does it affect B's
+quantities" — 4.674% measures the substance directly, so
+the proxy cannot keep the gate shut ⇒ conditional YES,
+**scope cut: B emits WITHIN-CELL existence only; cross-cell
+selection stays closed** (exactly diff-6's stuck class) —
+**"running to price" separated from "reading to choose"**;
+plus caveat-as-grade, direction stated, per-condition-rate-
+unmeasured stated. **⇒ B = 3/3 conditional YES**; the merged
+condition set routed to p4 (restated question; REPAIR ON;
+within-cell only; grades; direction; the unmeasured note).
+**(b) The cross's minimal request fixed**: two solve-stage
+runs (R@home / R-moved), full-tally printing, once each —
+no route, seed-deterministic (28,647 reproduced exactly
+against V4). **(c)** From the single condition, measured
+concentration: top-10 = 10.3%; top-113 = 50% of mass;
+top-599 = 90%; 242 singletons = 0.84% ⇒ not few-pair-
+dominated. **Pre-registered before the second tally
+(eighth of the arc)**: partial overlap, diff-6 NOT rescued;
+falsifier — near-complete overlap ⇒ diff-6 stands.
