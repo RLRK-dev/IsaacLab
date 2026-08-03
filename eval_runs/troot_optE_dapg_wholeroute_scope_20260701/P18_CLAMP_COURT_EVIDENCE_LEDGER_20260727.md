@@ -25671,3 +25671,18 @@ the delta error was **no check run** (assuming written lines
 = inserted lines), not an unengaged check ⇒ different rules
 ("ask whether it can support the claim" vs "measure what is
 measurable").
+
+## §890 — custody closed on the sweep (p6 -X)
+
+Pin MATCH ×2 (ledger sha 32-prefix 14973bf785b90c59828af4d4
+d03fe33a @ **435bea49a1**, guard layer 4 ALL PASS, row 161 =
+8 pipes unchanged). p6's second sweep pass, the single
+exclusion and its reason, the granularity correction, and
+the "I had not measured it" disclosure are banked on their
+side. **All three desks' courts are empty.** Standing state
+for whoever reads next: verdict confirmed and worded; band
+closed (roles, Δ, tie clause); floor term 1 operative with
+its null named, term 2 inert in both forms; the sweep
+applied at the lane start plus the live-quantity subset;
+the route's blocker still unexplained, which is the only
+open item touching the intermediate goal.
