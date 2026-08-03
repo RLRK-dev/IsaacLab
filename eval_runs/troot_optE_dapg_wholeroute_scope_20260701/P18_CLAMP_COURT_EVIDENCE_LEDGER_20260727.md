@@ -22752,3 +22752,46 @@ its author. **The closing stone: verification that works
 only OUTWARD; the most dangerous absence claim is about a
 topic YOU WERE NOTIFIED OF — the record was not "somewhere
 on disk" but ADDRESSED TO the claimant.** Court empty.
+
+## §812-813 — the interlocking verdicts: sixteen released, six re-addressed (p5 -300 bank #134 + p6 -280)
+
+**(a) p5 -300, bank #134 @ 85f068803b** (sha 932e6c6b42…
+3d2f MATCH, +50/−0; arithmetic re-derived: 4.84% = 1.04×,
+13.56% = 2.90×, need-ratio 2.80): **verdict — the §80-2
+six HELD (fully explainable by one-leg contamination at
+1.04× the measured rate); the unwrap sixteen RELEASED**
+(needs 2.90× on one leg AND zero on the other). Pre-verdict
+check exemplary: the unwrap pair moved TWO factors (head
+present only on the unwrap side — 0 hits vs present,
+verified by them) but the confound's DIRECTION is opposite
+the observation ⇒ **+16 is a LOWER BOUND of the unwrap
+effect — the monotone argument once more**. Released
+licenses: unwrapping genuinely multiplies the left arm's
+clear poses (≥20→≥36), not instrument-made. Not licensed:
+the partner-position effect; the wrap-caused-right-zero
+front half. Self-scores owned (the thresholds gave only the
+ratio — 2.67 predicted vs 2.80 measured; the 4.674% applied
+beyond its measured class makes the release conservative).
+**(b) p6 -280** (pin MATCH ×2 @ 8dd7ae390b; :492 verbatim
+self-read; E-losses and z re-derived here, 3.43≈their
+3.51): **16 STANDS UNDER ALL THREE MODELS** (independent
+P=0.0002; anti-correlated P=0.0065; common-mode ≈0) — the
+correlation model UNNECESSARY for this verdict. **The six's
+hold CHANGES ADDRESS**: makeable under independent/anti-
+correlated, but **INTACT under common-mode** (rejections
+226 vs 220 nearly equal — losses cancel) ⇒ model-dependent
+⇒ **the resolver = the two-condition FULL-TALLY CROSS,
+already landed in (c)** — the two instruments map 1:1 onto
+the two differences. Four assumptions declared; direction
+consistent (corrected ≈30 vs 46 keeps 16). And :47 verbatim
+(re-read here): the stereo head "absent by construction" in
+this run — their in-source-≠-CLOSE caution vindicated.
+**(c) LANE STATE**: the unwrap positive is now
+INSTRUMENT-REAL by two independent routes — the repair's
+first VERIFIED helping instance; the six awaits one desk
+analysis (the tally cross); **the B gate re-visit is posed
+to p4 with this desk's inclination: B UNBLOCKS with
+measured-caveat reporting** (the §748 gate's purpose —
+"price everything after it" — is fulfilled: the price is
+measured at 4.674% verdict-reaching), p5/p6 concurrence
+requested.
