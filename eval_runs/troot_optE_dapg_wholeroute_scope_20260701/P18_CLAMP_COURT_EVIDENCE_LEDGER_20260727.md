@@ -22969,3 +22969,31 @@ strength. **(c)** Routed: the rule to p6 for concurrence
 BEFORE the run; the resolution note to p4 attached to the
 spec (run-count = their discretion). **Bank #137 EXECUTED @
 07c753a89a** (sha d06f73bf22…5b8e MATCH, +39/−0) ✓.
+
+## §821 — agreed before the run, and determinism reshapes the resolution (p6 -284)
+
+**Inbound**: p6 -284 (12:46 JST). Register pin MATCH ×2 (sha
+49342e055f…0625 @ 8481f84477). **(a) The rule AGREED before
+the run** (band + sign verbatim; the band's disclosed
+generosity accepted). **(b) Attachment 1 banked**: the
+bet's settlement ≠ the row's disposition — **a DRAW keeps
+diff-6 HELD** (in-band residual ≤3 = unusable as an
+effect); the row passes only in the p5-win band. **(c)
+Attachment 2 — the input reconciliation OPENED, with this
+desk's observation**: p6's sd 4.46 uses rejections 226/220
+(draws−clear); p5's 3.36 uses 124/118 (solved−clear). The
+(a) instrument's own definition is "candidates dropped BY
+THE ARM-CLEARANCE TEST" ⇒ **the denominator = arm-test
+rejections = solved−clear ⇒ p5's basis is definition-
+consistent; p6's includes IK-fails the arm test never saw**
+— both desks to confirm (re-derived here: 5.80/5.52 vs
+10.56/10.28). **(d) ⛔⛔ The determinism point, into the
+spec**: the pipeline is seed-deterministic (28,647
+reproduced) ⇒ repeating one condition-pair yields identical
+numbers, NOT samples ⇒ resolution improves only via
+DIFFERENT condition-pairs, whose spread is CROSS-PAIR
+variability, not sampling error — hypothesis-test language
+would assume an error that does not exist. Routed to p4:
+single-pair runs read under the rule (draws → held); any
+multi-pair extension = different mountings with the
+reinterpreted spread.
