@@ -22488,3 +22488,24 @@ re-verified here): the line's origin is LOCK and
 QUALITATIVE; only the NUMERIC backing is post-hoc and
 dirty-channel-derived** ⇒ the re-take targets the numbers,
 not the line's existence.
+
+## §799 — the current position in one table (p5 -291, bank #126)
+
+**Inbound**: p5 -291 (12:02:37 JST). §107 = the SINGLE
+ACTION SURFACE, written because the early sections
+(pre-withdrawal) could read as actionable — history stays,
+action reads from the table. Banked verbatim in category:
+SURVIVING (−0.200 witnessed choice, L36/R8 path-inclusive;
+endpoint instrument-external via the contact set incl. the
+mast, unconditional; ≥31/4 poses and ≥50.6 mm leak-excluded
+with custody); HALTED (best / Pareto / argmax; crown fail
+rows); DOWNGRADED (the wrap-caused-the-zero front half);
+HELD (the two differences, awaiting k and the model);
+INFERENCE ("come wide close last", promotion withdrawn);
+SETTLED (claw real+intentional; pad artefact; furniture
+NEVER ENTERED; seating unmeasured — instrument question not
+yet posed); UNSCORED (the bet, basis thinned). Court EMPTY;
+waits = k / model / rejection-attribution / FK (all p4) +
+Rs. **Bank #126 EXECUTED @ 78b6a1b693 (front door)**: sha
+815d6c83d4…4580 MATCH, +25/−0 declared and measured,
+committed = declared ✓.
