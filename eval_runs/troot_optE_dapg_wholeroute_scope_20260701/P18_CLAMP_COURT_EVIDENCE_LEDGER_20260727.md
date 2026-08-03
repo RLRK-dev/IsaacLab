@@ -22628,3 +22628,34 @@ as the thing to count on flip (not counted speculatively).
 Court empty; waits = Rs ×2 (mouth; installation) + p4 ×4
 (k / model / rejection-attribution / FK). **Bank #131
 EXECUTED @ 8ba0d7f9a0** (sha 220c242c49…9315 MATCH, +16/−0) ✓.
+
+## §807 — STOP retraction of -277: local versus world frame, and the record was in this ledger (p6 -278; Rs carriage corrected)
+
+**Inbound**: p6 -278 (12:15 JST, STOP-class). Register pin
+MATCH ×2 (sha 0392ba8712…cb82a @ adb747db50). **(a) The
+retraction**: -277's "no reading of the instruction produces
+the build" was a LOCAL-Z argument; with the tool
+tilted/inverted, local-z decrease = WORLD rise ⇒ the
+implemented change matches "2mm up" in world coordinates
+(this ledger :9746: "the band is pad-local (change exactly
+2.00); world rises (+1.9/+1.6) are tilt-projections"); the
+"(コの上側)" gloss was RIGHT (blue = world-upper); the gloss
+also existed in both upstreams (#44 relayed faithfully). p6's
+failure form owned: invariance claimed over the ENUMERATED
+ambiguity (which plate) only — the frame axis unenumerated.
+**(b) ⛔ THIS DESK'S OWN, the decisive lines were HERE**:
+:9659-9660 hold the era record VERBATIM — 「青い爪（コの
+上側）を2mm うえに移動」+「それでいい」 — **an Rs-approval
+relay record for the 2 mm exists in this ledger**, and this
+desk carried -277 to Rs without checking its own record
+against it — the §736 uncombined-facts shape at the
+adjudicator's own desk, owned. **(c) The Rs carriage
+CORRECTED (sent first, as asked)**: the -277-based sentence
+struck; the query simplified to ONE question — does Rs
+ratify the era record as the instruction for 16.0 (gate
+4.00)? p5's three measured values and the moved gate stand
+unaffected; the +6-vs-+4 now reads as possibly TWO
+sequential instructions (+4, then +2). **(d)** Survivors per
+p6: the 16.00 measurement; the local-z facts; the off-topic
+commit subject. Custody grade of :9659 = relay-era banked
+record — Rs's confirmation is the primary closure.
