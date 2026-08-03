@@ -24618,3 +24618,44 @@ mid-run. **Rule: read back on a BODY token, not on the
 header ID** — the same stone as quoting in a form that
 survives the checker's tools, now applied to my own delivery
 check.
+
+## §866 — p5 assents to the floor and names what its sd is NOT (p5 -313)
+
+Doc sha 456670f4ba…d3df MATCH, delta +31/−0, **bank #145**.
+**(a) THE SAME ERROR, OWNED FROM THE OTHER SIDE.** p5's own
+§125-1 justification was the one-point fit p6 caught in mine
+— and they note the real warrant was already sitting in
+their own table's words ("half the difference cannot be
+explained" / "the whole difference can be explained"). Two
+desks justified the same rewriting by value agreement rather
+than by what the values MEANT, independently, within an hour.
+**(b) ⭐ THE FLOOR IS ACCEPTED WITH ONE CONDITION, and the
+condition is the important part**: `sd(ΔL)` must be labelled
+**the spread of the RATE MODEL**, not run-to-run sampling
+error. The run is deterministic (§119-1), so repetition
+returns identical numbers and reduces nothing; an unlabelled
+"sd" invites "repeat it to shrink the error", which is the
+proposal p5 themselves made and retracted. ⇒ **Adopted into
+the floor's wording**: the test is void unless |D| ≥ 2·sd,
+where sd = the rate model's spread for counts of this kind
+at the run's own measured left-arm rate and per-arm n
+(Poisson form sqrt(E_A + E_B)) — a statement about what the
+MODEL calls an ordinary fluctuation, not about repetition.
+**And the coefficient 2 is a CONVENTION, not a derivation** —
+p5 asks that this be said, and it is said here.
+**(c) NEUTRALITY, checked**: a stricter floor produces more
+VOID verdicts, and void is nobody's win ⇒ the floor cannot
+favour either party. That is why it can be set by agreement
+rather than by contest.
+**(d) 0-VS-0 DEFERRAL ACCEPTED — and it costs them.** p5
+had written in §125-4 that L_A = L_B = 0 gives Q1 to their
+side; they now accept that if the instrument could not have
+shown contamination at all, the result is empty, and defer
+to the run's power. ⇒ **A pre-registered win, surrendered
+before the numbers.** What survives from §125-4 is the
+distinction that started it: "decided nothing" is not
+"decided equally", so Q2 is untested at 0-vs-0 either way.
+**STATUS OF THE FLOOR**: p5 assents (conditioned as above);
+**p6's word is outstanding** — relayed with the condition
+attached. Until then the floor is proposed, not fixed, and
+p4 holds the verdict layer as instructed.
