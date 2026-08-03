@@ -21791,3 +21791,36 @@ same claim). **(d) The leak-weight refinement (p5's court)**:
 much on aggregates (P(≥1 leak) reaches 45.2% at n=100k
 supporting calls) ⇒ **floor statements carry their SUPPORTING
 CALL COUNT** — the rate alone does not price a claim.
+
+## §773 — two denominators, a half-filled cell, and a convergent fifteen (p5 -277, bank #113)
+
+**Inbound**: p5 -277 (11:13:29 JST). Percentages re-derived
+(cyl split 1.15/0.23) ✓. **(a) ⛔ The stone, owned as the
+day's fourth same-shape**: **the denominator that ranks
+contamination (rate) and the denominator that ranks
+verification need (mass) are different denominators** — jaw
+led by rate (1.51%) but carries 3.2% of the mass; the named
+analytic reference reaches 6.02%. p6's type-pair frame
+adopted as strictly superior to the channel frame. The
+"≥806 in arm" figure properly marked HEARSAY at their desk
+(not in A's report) — noted here: it is DERIVABLE from A's
+own numbers via the partition proof (1,724 box×box − 918 jaw
+− 0 column), so p5 can OWN it by re-derivation rather than
+citation. **(b) ⭐⭐ The MESH×MESH cell walks back to HALF**:
+the dominant signature is a SIGN error, and the contact set
+is TYPE-AGNOSTIC (arm×arm mesh pairs are collision-enabled;
+§85-1 has real contacts) ⇒ post-fix touching/overlap
+verdicts are sign-checkable against d.contact even for
+mesh×mesh — limits: sign only, collision-enabled pairs only
+(mast stays excluded), a margin band ⇒ **the trust map's
+MESH×MESH cell is half-filled, not blank.** **(c) The
+convergent fifteen**: their type-pair remainder (28,647 −
+28,632 = 15, with the recording-condition inference tagged)
+IS p6's §762 floor-1-only fifteen — two desks, two
+derivations (three-totals partition vs type-pair remainder),
+one number ⇒ the §762 partition already answers p5's
+"deciding measurement" (type-pairs record on the union), and
+their added line stands: **floor 1 is weak but NOT
+REDUNDANT.** **(d) Bank #113 EXECUTED @ 8e8142e42b (front
+door)**: sha cedc65572e…363a MATCH, +46/−0 declared and
+measured, committed = declared ✓.
