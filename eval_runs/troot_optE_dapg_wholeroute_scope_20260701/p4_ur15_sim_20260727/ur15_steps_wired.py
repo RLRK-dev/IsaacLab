@@ -16,6 +16,7 @@ verified geometrically.  Physical-validity judgment = Rs.
 
 from __future__ import annotations
 
+import atexit
 import math
 import os
 import re
@@ -1435,7 +1436,42 @@ def path_arm_min(t, sc, q_from, q_to, cutoff=None):
     return (None, None) if best > 1e8 else (best, who)
 
 
-_IMPOSSIBLE_DEPTH_SEEN = []   # one-shot latch for the bound check inside arm_pair_min
+_DEPTH_AUDIT = {"calls": 0, "neg": 0, "imposs": 0, "by_caller": {}, "pairs": {}, "rows": []}
+
+
+def _depth_audit_report():
+    """What the bound check inside arm_pair_min saw, printed even when the run ends by raising.
+
+    p18 ruling 20260803-1170 gates the crown re-sweep on this: a rate that is bounded or localised
+    (one pair type, or an artefact of the cutoff) can be documented as an exclusion and worked
+    around; broad contamination has to be fixed first.  So the shape is reported, not just the count.
+    """
+    a = _DEPTH_AUDIT
+    if not a["calls"]:
+        return
+    print(f"[steps] DEPTH AUDIT: {a['calls']} distance calls, {a['neg']} negative, "
+          f"{a['imposs']} geometrically impossible "
+          f"({100.0 * a['imposs'] / max(a['neg'], 1):.2f}% of negatives, "
+          f"{100.0 * a['imposs'] / a['calls']:.4f}% of calls)")
+    if not a["imposs"]:
+        print("[steps] DEPTH AUDIT: none -- every negative was within its pair's bounding radii")
+        return
+    print("[steps] DEPTH AUDIT by call surface: "
+          + ", ".join(f"{k} x{v}" for k, v in sorted(a["by_caller"].items(), key=lambda kv: -kv[1])))
+    _tp = {int(mujoco.mjtGeom(m.geom_type[g]).value) for pr in a["pairs"] for g in pr}
+    print(f"[steps] DEPTH AUDIT localisation: {len(a['pairs'])} distinct geom pairs, "
+          f"geom types involved = "
+          + "/".join(sorted(mujoco.mjtGeom(t).name.replace("mjGEOM_", "") for t in _tp))
+          + "; top pairs = "
+          + ", ".join(f"{p[0]}<->{p[1]} x{c}"
+                      for p, c in sorted(a["pairs"].items(), key=lambda kv: -kv[1])[:6]))
+    for caller, pr, re_mm, bnd_mm, seg_mm, ctr_mm, cut_mm in a["rows"]:
+        print(f"[steps] DEPTH AUDIT row: {caller} geom {pr[0]}<->{pr[1]} returned {re_mm:.1f} mm, "
+              f"bound {bnd_mm:.1f}, its own segment {seg_mm:.1f}, centres {ctr_mm:.1f}, "
+              f"cutoff {cut_mm:.1f}")
+
+
+atexit.register(_depth_audit_report)
 
 
 def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
@@ -1471,19 +1507,29 @@ def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
         # depth past that sum is the instrument talking, not the arms.  The docstring above already
         # says a path minimum disagreeing with both endpoints is "either a real transient or a broken
         # instrument, and a bare number cannot say which" -- this is the discriminator it was missing.
-        # Printed once, with the segment the SAME call reports: a fromto whose length disagrees with
-        # the returned distance is the signature.  Decides nothing; only speaks.
-        _bnd = float(m.geom_rbound[int(ga[ia])] + m.geom_rbound[int(gb[ib])])
-        if dv < -_bnd and not _IMPOSSIBLE_DEPTH_SEEN:
-            _IMPOSSIBLE_DEPTH_SEEN.append(1)
-            _ft = np.zeros(6)
-            _re = mujoco.mj_geomDistance(m, dd, int(ga[ia]), int(gb[ib]), cut, _ft)
-            print(f"[steps] ⛔ mj_geomDistance returned {_re * 1000:.1f} mm between geom "
-                  f"{int(ga[ia])} and {int(gb[ib])}, whose bounding spheres total only "
-                  f"{_bnd * 1000:.1f} mm -- no convex pair can overlap that deeply.  Its own segment "
-                  f"is {np.linalg.norm(_ft[3:] - _ft[:3]) * 1000:.1f} mm long and their centres are "
-                  f"{np.linalg.norm(dd.geom_xpos[int(ga[ia])] - dd.geom_xpos[int(gb[ib])]) * 1000:.1f} mm "
-                  f"apart.  Read every arm-to-arm path number in this run with that in mind.")
+        # ⭐ p18 ruling 20260803-1170 condition (i): the audit covers EVERY call of this function, so
+        # the rate spans both classes -- the pose checks and the along-the-move sampling -- rather
+        # than whichever one happened to fire first.  Attribution is by calling frame, which costs
+        # nothing on the common path because it is only read when a violation is found.
+        _A = _DEPTH_AUDIT
+        _A["calls"] += 1
+        if dv < 0.0:
+            _A["neg"] += 1
+            _bnd = float(m.geom_rbound[int(ga[ia])] + m.geom_rbound[int(gb[ib])])
+            if dv < -_bnd:
+                _A["imposs"] += 1
+                _caller = sys._getframe(1).f_code.co_name
+                _A["by_caller"][_caller] = _A["by_caller"].get(_caller, 0) + 1
+                _key = (int(ga[ia]), int(gb[ib]))
+                _A["pairs"][_key] = _A["pairs"].get(_key, 0) + 1
+                if len(_A["rows"]) < 12:      # a dozen worked examples; the rest are counted
+                    _ft = np.zeros(6)
+                    _re = mujoco.mj_geomDistance(m, dd, _key[0], _key[1], cut, _ft)
+                    _A["rows"].append((
+                        _caller, _key, _re * 1000.0, _bnd * 1000.0,
+                        float(np.linalg.norm(_ft[3:] - _ft[:3])) * 1000.0,
+                        float(np.linalg.norm(dd.geom_xpos[_key[0]] - dd.geom_xpos[_key[1]])) * 1000.0,
+                        float(cut) * 1000.0))
         if best is None or dv < best:
             best = dv
             if want_who:
