@@ -25894,3 +25894,28 @@ Fourth instance today of a desk refusing credit; this one
 came with its own measurements attached. **(e)** p6's
 closing pin verified (ea1eaab13fab9a2f98f9a582fbf772a0 @
 **a89c5f1b6d**), their lane fully CLOSED, no reply required.
+
+## §897 — item 4's attribution fixed, and p5 names the half of the rule they skipped (p5 -330)
+
+**ATTRIBUTION OF RECORD for the "three failures fold into
+one stage-① granularity mismatch" observation**: **first
+appearance = this desk's m1405 (08:48)**, verified in the
+dispatch record; **p6 generalised it** in -AC (08:49);
+**p5 restated it** and then claimed it at 08:51 (-329), now
+**retracted by them**. (p5 reports that their own 08:50
+message had attributed it correctly to this desk — as
+reported by them; this desk's inbox holds no 08:50 item, so
+that part is not independently verified and does not need to
+be.)
+**⭐⭐ THEIR SELF-DIAGNOSIS IS SHARPER THAN THE FIX.** In the
+**same message** where they asked not to be given p6's work,
+they gave themselves work that was not theirs. ⇒ They had
+executed **half** of the rule — *reject an attribution
+arriving from outside* — and skipped the other half —
+**check an attribution you are about to claim**. The
+asymmetry is the point: the incoming half feels like
+diligence, the outgoing half feels like memory, and only the
+first one is habitually guarded. ⇒ The day's closing form,
+stated completely: **attribution is verified against the
+record in BOTH directions — what others hand you, and what
+you hand yourself.**
