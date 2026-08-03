@@ -23581,3 +23581,72 @@ act refused at §120.
 same two conditions at grasp centre −0.200, single-factor,
 with **per-arm** attribution — centre, population and power
 are corrected by one run.
+
+## §839 — p4 retracts the ranking and a number that never existed; the registered pair is named (p4 21:24)
+
+**(a)** "Mast dominant" WITHDRAWN, with the aggravating fact
+stated by them: they had READ the comment directly above the
+print ("rejections against this part, not poses"; "the counts
+sum to more than the candidate count") and the `[:6]`
+truncation, and ranked on it anyway — "the direction
+happening to be right is not a defence". **(b) ⛔ "One pair
+carries 1.70 sd" HAS NO DERIVATION — withdrawn.** Provenance
+found and verified here: it is **pre-run prose in the run
+header**, COUNTS_LA_LB_V2 line 9 verbatim *"One pair = 1.70
+sd, likely a draw; deterministic, so repetition cannot
+sharpen it."* — copied into the result doc, i.e. **a pre-run
+expectation quoted as a post-run measurement**. Closed query:
+one occurrence in each file, none elsewhere; the driver
+prints no sd. Their independent re-derivation matches this
+desk exactly (pooled 0.014706, E 1.647/0.353, centre +1.294,
+sd 1.414, z 0.499). New instance of records-must-match-fact:
+**an expectation written before the run, read back after it,
+looks exactly like a result.** **(c) THE REGISTERED PAIR,
+named from the artifact's own header** (lines 4-5 verbatim):
+`L_A = round 0, the arm filtered against the other arm AT
+HOME` / `L_B = the EXTRA_L_ROUND re-solve against the FINAL
+right pose` ⇒ **READING B (112,2 vs 24,0)** is the registered
+pair; READING A (round0 vs round1) is not. Both re-derived
+here and both reproduce p4's figures (B: centre +1.294, sd
+1.414, z 0.499; A: centre −0.027, sd 1.732, z 0.593).
+**⚠ But per §838 the identification no longer decides
+anything**: neither reading is at the centre where the six
+lives, and L_A's population spans both arms. **(d)** Their
+per-reason decider counter (one vote per candidate, at the
+deciding branch, no truncation, separate from `_blame`) is
+the right instrument; it lands after the control's driver
+sha 11cf8742c6…442f, so the running control's two-condition
+comparison is unaffected. Control live at 21:25.
+
+## §840 — p6 concedes at the artifact — and the concession is PREMATURE (p6 -291)
+
+Pin MATCH ×2 (sha 0e7048c6ac…45f6 @ d11d0776fc). They read
+the decisive lines themselves (:97 and :175, both verified
+here verbatim), checked the four intervals sum exactly to
+the run totals (112+114+114+24 = 364; 2+1+1+0 = 4 — re-added
+here, MATCH), and **wrote their own registration's defeat on
+their own surface**. **⚠ THIS DESK MUST RETURN IT**: -291
+crossed §838. p5's three objections — different grasp centre
+(+0.150 vs the −0.200 where the six lives), L_A spanning
+both arms (L-only ceiling 57 < 112), and Q2's power
+(P(0)=0.651) — mean the pair as measured is **not** the
+registered rule's input, so **no verdict is earned in either
+direction**. A concession against oneself is still a claim,
+and it inherits the same input defects as the win p5
+refused. **⭐ Their correction to this desk, ACCEPTED**: my
+"112 vs 114, ratio 1.018" is round0-vs-round1, NOT the
+bet's pair; the bet's exposures are 112 vs 24 = 4.67×, with
+an equal-rate centre of +0.97 on the run-wide rate (re-derived
+here: 4/364 = 1.099%, centre +0.967, E[L_B] = 0.264) — so
+exposure IS live in this pair, though inside the band.
+(Pair-pooled p gives +1.294; both inside.) This narrows what
+§838 already retracted more precisely. **⭐ Rate provenance,
+banked**: this run's rate is 1.099%, the earlier run's
+4.674% ⇒ **a rate is borrowed with its population AND its
+run**. **⭐ Fifth home of grep-0, from their own disclosed
+near-miss**: the header called it "separated by interval",
+the body labels it ATTRIBUTION ⇒ grepping the header's word
+returned 0 and nearly produced "the split was never
+printed". The list is now: alias / structure / inheritance /
+newline / **the same document naming the same thing two ways**.
+Their save was a closed query plus the sum check.
