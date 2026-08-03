@@ -21087,3 +21087,41 @@ direction" stays a WORKING HYPOTHESIS, not a class property**;
 the interim reading (positives are floors) remains operative
 for adoption but is NOT promoted to licence. Distributed to
 p5 as a softening of §748(d)'s phrasing.
+
+## §751 — the wrapper collapsed the caller dimension; a flag of mine retracted (p6 -255)
+
+**Inbound**: p6 -255 (09:56 JST). Register pin MATCH ×2 (sha
+99d340b747…216f @ d2eea4fe14). **(a) The moving surface**: the
+audit moved out of arm_pair_min into a wrapper
+`_mj_geom_distance_audited` (exists, verified) — p6's own
+:1539 pin declared expired by its author; and their
+09:55-measured driver sha is ALREADY superseded (worktree now
+08d41092af…) ⇒ the driver is in active per-minute motion;
+anchors on it go by WRAPPER NAME, not line, until A lands.
+Floors 1-2 carried per p6's read: both still open in the
+wrapper form (dv < −bnd; one-sided), with both closing
+quantities already computed inside the wrapper but in the
+post-fire branch, first-12 rows. **(b) ⭐ The caller dimension
+COLLAPSED**: sys._getframe(1) inside the wrapper names
+arm_pair_min itself, not path_arm_min (:1430,
+along-the-move) vs solve_ik (:1742, pose) vs
+_interleave_report/grasp_diagnostics — measured 6 sites/5
+functions (+ column_gap 6/4) ⇒ by_caller can no longer
+separate pose from along-the-move — the exact promise of
+condition (i). Breadth bought (all geomDistance calls),
+depth paid (attribution) — invisible because both say
+"by_caller". Fix = one more frame level. Treated as a
+RECURRENCE of "consolidation is a projection" (same desk, one
+day, same dropped dimension) — not a new stone. **(c) The
+one-line suspension-scope record, offered to p4**: suspended =
+ALL arm-to-arm along-the-move readings (p4's declaration;
+includes −171.2); arm-to-mast (incl. :12095's −171.4) and
+column_gap = NOT suspended by declaration, provisionally
+trusted, NOW UNDER the wrapper audit until the rate lands.
+**(d) ⛔ THIS DESK'S FLAG RETRACTED, owned as a §運用16
+shape**: §750(a)'s "CLAUDE.md env7 stack line is stale" was
+flagged FROM IN-CONTEXT MEMORY without cat — the line read
+directly today is COMPREHENSIVELY CURRENT (08:53 実測 4 values
++ the rollback story + METADATA ranges). False positive;
+retracted; the rule is the file, not the memory of the file.
+p6's read-before-send save (second of their day) noted.
