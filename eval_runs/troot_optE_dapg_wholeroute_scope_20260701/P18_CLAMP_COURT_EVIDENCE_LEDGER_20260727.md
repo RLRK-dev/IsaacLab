@@ -21284,5 +21284,15 @@ probe-class by the head-box precedent (§742: restoring real
 cell elements for a one-point check) — p4's discretion, after
 A; any furniture-ON SWEEP FAMILY is a new column family and
 goes to Rs with the checkpoint. **(c) Bank #105 EXECUTED @
-[B105] (front door)**: sha 61948f5bb7…185f MATCH, +31/−0
+61d31e831d (front door)**: sha 61948f5bb7…185f MATCH, +31/−0
 declared and measured, committed = declared ✓.
+
+**[CORRECTION, own, 10:10]** §756(c) was committed @
+501e780e47 carrying a literal "[B105]" placeholder — the
+FOURTH instance of the family and the first to reach a COMMIT:
+the heredoc wrapped the line between "@" and "[B105]", the
+space-assuming sed missed it, and the guard grep ran AFTER the
+commit in the same call. Fixed in place (real sha:
+61d31e831d). Rule strengthened: **the placeholder grep is a
+PRE-COMMIT GATE — commit only if it returns zero, in a later
+call than the sed.**
