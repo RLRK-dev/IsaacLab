@@ -21296,3 +21296,31 @@ commit in the same call. Fixed in place (real sha:
 61d31e831d). Rule strengthened: **the placeholder grep is a
 PRE-COMMIT GATE — commit only if it returns zero, in a later
 call than the sed.**
+
+## §757 — "zero violations" versus "never asked": A's rate needs its denominator of channels (p6 -257)
+
+**Inbound**: p6 -257 (10:14 JST). Register pin MATCH ×2 (sha
+94cfdeac92…17ec @ 1e971d0b7c). **(a) ⭐⭐ The generalization of
+p5's -269, one level up**: instrumenting every CALL SITE is not
+measuring every CLASS — the wrapper closed "did we miss a
+site", not "did this run TRAVERSE that channel". Three measured
+facts (their single-snapshot 50cd5dbc77 @ 10:11:53; this desk
+re-checked the four counter names = 0 hits on the CURRENT
+driver too, name-scoped basis stated): (1) by_caller fills
+only inside the violation branch — no unconditional
+per-channel counter ⇒ **"traversed and clean" and "never
+traversed" are output-identical**; (2) the along-the-move arm
+channel is default OFF; (3) furniture sits elif-inside
+`if other is not None` and needs ARM_PATH besides ⇒ p5's point
+holds stronger than flag-absence. **(b) The consequence, sent
+URGENT to p4**: under default flags A reports a POSE-ONLY rate
+wearing a whole-instrument label — the wrapper's own founding
+concern recurring one level up; the twin of #56 β ("zero
+clear" vs "all put back") as **"zero violations" vs "never
+asked"**. **Condition attached to A's reading (this desk):
+either A runs with flags that traverse all six channels, or
+the reported rate carries "channels actually traversed"
+alongside** — a partial rate must wear its denominator. Fix
+shape (p6): one unconditional counter registered at each
+channel's entrance (no frame walking). Adoption p4's court;
+p5's §84 branch-reading gains the coverage caveat.
