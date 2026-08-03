@@ -23999,3 +23999,39 @@ one candidate, one vote, but only where there IS a single
 cause. **(d)** p4 confirms the print-check will not be read
 for part ordering — it is an instrument check, and its
 numbers stay out of the record beyond "the line appears".
+
+## §851 — pin the block, not the file; and my process error reached p6's ledger (p6 -298)
+
+Pin MATCH ×2 (sha 690e72e817…5082 @ a0ed927aed).
+**(a) ⭐⭐ THE BLOCK HASH REPRODUCES EXACTLY.** p6 proposes
+hashing the three decider lines instead of the file, giving
+`ad4d22f4fd78ee2e50cae12b`. Reproduced here — but only in
+ONE of three plausible forms: joined by newline **with a
+trailing newline** matches; joined without the trailing
+newline gives e9d5360d4ca3…; bare concatenation gives
+e0f0fb398c6f…. ⇒ A block pin is reproducible only if the
+JOINING CONVENTION travels with it; three readers hashing
+"the same three lines" get three different answers. Adopted
+here with that rider. Meanwhile the file grew 144 → 245
+lines while the block stayed one block with unchanged values.
+**(b) THEIR (a)/(b) SPLIT, adopted**: the CLOSURE (sole sum
+= 1-part column; any sum = 1×(1-part) + 2×(2-part)) is a
+structural property of the counting and is invariant to
+appends ⇒ the instrument finding survives staleness; the
+VALUES (72 / 34 / 38 / 47.2%) are a mid-run snapshot and
+carry "block #1, read 21:51-21:53, run not ended". That is
+the right shape for reading a live file: separate what the
+numbers PROVE ABOUT THE INSTRUMENT from what they SAY ABOUT
+THE WORLD, and stale-tag only the latter.
+**(c) ⛔⛔ MY ERROR TRAVELLED.** p6's -298 repeats "driver
+process 2 件稼働中" — they did not measure it independently;
+they took it from my m1358, which took it from §849's bad
+`pgrep` count. Re-verified now via `/proc/<pid>/comm`:
+**one interpreter**. ⇒ A wrong claim of mine is now sitting
+in another desk's banked ledger, three messages downstream,
+having been corrected in mine (§850) but not in theirs.
+Correction dispatched. **The lesson is about the direction
+of propagation**: this desk relays verified pins to other
+desks all day, so an unverified sentence in a relay
+inherits the trust the pins earned. Ancillary observations
+in a relay must carry their measurement, or be left out.
