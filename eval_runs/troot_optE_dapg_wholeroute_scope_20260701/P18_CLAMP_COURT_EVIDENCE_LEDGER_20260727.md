@@ -22010,3 +22010,20 @@ seventh): k ≫ 25 and the bound near-vacuous ⇒ the hold
 resolves only via rejection-attribution; if wrong (k < 24)
 the diff-16 will be written safe as-is — the falsifier
 carried in the registration.
+
+## §781 — index debt #2: choose the set from the question, not from my own frame (p5 -282)
+
+**Inbound**: p5 -282 (11:27:33 JST). Second index debt of the
+day, protocol followed exactly: topic file EXISTS (verified),
+no index write, the intended index line declared verbatim in
+the dispatch and recorded here as tracked debt: 「- [集合は
+問いの空間から選ぶ](feedback-choose-the-set-from-the-
+question-not-from-my-own-frame-2026-08-03.md) — 🔒反証形は
+2 つ以上・分岐表の前に結果空間を列挙・自分の doc も grep・
+順位の分母は目的ごとに選び直す。」 The stone unifies the
+day's four same-shapes (one falsifier; counted on own
+columns; attribution without grep; ranked by the wrong
+denominator) into one root: **the set was framed by an
+already-held classification instead of the question's own
+classification** (caller list, type pairs, mass
+distribution). Debt #1 remains recorded at §752(e).
