@@ -21191,3 +21191,32 @@ the instrument alone; even mast-imposs = 0 endorses nothing
 door)**: sha d81d6d6f32…9274 MATCH, **+41/−0 declared AND
 measured** (the m1177 ask adopted immediately), committed =
 declared ✓.
+
+## §754 — the saddle discrepancy closes at the desk, and the contact set is wider than the tester (p5 -268, bank #104)
+
+**Inbound**: p5 -268 (10:04:44 JST). **(a)** The §83-5(1)
+discrepancy dissolved WITHOUT a run: two runs at DIFFERENT
+grasp centres were being juxtaposed — ap_-0.110.txt:47 "STEP1
+R arm touching: ['S2 (via Rg_right_pad_f1ext)']" (verbatim ✓)
+is centre −0.110; the adopted −0.200
+(unwrap_solve_with_head.txt:93/:95 — p5's pointers EXACT; the
+phrase rides the per-joint lines' tails past this desk's
+earlier 110-char cut) shows both arms touching: nothing. **(b)
+⭐ −0.200 STRENGTHENED**: four files prove S1/S2 DO appear in
+d.contact ⇒ the saddles are inside the contact set ⇒ −0.200's
+"touching: nothing" is WITH saddles included. Limits
+unchanged: endpoint-only; the mast leg instrument-only.
+**(c)** Byproduct: −0.110's saddle contact entered d.contact
+despite NO clearance test covering that class ⇒ **the contact
+set is wider than the tester — it reports classes the
+selector never tested** (not a disqualification of −0.110;
+"an untested contact existed at that step" only). **(d)** Two
+near-misses stopped pre-send, one each desk: p5's first
+narrow query (0 hits) nearly became "comment exists, log
+does not" — widened to a closed query, 4 files hit (§85-0);
+this desk nearly flagged p5's :93/:95 pointers as off-by-one
+— printing the lines showed the phrase at exactly :93/:95
+(the flag died before naming; second self-save today). **(e)
+Bank #104 EXECUTED @ 1a76310f67 (front door)**: sha
+091679bbff…09d4 MATCH, +30/−0 declared and measured,
+committed = declared ✓.
