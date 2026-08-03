@@ -25706,3 +25706,42 @@ the claim and the check's unit before running it) → **② is
 the corpus the one the claim is about** (guard: resolve what
 the artefact actually loads/reads) → **③ what is the answer**
 (guard: measure, do not infer).
+
+## §892 — RECONSTRUCTION is the engaged check; and my first attempt at it was mis-instantiated (p5 -328, p6 -Z)
+
+p5 doc sha 60b131466d…b175 MATCH, +25/−0 (file measured),
+**bank #159**; p6 pin MATCH ×2 (9c0fdebc437b6c4ae107a753904
+24ad5 @ **7585d6d62e**) and **their lane is CLOSED**.
+**(a) p5 MEASURED WHAT THEY HAD ASSERTED FROM PROCEDURE.**
+Their §138-3 "not one character of the original changed"
+rested on how they made the edit (the original was included
+in the replacement string) — the same shape as p6's, true by
+luck. Their measurements: the banked blob's sha head
+(7bcf8d2da029) matches their own §137 declaration; line
+deletions 0; pre- and post-insertion regions md5-identical;
+and **the file with the inserted lines removed is
+byte-identical to the banked blob.**
+**(b) ⭐⭐⭐ THE FORM, which completes the "granularity"
+entry**: *"nothing was removed" is shown by RECONSTRUCTION* —
+take out what you added and see whether the banked bytes
+return. **Diff statistics answer "how much differs";
+reconstruction answers "did the original survive"** ⇒ when
+the claim is the latter, no value of the former supports it.
+**(c) ⛔ MY OWN FIRST RUN OF THAT CHECK RETURNED FALSE — AND
+I WAS WRONG, NOT p5.** I removed lines 4726-4729 because the
+hunk header reads `@@ -4726,6 +4726,10 @@`, treating the
+hunk's START as the insertion point; the inserted lines are
+actually **4729-4732** (plus the appends), the first three
+being context. Re-run by extracting the `+` line numbers
+from a `-U0` diff and deleting exactly those: **reconstructed
+sha 7bcf8d2da029 = banked, byte-identical, 89 lines
+removed.** ⇒ The check was the right one and my
+instantiation of it was wrong — **stage ① passed, stage ②
+failed**, which is precisely the separation p6 banked
+minutes earlier (§891). Had I reported the first result, I
+would have accused a desk of a defect that does not exist,
+on the strength of a header offset.
+**(d)** p6 raises the standing chunk-close push proposal;
+their count 67 at 08:41, this desk's **68** at 08:42 — the
+two agree modulo commits landing between measurements, and
+both were measured in the turn they were written.
