@@ -2176,7 +2176,33 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
     # cost passing over a good survivor.  If the best survivor is about as good as the best the
     # filter dropped, the filter took nothing and the competition is inside the ranking.
     _pool_sv = max(c[5] for c in pool)
-    q, pe, re_, hit, roll, sv, nfa, _bc = min(pool, key=_cost)
+    _winc = min(pool, key=_cost)
+    q, pe, re_, hit, roll, sv, nfa, _bc = _winc
+
+    # ⭐ p6 -296, accepted: the SAME juxtaposition for the other two cost terms.  Only the
+    # conditioning term was shown beside the pool's best, so a winner that lost on roll or on
+    # distance-from-reference looked identical to one that lost on nothing.
+    # ⛔ Why this is worth a line: the cost is roll + distance + conditioning, and NONE of the
+    # three contains a clearance quantity.  The repair changes which candidates are in the pool
+    # and cannot change how the pool is ranked -- so anything read downstream of this choice
+    # measures the ranking, not the filter.  That is derived; this prints what would measure it.
+    # Print only, no term added, no candidate re-ranked.
+    def _cost_terms(c):
+        return (2.0 * c[4],
+                float(np.linalg.norm(c[0] - ref)),
+                SIGMA_PENALTY * (max(0.0, SIGMA_GOOD - c[5]) / SIGMA_GOOD))
+    if _fell_back or not quiet:
+        _wt = _cost_terms(_winc)
+        _bt = tuple(min(_cost_terms(c)[_i] for c in pool) for _i in range(3))
+        # ⛔ The pool SIZE goes on the same line, and it is not decoration.  Of the first 22 lines
+        # this printed, 15 sat on a pool the fallback had reduced to two, where "the winner is also
+        # the pool's best on every term" cannot come out any other way -- a comparison that cannot
+        # differ is not a comparison.  Read the pair only where the size makes it able to speak.
+        print(f"[steps] {label} IK {t}: cost terms over a pool of {len(pool)}, winner vs the "
+              f"pool's best on each -- roll {_wt[0]:.4f}/{_bt[0]:.4f}  "
+              f"near {_wt[1]:.4f}/{_bt[1]:.4f}  cond {_wt[2]:.4f}/{_bt[2]:.4f}  "
+              f"(winner total {sum(_wt):.4f}; ⛔ no term here is a clearance, so the filter cannot "
+              f"move this ranking{'; ⚠ pool of 1 -- this line cannot differ' if len(pool) < 2 else ''})")
     # p11 -139: the conditioning of the candidates the clearance threw away is already computed --
     # sv is taken for every candidate, including the rejected ones, and then dropped on the floor.
     # Printing the best of them beside the winner's turns that into the one comparison that is
