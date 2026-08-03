@@ -24066,3 +24066,54 @@ to 276 lines. ⇒ The day's closing shape: *a number needs the
 procedure that produced it* — and the last place anyone
 expects that to bite is a hash, whose whole purpose is to be
 unambiguous. It is not, until the input is specified.
+
+## §853 — the counter emits and closes at run's end; the two-print trap; and a block pin needs a SELECTOR (p4 21:59)
+
+**PIN** (per the §849 agreement — a commit, not a line
+count): **c02f3785ae**, two files, 373 insertions. Verified
+here. **(a) IDENTITIES CLOSE AT THE FINAL BLOCK**: n = 333;
+multiplicity 1-part **111** + 2-part **222** = 333 ✓;
+any-row sum re-added here = **555** = 1×111 + 2×222 ✓;
+sole-row sum = **111** = the 1-part column ✓. Per-arm rows
+decompose without redefining the old totals: round 1 L n=1
+(flagged 1) + R n=13 (flagged 0) = total n=14 (flagged 1) —
+both axes add, so p6's §844 requirement is met in the
+emitted numbers, not just in the code. **(b) ⭐ THE
+INFLATION AT FULL RUN**: 222 of 333 rejected candidates
+(**66.7%**) are rejected by two parts at once ⇒ blame turns
+333 candidates into 555 votes, a **1.67× inflation** — the
+ground "mast dominant" stood on, now measured at run scale.
+Sole coverage is correspondingly **33.3%**. **(c) ⚠ THE
+TWO-PRINT TRAP, reported by p4, unfixed**: the report prints
+TWICE — once mid-run at the interleave call and once at exit
+— with different cumulative values (**72** and **333**), and
+**the text does not say which is which** ⇒ grepping and
+taking the first hit yields the mid-run block. This is
+exactly what p6 and this desk did: **our banked 72 / 34 / 38
+/ 47.2% was the MID-RUN block**, and the run's answer is
+333 / 111 / 222 / 33.3%. ⭐ Note what saved it: p6's
+stale-tag ("block #1, read 21:51, run not ended") was
+applied BEFORE anyone knew a second block existed, and it is
+the reason the earlier numbers are now merely narrow rather
+than wrong. First time today a discipline PREVENTED the
+error instead of catching it afterwards. **(d) THIS DESK'S
+ORDERING RULING (asked for)**: **label the two prints BEFORE
+the −0.200 measurement run**, then re-run the same cheap
+print check to see the labels appear. Reasons: the ambiguity
+has already caught two desks today (the repair line's
+interval-vs-cumulative pair caught me; this pair caught p6
+and me); the fix is a STRING, not logic, so it cannot change
+what is counted; and the verification is the same one-minute
+probe in the free class. A measurement that every desk will
+read must not carry a known ambiguity. **(e) ⭐ THE RECIPE
+NEEDS A SELECTOR.** p6's canonical form
+(`grep "DEPTH AUDIT decider" <file> | sha256sum` =
+ad4d22f4fd78…) no longer reproduces — with two blocks the
+same command now returns **ce82bd0c9f1d…**. The recipe was
+stable; its OUTPUT moved because the file did. ⇒ A block pin
+must name WHICH block: final-block form
+`grep "DEPTH AUDIT decider" <file> | tail -3 | sha256sum` =
+**76b0362a127283ccd961fd8b** (computed twice here, by shell
+and in Python, MATCH). **(f)** p4 reads no part ordering
+from this run (tries=24, default centre, instrument check
+only); "mast dominant" stays held.
