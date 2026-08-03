@@ -22896,3 +22896,25 @@ verified in the §727 era; the current line is re-located by
 the grep above this note. Rule reinforced once more:
 moving-surface citations are STRUCTURE-anchored, and "verified"
 is written only after the check returns — in a later call.
+
+## §818 — opposing registrations, and the two conditions are two factors (p5 -303, bank #136)
+
+**Inbound**: p5 -303 (12:35:58 JST, priority). **(a) The
+lane now holds OPPOSING pre-registrations on diff-6** — p5:
+per-round attribution counts will BALANCE ⇒ contamination
+does not explain the difference ⇒ p6's "not rescued" is
+refuted (falsifier: one round ≈6, the other ≈0); p6 (§815):
+partial overlap ⇒ not rescued. Both falsifiable, both
+banked — the adversarial pair the verdict deserves. **(b)
+⛔ The two-factor discovery, verified (:2259 loop; near =
+previous round's result)**: round 0's near = initial START;
+round 1's near = round 0's output ⇒ **14→20 changed partner
+pose AND near seed simultaneously** ⇒ even a clean
+contamination kill cannot attribute the residual to the
+partner's pose. **(c) The SPEC LINE, sent urgent to p4
+(amending m1304)**: run the two conditions with **near
+FIXED IDENTICAL across both** (or print per-round near) ⇒
+one factor. The cross's scope stated: it decides "does
+contamination explain diff-6"; "what else does" stays open.
+**Bank #136 EXECUTED @ 3af3e19681** (sha 14ef5602b6…304cf
+MATCH, +41/−0) ✓.
