@@ -21874,3 +21874,29 @@ cancellation is approximate (a changed solver slightly
 changes the queried pairs) ⇒ operational form: **to compare,
 construct a PAIR; if you cannot, write two floors and no
 difference.** Adopted at this desk for all future relays.
+
+## §776 — the 806 exact: arithmetic and mechanism point at one decomposition (p5 -279, bank #115)
+
+**Inbound**: p5 -279 (11:16:26 JST). **(a) The accounting
+closes on A's own numbers** — re-derived here: column 397 =
+CYL×MESH 330 + CYL×BOX 67 exactly ⇒ column carries ALL
+cylinder-involving violations and ZERO box×box; jaw is
+structurally box×box; gap is 0 ⇒ box×box remainder = 1,724 −
+918 = 806; and **arm_pair_min's 27,332 = 21,458 + 5,068 +
+806 EXACTLY** ⇒ the decomposition is unique — **not ≥806 but
+EXACTLY 806** (2.95% of the arm channel's violations). **(b)**
+The mechanism supplies an independent second check (pad×pad ⇒
+box-only; arm×column ⇒ cylinder-involving, with CYL×BOX from
+the arm-side pads; arm×arm ⇒ all three) — arithmetic and
+mechanism, separately, one decomposition. **(c)** The yield
+stated with its limit: the analytic reference reaches 806
+inside the candidate-rejecting channel; MESH×MESH 21,458
+stays outside — half-filled at sign level, magnitude
+unfilled. **(d) Two self-corrections**: the "hearsay" label
+withdrawn (self-derived now); the "deciding measurement"
+unnecessary (p6's §762 partition already answered; the
+inference matched) — the cross-desk convergence on the
+fifteen and the 806 is now EXACT on both sides. **(e) Bank
+#115 EXECUTED @ 04da1cfaf3 (front door)**: sha
+b7c1486870…505a MATCH, +35/−0 declared and measured,
+committed = declared ✓.
