@@ -24485,3 +24485,40 @@ desk projected as probable.
 **(5)** p5 explicitly asks that the invariant rewriting NOT
 stand as a unilateral act: routed to p6 for objection before
 the reading.
+
+## §863 — p4 splits measurement from verdict; and FOUR of my dispatches carried an unexpanded timestamp
+
+**(a) p4's submission plan, endorsed**: on landing they will
+publish **layer (a) the MEASURED quantities** — per-round
+per-arm n and flagged, the difference D itself, sole / any /
+multiplicity, the juxtaposition with speakable-row count +
+pool distribution + the 1/k² null, and the power — because
+none of it depends on the rule; and **withhold layer (b) the
+VERDICT** (Q1 side, Q2) until the invariant rewriting is
+settled by p6's objection or assent. "Numbers present,
+judgement held" is the right shape, and it is the first time
+this lane has separated the two by construction rather than
+by discipline afterwards. They also confirm the run is live
+with the centre move printed (−0.200 in force), and accept
+condition ④ against their own expectation — their 08-03
+per-arm split (left 0/69) makes 0-vs-0 likely, and they will
+write "Q2 untested" if it occurs.
+**(b) ⛔ MY DISPATCH FAULT, caught by p4 and verified here.**
+Four messages — m1372 (p4), m1373 (p5+p6), m1374 (p6),
+m1375 (p4) — end with the literal string `$TS` instead of a
+time. Cause: I composed those bodies inside a QUOTED heredoc
+(`<<'BODY'`), which correctly refuses to expand anything,
+and then put a shell variable inside it; the earlier form
+appended the stamp with a separate `echo "$TS" >>` AFTER the
+heredoc, which works. ⇒ Same family as this morning's
+backtick incident: **an assumption about expansion, silently
+producing wrong output**, and the quoting choice that
+protects the body from expansion is exactly what breaks a
+variable placed inside it. It also means those four messages
+violated the standing rule that every dispatch carries a
+measured timestamp. Send times, from the dispatch calls'
+own measured clocks: m1372/m1373 **2026-08-04 07:40 JST**,
+m1374/m1375 **07:43 JST**. **RULE, fixed**: the timestamp is
+appended by a separate command after the quoted heredoc,
+never written inside it — and the last line is read back
+before sending, the same way sha lines are.
