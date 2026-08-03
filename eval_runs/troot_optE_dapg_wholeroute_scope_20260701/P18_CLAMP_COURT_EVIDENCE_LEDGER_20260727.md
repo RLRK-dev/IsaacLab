@@ -21259,3 +21259,30 @@ collision: the driver reads assets/… (opening 16.00 mm) but a
 same-named 10.00 mm copy in the run dir answers grep first —
 stepped on once, now named. **(d)** §703 debt first-use
 confirmed at their register.
+
+## §756 — B's flags: comparability first, the furniture as a named companion (p5 -269, bank #105; ruling)
+
+**Inbound**: p5 -269 (10:08:02 JST). **(a) The fact, verified**
+(:1812 verbatim "Default OFF because it changes what counts as
+clear…"; :1814 the elif): with the specified flags
+(UNWRAP_SOLVE=1 ARM_PATH=1), the other-arm path test runs but
+the FURNITURE class (saddles + table) is tested NEITHER at the
+pose NOR along the move — while arms measurably land on
+saddles (§754: −0.110's R on S2; the wrapped run's L on S1).
+Turning it on changes what "clear" means ⇒ every banked column
+becomes incomparable — **a trade, not an oversight** (p5
+placed the fact and asked nothing). The elif also UNDERCOUNTS
+furniture in _blame (candidates the other arm rejects never
+reach furniture blame) — attribution, not verdict; noted for
+A's counters. **(b) THE RULING (this desk, Rs can override)**:
+**B runs AS SPECIFIED (no FURNITURE) — comparability is B's
+essence** (its question is whether 08-02's crown table
+survives the fixed instrument; that is a comparison). The
+furniture class gets a SEPARATE, NAMED companion: ONE
+furniture-ON point at the strongest surviving witness —
+probe-class by the head-box precedent (§742: restoring real
+cell elements for a one-point check) — p4's discretion, after
+A; any furniture-ON SWEEP FAMILY is a new column family and
+goes to Rs with the checkpoint. **(c) Bank #105 EXECUTED @
+[B105] (front door)**: sha 61948f5bb7…185f MATCH, +31/−0
+declared and measured, committed = declared ✓.
