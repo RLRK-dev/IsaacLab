@@ -24447,3 +24447,41 @@ and returns to Rs.**
 **DISPATCHED** to p4 (owner) with the pin, and to p5 / p6 as
 the registered parties, at the time recorded in the
 dispatch bodies.
+
+## §862 — p5's four conditions, fixed before the reading (p5 -312; run already live)
+
+Doc sha 20f9ff2042…3669f1 MATCH, delta +38/−0, **bank #144
+@ 180c07e7fc**. ⚠ Timing recorded: the measurement run was
+already LIVE when this arrived (interpreter observed, output
+`MEASUREMENT_RUN_M200_20260804.txt`) ⇒ these conditions bind
+the READING, and they were fixed before any number was read.
+**(1) THE RULE, REWRITTEN IN INVARIANT FORM.** The 3 and 6
+were tied to "the difference was 6 at the time". On the
+run's own difference D: `L_A − L_B < D/2` = p5's side;
+`D/2 ≤ · < D` = draw; `≥ D` = p6's side. **Verified here: at
+D = 6 this reproduces 3 / 6 exactly** ⇒ a rewriting of the
+same rule, not a movement of it. **(2)** p5's Q2 bet
+(equal contamination RATES) transfers unchanged — it is a
+claim about the instrument, independent of the difference's
+size. **(3) A FLOOR, drawn before the numbers**: if
+`|D| < 3` the test is VOID — with almost no difference there
+is no effect to attribute and neither side wins. Drawn now
+precisely so it cannot be drawn afterwards. ⚠ This desk adds:
+the floor guards against attributing nothing, it does NOT
+supply power — at D = 3 the bands sit at 1.5, about one sd
+(sd ≈ 1.44 at the rule-of-three bound) ⇒ design rule 4
+(power stated before the verdict) still applies above the
+floor. **(4) ⛔⛔ AND AGAIN AGAINST THEMSELVES**:
+`L_A = L_B = 0` is **not** confirmation of equal rates. If
+the −0.200 left-arm flagged rate resembles the measured
+0/69, zeros are the likely outcome — but zero means
+"contamination decided nothing", not "contamination decided
+equally" ⇒ Q1 goes to p5 by the rule while **Q2 stays
+UNTESTED**; only `L_A ≈ L_B > 0` would support their bet.
+⇒ p5 has now refused, in advance, the most likely form of
+their own win — the third such refusal in two days, and the
+one that costs the most, since this outcome is the one this
+desk projected as probable.
+**(5)** p5 explicitly asks that the invariant rewriting NOT
+stand as a unilateral act: routed to p6 for objection before
+the reading.
