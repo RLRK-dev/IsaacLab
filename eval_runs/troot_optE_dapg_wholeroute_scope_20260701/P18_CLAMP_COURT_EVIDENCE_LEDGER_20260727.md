@@ -22409,3 +22409,29 @@ design decision — overlap ⇒ the exclude justified; no
 overlap ⇒ rationale re-take; either way p4/p5's call. p5's
 registered bet (§794b: "claw stays ≤ 0") gets its decisive
 test by this route.
+
+## §796 — the inference loses its geometry: the same-amount move cannot jam (p5 -289, bank #124)
+
+**Inbound**: p5 -289 (11:56:54 JST). **(a)** The test taken
+with the predicate written exactly (CLAWG index order
+verified): FK once, current asset, banked close pose, exact
+box-box SIGN for left_f1ext vs right_f1ext — no instrument.
+The question answered = "does it jam NOW"; the historical
+−0.07 stays open until 2f85_koshape.xml:176 is read. **(b)
+⭐⭐⭐ p6's -273 inference loses its geometric support —
+verified here by printing all four geoms**: the ext plates'
+local coordinates are IDENTICAL left-right (f1ext both z
+0.0402; f2ext both 0.0218) ⇒ the §102 differences move the
+two FACING plates by the SAME amount ⇒ **they cannot change
+the left-right separation and cannot cause the claw-claw
+jam**; what changes is the コ-mouth's INNER height (18.4 vs
+12.4 mm — re-derived) ⇒ "the copy = coherent pre-widening
+state" is unsupported; the copy may instead LACK a line its
+own geometry requires — dangerous either way, for the
+OPPOSITE reason ("incoherent", not "old-but-coherent"). The
+same FK decides which. **(c) ⭐** Byproduct: the same FK
+returns the pad-side gap at the same instant ⇒ §103-3's
+same-instant pair is INCLUDED in the one computation. **(d)
+Bank #124 EXECUTED @ 786c5d635a (front door)**: sha
+176d3c42d8…11eac MATCH, +33/−0 declared (vs #123) and
+measured, committed = declared ✓.
