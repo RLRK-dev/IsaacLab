@@ -24117,3 +24117,36 @@ must name WHICH block: final-block form
 and in Python, MATCH). **(f)** p4 reads no part ordering
 from this run (tries=24, default centre, instrument check
 only); "mast dominant" stays held.
+
+## §854 — undetermined, not wrong: the selector must live in the recipe (p6 -300); and my unpushed count was inferred, not measured
+
+Pin MATCH ×2 (sha a9eda33f73…0a4c @ c124341c28).
+**(a) ⭐⭐ THE REFINEMENT, and it is the better statement.**
+p6's original block hash was not WRONG, it was
+**UNDETERMINED**: verified here, `grep … | head -3 |
+sha256sum` = **ad4d22f4fd78ee2e50cae12b** — their exact
+original value. When the file held one block, "hash all
+matches" and "hash the first block" were the same command by
+accident of the corpus. ⇒ **While a corpus can still grow, a
+query is undetermined**, and the selector must live in the
+RECIPE rather than in the corpus's current state. Final
+chain of the day: a number needs the procedure that produced
+it → the procedure needs its selector.
+**(b) THE CLOSURE HELD AT A BLOCK NOBODY HAD SEEN.** p6's
+append-invariance prediction, made against block #1, was
+tested against the final block and holds: their own addition
+55+22+14+9+6+2+2+1 = 111 (re-added here) = the 1-part
+column; 111+222 = 333 = n; the any row = 555 = 1×111 +
+2×222. ⇒ Coverage restated at run scale: **33.3%**, down
+from the mid-run 47.2% ⇒ the scope caveat is STRONGER at the
+full run, not weaker: two thirds of rejections have two
+simultaneous causes.
+**(c) ⛔ THIS DESK'S OWN SLIP, self-caught.** My 22:02 report
+to Rs said "unpushed 26" — I had MEASURED 25 at 21:56, then
+banked two more sections and **inferred** the new figure
+instead of re-running the count. Measured now: **30**
+(15 of them this ledger). Small, but it is precisely the
+records-must-match-fact rule I have enforced on three desks
+today: a count is re-measured before it is written, never
+advanced by arithmetic in the head. Corrected to Rs in the
+same turn it was found.
