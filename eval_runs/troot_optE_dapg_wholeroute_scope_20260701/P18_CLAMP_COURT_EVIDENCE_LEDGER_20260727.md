@@ -24810,3 +24810,55 @@ sample size (n_replicate = 2 ⇒ "no variation detected in
 the one available pair", the same shape as 0/69 not being
 0%); and if genuine replicate pairs are identifiable in the
 run, use ALL of them, not one.
+
+## §870 — the sign criterion inherits the defect too: BOTH forms of the second condition are inert (p5 -315, p6 -F)
+
+p5 doc sha 17c46bbd89…4969 MATCH, +25/−0, **bank #147 @
+1a6fa61b46**.
+**(a) p5's objection, and it is correct.** The reason no sd
+can be formed from the rounds applies unchanged to the sign
+form: on 14/20/20 the two differences (r0−r1) and (r0−r2)
+are both −6 **because r1 and r2 are the same number** —
+nothing moves after round 0 and round 2's seed is round 1's
+result, which is round 0's result ⇒ identical inputs,
+identical outputs. ⇒ The two "per-round differences" are
+**one comparison counted twice**, and their sign agreement
+is arithmetic, not evidence. ⭐ Their general statement:
+*a chain does not produce independent instances; what is
+missing is not an assumption but INSTANCES* — which is why
+being distribution-free does not rescue the sign form.
+**(b) p6 -F, crossing, reaches the same place by a
+dichotomy** and withdraws their own -E assent (they had
+un-withdrawn their -D withdrawal): rounds either differ in
+CONDITION — then the difference is effect, not noise — or
+they do not — then the same computation returns the same
+number and sd = 0 structurally, so the clause is vacuous.
+**Both branches kill it.** They further retract their own
+"it is not vacuous" defence: their counter-example (rounds
+1-2 coming out 20 and 14) would be evidence that the
+conditions were NOT the same, i.e. a misidentified replicate
+set — *"my counter-example proved vacuity instead of
+refuting it"*.
+**(c) ⛔ AND THE CRITERION WAS NEVER PINNED — my own
+instantiation differs from its author's.** p6 asks what my
+"−6, −6" are differences of. Answer, stated plainly: L round
+0 (14) minus L round 1 (20) and minus L round 2 (20) —
+**between-round, same arm**. Their own reading was L minus R
+**within each round**, giving +14/+20/+20. ⇒ The same phrase
+"per-round differences" names two different quantities, and
+neither of us noticed while both of us "verified" it. A
+criterion that two desks instantiate differently has not
+been pinned, whatever its statistical merits.
+**(d) ⇒ FINAL POSITION ON THE SECOND CONDITION**: **both
+forms — variance and sign — are INERT in this design, for
+one underlying reason: the run yields ONE instance of each
+condition, and the rounds are a deterministic warm-started
+chain, not instances.** ⇒ The run cannot say whether D is a
+round-to-round artifact; only an independent repetition axis
+(different seeds) could, and p5 explicitly does not request
+it. **This limitation is to be STATED IN THE VERDICT, not
+papered over**: the verdict may say "D is not explained by
+contamination" (if the first floor and the band support it)
+and must NOT say "D is real" or "D was confirmed across
+rounds". **The first floor term is unaffected and remains
+operative.**
