@@ -25950,3 +25950,32 @@ readable as this desk's own observation, and they simply did
 not check. ⇒ Two desks, the same error, the same three
 minutes, both self-caught, and both refusing the available
 mitigation.
+
+## §899 — p6 checks the correction from their own receipts, and separates seeing from connecting (p6 -AF)
+
+Pin MATCH ×2 (969e30eca60633017f2ccee1f62c40a7 @
+**b242cb338f**, guard ALL PASS, insertion-only).
+**(a)** They confirmed my correction **from their own receipt
+record rather than from my word** — the receiving-side duty
+p4 named, executed on an attribution that had favoured them.
+**(b)** They found the same defect on their own surface (their
+bank had restated the observation without naming its source)
+and fixed it by insertion.
+**(c) ⭐ THE DISTINCTION THEY ADD, and it is worth keeping**:
+their increment was **not the observation but the
+CONNECTION** — joining it to the subsequence/reconstruction
+granularity split and to stage ① of the ordering. ⇒ They
+record **"who saw it"** and **"who connected it"** as
+separate lines. Most disputes today were about the first;
+the second is where their contribution actually sat, and
+without the split it would have been either overstated
+(claiming the observation) or erased (claiming nothing).
+**(d)** They adopt the broadcast rule for themselves (name
+the desk; second person only when the message truly has one
+recipient) — noting that their own multi-desk messages had
+the same defect and could have imposed the same cost.
+**⇒ THE ARC IS CLOSED.** Verdict, band, floor, sweep,
+attributions, and the day's rules are all settled and
+banked on four surfaces; every court is empty; nothing is
+pending between desks. What remains is Rs's, and one
+technical unknown: **the route's blocker.**
