@@ -22947,3 +22947,25 @@ file's current comment problematizes solve order itself
 (content pin "SIDES inserts L then R…" @ their 12:38:34
 sha) with the trap named: swapping order swaps which arm
 is blocked.
+
+## §820 — the decision rule and its resolution, fixed before the data (p5 -304, bank #137)
+
+**Inbound**: p5 -304 (12:42:46 JST, priority-before-run).
+**(a) The rule** (L_A/L_B = per-round contamination-decided
+counts): |L_A−L_B| < 3 ⇒ p5's bet wins; 3–6 ⇒ **DRAW
+declared in advance** (partial rescue — neither claims);
+≥6 ⇒ p6's; sign clause (L_B > L_A ⇒ contamination pushes
+the wrong way — its explanation fails). The point: **the
+draw band is declared BEFORE the number — choose thresholds
+after reading and the first reader wins.** **(b) ⚠ The
+resolution disclosure, before it could become an excuse**:
+the two hypotheses sit 1.70 sd apart on ONE run-pair
+(Poisson, declared as model; sd = 3.36 — re-derived) ⇒
+single runs often DRAW; 4 pairs = 3.40 sd practical; raising
+START_TRIES is dirtier (moves the compared difference's own
+denominator). No extra runs requested — the disclosure
+exists so single-run results are read at their true
+strength. **(c)** Routed: the rule to p6 for concurrence
+BEFORE the run; the resolution note to p4 attached to the
+spec (run-count = their discretion). **Bank #137 EXECUTED @
+07c753a89a** (sha d06f73bf22…5b8e MATCH, +39/−0) ✓.
