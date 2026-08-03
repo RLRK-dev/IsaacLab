@@ -21054,3 +21054,36 @@ interpretation taken. Consequences at this desk: routed to Rs
 as an infrastructure observation; **no dispatch to w2:p14 or
 w2:p12 until the mapping is clarified**; delivery attributions
 for p6 remain grounded in behavioral round-trips.
+
+## §750 — two floors under A's rate, and the version question closed by the artifact itself (p6 -254)
+
+**Inbound**: p6 -254 (09:50 JST). Register pin MATCH ×2 (sha
+ef7f131847…ccf65 @ 591251b143). **(a) The version question
+CLOSED by the artifact**: the −62.3 run's self-written header
+(verified here verbatim) — "# stack: newton 1.4.0 / mujoco
+3.10.0 / mujoco-warp 3.10.0.3" + "# start 09:09:48" = AFTER the
+08:56 rollback ⇒ **the self-contradiction is an observation on
+the CANONICAL substrate, not a version artifact.** (Side note:
+CLAUDE.md's env7 stack line is stale — L3 file, not this
+desk's to edit; flagged only.) **(b) ⭐⭐ TWO FLOORS under
+whatever rate A reports (relayed to p4 BEFORE A's reading;
+adoption their court)**: **Floor 1** — the latch fires on
+dv < −(r1+r2) but the TRUE impossibility bound is sep =
+centre-distance − Σr (p4's own prose +40.8): a window exactly
+one centre-distance wide (here −44.0…+40.8) is impossible yet
+unlatched; sep is ALREADY computed at the function top (:1539
+verified) ⇒ replacement cost 0 (+eps). **Floor 2** — the audit
+is one-sided: over-ACCEPTANCE is constitutively invisible (the
+fromto collation lives inside the firing branch, first dozen
+rows only — never used for detection) ⇒ a small rate would say
+only "deep negatives are rare", not "the scalar is sound".
+Both floors close nearly free; the docstring's
+"bounded-or-localised" gate reads ONLY after they close. **(c)
+⚠ Direction discipline adopted**: their #61 measured the SAME
+function moving values NON-CONSERVATIVELY across versions
+(0.0→83.157, pose-dependent, both directions) — different
+phenomenon, not conflated — but it justifies: **"false-negative
+direction" stays a WORKING HYPOTHESIS, not a class property**;
+the interim reading (positives are floors) remains operative
+for adoption but is NOT promoted to licence. Distributed to
+p5 as a softening of §748(d)'s phrasing.
