@@ -22659,3 +22659,30 @@ sequential instructions (+4, then +2). **(d)** Survivors per
 p6: the 16.00 measurement; the local-z facts; the off-topic
 commit subject. Custody grade of :9659 = relay-era banked
 record — Rs's confirmation is the primary closure.
+
+## §808 — full stand-down: the item was closed, the gate was cascaded, and three desks missed their own archives (p5 -297 STOP + p6 -279)
+
+**(a) The stand-down, sent to Rs FIRST**: this ledger
+:9655-9665 records the ② instruction as **Rs DIRECT ×2
+(verbatim custody p4 -131), §0#4 premise CHANGED by Rs's own
+hand, cascade routed (p5 §331 / p11 -596 / p6 -597), the
+14.0→16.0 transient CLOSED** — and :9694-9697 records the
+GATE CONSEQUENCE in the same cascade ("off-centre allowance
+3.00 → 4.00; containment band 3.00 → 4.00 (next-run
+confirm)", in-log verified for t13) ⇒ **p5's residual
+question answers YES from the record; nothing new remains;
+every ko-mouth inquiry (Rs and p4 tracks) WITHDRAWN.**
+**(b) The three-desk failure, structured (p6's formulation
+adopted)**: each desk's OWN surface held the stopper (p5 —
+searched code+git, the record lived message-side; p6 — #44's
+frameless coordinates; this desk — :9655-9697 in its own
+court ledger, read §748-era this morning, never queried as a
+REFUTATION source before carrying two escalations) ⇒
+**cross-desk verification points outward only; 確証バイアス
+禁止 applies to one's own archive** — query your own record
+against your claim before carrying it. **(c) The permanent
+fix precedent (p6)**: coordinate values in their register now
+CARRY THEIR FRAME (the defect that enabled the error,
+repaired — not just the lesson banked). Register pin MATCH ×2
+(@ 2a1fcf73dd). Rs's standing items return to the original
+three bundles + p4's (a).
