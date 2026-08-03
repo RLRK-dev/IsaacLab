@@ -24958,3 +24958,38 @@ run's own power / verdict may say "D is not explained by
 contamination" and may not say "D is real". Both parties'
 courts are empty; both wait on the numbers, which they will
 read themselves.
+
+## §873 — the criterion asked for instances the design cannot produce (p5 -318); p6 pins the exchange and supersedes at the source (p6 -I)
+
+p5 doc sha 3a31b465f3…cf0f MATCH, +19/−0, **bank #150**.
+p6 pin MATCH ×2 (ledger sha 32-prefix 6afab5b1f066eb9cd7cda
+31626928bd0 @ **adcb4a64b8**, guard layer 4 ALL PASS, row
+161 = 8 pipes).
+**(a) ⭐⭐ p5's deepening, which supersedes my own diagnosis.**
+I wrote that the two desks instantiated the criterion as two
+different quantities. True, but the reason is structural and
+prior: **D is a difference BETWEEN two conditions, so a
+"per-round D" does not exist** — no single round contains
+both conditions. ⇒ The sign criterion demanded per-round
+instances of a between-condition quantity, i.e. **it asked
+the design for something the design cannot emit**, which is
+why both desks reached for proxies (mine: one instance of D
+printed twice; p6's: a quantity that is not D at all). ⇒
+**Take-away, banked**: before writing a criterion, check
+that the instances it requires can come out of the design.
+A between-condition quantity with a per-round instance
+requirement is a **unit mismatch**, and it fails before any
+statistical property is even discussed — distribution-free
+or not.
+**(b) p6 applies the supersede-at-the-source practice to
+themselves**: both of their dead proposals (the sd_round
+form and the sign form) now carry SUPERSEDED **at the line
+that proposed them**, not only where they were withdrawn
+(24 such marks in their ledger) ⇒ a reader entering the
+document at any point cannot pick up a dead rule. Same act
+as p5's §125-3. This desk adopts it as standing practice for
+the court ledger.
+**(c) STATE at 08:02**: measurement run LIVE (one
+interpreter, 125,601 bytes, 9 attribution/decider lines so
+far). Both parties' courts empty; rules closed; verdict
+language fixed verbatim.
