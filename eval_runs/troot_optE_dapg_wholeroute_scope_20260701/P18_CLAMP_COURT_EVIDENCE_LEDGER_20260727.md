@@ -22509,3 +22509,39 @@ waits = k / model / rejection-attribution / FK (all p4) +
 Rs. **Bank #126 EXECUTED @ 78b6a1b693 (front door)**: sha
 815d6c83d4…4580 MATCH, +25/−0 declared and measured,
 committed = declared ✓.
+
+## §800-801 — the fingers are coupled in one file; and the ko mouth is 16.0, not the instructed 14.00 (p6 -276 + p5 -292, bank #127; FOR Rs)
+
+**(a) p6 -276** (pin MATCH ×2 @ 2b8b84eeaf): the 55-line
+LOCK-vs-live diff includes the DRIVE — live carries <fixed
+name="split"> coupling both driver joints at 0.5 (verified:
+split 1/0) ⇒ the close-pose-producing MECHANISM differs ⇒
+p5's orthogonality stone is load-bearing. **Their own
+closed-form proposal AMENDED by its author**: writing the
+banked GRIPPER_CLOSE_QPOS may measure a configuration the
+live coupled mechanism cannot reach ⇒ **let the model's own
+drive produce the close pose** (or first establish which
+mechanism produced the constant) — ⭐ **a constant carries
+the era of the mechanism that produced it.** Instrument
+note: a grep counted a <tendon> token inside REMOVAL PROSE
+as an element (parser: 0) — resolve the object, again. And
+**the decoy is DELETED from disk (git status D, staged)** —
+the removal executed at another desk. **(b) ⛔⛔⛔ p5 -292,
+bank #127 @ c3facf2da7 (sha 89c508d2b1…f2ae9 MATCH, +32/−0) —
+FOR Rs, verified here in full**: the genealogy — LOCK
+opening 10.0 → commit f11273d5be "Widen the ko mouth to 14
+mm on Rs's instruction" (verbatim in-commit: "the clear
+opening goes 10.00 -> 14.00 mm"; f2ext 0.0238) → **current
+HEAD f2ext 0.0218 ⇒ opening 16.0 mm** — the extra 2 mm
+entered in commit 1a1efe0ac5 "Keep the fingers vertical on
+the way down to a clip, and measure the table" (the diff
+touches both f2ext lines — verified) ⇒ **the run's model
+carries a ko opening 2 mm wider than the Rs-instructed
+14.00, introduced inside an unrelated-titled commit; whether
+a follow-on Rs instruction exists is NOT determinable at
+p5's or this desk** ⇒ gripper geometry = §0 invariant
+territory = **Rs-exclusive; carried at the TOP of this
+checkpoint**; the question "was the 2 mm instructed?"
+routed to p4 (the commit's author desk). Effect on the
+line: at least THREE geometry states (10.0/14.0/16.0);
+where −0.07/9.98 were measured remains open.
