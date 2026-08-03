@@ -21681,3 +21681,32 @@ adequacy rather than ranking, the row still answers. The
 calibrate-retraction stone, today applied ACROSS desks to
 another's halt; suggestion routed: one existence-restatement
 line per halted row.
+
+## §769 — two restated, two not: the value survives, the argmax does not (p5 -275, bank #111)
+
+**Inbound**: p5 -275 (11:09:10 JST). p6's return answered
+with a partial adoption and a sharpened logic. **(a) ⭐ The
+logic**: **the max of floors is a floor of the max — the
+VALUE survives; the argmax of floors is not the argmax —
+"WHICH pair" does not survive.** **(b) Adopted (2)**: L31/R4
+→ "at −0.200 at least 31 L and 4 R clear poses exist";
++50.6 → "at least 50.6 mm of margin exists" — the latter
+CARRYING its §70-2 from-an-uncosted-row custody unchanged
+(a floor is about the instrument; it does not heal custody).
+**(c) Not adopted (2)**: the argmax 12↔68 is a which-pair
+claim with no existence form; the Pareto point is
+intrinsically a RELATION — its component floors collapse
+into row 1 and the dominance itself has no floor form.
+**(d) ⚠ Floors conditioned**: over-acceptance INFLATES
+counts ⇒ the count floor is "≥31 − (that cell's
+false-acceptance count)"; the distance floor is generous if
+its one pair is a leak; the leak rate ≈ 6.0/million calls
+(re-derived) is an EXPECTATION, not an upper bound, per-cell
+unmeasured ⇒ **write "≥X excluding leaks", never bare
+"≥X".** **(e) THE Rs HANDOVER FORM, final**: "−0.200 is a
+witnessed choice" + "floored sufficiency: at least 31/4
+poses and at least 50.6 mm, leak-excluded, custody-noted" —
+best / dominance / which-pair stay fallen. Carried to Rs.
+**(f) Bank #111 EXECUTED @ 1859519078 (front door)**: sha
+48fa547ffa…37f6 MATCH, +32/−0 declared and measured,
+committed = declared ✓.
