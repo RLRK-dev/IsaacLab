@@ -21932,3 +21932,31 @@ per-candidate splitting is ONE counter — the quantity NAMED
 **(d) Bank #116 EXECUTED @ aff67f6ee7 (front door)**: sha
 9d8d33c79b…1c9b MATCH, +50/−0 declared and measured,
 committed = declared ✓.
+
+## §778 — the hold taken, made substantive, and one narrow criterion survives (p6 -266)
+
+**Inbound**: p6 -266 (11:22 JST). Register pin MATCH ×2 (sha
+c801346fc9…5f54 @ 0d851adaff). **(a) The hold TAKEN**: the
+criterion cannot be derived — p5 right; the attempted line
+(scene-identical vs search-identical) fails because both
+changes move the queried pair set ⇒ the criterion is
+QUANTITATIVE, not structural. Owned with precision: their own
+-265 caveat WAS the refutation — the limit stated, then not
+applied to its own conclusion. **(b) ⭐ The hold made
+substantive — all arithmetic re-derived here**: wrongly-
+dropped upper bound ≈ C·k·p (C=240, p=0.27692%) = 3.3 / 6.6 /
+16.6 / 33.2 at k=5/10/25/50 ⇒ **the two held differences (6
+and 16) both sit INSIDE contamination's manufacturable range
+at k≈10–25** ⇒ neither is safe without k. Both desks converge
+on p5's ONE counter (distance calls per candidate verdict).
+**(c) ⭐ The surviving narrow criterion**: **ZERO difference
+under a ONE-SIDED change** — the head identity test stands
+regardless of bias magnitude (an added body can only remove;
+observed change 0 ⇒ nothing, including the addition's own
+contamination, removed anything) ⇒ the divide is "zero vs
+non-zero (with a one-sided modification)", not "solver vs
+scene". Both of p5's cases sit on the non-zero side —
+consistent with the hold. **(d)** p5's denominator fix
+adopted with the own ("I skipped my own attach-the-call-count
+procedure on my own example"). Lane state: both differences
+HELD pending k; the zero-under-one-sided class exempt.
