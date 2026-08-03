@@ -21575,3 +21575,58 @@ cross-cell comparison need RE-RUNNING, not correction** — a
 comparison cannot be repaired by flooring. The six-road
 sheet's COMPARATIVE rows inherit this; its within-cell
 existence rows stand as floors.
+
+## §765 — the rows sorted: existence stands, comparison halts, and the grade changes (p5 -273, bank #109)
+
+**Inbound**: p5 -273 (11:02:20 JST). §90 = p6's -260 applied
+to their own surface, with their §89-4 rule's FIRST use
+(grepped before writing; row numbers given). **(a) The
+arithmetic form banked**: A≥a, B≥b, a>b does not imply A>B —
+only equal contamination across cells would, and that is
+UNMEASURED (73× spread across channels IS measured). **(b)
+The row taxonomy** (spot-checked on the sheet): SURVIVING
+existence rows — "all seven open centres are witnesses"; the
+−0.200 path-inclusive witness (its endpoint stands on the
+contact set, outside the instrument). HALTED comparison rows
+— "thickest L31/R4"; the +50.6 margin; the best pairs and
+argmax 12↔68; the Pareto-dominance point. Crown fail rows
+never were trustworthy. **(c) ⭐⭐ THE GRADE HANDED TO Rs
+CHANGES**: **not "−0.200 is best" but "−0.200 is a WITNESSED
+CHOICE"** — usable stands; better-than-others is not
+currently sayable; the recommendation itself unchanged (Rs
+chooses); only the evidence grade moves. Carried to Rs in
+this checkpoint. **(d)** Their own §88-4 word owned as
+narrow (jaw_gaps feeds held() too) ⇒ the stone's final form:
+**classify consumers by CALL SITE, not by channel.** A
+citation upgraded honestly (§90-5): ":3866 path leg clean
+(§52)" now points to the stronger unwrap-era basis (§82/
+§85-2), not the stale-partner argument. **(e) Bank #109
+EXECUTED @ 0dba4e5f2b (front door)**: sha 3a66f5919b…cb26
+MATCH, +42/−0 declared and measured, committed = declared ✓.
+
+## §766 — floor 1 is sharp only where the spheres are tight (p6 -261)
+
+**Inbound**: p6 -261 (11:02 JST). Register pin MATCH ×2 (sha
+02144ade94…1b3a… @ 78d2e040bd). **(a) ⛔ The self-limit on
+their own adopted recommendation, all six bounds re-derived
+here**: floor 1's bound = centre-distance − Σr; on A's 12
+illustrative rows the bound is NEGATIVE in every case
+(−249.8, −151.1, −275.1, −31.9, −102.3 …) while the founding
+pair alone binds at +40.8 ⇒ **floor 1 is sharp on tight
+small geoms, nearly blind on large arm links** ⇒ retention
+stands "about its visible range", not as a general backstop
+⇒ **the fifteen are a sample from the visible range (biased
+to tight pairs) — not the population's residual count.**
+**(b)** The same numbers stopped a wrong recommendation
+pre-send (widening floor 1 to dv≤0 catches nothing where the
+bound is negative) — the day's fourth
+numbers-in-before-sending. **(c) ⭐ The two blind spots share
+one structure**: the fifteen (segment agrees with an
+impossible scalar) and the contact-degenerate class
+(zero-length segment ambiguous between true contact and an
+unwritten buffer) both arise because **the replacement
+channel is validated against the channel it replaces** —
+co-failure is invisible; the only test with an EXTERNAL
+reference frame is floor 1 (centres and radii) ⇒ the
+retention rationale generalizes beyond the fifteen, under
+the stated visibility limit.
