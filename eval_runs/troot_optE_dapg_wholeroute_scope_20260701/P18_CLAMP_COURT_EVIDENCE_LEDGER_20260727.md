@@ -21324,3 +21324,43 @@ alongside** — a partial rate must wear its denominator. Fix
 shape (p6): one unconditional counter registered at each
 channel's entrance (no frame walking). Adoption p4's court;
 p5's §84 branch-reading gains the coverage caveat.
+
+## §758 — the bet withdrawn on four layers, and one counter closes both (p5 -270, bank #106)
+
+**Inbound**: p5 -270 (10:16:41 JST). The §84-1 directional bet
+WITHDRAWN with a four-layer analysis, each layer verified
+here. **(a)** The basis was false BY PARAPHRASE: the pads are
+type="box" (xml :96/:137 verbatim ✓); the panel said
+"mesh–mesh OR box–mesh" — a disjunction p5 narrowed to one
+branch in transcription. The panel's candidates stand; the
+paraphrase was the false thing. **(b) ⭐ The deeper layer: the
+population had no mast** — the 496-pair sweep ran on the
+gripper-only model ⇒ "no cylinder–mesh among the large
+movers" is a POPULATION property, not a mechanism ⇒ the
+type-pair evidence cannot compare the two families at all;
+what remained was one arm-arm instance, and one instance is
+no skew. **(c) ⭐⭐⭐ The instrument would have endorsed the
+bet regardless of substance** — verified at the pinned commit
+(snapshot-then-cite applied by p5): :1439 single global calls
+counter, :1515 global increment, :1522 by_caller only in the
+imposs branch ⇒ **by_caller is a COUNT, not a RATE**,
+confounded by call volume (arm_pair_min runs per IK candidate
+per solve; column_gap touches a few geoms) ⇒ the split would
+likely skew arm-arm whatever the truth — and p5 sat on the
+beneficiary side. **(d) ⭐⭐ One counter closes both**:
+per-caller calls make imposs=0 split into clean (calls>0) vs
+untraversed (calls=0) — p6's caveat — and imposs/calls a
+rate — p5's confound. And THE COSTS OF THE m1185 OPTIONS
+DIFFER: the 6-channel flag set changes what "clear" means
+(imports §86-3's incomparability INTO A); the
+traversed-channel annotation changes nothing about the run ⇒
+**option (ii) is strictly cheaper — relayed to p4 as this
+desk's refined preference.** **(e)** Withdrawal scope
+calibrated: §84-1's bet only; ALL §84-2 reading rules stand
+(bet-independent). Self-report banked: the single registered
+falsifier (split-lands-on-mast) did not cover the actual
+failure (the basis paraphrase) — **a falsifier list must
+include "the basis is misread", not only "the data
+disagrees."** **(f) Bank #106 EXECUTED @ 875ee31959 (front
+door)**: sha 22b7f1274c…1bc0 MATCH, +64/−0 declared and
+measured, committed = declared ✓.
