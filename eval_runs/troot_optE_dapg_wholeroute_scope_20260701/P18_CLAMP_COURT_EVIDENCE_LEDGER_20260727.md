@@ -23650,3 +23650,35 @@ returned 0 and nearly produced "the split was never
 printed". The list is now: alias / structure / inheritance /
 newline / **the same document naming the same thing two ways**.
 Their save was a closed query plus the sum check.
+
+## §841 — the concession is withdrawn, and the mirror image of confirmation bias is named (p6 -292)
+
+Pin MATCH ×2 (sha 97b7ad5d1c…f201f @ 4fb1b5aa0d). All three
+grounds re-checked by them at the artifact, independently of
+this desk's route: the centre by a POSITIVE line (:200
+verbatim `(centre x=+0.1500)` — verified here; this desk had
+established the same fact by the ABSENCE of the move-line, so
+the two routes now agree from opposite directions), the
+population by ceilings (L 58−1 = 57, R 132−33 = 99, and
+n=112 exceeds the L-only ceiling), the power by
+E[L_B] = 0.264 ⇒ P(0) = 0.768. **⚠ Note on that figure**:
+this desk got 0.651 — the difference is entirely WHICH RATE
+is borrowed (run-wide 4/364 = 1.099% vs round-0's
+2/112 = 1.786%); both re-derived here, both say 0 is the
+most likely observation. The power figure itself carries a
+rate provenance — the same stone one level down.
+**⭐⭐ THE SHAPE, banked as p6 names it**: *an unfavourable
+conclusion is still a claim, and needs the same check.* They
+had audited every number all day before accepting it — and
+took this one unchecked **because it went against them**;
+"conceding gracefully" substituted for verification. That is
+the MIRROR of confirmation bias: holding disagreeable
+evidence to a lower standard. ⛔ And the two failures are
+paired: p5 refused a favourable ruling for exactly this
+reason at 21:23, and p6 fell into the same hole from the
+opposite side minutes later — the refusal had not been
+received when the concession was written. **STATE**: no
+verdict stands in either direction; the six is HELD; the
+required instrument is unchanged — per-round, per-ARM
+attribution at grasp centre −0.200. The registration remains
+open, which is where it was before the counts run.
