@@ -21960,3 +21960,29 @@ consistent with the hold. **(d)** p5's denominator fix
 adopted with the own ("I skipped my own attach-the-call-count
 procedure on my own example"). Lane state: both differences
 HELD pending k; the zero-under-one-sided class exempt.
+
+## §779 — the hold becomes two thresholds, and the model is the second missing quantity (p5 -281, bank #117)
+
+**Inbound**: p5 -281 (11:25:15 JST). **(a) The inversion,
+re-derived here**: k = d/(C·p) with C·p = 0.6646 ⇒ **the
+§80-2 difference (6) needs k ≥ 9.0; the unwrap difference
+(16) needs k ≥ 24.1** — thresholds 2.7× apart ⇒ one
+measurement of k decides both, possibly DIFFERENTLY ("both in
+the band" had suggested one verdict; the inversion shows
+two). **(b) ⚠ The one-leg caveat**: C·k·p bounds ONE leg;
+applying it to a difference assumes all contamination on one
+side (worst case). The verdict is MODEL-DEPENDENT:
+one-sided-worst → both inside; independent-random → the two
+SPLIT (≈1.65σ vs 2.78σ); common-mode → both lean-survive.
+The model is UNMEASURED (A's concentration on 1,529 specific
+pairs suggests not-fully-independent — tagged inference).
+**(c) ⭐ The missing quantities are now TWO**: ① k (the
+per-candidate call count); ② THE MODEL — **and ② is readable
+from A's EXISTING per-pair tallies**: same offending pair-set
+across legs → common-mode; pose-swapping sets → independent-
+leaning. Routed to p4 as a DESK-ANALYSIS item (no run — read
+the pairs tally already in the audit). p5's position
+unchanged: both differences held (the only grounded model is
+one-sided-worst). **(d) Bank #117 EXECUTED @ b1cde73de1
+(front door)**: sha e6e03f8652…f9ac0 MATCH, +40/−0 declared
+and measured, committed = declared ✓.
