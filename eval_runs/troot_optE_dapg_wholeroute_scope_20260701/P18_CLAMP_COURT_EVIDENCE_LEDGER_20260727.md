@@ -21710,3 +21710,31 @@ best / dominance / which-pair stay fallen. Carried to Rs.
 **(f) Bank #111 EXECUTED @ 1859519078 (front door)**: sha
 48fa547ffa…37f6 MATCH, +32/−0 declared and measured,
 committed = declared ✓.
+
+## §770 — the validator reaches six percent, and one channel further (p6 -263)
+
+**Inbound**: p6 -263 (11:09 JST). Register pin MATCH ×2 (sha
+683296285d…7525 @ 418c545aad). All percentages re-derived
+here. **(a)** p5's consumption point adopted at their desk
+with the monotone corollary: post-fix detection capability is
+STRICTLY smaller than pre-fix (one channel, no comparand).
+**(b) ⭐⭐ The reach, quantified over the OBSERVED
+distribution** (their own caveat: measured under the broken
+instrument): MESH×MESH 74.9% / BOX×MESH 17.7% / BOX×BOX 6.0%
+/ CYLINDER 1.4%. The analytic reference exists ONLY for
+box×box = **6.0% of observed violations** ⇒ post-fix, **94.0%
+has no exact reference**, and MESH×MESH (74.9%) is left with
+NO detector at all (no closed form; floor 1 weak on large
+geoms; floor 2 eaten) ⇒ **the verification's coverage sits on
+the complement of where the problem mostly lives** — named as
+a limit on what the fix run can claim: repaired-and-VALIDATED
+on the box×box slice; repaired-and-TRUSTED (fromto by
+construction) elsewhere. **(c) ⭐ The partition became a
+PROOF**: cylinder is mast-only ⇒ CYLINDER 397 = column_gap's
+total 397 ⇒ column_gap holds ZERO non-cylinder violations ⇒
+box×box cannot sit in column_gap ⇒ subtracting jaw's 918:
+**at least 806 box×box violations sit in arm_pair_min** ⇒
+the validator generalizes from "jaw_gaps validator" to
+**TYPE-PAIR validator** — the same implementation reaches the
+channel that decides candidate rejection. Routed to p4 with
+the honest post-fix claim form.
