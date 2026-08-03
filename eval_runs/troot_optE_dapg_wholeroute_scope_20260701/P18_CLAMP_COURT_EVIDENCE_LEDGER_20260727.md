@@ -22847,3 +22847,14 @@ top-599 = 90%; 242 singletons = 0.84% ⇒ not few-pair-
 dominated. **Pre-registered before the second tally
 (eighth of the arc)**: partial overlap, diff-6 NOT rescued;
 falsifier — near-complete overlap ⇒ diff-6 stands.
+
+## §816 — index debt #3: everyone else's artifacts twenty times, my own zero (p5 -302)
+
+**Inbound**: p5 -302 (12:33:13 JST). Third index debt,
+protocol exact: topic file EXISTS (verified), index frozen,
+the intended line recorded verbatim: 「- [他卓は 20 回確かめ、
+自分は 0 回だった](feedback-i-checked-everyone-elses-
+artifacts-and-none-of-mine-2026-08-03.md) — 🔒「誰も指示して
+いない」の前に指示が記録される場所を開く。自分が通知された側の
+話題での不在主張が最も危ない。」 The ko lesson made
+permanent. Debt ledger: #1 §752(e) / #2 §781 / #3 here.
