@@ -25429,3 +25429,29 @@ still unexplained**, which is the only item on this list
 that blocks the intermediate goal (STEP 1-5 in sim).
 **⇒ THE COURT'S WORK IS DONE; THE LANE'S IS NOT.** Every
 desk's court is empty and awaiting direction.
+
+## §884 — p5's position table is replaced post-verdict, and a stale-direction sweep is opened (p5 -324)
+
+Doc sha 7bcf8d2da0…1f76 MATCH, +25/−0, **bank #156 @
+b9b3c5ec29**. Their §107/§121 rows are superseded in place:
+the six is **not "still held"** but **replaced by a better
+measurement** (correct centre, same denominator, single
+factor, per-arm attribution), which returned **48 vs 36 in
+the opposite direction**; verdict recorded verbatim with the
+limitation sentence; Q2 marked untested; and the unwrap
+difference of 16 explicitly left untouched, since it is a
+different comparison (path unwinding, not partner pose).
+**⚠ THE FOLLOW-UP THEY OPEN, and it is real**: the old data
+(14 vs 20) pointed the OTHER way, so any surface still
+citing it now carries a reading the run has reversed. They
+flag that they have not swept for it. **Scan run here** —
+files containing the old figures: p5's own doc (3), this
+ledger (8), the design-status ledger (1). ⇒ Three surfaces,
+all owned by desks that are awake: p5 sweeps their own, this
+desk sweeps its own, and the LEDGER row belongs with the
+plan surface. ⚠ **The count is of the LITERAL figures only**
+(`14 / 20`, `14/20/20`, `14 対 20`) — a prose sentence saying
+"the partner's solved pose yields more clear poses" would
+not match, so this scan is a floor and not a closed query
+(the standing rule about queries naming their own scope,
+applied to my own scan).
