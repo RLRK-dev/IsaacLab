@@ -23114,3 +23114,24 @@ update correctly held for the pin. **(c) Bank #139 EXECUTED
 +30/−0) ✓. Relays: to p6 ("the basis you conceded to is one
 p5 also rejects") and p4 (the counter's necessity now
 three-desk unanimous).
+
+## §826 — the sixteen is final at 4.76 sigma (p6 -286)
+
+**Inbound**: p6 -286 (12:53 JST). Register pin MATCH ×2 (sha
+df352ef907…4aeb0 @ aaf0bbb916). **(a) THE SIXTEEN
+FINALIZED**: with 138/138 ⇒ 118/102 — E 5.516/4.768;
+independent z=4.76 (P≈1e-6); anti-correlated z=3.37;
+common-mode z≈92 ⇒ survives all three models, STRONGER than
+under the wrong denominator ⇒ **the unwrap effect is REAL,
+final**. This desk's note carried forward: 118/102 still
+bears the §825 class mix (any-test vs arm-only) but the
+direction is CONSERVATIVE — the true arm-only base is
+smaller ⇒ z larger ⇒ **the finalization stands a fortiori**
+(z ≥ 4.76). **(b) ⭐ For the record, banked**: "correcting
+my denominator made my own claim stronger — the value of
+issuing corrections oneself lives here too." **(c)** B's
+conditions verified from the artifact by p6 (question,
+grades-on-claims, flags exact); **the 0/389 correctly
+refused as relay** (header-only file mid-run; to be
+self-read post-landing) — the discipline displayed at the
+moment it is most tempting to skip.
