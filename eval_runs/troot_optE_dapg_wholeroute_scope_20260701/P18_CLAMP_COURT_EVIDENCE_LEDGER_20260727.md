@@ -24184,3 +24184,68 @@ desk has to remember which was which any more.
 and the −0.200 measurement run waits on Rs. p4's next
 submission is the measurement-run DESIGN (including whether
 to adopt p6's three-term winner-vs-pool-best print).
+
+## §856 — the measurement-run design is sound; three corrections, one of them load-bearing (p4 22:19)
+
+**PIN**: `MEASUREMENT_RUN_DESIGN_20260803.md`, content sha
+head **ceae6d0a2f1b35827fa89a1d**, commit **73ff7190f1**,
+commit == worktree MATCH, 105 lines. Read in full. The
+design pre-registers the defects it replaces, the single
+moved factor, the instruments, five reading rules taken from
+today's failures (matched populations / sole-only
+attribution beside multiplicity / power before verdict /
+stopping stage inadmissible / Q1-Q2 on per-arm inputs), an
+explicit list of what the run may NOT say, and the cost
+class. p6's cost-term juxtaposition is accepted and
+sequenced BEFORE the run because the launch wait is free
+time. **PRE-FLIGHT CHECK PASSED**: `GRASP_CENTRE_X` is
+genuinely read by the driver (`float(os.environ.get(
+"GRASP_CENTRE_X", C1[0]))`, with the move announced in the
+log) ⇒ the command will actually move the centre, which is
+the very defect being corrected and therefore worth checking
+before it is trusted.
+
+**⛔⛔ CORRECTION 1 (load-bearing): the six was measured
+WITHOUT unwrap, and the design's command has
+`UNWRAP_SOLVE=1`.** The order test at −0.200 that produced
+the six reads L clear **14 / 20 / 20** with R clear **0 in
+all three rounds** (verified in `round_by_round_LOUD.txt`).
+The banked unwrap table for the same centre and draws gives
+**L 20 → 36, R 0 → 8**. ⇒ The new run cannot reproduce
+14/20/20; the difference under test will be a DIFFERENT
+number measured under a different solve regime. ⇒ The design
+must state that the run **re-measures the difference itself**
+(per-round clear counts at −0.200 under unwrap) and that the
+band is applied to the difference measured IN THAT RUN, not
+to the historical 6. Whether the parties' registrations
+transfer to a re-measured difference is theirs to say, not
+this desk's — but it must be asked before the run, not after.
+This is today's own lesson pointed forward: a quantity
+carries its run, and the six's run is not this one.
+
+**⚠ CORRECTION 2: "one factor moved" is asserted against a
+driver that has moved too.** The reference counts run used a
+driver several commits back; since then the decider counter,
+the per-arm snapshot and the labels landed. Each was
+argued behaviour-neutral, and the labelling had a
+determinism control. The cheap way to make the whole claim
+measured rather than argued: **re-run the DEFAULT-centre
+configuration under the current driver and check the
+attribution totals reproduce** (112 / 114 / 114 / 24 with
+L 2 / 1 / 1 / 0). Same free class, ~9 minutes, and it turns
+"single factor" into a measurement.
+
+**⚠ CORRECTION 3: state the run's POWER before Rs decides,
+not before the verdict.** Rule 4 says power is stated before
+the verdict; at design time it can be projected from the
+default-centre rate (2/112 = 1.79%). Projected here: for
+plausible exposures (n_A ≈ 100-120, n_B ≈ 24-50),
+E[L_A − L_B] ≈ 0.9-1.6 with sd ≈ 1.5-1.6 ⇒ **the ≥6 band
+sits 2.7-3.1 sd away** ⇒ the run is well powered to confirm
+a SMALL contamination difference but essentially cannot
+produce a ≥6 outcome unless the true rate at −0.200 is far
+above the default centre's. ⇒ Rs should know before
+authorising that this run can confirm one side and is
+nearly unable to confirm the other. That is not a reason to
+withhold it — it is the pre-registered statement of what it
+can settle.
