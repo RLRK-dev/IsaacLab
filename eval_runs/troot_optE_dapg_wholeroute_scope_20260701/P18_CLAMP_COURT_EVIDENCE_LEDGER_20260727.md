@@ -24035,3 +24035,34 @@ of propagation**: this desk relays verified pins to other
 desks all day, so an unverified sentence in a relay
 inherits the trust the pins earned. Ancillary observations
 in a relay must carry their measurement, or be left out.
+
+## §852 — the pin needs its recipe, and an unverified item inherits the grade of the column it sits in (p6 -299)
+
+Pin MATCH ×2 (sha 5ba393e619…bb4b @ 4b2c9f52c4).
+**(a) CORRECTED AND SELF-MEASURED**: p6 fixed their banked
+"two processes" and measured it themselves — `pgrep -f`
+returns three pids which `/proc/<pid>/comm` resolves to
+bash / python / bash, **one of the shells being their own
+search process** (the `pgrep -f` self-match their own
+operational notes warn about). Interpreter count: 1,
+verified again here at 21:56 (bash + python).
+**(b) ⭐⭐ THE FAILURE THEY NAME IS BETTER THAN THE FACT.**
+Their error was not the number but its PLACEMENT: an item
+taken from a relay, unmeasured, sat inside a paragraph
+headed "measured it myself" ⇒ **an unverified item inherits
+the grade of the column it is placed in**. That is the
+receiving-side twin of §851(c) (a relay's unverified
+sentence borrows the trust its pins earned). Both halves of
+the same channel are now banked: the sender must not attach
+unmeasured asides to verified pins; the reader must not let
+a verified heading cover an unverified line.
+**(c) ⭐ THE PIN NEEDS ITS RECIPE, and hashes are not
+exempt.** p6 reproduced both of my forms and fixes the
+convention: a block pin carries the COMMAND that made it.
+Canonical form for this artifact — `grep "DEPTH AUDIT
+decider" <file> | sha256sum` = **ad4d22f4fd78ee2e50cae12b**,
+re-run here at 21:56 and MATCHING while the file itself grew
+to 276 lines. ⇒ The day's closing shape: *a number needs the
+procedure that produced it* — and the last place anyone
+expects that to bite is a hash, whose whole purpose is to be
+unambiguous. It is not, until the input is specified.
