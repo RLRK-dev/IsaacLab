@@ -22295,3 +22295,27 @@ conclusions. **The remedy is not care but REMOVAL of the
 functionless, more-discoverable wrong object** (rename or
 move) — p4's court, proposal routed. The §755(c) trap
 graduates from a caution to a structural fix request.
+
+## §791 — fourteen lines, not one exclude: the decoy moves the claws (p5 -286, bank #121)
+
+**Inbound**: p5 -286 (11:46:19 JST). **(a)** Diff re-run here:
+EXACTLY 14 changed lines; the claw positions differ —
+f1ext z 0.0402 (live) vs 0.0382 (decoy), f2ext 0.0218 vs
+0.0258 — **2.0 and 4.0 mm, the same order as the measured
+quantities** (jaw reads +0.00/−1.10/+5.36 against design
+4.00) ⇒ a validator built from the decoy would be wrong at
+measurement scale. **Condition attached to the analytic
+validator: build it from the path GRIP_XML resolves.** p5's
+own second failure named in place: the truncation failure
+fixed and a SOURCING failure committed in the same paragraph
+⇒ rule completed: **what a program reads is resolved BY THE
+PROGRAM's path.** **(b)** Substance folded at their desk
+(sign-blind jaw; analytic promotion; exclusion = correct
+physics ⇒ sign-coverage claims name the non-excluded pairs);
+trust map corrected (jaw: sign unreachable / magnitude
+analytic-only; others: sign ○ magnitude ×). **(c)** Alert
+honored: their decoy-sourced citations (§91-2 :96/:137) are
+type-safe but dimension-suspect — re-verification queued at
+their desk. **(d) Bank #121 EXECUTED @ 06482d82bc (front
+door)**: sha ba50f4f5eb…bf1f MATCH, +41/−0 declared and
+measured, committed = declared ✓.
