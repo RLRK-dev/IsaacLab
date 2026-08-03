@@ -5010,3 +5010,34 @@ driver は **綺麗な姿勢を すべて印字**します (`clear #k: q = [...]
 `−0.110` の saddle 接触は **どの clearance 検査にも掛かっていない** のに (§83-5(2))、**`d.contact` には出ました**。
 ⇒ ⭐⭐ **`d.contact` は 器具から独立なだけでなく、選別器が試験していない class まで覆う** ⇒ **§83-4 の (ii) の価値は 私が書いたより 一段高い。**
 ⚠ ⛔ **`−0.110` を失格にする読みではありません** — **その run の その step で、試験されていない接触が在った**、まで。
+
+---
+
+## §86 §83-5(2) を **commit で読み直しました** — B の flag 集合には furniture が入りません
+
+⭐ §83-0 で自分に課したとおり、**編集中の file からでなく commit から**読みました。HEAD = `5a56b083f6` (`08-03 09:44`)。
+
+### 86-1 committed の分岐 (逐語から起こした構造)
+
+```
+if  近い方の腕 < ARM_CLEARANCE:          hit                      # 他腕・姿勢で
+elif os.environ.get("FURNITURE"):                                  # ⭐ 既定 OFF
+        if furniture_gap < ARM_CLEARANCE: hit                      # 家具・姿勢で
+        elif near is not None and ARM_PATH: path_furniture_min      # 家具・移動中
+if not hit and near is not None and ARM_PATH:  path_arm_min         # 他腕・移動中
+```
+
+### 86-2 ⭐⭐ そこから出る 3 つの事実
+
+1. ⭐ **家具 (saddles + table) は `FURNITURE` 依存で 既定 OFF** ⇒ **私の面の全列は これ無しで測られています** (§83-5(2) を commit で確認。driver 自身の理由も逐語: *"Default OFF because it changes what counts as clear, and every count measured before 2026-08-02 was taken without it."*)。
+2. ⭐⭐ **家具の「移動中」検査は `FURNITURE` の内側に入れ子で、加えて `ARM_PATH` を要求します。**⇒ **`ARM_PATH=1` だけでは 他腕の移動中検査 (別の `if not hit …`) は動きますが、家具は 姿勢でも移動中でも 一切動きません。**
+3. ⇒ ⭐⭐⭐ **B は 指定どおりの flag (`UNWRAP_SOLVE=1 ARM_PATH=1`) では 家具 class を試験しません。**⚠ そして §85-1 のとおり、**腕は実際に saddle へ着いています** (`−0.110` で右腕が `S2`、巻いた経路の run で左腕が `S1`)。
+
+### 86-3 ⚠ ただし **ただ足せばよい**ものではありません (両側を書きます)
+
+- ⛔ **`FURNITURE=1` を足すと「何を clear と呼ぶか」が変わります** ⇒ **B の列は 既 bank の全列と 比較不能**になります (全列が これ無しで取られている)。
+- ⇒ ⭐ **これは trade であって 見落としではありません。**⛔ **私は求めません** — flag 集合の決定は p18 の court と Rs。**私が置くのは「指定どおりでは この class が入らない」という事実 1 つ**です。
+
+### 86-4 ⚠ 小さい報告上の歪み (判定は変わりません)
+
+家具の姿勢検査は 他腕の姿勢検査の **`elif`** に居るので、**他腕で既に落ちた候補は 家具の咎めを受けません** ⇒ **`_blame` の家具は 過小計上**。⛔ `hit` は どちらでも同じ ⇒ **判定でなく 帰属の話**です。
