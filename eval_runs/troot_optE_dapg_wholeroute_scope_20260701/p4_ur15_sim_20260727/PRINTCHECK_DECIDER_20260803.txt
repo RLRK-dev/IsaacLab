@@ -1,0 +1,56 @@
+# ⛔ THIS IS AN INSTRUMENT CHECK, NOT A MEASUREMENT.  p18 ordering ruling 20260803-1354.
+#   Its numbers enter no table and no comparison.  The only question it answers is whether
+#   the decider report and the per-arm attribution line EMIT AT ALL -- 'written' vs 'seen'.
+#   START_TRIES is deliberately 4 (default 24, the measurement runs used 240) so that no
+#   number here can be mistaken for a result: the candidate pools are too thin to mean anything.
+# ⛔ The grasp-centre -0.200 MEASUREMENT run remains Rs's call and is NOT this.
+# flags: LOUD_ROUNDS=1 EXTRA_L_ROUND=1 UNWRAP_SOLVE=1 ARM_PATH=1 START_TRIES=4
+# driver sha256: 8fc6259576472315d7294e304103f2dc666d305a1c80f5d478f59f0c9c2cfd7b  (commit 94a11dfce1)
+# started 2026-08-03 21:43:58 JST by p4
+[cell] cable bend EI in force: 0.005 N.m^2 from task_config.py:144
+[cell] -> joint stiffness 0.33333 N.m/rad over a 15 mm link
+[cell] cable 40 x 15 mm, 1.1243 g each, 44.97 g total
+[cell] clip collision read from the env source: True
+[steps] ⚠ the cell-constant contract is not satisfied yet: 11 names
+[steps] ⚠ each needs a home in the p5 spec; running non-strict while that is decided
+[steps]     _EXCUSED             line  1232  carries a number of its own and belongs to none of the three
+[steps]     _SEG_SCRATCH         line  1445  carries a number of its own and belongs to none of the three
+[steps]     _SHOULDER            line   436  carries a number of its own and belongs to none of the three
+[steps]     _bad                 line  2257  carries a number of its own and belongs to none of the three
+[steps]     _nz                  line  2263  carries a number of its own and belongs to none of the three
+[steps]     size="0.12 0.0425 0.0375" line   205  0.12 is written into the XML this driver builds.  The templa
+[steps]     size="0.12 0.0425 0.0375" line   205  0.0425 is written into the XML this driver builds.  The temp
+[steps]     size="0.12 0.0425 0.0375" line   205  0.0375 is written into the XML this driver builds.  The temp
+[steps]     pos="0 -0.175 1.485" line   205  -0.175 is written into the XML this driver builds.  The temp
+[steps]     pos="0 -0.175 1.485" line   205  1.485 is written into the XML this driver builds.  The templ
+[steps]     euler="2.356194 0 0" line   205  2.356194 is written into the XML this driver builds.  The te
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:324: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  m = cell.compile()
+/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py:328: UserWarning: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+  (S / "_steps_cell_full.xml").write_text(cell.to_xml())
+[steps] nq=113 nu=14 nbody=88 ngeom=140 eq=8  seat links C1=cab30 C2=cab23
+[steps] tracking bound: L reach 1546 mm -> lag allowed 5.18 mrad | R reach 1546 mm -> 5.18 mrad  (clearance 8.0 mm / reach; re-measured each step as the arm extends)
+[steps] arm colours: LEFT arm = ORANGE, RIGHT arm = PURPLE (claws keep blue = upper, red = lower).  Use the colour, not the side of the screen: the close-up panel is mirrored.
+[steps] geoms: 140 total, 60 unnamed; arm geom sets L=38 R=38
+[steps] cable settled: x[-0.300,+0.285] y[+0.280,+0.280] z-table[+0.1486,+0.1559] ncon=14
+[steps] measured grasp: L=cab27 [0.1125 0.28   0.9486]  R=cab32 [0.1875 0.28   0.9509]  drop across the span = 2.3 mm
+[steps] ⚠ mast set is 3 of 4 parts; ['stereo_head'] absent by construction, so no rejection can be attributed to it in this run
+[steps] attitude menu: 27 entries per arm; entry i on R is the negation of entry i on L in both components -> YES
+[steps] attitude menu, first 8 (yaw, roll) in rad:  L(+0.00,-0.00)/R(+0.00,+0.00)  L(+0.00,-0.35)/R(+0.00,+0.35)  L(+0.00,-0.60)/R(+0.00,+0.60)  L(+0.00,-0.85)/R(+0.00,+0.85)  L(+0.00,-1.10)/R(+0.00,+1.10)  L(-0.30,-0.35)/R(+0.30,+0.35)  L(+0.30,-0.35)/R(-0.30,+0.35)  L(-0.30,-0.60)/R(+0.30,+0.60)
+[steps] attitude menu: 22 of 27 entries have a non-zero yaw -- those are the ones the sign can be seen on; on the other 5 it is invisible either way, which is why a single trace line could not settle this
+[steps] start pose = the cell's home, both arms: [-3.1521 -0.2867  2.4674 -1.3953  1.5634 -1.5782]
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py", line 2307, in <module>
+    START[t] = solve_ik(t, GRASP1[t], tries=int(os.environ.get("START_TRIES", "24")),
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_steps_wired.py", line 2116, in solve_ik
+    raise RuntimeError(f"no IK solution for {t} at {tgt}")
+RuntimeError: no IK solution for L at [0.106 0.28  1.03 ]
