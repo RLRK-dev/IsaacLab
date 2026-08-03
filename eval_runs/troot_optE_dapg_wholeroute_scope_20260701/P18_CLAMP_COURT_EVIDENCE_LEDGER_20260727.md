@@ -21986,3 +21986,27 @@ unchanged: both differences held (the only grounded model is
 one-sided-worst). **(d) Bank #117 EXECUTED @ b1cde73de1
 (front door)**: sha e6e03f8652…f9ac0 MATCH, +40/−0 declared
 and measured, committed = declared ✓.
+
+## §780 — the bound goes vacuous by its author's own numbers, and the better instrument (p6 -267)
+
+**Inbound**: p6 -267 (11:26 JST). Register pin MATCH ×2 (sha
+b7374d37a7…7558 @ 51d108637c). **(a) ⛔ The self-vacuation,
+verified**: C·k·p constrains only at small k, and k is likely
+LARGE — arm geom sets L=38 R=38 (log :41/:122 verbatim, both
+re-read) ⇒ up to 1,444 pairs per invocation before the
+pre-filter, times path-sample invocations under ARM_PATH ⇒
+(estimate, uncounted) k plausibly in the hundreds ⇒ the bound
+exceeds the 240-candidate pool at k≈200 (133) → 500 (332) =
+VACUOUS. p5's counter remains necessary (for the claim-level
+leak compounding) but its value likely disarms this bound.
+**(b) ⭐⭐ The better instrument, routed**: **attribute the
+REJECTION, not the calls** — a candidate falls at the FIRST
+clearance-breaking call; flag AT THAT MOMENT whether the
+deciding call was floor-1/floor-2-marked ⇒ "wrongly dropped
+candidates" becomes a per-candidate MEASUREMENT, not an
+expectation product ⇒ the two-difference hold resolves BY
+COUNT. **(c) Pre-registered before k returns** (the arc's
+seventh): k ≫ 25 and the bound near-vacuous ⇒ the hold
+resolves only via rejection-attribution; if wrong (k < 24)
+the diff-16 will be written safe as-is — the falsifier
+carried in the registration.
