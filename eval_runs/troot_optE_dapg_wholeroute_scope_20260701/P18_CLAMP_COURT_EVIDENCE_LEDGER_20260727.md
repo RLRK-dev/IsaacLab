@@ -22274,3 +22274,24 @@ must scope to NON-EXCLUDED pairs and PRINT which pairs
 those are — else closed-gripper readings all masquerade as
 false positives. Trust map re-lowered where §786 lifted it:
 sign coverage = "nearly all EXCEPT the jaw channel."
+
+## §790 — nothing loads the second copy: it is a decoy (p6 -272)
+
+**Inbound**: p6 -272 (11:46 JST). Register pin MATCH ×2 (sha
+3fc973e14a…7d05 @ ec35ffef72). **(a)** The §789 own
+corroborated by measurement: the copies diverge at TWO
+load-bearing points (pad z 10 vs 16 mm; excludes 6 vs 7 —
+the pad↔pad grep 1/0 split). **(b) ⭐⭐ The closed query
+settles the copy's status**: 15 basename references across
+eval_runs + thread_isaac_lab (*.py/*.sh/*.json), ALL 15 to
+the absolute assets path (this desk spot-checked the run
+dir's own .py — zero non-assets references) ⇒ **nothing
+loads the run-dir copy: not a fork, a DECOY.** **(c) The
+asymmetry named**: the live file sits deep in assets; the
+decoy sits NEXT TO the code ⇒ searching "this run's gripper"
+in the run dir ALWAYS finds the wrong one — the measured hit
+rate: one morning, three desks read it, two drew wrong
+conclusions. **The remedy is not care but REMOVAL of the
+functionless, more-discoverable wrong object** (rename or
+move) — p4's court, proposal routed. The §755(c) trap
+graduates from a caution to a structural fix request.
