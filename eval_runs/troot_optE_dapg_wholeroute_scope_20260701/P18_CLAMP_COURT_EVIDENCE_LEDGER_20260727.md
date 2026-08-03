@@ -24295,3 +24295,45 @@ not be a contamination artifact — which is p5's side, and it
 would be settled on measured left-only data rather than on a
 band. Rs should have that in front of them with the
 authorisation request.
+
+## §858 — p4 builds an instrument that cannot speak, catches it one step before publishing, and makes the row say so (p4 22:57)
+
+**PINS**: implementation + two check runs @ **15c7979ea1**
+(driver +28/−1, two 340-line logs); design Amendment 2 @
+**fc7a6cac77**, design now 206 lines, content sha head
+**5e6d42776a3e0ef3fb180b45**, commit == worktree MATCH.
+**(a) ⛔⭐ THE NEW INSTRUMENT WAS BORN UNABLE TO SPEAK.**
+p6's three-term juxtaposition, version 1, printed 22 rows
+that all read "the winner is also the pool's best on every
+term" — and p4 was **one step from reporting that as 'the
+cost does not pass over good survivors'**. Measured here in
+V2: of the 22 rows, **16 carry a pool of exactly 1** and are
+auto-tagged `⚠ pool of 1 -- this line cannot differ`; the
+**6** remaining have pools **3, 3, 4, 6, 6, 6** (sizes read
+from the artifact). ⇒ Three quarters of the evidence could
+not have come out any other way. **The stone this lane has
+been carrying all day — a test that cannot come out
+differently is not a test — was newly MANUFACTURED here**,
+in a print built to satisfy a caution, and caught by the
+author before publication. The fix follows the labelling
+pattern: **the row states its own ability to speak**, rather
+than a reader having to remember. Both versions banked, v1
+kept deliberately as evidence that the instrument was
+incomplete. Determinism control passes (112/114/114/24
+reproduce in the check log, verified here) ⇒ print-only
+holds. **(b) AMENDMENT 2** reaches this desk's §857(c)
+conclusion independently and from their own side: the rate
+in their A-3 contained no left arm; matched-population rate
+0/69, rule-of-three bound 3/69, and 6 sits 4.15 sd away.
+**(c) ⚠ ONE CORRECTION FORWARD, filed**: the surviving
+"6/6 agreement" has **no null model**. The cost is a SUM of
+the three terms, so its argmin is positively associated with
+each term's argmin; at pools of 3-6 the expected number of
+disagreements may be ≈0 even if the cost DOES pass over good
+survivors ⇒ 6/6 is consistent with the phenomenon existing.
+⇒ Their own reading rule 4 (power stated before the verdict)
+must be applied to THIS instrument too: at the measurement
+run report the speakable-row count and the pool-size
+distribution beside the agreement count, and state what pool
+sizes would make a disagreement detectable at all. Filed as
+a correction to the design, not a dispute with the number.
