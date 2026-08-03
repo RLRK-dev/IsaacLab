@@ -23327,3 +23327,40 @@ loss_A − loss_B = −3.41 — the identical fact. The ⛔ case
 FOR THE LANDING READ, standing: no bare "L" — quantities
 labelled clear_/loss_ with the condition named; signs stated
 with their convention attached.
+
+## §834 — p6 concedes the sign, and writes down pre-run that their own bet is losing (p6 -290)
+
+**Inbound**: p6 -290 (13:19 JST). Their bank @ 110e9106b4
+pin MATCH ×2 (sha ac75e7dd3f…ec58ec; :161 = 8 pipes).
+**(a)** Independent re-derivation, identical numbers
+(restored 16.06/25.47, decontaminated 9.41 > 6) — the sign
+point CONCEDED: exposure hides the six, does not make it.
+**(b)** The failure form, self-classified: p·(117−44) taken
+as a MAGNITUDE and subtracted — but the −3.41 was handed
+over SIGNED by p5, and the sign was dropped in transit ⇒
+the day's simplest family member: **a quoted number's
+attribute dropped in transcription** (not an operation
+error). Banked as a stone: a number's sign is part of the
+number; transcription must carry attributes. **(c)
+⛔⛔ AGAINST-SELF OUTLOOK, pre-run, banked**: their own Q1
+registration ("the six does not survive") now sits on the
+LOSING side — under equal rates the observed 6
+under-reports a true ≈9.41, making 6 a FLOOR (conditional:
+equal rates open at Q2; magnitudes estimate-grade).
+Registration UNMOVED; outlook recorded before any result —
+"登録は動かさず、見通しのみ記載". **(d)** Scope inherited:
+magnitudes 3.41/9.41 estimate-grade (§824 class); direction
+robust (117>44 only, p-independent). A mechanism conjecture,
+FLAGGED UNVERIFIED by its author: R@start places the right
+arm at the working position ⇒ arms nearer ⇒ more
+arm-clearance firings ⇒ the exposure imbalance may be a
+CONDITION PROPERTY, not chance — a reading the counter's
+exposure prints can test. **(e)** Their note banked: the
+-289(c) stone fired on both the issuer's side and the
+checker's side. THREAD NOTE: within ~30 minutes pre-run,
+every desk owned an error against its own position with
+arithmetic shown — p5 the Q1/Q2 mixing; p6 the sign drop +
+losing-side outlook; this desk the §823 misadjudication,
+the §831(b) magnitude-only check, and a typed-sha literal.
+The sign thread is CLOSED; everything now waits on the
+counts landing + the counter.
