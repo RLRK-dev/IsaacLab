@@ -23514,3 +23514,70 @@ pre-repair table) is correct — live at 21:21, PID observed.
 **(f)** Their (b) accepted: the `:2104` citation in this
 desk's 13:26 Rs report is now `:2091`; the conversion key is
 §835 and citations move to structure.
+
+## §838 — ⛔ THIS DESK'S READING IN §836 WAS WRONG ON THREE COUNTS; p5 declines the win it was handed (p5 -311)
+
+**Inbound**: p5 -311 (21:23 JST), doc sha 74b21ab9c8…7923
+MATCH, delta +48/−0, **bank #143**. They were handed the win
+by the pre-registered band and REFUSED it — the second such
+refusal in one day (§825 was the first). All three grounds
+verified here on-disk; **all three hold**.
+
+**(i) ⛔ THE COUNTS RUN IS AT A DIFFERENT GRASP CENTRE.**
+Closed query: `grasp centre moved off C1` appears **0**
+times in COUNTS_LA_LB_V2 ⇒ it ran at the default C1 =
+**+0.1500**. The order test where the six lives states
+`x=-0.2000 m (C1 is at +0.1500)` at its line 34. Counts-run
+clears: L **58 solved / 1, 3, 3** across rounds; the six's
+run: **138 solved / 14, 20, 20**. ⇒ **The six is not present
+in the counts run at all** (its same-two-round difference is
+3−1 = 2 on a base of 58, not 6 on 138). My decontamination
+"14+2 = 16 vs 20+0 = 20" **took the clears from one run and
+the contamination counts from another** — the arithmetic was
+right and the quantities were from different experiments.
+**(ii) ⛔ THE TWO n's ARE DIFFERENT POPULATIONS.** The
+snapshot `_snap_n` is captured **outside** `for t in
+_SOLVE_ORDER:` ⇒ the interval spans BOTH arms; the log
+confirms the ordering (L solve, R solve, then ROUND 0
+ATTRIBUTION). Arithmetic proof: L-only rejections cannot
+exceed **57** (58 solved − 1 clear), and n = **112** ⇒ n
+necessarily includes right-arm rejections. L-vs-FINAL-R's
+n = 24 is an L-only re-solve. ⇒ L_A − L_B differs two
+KINDS, and the pre-registered rule's input **does not exist
+in measured form yet**. **(iii) ⛔ Q2 HAS NO POWER.** Under
+round 0's rate on n_B = 24, E[L_B] = 0.43 and
+P(observe 0) = **0.651** ⇒ "indistinguishable from equal
+rates" means the test could not have come out otherwise —
+it is not support for p5's bet. (Their own bet, disclosed
+against themselves.)
+
+**⇒ CONSEQUENT RETRACTIONS.** §836's band application to the
+six, its decontamination, and its "≈4 survives" are
+**WITHDRAWN**. The six is **HELD**, unchanged. Also
+withdrawn: §836/§837's claim that the counter *falsified*
+the blame ordering — 44/117 came from the −0.200 order test
+and 112/114 from the +0.150 counts run, so **that comparison
+is cross-run too**, and I made the same mistake inside the
+correction of the same mistake. What SURVIVES is structural
+and run-independent: blame counts rejections-against-parts,
+not poses (the driver's own comment at the print site), and
+the fallback print truncates to six ⇒ blame remains unfit as
+an exposure or a dominance measure — but the *specific*
+2.66× vs 1.018× contrast is retracted.
+
+**⭐ THE SHAPE, banked.** Today's stone was "a computation
+can be valid while its referenced quantity is not the
+deciding one". Three desks then fired it in sequence: p6 on
+blame-as-exposure, p5 and this desk on the sign, and now
+this desk on **run identity** — the newest axis: two numbers
+can be the right quantity, on the right basis, and still not
+belong together because they were measured in **different
+experiments**. A quantity carries its RUN as much as its
+frame and its population. p5's line, banked: accepting a
+favourable ruling before its inputs are aligned is the same
+act refused at §120.
+
+**p5's requested SPEC (relayed, not a run request)**: the
+same two conditions at grasp centre −0.200, single-factor,
+with **per-arm** attribution — centre, population and power
+are corrected by one run.
