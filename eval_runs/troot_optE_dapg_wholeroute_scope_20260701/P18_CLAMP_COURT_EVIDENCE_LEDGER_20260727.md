@@ -25128,3 +25128,91 @@ banked — the fifth kind (§875(c)) and now the twin. A stone
 is not really banked until it has been turned on the desk
 that banked it; today that step has produced two findings
 that no counterparty would ever have looked for.
+
+## §878 — VERDICT CONFIRMED: the difference is not contamination, and it points the other way (p4 reading, p5 -321, p6 -O)
+
+**PINS, all verified here**: run log @ **8cbdd19d86** (835
+lines, commit == worktree); reading @ **1e421677f6**
+(content sha head 32d9f33ad84d745ff5f7c12c, declared =
+measured, commit == worktree); p5 doc sha 22676a8bfb…41d9
+MATCH (+47/−0, **bank #153 @ 8af11203db**); p6 pin MATCH ×2
+(29739a53f134e8d32c7b96aa1c5fd782 @ **c690561076**).
+
+**THE MEASUREMENT, re-read here from the run log itself
+(not from either desk's summary)**: centre-move line present
+(−0.200 in force); L 138 solved throughout. **A = round 0
+(partner AT HOME): clear 48, arm-decided n = 9, flagged 0.
+B = L-vs-FINAL-R: clear 36, n = 81, flagged 0.** ⇒ **D = 12,
+L_A − L_B = 0.** Right arm: n = 20 / flagged 2 in every
+round ⇒ **every flagged call in the run is the right arm;
+the left arm is 0 in every condition** (0/90).
+
+**1. THE FLOOR DEGENERATED, AND p4 REFUSED TO PASS IT.** At
+an observed rate of 0 the Poisson null spread is exactly 0,
+so `|D| ≥ 2·sd` reads `12 ≥ 0` — **a test that cannot fail**,
+which is the thing this court has spent two days removing.
+p4 flagged rather than passed it; p5 independently demanded
+the null rate be named. Conservative form (rule of three,
+p ≤ 3/90): E_A 0.30, E_B 2.70, sd 1.732, **2·sd = 3.46 ⇒
+12 ≥ 3.46 holds** (re-derived here). ⇒ **The floor is
+satisfied on the conservative null, and the literal null is
+labelled degenerate.**
+**2. THE 0-vs-0 DEFERRAL RESOLVES — WITH POWER, NOT BY
+DEFAULT.** p5 supplies the computation the deferral was
+waiting for: to explain D = 12 by contamination, side B
+(n = 81) would need ≈ 12 flagged = **14.8%**, and under that
+rate P(observe 0) = **2.3e-6** (binomial; 6.1e-6 Poisson —
+both re-derived here). ⇒ This is **not** the empty
+zero-versus-zero case both parties feared; the run had ample
+power to see contamination of the required size and saw
+none. **⇒ Q1's answer is EARNED.**
+**3. BAND**: |L_A − L_B| = 0 < D/2 = 6 ⇒ **p5's side**, and
+exactly zero rather than merely small, so no sign convention
+can change it. **4. Q2 REMAINS UNTESTED**: n_A = 9 gives
+E ≤ 0.30 and P(0) = 0.74 ⇒ condition A discriminates
+nothing, exactly as p5 pre-registered against themselves.
+**5. TERM 2 INERT**, p6's limitation sentence verbatim in
+the reading.
+
+**⇒ VERDICT CONFIRMED, in the fixed words: "D is not
+explained by contamination."** Not said, and not sayable:
+"D is real", "the sign was confirmed across rounds".
+
+**⛔⛔ THE THING NOBODY REGISTERED: THE DIFFERENCE REVERSED.**
+Historically (no unwrap) B led A by 6; now **A leads B by
+12** — the partner AT HOME yields MORE clear poses, not
+fewer. ⇒ The design's refusal to apply the band to the
+historical 6 stopped being a precaution and became a
+measurement. Both parties' registrations were written about
+a difference that no longer points the way it did.
+**⚠ CONSEQUENT ISSUE, raised by p4 and held for the
+parties**: the band's sign convention was fixed while D
+pointed the other way, so `L_A − L_B ≥ D` may now be
+structurally unreachable. **This verdict does not depend on
+it** (0 is below any positive threshold), but it must be
+settled before the band is used on a run whose difference is
+non-zero. p4 explicitly does not decide it; neither does
+this desk.
+
+**INSTRUMENT FINDINGS, verified**: (i) **a blind spot in the
+attribution**: at exit, multiplicity reads `0 part(s): 110,
+1 part(s): 865, 2 part(s): 495` (sum 1470 = the rejected
+total, checked) ⇒ **110 candidates (7.5%) name no part at
+all**, because a candidate already touching is rejected at
+initialisation before any clearance test runs — an
+attribution hole, not a defect, and the sole row speaks only
+for the 865. (ii) **the cost juxtaposition is informative
+here** where it was vacuous in the probe: 144 rows, **127
+tagged unable to differ** (counted here), 17 speakable,
+agreement 4/17 against a null expectation of 0.41.
+**⚠ THIS DESK'S CAVEAT ON (ii)**: 4 observed against 0.41
+expected is agreement roughly **ten times ENRICHED** over
+the independence null ⇒ that comparison establishes the
+three terms are positively correlated in practice; it does
+**not** establish that the cost passes over good survivors.
+The claim that does stand is the descriptive one: **13 of 17
+winners are not the pool's best on at least one term.**
+**⚠ VARIANCE-MODEL NOTE**: p5's three power figures mix
+models (2.3e-6 binomial; 2.3e-2 and 3.0e-4 Poisson —
+verified). The conclusion is unaffected at every model, but
+p6's naming rule applies: state the model beside the number.
