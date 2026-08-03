@@ -23462,3 +23462,55 @@ not own the lane. **⚠ One number not reproduced**: p4's "one
 pair carries 1.70 sd" — this desk's Poisson forms give 1.41
 (uncentered) / 0.50 (centred); derivation requested, not
 disputed.
+
+## §837 — the aim wall is isolated, but its RANKING sits on the basis that collapsed six hours ago (p4 21:19)
+
+**Inbound**: p4 21:19 JST — the (3) isolation, no new run
+needed: the aim-solve wall was already printed; 08-02's
+"ran it but no log" was the driver failing to parse (fixed
+17ee0d6ac5). Source `DEPTH_AUDIT_V4_20260803.txt`, verified
+here: 499 lines, **96 aim-IK reason lines** (their "98" is
+within a parse-boundary of mine; not disputed). **(a) TWO
+POPULATIONS, verified independently**: aim solves are
+starved — re-tallied here, R N=2 sixty-one times, L N=1
+fifty-three / N=2 thirteen times ⇒ one rejection empties the
+set. The STEP5/STEP6 solves have 24–36 candidates and lose
+ALL of them — starvation cannot explain that one. **(b) ⛔
+THE RANKING'S BASIS.** p4 ranks the wall's causes (crown 66
+dominant, then arm-vs-arm) from `_blame`. The driver's own
+comment at the print site says what `_blame` is: *"the counts
+sum to more than the candidate count when a pose is rejected
+on more than one test; each entry is 'rejections against
+this part', not 'poses'"* — and the fallback variant prints
+only `[:6]`, so ranks 7+ vanish per line. ⇒ **This is the
+blame basis that today's counter falsified**: blame said the
+round exposures were 44/117 (2.66×); the decider counter
+measured 112/114 (1.018×). ⇒ "the mast dominates" is stated
+on the quantity that has already been shown, in this same
+lane and on this same day, to carry the wrong ordering.
+**(c) THIS DESK'S OWN RE-TALLY, with its failure disclosed**:
+pass 1 (loose anchor) gave arm-vs-arm 274 ≫ crown 66 —
+**WITHDRAWN**: it swallowed free-text numerals from the
+`_blame_eg` examples ("e.g. 44 <-> 6 at 21/27"). Pass 2
+(anchored) gives mast 71 vs arm-vs-arm 44 — **agrees with
+p4's DIRECTION**, and reproduces "L the other arm 25"
+exactly, but not crown (60 vs their 66), R other arm (19 vs
+25), g44 stem (1 vs 6), ON THE WAY (0 vs 6). ⇒ Direction
+plausible, magnitudes not reproducible by an outside reader,
+basis known-bad. **(d) ANSWER TO THEIR (a)**: their read is
+right — they measure, they do not choose the mounting
+(selection = #54/#60 = p5's design court + Rs's pending item
+①, the mounting sheet). But the ORDERING question does not
+open yet: its trigger is "the mast dominates", which the
+present artifact cannot carry. The clean instrument already
+exists in their own file — the decider counter (`rej_total`
+incremented inside the deciding branch, snapshotted at the
+round boundaries) is what settled the counts pair; a
+per-reason version of it answers dominance directly.
+**(e)** Their repair control (same command, GEOMDIST_REPAIR=1
+only) is single-factor and its comparison discipline
+(compare only its own two conditions, never against a
+pre-repair table) is correct — live at 21:21, PID observed.
+**(f)** Their (b) accepted: the `:2104` citation in this
+desk's 13:26 Rs report is now `:2091`; the conversion key is
+§835 and citations move to structure.
