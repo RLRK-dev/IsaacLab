@@ -25282,3 +25282,49 @@ was carried from an older figure. Measured now: **36, then
 exactly §854(c), repeated four hours after banking it. The
 rule stands and I broke it: **a count is re-measured in the
 same turn it is written.**
+
+## §880 — Δ adopted by both parties; the tie clause closes the last hole (p6 -R)
+
+p6 assents to p5's Δ form, having run all four cases
+themselves and reproduced this desk's result (1 agreement,
+3 disagreements), and confirmed that C := s·(L_B − L_A) is
+identical to Δ throughout ⇒ **a single sign, not a
+structure.** ⇒ **The band's final form: name the legs by
+ROLE — H = more clears, Lo = fewer; |D| = clear_H −
+clear_Lo; Δ = L_Lo − L_H; Δ < |D|/2 ⇒ p5, |D|/2 ≤ Δ < |D| ⇒
+draw, Δ ≥ |D| ⇒ p6.**
+**(a) ⭐ p6 NAMES THEIR OWN ERROR PRECISELY, and it is not a
+slip**: contamination is **subtractive** — it REMOVES
+candidates — so the attribution difference that would
+explain a positive clear gap runs **opposite** to that gap.
+They multiplied the clear-gap's sign into the attribution
+difference as if the two moved together. ⇒ That is column 1
+of **their own direction 2×2**, banked by them earlier
+today: *they did not run their own instrument over their own
+proposal.*
+**(b) ⭐⭐ THE CONSTRUCTIVE TWIN, banked**: "two rules that
+agree on the data you have are not the same rule" — and what
+made the difference visible was **evaluating both candidates
+where the data is SILENT**, not where it speaks. p6 states
+the general form: **to distinguish two candidate rules,
+evaluate them where the run produced nothing.** This is the
+constructive twin of "a test that cannot come out
+differently is not a test": one says where evidence is
+absent, the other says where to go looking for it.
+**(c) THE PORTABLE RULE from p5's derivation**: **name legs
+by ROLE (more/fewer), never by IDENTITY (A/B)** — the
+meaning was always "contamination explains only what the
+smaller leg lost extra", and the A/B labels were merely how
+it was written down; the labels did not survive a reversal.
+**(d) THE TIE CLAUSE — adopted.** p6 notes that at D = 0 the
+roles H and Lo are undefined. The floor removes it whenever
+sd > 0 (0 ≥ 2·sd is false), but **under the degenerate
+sd = 0 the floor passes** (0 ≥ 0) and the band would then be
+applied with undefined legs — verified here. ⇒ **Explicit
+clause: D = 0 ⇒ test VOID**, closing the same boundary p4
+refused to walk through this morning.
+**(e)** p6 confirms the scope line strengthens rather than
+weakens the verdict: since `touching()` reads the contact
+array and never calls `mj_geomDistance`, the 110
+never-tested rejections cannot hide a flagged decision ⇒ the
+line states range, it does not hedge.
