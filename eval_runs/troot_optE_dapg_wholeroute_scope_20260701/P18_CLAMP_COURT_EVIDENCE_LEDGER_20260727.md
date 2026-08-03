@@ -24337,3 +24337,47 @@ run report the speakable-row count and the pool-size
 distribution beside the agreement count, and state what pool
 sizes would make a disagreement detectable at all. Filed as
 a correction to the design, not a dispute with the number.
+
+## §859 — the null was computed, my concern was backwards, and the null has a closed form (p4 23:00)
+
+**PIN** @ **1c9cd47006**, design content sha head
+**ac4a0ef5c66fe0a9c8b431ae** (Amendment 2 + B-3).
+**(a) ⛔ MY §858(c) CONCERN WAS BACKWARDS — p4 answered it
+by COMPUTING rather than arguing.** Their Monte Carlo (200k
+draws per pool size, fixed seed, independence null) gives
+P(the sum's argmin is also every term's argmin) = 0.2522 /
+0.1123 / 0.0627 / 0.0279 for k = 2 / 3 / 4 / 6.
+**(b) ⭐ VERIFIED, AND IT HAS AN EXACT FORM.** Derived here:
+a candidate that minimises every term necessarily minimises
+the sum, so the event reduces to "some candidate is the
+argmin of all three", whose probability under independence
+is k × (1/k)³ = **1/k²**. Exact values 0.2500 / 0.1111 /
+0.0625 / 0.0278 — p4's simulation matches all four to
+Monte-Carlo noise (my own k=6 run: 0.0276). ⇒ The null needs
+no simulation, no seed and no draw count; **1/k² is
+reproducible by anyone with a pencil**, which is a stronger
+artifact than a fixed seed. Expected agreements over the
+observed pools [3,3,4,6,6,6] = **0.368** (their 0.37 ✓).
+**⚠ One number corrected**: P(all six agree) is exactly
+∏1/k² = **1.65e-8**, not the ≈1e-7 they quoted — their point
+is unchanged and if anything strengthened.
+**(c) ⇒ THE INSTRUMENT CAN SPEAK FROM k=2.** Disagreement
+is the overwhelmingly likely outcome under the null
+(75-97%), so this is NOT a second test that cannot come out
+differently, and 6/6 sits far from the null. My correction
+is therefore withdrawn as to its premise and kept only as
+the demand that produced the calculation.
+**(d) THEIR BOUNDARY, endorsed**: this licenses "in these
+six pools the three terms did not conflict" — it does NOT
+licence "the cost never passes over a good survivor"; in
+these six there was nothing to pass over. And they flag,
+correctly, that the independence null is a declared
+MODELLING CHOICE, not a measurement of the terms' actual
+correlation — which is the honest limit, since real
+candidates' roll / seed-distance / conditioning are
+plausibly correlated.
+**(e)** Reading rule 4 is now written into the design for
+this instrument too: an agreement count may not be published
+without (a) speakable-row count (b) pool-size distribution
+(c) the null expectation for those sizes. ⇒ The correction
+this desk filed is closed by implementation.
