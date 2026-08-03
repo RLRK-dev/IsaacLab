@@ -1445,7 +1445,7 @@ _GEOMDIST_REPAIR = bool(os.environ.get("GEOMDIST_REPAIR"))
 _SEG_SCRATCH = np.zeros(6)   # reused; the wrapper always asks for the segment
 
 
-def _depth_audit_report():
+def _depth_audit_report(scope="at exit -- cumulative over the WHOLE run"):
     """What the wrapper saw, printed even when the run ends by raising.
 
     p18's ruling gates the crown re-sweep on the SHAPE, not just the count: a rate that is bounded or
@@ -1456,6 +1456,11 @@ def _depth_audit_report():
     a = _DEPTH_AUDIT
     if not a["calls"]:
         return
+    # ⭐ p18 ordering ruling 20260803-1363: this report prints TWICE -- once mid-run at the
+    # interleave point and once at exit -- with different cumulative numbers and, until now,
+    # nothing saying which.  Two desks banked the mid-run block believing it was the run.  The
+    # fix is a string: no count, no denominator and no branch changes.
+    print(f"[steps] DEPTH AUDIT SCOPE: {scope}")
     ck = max(a["checked"], 1)
     print(f"[steps] DEPTH AUDIT: {a['calls']} calls, {a['checked']} unsaturated, {a['neg']} negative")
     # The denominator, printed before any rate: which channels this run actually asked.  A channel
@@ -1530,11 +1535,14 @@ def _depth_audit_report():
     if _d["n"]:
         def _fmt(dd):
             return ", ".join(f"{k} x{v}" for k, v in sorted(dd.items(), key=lambda kv: -kv[1]))
-        print("[steps] DEPTH AUDIT decider (sole cause, one candidate one vote, untruncated): "
+        print(f"[steps] DEPTH AUDIT decider [{scope}] (sole cause, one candidate one vote, "
+              "untruncated): "
               f"of {_d['n']} rejected candidates -- {_fmt(_d['sole']) or 'none has a sole cause'}")
-        print("[steps] DEPTH AUDIT decider (any cause, a candidate counts once per part that "
+        print(f"[steps] DEPTH AUDIT decider [{scope}] (any cause, a candidate counts once per "
+              "part that "
               f"rejected it): {_fmt(_d['any'])}")
-        print("[steps] DEPTH AUDIT decider multiplicity (parts rejecting one candidate): "
+        print(f"[steps] DEPTH AUDIT decider [{scope}] multiplicity (parts rejecting one "
+              "candidate): "
               + ", ".join(f"{k} part(s): {v}" for k, v in sorted(_d["mult"].items()))
               + "  ⚠ a sole-cause row can only speak for the 1-part column")
     print(f"[steps] DEPTH AUDIT sign reference: {a['sign_checked']} minima cross-checked against "
@@ -2239,7 +2247,7 @@ def _interleave_report(dd):
     # measure ITS OWN attribution rate -- the 4.674% belongs to the un-repaired instrument
     # and cannot be lent to a run whose values are repaired.  Printed BEFORE the line the
     # sweep watches for, so it is in the file whichever way the child is ended.
-    _depth_audit_report()
+    _depth_audit_report(scope="up to the interleave point -- a PREFIX of the run")
     print(f"[steps] 88mm-SPAN INTERLEAVE: arms closest "
           + (f"{_g*1000:+.1f} mm ({_who})" if _g is not None else
              f"nothing within the {ARM_PAIR_CUTOFF*1000:.0f} mm search radius")
