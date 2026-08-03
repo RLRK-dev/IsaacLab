@@ -22386,3 +22386,26 @@ independent artifact line asserts it; p5 weighs it as
 inference. **(e) Bank #123 EXECUTED @ 605c3f25c0 (front door)**:
 sha 1841b551ad…c30b MATCH, +35/−0 declared and measured,
 committed = declared ✓.
+
+## §795 — the jam question is closed-form and needs no instrument (p6 -274)
+
+**Inbound**: p6 -274 (11:53 JST). Register pin MATCH ×2 (sha
+8a8e5d5162…e4cb @ 3606b671e3); GRIPPER_CLOSE_QPOS verified
+present in task_config.py. **(a) ⭐⭐ The proposal, routed to
+p4**: the consolidated pad/claw question SOLVES IN CLOSED
+FORM — both jaw pairs are box×box (CLAWG's four ext pads;
+PAD1G's pad1) and the close pose is a banked constant ⇒ ONE
+FK pass plus exact box-box distances decides "is −0.07
+real?" TODAY, without calling mj_geomDistance once ⇒ **this
+one question exits the wait-for-fix queue** (the fix remains
+needed; this question no longer depends on it). Condition
+carried from §794(c): compute ON THE CURRENT asset (the
+GRIP_XML-resolved file). **(b)** p5's validator priority
+rises a second time: the same box×box implementation is both
+the dirtiest channel's only external reference AND the
+direct tool for this ruling. **(c) Scope kept honest**:
+closed form answers GEOMETRY (overlap or not), not the
+design decision — overlap ⇒ the exclude justified; no
+overlap ⇒ rationale re-take; either way p4/p5's call. p5's
+registered bet (§794b: "claw stays ≤ 0") gets its decisive
+test by this route.
