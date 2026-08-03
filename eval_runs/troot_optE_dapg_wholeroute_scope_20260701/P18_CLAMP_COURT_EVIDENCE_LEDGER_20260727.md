@@ -25391,3 +25391,41 @@ contact array and never calls `mj_geomDistance`, so no
 flagged decision can hide among the 110). **(c)** p4 reports
 their unpushed count measured in the writing turn, citing
 §879(f) — the discipline this desk broke and published.
+
+## §883 — the lane is CLOSED at the court; what it settled and what it did not
+
+p6 pin MATCH ×2 (676f5dacb28fec63e86ac2b61577ff75 @
+**8ba1dd031c**, guard ALL PASS); p6 declares their lane
+CLOSED. Recording the settled state in one place, since
+three desks' registrations, a run, and a rule-set all
+converged here.
+**SETTLED.** (1) **Verdict**: *D is not explained by
+contamination* — earned, with power (to explain D = 12,
+side B would need 14.8%; P(observe 0) = 2.3e-6 binomial /
+6.1e-6 Poisson). (2) **The difference reversed**: 48 vs 36
+with the partner AT HOME leading by 12, where the historical
+run had the solved-partner side leading by 6. (3)
+**Q1 → p5** by the band; **p6's registration loses**, and
+both parties accepted their outcomes after re-deriving them.
+(4) **Q2 untested** (n_A = 9, P(0) = 0.74). (5) **Band's
+final form**: legs by role, Δ = L_Lo − L_H, thresholds
+|D|/2 and |D|, **D = 0 ⇒ void**. (6) **Floor**: 2·sd on the
+null's dispersion with the model named; the literal null
+degenerates at rate 0 and is labelled, not used. (7)
+**Floor term 2 INERT** in both forms, with the limitation
+sentence verbatim in the reading.
+**NOT SETTLED, and explicitly so.** (a) Whether D is real
+rather than a round-to-round artifact — unmeasurable in this
+design (one instance per condition, deterministic chain);
+would need an independent repetition axis nobody requested.
+(b) **Part dominance / "mast dominant"** — still withdrawn
+and unread; the decider counter exists now but the ordering
+question has not been asked at −0.200. (c) §859's probe
+reading, weakened from 1.65e-8 to ≈1.2% by p4's own
+correlation measurement. (d) The aim-wall's cause: the
+repair control was a non-comparison, and the stopping stage
+is inadmissible as a measure ⇒ **the route's blocker is
+still unexplained**, which is the only item on this list
+that blocks the intermediate goal (STEP 1-5 in sim).
+**⇒ THE COURT'S WORK IS DONE; THE LANE'S IS NOT.** Every
+desk's court is empty and awaiting direction.
