@@ -1429,6 +1429,12 @@ _DEPTH_AUDIT = {"calls": 0, "checked": 0, "neg": 0, "below_lower": 0, "seg_disag
                 "type_all": {}, "repaired": 0, "repair_zero": 0, "repair_signed": 0,
                 "unrepairable": 0, "bound_informative": 0, "last_flagged": False,
                 "cand_evals": 0, "rej_total": 0, "rej_flagged": 0,
+                # ⭐ p18 §837 / p5: the DECIDER counter, on the mechanism that settled the counts
+                # pair.  `_blame` counts rejections AGAINST A PART and the mast test runs whether
+                # or not the candidate was already decided, so a ranking built on it over-counts.
+                # This tallies per CANDIDATE, untruncated: "sole" is one candidate one vote and
+                # carries no ordering convention; "mult" says how often a sole cause even exists.
+                "decider": {"n": 0, "sole": {}, "any": {}, "mult": {}},
                 "seg_under_contact": 0, "seg_under_narrow": 0,
                 "sign_checked": 0, "sign_ghost": 0, "sign_missed": 0}
 # ⭐ p18 ruling 20260803-1191(ii): the repair, behind a flag and OFF by default.  Everything added
@@ -1515,6 +1521,22 @@ def _depth_audit_report():
     print(f"[steps] DEPTH AUDIT seg_under split: {a['seg_under_contact']} asserted CONTACT "
           f"(dv <= 0, answerable by the contact list), {a['seg_under_narrow']} merely too narrow "
           f"(dv > 0, a magnitude error the contact list cannot speak to)")
+    # ⭐ The decider tally, PRINTED.  A counter that accumulates and never speaks is the fault
+    # this file has already named three times; it is not repeated here.  Two rows, because they
+    # answer different questions: "sole" is the only ordering-free attribution -- one candidate,
+    # one vote, and only when nothing else rejected it -- while "any" is the same shape as the
+    # blame tally and is shown beside it so the gap between them is visible rather than argued.
+    _d = a["decider"]
+    if _d["n"]:
+        def _fmt(dd):
+            return ", ".join(f"{k} x{v}" for k, v in sorted(dd.items(), key=lambda kv: -kv[1]))
+        print("[steps] DEPTH AUDIT decider (sole cause, one candidate one vote, untruncated): "
+              f"of {_d['n']} rejected candidates -- {_fmt(_d['sole']) or 'none has a sole cause'}")
+        print("[steps] DEPTH AUDIT decider (any cause, a candidate counts once per part that "
+              f"rejected it): {_fmt(_d['any'])}")
+        print("[steps] DEPTH AUDIT decider multiplicity (parts rejecting one candidate): "
+              + ", ".join(f"{k} part(s): {v}" for k, v in sorted(_d["mult"].items()))
+              + "  ⚠ a sole-cause row can only speak for the 1-part column")
     print(f"[steps] DEPTH AUDIT sign reference: {a['sign_checked']} minima cross-checked against "
           f"the solver's own contact list -- {a['sign_ghost']} asserted contact the solver does not "
           f"record (ghost), {a['sign_missed']} asserted clearance over a pair the solver IS "
@@ -1938,6 +1960,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         # near-miss test says so rather than passing silently.
         hit = bool(touching(t, sc))
         _by_clearance = False
+        _blame0 = dict(_blame)
         near_far_arm = None
         if other is not None:
             # p11 -146: this loop only ever asks whether anything is under the clearance, so it
@@ -2066,6 +2089,15 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
             sc.qpos[_a] = qw[_k]
         mujoco.mj_forward(m, sc)
         sv = sigma_min(t, sc)
+        if hit:
+            _why = tuple(sorted(k for k, v in _blame.items() if v > _blame0.get(k, 0)))
+            _dec = _DEPTH_AUDIT["decider"]
+            _dec["n"] += 1
+            _dec["mult"][len(_why)] = _dec["mult"].get(len(_why), 0) + 1
+            for _wk in _why:
+                _dec["any"][_wk] = _dec["any"].get(_wk, 0) + 1
+            if len(_why) == 1:
+                _dec["sole"][_why[0]] = _dec["sole"].get(_why[0], 0) + 1
         cands.append((qw, pe, re_, hit, abs(POSES[_try % len(POSES)][1]), sv, near_far_arm,
                       _by_clearance))
     # ⛔ The fallback below is a SILENT one, and it makes two opposite worlds print the same
@@ -2265,6 +2297,10 @@ for _round in range(3):
     # candidates, so it does not divide the candidates the verdict is made of.
     _snap_n, _snap_l = _DEPTH_AUDIT["rej_total"], _DEPTH_AUDIT["rej_flagged"]
     for t in _SOLVE_ORDER:
+        # ⭐ p6 §844: the same delta, taken per ARM.  n_B = 24 is a LEFT-ONLY exposure while every
+        # rate offered against it was measured over both arms, so the two-axis split is the only
+        # way the power question gets an input that is not the quantity under test.
+        _asn, _asl = _DEPTH_AUDIT["rej_total"], _DEPTH_AUDIT["rej_flagged"]
         # ⭐ p5 §31: the seeds, not the menu, were the thin part -- 24 uniform draws in a
         # six-dimensional joint space.  START_TRIES raises it so the question "is the survivor
         # set really of size one, or is the sample" can be answered.  Default unchanged.
@@ -2285,6 +2321,10 @@ for _round in range(3):
         if os.environ.get("EXTRA_L_ROUND"):
             print(f"[steps] round {_round} {t}: q = [" +
                   " ".join(f"{v:+.6f}" for v in START[t]) + "]")
+        if os.environ.get("LOUD_ROUNDS"):
+            print(f"[steps] ROUND {_round} {t} ATTRIBUTION: n = "
+                  f"{_DEPTH_AUDIT['rej_total'] - _asn} candidates decided by the arm test, "
+                  f"L = {_DEPTH_AUDIT['rej_flagged'] - _asl} of them by a flagged call")
 
     if os.environ.get("LOUD_ROUNDS"):
         print(f"[steps] ROUND {_round} ATTRIBUTION: n = "
