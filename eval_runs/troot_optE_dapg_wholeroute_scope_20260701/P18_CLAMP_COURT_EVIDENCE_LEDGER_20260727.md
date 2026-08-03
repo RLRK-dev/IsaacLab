@@ -23364,3 +23364,101 @@ losing-side outlook; this desk the §823 misadjudication,
 the §831(b) magnitude-only check, and a typed-sha literal.
 The sign thread is CLOSED; everything now waits on the
 counts landing + the counter.
+
+## §835 — p4's two submissions verified (mouth_clear unified; MEMORY.md re-measured)
+
+**Inbound**: p4 21:15 JST, three items. **(a) mouth_clear
+duplicate UNIFIED** @ a82d10a5a2 (pushed). Independently
+verified here by AST, not by reading the diff: at the parent
+commit **two** defs (lines 645, 2506), body hashes with
+docstrings stripped **d0082b6c47f7b8bb for BOTH** — p4's
+declared hash, reproduced; after, **one** def (line 2493),
+same body hash ⇒ run verdicts unchanged, as claimed. ruff
+F811 had named the same defect independently. **(b) ⚠ STALE
+LABEL KEY, verified and banked** — audit channel labels are
+`co_name:co_firstlineno`, so every banked audit table's
+labels now point at pre-unification positions. Measured
+shifts (def linenos, before → after): jaw_gaps 889→876
+(−13), column_gap 1285→1272 (−13), arm_pair_min 1730→1717
+(−13), gap 2536→2528 (**−8**), furniture_gap 395→395 (**0**).
+⇒ **NOT a single offset**: assuming −13 uniformly mislabels
+2 of the 5. This table is the conversion key for reading any
+audit artifact banked before a82d10a5a2. (arm_pair_min had
+also moved 1634→1730 earlier, unrelated.) **(c) MEMORY.md
+re-measured, material for Rs gate item ②**: 08-02 post-
+compression 20344 chars / 99 lines (custody note Addendum
+(ii)) → **now 27820 chars / 99 lines** — verified here by
+`wc`. Line count unchanged, +37% chars ⇒ existing lines grew;
+the 08-02 compression is already undone. p4 correctly did
+NOT act alone (the index's own header requires a coordinated
+pass). This is the fourth item's live measurement.
+
+## §836 — the counts pair landed at 13:03 and sat 8 hours on THIS desk; and the counter dissolves the exposure argument both parties built
+
+**⛔ RECEIPT GAP, owned.** `COUNTS_LA_LB_RESULT_20260803.md`
+was written 13:03:52. **No counts dispatch ever reached this
+session** — closed query over this desk's own ledger returns
+**0** hits for the artifact name / `n_A = 112` /
+`L-vs-FINAL-R` outside §822. My 13:26 report to Rs recorded
+that the artifact existed and then WAITED for a report. ⇒
+The lane sat ~8 h with the answer on disk. Rule taken:
+**a landed artifact the whole court is pre-registered
+against is CHASED, not waited on** — an inbox with no
+message is not evidence that no result exists, when the
+result's file is already visible. p4's send side cannot be
+adjudicated from here (the known queued-not-submitted mode);
+no blame is assigned, and the readback duty is this desk's.
+
+**PIN**: artifact @ c054b11f0b, commit == worktree, sha
+e7dff35c4cb05eb360fbfc89bcdc3714b96e6d6b0c31803f0de6c1ec1b711af4.
+Run 12:54:05→13:02:58, rc=1 (the STEP stall), flags
+LOUD_ROUNDS/EXTRA_L_ROUND/UNWRAP_SOLVE/ARM_PATH/TRIES=240,
+**GEOMDIST_REPAIR off** (deliberate — the six is a question
+about the instrument as it stands). Raw numbers, **no band
+verdict**, and p4 WITHDREW a band judgement they had applied
+before m1332 arrived.
+
+**THE COUNTER EXISTS AND IS THE ARM ONE.** `rej_total`
+increments inside the `near_far_arm < ARM_CLEARANCE` branch
+which sets `hit = True`, so furniture/mast tests below are
+`elif`/`if not hit` ⇒ it counts **candidates whose decider
+was the arm test**, verified by branch structure. Numbers —
+round 0 (partner AT HOME) n=112 / L=2; round 1 n=114 / L=1;
+round 2 n=114 / L=1; **L-vs-FINAL-R n=24 / L=0**.
+
+**⛔⛔ THE 44/117 COLLAPSE.** The actual arm-decided
+exposures are **112 vs 114** round-to-round — ratio 1.018,
+essentially EQUAL. The blame tally said 44 vs 117 (ratio
+2.66). ⇒ The blame counts were not merely estimate-grade,
+they carried the **wrong ordering**, and every argument this
+court built on them inherits it: p6's recentering magnitude
+(§828), the "never opposed" construction (§831(b)), **p5's
+sign check and this desk's re-derivation of it (§832)** —
+the sign conclusion "exposure hides the six" rested on
+117 > 44, a relation the real counter does not reproduce for
+the pair actually compared (112 vs 24, the OPPOSITE
+direction). **This desk's own failure, stated plainly**:
+§824 banked "blame counts do not partition candidates", and
+§831–§832 then used blame counts to fix the DIRECTION of a
+correction; re-deriving p5's arithmetic from the same wrong
+input was arithmetic-independent but **input-dependent** ⇒
+an independent check that shares the input is not
+independent where it matters.
+
+**THE READING under the pre-registered rule** (Q1, raw,
+uncentered, §118-1): |L_A − L_B| = |2 − 0| = **2 < 3** ⇒
+**p5's side by the band as declared before the run**.
+Q2 (rates, centred): 1.79% vs 0.00%, pooled 1.471%,
+equal-rate centre p·(n_A−n_B) = 1.29, observed 2, sd 1.41 ⇒
+**z = 0.50 — rates statistically indistinguishable**, p5's
+bet not rejected. Decontamination of the six: 14+2 = 16 vs
+20+0 = 20 ⇒ **≈4 of the six survives** as a real effect
+(expected-value form: 15.65 vs 20.35 ⇒ 4.71). ⇒ Contamination
+was mildly INFLATING the six, not hiding it — sign opposite
+to §832, on measured exposures instead of blame counts.
+**⚠ Both parties must read before this is banked as their
+verdict**; this desk applies the rule mechanically and does
+not own the lane. **⚠ One number not reproduced**: p4's "one
+pair carries 1.70 sd" — this desk's Poisson forms give 1.41
+(uncentered) / 0.50 (centred); derivation requested, not
+disputed.
