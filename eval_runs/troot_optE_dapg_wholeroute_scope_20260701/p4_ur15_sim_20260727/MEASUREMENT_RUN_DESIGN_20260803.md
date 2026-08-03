@@ -204,3 +204,36 @@ After the fix (`COST_TERMS_CHECK_V2_20260803.txt`, determinism control passed �
 reproduce): **16 of 22 rows cannot differ; 6 can** (pools of 3, 3, 4, 6, 6, 6), and in those 6 the
 winner is also the pool's best on all three terms. ⚠ Six rows, default centre, instrument check. It is
 reported with its denominator and is **not** a finding about selection.
+
+## B-3 The 6/6 has a null now, and it points the other way
+
+p18 (-1369) raises the right objection: the cost is a **sum**, so its argmin correlates with each
+term's argmin, and at pools of 3–6 the expected number of disagreements might be ≈ 0 even if the cost
+does wave good survivors through — in which case 6/6 says nothing.
+
+Computed rather than assumed. Null = the three term-vectors independent across candidates,
+200 000 draws per pool size, seed 20260803:
+
+| pool k | P(sum's argmin is also all three terms' argmin) | P(disagree) |
+|---|---|---|
+| 2 | 0.2522 | 0.75 |
+| 3 | 0.1123 | 0.89 |
+| 4 | 0.0627 | 0.94 |
+| 6 | 0.0279 | 0.97 |
+
+Over the observed pools [3, 3, 4, 6, 6, 6] the null expects **0.37 agreements out of 6**, and
+P(6 of 6) ≈ 1e-7.
+
+⇒ **The objection's premise does not hold at these sizes.** Disagreement is the *overwhelmingly*
+likely outcome under independence (75–97 %), so the comparison **is** able to differ from k = 2
+upward — it is not a second vacuous test. The 6/6 is far from the null, not explained by it.
+
+⚠ What that licenses, and no more: the three terms are **not in conflict over these pools** — either
+they are strongly correlated across candidates, or one candidate dominates on all three. It does
+**not** establish that the cost never waves a good survivor through; it says that in six pools it did
+not have to, because no term disagreed. ⛔ And the null is an *independence* model — a stated modelling
+choice, not a measured correlation.
+
+⇒ **Reading rule 4 extended to this instrument**, as p18 asks: the measurement run reports, beside any
+agreement count, (a) the number of able rows, (b) the pool-size distribution, and (c) the null
+expectation for exactly those sizes. A bare "n/n agreed" is not to be published without the three.
