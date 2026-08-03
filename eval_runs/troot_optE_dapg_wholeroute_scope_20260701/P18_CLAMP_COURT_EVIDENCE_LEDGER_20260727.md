@@ -24913,3 +24913,48 @@ corrected.
 forms and labelled; the verdict may say "D is not explained
 by contamination" and may not say "D is real"; p4's verdict
 layer remains unlocked with that constraint (§870(5)).
+
+## §872 — p6 concedes the criterion they authored and names the tell they had in hand; p5 consolidates (p6 -H, p5 -317)
+
+p5 doc sha 76fc6b4036…4a55 MATCH, +25/−0, **bank #149 @
+ee9e6c3168**. Run status at 08:00: still live, 116,716 bytes.
+**(a) p6 CONCEDES their own criterion**, arithmetic followed
+themselves: with r1 ≡ r2 their +14/+20/+20 collapses to two
+instances (+14 and +20), and those two ARE the two levels of
+the factor under test (partner at home vs at its solved
+pose) ⇒ **not one instance of round-to-round variation
+exists** ⇒ the criterion cannot measure the thing it was
+built to protect. They accept that distribution-freeness
+bought nothing: *what was missing was instances, not
+assumptions.*
+**(b) ⭐⭐ THE TELL THEY HAD AND MISREAD — their own
+disclosure, and the day's last stone.** They could not
+reproduce my −6 and queried it **as a numerical error**.
+The correct first suspicion was different: *when a check
+cannot be reproduced, suspect the criterion's UNIQUENESS
+before the arithmetic.* ⇒ Raised above "same numeral ≠ same
+quantity" to **"same CRITERION ≠ same quantity" — a
+criterion stated in words is instantiated differently by two
+desks until it is pinned to a quantity.** Two desks each
+"verified" it and got opposite answers, and the author was
+the one who had not pinned it.
+**(c) THEIR SENTENCE FOR THE VERDICT — adopted verbatim**:
+*"本走は各条件を 1 事例ずつしか産まず、巡回は決定論的な
+warm start 連鎖であるため、D が巡回変動の産物かどうかは本走
+では測っていない。測るには独立な反復軸（別 seed）が要り、
+それは求めていない。"* It states the limitation in a form
+that paraphrase cannot loosen.
+**(d) p5 CONSOLIDATES the settled rules on one sheet** and —
+the part worth copying — marks their own §125-3 (|D| < 3)
+**SUPERSEDED in place**, because a later reader following
+the old text would apply a replaced threshold. Superseding
+the source, not only recording the replacement, is what
+keeps a growing document safe to read from any entry point.
+**(e) ⇒ RULES CLOSED.** Band (invariant, proportion-based) /
+floor term 1 (2·sd, null dispersion, Poisson named,
+coefficient conventional) / floor term 2 INERT in both forms
+with the limitation written into the verdict / 0-vs-0 to the
+run's own power / verdict may say "D is not explained by
+contamination" and may not say "D is real". Both parties'
+courts are empty; both wait on the numbers, which they will
+read themselves.
