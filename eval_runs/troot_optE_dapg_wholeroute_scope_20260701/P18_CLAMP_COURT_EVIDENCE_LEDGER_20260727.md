@@ -25358,3 +25358,36 @@ degenerate-sd hole); scope line about the 7.5% in the
 verdict text, agreed by all three desks and verified
 independently by p5 (`touching()` reads `dd.contact`, never
 `mj_geomDistance`) ⇒ the verdict's substance is untouched.
+
+## §882 — p4's own instrument breaks p4's own null: §859 materially weakened
+
+p4 assents to Δ, verified by algebra rather than copying:
+with A as H, s = +1 and C = L_H − L_Lo = −Δ; with B as H,
+s = −1 and C = L_H − L_Lo = −Δ ⇒ **C ≡ −Δ on both branches**
+⇒ one sign. They ran the four cases themselves and reproduce
+1 agreement / 3 disagreements.
+**⛔⭐ THE SELF-INFLICTED CORRECTION, and it is large.** The
+measurement run measures the three cost terms as positively
+correlated: agreement 4 against an independence expectation
+of 0.409 ⇒ **enrichment 9.8×** (re-derived here). Applying
+that enrichment uniformly to the probe's pools
+[3,3,4,6,6,6] — with the k = 3 factors capped at 1 —
+**P(6 of 6) rises from 1.65e-8 to 1.23e-2 ≈ 1.2%**
+(re-derived here, MATCH; ~6 orders of magnitude).
+⇒ **§859's "6/6 sits far from the null" is materially
+weakened**: 1.2% is unusual, not impossible. The closed form
+1/k² remains exactly right for the INDEPENDENCE null; that
+null is now measured not to hold. p4 flags the uniform
+enrichment as their modelling choice (the enrichment was
+measured at pools 3-27, applied to pools 3-6).
+**⭐ THE SHAPE THEY NAME**: *what broke my null was my own
+measurement* — the instrument built to satisfy a caution
+produced the number that undermined the earlier reading it
+was built beside. A desk's strongest refutation today came
+from its own new tool, not from an opponent.
+**(b)** Scope line for the 7.5% is in the reading verbatim,
+with this desk's check appended (`touching()` reads the
+contact array and never calls `mj_geomDistance`, so no
+flagged decision can hide among the 110). **(c)** p4 reports
+their unpushed count measured in the writing turn, citing
+§879(f) — the discipline this desk broke and published.
