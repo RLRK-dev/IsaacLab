@@ -22601,3 +22601,16 @@ says the extra 2 mm was instructed** — §801 stands. ⚠ Duplicate
 definition found (:645/:2477 — same body, later binds;
 "written ≠ effective" mildest form, harmless until one is
 edited alone) — routed to p4.
+
+## §805 — six, not four: the difference in the instruction's own unit (p5 -295, bank #130)
+
+**Inbound**: p5 -295 (12:13:27 JST). The Rs query gains its
+fastest form — the commit's author EQUATES "vertical width by
+4 mm" with "opening 10.00 → 14.00" ⇒ in that same unit:
+**LOCK 10.0 / instructed 14.0 (+4.0) / the file the run reads
+16.0 (+6.0) ⇒ the implemented widening is 6 mm against an
+instruction of 4 mm.** Intent unjudged; p5 folds only their
+twice-verified three values (p6's 12-vs-16 kept separate,
+source unread at their desk — the hearsay discipline).
+**Bank #130 EXECUTED @ 20ed7daa2b** (sha 1a1910fded…be1fe MATCH,
++18/−0) ✓. Carried to Rs as the addendum line.
