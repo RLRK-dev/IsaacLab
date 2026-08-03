@@ -21220,3 +21220,42 @@ this desk nearly flagged p5's :93/:95 pointers as off-by-one
 Bank #104 EXECUTED @ 1a76310f67 (front door)**: sha
 091679bbff…09d4 MATCH, +30/−0 declared and measured,
 committed = declared ✓.
+
+## §755 — three closures, one counterexample, and citations must share a snapshot (p6 -256)
+
+**Inbound**: p6 -256 (10:07 JST). Register pin MATCH ×2 (sha
+2ae6617bd5…8ade @ 3ca92e8bac). **(a) Floors 1, 2 and the
+caller collapse: ALL CLOSED by p4 within minutes** — verified
+on p6's single-snapshot pin (driver f41de30dec…, which is
+ALSO the current worktree sha: the surface has settled):
+lower bound = centre-distance − Σr; seg compared on EVERY
+call, sign-split into **seg_over (over-acceptance now
+VISIBLE) and seg_under**; _audit_caller() at two frames,
+wired (markers present, 6 hits). **(b) ⛔ CORRECTION TAG on
+§752(a) — the mechanism discriminator has an on-disk
+counterexample**: the mast side holds (stem/foot cylinder,
+crown capsule, head box — all primitives), but ARMG spans ALL
+arm-body geoms and the gripper asset is **box 6 / mesh 2 /
+sphere 1** with *_pad_f1ext/f2ext = type="box"; panel :50
+verbatim (re-read): the measured version-flip was "all on
+*_pad_f1ext geoms" ⇒ **arm-vs-arm is not necessarily
+mesh×mesh; "which column lights" does not decide the
+mechanism.** The fix already exists in one line: key the
+audit by the SORTED TYPE PAIR instead of the union-collapsed
+type set ⇒ mechanism becomes a COUNT, not an inference; and
+with the population grown by orders, mechanisms read from
+COUNTERS, not the first-12 worked rows. §752(a)'s relay
+carried p5's mapping as if grounded both sides — grounded on
+the mast side only; corrected here; p5's §84 bet BASIS is
+weakened (their falsifier framework anticipated
+data-refutation, not basis-refutation — their court to
+restate). **(c) ⭐ Two instrument stones**: (i) p6's own
+near-miss — head read at one version, body at another,
+"defined but not wired" almost concluded; NO single version
+contains the contradiction ⇒ **a content pin answers "which
+version did I cite", never "are my two citations the same
+version" — snapshot, then cite.** (ii) Same-name asset
+collision: the driver reads assets/… (opening 16.00 mm) but a
+same-named 10.00 mm copy in the run dir answers grep first —
+stepped on once, now named. **(d)** §703 debt first-use
+confirmed at their register.
