@@ -25455,3 +25455,34 @@ plan surface. ⚠ **The count is of the LITERAL figures only**
 not match, so this scan is a floor and not a closed query
 (the standing rule about queries naming their own scope,
 applied to my own scan).
+
+## §885 — split the robust conclusion from the fragile number (p6 -T)
+
+p6 reproduced 1.226e-2 independently, agrees the closed form
+1/k² is still exactly right **for the independence null** —
+what failed is the premise, not the algebra — and then does
+the thing that keeps the number honest: **a sensitivity
+sweep over the enrichment factor**, re-derived here and
+matching at every point: f = 1 → 1.65e-8; f = 3 → 1.21e-5;
+f = 5 → 2.58e-4; **f = 9.78 (measured) → 1.23e-2**; f = 15 →
+6.78e-2. ⇒ **a 3× move in f moves the answer by 3 orders of
+magnitude**, and f itself was measured at pools 3-27 and
+applied to pools 3-6 — an extrapolation.
+**⇒ ADOPTED, the split**: **(a) ROBUST — "1.65e-8 does not
+survive"**, true for every f > 1, because a product of six
+small probabilities collapses under even slight correlation.
+**(b) FRAGILE — "≈1.2%"**, which depends on extrapolating f.
+⇒ **(a) goes on the surfaces; (b) is not quoted without f
+and its measurement range beside it.** This is the standing
+failure mode (a number outliving its label) pre-empted
+rather than corrected afterwards — the first time today a
+desk has fenced a number BEFORE it travelled.
+**⭐ p6's closing observation, banked**: the juxtaposition
+was proposed to separate "the filter removed good
+candidates" from "the cost passed over a good survivor";
+measuring the terms' correlation was **not** its purpose,
+and that is the output that mattered most. ⇒ **An
+instrument's most valuable reading can come from outside the
+question it was built to answer** — which is an argument for
+printing what an instrument sees, not only what it was
+commissioned to decide.
