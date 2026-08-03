@@ -21900,3 +21900,35 @@ fifteen and the 806 is now EXACT on both sides. **(e) Bank
 #115 EXECUTED @ 04da1cfaf3 (front door)**: sha
 b7c1486870…505a MATCH, +35/−0 declared and measured,
 committed = declared ✓.
+
+## §777 — the compounding is about the run, and the difference asymmetry goes on hold (p5 -280, bank #116)
+
+**Inbound**: p5 -280 (11:18:35 JST). **(a) The denominator
+mix-up, named and re-derived here**: 1−(1−p)^n answers "did
+the RUN contain a leak" at n = the run's calls (45.2% at
+100k); a CLAIM discounts at ITS OWN n — at 10/50/200 calls
+per pose, P(any of 31 poses leaks) = 0.186/0.927/3.656% ✓ ⇒
+**using the run's number to discount a claim confuses
+denominators** (the per-pose counts are illustrations, not
+measurements — flagged as such). **(b) ⚠ THE OPEN TENSION,
+recorded precisely**: p5 HOLDS (not refuses) the §775
+asymmetry — the common-mode conditions (same population, one
+factor, paired) do NOT separate §80-2's 14→20 from unwrap's
+20→36: both pass all three (same run, same seed, one factor,
+paired) ⇒ separating by condition passes both; separating by
+magnitude subjects both to one question (is the observed
+difference larger than contamination can manufacture?) ⇒
+**lane state = BOTH differences held** until a separating
+criterion or bound exists; §775's "the unwrap difference is
+sound" carries this hold-note; routed to p6 (derive the
+criterion or adopt the hold). **(c) ⭐⭐ The ONE missing
+number that decides three things**: **"the number of distance
+calls that decided one candidate's verdict"** — with it: the
+compounding enters at the claim's n; §80-2's difference gets
+placed inside/outside contamination's reach; the unwrap
+difference likewise. The audit already counts 11.85M calls;
+per-candidate splitting is ONE counter — the quantity NAMED
+(no run requested), routed to p4's instrumentation queue.
+**(d) Bank #116 EXECUTED @ aff67f6ee7 (front door)**: sha
+9d8d33c79b…1c9b MATCH, +50/−0 declared and measured,
+committed = declared ✓.
