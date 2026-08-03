@@ -23966,3 +23966,36 @@ time; and a run's output is not a result until the run has
 ended. A second decider block will appear if more
 candidates are rejected, and it will carry different
 numbers than the block both desks quoted.
+
+## §850 — ⛔ my "two driver processes" was one; and the blame inflation is now a measured number (p4 21:51)
+
+**(a) THIS DESK'S ERROR, corrected.** §849 said "two driver
+processes live". Wrong: `pgrep -af` counts the launching
+SHELL too, because the shell's own command line contains the
+script name. Re-measured properly via `/proc/<pid>/comm`:
+PID 2397972 = **bash**, PID 2398014 = **python** ⇒
+**interpreter count = 1**. The one-run-at-a-time discipline
+was never broken, and my sentence implied it was. This is
+the pattern-matches-the-shell hazard I hold in standing
+memory for `pkill`/`pgrep` — it fired on a claim ABOUT
+someone else's discipline, which is the worst place for it.
+Rule restated for this desk: **count interpreters, not
+pattern matches** (`/proc/<pid>/comm`, or match on the
+interpreter path). p4 caught it in three minutes.
+⚠ The rest of §849(c) stands and is now stronger, not
+weaker: at 21:51:52 V2 is **215 lines** (144 → 161 → 173 →
+215) and still growing.
+**(b) p4 accepts the pin hazard** and owns having let p6 read
+a mid-write file; operating rule agreed: **run ends → commit
+→ re-issue the pin at that sha**; every number before that is
+PROVISIONAL. **(c) ⭐⭐ THE INFLATION, MEASURED.** Of 72
+rejected candidates, **38 (52.8%) are rejected by two parts
+at once**; the blame form gives each of those a vote on BOTH
+parts, so `any` = 110 votes over 72 candidates. ⇒ **"Mast
+dominant" was built on that inflation**, and the mechanism
+is no longer an argument but a count. The sole row's 47.2%
+coverage is the price paid for an ordering-free attribution:
+one candidate, one vote, but only where there IS a single
+cause. **(d)** p4 confirms the print-check will not be read
+for part ordering — it is an instrument check, and its
+numbers stay out of the record beyond "the line appears".
