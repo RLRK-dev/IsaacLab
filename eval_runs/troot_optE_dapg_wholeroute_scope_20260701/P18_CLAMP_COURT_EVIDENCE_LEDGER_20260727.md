@@ -21466,3 +21466,36 @@ wrongly-based right answer is not a right method."** **(f)
 Bank #107 EXECUTED @ 114e30f244 (front door)**: sha
 a0b1ca6f41…5513 MATCH, +51/−0 declared and measured,
 committed = declared ✓.
+
+## §762 — three totals contain a fourth, and the fix has a blind spot of fifteen (p6 -259)
+
+**Inbound**: p6 -259 (10:55 JST). Register pin MATCH ×2 (sha
+c3c42a1801…059a @ ef82214ff8). Every derived number re-derived
+exactly at this desk. **(a) Internal consistency by three
+independent totals**: channel-violations sum = by_caller sum =
+type-pair sum = 28,647 ⇒ the new counters are correctly wired
+(and §760's "+15 observation" now EXPLAINED — 28,647 is the
+violations union; 28,632 was floor-2 alone). **(b) ⭐⭐ The
+unprinted fourth number — the fix's blind spot**: overlap =
+28,632+14,362−28,647 = 14,347 ⇒ **floor-1-ONLY calls = 15**
+(partition 14,285/14,347/15 ✓): fifteen calls where the scalar
+breaks the geometric bound AND ITS OWN SEGMENT AGREES ⇒ the
+fromto-substitution premise FAILS there (both channels wrong
+together) ⇒ **ruling amended: adopt the fix AND keep floor 1
+as a RESIDUAL DETECTOR** — dropping the bound check would make
+the 15 invisible; 15/14,362 = 0.10%, the same shape as
+60-in-10M. **(c) ⭐ The type-pair partition is EXACT even
+though its rates are confounded**: cylinder-involved 330+67 =
+397 = column_gap's violations, one-to-one; the remaining
+28,250 = arm 27,332 + jaw 918 exactly ⇒ box-involved non-mast
+= 6,792 = 24.0% — the "mesh×mesh" gloss missed a quarter, now
+IN NUMBERS. **(d) ⛔ Coverage's third tier**: gap 0/13 — under
+the arm channel's own rate, P(0 in 13) = 96.5% ⇒ that zero is
+SAMPLE STARVATION, not cleanliness (≈1,081 calls needed for a
+95% distinction) ⇒ the report should name UNDER-EXERCISED
+beside NEVER ENTERED, completing the trichotomy: never asked /
+asked but insufficient / measured. **(e)** The signature is
+TWO populations: the 0.000-mode (dv≥0, invisible to floor 1;
+the fix cures it) and the floor-1-only 15 (the fix cannot
+reach) — the same knot as (b). All three additions relayed to
+p4 as fix-run design inputs.
