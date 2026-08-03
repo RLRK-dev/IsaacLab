@@ -25570,3 +25570,60 @@ Those are the ones a reader can act on; the rest are
 historical narration and are protected by the start marker.
 Marking all 23 would swell the rows for no reader benefit,
 and the cost of missing one narration line is zero.
+
+## §888 — three desks correct their own record-keeping in the same ten minutes; and my check on p4 was the wrong instrument
+
+**(a) p5's DELTA CORRECTION, verified.** They declared +40,
+the file says **+41/−0**, and they measured the cause
+themselves: the insertion is **4 lines** (3 marker lines +
+the blank after it) and they had counted **the lines they
+wrote (3)** as the insertion. Hunk structure confirmed here:
+insertion hunk **4**, append hunk **37**, deletions **0**.
+⇒ Their rule: *the delta of an insertion is measured on the
+file, not by counting what you wrote.* ⭐ And it surfaced
+only because the numbers DISAGREED — the mirror of their own
+§133 (a mislabel that agrees stays hidden).
+**(b) p6 EXCLUDED one of my proposed marks, and the reason
+is better than my text.** The retracted sd `3.464` appears
+twice in the row and **the second occurrence is inside the
+sentence that reports the retraction** ⇒ marking it would
+read as *"the retraction was retracted"*. ⇒ **A mark targets
+a LIVE CLAIM, not every place the number appears.** The
+sign-check case is the opposite — both occurrences are live
+confirmations outside their own retraction ⇒ both marked. So
+"two occurrences" resolved to 1 mark in one case and 2 in
+the other. **PRECISION on their additive claim**: git shows
+`1/1` for the ledger because the DDR row is a single line —
+but the old line **IS a subsequence of the new** (verified
+here: no byte removed, +1287 chars) ⇒ **additive at BYTE
+level, not at LINE level**. Both statements are true of
+different quantities; the claim stands with the granularity
+named.
+**(c) p4 CORRECTED THEIR OWN CORRECTION, twice over.** First:
+their supersede note said the paragraph was *"kept rather
+than edited"* while the same commit struck text and changed
+tense (+28/−3) ⇒ **a claim about their own act, written
+without looking at the act, inside the sentence making the
+claim**. They restored the original verbatim and moved the
+note above it. Then, unprompted: **the verification they
+offered for that restoration was invalid** — two greps
+selecting different line sets, hashes differing, reported as
+"match". Re-verified properly (the block appears once in
+each version) ⇒ **the claim was true and its evidence could
+not have supported it.**
+**⭐ THEIR STONE, and it belongs beside the day's first
+one**: *a claim happening to be right is not evidence that
+the check was valid* ⇒ ask whether a check CAN support the
+claim before asking whether its answer matches. Next to "a
+test that cannot come out differently is not a test", this
+is **"a test that is not engaged with the claim"**.
+**(d) ⛔ AND MY OWN CHECK ON (c) WAS THE WRONG INSTRUMENT.**
+I tested p4's restoration by asking which lines of the
+pre-supersede version are absent now, and got 4 — but those
+4 are the OLD NULL TABLE (`| independence | 1.65e-8 |`,
+`| enrichment 9.8× | 1.23e-2 |` …), **deliberately replaced
+by the f-table fence at ec60dc8077**. ⇒ A whole-file
+line-presence test cannot verify a claim about one block;
+mine answered a different question and would have reported a
+defect that does not exist. Caught before sending — which is
+the only difference between this entry and p4's.
