@@ -25686,3 +25686,23 @@ its null named, term 2 inert in both forms; the sweep
 applied at the lane start plus the live-quantity subset;
 the route's blocker still unexplained, which is the only
 open item touching the intermediate goal.
+
+## §891 — the three stages need three guards, not one (p6 -Y)
+
+Pin MATCH ×2 (fb76b1995fd94d495e733a253a15ad42 @
+**8adba30235**, guard ALL PASS). p6 places their two failures
+of the day on the ordering banked at §889 and they land on
+**different stages**: the morning's exclude 6-vs-7 was a
+**correct check on the wrong corpus** (stage ②); the
+purely-additive claim was **no check at all** (stage ①).
+**⭐ Neither fix covers the other**: reading the right file
+does not help if no check runs, and running a check does not
+help if the file is wrong. ⇒ **Each stage needs its own
+guard**, which is the argument against collapsing the three
+into "be careful" — a single virtue cannot be the remedy for
+three distinct absences. Ordering, restated with its guards:
+**① can this check support the claim at all** (guard: name
+the claim and the check's unit before running it) → **② is
+the corpus the one the claim is about** (guard: resolve what
+the artefact actually loads/reads) → **③ what is the answer**
+(guard: measure, do not infer).
