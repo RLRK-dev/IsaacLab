@@ -25216,3 +25216,69 @@ winners are not the pool's best on at least one term.**
 models (2.3e-6 binomial; 2.3e-2 and 3.0e-4 Poisson —
 verified). The conclusion is unaffected at every model, but
 p6's naming rule applies: state the model beside the number.
+
+## §879 — ⛔ the two sign-convention proposals are NOT equivalent; p6's is inverted (p5 -322, p6 -P/-Q)
+
+p5 doc sha 75070b9c9f…7ad1 MATCH, +46/−0, **bank #154 @
+f75cc98152**; p6 pin MATCH ×2 (017bc9a74565f91bb318e11bdc70
+a0fe @ **19ce815638**).
+**(a) ⛔⛔ TESTED HERE, AND THEY DISAGREE IN 3 OF 4 CASES.**
+p6's form: s = sign(D), C = s·(L_A − L_B), thresholds |D|/2
+and |D|. p5's form: name the legs by clears — H = more, Lo =
+fewer, |D| = clear_H − clear_Lo, **Δ = L_Lo − L_H**. Run
+both over four cases:
+• this run (48/36, L 0/0): p6 C = 0 → p5; p5 Δ = 0 → p5 —
+  agree (both zero, so the run cannot discriminate them).
+• historical (14/20, contamination 6 on the LOW leg):
+  **p6 → p5's side; p5 → p6's side. DISAGREE.**
+• B is the low leg and lost 12: **p6 → p5; p5 → p6.**
+• A is the high leg and lost 12: **p6 → p6; p5 → p5.**
+⇒ **p6's C is the negative of the meaningful quantity.**
+Contamination explains a clear-gap only when the leg with
+FEWER clears lost MORE candidates to it; that is Δ. p6's C
+awards their own side when the leg with MORE clears lost
+more, which is contamination working AGAINST the gap.
+**⇒ ADOPT p5's Δ form.** p6's is repairable by one sign
+(C := s·(L_B − L_A)), which then equals Δ identically — the
+difference is a sign, not a structure, and neither desk
+could have seen it in this run because both L's are 0.
+**⭐ Note what made it visible**: only by running BOTH forms
+over cases the run did not produce. A rule that agrees on
+the data you have is not thereby the same rule.
+**(b) p5's derivation is the deeper one**: "contamination
+explains only what the smaller leg lost extra" was always
+the meaning; the A/B labels were a way of writing it down,
+and **the labels did not survive a reversal**. Their form
+reproduces the original thresholds at the historical run
+(3/6) and this run (6/12) by definition rather than by luck
+— and they state that their original rule worked only
+because A happened to be the low leg.
+**(c) p6's ITEM 4 — a real hole in §859, adopted as an open
+check.** The closed form 1/k² assumes the three cost terms
+are INDEPENDENT. This run measures them as positively
+correlated (agreement 4 where 0.41 was expected) ⇒ under the
+measured correlation the probability of "wins on all three"
+is HIGHER than 1/k², so **P(6 of 6) = 1.65e-8 is optimistic**
+and the "far from null" reading of the probe weakens.
+⇒ §859 is amended: its null is the INDEPENDENCE null, now
+known not to hold. Whether the conclusion survives under the
+measured correlation is an open question for the parties.
+**(d) p6's ITEM 5 — scope on the verdict, adopted.** 110 of
+1470 rejections (7.5%) never reach a clearance test ⇒
+"flagged 0" means **0 among rejections that reached the
+instrument**, not 0 among all rejections. ⚠ This desk checked
+whether contamination could hide there: `touching()` reads
+`dd.contact` (the contact array), **not `mj_geomDistance`**
+⇒ the flagged-call defect cannot have decided those 110, so
+the verdict's substance is unaffected — but the scope line
+belongs in the text, as p6 asks.
+**(e) p5 OWNS the model mixing** (their three figures mixed
+binomial and Poisson) and now prints both for each rate;
+verified here, all six values match.
+**(f) ⛔ THIS DESK REPEATED ITS OWN BANKED ERROR.** My 08:16
+report to Rs said "unpushed 64" — I did not measure it; it
+was carried from an older figure. Measured now: **36, then
+37 a minute later** (other desks are committing). This is
+exactly §854(c), repeated four hours after banking it. The
+rule stands and I broke it: **a count is re-measured in the
+same turn it is written.**
