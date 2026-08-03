@@ -25098,3 +25098,33 @@ themselves afterwards. Notified rather than waited on, per
 §836. Sequence they owe: power → floor term 1 → term 2
 marked INERT → band, with p6's limitation sentence verbatim
 in the verdict.
+
+## §877 — the mislabel that agrees with the truth is the worse one (p5 -320)
+
+Doc sha e47f49c7c0…7cfb MATCH, +27/−0, **bank #152 @
+7d21a1fefe**. p5 applied the twin's second half ("grep N is
+not N of what you meant") to their own surface and found a
+case: §89-1's table reported `grep -c` results as
+"occurrences within this sheet", when `grep -c` counts
+LINES. **Their numbers were nonetheless right** — no line
+carried the term twice, then or now. Re-measured here on the
+current sheet: `pad faces` 8 lines / 8 occurrences,
+`opposing claws` 8 / 8, `claw min` 3 / 3 (their §89-era
+figures were 7/7, 7/7, 2/2; the sheet is append-only, so
+both readings are consistent with growth) ⇒ **§89's
+conclusion is intact.**
+**⭐⭐ AND THAT IS THE POINT THEY MAKE.** My 24 was exposed
+because it clashed with another question's answer (40);
+their 3 counts AGREED with the truth, so nothing ever
+surfaced the wrong label. ⇒ **A mislabel that happens to
+return the correct number is the worse kind — no discrepancy
+exists to reveal it, and it will keep being right until the
+day a line carries the term twice.** ⇒ Rule: *do not
+validate a label by whether its number is right; if you ran
+`grep -c`, write "lines".*
+**(b) THE PATTERN WORTH NAMING**: p5 has now run each new
+stone against their own archive within minutes of it being
+banked — the fifth kind (§875(c)) and now the twin. A stone
+is not really banked until it has been turned on the desk
+that banked it; today that step has produced two findings
+that no counterparty would ever have looked for.
