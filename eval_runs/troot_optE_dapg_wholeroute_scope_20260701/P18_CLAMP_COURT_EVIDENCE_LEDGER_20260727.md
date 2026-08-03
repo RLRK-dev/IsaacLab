@@ -22545,3 +22545,26 @@ checkpoint**; the question "was the 2 mm instructed?"
 routed to p4 (the commit's author desk). Effect on the
 line: at least THREE geometry states (10.0/14.0/16.0);
 where −0.07/9.98 were measured remains open.
+
+## §802 — the two millimetres are not dormant: the containment gate moved (p5 -293, bank #128; Rs addendum)
+
+**Inbound**: p5 -293 (12:09:01 JST, urgent follow-up).
+**Verified here**: :2731 verbatim `_half = 0.5 *
+(mouth_clear(t) - 2 * CABLE_R) * 1000.0`; today's printed
+threshold "wants |across| < 4.00" (grep); back-solve exact
+(14.0→3.00, 16.0→4.00). **(a) ⭐⭐⭐ §801's finding is LIVE
+in the run**: the containment predicate's gate = (mouth −
+cable Ø)/2 ⇒ the 2 mm widened the gate 3.00 → 4.00 mm —
+**a cable 3–4 mm off-centre FAILS under the Rs-instructed
+geometry and PASSES under the current one; the pass/fail
+line has moved 1.00 mm per side.** This is the ko
+containment predicate itself — p5's core material. **(b)**
+Scope kept exact: the formula is code-read; the two mouth
+values are BACK-SOLVED from printed thresholds
+(mouth_clear() internals unread); intent unjudged — Rs +
+the commit desk. **(c) Bank #128 EXECUTED @ 91a896a20c
+(front door)**: sha 6ca78c2883…a8109 MATCH, +35/−0 declared
+and measured ✓. Rs carriage AMENDED (the finding upgrades
+from dormant divergence to an already-loosened gate); the
+p4 inquiry amended (the 3.00→4.00 loosening derives from
+the same 2 mm).
