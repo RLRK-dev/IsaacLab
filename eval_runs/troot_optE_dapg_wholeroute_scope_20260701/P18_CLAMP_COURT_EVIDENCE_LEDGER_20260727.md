@@ -21125,3 +21125,45 @@ directly today is COMPREHENSIVELY CURRENT (08:53 実測 4 values
 + the rollback story + METADATA ranges). False positive;
 retracted; the rule is the file, not the memory of the file.
 p6's read-before-send save (second of their day) noted.
+
+## §752 — the sheet maps the suspension, and the caller fix gains a second job (p5 -266, bank #102; first index debt)
+
+**Inbound**: p5 -266 (09:57:53 JST). **(a) ⭐⭐ The mechanism
+DISCRIMINATOR (reading, no run)**: their channel table gives
+the two candidate mechanisms OPPOSITE exposure — stem/foot are
+cylinder PRIMITIVES with contype=0 (ur15_cell.py:114-era
+verbatim preserved at this ledger :1187-1188, re-read) ⇒
+arm-vs-mast = mesh×primitive (crown & grasp-centre columns),
+arm-vs-arm = mesh×mesh (path legs, histogram, order test) ⇒
+**distmax-mechanism exposes the mast columns; mesh-mechanism
+exposes the arm columns — A's by_caller split discriminates
+them directly** ⇒ the §751 caller-dimension fix now carries a
+SECOND job beyond attribution. **(b) The one-sidedness floor
+hardens from shape to instance**: L3_PANEL_DECIDE.md:57
+verbatim (re-read) — "both versions' zero-returns are
+self-contradicted by their own fromto" ⇒ a 0.0 return NEVER
+latches under ANY lower bound (0.0 exceeds every bound) ⇒
+Floor 2 closes ONLY by fromto comparison; invisible errors
+have MEASURED instances in both runtimes. **(c) A claim cut by
+its own author**: contype=0/conaffinity=0 ⇒ stem/foot never
+enter d.contact ⇒ "touching: nothing" endorses NOTHING about
+mast clearance — the −0.200 witness endpoint: arm-arm/saddles/
+table/cable unconditional; the MAST leg rests on the
+instrument alone. The m1176 softening reached the same desk
+independently (they read the panel: cell 0.0→83.157 vs gripper
+87.16→0.0 — REVERSED directions across pairs; scope =
+version-diff, not within-version direction). **(d) Bank #102
+EXECUTED @ d265eb5cc7 (front door)**: sha 31c45c0ceb…3530 MATCH,
+**+125/−0 append-only measured at this desk** (no delta was
+declared — the gate measured it), committed = declared ✓.
+**(e) ⭐ FIRST USE OF THE INDEX-DEBT PROTOCOL (§703)**: topic
+file feedback-mid-edit-snapshot-is-not-the-program-2026-08-03
+.md EXISTS (34 lines; topic writes released under the split);
+the intended index line is DECLARED verbatim in the dispatch
+and recorded here as tracked debt (index frozen). The stone
+itself: p4's driver read three ways in three minutes (one
+self-recursive, one syntax-broken) — mid-edit, mtime inside
+the reading window; the STOP was averted by reading the
+COMMIT before naming the defect ⇒ **a mid-edit snapshot is
+not the program; read HEAD's blob before naming a defect in
+another desk's source.**
