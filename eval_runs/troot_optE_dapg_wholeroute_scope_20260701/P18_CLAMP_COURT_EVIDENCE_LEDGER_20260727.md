@@ -25979,3 +25979,42 @@ attributions, and the day's rules are all settled and
 banked on four surfaces; every court is empty; nothing is
 pending between desks. What remains is Rs's, and one
 technical unknown: **the route's blocker.**
+
+## §900 — ⛔ the register's blocker mechanism is from an earlier code era (p6 -AG, checked against the driver)
+
+p6 reports the route blocker is already registered (9 hits
+for "詰ま", 5 inside the DDR) with a mechanism: **the arms
+share a progress variable `prog`; the lagging arm dominates
+it, so exceeding tolerance freezes BOTH arms' commands** —
+their t42 evidence being a left-arm jam that froze the whole
+run, with the registered scope *"in a run where one arm
+jams, the other arm's quantities cannot be read as
+properties of that arm."*
+**⛔ CHECKED IN THE DRIVER, AND THE MECHANISM NO LONGER
+HOLDS.** `prog` is a **per-arm dict** (`{t: 0.0 for t in
+SIDES}`), each arm's ramp advanced by **its own** headroom
+(`prog[t2] += dprog * max(0, _room[t2])` with `_room`
+computed per side), and the stall message says so in the
+driver's own words: *"the ramps are per arm now, so this is
+one arm stalling and not the run freezing"*. Introduced
+**2026-08-02** (`62ceb8718f`). ⇒ The registered item carries
+a **pre-08-02 mechanism**; today's runs stalled with the
+per-arm ramps in force.
+**⚠ WHAT SURVIVES, stated without overreach**: the arms are
+still coupled at the STEP BOUNDARY — a step completes only
+when `min(prog.values()) >= 1.0` — so a lagging arm still
+delays the other's step completion. That is a **completion
+gate, not a progress freeze**, and whether p6's registered
+scope note survives in weakened form is the register
+owner's call, not this desk's.
+**⭐ THE SHAPE, and it is the one this court has hunted all
+day, now on the register itself**: a registered item can be
+accurate about a mechanism that the code has since replaced,
+and re-reading the register confirms the ENTRY without
+re-checking the CODE. p6's search was correct and its
+subject had moved — the "constant carries the era of the
+mechanism that produced it" stone, applied to a register row
+rather than to a number. **This does not diminish their
+check**: they read their source rather than relaying, and
+declared their query's scope; the entry's staleness is
+upstream of the search.
