@@ -642,19 +642,6 @@ def jaw_axes(t, dd=None):
     return np.vstack([np.cross(y_hat, z_hat), y_hat, z_hat])
 
 
-def mouth_clear(t="L", dd=None):
-    """Clear opening between the two claw inner faces [m], read off the model.
-
-    Rs widened this by 4 mm today.  Deriving it here means the band cannot disagree with the
-    asset the run is actually reading -- which is the failure mode that put a stale 10.00 into
-    the copy under the run directory.
-    """
-    dd = dd if dd is not None else d
-    g1, g2 = CLAWG[t][0], CLAWG[t][1]
-    centres = float(np.linalg.norm(np.array(dd.geom_xpos[g1]) - np.array(dd.geom_xpos[g2])))
-    return centres - float(m.geom_size[g1][2]) - float(m.geom_size[g2][2])
-
-
 def seat_point(t, dd=None):
     """Where the cable has to be: on the jaw centreline in x and y, at the slot height in z.
 
@@ -2504,7 +2491,12 @@ LX2, RX2 = C2[0] - GRIP_HALF_SPAN, C2[0] + GRIP_HALF_SPAN
 RX_MID = float(np.mean([C1[0], C2[0]]))  # table :1283 "R-hand Y はクリップ間中点"
 
 def mouth_clear(t="L", dd=None):
-    """Clear opening between the two claw inner faces [m], read off the model."""
+    """Clear opening between the two claw inner faces [m], read off the model.
+
+    Rs widened this by 4 mm today.  Deriving it here means the band cannot disagree with the
+    asset the run is actually reading -- which is the failure mode that put a stale 10.00 into
+    the copy under the run directory.
+    """
     dd = dd if dd is not None else d
     g1, g2 = CLAWG[t][0], CLAWG[t][1]
     centres = float(np.linalg.norm(np.array(dd.geom_xpos[g1]) - np.array(dd.geom_xpos[g2])))
