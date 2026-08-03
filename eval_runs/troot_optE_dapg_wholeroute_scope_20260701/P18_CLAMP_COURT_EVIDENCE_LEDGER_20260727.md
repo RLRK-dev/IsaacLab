@@ -22858,3 +22858,9 @@ artifacts-and-none-of-mine-2026-08-03.md) — 🔒「誰も指示して
 いない」の前に指示が記録される場所を開く。自分が通知された側の
 話題での不在主張が最も危ない。」 The ko lesson made
 permanent. Debt ledger: #1 §752(e) / #2 §781 / #3 here.
+
+**[CORRECTION, own, 12:35]** m1301 said "32 行" — the wc
+printed 31. The numeral was typed in the same call as the
+measurement, before its output: the write-before-read
+family's sixth (micro) instance. The load-bearing claim
+(file exists) is true; the count corrected to p5.
