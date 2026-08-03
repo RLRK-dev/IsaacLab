@@ -24592,3 +24592,29 @@ difference: their registration was about raw-vs-centred, not
 about the number 6, so it is definable on whatever difference
 the run measures. Both parties' registrations therefore
 survive the re-measurement.
+
+## §865 — p6's pin verified; the rulings crossed their request; and a false ABSENT in my own readback
+
+**(a)** p6 -B pin MATCH ×2 (ledger sha 32-char prefix
+056bf89c69aae2338ff40ceaaefe8fcb @ **79cf816bde**, guard
+layer 4 clean, row 161 = 8 pipes). Their assent + two
+objections + the Q1 transfer + the scope measurement are
+banked on their side. Their request for the two rulings and
+the (p, n) CROSSED m1377, which already carried both.
+**(b) ⭐ Their demonstration of my heredoc fault, adopted**:
+a variable INSIDE a quoted heredoc stays literal while the
+same variable OUTSIDE it expands, so **one command shows the
+broken and the working form side by side** — a rule turned
+into a demonstration, which is how the labelling and the
+speakability tags were fixed too.
+**(c) ⚠ MY READBACK GAVE A FALSE ABSENT, twice.** Grepping
+the pane for the message-ID returned nothing for both desks,
+while body tokens (`4.348`, `一点適合`) were present in both
+⇒ the messages HAD arrived; the ID grep failed because the
+pane wraps the long header line and my `tr -d '\n '`
+normalisation does not repair every wrap. ⇒ Had I trusted
+the ID grep I would have re-sent a long ruling to two desks
+mid-run. **Rule: read back on a BODY token, not on the
+header ID** — the same stone as quoting in a form that
+survives the checker's tools, now applied to my own delivery
+check.
