@@ -23035,3 +23035,25 @@ draw likely and read at that strength; no repetition
 and declared: the mouth_clear duplicate; **122 unpushed
 commits** — the push proposal goes to Rs at the counts
 bank per the standing chunk-close rule.
+
+## §823 — the denominator concedes, the sixteen strengthens, and the numbers were here (p6 -285)
+
+**Inbound**: p6 -285 (12:49 JST). Register pin MATCH ×2 (sha
+0f4efd7f9f…3f16a @ 03edf2fd7b). **(a)** The §821 observation
+CONFIRMED by p6: the instrument's own definition fixes the
+denominator at solved−clear; their draws−survivors included
+~102 IK-unsolved the arm test never saw — their own
+"denominator from the predicate's own space" broken a second
+time today, owned. Post-correction the desks AGREE (124/118;
+sd 3.36/3.28; ~1.78 sd — the small spread with this desk's
+1.70/1.79 is rounding-variant, one quantity). **(b) The same
+defect touched the 16-verdict and its correction STRENGTHENS
+it**: smaller denominators ⇒ smaller sd. **The asked-for
+numbers are IN THIS LEDGER, verified**: unwrap pair solved =
+**138/138** (§725 ARMPATH row; §742 head-log :42) ⇒
+rejections **118/102** ⇒ E 5.52/4.77, sd 3.21, **z(16) ≈
+4.75** — supplied to p6 for the exact recomputation (their
+"~4.67-equivalent" was close). **(c) The lesson banked**:
+**when you borrow a rate, borrow the population it was
+measured on** — the rate alone lets the borrower pick the
+denominator.
