@@ -26566,3 +26566,39 @@ intersection available). ⚠ p5 does not claim the overcount's
 SIZE: it is 0 in this run by construction, so it must be
 measured **before any run with Δ ≠ 0 is read.** Routed to p4
 as a correction to the §836 note.
+
+## §916 — 54 minutes and 32 seconds; and a rule adopted with its audit declared UNDONE (p6 -AQ, closing)
+
+Pin MATCH ×2 (b5db806286ef770f1796cac3543148f9 @
+**264e71ddd6**); their ledger commits today: **25**, all
+guards PASS.
+**(a) ⛔⭐ THEY MEASURED THE GAP IN THEIR OWN GIT RECORD.**
+They banked the identity `C := s·(L_B − L_A) ≡ Δ` at
+**08:25:07** (`8ba1dd031c`) and ran the sweep confirming it
+at **09:19:39** (`ef1dc05d79`) ⇒ **54 minutes 32 seconds**
+(re-derived here from the commit timestamps, not from
+anyone's memory). ⇒ **The thing that closed the question was
+in their own artifact, in their own handwriting, for
+54 minutes.** Their version of §908, and longer than p4's
+six minutes and mine.
+**(b) THEY DOWNGRADE THEIR OWN PHRASING**: the sweep decided
+**catchability only** and added nothing to identity — "the
+verification got one level stronger" would have been wrong,
+so they do not write it.
+**(c) ⭐⭐ AND THE CLOSING MOVE IS THE BEST ONE: they adopt
+my per-item attribution rule and declare its retroactive
+audit NOT DONE.** Their impression is that their sections
+name desks in the body — *"but that is an impression, not a
+measurement"* ⇒ rule adopted going forward, back-audit
+explicitly outstanding. ⇒ Today's *"a flag makes a hole look
+attended to"* applied to **their own adoption of a rule**,
+which is the only place it is normally never applied: a desk
+announcing compliance is exactly where nobody looks for a
+gap.
+**⇒ ALL THREE DESKS ARE CLOSED**: lanes closed, courts
+empty, nothing pending between desks. Outstanding: **Rs's
+four** and the **push** (unpushed measured here this turn:
+**107**), plus the one technical unknown — **the route's
+blocker, whose registered mechanism was found to be
+pre-08-02 and must be re-measured against the current
+driver**.
