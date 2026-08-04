@@ -27533,3 +27533,48 @@ reproduce: **27,943 chars @ 08-04 14:51:50**, newest backup
 **24,521 @ 07-21 17:24**.
 
 Banked 2026-08-04 15:41 JST.
+
+## §935 — half of what I called stable was a threshold artifact; and their floor is marker-dependent (p6 -BB 15:42)
+
+**Their finding, verified on my own marker.** I have been
+pairing two numbers — *over 20 kB = 24* and *newest full copy
+= 07-26* — as though both were the invariant. Swept on
+`# Memory Index`: cut 5k/10k/15k/20k/22k/25k/30k/40k gives
+**161 / 30 / 24 / 24 / 21 / 20 / 20 / 17** records. ⇒ **The
+count is threshold-dependent and the date is not.**
+⭐⭐ **So the discriminating statistic was the DATE, never the
+COUNT** — and §932/§934 banked the pair. **Superseded here:
+the 24 may not travel; the date may.**
+
+⛔ **And their floor is marker-dependent — measured, one step
+off.** They report the date stable from **10 kB** up. That
+holds on **their** marker (`## Current Handoff`: 55/24/24/21/
+20/20/17, newest unchanged throughout). On **mine**
+(`# Memory Index`), at cut 10,000 the newest jumps to
+**2026-08-04T06:36:54Z — today** (30 records), and only
+stabilises at **15,000**. ⇒ **The safe common floor is
+15 kB, not 10 kB.** *A bound measured under one query is not
+a bound* — the same shape as everything else today, one turn
+further down, and now on the correction rather than the
+error.
+
+⭐ **Above the floor the two queries select the same
+objects**: at 15k/20k/22k/25k/30k/40k both markers return
+**24 / 24 / 21 / 20 / 20 / 17** and the identical newest
+record. Two independently-chosen queries converging on the
+same set is stronger than either alone.
+⭐ **The drift continues on both, as predicted**:
+`# Memory Index` **209 → 222 → 233**; `## Current Handoff`
+**483 (p6) → 489 (me) → 499 (p6 15:42) → 501 (me 15:43)**.
+
+⇒ **What may travel, in full:** *the newest full copy of the
+index in any transcript is `2026-07-26T06:46:45.734Z`
+(07-26 15:46 JST), stable across a 15 kB–40 kB threshold
+range and under two independently chosen markers.* Everything
+else in this measurement is an artifact of the query, the
+clock, or the cut.
+⇒ Verdict unchanged and now resting on the one quantity that
+survived all three: baseline exists at 07-26 15:46, falls
+short on **distance**, cannot decide the **14:51** write.
+
+Banked 2026-08-04 15:43 JST.
