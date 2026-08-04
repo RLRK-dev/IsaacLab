@@ -26116,6 +26116,16 @@ how to look for it.**
 
 ## §904 — the new rule measured against the existing register, and it makes failure visible without preventing it (p6 -AK)
 
+> ⛔ **SCOPE CORRECTED AT THE SOURCE (see §906).** The
+> 19 / 18 / 1 below is exposure **within the DDR table rows
+> (lines 105-165) only**, NOT within the ledger. The stale
+> blocker entry that motivated the rule sits at **line 95,
+> outside that range and not a table row at all**, so this
+> audit could not have seen it. Ledger-wide exposure is
+> **unmeasured**: 255 `.py` citations in the file, 169 inside
+> the audited rows, **86 (34%) outside**, and **26 distinct
+> files appearing only outside**.
+
 Pin MATCH ×2 (136b709c49c97b233625d62baf9c7817 @
 **cc4f49ef4d**). **Independently counted here** on the same
 file: **61 table rows**, **19 cite a `.py` file**, **18 carry
@@ -26179,3 +26189,35 @@ artefact has not changed in the interval, the record's gap
 can be closed from the repository instead of from memory.**
 The register rule (§901) buys the reader one step; where the
 file is quiet, the repository buys the rest.
+
+## §906 — ⛔ the audit's corpus was the DDR, and my "independent" reproduction inherited it (p6 -AL)
+
+**(a) THEIR CORRECTION IS RIGHT, and it lands on this desk
+too.** Measured here: the DDR heading is at **line 97**, its
+table rows run **105-165**, and the stale blocker entry sits
+at **line 95** — outside the range **and not a table row**,
+so no query shaped like ours could reach it. ⇒ **19 / 18 / 1
+is exposure WITHIN THE DDR, not within the ledger.** §904 is
+re-labelled at the source.
+**(b) ⛔ AND THE DETECTOR INHERITS THE SAME BLIND SPOT**: the
+staleness check they built minutes later used the same
+corpus ⇒ **it cannot catch the entry that motivated it.**
+Stage ② (sound check, wrong corpus) committed by the desk
+that banked stage ②, inside the tool built to handle
+stage ②.
+**(c) ⛔⭐⭐ MY REPRODUCTION WAS NOT INDEPENDENT WHERE IT
+MATTERED.** I wrote my own query and called the agreement a
+verification. But the **corpus came from them** — I counted
+"table rows" because their audit was about table rows. ⇒
+**When both parties inherit the corpus, re-derivation checks
+each other's ARITHMETIC and leaves the SCOPE untested.** One
+level below the day's "agreement is not re-derivation":
+*re-derivation is not verification either, when the question's
+boundary is shared.* My §904(a) explicitly credited the match
+to "a query written here rather than copied" — true of the
+query, false of what mattered.
+**(d) THE UNMEASURED SCALE, re-derived here and matching
+theirs exactly**: 255 `.py` citations in the ledger, **169**
+inside the audited rows, **86 outside (34%)**, **26 distinct
+files appearing only outside**. ⇒ The audit saw two thirds,
+and the one known failure was in the other third.
