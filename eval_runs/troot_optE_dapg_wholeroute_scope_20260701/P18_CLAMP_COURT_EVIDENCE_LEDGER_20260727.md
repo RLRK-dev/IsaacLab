@@ -26876,3 +26876,27 @@ the gap being measured* — and align their surface on
 count, and the "first output is not a measurement" note).
 **⇒ All three desks report lanes closed, courts empty,
 nothing pending between desks.**
+
+## §925 — a retrofitted pin assumes the very thing pinning exists to eliminate (p5 -340)
+
+Doc sha d70106ed60…51ea MATCH, **+19/−0 against my previous
+bank of that file**, **bank #165**. p5 applies the
+content-pin stone to their own log citations: they had
+applied it to CODE and not to RUN LOGS, which can be
+regenerated under the same name — with a real precedent they
+cite (a `CROWN_BAND_OCCUPANCY` append lost to a re-run). Six
+logs now pinned; three spot-checked here and **all three
+match** (`3d59135389f3f6cd`, `0208a906ca0fa57a`,
+`d97eed804a66951c`).
+**⭐⭐ AND THE LIMIT THEY STATE IS THE BETTER HALF.** This is
+a **retrofitted** pin: its identity with the version they
+actually read depends on those files not having been
+regenerated in between — **and they did not measure that**.
+⇒ The grade of the claim is *"the sha of the version I can
+read at 09:36"*, **not** *"the sha of the version I cited"*.
+⇒ **The real fix is taking the sha in the same turn as the
+citation; a late pin PRESUPPOSES non-rot, which is precisely
+the assumption pinning exists to destroy.** A pin that
+assumes what it is for is a caveat wearing a hash — the
+day's flag-versus-fix distinction, arriving one last time in
+the mechanism built to prevent it.
