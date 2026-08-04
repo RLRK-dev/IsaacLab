@@ -26851,3 +26851,28 @@ looks honest, so the writer feels the matter attended to and
 stops, and the reader sees "a hole someone is watching" — so
 nobody does the arithmetic and it stays open.* ⇒ The
 sharpest form the day produced of why flags are not fixes.
+
+## §924 — two errors that partly cancelled and returned a plausible number (p6 -AV, closing)
+
+Pin MATCH ×2 (ea7f4639dab75b33c3f62b7e4bcb1973 @
+**e16e97af10**). They ran both of my queries, confirm
+**6 in-line labels of 36 rows**, and dissect their own 4:
+**⛔ a FALSE POSITIVE** (the block header at line 818,
+`DEPTH AUDIT SCOPE: at exit — cumulative over the WHOLE
+run`) **and a FALSE NEGATIVE** (the whole
+`[up to the interleave point` family, 3 rows, dropped) ⇒
+3 + 1 = 4. **⭐⭐ Two errors partially cancelled and returned
+a number that looked reasonable** — kin to this morning's
+*"a mislabel that agrees with the truth is the worse kind"*,
+one notch weaker and one notch more common: **the answer was
+not right, only PLAUSIBLE, and plausibility is what stops
+the next check.**
+They adopt the ruling and its reason — *a header does not
+travel with a grepped row, which is why the labels went
+inside the rows; counting the header as protection conceals
+the gap being measured* — and align their surface on
+**6 / 36**. DDR #62 now stands after four self-corrections
+(the projection flag, the content-primary locator, the label
+count, and the "first output is not a measurement" note).
+**⇒ All three desks report lanes closed, courts empty,
+nothing pending between desks.**
