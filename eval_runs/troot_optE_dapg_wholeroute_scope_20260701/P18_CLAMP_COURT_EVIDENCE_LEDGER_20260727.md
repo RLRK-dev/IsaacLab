@@ -28238,3 +28238,69 @@ both legs**: p4 **8** disk writes / 4 files / 2 index; p5
 **5** / 4 / 0; p6 **0**; total **13** over **8**.
 
 Banked 2026-08-04 16:09 JST.
+
+## §946 — they audited and found zero; I ran the same audit on myself and found two (p6 -BI 16:11)
+
+### p6's closure, verified from my own transcript
+
+**34** commits touch their ledger in the JST day —
+**identical to my count**. The two they flag as
+sha-absent-from-dispatch are real and read out:
+`ea8c6812f2` **08:27:05** (*Separate the robust conclusion
+from the number that carries it*, containing
+`1.23e-2`/`6.78e-2`) and `e02b35ea73` **09:02:34** (*Report
+the line I edited, not the one I kept quoting*, containing
+`after[160]`).
+✅ **Corroborated from a record neither of us keeps for the
+other — mine.** `6.78e-2` first appears in **my** transcript
+at **08:26:21 JST**, **44 s before** their commit;
+`after[160]` at **09:01:59**, **35 s before** theirs. ⇒ The
+content **did** reach me first in both cases. **Zero
+corrections landed only in their ledger. Their carried item
+closes clean.**
+⭐⭐ **And the residual gap's cause is ORDER, not memory.**
+Their discipline is *commit → pin*; these two went *dispatch
+→ commit*, so by the time the commit existed **the finding
+was already delivered and the motive to pin had evaporated**.
+⇒ The reader ends up holding the **content** and not the
+**address**. Their remedy — *when dispatch precedes commit,
+send a pin-only follow-up after committing* — is the right
+shape, and their message discharges it for both.
+
+### ⛔ The same audit on myself returns TWO
+
+Mechanically: every section I banked today (§926–§945)
+against the §-numbers cited across my **57** dispatch files.
+Result: **§927 and §936 were banked and never cited in any
+dispatch.**
+- **§927** — *the branch was pushed at 14:46:05, 125 commits
+  (`0ddf3ce997..3380349eee`), count reconciled 123 + 2 = 125*.
+  It went to **Rs** and never to the desks — **who are
+  tracking their own unpushed counts** (p4's 15:53 command
+  prints one). Operationally material and withheld by
+  accident.
+- **§936** — the closing synthesis with p6 **and my decision
+  to stop measuring the raw drift count**, with its reason.
+  The travelable claim reached them in m1449; **the decision
+  did not.**
+⭐⭐ **The mechanism is theirs with the axis rotated.** For
+p6, *dispatch before commit* removed the motive to pin. For
+me, **the report to Rs removed the motive to dispatch** —
+§927's subject is Rs's item, §936's substance had gone up the
+same channel. ⇒ **Whichever audience is served first removes
+the pressure to serve the other**: theirs an order in time,
+mine an order in audience.
+⇒ **A finding needs both its content and its address, and
+delivering either half is what makes the other feel done.**
+✅ **Both discharged in the dispatch that carries this
+section**, not deferred.
+
+⚠ **Their stated scope, which is also my blind spot**:
+corrections stated **only in user-facing text and never
+dispatched** are outside their audit — and that channel is
+exactly where my two went. Neither of us has audited it in
+the other direction; mine is now audited once, by section
+number, and that instrument would miss any correction I made
+in prose without a section.
+
+Banked 2026-08-04 16:12 JST.
