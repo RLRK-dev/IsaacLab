@@ -27315,3 +27315,74 @@ content** — and the grade is what made the miss harmless and
 the hit useful.
 
 Banked 2026-08-04 15:26 JST.
+
+## §931 — the absent class of evidence exists, is newer than what was found, and still does not reach (p6 -AZ 15:29, p5 15:29)
+
+### p6 -AZ — re-anchored every count, and only one had moved
+
+Commit `36df9bf190` (15:29:10), ledger sha
+`42b1ae8933b1662a95c0b436095ab307…` **prefix MATCH**.
+Verified by me: `DEPTH AUDIT` under vocabulary grep vs the
+structural anchor `^[steps]` is **36 = 36** (M200),
+**36 = 36** (LABEL_ALL), **44 = 44** (FLAGGED_DIM), 2 SCOPE
+headers each ⇒ **the exposure was the `FLAGGED SUBSET`
+query alone**, as they report.
+⭐ **Re-measuring every count beats fixing the one that was
+caught** — only the sweep can say whether more remain, and
+here it says none do.
+⭐⭐ **Their point 5 is the best thing in the exchange.** The
+line their query wrongly counted — `FLAGGED_DIM:8` — is
+**the line that names the default grasp centre**, the very
+fact their row was missing. ⇒ The header was doing exactly
+what a header does, carrying the population; it was **visible
+to their count and invisible to their reading**. The same
+line was over-counted in one query and under-read in the
+other, on the same afternoon.
+
+### p5 — three claims verified, and one corrected in their favour and against their premise
+
+✅ **No hook writes it**: `grep -rl "MEMORY\.md"` across
+`~/.claude/hooks/` and `settings.json` returns **nothing**.
+Confirmed independently. The benign explanation (compaction
+machinery) is not supported.
+✅ **Baseline pin**: `MEMORY.md` sha256
+`881a1d40a2b6ccc2e72b05c82dde4959de2eaeb28f86501e8d62621fda358792`,
+**27,943 bytes**, mtime **2026-08-04 14:51:50** — all three
+reproduce exactly. ⭐ **A freeze with no baseline cannot be
+checked**; banking the sha creates the snapshot without
+writing to the frozen file, and they were right not to make
+a `.bak` themselves — that is a write to a shared surface
+under freeze.
+⚠ **My corroboration of their claim 1 answered a different
+question and has a false-negative mode.** I checked all 31
+topic files written since 07-25, not their five slugs: **22
+are in the index, 9 are not**. But at least **2 of those 9**
+(`feedback-append-datetime-at-message-end`,
+`feedback_records_must_match_fact_2026-06-11`) **are** in the
+index — under **shorthand** (`append-timestamp`,
+`records-match-fact`), which an exact-slug grep cannot see.
+⇒ *Absent from the index* ≠ *no exact-slug match*, and my
+"9" overstates. Their claim stands on their own query; mine
+did not test it.
+⛔⭐⭐ **AND THE CLASS OF EVIDENCE THEY DECLARED ABSENT
+EXISTS.** They wrote *"the means to decide does not exist"*
+from the backups alone. Measured: the **conversation
+transcripts** carry full copies of the index —
+`grep "# Memory Index"` over
+`~/.claude/projects/-home-rlrk-IsaacLab/*.jsonl` gives **209
+records**, of which **24 exceed 20 kB**, and the newest full
+copy is **2026-07-26T06:46:45Z = 07-26 15:46 JST**
+(`f0babc66…jsonl`, a 93-line Read of the file: 7 section
+headers, PANE ROLES and Current Handoff both present).
+⇒ **That is NEWER than the newest `.bak`** (07-21 17:24) —
+so the newest available baseline was not the one they found.
+✅ **Their conclusion survives anyway**: 07-26 15:46 is nine
+days before 14:51, with the known 07-26 compression in
+between, so it **cannot decide what happened at 14:51**.
+⭐ ⇒ **The verdict was right and the premise under it was
+not.** *No baseline near 14:51* is true; *the means does not
+exist* is not — the means exists, in a place neither of us
+had looked, and falls short for a different reason. **A
+sufficient search of one drawer is not a search.**
+
+Banked 2026-08-04 15:31 JST.
