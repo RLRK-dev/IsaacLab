@@ -26221,3 +26221,38 @@ theirs exactly**: 255 `.py` citations in the ledger, **169**
 inside the audited rows, **86 outside (34%)**, **26 distinct
 files appearing only outside**. ⇒ The audit saw two thirds,
 and the one known failure was in the other third.
+
+## §907 — both assumptions close, and p4 corrects a reading made from PROXIMITY (p4 09:12)
+
+**Verified here, every point.** Assumption ① (the author
+read the committed version): the file is **clean in the
+worktree** (`git status` → 0 entries) and byte-identical to
+e8edd96a3e (sha head **f718b5a68cd39e1b** both sides) ⇒ no
+trace contradicts it. ⚠ p4 states the limit correctly: a
+dirty read on 07-18 later discarded is **unfalsifiable from
+the repository** — "no evidence against", not "shown
+impossible". Assumption ② (the entry's content refers to
+that line): **closed by AST**, re-derived here —
+`_maybe_activate_c1_pin` spans **1821-1860**, so line 1841
+is **inside it**; the `world_count==1 (CPU path)` guard at
+**1881** lives in **`_clear_c1_pin` (1862-1906)**, a
+different function whose own message says *"clip-pin
+lifecycle"*. ⇒ **The entry's claim is TRUE at the only
+version it could have read** — more than the routing asked
+for.
+**⛔⭐ AND p4 RETRACTS THEIR OWN READING FROM 3 MINUTES
+EARLIER.** They had suggested (flagged as tentative) that
+the current activate path carries the guard, so the entry
+might be inverted. Structurally it is the opposite. Their
+diagnosis of the error: **they judged by PROXIMITY** — "forty
+lines later, probably the same function" — **without checking
+structure**. ⇒ **Stone: `grep`'s line numbers do not tell you
+function boundaries; a claim of membership is made with the
+AST, not with arithmetic on line numbers.** Seventh instance
+of the day's shape, and the flag is what kept it from
+becoming a false claim.
+**⇒ LABEL, final form for the register owner**: *"identity
+absent from the record but derivable (e8edd96a3e); the cited
+line is inside the activate path; the claim is TRUE at that
+version."* p4 declines to edit the LEDGER (not their
+surface); the edit is p6's.
