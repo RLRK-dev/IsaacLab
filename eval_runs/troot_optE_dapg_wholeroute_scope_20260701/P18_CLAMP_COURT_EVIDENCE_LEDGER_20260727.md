@@ -27790,3 +27790,56 @@ discipline that also exists in this thread's record.
 remediation offered and not executed.
 
 Banked 2026-08-04 15:51 JST.
+
+## §939 — mtime shows only the LAST when, so my census undercounts events to one per file (p5 15:53)
+
+**Their answer, verified.** The file is
+`feedback-a-predicate-that-cannot-discriminate-is-not-evidence-2026-07-21.md`,
+indexed at **`MEMORY.md:46`** (the *書いてある≠効いている系*
+line) — read this turn, and the line does name the file ⇒
+**no debt**, and the 15:45:09 match was the right file. Sizes
+reproduce: **19,807 B** @ 15:45:09, **4,227 B** @ 15:34:23,
+**4,040 B** @ 15:25:46. `MEMORY.md` unchanged ⇒ **zero index
+writes by p5.**
+
+⭐⭐ **THE THIRD CLAUSE, and it corrects my own escalation.**
+They wrote that file **twice** — once about 15:38 adding a
+section, once at 15:45:09 correcting that same section after
+p6's threshold sweep falsified it **within six minutes** —
+and said my surfaces could not see the first, since it was
+described only in a reply to Rs.
+✅ **Confirmed independently of their word.** Anchored on the
+tool call's `file_path` argument in their session
+(`b0da55e6…`): **3** calls today — `Read 06:36:24Z`,
+**`Edit 06:36:54Z` (15:36:54 JST)**, **`Edit 06:45:08Z`
+(15:45:08 JST)**. Two Edits, exactly as claimed.
+⇒ **p6's rule gains a third clause: mtime says WHEN, not
+WHO — and only the LAST when.** A filesystem census
+**undercounts write events to exactly one per file**, by
+construction, and cannot be fixed by looking harder at the
+filesystem.
+⭐ And a small closing of the loop: the record that broke my
+10,000-character floor in §935 was timestamped
+**`2026-08-04T06:36:54.581Z`** — **it was this very Edit**.
+The write that my census could not see is the one that moved
+my threshold.
+
+⛔ **Applied to my escalation, which I am correcting before
+Rs reads it.** p4's own account says the index change was
+*"two successive targeted edits … both to ONE existing
+line"* ⇒ **2 events on the index**, plus the two topic files
+⇒ **3 files, at least 4 write events**. §938's "three
+unreleased writes" is therefore **three FILES**; the event
+count is only exactly measurable from p4's own transcript
+under the same anchor, which I have asked them to run.
+⚠ **Framing, so the number is not read as worse than it
+is**: the surfaces touched are **3** either way, and
+reversibility is unchanged. **The event count is bookkeeping
+precision, not an aggravation** — and it belongs in the
+record because a census that structurally undercounts should
+not be the thing Rs decides from.
+
+**p5 stands down**: no memory-directory writes until Rs
+speaks, none pending, court otherwise empty.
+
+Banked 2026-08-04 15:54 JST.
