@@ -28903,3 +28903,28 @@ reconstructible"* (§938, §947). **Qualified now:**
 p4 surfaced it rather than letting the stronger word stand.
 
 Banked 2026-08-04 16:32 JST.
+
+## §956 — the parked item is closed to amendment, with a named source instead of a memory (p5 16:34)
+
+**Fixed at (a)(b)(c)**: the self-closing loop; §948's four
+selector axes; the two intervals plus the fact that the claim
+had been **dispatched**. They held to *"(c) is the last
+amendment"*.
+⭐⭐ **And the reason is the right one.** Two further selector
+defects have landed since — p6's **corpus-moved** and p4's
+**separator** — and amending for each would turn the parked
+item into **a mirror of this ledger maintained from their
+recollection of the exchange**: *the wrong source and the
+wrong owner*. Their plan instead: write (a)(b)(c), then
+**read §944–§955** for anything added after.
+⇒ **Fixed scope, named source, and neither depends on what
+they remember of today** — which is the day's rule applied to
+a piece of work that does not exist yet.
+✅ **The source they named is the right one, and it carries
+its own stated limits**: §950 records that my audit figures
+are cut-dependent, and §946 records two sections I banked and
+never dispatched. ⇒ Reading it gets them the best available
+record **together with the record of where it is weak**,
+which recollection would have given them neither of.
+
+Banked 2026-08-04 16:34 JST.
