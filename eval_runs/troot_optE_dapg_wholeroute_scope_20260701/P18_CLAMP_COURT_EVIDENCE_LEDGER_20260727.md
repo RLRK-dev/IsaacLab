@@ -28123,3 +28123,67 @@ check for writes. My number grew 14 → 18 in seven minutes
 and every added call was mine.
 
 Banked 2026-08-04 16:05 JST.
+
+## §944 — the Bash leg measures where the path is written, not what was done (p5 16:06, p6 -BH 16:07)
+
+**Two desks hit the same auditor effect with opposite
+signs.**
+
+**p5 — 100% auditor, and the count grew as they reported
+it.** Their figure was **14**; my read of the same population
+at 16:07 gives **16**, and the two extra are **exactly the
+two messages they sent me about it** (16:04:38, 16:06:58).
+Composition: **9 dispatches + 7 analysis commands, none from
+ordinary work.** ⇒ Auditor fraction **16/16**.
+**Me — 44%.** 8 of my 18 path-anchored calls are my own
+analysis; the population grew 14 → 18 in seven minutes and
+every addition was mine.
+**p6 — the other sign, and it is the sharper half.** My
+path-anchored census returns **0** Bash calls for their
+session — while they have measured the memory directory
+repeatedly all afternoon. The reason they give and I confirm
+against the sweep: **their path lives in script files, not in
+the command string**, so their measuring never enters the
+census at all.
+⭐⭐ ⇒ **The census reads ZERO for the desk that measured the
+most and EIGHT for the auditor who wrote nothing. It is not
+measuring activity — it is measuring where the path was
+written.** Over-counts one desk, under-counts another, and
+the difference is tooling.
+⭐⭐ **And p5's half completes it**: the Bash leg would read
+**zero on a day when real writes happened**, because real
+writes go through `Write`/`Edit` and never appear in a Bash
+sweep. ⇒ **A check whose population is created by running it
+has a floor made of the audit and no ceiling from reality:
+its zero says nothing and its non-zero is mostly itself.**
+
+### The rule, for any future sweep
+
+1. **The write census is `Write`/`Edit`/`MultiEdit`
+   anchored on the `file_path` ARGUMENT, minus denials.**
+   That is the only leg that counts writes.
+2. **The Bash leg is a blind-spot probe for literal-path
+   indirection — never a census**, and it does not even see
+   indirection whose path is built at runtime or held in a
+   script file.
+3. **Any "who touched the memory directory" sweep run during
+   or after an audit measures the audit** unless it excludes
+   the audit's own window or reports the auditor fraction
+   beside the count.
+⚠ **Conclusions unchanged**: p6 = 0 writes, and the table of
+§942 stands. What this changes is only **reading a count as
+an index of activity**.
+
+### Two carried items
+
+⭐ **p6 takes my audience-axis failure as a live risk on their
+own surface**: they appended to their ledger 20+ times today
+and have **not audited** whether any correction went
+unbanked-to-message. Recorded as **their open item**, not
+mine to close.
+⭐ **Both desks adopt p5's rule**, and p6 adds the diagnosis:
+most of their failures today — vocabulary versus structure,
+the headers, the denominators — were **grepping something
+that should have been read.**
+
+Banked 2026-08-04 16:08 JST.
