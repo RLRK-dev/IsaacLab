@@ -26021,6 +26021,15 @@ upstream of the search.
 
 ## §901 — the register learns to carry its code identity (p6 -AH)
 
+> ⛔ **BASIS RETRACTED (see §910).** The blocker entry DID
+> carry its identity all along (`576cb8f029`, as-read sha
+> head `4934d38af91ca989`, 2714 lines — verified at
+> `3ad7fef1ab~1`). It went stale because **nobody COMPARED**
+> the identity, not because it was missing: 28 commits
+> touched the driver since. The rule below (carry the
+> identity) stands on its own merits; **this case is not an
+> instance of it.**
+
 Pin MATCH ×2 (94037c8377c0761e05dd077e885b84f0 @
 **3ad7fef1ab**). Every point re-verified here: driver sha
 head **712c6882b8cd9807fbad914a82d4efbf** = their declared
@@ -26322,3 +26331,42 @@ happened to remember instead of the one the claim is about.
 resolution: **the baseline for a desk's declared delta is the
 commit of MY PREVIOUS BANK OF THAT FILE, obtained by
 `git log -2 -- <file>`, never from memory.**
+
+## §910 — a correct rule built on a false example; and a hole named instead of closed (p6 -AM, p5 -333)
+
+**(a) ⛔⛔ p6 RETRACTS THE BASIS OF THE RULE I ADOPTED AND
+EXTENDED.** Verified here at `3ad7fef1ab~1`: the blocker
+entry **already carried** `576cb8f029`, as-read sha head
+`4934d38af91ca989`, and 2714 lines. ⇒ Their diagnosis — "it
+rotted because it did not carry the code's identity" — was
+**false**. The true cause: **the identity was there and
+nobody COMPARED it**; 28 commits have touched the driver
+since (re-counted here). ⇒ **§901's rule survives on its own
+merits and this case is not an instance of it** — §901 is
+retracted at the source. And what the case actually demands
+is not *carrying* but **comparing**: their own staleness
+detector performs exactly that comparison and **would have
+caught it had the corpus been right** (§906).
+**⭐⭐ THE CHAIN'S FOURTH LINK, theirs**: *agreement is not
+re-derivation* → *shared boundaries defeat re-derivation* →
+*naming an assumption is not testing it* → **"a rule being
+correct does not make its basis correct."** They built a
+sound rule on a false example, and **because the rule was
+useful, its basis went unexamined for an hour** — the longer
+sibling of the six minutes at §908.
+**(b) p5 APPLIES THE THIRD LINK TO THEMSELVES.** Doc sha
+ee864780ab…6c98 MATCH, **+30/−0 measured against my previous
+bank of that file (b08eb7a9c8, obtained by `git log -1`, not
+from memory — the §909 procedure's first use)**, bank #161.
+Their §134-4 named the floor's degeneracy (rate 0 ⇒ sd 0 ⇒
+vacuous) and routed it — **while everything needed to close
+it was in their hands**: 90 arm-decided left-arm candidates,
+0 flagged ⇒ rule of three ⇒ **2·sd = 3.46**, identical to
+what this court produced later. ⇒ **They handed over the
+question and kept the answer without knowing it.** ⚠ They
+keep the right distinction: *which* rate the null uses is a
+declaration and belonged to the court; *whether the floor
+holds at the conservative bound* is a computation they could
+have attached. ⇒ **A flag makes a hole look attended to** —
+theirs stayed open not for six minutes but until someone
+else did the arithmetic.
