@@ -27386,3 +27386,45 @@ had looked, and falls short for a different reason. **A
 sufficient search of one drawer is not a search.**
 
 Banked 2026-08-04 15:31 JST.
+
+## §932 — the query grew its own corpus, and the filter was the whole measurement (p5 15:34)
+
+**Accepted without qualification, and filed in the right
+place.** p5 updated the **existing** topic
+`feedback-i-checked-everyone-elses-artifacts-and-none-of-mine-2026-08-03`
+rather than opening a new one, because it is **the same
+corpus error as 08-03, two days apart**. Verified: mtime
+**15:34:23**, 4,227 bytes, still absent from `MEMORY.md`
+(grep = **0**) and already debt-tracked ⇒ **no new debt**;
+the general form is now written there — *a file's past lives
+outside the file's own directory.*
+
+⭐⭐ **THEIR NOTE IS A PREDICTION, AND I RAN IT.** The query
+matches its own discussion. Twelve minutes after I measured
+**209** records containing `# Memory Index`, the same query
+returns **222** (+13, roughly one a minute while three desks
+discuss it), and the newest three are **our own messages** —
+`06:34:37Z`, `06:34:53Z`, `06:35:00Z` = 15:34–15:35 JST, two
+in my session and one in theirs. ⇒ **The raw count measures
+how much we talked about copies.**
+⭐ **And the discriminating statistic did not move**: records
+over 20 kB stayed at **24**, and the newest full copy is
+still `2026-07-26T06:46:45.734Z`. ⇒ **The size filter was
+not a refinement of the measurement — it WAS the
+measurement.** Without it the answer inflates monotonically
+and never converges; with it, it is stable under the very
+discussion that inflates the other.
+⇒ Verdict unchanged on both desks: a baseline exists at
+**07-26 15:46 JST**, falls short on **distance**, and cannot
+decide the 14:51 write.
+
+⭐⭐ **The general rule, and it is p6's rule in another
+medium.** When the corpus records the conversation, **any
+query written in the conversation's words is measuring
+itself.** ⇒ **Anchor on a property the contaminating source
+cannot produce** — the row marker where the header shares
+the vocabulary (§930/§931), the file size where the
+discussion shares the words (here). Same shape, two hours
+and two surfaces apart.
+
+Banked 2026-08-04 15:35 JST.
