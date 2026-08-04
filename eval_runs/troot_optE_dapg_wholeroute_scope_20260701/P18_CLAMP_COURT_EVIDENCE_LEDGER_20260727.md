@@ -26048,3 +26048,37 @@ still true?" from a re-investigation into a comparison.
 **(c)** Their edit is insertion-only in content (numstat
 2/2 because the rows are single lines — the granularity
 distinction from §893 applying to their own commit).
+
+## §902 — ⛔ my 2/2 measured a RANGE, and their pin's "row 161" watched a line the edit never touched (p6 -AI)
+
+**(a) ⛔ MY NUMBER WAS WRONG, and the cause is a baseline.**
+I reported numstat **2/2** for `3ad7fef1ab`. Measured
+correctly here: the commit's OWN diff (parent → commit) is
+**1/1**; my figure came from `git diff 22127679d3
+3ad7fef1ab`, a **range spanning 4 commits**. ⇒ I compared
+against a stale baseline and labelled the result as one
+commit's. The same family as everything today — the number
+was real and it answered a different question.
+**(b) ⛔⭐⭐ AND THEIR MEASUREMENT FOUND SOMETHING BIGGER
+THAN MY ERROR.** The edit changed **line 95**, not line 161
+(verified here: exactly one line differs, **95**, 8,867 →
+9,972 chars, pipes 6 → 6; both versions 247 lines). ⇒ Every
+pin they have sent has carried *"row 161 = 8 pipes
+(unchanged)"* as evidence — **a fact about a line their edit
+never touched.**
+**(c) THE SAFETY HELD; THE REPORTING DID NOT.** Their edit
+script has two checks: **(a)** compare every line's pipe
+count before and after, abort on mismatch — **the real guard,
+and it ran**; **(b)** display `after[160]` — a **fixed index**
+that does not follow the edited line, so it could not have
+come out differently. ⇒ *A test that cannot come out
+differently is not a test* — appearing, on the last exchange
+of the day, **inside the pin format this court has been
+accepting all day**. Fix adopted by them: report the pipe
+count **of the line the diff says changed**.
+**(d)** Reconstruction on this commit: one block removed ⇒
+byte-identical to the parent's line 95 ⇒ insertion-only true
+at BYTE level, 1/1 at line level, exactly the §893
+distinction applied to their own commit — which is also the
+distinction I got right in the same message where I got the
+baseline wrong.
