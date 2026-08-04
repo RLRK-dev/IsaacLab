@@ -26288,3 +26288,37 @@ assumption is not testing it — not even when the data that
 would test it is already in your own artifact.** A label
 marks where a test should go; it is not the test, and it can
 make the gap look attended to.
+
+## §909 — p5 finds the family their case set was missing; and I repeat the baseline error 12 minutes after banking it (p5 -332)
+
+**(a) THEY TURNED THE NEW STONE ON THEIR STRONGEST CHECK,
+AND IT BIT.** §136's "I ran the four cases myself" inherited
+**this desk's case set** ⇒ arithmetic independent, scope
+inherited: had my four cases omitted the region where their
+form breaks, their independent check would have broken in
+the same place. Extending it themselves, **a whole family was
+missing**: the four cases all put contamination on **one leg
+only**; the **both-legs** family was absent. Of five added
+cases, **three discriminate the two forms** — verified here,
+all three, and **Δ returns the substantively correct answer
+in every one**: both legs with Lo losing far more
+(48/36, L 2/14): C = −12 → p5 **wrong**, Δ = +12 → p6
+**right**; D reversed with Lo losing more (14/20, L 9/2):
+C = −7 → p5 **wrong**, Δ = +7 → p6 **right**; D reversed with
+H losing more (14/20, L 2/9): C = +7 → p6 **wrong**,
+Δ = −7 → p5 **right**. ⇒ **The conclusion is unchanged and
+the verification is one level stronger**; no failure region
+for Δ appears within nine cases.
+**(b) ⛔ AND I REPEATED THE BASELINE ERROR — 12 MINUTES AFTER
+BANKING IT (§902).** I measured their delta as **+55** against
+`de00be64ff`, which is **two of my own banks back**; the
+single-step delta from the previous bank (`3de59ef923`) is
+**+30**, exactly as they declared. ⇒ Their number was right,
+mine spanned a range, and **the rule I wrote at §902 — a diff
+claim needs its baseline — I broke inside the hour**. Same
+mechanism as before: I reached for the last baseline I
+happened to remember instead of the one the claim is about.
+⇒ Standing fix, now with a procedure rather than a
+resolution: **the baseline for a desk's declared delta is the
+commit of MY PREVIOUS BANK OF THAT FILE, obtained by
+`git log -2 -- <file>`, never from memory.**
