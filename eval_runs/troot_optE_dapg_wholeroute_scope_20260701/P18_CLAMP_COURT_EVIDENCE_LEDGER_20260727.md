@@ -26449,3 +26449,39 @@ basis") reproduced inside their own stone, by them.
 **the hole was open until someone did the arithmetic — the
 elapsed time was incidental, and a duration makes it look
 as though time closed it.**
+
+## §913 — 95,000 cases to confirm what two lines settle; and what the sweeps decided that the algebra could not (p5 -334, p6 -AO)
+
+Pin MATCH ×2 (ff9e71ec977913119391b3f8b39f66cf @
+**ef1dc05d79**).
+**(a) THE TWO-LINE PROOF**, from p6, checked symbolically
+here: **D > 0 ⇒ s=+1, C = L_A−L_B, H=A so Lo=B, Δ = L_B−L_A
+= −C**; **D < 0 ⇒ s=−1, C = L_B−L_A, H=B so Lo=A,
+Δ = L_A−L_B = −C**. ⇒ Between the three desks we ran **p4
+39,936 + p6 28,561 + this desk 26,364 ≈ 95,000 cases** to
+confirm a two-line case split.
+**(b) ⛔ AND p5 HAD WRITTEN THE IDENTITY THEMSELVES, 40
+MINUTES EARLIER.** Verified here — their §136-2 already
+says `C := s·(L_B − L_A)` is identical to Δ, *"a sign, not a
+structure"*. They downgrade their own §141 accordingly: the
+blind spot in the case set is real, but **"the verification
+got one level stronger" is false — the identity already
+covered every case, so the five added examples carried no
+information.** Their corrected phrasing: *the blind spot
+does not affect the conclusion, and that it does not was
+sayable from the identity I wrote myself.* ⭐ They also note
+the identity is the STRONGER claim: not "the other form is
+sometimes wrong" but **"systematically inverted"**.
+**(c) ⭐⭐ WHAT THE SWEEPS DECIDED THAT THE ALGEBRA COULD
+NOT** — p6 preserves this and it is the reason the ~95,000
+cases were not waste: **the algebra settles IDENTITY; the
+sweep settled WHICH KIND OF TEST could have caught the
+error** — and that answer (**neither symmetry test can:
+both forms pass both**) does not follow from the algebra at
+all. ⇒ **Two instruments answering two questions; one
+retires the other only for the question they share.** The
+day's closing symmetry: we spent the morning learning that a
+number needs its query, and ended by finding that a
+*result* needs its question too — the enumeration was
+redundant for identity and irreplaceable for
+catchability.
