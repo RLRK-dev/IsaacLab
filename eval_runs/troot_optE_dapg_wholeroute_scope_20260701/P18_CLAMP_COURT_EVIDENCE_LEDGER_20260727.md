@@ -26702,7 +26702,10 @@ the denominator** — "can affect" becomes "does affect".
 `the other arm` sole **290** / any **680** ⇒ **57.4%**;
 `ON THE WAY` sole **120** / any **225** ⇒ **46.7%** (all
 re-derived here) ⇒ run-wide, of 28 flagged, actual lost
-clear poses ≈ **28 × (1 − 0.574) ≈ 12**. ⭐ Their own shape,
+clear poses ≈ **28 × (1 − 0.574) ≈ 12** ⛔ **[the ≈12 is a
+PROJECTION, not a count — see §920: the run does not print
+sole/any FOR THE FLAGGED SUBSET, so the ratio is assumed,
+not measured]**. ⭐ Their own shape,
 stated twice today: **"I named the hole correctly and held
 the filling number — both times in a log I had already
 read."** ⇒ Rule: **before writing "unmeasured", read the
@@ -26727,3 +26730,53 @@ changes is only **how much margin there was** — a quantity
 nobody is deciding anything on. ⇒ The last against-self act
 of the arc is also the smallest: a desk finding a number in
 their favour, checking its scope, and putting it down.
+
+## §920 — the ≈12 is a projection; and the labels reached 6 of 36 lines, with their author the first to fall in (p6 -AT, p4 09:32)
+
+**(a) ⛔ "≈12" IS A PROJECTION, from both desks
+independently.** `28 × (290/680) = 11.9` assumes **the
+flagged subset has the whole run's sole ratio**. Verified
+here: the run prints per-round n and L, and run-wide
+sole/any — **but no sole/any breakdown for the flagged
+subset**, and p4 confirms from the source that the counter
+has **no flagged dimension inside `if hit:`**. ⇒ The
+assumption is **untestable in this run**. p6 adds a reason
+to doubt it: flagged calls sit near the contamination
+boundary, and tight places are more likely to be rejected by
+several parts ⇒ **lower sole ratio ⇒ the true loss is
+smaller than 12.** §918(d) tagged at the source. ⚠ The
+run-wide 57.4% / 46.7% remain **measurements**; only the
+extrapolation to the flagged subset is not.
+**(b) ⭐ p6's TAXONOMY PLACEMENT**: the run measures the
+overcount **in general** and not **for the subset L is about**
+⇒ their **③ (measured but not printed)** sitting right next
+to **④ (printed but not used)**. An hour ago ④ overturned
+their "unmeasured"; ③ was beside it the whole time.
+**(c) ⛔⛔ AND p4 FELL INTO THE TRAP THEIR OWN LABELS EXIST
+TO PREVENT.** They took `grep | head -1` and got the
+**prefix** block — verified here: `:302` *"of **312**
+candidates dropped by the arm-clearance test, **6**
+flagged"* vs `:834` *"of **680** …, **28** flagged"* — and
+nearly reported that the run disagreed with my 680.
+**⭐ WHY THE LABELS DID NOT SAVE THEM, which is the heavier
+finding**: counted here, **36 DEPTH AUDIT lines carry the
+scope label on only 6 (17%)** — the three decider rows in
+each block. **30 lines are unlabelled** (rejection
+attribution, floor 1, floor 2, mechanism, by call surface,
+localisation, coverage, channels exercised, sign reference,
+seg_under split, repair …). ⇒ **They fixed the three lines
+they were looking at and left the identical trap on the
+thirty beside them — and were the first to fall in.** This
+is my §914 "quiet version" (a combined header) in its
+instrument form, on their surface.
+**(d) THIS DESK'S ORDERING RULING** (asked for; both are
+instrument changes, not measurement runs ⇒ **no Rs
+authorisation**, the same free class as the print check):
+**(a) labels on ALL audit lines FIRST** — a pure string
+change whose control is that every number reproduces; **then
+(b) the flagged dimension** in the decider counter, whose
+control is that **every pre-existing line reproduces
+byte-identically and only new rows appear**. ⛔ And (b)'s
+first output is an instrument check, not a measurement:
+its numbers enter no table until a run at a declared
+configuration.
