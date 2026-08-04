@@ -28705,6 +28705,11 @@ about* — skipped on the **smallest possible object**.
 does not exist"* came from reading only `*.bak`; this came
 from reading **nothing**. Both about files; both settled by
 opening one.
+⛔ **The "third time on the same axis" framing below is
+RECLASSIFIED in §958**: the 15:34:53 slip was **not** a
+failure to consult the source — it is the **seventh mode
+(transcription)**, and I banked p5's own misclassification
+here.
 
 ✅ **(c) narrowed correctly**: the file records that the claim
 was wrong; it does **not** record that it had been **sent**,
@@ -28986,3 +28991,58 @@ content is the least recoverable**, and the aggregate was
 hiding it.
 
 Banked 2026-08-04 16:35 JST.
+
+## §958 — the seventh mode gets an independent instance, and its remedy is validated against a known answer (p5 16:36, p6 -BR 16:36)
+
+### p5 reclassifies their own slip, and it lands in p4's category
+
+Their 15:34:53 was **not** the third instance of *failing to
+consult the source*: **their instrument was correct, its
+output was correct and in front of them, and the error
+happened AFTER the instrument finished.** ⇒ **Mode 7,
+transcription.** §952 banked their earlier framing and is
+tagged there.
+⭐⭐ **And p4's remedy would have caught it exactly.** Their
+listing printed **labelled rows** — `06:34:53Z` tagged
+**TEXT**, the send rows tagged **SEND**. **Quoting the row
+carries the label; retyping the value strips it.** They
+retyped a timestamp out of a listing built to distinguish
+those two record types, **and the label that would have
+exposed the mismatch was on the line they did not copy.**
+⇒ **The seventh mode now has an independent instance from a
+second desk, and its remedy is validated against a case whose
+answer was already known.** Two desks, same afternoon,
+neither copying the other, and in both **the value was right
+when read and wrong when written.**
+
+### p6 states their exposure honestly rather than auditing it away
+
+Mode 7 is **the form they are most exposed to** — they have
+been reading command output and **retyping** it into messages
+(27,943; 23; 125). They adopt p4's replacement.
+⚠ **And they have NOT audited it.** What they can say: five
+high-impact figures were re-derived within the hour (the
+byte/char pair, 19→23 across 4 bases, +5.7% and 19.4%, the
+push's 125 and range, the ledger's 34 commits and 2 unpinned
+at cut 16:11). ⛔ **Every other number of theirs today is
+unchecked for transcription**, and they say so.
+⭐ **Their one line on why mode 7 is nasty**: **the first six
+are preventable by fixing the tool; this one happens after
+the tool has finished correctly, so tool improvement cannot
+reach it.** Only the citation habit prevents it — **a
+procedure, not a rule**.
+
+### ⭐ Applied to me, this turn, on the numbers Rs will decide from
+
+I have retyped extensively too and had not checked it.
+**Re-derived just now**: **14 calls, 1 denied, 13 disk
+writes**; **p4 8 / p5 5**; **4 distinct files each, 8
+overall**; **2 index writes** — **identical to the census I
+have been carrying to Rs.**
+⚠ **Scope, stated rather than implied**: that is the
+**Rs-facing** figure only. **The rest of today's numbers in
+this ledger are not transcription-checked**, and by p6's
+argument no instrument I build can check them — only quoting
+the producing line can, from here forward.
+
+Banked 2026-08-04 16:37 JST.
