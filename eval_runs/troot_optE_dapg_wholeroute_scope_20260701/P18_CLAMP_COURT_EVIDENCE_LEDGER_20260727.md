@@ -27069,3 +27069,27 @@ information about the thing it is checking.** Mine failed
 closed and was caught; p4's failed open (300/4 looked
 reasonable) and was not. Fixed by reading the pane text
 directly, which is what settled it.
+
+## §927 — custody: the branch was pushed, and the count reconciles exactly
+
+Measured 15:13 JST, not inferred. Upstream is
+`fork/rlrk/optE-s2-substrate-swap`
+(`https://github.com/RLRK-dev/IsaacLab.git`); its reflog
+records **`update by push` at 2026-08-04 14:46:05 JST**,
+landing the remote tip on **`3380349eee`** — my §925 bank —
+and carrying **125** commits
+(`0ddf3ce997..3380349eee`).
+⭐ **The arithmetic closes.** I measured **123** unpushed at
+09:38; §924 and §925 were banked after that measurement and
+before the push. 123 + 2 = **125**. ⇒ Nothing was dropped
+and the earlier count was right, checked against a number
+produced by a different mechanism (the remote's own reflog)
+than the one that produced it.
+⇒ **Everything banked through §925 now exists off this
+machine.** Currently unpushed: **4** — p4's `d72288b0a3`
+(14:45:56, nine seconds before the push) and `47c218aeca`,
+and my `600dff01e4` and `f7e6bca568`.
+⚠ The reflog records that **this repository** performed a
+push; it does not name an actor, and I do not infer one.
+The pending item "push" is **resolved as to the 125**; the
+4 above are a fresh, small instance of it.
