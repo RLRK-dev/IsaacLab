@@ -1571,8 +1571,10 @@ def _depth_audit_report(scope="at exit -- cumulative over the WHOLE run"):
         _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET: {_f['n']} of {_d['n']} "
               f"rejected candidates were dropped by a far-arm call the floors had flagged "
               f"({100.0 * _f['n'] / max(_d['n'], 1):.3f}%).  The far-arm counter below says "
-              f"{a['rej_flagged']}; the two count the same events by different paths and must "
-              f"agree.  ⚠ FLAGGED IS NOT WRONG -- the floors mark a call as suspect, they do not "
+              f"{a['rej_flagged']}; both are fed by the same bit from the same site, so agreement "
+              f"is a TRANSPORT check -- it detects a lost bit, not a wrong one, and corroborates "
+              f"nothing about flaggedness.  ⚠ FLAGGED IS NOT WRONG -- the floors mark a call as "
+              f"suspect, they do not "
               f"adjudicate it.  ⚠ The bit is set at the far-arm test ONLY: the mast, furniture and "
               f"path tests are not tracked, so a candidate absent from this subset may still have "
               f"been rejected by a flagged call elsewhere.")
@@ -1580,10 +1582,21 @@ def _depth_audit_report(scope="at exit -- cumulative over the WHOLE run"):
             _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET (sole cause, one candidate "
                   f"one vote): of {_f['n']} flagged rejections -- "
                   f"{_fmt(_f['sole']) or 'none has a sole cause'}.  ⚠ The far-arm entry of this "
-                  f"row is a CEILING on how many rejections a repair could undo, not a projection "
-                  f"of how many it would: a repaired value can still fall under the clearance.")
+                  f"row is a CEILING on how many FAR-ARM rejections a repair could undo -- not a "
+                  f"projection of how many it would (a repaired value can still fall under the "
+                  f"clearance), and NOT a bound on the repair, which sits in the shared wrapper "
+                  f"and fires on a suspect call in ANY channel.")
             _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET (any cause): "
                   f"{_fmt(_f['any'])}")
+            # ⭐ p18 m1435(i): the enrichment a reader can compute from this row and the whole-set
+            # row has NO CONTROL ARM, so the fence goes where the number is rather than in a memo.
+            _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET ⚠ NO CONTROL ARM: the bit "
+                  f"exists only for the far-arm call, so a sole/any contrast can be formed for "
+                  f"flagged far-arm rejections and for NO other channel.  Any enrichment read off "
+                  f"these rows against the whole-set rows is therefore bounded to WITHIN far-arm "
+                  f"rejections; it cannot separate 'flagged is enriched in sole cause' from "
+                  f"'near-threshold rejections in general are', and is not evidence that the far "
+                  f"arm is special.")
             _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET multiplicity: "
                   + ", ".join(f"{k} part(s): {v}" for k, v in sorted(_f["mult"].items())))
         else:
