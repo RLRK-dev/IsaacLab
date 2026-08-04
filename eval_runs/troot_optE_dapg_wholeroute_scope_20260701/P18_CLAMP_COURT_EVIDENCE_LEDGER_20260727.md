@@ -26999,7 +26999,10 @@ difference and the wrong one about its *extent*.
 
 ### The first output, and the fences that must travel with the number
 
-7 of 653 rejected candidates flagged (**1.072%**); sole cause
+7 of 653 rejected candidates flagged (**1.072%** — ⛔ see
+§928: the instrument prints this same 7 against **450** in
+the adjacent row (**1.556%**), and 450, not 653, is the
+domain in which the flagged bit can exist at all); sole cause
 the other arm **x4**; multiplicity 1-part 4 / 2-part 3 (=7);
 whole set 251+402 = 653. sole/any **4/7 = 57.14%** vs
 **70/450 = 15.56%** ⇒ **3.673×**, one-sided binomial
@@ -27093,3 +27096,85 @@ and my `600dff01e4` and `f7e6bca568`.
 push; it does not name an actor, and I do not infer one.
 The pending item "push" is **resolved as to the 125**; the
 4 above are a fresh, small instance of it.
+
+## §928 — a question asked from a number's shape alone lands one number over, and the smell was real (p5 15:14, p6 -AW 15:14)
+
+### p6 -AW — verified three ways, and their self-correction is the better half
+
+Measured by me in the M200 log: **36** DEPTH AUDIT lines =
+**2** SCOPE headers (`:286` *up to the interleave point*,
+`:818` *at exit*) + **34** data rows, **6** in-line
+labelled. Their as-read prefix
+`ce8dde06f81cce4f97d2d6b79f1c6c01` matches the full sha of
+`LABEL_ALL_ROWS_CHECK_20260804.txt`. Commit `29d3f0db33`:
+**exactly one line changed** (`:166`), 8 pipes, ledger sha
+`ac79f1fea4179bd0…428e9`, commit == worktree.
+⭐⭐ **The query that produced the miscount also produced the
+DESCRIPTION of the miscount.** They had reported their false
+positive as *"the block header at line 818"* — one header.
+There are two, and `:286` was invisible to the query they
+used (`at exit -- cumulative`). ⇒ **§906's shape occurring
+inside a self-report: a correction is not automatically
+outside the corpus of the thing it corrects.** The error's
+own instrument was still holding the pen.
+⚠ Their `:286`/`:818` are **M200 log** lines; the same two
+headers sit at `:185`/`:322` in
+`LABEL_ALL_ROWS_CHECK_20260804.txt`, which is the file item
+3 of the same message verifies. **A line number must travel
+with its filename.**
+
+### p5 — they could not open the artifact, and asked the right question anyway
+
+Their worry: if 653 is rejected candidates and 7 is the
+flagged subset of them, the same-space control is the **646
+unflagged**, not 450.
+**Direct answer**, from `FLAGGED_DIM_CHECK_20260804.txt`
+(sha `23ffc08d623f44f2b06a851f455168e5f1c051486c21ee582cd6395b2e51cb60`,
+commit `47c218aeca`) `:342`/`:343`: **70** and **450** are
+the *same part* — "the other arm" — in the **sole-cause**
+and **any-cause** rows. 70/450 = of the candidates the other
+arm rejected at all, the share where it was the **only**
+part. The flagged **4/7** is that same ratio inside the
+flagged subset, and every flagged member was dropped by a
+far-arm call ⇒ **flagged ⊂ the 450**. One space. The 646
+answers a different question (flagged vs unflagged over
+*all* rejections, including candidates the other arm never
+touched). The disjoint control they reach for exists and I
+had it: **4/7 = 57.14% vs 66/443 = 14.90%, 3.835×, Fisher
+one-sided p = 0.0131** — larger than 3.673×, same reading.
+⭐⭐ **AND THE SMELL WAS REAL, ONE NUMBER OVER.** The
+artifact's own adjacent row (`:350`) reads *"of **450**
+candidates dropped by the arm-clearance test, **7** were
+dropped by a call the floors had flagged (**1.556%**)"* —
+while the FLAGGED SUBSET row (`:345`) reports the same 7 as
+*"7 of **653** rejected candidates (**1.072%**)"*. ⇒ **The
+instrument prints one numerator against two denominators in
+adjacent rows, both labelled "flagged", differing by 45%.**
+The flagged bit can only exist for candidates the arm test
+dropped, so **450 is its domain and 653 dilutes it with 203
+candidates for which the statistic is undefined** — the same
+defect as counting the SCOPE headers among rows that lack an
+in-line label, three hours later and in the instrument
+rather than the audit. Same at the prefix scope: 4/544
+(0.735%) at `:204` beside 4/364 (1.099%) at `:209`.
+⇒ Anyone comparing this run's **1.072%** with a later run's
+**1.556%** would read a change that is **purely
+denominator**.
+⭐⭐ **They could not check any of this, because I sent a
+ratio with no population and no artifact.** m1436 item 2 was
+a **fence about scope delivered in a form that carried
+none** — one message after banking p4 for exactly that
+(§926: the row is scoped, the message is what gets quoted).
+⇒ **The rule did not survive the act of enforcing it.** What
+made the question possible was p5 reasoning from the
+*shape* of a bare pair of numbers; what made it necessary
+was my omission.
+✅ **Their disposition stands and I am not asking them to
+move it**: the "about 12" remains OPEN on their sheet —
+default centre ≠ −0.200, and the flagged sets differ in size
+(**7** here vs **28** at `MEASUREMENT_RUN_M200_20260804.txt:834`,
+which they opened themselves; **6** at `:302` for the
+prefix). The 4 bounds the far-arm channel at the default
+centre only.
+
+Banked 2026-08-04 15:17 JST.
