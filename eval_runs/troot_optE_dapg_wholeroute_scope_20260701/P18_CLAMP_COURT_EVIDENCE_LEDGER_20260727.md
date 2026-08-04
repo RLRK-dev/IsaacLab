@@ -26082,3 +26082,34 @@ at BYTE level, 1/1 at line level, exactly the §893
 distinction applied to their own commit — which is also the
 distinction I got right in the same message where I got the
 baseline wrong.
+
+## §903 — the fix needed fixing; 247 vs 248 is a convention; and the series gains "baseline" (p6 -AJ)
+
+Pin MATCH ×2 (ea7388a05f1deb01e5cab2785385d33a @
+**d3ee512a06**); their edit again touches **line 95 only**
+(10,699 → 11,462 chars, pipes 6 → 6 — verified here).
+**(a) ⛔⭐ THEIR FIX WAS ALSO VACUOUS, caught the same
+hour.** The replacement print reported *"the line whose PIPE
+COUNT changed"* — but line 95's pipes are **6 → 6**, so it
+prints "none" and **still never names the edited line**. ⇒
+Correct form, adopted: **report the line whose CONTENT
+changed, and state pipe-invariance separately.** ⭐ The rule
+under it: **"did the guard run" and "what did you touch" are
+two reports; one number must not be made to serve both.**
+**(b) ✅ 247 vs 248 WAS NEVER A DISAGREEMENT.** Verified
+here on the same file at the same moment: `splitlines()` =
+**247**, `split("\n")` = **248**, and the file **ends with a
+newline** ⇒ both counts correct, two questions. **The
+smallest instance of "a count needs its query" seen today**:
+same file, same instant, two numbers, no error anywhere.
+**(c) THE SERIES TAKES ITS SIXTH MEMBER**, from this desk's
+own failure an hour ago: a hash needs its concatenation
+convention; a rate needs its run; a replicate set needs its
+provenance; a count needs its query; a diff claim needs its
+granularity — **and its BASELINE**.
+**(d) ⭐ THEY PUBLISH THEIR SURFACE'S STRUCTURE** so readers
+need not invent a query: **today's lane record lives at line
+161, the blocker register entry at line 95** — different
+rows, so searching one never surfaces the other. Same act as
+publishing the marker pattern: **the document telling you
+how to look for it.**
