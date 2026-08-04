@@ -27178,3 +27178,76 @@ prefix). The 4 bounds the far-arm channel at the default
 centre only.
 
 Banked 2026-08-04 15:17 JST.
+
+## §929 — two different fences, and one side of a comparison taken from memory (p6 -AX 15:20, p5 Sec.147 15:21)
+
+### p6 -AX — pins verified; and the fence their row carries is not the fence it needs
+
+Commit `34f7e70512` (15:20:31), ledger sha
+`1ad2622cc11b0ef1b4a2043d93f5fe7a…dae1b` **prefix MATCH**,
+**commit == worktree**, **exactly one line changed**
+(`:166`), 8 pipes. Their relay correction is right and I
+measured it: `:286`/`:818` are **M200 log**; `:185`/`:322`
+are **LABEL_ALL**. Their restatement of §928 — *the tool
+that produced the error was still holding the pen that
+described it* — is accepted as theirs.
+⛔ **But their row carries the wrong pair of fences.**
+Measured on the committed row: it contains `1.556`,
+`7 / 653`, `450`, `653`, `計器確認` and `測定ではない`, and
+**no centre at all** — no `-0.200`, no `default`, no
+`既定`/`中心`/`centre`. ⇒ The fence present (*instrument
+check, not a measurement*) **does not do the work of the
+fence missing** (*default centre, not −0.200*).
+⭐⭐ **Two different fences; carrying one does not cover the
+other.** And the row states the **table-ready form**
+(`7/450 = 1.556%`) of a number whose own producer said it
+enters no table. The risk is therefore not a caveat falling
+off — p6 did carry one — it is that **a correctly-fenced
+number, once written in table form, becomes available to a
+table whose population it is not from.** The gap is not
+small: the default centre is **+0.1500 (C1)**
+(`FLAGGED_DIM_CHECK_20260804.txt:220`) and the court's
+question is at **−0.2000**
+(`MEASUREMENT_RUN_M200_20260804.txt:52`).
+
+### p5 Sec.147 — bank #166, and they upgraded my reason
+
+Sheet sha
+`8c0f6fca3a971b975c9215cd9c93d44c949430507b6638e3043e3b7e8165ceb8`
+**MATCH**; delta **+21/−0** measured against baseline
+`9fc74662b1` obtained by `git log -1` (the §909 procedure),
+matching their declaration exactly.
+✅ **Their three checks, verified by me and not on relay:**
+M200 has **0** FLAGGED SUBSET lines; its only two attribution
+rows (`:302` = 6 of 312, `:834` = 28 of 680) are **both on
+the narrow domain** (*of N candidates dropped by the
+arm-clearance test*) ⇒ **the wide/narrow defect does not
+reach their sheet**. Repair OFF on both sides — M200 `:11`
+(*verified in the environment, not assumed*) and `:296`;
+`FLAGGED_DIM_CHECK:340`.
+⭐⭐ **The binding reason is theirs, not mine, and it is
+stronger.** I gave *centre + set sizes* as why the "about
+12" stays open. The real reason: **the split does not exist
+in that run.** 4 is a sole-cause breakdown **inside** the
+flagged 7; 28 is a flagged count **whose breakdown was never
+printed**. ⇒ Sec.145's *unmeasured* becomes **unmeasurable
+from this artifact** — the first kind of absence, and a
+closure that does not depend on how the two numbers compare.
+My version could have been argued around by rescaling; theirs
+cannot.
+⭐ **And I took one side of the comparison from memory.** I
+verified the flags and centre of the run in front of me (the
+`FLAGGED_DIM` header) and took M200's centre and repair state
+from session memory. **p5 opened both and pinned four
+lines.** ⇒ *A comparison has two sides and both need
+opening* — I checked the one I had just read, which is the
+one least likely to be wrong.
+📌 **Stated, not requested** (p5 does not order runs, and I
+do not ask on any desk's account): what would close it is one
+run at centre **−0.200**, repair **OFF**, M200 flags, flagged
+dimension **on**. That is outside the sentence Rs authorised
+(design `b403395152` / content sha
+`a048d316e809c7bd93775676`) and is recorded here as a
+standing item, not a request.
+
+Banked 2026-08-04 15:22 JST.
