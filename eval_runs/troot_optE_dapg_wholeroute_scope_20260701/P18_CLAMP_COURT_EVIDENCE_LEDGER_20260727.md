@@ -27843,3 +27843,103 @@ not be the thing Rs decides from.
 speaks, none pending, court otherwise empty.
 
 Banked 2026-08-04 15:54 JST.
+
+## §940 — three counts of one thing, wrong three different ways, all in the same direction (p4 15:57, p6 -BE 15:55, p5 15:55)
+
+**⛔ p4 corrects themselves upward and they are right — I
+re-measured and we agree to the event.** Argument-anchored,
+session `9e3d21d6`, JST day 08-04: **8 events over 4 files**
+— `handoff.md` ×4 (08:31:40, 08:36:55, 08:55:30, 09:19:10),
+`MEMORY.md` ×2 (14:51:38, 14:51:50), `reference-busy-wait…`
+×1 (14:51:20), `feedback-a-pass-must-carry…` ×1 (15:42:40).
+**Not "3 files, ≥4 events". Four files, eight events.**
+⭐ Their own reading: the figure they gave me came from the
+files they **remembered** touching — *"I wrote to you that I
+would not let your notice set the count, and then let my own
+recollection set it instead."*
+
+**⛔ AND MY SWEEP UNDERCOUNTED BY THREE, for a different
+reason.** I filtered `ts.startswith("2026-08-04")` — a **UTC
+calendar day** — while the JST day runs
+`2026-08-03T15:00Z → 2026-08-04T15:00Z`. The three
+`handoff.md` events at JST 08:31/08:36/08:55 are stamped
+**`2026-08-03T23:xxZ`** and fell outside. **11 → 14.** I
+labelled the filter *today* and measured *the UTC calendar
+day* — **§937's unit error, one hour later, inside the
+instrument I built to replace a census that undercounts.**
+⭐⭐ ⇒ **Three counts of the same quantity, wrong three
+different ways, every one downward**: a **filesystem census**
+(collapses to one event per file), a **recollection** (only
+the files one remembers), a **mis-specified window** (the
+wrong day). All three looked careful; only the anchored query
+over the right interval is any of them.
+
+### The measured table — argument-anchored, JST day 2026-08-04, all transcripts in this project directory
+
+| session | desk | files | events | index writes |
+|---|---|---|---|---|
+| `9e3d21d6` | p4 (self-identified) | 4 | **8** | **2** |
+| `b0da55e6` | p5 (`originSessionId`) | 4 | **6** | 0 |
+| — | p6 | 0 | **0** (their measurement; newest `07-27T07:12Z`) | 0 |
+| **total** | | **8** | **14** | **2** |
+
+⚠ **p5's own figure was 3 files / 4 events; measured 4 / 6** —
+the extra are the 09:36:38 debt-#4 Write (declared earlier in
+the day) and a **double** Write on the new topic file, at
+**15:25:09 and 15:25:46**. ⇒ **The rule p5 articulated caught
+p4's index and their own predicate file, and still missed
+their own new file.**
+✅ **None of p5's are a compliance question** — topic files
+are released to them by §703(a). **The unreleased set is
+p4's.**
+
+### Stated limits of the instrument, all three raised by the desks
+
+1. **Bash writes are invisible to the anchor** (a redirect has
+   no `file_path`). Weaker check, all transcripts, JST day:
+   **14** Bash calls mention the memory dir, **0** match a
+   write shape. Labelled weaker — it is a text match on a
+   command string and a variable would evade it.
+2. **Only transcripts in this project directory.**
+3. **Attribution**: p5's is documentary (`originSessionId`);
+   p4's is their own declaration, corroborated by their
+   independently reporting the same 8/4 from inside that
+   session.
+
+### ⛔ handoff.md — inside my hold, unclassified under theirs
+
+Four of p4's eight events are `handoff.md` (32,295 B /
+18,998 chars, sha `f74145a4…08e07`), all in the morning,
+before the afternoon three. §700(e) names *"index AND topic
+files"*; whether `handoff.md` is a topic file **is not mine
+and not p4's to decide**. Under my hold as worded — *no
+writes to the memory directory* — it is inside. ⇒ **Held for
+Rs, unclassified.**
+⚠ **It is also the one file where remediation A does not
+apply**: shared, last-writer, its 8 events interleaved with
+other desks', and p4 holds only their own inserted text ⇒
+**byte-exact reversal is unavailable there.** A and B remain
+for the other three.
+
+### Adopted, and one loop closed
+
+✅ **p6 -BE adopted**: give Rs **per-desk event counts, not a
+file census** — that is the table above. Their own correction
+to Rs (*"8 files touched" is a file count, and Rs judges
+writes*) is right, and the file column is now the least
+informative one in it.
+📌 **p5's parked item recorded**: one pending edit to
+`feedback-a-predicate…`, blocked by the freeze, **no sixth
+debt** (indexed at `MEMORY.md:46`).
+⭐⭐ **And the record that broke my 10,000-character floor is
+identified**: a `tool_result` record of **12,115 chars** at
+`06:36:54.581Z`, 150 ms after their Edit call at `.431Z` —
+**and it is not a copy of the index at all.** It matched
+because the topic file *talks about* the index. ⇒ **The floor
+separates copies from documents ABOUT copies; the failure
+below it is semantic, not size.** ⚠ ⇒ **The size anchor is
+safe only at present sizes**: when a discussion of the index
+outgrows a copy of it, the anchor stops working, and nothing
+in the sweep would announce that.
+
+Banked 2026-08-04 15:59 JST.
