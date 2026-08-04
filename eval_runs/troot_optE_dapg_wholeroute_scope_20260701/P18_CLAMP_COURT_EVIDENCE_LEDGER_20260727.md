@@ -26900,3 +26900,155 @@ the assumption pinning exists to destroy.** A pin that
 assumes what it is for is a caveat wearing a hash — the
 day's flag-versus-fix distinction, arriving one last time in
 the mechanism built to prevent it.
+
+## §926 — ⛔ the control I ordered could not be satisfied; and the exception list was counted from memory (p4 14:59, ordering ruling 20260804-1430 (a)+(b))
+
+**Custody, three ways each.** (a) `d72288b0a3` 14:45:56,
+`LABEL_ALL_ROWS_CHECK_20260804.txt` sha
+`ce8dde06f81cce4f…0143c` — **commit == worktree ==
+declared**. (b) `47c218aeca` 14:58:35,
+`FLAGGED_DIM_CHECK_20260804.txt` sha `23ffc08d623f44f…cb60`
+— same three-way MATCH. Each artifact's header declares the
+**driver** sha and both match the committed driver at their
+own commit (`449ec8294958f385…` @ (a),
+`ec6eb6b8294b7279…` @ (b); driver worktree clean at (b)).
+⇒ a same-turn pin, printed by the run itself — §925's fix,
+already standard on this desk.
+
+### (a) PASSES as declared — and a much stronger PASS was one command away
+
+36 DEPTH AUDIT lines = **2 SCOPE headers + 34 data rows**;
+data rows carrying an in-line label **6 → 34**. All **10**
+ATTRIBUTION rows byte-identical to the reference: totals
+112/2, 114/1, 114/1, 24/0; per-arm 0L 21/0, 0R 91/2, 1L
+24/0, 1R 90/1, 2L 24/0, 2R 90/1.
+⭐ **The denominator change is a correction, not a
+restatement.** The 2 SCOPE headers *are* the labels;
+counting them among the rows that lack an in-line label
+counted the label as one of the defects. **6/36 was never a
+rate of anything** — the numerator's query is unchanged, the
+denominator's was wrong. (The artifact header still carries
+`36 rows, 6 labelled (17%)` as its problem statement; the
+corrected denominator lives here.)
+⭐ **Their PASS is scoped to 10 numbers, and the reference is
+TWO driver commits behind** (`15c7979ea1` pool-size print,
+then `d72288b0a3`). Measured across both: of **282**
+reference `[steps]` rows, **252 byte-identical**, and after
+removing ONLY the inserted label text and the quoted line
+numbers, **0 reference rows remain unaccounted — every one
+reproduces**, with **22** rows new, all the pool-size print.
+⇒ The available control covered 282 rows and an untested
+intervening commit; the declared one covered 10. Guard on my
+own check: the normalisation touches `:<digits>` and
+`line <digits>` only — counts appear as `xN`, `N/M`, `(p%)`,
+`n = N` and are untouched, so it cannot erase what it
+verifies.
+
+### (b) ⛔ MY CONTROL WAS UNSATISFIABLE, and they said so instead of passing it
+
+I ordered *"existing rows byte-reproduce, only new rows
+added"* — quoted verbatim in their header. Rows in this
+artifact **quote their own driver line numbers**, so **no
+change to this file can ever satisfy it**. The predicate
+returns FAIL for a correct change and a wrong one alike ⇒
+*a predicate that cannot discriminate is not evidence*,
+arriving in a **control** instead of a measurement.
+⭐⭐ **And I had the satisfiable unit one item earlier.** (a)'s
+control was *every NUMBER reproduces*. I moved from counts to
+bytes and made the control stricter-looking and impossible.
+⇒ **A control's unit must be the quantity the claim is
+about, not the medium it is printed in.** A stricter control
+that measures the wrong thing is not stricter; it is
+off-target. I imposed it without running my own stage ① on
+it — name the claim and the check's unit before running.
+
+### Their accounting of the exception is wrong; their conclusion is right and holds more widely
+
+Declared: of 304 rows, **300 byte-identical, 4 differing**
+in quoted line numbers, 8 added. Measured (order-independent
+multiset over the 304 `[steps]` rows): **295 byte-identical,
+9 differing, 8 added**. The five missed are the
+`channels exercised`, `coverage -- MEASURED` and the second
+`by call surface` rows in **both** scopes — rows whose
+*channel names* embed a definition line (`arm_pair_min:1758`).
+⭐ **The list said "etc" and the count said 4.** One sentence
+carries an open enumeration (`3483->3524 etc`) and a closed
+count of it. **An enumeration that trails off cannot be
+counted; counting it counts your memory of it.** Third time
+today a "4" came from recalling which rows one had touched
+(§922, §924) — and this one landed inside the instrument
+built to stop exactly that.
+⭐ **The shift rule is false as stated and true in a stronger
+form.** Not "+8 above the first, +41 above the rest": the
+observed shift set is **{0, 8, 34, 35, 36, 41}**, and it
+equals exactly the cumulative net-insertion values of the
+five diff hunks (`-1437 +1437,9` / `-1558,0 +1567,26` /
+`-1982,0 +2017` / `-2013,0 +2049` / `-2114,6 +2150,11`).
+**29 of 29** quoted line-number tokens predicted exactly,
+**0 mispredicted**. ⇒ The honest control is not an exception
+granted by category but a **six-valued positive control**:
+every quoted line number moved by exactly the net insertion
+above it, **every count and rate unchanged**, 8 rows new,
+all FLAGGED SUBSET.
+⭐ **§910 inverted.** *A rule being correct does not make its
+basis correct* — here **a basis too small did not make the
+conclusion wrong, and that is why the miscount survived:
+nothing it touched came out different.** The same inspection
+produced the right generalisation about the *form* of the
+difference and the wrong one about its *extent*.
+
+### The first output, and the fences that must travel with the number
+
+7 of 653 rejected candidates flagged (**1.072%**); sole cause
+the other arm **x4**; multiplicity 1-part 4 / 2-part 3 (=7);
+whole set 251+402 = 653. sole/any **4/7 = 57.14%** vs
+**70/450 = 15.56%** ⇒ **3.673×**, one-sided binomial
+**p = 0.01379**. Every figure reproduces. The reference
+population containing the subset does not matter: disjoint
+contrast 4/7 vs 66/443 = **3.835×**, Fisher one-sided
+p = 0.0131.
+⭐ **The enrichment has no control arm.** `_ret_flagged` is
+carried only for the call that produced the far-arm minimum
+(`:1830`, correct per 20260803-1232) and consumed only at the
+far-arm rejection site (`:2047-2049`). ⇒ the same sole/any
+contrast **cannot be computed for a flagged mast call**, so
+*"flagged ⇒ enriched in sole cause"* cannot be separated
+from *"near-threshold rejections in general are enriched in
+sole cause"*. Bounded reading: **within far-arm rejections**
+— which is exactly what the "≈12" assumption needed, and is
+**not** evidence that the far arm is special.
+⭐ **The ceiling's scope must travel with the number.** The
+row says *"the far-arm entry of this row is a CEILING"*; the
+message says *"CEILING of 4 rejections a repair could undo"*.
+The repair sits in the shared wrapper (`:1766`,
+`caller is not None`) and fires on **any** suspect call in
+**any** channel ⇒ 4 bounds **one channel**, not repairs. The
+row is scoped; the message is what gets quoted.
+⭐ **"Two paths agree" is a TRANSPORT check.** `rej_flagged`
+(`:2048`) and `_f["n"]` (`:2154`) are both fed by
+`_cand_flagged` from the same site ⇒ agreement detects a
+**lost** bit, not a **wrong** one. It cannot corroborate
+flaggedness itself.
+⚠ `304 audit rows` carries no query while its neighbour
+`34 data rows` states one explicitly — same message, one
+item disciplined and one not. **Per CLAIM, not per message.**
+
+### Credited
+
+① They reported **the weaker true statement instead of the
+stronger false one**, and that is what exposed my
+unsatisfiable control — a desk that had simply written PASS
+would have hidden my error and their own miscount together.
+② The empty subset prints as a **RESULT** (`:1567-1570`),
+not omitted. ③ The *ceiling, not projection* fence lives in
+the **instrument**, not a memo ⇒ the retracted "≈12" cannot
+be re-derived from this row. ④ They named the authorization
+boundary — the flagged split at −0.200 is outside the
+sentence Rs authorised (design `b403395152`, content sha
+`a048d316e809c7bd93775676`) — and **left the asking to
+whoever needs the number**.
+
+**⇒ (a) PASS. (b) PASS on its conclusion, with its
+accounting corrected here (295/9/8, six-valued shift
+control). Neither enters a table. The unsatisfiable control
+was mine.** Banked 2026-08-04 15:09 JST.
