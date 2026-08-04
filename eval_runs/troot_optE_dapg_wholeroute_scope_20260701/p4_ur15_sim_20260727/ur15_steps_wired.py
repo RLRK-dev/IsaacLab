@@ -1461,13 +1461,24 @@ def _depth_audit_report(scope="at exit -- cumulative over the WHOLE run"):
     # nothing saying which.  Two desks banked the mid-run block believing it was the run.  The
     # fix is a string: no count, no denominator and no branch changes.
     print(f"[steps] DEPTH AUDIT SCOPE: {scope}")
+
+    def _pr(msg):
+        # ⛔ EVERY row in this block says which block it is.  Thirty of the thirty-six did not:
+        # the labels went on the three rows I was looking at and not on their neighbours, and the
+        # first reader to grep the prefix by mistake was the author of the labels.  Skips the rows
+        # that already carry it and the SCOPE header itself.
+        if (msg.startswith("[steps] DEPTH AUDIT") and "[at exit" not in msg
+                and "[up to the interleave" not in msg and "DEPTH AUDIT SCOPE:" not in msg):
+            msg = msg.replace("[steps] DEPTH AUDIT", f"[steps] DEPTH AUDIT [{scope}]", 1)
+        print(msg)
+
     ck = max(a["checked"], 1)
-    print(f"[steps] DEPTH AUDIT: {a['calls']} calls, {a['checked']} unsaturated, {a['neg']} negative")
+    _pr(f"[steps] DEPTH AUDIT: {a['calls']} calls, {a['checked']} unsaturated, {a['neg']} negative")
     # The denominator, printed before any rate: which channels this run actually asked.  A channel
     # absent from this list was never entered, and no statement about it is supported either way.
     # Rate, not count.  arm_pair_min runs per candidate and column_gap over a handful of geoms, so
     # raw counts compare call volume rather than mechanism (p5 -270(c)).
-    print("[steps] DEPTH AUDIT channels exercised -- violations / calls (rate): "
+    _pr("[steps] DEPTH AUDIT channels exercised -- violations / calls (rate): "
           + " | ".join(
               f"{co.co_name}:{co.co_firstlineno} {a['chan_viol'].get(co, 0)}/{n} "
               f"({100.0 * a['chan_viol'].get(co, 0) / n:.5f}%)"
@@ -1475,7 +1486,7 @@ def _depth_audit_report(scope="at exit -- cumulative over the WHOLE run"):
     _known = {"arm_pair_min", "column_gap", "furniture_gap", "jaw_gaps", "gap", "release_ctrl"}
     _ran = {co.co_name for co in a["chan"]}
     _missed = sorted(_known - _ran)
-    print(f"[steps] DEPTH AUDIT channels NOT exercised this run: {_missed if _missed else 'none'}"
+    _pr(f"[steps] DEPTH AUDIT channels NOT exercised this run: {_missed if _missed else 'none'}"
           + ("  <- the rate below says nothing about these" if _missed else ""))
     # ⭐ p6 via p18, 20260803-1198(ii): "asked and clean" and "asked too few times to tell" are not
     # the same claim, and a 0/13 reads like the first while being the second.  At the arm channel's
@@ -1485,45 +1496,45 @@ def _depth_audit_report(scope="at exit -- cumulative over the WHOLE run"):
              for co, n in a["chan"].items() if a["chan_viol"].get(co, 0) == 0 and n < 1081]
     _measured = [f"{co.co_name}:{co.co_firstlineno}"
                  for co, n in a["chan"].items() if a["chan_viol"].get(co, 0) or n >= 1081]
-    print(f"[steps] DEPTH AUDIT coverage -- MEASURED: {_measured or 'none'} | "
+    _pr(f"[steps] DEPTH AUDIT coverage -- MEASURED: {_measured or 'none'} | "
           f"ASKED BUT TOO FEW TIMES TO TELL: {_thin or 'none'} | NEVER ASKED: {_missed or 'none'}")
     _bi = max(a["bound_informative"], 1)
-    print(f"[steps] DEPTH AUDIT floor 1 (below the bounding-sphere gap): {a['below_lower']} "
+    _pr(f"[steps] DEPTH AUDIT floor 1 (below the bounding-sphere gap): {a['below_lower']} "
           f"({100.0 * a['below_lower'] / ck:.4f}% of unsaturated) -- but its DENOMINATOR is the "
           f"{a['bound_informative']} calls whose spheres were apart enough for the bound to say "
           f"anything ({100.0 * a['bound_informative'] / ck:.2f}% of unsaturated), giving "
           f"{100.0 * a['below_lower'] / _bi:.4f}% within that visible domain.  Outside it the bound "
           f"is vacuous and a clean sheet from floor 1 is not evidence.")
-    print(f"[steps] DEPTH AUDIT floor 2 (scalar disagrees with its own segment): {a['seg_disagree']} "
+    _pr(f"[steps] DEPTH AUDIT floor 2 (scalar disagrees with its own segment): {a['seg_disagree']} "
           f"({100.0 * a['seg_disagree'] / ck:.4f}%) -- {a['seg_over']} claiming MORE room than the "
           f"segment (over-acceptance), {a['seg_under']} claiming LESS (over-rejection)")
     if not (a["below_lower"] or a["seg_disagree"]):
-        print("[steps] DEPTH AUDIT: clean -- every unsaturated call agreed with its own segment "
+        _pr("[steps] DEPTH AUDIT: clean -- every unsaturated call agreed with its own segment "
               "exactly and no negative fell below its pair's bounding-sphere gap")
         return
-    print("[steps] DEPTH AUDIT by call surface: "
+    _pr("[steps] DEPTH AUDIT by call surface: "
           + ", ".join(f"{k} x{v}" for k, v in sorted(a["by_caller"].items(), key=lambda kv: -kv[1])))
-    print(f"[steps] DEPTH AUDIT localisation: {len(a['pairs'])} distinct geom pairs; top pairs = "
+    _pr(f"[steps] DEPTH AUDIT localisation: {len(a['pairs'])} distinct geom pairs; top pairs = "
           + ", ".join(f"{p[0]}<->{p[1]} x{c}"
                       for p, c in sorted(a["pairs"].items(), key=lambda kv: -kv[1])))
     # ⭐ p6 via p18 20260803-1235(c): the [:6] head was throwing away 99.6% of the tally, and the
     # model read (common-mode versus independent) needs the whole distribution, not its crown.
     # ⭐ Rates now, not counts (p18 1191(iii)): every unsaturated call is counted against its own
     # type pair, so the mechanism read no longer measures how often each pair happens to be asked.
-    print("[steps] DEPTH AUDIT mechanism -- violations / calls per geom-type pair (mesh x mesh is "
+    _pr("[steps] DEPTH AUDIT mechanism -- violations / calls per geom-type pair (mesh x mesh is "
           "arm against arm, cylinder x mesh is arm against the stem and foot): "
           + " | ".join(
               "x".join(mujoco.mjtGeom(t).name.replace("mjGEOM_", "") for t in tk)
               + f" {a['type_pairs'].get(tk, 0)}/{n} ({100.0 * a['type_pairs'].get(tk, 0) / n:.5f}%)"
               for tk, n in sorted(a["type_all"].items(), key=lambda kv: -kv[1])))
     if _GEOMDIST_REPAIR:
-        print(f"[steps] DEPTH AUDIT repair ACTIVE: {a['repaired']} values replaced by their own "
+        _pr(f"[steps] DEPTH AUDIT repair ACTIVE: {a['repaired']} values replaced by their own "
               f"segment ({a['repair_zero']} where the scalar was exactly zero, "
               f"{a['repair_signed']} keeping the scalar's sign), {a['unrepairable']} left alone "
               f"because the segment was degenerate too")
     else:
-        print("[steps] DEPTH AUDIT repair OFF -- values reported by the library were used unchanged")
-    print(f"[steps] DEPTH AUDIT seg_under split: {a['seg_under_contact']} asserted CONTACT "
+        _pr("[steps] DEPTH AUDIT repair OFF -- values reported by the library were used unchanged")
+    _pr(f"[steps] DEPTH AUDIT seg_under split: {a['seg_under_contact']} asserted CONTACT "
           f"(dv <= 0, answerable by the contact list), {a['seg_under_narrow']} merely too narrow "
           f"(dv > 0, a magnitude error the contact list cannot speak to)")
     # ⭐ The decider tally, PRINTED.  A counter that accumulates and never speaks is the fault
@@ -1535,30 +1546,30 @@ def _depth_audit_report(scope="at exit -- cumulative over the WHOLE run"):
     if _d["n"]:
         def _fmt(dd):
             return ", ".join(f"{k} x{v}" for k, v in sorted(dd.items(), key=lambda kv: -kv[1]))
-        print(f"[steps] DEPTH AUDIT decider [{scope}] (sole cause, one candidate one vote, "
+        _pr(f"[steps] DEPTH AUDIT decider [{scope}] (sole cause, one candidate one vote, "
               "untruncated): "
               f"of {_d['n']} rejected candidates -- {_fmt(_d['sole']) or 'none has a sole cause'}")
-        print(f"[steps] DEPTH AUDIT decider [{scope}] (any cause, a candidate counts once per "
+        _pr(f"[steps] DEPTH AUDIT decider [{scope}] (any cause, a candidate counts once per "
               "part that "
               f"rejected it): {_fmt(_d['any'])}")
-        print(f"[steps] DEPTH AUDIT decider [{scope}] multiplicity (parts rejecting one "
+        _pr(f"[steps] DEPTH AUDIT decider [{scope}] multiplicity (parts rejecting one "
               "candidate): "
               + ", ".join(f"{k} part(s): {v}" for k, v in sorted(_d["mult"].items()))
               + "  ⚠ a sole-cause row can only speak for the 1-part column")
-    print(f"[steps] DEPTH AUDIT sign reference: {a['sign_checked']} minima cross-checked against "
+    _pr(f"[steps] DEPTH AUDIT sign reference: {a['sign_checked']} minima cross-checked against "
           f"the solver's own contact list -- {a['sign_ghost']} asserted contact the solver does not "
           f"record (ghost), {a['sign_missed']} asserted clearance over a pair the solver IS "
           f"contacting (miss).  ⚠ bounds neither way: contacts live inside the margin band only, "
           f"and the list is per pair while the minimum is one pair.")
-    print(f"[steps] DEPTH AUDIT rejection attribution: of {a['rej_total']} candidates dropped by "
+    _pr(f"[steps] DEPTH AUDIT rejection attribution: of {a['rej_total']} candidates dropped by "
           f"the arm-clearance test, {a['rej_flagged']} were dropped by a call the floors had "
           f"flagged ({100.0 * a['rej_flagged'] / max(a['rej_total'], 1):.3f}%) -- measured, not "
           f"bounded.  Candidate evaluations: {a['cand_evals']}; violations per evaluation = "
           f"{(a['below_lower'] + a['seg_disagree']) / max(a['cand_evals'], 1):.2f}")
-    print("[steps] DEPTH AUDIT: the rows below are ILLUSTRATIVE, capped at twelve.  Read the "
+    _pr("[steps] DEPTH AUDIT: the rows below are ILLUSTRATIVE, capped at twelve.  Read the "
           "mechanism off the counters above, not off them.")
     for caller, pr, dv_mm, seg_mm, bnd_mm, ctr_mm, cut_mm in a["rows"]:
-        print(f"[steps] DEPTH AUDIT row: {caller} geom {pr[0]}<->{pr[1]} returned {dv_mm:.3f} mm, "
+        _pr(f"[steps] DEPTH AUDIT row: {caller} geom {pr[0]}<->{pr[1]} returned {dv_mm:.3f} mm, "
               f"its own segment {seg_mm:.3f}, Sum-r {bnd_mm:.1f}, centres {ctr_mm:.1f}, "
               f"cutoff {cut_mm:.1f}")
 
