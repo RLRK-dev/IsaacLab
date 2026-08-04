@@ -27251,3 +27251,67 @@ dimension **on**. That is outside the sentence Rs authorised
 standing item, not a request.
 
 Banked 2026-08-04 15:22 JST.
+
+## §930 — the header shares the rows' vocabulary, so the rows' query keeps catching it (p6 -AY 15:25, p5 debt #5 15:26)
+
+### p6 -AY — both fixes verified, and one number in the paragraph accepting the lesson
+
+Commit `8669d304b5` (15:25:26, *"Put the centre on the
+number, and withdraw the instrument claim for −0.200"*),
+ledger sha `ed8b3b774ebc514dd68131891ab5d608…ae187` **prefix
+MATCH**, **commit == worktree**, **exactly one line
+changed** (`:166`), 8 pipes.
+✅ **The row now names the centre**: `+0.1500`, `C1`, `既定`
+and `−0.200` are all present where three minutes earlier
+none were. ✅ **And they withdrew their own claim from three
+minutes before** — *"the instrument the row asked for
+exists"* was **false at −0.200**; correct form: *built at
+the default centre, not yet at −0.200*.
+⚠ **Their parenthetical "FLAGGED_DIM は 9 本" is the grep
+count, not the instrument's.** Measured:
+`grep -c "FLAGGED SUBSET"` = **9**; anchored on the row
+marker (`^[steps]`) = **8**. The ninth is the **header
+comment at `:8`**. Their conclusion is untouched — M200
+returns **0** under either reading — but the count is right
+only under the reading that includes a comment.
+⭐⭐ **The general form, third instance today.** A file's
+header **talks about** the rows, so **any query written in
+the rows' vocabulary will also match the header** — the
+SCOPE headers in the label denominator, the `:818` false
+positive, and now the comment line, all the same mechanism.
+⇒ **Anchor a count on the row's structural marker, never on
+its vocabulary.** And note where this one landed: inside the
+paragraph accepting the lesson about it. **Acceptance is not
+transfer.**
+
+### p5 — index debt #5, and the lesson is about the GRADE of an utterance
+
+Verified on disk: the topic file exists (**4,040 bytes**,
+15:25), frontmatter well-formed with `type: feedback` and a
+slug matching the intended index line;
+`grep -c` for that slug in `MEMORY.md` = **0** ⇒ **the index
+freeze holds** and this is a debt, not an edit. Their
+duplicate-guard check
+(`project_t_root_coord2_r1r3_narrowing_2026-05-13`, a
+2026-05-13 project record, word overlap only) is recorded
+**in the file rather than asserted in the message**, which
+is the right place for it.
+⇒ **Index debts now 5**: §752(e), §781, §816, §923, and
+this. All p5's; all awaiting Rs's consolidated gate.
+⚠ **Observation with its limit:** `MEMORY.md`'s mtime is
+**2026-08-04 14:51**, after the freeze. mtime alone cannot
+say whether content changed, or by whom, and this file has
+no version history — so this is recorded as an
+**observation, not a finding**, which is precisely the grade
+their new topic is about.
+⭐ **Their lesson is the one that produced §928.** *When you
+cannot verify, the correct move is a question carrying its
+limit — not silence, not an assertion; a question is allowed
+to be wrong and an assertion is not.* They could not open
+the artifact, asked from the shape of a bare pair of
+numbers, landed one number over, and a real defect came out.
+⇒ **The lesson is the GRADE of the utterance, not its
+content** — and the grade is what made the miss harmless and
+the hit useful.
+
+Banked 2026-08-04 15:26 JST.
