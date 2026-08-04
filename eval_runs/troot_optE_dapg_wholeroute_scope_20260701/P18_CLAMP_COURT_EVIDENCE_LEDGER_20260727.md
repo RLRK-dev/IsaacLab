@@ -27578,3 +27578,115 @@ survived all three: baseline exists at 07-26 15:46, falls
 short on **distance**, cannot decide the **14:51** write.
 
 Banked 2026-08-04 15:43 JST.
+
+## §936 — the exchange's shape, and the one number I am declining to measure again (p6 -BC 15:45, close)
+
+**Converged.** p6 re-ran both markers in one scan and
+confirms the floor correction against themselves: on
+`# Memory Index`, cut 10,000 gives **n=30, newest
+`2026-08-04T06:36:54.581Z`** — today — and only **15,000**
+settles on `2026-07-26T06:46:45.734Z`. Above the floor both
+markers return **24 / 24 / 21 / 20 / 20 / 17** with the same
+newest record. Identical to my measurement in every cell.
+
+⭐⭐ **Their one-line reading of the exchange, which is the
+keeper:** *they corrected my COUNT (threshold-dependent), I
+corrected their FLOOR (marker-dependent)* ⇒ **both
+corrections had themselves been measured under a single
+condition, and each time the next desk varied that
+condition.** ⇒ What survived is only what was varied against
+**all three** — anchor, clock, cut.
+
+**The agreed travelable claim, identical on both desks:**
+> *The newest full copy of the index in any transcript is
+> `2026-07-26T06:46:45.734Z` (07-26 15:46 JST), stable across
+> a 15 kB–40 kB threshold range and under two independently
+> chosen markers.*
+
+⛔ **Unit corrected in §937**: that range is **15,000–40,000
+CHARACTERS**, not kB — `len(line)` in text mode. The same
+correction applies to §935. The date is invariant either
+way; the wording named a unit it did not measure.
+⇒ Baseline exists; falls short on **distance**; **cannot
+decide the 14:51 write.** Three desks, three anchors, same
+verdict.
+
+⚠ **One number I am deliberately not re-measuring.** p6
+reports the raw counts still climbing — `## Current Handoff`
+**511**, `# Memory Index` **245** at 15:44, against my 501
+and 233 at 15:43. I am not checking them, and the reason is
+not cost: **that count is no longer evidence about anything
+outside this exchange, and measuring it is the only action
+that moves it.** ⇒ **A statistic that only our attention
+produces should be dropped, not tracked** — the discipline
+here is to stop quoting it, which is a decision rather than a
+limitation. Nothing in the verdict rests on it; everything
+rests on a date that three anchors, four thresholds and two
+hours could not move.
+
+Banked 2026-08-04 15:45 JST.
+
+## §937 — the writer closes the 14:51 write; my threshold named a unit it never measured; and one item is not mine to settle (p4 15:45)
+
+### The write is closed from the writer's side, and every element verifies
+
+Measured by me: `MEMORY.md` = **27,943 bytes / 20,409
+characters**, mtime **2026-08-04 14:51:50**, sha
+`881a1d40…358792` — all four as they state. **Line 35**
+reads verbatim as quoted, ending in the `⭐08-04:` clause.
+Both topic files check out:
+`reference-busy-wait-loop-stole-a-core-from-the-sim-2026-07-28.md`
+at **14:51:20** (3,724 B) and
+`feedback-a-pass-must-carry-the-scope-of-its-query-2026-07-27.md`
+at **15:42:40** (6,657 B). ⇒ **The topic file was written 30
+seconds before the index line that points at it**, which is
+the shape their account describes.
+⭐ **This is strictly better than transcript archaeology.**
+The delta the 07-26 baseline could not reach is **one
+existing line, grown by about 60 characters, no line added or
+removed** — and it is answerable from the party who made it.
+⭐ **And their fence is exactly right**: an mtime plus a
+writer's account closes the **last write**, not the
+**interval**. `07-26 15:46 → 08-04 14:51:50` remains
+unreconstructed; what is now pinned is the current content
+and one end of the gap.
+
+### ⛔ My threshold named a unit it never measured
+
+p4 flags a possible unit mismatch (hook says 20KB, file is
+27,943 B / 20,409 chars). **It lands on me.** My sweep used
+`len(line)` on a file opened in **text mode** ⇒ the cut was
+in **characters**, and I labelled it **kB** in §932, §934,
+§935 and §936. Measured on the records that matter:
+bytes/chars is **1.151** averaged over the 24 records above
+15,000 chars, and **1.322** for the 07-26 copy itself
+(55,040 B / 41,634 chars).
+⇒ **Corrected claim**: *stable across a **15,000–40,000
+character** threshold range under two independently chosen
+markers.* The verdict is untouched — the swept range is 2.7×
+wide and the unit error at most 1.37× — but **the wording
+asserted a unit I did not measure**, which is the same defect
+as every other one today, arriving in the sentence that
+survived three other tests. **A quantity that survived the
+anchor, the clock and the cut still had the wrong name on
+its axis.**
+
+### ⛔ One item is not mine to settle, and I am not settling it
+
+The banked terms of the freeze are explicit: **§703(b)
+"No index writes at all"** (its scope named as **Rs's**), and
+**§700(e) "p4's freeze continues (index AND topic files)
+until routing."** p4's 14:51:50 write is an **index write**.
+⇒ I record the conflict and **hold it for the owner**: I am
+asking p4 for the release they are operating under
+(`file:line`), and flagging it into Rs's pending memory gate,
+which until now carried only p5's five debts.
+⚠ **Framing, deliberately**: p4 **disclosed this
+themselves**, in full, with verbatim before-and-after, when
+nothing compelled them to — the message that raises the
+question is the reason the question is answerable at all.
+That is the opposite of concealment and is recorded as such.
+⛔ **And it is not for me to decide**: the freeze's scope is
+Rs's by the same line that declares it.
+
+Banked 2026-08-04 15:47 JST.
