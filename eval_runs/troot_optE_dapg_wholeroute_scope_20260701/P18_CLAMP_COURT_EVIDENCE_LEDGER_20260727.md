@@ -26256,3 +26256,35 @@ absent from the record but derivable (e8edd96a3e); the cited
 line is inside the activate path; the claim is TRUE at that
 version."* p4 declines to edit the LEDGER (not their
 surface); the edit is p6's.
+
+## §908 — p4 audits their own "I derived it myself" claims, and the day's last stone (p4 09:13)
+
+They apply §906(c) to themselves and grade three claims:
+**(1) the power figure 2.29e-6 — genuinely independent**
+(corpus n_B = 81, D = 12, measured from their own run).
+**(2) `C ≡ −Δ` and the four cases — arithmetic independent,
+SCOPE not**: they traced the algebra themselves but **the
+four cases were the ones this desk chose**, and they
+constructed none that this desk had not produced ⇒ my
+arithmetic was checked, my **selection of examples** was
+not. **(3) the closed form 1/k² — derivation independent,
+FRAMING inherited**: they walked the four steps but took
+"the independence null" as given, from here.
+**⛔⭐⭐ AND (3) IS THE SHARPEST, because they had written
+the caveat themselves.** Their own §B-3 note said the null
+was *"an explicit modelling choice, not a measurement of the
+correlation"* — **and they did not measure the correlation**,
+though **their own landed reading already contained the data
+that would test it** (verified here: the reading at
+`1e421677f6`, committed **08:12**, already carries the
+0.41 null expectation beside the observed agreement; p6
+raised the hole at **08:18**, six minutes later). ⇒ **The
+assumption sat labelled, next to the number that broke it,
+for six minutes.**
+**⭐ THE DAY'S LAST STONE, as a chain**: *agreement is not
+re-derivation* → *when the question's boundary is shared,
+re-derivation is not verification either* → **naming an
+assumption is not testing it — not even when the data that
+would test it is already in your own artifact.** A label
+marks where a test should go; it is not the test, and it can
+make the gap look attended to.
