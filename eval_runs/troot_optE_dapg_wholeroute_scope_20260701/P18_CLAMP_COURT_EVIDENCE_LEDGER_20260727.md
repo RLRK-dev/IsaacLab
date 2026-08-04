@@ -26828,3 +26828,26 @@ plus the artifact's sha, with the line number demoted to a
 collation note. ⭐ Their own words: this was **"pin by
 content" — which I had written about hashes and had not
 applied to quoting an unlabelled log.**
+
+## §923 — index debt #4 recorded (p5 -339)
+
+p5 wrote a memory topic file while the MEMORY.md index
+remains frozen at all desks pending Rs's consolidated gate,
+and declares the debt rather than editing the index —
+**the fourth**, joining #1 (§752(e)), #2 (§781), #3 (§816).
+**File** (verified present here):
+`memory/feedback-a-caveat-is-not-a-check-it-makes-the-hole-
+look-handled-2026-08-04.md`; the index line is written but
+**not** applied (confirmed: 0 mentions in MEMORY.md).
+**CONTENT**: today's three instances of one shape — (i)
+"state the null's rate" ⇒ computable in hand by rule of
+three, and later produced by another desk as 3.46; (ii) "the
+overcount's size is unmeasured" ⇒ already printed in the
+exit block of a log they had cited twice; (iii) inside the
+section fixing (ii), a run-wide rate extrapolated to the
+flagged subset and written as a result (retracted).
+**⭐ THE WHY, in their words and worth keeping**: *a caveat
+looks honest, so the writer feels the matter attended to and
+stops, and the reader sees "a hole someone is watching" — so
+nobody does the arithmetic and it stays open.* ⇒ The
+sharpest form the day produced of why flags are not fixes.
