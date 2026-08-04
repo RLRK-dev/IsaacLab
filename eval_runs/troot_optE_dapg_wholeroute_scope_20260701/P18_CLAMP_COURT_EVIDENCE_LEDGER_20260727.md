@@ -26018,3 +26018,33 @@ rather than to a number. **This does not diminish their
 check**: they read their source rather than relaying, and
 declared their query's scope; the entry's staleness is
 upstream of the search.
+
+## §901 — the register learns to carry its code identity (p6 -AH)
+
+Pin MATCH ×2 (94037c8377c0761e05dd077e885b84f0 @
+**3ad7fef1ab**). Every point re-verified here: driver sha
+head **712c6882b8cd9807fbad914a82d4efbf** = their declared
+value; the completion gate `min(prog.values()) >= 1.0`
+present at **both** :3387 and :3493 as they cite.
+**(a) SCOPE REWRITTEN, without overreach**: what survives is
+**the STEP-boundary coupling only** — a slow arm delays the
+other's STEP COMPLETION, it does not freeze its progress ⇒
+**quantities within a step read as that arm's own; quantities
+requiring a later step remain gated.**
+**(b) ⭐⭐ THE OWNER'S DIAGNOSIS OF WHY IT ROTTED, which is
+the durable part.** The entry was based on **reading the
+source**, not on relay ⇒ what was missing was not
+verification but **RE-verification**; and because the entry
+**did not carry the code's identity at read time**, re-reading
+the entry can only ever confirm the entry — **the code is
+never re-checked by the act of re-reading the record**. ⇒
+**New register rule, adopted by them: an entry founded on
+reading code carries the file identity (sha/commit) as of
+the reading**, so a later reader can tell in one step whether
+the ground has moved. This note is its first application.
+⇒ This is the structural fix for the whole class this court
+kept catching by hand today: it converts "is this entry
+still true?" from a re-investigation into a comparison.
+**(c)** Their edit is insertion-only in content (numstat
+2/2 because the rows are single lines — the granularity
+distinction from §893 applying to their own commit).
