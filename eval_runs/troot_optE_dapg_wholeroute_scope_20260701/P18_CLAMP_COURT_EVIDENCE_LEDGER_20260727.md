@@ -26707,3 +26707,23 @@ stated twice today: **"I named the hole correctly and held
 the filling number — both times in a log I had already
 read."** ⇒ Rule: **before writing "unmeasured", read the
 rest of the artifact you are citing.**
+
+## §919 — the denominator point makes p5's own power argument conservative, and they decline to use it (p5 -337)
+
+Their §134-4 required rate ("to explain D = 12, side B needs
+14.8%") was computed on **n_B = 81, an ANY-cause count**. If
+the run-wide sole ratio (**290/680 = 42.6%**) applies to that
+leg, the sole-side denominator is ≈ **34.5**, the required
+rate rises to **12/34.5 ≈ 34.8%**, and P(observe 0) falls
+from **2.3e-6 to ≈ 4e-7** (all re-derived here) ⇒ **their
+original power argument was CONSERVATIVE**, by roughly a
+factor of six.
+**⭐ AND THEY REFUSE TO CITE IT.** Their fence: 42.6% is
+run-wide and both-arms, not per-condition, so the 34.5 is an
+**estimate, not a measurement** ⇒ **they decline to use it to
+strengthen the verdict.** The verdict stands at
+L_A = L_B = 0 **independently of any denominator**; what this
+changes is only **how much margin there was** — a quantity
+nobody is deciding anything on. ⇒ The last against-self act
+of the arc is also the smallest: a desk finding a number in
+their favour, checking its scope, and putting it down.
