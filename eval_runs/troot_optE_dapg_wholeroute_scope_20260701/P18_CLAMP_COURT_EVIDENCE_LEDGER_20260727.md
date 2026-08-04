@@ -28450,3 +28450,159 @@ delivery**. ⇒ Both directions of the rule now stand:
 not create a second delivery either.**
 
 Banked 2026-08-04 16:18 JST.
+
+## §949 — ⛔ a three-way lock on MEMORY.md that fires on whoever touches it next; and a fix that erased the evidence of what it fixed (p4 16:22, p6 -BK 16:20, p5 16:19)
+
+### ⛔ ESCALATION — the three-way lock (p4), verified where verifiable
+
+Three rules meet on one file and point in three directions:
+1. **An instruction to act** — a size rule fires on any edit
+   to `MEMORY.md` telling the editor to compact it below
+   **17.1K now**; it fired on p4 **twice at 14:51**.
+2. **A rule forbidding acting alone** — ✅ **verified on
+   disk**, `MEMORY.md`'s own header:
+   *「目標 17.1K までの残りは pass14 同型の coordinated pass
+   （他 pane 行の要約を含むため単独実施しない）」*.
+3. **A hold forbidding acting at all** — the freeze, §703(b),
+   scope Rs's.
+⚠ **What I could NOT locate, stated as such**: a *configured*
+hook producing (1). Closed query — `~/.claude/settings.json`
+PostToolUse (**6** hooks, none memory- or size-related),
+`/home/rlrk/IsaacLab/.claude/settings*.json` (SessionStart
+and UserPromptSubmit only), `grep -rln "MEMORY\.md"
+~/.claude/hooks/` = **0**, `grep -rn "17\.1|17100|24\.4|
+24400" ~/.claude/hooks/` = **0**, and `post_edit_review.sh`
+has no size/compact branch. ⇒ p4's receipt is **first-hand**
+and I do not doubt it; the producer is most likely the
+**memory subsystem speaking to the editing agent**, not a
+shell hook. ⭐ **That strengthens the lock rather than
+weakening it: it cannot be switched off by editing a hook
+file, and it will fire on whoever edits next.**
+✅ **And the unit confirms §937/§942**: 20,409 characters
+against the rule's own "20KB" label ⇒ the label is
+**character-based**, while the file is **27,943 bytes** —
+the two disagree by **37%** on this file.
+⇒ **For Rs's decision.** Right now nobody is touching the
+file, **which is exactly why the conflict would go unnoticed
+until someone does.** No desk is proposing a resolution; it
+is Rs's by the same line that makes the freeze Rs's.
+
+### ⭐⭐⭐ p6 — the remediation entered the corpus and erased the evidence of the defect it fixed
+
+Their selector counted **371**, of which **27** are not
+dispatches (the string inside old heredocs) ⇒ same false-YES
+shape as p4's; tightened to `MSG=` + `cat <<'EOF'` gives
+**216**. ⚠ **Loose vs tight did not change the verdict** —
+*the concern was real and did not affect the answer*, which
+is the accurate way to say it.
+⛔ **But the re-run itself moved 2 → 0**, because **their
+16:11 remediation message contained both shas**. ⇒ **The fix
+entered the corpus and made the class it fixed
+undetectable.** Anyone running the same audit tomorrow reads
+**0** and concludes there was never a gap.
+⭐ **Third member of the family**: §932 *the corpus records
+the conversation* → p4 *the selector enters its own result
+set* → p6 **the remediation enters the corpus and erases its
+own defect class**.
+✅ Their restatement with the cut: *"before the 16:11
+remediation: 2 unpinned; after: 0 — and the 0 is the fix
+being in the corpus, not the absence of a defect."*
+⇒ **This applies to my own ledger.** Every audit figure in
+§946–§948 is **cut-dependent** and will read **lower** on
+re-run, because the corrective dispatches are now inside the
+corpus they measure. **Reader warning: the cuts are
+§946 = 16:12, §947 = 16:17, §948 = 16:18.**
+
+### p4's two self-corrections
+
+✅ **Their floor closes on the marker axis**: they read all
+**47** unselected blocks; no fifth correction ⇒ the **4**
+stand as measured there.
+⛔ **But the denominator moved while they measured it** —
+**120 at 16:15, 126 at 16:20**, the six added being their own
+messages in this exchange ⇒ the figure reads *"4 of a
+population that grows as I report it"*, not *4 of 120*. **My
+window mode, hit on the denominator after they reported it on
+the selector.**
+⛔ **And their predicate was wrong**: they audited
+**corrections**; the channel also carries **decisions** — my
+§936 was one — and they made one that never left their prose:
+at **14:52:07** they declined the size rule's demand to
+compact `MEMORY.md`, and told only Rs. ⇒ That decision is
+what surfaced the lock above.
+
+### p5 — the parked item amended, for the stated reason
+
+Their single pending edit now carries **two** things: (a) the
+self-closing loop already parked, and (b) **§948's four
+selector failure modes, sourced from this ledger rather than
+from their recollection**. Reason given: as parked it named
+only (a), so (b) would have depended on remembering — **the
+medium the day disqualified**. Still one pending write, no
+sixth debt.
+
+### ⚠ Delivery, recorded rather than assumed
+
+m1459 showed as **unsubmitted** in p6's input
+(`Pasted text #92`) after two submit attempts (Tab, then
+Enter) while they were mid-turn, so I recorded it as **not
+delivered** and re-sent the substance as the short **m1460**.
+⛔ **That was wrong — see §950.** p6 reports, and their -BL
+proves, that m1459 **did** reach them: -BL answers §948's
+four modes by name. **The input-box state is not a delivery
+test.**
+
+Banked 2026-08-04 16:22 JST.
+
+## §950 — a fifth axis that is not the selector, and the first instrument today that erred the safe way (p6 -BL 16:21, -BM 16:22)
+
+### ⭐⭐⭐ The fifth axis: not the selector, not the count — the CORPUS
+
+§948 closed with *all four are the selector rather than the
+count*. p6 shows their -BK finding **is neither**: **the
+selector was correct and the corpus moved.** Their
+remediation entered the corpus and erased the evidence of the
+defect it fixed (before 16:11 = **2** unpinned; whole session
+= **0**; the difference is their own remediation message
+carrying both shas).
+⇒ **Four modes say *the instrument is wrong*. The fifth says
+*the instrument is right and the thing measured was changed
+after the measurement*.** Same query, same anchor, different
+answer.
+⭐⭐ **And the property all five share is why they matter**:
+**every one makes the audit look BETTER than reality** — more
+delivered, fewer defects. ⭐ **The fifth returns 0, so nobody
+investigates it.** ⇒ **Two kinds of lying zero now stand side
+by side**: *the predicate is too tight to fire* (§942) and
+**the signal was removed by the repair** (here).
+⇒ **Remedy, same discipline as §944**: an audit over a living
+corpus must **state its cut** and either exclude the
+remediation or separate it by time. p6's declaration is
+already restated that way.
+
+### ⛔ My delivery readback was wrong, and wrong in the rare direction
+
+**m1459 DID reach p6.** Their -BL answers §948's four modes
+**by name** and assigns their own failures to them ⇒ the
+content was in hand and had already acted, while the pane's
+input box still showed `Pasted text #92`. **Both were true at
+once.**
+⇒ **The input-box state is not a delivery test.** My
+predicate — *body token visible / paste still in the input* —
+fails in **both** directions: it missed a delivered message
+because the pane **wrapped** the token (§926 addendum), and
+now it reported an undelivered message that had been
+delivered. **The reliable evidence of delivery is the
+destination ACTING on the content**, which is what p6
+supplied.
+⭐⭐ **And this is the first instrument today that erred toward
+WORSE than reality.** Every other one erred toward better —
+delivered-looking, clean-looking, fewer defects. ⭐ **A
+conservative instrument is safe and it manufactures work that
+does not exist**: I was one step from pushing p6 to re-send
+something they already had, which by my own ruling would have
+been bookkeeping and not delivery.
+✅ **m1460 therefore stands as a duplicate, not a delivery** —
+and I am recording it as such rather than counting it.
+
+Banked 2026-08-04 16:23 JST.
