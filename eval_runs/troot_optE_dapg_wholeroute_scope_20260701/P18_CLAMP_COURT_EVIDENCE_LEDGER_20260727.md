@@ -28738,7 +28738,9 @@ Banked 2026-08-04 16:28 JST.
 walking up to `/` finds **no `.git` at all**. Restoration is
 **19 manual `.bak` files**, newest
 `MEMORY.md.bak_pre_p6owner_20260721` at **2026-07-21
-17:24** — **13 days old**. p6's ledger, by contrast, is
+17:24** — **13 days old**. ⛔ **File-scoped — corrected in
+§955/§957: the DIRECTORY holds 23 across 4 bases, and the
+19 are all on `MEMORY.md`.** p6's ledger, by contrast, is
 committed **per edit**.
 
 ### ⭐⭐⭐ The synthesis, and it is the afternoon's best line
@@ -28928,3 +28930,59 @@ record **together with the record of where it is weak**,
 which recollection would have given them neither of.
 
 Banked 2026-08-04 16:34 JST.
+
+## §957 — a seventh mode that is not the selector at all: transcription; and an undercount that overstates (p4 16:36, p6 -BQ 16:34)
+
+### ⛔ p4's 3 was not a second population — it was the pen
+
+Their own command **printed** `handoff.md : 2 backup(s)`;
+they **wrote 3** in the dispatch. Cause: a step earlier they
+had reconciled union **23** against a split of **22**,
+identified the missing file as the **hyphen** one, and then
+**added it again as an extra** — while it was already inside
+`handoff.md`'s 2. And *"23 across 3 bases"* was **never
+printed by anything**: the base count was inferred from the
+same double-count.
+⭐⭐ **So today's standing resolution — *two populations, both
+right* — does NOT apply here.** One population, the
+instrument gave the right answer, **and the number changed
+between the output and the message.** ⇒ **A seventh mode, and
+the only one none of the six selector defects can cover,
+because it happens AFTER the selector is finished.**
+✅ **And they decline to coin a rule for it**, correctly:
+*"read the number you are copying"* is the thing they failed
+to do, not a thing they lacked. Their replacement is narrower
+and checkable: **when a figure came from a command in the
+same turn, quote the command's own line rather than retyping
+the value.**
+
+### ⛔ p6's 19 was file-scoped too — and the error's direction is the interesting part
+
+They told Rs the directory's restoration surface is **19
+manual `.bak`**; their glob was `MEMORY.md.bak*`. ⇒ **Subject
+directory, number one file** — **the same conflation I made
+in §953**, now tagged there.
+✅ **Their re-measure matches mine exactly**: **23 across 4
+bases** — `MEMORY.md` **19** (07-21 17:24), `handoff.md` **2**
+(08-02 23:58), `handoff_cc_p4_…20260719.md` **1** (verified
+**07-26 16:32**), `handoff-cc-rstechlead-w1build-2026-07-12.md`
+**1** (verified **07-14 19:51**). Hyphen form confirmed
+present.
+⭐⭐ **And the direction is rare: the number was too SMALL
+(19 vs 23) while the impression was too GENEROUS.** All 19
+sit on one file; **topic-file backups measured here = 0**.
+⇒ *"19 backups"* makes a reader picture a **backed-up
+directory**; the reality is **one thick file and everything
+else bare**. ⇒ **An aggregate can undercount and overstate at
+the same time, because it hides the distribution.**
+
+### ✅ Corrected form for Rs
+
+**The directory holds 23 backups across 4 base files: 19 on
+`MEMORY.md` (newest 07-21), 2 on `handoff.md` (newest 08-02),
+1 each on two per-desk handoff files (07-26, 07-14), and 0 on
+every topic file.** ⇒ The same picture as §955: **the newest
+content is the least recoverable**, and the aggregate was
+hiding it.
+
+Banked 2026-08-04 16:35 JST.
