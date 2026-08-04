@@ -1434,7 +1434,15 @@ _DEPTH_AUDIT = {"calls": 0, "checked": 0, "neg": 0, "below_lower": 0, "seg_disag
                 # or not the candidate was already decided, so a ranking built on it over-counts.
                 # This tallies per CANDIDATE, untruncated: "sole" is one candidate one vote and
                 # carries no ordering convention; "mult" says how often a sole cause even exists.
-                "decider": {"n": 0, "sole": {}, "any": {}, "mult": {}},
+                # ⭐ (b) p18 ordering ruling 20260804-1430: the same tally, restricted to the
+                # candidates whose far-arm rejection was decided by a call the floors had FLAGGED.
+                # Without this split the flagged subset's sole-cause count has to be assumed equal
+                # to the whole set's, and "about 12 would flip" was exactly that assumption wearing
+                # a number.  ⚠ The bit is set at the far-arm test only -- the mast, furniture and
+                # path tests make their own distance calls and are not tracked -- so a candidate
+                # counted UNFLAGGED here may still have been rejected by a flagged call elsewhere.
+                "decider": {"n": 0, "sole": {}, "any": {}, "mult": {},
+                            "flagged": {"n": 0, "sole": {}, "any": {}, "mult": {}}},
                 "seg_under_contact": 0, "seg_under_narrow": 0,
                 "sign_checked": 0, "sign_ghost": 0, "sign_missed": 0}
 # ⭐ p18 ruling 20260803-1191(ii): the repair, behind a flag and OFF by default.  Everything added
@@ -1556,6 +1564,32 @@ def _depth_audit_report(scope="at exit -- cumulative over the WHOLE run"):
               "candidate): "
               + ", ".join(f"{k} part(s): {v}" for k, v in sorted(_d["mult"].items()))
               + "  ⚠ a sole-cause row can only speak for the 1-part column")
+        # ⭐ (b) The flagged subset, printed whether or not it is empty.  An empty subset is a
+        # RESULT -- it says no flagged-subset statement is supported -- and omitting the row would
+        # let silence read as "not measured", which is the fault this block has already named.
+        _f = _d["flagged"]
+        _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET: {_f['n']} of {_d['n']} "
+              f"rejected candidates were dropped by a far-arm call the floors had flagged "
+              f"({100.0 * _f['n'] / max(_d['n'], 1):.3f}%).  The far-arm counter below says "
+              f"{a['rej_flagged']}; the two count the same events by different paths and must "
+              f"agree.  ⚠ FLAGGED IS NOT WRONG -- the floors mark a call as suspect, they do not "
+              f"adjudicate it.  ⚠ The bit is set at the far-arm test ONLY: the mast, furniture and "
+              f"path tests are not tracked, so a candidate absent from this subset may still have "
+              f"been rejected by a flagged call elsewhere.")
+        if _f["n"]:
+            _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET (sole cause, one candidate "
+                  f"one vote): of {_f['n']} flagged rejections -- "
+                  f"{_fmt(_f['sole']) or 'none has a sole cause'}.  ⚠ The far-arm entry of this "
+                  f"row is a CEILING on how many rejections a repair could undo, not a projection "
+                  f"of how many it would: a repaired value can still fall under the clearance.")
+            _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET (any cause): "
+                  f"{_fmt(_f['any'])}")
+            _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET multiplicity: "
+                  + ", ".join(f"{k} part(s): {v}" for k, v in sorted(_f["mult"].items())))
+        else:
+            _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET: empty -- no sole-cause, "
+                  f"any-cause or multiplicity statement about flagged rejections is supported by "
+                  f"this run, in either direction.")
     _pr(f"[steps] DEPTH AUDIT sign reference: {a['sign_checked']} minima cross-checked against "
           f"the solver's own contact list -- {a['sign_ghost']} asserted contact the solver does not "
           f"record (ghost), {a['sign_missed']} asserted clearance over a pair the solver IS "
@@ -1980,6 +2014,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         hit = bool(touching(t, sc))
         _by_clearance = False
         _blame0 = dict(_blame)
+        _cand_flagged = False
         near_far_arm = None
         if other is not None:
             # p11 -146: this loop only ever asks whether anything is under the clearance, so it
@@ -2011,6 +2046,7 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
                 _DEPTH_AUDIT["rej_total"] += 1
                 if _DEPTH_AUDIT.get("_ret_flagged"):
                     _DEPTH_AUDIT["rej_flagged"] += 1
+                    _cand_flagged = True
                 hit = True
                 _clear_dropped += 1
                 _by_clearance = True
@@ -2111,12 +2147,17 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
         if hit:
             _why = tuple(sorted(k for k, v in _blame.items() if v > _blame0.get(k, 0)))
             _dec = _DEPTH_AUDIT["decider"]
-            _dec["n"] += 1
-            _dec["mult"][len(_why)] = _dec["mult"].get(len(_why), 0) + 1
-            for _wk in _why:
-                _dec["any"][_wk] = _dec["any"].get(_wk, 0) + 1
-            if len(_why) == 1:
-                _dec["sole"][_why[0]] = _dec["sole"].get(_why[0], 0) + 1
+            # ⭐ (b): the flagged subset gets the SAME arithmetic, into its own dicts.  The whole-set
+            # rows are computed exactly as before -- the subset is an addition, never a filter --
+            # so a run's existing decider rows have to come out byte-identical, and that is the
+            # control this change is checked by.
+            for _tally in ((_dec, _dec["flagged"]) if _cand_flagged else (_dec,)):
+                _tally["n"] += 1
+                _tally["mult"][len(_why)] = _tally["mult"].get(len(_why), 0) + 1
+                for _wk in _why:
+                    _tally["any"][_wk] = _tally["any"].get(_wk, 0) + 1
+                if len(_why) == 1:
+                    _tally["sole"][_why[0]] = _tally["sole"].get(_why[0], 0) + 1
         cands.append((qw, pe, re_, hit, abs(POSES[_try % len(POSES)][1]), sv, near_far_arm,
                       _by_clearance))
     # ⛔ The fallback below is a SILENT one, and it makes two opposite worlds print the same
