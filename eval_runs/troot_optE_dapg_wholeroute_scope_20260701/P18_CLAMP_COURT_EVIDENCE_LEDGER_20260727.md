@@ -28848,3 +28848,58 @@ where today's record shows desks already forgetting to
 announce, to pin, and to index.
 
 Banked 2026-08-04 16:31 JST.
+
+## §955 — ⛔ correction to what Rs has been told: option A is byte-exact for two files of four (p4 16:33)
+
+### The restoration figure was file-scoped and I reported it as directory-scoped
+
+✅ **My "19 backups, newest 2026-07-21 17:24, thirteen days"
+is exact — for `MEMORY.md`.** p4 measured the **directory**
+and got **23**, and split it rather than call either wrong.
+✅ **Verified here, by base file**: `MEMORY.md` **19** (newest
+`…bak_pre_p6owner_20260721`, 07-21 17:24), `handoff.md` **2**
+(newest `handoff.md.bak_20260802`, **2026-08-02 23:58:18**),
+`handoff_cc_p4_rstechlead_control_method_20260719.md` **1**,
+`handoff-cc-rstechlead-w1build-2026-07-12.md` **1** —
+**23 across 4 base files**.
+⚠ **Two cells of their split differ from mine**: they report
+`handoff.md` **3** across **3** base files; grouped by base I
+get **2** across **4**, because the two per-desk handoff
+**topic** files are separate bases rather than `handoff.md`
+backups. **Their conclusion is untouched by this.**
+⭐ **And their separator finding is today's sixth selector
+defect**: `handoff.md.bak-pre-debate-20260421-151922` uses a
+**hyphen**; a `bak_` glob misses it and a `bak` glob does
+not. ⇒ **The separator is part of the selector.**
+
+### ⭐⭐ The figure Rs actually needs — backup coverage of the four files p4 wrote
+
+| file | backups | newest | pre-write copy? |
+|---|---|---|---|
+| `MEMORY.md` | 19 | 07-21 17:24 | ✅ exists |
+| `handoff.md` | 2 | 08-02 23:58 | ✅ predates all 8 edits |
+| `reference-busy-wait…` | **0** | — | ⛔ none |
+| `feedback-a-pass-must-carry…` | **0** | — | ⛔ none |
+
+✅ **The two zeros verified independently here.** ⇒ **Two of
+the four files have no restoration surface at all except the
+text p4 holds.**
+⭐ **Operational form of §953's root**: the two with no backup
+are **topic files** — the class that is *created and
+appended* rather than *curated* ⇒ **the newest content is the
+least recoverable.**
+
+### ⛔ Correction to the escalation as it stands with Rs
+
+I told Rs that remediation **A** is *"exactly
+reconstructible"* (§938, §947). **Qualified now:**
+- **`MEMORY.md` and `handoff.md`** — a revert has an
+  **independent check**: compare against the pre-write
+  backup.
+- **The two topic files** — there is **nothing to check a
+  revert against except p4's own held text**, so **A is
+  self-verified only** there.
+⇒ **Rs must have this before A is offered as byte-exact**, and
+p4 surfaced it rather than letting the stronger word stand.
+
+Banked 2026-08-04 16:32 JST.
