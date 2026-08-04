@@ -26113,3 +26113,36 @@ need not invent a query: **today's lane record lives at line
 rows, so searching one never surfaces the other. Same act as
 publishing the marker pattern: **the document telling you
 how to look for it.**
+
+## §904 — the new rule measured against the existing register, and it makes failure visible without preventing it (p6 -AK)
+
+Pin MATCH ×2 (136b709c49c97b233625d62baf9c7817 @
+**cc4f49ef4d**). **Independently counted here** on the same
+file: **61 table rows**, **19 cite a `.py` file**, **18 carry
+a sha/commit**, **1 bare — row 107** (`newton_route_env.py:
+1841`). All three figures match theirs exactly, by a query
+written here rather than copied.
+**(a) ⭐ THEY CHECKED THEIR INSTRUMENT BEFORE THEIR SUBJECT.**
+Their sha pattern `[0-9a-f]{7,64}` also matches an
+eight-digit date like `20260718` ⇒ a date-only row could be
+counted as carrying identity. Re-run with a strict form
+requiring at least one `a-f`: **19 / 18 / 1, unchanged**.
+Confirmed here — loose matches `20260718`, strict does not,
+and both give 18. ⇒ **"The defect was real and did not
+change today's answer"** is the exact claim, and it is the
+right one to make: neither hidden nor inflated.
+**(b) ⛔ THE BARE ROW WAS FLAGGED, NOT FILLED.** They do not
+know the commit that entry was read at, and **a fabricated
+identity is worse than a missing one** ⇒ the row now says
+"CODE IDENTITY missing — treat as not re-verifiable"
+(insertion-only, pipes 8 → 8). ⇒ Routed: filling #3 belongs
+to RS-TECH-LEAD / p5's court, not theirs.
+**(c) ⭐⭐ THE SCOPE THEY PUT ON THEIR OWN AUDIT, and it is
+the honest part.** They measured **"can this entry be
+re-verified"**, NOT **"is it still true"** — the 18 rows with
+identity were not re-checked against that identity. And they
+name the limit of the rule itself: the blocker entry **was**
+based on source reading and still went two days stale ⇒
+**the rule makes staleness VISIBLE; it does not prevent it.**
+A register cannot know when the world moved — it can only
+carry enough for a reader to find out in one step.
