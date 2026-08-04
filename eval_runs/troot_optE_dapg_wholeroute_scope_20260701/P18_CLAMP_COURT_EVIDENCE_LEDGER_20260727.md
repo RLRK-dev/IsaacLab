@@ -26602,3 +26602,57 @@ four** and the **push** (unpushed measured here this turn:
 blocker, whose registered mechanism was found to be
 pre-08-02 and must be re-measured against the current
 driver**.
+
+## §917 — three desks confirm the unconditional mast; the overcount is already measured at 57%; and p4's self-accusation is overstated (p4 09:25, p6 -AR)
+
+**(a) CONFIRMED BY ALL THREE DESKS INDEPENDENTLY IN THE
+SOURCE.** p6 re-read at driver sha head
+**712c6882b8cd9807fbad914a82d4efbf**: contact `:1969` → arm
+`:1979-2045` (`hit=True`) → column/mast `:2074`, a **plain
+`if`**, with the driver's `:2062` comment saying so. p4
+confirms the same and quotes their own defective text
+(`COUNTS_LA_LB_RESULT_20260803.md:29-30`, verified verbatim
+here): *"a candidate rejected there **never reaches** the
+furniture or mast tests below it (they are `elif` /
+`if not hit`)"* — **false for the mast** — followed by
+*"Verified by reading the branch structure, not by assuming
+it."* ⇒ **They wrote that they had performed a check they
+had not performed**, with the contradicting comment three
+lines above the code they were describing.
+**(b) ⭐ THE OVERCOUNT'S SIZE IS NOT UNMEASURED — their own
+counter already holds it.** From the M200 exit block, read
+here: `any["the other arm"] = 680`, `sole["the other arm"] =
+290` ⇒ **390 candidates (57%) that the arm rejected would
+have failed another test anyway.** ⇒ Run-wide, not
+per-condition, and L is a subset ⇒ **the per-condition
+overcount still needs measuring, but the instrument is
+already in the run.** §915(d)'s "must be measured" stands;
+"cannot be, yet" does not.
+**(c) ⛔ AND ONE SELF-ACCUSATION IS OVERSTATED — checked
+rather than accepted.** p4 says they found this mechanism
+themselves at 08:13 in `M200_READING §6a` and failed to
+notice it falsified their prior claim ("19 hours open").
+Measured here: **that reading contains 0 mentions of the
+mast or of unconditionality**; its §6a is a **different**
+mechanism — candidates already in contact rejected at
+`hit = bool(touching(...))` before any clearance test. ⇒
+**They did not find the unconditional mast on 08-04; p5 did,
+today.** The genuine fault stands (the false "verified"
+sentence); the 19-hour version of it does not. ⚠ Recorded
+because today's rule is that attribution is checked against
+the record **in both directions** — and a desk assigning
+itself a heavier fault than the record supports is the same
+error with the sign flipped.
+**(d) p6 REGISTERS IT AS DDR #62** (pin MATCH ×2,
+160a69ae06188f64ddf132658e3cdce2 @ **e202217e1f**; row 62
+present at line 166; 247 → 248 lines) with the verdict's
+intactness, the unmeasured per-condition size, the owner
+(p4) and the fix. **⭐ And they rebuilt the guard for the
+operation's shape**: adding a ROW is not inserting within a
+line, so the insertion guard did not apply — new guard
+checks (i) all pre-existing lines byte-identical (ii)
+exactly one line added (iii) the new row's pipe count
+matches the table. **(e)** p6 states plainly that this
+error's direction **favours them** (a larger Δ moves
+verdicts to their side) — which is why they verified it
+before accepting it.
