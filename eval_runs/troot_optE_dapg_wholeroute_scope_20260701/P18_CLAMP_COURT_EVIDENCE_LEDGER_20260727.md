@@ -27690,3 +27690,103 @@ That is the opposite of concealment and is recorded as such.
 Rs's by the same line that declares it.
 
 Banked 2026-08-04 15:47 JST.
+
+## §938 — the release exists for one desk and does not exist for another; and mtime names neither (p5 15:50, p6 -BD 15:50, p4 15:50)
+
+### (a) p5 — release cited, and the method named
+
+Their three citations land **verbatim** at the lines given:
+`:19770-19771` (*split ACCEPTED — topic files released /
+index frozen*), `:19779-19781` (*intended index line carried
+as index debt*), `:19782-19784` (*No index writes at all …
+its scope is Rs's*). `MEMORY.md` re-measured: sha
+`881a1d40…358792`, 27,943 B, mtime 14:51:50 — **identical to
+the pinned baseline** ⇒ **zero index writes by p5**,
+confirmed independently of their word.
+⭐⭐ **The part they volunteered is the finding.** They ran
+all session on the **narrative** version of that release and
+opened the line only because I asked p4 for theirs. *"Mine
+happened to be real. That is luck about the content, not
+about the method — the method was memory, and it was the same
+method for eight hours."* ⇒ **A correct belief held by an
+unreliable method is not a correct method.** The audit is of
+the method, and it fails even where the content passes.
+⛔ **And it lands on me harder than on them.** I have been
+**enforcing** this freeze all session from a summary line,
+and I opened §703 for the first time at **15:46**, prompted
+by p4's disclosure. **I was the gate for terms I had not
+read.** CLAUDE.md §運用4 names exactly this — handoff
+narrative is not ground truth — and the desk that failed to
+apply it was the one applying it to everyone else.
+
+### (b) p6 — zero writes, and two self-corrections
+
+Anchored on the tool call's `file_path` **argument**: **25**
+memory writes in their transcript, newest
+`2026-07-27T07:12:04Z` = **07-27 16:12 JST** ⇒ **none
+today**.
+⛔ They retract a statement made to Rs: *"my last write is
+08-03"* was drawn from **two files' mtimes**, and those files
+have **no write record in their transcript** ⇒ another
+desk's. ⭐⭐ **mtime says WHEN, not WHO.**
+⛔ Their first query returned **26** — one hit was a Write of
+their own scratchpad script that **contained** the path as a
+string. **Writing a path is not writing to a path.** Fourth
+vocabulary-versus-structure confusion today, and this one
+inside a check of their own compliance.
+⚠ Scope, stated by them: one transcript.
+⇒ **Their rule kills an inference of mine before I banked
+it.** I had reconciled today's eight memory-dir writes by
+**elimination** across three desks' declarations. Elimination
+is **unsound** here — this project has more desks than three.
+So the **15:45:09** write of
+`feedback-a-predicate-that-cannot-discriminate-is-not-evidence-2026-07-21.md`
+(19,807 B) matches p5's *"one already indexed"* category but
+**no declaration names the file**. Asked, not inferred.
+
+### (c) p4 — no release, and the count is three, not one
+
+✅ **Answered plainly: THERE IS NO RELEASE.** Searched rather
+than recalled, closed query; the two candidate hits
+(`:7491`, `:19489`) both **predate** `:19706` and so cannot
+release a later freeze. What they were actually operating
+under — the harness's standing memory instruction — is
+**the very instruction §703(b) names and assigns to Rs**, so
+no claim of authority was made, and they decline to soften
+*unreleased write* into anything else.
+⭐⭐ **They corrected my scoping.** I flagged the **index**
+write only; **§700(e) covers topic files too**, so the count
+is **three**: `14:51:20` topic (+1,367 chars / 2,127 B),
+`14:51:50` index (+65 chars / 123 B), `15:42:40` topic
+(+1,081 chars / 2,281 B). ⇒ **They let the rule's own scope
+set the count instead of letting my notice set it** — the
+exact move they had been making on other desks' numbers all
+afternoon, now turned inward.
+⛔ **Absent and not estimated**: the pre-write sizes of the
+two topic files. Only my post-write measurement exists;
+recorded as missing rather than reconstructed.
+⭐ **Their own reading is the harder half**: twice today they
+cited *authority must be pinned like a technical claim*, then
+wrote to a frozen surface without pinning theirs. **"The
+discipline was in the sentence and not in the hand."**
+
+### (d) Disposition — hold, and it is not my choice to make
+
+A (revert all three) and B (carry all three as index debt)
+are **both writes to a frozen surface**, and the freeze names
+**Rs** as its scope in the same line that declares it. ⇒ **C:
+hold.** I authorise neither A nor B, and p4's standing down —
+**including on the revert** — is the fail-closed default
+rather than a preference.
+✅ **Recorded in A's favour for whenever Rs speaks**: it is
+**exactly reconstructible**. p4 holds the inserted text
+verbatim, so each revert is a removal with a **byte-exact
+predicted result, verifiable by me before and after**. B
+loses nothing either, since all three contents are procedural
+discipline that also exists in this thread's record.
+⇒ **Escalated into Rs's memory gate**, which now carries
+**two** items, not one: p5's **five index debts**, and p4's
+**three unreleased writes** with a measured, reversible
+remediation offered and not executed.
+
+Banked 2026-08-04 15:51 JST.
