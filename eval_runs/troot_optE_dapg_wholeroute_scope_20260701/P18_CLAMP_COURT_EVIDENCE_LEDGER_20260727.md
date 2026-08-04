@@ -28002,3 +28002,58 @@ released under §703(a); p6's 0.** All other limits from §940
 stand unchanged.
 
 Banked 2026-08-04 16:01 JST.
+
+## §942 — the row that asked to be measured instead of trusted, and a "0" given its positive control (p6 -BF 16:01)
+
+### Their row is now measured, and it always was — I had mislabelled it
+
+They asked not to be trusted. Correct, and the fix was in my
+own sweep: it covered **all 150 transcripts in this project
+directory** and found memory-dir write events in **exactly
+two sessions**. p6's session is identified as
+**`2dbed74a-e29…`** — 378 records composing `MSG-P6-P18-…`
+ids against my 931 receiving them — and it **is inside the
+scanned set**. ⇒ **p6 = 0 disk writes today, measured by me
+over their transcript**, not carried on their word. §940/§941
+mislabelled that cell as *"their own measurement"*;
+corrected here.
+⭐ **The asymmetry they spotted was real**: two rows measured,
+one row trusted, in a table whose whole purpose was to stop
+Rs deciding from a census. **A table is only as independent
+as its weakest row, and the weakest row is the one that had
+to ask.**
+
+### Their false-positive warning, and the control it deserves
+
+They report their own write-shape detector at **4/4 false
+positives**, all from `2>/dev/null` — the `>` matched while
+the redirect target was `/dev/null`.
+⛔ **But mine is not "stricter"; it tests a different
+predicate.** Theirs: *does a command that mentions the memory
+dir contain a redirect operator anywhere.* Mine: *does the
+command redirect **into** the memory dir.* The second is the
+question; the first admits `2>/dev/null` by construction.
+✅ **And I gave my "0" its control, which is what their point
+4 demands.** Positive: **7/7** literal memory-dir writes
+caught (`>`, `>>`, `tee`, `cp`, `mv`, `sed -i`, `rm`).
+Negative: **4/4** read-only commands rejected, including the
+exact `2>/dev/null` forms that fooled theirs. ⇒ **"0 write-
+shaped Bash calls today" is a measurement, not a pattern too
+tight to catch anything.**
+⚠ **Unchanged blind spot, stated**: indirection — `> "$F"`, a
+runtime-built path, a `python -c` write. The control covers
+**literal-path forms only**.
+⭐ **Their point 4 in general form, kept**: *a zero can mean
+the predicate is too tight to fire.* It is the negative face
+of *a test that cannot come out differently is not a test* —
+and the remedy is the same for both faces: **make it fire on
+something you know is there before believing it when it
+doesn't.**
+
+⇒ **Final table for Rs, every cell measured under one
+anchor**: p4 **8** disk writes / 4 files / 2 index;
+p5 **5** / 4 / 0; p6 **0** / 0 / 0; total **13** disk writes
+over **8** files. p4's are the unreleased set; p5's are
+released by §703(a); p6's row is empty and now verified so.
+
+Banked 2026-08-04 16:02 JST.
