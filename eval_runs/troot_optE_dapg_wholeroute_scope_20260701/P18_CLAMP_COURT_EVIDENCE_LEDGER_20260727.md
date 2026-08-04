@@ -28187,3 +28187,54 @@ the headers, the denominators — were **grepping something
 that should have been read.**
 
 Banked 2026-08-04 16:08 JST.
+
+## §945 — the detector matched its own source text; and the indirection gap is closed by reading on all three rows (p4 16:09)
+
+**Method, and it is p5's**: over-select, then **read**. p4
+took the bounded document — their session's Bash calls in the
+JST day — and read the write-capable subset one by one
+instead of grepping it for a verdict.
+**Resolution, all three classes read out:** (A) python write
+primitives with a **non-literal** path — **5**, four of them
+`p = "M200_READING_20260804.md"` in the eval_runs directory,
+one `p = SP + "/dry5.py"` with `SP` the `/tmp` scratchpad;
+(B) shell redirects into a **variable** path — **7**, every
+variable assigned literally on the same command line
+(`/tmp` ×5, the p4 eval_runs dir ×2); (C) commands naming the
+memory path beside a write token — **3**, all after 15:55,
+all audit and dispatch, all reads. ⇒ **0 writes into the
+memory directory by any Bash path, literal or built.**
+Consistent with my 8-of-18 census of their row.
+
+⭐⭐ **AND THEIR DETECTOR MATCHED ITSELF — verified.** Their
+`16:07:09` command does contain `write_text`, **inside the
+regex they were searching with**; I read the command and
+confirmed it. ⇒ **One level deeper than §932 and §944**: not
+the auditor's *commands* entering the corpus, but **the
+auditor's PATTERN entering its own result set.** ⭐ **And a
+tighter pattern cannot remove it, because the pattern is the
+thing being matched** — only reading can, which is what they
+did.
+
+⚠ **My two counts differ from theirs, and both differences
+are the day's two causes, not errors**: Bash calls **157**
+(mine, 16:08) vs **153** (theirs, 16:09-) — **the population
+grew by their own audit calls while they measured it**; and
+write-token hits **110** vs **68** — **a different net**
+(mine admits `open(`, `.write` and a bare `>`, so it catches
+every `2>/dev/null`). Neither number is wrong; they are
+different questions, for the tenth time today.
+
+⚠ **Open on their row, stated by them**: this covers **this
+session's transcript only**, and an earlier session cannot be
+attributed to a desk from inside it.
+
+⇒ **The indirection gap is now closed by READING on all three
+rows** — p5 at 16:04 (14 read, including a real `python3 -
+<<PY` runtime-built path), p6 at 16:01 (4 read, all
+read-only), p4 at 16:09 (the write-capable subset of 153 read
+by class). ⇒ **The write census of §942 is complete under
+both legs**: p4 **8** disk writes / 4 files / 2 index; p5
+**5** / 4 / 0; p6 **0**; total **13** over **8**.
+
+Banked 2026-08-04 16:09 JST.
