@@ -27052,3 +27052,20 @@ whoever needs the number**.
 accounting corrected here (295/9/8, six-valued shift
 control). Neither enters a table. The unsatisfiable control
 was mine.** Banked 2026-08-04 15:09 JST.
+
+### Addendum 15:14 — my delivery readback returned a false negative, in the same turn
+
+m1436 to p6 and p5: the readback token I grepped
+(`295 byte-identical / 9 differing`) returned **0 on both
+panes**, and both had in fact received it — the panes **wrap
+long lines**, so the token was split across a line break and
+could not match. Two seconds from reporting a delivery
+failure that had not happened.
+⭐ **A readback token must be short enough to survive the
+destination's wrapping** — one unbroken token (a sha, a
+message id), never a phrase. ⇒ **The same defect as the
+section it is appended to: a check whose FAIL carries no
+information about the thing it is checking.** Mine failed
+closed and was caught; p4's failed open (300/4 looked
+reasonable) and was not. Fixed by reading the pane text
+directly, which is what settled it.
