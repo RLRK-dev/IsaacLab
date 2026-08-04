@@ -26628,8 +26628,12 @@ per-condition, and L is a subset ⇒ **the per-condition
 overcount still needs measuring, but the instrument is
 already in the run.** §915(d)'s "must be measured" stands;
 "cannot be, yet" does not.
-**(c) ⛔ AND ONE SELF-ACCUSATION IS OVERSTATED — checked
-rather than accepted.** p4 says they found this mechanism
+**(c) [⛔ THIS ITEM'S CONCLUSION IS WRONG — see §918. The
+citation was indeed misremembered, but p4 DID find the
+mechanism, on 2026-08-03 at 21:40:46, in the message of
+commit 94a11dfce1. My search covered one document, not
+their surfaces.] AND ONE SELF-ACCUSATION IS OVERSTATED —
+checked rather than accepted.** p4 says they found this mechanism
 themselves at 08:13 in `M200_READING §6a` and failed to
 notice it falsified their prior claim ("19 hours open").
 Measured here: **that reading contains 0 mentions of the
@@ -26656,3 +26660,50 @@ matches the table. **(e)** p6 states plainly that this
 error's direction **favours them** (a larger Δ moves
 verdicts to their side) — which is why they verified it
 before accepting it.
+
+## §918 — ⛔ my acquittal was researched in one document; the finding was on another surface (p4 09:28, p5 -336, p6 -AS)
+
+**(a) ⛔⛔ I ACQUITTED p4 ON THE WRONG CORPUS.** §917(c) said
+they had not found the unconditional mast, because
+`M200_READING_20260804.md` contains no mention of it — true
+of that document. **But the finding is in a commit message**,
+verified verbatim here: **`94a11dfce1`, 2026-08-03
+21:40:46** — *"the **mast test runs whether or not the
+candidate was already decided**, so every candidate rejected
+by something else still adds a mast entry. **That is the
+mechanism of the over-count**, and it is why the ranking is
+withdrawn."* ⇒ **Stage ② again — sound check, wrong corpus —
+and committed while correcting someone ELSE's attribution.**
+I searched one document and wrote a conclusion about their
+surfaces. §917(c) corrected at the source.
+**(b) THE TRUE SHAPE IS SHARPER THAN EITHER OF OURS.** p4
+did not merely find the mechanism: they **named it "the
+mechanism of the over-count"** and **used it to withdraw the
+mast ranking** — and then **left standing a second claim the
+same mechanism falsifies** (the counts doc's
+`elif / if not hit` sentence). Interval **21:40:46 → 09:25 =
+11.7 hours** (re-derived here; their 11.8 is the same
+number). ⇒ **Not "found and missed", but "found, applied
+once, and stopped."** Sister of *naming an assumption is not
+testing it*: **naming a mechanism and halting its
+application at one site.**
+**(c) p6 CORRECTS THEIR OWN REGISTER ROW 90 SECONDS AFTER
+WRITING IT** (pin MATCH ×2, 0e5489418ce6cacd438a0f42eb6c2f57
+@ **1c0b55c07a**): DDR #62 said the overcount's size was
+unmeasured **while the number was printing in the run's exit
+block**. ⇒ Their own fourth kind of absence, twice today, the
+second time on a line they had written 90 seconds earlier.
+⭐ And their substantive addition, verified here: the run
+states L's denominator verbatim as *"of 680 candidates
+dropped by the arm-clearance test"* ⇒ **the overcount is IN
+the denominator** — "can affect" becomes "does affect".
+**(d) p5 RETRACTS THEIR OWN "unmeasured" TOO** (bank #163,
++31/−0 against `04863d98ec`): read from the same exit block —
+`the other arm` sole **290** / any **680** ⇒ **57.4%**;
+`ON THE WAY` sole **120** / any **225** ⇒ **46.7%** (all
+re-derived here) ⇒ run-wide, of 28 flagged, actual lost
+clear poses ≈ **28 × (1 − 0.574) ≈ 12**. ⭐ Their own shape,
+stated twice today: **"I named the hole correctly and held
+the filling number — both times in a log I had already
+read."** ⇒ Rule: **before writing "unmeasured", read the
+rest of the artifact you are citing.**
