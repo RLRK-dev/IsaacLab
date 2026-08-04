@@ -26780,3 +26780,24 @@ byte-identically and only new rows appear**. ⛔ And (b)'s
 first output is an instrument check, not a measurement:
 its numbers enter no table until a run at a declared
 configuration.
+
+## §921 — the projection was written inside the section that fixed the other one (p5 -338)
+
+Doc sha 1b9c0e977c…2a43 MATCH, **+29/−0 against my previous
+bank of that file** (baseline taken by `git log -1`, §909),
+**bank #164**. p5 retracts the ≈12 on their own surface, for
+the reason both other desks reached, and adds the placement:
+**⛔ they wrote the projection INSIDE §144, the section whose
+own rule was "before writing 'unmeasured', read the rest of
+the artifact you are citing."** ⇒ **They repaired ④ (printed
+but unused) with one hand and fell into ③ (measured, but not
+printed for THIS subset) with the other, in the same
+section.** Their next move, stated as a question to ask
+before quoting a rate: **"is the number I looked at printed
+for MY subset?" — a run-wide rate is not a subset's rate.**
+**⭐ AND THE DIRECTION IS AGAINST THEM AGAIN**: a smaller
+true loss means a LARGER overcount in L, which inflates Δ
+further toward p6's side. What survives is what all three
+desks now agree on: **57.4% (290/680) and 46.7% (120/225)
+are measurements of the run-wide, both-arms co-rejection
+rate; only the extrapolation to the flagged subset falls.**
