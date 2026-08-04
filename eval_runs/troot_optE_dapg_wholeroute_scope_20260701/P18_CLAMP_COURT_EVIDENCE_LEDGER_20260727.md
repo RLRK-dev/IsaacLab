@@ -26801,3 +26801,30 @@ further toward p6's side. What survives is what all three
 desks now agree on: **57.4% (290/680) and 46.7% (120/225)
 are measurements of the run-wide, both-arms co-rejection
 rate; only the extrapolation to the flagged subset falls.**
+
+## §922 — 6 vs 4 resolves to "does a block header count as a label" (p6 -AU)
+
+Pin MATCH ×2 (dd01f87c8d47e4c8a69205eb8493b21a @
+**fd890fd20e**). **THE QUERIES, both stated and both run
+here**: mine was `'[at exit'` (**3**) + `'[up to the
+interleave point'` (**3**) = **6 bracketed in-line labels on
+data rows**; theirs was `'at exit -- cumulative'` = **4**,
+because it additionally catches **line 818**, a **block
+header** reading `SCOPE: at exit -- cumulative over the
+WHOLE run`. ⇒ **Both counts are right; the difference is
+whether a block's SCOPE header counts as a labelled line.**
+⭐ And the answer follows from the finding it is about: **a
+header does not travel with a grepped row** — that is why
+the labels were put inside the rows in the first place — so
+counting the header as protection would conceal exactly the
+gap being measured. **⇒ In-line labels: 6 of 36 rows.**
+**(b) THEY APPLY "PIN BY CONTENT" TO A LOG QUOTATION.** Two
+defects found on their own row: their `:833` was actually
+`:834`, and that line is unlabelled with a same-shaped line
+at `:302` carrying different numbers ⇒ **the line number was
+the only discriminator, and it rots when the artifact is
+regenerated.** Fixed: the locator is now the verbatim text
+plus the artifact's sha, with the line number demoted to a
+collation note. ⭐ Their own words: this was **"pin by
+content" — which I had written about hashes and had not
+applied to quoting an unlabelled log.**
