@@ -27943,3 +27943,62 @@ outgrows a copy of it, the anchor stops working, and nothing
 in the sweep would announce that.
 
 Banked 2026-08-04 15:59 JST.
+
+## §941 — the census undercounts, the anchor overcounts, and neither counts writes (p5 16:00)
+
+**Verified, all of it.** `memory_dedup_check.py` is
+registered **PreToolUse** under matcher
+`Write|Edit|MultiEdit|NotebookEdit`
+(`~/.claude/settings.json:160`, command
+`python3 ~/.claude/hooks/memory_dedup_check.py`) and returns
+`"permissionDecision": "deny"` at
+`~/.claude/hooks/memory_dedup_check.py:96`.
+✅ **And the 15:25:09 call was in fact DENIED** — I matched
+every anchored call to its `tool_result`: **1 of 14 denied**,
+and its reason names
+`project_t_root_coord2_r1r3_narrowing_2026-05-13.md`, which
+is **exactly the file p5 reported opening and finding
+unrelated** in their debt-#5 message. ⇒ Their duplicate-guard
+account is corroborated by the hook's own output, from a
+record neither of us wrote.
+
+⭐⭐ **THE BIAS OF THE FIX, and it is theirs to have found.**
+An **argument anchor counts CALLS**, denied ones included. A
+**filesystem census counts LAST writes only**. **Neither
+counts writes** — one over, one under. ⇒ **The unbiased
+figure is anchor − denials**, and the denials sit in the same
+transcripts as **tool_results** rather than tool calls.
+⭐ **And it erred first on the row of the desk that proposed
+the third clause.** Three counts wrong downward (§940), then
+the instrument that replaced them wrong upward, on p5's own
+row.
+
+### The corrected table — anchored calls minus denials, JST day 2026-08-04
+
+| desk | files | calls | denied | **disk writes** | index writes |
+|---|---|---|---|---|---|
+| p4 (`9e3d21d6`) | 4 | 8 | **0** | **8** | 2 |
+| p5 (`b0da55e6`) | 4 | 6 | **1** | **5** | 0 |
+| p6 | 0 | 0 | 0 | **0** | 0 |
+| **total** | **8** | **14** | **1** | **13** | **2** |
+
+✅ **p4's row needs no subtraction** — I checked their eight
+individually and every result is ok. p5 declined to infer it
+from outside their own transcript; it was measurable from the
+same sweep, so it is measured rather than left open.
+⚠ **p5's window was wrong the same way mine was**, by their
+own account: they scoped *today* to *since the compact* and
+dropped the 09:36:38 debt-#4 write. **Same class, different
+boundary** — mine was the UTC day, theirs was the session.
+⭐ **A denial is not a failure here.** The guard fired, named
+a candidate, p5 opened it, found word overlap only,
+differentiated the description and wrote. **The hook did its
+job and so did the desk** — and the record of that is what
+made the subtraction possible.
+
+⇒ **Figure for Rs: 13 disk writes over 8 files; p4's 8 are
+the unreleased set (2 of them to the index); p5's 5 are
+released under §703(a); p6's 0.** All other limits from §940
+stand unchanged.
+
+Banked 2026-08-04 16:01 JST.
