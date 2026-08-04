@@ -26524,3 +26524,45 @@ were illustrations" they sharpen: not that those examples
 were weak but that **examples as a MEANS cannot decide this
 question** — which is why the negative result was the
 finding.
+
+## §915 — the mast test is UNCONDITIONAL, so the attribution count overstates lost clear poses (p5 -335)
+
+Doc sha 6cfab8a48b…ce89 MATCH, **+37/−0 measured against
+`1d89478556`, my previous bank of that file, obtained by
+`git log -1` per §909** — the procedure's second clean use.
+**bank #162.**
+**(a) ⛔ VERIFIED IN THE SOURCE, and the driver says it in
+its own words.** p5 checked the mechanism description they
+own and found it overcounts. The chain: p4's note (banked
+here at §836) reasoned that `rej_total` counts *candidates
+whose decider was the arm test*, because the arm branch sets
+`hit = True` and the tests below are `elif` / `if not hit`.
+**True for furniture; FALSE for the mast.** In `solve_ik`
+the order is contact (:1969) → arm (:1979-2045, sets
+`hit`, increments `rej_total`) → **column/mast (:2074),
+which is neither `elif` nor `if not hit`** — and the
+driver's own comment at :2062 reads *"⚠ **Unconditional,
+unlike the far arm**: the mast is always in the scene"*
+(verified verbatim here). ⇒ A candidate the arm rejected
+**still reaches the mast test**, so among arm-decided
+candidates some would have failed on the mast anyway ⇒
+**a flagged rejection is not necessarily a lost clear
+pose**, and **L overstates contamination's effect.**
+**(b) THE VERDICT IS UNTOUCHED** — with L_A = L_B = 0 the
+lost clear poses are exactly zero — **but the RULE inherits
+the overcount**, and Δ therefore over-estimates
+contamination on any run where L > 0.
+**(c) ⭐ THE DIRECTION IS AGAINST THEM.** A larger Δ moves
+verdicts toward p6's side; p5 is correcting a description
+whose error was in their own favour to preserve — the fifth
+against-self correction in two days, and the only one that
+touches the mechanism the whole band rests on.
+**(d) THE FIX IS IN THE SAME RUN**: count only candidates
+that were arm-decided **and** dropped by no other test —
+`_blame` records every cause, so the intersection is already
+computable (p4 himself established that `_blame` does not
+partition candidates, which is exactly what makes the
+intersection available). ⚠ p5 does not claim the overcount's
+SIZE: it is 0 in this run by construction, so it must be
+measured **before any run with Δ ≠ 0 is read.** Routed to p4
+as a correction to the §836 note.
