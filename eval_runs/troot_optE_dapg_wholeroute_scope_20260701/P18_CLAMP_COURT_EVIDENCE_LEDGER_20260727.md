@@ -27428,3 +27428,77 @@ discussion shares the words (here). Same shape, two hours
 and two surfaces apart.
 
 Banked 2026-08-04 15:35 JST.
+
+## §933 — ⛔ my baseline was two commits back, and my diagnosis of their miscount was rhetoric (p4 15:37)
+
+**Custody.** `592ac2d8ac` (15:25:47, the three fences) and
+`02b85fc52f` (15:36:25, the denominator). Both artifacts
+**MATCH commit == worktree == declared** —
+`FENCES_IN_THE_ROW_CHECK_20260804.txt` `c62df621af…4318f`,
+`DENOMINATOR_FIX_CHECK_20260804.txt` `9bcdb3e492…9227`.
+
+**The denominator control is exactly as declared, measured
+against the RIGHT predecessor.** 314 → 314 rows,
+**byte-identical 304**, **shifted-only 8**, **rewritten
+exactly 2**, **28 of 28** tokens, shift set **{0, 12}**.
+Every number in their statement reproduces.
+⛔ **My first measurement of it did not — because I used the
+wrong baseline.** I compared against `FLAGGED_DIM_CHECK`,
+**two artifacts back**, which folds the fences change in, and
+got 300/12/14. The true predecessor is
+`FENCES_IN_THE_ROW_CHECK`. ⇒ **Third instance of the
+baseline error I have banked twice** (§854, §909). The fix I
+wrote there was for commits (`git log -2`); its artifact
+analogue I had not drawn: **the predecessor is the previous
+OUTPUT, not the previous output I happen to have measured.**
+✅ **The cross-row check holds**: `:206`/`:212` = 4/364 =
+**1.099%** at the prefix, `:348`/`:354` = 7/450 = **1.556%**
+at exit — subset row and attribution row now agree in the
+same run, and the subset row names its domain where it
+divides.
+⭐ **They closed the question, not the instance**: an AST
+enumeration of **all 9 divisions** in the report function,
+each classified against its own domain; one was wrong, now
+zero. **That is the closed form of the query** — the
+counterpart of p6's re-anchored sweep, reached independently
+two hours later on a different surface.
+✅ **The three fences print beside the number** (verified in
+`FENCES_IN_THE_ROW_CHECK`): transport check, CEILING over
+**far-arm** rejections and explicitly not a bound on the
+repair, and a new **NO CONTROL ARM** row. ⭐ Counted with the
+structural anchor, not the vocabulary — `NO CONTROL ARM` is
+**3** by grep and **2** by `^[steps]`; p6's rule paid within
+three hours of being written.
+
+**The 19 vs 29 reconciliation is exact.** My 29 = **10
+unchanged + 19 moved**; theirs counted only what moved. Both
+right, different questions — and the 10 are load-bearing,
+since they verify that what should **not** move did not.
+⚠ **And my 29 had an unstated population**: `[steps]` rows
+only. The Python traceback line quotes
+`ur15_steps_wired.py, line 3712 → 3753` (+41, obeying the
+same hunk arithmetic) and lives outside it ⇒ **30** over the
+whole file. Their *"30 if the traceback row is included"* is
+right. **My count needed its query, on the day I asked
+everyone else for theirs.**
+
+⛔⭐⭐ **AND MY DIAGNOSIS OF THEIR MISCOUNT WAS WRONG.** §926
+said their "4" came from counting their own memory — inferred
+from the `etc` in their prose. The actual mechanism, which
+they report: **a NORMALISED comparison reported as a byte
+comparison**, their sed having collapsed exactly the five
+rows I named.
+⇒ **The arithmetic confirms them and refutes me**:
+**295 + 5 = 300** and **9 − 5 = 4**, the *same* five on both
+sides. **A memory lapse does not produce matching deltas; a
+collapsing normalisation does.**
+⇒ **The evidence for the right diagnosis was inside my own
+measurement and I did not look at it.** I explained a wrong
+number from the rhetoric around it instead of from the
+procedure that produced it. **An explanation of an error is
+itself a claim and needs its own evidence.**
+✅ **Retracted**: the *finding* (295/9/8) stands unchanged;
+the *cause* I assigned does not. **§926's "counted your
+memory" line is superseded here.**
+
+Banked 2026-08-04 15:40 JST.
