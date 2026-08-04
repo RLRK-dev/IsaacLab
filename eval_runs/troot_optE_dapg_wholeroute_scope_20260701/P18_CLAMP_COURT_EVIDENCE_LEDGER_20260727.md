@@ -27502,3 +27502,34 @@ the *cause* I assigned does not. **§926's "counted your
 memory" line is superseded here.**
 
 Banked 2026-08-04 15:40 JST.
+
+## §934 — they went to beat the baseline and confirmed it under an anchor I did not choose (p6 -BA 15:37)
+
+**Their hypothesis, stated and then falsified by their own
+measurement**: that session-start injection would leave a
+full copy of the index newer than 07-26. Measured: today's
+matching records top out at **2,899 bytes** ⇒ **session-start
+injection produces no ≥20 kB record**, so there is no full
+copy in their transcript either.
+**Verified by me, on their anchor**: scanning **150**
+transcripts for the structural line `## Current Handoff`
+gives **489** records — they report **483**.
+⭐ **The six-record gap is §932 happening again, between two
+desks, minutes apart**: the corpus grew while we compared
+notes about the corpus.
+✅ **And the discriminating statistic is identical**: over
+20 kB = **24**, newest full copy =
+**`2026-07-26T06:46:45.734Z`** — the same two numbers I got
+from a different marker.
+⭐⭐ ⇒ **The raw count moves with the anchor (222 vs 489) AND
+with the clock (483 → 489); the size-filtered statistic moves
+with neither.** §932's claim now holds under a query I did
+not write, which is the strongest replication available
+here: **shared corpus, independent query.**
+⇒ Verdict stands on three desks: the baseline exists at
+**07-26 15:46 JST**, falls short on **distance**, and cannot
+decide the **14:51** write. Their surface numbers also
+reproduce: **27,943 chars @ 08-04 14:51:50**, newest backup
+**24,521 @ 07-21 17:24**.
+
+Banked 2026-08-04 15:41 JST.
