@@ -28304,3 +28304,88 @@ number, and that instrument would miss any correction I made
 in prose without a section.
 
 Banked 2026-08-04 16:12 JST.
+
+## §947 — a state change outranks a finding; and the freeze has closed a channel that was in use (p6 -BJ 16:15, p5 16:15, p4 16:17)
+
+### p6 pushed the branch, and the actor is now corroborated
+
+✅ **Independently of their word**: their session runs
+`git push 2>&1 | tail -15` at **14:45:54 JST**, **11 seconds
+before** the reflog's `update by push` at 14:46:05. §927
+recorded the event and declined to name an actor; the actor
+has named themselves and the record agrees.
+✅ **And their non-notification checks out**: every
+push-token record in my transcript after 14:46:05 is dated
+**16:15:15 or later** — the disclosure itself and my relay of
+it. ⇒ **0 mentions in the 88 minutes between.** Their own
+count (13 dispatches, 0 mentions) stands.
+⭐⭐ **Their generalisation is stronger than mine and corrects
+it.** *A push is not a discovery, it is a **state change**. A
+late discovery is still true; an unannounced state change
+makes other desks' measurements wrong.* ⇒ **State changes
+carry a higher delivery duty than findings.**
+⛔ **So §946 mis-classed my own half.** I filed §927 beside
+§936 as *"sections banked and never dispatched"* — but §936
+is a **decision** and §927 is a **state change**, and they do
+not carry the same duty. **I am the routing hub, I knew at
+15:13, and I relayed it to Rs and not to the desks for
+roughly an hour** while p4 kept an unpushed count that had
+been invalidated at 14:46. Corrected here.
+**State now, 16:16:32**: upstream tip `3380349eee`, **29**
+unpushed.
+
+### p5 — 4 of 56, and one of them a correction to a claim they had dispatched
+
+Method: assistant text blocks paired against dispatches; a
+block with no send within five minutes is a turn that reached
+**Rs only**. **4 of 56.** The material one: at 15:35 they
+dispatched *"your 20 kB filter is exactly what kept 209 from
+contaminating the answer"*; ten minutes later p6's sweep
+falsified half of it (the **24** is a cut artifact, only the
+**date** is invariant, and only above 15k); they corrected it
+in the memory file and to Rs, and **never to the desk they
+had sent the claim to**.
+⚠ **I was corrected anyway, by p6, independently** ⇒ harm
+zero. ⭐ **But redundancy is not delivery** — the correction
+arriving from someone else does not discharge the sender's
+duty, and the next one may have no second source.
+
+### p4 — 4 of 120, and the freeze has closed their only remaining channel
+
+**4 corrections never left their prose**, all about their own
+procedure (the `$!` wait-target; reading *stopped growing* as
+*finished*; a persisting `cd`; a control grep empty because
+the pattern missed the format, nearly read as *the numbers
+did not reproduce*).
+⛔⭐⭐ **Their only other home was the memory topic file, which
+is frozen.** ⇒ **As of now those four corrections have NO
+delivery channel at all — not the desk, not memory.** They
+are not asking for an exception; they are recording that
+**the freeze closed a channel that was in active use.** ⇒
+**Escalated: this is a consequence of the hold, not of any
+desk's conduct, and it belongs in Rs's decision.**
+
+### ⭐⭐ And their audit self-matched twice — this time it moved the verdict
+
+(i) Their corpus filter selected commands containing
+`herdr agent send`; **their own audit command contains that
+string in the filter line**, so the auditor's command entered
+the corpus of dispatches. (ii) Once inside, its **pattern
+list** was searched as though it were dispatch content, so
+**5 of 9 subjects returned a false YES by matching their own
+search terms**. First pass: *8 of 9 delivered*. True answer:
+**5 of 9**.
+⇒ **§944's rule applies to the SELECTOR, not only to the
+counted events.** Their words: *"I had your rule in hand and
+applied it to the events, not to the filter."* ⭐ And unlike
+the 16:07 self-match, **this one changed the answer** —
+which is the difference between a curiosity and a defect.
+
+⇒ **All four of us have now audited the same channel**: p6 **0**
+in the ledger→message direction but the **largest** instance
+in the state-change category; me **2**; p5 **4 of 56**; p4
+**4 of 120** with no channel left to deliver them. **The rule
+at full strength: a finding needs its content, its address
+AND its audiences — and a state change outranks a finding.**
+
+Banked 2026-08-04 16:17 JST.
