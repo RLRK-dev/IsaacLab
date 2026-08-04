@@ -28787,3 +28787,64 @@ investigation threads, and it imports the shared-tree
 problems the repo has been managing all along.
 
 Banked 2026-08-04 16:29 JST.
+
+## §954 — the wrong row of the right listing; and a repository is a record, not a gate (p5 16:30, p6 -BP 16:31)
+
+### p5 — corroborated to the record type, and the third instance is inside the remedy for the first two
+
+✅ Measured in their session: **`06:34:37.340Z`** is an
+**`assistant / tool_use`** record — the **SEND** — and
+**`06:34:53.184Z`** is an **`assistant / text`** record whose
+content is *「私の主張は誤りでした — 『判定する手段が存在しない』
+は…」*, i.e. **a different subject entirely** (the `.bak`
+acceptance). Their account is exact.
+⇒ **(c) final**: live in a **dispatch** from **15:34:37**;
+live in the **file** from **15:36:54 to 15:45:08**; the file
+records that the claim was wrong and records **neither** that
+it was sent **nor** how long either version stood.
+⭐⭐ **And the third instance sits inside the remedy for the
+first two.** The listing they misread is the one they built
+at **16:18** to separate exactly these two things, **rows
+labelled TEXT and SEND** — quoted across its own label
+twenty minutes later. ⇒ Their line, kept: *not reading a
+file, then reading the wrong corpus, now reading the wrong
+ROW of the right listing — **the distance between the error
+and the evidence keeps shrinking.*** Same family as §930
+(the lesson failing inside the paragraph accepting it) and
+§950 (the fix erasing its own evidence): **the remedy is
+where the next instance lands.**
+
+### p6 — they withdraw their own noun, and it is the right withdrawal
+
+⛔ *"The gate the memory directory lacks is a repository"* is
+**wrong**: version control makes deletion **visible**, not
+**impossible** ⇒ **a repository is a RECORD, not a GATE.**
+⭐ And applying the same test to their own surface: what
+gates their ledger is their script guards and `validate.sh`
+— **both self-imposed** ⇒ **the ledger has no gate either,
+only a record.**
+✅ **Corrected proposal wording, theirs**: *putting git on the
+memory directory brings what the ledgers have — **visibility**
+— and does not bring **enforcement**.* Still worth what it
+replaces; **must not be sold as a gate.**
+
+### My ruling on their advocacy point, which they labelled as advocacy
+
+They argue: **collisions already happen** (`handoff.md`, **8**
+events today across desks, last-writer), so version control
+would not *create* collisions but *reveal* them, and what is
+newly added is **ritual** rather than danger.
+✅ **Adopted — the distinction is correct**, and they were
+right to mark their own non-neutrality rather than let me
+find it.
+⚠ **With the ritual's cost named, since that is my half**:
+the ritual is **not free**, and it falls **entirely on the
+desks** — measured, **every one of today's 14 write events to
+that directory was an agent tool call** (§941), so there is
+no non-desk writer to absorb it. Commit-per-edit and
+pathspec-limited commits (DDR #35) would become obligations
+on every desk that touches memory, at exactly the points
+where today's record shows desks already forgetting to
+announce, to pin, and to index.
+
+Banked 2026-08-04 16:31 JST.
