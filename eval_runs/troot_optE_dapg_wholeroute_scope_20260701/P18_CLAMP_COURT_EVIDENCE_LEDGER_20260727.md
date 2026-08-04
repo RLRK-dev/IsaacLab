@@ -26415,7 +26415,8 @@ wide the example set.** Only a derivation **from the
 mechanism** (contamination is subtractive) separates them —
 which is exactly why the direction 2×2 was needed, and why
 p5's derivation, not anyone's case list, is what decided it.
-**(b) THE DISAGREEMENT COUNT IS IDENTICAL; THE RATE IS NOT,
+**(b) [p6 -AN — attribution added at the source, see §914]
+THE DISAGREEMENT COUNT IS IDENTICAL; THE RATE IS NOT,
 AND NOBODY IS WRONG.** They report **65.9%**, I measured
 **71.4%** — same numerator, **18,816 disagreeing cases**,
 different denominator: 13⁴ = **28,561 including ties** vs
@@ -26485,3 +26486,41 @@ number needs its query, and ended by finding that a
 *result* needs its question too — the enumeration was
 redundant for identity and irreplaceable for
 catchability.
+
+## §914 — I broke my own broadcast rule 25 minutes after banking it, and my ledger had the quieter version of it (p4 09:21)
+
+**(a) ⛔ RECURRENCE, mine, confirmed.** m1423 went to three
+desks and used the second person for one desk's work
+(`貴囲い`) — the defect I banked at **§896(b)** at 08:53 and
+repeated at **09:20**. p4 files it not as a complaint but as
+evidence: **a rule being useful does not make it followed** —
+the operational face of the day's fourth stone, and this
+time the instance is mine.
+**(b) ⛔ AND THE LEDGER CARRIED A QUIETER VERSION.** §912's
+header names **two** desks ("p6 -AN; and p4 fences their own
+stone"), so its item (b) — the 65.9% / 71.4% denominator
+finding, which is **p6's** — had no per-item attribution and
+could be read as either desk's. ⇒ **A combined header is the
+written form of the same second-person defect.** Fixed at
+the source: §912(b) now names p6. **Rule extended: a section
+covering two desks attributes per ITEM, not per header.**
+**(c) ATTRIBUTIONS CONFIRMED by search** (not by anyone's
+say-so, at p4's own request): the rate finding is **p6's**
+(p4 computed no rates — 0 occurrences of those figures on
+their surface, their sweep reported 39,936 with 0
+mismatches); *"exhaustive scanning does not rescue a wrong
+algebra"* is **p4's** and already sits under a §911 header
+naming them; the *"the mechanism criterion is a restatement
+of Δ, so agreement carries no information"* fence is
+**p6's**.
+**(d) TWO STRENGTHENINGS FROM p4, adopted.** Their own 09:17
+phrasing ("meaning is carried by p5's derivation") they
+downgrade as **too weak**: precisely, **the mechanism
+criterion IS Δ restated, so the 100% agreement carries no
+information at all** — only two claims stand, that the old
+form contradicts the mechanism over most of the space and
+that symmetry cannot separate them. And their "the examples
+were illustrations" they sharpen: not that those examples
+were weak but that **examples as a MEANS cannot decide this
+question** — which is why the negative result was the
+finding.
