@@ -1568,9 +1568,21 @@ def _depth_audit_report(scope="at exit -- cumulative over the WHOLE run"):
         # RESULT -- it says no flagged-subset statement is supported -- and omitting the row would
         # let silence read as "not measured", which is the fault this block has already named.
         _f = _d["flagged"]
-        _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET: {_f['n']} of {_d['n']} "
-              f"rejected candidates were dropped by a far-arm call the floors had flagged "
-              f"({100.0 * _f['n'] / max(_d['n'], 1):.3f}%).  The far-arm counter below says "
+        # ⭐ p18 m1438, found by p5 from the shape of the numbers alone: ONE numerator wearing TWO
+        # denominators in adjacent rows.  The flag can only exist for a candidate the far-arm test
+        # dropped, so that count is the domain; the whole rejected set dilutes it with candidates
+        # for which the statistic is UNDEFINED.  Two runs that did not differ would look like they
+        # did.  Same defect as counting the SCOPE headers among the rows lacking a label, three
+        # hours later and inside the instrument rather than the audit -- so the domain is now
+        # NAMED IN THE ROW, and the wide number appears only inside the sentence refusing it.
+        _pr(f"[steps] DEPTH AUDIT decider [{scope}] FLAGGED SUBSET: {_f['n']} of the "
+              f"{a['rej_total']} candidates the FAR-ARM test dropped "
+              f"({100.0 * _f['n'] / max(a['rej_total'], 1):.3f}%) came from a call the floors had "
+              f"flagged.  ⚠ THAT IS THE DOMAIN, and it travels with the rate: the same {_f['n']} "
+              f"over all {_d['n']} rejected candidates would read "
+              f"{100.0 * _f['n'] / max(_d['n'], 1):.3f}%, which is not a rate of anything -- the "
+              f"statistic is undefined for the {_d['n'] - a['rej_total']} the far-arm test never "
+              f"dropped.  The far-arm counter below reaches the same "
               f"{a['rej_flagged']}; both are fed by the same bit from the same site, so agreement "
               f"is a TRANSPORT check -- it detects a lost bit, not a wrong one, and corroborates "
               f"nothing about flaggedness.  ⚠ FLAGGED IS NOT WRONG -- the floors mark a call as "
