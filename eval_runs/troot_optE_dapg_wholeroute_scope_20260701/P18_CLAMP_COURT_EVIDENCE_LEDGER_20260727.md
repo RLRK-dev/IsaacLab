@@ -26401,3 +26401,51 @@ resolution into a procedure, observing that **every repeat
 they made today had ended with "I will be careful next
 time"** — which is the reason the fix had to become a
 command line rather than an intention.
+
+## §912 — the negative result is the finding: symmetry cannot separate the two forms (p6 -AN); and p4 fences their own stone (p4 09:18)
+
+**(a) ⭐⭐ THE HEADLINE IS A NEGATIVE RESULT, and it is the
+most useful thing in the sweep.** Reproduced here over the
+same space: **① relabelling invariance** (swap the A/B
+names) — **0 violations for BOTH forms**; **② equal
+contamination on both legs must not "explain" the gap** —
+**0 violations for BOTH forms**. ⇒ **p6's inverted form is
+catchable by neither symmetry nor sanity examples, however
+wide the example set.** Only a derivation **from the
+mechanism** (contamination is subtractive) separates them —
+which is exactly why the direction 2×2 was needed, and why
+p5's derivation, not anyone's case list, is what decided it.
+**(b) THE DISAGREEMENT COUNT IS IDENTICAL; THE RATE IS NOT,
+AND NOBODY IS WRONG.** They report **65.9%**, I measured
+**71.4%** — same numerator, **18,816 disagreeing cases**,
+different denominator: 13⁴ = **28,561 including ties** vs
+**26,364 with ties excluded** by the tie clause
+(18,816/28,561 = 65.9%, 18,816/26,364 = 71.4%). ⇒ **The
+day's stone in its purest form yet**: identical measurement,
+two queries, two rates, no error anywhere — and it appeared
+in the very sweep built to settle a disagreement.
+**(c) THEIR FENCE, adopted**: the mechanism criterion is
+**algebraically the Δ criterion** — verified here, **0
+mismatches over 26,364 cases** for `Δ ≥ |D| ⟺ (Lo+L_Lo) ≥
+(H+L_H)`. ⇒ The 100% agreement is **not an independent
+verification of Δ**; what stands is (i) their old form
+contradicts the mechanism on most of the space, and (ii)
+symmetry cannot separate the forms. **Δ's correctness rests
+on the mechanism description being right**, which is the
+design court's, not this one's. ⚠ **My own first pass got
+89.5% for Δ** because I invented a draw-band for the
+mechanism that is not in their definition — my
+instantiation, disclosed, and the boundary test above is the
+one that matches the claim.
+**(d) p4 FENCES THEIR OWN STONE, one layer down.** Of their
+three stones today, (a) and (b) have bases they verified;
+**(c)** — "prefer stating the algebra's example-independence
+over counting blind spots" — **rests on a layer they did not
+verify**: the grid proves their two branches agree, not that
+Δ is semantically right, which they inherit from p5. ⇒ §910's
+structure ("a rule can be right on a false or unexamined
+basis") reproduced inside their own stone, by them.
+**(e)** They also accept the reframing of the six minutes:
+**the hole was open until someone did the arithmetic — the
+elapsed time was incidental, and a duration makes it look
+as though time closed it.**
