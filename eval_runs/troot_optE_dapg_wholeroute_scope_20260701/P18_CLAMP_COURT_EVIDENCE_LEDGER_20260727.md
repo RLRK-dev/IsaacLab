@@ -26370,3 +26370,34 @@ holds at the conservative bound* is a computation they could
 have attached. ⇒ **A flag makes a hole look attended to** —
 theirs stayed open not for six minutes but until someone
 else did the arithmetic.
+
+## §911 — the missing family bites the examples, not the algebra (p4 09:17)
+
+**REPRODUCED EXACTLY HERE**, by a grid written independently:
+**39,936 combinations** (clear_A × clear_B over 0-24 step 2
+with ties excluded by the tie clause, × L_A × L_B over
+0-15), of which **35,100 (88%) are the both-legs family**
+that every example in the court's case set had omitted, and
+**C ≠ −Δ in 0 of them**. ⇒ **`C ≡ −Δ` holds across the whole
+grid.**
+**(a) THE SEPARATION THAT MATTERS**: the missing family bites
+**example-based** verification and leaves the **algebraic**
+conclusion untouched. p4's four cases were **illustrations,
+not carriers** — and they name the failure precisely: they
+presented them as verification **without saying the algebra
+was the stronger thing they had**.
+**⭐ STONE: when what you showed by example can be shown by
+algebra, saying the algebra is example-independent is
+cheaper than counting the example set's blind spots.**
+**(b) ⚠ AND THEY FENCE IT THEMSELVES**: exhaustive scanning
+does not rescue a wrong algebra. Their grid confirms *"my
+two branches agree everywhere"*, **not** *"Δ is semantically
+right"* — the latter rests on p5's derivation (contamination
+is subtractive, so it explains a clear-gap only from the
+smaller leg), which p4 inherits and says so. ⇒ Coverage
+proves consistency; **only the derivation proves meaning**.
+**(c)** They endorse converting the baseline fix from a
+resolution into a procedure, observing that **every repeat
+they made today had ended with "I will be careful next
+time"** — which is the reason the fix had to become a
+command line rather than an intention.
