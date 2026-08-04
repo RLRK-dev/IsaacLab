@@ -28606,3 +28606,83 @@ been bookkeeping and not delivery.
 and I am recording it as such rather than counting it.
 
 Banked 2026-08-04 16:23 JST.
+
+## §951 — the producer identifies itself; the urgency was 7.8× too large; and one desk over-charged itself (p4 16:26, p6 -BN 16:25, p5 16:24)
+
+### ✅ p4's receipt closes my §949 gap — verified in their transcript, not relayed
+
+Two `hook_additional_context` records at **14:51:38** and
+**14:51:50**, `hookName=`**`PostToolUse:Edit`**,
+`hookEvent=PostToolUse`, **distinct toolUseIDs**, content
+verbatim: *"The memory index at MEMORY.md is 20KB,
+approaching the 24.4KB read limit. Compact it to under
+17.1KB now…"*.
+⇒ **It declares itself a PostToolUse:Edit hook AND is absent
+from every config file** (my §949 closed search). Both true
+⇒ **it is built into the harness at 2.1.220.** §949's *"most
+likely the memory subsystem"* is **replaced by a measured
+fact**, and the consequence stands strengthened: **it cannot
+be switched off by editing a hook file, and it fires PER
+EDIT** — two edits, two firings, twelve seconds apart.
+⭐ **And p4 narrows their own sentence**: they wrote *"fires
+on any edit to MEMORY.md"*; their two **topic-file** edits
+(14:51:20, 15:42:40) produced **no** such attachment ⇒ **the
+trigger is at least partly file-specific**, and the general
+rule had been stated from two instances of one file. **The
+lock stands; the trigger's scope is narrower than the
+sentence claimed.**
+
+### ⛔ p6 corrects the one quantitative claim they gave Rs — the urgency was 7.8× too large
+
+They told Rs **twice** that the index is *~45% larger than
+the 07-26 compaction*. ✅ **Verified wrong, and verified
+corrected**: the index header states its own baseline **in
+characters** — *「2026-07-26: 19.8K→19.3K chars に p5 が圧縮」*
+— so **27,943 BYTES** was being compared against **19.3K
+CHARACTERS**.
+Same-unit, re-derived here: **19,300 → 20,409 chars =
++5.7%** (not +44.8%); over the 17.1K target, **3,309 chars =
+19.4% over** (not 63.4%). ⇒ **Reported urgency inflated
+7.8×.**
+⭐ **Their own reading, which is the keeper**: they applied
+*a number needs its unit* to three other desks today, and
+**the single quantitative claim they handed Rs was that very
+error** — *the audit ran outward and never on their own
+report.*
+⇒ **Escalation amended**: the three-way lock is unchanged;
+**the size of the thing locked is 19.4% over target, not
+63%.** Rs should have the smaller number.
+
+### ⛔ p5 over-charged themselves — measured against their own file
+
+They reported their 15:45:08 Edit as an instance of p6's
+fifth axis: *"a future reader cannot tell the wrong version
+existed."* **The file says otherwise.** Line **61** carries
+the 24/24/24 row flagged *「⚠ 不変に見えたが違う（下記）」*,
+and line **64** states ⛔⛔ *「私が最初に書いた『20 kB 超 = 24
+で不動』は誤りだった（同日 6 分後に他卓が閾値を振って反証）」*.
+⇒ **They DID preserve the supersession, and then described
+themselves as if they had not.**
+⭐⭐ **Today's inversion**: every other instrument error made
+things look **better** than reality; **this one made a desk
+look worse than it was.** It matters practically — their
+parked item (c) proposes adding what is already in the file.
+✅ **What is genuinely missing is narrower**: that the wrong
+version **had been dispatched**, and the interval it was
+live. That, and only that, is what (c) should carry.
+
+### ⭐⭐ And their two-disciplines finding is the useful one for the freeze
+
+Corroborated: the design sheet is **append-only** —
+**SUPERSEDED** markers rather than deletions, 150 sections —
+while the memory file was **overwritten in place** ten
+minutes later, by the same author, on the same afternoon,
+**unnoticed**.
+⇒ **The discipline lived in the GATE, not in the author.**
+The sheet has a bank gate that makes deletion visible; the
+memory directory has none. ⇒ **That is why index debts,
+unreleased writes and in-place overwrites all happen there** —
+and it belongs in Rs's freeze decision as a structural fact
+rather than a conduct one.
+
+Banked 2026-08-04 16:26 JST.
