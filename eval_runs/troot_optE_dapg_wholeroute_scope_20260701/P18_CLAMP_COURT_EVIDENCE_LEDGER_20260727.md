@@ -28729,3 +28729,61 @@ merely wasted; it is unavailable, so the error resolves into
 either an unfulfillable obligation or a violation.
 
 Banked 2026-08-04 16:28 JST.
+
+## §953 — 📌 the gate the memory directory lacks is a repository; and the afternoon was `git log` reconstructed by hand (p6 -BO 16:28)
+
+### ✅ Verified, all of it
+
+`git rev-parse` in the memory directory is **fatal**, and
+walking up to `/` finds **no `.git` at all**. Restoration is
+**19 manual `.bak` files**, newest
+`MEMORY.md.bak_pre_p6owner_20260721` at **2026-07-21
+17:24** — **13 days old**. p6's ledger, by contrast, is
+committed **per edit**.
+
+### ⭐⭐⭐ The synthesis, and it is the afternoon's best line
+
+Everything four desks did today — counting transcript
+records (**209 → 222 → 233**; **483 → 489 → 501 → 511**),
+sweeping a threshold across **5k–40k**, choosing two
+independent markers, arguing auditor fractions, reading Bash
+calls one at a time, matching `tool_use` to `tool_result` to
+subtract denials — **was a reconstruction of what `git log`
+answers in one command.** ⇒ **We dug the conversation because
+the surface has no diff.**
+⇒ **And it is the root of the whole class**: index debts,
+unreleased writes and in-place overwrites all live on the one
+surface where **deletion is invisible**. p5's design sheet
+stayed append-only because its bank gate **makes deletion
+visible**; the memory directory has no such gate, and the
+same author behaved oppositely on the two within ten minutes
+(§951).
+
+### 📌 Proposal for Rs — p6's, not implemented, and not by me either
+
+**Put the memory directory under version control.** It closes
+four of today's threads at once: **(1)** in-place overwrite
+becomes visible; **(2)** who-wrote-when is answerable without
+transcript archaeology (p6's mtime finding); **(3)** the
+baseline question becomes trivial — my 07-26 distance problem
+simply disappears; **(4)** the delivery and remediation audits
+become unnecessary.
+⚠ **Scope, theirs**: an infrastructure proposal, outside their
+planning charter; **they will not implement it** (frozen, and
+out of scope). **Nor will I** — it is a write to the frozen
+surface and the freeze's scope is Rs's.
+⚠ **And the cost side, which is mine to add so the proposal
+is not one-sided**: **a repository is a gate only if
+something enforces committing.** Version control makes
+deletion **visible**, not **impossible** — the ledgers are
+committed per edit by *discipline*, and the same discipline
+would be required here. Further, the directory holds
+`handoff.md` and per-desk files written **concurrently by
+several sessions**, so the shared-tree hazards this branch
+already carries — last-writer collisions, the need for
+pathspec-limited commits (DDR #35) — would follow it in.
+⇒ **Rs should have both halves**: it dissolves four
+investigation threads, and it imports the shared-tree
+problems the repo has been managing all along.
+
+Banked 2026-08-04 16:29 JST.
