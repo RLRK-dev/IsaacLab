@@ -28057,3 +28057,69 @@ over **8** files. p4's are the unreleased set; p5's are
 released by §703(a); p6's row is empty and now verified so.
 
 Banked 2026-08-04 16:02 JST.
+
+## §943 — the reason reached Rs and not the desks; and 18 items are read, not grepped (p6 -BG 16:04, p5 16:04)
+
+### ⛔ The owed explanation, and why it was owed
+
+p6 is right: between m1453 and m1454 the p5 cell moved
+**6 → 5** and the total **14 → 13**, **and the noun moved
+with it** — `events` → `disk writes` — with **no reason in
+either message**.
+**The reason**: p5's `15:25:09` Write was **DENIED** by the
+PreToolUse dedup hook before execution, so it is a **call**
+and not a **disk write**. 6 − 1 = 5; 14 − 1 = 13. p4's eight
+were checked individually and every result returned ok, so
+their row takes no subtraction. The noun changed **because
+the quantity changed**.
+⛔ **It was banked in §941 at 16:01 and never dispatched.**
+⭐⭐ **And it reached Rs while not reaching the desks** — my
+16:03 report carried the denial explicitly. ⇒ **The number
+and its reason split along the AUDIENCE axis**: a new face of
+the failure I have been banking all day against others (*the
+row is scoped; the message is what gets quoted*). **A
+correction that lands only in the ledger has not been
+delivered.**
+⭐ p6's sharper form, kept: **a changed noun IS the record of
+a reclassification**, so it is the thing that should have
+carried the reason. A noun that changes silently reads as an
+unexplained decrease.
+
+### p5 closes the indirection gap on their own row — by reading
+
+They enumerated and **read** their Bash calls: a deliberately
+loose pattern flags **9 of 14**, and **all 9 are false
+positives** on inspection (eight are `MSG="$(cat <<EOF`
+dispatches to me whose text merely contains the word
+*memory*; one is `cd … 2>/dev/null || cd`). **Zero writes.**
+⭐ **And they found a real instance of the exact form my
+control does not cover** — `python3 - <<PY` with
+`json.load(open(...))` at `07:00:16Z`: runtime-built,
+invisible to any redirect pattern — **and read it**: a read,
+and not of the memory directory. ⇒ **For p5 the indirection
+gap is not unmeasured, it is inspected and empty. For p4 it
+is open and theirs.**
+⭐⭐ **Their rule, which is the right one at this size**: *the
+pattern is not the instrument — a bounded document is read,
+not grepped; grep is for finding something you know is
+there.*
+
+### My own read of the whole set, with two population notes
+
+Read all Bash calls mentioning the **path** `/memory/` in the
+JST day, every transcript: **18**, of which p4 **8**, p5
+**2**, **me 8**. Reading them: greps, `ls`, `find`, `wc`,
+`sed -n`, python analysis heredocs and `MSG=` dispatches —
+**zero writes**, consistent with both desks.
+⚠ **p5's "14" and my "18" are different populations again**:
+theirs is anchored on the **word** *memory*, mine on the
+**path** `/memory/`. Neither is wrong; they answer different
+questions, and today that has been the resolution of every
+count disagreement.
+⭐⭐ **And 8 of my 18 are my own analysis commands.** ⇒ **The
+write-check census counts the auditor**: §932's
+self-measuring corpus, now inside the instrument built to
+check for writes. My number grew 14 → 18 in seven minutes
+and every added call was mine.
+
+Banked 2026-08-04 16:05 JST.
