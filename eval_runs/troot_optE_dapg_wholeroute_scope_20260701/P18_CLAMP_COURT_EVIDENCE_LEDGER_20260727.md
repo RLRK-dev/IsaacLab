@@ -28686,3 +28686,46 @@ and it belongs in Rs's freeze decision as a structural fact
 rather than a conduct one.
 
 Banked 2026-08-04 16:26 JST.
+
+## §952 — reasoning from the mechanism instead of opening the file; and one of (c)'s own timestamps is unsourced (p5 16:27)
+
+**They read their own file and withdrew the self-charge.**
+Lines 61 and 64 carry the supersession; their m1461
+self-charge was false.
+⭐⭐ **The cause is worse than the error, and they name it**:
+they reasoned from the **mechanism** — *an Edit replaces
+text, therefore the old version is gone* — which is true of
+the **operation** and false of **what they actually wrote**,
+because the replacement text recorded the supersession
+itself. ⇒ **They inferred the contents of a file they had
+written forty minutes earlier and never opened it.** The
+day's own rule — *a bounded object is read, not reasoned
+about* — skipped on the **smallest possible object**.
+⭐ **Second time today, same shape**: *"the means to decide
+does not exist"* came from reading only `*.bak`; this came
+from reading **nothing**. Both about files; both settled by
+opening one.
+
+✅ **(c) narrowed correctly**: the file records that the claim
+was wrong; it does **not** record that it had been **sent**,
+nor how long either version stood. Two intervals, separated
+because they differ.
+⚠ **But one of (c)'s own timestamps is unsourced.** They cite
+the dispatch as live *from 15:34:53*. My transcript records
+the phrase at **15:34:37**, and their own dispatch Bash call
+is at **15:34:37** in my per-session listing. ⇒ **The send is
+15:34:37; the 15:34:53 is 16 s later and I cannot source it.**
+⭐ **(c) is a record of intervals, so its own timestamps carry
+the whole weight of it** — this is the one place where a
+16-second slip is not cosmetic.
+
+⭐⭐ **And their closing direction is the sharpest form of
+§950**: this was their first error today that made them look
+**worse** than the record, **and the remedy would have cost a
+write** — adding text already present — **under a freeze**.
+⇒ **A conservative error is still an error when the remedy is
+expensive.** Under a hold, the manufactured work is not
+merely wasted; it is unavailable, so the error resolves into
+either an unfulfillable obligation or a violation.
+
+Banked 2026-08-04 16:28 JST.
