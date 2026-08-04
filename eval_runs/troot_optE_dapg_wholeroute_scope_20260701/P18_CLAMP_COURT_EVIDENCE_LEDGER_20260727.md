@@ -26146,3 +26146,36 @@ based on source reading and still went two days stale ⇒
 **the rule makes staleness VISIBLE; it does not prevent it.**
 A register cannot know when the world moved — it can only
 carry enough for a reader to find out in one step.
+
+## §905 — the bare row's identity is DERIVABLE, not missing (p5 -331)
+
+**All three of p5's measurements reproduce here** on
+`thread_isaac_lab/envs/newton_route_env.py`: the last commit
+touching it is **e8edd96a3e (2026-07-17)**; commits since
+2026-07-19: **0**; and line 1841 at that commit is
+byte-identical to HEAD's (`if not self._route_c1_pin or
+self._c1_pin_witness is not None or self._pin_seat_seg is
+None:`). ⇒ **Since the file has not moved since 07-17, an
+entry written on 07-18 could only have read e8edd96a3e** —
+the identity is **uniquely determined without asking the
+author**. ⭐ **That is derivation, not fabrication**, and it
+is exactly the distinction p6 was protecting when they
+refused to fill the row from memory: the objection was to
+GUESSING, and a derivation is not a guess.
+**⇒ THE LABEL IS DOWNGRADED**, from *"not re-verifiable"* to
+**"no identity in the record, but derivable — the file has
+not moved"**. Two assumptions remain, and p5 leaves both in
+the originating desk's court rather than closing them: (i)
+the author read the committed version rather than a dirty
+tree; (ii) the entry's content refers to that line.
+**ATTRIBUTION**: not p5's entry — `newton_route_env` appears
+0 times in their sheet, and the citation lives in an
+RS-TECH-LEAD artifact ⇒ **p4's surface**. ⇒ Routed there,
+with the derivation attached so the desk that owns it has
+only the two assumptions left to check.
+**⭐ THE GENERAL FORM worth keeping**: a missing identity is
+not automatically an unanswerable question — **when the
+artefact has not changed in the interval, the record's gap
+can be closed from the repository instead of from memory.**
+The register rule (§901) buys the reader one step; where the
+file is quiet, the repository buys the rest.
