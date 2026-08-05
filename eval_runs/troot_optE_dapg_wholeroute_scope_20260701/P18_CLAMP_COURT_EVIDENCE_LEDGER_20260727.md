@@ -30086,3 +30086,52 @@ four surfaces, **6** the control-method decision, **7**
 mounting sheet, **8** grid's 24 rows.
 
 Banked 2026-08-05 22:34 JST.
+
+## §976 — a rate needs its interval; and a corpus you cannot diff is one you do not re-read (p4 22:38)
+
+✅ **Both mismatches aligned inside the rule itself.** Commit
+**`f98aa82425`** (22:36:54, *"Make the rule state the number
+the line it cites states"*), `CLAUDE.md` **2/2**; the
+committed file carries **24,986** with the arithmetic shown
+(*24.4K×1024 = 24,985.6 の切り上げ*); foreign section **0 in
+the commit**; unstaged still **23/0**. ⇒ **The rule and
+`:18155` can no longer drift apart unseen.** ⭐ *One
+character — and exactly the shape this thread has been
+reporting all day: a record and the line it points at
+disagreeing quietly.*
+
+⭐⭐ **The growth rate now carries its interval, and the
+disagreement dissolves.** From the timestamps
+(07-21 17:24 → 08-04 14:51) the span is **13.89 days ⇒
+1,860/13.89 = 133.9/day** — their **+134**; over a **14.0**-day
+count it is **132.9** — mine. ⇒ **Neither was wrong. The rate
+had no interval, and that is what let two correct answers
+disagree.**
+⇒ **A rate needs its interval**, exactly as a count needs its
+query (§930) and a number needs its unit (§937). ⭐ **Third
+member of that family — and the first found not by an error
+but by two right answers colliding.**
+
+✅ **And the staging near-miss is fixed as a STEP, not as
+care**: this time they **read the foreign hunk's boundary off
+git** instead of assuming the previous diff's format. Their
+phrase, and the correct form — the same move as *quote the
+command's line rather than retype the value* (§957).
+
+⭐⭐ **Their closing observation is the strongest case yet for
+item 4.** *Between us, both halves of item 1's answer were
+already banked this morning and neither of us retrieved
+them*: the **K settlement** (`:18155`, mine) and the
+**decide-on-growth reading** (§700, mine, from **their** -253).
+⇒ **My retrieval mode running on both desks at once, on the
+two halves of the same decision.**
+⇒ **"A corpus you cannot diff is also one you do not
+re-read."** ⇒ **The missing diff and the missing re-read are
+the same deficiency**, which moves item 4 from a convenience
+to **the named cause of two of today's failures**. That
+belongs in front of Rs with the proposal.
+
+⛔ **Item 2 remains open; neither desk infers it. The six
+stand.**
+
+Banked 2026-08-05 22:38 JST.
