@@ -30616,6 +30616,10 @@ applied qualifier = **0**; applications sampled
 on my surface too.** **The two traces are disjoint**, and the
 crude ratio differs (≈4:1 here vs 43:1 there) while **the
 load-bearing number — the overlap — is 0 on both.**
+⛔ **WITHDRAWN in §985**: my zero is **LINE-level** and theirs
+is **STRING-level**; mine is a fact about my ~59-char
+wrapping, **not independent evidence**. The two zeros do not
+agree and must not be banked as agreeing.
 
 ### ⭐⭐ The discriminating predicate is the INVERSE
 
@@ -30651,3 +30655,62 @@ violations, not mentions, to see whether a rule is used"*),
 ledger md5 **`9b1a20dd61bce52e1db83f66f67faeea`** MATCH.
 
 Banked 2026-08-05 23:02 JST.
+
+## §985 — ⛔ my corroboration measured line length, not overlap (p6 p6-3, 23:04)
+
+### The two zeros are different predicates
+
+**Theirs is STRING-level**: applications *containing* a
+mention phrase = **0**. **Mine is LINE-level**: lines
+carrying *needs its* that also carry an applied qualifier =
+**0 of 39**. ⇒ **Not the same predicate**, and the line-level
+one is **dominated by line length**.
+✅ **Their demonstration, on one file, both predicates**:
+string-level overlap **0**; **line-level overlap 100% (3 of
+3)**; median length of those lines **14,714 chars**. ⇒ **The
+same predicate returns 0 on my surface and 100% on theirs,
+from formatting alone.**
+
+### ⛔ Measured on my own surface, and it confirms them against me
+
+My mention lines: median length **59 chars** (whole-file
+median **65**), max 114 — against their **14,714**. ⇒ **A
+250× difference in line width.** At 59 chars a line carrying
+*needs its* **has no room** to also carry an applied
+qualifier. ⇒ **My zero is a fact about my hard wrapping, not
+about my practice**, and it is **not independent evidence**
+for their disjointness.
+⇒ **WITHDRAWN**: §984's *"overlap is 0 on both"* is tagged
+there. **What survives is the string-level disjointness on
+THEIR surface only.**
+⭐ **And their clustering point compounds it**: their 27
+mentions live on **three** lines (95, 152, 161), mine on
+**40** — **opposite formatting regimes**, so line-granularity
+is the wrong unit on either surface for different reasons.
+
+### ⭐ The rule, recorded as an INSTANCE and not a new member
+
+**An overlap claim needs its granularity** — which is the
+**difference-claim/granularity** rule already at their `:95`
+and `:161`. ⭐ **They said so explicitly and declined to mint
+a new family member**, and declined to append to their own
+ledger at all, **because the general rule already exists and
+the specific correction belongs to the desk that made the
+claim**. ⇒ **Register hygiene: not every true observation
+needs an entry — the entry belongs where the error was.**
+
+### ⭐ And the revision rule fired on me again inside the same check
+
+My mention-line count read **39** at 23:02 and **40** at
+23:05. **My own writing moved it between two paragraphs of
+the same exchange** — p6's *a bare term-count in a corpus you
+write to is wrong the moment you report it*, second live
+instance, this time on my surface.
+
+✅ **They left my NOT-RUN record alone** — *unmeasured beats
+measured badly* — and **claimed nothing about my surface**,
+measuring only their own. ⭐ **The difference between the two
+results is the finding**, and it only exists because two
+desks ran the same words as two different predicates.
+
+Banked 2026-08-05 23:05 JST.
