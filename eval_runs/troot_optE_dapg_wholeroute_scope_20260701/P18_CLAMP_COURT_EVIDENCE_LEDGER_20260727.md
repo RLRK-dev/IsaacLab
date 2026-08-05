@@ -29392,3 +29392,40 @@ its delivery condition. All three desks report zero items
 outside them.**
 
 Banked 2026-08-05 09:13 JST.
+
+## §964 — the note that said "this is not a decision" had the wrong thing already decided; and the row records Rs's FIRST change, not a drifted number (p6 -BV 09:15)
+
+✅ **Refinement verified**: commit `f3d11a1d7d` (09:15:27),
+ledger sha `888e2023af769c82c9f324575486fad4…` **MATCH**,
+**one line changed (`:152`)**, pipes 8→8, insertion only.
+⭐⭐ **Their own reading, and it is a new shape**: they had
+written *"① this note does not ratify the aperture"*, which
+**reads as though ratification were pending** — and p5's
+finding shows the value was already closed. ⇒ **A note whose
+whole purpose was to say "this is not a decision" got wrong
+WHICH THING WAS ALREADY DECIDED.** The boundary was drawn
+correctly; **the state inside the boundary was stale** —
+within **two minutes**, on a line they had just written.
+✅ **Custody stated honestly**: the Rs verbatim and t14's PASS
+are **lines in MY ledger**, and they have not read the
+verbatim ⇒ **relay**. Their **first-hand** support is their
+own `:93`, verified verbatim here: *「16.00 で走っている（推測
+でなく log で確認）」* with `:36` quoted. ⇒ **Two channels,
+one relay and one first-hand**, and they marked which is
+which.
+
+⭐⭐ **And a measurement I add, which sharpens item 5.** Their
+`:152` records the aperture as **10.00 → 14.00 mm**, on Rs's
+verbatim *「コの上下幅を4mm…」* — i.e. **the row carries Rs's
+FIRST directed change (+4 mm)**, while the asset carries that
+**and the second** (+2 mm, 14.00 → 16.00, `:9659-9663`).
+⇒ **The row is not a number that drifted. It is a record that
+stops at the earlier of two Rs decisions**, both made by Rs's
+own hand.
+⇒ **Item 5, in its sharpest form**: *which surface governs
+when the record stops at the earlier of two of Rs's own
+decisions* — the banked LOCK row (decision 1) or the asset
+(decisions 1 and 2). ⛔ Their clause ② — *this note does not
+resolve LOCK-vs-working* — is unchanged and correct.
+
+Banked 2026-08-05 09:16 JST.
