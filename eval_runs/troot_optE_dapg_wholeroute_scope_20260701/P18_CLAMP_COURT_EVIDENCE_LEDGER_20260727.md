@@ -29429,3 +29429,57 @@ decisions* — the banked LOCK row (decision 1) or the asset
 resolve LOCK-vs-working* — is unchanged and correct.
 
 Banked 2026-08-05 09:16 JST.
+
+## §965 — the frame question they held as unmeasured was closed in my ledger; third time this morning (p6 -BW 09:18)
+
+### ✅ Their corroboration verified, geom by geom
+
+`f1ext` rgba `0.85 0.25 0.25` = **red**, local z **0.0402**,
+**unchanged**; `f2ext` rgba `0.20 0.45 0.95` = **blue**, local
+z **0.0218**, moved from the row's **23.80** by **exactly
+2.00 mm**. ⇒ **The subject (the blue claw) and the amount
+(2 mm) of Rs's second instruction both match the asset**,
+which supports the two-decisions reading without needing it
+to be assumed.
+
+### ✅ And the direction question they refused to judge is already closed — in my ledger
+
+They flagged that in the **local** frame blue is the *lower*
+geom and the move was **local −z**, which reads against the
+verbatim *「青い爪（コの上側）を2mm うえに移動」*, and they
+**declined to call it a contradiction** because they had
+once argued a world-frame instruction in local coordinates,
+declared a STOP, and retracted. **That caution was correct.**
+⭐⭐ **And the measurement exists, on my surface, three lines
+of it**: `:9660` — *world rise ≠ 2.0 (tool tilted; measured
+**L +1.9 / R +1.6 mm**)*; `:9746` — *the band is pad-local
+(change exactly 2.00); world rises (+1.9/+1.6) are
+**tilt-projections***; `:9791` — *Roll-projection closure:
+**world rises = pad 2.00 through roll (2.00·cos…)***.
+⇒ **local −z maps to world UP**; *「コの上側」* is the
+**world**-up side; *「2mm うえ」* is the pad-local 2.00 whose
+world projection is +1.9/+1.6. ⇒ **The verbatim is consistent
+once the frame is named, and the projection was closed
+arithmetically.**
+⇒ **No world measurement is needed. Item 5's wording stands,
+and the sub-question is retired rather than added** — which
+is the direction a pending list should move.
+
+### ⭐⭐ Third time this morning, and it is no longer three incidents
+
+§961 — the 15:45:09 write I had verified 44 minutes earlier.
+§963 — the aperture closure at `:9659-9663`, in lines I
+banked. §965 — the roll-projection closure at `:9746`/`:9791`.
+**Every one surfaced because another desk raised it, not
+because I retrieved it.**
+⇒ **That is not three lapses; it is a property: the ledger
+has outgrown my retrieval.** ⇒ **Queries into it must be
+RUN, not remembered** — the same rule I have applied to
+everyone else's corpora all day, now applied to the corpus I
+maintain.
+⇒ ⚠ **And it belongs in Rs's item 1**: the argument that this
+ledger is the record a fresh session would need is only as
+good as the record being **queried**. It has answered three
+questions today that its own author did not know it held.
+
+Banked 2026-08-05 09:19 JST.
