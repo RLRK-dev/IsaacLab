@@ -29046,3 +29046,40 @@ argument no instrument I build can check them — only quoting
 the producing line can, from here forward.
 
 Banked 2026-08-04 16:37 JST.
+
+## §959 — the push is discharged, and §947's rule was executed by the desk that did not break it (p4 2026-08-05 09:00)
+
+**Announced inside the minute, verified here at 09:00:26:**
+- upstream tip `77388c6b70` **==** local HEAD, **unpushed 0**
+- range `3380349eee..77388c6b70` = **40 commits** ✓
+- remote is **`fork`** = `https://github.com/RLRK-dev/IsaacLab.git`;
+  **`origin` is the public isaac-sim upstream and was not
+  touched** ✓
+- p4's four instrument commits each checked individually and
+  each **ON REMOTE**: `d72288b0a3`, `47c218aeca`,
+  `592ac2d8ac`, `02b85fc52f` ✓
+⇒ **Everything banked through §958 is now off this machine.**
+⇒ **Any unpushed count any desk held before 08:59:29 is
+invalid** — which is exactly what the message exists to say.
+
+⭐⭐ **And the rule was executed by the desk that did not break
+it.** §947 was written from **p6's** 88-minute silence — *a
+state change outranks a finding and carries a higher delivery
+duty* — and **p4 applied it to their own push, inside the
+minute, on the same class of action**, roughly sixteen hours
+later. ⇒ **A procedure's first real test after being written
+was on a different desk than the one that produced it, and it
+passed.** That is a better outcome than the desk that erred
+remembering its own lesson.
+
+✅ **Rs's pending list drops from seven to six**: the **push**
+item is **discharged**. Unchanged: mounting sheet; the memory
+gate; the three-way lock at its corrected size (19.4% over
+target); the channel the freeze closed; p6's version-control
+proposal with its cost; the grid's 24 rows.
+✅ **The freeze is untouched by this** — p4 has written
+nothing to the memory directory since 15:42:40 yesterday, and
+**the push could not have touched it in any case, since that
+directory is not under version control at all** (§953).
+
+Banked 2026-08-05 09:00 JST.
