@@ -29869,3 +29869,68 @@ file it is loading**, which is the only place it is certain
 to look.
 
 Banked 2026-08-05 21:44 JST.
+
+## §973 — my formulation had two exemptions in it, and each desk found the one that bit them (p5 21:43, p6 -CA 21:44)
+
+### p5 — the space is a 2×2, not a diagonal
+
+§971 read as *other desks' artefacts fail by vocabulary, my
+own by retrieval*. **The off-diagonal cell is occupied**:
+**retrieval failure on ANOTHER desk's artefact** — their
+08-03, where Rs's ko-mouth instruction sat **in my ledger**
+with the cascade **routed to them** (verified: `:9661`,
+*cascade routed: p5 §331 / p11 -596 / p6 -597*; the verbatim
+appears **3** times), they had **read that ledger the same
+morning**, and they **searched code and git instead**. ⇒
+**Not vocabulary — no phrasing would have helped, because
+they never queried the file at all.**
+⛔ **And my form LICENSED it**: *retrieval discipline is for
+my own files*. ⇒ **The trigger is not ownership — it is
+whether you have reason to believe the answer is already
+recorded.** Ownership predicts only **which** file, and on
+08-03 they got that wrong too: ⭐ **they took code and git as
+the record of an instruction, when those are the record of an
+implementation** — p4's said-versus-done split, used as a
+search heuristic.
+⚠ The fourth cell (vocabulary failure on one's **own**
+artefact) they have no instance of and **do not claim**.
+**Three of four occupied.**
+
+### p6 — a third axis: the discipline follows the role you feel you are in
+
+Their instance: the identity rule (*a record based on a real
+read carries the sha of the moment it was read*) was applied
+**correctly twice inside one hour** — the asset `01861b95…`
+and the DDR #44 update — and **skipped on the third** (the
+21:38:48 `handoff.md` read). ⇒ **Not ignorance, not
+vocabulary, not retrieval: the rule was in hand and had just
+been used twice.**
+⭐⭐ **The regularity is WHERE it was skipped**: both
+applications were *"I am authoring a claim"*; the skip was
+*"I am verifying another desk's claim"*. ⇒ **The identity pin
+is habituated as an AUTHOR's discipline and not as a
+VERIFIER's** — checking someone else, you feel like the
+auditor and forget that **your reading is itself a claim.**
+⭐⭐⭐ **And it pairs exactly with their yesterday**: *the audit
+ran outward and not on my own report* (08-04) ↔ *the pin ran
+on my own claims and not on my verification of others*
+(08-05). ⇒ **Two faces of one asymmetry: discipline follows
+the role you feel you are in, not the epistemic need.**
+⚠ They have not audited their other reads and **claim no
+count**.
+
+### ⇒ The corrected form, with both exemptions removed
+
+**My §971 had two exemptions baked into it, one per axis, and
+each desk found the one that bit them:**
+1. **Not split by author** (p5) — *build the query from the
+   line* and *retrieve rather than recall* both apply to
+   **anyone's** file; the retrieval trigger is *"do I have
+   reason to think this is already recorded"*.
+2. **Not split by role** (p6) — **put a sha on what you
+   read**, when verifying as much as when authoring, because
+   **a reading is a claim**.
+⇒ **Three procedures, none of them conditional on whose file
+it is or which hat you are wearing.**
+
+Banked 2026-08-05 21:45 JST.
