@@ -29311,3 +29311,84 @@ closed-query rule landing on me on the day I have been
 applying it to everyone.
 
 Banked 2026-08-05 09:10 JST.
+
+## §963 — ⛔ I put a closed question on Rs's list, and the answer was in my own ledger (p5 09:12, p4 09:09, p6 -BU 09:12)
+
+### ⛔ Item 5 was half-answered before I wrote it — verified in my own bank
+
+p5 cited **into this ledger** rather than asserting, and both
+citations hold:
+- **`:9659-9663`** — Rs's instruction ② verbatim,
+  *「青い爪（コの上側）を2mm うえに移動」*＋*「それでいい」* ⇒
+  **"§0#4 gripper-geometry premise CHANGED by Rs's own hand"
+  (DDR #44 form)**, cascade routed to p5 §331 / p11 -596 /
+  p6 -597, and it explicitly **CLOSES** the 15:14
+  observation: the *"14.0mm → 16.0mm"* text was p4's
+  in-progress report of that Rs-directed change; **no
+  unrouted change existed**.
+- **`:10050-10053`** — t14 ran at **opening 16.00**, closing
+  §331(a)'s caveat ⇒ **the first grasp-gate PASS was measured
+  WITH Rs's +2 mm in effect.**
+⇒ **The aperture VALUE is closed by Rs's own hand**, and a
+banked PASS stands on it.
+⛔ **So item 5 as I worded it — *"ratification of the
+aperture"* — would have asked Rs to re-decide what Rs already
+decided by hand.** ⇒ **Already-decided ≠ pending**, one level
+worse than p4's *unrequested ≠ pending*, because it spends
+the attention the whole list exists to protect.
+⭐ **And the answer was in my own ledger, at lines I banked**
+— the second time this morning that what was missing was
+**retrieval, not knowledge** (§961).
+✅ **p5's own limits, correctly stated**: §331 has no heading,
+only references; and the heading below `:10054` — *"346. The
+ratification converges — p5 yields the layer and adds the
+height to the annotation"* — names **a layer and an
+annotation**, and they **refused to read a heading as a
+result**. Verified: that heading's subject is not established
+as the aperture.
+
+### ⚖ Item 5 re-scoped, not removed
+
+⛔ **Out**: *may the aperture be 16.00* — closed at
+`:9659-9663`, measured under at `:10050-10053`.
+✅ **Live**: **which SURFACE is authoritative — the banked
+LOCK row, or the asset Rs changed by hand.** That is a
+records/spec question, **Rs-exclusive** (04-Specs is CC
+read-only), and it is exactly what p6 measured: the two
+disagree, both committed, both clean.
+⇒ **Item 5 now reads: "§0 #4 — reconcile the banked LOCK row
+with the asset Rs changed; which surface governs."** Not a
+re-ratification.
+✅ **And p6's DDR #44 update is exactly right under this**:
+commit `4ca138e408` (09:12:00), ledger sha
+`c2969b98f9a2a3a2a182e4cb034e21d6…` **MATCH**, **one line
+changed (`:152`)**, pipes 8→8, insertion only — and the
+**boundary is written INSIDE the row**, verbatim: it does not
+ratify the aperture, does not resolve LOCK-vs-working, names
+§0 #4 as Rs's, and says *do not read this as a decision*.
+**The record disagrees; the decision does not.**
+
+### p4 — nothing outside the eight, two more mislabels dropped, and one delivery condition
+
+Their probe (**64** statements containing *pending / awaiting
+/ Rs's own word / unauthorised / unreleased / held*, read and
+resolved) is **stated as a probe, not a census** — an item
+phrased without those words would not appear.
+⛔ **Two more of their own labels corrected**: the **repair-on
+comparison run** and **a run at another centre or a sweep**
+were written as *needing Rs's word*, which **reads as
+pending**. Both are **unrequested**; no desk has asked and
+they are not asking. ⇒ **Dropped from every list.**
+⭐⭐ **And the boundary they asked to have stated rather than
+assumed, which I am attaching to item 1 as a DELIVERY
+CONDITION**: *if Rs rules on item 1 and the ruling reaches
+this thread only, the next p4 session will not see it either
+— the ruling would land in the same place the freeze did.*
+⇒ **Not a ninth item; a property of items 1 and 2 that only
+appears at the moment they are answered.**
+
+⇒ **The eight stand, with item 5 re-scoped and item 1 carrying
+its delivery condition. All three desks report zero items
+outside them.**
+
+Banked 2026-08-05 09:13 JST.
