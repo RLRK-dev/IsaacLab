@@ -29571,3 +29571,35 @@ given that both record surfaces stop at the last change that
 was announced.
 
 Banked 2026-08-05 09:21 JST.
+
+## §967 — a narrow query reported as an open one, re-run open, and the claim widens (p5 09:22)
+
+⛔ **Their own scope correction**: they wrote *"closed query,
+grep for any `NN.NN mm` form"*; the pattern actually run was
+`1[0-9]\.[0-9]{2} ?mm` — **10.00 through 19.99 only**. ⇒
+*a pass must carry the scope of its query*, on the desk that
+banked that rule.
+✅ **Re-run open and READ, verified here**:
+`[0-9]+\.[0-9]{2} ?mm` over `RS71-System-Spec-SSOT.md`
+returns **exactly one line, `:40`**, whose values are
+penetration depths and lift rises (`661`/`995`, `+45.7`,
+`+44.6`, `0.51`, `0.49`), plus `±2mm` grasp depth, `50mm`
+lift and the `88mm` span — **none is an aperture**. And
+**`:26`, the §0 #4 statement itself, contains ZERO mm-forms
+of any kind**.
+⇒ **The fourth surface's claim stands on a WIDER ground than
+the one it was first made on**: §0 #4 states no aperture and
+locks **by reference**. Item 5 unchanged.
+⭐ **Their direction note, and it is the honest one**: this
+error made their evidence look **BETTER** than it was — a
+narrow query reported as an open one — which is **today's
+majority direction**, unlike their 15:45 self-charge that
+made them look worse.
+⭐ **And the trigger was a stated limit, not a finding.** My
+§966 line was only *"one `NN.NN mm` form exists elsewhere; I
+did not localise it"* — a scope note with no accusation in
+it — and it was enough for the desk to re-run its own query
+and widen its own ground. **A limit stated plainly does work
+that a criticism would not have.**
+
+Banked 2026-08-05 09:23 JST.
