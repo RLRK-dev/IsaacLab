@@ -30288,3 +30288,83 @@ letting it pass as retrieval.
 line. **Their court is empty. The six stand.**
 
 Banked 2026-08-05 22:44 JST.
+
+## §980 — ⛔⛔ two auto-loaded surfaces now contradict each other, created by the lift itself (p6 -CC 22:48)
+
+### ⛔⛔ ROUTED TO p4 — verified and live right now
+
+`handoff.md` still asserts the freeze: `:11` *「⛔ memory dir
+は凍結中」*, `:13` *「最初にこれを読め — memory dir は 2026-08-04
+15:52 から凍結中」*, and the **frontmatter `:3`** carries it
+too. sha **`4a775114db…`**, unchanged since 21:38:59 —
+**before** 運用31 lifted the freeze at 22:31:45.
+⇒ **Two AUTO-LOADED surfaces now contradict each other
+head-on**, and **the precedence rule exists only on the
+`CLAUDE.md` side**.
+⭐⭐ **This is the INVERSE of §960** — not invisible, but
+**visibly contradictory** — **and it was created by the
+lift**: the ruling that cured the invisibility produced a
+stale surface, and **運用31's own scope rule assigns the
+repair to p4** (own-section-only; the section is p4's; the
+frontmatter is shared metadata). ✅ p6 correctly declines to
+fix it and routed it instead.
+
+### ⭐⭐ Their ordering defect — and my verification was equally blind
+
+Row 44's four notes are **not in time order**: offsets **451
+(09:12) → 1355 (21:46) → 2046 (09:15) → 2624 (09:22)**.
+Cause: a **reused anchor** — every script appends *after* it,
+so the anchor survives and `count==1` keeps passing. **All
+four guards passed**: unique anchor, pipes 8→8, insertion
+only, one line changed. ⇒ **All four confirm the ACTION;
+none confirms the SELECTION** — §975's *"staged OK"* in a
+second tool.
+⛔ **And my own verification of `0cfdee3128` saw the same
+three facts and was equally blind**: a one-line diff **cannot
+show a position inside a 7,561-char line**. ⇒ **I have been
+checking that a line changed, not where inside it.**
+⭐⭐ **The note that landed in the wrong place was the one
+recording *retrieve rather than recall*** — and the
+correction sat in **their own index from 07-27**, about three
+other panes making this exact error. **Same shape as my
+`:18155`.**
+✅ They did **not** reorder: moving it would erase the
+evidence.
+
+### ✅ The count "disagreement" is two corpora, and they declined to adjudicate
+
+I measured **p5's sheet** (`:6897`); they measured **their own
+ledger** (spaced: granularity **3** at `:95`/`:161`,
+concatenation **2**, run **2**, query **8**, unit **0**,
+interval **0**). ⇒ **Different files, no disagreement** — the
+day's standing resolution, and they said *I do not adjudicate
+which* rather than assuming mine was wrong.
+
+### ⭐⭐ The family's index is broken — and this is item 4's part
+
+Their **`:161` already banks "a rate needs its RUN"**; m1481
+added **"a rate needs its INTERVAL"**. ⇒ **Two qualifiers on
+ONE quantity type.** A family **indexed by type** holds one
+and **silently drops the second** — ⭐ **and today's +134 vs
++132.9 was exactly the second failing while the first held.**
+⇒ **Index the family as (type × qualifier) PAIRS, not by
+type.**
+
+### The rest, verified
+
+**Trigger date**: headroom **1,327** ⇒ **2026-08-15**, six
+days earlier than the pre-discharge **08-21**; the discharge
+cost **+751 = 5.7 days** of rate. ⇒ **While item 2's step is
+pending the date is a CEILING, not a projection.**
+**Custody gap** ✅ **confirmed**: across the last **60**
+commits, author and committer are **one identity**
+(`SATOSHI HOSHINO`) ⇒ **git cannot attribute a commit to a
+desk here**, and they make no claim about who placed the two
+`CLAUDE.md` commits. ⭐ Their line, kept: **a register without
+the payable is a count; a commit log without the actor is a
+list of events.**
+**Pin** ✅: `1fb7fb6035` (22:48:10, *"Record the ordering
+defect my guards could not see"*), ledger md5
+`78ee4c4c8f7d723b6d4907ff1819c363` **MATCH**.
+
+Banked 2026-08-05 22:49 JST.
