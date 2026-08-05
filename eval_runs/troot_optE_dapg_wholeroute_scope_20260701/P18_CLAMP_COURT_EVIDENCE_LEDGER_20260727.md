@@ -30714,3 +30714,71 @@ results is the finding**, and it only exists because two
 desks ran the same words as two different predicates.
 
 Banked 2026-08-05 23:05 JST.
+
+## §986 — ⭐⭐ item 4 restated: the deficiency is GRANULARITY, not tracking (p6 p6-4, 23:07)
+
+### ✅ Their numbers verify, and the contrast with my surface is the finding
+
+**Their ledger**: **646,703 chars** ✓, median line **140** ✓,
+max **204,528** ✓, and the **top 15 lines hold 482,883 chars
+= 74.7%** ✓ of the file. (Line count 248 here vs their 249 —
+a trailing-newline convention, not a discrepancy worth
+chasing.) **Half their file lives in FIVE lines — 2.0% of
+its lines.**
+**My ledger, for contrast**: **30,716 lines**, 1,992,131
+chars, median **62**, max **574**; **top-15 lines = 0.2%** of
+the file; **half the file needs 9,882 lines (32.2%)**.
+⇒ **Two ledgers, both fully version-controlled, with opposite
+diffability**: theirs is **74.7% undiffable**; in mine
+**nothing can hide** — the largest line is 574 chars.
+
+### ⭐⭐ Which corrects item 4 as I had been carrying it
+
+My framing was *a corpus you cannot diff is one you do not
+re-read*, aimed at `memory/`, **which has no tracking at
+all**. **Theirs HAS tracking and is still undiffable for
+three quarters of its content.** ⇒ **THE DEFICIENCY IS
+GRANULARITY, NOT TRACKING** — putting git on `memory/` closes
+the tracking half and **does nothing for the granularity
+half** if the same formatting follows it there.
+⇒ **Item 4 goes to Rs as two parts, not one**: **(a)
+tracking** — `memory/` has none (§953); **(b) granularity** —
+tracking gives visibility only at the granularity the
+formatting permits, **and p6's ledger is the measured
+counter-example.**
+
+### ⭐ And it is the measured common cause of two of tonight's failures
+
+The **row 44 ordering defect** was invisible to their guard
+**and to my verification** because it happened **inside one
+7,561-char line**; the **line-level overlap predicate**
+returned 100% on their surface **from the same widths**
+(§985). ⇒ **One measurable property, two independent
+failures, three hours apart.**
+⭐ **And it explains the asymmetry honestly**: my verification
+of their edits was blind for a **structural** reason, not a
+procedural one — **I was reading a diff at a granularity
+their file does not support**, and nothing analogous can hide
+in mine.
+⚠ **They do not propose the remedy**: reformatting the SSOT
+**rewrites banked content and would erase the diff history
+that is the evidence here**. ⇒ Rs's call inside item 4;
+**they supply the number, not the fix.**
+
+### ⭐⭐ Their self-report: the guard proved position and never asked relevance
+
+All **five** of their notes tonight landed on **row 44**, the
+**DDR gripper-geometry** row — while being about **their
+instrument and their counting**, not about §0 #4. ⇒ **The
+cell-tail guard proved WHERE the text lands and never asked
+WHETHER that row was the right row: selection verified
+POSITION, not RELEVANCE.** ⭐ *"Staged OK confirms the action,
+not the selection"* (§975), **one level up**.
+✅ **They are not moving them** — moving is what erases
+evidence, and **the drift is more useful visible than
+tidied**; they record it so the pile reads as **drift**
+rather than as five considered placements.
+⭐ **And no ledger append for either finding** — the second
+**would land on the very row it is a complaint about.**
+
+Banked 2026-08-05 23:08 JST.
