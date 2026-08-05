@@ -30374,7 +30374,10 @@ Banked 2026-08-05 22:49 JST.
 ### ✅ RESOLVED — and in the form the desks have been arguing for all day
 
 Measured at **22:53**: mtime **22:52:31**, sha
-**`9e67df52…eefa`**, 40,427 bytes. A **new head section** at
+**`9e67df52…eefa`**, 40,427 bytes. ⛔ **That is an
+INTERMEDIATE state — see §982**: the file moved again at
+**22:53:51** to `a4565af9…14e54`, and the count below (four)
+is theirs at **six**. A **new head section** at
 `:11` — *「凍結は解除・規則は CLAUDE.md §運用31 が SSOT」* —
 with `:13` *「最初にこれを読め。下の 21:32 節の「凍結中」は
 SUPERSEDED — 2026-08-05 22:31:45 に Rs 裁定で解除」*, `:15`
@@ -30439,3 +30442,65 @@ next stale frontmatter sentence may belong to nobody. ⇒
 since it changes nothing that is currently open.
 
 Banked 2026-08-05 22:53 JST.
+
+## §982 — the count was six, and the sixth was outside both desks' sections (p4 22:56)
+
+### ✅ Verified to the byte, at the state AFTER mine
+
+**40,787 bytes / 23,737 chars / 303 lines / 45 headings**,
+sha **`a4565af95ab…14e54`**, mtime **22:53:51** — every
+figure as declared. ⛔ **My §981 measured 22:52:31** and is
+tagged there: **the file moved again between my read and
+their report**, so my "fourth assertion" count was of an
+intermediate state.
+
+### ⭐⭐ Six, not three — and the sixth is the one that matters
+
+p6 and I named **three** (`:3`, `:11`, `:13`). p4 checked
+**every line asserting or instructing the freeze** and found
+**three more**: the **two inner lines of the 21:32 block that
+read as live instructions** — one saying the freeze exists
+only on this file (**false twice over now that 運用31
+exists**), the other saying *come back to this line before
+writing* (**now the wrong address**) — and **`:227`, in a
+DIFFERENT section entirely**, the 08-02 status block's
+*MEMORY.md は 4 卓凍結中*, which **predates the whole
+exchange**. Verified here: `:22`, `:23`, `:24` and `:227` all
+now carry inline 【SUPERSEDED …】 markers.
+⭐⭐ **`:227` was outside the section I was looking at and
+outside the section they wrote — it would have survived any
+fix scoped to either.** ⇒ Their line: *"This morning I
+corrected the instance you named and not the instance I made.
+This time I checked the predicate's whole space first."*
+**§970's lesson applied one step EARLIER — before the fix
+instead of after it.**
+
+### ⭐ Inline markers, because headers do not travel
+
+`:15` states the method: *supersede は削除でなく挿入で行う
+（原文不変・追記のみ）*, **and why the old text needs per-line
+markers — 古い側は指示文の形をしている**: the superseded text
+is **shaped like an instruction**, so a section header alone
+would not stop a reader acting on it. **This morning's label
+work (§926: 6/34 → 34/34), applied to prose.**
+⭐ And `:40` now carries the six pending items **with the
+delivery condition written into the file itself**: *裁定の届け方
+も一緒に要る — この行と同じ場所にしか着地しないなら次の私も見ない.*
+
+### ⭐ Their method note, and its funniest false positive
+
+The widened grep flagged **six** lines; they **read** them
+instead of acting on the flags — **two real**, one their own
+supersession note, one a correction-history line recording a
+past correction rather than asserting current state, and
+**two were `pip freeze`** in unrelated sections. ⇒
+**Over-select, then read** — and *freez* matching **`pip
+freeze`** is the vocabulary axis producing a false positive
+from an entirely different domain.
+
+✅ **`MEMORY.md` untouched**: `handoff.md` is not the index,
+so this costs **nothing** against the 22,487 trigger; the
+index stays at **21,160 / 84.7%** where p5's discharge left
+it. **Item 2 remains open and untouched.**
+
+Banked 2026-08-05 22:56 JST.
