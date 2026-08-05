@@ -29992,3 +29992,97 @@ much as authoring. ⚠ With their non-claim beside it: other
 reads unaudited, one instance named, no count asserted.
 
 Banked 2026-08-05 21:47 JST.
+
+## §975 — ⭐⭐⭐ ITEM 1 DECIDED BY RS AND LANDED WHERE A FRESH SESSION READS IT (p4 22:33)
+
+### ✅ The implementation verifies, including the part that could have gone wrong quietly
+
+Rs verbatim **「推奨で良い」** on p4's recommendation.
+Implemented at **`9213a675b0`** (22:31:45, *"Put the
+memory-directory rule where a fresh session reads it"*),
+**`CLAUDE.md` §運用31** inside セッション管理 — **7 insertions /
+1 deletion**, and 運用31 is present in the **committed** file.
+⇒ **The rule is now on an auto-loaded surface**, which was
+§960's whole finding: the freeze never was.
+**Its content**: topic files **RELEASED**; `MEMORY.md` under a
+**growth condition** (hard **24,985**, ≥90% ⇒ a **coordinated**
+compaction is raised, **never a solo pass**, and **below 90%
+the hook's 17.1K demand is explicitly not to be obeyed** —
+17,510 is a target, not a requirement); `handoff.md` **SHARED
+last-writer, edit your own section, never rewrite**; the axis
+is **growth, not level**; and the **2026-08-04 15:52 freeze is
+LIFTED**, citing my `:19706` and `:19782` as the superseded
+basis.
+
+### ✅ The staging claim — checked, because this is where a shared tree bites
+
+The **23 uncommitted lines that are not theirs**
+(`## Pane Message Routing Protocol`) are: **0 in the commit,
+0 in its parent, 1 in the working tree**, and the single hit
+inside `git show` is **in p4's own commit message**, not in a
+staged line. Unstaged diff on `CLAUDE.md` is **23/0**. ⇒
+**The foreign section was not banked, and it remains
+untouched for whoever wrote it.**
+⭐⭐ **And their near-miss is the instrument lesson.** Their
+first attempt filtered with a **`-U0` hunk header against a
+`-U3` diff**; the boundary did not match; **all 30 lines were
+staged, and `git` said "staged OK".** They found it only by
+**asking whether the foreign section was inside the staged
+diff**. ⇒ **"Staged OK" confirms the ACTION, not the
+SELECTION** — the selector defect, this time inside the
+staging tool, on an **L3 file**.
+
+### ⛔ The figure I carried to Rs was wrong, and the correction was in my own ledger
+
+The hook's **K is ×1024** — settled at **my own `:18155`**
+(*"limit 24.4K = 24986 chars"*). p4 had been computing ×1000.
+⇒ target **17,510** not 17,100; **MEMORY.md at 20,409 is
+16.6% over target**, **not the 19.4% I reported to Rs**.
+⇒ **The same magnitude has now been wrong twice in two
+different unit errors — bytes (63.4%), then chars×1000
+(19.4%) — and I relayed both.** ⭐ **And the settlement that
+would have caught the second was in my own corpus**:
+retrieval failure, on the one figure standing in front of Rs.
+✅ **Everything else re-derived and matching**: **81.7%** of
+hard, **18.3%** clearance to hard, 90% ≈ **22,487**, target
+**17,510**.
+⚠ **Two small mismatches worth aligning, neither material**:
+(i) `:18155` says **24,986** (24.4×1024 = 24,985.6 **rounded
+up**) while 運用31 says **24,985** (**truncated**) — a
+one-char gap between the rule and the line it cites;
+(ii) growth recomputes to **+132.9/day** over 14 days
+(18,549 → 20,409) against the **+134** reported.
+
+### ⭐ And their own retrieval finding, on their own material
+
+**§700(a)(b)** already recorded that **the hard limit is what
+must be protected and that the forcing function is GROWTH** —
+from **p4 -253, their own earlier reading**. ⇒ *The answer to
+"what should this be decided on" had been **derived and not
+retrieved**.* My §965 mode, on their material, an hour after
+it was framed.
+
+### ⚖ What this decides, and what it does not
+
+✅ **Item 1: DECIDED.** Its three measured consequences go
+with it — the rule is now auto-loaded (a); topic files are
+released so p4's four procedure corrections have a channel
+again (b); `handoff.md` carries the state and is governed by
+an edit-your-own-section rule (c).
+✅ **Item 3: RESOLVED.** The lock had three jaws; the ruling
+removes two — the freeze is gone and the hook's demand is
+explicitly not to be obeyed below 90%. **What survives is the
+file's own no-solo-pass rule, which the ruling keeps and
+cites.**
+⛔ **Item 2 stays OPEN, and I do not infer it.** Their reading
+— with the freeze lifted a revert restores nothing, so **B**
+is the consequent rather than a choice — is sound, **but Rs
+approved a RULE, not a disposition of past writes.** They
+decline to infer one; so do I.
+⇒ **Rs's list: 8 → 6.** Remaining: **2** memory gate (A/B/C +
+p5's five debts and parked write + `handoff.md`'s
+classification), **4** version-control proposal, **5** §0 #4's
+four surfaces, **6** the control-method decision, **7**
+mounting sheet, **8** grid's 24 rows.
+
+Banked 2026-08-05 22:34 JST.
