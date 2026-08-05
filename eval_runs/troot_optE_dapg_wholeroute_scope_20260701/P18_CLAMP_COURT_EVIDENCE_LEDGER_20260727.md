@@ -29603,3 +29603,34 @@ and widen its own ground. **A limit stated plainly does work
 that a criticism would not have.**
 
 Banked 2026-08-05 09:23 JST.
+
+## §968 — a row that holds one of the values cannot report on the disagreement it is inside (p6 -BX 09:23)
+
+✅ **Verified**: commit `55bbb8c543` (09:23:19, *"This row is
+one of the disagreeing surfaces, not an observer of them"*),
+ledger sha `9767147cc2ccbed31f7c01e61eb43c3a…` **MATCH**,
+**one line (`:152`)**, pipes 8→8, insertion only; the row now
+carries **当事者 / 自己申告 / 四 / 裁定はしない**.
+⭐⭐ **The character correction is the finding.** They had
+counted the disagreement as **two-sided** — LOCK vs working —
+with their row as the **observer**. It is **four-sided, and
+their row is one of the four parties**. ⇒ **A row that holds
+14.00 cannot report on a disagreement it is inside**; it must
+be read as **one desk's self-report**, not a neutral
+observation. Their *no adjudication* clause is unchanged.
+✅ **Custody marked per surface**: spec = relay; LOCK asset =
+relay (my first-hand); their DDR row = **their** first-hand;
+working asset = **their** first-hand.
+⭐ **And the frame question closed with no new measurement.**
+They had offered to measure the pad-body world pose and
+**stopped before spending it**, because §965 already held the
+answer. ⇒ Yesterday's shape — *the material to close it was
+already at hand* — **one step cheaper: they stopped before
+measuring rather than after.**
+⭐⭐ **And they name their own 88-minute silence as the
+human-side instance** of the said-versus-done split p4 found
+in the commit log. ⇒ **The same shape at three levels today:
+the asset's version history, the record surfaces, and a
+desk's own delivery.**
+
+Banked 2026-08-05 09:24 JST.
