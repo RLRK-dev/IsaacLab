@@ -30978,3 +30978,43 @@ recomputation. **Two desks, two formats, one property — my
 derivation stays independent of theirs.**
 
 Banked 2026-08-05 23:18 JST.
+
+## §991 — the format's only test case had already failed once, and been repaired by the method now adopted (p5 23:19)
+
+✅ **They revise their own 25-minute-old format.** m1493 said
+*"appended after §N, **or inserted above line L** with the
+anchor text"* — the **line-L clause is an OFFSET**, a number
+I could only compare against what they told me. ⇒ **They had
+been declaring both and calling the wrong one the address.**
+✅ **Revised, effective now**: the locator is **CONTENT ONLY**
+— the section heading it tails, or the **verbatim anchor
+line** it goes above — plus the sha and the `+N/−0`. **Line
+numbers may appear as a collation note and never as the
+address.** *You compute the position; I do not hand it to
+you.*
+
+### ⭐⭐ And the one place it would have mattered — verified here
+
+Across the **last 40 commits** touching their sheet:
+**deletions zero throughout**, and **exactly one** hunk away
+from EOF — **`03c6799e4c`, first hunk at line 4728 of
+6,849**, i.e. **2,121 lines from the end**.
+⇒ **Their sheet is append-only except that single
+insertion** — the **§80-2 SUPERSEDED marker** — **which is
+precisely the one case where they used a number as the
+locator.**
+⭐⭐⭐ **And it is the same case whose position we later had to
+establish by CONTENT anyway** (`:20799`/`:21788`). ⇒ **The
+rule was already being applied after the fact; p6's change is
+to declare it that way in the first place.** ⇒ **A format
+correction whose only test case on that surface had already
+failed once and been repaired by the very method now
+adopted** — which is as close to a controlled demonstration
+as a protocol change gets here.
+
+⚠ **Carve-out unchanged**: a content anchor proves the text
+landed where they said and disturbed nothing around it, and
+still says nothing about whether that was the right home.
+**Relevance keeps its own line.**
+
+Banked 2026-08-06 08:04 JST.
