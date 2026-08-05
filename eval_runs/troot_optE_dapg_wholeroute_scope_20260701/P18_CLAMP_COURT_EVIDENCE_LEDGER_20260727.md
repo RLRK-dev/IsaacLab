@@ -29483,3 +29483,91 @@ good as the record being **queried**. It has answered three
 questions today that its own author did not know it held.
 
 Banked 2026-08-05 09:19 JST.
+
+## §966 — four surfaces, three values and a pointer; and I truncated a verbatim in a way that changed its type (p5 09:19, p4 09:21)
+
+### ⛔ My own error first: I dropped the word that makes it an increment
+
+m1471 quoted Rs as *「コの上下幅を4mm」*. The instruction is
+*「コの上下幅を4mm**増やして**」* — verified at my own
+**`:3550`**. ⇒ **Truncating the verbatim changed its TYPE**:
+*increase by 4 mm* became something readable as *set to
+4 mm*. **A dropped suffix is not a shortened quote; it is a
+different claim.** p5 caught it from the ledger I keep.
+
+### ✅ p5 — the banked LOCK asset carries ZERO decisions, not decision one
+
+Verified first-hand here: `2f85_koshape.xml`, md5
+**`0dc0ca3479056d04de80342e2188bdce`** ✓, `f1ext` z
+**0.0382**, `f2ext` z **0.0258**, half **0.0012** ⇒
+**0.0370 − 0.0270 = 0.0100 m = 10.00 mm** ✓.
+⇒ **Decision one (14.00) is NOT in the LOCK asset** — it
+lives in p6's DDR row and p4's ported model. ⇒ **The row that
+stops at decision one is the DDR row; the LOCK surface stops
+BEFORE BOTH.** My §964 wording put decision 1 on the LOCK
+row; corrected here.
+
+### ✅ And a fourth surface, which has no number at all
+
+`RS71-System-Spec-SSOT.md` §0 #4 states **no aperture**:
+closed query, `上下幅` = **0** occurrences, and `:26`/`:40`
+lock **by reference** to `2f85_koshape.xml` (and
+`GD-KoShape-Finger.md`). ⚠ One `NN.NN mm` form exists
+elsewhere in the file; I did not localise it, and p5's claim
+is about §0 #4.
+⇒ **If the pointer governs, the spec asserts 10.00 without
+ever printing it, and editing the spec's text alone would not
+move what it asserts.**
+
+| surface | value | decisions carried |
+|---|---|---|
+| RS71 §0 #4 | **no number — a pointer** | whatever it resolves to |
+| banked LOCK `2f85_koshape.xml` | **10.00 mm** | **zero** |
+| DDR #44 row | **14.00 mm** | decision 1 |
+| working `_ur15_2f85_koshape_actuated.xml` | **16.00 mm** | decisions 1 + 2 |
+
+⚠ **p5's stated limit**: banked→working is **+6.00** total,
+split `f1ext` **+2.00** / `f2ext` **−4.00**, which does **not**
+reproduce the recorded *split the claws ±2.00* for decision
+one ⇒ **per-decision attribution is not recoverable from these
+two files**; the 14.00 intermediate lives in a third asset
+they have not opened. They claim no attribution.
+
+### ✅ p4 — a third surface, and the reason both records stop where they do
+
+Recomputed from the geoms at **every commit that touched the
+file**, all three verified here: `a3fbd7d7e4` (07-27 12:47,
+*Track the gripper model the UR15 runs actually read*) =
+**10.00**; `f11273d5be` (07-27 16:25, ***Widen the ko mouth
+to 14 mm on Rs's instruction***) = **14.00**; `1a1efe0ac5`
+(07-28 15:16, ***Keep the fingers vertical on the way down to
+a clip, and measure the table***) = **16.00**; working tree
+clean = 16.00. **Three commits, two changes, +4 then +2.**
+⭐ **Mechanism distinguishes them**: decision 1 moved **both**
+jaws (±2.00 each, +4 total); decision 2 moved **one** —
+`f2ext`, the **blue** geom — which is precisely what Rs's
+verbatim names. ⇒ **Decision 2 is identifiable in the asset
+independently of the ledger that records the words.**
+⚠ They flag the local-−z direction as **frame-dependent** and
+explicitly do not claim a contradiction. ✅ **Answered in
+§965**: world rise **+1.9/+1.6**, closed as **2.00·cos(roll)**
+at my `:9791`.
+⭐⭐ **Their addition 2, and it is the finding.** The +4 commit
+**announces itself**; the +2 change **rode inside a commit
+about keeping fingers vertical**, whose subject never mentions
+the aperture. ⇒ **The COMMIT LOG also stops at decision one,
+for the same reason as the row — not a second accident.**
+⇒ **Two record surfaces both stop where the ANNOUNCEMENTS
+stop, while the asset carries what was done.** ⇒ *The record
+follows what was said; the artefact follows what was done;
+and they part company exactly where something was done
+without being said.* **That is today's whole shape, one layer
+down, in the project's own history.**
+
+⇒ **Item 5, final form for Rs**: **four surfaces, three values
+and a pointer — spec (pointer) / LOCK 10.00 / DDR row 14.00 /
+working asset 16.00 — and the question is which governs**,
+given that both record surfaces stop at the last change that
+was announced.
+
+Banked 2026-08-05 09:21 JST.
