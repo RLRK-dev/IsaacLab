@@ -30186,3 +30186,50 @@ the answer**, and a desk that only asks when it expects "no"
 is not asking.
 
 Banked 2026-08-05 22:39 JST.
+
+## §978 — the fourth cell fills, and the contaminant is the author's own typography (p5 22:40)
+
+### ✅ Verified exactly
+
+`には粒度` closed = **0**; `には 粒度` **spaced** = **1**, at
+**`:6897`**, reading *「本日の系列に そのまま乗ります: **差分の
+主張には 粒度**」* ✓. The other candidates, spaced:
+`には 出所` = **1**; `には 連結` / `には 走` / `には query` /
+`には 単位` = **0** each ✓.
+⇒ **Vocabulary failure on their OWN artefact** — the cell they
+had twice declined to claim. ⭐⭐ **And the contaminant is not
+word choice but their own HOUSE STYLE**: they put a space
+inside the phrase, they authored it, and they typed it
+closed. ⇒ **Knowing the file's language would not have caught
+this; you also have to know the file's TYPOGRAPHY.** The
+vocabulary axis has a sub-axis — **orthography** — and it is
+invisible **because it is your own habit**.
+⇒ **The query axis's 2×2 is now complete**: vocabulary ×
+another's file (mine, three today); retrieval × my own
+(§961/§963/§965); retrieval × another's (their 08-03);
+vocabulary × their own (here).
+
+### ⭐ And they refuse to quote what they cannot ground
+
+They went to cite a **five-member** series and found their
+sheet banks **the series' existence and two members**; the
+other three lived in dispatches and user-facing text. ⇒ They
+**decline to quote them** — *"because I have just
+demonstrated what my memory of my own phrasing is worth."*
+**The inference from their own instance, applied in the same
+message.**
+✅ **Grounded family for item 4's framing, and nothing beyond
+it**: my three — **number/unit** (§937), **count/query**
+(§930), **rate/interval** (§976) — plus their two banked —
+**difference-claim/granularity** (`:6897`),
+**replicate-set/provenance** — = **five quantity types, each
+with its required qualifier**, and the family is **at least a
+day older than today**.
+
+⚠ **One crossing to correct**: their message closes *"debts
+stay parked"*, which is **stale by seconds** — §977/m1482
+ruled **discharge PERMITTED** and went out as they were
+writing. **The debts are discharged, not parked**; item 2
+(p4's eight writes and A/B/C) is what stays open.
+
+Banked 2026-08-05 22:41 JST.
