@@ -29083,3 +29083,70 @@ nothing to the memory directory since 15:42:40 yesterday, and
 directory is not under version control at all** (§953).
 
 Banked 2026-08-05 09:00 JST.
+
+## §960 — ⛔⛔ the freeze is invisible to a fresh session, verified; and "unrequested" is not "pending" (p4 09:03)
+
+### Two pending lists reconciled
+
+Mine six, theirs six, **overlap three**. The mounting sheet
+and the grid's 24 rows are outside their court and they defer
+to mine; their **A/B/C** and the **`handoff.md`
+classification** sit inside my memory-gate item. Two real
+gaps remained.
+
+### GAP 1 — ⭐ unrequested is not pending
+
+They had listed **the M200 centre** as awaiting Rs. It is
+**not pending — it is unrequested**: nobody asked for it,
+because they declined to ask on their own account and said
+so. ⇒ **Calling it pending would put a request in front of Rs
+that no desk made.** Removed on their side; **not added to
+mine.**
+⭐ **A pending list that absorbs unrequested items
+manufactures decisions for the human** — the same failure as
+a census that counts the auditor, moved to a queue.
+
+### GAP 2 — ⛔⛔ and the mechanism is still armed, which I verified
+
+The conflict between **the harness's standing memory
+instruction** and **the freeze** was on their list and nobody
+else's, because they raised it **only in user-facing prose**
+and never dispatched it. ⇒ **A fifth instance of the channel
+they audited yesterday — and in the category their audit
+missed**, since they audited *corrections* while the channel
+also carries **decision requests**. Their *"4 of 126"*
+produced a live instance **within twenty hours**, and it is
+the item most likely to make the violation repeat.
+⛔⛔ **VERIFIED HERE, closed query**: the freeze appears in
+**ZERO** auto-loaded surfaces — `CLAUDE.md` **0**,
+`AGENTS.md` **0**, `.claude/rules/prohibited.md` **0**,
+`GOALS.md` **0**, and the three global personal files
+(`~/.claude/CLAUDE.md`, `l-gate.md`,
+`operational-know-how.md`) **0**. The **only** file in the
+repo containing *"No index writes at all"* is **this
+ledger**.
+⇒ **A fresh session cannot see the freeze. It can only see
+the instruction.** The freeze lives in my ledger and in each
+desk's live context; the instruction lives in their system
+prompt. ⇒ **The recurrence is STRUCTURAL, not behavioural** —
+p4's words, *"the failure has a mechanism and the mechanism
+is still armed"*, and the mechanism is now measured.
+⚠ **And the fix is Rs's, not mine**: putting the freeze on an
+auto-loaded surface means editing `CLAUDE.md` or
+`prohibited.md`, which are **L3 and Rs-exclusive**. I will
+not do it, and I am not proposing wording — only reporting
+that no surface currently carries it.
+
+### ⇒ Rs's list goes back to SEVEN
+
+**push** stays discharged (§959). Added as its own item, and
+it is the one that decides whether the others recur:
+**standing memory instruction vs the freeze — which governs a
+session that has not read this ledger.** The rest unchanged:
+mounting sheet; memory gate (p5's five debts, p4's eight
+writes, A/B/C, `handoff.md`'s classification); the three-way
+lock at 19.4% over target; the channel the freeze closed;
+p6's version-control proposal with its cost; the grid's 24
+rows.
+
+Banked 2026-08-05 09:03 JST.
