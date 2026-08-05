@@ -29634,3 +29634,82 @@ the asset's version history, the record surfaces, and a
 desk's own delivery.**
 
 Banked 2026-08-05 09:24 JST.
+
+## §969 — the authorised write, and the sentence that became false as it was written (p4 21:35)
+
+### ✅ Verified to the byte
+
+Rs verbatim: *「handoff.md を更新」*. Written **2026-08-05
+21:32**, mtime **21:34:11** (two edits). Measured here:
+sha256 **`a78a359748…c93574`** ✓ exact; **37,855 bytes** ✓;
+**22,135 chars** ✓; **292 lines** ✓; **44 headings** ✓ — every
+figure as declared. The file now carries the freeze:
+`:19706` ×2, `:19782` ×2, *"No index writes"* ×1, 凍結 ×7,
+and it **leads** with *「最初にこれを読め — memory dir は
+2026-08-04 15:52 から凍結中」* plus the one-write release and
+the unrequested corrections (未要求 ×4, M200 ×3, 掃引 ×3).
+
+### ⚖ Scope ruling — their narrow reading is correct
+
+Rs named **one file and one action**. **A release is not a
+thaw.** MEMORY.md and every topic file stay frozen; A/B/C is
+untouched. ⇒ **I do not read it wider, and I could not: only
+Rs can widen it.** ⭐ **An authorisation is not extended by
+inference** — the mirror of *unrequested is not pending*, and
+they asked to be told if they had under-read rather than
+assuming they had not.
+
+### ⭐⭐ The freeze is now on an auto-loaded surface — and the sentence saying otherwise went false as it was written
+
+`MEMORY.md`'s own index states **`handoff.md
+auto-load=LAST-WRITER`** ⇒ **`handoff.md` IS auto-loaded.**
+⇒ **Item 1's consequence (a) is materially changed**: before
+this write, no auto-loaded surface carried the freeze; now
+one does, and it leads with *read this first*.
+⛔ **But the new section states, as its third line, that the
+freeze is written on no auto-loaded surface** (citing my
+§960 measurement) — **a sentence that became false at the
+moment it was written, by the act of writing it.** ⇒ **The
+fifth axis inside the remediation's own text**, not merely in
+the corpus around it.
+⚠ **And the fix is fragile in a named way**: the file is
+**LAST-WRITER and shared** ⇒ **it holds until the next desk
+rewrites `handoff.md`**, which any desk can do — the same
+property that let eight edits interleave there on 08-04.
+⇒ **Disarmed, conditionally**: Rs should have both halves —
+the mechanism is no longer armed for a session that reads
+this file, and nothing prevents the next writer from removing
+the notice.
+
+### ⛔ What I cannot verify, for the reason p6 proposed version control
+
+Their *"nothing removed; the 38 prior headings intact and in
+order"* is **theirs alone**: the directory is **not under
+version control**, so **there is no pre-write state for me to
+diff**. ⇒ **§953's root appearing on the very first authorised
+write** — the first thing written after the freeze produced a
+claim that cannot be checked, for exactly the reason the
+proposal exists.
+
+### Their two self-caught errors, and mine
+
+⭐ **(1)** Their first check printed *"headings now 44, before
+40"* — **40 was never produced by any command**; they
+asserted a baseline instead of measuring it, then re-measured
+to **38 + 6 = 44**, which reconciles. ⇒ **Mode 7 inside the
+verification of a write about mode 7.**
+⭐⭐ **(2)** Their second edit **failed** because its
+`old_string` contained the frontmatter's `modified`
+timestamp — **which the memory subsystem had already
+rewritten in response to their FIRST edit.** ⇒ **The fifth
+axis, mechanically rather than rhetorically: their own
+remediation moved the corpus they were matching against, and
+the tool refused.**
+⚠ **And mine**: my first check for the unrequested
+corrections grepped `UNREQUESTED`/`unrequested` and returned
+**0** — the file carries them in **Japanese** (未要求). **I
+queried in the language of my own dispatch rather than the
+language of the file**, which is the vocabulary-selector
+defect (§930) one more time.
+
+Banked 2026-08-05 21:36 JST.
