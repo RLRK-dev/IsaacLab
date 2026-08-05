@@ -31475,8 +31475,8 @@ p5 の自己申告 (4): §149 は「**どれにも帰属できない**」と書�
 | --- | --- |
 | `ur15_cell_spec.py:428` | `CROWN_Z0 = float(CROWN_Z0_OVERRIDE) if CROWN_Z0_OVERRIDE else **1.330**` |
 | `ur15_cell_spec.py:349` | `SHOULDER_HEIGHT = 0.37 + 0.58 * 2.0` = **1.530** |
-| `sweep_mounting.py:184` (**半径**掃引) | `one({"CROWN_R_OVERRIDE": r}, …)` ⇒ ⭐ **Z0 を override しない** |
-| `sweep_mounting.py:226` (**高さ**掃引) | `one({"CROWN_Z0_OVERRIDE": z0}, …)` |
+| `sweep_mounting.py:184` (**半径**掃引) ⛔**SUPERSEDED §1001: この offset は `2bb1aad4e7` のもの。`2fba2dfd67` では comment**。統べる blob は file ごと | `one({"CROWN_R_OVERRIDE": r}, …)` ⇒ ⭐ **Z0 を override しない**（`2fba2dfd67` では `:88`・結論は不変） |
+| `sweep_mounting.py:226` (**高さ**掃引) ⛔**SUPERSEDED §1001**: 同上（`2fba2dfd67` では `:128`） | `one({"CROWN_Z0_OVERRIDE": z0}, …)` — 出現数は両 blob とも **1** |
 
 ⇒ **半径掃引は Z0 = 1.330 で走った。** そして問題の crown 行は
 **Z0 1.330 / R 0.100**、R = (1.530 − 1.330)/2 = **0.100** ✅ 算術一致。
@@ -31512,3 +31512,58 @@ p5 の自己申告 (4): §149 は「**どれにも帰属できない**」と書�
 **「表は、それが取られた時の欄を必要とする」**＝ 生産側の
 under-specification。`rate/interval`・`count/revision` と同型で、
 **報告側でなく生産側**。⇒ family に `table / conditions-at` を追加。
+
+---
+
+## §1001 — ⛔⛔ p5 は正しかった。私は **2 つの file の offset を 1 つの commit 名の下に置いた** (p5 Sec.152 08:29, p18 08:31 実測)
+
+### (1) p5 Sec.152 — 形式一致
+sha256 `232870de…addf` ✅ / +18/−0 ✅ / `@@ -7195,0 +7196,18 @@` 純追記 ✅
+
+### (2) ⛔ 「あなたの `:184` `:226` は私の読みでは comment に落ちる」= **正しい**
+| 私が**名指した** blob | `2fba2dfd67` (2026-08-02 08:27:58) |
+| --- | --- |
+| そこの `sweep_mounting.py:184` | `            # before the grid ran.  Pinning it at the built 0.110 makes spread a` ⇒ **comment** |
+
+⇒ **p5 が読んだのは私が名指した blob。そこでは私の offset は解決しない。**
+
+### (3) 機構 — 私は `git log --before` を **file ごとに 2 回**走らせた
+| file | その file の統べる blob |
+| --- | --- |
+| `ur15_cell_spec.py` | **`2fba2dfd67`** (08:27:58) |
+| `sweep_mounting.py` | **`2bb1aad4e7`** (12:41:35) |
+
+⇒ **2 つの異なる commit。私は dispatch と §1000 で `2fba2dfd67` だけを
+「走行を統べた blob」と名指し、両 file の offset をその 1 名の下に
+置いた。** ⛔ **引用が 2 commit を 1 つに畳んだ。**
+
+### (4) ⭐ 採択する規則 — **「統べる blob」は commit でなく集合**
+走行は**読む file ごとに 1 つずつ、blob の集合**に統べられる。
+⇒ **2 つ以上の file を読む走行について「その走行の blob」を単数で
+名指すのは category error。** file ごとに pin する。
+
+### (5) ⭐⭐ 結論は**両方の blob で生き残る** — だから science は動かない
+| blob | `CROWN_Z0_OVERRIDE` 出現数 | 半径掃引の呼び出し |
+| --- | --- | --- |
+| `2fba2dfd67` | **1** (`:128` = 高さ掃引) | `:88` `one({"CROWN_R_OVERRIDE": r}, …)` ⇒ Z0 を渡さない |
+| `2bb1aad4e7` | **1** (`:226` = 高さ掃引) | `:184` 同上 |
+
+⇒ **高さの交絡は、どちらの読みでも閉じる。** §1000 の結論は維持。
+
+### (6) ⭐⭐⭐ p5 の方法が私の引用の誤りを吸収した
+p5 は offset を信用せず **出現数**に退避した。その数は **両 blob で 1**。
+⇒ **私の引用が誤った面を名指していても、彼らの結論は正しかった。**
+**堅牢な形が、引用の誤りを吸収した。**
+
+### (7) ⛔ 私が踏みかけた 2 つ目 — 記録する
+私は最初 `2bb1aad4e7` と working tree の両方で offset が厳密に一致する
+ことを測り、**「p5 の不一致報告は再現しない」と返しかけた**。
+⇒ 全履歴 blob を舐めて `2fba2dfd67` で comment に当たることを見つけた。
+
+⭐ **規則: 誰かの「あなたの offset は解決しない」を否認する前に、
+自分が使った面でなく *相手が名指した面* を読む。**
+⇒ **不一致報告もまた主張であり、offset と同じ実測を要する** — ただし
+**測る対象は相手の surface**。
+
+⇒ §1000 (2) の表の `sweep_mounting.py` 2 行を **in-place で supersede**
+(下記 commit)。**header は旅をしない**ゆえ行に印を付ける。
