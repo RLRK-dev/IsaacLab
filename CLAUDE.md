@@ -325,3 +325,26 @@ Pre-task prior-art/no-repeat guard (V7/V10) + current-state freshness guard (V9)
 |------|------|-------------|
 | 事実 | ... | ファイル:行番号 |
 | 推測 | ... | なぜ推測か + 検証方法 |
+
+## Pane Message Routing Protocol
+
+To prevent cross-pane stalls and regressions, messages routed through OPS-SUP must follow this protocol:
+
+- Check each message for ambiguity in role/authority, scope, status, version/SHA, evidence basis, timestamps, and supersession.
+- If ambiguity or contradiction is detected, return the message to its source pane with the unclear text, missing evidence, required fixes, and resubmission condition. Do not silently normalize it.
+- Record routing states explicitly: `AMBIGUITY DETECTED` → `RETURNED` → `RESUBMISSION RECEIVED` → `VERIFIED`.
+- After forwarding, confirm that the destination pane received the message. A send without destination readback is incomplete.
+- Distinguish verbatim relay, interpreted scope confirmation, and independent verification. Do not represent an OPS-SUP interpretation as an Rs ruling.
+- Before forwarding, compare pane role, node, SSOT, owner, gate, and authority scope. Conflicts between `T-ROOT-RS-TECH-LEAD`, `T-ROOT-RS-TECH-LEAD2`, and `pX:SKILL-DESIGN` must be surfaced and held for the proper authority.
+- Preserve exact commit/blob/SHA and measured timestamps; never fill truncated or missing values by inference.
+- Attach or preserve a stable message ID so duplicate delivery, replay, correction, and supersession can be distinguished. A correction must identify the message or artifact it supersedes.
+- Distinguish a delivery ACK from content acceptance, concurrence, evidence verification, and authority approval. Receipt alone must never flip a gate or status.
+- Require each actionable message to state the owner, next action, completion or acceptance condition, dependencies, ordering constraints, and any applicable deadline. If one is absent and affects execution, return the message rather than infer it.
+- Treat undefined coined terms as ambiguous. Preserve the original term in verbatim relay, mark it `UNDEFINED TERM`, and require the source pane to define it before it is used in a design, ruling, gate, or implementation claim.
+- Verify branch, dirty-tree state, and whether evidence is `as-read`, `as-run`, committed, or banked. Do not substitute a working-tree observation for a committed artifact or exact-pin claim.
+- Do not execute or forward an actionable stale or superseded instruction. Historical text may be retained only when it is clearly marked and points to the current SSOT.
+- If a response is overdue or a pane remains blocked, notify the owner again and escalate to the proper authority with the blocker, elapsed state, and exact missing condition. Do not bypass the gate to avoid delay.
+- Check priority and dependency conflicts before forwarding. WMSO is the highest-priority integration concept, but its priority does not bypass safety, evidence, design, or authority gates.
+- Route all SKILL decomposition, granularity, unit, and composition decisions to `pX:SKILL-DESIGN`. Other panes may provide materials or compatibility evidence but must not silently decide those questions.
+- While a message is in `AMBIGUITY DETECTED` or `RETURNED`, keep dependent implementation, experiment, run, landing, push, status flip, and gate flip fail-closed unless an authorized independent path is explicitly documented.
+- Complete the routing loop in both directions: confirm destination readback after forwarding, then return the destination's disposition or remaining conditions to the source pane. A one-way relay is incomplete.
