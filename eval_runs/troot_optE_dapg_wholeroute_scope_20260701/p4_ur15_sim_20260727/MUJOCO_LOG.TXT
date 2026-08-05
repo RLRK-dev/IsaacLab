@@ -456,3 +456,1689 @@ impratio: parent has 1, child has 10, keeping parent value
 WARNING Tue Jul 28 23:46:59 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
 impratio: parent has 1, child has 10, keeping parent value
 
+WARNING Tue Jul 28 23:51:57 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Tue Jul 28 23:51:57 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:29:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:29:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:56:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:56:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:57:18 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:57:18 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:57:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:57:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:58:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:58:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:59:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:59:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:59:34 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 02:59:34 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:00:08 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:00:08 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:00:42 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:00:42 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:03:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:03:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:03:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:03:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:04:10 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:04:10 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:04:45 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:04:45 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:05:19 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:05:19 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:05:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:05:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:06:27 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:06:27 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:07:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:07:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:08:57 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:08:57 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:09:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:09:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:10:23 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:10:23 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:10:57 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:10:57 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:11:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:11:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:12:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:12:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:12:51 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:12:51 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:13:25 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:13:25 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:13:57 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:13:57 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:14:31 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:14:31 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:23:22 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:23:22 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:29:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:29:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:33:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:33:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:46:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:46:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:46:54 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:46:54 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:47:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:47:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:48:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:48:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:48:30 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:48:30 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:49:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:49:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:49:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:49:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:50:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:50:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:58:49 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 03:58:49 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:00:29 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:00:29 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:01:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:01:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:01:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:01:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:02:10 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:02:10 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:02:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:02:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:03:18 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:03:18 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:03:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:03:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:04:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:04:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:05:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:05:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:05:47 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:05:47 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:06:19 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:06:19 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:06:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:06:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:07:25 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:07:25 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:07:59 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 04:07:59 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:30:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:30:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:31:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:31:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:31:46 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:31:46 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:32:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:32:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:32:46 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:32:46 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:33:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:33:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:33:58 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:33:58 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:34:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:34:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:35:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:35:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:35:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:35:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:36:12 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:36:12 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:36:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:36:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:37:22 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:37:22 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:37:56 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:37:56 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:38:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:38:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:39:10 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:39:10 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:39:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:39:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:40:20 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:40:20 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:40:54 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:40:54 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:41:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:41:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:42:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:42:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:42:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:42:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:43:10 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:43:10 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:43:45 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Wed Jul 29 20:43:45 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:01:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:01:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:01:33 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:01:33 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:02:07 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:02:07 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:02:42 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:02:42 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:03:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:03:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:04:37 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:04:37 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:05:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:05:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:05:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:05:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:06:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:06:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:06:47 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:06:47 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:24:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:24:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:24:50 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:24:50 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:25:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:25:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:26:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:26:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:26:34 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:26:34 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:44:24 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 08:44:24 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:13:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:13:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:26:21 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:26:21 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:38:58 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:38:58 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:39:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:39:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:44:58 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:44:58 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:45:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:45:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:51:31 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 09:51:31 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:01:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:01:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:06:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:06:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:10:24 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:10:24 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:14:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:14:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:19:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:19:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:23:25 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:23:25 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:27:45 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:27:45 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:30:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:30:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:35:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:35:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:41:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:41:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:45:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:45:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:50:20 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:50:20 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:56:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 10:56:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:00:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:00:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:05:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:05:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:12:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:12:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:13:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:13:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:18:42 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:18:42 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:19:49 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:19:49 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:21:25 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:21:25 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:22:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:22:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:22:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:22:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:23:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:23:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:24:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:24:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:25:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:25:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:26:58 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:26:58 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:28:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:28:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:29:08 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:29:08 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:31:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:31:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:34:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:34:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:39:56 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:39:56 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:45:46 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:45:46 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:50:22 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:50:22 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:55:14 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 11:55:14 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:01:14 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:01:14 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:06:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:06:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:11:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:11:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:11:49 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:11:49 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:17:07 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:17:07 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:22:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:22:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:27:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:27:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:41:45 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:41:45 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:42:55 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:42:55 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:44:05 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:44:05 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:45:14 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:45:14 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:46:22 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:46:22 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:47:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:47:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:48:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:48:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:49:50 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:49:50 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:50:56 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:50:56 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:52:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:52:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:53:10 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:53:10 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:54:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:54:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:55:22 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:55:22 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:56:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:56:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:57:34 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:57:34 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:58:42 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:58:42 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:59:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 12:59:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:00:56 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:00:56 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:02:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:02:02 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:03:08 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:03:08 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:04:14 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:04:14 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:05:20 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:05:20 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:06:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:06:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:07:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:07:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:14:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:14:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:16:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:16:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:17:14 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:17:14 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:18:24 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:18:24 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:19:34 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:19:34 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:20:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:20:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:21:54 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:21:54 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:23:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:23:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:25:33 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:25:33 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:26:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:26:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:27:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:27:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:29:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:29:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:30:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:30:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:31:17 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:31:17 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:32:27 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:32:27 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:33:37 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:33:37 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:34:45 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:34:45 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:35:55 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:35:55 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:37:05 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:37:05 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:38:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 13:38:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:02:05 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:02:05 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:16:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:16:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:31:24 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:31:24 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:33:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:33:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:37:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:37:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:39:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:39:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:40:18 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:40:18 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:41:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:41:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:42:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:42:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:43:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:43:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:45:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:45:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:52:17 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:52:17 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:53:27 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:53:27 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:54:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:54:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:55:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:55:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:56:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:56:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:58:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:58:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:59:08 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 14:59:08 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:00:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:00:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:01:24 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:01:24 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:02:30 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:02:30 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:17:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:17:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:18:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:18:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:20:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:20:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:21:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:21:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:33:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:33:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:34:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:34:36 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:35:46 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 15:35:46 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 16:19:27 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 16:19:27 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 16:29:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 16:29:16 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 16:39:21 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 16:39:21 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 16:50:11 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 16:50:11 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 17:04:41 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 17:04:41 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 17:18:59 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 17:18:59 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 17:33:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 17:33:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 20:46:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 20:46:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 20:56:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 20:56:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 21:05:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 21:05:40 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 21:12:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 21:12:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 21:20:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 21:20:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 21:27:13 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 21:27:13 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 21:57:47 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 21:57:47 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:08:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:08:01 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:17:58 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:17:58 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:20:55 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:20:55 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:23:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:23:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:26:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:26:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:30:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:30:48 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:38:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:38:52 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:40:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:40:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:41:20 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:41:20 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:42:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:42:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:43:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:43:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:44:56 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:44:56 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:46:08 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:46:08 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:54:17 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:54:17 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:57:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:57:44 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:59:42 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 22:59:42 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:02:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:02:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:03:54 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:03:54 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:10:07 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:10:07 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:14:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:14:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:17:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:17:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:24:59 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Sun Aug  2 23:24:59 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 06:22:51 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1 (default), child has 10, keeping parent value
+
+WARNING Mon Aug  3 06:22:51 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1 (default), child has 10, keeping parent value
+
+WARNING Mon Aug  3 09:09:49 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 09:09:49 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 09:44:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 09:44:28 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 10:13:27 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 10:13:27 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 10:17:39 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 10:17:39 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 10:20:37 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 10:20:37 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 10:54:30 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 10:54:30 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 11:34:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 11:34:00 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 11:41:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 11:41:04 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:34:54 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:34:54 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:36:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:36:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:37:18 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:37:18 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:38:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:38:32 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:39:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:39:03 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:40:13 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:40:13 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:41:23 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:41:23 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:42:33 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:42:33 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:43:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:43:43 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:48:37 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:48:37 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:54:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 12:54:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 21:18:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 21:18:26 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 21:44:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 21:44:06 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 21:46:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 21:46:09 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 22:03:25 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 22:03:25 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 22:22:46 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 22:22:46 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 22:36:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 22:36:15 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 22:46:50 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Mon Aug  3 22:46:50 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Tue Aug  4 07:41:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Tue Aug  4 07:41:35 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Tue Aug  4 09:35:38 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Tue Aug  4 09:35:38 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Tue Aug  4 14:47:51 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Tue Aug  4 14:47:51 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Tue Aug  4 15:15:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
+WARNING Tue Aug  4 15:15:53 2026: Attach conflict when attaching 'robotiq_2f85' to 'ur15_steps', policy is 'warning'
+impratio: parent has 1, child has 10, keeping parent value
+
