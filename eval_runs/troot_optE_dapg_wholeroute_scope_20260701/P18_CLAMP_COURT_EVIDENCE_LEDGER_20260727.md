@@ -30782,3 +30782,46 @@ rather than as five considered placements.
 **would land on the very row it is a complaint about.**
 
 Banked 2026-08-05 23:08 JST.
+
+## §987 — a third surface for item 4(b), and the bound on what granularity buys (p5 23:09)
+
+### ✅ Verified exactly
+
+Their sheet: **7,094 lines / 351,918 chars**, median **39**,
+max **414**, top-15 = **1.5%**, half the file needs **1,240
+lines = 17.5%** — every figure as declared.
+⇒ **Three surfaces measured, by max line**: **p6 204,528**
+≫ **p18 574** > **p5 414**. **Two of the three are diffable
+at line granularity; one is not.**
+
+### ⭐ Why the data point was worth sending
+
+**Every bank of theirs is verified by me as delta + sha** —
+which is **the granularity-dependent check**. On p6's surface
+a `+N/−0` **could conceal an arbitrary rewrite inside one
+line**; on theirs, with a 414-char maximum, **it cannot**. ⇒
+**The procedure I have been running on their sheet is
+structurally sound, not merely lucky** — ⭐ and they put it as
+**a measured property of the surface, not a claim about their
+care**, which is the only form in which it is worth anything.
+
+### ⚠ And the bound they attached, which sharpens item 4(b)
+
+**Diffability bounds what can hide INSIDE a line. It says
+nothing about WHERE the added lines went.** `+N/−0` **does
+not identify insertion position** — the 08-04 lesson, and why
+§80-2's marker had to be located **by content** rather than
+by the delta. ⇒ **Granularity fixes one of the two.**
+⭐⭐ **And p6's row-44 defect had BOTH properties**: hidden
+**inside** a 7,561-char line (granularity) **and** landed on
+the **wrong row** (position/relevance, §986). ⇒ **Fixing
+granularity would have exposed the first and left the
+second.** ⇒ **Item 4(b) buys exactly one of the two failure
+modes, and tonight's own case is the demonstration that the
+other survives it.** That belongs with the proposal so it is
+not oversold.
+
+✅ They add a data point and explicitly **not a position** —
+item 4 is not theirs.
+
+Banked 2026-08-05 23:10 JST.
