@@ -149,7 +149,7 @@ THREAD project の全 task は logic tree 上の node として管理し、各 n
 
 ## 運用ルール
 
-### セッション管理 (§1, 1b, 11, 13)
+### セッション管理 (§1, 1b, 11, 13, 31)
 
 1. **Conversation compacted時: 以下を順に実行し再読み込みせよ**
    - `cat ~/IsaacLab/CLAUDE.md`
@@ -157,6 +157,12 @@ THREAD project の全 task は logic tree 上の node として管理し、各 n
 1b. **セッション開始時のpreflight check必須:** `bash ~/IsaacLab/harness/scripts/preflight_check.sh` を実行。FAILがあれば作業開始禁止 — rsに報告して解決を待つ。WARNはタスク報告に含める
 11. **タスク完了時の/clear必須:** タスクのstatus→done移行（Proof of Work確認済み）後、次タスク着手前に必ず`/clear`を実行する。CLAUDE.md が自動再読み込みされ前タスクの context 汚染を防ぐ。同一タスク内の連続作業中は不要
 13. **context 制御:** raw ctx 70% で auto `/compact` 自動発火（SSOT: `~/.claude/hooks/lib/ctx_thresholds.sh` SOFT=70/HARD=92）。`/handoff` は状況判断で manual 実行（long task / CC Debate 前 / ctx70% 接近時に state 保全推奨、lossless）。**manual `/compact` は禁止**（情報損失が handoff の保険を上回る）。CC Debate 前 `/handoff` は原則必須ではない（CC1 判断）
+31. **memory ディレクトリの書き込み規則（Rs 裁定 2026-08-05）:** 対象 = `~/.claude/projects/-home-rlrk-IsaacLab/memory/`（全 pane 共有・⛔ **git 管理外＝削除が見えない**）。
+    - **topic file（`feedback-*` / `reference-*` / `project-*` / per-pane `handoff_cc_*`）= 解放。** 単独所有・追記型・容量上限なしゆえ通常どおり書いてよい
+    - **`MEMORY.md`（索引）= 成長条件つき。** hard limit = **24,985 chars**（= 24.4K×1024。⚠ K は **×1024**、`LEDGER:18155` で決着。これを越えると索引が読めない）。**90%（≈22,487 chars）を超えたら coordinated 圧縮を起票**する。⛔ **単独で圧縮しない**（他 pane の行の要約を含むため。file 冒頭の同旨記載が SSOT）。⚠ 90% 未満なら hook が「17.1K まで圧縮せよ」と言っても**従わない**（17,510 は hook の目標であって要件ではない）
+    - **`handoff.md` = SHARED last-writer。** 自分の節のみ Edit で狙い撃ち。⛔ **全書き換え禁止**（他 pane の節を消す）
+    - **判断軸は水準でなく成長**（実測 +134 chars/日 = 07-21 18,549 → 08-04 20,409）。過去 96.1% まで達し圧縮で戻した実績あり ⇒ 全面停止でなく閾値運用
+    - ⛔ **2026-08-04 15:52 からの全面凍結は本裁定で解除**（旧根拠 = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md:19706` §700(e) / `:19782` §703(b)）。⭐ **規則をここに置く理由 = 凍結は台帳にしか無く、新 session から見えず、守れなかった**（見えない規則は予防でなく確定した違反になる）
 
 ### タスク着手前 (§2, 4, 7, 8, 24)
 
