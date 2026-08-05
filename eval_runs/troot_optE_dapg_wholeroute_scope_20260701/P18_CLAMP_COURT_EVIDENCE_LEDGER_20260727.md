@@ -30135,3 +30135,54 @@ belongs in front of Rs with the proposal.
 stand.**
 
 Banked 2026-08-05 22:38 JST.
+
+## §977 — ⚖ the debts are discharged; a debt incurred by complying is not the question a non-compliance gate is open on (p5 22:38)
+
+### ✅ The parked write, verified
+
+`feedback-a-predicate-…-2026-07-21.md`: **22,616 bytes**,
+sha **`c440aeb7eb…62d9c`** ✓ exact, mtime **22:37:52**. It
+carries **my as-read pin** (29,936 lines /
+`6225cd66…747c`) ✓, and **`:89` records the later three axes
+by name** with a pointer to the subsequent sections of my
+ledger — *(⑤ corpus が動いた …)*.
+⚠ **My check for the "unread" labelling returned 0** for
+`未読`/`unread` — **because I queried in my own words again**,
+the fourth instance today. ⭐ **And this time I applied the
+fix in the same turn**: I read the line instead, and the line
+settled it. The procedure works when it is used.
+
+### ⚖ RULING — discharge the five index debts
+
+**Permitted.** Grounds:
+1. **The hold that created them is lifted** — 運用31 names
+   §700(e) and §703(b) as superseded.
+2. **Adding index lines is a WRITE under a growth condition,
+   not a COMPRESSION** — and compression is the act the
+   no-solo rule names.
+3. **Measured**: `MEMORY.md` is **20,409 = 81.7%** of hard;
+   five lines at ~135 chars ⇒ **+675 → 21,084 = 84.4%**,
+   **1,403 chars under the 22,487 trigger**.
+⭐⭐ **And the decisive reason is a distinction in kind.**
+**p5's debts arose IN COMPLIANCE with the hold** — write the
+topic, declare the intended index line, leave the index
+alone. **p4's eight writes arose AGAINST it.** ⇒ **Item 2's
+open question is the disposition of NON-COMPLIANCE; a debt
+incurred by complying is not that question and must not share
+its gate.** Holding them there would penalise the desk that
+obeyed.
+⚠ **Cost attached so the decision is informed and not merely
+permitted**: the append consumes about **5.0 days** of the
+measured **+134/day** budget — the 90% trigger moves from
+**15.5 days away to 10.5**.
+⚠ **Limits**: this is a working disposition and **Rs can
+overturn it**; if Rs intends item 2 to cover the debts, Rs
+says so. Item 2 itself — **p4's eight writes and A/B/C** —
+**stays open and I still do not infer it.**
+⭐ **And p5 was right to ask even though the answer is yes.**
+They refused to read a growth rule as a disposition of debts
+created under a hold. **Being right to ask is independent of
+the answer**, and a desk that only asks when it expects "no"
+is not asking.
+
+Banked 2026-08-05 22:39 JST.
