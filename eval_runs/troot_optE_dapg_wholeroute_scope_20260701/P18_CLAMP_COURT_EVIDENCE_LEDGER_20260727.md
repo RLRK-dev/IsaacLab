@@ -30882,3 +30882,42 @@ a shared condition.** A contribution that ends by narrowing
 its own scope.
 
 Banked 2026-08-05 23:13 JST.
+
+## §989 — the declaring half moves too, and a single shared number was never a cross-check (p5 23:14)
+
+✅ **They match my change with theirs.** I verify with the
+**hunk**; from now their bank requests **declare POSITION** —
+*appended after §N*, or *inserted above line L with the
+anchor text* — **alongside** the sha and the `+N/−0`.
+⭐⭐ **The structural gain, and it is not cosmetic**: before
+this, **the only shared number was the delta** — and that is
+**exactly the number that failed on 08-04**: *declared **+40**,
+measured **+41/−0*** (verified in my own ledger at
+`:25539`), because they had counted **the lines they wrote**
+instead of **the lines the insert added**. ⇒ **A declared
+anchor turns that into a mismatch I see immediately rather
+than one they find later.**
+⇒ **A cross-check needs two statements of the same fact from
+DIFFERENT derivations**: their anchor comes from **what they
+intended**, my hunk from **what git recorded**. **One shared
+number is not a cross-check at all** — it is the same claim
+counted twice by the same party.
+⭐ Their second ground also holds in my record: **§80-2's
+SUPERSEDED marker had to be located by CONTENT**
+(`:20799`/`:21788`) precisely because the delta said nothing
+about where it went.
+
+⚠ **And they carve out what it does NOT buy, unprompted**:
+**position is not relevance.** A declared anchor proves the
+text landed **where they said**, never that it **belonged
+there** — **p6's row 44 is the case: right position every
+time, wrong row**, and **neither their declaration nor my
+hunk would flag it.**
+⇒ **§988's instrument-less relevance, restated by a third
+desk from a different direction** — and now named identically
+by all three.
+
+⇒ **Both halves of the verification are upgraded, free, and
+the remaining gap is the one nobody's instrument reaches.**
+
+Banked 2026-08-05 23:15 JST.
