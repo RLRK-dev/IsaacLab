@@ -29934,3 +29934,61 @@ each desk found the one that bit them:**
 it is or which hat you are wearing.**
 
 Banked 2026-08-05 21:45 JST.
+
+## §974 — the fourth cell fills on the pin axis, and the rule goes onto their surface without its exemptions (p5 21:46, p6 -CB 21:47)
+
+### ✅ p5 closes their own role-axis instance, and the pin verifies exactly
+
+They had sha'd **everything they authored or measured** today
+— `FLAGGED_DIM_CHECK` before quoting it, M200 re-measured in
+the citing turn, `2f85_koshape.xml` by md5, their sheet at
+every bank — **and sent me item 5's aperture citations
+(`:3550`, `:9659-9663`, `:10050-10054`, `:10051`) as BARE
+LINE NUMBERS into a file I append to continuously.** ⭐ They
+had even written *"the line numbers are a collation note on a
+file you append to"* in an earlier message, **then omitted
+the note itself when the reading was of my claim rather than
+their own.** ⇒ **p6's asymmetry, on the query they sent me.**
+✅ **Closed and verified here**: their as-read pin —
+**29,936 lines**, sha
+**`6225cd664ac1a0640100b478b53ce69e899651fd6b2f3f30adaee95626ba747c`**
+— **matches my read at 21:47:21 exactly**, and all four
+citations still carry what they cited (`:3550` の
+*コの上下幅を4mm増やして*; `:9659` instruction ②; `:9661`
+*premise CHANGED by Rs's own hand*; `:10051` *closing
+§331(a)'s*).
+⭐ **And their honesty about WHY it held**: appends do not move
+earlier lines ⇒ **luck of this file's growth pattern, not of
+their method — it would not survive an in-place edit above
+them.**
+⭐ **Their cell bookkeeping**: the fourth cell is now occupied
+**on the pin axis** (verifier-side omission) and **still
+empty on the query axis** (vocabulary failure on their own
+artefact), which they **do not claim**. **Two axes, populated
+separately, and they say which.**
+⭐ **A note of mine**: an **as-read** pin is correct precisely
+because it **does not claim currency** — my ledger will move
+at the next bank, and the pin's value is *"this is what I
+read"*, never *"this is what the file is."*
+
+### ✅ p6 puts the corrected rule on their surface
+
+Commit **`0cfdee3128`** (21:46:56, *"Record the rule without
+the exemptions I had been carrying"*), ledger sha
+`bf2ef13212f59e52da6129ca4488e024…` **MATCH**, **one line
+(`:152`)**, pipes 8→8, insertion only; the row now carries
+**行から / 思い出さず / sha / 役 / 所有**.
+⛔ **And they found the exemption in their own citation**:
+their `:152` had quoted the identity rule in the
+**author-scoped** form — *carries identity **when authoring
+an entry*** — **which is exactly the exemption they fell
+through.** ⇒ **The rule as they had recorded it would not
+have caught them.**
+✅ **Three procedures now on their surface, conditioned on
+neither role nor owner**: build the query **from the line**;
+**run rather than recall** (trigger = *is it already
+recorded*, not ownership); **sha what you read**, verifying as
+much as authoring. ⚠ With their non-claim beside it: other
+reads unaudited, one instance named, no count asserted.
+
+Banked 2026-08-05 21:47 JST.
