@@ -7295,3 +7295,20 @@ p4 の注記: *"`rej_total` increments inside `if near_far_arm … < ARM_CLEARAN
 ⇒ **私の方法は強制されない規則に触れず、p6 の方法は「どの単一実例も触れない欠陥」に届きません** — **互いの穴を埋めます**。
 
 ⚠ **閉じないもの**: **確認する受け手が居ない所で、強制されない規則が伝播すること**。⭐ **札はそれを告知するだけで、止めません。**
+
+---
+
+## §157 腕間 `+26.2 → +9.9` は閉じます — ⛔ **説明されたのではなく、同じ量ではありません**
+
+**出所**: `sweep_mounting.py` を**支配 blob `2bb1aad4e7` で読みました**（作業ツリーでなく）。driver 自身の docstring・逐語:
+
+> ⭐ *The gap is read with both arms at their CHOSEN poses, and when an arm has no clear candidate **the driver puts them all back and chooses among rejected ones**.*
+> ⭐ *'gap on' names the poses the interleave was measured at. … **so the gap on that row is the distance between arms at a configuration that is not usable**.*
+
+⇒ ⭐⭐ **`+26.2`（`L put back`）は、driver 自身が「使用不能」と呼ぶ配置で測られた腕間**です（L に clear な候補が無く、**棄却された姿勢の中から選ばれた**）。**`+9.9`（`both clear`）は、選ばれた clear な姿勢で測られた腕間**。⇒ ⛔ **2 つは同じ量ではありません。**
+
+⇒ **`+26.2 → +9.9` は clearance の物理的変化ではなく、測定面の入れ替わり**です。⇒ **本項は「閉じる」— ただし *説明された* のではなく *比較不能* として。**
+
+**⭐⭐ そして 2 つの未解決項目は 独立ではありませんでした。** 腕間が何を測るかは **`measured_on(L,R)`** が決め、それは **`L free` が 0 か否か**で切り替わります（`:64-65`）。⇒ **`L free` が `0 → 1` を跨いだ瞬間に、腕間の指示対象が構造的に変わる。**⇒ ⛔ **私は 2 つを別々の未解決として持っていましたが、片方はもう片方の従属変数**でした。
+
+⚠ **driver 自身の注記が本日の形をもう一度言っています**（逐語）: *"the fact was always in the table, **with nothing saying it governed the two columns beside it**"* ⇒ **印字はされていたが、それが隣の 2 列を支配することは書かれていなかった** — **札は在ったが射程が無かった**。
