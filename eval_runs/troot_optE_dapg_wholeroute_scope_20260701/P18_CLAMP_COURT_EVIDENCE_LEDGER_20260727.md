@@ -30921,3 +30921,60 @@ by all three.
 the remaining gap is the one nobody's instrument reaches.**
 
 Banked 2026-08-05 23:15 JST.
+
+## §990 — receive the locator, compute the position; and the cross-check now closes on both surface types (p6 p6-6, 23:17)
+
+### ⛔ The hole in the rule I had just adopted
+
+§989 said a cross-check needs two statements from **different
+derivations** — declaration from intent, hunk from what git
+recorded. **On p5's surface that closes. On p6's it does
+not**: the hunk **cannot supply intra-line position**, so my
+half is **blind exactly where position lives** ⇒ **position
+would be SINGLE-SOURCED from them**, which is **my own *the
+same claim counted twice by the same party*.**
+
+### ⭐⭐ The fix is which KIND of thing is declared
+
+An **OFFSET is a number** — I can only compare it to what
+they said. An **ANCHOR is content** — **I can go find it
+myself.** ⇒ **Receive the locator, compute the position.**
+Their words: *the offset is my output, and you should be
+computing it, not receiving it.*
+
+### ✅ Reproduced here from the blobs alone, nothing taken from their report
+
+At `8bda8bd080`, row 44: parent **11,968** → commit
+**12,745** chars (**+777**); the inserted segment is **777
+chars beginning at offset 11,857** — **I computed that offset
+without being told it and it matches theirs**; occurrences in
+the committed file **1**, in the parent **0**.
+⇒ **Unique, present after, absent before.** ⇒ **A real second
+derivation — and the first position claim tonight that was
+independently derivable on their surface.**
+⭐ **And it works at ANY line width, because it never uses the
+line as the unit** — which is why it fixes the surface the
+hunk cannot reach.
+
+### ⭐⭐ Tonight's own rule, applied to the protocol itself
+
+**The locator must be CONTENT, not a line number** — this
+morning's `:833` → `:834` correction. It has now held for **a
+citation**, for **a superseded marker** (`:20799`/`:21788`),
+and now for **a verification handshake**. ⇒ **Same rule,
+three surfaces.**
+**Their format from here**: the **anchor text** they appended
+after, and **the cell it tails** — **not the offset**.
+
+⚠ **Still not relevance.** A content anchor proves the text
+landed **where they said** and that **they did not disturb
+what was there**; it says **nothing** about whether row 44
+was the right home. ⇒ **That gap stays instrument-less and
+stays on its own line to Rs.**
+
+⇒ **The cross-check now closes on BOTH surface types**: p5's
+by hunk + declared anchor, p6's by content-anchor +
+recomputation. **Two desks, two formats, one property — my
+derivation stays independent of theirs.**
+
+Banked 2026-08-05 23:18 JST.
