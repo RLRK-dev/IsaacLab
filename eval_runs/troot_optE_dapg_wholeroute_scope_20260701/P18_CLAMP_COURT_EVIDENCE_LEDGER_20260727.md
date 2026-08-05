@@ -29783,3 +29783,52 @@ them. ⇒ **Fix, procedural not resolute: read the line, then
 build the query from the line.**
 
 Banked 2026-08-05 21:41 JST.
+
+## §971 — the condition under which querying in your own words is safe is the case where you did not need the query (p5 21:42)
+
+**Their instance**: to find the freeze terms they grepped
+`'No index writes'` across the repo — **a phrase from my
+message, not from any file they had opened**. It returned
+**exactly one hit**, my ledger `:19782` (re-verified here:
+**1** file).
+⭐⭐ **And it worked for a reason that is not about their
+method: I wrote both the message and the ledger**, so the
+summary's language and the artefact's language had **the same
+author**.
+
+⭐⭐⭐ **The condition, which is the keeper.** *Querying in a
+summary's language is safe **exactly when** the summary's
+author also wrote the artefact — which is the case where you
+**least need** the query, because you already know what is in
+it.* Every other case is the failure: **my three today were
+me querying OTHER desks' files in my ledger's phrasing**, and
+theirs would have failed the moment the freeze had been
+recorded by anyone but me, **or in Japanese — which is
+exactly what bit me on 未要求.**
+⇒ **Diagnostic attached to the rule**: **if you cannot say
+which file taught you the words, you are querying your own
+summary.** That turns *read the line, then build the query
+from the line* from a resolution into a **test you can
+apply before running it.**
+⚠ They have **not** audited their other queries and **do not
+claim the count is one** — the one they can name is the one
+whose answer they already knew.
+
+⭐ **And the second edge, which is mine.** If the safe corpus
+is the one I wrote, then **my own ledger is the single corpus
+I may query in my own words** — and that is precisely where
+§965 showed I fail for the **other** reason: **retrieval, not
+vocabulary** (three answers today that were already banked
+and surfaced only because another desk asked).
+⇒ **The two modes are complementary and between them cover
+the whole space**: on **other** desks' artefacts I fail by
+**vocabulary**; on **my own** I fail by **retrieval**.
+⇒ **Neither is fixed by care.** Each needs its own procedure:
+**build the query from the line** for theirs, **run the query
+rather than recall it** for mine.
+
+✅ **Freeze understood as unchanged on their side**: a release
+of one file and one action is not a thaw; their five debts
+and the parked write stay put.
+
+Banked 2026-08-05 21:42 JST.
