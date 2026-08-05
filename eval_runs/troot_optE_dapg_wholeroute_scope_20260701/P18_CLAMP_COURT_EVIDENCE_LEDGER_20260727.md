@@ -30368,3 +30368,74 @@ defect my guards could not see"*), ledger md5
 `78ee4c4c8f7d723b6d4907ff1819c363` **MATCH**.
 
 Banked 2026-08-05 22:49 JST.
+
+## §981 — the contradiction is repaired by supersession-in-place, and my truncated read nearly manufactured a fifth (p5 22:51, measured 22:53)
+
+### ✅ RESOLVED — and in the form the desks have been arguing for all day
+
+Measured at **22:53**: mtime **22:52:31**, sha
+**`9e67df52…eefa`**, 40,427 bytes. A **new head section** at
+`:11` — *「凍結は解除・規則は CLAUDE.md §運用31 が SSOT」* —
+with `:13` *「最初にこれを読め。下の 21:32 節の「凍結中」は
+SUPERSEDED — 2026-08-05 22:31:45 に Rs 裁定で解除」*, `:15`
+**stating why the old section is KEPT** (*it was true when
+written; it is the record that the freeze existed*), and
+`:16` *「この矛盾は解除そのものが作った」*. The 21:32 header and
+`:22`/`:23` carry supersession markers; the **frontmatter
+`:3`** now reads *凍結は解除済* with the superseded basis.
+⭐⭐ **Supersession-in-place, not deletion** — applied to the
+one surface that most invited a quiet rewrite, and it keeps
+the evidence that the freeze existed.
+✅ **And the repair reached a FOURTH assertion that neither
+desk had named**: `:227`, deep inside the 08-02 section,
+carries its own 【SUPERSEDED 2026-08-05 22:31:45】 marker.
+⇒ **The repair's coverage exceeded the routing.**
+
+### ⛔ My near-miss, and its direction is the bad one
+
+My grep printed `:227` **truncated at 120 chars**; the
+supersession marker sits at the **head** of that line, and I
+**read the truncated line as the line**. ⇒ I was one step
+from reporting a **missed** assertion that was already fixed
+and sending p4 after it.
+⭐ **Fourth instance today of reading a truncated output as
+the result** (§962's `head -12`; §970's own-words queries) —
+and **the first whose error direction was WORSE than
+reality**, which is the direction that **manufactures work**
+rather than hiding it. ⇒ Same procedural fix as the rest:
+**read the line, not the window onto it.**
+
+### ✅ p5's negative, with its limits stated by them
+
+Their sweep — *memory dir / memory ディレクトリ / memory
+directory* **AND** one of *凍結 / freez / frozen / 15:52*,
+across the memory directory, their repo handoff and their
+design sheet — returned **three hits, all in `handoff.md`**
+(`:3`, `:11`, `:13`), and `15:52` **0** in both of their own
+surfaces. ⇒ **The contradiction was confined to
+`handoff.md`** as far as their surfaces reach.
+⚠ **Both limits named by them**: **three surfaces, not the
+repo**, and the pattern requires **the phrase and the freeze
+word on the SAME line**, so a split assertion would evade it.
+*Their own granularity lesson pointed at their own check* —
+and stated **so a clean result would not read as a clean
+directory.**
+
+### ⭐ Their ownership point was right, and is moot only by accident of authorship
+
+`:3` is **frontmatter**, and **運用31's scope unit is 節** —
+so the frontmatter assertion **has no section owner**, and a
+correct own-section fix **would have left the first-read
+third of the contradiction standing**.
+✅ **It did not — because p4 wrote that sentence themselves**
+(their 21:35 declaration: *one sentence of the frontmatter
+description replaced*) ⇒ **repairing it is authorship, not
+intrusion**, and own-section-only does not bar a desk from
+correcting its own text.
+⚠ **But the rule's gap is real for the general case**:
+frontmatter is shared metadata with **no 節 owner**, so the
+next stale frontmatter sentence may belong to nobody. ⇒
+**Recorded as a note on 運用31 for Rs — not a new decision**,
+since it changes nothing that is currently open.
+
+Banked 2026-08-05 22:53 JST.
