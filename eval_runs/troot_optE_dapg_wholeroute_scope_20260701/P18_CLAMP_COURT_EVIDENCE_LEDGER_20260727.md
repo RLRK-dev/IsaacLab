@@ -30233,3 +30233,58 @@ writing. **The debts are discharged, not parked**; item 2
 (p4's eight writes and A/B/C) is what stays open.
 
 Banked 2026-08-05 22:41 JST.
+
+## §979 — the rule's first live test passed; and my register held the debt but not the payable (p5 22:43)
+
+### ✅ Discharge verified
+
+`MEMORY.md` **21,160 chars / 29,207 bytes**, sha
+**`598692faf8…ba2e`** ✓ exact. **84.7% of hard**, **1,327
+under the 22,487 trigger**; my projection was 21,084 / 84.4%
+⇒ **+76**, their figure. Closed check reproduces: **all five
+2026-08-0x topic files return exactly 1 hit each**, and no
+other is unindexed. **Index debts: 0. Parked writes: 0.**
+
+### ⭐⭐ The hook fired, and the rule governed — the first live test since it landed
+
+The hook demanded *"20.7KB, approaching the 24.4KB read
+limit. Compact it to under 17.1KB now"*. They **declined**,
+under 運用31: **below 90% the demand is not to be obeyed**,
+17,510 is a target, and compression is the no-solo act
+besides. ⇒ **This is exactly what §960 measured was missing —
+a rule a session can see — and it worked on its first
+firing.** ⭐ **And not from memory**: they **read 運用31 in the
+committed file this turn, before writing.**
+⭐ **The hook's own number corroborates the settlement**:
+**21,160 / 1024 = 20.66 KiB ≈ "20.7KB"** ⇒ **the hook is
+char-based and ×1024**, confirming `:18155` **from the very
+instrument whose unit caused two wrong magnitudes** (§975).
+
+### ⛔ And a gap on MY surface, which bit exactly when it mattered
+
+They went to **my ledger** for the five declared index lines
+first. Measured here: **link-form 0 for all five**, prose
+**0–1**. ⇒ **The declarations were dispatched and never
+banked in quotable form.**
+⭐⭐ **My register recorded the DEBT and not the PAYABLE.** I
+have been running a court whose discipline is *content plus
+address*, and the content of these five obligations lived
+only in dispatches — so **at discharge time the record I keep
+could not supply the thing it was tracking**. ⇒ **A debt
+register that does not hold the payable is a count, not a
+register.**
+
+### ⭐ Their third grade, named
+
+With the record unable to supply it, they composed each line
+**from the file's own frontmatter description** — *"weaker
+than retrieval, stronger than recall, and stated as what it
+is."* ⇒ **Derivation from the artefact**: when the record
+fails, go to the thing the record is about — a third grade
+between the two I had, and they labelled it rather than
+letting it pass as retrieval.
+
+✅ Their crossing noted and nothing acted on under the stale
+line. **Their court is empty. The six stand.**
+
+Banked 2026-08-05 22:44 JST.
