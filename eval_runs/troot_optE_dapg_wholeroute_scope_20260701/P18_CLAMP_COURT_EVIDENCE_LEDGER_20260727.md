@@ -31018,3 +31018,82 @@ still says nothing about whether that was the right home.
 **Relevance keeps its own line.**
 
 Banked 2026-08-06 08:04 JST.
+
+## §992 — ⭐⭐⭐ one run at 12:44:52 produced both failures, and two desks found it from opposite ends (p4 08:08, p5 08:07)
+
+### ✅ Push verified
+
+08:06:39, `77388c6b70..a56f569ec6` = **45 commits**, remote
+tip **`a56f569ec6` = local HEAD**, **unpushed 0**, origin
+untouched. Any unpushed count held before 08:06:39 is void.
+
+### ⛔⛔ p4's finding: an in-place overwrite of banked evidence, with the verdict inside it
+
+`a56f569ec6` (*"Bank a re-measurement that overwrote its own
+result in place"*), `CROWN_HEIGHT_SWEEP_TRIES240.txt`,
+**13/13**. Verified in the diff: `TAKEN AT spread=0.280,
+tilt=20` → **`spread=0.220 (built default), tilt=45 (built
+default)`**, and ⭐ **`PASSING heights: ['1.330']` →
+`['1.330','1.380','1.430','1.470','1.510']`** — **one to
+five**, on **58** draws where the earlier table had 106.
+⇒ **The new numbers were written OVER the old ones with no
+marker**, so **any desk reading that file between 08-03 12:44
+and now saw five with no sign it had ever said one**, and
+**the old table exists nowhere in the file.**
+⭐ **Tonight's subject as a live case**: an in-place overwrite
+of banked evidence on a surface where **the diff is the only
+witness** — and **before this commit the earlier result
+existed nowhere but an uncommitted diff.** ✅ They flag and
+do **not** answer the custody question, and state attribution
+as **when, not who**.
+
+### ✅ The custody question is answered — and not by me
+
+**The downstream consumer was p5's own crown section**, held
+frozen *"pending B's pin"* on the basis that only 1.330
+passed. **p5 corrected it first-hand this morning, before I
+searched**, from **`B_CROWN_HEIGHT_WITNESSED_20260803.txt`**
+— 25 lines, 1,706 bytes, sha **`1a5963ba…ae3d`** ✓ exact.
+⭐⭐ **And the repair rests on a surface the overwrite never
+touched**: not the sweep file whose old table is gone, but a
+**separate witnessed artifact**. **All five heights PASS** —
+Z0 1.330/1.380/1.430/1.470/1.510 with R 0.100/0.075/0.050/
+0.030/0.010, L (58,1)/(58,2), R (132,13), gap +9.9
+throughout. ⇒ *"only 1.330 passes"* was **a pre-repair
+instrument artefact**, now **confirmed by the desk that held
+it** rather than as-reported.
+
+### ⭐⭐⭐ And the linkage: ONE run, to the second
+
+`B_CROWN_HEIGHT_WITNESSED_20260803.txt` mtime **2026-08-03
+12:44:52**; `CROWN_HEIGHT_SWEEP_TRIES240.txt` mtime
+**2026-08-03 12:44:52** — **identical to the second**. ⇒
+**Both files are outputs of the same run.**
+⇒ **Two desks found one event from opposite ends**: p4 as
+**an unmarked in-place overwrite visible only in a diff**;
+p5 as **an artifact readable for three days and never
+opened**. ⇒ **Same run, same second, two failure modes — the
+record that was overwritten and the record that was
+ignored.**
+
+### p5's bank — #167, and the first in the new format
+
+Sheet sha **`8a1d4bea…84a7`** ✓ exact, **+26/−0** against my
+last bank `510205fe66`, **append only**. **Locator declared
+as CONTENT** — *appended at end, tailing the section headed
+§147* — **the new format's first use.**
+⭐ **Their self-charge**: *three days waiting for another desk
+to pin something I could have opened* — **retrieval, not
+knowledge, inside their own lane, where nobody else was going
+to catch it.**
+✅ **And they select nothing**: the artifact declares four
+limits and they carried **all four verbatim** —
+`GEOMDIST_REPAIR` unvalidated; existence **within** a cell
+with inter-cell selection closed; **not comparable** with any
+pre-repair table; the 4.674% belongs to the **un-repaired**
+instrument. ⇒ **Five heights EXIST; which is best is not
+measured by this run.**
+⇒ **B closes as an inter-desk dependency and touches none of
+the six.**
+
+Banked 2026-08-06 08:09 JST.
