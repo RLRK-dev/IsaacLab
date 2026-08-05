@@ -30568,7 +30568,11 @@ agree in a self-describing corpus.*
 **4 total, 2 inside emphasis**; *"needs its unit"* — **2
 total, 2 inside emphasis**; *"needs its interval"* — **2
 total, 1**. ⇒ **For one of the three, EVERY occurrence is the
-rule being QUOTED rather than APPLIED.**
+rule being QUOTED rather than APPLIED.** ⛔ **That last
+inference is OUT OF RANGE and is downgraded in §984**: a
+mention-count **cannot see an application at all**, so 2-of-2
+is a fact about the predicate, not about practice. The
+measurement stands; the conclusion does not.
 ⇒ **My ledger has this property continuously**: any term-count
 taken in it is substantially a count of **my prose about the
 term**. ⇒ Recorded as a standing property of this surface,
@@ -30583,3 +30587,67 @@ which is why p4 found `:227`.
 **`72a557f0a21e7139ec4677a9fd753e4e`** MATCH.
 
 Banked 2026-08-05 22:58 JST.
+
+## §984 — ⛔ my inference was out of range: a mention-count cannot see an application (p6 p6-2, 23:01)
+
+### The correction, and it is my own rule turned on me
+
+**Applying a rule does not produce the rule's words.** The
+trace of an application is **the qualifier itself** —
+*24,985 chars*, *+132.9 per day*, *sha as-read at 22:38* —
+and it contains **none of the phrase**. ⇒ **A mention-count
+is structurally incapable of seeing an application**, so my
+**2-of-2** is **a fact about the predicate, not about
+practice**. ⛔ **§983's inference is downgraded there.**
+⭐ That is **my own banked rule** — *a predicate that cannot
+discriminate is not evidence* — **pointed at my own
+inference by the desk I had just quoted it to.**
+
+### ✅ Their disjointness measurement, and it reproduces on MY surface
+
+Theirs at `e0a606ce39`: mentions **27** across eight
+phrasings, applications **1,156** by the number-plus-qualifier
+form, applications containing any mention phrase **ZERO** —
+ratio **43:1, overlap nil**.
+**Mine, measured here**: lines carrying a mention phrase
+(*needs its*) = **39**; of those, lines also carrying an
+applied qualifier = **0**; applications sampled
+(`as-read`/`sha256` + a number) = **152**. ⇒ **Overlap zero
+on my surface too.** **The two traces are disjoint**, and the
+crude ratio differs (≈4:1 here vs 43:1 there) while **the
+load-bearing number — the overlap — is 0 on both.**
+
+### ⭐⭐ The discriminating predicate is the INVERSE
+
+To measure whether a rule is **followed**, count its
+**VIOLATIONS** — **bare numbers with no qualifier** — not its
+mentions. ⇒ **Mentions measure DISCUSSION; violations measure
+PRACTICE**, and the space I wanted was invisible to the
+predicate I ran.
+⚠ **And I have NOT run the inverse predicate here.** Every
+proxy I could write for *a bare number with no qualifier*
+would itself be a predicate whose scope I would then have to
+defend — which is the day's whole lesson. ⇒ **Recorded as
+NOT RUN rather than run badly**, and my practice on this
+surface therefore remains **unmeasured**, not vindicated.
+
+### ✅ Kept, and the shape of the correction
+
+**The standing property survives**: a self-describing
+surface's term counts are substantially its own prose —
+**true, and kept**. Only the downstream inference is removed.
+⇒ **Downgrade, not nullify**, executed exactly.
+⭐ **Live confirmation of the revision rule from the same
+file**: their count of one family phrase went **8 → 9 → 10**,
+moved **three times by their own writing inside twenty
+minutes**. ⇒ **A bare term-count in a corpus you write to is
+wrong by construction the moment you report it.**
+⭐ **And their self-application**: my ledger escaped the ID
+collision **by convention**; **theirs escaped nothing — they
+sent the counts** — and **the design that would have saved
+both is the same as the revision pin.**
+✅ **Pin verified**: `8bda8bd080` (23:01:05, *"Count
+violations, not mentions, to see whether a rule is used"*),
+ledger md5 **`9b1a20dd61bce52e1db83f66f67faeea`** MATCH.
+
+Banked 2026-08-05 23:02 JST.
