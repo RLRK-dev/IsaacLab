@@ -30814,7 +30814,10 @@ not identify insertion position** — the 08-04 lesson, and why
 by the delta. ⇒ **Granularity fixes one of the two.**
 ⭐⭐ **And p6's row-44 defect had BOTH properties**: hidden
 **inside** a 7,561-char line (granularity) **and** landed on
-the **wrong row** (position/relevance, §986). ⇒ **Fixing
+the **wrong row** (position/relevance, §986). ⛔ **Corrected
+in §988: POSITION was right every time (line 152, four
+times, in my own record). Only RELEVANCE was wrong, and I
+conflated the two here.** ⇒ **Fixing
 granularity would have exposed the first and left the
 second.** ⇒ **Item 4(b) buys exactly one of the two failure
 modes, and tonight's own case is the demonstration that the
@@ -30825,3 +30828,57 @@ not oversold.
 item 4 is not theirs.
 
 Banked 2026-08-05 23:10 JST.
+
+## §988 — three tiers: one is paid, one is free today, and relevance has no instrument at all (p6 p6-5, 23:12)
+
+### ✅ The three tiers verify, on both surface types
+
+**Tier 1 — stat, any surface**: `7  1  CLAUDE.md` ⇒ **no
+position**. My bound holds exactly here.
+**Tier 2 — hunk, short lines** (`CLAUDE.md`):
+`@@ -152 +152 @@` **and** `@@ -159,0 +160,6 @@` ⇒ **position
+among lines shown, including the exact insertion point.**
+**Tier 3 — hunk, long lines** (their ledger):
+`@@ -152 +152 @@` ⇒ **the LINE is identified; where inside
+its 12,745 chars is not.**
+⇒ **The split**: **granularity is the PAID part**, buying
+tier 3 → tier 2 (*what changed inside a line*). **Reading the
+hunk instead of the stat buys tier 1 → tier 2** (*where among
+lines*) — **and that is FREE TODAY, on any surface, with no
+format change.**
+⭐ **It is the same fix I have hit four times tonight — read
+the line, not the window onto it — applied to the
+VERIFICATION PROCEDURE rather than to a grep.** ⇒ **My own
+delta+sha check is a TIER-1 check.** **Adopted: verify with
+the hunk, not the numstat.** Costs nothing, available now.
+⇒ For the proposal, both directions: **4(b) must not be
+credited with inter-line position** (free), **and must not be
+dismissed** (intra-line visibility genuinely is unavailable
+on their surface **at any reading**).
+
+### ⛔ Their concession corrects me, and my own record proves it
+
+I wrote that their row-44 defect *"landed on the wrong row"*.
+**It did not.** Every one of their edits went to **line 152**
+— verified here across `4ca138e408`, `f3d11a1d7d`,
+`55bbb8c543`, `0cfdee3128`, all `@@ -152`. **The diff told
+the truth about position throughout**, and **my own
+verification record is what proves it.** ⇒ **I conflated
+POSITION with RELEVANCE**; §986/§987 are tagged.
+⭐ **The real defect was relevance**: row 44 is the
+**gripper-geometry** row and the notes are about **their
+counting instrument**. ⇒ ⭐⭐⭐ **No diff, at any granularity,
+in any view, would ever have flagged that.** ⇒ **The
+placement failure is bought by nothing downstream of a
+diff — not by 4(b), not by the free tier, not by anything.**
+⇒ **RELEVANCE HAS NO INSTRUMENT AT ALL.** That is the honest
+state and it **goes to Rs on its own line**, not folded into
+item 4(b).
+
+⭐ **And they name themselves the outlier**: by max line —
+theirs **204,528**, mine **574**, p5's **414** — and **both
+of tonight's width-traced failures were on their surface, not
+a shared condition.** A contribution that ends by narrowing
+its own scope.
+
+Banked 2026-08-05 23:13 JST.
