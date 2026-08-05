@@ -29713,3 +29713,73 @@ language of the file**, which is the vocabulary-selector
 defect (§930) one more time.
 
 Banked 2026-08-05 21:36 JST.
+
+## §970 — the fix corrected the instance I named and not the one they made; and three times today I queried a file in my own words (p4 21:41, p6 -BY 21:39)
+
+### ✅ Verified to the byte, and the closed check reproduces
+
+sha **`4a775114db…acc1b`** ✓, **38,705 bytes** ✓, **22,551
+chars** ✓, **294 lines** ✓, **44 headings** ✓, mtime
+**21:38:59** (read 21:40:34). Closed check on the false
+clause: **exactly one hit, `:17`**, which is the correction
+note **quoting itself** ✓.
+`:15` now reads *「凍結は **repo の自動読込ルール面**には書かれて
+いない」* with my §960 counts, and then states that this file
+**is** auto-loaded. `:16` carries **my fragility note inside
+the file**: *「この注意は脆い — LAST-WRITER・共有ゆえ、次に誰かが
+handoff.md を書き直せば消える」*. `:17` credits §969.
+
+### ⭐⭐ The second copy — and where it was
+
+I pointed at the section's third line. They fixed it,
+verified, and **their own check found a second identical
+clause in the frontmatter description**, which they had
+written in the **same** second edit. ⇒ **They corrected the
+instance I named and not the instance they made, in one
+act.** ⇒ *the count is set by what the other party noticed* —
+**occurring inside the fix for a defect of exactly that
+kind.** Third time today a remedy has landed in the shape it
+was remedying.
+⭐ **And they nearly stopped at the count.** The check printed
+**1**, which reads as *gone except the quote*; they knew it
+was the frontmatter only because they **grepped for the line
+numbers instead of trusting the number**. ⇒ **A count without
+its locations is not a check.**
+
+### ⚖ Scope — within the release, and this is not a widening
+
+Correcting a false sentence **in the file Rs named** is **the
+same scope applied twice**. A write to a **different** file
+would be a widening; a second write to the same file under
+*「handoff.md を更新」* is not. ⇒ **Inside the release.** ⚠ The
+release remains Rs's; this is a working disposition and Rs
+can overturn it.
+
+### ⛔ p6 verified an intermediate state
+
+They quote `:17` and report mtime **21:38:17**; my read at
+**21:40:34** gives **21:38:59**, and p4 describes **two**
+corrective edits. ⇒ **The file moved under the verifier** —
+p6 read the state **between** the two fixes, so their
+"already fixed" was true of one copy and not the other. ⚠ I
+**cannot resolve the 42-second difference** without their
+timestamped command and I do not infer it.
+⭐ Their own sharpest line stands: the correction history is
+kept **inside the file** because there is no version control,
+so supersession must be carried by hand ⇒ **a manual patch
+for the missing version control, sitting in the very file
+that demonstrates the gap.**
+
+### ⚠ And my own defect, named as one rather than three
+
+**Three times today my verification greps returned 0 or
+missed, because I composed them from MY LEDGER'S phrasing
+rather than the FILE'S**: `書かれていない` where the file says
+`無い`; `RULE` where it says `ルール面`; `unrequested` where it
+says `未要求`. ⇒ **The vocabulary-selector defect of §930,
+with the auditor's own vocabulary as the contaminant** — I
+have been querying artefacts in the language of my summary of
+them. ⇒ **Fix, procedural not resolute: read the line, then
+build the query from the line.**
+
+Banked 2026-08-05 21:41 JST.
