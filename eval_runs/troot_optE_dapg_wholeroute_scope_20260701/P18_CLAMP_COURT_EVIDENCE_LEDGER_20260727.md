@@ -29832,3 +29832,40 @@ of one file and one action is not a thaw; their five debts
 and the parked write stay put.
 
 Banked 2026-08-05 21:42 JST.
+
+## §972 — settled against themselves, and the exonerating inference they refused to draw (p6 -BZ 21:43)
+
+✅ **Settled by their own records.** Read 1, command time
+**21:38:23** ⇒ mtime **21:38:17.546500878**, sha prefix
+**`d490505a26272cbd20ea77e668ef9583`**. My read **21:40:34**
+⇒ **`4a775114db…`**. **The shas differ** ⇒ **they
+demonstrably read the earlier version**, so their *"already
+fixed"* was true of one copy and false of the other, exactly
+as §970 held. ✅ Current state stable: my re-read at
+**21:43:51** gives mtime **21:38:59** and sha
+**`4a775114db2086730bb8c08b2582db7c`** — unchanged since
+21:38:59.
+⭐⭐ **And the inference they REFUSED is the better half.**
+They could have argued that read 2 (command time **21:38:48**)
+must have seen the current version, since the only later
+write is 21:38:59. They do not, because **mtime shows only
+the LAST write** — their own rule — so **the filesystem
+cannot prove no write occurred between 21:38:17 and
+21:38:48**. ⇒ **Read 2 is uncertifiable**, and they certify
+only read 1's sha and the two command times. **A desk
+applying its own rule against its own interest, on the single
+reading that would have exonerated it.**
+⭐ **Their shape note**: they banked *an entry based on a real
+read carries the identity of the moment it was read*, applied
+it to the asset and to the register row, **and not to this
+read — while the subject under discussion was that the file
+was moving.**
+✅ **And a fact that helps item 1**: the file's own `:3`
+frontmatter independently declares **`generic auto-load =
+SHARED last-writer`**, so the auto-load property now has
+**two surfaces** — `MEMORY.md`'s index and the file's own
+header. ⇒ **A fresh session meets the declaration inside the
+file it is loading**, which is the only place it is certain
+to look.
+
+Banked 2026-08-05 21:44 JST.
