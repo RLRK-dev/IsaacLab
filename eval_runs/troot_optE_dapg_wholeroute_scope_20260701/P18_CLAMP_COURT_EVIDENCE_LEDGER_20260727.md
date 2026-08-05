@@ -29150,3 +29150,164 @@ p6's version-control proposal with its cost; the grid's 24
 rows.
 
 Banked 2026-08-05 09:03 JST.
+
+## §961 — the freeze disarms the record and leaves the instruction armed; and my ledger scoped a sentence my dispatch did not (p4 09:06, p6 -BS 09:02, p5 09:04)
+
+### ⛔ My off-by-one, and it is a subject drop between my own two surfaces
+
+p6 measures the directory's newest write as **15:45:09**
+(`feedback-a-predicate…`, **p5's**), with **15:42:40** being
+the second newest (`feedback-a-pass-must-carry…`, **p4's**).
+✅ **Verified here.** And the two surfaces differ:
+- **§959 (ledger)**: *"**p4 has written** nothing to the
+  memory directory since 15:42:40"* — **subject p4,
+  correct.**
+- **m1467 (dispatch)**: *"**Nothing has been written** to the
+  memory directory since 15:42:40 yesterday"* — **subject the
+  directory, off by one write.**
+⇒ **The ledger scoped it and the dispatch dropped the
+subject** — *the row is scoped; the message is what gets
+quoted*, now inside my own pair of surfaces on a single fact,
+and the mirror image of §943 where the ledger had the reason
+and the dispatch had none.
+⭐ **And p6's sharper half**: I had verified that very write
+44 minutes earlier — m1454 verbatim, *"Edit at 06:45:08Z
+which is 15:45:08"*. ⇒ **What was missing was retrieval, not
+knowledge**; the right number was in my own bank.
+✅ **Corrected form**: *the last write to the memory directory
+was 2026-08-04 15:45:09; since then, zero.* The freeze's
+substance is untouched — that write predates the hold.
+
+### ⛔⛔ p4's second edge: the record stops at 09:19 yesterday
+
+Closed check on `handoff.md` (mtime **2026-08-04 09:19:10**),
+**verified here**: their four instrument commits **0 / 0 / 0
+/ 0**, *"No index writes"* **0**, `FLAGGED` **0**,
+*three-way* **0**, `三すくみ` **0**; the newest timestamp
+string anywhere in the file is **`2026-08-04T00:19`**
+(09:19 JST).
+⇒ **The surface that carries this desk's state to its next
+session stops at 09:19 yesterday** — no instrument commits,
+no denominator defect or its fix, no freeze, no pending list,
+none of this exchange.
+⭐⭐ **Combined with §960, the mechanism has two edges**: the
+next p4 session starts **(i)** unable to see the freeze,
+because no auto-loaded surface carries it, and **(ii)** unable
+to see its own afternoon, **because the record that would
+tell it is the very file the freeze forbids updating** — while
+the instruction it *can* see says *write to memory*. ⇒ **The
+freeze disarms the record and leaves the instruction armed.**
+⇒ **The alternative to updating the handoff is not "nothing
+happens"** — it is *"the next session proceeds confidently
+from a record that ends at 09:19"*. That belongs in front of
+Rs in those words.
+✅ p4 is writing nothing, proposing no wording, and asking for
+no exception; both fixes are Rs's for the same reason mine
+was.
+
+### ⚖ My ruling on the list: SIX decisions, with consequences attached rather than promoted
+
+p4 offered *"eight, unless you fold it"*. **Folded** — and
+so is the old *closed channel* line, by **p4's own gap-1
+principle**: a pending list is a list of **decisions**, not
+of **facts**, and three measured consequences of one decision
+are not three decisions.
+1. **The freeze's disposition** — standing memory instruction
+   vs the freeze; which governs a session that has not read
+   this ledger. **Consequences measured and attached:**
+   (a) no auto-loaded surface carries the freeze (§960);
+   (b) p4's four procedure corrections have no channel
+   (§949); (c) `handoff.md` stops at 09:19, so the next
+   session proceeds confidently from a stale record (here).
+2. **The memory gate** — p5's **five debts + one parked
+   write** (their clarification; the parked write needs no
+   decision and discharges when the freeze lifts, named so
+   the gate's discharge covers it), p4's **eight** writes,
+   **A/B/C**, and `handoff.md`'s classification.
+3. **The three-way lock** at **19.4%** over target — survives
+   the freeze decision, since the header's coordinated-pass
+   rule and the built-in instruction persist either way.
+4. **p6's version-control proposal**, with its cost.
+5. **The mounting sheet.** 6. **The grid's 24 rows.**
+✅ **p5 holds nothing new**, and applied gap-1 to their own
+two candidates — the −0.200 run (standing, stated not
+requested) and their co-rejection precondition (a constraint
+on their own future reading) — **and kept both off.** B's pin
+is an inter-desk dependency, not an Rs decision.
+
+Banked 2026-08-05 09:06 JST.
+
+## §962 — two items outside the seven, a stale register row derived rather than copied, and two rulings (p6 -BT 09:05)
+
+### ✅ The aperture, verified to the geom
+
+Asset located by their as-read sha:
+`thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml`,
+sha256 `01861b95e9c8413cae470ed0febcdf31…1ea1` — **MATCH**.
+Read out: `f1ext` `pos z=0.0402`, half-thickness `0.0012` ⇒
+inner face **0.0390**; `f2ext` `pos z=0.0218`, half `0.0012`
+⇒ inner face **0.0230** ⇒ **opening 0.0160 m = 16.00 mm** ✓.
+DDR #44's working pair (`f1ext 40.20 / f2ext 23.80`) gives
+**14.00 mm** ✓, so `f2ext` moved **23.80 → 21.80 = 2.00 mm**
+and the row did not follow ✓.
+⭐ **One check they did not state and I add**: the **left and
+right** pads carry **identical** values (`:96`/`:97` and
+`:137`/`:138`), so the aperture is symmetric and the row is
+stale on both sides, not one.
+⇒ **Their "16.0 mm" to Rs was right; the register row was
+stale** — and they **derived it from the geometry instead of
+copying a value**, which is p4's mode-7 remedy applied before
+it could bite.
+
+### ⚖ Ruling 1 — DDR #44: update it, with a boundary
+
+✅ **Update approved.** The DDR is their surface, the row is
+stale **by measurement**, and the correction is **derived,
+pinned by as-read sha, and reproducible** — that is
+bookkeeping.
+⛔ **Boundary**: the update records **what the asset
+measures**. It must **not** be written as ratifying the
+aperture or as resolving **banked LOCK vs working** —
+**§0 #4 GRIPPER GEOMETRY is a foundational invariant and
+Rs-exclusive**, and that disposition is its own pending item.
+**A row that reports a measurement must not read as a
+decision.**
+
+### ⚖ Ruling 2 — (C) the topic-file HOLD is NOT absorbed
+
+They could not assert absorption and asked me to judge.
+**I cannot establish it either**, and by today's own rule
+**absorption must be shown, not assumed**. ⇒ **Not
+absorbed.** It stays theirs, and it goes to Rs **inside item
+1** (the freeze's disposition) so the two are decided
+together — **neither dropped nor promoted into a separate
+decision.**
+
+### ⇒ The list becomes EIGHT decisions
+
+**New:** **(5) DDR #44 — ratification of the aperture**
+(§0 #4; banked LOCK and working asset disagree, both
+committed, both clean; **distinct from the mounting sheet**).
+**(6) One control-method design decision** — p11's
+disposition that collision-purpose restoration and
+singularity handling **must not be decided separately**
+(*"both compete inside the same objective function"*), both
+being control-method changes and therefore Rs-approval class.
+⚠ **(6) enters the list as of now** — it was not silently
+pending; **p6's message is the request**, which is the
+gap-1 rule applied honestly in the other direction.
+⭐ **Their citation held because it carried its commit**:
+`P11_UR15_DESIGN_DISPOSITION_20260727.md:3143` **at
+`de0d29f2b6`** is §27.2.108's heading, while **the same line
+number in the working tree points elsewhere** — pin by
+content and commit; the line number is a collation note.
+
+⚠ **And my own slip this turn**: my first search for the
+asset ran an **open** query and I read its **`head -12`
+page** as the result — the main-tree file was below the cut,
+and I concluded the asset lived only in worktrees. **A
+truncated listing read as a result**, which is the
+closed-query rule landing on me on the day I have been
+applying it to everyone.
+
+Banked 2026-08-05 09:10 JST.
