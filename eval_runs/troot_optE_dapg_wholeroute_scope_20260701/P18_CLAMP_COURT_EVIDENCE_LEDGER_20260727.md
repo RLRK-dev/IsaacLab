@@ -32815,3 +32815,66 @@ p4: 「私の欠落は、**主張が topic file を名指しているのに `MEM
 調べたこと**を説明しない」。
 ✅ **そのとおり。** (a) path 欠落 = p4 / (b) `measurement / subject` = 私。
 **独立した 2 件**であり、片方でもう片方を相殺しない。
+
+---
+
+## §1022 — ⭐⭐⭐⭐ §0 #2: **値は稼働コードが読む。しかし *その値を守る assert は一度も呼ばれない*。**私の言い分でも p6 の言い分でもない、第 3 の答 (p6 p6-22 09:24:29, p18 09:28 実測)
+
+### (1) ⛔ p6 の STOP は正しい — 私は Rs に**誤って伝わる形**で出していた
+私が運んでいた文: 「不変前提を主張する定数は稼働コードに読まれず、
+振る舞いを支配するのは別の（不変前提でない）定数」。
+⇒ ⭐ **`COMMANDED_SPAN` については真。⛔ しかし「§0 #2 は *enforce されて
+いない*」と読まれる。それは別の主張であり、私は user-facing 報告で
+実際にそう書いた。** ⇒ **Rs へ訂正する。**
+
+### (2) 件数の食い違い — ⭐ **family 第 1 項が、私と p6 の間で、本日最重要の主張の上で**
+| 誰 | 数えたもの | 結果 |
+| --- | --- | --- |
+| 私 | **定数名** `COMMANDED_SPAN`（⚠ repo 全体） | 2 |
+| p6 | 同（`thread_isaac_lab/**.py`） | **1** |
+| p6 | ⭐ **標識 token** `INVARIANT#2` | **44 site / 6 file** |
+
+✅ **私の実測: `thread_isaac_lab/**.py` で `COMMANDED_SPAN` = 1（定義のみ）
+／ `INVARIANT#2` = 44 site・6 file。⇒ p6 の数が正しい。**
+⇒ ⭐ **どちらも誤っておらず、どちらも query を載せず、2 つの答が同じ
+不変前提について *反対の読み* を支える。**
+
+### (3) ⭐ p6 の反証 — 実測一致。**§0 #2 は「主張されるだけ」ではない**
+- `envs/route_executor.py:149-151` は **本物の `assert`**:
+  `assert abs(2.0 * _GHS - _SPAN_NOMINAL_M) < 1e-9, "INVARIANT#2
+  (FOUNDATIONAL 88mm span) broken: … (off-grid revert; see RS71 §0 #2 —
+  Rs premise, STOP)"`
+- **`GRIP_HALF_SPAN` は稼働コードが読む**: `route_executor.py:176`
+  （`r_ty = c2y + _GHS  # (a1) HOLD Y = 88mm span`）/
+  `newton_grip_env.py:435-436`（EE 目標を ∓ で作る）/
+  `newton_aerial_regrasp_mujoco_env.py:214`・`:306`。
+⇒ ✅ **88 mm は実際に EE 目標を形作っている。**
+
+### (4) ⭐⭐⭐⭐ しかし p6 が「誰かが Rs に *安全だ* と言う前に確かめたい」と
+### 言った当の検査を私が走らせた — **結果は逆**
+`assert_span_invariant`（`route_executor.py:135` 定義・**両方の assert を
+内包**）の参照を **repo 全体・全 file 種**で閉じた query:
+| 場所 | 種類 |
+| --- | --- |
+| `envs/route_executor.py:135` | **自分の定義** |
+| `…P2-routeexec/state.md:86` | **vault の記述**（コードでない） |
+| `.codex/worktrees/…` の同 2 件 | **worktree の複製** |
+⇒ ⭐⭐⭐⭐ **コード中の呼び出し site = 0。§0 #2 を守る assert を持つ関数は
+一度も呼ばれない。**
+
+⇒ ⭐⭐⭐ **正しい文（私のでも p6 のでもない第 3 の答）**:
+**「値」は稼働コードが読み、EE 目標を形作る。⛔「値を守る検査」は死んでいる。**
+⇒ **`GRIP_HALF_SPAN` を変えれば lane は黙って動き、何も発火しない。**
+
+⚠ **私の scope**: 関数名の文字列検索。動的 dispatch（`getattr`・registry）
+は逃れる。⇒ **「呼ばれない」は文字列検索の範囲での主張。**
+
+### (5) ⭐ §0 #2 の open DDR 行は **2 つ**（私は 1 つしか運んでいなかった）
+- **row 58**（p5）= 実測 75 対 指令 88。
+- ⭐ **row 45**（p6）= **88 → 176 mm の倍化が「Rs 裁定」として報告され、
+  disk のどこにも無い**。`GRIP_HALF_SPAN` と `CLIP_Y_SPACING` は**不変**で、
+  上記の guard 群は**旧値を守る側に立っている**。
+  ✅ 私の実測: `task_config.py` に span としての `0.176` は無い
+  （`±0.176715` は別量）。
+⇒ **Rs には 2 行とも要る。row 45 こそが「主張されるだけでなく守られている」
+と言っている行。**
