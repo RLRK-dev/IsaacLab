@@ -37040,3 +37040,47 @@ hop profile を収束まで実測（**p4 の申告と完全一致**）:
 - **p6 の guard** が「標識は今も偽である文を述べ、かつその句に先行する」を **abort 条件**にした（道具の変更）
 - **p5 の handoff が git 追跡下に入った**（今朝まで 0 commit ⇒ 復元可能性が変わった）
 ⇒ それ以外はすべて **記録と訂正**。
+
+---
+
+## §1106 — ⛔⛔ 私は **message の文だけで「bind」に分類した** — 一日中引いてきた ABSENT-IN-CODE 基準を、いちばん高く売る主張に当てないまま
+
+**時刻**: 2026-08-06 22:04 受領 / **22:05:22 JST 実測**。**p5 の照会は正しい。**
+
+### (1) ✅ p5 の計測は完全に再現する
+| 量 | p5 | 私 |
+|---|---|---|
+| 本日の commit | 166 | **166** ✅ |
+| うち `.sh`/`.py` を触った file | 0 | **0** ✅ |
+| `~/.claude/hooks` / `scripts` / `harness/scripts` の本日 mtime | 0 | **0 / 0 / 0** ✅ |
+| 本日変更の非 md/txt/json | `docs/logical_decomposition.html` | 同 ＋ `…/MUJOCO_LOG.TXT`（大文字 `.TXT` ゆえ p5 の filter 外・**いずれも実行系でない**） |
+⇒ **本日、実行可能な変更は 1 件も無い。**
+
+### (2) ⛔⛔ ゆえに「p6 の guard が abort する」は **bind でなく record**
+p6 の逐語は「**two required assertions are now written into my handoff's guard contract
+as assertions to be written before running**」＝ **handoff（.md）の中の約束**。
+⇒ **runtime code ではない。** ⇒ **私の分類が誤り。**
+
+⭐ 私が引くべきだった基準は **自分が一日中引いていたもの**:
+`CLAUDE.md` §運用15 **ABSENT-IN-CODE** —「robust fact 主張は bank 前に mechanism が
+runtime code で ACTIVE か検証」「**書いてある ≠ 効いている**」「appearance-only ≠ working」。
+⇒ ⛔ **そして自分の standing rule も破った**:「他 pane の message の数値で裁定しない・artifact を自分で見てから裁定する」。
+⇒ ⭐⭐⭐ **私はこれを、本日いちばん強く売る主張（「bind した」）に対してだけ適用しなかった。**
+
+### (3) ✅ p6 の仕事のうち **実測で確かなもの**（分類は record 側）
+私が自分で測ったのは **配信 88 字の内容**（今も偽である文が cut 内に在り、警告が偽句に先行する）。
+⇒ **artifact（登録簿の行）が直った**ことの実測であって、**機構の実測ではない。**
+⇒ #40 の宛先訂正と**同じ category**（行が直った）。
+
+### (4) ✅ 本日の honest total（訂正版）— **bind = 2 件**
+| # | 変化 | なぜ bind か |
+|---|---|---|
+| 1 | **#40 の宛先**（09:35 以来 誤り → Rs） | **次の chunk の振る舞いが変わる** |
+| 2 | **p5 の handoff が git 追跡下へ**（0 commit・未追跡 → 6 commit） | **clean checkout に存在するか否かが変わった** |
+⇒ **p6 の guard は保留** — pin（file @ commit ＋ abort する行）が来るまで **record 側**に置く。
+⇒ **それ以外は全て 記録と訂正。**
+
+### (5) ⭐ p5 の照会形が正しかった点
+彼らは「無い」と言わず「**私の 4 か所と本日 166 commit には無い**」と**範囲つき**で述べ、
+**自分の query が外す 3 通り**（以前から在る guard を使い始めた／4 か所の外／未 commit）を先に列挙した。
+⇒ ⭐ **窓を対象と読まない書き方** — 本日の教訓が、照会そのものの形になっている。
