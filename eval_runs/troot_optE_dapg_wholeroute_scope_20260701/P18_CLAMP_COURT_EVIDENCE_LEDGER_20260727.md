@@ -36115,3 +36115,55 @@ head marker（挿入・純加算）」⇒ **17:21 に title を置換（`+6/−1
 ⭐⭐ **累積 shift を渡した**: `:1-84` 不動・`:85` 以降 **+4**、
 **17:11 の挿入と合わせて今朝の番号から通算 +7** ⇒ **`:227` は `:230` ではなく
 `:234`。⇒ 私が 2 つの delta を合成せずに済む。**
+
+---
+
+## §1088 — push 実行（Rs 一言）。届いた面で検証し、**残高 0 は瞬間の主張**
+
+**時刻**: 2026-08-06 17:39:27 JST 計測開始 / 17:40:07 JST 検証読み。
+**契機**: Rs 逐語「**push**」。⇒ 標準形どおり — **提案は私・実行は Rs の一言**
+（`feedback-push-proposal-at-chunk-close-2026-07-13`）。私からは動かしていない。
+
+### (1) 事前計測（push 前・すべて同一ターン実測）
+| 量 | 実測 | 注 |
+|---|---|---|
+| branch | `rlrk/optE-s2-substrate-swap` | — |
+| fork tip（push 前） | `658d511e5fcab59caf880f63f834487056ff0d7c` | p4 の 16:12:01 push が置いた面 |
+| local HEAD | `a991ba3f6078d0c0690ee96542a871ad5352e861` | = §1087 bank |
+| 未 push | **52** | `rev-list --count fork/…..HEAD` |
+| staged | **空** | ⚠ 共有 tree ゆえ必須確認（他 pane の staged を巻き込まない） |
+
+**触れた面**: 7 file / 2 dir のみ —
+`eval_runs/troot_optE_dapg_wholeroute_scope_20260701`（6）＋
+`thread_isaac_lab/thread-vault/07-Design`（1 = p6 の row 44/48 head marker）。
+⇒ **code 0 file。** 秘密形 path 走査（`\.env$|\.pem$|\.key$|keystore|credential|secret|token|id_rsa`）= **NONE**。
+
+### (2) 実行と結果
+`git push fork rlrk/optE-s2-substrate-swap` ⇒ `658d511e5f..a991ba3f60`。
+⛔ **`origin` は public upstream（isaac-sim/IsaacLab）ゆえ対象外** — 送り先は `fork`（RLRK-dev）のみ。
+
+### (3) ⭐⭐ 検証は **届いた面** で行った（自分の複製でなく）
+- ⛔ `git rev-parse fork/rlrk/…` は **私の local tracking ref** = 私が push で書いた自分の複製。
+  これで確認すれば「自分の書込を自分で読み返した」だけになる。
+- ✅ `git ls-remote fork rlrk/optE-s2-substrate-swap` ⇒ **remote 自身が返した**
+  `a991ba3f6078d0c0690ee96542a871ad5352e861` = local HEAD と一致。
+⇒ ⭐ 本日ずっと走っている型と同じ:
+**source の変数名でなく delivery surface で確認する**
+（`feedback-verify-at-the-delivery-surface-not-the-source-variable-name-2026-07-19`）。
+
+### (4) ⭐⭐⭐ 「未 push 0」は **object でなく pointer の主張**
+実測 `rev-list --count` = **0**（17:40:07 JST）。
+⛔ しかし本 tree は **共有**で、他 pane が随時 commit する ⇒
+**0 は 17:40:07 時点の瞬間値であって、恒久の性質ではない。**
+⇒ p5 の軸（object = commit で名指した内容 = 永久 / pointer = tip・HEAD = 瞬間、
+時刻必須）を **自分の行為の報告に適用**した:
+- **object 主張（永久・時刻不要）**: 「`658d511e5f..a991ba3f60` の 52 commit が
+  fork に在る」
+- **pointer 主張（瞬間・時刻必須）**: 「未 push は 0」← 17:40:07 JST を添えて初めて真
+
+### (5) 位置（3 位置の型）
+本件は **第 1 位置 = 自分の行為が真にすること** ⇒ 救済不要・stamp のみで足りる。
+⚠ ただし **(4) の pointer 部分だけは第 1 位置でも時刻が要る** —
+「自分の行為の帰結」であっても、**他者の行為が同じ量を動かせる**ため。
+
+**残**: Rs list = **7 件 open（2,4,5,6,7,8,9）**。3 卓とも私への未処理なし。
