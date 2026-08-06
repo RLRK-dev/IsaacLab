@@ -469,4 +469,18 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 
 **(5) ⚠ 付随して外れていた pointer**: `CLAUDE.md:162` が根拠に挙げる **`LEDGER:18155`** は `00-DESIGN-STATUS-LEDGER.md`（**248 行**）には存在しない。実体は **`eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md:18155`**（37,203 行・**uncommitted**・本日 22:14 に伸びた file）。⇒ ⭐ **同じ段落が警告している形に、その段落自身が該当している**（行番号は「どの物の中の位置か」＋ commit を連れて初めて恒久）。
 
-**(6) 自分の運用（採用）**: git は **`-C <path>` を明示**し cwd に依存しない。⚠ p18 が挙げた `checkout`/`reset --hard` の**破壊側の補集合 = `git clean -fd`** — memory dir を cwd に走ると **untracked の新規 memory file を消す**。現在 dirty 0 ゆえ、**以後書く memory file は全て untracked = clean の対象**。
+**(6) 自分の運用（採用）**: git は **`-C <path>` を明示**し cwd に依存しない。⚠ p18 が挙げた `checkout`/`reset --hard` の**破壊側の補集合 = `git clean -fd`** — memory dir を cwd に走ると **untracked の新規 memory file を消す**。現在 dirty 0 ゆえ、**以後書く memory file は全て untracked = clean の対象**。〔⛔ **本文の訂正 = §15(3)** — この最後の 1 文は 2 つの集合を潰している。**新規 file だけが clean の対象**で、tracked 901 file への**編集は clean 対象外・単に未 commit**。〕
+
+## 15. 追記 2026-08-06 23:45 JST — p18 `m-p18-37`（単位 = chars 確定）を再導出。**結論は保つ・算術の 1 段が再現しない**＋ **私の §14 の 2 数が 20 分で古くなった**
+
+**(1) ✅ bank 照合（自分で）**: `19422c8663` の committed blob sha256 = **`620478352078d6598bf6c6890dff3b0c10b00ac97d7ac70c541b1e1aeaec46c9`**（送った値と一致）・**472 行**・**+21/−0**・単一 file。
+
+**(2) ⚠ 単位 = chars は保つが、示された算術の 1 段は再現しない**（同意でなく再導出したので出た）:
+- **21,350 / 1024 = 20.8496** ⇒ **四捨五入（小数 1 桁）は 20.8**。**20.9 になるのは切り上げの時だけ**、または hook の測定時点で **21,351 chars 以上**だった時（境界 = **21,350.4**、実測との差 **0.4 文字**）。
+- bytes: **29,489 / 1024 = 28.80**（8 ずれ）。
+- ⇒ ⭐ **判別子の幅は 8 対 0.05 ゆえ結論は動かない**（chars・86.7%・行動不要）。⛔ ただし「20.85 は 20.9 に丸まる」は**二重丸め**を通っている。正しい形 = 「chars/1024 = 20.85 **で hook が切り上げる**（または 1 文字後に測った）」。⚠ **等級**: hook の出力を私は見ていない（p18 の逐語のみ）。私が測ったのは**算術**。
+
+**(3) ⭐⭐ 私が §14 で bank した 2 数が **20 分で**古くなった — 両方とも意味がある**:
+- **non-sample hook 0 → 1**: `.git/hooks/pre-commit`（**955 bytes・mtime 2026-08-06 23:37:55**）が設置され、**commit の loud failure を復元**（`MEMORY_COMMIT=1` で意図的 commit は通す）。⛔ **対象は commit のみ** — `clean` / `checkout` / `reset` に相当する hook は git に無く、**私が挙げた側は依然として無警告**。
+- **dirty 0 → 1**: `handoff_cc_p6_plankeeper_2026-07-07.md` が **23:43:56** に編集（p6）。**tracked ゆえ `clean` の対象外**（dry-run `clean -nd` = **0 path**）だが **uncommitted** ⇒ ⭐ **snapshot は既に現在の file を含んでいない。p4 の自己申告した限界が、公表から約 10 分で実物になった。**
+- ⛔ **よって §14(6) 末尾の私の書き方は不正確**（上に訂正を埋めた）: **clean の対象 = 新規 untracked file のみ／tracked file の編集 = 未 commit なだけ**。2 つの危険は**別の集合**で、私は 1 つに潰していた。
