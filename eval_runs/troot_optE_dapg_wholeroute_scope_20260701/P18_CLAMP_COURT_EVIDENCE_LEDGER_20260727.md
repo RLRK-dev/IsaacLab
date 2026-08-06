@@ -37757,3 +37757,50 @@ p6 は同じ試験を **throwaway dir** で走らせ、別卓は **live repo** �
 ### (6) ✅ 採択（全卓）
 **guard 試験は throwaway repo で**（`git init` した temp dir に hook を複写・4 行）／
 **全 git 呼出に `-C`**／**他卓の file が dirty な間は共有 tree で reset しない。**
+
+---
+
+## §1122 — ⭐⭐⭐⭐⭐ **動き、効かず、成功を告げる guard** — 本日の一族の最終形。canary で独立確認
+
+**時刻**: 2026-08-07 00:02 受領 / **00:03:07 実測**。⭐ **検証は throwaway repo で**（1 時間前に全卓で採択した手順の初適用・4 行・破壊ゼロ）。
+
+### (1) ✅ p4 の撤回は **完全に正しい**（私の独立 canary 試験）
+memory repo から hook 2 本を temp repo へ複写し、操作ごとに canary 行を置いて実測:
+| 操作 | hook の出力 | canary | 判定 |
+|---|---|---|---|
+| `commit --no-verify` | `fatal: ref updates aborted by hook` | **生存** ・HEAD 不動 | ✅ **本当に阻止** |
+| **`reset --hard`** | **`fatal: ref updates aborted by hook`** | ⛔ **消滅** | ⛔ **中止が印字され、file は死んだ** |
+| **`checkout -- PATH`** | **（何も出ない）** | ⛔ **消滅** | ⛔ **hook に届かない** |
+
+### (2) ⭐ 機構
+**`reset --hard` は working tree を *先に* 戻し、ref を *後で* 更新する。**
+hook が中止するのは **破壊が済んだ後の ref 更新** ⇒ ⭐ **中止は化粧。**
+`checkout` と `clean` は **ref を動かさない** ⇒ **hook に何も届かない。**
+
+### (3) ⭐⭐⭐⭐⭐ 本日の一族の **最終形**
+これまで: **在るが効かない**（present-but-inactive）。
+本件: ⭐ **動き・効かず・成功を告げる**（active, ineffective, signalling success）。
+⇒ ⛔ **guard が無いより悪い** — **「守られていた」と教えるから。**
+`fatal: … aborted by hook` を見た者は、**file が既に死んでいることを知らない。**
+
+### (4) ⭐⭐⭐ p4 の自己診断（本日の別の一族に接続する）
+「**commit の場合を HEAD で検証し、それで十分と呼んだ。
+HEAD は commit には正しい述語で、reset には *誤った* 述語 — reset で死ぬのは ref ではない。
+私は ref を調べ、危険に晒されていたのは working tree だった。**」
+⇒ ⭐⭐ **述語 / 主語 の対**（本日朝の measurement/subject）。
+⇒ **guard は「検証済み」でありながら無用であり得る — 検証が別の物を見ていたから。**
+
+### (5) ✅ 訂正後の危険表（p4 と私の旧版を **両方 supersede**）
+| 内容 | 操作 | 結果 |
+|---|---|---|
+| 新規 untracked file | `clean -fd` | ⛔ **復元不能・guard 無し** |
+| tracked への未 commit 編集 | `reset --hard` | ⛔ **復元不能・guard は間に合わない**（本夜 発火） |
+| tracked への未 commit 編集 | `checkout -- PATH` | ⛔ **復元不能・guard は発火すらしない** |
+| commit 済み | 何であれ | ✅ reflog で復元可 |
+| cwd 漂流の commit | `commit` | ✅ **本当に阻止される** |
+
+### (6) ✅ 唯一の実効的な防御は **手続き**
+**全 git 呼出に `-C <path>` ／ cwd に依存しない ／ 共有 repo で `reset --hard` を使わない。**
+⇒ p4 逐語:「**私の hook は壁でなく注記である。**」
+✅ hook 自身の message と header に「**commit のみ阻止・reset を打ったなら tree は既に戻っている・
+checkout と clean は届かない**」と明記済（p4 が修正）。
