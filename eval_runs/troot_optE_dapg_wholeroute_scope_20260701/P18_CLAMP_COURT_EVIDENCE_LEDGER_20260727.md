@@ -32878,3 +32878,66 @@ p4: 「私の欠落は、**主張が topic file を名指しているのに `MEM
   （`±0.176715` は別量）。
 ⇒ **Rs には 2 行とも要る。row 45 こそが「主張されるだけでなく守られている」
 と言っている行。**
+
+---
+
+## §1023 — ⭐⭐⭐⭐ 完成形: **正確な失敗を予見し、正確な guard を書き、それが守る相手の file 名まで書き、その guard は一度も呼ばれない。守る相手は今 disk に在る。** (p4 09:33 / p5 Sec.165 09:28:41、p18 09:31 実測)
+
+### (1) ⭐ p4 が私の scope を破った — grep でなく AST
+範囲 = `thread_isaac_lab` `eval_runs` `scripts` `source` 配下の全 `.py`
+（`.codex/worktrees` と `__pycache__` を除外）。
+**2,770 file を parse・構文エラー 0**（＝ 読めずに飛ばされた file が無い）。
+| 対象 | 数 |
+| --- | --- |
+| 定義 | **1** = `thread_isaac_lab/envs/route_executor.py:135` |
+| **呼び出し site**（直接・属性とも） | **0** |
+| **値としての参照**（Name/Attribute node） | **0** ⇒ dispatch 表・decorator・callback・partial に **入っていない** |
+| **名前を含む文字列定数** | **0** ⇒ `getattr(obj, "assert_span_invariant")` が **無い** |
+
+⭐ **grep は「定義」と「呼び出し」を分けられず、「値として渡された関数」は
+そもそも見えない。AST は両方を見て、3 つとも空。**
+
+⭐ **残余を手を振らずに数値化**: 当該 tree の `getattr`/`hasattr` は **1,619 件**、
+うち **281 件が非リテラル名**（実行時に文字列を組み得る）。**281 は未走査**、
+標本 8 件はいずれも routing path 外（torch dtype・test の reflection・
+owner/attr proxy）。⇒ **「呼ばれない、ただし 281 の動的参照のどれかが
+この名前を構成しない限り」** — 「動的 dispatch は逃れる」よりはるかに狭い。
+
+### (2) ⭐⭐⭐⭐ 死んだ guard は **その失敗のために作られていた** — 逐語確認
+`route_executor.py:136-141` docstring 逐語:
+> *"Invariant-specific anti-revert check for the 88mm span (§13.5 G5).
+> This is a **NUMERIC pin**, not a generic AST/string-equal check: it catches
+> an off-grid `GRIP_HALF_SPAN` revert (e.g. **0.044 -> 0.030 = 60mm**;
+> **a 60mm backup exists on-disk at `task_config.py.pre_3c_backup:121`**)
+> that on-grid byte-repro alone cannot see."*
+
+⭐⭐ **その backup は実在する（私が実測）**:
+`thread_isaac_lab/configs/task_config.py.pre_3c_backup`（9,892 B・Apr 20 05:32）
+**`:121` = `GRIP_HALF_SPAN = 0.030  # …(arm-to-arm span = 60mm)`**
+
+⇒ ⭐⭐⭐⭐ **誰かが「正確な revert」を予見し、「正確な guard」を書き、
+「それが守る相手の on-disk file と行番号」まで書き、⛔ その guard は
+何からも呼ばれない。そして守る相手は *今 disk に在る*。**
+
+### (3) 状態のまとめ（Rs 向け・3 段）
+| | 状態 |
+| --- | --- |
+| 88 mm の **値** | ⭐ **生きている** — `route_executor.py:176` / `newton_grip_env.py:435-436` / `newton_aerial_regrasp_mujoco_env.py:214`・`:306` で EE 目標を作る |
+| 88 mm の **guard** | ⛔ **死んでいる** — 呼び出し 0（AST 実証） |
+| guard が守る **相手** | ⚠ **disk に在る**（60 mm backup・`:121`） |
+
+⛔ **p4 の限定（保持）**: 調べたのは **その関数名**であって、
+**「88 mm に他の guard が無い」ことは *誰も* 調べていない**。
+⇒ **より広い guard 目録は未実施。これは主張していない。**
+
+### (4) p5 Sec.165 — #60 discharge、裁定どおり provenance のみ
+sha256 `0ce774bc…c626` ✅ / +22/−0 ✅ / `@@ -7448,0 +7449,22 @@` ✅
+**content anchor 3 本すべて実測一致**:
+`ur15_cell_spec.py:414`「**The numbers below are p5 bank #22.**」/
+`:428`（`CROWN_Z0 … else 1.330`）/ `:433`「**p5 bank #22 floor — the head
+only has to reach the mounts**」。
+⇒ **Rs 行向けの内容 = crown の 2 数は p5 の *設計値* であって測定ではない**
+（高さ = 参照写真からの目視読み・半径 = *下限* 由来）。
+⇒ **帰結: mast 接地の全結論は、この 2 数の等級で上限が決まる。**
+✅ **推奨なし**（何であるべきかを述べていない）＝裁定条件どおり。
+⭐ **offset でなく content で引用**（本 file で本日 2 度 offset を外したため）。
