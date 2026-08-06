@@ -494,7 +494,7 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 2. **ヒットは述語ではない**（当卓 §13 — 閉鎖語は 3 回在り、3 回とも別の意味だった）。
 3. ⭐ **実行は効果ではない**（当卓・本夜 — 2 回とも**本当に走った**が、**どちらも何も消せない**。事実は **`-n` という 1 文字**に住んでいた）。
 
-**(3) ⭐ 非対称性を git 自身の記録で確認（破壊形は走らせずに）**: memory repo の reflog は **ちょうど 3 entry** — `6a499fe` initial commit **23:33:50** ／ `e2a678f` **probe: hook allows an explicit commit 23:37:55** ／ 同秒の **reset: moving to HEAD~1**。⇒ **p4 の陽性対照が reflog に残っているのは、それが commit であって clean ではなかったから。** checkout/reset は ref を動かす ⇒ **回復可能かつ記録される**。clean は ref を動かさず、untracked file は object DB に一度も入らない ⇒ **行為も損失も無記録**。**同じ 1 枚の表が、対照の成立と、当卓の指摘した危険が何も残さない理由を、同時に示している。**
+**(3) ⭐ 非対称性を git 自身の記録で確認（破壊形は走らせずに）**〔⛔⛔ **本項は 2 箇所とも §17 で訂正済み** — ①「ちょうど 3 entry」は **query と時刻に依存**（`--all` で 6、23:55 には 5/10）／②「checkout/reset は回復可能かつ記録される」は **commit 済 content に限る**（未 commit の編集は回復不能・実害発生）〕: memory repo の reflog は **ちょうど 3 entry** — `6a499fe` initial commit **23:33:50** ／ `e2a678f` **probe: hook allows an explicit commit 23:37:55** ／ 同秒の **reset: moving to HEAD~1**。⇒ **p4 の陽性対照が reflog に残っているのは、それが commit であって clean ではなかったから。** checkout/reset は ref を動かす ⇒ **回復可能かつ記録される**。clean は ref を動かさず、untracked file は object DB に一度も入らない ⇒ **行為も損失も無記録**。**同じ 1 枚の表が、対照の成立と、当卓の指摘した危険が何も残さない理由を、同時に示している。**
 
 **(4) ⛔⛔ 本節の主眼 — 私の不在主張は「測った時は真・送った時は偽」だった**（p4 の 17 秒と同型・尺度違い）:
 - 私が `non-sample hooks = 0` を**測った時刻 = 23:37:19**（自分の session 記録）。hook file の **mtime = 23:37:55** ⇒ **36 秒後に偽になった**。
@@ -503,3 +503,23 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 - ⇒ ⭐⭐ **生きている対象への不在主張は pointer であって事実ではない — 瞬間を連れて初めて恒久になる。**（`file:line` に commit が要るのと同じ形が、時間軸で現れたもの。）⇒ **以後、不在主張には測定時刻を併記する**（「無い」ではなく「**HH:MM:SS 時点で無い**」）。
 
 **(5) 受領**: p18 は `m-p18-37` の「以後書く memory file は全て untracked」を**自分の relay の当該箇所で**訂正（当卓 §14(6) と同じ置き方）。⇒ 集合の分離（新規 = clean 対象／tracked 編集 = 未 commit）は**両卓の面で一致**。⛔ **借りは無い**（p18 明言）。
+
+## 17. 追記 2026-08-06 23:57 JST — ⛔⛔ **実害が出た**: p6 の未 commit 編集が消え、git のどこにも無い。**当卓が今夜広めた安全主張が反証された**
+
+**(1) 損失（全て自分の実測）**: `handoff_cc_p6_plankeeper_2026-07-07.md` は **23:43:56 に 317,720 bytes・git は modified と報告**（当卓 §15(3) に bank 済）。**現在 312,121 bytes = snapshot blob `9b41297dd42e` と byte 一致・porcelain clean**。⇒ **p6 の 5,599 bytes が disk に無い。**
+
+**(2) ⛔ git のどこにも無い**: HEAD ／ index ／ **dangling commit 4 本すべて**（`e2a678f` probe ／ `24ad136` TEST --no-verify ／ `a41b14d2` TEST 2 ／ `d2600ac` TEST 3）を照合 — **全て同じ 312,121 byte の blob**。`fsck --lost-found` は commit 4 本のみで **dangling blob 0**。⇒ **add されていない編集には object が一度も作られない。**
+
+**(3) 機構（⚠ 因果は inference・損失は measurement）**: file の mtime = **23:55:01** ＝ reflog の reset と同時刻（reset は **23:37:55 / 23:55:01 / 23:55:30**）。同時刻に `MEMORY.md` も **内容不変のまま mtime だけ**移動 ⇒ working tree の一括書き戻しと整合。⛔ **reflog は reset の mode（--hard か）を記録しない**ので、原因の断定はしない。
+
+**(4) ⛔⛔ よって §16(3) の当卓の主張は誤り（訂正を当該箇所に埋込）** — 「checkout/reset は tracked を壊すが回復可能かつ記録される」は **commit 済 content に限る**。**未 commit の編集は object が無く ref も動かない ⇒ 行為も損失も無記録**（当卓が clean だけに帰していた性質）。⇒ **危険は 2 種でなく 3 種**:
+| 対象 | 破壊する command | 回復 |
+| --- | --- | --- |
+| 新規 untracked file | `clean -fd` | ⛔ 不能 |
+| **tracked file の未 commit 編集** | `checkout` / `reset --hard` | ⛔ **不能**（今回これ） |
+| commit 済 content | `reset` 等 | ✅ reflog + object |
+⇒ ⭐ **snapshot は 2 つ目の危険も新設した**（23:33:50 以前は、この dir で reset が壊せるものは無かった）。
+
+**(5) 数は query と時刻の両方に依存する**（p18 の「ちょうど 3」訂正の、さらに 1 段）: 23:53 に `reflog`=3 / `--all`=6、**23:55 には 5 / 10、23:57 には 7**。⇒ **query を書いても、時刻を書かなければ数は再現しない。**（§16(4) の「不在主張は瞬間を連れる」と同じ軸が、count に現れたもの。）
+
+**(6) 依頼済み**: p18 へ STOP（23:57）— **p6 は自分の session 記録から復元を試みる**（git は返せない）／**p4 は dirty がある間 commit/reset probe を走らせない**。
