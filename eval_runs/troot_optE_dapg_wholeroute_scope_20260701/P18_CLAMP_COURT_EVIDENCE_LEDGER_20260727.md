@@ -33287,3 +33287,66 @@ p4 の自己申告: 検証出力が **1 件の削除を示す行の直下に
 ⇒ **自分の 4(b) の「許可不要な半分」を *記述でなく実行* した初回。**
 ✅ pointer 検査も実施（台帳 0・manifest 0。`7 件` の 3 hit は**読んで**
 無関係と確認）。
+
+---
+
+## §1030 — ⭐⭐⭐ 注記が指す body は **モデルに存在しない**（p4・静的に確定）。＋ 登録簿が **1 行の中で自分と矛盾** する（p5 → p6 へ routing） (p4 09:50 / p5 Sec.169 09:46:25、p18 09:52 実測)
+
+### (1) ⭐⭐⭐ p4 の静的測定 — 全項目一致
+| 名前 | 2 つの gripper asset での出現 |
+| --- | --- |
+| `panda_hand` / `left_finger` / `right_finger` / `panda_leftfinger` / `panda_rightfinger` | **すべて 0 / 0** |
+`thread_isaac_lab/assets/` 全体で `panda_hand` を含む file = **0**。
+**コの gripper の 14 body（document 順・実測一致）** = `base_mount` `base`
+`right_driver` `right_coupler` `right_spring_link` `right_follower`
+`right_pad` `right_silicone_pad` `left_driver` `left_coupler`
+`left_spring_link` `left_follower` `left_pad` `left_silicone_pad`
+
+⇒ ⭐⭐⭐ **`test_newton_clip_routing.py:463`/`:467` の注記
+（「body offset 6 = panda_hand」「offset 7, 8 = left/right prismatic
+fingers」）は、*モデルに存在しない body* を名指している。**
+
+### (2) ⭐ 性質は **3 段**に分かれた
+| # | 問い | 状態 |
+| --- | --- | --- |
+| 1 | **実在の** body を読むか | ✅ **読む**（p5・§1029） |
+| 2 | **正しい** body を読むか | ⚠ **未測**（build が要る＝走行。誰も走らせていない） |
+| 3 | ⭐ **どの body かの *記述* が、存在する body を指すか** | ⛔ **指していない**（p4・静的・確定） |
+
+⭐ **p4 の限定（保持・正しい）**: **「注記の指示先が不在」であって
+「index が誤り」ではない。index が正しいまま注記だけ古いことはあり得て、
+build 無しに両者は区別できない。**
+⚠ **この script が UR15 の実行経路かも未測**（p5 の限定も存続）。
+
+### (3) ⭐ 私の裁定 — p4 の越境の問い: **越境ではない**
+理由:
+- **p5 は限界を *名指し*、主張しなかった** ⇒ ⭐ **自分が持たない限界を
+  名指すことは *招待* であって *主張* ではない。**
+- 事実型・1 命令・**gate についての主張を囲む**。
+- ⭐⭐ **本日、court は一度も割り当てをせず、能力で routing して全部片付いた**:
+  p6 が guard 目録を名指す → p5 が辞退し p4 を名指す → p4 は既に実施済 →
+  p5 が body 番号の限界を名指す → p4 が静的部分を確定。
+  ⇒ **「名指す」だけで足りている。**
+
+### (4) p5 Sec.169 — ⭐ **登録簿が 1 行の中で自分と矛盾**（→ p6 へ routing）
+sha256 `86d5e1b9…`（先頭一致）✅ / +14/−0 ✅
+- **#46 の owner 欄**は逐語「**spec 納品済（上記 sha・未 bank）**」＝ **未 bank**
+  （実測: 当該行に `未 bank` が **3 回**）。
+- ⛔ **同じ行の本文**は **4 回の bank を記録し、現行の pin を名指す**。
+- ✅ **私も commit で検証**: `P5_UR15_CELL_CONSTANTS_SPEC_20260727.md` @
+  `459d94bdb4` は **272 行**・content sha256 `81a7d76a7ac16a9cb118…`
+  ⇒ **spec は bank されている。owner 欄の「未 bank」は *自分の行に対して* 古い。**
+⇒ ⭐ **新しい変種: 「材料が既に手元に在った」ではなく
+「行の *欄* と *本文* が違うことを言っていた」。登録簿は *自分に対して* 古くなり得る。**
+（本日 3 例目の「面が自分と矛盾」: manifest §1 対 §2 / frontmatter 対 §2 / 本件。
+そして本件は **1 行の中**。）
+
+- **p5 の側は discharge**（納品かつ bank 済）。⛔ **行は閉じない** — 行自身が
+  「bank は close 条件でない、③ は driver が spec 値で実際に走ったことの
+  提示を要し、それは走行＝Rs の認可」と書いている ⇒ **行は Rs gate 待ちで
+  あって、どの卓待ちでもない。**
+- ⚠ **on-disk は現在 571 行・sha `f76d06a309bd80b95cab…`**（bank 済 272 行の
+  2 倍超）。**p5 は pin を動かさず**（行の規則が未 bank の作業 copy を
+  banked pin として書くことを禁じている）、**571 行版で行の 3 論点が
+  生き残っているかは検査していない** ⇒ **p6 の文書化された手続き・p6 のもの。**
+⇒ **routing: owner 欄の是正と 571 行の点検は p6。p5 は LEDGER を編集しない（正しい）。**
