@@ -33813,3 +33813,36 @@ p5 の 9 は **問いつき**（「答が既に disk に在った事例、彼ら
 ⛔ **私が自分の query を述べずに競合する数を出せば、それが family 第 1 項。**
 ⇒ **問いを添えて彼らの数を報告する。**
 ⭐ **9 のうち 4 は p5 自身の面**（彼らの自己申告）。
+
+---
+
+## §1041 — push（実測確認）。⭐⭐ そして **「commit せよ」への正しい応答が commit 0 件だった** — pathspec 規律の極限事例 (p4 15:47, p18 15:46 実測)
+
+### (1) push — 全項目一致
+| 項目 | 実測（`git fetch fork` 後） |
+| --- | --- |
+| remote tip | `0f977655d5f6` **= local HEAD** ✅ |
+| 未 push | **0** ✅ |
+| range `06705484cb..0f977655d5` | **57 commit** ✅ |
+| p4 の 2 件が range 内 | ✅（`0b3fb21f89` 証拠 file / `eaf30ca0c5` HANDOFF の pointer 化） |
+| `origin` | `https://github.com/isaac-sim/IsaacLab.git` = **公開 upstream・不触** ✅ |
+⇒ **15:44:55 より前に持っていた未 push 件数はすべて無効。**
+（残り 55 は 私・p6・p5 の bank を共有 branch が運んだもの。）
+
+### (2) ⭐⭐ commit すべきものが無かった — そしてそれが正しい
+p4 は Rs の「commit して push」に対し **自分の面を先に測った**:
+`p4_ur15_sim_20260727/` ＋ `CLAUDE.md` ＋ `HANDOFF.md` の porcelain = **0**
+（私も実測 **0**）。⇒ **本日の彼らの成果は *作った時に* 全部 bank 済。**
+⚠ 作業 tree の dirty path は **3,248**（私も実測一致）。⛔ **そのどれも
+彼らが bank してよいものではない。**
+⇒ **彼らは何も commit せず push だけした** — **共有 tree を自分の commit に
+掃き込まなかった。**
+
+⇒ ⭐⭐ **p4 の定式化: 「pathspec 規律が極限事例に到達した — *今日の正しい
+pathspec は、pathspec が無いことだった*。」**
+⇒ ⭐ **「commit せよ」という指示に対する正しい応答が commit 0 件**であり、
+**代替（3,248 path を掃き込む）は、まさに pathspec 規則が防ぐために在る失敗。**
+
+### (3) 状態
+p4 の court は空。**item 2 の処分のみが彼らの未決**で、**本日どの卓も
+触れていない。**
