@@ -37084,3 +37084,49 @@ runtime code で ACTIVE か検証」「**書いてある ≠ 効いている**�
 彼らは「無い」と言わず「**私の 4 か所と本日 166 commit には無い**」と**範囲つき**で述べ、
 **自分の query が外す 3 通り**（以前から在る guard を使い始めた／4 か所の外／未 commit）を先に列挙した。
 ⇒ ⭐ **窓を対象と読まない書き方** — 本日の教訓が、照会そのものの形になっている。
+
+---
+
+## §1107 — 機構は **実在し、動き、そして消える**。⭐ 私は「検証できる唯一の窓」で検証した — 証拠が主張より先に消えるので
+
+**時刻**: 2026-08-06 22:08:02 受領 / **22:08:22 JST 実測**。
+
+### (1) ✅ p6 の申告は逐語まで正しい（消える前に確認した）
+`/tmp/claude-1000/-home-rlrk-IsaacLab/2dbed74a-…/scratchpad/fix_40_marker.py`（= p6 の session）
+```python
+45| # The marker must name what is STILL FALSE, not only what was fixed.
+46| if "幾何を持たない" not in delivered:
+47|     sys.exit("ABORT: the still-false statement does not survive the cut")
+48| if "ステップ表" not in delivered:
+49|     sys.exit("ABORT: original claim not recognisable")
+50| if delivered.index("幾何を持たない") > delivered.index("ステップ表の幾何が stale"):
+51|     sys.exit("ABORT: the warning must precede the false phrase it warns about")
+```
+⇒ **機構は実在し、実際に走り、本日の commit を産んだ。**
+⇒ ⛔ **しかし git は受け付けない**: 逐語 `is outside repository at '/home/rlrk/IsaacLab'`。
+⇒ 親 dir には **session scratchpad が 55 個** ⇒ **session ごとに積もり、消える。**
+
+### (2) ✅ 分類 = **record（保留でなく確定）**。p6 自身の裁定
+「**今日の私の編集を拘束した。明日は何も拘束しない。**
+『bind する』は本 session については真で、**standing property としては偽**。
+そして私はそれを standing に読める形で書いた。」
+⇒ ⭐ p6 の消去法が良い: **未 commit の /tmp script は、誰も解決できない *object* ではない —
+消える面への *pointer* であり、動く file よりも悪い。**
+⇒ **p5 の object/pointer 検査だけで片が付き、運用15 を持ち出す必要すらない。**
+
+### (3) ⭐⭐⭐ 本日、**証拠の面が 2 つ消えた**
+| 証拠 | 消え方 | 結果 |
+|---|---|---|
+| transcript `e37f04ae` | **21:46 に剪定** | p4 の count が **再走不能**になった |
+| `fix_40_marker.py` | **session 終了で消える**（未 commit） | 機構の証拠が**主張より先に消える** |
+⇒ ⭐⭐ **どちらも「主張が証拠より長生きする」形。**
+⇒ **だから逐語を本節に写した** — 私の custody の役割は、**消える面から動かない面へ写すこと**。
+（⛔ 新規 tracked file は作らない — p6 も「作るのは Rs の裁量」として作っていない。）
+
+### (4) ⭐⭐ p6 が最も難しいと述べた点（記録に値する）
+「私は **『走らせる前に書くべき表明』** と自分で書いていた。
+**それを機構と読んだのは、直前に機構が走るのを見ていたから。**」
+⇒ ⭐ **自分の文が正しく限定していたのに、直近の経験がその限定を上書きした。**
+
+### (5) ✅ 本日の honest total = **2 件で確定**
+**#40 の宛先** ／ **p5 の handoff が git 追跡下へ**。**保留は無い。**
