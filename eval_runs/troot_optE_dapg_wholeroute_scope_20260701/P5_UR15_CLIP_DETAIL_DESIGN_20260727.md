@@ -7516,3 +7516,18 @@ p4 の注記: *"`rej_total` increments inside `if near_far_arm … < ARM_CLEARAN
 **(4) ⇒ #40 第 2 段の結論**: **再導出は不要**でした — **値は 2026-06-22 から同じ file の 240 行ほど下に在り**、**使い分けの規則も書かれています**。⇒ **残るのは「どの consumer が どちらを引くか」の是正**で、⛔ **それは `task_config.py` = L3 への書込**ゆえ **Rs**。
 
 ⇒ ⭐ **本日 7 度目の同じ形**、そして**最も高い面**（SSOT の中）で起きていました。
+
+---
+
+## §168 Z-Check Gate は **`EE_TO_FINGERTIP` に汚染されていません** — ⛔ ただし **body 番号を Franka 配置で決め打ち**しています
+
+⚠ p18 が「2 つの事実を並べ、鎖は主張しない」と置いたので、**鎖のうち私が測れる 1 本を測りました**（⛔ 鎖の主張はしません）。
+
+**(1) ✅ 定数汚染は無い。** `test_newton_clip_routing.py` の `check_penetration()` は **記録された指の z** を `TABLE_HEIGHT` と比べるだけで、⛔ **`EE_z − EE_TO_FINGERTIP` のような定数由来の推定を使っていません**。記録側は逐語:
+`entry[f"{label}_finger_z"] = [float(body_q[bs + 7][2]), float(body_q[bs + 8][2])]`
+⇒ ⭐ **sim の実 body z** ⇒ **Franka 定数（0.220）を継承しません。**⇒ **§167 の 55.75 mm 差は、この gate の読みには入りません。**
+
+**(2) ⛔ 代わりの露出 = body 番号の決め打ち。** 同じ block の comment 逐語 **`# Hand z (body offset 6 = panda_hand)`** ／ **`# Finger z (body offset 7, 8 = left/right prismatic fingers)`**。⇒ **`bs + 7` / `bs + 8` は literal**で、**Franka の body 配置**を前提にしています。⚠ **UR15 ＋ Robotiq 2F-85 の build で `+7 / +8` がコ字爪を指すかは未測**（⛔ そもそも本 script が UR15 経路かどうかも私は測っていません）。⇒ **「実 body を読む」ことと「正しい body を読む」ことは別**です。
+
+**(3) ⭐ 自分の測り方の欠陥（同一 turn で自分で捕捉）**: 私は最初 `"left_finger_z"` を literal で grep し、**読み手（`check_penetration`）1 件しか出ず**、「**書き手が居ない ⇒ gate は永久に発火しない**」と読みかけました。⛔ **誤りです** — **書き手は f-string で key を組んでいる**（`f"{label}_finger_z"`）ので **literal 検索では原理的に見えない**。
+⇒ ⭐⭐ **選別器の新しい下位軸 = 「key が実行時に組まれる」**。p6 の *orthography*（私の書式が私の query を外した）の兄弟で、**今度は *対象* の側が実行時に名前を作る**形。⇒ **literal 検索の 0 件は、f-string / getattr / 辞書組み立ての前では不在の証拠になりません。**
