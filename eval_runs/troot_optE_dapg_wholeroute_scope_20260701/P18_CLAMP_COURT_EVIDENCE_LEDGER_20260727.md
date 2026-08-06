@@ -33543,3 +33543,53 @@ p5 は **「私の読みでは 2 つ」** と述べ、**1 file・今日の状態
 本日、私は **①「9 件」（count/query）②「§0 #2 は enforce されていない」
 ③ 本件（count/revision）** の 3 件を Rs に運び、いずれも卓が止めた。
 ⭐ **3 件とも、私が *自分で作った一覧の項目* である。**
+
+---
+
+## §1035 — ⭐⭐⭐⭐ 前提は **因果形**で書かれており、**このセルではその前件が偽**。⭐ 変わったのは **根拠であって許可ではない** (p5 Sec.172 09:56:21, p18 10:04 実測)
+
+### (1) 両側とも **私が source で逐語確認**
+**前提**（`RS71-System-Spec-SSOT.md:67`・Rs DECISION B2, 2026-06-25）:
+> 「…**NOT horizontal routing curvature**（5-clip 千鳥 X-Y curvature は
+> **2nd bend DOF/joint を要する**）。**Horizontal routing through the
+> staggered clips is therefore KINEMATIC**（grasp-drag ＋ **AUTHORIZED
+> clip-retention pin**）… banked sim2real fidelity limitation（Rs 受容・
+> 欠陥ではない）that **EXPLAINS the AR routing fidelity-QUARANTINE**」
+
+**セル**（`…/p4_ur15_sim_20260727/ur15_cell.py`）逐語:
+```
+<joint name="cab{i}_y" type="hinge" axis="0 1 0"
+<joint name="cab{i}_z" type="hinge" axis="0 0 1"
+```
+⇒ ⭐⭐⭐⭐ **link あたり hinge が 2 つ — 前提が「欠けている要件」として
+名指した *まさにその 2 つ目の bend DOF*。**
+
+### (2) ⭐⭐⭐ 観察 — 前件が偽
+前提は **因果形**（*水平曲率は表現できない、ゆえに水平 routing は kinematic*）。
+⇒ **このセルでは前件が偽。** ⇒ **前提が与えた *理由* は、ここでは成り立たない。**
+
+### (3) ⭐⭐⭐⭐ p5 が言わないこと — そしてそれが本項の核
+> **許可は失効しない。clip-retention pin の authorisation は Rs のもので、
+> *理由が動いたからといって動かない*。**
+> ⭐ **変わったのは *根拠* であって *許可* ではない。**
+
+⇒ ⭐⭐ **court がこれまで名前を持っていなかった区別**。
+§0 不変前提に触れる観察の**正しい扱い方そのもの**（STOP-and-flag・
+build-first をしない・Rs 専権）を、**言葉にして実行している。**
+
+### (4) ⭐ 私が加える爆風半径 — **文書自身の語による**
+前提の文は **自分で**「これが **AR routing fidelity-QUARANTINE を EXPLAIN
+する**」と書いている。
+⇒ ⭐ **このセルで理由が偽なら、*quarantine の述べられた根拠* も同様に偽。**
+⛔ **quarantine 自体も authorisation 同様 Rs のもので、動かない。**
+⇒ **理由が偽になった下流は 2 つ**: ①kinematic routing の許可の *論拠*
+②AR quarantine の *論拠*。**どちらも Rs 無しには動かない。**
+（⚠ 私の推論ではなく **前提の文自身の語**。）
+
+### (5) p5 の lane での帰結 — **仕事を名指し、やらない**
+routing-motion 設計は前提を継承する ⇒ **「水平曲率は表現できない、ゆえに
+drag ＋ pin」を *引用した* 設計判断は、実際に走るセルに対して再導出が要る。**
+⛔ **どれがそれかの目録は作っていない（名指しであって実施ではない）。**
+✅ **方向も未決のまま**（07-27 の行自身の訂正を携行 — DOF 追加は易しい側だが、
+セル全体としてはどちらにも解決しないので non-conservative とも呼ばない）。
+⛔ **B2 を決めない** — 前提が変わるのかセルが戻るのかは Rs。
