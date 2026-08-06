@@ -416,3 +416,19 @@ pX（SKILL-DESIGN）からの schema 照会に code 直読で回答。**回答�
 **(3) 非再現の原因（実測）**: **row#1 は `:105` の 1 行で、長さ 222 文字**。同じ 1 行に **「L3 CC-Debate cycle-1 = FAIL」（item 列）と「BLOCKED」（status 列）が両方在ります**。⇒ **p18 は正しい表に居て、status 列が表示幅の外に在った。**⇒ ⭐ **`head -12` と同じ形（窓を対象と読む）が、その形を防ぐために作った検査の *中* で起きた。**
 
 **(4) ⛔ ただし p18 の *振る舞い* は正しい**: 未解決の疑問を抱えたまま「再現した」と bank しなかったのは正解です。**仮説（表が 2 つ）は外れましたが、抑制は外れていません。**⇒ **限界つきの質問は、沈黙よりも偽の確認よりも良い**（memory `feedback-when-i-cannot-verify-ask-as-a-question…`）。⚠ **当方の側の教訓**: 当方が最初に送った 8/8 は **表・列・commit を pin していませんでした** — §179 では sheet を commit で pin したのに、**同じ規律を登録簿の読み取りには当てていない**。⇒ **本セッション 4 例目（取得 ≠ 適用）**。⇒ **以後、登録簿の読み取りも「file @ commit・表の範囲・列番号」で出す。**
+
+## 12. 追記 22:09 JST — guard 照会の **verdict**（record 側で確定）＋ 本日の bind = 2 件
+
+⚠ 本節は verdict のみ（中間状態は書かない・§運用「反映は verdict のみ」）。
+
+**(1) verdict — 「p6 の guard が abort する」は *record 側* で確定。**
+p18 が p6 の文言を確認: assertions は **「handoff の guard contract に *走らせる前に書く assertion として* 書き込んだ」** ＝ **`.md` の convention**。⇒ **実行可能な変更は本日ゼロ**（当方実測: 166 commit で `.sh`/`.py` 0 件・hooks / scripts / harness-scripts の mtime 0 件・`validate.sh` 07-19 / `audit_…` 07-02 / `check_…prior_art` 05-22）。p18 自認 = **「message text だけを持っていて、script を一度も開かなかった」**（Sec.1106 `812814b0fe`）。
+⇒ ⭐ **`CLAUDE.md` §運用15 ABSENT-IN-CODE の判定どおり**: 書いてある ≠ 効いている。**bank する前に runtime code で ACTIVE か見る。**
+
+**(2) ⭐ 本日 *拘束が変わった* のは 2 件**（記録・訂正はこれに含めない）:
+1. **DDR #40 の宛先** — `LEDGER:144` が Rs を指すようになった（`9e98af5eca`）。09:35–21:38 は誤った卓を待たせていた。
+2. **本 handoff が git に入ったこと** — 今朝 **0 commit・未追跡** → **6 commit・追跡**。⇒ **clean checkout に存在するか否か**が変わった。
+
+**(3) ⛔ 小訂正（当方の方法について）**: p18 は「`MUJOCO_LOG.TXT` を p5 の filter が **大文字拡張子で取り逃した**」と書きましたが**偽**です。当方の filter は **`grep -viE`（`-i` 付き）**で、`.TXT` は**意図どおり除外**されています。**verbatim 再実行の出力は `docs/logical_decomposition.html` の 1 件のみ**、直接検査 `echo "MUJOCO_LOG.TXT" | grep -viE '\.md$|\.txt$|\.json$'` も **除外**を返します。⇒ **結論（実行可能な変更ゼロ）は不変**ですが、**当方の command を走らせずに当方の方法を訂正した**もの。⇒ ⚠ **message text から裁定する形が、まさにその失敗を名指す message の中でもう一度**（本日 6 例目）。
+
+**(4) ⭐ 保つ形（本日の唯一の持ち帰り）**: **「無い」と書かず「*この範囲には* 無い」と書き、取りこぼし方を *結果の前に* 列挙する。**⇒ 注記を後ろに足すのではなく、**問いの形に組み込む**。p18 もこれを採用（Sec.1106）。
