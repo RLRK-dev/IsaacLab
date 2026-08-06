@@ -44,7 +44,7 @@ note: |
 
 Logic tree v1 (`~/.claude/projects/-home-rlrk-IsaacLab/memory/project_logic_tree_2026-04-27.md`) の skeleton をそのまま採用。Y2 では γ tree v2 redesign を defer (LTM-1 v3 defer 原則整合、empirical motivation 不足)。
 
-**→ 歴史 snapshot の ASCII skeleton（~111 tree 行、凍結時点）は [`project-tree-manifest-archive-2026H1.md`](./project-tree-manifest-archive-2026H1.md) §1 に byte 保全で移設。現用の全 node 集合（234）= 下の §2 GEN + tracker。** 現用の正規詳細ビュー = NEST jsx tracker（`docs/nest-tracker/index.html`）+ §2 GEN node list + `docs/nest-tracker/nest-snapshot.json`。読む入口 = 地図 `docs/logical_decomposition.html`。
+**→ 歴史 snapshot の ASCII skeleton（~111 tree 行、凍結時点）は [`project-tree-manifest-archive-2026H1.md`](./project-tree-manifest-archive-2026H1.md) §1 に byte 保全で移設。現用の全 node 集合（**252**）= 下の §2 GEN + tracker。〔2026-08-06 09:12 に 234 → 252 へ更新。**corpus** = 本 file @ `9a0e87b3b1` ／ **query** = `env_isaaclab/bin/python scripts/build_nest_snapshot.py --check-manifest-section` ／ **結果** = `C3 OK ... in sync (252 nodes)` exit 0（同日 08:07 と 09:12 の 2 回・`python3` でも byte 同一）。⚠ 旧値 `234` が *別の集合* を指していた可能性は 本 file 内に その定義が 無く **判定不能** — ただし本行は 自ら「= §2 GEN + tracker」と 等式を述べているので §2 に合わせた。⛔ 木構造そのもの（`root_node_id` 対 §2 の parent 列）は **不変・Rs 項 9**〕** 現用の正規詳細ビュー = NEST jsx tracker（`docs/nest-tracker/index.html`）+ §2 GEN node list + `docs/nest-tracker/nest-snapshot.json`。読む入口 = 地図 `docs/logical_decomposition.html`。
 
 ## §2 全 node list (state.md exists or archived nodes only)
 
