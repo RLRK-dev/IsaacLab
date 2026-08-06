@@ -37201,3 +37201,53 @@ docs/logical_decomposition.html
 費用 = **3 コマンド**。⇒ **「本文全読は未了」と書いた注記より安い。**
 （1 度目 = p5 の #40 検査が「parse 済抽出に awk 1 本」で、繰り越し注記より安かった件。）
 ⇒ **限界を書く方が、限界を閉じるより高くつくことがある。**
+
+---
+
+## §1110 — memory dir が版管理下に入った（検証済）。⭐⭐ そして **今まで大声で失敗していたものが、静かに成功するようになった**
+
+**時刻**: 2026-08-06 23:34 受領 / **23:35:12 JST 実測**。契機 = Rs 逐語「**すすめて**」。
+
+### (1) ✅ p4 の申告は全項目一致（私の独立実測）
+| 主張 | 実測 |
+|---|---|
+| repo at `~/.claude/projects/-home-rlrk-IsaacLab/memory` | ✅ toplevel 一致 |
+| initial commit `6a499fe967b28ddd273c459dd4e05df7eb1d2164` | ✅ **完全一致** |
+| tracked 901 / dirty 0 | ✅ **901 / 0** |
+| gc 後 4.5 MB | ✅ **4.5M** |
+| 隔離 | ✅ 主 tree は逐語 `is outside repository at '/home/rlrk/IsaacLab'` |
+| `MEMORY.md` 21,663 chars | ✅ 一致 |
+| 秘密 0 件 | ✅ **私の独立 pattern でも 0**（`api_key|password|secret|token|BEGIN … PRIVATE KEY` の代入形） |
+
+### (2) ⭐⭐ p4 が自分で付けた最重要の限定（正しい）
+「**hook 無し（hook logic は L3 ゆえ触らない）・remote 無し・定期 commit 無し**
+⇒ **現時点で捕らえているのは過去だけで、以後の変更は捕らえない。**
+**誰も commit しない repository は、repository が無いのと同じだけしか記録しない。**
+⇒ **PRESENT IS NOT ACTIVE.**」
+⇒ ⭐ **本日の ABSENT-IN-CODE 教訓を、自分の成果物に、促されずに適用している。**
+⇒ ⛔ **「memory dir は版管理下」を「変更が捕らえられている」と読んではならない。**
+
+### (3) ⭐⭐⭐⭐ **新しい危険 — 失敗が大声から無音になった**（私の発見・実測）
+**本日の私の運用メモ**: 「cwd が memory dir に流れると `git` が
+**`not a git repository` で落ちる**ので、必ず `cd /home/rlrk/IsaacLab` する」。
+⇒ **その失敗は *大声* で、私を守っていた。**
+
+**実測（今）**: cwd = memory dir で
+```
+$ git rev-parse --show-toplevel
+/home/rlrk/.claude/projects/-home-rlrk-IsaacLab/memory
+```
+⇒ ⛔ **今や *成功* する。別の repo に対して。**
+⇒ **IsaacLab のつもりの `git add -A && git commit` は memory repo に commit する。**
+**`git checkout` / `git reset --hard` は memory の file に効く。**
+
+⇒ ⭐⭐⭐ **本日の主形そのもの**: `head -12` が総数になり、`range(6)` が答えになり、
+**いま `not a git repository` が消えた。**
+**安全装置が答えに化ける／大声の失敗が無音の成功に化ける。**
+⇒ **対処 = 全 git 操作で `-C <path>` を明示するか、`cd /home/rlrk/IsaacLab` を先頭に置く**
+（cwd 依存をやめる）。
+
+### (4) ⚠ 未決（p4 も「自分のものでない」と明記）
+**custodian は誰か ／ commit を自動化するか ／ remote を持たせるか。**
+⇒ p4 は初回 snapshot を取っただけで、**自分を任命していない。**
+⇒ **取り消しは `.git` を rm -rf するだけで、memory file には触れない**（申告・未実行）。
