@@ -33123,3 +33123,52 @@ sha256 `2a0d2693…bf91` ✅ / +22/−0 ✅
 ### (7) ⭐ routing が自分で解けた
 p5 は guard 目録を辞退し「自然な所有者は p4」と名指し — ⭐ **p4 は既に
 実施済（§1025）**。⇒ **私が割り当てる前に、名指しだけで解決した。**
+
+---
+
+## §1027 — ⭐⭐⭐⭐ 再導出は **不要だった** — 値も使用規則も **同じ SSOT の 240 行下に 6 月から在る**。⛔ そして位置を決める 2 定数は旧値を足したまま (p5 Sec.167 09:37:57, p18 09:41 実測)
+
+### (1) 実測 — 全項目一致
+sha256 `21271e47…5873` ✅ / +26/−0 ✅
+| 場所 | 逐語（私が source で確認） |
+| --- | --- |
+| `task_config.py:78` | `EE_TO_FINGERTIP = 0.220  # FRANKA panda_hand->fingertip [m]` |
+| `:84` | *"220mm, Franka value; **re-derive S6**"* |
+| ⭐ `:321` | `EE_TO_PINCH_TIP_CLOSED = 0.27574726696  # wrist_3 -> pad TIP drop [m] (tip_drop_m; **コ f1ext claw tip**, re-derived **2026-06-22**)` |
+| `:320` / `:326` | `EE_TO_PINCH_CLOSED = 0.2548428289592266` / `EE_TO_PINCH_OPEN = 0.26092` |
+| ⭐⭐ `:324` | *"EE_TO_FINGERTIP above (0.220) is the **Franka/legacy** value — **UR5e+Robotiq consumers use THESE**."* |
+
+⇒ ⭐⭐⭐ **値も、artifact 名も、*使用規則* も、同じ file に 6 月 22 日から在る。**
+
+### (2) ⛔ しかし位置を決める 2 定数は規則に従っていない
+| 行 | 実測 |
+| --- | --- |
+| `:93` | `GRASP_Z = TABLE_HEIGHT + CLIP_BASE_HEIGHT + **EE_TO_FINGERTIP**  # 1.025` |
+| `:95` | `PUSH_Z  = TABLE_HEIGHT + CLIP_BASE_HEIGHT + **EE_TO_FINGERTIP**  # 1.025: same as GRASP_Z` |
+（`TABLE_HEIGHT = 0.80` `:20` / `CLIP_BASE_HEIGHT = 0.005` `:91`）
+⇒ **file が「これを使え」と書いた当の consumer が、旧値を足している。**
+
+### (3) 算術（**観測でなく算術**として等級）— 私も再計算
+`PUSH_Z = 0.80 + 0.005 + 0.220 = 1.025`
+IK 目標は wrist_3（`:84`）⇒ **測定済の ko 落差を当てると爪先 =
+`1.025 − 0.27575 = 0.74925`** ⇒ ⛔ **卓 0.80 の 50.75 mm 下**。
+差 `0.27575 − 0.220 = **+55.75 mm**`（ko 爪先の方が低い）。✅ 全部一致。
+
+⛔ **p5 の限定（保持・私も広げない）**: **UR15 の実行経路がこの `PUSH_Z` を
+使うかは未測**（step table は import するが、UR15 sim が step table を走らせる
+かは彼らの検査範囲外）。⇒ **貫通を *観測した* とは主張しない。**
+
+### (4) ⚠ 本日の 2 発見がここで接する — **事実として並置、因果は主張しない**
+- `CLAUDE.md:277`: **Fingertip Z-Check Gate** = 「episode 後 fingertip z を
+  TABLE_HEIGHT と比較、貫通で **PASS→FAIL 自動降格**」
+  ⇒ ⭐ **プロジェクトはまさにこの失敗様式のために gate を作っている。**
+- ⛔ §1018: **その gate を持つ script が読む asset は開口 10.00 mm 側**
+  （稼働 driver 側は 16.00 mm）。
+⇒ **2 つの検証済みの事実が同じ失敗様式に触れる。⛔ 連鎖は主張しない
+（gate の実行経路も、UR15 が step table を走らせるかも、未測）。Rs の判断材料。**
+
+### (5) ⇒ #40 の closure
+**再導出は不要だった。値も使用規則も既に在る。残るのは
+「どの consumer がどの定数を読むか」の是正 = `task_config.py` の編集 = **L3 = Rs**。**
+⭐ **本日 7 例目の「材料は既に手元に在った」。そして最も鋭い — run log でも
+他卓の台帳でもなく、**SSOT 自身の中**に、使用規則つきで在った。**

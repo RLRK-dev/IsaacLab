@@ -7490,3 +7490,29 @@ p4 の注記: *"`rej_total` increments inside `if near_far_arm … < ARM_CLEARAN
 **(5) ⛔ 影響範囲（＝ 権限が要る半分）**: `EE_TO_FINGERTIP` は **envs / scripts / tests の 約 25 file** が読みます。⇒ **再導出値の *反映* は局所編集ではなく SSOT 変更**（`task_config.py` = L3）。⇒ ⭐ **導出は私・書き込みは Rs 承認** という分割になります。
 
 ⇒ **第 2 段（数値）= UR15 ＋ Robotiq 2F-85（コ字爪）の `wrist_3 → 爪先` を asset から実測すること**。⛔ **本節では出していません。**
+
+---
+
+## §167 DDR #40 第 2 段（数値）— ⛔ **測る必要はありませんでした。同じ file の 240 行下に 2026-06-22 から在ります**
+
+⚠ **裁定条件どおり**: 自 sheet に bank ・⛔ `task_config.py` に触れない ・⭐ **置き換わる Franka 値を並記**。
+
+**(1) 値（`task_config.py` 逐語）**
+
+| 量 | 値 [m] | 逐語注記 |
+| --- | --- | --- |
+| ⛔ **Franka / legacy** | **`EE_TO_FINGERTIP = 0.220`** | `# FRANKA panda_hand->fingertip [m]` ・`220mm, Franka value; re-derive S6` |
+| ⭐⭐ **コ字爪・実測** | **`EE_TO_PINCH_TIP_CLOSED = 0.27574726696`** | `wrist_3 -> pad TIP drop [m] (tip_drop_m; コ f1ext claw tip, re-derived 2026-06-22 …)` |
+| （参考）閉 pinch 中心 | `EE_TO_PINCH_CLOSED = 0.2548428289592266` | `wrist_3 -> pinch_mid drop` |
+| （参考）開 pinch 中心 | `EE_TO_PINCH_OPEN = 0.26092` | 2026-06-26 再導出（Rs DC2） |
+
+⇒ **差 = `0.27575 − 0.220 = +0.05575 m = +55.75 mm`**（爪先は Franka 値より **55.75 mm 下**）。出所 artifact = `eval_runs/troot_optE_rs71_koshape_ee_tip_rederive_20260622/`。
+
+**(2) ⭐⭐ そして file 自身が使い分けを既に命じています** — 逐語 **`EE_TO_FINGERTIP above (0.220) is the Franka/legacy value — UR5e+Robotiq consumers use THESE.`** ⇒ ⛔ **規則は書かれており、`GRASP_Z`（`:93`）と `PUSH_Z`（`:95`）は従っていません**（両者とも `EE_TO_FINGERTIP` を足している）。
+
+**(3) 算術上の帰結（⛔ 観測ではなく算術です）**: `PUSH_Z = TABLE_HEIGHT + CLIP_BASE_HEIGHT + EE_TO_FINGERTIP = 0.80 + 0.005 + 0.220 = 1.025`。**IK 目標は `wrist_3`**（`:84` 逐語）⇒ **コ字爪の実測 drop を当てると爪先 = `1.025 − 0.27575 = 0.74925 m`** ⇒ ⭐ **卓面 0.80 より 50.75 mm 下**。
+⚠ **等級**: これは **定数どうしの算術**です。⛔ **UR15 の実行系が この `PUSH_Z` を使うかは測っていません**（工程表は import しますが、UR15 sim が工程表を走らせるかは私の知る所ではない）。⇒ **貫入を観測したとは言いません。**
+
+**(4) ⇒ #40 第 2 段の結論**: **再導出は不要**でした — **値は 2026-06-22 から同じ file の 240 行ほど下に在り**、**使い分けの規則も書かれています**。⇒ **残るのは「どの consumer が どちらを引くか」の是正**で、⛔ **それは `task_config.py` = L3 への書込**ゆえ **Rs**。
+
+⇒ ⭐ **本日 7 度目の同じ形**、そして**最も高い面**（SSOT の中）で起きていました。
