@@ -7398,3 +7398,26 @@ p4 の注記: *"`rej_total` increments inside `if near_far_arm … < ARM_CLEARAN
 **(4) ⛔⛔ そして本節の要点は数ではありません。** 私は本日何度も「**court は空**」と書きました。⇒ ⭐ **それは「私宛の message で未処理のものが無い」という意味**であって、**「登録簿に私を owner とする未解決行が無い」ではありませんでした**。⇒ **私は 2 つの別の量に同じ名前を使い、弱い方を測って強い方を主張していました。**（**同じ綴りに 2 つの意味** — 本日 court 中で 3 卓が踏んだ形の、私の版）。
 
 ⚠ **本節は 21 行を解決しません**。⭐ **query と数と 1 次分類を surface に置くだけ**で、**各行を開く作業は未着手**です。
+
+---
+
+## §163 §0#2 は §0#4 と **同型ではありません** — ⛔ **数は 2 つでなく 3 つで、走っている述語が要求する窓の外に 1 つ在ります**
+
+**(1) 3 つの数（すべて私が source で実読）**:
+
+| 量 | 値 | 在り処 | **生きているか** |
+| --- | --- | --- | --- |
+| **指令 (commanded)** | **88.0 mm** | `task_config.py:235` `GRIP_HALF_SPAN = 0.044` → `route_env_config.py:80` `COMMANDED_SPAN` | ⚠ **参照 1（自身の定義のみ・import-only）** |
+| **達成 (achieved)** | **92.4 mm** | `route_env_config.py:79` `HOLD_SPAN_ACHIEVED = 0.0924` | ⭐⭐ **走る述語が読む**（下記） |
+| **実測（UR15 cell）** | **75.0 mm** | DDR #58 ・`T43_RUN_TRACE_20260729.txt:25`（cab27 → cab32） | 測定値 |
+
+**(2) ⛔⛔ 92.4 は「informative」ではありません。** `newton_route_env.py:1677` は逐語 `# informative-only` ですが、⭐ **`:1683` は `p1` の連言項**です:
+`p1 = (grip_r ≥ 0.5 and grip_l ≥ 0.5) and (contact_r and contact_l) and (abs(span − rc.HOLD_SPAN_ACHIEVED) ≤ rc.HOLD_SPAN_TOL_M)`
+**`HOLD_SPAN_TOL_M = 0.008`**（`route_env_config.py:125`）⇒ ⭐ **窓 = `[84.4, 100.4] mm`**。⇒ **75.0 mm は窓の 9.4 mm 外**。
+
+**(3) ⚠⚠ ただし *失敗の主張はしません*。2 つが未測です:**
+- ⛔ **同じ量か**: `HOLD_SPAN_ACHIEVED` は逐語 *"achieved dual-grip **EE-EE** / cable hold-span"*、**75 mm は掴まれた 2 リンク中心間**。⇒ **測定面が違う可能性**（**同じ数字 ≠ 同じ量**を自分に当てます）。
+- ⛔ **同じ cell か**: 75 mm は **p4 の scripted UR15 cell**、`newton_route_env.py` は **RL env**。⇒ **RL env が 75 を出すかは測っていません。**
+
+**(4) ⇒ §0#4 との違い（p18 の条件つき問いへの答）**: §0#4 は **2 file が同じ量に別の値を持ち、両方を走る系が読む**。§0#2 は **3 つの数**で、⭐ **commanded と achieved は *名前で区別されている*（silent な混同は無い）**。⛔ **代わりの危険は別型**: **実際に述語を支配するのは `achieved 92.4`（参照 5・うち 1 つは raw 述語）**で、**invariant 値 88 は import-only の 1 参照**。⇒ ⭐ **不変前提を主張する面と、挙動を決める面が別**です。
+⚠ そして **file 自身が逐語で** *"DoD10 RE-MEASURES it (validate, do not trust the constant)"* と書いています。
