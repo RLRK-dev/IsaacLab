@@ -449,3 +449,24 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 ⭐ **判別子として残すもの（本日の形の鏡像）**: 「**grep 0 ≠ 無い**」は本日 何度も出ましたが、ここで出たのは **その裏 — 「grep ヒット ≠ 述語が真」**。**3 件とも語は在り、意味は違いました**（注記の印 / 部分の完了 / 条件の中の語）。⇒ **語の存在は述語の充足でない。ヒットは *読む* 対象であって *数える* 対象ではない。**
 
 ⭐ **費用**: 3 コマンド。§10 で「本文全読は未了」と書いた注記より安い — **本日 2 度目の同じ会計**。
+
+## 14. 追記 2026-08-06 23:40 JST — p18 `m-p18-36`（memory dir = git repo）を独立検証。**6/6 再現・1 数だけ単位で割れる**
+
+⚠ 全て自分の実行（message text からは裁定しない）。⛔ 当該 dir では read-only command のみ（`add`/`commit`/`checkout`/`reset` は一切走らせていない）。
+
+**(1) 再現した 6 件**: toplevel = memory dir ／ initial commit **`6a499fe967b28ddd273c459dd4e05df7eb1d2164`**（commits=1）／ tracked **901** ／ dirty **0** ／ `.git` **4.5M** ／ IsaacLab 側の答は **`is outside repository at '/home/rlrk/IsaacLab'`**。⇒ 分離は私の側でも成立。
+
+**(2) ⭐「前進が捕まらない」も実測で裏付き**: remote **0** ／ non-sample hook **0** ／ `crontab -l` の memory|git 一致 **0** ／ systemd user timer の memory 一致 **0**。⇒ **p4 の自己申告どおり、commit を走らせる仕掛けはどこにも無い。**「version 管理下」を「変化が記録されている」と読まない。
+
+**(3) ⭐ 沈黙した guard は *機構として* 裏付く**: memory dir の**先祖に `.git` が 1 つも無い**（`…/-home-rlrk-IsaacLab` / `projects` / `.claude` / `/home/rlrk` / `/` を実測）⇒ 以前は `/` まで登り切って落ちていた。⚠ **等級 = 過去の挙動そのものは測れない**。私が測ったのは「今、先祖に repo が無い」＝ 落ちていた理由の側。
+
+**(4) ⛔ 唯一割れた数 = `MEMORY.md` のサイズ。**単位で結論が反転する:
+- 実測 **21,663 chars (`wc -m`) / 30,127 bytes (`wc -c`) / 105 行**。p18 の 21,663 は **`wc -m` でのみ**再現する。
+- `CLAUDE.md:162` の hard limit は「**24,986 chars**」と書かれ、導出は **24.4K×1024**（＝ byte 側の慣習）。
+- ⇒ **char 読み = 86.7%（起票閾値 22,487 に未達・行動不要）／ byte 読み = 30,127 − 24,986 = 5,141 超過（規則の言う「索引が読めない」水準）**。⭐ **同じ file・同じ規則で、行動が正反対になる。**
+- ⚠ **等級（弱い所を先に）**: 私は**消費側を測っていない** — `~/.claude/hooks` 全走査で `MEMORY.md` への参照は **0 件**（cap を課している code は手元に無い）。byte 読みの根拠は clamp 台帳 `:6026`-`:6028` の **「29,908 bytes」「24.4KB read cap」**（p15 harness の文言）で、**私はその警告自体を見ていない**。
+- ⛔ **単独では圧縮しない**（§運用31・他 pane の行を含む）。要るのは圧縮ではなく **単位の確定**。
+
+**(5) ⚠ 付随して外れていた pointer**: `CLAUDE.md:162` が根拠に挙げる **`LEDGER:18155`** は `00-DESIGN-STATUS-LEDGER.md`（**248 行**）には存在しない。実体は **`eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md:18155`**（37,203 行・**uncommitted**・本日 22:14 に伸びた file）。⇒ ⭐ **同じ段落が警告している形に、その段落自身が該当している**（行番号は「どの物の中の位置か」＋ commit を連れて初めて恒久）。
+
+**(6) 自分の運用（採用）**: git は **`-C <path>` を明示**し cwd に依存しない。⚠ p18 が挙げた `checkout`/`reset --hard` の**破壊側の補集合 = `git clean -fd`** — memory dir を cwd に走ると **untracked の新規 memory file を消す**。現在 dirty 0 ゆえ、**以後書く memory file は全て untracked = clean の対象**。
