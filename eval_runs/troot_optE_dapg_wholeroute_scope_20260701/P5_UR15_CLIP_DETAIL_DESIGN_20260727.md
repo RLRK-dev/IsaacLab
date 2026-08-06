@@ -7468,3 +7468,25 @@ p4 の注記: *"`rej_total` increments inside `if near_far_arm … < ARM_CLEARAN
 ⇒ ⛔ **どちらも上の 2 つの数を「測定値」に格上げしません**（§156 と同型: **値の格上げは、より良い接地によってのみ起き、隣接作業では起きない**）。
 
 ⛔⛔ **本節は推奨を含みません** — **冠の高さ・半径がどうあるべきかは述べていません**（Rs 裁定の入力を良くするだけで、裁定はしない）。
+
+---
+
+## §166 DDR #40 第 1 段（構造）— **工程表は幾何を 1 つも持っていません。stale なのは 定数 1 個です**
+
+⚠ **裁定どおり分割**: 再導出は私・⛔ **43 ステップ表（`07-Design`・CC read-only）には触れません**。⚠ **その表の所有が私であることは、p18 の記録上 *推論* であって確認ではありません**（p18 申告・私は確認していない）。
+
+**(1) ⭐⭐ 表は幾何を 1 つも持っていません — 9 個すべて import です。** `thread_isaac_lab/skills/step_table.py`（255 行）:
+- `task_config` から: `CLIP_POSITIONS` ・`GRIP_HALF_SPAN` ・`REST_CLIP_X` ・`WIDE_LEFT_Y` ・`WIDE_RIGHT_Y`
+- `scripted_skills` から: `HOME_Z` ・`PUSH_Z` ・`REST_RISE_Z` ・`ROUTING_RISE_Z`
+⇒ ⭐ **「工程表の幾何が stale」の実体は、表ではなく *参照先の定数*** です。⇒ **表の編集は 1 行も要らない** — 分割は裁定が想定したより綺麗に切れます。
+
+**(2) ⭐⭐ UR5e / Franka 前提は 定数 1 個に集中しています。** `task_config.py:78` 逐語 `EE_TO_FINGERTIP = 0.220  # FRANKA panda_hand->fingertip [m]; …`／`:84` 逐語 *"Finger tips are EE_TO_FINGERTIP (**220mm, Franka value; re-derive S6**)"*／`:324` 逐語 *"EE_TO_FINGERTIP above (0.220) is the **Franka/legacy**"*。
+⇒ **code 自身が「Franka の値・再導出待ち」と書いています。**これが `GRASP_Z` と `PUSH_Z`（ともに `TABLE_HEIGHT + CLIP_BASE_HEIGHT + EE_TO_FINGERTIP = 1.025`）に入り、**表はその `PUSH_Z` を import** します。
+
+**(3) 残り 3 つの高さは robot 項を持ちません**: `HOME_Z = TABLE + 0.320` ・`ROUTING_RISE_Z = TABLE + 0.270` ・`REST_RISE_Z = TABLE + 0.250`（`scripted_skills.py`）。⇒ ⭐ **形は robot 非依存**。⛔ **十分性は別問題**（UR15 ＋ コ字グリッパで実際に逃げられるかは未測）。
+
+**(4) `WIDE_LEFT_Y` / `WIDE_RIGHT_Y` は `GRIP_HALF_SPAN` 従属** ⇒ **§163 の所見をそのまま継承**します（不変前提を主張する面と、挙動を支配する面が別）。
+
+**(5) ⛔ 影響範囲（＝ 権限が要る半分）**: `EE_TO_FINGERTIP` は **envs / scripts / tests の 約 25 file** が読みます。⇒ **再導出値の *反映* は局所編集ではなく SSOT 変更**（`task_config.py` = L3）。⇒ ⭐ **導出は私・書き込みは Rs 承認** という分割になります。
+
+⇒ **第 2 段（数値）= UR15 ＋ Robotiq 2F-85（コ字爪）の `wrist_3 → 爪先` を asset から実測すること**。⛔ **本節では出していません。**
