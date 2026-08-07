@@ -614,3 +614,26 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 **(4) p6 の rung（採用）= DURABLE IS NOT CURRENT**: identity（sha 一致）／durability（消えない）／currency（最新）が **3 方向に分離**し、**どの copy も 3 つ全部は満たさない**。⇒ **durable copy を引く者は「00:02 の状態」として引く。**
 
 **(5) bank**: 604 = **`e64b22a982`**（sha `acce074525ac5eed` 一致・自分で照合）。⇒ 本 arc は CLOSE、当卓は standby（単位 = chars で no-action ／ #18 は execution HOLD ／ memory dir への git は必要が生じるまで 0）。
+
+## 23. 追記 2026-08-07 15:24 JST — §19(3) の「読むだけの筈が書いていた」に **実際の処方**（対照つきで自分で検証）
+
+**(1) `git --no-optional-locks` は本当に index を書かない**（p18 発・当卓が**使い捨て repo で対照つき**再現）:
+| 実行 | `.git/index` mtime | 判定 |
+| --- | --- | --- |
+| 実行前 | 15:23:46.576 | — |
+| `git --no-optional-locks status --porcelain` | 15:23:46.**576** | **UNCHANGED** |
+| `git status --porcelain`（対照） | 15:23:46.**590** | **REWRITTEN**（+14 ms） |
+⇒ **対照が効いている**（片方だけなら「たまたま同じ秒」で通ってしまう）。⇒ §19(3) で当卓が公表した「status は書き込み」は**回避可能**だった。**halt 中に file を直読して凌ぐ必要は無かった。**
+
+**(2) ⚠ ただし flag は §19(3) の *半分* しか直さない** — 当卓の write は 2 経路あった。**残り半分も対照で確定**:
+| 実行 | `.git/lost-found` | 判定 |
+| --- | --- | --- |
+| `git fsck`（素） | 生成 **されない** | 読むだけ |
+| `git fsck --lost-found` | **生成される**（`commit/`） | **書く** |
+⇒ **書いているのは `fsck` ではなく `--lost-found`**。⇒ ⭐ **§19(4) の「事実は flag に住む」が、当卓自身の 2 つの write の両方で成立した**（`clean` は `-n` で読むだけ／`fsck` は `--lost-found` で書く）。
+
+**(3) ⇒ 当卓の read-only 手順（以後これで固定）**: `git --no-optional-locks <read subcommand>` ／ `fsck` は **素で**呼ぶ ／ ⛔ `--lost-found` は custodian の依頼が無い限り使わない。
+
+**(4) 未回収の副作用**: 23:56:22 に当卓が作った `memory/.git/lost-found/commit/` は **残置**（掃除の道具が `clean` になり得るため custodian 判断・§19(6)）。
+
+**(5) 本 arc の一般形（p18 総括・当卓も採る）**: 今夜の枠組み誤りは全て **「問われた対象を見られない述語で問うた」** — `clean` は犠牲者の行を見られず、file 単位の枠は 1 行の差分を見られず、`head -12` は 26 見出しを見られなかった。⇒ **答は全て正しく、述語が問いより狭かった。**
