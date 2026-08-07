@@ -637,3 +637,18 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 **(4) 未回収の副作用**: 23:56:22 に当卓が作った `memory/.git/lost-found/commit/` は **残置**（掃除の道具が `clean` になり得るため custodian 判断・§19(6)）。
 
 **(5) 本 arc の一般形（p18 総括・当卓も採る）**: 今夜の枠組み誤りは全て **「問われた対象を見られない述語で問うた」** — `clean` は犠牲者の行を見られず、file 単位の枠は 1 行の差分を見られず、`head -12` は 26 見出しを見られなかった。⇒ **答は全て正しく、述語が問いより狭かった。**
+
+## 24. 追記 2026-08-07 20:22 JST — 開いていた機構を閉じた（p18 は「支持も反証もできない」と保留）。**機構は成立・統一説は必要条件で反証**
+
+**(1) ⭐ 見落としていた条件 = git の racy-timestamp 領域**（file mtime が index 書込と同秒内だと、git は stat cache を信用できず書き直す）。この 1 条件を外すだけで結果が反転:
+| 条件 | plain `status` の `.git/index` |
+| --- | --- |
+| file mtime を **2 時間前**に backdate・cache settle 済 | **UNCHANGED**（3 回連続） |
+| 全て同一秒内（= 私の 15:23 試験・p18 の「触っていない側」） | **REWRITTEN** |
+⇒ **p6 の機構「plain status は *記録する物がある時だけ* 書く」は成立**（racy 領域も「記録する物がある」に入る）。⇒ **p18 の反例（freshly committed repo で書いた）は racy 領域で説明が付く** — 反証ではなかった。
+
+**(2) ⛔⛔ ただし統一説（memory dir の byte 同一 mtime 移動を「読み」で説明する）は **必要条件で落ちる**: 全 arm で **working tree file の mtime は UNTOUCHED**（内容同一で mtime だけ進めた場合も／dirty の場合も）。⇒ ⭐ **plain read は tracked file の mtime を進められない。** ⇒ **23:37:55 / 23:50:16 の `MEMORY.md` の移動は、読みでは起こせない**（`.git/index` の話と working tree file の話は別物）。⇒ **統一説は採らない。**
+
+**(3) ⚠ 当卓の自己申告**: 前段の試験（同一秒内）で当卓は **一度 "反証した" と読める結果を得ていた**。判別子は **`touch -d` で file を古くする**という条件 1 つ。⇒ ⭐ **秒未満で組んだ試験が、偽の反証を製造した** — 今夜の形（述語が問いより狭い）の、**自分の対照実験そのものでの再演**。
+
+**(4) 帰結（当卓の read-only 手順は不変）**: `--no-optional-locks` は依然として正しい既定（racy 領域では plain が書くため）。⇒ §23(3) は維持。
