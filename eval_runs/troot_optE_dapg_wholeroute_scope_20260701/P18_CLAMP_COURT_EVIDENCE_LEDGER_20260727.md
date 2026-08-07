@@ -38576,3 +38576,46 @@ p4 は自分の報告で「p18 の対」と書いていたのを訂正。
 **memory repo の commit（snapshot 以降）= 0** ／ 私の未 commit = 0 ／ 未 push = 22。
 ⇒ ⭐ **p4 の一文を Rs へ**: **「複製は file を救い、repository を救わない。
 commit が要り、commit には custodian が要る。」**
+
+---
+
+## §1141 — ⭐⭐⭐ **前提条件を欠いた control は、現象を作れない**（私の最初の検査は偽陰性だった）。事実は両方向とも flag に宿る
+
+**時刻**: 2026-08-07 15:25 受領 / **15:26:09・15:26:29 実測**。bank = p5 639 行 @ `4107e927cc`。
+
+### (1) ✅ `status` の control — 完全再現（throwaway repo・両方向）
+| 命令 | `.git/index` mtime |
+|---|---|
+| before | `15:26:09.790` |
+| `git --no-optional-locks status` | **`.790` 不変** |
+| `git status`（対照） | **`.816` 書換** |
+⇒ **読み取りは本当に無償。** p5 の §19(3) の自認（「read-only は誤った語」）には **最初から remedy が在った。**
+
+### (2) ⛔ 私の最初の `fsck` 検査は **偽陰性**だった
+clean な throwaway repo で `git fsck --lost-found` を走らせ ⇒ **`.git/lost-found` は作られなかった。**
+⚠ **もしこれを所見にしていたら、p5 を誤って反証していた。**
+**原因 = 私の repo に unreachable object が無かった** ⇒ **現象の前提条件が無い。**
+✅ **前提を作って再試**（commit → `reset --hard` で dangling を作る）:
+| 命令 | 結果 |
+|---|---|
+| `git fsck`（素） | `.git/lost-found` **absent** ＝ **読み取り** |
+| `git fsck --lost-found` | **`.git/lost-found/commit/4b36eeb1…` を作成** ＝ **書込** |
+⇒ ⭐⭐ **p5 は正しい。`fsck` ではなく `--lost-found` が書く。**
+
+⇒ ⭐⭐⭐ **本夜の型の *control* 側の形**:
+**述語が狭すぎれば取りこぼす／広すぎれば他者を自分に帰属させる／
+そして *前提条件を欠けば、現象そのものを作れない*。**
+**3 つとも「正しい答え・訊かれていない問い」。**
+⚠ 同じ command 内でもう 1 つ: `fsck --unreachable | grep -c unreachable` は **0** を返したが、
+dangling は実在した（lost-found が 1 つ預けた）⇒ **私の *数え方* も出力形式と合っていなかった。**
+
+### (3) ⭐⭐ p5 の対称性（採用）— **事実は両方向とも flag に宿る**
+**`clean` は `-n` で無害／`fsck` は `--lost-found` で有害。**
+⇒ **同じ監査の中で、動詞は 2 方向に誤らせた。**
+✅ p5 の恒久手順: **全 read subcommand に `--no-optional-locks` ／ `fsck` は素で ／
+`--lost-found` は custodian の要請なしに使わない。**
+⛔ 23:56:22 に作った `.git/lost-found/commit` は **そのまま残す** —
+**取り除く明白な道具が、今夜の主題そのものだから。**
+
+### (4) ✅ arc の終了
+p5 = standby（unit は chars ゆえ無操作・#18 は execution HOLD）。3 卓とも私への未処理なし。
