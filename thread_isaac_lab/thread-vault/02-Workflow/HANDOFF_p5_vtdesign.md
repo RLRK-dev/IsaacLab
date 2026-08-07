@@ -670,4 +670,21 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 - **23:50:16** = reflog に entry 無し ⇒ **checkout 型で説明可能だが、実行の記録は無い**。⇒ **「種類としては説明済み・実行者は未特定」**。⛔ **当卓は「これが起きた」とは言わない**（lab で再現した機構であって、当該事象の観測ではない）。
 - **読み（`status`）は依然として除外**（§24(2)・p18 が 4 regime で確認）。
 
-**(4) ⚠ 分離できなかった arm を明記**: `git restore <file>` は当卓の試験では **UNTOUCHED** だったが、**同一秒内（racy 領域）**で走っており **§24(3) の confound がそのまま当てはまる**。⇒ **`checkout --` と `restore` の差は主張しない**（当卓の試験では分離不能）。
+**(4) ⚠ 分離できなかった arm を明記**: `git restore <file>` は当卓の試験では **UNTOUCHED** だったが、**同一秒内（racy 領域）**で走っており **§24(3) の confound がそのまま当てはまる**。⇒ **`checkout --` と `restore` の差は主張しない**（当卓の試験では分離不能）。〔✅ **§26 で分離済み（20:28）= 差は無い**。当時の UNTOUCHED は artifact だった。〕
+
+## 26. 追記 2026-08-07 20:28 JST — **4 command を同一条件で分離**（§25(4) の保留を解消）＋ 本 arc CLOSE
+
+**(1) ⭐ 条件を統制して 4 way 比較**（stale だが **racy でない** cache ／ 内容同一 ／ **setup と op の間に git を 1 つも挟まない**〔p18 が「自分の前提確認の `status` が条件を壊した」と報告した罠を、設計で外した〕）:
+| command | file mtime | 内容 |
+| --- | --- | --- |
+| `git checkout -- f.txt` | **REWRITTEN** | 同一 |
+| `git restore f.txt` | **REWRITTEN** | 同一 |
+| `git reset --hard HEAD` | **REWRITTEN** | 同一 |
+| `git status --porcelain` | **UNTOUCHED** | 同一 |
+⇒ ✅ **`restore` は `checkout --` と同じ**（§25(4) の UNTOUCHED は **artifact** だった）。⇒ ⭐ **1 つの実験で 3 つが同時に立つ**: 書込 3 command は **byte 同一の file を書き直して mtime を進める**／**`status` は file に触れない**（当卓の必要条件）／**両者は別 command の話で競合していなかった**。
+
+**(2) 受領（当卓の未測を他卓が閉じた 2 件・出所を明記）**:
+- **§25(5) の「条件は自己再武装するか」= NO**（p18 実測）: armed → checkout #1 REWRITTEN → **#2/#3/#4 は UNTOUCHED**。**checkout は書きながら index entry を更新するので自分で武装解除する ⇒ cascade は無い**。⇒ **無音の書き直しには毎回、別の「武装事象」（内容を変えずに mtime を動かす何か）が要る**。⚠ 当卓は未測・p18 の測定。
+- **§25(3) の「実行者 未特定」= 閉じた**（p4 の transcript）: **23:37:55 `git -C $M reset --hard HEAD~1 -q`** ／ **23:50:16 `git -C $M checkout -- MEMORY.md`** — **両方とも p4 の command で、両時刻に一致**。⇒ **読みは最初から無関係**（`checkout`/`reset` は working tree を書くのが仕事）。
+
+**(3) ⇒ 昨夜からの未決は全て CLOSE**（23:37:55 = 機構＋reflog＋実行者／23:50:16 = 機構＋実行者・reflog は構造上出ない／読みは除外）。当卓の read-only 手順（§23(3)）と `--no-optional-locks` 既定は不変。
