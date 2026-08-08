@@ -100,6 +100,7 @@ def main() -> int:
 
     grid = np.vstack([np.hstack(tiles[:2]), np.hstack(tiles[2:])])
     out = _GEN / "UR15_CELL_OVERVIEW_20260729.png"
+    out.parent.mkdir(parents=True, exist_ok=True)
     Image.fromarray(grid).save(out)
     print(f"[out] {out}  ({grid.shape[1]}x{grid.shape[0]})")
     print("[note] pose = the cell's home values, both arms; left arm ORANGE, right arm PURPLE")
