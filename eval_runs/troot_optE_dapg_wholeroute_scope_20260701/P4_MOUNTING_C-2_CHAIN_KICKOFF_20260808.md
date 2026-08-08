@@ -382,3 +382,18 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 
 > ⛔ **§17 の穴を塞ぐ 2026-08-09 00:45（p11 の実務注記が照らした・p4 が構造で確認）**: spec `:203`/`:215` は視覚レグに **2 択**を認める（`render_cell_overview.py` **か** wired 自身の描画）。⛔ **私の §17 の YES は前者だけ**である。⭐ **後者は route run** — `ur15_steps_wired.py` を走らせることは **STEP 1（`:2509`）＋ STEP 表 2-18（`:2639`）を実行すること**そのもの ⇒ **世界の証拠を生む** ⇒ **§17 の新判別語で C 側 = Rs gate**。
 > ⇒ **確定**: **pZ の item は `render_cell_overview.py`（静的）で行う**。⛔ **wired 描画へ切り替えてよいと読まない**（読み替えると authorization の無い route run になる）。⚠ **順序**: render は今日の disk では走らない（`meshpool` 不在・`mkdir` 0）⇒ **micro-chunk の着地後**に `_gen` 経路で走る（§7 `:98-99`）。⇒ **2 択は費用が等価でない** — 一方は静的、他方は Rs gate。
+
+## 18. `_gen` をどう埋めるか（p18 §1225 (ii)・open 05:43 時点で 4h54m）— p4 court
+
+⭐ **決定的な実測（本裁定の根拠・p4 第一手）**: `ur15_steps_wired.py` に **`__name__` guard は 0 件**（`grep -c` = 0・rc=1）。⇒ ⛔ **import しただけで script 全体が走る＝ route 実行**。⇒ **「走らせずに `_gen` を作る」経路は存在しない**（これが p0 の 3 択が deadlock に見えた理由）。
+
+**裁定 = (a) を採る。ただし私の acceptance item (iii) を 2 つに割る（畳んでいたのは私）。**
+- ⛔ **私の欠陥**: §7 の pZ 項目 (iii)「render が **C-2 cell の絵**を出す（視覚レグ復旧の実証）」は、**2 つの述語を 1 文に畳んでいた** — ①道具が直った ②絵が **C-2 cell** である。②は **cell の新規 build** を要し、build は wired 実行 ＝ **route run ＝ Rs gate**。⇒ **私の item は、書いた形のままでは Rs gate 無しに満たせない**（DoD 畳み込みと同じ形・3 度目）。
+- ⇒ **(iii-a) 道具の復旧（pZ の remit・gate なし）**: `_gen` を**救出済みの tracked snapshot** `p4_ur15_sim_20260727/asbuilt_snapshots/_steps_cell_full_asof_20260804_152626.xml` から seed し、`render_cell_overview.py` が走って画像を出すことを示す。⭐ **死んだ scratchpad へは触らない**（rescue copy は repo 内・tracked）。⚠ **必ず射程注記**: 「**描かれている cell は 2026-08-04 の版であって C-2 ではない**」。これは §17 の **道具の証拠**。
+- ⇒ **(iii-b) C-2 cell の絵（DoD 段へ繰り延べ）**: 新規 build が要る ⇒ **route run ＝ Rs gate** ⇒ **micro-chunk の着地条件にしない**。DoD 段で motion つきの run と一緒に取る（そこは元から Rs gate）。
+- ⛔ **(b) は採らない**（Rs gate を micro-chunk の前提にすると、修理が権限待ちで止まる）／⛔ **(c) は採らない**（新 CLI = §7 の ⛔ list 違反）。
+
+## 19. p11 の 2 件（p18 §1225 (vi)）— p4 court
+
+- **(a) D6 の pointer 訂正 = 採用**: `P4_DEFINE_C3C5_PORT_TO_CURRENT_SUBSTRATE_20260809.md` の D6 が指す先は「§2 最終行」ではなく **「§2 の表・clip 座標系の行」**（見出しで指す = 本 file 冒頭の引用規則どおり）。⇒ **DEFINE 側に訂正を追記する**。
+- **(b) C1/C2 の非対称 = 採用（⚠ 条件つき）**: p4 実測 — **C1 は厳密な転置**（task `(0.350,0.150)` ↔ cell `(0.150,0.350)`・True）／**C2 は転置でない**（task `(0.400,0.075)` の転置は `(0.075,0.400)` だが cell は `(0.040,0.400)`・False）。⇒ ⭐ **C1 だけの値照合は PASS して何も保証しない**。⚠ **私が足す条件**: この転置は **`WORK_ROW_DY = 0`（既定）でのみ成立**（`ur15_cell_spec.py:387` = env で上書き可）⇒ **env を変えると C1 の一致も消える** ⇒ ⛔ **「C1 が一致した」を根拠にしない**は、より強い理由で成立する。
