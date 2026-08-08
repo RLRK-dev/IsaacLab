@@ -14,7 +14,7 @@
 - 地図（`docs/logical_decomposition.html`）に「実行可能経路の到達 = 5 中 2」の 1 行が着地（p6・**3 項形**＝①L-geom witness は task_config 配置について ②実行到達 = C1/C2 ③L-phys/L-exec 未確立・char 単位で挿入のみ・既存記述は保全）。
 - ⭐ 地図 `:174`「FK で検算した witness は無い」と `LEDGER:78`「WITNESS FOUND（L-geom のみ）」は**矛盾でない**（現物に FK 呼び出し 0・述語の広さの差）⇒ ⛔ **地図を stale として直さない**。
 
-> ⚠ **語の対象を固定（2026-08-09 00:20 追記）**: 本節で言う **dead-scratchpad / 旧 session = `b952db35-19a6-4bca-8043-e6731b3f2141`**（p4 の sim session・`ur15_steps_wired.py:32` が bind する側）。⛔ **死んだ session はもう 1 つある** — p6 の `2dbed74a…` は**別物**で、同じ「dead-session token」という言い方で 2 卓が 4 分すれ違った。⇒ **不在・存在いずれの主張も 5 欄を書く: ①どの対象 ②token 文字列 ③pattern 構文 ④path 母集団 ⑤数え方。**
+> ⚠ **語の対象を固定（2026-08-09 00:20 追記）**: 本節で言う **dead-scratchpad / 旧 session = `b952db35`**（p4 の sim session・**完全形は `ur15_steps_wired.py:32` の `S = Path(...)` から取る**）。⛔ **完全形をここに転記しない** — 完全形の query が「code だけを拾う clean な query」でいられるのは**記録が完全形を写さないから**で、写した瞬間にその性質が壊れる（実測 00:22: 完全形を含む tracked `*.md` = 2 件。うち 1 件は本 file だった）。⭐ **prefix は 2 session（`b952db35` / `2dbed74a`）を先頭 8 字で判別できるので、対象の固定には prefix で足りる。**⛔ **死んだ session はもう 1 つある** — p6 の `2dbed74a…` は**別物**で、同じ「dead-session token」という言い方で 2 卓が 4 分すれ違った。⇒ **不在・存在いずれの主張も 5 欄を書く: ①どの対象 ②token 文字列 ③pattern 構文 ④path 母集団 ⑤数え方。**
 
 ### 生きた状態
 - **p0 の発進条件 = p5 の工程表整合レグの返答**（当日 1 時間以上待ち）→ p0 実装（**2 commit**: spec の 4 編集 / `ur15_steps_wired.py:32` の dead-scratchpad 解消）→ pZ 検証 → p4 まとめ
