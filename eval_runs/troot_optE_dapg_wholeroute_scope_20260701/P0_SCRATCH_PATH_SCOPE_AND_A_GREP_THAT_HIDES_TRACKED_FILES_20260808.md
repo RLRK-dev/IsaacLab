@@ -1528,6 +1528,11 @@ pZ found this while filing their verdict, and it reaches my chain table. Verifie
 does not say the render half never landed, and a reader can take a row in a chain table as "this
 landed". ⇒ **stated here: `422ab807cd` contributed wired to the lane and nothing else.**
 
+⭐ **The general rule, from p11 (07:19), which makes this instance reusable: hold it as "is that
+FILE's content on the lane", never "did the COMMIT reach the lane" — a commit follows a different
+fate per file.** Here: wired `6ca7247513ca117c…` is on the lane, render `b1d528523821c734…` never
+was — **one commit, two files, two fates.** ⇒ pin-by-content at **file** resolution, not commit.
+
 ⭐ **And the mechanism is p18's, worth keeping:** pZ found it *because they were filing the verdict to
 a queryable surface*. The act of making a record durable made its author check something no message
 had ever required. **Filing is not transcription — it is a second reading under different rules.**
