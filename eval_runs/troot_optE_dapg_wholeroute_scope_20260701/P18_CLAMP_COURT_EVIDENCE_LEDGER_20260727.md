@@ -40062,3 +40062,42 @@ p6:「transcript は session-scoped（昨日測ったあの class）。**2 本�
 **CLOSED = 1, 2, 3, 4, 5, 6。OPEN = 3 = {7（p5 へ回付・menu 組成のみ）, 8, 9}。** ⇒ **p6 の count と一致。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1168 — ✅ **integrity hook の発火 = FALSE POSITIVE（機構つきで確定・当卓 追認）** ⭐ **本日の「hit は述語でない」が、*捏造検知器そのものの中* で起きた** ＋ 委嘱 2 件の納品
+
+**契機** = 当卓が p5 の卓で読んだ `hook_success`「🚨 [L3 Verifier] severity=high type=deceive — Possible fabrica…」を **解決せず回付**（`m-p18-78` (4)）→ p5 が機構つきで裁定（10:55:16）。当卓 実測 10:55-10:57。
+
+### (1) ✅ 機構 — **当卓が heuristic 本体を読んで再現**
+```
+/home/rlrk/.claude/hooks/pattern_verifier.py:54   (Rule 3: commands that fake output)
+  r'echo\s+["\'].*(?:PASS|FAIL|OK|SUCCESS|ERROR|Test\s+\d).*["\']'
+
+発火した行 : echo "=== CROWN_AT_PASSING_MOUNTING (43 lines full) ==="
+再現       : re.search → True
+理由       : 'CROWN_AT_PASSING_MOUNTING' に 'PASS' が含まれる（PASSING）
+```
+✅ **その file は実在し tracked、しかも実測 43 行** — **label の自称「43 lines full」と一致**（label 自体が正直だったことの傍証）。
+
+⇒ ⭐⭐⭐ **heuristic は「`echo` が試験結果を捏造する」形を捕まえる設計。捕まえたのは *artifact の file 名が表示見出しの中に在った* ことだけ。**
+⇒ ⭐ **本日の rung が、*捏造検知器の内部* で起きた**: 「**hit は述語でない**」。**`PASS` という文字列は在り、それは file 名を意味していた。**
+✅ **数値の出所も p5 が示し当卓が確認**: 当該 turn の数値は `sed`/`cat` が tracked file から読んだもの（`echo` は見出し 2 本のみ・データ経路ではない）。**当卓が `m-p18-75` で tracked 確認した 5 file と同一**。
+
+### (2) ⭐⭐ p5 の standing behaviour — **当卓が支持し、規則として記録する**
+p5 逐語:「**hook を避けるために command をいじらない**（健全だ、鳴らせておけ）。**発火のたびに、この形で on-record に裁定する** — 黙って通さない、回避しない」
+⇒ ⭐⭐⭐ **これが noisy だが健全な guard への唯一の正しい応答。** ⛔ **command を言い換えて黙らせれば、*本物の捏造に対しても* 鳴らなくなる** — 本日 §1122 で bank した「active, ineffective, and signalling success」を、**自分の手で作りにいく**行為になる。
+⇒ ✅ **当卓の側の教訓**: **回付して正解だった。**当卓は内容が切れていて判別できず、⭐ **「読んだと言い、解かない」**を実行した（§1150 の枝）。**握り潰していたら、機構も standing rule も出てこなかった。**
+
+### (3) ✅ 委嘱 2 件 = 納品・bank 済（当卓 独立 hash 照合）
+| doc | 行 | sha256 | 性質 |
+|---|---|---|---|
+| `P5_SUCCESSION_GRIP_DOD_DESIGN_V01_20260808.md` | 91 | `128eed32ff88c1c6…4ba601d` | ⛔ **実行を認可しない**（draft → #18 再 debate(L3) → Rs sign-off 下 impl・HOLD 継続） |
+| `P5_ITEM7_MOUNTING_MENU_V01_20260808.md` | 74 | `49bd6954af0187a9…c862a90e8` | ⛔ **推奨を含まない**（settle = Rs） |
+
+✅ **Rs 委嘱を一次確認**: `c2d317bc` line 1167 `01:42:56.775Z` = **10:42:56 JST**「DoD 設計の commission を出す — 着手して」。
+⭐ **当卓は p6 の教えた方法（window 内 全 record を type 別に数えてから読む）で引いた** — 今回は plain user turn だったが、**3 class のどれでも捕まる引き方**になった。
+⭐ **menu の作りが正しい**: 共通の穴（witness ≠ route ／ DDR #54 の部材が全数値から欠落 ／ #57 chosen-pair 依存）を**選択肢より前**に置く ⇒ **menu が verdict と読まれない。**
+
+### (4) ✅ p5 の自己訂正 1 件
+「817」は記憶の数（当卓の実測・bank は **816** = `002919462b`）。⇒ p5 は **以後 旧版を sha/commit で参照し、記憶した行数で参照しない**と宣言。
+
+**Banked — 時刻は本節 commit の author date が正。**
