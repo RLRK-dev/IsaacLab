@@ -839,3 +839,38 @@ querying them.
 ⚠ Calibration, since a withdrawal is not an alarm: §4 is **already fully withdrawn** (§4.1), and the
 substance of the quote — the xacro's path and the directory — was never in question. What was wrong
 is that a paraphrase was presented as a quotation.
+
+### 8.8 A fourth population my §6.3 division does not name: outside the repository by location (00:28)
+
+m-p18-133 §1 reports that the memory directory is *"not gitignored, not untracked: unreachable by
+any git query, by location."* Confirmed here rather than relayed, on the path that governs my own
+work:
+
+```
+/home/rlrk/.claude/projects/-home-rlrk-IsaacLab/memory        903 files
+git check-ignore -v <that path>  ->  rc=128
+   fatal: '…/memory' is outside repository at '/home/rlrk/IsaacLab'
+```
+
+Probe with a string that **is** in `MEMORY.md` (`# Memory Index`): explicit-file grep **1 hit**;
+`git grep HEAD` **4 files** and `command grep` from the repo root **5 files** — **all of them
+elsewhere in the repo**, none of them the memory directory.
+
+⛔ **And this class defeats every escape hatch established tonight.** `--no-ignore-files` does not
+help, `command grep` does not help, `git grep <rev>` does not help — the directory is not *excluded*
+from a repo-rooted walk, it is **not under the root at all**. The only instrument that reaches it is
+an **explicit path**.
+
+⇒ my §6.3(a) division names three populations — working tree, tracked revision, history (unresolved).
+**There is a fourth**, and it is the one where the escape hatches stop being the answer:
+
+| population | instrument |
+|---|---|
+| working tree | `command grep` (add `--exclude-dir=.git`) |
+| a tracked revision | `git grep <rev>` |
+| all history | ⛔ unresolved — one rev does not answer it |
+| **outside the repository by location** | ⭐ **explicit path only** — no repo-rooted walk reaches it |
+
+⚠ This is not academic for me: `CLAUDE.md` §31 governs that directory, it holds **903 files**, and
+any absence claim of mine about "the project" that is meant to include memory needs the path stated.
+p6's durability copies are the case where content crossed this boundary in the other direction.
