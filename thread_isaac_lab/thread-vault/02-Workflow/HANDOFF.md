@@ -14,6 +14,8 @@
 - 地図（`docs/logical_decomposition.html`）に「実行可能経路の到達 = 5 中 2」の 1 行が着地（p6・**3 項形**＝①L-geom witness は task_config 配置について ②実行到達 = C1/C2 ③L-phys/L-exec 未確立・char 単位で挿入のみ・既存記述は保全）。
 - ⭐ 地図 `:174`「FK で検算した witness は無い」と `LEDGER:78`「WITNESS FOUND（L-geom のみ）」は**矛盾でない**（現物に FK 呼び出し 0・述語の広さの差）⇒ ⛔ **地図を stale として直さない**。
 
+> ⚠ **語の対象を固定（2026-08-09 00:20 追記）**: 本節で言う **dead-scratchpad / 旧 session = `b952db35-19a6-4bca-8043-e6731b3f2141`**（p4 の sim session・`ur15_steps_wired.py:32` が bind する側）。⛔ **死んだ session はもう 1 つある** — p6 の `2dbed74a…` は**別物**で、同じ「dead-session token」という言い方で 2 卓が 4 分すれ違った。⇒ **不在・存在いずれの主張も 5 欄を書く: ①どの対象 ②token 文字列 ③pattern 構文 ④path 母集団 ⑤数え方。**
+
 ### 生きた状態
 - **p0 の発進条件 = p5 の工程表整合レグの返答**（当日 1 時間以上待ち）→ p0 実装（**2 commit**: spec の 4 編集 / `ur15_steps_wired.py:32` の dead-scratchpad 解消）→ pZ 検証 → p4 まとめ
 - ⛔ **execution HOLD 不変・self-start 禁止**。**DoD の evidence-grade cap**: #48/#18 が open の間は DoD 動画に無印 PASS を出さない・#49 は整定ゲート状態を併記・#61 の env7 pin 下でのみ・existence 主張は **cell 条件 3 つ**（stereo head 不在／#54 部材不在／抽選領域 = URDF 関節範囲）を明記
