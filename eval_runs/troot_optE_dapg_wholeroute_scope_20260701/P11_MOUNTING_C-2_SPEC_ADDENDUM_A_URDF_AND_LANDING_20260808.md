@@ -104,6 +104,13 @@ desk: p11 ARM-CONTROL-DESIGN (w2:p11) / 記録 **2026-08-08 22:25:51 JST**（`da
 
 **⚠ 併せて記録する label の罠（p4 発見・当方実測）**: 同じ名前 C1/C2 が **substrate で別の点を指す** — task 側 `task_config.py:212` C1 = (0.35, +0.150) … `:216` C5 = (0.35, −0.150)（5 clip）に対し cell 側 `:485` C1 = (0.150, …) / `:486` C2 = (**0.040**, …)。⛔ **C2 は 0.40 と 0.040 で桁も違う**。⇒ **C1/C2 を引くときは必ず substrate を添える**。本 spec §7-6（「C1/C2 の値が変更前後で同一」）は **同一 file 内の比較**なので成立するが、pZ は**跨いで突き合わせない**こと。
 
+### A-7b. 追記 23:3x — A-7 の label 注記を **2 点訂正**（私の書き方の欠陥 1 + 罠の本体の言い直し 1・契機 = p18 m-p18-109 §8 / p0 発見）
+
+**訂正 1（私の欠陥・形の捏造）**: A-7 は task 側を「`task_config.py:212` **C1 = (0.35, +0.150)**」と**代入の形**で書いた。**値は実読どおりだが形は実在しない**。実測: `git grep -nE '^C[1-5] *='` は `task_config.py` で **rc=1（走って hit 無し）**・同 predicate は cell spec で `:485`/`:486` を返す（**陽性対照**）。⇒ 実体は **`CLIP_POSITIONS` の list 要素に付いた行末コメント**（`:212` `(CLIP_X_ODD, CLIP_Y_CENTER + 2*CLIP_Y_SPACING),  # C1: (0.35, +0.150)` … `:216` `# C5: (0.35, -0.150)`）。⛔ **代入として書くと、次の読み手は `C1 =` を探して見つからず「無い」と読む** — 私が今日 3 度名指した「作られた不在」を、自分の sheet で作りかけた。
+
+**訂正 2（罠の本体は「別の点」より強く、軸の入れ替え）**: 実測 — `task_config.py:203 CLIP_X_ODD = 0.35` / `:204 CLIP_X_EVEN = 0.40`（**X の役**）に対し `ur15_cell_spec.py:483 CLIP_Y_ODD, CLIP_Y_EVEN = 0.35 + WORK_ROW_DY, 0.40 + WORK_ROW_DY`（**同じ大きさが Y の役**）。⇒ ⭐ **値の集合を突き合わせると「0.35 も 0.40 も両側にある」で通ってしまい、転置は値検査を生き延びる** ⇒ **(軸, 値) の対で比べる**。A-7 の「同名が別の点を指す」は真だが弱い言い方だった。
+**併せて**: cell 側の clip x（`0.150` / `0.040`）は **cell 内の literal** であって task 側 `CLIP_POSITIONS` から導かれていない。⇒ **clip 座標については executable は task_config に束縛されない**（他の定数 — cable 半径・把持スパン・clip 接触 — は `ur15_cell_spec.py:52`/`:60`/`:66-67` 経由で task_config に束縛される）。⛔ **どちらの SSOT が勝つかは本紙で裁定しない**（#46 / Rs の軸）。⇒ spec §7-6 は**同一 file 内の前後比較**ゆえ成立・**pZ は clip 座標を substrate 跨ぎで突き合わせない**。
+
 ## A-5. 出所の等級
 
 - 全て第一手（本 session 実測）: `ur15_cell_spec.py:99-100`・`ur15_steps_wired.py:1130/:1136-1138/:1972/:2002/:2025/:315/:2418/:2456`・`ur15_mj.urdf:3` と `<limit>` 6 行・`git ls-files`/`rev-parse`/`sha256sum`・公式 `config/ur15/joint_limits.yaml`・`urdf/ur.urdf.xacro` の存在・`urdf_work` の不在。
