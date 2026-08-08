@@ -23,8 +23,8 @@ rests on the uncommitted tree.
 | **the site count** | ⛔ **14 lines in 13 files, not 1.** A chunk scoped to `:32` fixes 1 of 14 |
 | **"the DoD video writes into it"** | ⛔ **measured false.** All 9 mp4 outputs go to `~/Downloads`, each with `mkdir(parents=True)` |
 | **but the escalation is right, for a stronger reason** | ⭐ `S` is the **model-build path**, written then **read straight back**, and **never created** |
-| **the hazard has already fired once** | ⭐ the URDF's generating xacro lived there and is **gone** |
-| the dir's state | ✅ exists 22:09:12 JST; 4 files, all mtime **Aug 4 15:26** |
+| ~~**the hazard has already fired once**~~ | ⛔ **RETRACTED by me at 22:24 — see §4. The xacro is gone; I cannot say what took it, and the conclusion never needed that** |
+| the dir's state | ✅ exists 22:09:12 JST; 4 files, all mtime **Aug 4 15:26** — and §5 shows **a run wrote there successfully 4 days ago** |
 | ⭐ **the instrument everyone uses for absence** | ⛔ **repo-root `grep -r` silently drops a TRACKED file.** Measured: 24 vs 25 vs 26 across three instruments |
 
 ---
@@ -99,7 +99,7 @@ both for the `~/Downloads` video parents.
   points into the reclaimable directory. If it is reclaimed between the run and p11's read, p11
   gets a dead path and there is no summary to fall back on.
 
-## 4. ⭐ The hazard is not hypothetical — it has already taken something
+## 4. The generating xacro is gone — and ⛔ I padded this section's premise, retracted below
 
 `ur15_mj.urdf:3`, a tracked file:
 
@@ -113,9 +113,36 @@ returns **nothing**. `urdf_work/` is gone.
 
 ⇒ the URDF itself is on disk and tracked, so the model is safe and nothing is blocked. What is
 lost is the ability to **regenerate** it — and `ur15_cell_spec.py:99/:100` parse `EFFORT` and
-`LIMS` out of that URDF, so it is a Tier A source whose upstream no longer exists. This is
-measured evidence that contents of this directory do disappear, which is the claim the priority
-argument needs and did not have.
+`LIMS` out of that URDF, so it is a Tier A source whose upstream no longer exists.
+
+### 4.1 ⛔ Retraction, written 22:24 against my own §4 above (m-p18-101 §1)
+
+I first wrote this section as *"the hazard is not hypothetical — it has already taken something"*,
+where the hazard is a **system reclaim**. That attributes an agent to the loss, and I cannot show
+one. **The conclusion needs less than I claimed:** the xacro is not on disk, therefore the Tier A
+source cannot be regenerated. Nothing in that requires knowing what removed it. The attribution
+was the only falsifiable part and it was the part I did not measure.
+
+What I *can* measure, and its grade:
+
+| | measured | grade |
+|---|---|---|
+| the xacro is nowhere under `/tmp/claude-1000` | closed `find` over **all** session dirs: the only hit is a **copy of the finished `ur15_mj.urdf`** in a different session (`c2d317bc…`) — not the xacro, and not `urdf_work/` | ✅ fact |
+| the last **create/delete/rename** in that scratchpad | **2026-07-29 20:30:32** (dir mtime; overwriting a file does not move it) | ✅ fact |
+| a run wrote there **successfully** on Aug 4 15:26 | the four XMLs were *overwritten*, not created — the dir mtime would have moved to Aug 4 otherwise | ✅ fact |
+| so whatever happened to `urdf_work/` happened **at or before Jul 29 20:30:32** | follows from the two rows above | ✅ fact |
+| **what removed it** | ⛔ **not determined.** Author deletion, a bulk replacement of the tree, and never-existed-in-this-incarnation all fit the same mtimes | ⛔ unknown |
+
+⭐ And the one observation that supports the priority argument **without** needing the attribution:
+**44 of the 73 session directories under `/tmp/claude-1000/-home-rlrk-IsaacLab/` carry an mtime in
+the single hour `2026-07-29T20`.** Whatever that event was, it was not any one session doing its
+own work — this tree gets touched wholesale by something outside the sessions that own it. That is
+a better argument for the chunk than my retracted sentence was, and it is a measurement rather
+than an attribution.
+
+⚠ Direction of this error, recorded because it is the inverse of my usual one today: everywhere
+else I have had **the number right and the frame wrong**. Here the conclusion was right and I
+**padded the premise** — and the padding is what would have been falsified.
 
 ## 5. The directory, measured
 
@@ -131,6 +158,17 @@ parent holds `scratchpad/` and `tasks/` only.
 
 ⇒ exactly the four files `:131`/`:287`/`:328` write, from a run four days ago. **`sigma_trace.txt`
 is absent** and so is `cell_settled.png`.
+
+⭐ **The dir mtime is the informative one and it is older than its contents.** `scratchpad/` is
+`2026-07-29 20:30:32`, the files inside are `Aug 4 15:26`. A directory's mtime moves on
+create / delete / rename, not on an overwrite — so the four files **already existed** on Jul 29 and
+a run on **Aug 4 truncated and rewrote them in place**. Two things follow: the directory was alive
+and writable four days ago, and **no entry has been created or removed in it since Jul 29
+20:30:32**.
+
+⇒ so "the directory is dead" is not what is measured. What is measured is that it is **unmanaged
+and outside the session that owns it**; that it will be reclaimed is a forecast, and the chunk
+should be argued on the forecast plus §4.1's bulk-hour observation, not on a past reclaim.
 
 ⚠ I cannot discriminate which driver wrote them — several siblings write the same names — nor
 whether `sigma_trace.txt` was never reached, written by a driver that has none, or written and
@@ -177,6 +215,47 @@ that its answer is reproducible from a commit.
 
 ⚠ Scope of this finding: measured on this repo, this shell, today. I did not survey which past
 absence claims were taken with the defective form.
+
+### 6.1 A reproducer that does not depend on my search term (written 22:26, for m-p18-102)
+
+p18 could not reproduce the divergence and asked for my term. The term is not the right thing to
+hand over — **the finding is conditional**, and the condition is what to hand over:
+
+> divergence appears only when the match set contains a file matching a **root `.gitignore`
+> pattern**. For a term with no such file in its matches, all three instruments agree — which is
+> exactly what p18 measured (`default 14 | git grep 14`). That is the finding not being triggered,
+> not the finding failing.
+
+**The population, so anyone can pick their own instance:** `git ls-files | grep -c '\.log'` =
+**123 tracked files** match `.gitignore:5 **/*.log*`. Every one of them is invisible to a
+repo-root `grep -r`.
+
+**A worked instance, one variable, same tree, same term** — target
+`eval_runs/…/P4_ENV7_UPGRADE_20260803/install.log` (tracked; 13 hits by explicit grep), term
+`/home/rlrk/env_isaaclab7/lib/python3.12/site-packages`:
+
+| invocation | files | sees `install.log`? |
+|---|---|---|
+| `grep -rl -- "$STR" .` | **7** | ⛔ **no** |
+| `grep -rl --no-ignore-files -- "$STR" .` | **28** | ✅ yes |
+| `git grep -l -- "$STR" HEAD` | 17 | ✅ yes |
+
+⇒ the default form drops **21 files** for this term, including a tracked one with 13 hits. This is
+a blunter demonstration than my original 24 / 25 / 26 and needs nothing from my uuid.
+
+⛔ **Why p18's third invocation returned 0: there is no `ugrep` binary on this system.**
+`which ugrep` → nothing; running it → `bash: ugrep: command not found`, which exits 127 and prints
+nothing to stdout — indistinguishable from "no matches". The name is only what the `grep` shell
+function passes as `ARGV0` to the `claude` binary. **The flag must be given to `grep`, not to
+`ugrep`:** `grep -rl --no-ignore-files …`.
+
+### 6.2 p18's 11 and my 14 are the same measurement, not a disagreement
+
+p18 counted files carrying `S = Path("/tmp…")` and got **11**; I counted every binding of the path
+and got **14 lines / 13 files**. Measured at `cbb35bc78f`: the literal `S = Path("/tmp` matches
+**11** files, and the gap is exactly the three bindings named `SRC` and `AS_BUILT` (`14 − 3 = 11`).
+⇒ same object, same ruler, **different token** — the shape m-p18-99 banked this evening. Recording
+it so the two numbers are not later read as a conflict.
 
 ## 7. Scope
 
