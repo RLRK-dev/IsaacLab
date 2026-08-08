@@ -14,14 +14,16 @@ status: PENDING
 parent_node: T-ROOT
 children_nodes: []
 dependencies:
+  # ⚠ 本欄は NEST の 2-edge（precedent / blocker）しか持てない。p4 裁定 2026-08-09 06:01
+  #   （kickoff 見出し「B. 裁定 — DEFINE の D1-D6 を NEST の語に割る」@ `ff4132f4c7`）は 4 class を使う:
+  #     D1 = precedent ／ D3 = precedent（ただし *再測* の）／ D4 = precedent（ただし *主張* の）
+  #     D2・D5 = grade cap（precedent でも blocker でもない）／ D6 = constraint（依存ではない）
+  #   ⇒ ⭐ blocker = 0 件（設計 phase の着手を止めるものは無い）。
+  #   ⛔ D3/D4/D2/D5/D6 は本欄の 2 語に収まらないので下に載せていない — 全 6 件は本文 §4 の表が正。
+  #   ⛔「依存がある」を「止まっている」と読まない（p4 逐語）。
   precedent:
-    - "D1: C-2 取付の着地（本 chunk が建てる cell の土台）— court = p4 chain（進行中）"
-    - "D3: #54 部材入力 — court = p5/p11 設計 ＋ Rs"
-  blocker:
-    - "D2: #48 cable の第 2 DOF — DoD 動画の evidence-grade を止める（無印 PASS 不可）— court = Rs（未 disposition）"
-    - "D4: L-geom が C-2 cell 配置で未確立（07-14 の witness は task_config 配置・共通 hop が 1.34 倍違う）— 設計 phase で再確立が要る"
-    - "D5: #18 grip-efficacy / #49 整定ゲート / #61 env 版 pin — 既存 cap がそのまま継承"
-    - "D6: 座標系の別物性（task_config と cell で同名 C1/C2 が別座標）— 移植時の値の読み替え全部・⛔ 値を写さない"
+    - "D1: C-2 取付の着地（この cell の上に建てる。着地前に幾何を作り直せない）— court = p4 chain（進行中）"
+  blocker: []
 session_history: []
 define_artifact: "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_DEFINE_C3C5_PORT_TO_CURRENT_SUBSTRATE_20260809.md @ 9ab375026a"
 created: 2026-08-09T05:46:32+09:00
@@ -61,12 +63,30 @@ spec_version: LTM-1 v1.2
 **設計** = p11（cell 幾何・arm control）＋ p5（工程表 19-43 の詳細・SKILL 単位）／**実装** = p0 ／**検証** = pZ ／**まとめ** = p4。= C-2 chain と同型。
 〔p4 DEFINE 見出し『## 4. 体制の提案（⛔ 確定は各 court）』。⛔ 確定は各 court であり本 node は記録のみ〕
 
-## 4. ⚠ p6 が provisional に置いたもの（p4 の court・確認待ち）
+## 4. 依存の分類 — p4 裁定で確定（⛔ p6 の暫定配置は SUPERSEDED）
 
-front matter の `dependencies` は NEST の **2-edge taxonomy（precedent = 完了必須 / blocker = 並行制約）**を要求するが、**p4 の DEFINE は D1–D6 をこの 2 語で分類していない**（表の列は「何を止めるか」）。
-⇒ **p6 の暫定配置**: D1・D3 = precedent（cell の土台・部材入力 ＝ 完了が要る側）／D2・D4・D5・D6 = blocker。
-⇒ **保守側の向き**: 迷った依存は precedent へ置いた（precedent は §3.1 #2 で**起動を止める**＝条件を増やす方向）。
-⛔ **これは分類の決定ではない** — p4 が別に分ける場合は front matter を書き換える。**本 node は PENDING ゆえ、どちらの edge もまだ消費されていない**（precedent は §3.1 #2 起動で、blocker は §3.5 cascade で消費される）。
+**確定 = p4 裁定 2026-08-09 06:01**（kickoff 見出し『**B. 裁定 — DEFINE の D1-D6 を NEST の語に割る**』@ `ff4132f4c7`・当卓 first-hand 実読）。⛔ **05:49 の p6 暫定配置（D1・D3 = precedent ／ D2・D4・D5・D6 = blocker）は失効**。
+
+| # | p4 の分類（逐語） | 理由（p4 逐語） |
+|---|---|---|
+| **D1** C-2 取付の着地 | ⭐ **precedent** | この cell の上に建てる。着地前に幾何を作り直せない |
+| **D3** #54 部材入力 | **precedent（ただし *再測* の）** | 設計着手の precedent ではない。**部材込み再測**が D3 を待つ |
+| **D4** L-geom が C-2 配置で未確立 | **precedent（ただし *主張* の）** | 設計は進む。⛔「5-clip は幾何的に可能」と**言う**前に再確立が要る |
+| **D2** #48 ／ **D5** #18・#49・#61 | ⭐ **grade cap**（precedent でも blocker でもない） | 作業を止めない。**verdict の等級**だけを縛る |
+| **D6** 座標系の別物性 | **constraint**（作業中ずっと効く注意） | 依存ではない。**値を写さない**という作業規律 |
+
+⇒ ⭐ **blocker = 0 件**。⛔ **「依存がある」を「止まっている」と読ませない**（p4 逐語 — 本夜 2 時間止めた誤読と同じ形）。
+
+**⚠ p6 の執行上の注記（機構の限界・隠さない）**: NEST の `dependencies` 欄は **precedent / blocker の 2 語しか持てない**（NEST §2.1 = 2-edge へ縮小済）。p4 の 4 class のうち **front matter に載るのは D1 のみ**。⛔ **D3/D4 を `precedent` 欄に書けない** — 同欄は §3.1 #2 で**起動条件**として消費され、「起動を止める」意味になるが、p4 は 3 件とも**着手を止めない**と裁定しているため。⇒ **欄に載らない 5 件は本表が正**、front matter からは YAML コメントで本表を指している。
+
+**⇒ status への影響 = 無し（再確認）**: 本 node が PENDING である理由 2 つのうち、§3.1 #2（precedent 全件 COMPLETE）は **D1 のみが該当**するようになったが、**D1 は進行中**ゆえ条件は依然 不成立。もう 1 つの理由（session 未 binding）も不変。⇒ **PENDING のまま**。
+
+## 4-A. DDR row 64 に FOUNDATIONAL tag を付けない（p4 裁定 2026-08-09 06:08・p6 は従う）
+
+- **裁定**（kickoff 見出し『**2026-08-09 06:08:37 — 裁定 2 件: DDR row 64 の FOUNDATIONAL tag ＝ ⛔付けない**』）: 当該 tag の運用実態は「**§0 の不変前提に触れるか**」の述語。row 64 は**証拠の *射程* についての行**であり **premise を変えていない** ⇒ **付けない**。
+- ⛔ **p4 逐語の核心**:「**session 開始 digest に載せたいから tag する**」は採らない — **述語を、その副作用のために使うこと**になり、以後その述語は誰にとっても意味を失う。
+- **p6 の測定（p4 の明示した限界を埋める）**: p4 は「digest は tag 付き行だけを配る」を第一手で確認できていないと明記（hook *script* を grep して 0）。⇒ **p6 は hook の *出力* を実読して確認済**（形 = `- #<id> [FOUNDATIONAL] <claim, cut> -> <解消条件, cut>`・内容 88 字で切り・**id 集合が tag 付き 27 行と完全一致**）。**p18 が同じ query を独立に走らせて再現**（27 / 64 / row64=0 / row54=1）。
+- ⇒ **残る事実（隠さない）**: row 64 は **session 開始時には配られない**。p4 が置いた代替の保護 = ① row 64 の head marker が **88 字の内側**に警告を持つ（**p6 実測で成立**）② **C3-C5 設計者の入口は DEFINE** で、そこに D4 が同内容を持つ ③ **本 node の §4 表**。⇒ **入口から入る読み手には届く**。
 
 ## 5. 出発点（p4 が本 session で実測・推定を含まない）
 
