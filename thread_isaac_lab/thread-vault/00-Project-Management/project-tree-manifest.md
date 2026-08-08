@@ -50,7 +50,7 @@ Logic tree v1 (`~/.claude/projects/-home-rlrk-IsaacLab/memory/project_logic_tree
 
 <!-- GEN:NEST:BEGIN (build_nest_snapshot.py; 手書き禁止) -->
 
-_252 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
+_252 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = per-node state.md; 手書き禁止)。status = verbatim (coercion なし)。⚠**既知の -4（2026-08-08 註記・項 9 裁定 (iii) = 手続 close）**: snapshot は 255 node・本 §2 は 252 行。差 = `T-Empirical` の子 4 個（`-OneClip`/`-TwoClip`/`-FiveClip-State`/`-FiveClip-Vision`・全 IN_PROGRESS）。**原因は仕様**: 本 §2 = `*/state.md` 走査の厳格 view（`build_nest_snapshot.py:290`）で、この 4 個は **state.md file を持たず** snapshot 側の合成（同 `:17`）にのみ存在する。⚠ 残る問い（node lifecycle 側・生成器でない）= この 4 個に state.md を作るべきか — owner court。 全 node 詳細/依存 = NEST jsx tracker + nest-snapshot.json。_
 
 | node_id | status | parent |
 |---|---|---|
