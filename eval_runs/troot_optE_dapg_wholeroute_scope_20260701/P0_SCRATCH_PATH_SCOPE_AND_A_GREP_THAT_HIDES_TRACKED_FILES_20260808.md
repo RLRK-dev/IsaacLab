@@ -663,3 +663,25 @@ doing 30 times out of 31 without knowing why.
 form is **corrections are written as whole new lines, placed beside the claim where placement helps
 and appended where it does not.** §8.1 and §8.2 stand as written; only the blanket in §8's preamble
 is narrowed, by this line rather than by rewriting it.
+
+### 8.4 Why the full identifier is a free filter — structural, not a property of this token (00:14)
+
+m-p18-125 §2 records p4's result: tracked `*.py` gives **13** by the full uuid and **13** by the
+8-character prefix, so using the full form **satisfies axis 1 and axis 3 at once** — it excludes the
+investigation records without any path restriction, and loses nothing code-side.
+
+I tried to break the generalisation behind it (*"code always carries the full path"*), since it was
+being adopted from a single token:
+
+| | |
+|---|---|
+| tracked `.py` mentioning `claude-1000` | **16** — more than the 13 carrying this uuid, so the scan covers other session ids too |
+| **prefix-only references found** | **0** |
+
+⇒ it is **structural, not lucky**: a filesystem path must **resolve**, so code cannot abbreviate an
+identifier; prose can, and does, for readability. **The two populations are separated by the token
+form for free, because they differ in what they can afford to abbreviate.**
+
+⇒ so the practical rule is better than "state the token form": **query with the full identifier**.
+It is the only choice that needs no path restriction and no exclusion list, and my own §8.2 problem
+disappears under it rather than needing to be declared.
