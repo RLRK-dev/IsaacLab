@@ -81,6 +81,29 @@ desk: p11 ARM-CONTROL-DESIGN (w2:p11) / 記録 **2026-08-08 22:25:51 JST**（`da
 
 **母集団の言い切り方も直す**（p18 §3 で採用された形に合わせる）: 本主張は「**現在の作業ツリー（tracked + on-disk）に他の導出は無い**」であって「**project の履歴のどこにも無い**」ではない。⛔ 履歴（過去 rev の range）は**未測・本紙は主張しない**。⇒ p0 が編集するのは現在の file ゆえ、実務上これで閉じる。
 
+## A-7. 追記 23:2x — **本 chunk の DoD を折り畳んでいた**（spec §0 と §9 の当該文を supersede・契機 = p4 の scope 訂正 / p18 m-p18-107 §1 が私の court として回付）
+
+**私の欠陥**: banked spec は §0 と §9 で「**chain DoD = 43-step scripted route 動画（裁定 A）**」と書いた。裁定 A の引用自体は正しいが、それは **p4 の任務定義**であって **本 chunk が C-2 cell で出せる受入 artifact ではない**。2 つの scope を 1 文に折り畳んでいた。
+
+**実測（本 session・controlled predicate と rc つき）**:
+
+| measurement | 実測値 | 出所 |
+|---|---|---|
+| live cell の clip 定義 | **C1 `(0.150, CLIP_Y_ODD)` / C2 `(0.040, CLIP_Y_EVEN)` の 2 個のみ** | `ur15_cell_spec.py:485`/`:486`（`^C[12] *=` rc=0 = 陽性対照） |
+| 同 predicate で C3/C4/C5 | **0**（`^C[345] *=` **rc=1** = 走って hit 無し） | 同 file |
+| `\bC[345]\b` を live 2 file 全体で | **0**（rc=1） | `ur15_cell_spec.py` + `ur15_steps_wired.py` |
+| 実行される STEP | **STEP 1**（`:2509` 逐語「the arms REACH the start pose by servo motion」）＋ **STEP 表 2-18**（`:2639`）= 表 row **17 本を計数**・最終 row = `(18, "上昇", …)` ⇒ **計 18** | `ur15_steps_wired.py` |
+| canonical row 18 | 述語 **{c1_retained ∧ c2_retained}** / verdict source **N** | `eval_runs/troot_verbal_teaching_20260705/CANONICAL_MOTION_TABLE_V1.md:141` |
+| canonical row 43 | 述語 **{c1∧c2∧c3∧c4∧c5_retained}**（whole-route 分子）/ verdict source **R（whole-route 最終 = Rs 動画）** | 同 `:160` |
+
+⇒ ⭐ **訂正（本紙が正・spec §0/§9 の当該文を supersede）**:
+- **本 chunk（C-2 mounting）の受入 = canonical 1-18 を C-2 cell で走らせた動画**（row 18 述語 = C1・C2 保持 / verdict source N）。
+- **裁定 A の 43-step / 5-clip whole route = 任務定義**（row 43・verdict source **R** = Rs 動画）。**live cell に C3-C5 は無い**ので本 chunk の設計では到達できない。**5-clip 化の scoping は Rs の court・別 chunk**（p4 が routing 済）。本 spec はそれを scope していないし、していると読まれてはならない。
+- ⚠ **「2 of 5 だから本 chunk は不足」と採点しない**（pZ の pre-commitment を採用）— それは **row 43 を本 chunk に当てる誤った行の測定**。本 chunk が答える行は row 18。
+- **evidence-grade cap は不変**: #48/#18 open の間は無印 PASS を出さない・#49 はゲート状態併記・#61 の env pin・cell 条件 3 件（stereo head 不在 / #54 部材不在 / URDF 関節範囲）。
+
+**⚠ 併せて記録する label の罠（p4 発見・当方実測）**: 同じ名前 C1/C2 が **substrate で別の点を指す** — task 側 `task_config.py:212` C1 = (0.35, +0.150) … `:216` C5 = (0.35, −0.150)（5 clip）に対し cell 側 `:485` C1 = (0.150, …) / `:486` C2 = (**0.040**, …)。⛔ **C2 は 0.40 と 0.040 で桁も違う**。⇒ **C1/C2 を引くときは必ず substrate を添える**。本 spec §7-6（「C1/C2 の値が変更前後で同一」）は **同一 file 内の比較**なので成立するが、pZ は**跨いで突き合わせない**こと。
+
 ## A-5. 出所の等級
 
 - 全て第一手（本 session 実測）: `ur15_cell_spec.py:99-100`・`ur15_steps_wired.py:1130/:1136-1138/:1972/:2002/:2025/:315/:2418/:2456`・`ur15_mj.urdf:3` と `<limit>` 6 行・`git ls-files`/`rev-parse`/`sha256sum`・公式 `config/ur15/joint_limits.yaml`・`urdf/ur.urdf.xacro` の存在・`urdf_work` の不在。
