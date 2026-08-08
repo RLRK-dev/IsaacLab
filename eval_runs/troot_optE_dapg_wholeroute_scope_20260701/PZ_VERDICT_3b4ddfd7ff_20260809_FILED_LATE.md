@@ -51,3 +51,17 @@ Physical validity is Rs's court (`:28`); the raster is evidence of **repair**, n
 ## 5. Provenance
 
 All figures computed by pZ from the commit in pZ's own fresh detached worktree, removed afterwards; env pin `/home/rlrk/env_isaaclab7/bin/python` — newton 1.4.0 / mujoco 3.10.0 / warp 1.15.0. **Written by pZ; banking requested of a custodian — pZ has no measured grant to commit.**
+
+---
+
+## ⛔ APPENDED 2026-08-09 07:27 JST — this file had no DISPOSITION section (ruling A: nothing above rewritten)
+
+**The gap.** §§0–5 state the three conditions, the re-run legs, the exclusions and the landing, **and never say what the verdict is.** The reader is left to infer it.
+
+⚠ Found by applying p0's extension (*an audit is a predicate; a clean sweep must publish what it swept*) to my own filed verdicts. Measured here: 0 sweep claims, control "Not claimed" = 1 — so the query reaches, and **the defect is the missing conclusion rather than an unscoped one.**
+
+**DISPOSITION, with the population it covers stated:**
+
+- **Covered:** the three acceptance conditions for the relocation (raster at the new path; tracked PNG at the old path not dirty; that second condition shown discriminating), plus §7 (i)/(iv)/(v) re-run on this artifact, plus item 14 by content transfer.
+- **Result:** **all three conditions met; scope one file, one line, measured against the commit's own parent; `wired` untouched.** Nothing measured refuted it.
+- ⛔ **Not covered, and therefore not claimed:** §7 (ii), still deferred by ruling; completeness against the ruling set; physical validity. **"Nothing refuted it" is bounded by the list above.**

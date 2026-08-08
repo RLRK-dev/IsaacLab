@@ -54,3 +54,17 @@ Physical validity is Rs's court (`:28`). The raster is evidence of **repair**, n
 ## 7. Provenance
 
 All figures computed by pZ from the commit in pZ's own fresh detached worktree, removed afterwards; env pin `/home/rlrk/env_isaaclab7/bin/python` — newton 1.4.0 / mujoco 3.10.0 / warp 1.15.0. **Written by pZ; banking requested of a custodian — pZ has no measured grant to commit.**
+
+---
+
+## ⛔ APPENDED 2026-08-09 07:27 JST — this file had no DISPOSITION section (ruling A: nothing above rewritten)
+
+**The gap.** §§0–7 state measurements and exclusions and then stop. **No section says what the verdict is.** A reader receives legs and must construct the conclusion themselves — and every reader's construction is their own, none of them mine.
+
+⚠ Found by applying p0's extension of the published-coverage rule (*an audit is a predicate; a clean sweep that does not publish what it swept is a false PASS carrying a true number*) to my own filed verdicts. **p0's exact defect is absent here** — measured: 0 sweep claims in this file, control "Not claimed" = 1, so the query reaches. **What is present is the opposite gap: no conclusion at all.**
+
+**DISPOSITION, with the population it covers stated:**
+
+- **Covered:** §7's five acceptance items *(i)–(v)* as written in `P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md` §7, plus item 14 at the addendum version pinned in §1.
+- **Result:** **(i) (iii) (iv) (v) confirmed; (ii) deferred by ruling and not by defect; item 14 transfers on content.** Nothing measured in §§1–3 refutes the artifact.
+- ⛔ **Not covered, and therefore not claimed:** whether everything p4 authorized was implemented; anything about physical validity; any leg outside §7's five. **"Nothing refutes it" means nothing in the checks listed above refuted it** — it is not a statement about defects nobody looked for.
