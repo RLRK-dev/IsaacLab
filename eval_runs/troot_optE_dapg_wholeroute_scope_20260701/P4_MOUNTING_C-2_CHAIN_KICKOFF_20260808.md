@@ -42,6 +42,12 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 
 ⇒ **FOUNDATIONAL 未解決依存で本 chunk を gate するものは無い**。設計・実装段の各 gate（/geometric-design・prior-art guard・rule-check・pZ 検証・動画 DoD）は chain 内で各 owner が実施。
 
+> ⛔ **訂正/射程付与 2026-08-08 21:20:20（自検出・機構 = p18 m-p18-93 §2 と同一 = 窓外列への不在主張）**: 上表と上行の結論は **240 字窓の truncated 読み**から出しており、**FOUNDATIONAL 列（行末）は長行で窓外**だった。全 DDR 行の行末列を閉じた query（`sed -n '102,167p' | awk` 行末 150 字抽出・本 session 21:17）で実測した結果:
+> 1. **design-start を gate する行 = 0 — 原結論は design-start に限り生存**（上表の「否」判定は全て維持）。
+> 2. ⚠ **上表が落としていた未解決 FOUNDATIONAL/準同等 行（本 chain の後段レグに収束）**: **#18**（grip-efficacy・route 把持レグへ収束・p5 chain 進行中）/ **#48**（working cell の cable が banked 前提 (RS71 §4 B2) より 1 DOF 多い・disposition = **Rs** ⇒ **DoD 動画の evidence-grade を cap** — 未解消なら受入報告に射程を明記し無印 PASS を出さない）/ **#49**（整定ゲート未到達 ⇒ 以後の数値は動く腕で測られた・probe 数値の evidence-grade・判定 = p11/実装 lane）/ **#61**（env7 版 pin — 版を言う全 evidence の接地に効く・env_isaaclab7 固定）。pin/training 軸の **#2/#4/#12/#19/#26** は本 chunk 非依存（上表結論に変更なし）。**#44** は item 5 で処置済（`ITEM5_RS_RULING_WORKING_ASSET_AUTHORITATIVE_20260808.md` §8）。
+> 3. **#46 の精密化（行末 2,200 字を実読）**: p5 の詳細設計（権威実装再利用 vs 自作の是非）は**納品・bank 済** = `P5_UR15_CELL_CONSTANTS_SPEC_20260727.md` @ `459d94bdb4`（banked 272 行版・content sha256 先頭 `81a7d76a7a`）。**#46 の実射程 = cell 定数 21 件（うち物理を変えるもの 10 件）**の齟齬であり clip 1 件ではない。⚠ on-disk 版は 571 行 = banked の 2 倍超（pin/作業版の乖離・row 46 が自ら記録）⇒ **設計は banked 版を content 主で消費**し再導出しない。**run は Rs の gate**（row 46 行末逐語）— §0 の「実行なし」解釈と整合。
+> 4. **#57 の精密化**: 左腕開始姿勢は**裁定済（§24）・y 掃引待ち**、上流（clip 配置・役割・取付）= Rs court（row 57 行末）。設計はこの裁定を消費する。
+
 ## 4. 回付（m-p4-59・w2:p18 経由）
 
 - **owner** = p11（cell / arm-control 設計）+ p5（工程表整合・SKILL 詳細）
