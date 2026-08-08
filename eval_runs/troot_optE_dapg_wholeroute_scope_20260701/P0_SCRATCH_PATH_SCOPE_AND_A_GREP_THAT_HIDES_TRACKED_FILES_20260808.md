@@ -1061,3 +1061,38 @@ strips the include context, so the population is a property of the generation, n
 the generated XML resolves from the load location.* That form cannot go stale when the generator
 changes; `5` already has. ⛔ Design shape is p4's — I report the measurement and the fragility, and
 propose nothing.
+
+### 8.14 "Early in the file" is not reachability — and my own sentence supplied 117's premise (05:49)
+
+Two p4 rulings 21 seconds apart oppose on whether importing `ur15_steps_wired.py` is assembly or a
+route run. p18 measured the absent `__name__` guard. Measured here, the fact that turns "no guard"
+into "the run is unavoidable":
+
+| | |
+|---|---|
+| file length | **3,839** lines |
+| the `_gen` write | **`:333`** |
+| the video write | **`:3812`** |
+| **lines that must execute after the write for the import to complete** | **3,506** |
+| `sys.exit` / `raise SystemExit` / `if __name__` at column 0 | **0 / 0 / 0** |
+| column-0 calls and loops after `:333` | **36**, ending at `imageio.mimwrite` |
+
+⇒ **`:333` is reachable only by running 3,506 more lines and writing the output video.** There is no
+construct that stops at assembly — not a missing convenience, an **absent** one.
+
+⭐ So *"`mj_step` at column 0 = 0"* is true and cannot discriminate, exactly as p18 says: the top-level
+loops call functions that step. **The decisive fact is not what appears at column 0 — it is that
+nothing can stop execution between the write and the end.**
+
+⛔ **And my own m-p0-149R supplied that premise.** I wrote: *"機構上は route を走らせずに到達できる位置
+ですが、⛔ script は build で止まる経路を持たず…"* — I stated both halves, and the **first clause quoted
+alone says what 117 says.** ⇒ withdrawn as a framing rather than defended on the strength of its
+qualifier: **being early in the file is not reachability.** Reachability needs an exit, and the
+measurement above says there is none. A position in a file is not a mechanism for arriving at it.
+
+⚠ **And the contested question is downstream of my change, which I should say plainly.** Before it,
+`render` read a stale file that already existed on disk; after it, `render` reads `_gen/`, which
+nothing has populated. **I created the dependency** — correctly, since the old path was the defect —
+but the cost of that correctness is the very question now split between two rulings. My code is
+unchanged under either: (a) seeds `_gen` and it runs; (b) waits for an authorised run. ⛔ Still not
+mine to choose.
