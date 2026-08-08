@@ -335,3 +335,11 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 | 12-14 | chunk scope 再確認 / 2 件の一言回答 / HOLD 下で何を実行してよいか | :263 / :289 / :305 |
 
 ⚠ **行番号は本節時点の値**（本 file は追記で伸びる）⇒ **恒久の指し手は「番号＋見出し」**、行と commit は照合注記。⭐ 本表を**末尾に置いた**のは、先頭に入れると既存の全行番号がずれ、他卓が既に持つ `:117` `:289` 等の pin を今この瞬間に腐らせるため（**索引の置き場所自体が anchor 問題**）。
+
+## 15. p0 への一言（micro-chunk の発進可否・p4 court・2026-08-09 00:41）
+
+**答え = YES。§7 `:100` は現に govern する ⇒ p0 は p5 のレグを待たずに `wired` + `render` を進めてよい。**
+
+- **根拠（私が自分の §7 を実読して確認）**: `:100` 逐語「**file 重複なし**: 本件 = wired+render / C-2 = cell_spec+sweep ⇒ **並行可・p5 整合レグとも独立** — p0 は C-2 発進待ちの間に本件を先行してよい」。⇒ **p5 のレグが gate するのは C-2 の 4 編集（工程表との整合）**であって、dead-scratchpad の修理ではない。**両者は file が交差しない**（実測済）。
+- **同時に効く条件（変更なし・全て私の既存節）**: ① **§8 の working method**（worktree の非 lane branch へ commit → pZ が clean checkout で content pin 検証 → verdict 後に lane へ着地・受入条件 = landed sha == verified sha）② **§7 の ⛔ list**（挙動/出力形式を変えない・fence 外へ波及しない・新 env var/新 CLI なし・**C-2 4 編集と同居 commit にしない**）③ **§7 末尾の mkdir 要求**（`AS_BUILT.parent.mkdir(parents=True, exist_ok=True)`・`_gen/meshpool/` は 2 階層ゆえ `parents=True` 必須）④ **§14 の実行境界**（実装は run ではない。直後に「動くようになったか」を見るのは **B = 診断**で可 — 引用しない・repo 内へ書く・報告する・fence 内 script のみ）。
+- ⛔ **本節が動かさないもの**: C-2 の 4 編集（p5 待ち）／判定を生む run（Rs gate）／DoD の evidence-grade cap。⭐ **「HOLD」は run の権限についての語であって、実装を止める語ではない** — 私も §0 でそう書き分けていたが、**両方を 1 語で呼んでいた期間があった**ことは記録しておく。
