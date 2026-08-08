@@ -13,6 +13,22 @@ pass took its counts over the shared working tree. I re-took every count from th
 `git grep <rev>`; all of them reproduce, and the denominators are the commit's. Nothing below
 rests on the uncommitted tree.
 
+⭐ **HOW TO CITE THIS FILE — added 00:19, at the top because that is where a stale pin gets made.**
+This artifact took **15 commits and grew 196 → 723 lines in one evening**, so *"P0_SCRATCH_PATH…md"*
+alone does not identify a version.
+
+- **Pin the FILE by CONTENT** — `sha256sum` of this path. A commit sha is immutable but pins the
+  **repo**, and the repo ref moves under other panes while this file does not (m-p18-127).
+- **Cite section + content**, with the version as a **collation note**, never as the pin.
+- **Sections are appended, never rewritten; numbers are never reused** (§8, narrowed by §8.3:
+  corrections are written as **whole new lines**, placed beside the claim where placement helps).
+- **Withdrawn claims stay visible** with the correction beside them — §4 and §6.4 are withdrawn in
+  place, not deleted. If a section carries ⛔ WITHDRAWN, read the section it points to before
+  quoting either.
+- ⛔ **Quote-forbidden, per-claim** (each names the version that carried it): §4 in `0b9fd21dd9`
+  and `aa5f0a673a`; §6.4's *"either direction"* in `6186510e91` and `bc452521e0`; §8.2's *"the clean
+  one escaped by accident"* in `5000738e9c` and `cebe0248de`; §6.3(a)'s history row in `c6b740ed36`.
+
 ---
 
 ## 0. Verdict
