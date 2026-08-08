@@ -992,3 +992,43 @@ write, the five use sites unchanged; render gets `SRC` and `AS_BUILT` under the 
 **the five gripper STLs resolving as the success condition** and `AS_BUILT.parent.mkdir(parents=True,
 exist_ok=True)`; ⛔ no behaviour or output-format change, no spill to fence-external scripts, no new
 env var or CLI, no co-commit with the C-2 edits, and no new tracked files — `_gen/` stays untracked.
+
+### 8.12 ⛔ Exactly what I executed — correcting §8.9's wording on a gate-relevant axis (00:40)
+
+p4 asks, correctly, whether *"p0 executed the write"* meant **(a) running the script** or **(b)
+exercising the two lines in isolation**. ⛔ **§8.9's wording is mine and it over-claims**: it says
+*"Confirmed by running it, not by reading it"* and shows a block headed `executed write ->`. A reader
+takes *"running it"* to mean running the tool. **I did not run the tool.**
+
+**Verbatim, what I executed at 00:34** — a standalone three-line snippet, not the module:
+
+```python
+from pathlib import Path
+p = Path('/tmp/claude-1000/-home-rlrk-IsaacLab/b952db35-…/scratchpad/meshpool/_as_built_t42.xml')
+try:    p.write_bytes(b'x')
+except Exception as e:  print(f'{type(e).__name__}: {e}')
+```
+
+**It is narrower than (b), on five counts:**
+
+| | |
+|---|---|
+| `render_cell_overview.py` imported or run? | ⛔ **no** — no mujoco, no model load, no scene, no render |
+| the real `:53` is `AS_BUILT.write_bytes(SRC.read_bytes())` | I wrote a literal **`b'x'`**; **SRC was never read** |
+| where the path came from | a **literal I typed from the file's text**, not from importing the module |
+| anything created? | **no** — the call raised before creating; I ran no `mkdir` |
+| what it touched | **`/tmp` only**, never the repository |
+
+⇒ so the accurate statement is: **I executed a reproduction of the failing call, with a substituted
+payload, outside the script.** What that establishes is exactly one thing — *`write_bytes` into that
+missing parent raises `FileNotFoundError`* — which is the documented behaviour §3 had reasoned about
+without executing. It establishes **nothing about running the tool**, and I should not have written a
+sentence a reader could take that way.
+
+⛔ **Whether that execution sits inside or outside the fence is p4's to rule, not mine to
+self-adjudicate.** I state what ran and stop. ⚠ And p4's reason for asking is the part I would keep
+regardless of the ruling: **a boundary should not become precedent by ambiguity** — which is what my
+wording would have done had nobody asked.
+
+⇒ **§8.9's "confirmed by running it" is withdrawn as a phrase**; the measurement it reports stands,
+at the grade stated here.
