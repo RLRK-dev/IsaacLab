@@ -214,3 +214,20 @@ A-7b は罠の本体を「**軸の転置**」と名付けたが、**その名前
 ⛔ **本節が主張しないこと**: relocation の要否（p4 court）／run 認可（Rs court）／C-2 の 4 編集の着手（p5 レグ待ち）。
 
 [SUPERSEDES: なし — 本節は追補の register であり既存節を置き換えない]
+
+## A-11. 追記 2026-08-09 06:5x — **(f) の理由を差し替える**（着地を検知したので予告どおり実行）＋ A-10 の主張に **DURABLE / PERISHABLE** を付す
+
+[SUPERSEDES: A-10 の (f) 行の**理由**（結論は不変）]
+
+**着地の確認（当方実測 06:50:26・lane tip `52e3a64a53`）**: `render_cell_overview.py:102` = **`out = _GEN / "UR15_CELL_OVERVIEW_20260729.png"`**／**tracked PNG への経路 = 0**（対照 `_GEN /` = 3 ⇒ 判別力のある 0）／tracked PNG は **clean**。⇒ ⭐ **私が (f) で守ろうとした対象は、規則でなく path で守られるようになった**。
+
+⇒ **(f) は撤回しない。理由を入れ替える**:
+- ⛔ **旧理由（失効）**: 「共有 tree で走らせると tracked PNG を上書きするから」— **着地により該当経路が消滅**。
+- ✅ **新理由（現在の根拠）**: ① **生成物 `_gen` は ignore されていない**（実測 `git check-ignore -q` **rc=1**・対照 `.claude` は rc=0）⇒ **広い `git add` に晒される**（⚠ 現在 lane の working tree に `_gen` は**存在しない** = 生成前なので、露出は**走らせた後に生じる**）② **worktree 隔離は tracked content にしか及ばない**（絶対 path 経由の入力は main を読む・06:20 実測。現行 render は `HERE.parents[2]` へ是正済だが、**同 dir の他 script はこの限りでない**）。
+⇒ ⭐ **一般形（本節を書く理由そのもの）**: **同じ結論が別の理由で立ち続ける時、理由を更新しないと、元の理由が消えた後も規則だけが慣性で残る**。⛔ 規則を残すことと、規則の根拠を残すことは別の作業。
+
+**A-10 の主張の DURABLE / PERISHABLE 仕分け**（⚠ **引用する側への指示**）:
+- **DURABLE（commit / blob に pin 済・再現可）** = (h) の数値（lane `fa59bff987` 時点・wired content sha256 先頭 `6ca7247513ca117c`）／(g) の URDF content pin `b4c60d4d…`（tracked）。
+- ⛔ **PERISHABLE（世界の状態・引用前に再測せよ）** = (f) の根拠に使う lane 側の状態（`:102` の中身・PNG の tracked/dirty・`_gen` の有無と ignore 状態）／(g) の「repo 外 dir `/home/rlrk/src/…` が在る」／worktree の file 数・prune 可否・process の有無。
+- ⚠ **date は instant ではない**（他卓の指摘を採用）: 上記 PERISHABLE 行の裏づけは **commit witness**（本節なら lane tip `52e3a64a53` 06:49:44）で持つ — **私が打った日時ではなく、誰も打っていない時刻**。
+- ⛔ **label では防げない残り**: 読み手が as-of を current と読むことは、書き方では止まらない。⇒ **再測だけが答**（「起票時に真」でなく「今も真か」）。
