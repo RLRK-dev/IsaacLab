@@ -731,3 +731,16 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 1. p0 = **1 行のみ**修正（`Path(__file__).resolve().parent` 起点の相対形）。⛔ 他の行に触れない。
 2. **新 commit = 別 content sha** ⇒ **pZ の既存 verdict（`b1d528523821c734…` を名指す）は古い artifact のもの**。⛔ **黙って差し替えない** — pZ は**新 sha で検証し直し**、**両 sha を記録**する（旧 = 検証済・新 = 現行）。
 3. ⚠ **射程は縮むが消えない**: 本修正は **machine 依存を 1 つ**（code 側）除くだけ。**seed XML 内の 7 件の mesh 参照は `/home/rlrk/src/…`（repo 外）のまま**（= data 側・本 chunk の対象外）⇒ **「このマシン＋この非 repo dir」の scope 句は残る**。⛔ 「machine 独立になった」と書かない。
+
+## 2026-08-09 06:20 JST — 移設の 2 つの帰結を裁定（archival marker / `_gen` の露出）
+
+**A. 裁定 — 移設と同じ commit で、p0 は 1 行の comment を置く（新 file は作らない）**
+- **実測**: 当該 PNG を書く tracked code は **`render_cell_overview.py` のみ**（他 0）⇒ ⭐ **移設後、その tracked PNG を再生成するものは repo に存在しなくなる** ⇒ **2026-07-29 の静止画として恒久化**。⚠ **file 名の日付は注意深い読み手に警告するが、path（`p4_ur15_sim_20260727/…`）は「現在の cell」と読める** ⇒ **古さが恒久化し、かつ不可視になる**（p0 の指摘・私の実測で確認）。
+- ⛔ **移設をやめる理由にはしない**（やめれば「黙って入れ替わる」方が起きる）。⇒ **marker を置く**。
+- **裁定**: **移設と同じ commit で、出力行の傍に 1 行 comment** — 「⚠ 同 dir の `UR15_CELL_OVERVIEW_20260729.png` は **2026-07-29 の archival artifact** であり、本 script はもう書かない（出力は `_gen/`）」。⭐ **comment は新 file でも出力形式の変更でもない**（§7 の禁止 2 つのどちらにも当たらない）・**読み手が必ず通る場所に届く**。
+- **carry**: **tracked PNG 自体の archive path 化 or sibling marker file** は **file 名の件と同じ cleanup chunk**（tracked file の移動は 5 件の引用記録に触れるため単独では動かさない）。⇒ **p6 の register へ 1 行**（owner p4/p0・条件付き carry）。
+
+**B. 裁定 — `_gen` の露出は「機構が無い」と明記して cleanup へ carry（この chunk では `.gitignore` を触らない）**
+- **実測**: `git check-ignore` の **rc=1 = ignore されていない**・`.gitignore` に `_gen` の entry は **無い** ⇒ **`_gen` は untracked かつ un-ignored**（3.2 MB の STL copy ＋ 移設後の PNG が入る）。
+- ⛔ **この chunk では `.gitignore` を編集しない**（repo 全体に効く shared surface・本 chunk の 2 file 外）。
+- ⚠ **ただし「守られている」と読ませない**: 現状の唯一の防御は **pathspec 限定 commit という*規律*であって機構ではない** — ⭐ **今夜ずっと「規則では守れず機構でしか守れない」と書いてきた当人が、ここでは規律に頼る**ことを明記する。⇒ **cleanup chunk の第 1 項目に `.gitignore` への `_gen/` 追加**を置く（機構化）。
