@@ -241,9 +241,11 @@ root.
 
 ⭐ **The operational consequence, which reaches well past this chunk: a repo-root `grep -r`
 returning 0 is not absence.** It cannot see tracked `*.log*`, anything under `**/logs/*`
-(`.gitignore:58`), or `/logs/` (`:120`). For a closed query, root the walk at the subtree, pass
-`--no-ignore-files`, pass explicit files, or use `git grep <rev>` — which has the added property
-that its answer is reproducible from a commit.
+(`.gitignore:58`), or `/logs/` (`:120`).
+
+⛔ **My remedy list here is superseded — see §6.3.** I wrote *"or use `git grep <rev>`"* as if either
+route closed an absence. It does not: `git grep` is blind to everything untracked, which is the
+larger population.
 
 ⚠ Scope of this finding: measured on this repo, this shell, today. I did not survey which past
 absence claims were taken with the defective form.
@@ -280,6 +282,59 @@ a blunter demonstration than my original 24 / 25 / 26 and needs nothing from my 
 nothing to stdout — indistinguishable from "no matches". The name is only what the `grep` shell
 function passes as `ARGV0` to the `claude` binary. **The flag must be given to `grep`, not to
 `ugrep`:** `grep -rl --no-ignore-files …`.
+
+### 6.3 What replaces §6's remedy list — corroborated first-hand, not relayed (22:52)
+
+p6 found a second, larger face of this and p18 adopted their division; p18 also warned that *a
+relayed attribution that survives is still not a measurement*, so I re-ran the parts that touch my
+own section.
+
+**(a) The division, which supersedes my list.** Population picks the instrument; one run, not two:
+
+| the claim | the instrument |
+|---|---|
+| "not in the working tree" | `command grep` **alone** (add `--exclude-dir=.git`) |
+| "not in the project at all, incl. deleted-but-committed" | that **plus** `git grep <rev>` |
+| "not in a specific tracked revision" | `git grep <rev>` **alone** |
+
+**(b) I found one filter; there are three.** `--ignore-files` (mine), `-I` (skips what it judges
+binary), `--exclude-dir=.git .svn .hg .bzr .jj .sl`. My §6 named the first as if it were the defect.
+
+**(c) The intersection, measured here.** `.gitignore:101` is `/.claude/` and `git ls-files .claude/`
+= **0**, so that subtree is invisible to **both** daily routes:
+
+| for `timeouts汚染禁止` in `.claude/rules/prohibited.md` | |
+|---|---|
+| explicit file read | **2 hits** — predicate sound |
+| wrapper `grep -rl` from repo root | **0** |
+| `git grep -l HEAD` | **0** |
+| `command grep -rl --exclude-dir=.git` | **1** |
+
+⇒ the prohibition rules and **33 `SKILL.md`** sit where both routes return zero. For contrast,
+`CLAUDE.md` and `AGENTS.md` are tracked at repo root and reachable by all three.
+
+**(d) The `-z` escape hatch works, and it is fragile for a reason worth naming.** `grep -z -rl`
+does find `prohibited.md` (1). But the cause is in the wrapper's own source: its case-guard lists
+`-[Zz]*`, so `-z` **falls through to `command grep`**. ⇒ **it is not a search fix; it changes which
+binary runs**, by tripping a fallback that exists for an unrelated reason (`-z` = NUL-separated
+output). If that guard list ever changes, `-z` silently stops bypassing and the absence claims go
+quietly wrong again. ⭐ **Prefer `command grep` explicitly** — it says what it does.
+
+**(e) The discipline that already routes around this was written before anyone measured it.**
+`prohibited.md:38` — *「ルール・禁止事項を引用する場合、CLAUDE.md/prohibited.md の原文を cat で確認して
+から引用すること」*. `cat` takes an explicit path and never walks a tree, so the one rule governing
+how these files may be quoted is **immune to the blind spot by construction**, for a different
+reason than the one that makes it necessary.
+
+**(f) Two holes in my own instruments, disclosed.**
+- ⛔ My §6.3(c) first draft printed a column of counts that were *paths whose basename matched*,
+  not occurrences. Reported above as reachable / not reachable instead. Same class as the
+  `grep -c`-is-not-an-occurrence-count error banked earlier today.
+- ⛔ My §1 claim *"neither extra file is inside the lane dir"* came from an **empty pipeline with no
+  `rc`** — indistinguishable from a broken command (p18's `ugrep` 127). Re-run with the guard:
+  `rc=1` from grep (ran, found nothing), a **positive control** on `ur15_steps_wired.py` in the same
+  listing returns `1` with `rc=0`, and the listing is **251 paths**. The absence is measured. The
+  conclusion never moved, but it was unguarded when I banked it.
 
 ### 6.2 p18's 11 and my 14 are the same measurement, not a disagreement
 
