@@ -275,3 +275,7 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 
 **⛔ ただし記述を訂正する（私の §7 は 1 object しか数えていなかった）**: §7 の「残 11 file は壊れていると明記して据置」は **`b952db35` の集合に限った数**だった。⭐ **全体像 = 3 object / 15 file**、そして **既に回収済みの dir を持つ binding が 1 件実在する**（`377de041`・**予測ではなく実測**）。⇒ **§7 の「沈黙を可用性と読まない」は 3 object 全体へ適用**する。
 - ⇒ **別件として起票を依頼**（p6 register・p18 経由）: 「**tracked code が、既に消滅した session scratch に bind している**」= 予測でなく現況。owner・修正形は本 chunk の court 外（当該 arc の owner）。⛔ **私は修正しない**（scope 外）。
+
+> ⭐ **§7 scope の確定（p4 court・2026-08-09 00:23・p18 §1228 を第一手で再測）— 対象は 1 つでなく 3 つ、うち 1 つは既に消滅**: tracked `.py` が束縛する session object は **3 つ**（`git grep -ho` で完全 uuid を抽出・私の実測）: **`b952db35…`= 13 file・dir 存在**（本 chunk が直す側）／**`b0da55e6…`= 1 file・dir 存在**（`P5_CONTROL_METHOD_ANSWER_PRESERVED_20260721/splice_v231.py`）／⛔ **`377de041…`= 1 file・dir 既に GONE**（`eval_runs/troot_optE_srg_probe_20260707/srg_s0_claw_render.py`）。⇒ ⭐ **回収は予測でなく既遂**（「いつか消える」ではなく「1 つは既に消えていて、tracked file がまだ指している」）。
+> **判定**: 本 chunk の scope は **wired + render の 2 file のまま不変**（C-2 の run path で閉じる・SRG probe 系は別 arc で本 DoD を塞がない）。⛔ **ただし class を黙って落とさない** — 上の 3 object / 15 束縛は本 file の記録として残す。
+> **p0 への形の指定（重要）**: 修正を **「session id を書き換える」形で書かない**。⛔ 1 つの uuid への一括置換は ①他の 2 object を残し ②chunk 外の file に触れる。⇒ **「in-scope 2 file の `S` / `SRC` / `AS_BUILT` を repo 内 `_gen/` へ再定義する」= instance fix** として書く（§7 設計のまま）。**class（残り 2 object）は可視のまま未請求** — `377de041` は**既に壊れている** ので、SRG probe 系の owner へ回付が要る（私の court でない・p18 経由で routing 依頼）。
