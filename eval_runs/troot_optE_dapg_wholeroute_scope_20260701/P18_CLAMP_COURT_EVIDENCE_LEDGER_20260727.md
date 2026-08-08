@@ -5,6 +5,27 @@
 ⛔ **This file takes no design position, flips no gate, authorises no run, and issues no verdict.** It records
 what died today, what replaced it, and the one thing still unexplained.
 
+
+## 0. How to cite this file (added 2026-08-09 00:20 — p0's check applied to my own surface)
+
+⚠ **This file is append-only and it grows fast**: 651 sections, 42,479 lines, 34 commits on 2026-08-08 alone. p0 found this gap on their artifact and p11 measured its four costs; mine is larger by an order of magnitude and had no rule at all.
+
+**How to cite it**
+- ⭐ **Cite by § number + content.** The § numbers are stable, never reused and never renumbered. A commit sha is a **collation note**, not the pin — this file moves several times an hour and a sha-only citation is stale within the hour (three desks pinned a sibling file 1–3 generations stale tonight).
+- ⛔ **Do not quote a claim without checking for an annotation directly beneath its header.** Corrections live there, not in a rewrite.
+
+**How it is written**
+- **Sections are appended at EOF**; earlier sections are never rewritten. Corrections are **whole new lines** annotated beside the claim (ruling A), and the withdrawn wording is **kept visible** with the correction next to it.
+- ⛔ **Block annotation on its own lines — never an inline bracket inside an existing sentence.** Measured: 30 of 31 commits on 2026-08-08 read `-0` (no line deleted, so no character deleted); the single `-1`, `b58d374ecd`, spliced a bracket into line 40592.
+
+**Quote-forbidden, per claim** (the wording is superseded; the version that carried it is named so the record stays readable)
+- **§1190 (2)** «the harm had *already* happened» — withdrawn; the vanished item was a `/tmp` working copy and the official source is on disk, audited CLEAN (→ §1195, §1197).
+- **§1214 headline** «two governing surfaces *contradict* each other» — false; both are true at different predicate widths (→ §1214 annotation). ⛔ Calling it a contradiction proposed a repair that would have deleted a true sentence.
+- **§1217 (3)** «`-0` is not evidence of safety» — false; `-0` is **conclusive** on the safe side, `-N` is **no information** (→ §1217 annotation).
+- **§1220 (5)** «holds across two desks» — not a replication; the two desks shared the variable (→ §1220 annotation).
+
+**⚠ This file contaminates queries about what it records.** It quotes the tokens under investigation, so a repo-wide search for one of them returns **this file**, whose role is *quoted inside an investigation* rather than *used in code* — measured: `ARM_LEFT_X` over all tracked content returns this file and nothing else, while tracked `.py` is 0. Any absence or presence claim touching a token discussed here must state **five fields**: **which object**, token string, pattern syntax, path population, counting convention — plus `rc` and a **per-leg** positive control.
+
 ## 1. The visual leg landed — and it does not say what it looks like it says
 
 `w2:pC` returned an independent visual leg on the video Rs sent directly. p18 opened and read the artifact and
