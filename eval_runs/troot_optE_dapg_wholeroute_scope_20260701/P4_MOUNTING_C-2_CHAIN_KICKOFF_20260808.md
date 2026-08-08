@@ -192,3 +192,17 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 > 1. ⛔ **「面の不一致」は不一致ではない（前段落の記述を撤回）**。witness script を直読: **FK 系 token = 0（rc=1）**・冒頭 SCOPE 逐語「A PASS here establishes **L-geom only** … It does NOT establish **L-phys** … nor **L-exec**」。⇒ 地図 `:174` の述語は「**構成し FK で検算した** witness」で、この artifact はそれを**満たさない** ⇒ **地図の「まだ誰も作っていない」は書かれたとおり真**・LEDGER `:78` の「WITNESS FOUND（L-geom のみ）」も真。**別の述語についての 2 つの真**であって矛盾ではない。⛔ **地図を直させてはならない**（真の文を消すことになる）。
 > 2. ⛔⛔ **witness は「別の配置」で計算されている ⇒ 私の term (1) は無条件では書けない**。実測: 同 script の参照 = **`task_config` 5 件（rc=0）／`ur15_cell_spec` 0 件（rc=1）**・clip の記述逐語「**C1..C5 staggered, odd X=0.35 / even X=0.40, Y pitch 75 mm**」= **task_config 配置**（0.35/0.40 が **X** に立つ側）。⇒ ⭐ **L-geom witness が成立しているのは task_config 配置についてであって、p0 が実装しようとしている UR15 C-2 cell についてではない**（同名 C1/C2 が別座標 = 本 file の substrate 注意そのもの）。⇒ ⛔ **私自身の条件 (iv)（clip 名には必ず substrate を添える）を、私は自分の term (1) に当てていなかった。**
 > ⇒ **term (1) の改定形**: 「**L-geom witness DONE — ただし `task_config` 配置について（2026-07-14・6/6 PASS）。UR15 C-2 cell 配置についての L-geom は未確立**」。⇒ ⭐ **帰結（本 chunk の絵の精密化）**: C-2 cell については **L-geom / L-phys / L-exec の 3 脚とも未確立**であり、本 §9 が測ったのは **L-exec の到達（2/5）**のみ。
+
+## 10. 統治集合の pin と、URDF provenance 主張の縮小（p4・2026-08-08 23:53）
+
+**(a) 統治集合（consolidation で私が照合する対象を確定させる）**:
+- **設計 = `P11_MOUNTING_C-2_IMPL_DESIGN_SPEC_20260808.md` @ `3315631007`（273 行）** — §6 の ACCEPT はこの版に対する。
+- **別紙 A = `P11_MOUNTING_C-2_SPEC_ADDENDUM_A_URDF_AND_LANDING_20260808.md` @ `5a7fa99b61`（164 行・content sha256 `f1a764e84c9c5dc8…cb3f402a`）** — 実読の結果 **設計 4 編集（定数 3 + label 2 行）を 1 つも変更しない**（検証計器の差替・射程の限定・解釈の固定・p11 自身の DoD 畳み込み訂正）⇒ ⭐ **再受入は要らないが、統治集合として pin する**（pZ が何に対して検証したかを consolidation で言えるようにするため）。⚠ **別紙は追記され続ける** ⇒ 引用時は content で持ち、版を添える。
+- ⭐ **A-3 が私の §8 との衝突を解いている**: spec `:201` §6-4「本 branch 上で行う」が固定するのは **最終 lane** であって中間 commit 先ではない ⇒ **worktree 上の非 lane branch で実装 →(pZ 検証)→ lane へ着地**は spec と矛盾しない（commit 規律 = pathspec 限定 + `--no-verify` は中間でも lane でも同じ）。
+- ⭐ **A-1 の射程限定を受入条件に取り込む**: 開始姿勢の witness（L clear 5 / R clear 30 @ 240 draws）は **URDF の関節範囲を抽選領域として**得られた existence（`ur15_steps_wired.py:1972` が `LIM` から一様抽選）⇒ 受入報告では **「URDF 関節範囲上の existence」**と書く。
+
+**(b) ⛔ 私の URDF provenance 主張を縮小する（§7 の記述が強すぎた）**: 私は「生成元 xacro は消滅・**本 chunk では回復不能**ゆえ記録が処置」と書いた。**A-2（p11）を受けて p4 が第一手で確認**:
+- **公式 description は on-disk に実在** — `/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/` に **同名 `urdf/ur.urdf.xacro` と `config/ur15/joint_limits.yaml` の両方**（`ls` 実測）。
+- **値の突き合わせ（p4 自測）**: 公式 `joint_limits.yaml` の `max_effort` = shoulder_pan 433.0 / shoulder_lift 433.0 / elbow 204.0、`ur15_mj.urdf` の distinct effort = **433.0 / 204.0 / 70.0** ⇒ 一致（wrist 3 本 = 70.0）。
+- ⇒ ⭐ **消えたのは `/tmp` の作業複製であって上流ではない。「監査できない」は偽** — 公式値との照合は今日できたし、実際に一致した。⛔ **縮小後も残る穴（一般化しない）**: 消えた作業複製が公式 xacro と byte 一致だったかは原理的に確かめられない ⇒ **恒久の錨は content pin**（URDF は tracked・commit から再現できる）。
+- ⇒ **micro-chunk（§7）の優先度根拠は「provenance 喪失」から降りる**が、chunk 自体は不変で残る（理由 = ①視覚レグ script の copy 先 dir が既に削除済 ②生成物と `sigma_trace` が回収対象の dir に出る）。
