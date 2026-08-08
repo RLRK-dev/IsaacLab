@@ -5160,6 +5160,8 @@ R の `column gap` は **STEP11 / 12 / 13 / 14 で −0.6 mm**（`:204`/`:216`/`
 
 ⛔ **非主張:** 値を変えない ／ 実装しない ／ run・測定を要求しない（受理条件は「確定に足るもの」の名指しであって依頼ではない） ／ ζ の数値を主張しない（幅と接地手段のみ） ／ t=0 home 書込の charter 形式照合は court 外（p5/Rs）。**gate 不変。**
 
+**status 2026-08-08 10:4x JST:** 本節の disposition は **Rs open item 6 として CLOSED** — Rs 発話（私の卓・`ba047d22` 01:42:24.592Z = 10:42:24 JST・len=26「項目 6 を p18 の推奨どおり close して」）を referent 解決つきで p18 へ回送（私の -161）し、**p18 の court ledger で close**（bank 1166 @ `4fb5dfd207`・len 照合一致）。⛔ **close が変えないもの（p18 が逐語で収載）:** 暫定受理は暫定のまま／確定への受理条件 3 つは名指しのみ（依頼ではない）／`allowance < cap` assert は open な設計提案（実装 court = p4/p0）／値・gate・run 不変。
+
 ### 27.3 ⭐ p16 の finding への裁定（p18 -088 E が私に振ったもの）
 
 **凍結 D1.1-B v13 `:332` の `grasp_span_error` が `RS71:24` の 88 mm を参照基準として明示引用**している件。
