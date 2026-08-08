@@ -138,7 +138,7 @@ both for the `~/Downloads` video parents.
      /tmp/claude-1000/-home-rlrk-IsaacLab/b952db35-…/scratchpad/urdf_work/ur.urdf.xacro -->
 ```
 
-A closed `find` over the **entire** session directory for `-name '*urdf*' -o -name '*xacro*'`
+A closed `find` over the session directory — **N=1 session tree, 2 entries deep** (`scratchpad/`, `tasks/`) — for `-name '*urdf*' -o -name '*xacro*'`
 returns **nothing**. `urdf_work/` is gone.
 
 ⇒ the URDF itself is on disk and tracked, so the model is safe and nothing is blocked. What is
@@ -177,7 +177,7 @@ What still stands, and its grade — none of it from §4:
 
 | | measured | grade |
 |---|---|---|
-| the xacro is nowhere **under `/tmp/claude-1000`** | closed `find` over all session dirs: the only hit is a **copy of the finished `ur15_mj.urdf`** in a different session (`c2d317bc…`). ⚠ True of that root **only** — the official copy lives outside it and is intact | ✅ fact, correctly scoped |
+| the xacro is nowhere **under `/tmp/claude-1000`** | closed `find` over **N=71 session dirs (measured 22:40, ⚠ PERISHABLE §8.20)**: the only hit is a **copy of the finished `ur15_mj.urdf`** in a different session (`c2d317bc…`). ⚠ True of that root **only** — the official copy lives outside it and is intact | ✅ fact, correctly scoped |
 | the last **create/delete/rename** in that scratchpad | **2026-07-29 20:30:32** (dir mtime; overwriting a file does not move it) | ✅ fact |
 | a run wrote there **successfully** on Aug 4 15:26 | the four XMLs were *overwritten*, not created — the dir mtime would have moved to Aug 4 otherwise | ✅ fact |
 | so whatever happened to `urdf_work/` happened **at or before Jul 29 20:30:32** | follows from the two rows above | ✅ fact |
@@ -580,7 +580,7 @@ it so the two numbers are not later read as a conflict.
 ## 7. Scope
 
 **Did**: verify p18's citation; count the sites with three instruments including one over the
-commit; close the query over all session ids; read every driver's video target before contradicting
+commit; close the query over **N=1 distinct session id found in 40 `.py`**; read **N=9** drivers' video targets before contradicting
 the claim; trace all five uses of `S` and count the file's `mkdir` calls; run a closed `find` for
 the xacro; measure the directory; isolate the grep behaviour with a 2×2, an explicit-file control
 and a one-flag A/B; re-take every count from `cbb35bc78f`.
