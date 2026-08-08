@@ -42605,3 +42605,92 @@ p0    その間に shell が 何をしたか  （展開と quoting）
 ```
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1224 — ✅ **Rs 裁定 2 件が執行された（p4）— C3-C5 chunk の起票 ＋ 143 commit の push。全 pin 三重照合で一致** ＋ ⭐⭐⭐ **1 通の返信の中で、2 つの項目が *別の証拠等級* を持っていた**
+
+**契機** = p4 `m-p4-115`（05:30:54 JST）。当卓 実測 05:31-05:33。⛔ **実行 0・HOLD 不変**（bracketed pgrep rc=1・GPU compute = Chrome のみ 174 MiB）。
+
+### (1) ✅ **起票 file — 5 つの pin すべて当卓で一致**
+```
+commit        9ab375026a24e1e4a41491f8d2114b43e94e4a5f   存在・author date 2026-08-09 05:30:26 +0900
+subject       「File the chunk Rs approved: port the five-clip route to the live substrate」
+numstat       53 / 0 / 1 file  ← 挿入のみ・削除 0・単一 file
+content sha   worktree = blob = p4 申告 = 864d3799…5338a9013   ← 三方一致
+依存と gate    D1-D6 = **6 行**（p4 申告「6 件」と一致）
+```
+⚠ **見出しは 6 つで、p4 が挙げたのは 5 つ** — 落ちていたのは **`## 0. 授権と、その射程（over-read しない）`**。⭐ **落ちた 1 つが、*授権の射程を画す節*** だった。⇒ ✅ **内容は message 本文に逐語で入っていた**（「可 = 起票してよい ⛔ 実装・実行・GPU 消費の承認ではない」）ゆえ **輸送では何も失われていない**。⛔ **欠けたのは見出しの一覧**であって節ではない — **方向を明記する**（過大でなく過小報告・かつ最も過小報告されてはいけない節）。
+
+### (2) ✅ **push — 宛先・回数・件数を当卓が独立に測った**
+```
+remote 定義     fork = https://github.com/RLRK-dev/IsaacLab.git    origin = isaac-sim/IsaacLab.git（上流）
+reflog          05:29:11  → 833bfb2e9e   「update by push」
+                05:30:34  → 9ab375026a   「update by push」          ⇒ **2 回**に分かれていた
+件数            fd9a9ab30d..833bfb2e9e = **142**   （= 当卓が持ち越していた数と一致）
+                833bfb2e9e..9ab375026a = **1**
+                合計 fd9a9ab30d..9ab375026a = **143**（p4 申告「142+1」と一致）
+ahead           fork/rlrk/optE-s2-substrate-swap..HEAD = **0**
+FETCH_HEAD      9ab375026a…  branch 'rlrk/optE-s2-substrate-swap' of https://github.com/RLRK-dev/IsaacLab
+                mtime 2026-08-09 05:30:34.844（**remote 由来の読み**）
+```
+✅ **宛先は `fork`。⛔ `origin`（上流 isaac-sim）ではない** — 当卓の常設規則どおり。
+⚠ **測定の instant を添える**: 上記は **05:30:34 時点で remote が報告した値**を当卓の repo が記録したもの。**それ以降 remote を照会していない**（ネットワークは sandbox 外）。⇒ 「remote は *今* 9ab375026a である」ではなく「**05:30:34 に remote はそう報告した**」が当卓の言える形。
+
+### (3) ⭐⭐⭐ **主所見 — 同じ 1 通の返信で、2 項目の証拠等級が違った**
+Rs 逐語 = **「2: 可　３：push」**。
+```
+③  「push」  ← 語そのものが 指示対象を含む。Rs が **push という語を書いた** ⇒ 自己証拠。
+②  「可」    ← 単独では **何も指さない**。指示対象は「①②③ の labelled set」からしか来ない。
+```
+✅ **当卓の閉じた query（母集団を明記）**:
+```
+母集団 A  tracked files @ HEAD                       git grep -l '3 択照会' HEAD -- .        → 1 file  rc=0
+母集団 B  working tree 全 file（untracked 含・.git 除外） grep -rl --exclude-dir=.git          → 1 file  rc=0
+positive control  同形の filter が既知の語を引けるか   'C3–C5 を現基盤へ持ってくる'          → 1 file  rc=0
+```
+⇒ ⛔ **labelled set が repo 内に在る場所は 1 つだけ — p4 自身の DEFINE file の `## 0.` 節 `:10`、しかも返信の *後* に書かれたもの。**
+⇒ ⭐ **すなわち「②の指示対象」を証明する repo 側の記録は、その②が授権した artifact の中にしか無い。**
+⛔ **「repo に無い」≠「無い」** — 照会は pane message で送られており、**pane transcript は本母集団の外**（当卓は repo しか測っていない）。⇒ **不在は主張しない。**
+✅ **p4 の開示は正しい形**:「**私の解決（解決者 = p4・labelled set ゆえ一意）**」と自分を解決者として名乗っている ⇒ **これは隠された推論ではなく、ラベルの付いた推論**。
+⇒ ⭐⭐ **当卓が足すのは 1 点だけ**: **③ は p4 抜きで検査できる／② は検査できない。**同じ 1 通・同じ権威・**別の等級**。⇒ **③（push・実行済・不可逆）が自己証拠側だったのは幸運であって設計ではない。**⭐ **今後: 番号だけの返信を受けたら、labelled set を *返信より前の時刻で* bank してから執行する**（= 当卓の「集合を検証対象の主張から採らない」の、*授権*における版）。
+
+### (4) ✅ **回付（当卓は決めない）**
+- **p6 へ**: NEST node 化（親 = `T-ROOT`・本 file を DEFINE として参照）。**条件は p4 のものをそのまま**運ぶ — ⛔ p4 は tree surface を編集しない・**node 化の可否と文言は p6 の court**。
+- **D2（#48 cable 第 2 DOF）は本 chunk でも解けず Rs の court のまま** ⇒ **本 chunk の DoD 動画も射程注記つき・無印 PASS を出さない**（既存 cap の継承・`P11_MOUNTING_C-2_IMPL_DESIGN_SPEC_20260808.md:42` と同旨）。
+- ⛔ **「可」は起票の可否のみ** — **実装・実行・GPU の授権ではない**（p4 §0 逐語）。**C-2 chain とは並行・混ぜない**（p4 §5）。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1225 — ⛔⛔⛔ **当卓が 123.6% の違反警報を出しかけた。file は 1 byte も変わっておらず、変わったのは *当卓の道具* だけ** — 同じ 2 数・同じ file で **3 度目**
+
+**契機** = §1224 の定例 state 測定（05:32:14）。⛔ **誤報は dispatch 前に捕捉**（bank も dispatch もしていない）。
+
+### (1) ⛔ 起きたこと
+```
+当卓が持ち越していた読み   22,129   （88.57% ・ gate まで 358）
+今回 反射的に打った道具     wc -c → 30,895   ⇒ 24,986 に対し **123.6% = 5,909 超過**
+mtime                      2026-08-08 21:59:15.925730711   ← **前回の読みと 完全に同一**
+```
+⇒ ⛔ **file は変わっていない。**「+8,766 の増加」は **100% 器具由来**。
+✅ **両単位を測って解決**: `wc -c` = **30,895 bytes** ／ `wc -m` = **22,129 chars** ／ 107 行。⇒ **持ち越していた 22,129 は *文字数* で、正しい。**
+
+### (2) ✅ **単位は当卓の台帳で既に決着していた — §637（p4 -235 の provenance 訂正つき）**
+`## §637 — the shared index nears its read limit, and the two sizes / are different units` 逐語:
+> 「the hook's number is **CHARACTERS** (heavy Japanese ≈ 3 bytes per char) — **two numbers, two units, no contradiction**」
+> 「The real measurement, taken at 13:53:26: **31227 bytes / 22783 chars / 101 lines**」
+⇒ ✅ **§運用31 の「24,986 chars」は *文字*。**「24.4K×1024」の導出も **hook の 24.4K が文字数**ゆえ整合 ⇒ ⛔ **規則側に欠陥は無い**（当卓が byte という読みを勝手に供給しただけ）。⭐ **L3 file に無い欠陥を作らない。**
+✅ **現況（確定）**: **22,129 chars = 88.57% ・ 90% gate（22,487）まで 358 ・ 未 trip ・ 圧縮起票せず。**（§637 時点 22,783 chars から **−654 chars・+6 行** ⇒ 減っている。）
+
+### (3) ⭐⭐⭐ **所見 — 単位を bank しても、*道具へ手を伸ばす反射* は直らない**
+本件は同じ file・同じ 2 数に対する **3 周目**:
+```
+1 周目  §637   「2 つの数・2 つの単位」を bank            （p4 -235 が provenance を付けて訂正）
+2 周目  §638   当卓の §637 初版が **測定より先に結論**を書いていた（[SIZES] placeholder ＋「consistent」）
+3 周目  今回   規則は当卓の台帳に在り、当卓が書いた。それでも **wc -c を先に打った**
+```
+⇒ ⭐⭐⭐ **p6 の「教訓は *題名* で引かれ *本文* で適用される」の、当卓自身での実証。**§637 の題は「**index が read limit に近づく**」＝ **大きさの見出し**。単位は **本文**に在る。⇒ **「限界に近いか？」では引けるが、「私の数はどの単位か？」では決して引けない。**
+⇒ ✅ **恒久の形**: **共有 index の大きさは常に `wc -m`（文字）で測り、報告に単位を書く。**⭐ **一致しない 2 数を見たら、まず mtime を見る** — file が動いていなければ、動いたのは器具。
+⚠ **危険度**: 本誤報は **§運用31 の「90% 超で *coordinated* 圧縮を起票」** を発火させ得た ⇒ **複数 pane を巻き込む行動**。⛔ **単独圧縮は禁止**ゆえ実害の手前で止まる設計だが、**起票そのものが 5 卓の注意を消費する。**
+
+**Banked — 時刻は本節 commit の author date が正。**
