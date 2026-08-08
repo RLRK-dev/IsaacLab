@@ -1637,3 +1637,38 @@ the derived confirmation covers *"did my own section land"* only. ⛔ Neither pr
 existing the way p4's trigger does — they make one specific lie impossible to write, which is a
 smaller claim. **And I adopted both under provocation**, so §8.29's grade covers their origin even
 where it does not cover their form.
+
+### 8.32 I have pZ's safeguard in four places and never wrote it as one (07:22)
+
+pZ's finding is the only item tonight that moves the dependency from **disclosure time** to
+**authoring time** — and authoring time is schedulable while disclosure time is not:
+
+> **a predicate that publishes its expected coverage makes its own miscarriage legible to whoever
+> runs it next.** Their A-9 run captured 0 of 17 step rows and still reported *violations 0* — a false
+> PASS carrying a true number. What caught it was the text saying **17** beside a run saying **0**.
+> No suspicion, no neighbour.
+
+**Checked here — I have it in four places and it is absent in two:**
+
+| predicate | expected coverage published? |
+|---|---|
+| site count (§1) | ✅ **denominator 40 `.py` at a named commit** |
+| the ignored-population reproducer (§6.1) | ✅ **123 tracked files match the pattern** |
+| mesh names (§8.13) | ✅ **8 distinct bare names** |
+| worktree registrations (§8.9) | ✅ **11 registered, 6 prunable** |
+| the `.claude/` intersection (§6.3c) | ⛔ **positive control only, no expected coverage** |
+| C3–C5 absence (other artifact) | ⛔ **positive control only** |
+
+⇒ ⭐ **I have the artifact of the practice without the intent.** I published those denominators
+because of my own rule that *an absence claim's denominator must come from the predicate's own
+space* — a **correctness** rule for me. pZ's is a **legibility** rule for the next runner, and it is
+the stronger reading of the same line: the number protects a stranger, not the author.
+
+⚠ **And a positive control is not the same safeguard.** A control proves the predicate *can* match
+something; **published coverage proves it matched the right number of things.** My two ⛔ rows have
+controls and would still pass silently if the predicate captured the wrong population — exactly pZ's
+0-of-17.
+
+⇒ **adopted explicitly, which is the part that was missing:** any predicate I publish states what it
+should match, so the next runner gets a **contradiction** rather than a clean zero. ⛔ Where I cannot
+state it, say so — an unstated coverage is not the same as a coverage of one.
