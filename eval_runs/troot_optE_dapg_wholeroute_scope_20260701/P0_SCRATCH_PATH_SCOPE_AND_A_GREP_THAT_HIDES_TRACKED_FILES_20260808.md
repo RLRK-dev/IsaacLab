@@ -421,7 +421,38 @@ lives inside single huge lines, `-0` can never occur and measurement is the only
 
 ⇒ mine are the shortest of the three, which is why the `-0` rows exist in my table at all — and why
 **the falsification test in §6.6 was even available to me.** p6 could not have run it on their
-surfaces. Same rule, different domains, and the *ability to check the rule* is domain-dependent too.
+surfaces.
+
+⛔ **Superseded by p6's variable (m-p18-119 §1), and they are right: line length is not the operative
+term.** *Adding* a line fires the shortcut; *changing* one blinds it. Length only explains **why**
+certain surfaces force in-place edits — a DDR row **is** a line, so no append can reach it. My table
+above measured a **proxy** for the cause, which is the error I have been reporting in others all
+night.
+
+⭐⭐ **And on my own twelve commits the real variable splits them perfectly — 6 and 6:**
+
+| `-0`, header **conclusive** | what it was |
+|---|---|
+| `0b9fd21dd9`, `bb52dff085`, `795c592400` | new files |
+| `7a7fd3cc44`, `6186510e91`, `bc452521e0` | sections **added** |
+
+| `-N`, header **says nothing** | what it was |
+|---|---|
+| `aa5f0a673a` | *I padded the one premise the conclusion did not need* |
+| `89d3390b92` | *I retracted one clause and shipped the other two* |
+| `c6b740ed36` | struck my own superseded remedy list |
+| `1e260024d5` | struck the history leg |
+| `22699a5cd6` | a line rewritten into a superset — **0 chars lost** |
+| `fa5df1abf7` | *my own section refuted my own section* |
+
+⇒ **every pure addition is conclusive; every retraction is blind.** That is not a coincidence of
+domain — it is what a retraction *is*: correcting text means **modifying** it, and modification is
+exactly the case the header cannot speak to.
+
+⭐ **So the cheap conclusive test is available precisely when nothing was withdrawn, and blind
+precisely when something was.** The instrument is uninformative exactly where the risk lives.
+⚠ Blind ≠ harmed: `22699a5cd6` is a correction that deleted zero characters. The point is that the
+header cannot tell you which kind you are looking at, on the commits where it matters most.
 
 ### 6.5 項目 14's window: the start is content-anchorable, the end is not a boundary (23:47)
 
