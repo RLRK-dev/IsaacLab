@@ -60,13 +60,13 @@
 - (a) **#26 と同型の表現**（「直ちに無効とはしない・継続利用可否は L-P0 判断と一括」— Rs 自身の precedent）
 - (b) 一括 TRACE/歴史 grade へ格下げ（PD 基盤で全数取り直しが §2 P4 で確定しているため、実務差は小）
 - (c) 設計知見（§4 末尾 3 点）のみ明示継承・数値は全て無効
-**Q3. 順序** — #18-last（pN 07-20）を維持するか。前提: **(d) arc 自体が Rs PLAN_STATUS review で HOLD**（row `:60` ①-⑤: records fix / status 分離 / B1・B2 owner 確定 / L-P0 REQUIRED / PASS@4⇒@10）。⇒ #18 の位置は **gate chain 再構成の中で** (d) P-D1 の後に確定するのが自然（維持 = 現行どおり）。
+**Q3. 順序** — #18-last（pN 07-20）を維持するか。前提: **(d) arc 自体が Rs PLAN_STATUS review で HOLD**（row `:60` ①-⑤: records fix / status 分離 / B1・B2 owner 確定 / L-P0 REQUIRED / PASS@4⇒@10）〔⛔ **訂正 2026-08-08 10:35（§9）: この ①-⑤ 列挙は stale だった** — 同じ row の後段で **①③④ は 07-19 中に解消**（v1.4 `e32c75c3a4` = B1 裁定＋L-P0 REQUIRED 昇格 → P-D1 prereg 凍結 → **P-D1 evidence 完了 bank `e5d2dc214a`**・video leg 13:44 納品済）。行の途中で読みを止めた読み〕。⇒ #18 の位置は **gate chain 再構成の中で** (d) P-D1 の後に確定するのが自然（維持 = 現行どおり）。
 **Q4. 新 DoD の骨格**（数値設計は再定義後に p5 が導出 — ここでは決めない）: 旧 DoD「ik_chord が FF に match」は**両 drive とも消滅**。候補骨格 = PD closed-loop で **grip 保持のまま C1 seat（g3）到達**・**C2_REGRASP を含む** coverage・視覚レグ必須（numeric 単独 PASS 禁止）。
 **Q5. lane 境界の確認** — row 18 owner = `p5/force-design`。ただし新枠組みでは **PD 駆動の性質（p11 = arm-control 設計 owner）**に測定が依存。提案分担: **測定系・DoD 設計 = p5 ／ PD 駆動側前提の供給 = p11 ／ 実測・実装 = lead lane**（Rs 確定要）。
 
 ## §6 連鎖の全体像（1 行）
 
-**Rs 本再裁定（Q1-Q5）→ gate chain 再構成 → (d) P-D1 probe（HOLD 解除条件 ①-⑤）→ PD 基盤 evidence 取り直し → #18 re-debate → impl（Rs sign-off）→ (d-b) → training-ready。**
+**Rs 本再裁定（Q1-Q5）→ gate chain 再構成 → (d) P-D1 probe（HOLD 解除条件 ①-⑤）→ PD 基盤 evidence 取り直し → #18 re-debate → impl（Rs sign-off）→ (d-b) → training-ready。**〔⛔ **訂正 2026-08-08 10:35（§9）**: 「P-D1 probe（HOLD 解除条件 ①-⑤）」は stale — **P-D1 は 07-19 に走行済・evidence banked `e5d2dc214a`**。残る鎖 = **gate chain 再構成 ＋ UR15 基盤での再取得**。〕
 
 ## §7 sources（全て実読・as-read 2026-08-08 09:5x-10:00）
 
@@ -98,3 +98,11 @@
 - 旧 evidence の最終 disposition は **L-P0 判断（Rs）と一括**のまま（Q2 (a) の中身そのもの）。
 
 **反映経路**: 本 §8 bank（p18）→ p18 が p6 へ回付 → p6 が row 18 へ着地（succession 再定義 note・「待ち = Rs 再裁定」の discharge・close 条件更新は p6/Rs 側）。07-Design は p5 read-only ゆえ直接編集しない。
+
+## §9 B1/B2 確定状況（Rs 照会 2026-08-08 10:30 への回答・as-read 10:31-10:35）
+
+**結論: B1/B2（imported actuator disposition）は 2026-07-19 に裁定済み・同日 実証済み。**
+- **裁定** = design **v1.4** `e32c75c3a4`（版表 `:14`・row `:60`）: **B1（strip-at-import）= PRIMARY**（Rs 推奨に concur）／ **B2（inert 零化 nu=28）= strip 不可時の fallback のみ**（動的 force≡0 試験 REQUIRED）。⚠当時の probe 実装は B2 形 → B1 再実装要、と同 note に記録。
+- **実証** = P-D1 prereg v1.2 凍結（`32617b119a`・**Rs canonical R0-R4 matrix**・R1 = **B1-clean** 走行）→ **evidence 完了 bank `e5d2dc214a`**・video leg 13:44 Rs 納品。結果 = **R1（clean）全滅** ⇒ choreography-blocked・re-sequencing = Rs surface（= L-P0 evidence・DDR #26 の「L-P0 測定済」と同一物）。
+- **残り（bounded）**: (a) review v4 の「B2 STOP-gate 化」の最終 fold — 現 doc（v2.30 `031ca0dc95`・⚠worktree dirty as-read）に文字列 `STOP-gate` は **0 hit**（⛔この query での不在まで・改名の可能性は排除できない — 確定は版表 40+ 行の実読要）。(b) ⭐ **UR15 premise 変更（#38・07-27）後の適用** — nu=16/28 は `ur5e.xml` の数。**UR15 cell における余剰 actuator の有無・strip 対象は別 model の再測定**（推測・ラベル付き — B1 の*原則*は生きる）。
+- ⛔ **本 doc 自身の訂正 2 件を claim 位置に埋込**（§5 Q3・§6）: 「(d) HOLD ①-⑤」「P-D1 probe HOLD」は**行の途中で読みを止めた stale read**だった — ①③④ は 07-19 中に解消・P-D1 は走行済。⇒ **p5 の DoD 設計の前提は「B1/B2 の choice 待ち」ではなく「commission ＋ UR15 基盤での B1 適用確認」に更新**。
