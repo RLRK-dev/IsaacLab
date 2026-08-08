@@ -42071,6 +42071,20 @@ task_config の出現 = 6 件・すべて comment（:93 :94 :101 :577 :880 :2953
 **Banked — 時刻は本節 commit の author date が正。**
 
 ## §1214 — ⛔⛔⛔ **統治する 2 面が正面から食い違っている: 台帳は「WITNESS FOUND」、地図は「まだ誰も作っていない」** ＋ ⛔ **当卓が運んだ「5-clip witness 不在」は半分偽** ＋ ⭐⭐⭐ **p6 の (c) = 器具は成功し、*読み* が失敗した**
+> ⛔⛔⛔ **【23:33 追記 — 裁定 A: 本文は 1 字も書き換えない】本節の見出し「正面から食い違っている」は *偽*。両面とも真で、述語の幅が違うだけ。**
+> p4 が **現物**（`/home/rlrk/Claudecode/shared/GEOM_WITNESS_5CLIP_p5_20260714.py`）を読み、当卓が独立に追認:
+> ```
+> 閉じた query（rc は grep 自身）  fk 0/rc1 ・ FK 0/rc1 ・ forward_kin 0/rc1 ・ eval_fk 0/rc1 ・ mj_forward 0/rc1 ・ IK 0/rc1
+> 陽性対照                        reach 2 hits / rc=0（述語は本 file に届く）
+> file 自身の宣言 :20-:24 逐語   「SCOPE (stated up front so the result cannot be over-read):
+>                                  A PASS here establishes L-geom only … It does NOT establish
+>                                  L-phys … nor L-exec」
+> ```
+> ⇒ ✅ **地図 `:174` の「*FK で検算した* witness は まだ誰も作っていない」は、書かれたとおりに真**（述語が **FK 込み**で狭い）。✅ **`LEDGER:78` の「WITNESS FOUND（L-geom のみ）」も真。**⇒ **矛盾ではない。**
+> - ⛔⛔ **したがって「地図が 4 日新しいのに無いと言う ⇒ stale」は当卓の誤読。⛔ 地図を直してはならない**（直せば真の文が消える）。⚠ **当卓はこの枠づけを 6 卓へ 2 度送った** — ⭐⭐ **「矛盾」と名指すこと自体が *修理を提案する行為* だった。**⇒ ✅ **規則: 不整合の報告は行為を形づくる主張である。述語の幅の違いを「矛盾」と呼ばない。**
+> - ⚠ **当卓と p4 で 1 token だけ食い違う**（原因は述べない）: p4 は `kinemat` を 0/rc=1、当卓は **1 hit / rc=0** — 実体は `:4` の docstring「Does a **kinematically** valid cable configuration EXIST…」＝ **問いの中の語であって呼び出しではない**（= §1203 の hit の役割）。⇒ **p4 の結論は不変。**
+> - ⚠ **錨文は「逐語同一」ではない**（p4 の語）: LEDGER =「4 つとも崩壊。」／地図 =「4 つとも崩壊**した**。」— **1 語違い・実質同一。**
+> - ⚠ **artifact は repo 外・untracked** ⇒ **恒久性は commit で守られていない**（p4 が条件 ① に明記）。
 
 **契機** = p6 `m-p6-58`（23:26:43）。当卓 実測 23:26-23:29。
 
