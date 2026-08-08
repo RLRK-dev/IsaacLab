@@ -650,3 +650,17 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 - **改定**: 再現する側の run 記録は **「同一機械・同一 env pin・同一 command」** と射程を書く。⛔ **env pin は package 版を固定するが、絶対 path が解決することは固定しない**。⇒ 別機械での再現は **主張しない**。
 
 ⭐ **本節の書き方も機構の適用**: 直前に backtick 展開で値が消えたので、本節は **printf の引数**で書いた（可変値は shell に渡し、本文に展開文脈を持たせない）。
+
+## 2026-08-09 06:11 JST — 2 件の裁定（共有 tree で走らせない / 5′ の再現可能枝は「このマシン」まで）
+
+**A. 裁定 — ⛔ 修理後の render を共有 checkout で走らせない（pZ 発見・p18 §1234 (2)・open 06:08）**
+- **実測（HEAD）**: PNG は **tracked**／`render_cell_overview.py:22` `HERE = Path(__file__).resolve().parent`・`:80` `out = HERE / "UR15_CELL_OVERVIEW_20260729.png"` ⇒ **script の既定出力先は、自分が置かれた checkout の中の tracked file**。⇒ **共有 tree で走らせると tracked content が汚れる** — **私の working method が存在する理由そのもの**。
+- ⭐ **pZ の指摘の要点（採用）**: 修理**前**は親 dir 不在で `:53` に**到達できなかった** ⇒ **修理はこの行を初めて到達可能にした**。⛔ **diff には現れない**（p0 の diff はこの行に触れていない）— **正しい修正の帰結**であって欠陥ではない。
+- **裁定 = 手続きで塞ぐ（code は触らない）**: **render の実行は必ず worktree（使い捨ての checkout）で行い、⛔ 共有 tree では走らせない**。⇒ 受入項に追加（pZ の 2 回の run は両方 worktree だったので**今夜は当たっていない**）。
+- ⛔ **出力先の付け替えはしない** — それは **出力形式の変更**で、私が §7 で禁じ、filename の件で自分にも適用した規則。⇒ **file 名と出力先の整理は同じ後続 cleanup chunk**へ（owner p4/p0・C-2 4 編集の着地後）。
+
+**B. 裁定 — 5′ の「再現可能」枝は *このマシン* までしか届かない（p0 発見・open 06:08）**
+- **実測（版を添える）**: **実装 blob `422ab807cd` の `render_cell_overview.py:46`** に `MESH_SRC = Path("/home/rlrk/IsaacLab/…/robotiq_2f85/assets")` = **絶対・machine 固有**。⚠ **HEAD 版には 0 件** — ⭐ **この絶対 path は p0 の実装が追加した**（mesh 解決のため）。`ur15_steps_wired.py` にも絶対 path 2 件。
+- ⇒ **pZ の「path-independent」は *この filesystem 内で* 独立という意味**であって **machine 独立ではない**。⛔ **env pin は package 版を固定するが、絶対 path が解決することは保証しない**。
+- **5′ 再現可能枝の scope 句（必須）**: run 記録に「**このマシン（絶対 path が解決する環境）で、同一 command・同一 env pin のとき再現**」と書く。⛔ 「再現可能」と無条件に書かない。
+- ⭐ **p0 の見つけ方を規律として採る**: 「**何があれば path 依存になったか**」を問うた（「自分の何がこれを説明するか」ではなく）。前者は主張を溶かし、後者は主張を出荷する。
