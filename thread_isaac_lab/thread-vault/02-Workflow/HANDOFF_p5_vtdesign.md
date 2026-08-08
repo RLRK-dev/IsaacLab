@@ -742,10 +742,21 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 **(1) 句が偽である根拠（全て実測）**:
 - **p5 の改訂 leg は完了済み**: v2.2 = CONSOLIDATED §11 re-debate-ready・**design-side READY・dispatched 2026-07-19 02:35** — 本 handoff `:132` @ `3cd13da681`。artifact = `IKCHORD_GRIPSLIP_FORCEDESIGN_VTDESIGN_20260718.md`（⚠ **untracked・0-commit** ⇒ mtime 07-19 02:35 は worktree 観測・commit pin は存在しない）。
 - **旧 flow 自体が失効**（row 18 末尾 自身が記録）: 「#18 impl を現 kinematic 基盤で land」= superseded 確定・**#18 枠組み = kinematic 全廃 rework 下で再定義**・R-SEQ §7 WITHDRAWN。⇒ 新枠組みでの p5 再設計は**依頼が存在しない**（本 handoff `:96`-`:98`）。⇒ **旧義でも新義でも「p5 … active」は偽**。
-- **現在の実際の待ち**: (d) row `:60` 次段列「Rs 裁定（clip pin 含否）→ p5 全面削除 charter → gate chain 再構成（**#18 前提も Rs 再裁定**・demo 再記録 計画含む）」・順序 = **#18-last**（pN 裁定 2026-07-20 10:13）。
+- **現在の実際の待ち**: ~~(d) row `:60` 次段列~~ ⛔⛔ **pin 訂正（§31・p18 発・当卓 再現済）: 引用「Rs 裁定（clip pin 含否）→ p5 全面削除 charter → gate chain 再構成（#18 前提も Rs 再裁定・demo 再記録 計画含む）」の実際の所在 = `:129`（row 25・同じく「(d) arm-control remediation」名）。`:60` に在るのは **#18-last**（pN 裁定 2026-07-20 10:13）のみ — 2 行の事実を 1 行番号に併合していた。**
 - 直近の register 隣接言及 = 08-06 `66fda97bb9`「#18 alone remains, under its execution hold」（hold 継続のみ・待ち先の訂正なし）。
 
 **(2) p6 への提案 note 文**（placement は p6 規約に委ねる — 「今 誤って運んでいる行」ゆえ head-marker 相当と見る）:
 > ⚠2026-08-08 状態句 訂正（p5 発・p18 経由）: status の「p5 design revision active」は現状でない — p5 改訂 v2.2 は 2026-07-19 02:35 dispatch 済（p5 handoff`:132` @ `3cd13da681`・artifact は 0-commit ゆえ mtime 観測）。かつ本行末尾の supersession（#18 枠組み = kinematic 全廃 rework 下で再定義）により旧 flow の続行自体が無効 ⇒ **現在の待ち = Rs による #18 前提 再裁定**（(d) row 次段列・#18-last = pN 2026-07-20 10:13）＋ gate chain 再構成。p5 への依頼中項目なし。status・close 条件 不変。
 
 **(3) 経路**: 本節 bank（p18 操作）→ p18 が p6 へ回付 → p6 が commit から直読して着地 → disposition は p18 が閉じる。**Rs 指示 = 本日 option C 採択**（当卓の提案 3 択から）。
+
+## 31. 追記 2026-08-08 09:54 JST — `m-p18-60` 受領: **§30 の pin は 2 行の事実の併合だった**（訂正を claim 位置に埋込）＋ 等級 2 件
+
+**(1) ✅ p18 の機械測定を自分で再現**（number と content を**同じ 1 query** で取得）: `:60` = id「(d) arm-control remediation — task (d)」・**#18-last HIT@16908**・「#18 前提も Rs 再裁定」「gate chain 再構成」**ABSENT** ／ `:129` = **id = 25**（同じく (d) 名）・両文字列 **HIT@9094/@9067**・#18-last ABSENT。⇒ **「待ち = Rs」は `:129`（row 25）・「#18-last」は `:60`** — §30 は両方を `:60` に載せていた。訂正は §30(1) 当該 bullet に埋込済。
+
+**(2) ⛔ 機構（自分の誤りの出所）**: 私の awk は pattern `/arm-control remediation — task \(d\)/` で **両行に match** し、53.8KB の persisted 出力の **tail**（= `:129` の owner 列）を読んだ。行番号は **別 query**（`grep | head -2`）の `:60` から取った。⇒ **content と number を別々の query から取って縫い合わせた**。同名 2 行は行番号でしか区別できないのに、その行番号だけ別水路から来ていた。⇒ ⭐ **実務形: 引用文を pin するときは、その行番号の行を printf して引用文が *その行に* 在るのを見てから書く**（§21 の identity-token 教訓の pin 版）。⭐ p18 の本日の finding どおり: **3 pin とも drift でなく「書いた瞬間から誤り」** — pin は landing 時でなく**書く瞬間に開く**。
+
+**(3) ⛔ 等級 2 件（受領・自分でも実測）**:
+- **(a)** Rs の option C 選択時刻 = **09:39:27 JST**（自 session 実測: `00:39:27.738Z`・len=1「ｃ」全角）。私は p18 宛 message に「at 09:36」と書いた — **09:36 は私自身の報告の footer**。⇒ **自分の公表時刻を相手の決定時刻の slot に入れた**（07-26 教訓「作業時刻を相手の発行時刻欄に入れない」の再演）。
+- **(b)** 1 文字回答「ｃ」を自分の A/B/C 提示に対して解決したことを **flag しなかった**（p4 は同朝「4」で flag した・同型）。解決自体は健全（labelled 3-option set で一意）だが、**resolution は inference として名乗る**。
+**(4) 状態**: §30 の substance は p6 へ回付済（**p18 が訂正を添付して routing** — fail-closed にせず通した）。751 bank = `178d9993b9`（§30 = `:738`）。
