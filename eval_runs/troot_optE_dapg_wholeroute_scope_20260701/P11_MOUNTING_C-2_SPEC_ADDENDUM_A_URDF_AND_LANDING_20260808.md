@@ -158,6 +158,17 @@ A-7b は罠の本体を「**軸の転置**」と名付けたが、**その名前
 ⚠ **A-8 の substance は不変** — confinement は成立する（違反 0）。壊れていたのは**それを landing 後に示すはずだった計器**であり、pZ が**載る前に**走らせて見つけた。
 ⚠ **私自身が本節を書く途中で同型を踏んだ（記録）**: import block を `^from ur15_cell_spec import \($` で探して**全語 NO** という一貫した偽を出した（実物は行末に `# noqa` があり `$` が当たらない）。**IndexError が偶発的な対照になって気づいた** ⇒ 上の最終形は **anchor 不在で assert・imported-YES 数 > 0 を対照として印字**する。
 
+### A-9b. 追記 23:5x — A-9 の数値の隣に **pattern と数え方** を置く（pZ 提案・p18 m-p18-117 §4 で採用された規則を自分の計器へ適用）
+
+⚠ A-9 は**数だけ**を書いていた。**数は記録ではない** — pattern と数え方が無いと、landing 後の再実行が**定義の違いで「不一致」に見え、無い regression を読ませる**。以下を計器の一部として固定する（本 session 実測）:
+
+- **pattern = `\b<TERM>\b`**（Python `re`・case-sensitive）／**数え方 = 語を含む「行」の数**（occurrence 数ではない）。
+- ⭐ **この 2 つの選択は数を動かす（実測）**: `TILT` は **行 `\b..\b` = 4 / 行 substring = 8**（他卓の 7・8 との差はここ — 対象の不一致ではなく**定義の違い**）／`YOKE_SPREAD` は **行 5 / occurrence 6**（1 行に 2 回）。`CROWN_R` は 3 方式とも 7。
+- ⭐ **`_` は単語構成文字**なので **`\bTILT\b` は `SEGFAULT_AT_SPREAD0340_TILT30` に当たらない**（実測 False）。⇒ 本計器が採るのは**厳密形**であり、**comment 内の file 名を数えない**のは仕様（役割の違う hit を混ぜない）。
+- **内容 anchor の停止点も実測**: 「`STEP table`」行 = `:2639`・捕捉した step row **17 本の span = `:2703`-`:2721`**。⇒ **旧窓 2760 は表の終端より 39 行先まで走っていた**（0 は superset 上の 0 だったので confinement は弱まらないが、停止点が恣意だった）。**新形は表の終端で止まる**（行番号ではなく空行で終端を判定）。
+
+⇒ **pZ 項目 14（改・最終形）に含める記録項目** = ①anchor が見つかったこと（`STEP table` 行番号）②row span の始点・終点 ③各語の行数 ④pattern と数え方の明記 ⑤未 import 語の別記 ⑥違反数（0 期待）。
+
 ## A-5. 出所の等級
 
 - 全て第一手（本 session 実測）: `ur15_cell_spec.py:99-100`・`ur15_steps_wired.py:1130/:1136-1138/:1972/:2002/:2025/:315/:2418/:2456`・`ur15_mj.urdf:3` と `<limit>` 6 行・`git ls-files`/`rev-parse`/`sha256sum`・公式 `config/ur15/joint_limits.yaml`・`urdf/ur.urdf.xacro` の存在・`urdf_work` の不在。
