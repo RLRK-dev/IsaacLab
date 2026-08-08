@@ -19,6 +19,7 @@ children_nodes:
   - T-L1X-Substrate-Realism
   - T-Meta
   - T-Predicate-Redefinition
+  - T-ROOT-C3C5-Port-To-Current-Substrate-20260809
   - T-ROOT-COORD
   - T-ROOT-DesignDoc-Renewal-20260711
   - T-ROOT-Kinematic-Pin-Complete-Removal-20260719

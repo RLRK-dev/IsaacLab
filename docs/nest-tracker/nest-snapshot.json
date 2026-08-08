@@ -951,6 +951,7 @@
         "T-L1X-Substrate-Realism",
         "T-Meta",
         "T-Predicate-Redefinition",
+        "T-ROOT-C3C5-Port-To-Current-Substrate-20260809",
         "T-ROOT-COORD",
         "T-ROOT-DesignDoc-Renewal-20260711",
         "T-ROOT-Kinematic-Pin-Complete-Removal-20260719",
@@ -970,6 +971,16 @@
         "T-Vision",
         "T-WM"
       ],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-C3C5-Port-To-Current-Substrate-20260809",
+      "goal": "現基盤（UR15 mujoco cell）で、canonical 工程表 19-43 段（C3/C4/C5 への配索 ＋ ホーム復帰）が実行できる状態にする。〔p4 DEFINE 見出し『## 1. 目的（何を達成したら閉じるか）』逐語 @ `9ab375026a`〕",
+      "means": "⚠ **閉じ条件は未確定**（p4 DEFINE 逐語「確定は設計 phase」）。以下は *候補* であって acceptance ではない:\n  ① cell に C3/C4/C5 が存在する\n  ② driver が canonical 19-43 を実行する\n  ③ 43 段通しの動画（裁定 A の DoD）が出る\n  ④ Rs human-GT\n⛔ 成功率・精度は本 chunk の閉じ条件ではない（T-ROOT の現 bar =「rough/imperfect でも SIM で基本動作」`T-ROOT/state.md:4`）。\n⛔ DoD 動画は #48（cable 第 2 DOF）が open の間 **射程注記つき** — 無印 PASS 不可（p4 DEFINE 見出し『## 3. 依存と gate』D2）。\n",
+      "status": "IN_PROGRESS",
+      "dependencies": [],
+      "parent": "T-ROOT",
+      "children": [],
       "session_history": []
     },
     {
