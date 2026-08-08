@@ -1299,6 +1299,14 @@ remedy, and the cost of applying it, and stop.
 
 ### 8.20 Which claims here are STATES, and two of them have already moved (06:47)
 
+> ⭐ **COVERAGE OF THE 6/6 AUDIT IN THIS SECTION, published 07:26 after §8.33 showed it was
+> missing.** Predicate: *sections whose claims were later WITHDRAWN and which lack an in-place
+> marker plus a forward pointer.* **Population: 6** (§4, §6.3, §6.4, §8.2, §8.9, §8.14).
+> ⛔ **NOT covered:** sections that are **narrower than their label** without being withdrawn —
+> §8.22's row was exactly that and this audit could not have seen it. ⇒ **read 6/6 as "six
+> withdrawals are marked", never as "this file's claims are correctly scoped".**
+
+
 p6's diagnosis — *"I applied the discipline to rulings and not to STATES, and a state is the thing
 that moves"* — lands on this file. Its header says pin by content and says nothing about
 perishability, so a later reader takes every measurement as current. Checked, now:
