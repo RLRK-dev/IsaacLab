@@ -70,6 +70,47 @@ the command itself. ⚠ **The tell was luck of arithmetic**: had the true answer
 ⇒ **`rc` has to be captured from the command, not from the pipeline.** This is my fourth instrument
 hole tonight and the second one that a rule reached before the error did.
 
+## 3.1 ⭐ The two frames share their numerals with the axes swapped (added 23:26, from m-p18-108 §1)
+
+The coordinate warning relayed in m-p18-108 §1 is a precondition for what I am to implement, so I
+opened both files instead of carrying the quoted lines.
+
+**First, the form is not what was relayed.** There is **no `C1 = …` in `task_config.py`.** Read at
+HEAD, `:211-217` is a **list**, and `C1`–`C5` appear only as **comments on its elements**:
+
+```
+:203 CLIP_X_ODD  = 0.35   # X for C1, C3, C5
+:204 CLIP_X_EVEN = 0.40   # X for C2, C4 (千鳥 +50mm)
+:211 CLIP_POSITIONS = [
+:212   (CLIP_X_ODD,  CLIP_Y_CENTER + 2 * CLIP_Y_SPACING),   # C1: (0.35, +0.150)
+:216   (CLIP_X_ODD,  CLIP_Y_CENTER - 2 * CLIP_Y_SPACING),   # C5: (0.35, -0.150)
+```
+
+`git grep -nE '^C[1-5] = ' -- '*task_config.py'` → **rc=1, no match** — correctly, because those
+names are not bound identifiers there. The **values** relayed are right; the **form** was a comment
+rendered as an assignment. Substance unaffected; recorded because a later reader will search for
+the assignment and not find it.
+
+**Second, and this is the load-bearing part** — the hazard is worse than "same label, different
+point":
+
+| | `task_config.py` | `ur15_cell_spec.py` |
+|---|---|---|
+| C1 | x **0.35**, y **+0.150** | `:485` x **0.150**, y `CLIP_Y_ODD` |
+| C2 | x **0.40**, y +0.075 | `:486` x **0.040**, y `CLIP_Y_EVEN` |
+| the row bases | `:203/:204` **0.35 / 0.40** are the **X** values | `:483` `CLIP_Y_ODD, CLIP_Y_EVEN = 0.35 + WORK_ROW_DY, 0.40 + WORK_ROW_DY` — the same numerals as the **Y** bases |
+
+⇒ **the same numerals appear on both sides with the axes exchanged.** That is the one form a
+cross-substrate copy can take that survives a value check: a transposition looks like agreement to
+anything comparing sets of numbers rather than (axis, value) pairs. ⭐ **Compare (axis, value)
+pairs, never value sets**, whenever these two files meet.
+
+**Third, the reassuring half, measured rather than assumed:** the cell's clip coordinates do **not**
+derive from `task_config`. `:483` computes both row bases locally, and the only `CLIP` name imported
+across is `:61 CLIP_BASE_HEIGHT = _tc.CLIP_BASE_HEIGHT` — a height, not a position. Positive
+control: **17** `_tc.` references exist in the file, so the predicate finds imports when there are
+any. ⇒ no silent inheritance of the other substrate's clip frame.
+
 ## 4. Scope
 
 **Did**: read the spec module's clip assignments; run the clip-use predicate over all tracked `.py`
