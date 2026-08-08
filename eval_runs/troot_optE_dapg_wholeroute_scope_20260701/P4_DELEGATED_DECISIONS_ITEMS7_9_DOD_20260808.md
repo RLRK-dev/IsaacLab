@@ -51,3 +51,20 @@ item 9 は両卓未測定 ⇒ 委任でも裁けない（§0④）。**決定 = 
 ## 6. 出所の等級
 
 - 委任 = Rs 直接（本 session）／item 8 裁定 = p18 first-hand 検証の relay（record class 全数法・私は p6 session を読んでいない）／menu = p5 作・p18 bank（1015db61… @ 9b5aada66d 系）／grid・crown 系数値 = p4 first-hand／DoD cycle 結果 = p18 の durable log 実読の relay。
+
+## 7. item 9 裁定（2026-08-08 13:2x 追記・委任残効下）
+
+対象 = `P6_ITEM9_ROOT_RECONCILIATION_20260808.md` @ `56ee36ecb1`（p4 全読・(i)(ii) は p18 が独立再導出済 m-p18-87）。⛔ **裁くのは判断のみ。CLAUDE.md:131 と NEST 仕様（`operational-rule-LTM-1.md`・L3）への書込は委任外**（prohibited.md「CLAUDE.md の変更は rs 指示時のみ」・item-5 04-Specs gate と同形）— p18 boundary に**同意**・不一致なし。
+
+**裁定 (i) — 「root」の指す node**: **tree（manifest・255 chain 全終点・cycle 0/dangling 0・2 卓再導出）が構造の正** ⇒ 実 root = `T-PRODUCTION-LINE`（生産ライン工程①〜⑧）・`T-ROOT` はその唯一の子 = **THREAD subtree の root**。`CLAUDE.md:131`/NEST 仕様の「Root node: T-ROOT」は **tree-root 宣言としては stale**（THREAD-scope root としての T-ROOT の役割は不変）。帰結: cascade/集計は実 tree で読む（1 段上が在る）。⚠ T-PRODUCTION-LINE の創設 provenance は本裁定で再監査していない（構造の 2 卓実測のみ・Rs が下記文言を見る時点で名指しが目に入る）。
+
+**裁定 (ii) — goal 文言の正**: **SOMA `:16`/`:37` の「100% へ定性的に再定義（Rs 2026-06-23）」が現行** — 根拠 = SOMA は目標定義 SSOT（CLAUDE.md Key Files が明文）・manifest §1 が独立に同旨・5 面 sweep に後戻り証拠 0。**95-final を運ぶ 2 面（T-ROOT state・CLAUDE.md:131）は stale 写し**。⚠ 限界を継承: 06-23 の log 原 entry は未特定（p6 の閉じていない grep 1 回）— custody = SOMA の記載であり、後の Rs 逐語が 95 へ戻していれば本裁定は flip する（5 面に証拠なし）。⚠ **node 名の文字列「…95%…」は識別子** — 改名は別の行為（本裁定は goal 欄のみ・名は触らない）。
+
+**裁定 (iii) — 255 vs 252（生成器が IN_PROGRESS 子 4 個を除外）**: 事実は確定（C3 PASS ゆえ「§2 が古い」でなく「生成器がそう出す」）。**truth-ruling は不要・手続で閉じる**: 生成器 owner に filter の意図を照会（p18 経由）。回答まで **manifest §2 に「−4 の既知除外」註記を p6 が付す**（p6 面・機械執行可）。
+
+**propagate の許可（裁定の実行・書込可能面のみ）**: p6 は (i)(ii) を **T-ROOT `state.md` goal 欄・manifest §1・地図**へ機械執行してよい（SOMA は既に正・CLAUDE.md/NEST 仕様は Rs 待ち）。
+
+**Rs に要る一言（landing 用・文言は提案 = 私の draft であって Rs の言葉ではない）**: `CLAUDE.md:131` を例えば —
+> **Root node (tree):** T-PRODUCTION-LINE（生産ライン工程①〜⑧）/ **THREAD subtree root:** T-ROOT「5-clip cable routing を vision-based で成功させる — 目標は 100% へ定性的に再定義済（Rs 2026-06-23・SSOT = SOMA:16）」
+
+へ差し替え（NEST 仕様の同旨行も同時）。**「直して」の一言で p6 が両 L3 面を着地**（or Rs 自身の編集）。
