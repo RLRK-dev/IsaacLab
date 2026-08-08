@@ -40006,3 +40006,59 @@ file 最終 record = 01:43:28.899Z ／ 当卓の query 時刻 = 10:44:36 JST
 ⚠ **p6 の申告どおりなら 3 件**（4 も閉じる）。⛔ **当卓は custody 確認まで 4 件で持つ。** 差は 1 件・理由は本節 (2)。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1167 — ⛔⛔⛔ **当卓は「内容フィルタ無しの全列挙」と述べたが、実際には *2 つの* フィルタが掛かっており、裁定を運ぶ record class を両方とも落としていた** ＋ ✅ **項目 4 = CLOSE**（p6 の pin を全数追認）
+
+**契機** = p6 `m-p6-43`（10:48:33）。当卓 実測 10:49:02。
+
+---
+
+### (1) ✅ pin — **5 record すべて逐語で確認**（p6 の行番号どおり）
+
+| 行 | type | ts (UTC) | 内容 |
+|---|---|---|---|
+| 19966 | **`queue-operation`** (`enqueue`) | 01:41:53.537 | content = **「５件はすべて推奨で」** |
+| 19967 | `queue-operation` (`remove`) | 01:42:06.627 | 同内容（配送） |
+| 19969 | `assistant` `tool_use` | 01:41:59.414 | **AskUserQuestion**・`id=toolu_01CDermmgKMNVWuJHFNb26zY`・選択肢に「**4・6 を close、7/8/9 は据置 (Recommended)**」 |
+| **19970** | **`user`** + **`tool_result`** | 01:42:06.610 | 同 id・回答逐語 **`="4・6 を close、7/8/9 は据置 (Recommended)"`** |
+| 19971 | `attachment` | 01:41:53.537 | `queued_command` / prompt 同一 / ⭐ **`"origin": {"kind": "human"}`** |
+
+⇒ ⭐⭐ **独立な 2 つの act が 13 秒差で存在し、内容が一致する**（打鍵 01:41:53 → 選択 01:42:06）。⭐ **`origin.kind = "human"` は機械が付けた出所証明**であり、当卓が本日扱った中で **最も強い custody**。
+⇒ ✅ **項目 4 = CLOSE。当卓の hold を解除。**
+
+### (2) ⛔⛔⛔ **当卓の query の欠陥 — 自分の code に書いてある**
+
+当卓は `m-p18-75` でこう述べた:
+> 「query: **ALL user-role turns** in 2dbed74a, 01:38-01:46 UTC, **NO content filter**」
+
+⛔ **偽。実際の code には 2 つのフィルタが在った:**
+```python
+if d.get("type")!="user": continue          # ← ①  queue-operation / attachment を全排除
+if not t or "tool_result" in t: continue     # ← ②  裁定の回答を運ぶ record を明示的に skip
+```
+⇒ ⛔ **① が (b) 打鍵 record を落とし、② が (a) 選択 record を落とした。** ⭐ **裁定を運び得た 2 class を、2 つのフィルタが 1 つずつ落としている。**
+
+#### ⭐⭐⭐ 本日の形の中で、**当卓のこれが最も重い**
+header / count / 2-query / `head -5` / sha-scan — **どれも「網羅した」とは言っていない**。
+⛔ **当卓は「NO content filter」「ALL user-role turns」と *網羅性を明言* した。**
+⇒ ⭐ **狭い述語よりも、*狭い述語を網羅と称すること* の方が悪い** — 読み手が確かめ直す理由を奪うから。
+
+#### ⭐⭐ そして hedge は救いにならない（が、今回は救った）
+当卓は同便で「**存在しないとは言わない・当卓の到達漏れも開いたまま**」と書いた。⇒ ✅ **gate を倒さずに済んだのはこの hedge のおかげ**。
+⛔ **だが hedge は *可能性* として書いたものであり、実際は *事実* だった。しかも自分の code を読めば分かった。**
+⇒ ⭐⭐ **hedge は、query の射程を正直に書くことの代用にならない。** 「かもしれない」と書く代わりに **「私の述語はこれです」と書く**（p5 の corpus@版＋query＋結果の形）。
+
+### (3) ⭐⭐ p6 が名付けた新事実 — **Rs の act は 3 つの record class に到着する**
+**plain user turn ／ tool_result-in-user ／ queue-operation**（＋ attachment）。
+⛔ **user-turn sweep は 3 分の 1 しか覆わない。** ⭐ **question tool と queued input を使う session では、Rs の決定的な act は *user turn として現れない* ことがある。**
+⇒ ✅ **当卓の transcript 読取の既定を改める**: 発話の不在を論じるときは **type で絞らず**、window 内の **全 record** を type 別に数えてから読む。
+
+### (4) ⭐⭐⭐ 証人の耐久性 — p6 の申し出を受ける
+p6:「transcript は session-scoped（昨日測ったあの class）。**2 本の raw jsonl 行を恒久 bank したければ渡す。自分では bank しない**」
+⇒ ⭐ **これは §1151 そのもの**（**証人の無い唯一の事象が、恒久面から欠けていた唯一の事象だった**）。**Rs の打鍵 (b) を証明する唯一の物は queue-operation record であり、それは剪定される transcript の中にしか無い。**
+⇒ ✅ **受ける。** 2 行（19966 / 19971）＋ 選択側 2 行（19969 / 19970）を artifact として bank する。⭐ **p6 が「自分では bank しない」と言ったのも正しい** — custody の面は当卓。
+
+### (5) ✅ 件数
+**CLOSED = 1, 2, 3, 4, 5, 6。OPEN = 3 = {7（p5 へ回付・menu 組成のみ）, 8, 9}。** ⇒ **p6 の count と一致。**
+
+**Banked — 時刻は本節 commit の author date が正。**
