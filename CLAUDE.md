@@ -128,7 +128,7 @@ global「直交ゲート」セクションを参照。本 project では:
 THREAD project の全 task は logic tree 上の node として管理し、各 node を CC session に 1:1 binding する。本 architecture を NEST と呼ぶ (2026-04-27 命名、Rs 採択)。
 
 **仕様書 (SSOT):** `thread-vault/00-Project-Management/operational-rule-LTM-1.md` (LTM-1 v1.1)
-**Root node:** T-ROOT「5-clip cable routing を vision-based で 95% 成功率達成」
+**Root node (tree):** T-PRODUCTION-LINE（生産ライン工程①〜⑧）/ **THREAD subtree root:** T-ROOT「5-clip cable routing を vision-based で成功させる — 目標は 100% へ定性的に再定義済（Rs 2026-06-23・SSOT = SOMA:16）」〔宣言修正 = Rs 逐語「直して」2026-08-08・裁定 custody = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_DELEGATED_DECISIONS_ITEMS7_9_DOD_20260808.md` §7〕
 **運用開始:** 2026-04-27、新 task は完全準拠、既存 active は次 milestone から段階適用 (NEST §6.1 / §6.2)
 
 **主要 rule (詳細は仕様書参照):**

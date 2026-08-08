@@ -498,6 +498,8 @@ root_goal_confirmed_by: rs (2026-04-27)
 
 rs が後日 root_goal を改訂したい場合は §8.1 root 変更手順を適用。本 v1.1 は dormant 状態を持たず、issuance と同時に発効可能 (CLAUDE.md cross-ref 追加が前提条件)。
 
+> ⚠ **SUPERSESSION 記録 2026-08-08（Rs 逐語「直して」・p4 記録）:** 上の v1.1 yaml は issuance 時点の歴史記録として不変。現行は 2 点で supersede 済 — ① **root_goal**: Rs 2026-06-23 に「100% へ定性的に再定義」（SSOT = SOMA:16・95 数値は失効。§7.2 の format 例中の同文言も例示にすぎない）。② **tree root**: 実測（255 node・cycle 0/dangling 0・2 卓独立再導出 2026-08-08）で tree の root = `T-PRODUCTION-LINE`（生産ライン工程①〜⑧）・T-ROOT はその唯一の子 = **THREAD subtree root**（node ID・名の「95%」は識別子ゆえ不変）。⚠ **§8.1 の全 node 再評価は本記録では起動していない**（発動は Rs 判断）。裁定 custody = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_DELEGATED_DECISIONS_ITEMS7_9_DOD_20260808.md` §7 @ `d1edb98eb5`。
+
 ### §7.2 project-tree-manifest.md format
 
 ```yaml
