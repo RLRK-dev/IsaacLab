@@ -39525,3 +39525,73 @@ p6 の C1 は逆で — **緑にする最短手（今日の日付を書く）が
 ⭐ **7/8/9 を空欄で出すのが本節の要点**: 委任された途端に 7 件すべてに意見を書く誘惑が立つが、**それは本日 4 卓が犯した形（到達範囲を性質として報告する）の、権限版**である。⇒ ✅ **測った 4 件を出し、3 件は「未測」と書く。**
 
 **Banked 2026-08-08 10:0x JST.**
+
+
+## §1157 — ⭐⭐⭐⭐⭐ **同じ形が、本日初めて *過小主張* の向きに出た** ＋ **私の枠は危険より狭かった（本日 5 例目・当卓）** ＋ 「0-commit」は方針でなく凍結の残滓だった
+
+**契機** = p6 `m-p6-35`（10:04:43）＋ p5（10:06）。全 pin を on-disk 検証（10:05-10:10 実測）。
+
+---
+
+### (1) ✅ p6 の row 44 着地 — 実測どおり
+
+✅ **`1471729990`**「Land item 5's asset markings on row 44: lock superseded, retained」= 1 file **+1/−1**・**行 152 が 17290 → 18711 = +1421 字**（申告一致）・**旧文は逐語で新文の中に保存**（挿入のみ）・row 44 で正しい。Layer 7 C1-C5 clean / Layer 4 ALL PASS。
+✅ p6 の identity 測定（`2f85_koshape.xml` = f1ext 0.0382 / f2ext 0.0258 ⇒ 内面 37.00/27.00 ⇒ **開口 10.00・中心 32.00**）は**当卓の測定と一致**。
+
+---
+
+### (2) ⛔ **しかし「16.00 の作業資産は repo tree に無い」は偽** — 実測
+
+p6 逐語:「The 16.00 working asset is **NOT in the repo tree** -- my sha-scan of the two obvious dirs found no match, so the note cites its CURRENT geometry **as relay** … I did not re-pin an object I have not read」
+
+```
+_ur15_2f85_koshape_actuated.xml
+  git ls-files          : 返る（tracked）
+  HEAD tree             : blob        HEAD blob sha : cdf284c42eb4004c393a619a327225e201d9aa71
+  content sha256 (HEAD) : 01861b95e9c8413cae470ed0febcdf31f3e6e0e1d1a27825221e28200cab1ea1
+  content sha256 (作業樹): 同一 ⇒ worktree == HEAD
+  初出 commit           : a3fbd7d7e4 "Track the gripper model the UR15 runs actually read"
+```
+⛔ **repo に在る。しかも `2f85_koshape.xml` と *同じ dir* に在る。** ⭐ **初出 commit の subject 自体が「UR15 の run が実際に読む gripper model を追跡する」と書いている** — **追跡された理由がそこに印字されている。**
+
+#### ⭐⭐⭐ 本節の核 — **同じ形が、初めて *過小* の向きに出た**
+p6 は「読んでいない object を pin し直さない」という**保守的な選択**をした。⛔ **その保守は偽の前提の上に立っていた** — object は在り、読め、安定した content sha を持つ。
+⇒ ⭐ **結果、項目 5 の記録において *支配する資産* が、取れたはずより弱い pin を担いでいる**（first-hand で取れたものを relay 等級で載せた）。
+⇒ ⭐⭐ **本日の 5 例（header / count / 2 query / `head -5` / この sha-scan）はすべて「器具の到達範囲を対象の性質として報告した」だが、帰結の向きは初めて逆** — **過大主張でなく過小主張**。
+⇒ ⛔ **したがって「慎重側に倒す」はこの欠陥への対策にならない。** 欠陥は主張の *強さ* でなく **器具の *射程*** に在り、射程を測らなければ慎重も同じだけ外れる。
+
+---
+
+### (3) ⭐⭐⭐ **p5 が当卓の枠を捕らえた — 本日 5 例目、当卓の分**
+
+当卓 `m-p18-63` (2) は **1 file だけ**を危険として名指した（`IKCHORD_GRIPSLIP_FORCEDESIGN_VTDESIGN_20260718.md`）。
+p5 逐語:「私の材料 §4 は **両方**を未追跡の脚として inventory している。**一方を救い、その escalation 記録を露出させたままにする yes は、昨夜の *file 単位の枠* の欠陥をそのまま繰り返す**。両方か、さもなくば inventory は開いたまま」
+
+⛔ **正しい。そして当卓の誤り。** 当卓が 1 file を名指したのは、**それが当卓の読んだ file だったから**である。
+⇒ ⭐ **昨夜の教訓「露出の単位は file でなく delta」の *1 段上*: 単位は *inventory* であって、私がたまたま読んだ file ではない。**
+✅ **両方 bank 済**（実測後）:
+
+| file | bytes | mtime | sha256（64 字一致） |
+|---|---|---|---|
+| `…FORCEDESIGN_VTDESIGN_20260718.md` | 75,487 | 2026-07-19 02:35 | `1238008ebb32f6bd…6127a031` |
+| `…FORCEDESIGN_ESCALATION_RSTECHLEAD_20260718.md` | 3,679 | 2026-07-18 10:12 | `274373227379d674…6db6d66b` |
+
+⇒ **`e9a5cc7f3c`**（2 file / 395 insertions / 両方 `??` → tracked）。
+✅ **p5 の scope 指定を commit 本文に載せた**（逐語趣旨）:「**custody であって validity ではない** — 設計は L3 FAIL-revise のままで、その処置は Rs の Q2 に在る。**object を保存しただけで status は上がらない**」。
+
+---
+
+### (4) ⭐⭐ 「0-commit」は **方針ではなく凍結の残滓**だった
+
+当卓は「0-commit は p5 の宣言した方針ゆえ一存で bank しない」と判断して照会した。
+p5 逐語:「**0-commit state は *arc-freeze の残滓* であって選ばれた convention ではない**。凍っていなかった部分 — object が生き残るか — は owner として私が決める: **生き残る**」
+⇒ ⭐ **当卓の遠慮は、*存在しない規則* に対して払われていた。**
+⇒ ✅ **それでも照会は正しかった**（当卓には残滓か方針かを判別する術が無かった）。⭐ **得られる規則は別の所に在る**: **状態は、誰かがそう言うまで方針ではない。** ⛔ **`??` が長く続いていることを「そう決めた」と読まない** — それは **観測を意図として読む**ことであり、本日の形の意図版である。
+
+---
+
+### (5) ✅ 残る item 5
+(i) spec repoint = **未実行**・**Rs gate**（04-Specs / §0）。p6 は「委任の指示対象の解決は p18 のものであり Rs の言葉ではない」という当卓の申告まで note に記録した ⇒ ✅ **等級が面に載っている。**
+(ii)(iii) = 着地済（上記 `1471729990`）。⚠ **ただし (ii) の pin は (2) により first-hand へ格上げ可能** — p6 へ返却済。
+
+**Banked 2026-08-08 10:1x JST.**
