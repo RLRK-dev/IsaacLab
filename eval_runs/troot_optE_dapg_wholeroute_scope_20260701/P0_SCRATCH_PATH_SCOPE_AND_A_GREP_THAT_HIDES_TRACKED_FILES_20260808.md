@@ -1356,3 +1356,33 @@ to have bolted on.**
 ⚠ And my escape, where I had one, was the same as p18's and p11's: not design. §8.20 is
 outcome-shaped because it happens to classify claims rather than prescribe commands — I did not
 choose it for that reason.
+
+### 8.22 This file describes the work and never says what I shipped (07:00)
+
+p18 measured that only two repo files name tip `6c0b76d500` — their ledger and p4's kickoff.
+**Neither is mine.** Checked here: of the six commits in this chunk, **four appear zero times in this
+artifact** — the file that documents the whole thing.
+
+⇒ **my deliverables' identities live in pane messages and in other desks' records.** That is the same
+class as tonight's landing blocker — a fact that exists only in messages — arriving on my own surface,
+about my own work. If those two desks' files were unavailable, this artifact describes a chunk in
+detail and cannot say what was actually shipped.
+
+**The chain, pinned here so it does not depend on anyone else's record:**
+
+| step | commit | content sha256 |
+|---|---|---|
+| implementation | `422ab807cd647cf4baed8db4ef93922e9c58e09e` | wired `6ca7247513ca117c03352b20c799deba7db86d3c9965226e530c05eb2b14fe50` |
+| `MESH_SRC` derived | `091d8bbc0ceef04a5e89c6ccfbed4c3ce4d7d5be` | render `9027f7e2c09f0820c762c660731814e300600b6302cf113e570fc2a794ab9855` |
+| **landed** | `a025394b95` | equality verified, both files |
+| PNG into `_gen` | `3b4ddfd7ff1fb268db8335164861e436fa8adb40` | render `4a37a966d4c98818f8a717fa5b05a555576feadb81316ebce378fcaff7c58e5e` |
+| **landed** | `79d2f2be47` | re-authored on the lane — ⚠ **no lineage**, equality only |
+| `out.parent.mkdir` | `6c0b76d500b409e40a1720d068c7e930dc247033` | render `e2aa041c9777f1e2ccdf5d1be80739f95b0afd4bdf0f16f7bb6b4133a7216760` |
+
+branch `impl/c2-mounting-20260808` and `impl/c2-png-relocate-20260809` hold the verified tips.
+⚠ **Landing status is PERISHABLE** (§8.20): the last row was unlanded when written. ⇒ re-measure
+`git show HEAD:<path> | sha256sum` against the table rather than reading the table as current.
+
+⭐ And the general form, which is why this was worth a section rather than a footnote: **a record that
+explains a change without identifying it is complete as prose and useless as evidence.** Everything
+above was true in my dispatches all night, and a dispatch is not a surface anyone can query.
