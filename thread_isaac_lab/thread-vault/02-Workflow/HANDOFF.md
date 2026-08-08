@@ -17,6 +17,8 @@
 > ⚠ **語の対象を固定（2026-08-09 00:20 追記）**: 本節で言う **dead-scratchpad / 旧 session = `b952db35`**（p4 の sim session・**完全形は `ur15_steps_wired.py:32` の `S = Path(...)` から取る**）。⛔ **完全形をここに転記しない** — 完全形の query が「code だけを拾う clean な query」でいられるのは**記録が完全形を写さないから**で、写した瞬間にその性質が壊れる（実測 00:22: 完全形を含む tracked `*.md` = 2 件。うち 1 件は本 file だった）。⭐ **prefix は 2 session（`b952db35` / `2dbed74a`）を先頭 8 字で判別できるので、対象の固定には prefix で足りる。**⛔ **死んだ session はもう 1 つある** — p6 の `2dbed74a…` は**別物**で、同じ「dead-session token」という言い方で 2 卓が 4 分すれ違った。⇒ **不在・存在いずれの主張も 5 欄を書く: ①どの対象 ②token 文字列 ③pattern 構文 ④path 母集団 ⑤数え方。**
 
 ### 生きた状態
+> ✅ **2026-08-09 06:29 更新 — micro-chunk は *着地済*（wired + render）**: p0 実装 → pZ 検証 → **p4 が lane へ着地**（受入条件「**verified content sha == landed content sha**」を実行し両 file MATCH = 機械証明）。⇒ **生成物は死んだ scratchpad を離れ、視覚レグ script は再び走る**。⛔ **残るのは C-2 の 4 編集のみ**（`ur15_cell_spec.py` / `sweep_mounting.py`）で、**その発進条件が下行の p5 レグ**。carry（着地を妨げない・所有者つき）= `_gen` が un-ignored（cleanup 第 1 項）／凍結 PNG の archive 化（marker 設置済）／検査述語 2 件（p11）。
+
 - **p0 の発進条件 = p5 の工程表整合レグの返答**（当日 1 時間以上待ち）→ p0 実装（**2 commit**: spec の 4 編集 / `ur15_steps_wired.py:32` の dead-scratchpad 解消）→ pZ 検証 → p4 まとめ
   - ⛔ **実装時に落としてはならない 1 点（pointer でなく本文に置く）**: 移設先で **`AS_BUILT.parent.mkdir(parents=True, exist_ok=True)`**（`_gen/meshpool/` は 2 階層ゆえ `parents=True` 必須）。⇒ 落とすと**現に起きている失敗**（視覚レグ script が親 dir 不在で FileNotFoundError）が**新しい path で再現**する。根拠と全条件 = kickoff **§7 末尾**。
 - ⛔ **execution HOLD 不変・self-start 禁止**。**DoD の evidence-grade cap**: #48/#18 が open の間は DoD 動画に無印 PASS を出さない・#49 は整定ゲート状態を併記・#61 の env7 pin 下でのみ・existence 主張は **cell 条件 3 つ**（stereo head 不在／#54 部材不在／抽選領域 = URDF 関節範囲）を明記
