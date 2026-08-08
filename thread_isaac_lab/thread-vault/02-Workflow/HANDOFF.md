@@ -1,7 +1,7 @@
 ## 前セッション完了: 2026-08-08 23:4x JST (p4 / C-2 実装 chain = 設計 2 本受入・射程は 5 clip 中 2・実行は HOLD のまま)
 
 ⛔ 全 sha・全経緯の正本（**数は写さない — ポインタを持つ**）:
-- `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md`（§6 受入判定・§7 dead-scratchpad micro-chunk・§8 working method 裁定・§9 別紙 A 受入・各所に自己訂正の挿入）
+- `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md`（**§0-§13 = p4 の一次テキスト**。主要 = §6 受入判定 / §7 dead-scratchpad micro-chunk / §8 **working method 裁定**（非 lane branch → pZ 検証 → lane へ着地・worktree 手順つき）/ §9 射程 = 5 clip 中 2 / §10 統治集合 pin / §11 検証計器の版 = 実行時点 HEAD ＋ 受入自動延長の機械判定条件 / §12 chunk scope = 2 file 維持 / §13 p0・p6 への回答。⚠ **節は追記され続ける — 数え上げでなく本文を読む**。各所に自己訂正が**挿入形**で入る）
 - 設計 = `P11_MOUNTING_C-2_IMPL_DESIGN_SPEC_20260808.md` @ `3315631007`（**受入対象はこの版**・273 行）＋ 別紙 A `P11_MOUNTING_C-2_SPEC_ADDENDUM_A_URDF_AND_LANDING_20260808.md` = ⚠**追記型ゆえ版を pin しない — HEAD を読む**（旧記載 `88130a537e` は**作成時の版**で、23:5x 時点で既に 3 世代先まで進んでいた）。⭐**別紙は設計 4 編集の値を変えない限り再受入不要**（p4 実測: 追記分は計器・射程・解釈のみ・設計値 hit 0）
 - p18 台帳 `P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md` の当日 bank 帯（§1179-1214 系）
 
