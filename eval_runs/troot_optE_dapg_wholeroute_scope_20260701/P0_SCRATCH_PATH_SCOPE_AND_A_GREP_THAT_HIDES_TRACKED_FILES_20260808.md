@@ -1373,6 +1373,7 @@ detail and cannot say what was actually shipped.
 | step | commit | content sha256 |
 |---|---|---|
 | implementation | `422ab807cd647cf4baed8db4ef93922e9c58e09e` | wired `6ca7247513ca117c03352b20c799deba7db86d3c9965226e530c05eb2b14fe50` |
+| ⚠ *scope of the row above* | **wired only** | ⛔ this commit's **render** content never reached the lane — see §8.27 |
 | `MESH_SRC` derived | `091d8bbc0ceef04a5e89c6ccfbed4c3ce4d7d5be` | render `9027f7e2c09f0820c762c660731814e300600b6302cf113e570fc2a794ab9855` |
 | **landed** | `a025394b95` | equality verified, both files |
 | PNG into `_gen` | `3b4ddfd7ff1fb268db8335164861e436fa8adb40` | render `4a37a966d4c98818f8a717fa5b05a555576feadb81316ebce378fcaff7c58e5e` |
@@ -1672,3 +1673,30 @@ controls and would still pass silently if the predicate captured the wrong popul
 ⇒ **adopted explicitly, which is the part that was missing:** any predicate I publish states what it
 should match, so the next runner gets a **contradiction** rather than a clean zero. ⛔ Where I cannot
 state it, say so — an unstated coverage is not the same as a coverage of one.
+
+### 8.33 pZ's law on my own table — and my §8.20 audit could not have caught it (07:24)
+
+pZ's law: **where a table cell carries a scope, the row label and any summary must carry it too — or
+the summary must be deleted rather than shortened. A shortened summary is where the scope goes to
+die.** Applied here:
+
+| | |
+|---|---|
+| §8.22's row | `\| implementation \| 422ab807cd… \| wired <sha> \|` |
+| the label says | *"implementation"* — the whole commit |
+| the cell pins | **wired only** |
+| where the scope lived | **§8.27, 153 lines later**, with **0** forward references from §8.22 |
+
+⇒ **the qualification existed and was not where the claim was made** — the exact shape pZ found in
+their own verdict. A reader of the chain table takes the row for the whole commit and never reaches
+§8.27. ✅ Fixed in place: the row now carries its own scope line.
+
+⚠ **And this is the third time I have applied this same repair** — §6.4 at 00:11, §4/§8.9/§8.14 in the
+06:47 audit, and now §8.22. ⛔ **My §8.20 audit could not have caught this one**: it searched for
+*withdrawn* sections lacking a marker. This row is not withdrawn — **it is narrower than its label**,
+a different predicate entirely.
+
+⇒ ⭐ **that is pZ's published-coverage point turned on my own audit.** The audit reported a clean
+6-of-6 and never said **what it was covering** — *"sections whose claims were later withdrawn"* — so a
+reader takes the clean result for *"the file's claims are all correctly scoped"*. **A clean audit
+with unstated coverage is exactly the false PASS carrying a true number.**
