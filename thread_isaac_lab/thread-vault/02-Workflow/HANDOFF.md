@@ -20,7 +20,7 @@
 - **Rs 判断待ち** = ①**C3-C5 へ延ばす別 chunk の起票可否** ②**push**（当日分は未 push）
 
 ### 次にやること
-1. preflight（auto）→ 本 file →ate memory の p4 per-pane file（`handoff_cc_p4_rstechlead_control_method_20260719.md` の末尾数節 = 当日確立した手順の SSOT）
+1. preflight（auto）→ 本 file → memory の p4 per-pane file（`handoff_cc_p4_rstechlead_control_method_20260719.md` の末尾数節 = 当日確立した手順の SSOT）
 2. ⛔⛔ **上の 19:1x 節の「次 message ID = m-p4-59」は SUPERSEDED。番号を記憶・注記から採らない**（当日 `m-p4-64`×2・`65`×3・`66`×2 の重複が全てこれで起きた）。**採番 = scratchpad で排他生成**（`( set -C; : > m-p4-$N.txt )` を昇順に試し、最初に作れた N が自分の番号）。⚠ 当日の helper `…/scratchpad/send_p18.sh` は **session 限りの場所に在る**ので次 session には無い — **手順を再実装する**（default-deny で直近 5 件の件名を見せてから送る／送信時に footer 時刻を shell 付加／配送 probe は **footer 時刻**で引き **miss は不明**・⛔ blind re-send しない）。
 3. ⛔ self-start しない。pane 宛は全て **w2:p18 経由**。
 
