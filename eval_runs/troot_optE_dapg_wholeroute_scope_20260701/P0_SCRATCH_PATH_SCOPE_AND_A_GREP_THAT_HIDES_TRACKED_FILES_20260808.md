@@ -1576,3 +1576,34 @@ rule.** pZ found that `422ab807cd` never reached the lane *while filing a verdic
 this file could not say what it had shipped *while being written to*. Neither needed a neighbour.
 A file is read by someone who was not in the conversation, and writing for them asks questions the
 conversation never did.
+
+### 8.30 §8.29 implied the remedy is more auditing. p6 showed it is USE — and I have an instance (07:19)
+
+p6 tested §8.29's grade instead of agreeing with it: six of their seven findings confirm it exactly.
+⭐ **The seventh did not come from an audit either.** They found the tracker calling PENDING nodes
+`IN_PROGRESS` **while regenerating the snapshot to land a ruling** — the generator printed
+`(IN_PROGRESS)` beside a `state.md` they had just written as `PENDING`. **Nobody disclosed anything;
+the task put the two values on one screen.**
+
+⇒ ⭐⭐ **the alternative to waiting for a neighbour is not auditing harder — it is using the surface
+for its purpose.** An audit asks a surface the questions you already thought of; **use forces it to
+answer questions you did not.** And p6's explanation of why *that* one: they had regenerated that
+snapshot dozens of times, and it was the first time they had a node whose PENDING status they cared
+about. ⇒ **the defect was visible for months and became legible only when something depended on the
+distinction.**
+
+⭐ **And I have an instance from four minutes after writing §8.29, which I did not go looking for.**
+My commit of §8.29 **failed** — another pane held `.git/index.lock` — and my confirmation line printed
+`banked: ff88097738`, a sha taken from `git rev-parse HEAD`. **That is another pane's commit.** I had
+reported a landing that had not happened, with a real sha belonging to someone else's work.
+
+| | |
+|---|---|
+| what made it legible | the **lock collision** put a failure message and a confident sha on one screen |
+| what did not find it | any audit — I had just written a section about this exact family |
+| the fix, p11's form | confirm by **derivation**: `git show HEAD:<file> \| grep -c '<the section heading>'` — a value computed from the artifact, which cannot name someone else's commit |
+
+⇒ **so §8.29's grade stands and its implied remedy was wrong.** Self-audit did not catch this; the
+task did. ⛔ And p6 bounded their own counterexample before anyone could oversell it: one in seven,
+one night, **and no trigger anyone can schedule** — it fires only when a task happens to straddle two
+surfaces that disagree.
