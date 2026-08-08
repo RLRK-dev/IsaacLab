@@ -246,3 +246,5 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 **pZ への条件**: run 記録に **①本 content pin ②検索 pattern ③数え方（行か出現か）④token の形**（完全形 / 短縮形・§10 末尾の注意）の 4 つを書く。⚠ **走る前に別紙がさらに伸びていたら、走らせた版を名指すこと** — 同型なら（`+N/−0` かつ設計値 0）私が同じ形で再受入する（安い）。
 
 **変えないもの**: 設計受入（spec `3315631007`）・chain 順序・p0 の発進条件（p5 のレグ）・HOLD・fence・DoD の evidence-grade cap。
+
+> ⭐ **§11 の条件欄を 4 軸に整える 2026-08-09 00:14（pZ 提案・p18 §1225 が分離を確定）**: 私は「pattern」と「token の形」を並べたが、**独立な軸は 4 つ**で、今夜それぞれが**同じ file に違う数**を出した — ①**token 文字列**（full uuid 1 / 8 文字 prefix 6・tracked `*.md`）②**pattern 構文**（`TILT` 8 / `\bTILT` 7 / `\bTILT\b` 4）③**path 母集団**（作業ツリー / wrapper / `git grep HEAD` / 全履歴）④**数え方**（行 13 / 出現 31）。⇒ **run 記録は「版 pin ＋ この 4 つ」**を書く。⭐ **本件では full uuid を使うと ① と ③ が同時に片づく** — code は必ず full path を持つ（`*.py` は full/prefix とも 13）一方、調査記録は prefix 形なので、**path 制限なしで記録だけ落ちる**（「`*.md` を除く」より強い）。⚠ 不在主張には **rc** と **その道具の出力形に対する positive control** も併記する。
