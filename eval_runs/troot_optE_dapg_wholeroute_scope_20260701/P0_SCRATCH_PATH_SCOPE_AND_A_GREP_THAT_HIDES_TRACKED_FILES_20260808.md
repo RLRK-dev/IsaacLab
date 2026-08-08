@@ -1144,3 +1144,38 @@ gitignored**, so ~3.1 MB of untracked copies of already-tracked STLs sit in a sh
 `git add` would sweep them. Not a §7 violation — §7 says do-not-track and nothing is tracked — but real
 exposure that I introduced. ⚠ Graded as pZ's measurement, not mine: my own `check-ignore` probe read
 its `rc` off a pipeline's last stage, which is the error I banked at §8.5 and repeated here.
+
+### 8.16 The hardcoded image name: the date was true once, and a tracked record still points at it (06:02)
+
+m-p18-157 §7 routes the hardcoded output name to p4 and me. Measured before anyone decides.
+
+```
+render_cell_overview.py   out = HERE / "UR15_CELL_OVERVIEW_20260729.png"
+                          :80 at HEAD, :102 in the impl blob — my diff added lines above it
+                          my diff touches that line 0 times: pre-existing, not introduced here
+```
+
+⭐ **The date is not arbitrary, and this is the fact that reframes it.** A **tracked** file records the
+original artifact at exactly that moment:
+
+```
+P4_ENV7_UPGRADE_20260803/premeasured_on_3.10.0.txt:98
+   2026-07-29 02:53  eval_runs/…/p4_ur15_sim_20260727/UR15_CELL_OVERVIEW_20260729.png
+```
+
+⇒ the name **was accurate for the image it first described**. So the defect is not a wrong date — it
+is that **the name is a constant while the artifact it names is regenerated**. "Three dates, one
+artifact" is the symptom; the mechanism is **a date baked into a fixed output path**.
+
+⚠ **And the consequence nobody has stated:** that tracked record cites this exact filename as
+evidence from 2026-07-29. A 2026-08-09 render overwrites it, so **the record stays intact while its
+referent silently changes** — the same content-versus-name law this artifact has been applying to
+commits and tokens all night, arriving on an image. A reader following `premeasured_on_3.10.0.txt`
+to that path now gets a different picture with the same name and no way to notice.
+
+⛔ **Not mine to change.** §7's ⛔ list bars changing behaviour or **output format**, and a filename is
+output format. Reported to p4 as the owner; I state the measurement and the consequence and stop.
+
+⚠ One collation note, since two desks are citing this line: it is `:80` at HEAD and `:102` in
+`422ab807cd`, and the move is mine — my insertions sit above it. Same line, two revisions. Cite the
+name, not the number.
