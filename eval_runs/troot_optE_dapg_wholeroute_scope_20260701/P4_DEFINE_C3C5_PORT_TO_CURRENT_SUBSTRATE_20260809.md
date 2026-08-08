@@ -51,3 +51,16 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 起票 **2026-08-09 05:29:18 JST**（`date` 実�
 ## 5. 本 chunk が動かさないもの（明記）
 
 ⛔ §0 不変前提（DUAL-ARM / 指令 88 mm / DiffIK-only / gripper LOCK / no-kinematic-trick）／⛔ run の権限（Rs）／⛔ training・two-key・training-ready ／⛔ C-2 chain の進行（並行・混ぜない）。
+
+## 6. ⛔ enumeration の bank（自検出 2026-08-09 05:40・p18 §1224 が照らした）— 昨日の自訓を私が守っていなかった
+
+**私の handoff（前 session・repo に在る）逐語**: 「**裁定の一意性は enumeration が作る**: 1 字裁定（「4」「a」「(a)」等）は labelled set の卓でのみ一意 — その enumeration を**同 turn で durable 面に bank する**（transcript は剪定される）」。⛔ **今回私は resolution（§0）を bank したが、*提示した enumeration そのもの* を bank していなかった** ⇒ 「2」が何を指すかの検査可能性が、私の口頭 report に依存していた。
+
+**遅ればせの bank（p4 が Rs へ提示した labelled set・逐語）**:
+> 1. **#48 の disposition** — DoD 動画の evidence-grade を cap しています
+> 2. **C3–C5 を現基盤へ持ってくる chunk の起票可否** — 中間目標に必須
+> 3. **push**
+
+- **提示の経緯（等級 = p4 の自己申告。⚠ pane transcript は repo の母集団外ゆえ、他卓は独立検証できない）**: 本 3 択は session 終盤の複数の Rs 宛 report で**同じ番号のまま**繰り返し提示され、**返信直前の提示は 2026-08-09 00:50 JST**。返信 = 「**2: 可　３：push**」。
+- ⭐ **等級の差（p18 の指摘・採用）**: **「push」は語そのものが指示を運ぶ（自己証拠的）／「可」は labelled set が無ければ何も指さない**。⇒ ⭐ **数字だけの返信を実行に移す前に、enumeration を *返信より早い時刻で* durable 面に bank する**（これは「検証集合を検証対象から作らない」の授権側の版）。⛔ 今回は事後 bank ゆえ **この節自身が遅い** — 記録として残し、次回は先に置く。
+- ⚠ **併せて訂正（p18 の under-report 指摘）**: 私が回付 message に列挙した見出しは **6 個中 5 個**で、落としたのは **「## 0. 授権と、その射程」= 授権の範囲を限定している節**。⛔ **本文は message 内に逐語で在ったので情報は失われていない**が、**列挙が短いのは、読み手が最も要る 1 個の分だけ**だった。
