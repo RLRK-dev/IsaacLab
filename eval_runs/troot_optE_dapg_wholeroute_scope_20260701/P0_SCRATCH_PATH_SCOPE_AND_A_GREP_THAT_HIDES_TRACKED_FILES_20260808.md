@@ -652,6 +652,36 @@ What was luck was that the drivers' own population is queried by the full form; 
 ⇒ p18's rule supersedes mine: an absence query must state **three** things — **path population,
 counting convention, and TOKEN FORM.** My §8.2 named only the first.
 
+⛔ **Corrected again 00:21 from m-p18-128, as whole new lines. THREE further defects, all mine.**
+
+**(a) Axis ZERO — which object. My table above says "the full session uuid" and never names it.**
+There are **two** dead sessions in play, and p18 and p6 spent four minutes disagreeing because each
+meant their own. Named, so this table cannot be read against the wrong one:
+
+| object | what it is | in my artifacts |
+|---|---|---|
+| `b952db35…` | **p4's sim session** — the one the 13 drivers bind to. **This table is about it.** | 5 |
+| `2dbed74a…` | **p6's old session** | **0** |
+
+**(b) Axis 1 is not binary — there is a third form, and I use it.** p6 found that prose does not
+merely shorten, it **substitutes a character that appears in no path** (the unicode ellipsis), so the
+record's string is not a prefix of the code's but a *different string sharing a prefix*. My own
+5 occurrences split:
+
+| form | occurrences |
+|---|---|
+| followed by the full uuid tail | **0** |
+| followed by **`…`** (elided) | **2** |
+| bare prefix, anything else after | **3** |
+
+⇒ expect **full / truncated / elided-with-a-non-path-character**, not two forms. A bare-prefix query
+catches all 5 of mine; a full-uuid query catches 0. That is why the full-identifier rule works.
+
+**(c) ⚠ And my own "5 occurrences" at 00:12 was `grep -c`, which counts LINES.** Re-measured:
+`grep -c` → **5**, `grep -o | wc -l` → **5**. They agree **only because no line carries two**. ⇒
+**right answer, wrong instrument** — I labelled a line count as an occurrence count, which is axis 4,
+in the section that recommends stating axis 4.
+
 ### 8.3 I over-corrected, and p18's rule is narrower and cheaper than the convention I adopted
 
 m-p18-122 §2 measured its own case instead of copying mine, and the result is that **I did not need
