@@ -111,6 +111,23 @@ desk: p11 ARM-CONTROL-DESIGN (w2:p11) / 記録 **2026-08-08 22:25:51 JST**（`da
 **訂正 2（罠の本体は「別の点」より強く、軸の入れ替え）**: 実測 — `task_config.py:203 CLIP_X_ODD = 0.35` / `:204 CLIP_X_EVEN = 0.40`（**X の役**）に対し `ur15_cell_spec.py:483 CLIP_Y_ODD, CLIP_Y_EVEN = 0.35 + WORK_ROW_DY, 0.40 + WORK_ROW_DY`（**同じ大きさが Y の役**）。⇒ ⭐ **値の集合を突き合わせると「0.35 も 0.40 も両側にある」で通ってしまい、転置は値検査を生き延びる** ⇒ **(軸, 値) の対で比べる**。A-7 の「同名が別の点を指す」は真だが弱い言い方だった。
 **併せて**: cell 側の clip x（`0.150` / `0.040`）は **cell 内の literal** であって task 側 `CLIP_POSITIONS` から導かれていない。⇒ **clip 座標については executable は task_config に束縛されない**（他の定数 — cable 半径・把持スパン・clip 接触 — は `ur15_cell_spec.py:52`/`:60`/`:66-67` 経由で task_config に束縛される）。⛔ **どちらの SSOT が勝つかは本紙で裁定しない**（#46 / Rs の軸）。⇒ spec §7-6 は**同一 file 内の前後比較**ゆえ成立・**pZ は clip 座標を substrate 跨ぎで突き合わせない**。
 
+## A-8. 追記 23:3x — spec の中心主張「変更は cell 側で閉じる」を**検証可能な述語**にする（pZ 項目 14 新設・契機 = p4 の測定 / p18 m-p18-111 §4）
+
+banked spec §0/§2 H5/§3.4 は「**C-2 は cell 側で閉じ、task 幾何を汚さない**」と主張していたが、**主張のまま**で pZ が測れる形になっていなかった。⇒ 述語化して当方で実測（陽性対照つき）:
+
+| 検査 | 結果 |
+|---|---|
+| STEP 表領域（`ur15_steps_wired.py` 2639-2760）に mounting 定数（`YOKE_SPREAD` / `CROWN_R` / `CROWN_ZC` / `TILT` / `SHOULDER_HEIGHT` / `COLUMN_R`）が現れるか | **0（rc=1 = 走って hit 無し）** |
+| **陽性対照**（同領域・同形式で `GRIP_HALF_SPAN` / `C2[` / `GL[` / `GR[`） | **13 hit（rc=0）** ⇒ 述語はこの領域に当たれる ＝ 上の 0 は判別力のある 0 |
+| 目標値の出所（実読） | `:91 Z_SEAT = GROOVE_Z` ／ `:1121-1122 GL/GR = GRASP_CENTRE_X ∓ GRIP_HALF_SPAN`（y,z は実測 cable）／ `:2625-2626` 同（実測 cable）／ `:2642 RX_MID = mean([C1[0], C2[0]])` |
+
+⇒ ✅ **STEP 2-18 の直交座標目標は cable・clip・指令スパンの関数であって、取付の関数ではない** ⇒ **mounting を C-2 へ動かしても route の目標点は動かない**（spec の confinement 主張が、断定から**測れる述語**になった）。
+⛔ **これが establish しないこと（over-read 防止・当方で先に塞ぐ）**: 「動きが同じ」ではない。**同じ目標へ別の取付から到達する以上、IK 解と経路は変わる** ⇒ 経路の干渉は依然 carry（spec §3.5c step 2）であり、答えるのは DoD 動画 + pZ + Rs human-GT。
+
+**pZ 項目 14（新設）**: 実装 diff 後に上表の 2 行（mounting 定数 = 0 / 陽性対照 = nonzero）を**同じ形で再実行**し、rc とともに記録する。⇒ confinement は「設計時にそうだった」ではなく「landing 後も成り立つ」形で検査される。
+
+⚠ **witness の取り違え防止（同名 2 個・当方実測・契機 = p18 m-p18-111/-112 が別 witness の substrate 欠落を指摘）**: 今夜「witness」は **2 つの別物**を指している。⑴ **5-clip の L-geom witness**（2026-07-14・6/6 PASS）は **task_config の clip 配置**の上で計算されたもの（0.35/0.40 が **X** の役）。⑵ **本 spec の C-2 witness**（開始姿勢 clear・240 draws）は **cell 配置**の上の測定 — 計器 `sweep_mounting.py` → `ur15_steps_wired.py` は **`ur15_cell_spec` を import**（`:39`/`:55`・rc=0 = 陽性対照）し、**`task_config` を import しない**（`^ *(from|import) .*task_config` = **0 / rc=1**）。⇒ ⛔ **⑴ を本 chunk の幾何的裏づけとして引かない・⑵ を 5-clip の主張に使わない**。本 spec が立っているのは ⑵ のみ。
+
 ## A-5. 出所の等級
 
 - 全て第一手（本 session 実測）: `ur15_cell_spec.py:99-100`・`ur15_steps_wired.py:1130/:1136-1138/:1972/:2002/:2025/:315/:2418/:2456`・`ur15_mj.urdf:3` と `<limit>` 6 行・`git ls-files`/`rev-parse`/`sha256sum`・公式 `config/ur15/joint_limits.yaml`・`urdf/ur.urdf.xacro` の存在・`urdf_work` の不在。
