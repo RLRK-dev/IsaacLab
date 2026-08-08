@@ -54,6 +54,24 @@ desk: p11 ARM-CONTROL-DESIGN (w2:p11) / 記録 **2026-08-08 22:25:51 JST**（`da
 
 13. **URDF の content pin**: 検証記録に `ur15_mj.urdf` の **content sha256 `b4c60d4d…b57d`** を記載する（生成元 xacro の作業複製が消えているため、**content pin が唯一の恒久錨**）。⚠ 併せて existence 主張の射程に「**抽選領域 = 当該 URDF の関節範囲**」を書く（A-1）。⇒ spec §7-12 の cell 条件は **3 条件**になる: stereo head 不在 / #54 部材不在 / **URDF 関節範囲を領域とする抽選**。
 
+## A-6. 追記 22:39 — banked spec §1 の不在主張に**母集団**を付ける（契機 = p18 m-p18-103 §2 の規則改訂）
+
+**対象の主張**（banked spec `:31` 相当）= 「**コード上の導出は `ur15_cell_spec.py:432` の 1 箇所のみ**」。⚠ v1/v2 執筆時に私が実際に走らせたのは **2 file を名指しした grep** であり、「他 file に無い」と書ける母集団を測っていなかった（debate CC3 が語り過ぎを指摘し v2 で文言は直したが、**母集団は依然無記載**だった）。⇒ 閉じた query を 2 経路で走らせ直した。
+
+**結果（本 session 22:38-22:39・rc を毎回確認）**:
+
+| 経路 | 母集団（自分で計測） | `YOKE_SPREAD/2` の `.py` hit | rc |
+|---|---|---|---|
+| A: `git grep`（tracked） | tracked **5,262** file（うち `.py` **2,036**） | 5 箇所 | 0（走行・hit あり） |
+| B: `command grep -r`（ignore 規則なし = tracked + untracked + ignored） | disk 上の `.py` **43,032**（worktree 複製を含む） | **同じ 5 箇所** | 0 |
+| B'（worktree 複製のみ・別計測） | `.claude/worktrees` + `.codex/worktrees` = 4 本 | **0** | **1**（= 走って hit 無し。⛔ rc 1 と 127 を混同しない） |
+
+**5 箇所の内訳** = **実行される導出は 1 つだけ**: `ur15_cell_spec.py:432`（`:429` の 4 分岐 chain の最終 else）。残り 4 は文字列 — `ur15_cell_spec.py:426`（注記）/ `sweep_mounting.py:258`（print）/ `:288`（comment）/ `compare_24_vs_240.py:78`（print）。
+**`CROWN_R` の代入点**（同 2 経路）= `.py` で **`ur15_cell_spec.py:429` の 1 箇所のみ**。⚠ `ur15_steps_wired.py:174`/`:179` は hit するが **comment と print の文字列**であって代入ではない（実読で判別）。
+
+⇒ ✅ **spec §1 の「編集点は単一」は 2 経路・上記母集団で成立**（v2 の文言も維持）。⛔ **覆っていない範囲を明記**: 非 `.py` の実行面は本 query の外（本 cell は Python で組まれるため既知の面は無いが、「無い」ことを測ってはいない）／worktree 複製は**別立てで測り 0 と確認**（フィルタで隠していない — 表示から除外した集合を測らずに済ませると、それ自体が作られた不在になる）。
+⭐ **私が引き取る形**: 名指し file への grep は**その file についての主張しか閉じない**。「他に無い」と書くなら、書く前に母集団を測って併記する（p18 §1195 = cardinality は membership を答えない、の同型 — 私の側は「2 file の counts で全体の membership を語っていた」）。
+
 ## A-5. 出所の等級
 
 - 全て第一手（本 session 実測）: `ur15_cell_spec.py:99-100`・`ur15_steps_wired.py:1130/:1136-1138/:1972/:2002/:2025/:315/:2418/:2456`・`ur15_mj.urdf:3` と `<limit>` 6 行・`git ls-files`/`rev-parse`/`sha256sum`・公式 `config/ur15/joint_limits.yaml`・`urdf/ur.urdf.xacro` の存在・`urdf_work` の不在。
