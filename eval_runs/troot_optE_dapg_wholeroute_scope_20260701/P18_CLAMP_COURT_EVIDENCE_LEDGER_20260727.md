@@ -43403,3 +43403,58 @@ p6 は **positive control で証明**した: 自分の pattern は **本物の `
 - **p11 の landing 直前の最終点検**: **A-9/A-9b の publish した数値に rev が付いていない**（当該範囲で `02b85fc52f`/`422ab807cd`/rev/版 = 0・対照 = 数値自体 4 hit ⇒ 判別的な 0）⇒ **着地で lane の wired が変わると `:2639` 等は全て +5 ずれ、rev の無い数値を読む者は *regression* と読み得る**。⚠ **今日の run は守られている**（pZ には 06:24 の便で「再導出せよ・比較するな」と rev 併記を既に渡した）⇒ **落ちるのは次に sheet だけを読む者。**⭐ **「durable に在ることと message に在ることは別」の p11 側の再発。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1237 — ⭐⭐⭐ **「探している物と、探している側が、同じ材料でできている」— 自己一致は述語の *目的* によって保証される（p6）** ＋ ⛔ **当卓は p6 の修正済 predicate を、その警告の 2 分前に採用して state を報告していた**
+
+**契機** = p6 `m-p6-92`（URGENT・06:31:12）＋ p4 `m-p4-143`（06:32:10）＋ p0 `m-p0-169R`（06:31:10）＋ p11（06:30:30）。当卓 実測 06:30-06:33。
+
+### (1) ⛔ **当卓は「見た物を言えない check」を「自分を見る check」に置き換え、4 分以内に それで報告した**
+```
+p6 の text predicate を filter OFF・rc は search 自身から（当卓 実測）
+  pgrep -af 'env_isaaclab[0-9]*/bin/python|/home/rlrk/IsaacLab/[^ ]*\.py'
+  → 3598332 /bin/bash -c source /home/rlrk/.claude/shell-snapshots/…   ＝ **当卓自身の wrapper shell**・rc=0
+```
+⇒ ⛔ **当卓の `m-p18-170` の state 行は、自己一致する器具で作られ、`grep -v 'pgrep\|claude'` が *偶然* 救っていた**（Claude Code の snapshot path に "claude" が含まれるという **vendor path の事故**であって設計ではない・p6 実測）。⇒ **p6 の rc も filter のもので search のものではなかった。**
+
+### (2) ⭐⭐⭐ **p6 の一般化（本夜の最深部・当卓は *法則* として記録する）**
+> **「project の interpreter が走っているか」を問う check にとって、*その interpreter を走らせる shell はどれもその文字列を含む*。⇒ 自己一致は述語の *目的* によって保証されている。bracket で逃げられる text は無い。**
+
+⇒ ⭐ **探している物と、探している側が、同じ材料でできている。**
+⇒ **これは 4 卓が 4 方向から同じ場所に着いた**: 当卓の 06:24:52（heredoc 本文が述語の語を含む）／p11 の実演（① 自分の shell に一致 ② **平文と bracket 形が同じ行に在ると bracket 形は平文に当たる** ③ 平文が無い行でのみ bracket は効く）／p0 の「**探す者は、探す対象の名前を書かずには報告できない**」／p6 の本項。
+⇒ ✅ **逃げ道は規律ではない — 「process の *text が何と言っているか*」でなく「**process が *何であるか*」を問うこと。**
+
+### (3) ✅ **構造的な形（p6 提案・当卓が *両対照とも自分で* 走らせた）**
+```
+for pid in $(pgrep -f 'env_isaaclab|IsaacLab'); do
+  exe=$(readlink /proc/$pid/exe) || continue
+  case "$exe" in *python*) echo "$pid $exe $(tr '\0' ' ' < /proc/$pid/cmdline)";; esac
+done
+```
+```
+POSITIVE  当卓が本物を起動 → CAUGHT 3598355  exe=/usr/bin/python3.12  cmd=/home/rlrk/env_isaaclab7/bin/python -c …
+NEGATIVE  cmdline に env_isaaclab7/bin/python を **文字列として** 持つ bash → **NOT MATCHED**（exe が /bin/bash）
+```
+⇒ ⭐ **command line は誰でも（事故でも）書ける *text*。`/proc/PID/exe` は *kernel が読み込んだ物*。wrapper は「自分は bash だ」について嘘をつけない。**
+⚠ **限界も継承（p6 の逐語）**: `/proc` が要る（Linux のみ）／python 以外の interpreter で起動された THREAD process は落ちる／候補集合は `pgrep -f` で **なお text で門番されている** ⇒ どちらの文字列も含まない path から起動された THREAD python は不可視。**前より狭いが閉じてはいない。**
+
+### (4) ⛔ **順序が教訓であって、修理が教訓ではない**
+```
+p6 の 1 つ目   確信のある偽陰性（control で証明済）
+p6 の 2 つ目   自己一致し、測っていない filter でそれを隠していた
+              ⭐ しかも「1 つ目がなぜ危険か」を説明する同じ message で 6 卓へ配った
+当卓           その同じ窓の中で採用し、それで state を報告した
+```
+⇒ ⭐⭐⭐ **2 番目の器具は 1 番目より良かったのではなく、*違う壊れ方をした*。**⇒ **欠陥は訂正と同じ速さで伝播した。**
+✅ **p6 の 06:26:55 の捕捉は無傷**（本物の python・cmdline に "claude" を含まず・捕らえて印字した）— **観測は健全で、器具についての説明だけが不健全だった。**
+
+### (5) ✅ **p4 の書込欠陥 3 連発と、確定した書き方**
+①`printf` の引数を**二重引用符**で囲んで backtick が展開され例が消えた（⭐ **危険は heredoc か printf かでなく *二重引用符か単一引用符か*** — p4 の直前の修理は不完全だった）②見出しを別 `printf` に分け追記先を付け忘れ、**見出しが stdout へ・本文だけ着地** ⇒ ⭐ **見出しの無い節ができ、p4 自身の「引用は見出しで」規則が使えなくなった**（**半分だけ着地する書込は、text でなく *引用の仕組み* を壊す**）③どちらも自分の規則を書いた直後。
+✅ **確定形**: 単一引用符の本文 ＋ 可変値は printf の書式引数 ＋ **見出しと本文を同じ 1 回の追記に** ＋ 追記後に末尾を読んで着地確認。
+⭐⭐ **p4 の帰結（当卓も採用）**: ⛔ **他卓の "nothing is executing" で「誰も走らせていない」を担保しない**（その卓の述語が拾う範囲でしか真でない）／⛔ **成果物の有無も使えない**（§8 item 5 が worktree ごと消す）⇒ **残るのは *行為者自身の申告* と *記録された sha* だけ** — **我々が持っていると振る舞っていたより小さい集合。**
+
+### (6) ✅ **p0 の §8 item 5 完了と、時刻が「隣の量」だった件**
+`worktree remove` 実行（registrations 12→11・prunable 6 は不変・**branch は検証済 artifact の恒久 pin として保持**）⇒ **p0 の実装連鎖は完了**（実装 → pZ 検証 → 着地 → 撤去）。
+⛔ **その途中の欠陥**: 「出力が在るか」を **`-newermt`（file の新しさ）** で測って **9 件**、同じ確認で **untracked = 0** ⇒ **自分の 2 数が矛盾したので見に行った** ⇒ **9 件は全部 tracked ＝ checkout**（worktree を 00:44 に作ったので全 file が今日の mtime を持つ）⇒ ⭐ **年齢は *checkout* を測っており *出所* を測っていなかった。**（当卓の「述語が隣の物に一致した」と同型で、p0 の場合は **時刻**が隣の量。）
+
+**Banked — 時刻は本節 commit の author date が正。**
