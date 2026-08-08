@@ -39595,3 +39595,66 @@ p5 逐語:「**0-commit state は *arc-freeze の残滓* であって選ばれ�
 (ii)(iii) = 着地済（上記 `1471729990`）。⚠ **ただし (ii) の pin は (2) により first-hand へ格上げ可能** — p6 へ返却済。
 
 **Banked 2026-08-08 10:1x JST.**
+
+
+## §1158 — ⭐⭐⭐⭐⭐ **p4 は 1 file を問うた。実測は 630 file で、その中に「session 開始時に必ず読め」と規定された面が 2 つ在り、宣言された backup 機構は 3 月から空だった**
+
+**契機** = p4 `m-p4-44`（10:07）の質問 2 件。⭐ **p4 は「設計上の意図か exposure か、私は判別を持たない」と述べ、行動せず問いだけを出した** — 本日 `m-p18-63` (2) で当卓が取った形と同型で、正しい。実測 10:08-10:12。
+
+---
+
+### (1) ✅ 質問 (1) HALT — **解除済**（当卓台帳 §1129 に在る）
+
+**2026-08-07 15:02:53、発令者 p6 が解除。** Rs 逐語「HALT を解除してよいか p6 に確認して」（14:5x・経由 p4・判断者 p6）。⭐ **条件は申告でなく実測で充足**（当卓が時刻を測った）。
+⭐ p6 の理由づけ逐語（本回答に必ず添える）:「**解除するのは *原因が止まった* からであって、*危険が消えた* からではない。この 2 つを混ぜるな。**」
+⛔ p6 は **p4 の宣言を解除の条件にしなかった**（記録として受け取り、対価として扱わない）。⇒ **disposition は完結・p4 の文脈に無かっただけ。**
+
+---
+
+### (2) ⛔⛔⛔ 質問 (2) `log.md` — **p4 の観測は正しい。ただし単位が違う。**
+
+✅ **p4 の申告は全数一致**: `thread_isaac_lab/thread-vault/log.md` = **7,690 行 / 2,640,265 byte / `??` untracked / `ls-files` に無い / check-ignore 空（＝ NOT ignored）/ commit 0**。
+✅ ⭐ **kill set 所属を dry run で実証**: `git clean -nd -- <log.md>` ⇒ 逐語「**Would remove thread_isaac_lab/thread-vault/log.md**」。
+✅ **RS71 §0#5 の pin も実在**: `RS71-System-Spec-SSOT.md:27`「the ONLY authorized exception is the clip-retention pin (`log.md:6534`)」＋ `:56` `:57`。**RS71 自身は TRACKED** ⇒ ⭐ **追跡された spec が、追跡されていない file の行を、唯一の kinematic 例外の根拠として指している。**
+
+#### ⭐⭐⭐ しかし単位は 1 file ではない — **実測 630**
+
+```
+thread-vault 配下 .md   tracked  :  69
+thread-vault 配下 .md   untracked: 630
+```
+⭐ **CLAUDE.md が名指す vault SSOT を 1 つずつ引くと、割れ方に規則が在る**:
+
+| file | 状態 | 位置づけ |
+|---|---|---|
+| `04-Specs/RS71-System-Spec-SSOT.md` | ✅ TRACKED | 設計 |
+| `04-Specs/SOMA.md` | ✅ TRACKED | 設計 |
+| `07-Design/00-DESIGN-STATUS-LEDGER.md` | ✅ TRACKED | 設計 |
+| `07-Design/RL-Routing-Design.md` | ✅ TRACKED | 設計 |
+| `index.md` | ✅ TRACKED | 運用 |
+| **`02-Workflow/VaultProtocol.md`** | ⛔ **UNTRACKED** | **運用（guard を定義する当の文書）** |
+| **`handoff.md`** | ⛔ **UNTRACKED** | **運用** |
+| **`log.md`** | ⛔ **UNTRACKED** | **運用** |
+
+⇒ ⭐⭐ **設計面は追跡され、運用面は追跡されていない** — **割れ方は一貫しており、意図的な設計に見える。**
+⇒ ⛔ **だが CLAUDE.md「Vault Operation Protocol」は逐語で「Session start: Read `index.md` → `handoff.md` → `tail -20 log.md` (**mandatory**)」と規定する** ⇒ ⭐⭐⭐ **必読 3 面のうち 2 面が、復旧経路の無い kill set の中に在る。**
+⇒ ⛔ **そして guard を定義する `VaultProtocol.md` 自身が無保護である。**
+
+#### ⭐⭐ 意図と機構は **別の問い**（p4 の二分を割り直す）
+p4 は「設計上の意図（off-git 運用）か exposure か」と二分した。⭐ **実測はこれを 2 つに割る**:
+- **追跡方針** = 一貫しており **意図的に見える**（設計/運用の線）。⚠ **当卓は「意図」を証拠で持たない — 見えるだけ**。
+- **backup 機構** = ⛔ **意図ではなく *空***。`.vault-config.yml:32-38` が `.vault-backups/` を **retention: "persistent"**・「Manual backups of modified files」と**宣言している**が、実測の中身は **`README.md` 1 本（872 byte・2026-03-02）だけ** ⇒ **backup は 0 本、3 月から。**
+⇒ ⭐⭐⭐ **宣言された機構が空であることは方針ではない。** これは本日ここまでの「**書いてある ≠ 効いている**」の、config 面での実例（`ABSENT-IN-CODE` の運用版）。
+
+⛔ **当卓は行動しない**（vault 追跡方針は当卓の court でない・§運用3 権限マトリクス）。**測定して Rs へ上げる。**
+
+---
+
+### (3) ⭐⭐ 本節の形 — **枠の教訓が 12 分で 2 回、向きを変えて出た**
+
+- **10:06**: p5 が当卓を捕らえた —「貴 (2) は 1 file を名指したが、inventory は 2 本」⇒ **当卓の枠が危険より狭かった**。
+- **10:07**: p4 が **1 file**（`log.md`）として exposure を出した ⇒ **実測は 630**。
+⇒ ⭐ **同じ 1 時間の中で、当卓は枠を狭めて叱られ、次の便で他卓の狭い枠を広げた。**
+⇒ ⭐⭐ **これは「学んだ」ではなく「*直前に殴られた側の器具を、次の入力に当てた*」** — 一般化ではなく転移である。**転移が起きたことを記録する**（一般化したと書くと、次の別形で同じ穴に落ちる）。
+
+**Banked 2026-08-08 10:1x JST.**
