@@ -81,4 +81,28 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 
 **pin 訂正（本 file §1-1・m-p18-96 spillover・自測 21:33）**: 裁定 A の cite `LEDGER:40` → 正 = **`:39`**・UR15 supersede の cite `:34` → 正 = **`:36`**。⭐ 2 誤りは逆方向 = 挿入 drift ではなく**書いた時点の独立 2 誤記**（p18 の診断に自測で一致・§1 原文は編集しない — 本節が訂正の record）。
 
+## 7. micro-chunk DEFINE — dead-session scratchpad 依存の解消（owner: 設計 = p4 本節 / 実装 = p0 / 検証 = pZ）
+
+**記録 2026-08-08 22:12:10**（`date` 実測・全事実は本 session 22:0x-22:1x の第一手測定）。
+
+**優先度の格上げ（p18 m-p18-97 の論証 + 新実測）**: ⛔ **回収は既に始まっている** — `render_cell_overview.py` の copy 先 dir `…/scratchpad/meshpool/` は **既に削除済**（`ls` 実測 = No such file or directory）⇒ **fence 承認済の視覚レグ script は現時点で壊れている**（`:53` `AS_BUILT.write_bytes` が親 dir 不在で失敗する）。よって本 chunk は「推奨」でなく **pZ 視覚レグ / DoD の前に必須**。
+
+**実測（機構）**:
+1. `ur15_steps_wired.py:32` — `S = Path("/tmp/claude-1000/…/b952db35-…/scratchpad")` = **閉鎖済み旧 session の scratchpad**（現 session = ae175dcf・本日 2 卓で session id が roll した実測あり）。
+2. S の使用 5 点: **:287 top-level `(S/"_steps_world.xml").write_text(world)` = import 時実行**（:288 で即 compile・dir 不在なら import 自体が落ちる）/ :328 top-level `_steps_cell_full.xml` / :131-132 関数内 `_arm_only_{tag}.xml` / **:3809-3810 `sigma_trace.txt` = run 出力も dead dir 行き**。`S.mkdir` は **0 箇所**（dir 実在に依存）。
+3. `render_cell_overview.py:36-39` — 同 dead path 2 本: `SRC = …/_steps_cell_full.xml`（wired の生成物を読む producer→consumer 結線）/ `AS_BUILT = …/meshpool/_as_built_t42.xml`（:53-54 SRC→copy→load）。
+4. **mesh 解決の制約**: 生成 XML（flatten 済）は gripper mesh 5 件を**相対名**で参照（`base_mount/base/coupler/driver/follower.stl` — flatten で include 文脈が消え、load 位置基準で解決）+ repo 絶対 path（`ur15_mirror_meshes/*`）。⇒ **meshpool の役割 = 相対 5 件の解決点**（STL 実体を持つ dir から load する仕掛け）。
+5. scratchpad root は現存・`_steps_cell_full.xml` = 61,833 bytes・mtime **2026-08-04 15:26**（stale・最終 import 時刻）。`sigma_trace.txt` の programmatic reader = **0**（grep 実測・run log の言及のみ）。fence 外 10 script にも同 dead path が在るが **scope 外**（§6 fence が使用を禁止済・触らない）。
+
+**設計（shape・実装裁量は p0）**:
+- `ur15_steps_wired.py`: `S = Path(__file__).resolve().parent / "_gen"` ＋ 最初の write 前に `S.mkdir(exist_ok=True)`。使用 5 点は無変更で追随（S の再定義のみ）。
+- `render_cell_overview.py`: `SRC = <wired と同じ _gen>/_steps_cell_full.xml`・`AS_BUILT = <_gen>/meshpool/_as_built_t42.xml` とし、**gripper STL 5 件が解決すること**を成立条件とする（例: script 起動時に repo assets（`GRIP_XML` 同梱 mesh）から `_gen/meshpool/` へ copy。手段は p0 裁量・**新 file を repo に track しない**〔生成物は untracked の `_gen/` 内〕）。
+- ⛔ しないこと: 挙動・出力形式の変更 / fence 外 script への波及 / 新 env var・新 CLI / C-2 4 編集との同居 commit（**file 重複なし**: 本件 = wired+render / C-2 = cell_spec+sweep ⇒ **並行可・p5 整合レグとも独立** — p0 は C-2 発進待ちの間に本件を先行してよい）。
+- L-TRIAGE: 2 file・~10 行・repo 追跡の新 file なし ⇒ **L1**（DoD = 本節 + pZ 項・検証 = pZ 独立）。
+
+**pZ 受入項（本件分・spec §7 の 12 項に追加）**:
+(i) 2 script に `/tmp/claude` 参照 0（grep 閉じ query）。(ii) wired import が旧 path 不在前提で成功し生成物が `_gen/` に出る（旧 dir を消さずに検証するなら: 参照 0 ＋ `_gen/` への出力実在で足りる）。(iii) `render_cell_overview.py` が C-2 cell の絵を出す（**視覚レグ復旧の実証**）。(iv) 旧 path を読む consumer 0（sigma_trace reader 0 は実測済・render の SRC 付替えで最後の consumer が消える）。(v) pathspec 限定 commit・C-2 編集と分離。
+
+**evidence 保全（p4 実施済・claim なし）**: 旧 scratchpad の `_steps_cell_full.xml`（唯一の as-built snapshot・削除リスク下）を repo へ rescue copy = `p4_ur15_sim_20260727/asbuilt_snapshots/_steps_cell_full_asof_20260804_152626.xml`（cp -p・mtime 保全 2026-08-04 15:26:33・61,833 bytes・sha256 `28c242410314b199042acd0349a00e5937ccb08dbcd53e336a13a0fa8b944cab`）。⚠ **本 copy が「どの run を back するか」は無主張**（mtime = 最終 import 時刻という事実のみ。banked 測定との対応は content 照合してから言う）。
+
 > ⛔ **時刻訂正 2026-08-08 22:10:09（v5・挿入のみ・判定/数値/sha は全て不変）**: 上の「21:32 自測」「自測 21:33」は**書いた時点で誤りの時刻** — 測定対象の spec v2 は 21:50:11 起草・bank commit `3315631007` は **21:55:49**（`git show -s` 実測）ゆえ、21:32 に banked sha は測れない。実際の測定 = 本 session transcript の tool 時刻 **22:00:26–22:02:28**（sha 照合・裁定 A/UR15 行の再測）＋ 独立再測 **22:05:47**。v4 の pin `5ddf8f50c975a744…f81b115b` は v4 を指し続ける（pin は版を指す・rename の先例と同形）。

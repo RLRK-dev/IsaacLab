@@ -1,0 +1,641 @@
+<mujoco model="ur15_steps">
+  <compiler angle="radian"/>
+
+  <option timestep="0.000208333" integrator="implicitfast" cone="elliptic"/>
+
+  <visual>
+    <global offwidth="1600" offheight="900"/>
+    <headlight ambient="0.45 0.45 0.45" diffuse="0.75 0.75 0.75" specular="0.2 0.2 0.2"/>
+    <map znear="0.02"/>
+  </visual>
+
+  <default>
+    <default class="L_main"/>
+    <default class="Lg_main">
+      <default class="Lg_2f85">
+        <mesh scale="0.001 0.001 0.001"/>
+        <general biastype="affine"/>
+        <default class="Lg_driver">
+          <joint solreflimit="0.005" solimplimit="0.95 0.99" range="0 0.8" armature="0.005" damping="0.1"/>
+        </default>
+        <default class="Lg_follower">
+          <joint solreflimit="0.005" solimplimit="0.95 0.99" range="-0.872664 0.872664" armature="0.001"/>
+        </default>
+        <default class="Lg_spring_link">
+          <joint springref="2.62" stiffness="0.05" range="-0.296706 0.8" armature="0.001" damping="0.00125"/>
+        </default>
+        <default class="Lg_coupler">
+          <joint solreflimit="0.005" solimplimit="0.95 0.99" range="-1.57 0" armature="0.001"/>
+        </default>
+        <default class="Lg_visual">
+          <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+        </default>
+        <default class="Lg_collision">
+          <geom type="mesh" group="3"/>
+          <default class="Lg_pad_box1">
+            <geom size="0.011 0.004 0.009375" type="box" priority="1" friction="0.7" solref="0.004" solimp="0.95 0.99" rgba="0.55 0.55 0.55 1"/>
+          </default>
+          <default class="Lg_pad_box2">
+            <geom size="0.011 0.004 0.009375" type="box" priority="1" friction="0.6" solref="0.004" solimp="0.95 0.99" rgba="0.45 0.45 0.45 1"/>
+          </default>
+        </default>
+      </default>
+    </default>
+    <default class="R_main"/>
+    <default class="Rg_main">
+      <default class="Rg_2f85">
+        <mesh scale="0.001 0.001 0.001"/>
+        <general biastype="affine"/>
+        <default class="Rg_driver">
+          <joint solreflimit="0.005" solimplimit="0.95 0.99" range="0 0.8" armature="0.005" damping="0.1"/>
+        </default>
+        <default class="Rg_follower">
+          <joint solreflimit="0.005" solimplimit="0.95 0.99" range="-0.872664 0.872664" armature="0.001"/>
+        </default>
+        <default class="Rg_spring_link">
+          <joint springref="2.62" stiffness="0.05" range="-0.296706 0.8" armature="0.001" damping="0.00125"/>
+        </default>
+        <default class="Rg_coupler">
+          <joint solreflimit="0.005" solimplimit="0.95 0.99" range="-1.57 0" armature="0.001"/>
+        </default>
+        <default class="Rg_visual">
+          <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+        </default>
+        <default class="Rg_collision">
+          <geom type="mesh" group="3"/>
+          <default class="Rg_pad_box1">
+            <geom size="0.011 0.004 0.009375" type="box" priority="1" friction="0.7" solref="0.004" solimp="0.95 0.99" rgba="0.55 0.55 0.55 1"/>
+          </default>
+          <default class="Rg_pad_box2">
+            <geom size="0.011 0.004 0.009375" type="box" priority="1" friction="0.6" solref="0.004" solimp="0.95 0.99" rgba="0.45 0.45 0.45 1"/>
+          </default>
+        </default>
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <texture type="2d" colorspace="auto" name="grid" builtin="checker" rgb1="0.19 0.21 0.25" rgb2="0.25 0.27 0.32" width="512" height="512"/>
+    <material name="gridmat" texture="grid" texrepeat="12 12" reflectance="0.05"/>
+    <material name="col" rgba="0.86 0.86 0.87 1"/>
+    <material name="table" rgba="0.55 0.57 0.62 1"/>
+    <material name="clip" rgba="0.3 0.78 0.42 1"/>
+    <material name="clipf" rgba="0.2 0.62 0.32 1"/>
+    <material name="rest" rgba="0.72 0.6 0.35 1"/>
+    <material name="cable" rgba="0.95 0.95 0.97 1"/>
+    <material name="Lg_metal" rgba="0.58 0.58 0.58 1"/>
+    <material name="Lg_silicone" rgba="0.1882 0.1882 0.1882 1"/>
+    <material name="Lg_gray" rgba="0.4627 0.4627 0.4627 1"/>
+    <material name="Lg_black" rgba="0.149 0.149 0.149 1"/>
+    <material name="Rg_metal" rgba="0.58 0.58 0.58 1"/>
+    <material name="Rg_silicone" rgba="0.1882 0.1882 0.1882 1"/>
+    <material name="Rg_gray" rgba="0.4627 0.4627 0.4627 1"/>
+    <material name="Rg_black" rgba="0.149 0.149 0.149 1"/>
+    <mesh name="L_base" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/base.stl"/>
+    <mesh name="L_shoulder" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/shoulder.stl"/>
+    <mesh name="L_upperarm" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/upperarm.stl"/>
+    <mesh name="L_forearm" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/forearm.stl"/>
+    <mesh name="L_wrist1" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/wrist1.stl"/>
+    <mesh name="L_wrist2" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/wrist2.stl"/>
+    <mesh name="L_wrist3" content_type="model/stl" file="/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/collision/wrist3.stl"/>
+    <mesh name="Lg_base_mount" class="Lg_2f85" file="base_mount.stl"/>
+    <mesh name="Lg_base" class="Lg_2f85" file="base.stl"/>
+    <mesh name="Lg_driver" class="Lg_2f85" file="driver.stl"/>
+    <mesh name="Lg_coupler" class="Lg_2f85" file="coupler.stl"/>
+    <mesh name="Lg_follower" class="Lg_2f85" file="follower.stl"/>
+    <mesh name="Lg_pad" class="Lg_2f85" file="pad.stl"/>
+    <mesh name="Lg_silicone_pad" class="Lg_2f85" file="silicone_pad.stl"/>
+    <mesh name="Lg_spring_link" class="Lg_2f85" file="spring_link.stl"/>
+    <mesh name="R_base" content_type="model/stl" file="/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_mirror_meshes/base.stl"/>
+    <mesh name="R_shoulder" content_type="model/stl" file="/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_mirror_meshes/shoulder.stl"/>
+    <mesh name="R_upperarm" content_type="model/stl" file="/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_mirror_meshes/upperarm.stl"/>
+    <mesh name="R_forearm" content_type="model/stl" file="/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_mirror_meshes/forearm.stl"/>
+    <mesh name="R_wrist1" content_type="model/stl" file="/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_mirror_meshes/wrist1.stl"/>
+    <mesh name="R_wrist2" content_type="model/stl" file="/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_mirror_meshes/wrist2.stl"/>
+    <mesh name="R_wrist3" content_type="model/stl" file="/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_mirror_meshes/wrist3.stl"/>
+    <mesh name="Rg_base_mount" class="Rg_2f85" file="base_mount.stl"/>
+    <mesh name="Rg_base" class="Rg_2f85" file="base.stl"/>
+    <mesh name="Rg_driver" class="Rg_2f85" file="driver.stl"/>
+    <mesh name="Rg_coupler" class="Rg_2f85" file="coupler.stl"/>
+    <mesh name="Rg_follower" class="Rg_2f85" file="follower.stl"/>
+    <mesh name="Rg_pad" class="Rg_2f85" file="pad.stl"/>
+    <mesh name="Rg_silicone_pad" class="Rg_2f85" file="silicone_pad.stl"/>
+    <mesh name="Rg_spring_link" class="Rg_2f85" file="spring_link.stl"/>
+  </asset>
+
+  <worldbody>
+    <geom name="floor" size="6 6 0.1" type="plane" contype="0" conaffinity="0" material="gridmat"/>
+    <body name="column">
+      <geom name="stem" size="0.102 0.58" pos="0 0 0.95" type="cylinder" material="col"/>
+      <geom name="foot" size="0.215 0.03" pos="0 0 0.03" type="cylinder" material="col"/>
+      <geom name="crown" size="0.11 0.22" pos="0 0 1.44" quat="0.707107 0 -0.707107 0" type="capsule" material="col"/>
+      <body name="L_shoulder_link" pos="-0.374574 0 1.68457" quat="0 -0.382683 0 0.92388" gravcomp="1">
+        <inertial pos="2.4e-05 -0.025304 -0.033309" quat="0.695667 0.163117 -0.158899 0.681316" mass="9.9883" diaginertia="0.0520589 0.0513337 0.0299064"/>
+        <joint name="L_shoulder_pan_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-433 433" armature="0.1" damping="1"/>
+        <geom quat="0 0 0 1" type="mesh" mesh="L_shoulder"/>
+        <body name="L_upper_arm_link" quat="0.707107 0.707107 0 0" gravcomp="1">
+          <inertial pos="-0.228491 -8.3e-05 0.192787" quat="0.508311 0.491722 0.494029 0.505732" mass="14.9255" diaginertia="1.1885 1.18368 0.0472925"/>
+          <joint name="L_shoulder_lift_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-433 433" armature="0.1" damping="1"/>
+          <geom pos="0 0 0.1" quat="0.5 0.5 -0.5 -0.5" type="mesh" mesh="L_upperarm"/>
+          <body name="L_forearm_link" pos="-0.6475 0 0" gravcomp="1">
+            <inertial pos="-0.210929 1.9e-05 0.070552" quat="0.48756 0.51214 0.511914 0.487793" mass="6.1015" diaginertia="0.303502 0.297506 0.017818"/>
+            <joint name="L_elbow_joint" pos="0 0 0" axis="0 0 1" range="-3.14159 3.14159" actuatorfrcrange="-204 204" armature="0.1" damping="1"/>
+            <geom pos="0 0 0.125" quat="0.5 0.5 -0.5 -0.5" type="mesh" mesh="L_forearm"/>
+            <body name="L_wrist_1_link" pos="-0.5164 0 0.1824" gravcomp="1">
+              <inertial pos="2.5e-05 -0.016413 -0.019695" quat="0.833332 0.5518 -0.0145415 0.0293715" mass="2.089" diaginertia="0.00433968 0.00421107 0.00224825"/>
+              <joint name="L_wrist_1_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-70 70" armature="0.1" damping="1"/>
+              <geom pos="0 0 -0.0502" quat="0.707107 0.707107 0 0" type="mesh" mesh="L_wrist1"/>
+              <body name="L_wrist_2_link" pos="0 -0.1361 -2.79146e-11" quat="0.707107 0.707107 0 0" gravcomp="1">
+                <inertial pos="2.5e-05 0.015886 -0.01996" quat="0.548572 0.831821 0.0724532 -0.0435051" mass="2.0869" diaginertia="0.00428972 0.00423268 0.0022586"/>
+                <joint name="L_wrist_2_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-70 70" armature="0.1" damping="1"/>
+                <geom pos="0 0 -0.064" quat="1 0 0 0" type="mesh" mesh="L_wrist2"/>
+                <body name="L_wrist_3_link" pos="0 0.1434 -2.94118e-11" quat="0.707107 -0.707107 0 0" gravcomp="1">
+                  <inertial pos="-1.8e-05 -0.000112 -0.053397" quat="0.933909 -0.0233442 -0.0218371 -0.356078" mass="1.0666" diaginertia="0.00140944 0.00140222 0.00100034"/>
+                  <joint name="L_wrist_3_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-70 70" armature="0.1" damping="1"/>
+                  <geom pos="0 0 -0.0715" quat="0.707107 0.707107 0 0" type="mesh" mesh="L_wrist3"/>
+                  <body name="Lg_base_mount" childclass="Lg_2f85" pos="0 0 0.007" gravcomp="1">
+                    <geom class="Lg_visual" material="Lg_black" mesh="Lg_base_mount"/>
+                    <geom class="Lg_collision" mesh="Lg_base_mount"/>
+                    <body name="Lg_base" pos="0 0 0.0038" quat="0.707107 0 0 -0.707107" gravcomp="1">
+                      <inertial pos="0 -2.70394e-05 0.0354675" quat="0.999999 -0.00152849 0 0" mass="0.777441" diaginertia="0.000260285 0.000225381 0.000152708"/>
+                      <geom class="Lg_visual" material="Lg_black" mesh="Lg_base"/>
+                      <geom class="Lg_collision" mesh="Lg_base"/>
+                      <site name="Lg_pinch" pos="0 0 0.145" group="5" rgba="0.9 0.9 0.9 1"/>
+                      <body name="Lg_right_driver" pos="0 0.0306011 0.054904" gravcomp="1">
+                        <inertial pos="2.96931e-12 0.0177547 0.00107314" quat="0.681301 0.732003 0 0" mass="0.00899563" diaginertia="1.72352e-06 1.60906e-06 3.22006e-07"/>
+                        <joint name="Lg_right_driver_joint" class="Lg_driver" pos="0 0 0" axis="1 0 0"/>
+                        <geom class="Lg_visual" material="Lg_gray" mesh="Lg_driver"/>
+                        <geom class="Lg_collision" mesh="Lg_driver"/>
+                        <body name="Lg_right_coupler" pos="0 0.0315 -0.0041" gravcomp="1">
+                          <inertial pos="0 0.00301209 0.0232175" quat="0.705636 -0.0455904 0.0455904 0.705636" mass="0.0140974" diaginertia="4.16206e-06 3.52216e-06 8.88131e-07"/>
+                          <joint name="Lg_right_coupler_joint" class="Lg_coupler" pos="0 0 0" axis="1 0 0"/>
+                          <geom class="Lg_visual" material="Lg_black" mesh="Lg_coupler"/>
+                          <geom class="Lg_collision" mesh="Lg_coupler"/>
+                        </body>
+                      </body>
+                      <body name="Lg_right_spring_link" pos="0 0.0132 0.0609" gravcomp="1">
+                        <inertial pos="-8.65005e-09 0.0181624 0.0212658" quat="0.663403 -0.244737 0.244737 0.663403" mass="0.0221642" diaginertia="8.96853e-06 6.71733e-06 2.63931e-06"/>
+                        <joint name="Lg_right_spring_link_joint" class="Lg_spring_link" pos="0 0 0" axis="1 0 0" springref="2.62"/>
+                        <geom class="Lg_visual" material="Lg_black" mesh="Lg_spring_link"/>
+                        <geom class="Lg_collision" mesh="Lg_spring_link"/>
+                        <body name="Lg_right_follower" pos="0 0.055 0.0375" gravcomp="1">
+                          <inertial pos="0 -0.011046 0.0124786" quat="0.986437 0.164143 0 0" mass="0.0125222" diaginertia="2.67415e-06 2.4559e-06 6.02031e-07"/>
+                          <joint name="Lg_right_follower_joint" class="Lg_follower" pos="0 -0.018 0.0065" axis="1 0 0"/>
+                          <geom class="Lg_visual" material="Lg_black" mesh="Lg_follower"/>
+                          <geom class="Lg_collision" mesh="Lg_follower"/>
+                          <body name="Lg_right_pad" pos="0 -0.0189 0.01352" gravcomp="1">
+                            <inertial pos="0 -0.0025 0.0185" quat="0.707107 0 0 0.707107" mass="0.0035" diaginertia="4.73958e-07 3.64583e-07 1.23958e-07"/>
+                            <geom name="Lg_right_pad_f1ext" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0402" type="box" priority="1" friction="0.7" solref="0.004" solimp="0.95 0.99" mass="0" rgba="0.85 0.25 0.25 1"/>
+                            <geom name="Lg_right_pad_f2ext" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0218" type="box" priority="1" friction="0.7" solref="0.004" solimp="0.95 0.99" mass="0" rgba="0.2 0.45 0.95 1"/>
+                            <geom name="Lg_right_pad1" class="Lg_pad_box1" pos="0 -0.0026 0.028125" mass="0"/>
+                            <geom name="Lg_right_pad2" class="Lg_pad_box2" pos="0 -0.0026 0.009375" mass="0"/>
+                            <geom class="Lg_visual" mesh="Lg_pad"/>
+                            <body name="Lg_right_silicone_pad" gravcomp="1">
+                              <geom class="Lg_visual" material="Lg_black" mesh="Lg_silicone_pad"/>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                      <body name="Lg_left_driver" pos="0 -0.0306011 0.054904" quat="0 0 0 1" gravcomp="1">
+                        <inertial pos="0 0.0177547 0.00107314" quat="0.681301 0.732003 0 0" mass="0.00899563" diaginertia="1.72352e-06 1.60906e-06 3.22006e-07"/>
+                        <joint name="Lg_left_driver_joint" class="Lg_driver" pos="0 0 0" axis="1 0 0"/>
+                        <geom class="Lg_visual" material="Lg_gray" mesh="Lg_driver"/>
+                        <geom class="Lg_collision" mesh="Lg_driver"/>
+                        <body name="Lg_left_coupler" pos="0 0.0315 -0.0041" gravcomp="1">
+                          <inertial pos="0 0.00301209 0.0232175" quat="0.705636 -0.0455904 0.0455904 0.705636" mass="0.0140974" diaginertia="4.16206e-06 3.52216e-06 8.88131e-07"/>
+                          <joint name="Lg_left_coupler_joint" class="Lg_coupler" pos="0 0 0" axis="1 0 0"/>
+                          <geom class="Lg_visual" material="Lg_black" mesh="Lg_coupler"/>
+                          <geom class="Lg_collision" mesh="Lg_coupler"/>
+                        </body>
+                      </body>
+                      <body name="Lg_left_spring_link" pos="0 -0.0132 0.0609" quat="0 0 0 1" gravcomp="1">
+                        <inertial pos="-8.65005e-09 0.0181624 0.0212658" quat="0.663403 -0.244737 0.244737 0.663403" mass="0.0221642" diaginertia="8.96853e-06 6.71733e-06 2.63931e-06"/>
+                        <joint name="Lg_left_spring_link_joint" class="Lg_spring_link" pos="0 0 0" axis="1 0 0" springref="2.62"/>
+                        <geom class="Lg_visual" material="Lg_black" mesh="Lg_spring_link"/>
+                        <geom class="Lg_collision" mesh="Lg_spring_link"/>
+                        <body name="Lg_left_follower" pos="0 0.055 0.0375" gravcomp="1">
+                          <inertial pos="0 -0.011046 0.0124786" quat="0.986437 0.164143 0 0" mass="0.0125222" diaginertia="2.67415e-06 2.4559e-06 6.02031e-07"/>
+                          <joint name="Lg_left_follower_joint" class="Lg_follower" pos="0 -0.018 0.0065" axis="1 0 0"/>
+                          <geom class="Lg_visual" material="Lg_black" mesh="Lg_follower"/>
+                          <geom class="Lg_collision" mesh="Lg_follower"/>
+                          <body name="Lg_left_pad" pos="0 -0.0189 0.01352" gravcomp="1">
+                            <inertial pos="0 -0.0025 0.0185" quat="0.707107 0 0 0.707107" mass="0.0035" diaginertia="4.73958e-07 3.64583e-07 1.23958e-07"/>
+                            <geom name="Lg_left_pad_f1ext" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0402" type="box" priority="1" friction="0.7" solref="0.004" solimp="0.95 0.99" mass="0" rgba="0.85 0.25 0.25 1"/>
+                            <geom name="Lg_left_pad_f2ext" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0218" type="box" priority="1" friction="0.7" solref="0.004" solimp="0.95 0.99" mass="0" rgba="0.2 0.45 0.95 1"/>
+                            <geom name="Lg_left_pad1" class="Lg_pad_box1" pos="0 -0.0026 0.028125" mass="0"/>
+                            <geom name="Lg_left_pad2" class="Lg_pad_box2" pos="0 -0.0026 0.009375" mass="0"/>
+                            <geom class="Lg_visual" mesh="Lg_pad"/>
+                            <body name="Lg_left_silicone_pad" gravcomp="1">
+                              <geom class="Lg_visual" material="Lg_black" mesh="Lg_silicone_pad"/>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="R_shoulder_link" pos="0.374574 0 1.68457" quat="0 0.382683 0 0.92388" gravcomp="1">
+        <inertial pos="-2.4e-05 -0.025304 -0.033309" quat="0.695667 0.163117 0.158899 -0.681316" mass="9.9883" diaginertia="0.0520589 0.0513337 0.0299064"/>
+        <joint name="R_shoulder_pan_joint" pos="0 0 0" axis="0 0 -1" range="-6.28319 6.28319" actuatorfrcrange="-433 433" armature="0.1" damping="1"/>
+        <geom quat="0 0 0 1" type="mesh" mesh="R_shoulder"/>
+        <body name="R_upper_arm_link" quat="0.707107 0.707107 0 0" gravcomp="1">
+          <inertial pos="0.228491 -8.3e-05 0.192787" quat="0.508311 0.491722 -0.494029 -0.505732" mass="14.9255" diaginertia="1.1885 1.18368 0.0472925"/>
+          <joint name="R_shoulder_lift_joint" pos="0 0 0" axis="0 0 -1" range="-6.28319 6.28319" actuatorfrcrange="-433 433" armature="0.1" damping="1"/>
+          <geom pos="0 0 0.1" quat="0.5 0.5 0.5 0.5" type="mesh" mesh="R_upperarm"/>
+          <body name="R_forearm_link" pos="0.6475 0 0" gravcomp="1">
+            <inertial pos="0.210929 1.9e-05 0.070552" quat="0.48756 0.51214 -0.511914 -0.487793" mass="6.1015" diaginertia="0.303502 0.297506 0.017818"/>
+            <joint name="R_elbow_joint" pos="0 0 0" axis="0 0 -1" range="-3.14159 3.14159" actuatorfrcrange="-204 204" armature="0.1" damping="1"/>
+            <geom pos="0 0 0.125" quat="0.5 0.5 0.5 0.5" type="mesh" mesh="R_forearm"/>
+            <body name="R_wrist_1_link" pos="0.5164 0 0.1824" gravcomp="1">
+              <inertial pos="-2.5e-05 -0.016413 -0.019695" quat="0.833332 0.5518 0.0145415 -0.0293715" mass="2.089" diaginertia="0.00433968 0.00421107 0.00224825"/>
+              <joint name="R_wrist_1_joint" pos="0 0 0" axis="0 0 -1" range="-6.28319 6.28319" actuatorfrcrange="-70 70" armature="0.1" damping="1"/>
+              <geom pos="0 0 -0.0502" quat="0.707107 0.707107 0 0" type="mesh" mesh="R_wrist1"/>
+              <body name="R_wrist_2_link" pos="0 -0.1361 -2.79146e-11" quat="0.707107 0.707107 0 0" gravcomp="1">
+                <inertial pos="-2.5e-05 0.015886 -0.01996" quat="0.548572 0.831821 -0.0724532 0.0435051" mass="2.0869" diaginertia="0.00428972 0.00423268 0.0022586"/>
+                <joint name="R_wrist_2_joint" pos="0 0 0" axis="0 0 -1" range="-6.28319 6.28319" actuatorfrcrange="-70 70" armature="0.1" damping="1"/>
+                <geom pos="0 0 -0.064" quat="1 0 0 0" type="mesh" mesh="R_wrist2"/>
+                <body name="R_wrist_3_link" pos="0 0.1434 -2.94118e-11" quat="-0.707107 0.707107 0 0" gravcomp="1">
+                  <inertial pos="1.8e-05 -0.000112 -0.053397" quat="0.933909 -0.0233442 0.0218371 0.356078" mass="1.0666" diaginertia="0.00140944 0.00140222 0.00100034"/>
+                  <joint name="R_wrist_3_joint" pos="0 0 0" axis="0 0 -1" range="-6.28319 6.28319" actuatorfrcrange="-70 70" armature="0.1" damping="1"/>
+                  <geom pos="0 0 -0.0715" quat="0.707107 0.707107 0 0" type="mesh" mesh="R_wrist3"/>
+                  <body name="Rg_base_mount" childclass="Rg_2f85" pos="0 0 0.007" gravcomp="1">
+                    <geom class="Rg_visual" material="Rg_black" mesh="Rg_base_mount"/>
+                    <geom class="Rg_collision" mesh="Rg_base_mount"/>
+                    <body name="Rg_base" pos="0 0 0.0038" quat="0.707107 0 0 -0.707107" gravcomp="1">
+                      <inertial pos="0 -2.70394e-05 0.0354675" quat="0.999999 -0.00152849 0 0" mass="0.777441" diaginertia="0.000260285 0.000225381 0.000152708"/>
+                      <geom class="Rg_visual" material="Rg_black" mesh="Rg_base"/>
+                      <geom class="Rg_collision" mesh="Rg_base"/>
+                      <site name="Rg_pinch" pos="0 0 0.145" group="5" rgba="0.9 0.9 0.9 1"/>
+                      <body name="Rg_right_driver" pos="0 0.0306011 0.054904" gravcomp="1">
+                        <inertial pos="2.96931e-12 0.0177547 0.00107314" quat="0.681301 0.732003 0 0" mass="0.00899563" diaginertia="1.72352e-06 1.60906e-06 3.22006e-07"/>
+                        <joint name="Rg_right_driver_joint" class="Rg_driver" pos="0 0 0" axis="1 0 0"/>
+                        <geom class="Rg_visual" material="Rg_gray" mesh="Rg_driver"/>
+                        <geom class="Rg_collision" mesh="Rg_driver"/>
+                        <body name="Rg_right_coupler" pos="0 0.0315 -0.0041" gravcomp="1">
+                          <inertial pos="0 0.00301209 0.0232175" quat="0.705636 -0.0455904 0.0455904 0.705636" mass="0.0140974" diaginertia="4.16206e-06 3.52216e-06 8.88131e-07"/>
+                          <joint name="Rg_right_coupler_joint" class="Rg_coupler" pos="0 0 0" axis="1 0 0"/>
+                          <geom class="Rg_visual" material="Rg_black" mesh="Rg_coupler"/>
+                          <geom class="Rg_collision" mesh="Rg_coupler"/>
+                        </body>
+                      </body>
+                      <body name="Rg_right_spring_link" pos="0 0.0132 0.0609" gravcomp="1">
+                        <inertial pos="-8.65005e-09 0.0181624 0.0212658" quat="0.663403 -0.244737 0.244737 0.663403" mass="0.0221642" diaginertia="8.96853e-06 6.71733e-06 2.63931e-06"/>
+                        <joint name="Rg_right_spring_link_joint" class="Rg_spring_link" pos="0 0 0" axis="1 0 0" springref="2.62"/>
+                        <geom class="Rg_visual" material="Rg_black" mesh="Rg_spring_link"/>
+                        <geom class="Rg_collision" mesh="Rg_spring_link"/>
+                        <body name="Rg_right_follower" pos="0 0.055 0.0375" gravcomp="1">
+                          <inertial pos="0 -0.011046 0.0124786" quat="0.986437 0.164143 0 0" mass="0.0125222" diaginertia="2.67415e-06 2.4559e-06 6.02031e-07"/>
+                          <joint name="Rg_right_follower_joint" class="Rg_follower" pos="0 -0.018 0.0065" axis="1 0 0"/>
+                          <geom class="Rg_visual" material="Rg_black" mesh="Rg_follower"/>
+                          <geom class="Rg_collision" mesh="Rg_follower"/>
+                          <body name="Rg_right_pad" pos="0 -0.0189 0.01352" gravcomp="1">
+                            <inertial pos="0 -0.0025 0.0185" quat="0.707107 0 0 0.707107" mass="0.0035" diaginertia="4.73958e-07 3.64583e-07 1.23958e-07"/>
+                            <geom name="Rg_right_pad_f1ext" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0402" type="box" priority="1" friction="0.7" solref="0.004" solimp="0.95 0.99" mass="0" rgba="0.85 0.25 0.25 1"/>
+                            <geom name="Rg_right_pad_f2ext" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0218" type="box" priority="1" friction="0.7" solref="0.004" solimp="0.95 0.99" mass="0" rgba="0.2 0.45 0.95 1"/>
+                            <geom name="Rg_right_pad1" class="Rg_pad_box1" pos="0 -0.0026 0.028125" mass="0"/>
+                            <geom name="Rg_right_pad2" class="Rg_pad_box2" pos="0 -0.0026 0.009375" mass="0"/>
+                            <geom class="Rg_visual" mesh="Rg_pad"/>
+                            <body name="Rg_right_silicone_pad" gravcomp="1">
+                              <geom class="Rg_visual" material="Rg_black" mesh="Rg_silicone_pad"/>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                      <body name="Rg_left_driver" pos="0 -0.0306011 0.054904" quat="0 0 0 1" gravcomp="1">
+                        <inertial pos="0 0.0177547 0.00107314" quat="0.681301 0.732003 0 0" mass="0.00899563" diaginertia="1.72352e-06 1.60906e-06 3.22006e-07"/>
+                        <joint name="Rg_left_driver_joint" class="Rg_driver" pos="0 0 0" axis="1 0 0"/>
+                        <geom class="Rg_visual" material="Rg_gray" mesh="Rg_driver"/>
+                        <geom class="Rg_collision" mesh="Rg_driver"/>
+                        <body name="Rg_left_coupler" pos="0 0.0315 -0.0041" gravcomp="1">
+                          <inertial pos="0 0.00301209 0.0232175" quat="0.705636 -0.0455904 0.0455904 0.705636" mass="0.0140974" diaginertia="4.16206e-06 3.52216e-06 8.88131e-07"/>
+                          <joint name="Rg_left_coupler_joint" class="Rg_coupler" pos="0 0 0" axis="1 0 0"/>
+                          <geom class="Rg_visual" material="Rg_black" mesh="Rg_coupler"/>
+                          <geom class="Rg_collision" mesh="Rg_coupler"/>
+                        </body>
+                      </body>
+                      <body name="Rg_left_spring_link" pos="0 -0.0132 0.0609" quat="0 0 0 1" gravcomp="1">
+                        <inertial pos="-8.65005e-09 0.0181624 0.0212658" quat="0.663403 -0.244737 0.244737 0.663403" mass="0.0221642" diaginertia="8.96853e-06 6.71733e-06 2.63931e-06"/>
+                        <joint name="Rg_left_spring_link_joint" class="Rg_spring_link" pos="0 0 0" axis="1 0 0" springref="2.62"/>
+                        <geom class="Rg_visual" material="Rg_black" mesh="Rg_spring_link"/>
+                        <geom class="Rg_collision" mesh="Rg_spring_link"/>
+                        <body name="Rg_left_follower" pos="0 0.055 0.0375" gravcomp="1">
+                          <inertial pos="0 -0.011046 0.0124786" quat="0.986437 0.164143 0 0" mass="0.0125222" diaginertia="2.67415e-06 2.4559e-06 6.02031e-07"/>
+                          <joint name="Rg_left_follower_joint" class="Rg_follower" pos="0 -0.018 0.0065" axis="1 0 0"/>
+                          <geom class="Rg_visual" material="Rg_black" mesh="Rg_follower"/>
+                          <geom class="Rg_collision" mesh="Rg_follower"/>
+                          <body name="Rg_left_pad" pos="0 -0.0189 0.01352" gravcomp="1">
+                            <inertial pos="0 -0.0025 0.0185" quat="0.707107 0 0 0.707107" mass="0.0035" diaginertia="4.73958e-07 3.64583e-07 1.23958e-07"/>
+                            <geom name="Rg_left_pad_f1ext" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0402" type="box" priority="1" friction="0.7" solref="0.004" solimp="0.95 0.99" mass="0" rgba="0.85 0.25 0.25 1"/>
+                            <geom name="Rg_left_pad_f2ext" size="0.011 0.009 0.0012" pos="0 -0.0026 0.0218" type="box" priority="1" friction="0.7" solref="0.004" solimp="0.95 0.99" mass="0" rgba="0.2 0.45 0.95 1"/>
+                            <geom name="Rg_left_pad1" class="Rg_pad_box1" pos="0 -0.0026 0.028125" mass="0"/>
+                            <geom name="Rg_left_pad2" class="Rg_pad_box2" pos="0 -0.0026 0.009375" mass="0"/>
+                            <geom class="Rg_visual" mesh="Rg_pad"/>
+                            <body name="Rg_left_silicone_pad" gravcomp="1">
+                              <geom class="Rg_visual" material="Rg_black" mesh="Rg_silicone_pad"/>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+    <body name="table" pos="0 0.34 0">
+      <geom name="table_top" size="0.7 0.2 0.02" pos="0 0 0.78" type="box" material="table"/>
+    </body>
+    <body name="C1" pos="0.15 0.35 0.8">
+      <geom name="C1_0" size="0.015 0.02 0.0025" pos="0 0 0.0025" type="box" friction="1 0.005 0.005" solref="-40000 -400" material="clip"/>
+      <geom name="C1_1" size="0.015 0.0015 0.0075" pos="0 -0.009 0.0125" type="box" friction="1 0.005 0.005" solref="-40000 -400" material="clip"/>
+      <geom name="C1_2" size="0.015 0.0015 0.0075" pos="0 0.009 0.0125" type="box" friction="1 0.005 0.005" solref="-40000 -400" material="clip"/>
+      <geom name="C1_3" size="0.015 0.002 0.005" pos="0 -0.013 0.025" type="box" friction="1 0.005 0.005" solref="-40000 -400" material="clip"/>
+      <geom name="C1_4" size="0.015 0.002 0.005" pos="0 0.013 0.025" type="box" friction="1 0.005 0.005" solref="-40000 -400" material="clip"/>
+    </body>
+    <body name="C2" pos="0.04 0.4 0.8">
+      <geom name="C2_0" size="0.015 0.02 0.0025" pos="0 0 0.0025" type="box" friction="1 0.005 0.005" solref="-40000 -400" material="clip"/>
+      <geom name="C2_1" size="0.015 0.0015 0.0075" pos="0 -0.009 0.0125" type="box" friction="1 0.005 0.005" solref="-40000 -400" material="clip"/>
+      <geom name="C2_2" size="0.015 0.0015 0.0075" pos="0 0.009 0.0125" type="box" friction="1 0.005 0.005" solref="-40000 -400" material="clip"/>
+      <geom name="C2_3" size="0.015 0.002 0.005" pos="0 -0.013 0.025" type="box" friction="1 0.005 0.005" solref="-40000 -400" material="clip"/>
+      <geom name="C2_4" size="0.015 0.002 0.005" pos="0 0.013 0.025" type="box" friction="1 0.005 0.005" solref="-40000 -400" material="clip"/>
+    </body>
+    <body name="S1" pos="-0.3 0.28 0.8">
+      <geom name="S1_post" size="0.014 0.014 0.075" pos="0 0 0.075" type="box" material="rest"/>
+      <geom name="S1_la" size="0.014 0.004 0.006" pos="0 -0.012 0.156" type="box" material="rest"/>
+      <geom name="S1_lb" size="0.014 0.004 0.006" pos="0 0.012 0.156" type="box" material="rest"/>
+    </body>
+    <body name="S2" pos="-0.055 0.28 0.8">
+      <geom name="S2_post" size="0.014 0.014 0.075" pos="0 0 0.075" type="box" material="rest"/>
+      <geom name="S2_la" size="0.014 0.004 0.006" pos="0 -0.012 0.156" type="box" material="rest"/>
+      <geom name="S2_lb" size="0.014 0.004 0.006" pos="0 0.012 0.156" type="box" material="rest"/>
+    </body>
+    <body name="S3" pos="0.245 0.28 0.8">
+      <geom name="S3_post" size="0.014 0.014 0.075" pos="0 0 0.075" type="box" material="rest"/>
+      <geom name="S3_la" size="0.014 0.004 0.006" pos="0 -0.012 0.156" type="box" material="rest"/>
+      <geom name="S3_lb" size="0.014 0.004 0.006" pos="0 0.012 0.156" type="box" material="rest"/>
+    </body>
+    <body name="cab0" pos="-0.3 0.28 0.954">
+      <joint name="cable_free" type="free"/>
+      <geom name="cab0_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+      <body name="cab1" pos="0.015 0 0">
+        <joint name="cab1_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+        <joint name="cab1_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+        <geom name="cab1_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+        <body name="cab2" pos="0.015 0 0">
+          <joint name="cab2_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+          <joint name="cab2_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+          <geom name="cab2_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+          <body name="cab3" pos="0.015 0 0">
+            <joint name="cab3_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+            <joint name="cab3_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+            <geom name="cab3_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+            <body name="cab4" pos="0.015 0 0">
+              <joint name="cab4_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+              <joint name="cab4_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+              <geom name="cab4_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+              <body name="cab5" pos="0.015 0 0">
+                <joint name="cab5_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                <joint name="cab5_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                <geom name="cab5_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                <body name="cab6" pos="0.015 0 0">
+                  <joint name="cab6_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                  <joint name="cab6_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                  <geom name="cab6_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                  <body name="cab7" pos="0.015 0 0">
+                    <joint name="cab7_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                    <joint name="cab7_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                    <geom name="cab7_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                    <body name="cab8" pos="0.015 0 0">
+                      <joint name="cab8_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                      <joint name="cab8_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                      <geom name="cab8_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                      <body name="cab9" pos="0.015 0 0">
+                        <joint name="cab9_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                        <joint name="cab9_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                        <geom name="cab9_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                        <body name="cab10" pos="0.015 0 0">
+                          <joint name="cab10_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                          <joint name="cab10_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                          <geom name="cab10_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                          <body name="cab11" pos="0.015 0 0">
+                            <joint name="cab11_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                            <joint name="cab11_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                            <geom name="cab11_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                            <body name="cab12" pos="0.015 0 0">
+                              <joint name="cab12_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                              <joint name="cab12_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                              <geom name="cab12_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                              <body name="cab13" pos="0.015 0 0">
+                                <joint name="cab13_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                <joint name="cab13_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                <geom name="cab13_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                <body name="cab14" pos="0.015 0 0">
+                                  <joint name="cab14_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                  <joint name="cab14_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                  <geom name="cab14_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                  <body name="cab15" pos="0.015 0 0">
+                                    <joint name="cab15_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                    <joint name="cab15_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                    <geom name="cab15_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                    <body name="cab16" pos="0.015 0 0">
+                                      <joint name="cab16_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                      <joint name="cab16_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                      <geom name="cab16_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                      <body name="cab17" pos="0.015 0 0">
+                                        <joint name="cab17_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                        <joint name="cab17_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                        <geom name="cab17_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                        <body name="cab18" pos="0.015 0 0">
+                                          <joint name="cab18_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                          <joint name="cab18_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                          <geom name="cab18_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                          <body name="cab19" pos="0.015 0 0">
+                                            <joint name="cab19_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                            <joint name="cab19_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                            <geom name="cab19_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                            <body name="cab20" pos="0.015 0 0">
+                                              <joint name="cab20_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                              <joint name="cab20_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                              <geom name="cab20_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                              <body name="cab21" pos="0.015 0 0">
+                                                <joint name="cab21_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                <joint name="cab21_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                <geom name="cab21_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                <body name="cab22" pos="0.015 0 0">
+                                                  <joint name="cab22_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                  <joint name="cab22_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                  <geom name="cab22_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                  <body name="cab23" pos="0.015 0 0">
+                                                    <joint name="cab23_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                    <joint name="cab23_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                    <geom name="cab23_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                    <body name="cab24" pos="0.015 0 0">
+                                                      <joint name="cab24_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                      <joint name="cab24_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                      <geom name="cab24_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                      <body name="cab25" pos="0.015 0 0">
+                                                        <joint name="cab25_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                        <joint name="cab25_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                        <geom name="cab25_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                        <body name="cab26" pos="0.015 0 0">
+                                                          <joint name="cab26_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                          <joint name="cab26_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                          <geom name="cab26_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                          <body name="cab27" pos="0.015 0 0">
+                                                            <joint name="cab27_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                            <joint name="cab27_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                            <geom name="cab27_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                            <body name="cab28" pos="0.015 0 0">
+                                                              <joint name="cab28_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                              <joint name="cab28_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                              <geom name="cab28_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                              <body name="cab29" pos="0.015 0 0">
+                                                                <joint name="cab29_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                                <joint name="cab29_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                                <geom name="cab29_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                                <body name="cab30" pos="0.015 0 0">
+                                                                  <joint name="cab30_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                                  <joint name="cab30_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                                  <geom name="cab30_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                                  <body name="cab31" pos="0.015 0 0">
+                                                                    <joint name="cab31_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                                    <joint name="cab31_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                                    <geom name="cab31_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                                    <body name="cab32" pos="0.015 0 0">
+                                                                      <joint name="cab32_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                                      <joint name="cab32_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                                      <geom name="cab32_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                                      <body name="cab33" pos="0.015 0 0">
+                                                                        <joint name="cab33_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                                        <joint name="cab33_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                                        <geom name="cab33_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                                        <body name="cab34" pos="0.015 0 0">
+                                                                          <joint name="cab34_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                                          <joint name="cab34_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                                          <geom name="cab34_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                                          <body name="cab35" pos="0.015 0 0">
+                                                                            <joint name="cab35_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                                            <joint name="cab35_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                                            <geom name="cab35_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                                            <body name="cab36" pos="0.015 0 0">
+                                                                              <joint name="cab36_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                                              <joint name="cab36_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                                              <geom name="cab36_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                                              <body name="cab37" pos="0.015 0 0">
+                                                                                <joint name="cab37_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                                                <joint name="cab37_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                                                <geom name="cab37_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                                                <body name="cab38" pos="0.015 0 0">
+                                                                                  <joint name="cab38_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                                                  <joint name="cab38_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                                                  <geom name="cab38_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                                                  <body name="cab39" pos="0.015 0 0">
+                                                                                    <joint name="cab39_y" pos="0 0 0" axis="0 1 0" stiffness="0.33333" damping="0.01"/>
+                                                                                    <joint name="cab39_z" pos="0 0 0" axis="0 0 1" stiffness="0.33333" damping="0.01"/>
+                                                                                    <geom name="cab39_g" size="0.004 0.0075" pos="0.0075 0 0" quat="0.707107 0 -0.707107 0" type="capsule" condim="6" friction="1 0.005 0.005" mass="0.001124" material="cable"/>
+                                                                                  </body>
+                                                                                </body>
+                                                                              </body>
+                                                                            </body>
+                                                                          </body>
+                                                                        </body>
+                                                                      </body>
+                                                                    </body>
+                                                                  </body>
+                                                                </body>
+                                                              </body>
+                                                            </body>
+                                                          </body>
+                                                        </body>
+                                                      </body>
+                                                    </body>
+                                                  </body>
+                                                </body>
+                                              </body>
+                                            </body>
+                                          </body>
+                                        </body>
+                                      </body>
+                                    </body>
+                                  </body>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <contact>
+    <exclude body1="Lg_base" body2="Lg_right_driver"/>
+    <exclude body1="Lg_base" body2="Lg_right_spring_link"/>
+    <exclude body1="Lg_base" body2="Lg_left_driver"/>
+    <exclude body1="Lg_base" body2="Lg_left_spring_link"/>
+    <exclude body1="Lg_right_coupler" body2="Lg_right_follower"/>
+    <exclude body1="Lg_right_pad" body2="Lg_left_pad"/>
+    <exclude body1="Lg_left_coupler" body2="Lg_left_follower"/>
+    <exclude body1="Rg_base" body2="Rg_right_driver"/>
+    <exclude body1="Rg_base" body2="Rg_right_spring_link"/>
+    <exclude body1="Rg_base" body2="Rg_left_driver"/>
+    <exclude body1="Rg_base" body2="Rg_left_spring_link"/>
+    <exclude body1="Rg_right_coupler" body2="Rg_right_follower"/>
+    <exclude body1="Rg_right_pad" body2="Rg_left_pad"/>
+    <exclude body1="Rg_left_coupler" body2="Rg_left_follower"/>
+  </contact>
+
+  <equality>
+    <connect name="C1_pin" body1="C1" body2="cab30" anchor="0 0 0.009" active="false"/>
+    <connect name="C2_pin" body1="C2" body2="cab23" anchor="0 0 0.009" active="false"/>
+    <connect body1="Lg_right_follower" body2="Lg_right_coupler" anchor="0 0 0" solref="0.005" solimp="0.95 0.99"/>
+    <connect body1="Lg_left_follower" body2="Lg_left_coupler" anchor="0 0 0" solref="0.005" solimp="0.95 0.99"/>
+    <joint joint1="Lg_right_driver_joint" joint2="Lg_left_driver_joint" polycoef="0 1 0 0 0" solref="0.005" solimp="0.95 0.99"/>
+    <connect body1="Rg_right_follower" body2="Rg_right_coupler" anchor="0 0 0" solref="0.005" solimp="0.95 0.99"/>
+    <connect body1="Rg_left_follower" body2="Rg_left_coupler" anchor="0 0 0" solref="0.005" solimp="0.95 0.99"/>
+    <joint joint1="Rg_right_driver_joint" joint2="Rg_left_driver_joint" polycoef="0 1 0 0 0" solref="0.005" solimp="0.95 0.99"/>
+  </equality>
+
+  <tendon>
+    <fixed name="Lg_split">
+      <joint joint="Lg_right_driver_joint" coef="0.5"/>
+      <joint joint="Lg_left_driver_joint" coef="0.5"/>
+    </fixed>
+    <fixed name="Rg_split">
+      <joint joint="Rg_right_driver_joint" coef="0.5"/>
+      <joint joint="Rg_left_driver_joint" coef="0.5"/>
+    </fixed>
+  </tendon>
+
+  <actuator>
+    <general name="Lg_fingers_actuator" class="Lg_2f85" tendon="Lg_split" ctrlrange="0 255" forcerange="-5 5" gainprm="0.313725" biasprm="0 -100 -10"/>
+    <general name="Rg_fingers_actuator" class="Rg_2f85" tendon="Rg_split" ctrlrange="0 255" forcerange="-5 5" gainprm="0.313725" biasprm="0 -100 -10"/>
+    <general name="L_shoulder_pan_joint_act" joint="L_shoulder_pan_joint" ctrllimited="true" ctrlrange="-6.28319 6.28319" forcerange="-433 433" biastype="affine" gainprm="10000" biasprm="0 -10000 -600"/>
+    <general name="L_shoulder_lift_joint_act" joint="L_shoulder_lift_joint" ctrllimited="true" ctrlrange="-6.28319 6.28319" forcerange="-433 433" biastype="affine" gainprm="10000" biasprm="0 -10000 -600"/>
+    <general name="L_elbow_joint_act" joint="L_elbow_joint" ctrllimited="true" ctrlrange="-3.14159 3.14159" forcerange="-204 204" biastype="affine" gainprm="10000" biasprm="0 -10000 -600"/>
+    <general name="L_wrist_1_joint_act" joint="L_wrist_1_joint" ctrllimited="true" ctrlrange="-6.28319 6.28319" forcerange="-70 70" biastype="affine" gainprm="1200" biasprm="0 -1200 -72"/>
+    <general name="L_wrist_2_joint_act" joint="L_wrist_2_joint" ctrllimited="true" ctrlrange="-6.28319 6.28319" forcerange="-70 70" biastype="affine" gainprm="1200" biasprm="0 -1200 -72"/>
+    <general name="L_wrist_3_joint_act" joint="L_wrist_3_joint" ctrllimited="true" ctrlrange="-6.28319 6.28319" forcerange="-70 70" biastype="affine" gainprm="1200" biasprm="0 -1200 -72"/>
+    <general name="R_shoulder_pan_joint_act" joint="R_shoulder_pan_joint" ctrllimited="true" ctrlrange="-6.28319 6.28319" forcerange="-433 433" biastype="affine" gainprm="10000" biasprm="0 -10000 -600"/>
+    <general name="R_shoulder_lift_joint_act" joint="R_shoulder_lift_joint" ctrllimited="true" ctrlrange="-6.28319 6.28319" forcerange="-433 433" biastype="affine" gainprm="10000" biasprm="0 -10000 -600"/>
+    <general name="R_elbow_joint_act" joint="R_elbow_joint" ctrllimited="true" ctrlrange="-3.14159 3.14159" forcerange="-204 204" biastype="affine" gainprm="10000" biasprm="0 -10000 -600"/>
+    <general name="R_wrist_1_joint_act" joint="R_wrist_1_joint" ctrllimited="true" ctrlrange="-6.28319 6.28319" forcerange="-70 70" biastype="affine" gainprm="1200" biasprm="0 -1200 -72"/>
+    <general name="R_wrist_2_joint_act" joint="R_wrist_2_joint" ctrllimited="true" ctrlrange="-6.28319 6.28319" forcerange="-70 70" biastype="affine" gainprm="1200" biasprm="0 -1200 -72"/>
+    <general name="R_wrist_3_joint_act" joint="R_wrist_3_joint" ctrllimited="true" ctrlrange="-6.28319 6.28319" forcerange="-70 70" biastype="affine" gainprm="1200" biasprm="0 -1200 -72"/>
+  </actuator>
+</mujoco>
