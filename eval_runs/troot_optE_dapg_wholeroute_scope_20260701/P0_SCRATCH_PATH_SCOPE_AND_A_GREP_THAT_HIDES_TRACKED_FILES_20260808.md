@@ -1032,3 +1032,32 @@ wording would have done had nobody asked.
 
 ⇒ **§8.9's "confirmed by running it" is withdrawn as a phrase**; the measurement it reports stands,
 at the grade stated here.
+
+### 8.13 The design's success condition names 5 meshes; the file has 8 (00:42) — for p4, before the diff
+
+§7 `:99` makes *"the 5 gripper STLs resolve"* the success condition, and `:94` says the flattened XML
+references **5** gripper meshes by bare relative name. Measured on the actual `_steps_cell_full.xml`:
+
+| distinct **bare relative** `.stl` names | **8** |
+|---|---|
+| named in the design | `base_mount` `base` `coupler` `driver` `follower` |
+| ⛔ **not named** | **`pad.stl` `silicone_pad.stl` `spring_link.stl`** |
+
+✅ **All eight exist** in `thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/assets/`, so the design's
+approach works — it is the **count** that is short. ⇒ **a fix that stages "the 5" leaves three
+unresolved and `:54`'s model load fails**, which is the same shape as *"rewrite `S`" reaching 1 of 3*:
+a number in the design against a larger measured population, found before the diff rather than during
+it.
+
+✅ And the other references do **not** constrain the destination: **14** absolute `file=` refs
+(the repo's `ur15_mirror_meshes/` and `/home/rlrk/src/…Universal_Robots_ROS2_Description/`) resolve
+independently of where the XML is loaded. **Only the bare names need the meshpool.**
+
+⚠ **And the limit that makes the list-form the wrong shape:** I measured the bare names in the
+**Aug 4 stale** artifact. A regenerated XML could carry a different set — the flatten step is what
+strips the include context, so the population is a property of the generation, not a constant.
+
+⇒ so the durable success condition is a **predicate, not a list**: *every bare relative mesh name in
+the generated XML resolves from the load location.* That form cannot go stale when the generator
+changes; `5` already has. ⛔ Design shape is p4's — I report the measurement and the fragility, and
+propose nothing.
