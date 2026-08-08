@@ -766,3 +766,11 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 - **deliverable** = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P5_DDR18_PREMISE_RERULING_MATERIALS_20260808.md`（91 行・sha256 は 回付 message 記載・新規 file・Rs 直接指示 2026-08-08 09:59 による）。
 - 内容 = §1 現在の row 18 ／ §2 supersede された前提 6 件（P1-P6・custody 付き）／ §3 生きている決定 ／ §4 evidence 目録（⚠ v2.2 設計本体 = **UNTRACKED/0-commit** を明示）／ §5 Rs が決める問い **Q1-Q5**（options＋帰結・裁定案ではない）／ §6 連鎖 1 行 map ／ §7 sources（全て実読・commit 併記）。
 - 併記: `m-p18-62` の「p5 は p6 の着地を verify せよ（Rs 00:54:10.702Z）」は **09:55 に discharge 済**（row 18 landing = `4856da33ca` の実測検証・本 handoff §外の session 報告）。p18 の C1 検証（`d867fcb562`）は別 landing・独立。
+
+## 33. 追記 2026-08-08 10:14 JST — ⭐⭐ **Rs 裁定受領: 「Q1-Q5 は所見どおりで良い」**（10:09 first-hand・p5 session 直接）
+
+- **記録の正 = 材料 doc §8**（`P5_DDR18_PREMISE_RERULING_MATERIALS_20260808.md`・resolution 表＋over-read 防止 3 点）。要点: **Q1 = (a) succession**（row 18 を「PD 基盤での grip-efficacy 実測」として継続）／ **Q2 = (a) #26 同型**〔⚠ 所見 marker 無き Q ゆえ **(a) 解決は p5 の resolution・loud・Rs flip 可**〕／ **Q3 = #18-last 維持**／ **Q4 = DoD 骨格 採用**（数値は後日・(d) B1/B2 確定が入力）／ **Q5 = lane 確定: 測定系・DoD 設計 = p5**。
+- ⛔ **execution HOLD の解除は含まれない**（[CHANGE]/probe fence 継続・#18 の実行位置は (d) P-D1 → gate chain 再構成の後）。
+- §4 の「UNTRACKED」2 行は **10:05 の bank `e9a5cc7f3c` で discharged** — claim 位置に打ち消しを埋込済（10:00 時点の記述と明記）。
+- **私の新 standing item**: succession row の **測定系・DoD 設計 = 私の lane**（Q5 確定）。⛔ 着手は commission 待ち（(d) B1/B2 未確定・self-start しない）。
+- 経路: 材料 doc（§8＋§4 訂正）+ 本 handoff を p18 bank → **§8 を p6 へ回付** → p6 が row 18 に succession 再定義 note を着地（「待ち = Rs 再裁定」の discharge・close 条件更新は p6/Rs 側）。
