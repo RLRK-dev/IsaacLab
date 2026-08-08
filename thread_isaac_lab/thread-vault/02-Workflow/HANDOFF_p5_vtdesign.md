@@ -807,3 +807,10 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 
 **(1) 回答（= 材料 doc §9 が正）**: **B1/B2 は 07-19 に裁定済み・同日実証済み** — **B1（strip-at-import）= PRIMARY**（v1.4 `e32c75c3a4`・Rs 推奨 concur）／B2 = fallback（force≡0 REQUIRED）。P-D1 は **R0-R4 matrix（R1 = B1-clean）で走行済・evidence bank `e5d2dc214a`**・video leg 13:44 納品済。結果 = R1 全滅 ⇒ choreography-blocked・re-sequencing = Rs surface。残り = (a) B2 STOP-gate fold の最終状態（現 doc v2.30 に該当語 0 hit・⛔query 限定）(b) **UR15 premise 後の適用**（nu=16/28 は ur5e の数 ⇒ UR15 model で再測要・推測）。
 **(2) ⛔ 訂正（今朝 5 例目の「読みを行の途中で止めた」）**: 材料 doc §5 Q3/§6 の「(d) HOLD ①-⑤」「P-D1 probe HOLD」は **stale** — ①③④ は同じ row の後段で 07-19 中に解消・P-D1 は走行済だった。⇒ claim 位置に訂正埋込 + §9。⇒ **私の DoD 設計前提を更新: 「B1/B2 の choice 待ち」ではなく「commission ＋ UR15 基盤での B1 適用確認」**（§33 の前提記述はこの §37 が supersede）。
+
+## 38. 追記（date 実測 10:41:16 系列）— Rs 照会「UR15 基盤での B1 適用」= **確認済（構造的充足）**・私の DoD 設計前提は **commission のみ**に
+
+- **正 = 材料 doc §10**。要点: arm source（`ur15_base*.xml`）= actuator **0**・gripper = 意図 1 個/側のみ（`:25` は defaults 記入）・arm servo 12 本は driver `ur15_steps_wired.py:308-315` が明示生成 ⇒ **nu = 14 が run log 複数で実測**・全 14 本 駆動・**undriven actuator の存在余地なし**。
+- ⛔ **穴 2 点も §10 に loud**: (a) B1 は機構未実装（attach は source に在れば黙って持ち込む・nu assert 無し ⇒ source 差し替えで ur5e 機構が再現し得る — guard は**提案どまり**・§運用24）(b) scope = p4_ur15_sim driver 系列限定。
+- §9 header の「10:30」→ **10:31:11 JST** に訂正（p18 first-hand・`m-p18-73` の保留を本接触で消化）。
+- ⇒ **standing item 更新: succession row の測定系・DoD 設計の前提は commission のみ**（B1/B2 = 裁定・実証・UR15 適用とも closed）。⛔ self-start しない。
