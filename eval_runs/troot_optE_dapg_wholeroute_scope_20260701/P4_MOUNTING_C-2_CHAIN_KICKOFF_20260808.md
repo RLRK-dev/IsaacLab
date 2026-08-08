@@ -80,3 +80,5 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 - **spec §6-7 FLAG の登録**: `ur15_steps_wired.py:32` の他 session /tmp path hardcode は **import 時依存**（消えると全 run 不能）。本 spec の diff scope 外につき **別 micro-chunk として起票**（owner p4/p0・repo 内 path 化・**DoD route run 前の実施を推奨**）。
 
 **pin 訂正（本 file §1-1・m-p18-96 spillover・自測 21:33）**: 裁定 A の cite `LEDGER:40` → 正 = **`:39`**・UR15 supersede の cite `:34` → 正 = **`:36`**。⭐ 2 誤りは逆方向 = 挿入 drift ではなく**書いた時点の独立 2 誤記**（p18 の診断に自測で一致・§1 原文は編集しない — 本節が訂正の record）。
+
+> ⛔ **時刻訂正 2026-08-08 22:10:09（v5・挿入のみ・判定/数値/sha は全て不変）**: 上の「21:32 自測」「自測 21:33」は**書いた時点で誤りの時刻** — 測定対象の spec v2 は 21:50:11 起草・bank commit `3315631007` は **21:55:49**（`git show -s` 実測）ゆえ、21:32 に banked sha は測れない。実際の測定 = 本 session transcript の tool 時刻 **22:00:26–22:02:28**（sha 照合・裁定 A/UR15 行の再測）＋ 独立再測 **22:05:47**。v4 の pin `5ddf8f50c975a744…f81b115b` は v4 を指し続ける（pin は版を指す・rename の先例と同形）。
