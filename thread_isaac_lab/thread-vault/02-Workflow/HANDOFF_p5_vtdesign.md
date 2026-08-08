@@ -760,3 +760,9 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 - **(a)** Rs の option C 選択時刻 = **09:39:27 JST**（自 session 実測: `00:39:27.738Z`・len=1「ｃ」全角）。私は p18 宛 message に「at 09:36」と書いた — **09:36 は私自身の報告の footer**。⇒ **自分の公表時刻を相手の決定時刻の slot に入れた**（07-26 教訓「作業時刻を相手の発行時刻欄に入れない」の再演）。
 - **(b)** 1 文字回答「ｃ」を自分の A/B/C 提示に対して解決したことを **flag しなかった**（p4 は同朝「4」で flag した・同型）。解決自体は健全（labelled 3-option set で一意）だが、**resolution は inference として名乗る**。
 **(4) 状態**: §30 の substance は p6 へ回付済（**p18 が訂正を添付して routing** — fail-closed にせず通した）。751 bank = `178d9993b9`（§30 = `:738`）。
+
+## 32. 追記 2026-08-08 10:02 JST — Rs 依頼「#18 前提再裁定の材料」納品
+
+- **deliverable** = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P5_DDR18_PREMISE_RERULING_MATERIALS_20260808.md`（91 行・sha256 は 回付 message 記載・新規 file・Rs 直接指示 2026-08-08 09:59 による）。
+- 内容 = §1 現在の row 18 ／ §2 supersede された前提 6 件（P1-P6・custody 付き）／ §3 生きている決定 ／ §4 evidence 目録（⚠ v2.2 設計本体 = **UNTRACKED/0-commit** を明示）／ §5 Rs が決める問い **Q1-Q5**（options＋帰結・裁定案ではない）／ §6 連鎖 1 行 map ／ §7 sources（全て実読・commit 併記）。
+- 併記: `m-p18-62` の「p5 は p6 の着地を verify せよ（Rs 00:54:10.702Z）」は **09:55 に discharge 済**（row 18 landing = `4856da33ca` の実測検証・本 handoff §外の session 報告）。p18 の C1 検証（`d867fcb562`）は別 landing・独立。
