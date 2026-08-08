@@ -1,8 +1,14 @@
-# ITEM 7 — 取付（mounting）menu v0.1（p5 組成・settle は Rs）
+# ITEM 7 — 取付（mounting）menu v0.2（p5 組成・⭐ **SETTLED = C-2**（§0-A））
 
 **地位**: Rs 指示「**p5 に menu を組ませて**」（p4 卓 `9e3d21d6` 2026-08-08 10:43:48 JST・len=15・p18 first-hand 検証 `m-p18-75`）。**scope = menu 組成のみ** — run 0・training 0・実行 0・⛔ **推奨を書かない**（settle = Rs・p4 の artifact は「material であって recommendation でない」を保存）。
 **材料（全て tracked・p4 測定・as-read 2026-08-08 10:47-10:50）**: `p4_ur15_sim_20260727/` の `GRID_24_VS_240_20260802.txt`・`CROWN_SWEEPS_240_READING_20260802.md`・`CROWN_AT_PASSING_MOUNTING_20260802.txt`・`GRASP_CENTRE_240_READING_20260802.md`・`WORK_ROW_240_READING_20260802.md` ＋ DDR **#54/#57/#60**（`:158`/`:161`/`:164` as-read）。
 **測定の共通単位**: 240 draws・start-pose 段の**証人**（witness = L clear ≥1 ∧ R clear ≥1 ∧ pair 分離）。⛔ **witness pose pair ≠ route**（p4 逐語・全 option 共通）。
+
+## §0-A SETTLE 記録（2026-08-08 追記 — 本節と各所の「⇒ 決着」注記のみ追加・組成時本文は不変）
+
+- **決定 = C-2**（spread **0.280** / tilt **20°**・crown **0.110 不変**）。決定者 = **p4、Rs 委任下**（Rs 逐語「君が判断していい」= p4 卓 `9e3d21d6`:6237・2026-08-08T04:09:27.452Z = 13:09:27 JST・user record — **当卓 first-hand 照合済**。委任の実効集合 {7, 9, #18 DoD}）。**決定の記録（正・cite 先）= `P4_DELEGATED_DECISIONS_ITEMS7_9_DOD_20260808.md` @ `8599c6627d`**（content sha `8d113c5a1eb87edbbb81bcbddaec8e75234019e97067e8dfd9bb6587835cf01f`・当卓照合済／p18 検証 = `m-p18-86`）。⚠ 組成時 header の「settle は Rs」は**委任下の p4 決定**で満たされた（Rs 直接発話でない — 等級を落とさず記す）。
+- **§4 の 4 点の決着**: **1 = C-2**／**2 = crown 不変**（忠実性裁定を消費しない — p4 記録 §2.3）／**3 = 選んでから部材込み再測**（**carrier = item 7 単独**。item 8 は Rs 直接裁定 (a)〔`2dbed74a`:20133・13:07:05 JST・当卓 first-hand 照合済〕で close — **(a) は #54 再測を認可しない**・列挙 3 面一致 @ `8599c6627d` §1）／**4 = 不要**（C-2 は chosen-pair witness — p4 記録 §2.1・`GRID240_READING_20260802.md` §3 = L5/R30・+14.7mm 当卓実読一致 — ゆえ pose-pair 選択実装が要らない）。
+- **効力の限界**: 本 settle は**選択の決定**であり**実行 0**（HOLD 不変・env/asset 編集 0・実装は設計→実装→検証 chain と gate 経由）。**C-2 は「#54 部材入力が確定し次第、C-2 列を部材込みで再測する」条件を負って立つ**（:55 の自己宣言どおり数値は動き得る — p4 記録 §3）。witness ≠ route 不変（:54）。
 
 ---
 
@@ -42,7 +48,7 @@
 |---|---|---|---|---|
 | C-1 | **0.280 / 20°** | **無し** | **chosen pair PASS** | **+22.7 mm**（唯一の chosen-pair PASS・L1/R4） |
 | C-1′ | 0.280 / 20° | ≤ 0.075（height 族） | best pair | **+35.7〜+38.9 mm**（546 対・全 head に witness） |
-| C-2 | 0.280 / 20° | 0.110 | grid witness | **+14.7 mm**（L5/R30） |
+| **C-2 ⭐SETTLED（§0-A）** | 0.280 / 20° | 0.110 | grid witness | **+14.7 mm**（L5/R30） |
 | C-3 | 0.340 / 20° | 0.110 | grid witness | **+15.3 mm**（L2/R34） |
 | C-4 | 0.400 / 20° | 無し | grid witness | **+17.2 mm**（L8/R34） |
 | C-5 | 0.280 / 45° | 無し | grid witness | **+11.9 mm**（L4/R8） |
@@ -59,10 +65,10 @@
 
 ## §4 Rs が settle する点（menu の外側）
 
-1. **family の選択**（A = cell 不変 / B = crown / C = mounting）と行の選択。
-2. **crown 変更の可否**（実 cell との忠実性 — #60・B/C-1′ の前提）。
-3. **#54 部材入力**の時期（先決 or 選択後再測）。
-4. B/C-1′ を選ぶ場合: **pose-pair 選択の実装**を lead lane に発注するか（chosen→best の差を実現する装置）。
+1. **family の選択**（A = cell 不変 / B = crown / C = mounting）と行の選択。⇒ **決着 = C-2**（§0-A）
+2. **crown 変更の可否**（実 cell との忠実性 — #60・B/C-1′ の前提）。⇒ **決着 = 不変**（§0-A）
+3. **#54 部材入力**の時期（先決 or 選択後再測）。⇒ **決着 = 選択後再測・carrier = item 7 単独**（§0-A）
+4. B/C-1′ を選ぶ場合: **pose-pair 選択の実装**を lead lane に発注するか（chosen→best の差を実現する装置）。⇒ **決着 = 不要**（C-2 は B/C-1′ でない — §0-A）
 
 ## §5 sources（全て実読・witness commit は bank 後に版表へ追記）
 
