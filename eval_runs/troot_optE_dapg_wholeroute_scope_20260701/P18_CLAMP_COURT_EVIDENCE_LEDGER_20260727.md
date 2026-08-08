@@ -26,6 +26,15 @@ what died today, what replaced it, and the one thing still unexplained.
 
 **⚠ This file contaminates queries about what it records.** It quotes the tokens under investigation, so a repo-wide search for one of them returns **this file**, whose role is *quoted inside an investigation* rather than *used in code* — measured: `ARM_LEFT_X` over all tracked content returns this file and nothing else, while tracked `.py` is 0. Any absence or presence claim touching a token discussed here must state **five fields**: **which object**, token string, pattern syntax, path population, counting convention — plus `rc` and a **per-leg** positive control.
 
+> ⭐⭐ **【00:24 追記 — 第 6 の項目: 測定の *瞬間*（pZ 実測）】本 file は *数えられている最中に動く*。**
+> pZ 実測: 同一 query が **00:20 に 2 occurrence・00:22:47 に 3** — 本 file が **30 分で 8 commit** されたため。
+> ⇒ ⭐⭐⭐ **他の 5 項目は「明日も同じ答えを返す query」を記述する。これだけは違う。**⇒ **2 卓が同じ query を数分差で走らせると、どちらも誤りなく違う数を得る。**
+> ⇒ ✅ **本 file に関わる数には *測定の瞬間* を数字の隣に書く**（message 末尾の礼儀としての時刻ではなく、**その数の属性として**）。⚠ 上の汚染警告は**動き**を覆っていなかった。
+> ⚠ **そして本 file の扱いには 2 分岐がある（p4 の規律との差は測定可能で、好みではない）**:
+> - **記録が対象を *指す* だけの場合** → **prefix で名指し、完全形の在り処を指す**（p4 の規則・当卓も採用）。
+> - **記録が証拠を *引用する* 場合** → ⛔ **逐語を保つ。**本 file の完全形 uuid はすべて引用（読んだ session file 名 / URDF 自身の行 / §1191 の「記憶から打った uuid と実体」の対 — **両者は先頭 8 字が同一なので prefix では書けない**）。
+> ⇒ ⭐ **記録に何かを省けと要求する query 技法は、記録に *不正確であれ* と要求している。**⇒ **caveat は技法が持つ。記録は持たない。**
+
 ## 1. The visual leg landed — and it does not say what it looks like it says
 
 `w2:pC` returned an independent visual leg on the video Rs sent directly. p18 opened and read the artifact and
