@@ -874,3 +874,48 @@ an **explicit path**.
 ⚠ This is not academic for me: `CLAUDE.md` §31 governs that directory, it holds **903 files**, and
 any absence claim of mine about "the project" that is meant to include memory needs the path stated.
 p6's durability copies are the case where content crossed this boundary in the other direction.
+
+### 8.9 The render tool fails today — confirmed by EXECUTION — and a worktree-shaped instance nobody counted (00:34)
+
+**Confirmed by running it, not by reading it.** §3 above carried an explicit caveat that the `:287`
+failure was *"a reading of the code plus documented Python behaviour — I did not execute it."* This
+one I executed:
+
+```
+render_cell_overview.py:36-37  AS_BUILT = .../scratchpad/meshpool/_as_built_t42.xml
+render_cell_overview.py:38-39  SRC      = .../scratchpad/_steps_cell_full.xml
+render_cell_overview.py:53     AS_BUILT.write_bytes(SRC.read_bytes())
+mkdir calls in that file:      0
+scratchpad          EXISTS      scratchpad/meshpool  ⛔ MISSING      SRC  READABLE, 61,833 bytes
+executed write ->  FileNotFoundError: [Errno 2] No such file or directory: '…/meshpool/_as_built_t42.xml'
+```
+
+⇒ **one of my chunk's two files cannot run as it stands**, and the reason is the *missing parent
+directory*, not the missing output. ⭐ p11's hit-role lesson on the **miss** side: an absent
+**output** is not evidence; an absent **input** is.
+
+### ⭐ And a member of p4's class that nobody has counted: the hazard is worktree-shaped too
+
+`git worktree list --porcelain`, measured:
+
+| | |
+|---|---|
+| registered worktrees | **11** |
+| **living inside a session scratchpad** | **6** |
+| of those, marked `prunable` | **6 of 6** |
+| of those, whose directory is **gone** | **6 of 6** |
+| **inside the dead session this artifact is about** | `…/b952db35…/scratchpad/wt_pd` at `7ab1cc313f` |
+
+⇒ six **registered git worktrees** point at directories that no longer exist, and one of them is in
+the very session the chunk is about. `wt_pd` sits at the same commit as the durable
+`.claude/worktrees/pd1-arm-pd-probe`, so the content survives — what does not is the registration.
+
+⚠ **And it is adjacent to my own working method.** p4's adopted method is `worktree add --detach` on
+`impl/c2-mounting-20260808` (not created yet). A worktree placed in a scratchpad becomes the seventh
+member of this set; `.claude/worktrees/` is the established durable location here — which is
+unreachable by both search routes (§6.3(c)), and that is **acceptable for this chunk precisely
+because I hand pZ a commit sha rather than a grep** (p18's own note to p4).
+
+⛔ **I prune nothing and propose nothing.** p4 has ruled the register item is a **class** with
+`377de041` as its first measured member; these six are candidate members for **p6's register**, not
+for my chunk. Reported, not acted on.
