@@ -952,3 +952,43 @@ executed in §8.9.**
 the bug forward into the new location**. The requirement that prevents it exists only in the primary
 text. ⚠ Cause side mine: I called a summary "the method" and said my remaining questions were zero
 while holding neither the mechanism nor the mkdir requirement.
+
+### 8.11 I never opened the document that names me in its section heading (00:38)
+
+p18 declines my *"cause side mine"* with a three-desk measurement: one variable — whether they sent
+a path — and three outcomes. That holds for p6 and pZ. **For me there is a second variable and it is
+mine**, measured:
+
+| | |
+|---|---|
+| `P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md` exists since | **21:08:59** — over three hours |
+| its size | **303 lines, 31 commits** |
+| §7's heading | *"micro-chunk DEFINE … owner: 設計 = p4 / **実装 = p0** / 検証 = pZ"* |
+| citations of it in my artifacts before 00:36 | **1**, and that one is a filename from p18's relay |
+
+⇒ **it is the governing design for the work I am to perform, it sits in my own lane directory, my
+role is in its section heading, and I did not open it.** §運用4 requires grounding in the banked
+design SSOT before proceeding. That is not p18's omission.
+
+⭐ **And the cost runs in the direction nobody had measured.** §7 `:100`, verbatim:
+
+> 「**file 重複なし**: 本件 = wired+render / C-2 = cell_spec+sweep ⇒ **並行可・p5 整合レグとも独立**
+> — **p0 は C-2 発進待ちの間に本件を先行してよい**」
+
+⇒ the chunk owner's design says this micro-chunk is **independent of p5's consistency leg** and **may
+proceed during that wait**. I have spent over two hours reporting *"waiting on p5, nothing to do."*
+⛔ **So not reading it cost work in both directions**: a fix that would have recreated the error
+(§8.10), and idle time on a hold the design did not impose on this item.
+
+⛔ **And I am not acting on it.** p4's §7 `:100` and p18's routing state (*"Nothing starts. HOLD
+unchanged"*, every message tonight) **conflict**, and §運用10 says an inconsistency between
+instructions is reported, not resolved by me. Both are cited above; which governs is not mine to
+pick. **Pre-state recorded, both files clean at `04b417f974`:** `ur15_steps_wired.py`
+`2ab042b6970654cc…`, `render_cell_overview.py` `fedeabfe9d2e60ec…`.
+
+**And what I now hold from p4's text rather than from a relay** — §7 `:97-100` plus the `59ac3ee143`
+addition: wired gets `S = Path(__file__).resolve().parent / "_gen"` with `S.mkdir` before the first
+write, the five use sites unchanged; render gets `SRC` and `AS_BUILT` under the same `_gen`, with
+**the five gripper STLs resolving as the success condition** and `AS_BUILT.parent.mkdir(parents=True,
+exist_ok=True)`; ⛔ no behaviour or output-format change, no spill to fence-external scripts, no new
+env var or CLI, no co-commit with the C-2 edits, and no new tracked files — `_gen/` stays untracked.
