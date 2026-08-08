@@ -57,7 +57,7 @@ desk: p6 PLAN-KEEPER (w2:p6) / 記録 2026-08-08（時刻の instant は本 file
 ## §7 訂正と執行の追記（2026-08-08・propagation 後）
 
 **⛔訂正 1 — §3 の「地図 = 数値なし」は誤り**。地図 `:149` は同じ行の goal span に **`(L0 = 100% 定性的)` を既に運んでいた**。当方の §3 測定は `cut -c1-150` が行を切り落とした断片を全体として読んだもの（= 本日の head -5 と同族・照合自身の中で発生）。
-⇒ **(ii) の正しい集計 = 再定義の着地は 5 面中 3 面**（SOMA・manifest §1・地図）。stale = **2 面のみ**: `CLAUDE.md:131`（L3・Rs 待ち）と T-ROOT state.md（下記で解消）。核心（statethe 面同士の矛盾・L3 行の二重の誤り）は不変。
+⇒ **(ii) の正しい集計 = 再定義の着地は 5 面中 3 面**（SOMA・manifest §1・地図）。stale = **2 面のみ**: `CLAUDE.md:131`（L3・Rs 待ち）と T-ROOT state.md（下記で解消）。核心（面同士の矛盾・L3 行の二重の誤り）は不変。
 
 **執行記録（p4 裁定 + 明示許可・p18 `m-p18-88` 経由）**:
 - T-ROOT state.md goal / goal_verification = **100% 定性へ同期済** `05c4eff561`（goal の*変更*でなく Rs 06-23 既定値への同期・file 内の旧 flag は区別を明記して更新・real-world scope 文の flag は継続）
