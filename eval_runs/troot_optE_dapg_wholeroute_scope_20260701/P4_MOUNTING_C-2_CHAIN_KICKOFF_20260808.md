@@ -61,3 +61,22 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 
 - Rs 指示 = 直接受信（本 session・relay でない）。referent 解決 = p4（§0 に明示）。
 - C-2 settle・chain 定義 = 前日 banked artifact 実読（first-hand）。DDR 行 = LEDGER 実読(truncated cols・行番号は再 grep 前提の pointer)。地図 now-box は 07-18 as-of で stale（P11 WARN と整合）— 本 kickoff は LEDGER + 前日 artifact を正とした。
+
+## 6. 受入判定（p4・2026-08-08 22:03:03 — m-p18-96 routing への回答）
+
+**判定 = ACCEPT（条件付き発進）**。対象 = `P11_MOUNTING_C-2_IMPL_DESIGN_SPEC_20260808.md` @ `3315631007`（273 行・content sha256 `a7c116dfd4982331…4d3b42c7` 全 64 桁一致を 21:32 自測・v2 = 5 体 debate CRITICAL 1 + MAJOR 9 全採択反映済 = spec §11）。
+
+**受入根拠（全文実読・第一手照合）**:
+1. **settle との一致**: C-2 (0.280/20°)・crown は導出則廃止の literal 0.110 pin — 「crown 不変」の忠実実装（導出則のままだと spread 0.280 で r=0.140 = 一度も測られていない cell）。再決定なし（spec §0/§1）。
+2. **scope 最小**: 4 編集 2 file（eval_runs のみ・`task_config.py`/env source/04-Specs 不触・新 file なし・新 CLI なし）。
+3. **flag 継承が完全**: #45/#48/#49/#54（+60 mm **拡大**方向へ訂正済 = 本 file 旧記載 298 の cross-row 誤りも同時に解消）/#57/#58/#61/#39/#18 — 本 file 訂正 2 項の evidence-grade cap（無印 PASS 禁止）を spec §9 DoD が内蔵。数値の第一手検算 = H4 (1.330+0.220=1.550≥1.530)・tilt 変換 (90°−20°=70°)・#54 (0.178/0.118/+60mm)・witness (5/30/+14.7) 全て一致。
+4. **gate 充足**: /geometric-design 6-step = spec §3 全出力・5 体 debate 事前実施・prior-art BLOCKER 4 件は逐件 disposition（§8 = C-2 選定の測定 corpus であり失敗経路の再試行でない）・L2 自己申告は保守側で妥当。
+5. **検証の判別力**: pZ 12 項（override 回帰・権威 clip guard 生存・existence 再抽選 count 非要求・fallback 行 = 非 evidence の手続バー・cell 条件明記）は「効いた/壊れた」を見分ける形。
+
+**発効・条件**:
+- **spec §6-6 run-path fence = 本受入で発効**: C-2 の全 run は `ur15_steps_wired.py` + `ur15_cell_spec.py` の SSOT 直結経路のみ。retired 4 driver + `ur15_steps_c1seat.py` + 独自 cell の video 3 script は不使用。視覚レグ = `render_cell_overview.py` か wired 自身の描画。
+- **p0 発進条件 = p5 の工程表整合レグの返答（矛盾なし）**。設計 phase は p11+p5 共同（commission 定義）。p5 の supersession sheet は系譜 bookkeeping で **p0 blocker にはしない**。
+- **DoD の evidence-grade cap**（spec §9 のとおり受入時に再確認する）: #48/#18 open の間 DoD 動画へ無印 PASS を出さない・#49 は gate 状態併記・#61 env7 pin 下でのみ・existence 主張は cell 条件（stereo head 不在・#54 部材不在）を明記。
+- **spec §6-7 FLAG の登録**: `ur15_steps_wired.py:32` の他 session /tmp path hardcode は **import 時依存**（消えると全 run 不能）。本 spec の diff scope 外につき **別 micro-chunk として起票**（owner p4/p0・repo 内 path 化・**DoD route run 前の実施を推奨**）。
+
+**pin 訂正（本 file §1-1・m-p18-96 spillover・自測 21:33）**: 裁定 A の cite `LEDGER:40` → 正 = **`:39`**・UR15 supersede の cite `:34` → 正 = **`:36`**。⭐ 2 誤りは逆方向 = 挿入 drift ではなく**書いた時点の独立 2 誤記**（p18 の診断に自測で一致・§1 原文は編集しない — 本節が訂正の record）。
