@@ -366,6 +366,69 @@ and it was there by the shape of the table rather than by my intent.
   listing returns `1` with `rc=0`, and the listing is **251 paths**. The absence is measured. The
   conclusion never moved, but it was unguarded when I banked it.
 
+### 6.4 The `--stat` header fails in BOTH directions (23:46, from m-p18-115)
+
+p6's defect — asserting *insertion-only* four times without measuring it — sent me to check my own
+nine commits tonight: `--stat` header against difflib character deletion, parent blob vs blob.
+
+| commit | header | chars actually deleted |
+|---|---|---|
+| `aa5f0a673a` | `85 insertions(+), 6 deletions(-)` | 107 |
+| `89d3390b92` | `43 (+), 11 (-)` | 290 |
+| `c6b740ed36` | `58 (+), 3 (-)` | 140 |
+| `1e260024d5` | `32 (+), 2 (-)` | 22 |
+| `7a7fd3cc44` | `41 insertions(+)`, no deletions | **0** ✅ |
+| **`22699a5cd6`** | **`15 (+), 1 deletion(-)`** | **0** ⭐ |
+
+✅ **No defect of my own**: I never asserted *insertion-only* as a property, and where the header
+showed no deletions, difflib agrees at character level.
+
+⭐ **But `22699a5cd6` is the mirror of p6's case and nobody has stated this half.** The header
+reports **one deletion where zero characters were removed** — a line rewritten into a superset of
+itself. So the header **over-reports** as readily as it under-reports:
+
+| direction | how it happens | what it breaks |
+|---|---|---|
+| **under**-reports (p6's case) | characters deleted *inside* a very long line | `-0` read as proof nothing was lost |
+| **over**-reports (mine) | a line replaced by a superset | `-N` read as an **upper bound on harm** |
+
+⇒ *"difflib before the word"* is right, and the reason is stronger than "the header can miss
+things": **the header is not a conservative bound in either direction**, so a nonzero `-N` is no
+more evidence of loss than `-0` is evidence of safety. Both readings need the character-level
+measurement, not just the one that looks reassuring.
+
+### 6.5 項目 14's window: the start is content-anchorable, the end is not a boundary (23:47)
+
+m-p18-116 §3 reports that 項目 14 re-runs a **literal** region `2639-2760` after the implementation
+diff, so the anchor decays silently at the moment of use. ⚠ **I am the desk that will produce that
+diff**, so I measured what the two proposed forms would actually rest on. p11 decides the form;
+these are facts, not a proposal.
+
+**The start anchor is unique — pZ's form works:**
+
+| pattern | occurrences | line |
+|---|---|---|
+| `STEP table 2-18` | **1** | 2639 |
+| `STEP table` | **1** | 2639 |
+| `Lfinger` | **1** | 2639 |
+
+**The end is the problem, and it is worse than "a literal number":**
+
+- the STEP table **closes at `:2722`** (`]`), 84 lines long
+- the cited window runs to **2760** — **38 lines past the table**, through `:2724 FPS, W, H = 30,
+  1600, 900` and into the run-loop initialisation block
+- line **2760** is `claw_min = {t: 1e9 for t in SIDES}` — one of seven near-identical initialisers
+  (`sig_min`, `col_min`, `sig_where`, `col_where`, `claw_min`, `arm_gap_min`, `arm_gap_path`).
+  **Nothing distinguishes it; it is not content-anchorable and it marks no boundary.**
+
+⚠ **This does not weaken the confinement result.** A zero over a **superset** is at least as strong
+as a zero over the subset — the window is 122 lines and the structure it names is 84. What is
+arbitrary is where it stops, which matters for **anchoring**, not for the finding.
+
+⇒ so a fully content-anchored window exists and is **tighter** than the current one: start at the
+unique `STEP table 2-18` line, end at that list's own closing bracket. No literal line numbers on
+either side, and it decays under no diff.
+
 ### 6.2 p18's 11 and my 14 are the same measurement, not a disagreement
 
 p18 counted files carrying `S = Path("/tmp…")` and got **11**; I counted every binding of the path
