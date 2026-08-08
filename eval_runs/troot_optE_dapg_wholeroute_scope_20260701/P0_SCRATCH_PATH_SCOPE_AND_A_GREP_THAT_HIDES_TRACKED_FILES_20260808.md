@@ -1096,3 +1096,42 @@ nothing has populated. **I created the dependency** — correctly, since the old
 but the cost of that correctness is the very question now split between two rulings. My code is
 unchanged under either: (a) seeds `_gen` and it runs; (b) waits for an authorised run. ⛔ Still not
 mine to choose.
+
+### 8.15 ⛔ §8.14's absence claim is FALSE — I used the failing predicate in the message that named it (05:53)
+
+pZ found two guarded exits. Verified on my own impl blob `422ab807cd`:
+
+```
+:1035  if _os.environ.get("P4_CLIP_DUMP") == "1":      ->  :1088      raise SystemExit(0)
+:2853  if _os.environ.get("P4_RELEASE_ONLY") == "1":   ->  :2865      raise SystemExit(0)
+:292   (S / "_steps_world.xml").write_text(world)          both precede :1088
+:333   (S / "_steps_cell_full.xml").write_text(...)        ⇒ both _gen artifacts written, then halt
+```
+
+⇒ ⛔ **§8.14's *"there is no construct that stops at assembly — an absent one"* is FALSE.** Two exist,
+they are **indented inside top-level `if` guards**, and an indented exit halts the module exactly as
+dead as one at column 0. Under `P4_CLIP_DUMP=1` execution stops at `:1088` — **before the STEP table,
+before any renderer, before the video write.**
+
+⭐⭐ **And the shape is the sharpest of the night, because it is mine and it is self-inflicted twice
+over.** §8.14 diagnosed 117's *"`mj_step` at column 0 = 0"* as **a predicate that cannot discriminate**
+— and then reported `sys.exit / raise SystemExit / if __name__ (col 0) = 0/0/0` **as evidence of
+absence, in the same table, on the same question.** I applied a **column-0 predicate to a reachability
+question** in the message that named exactly that error. The anchor I criticised is the anchor I used.
+
+⛔ **And it breaks a second claim in `m-p0-149R` §3.** I listed three options and wrote that (c), a
+build-only path, *"is a new CLI and hits the §7 prohibition"*. **A build-only path already exists**,
+reached by a **pre-existing** environment variable — so §7's ban on *new* env vars and *new* CLIs does
+not touch it. ⇒ **my option set was not merely incomplete; the option I dismissed as forbidden was
+available with no new construct at all.**
+
+⚠ **What this does NOT settle, and I am not extending it:** the guard sits **after** a 2000-step cable
+settle at `:1033-:1034`, so that path **steps physics**. Whether that is tool evidence or world
+evidence is p4's discriminator to apply, and pZ declined to choose it. So do I. ⭐ My code is unchanged
+under every reading — what changed is that one of the reasons I gave for closing the question was wrong.
+
+⚠ Also from pZ's verification, and it is a consequence of my implementation: **`_gen` is not
+gitignored**, so ~3.1 MB of untracked copies of already-tracked STLs sit in a shared tree where a wide
+`git add` would sweep them. Not a §7 violation — §7 says do-not-track and nothing is tracked — but real
+exposure that I introduced. ⚠ Graded as pZ's measurement, not mine: my own `check-ignore` probe read
+its `rc` off a pipeline's last stage, which is the error I banked at §8.5 and repeated here.
