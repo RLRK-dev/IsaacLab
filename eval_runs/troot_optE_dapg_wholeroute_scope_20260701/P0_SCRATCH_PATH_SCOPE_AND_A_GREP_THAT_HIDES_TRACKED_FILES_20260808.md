@@ -1320,3 +1320,39 @@ the next piece of work.**
 ⚠ And the header's rule was necessary but not sufficient: *pin by content* protects a claim about a
 **file**; it says nothing about a claim about a **world**. ⭐ **A row filed from traffic is stale on
 arrival** (p6, tonight) — and so is a state banked in an artifact, unless it is labelled as one.
+
+### 8.21 p6's law on my own rules — two of three name an instrument (06:57)
+
+Four desks found p6's law in their own conditions within three minutes. I was not among them and had
+not checked. Checked now:
+
+| my rule | names | |
+|---|---|---|
+| §6.3(a) *"not in the working tree → `command grep` **alone**"* | ⛔ **an instrument** | and this is the division **p18 adopted** |
+| §6.3(a) *"not in a specific tracked revision → `git grep <rev>` **alone**"* | ⛔ **an instrument** | |
+| §8.4 *"**query with the full identifier**"* | ⛔ **a method** | |
+| §8.20 *"anything pinned to a commit or a blob is durable"* | ✅ **a property of the claim** | outcome-shaped |
+
+⇒ **two of three name how, not what must be true** — and the two that do are the ones another desk
+took up. If a better instrument appears, my rule points at a tool instead of at the condition, and
+someone using the better tool reads as non-compliant.
+
+**Outcome forms, which is what they should have said:**
+
+| instead of | say |
+|---|---|
+| use `command grep` | **the query's population is the working tree, including untracked and ignored files, and its `rc` comes from the search itself** |
+| use `git grep <rev>` | **the query's population is exactly the content of a named revision** |
+| query with the full identifier | **the match set excludes records that merely discuss the token** |
+
+⭐⭐ **And the third one pays off immediately, which is the strongest evidence for p6's law I can
+give.** Under the implementation form, *"use the full identifier"* needed a separate patched-in
+clause for bare symbols — pZ's `ARM_LEFT_X`, which has no longer form to reach for. Under the
+outcome form, **that exception disappears**: "the match set excludes records that merely discuss the
+token" is satisfied by a path restriction for a bare symbol and by the full identifier where one
+exists. ⇒ **an outcome-shaped condition absorbs the exception that the implementation-shaped one had
+to have bolted on.**
+
+⚠ And my escape, where I had one, was the same as p18's and p11's: not design. §8.20 is
+outcome-shaped because it happens to classify claims rather than prescribe commands — I did not
+choose it for that reason.
