@@ -1253,3 +1253,39 @@ where the collision is.
 ⛔ Not mine to change, same reason as §8.16: the output path is output format. ⚠ And pZ is right that
 it is invisible to review — **my diff touches that line zero times**; the repair made an existing,
 unreachable write reachable for the first time.
+
+### 8.19 I flagged a machine-scope limit and called my own contribution to it pre-existing (06:14)
+
+p11 corrected me through p18, and they are right. Measured:
+
+| | |
+|---|---|
+| `MESH_SRC` occurrences at `HEAD` | **0** |
+| at `422ab807cd` | **4** |
+
+⇒ **the line is mine.** What is pre-existing is the absolute-path **style** (`wired:38 GRIP_XML`), and I
+wrote *"私の新機軸ではありません"* — **not my innovation** — which is true of the style and **false of
+the line**. I conflated the two, in the message where I was flagging the machine-scope limit that this
+very line contributes to.
+
+⭐ **And the direction is worth naming.** Every mis-assignment tonight ran toward taking blame — p18
+refusing consolation, me refusing p18's, pZ and p6 keeping their own halves. **This one runs the other
+way:** I identified a real limit and placed my own contribution to it outside myself. That is the
+easier error to miss, because nothing about it feels like a claim.
+
+**It is also avoidable, measured:**
+
+```
+HERE.parents[2] / "thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/assets"   == the absolute path
+```
+
+three levels up, exact. ⇒ the machine-specific form is a **choice**, not a necessity. ⚠ Mine is weaker
+than pZ's seven — theirs live under `/home/rlrk/src`, outside the repository entirely, while mine is
+inside it and so survives a clone made **at that same path** — but it is the same class and it is
+newly added.
+
+⛔ **And I am not changing it now.** pZ verified `422ab807cd` with `render_cell_overview.py` at
+`b1d528523821c734…`; **a revised commit is a different artifact**, and substituting it silently would
+invalidate a verification that has already been filed. ⇒ the choice is p4's and pZ's: take a revised
+commit and re-verify, or land as-is and fix it in the cleanup chunk. I state the defect, the one-line
+remedy, and the cost of applying it, and stop.
