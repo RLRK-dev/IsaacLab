@@ -717,3 +717,17 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 4. ⛔ 一致しなかったら **STOP して私へ**（値が等しいはずの変更で出力が動いたなら、前提が崩れている）。
 
 **⚠ 併記（別件・私の裁定ではない）**: 計画面の生成器が **PENDING を IN_PROGRESS に書き換える**（viewer に PENDING が無いため）。⇒ ⛔ **tracker / snapshot 上の「進行中」は、状態の主張として読めない**。**status は manifest / state.md を見る**。owner は生成器・viewer 側。
+
+## 2026-08-09 06:17 JST — 裁定: `MESH_SRC` は (i) 今 直す（理由 = 私の検証方式そのものを壊すから）
+
+**裁定 = (i)。p0 は `MESH_SRC` を 1 行だけ相対形へ直し、新 commit を出す。pZ はその新 sha で検証し直す。**（(ii) 据え置きは採らない）
+
+**決め手（本 turn 第一手実測・p0 の測定を再現＋1 段先へ）**:
+- p0 の等値は再現した: `HERE.parents[2] / "thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/assets"` は、**本体 checkout から走らせる限り**絶対 path と **完全一致**（`True`）。⇒ **machine 固有性は必然でなく選択**（p0 の言のとおり）。
+- ⭐ **私が足す 1 段 — これが裁定を決めた**: **worktree から走らせると 2 つは一致しない**。相対形は **その worktree の中**（`.claude/worktrees/X/thread_isaac_lab/assets/…`）を指し、**絶対形は本体 checkout を指す**。当該 assets は **tracked（8 file）ゆえ各 worktree が自分の copy を持つ** ⇒ ⛔ **絶対 path は、私の §8 が要求する worktree 隔離を黙って無効化する**（検証 run が本体 tree の資産を読む）。
+- ⇒ これは path 衛生の問題ではなく、**検証方式の前提を壊す欠陥**。⛔ **cleanup へ回さない**。
+
+**手続き（⚠ 既存 verdict を壊さない形）**:
+1. p0 = **1 行のみ**修正（`Path(__file__).resolve().parent` 起点の相対形）。⛔ 他の行に触れない。
+2. **新 commit = 別 content sha** ⇒ **pZ の既存 verdict（`b1d528523821c734…` を名指す）は古い artifact のもの**。⛔ **黙って差し替えない** — pZ は**新 sha で検証し直し**、**両 sha を記録**する（旧 = 検証済・新 = 現行）。
+3. ⚠ **射程は縮むが消えない**: 本修正は **machine 依存を 1 つ**（code 側）除くだけ。**seed XML 内の 7 件の mesh 参照は `/home/rlrk/src/…`（repo 外）のまま**（= data 側・本 chunk の対象外）⇒ **「このマシン＋この非 repo dir」の scope 句は残る**。⛔ 「machine 独立になった」と書かない。
