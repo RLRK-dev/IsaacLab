@@ -685,3 +685,39 @@ form for free, because they differ in what they can afford to abbreviate.**
 ⇒ so the practical rule is better than "state the token form": **query with the full identifier**.
 It is the only choice that needs no path restriction and no exclusion list, and my own §8.2 problem
 disappears under it rather than needing to be declared.
+
+### 8.5 The condition my own argument contained, and a false-presence check on myself (00:17)
+
+**pZ's counterexample supplies the condition §8.4 lacked, and it was inside my own reasoning.** I
+argued that *code cannot abbreviate an identifier, so the token form separates the populations for
+free*. The corollary I did not extract: **only identifiers that CAN be abbreviated are separable
+that way.** A bare symbol — pZ's `ARM_LEFT_X` — has no longer form to reach for, so the record
+writes it exactly as code would and only path restriction works. I stated the half that supported
+my rule.
+
+⇒ complete form: **query with the full identifier where one exists** (free, structural, no
+exclusion list); **where the token is a bare symbol, restrict the path and state the restriction.**
+
+**And pZ's second point is a new direction — false PRESENCE**, where every guard tonight was aimed
+at absences that failed to reach. So I ran it on my own artifacts: 14 distinct `SCREAMING_SNAKE`
+symbols recorded, **4** with zero occurrences in tracked `.py` (control: `GRIP_HALF_SPAN` → 20
+files, rc=0).
+
+⛔ **And on inspection none of the four is pZ's case.** Reporting "4 manufactured presences" would
+have been exactly tonight's over-claim:
+
+| symbol | why it reads as absent from code |
+|---|---|
+| `SEG_LEN` | a real symbol, **7 occurrences**, in the witness file — which is **untracked**, so no `git grep` reaches it |
+| `GEOM_WITNESS`, `GEOM_WITNESS_5CLIP` | a **filename**, not a code symbol |
+| `SHARED_DIR` | lives in **4 tracked non-`.py`** surfaces including `CLAUDE.md` |
+
+⇒ each is a **population mismatch**, not a deleted symbol: untracked file, non-`.py` surface,
+filename-not-symbol. ⭐ **My own false-presence test needed the same three fields it was testing** —
+scoping it to tracked `.py` produced four hits that dissolve once the population is named.
+
+⚠ The residue that is real: `SEG_LEN` and the witness filename point at a file **inside the repo
+tree and untracked**, so a future desk querying tracked code gets **0** and this artifact as the
+only prose hit. That reads as *"p0 discussed a symbol not in the project"*, and the correct reading
+is *"the symbol lives where no git query reaches"* — p18's own note about where `LEDGER:78`'s
+evidence sits, arriving on my surface by a different route.
