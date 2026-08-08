@@ -166,3 +166,18 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 - 本 chunk の受入報告は「**C1→C2（canonical 1–18）が C-2 cell で走ることを示す動画**」で閉じる。⛔ **これを「43-step 完了」「裁定 A 充足」と書かない**（#48/#18/#49/#61 の grade cap は従前どおり別に効く）。
 - **裁定 A の充足には 19–43 と 5-clip cell が要る** ⇒ **別 chunk として起票が要る**（規模は本 chunk と桁が違う。起票の可否・順序は Rs / 私の lane で別途）。
 - p11 spec の同文言（§0 `:13`・§9）は **p11 の doc** ゆえ私は編集しない — **本節を回付**して p11 の court に置く（内容の誤りではなく **射程の畳み込み**であり、spec の技術内容は無変更で足りる）。
+
+> ⛔⛔ **§9 の訂正 2026-08-08 23:17:24（自検出・本日 4 度目の同型 = 自分の `head -10` が一覧を切った）**: 上表最終行「C3/C4/C5 に触れる .py = **retired driver 3 本のみ**」は**偽**。⛔ **私の query は `| head -10` で切れており、実数は 31 file**（同 query を切らずに再走・rc=0 印字）。⚠ **この誤りは Rs への報告にも乗った**（同 turn で訂正済）。
+>
+> **切れていた側に在ったもの（第一手・docstring 逐語）**:
+> - `thread_isaac_lab/skills/step_table.py` — 自称「**43-STEP routing table — maps each STEP to its skill and parameters**」・出所 = `RL-Routing-Design.md §2.3`・**C1〜C5 を参照**
+> - `thread_isaac_lab/scripts/dry_run_39step.py` — 「full **39-step** cable routing sequence の dry-run IK 検証 + per-camera MP4」
+> - `thread_isaac_lab/scripts/wet_run_full_sequence.py` — 「Execute full **43-step** routing sequence **in Newton VBD** with video」
+> - 他に route stack（`route_executor.py` / `routing_orchestrator.py` / `route_env_config.py` / `test_newton_clip_routing.py` 等）
+>
+> ⭐ **訂正後の正しい絵（結論は変わらないが、理由が変わる）**:
+> 1. **5-clip の材料は「無い」のではなく「別 substrate に在る」** — 全系列 script が名指す実行基盤は **Newton VBD** で、これは **DISCARDED track**（`CLAUDE.md` Newton VBD 節: env6-VBD は「DISCARDED → mujoco 基盤」）。⇒ **現行 substrate（UR15 mujoco）で走る 5-clip の実装は依然として無い**（cell が 2 clip = `ur15_cell_spec.py:485-486`・driver が 18 段）。
+> 2. ⇒ **残作業は「全部を新規に作る」でも「段を書き足すだけ」でもなく、*設計・表・waypoint は既存、実行面は現 substrate へ作り直し*** という中間形。**規模の見積りは本節では出さない**（測っていない）。
+> 3. ⚠ **clip 座標系も別物**: `task_config.py:211-217` の 5 clip は `(0.35/0.40, ±0.150…)` の千鳥、UR15 cell は `C1=(0.150, …)` `C2=(0.040, …)`（`ur15_cell_spec.py:485-486`）⇒ **同じ名前 C1/C2 が別の座標を指している** ⛔ 両者の数を突き合わせる時は必ず substrate を添える。
+>
+> ⭐ **私の欠陥の形（4 度目・同一）**: 240 字窓 → `head -12` → `head -10`。⛔ **「一覧を出して散文にする」経路が毎回切れる。** ⇒ 規律 = **一覧を数える／不在を言う query に `head` を付けない**（付けたら「これは切った表示であって集合ではない」と同じ行に書く）。
