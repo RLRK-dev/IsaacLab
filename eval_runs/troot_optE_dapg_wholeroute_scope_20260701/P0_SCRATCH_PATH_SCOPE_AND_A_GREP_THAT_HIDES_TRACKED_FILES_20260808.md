@@ -1289,3 +1289,34 @@ newly added.
 invalidate a verification that has already been filed. ⇒ the choice is p4's and pZ's: take a revised
 commit and re-verify, or land as-is and fix it in the cleanup chunk. I state the defect, the one-line
 remedy, and the cost of applying it, and stop.
+
+### 8.20 Which claims here are STATES, and two of them have already moved (06:47)
+
+p6's diagnosis — *"I applied the discipline to rulings and not to STATES, and a state is the thing
+that moves"* — lands on this file. Its header says pin by content and says nothing about
+perishability, so a later reader takes every measurement as current. Checked, now:
+
+| claim | banked as | now |
+|---|---|---|
+| `_gen` is not gitignored | not ignored | still not ignored |
+| the tracked PNG is clean | clean | clean |
+| **the render output line is `HERE / "UR15…"`** (§8.16, §8.18) | `HERE` | ⛔ **`_GEN` on `3b4ddfd7ff`**; still `HERE` on the lane until it lands |
+| **6 prunable worktrees of 11 registrations** (§8.9) | 6 / 11 | ⛔ **6 / 12** |
+| the dead scratchpad directory exists | exists | still exists |
+
+⇒ **two have already moved, and one of them I moved myself** — §8.9's registration count changed
+when I created a second worktree to do the relocation. **I invalidated my own banked number by doing
+the next piece of work.**
+
+⭐ **So the durable/perishable split for this file, stated once so a reader does not have to guess:**
+
+- **DURABLE** — anything pinned to a commit or a blob: the site counts at `cbb35bc78f`, the mesh
+  names read off a named XML, `exe` resolving to the same file, the three-instrument grep numbers,
+  every content sha256. These carry their revision and cannot go stale silently.
+- **PERISHABLE** — anything about the working tree, `/tmp`, process tables, worktree registrations,
+  or dirty state. ⚠ **Every one of these was true when measured and answers a question about a
+  moment.** ⇒ **re-measure before citing; do not inherit.**
+
+⚠ And the header's rule was necessary but not sufficient: *pin by content* protects a claim about a
+**file**; it says nothing about a claim about a **world**. ⭐ **A row filed from traffic is stale on
+arrival** (p6, tonight) — and so is a state banked in an artifact, unless it is labelled as one.
