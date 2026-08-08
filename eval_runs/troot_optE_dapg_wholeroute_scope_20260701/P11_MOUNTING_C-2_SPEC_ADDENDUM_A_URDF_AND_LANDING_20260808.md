@@ -72,6 +72,15 @@ desk: p11 ARM-CONTROL-DESIGN (w2:p11) / 記録 **2026-08-08 22:25:51 JST**（`da
 ⇒ ✅ **spec §1 の「編集点は単一」は 2 経路・上記母集団で成立**（v2 の文言も維持）。⛔ **覆っていない範囲を明記**: 非 `.py` の実行面は本 query の外（本 cell は Python で組まれるため既知の面は無いが、「無い」ことを測ってはいない）／worktree 複製は**別立てで測り 0 と確認**（フィルタで隠していない — 表示から除外した集合を測らずに済ませると、それ自体が作られた不在になる）。
 ⭐ **私が引き取る形**: 名指し file への grep は**その file についての主張しか閉じない**。「他に無い」と書くなら、書く前に母集団を測って併記する（p18 §1195 = cardinality は membership を答えない、の同型 — 私の側は「2 file の counts で全体の membership を語っていた」）。
 
+### A-6b. 追記 23:11 — A-6 の「同じ 5 箇所」を**目視でなく判別力のある検査**で確定（契機 = p18 m-p18-106 §1 membership/path-form）
+
+⚠ A-6 の集合等価は **2 つの印字を目で見比べて**書いていた。両経路は**同じ object を別の文字列で描く** — 実測: route A `eval_runs/…/compare_24_vs_240.py:78` / route B `./eval_runs/…/compare_24_vs_240.py:78`（先頭 `./` の有無）。⇒ 正規化（`sed 's#^\./##'` → `path:line` 抽出 → `sort -u`）して `comm` で測り直した:
+
+- **A-only 0 / B-only 0 / 共通 5 / `diff` rc=0**（`git grep -- '*.py'` rc=0・`command grep -r --include='*.py'` rc=0）⇒ **A-6 の等価主張は成立**（結論不変・根拠が目視から集合演算へ）。
+- ⭐ 副次: 今回の route B は **worktree を除外せずに**走らせて同じ 5 ⇒ **worktree 複製の寄与 0** が A-6 の B'（rc=1）と独立に一致。
+
+**母集団の言い切り方も直す**（p18 §3 で採用された形に合わせる）: 本主張は「**現在の作業ツリー（tracked + on-disk）に他の導出は無い**」であって「**project の履歴のどこにも無い**」ではない。⛔ 履歴（過去 rev の range）は**未測・本紙は主張しない**。⇒ p0 が編集するのは現在の file ゆえ、実務上これで閉じる。
+
 ## A-5. 出所の等級
 
 - 全て第一手（本 session 実測）: `ur15_cell_spec.py:99-100`・`ur15_steps_wired.py:1130/:1136-1138/:1972/:2002/:2025/:315/:2418/:2456`・`ur15_mj.urdf:3` と `<limit>` 6 行・`git ls-files`/`rev-parse`/`sha256sum`・公式 `config/ur15/joint_limits.yaml`・`urdf/ur.urdf.xacro` の存在・`urdf_work` の不在。
