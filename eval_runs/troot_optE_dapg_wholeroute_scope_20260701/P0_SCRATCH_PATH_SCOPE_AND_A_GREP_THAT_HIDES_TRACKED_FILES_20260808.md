@@ -294,8 +294,16 @@ own section.
 | the claim | the instrument |
 |---|---|
 | "not in the working tree" | `command grep` **alone** (add `--exclude-dir=.git`) |
-| "not in the project at all, incl. deleted-but-committed" | that **plus** `git grep <rev>` |
+| ~~"not in the project at all, incl. deleted-but-committed"~~ | ⛔ **struck 23:12 — this leg does not close.** See below |
 | "not in a specific tracked revision" | `git grep <rev>` **alone** |
+
+⛔ **Row 2 is withdrawn, 13 minutes after I banked it.** pZ measured `git grep -l HEAD` → 0 / rc=1
+and `git grep -l 87278086a2^` → 1 / rc=0 on the same token: **one rev does not answer a history
+question, the rev has to range**, and the closed query over 6776 revs was not affordable (`git log
+--all -S` killed at exit 143). pZ reported no number, which is the right output.
+⇒ **the phrasing goes with it.** Never write *"not in the project at all"* — write **"not in the
+working tree, and not at `<rev>`"**, naming both populations. ⭐ **The history population is
+UNRESOLVED and is recorded as unresolved**, not papered over with the two instruments that do work.
 
 **(b) I found one filter; there are three.** `--ignore-files` (mine), `-I` (skips what it judges
 binary), `--exclude-dir=.git .svn .hg .bzr .jj .sl`. My §6 named the first as if it were the defect.
@@ -326,7 +334,29 @@ quietly wrong again. ⭐ **Prefer `command grep` explicitly** — it says what i
 how these files may be quoted is **immune to the blind spot by construction**, for a different
 reason than the one that makes it necessary.
 
-**(f) Two holes in my own instruments, disclosed.**
+**(e2) The membership filter itself is an instrument — three tools render one object three ways.**
+p18 nearly published a contradiction of (c) because their membership pattern anchored on a leading
+`./`, which **encodes a path form, not a path**. Measured here, one line of each tool's output for
+the same search:
+
+| tool | renders a hit as |
+|---|---|
+| wrapper `grep -rl` | `GOALS.md` |
+| `command grep -rl … .` | `./.claude/worktrees/…/GOALS.md` |
+| `git grep -l … HEAD` | **`HEAD:CLAUDE.md`** — a third form, with a `<rev>:` prefix neither other tool has |
+
+⇒ any filter anchored at `^` breaks against all three differently. My filters happened to be bare
+unanchored substrings (`grep -c 'prohibited.md'`), which match every rendering — **but I did not
+check that before relying on them**, which is the actual rule. What does defend (c) is that every
+row of that table runs the **same filter** and produces both a hit and a miss (`0 / 0 / 1`), so the
+filter demonstrably reaches the object whenever the tool does. That is the discriminating control,
+and it was there by the shape of the table rather than by my intent.
+
+**(f) Three holes in my own instruments, disclosed.**
+- ⛔ I ran two of (c)'s three cells with **`2>/dev/null`** — the stderr mask that has burned me
+  before. Re-run with stderr visible and `rc` printed: wrapper `rc=0` / 0 hits, `git grep` `rc=0` /
+  0 hits, `command grep` `rc=0` / 1 hit. All three commands ran; `rc=0` on the zero cells means the
+  phrase was found *elsewhere*, just not in that file. The numbers stand and are now guarded.
 - ⛔ My §6.3(c) first draft printed a column of counts that were *paths whose basename matched*,
   not occurrences. Reported above as reachable / not reachable instead. Same class as the
   `grep -c`-is-not-an-occurrence-count error banked earlier today.
