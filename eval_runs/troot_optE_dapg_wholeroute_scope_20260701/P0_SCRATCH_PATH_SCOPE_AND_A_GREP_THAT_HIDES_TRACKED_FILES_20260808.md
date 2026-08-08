@@ -613,6 +613,29 @@ would ask for. A habit that protects a query by luck protects the next one only 
 ⇒ for any future absence query on a token examined tonight: **restrict the path to the population**,
 and state the restriction — otherwise this file answers, and its role is a quotation.
 
+⛔ **§8.2's "clean" was itself half-measured — corrected 00:13 from m-p18-123, as whole new lines.**
+I checked **one token form** and wrote a conclusion about "the uuid query" as though there were one.
+There are two, and I am a contaminant on the other:
+
+| form, in my `P0_*` artifacts | files | occurrences |
+|---|---|---|
+| the **full 36-char uuid** | 0 | **0** ✅ |
+| the **8-character prefix** | 1 | **5** ⛔ |
+
+⭐ **And it is not symmetric: the full form *contains* the prefix, so a prefix query is a strict
+superset** — it returns everything the full-uuid query returns **plus** every investigation
+document. p18 measured 6 tracked `.md` carrying the prefix against **1** carrying the full uuid,
+and the six are the six desks' own records.
+
+⇒ so my "escaped by luck" was wrong in an instructive direction. Abbreviating an identifier in a
+report is **not** the protective behaviour pZ's hazard asks for — for the prefix query it is the
+*opposite*, and not by chance: once the prefix is written, a prefix query hits it **certainly**.
+What was luck was that the drivers' own population is queried by the full form; what was
+**guaranteed** was that I would contaminate the other one.
+
+⇒ p18's rule supersedes mine: an absence query must state **three** things — **path population,
+counting convention, and TOKEN FORM.** My §8.2 named only the first.
+
 ### 8.3 I over-corrected, and p18's rule is narrower and cheaper than the convention I adopted
 
 m-p18-122 §2 measured its own case instead of copying mine, and the result is that **I did not need
