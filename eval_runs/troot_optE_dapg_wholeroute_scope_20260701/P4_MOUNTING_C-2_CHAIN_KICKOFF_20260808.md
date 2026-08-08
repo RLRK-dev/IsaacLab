@@ -139,3 +139,30 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 2. **A-3 受入 ⇒ 私の §8 の言い方を弱める（実質は不変）**: spec `:201` §6-4 が固定しているのは**着地先（lane）**であって中間 commit 先でも順序でもない（括弧書きが `probe/pd1-arm-pd` との**branch 帰属**の対比を述べており、p11 の読みが本文に忠実）。⇒ ⛔ **§8 で「spec §6-4 を手続として修正する」と書いたのは必要より強い主張**だった（矛盾は無く、解釈で足りた）。裁定の実質 = 非 lane branch → pZ 検証 → lane 着地、は**不変**。〔本日 p18 §1189 と同型 = 結論は正しく、premise を盛った〕
 3. **A-2 受入 ⇒ p6 への DDR 依頼を狭い形へ差し替え**: §7 の URDF bullet は p18 便に接地して「再生成も source 監査も不能」と書いたが、p11 の第一手監査 = **公式 description が on-disk に在り（`…/Universal_Robots_ROS2_Description/`）、腕 6 関節の `<limit>` は公式 `joint_limits.yaml` を厳密に再現**（audit CLEAN）。⇒ **DDR に載せるのは「provenance 喪失」ではなく次の 4 点**: (i) 消えたのは **/tmp の作業複製**（公式上流は在る）(ii) **腕 `<limit>` 6 行は公式照合済 = CLEAN** (iii) **未監査 = URDF の他の内容**（mesh 参照・慣性・link 幾何）(iv) **恒久錨 = content pin `b4c60d4d…b57d`**。⛔ **私の元の依頼文（強い形）は本節で SUPERSEDED** — p6 が未着地なら本節の形で起票（着地済みなら本節を訂正の根拠に）。
 4. **変わらないもの**: C-2 の決定入力（0.280/20°/crown 0.110 pin）・chain 順序・p0 発進条件（p5 の工程表整合レグ）・HOLD・§6-6 fence・DoD の evidence-grade cap・#39 STOP tripwire（別軸・本紙は動力学定数に触れない）。
+
+## 9. ⛔ DoD 射程の訂正と、中間目標までの実距離（p4 自測 2026-08-08 23:12:07・実行なし・静的読みのみ）
+
+⛔ **私の §6 と p11 spec（§0 `:13` / §9）が書く「chain DoD = 43-step scripted route 動画」は、本 chain の実装範囲では produce できない。** 裁定 A（`LEDGER:39`）は **p4 の任務定義（mission）**であって本 chunk の DoD ではない — 私はその 2 つを 1 文に畳んでいた。⇒ **本 chunk の DoD = 実装済みの route が C-2 cell で走る動画**（下記 18 段）。
+
+**実測（全て tracked file の静的読み・`git grep`/`awk`・rc 印字済）**:
+
+| 面 | 実測 | 出所 |
+|---|---|---|
+| canonical 表の段数 | **1–43**（番号付き 42 行・最大 43） | `eval_runs/troot_verbal_teaching_20260705/CANONICAL_MOTION_TABLE_V1.md` |
+| canonical 18 | 「**C2から上昇**」・clip 欄 = **C1,C2** | 同上 |
+| canonical 43 | 「**ホーム復帰(両手全開)**」・clip 欄 = **C1-C5**（5 clip 全 seated retained） | 同上 |
+| fence 承認 driver の実装 | **STEP 1**（開始姿勢へサーボ移動 `:2509`）＋ **STEP 表 2-18**（17 行 `:2639-`）= **計 18 段**・終端 = step 18「上昇」 | `ur15_steps_wired.py` |
+| live cell の clip 定義 | ⭐ **C1 と C2 の 2 個のみ** | `ur15_cell_spec.py:485-486` |
+| C3/C4/C5 に触れる .py | **retired driver 3 本のみ**（`ur15_steps.py` / `ur15_steps_c1seat.py` / `ur15_steps_reaim.py`）= **§6-6 fence が使用禁止にした側** | `git grep -l` |
+
+⇒ **driver は canonical 1–18 を、段の名前まで一致する形で実装している**（18 = 「C2から上昇」で両者一致）。⇒ ⭐ **本 chain が届く範囲 = 5 clip 中 2 clip（C1→C2）**。
+
+**中間目標（T-ROOT = 5-clip routing）までの実距離（測れた分・推測しない）**:
+1. **段**: 19–43 の **25 段が未実装**（内容 = C3/C4/C5 への配索 ＋ ホーム復帰）。
+2. ⭐ **cell**: 走る cell に **C3/C4/C5 が存在しない**（定数が 2 個）⇒ 残りは「段を書き足す」ではなく **cell を作り直す**側の作業。⛔ **これは本 chunk の scope 外**（C-2 は取付幾何の chunk）。
+3. **既知の carry と整合**: 地図の「**5-clip 配置を実際に構成し FK で検算した witness は まだ誰も作っていない**」（W-1 carry）と本実測は同じ穴を別角度から指している — 私は今回 **executable path 側**で測った。
+
+**帰結（p4 の court で決めること・決めたこと）**:
+- 本 chunk の受入報告は「**C1→C2（canonical 1–18）が C-2 cell で走ることを示す動画**」で閉じる。⛔ **これを「43-step 完了」「裁定 A 充足」と書かない**（#48/#18/#49/#61 の grade cap は従前どおり別に効く）。
+- **裁定 A の充足には 19–43 と 5-clip cell が要る** ⇒ **別 chunk として起票が要る**（規模は本 chunk と桁が違う。起票の可否・順序は Rs / 私の lane で別途）。
+- p11 spec の同文言（§0 `:13`・§9）は **p11 の doc** ゆえ私は編集しない — **本節を回付**して p11 の court に置く（内容の誤りではなく **射程の畳み込み**であり、spec の技術内容は無変更で足りる）。
