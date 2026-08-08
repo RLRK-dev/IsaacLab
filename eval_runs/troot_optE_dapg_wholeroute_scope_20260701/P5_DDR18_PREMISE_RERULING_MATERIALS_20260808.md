@@ -99,10 +99,27 @@
 
 **反映経路**: 本 §8 bank（p18）→ p18 が p6 へ回付 → p6 が row 18 へ着地（succession 再定義 note・「待ち = Rs 再裁定」の discharge・close 条件更新は p6/Rs 側）。07-Design は p5 read-only ゆえ直接編集しない。
 
-## §9 B1/B2 確定状況（Rs 照会 2026-08-08 10:30 への回答・as-read 10:31-10:35）
+## §9 B1/B2 確定状況（Rs 照会 2026-08-08 10:31:11 JST〔⛔当初 header は「10:30」= 未実測の丸め・p18 first-hand 訂正 `m-p18-73`〕への回答・as-read 10:31-10:35）
 
 **結論: B1/B2（imported actuator disposition）は 2026-07-19 に裁定済み・同日 実証済み。**
 - **裁定** = design **v1.4** `e32c75c3a4`（版表 `:14`・row `:60`）: **B1（strip-at-import）= PRIMARY**（Rs 推奨に concur）／ **B2（inert 零化 nu=28）= strip 不可時の fallback のみ**（動的 force≡0 試験 REQUIRED）。⚠当時の probe 実装は B2 形 → B1 再実装要、と同 note に記録。
 - **実証** = P-D1 prereg v1.2 凍結（`32617b119a`・**Rs canonical R0-R4 matrix**・R1 = **B1-clean** 走行）→ **evidence 完了 bank `e5d2dc214a`**・video leg 13:44 Rs 納品。結果 = **R1（clean）全滅** ⇒ choreography-blocked・re-sequencing = Rs surface（= L-P0 evidence・DDR #26 の「L-P0 測定済」と同一物）。
 - **残り（bounded）**: (a) review v4 の「B2 STOP-gate 化」の最終 fold — 現 doc（v2.30 `031ca0dc95`・⚠worktree dirty as-read）に文字列 `STOP-gate` は **0 hit**（⛔この query での不在まで・改名の可能性は排除できない — 確定は版表 40+ 行の実読要）。(b) ⭐ **UR15 premise 変更（#38・07-27）後の適用** — nu=16/28 は `ur5e.xml` の数。**UR15 cell における余剰 actuator の有無・strip 対象は別 model の再測定**（推測・ラベル付き — B1 の*原則*は生きる）。
 - ⛔ **本 doc 自身の訂正 2 件を claim 位置に埋込**（§5 Q3・§6）: 「(d) HOLD ①-⑤」「P-D1 probe HOLD」は**行の途中で読みを止めた stale read**だった — ①③④ は 07-19 中に解消・P-D1 は走行済。⇒ **p5 の DoD 設計の前提は「B1/B2 の choice 待ち」ではなく「commission ＋ UR15 基盤での B1 適用確認」に更新**。
+
+## §10 UR15 基盤での B1 適用確認（Rs 照会 2026-08-08 10:38 台への回答・as-read 10:39-10:41）
+
+**結論: UR15 基盤（p4_ur15_sim_20260727 driver 系列）では B1 は *構造的に* 満たされている — ただし「strip 機構が在る」のではなく「持ち込む物が無い」による（vacuous satisfaction）。**
+
+**実測（全て on-disk・run 不要）**:
+1. **arm source = actuator 0 個**: `ur15_base.xml` / `ur15_base_mirrored.xml`（両方 tracked）— actuator 要素 **0**・include **0**。⇒ ur5e で綱引きを起こした「vendor `<actuator>` block が model と一緒に乗る」経路に、**乗る物が存在しない**。
+2. **gripper source = 意図された 1 個/側のみ**: `_ur15_2f85_koshape_actuated.xml` の `<general>` 2 件のうち **:25 は `<default class="2f85">` 内の defaults 記入（instance でない）**・実 actuator は **`fingers_actuator` 1 個**（:198・tendon「split」）。
+3. **arm servo 12 本は composer が明示生成**: `ur15_steps_wired.py:308-315` — `J6`×2 側、`{L,R}_{joint}_act`、PD affine（gain kp / bias −kp, −kp·KVR・wrist/arm で kp 別）、**forcerange = ±EFFORT・ctrllimited=1**。
+4. **合計 nu = 12 + 2 = 14 が runtime で成立**: run log 実測 `[steps] … nu=14`（07-27 08:50 / 10:41 / t43 trace 07-29 ほか複数・nq は cable 構成で 97/113 と動くが **nu=14 は不変**）。
+5. **全 14 本が駆動される**: `:678-683` — arm slot に qarm・gripper slot に ctrl_g。**ctrl≡0 で放置される actuator は無い**（ur5e の綱引き条件 = 「undriven なのに存在」が成立しない）。
+
+**⛔ 等級と残る穴（2 点・loud）**:
+- **(a) B1 は「機構」としては未実装**: attach 経路（`attach_body`）は **source に actuator が在れば黙って持ち込む**（gripper の `{tag}g_fingers_actuator` が prefix 付きで来ている事実がその証明）。今日の充足は **source file の中身**に依存しており、`ur15_base*.xml` を actuator 付き vendor MJCF に差し替えると **ur5e の失敗機構がそのまま再現**する。driver に **nu==14 の assert は無い**（`:351` は print のみ・`AN.index()` は不足で落ちるが**余剰は素通し**）。⇒ 将来 guard 候補（提案であって実装ではない — §運用24）。
+- **(b) scope 限定**: 確認したのは **p4_ur15_sim_20260727 の driver 系列**（現行 UR15 実行系・log 実測 07-27〜07-29）。別の UR15 loader が生まれた場合は別途。
+
+**⇒ p5 の DoD 設計前提への帰結**: 「UR15 基盤での B1 適用確認」は **本 § で discharge**（構造的充足＋(a) の穴の明示まで）。残る前提 = **commission のみ**。
