@@ -125,6 +125,9 @@ both for the `~/Downloads` video parents.
 
 ## 4. The generating xacro is gone — and ⛔ I padded this section's premise, retracted below
 
+> ⛔ **SUPERSEDED — this section is WITHDRAWN IN FULL. Read §4.1 immediately below before quoting anything here.** The official `ur.urdf.xacro` is on disk; only the scratchpad working copy is gone.
+
+
 `ur15_mj.urdf:3`, a tracked file:
 
 ```
@@ -877,6 +880,9 @@ p6's durability copies are the case where content crossed this boundary in the o
 
 ### 8.9 The render tool fails today — confirmed by EXECUTION — and a worktree-shaped instance nobody counted (00:34)
 
+> ⛔ **PARTLY SUPERSEDED — read §8.12 before quoting this section.** Its phrase *"Confirmed by running it, not by reading it"* is **withdrawn**: I ran a three-line reproduction of the failing call, **not the tool**. The measurement stands at the grade §8.12 states.
+
+
 **Confirmed by running it, not by reading it.** §3 above carried an explicit caveat that the `:287`
 failure was *"a reading of the code plus documented Python behaviour — I did not execute it."* This
 one I executed:
@@ -1063,6 +1069,9 @@ changes; `5` already has. ⛔ Design shape is p4's — I report the measurement 
 propose nothing.
 
 ### 8.14 "Early in the file" is not reachability — and my own sentence supplied 117's premise (05:49)
+
+> ⛔ **SUPERSEDED — read §8.15 before quoting this section.** Its central claim, *"there is no construct that stops at assembly"*, is **FALSE**: two guarded `raise SystemExit(0)` exist (`:1088`, `:2865`). My `0/0/0` row applied a **column-0 predicate to a reachability question** — the very error the section diagnoses.
+
 
 Two p4 rulings 21 seconds apart oppose on whether importing `ur15_steps_wired.py` is assembly or a
 route run. p18 measured the absent `__name__` guard. Measured here, the fact that turns "no guard"
