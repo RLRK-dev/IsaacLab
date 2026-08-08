@@ -93,7 +93,21 @@ pair as a whole looks "mostly consistent" because `0.40` appears on both sides. 
 | witness frame | **90.14 mm** | **7** |
 | executable cell | **120.83 mm** | **9** |
 
-ratio **1.340×**. The witness solved four equal 90.14 mm hops, spanning **28** of 40 bodies. The
+ratio **1.340×**. The witness solved four equal 90.14 mm hops, spanning **28** of 40 bodies.
+
+**Reconciliation of the segment counts (m-p18-113 §4).** p18 reports the raw quotients `6.01` and
+`8.06`; I reported `7` and `9`. These are **the same measurement one step apart**, and the step is
+**plain `ceil` — the artifact's own formula**, not a choice of mine:
+
+| | raw `c/15` | `ceil` | arc at ceil | artifact's criterion `:48` *arc ≥ chord* |
+|---|---|---|---|---|
+| witness frame | **6.009** | **7** | 105 mm | 6 seg → 90 mm, **short by 0.14 mm** |
+| cell frame | **8.055** | **9** | 135 mm | — |
+
+`:53` is `n_min = math.ceil(c / SEG_LEN)`. ⭐ And `:60` prints, verbatim,
+*"(banked §2.1 says 5 -> that table is WRONG; **6 fails by 0.14mm**)"* — the artifact states its own
+0.14 mm, and my figure reproduces it exactly. Not ceil-plus-endpoint; just `ceil`, anchored in the
+file rather than in either desk's convention. The
 cell's single defined hop is a third longer.
 
 ⚠ **This does not make the witness wrong.** It answers its own question in its own frame, and says
