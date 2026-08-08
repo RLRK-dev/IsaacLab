@@ -301,3 +301,20 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 > ⛔⛔ **§7 設計の穴（自検出 2026-08-09 00:33・p18 §1235 の実測が照らした・p0 が diff を書く前に）**: 私は **wired 側にのみ** `S.mkdir(exist_ok=True)` を要求し、**render 側の親 dir 生成を書いていなかった**。実測（本 turn・rc は grep 自身のもの）= `render_cell_overview.py` に `mkdir` は **0 箇所（rc=1）**／`…/scratchpad` は**在る**が **`…/scratchpad/meshpool` は不在** ⇒ **`:53 `AS_BUILT.write_bytes(SRC.read_bytes())` は今この瞬間 FileNotFoundError で落ちる**（⭐ 落ちる原因は **AS_BUILT の親 dir** であって、書かれる側の `_as_built_t42.xml` の不在ではない — **不在の出力は証拠でなく、不在の入力が証拠**）。
 > ⇒ **p0 への追加要求（設計の変更でなく欠落の補充）**: 移設先でも **`AS_BUILT.parent.mkdir(parents=True, exist_ok=True)` を書く**（`_gen/meshpool/` は 2 階層ゆえ `parents=True` 必須・wired 側の `_gen` も同形で安全側に `parents=True`）。⛔ **これを落とすと同じ失敗が新しい path で再現する**。
 > ⇒ **本 chunk の性格も更新**: 「将来 dir が消えるかもしれないという durability 上の懸念」ではなく、**DoD の視覚レグ script が現に走らない状態の修理**（p4 が 23:53 に priority を provenance から降ろした後の、より強い実測根拠）。⚠ 代替経路は spec `:203`/`:215` が既に認可（視覚レグは wired 自身の描画でも可）— ⛔ **旧 session の dir を作り直して回避しない**（本 chunk が消しに来ている条件そのもの）。
+
+## 14. HOLD 下で何を実行してよいか（p4 court・2026-08-09 00:37）
+
+⚠ **契機**: 「p0 が 00:34 に write を実行して `FileNotFoundError` を得た」（p18 §1235/§1241）。⛔ **私は p0 を咎めない** — **境界を書いていなかったのは私**で、fence を発効させたのは私だから。⇒ 前例が曖昧なまま積み上がる前に明文化する。⛔ **本節は緩和ではない**（下の C は従来どおり Rs gate）。
+
+**A. 受入済 spec が既に authorize している実行（追加の gate 不要）**
+- spec §6-2 の self-check（`python -c` で定数を import して印字）・pZ の受入 12 項＋別紙の項目。⇒ **私が accept した時点で承認済**。⚠ ただし **#61 の env pin**（`env_isaaclab7`）下で行い、版を run 記録に書く。
+
+**B. 診断実行（本節で新たに明文化・条件つきで可）**
+- **定義**: 既存 script を走らせて**故障の有無・機構を観測する**こと。⭐ **成果物は「壊れている/直った」の観測のみ**。
+- **条件（全て満たすこと）**: ①**task 性能・DoD・verdict の根拠に一切引用しない**（引用したければ C へ上がる）②書き込みは **repo 内の生成物 dir** に限る（⛔ session scratchpad へ新規に作らない = 本 chunk が直している当のもの）③**実行した事実と結果を報告する**（黙って走らせない）④**fence 内の script のみ**（退役 driver・独自 cell の video script は不可）。
+- **理由**: 修理が要るかを**測らずに決める**ことこそ今夜ずっと直してきた失敗（p0 の 00:34 の実行は、私の §7 の穴＝render 側 mkdir 欠落を**別の端から**照らした）。⛔ 診断を禁じると、設計判断が推測の上に乗る。
+
+**C. 判定を生む run（不変・Rs gate）**
+- sim を走らせて **task の成否・数値・動画**を得る類（DoD run・row 46 の close 条件を満たす run・training 一切）。⇒ **Rs の gate**（row 46 逐語）＋ fence ＋ env pin ＋ 本 file の evidence-grade cap（#48/#18 open の間は無印 PASS なし・#49 は gate 状態併記）。⛔ **本節は C を 1 mm も動かさない**。
+
+**判別の一言**: ⭐ **「その出力を後で引用したくなるか」**。引用したくなるなら C（Rs gate）。「動くか動かないか」を見るだけなら B。定数を読むだけなら A。
