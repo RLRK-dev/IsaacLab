@@ -39912,3 +39912,45 @@ p6 は **記憶からでなく banked object `f486965895` を読んで**引用�
 **CLOSED 済 = 1, 2, 3, 5。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1165 — ⭐⭐⭐ **「成り立っている」と「守られている」の差** — p5 の UR15 B1 検査（当卓 全数追認）。⭐ 本日の「書いてある ≠ 効いている」の *反転形*: **性質は真だが、それを真に保つ機構が無い**
+
+**契機** = Rs 照会（p5 卓）→ p5 が run 無しで測定回答。当卓 実測 10:42-10:45。
+
+### (1) ✅ p5 の測定 — **全数一致**
+
+| p5 の主張 | 当卓の実測 |
+|---|---|
+| arm source が actuator を持たない | ✅ `ur15_base.xml` / `ur15_base_mirrored.xml` **両方とも `<actuator>`=0・`<include>`=0・`<general>`=0** |
+| gripper file の他方の `<general>` は **default 記載**であって instance でない | ✅ `:25` の `<general biastype="affine"/>` は `:23` `<default class="2f85">` の内側。実 instance の `<actuator>` block は `:197` |
+| driver が 12 個の arm servo を明示構築 | ✅ `ur15_steps_wired.py:308-315` = `for tag in SIDES: for i, j in enumerate(J6)` ⇒ **2 側 × 6 関節 = 12**・`mjBIAS_AFFINE`・`forcerange`・`ctrllimited` |
+| run log が nu=14 | ✅ **閉じた query で 27 件、全部 `nu=14`**（他の値 0）。12 arm + 2 gripper |
+
+⇒ ✅ **B1 = UR15 substrate 上で構造的に成立**。⭐ **ただし「strip 段が走るから」ではなく「*剥ぐものが無いから*」。**
+⇒ **ur5e の綱引きの前提（駆動されない actuator が存在すること）に、instance が 1 つも無い。**
+
+### (2) ⭐⭐⭐ **p5 が自ら出した 2 つの穴 — こちらが本節の価値**
+
+**(a) B1 は *状態* であって *機構* ではない。**
+- `attach_body` は **source が actuator を持てば黙って取り込む** — ⭐ **その経路が生きている証拠が、接頭辞付きの gripper actuator そのもの**（＝経路は動作している。ただ今は arm 側に取り込む物が無いだけ）
+- driver に **nu の assert が無い**（print のみ）。⭐ **`.index()` は *欠落* を捕まえるが *余剰* は通す**（非対称。p5 の推論・当卓 grade = 論理として妥当・実行検査はしていない）
+- ⇒ ⛔ **arm source を actuator block 付きの vendor MJCF に差し替えれば、ur5e の機構がそのまま再現する。**
+
+⇒ ⭐⭐⭐ **本日ここまでの「書いてある ≠ 効いている」（ABSENT-IN-CODE / 空の backup dir）の *反転形***:
+| 形 | 例 |
+|---|---|
+| 宣言されているが効いていない | `.vault-backups` が persistent 宣言・中身 0（§1158） |
+| ⭐ **成り立っているが守られていない** | **B1（今は真・保つ機構は不在）** |
+⇒ ⭐ **どちらも「現在の観測」から「今後の保証」を読んではならない**という同じ規則の両側。**片方は false を true に見せ、もう片方は *脆い true* を *堅い true* に見せる。**
+✅ **p5 は guard を「提案のみ・未実装」と明記**（scope 規則遵守）— ⭐ **穴を名指しながら勝手に塞がない。**
+
+**(b) scope = `p4_ur15_sim_20260727` の driver 系のみ**（p5 明記）。
+
+### (3) ✅ bank ＋ 併せて
+- 材料 **125 行** / sha256 `146e741da0e16eb6…ded897d7` **64 字一致** ⇒ commit（§10 ＋ §9 見出し訂正）
+- handoff **816 行** / sha256 `999e40e60cd2546a…b504cf0d` **64 字一致** ⇒ commit（§38）
+- ✅ **当卓の m-p18-73 の指摘（§9 見出し 10:30 → 実測 10:31:11）を *主張の在る場所* で訂正済**
+- ✅ p5 の前提は **1 本に収束**: B1/B2 は裁定済・実証済・UR15 検査済 ⇒ **DoD 設計は commission 待ちのみ**（self-start しない）
+- ⭐ **p5 は「今回は書いた後に行数を測った」と明記** — 10:35 の 812/809 の形（測定値の隣の推測値）を、次の便で機構的に潰した。
+
+**Banked — 時刻は本節 commit の author date が正。**
