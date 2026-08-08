@@ -312,3 +312,20 @@ A-7b は罠の本体を「**軸の転置**」と名付けたが、**その名前
 ### (l'') p0 の拡張 — **audit も述語**（何を探したかを述べる）
 
 ✅ **本紙の 2 つの audit は探した対象を述べている**（実測 07:26:23）: ①「publish した述語 **21**」＝ backtick 内に `^`/`\b`/`grep`/`git`/`rc=` を含む行 ②「表 **38 行**」＝ `|` 区切り行で、**cell に限定語が在り label に無い**行を探した。⚠ ただし**どちらも代理指標**（近傍の数値／限定語の有無）であり **retracted かどうかは見ていない** ⇒ ⛔ **「clean」と読ませない** — 本 audit が答えたのは *被覆の有無* と *label の限定* だけ。
+
+### (l''') 追記 07:2x — **3 行形（population / expected / positive control）で書き直す**（p4 の完成形・私の (l') は 5 行中 1 行しか満たしていなかった）
+
+⛔ **実測（07:28:28・自分の (l') を機械判定）**: 述語 5 行のうち **expect は 5/5**・**population は 3/5**・**positive control は 1/5**。⇒ ⭐ **被覆だけでは miscarriage は捕まるが、死んだ query は捕まらない** — 対照が無ければ「0」が「当たらなかった」なのか「無い」なのか判らない。
+
+✅ **完成形（本節が正・これを写せば 3 つとも付いてくる）**:
+- **population** `ur15_steps_wired.py` @ 検査対象 rev（`git show <rev>:<path>`）／**expect 8**／**control**: 同 file で `^\s*[A-Z][A-Z0-9_]*\s*=` は **200+ 行に当たる**（＝ 抽出機構が生きている）
+  - 述語: `^\s*(Z_SEAT|GL|GR|LX[0-9]?|RX[0-9]?|RX_MID)\s*(,\s*(同)\s*)*=`
+- **population** 同 file 全体／**expect 17**／**control**: anchor 語 `STEP table` の出現が **1**（0 なら anchor 不在で走らせてはいけない）
+  - 述語: 「`STEP table` を含む行の直後の連続 `(N, …` 行」
+- **population** 同 file 全体・mounting 語 12／**expect 目標行内 0**／**control**: 同 12 語の whole-file 出現が **10 語で非 0**（残り 2 語 `CROWN_Z0`・`COLUMN_STEM_H` は未 import ＝ 構造的不在）
+- **population** repo 全体の `.py`（tracked 2,036 / disk 43,032）／**expect 5（実行される導出 1）**／**control**: `YOKE_SPREAD` 単独なら **同 file で 5 行以上**に当たる
+  - 述語: `\bYOKE_SPREAD *[/] *2\b`
+- **population** 任意 path／**expect rc=1**／**control**: `.claude` で **rc=0**（＝ ignore 判定が働く）
+  - 述語: `git check-ignore -q <path>`
+⇒ ⭐ **3 つの役割は互いに代替しない**: population = 何を測ったか／expect = 取りこぼしを露見させる／control = query が死んでいないことを示す。
+⚠ **等級**: 規則は p4 由来（**採用は provoked**）、**この discharge は self-scheduled**。⛔ 私が自発的に見つけたのではない。
