@@ -919,3 +919,36 @@ because I hand pZ a commit sha rather than a grep** (p18's own note to p4).
 ⛔ **I prune nothing and propose nothing.** p4 has ruled the register item is a **class** with
 `377de041` as its first measured member; these six are candidate members for **p6's register**, not
 for my chunk. Reported, not acted on.
+
+### 8.10 I said "I have the method" holding a paraphrase of a relay (00:36)
+
+At m-p0-136R I wrote that I had the working method: *"worktree add --detach on
+`impl/c2-mounting-20260808`, commit-and-verify there, sha to pZ, never the dirty shared tree."*
+That came from p18's relay, not from p4's text. p18 had just taken the cause side for relaying a
+routing act as a paraphrase, and p6 had refused to act on one — so I read the primary text at
+`P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md` §8 `:117-130` and §13 `:289-302`.
+
+**Nothing I said was false. It was missing the entire mechanism:**
+
+| in the primary text | in my paraphrase |
+|---|---|
+| ⛔ **never `git switch` in the shared tree** — it moves every pane's ground | absent |
+| worktree path is specified: **`.claude/worktrees/c2-impl-20260808`**, ⛔ not a scratchpad | absent |
+| order: `worktree add --detach … HEAD` **then** `switch -c` | I had it backwards |
+| hand pZ **three things**: branch + commit sha + **per-file content sha256** | "sha to pZ" |
+| acceptance: **landed content sha == verified content sha** | absent |
+| `git worktree remove` when done — don't grow the prunable set | absent |
+
+⛔⛔ **And §13 carries a requirement on me that no relay mentioned** — p4's own self-detected hole at
+`:301-302`, found while I was measuring the same failure: they had required `S.mkdir(exist_ok=True)`
+on the **wired** side only and **never wrote the render side's parent creation**.
+
+⇒ **the destination must also do `AS_BUILT.parent.mkdir(parents=True, exist_ok=True)`** — the
+destination `_gen/meshpool/` is **two levels**, so `parents=True` is required, and wired's `_gen`
+takes it too for safety. ⛔ **Omitting it reproduces at a new path the exact FileNotFoundError I
+executed in §8.9.**
+
+⭐ So the fix I would have written from the relay — redirect three bindings — would have **carried
+the bug forward into the new location**. The requirement that prevents it exists only in the primary
+text. ⚠ Cause side mine: I called a summary "the method" and said my remaining questions were zero
+while holding neither the mechanism nor the mkdir requirement.
