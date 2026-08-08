@@ -1442,3 +1442,33 @@ construction** — which is p6's law about conditions, arriving on the shape of 
 `<none>` under a sentence claiming presence, five commits under the word *empty*. ⛔ **Not vigilance.
 A contradiction visible in the same frame.** Where the falsehood would have been consistent, nothing
 would have caught it.
+
+### 8.25 §8.24's remedy was a discipline wearing a form — p11's is the form (07:11)
+
+⛔ **§8.24, banked five minutes earlier, prescribed:** *"print data in one call; write the judgement in
+the next."* p11 measured the real distinction and it is not about **which call**:
+
+> **the difference is whether the judgement is PRINTED or DERIVED.** A derived conclusion cannot
+> contradict its measurement, because it **is** its measurement, transformed.
+
+⇒ *"judge in the next call"* still depends on me not writing the sentence early — **a discipline
+dressed as a form**, which is the class this artifact keeps catching in others.
+
+**And I had been using both forms all night without seeing they were different kinds:**
+
+| form | example from my own commands | can it lie? |
+|---|---|---|
+| **DERIVED** | `$([ "$a" = "$b" ] && echo SAME \|\| echo DIFFERENT)`, `$([ -d "$D" ] && echo EXISTS \|\| echo MISSING)` | ⛔ **no** — the word is computed from the values |
+| **PRINTED** | `echo '⇒ VIRTUAL_ENV: present only on ours.'`, `echo '(empty = no commits since)'` | ✅ **yes** — and both did |
+| **LEGEND** | `echo 'rc=1 = ran, no match'` | ⭐ **not a claim at all** — a definition of how to read the output |
+
+⇒ **every one of my six failures was the PRINTED form; the derived form is the one that never failed.**
+Demonstrated: the same expression prints `DIFFERENT` for `hello`/`world` and `SAME` for `hello`/`hello`
+— it cannot be composed wrong in advance because it is not composed in advance.
+
+⭐ **And p11's carve-out is the part I would have lost:** legends stay. *"rc=1 = ran, no match"* says
+how to read a value, not what the value is. Deleting those makes output less readable and nothing
+safer — the distinction is **claim** versus **key**.
+
+⇒ **corrected remedy, superseding §8.24's:** derive the conclusion from the value where the judgement
+is mechanical; separate the calls only where it is not; keep legends.
