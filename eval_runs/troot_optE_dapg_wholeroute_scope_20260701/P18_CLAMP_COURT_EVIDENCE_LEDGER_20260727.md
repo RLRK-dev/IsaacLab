@@ -40213,3 +40213,42 @@ STEP 表から grip-obligation mask（CLAMP cell のみ・handover 瞬間を pin
 ⇒ ⭐ **当卓が要求した「未測と測定済 fail を menu 上で見分けられるように」が満たされた。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1171 — ✅ **cycle 2 = REVIEW（cycle 上限到達）→ 処分は Rs へ。全数追認** ＋ ⭐⭐⭐ **「shell が値を組み立てる」欠陥の 3 変種が本日出揃った**
+
+**契機** = p5（11:58:11 ＋ 訂正 11:58:45）。当卓 実測 11:58-12:02。
+
+### (1) ✅ artifact
+| doc | 行 | sha256 | 備考 |
+|---|---|---|---|
+| DoD **v0.3** | **96** | `e1a2c62abfe8332a…81c7485` | 版表に **v0.1 `:11` / v0.2 `:12` / v0.3 `:13`** の 3 版すべて（当卓 実測） |
+| handoff | **841** | `03810579c5d3957f…64c2450e` | ⚠ **前便の pin `d44b4eb0…` は p5 が自ら撤回**（下記 (3)） |
+
+### (2) ✅ debate の証人 — **恒久 log を当卓が直読**
+`harness-vault/verification-log/verification-log.jsonl` に `task-p5-succession-dod-redebate-001` が **2 件**:
+```
+cycle 1  2026-08-08T02:30:17+00:00 (11:30:17 JST)  num_agents=5  overall=FAIL     problems=14
+cycle 2  2026-08-08T02:57:38+00:00 (11:57:38 JST)  num_agents=5  overall=REVIEW   problems=10
+```
+✅ **agents は A-E の 5 名 × 2 cycle = 10 報告 ＋ consolidator 2**（p5 申告と一致）。
+✅ ⭐ **当卓は `consolidated.parse_warning` も見た = 両 cycle とも `False`** — **仮定せず確認した**（parse 崩れがあれば報告の中身が欠ける可能性があったため）。
+✅ **protocol 逐語**: `.claude/skills/verification-subagent/SKILL.md:440`「**FAIL** → Fix accepted issues, re-run from Step 1. **Max 2 cycles.**」⇒ **REVIEW への移行は規定どおり。**
+⚠ **当卓の query 失敗を記録**: 最初 `~/.claude/skills/verification-subagent/SKILL.md` を引いて **0 件**だった。実体は **project-local `.claude/skills/...`**。⇒ ⭐ **本日 n 度目 — 路を間違えた query の空振りを、対象の不在と読まなかった**（widen して見つけた）。**この自制だけが、本日ここまで機能し続けている唯一の防御。**
+
+### (3) ⭐⭐⭐ **本節の発見 — 「shell が値を組み立てる」欠陥の 3 変種が本日出揃った**
+
+| 変種 | 実例（本日） | 何が起きたか |
+|---|---|---|
+| **置換されるべきでないのに置換された** | 当卓の ledger 追記（`python -c "…"` 内の backtick） | pin が **空文字** で着地。文は成立して見える |
+| **置換されるべきなのに置換されなかった** | p5 §42 初版（escaped heredoc に `$DL`/`$DS` が残留） | **template token がそのまま出荷** |
+| **そもそも変数でなかった** | p5 の「812」（測定値の隣の書き置き定数） | **古い定数が測定値の顔で出荷** |
+
+⇒ ⭐⭐⭐ **共通構造 = *成果物は、自分の中の値が shell の仕事を経たかどうかを語れない*。**
+⇒ ⭐ **したがって「shell を正しく使う」ではこの族は閉じない。閉じるのは *出荷前に成果物自身を読む* こと** — p5 は今回 **送信直後の grep** で捕らえ、当卓は **`command not found` の鳴り**で捕らえた。⛔ **どちらも「気づいた」のであって「検査した」のではない。**
+✅ **p5 の是正の形は正しい**: `:839` は **訂正後の正しい pin（96 行・`e1a2c62a…`）と、失敗した token の記録を同じ行に併置**。⛔ **消していない** ⇒ 裁定 A と同型。**当卓の実測 = handoff 内の残留 token は `:839` の 1 行のみ・DoD v0.3 は 0 件。**
+
+### (4) ✅ 処分
+**DISPOSITION = REVIEW**（protocol 上限）。Rs が選ぶ = **(a) v0.3 に第 3 panel** ／ **(b) 設計側 accept・残余は chain の OPEN station（`/reward-design` 全再走 ＋ `/pre-check`）が担う**。
+⛔ **HOLD 不変・何も実行されない。**
+
+**Banked — 時刻は本節 commit の author date が正。**
