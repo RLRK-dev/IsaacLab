@@ -128,6 +128,20 @@ banked spec §0/§2 H5/§3.4 は「**C-2 は cell 側で閉じ、task 幾何を�
 
 ⚠ **witness の取り違え防止（同名 2 個・当方実測・契機 = p18 m-p18-111/-112 が別 witness の substrate 欠落を指摘）**: 今夜「witness」は **2 つの別物**を指している。⑴ **5-clip の L-geom witness**（2026-07-14・6/6 PASS）は **task_config の clip 配置**の上で計算されたもの（0.35/0.40 が **X** の役）。⑵ **本 spec の C-2 witness**（開始姿勢 clear・240 draws）は **cell 配置**の上の測定 — 計器 `sweep_mounting.py` → `ur15_steps_wired.py` は **`ur15_cell_spec` を import**（`:39`/`:55`・rc=0 = 陽性対照）し、**`task_config` を import しない**（`^ *(from|import) .*task_config` = **0 / rc=1**）。⇒ ⛔ **⑴ を本 chunk の幾何的裏づけとして引かない・⑵ を 5-clip の主張に使わない**。本 spec が立っているのは ⑵ のみ。
 
+### A-7c. 追記 23:38 — A-7b の「転置」は **C1 でしか成立しない**（当方で算術を再導出・契機 = p0 測定 / p18 m-p18-113 §4）
+
+A-7b は罠の本体を「**軸の転置**」と名付けたが、**その名前は 2 clip 中 1 個にしか当たらない**。source の構成定数から組み直して再計算（⛔ 行末コメントの数値は使わず `CLIP_X_ODD/EVEN`・`CLIP_Y_CENTER`・`CLIP_Y_SPACING`・`WORK_ROW_DY=0.0` から合成。`env_isaaclab7` の python で実行）:
+
+| clip | task 側 | cell 側 | 厳密な転置か |
+|---|---|---|---|
+| C1 | (0.350, 0.150) | (0.150, 0.350) | **True** |
+| C2 | (0.400, 0.075) | (0.040, 0.400) | **False** |
+| **C1→C2 の弦** | **90.14 mm** | **120.83 mm** | **比 1.3405 倍**（15 mm pitch 換算 6.01 対 8.06 節） |
+
+⇒ ⭐ **2 面は「1 つの読み替え（転置）」では関係づかない** — C1 だけが転置で、C2 は違う。⇒ ⛔ **C1 だけで値検査すると通る**（見た目に分かりやすい方でなく、欺く方の並び）。
+⇒ ⭐⭐ **より強い言い方（かつ測定済）**: 両面が共に定義する唯一の hop が **cell 側で 1/3 長い**。「carry は未確立」ではなく「**測ってあり、違う**」。⇒ A-7b の (軸, 値) 対で比べる規則は有効なまま・**「転置」という名前だけを撤回**する（1 個の例から関係全体に名前を付けていた）。
+⚠ 本 chunk への影響 = **なし**（本 spec は cell 面のみで閉じ、task 面の clip 座標を引かない = A-7b/A-8）。本節は**引用する側**への警告。
+
 ## A-5. 出所の等級
 
 - 全て第一手（本 session 実測）: `ur15_cell_spec.py:99-100`・`ur15_steps_wired.py:1130/:1136-1138/:1972/:2002/:2025/:315/:2418/:2456`・`ur15_mj.urdf:3` と `<limit>` 6 行・`git ls-files`/`rev-parse`/`sha256sum`・公式 `config/ur15/joint_limits.yaml`・`urdf/ur.urdf.xacro` の存在・`urdf_work` の不在。
