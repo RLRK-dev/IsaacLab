@@ -42,11 +42,11 @@
 | IKCHORD_GRIPSLIP_DIAGNOSTIC_RESULT_…0718 | tracked | M2 CONFIRMED / M1 REFUTED |
 | IKCHORD_GRIPSLIP_FIX_L3_PROPOSE / _VERDICT …0718 | tracked | lever 方向 sound・as-specified FAIL-revise（gap ①③） |
 | IKCHORD_GRIPSLIP_GONOW_PREREG / _EVIDENCE_RESULT …0718 | tracked | B4-shadow・B5a・pN PASS-CLOSE |
-| **IKCHORD_GRIPSLIP_FORCEDESIGN_VTDESIGN_…0718（v2.2 設計本体）** | ⚠ **UNTRACKED / 0-commit** | A1/A2/A3 改訂設計（§10.10-10.12） |
-| IKCHORD_GRIPSLIP_FORCEDESIGN_ESCALATION_…0718 | ⚠ **UNTRACKED** | escalation 記録 |
+| **IKCHORD_GRIPSLIP_FORCEDESIGN_VTDESIGN_…0718（v2.2 設計本体）** | ⚠ ~~UNTRACKED / 0-commit~~ **→ banked `e9a5cc7f3c`（10:05・custody not validity）** | A1/A2/A3 改訂設計（§10.10-10.12） |
+| IKCHORD_GRIPSLIP_FORCEDESIGN_ESCALATION_…0718 | ⚠ ~~UNTRACKED~~ **→ banked `e9a5cc7f3c`（同上）** | escalation 記録 |
 
 - **全 evidence は kinematic 基盤 ＋ UR5e cell 上の測定** ⇒ P4・P5・P6 の 3 重 caveat が乗る。
-- ⚠ **設計本体 v2.2 が唯一 0-commit** — disposition が何であれ、**歴史 record として bank するか消えるに任せるか**は決め所（昨夜の実測: untracked file は消えても無記録）。
+- ~~⚠ **設計本体 v2.2 が唯一 0-commit** — disposition が何であれ、**歴史 record として bank するか消えるに任せるか**は決め所~~〔✅ **discharged 10:05** — 両 file とも `e9a5cc7f3c` で bank（owner 判断 = p5・commit message に custody-not-validity 明記）。本 bullet は 10:00 時点の記述〕。
 - **基盤が変わっても残る設計知見**（v2.2 から継承価値のあるもの）: (i) 「右腕接触喪失 → 左単腕 → 高速横 escape」という failure class と、joint-delta ∧ EE-vs-chord ∧ cable-motion の **3 量相関 discriminator**（1 量は confound）(ii) IK の**離散 branch/basin 選択**という自由度の存在（PD でも DiffIK target 生成側に残る概念）(iii) coverage 教訓 = **C2_REGRASP（fresh branch 選択点）が最高 risk**。
 
 ## §5 Rs が決める問い（options ＋ 帰結）
@@ -76,3 +76,25 @@
 - `thread_isaac_lab/thread-vault/02-Workflow/HANDOFF_p5_vtdesign.md:132` @ `88e778acdf`（v2.2 dispatch 記録）＋ §30-31（row 18 訂正 arc）
 - `CLAUDE.md` §0#5（pin 例外 custody）・DiffIK 節（PD charter Rs 承認 07-26）
 - ⚠ 行番号は **untracked/伸長 file では引くたび再解決**（本 doc の LEDGER pin は commit 併記で恒久化）
+
+---
+
+## §8 裁定記録（2026-08-08 10:09 JST 受領・first-hand）
+
+**Rs 発話（p5 session 直接・verbatim）**: 「**Q1-Q5 は所見どおりで良い**」（2026-08-08 10:0x・本 doc §5 への応答）。
+
+**resolution（各 Q が何に確定したか）**:
+| Q | 確定内容 | 等級 |
+|---|---|---|
+| Q1 | **(a) succession 再定義** — row 18 を「**PD 基盤での grip-efficacy 実測**」として継続（FOUNDATIONAL 維持・GATES (d-b) 連鎖保存・旧機構 M-b2 は kinematic 固有ゆえ基盤ごと消滅、と注記） | 所見 = 明示 (a) ⇒ 直接確定 |
+| Q2 | **(a) #26 と同型の表現** — 旧 evidence は「直ちに無効とはしない・継続利用可否は L-P0 判断と一括」 | ⚠ **§5 Q2 には所見 marker が無かった** ⇒ (a)（precedent 併記の第 1 案）への解決は **p5 の resolution（inference・loud）**。Rs は無費用で flip 可（§5 記載どおり実務差 = 小） |
+| Q3 | **#18-last 維持**（gate chain 再構成の中で (d) P-D1 の後に位置確定） | 所見 = 明示 ⇒ 直接確定 |
+| Q4 | **DoD 骨格 採用**: PD closed-loop で **grip 保持のまま g3（C1 seat）到達**・**C2_REGRASP を含む coverage**・**視覚レグ必須**（numeric 単独 PASS 禁止）。数値設計は再定義後に p5 が導出 | 候補骨格 = 唯一提示 ⇒ 採用 |
+| Q5 | **lane 確定**: 測定系・DoD 設計 = **p5** ／ PD 駆動側前提の供給 = **p11** ／ 実測・実装 = **lead lane** | 提案 = 明示 ⇒ 直接確定 |
+
+**本裁定が決めて *いない* こと（over-read 防止）**:
+- ⛔ **execution HOLD の解除は含まれない** — Q3 採用により #18 の実行位置は「(d) P-D1（現在 probe HOLD・Rs review ①-⑤）→ gate chain 再構成」の**後**のまま。[CHANGE]/probe fence は継続。
+- ⛔ **DoD の数値**は未設計（Q4 は骨格のみ）。導出は succession row の commission 後・かつ **(d) の B1/B2（actuator disposition）確定が入力に要る**（PD 駆動の性質に依存するため）。
+- 旧 evidence の最終 disposition は **L-P0 判断（Rs）と一括**のまま（Q2 (a) の中身そのもの）。
+
+**反映経路**: 本 §8 bank（p18）→ p18 が p6 へ回付 → p6 が row 18 へ着地（succession 再定義 note・「待ち = Rs 再裁定」の discharge・close 条件更新は p6/Rs 側）。07-Design は p5 read-only ゆえ直接編集しない。
