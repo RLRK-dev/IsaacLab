@@ -23,7 +23,7 @@ rests on the uncommitted tree.
 | **the site count** | ⛔ **14 lines in 13 files, not 1.** A chunk scoped to `:32` fixes 1 of 14 |
 | **"the DoD video writes into it"** | ⛔ **measured false.** All 9 mp4 outputs go to `~/Downloads`, each with `mkdir(parents=True)` |
 | **but the escalation is right, for a stronger reason** | ⭐ `S` is the **model-build path**, written then **read straight back**, and **never created** |
-| ~~**the hazard has already fired once**~~ | ⛔ **RETRACTED by me at 22:24 — see §4. The xacro is gone; I cannot say what took it, and the conclusion never needed that** |
+| ~~**the hazard has already fired once**~~ | ⛔ **WITHDRAWN ENTIRELY at 22:40 — §4 carried THREE defects and contributes nothing to the chunk. The official `ur.urdf.xacro` is on disk; only the scratchpad copy is gone. See §4.1** |
 | the dir's state | ✅ exists 22:09:12 JST; 4 files, all mtime **Aug 4 15:26** — and §5 shows **a run wrote there successfully 4 days ago** |
 | ⭐ **the instrument everyone uses for absence** | ⛔ **repo-root `grep -r` silently drops a TRACKED file.** Measured: 24 vs 25 vs 26 across three instruments |
 
@@ -53,6 +53,14 @@ denominator: **40** `.py` files in the directory at that commit.
 | `render_cell_overview.py:36` **and** `:38` | `AS_BUILT`, `SRC` — the only file with two |
 
 ⭐ Closed over the *space*, not just the one id: `grep -oh 'claude-1000/-home-rlrk-IsaacLab/[0-9a-f-]*' *.py | sort | uniq -c` returns exactly **one** entry, `14 …b952db35…`. There is no second dead session hiding in the drivers.
+
+⚠ **The count above is the LANE DIRECTORY's, and the chunk may want the repo's.** Same predicate,
+same commit, no path restriction: **15 files / 16 lines** — p18's figure, reproduced here exactly.
+The two extra are outside this lane: `P5_CONTROL_METHOD_ANSWER_PRESERVED_20260721/splice_v231.py:5`
+and `w1_b2_dod_legs/leg8_hold_calibration.py:118`. My 13/14 and p18's 15/16 are the **same
+measurement over different populations**, and both are right for their stated scope — but a fix
+that means "every driver" has **16 lines** to cover, not 14. Naming which population a count
+covers is the §6.1 lesson turned on my own headline number.
 
 ⚠ Three of the fourteen are bound to names other than `S` (`SRC`, `AS_BUILT`). A fix that greps for `^S = Path(` would miss them — the same "verify at the delivery surface, not the source variable name" shape.
 
@@ -115,27 +123,51 @@ returns **nothing**. `urdf_work/` is gone.
 lost is the ability to **regenerate** it — and `ur15_cell_spec.py:99/:100` parse `EFFORT` and
 `LIMS` out of that URDF, so it is a Tier A source whose upstream no longer exists.
 
-### 4.1 ⛔ Retraction, written 22:24 against my own §4 above (m-p18-101 §1)
+### 4.1 ⛔ §4 IS WITHDRAWN. Three defects, in two passes — 22:24 and 22:40
 
-I first wrote this section as *"the hazard is not hypothetical — it has already taken something"*,
-where the hazard is a **system reclaim**. That attributes an agent to the loss, and I cannot show
-one. **The conclusion needs less than I claimed:** the xacro is not on disk, therefore the Tier A
-source cannot be regenerated. Nothing in that requires knowing what removed it. The attribution
-was the only falsifiable part and it was the part I did not measure.
+**22:24 (m-p18-101 §1), the AGENT.** I wrote *"the hazard is not hypothetical — it has already
+taken something"*, where the hazard is a **system reclaim**. That attributes an agent to the loss
+and I never measured one. Retracted.
 
-What I *can* measure, and its grade:
+**22:40 (m-p18-103 §5), the SCOPE and the CONSEQUENCE — the clauses I kept.** p18's rule that
+evening — *a retraction has to re-test the clauses it KEEPS, not only the one it drops* — landed
+on me within minutes of my own retraction, which had done exactly that. Measured now:
+
+| clause I kept at 22:24 | status |
+|---|---|
+| *"the xacro is not on disk"* | ⛔ **FALSE as written.** `/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/urdf/ur.urdf.xacro` **exists**, 2153 B, with `config/ur15/joint_limits.yaml` 2490 B beside it. Only the **scratchpad working copy** is gone |
+| *"a Tier A source has lost its upstream / cannot be regenerated or audited against its source"* | ⛔ **FALSE.** p11 performed that audit against the official description and got six exact rows (`max_effort` 433/433/204/70/70/70; ±360/±360/±180/±360/±360/±360 deg) |
+
+⭐ **The mechanism of my error is one of my own banked rules.** My closed `find` was scoped to
+`/tmp/claude-1000`, and I let that scope become the denominator of an absence claim whose predicate
+was *"is the generating source available **anywhere**"*. **The denominator of an absence claim has
+to come from the predicate's own space, not from where I happened to look.** The search was
+sound and closed over its own root; the conclusion I hung on it was about a different space.
+
+⇒ **§4 contributes nothing to the chunk and is withdrawn as a support, not softened.** It was the
+most consequential-sounding item I had and its value is zero. What survives is only: the
+scratchpad copy of the xacro is gone, which harms nothing because the upstream is intact.
+
+⛔ **Anything downstream that cites §4 — including a relay of "THE FAIL-CLOSED SOURCE HAS LOST ITS
+UPSTREAM" — is citing a withdrawn claim.** p11's audit is the governing statement.
+
+What still stands, and its grade — none of it from §4:
 
 | | measured | grade |
 |---|---|---|
-| the xacro is nowhere under `/tmp/claude-1000` | closed `find` over **all** session dirs: the only hit is a **copy of the finished `ur15_mj.urdf`** in a different session (`c2d317bc…`) — not the xacro, and not `urdf_work/` | ✅ fact |
+| the xacro is nowhere **under `/tmp/claude-1000`** | closed `find` over all session dirs: the only hit is a **copy of the finished `ur15_mj.urdf`** in a different session (`c2d317bc…`). ⚠ True of that root **only** — the official copy lives outside it and is intact | ✅ fact, correctly scoped |
 | the last **create/delete/rename** in that scratchpad | **2026-07-29 20:30:32** (dir mtime; overwriting a file does not move it) | ✅ fact |
 | a run wrote there **successfully** on Aug 4 15:26 | the four XMLs were *overwritten*, not created — the dir mtime would have moved to Aug 4 otherwise | ✅ fact |
 | so whatever happened to `urdf_work/` happened **at or before Jul 29 20:30:32** | follows from the two rows above | ✅ fact |
 | **what removed it** | ⛔ **not determined.** Author deletion, a bulk replacement of the tree, and never-existed-in-this-incarnation all fit the same mtimes | ⛔ unknown |
 
 ⭐ And the one observation that supports the priority argument **without** needing the attribution:
-**44 of the 73 session directories under `/tmp/claude-1000/-home-rlrk-IsaacLab/` carry an mtime in
-the single hour `2026-07-29T20`.** Whatever that event was, it was not any one session doing its
+**44 of the 71 session directories under `/tmp/claude-1000/-home-rlrk-IsaacLab/` carry an mtime in
+the single hour `2026-07-29T20`.** ⛔ *Corrected 22:40: I first wrote **73**, which is the parent's
+hard-link count (`stat -c %h`), not a directory count — a directory's link count is subdirectories
+plus `.` and `..`, so `73 − 2 = 71`. p18 measured 71 independently and was right. I read a number
+that was adjacent to the one I claimed; the fraction is 44/71, slightly stronger than I said.*
+Whatever that event was, it was not any one session doing its
 own work — this tree gets touched wholesale by something outside the sessions that own it. That is
 a better argument for the chunk than my retracted sentence was, and it is a measurement rather
 than an attribution.
