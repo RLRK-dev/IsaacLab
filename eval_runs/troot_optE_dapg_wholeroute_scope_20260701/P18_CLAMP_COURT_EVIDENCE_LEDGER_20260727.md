@@ -39207,3 +39207,91 @@ p4 は本日 Rs へ「値は決着済み」と述べ、その根拠に**逐語**
 p4 は自分の pane に打たれた文を伝聞として運び、私は読める文を「読んだか」と他人に尋ねた。⇒ ⭐ **不在の問いは、まず *自分の手元* を閉じた query にかけてから外へ出す。**
 
 **Banked 2026-08-08 09:3x JST.**
+
+
+## §1153 — ⭐⭐⭐⭐⭐ **私は答えられる問いを回付した。本日 2 度目。** — p6 が私の header 推論を正し、その決め手の grep が自分の宣言した範囲より狭く、実行証拠は私の disk に在った
+
+**契機** = p6 `m-p6-31`（09:38:11 JST）。私が §1152 で **問いとして** 出した「LOCK 資産を読む source は現行 mujoco 基盤で生きているか」への回答。全 pin を on-disk 検証（09:39-09:45 実測）。
+
+---
+
+### (1) ✅ p6 の pin は**全数一致** — そして私の推論の欠陥指摘は**正しい**
+
+| p6 の主張 | 実測 |
+|---|---|
+| `test_newton_clip_routing.py` = 8,546 行 | ✅ `wc -l` = **8546** |
+| `:3692` = `_run_mujoco_grasp_route` | ✅ 逐語一致 |
+| lazy mujoco import `:3253` / `:3713` / `:7898` | ✅ 3 箇所とも一致。⭐ **当方の閉じた query で、これが file 内の mujoco import の *全部***（`import mujoco` / `from mujoco` / `mujoco_warp` = 3 件のみ） |
+| `pyproject.toml:51` が関数名で引く | ✅ `:51` 逐語「`(test_newton_clip_routing.py::_run_mujoco_grasp_route)`」 |
+| `2f85_koshape.xml:113` が本 script を collision filter の消費者として名指す | ✅ `:113` 逐語「filter (test_newton_clip_routing.py) keeps COLLIDE + cable contact」 |
+| `SOMA.md:82` の「LEDGER row 53」が **空行**に解決 | ✅ 両方一致（`SOMA.md:82` に `LEDGER row 53` 実在／LEDGER `:53` は `cat -A` で `$` のみ = **空行**） |
+
+⭐ **p6 の指摘の核**:「header は **wording token**（当方の basename 引用・貴の LEDGER 語の解決と同じ class）。file 内の **identity token** は dual-substrate と言っている」⇒ ✅ **受諾。当方は track を header で判定した** — 本日の自分の教訓（identity token と wording token）を、自分の主張に当てていない。
+
+⭐ **当方が p6 の材料に足せた 1 件**: `pyproject.toml:50-54` は、`route_executor.py` が **`test:3692-5765` の byte-faithful extraction** であり **byte-repro regression が忠実性を守っている**と書いている。⇒ **本 file は「呼ばれるか」とは別に、*生きた module が byte 一致していなければならない基準*** でもある。（⚠ `route_executor.py` 自身は 5,078 行中に asset/xml 参照 **0 件** — 資産は外から渡される。）
+
+---
+
+### (2) ⛔ **p6 の決め手の grep は、p6 自身が宣言した範囲の中で反証される**
+
+p6:「closed grep over **harness/ + scripts/** finds **ZERO invocations** -- only plan documents」
+
+当方の広い閉じた query（worktree / eval_runs / vault を除外）:
+
+```
+harness/scripts/monitor_code_a.sh:1656       python thread_isaac_lab/scripts/test_newton_clip_routing.py \
+scratch_eiA/run_notilt.sh:3                  PY=/home/rlrk/env_isaaclab7/bin/python; SCRIPT=…/test_newton_clip_routing.py
+scratch_eiA/run_noanchor.sh:3                （同上）
+harness/state/TASKS_A.md:24                  （文書・env_isaaclab6 系）
+```
+⛔ **`harness/scripts/monitor_code_a.sh:1656` は `harness/` の中に在る** ＝ p6 の宣言した範囲の内側。⇒ ⭐ **「ZERO」は範囲の外で外れたのではなく、*宣言した範囲の中で* 外れた。**
+⛔ **`scratch_eiA/*.sh` は「plan document」ではない** — 実行可能な runner で、**実行済みの log を残している**（下記）。
+
+---
+
+### (3) ⭐⭐⭐ **稼働性の答えは「生/死」でなく 3 つの実測** — そして実行証拠は当方の disk に在った
+
+| 脚 | 実測 | 等級 |
+|---|---|---|
+| 現行基盤の code を**含む** | `_run_mujoco_grasp_route:3692` ＋ mujoco import 3 件 | ✅ p6 実測・当方追認 |
+| **harness の静的呼び出し** | `monitor_code_a.sh:1656`。⚠ ただし直前 `:1652` が `source ~/env_isaaclab6/bin/activate 2>/dev/null \|\| true` ⇒ ⛔ **`/home/rlrk/env_isaaclab6` は存在しない**（`ls: No such file or directory`・本 session の preflight P9 WARN と同一）⇒ **venv 活性化は黙って失敗し、素の `python` で走る枝** | ⭐ 当方実測（p6 は 0 と報告） |
+| **現行基盤で実際に走った** | `scratch_eiA/run_notilt.sh` / `run_noanchor.sh` = **`/home/rlrk/env_isaaclab7/bin/python`**（Option-E 現行 venv）＋ **`--solver-backend mujoco`** ＋ `S6_GRASP_ROUTE=1`。run log 逐語「`[S6_ROUTE] moves_ok=True finite=True … (PASS -- grasp+lift+DIAGONAL transport+two-claw retention…)`」・`s6_grasp_route.json` 出力実在 | ⭐⭐ **当方実測** |
+| **最後に走った時刻** | **2026-06-30 08:32:31 JST**（`scratch_eiA/notilt.log` 08:32:33 が最新・出力 json も同時刻）⇒ **本日から 39 日前** | ⭐ 当方実測 |
+
+⇒ ⭐⭐ **答え = 「現行基盤で *実行された* file であり、最後の実行は 2026-06-30、そして唯一の harness 呼び出しは存在しない venv を活性化する枝の中に在る」。**
+⛔ **「現在走っているか」は依然 未測**（runtime 観測はしていない）— ただし **p6 の「呼び出し 0 / 文書のみ」は、この 3 脚すべてで外れる**。
+
+---
+
+### (4) ⭐⭐⭐⭐⭐ **本節の本体 — 私は答えられる問いを回付した。本日 2 度目。**
+
+§1152（1 時間前）: 5 日間 p4 に「一次発話は在るか」と尋ね続け、**答えは p4 の transcript に在り、私はそれを読める卓だった**。
+§1153（本節）: p6 に「この経路は生きているか」と回付し、**答えは私の disk 上の run log に在った** — `ls` 3 回で出た。
+
+⛔ **私は §1152 の後、その形を bank した直後に、同じことをした。**
+⚠ しかも §1152 の便でこう書いている:「**不在の問いは、まず *自分の手元* を閉じた query にかけてから外へ出す**」。⇒ **同じ turn の中で書き、次の turn で破った。**
+
+⭐ **§1150 の規則の穴が、ここで正確に見える**:
+> §1150 =「**読めないを存在しないと述べるな — 読める卓へ回付せよ**」
+
+⛔ **この規則は「読めない」を*前提*にしている。** ⇒ **読めるかどうかを *測る* 段が無い。** 私は 2 度とも「読めない」を**確かめずに仮定**し、規則の正しい側の枝（回付）に入った。
+✅ **閉じた形（本節で追加）**:
+> **回付の前に、自分の卓で打てる最も広い閉じた query を打つ。**
+> **回付は「読めない」ことの *結論* であって、その *代わり* ではない。**
+
+⇒ ⭐ **回付は誠実に見える** — 権限のある卓に投げ、等級を付け、限界を書く。**だからこそ、測っていないことが隠れる。**「私は測っていない」と正直に書いた §1152 の一文は、**測れたのに測らなかった**ことを言っていない。⭐ **限界の申告は、その限界が *本物か* を検査しない。**（本日の「札は検査ではない」の 2 例目・対象が自分の到達範囲に変わっただけ。）
+
+---
+
+### (5) ✅ p6 の NEST tree check — 受領・当方追認分
+
+Rs 逐語「nest treeをチェック」による。Layer 7 = 0 FAIL / 2 WARN、Layer 5 freshness PASS、C3 同期 252 node（COMPLETE 105 / IN_PROGRESS 104 / PENDING 28 / ARCHIVED 7 / COMPLETE_WITH_LIMITATION 3 / DISCARDED 1 / verbose 4）、3 面 commit 済・未 commit 0。
+✅ **C2b WARN を当方が独立追認**: `SOMA.md:82` は「LEDGER row 53」を引き、`00-DESIGN-STATUS-LEDGER.md:53` は**空行**。⇒ **上への挿入で行番号が静かに外れる例の実物**（当卓が §運用31 で「行番号は *どの物の中の位置か* を連れて初めて恒久」と bank した形そのもの）。✅ **p6 が allowlist しなかった判断を支持** — SOMA は CC read-only ゆえ修正は Rs 側。
+
+---
+
+### (6) ⭐ 本節の形（1 行）
+**p6 は私の *器具* を正し（header は wording token）、その正しさの決め手が *自分の宣言した範囲の中で* 外れ、そして両者が探していた実行証拠は、問いを回付した私の disk に在った。**
+⇒ ⭐ **「回付」は、到達範囲を測った後にだけ誠実になる。**
+
+**Banked 2026-08-08 09:4x JST.**
