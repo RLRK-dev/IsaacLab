@@ -734,3 +734,18 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 **(3) 位置づけ（p6 の自己評価が正しい）**: 3 つの remedy のうち **列を替える手は適用範囲が最も狭い**（誰かが既に log を残している事象クラスに限る）。p4 の規則（欠陥の名指し）と当卓の非摂動計器は**任意の事象クラスで効く**。⇒ **強さの順ではなく、適用条件の違い。**
 
 **(4) bank**: 720 = **`77e714599c`**（sha `67fe2a97ce875b0b` 一致・自分で照合）。⇒ 本 arc は当卓側 CLOSE。
+
+## 30. 追記 2026-08-08 09:40 JST — 訂正回付 packet: DDR row 18 の状態句が誤った卓を待たせている（#40 と同型・Rs 指示 option C）
+
+**対象**: `00-DESIGN-STATUS-LEDGER.md:122`（row 18・as-read 09:40、着地時は p6 が行番号 再解決）status 列 第 3 句 **「L3 FAIL→p5 design revision active」**。⛔ **status（IN-RESOLUTION / execution HOLD）と close 条件は動かさない** — 訂正するのは**誰を待っているかの記述のみ**。
+
+**(1) 句が偽である根拠（全て実測）**:
+- **p5 の改訂 leg は完了済み**: v2.2 = CONSOLIDATED §11 re-debate-ready・**design-side READY・dispatched 2026-07-19 02:35** — 本 handoff `:132` @ `3cd13da681`。artifact = `IKCHORD_GRIPSLIP_FORCEDESIGN_VTDESIGN_20260718.md`（⚠ **untracked・0-commit** ⇒ mtime 07-19 02:35 は worktree 観測・commit pin は存在しない）。
+- **旧 flow 自体が失効**（row 18 末尾 自身が記録）: 「#18 impl を現 kinematic 基盤で land」= superseded 確定・**#18 枠組み = kinematic 全廃 rework 下で再定義**・R-SEQ §7 WITHDRAWN。⇒ 新枠組みでの p5 再設計は**依頼が存在しない**（本 handoff `:96`-`:98`）。⇒ **旧義でも新義でも「p5 … active」は偽**。
+- **現在の実際の待ち**: (d) row `:60` 次段列「Rs 裁定（clip pin 含否）→ p5 全面削除 charter → gate chain 再構成（**#18 前提も Rs 再裁定**・demo 再記録 計画含む）」・順序 = **#18-last**（pN 裁定 2026-07-20 10:13）。
+- 直近の register 隣接言及 = 08-06 `66fda97bb9`「#18 alone remains, under its execution hold」（hold 継続のみ・待ち先の訂正なし）。
+
+**(2) p6 への提案 note 文**（placement は p6 規約に委ねる — 「今 誤って運んでいる行」ゆえ head-marker 相当と見る）:
+> ⚠2026-08-08 状態句 訂正（p5 発・p18 経由）: status の「p5 design revision active」は現状でない — p5 改訂 v2.2 は 2026-07-19 02:35 dispatch 済（p5 handoff`:132` @ `3cd13da681`・artifact は 0-commit ゆえ mtime 観測）。かつ本行末尾の supersession（#18 枠組み = kinematic 全廃 rework 下で再定義）により旧 flow の続行自体が無効 ⇒ **現在の待ち = Rs による #18 前提 再裁定**（(d) row 次段列・#18-last = pN 2026-07-20 10:13）＋ gate chain 再構成。p5 への依頼中項目なし。status・close 条件 不変。
+
+**(3) 経路**: 本節 bank（p18 操作）→ p18 が p6 へ回付 → p6 が commit から直読して着地 → disposition は p18 が閉じる。**Rs 指示 = 本日 option C 採択**（当卓の提案 3 択から）。
