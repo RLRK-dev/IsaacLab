@@ -21,6 +21,8 @@
   - ⛔ **実装時に落としてはならない 1 点（pointer でなく本文に置く）**: 移設先で **`AS_BUILT.parent.mkdir(parents=True, exist_ok=True)`**（`_gen/meshpool/` は 2 階層ゆえ `parents=True` 必須）。⇒ 落とすと**現に起きている失敗**（視覚レグ script が親 dir 不在で FileNotFoundError）が**新しい path で再現**する。根拠と全条件 = kickoff **§7 末尾**。
 - ⛔ **execution HOLD 不変・self-start 禁止**。**DoD の evidence-grade cap**: #48/#18 が open の間は DoD 動画に無印 PASS を出さない・#49 は整定ゲート状態を併記・#61 の env7 pin 下でのみ・existence 主張は **cell 条件 3 つ**（stereo head 不在／#54 部材不在／抽選領域 = URDF 関節範囲）を明記
 - **Rs 判断待ち** = ①**C3-C5 へ延ばす別 chunk の起票可否** ②**push**（当日分は未 push）
+  - ✅ **両方 解決済（2026-08-09 05:2x-05:3x・Rs 逐語「2: 可　３：push」）**: ②**push 実行済**（fork へ 2 回・以後 ahead は他卓分のみ）／①**起票 = 可** ⇒ DEFINE 起票済 = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_DEFINE_C3C5_PORT_TO_CURRENT_SUBSTRATE_20260809.md`（見出しで引く・53 行）。⛔ **「可」は *起票* の授権のみ** — 実装・実行・GPU は含まない（同 file 「## 0. 授権と、その射程（over-read しない）」）。
+  - ⇒ **現在の待ち（差し替え）**: **node 化** = p6 の court（親 = `T-ROOT`・上記 file が DEFINE）／**#48（cable 第 2 DOF）** = **Rs**（未 disposition ⇒ DoD 動画は射程注記つき・無印 PASS 不可）／**C-2 の 4 編集** = p5 の工程表整合レグ／**micro-chunk（wired+render）** = p0 実装可（clear 済）。
 
 ### 次にやること
 1. preflight（auto）→ 本 file → memory の p4 per-pane file（`handoff_cc_p4_rstechlead_control_method_20260719.md` の末尾数節 = 当日確立した手順の SSOT）
