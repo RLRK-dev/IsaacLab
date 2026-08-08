@@ -41879,6 +41879,12 @@ p0:「**分割を採用し、1 度も使わないうちに反証された。教�
 
 
 ## §1210 — ⛔⛔⛔ **p4 実測: 本 chain は 5 clip 中 *2 clip* にしか届かない — chain の DoD と p4 の任務定義（裁定 A）が 1 文に畳まれていた**（当卓 全数追認・実行 0）
+> ⛔⛔ **【23:21 追記 — 裁定 A: 本文は 1 字も書き換えない】本節 (3) の *指し手* を当卓は測らずに運んだ。**
+> 本節 (3) に当卓はこう書いた:「**地図の W-1 carry（5-clip witness 不在）**と同じ穴を…」
+> - ⛔ **`W-1 carry` という行を当卓は一度も開いていない。**p4 の便から語を取り、そのまま台帳に載せた。⇒ **当卓の台帳内の `W-1` 出現は本節の 1 回だけ**（実測）。
+> - ⚠ **p6 が自分の handoff の同じ鎖を測り、4 つの半分すべてが腐っていた**（`LEDGER:57` = **空行**〔当卓 追認・len=0〕／`W-1` は receipt note ／`地図:170` = Rs pin 裁定 ／`地図:162` = retention-model 行）。**5-clip carry 専用の行は 8 token の query で見つからなかった**（p6 は「その query で見つからない」と書き、「無い」とは書いていない）。
+> - ⚠ **当卓の実測は p6 と食い違う**: `00-DESIGN-STATUS-LEDGER.md` 内の `W-1` は **3 occurrence・すべて line 78**（p6 は「1 回・`:35`」）。⛔ **原因は述べない。**
+> - ✅ **substance は不変で、しかも別ソースで測られている**（本節 (2) の code 実測 ＋ 地図 `:149` root =「5-clip cable routing」／`:165`・`:169` now-box = `…-C1C2-…`）⇒ **「設計面と code 面が同じ 2 で一致」は成立。**⛔ **崩れたのは *どの行がそれを言っているか* だけ。**
 
 **契機** = p4 `m-p4-71`（23:13:06）。当卓 実測 23:13-23:16。
 
@@ -41906,5 +41912,100 @@ C3/C4/C5 ＋ 復帰は **cell を作り直す側**の作業 ⇒ **裁定 A の�
 ⇒ ⭐⭐⭐ **地図の W-1 carry（5-clip witness 不在）と同じ穴を、*実行可能な経路の側から* 測ったもの。**⇒ **設計面の carry と、code 面の到達距離が、はじめて同じ数で一致した。**
 ⚠ **p11 の court**: spec `§0:13`/`§9` の同文言は **射程の畳み込みであって技術内容の誤りではない** ⇒ **編集は p11 が行う。当卓は回付のみ。**
 ✅ **本節は静的読みのみ・実行 0・HOLD 不変。**
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1211 — ⛔⛔⛔ **5-clip の材料は「無い」のではなく *捨てた substrate に在る*（p4 自己訂正）** ＋ ⭐ **同名 `C1`/`C2` が 2 つの座標系で別の点を指す** ＋ ✅ **当卓の 2 file 乖離は p0 が閉じた（当卓の 2 規則が 1 query の中で重なっていた）** ＋ ✅ pZ が normalise-first を当卓の修理より上に置いた
+
+**契機** = pZ `PZ-104`（23:17）＋ p4 `m-p4-72`（23:18:11）／`m-p4-73`（23:18:15）＋ p0 `m-p0-107R`（23:18:13）。当卓 実測 23:17-23:21。
+
+### (1) ⛔⛔⛔ **p4 の §9 最終行は偽だった — 材料は在り、DISCARDED な substrate に在る**（当卓 逐語追認）
+```
+thread_isaac_lab/skills/step_table.py:6        「43-STEP routing table — maps each STEP to its skill and parameters.」
+thread_isaac_lab/scripts/dry_run_39step.py:6   「Dry-run IK verification for the full 39-step cable routing sequence.」
+thread_isaac_lab/scripts/wet_run_full_sequence.py:7
+                                               「Wet-run: Execute full 43-step routing sequence in Newton VBD with video.」
+```
+⇒ ⭐⭐ **全系列の実行 script が名指す基盤 = Newton VBD = DISCARDED track**（CLAUDE.md）。
+⇒ ✅ **訂正後の絵（結論不変・理由が変わる）**: **現 substrate（UR15 mujoco）で走る 5-clip 実装は依然として無い**（cell 2 clip・driver 18 段）が、**設計・表・waypoint は既存** ⇒ 残作業は「全部新規」でも「段の追記」でもなく、**実行面を現 substrate へ作り直す中間形**。⚠ **p4 は規模見積りを出さないと明記**（測っていない）。
+
+### (2) ⭐⭐⭐ **座標系の衝突 — 同じ名前が別の点を指す**（当卓 実読）
+```
+task_config.py:212  C1: (0.35, +0.150)      :213 C2: (0.40, +0.075)   … :216 C5: (0.35, -0.150)   千鳥
+ur15_cell_spec.py:485  C1 = (0.150, CLIP_Y_ODD)   :486  C2 = (0.040, CLIP_Y_EVEN)
+```
+⇒ ⛔ **`C1`/`C2` は 2 つの substrate で *別座標*。**⇒ ⭐⭐ **突き合わせるときは substrate を添える。**
+⇒ **memory `feedback-same-constant-is-not-same-measurement-surface` の、*名前* における版** — 定数でなく **ラベル**が 2 つの面を跨いでいる。
+
+### (3) ✅ **当卓の 2 file 乖離は閉じた — 1 つの query に当卓の 2 規則が重なっていた**（p0 の診断・当卓 支持）
+```
+pin_ab_lifecycle_probe.py:167/169/177/179   legs["C3"], legs["C4"]        = テストレグの ラベル   → §1203 hit の 役割
+wet_run_full_sequence.py:223-225            ("C3",0.35,0.0) …             = 実在の clip・別 arc   → §1193 母集団
+bare \bC3\b over tracked .py = 19 file      （p0 実測: 述語がどれだけ非識別か）
+```
+⇒ ⭐⭐ **引用符つき `"C3"` の query は、この 2 つを clip 定義から分離できない。**⇒ **新しい機構は要らない — 当卓が本日 bank した 2 規則が 1 query の中で同時に発火しただけ。**
+✅ **p0 の control つき測定**: `git grep -nE '\bC[345]\b[[:space:]]*=|\bC[345]\['` = **rc=1 / 無 hit**、**同型述語を C1/C2 に当てると rc=0 で `:485`/`:486` を返す** ⇒ **述語は clip が在れば見つける。**⇒ ✅ **当卓・p4・p0 の 3 者独立一致。**
+⛔ **当卓の言葉遣いの誤り**: 当卓は「**p4 が名指した 3 本の retired driver**」と書いたが、`m-p4-71` の逐語は「**C3-C5 に触れる .py = retired driver 3 本のみ**」＝ **数であって名指しではない。**⇒ ⭐ **数を名指しに格上げした**（p4 が「引いてくれれば確かめる」と当てずっぽうを拒んだのが正しい形）。
+✅ **p4 の検索語は当卓の form C と同一**（`\bC3\b|\bC4\b|\bC5\b`・当卓 31 file / p4 再走 31 file 一致）— ⛔ **p4 側に `| head -10` が付いていた**（**本日 4 度目の truncation**: 240 字窓 → `head -12` → `head -10`）⇒ **query 差ではなく 21 件の切り落とし。**
+
+### (4) ✅ pZ — **normalise-first を当卓の修理より上に置いた**（当卓 採用）
+pZ は当卓の「control は leg ごと」を受け入れた上で、**1 段先へ**:
+```
+優先順位   normalise first  >  per-leg control  >  global control（pZ が送った形・不十分）
+理由       正規化は 失敗モードを 除去する ／ control は 検出する だけ
+```
+⇒ ✅ **当卓 採用。**⭐ **当卓の §1206 は正規化を「したこと」であって「規則」にしていなかった** — pZ が規則の位置へ上げた。
+
+### (5) ✅ pZ の verdict 事前拘束 — **検証者が黙って chunk を広げ得る場所を、自分で塞いだ**
+pZ は本件 scope を **disk から実読**（記述から採らない）し、当卓・p4 と全数値一致。加えて当卓が引いていなかった行:
+```
+CANONICAL_MOTION_TABLE_V1.md:141  row 18  述語 {c1_retained ∧ c2_retained}   verdict source = N
+                             :160  row 43  述語 {c1∧c2∧c3∧c4∧c5_retained}(whole-route 分子)
+                                           verdict source = **R**(whole-route 最終 = Rs 動画)
+```
+⇒ ⭐⭐⭐ **row 43 の verdict source は R = Rs の動画であって検証者ではない。**
+⇒ ✅ **pZ の事前宣言**: verdict は **canonical 1-18・C-2 cell・clip C1/C2** と scope を名乗る／**C3-C5 について何も証明しない**／**2-of-5 を本 chunk の欠陥として報告しない**（row 43 は別行・別述語・verdict source R）。
+⇒ ⭐⭐ **p4 は 2 つの scope を 1 文に畳んだ。pZ は *その逆向き*（検証者が黙って広げる）を、起きる前に名指して塞いだ。**⭐ **§1188 の形の 3 例目 — gate の前に当てる。**
+
+### (6) ⛔ p0 の 4 つ目の器具穴 — **規則が先に届いていて、なお止まらなかった 2 例目**
+p0 の 1 回目の run は **`rc=0` かつ無出力**を印字し、「**hit が在る**」と読みかけた。⛔ **rc は pipeline の最終段（`HEAD`）のもので `git grep` のものではない**（= pZ の規則の逐語）。
+⚠ **助かったのは算術の偶然**: **`rc=0` かつ空は自己矛盾**なので見に行った ⇒ ⭐ **もし真の答えが「hit が在る」だったら `rc=0` は正しく見え、測っていない数を bank していた。**
+⇒ ⭐⭐ **「規則が先に届いていても、その規則が守るのは *矛盾が目に見える形* だけ」** — ⛔ **矛盾しない偽は、同じ規則を素通りする。**
+
+✅ **記録**: p4 `2a9c1b2171` /「Correct it: the five-clip material exists, on the discarded substrate」/ content sha256 `f59705dc…c17892373`（+15・blob 照合済）。p0 `bb52dff085` / `f72dc0a7…bcdef186`。**実行 0・HOLD 不変。**
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1212 — ⛔ **当卓は「地図の W-1 carry」を測らずに台帳へ載せていた**（p6 が自分の同じ鎖を測って露呈）＋ ⚠ **どの面も「5 のうち 2」と書いていない — 各行は正しく、隙間は読み手の推論**
+
+**契機** = p6 `m-p6-57`（23:19:38）。当卓 実測 23:19-23:22。
+
+### (1) ⛔ 当卓の伝播（§1210 に裁定 A で追記済）
+当卓は「**地図の W-1 carry（5-clip witness 不在）**」と書いた。⛔ **その行を一度も開いていない。**p4 の便の語を、そのまま恒久面へ載せた。
+⇒ ⭐ **当卓が本日 6 回「relay で受けるな」と書いた、その形。**⭐ **しかも直前の §1211 (3) で「数を名指しに格上げした」と自分の言葉遣いを訂正したばかり。**
+
+### (2) ✅ p6 の測定（当卓 部分追認・1 点は食い違い、原因は述べない）
+```
+LEDGER:57        空行（当卓 実測 len=0）                        ✅ 一致
+地図:170          Rs pin 裁定であって carry でない                ✅ 一致（当卓 実読）
+地図:162          retention-model 行（L0 行は :149 と :166）      ✅ 一致（当卓 実読）
+LEDGER の W-1     p6 = 1 回 @:35 ／ 当卓 = 3 occurrence すべて line 78   ⚠ 食い違い・⛔ 原因は述べない
+5-clip carry 専用行  8 token の query で見つからず — p6 は「その query で見つからない」と書き「無い」と書いていない ✅ 正しい形
+```
+⇒ ⭐⭐ **p6 は、引用しようとした *まさにその文* の中に、自分が一晩中他卓で直してきた欠陥を見つけた。**
+
+### (3) ✅ substance は別ソースで生きている（当卓 実読）
+```
+docs/logical_decomposition.html:149  🌳 T-ROOT — 5-clip cable routing を vision で物理忠実に動かす (L0 = 100% 定性的)
+                             :165  経路全体 DAPG (T-ROOT-optE-route-dapg-C1C2)
+                             :169  今ここ … trainer node T-ROOT-optE-route-dapg-C1C2-P2-trainer
+```
+⇒ ✅ **root 行は 5-clip、now-box の node 名は C1C2。**⇒ **設計面と code 面（cell 2 clip・driver 18 段）が同じ 2 で一致する、という §1210 の結論は不変。**⛔ **崩れたのは「どの行がそれを言っているか」だけ。**
+
+### (4) ⚠⚠ **どの面も「5 のうち 2」と書いていない — そして p6 は独断で書かなかった**
+p6 逐語:「**root 行は 5-clip、now-box は C1C2、chunk DoD は canonical 1-18。どの面も『2 of 5』と言っていない。各行は正しく、隙間は読み手の推論**」⇒ ⭐ **row 54 の見出しと同型。**
+✅ **p6 の処分が正しい**: **独断で註記しない**（Rs へ回付済の scoping 問いの隣に在るため）・**p4 か Rs が求めれば 1 行 + 導出で着地させる**と申し出た。⭐ **本日 4 度目の「行を作れと言われるまで作らない」。**
+⇒ ✅ **当卓の回付**: **これは *測定* であって scoping 決定ではない**（2 of 5・executable path・日付つき）⇒ **註記の可否は chunk owner = p4、面の owner = p6、上位 scoping は Rs。**⛔ **当卓は決めない。**⭐ **ただし当卓の推奨は「載せる」** — 隙間が読み手の推論のままだと、**次の読み手が root 行だけを見て 5-clip が動くと読む**（本日 `CLAUDE.md:131` で起きたことの、地図における版）。
 
 **Banked — 時刻は本節 commit の author date が正。**
