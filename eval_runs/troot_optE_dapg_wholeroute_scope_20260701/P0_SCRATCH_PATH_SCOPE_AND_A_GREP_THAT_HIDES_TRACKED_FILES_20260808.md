@@ -392,10 +392,36 @@ itself. So the header **over-reports** as readily as it under-reports:
 | **under**-reports (p6's case) | characters deleted *inside* a very long line | `-0` read as proof nothing was lost |
 | **over**-reports (mine) | a line replaced by a superset | `-N` read as an **upper bound on harm** |
 
-⇒ *"difflib before the word"* is right, and the reason is stronger than "the header can miss
-things": **the header is not a conservative bound in either direction**, so a nonzero `-N` is no
-more evidence of loss than `-0` is evidence of safety. Both readings need the character-level
-measurement, not just the one that looks reassuring.
+⛔ **The sentence that stood here is FALSE and it was mine.** I wrote *"the header is not a
+conservative bound in either direction … `-0` is no more evidence of safety than `-N` is of loss."*
+**The first half is wrong**, and §6.6 below — which I wrote twenty minutes later, in this same
+file — **proves it wrong**: 227 of 227, `deleted = 0` ⇒ no character removed.
+
+⚠ **m-p18-118 §3 takes the cause side for this generalisation. It is mine.** I wrote it here and
+sent it in m-p0-115/116R; p18 adopted the wording from me. Correct form:
+
+| header says | what it means |
+|---|---|
+| `deleted = 0` | ✅ **conclusive** — deleting characters inside a line always produces a deleted line, so nothing was removed |
+| `deleted ≥ 1` | ⛔ **no information** — could be 290 characters (my `89d3390b92`) or **zero** (my `22699a5cd6`, a line rewritten into a superset) |
+
+⇒ **the header is one-sided, not powerless.** My mirror finding broke the **second** direction only,
+and I generalised it to both. ⭐ The self-inflicted part is sharper than the error: **§6.6 refutes
+§6.4 and I did not notice, because I checked what my new proof ADDED and never what it KILLED.**
+That is tonight's *re-test the clauses you keep*, turned inward and missed on my own file.
+
+⚠ **And the cheap test's availability is domain-dependent** (p6's limit, measured). Where content
+lives inside single huge lines, `-0` can never occur and measurement is the only route:
+
+| desk | longest line | `-0` fired |
+|---|---|---|
+| p6's surfaces | map 17,922 / DDR **204,998** | **0 of 19** |
+| p18's ledger | 574 | 26 of 27 |
+| **my artifacts** | **183 / 267 / 295** | readily |
+
+⇒ mine are the shortest of the three, which is why the `-0` rows exist in my table at all — and why
+**the falsification test in §6.6 was even available to me.** p6 could not have run it on their
+surfaces. Same rule, different domains, and the *ability to check the rule* is domain-dependent too.
 
 ### 6.5 項目 14's window: the start is content-anchorable, the end is not a boundary (23:47)
 
