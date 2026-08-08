@@ -62,3 +62,18 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 09:23:57 JST**（`date` 実�
 - 初版 bank = `ee511c046c1939c4c682850ff62188d77d4ce851`（content sha256 `9b2f726fa6c50a3f9afff8a5283432db13aa64603676f293bcf7433616b0e6bc`）= Rs 裁定「4」が載った版。
 - ⛔ 本 file を回付した dispatch **m-p4-41 の pin は placeholder のまま送信された**（「at commit 5240f8f9…（下記 sha）」— `5240f8f9` は repo のどの object にも解決せず、予告した sha も続かなかった。捕捉 = p18 m-p18-59 (2)・再検証 = p4 09:37）。supersede = m-p4-42。
 - 本訂正（§2 の区間帰属＋枠衝突・§5 の等級格上げ）は**挿入のみ**（原文不変・削除 0 行）。
+
+## 7. Rs 委任と執行状態（2026-08-08 10:0x 追記）
+
+**Rs 逐語（00:54:00.755Z UTC = 09:54 JST）= 「すべて君またはp18の推奨で良い」**。先行文脈 = 私の 09:46 close「Rs 判断待ちは変わらず: open 6 問 + 項目 5 の spec 着地」。⚠ 指示対象「すべて」の解決者は私と p18（各自独立に同じ解決・p18 m-p18-62 が明示宣言）— Rs の語ではない。
+
+**執行状態:**
+- **①（RS71 :26/:40/:73/:84 の参照付け替え）= 準備のみ・commit 保留。** 編集を作成した後、p18 m-p18-62 (a) が gate を提示: 04-Specs は CC read-only（write-matrix `:24`）・本日の先例 = p6 の SOMA 編集は Rs が file と変更を**名指した**明示指示下 ⇒ **blanket 委任が 04-Specs 書込に届くかは Rs のみが言える**。私の読みは「届く」だったが、検証卓が別読みを保持 ⇒ §運用10 で停止・Rs の一言待ち。edits は patch として恒久保存 = `ITEM5_SPEC_LANDING_PREPARED_RS71_PATCH_20260808.patch`（41 行・sha256 `9bb134116b980d27fdd5a1af7bbf7903a4bc7c30457b9388466c51f08ecc7248`・RS71 は HEAD へ復元・blob 一致検証済）。
+  - ⭐ **保留中に見つけた設計注意**: RS71 `:38` P0 注記 = §0#4 行の肥大が過去に hook echo (12.7KB) を context 外へ追い出した実績 ⇒ 認可された場合の着地は、prepared patch の「:26 行内 ~700 chars 追記」でなく **:26 は最小 supersession 節＋詳細は §0-A へ**の形に直すべき。
+  - ⚠ 保留の実害（毎日続く）: §0#4 の stale 参照が session 開始 hook で毎回全卓に配信され続ける（p6 台帳 (d): spec 未反映 2 回連続・LOCK 乖離 4.00→6.00 mm）。
+- **②（LOCK asset の処置）= 執行済（CC 書込可能面）。** 私の推奨 = Rs 07-21 凍結形式（凍結物は編集せず、指す側に注記）: asset 不触・GD-KoShape-Finger.md head caveat を挿入。ledger 側の (ii)(iii) = p6（p18 m-p18-62 割当）。
+- **③（DDR#44 最終処理）= p6**（p18 が回付・割当済）。
+- **残件**: p18 m-p18-62 推奨 = 2 CLOSE / 4 CLOSE-with-limits / 6 ACCEPT (p11 disposition・残穴 = p11 の one-line assert) / **7・8・9 = 推奨なし（未測定のまま Rs に留まる — 権限が来た瞬間に全件へ意見を持ちたくなる引力こそ本日の欠陥の別衣装、と p18 が明示）**。私からの追加推奨もなし（7/8/9 は私も未測定）。
+- **record ≠ wiring（射程の明示）**: 本裁定は「どの面が記録として正か」を閉じた。**code の配線は別軸** — `test_newton_clip_routing.py:160` は今も `2f85_koshape.xml` を load（live-but-degraded per p18/p6・repoint は未裁定の別作業）。
+
+出所等級: Rs 委任 = 直接（本 session 実受信）。p18 の解決宣言・推奨 map・gate = m-p18-62 実受信。SOMA 先例 = p18 報告経由（relay・p6 の commit `006b25a77c` は push 一覧で実見）。
