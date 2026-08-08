@@ -5117,6 +5117,49 @@ R の `column gap` は **STEP11 / 12 / 13 / 14 で −0.6 mm**（`:204`/`:216`/`
 
 ⛔ **非主張:** p5 の裁定を上書きしない ／ τ の値を出さない ／ 窓の新しい値を提案しない（**関係のみ: 窓 ≤ 許容**） ／ t23・t8・t22 を再測したと言わない ／ 実装しない ／ run を求めない。**gate 不変。**
 
+### 27.2.160 ⭐⭐⭐ **コントローラー審査（Rs 直接指示 2026-08-08「コントローラーをチェック」）— spec §4 が私の court に置いた 5 定数の裁定: 構造 ✅ / 出所 ✅ / KP 系 3 定数は *暫定* 受理（境界を数値で名指す）。⛔ 値は変えない・実装しない**
+
+**接地（すべて私が HEAD `293ea3aa37` で読んだ）:** 依頼の根拠 = `P5_UR15_CELL_CONSTANTS_SPEC_20260727.md:92` 逐語「`KP_ARM` `KP_WRI` `KVR` `ARMATURE` `DAMP` … ⛔ **arm-control の court** — 本 spec は名前と出所だけ持ち、値の可否を判定しません」。対象実装 = `ur15_cell_spec.py:828-829`（`ARMATURE, DAMP = 0.1, 1.0` / `KP_ARM, KP_WRI, KVR = 10000.0, 1200.0, 0.06`）＋ `ur15_steps_wired.py:307-315`（actuator 構築: `gainprm[0]=kp, biasprm=[0,−kp,−kp·KVR]`, `forcerange=±EFFORT[i]`）。⛔ **run は 0 回**（読み＋閉形式計算のみ・`mj_step` 不使用）。
+
+#### ① ✅ **構造 — 妥当（official 形と同型・不変前提を保持）**
+
+- **形 = position servo（P + 速度 damping の affine bias）＋ torque clamp ＋ gravcomp=1.0 ＋ `implicitfast`**（`:250` `integrator="implicitfast"`）。⭐ **on-disk の official menagerie UR5e（`thread_isaac_lab/assets/ur5e_robotiq/ur5e/ur5e.xml:10`）と同一の作り**（`gainprm="2000" biasprm="0 -2000 -400"`）。gravcomp は PhysX 側 `disable_gravity=True` と parity（code 内に実測根拠「無しだと 17 mm 沈む」）。
+- **不変前提（§0#3/#5・IK ベース制御のみ・servo 目標のみ）:** 制御 loop の腕への書込は **`d.ctrl` のみ**（`:2563`/`:2571`/`:3470-3474`。`_sv`/`_sc2`/`_ap`/`_sci` は予測用 scratch MjData ＝ `eval_fk` 系で適法）。**live `d.qpos` への腕書込は全 file で 1 か所** `:2383` — これは **t=0 の世界構築**（cell 同梱の home・code 内に「Rs: start from home」と指示逐語・`mj_forward` のみ・以後は `START_RAMP` で servo が実走）。⇒ **私の読み: t=0 の初期条件は「reset」ではない**（先行状態が無い所に teleport は定義されない・実 cell も home で据え付く）。⚠ 失効済み reset-init 例外との形式照合を要するなら court = p5/Rs（1 行で足りる）。
+- **指 = Robotiq official tendon actuator 不変**（`ctrlrange 0-255` / `forcerange ±5`・`2f85.xml:189` と同値）。
+- **command ramp は progress-gated**（`:3461-3463` 逐語 "the command gated on the arm keeping up… The move is done when the command has reached the far end"・指 close は「arms settled (resid < SETTLE_TOL)」で解錠）⇒ ⭐ **time-based 補間の正帰還（私の /diffik-trajectory 禁止形）を作らない**。✅
+
+#### ② ✅ **出所 — EFFORT/LIMS は URDF から fail-closed に読む**
+
+`ur15_cell_spec.py:84-100`: `<limit>` 欠落で **raise**（黙って推測しない ✓）。実値（`ur15_mj.urdf`・私が読んだ）: effort = **433/433/204/70/70/70 N·m**、velocity = **π/π/4.19/5.24×3 rad/s**。`ARMATURE=0.1` は menagerie UR5e `:9` の `armature="0.1"` と一致 ✅。`DAMP=1.0` は kv=600 の 0.17% で無害 ✅。
+
+#### ③ ⭐⭐⭐ **KP_ARM/KP_WRI/KVR の含意（閉形式・kp, kv=kp·KVR, EFFORT のみから厳密）**
+
+| 量 | j1/j2 | j3 | 手首×3 |
+|---|---|---|---|
+| kp / kv | 10000 / 600 | 10000 / 600 | 1200 / 72 |
+| **線形帯**（飽和誤差 = EFFORT/kp） | **2.48°** | **1.17°** | **3.34°** |
+| **damping 律速の上限速度**（EFFORT/kv） | 0.72 rad/s = **41°/s** | 0.34 = **20°/s** | 0.97 = **56°/s** |
+| URDF velocity limit 比 | 1/4.4 | 1/12 | 1/5.4 |
+
+- ⭐ **線形帯の外では、この controller は「±定格 torque の clamp」そのもの** ⇒ **障害物に 2.5° 押し込まれた瞬間から全力で押し続ける** — t22 の「j1 が 433 N·m 全量で柱を押す」（`:1313` に文書化済）は **この gains の設計どおりの挙動**であり異常ではない。⛔ **fidelity 注記（非保守方向）:** 実 UR15 は protective stop で落ちる。sim は落ちずに押し続ける ⇒ **衝突耐性についての sim PASS は実機へ移らない**（§運用15 conservatism 記録）。
+- ⭐ **速度は全関節で定格の 1/4〜1/12** ⇒ URDF velocity limit 非実装は damping が実質覆う（超えられない）。速度実現性の向きは**保守側** ✅。工程が秒単位で遅いことの機構でもある。
+- **安定性:** dt = `CELL_TIMESTEP = PRODUCER_SIM_DT`（`:152`/`:158`・実測系列「4000 steps = 0.83 s」`wired:2513` ⇒ ~2.1e-4 s）で ωn·dt ≤ 0.07 ≪ 2、kv は implicitfast が implicit 積分 ⇒ **数値安定は広い余裕** ✅。
+- **減衰比 ζ = kv/(2√(kp·I))**（🔶 I は未接地 — ここだけ推測・幅で言う）: 手首は I≈0.1-0.4 で **ζ≈1.6-3.3 過減衰** ✅。j1/j2 は伸展時 I≈10-40 なら **ζ≈0.47-0.95 やや不足減衰**。⚠ **overshoot/ringing だけは全計器の中に証人が無い**（settle 残差は印字済 `:3466` ・saturated flag は STEP1 型 report のみ `:2637`）。接地は **home での M(q) 対角 1 行印字**で足りる（⛔ 要求はしない）。
+- **menagerie 比:** KVR 0.06 対 0.2（相対減衰 1/3.3）・kp 5×/2.4× ⇒ 同一慣性なら ζ は official 比 ~0.67（腕）/~0.47（手首）。手首は絶対値で過減衰のまま ⇒ 実害は j1/j2 のみに載る可能性。**比較であり verdict ではない。**
+
+#### ④ ⭐ **裁定**
+
+> **ARMATURE / DAMP = ✅ 受理**（official 一致・無害）。**EFFORT / LIMS = court 外**（URDF 由来・reader ✅）。
+> **KP_ARM / KP_WRI / KVR = 暫定受理** — 観測記録（t20 静定 0 mrad・非飽和 hold・破綻無し）と矛盾せず、数値安定は余裕。**確定への受理条件（全て既存量の印字で足りる・新計器不要）:** (a) saturated flags を per-step で（⭐ **§27.2.154 ④ / §27.2.158 ⑤ と同じ既存欄に落ちる第 3 の必要**） (b) settle 残差 per-step（✅ 既に在る） (c) M(q) 対角 1 回 ⇒ ζ 接地。⛔ **retune は提案しない**（現記録に retune を要求する failure が無い）。
+
+#### ⑤ **私の既知 open との照合（HEAD で再確認）**
+
+- ✅ **τ 規則は批准形どおり code に在る**: `vertical_tol_deg()`＝`(r_max+cap)/2`・**第 3 分岐 raise が p11 名指しで実装**（`ur15_cell_spec.py:752-767`）。旧 roll-cap は SUPERSEDED を明記して可読保存（私の §27.2.124 形 ✅）。cap は driver が検査自身の量で測る（404(ii) 修正済・台帳既収載）。
+- ⚠ **残る穴 1（§27.2.154 ⑦ 未着地）:** interim 経路は cap と**比較せずに** 5.73 を返す（`vertical_tol_deg(None)`）。print `:2816-2819` は両値を記録するが**比較しない** ⇒ driver 実測 cap ≤ 5.73 になっても何も raise しない。処方は従前どおり起動時 `allowance < cap` assert 1 行（設計提案のみ）。
+- ⚠ **残る穴 2（stage 1 未着地・想定内）:** 座り段の解き受理窓 **`re_max=0.30`（17.19°）のまま**（`:3228`/`:3241`）。r_max 未測 ⇒ interim 継続は整合。順序は §27.2.156 の 4 段のまま。
+
+⛔ **非主張:** 値を変えない ／ 実装しない ／ run・測定を要求しない（受理条件は「確定に足るもの」の名指しであって依頼ではない） ／ ζ の数値を主張しない（幅と接地手段のみ） ／ t=0 home 書込の charter 形式照合は court 外（p5/Rs）。**gate 不変。**
+
 ### 27.3 ⭐ p16 の finding への裁定（p18 -088 E が私に振ったもの）
 
 **凍結 D1.1-B v13 `:332` の `grasp_span_error` が `RS71:24` の 88 mm を参照基準として明示引用**している件。
