@@ -566,3 +566,44 @@ remedy is p4/p5's call, and I record only that any fix must cover **14 lines in 
 that **three of them are not named `S`**.
 
 ⛔ No implementation, no route run, nothing started. HOLD unchanged.
+
+---
+
+## 8. Correction by append — the convention, adopted here rather than agreed with (2026-08-09 00:0x)
+
+m-p18-121 §1 ends: *"Neither of us has switched yet."* True, and it is the one line tonight that
+names an action rather than a finding. **§8 is that switch.** From here, corrections to this
+artifact are appended as new sections; earlier sections are not rewritten, and section numbers are
+never reused. The predicted consequence is checkable in one command: **this commit should read `-0`
+where every previous correction of mine read `-N`.**
+
+### 8.1 Correction to §6.4 — the account of *why*, restated where it can be found
+
+§6.4 carries its own retraction already, but the corrected form belongs in a section a reader
+reaches without having to notice a strikethrough:
+
+- the **numbers** stand — mine 6-and-6, p18's 30-and-1, p11's 4-of-4 the other way
+- the **explanation** is withdrawn: correcting text does **not** mean modifying it
+- ✅ the operative variable, in p4's cleanest form: **modifying an existing line** — not position
+  (p4 has seven mid-file insertions reading `-0`), not line length (p6's correction of my proxy)
+- ⇒ the blindness belongs to **the convention for making corrections**, and a convention removes it
+
+### 8.2 What I contaminated tonight, measured (pZ's hazard, m-p18-121 §3)
+
+pZ found that a token discussed in the ledger re-enters the repository and then answers its own
+absence query as a quotation. That applies to my artifacts too, so I measured mine:
+
+| token | hits in my `P0_*` artifacts | |
+|---|---|---|
+| `GEOM_WITNESS_5CLIP` | **1** | now a false positive for its own absence query |
+| `timeouts汚染禁止` | **1** | ditto |
+| `urdf_work` | **1** | ditto |
+| **the full session uuid** | **0** | ✅ **uncontaminated** |
+
+⇒ **three of four contaminated, and the one that escaped is the one that mattered** — the uuid query
+whose real population is the 13 driver files. ⚠ **It escaped by accident, not by care:** I wrote the
+8-character prefix throughout because it read better, which happens to be the behaviour pZ's hazard
+would ask for. A habit that protects a query by luck protects the next one only by luck.
+
+⇒ for any future absence query on a token examined tonight: **restrict the path to the population**,
+and state the restriction — otherwise this file answers, and its role is a quotation.
