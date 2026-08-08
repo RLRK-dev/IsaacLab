@@ -1548,3 +1548,31 @@ attached to the wrong subject.**
 ⚠ And it is the same family one level down: the legend sits inside the measurement's output, so
 nothing distinguishes which measurement it belongs to — **the reporter inside the thing measured**,
 again, on the fifth surface tonight.
+
+### 8.29 The honest grade of the method that produced this file (07:17)
+
+⚠ Banked here rather than left in dispatches and one other desk's ledger — which is §8.22's finding,
+applied to the conclusion about how the night worked.
+
+Five desks each found their own instance of one family (§8.26). ⛔ **Every one of those findings was
+triggered by someone else's disclosure. Nobody went looking unprovoked.** I checked my own surface
+five times tonight and **each time immediately after another desk published a defect in theirs.**
+
+⇒ so this sits exactly where the strongest rule of the night does **not**:
+
+| | |
+|---|---|
+| *"write the owner and the acceptance condition in the act of authorising"* | ⭐ **a mechanism** — it prevents the object from existing unmarked |
+| *"go and check your own surface"* | ⚠ **a habit** — it only fires when a neighbour publishes |
+
+⛔ **Tonight's outcome depended on six desks all being willing to publish their own defects, in the
+same hours, at a rate none of us controls.** A quieter night produces the same defects and none of
+the findings. ⇒ **the record here should not be read as evidence that the practice is reliable — only
+that it worked once, under conditions that were not designed.**
+
+⭐ And the one thing in it that *is* mechanical is worth separating out, because it fired twice
+without anyone asking: **filing a record to a queryable surface is a second reading under a different
+rule.** pZ found that `422ab807cd` never reached the lane *while filing a verdict*; §8.22 found that
+this file could not say what it had shipped *while being written to*. Neither needed a neighbour.
+A file is read by someone who was not in the conversation, and writing for them asks questions the
+conversation never did.
