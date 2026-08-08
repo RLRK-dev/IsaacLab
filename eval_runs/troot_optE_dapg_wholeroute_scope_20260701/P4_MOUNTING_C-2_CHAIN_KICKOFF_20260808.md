@@ -397,3 +397,22 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 
 - **(a) D6 の pointer 訂正 = 採用**: `P4_DEFINE_C3C5_PORT_TO_CURRENT_SUBSTRATE_20260809.md` の D6 が指す先は「§2 最終行」ではなく **「§2 の表・clip 座標系の行」**（見出しで指す = 本 file 冒頭の引用規則どおり）。⇒ **DEFINE 側に訂正を追記する**。
 - **(b) C1/C2 の非対称 = 採用（⚠ 条件つき）**: p4 実測 — **C1 は厳密な転置**（task `(0.350,0.150)` ↔ cell `(0.150,0.350)`・True）／**C2 は転置でない**（task `(0.400,0.075)` の転置は `(0.075,0.400)` だが cell は `(0.040,0.400)`・False）。⇒ ⭐ **C1 だけの値照合は PASS して何も保証しない**。⚠ **私が足す条件**: この転置は **`WORK_ROW_DY = 0`（既定）でのみ成立**（`ur15_cell_spec.py:387` = env で上書き可）⇒ **env を変えると C1 の一致も消える** ⇒ ⛔ **「C1 が一致した」を根拠にしない**は、より強い理由で成立する。
+
+## 18. `_gen` をどう満たすか（p4 court・2026-08-09 05:44・p18 §1230 (ii) = 00:49 から open）＋ ⛔ 今日の絵は C-2 ではない
+
+**答え = (b) の精密形。⛔ (a) と (c) は却下。そして (iii) は 2 つに割る必要がある。**
+
+**A. 機構（本 turn 第一手実測）**: `_gen/_steps_cell_full.xml` は **wired を import した時点で生成される** — `ur15_steps_wired.py:287` が `_steps_world.xml` を書き、`:288` が MjSpec を組み、`:328` が `_steps_cell_full.xml` を書く。**3 つとも column 0 = import scope**。かつ **`mj_step` は top-level に 0 件**（10 件すべて関数内・実測）⇒ ⭐ **import は「組み立て」であって route run ではない**（motion なし・task 出力なし）。
+⇒ **class = §17 の「道具の証拠」側 ⇒ pZ の職掌内・Rs gate に上げない**（§14 の B・生成先は repo 内 `_gen/`・env7 pin・fence 内 script のみ）。
+- ⛔ **(a) 救出 snapshot から seed する = 却下**: `asbuilt_snapshots/_steps_cell_full_asof_20260804_152626.xml` は **2026-08-04 の cell**。⭐ 却下の理由は「古いから」ではなく **絵が別の cell を証明してしまうから**（今夜ずっと直してきた「同じラベルで別の対象」）。
+- ⛔ **(c) build 専用 path / 新 CLI = 却下**（§7 の「新 env var・新 CLI を作らない」に抵触）。
+
+**B. ⛔ 今日 import して出る絵は C-2 ではない（sequencing・これが本裁定の要点）**: **C-2 の 4 編集は未着地**（`ur15_cell_spec.py` tip `2fba2dfd67` / `sweep_mounting.py` tip `2bb1aad4e7`・p5 のレグ待ち）⇒ 既定は **built cell (0.220 / 45°)** のまま。⇒ **今 render を走らせて出るのは built cell の絵**。
+⇒ **pZ 項目 (iii) を 2 つに割る**:
+- **(iii-a) 道具の修理の実証** = render が `_gen` 経路で走り、画像が出る。**今できる**・micro-chunk の DoD に足りる。⛔ **画像に「C-2 cell」と書かない**（built cell の絵）。
+- **(iii-b) C-2 cell の絵** = **C-2 の 4 編集が着地した後**にのみ可能。⇒ **C-2 chunk 側の受入項**であって micro-chunk の閉じ条件ではない。
+⚠ **これを割らないと**: pZ は render を走らせ、**built cell の絵を「C-2 cell の絵」として提出**することになる（label と対象の不一致・今夜 7 回出た形）。
+
+**C. p11 の 2 提案（p18 §1230 経由・私の court）= 両方 採用**:
+1. **D6 の pointer を見出しで指す**: 「§2 最終行」→ **「§2 の表・clip 座標系の行」**（行は動く・見出しは動かない）。
+2. **転置の罠の鋭い形を明記**: **C1 は完全な転置（task (0.350,0.150) ↔ cell (0.150,0.350)）だが C2 は違う（task (0.400,0.075) vs cell (0.040,0.400)）** ⇒ ⛔ **C1 だけの値照合は通ってしまい、何も保証しない**。D6 の「値を写さない」は運用上これを塞ぐが、**罠の形を書いておく方が読み手に効く**。
