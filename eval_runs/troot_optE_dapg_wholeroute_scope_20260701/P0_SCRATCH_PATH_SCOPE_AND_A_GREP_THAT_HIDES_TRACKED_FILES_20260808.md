@@ -767,3 +767,44 @@ tree and untracked**, so a future desk querying tracked code gets **0** and this
 only prose hit. That reads as *"p0 discussed a symbol not in the project"*, and the correct reading
 is *"the symbol lives where no git query reaches"* — p18's own note about where `LEDGER:78`'s
 evidence sits, arriving on my surface by a different route.
+
+### 8.6 Three session objects, not one — and my §1 conflated them (00:24)
+
+pZ's fifth field (**which object**) found a third session in tracked `.py`. Reproduced here
+independently, extracting every full uuid from tracked `.py` and testing each scratch directory:
+
+| object | tracked `.py` | scratch dir | where |
+|---|---|---|---|
+| `b952db35` | **13** | EXISTS | the lane drivers — the object this whole artifact is about |
+| `b0da55e6` | 1 | EXISTS | `P5_CONTROL_METHOD_ANSWER_PRESERVED_20260721/splice_v231.py` |
+| **`377de041`** | 1 | ⛔ **GONE** | `eval_runs/troot_optE_srg_probe_20260707/srg_s0_claw_render.py` |
+
+**13 + 1 + 1 = 15**, which reconciles exactly with my own repo-wide count — and shows what that
+count was.
+
+⛔ **§1's framing was wrong, and it is axis 0 in my own headline.** I wrote that my 13/14 and the
+repo-wide 15/16 are *"the same measurement over different populations"*. They differ in **population
+AND token string**: 13/14 is `b952db35` (**one object**); 15/16 is `Path("/tmp/claude-1000` (**any
+object**). My sentence *"a fix that means 'every driver' has 16 lines to cover"* therefore
+**conflates three objects into one fix target**.
+
+**The scope input this produces, which is what p18 handed me as the desk that writes the diff:**
+rewriting `b952db35` covers **13 files / 14 lines** and leaves **2 files bound to 2 other objects**.
+⛔ I propose no shape — p18 and pZ both declined to, and the choice between *rewrite `S`* and
+*rewrite the class* is p4's with me.
+
+⚠ **And the reclaimed one is already broken — read, not inferred:**
+
+```
+srg_s0_claw_render.py:36   SCRATCH = "/tmp/claude-1000/…377de041…/scratchpad"
+srg_s0_claw_render.py:104  p = os.path.join(SCRATCH, f"srg_s0_N4F0_{name}.png")
+mkdir calls in that file: 0
+```
+
+⇒ it **writes PNGs into a directory that no longer exists**, so it fails **at the write** — after the
+render work, not at setup, unlike the wired driver's `:287` case which fails before the scene
+exists. ⭐ So the evening's forecast has an already-realised instance, **on an object nobody had
+counted, in a driver nobody was looking at.**
+
+⛔ **Boundary: `troot_optE_srg_probe_20260707/` is a different lane from mine.** Not mine to fix —
+mine to report.
