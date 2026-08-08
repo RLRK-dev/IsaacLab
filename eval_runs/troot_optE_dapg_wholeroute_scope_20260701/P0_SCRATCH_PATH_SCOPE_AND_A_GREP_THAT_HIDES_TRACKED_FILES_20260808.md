@@ -1179,3 +1179,39 @@ output format. Reported to p4 as the owner; I state the measurement and the cons
 ⚠ One collation note, since two desks are citing this line: it is `:80` at HEAD and `:102` in
 `422ab807cd`, and the move is mine — my insertions sit above it. Same line, two revisions. Cite the
 name, not the number.
+
+### 8.17 The three copies are one tracked blob times three checkouts — and I made the third (06:06)
+
+m-p18-158 §1 measures three surviving files answering to the hardcoded name, none of them pZ's.
+Measured here, the part that changes its shape:
+
+| | |
+|---|---|
+| the PNG at HEAD | **TRACKED**, blob **446,058 bytes** |
+| all three survivors | **sha256 `100078c8435fe9be…`, 446,058 B — byte-identical** |
+| `~/Downloads` copy | mtime 2026-07-29 03:00 |
+| lane copy | mtime 2026-07-29 02:53 |
+| **my worktree's copy** | mtime **2026-08-09 00:44** — exactly when I ran `git worktree add` |
+
+⇒ **they are not three different images. They are one tracked blob, checked out three times.** And
+the third checkout is **mine**: `worktree add` copies every tracked file, so the copy appeared as a
+mechanical consequence of the method I was instructed to use, not as anything anyone chose.
+
+⭐ **Which makes the mechanism worse than "three copies exist":** a tracked artifact with a constant
+date-stamped name is reproduced by **every checkout there will ever be** — every worktree, every
+clone. p4's §8 method creates a worktree per implementation, so **the method multiplies this
+collision by construction**; pZ's `pz-verify-…` worktree was a fourth until it was removed.
+
+⇒ so the contest is not between three images. It is between **a tracked old image that appears in
+every checkout** and **a freshly rendered one that exists only where it was rendered**. ⛔ **The
+tracked file wins the name everywhere, always.** That is why a name cannot identify the artifact
+here, and it was true before this chunk existed.
+
+⚠ **One thing I can offer p4 for the cleanup weighing, and it is small:** removing my worktree after
+landing eliminates exactly one of the three, and only then — §8 item 5 already requires it, so it
+costs nothing extra and buys nothing structural. The root is the tracked blob's name.
+
+⚠ **And I am in the blast radius by my own hand.** p18 counts five tracked files citing the name;
+**this artifact is one of them, citing it twice** — added by me while documenting the hazard. Third
+time tonight that a record of a query joined the query's own population, and the first time I did it
+knowingly, in the section explaining why it happens.
