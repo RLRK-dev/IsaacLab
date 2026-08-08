@@ -40167,3 +40167,49 @@ menu の見出しは実測で 5 つ:
 ✅ **是正**: ledger への append も **Write → python が file を読んで append** に統一（shell が本文を一度も見ない）。本追記自体がその形で書き直されている。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1170 — ⭐⭐⭐⭐⭐ **#18 再 debate = FAIL-revise（36 challenge・rebut 0）。核は「v0.1 が *自分の過去の結論で退けた述語* を縛っていた」** — 当卓が code から全数追認
+
+**契機** = p5（11:33:09）。Rs が p5 の卓で再 debate を指示。当卓 実測 11:34-11:38。
+
+### (1) ✅ artifact — **3 件とも 64 字一致**
+| doc | 行 | sha256 |
+|---|---|---|
+| `P5_SUCCESSION_GRIP_DOD_DESIGN_V01_20260808.md`（**v0.2**・同一 path・版表に両方） | **100** | `5861371b614dcb9d…edb7f23f` |
+| `P5_ITEM7_MOUNTING_MENU_V01_20260808.md` | **74** | `1015db61291022a3…f979c6ce` |
+| `HANDOFF_p5_vtdesign.md` | **834** | `5019bfb9f18add78…d87d478a` |
+
+✅ **challenge 数の算術**: CC2 9 ＋ CC3 9 ＋ CC4 8 ＋ CC5 10 = **36**（申告一致）。**REBUT 0 = CC1 が全件受諾**・NHA = CHANGE_JUSTIFIED・DECIDE = **FAIL-revise**。
+✅ **debate は恒久面に載っている**: `harness-vault/verification-log/verification-log.jsonl` に `task-p5-succession-dod-redebate-001` が **1 件**（当卓 grep 実測）。⭐ **transcript でなく log file** ⇒ §1151 の証人条件を満たす。
+
+### (2) ⭐⭐⭐ **核心を当卓が code で確認 — 述語は「古い」のでなく *当人が退けた* もの**
+
+```
+ur15_steps_wired.py
+  :570  def grasped(t)            ← v0.1 が縛った
+  :855  def held(t, dd=None)      ← retention の計器（R6）
+  :963  def seated(clip, cx, cy, link)      ← v0.1 が縛った（固定 link）
+  :978  def seated_any(clip, cx, cy)        ← 修正版。:3477 で driver が実際に呼ぶ
+```
+
+⛔⛔ **`held()` の docstring `:864-865` が逐語で `grasped()` を名指しで弾劾している**:
+> **「`grasped()` answers neither: **p5 showed** it says held when the claws have closed through each other and released when the cable is still surrounded by them.」**
+
+⇒ ⭐⭐⭐ **弾劾の出典は「p5 showed」= p5 自身の過去の発見。** ⇒ **v0.1 は、*自分が退けた述語* を、まさにその述語が答えられないと自分で示した問いに縛った。**
+⛔ **`seated` → `seated_any` は同一 file の 15 行下**で、しかも **driver が実際に呼ぶのは `seated_any`**（`:3477`）。
+⭐ **`grasped()` 自身の docstring も自分の前身を弾劾している**（`:571-577`「touch-only 版は **Rs が見れば無いと分かる clamp** を PASS と報告した」）⇒ **両述語とも自分の履歴を持ち歩いている。**
+
+#### ⭐⭐ 本日の形の、最も鋭い版
+本日ここまでの形は「**器具の到達範囲を対象の性質として報告する**」だった。
+本件は **「読み足りない」ですらない — *自分の結論を読まなかった*。**
+⇒ ⭐ **当卓の `:55`/`:64`（引用の 9 行下）／ p5 の「行の途中で読むのをやめた」／ 本件の「15 行下の修正版」— 3 件とも *近接した正解* を跨いでいる。** ⭐⭐ **遠くにある物より、隣にある物の方が読まれない。**
+
+### (3) ✅ v0.2 の是正（p5 記載・当卓は artifact 一致のみ確認）
+STEP 表から grip-obligation mask（CLAMP cell のみ・handover 瞬間を pin）／G-close・G-hold・G-seat を **grasped-full / `held()` / `seated_any`** へ再束縛（found-link witness つき）／両側境界つき帰属則／#56・`:1391` の訂正／**coverage 節（C2 instance のみ・C3-C5+E は未被覆）を明記**／chain station を OPEN status で（`/reward-design` 全再走 ＋ `/pre-check`）／substrate census gate／wc=1 envelope／D-list 再構築（D-1 削除・D-7 追加）。
+⭐ **「hold-rate 天井 0.518 が設計上 L2 に生じる」= leg window が指の schedule と矛盾していた** ⇒ **達成不能な DoD を、走らせる前に debate が捕らえた。**
+
+### (4) ✅ menu の是正（当卓 `m-p18-80` の依頼どおり）
+`0.340/30` = **「未測」から「測定済 fail」へ**、両者を明示的に区別して記載（KINONLY `:44`/`:56`・fix `2bb1aad4e7`・両 sheet・`L put back`）。**PASS 4 件は不変。**
+⇒ ⭐ **当卓が要求した「未測と測定済 fail を menu 上で見分けられるように」が満たされた。**
+
+**Banked — 時刻は本節 commit の author date が正。**
