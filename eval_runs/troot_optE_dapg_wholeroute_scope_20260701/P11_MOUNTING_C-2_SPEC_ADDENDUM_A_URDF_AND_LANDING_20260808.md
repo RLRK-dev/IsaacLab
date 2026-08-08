@@ -169,6 +169,20 @@ A-7b は罠の本体を「**軸の転置**」と名付けたが、**その名前
 
 ⇒ **pZ 項目 14（改・最終形）に含める記録項目** = ①anchor が見つかったこと（`STEP table` 行番号）②row span の始点・終点 ③各語の行数 ④pattern と数え方の明記 ⑤未 import 語の別記 ⑥違反数（0 期待）。
 
+### A-9c. 追記 23:5x — **境界を 1 語ずつでなく名前空間の全数分類で決める**（pZ の pedestal 指摘 / p18 m-p18-118 §1-2・決定 = p11）
+
+**決定 1（pedestal は mounting に入れる）**: `PEDESTAL_R` / `PEDESTAL_HZ` は柱の**脚**（`ur15_steps_wired.py:269` の `<geom name="foot" …>`・import `:45`）。⇒ **床から腕の取付点までを支える構造**（柱・脚・冠・ヨーク）は mounting とし、対象語を **10 → 12 語**へ拡張。実行 = **違反 0**（PEDESTAL_R 2 行 / PEDESTAL_HZ 2 行・いずれも in-target 0）。⛔ 現時点で verdict は動かない — 動くのは **landing 後 re-run の被覆**（脚に手を伸ばす regression が旧 10 語では素通りした）。
+
+**決定 2（境界規則・これが本体）**: ⭐ **1 語ずつ答えると、次に「どちらの表にも無い語」が出るたびに 1 往復かかる**。⇒ **driver が cell spec から import する名前空間を全数列挙して分類する**（実測 = import block `:39`-`:54` の **73 定数** ＋ `_spec.` 経由 13）。分類規則:
+- **A: 支持構造（= mounting・検査対象 12 語）** — 柱 `COLUMN_*` / 脚 `PEDESTAL_*` / 冠 `CROWN_*` / ヨーク `YOKE_SPREAD` `TILT` `SHOULDER_HEIGHT`。**目標計算行に現れてはならない**。
+- **B: 作業面・什器（除外）** — `TABLE_*` `FLOOR_*` `REST_*` `WORK_ROW_DY` `CLIP_Y_*` 等。⛔ **除外の理由は「重要でない」ではなく「目標計算に *正当に* 現れる量だから**（例: rest 行は目標そのもの）。これらの不変性は **pZ 項目 6** が受け持つ。
+- **C: 制御・接触・cable・公差など（本検査の対象外）** — `KP_*` `DAMP` `EFFORT` `LIMS` `CABLE_*` `CLIP_SOLREF` 等。⛔ **`TILT_CAL_DEG` はここ**（姿勢較正の公差であって取付ではない）。
+⇒ **新語が入ったら、まず 3 分類のどれかに置く**。⛔ **どの表にも無い語を残さない**（それが今回の穴の class）。
+
+**homograph 対照（pZ 指摘の再導出・当方実測）**: `\bTILT\b` **4** ＋ `\bTILT_CAL_DEG\b` **3** = **7** = `\bTILT`（先頭のみ境界）の 7 に**厳密一致**。substring は 8（comment 内 file 名を含む）。⇒ ⭐ **per-term 対照は homograph で水増しされうる**（「他所に出る」を根拠に 0 の判別力を主張するので、その N が別 symbol 由来だと**対照が実際より強く読める**）。**両側境界形は構造的にこれを免れる**ため、A-9b の pattern 定義を維持する。
+
+⚠ **自己申告（本節を測る途中・4 件目）**: 上の分解を最初に走らせた時、heredoc 内で `r'\\bTILT\\b'` と二重にエスケープしてしまい **全項目 0** という一貫した偽を出した。**気づいた理由は同 turn の主検査が TILT=4 を出していたこと** ＝ **異なる走行どうしの不一致**（p0 の順位「正規化 > 走行間の一致 > 同一計器内の対照 > rc」の 2 段目が効いた）。
+
 ## A-5. 出所の等級
 
 - 全て第一手（本 session 実測）: `ur15_cell_spec.py:99-100`・`ur15_steps_wired.py:1130/:1136-1138/:1972/:2002/:2025/:315/:2418/:2456`・`ur15_mj.urdf:3` と `<limit>` 6 行・`git ls-files`/`rev-parse`/`sha256sum`・公式 `config/ur15/joint_limits.yaml`・`urdf/ur.urdf.xacro` の存在・`urdf_work` の不在。
