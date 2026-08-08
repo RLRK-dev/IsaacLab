@@ -29,7 +29,12 @@ import mujoco  # noqa: E402
 import numpy as np  # noqa: E402
 from scipy.spatial.transform import Rotation  # noqa: E402
 
-S = Path("/tmp/claude-1000/-home-rlrk-IsaacLab/b952db35-19a6-4bca-8043-e6731b3f2141/scratchpad")
+# Generated artifacts live beside this script, not in the scratchpad of a session that has closed.
+# The old path pointed into one; :287 writes and :288 reads it back at import, so a reclaimed
+# directory failed the build before the scene existed.  mkdir here because that first write is at
+# import time and nothing else creates the directory.
+S = Path(__file__).resolve().parent / "_gen"
+S.mkdir(parents=True, exist_ok=True)
 GRIP_XML = "/home/rlrk/IsaacLab/thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml"
 OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "/home/rlrk/Downloads/ur15_steps.mp4")
 

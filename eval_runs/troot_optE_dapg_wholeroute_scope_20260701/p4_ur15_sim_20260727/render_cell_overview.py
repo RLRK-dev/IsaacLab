@@ -33,10 +33,28 @@ _TINT_R = re.search(r'"R": \(([^)]*)\)', _SRC[_SRC.index("ARM_TINT = "):]).group
 ARM_TINT = {"L": tuple(float(v) for v in _TINT_L.split(",")),
             "R": tuple(float(v) for v in _TINT_R.split(","))}
 
-AS_BUILT = Path("/tmp/claude-1000/-home-rlrk-IsaacLab/b952db35-19a6-4bca-8043-e6731b3f2141/"
-                "scratchpad/meshpool/_as_built_t42.xml")
-SRC = Path("/tmp/claude-1000/-home-rlrk-IsaacLab/b952db35-19a6-4bca-8043-e6731b3f2141/"
-           "scratchpad/_steps_cell_full.xml")
+# The same _gen directory ur15_steps_wired.py writes into -- both scripts sit in this directory, so
+# HERE / "_gen" is one place, not two.  These used to point into a closed session's scratchpad; the
+# meshpool level of it had already been reclaimed, so :53 could not run at all.
+_GEN = HERE / "_gen"
+SRC = _GEN / "_steps_cell_full.xml"
+AS_BUILT = _GEN / "meshpool" / "_as_built_t42.xml"
+
+# The flattened XML names its gripper meshes without a directory, so they resolve against wherever
+# the model is loaded from -- which is why AS_BUILT sits one level down in a pool of its own.  The
+# set is a property of the generation, not a constant: read it off the XML rather than listing it.
+MESH_SRC = HERE.parents[2] / "thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/assets"
+
+
+def _stage_meshes(pool: Path, xml: str) -> list[str]:
+    """Copy every bare-name mesh the XML asks for into `pool`, and return the names staged."""
+    names = sorted(set(re.findall(r'file="([^"/]+\.stl)"', xml)))
+    missing = [n for n in names if not (MESH_SRC / n).is_file()]
+    if missing:
+        raise FileNotFoundError(f"mesh not in {MESH_SRC}: {', '.join(missing)}")
+    for n in names:
+        pool.joinpath(n).write_bytes((MESH_SRC / n).read_bytes())
+    return names
 J6 = ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint",
       "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]
 W, H = 1200, 880   # the model's offscreen buffer is 900 tall; stay inside it
@@ -50,7 +68,11 @@ VIEWS = [("front  (+y toward the viewer)", 90.0, -12.0, 3.4, 1.05),
 
 def main() -> int:
     # keep the staged copy in step with whatever the last run compiled
+    AS_BUILT.parent.mkdir(parents=True, exist_ok=True)
+    _xml = SRC.read_text()
     AS_BUILT.write_bytes(SRC.read_bytes())
+    _staged = _stage_meshes(AS_BUILT.parent, _xml)
+    print(f"[cell] staged {len(_staged)} meshes into {AS_BUILT.parent}: {' '.join(_staged)}")
     m = mujoco.MjModel.from_xml_path(str(AS_BUILT))
     d = mujoco.MjData(m)
     for t in ("L", "R"):
