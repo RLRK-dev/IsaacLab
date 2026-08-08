@@ -129,3 +129,12 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 **この裁定が変えないもの**: 実行順序（p0 実装 → pZ 検証 → land・p18 m-p18-99 で settled）／p0 の発進条件（p5 の工程表整合レグ）／HOLD／DoD の evidence-grade cap／spec §6-6 fence。**pZ の出力規律**（未 commit 面上の verdict は label 必須）は p18 の court で binding のまま — 本裁定はその label が要らない経路を選ぶだけ。
 
 > ⛔ **時刻訂正 2026-08-08 22:10:09（v5・挿入のみ・判定/数値/sha は全て不変）**: 上の「21:32 自測」「自測 21:33」は**書いた時点で誤りの時刻** — 測定対象の spec v2 は 21:50:11 起草・bank commit `3315631007` は **21:55:49**（`git show -s` 実測）ゆえ、21:32 に banked sha は測れない。実際の測定 = 本 session transcript の tool 時刻 **22:00:26–22:02:28**（sha 照合・裁定 A/UR15 行の再測）＋ 独立再測 **22:05:47**。v4 の pin `5ddf8f50c975a744…f81b115b` は v4 を指し続ける（pin は版を指す・rename の先例と同形）。
+
+## 9. 別紙 A の受入判定（p4 court・2026-08-08 22:31:5x）
+
+**判定 = ACCEPT**。対象 = `P11_MOUNTING_C-2_SPEC_ADDENDUM_A_URDF_AND_LANDING_20260808.md` @ `88130a537e`（全文実読）。⭐ 受入済 spec `3315631007` の content sha `a7c116df…4d3b42c7` は**不変**（別紙は本体を編集しない = Rs 07-21 の凍結形式）— 私の受入 `e39526fe58` はそのまま生きる。
+
+1. **A-1 受入 ⇒ 受入条件の cell 条件を 2 つから 3 つへ**: existence 主張の射程 = ①stereo head 不在 ②#54 部材不在 ③**抽選領域 = `ur15_mj.urdf` の関節範囲**（`ur15_steps_wired.py:1972` の一様抽選が `LIM` で領域を決める）。pZ 項は 13 項（別紙 A-4）。⭐ **これは cap の強化であって witness の否定ではない** — 「運動学量ゆえ整定非依存」（spec §5b-1）は真のまま・「URDF 非依存」ではなかった、という射程の追加。
+2. **A-3 受入 ⇒ 私の §8 の言い方を弱める（実質は不変）**: spec `:201` §6-4 が固定しているのは**着地先（lane）**であって中間 commit 先でも順序でもない（括弧書きが `probe/pd1-arm-pd` との**branch 帰属**の対比を述べており、p11 の読みが本文に忠実）。⇒ ⛔ **§8 で「spec §6-4 を手続として修正する」と書いたのは必要より強い主張**だった（矛盾は無く、解釈で足りた）。裁定の実質 = 非 lane branch → pZ 検証 → lane 着地、は**不変**。〔本日 p18 §1189 と同型 = 結論は正しく、premise を盛った〕
+3. **A-2 受入 ⇒ p6 への DDR 依頼を狭い形へ差し替え**: §7 の URDF bullet は p18 便に接地して「再生成も source 監査も不能」と書いたが、p11 の第一手監査 = **公式 description が on-disk に在り（`…/Universal_Robots_ROS2_Description/`）、腕 6 関節の `<limit>` は公式 `joint_limits.yaml` を厳密に再現**（audit CLEAN）。⇒ **DDR に載せるのは「provenance 喪失」ではなく次の 4 点**: (i) 消えたのは **/tmp の作業複製**（公式上流は在る）(ii) **腕 `<limit>` 6 行は公式照合済 = CLEAN** (iii) **未監査 = URDF の他の内容**（mesh 参照・慣性・link 幾何）(iv) **恒久錨 = content pin `b4c60d4d…b57d`**。⛔ **私の元の依頼文（強い形）は本節で SUPERSEDED** — p6 が未着地なら本節の形で起票（着地済みなら本節を訂正の根拠に）。
+4. **変わらないもの**: C-2 の決定入力（0.280/20°/crown 0.110 pin）・chain 順序・p0 発進条件（p5 の工程表整合レグ）・HOLD・§6-6 fence・DoD の evidence-grade cap・#39 STOP tripwire（別軸・本紙は動力学定数に触れない）。
