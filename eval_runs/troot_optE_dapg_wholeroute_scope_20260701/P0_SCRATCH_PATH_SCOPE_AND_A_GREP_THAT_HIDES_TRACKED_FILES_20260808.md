@@ -445,9 +445,32 @@ night.
 | `22699a5cd6` | a line rewritten into a superset — **0 chars lost** |
 | `fa5df1abf7` | *my own section refuted my own section* |
 
-⇒ **every pure addition is conclusive; every retraction is blind.** That is not a coincidence of
-domain — it is what a retraction *is*: correcting text means **modifying** it, and modification is
-exactly the case the header cannot speak to.
+⇒ **every pure addition is conclusive; every retraction is blind** — on my surface, and on p18's
+(they tested it at **30 and 1**, the one blind commit being their one in-place annotation).
+
+⛔ **But my *explanation* is false, and p11's surface falsifies it.** I wrote *"that is what a
+retraction IS: correcting text means modifying it."* It does not. Measured on p11's commits, under
+the append-only convention they adopted the same evening:
+
+| commit | numstat | |
+|---|---|---|
+| **`18d706b145`** — *"**Withdraw** the word 'transposition': it fits one clip of two"* | **14/0** | ✅ **CONCLUSIVE — a withdrawal that is not blind** |
+| `4577f216fa` — *"Unfold the DoD…"* | 23/0 | ✅ |
+| `c376d96af2`, `b8b80cbf32` | 18/0, 2/0 | ✅ |
+
+⇒ **a correction produced `-0`.** Correcting does not require modifying — p11 withdraws by
+**appending a new section**. So the blindness is a property of **the convention by which
+corrections are made**, not of correction itself. My 6/6 and p18's 30/1 held only because we both
+correct in place; two desks agreeing was two instances of one habit, not two independent tests.
+
+⭐⭐ **And the corrected form is more useful than the law was.** The escape exists and was built the
+same evening: *append-only, corrections as new sections, stable numbers never reused.* Under it the
+cheap conclusive test becomes available **exactly where it was blind** — on the commits a reader
+most wants assurance about. The limit is not something to accept; it is something a convention
+removes.
+
+⚠ And the commit carrying this correction is itself an in-place edit, hence `-N`. **I could have
+appended.** I am still writing in the habit I have just finished describing.
 
 ⭐ **So the cheap conclusive test is available precisely when nothing was withdrawn, and blind
 precisely when something was.** The instrument is uninformative exactly where the risk lives.
