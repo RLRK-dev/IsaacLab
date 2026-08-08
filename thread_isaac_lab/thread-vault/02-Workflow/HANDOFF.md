@@ -18,6 +18,7 @@
 
 ### 生きた状態
 - **p0 の発進条件 = p5 の工程表整合レグの返答**（当日 1 時間以上待ち）→ p0 実装（**2 commit**: spec の 4 編集 / `ur15_steps_wired.py:32` の dead-scratchpad 解消）→ pZ 検証 → p4 まとめ
+  - ⛔ **実装時に落としてはならない 1 点（pointer でなく本文に置く）**: 移設先で **`AS_BUILT.parent.mkdir(parents=True, exist_ok=True)`**（`_gen/meshpool/` は 2 階層ゆえ `parents=True` 必須）。⇒ 落とすと**現に起きている失敗**（視覚レグ script が親 dir 不在で FileNotFoundError）が**新しい path で再現**する。根拠と全条件 = kickoff **§7 末尾**。
 - ⛔ **execution HOLD 不変・self-start 禁止**。**DoD の evidence-grade cap**: #48/#18 が open の間は DoD 動画に無印 PASS を出さない・#49 は整定ゲート状態を併記・#61 の env7 pin 下でのみ・existence 主張は **cell 条件 3 つ**（stereo head 不在／#54 部材不在／抽選領域 = URDF 関節範囲）を明記
 - **Rs 判断待ち** = ①**C3-C5 へ延ばす別 chunk の起票可否** ②**push**（当日分は未 push）
 
