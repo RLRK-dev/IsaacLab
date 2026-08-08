@@ -1386,3 +1386,26 @@ branch `impl/c2-mounting-20260808` and `impl/c2-png-relocate-20260809` hold the 
 ⭐ And the general form, which is why this was worth a section rather than a footnote: **a record that
 explains a change without identifying it is complete as prose and useless as evidence.** Everything
 above was true in my dispatches all night, and a dispatch is not a surface anyone can query.
+
+### 8.23 Chunk closed — the landing row of §8.22, re-measured (07:01)
+
+§8.22 labelled the last row PERISHABLE and said to re-measure rather than read the table as current.
+Doing that:
+
+| | |
+|---|---|
+| lane render | `e2aa041c9777f1e2ccdf5d1be80739f95b0afd4bdf0f16f7bb6b4133a7216760` |
+| verified tip `6c0b76d500` | **identical** |
+| landing commit | `76b535ec60`, 06:58:19 |
+| the outcome condition | `:102` assigns the path → `:103` creates the parent → `:104` writes ⇒ **the directory exists before the write** |
+| tracked PNG dirty | **0** |
+
+⇒ **the chunk is closed**: implemented, verified, landed, and the purpose measured on the object it
+protects. §8 item 5 done — worktree removed, **registrations 11, prunable 6, none of them mine**,
+both branches kept as pins of the verified tips.
+
+⭐ **And the enumeration is what closed it, not the equality test.** Run one detected an authorised
+change that had never been implemented and deferred it explicitly; run two closed it on *landed*.
+⛔ **The equality test passed on both occasions.** A chunk checked only for `landed == verified` would
+have shipped without `auth-2` and nothing would have said so — which is the whole argument for the
+completeness check being a **separate instrument** rather than a redundancy.
