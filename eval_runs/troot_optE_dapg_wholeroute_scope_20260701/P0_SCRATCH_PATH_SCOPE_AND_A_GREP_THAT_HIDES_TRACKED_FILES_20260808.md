@@ -1715,3 +1715,26 @@ a different predicate entirely.
 6-of-6 and never said **what it was covering** — *"sections whose claims were later withdrawn"* — so a
 reader takes the clean result for *"the file's claims are all correctly scoped"*. **A clean audit
 with unstated coverage is exactly the false PASS carrying a true number.**
+
+## 8.34 ⛔ My "0 remaining" was a zero that could not have come out otherwise
+
+I applied p4's step — write coverage as a number, never as a word — to four universals in this
+file, and then printed a re-check reading **`remaining unmeasured universals: 0`**.
+
+⛔ **That zero proves nothing.** The regex I re-checked with names the four exact strings I had just
+replaced (`over all session`, `read every driver`, `the entire session`, `over **all**`). After the
+replacement it returns 0 **by construction** — it could not have matched a fifth universal if one
+existed, because it was built from the four I already knew about.
+
+⭐ This is pZ's fifth step — *a control must test the predicate it is a control for* — failing in my
+hands about ten minutes after it was published, and on the very edit that was applying step four.
+The shape is the same one I reported in others all night: **I sourced the verification set from the
+claim under review.**
+
+**What actually establishes the result** is the broad regex that found them in the first place, read
+by eye: **6 hits at HEAD**, of which `:141` and `:180` now carry `N=`, `:324` carries 6776, `:584`
+carries "five", `:48`'s referent count 14 is in its own heading, and `:163` is the sentence
+*describing* my error rather than a coverage claim.
+
+⇒ **The finding stands; my instrument did not establish it.** ⛔ Read "0 unmeasured universals" as
+resting on a six-row manual read, never on the zero I printed.
