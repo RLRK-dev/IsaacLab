@@ -1215,3 +1215,41 @@ costs nothing extra and buys nothing structural. The root is the tracked blob's 
 **this artifact is one of them, citing it twice** — added by me while documenting the hazard. Third
 time tonight that a record of a query joined the query's own population, and the first time I did it
 knowingly, in the section explaining why it happens.
+
+### 8.18 My fix moved the writes from outside the repo to inside it — that was the instruction (06:11)
+
+pZ's forward hazard is a consequence of my change, and measuring it shows the shape is wider than
+the one PNG.
+
+| | before (`HEAD`) | after (`422ab807cd`) |
+|---|---|---|
+| wired `S` | `/tmp/…/scratchpad` | `HERE / "_gen"` |
+| render `SRC` / `AS_BUILT` | `/tmp/…/scratchpad…` | `HERE / "_gen"…` |
+| **where that is** | **outside the repository entirely** | **inside whatever checkout runs it** |
+
+⇒ **the fix moved the write target from outside the repo to inside it.** That is exactly what §7
+required — *"生成物は repo 内の生成先へ"* — so it is the instruction carried out, not a defect. What
+follows from it is the part worth stating.
+
+**A shared-tree run now touches three things:**
+
+| | |
+|---|---|
+| `_gen/` | a new **untracked** directory in the checkout |
+| `_gen/meshpool/` | **~3.2 MB** of STL copies, 8 files |
+| the PNG | `HERE / "UR15_CELL_OVERVIEW_20260729.png"` — **a tracked blob** |
+
+⭐ **And the exposure is wider than one file: that directory holds 212 tracked non-`.py` files.** The
+PNG is simply the one the current code writes. Anything later added as `HERE / "<name>"` lands among
+212 tracked evidence artifacts.
+
+⭐ **So the precise shape is this, and it is not symmetrical:** §7 told me to route generated
+artifacts into a repo-internal generated directory, and I did — `_gen/` is a **subdirectory**,
+cleanly separated from the 212. **The one output that does not go into `_gen/` is the PNG**, because
+that line is pre-existing and §7's ⛔ list bars me from touching output format. ⇒ **the design's own
+separation is complete everywhere except at exactly the point p4 declined to change**, and that is
+where the collision is.
+
+⛔ Not mine to change, same reason as §8.16: the output path is output format. ⚠ And pZ is right that
+it is invisible to review — **my diff touches that line zero times**; the repair made an existing,
+unreachable write reachable for the first time.
