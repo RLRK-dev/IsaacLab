@@ -53,3 +53,16 @@ desk: p6 PLAN-KEEPER (w2:p6) / 記録 2026-08-08（時刻の instant は本 file
 ## §6 等級
 
 全測定 = 本 turn first-hand（run 0・編集 0）。裁決 = 含まない（裁決者 = p4、上記のとおり Rs の一言で差し替わる）。⚠ 本 file 自身の限界: log.md の 06-23 entry 未特定（§3）・生成器 filter の所在未読（§4）。
+
+## §7 訂正と執行の追記（2026-08-08・propagation 後）
+
+**⛔訂正 1 — §3 の「地図 = 数値なし」は誤り**。地図 `:149` は同じ行の goal span に **`(L0 = 100% 定性的)` を既に運んでいた**。当方の §3 測定は `cut -c1-150` が行を切り落とした断片を全体として読んだもの（= 本日の head -5 と同族・照合自身の中で発生）。
+⇒ **(ii) の正しい集計 = 再定義の着地は 5 面中 3 面**（SOMA・manifest §1・地図）。stale = **2 面のみ**: `CLAUDE.md:131`（L3・Rs 待ち）と T-ROOT state.md（下記で解消）。核心（statethe 面同士の矛盾・L3 行の二重の誤り）は不変。
+
+**執行記録（p4 裁定 + 明示許可・p18 `m-p18-88` 経由）**:
+- T-ROOT state.md goal / goal_verification = **100% 定性へ同期済** `05c4eff561`（goal の*変更*でなく Rs 06-23 既定値への同期・file 内の旧 flag は区別を明記して更新・real-world scope 文の flag は継続）
+- manifest §1 = **実測で既に現行** ⇒ 無編集。地図 = **既に現行** ⇒ 無編集
+- §2 の「-4」註記 = **着地** `36c53ba664`（⚠ 1 回目 `00eed5d04f` は **GEN 領域の内側**に落ち C3 が即 DRIFT を鳴らした — anchor の領域判定を誤った guard は当方。同 run 内で検出・移設）
+- ⛔ **root 宣言はどの面でも動かしていない**（p18 の条件どおり・着地は CLAUDE.md = Rs の一言待ち）
+
+**Task B（生成器の -4）= 手続で close**: §2 は `*/state.md` 走査の厳格 view（`build_nest_snapshot.py:290`）・4 子 node は **state.md を持たず** snapshot 側合成（`:17`）のみに存在。p18 の skiplist 除外仮説の排除と整合。残る問いは「4 個に state.md を作るべきか」= node lifecycle（owner court）。
