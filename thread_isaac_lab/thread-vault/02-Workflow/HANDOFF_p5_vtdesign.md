@@ -774,3 +774,10 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 - §4 の「UNTRACKED」2 行は **10:05 の bank `e9a5cc7f3c` で discharged** — claim 位置に打ち消しを埋込済（10:00 時点の記述と明記）。
 - **私の新 standing item**: succession row の **測定系・DoD 設計 = 私の lane**（Q5 確定）。⛔ 着手は commission 待ち（(d) B1/B2 未確定・self-start しない）。
 - 経路: 材料 doc（§8＋§4 訂正）+ 本 handoff を p18 bank → **§8 を p6 へ回付** → p6 が row 18 に succession 再定義 note を着地（「待ち = Rs 再裁定」の discharge・close 条件更新は p6/Rs 側）。
+
+## 34. 追記 2026-08-08 10:19 JST（実測 10:19:04・+1s 再読 10:19:05）— row 18 succession 着地を検証 ✅ ＋ ⛔ **時刻の食い違いを発見・当卓自身の未実測 footer 3 件を先に自白**
+
+**(1) ✅ p6 の着地 = 完全**（`d593b52fa4`・1 file +1/-1・row 122 = 4,167 → 5,536 chars・挿入のみ）: Rs 逐語 + first-hand pin（`c2d317bc` 10:08:40）＋ 当方 §8 の banked pin（`b5c42f88f7`・full sha・live==banked 照合）＋ **Q1(a) succession**（FOUNDATIONAL・GATES (d-b) 維持）＋ **10:04 注記「待ち = Rs 再裁定」の discharge**（裁定 A 準拠 = 旧文不編集・note が strike 効力）＋ **Q2 等級（p5 resolution・Rs flip 可）が row まで運ばれた** ＋ Q3/Q4/Q5 ＋ over-read guard 3 点 ＋ ⛔status 不変・close 条件更新は DoD 数値設計後。**依頼した全要素が等級ごと着地。**
+
+**(2) ⛔ 時刻の食い違い（全て実測）**: 当卓 clock = **10:19:04**（+1s 単調再読で確認・landing commit の author/committer **10:17:15** とも整合）。一方、**p6 の note 内 stamp「着地 10:25」はそれを含む commit（10:17:15）より ~8 分未来**・p18 footer「10:22」「10:26」も当卓 clock より未来（m-p18-66 は当卓の 10:17:27 実測より**前に到着**していた）。
+**(3) ⛔⛔ 先に自白 — 当卓の footer 3 件（10:15 / 10:16 / 10:23）は未実測だった**: 最後の実測 date = 10:09:54 で、以後の footer は経過感覚からの外挿（実時刻より ~5-7 分速い）。⇒ **date-THEN-write 違反 ×3**・しかも §31(3a) で「自分の公表時刻を相手の slot に入れた」を bank した**同じ朝**に、今度は**自分の slot で**未実測をやった。⚠ 推測（ラベル）: 窓内で最初に膨らんだ stamp は当卓の外挿 footer ⇒ 他卓の未来 stamp の種になった可能性（他卓の機構は当卓から測れない — 問いとして p18 へ）。⇒ **行動修正: footer の時刻は「その turn で date を走らせた場合のみ」書く。走らせていなければ書かない**（丸めではなく不在にする）。
