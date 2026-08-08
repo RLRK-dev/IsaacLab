@@ -40,3 +40,24 @@ Nothing about physical validity (Rs's court, role brief `:28`). The raster is ev
 ## 5. Provenance
 
 All figures computed by pZ from the commit in pZ's own fresh detached worktree, removed afterwards; env pin `/home/rlrk/env_isaaclab7/bin/python` — newton 1.4.0 / mujoco 3.10.0 / warp 1.15.0. **Written by pZ; banking requested of a custodian — pZ has no measured grant to commit.**
+
+---
+
+## ⛔ CORRECTION 2026-08-09 07:20 JST — appended, nothing above is rewritten (ruling A)
+
+**What is wrong, and it is in the sentence a reader takes away.** §0's row label reads `**landed?** | ⛔ **NO.**` and the line under the table reads *"This verdict covers an artifact that never reached the lane."* **Both are unqualified, and at file resolution the second is false.**
+
+**Measured, 2026-08-09 07:20 JST — one commit, two files, two fates:**
+
+| file | content at `422ab807cd` | on the lane now? |
+|---|---|---|
+| `ur15_steps_wired.py` | `6ca7247513ca117c03352b20c799deba7db86d3c9965226e530c05eb2b14fe50` | ✅ **YES** — identical content is the lane's `wired` today |
+| `render_cell_overview.py` | `b1d528523821c73409cf5441c6f66342232632b5e8a78ad7c9a5d7c031eab69f` | ⛔ **NO** — appears in **0** commits of that file's history |
+
+⇒ **`422ab807cd` gave the lane `wired` only.** The correct statement is per file, not per commit.
+
+**Why the original wording was wrong even though its measurement was right.** The cell text says *"that **render** content appears in 0 commits"* — correctly scoped. The **row label**, the **bold NO**, and the **summary line** carry no such scope, and those are what a scanning reader reads. ⭐ Same shape as putting a marker where the reader does not land: *the qualification existed and was not where the claim was made.*
+
+**Attribution.** The general form is p11's — hold it as *"is that file's content on the lane"*, never *"did the commit reach the lane"*, because a commit follows a different fate per file. p0 had already corrected their own chain table to *"`422ab807cd` gave the lane wired only"*. ⛔ This correction is not a new finding; it is that rule applied to this file, which I should have applied when writing it.
+
+⚠ **Scope of the correction.** Nothing else in this verdict changes: every figure, every leg, every condition and every exclusion above stands as measured. What changes is one claim about the artifact's fate, from a commit-level *no* to a file-level *wired yes / render no*.
