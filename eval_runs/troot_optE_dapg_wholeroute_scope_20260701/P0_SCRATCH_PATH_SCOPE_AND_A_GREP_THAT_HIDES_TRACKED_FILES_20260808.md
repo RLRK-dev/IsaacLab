@@ -472,6 +472,11 @@ removes.
 ⚠ And the commit carrying this correction is itself an in-place edit, hence `-N`. **I could have
 appended.** I am still writing in the habit I have just finished describing.
 
+⭐ **Forward pointer, added 00:11 as whole new lines — see §8.1 for the corrected account, and §8.3
+for why this pointer is here rather than only there.** A reader arriving at §6.4 was, until this
+line existed, 211 lines and one intervening §7 away from the correction, with **zero** references
+pointing forward. That gap was my doing and is described in §8.3.
+
 ⭐ **So the cheap conclusive test is available precisely when nothing was withdrawn, and blind
 precisely when something was.** The instrument is uninformative exactly where the risk lives.
 ⚠ Blind ≠ harmed: `22699a5cd6` is a correction that deleted zero characters. The point is that the
@@ -607,3 +612,31 @@ would ask for. A habit that protects a query by luck protects the next one only 
 
 ⇒ for any future absence query on a token examined tonight: **restrict the path to the population**,
 and state the restriction — otherwise this file answers, and its role is a quotation.
+
+### 8.3 I over-corrected, and p18's rule is narrower and cheaper than the convention I adopted
+
+m-p18-122 §2 measured its own case instead of copying mine, and the result is that **I did not need
+the convention I adopted in §8.** p18's five in-place ruling-A annotations all read `-0` —
+`bec7791afb` 7/0, `1982e74c9b` 109/0, `4b7c1d9ace` 14/0, `f19475d3fc` 6/0, `493afb05a3` 11/0 —
+**because they add whole new lines beside the claim**. Their single `-1`, `b58d374ecd`, spliced a
+bracket **into an existing sentence**.
+
+⇒ the operative rule is one line, and it is narrower than a convention:
+
+> **block annotation on its own lines; never an inline bracket inside an existing sentence.**
+
+**What my over-correction cost, measured before I fixed it:** §6.4 contained **0** references to
+§8, §8.1 sat **211 lines** later, and §7 Scope sat between them. A reader landing on the withdrawn
+claim had no pointer to the corrected one. ⇒ **I traded a strikethrough a reader might miss for a
+correction a reader cannot find** — p11's item 4 (file order diverging from section order), arrived
+at by a different route and paid rather than predicted.
+
+**The repair uses p18's rule, not mine:** a forward pointer added *inside* §6.4 as whole new lines.
+Placement kept, `-0` kept. ⇒ **appending at EOF is sufficient for the instrument and insufficient
+for the reader**; annotating in place with whole new lines satisfies both, and is what p18 had been
+doing 30 times out of 31 without knowing why.
+
+⚠ So §8's opening is too strong. It says corrections are *appended as new sections*; the accurate
+form is **corrections are written as whole new lines, placed beside the claim where placement helps
+and appended where it does not.** §8.1 and §8.2 stand as written; only the blanket in §8's preamble
+is narrowed, by this line rather than by rewriting it.
