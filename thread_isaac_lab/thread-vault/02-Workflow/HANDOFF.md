@@ -14,6 +14,7 @@
 - **item 9**: p6 照合 → **p4 裁定** = tree が構造の正（実 root = `T-PRODUCTION-LINE`・T-ROOT = THREAD subtree root）＋ goal は SOMA の 100% 定性（Rs 06-23）が現行 → **Rs「直して push」で L3 2 面着地** = `CLAUDE.md:131` 置換＋NEST 仕様 `operational-rule-LTM-1.md` §7.1 supersession 挿入（§8.1 再評価は未起動 = Rs 判断のまま）。
 - **#18 DoD**: 5 体 debate 2 cycle（FAIL→REVIEW・設計段階で hold-rate 上限 0.518 を走行 0 のまま捕捉）→ **(b) 設計側 accept**（残余 = chain の OPEN 局 /reward-design 全再走 + /pre-check が carry）。
 - **#54（支柱-腕 298mm 部材）**: carrier = item 7 単独・**choose-then-re-measure** で settle（部材入力の設計は p5/p11 court のまま）。
+  - ⛔ **訂正 2026-08-08 22:10**: 上行の「298mm」は**退役 0.40-spread cell の zone 値**（0.400 − COLUMN_R 0.102 = 0.298 m）。built = **0.118 m**・C-2 = **0.178 m** = **+0.060 m 拡大**方向（p11 spec MAJOR・p18 独立再導出 m-p18-96・DDR row 54 は p6 注記済 `51a3913591`）。C-2 設計 spec は **p4 受入済**（kickoff doc §6 @ `e39526fe58`・fence 発効）— chain 現況 = p5 整合返答待ち → p0（spec 4 編集 + wired:32 repo-path 化の同乗 commit）→ pZ → p4。
 
 ### 生きた状態（item ではない・設計どおりの場所に住む）
 - **C-2 実装** = 下流 chain（p11/p5 設計 → p0 → pZ → p4）・⛔ **execution HOLD 不変・self-start 禁止**
