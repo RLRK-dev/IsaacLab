@@ -189,3 +189,28 @@ A-7b は罠の本体を「**軸の転置**」と名付けたが、**その名前
 
 - 全て第一手（本 session 実測）: `ur15_cell_spec.py:99-100`・`ur15_steps_wired.py:1130/:1136-1138/:1972/:2002/:2025/:315/:2418/:2456`・`ur15_mj.urdf:3` と `<limit>` 6 行・`git ls-files`/`rev-parse`/`sha256sum`・公式 `config/ur15/joint_limits.yaml`・`urdf/ur.urdf.xacro` の存在・`urdf_work` の不在。
 - p18 便（m-p18-102）= 契機であって根拠ではない（数値・結論は当方が独立に取り直した）。⛔ 相手の便の数値で裁定しない。
+
+## A-10. 追記 2026-08-09 06:4x — **未処理 8 件を durable に着地させる**（EOF 追記・本節が (a)-(h) の register）
+
+⭐ **なぜ今 landing するか**: これらは私が決めた変更点でありながら、**repo から到達不能な卓帳と message にしか無かった**。他卓が「認可されたが実装されていない件を繋ぐ register が無い」と名付けた class に、**私の未処理 list がそのまま該当していた**（authorized-not-scheduled の私版）。⇒ **pZ の run は完了・filing 済**ゆえ pin を凍結する理由も消えたので、**EOF 追記**（固定 anchor の手前でなく = A-9c までの並び順の欠陥を繰り返さない形）で着地させる。
+
+⚠ **本節の性格**: 以下は **spec 本文の追補として提案する変更点**であって、**本節が spec を書き換えるものではない**（spec `3315631007` は p4 受入済で不触・07-Design/04-Specs は Rs 専権）。採否・適用は p4 の court。
+
+| # | 対象 | 追加する内容 | 実測根拠（本紙内） |
+|---|---|---|---|
+| (a) | spec `:215` §7-8 | **wired 経路に「run 認可側」の印**（2 経路の並置に gate の印が無い） | 本節下 |
+| (b) | A-3 | 裁定の根拠を **message ID から durable location へ**（`P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md` の見出し `## 8. working method 裁定` / `## 13.`） | A-3 |
+| (c) | 本紙全体 | **予約 token による双方向 marker**（`[SUPERSEDES: X]` / `[SUPERSEDED-BY: Y]`）。⛔ **過去節の被覆は遡って測れない**（token を要求していなかったため）ので **本節以降に適用**する | A-9c 下の実測 |
+| (d) | 計器（項目 14） | 目標行の述語を **comma-tuple 対応**（`^\s*(Z_SEAT\|GL\|GR\|LX[0-9]?\|RX[0-9]?\|RX_MID)\s*(,\s*(同)\s*)*=`）＋ **コメント除去後に判定** | A-9 / A-9b |
+| (e) | §7-8 | **artifact の同一性 = content sha256**（filename でない）。**再現可能なら command + env pin + machine + sha で足り file 保存は不要／非再現なら保存要／⭐ 仮定せず 2 回描いて sha を比べる** | A-8 の witness 分離 |
+| (f) | §7-8 | **detached worktree で走らせる（共有 tree では走らせない）**。⚠ **worktree 隔離は tracked content についてのみ** | 本節下 |
+| (g) | A-2 | **本監査は repo 外 dir（`/home/rlrk/src/…`）に依存 ⇒ repo 単独では再現不能・別 machine 未検証**。⚠ **一致の事実は落ちない**（URDF 側は tracked + content pin `b4c60d4d…`）— 落ちるのは再実行可能性 | A-2 |
+| (h) | A-9 / A-9b | **各数値に測定 rev を併記**し「**landing 後は再導出せよ・比較するな**」を本文へ | 下記 |
+
+**(h) の現行値（rev つき・2026-08-09 06:33:08 実測）**: lane tip `fa59bff987` 時点の landed `ur15_steps_wired.py`（content sha256 先頭 `6ca7247513ca117c`）で **anchor `:2644` / step rows 17（span `:2708`-`:2726`）/ target-assign 8 行 `[96,1126,1127,2630,2631,2645,2646,2647]` / mounting terms 12 / structurally-absent 2（`CROWN_Z0`・`COLUMN_STEM_H`）/ 違反 0**。⚠ **A-9/A-9b 本文の数値は旧 lane `02b85fc52f` 時点**（anchor `:2639` 等）で、両者の差は **全行 +5 の平行移動**（内容 anchor が全て拾い直したことを実測）。
+
+**(a)(f) の実測根拠（landed 面・2026-08-09 06:34:04）**: landed `render_cell_overview.py` は `:39 _GEN = HERE / "_gen"` / `:40 SRC` / `:41 AS_BUILT` / `:46 MESH_SRC = HERE.parents[2] / …` へ移ったが、⛔ **`:102 out = HERE / "UR15_CELL_OVERVIEW_20260729.png"` は移っておらず、同 PNG は今も tracked**（`git ls-files` rc=0）⇒ **共有 checkout で走らせると tracked blob を上書きする**。⚠ archival marker は**読む人を守るが file を守らない**。⇒ (f) は着地後も必要。
+
+⛔ **本節が主張しないこと**: relocation の要否（p4 court）／run 認可（Rs court）／C-2 の 4 編集の着手（p5 レグ待ち）。
+
+[SUPERSEDES: なし — 本節は追補の register であり既存節を置き換えない]
