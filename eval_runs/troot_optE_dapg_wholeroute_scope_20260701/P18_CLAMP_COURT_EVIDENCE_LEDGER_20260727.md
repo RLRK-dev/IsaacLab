@@ -40945,3 +40945,45 @@ pZ:「最初 HEAD=`8d2ffc154b` と書いた — **貴の行から取った**。�
 ⭐ **E 項が重要**: scratch path 項は **pZ の沈黙が clearance ではない** — **p0 の実装が `ur15_steps_wired.py` に触れれば、その行は pZ が読む面の内側**。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1188 — ⭐⭐⭐⭐⭐ **pZ が、当卓が 07-19 に bank した規則を独立に再導出し、*まだ起きていない* gate に前もって当てた** — 本日はじめて、教訓が事後でなく事前に効いた
+
+**契機** = pZ `-098`（22:15:23）。当卓 実測 22:15-22:19。
+
+### (1) ✅ pZ の測定 — **3 値とも一致**、そして **partition は 3 つ**
+```
+porcelain entries = 3247   （pZ 申告 3247）
+ modified tracked =  967   （pZ 申告  967）
+ untracked        = 2279   （pZ 申告 2279）
+```
+⚠ **967 + 2279 = 3246** ⇒ **1 件が どちらでもない。**当卓が同定:
+```
+ D eval_runs/codex_panes_evidence_2026-05-10/manifest.json      ← 未 commit の *削除*
+histogram（完全分割）: 2279 '??' + 967 ' M' + 1 ' D' = 3247
+```
+⇒ ⭐⭐ **この 1 件が pZ の主張の *最も清潔な証明* になっている**: 共有 tree は追加と編集だけでなく **tracked file の未 commit 削除**を含む ⇒ ⛔ **どの commit を checkout しても、その file が *無い* tree は再現できない。**⇒ **「by construction で再現不能」は比喩でなく文字どおり。**
+⭐ **pZ は 2 分類を提示しただけで「これで全部」とは書いていない**（当卓が補完）。⇒ **合計と内訳の関係は、どちらも測っても *分割の完全性* は別の主張**（本日の族に連なる: 数/母集団）。
+
+### (2) ✅ pZ の引く前例と pattern — 実在
+```
+probe/pd1-arm-pd  … local + remotes/fork/ に実在
+7ab1cc313f        … 2026-07-21 "Pin the wording by content, not by version (c77)"・当該 branch 上
+```
+✅ **当卓 memory の該当規則も実在**: `feedback-pin-over-committed-state-not-dirty-tree-verify-in-worktree-2026-07-19` —「**共有 tree の dirty pin は clean checkout で再現しない**」。
+⇒ ⭐⭐⭐ **pZ は当卓の卓で bank された規則を、当卓に言われずに再導出し、しかも 07-19 の自分の失敗（source closure を dirty tree 上で pin → 3 members が他 pane の編集を運び、clean worktree の再計算が食い違った）を出典として添えた。**
+
+### (3) ⭐⭐⭐ **本節の核 — 本日はじめて、教訓が *事前* に効いた**
+本日ここまで、この族の教訓はすべて **事後**に働いた（誰かが誤り、別の卓が捕らえ、bank した）。§1182 で「機構が *検査* として伝播した」のが初だったが、それも **既に書かれた artifact** に対してだった。
+⇒ ⭐⭐ **今回は *まだ走っていない gate* に対して、走る前に制約を出している。**⛔ **p0 が着手した後では、選択の値段は既に払われている。**
+⇒ ⭐ **pZ の言い方が正確**:「**値段は p0 が始まる *前* に知られるべきで、後ではない**」。
+
+### (4) ✅ 当卓の処分 — **court を 2 つに割る**
+- ⭐ **evidence-grade の帰結 = 当卓の court・拘束的**: **未 commit の共有 tree 上で取られた verdict は、*構成上* どの commit からも再現できない。**⇒ **その verdict は「未 commit 面上で測定・commit から再現不能」と *等級を明記して* しか出せない。**⛔ **これは注意の問題でなく、上で示した ` D` 1 件が示すとおり *不可能性* の問題。**
+- ✅ **作業方法の選択 = p4 / p0 の court**（当卓は決めない）。
+- ⭐ **当卓の推奨（pZ が「or you」と明示的に開けたので出す）**: **pattern は repo に既に在る**（`probe/pd1-arm-pd`）。**p0 が lane でない branch へ commit し sha を送る** ⇒ pZ が content で pin・**新規 detached worktree で検証** ⇒ **着地は verdict の後、lane commit として起きる**。⭐ **brief `:39`「commit or files」に合致し、当卓が確定した順序（実装 → 検証 → 着地）を一切変えない。**⇒ **良い方の選択肢の費用は「非 lane branch への commit 1 本」。**
+
+### (5) ✅ pZ の状態
+**何も開始していない**（実行・artifact・commit・memory-dir 書込・self-start いずれも 0）。HOLD 不変。⭐ **今回は tip を repo から測った**と明記（前便の「当卓の行から取った」への自己是正が 1 turn で効いている）。
+
+**Banked — 時刻は本節 commit の author date が正。**
