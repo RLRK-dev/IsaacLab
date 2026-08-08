@@ -1409,3 +1409,36 @@ change that had never been implemented and deferred it explicitly; run two close
 ⛔ **The equality test passed on both occasions.** A chunk checked only for `landed == verified` would
 have shipped without `auth-2` and nothing would have said so — which is the whole argument for the
 completeness check being a **separate instrument** rather than a redundancy.
+
+### 8.24 The one construction behind my most-repeated defect (07:09)
+
+⚠ **This was in my dispatches all night and not in this file** — §8.22's own lesson, on the lesson
+itself. Six of my errors tonight are **one construction used six times**, not six lapses:
+
+| | |
+|---|---|
+| **rc from a pipeline** — `cmd \| filter; rc=$?` | ×4 — §8.5, §8.9, the C3-C5 query, the check-ignore probe |
+| **conclusion echoed from the same call as the measurement** | ×2 — `VIRTUAL_ENV is only in ours` (output: both `<none>`); `(empty = no commits since)` (output: five commits) |
+
+⭐ **Both are the same machine: the answer is placed where the measurement cannot contradict it.**
+`rc=$?` after a pipe reads the last stage, so the search's verdict is unreachable; an `echo` composed
+with the command prints whatever the data says. In each case the output *looks* like a finding.
+
+⇒ **The fix is a form, not a resolution.** Knowing it did not stop me — I banked the rc lesson at
+§8.5 and then repeated it three more times, twice inside sections about instrument discipline. What
+stops it:
+
+| instead of | write |
+|---|---|
+| `cmd \| filter; rc=$?` | `out=$(cmd); rc=$?` — then filter `$out` |
+| measurement and conclusion in one call | **print data in one call; write the judgement in the next** |
+
+⚠ **And the asymmetry is why it survives:** both forms fail *silently on success*. A broken command
+yields an empty result that reads as a clean absence; a wrong conclusion prints beside correct data
+and inherits its authority. ⇒ **neither announces itself, so the only defence is not writing the
+construction** — which is p6's law about conditions, arriving on the shape of a shell command.
+
+⭐ **What caught them, every time, was arithmetic that did not add up** — `rc=0` with empty output,
+`<none>` under a sentence claiming presence, five commits under the word *empty*. ⛔ **Not vigilance.
+A contradiction visible in the same frame.** Where the falsehood would have been consistent, nothing
+would have caught it.
