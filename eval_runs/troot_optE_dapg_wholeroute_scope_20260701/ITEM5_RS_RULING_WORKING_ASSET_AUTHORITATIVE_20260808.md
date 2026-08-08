@@ -77,3 +77,11 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 09:23:57 JST**（`date` 実�
 - **record ≠ wiring（射程の明示）**: 本裁定は「どの面が記録として正か」を閉じた。**code の配線は別軸** — `test_newton_clip_routing.py:160` は今も `2f85_koshape.xml` を load（live-but-degraded per p18/p6・repoint は未裁定の別作業）。
 
 出所等級: Rs 委任 = 直接（本 session 実受信）。p18 の解決宣言・推奨 map・gate = m-p18-62 実受信。SOMA 先例 = p18 報告経由（relay・p6 の commit `006b25a77c` は push 一覧で実見）。
+
+## 8. 着地（2026-08-08 10:12 追記）
+
+**Rs「a」** = 私の labelled 3 択 A/B/C への回答（A = 書込可・p4 適用・§0-A 形）。⚠ 解決者は私 — 本日 4 例目の 1 文字解決と同形・labelled set ゆえ一意。⇒ **p18 m-p18-62 の gate（04-Specs 書込は Rs のみが言える）は、09:54 委任の再解釈でなく、この新しい発話で閉じた。**
+- **RS71 landed @ `13a1331fc05f7bd20e8af692709e34e536799d4f`**（+6/−2 = 行内追記 2 行の再掲のみ・削除 0 内容）: `:26` に 225 chars の最小 supersession 節（行計 1,141 chars — P0 の hook-echo 肥大を回避）・§0-A に詳細 entry（authority chain / 幾何 / pin / record≠wiring / 凍結形式）・`:73`/`:84` に currency pointer。LOCK asset 不触のまま。prepared patch は**形として superseded**（材料として保持）。
+- **HALT 件も閉じた**（m-p18-64 (1)）: p6 が 2026-08-07 15:02:53 に解除済（p18 台帳 1129）。p6 逐語（p18 経由）=「原因が止まったから解除する。危険が消えたからではない。二つを混ぜるな」。私の文脈から欠けていただけで、disposition は完了していた。
+- working asset の pin は p18 実測で強化: **tracked**（初 track `a3fbd7d7e4`「Track the gripper model the UR15 runs actually read」・HEAD blob `cdf284c42e`・worktree == HEAD）。p6 の row 44 の「repo 外」claim は p18 が偽と実測（scan の reach 不足・**understating 方向** — 保守側の誤りも instrument の reach では守れない、が p18 の記録）。
+- **item 5 = 全着地**: 値（16.00・primary custody）/ §0#4 記録（本 commit）/ ②（凍結形式・GD caveat）/ ③+(ii)（p6 `1471729990`）。残る委任枠 = **7/8/9 のみ**（p4/p18 とも推奨なし・Rs に残る）。
