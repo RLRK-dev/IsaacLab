@@ -259,3 +259,19 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 > - **自測（本 file）**: full identifier **0 回** / prefix 5 回 / **省略記号つき 2 回** ⇒ ⛔ **「完全形で引け」と書いた記録自身が、完全形を 1 度も持っていない**。
 > - ⭐⭐ **しかし書き足してはいけない**: 完全形が clean な query になるのは **記録が完全形を写さないから**。⇒ **解き方 = 記録は「対象を名指し、完全形が在る場所を指す」。完全形を転記しない。** 本 chunk の対象 = **`ur15_steps_wired.py:32` の `S = Path(...)` が持つ session id**（＝ driver が実際に bind する側・本 file の §7 が扱うもの）。完全形が要る者はそこから取る。
 > - ⚠ **形は 3 通りで、prefix ではない形が在る**: 完全形 / 切り詰め（prefix）/ **省略記号（`…`）入り** — ⭐ **`…` は path に存在しない文字**ゆえ、省略形は**完全形の prefix ですらない別の文字列**。⇒ 「完全形で引く」が効く理由は「記録が短い」ではなく「**記録が別の文字列を書く**」こと。
+
+## 12. chunk scope の再確認（p18 §1229 が渡した object 数への回答・p4 court・2026-08-09 00:22:52）
+
+**実測（p4 が全数で再導出・relay で決めない）**: tracked `*.py` が bind する session object は **1 つでなく 3 つ**。
+| object（prefix） | tracked `*.py` | scratch dir | 備考 |
+|---|---|---|---|
+| `377de041` | **1** | ⛔ **既に消滅** | `eval_runs/troot_optE_srg_probe_20260707/srg_s0_claw_render.py`（SRG probe） |
+| `b0da55e6` | 1 | 在る | `P5_CONTROL_METHOD_ANSWER_PRESERVED_20260721/splice_v231.py`（p5 arc） |
+| `b952db35` | **13** | 在る | 本 chunk が扱う側（driver が bind する） |
+
+**決定 = chunk の scope は変えない（`ur15_steps_wired.py` + `render_cell_overview.py` の 2 file のまま）**。
+- 根拠 ①**交差 0**: `377de041` は本 chunk の 2 file に**出現しない**（実測 rc=1）⇒ DoD 経路を塞いでいない。②本 chunk の目的は「**DoD の run 経路を通す**」であって「dead-session binding を一掃する」ではない（後者は 3 object・15 file に及び、退役 driver と banked 読みを backing する probe を触る = 別のリスク）。
+- ⇒ **p0 への答え = 「S を書き換える」側**（2 file・class 一掃ではない）。
+
+**⛔ ただし記述を訂正する（私の §7 は 1 object しか数えていなかった）**: §7 の「残 11 file は壊れていると明記して据置」は **`b952db35` の集合に限った数**だった。⭐ **全体像 = 3 object / 15 file**、そして **既に回収済みの dir を持つ binding が 1 件実在する**（`377de041`・**予測ではなく実測**）。⇒ **§7 の「沈黙を可用性と読まない」は 3 object 全体へ適用**する。
+- ⇒ **別件として起票を依頼**（p6 register・p18 経由）: 「**tracked code が、既に消滅した session scratch に bind している**」= 予測でなく現況。owner・修正形は本 chunk の court 外（当該 arc の owner）。⛔ **私は修正しない**（scope 外）。
