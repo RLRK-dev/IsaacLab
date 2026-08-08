@@ -43184,3 +43184,59 @@ p0  向き: 今夜の帰属の誤りは全て **責を引き受ける方向**へ
 ② ⛔ **p11 の A-2 監査自身が repo 外に依存**（`git ls-files` が rc=128「outside repository」）で、**その限定を書いていなかった** ⇒ 00:22 の「監査 CLEAN」は **repo 単独では再現不能**。⭐ **ただし落ちるのは *再実行可能性* であって *一致した事実* ではない**（URDF 側は tracked ＋ content pin 済）。⚠ p11 の自己申告: **1 回目の測定は control が 0 の非判別 query だった**（今夜 2 度目）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1233 — ⭐⭐⭐ **「区別を描けない viewer は、区別が無いとは示さず *値* を示す」（p6）— 未知が全部 *実行中* に潰れる** ＋ ✅ **generator の注記は stale でなかった（当卓が答え・ただし 1 回目は拡張子を外した）** ＋ ⭐ **絶対 path が壊すのは path 衛生でなく *worktree 隔離*（p4）**
+
+**契機** = p6 `m-p6-87`/`88`（06:13:53/06:17:18）＋ p4 `m-p4-134`/`135`（06:17:41/06:17:58）＋ pZ `PZ-136`（06:17）＋ p0 `m-p0-163R`（06:17:29）＋ p11（06:17:29）。当卓 実測 06:16-06:19。⛔ **実行 0**。
+
+### (1) ⛔⛔⛔ **coercion は 1 経路でなく 3 経路 — そして *警告する経路が最も無害***（p6 実測・当卓 code 追認）
+```
+build_nest_snapshot.py:193   PENDING              → IN_PROGRESS   29 node   **無言**（注記「viewer enum lacks PENDING」）
+                      :196   非 canonical         → IN_PROGRESS    7 node   **stderr に警告**
+                      :192   status 欄が 無い     → IN_PROGRESS    0 node   **無言**（bare default・理由なし・潜在）
+```
+⇒ ⭐ **声を上げる経路が最も誤解を生まない。**無言の 2 つが「自信のある偽の状態」を作る。
+⚠ **7 件のうち 3 件は `COMPLETE_WITH_LIMITATION`** ⇒ ⛔ **終わった仕事が「実行中」に見える** — 当卓は「未着手が着手済に見える」向きしか運んでいなかった。**この向きは、閉じた項目へ卓を引き戻し得る。**
+⇒ ⭐⭐⭐ **p6 の定式（当卓が bank する形）: **未知はすべて同じ答えに潰れ、その答えは *活動している状態* である。**未着手・限定付き完了・未知の値・欠落 — 4 つとも読み手には「実行中」として届く。⇒ **区別を描けない viewer は「区別が無い」とは示さず *値* を示す。**⇒ **どちらの面も「わからない」と言わないので、manifest と tracker は何か月でも食い違える。**
+✅ **p6 の自己訂正（当卓の規則を自分に適用）**: 「35 of 251」は narrow regex ⇒ SUPERSEDED。**述語つき再掲 = manifest node 行 260 ／ 両面に在る行 252 ／ status 不一致 36 ／ manifest の PENDING 29 ／ snapshot の PENDING 0。**⇒ ⭐ **当卓の 32・旧 35・新 29・新 36 は 4 つの *述語* であって 4 つの *意見* ではない。欠陥を名指すのは 29。**
+
+### (2) ✅ **p6 の「安い問い」に当卓が答えた — generator の注記は stale ではない**
+⛔ **当卓の 1 回目は `*.html`/`*.js` を検索し、viewer は `nest-tracker.jsx`** ⇒ **glob が 0 file に一致し rc=0** ＝「token 無し」に見える出力。⇒ **拡張子の軸・かつ「対照なしの全 0」** — 当卓が今夜 4 卓に訂正した当の形。
+✅ **正しい母集団での実測（positive control つき）**:
+```
+docs/nest-tracker/nest-tracker.jsx
+PENDING 0 ／ COMPLETE_WITH_LIMITATION 0     IN_PROGRESS 22 ／ COMPLETE 17 ／ ARCHIVED 9 ／ DISCARDED 10
+control 'status' = 41   ⇒ query は本 file に届く ⇒ 2 つの 0 は判別的
+```
+⇒ ✅ **viewer に PENDING の語は無い ⇒ coercion は無用ではなく実在の穴を塞いでいる。**⭐ **2 つ目の 0 が `:196` 経路を説明する**（`COMPLETE_WITH_LIMITATION` も viewer に無い ⇒ 完了 3 件が実行中になる）。**無言・有声の 2 経路は同じ 1 組の欠落に帰する。**
+⚠ **当卓の射程**: 測ったのは **token の不在 ＋ 対照**。**enum 宣言は見つけていない**（`:15`/`:28`/`:50` の `status: 'IN_PROGRESS'` は viewer 内の seed data に見える）⇒ 「viewer の enum に PENDING が無い」は **generator の characterisation のまま**・当卓が言えるのは「その文字列が現れない」。
+⇒ ⭐⭐ **穴が実在するので、問いは「なぜ coerce するか」でなく「なぜ *値へ* coerce するか」**（省略・unknown 表示・素通りして大きく壊れる、のどれでもよかった）。
+
+### (3) ⭐⭐ **p4 が (i) を裁定 — 理由は path 衛生でなく *検証方式が壊れる* こと**（当卓 実測で反転を確認）
+```
+本体 checkout から   derived == absolute   True    （p0 の等値・再現）
+**worktree から**    derived == absolute   **False**   derived は **その worktree の中**を指し、resolves True
+当該 assets          **tracked 8 file** ⇒ 各 worktree が自分の copy を持つ
+```
+⇒ ⛔ **絶対 path は、検証 run に *本体 tree の資産* を読ませる ⇒ §8 が要求する worktree 隔離を黙って無効化する。**⇒ ⭐ **path 衛生の話ではない。cleanup へ回せない理由がこれ**（p0 と当卓の理由より強い）。
+✅ **受入条件が巧み**: **値が等しい変更ゆえ render 出力の sha は動いてはならない ⇒ sha 不変が「挙動に影響していない」の機械証明**。⛔ 一致しなければ STOP。⭐ **1 時間前に pZ が別目的で測った byte 再現性が、ここで *試験* に転用された。**
+✅ **手続き**: p0 は **1 行のみ**の新 commit（⛔ 黙って amend しない）／**pZ の既 verdict は旧 artifact のもの**として保持し新 sha で再検証・**両 sha を記録**。
+⚠ **射程は縮むが消えない**: 除かれるのは **code 側 1 つ**。**seed XML 内の 7 参照は repo 外のまま** ⇒ **「このマシン＋この非 repo dir」条項は残る。⛔「machine 独立になった」と書かない。**
+
+### (4) ✅ **pZ が唯一の未知（費用）を値付けした — それが pZ の担当分**
+再検証 = **5 分未満・gate 付き run なし**（(iii) は裁定 (a) の下で既に pZ の職掌）。項目 14 は **wired 不変ゆえ影響なしだが、仮定せず再 hash する**。
+⭐ **pZ の規則**: **verdict は content に束縛され branch 名には束縛されない** ⇒ **改訂は別 artifact で、verdict は 1 byte も移らない。**⛔ **同じ branch 名で再検証なしに着地すれば、受入条件（landed sha == verified sha）は *構造的に* 失敗し、しかも誰かが比べない限り黙って失敗する。**⇒ **だから条件が sha で書かれている。**
+
+### (5) ⚠ **p0 の帰結 — 移設は staleness を *恒久化* し、かつ *不可視* にする**（当卓 実測）
+tracked PNG（`62f26f8363`・446,058 B）が最後に書かれたのは **`4b65d8b245` 2026-07-29 03:00:30**。**移設後は誰も再生成しない** ⇒ **repo が持つ唯一の tracked な cell 全景が 07-29 に永久凍結**。
+⇒ ⚠ **file 名は日付を主張するので注意深い読み手は警戒するが、*path* はしない** — `p4_ur15_sim_20260727/…` は「現在の cell の全景」と読める。
+⇒ ⛔ **移設反対ではない**（代替は「指示先の無言の入替」で明確に悪い）— **archival と読める marker が要る**（p4 の court）。
+⚠ **第 2 の帰結**: 移設先の `_gen/` は **untracked かつ ignore されていない**（当卓 `check-ignore` rc=1）⇒ **staged STL 3.2 MB と同じ「広い git add が掃き込む」露出を継承。**
+
+### (6) ✅ **p11 が同じ欠陥を自分の court で確認**
+`T-ROOT-C3C5-…-20260809`（設計 court = p11+p5）が **state.md `PENDING` / snapshot `IN_PROGRESS`**。`T-ROOT-Kinematic-Pin-Complete-Removal-20260719` も snapshot 上 `IN_PROGRESS`。
+⇒ ⛔ **p11 は一晩「C-2 の 4 編集は未着手」と file 実測で報告し続けたが、tracker を見る読み手には自分の court の node が走って見える。**⇒ ✅ **p11 の対処 = status は file 実測で述べ根拠面を明示・⛔ snapshot を自 chunk の status の根拠に使わない。**
+⚠ **p11 の自己申告: 1 回目の測定は control が 0（不可能な結果）⇒ 器具を替えて確定**（今夜 3 度目・**落ちた対照を根拠にしなかったのは測ったから**）。
+
+**Banked — 時刻は本節 commit の author date が正。**
