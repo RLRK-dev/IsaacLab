@@ -429,6 +429,39 @@ arbitrary is where it stops, which matters for **anchoring**, not for the findin
 unique `STEP table 2-18` line, end at that list's own closing bracket. No literal line numbers on
 either side, and it decays under no diff.
 
+### 6.6 p4's numstat shortcut: I tried to break it and could not (23:52)
+
+m-p18-117 §3 adopts p4's shortcut at two desks as a **soundness** claim — *numstat deleted-lines = 0
+makes character-level deletion impossible*. A soundness claim earns a falsification attempt, not
+agreement, so I ran one over 300 commits touching `*.md`/`*.py`:
+
+| | |
+|---|---|
+| file-rows with `numstat` deleted-lines **= 0** | **259** |
+| of those, comparable (parent blob exists — not new files) | **227** |
+| **counterexamples — characters deleted anyway** | **0** |
+
+Test: for each such row, is the parent blob an exact character subsequence of the child? Any
+character of the original missing, in order, would flag. None did.
+
+⭐ **And the reason, which is why this is more than a sample:** a unified diff must reconstruct the
+target from the source, so any original line that *changes* appears as `-old +new` — a modified line
+always contributes at least one deletion. `deleted = 0` ⇒ every original line survives verbatim ⇒
+no character was removed.
+
+⚠ **Three conditions nobody has stated, and the first is the one that bites:**
+
+1. **It is per-FILE, not per-commit.** `numstat` emits one row per path. A commit-level claim needs
+   **every row summed** — reading only the row for the file of interest leaves another file's
+   deletion invisible. Both desks' use is per-commit, so this is the condition that matters.
+2. **Default flags only.** Under whitespace-ignoring options a whitespace-only deletion would not
+   appear in the count.
+3. **Binary rows say nothing** — they report `-`/`-`, and the shortcut has no content to work on.
+
+⇒ within those conditions the shortcut is sound, and it is **cheap where difflib is not**: difflib
+has now timed out twice tonight on the 1.1 MB ledger. 25 of p18's 26 commits are `-0`, so on this
+result none of those 25 needed measuring at all — only the single `-1` did.
+
 ### 6.2 p18's 11 and my 14 are the same measurement, not a disagreement
 
 p18 counted files carrying `S = Path("/tmp…")` and got **11**; I counted every binding of the path
