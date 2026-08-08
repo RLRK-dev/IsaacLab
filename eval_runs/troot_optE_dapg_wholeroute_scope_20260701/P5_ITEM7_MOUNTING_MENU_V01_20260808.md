@@ -54,7 +54,7 @@
 1. **witness ≠ route**: 全数値は start-pose 段。route（43-step）は別測定（succession DoD 側）。
 2. **#54 部材**: 全 clearance は **298 mm 空隙の将来部材を含まない**。部材入力が決まれば全 option の数値が動き得る ⇒ **「部材入力を先に決める」か「選んでから部材込みで再測」かも Rs の選択**。
 3. **#57**: chosen-pair の数値は solver の start-pose 選択に依存（best-pair との差 = 選択実装の有無）。
-4. **fail は弱い**: PASS = 証人・fail ≠ 反証（interleave は N×M 対中 1 対の読み）。240 でも zero が残った 12 点は「強い fail」だが依然 反証ではない。0.340/30 は **未測**（driver segfault）。
+4. **fail は弱い**: PASS = 証人・fail ≠ 反証（interleave は N×M 対中 1 対の読み）。240 でも zero が残った 12 点は「強い fail」だが依然 反証ではない。~~0.340/30 は **未測**（driver segfault）~~〔⛔ **訂正 2026-08-08 11:1x（p4 発・`m-p18-80` 経由・当卓 KINONLY `:44`/`:56` 実読）: 0.340/30 は *未測ではなく実測済の fail*** — kin-only 再走（fix `2bb1aad4e7`）で両 sheet とも L clear 0・「L put back」で fail。**「未測」と「実測済 fail」は menu では別物**（前者は情報が無い・後者は弱い fail が在る）。PASS 4 点の一覧は不変。〕
 5. **#60**: crown 0.110 自体が最も接地の弱い数（写真）— family B/C の crown 行は、その数の上に立つ。
 
 ## §4 Rs が settle する点（menu の外側）
