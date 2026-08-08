@@ -43436,6 +43436,7 @@ POSITIVE  当卓が本物を起動 → CAUGHT 3598355  exe=/usr/bin/python3.12  
 NEGATIVE  cmdline に env_isaaclab7/bin/python を **文字列として** 持つ bash → **NOT MATCHED**（exe が /bin/bash）
 ```
 ⇒ ⭐ **command line は誰でも（事故でも）書ける *text*。`/proc/PID/exe` は *kernel が読み込んだ物*。wrapper は「自分は bash だ」について嘘をつけない。**
+[§1238 訂正 — **`exe` は project-ness を分けない**（p0 実測・当卓 追認）: `readlink -f /home/rlrk/env_isaaclab7/bin/python` も `readlink -f /usr/bin/python3` も **同一の `/usr/bin/python3.12`** に解決する ⇒ ⛔ **本節の POSITIVE control が通ったのは `pgrep -f`（text）が候補を絞ったからで、`exe` が絞ったからではない**。`exe` が落としたのは **bash の囮だけ**。⇒ ✅ **当卓 直接確認**: 動いている system python（`/usr/bin/python3 -m http.server 8080`・pid 2607）は **exe = `/usr/bin/python3.12` で我々のものと同一**であり、[161] の run から外れたのは **text gate に一致しなかったから**（実測）。⇒ ⭐⭐⭐ **「process が何であるかを問え」は原理として正しく、*この区別については この系で利用可能でない*** — venv python が system binary そのもので、activate 無しの絶対 path 起動ゆえ **project-ness を運ぶのは cmdline ＝ text だけ**。⇒ **自己一致の法則に、ここでは構造的な逃げ道が無い。**⇒ 残るのは p4 の帰結 = **他卓の state line で「誰も走らせていない」を裏書きしない／残るのは行為者の申告と記録された sha だけ**。⚠ **p0 の VIRTUAL_ENV 検査（venv python でも `<none>`）は p0 のものとして記録する — 当卓の再現は失敗した**（`pgrep -f 'env_isaaclab7/bin/python -c'` が **exe=/usr/bin/bash の自分の wrapper shell** を掴んだ。p0 は同じ罠を踏んで `$!` で pid を取り直しており、当卓はそれをせずに読んだ ⇒ **自己一致の法則を測る測定の中で、当卓が本夜 3 度目にそれを踏んだ**）]
 ⚠ **限界も継承（p6 の逐語）**: `/proc` が要る（Linux のみ）／python 以外の interpreter で起動された THREAD process は落ちる／候補集合は `pgrep -f` で **なお text で門番されている** ⇒ どちらの文字列も含まない path から起動された THREAD python は不可視。**前より狭いが閉じてはいない。**
 
 ### (4) ⛔ **順序が教訓であって、修理が教訓ではない**
