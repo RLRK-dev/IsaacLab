@@ -43771,3 +43771,57 @@ tip 6c0b76d500  wired 6ca7247513ca117c…（不変）  render e2aa041c9777f1e2�
 ⇒ **p4 は auth-2 を *landed* で閉じる**（⛔ implemented では閉じない）⇒ **着地後に完全性検査を *成果形で* 再走。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1245 — ✅ **chunk 全項目 CLOSED（auth-2 が *結果の形で* ABSENT→PRESENT へ反転）** ＋ ⛔ **当卓が 1 分差で正反対の disposition を同じ卓へ送った** ＋ ⭐⭐⭐ **verdict が pane message にしか無い — 検証の連鎖の証拠が、行為する卓から query できない**
+
+**契機** = p4 `m-p4-161`/`162`/`163`（06:56:57/06:57:41/06:59:25）＋ pZ `PZ-148`/`149`（06:54/06:58）＋ p0 `m-p0-182R`（06:57:34）＋ p11（06:54/06:59:40）。当卓 実測 06:56-07:00。⛔ **実行 0**。
+
+### (1) ✅ **CLOSED — 当卓が独立に確認**
+```
+lane 76b535ec60（06:58:19）  render **e2aa041c9777f1e2ccdf5d1be80739f95b0afd4bdf0f16f7bb6b4133a7216760** = tip と一致
+                            wired 6ca7247513ca117c…（不変）  scope = 自分の親に対して 1 file・1/0（純挿入）
+auth-2 を **結果の形で** 確認  :102 out = _GEN / "…png"   :103 out.parent.mkdir(parents=True, exist_ok=True)   :104 save(out)
+                            ⇒ **書込先の親が、書込経路の上で、書込の直前に作られる**
+tracked PNG dirty            **0**
+```
+⇒ ⭐⭐ **enumeration が 2 回とも仕事をした**: **1 回目 = 未実装を検出して明示的に繰延／2 回目 = landed で閉じた**（⛔ implemented では閉じない）。⛔ **等式検査は両回とも PASS していた** ⇒ **等式だけの chunk なら auth-2 を欠いたまま出荷し、誰も気づかなかった。**⇒ **2 本目の instrument が要る理由が、実演で確定した。**
+
+### (2) ⛔⛔ **当卓の欠陥 — 1 分差で正反対の disposition**
+```
+m-p18-183   「YOUR RULE'S PRECONDITION IS MET. NOTHING IS WAITING.」     = 解除
+m-p18-184   「p4 IS RIGHT IN SUBSTANCE … pZ MUST FILE THE VERDICT」      = 保留の是認
+```
+⇒ ⛔ **同じ卓へ・同じ問いについて・1 分差で逆。**⭐ **40 分前に当卓が p4 と p6 の間で surface した交差の形が、今度は当卓 1 卓の中で起きた。**
+✅ **p4 はどちらも *指示* として扱わなかった**（§4 は当卓の **§2 の測定**＝「2 つの step は別物」を引用し、**自分の再計算で着地した**）⇒ ⭐ **当卓を読み飛ばす実践が、当卓の不整合を無害にした — 本夜 4 度目。**
+
+### (3) ⭐⭐⭐ **構造的 blocker — verdict が pane message にしか無い**（当卓 実測）
+```
+repo 内で 6c0b76d500 を名指す file  = **2**（当卓の台帳・p4 の kickoff）
+pZ の verdict 本文（PZ-147）        = **pane message** ⇒ どの file query にも掛からない
+p4 の pane の recent 窓             'PZ-147' 0 ／ 'e2aa041c' 0 ／ '6c0b76d500' 1（窓 4,794 字）
+                                    ⚠ **recent は窓であって inbox ではない ⇒ UNKNOWN であって不在ではない**
+```
+⇒ ⭐ **p6 の限界（「pane message にしか無い ruling はどの file query の外にも在る」）が、*ruling* でなく *verdict* の上で、しかも *着地を止める形で* 効いた。**
+⇒ ⛔ **p4 は今夜 2 回、pane message にしか存在しない verdict の上で着地しており、3 回目にその存在を確認できなかった** ⇒ **p4 は verdict の *存在* を当卓から取らざるを得ず、当卓から物を取るなというのが今夜の結論そのもの。**
+⚠ **pZ の verdict の内容は毎回すべて当卓で再現している** — 問題は内容でなく **queryability**。
+⭐ **pZ の §D が当卓の未名の義務を名指した**:「**着地を報告するのは routing 卓であって、verifier が見張るのではない**」⇒ **p4 の着地 06:58:19 に対し pZ の最終確認は 06:56:25** ⇒ **当卓が報告した**（lane の render = `e2aa041c…` であって `4a37a966…` ではない・**間違った方と比べれば正しい着地に偽の失敗が出る**）。
+
+### (4) ⭐⭐ **p0 — 自分が 4 卓に入っていなかったので、自分で確認した**
+```
+§6.3(a)「working tree に無い → command grep **単独**」        ⛔ **道具**を名指す
+§6.3(a)「特定 revision に無い → git grep <rev>」               ⛔ **道具**を名指す
+§8.4  「**完全識別子で** 照会せよ」                            ⛔ **方法**を名指す
+§8.20 「commit / blob に pin された物は durable」               ✅ **主張の性質** = outcome 形
+```
+⇒ ⭐⭐⭐ **p0 の 3 つ目が、p6 の法則の最良の証拠**: **実装形の「完全識別子を使え」は、伸ばす形を持たない裸のシンボル（pZ の `ARM_LEFT_X`）のために *別条項の継ぎ足し* を必要とした。⇒ outcome 形（「一致集合が、その token を論じているだけの記録を含まない」）ではその例外が消える** — 裸のシンボルは **path 限定**で、長い形は **完全識別子**で、どちらも満たすから。
+⇒ ⭐ **outcome 形の条件は、実装形が patch を必要とした例外をそのまま吸収する。**
+⚠ **p0 の唯一の outcome 形も偶然**（命令でなく *主張* を分類しているから）— **当卓・p11 と同じ「徳でなく網」。**
+
+### (5) ⭐ **p11 — 同じ blocker を自分の結論に当て、1 件を見つけた**
+✅ repo から引ける = landed wired sha（2 hit）・lane rev（2）・「違反 0」（5）・対照 `anchor` 8。
+⛔ **引けない** = **`091d8bbc0c` 0 / `422ab807cd` 0** ⇒ ⭐ **「項目 14 の結果は改訂 commit と impl commit にも妥当」という結論は message にしか無い**（sheet には *現行 lane 値* しか無く、**どの版で確認したかの系列**が repo から辿れない）。
+⇒ **処置 (j)** = 確認系列を 1 行（`02b85fc52f` → `422ab807cd` → `091d8bbc0c` → landed `fa59bff987` の 4 版で wired content sha 不変・違反 0）⇒ ⭐ **結論が p11 抜きで検証可能になる。**
+⚠ **p11 の自認**: A-10 を landing した時「message にしか無いものを durable にした」と書いたが、**その時点で既にこの 1 件が message に残っていた** ⇒ ⭐ **register を作る作業それ自体は完全性を保証しない**（**書き留めたものしか入らない** = p6 の批判そのもの）⇒ **今回見つかったのは、他卓の blocker を見て自分の面を測ったから。**
+
+**Banked — 時刻は本節 commit の author date が正。**
