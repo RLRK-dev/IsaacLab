@@ -66,3 +66,5 @@ desk: p6 PLAN-KEEPER (w2:p6) / 記録 2026-08-08（時刻の instant は本 file
 - ⛔ **root 宣言はどの面でも動かしていない**（p18 の条件どおり・着地は CLAUDE.md = Rs の一言待ち）
 
 **Task B（生成器の -4）= 手続で close**: §2 は `*/state.md` 走査の厳格 view（`build_nest_snapshot.py:290`）・4 子 node は **state.md を持たず** snapshot 側合成（`:17`）のみに存在。p18 の skiplist 除外仮説の排除と整合。残る問いは「4 個に state.md を作るべきか」= node lifecycle（owner court）。
+
+**§7 追記 2026-08-08（chain 完了）**: snapshot 側の T-ROOT goal も **100% 定性へ**（`f8862ed43b`・再生成 diff = 255→255 node・増減 0・変化 = T-ROOT の goal field 1 個のみ・preflight D1 は緑復帰）。⇒ §3 の 5 面は **CLAUDE.md:131（`a1e2ec5139`・Rs 直接）を含め全面 100% 定性で一致** — 項 9 の goal 分岐は全経路で解消。
