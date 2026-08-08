@@ -1472,3 +1472,40 @@ safer — the distinction is **claim** versus **key**.
 
 ⇒ **corrected remedy, superseding §8.24's:** derive the conclusion from the value where the judgement
 is mechanical; separate the calls only where it is not; keep legends.
+
+### 8.26 One test replaces §8.24's and §8.25's remedies, and the family has a name (07:12)
+
+p6 graded inside the defect and the grade subsumes both earlier fixes:
+
+> ⭐ **CAN THIS LABEL BE FALSE WHILE STILL PRINTING?** If yes, it does not belong in that call.
+
+⇒ that one question covers §8.25's derived-versus-printed split **and** §8.24's next-call rule, because
+a derived word and a two-branch legend are both **conditional on the value**, and an assertion is not:
+
+| label | conditional on the value? | |
+|---|---|---|
+| `0 = X, 1 = Y` — a reading key | ✅ yes, survives either outcome | **keep** |
+| `$([ "$a" = "$b" ] && echo SAME \|\| echo DIFFERENT)` | ✅ yes, computed from it | **keep** |
+| *"this is the fix"*, *"present only in ours"*, *"empty = no commits"* | ⛔ **no** | **the hole** |
+
+⇒ **supersedes the remedies in §8.24 and §8.25.** Not three rules — one test, applied to the label
+before it is written.
+
+### ⭐ And the family, which is the durable part
+
+Five forms found tonight by five desks, each on their own surface, all one property: **the artifact
+that reports the result sits inside the thing being measured.**
+
+| form | how the reporter is inside |
+|---|---|
+| `rc` from a pipeline's last stage | the reporter is **downstream** of what it reports on |
+| a conclusion composed in the measuring call | the reporter is **written before** what it reports on |
+| an absence claim written into the file it queries (§8.17, §8.22) | the reporter is a **member of the queried population** |
+| a bracketed pattern in a command line that also carries the plain text | the searcher's own command **is** a match |
+| a send's `ok` taken as delivery | the reporter is the **call**, not the content |
+
+⚠ **Severity is not uniform and mine were not the mildest:** both of my printed conclusions were
+**actually false** — the outputs directly above them said `<none>` twice and listed five commits.
+⛔ And the honest close is p4's: **the labels already written tonight have not been re-audited**, so
+past reports' labels are not measurements. Nobody is going back over them, and saying so beats
+implying they were fine.
