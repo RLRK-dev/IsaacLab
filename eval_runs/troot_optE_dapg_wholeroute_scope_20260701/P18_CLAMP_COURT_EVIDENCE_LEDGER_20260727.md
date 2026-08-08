@@ -40441,3 +40441,45 @@ build_nest_snapshot.py:17   "Synthesizes missing nodes (T-ROOT virtual root + um
 ⇒ ⭐ **残る問いは generator でなく node-lifecycle**（NEST §2.1「node = state.md」に照らして 4 件に state.md を作るべきか）= **node owner の court**、manifest 註記に名指し済。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1176 — ✅✅ **本日最大の所見が閉じた — `CLAUDE.md:131` の 2 主張とも修正・L3 2 面着地・push 済**（当卓 全数検証）
+
+**契機** = p4 `m-p4-57`（18:08:37）。当卓 実測 18:08-18:14。
+
+### (1) ✅ Rs 逐語 — 一次
+```
+9e3d21d6  line 6327  2026-08-08T09:04:58.386Z = 18:04:58 JST  user  「直して push」
+```
+（当卓は window 内の全 record class を数えてから読取: user 12 / assistant 23 / attachment 8 / file-history-delta 1）
+
+### (2) ✅ 着地 `a1e2ec5139`「Land the root-line fix on both L3 surfaces, on Rs's word」= **2 file・+3/−1**（申告一致）
+
+**`CLAUDE.md` +1/−1** — 逐語 diff:
+```
+- **Root node:** T-ROOT「5-clip cable routing を vision-based で 95% 成功率達成」
++ **Root node (tree):** T-PRODUCTION-LINE（生産ライン工程①〜⑧）/ **THREAD subtree root:** T-ROOT
+  「5-clip cable routing を vision-based で成功させる — 目標は 100% へ定性的に再定義済
+   （Rs 2026-06-23・SSOT = SOMA:16）」
+```
+⇒ ⭐⭐⭐ **1 行に載っていた 2 つの誤りが、1 行の中で両方直った**:
+- **root の同定** = tree root（`T-PRODUCTION-LINE`）と subtree root（`T-ROOT`）を**分けて名指す** ⇒ tree と宣言が一致
+- **目標** = 95% → **100% 定性**、しかも **SSOT pin（`SOMA:16`）付き** ⇒ ⭐ **次に食い違ったとき、どちらが正かが行の上で分かる**（元の行はそれを持っていなかった）
+
+**`operational-rule-LTM-1.md` +2/−0** — §7.1 直後に **SUPERSESSION 記録**を挿入。⭐ **v1.1 yaml は issuance 時点の歴史記録として不変**（消していない＝裁定 A と同型）・**§8.1 再評価は未起動と明記**。
+
+### (3) ✅ push
+`ls-remote` = **`a1e2ec513936d6dbd13d5f958061de49dd5aeb98`**（申告と一致）／範囲 `d39d4bec9a..a1e2ec5139` = **15**（実測）。
+
+### (4) ⭐ p4 の自己申告 3 件 — すべて当卓の検証より先に本人が出した
+1. **解決者 = 自分**（§7 の draft は「p6 or Rs」と書いたが、複合命令が自卓宛ゆえ自分が実行）
+2. ⚠ **構成一覧を push *後* に測った**（事前印字を怠った）— ⭐ **手順逸脱を、結果が正しくても申告した**
+3. ⚠ 検証 command の diff が worktree 比較になり 77KB 出力（commit 自体は `show --numstat` で検証済・共有 tree の dirty は不触）
+
+### (5) ⭐⭐ 本日の弧の閉じ方
+**朝**: 器具の到達範囲を対象の性質として報告する形が 4 卓で出た。
+**昼**: 同じ形が *検証器具の中* で 3 度出た（捏造検知器・当卓の transcript sweep・編集 anchor）。
+**夕**: **全 session に配られる L3 の 1 行が、2 つの誤りを同時に配っていた**ことが測定で判り、**Rs の 2 語で閉じた。**
+⇒ ⭐⭐⭐ **見つけるのに 4 卓・1 日を要した誤りは、直すのに 1 commit・+3/−1 だった。** ⭐ **費用は *修理* でなく *不在の測定* に在る** — 誰も root を数えていなかった間、その行は毎 session 配られ続けていた。
+
+**Banked — 時刻は本節 commit の author date が正。**
