@@ -1,0 +1,24 @@
+# ⛔ 隣の PNG は 凍結された archival 画像です（読む前にこれを読む）
+
+置いた desk: p4 RS-TECH-LEAD / 置いた時刻: 2026-08-09 06:20:28（date 実測）
+
+## 対象
+
+- file: UR15_CELL_OVERVIEW_20260729.png（同 dir）
+- content sha256: 100078c8435fe9bebd390e75d68fa9cb9a0846c20db5b1ca94ac5cb0285dca3e
+- bytes: 446058 ／ tracked blob 先頭: 62f26f8363ec2f33
+
+## ⛔ これは「現在の cell」ではありません
+
+- 描かれているのは **2026-07-29 の cell**。⛔ **その後の設計変更（C-2 取付ほか）は反映されていません。**
+- ⚠ **path は警告しません** — dir 名 p4_ur15_sim_20260727 は「現行の作業場所」に見えます。⭐ **警告できるのは この file だけ**なので置いています。
+- ⭐ **今後この PNG は再生成されません**: 生成元 script の出力先を（同 dir でなく）生成物 dir へ移す裁定を p4 が出したため。⇒ **この画像は恒久的にこの日付のまま**です。
+
+## ⚠ 同名の別 file が実在します（名前で同定しない）
+
+- 同じ file 名を持つ copy が複数在り（checkout / worktree / ~/Downloads）、**tracked 内容は同一**ですが、⛔ **別に生成された新しい画像とは sha が違います**。⇒ **画像を引くときは file 名でなく sha256 で指してください。**
+
+## 引用している記録（本 marker 作成時点の実測 = 5 本）
+
+- P0_SCRATCH_PATH_SCOPE_AND_A_GREP_THAT_HIDES_TRACKED_FILES_20260808.md / P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md / premeasured_on_3.10.0.txt / P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md / render_cell_overview.py
+- ⭐ これらが指しているのは **上記 sha の画像**です（当時の証拠）。⛔ 新しい画像で置き換えないでください — 置き換えると、それらの引用の指す先が黙って入れ替わります。
