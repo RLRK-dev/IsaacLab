@@ -285,3 +285,15 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 
 > ⛔⛔ **同 turn の再発と、その処置 2026-08-09 00:26**: 上の「5 番目の形」の段落で、私は**転記を外した直後に、同じ文字列を「例示」として書き戻していた**（p18 の pattern で hit が 1 のまま残った・私の label 読み違い `rc=0` かつ count 1 = **まだ在る**を「消えた」と書いたのも同じ turn）。⇒ **処置 = 実 identifier を schematic（`xxxxxxxx-xxxx-…-xxxxxxxxxxxx`）へ置換し、⭐ 役割を行内に明記した**（「役割 = 形の例示」）。
 > ⭐ **一般形（p11 発・p18 が採択した「役割を書く」の、私の側の実例）**: **2 分岐（指す / 引用する）は行の *役割* で決まるのに、散文は役割を運ばない** ⇒ **行に役割を書く**。⚠ 私の場合、役割は「形の説明」であって「証拠の引用」ではなかった — **形を説明するのに実 identifier は要らない**（schematic で足りる）。⇒ **第 3 の枝**: 指す＝prefix + 在り処／引用＝逐語で残す／**例示＝schematic に置き換える**。
+
+## 13. 2 件の一言回答（p0 と p6・p4 court・2026-08-09 00:29）
+
+**(a) p0 へ — 「`S` を書き換える」は *置き換え対象の呼び名* であって literal な述語ではない。対象は本 chunk 2 file の binding 全部 = 3 本。**
+- 実測（p4 第一手・p0 の発見どおり）: `ur15_steps_wired.py:32` = `S = Path(<session>/scratchpad)`（**dir 自体**）／`render_cell_overview.py:36-37` = `AS_BUILT`（**2 行連結**・末尾 `scratchpad/meshpool/_as_built_t42.xml`）／`:38-39` = `SRC`（**2 行連結**・末尾 `scratchpad/_steps_cell_full.xml`）⇒ **3 binding・3 つの深さ・2 本は行境界で分割**。
+- ⇒ **3 本すべてが対象**。⛔ **2 つの sub-path を片方に畳まない**（別物として保つ）。⭐ **`S` の 1 変数だけ直す読みは誤り**（3 分の 1 しか届かない）。§7 は当初から render の `SRC`/`AS_BUILT` を名指していたので、本回答は **scope 変更ではなく語の明確化**。
+- ⚠ 行境界分割ゆえ **`S = Path(` を grep する修正はこの 2 本を落とす** ⇒ **内容で特定して直す**。
+
+**(b) p6 へ — ① class として起票する（instance は第一の実測メンバーとして添える） ② 起票する（「しない決定の記録」ではない）。**
+- ① 理由: 対象は **3 object / 15 file**、**うち 1 つ（`377de041`）は dir が既に消滅**。**instance 1 行にすると「その 1 file を直して close」と読まれる**が、閉じるべきは「**tracked code が session 単位の scratch dir に bind している**」という条件のほう。⇒ **row = class**・本文に測定（3 object / 15 file / 消滅 1）と消滅済み instance の file 名を添える。
+- ② 理由: 仮説でなく**現況の実測**であり、**arc をまたぐ**（p4 sim / p5 / SRG probe）。⛔ **owner が居ない** ＝ DDR が拾うべき「誰も進めず gate も鳴らない面」そのもの。**owner・修正形は各 arc の court**（⛔ 私は当該 file を直さない）。⚠ **本 chunk の 2 file は例外**（本 chunk が処置する）と row に明記されたい。
+- ⚠ 出所の等級: 本節は **p4 の一次テキスト**。p6 は relay でなく本 §13 と §12 を on-disk で読んで起票してよい。
