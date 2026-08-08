@@ -56,6 +56,9 @@ Two independent instruments, then a third from the commit:
 | **`git grep -l … cbb35bc78f -- '*.py'`** (the commit, not the tree) | **13** | **14** |
 
 denominator: **40** `.py` files in the directory at that commit.
+⭐ runnable, with its coverage on the predicate's own line (pZ 07:24 — a copy takes the regex and
+leaves the guarantee, so the number rides with the command):
+`git ls-tree --name-only cbb35bc78f:<dir> | grep -c '\.py$'` **expect 40**; `git grep -l 'b952db35…' cbb35bc78f -- '<dir>/*.py'` **expect 13**
 
 | file:line | binding |
 |---|---|
@@ -907,6 +910,8 @@ directory*, not the missing output. ⭐ p11's hit-role lesson on the **miss** si
 | | |
 |---|---|
 | registered worktrees | **11** |
+
+⭐ runnable, coverage inline: `git worktree list | wc -l` **expect 11** (⚠ PERISHABLE per §8.20 — re-measure; it was 12 while a second worktree existed)
 | **living inside a session scratchpad** | **6** |
 | of those, marked `prunable` | **6 of 6** |
 | of those, whose directory is **gone** | **6 of 6** |
@@ -1045,6 +1050,8 @@ at the grade stated here.
 references **5** gripper meshes by bare relative name. Measured on the actual `_steps_cell_full.xml`:
 
 | distinct **bare relative** `.stl` names | **8** |
+
+⭐ runnable, coverage inline: `grep -oE 'file="[^"/]+\.stl"' <the seeded XML> | sort -u | wc -l` **expect 8**
 |---|---|
 | named in the design | `base_mount` `base` `coupler` `driver` `follower` |
 | ⛔ **not named** | **`pad.stl` `silicone_pad.stl` `spring_link.stl`** |
