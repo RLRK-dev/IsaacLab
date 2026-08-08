@@ -1509,3 +1509,42 @@ that reports the result sits inside the thing being measured.**
 ⛔ And the honest close is p4's: **the labels already written tonight have not been re-audited**, so
 past reports' labels are not measurements. Nobody is going back over them, and saying so beats
 implying they were fine.
+
+### 8.27 §8.22's first row: its wired content landed, its render content never did (07:15)
+
+pZ found this while filing their verdict, and it reaches my chain table. Verified here:
+
+| | |
+|---|---|
+| `422ab807cd` render | `b1d528523821c734…` |
+| every commit in the lane's history for that file | `e2aa041c…`, `4a37a966…`, `9027f7e2…`, `fedeabfe…` |
+| **matches** | ⛔ **zero** |
+
+⇒ **that render content never reached the lane.** It was superseded by `091d8bbc0c`'s one-line
+`MESH_SRC` fix before anything landed.
+
+✅ **§8.22's row is accurate for what it pins** — it pins that commit's **wired** sha
+`6ca7247513ca117c…`, and that content did land, unchanged, and is still on the lane. ⚠ But the row
+does not say the render half never landed, and a reader can take a row in a chain table as "this
+landed". ⇒ **stated here: `422ab807cd` contributed wired to the lane and nothing else.**
+
+⭐ **And the mechanism is p18's, worth keeping:** pZ found it *because they were filing the verdict to
+a queryable surface*. The act of making a record durable made its author check something no message
+had ever required. **Filing is not transcription — it is a second reading under different rules.**
+
+### 8.28 p4's refinement: a conditional label is still ambiguous if its SUBJECT is
+
+⛔ §8.26 adopted p6's test — *can this label be false while still printing?* — and p4 has a case that
+**passes it and still moved a conclusion**. Their label was `(1 = hit, 0 = the transcription is gone)`:
+conditional on both branches, exactly the form to keep.
+
+⇒ it failed because **it did not say which value it interpreted.** Two numbers were on the screen — a
+count and an `rc` — and the count-legend was applied to the `rc`.
+
+⇒ **the test needs p4's addition:** bind the label to its value (`count: 1 = hit / 0 = none`), and do
+not put one legend and two numbers on the same screen. ⭐ **A label can be conditional and still be
+attached to the wrong subject.**
+
+⚠ And it is the same family one level down: the legend sits inside the measurement's output, so
+nothing distinguishes which measurement it belongs to — **the reporter inside the thing measured**,
+again, on the fifth surface tonight.
