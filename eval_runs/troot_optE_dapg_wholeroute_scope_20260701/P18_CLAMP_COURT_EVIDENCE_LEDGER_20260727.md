@@ -40592,6 +40592,7 @@ T-PRODUCTION-LINE/state.md:28-29 逐語
 ⇒ ⭐ **設計者は取付幾何を触れば両方に必ず出会う。** ⛔ **どちらの行も他方の存在を書いていない** ⇒ **項目 7/8 で見た「1 つの決定が 2 行から到達可能」と同型。** ⇒ **p11/p5 へ *対* として渡す。**⛔ **当卓は §0#2 について何も決めない**（Rs 専権・p4 の flag どおり STOP-and-Rs）。
 
 ### (4) ⛔ **file 名が clip の名前と衝突している**（本文は正しい）
+〔⚠ **追記 §1180**: 下記の旧 path は **2026-08-08 21:08:59 に rename 済**（`930dac85bc`・新 path = `P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md`）。**本節の旧 path 表記は「当時 citation されていた物」の記録として残す。**〕
 ```
 file 名 : P4_C2_CHAIN_KICKOFF_20260808.md      ← "C2"（ハイフン無し）
 本文    : "C-2" 7 回 / "C2" 0 回               ← 一貫して正しい
@@ -40603,5 +40604,39 @@ file 名 : P4_C2_CHAIN_KICKOFF_20260808.md      ← "C2"（ハイフン無し）
 ### (5) ✅ 処分 = **RETURN でなく ROUTE**（p4 の「疑義あれば RETURN を」への回答）
 **返さない理由**: ①referent は Rs 自身の定義に接地 ②解釈である旨を p4 が自ら明記 ③受入 chain と gate を名指し（banked design → p0 → pZ → p4・DoD = 43-step scripted route 動画・裁定 A）④**code/env/spec/asset を触っていない** ⑤p11/p5 の self-start 禁止は **回付された commission** で満たされる。
 ⚠ **添えて渡すもの 2 件**: **(4) の改名推奨**、**(3) の #45×#58 の対**。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1180 — ⭐⭐ **正しい修正は、それを要求した引用を無効にする — そして持っているのは要求した側だった** ＋ ⭐ **path 変更をまたいで content sha が不変 = rename-only の機械証明**
+
+**契機** = p4 `m-p4-60`（21:09:16）。当卓 実測 21:09-21:12。
+
+### (1) ✅ rename の検証 — **2 系統とも一致**
+```
+930dac85bc  21:08:59  "Rename kickoff record: C2 collided with the clip name, C-2 is the mounting row"
+  git -M          : {P4_C2_CHAIN_KICKOFF_… => P4_MOUNTING_C-2_CHAIN_KICKOFF_…} | 0
+  numstat         : 0  0                      ← 挿入 0 / 削除 0
+  content sha256  : 旧 path @ 6c14e909e5 = 39cffb1d56993f80…fb69bd05
+                    新 path @ 930dac85bc = 39cffb1d56993f80…fb69bd05   ← 同一
+```
+⭐⭐ **p4 が添えた検証形が良い**:「**path 変更をまたいで content sha が同一 = rename-only の機械証明**」。
+⇒ ⭐ **「私は本文を編集していない」という *申告* より強い** — **著者を信じずに、後から誰でも確かめられる。**
+⚠ **`git -M` の rename 検出は類似度しきい値つきの推定**であるのに対し、**content sha の一致は厳密**。⇒ **2 系統が独立に同じ結論を出している。**
+
+### (2) ⭐⭐⭐ **本節の核 — 閉じた query が「残る 1 件」を一意に指した**
+```
+旧 path 'P4_C2_CHAIN_KICKOFF_20260808' を引く file（worktree 除外・md/txt/json）
+  → eval_runs/…/P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md   … 1 件のみ（＝ 当卓の台帳）
+旧 path の on-disk 実体 : 無し
+```
+⇒ ⭐⭐ **改名を推奨したのは当卓であり、その改名で腐った引用を持っていたのも当卓だけだった。**
+⇒ ⭐⭐⭐ **形として一般化する**: **正しい修正は、それを要求した引用を無効にする。**そして **要求した側は、要求の中でその物を引いている**ので、**ほぼ必ず自分が stale を持つ。**
+⇒ ✅ **規則（当卓）**: **pointer の修正を推奨したら、着地の通知を受けた時点で *自分の面* を閉じた query にかける。**⛔ 相手に直させて終わりにしない。
+✅ **処置 = 裁定 A**（§1179 の旧 path 表記は **当時 citation されていた物の記録として残し**、冒頭に 1 個の marker を置いた）。⛔ **上書きしない** — 旧 path が何を指していたかは、改名の理由そのものだから。
+
+### (3) ✅ commission は不変
+p4 明記: **内容・owner・受入条件に変更なし**。⇒ **m-p18-91 の回付は有効**（p11 + p5 / design spec / banked → p0 → pZ → p4 / DoD = 43-step 動画・裁定 A / 実行なし）。
+✅ Rider 1（#45 × #58 の対）= p4 了解・**designers 宛のまま**・p4 は §0#2 に意見を持たない旨を明記。
 
 **Banked — 時刻は本節 commit の author date が正。**
