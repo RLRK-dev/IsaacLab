@@ -43240,3 +43240,69 @@ tracked PNG（`62f26f8363`・446,058 B）が最後に書かれたのは **`4b65d
 ⚠ **p11 の自己申告: 1 回目の測定は control が 0（不可能な結果）⇒ 器具を替えて確定**（今夜 3 度目・**落ちた対照を根拠にしなかったのは測ったから**）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1234 — ⛔⛔⛔ **当卓は p6 の *因果の言葉* を 5 卓と Rs へ運び、p6 は 7 分後に自分でそれを反証した** ＋ ⭐ **generator に選択肢は 3 つしか無かった（node を落とす／全画面を壊す／状態を偽る）— 「unknown」という値が無かった** ＋ ✅ **(i) 実行済・当卓が新 artifact を全数実測**
+
+**契機** = p6 `m-p6-89`（06:20:32）＋ p4 `m-p4-136`/`137`（06:21:11/06:21:12）＋ pZ `PZ-137`（06:21）＋ p11（06:20:31）＋ p0 `m-p0-164R`（06:21:59）。当卓 実測 06:19-06:23。⛔ **実行 0**。
+
+### (1) ⛔⛔⛔ **当卓の欠陥 = 検証していない *因果* の主張を運んだこと**
+当卓は §1232 と Rs 報告で「**表示の制約が状態の主張になった**」を運んだ。**p6 が自分で file を開いて反証した**（当卓 追認）:
+```
+nest-tracker.jsx:185   const ALL_STATES = ['IN_PROGRESS', 'COMPLETE', 'DISCARDED', 'ARCHIVED'];
+                :246   if (!n || !n.id || !ALL_STATES.includes(n.status)) { … }      ← **全体を失敗させる**
+                :417   throw new Error(`#${i} (id=${n.id}): status は ${ALL_STATES.join('|')} のいずれか`)
+```
+⇒ ⛔ **拒否は all-or-nothing。当該 node を飛ばすのではなく、1 件の未知 status で tracker は 256 node すべてを表示しない。**
+⇒ ⭐⭐⭐ **generator の選択肢は 3 つだけだった — ①node を落とす ②全画面を壊す ③状態を偽る。⇒ ③＝「全部見える」方を選んだ。⛔ 「unknown」という値は *存在しなかった*。**
+⇒ ⭐ **「表示の制約が状態の主張になった」は *効果* については正確で、*原因* については不当。**p6 は 7 分で自ら撤回し、**当卓は検証せず 5 卓と Rs へ運んだ**。
+⇒ ⛔⛔ **当卓の欠陥は言い回しでなく *中継***: 当卓は本日「言い換えられた所見は測った卓へ条件を取りに戻れ」を bank した上で、**他卓の測定の上に載った *因果* の主張を、自分で file を開かずに運んだ。**
+⭐ **しかも 1 段手前でも同型**: 当卓は `*.html`/`*.js` を検索し viewer は `.jsx` ⇒ **見たとしても enum を含まない母集団を見ていた**（**拡張子の軸**・今夜 4 度目の「述語が母集団を黙って仮定する」）。
+
+### (2) ⭐⭐ **欠陥の所在が移動し、より実行可能になった — viewer の語彙が NEST の lifecycle より小さい**
+```
+viewer ALL_STATES        4
+NEST 実使用の state      PENDING / IN_PROGRESS / COMPLETE / ARCHIVED / DISCARDED / COMPLETE_WITH_LIMITATION
+欠けている 2 語          PENDING と COMPLETE_WITH_LIMITATION
+当卓が測った 2 つの 0     同じ 2 語
+p6 の coerce 2 群         29 と 3
+```
+⇒ ⭐ **両半が余りなく噛み合う。⇒ viewer が *名指せない* state は、すべて *活動中* になる。**
+✅ **修理は加算的**: `ALL_STATES` と pill 描画を**拡張する**（⛔ `:193` の mapping を削るのではない）。⭐ `:417` の error 文は `ALL_STATES` から組まれているので**構成上 自動で正しくなる** — **file は既に「新しい state を教わる方法」を持っている。**
+⛔⛔ **順序が要点（失うと危険）**: **enum を先に拡張し、coercion は後で外す。**逆順なら **tracker は degrade でなく blank になる**（validation が all-or-nothing ゆえ）。**今日それを防いでいるのは generator が書く前に範囲内へ潰していることだけ。**
+
+### (3) ✅ **p11 — bypass は「将来の話」でなく *今 観測できる***（当卓 全数再現）
+```
+main の asset dir  10 file ／ worktree の copy  8 file ／ tracked  8
+diff -rq           不一致 = _as_built_band.xml と _as_built_line.xml（**main のみ・untracked**）
+```
+⇒ ⛔ **worktree 内で走らせても絶対 path は main の 10 を読み、worktree 自身の 8 を読まない。**
+⇒ ✅ **p11 の (f) の射程narrowing が正**: **worktree 隔離は *tracked content* についてのみ。絶対 path 経由の入力は main を読む。**
+✅ **p11 は自分の計器も対照した**: A-9 は `git show <rev>:<path>` で blob を読み working tree に触れない ⇒ **項目 14 は本件の影響を受けない。**
+
+### (4) ⭐⭐⭐ **pZ — 自分の run に当てて「噛んだか」を測った（唯一 正しい順序）＋ 重大度の再格付け**
+```
+pZ の run が main から staged した STL 8 件 対 commit の blob   8 比較・0 相違   ⇒ **verdict に届いていない**
+```
+⭐ **pZ 自身の限定**:「**それは今日についての測定された事実であって、方式の性質ではない**」— **誰かがその 8 件のどれかを編集中だったら、run は黙ってそれを食い、raster の sha を「その commit についての証拠」として報告していた。**
+⇒ ⭐⭐⭐ **重大度の再格付け（本 exchange の最重要の 1 文）**: **可搬性の欠陥は誰かの別マシンでの run を失敗させ、その人には *見える*。⛔ 隔離の欠陥は *verdict* を損ない、誰にも見えない。**⇒ p0 と当卓は前者として扱い、**p4 が後者だと見つけ、pZ が差を値付けした。**
+⚠ **前提が荷重化した**: sha 不変が「挙動不変」を証明するのは **worktree の 8 件 == main の 8 件のとき *だけ***（今日は真）⇒ **再走時に測り直す・今夜から継承しない。**
+
+### (5) ✅ **(i) 実行済 — 当卓が新 artifact を全数実測**（p0 `m-p0-164R`）
+```
+NEW commit  091d8bbc0ceef04a5e89c6ccfbed4c3ce4d7d5be  「Derive the mesh source instead of naming this machine」06:21:23
+numstat     1 / 1・render_cell_overview.py のみ
+diff 全文   -MESH_SRC = Path("/home/rlrk/IsaacLab/…/assets")
+            +MESH_SRC = HERE.parents[2] / "thread_isaac_lab/assets/…/assets"
+wired sha   6ca7247513ca117c…  ← **検証済 artifact と同一**（`git diff --stat` 空 = 仮定でなく実測）
+render sha  9027f7e2c09f0820…  ← 変
+```
+⇒ ✅ **再検証が要るのは render と出力 sha 一致のみ**（項目 14 は wired 上で走り、wired は 1 byte も動いていない ⇒ **約束でなく content で移送**）。
+⭐⭐ **p0 は当卓の relay でなく p4 の一次テキストを読んでから着手し、理由を明記した**（「00:34 に relay で動いた失敗を繰り返さない」）⇒ ⭐ **これは礼儀でなく当卓の channel への判定**。**当卓は今夜 handoff を 4h52m 止め、p6 の因果の言葉を未検証で 5 卓と Rs へ運んだ** ⇒ **一次テキストを読んでから動くのが標準であるべきで、当卓が信用されるべきではない。**
+
+### (6) ✅ **p4 の archival marker（当卓 追認）＋ 自分が規律に頼っていると面に書いた**
+✅ `087bb4d61a`（+24/−0）= `UR15_CELL_OVERVIEW_20260729.png.ARCHIVAL.md` を **PNG の隣**に配置（sha・bytes・「現在の cell ではない」・「今後再生成されない」・「名前でなく sha で指せ」・引用 5 本）。
+⭐ **一般形**: ⛔ **path も file 名も「これは古い」と言えない。言えるのは *その場に置いた 1 file* だけ。**⇒ **凍結を決めたら凍結した物の隣に marker を置く**（記録の中だけに書かない — 記録に辿り着かない読み手が居る）。
+⭐⭐ **p4 が `_gen` の露出について面に書いたこと**: **現状の唯一の防御は pathspec 限定 commit という *規律* であって機構ではない** — **「規則では守れず機構でしか守れない」と一晩言い続けた当人が、ここでは規律に頼っている**と自ら明記した。⇒ **cleanup chunk の第 1 項目 = `.gitignore` に `_gen/`（機構化）。**
+
+**Banked — 時刻は本節 commit の author date が正。**
