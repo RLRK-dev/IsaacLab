@@ -814,3 +814,9 @@ p18 が p6 の文言を確認: assertions は **「handoff の guard contract �
 - ⛔ **穴 2 点も §10 に loud**: (a) B1 は機構未実装（attach は source に在れば黙って持ち込む・nu assert 無し ⇒ source 差し替えで ur5e 機構が再現し得る — guard は**提案どまり**・§運用24）(b) scope = p4_ur15_sim driver 系列限定。
 - §9 header の「10:30」→ **10:31:11 JST** に訂正（p18 first-hand・`m-p18-73` の保留を本接触で消化）。
 - ⇒ **standing item 更新: succession row の測定系・DoD 設計の前提は commission のみ**（B1/B2 = 裁定・実証・UR15 適用とも closed）。⛔ self-start しない。
+
+## 39. 追記（date 実測 10:50:16 系列）— **2 件の Rs 委嘱を納品**: succession DoD 設計 v0.1 ＋ item 7 取付 menu v0.1
+
+**(1) succession #18 DoD 設計 v0.1**（commission = Rs first-hand 本 session 10:4x「DoD 設計の commission を出す — 着手して」）: `P5_SUCCESSION_GRIP_DOD_DESIGN_V01_20260808.md`（91 行・sha256 `128eed32ff88c1c68e0e114dfe8c7c0741b2db50b628c248079af1d724ba601d`）。骨格 = Q4 裁定どおり（PD closed-loop・grip 保持のまま g3・C2 REGRASP 含む coverage・視覚レグ必須）。設計の中身: 段構造 = 43-step 表の Phase 境界に整列・**episode 3 値 taxonomy**（VALID-PASS/VALID-FAIL/INVALID — route 失敗と grip 失敗の構造分離）・述語は**実装済み surface に bind**（`grasped()` face gap (2,8)mm・`seated()`・pin は述語に使わない）・**leg 別分母**（L1-L6・REGRASP = L4）・conservatism 宣言・**D-list**（数値は発明せず測定手順つきで re-debate へ）・/reward-design 4 artifact を適用形で内蔵。⛔ **実行 authorize せず**（gate chain: 本 draft → #18 re-debate → impl は Rs sign-off）。
+**(2) item 7 取付 menu v0.1**（Rs「p5 に menu を組ませて」・p4 卓 10:43:48・p18 relay `m-p18-75`・**scope = menu のみ・推奨なし**）: `P5_ITEM7_MOUNTING_MENU_V01_20260808.md`（74 行・sha256 `49bd6954af0187a9fef081d0c6b9a7f2adcddfee19d00efccdf4403c862a90e8`）。family A（cell 不変: grasp −0.150/−0.200 witness +10.7・work-row +0.200/+0.250 witness +34.5/+29.5）/ B（crown 除去/0.020: best +37.5・chosen は接触 ⇒ pose-pair 選択要）/ C（0.280/20 chosen-PASS +22.7 ほか grid witness 4 点）。共通の穴 = witness≠route・**#54 部材は全数値に不含**・#57 chosen 依存・#60 crown=写真由来。settle 点 4 つを §4 に列挙。
+**(3) 両 doc とも新規 untracked ⇒ 即 bank 要**（昨夜の class）。
