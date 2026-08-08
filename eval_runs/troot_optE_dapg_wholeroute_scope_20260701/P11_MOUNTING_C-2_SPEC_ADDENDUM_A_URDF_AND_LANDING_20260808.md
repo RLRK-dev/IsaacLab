@@ -142,6 +142,22 @@ A-7b は罠の本体を「**軸の転置**」と名付けたが、**その名前
 ⇒ ⭐⭐ **より強い言い方（かつ測定済）**: 両面が共に定義する唯一の hop が **cell 側で 1/3 長い**。「carry は未確立」ではなく「**測ってあり、違う**」。⇒ A-7b の (軸, 値) 対で比べる規則は有効なまま・**「転置」という名前だけを撤回**する（1 個の例から関係全体に名前を付けていた）。
 ⚠ 本 chunk への影響 = **なし**（本 spec は cell 面のみで閉じ、task 面の clip 座標を引かない = A-7b/A-8）。本節は**引用する側**への警告。
 
+## A-9. 追記 23:4x — **pZ 項目 14 の計器を差し替える**（A-8 の項目 14 は本節が supersede・発見 = pZ / 回付 = p18 m-p18-116・決定 = p11）
+
+**pZ が指摘した 2 欠陥（当方で確認・いずれも成立）**:
+1. **領域行は主張を運べない**: A-8 自身が引いた目標の出所（`:91` / `:1121-1122` / `:2625-2626`）は **どれも窓 2639-2760 の外**。⇒ 例えば `:2625`（窓の 14 行上）で mounting 定数が目標へ入っても、領域 scan は**見ない**。confinement を支えていたのは領域行ではなく **file 全体での局在**だった。
+2. **anchor が使う瞬間に腐る**: 項目 14 は「landing 後に同じ 2 行を再実行」と書いたが、**diff は行を挿入する** ⇒ literal `2639-2760` は別のコードを指し、**0 を返し続けながら別物を測る**。
+
+**差し替える形（当方で実装・実行済。literal 行番号を述語に持たない）**:
+- **対象語**は spec の mounting block から**機械導出**（`ur15_cell_spec.py` の柱・冠・ヨーク系 10 語 = `YOKE_SPREAD` `TILT` `CROWN_R` `CROWN_ZC` `CROWN_Z0` `SHOULDER_HEIGHT` `COLUMN_R` `COLUMN_HZ` `COLUMN_STEM_BOTTOM` `COLUMN_STEM_H`）。⚠ 作業列・什器（`REST_*` `TABLE_*` `FLOOR_*` `WORK_ROW_DY` `HOME_POSE`）は **mounting ではない**ので対象外（本 spec が触れない＝pZ 項目 6 の領分）。
+- **目標計算行は内容で特定**（`^\s*(Z_SEAT|GL|GR|LX|LX2|RX|RX2|RX_MID)\s*=` の代入行 ＋ 「`STEP table`」を含む行を anchor にした直後の連続する `(N, …` 行）。**実測でこの述語は `:91 :1121 :1122 :2625 :2626 :2642` と step row 17 本を捕捉** ⇒ **欠陥 1 の穴を塞ぐ**。
+- **判定**: file 全体を語ごとに走査し、**目標計算行に mounting 語が 1 つも現れないこと**。**実行結果（本 session）= 違反 0**（whole-file 出現数 = YOKE_SPREAD 5 / TILT 4 / CROWN_R 7 / CROWN_ZC 2 / SHOULDER_HEIGHT 3 / COLUMN_R 3 / COLUMN_HZ 2 / COLUMN_STEM_BOTTOM 2・**いずれも in-target 0**）。
+- **語ごとの対照**: whole-file 出現 0 の語は「目標に無い」と「file に無い」を判別できない ⇒ ⚠ **実測で `CROWN_Z0` と `COLUMN_STEM_H` が 0**。**import block を内容で特定して確認 = 両語とも未 import**（対照 = 他 6 語は import 済）。⇒ この 2 語は **構造的に不在**（探索の失敗ではない）と**別立てで記録する**。
+⇒ **pZ 項目 14（改）**: landing 後に**この形**（内容 anchor・whole-file・語ごと対照・未 import の別扱い）で再実行し、**違反 0 と各語の出現数、および anchor が見つかったこと**を rc とともに記録する。
+
+⚠ **A-8 の substance は不変** — confinement は成立する（違反 0）。壊れていたのは**それを landing 後に示すはずだった計器**であり、pZ が**載る前に**走らせて見つけた。
+⚠ **私自身が本節を書く途中で同型を踏んだ（記録）**: import block を `^from ur15_cell_spec import \($` で探して**全語 NO** という一貫した偽を出した（実物は行末に `# noqa` があり `$` が当たらない）。**IndexError が偶発的な対照になって気づいた** ⇒ 上の最終形は **anchor 不在で assert・imported-YES 数 > 0 を対照として印字**する。
+
 ## A-5. 出所の等級
 
 - 全て第一手（本 session 実測）: `ur15_cell_spec.py:99-100`・`ur15_steps_wired.py:1130/:1136-1138/:1972/:2002/:2025/:315/:2418/:2456`・`ur15_mj.urdf:3` と `<limit>` 6 行・`git ls-files`/`rev-parse`/`sha256sum`・公式 `config/ur15/joint_limits.yaml`・`urdf/ur.urdf.xacro` の存在・`urdf_work` の不在。
