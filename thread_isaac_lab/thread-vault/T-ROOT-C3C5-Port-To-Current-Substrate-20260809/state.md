@@ -88,6 +88,7 @@ spec_version: LTM-1 v1.2
 - **事実**: 本 node の port 対象 driver family に**駆動状態 `d.qpos` への直接書込**がある。腕関節と確証済 = **5 site**（`ur15_route.py:220`/`:229`・`ur15_steps_wired.py:2388`・`ur15_yoke_video.py:120`/`:129`）。全 scope（repo 全体 75 site / 16 file・駆動 `d` 16 site / 10 file）・型の区別・分類の限界は **DDR #66 が正**。**Rs へ escalate 済**（m-p18-212→214）・⛔**全 site 誰も触らない**。
 - **効き方**: **Rs 裁定まで、本 file 群に依存する work は [DEFER-RECON] で #66 を照合**してから進む。⛔**起動条件は変えない** — §4 表の p4 裁定・front matter とも不変（`blocker` 欄への昇格は p4 の court）。
 - ⚠ **判定様式への効き**（p5 の帰結・#66 に記録）: 開始姿勢は `ur15_steps_wired.py:2388` の書込で作られ、下流の `START` はそれを読む（`:2393`→`:2399`→`:2423-2425`）⇒ **goal_verification の判定で「開始姿勢は測定済」型の述語は使えない**（書けば構築により常に真）。
+- ⭐ **2026-08-09 10:3x 追記（m-p18-215・custody `ccc718d5ee:1556`/`:1563` = p6 が blob を実測・sha256 一致）**: Rs 逐語「すべて承認」は **#66 の裁定を含まない**（承認語は裁定の枝を選べない — p4 読解・fail-closed）⇒ **本 gate は不変。wired run は DoD 動画（goal_verification ③）を含めて閉じたまま**。現存する唯一の run 認可 = **KINONLY 計器**（実装 p0・検証 pZ・driver family 実行 0 条件 = 本 gate の file 群に触れない設計）。その flow 終端（p4 呼称 dep-1 CLOSE）後に **C-2 四編集が開始可** = D1（C-2 着地）の経路上の動き（⚠ dep-1↔D1 の写像は p4 未言明・写さない）。
 
 ## 4-A. DDR row 64 に FOUNDATIONAL tag を付けない（p4 裁定 2026-08-09 06:08・p6 は従う）
 
