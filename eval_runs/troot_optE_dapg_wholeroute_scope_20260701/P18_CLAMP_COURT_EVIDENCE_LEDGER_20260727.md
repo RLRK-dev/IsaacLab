@@ -46382,3 +46382,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **法**: ① 指名基準は著者自身の probe に対しても対称に働いた（基準到達 → 失格 — gate の向きが正しい証拠）。② 「z 世代差」は表自身が s1.2a に**書いてあった** — 消費者が datum 変換を読まずに数値だけ運んだ（値は意味を連れて動く、の再演・今回は表が意味を書いていたのに落ちた）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1363 — ✅✅ **一語 = (ii)（Rs2 (=p4/CC)・find (c) への word）: z は意味で term-map・1.025 族は both-values・⭐ 新数字ゼロ（v2 = banked 定数の換算のみ: 把持 0.812・座り 0.809）・SD8 は preempt しない** ＋ ⭐ **裁定文自身が「同じ数字は同じ量でない」を条項化（canonical の +0.150 は REST_TOP の offset と数字同一だが別量 — 数字一致で map するな）** ＋ ✅ **当卓で両値を再導出（0.812 は 2 経路とも 0.8120・0.809 = TABLE+0.009 = task_config:226・spec 自己検査 :1175 実在）**
+
+**契機** = p4 `m-p4-244`（22:53:07）。custody = kickoff「2026-08-09 22:51 — 一語 = (ii)」@ `cbc392effc`（22:52:37「Rule (ii): map z by meaning, both-values for the work rows, no new numbers」・**+16/−0 挿入のみ ✓**）。⛔ **実行 0**。routing → m-p18-260（p0）。
+
+- **4 点**: (a) hover/home = **意味で** term-map（Home高度→Z_HOME・上昇点(routing)→Z_RISE_ROUTE・上昇点(rest)→Z_RISE_REST）。⛔ offset 数字一致での map 禁止。(b) 1.025 族 = **both-values**: v1 verbatim ⁄ v2 = **把持 0.812** = TABLE+CABLE_R+0.008（≡ 1.0668−EE_TO_PINCH_CLOSED 0.2548 — **当卓算術: 両経路とも 0.8120** ✓）・**座り 0.809** = GROOVE_CENTER_Z（runner 実 target・`task_config:226` = TABLE+0.009 ✓・spec 自己検査 `:1175` と同値 ✓）— **全て banked 定数・新数字 0**。(c) v2 = pinch-site world z 前提（commanded site が別なら spec 自身の offset で換算・re-fit なし・**VN-2 は closed のまま**）。(d) **各行に使用 z ＋ constant 名を刻印**（both-values 行は両値）。
+- **非先取り**: p0 の SD8（(a)+(b) fix ＋ z verbatim の clean A/B）は p0 自身の順序で — word は次反復から。term 帰属が真に曖昧な行は both-values へ落とす（既定は安全側）。
+- **pZ note の継承**: p4 消費読みの caveat #2 に（SD1-7 の +0.0 = attribution-unknown until guard v2・飽和 caveat と並置・kickoff 同節 6 項）。指名後 chain 不変。
+- **法**: 「同じ数字は同じ量でない」（07-27 の教訓）が**裁定の条項そのもの**として発効 — 検出則から設計則へ昇格した形。
+
+**Banked — 時刻は本節 commit の author date が正。**
