@@ -2078,3 +2078,31 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 3. **表に乗る宣言済み scope（私の消費読みが明示継承する 4 つ・p0 自身の言葉）**: (i) **cable-absent scope**（jaw 内 8mm 半径 cable は sub-3mm work-row standoff を正確に変える）(ii) **straight-joint-path model**（row 2 の −115.2 は path model の値・pose 主張でない）(iii) kept-contact 残余 **6.1%**（28,640/466,830）= R1-R5 下で attribution-unknown 事前登録 (iv) v1 endpoint 全 clear（+5.7..+23.9 / +20.3..+50.8）・**TOUCHING 33/36 = endpoint∧path の連言**（cell に分解が載る）。
 4. **chain（1 run = 1 commit・hub 全検証）**: `bbc500b636`（cell+witness guard）→ `d8badd92d3`（fork (b) rules）→ `f531b019b2`（AABB bound・suspects 63%→91.5%）→ **`4f3385968f`（私の (ii) z word 消費 — 自卓照合 23:34:02「Consume z by Rs2's (ii) word: term-map, both-values, stamped」+62/-21 = 刻印要求 (d) まで実装）**→ `120746a49b`（S1 graze fix・family 別 chain）。
 5. **私の位置 = NO ACT YET**: pZ の formal leg（pZ の form・pZ の pace）→ 表が私の消費読みへ → 導出 → **4 編集 unlock**。消費読みの装備 = 9 節（10:30/10:41/10:50/10:56/11:01/11:08/16:26/17:21/19:04）＋ caveat stack（saturation は 19:04 の解除条件で fix 形を確認して読み替え・R1-R5・本節 3 項の 4 scope）。wired run = その後も Rs1 認可。台帳 1368 @ `18d74ca6e6`（自卓照合 00:17:22 +11）。
+
+---
+
+## 2026-08-10 00:58 — 消費読み完了 → 導出（在る/無い＋STEP 番号）→ **mounting C-2 の 4 編集 = UNLOCK**
+
+### (0) 手続き — 9 節再読・7 読 = 全 PASS（全て log 自読・m-p18-264 が trigger）
+
+- **表 pin（3 卓目）**: 読み時 00:54:58 に sha256 自測 — `_gen/shakedown10.log` = `2d82e0af1b…`／`_gen/kinonly_solutions.json` = `58af7ebe0f…`（p0 read-time・p18 00:16・pZ 00:19 と全一致）。pZ formal leg = **4 clauses PASS**（`PZ_LEG_120746a49b_20260810.md` @ `9dd5d3a318`・決定論 = bank byte-identical 再生成・4/4 sample 再測一致・最深 path cell 独立再導出）。
+- 7 読: ①解決 3 数 = 0.28/20.0°/0.11（log `:3`・load 済み spec module 印字）＋ WORK_ROW_DY `<unset>→0.0` 明示（`:4`）②DEV-C2X 写像 1 行宣言＋C1 陽性対照 0.0 (expect 0.0)＋clip C2 35.0 (expect 35.0)（`:28`）・C2 全行が cell/design 対 ③audit 陽性対照 = 非空（import 621・帰属つき exec/compile・Popen 2 argv 公表・system 0・**mj_step 0**・**DRIVER-FAMILY 0**）④along-path 刻印 = i/20 形式 ⑤STEP-1 行 = link 幾何（+250.9 L_shoulder↔Rg_right_pad／+51.5 upper_arm↔base — (2)v2 充足）⑥z 刻印 = 値＋constant 名・`[z]` 行に 0.812 == 1.0668−0.2548 の cross-check（**私の (ii) word 4 点とも実装済**・1.050→Z_RISE_REST の term-map も canonical `:44/:47` 自読で意味整合）⑦C2 行の候補毎導出（下記 (1)）。
+- caveat stack 適用: R1（+0.0 = attribution-unknown・17 cell 実数一致）／R2（`>=bound` = 保守 stand-in）／saturation は guard-v2 形（`>=bound` tag・ceiling 500 級の行は本表に出現せず — 19:04 の読み替え発動なし）／cable-absent／path-model／p11 3 節（pair 名・recorder≠測定・absent-is-default）。
+
+### (1) 導出 — 在る/無い＋STEP 番号（候補毎・帰属つき）
+
+- **在る（CLEAR = endpoint∧path が証明された行）**: **STEP 1**（ASSIGNED spec.HOME_POSE・+250.9/+51.5）＋ **v1(verbatim 1.025) の STEP 4・8・9**（+17.1..+19.0 arms／+20.3..+47.3 env・path は `>=bound` 保守 stand-in で正）。36 instance 中 CLEAR 3・TOUCHING 33（pZ §8 と一致・自数え）。
+- **運動学的成立（IK 解の存在）**: **STEP 2-18 全行・全 36 instance が acceptance（2.0 mm／0.02 rad）内で解けた — NOT-SOLVED 0**。「在る」の第一義（解 pose の存在）は全 STEP で立つ。
+- **無い（この計器・この budget で clear pair 空）**: 設計高さ v2 の全 work 行 — STEP 3・4 @0.812／7・8・9 @0.809／15・16・17 @0.809（両候補）= **clear-pairs 0・sel=maxmin**・endpoint 負は **pad↔table_top（−0.3..−3.5 mm）と wrist↔wrist（−0.2..−2.3 mm）**。STEP 16/17 design は env-capped R=0 で「touching は design point のもの」と行自身が言う。⚠ **この帯（sub-3..8mm）は cable-absent scope が名指すそのもの**（8mm cable が jaw に在れば正確に変わる帯・row 48 open）— 「設計が C-2 で破れる」証拠ではなく「cable 込み再測が要る」帯。**mounting 起因の負は 0 行**（mast 系 env 読みは全部正: stem +20.3..+21.3／S2 +31.1/+40.9／S1 +50.0／crown pair は負として一度も出現しない・base mounts は設計どおり除外）。
+- **TOUCHING（帰属つき残り）**: path-model 負（**STEP 2 の −115.2 = coupler↔stem 経路** — 直線 joint-path model の値・pose 主張でない／STEP 5/6/10/18 の −0.7..−19.5 = wrist↔wrist 系）＋ **kept-zero 17 cell**（16 path + 1 endpoint〔15-design-v2 arms +0.0 base_mount 対〕= attribution-unknown・R1 で保守的 touching・証明された接触ではない）。
+- **候補間（DEV-C2X）**: C2 8 行 × 2 候補で **verdict 型は完全同型**（割れたのは margin のみ・例 +3.6↔+13.6）⇒ **本表は 35mm 未裁定を裁定せず、成立性も割らない**（D-8 未裁定のまま進める形が成立）。
+
+### (2) 導出文（pre-registered form・逐語 scope note 込み）
+
+> 本表は **commanded path を sample** した（followed trajectory は mode-A = 未測・端点は sampler 設計上除外 precedent `:1342`）。**cable は不在**（row 48 open — 本表が覆うのは arm/arm・arm/clip・arm/table・arm/column のみ）。**運動学的には STEP 18 まで成立**（全 36 instance 解得・NOT-SOLVED 0）。**追従の成否は未測（近傍では STEP 2 で 0.0%）**。clearance の証明された CLEAR は STEP 1・4(v1)・8(v1)・9(v1)、設計高さ work 行の負は cable-absent 帯（pad↔table／wrist↔wrist・≤3.5mm）に住み、mounting 起因の負は 0。
+
+### (3) 判定 = **UNLOCK（4 編集を implement chain へ渡す）**
+
+1. **C-2 採択は既決**（Rs 委任下 settle・design spec `:11`「本 spec の仕事は C-2 を実装可能な形に落とすこと」）— 本導出はその evidence gate であり、**表は mounting 起因の閉塞を 1 行も示さない**（crown 負 0・mast 系全正・base mounts 設計どおり除外・比較 track で 3+1 行の完全 CLEAR = cell は two-arm clear pose を許容）。
+2. **負の全帰属が mounting 以外**: cable-absent 帯（work 行 endpoint）／path model（経路設計・mode-A 未測）／attribution-unknown zeros。かつ **arm-arm は spread 0.28 で built 0.22 より広い側** — 本表の arm-arm 負は built に戻して改善する量ではない。
+3. **unlock の意味 = 編集の実施解錠のみ**: `ur15_cell_spec.py` @ `2fba2dfd67` の 3 token（YOKE_SPREAD 0.28／TILT 20.0／CROWN_R literal 0.110）＋ 根拠 comment（design spec §2・witness `SPREAD_TILT_SWEEP_TRIES240_KINONLY.txt:54`・#54 部材条件つき）。**実装 = p0 → 検証 = pZ → 着地 = p4**（micro-chunk 形・06-29 実績の等号受入）。⛔ **DoD run・wired 一切は別 gate のまま（Rs1 認可）**・dep-2 は等級 cap として継続（blocker 分類どおり進行は妨げない）・D4（C-2 配置の L-geom 未確立）と #54（部材入力後の再測条件）と stereo-head 不在条件は carry で編集の根拠 comment に同乗。
