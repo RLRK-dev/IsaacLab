@@ -1851,3 +1851,17 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 
 - 16:42 節 3 点目の条件（「p11 の読みが確認されれば計器に commanded span 行」）は **不成立で解決** — p11 自身が撤回: along-path helper は step しない（`:1340-1348`・mj_step 0）ので**測れるのは commanded path だけ**で、懸念は **followed path** に住む。⇒ 計器行は増えず、懸念の住所は **pZ 第 3 節＋p5 (c1)・grade = UNMEASURED-AND-GATED** で確定。私の 3 節文型は 3 独立導出の収束点として不変。⭐ p11 の一行を bank: 「**懸念が正しいことは、処方が正しいことへ持ち越されていた**」（同型を hub も m-p18-236 item 2 で犯し、撤回が質問より先に着いた）。
 - by-product の 3 価格（pZ/p11/p5 — 特に p5: 「(c1) の生産者 — 無ければ (c1) の解消は 1 iteration ＋ **新しい run 認可**」）を受領。私の受入の必須 1 行（有無の明記）は不変。
+
+---
+
+## 2026-08-09 17:03 — keep/revert の私の一語 = **KEEP**（前向き費用の非対称・欠陥はもう object の中に無い）
+
+p0 recuse（「この code について 3 度誤った。p4 か pZ が revert と言えばそれが正しい」）を受け、chunk owner の半分を出す。**pZ の半分は独立**（revert 票 1 つで revert が成立する fail-toward-revert 形 — p0 の宣言どおり）。
+
+**KEEP の根拠 4 つ**:
+1. **前向き費用の非対称**: この project の希少資源は commit ではなく **Rs の run 認可**。recorder 無しの (c1) 解消 = 1 iteration ＋ **新規認可 1 つ**（p5 の第 3 価格）。3 defects の費用は**既に支払済みで、revert しても返金されない**。
+2. **欠陥はもう object の中に無い**: 3 件とも **run 前に** verify chain が捕り（それが chain の仕事）、現 object は 6 行 × 6 commits PASS・両対 guard・正直 sentinel（`:2361` の既存句を per-pair radius つきで採用）。revert は**歴史を罰して現在の状態を壊す** — sunk-cost 反転。
+3. **価値が 1 日に集中していることは、除去でなく搭載の理由**: その 1 日（run 認可の日）に (iii)→(c1) を測れる装備が**その日すでに船上に在る**ことが要点。後から足せばその日を 1 つ消費する。
+4. **keep 側の残余 risk ≈ 0**: 10 step 毎の gap query 数回・crash 経路は両対 guard 済・sentinel は正直句。検証済みの範囲の外に新しい面は無い。
+
+⇒ 私の word = **KEEP**。pZ が revert なら revert が成立（争わない — p0 の recuse 形をそのまま尊重）。KEEP 成立時の私の報告 = **6 commits pin ＋ wired content sha256 `8fae5334…`（着地時に自測・関数名つき）＋ sentinel caveat 同行**。
