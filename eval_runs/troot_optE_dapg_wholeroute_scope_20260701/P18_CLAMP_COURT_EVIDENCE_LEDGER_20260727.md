@@ -46133,3 +46133,15 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **不変**: 閉じた report の 4 値は全て真に内側・scoping は正のまま。診断の意味も不変 — **計器の将来の読み**にのみ効く。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1340 — ✅ **p6 の row が chain を閉じた（6 commit を merge-base で自卓確認・arc 数値・S4-B gate 解除〔not-a-DoD-unlock 文つき〕・全記録を歴史として保存）** ＋ ⭐⭐⭐ **p11 の §14.27 突合③（Rs 指示）: 裁定①の指す site は 12（59 でも 33 でもない — AST node を site と同一視していた自己訂正）— そして servo 経路は仮説でない:「同じ関数の中で gripper が既にそれで動いている」（腕を外すのは index 集合 1 つ）— ⚠ ただし「はず」≠「済み」: env 側の腕 servo 配線は 0**
+
+**契機** = p6 `m-p6-140`（17:21:06・`9f53bb7d39`）＋ p11（17:21:10・`684c4373f7` 88 行 sha 一致・route_executor `:1814-1817` 逐語 当卓確認「overwrite ONLY the arm coords; leave the gripper coords DYNAMIC so the servo drives them via control.joint_target_pos」）。⛔ **実行 0**。
+
+- **p11 の数の自己訂正**: AST 59 node → **REBIND 26（読み）＋ SUBSCRIPT 33（書き）**・33 = **腕姿勢 12** / 速度ゼロ化 16 / gripper 2 / 混在 3 ⇒ **裁定①の対象 = 12 site・全て同一形**（prohibited.md の「FK→physics 複写」逐語そのもの — 1 site 例外の読みは形の上で不成立）。用途 4 群（A reset 5 / B 毎 step 4 / C banked 復元 1 / D fixture 3）。
+- ⭐⭐⭐ **構造による裁定①の裏づけ**: gripper は同じ関数内で servo 駆動済み — **腕の除外は `_ARM_OVERWRITE_LOCAL` 1 集合**・servo 経路の実在 19 file。⇒ 「すべてコントローラの司令で実現できるはず」は**コードの構造が言っている**。⚠ **配線は未実施**（`ARM_PD_DRIVE` は probe 3 file のみ・envs/ に 0・対照つき）。
+- **③の答えの形**: A+B の 9 site = servo 化が筋／C(1) = **Rs の境界**（復元 ≠ 駆動・keyframe 同型）／D = fixture は**上書き機構の試験**なので servo 化すると試験対象が消える／速度ゼロ化 16 は従属。⛔ **「delete で足りる」site は 0**（今日の wired の教訓と同型 — 消せば腕が無駆動になる）。
+- ⛔ **bank しない規律の維持**: ②dead/live が空く限り disposition は条件つき（dead なら削除になりうる）・site 一覧は AST 1 機構（alias 不可視）— 「1 機構で不在を主張しない」。**残る bank 条件 = ②（測定・p11 の court でない・owner 未定）＋ C の境界（Rs）**。
+- p6 の閉鎖 row: 6/6 merge-base・arc 数値・「閉鎖で何も走らない」リスト・残 site 分類 = OPEN・non-gating・snapshot C3 OK。
+
+**Banked — 時刻は本節 commit の author date が正。**
