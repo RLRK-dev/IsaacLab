@@ -1509,3 +1509,40 @@ m-p18-212 で **(a) placement = p4 確定**（scope = 「build 毎に何が buil
 - **dep-3 が gate するもの**: `ur15_steps_wired.py` を走らせる一切（**DoD 動画を含む**）。**gate しないもの**: C-2 の 4 編集（別 file: `ur15_cell_spec.py`/`sweep_mounting.py`）・(a) 納品（本節 §A・静的文）・dep-1（p5 レグ）。
 - dep-1 追記: p5 は「**43-step は前提に *成功条件経由で* 依存する**」と別途回答済（m-p18-212 末尾）— 工程表整合レグ（C-2 幾何）とは別答・期限 18:00 不変。
 - 動かさないもの: HOLD／run 0（本節も全て静的 read）／04-Specs・07-Design 不触／C-2 4 編集未着手（`2fba2dfd67`/`2bb1aad4e7`）。
+
+---
+
+## 2026-08-09 10:15 — dep-1 gate 裁定（p5 の第 3 の答えを受理・計器を条件付きで leg 充足と認める）＋ dep-3 の射程を実測で答える（「banked 経路」は wired 実行だった）＋ 私の scratch 主張の訂正
+
+m-p18-214 が p4 に 2 決定を求めた: (i) p5 が名指した KINONLY 測定は leg を満たすか・chunk 内か、(ii) dep-3 はそれに届くか（明示せよ）。以下、全て自測に基づく。
+
+### §A — dep-1 裁定: p5 の納品を **受理**（第 3 の答え）・提案計器は **条件付きで leg 充足**
+
+1. **受理**: p5 の per-STEP 回答（bank `9679a6156b` §4c・10:08:49・期限より 9 時間早い）は、私の二択（無い／在る＋番号）の**どちらも根拠なしには言えない**ことを STEP 毎の測定で示した。⭐ **「整合を確認した」型の不合格形ではない** — 測定が在って、二択が閉じないことを測定が示している。⇒ **p5 の債務 = 履行済**。期限 18:00 は消費された（早納）。
+2. **STEP 1 の扱い（p5 の帰結を計器仕様に折り込む）**: STEP 1 は「pose が書かれる」ことで**構成上真** ⇒ 計器の STEP 1 行は **存在でなく「assigned pose が C-2 で collision-free か」を測る**（別の結果が出得る述語に差し替える）。
+3. **計器の受入条件（成果形・私が gate owner として置く）**: 出力 = STEP 1–18 の各行に **solved ／ collision-free（最接近 mm）／ arms-closest（mm）／ 探索予算（restarts・iterations・seed）**。加えて (α) artifact が**自分の限界を自分で公表**する（sweep file がやったとおり）(β) C-2 の指定は **committed tip ＋ env override**（`2fba2dfd67` + `YOKE_SPREAD_OVERRIDE=0.28` 等）で行い、code sha と env 値を両方 pin（4 編集の先行着地を要求しない）(γ) mounting witness を引くときは **tail 表記を伴う**（下記 §D）。
+4. **chunk 内か**: **内** — 私が張った gate の検証計器・記録 artifact を 1 つ産むだけ・編集対象 2 file に触れない・route 動力学なし。⛔ ただし §B の形態条件を満たす場合に限る（banked 経路の再利用は「計器」ではなく wired 実行 — 下記）。
+
+### §B — dep-3 の射程（明示・実測ベース）＋ 私の shipped 前の自己捕捉
+
+1. ⛔ **「banked sweeps と同じ KINONLY 経路」は wired の実行である**（実測）: `sweep_mounting.py:100-101` 逐語 `subprocess.Popen([PY, "-u", "ur15_steps_wired.py"], …)`。sweep は wired を **点ごとに subprocess 起動**し、interleave 行（wired `:2359`）を parse する。p5 の逐語「stopped **after the start-pose lines**」＋ 行順（`:2359` interleave → `:2386-2393` HOME seed = **`:2388` を含む**）⇒ **banked 経路の 1 点実行は、escalated site `:2388` を実行する**。⇒ ⭐ **dep-3 は banked 経路の再利用に届く。届かない形は新造の自己完結計器のみ。**
+2. **自己捕捉（shipped 前）**: 私は届く/届かないの述語を「**import closure** に driver 一族が入るか」で書きかけた。⛔ **subprocess は import 解析に映らない** — `:100-101` の実測が出荷前に捕らえた。⇒ 述語を行為形に直す: **「driver 一族（wired/route/steps/reaim/c1seat）の file を、いかなる機構（import・subprocess・exec・runpy）でも実行させるか」**。p11 の教訓（行為に付け、名前に付けるな）の、p18 が「1 層内側で未適用」と言った層の**さらに 1 層内側**で同じ形が出た。
+3. **dep-3 に届かない計器の形（受入条件・成果形）**: (i) 実行させる file = 自分と `ur15_cell_spec.py`（定数・XML）のみ — driver 一族の実行 0（上記行為形述語で検証・陽性対照つき）(ii) **mj_step 呼出し 0**（純 FK: `mj_forward` ＋ `mj_geomDistance` のみ）(iii) 自前 MjData は一度も step されない。
+4. ⚠ **私が裁定しないこと（class の開示義務だけ置く）**: この計器の方法（候補 qpos を step されない MjData に書いて FK 評価）は、**Rs の前に在る shape-2 と同じ行為 class**。⇒ **run 申請にこの class を明記して出す** — Rs が行為を見える状態で認可する形にする（後から発見される形にしない）。run 認可は Rs（p18 と同じく、私は求めていない）。実装 owner 提案 = p0（chain どおり）・**着手も run 認可後**（計器は走らせる以外の用途がないので、実装と run を 1 認可に束ねて申請するのが最小）。
+
+### §C — ⛔ 私の §B1（10:04 節）の訂正: scratch は「IK 作業域」だけではなかった
+
+- p18 の指摘（live/scratch を**受け手の名前**で分けている）を act で再測: wired の `mj_step` 受け手 census = **10 site 中 6 が scratch**（`:690 :711 :735` sc / `:2691` sc / `:2861` _sc / `:3278` _sv）。⇒ ⛔ **私の「scratch = IK solver 作業域（FK 評価）」は過小記述** — 6 site は **影 rollout**（PREDICT_S/SETTLE_S の動力学を側コピーで走らせ、seat 予測・jaw 軸・release 開口・隙間解を測る）。
+- **live への還流は「決定」のみ**（返り値 = 点・軸・距離。live `d.qpos` への書込は依然 `:2388` の 1 箇所・scratch→d の state 複写 0 — 既測）。⇒ **第 3 の形「影の動力学」**として、7 site の class 一覧の隣に置かれるべき事実（裁定は Rs）。
+- ⭐ 教訓は同じ 1 本: **名前（sc）で分類した瞬間に、その名前の中の行為差（FK だけ／step する）が見えなくなる。**
+
+### §D — 台帳更新・採用 1 件
+
+| id | 状態 10:15 |
+|---|---|
+| dep-1 | **p5 履行済（第 3 の答え・9h 早）**。残 gate = 計器（§A3/§B3 の条件・owner 提案 p0）＋ **run 認可 = Rs**。旧期限 18:00 = 消費 |
+| dep-2 | 不変（spec 着地待ち・cap 維持） |
+| dep-3 | 不変（Rs 裁定待ち）— **射程を明文化**: banked sweep 経路（wired subprocess）に**届く**／§B3 形の新計器に**届かない** |
+
+- **採用（p18 rider）**: 私の記録が C-2 の start-pose witness PASS を引くときは以後 **「240 draw で L 5/240（2.1%・tail 事象）」を併記**する。bare PASS は探索費用を落とす。
+- 動かさないもの: HOLD／run 0（本節も全て静的 read）／C-2 4 編集未着手（`2fba2dfd67`/`2bb1aad4e7`）／7 site 不触／04-Specs 不触。
