@@ -1546,3 +1546,40 @@ m-p18-214 が p4 に 2 決定を求めた: (i) p5 が名指した KINONLY 測定
 
 - **採用（p18 rider）**: 私の記録が C-2 の start-pose witness PASS を引くときは以後 **「240 draw で L 5/240（2.1%・tail 事象）」を併記**する。bare PASS は探索費用を落とす。
 - 動かさないもの: HOLD／run 0（本節も全て静的 read）／C-2 4 編集未着手（`2fba2dfd67`/`2bb1aad4e7`）／7 site 不触／04-Specs 不触。
+
+---
+
+## 2026-08-09 10:25 — Rs「すべて承認」の受領・執行範囲の確定（⚠ 承認語は裁定枝を選べない — 読みの限界を明記して執行）
+
+### (0) 受領 custody
+
+- **Rs 逐語**: 「**すべて承認**」（2026-08-09 10:2x JST・本 session 直答・私が直接受領 — relay ではない）。
+- 直前に Rs の前に在った私の 3 項列挙（10:18 報告逐語）: 「① `:2388`＋class 裁定 ② (c) placement ③ 計器の実装+run 認可」。
+- ⭐ **開示条件は満たされた状態での承認**: ③ の申請文はすでに act-class（shape-2 と同 class）を明記していた（10:15 §B4・10:18 報告に逐語）。⇒ **Rs は行為が見える状態で承認した。**
+
+### (1) 読みの限界（⚠ loud・ここが本節の要点）
+
+- **「承認」が執行できるのは認可形の項のみ。** ③（計器の実装＋run・1 認可に束ねた申請）= **認可された**。
+- ⛔ **① は執行しない**: `:2388`＋class は**裁定**（breach ／ 例外内 の枝選択）であり、承認語は**枝を選べない**。「すべて承認 = 現状の 7 site を是認（例外内）」の読みも可能だが、その読みで dep-3 を開けると **誤読 1 つで wired run（DoD 動画）が解禁**される — 費用が非対称ゆえ狭い読みを取る。⇒ **dep-3 = open のまま・wired を走らせる一切は引き続き gate**。Rs が例外内の意なら一語（例:「:2388 は例外内」）で開く。
+- ⛔ **② も執行しない**: (c) placement は **owner 名**が要る。承認語は名を運ばない。(c) = 無主のまま（Rs の一語で置ける）。
+- 🔶 **C3-C5 chunk の開始**も「すべて」に含まれ得るが、同 chunk の D1（C-2 着地）が未充足のため**どの読みでも今は動けない** — 起票済・PENDING のまま（この行は inference と明記）。
+
+### (2) 執行 — ③ 計器 commission を p0 へ（p18 経由・本 turn 発送）
+
+| 欄 | 内容 |
+|---|---|
+| owner | **p0**（実装）→ **pZ**（実装検証）→ run → **p4**（表から dep-1 の文を導出） |
+| 認可 | **Rs「すべて承認」10:2x**（実装＋run を 1 認可・act-class 開示済みの申請に対して） |
+| 受入条件（成果形・10:15 §A3/§B3 の再掲＋運用 2 点） | (1) per-STEP 表: STEP 1–18 各行に solved／collision-free（最接近 mm）／arms-closest（mm）／探索予算（restarts・iterations・seed） (2) **STEP 1 行 = assigned pose が C-2 で collision-free か**（存在述語は使わない） (3) C-2 指定 = committed tip `2fba2dfd67` ＋ env override（`YOKE_SPREAD_OVERRIDE=0.28` / `TILT_DEG_OVERRIDE=20` / `CROWN_R_OVERRIDE=0.110`）— code sha と env 値を artifact に両方 pin (4) **自己完結形**: 実行させる file = 自分＋`ur15_cell_spec.py` のみ・**driver 一族（wired/route/steps/reaim/c1seat）の実行 0 をいかなる機構（import・subprocess・exec・runpy）でも**（行為形述語・陽性対照つきで artifact に記載） (5) **mj_step 呼出し 0**（純 `mj_forward`＋`mj_geomDistance`）・自前 MjData を一度も step しない (6) artifact は自分の限界を自分で公表（探索予算が結論の一部） (7) 実行 = `/home/rlrk/env_isaacab7/bin/python`（⚠ 正: `env_isaaclab7`）・CPU で足りる・版 4 つ組を artifact に記録 |
+| dep-3 との関係 | **届かない**（(4)(5) が満たされる限り）— 10:15 §B3 の測定済み判定。⛔ (4) が破れた形は banked 経路と同じく wired 実行になり dep-3 が gate する |
+| 完了条件 | pZ verify PASS → run → 表 → **p4 が「在る/無い＋STEP 番号」を表から導出して dep-1 CLOSE** → p0 は C-2 の 4 編集に着手可 |
+
+### (3) 台帳（10:25）
+
+| id | 状態 |
+|---|---|
+| dep-1 | **計器 認可済**（Rs 10:2x）。p0 実装待ち → pZ → run → 表 → CLOSE。p5 は履行済のまま |
+| dep-2 | 不変（spec 着地待ち・cap 維持 — 「承認」は新文言の着地ではない） |
+| dep-3 | **open のまま**（(1) の狭い読み）。wired 実行は引き続き gate（DoD 動画含む） |
+
+- 動かさないもの: C-2 4 編集（計器の表まで未着手のまま `2fba2dfd67`/`2bb1aad4e7`）／7 site 不触／04-Specs 不触／DoD の evidence-grade cap（#48 系 = spec 着地まで・#18 別軸）。
