@@ -46417,3 +46417,16 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **状態**: SD8 の env 列は無効・行は有効。次 = 規則 2 本の下で env 列が生きた shakedown → (ii) 反復 → 基準充足で指名。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1366 — ✅✅ **Rs1 (the human)「止まっている、すすめて」（23:0x）→ Rs2 (=p4/CC) が保留していた設計 court word を発行: build は mounting 設計に一致・overlap は designed engagement・fork = (b) — ⭐ p0 の 23:02 自己解決と両 court 独立合流（p0 = cell spec の文・p4 = mounting SSOT の数値 1.550 ≥ 1.530・+20 mm）** ＋ ⭐ **p4 の scope 2 条項が新規 operative（① 除外形 = 「固定 base を L/R set から外す」・⛔ crown を env から外す形は不可〔spec :56 family B 却下〕② −79.2182 の深さは設計 parameter でない — set fix 後の attachment 非跨ぎ残余 = 本物の読み）** ＋ ⭐ **p4 見出し自認「保留自体が blocker になった」**
+
+**契機** = p4 `m-p4-245`（23:09:42）。custody = kickoff `:2055` @ `120c15ef7a`（23:09:18・+10/−0 ✓）。⛔ **実行 0**。routing → m-p18-262（p0 operative・p4 reconciliation・pZ FYI — 配達 3/3・p0/pZ は末尾実読で確定）。
+
+- **再接地の中身（§1361 法の適用 2 回目）**: p4 の依頼は fork を未決として書くが、**p0 が 23:02:24 に (b) を自己解決済**（d8badd92d3・p4 へ cc 済 — 相手の pane はまだ ingestion していなかった: Rs1 発話時点の idle 実測は正・その後 p0 が動いた = relay lag・矛盾なし）。⇒ 配達は「word の確認＋**新規分 = scope 2 条項のみ**」の形 — 決着済 fork の再審理を運ばない。
+- **合流の質**: p0 = cell spec :421-424 の文（「届かない head は何も担いでいない」）／p4 = mounting SSOT の数値（crown top 1.550 ≥ mounts 1.530・取付点 [±YOKE_SPREAD,0,1.53]・crown 軸 1.440/R 0.110・built と C-2 縦幾何同一）。**2 court・2 計器・同一結論** — in-flight 合流の 3 例目（(i) の p0×pZ・§1357 ／ 命名の 4 卓 ／ 本件）。
+- **scope (i) の遵守観測（当卓が配達に添えた形）**: p0 の landed 規則は weld partition（base → 構造）＋ ancestor 除外で、**crown は env に残存** — smoke の L/R-env +51.5 が「upper arm vs mount」= crown/mount が動 link に対し測定継続中、という観測を添え、**一語の遵守確認**を p0 に求めた（当卓が代わりに宣言しない）。
+- **scope (ii)**: −79.2182 は base geom 形状 × capsule の合成であって設計値でない — set fix 後の残余 overlap（attachment を跨がないもの）は**本物の clearance 信号**として扱う。
+- **readback 実務の追記**: 送信直後の probe は render と競合する — 数秒内の miss は「未 render」であり、待って再読してから分類する（今夜 2 回目の同型・規律自体は機能: miss → UNKNOWN → 実読・blind re-send 0）。
+- **状態**: p0 の一語（scope (i) 遵守確認）待ち → 再開（生きた env 列 → shakedown → (ii) 反復 → 指名）。認可・lock 全不変。
+
+**Banked — 時刻は本節 commit の author date が正。**
