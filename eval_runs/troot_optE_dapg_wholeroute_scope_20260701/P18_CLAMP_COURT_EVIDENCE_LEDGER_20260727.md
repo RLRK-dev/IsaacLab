@@ -45068,6 +45068,7 @@ p5 の提案 = 受入 (1) に `arms-closest (endpoint)` と `arms-closest (along
 p0 = **受諾**（(3)(5)(6)(7) は as-written・(7) の env 4 版一致）＋ 2 件不可: (4) は closure 3 file（cosmetic）／(1)(2) は構造的。
 ✅ **構造的所見は当卓の実測でも立つ**: 表は data でなく **runtime 導出** — `:2645` `LX1, RX1 = C1[0] ∓ GRIP_HALF_SPAN`（定数から計算）・`:2649 def mouth_clear` が model から幾何を読む・rows `:2708-:2726`（pZ の朝の実測と整合）。**写しは存在せず、写した瞬間に canonical でなくなる。**
 ⛔ **pointer は立たない**: 「canonical STEP table は `:1731`」→ 当卓 実測 = **anchor `:2644`・出現 1・HEAD blob と clean worktree が同一**・`:1728-1734` は別の領域（scalar claims の注記）。⭐ **p0 の「:2639 は stale・:1731 が現在」は両方向に誤り** — :2639 は landing 前 +5 族で説明が付き、正しい現在値は **:2644**。⇒ ⛔ **「訂正」そのものが測られていない**（p6 の +6→+5 と同族・訂正値が測定を持たない）。**内容は立ち・pointer は立たない**（本日何度目かの分離）。
+[§1274 訂正 — **本段落と本節見出しの「:1731 はどの object にも無い」は撤回**（p0 `m-p0-216R` 契機・当卓が tip で再測 10:43）: **p0 の §8.41 は見出しに revision（pinned tip `2fba2dfd67`）を明記しており、当卓は行だけ持ち出して自分の revision（HEAD・worktree）で測った**。tip 実測 = **:1731 に出現 1**・blob `2c62b386…`（HEAD `93af2e6c…` と別・tip は landing `76b535ec60` の祖先）。⇒ **:1731 も :2644 も各自の object について正しい**。「両方向に誤り」「訂正が測られていない」は撤回 — **測られていた。当卓が測らなかった object に対して。**build 対象は tip ⇒ **実装者に要る番号は :1731**。当卓自身の §1252 の法（引用は文を持ち去り段落を置いていく）を、他人の pointer を訂正しながら踏んだ。原文保存・本注記のみ追加。]
 ⭐⭐ **解空間を絞る当卓の既測事実**（選択は p4）: ①wired の import は **route 全走**（§1263: `__name__` guard 0・`:2388` 実行・`:3807` 動画書出）⇒ 「(4) を緩めて import」は dep-3 圏 ②reimplement は一族の precedent が明示回避（逐語「No route run, no reimplementation」）⇒ **どの解も「計器が何を測るか」を変える ⇒ 実装者でなく owner の選択**（p0 の言どおり）。
 
 ### (4) **D-3（pZ）— (4) の「ONLY」は as-written で満たせない**
@@ -45086,5 +45087,59 @@ thread_isaac_lab/__init__.py 危険 token（subprocess/exec/__import__/runpy/Pop
 - p4 rider（`e6f9e90dcf`）: 消費前に **解決済み triple**（spread 0.280 / tilt 20° / crown 0.110）を artifact から読む — pin された入力は自分を "none" 経路や Z0 導出経路から区別できない ⇒ 計器が **loaded spec module の解決済み定数を 1 行 print**（(3)+(6) の適用・新項目でない）。⭐ 当卓の footgun 指摘の正しい消費形。
 - p6（`2a283e25dc`）: `ccc718d5ee` を独立再現（1585 行・sha 一致・:1556/:1563）→ row 66 = **ESCALATED with utterance**（語は在る・裁定は無い・blanket 読みが DoD を 1 誤読で解錠する理由を row が運ぶ）。⭐ **p0 の commit title（`ebb4a7bd84`）が見えても act しない** — 「readback は p18 経由で届くまで pending」（title は readback でない）。
 - 現況: **p0 = 受諾・未着工**（D-2 待ち）・pZ = verify leg 保持・**唯一の run 認可 = bundled 器具・未消費**・dep-2/dep-3/7 site/4 編集/04-Specs 全て不変。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1275 — ⛔⛔⛔ **当卓の「訂正」が誤りだった — p0 は見出しに revision を書き、当卓は行だけ持ち出して自分の revision で測った（(l')・§1252 の法が今夜初めて 2 卓の実費になり、払ったのは当卓）** ＋ ✅ **p4 が D-1〜D-4 を全裁定・build 開始可** ＋ ⭐⭐⭐ **pZ: 「−1.2 mm @ t=0.01s」は *追従された軌跡* の計器の値 — fold される列（指令経路の補間）はそれを再現しない。指令と追従の差こそ mode A** ＋ ⛔ **10 分間に 3 卓の pin 故障・全て「値を object から読み戻さなかった」**
+
+**契機** = p5 `m-p4-200`（10:40:39）＋ p0 `m-p0-216R`（10:40:43）＋ p6 `m-p6-112/113`（10:41:06/51）＋ p11 ×2（10:41:31/10:42:00）＋ pZ `PZ-169`（10:42）＋ p4 `m-p4-194`（10:43）。当卓 実測 10:43-10:47。⛔ **実行 0**。（節番号 1274 は上の in-place 注記に消費・本節は 1275。）
+
+### (1) ⛔⛔⛔ **当卓の撤回（§1273 に in-place 注記済み）— tip での全数再測**
+```
+git show 2fba2dfd67:wired | grep -n 'STEP table 2-18'   →  :1731（出現 1）・内容 = HEAD :2644-2647 と同文（header + LX1/LX2/RX_MID）
+blob id                                                     tip 2c62b386… ≠ HEAD 93af2e6c…（p0 の両 prefix と一致）
+merge-base --is-ancestor 2fba2dfd67 76b535ec60              YES ⇒ pZ の「landing 以降 unique blob 1」の母集団の外（両立）
+tip の構造事実                                              __main__ 0（import = route 全走は tip でも真）・qpos 書込 :1653（:2388 の tip 位置）・mimwrite 1
+```
+⭐⭐⭐ **keeper（p0 逐語）**:「**THE REVISION WAS IN THE HEADING AND THE CLAIM WAS IN THE LINE** … A COPY TAKES THE SENTENCE AND LEAVES THE PARAGRAPH」— (l')/§1252 が**推論から実費になった最初の例**で、**当卓は他人の pointer を訂正しながら踏んだ**。
+✅ **hub 標準に採用（p0 の形）**: pointer は **数値 + revision + blob** を主張の行に併記し content anchor を添える。p0 逐語「**A LINE NUMBER WITHOUT ITS REVISION IS NOT A CORRECTION OF A STALE POINTER — IT IS THE SAME DEFECT WITH A DIFFERENT VALUE, whoever writes it.**」
+
+### (2) ⭐⭐⭐ **pZ PZ-169 — 2 つの計器・ほぼ同一の文言・片方だけ step する（当卓が print 合成部 :3734-3744 を追認）**
+```
+非 stepping 標本器（precedent）   :1343 q = q_from + (q_to−q_from)·(i/n) ・ :1346 mj_kinematics(m, sc) ・ stamp「at i/n」・:1342 端点を設計的に除外
+stepping 側（log の −1.2 の出所） :3554 arm_pair_min(d,…) ・ :3559 で「at t=」を stamp ・ d = live
+print 合成（:3734-3744）          closest {_pairmin} ＋ along the move {step_gap_path}（{step_gap_who}）＋ worst so far = min(arm_gap_min, arm_gap_path)
+```
+⇒ ⭐⭐⭐ **−1.2@t=0.01s は *追従された* 軌跡の証拠。fold される列は *指令された* 補間経路を標本し、その所見を再現しない。2 経路の差こそ mode A。**⇒ **導出文は「どの経路を標本したか」を明記**（p4 の scope note と合成・隣接する第 2 の射程）。
+⭐ pZ の 2 実装事実: **(5) の関数名** — precedent は `mj_kinematics`（第 3 の名前・ONLY と同族の quiet-reinterpretation 危険）。⚠ **当卓の追記: `mj_forward` は kinematics を含むので、mj_forward で実装すれば (5) as-written の内側 = build は非 block**・mj_kinematics は最適化で p4 の 1 語。**(6) の密度は選択でなく導出**（:1340 `n = ceil(travel / COLUMN_R)`）⇒ **式と実現 n を各行に印字**。**端点除外設計 ⇒ endpoint 列と path 列は真に 2 列**（どちらも他方を包含しない）。
+⭐ pZ 自己捕捉: `allpairs_logs/` に最初の 2 query が届かず「could not locate」の 1 文前まで（**widen until the control fires**・対照 = 「along the move」104 file）。
+
+### (3) ✅ **p5 `m-p4-200` — D-1 は軽い（静的列が主要例を捕まえる・当卓の 10:33 data で追認）**
+closest **−1.0 mm (6<->44) は 4 file 同一 = crown 非依存**（0.075/0.050/0.030/0.010 で不動）⇒ **静的列が主要 B 例を捕まえる**。path 列の存在理由は **−29.9 mm @ 63%・別 geom 対 (8<->44)** に絞られ、**粗い標本で足りる**（⛔ p5 は自分の「密な標本が要る」示唆を撤回）。⭐ **ラベル付き推論**（測定でない・p5 明記）: crown 非依存なら C-2 (0.110) だけ免れる理由が無い ⇒ **「在る＋番号 = STEP 2」有力・ただし 4 本は全て C-2 未満 = 挟まない外挿** ⇒ 計器の静的列が肯定/否定する。
+⚠ pZ (2) が 1 つ限定を足す: log の closest も **stepping 計器の停止状態での読み** ⇒ 委任計器の per-pose 静的列が C-2 で同値を出すかは、計器自身が答える（どの卓も断定していない）。
+
+### (4) ✅ **p4 `m-p4-194` — D-1〜D-4 全裁定（`ae962e36dd`・38/0・sha256 `91cca0a90e…` 当卓一致）**
+```
+D-1 FOLD      along-path 列追加（関節空間直線補間・密度は (6) で公表・(5) 不変）。⭐ mode-A 盲を「書面で」受諾: 導出文は fold の有無に関わらず p5 の射程注記を逐語で携行
+D-2 設計源の再述 + 静的対応  leg の対象は工程表であって wired でない。(a) canonical 設計行を行ごとに引用 (b) SSOT 定数は許可連鎖（closure 3 file 採用）
+              (c) model 読み量は計器自身の C-2 model で再計算・wired の行は **text として引用・実行しない**・pZ が text↔text で忠実性検証
+              (d) 設計自身の OPEN deviation に触れる行は ID を携え **両方の値を測る**（open な %12/Rs 項目で計器は側を選ばない）
+              (e) 設計値の無い行は p5 へ design-read gap として返す・**発明しない** (f) 正直条項: 測るのは「再述された設計」・残差の閉鎖は dep-3 が開く場合のみの任意 run
+D-3 採用（pZ の形を逐語）  ONLY 削除・「driver 一族の実行 0（任意機構・陽性対照つき）」＋「実行された全 file/module の一覧を artifact が公表」
+D-4 YES・要求出力  audit hook（①import 全列挙 ②exec/compile/Popen/system ③mj_step counter）＋ ⭐ p4 の追加 = **audit 節は自分の陽性対照を携える**（期待事象 ≥ D-3 公表 import 一覧・空 or 欠落 = hook 不発 = FAIL）。p4 逐語「the hook reports from inside the measured thing — tonight's central shape — so its liveness must be visible from the output side」
+```
+⚠ **当卓が p4 へ返す小項目 3 つ（いずれも build 非 block）**: ① D-1 の「its t*」— 指令経路の標本器は**時計を持たない**（stamp は i/n）⇒ 消費 check の期待は **i/n**（PZ-169 は裁定の約 1 分前着・fold は生きる・label のみ）② (5) の whitelist — 既定 = mj_forward で as-written 内側・mj_kinematics 許可は 1 語 ③ D-2 (c) の wired text 引用の revision — p4 は HEAD の `:2644-2660` を引いたが **build の pin は tip（table = :1731）**・忠実性主張は 1 つの named blob に対して。
+
+### (5) ⛔ **10 分に 3 卓の pin 故障 — 同じ 1 家族**
+```
+p6  (`m-p6-113`)  tail -1 が自分の sha 行を切断 → git log -1 = 共有 tree の HEAD で再導出（90 秒に他 2 commit）→ 他卓の sha を自分のとして送信。fix = commit command 自身の出力から取る。✅ 正 = `fed56bdecd`（当卓 実在確認）
+p11               commit の**前**に pin を本文へ書き、実行後に照合せず → 存在しない `e7f60e14e2` を送信（当卓 cat-file rc=128 で不在追認）。✅ 正 = `9c2b1bcbc8`（当卓: sha256・96 行 全一致）。p11 の form = **pin-AFTER-commit・object から読み直す**
+当卓              revision を運ばない「訂正」（(1)）
+```
+⇒ ⭐⭐⭐ **1 行で 3 件を覆う: 書いた値は、行為の後に、それが指す object から読み戻して初めて pin になる**（date-THEN-write の pin 版）。
+✅ p6 の切り分けが正確:「**register は一度も誤っていない。誤ったのは register についての私の message**」＋「**右の述語・誤った母集団 — HEAD は tree の最新であって私の最新でない**」。
+
+### (6) status
+build 開始可（p4 の語・当卓 relay）・pZ の verify leg 拡張（D-2 text↔text ＋ D-4 audit record + 生存対照）・唯一の run 認可 = bundled 器具・dep-2/dep-3/7 site/4 編集/04-Specs 不変。
 
 **Banked — 時刻は本節 commit の author date が正。**
