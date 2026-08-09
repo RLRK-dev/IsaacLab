@@ -45943,3 +45943,25 @@ worktree             4981b37a…（= HEAD・clean）
 - ⛔ **p4 への要点**: p0 の「進めてください」は **自分の hold の清算**であって pZ の hold（`:2404` None guard・第 1 標本で raise）に触れない — **crossing であって矛盾でない**。sequence 不変: **第 5 commit（guard）→ pZ 再走 → p4 report（5 commit・guard 後 sha・関数名つき）**。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1322 — ⭐⭐⭐ **第 5 commit 着地・pZ が無 prompt で判定: 6 行 PASS × 5 commit・guard は正形 — ⛔ しかし第 4 節は退役でなく 1 hop 移動:「crash から偽の数へ」— sentinel 1e9 は、全標本が None の *期待される* 場合に「+1000000000000.0 mm」を測定として印字する** ＋ ✅ **p0 の費用計算と revert 申し出（by-product は安全になるまで 3 commit・risk を運んだのは 2 度とも by-product — 判断は p4/pZ へ）** ＋ ⭐ **p5 の 2 件目の不発（「認めた ≠ 掃いた」）**
+
+**契機** = PZ-189（16:57・addendum re-bank 済 当卓）＋ p0 `m-p0-243R`（16:57:29）＋ p5 `m-p4-228`（16:57:30）＋ p11 即時（16:57:44・STOP 形）＋ PZ-190（16:58）。当卓 実測 16:58:21-16:59。⛔ **実行 0**。
+
+### (1) ✅ **第 5 commit（`755eae7ddd` 16:56:53・5/1・当卓検証: wired content sha256 `b63400555573585f…`）**
+guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当卓の `:2404-2405` grep は 0 を返した = shift 前の行への stale 検査**・p11 の HEAD 直読が解いた。行番号法の当卓 3 例目）。settle block 内の無 guard 比較 0（対照 `is not None` 2）。p0 は **read back with a control**（無 guard pattern が合成行に 1/1 発火 — 「0 単独は無価値」を自分で適用）。⭐ code 内の confession comment に「the class fixed at the instance」を逐語で残した。
+⭐ **p0 の費用計算（そのまま p4/pZ の court へ）**:「**by-product は安全になるまで 3 commit・risk は 2 度とも by-product 側。wired が載せるべきでないという結論なら防御可能な読みで、4 commit 全部 revert する** — p5 の費用順序で keep を主張した私にとって、3 欠陥も費用だ」。
+
+### (2) ⛔⛔ **pZ の第 4 節・1 hop 移動（source＋算術・run せず・grade 明記）**
+```
+:2398 _traverse_arm = 1e9, "-"   → guard は None を skip ⇒ 176 mm 内に標本が 1 つも無ければ **未代入のまま**
+⇒ print は「settle traverse worst: arm<->arm +1000000000000.0 mm (-)」— **測定でない数が %.1f の枠で data として読める**
+そして это は corner でなく **期待される場合**（実測 2 構成とも圏外: 491.3 / 194.2 対 176）
+```
+⭐ **pZ の対句**:「**crash は騒がしい。sentinel は data の顔をする**」。✅ **正直な形は同 file に既に 2 回在る**（`:2361`/`:3777`「nothing within the N mm search radius」・`:2539` 逐語「None = … the best case」）⇒ **新しい発明でなく、1 関数先の既存形**。
+⇒ 処置（pZ の建て付け・当卓 endorse）: **第 3 の hold にはしない**（crash でなく fix の外）。**p0 = print に 1 分岐（`:2361` 形・裁量）／p4 = 数を引くなら「1e12 = 176 mm 内に一度も入らず、very clear ではない」の caveat を report に**。pZ は print 決着後に**第 2 addendum を 1 節で**書く。
+
+### (3) ⭐ **p5 の 2 件目の不発 — census DID-NOT-FIRE 1 → 2**
+同じ `head -1` を同 session の**2 箇所**で使い、prompt された 1 箇所だけ直していた（crown 半径 4 本の読み = 「族は C-2 を挟まない」の根拠側が未修正）→ 全行走査で再測・**主張は生存**（各 file mounting 行 1・distinct crown 1）・穴は在って不発（各 file 1 行のため）。⭐ **p5 の一般形（採用）**:「**欠陥を認めた時に直すべきは *その測定* でなく *その道具を使った全箇所*。認めた ≠ 掃いた**」。⭐ 気づきの経路も census の形: **他卓（p0 の guard）の欠陥記述が、自分の未検出同型を探す述語になった** — 自分では探していなかった、と明記。
+
+**Banked — 時刻は本節 commit の author date が正。**
