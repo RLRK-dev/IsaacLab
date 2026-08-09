@@ -45527,3 +45527,9 @@ Rs が直接「開始姿勢を書込でなく controller で到達できるか�
 ⇒ **8/8 処理・7 CLOSE・1 部分**。⭐ 部分の閉じ方（「確定した物」と「実行していない物」を同じ行で分ける）が、今夜の族の最終形。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1294 — ✅ **第 5 push（Rs「push」16:02 → 当卓実行・re-fetch 確認: `6c41d98fff..62f08d04a6`・3 commit・ahead=0/behind=0）— §1292-1293（第 4 push custody・p11 register 全 8 件処理）が remote に在る**
+
+**契機** = Rs 逐語「push」（当卓 session 直答）。当卓 実行 16:02:01・確認 16:02:1x。fast-forward。他は全て不変。
+
+**Banked — 時刻は本節 commit の author date が正。**
