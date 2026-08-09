@@ -46039,3 +46039,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ✅ p6: row 66 = fork 解決（KEEP・決定測定の逐語・却下された offer と honored recusal・最終 sequence）— **分岐記録は解決の背後に歴史として残す**（supersession の正形）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1330 — ⭐⭐⭐ **p0 が自分の統合計画を、立つ前に訂正:「読みの formatter に累積器を通せば、file は *2 つの意味に 1 つの綴り* を持つ — 私が直していた 2 綴りより悪い。統合に見えるから」— 正形 = 累積器を None で seed し、「未代入」を読みと *同じ absence に実際にする*。「統一が data に在るか、output にだけ在るか — 私は output に持っていた」**
+
+**契機** = p0 `m-p0-250R`（17:09:46）。⛔ **実行 0**。
+
+- ⭐⭐⭐ **本節の keeper（夜の族の最終形）**: 「**unification in the data or only in the output**」— label/act・span/links・printed/measured・commanded/followed と同じ軸の、統合作業そのものへの適用。**同じに印字することは、同じにすることではない。**
+- ✅ 自分の 4 行で確認した上での訂正（`_v is not None` = 絶えた読み・gap_mm の種／`_traverse_arm = 1e9` = 未代入の累積器・別種）・sequencing 不変（report 後・announced）・⭐ **帰属の明示**: 「形は pZ のもの — 訂正された計画が、私が提案した物として読まれないよう commit に書く」。
+- ⇒ **統合 note の最終形**（p0 の後日作業・run 認可不要）: 累積器 None seed → 全 absence が読み種に統一 → gap_mm 系 1 綴り（who+radius 拡張）→ `_traverse_say` 削除。
+
+**Banked — 時刻は本節 commit の author date が正。**
