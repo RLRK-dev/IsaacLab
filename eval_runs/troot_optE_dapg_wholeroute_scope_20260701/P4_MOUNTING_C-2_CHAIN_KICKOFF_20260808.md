@@ -1710,3 +1710,13 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 2. **#46 containment = NOT CONTAINED**（p6 回答・私の依頼の最終項が閉じた）: census は 07-27 に `:172` で 0.040 を**見ていた**が、+0.075 との**比較は一度も存在しなかった** — ⭐ 逐語で bank: **「頁の上の値は、問われた問いではない」**。⛔ 私の 11:01 の「#46 が本件を含む蓋然性が高い」は**反証された**（予測として書き・検証先を指名してあった — 過程は機能した）。D-8 は単独 row として立つ。cross-ref 提案は「D-8 ↔ #46 は別物」という**答えつき**で閉じる。
 3. **survivor 候補（consumer 知識・所有は p0）**: pZ の静的分離 — (i) column geom **反証**（作業帯で両柱は同一 solid・欠けた solid は 80-130mm の侵入を製造できない）(ii) tilt 規約 **between-difference として反証**（mount 式が文字同一 ⇒ 誤りなら両方で誤る）(iii) **生存 = selection difference**: driver は clearance-aware 候補探索（tip `:1209` CLEARANCE_REPORT・`:1496` gap < ARM_CLEARANCE で棄却・trace 実在 285 行: STEP 3 R −0.6mm・「clearance removed 1 of 20」）、計器には無い（= p0 自身の欠陥 (a) の他半分）。⭐ endorse された文: **同じ幾何・同じ mount・同じ link で −0.6 vs −80〜−130 ⇒ 差は選択の差であって幾何の差でない**。⚠ mode-A 残渣: driver は「commanded pose は全て clear で、なお腕は 0.6mm 内側で終わった」を記録 — **clearance 選択済み pose の運動学評価は ≥0 で読めるはず**で、深い負は計器側の何かを指す。⇒ 将来の表の意味を規定する知識として bank（機構の名指しは p0 の code 確認へ — 私は pattern から先を言わない）。
 4. 不変: 私の 7 読は D-8 参照＋v3 witness 形で武装のまま／revision 未指名・pZ leg 保持／dep-2 cap・dep-3 open・7 site・mounting C-2 の 4 編集・04-Specs 全て不変。私の word の 4 assignment は全て閉じた（p0 build ✓・p5 D-8 ✓・p6 containment ✓・pZ C2 照合 ✓）。
+
+---
+
+## 2026-08-09 12:53 — Rs の問い「書き込まないでコントローラーで持っていくことはできないのか？」への回答 custody ＋ zero-pose 診断 1 行の依頼
+
+1. **Rs 逐語**（12:5x JST・本 session 直答）: 「書き込まないでコントローラーで持っていくことはできないのか？」— ①（`:2388` 裁定）の修正可能性を突く問い。
+2. **回答の骨子（送付済・本 file が custody）**: **できる** — rule 自身が要求する形（「腕の開始姿勢は PD の実移動で到達する」）で、**実装済み前例**あり = `probe/pd1-arm-pd`（PhysX・arm reset 書込 0・サーボ目標のみ・Rs 承認 2026-07-26・prohibited.md 根拠注記）。障害は wired `:2386-2387` comment が名指す 1 点のみ: **この取付の zero 構成 = 腕交差**。⚠ **交差 = 衝突か は未測**。
+3. **分岐**: 非衝突 → `:2388` 削除＋`ctrl=HOME` settle で即（費用 = 整定秒数）。衝突 → (a) **asset が home を宣言**（keyframe / joint `ref` で qpos0 = home・実行時書込ゼロ。⚠ keyframe reset を「書込」に数えるかの線引き = Rs）(b) 段階 servo unfold（要設計）。
+4. **診断依頼（m-p4-202・p18 経由 → p0）**: 次 iteration に **qpos=0 の腕間・腕-柱/卓 worst clearance 1 行**（geom pair 名つき・mj_forward のみ・step なし・受入条件でなく diagnostic・既存 bundle と free-iteration default の内側）。⇒ どの分岐かが 1 iteration で確定。**breach 枝なら修正形そのもの・例外内枝でも読み物として立つ — どちらでも無駄にならない**。
+5. 不変: dep-3 open（wired 全 gate）・7 site 不触・mounting C-2 の 4 編集未着手・私の 7 読武装のまま。
