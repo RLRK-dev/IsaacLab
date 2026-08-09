@@ -123,3 +123,69 @@ This discharges the forward condition I stated when the verdict was filed: *"if 
 
 The fourth clause is new and it is **not** about the fix: it is about the instrument bolted to it. One guard on `:2404`, in the form already present at `:2414`, removes it.
 
+---
+
+# ⛔ SECOND ADDENDUM 2026-08-09 17:10 JST — commits five and six, the KEEP word, and one finding that is **new** (ruling A: nothing above rewritten)
+
+## B1. My own A1 is stale, and I am not exempt from the rule I have been applying all night
+
+A1 named `4981b37a…` as the final content sha256. It was correct **for four commits**. Two more landed. Every hash below is named with its function:
+
+| | |
+|---|---|
+| `ur15_steps_wired.py` **content sha256**, current | `8fae5334e85e6af5cf1efffdd8dcdca76c3b999006a8e5374012d93466da5bbf` |
+| the same object's **git blob SHA-1** | `ae8aa42d49dd2bb817f927dfe84a148f8e269a6a` |
+
+⇒ **retired, named as retired**: `6ca7247513ca117c…` (pre-fix) · `12f9d034a6568ac7…` (§1, two commits) · `4981b37a8cc65d41…` (A1, four commits) · `b63400555573585f…` (five commits).
+
+## B2. The table on the fifth and sixth commits — **PASS**, each against its own parent
+
+| commit | scope | parent | rows |
+|---|---|---|---|
+| `755eae7ddd` *"Guard the arm pair too, which is the one that needs it"* | **5 / 1** | `2e11b6651f` | six rows PASS; ordering interior `:2393`–`:2430` |
+| `2a3b5825b7` *"Say nothing was in range instead of printing the sentinel"* | **13 / 2** | `bd1c12e19b` | six rows PASS; ordering interior `:2393`–`:2441` |
+
+⇒ **six rows PASS across all six commits.** The guard is `if _v is not None and _v < _traverse_arm:` — the form already at `:2414`. The print routes both readings through `_traverse_say`, which takes the file's own phrasing from `:2361`/`:3777`.
+
+## B3. Clause four is discharged, and it discharged in two hops
+
+crash → sentinel-printed-as-data → closed. ⭐ **A crash is loud; a sentinel wears the face of data** — the guard that removed the crash is what made the sentinel reachable, so the second hop existed only because the first was fixed.
+
+## B4. ⛔ A correction of my own, caught by one grep
+
+I had half-drafted a finding that `_traverse_say` was *"a second private absence-spelling, a thirteenth site of what `gap_mm` centralizes, with a different magic number."* **Measurement dissolved it.** There are **two absence kinds** in this file, both pre-existing, and the new print uses the right one for its kind:
+
+- `gap_mm:1891` — `return absent if x is None else f"{x * 1000.0:+.1f} mm"` — keys on `None`: **a reading that was absent**. 12 call sites.
+- `_traverse_say:2430` — `if v > 1e8` — keys on the **sentinel**: an accumulator that was never assigned. And `init 1e9 / test 1e8` is the file's own idiom, in use before tonight at `:3791` and `:3853`.
+
+⇒ `gap_mm` **cannot** be a drop-in here: the guard converts `None` into *skip*, so what reaches the print is a float sentinel, never `None`. ⭐ The `:1880` history ("individual guards were not working") is real and it is about the **reading** kind, where the centralization exists and holds. It is not evidence about these four lines. **The difference between my two drafts was one grep.**
+
+## B5. ⛔ NEW FINDING — the declared search radius does not describe the query that produced most of the numbers
+
+The env line prints one radius for a value drawn from **two** queries:
+
+```
+:2436  _traverse_say(_traverse_env, …, 'arm<->column/furniture', ARM_DECIDE_CUTOFF * 1000)
+```
+
+- `furniture_gap:402` — `cut = ARM_DECIDE_CUTOFF if cutoff is None else cutoff` ⇒ **16 mm** (`ARM_DECIDE_CUTOFF = 2·ARM_CLEARANCE = 4·CABLE_R = 4 × 0.004`). Declared radius correct for this half.
+- `column_gap:1295` — the prefilter is `if cutoff is not None and …`, and the settle calls it **with no cutoff** ⇒ **the prefilter is skipped entirely**; the range is `mj_geomDistance`'s `distmax = 1.0` at `:1299`, i.e. **1000 mm**. Its `:1307 if best > 1e8` can then never fire, so this half never returns `None` either.
+
+⇒ **A column reading of +80.1 mm — the diagnostic's own HOME endpoint — would print as a value beside a declared search radius of 16 mm.** A number larger than its own stated radius is self-contradictory on its face, and the absence sentence *"nothing within the 16 mm search radius"* is unreachable for a pair one of whose queries searches to a metre.
+
+⚠ **This is the fourth finding in the four voluntary lines, and it is a reporting defect** — not a crash, not in the fix, and it fails no row. ⭐ It also sharpens the citation rule: *cite the value and its derivation* is not enough — **the radius must be the one the query that produced the number actually used.** The derivation here is right and attached to the wrong query.
+
+## B6. My word on keep-versus-revert: **KEEP**, with the grounds and the two conditions that would have reversed it
+
+- **No write path to state** — AST over the settle span (`:2398`–`:2441`): every assignment target is a plain local name (`_traverse_arm`, `_traverse_arm_who`, `_traverse_env`, `_traverse_env_who`, `_v`, `_w`); attribute targets **0**, subscript targets **0**. ⚠ that query covers assignment statements; for-loop targets are names by inspection. ⇒ the recorder's whole range is **crash or wrong number — never a moved arm**.
+- **Every finding came from reading** — the tight pair, the env `None`, the arm `None`, the sentinel print, and B5. **Not one needed a run**, so the discovery mode never depended on the gated resource.
+- **It is the only instrument that can discharge clause three of this verdict**, and reverting leaves that clause open at the price of a future Rs authorization.
+- ⛔ **I would have said REVERT if either held, and neither does**: a write path to state (measured: none), or a defect surfacing **after** a run rather than before (all surfaced before).
+- ⛔ **What I do not claim**: that these lines carry no unknown shape. Nobody can, and I will not manufacture grounds for a "no". The claim is bounded — *if* one exists, its range is crash-or-wrong-number, and it is findable by reading.
+
+## B7. Verdict over six commits
+
+> **The fix is structurally clean at all six commits · the settle exists and is ordered correctly · whether the arms pass clear on the way is unmeasured and gated · and the recorder that will answer that third clause on the authorized day declares, for its environment pair, a search radius that only one of its two queries uses.**
+
+The fix itself is unchanged and has been correct since `bc0bfe5b88`.
+
