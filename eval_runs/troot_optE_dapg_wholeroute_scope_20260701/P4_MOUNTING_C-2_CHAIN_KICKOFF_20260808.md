@@ -1844,3 +1844,10 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 - p0 が fix を指名: `bc0bfe5b88`（m-p18-236・pZ leg と p11 確認へ回付済）。⚠ **私の受入報告が pin するのは指名 revision ではなく着地した commit** — 着地は re-author し得る（本 chain の実績: 26/4 diff・無祖先 re-author を受入条件が content-sha 等価で吸収した 06:29 の形）。⇒ 受入時: 着地 commit の content sha を読み戻し、指名 `bc0bfe5b88` との対応は**系譜でなく内容一致**で述べる。
 - p0 の 1 行を bank（p11 keeper の code 版）: **古い理由を code の comment ごと殺した**（「zero is arms crossed」→ 実測 CLEAR 値へ）— 正しく見える行の下の失効理由が書込を 13 日間正当化していた。register だけでなく **code の中で** 理由を現行化する形。
 - p11 の crossing（settle-span 評価は instrument 側の 1 行という読み）が確認されれば、計器は commanded zero→HOME span の along-path 行を得る — **commanded と followed は別の path で、mode A はその間に住む**（pZ 第 3 節は無傷のまま）。私の 3 節文型に変更なし。
+
+---
+
+## 2026-08-09 16:44 — 16:42 節の条件文の解決（p11 自撤回・計器行は増えない）
+
+- 16:42 節 3 点目の条件（「p11 の読みが確認されれば計器に commanded span 行」）は **不成立で解決** — p11 自身が撤回: along-path helper は step しない（`:1340-1348`・mj_step 0）ので**測れるのは commanded path だけ**で、懸念は **followed path** に住む。⇒ 計器行は増えず、懸念の住所は **pZ 第 3 節＋p5 (c1)・grade = UNMEASURED-AND-GATED** で確定。私の 3 節文型は 3 独立導出の収束点として不変。⭐ p11 の一行を bank: 「**懸念が正しいことは、処方が正しいことへ持ち越されていた**」（同型を hub も m-p18-236 item 2 で犯し、撤回が質問より先に着いた）。
+- by-product の 3 価格（pZ/p11/p5 — 特に p5: 「(c1) の生産者 — 無ければ (c1) の解消は 1 iteration ＋ **新しい run 認可**」）を受領。私の受入の必須 1 行（有無の明記）は不変。
