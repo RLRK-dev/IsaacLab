@@ -124,6 +124,37 @@ START = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
 **canonical STEP 1-18 の waypoint を、C-2 の取付で kinematics のみ解く**（= banked 掃引と同じ `KINONLY` 経路。route は走らせない・dynamics 無し）。出力 = 各 STEP の solved / collision-free / arms-closest。⇒ **これが返れば 2 択のどちらかが確定する。**
 ⚠ **私はこれを起動しない** — HOLD と fence が現行で、私に run 権限は無い。⇒ **要る判断 = この KINONLY solve を許すか否か**（owner = p4 の gate ＋ Rs の run 権限）。
 
+## 4d. 追記 2026-08-09 10:18 JST — ⛔ **§4c の母集団は私が「見覚え」で選んでいた。述語で取り直したら中身が変わり、私が (4) で名指した測定も誤りだった**（挿入のみ）
+
+**契機** = p18 §1265 §5 の p0 集計逐語「**FOUR CORRECTIONS IN TWENTY MINUTES AND NOT ONE TOUCHED THE PREDICATE. Every one widened the POPULATION**」。⇒ **自分の §4c にそのまま当てた。**
+
+### (1) ⛔ 自己欠陥 — 189 → 4 の絞り込みは述語でなく**認識**だった
+
+§4c は「C-2 の点で走った artifact = 4 件」と書いたが、**その 4 件は私が file 名で見覚えたもの**で、述語を通していない。⇒ 機械述語 `spread 0\.280 tilt 20` で取り直すと **10 件**（positive control 1/1）。**私の 4 件と重なるのは 3 件だけ**で、**6 件は開いてもいなかった**（`allpairs_logs/cap_z_*.txt` 4 件 ＋ `seed240_sources/rt_grid_240.txt` `stage1.txt`）。⚠ 逆に私が数えた `SPREAD_TILT_SWEEP_TRIES24_20260729.txt` は述語に掛からない（表形式で散文の echo を持たない）。⇒ **どちらの集合も単独では母集団でない。**
+
+### (2) ✅ 取り直した結果 — **exact C-2 の結論は生き残る**（ただし今度は述語で導いた）
+
+述語 `spread 0\.280 tilt 20\.0 deg +crown r 0\.110`（＝ **C-2 の 3 つ組そのもの**・positive control 1/1）で tracked 全体を引くと **2 件**:
+`grid_logs_tries24/st_0.110_0.280_20.txt` ／ `seed240_sources/rt_grid_240.txt` — **2 件とも route の段は 0**（開始姿勢のみ）。
+⇒ **§4c(3) の表は変わらない**: **STEP 1 = 代入で満たされる／STEP 2-18 = exact C-2 では未測**。
+
+### (3) ⭐⭐⭐ しかし**最も近い測定済み近傍は、STEP 2 で失敗している** — §4c はこれを持っていなかった
+
+同じ **spread 0.280 / tilt 20.0** で **crown だけが違う 4 run**（`cap_z_*.txt`・crown **0.075 / 0.050 / 0.030 / 0.010**）は、**4 本とも STEP 2 に到達して失敗する**（逐語・`cap_z_1.470` 例）:
+- 「**STEP 2 COMMAND L: reached 0.0% of the way to the solved pose in 2.2s** … held back on 1056」（R も同じ）
+- 「**STEP 2 ARM-TO-ARM: closest −1.0 mm … ← TOUCHING OR THROUGH**   along the move −1.2 mm」
+- 「**RuntimeError: STEP2 L/R: THIS arm's command stopped advancing for a whole step's worth of ticks and its move did not finish (both arms).**」
+
+⚠ **これは C-2 の測定ではない**（crown が違う）。⚠ **しかも 4 本とも crown が C-2 の 0.110 より小さい側**（0.010-0.075）⇒ **この族は C-2 を挟んでいない**（外挿であって内挿でない）。
+⇒ ⭐ **それでも leg にとっては重い**: 「STEP 2-18 は未測」は真だが、**最も近い測定は STEP 2 で腕が −1.0 mm 貫通して止まっている**。⇒ **「在る＋番号」の第 1 候補は STEP 1 ではなく STEP 2** に動く（⛔ 確定はしない — C-2 で測っていない）。
+
+### (4) ⛔⛔ **私が §4c(4) で名指した測定は、この失敗を見つけられない** — 自分の提案の撤回と差し替え
+
+§4c(4) は「**KINONLY で STEP 1-18 の waypoint を解く**」を「binary を閉じる唯一の安い測定」と書いた。⛔ **誤り。**
+近傍の失敗は「**解が無い**」ではなく「**指令された移動が進まない（0.0%）／移動中に腕が接触する**」— **時間発展を伴う量**。**KINONLY は姿勢の解と静的な干渉しか見ないので、この失敗モードに対して常に PASS を返しうる。** ⇒ ⭐ **私は、探している故障を原理的に検出できない計器を推薦していた**（本日の「違う向きには出ない述語」の同族。⚠ しかも私はそれを他所で指摘した後に、自分で作った）。
+
+**差し替え（提案・⛔ 私は起動しない）**: 近傍 4 run と**同じ経路**で、**crown 0.110（= C-2）を 1 点だけ**走らせ、**STEP 2 まで**の指令追従率・along-the-move の腕間距離・RuntimeError の有無を取る。⇒ **近傍と 1 変数（crown）だけ違う対照**になり、**「C-2 でも STEP 2 で止まるか」が直接出る**。⚠ これは **KINONLY ではなく wired の実行**（＝ dep-3 と HOLD の対象）。⇒ **判断は p4 の gate ＋ Rs の run 権限**であり、私は要求しない。
+
 ## 5. 権限の明示（形式の受理 ≠ 行為許可）
 
 - 本 file は **測定と回答**であり、**p0 の gate を私が反転させるものではない**。gate の運用は p18 の routing / chain の順序に従う。
