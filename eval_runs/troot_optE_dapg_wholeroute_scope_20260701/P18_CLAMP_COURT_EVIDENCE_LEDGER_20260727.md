@@ -46520,5 +46520,16 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **事前登録の基線（pZ・01:04-01:05 実測）**: lock 実在（spec 最終 commit == `2fba2dfd67`・sweep == `2bb1aad4e7`・両 clean）・built token 今日 = 0.22/45.0/YOKE_SPREAD/2 由来・witness :54 実読 = **唯一の PASS 行がちょうど 0.280/20/0.110・+14.7**。7 行 parent-relative。
 - ⭐ **row 6 の設計**: 更新は format 変更に**当たらない**（announce の「出力形式変更なし」と矛盾しない）・放置は **finding であって blocker でない** — 判定が編集者の選択を縛らず、どちらでも判定できる形（「発火しない述語は検査でない」の裏面: 発火してもchainを止めない述語設計）。
 - **法**: 「見つかった class は、次の同型が**書かれる前に**述語になる」— F1（引用 drift）→ c14 → row 6 と、同じ class が事後発見 → 事後発見 → **事前登録**へ進化した夜。
+- ⚠ **訂正（§1376 の時系列実測による・in-place）**: 本節見出しの「p0 の editor が閉じる前」は **表の bank（79b53c797a・landing の parent になった）については真・row 6 FYI については偽** — FYI 配達 ~01:07:0x は landing commit 01:06:51 の数秒**後**。2 つの object を 1 つの時制で括った誤り。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1376 — ⭐⭐⭐ **着地（p0・`0f6b4a733e` 01:06:51「Make C-2 the mounting defaults: spread 0.280, tilt 20.0, crown pinned」）: 4 編集・2 file のみ・+23/−6 — **parent = `79b53c797a` = pZ の banked acceptance そのもの**（「編集は banked 判定に対して code される」という pZ の意図が、queue の 30 秒差で **文字通り親子関係として** git 史に刻まれた）** ＋ ✅ **両 content sha = p0 の function-named pin と完全一致（当卓再演算: cell_spec `d4f79856bd…`・sweep `51697f6360…`）** ＋ ✅ **fresh interpreter 検証（p0）: 無 override = 0.28/20.0/0.110・built は override で再現・4-branch 優先順位不変・py_compile 両通過** ＋ ⚠ **KINONLY 消費者 note: 計器は自 spec を C2_ENV 経由で `2fba2dfd67` に pin — 指名・凍結は不影響で立つ**
+
+**契機** = p0 `m-p0-264R`（01:07:17・cc pZ/p4）。当卓検証: commit・parent・両 sha・file 数 全一致。⛔ **実行 0**（p0 の検証 = fresh interpreter の定数読み・py_compile — 編集検証の class）。routing → m-p18-269（pZ = leg trigger・p4 = 等号材料の sha 対＋§1 pointer note・p0 cc）。
+
+- **時系列（実測で確定）**: announce 01:05:05 → **acceptance bank 01:06:2x（当卓）** → **landing commit 01:06:51（parent = その bank）** → row-6 FYI 配達 ~01:07:0x → landing message 01:07:17。⇒ 表は間に合い・FYI は間に合わず — **row 6 は「FYI に助けられていない素の事前登録述語」として leg で判定される**（それが本来の設計 — 述語の価値が配達に依存しない）。
+- **編集の中身（announce と一致・spec §1 のとおり）**: YOKE_SPREAD else 0.22→0.28／tilt 45.0→20.0（履歴 comment 不触）／CROWN_R else → literal 0.110（**unmeasured-0.140 mint を note で名指し**・:426 域 note 書換）／sweep label = display-only＋hand-tracking caveat。根拠 comment 全項（witness :54 = L5/R30・built L0／#60 photo-pin／#54 span 0.178 m／stereo-head 不在／D4 carry）。編集直前の byte-equal 実測（diff empty）。
+- **ball = pZ の parent-relative leg**（7 行・banked のまま）→ p4 等号受入（sha 対は m-p18-269 で返却）。DoD/wired = Rs1 (the human) 認可待ちのまま。
 
 **Banked — 時刻は本節 commit の author date が正。**
