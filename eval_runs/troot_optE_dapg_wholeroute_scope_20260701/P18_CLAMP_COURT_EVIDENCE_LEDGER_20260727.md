@@ -46211,3 +46211,15 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **不動の確認**（p4 の再掲と当卓 §1346 の整合）: dep-3 閉鎖 chain は閉のまま・dep-1 の 4 編集は計器の表待ち（飽和 caveat 継承）・dep-2 cap 不変・実行中 0・run 認可は bundled 計器のみ・revision 未指名。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1348 — ✅✅ **(c) が裁定でなく測定で解けた（p4）: Rs は誤形の問いを正しく拒否（逐語「おれは隔離をしていないから俺に理由を問われてもわからない」）— 隔離の cause-of-record は追跡初日から機構・1-DOF/fidelity 説は 13 日後の別目的 gloss** ＋ ✅ **当卓で全 pin 再現（初出 commit の追加行内 grep・`-S` 除去歴 0・現行番地 :63/:31 まで）** ＋ **帰結: (c) = 設計文 → 引用修理 1 行（p11 統合 draft へ畳込・Rs の残る行為は着地 1 回のまま・今すぐの 1 件は消滅）**
+
+**契機** = p4 `m-p4-211`（17:50）。⛔ **実行 0**（検証は read-only git/grep のみ）。routing 依頼（p11/p5/p6）→ m-p18-255。
+
+- **測定の再現（当卓 17:50:22–17:5x）**: ① `e05efab04a`（2026-07-02 07:14:23「Track vault planning SSOT files in git」= vault SSOT 追跡初日）の LEDGER blob `:42` に逐語「its mechanism (spring-follow + kinematic hold) is **fidelity-QUARANTINED**」— 現 worktree では **`:63`**（行番号は移動・文は無傷・同 row に 07-27 の 43-step 幾何 stale 注記が追記されただけ）。② `git log -S 'fidelity-QUARANTINED'`（LEDGER path）= **導入の 1 commit のみ** — 除去/再導入 0 ⇒ 「unchanged since」を出現数変化レベルで支持。③ `4de2c9fd42`（2026-07-15 02:09:46）= **spec 1 file・+4 行のみ**・gloss 文「same banked sim2real fidelity limitation that already explains the AR-routing QUARANTINE」は**追加行内**（`^+` grep = 1）・現 spec **`:31`** に存続 — invariant-5（pin）の「What Rs accepted with it」節 = 正当化 gloss であり隔離の decision-of-record でない。④ 相対順序 07-02 ＜ 07-15 = **13 日** ✓。
+- **問いの形の法（採用）**: 「記録が持っている答えを人に問う」のは誤形 — Rs の拒否が正しい。**custody 順序は測定で決まる・fidelity 実体論は誰も主張しない** ⇒ **4 卓の decline はどれも破られない**（p4 自身の decline「fidelity 裁定は測定で決まらない」も真のまま — 測ったのは順序であって真因でない）。
+- **限界も逐語で乗る**: vault の git 前史（07-02 以前）は未捜索 — 相対順序はそれでも確立（機構説 ≤07-02）。物理的真因は**未測・誰も主張しない**。
+- **帰結**: 隔離の記録上の理由は前提文が消えても消えない（LEDGER 在住）。宙に浮くのは spec `:31` の gloss だけ ⇒ **修理 = 引用先を LEDGER 機構 row へ差し替える 1 行**・p11 の (b)(d) 統合 draft へ畳込（⚠ 04-Specs read-only ゆえ draft 内・適用は Rs 着地時）。**Rs の今すぐの 1 件は消滅**・残る行為 = 統合 draft の spec 着地 1 回（修理は同便）。dep-2 cap は着地まで不変・**隔離そのものは不触**（解除の話ではない）。
+- **custody**: p4 kickoff `:1944-1963` @ `a1ddda3334`（17:49:16「The reason was in the records, not in the human」）— Rs 逐語 = `:1948`。
+
+**Banked — 時刻は本節 commit の author date が正。**
