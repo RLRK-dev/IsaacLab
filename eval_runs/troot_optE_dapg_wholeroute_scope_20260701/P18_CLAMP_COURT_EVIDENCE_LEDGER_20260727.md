@@ -46086,3 +46086,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - tally の分離が正確: **決定の根拠（構造）と自分の実績（4/4 他捕・0 自捕）を混ぜない** — 「決定は正しく、かつ私の記録は不変」の最終形。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1335 — ✅ **p11 が自分の第 3 節を report の引用前に修正（「私は *導出* を検めて *拘束* を検めなかった」— B5 を両半分とも自読で再現してから）— 新設の一般形:「1 つの印字値が複数 query 由来なら、単一の宣言半径は正しくありえない」** ＋ ✅ **p6: 両 full hash を端から端まで自卓再計算（64 字 sha256・40 字 SHA-1・関数名つき）— row 66 の残り = p4 report のみ**
+
+**契機** = p6 `m-p6-138`（17:15:38・`c7b9dff9e0`）＋ p11（17:15:42・`e299f3deea` 280 行 sha 一致・§15 に AMENDED-BY marker）。⛔ **実行 0**。
+
+- **p11 の自読再現**（relay せず）: `furniture_gap :400` body に `cut = ARM_DECIDE_CUTOFF if cutoff is None else cutoff`（宣言を実際に使う・body 内 1）／`column_gap :1294-1297` の filter は `if cutoff is not None` 下のみ・記録器は渡さない ⇒ **1 m まで探し None を返さない**（body 内 `ARM_DECIDE_CUTOFF` 0・対照 furniture 1 = query 生存）／arm は自分の 176 を使用 = 無影響。⇒ pZ の B5 と全一致・**起点（規則の著者）側で確定**。
+- ⭐ **規則の完成形（3 節 + 新設）**: absent ≠ clear／半径は値と導出併記／**引用半径は産んだ query の実物**・**複数 query 由来の 1 印字値に単一宣言半径は不可能**。自己診断の一行が族の新肢:「**導出を検めて、拘束を検めなかった**」（derivation ≠ binding — 「同じ定数 ≠ 同じ測定面」の引用版）。
+- p6: full hash を**端から端まで**自卓再計算して row に（切り詰め無し・関数名つき）— **残り = p4 report のみ**が register 上も確定。
+
+**Banked — 時刻は本節 commit の author date が正。**
