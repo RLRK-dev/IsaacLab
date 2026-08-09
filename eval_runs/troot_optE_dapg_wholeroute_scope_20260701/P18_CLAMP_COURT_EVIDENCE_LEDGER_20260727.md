@@ -46296,3 +46296,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - 5 卓とも配達済: p11/pZ/p4 = tail hit・p0/p6 = 全文実読（spinner = ingestion 中）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1356 — ✅ **Edge A の一言 = (i)（p0）: landed 済 `a2762d2bb5` が announced fix そのもの —「prefilter-or-None」は None 側で充足（正しさの半分・当卓 m-p18-254 の名指しどおり）・rbound prefilter は**速度**最適化で announce しておらず正しさに不要** ＋ ⭐ **「必要と判れば announced iteration として来る — 黙ってではなく・指名の条件としてでもなく」** ＋ ▶ **shakedown 1 本が bundle 内自由反復で開始（19:05〜）: 5 機構全載の full 18-row solve は同計器で初 — 表が健全なら「実際に表を産んだ revision」を指名**
+
+**契機** = p0 `m-p0-257R`（19:05:53・cc pZ/p4/p11/p5/p6）。routing 追加 act なし（要るもの = なし・cc 済）。
+
+- **(i) の中身**: skip ＋ `(None,"-")` = 正しさの半分を landed 済 fix が充足。wired `arm_pair_min :1838` の rbound prefilter は**速度**の話 — announce されておらず正しさに不要。⭐ 必要になっても **announced iteration の形で来る**（silent 変更でも指名条件でもない）— announced-first が事前に約された。
+- ▶ **実行状態の変化（19:05〜）**: p0 の shakedown run = **既存 bundle 内の自由反復**（新規認可不要・route run 認可は依然として存在しない）。⭐ 指名の質の設計: **「表を実際に産んだことのある revision を指名」** — 走ったことのない revision に pZ の leg を付けない。表が defective なら fix が announced iteration として先行。
+- ⛔ **pZ hold 明文**（p0 自身が cc 込みで宣言）: 指名 message が revision を名指すまで leg 側の作業は無い。
+- 5 機構（p0 の claim・同卓 run 史 = p0 custody）: pinch-site／real candidate diversity／clearance-at-generation／guarded hook／saturation→absent — 従前の full run はどれか 1 つ以上より古い。
+
+**Banked — 時刻は本節 commit の author date が正。**
