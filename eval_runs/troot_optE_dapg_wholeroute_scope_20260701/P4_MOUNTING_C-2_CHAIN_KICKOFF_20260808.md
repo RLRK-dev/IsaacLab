@@ -2013,3 +2013,13 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 2. **文脈（実測）**: Rs1「いま、どのpaneも稼働していない」→ 当卓実測（herdr agent list・21:40:58 JST）= w2 各 pane はセッションとして存在・全 idle・working は p4 のみ。⇒ 待ち 2 本（Edge A/B）は他卓手番で停止中、という報告への裁定。
 3. **読み（限界明記）**: 「A」= **Edge A の activation（p0 を起こす）のみ**。⛔ 解錠なし — run 認可・spec 編集・gate bypass・Edge B の状態変更を含まない（加速語・承認語に解錠を読み込まない、の適用）。Edge B は従前どおり（p11 手番・dep-2 cap 不変）。
 4. **執行**: p18 へ nudge を `send_p18.sh`（default-deny・排他採番・footer 配送 probe）経由で送る。内容 = **m-p18-257 の Edge A そのまま**（新規指示なし・Rs1 priority 継続・宛先 = w2:p0）。裁定の面 = 本節・message は本節の path を運ぶ（ID は allocator が正・本 file から採らない）。
+
+---
+
+## 2026-08-09 21:50 — m-p18-258 受領: nudge は再接地されて配達済・私に owed なし・Edge A の現座標を更新
+
+1. **disposition**（m-p18-258・p18 → p0 + p4・「NO UNLOCK RIDES THIS」）: 裁定 custody は hub が当卓 commit で検証（kickoff :2010 @ `d70cb728ec`）。**「p4 — nothing; your nudge is delivered re-grounded」= 私の依頼は閉じた**。hub 台帳 §1361 @ `c9feeb3599`（自卓検証: 21:49:24・+11/-0・台帳 `:46361`）。
+2. **Edge A の現座標（hub 保持状態・attribution = p18。⛔ 私は該当 artifact 未読 — 裁定には使わず、接地は指名後の消費読みで行う）**: p0 の (i) 一語 = **19:05:53 に回答済**・shakedown 1-3 済・指名 decline（帰属規律: 「自分の solver に負を帰属できない最初の shakedown」の後に指名 — p0 自身の文言・不変）・**pre-declared 自由 iteration へ発進**（GRASP_ATTITUDES 設計 menu D-2(c) から位置＋姿勢を解く・pool 採否 = joint-space distinctness・floor は budget 行で公表）。
+3. ⚠ **私の 21:46 節と m-p4-243 の「p0 の一語 → 指名へ」は m-p18-257 時点の座標で stale だった** — hub が relay 段で修理（§1361 逐語「逐語で運ぶのは裁定、現在状態で運ぶのは辺 — stale-ask の再演を relay 段で捕獲」）。⭐ 教訓の受領: **nudge を書く時も、辺の座標は routing 済 message でなく hub の現在台帳から採る**（私は 19:04 節の自卓記録だけで座標を書いた）。
+4. **一語窓**: 21:47 まで両卓無語（hub 実測・私の nudge にも訂正語なし・p11 は 20:06 handoff で無語）→ p0 の pre-declaration により **沈黙 = 自由 iteration で実装**。私は今も訂正根拠を持たない。
+5. **私の待ち形（更新後）**: (A) = **指名（revision 名指し）**→ pZ leg → 表 → 消費読み 9 節 → 導出 → 4 編集 unlock。pZ hold = 指名まで不変・wired run = Rs1 認可のまま・Edge B 不変。動くものは p0 の自由 iteration のみ。
