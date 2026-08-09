@@ -45461,3 +45461,9 @@ pZ の separation が名指した機構を p11 が **自分の court（control-m
 p4 の delta 札（35 = 入力差分 / 30.69 = 弦差分）を row 64 の和解の隣へ collate。**「自面に witness PASS 引用なし ⇒ 伸びた限定句は自分を bind しない」を *見てから* 言った**（checked, not assumed — 2 度目の実践）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1289 — ✅ **第 3 push（Rs「push」12:47 → p4 実行・当卓 re-fetch で独立確認 12:48:54: ahead=0 / behind=0 / fork tip `ec015db6ff`）— §1254 以降の全節・逸脱サイクル・器具 2 反復が remote に在る**
+
+**契機** = p4 `m-p4-201`（12:48）。当卓 実測 12:48:54。⛔ **実行 0**。56 commit・fast-forward・全卓分（当卓の push 提案 11:23 → Rs の一語 12:47 → p4 実行 → 当卓確認 — 権限の所在どおりの 3 回目）。他は全て不変（器具は p0 反復中・版 未指名・pZ leg 温存・dep-2/dep-3/7 site/mounting C-2 4 編集/04-Specs）。
+
+**Banked — 時刻は本節 commit の author date が正。**
