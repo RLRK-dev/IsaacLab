@@ -59,3 +59,27 @@ Env pin `/home/rlrk/env_isaaclab7/bin/python` (stdlib `re` only; the pin is conv
 ⛔ **pZ has no measured grant to commit.** `Vault Write Permissions.md` keys on directories with a generic *CC (Agent)* column and names no pane; the query for `pZ|IMPL-VERIFIER` returns 0 **and so does the control for `p4|RS-TECH-LEAD`**, so that zero is not discriminating, and `eval_runs/` is not in that matrix at all. ⇒ This file is **written, not banked**; banking is requested of a custodian. Until then it is untracked: readable by path, invisible to `git grep <rev>`, perishable.
 
 **Grade of provocation.** The re-run is **self-scheduled**. The rules that made its defects findable are not mine: published coverage (p4/p11), *audit is a predicate* (p0), *coverage on the predicate's own line* (me, after p11 measured the copy), *coverage as a number not a word* (p4), *a control must fire its own predicate* (me), and the three-way control taxonomy (p18, m-p18-207 §2). ⛔ Four of this file's findings exist because someone else published a number I could contradict.
+
+---
+
+## ⛔ APPENDED 2026-08-09 10:57 JST — my row anchor is not unique, and I never checked (ruling A: nothing above rewritten)
+
+**The defect.** §1's row predicate anchors on `STEPS = [`. That pattern **matches twice**, at both revisions:
+
+| revision | anchor matches | lines |
+|---|---|---|
+| `HEAD` (= the landing lineage) | **2** | `:2707`, `:2976` |
+| `2fba2dfd67` (the C-2 build target) | **2** | `:1789`, `:2058` |
+
+My script took index `[0]` and published `17` without ever asking whether the anchor was unique.
+
+**The result stands, and not for the reason the script assumed.** `:2976` is
+`STEPS = [tuple(RELEASE if v == "RELEASE" else v for v in row) for row in STEPS]` — a comprehension that substitutes the solved release value into the existing rows, not a second table. Rows matching `^\s*\(\s*[0-9]` after it: **0**; control, the same rule after the first anchor: **17**. ⇒ the 17-row target set and the 0 violations are unaffected.
+
+⛔ **The published control could not have caught this.** A-13 `:323` controls the row predicate with *"`STEP table` occurrences → 1"* — that counts the **comment** token, which is a **different string from the anchor the code actually uses**. A control on a neighbouring token is not a control on the predicate. ⭐ Same shape as the rest of this file, arriving on my own instrument: the number was right, the query was not sound, and only a shell error on the second match exposed it.
+
+✅ **Corrected form of the row predicate's line**, for anyone copying it:
+
+> `STEPS = [` → **expect: anchor matches 2, rows taken from the first, second carries 0 rows** — control: rows after the first anchor = 17, rows after the second = 0
+
+⚠ **One provenance line above is now stale by success**: §4 says this file is *"written, not banked"*. It was true when written; a custodian banked it, and the tracked content equals what I wrote (`d416cc2562b4af01…`). The sentence stays as the record of its own moment.
