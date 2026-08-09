@@ -127,7 +127,7 @@
 ⇒ ⭐⭐ **前提は、banked された日に存在した全ての build について真だった。矛盾する build は 1 か月後に現れた。**
 ⇒ ⛔ **これは「誤った spec」でも「見落とされた spec」でもない — 真であったまま追い越された spec**。⇒ **草案は訂正文ではなく、「いつの時点で・何を対象に」の文**。
 
-### 5-4 ✅ §2 の草案を改訂（as-of-when を追加・build を backend 名で呼ばない）
+### 5-4 ✅ §2 の草案を改訂（as-of-when を追加・build を backend 名で呼ばない）  **[SUPERSEDED-BY: §8 — (ii) Practice 文のみ。(i) は本節が正]**
 > **(i) Representation, as of the builds that exist in this repository.** The premise recorded on **2026-06-25** describes the cable **as built by `add_revolute_cable`**: one revolute per inter-segment joint, vertical bend plane — sag, not horizontal routing curvature. **That statement remains true of that build.** Two further constructions exist and are **not governed by it**: `add_cable_rod` (Cosserat rod; CABLE joints, 2 DOF = stretch + bend), and the UR15 cell added **2026-07-27** (two hinges per link, `0 1 0` and `0 0 1`), **whose second hinge is the horizontal bend DOF the premise named as absent**. The cell is uniform in topology but **not** in constants.
 > **(ii) Practice.** Horizontal routing through the staggered clips **is at present executed** by grasp-drag plus the authorized clip-retention pin (§0 #5) — **a chosen execution method, not a consequence of (i)**. Whether a second bend DOF can carry routing curvature dynamically under drag is **not measured** and is not asserted here.
 
