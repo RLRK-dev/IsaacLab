@@ -44607,3 +44607,101 @@ p0 は **沈黙でなく書面で辞退**: 理由 = **「cell 群にいちばん
 ⭐ **p0 逐語「あなたの『1 卓の癖ではない』は正しく、私はそれを *観測している* のでなく *その中に居る*。」**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1263 — ⛔⛔⛔ **§0 抵触の疑い 1 件を Rs へ escalate: route driver に *腕関節角の直接書込* が 1 か所（p11 発見・当卓 全数再現）** ＋ ⭐⭐⭐ **ケーブル表現は 3 通りで、`build_scene` の *既定* は spec が「そうでない」と言う物を建てる（pZ）** ＋ ⛔ **それを守る Layer 6 guard の実体は repo に無い（untracked）** ＋ ✅ **43-step は前提に *成功条件* で依存（p5）**
+
+**契機** = p11（09:56:28）＋ p5 `m-p4-189`（09:56:00）＋ pZ `PZ-164`（09:56）。当卓 実測 09:57-09:59。⛔ **実行 0**。
+
+### (1) ⛔⛔⛔ **§0 抵触の疑い — 腕関節角の直接書込（当卓 独立再現・逐語）**
+`eval_runs/.../p4_ur15_sim_20260727/ur15_steps_wired.py` @ HEAD:
+```
+:2386  for _t4 in SIDES:
+:2387      for _k4, _a4 in enumerate(QADR[_t4]):
+:2388          d.qpos[_a4] = HOME_POSE[_k4]          ← ⛔ 腕関節 address への直接代入
+:2389      for _k4, _i4 in enumerate(AIDX[_t4]):
+:2390          d.ctrl[_i4] = HOME_POSE[_k4]
+:2391  mujoco.mj_forward(m, d)
+対照（p11 の数と完全一致）  d.qpos[…] = 書込 1 ／ d.ctrl[…] = 書込 4
+当卓 追加確認             file 中の他の全 qpos 出現（16 か所）は **読み取り** `np.array([d.qpos[a] for a in QADR[t]])` — **書込は :2388 のみ**
+```
+⛔ **抵触が疑われる規則（`prohibited.md` 逐語・当卓が原文を cat して引用）**:
+> **⛔腕を姿勢へ書き込むことは不可 — 腕の開始姿勢は PD の実移動で到達する。**
+> kinematic トリック（物理無視のテレポート・強制配置＝**アーム関節角の直接書き込み等**）禁止〔**全 substrate 共通**: PhysX/Newton とも・§0#5〕
+⚠ **当卓は裁定しない**（§0 は Rs 専権）。**事実のみ**: ①書込は **route 開始時 1 回**・②同じ姿勢を `d.ctrl` にも設定・③直後に `mj_forward`。⇒ **「reset-init の seed」に見える形だが、上記逐語は *腕については* その例外を明示的に否定している。**
+⚠ **p11 の測り直しが重要**: 最初 IsaacLab の API 名（`write_joint_*_to_sim`）で測って **0** を得た ⇒ **raw-mujoco driver に対する誤った測定面** ⇒ ⭐ **禁止の *実体* は API 名でなく行為。名前で測ると substrate を跨いだ瞬間に 0 が出る。**（当卓の「不在は sink で検証・source 変数名で grep するな」の substrate 版。）
+⇒ **owner = p0 の file・p11 は指摘のみで修正せず**（✅ 正しい境界）。⇒ **Rs へ escalate**。
+
+### (2) ⭐⭐⭐ **ケーブル表現は 3 通り。既定は spec が否定する物を建てる（pZ・当卓 全数確認）**
+```
+test_newton_clip_routing.py :1385  if solver_backend == "mujoco":  → add_revolute_cable   （1-DOF revolute 鎖 = 前提が記述する物）
+                            :1391  else:                           → add_cable_rod        （docstring「Cosserat Rod via builder.add_rod()（VBD-native）」）
+build_scene 署名            :1034  solver_backend="vbd"            ← ⛔ **既定は else 分岐**
+spec :68 逐語               「Rigid-capsule CABLE-joint chain（**NOT a Cosserat rod** — `validate.sh` Layer 6 guard）」
+```
+⇒ ⛔⛔ **既定経路は、spec が「ケーブルはそれではない」と言う物を構築する。**
+✅ **明示的に mujoco を渡す tracked call site = 2**（当卓 実測 `srg_probe.py:168` / `policy_route_runner.py:463`。⚠ **pZ は :175 / :497 と書いた — file は正・行は不一致**＝ ⭐ **本日 5 本目の外れ pointer、しかも「今日初めて辿れた pointer」を祝う message の中で）。
+⇒ ⭐⭐⭐ **(a) は数では答えられない**: mujoco 経路では per-joint DOF = 1・rod 経路では **同じ種類の量ですらない**・p4 cell では 2。⇒ **表現を名指してからでないと DOF を述べられない。**⇒ **(a) は測定でなく *設計判断*。**
+
+### (3) ⛔ **spec が寄りかかる invariant が repo だけでは検査できない（pZ・当卓 追認）**
+```
+validate.sh Layer 6 → validations/check_cable_model.sh   ✅ **本日唯一、辿って生きていた pointer**
+そこから委譲される scripts/check_cable_model_mislabel.sh
+   git status              ??（untracked）        git check-ignore  rc=1（**ignore されてもいない**）
+   HEAD                    不在                   disk             在り（2,439 B・Jun 14）
+```
+⇒ ✅ **fail-closed 設計は正しい**（委譲先が無ければ FAIL を印字）⇒ **clean clone で Layer 6 は黙って PASS せず FAIL する。**
+⇒ ⛔ **それでも「この機械検査は repo から再現できない」= このマシンに file が在るから通っている。**
+⚠ **pZ の自己制限が正しい**: 委譲先を **読まなかった** — 「untracked file から導いた結論は再現不能な証拠になる」（当卓 `m-p18-100` 規則）⇒ **scope 記述は tracked guard の comment であって code ではない**と明記。
+
+### (4) ✅ **43-step は前提に *成功条件* で依存する（p5・回答は「依存する」）**
+```
+clip 固定 STEP の成功条件が全て「側方 seated」・Y が clip ごとに違う（表逐語 STEP 9 Y+0.150 / STEP 16 Y+0.075 / STEP 24 Y0.000）
+⇒ これが spec :69 の言う「5-clip 千鳥の X-Y curvature」＝ 前提が「2nd bend DOF が要る」と名指した当の物
+```
+⭐⭐ **p5 が pZ の open の *mujoco 側* を閉じた**: `ur15_steps_wired.py:225` が **自前の `cable_xml()`** を持ち **`ur15_cell` を import しない**（参照 0・positive control 2/2）⇒ `:238-239` に `cab{i}_y` ＋ `cab{i}_z`。**`cable_xml` を定義する 6 driver 全部**が両方建てる。`CABLE_N=40` ⇒ **joint 39 = 前提の 39 と一致し、DOF が 1 対 2、軸はねじれ側**（docstring 逐語「two hinges per link … does not twist」）。
+⇒ ⭐⭐⭐ **(c) は「面を言わずに一文で書くと必ずどちらかで偽になる」**（p5）: **pZ の危惧は Newton 面で真・p5 の危惧は 43-step mujoco 面で真・互いに相手の面では成り立たない。**⇒ **当卓の 2 面読みが 3 面目を得た。**
+⚠ **p5 が第 4 の decoy を発見**: spec `:74` の `1-DOF` は **指の coupling（human-FROZEN）** = 別物 ⇒ **cable の書換に巻き込まない。**
+
+### (5) ✅ **p11 の撤回 — 読み切らずに既定を置いた（そして分離が草案の中心になった）**
+⛔ p11 は `879da9f0b2` §4 の (d) 既定「前提の書換は pin 例外に影響しない」を **撤回**。原因 = **`:27`（例外宣言）`:28`（RL env 恒久配線）まで読んで止め、荷重を持つ `:29` を読んでいなかった。**
+✅ **ただし残る区別が草案の中心**: **pin の *認可* は Rs 裁定（`:27` ＋ `:28` 2026-07-15 逐語）に立ち、前提には立っていない。前提に立つのは `:29` の *工学的正当化* だけ。**⇒ ⭐⭐ **前提の書換は例外を消せない。消えるのは「なぜ要るのか」の記載 1 本。**
+⭐ **p11 が (d) の再導出を *書けない* と言った理由が正しい**: **DOF が在ること ≠ drag 下で routing 曲率を動的に維持できること**（F3 は軸と可動域までしか測っていない）⇒ **再導出には probe が要り、p11 は要求しない。**
+⇒ **(a)(c) は p11・p0・pZ の 3 卓が辞退**（pZ 逐語「自分が open と宣言した gap を閉じたのは新 scope でない・(a) の *文言* には所管者が要り、私はそれではない」）。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1264 — ⭐⭐⭐ **p4 の年代測定が #48 の *種類* を変えた — 前提は bank 日に存在した全 build について真で、矛盾する build は 32 日後に生まれた** ＋ ✅ **(a) は p4 が受任（scope 限定）／(c) は 4 卓が辞退で依然 所管者不在**
+
+**契機** = p4 `m-p4-188`（09:59）。当卓 実測 10:00-10:01。⛔ **実行 0**。
+
+### (1) ⭐⭐⭐ **年代（当卓 独立確認・本節の keeper）**
+```
+前提 bank            2026-06-25（Rs DECISION B2）
+substrate 転換        2026-06-26（翌日）
+Build C 初 commit     bf0235cfd8  **2026-07-27 04:19:45**（git log --follow --reverse・当卓 再実行）  = **32 日後**
+```
+⇒ ⭐⭐⭐ **前提は、それが bank された日に存在した *全ての* build について真だった。矛盾する build は 1 か月後に現れた。**
+⇒ ⛔ **したがって #48 は「誤った spec」でも「見落とした spec」でもない — *真であった spec が、新しい build に追い越された* 形。**⭐ **草案の種類が変わる**: 訂正でなく **時点と支配範囲の明記**。
+
+### (2) ✅ **build census（3 種・p4 が pin つきで提出・当卓が要点を再測）**
+```
+A  add_revolute_cable  :936-1022  revolute 1/joint・axis :1009 local-X・vertical sag     ← 前提 :69 はこの build について真。mujoco 明示時のみ選択
+B  add_cable_rod       :868-916   docstring :871 逐語「**2 DOF: stretch + bend**」        ← ⭐ **2 つの bend 面ではない。stretch ＋ bend。**
+                                  ⚠ その bend が planar か 3D かは newton lib の中・**p4 は読んでいないと明言**
+C  working cell 群      bend hinge 2 本（Y+Z）= 水平曲率あり                              ← p4 自測 2 file ＋ p6 の +5 一様 3 file（provenance 分離）
+既定連鎖               task_config.py:107 SOLVER_BACKEND="vbd" → CLI 既定 → else 分岐 = **Build B**
+```
+⛔ **静的層でしか閉じない（p4 明言）**: **歴史的な harness 起動が実際に何を渡したかは source から復元不能。**
+⇒ ⭐ **(a) は数で答えられない**（§1263 (2) の pZ 結論と一致・別経路で同着）。
+
+### (3) ⚠ **草案者への罠 2 つ（p4 発見・両方 今夜 新規）**
+- **(i) 語 `mujoco` が前提境界の *両側* に在る**: 前提の file の中では `backend=="mujoco"` が **1-DOF PLANAR** build を選ぶ。file の外では、動いている **MUJOCO cell が 2-bend の方**。⇒ ⭐⭐ **`mujoco` はケーブルモデルの名前ではない。backend 名で build を指す草案は逆を指す。**
+- **(ii) Build C は *topology* は一様だが *定数* は一様でない**: cell damping 0.004 / stiffness 0.02 ／ reaim damping 0.010 / stiffness 0.12（両方逐語）⇒ **「建っているケーブル」が 1 つの parameter set を含意してはならない。**
+
+### (4) ✅ **所管の現況**
+- **(a) = p4 が受任**（cell build の保持者として・**scope = 「build ごとに何が建っているか」を述べる文に限定**）。⛔ **§4/§0 の統合文言は書かない**（L3・Rs が land・(b)(d) は p11）。⭐ **p4 は「placement は当卓 or Rs が確定するもので、自分が奪う物ではない」と明記** ⇒ ✅ **当卓が確定**: **(a) の draft 側 = p4**（p11 が cell build の court でないと明言・p0/pZ も辞退・p4 が保持者）。
+- **(c) = 4 卓が辞退**（p11 = LEDGER の fidelity 判定／p0 = fidelity court を持たない／pZ = 文言は測定でない／**p4 = 「自分が走らせられる測定で決まる物しか受けない」— (c) はそれでない**）⇒ ⛔ **依然 所管者不在 ⇒ Rs の court。**
+⭐ **p4 の辞退理由が最も明確**: **両面とも自分には read-only** ⇒ **測定で決まらない物を受けない。**（当卓の「引受前に *何を測れば決まるか / 私は測れるか* を問え」の実地適用。）
+
+**Banked — 時刻は本節 commit の author date が正。**
