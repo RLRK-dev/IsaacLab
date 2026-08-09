@@ -2059,3 +2059,12 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 3. **word（設計 court・裁定）**: **build は mounting 設計に一致する — overlap は設計された係合であり、fork は (b) に落ちる**。根拠 = H4「crown が mount を担ぐ」（spec `:84`: crown top 1.550 ≥ mounts 1.530・**+20 mm は設計された engagement**）・取付点 [±YOKE_SPREAD,0,1.53]（`:69`）・crown capsule 軸 1.440/R 0.110（`:71-72`）— built(0.22/45) と C-2(0.28/20) で縦幾何は同一。⚠ **−79.2182 の深さ自体は設計 parameter でない**（base geom 形状 × capsule の合成・engagement が非零で設計どおりである事実に依存しない）。
 4. **word の縁取り（scope 2 つ）**: (i) 除外は **attachment pair（固定 base geom ↔ それを担ぐ構造）を L/R clearance set から外す形**（pZ の (b) 文言そのもの）。⛔ **crown を env set から外す形は不可** — crown は動く link に対する実在障害物（C-2 設計自体が「頭に耐える取付を選ぶ」で立っている・spec `:56` family B 却下・#60）。(ii) set fix 後に attachment を跨がない残余 overlap（例: 姿勢依存の wrist↔crown）が出れば、それは**本物の clearance 読み** — 定数と混同しない。
 5. **執行**: send_p18.sh で p18 へ（宛先 p0・Rs1 加速の伝達つき）。私の chain 不変: 指名 → pZ leg → 表 → 消費読み → 4 編集 unlock。
+
+---
+
+## 2026-08-09 23:11 — m-p18-262 受領: fork は両 court から独立に (b) で決着（再審なし）・私に owed なし
+
+1. **収束（m-p18-262 §2）**: p0 は **23:02:24 に自力で (b) を解決**していた — cell spec 自身の文（`:421-424` @ `2fba2dfd67`）に接地し、rules 着地 `d8badd92d3`（**weld partition ＋ one-joint ancestor-pair exclusion**）・hub 台帳 1365。私の 23:08 word（mounting SSOT の数値・H4）とは**別 court・別 instrument で同一結論** — 真に独立な収束（同意の再導出でない方の形）。**fork = (b)・build は無罪・再審しない**。
+2. **relay lag の整理（矛盾なし）**: Rs1 発話時点の実測（23:08:43 idle）は正・word commit 時点では p0 は既に動いていた — hub が §1 で reconcile。⚠ 教訓 rider: **idle の実測は発話時点の事実で、着地時点の事実ではない**（実測にも鮮度がある — 15 節鮮度規律の pane-status 版）。
+3. **私の scope 縁取り 2 つは operative になった**（m-p18-262 §3）: (i) 除外 = 「固定 base geom が L/R set を出る」形・⛔ crown は env に残る — hub 観測では p0 の landed rules は準拠に見える（smoke: L/R-env +51.5 = upper-arm↔mount = crown は動く link に対し測られ続けている）→ **p0 の一語 confirm 待ち（p0 の課題・私のでない）**。(ii) 残余 overlap（attachment を跨がない）= 本物の clearance 信号。
+4. **状態**: 私に owed なし。chain 不変（指名 checkpoint disposition → pZ leg → 表 → 消費読み 9 節 → 導出 → 4 編集 unlock）。動くものは p0 の自由 iteration のみ（live env column → shakedown → (ii) z-iteration → 基準 clear で指名）。台帳 1366 が本 dispatch に続く。
