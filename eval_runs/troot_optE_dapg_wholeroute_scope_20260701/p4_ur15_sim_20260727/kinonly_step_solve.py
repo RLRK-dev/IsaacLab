@@ -730,6 +730,42 @@ def main() -> int:
     print(f"[dev-c2x] mapping: design (across,along) -> cell (x,y) by transposition; "
           f"clip C1 control = {abs(CLIP_XY['C1'][0] - 0.150) * 1000:.1f} mm (expect 0.0), "
           f"clip C2 = {abs(CLIP_XY['C2'][0] - 0.075) * 1000:.1f} mm (expect 35.0)")
+    # ---- z, per Rs2 (= p4/CC)'s (ii) word (m-p18-260, operative from this iteration) ----------
+    # Term-map BY MEANING using the canonical table's own §1.1 dictionary (z value -> term);
+    # ⛔ never by offset-number coincidence.  The 1.025 family runs BOTH-VALUES: v1 = verbatim
+    # canonical (Franka-generation EE datum, kept for comparability), v2 = banked pinch
+    # conversions -- ZERO NEW NUMBERS, every v2 is a banked constant or a difference of banked
+    # constants, and the two derivation routes are cross-checked at runtime.
+    Z_GRASP_V2 = float(spec.TABLE_TOP) + float(spec.CABLE_R) + 0.008
+    _g2 = 1.0668 - 0.2548
+    if abs(Z_GRASP_V2 - _g2) > 1e-9:
+        raise RuntimeError(f"grasp v2 routes disagree: TABLE+CABLE_R+0.008={Z_GRASP_V2!r} vs "
+                           f"1.0668-EE_TO_PINCH_CLOSED={_g2!r} -- a banked constant moved; stop")
+    Z_SEAT_V2 = float(spec.GROOVE_CENTER_Z)
+    if abs(Z_SEAT_V2 - (float(spec.TABLE_TOP) + 0.009)) > 1e-9:
+        raise RuntimeError(f"seat v2 route disagrees: GROOVE_CENTER_Z={Z_SEAT_V2!r} vs "
+                           f"TABLE+0.009={float(spec.TABLE_TOP) + 0.009!r}")
+    print(f"[z] (ii) map: 1.050->Z_RISE_REST({float(spec.Z_RISE_REST):.3f}) "
+          f"1.070->Z_RISE_ROUTE({float(spec.Z_RISE_ROUTE):.3f}); 1.025 family both-values: "
+          f"cable rows v2=TABLE+CABLE_R+0.008({Z_GRASP_V2:.3f}, == 1.0668-0.2548 checked), "
+          f"clip rows v2=GROOVE_CENTER_Z({Z_SEAT_V2:.3f}); v1=verbatim(1.025).  "
+          f"Chain follows the first solved instance per row (v2 x cell-x first).")
+
+    def z_for(row, ref) -> list[tuple[str, float]]:
+        if row["zL"] != row["zR"]:
+            raise RuntimeError(f"row {row['step']} zL != zR -- the term dictionary assumes one z")
+        z = float(row["zL"])
+        if abs(z - 1.050) < 1e-9:
+            return [("Z_RISE_REST", float(spec.Z_RISE_REST))]
+        if abs(z - 1.070) < 1e-9:
+            return [("Z_RISE_ROUTE", float(spec.Z_RISE_ROUTE))]
+        if abs(z - 1.025) < 1e-9:
+            v2 = (("TABLE+CABLE_R+0.008", Z_GRASP_V2) if ref == "cable-at-rest"
+                  else ("GROOVE_CENTER_Z", Z_SEAT_V2))
+            return [v2, ("verbatim", 1.025)]
+        raise RuntimeError(f"row {row['step']} z={z} has no term in the canonical §1.1 dictionary "
+                           f"and no banked conversion -- refusing to invent one (falls to Rs2)")
+
     # Resolve every referent FIRST and print the resolution block, so the rule each row used is
     # on the record before any solving starts (and mid-table prints cannot break the markdown).
     resolved, carry = [], None
@@ -739,18 +775,19 @@ def main() -> int:
         resolved.append((row, ref, xy, rule))
     print()
     for row, ref, xy, rule in resolved:
-        print(f"[referent] STEP {row['step']:>2} -> {ref} ({xy[0]:+.3f}, {xy[1]:+.3f})  {rule}")
+        zs = " / ".join(f"{n}({v:.3f})" for n, v in z_for(row, ref))
+        print(f"[referent] STEP {row['step']:>2} -> {ref} ({xy[0]:+.3f}, {xy[1]:+.3f})  z: {zs}  {rule}")
 
     bank: list[dict] = []
     print()
-    print("| STEP | referent | candidate | attitude L(yaw,roll)/R [rad] | arms-closest mm (pair) | "
-          "arm-env mm (pair) | along-path worst mm (i/n, pair) | winner pe mm / re rad (L, R) | "
-          "budget | verdict |")
-    print("|---|---|---|---|---|---|---|---|---|---|")
+    print("| STEP | referent | candidate | z m (name) | attitude L(yaw,roll)/R [rad] | "
+          "arms-closest mm (pair) | arm-env mm (pair) | along-path worst mm (i/n, pair) | "
+          "winner pe mm / re rad (L, R) | budget | verdict |")
+    print("|---|---|---|---|---|---|---|---|---|---|---|")
 
-    def row_at(row, ref, cx, cy, label, prev):
-        tl = np.array([cx - spec.GRIP_HALF_SPAN, cy, row["zL"]])
-        tr = np.array([cx + spec.GRIP_HALF_SPAN, cy, row["zR"]])
+    def row_at(row, ref, cx, cy, label, prev, zname, zval):
+        tl = np.array([cx - spec.GRIP_HALF_SPAN, cy, zval])
+        tr = np.array([cx + spec.GRIP_HALF_SPAN, cy, zval])
         cL, peL, reL, uL = solve_arm("L", tl, prev["L"])
         cR, peR, reR, uR = solve_arm("R", tr, prev["R"])
         # ⛔ The reach-only fallback of shakedowns 1-3 is GONE, by construction: a position-only
@@ -761,11 +798,12 @@ def main() -> int:
         if not cL or not cR:
             def _diag(bpe, bre):
                 return f"{bpe * 1000:.1f}mm/" + (f"{bre:.3f}rad" if bre < 1e9 else "no att-conv try")
-            print(f"| {row['step']} | {ref} | {label} | - | - | - | - | "
+            print(f"| {row['step']} | {ref} | {label} | {zval:.3f} ({zname}) | - | - | - | - | "
                   f"best L {_diag(peL, reL)}, R {_diag(peR, reR)} | "
                   f"{uL + uR} it, pool L{len(cL)}/R{len(cR)} | NOT SOLVED (within this budget) |")
             bank.append({
                 "step": row["step"], "referent": ref, "candidate": label,
+                "z_name": zname, "z_value": zval,
                 "target_L": [float(x) for x in tl], "target_R": [float(x) for x in tr],
                 "best_pe_mm": [peL * 1000.0, peR * 1000.0],
                 "best_re_rad": [None if reL >= 1e9 else reL, None if reR >= 1e9 else reR],
@@ -840,12 +878,14 @@ def main() -> int:
         verdict = ("CLEAR" if clear else "TOUCHING OR THROUGH") + cap
         along = gap_say(worst, wp) if worst is None else f"{worst * 1000:+.1f} at {at} ({wp})"
         att_s = (f"L({wa[1][0]:+.2f},{wa[1][1]:+.2f}) R({wb[1][0]:+.2f},{wb[1][1]:+.2f})")
-        print(f"| {row['step']} | {ref} | {label} | {att_s} | {gap_say(aa, pair)} | {gap_say(ae, pe)} | "
+        print(f"| {row['step']} | {ref} | {label} | {zval:.3f} ({zname}) | {att_s} | "
+              f"{gap_say(aa, pair)} | {gap_say(ae, pe)} | "
               f"{along} | L {wa[2] * 1000:.1f}/{wa[3]:.3f}, R {wb[2] * 1000:.1f}/{wb[3]:.3f} | "
               f"{uL + uR} it, pool L{len(cL)}/R{len(cR)}, env-clear L{ncL}/R{ncR}, "
               f"clear-pairs {n_clear}, sel={'near' if nearest is not None else 'maxmin'} | {verdict} |")
         bank.append({
             "step": row["step"], "referent": ref, "candidate": label,
+            "z_name": zname, "z_value": zval,
             "target_L": [float(x) for x in tl], "target_R": [float(x) for x in tr],
             "q_L": [float(x) for x in wa[0]], "q_R": [float(x) for x in wb[0]],
             "att_L": list(wa[1]), "att_R": list(wb[1]),
@@ -865,16 +905,14 @@ def main() -> int:
 
     prev = solved_q[1]
     for row, ref, (cx, cy), rule in resolved:
-        if ref == "C2":
-            got = None
-            for label, (ax, ay) in C2_CAND.items():
-                r = row_at(row, "clip C2", ax, ay, label, prev)
+        shown = {"C1": "clip C1", "C2": "clip C2"}.get(ref, ref)
+        xcands = list(C2_CAND.items()) if ref == "C2" else [("single", (cx, cy))]
+        got = None
+        for zname, zval in z_for(row, ref):
+            for xlabel, (ax, ay) in xcands:
+                r = row_at(row, shown, ax, ay, xlabel, prev, zname, zval)
                 got = got or r
-            prev = got or prev
-        else:
-            shown = {"C1": "clip C1", "C2": "clip C2"}.get(ref, ref)
-            r = row_at(row, shown, cx, cy, "single", prev)
-            prev = r or prev
+        prev = got or prev
 
     print()
     print(f"[budget] tries {TRIES} = 2 full passes over the design menu ({len(MENU)} attitudes, "
@@ -890,7 +928,10 @@ def main() -> int:
           f"no-clear-pair fallback, and the row says which; seeding pass 1 = prev pose, pass 2 = "
           f"prev+N(0,0.35), home/uniform without prev; along-path samples 19 interior (arm-arm "
           f"AND arm-env), endpoints excluded, path start = the previous row's SELECTED pose "
-          f"(banked as path_from)")
+          f"(banked as path_from); z per Rs2's (ii) word -- term-map by the canonical §1.1 "
+          f"dictionary (Z_RISE_REST/Z_RISE_ROUTE), 1.025 family both-values "
+          f"(TABLE+CABLE_R+0.008={Z_GRASP_V2:.3f} / GROOVE_CENTER_Z={Z_SEAT_V2:.3f} / verbatim), "
+          f"every row stamped with value + constant name")
     sol = _GEN / "kinonly_solutions.json"
     sol.write_text(json.dumps({
         "meta": {
