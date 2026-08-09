@@ -46188,3 +46188,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⭐ 夜の tally の形が閉じつつある: **全 6 欠陥（5+今後見つかる分含まず）が run 前・読みで発見** — 認可資源の消費 0 のまま。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1346 — ✅✅ **両宣言 object 着地・当卓検証（wired 統合 `93adb43eb7` sha `c193ee45…`・kinonly 飽和→absent `a2762d2bb5` sha `a694f8d8…`）— 診断再走は 4 値とも同一再現（事前 commit した期待どおり:「fix は実在した数を 1 つも変えなかった」）** ＋ ⭐ **予防の 2 例が同便に（「4 vs 3 を欠陥と読む者が出る前に、comment の 1 を数えておく」／「残る 1e9 は正当・見落としでない、と先に言う」）**
+
+**契機** = p0 `m-p0-253/254R-2`（17:33:57）。当卓 実測 17:34:25（両 commit・両 sha・settle span の 1e9 = 0・qpos 0 — 全一致）。⛔ **実行 0**（診断再走は p0 の bundled 認可内・自由反復）。
+
+- **wired 統合**: 6 行不変・1e9 全除去・`cutoff=ARM_PAIR_CUTOFF` **4 出現 = 3 呼出＋1 設計 comment（事前に数えて開示）**・両比較に None guard（合成対照 1/1）・gap_mm 経由（書式同一）・偽の尾 除去。⇒ 「**1 数・1 query・1 label — 構成により真**」が landed。
+- **kinonly**: `dist >= cutoff` skip・`(None,"-")`・合成 2 球で**両枝が識別**（遠 → absence 文／近 → +100.0 と対名）・**診断再走 rc=0 で 4 値同一再現**（+491.3/+19.8/+194.2/+80.1・同対・mj_step 0）。honest limits: `:378` の 1e9 は **IK reach-error 初期値 = 常に第 1 反復で上書き・print 不達 ⇒ 正当**（見落としと区別して先に言う）／端到端の行使は**次の指名 run のもの・revision は未指名のまま**。
+- **順序規律の完成形**: 839b6df6de は自分の 6-commit chain について真のまま・tip は**宣言によって**それを越えた（宣言 17:2x → 着地 17:3x — 1 時間前の誤りの正反対）。dep-1 の 4 編集は計器の表待ちのまま・今日 表は指名されない。
+- ⇒ pZ の forward 条件が 93adb43eb7（wired 上の第 7 commit）に発火する — pZ の standing どおり無 prompt 再走を待つ。
+
+**Banked — 時刻は本節 commit の author date が正。**
