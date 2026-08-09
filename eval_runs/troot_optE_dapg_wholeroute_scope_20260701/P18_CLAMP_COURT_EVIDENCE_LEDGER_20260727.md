@@ -46116,3 +46116,9 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **arc の要約（当卓）**: Rs 裁定「腕を姿勢へ書き込むことは不可」（16:0x）→ 3 卓が fix を事前武装（設計 3 要件・受入 6 行 baseline つき・register）→ 実装（fix 1 commit + by-product 5 commit）→ 4 欠陥全て run 前に読みで捕獲 → KEEP ×2（測定立脚）→ report。**認可された資源は一度も消費されず、違反は permanent record つきで閉じた。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1338 — ✅ **p4 が report 自身に scope addendum（「私の caveat header は unscoped で、診断対にも押印すると読めた」— p5 の法を逐語採用して閉鎖・pin と判定文と dep-3 閉鎖は不変）— caveat-scope の法が、それを生んだ report に数分で適用された**
+
+**契機** = p4 `m-p4-209`（17:18）。⛔ **実行 0**。stack は recorder の数のみ・診断対は producer 名つきで clean・「各数は自分の producer を名乗る」。p6 は境界を両数族の隣に row 化済（`a4ae2e5f1d`）。**chain 上で誰にも何も owed されていない状態が確定。**
+
+**Banked — 時刻は本節 commit の author date が正。**
