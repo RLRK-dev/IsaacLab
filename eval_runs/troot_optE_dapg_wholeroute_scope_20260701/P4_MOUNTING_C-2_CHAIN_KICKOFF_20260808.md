@@ -1938,3 +1938,26 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 2. **私の消費読みへの継承（p0 fix 着地まで）**: per-STEP 表の arm↔arm / arm↔env 行で **ceiling 値（500.0 mm 級）は「最も余裕のある数」ではなく saturation 候補**。⭐ pZ の filing-time 法則を採用: **表が重要になる瞬間こそこれが最も見えない瞬間 — だから今 file する**。
 3. **+491.3 への rider 追加**（16:38 節の advance 知識に同行・closed report は不変）: 値は真に内側（<500 ⇒ 実測・飽和なら 500.0 と読める）だが **飽和 ceiling の 98.3%（余白 8.7 mm）** — 数の ceiling への近さは **計器の性質であって cell の性質ではない**。margin を「潤沢」と読まない。
 4. **pair-name 対照の限界**（作者 pZ 自身が file）: 「pair を名指す行 = geom-distance 量」は span-from-geometry を分けるが **real-from-saturated を分けられない**（飽和読みも実読と同じく pair 名を運ぶ）。私の消費読みの pair 対照にも同じ限界注記。
+
+---
+
+## 2026-08-09 17:48 — (c) は裁定でなく測定で解けた: 隔離の cause-of-record は機構（LEDGER・≤07-02）・1-DOF 説は 13 日後の別目的 gloss
+
+### (0) 問いの修正（Rs の指摘が正しい）
+
+私は Rs に「隔離の本当の理由はどちらか」を裁定として問うた。⛔ **誤形** — 隔離を決めて記録したのは CC 運用であり、理由は Rs の頭でなく**記録の中**に在る。Rs 逐語「おれは隔離をしていないから俺に理由を問われてもわからない」。⇒ 問いを撤回し測定に変換（私の decline は「fidelity 裁定は測定で決まらない」だった — **custody 順序は測定で決まる**・decline と矛盾しない）。
+
+### (1) 測定（全 pin 自卓）
+
+- **LEDGER（成否 SSOT）**: git 追跡初日（`e05efab04a` 2026-07-02 07:14「Track vault planning SSOT files in git」）の blob `:42` に**既に**逐語「AR reached 92.2% (Gate G3 PASS) but its **mechanism (spring-follow + kinematic hold)** is **fidelity-QUARANTINED**」。⇒ **隔離の cause-of-record = 機構**。追跡初日から今日まで不変。
+- **spec 側の 1-DOF 説**: `:31` の文（"same banked sim2real fidelity limitation that already explains the AR-routing QUARANTINE"）の初出 = **`4de2c9fd42` 2026-07-15 02:09「Invariant 5: the pin is wired into the RL env, and only for clips」** — **13 日後**・**§0 invariant-5（pin）の正当化のために**書かれた gloss で、隔離決定そのものの記録ではない。⚠ 同じ sub-entry は 07-15 に ERRATUM（%12・p5 STOP upheld）で一度直された履歴も持つ（`:30`）。
+- **限界の明記**: vault の git 前史（07-02 以前の log）は未捜索 — ただし両候補の**相対順序**は確立（機構説 ≤07-02 ＜ 1-DOF gloss = 07-15）。⛔ 「物理的に真の原因はどちらか」（fidelity 実体論）は**測っていない** — 測ったのは**記録の custody 順序**。
+
+### (2) (c) の帰結 = 設計文でなく引用修理
+
+- **隔離の記録上の理由は前提文が消えても消えない**（LEDGER に住んでいる）。spec `:31` の gloss だけが宙に浮く ⇒ **修理 = 引用先を機構（LEDGER row）へ差し替える 1 行** — p11 の (b)(d) 統合 draft に畳み込める。**新しい設計判断は不要・4 卓の decline はどれも破られない**（誰も fidelity を裁定していない）。
+- **Rs の判断は不要になった**（今すぐの 1 件は消滅）。残る Rs の行為は従前どおり **統合 draft の spec 着地**のみ（着地時に引用修理も一緒に目に入る — 承認 1 回のまま）。
+
+### (3) 動かさないもの
+
+隔離そのもの（解除の話ではない）／dep-2 cap（着地まで）／(d) = p11／04-Specs 不触。
