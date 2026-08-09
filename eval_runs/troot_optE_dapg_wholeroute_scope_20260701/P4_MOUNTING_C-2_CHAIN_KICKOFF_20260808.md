@@ -2049,3 +2049,13 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 3. **準備済みの (a) 側読み（⛔ 未発行 — p0 の第一語を pre-empt しない）**: 設計 spec 自身が **H4「crown が mount を担ぐ」** — crown top = CROWN_Z0+2R = 1.330+0.220 = **1.550 ≥ mounts 1.530（margin +20 mm・設計された係合）**（`P11_MOUNTING_C-2_IMPL_DESIGN_SPEC_20260808.md:84`・取付点 pos=[±YOKE_SPREAD,0,1.53] `:69`・crown capsule 軸 CROWN_ZC=1.440/R=0.110 `:71-72`・断面図 `:96-99`）。⇒ **base は crown の上に載る設計 = 剛結合部の geom 相互貫入は設計の帰結**（built 0.22 でも C-2 0.28 でも縦幾何は同一）。私に routed されたら word = 「build は設計に一致・overlap は designed attachment・fork は (b)（結合面の pair は clearance pair でない）」— 1 turn で出せる。⚠ −79.2 の深さ自体は base geom 形状との合成（+20 は点係合の margin・幾何整合の桁確認のみ・詳細測定は p0/pZ の計器側）。
 4. **消費した訂正 2 件**: (i) hub 自己訂正 — find (b) cell 完成＋guard v2 は **既に IN**（`bbc500b636` 22:44:58・m-p18-259 の「next iteration」は 2 分差の stale・pZ の freshness catch）。(ii) 私の caveat #2（22:51 節 6 項）は pZ の **事前登録 R1-R5** に接地が移った（R1 = +0.0 attribution-unknown / R2 = >=bound は保守 stand-in / R4 = bank は untracked ⇒ 読み時 content-sha pin `788fe874…` 22:49:46 / R5 = verdict は cell build を跨がない — 同一 q で SD7 世界 +2.87 / 完成世界 −79.22 の実証つき）。私の消費読みは R1-R5 を引用して行う。
 5. **状態**: 私から出すものなし（「p4 — only if the fork falls to mounting design」）。指名なし・pZ hold 不変・4 編集 locked・wired run = Rs1 認可のまま。⚠ pZ §5 末尾の隣接未測（driver 自身の recorder set の同型問題）は指名時の読みで扱う — carry。
+
+---
+
+## 2026-08-09 23:08 — Rs1「止まっている、すすめて」→ 保留していた設計 court の word を発行（fork の決定因は私の court・保留自体が blocker になった）
+
+1. **Rs1 逐語**（本 pane 直答・23:0x JST）: 「止まっている、すすめて」。実測（herdr agent list 23:08:43）: p18/p0/pZ 全て idle・working は p4 のみ — 停止は事実。**読み = 加速・解錠なし**（run 認可・spec 編集・gate bypass に非ず — 18:57/21:46 節と同じ規律）。
+2. **加速の中身**: fork の「どちらに落ちるか」の決定因 = **build が mounting 設計に一致するか** — これは pZ §5 の逐語どおり **私（Rs2）の SSOT court の問い**。23:01 節で準備済みの答えを**保留せず発行する**（p0 の第一語を待つ礼が、全卓 idle では chain の blocker そのもの）。p0 の課題選択（set-selection の実装）は奪わない — 私が出すのは設計事実と分岐の決定だけ。
+3. **word（設計 court・裁定）**: **build は mounting 設計に一致する — overlap は設計された係合であり、fork は (b) に落ちる**。根拠 = H4「crown が mount を担ぐ」（spec `:84`: crown top 1.550 ≥ mounts 1.530・**+20 mm は設計された engagement**）・取付点 [±YOKE_SPREAD,0,1.53]（`:69`）・crown capsule 軸 1.440/R 0.110（`:71-72`）— built(0.22/45) と C-2(0.28/20) で縦幾何は同一。⚠ **−79.2182 の深さ自体は設計 parameter でない**（base geom 形状 × capsule の合成・engagement が非零で設計どおりである事実に依存しない）。
+4. **word の縁取り（scope 2 つ）**: (i) 除外は **attachment pair（固定 base geom ↔ それを担ぐ構造）を L/R clearance set から外す形**（pZ の (b) 文言そのもの）。⛔ **crown を env set から外す形は不可** — crown は動く link に対する実在障害物（C-2 設計自体が「頭に耐える取付を選ぶ」で立っている・spec `:56` family B 却下・#60）。(ii) set fix 後に attachment を跨がない残余 overlap（例: 姿勢依存の wrist↔crown）が出れば、それは**本物の clearance 読み** — 定数と混同しない。
+5. **執行**: send_p18.sh で p18 へ（宛先 p0・Rs1 加速の伝達つき）。私の chain 不変: 指名 → pZ leg → 表 → 消費読み → 4 編集 unlock。
