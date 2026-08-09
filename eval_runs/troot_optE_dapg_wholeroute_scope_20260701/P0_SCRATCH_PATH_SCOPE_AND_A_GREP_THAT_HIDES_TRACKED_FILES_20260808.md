@@ -1881,3 +1881,48 @@ what separates arm from non-arm and I have not done it.
 widened the *population*, and every population was taken from whatever the previous message named.
 ⇒ The predicate was right from p11's second attempt on. **The error was never in what we measured —
 only ever in what we measured it over.**
+
+## 8.40 ⛔ I nearly handed Rs a false all-clear on the §0 escalation, and the number is what stopped me
+
+p18 flagged that the live-vs-scratch split is made **by the receiver's name** (`d` vs `sc`, `_sc*`)
+rather than by verifying each is never stepped — *"the act-not-name lesson is still unapplied one
+layer in."* Nobody was assigned it, so I measured it.
+
+**The name split is broken in both directions.** `sc` in `ur15_steps_wired.py` carries 24 writes and
+**is** handed to `mj_step` (`:690 :711 :735 :2691`); `d` in `probe_geomdistance_sign.py` is stepped
+**zero** times. Name says scratch/live; the act says the opposite in both.
+
+⛔ **Then I built a second axis and it returned a false all-clear.** Asking *"is the receiver a fresh
+`MjData` copy?"* gave **stepped AND persistent = 0 sites** — i.e. *nothing can be driving the robot*,
+which would have defused a §0 escalation sitting in front of Rs.
+
+⭐ **The number is what stopped me.** A clean zero that dissolves the whole question is the shape I
+have been reporting in others all night, so I checked the predicate instead of sending it:
+
+```
+d  = mujoco.MjData(m)   ur15_steps_wired.py:334   column 0   ← the program's ONE live object
+sc = mujoco.MjData(m)   :482 :680 :701 :725 :1925 :2685      ← indented, throwaways in helpers
+```
+
+⇒ My regex matched **both**, so it labelled the live object a "fresh copy". ⛔ Had I sent it, I would
+have told Rs the escalation was empty.
+
+**Corrected — construction scope (col-0 = live) × stepped, control passes:**
+
+| bucket | sites |
+|---|---|
+| ⛔ **stepped AND live — the only bucket that can drive the robot** | **7** in 5 files |
+| stepped but a throwaway (rollouts/prediction) | 44 |
+| not stepped | 24 |
+
+✅ **The 7 are exactly p18's independently-derived "seven arm-joint writes, five files"** — `route`
+:220 :229 · `wired` :2388 · `yoke` :120 :129 · `final_video` :74 · `grip_video` :102 — reached by a
+two-conjunct structural predicate where p18 reached them by reading. ⚠ Their later verified-arm
+count is **5**: `final_video:74` is a whole-state slice and `grip_video:102` is unverified for
+arm-ness. ⇒ **Different predicates, consistent results** — 7 write the live stepped object, 5 are
+confirmed to reach arm joints.
+
+⭐⭐ **And the sting:** column-0 was the *right* discriminator here — for a **construction-scope**
+question. Earlier tonight I shipped a defect using column-0 on a **reachability** question (§8.14).
+⇒ **The same syntactic feature is sound for one question and worthless for another**, so a
+predicate's validity is never readable from its shape — only against the question it is asked.
