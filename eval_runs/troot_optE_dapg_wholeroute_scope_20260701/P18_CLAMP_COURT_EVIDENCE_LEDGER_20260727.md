@@ -46122,3 +46122,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 **契機** = p4 `m-p4-209`（17:18）。⛔ **実行 0**。stack は recorder の数のみ・診断対は producer 名つきで clean・「各数は自分の producer を名乗る」。p6 は境界を両数族の隣に row 化済（`a4ae2e5f1d`）。**chain 上で誰にも何も owed されていない状態が確定。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1339 — ⛔⛔ **pZ の filed-not-reopened: KINONLY の `closest()` は cutoff を *距離として・対名つきで* 返す（prefilter 0・当卓 全点検証）— wired が `:1302` で自ら名指して guard した当の失敗「the cutoff wearing a distance's clothes」が、dep-1 の 4 編集が待つ計器の側に在る** ＋ ⚠ **診断の headline +491.3 は 500 天井の 98.3%（余裕 8.7 mm）— 4 値とも真に内側で report は不変・だが少し広い構成は 500.0 を最も余裕ある数の顔で印字する** ＋ ⭐ **pZ の 2 法:「私の対名対照は real と saturated を分けられない — 自分の器具の限界を、それが書かれた計器の中で見つけた」「表が問題になる瞬間が、それが最も見えない瞬間 — だから今 file する」**
+
+**契機** = pZ `PZ-194`（17:19）。当卓 実測 17:20:15（`closest` :291-295 素通し・prefilter token 0・wired :1302 逐語・margin 算術一致）。⛔ **実行 0**（pZ の 2 球 model は PZ-176 で事前宣言済みの自前 XML・API 性質の測定・driver 一族/THREAD scene 不触）。
+
+- **構造**: `mj_geomDistance` は対が distmax より遠いと **distmax を返す**（pZ が自前 2 球で実測: 真の gap 1.980 m に対し distmax 0.5→0.500000／1.0→1.000000／3.0→1.980000）⇒ **全対が 0.5 m 超なら closest() は 500.0 mm を測定として返し、対名まで付く**。wired 側は **None + exact rbound prefilter**（`arm_pair_min :1838`）で正にこれを封じ、comment がその名を与えていた。
+- ⚠ **pZ の自己限界申告が要点**: 「対を名乗る行 = geom-distance 量」の対照は **span からは分けるが saturated からは分けられない** — **饱和した読みも対名を運ぶ**。⇒ 受入 (2) の機械対照の適用範囲に 1 個の穴（器具の author が自分で file）。
+- **着地先 = この chain でなく dep-1**: 4 編集が gate される **per-STEP 表の将来の行**で、ちょうど 500.0 の arm↔arm / arm↔env は **飽和であって clearance でない** — しかも**表で最も余裕ある数に見える**。fix = file 自身の 1 directory 先の pattern（prefilter or None+absence の綴り）。**p0 の court・急ぎ無し**（今日は何も走らない）。⭐ **filing の時機の法**: 「表が重要になる瞬間 = それが最も見えない瞬間。だから今」。
+- **不変**: 閉じた report の 4 値は全て真に内側・scoping は正のまま。診断の意味も不変 — **計器の将来の読み**にのみ効く。
+
+**Banked — 時刻は本節 commit の author date が正。**
