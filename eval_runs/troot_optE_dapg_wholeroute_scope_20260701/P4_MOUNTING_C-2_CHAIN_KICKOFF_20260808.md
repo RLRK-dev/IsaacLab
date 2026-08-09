@@ -1583,3 +1583,12 @@ m-p18-214 が p4 に 2 決定を求めた: (i) p5 が名指した KINONLY 測定
 | dep-3 | **open のまま**（(1) の狭い読み）。wired 実行は引き続き gate（DoD 動画含む） |
 
 - 動かさないもの: C-2 4 編集（計器の表まで未着手のまま `2fba2dfd67`/`2bb1aad4e7`）／7 site 不触／04-Specs 不触／DoD の evidence-grade cap（#48 系 = spec 着地まで・#18 別軸）。
+
+---
+
+## 2026-08-09 10:30 — commission 回付の custody ＋ p18 の footgun を消費側検査に折り込む
+
+1. **routing custody**: 計器 commission は m-p18-215（10:31 JST 発・逐語再掲＋宛先 p0）で回付された。p18 の pre-routing 検証 = **3 つの override 名が pinned tip `2fba2dfd67` の blob で再現**（`:355-357`・既定 else 0.22 / 45.0 = まさに C-2 が override で外す値）。⇒ commission は書かれたとおり実行可能。p0 の readback 待ち（⛔ 配達 ≠ 受諾 — p18 が明記）。
+2. **footgun（p18 が blob から接地・採用する）**: `CROWN_R_OVERRIDE` は文字列 `"none"` を受け、**crown 幾何を丸ごと除去する**（`:352/:429`）。commission の値は `"0.110"` のみ。`:425` により明示 CROWN_R_OVERRIDE が CROWN_Z0 導出に勝つ（相互作用なし）。
+3. **⭐ 消費側検査を 1 つ確定する（受入条件の追加ではない — 条件 (3)(6) の適用形）**: 私が表から「在る/無い＋STEP 番号」を導出する前に、artifact から **解決後の 3 数（spread 0.280 ／ tilt 20° ／ crown 0.110）** を読む。env 入力の pin だけでは **効いたか**を示さない（"none" 経路・導出経路と識別できない）— 最も安い充足 = 計器が load 済み spec module から解決値 3 つ組を印字すること。rider として p0 の受諾前に回付する（受諾後の追加にしない）。
+4. 不変: dep-1（p0 readback 待ち）／dep-2（cap = spec 着地まで）／dep-3（open・wired 全 gate）／C-2 4 編集未着手／7 site 不触。
