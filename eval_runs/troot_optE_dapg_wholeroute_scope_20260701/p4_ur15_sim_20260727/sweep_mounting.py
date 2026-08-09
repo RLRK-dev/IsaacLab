@@ -166,8 +166,11 @@ def main() -> int:
     # showed it was a property of that row.  So the mounting this sweep sits on is read from the
     # environment and printed in the header AND on every line -- a radius column with no tilt
     # beside it is the shape of the mistake, not just how it was written up.
-    _sp = os.environ.get("YOKE_SPREAD_OVERRIDE", "0.220 (built default)")
-    _ti = os.environ.get("TILT_DEG_OVERRIDE", "45 (built default)")
+    # ⚠ These fallback labels are display-only and TRACK THE SPEC'S DEFAULTS BY HAND: whenever
+    # ur15_cell_spec.py changes its no-override values, these strings must follow, or a run
+    # without env vars measures the new cell while printing the old one's name on every line.
+    _sp = os.environ.get("YOKE_SPREAD_OVERRIDE", "0.280 (C-2 default)")
+    _ti = os.environ.get("TILT_DEG_OVERRIDE", "20 (C-2 default)")
     out.append("(a) CROWN RADIUS.  'none' removes the geometry entirely -- the lower bound p5")
     out.append(f"    asked to include.  ⛔ TAKEN AT spread={_sp}, tilt={_ti} deg -- every row")
     out.append("    below is that mounting with only the radius moving.  Nothing here is a")

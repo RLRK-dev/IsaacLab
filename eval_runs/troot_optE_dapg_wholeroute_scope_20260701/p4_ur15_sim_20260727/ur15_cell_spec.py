@@ -355,7 +355,17 @@ SHOULDER_HEIGHT = 0.37 + 0.58 * 2.0     # spec §4 -- all five driver files alre
 _YOKE_SPREAD_OVERRIDE = _os_module.environ.get("YOKE_SPREAD_OVERRIDE")
 _TILT_DEG_OVERRIDE = _os_module.environ.get("TILT_DEG_OVERRIDE")
 CROWN_R_OVERRIDE = _os_module.environ.get("CROWN_R_OVERRIDE")
-YOKE_SPREAD = float(_YOKE_SPREAD_OVERRIDE) if _YOKE_SPREAD_OVERRIDE else 0.22
+# C-2 mounting as the defaults (spread 0.280 / tilt 20.0 / crown literal 0.110).  Grounds:
+# settle = P4_DELEGATED_DECISIONS_ITEMS7_9_DOD_20260808.md §2 (Rs-delegated); witness =
+# SPREAD_TILT_SWEEP_TRIES240_KINONLY.txt:54 (L clear 5 / R clear 30 of 240 draws, pair gap
+# +14.7 mm, where built 0.220/45 had L clear 0); crown 0.110 stays the photo-derived pin (#60).
+# Conditions the defaults carry: #54 -- no member between column and mounts is modelled, and
+# C-2 widens the unsupported span to 0.178 m (+60 mm over built), so the C-2 column re-measures
+# WITH the member once its inputs settle; the reference cell's stereo head is declared but
+# default-OFF in the model, so the witness and every clear count are claims about a
+# stereo-head-ABSENT cell; D4 rides as carry.  Past sweeps stay reproducible via the override
+# env vars below -- the built cell is YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45.
+YOKE_SPREAD = float(_YOKE_SPREAD_OVERRIDE) if _YOKE_SPREAD_OVERRIDE else 0.28
 # Rs's supplied cell, ur15-dual-arm-cell.md:
                                         # yoke_spread_m 0.22, yoke_angle_deg 45.  ⛔ My 0.106 was
                                         # a number I read off a screenshot by eye; this one is
@@ -372,7 +382,7 @@ YOKE_SPREAD = float(_YOKE_SPREAD_OVERRIDE) if _YOKE_SPREAD_OVERRIDE else 0.22
                                         # the pair", which the re-measurement must honour.
 _YOKE_SPREAD_SUPERSEDED = 0.40          # spec §4 -- "0.22/45deg made the two arms interleave at an
 TILT = math.pi / 2.0 - math.radians(float(_TILT_DEG_OVERRIDE) if _TILT_DEG_OVERRIDE
-                                        else 45.0)  #          88 mm span; 0.40/20deg clears the rest row
+                                        else 20.0)  #          88 mm span; 0.40/20deg clears the rest row
                                         #            and both clips" (measured, and measured as a
                                         #            pair, so the two cannot be separated)
 TABLE_HX, TABLE_HY = 0.70, 0.20         # spec §4 -- ⚠ weak grounds, and spec §7 asked whether p4
@@ -423,13 +433,17 @@ COLUMN_R = 0.102                        # spec §6.4j -- the shared column both 
 # sat 190 mm below the mounts.  So when CROWN_Z0_OVERRIDE is set, R is derived as
 # (SHOULDER_HEIGHT - CROWN_Z0) / 2 and every point of that sweep is a head that reaches.
 # ⚠ Precedence: an explicit CROWN_R_OVERRIDE still wins, so the earlier radius sweep is
-# reproducible unchanged.  With neither set, nothing moves: R = YOKE_SPREAD / 2 as built.
+# reproducible unchanged.  With neither set, the default is the LITERAL 0.110 -- a pinned
+# radius, no longer derived: at spread 0.280 the old YOKE_SPREAD/2 rule would mint 0.140, a
+# crown no sweep has ever measured (the grid measured crown in {none, 0.110} only), while the
+# C-2 witness was taken at CROWN_R_OVERRIDE=0.110, bit-identical to this literal.  The built
+# cell's 0.110 = 0.22/2 coincidence is why the derivation ever looked like a rule.
 CROWN_Z0_OVERRIDE = _os_module.environ.get("CROWN_Z0_OVERRIDE")
 CROWN_Z0 = float(CROWN_Z0_OVERRIDE) if CROWN_Z0_OVERRIDE else 1.330
 CROWN_R = (0.0 if (CROWN_R_OVERRIDE or "").lower() == "none"
            else float(CROWN_R_OVERRIDE) if CROWN_R_OVERRIDE
            else (SHOULDER_HEIGHT - CROWN_Z0) / 2.0 if CROWN_Z0_OVERRIDE
-           else YOKE_SPREAD / 2)
+           else 0.110)
 # p5 bank #22 floor -- the head only has to reach the mounts
 CROWN_ZC = CROWN_Z0 + CROWN_R           # its axis, so the underside lands exactly on CROWN_Z0
 # The cell's own home pose, left arm, from ur15-dual-arm-cell.md.  ⭐ The right arm takes the same
