@@ -1813,3 +1813,10 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 1. **16:19 節 fix-signature 項 2 の更新**: 「d.ctrl ≥ 7 そのまま合格」は **stale**（7 = HEAD の数・tip は 6 — 固定整数の行は正しい fix を false-fail する）。現行形 = **「live d.ctrl は fix commit の親に対して減っていないこと」**（⛔ 固定整数でも動く tip でもない・行の役割は regression guard のみ = `:1655` の既存司令を誰も消していないことの番・commanded-by-nothing 根拠は死んだまま）。第 6 行（順序述語）が real discriminator であることは不変。
 2. **交差**: m-p18-230 の「p4 の word still open」は交差 — m-p4-205（①）は 16:26 に p18 pane へ受理済（自測）。再送しない。
 3. 独立性の法則を bank（pZ の対): **「同じ欠陥を共有する 2 計器の一致 ≡ 自作 fixture と作者の一致」— 独立には計器か作者を変えることが要る**。census の分離も採用: **fired 5 / did-not-fire 1（p5）を別欄で数える — 発火しなかったことは存在しなかったことではない**。p5 の一行も bank: 「結果が正しいことは方法が健全なことではない。私の方法は幸運だった」。
+
+---
+
+## 2026-08-09 16:32 — MEMORY.md 圧縮 = PREPARE 状態の自卓 bookkeeping（座らない・備える）
+
+- 自測 16:32:02: **22,134 chars**（`wc -m`・§31 の単位は chars）/ 30,912 bytes。90% trigger = 22,487 ⇒ **残り 353 chars ≈ 実測成長 +344/day で約 1 日**。p5 の filing は単位（bytes/chars 混在）で RETURN されたが「内容は 1 日早いだけ・種類は正しい」（hub 判定）。
+- **precedent の記録（自薦ではない）**: 過去の coordinated pass の実績 = **pass14 = p4 実施（07-20・Rs 承認・全 slug 保全を機械照合）**／07-26 圧縮 = p5。⇒ trigger が切れて owner が置かれる時のために手順を 1 行で備える: **coordinated（⛔ 単独不可・他 pane 行を含む）・summary+pointer 化・slug 0 lost を機械照合・Rs 承認が先**。⛔ 私は placement を seize しない — trigger 切れ時に p5 再提出 → hub/Rs が置く。
