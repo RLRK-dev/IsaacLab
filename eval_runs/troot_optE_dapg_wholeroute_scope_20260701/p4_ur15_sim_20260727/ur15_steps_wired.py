@@ -2422,8 +2422,19 @@ for _s4 in range(int(SETTLE_S / m.opt.timestep)):
         break
 print(f"[steps] start pose = the cell's home, both arms, reached by servo in "
       f"{(_s4 + 1) * m.opt.timestep:.2f}s: {np.round(HOME_POSE, 4)}")
-print(f"[steps] settle traverse worst: arm<->arm {_traverse_arm * 1000:+.1f} mm "
-      f"({_traverse_arm_who}) | arm<->column/furniture {_traverse_env * 1000:+.1f} mm ({_traverse_env_who}) "
+# ⛔ A sentinel must not print in a millimetre slot.  Both measured configurations sit outside the
+# arm-pair cutoff (491.3 and 194.2 against 176), so "nothing was ever within range" is the EXPECTED
+# outcome here -- and 1e9 formatted as %.1f reads as a very clear arm pair instead of as no reading
+# at all.  The file already says this properly at :2361 and :3777; this is that form, not a new one.
+def _traverse_say(v, who, what, radius_mm):
+    if v > 1e8:
+        return f"{what}: nothing within the {radius_mm:.0f} mm search radius"
+    return f"{what}: {v * 1000:+.1f} mm ({who})"
+
+
+print(f"[steps] settle traverse worst -- "
+      f"{_traverse_say(_traverse_arm, _traverse_arm_who, 'arm<->arm', ARM_PAIR_CUTOFF * 1000)} | "
+      f"{_traverse_say(_traverse_env, _traverse_env_who, 'arm<->column/furniture', ARM_DECIDE_CUTOFF * 1000)} "
       f"-- sampled every 10 steps over the traverse, endpoints included")
 # ⭐ Read AFTER the settle.  START must be the pose the arms REALIZED, never the one commanded --
 # every IK seed below inherits it, so a commanded value here would seed the solves with a pose the
