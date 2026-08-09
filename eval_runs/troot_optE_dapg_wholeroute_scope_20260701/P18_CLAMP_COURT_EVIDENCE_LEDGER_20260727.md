@@ -45790,3 +45790,23 @@ p5 の成長算術        「08-04 20,409 → 30,895 = +2,097/日」 ⇒ ⛔ §3
 - ✅ pZ は当卓の bank を **lane から自分で byte 照合**（receipt を取らず）— 「配達 ≠ 受理」の受理側の完了形。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1312 — ⭐⭐⭐ **診断数値が出た: zero 姿勢は CLEAR（arm↔arm +491.3 mm・arm↔table +19.8 mm・対 HOME 対照 +194.2/+80.1）⇒ 分岐 = 純 servo・初期条件は Rs へ戻らない** ＋ ⛔⛔⛔ **空 log の真機構 = 「audit hook が sys._getframe を呼び、_getframe が自分の audit event を発火 ⇒ hook が自分を呼んだ」— 今夜の中心形の最も文字通りの実例・しかも偽 Popen 帰属を閉じるために書いた fix の中に居た**
+
+**契機** = p0 `m-p0-233R`（16:36:37・pin `6278a97844` 当卓確認）。⛔ **実行 0**（数値は p0 の認可済み器具から）。
+
+### (1) ⭐⭐⭐ **step (i) 完了（mj_forward のみ・mj_step 0・両行が geom 対を名乗る）**
+```
+qpos = 0（両腕）      arm↔arm +491.3（L_base#2 ↔ R_base#41）   arm↔柱/台 +19.8（R_forearm#44 ↔ table_top）   CLEAR
+spec.HOME_POSE（対照） arm↔arm +194.2                            arm↔柱  +80.1                                  CLEAR
+```
+⇒ **NOT COLLIDING ⇒ fix = 純 servo 枝**（p4 の決定木どおり）。⛔ **初期条件の問いは Rs へ戻らない・keyframe/段階 unfold 枝は不採用**。⚠ 事前明記の 2 限界: **再組立 cell の数**である事／**最タイトは table への +19.8 mm = settle が尊重すべき margin**。
+⇒ **fold-back 発火**: p5 §4m の三つ組の pending 2 値が**両方測定済みに** — ②zero-pose = 本行・①HOME@C-2 clearance = 対照行（+194.2/+80.1）。p4 の TRIPLE 消費行にも同値。⚠ mode A（PD が実際に到達するか）は依然未測 — それは fix 本体の settle が実地で示す。
+
+### (2) ⛔⛔⛔ **真機構 — 計器が事象の源になった（p0 の 3 度目の機構訂正・実測つき）**
+**hook が「誰が呼んだか」を記録するため `sys._getframe` を呼ぶ → `_getframe` 自身が audit event を発火 → hook が自分を呼ぶ** ⇒ 同じ import が **90 秒超 → 0.5 秒**（再入 flag の有無で実測）。⭐ **「事象を測る計器が事象の源になる」— 今夜の中心形の最も文字通りの形。しかも偽 Popen 帰属を閉じるために書いた argv/frame fix の中に居た。**
+⛔ **p0 の撤回も正確**: 「4 process の競合が機構」は誤り — 4 つは**hang を retry した症状**であって原因でない。「**測定された機構の前に、誤った機構が 2 つ**」— 自ら数えた。
+
+### (3) 次 = fix 本体（3 要件）→ pZ の表。dep-3 gate 不変・7 site 不触。
+
+**Banked — 時刻は本節 commit の author date が正。**
