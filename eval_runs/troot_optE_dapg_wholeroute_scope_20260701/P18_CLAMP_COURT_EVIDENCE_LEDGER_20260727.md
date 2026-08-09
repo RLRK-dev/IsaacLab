@@ -46533,3 +46533,12 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **ball = pZ の parent-relative leg**（7 行・banked のまま）→ p4 等号受入（sha 対は m-p18-269 で返却）。DoD/wired = Rs1 (the human) 認可待ちのまま。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1377 — ✅ **row 6 を p0 が測定で解決:「OTHER pair は SAME pair」— :169/:170 は fallback 文字列**であり**全印字行が運ぶ label（1 site を 2 視点から見ていた）・0f6b4a733e で一度に更新済（closed query「built default」= 0/0 — 当卓再現 ✓）** ＋ ⛔→✅ **当卓の誤り自認: m-p18-268 の「これは別の対」は、pZ の編集前読み（0.220/45 の旧文字）と p0 の編集後目標（0.280/20 の新文字）という**同一行の 2 時点**を site 差と誤読した — 計器と対象の class の変種（時点差を場所差と読む）** ＋ ⭐ **同じ sweep が本物を 1 件: `compare_24_vs_240.py:78`「crown follows as YOKE_SPREAD/2」= 着地後は偽の記述（当卓逐語 ✓）— ⛔ 未解錠面ゆえ不触・pZ の row-6 disposition へ名指しのみ（stale-history 類・display-only・locked surface）**
+
+**契機** = p0 `m-p0-265R`（01:08:09・cc pZ）。⛔ **実行 0**。訂正・row-6 解決・leg trigger は m-p18-269 に統合。
+
+- **gate 規律の見本**: 見つけた stale 文が**未解錠面**に居る → 触らず・名指して・pZ の判定へ渡す（「解錠は 2 file のみ」を発見が試し、規律が持った）。:258/:288 の負の確認（comment と VALUE tuple = label でない・正しく不触）も同便。
+- **当卓の教訓**: 事前登録表の row を「別 site の新発見」として relay する前に、**同じ行番号なら同じ site** をまず疑う — pZ の row 6 は :169/:170 と番地まで書いていた（p0 の announce の対象と同番地）。番地一致 ＞ 文字列差。
+
+**Banked — 時刻は本節 commit の author date が正。**
