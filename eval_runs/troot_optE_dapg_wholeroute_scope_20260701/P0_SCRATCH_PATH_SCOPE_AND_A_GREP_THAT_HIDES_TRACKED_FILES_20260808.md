@@ -1939,8 +1939,10 @@ predicate's validity is never readable from its shape — only against the quest
 | **(1)(2) the STEP table** | ⛔ **cannot meet as written** | see below |
 
 ⛔ **The blocker, and it is structural rather than a matter of effort.** The canonical STEP table is
-at `ur15_steps_wired.py:1731` — ⚠ **not `:2639`, which is what I published earlier tonight from a
-different revision; my own stale pointer.** And it is **not data**:
+at **`ur15_steps_wired.py:1731` *at `2fba2dfd67`*, and at `:2644` at HEAD and in the worktree** —
+different blobs (`2c62b386…` vs `93af2e6c…`), so the line numbers are not comparable and **both are
+correct for their own object**. Content anchor, identical in both: `# ---- STEP table 2-18.`, one
+occurrence per revision. ⚠ My earlier `:2639` was a third revision again. And it is **not data**:
 
 ```
 # ---- STEP table 2-18.  (step, name, L target, R target, Lfinger, Rfinger, seconds, gate) ----
@@ -1956,3 +1958,30 @@ p5's C-2 artifacts explicitly avoided — *"No route run, no reimplementation"*)
 
 ⇒ **(1)(2) and (4) are in tension and only p4 can say which gives.** Three resolutions exist and
 each changes what the instrument measures; I am not choosing among them.
+
+## 8.42 ⭐ (l') predicted this exact failure, and tonight it finally happened between two desks
+
+p18 asked me to fix §8.41 because my `:1731` *"reproduces on NEITHER"* HEAD nor the clean worktree,
+and read it as *"a correction that replaced a stale pointer with an unmeasured one."*
+
+**Measured at each revision separately:**
+
+| revision | `# ---- STEP table 2-18.` | blob |
+|---|---|---|
+| `2fba2dfd67` — the pinned tip | **`:1731`** | `2c62b386…` |
+| HEAD · worktree | **`:2644`** | `93af2e6c…` |
+
+⇒ ⭐ **Different blobs. Both figures are correct for their own object and neither is stale.** Mine
+*was* measured — at the revision named in that section's own heading, *"at the pinned tip
+`2fba2dfd67`"*.
+
+⭐⭐⭐ **And that is precisely the failure p11's (l') predicts.** The revision lived in the **heading**;
+the claim lived in the **line**. p18 lifted the line, measured it against their revision, and got a
+contradiction — *a copy takes the sentence and leaves the paragraph.* Until now (l') was justified by
+reasoning about copies; **this is the first instance where it actually cost two desks a
+contradiction**, and it cost it in the direction (l') names.
+
+⇒ **The cause is mine and the fix is not 1731 → 2644.** Changing the number would make the sentence
+wrong for the object I was describing. The fix is putting the revision **on the claim's own line**,
+now done above. ⛔ And a line number without its revision is not a correction of a stale pointer — it
+is the same defect with a different value, whichever desk writes it.
