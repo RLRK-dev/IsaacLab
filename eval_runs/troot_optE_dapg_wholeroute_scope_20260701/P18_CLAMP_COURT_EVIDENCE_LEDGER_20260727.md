@@ -45573,3 +45573,33 @@ Rs 逐語（16:0x・p4 session 直答・**2 turn 前に `:2388` 自体と servo 
 - ⭐ 夜の形として: **p4 の response map・p5 の §4b・pZ の pre-commitment — 3 卓が「条件を裁定の前に書く」を実践し、今日 2 つが発火した**（map は同 turn 執行・§4b は gate 注記の要求として）。**事前に書かれた条件は、発火した時に議論を要らなくする。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1298 — ⭐⭐⭐ **fix chain の 3 卓が p0 の着工前に揃った — p11「1 行消せば済むではない（削除だけだと IK の種が静かに変わる）」・pZ「対照は fix が landing した瞬間に消える ⇒ baseline を今 AST で取り pre-register」・p6「row 66 = RULED BREACH へ頭部修復」** ＋ ⛔ **pZ の自己訂正 2 数（行頭仮定が 2 度同じ向きに低く数えさせた）**
+
+**契機** = p6 `m-p6-120`（16:11:47・`c1d42b65f9` 当卓検証・row 66 頭部逐語確認）＋ pZ `PZ-177`（16:12・repo 不触 ⇒ **本節が pre-registration の durable home**）＋ p11（16:12:48・pin `34544dae3a` 65 行 sha 一致・当卓が tip `:1653-1661` を直読追認）。⛔ **実行 0**。
+
+### (1) ⭐⭐⭐ **p11 の設計確認 — 「1 行消す」は fix ではない（当卓 tip 追認）**
+```
+tip :1653 書込 → :1656 mj_forward → :1658 START = d.qpos の読み戻し → :1659-1661 solve_ik(…, near=START[t]) が種に使う
+```
+⇒ ⛔ **書込だけ消すと `:1658` は「HOME」でなく「build 姿勢」を読み、以後の IK の種が全部変わる — 失敗として現れず、静かに別の解へ収束する。**
+✅ **3 要件（branch 非依存）**: (1) 腕へは **servo 目標のみ**（scratch 経由の状態複写も不可） (2) **PD の実移動で HOME へ**（収束判定は**既存の** `SETTLE_S`/`SETTLE_TOL` — 新閾値を発明しない） (3) ⭐⭐ **`START` の読み出しを settle の *後ろ* へ** — **START は「命じた姿勢」でなく「実現した姿勢」**。
+⭐ 先例（`probe/pd1-arm-pd`）の原理を抽出:「**命じた目標と実現した q が frame 0 で一致する**」— 先例は 目標:=実現 q・本件は 実現 q を PD で目標へ（向きが逆なだけの同じ要件）。⛔ p11 自己訂正: 先例の `.ctrl[` 数え 0 は**無意味な 0**（env API 駆動 = 面が違う）。
+✅ **向きの分離**: 禁じ手 `d.qpos ← scratch` は HEAD で **0**（保つべき不変条件）／逆向き `scratch.qpos[:] = d.qpos` は 6+ 在って**評価用読み出し** — **2 つの向きを同じ語で呼ばない**。
+
+### (2) ⭐⭐⭐ **pZ の pre-registered acceptance（本節 = durable custody・fix 前の baseline は AST walk）**
+**理由**: no-detour 条項の「0 のまま」は **fix 後にだけ測ると「まだ 0」と「死んだ query」を区別できない**。かつ **arm-pose 述語が実違反に発火することを示せる唯一の場所 = fix 前の file** — **その対照は fix 自身が消す** ⇒ 両半が存在する今 取る。
+```
+baseline（AST・構造）  HEAD: live d.qpos 1 [:2388]・d.ctrl 7 ／ scratch 35（6 受け手）・dynamic 経路（setattr/exec/eval/copyto/mj_copyData）0
+                        tip:  live d.qpos 1 [:1653]・d.ctrl 6 ／ walk 生存対照 = Call node 1549/1205
+受入（fix 後・事前確定） live d.qpos **1→0**（fix の署名）／ live 非-ctrl 状態書込 **0→0**（qvel/qacc/act/mocap_*/xfrc 含む）／ dynamic **0→0**
+                        live d.ctrl **7→≥7** ⭐（qpos が 0 になって ctrl が増えなければ「腕は何にも司令されていない」= 別の欠陥として報告）
+                        scratch = 無制約（scratch へ書くことは裁定された行為でない）
+```
+⛔ **限界を先に**: 静的・単一 file の主張 — **d を引数に受ける他 module の helper 内の書込は覆えない**。act-level の閉鎖は run が要り **dep-3 が禁じる** ⇒ 「**この file で構造的に clean・act-level の leg は gated であって passed でない**」と報告する。
+⛔ **pZ の自己訂正 2 数（同じ 1 仮定・行頭開始を要求した regex）**: d.ctrl HEAD = 4 でなく **7**（inline 形が不可視）／scratch = 27 でなく **35・6 受け手**（`_ap`/`_sc2`/`_sci` を列挙漏れ）。**結論（live d.qpos = 1 @ :2388）は不変** — 数だけが低かった。⭐ **regex は「思いついた形」を列挙し、AST walk は「代入 node」を列挙する** — no-detour 条項にはその差が要る。
+
+### (3) ✅ **p6 の register 執行（`c1d42b65f9`・当卓検証）**
+row 66 = **RULED = BREACH**（頭部の「疑義」を in-place 修復・旧頭部は括弧で保存 — 「裁定済み違反を疑義として配る頭部は誤りを配る」）・fix chain (i)-(iv) と owner・衝突枝の Rs 返送・keyframe 境界 = Rs 専権・no-detour 逐語・**当卓の written≠delivered 自己訂正も row に**（「回付済みと再報告する者が出ないように」）。node gate は裁定に接地し直し・snapshot 再生成 C3 OK。
+
+**Banked — 時刻は本節 commit の author date が正。**
