@@ -1426,3 +1426,42 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 ### (4) 本節が動かさないもの
 
 C-2 の 4 編集（dep-1 gate・`2fba2dfd67` / `2bb1aad4e7` 未着手）／HOLD／run と DoD 動画 = Rs の権限／04-Specs（私は 1 byte も触れない）／draft の中身（p11/p5 の court — routing の受入条件 (a)–(d) は p6 案・確定は先方）。⛔ m-p18-210 の 要るもの に p4 は居ない — 本節は自卓の台帳整合のみ。
+
+---
+
+## 2026-08-09 09:56 — (a) への回答: cable build census（3 build・全 pin 自測）＋ 所有の答え（(a) 受け方を限定して可・(c) 辞退）
+
+m-p18-211 が「(a)(c) は無主」と surface した。**cell build を保持しているのは私**（Build C 一族 = `p4_ur15_sim_20260727/` = 私の arc）。⇒ (a) の**実測半分をこの節で納品**する。draft 側の placement は私が自任しない（router/Rs が置く）。全 pin は本 turn の自測（HEAD・全 file CLEAN 前提は 09:47 節で検証済の 2 file ＋ 本節の追加測定）。
+
+### (1) census — 「built」は 1 つではなく 3 つ（＋ 選択機構）
+
+| build | 場所（自測 pin） | joint/link | 何が曲がるか | いつ選ばれるか |
+|---|---|---|---|---|
+| **A** `add_revolute_cable` | `test_newton_clip_routing.py:936-1022`（87 行中 joint axis は 1 つ = `:1009` `axis=wp.vec3(1.0, 0.0, 0.0)` local-X・vertical sag。他の axis hit は quaternion 数学 — pZ の測定が私の卓で再現） | **1**（revolute） | 縦 sag のみ。**前提 :69 はこの build について真** | `build_scene(solver_backend="mujoco")` の分岐 `:1385-1389` |
+| **B** `add_cable_rod` | 同 file `:868-916`（pZ 未読と申告した側・本節で読了）。`builder.add_rod` `:897-905` | **CABLE joint**・docstring `:871` 逐語 "**2 DOF: stretch + bend**" | ⚠ **stretch＋bend**（bend 2 面ではない）。bend が平面か 3D かは **未測**（newton lib 内部・私は読んでいない） | **既定枝**: 署名 `:1030-1034` `solver_backend="vbd"`・CLI `:8118-8120` default = `task_config.py:107` `SOLVER_BACKEND = "vbd"`・`:8127` で束縛 → else 枝 `:1391` |
+| **C** working cell 一族（5 file） | `ur15_cell.py:102-103`（09:47 自測）＋ `ur15_steps_reaim.py:160-161`（本節 自測）。route/steps/wired の 3 file は p6 の +5 uniform（p18 再測）— 私は 2/5 を自測、3/5 は他卓測と明記 | **2**（hinge×2） | **bend-Y ＋ bend-Z ⇒ 水平 routing curvature が現に在る** | Option-E S-series driver（私の arc）が MJCF を直接生成 |
+
+### (2) 年表 — 前提は「偽になった」のではなく「後から来た build を覆っていない」
+
+- 前提 bank = **2026-06-25**（spec `:69`・対照一致）。substrate 転換（Newton 破棄 → mujoco 基盤）= **2026-06-26**（CLAUDE.md・**翌日**）。Build C 初 commit = `bf0235cfd8` **2026-07-27 04:19**（`git log --follow --reverse` 自測）= **32 日後**。
+- ⇒ **前提は bank 日に存在した全 build について真だった。** 矛盾する build は 1 ヶ月後に生まれた。pZ の「2 build であって 1 つの偽文ではない」に年表の根拠が付く。
+
+### (3) 起草者への罠 2 件（census から出た増分・誰も未指摘）
+
+1. **「mujoco」という語は前提境界の両側に出る**: 前提の grounding file 内では `solver_backend=="mujoco"` が **1-DOF planar（Build A）を選ぶ**。working **mujoco** cell（Build C）は **2-bend** である。⇒ **「mujoco」は cable model の名前ではない。** draft が backend 名で build を指すと逆を指す。
+2. **Build C は topology こそ 5 file 一様（hinge 2 本）だが、定数は一様でない**: `ur15_cell.py:102-103` damping 0.004 / stiffness 0.02 ↔ `ur15_steps_reaim.py:160-161` damping **0.010** / stiffness **0.12**（両方 自測・逐語）。⇒ draft の「the built cable」が単一 parameter 組を含意してはならない。
+
+### (4) pZ の open item を「静的層まで」閉じる
+
+- **静的既定 = Build B**（連鎖: `task_config.py:107` → CLI default `:8118-8120` → `:8127` → else 枝 `:1391`）。**Build A は明示 `--solver-backend mujoco` が要る**（S6_GRASP* 経路 `:8182-8191` は mujoco 必須）。
+- ⛔ **開いたまま残るもの（正直に）**: 歴史上の実 run が何を渡したか（harness 呼出しの runtime census）は source だけからは閉じない。私は静的層のみ閉じた。
+
+### (5) 所有の答え
+
+- **(a)**: 実測半分は**上表で納品済**（(a) の成果条件逐語 "states the cable's ACTUAL degrees of freedom per joint, matching what is built" — census は build 毎にまさにそれを述べる）。**draft 側が cell-build 保持者に置かれるならそれは私の卓で、受ける** — ただし scope 限定: **「何が built か」を build 毎に述べる文まで**。⛔ §4/§0 の統合文言は書かない（L3・着地は Rs・(b)(d) は p11）。placement の確定は router/Rs。
+- **(c)**: **辞退**。理由 = LEDGER の機構因 ↔ spec の忠実度因の 2 面照合は **fidelity/design の裁定**で、私はどちらの面も保持しない（07-Design/04-Specs は私に read-only・quarantine の verdict は p4 の court でない）。私の banked rule「引受前に『何を測れば決まるか・私は測れるか』」— (c) は私が走らせられる測定では決まらない。
+
+### (6) 台帳・不変
+
+- dep-2 の内訳更新: draft 相 = **(b)(d) p11 保有／(a) census 納品済・placement 待ち／(c) 無主のまま**。**cap は spec 着地まで**（不変・p18 が「正しい閉止事象」と追認）。
+- 動かさないもの: HOLD／run 0（本節は全て静的 read）／C-2 4 編集（`2fba2dfd67`/`2bb1aad4e7` 未着手）／dep-1（p5・18:00・別件）／04-Specs（1 byte も触れない）。
