@@ -1985,3 +1985,66 @@ contradiction**, and it cost it in the direction (l') names.
 wrong for the object I was describing. The fix is putting the revision **on the claim's own line**,
 now done above. ⛔ And a line number without its revision is not a correction of a stale pointer — it
 is the same defect with a different value, whichever desk writes it.
+
+## 8.43 ⛔ I reached my own nomination criterion and my own probes disqualified the revision — three finds, two mine to fix, one for Rs2's word
+
+*(2026-08-09 22:41 JST.  Naming per the ruling relayed in m-p18-256: **Rs1 = the human; Rs2 = p4/CC.**
+First use in this artifact; adopted from here on.)*
+
+Rs1 ruled "A" (edge A resumes, m-p18-258) and the pre-declared path ran: shakedowns 4→7 on
+`kinonly_step_solve.py`, one committed revision per run from SD5 on (SD4's exact code state was
+edited over before committing — a transient the run's own log cannot cite; from SD5 every log has a
+commit to name: `921ca08fa6` → `5ec54aff1b` → `49c72643a5`).
+
+**The solver-attributable mechanisms are closed, each by a measured find:**
+
+| shakedown | negatives looked like | the mechanism was MINE, named and fixed |
+|---|---|---|
+| 4 (uncommitted) | TOUCHING 21/21, pools 50-82 but 6x6 ranked | (i) position-only IK never commanded the design's menu; (ii) finalist truncation; (iii) ⭐ `mj_jacSite` reads `cdof`, which `mj_kinematics` never updates — SD1-3 descended a HOME-pose Jacobian every iterate (`mj_comPos` added) |
+| 5 (`921ca08fa6`) | every endpoint CLEAR, 23/25 paths "+0.0 at 1/20" | referent v2 (TABLE_Y was the table's centreline, not a cable row; rows 8/12-14/17 re-resolved by the design's own columns) opened the endpoints; then clearance-argmax selection let consecutive winners sit on different IK branches — the sweep was my selection's |
+| 6 (`5ec54aff1b`) | same +0.0 pattern, now `sel=near` everywhere | selection now the driver's own rule (nearest-prev among clear pairs, :1376-1378 @ 2fba2dfd67) — and the +0.0 SURVIVED it, at dq_to_prev = 0.0 rows: **a zero-length path reading differently from its own endpoint**, which no selection can cause |
+| 7 (`49c72643a5`) | CLEAR 14 / TOUCHING 11 / NOT-SOLVED 0 | the +0.0 was never a distance: see below |
+
+**Find 1 — `mj_geomDistance` returns exact-0.0 sentinels (probe `probe_geomdistance_exact_zero.py`,
+mujoco 3.10.0).** Two measured modes on this cell:
+- *flip mode*: a mesh pair **61.590 mm** apart returns exactly 0.0 at every cutoff when the pose
+  moves by ONE ULP (computing `0.95q+0.05q` in place of `q`; max qpos delta 8.9e-16 rad, geom_xpos
+  delta < 1e-12), and +61.590 again at the original bits — deterministic, reversible.
+- *stable mode*: pad↔table_top pairs with **301.9 mm** centre distance return 0.0 at BOTH bit
+  patterns, with a self-contradicting witness segment (`fromto` spans ~520 mm for a claimed 0.0).
+SD7's jitter-requery caught the flip mode: **393,301 exact-zero readings re-queried, 99.73% moved
+off zero**; env-clear counts rose from L1-10/R2-11 to L26-67/R64-70 and clear-pairs from 1-30 to
+371-2447 — the sentinel had been suppressing the whole table.  The stable mode passes that guard
+(1,057 stayed-zeros kept as conservative contact), so the remaining "+0.0 ↔ table_top" TOUCHING
+rows are attribution-unknown until the guard checks **witness consistency** (|fromto| vs dist) and
+falls back to an analytic lower bound.  ⛔ My dispatched attribution of those rows to "cable-absent
+proximity" was the wrong mechanism — conservative in direction, wrong in cause.
+
+**Find 2 — the reassembled cell is incomplete against the driver's own world** (read at the tip:
+mast trio :244-247, saddles :186-194, clips from `spec.CLIP_PARTS` :148-161 @ 2fba2dfd67).  Mine
+has stem only (no foot, no crown — while printing `CROWN_R=0.11` in its own [c2] line), stem at the
+retired 0→SHOULDER_HEIGHT form the spec marks "⛔ Was" (correct: 0.37→1.53), no saddles, and clips
+hand-restated instead of `spec.CLIP_PARTS` — the exact drift the spec's own mechanism exists to
+prevent.  Mast-adjacent clearances in SD1-7 were measured against an incomplete mast.
+
+**Find 3 — the canonical z was consumed in the wrong datum, every row, SD1-7.**  Measured: this
+cell's `TABLE_TOP = 0.8`; canonical STEP-1 z = 1.120 locks to TABLE+0.20 (= the spec's own Z_HOME)
+only at TABLE = 0.92, transport rows 1.070 = TABLE+0.150 = REST_TOP exactly at 0.92, grasp 1.025 =
+45 mm under the saddle tops (the sagging middle) at 0.92.  And the canonical table SAYS SO
+(`CANONICAL_MOTION_TABLE_V1.md` §1.2a): its z are **Franka-generation EE-datum numbers**
+(1.025 = TABLE + CLIP_BASE + EE_TO_FINGERTIP 0.220), with the ko-gripper-generation equivalent a
+different number (1.0668 = TABLE + CABLE_R + EE_TO_PINCH_CLOSED 0.2548 + 0.008) — "z 世代差 =
+substrate 定数差、工程意味は保存".  My instrument fed those Franka EE numbers to the pinch site on
+a TABLE=0.8 cell: every station sat ~120 mm high with the tool offset mis-frame on top.  ⛔ This is
+DEV-C2X's shape at full width — a divergence between the sanctioned source and the reassembled
+cell — and the resolution is not mine to derive: the term mapping (§1.1 Home高度/上昇点/下降点 →
+this cell's Z_HOME / Z_RISE_* / grasp geometry) is the design's, so it goes to Rs2 (= p4) for the
+word, with the hover/transport terms mapping cleanly to spec constants and the grasp/seat terms
+needing the design's own derivation.
+
+⇒ **Nomination is withheld by my own criterion, correctly:** the criterion was "negatives I cannot
+attribute to my own solver", and SD7's negatives now attribute to my measurement guard, my cell
+reassembly, and my datum consumption — all mine, none the design's.  The discipline did its job in
+the direction it was built for: probe before nominate.  Free iteration continues: guard v2
+(witness-consistency + analytic lower bound), cell completion (mast trio, saddles, CLIP_PARTS), and
+SD8 at verbatim z so the fix effects are isolated against SD7 while Rs2's z word is out.
