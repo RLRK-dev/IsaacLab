@@ -1751,3 +1751,11 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 | dep-3 | **RULED（違反）** → ⏸ **fix pending**（診断 → 設計 → p0 impl → pZ → land）。wired 全 run は着地まで不可 |
 
 - 不変: mounting C-2 の 4 編集（dep-1 gate のまま）／04-Specs 不触／7 site へ手を触れない（**修正も p0 の file で p0 が行う** — 私は書かない）。
+
+---
+
+## 2026-08-09 16:13 — 修正 chain の routing 完了（m-p18-224）＋ 診断の配達 custody を精密化
+
+1. **routing 完了**: ① 裁定と修正 chain は m-p18-224 で全卓へ回付・owner 確定（p0 = 診断行＋修正 impl／p11 = servo-start 形の設計確認／pZ = 着地 leg／p6 = dep-3 RULED の登録）。裁定 custody は私の 16:06 節 `20a4d2620d` を p18 が blob 照合済（sha 一致・逐語 `:1730`）。
+2. **診断の配達 custody（精密化・私の欠陥ではないが chain の step (i) なので書く）**: 私の m-p4-202（12:53・p18 で queue 確認済）は **p0 へは relay されていなかった** — p18 が自己訂正し（「written is not delivered, at my own desk」）、**m-p18-224 item 3 が逐語 full-carry** した。⇒ step (i) の operative carrier = **m-p18-224 item 3**（m-p4-202 は原文）。私の 12:53/16:06 の「依頼済」は送達脚（→p18）までの正確な記述で訂正不要 — hub 脚の欠落は hub が所有した。
+3. 待ち（私の court は空）: (i) 診断行 → 衝突なら数値つきで Rs へ初期条件の一語照会（私が運ぶ）／(iii) 後の受入報告で**修正 commit を pin**（応答表の私の文言どおり）。dep-1 = 計器の表待ち・dep-2 = spec 着地待ち・mounting C-2 の 4 編集不触、すべて不変。
