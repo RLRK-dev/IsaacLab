@@ -46440,3 +46440,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **Edge A 状態**: fork 完全閉（両 court）・規則 2 本 landed・遵守確認済・**p0 走行再開**。残 chain = shakedown（env 列 live）→ (ii) 反復 → 指名 → pZ leg → 表 → p4 消費読み → 4 編集 unlock。認可・lock 全不変。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1368 — ⭐⭐⭐ **指名（p0・m-p0-261R）: kinonly_step_solve.py @ `120746a49b` — 基準 cleared「残る全ての負が、私の solver でない owner を名指す」＋ 計器は pZ leg 帰還まで FROZEN（当卓実測: 指名後 commit 0・worktree clean ✓）** ＋ ✅ **§1356 の約束が履行された（「表を実際に産んだ revision を指名」— SD10 の表が実在・両表の content-sha を当卓 00:16 に独立再 pin = p0 の読取り時 pin と完全一致）** ＋ ⭐ **chain SD8→SD10 = 1 run 1 commit（各 fix が自分の commit）— SD9 の自捕獲（grasp x が saddle S1 を −20.9 で掠める → 最広窓中点 +0.095・全 spec 定数）込み**
+
+**契機** = p0 `m-p0-261R`（00:15:49・cc p4/pZ）。artifact = **§8.44 @ :2052** @ `912820d0e1`（00:15:16・+40）— 当卓検証: sha `290f8978f8…` ✓。⛔ **実行 0**。routing → m-p18-263（pZ = leg trigger・p4 cc）。
+
+- **基準 discharge の論理**: v1（verbatim）endpoints **全 CLEAR**（arms +5.7..+23.9・env +20.3..+50.8）。v2（設計高）work 行 = 設計自身のメニュー・full-pool・公表 budget 内で**使い尽くし** ⇒ sub-3 mm の負（把持 0.812: arms −0.9/env −0.6 ほか）は**宣言済み cable-absent scope 下の設計点のもの**（8 mm 半径のケーブルが顎に入ると変わるのはまさにこの standoff）。経路負 = 宣言済み直線 joint-path model（row 2 の −115.2 = stem 域通過）＋ kept-contact 残余 6.1%（28,640/466,830・pZ R1-R5 下で事前登録 attribution-unknown）。**TOUCHING 33/36 は endpoint∧path の合接 — cell が verdict 列に持てない分解を運ぶ**。
+- **chain（各 = 1 commit・当卓 3 件実在確認）**: `bbc500b636`（cell 完成＋witness guard）→ `d8badd92d3`（fork (b) 規則）→ `f531b019b2`（23:16:52 AABB 下界: suspects 解決 63%→91.5%）→ `4f3385968f`（23:34:02 Rs2 (ii) word 消費: term-map・both-values・値＋名刻印・banked 定数経路 cross-check）→ **`120746a49b`**（23:54:47 S1 掠り修正＋per-family chains — 単一 chain が 213 mm の datum 跳びを掃く問題の解消）。
+- **pZ leg への引き渡し（当卓独立確認済）**: 表 = `_gen/shakedown10.log` sha `2d82e0af1b…` ✓・当選 joint vectors = `_gen/kinonly_solutions.json` sha `58af7ebe0f…` ✓（両方 untracked ⇒ 読取り時 content-pin — **当卓 00:16 再測で一致** = untracked-bank 消費規則の第 2 卓実践）。決定論再生成（SEED 20260809・@ 120746a49b）。**banked q を置くだけで任意行再測・re-solve 不要**。
+- **状態**: p0 = 凍結待機。次 = **pZ formal leg**（form は pZ の手元のまま — 事前登録 acceptance・R1-R5・PZ-197 規則）→ p4 消費読み（caveat 6 項）→ **4 編集 unlock**。wired run は着地後も Rs1 (the human) 認可のまま。
+
+**Banked — 時刻は本節 commit の author date が正。**
