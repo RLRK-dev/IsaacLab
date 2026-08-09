@@ -88,6 +88,42 @@ START = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
 
 ⚠ **併せて、私の §4 の判定に条件が付く**: 「直接の矛盾なし」は**記号の交差について**の結論であり、**STEP 1 の前提充足の様式（代入か移動か）には触れていない**。受入条件つき再発注（per-STEP 形）に答えるのは §4 ではなく本節以降。
 
+## 4c. 追記 2026-08-09 10:12 JST — **受入条件つき再発注（m-p18-209）への回答本体。閉じた検索を実施した。**
+
+### (1) 閉じた検索（母集団を問いの空間から取り、私の folder から取っていない）
+
+- **母集団** = HEAD の tracked file 全体を `0\.280|spread[ =]*0\.28|YOKE_SPREAD_OVERRIDE=0\.28` で引いた **189 file**（positive control 1/1）。⚠ この述語は **REST_Y = 0.28** と mesh 由来の数値も拾う（＝ 広すぎる側に外してある。狭い述語で「無い」と言わないため）。
+- **その中で「C-2 の点そのもの（crown 0.110 / spread 0.280 / tilt 20）で走った」artifact** = **4 件**:
+  `grid_logs_tries24/st_0.110_0.280_20.txt` ／ `SPREAD_TILT_SWEEP_TRIES24_20260729.txt` ／ `SPREAD_TILT_SWEEP_TRIES240_KINONLY.txt`（および `TRIES240`）／ `seed240_sources/tries240.txt`
+- **その 4 件の中に、route の段（descend / grasp / push / clamp / C1へ / C2へ）を測った記録は 0**（positive control 1/1）。⚠ 唯一引っ掛かる 1 行は 2 file で**同一**の `[steps] measured grasp: L=cab27 … R=cab32 … drop across the span = 2.3 mm`＝ **掴む点の静的な計測**であって段の実行ではない（しかもその `0.28` は **REST_Y** で spread ではない）。
+- 掃引 file 冒頭の逐語がこれを裏づける: 「**the real driver, once per point, stopped after the start-pose lines. No route run**」。
+
+### (2) ⚠ 検索の副産物 — **同じ点で、draw 数だけが違う 2 つの結果が在る**
+
+| draws | L solved | **L free** | R solved | R free | arms closest | interleave | 判定 |
+|---|---|---|---|---|---|---|---|
+| **24** | 13 | **0** | 16 | 4 | **+0.0 mm** | YES | fail |
+| **240** | 106 | **5** | 122 | 30 | **+14.7 mm** | no | **PASS** |
+
+⇒ ⛔ **矛盾ではない**（draw を増やせば稀な解が出る）。⇒ ⭐ **しかし C-2 の PASS は裾の事象**: 左腕は **240 draw 中 5 = 2.1%**。24 draw では「触れているか貫通」と読める。掃引 file 自身が冒頭で警告している —「24 draws gave survivor counts that were **a property of the sample, not the cell**」。⇒ **「C-2 は PASS」は真だが、*どれだけ探せば見つかるか* を伴わないと片手落ち。**
+
+### (3) 回答（STEP 番号つき）
+
+| STEP | 前提 | C-2 での状態（実測） |
+|---|---|---|
+| **1** 初期位置(上昇点・原点) | 開始姿勢に居ること | ⚠ **代入で満たされる**（§4b）⇒ **合否が C-2 に依存しない**。開始姿勢の探索自体は測ってあり **240 draw 中 5（左腕 2.1%）・両腕 +14.7 mm** |
+| **2-18** | 各 waypoint への IK と接触回避 | ⛔ **測定が 1 件も無い**（上記閉じた検索） |
+
+⇒ ⭐ **合格形の 2 択（「無い」／「在る＋番号」）を正直には返せない。**
+- 「**無い**」と言うには STEP 2-18 が解けることの根拠が要る — **無い**。
+- 「**在る＋番号**」と言うには、ある STEP が解けないことの根拠が要る — **これも無い**。
+- ⛔ **「整合を確認した」で済ませない**という条件は満たしている（本節は per-STEP で状態を述べ、どちらでもない理由を測定で示している）。
+
+### (4) この gate を閉じる唯一の安い測定（⛔ 実行しない・authorization を持たない）
+
+**canonical STEP 1-18 の waypoint を、C-2 の取付で kinematics のみ解く**（= banked 掃引と同じ `KINONLY` 経路。route は走らせない・dynamics 無し）。出力 = 各 STEP の solved / collision-free / arms-closest。⇒ **これが返れば 2 択のどちらかが確定する。**
+⚠ **私はこれを起動しない** — HOLD と fence が現行で、私に run 権限は無い。⇒ **要る判断 = この KINONLY solve を許すか否か**（owner = p4 の gate ＋ Rs の run 権限）。
+
 ## 5. 権限の明示（形式の受理 ≠ 行為許可）
 
 - 本 file は **測定と回答**であり、**p0 の gate を私が反転させるものではない**。gate の運用は p18 の routing / chain の順序に従う。
