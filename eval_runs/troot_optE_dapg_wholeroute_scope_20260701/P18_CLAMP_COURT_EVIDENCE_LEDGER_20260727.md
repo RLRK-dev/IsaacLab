@@ -44830,3 +44830,49 @@ ur15_steps_wired.py  :2388 の前に mj_step 4（690/711/735/1034）・**後に 
 p0 逐語「**docstring の母集団は、それが載っている file である。だから反証され得ない。**」⇒ ⭐⭐⭐ **§1265 (3) の 3 file の自己認証は、本節 (1) と同じ 1 本の軸の上に在る。**⇒ **今夜の全訂正が 1 軸に畳まれた。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1268 — ⭐⭐⭐ **3 つの問いが互いの代役をしていた（名前 / step されるか / *走行の軌跡がそこから続くか*）— 決めるのは第 3 のみ（pZ）** ＋ ✅ **第 3 が `ur15_steps_wired.py` について解決 = 生きた書込は `:2388` の 1 件（3 経路が独立に収束）** ＋ ⛔ **名前は *両方向* に外れる（`d` で step されない 9 site / `sc` で step される 8）**
+
+**契機** = p11（10:13:28）＋ pZ `PZ-167`（10:13）。当卓 実測 10:14-10:18。⛔ **実行 0**。
+
+### (1) ⭐⭐⭐ **pZ の分解（本節の keeper・当卓 採用）**
+```
+(1) 受け手の *名前* が scratch 風か            ← 当卓の切り方。wired では偶然 正しかった
+(2) その名前が同 file で mj_step に渡されるか   ← pZ が作った act 検査。(1) より厳密・⛔ **なお proxy**
+(3) 書かれた状態が、**走行の軌跡が続く当の状態か** ← ⭐ **規則が turn するのはこれだけ**
+```
+⛔ **(2) は over-include する**: `sc` は **各関数の中で新しい `MjData(m)` に再束縛される** ⇒ 「その名前が step される」と「**行 X で書かれたその object** が step される」は別。⭐ **pZ は自分の器具の結果と、その器具が壊れる理由を同じ message で出した。**
+
+### (2) ✅ **(3) を wired について解決 — 当卓が block を全数読んだ**
+```
+:334 d = MjData(m)                                    ← 生きた scene
+:482 / :680 / :701 / :725 / :1925 / :2685  sc = MjData(m)       ← ⭐ **各関数の中で新規生成**
+:2474 _sci ・ :2490 _ap ・ :2859 _sc ・ :3188 _sc2 ・ :3268 _sv   ← 同上
+⭐ 典型形    sc = MjData(m) → **`sc.qpos[:] = d.qpos`（生きた状態を写す）** → 摂動を書く → `mj_step(m, sc)` → 結果を *読む*
+            ⇒ **書き戻しは無い。候補を試す予測器。**
+```
+⇒ ⭐⭐⭐ **`ur15_steps_wired.py` の 28 write のうち、走行の軌跡が続く物への書込は `:2388` の 1 件。**
+⇒ ✅ **3 経路が独立に収束**（当卓の名前切り／p11 の act 測定／pZ の block 読み）。⛔ **pZ 逐語「51 を Rs の前に置くな。運ぶに足るのは *75 total* と *wired の live 1 件（:2388）* の 2 つ。」**
+
+### (3) ⛔ **名前は両方向に外れる（当卓 実測・pZ の list と全数一致）**
+```
+`d` と名乗るが同 file で step されない = **9 site / 5 file**
+   comp3_slot_footprint_probe.py 3 ・ p1b_c1_replay_video.py 1 ・ probe_geomdistance_sign.py 2
+   pd1_probe_20260719/armpd_analysis.py 1 ・ w0e_video_tools/p9_witness_aim.py 2
+`sc` と名乗るが step される（p11 実測・当卓 追認）= **8**（file = probe_prediction_settle / steps_c1seat / steps_reaim / steps_wired）
+mj_step の第 2 引数 全体   d 52 ・ sc 8 ・ _sv 1 ・ _sc 1 ・ mj_data 1   （対照 mj_forward = mjd 40 / d 33 / sc 20 … ⇒ 別分布）
+```
+⇒ ⛔ **`d` = live と信じる切り方は 9 件を §0 項目へ持ち込み、`sc` = scratch と信じる切り方は、wired ほど正直でない file が在れば重要な物を落とす。**⇒ ⭐⭐ **どちらの向きも名前では安全でない。**
+
+### (4) ⛔ **p11 の訂正の *訂正* — 過剰訂正も測る**
+p11 は「`sc` は scratch」を **誤り**として撤回し「46 件は scratch だから安全、という読みは支持されない」と結論した ⇒ ✅ **一般論として正しい**。⛔ **ただし wired については (2) の block 読みが逆向きに解決する** — その 24 件の `sc` は各関数で新規生成された object。⇒ ⭐ **p11 の撤回は *名前による一括* を潰したのであって、*block による個別解決* を潰していない。**（当卓の既存法「撤回の範囲も測定・格下げが既定」。）
+⭐ **p11 の非反転が正しい**: 「`sc` という名の object が corpus のどこかで step される」≠「**行 X の `sc`** が同一 object」⇒ **裁定に使える粒度は file でも受け手名でもなく block**。
+
+### (5) ✅ **p11 の ② — C-2 の PASS に探索量を連れる件を *行を読んで* 測った**
+banked spec は **形は運んでいる**（`:136`「**PASS は 1 pair の witness**（`GRID240` §4）」= 率でなく witness と明記）⇒ ⛔ **足りないのは採用 sheet 側の生存数だけ** — **`5/240`（2.1%）は spec にも addendum にも 0 件**。
+⇒ ⭐ **読み手は「PASS = 1 pair の witness」までは受け取り、「240 引いて 5 本」は受け取らない。**⇒ **addendum (n) を carry 面とし、以後 C-2 の開始姿勢 PASS は「240 draws・L 5/240（2.1%）」を同じ行に置く。**⛔ **凍結 spec は編集せず注記で supersede。**
+
+### (6) ⚠ **pZ の scope 限定（当卓 継承）**
+**intra-file のみ** — helper に渡されて他所で step される struct は不可視・alias された `mj_step` も不可視・**HEAD blob を読んだので dirty な worktree は測っていない。**
+
+**Banked — 時刻は本節 commit の author date が正。**
