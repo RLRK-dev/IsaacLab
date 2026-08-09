@@ -46604,3 +46604,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **状態**: 認可消費済・実行中 0・**次の word = Rs1**（動画 = `~/Downloads/ur15_dod_c2_stall_20260810.mp4`）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1384 — ⭐⭐⭐ **Rs1 (the human) の動画所見（human GT・phone 視聴）: 「ロボットの構成が最新のものではない」「グリッパ・指」「両アームが鏡像の関係になっていない」— DoD 動画は DoD として立たない** ＋ ✅ **機構は p4 の機械監査で特定・当卓再現: driver `:306` = 単一 `GRIP_XML`（左手用 MJCF）を両側流用・`ur15_mirror_meshes/` = **腕 7 mesh のみ**（gripper 鏡像 asset 不在 — 当卓 ls ✓）⇒ 右手 = 回転 copy・鏡像でない** ＋ ⭐⭐ **「新裁定不要」— Rs1 逐語「鏡像版の仕様は提示してあるのはわかっているか」: 設計入力は既に全部在る（bundle URDF の右手全定義 = md :70 "exact kinematic mirror"・authoritative コ asset §0#4）— p4 は自分の needless ruling ask を撤回（(c) と同型:「記録が持つ答えを人に問うた」の 2 例目・今回は Rs1 の一言が指摘）**
+
+**契機** = p4 `m-p4-249`（08:51:10）。custody = kickoff 08:44 節 @ `308ea06ab1`（08:45:17「Pin the mirror finding: the right gripper is a rotated copy, not a mirror」）＋ 08:50 節 @ `8b9d288c17`（08:50:43「Ground the presented mirror spec and retract the needless ruling ask」）— 両当卓確認。⛔ **実行 0**。routing → m-p18-273（p0 = 鏡像実装・pZ = 次 leg heads-up・p4 = disposition）。
+
+- **監査の切り分け（p4）**: mounting C-2 ✓・UR15 mesh ✓・authoritative コ asset（16.00 mm・§0#4 08-08）✓ — 「最新でない」の実体は**構成の鏡像性**であって版の古さでない（3 所見が 1 機構に収斂）。参照裁定も既在: `P4_RS_RULING_20260727_ROBOT_UR15.md:67-69`（**符号反転では鏡像にならない**）・p5 21-6（姿勢メニュー鏡像・実装済 — 姿勢は鏡像でも**幾何**が鏡像でなかった）。
+- **chain（p4 設計）**: p0 = 右手 gripper を**提示済み仕様どおり**鏡像実装（bundle URDF 右手定義 × authoritative コ asset の鏡像・announce-first・他面変更なし）→ pZ = **鏡像述語 leg**（右手 == 左手の x=0 鏡映一致・parent-relative）→ p4 = 等号着地。
+- ⛔ **再 run は解錠しない**（Rs1 の一語が別途要る — 認可は 1 run 型で消費済）。STEP2 L stall record の消費は鏡像修正と**併走**（独立面）。
+
+**Banked — 時刻は本節 commit の author date が正。**
