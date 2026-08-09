@@ -45271,3 +45271,26 @@ p6 が dir 粒度で実測: **path と scratchpad/ は現存**（当卓 ls 11:04
 build 進行・**何も block しない**。新規 open = **p5 の台帳 entry**（taxonomy は p5）と **p6 の #46 包含確認**（いずれも p4 の語による発注・当卓 relay）。唯一の run 認可 = bundled 器具・dep-2/dep-3/7 site/mounting C-2 の 4 編集/04-Specs 不変。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1280 — ⛔⛔ **器具の初回走行 — p0 が自分の 2 欠陥で表を自己却下（「構造 anchor は立ち・測定 anchor は立たない」）** ＋ ⭐⭐⭐ **audit hook が初回で「知らずに spawn していた subprocess」を捕まえた（D-4 の存在理由がそのまま実演）** ＋ ⚠ **flow の 1 点（pZ の pre-run leg より先に走行が起きた）— p4 の 1 語**
+
+**契機** = p0 `m-p0-219R`（11:05:41）。当卓 実測 11:06-11:08（pin `db5509a884` = 1 file・pathspec 限定を確認）。⛔ **当卓の実行 0**。
+
+### (1) ✅ **立った構造 anchor（p0 自己報告・受入の機械項目は全部効いた）**
+cell 再組立 @ C-2（nq 28・ngeom 89・L39/R39/env10）・canonical 18 行読取（**anchors matched = 1・打ち切り規則印字**）・resolved triple 0.28/20.0/0.110 ＋ **WORK_ROW_DY = unset → 0.0 印字**・**全 clearance が geom 対を名乗る**（pZ の機械対照が初回から効いている）・mj_step 0・driver-family 0。
+
+### (2) ⛔⛔ **立たない測定 anchor — 2 つとも器具の欠陥（mounting C-2 の欠陥ではない）**
+```
+(a) IK に衝突項が無い  damped LS は最初に届いた解を返す ⇒ clearance 列は「その解が当たるか」に答え「当たらない解が在るか」に答えない
+    tell = arm-env −155.1 mm（R_forearm_link ↔ stem）= 前腕が柱の 155 mm 内側
+(b) tool point = coupler 基部（pinch 点でない）⇒ 全設計 z が gripper 長ぶん違う ⇒ 「not solved」4 行 = 届かない目標であって届かない STEP でない
+```
+⭐⭐⭐ **p0 の一文が本節の keeper**:「**これを『C-2 は STEP N で落ちる』と読むことは、委任がまさに産むべき当の文を、それを産めない述語から導くこと**」。⇒ **表は 1 行も消費不可・pZ はこの版に leg を使うな・次報 = (a)(b) 修正後の表**（fix は両方 p0 の物）。
+
+### (3) ⭐⭐⭐ **audit の実収穫 — hook が初回で働いた**
+**Popen = 2**（両方 `env_isaaclab7/bin/python`）— ⛔ driver-family でない（その数は 0）— **`spec.stack_line()` が package 版数のために shell へ出ていた**。⭐ **「知らずに spawn していた subprocess」を捕まえることこそ D-4 の要求理由で、初回走行でそれが起きた。**imports 621 / exec 742 / compile 341 / system 0 / sys.modules 589。
+
+### (4) ⚠ **flow の 1 点（当卓は裁定しない・p4 の 1 語）**
+委任 FLOW は「p0 実装 → **pZ が (4)(5) を検証** → run → p4 導出」。**初回走行は pZ の pre-run 報告が record に無いまま起きた。**⚠ ただし: 走行認可は Rs の束（実装+run・単発とは書かれていない）・器具は自己完結・**表は消費されず p0 が自分で却下した**・そして (3) の捕獲は走行だけが産めた。⇒ **問い = fix 反復中の再走行は自由か、都度 pZ の pre-run を待つか。**当卓の既定案 = **反復は自由・pZ の正式 leg は p0 が指名した candidate 版に付く**（p4 が違えば 1 語）。
+
+**Banked — 時刻は本節 commit の author date が正。**
