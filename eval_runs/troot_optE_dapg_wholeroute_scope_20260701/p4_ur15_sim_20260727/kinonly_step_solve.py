@@ -630,7 +630,16 @@ def main() -> int:
         sR = env_scan("R", cR, prev["L"])
         ncL = sum(1 for _c, v, _p in sL if v is None or v > 0)
         ncR = sum(1 for _c, v, _p in sR if v is None or v > 0)
-        best = None
+        # ⛔ SELECTION = THE DRIVER'S OWN RULE, learned from shakedown 5: among CLEAR pairs, take
+        # the one NEAREST prev in joint space -- solve_ik "returns the one closest to `near` (so
+        # the servo move stays short)" (:1376-1378 @ 2fba2dfd67), and the aim loop pins entries
+        # because that "holds each arm on one IK branch across the correction rounds" (:753-756).
+        # Shakedown 5 ranked by clearance ALONE: every endpoint came out clear, and 23 of 25
+        # along-path columns read +0.0 at 1/20, because consecutive winners sat on different IK
+        # branches and the straight joint path between branches sweeps through the scene.  Those
+        # path negatives were MY selection's, not the design's.  Max-min clearance remains only
+        # as the fallback when no clear pair exists, and the row says so.
+        best, nearest, n_clear = None, None, 0
         for a, vL, pL in sL:
             for b, vR, pR in sR:
                 place({"L": a[0], "R": b[0]})
@@ -643,7 +652,16 @@ def main() -> int:
                             0.5 if vR is None else vR)
                 if best is None or score > best[0]:
                     best = (score, a, b, v, pr_, we, pe_)
-        _, wa, wb, aa, pair, ae, pe = best
+                if all(x is None or x > 0 for x in (v, vL, vR)):
+                    n_clear += 1
+                    dq = (float(np.linalg.norm(a[0] - prev["L"]))
+                          + float(np.linalg.norm(b[0] - prev["R"])))
+                    if nearest is None or dq < nearest[0]:
+                        nearest = (dq, a, b, v, pr_, we, pe_)
+        picked = nearest if nearest is not None else best
+        _sel, wa, wb, aa, pair, ae, pe = picked
+        sel = ("nearest-prev among clear pairs" if nearest is not None
+               else "max-min clearance (NO clear pair exists in the pool)")
         qs = {"L": wa[0], "R": wb[0]}
         N = 20
         worst, at, wp = None, "-", "-"
@@ -664,12 +682,15 @@ def main() -> int:
         if not clear and capped and ae is not None and ae <= 0:
             cap = (f" (env-capped {'&'.join(capped)}: 0 env-clear candidates in the pool -- "
                    f"within this budget the touching is the design point's, not the selection's)")
+        elif not clear and n_clear == 0:
+            cap = " (no clear pair in the full pool within this budget -- max-min fallback shown)"
         verdict = ("CLEAR" if clear else "TOUCHING OR THROUGH") + cap
         along = gap_say(worst, wp) if worst is None else f"{worst * 1000:+.1f} at {at} ({wp})"
         att_s = (f"L({wa[1][0]:+.2f},{wa[1][1]:+.2f}) R({wb[1][0]:+.2f},{wb[1][1]:+.2f})")
         print(f"| {row['step']} | {ref} | {label} | {att_s} | {gap_say(aa, pair)} | {gap_say(ae, pe)} | "
               f"{along} | L {wa[2] * 1000:.1f}/{wa[3]:.3f}, R {wb[2] * 1000:.1f}/{wb[3]:.3f} | "
-              f"{uL + uR} it, pool L{len(cL)}/R{len(cR)}, env-clear L{ncL}/R{ncR} | {verdict} |")
+              f"{uL + uR} it, pool L{len(cL)}/R{len(cR)}, env-clear L{ncL}/R{ncR}, "
+              f"clear-pairs {n_clear}, sel={'near' if nearest is not None else 'maxmin'} | {verdict} |")
         bank.append({
             "step": row["step"], "referent": ref, "candidate": label,
             "target_L": [float(x) for x in tl], "target_R": [float(x) for x in tr],
@@ -680,6 +701,10 @@ def main() -> int:
             "env_mm": None if ae is None else ae * 1000.0, "env_pair": pe,
             "along_worst_mm": None if worst is None else worst * 1000.0,
             "along_at": at, "along_pair": wp,
+            "path_from_L": [float(x) for x in prev["L"]],
+            "path_from_R": [float(x) for x in prev["R"]],
+            "selection": sel, "clear_pairs": n_clear,
+            "dq_to_prev_rad": None if nearest is None else nearest[0],
             "pool": [len(cL), len(cR)], "env_clear": [ncL, ncR], "iters": uL + uR,
             "verdict": verdict,
         })
@@ -705,10 +730,14 @@ def main() -> int:
           f"seat-solve re_max :733, and under half the menu's finest roll spacing 0.05 so a "
           f"converged attitude names ONE entry); solver numerics = driver's 6D DLS verbatim "
           f"(:1448-1462: 0.6 rot weight, 0.05^2 damping, half-step, 0.15 cap); pool = every "
-          f"distinct converged candidate, floor {POOL_MIN_DQ} rad L2/6 joints; pairs ranked over "
-          f"the FULL pool (LxR), env precomputed per candidate, ranking never rejection; seeding "
-          f"pass 1 = prev pose, pass 2 = prev+N(0,0.35), home/uniform without prev; along-path "
-          f"samples 19 interior (arm-arm AND arm-env), endpoints excluded")
+          f"distinct converged candidate, floor {POOL_MIN_DQ} rad L2/6 joints; pairs scored over "
+          f"the FULL pool (LxR), env precomputed per candidate, ranking never rejection; "
+          f"SELECTION = nearest-prev among clear pairs (driver :1376-1378 'closest to near so "
+          f"the servo move stays short'; branch-pinning :753-756), max-min clearance only as the "
+          f"no-clear-pair fallback, and the row says which; seeding pass 1 = prev pose, pass 2 = "
+          f"prev+N(0,0.35), home/uniform without prev; along-path samples 19 interior (arm-arm "
+          f"AND arm-env), endpoints excluded, path start = the previous row's SELECTED pose "
+          f"(banked as path_from)")
     sol = _GEN / "kinonly_solutions.json"
     sol.write_text(json.dumps({
         "meta": {
