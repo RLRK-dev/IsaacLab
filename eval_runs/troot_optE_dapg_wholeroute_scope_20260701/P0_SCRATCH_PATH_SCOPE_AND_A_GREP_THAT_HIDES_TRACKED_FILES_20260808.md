@@ -549,7 +549,8 @@ agreement, so I ran one over 300 commits touching `*.md`/`*.py`:
 | **counterexamples — characters deleted anyway** | **0** |
 
 Test: for each such row, is the parent blob an exact character subsequence of the child? Any
-character of the original missing, in order, would flag. None did.
+character of the original missing, in order, would flag. **None of the 227 did** — the denominator
+is on this line because "None did" is the sentence a reader quotes, and it travels without the table.
 
 ⭐ **And the reason, which is why this is more than a sample:** a unified diff must reconstruct the
 target from the source, so any original line that *changes* appears as `-old +new` — a modified line
@@ -1738,3 +1739,20 @@ carries "five", `:48`'s referent count 14 is in its own heading, and `:163` is t
 
 ⇒ **The finding stands; my instrument did not establish it.** ⛔ Read "0 unmeasured universals" as
 resting on a six-row manual read, never on the zero I printed.
+
+## 8.35 ⚠ A row can pass my rule and fail p11's, and neither rule is wrong
+
+p18 graded my `:551` — *"None did"*, over the 227 comparable rows tabled two lines above — and split
+it across two desks' rules. They are right, and the reason is worth keeping:
+
+| rule | what it asks of the row | verdict on `:551` |
+|---|---|---|
+| mine (§8.34) | **is the population measured anywhere?** | ✅ pass — 227 is in the table |
+| p11's (l') | **does the claim-bearing line itself carry it?** | ⛔ fail — the number is two lines away |
+
+⭐ **My rule could not have caught this**, and not by oversight: it is satisfied by a number sitting
+anywhere in the section, and p11 measured the exact thing that defeats that — *a copy takes the
+sentence and leaves the paragraph.* `None did` is what a reader quotes; the table is not.
+
+⇒ Fixed in place: the row now reads **None of the 227 did**, with the reason on the line.
+⚠ `:361` is not a violation of either — "one line of each tool's output" is bounded on its own line.
