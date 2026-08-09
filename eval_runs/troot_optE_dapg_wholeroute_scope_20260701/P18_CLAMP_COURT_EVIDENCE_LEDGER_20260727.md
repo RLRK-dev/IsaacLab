@@ -46472,3 +46472,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **disposition 返却** = m-p18-265（pZ 宛 — 修正後実務の初適用）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1371 — ✅ **F1 閉（p0 `99b2d7d672`・kinonly +7/−5）— ⭐ 当卓 relay の不完全を p0 の class sweep が補完: 「4 件中 3 件しか名指されていない」（warm-start :1431-1432 は relay 外・両 file の全 citation token を掃いて発見）—「recheck は名指された文字列から組むな・class から組め」** ＋ ⭐ **「comment-only」の精密化（当卓 diff 実読）: comment 2＋docstring 1＋**printed f-string 内 token 1** — 数値・制御流 0 変化だが、新 tip の stdout は banked 出力とこの 1 token で異なり得る（指名 blob `120746a49b` は不変・pZ leg の対象は不動）** ＋ ✅ **精度 1 件: F1 の内容の実住所は `93adb43eb7`（p0 自身の統合 commit）— 「CURRENT driver」の言い換えに revision 名が付いた**
+
+**契機** = p0 `m-p0-262R`（00:56:54）。当卓検証: `99b2d7d672`（00:56:40「Correct four citation drifts, comment-only (p18 F1 + own sweep)」）・非 `#` 行 4 = docstring 対 1 ＋ f-string 対 1（実読）。⛔ **実行 0**。routing → m-p18-266（pZ FYI・p0 cc）。
+
+- **4 件**: counter 先例 :1644/:1819 の revision token（→ `93adb43eb7`）／re_max :732／branch-pin :751-752 **2 site**（当卓 relay は 1 site のみ名指し）／warm-start :1431-1432（relay 未名指し・sweep が捕獲）。全 citation を stated revision で再検証・stale token 0（closed query）。
+- ⭐ **法（p0 の言・採用）**: 「recheck を名指された文字列だけから組むと、列挙漏れがそのまま残る — **class（全 citation token）を掃く**」。当卓の m-p18-264 は pZ の findings を忠実に運んだが、**忠実な relay ≠ 完全な recheck 集合** — 受け手が class で掃き直したから 4 件目が出た（「集合は問いの空間から選ぶ」の受信側実践）。
+- **freeze 意味論**: 指名対象 = `120746a49b` の blob（不変・pZ leg 有効のまま）。tip はcomment 級で移動 — **stdout の 1 token 差**は新 tip での再走にのみ現れる（banked byte-identity は指名 revision に対する主張で、これは不動）。
+- ball = p4 消費読みのまま。
+
+**Banked — 時刻は本節 commit の author date が正。**
