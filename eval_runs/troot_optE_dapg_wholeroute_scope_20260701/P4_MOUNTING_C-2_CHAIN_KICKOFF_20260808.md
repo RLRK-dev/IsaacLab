@@ -1996,3 +1996,11 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
    - **(B) spec 着地の前段**: p11 の統合 draft（`35d7ef4d0d`・(a)(b)(c)(d) 全折込済）→ **§0 前提変更 = L3 ⇒ §運用2 [VERIFY] 5 体検証**（convene = draft owner p11・CC1 形）→ 完了後 Rs1 へ着地承認 1 回の形で提示。
 3. 進められない辺（理由つき・催促しない）: C3-C5（D1 未充足）／MEMORY.md pass（trigger 未達・早発は一度 RETURN 済）／DoD run（4 編集後・Rs1 認可の領分）。
 4. ⚠ 自分の手続き違反 1 件を記録: 18:02 節の見出し時刻は **date と同一 call の heredoc に書いた**（第 4 発・値は偶然一致 — 幸運は手続きではない）。本節から分離を再徹底（この見出しは印字 18:57:23 を読んでから書いた）。
+
+---
+
+## 2026-08-09 19:04 — 両辺 routed（disposition 受領）＋ saturation caveat の解除条件を鋭くする
+
+1. **disposition**: 両辺とも Rs1 priority つきで routed（m-p18-257・全 pin hub 再現済）。私に owed なし。Edge A は p0 の一語（landed `a2762d2bb5` の skip 形 fix が「announced prefilter」か・rbound 形が別途来るか）→ 指名へ。Edge B は p11 が 5 体検証を convene。
+2. **私の 17:21 caveat の解除条件を書いておく**: 「ceiling 行 = saturation 候補」は **指名 revision 上で pZ leg が fix の形（skip 形 or rbound 形）を確認した時点で、その形に応じて読み替える** — skip 形なら「絶対 ceiling 行は出ない・absent は (None,"-") で現れる」へ、rbound 形なら wired 同型へ。⛔ 表を消費する私が、fix 前の caveat を fix 後の表に持ち越して過剰に割引かないため（不要な場所の caveat は信頼を蝕む — p5 の法則の自分への適用）。
+3. 記録: 第 5 push（18:53・`dfe9d636e4..f43cf43a7b`・15 commits）は他卓実行・hub 検証済 — 私の行為ではない（custody のみ）。
