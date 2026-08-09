@@ -1389,3 +1389,40 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 ### (5) 繰り越し（⛔ 本 chunk の claim を gate しない・owner つき）
 
 `:814` の 3 件は据え置き: 生成物 dir の un-ignored 露出（owner **p0**・`.gitignore` 1 行）／tracked PNG の上書き到達可能性（marker 済・恒久修正は別件 = hardcoded 2026-07-29 file 名）／A-9 の述語 2 件。＋ URDF provenance 起票（owner **p6**）／dead-scratchpad の class 行（owner **p6**）。⛔ **いずれも p18 の 09:34 STATE では OPEN に立っていない** ＝ 進行を止めないが、消えたわけでもない。
+
+---
+
+## 2026-08-09 09:47 — #48 の Rs 裁定が着いた: 応答表の 2 行目を同 turn で実行（dep-2 更新・**cap は spec 着地まで**）
+
+### (0) 何が来たか・私が何を検証できたか（provenance を分けて書く）
+
+- **来たもの** = p18 m-p18-210（09:46）経由の Rs 裁定。逐語（**p6 の受領文**・私は発話を目撃していない）: 「**前提を変えて良い**」（2026-08-09 ~09:39 JST）。
+- **私が検証した物** = p6 の bank: commit `b01cea5482`（09:40:45・1 insertion 1 deletion・DDR row 48 の in-place 編集）。row head 逐語（blob 直読）: 「⭐**Rs 裁定あり 2026-08-09 — 前提側を変更してよい（spec 未編集）**」。⇒ row 48 が Rs に出した 2 択（前提を変える／cell を戻す）のうち **前提側が選ばれ、cell は戻さない**。
+- ⛔ 裁定が**言っていない**こと（p6 の列挙・p18 が追認・私も追認）: 新文言そのもの／04-Specs の編集認可（Rs court・**未編集**）／build・probe の進行（§0 前提変更 = L3 ⇒ §運用2 [VERIFY] 5 体検証が先行）。**draft は可・edit は不可。**
+
+### (1) 2 つの事実を自卓で再測した（他卓の数値で裁定しない）
+
+- **spec** `04-Specs/RS71-System-Spec-SSOT.md`: 前提文は **`:69`**（`:67` は見出し `## 4. CABLE`）。逐語確認: "the cable is a **1-DOF-per-joint PLANAR bender** built with the bend plane **VERTICAL (sag)** — 39 inter-segment joints each a single revolute…"。**CLEAN**（`git diff --quiet HEAD` = 差分なし）。
+- **built cell** `p4_ur15_sim_20260727/ur15_cell.py`: **`:102`** `cab{i}_y` hinge `axis="0 1 0"` ＋ **`:103`** `cab{i}_z` hinge `axis="0 0 1"` = **1 link に hinge 2 本**。`:97` は freejoint・`:98` は geom（p18 の訂正どおり）。**CLEAN**。
+- ⇒ **p18 の訂正済 pointer は私の卓で再現**（:69 / :102-103）。⚠ 1 点の増分（FYI・p6 の row）: **banked row 48 自身も `…SSOT.md:67` を運んでいる**（引用逐語は :69 の文）。読み手は見出しに着地する。⛔ 直すか残すかは p6 の court — 数は旅をし、pointer は旅をしない（p18 §1252 と同法）。
+
+### (2) 応答表の 2 行目を実行する（09:41 節で事前確定した分岐・⭐ 設計どおり 1 turn で済んだ）
+
+来た裁定 = 「前提を supersede する」枝。09:41 節 dep-2 応答表の該当行を逐語で消費する:
+
+> | 前提を supersede（RS71 §4 B2 を更新） | 07-Design/04-Specs は CC read-only ⇒ **spec 更新待ち**を loud に surface（§運用4）。cap は spec 着地まで維持 |
+
+- **loud surface（ここがその surface）**: ⛔ **RS71 §4 B2 の後継文言は未着地・04-Specs は CC read-only ⇒ 私は触れない。** draft の owner 提案 = p11（+ p5 = 43-step 依存の申告）— p18 routing のとおり・**私は draft しない**。
+- ⭐ **cap の閉止イベントに名前が付いた**: 従来の書式「**#48/#18 open の間** DoD 動画へ無印 PASS を出さない」は実質そのまま生きる（row 48 は spec 未編集ゆえ open のまま）が、**閉じる事象が特定された = 「Rs が新文言を RS71 に着地させた時」**。p18 の hub 執行文と一致: "NO CABLE CLAIM GETS AN UNQUALIFIED PASS UNTIL Rs LANDS THE NEW WORDING"。⛔ #18 の cap は**別軸・不変**。
+- ⚠ **私の前報の緩い一文を訂正する**（見出しに入れた）: 私は Rs へ「cap を外せるのは #48 の disposition のみ」と書いた。**選ばれた枝では disposition は cap を外さない — 外すのは spec 着地である。**（応答表の 1 行目の枝〔前提の内側〕なら即解除だったが、その枝は選ばれなかった。）
+
+### (3) dep 表の状態更新（09:47 実測）
+
+| id | 状態 09:41 | 状態 09:47 |
+|---|---|---|
+| dep-1（p5 工程表レグ） | ⏸ 再発行済・期限 18:00 JST | **不変**（p18 が明示: m-p18-210 は m-p18-209 を置換しない・2 件 2 owner） |
+| dep-2（#48） | ⏸ Rs court・応答表待機 | ✅ **裁定済（前提側）** → ⏸ **spec 着地待ち**（owner = Rs・draft = p11/p5 court）。**cap 維持**・応答表 row 2 消費済 |
+
+### (4) 本節が動かさないもの
+
+C-2 の 4 編集（dep-1 gate・`2fba2dfd67` / `2bb1aad4e7` 未着手）／HOLD／run と DoD 動画 = Rs の権限／04-Specs（私は 1 byte も触れない）／draft の中身（p11/p5 の court — routing の受入条件 (a)–(d) は p6 案・確定は先方）。⛔ m-p18-210 の 要るもの に p4 は居ない — 本節は自卓の台帳整合のみ。
