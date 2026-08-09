@@ -1592,3 +1592,41 @@ m-p18-214 が p4 に 2 決定を求めた: (i) p5 が名指した KINONLY 測定
 2. **footgun（p18 が blob から接地・採用する）**: `CROWN_R_OVERRIDE` は文字列 `"none"` を受け、**crown 幾何を丸ごと除去する**（`:352/:429`）。commission の値は `"0.110"` のみ。`:425` により明示 CROWN_R_OVERRIDE が CROWN_Z0 導出に勝つ（相互作用なし）。
 3. **⭐ 消費側検査を 1 つ確定する（受入条件の追加ではない — 条件 (3)(6) の適用形）**: 私が表から「在る/無い＋STEP 番号」を導出する前に、artifact から **解決後の 3 数（spread 0.280 ／ tilt 20° ／ crown 0.110）** を読む。env 入力の pin だけでは **効いたか**を示さない（"none" 経路・導出経路と識別できない）— 最も安い充足 = 計器が load 済み spec module から解決値 3 つ組を印字すること。rider として p0 の受諾前に回付する（受諾後の追加にしない）。
 4. 不変: dep-1（p0 readback 待ち）／dep-2（cap = spec 着地まで）／dep-3（open・wired 全 gate）／C-2 4 編集未着手／7 site 不触。
+
+---
+
+## 2026-08-09 10:41 — D-1〜D-4 の 4 裁定（build 発進用・1 message で回答）＋ mode-A 盲点の明文受諾
+
+m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: canonical 表の実在と形（`eval_runs/troot_verbal_teaching_20260705/CANONICAL_MOTION_TABLE_V1.md`・320 行・§1.2 統一 43-step 表・原本 2 ソース = `RL-Routing-Design.md` §2 ＋ `full_43step.json`・§2 に doc↔json **逸脱台帳**）／ wired `:2644-2660` 直読（`LX1, RX1 = C1[0] ∓ GRIP_HALF_SPAN`・`mouth_clear` は **model から読む**設計で、docstring 自身が「copy に stale 10.00 が入った故障モード」を根拠に挙げる）。
+
+### D-1 = **fold（採用）＋ mode-A 盲点の明文受諾**
+
+- 受入条件 (1) に **along-path 列を追加**: 各 STEP、隣接 pose 間の joint-space 線形補間を公表密度で sample し、`mj_forward`＋`mj_geomDistance` で **worst clearance と その t\***を記録（条件 (5) 無傷 — step しない）。根拠 = 端点 sampling は t=0.01s（3 file）と t=1.39s（1 file）の接触を**どちらも見えない**（p18 が log から実測）。端点だけの表は「10ms で接触する STEP」に PASS を印字する。
+- ⭐ **mode-A（追従・時間発展）は本計器に永久に見えない — これを意識的に受諾する（今、文書で）**: 導出文は fold の有無に関わらず p5 の scope note を逐語で運ぶ — 「**運動学的には STEP N まで成立。追従の成否は未測（近傍では STEP 2 で 0.0%）**」。⚠ p18 の時系列指摘は正しい: 私の 10:18/10:27 起草は §4b/§4c(2) を折り込み、**A 盲点の受諾を記録していなかった**。本節がその受諾の記録である。
+
+### D-2 = **設計源の restate ＋ 静的照合**（(4) は緩めない・値 copy もしない）
+
+- **レグの対象は 工程表（設計）であって wired ではない**。よって waypoint の源は設計側から取る:
+  - (α) **per-row 引用**: 各 STEP 行は canonical 設計行（`CANONICAL_MOTION_TABLE_V1.md` §1.2 ＋ 原本 2 ソース）を cite する。
+  - (β) SSOT 定数は許可済み import 連鎖から（**p0 の cosmetic 採用**: 実行 file は 3 つと明記し、driver 一族 0 を証明する — spec`:45`→task_config・import 0 は p0 検証済み）。
+  - (γ) **model-read 量（`mouth_clear` 級）は計器が自分の C-2 model から読む** — wired の docstring 自身が言う設計意図（「band は読んでいる asset と食い違えない」）に忠実。式は計器内に restate し、**wired の該当行を「text として」cite**（⛔ 実行しない）— **pZ が text↔text の静的照合**で式の一致を検証する。
+  - (δ) **設計自身の open 逸脱（表 §2 台帳・例: D-1 grasp X 0.30↔0.15）に触れる行は、逸脱 ID を運び両方の値を測る** — %12/Rs 未裁定の項で計器が側を選ばない。
+  - (ε) 設計値が canonical 源に**無い**行は捏造せず **p5 へ design-read gap として返す**。
+  - (ζ) artifact の honesty 節: 「本計器が測るのは *restate された設計*。式の忠実性 = 静的照合。restate 漂移の残差は、dep-3 が開いた場合に wired KINONLY との等価 run で閉じられる（optional・レグ充足に不要）」。
+- **理由**: (i) import 許容 = dep-3/Rs の領分（wording でない — p18 のとおり）(ii) 値 copy = wired 自身が記録した故障モード（stale copy）(iii) 上記 (α)-(ζ) は全 gate を保ったまま、レグの問い（設計は C-2 で破れるか）を正面から測る。wired↔設計の乖離は**別の欠陥**で、dep-3 の向こう側に留まる。
+
+### D-3 = **pZ の書き直しを採用**（"only" を消す）
+
+- (4) v2 = 「**driver 一族（wired/route/steps/reaim/c1seat）の実行 = 0、いかなる機構でも（import・subprocess・exec・runpy）、陽性対照つき**」＋「**artifact は実際に実行された file/module の一覧を公表する**」。
+- 理由の記録: 満たせない条件は受入時に**静かに再解釈される** — 語を今直す方が良い（pZ の指摘 = 私の auth-2 成果形書き直しと同じ法則）。
+
+### D-4 = **yes — audit hook を必須出力にする**（＋ audit 節に自分の陽性対照）
+
+- `sys.addaudithook`（pZ が pinned 3.12.3 で検証済み）で、計器自身の出力として: 全 import・exec/compile/Popen/system 事象・mj_step counter を印字。**2 報告制**（pre-run source 走査 ／ post-run audit 記録）— 前者は後者を免除しない。
+- ⭐ **私の追加 1 点**: audit 節は**自分の陽性対照**を運ぶ — 期待事象（mujoco・numpy・cell_spec 連鎖の import ≧ D-3 公表一覧）が**非空で現れる**こと。空/欠落 = hook 不発 = FAIL。理由 = hook は**測られる物の内側から報告する**（今夜の中心形そのもの）ゆえ、その生存が出力側から独立に見えなければならない。
+
+### 消費側検査の更新（10:30 節に 2 つ足す）
+
+導出前に読む: 解決 3 数（0.280/20°/0.110）／**逸脱 ID 行の両値**／**audit 節の陽性対照**。導出文は **mode-A scope note を逐語で**含む。
+
+不変: dep-2 cap／dep-3 open（wired 全 gate）／7 site 不触／C-2 4 編集未着手／04-Specs 不触。run 認可は束ねた計器 1 件のみ。
