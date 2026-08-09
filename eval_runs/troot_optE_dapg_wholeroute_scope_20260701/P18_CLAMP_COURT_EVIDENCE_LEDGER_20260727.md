@@ -45545,3 +45545,19 @@ Rs が直接「開始姿勢を書込でなく controller で到達できるか�
 - **発火条件 = p11 への run 認可**（scope: 隔離 worktree で renderer を 2 回・描画のみ・driver family 不実行・mj_step 不要）。⛔ **p11 は要求しない・当卓も要求しない — Rs の一言のみが発火させる。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1296 — ⛔⛔⛔ **Rs が ① を裁定: 腕姿勢書込は違反・「すべてコントローラの司令で実現できるはず」— dep-3 = BREACH 確定・DoD 動画含む wired run は fix landing まで停止（p4 の response map が同 turn 執行）** ＋ ⛔ **当卓の訂正: zero-pose 診断を「回付済み」と報告したが pane へ送っていなかった（written ≠ delivered の自例）— 本 relay で診断全文を carry**
+
+**契機** = p4 `m-p4-203`（16:08・custody pin `20a4d2620d` 31/0・sha `eed65ed5…` 当卓一致・逐語 blob 内確認）。当卓 実測 16:09-16:12。⛔ **実行 0**。
+
+### (1) ✅ **custody（当卓検証済み）**
+Rs 逐語（16:0x・p4 session 直答・**2 turn 前に `:2388` 自体と servo precedent を提示済みの文脈**）:「**腕を姿勢へ書き込むことは不可 すべてコントローラの司令で実現できるはず。**」⇒ **① 裁定: 書込は違反・fix 方向 = 全て controller 司令**（banked 規則 prohibited.md の逐語と同方向 — 引き伸ばしなしで適用可能）。
+
+### (2) ✅ **response map 執行（10:04 に事前 commit された分岐のとおり）**
+**dep-3 = RULED（breach）** ⇒ ⛔ **fix landing まで wired run 全停止（DoD 動画含む）**・acceptance report が fix commit を pin。fix chain: **(i) zero-pose 診断が分岐を決める → (ii) 既定 = 純 servo**（Rs の言い回しそのまま）— ⚠ **zero 姿勢が collide するなら数字を添えて Rs へ戻す**（「step 1 から貫入して始まる sim は物理的に無効 — controller の問題ではない」）→ **(iii) impl = p0・設計確認 = p11・verify = pZ・land → (iv) landing 後も wired の run は Rs 認可**。
+⭐ **p4 の scope 規律**: live 腕状態に作用する物のみ・critical path = wired `:2388`。retired route・video 3 兄弟 = 走らせる者が出るまで無処置（走らせるなら fix 先行）・offline-replay 分類は OPEN のまま。**KINONLY 器具は無関係**（live 腕なし・act-class 開示つき別認可）。**shadow-rollout class は listed & unruled のまま — 今日の語を伸ばしも縮めもしない**。⛔ **迂回禁止を明文化: 「scratch に書いて d へ状態複写」は fix の形として不可** — scratch→d 複写は今日 0 で 0 のまま・**d へ行くのは servo 目標のみ**。
+
+### (3) ⛔ **当卓の訂正（written ≠ delivered・p0 の第 4 面の自例）**
+当卓は 13:0x の Rs 報告と §1290 (4) で zero-pose 診断を「**p0 へ回付済み**」と書いた。⛔ **pane message は送っていない**（§1290 の bank は durable だが p0 の pane には届いていない。傍証 = p0 の 13:00:20 message は診断に無言及）。⇒ **本 relay `m-p18-224` が診断全文を carry して修正**。⭐ 「回付」は ledger への bank でなく **宛先の pane への配達**で完了する — 当卓自身の routing 規則の再確認。
+
+**Banked — 時刻は本節 commit の author date が正。**
