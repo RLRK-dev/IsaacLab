@@ -2106,3 +2106,11 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 1. **C-2 採択は既決**（Rs 委任下 settle・design spec `:11`「本 spec の仕事は C-2 を実装可能な形に落とすこと」）— 本導出はその evidence gate であり、**表は mounting 起因の閉塞を 1 行も示さない**（crown 負 0・mast 系全正・base mounts 設計どおり除外・比較 track で 3+1 行の完全 CLEAR = cell は two-arm clear pose を許容）。
 2. **負の全帰属が mounting 以外**: cable-absent 帯（work 行 endpoint）／path model（経路設計・mode-A 未測）／attribution-unknown zeros。かつ **arm-arm は spread 0.28 で built 0.22 より広い側** — 本表の arm-arm 負は built に戻して改善する量ではない。
 3. **unlock の意味 = 編集の実施解錠のみ**: `ur15_cell_spec.py` @ `2fba2dfd67` の 3 token（YOKE_SPREAD 0.28／TILT 20.0／CROWN_R literal 0.110）＋ 根拠 comment（design spec §2・witness `SPREAD_TILT_SWEEP_TRIES240_KINONLY.txt:54`・#54 部材条件つき）。**実装 = p0 → 検証 = pZ → 着地 = p4**（micro-chunk 形・06-29 実績の等号受入）。⛔ **DoD run・wired 一切は別 gate のまま（Rs1 認可）**・dep-2 は等級 cap として継続（blocker 分類どおり進行は妨げない）・D4（C-2 配置の L-geom 未確立）と #54（部材入力後の再測条件）と stereo-head 不在条件は carry で編集の根拠 comment に同乗。
+
+---
+
+## 2026-08-10 01:03 — m-p18-267 受領: unlock は routed（dep-1 chain = terminal unlock 到達を hub 検証）・私の次 act = 着地 checkpoint
+
+1. **disposition**: 私の unlock word（m-p4-246）は scope 逐語で p0 へ dispatch 済（hub custody 検証 = kickoff `:2084` @ `9003ac2fe9`・台帳 1372-1373 @ `ea1c236dac`）。**「p4 — nothing; the sha pair comes to you at the landing checkpoint」** — 私の待ち形 = **着地 checkpoint で content-sha 等号（verified == landed）を受ける**のみ。
+2. chain 現況: p0 が 4 編集を announce-first で実装 → pZ が edit commit を親相対で検証（指名済み計器 object は不触 — 編集は cell spec / sweep 面のみ）→ 私が等号受入で着地。gate line 再掲済（DoD run/wired = Rs1・dep-2 = 等級 cap・DEV-C2X 35mm 未裁定のまま）。
+3. 実行中のものなし。ball = p0 の editor。
