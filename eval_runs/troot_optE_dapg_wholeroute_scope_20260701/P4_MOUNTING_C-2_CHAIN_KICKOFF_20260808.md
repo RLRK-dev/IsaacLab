@@ -1674,3 +1674,21 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 **operative 2 点（p18 発・衝突なし・endorse）**: pZ の text↔text／値照合は **C2 で走る**（C1 は厳密一致ゆえ何も判別しない — 判別しない述語）／p0 は解決 3 数の隣に **WORK_ROW_DY の実効値**を印字。
 
 不変: dep-2 cap／dep-3 open／7 site 不触／C-2 4 編集未着手／run 認可 = 計器 1 件のみ。⚠ ur15_cell.py の dead-scratchpad path `:44`（p18 報告）は既登録 class（dead-session bind・owner p6 起票済の族）— 本 commission 外・不触で受領。
+
+---
+
+## 2026-08-09 11:08 — flow の一語（default を能動採用）＋ 11:01 節の 3 語修正（C1 の役割・LATENT・名前衛生）
+
+**flow の一語 = p18 提案の default を能動採用**（沈黙同意にしない — gate の修正は gate の作者が書く）:
+- **iteration は自由に走る。pZ の formal legs（(4)(5)＋表対照）は p0 が指名する候補 revision に付く。** 根拠: ①認可は bundle（単発 shot ではない）②D-4 の初回発火が証明した — **audit は run でしか出ない情報を出す**（Popen=2 = `spec.stack_line()` が版取得で shell を呼んでいた。p0 も知らなかった subprocess。driver-family は 0）③leg の対象は**文が消費する表**であり、それは指名 revision だけが産む。
+- rider 1 行: **各 iteration の audit 節は disk に残す**（失敗 iteration の監査痕を消さない — 継続する監査線）。
+- ⛔ 不変の芯: **NO ROW IS CONSUMED** — 私の 7 読と導出は、pZ の leg が指名 revision で PASS するまで武装したまま。p0 が自分の表を自分で棄却した形（「collision 項の無い IK の clearance は『その解が衝突するか』であり『clear な解が在るか』ではない」「tool point が coupler base ⇒ 4 つの not-solved は届かない target であって届かない STEP でない」）が標準 — **委任の文を、産めない述語から導出しない**。
+
+**11:01 節の修正 3 語**:
+1. **「C1 は何も判別しない」を差し替え**（p18 が自分の句を撃った — 私の echo も同罪）: 正しい二脚形 = **C1 = 写像の陽性対照（期待 0.0/0.0・写像を固定する脚）／clip C2 = 測定（期待 35.0/0.0）**。C1 単独では発散を判別しないが、**C1 無しでは 35.0 がどの軸の数かが読めない**（undeclared 写像の実測被害 = C1 に 200 mm が製造され clip C2 が 360 に誤読 — pZ 実測）。WORK_ROW_DY の意味も精密化: **DY が動かせるのは C1 の一致だけ（0 条件）・35.0 は DY の触れない軸に住む**。
+2. **「dead-scratchpad」の私の echo を LATENT へ**（p6 の grain が正・p18 が自分の増幅を訂正済）: `ur15_cell.py:44` の path と scratchpad/ は**現存する**（2 時点の観測・live/dead どちらも断言しない）。row 63 = **LATENT（bind 先が消えた時に発火する class）**。私の 11:01 末尾の「dead-session bind」表現はこれに読み替える。
+3. **名前衛生を採用**（p11・hub 標準）: 以後 **「mounting C-2」（取付案）／「clip C2」（2 番クリップ）**と常に修飾して書く。1 hyphen 差が同じ doc に 52/4・12/13 回同居している。
+
+**受領（consumer として頭に置く 2 件）**: p11 の自己申告 — 受入 #6「task 幾何不変 ✅」は**この発散に対し非判別**（不変条件は定数が誤っていても通る）⇒「clip 位置が正しい」とは決して読まない／D-4 は初回発火で稼いだ（audit の期待事象・液性対照とも設計どおり機能）。
+
+不変: dep-2 cap／dep-3 open／7 site 不触／mounting C-2 の 4 編集未着手／run 認可 = 計器 bundle 1 件（p0 の卓で iteration 中）。
