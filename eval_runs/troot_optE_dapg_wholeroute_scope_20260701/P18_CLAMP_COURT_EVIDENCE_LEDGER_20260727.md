@@ -45143,3 +45143,39 @@ p11               commit の**前**に pin を本文へ書き、実行後に照�
 build 開始可（p4 の語・当卓 relay）・pZ の verify leg 拡張（D-2 text↔text ＋ D-4 audit record + 生存対照）・唯一の run 認可 = bundled 器具・dep-2/dep-3/7 site/4 編集/04-Specs 不変。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1276 — ✅ **commission loop CLOSED・p0 着工（D-1..D-4 as-received・(iii) は tip 採用）** ＋ ⛔ **p5 が自分の D-1 主張を撤回 —「closest は静的」は偽（live の stepped `d`）— 生存経路は *開始姿勢の行*・罠 =「commanded span で実装すると +0.0 側を再現」** ＋ ⛔⛔ **pZ: audit hook は自分の設置より前を報告できない（sys.modules 併記で閉じる）** ＋ ⭐⭐⭐ **p11:「公表した期待値が、自分の壊れた再実装を捕まえた」— per-pattern 対照は走査を検査しない**
+
+**契機** = p5 `m-p4-202`（10:50:22）＋ p0 `m-p0-217R`（10:50:24）＋ p6 `m-p6-114`（10:50:35）＋ p4 `m-p4-195`（10:51）＋ pZ `PZ-170/171`（10:51/52）＋ p11（10:51:58）。当卓 実測 10:51-10:56。⛔ **実行 0**。
+
+### (1) ⛔ **p5 の撤回（当卓 全数追認）と、build に入る 1 つの罠**
+```
+:3699 / :3554   arm_pair_min(d, …)   ← closest も along-the-move も live の stepped d      ✅ 追認
+:1422 / :2055   arm_pair_min(sc, …)  ← code 自身が live と scratch を区別                  ✅ 追認
+:3747           「realised at rest」   ← closest = 実現姿勢での読み                          ✅ 追認
+```
+⇒ 「委任済みの静的列が −1.0 を捕まえる」は**取り下げ**（p5 自身）。✅ **生存経路** = 追従 0.0% ⇒ 測られた配置 ≈ **assigned start pose**（⚠ 推論・p5 明記）⇒ **受入 (2) の行が見る**。
+⛔ **罠（source 自身が理由を書いている・当卓 逐語確認）**: 同じ配置に **INTERLEAVE +0.0** と **ARM-TO-ARM −1.0** — `:2365`「⚠ **commanded span, not the links actually held**」・`:1115`「commanded span は 88 mm・実リンクは 75 mm」。⇒ **受入 (2) は実リンク間の幾何で測る**。span 形は +0.0（見逃す側）を再現する。pZ の table 対照に 1 項目追加。crown 非依存は「**実現**姿勢の性質」へ読み替え・STEP-2 推論は格不変。
+
+### (2) ✅ **p0 `m-p0-217R` — loop CLOSED・着工。事前測定 2 件と、開いた 1 問**
+D-1..D-4 を as-received で正確に復唱（i/n 明記・mj_forward 既定・**(iii) tip 採用 = 全 wired 引用に revision+blob**）。事前測定: ①canonical 表 = blob `dd94d7bf46`・320 行・STEP 1..18 完備（当卓 追認。当卓の全 file row-grep 40 は 19-43 の同形行を含むだけで矛盾しない）②⛔ **設計は数値 x/y を持たない**（x/y token 0・対照 z 3）— 水平目標は **clip 同一性で命名**。⇒ **p0 の読み = D-2(c)**（model-read・自 C-2 model の clip 位置から再計算）・**(e) なら p5 へ・発明はしない**。⚠ **p4 の一言待ち**。
+
+### (3) ✅ **p4 `m-p4-195`（`a826b90f1c`・15/0・sha 一致）— (i)(ii)(iii) 全裁定**
+(i) **i/n 採用・t* 撤回**・導出文 template に「commanded path sampled（followed = mode A, unmeasured）・endpoints excluded by design」を組込み。(ii) **(5) v2 = 「mj_step 0; FK evaluation only — mj_forward OR mj_kinematics — plus mj_geomDistance reads」**（quiet-reinterpretation の予防・p0 は mj_forward で開始可のまま）。(iii) **対応目標 = tip blob**・⭐ p4 自ら「**p0 の法が当卓に届いた夜に、当卓がその class を再演した**」と命名（commit 題名も同旨）・source で `:1731-:1734` を再測してから修正。消費 check = 5 読（resolved triple・deviation 両値・audit 生存対照・i/n・mode-A 注記+経路名）。
+
+### (4) ⛔⛔ **pZ `PZ-170` — audit hook の 3 事実（当卓は greppable 分を追認）**
+- **(a) 設置前は見えない**（pZ が pin 済み 3.12.3 で実測: textwrap-before は record 外・difflib-after は内）⇒ **公表 import 一覧は構造的に不完全なのに完全に読める** ⇒ ✅ fix = **hook の event stream ＋ `sorted(sys.modules)` を終了時に両方公表**（後者は順序非依存・前者だけが exec/Popen を持つ）。
+- **(b) 生存対照は event type ごと・かつ計器の外**（import で満ちた対照は exec/Popen の脚を語らない = 緩和箱／計器が自分の hook を証明する event を自分で起こすと **対照が認証対象の record の中に入る** = 中心形）⇒ pZ が hook を逐語で持ち出し stand-in で全 type 発火（計器の record は清潔なまま）。
+- **(c) `mj_step` は C call で audit event にならない ⇒ wrapper**。in-file precedent = `:1644/:1819`（当卓 逐語確認）。counter の生存証明は mj_step 1 回を要し (5) が禁じる ⇒ **これも pZ の leg・stand-in 上**。
+- **(d)** anchor 一致数を row 数の隣に公表（`STEPS = [` は両 rev で **2 回**一致 — HEAD `:2707/:2976`・tip `:1789/:2058`・当卓 実測一致）。
+⚠ **当卓の粒度訂正（送る前に捕捉）**: pZ の「HEAD だけが *widened by 4 mm* を持つ」を **file 全体 grep で 1/1** と読み「訂正」しかけた ⇒ **block 粒度で再測 = 23 行中 12 行が異なり、その段落は HEAD の mouth_clear docstring 内**。⇒ ⭐ **file-level の数は block-level の問いに答えない** — pZ 自身の朝の法が当卓に到着。**(iii) の blob 名は cosmetic でない**が確定。
+
+### (5) ⭐⭐⭐ **p11（`90babdd8dd`・21/0・sha/412 行 一致・pin-AFTER-commit 実践）— 「期待値が私の壊れた再実装を捕まえた」**
+再実装が **15/6** を返し公表値 **17/8** と食い違い → blob 不変を確認（`fa59bff987`=HEAD・触る commit 0）→ **欠陥は再実装**: ①走査が `:2723-2724` の表内 comment で打ち切り（STEP 17/18 落ち）②LHS 形が `:2645/:2646` を落とす。✅ 修正後 3 rev すべて **17/8**・**build tip でも 17/8**（anchor `:1731`・span 1790-1808）= **928 行ずれた 2 版で同値 = rev 不変が実測になった**。
+⇒ ⭐⭐⭐ **一般化（採用）**: **per-pattern の positive control は、その pattern を回す走査を検査しない** — 壊れた再実装でも両対照は発火し続けた。**捕まえたのは「expect 17」**。⇒ **公表には打ち切り規則と LHS の形を pattern と同じ場所に**（可能なら実行可能物そのもの）。
+✅ **pZ `PZ-171` の同族を当卓が bank**（`f80a80167a`・24/0・先頭 61 行 byte 同一・全文読了）: 「**隣の token への対照は、述語への対照ではない**」（"STEP table" は comment の token・code の anchor と別文字列）。
+
+### (6) status
+p6 row 66 改訂（`209197e6ae`・sha は commit 出力から読取 = 自 fix 即適用・当卓 実在確認）。**build 進行中**（形は 2(a)-(d)+3 が shape・停止なし）。開いているのは **p4 の 2 語**（x/y の (c)/(e)・D-2(c) の blob 名の受入文への記載）。唯一の run 認可 = bundled 器具・dep-2/dep-3/7 site/4 編集/04-Specs 不変。
+
+**Banked — 時刻は本節 commit の author date が正。**
