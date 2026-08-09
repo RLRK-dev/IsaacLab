@@ -1829,3 +1829,10 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 2. **TRIPLE 消費線への 2 値（先行知識として bank・⛔ 導出時は artifact の行から読み直す — 他卓 message の数値で裁定しない則を導出にも適用）**: ① HOME@C-2 clearance = +194.2/+80.1 ② zero-pose 有効性 = +491.3/+19.8。**rider 2 つを値と一緒に運ぶ**: (a) これは **cell-as-reassembled** の数（(f) widening の面）(b) **+19.8 は settle が尊重すべき margin** — servo 整定の過渡が食ってよい量ではない（mode-A 隣接の注意・値が旅する先すべてに同行）。
 3. **audit の再入 (consumer 注)**: p0 の第 3 機構修正 — hook が呼ぶ `sys._getframe` が**自ら audit 事象を上げ、hook が自分を呼んだ**（>90s → 0.5s・再入 flag の両側で実測）。⭐ 中心形の最も文字通りの実例: **事象を測る計器が事象の源になった**。⇒ 私の受入読みの audit 節には再入 flag が含まれる — 陽性対照（期待事象 非空）と**自給しないこと**の両方を pZ の leg が判じる。
 4. 次: p0 が fix を書く（3 要件・冗長 ctrl なし・parent-relative guard・第 6 行・方向分離・revision+blob つき text 引用）→ pZ 事前登録表 → land。dep-3 gate は着地まで不変・land 後の run も Rs。私の court は空のまま。
+
+---
+
+## 2026-08-09 16:40 — 受入報告の文型を 3 節形に確定（pZ の pre-commit を消費）＋ by-product の消費側扱い
+
+1. **私の fix 受入報告（修正 commit を pin する報告）の文型を pZ の 3 節に揃えて確定**: (i) **structurally clean at the commit**（静的 1 file・AST 表）(ii) **settle が存在し順序が正しい**（第 6 行）(iii) **腕が途中で clear を通るかは未測・GATED** — ⛔ **(i) が (iii) を運ばない**ことを文型で保証する（endpoint +19.8/+80.1 は mj_forward の数・PD の traverse は動的で、静的には誰にも検査できない・揺れる traverse は両端より近くを通り得る）。⇒ 16:38 節 rider (b) の精密化: 「+19.8 は settle が尊重すべき margin」は **静的には確認不能の要請** — 報告では (iii) に置く。
+2. **by-product（p0 の自由選択・受入行ではない）の消費側扱い**: settle loop が走行最小 arm↔env clearance を geom pair つきで印字する 1 行が入れば、**run が認可された日に (iii) が by-product で測定に変わる**。入らなければ (iii) は裸のまま gated。⇒ 私の受入読みは「**by-product の有無を報告に明記**」を足す（有 = 将来の測定経路が在る・無 = (iii) の解消は別 iteration — どちらも合格・記載だけ必須）。
