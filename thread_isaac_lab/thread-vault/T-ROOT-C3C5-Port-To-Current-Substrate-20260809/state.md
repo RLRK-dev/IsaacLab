@@ -83,6 +83,12 @@ spec_version: LTM-1 v1.2
 
 **⇒ status への影響 = 無し（再確認）**: 本 node が PENDING である理由 2 つのうち、§3.1 #2（precedent 全件 COMPLETE）は **D1 のみが該当**するようになったが、**D1 は進行中**ゆえ条件は依然 不成立。もう 1 つの理由（session 未 binding）も不変。⇒ **PENDING のまま**。
 
+### 4-B. GATE 追加 — DDR #66（§0 疑義・Rs 裁定待ち）2026-08-09 10:1x p6 追記
+
+- **事実**: 本 node の port 対象 driver family に**駆動状態 `d.qpos` への直接書込**がある。腕関節と確証済 = **5 site**（`ur15_route.py:220`/`:229`・`ur15_steps_wired.py:2388`・`ur15_yoke_video.py:120`/`:129`）。全 scope（repo 全体 75 site / 16 file・駆動 `d` 16 site / 10 file）・型の区別・分類の限界は **DDR #66 が正**。**Rs へ escalate 済**（m-p18-212→214）・⛔**全 site 誰も触らない**。
+- **効き方**: **Rs 裁定まで、本 file 群に依存する work は [DEFER-RECON] で #66 を照合**してから進む。⛔**起動条件は変えない** — §4 表の p4 裁定・front matter とも不変（`blocker` 欄への昇格は p4 の court）。
+- ⚠ **判定様式への効き**（p5 の帰結・#66 に記録）: 開始姿勢は `ur15_steps_wired.py:2388` の書込で作られ、下流の `START` はそれを読む（`:2393`→`:2399`→`:2423-2425`）⇒ **goal_verification の判定で「開始姿勢は測定済」型の述語は使えない**（書けば構築により常に真）。
+
 ## 4-A. DDR row 64 に FOUNDATIONAL tag を付けない（p4 裁定 2026-08-09 06:08・p6 は従う）
 
 - **裁定**（kickoff 見出し『**2026-08-09 06:08:37 — 裁定 2 件: DDR row 64 の FOUNDATIONAL tag ＝ ⛔付けない**』）: 当該 tag の運用実態は「**§0 の不変前提に触れるか**」の述語。row 64 は**証拠の *射程* についての行**であり **premise を変えていない** ⇒ **付けない**。

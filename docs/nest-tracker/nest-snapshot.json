@@ -976,7 +976,7 @@
     {
       "id": "T-ROOT-C3C5-Port-To-Current-Substrate-20260809",
       "goal": "現基盤（UR15 mujoco cell）で、canonical 工程表 19-43 段（C3/C4/C5 への配索 ＋ ホーム復帰）が実行できる状態にする。〔p4 DEFINE 見出し『## 1. 目的（何を達成したら閉じるか）』逐語 @ `9ab375026a`〕",
-      "means": "⚠ **閉じ条件は未確定**（p4 DEFINE 逐語「確定は設計 phase」）。以下は *候補* であって acceptance ではない:\n  ① cell に C3/C4/C5 が存在する\n  ② driver が canonical 19-43 を実行する\n  ③ 43 段通しの動画（裁定 A の DoD）が出る\n  ④ Rs human-GT\n⛔ 成功率・精度は本 chunk の閉じ条件ではない（T-ROOT の現 bar =「rough/imperfect でも SIM で基本動作」`T-ROOT/state.md:4`）。\n⛔ DoD 動画は #48（cable 第 2 DOF）が open の間 **射程注記つき** — 無印 PASS 不可（p4 DEFINE 見出し『## 3. 依存と gate』D2）。\n",
+      "means": "⭐ **③ = 必須（Rs 確定 2026-08-09 09:3x・逐語「dod動画は必要」）**。⛔ 残り ①②④ は依然 *候補*（p4 DEFINE 逐語「確定は設計 phase」）:\n  ① cell に C3/C4/C5 が存在する                         — 候補\n  ② driver が canonical 19-43 を実行する                 — 候補\n  ③ **43 段通しの動画（裁定 A の DoD）が出る — ⭐必須**  ＝ **腕・ハンド・フィンガを描画した動画**（裁定 A 逐語・LEDGER 内容で引く）\n  ④ Rs human-GT                                          — 候補\n⚠ **p6 が読み取らなかったこと（明示）**: Rs 発話は ③ を **必須**にしただけで、⛔ ①②④ を *不要* にしていない・⛔ ③ を *唯一の* 閉じ条件とも言っていない。\n⚠ **等級**: Rs 直接発話（当卓が直接受領）。⭐ 裁定 A の「DoD = 腕・ハンド・フィンガを描画した動画」自体は本日以前から LEDGER に banked（本確定はそれを *本 chunk の閉じ条件* として固定したもの）。\n⛔ 成功率・精度は本 chunk の閉じ条件ではない（T-ROOT の現 bar =「rough/imperfect でも SIM で基本動作」`T-ROOT/state.md:4`）。\n⛔ DoD 動画は #48（cable 第 2 DOF）が open の間 **射程注記つき** — 無印 PASS 不可（p4 DEFINE 見出し『## 3. 依存と gate』D2）。\n",
       "status": "IN_PROGRESS",
       "dependencies": [],
       "parent": "T-ROOT",
