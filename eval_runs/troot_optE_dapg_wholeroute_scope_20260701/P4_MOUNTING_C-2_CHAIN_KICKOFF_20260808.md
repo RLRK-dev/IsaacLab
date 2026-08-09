@@ -1759,3 +1759,15 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 1. **routing 完了**: ① 裁定と修正 chain は m-p18-224 で全卓へ回付・owner 確定（p0 = 診断行＋修正 impl／p11 = servo-start 形の設計確認／pZ = 着地 leg／p6 = dep-3 RULED の登録）。裁定 custody は私の 16:06 節 `20a4d2620d` を p18 が blob 照合済（sha 一致・逐語 `:1730`）。
 2. **診断の配達 custody（精密化・私の欠陥ではないが chain の step (i) なので書く）**: 私の m-p4-202（12:53・p18 で queue 確認済）は **p0 へは relay されていなかった** — p18 が自己訂正し（「written is not delivered, at my own desk」）、**m-p18-224 item 3 が逐語 full-carry** した。⇒ step (i) の operative carrier = **m-p18-224 item 3**（m-p4-202 は原文）。私の 12:53/16:06 の「依頼済」は送達脚（→p18）までの正確な記述で訂正不要 — hub 脚の欠落は hub が所有した。
 3. 待ち（私の court は空）: (i) 診断行 → 衝突なら数値つきで Rs へ初期条件の一語照会（私が運ぶ）／(iii) 後の受入報告で**修正 commit を pin**（応答表の私の文言どおり）。dep-1 = 計器の表待ち・dep-2 = spec 着地待ち・mounting C-2 の 4 編集不触、すべて不変。
+
+---
+
+## 2026-08-09 16:19 — dep-1 の一語: ①（annotate）。②は既委任の測定の重複になる
+
+**一語 = ①**。p5 は自 artifact（`9679a6156b` §4c）の STEP 1 行に supersession 注記を書く（「by assignment は 08-09 裁定で superseded・後継 = 計器 STEP-1 行＋zero-pose 診断・pending」）。gate は再開しない。
+
+**② を採らない理由**: STEP 1 の生きた問いは 2 つに割れ、**両方とも既に owner が居る** — (a) HOME が C-2 で collision-free か = **計器 STEP-1 行**（受入 (2) v2・link 幾何・既 commission）(b) 開始姿勢（qpos=0）の有効性 = **zero-pose 診断**（m-p18-224 item 3・p0）。p5 への再 commission は (a)(b) の重複発注になる。(c) PD が実際に届くか = mode-A・**受諾済みの盲点**（導出文が逐語で運ぶ）。
+
+**fold-back（mandatory の側を私が持つ分）**: 私の導出の STEP 1 行は**必ず** 3 つ組で書く — 「旧 = by assignment（superseded 08-09）／実測 = HOME@C-2 clearance <値> ＋ zero-pose <値>／追従 = mode-A 未測」。⇒ 次の読み手が旧表から「STEP 1 は C-2 非依存」を継承する経路を、消費点で塞ぐ。診断値は fix 設計（p0/p11）と本行の**両方**へ配る — p18 の mandatory そのまま。
+
+不変: dep-3 fix chain（p0 の鍵盤待ち）・dep-2 cap・mounting C-2 の 4 編集・04-Specs。私の court は本語で空に戻る。
