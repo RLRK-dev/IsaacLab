@@ -10,9 +10,10 @@ def row(label, q):
     mujoco.mj_forward(m, d)
     aa, pa = K.closest(m, d, grp["L"], grp["R"])
     e1, p1 = K.closest(m, d, grp["L"], grp["env"]); e2, p2 = K.closest(m, d, grp["R"], grp["env"])
-    ee, pe = (e1, p1) if e1 <= e2 else (e2, p2)
-    print(f"| {label} | {aa*1000:+.1f} ({pa}) | {ee*1000:+.1f} ({pe}) | "
-          f"{'CLEAR' if min(aa, ee) > 0 else 'TOUCHING OR THROUGH'} |", flush=True)
+    ee, pe = (e1, p1) if (e2 is None or (e1 is not None and e1 <= e2)) else (e2, p2)
+    ok = all(v is None or v > 0 for v in (aa, e1, e2))
+    print(f"| {label} | {K.gap_say(aa, pa)} | {K.gap_say(ee, pe)} | "
+          f"{'CLEAR' if ok else 'TOUCHING OR THROUGH'} |", flush=True)
 print("| pose | arm<->arm mm (pair) | arm<->column/table mm (pair) | verdict |", flush=True)
 print("|---|---|---|---|", flush=True)
 row("qpos = 0 (both arms)", np.zeros(6))

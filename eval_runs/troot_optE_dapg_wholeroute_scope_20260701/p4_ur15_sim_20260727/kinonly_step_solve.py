@@ -288,13 +288,32 @@ def closest(m, d, A: list[int], B: list[int], cutoff: float = 0.5) -> tuple[floa
         b = mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, int(m.geom_bodyid[g])) or "?"
         return f"{b}#{g}"
 
-    best, who = 1e9, "none"
+    # ⛔ mj_geomDistance SATURATES: it returns the cutoff itself for a pair that is farther, so a
+    # saturated value wears a distance's clothes and carries a pair name exactly like a real one.
+    # The wired driver names this failure in its own arm query and returns None instead; same rule
+    # here -- a reading at or past the cutoff is ABSENT, (None, "-"), never a number.
+    best, who = None, "-"
     for a in A:
         for b in B:
             dist = mujoco.mj_geomDistance(m, d, a, b, cutoff, None)
-            if dist < best:
+            if dist >= cutoff:
+                continue
+            if best is None or dist < best:
                 best, who = dist, f"{nm(a)} <-> {nm(b)}"
     return best, who
+
+
+def gap_say(v: float | None, who: str, cutoff: float = 0.5) -> str:
+    """One spelling for a reading or its absence -- never a sentinel in a millimetre slot."""
+    if v is None:
+        return f"nothing within the {cutoff * 1000:.0f} mm search radius"
+    return f"{v * 1000:+.1f} ({who})"
+
+
+def gap_worst(*vs: float | None) -> float | None:
+    """Minimum over readings; absent means beyond the cutoff, which no reading is larger than."""
+    present = [v for v in vs if v is not None]
+    return min(present) if present else None
 
 
 def main() -> int:
@@ -341,10 +360,11 @@ def main() -> int:
     print()
     print("| STEP | referent | rule | arms-closest mm (pair) | arm-env mm (pair) | verdict |")
     print("|---|---|---|---|---|---|")
+    ae = gap_worst(ae_l, ae_r)
+    ae_pair = pair_l if (ae_r is None or (ae_l is not None and ae_l <= ae_r)) else pair_r
     print(f"| 1 | ASSIGNED start pose (spec.HOME_POSE) | not solved -- read from the design | "
-          f"{aa * 1000:+.1f} ({pair}) | {min(ae_l, ae_r) * 1000:+.1f} "
-          f"({pair_l if ae_l <= ae_r else pair_r}) | "
-          f"{'CLEAR' if min(aa, ae_l, ae_r) > 0 else 'TOUCHING OR THROUGH'} |")
+          f"{gap_say(aa, pair)} | {gap_say(ae, ae_pair)} | "
+          f"{'CLEAR' if all(v is None or v > 0 for v in (aa, ae_l, ae_r)) else 'TOUCHING OR THROUGH'} |")
     # ---- STEP 2-18 -----------------------------------------------------------------------
     # Damped-least-squares IK on the tool point, kinematics only.  SEARCH BUDGET IS PART OF THE
     # CONCLUSION (acceptance (6)): a "not solved" row means not solved WITHIN THIS BUDGET.
@@ -388,7 +408,9 @@ def main() -> int:
                     d.qpos[_a2] = q[_k2]
                 mujoco.mj_kinematics(m, d)
                 _gap, _ = closest(m, d, grp[t], grp["env"])
-                if _gap > float(spec.ARM_CLEARANCE):
+                # Absent = nothing within half a metre of the environment -- clear by more than
+                # the clearance constant ever asks.
+                if _gap is None or _gap > float(spec.ARM_CLEARANCE):
                     cands.append(q.copy())
                 if len(cands) >= KEEP:
                     break
@@ -435,23 +457,26 @@ def main() -> int:
                 v, pr_ = closest(m, d, grp["L"], grp["R"])
                 w1, p1 = closest(m, d, grp["L"], grp["env"])
                 w2, p2 = closest(m, d, grp["R"], grp["env"])
-                we, pe_ = (w1, p1) if w1 <= w2 else (w2, p2)
-                score = min(v, we)
+                we, pe_ = (w1, p1) if (w2 is None or (w1 is not None and w1 <= w2)) else (w2, p2)
+                # Ranking key only, never printed: absent ranks as the cutoff -- the roomiest a
+                # reading could be.  The printed cell keeps the absence sentence.
+                score = min(0.5 if v is None else v, 0.5 if we is None else we)
                 if best is None or score > best[0]:
                     best = (score, {"L": a, "R": b}, v, pr_, we, pe_)
         _, qs, aa, pair, ae, pe = best
         N = 20
-        worst, at, wp = 1e9, "-", "-"
+        worst, at, wp = None, "-", "-"
         for i in range(1, N):
             f = i / N
             place({t2: (1 - f) * prev[t2] + f * qs[t2] for t2 in ("L", "R")})
             v, pp = closest(m, d, grp["L"], grp["R"])
-            if v < worst:
+            if v is not None and (worst is None or v < worst):
                 worst, at, wp = v, f"{i}/{N}", pp
         place(qs)
-        verdict = "CLEAR" if min(aa, ae, worst) > 0 else "TOUCHING OR THROUGH"
-        print(f"| {row['step']} | {ref} | {label} | {aa * 1000:+.1f} ({pair}) | {ae * 1000:+.1f} ({pe}) | "
-              f"{worst * 1000:+.1f} at {at} ({wp}) | L{eL * 1000:.1f}/R{eR * 1000:.1f} | "
+        verdict = "CLEAR" if all(x is None or x > 0 for x in (aa, ae, worst)) else "TOUCHING OR THROUGH"
+        along = gap_say(worst, wp) if worst is None else f"{worst * 1000:+.1f} at {at} ({wp})"
+        print(f"| {row['step']} | {ref} | {label} | {gap_say(aa, pair)} | {gap_say(ae, pe)} | "
+              f"{along} | L{eL * 1000:.1f}/R{eR * 1000:.1f} | "
               f"{uL + uR} it | {verdict} |")
         return qs
 
