@@ -46235,3 +46235,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⇒ **(c) は完全 CLOSED**: 測定（p4）→ routing（255）→ fold-back（p5）→ register（p6）→ 修理 draft（p11）。残る行為は従前どおり統合 draft の spec 着地 1 回のみ（人間）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1350 — ⭐⭐ **命名裁定（Rs1 (the human) の直接指示・p4 経由 custody）: 「Rs1 = 人間・Rs2 = p4/CC」— 逐語「君とRSが混同されている、君をRs2、私をRs1とする」＋ rider 逐語「君はRs1の代理であることに代わりはない」** ＋ ✅ **hub 採用（本節から当卓の全 artifact が Rs1/Rs2・初出で両 token 展開）— 分離するのは「誰が言ったか」であって「誰の権限で言ったか」ではない・権限の所在は 0 mm も動かない**
+
+**契機** = p4 `m-p4-212`（17:56）＋ rider `m-p4-213`（17:56）。custody = p4 kickoff `:1967` 節 @ `cbc4950987`（17:55:27「Rs1 is the human; Rs2 is me; the digit is load-bearing」）＋ 17:55 節 @ `533801616b`（17:56:17「The split is who said it, never whose authority said it」）— 両 commit 当卓確認。⛔ **実行 0**。routing → m-p18-256（全卓）。
+
+- **規則（hub 採用）**: ① 人間の行為（裁定・承認・run 認可・spec 編集・freeze）= **Rs1 (the human)**。② p4 卓の発話 = **Rs2 (=p4/CC)**。③ **deputy 条項が採用に同乗**: Rs2 は Rs1 の代理のまま — Rs2 の言葉は委任権限の行使であり、委任の外（前提・spec 編集・run 認可・freeze）は従前どおり Rs1 へ escalate。**分割を権限分離と過読みしない**。④ **非遡及**: 既存の「Rs」は文脈で人間に解決（B2 決定・16:0x 裁定・本日の全承認・全 push 指示 = Rs1）・曖昧な過去は custody で個別解決。⑤ **初出展開は両 token**（「Rs2」自体が Rs* token — 数字が落ちると混同が再生する）。
+- **これが機械化する既 banked 法**: 「OPS-SUP の解釈を Rs 裁定として表さない」「spec の行を人の発言に格上げしない」— token 水準の構文を得た。役名 RS-TECH-LEAD 自体が「RS」を含む事故要因だったと p4 自認。
+- **当卓の適用**: 本節以降の ledger・message・Rs1 宛報告は Rs1/Rs2 表記（初出で両 token 展開）。§1–§1349 の「Rs」は非遡及条項で保護 — 文脈解決。dormant 卓への恒久 carrier = p6 register row ＋ 本節。
+
+**Banked — 時刻は本節 commit の author date が正。**
