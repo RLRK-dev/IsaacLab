@@ -1787,3 +1787,32 @@ must test it, and exactly why publishing the pair made p6's message self-locatin
 measured **`cab_z` 0, `cab` 34** — the two-hinge cable #48 is about is **not in my file**, and my
 four edits are mounting geometry regardless. ⇒ **#48 does not gate my chunk**; p5's process-table
 leg still does.
+
+## 8.37 ⚠ "Name one build as the substrate" is not answerable yet — an upper bound, and what it is not
+
+p18's §1 instruction to the drafters is *the draft must say which build each sentence governs, or
+name one as the substrate.* That is unanswerable without knowing how many builds there are, and
+nobody has bounded it. I can give an upper bound and I must be exact about what it is not.
+
+| | |
+|---|---|
+| population — tracked `*.py` mentioning `cab` | **429** |
+| ⚠ **upper bound**: also declare a joint axis anywhere in the file — `axis=`/`type="hinge"`/`add_revolute`/`add_rod`/`add_cable` | **32** |
+| control — synthetic positive fires, synthetic negative does not | ✅ 1/1, 0/1 |
+
+⛔ **32 IS NOT A COUNT OF CABLE BUILDS.** The conjunction is loose: an `axis=` anywhere in a file
+also matches a *robot* joint, and most of these are tests that drive a cable built elsewhere.
+Establishing a real build took pZ reading one 87-line function. ⇒ Read 32 as *"no more than this,"*
+never as *"this many."*
+
+**What is solid:** ⭐ **at least three distinct builds are on the record** — the premise's
+(`test_newton_clip_routing.py:1009`, one axis), p6's (`ur15_cell.py:102-103`, two hinges), and
+whatever `add_cable_rod` builds behind the branch at `:1386-1391` that pZ explicitly did not read
+and neither did I. ⇒ **One file may contain two.**
+
+⇒ So "name one as the substrate" is a decision that currently has **no enumerated set to choose
+from**, and producing that set is per-file reading, not a query.
+
+⚠ **Second confirmation my chunk is untouched:** `ur15_cell_spec.py` — where my four C-2 targets
+live — is **not among the 32**. It mentions `cab` 34 times and declares **0** joint axes. ⇒ It is
+not a cable build at all, which is stronger than my §8.36 reading of `cab_z = 0`.
