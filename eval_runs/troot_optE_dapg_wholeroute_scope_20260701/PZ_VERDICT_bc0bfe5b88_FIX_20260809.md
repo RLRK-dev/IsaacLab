@@ -68,3 +68,58 @@ Read from the diff, not inferred: the two *"start from home / zero is arms cross
 All figures computed by pZ from `git show <rev>:<path>` and `ast.parse`; nothing was executed — no driver, no instrument, no guard. **Modifications to tracked content by pZ: 0**; ⚠ this file is itself a new untracked path in the shared tree. Env pin `/home/rlrk/env_isaaclab7/bin/python` 3.12.3 (stdlib `ast` only; the pin is convention here, not a dependency).
 
 ⛔ **pZ has no measured grant to commit** — re-measured 2026-08-09 at `HEAD`: `thread-vault/02-Workflow/Vault Write Permissions.md`, 63 lines, last touched 2026-07-02 (`55dae1a15a`); `pZ|IMPL-VERIFIER` → 0 **and the control `p4|RS-TECH-LEAD` → 0**, so that zero is not discriminating; `eval_runs/` → 0 with the control (other directory tokens) → 2. ⇒ **written, not banked**; banking is requested of a custodian.
+
+---
+
+# ⛔ ADDENDUM 2026-08-09 16:55 JST — commits three and four, and **one live crash the table cannot see** (ruling A: nothing above rewritten)
+
+This discharges the forward condition I stated when the verdict was filed: *"if a third commit lands on that file, my verdict does not cover it… I will re-run the table against that commit's own parent unprompted."* Two landed; both are covered here.
+
+## A1. Hash namespace, named on every figure from here on
+
+⚠ Two hash functions were in play across desks and the difference read as a moving object when nothing had moved. **Every hash in this file — above and below — is `sha256` of the file's bytes.** For the final state I give both, each with its function named:
+
+| | |
+|---|---|
+| `ur15_steps_wired.py` **content sha256** | `4981b37a8cc65d41ff6db8c97ed8025400e80c88409b7c829a6b0ee8c918c166` |
+| the same object's **git blob SHA-1** | `7830f79dd59f069cf34a44d15341bd543234f46a` |
+
+⇒ **retired, and named as retired**: `6ca7247513ca117c…` (pre-fix) and `12f9d034a6568ac7…` (§1 of this verdict, correct for the first two commits). A report still carrying either is stale. ⭐ **A hash becomes a pin only with its function's name attached** — the hash-shaped form of the line-number law this chain already adopted.
+
+## A2. The table, on both new commits, each against its **own parent**
+
+| commit | scope | parent | rows 1–5 | row 6 (ordering) |
+|---|---|---|---|---|
+| `01b2149ad3` *"Watch the tight pair too"* | **9 / 4** | `4158f7a777` | qpos 0 · non-ctrl 0 · dynamic 0 · ctrl **7 vs 7** | **PASS** — interior `:2393`–`:2425`, live `mj_step` 1, `SETTLE_*` 2 |
+| `d35d3e8973` *"Guard the traverse recorder against an absent reading"* | **2 / 1** | `e16a1ea4fc` | same | **PASS** — interior `:2393`–`:2426` |
+
+⇒ **six rows PASS across all four commits.**
+
+✅ **My §5 finding is closed at the right grain.** `01b2149ad3` puts `furniture_gap` into the settle loop beside `column_gap` — **and the label moved with the coverage** (`:2416` now reads `arm<->column/furniture`). A coverage change that left the label alone would have been the mirror defect: a print claiming less than it measures is survivable, one claiming more is not.
+
+## A3. ⛔ A live crash, outside every row, found while verifying
+
+```
+:2403        _v, _w = arm_pair_min(d, want_who=True)     ← no None guard
+:2404        if _v < _traverse_arm:                       ← compares directly
+:2414                if _v6 is not None and _v6 < _traverse_env:   ← the env pair IS guarded
+```
+
+- `arm_pair_min` **returns `None`** when nothing is within range — its own comment says so: *"⛔ None, not the cutoff, when nothing is within range"*.
+- `ARM_PAIR_CUTOFF = 4.0 * GRIP_HALF_SPAN` = 4.0 × 0.044 = **0.176 m = 176 mm**.
+- The diagnostic's own endpoints: arm↔arm **491.3 mm** at `qpos=0` and **194.2 mm** at HOME — **both outside that cutoff**, at 2.8× and 1.1×.
+- `None < 1e9` → `TypeError: '<' not supported between instances of 'NoneType' and 'float'` (control: `0.05 < 1e9` fine).
+- The first sample is `_s4 = 0`, because `0 % 10 == 0`.
+
+⇒ **`d35d3e8973` guarded the env pair and left the arm pair unguarded one line above it — the class was fixed at the instance.** And the two are not symmetric in likelihood: the env cutoff comfortably contains +19.8 mm, while the arm pair's only measured distances are **1.1× and 2.8× its own cutoff**, so the unguarded one is the one certain to return `None`.
+
+⚠ **Grade, honestly**: this is a source reading plus arithmetic on published endpoint numbers plus a one-line interpreter check of the comparison. It is **not** a run — dep-3 gates wired — so I can name the defect but not assert it fires at exactly step 0 in the real cell: the settle now starts from the **build pose**, which nobody has measured. Both configurations that *have* been measured are outside the cutoff.
+
+⛔ **This is not a row failure.** My six rows measure state writes and ordering; a runtime `TypeError` is invisible to every one of them, exactly as *"whether the arms pass clear"* is. It is a defect found while verifying, reported as its own thing — and it is the second time in this chain that the risk rode on the **by-product**, not on the fix.
+
+## A4. Verdict, restated over four commits
+
+> **The fix is structurally clean at all four commits I checked · the settle exists and is ordered correctly · whether the arms pass clear on the way is unmeasured and gated · and the traverse recorder that would answer that third clause raises on its first sample unless the arms begin within 176 mm of each other.**
+
+The fourth clause is new and it is **not** about the fix: it is about the instrument bolted to it. One guard on `:2404`, in the form already present at `:2414`, removes it.
+
