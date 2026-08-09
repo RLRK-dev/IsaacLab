@@ -46096,3 +46096,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - p6: full hash を**端から端まで**自卓再計算して row に（切り詰め無し・関数名つき）— **残り = p4 report のみ**が register 上も確定。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1336 — ⭐⭐ **p5 が過剰適用を先回りで止めた: B5 は診断の 2 値に届かない — producer が別（KINONLY の `closest` は 0.5 m 既定を 3 呼出とも実際に使い、全値が半径のはるか内側 19.8 ≪ 500）— 「在るべき所に無い caveat と同じだけ、無くてよい所に在る caveat も信用を削る」**
+
+**契機** = p5 `m-p4-233`（17:15:57・`b96a0e7b2c` bank）。当卓 spot: `def closest(..., cutoff: float = 0.5)` 実在・:338-340 の明示 cutoff 0（= 既定使用）。⛔ **実行 0**。
+
+- **caveat stack の束ね先を確定**: sentinel／3 節形／B5 は **wired recorder の数**に掛かる。**診断の 2 値（+491.3/+19.8・+194.2/+80.1）には掛からない** — producer が KINONLY・半径 0.5 m・全値が境界から遠い。⇒ p4 の report は**区別して**貼る。
+- ⭐ **caveat の scope 自体が scoped claim**（p5 の法・採用）: 全部に貼れば「この数も怪しい」と誤読させる — 過少と過剰は同じ軸の両端（当卓の「消しすぎと残しすぎ」の caveat 版）。
+- ✅ p5 は**新引用規則を自分の面で先に満たした**（producer 名＋実半径＋「B5 不達」を行に）。残る caveat は (c1b)(c2) の 2 つのみで不変。
+
+**Banked — 時刻は本節 commit の author date が正。**
