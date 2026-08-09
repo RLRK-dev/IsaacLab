@@ -45367,3 +45367,23 @@ row 64 に p4 の接続所見（witness-chord = DEV-C2X の別出現・`c5225737
 ⇒ **p4 の語の 4 配分（p0 build・pZ C2 対応・p5 台帳・p6 包含）が全て閉じた。**残る動きは p0 の反復のみ（自己管理・版 未指名）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1284 — ⭐⭐ **p5 が p0 の候補 (ii) の *分離述語* を供給し、当卓が pinned tip で 3 逐語とも確認 — 取付角の規約は補角（mounting C-2 の 20° = Ry(70°)）で、組込みの陽性対照（tilt_deg=45 → 左基部 Ry(−45°)）が既に在る** ＋ ✅ **p4 が死んだ帰属の echo を修復し、35（入力差分）と 30.69（弦差分）の混同を先回りで封じた**
+
+**契機** = p5 `m-p4-210`（11:14:51・worktree 読みと明記・tip 確認を依頼）＋ p4 `m-p4-199`（11:15）。当卓 実測 11:15-11:17。⛔ **実行 0**。
+
+### (1) ⭐⭐ **tip 確認（content-addressed・当卓）**
+```
+補角定義      tip :374  TILT = math.pi / 2.0 - math.radians(float(_TILT_DEG_OVERRIDE) …)   ⇒ built 45°→TILT 45°・mounting C-2 20°→**TILT 70°**（π/2−20°=70.0 再計算）
+spec は適用しない  from_euler / Rotation = **0**（定数を輸出し姿勢を作らない — p0 の「spec は model を持たない」と整合）
+driver の適用   tip :274  q = Rotation.from_euler("xyz", [0.0, sign * TILT, 0.0])
+組込み対照     tip :268  逐語「Back to sign * TILT, which the supplied cell confirms: **its left base is Ry(-45 deg)**」
+⚠ 表示逆算形（p5 の worktree :2363）は tip で当卓の grep に掛からず — 3 つの荷重逐語は全て確認・この 1 点のみ未確認と明記
+```
+⇒ ⭐⭐ **分離述語（p5・結論ではない）**: p0 の組立が **`Ry(sign*TILT)`（C-2 で ±70°）** か **`Ry(sign*radians(tilt_deg))`（±20°）** か。**後者なら 50° ずれ** — 「全 STEP・両候補で一様に前腕が柱内・home だけ +80.1 mm 空く」という観測と形が合う。⭐ **陽性対照は新造不要**: tilt_deg=45 を入れ左基部が Ry(−45°) に一致するか — **供給された cell 自身の値**で、driver の comment が出所を名指している。
+⭐ **p5 の規律 2 点**（採用のまま relay）: ①「私は機構を断定しない — これは分離のための述語」（p0 の pattern-から-命名しない規律への従属）②worktree 読みを明記し tip 確認を他卓に依頼（当卓が実施）。
+
+### (2) ✅ **p4 `m-p4-199`（`b950424334`・9/0・sha 一致）**
+死んだ帰属の echo を自 file で in-place 修復（生き残り = 捕獲自体と「audit は run-only の情報を産む」・死 = 帰属のみ）。消費 7 読は **D-8** を参照（仮札 DEV-C2X から更新）。⭐ **精度の先回り**: 「**across 入力は +35.0 mm 動き、弦は +30.69 mm 動いた（90.14→120.83）— 35 は入力差分であって弦差分ではない**」を自 file に明記（p11 の警告が 3 file 目に到達 = 読み手が混ぜる前に封じた）。
+
+**Banked — 時刻は本節 commit の author date が正。**
