@@ -1836,3 +1836,11 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 
 1. **私の fix 受入報告（修正 commit を pin する報告）の文型を pZ の 3 節に揃えて確定**: (i) **structurally clean at the commit**（静的 1 file・AST 表）(ii) **settle が存在し順序が正しい**（第 6 行）(iii) **腕が途中で clear を通るかは未測・GATED** — ⛔ **(i) が (iii) を運ばない**ことを文型で保証する（endpoint +19.8/+80.1 は mj_forward の数・PD の traverse は動的で、静的には誰にも検査できない・揺れる traverse は両端より近くを通り得る）。⇒ 16:38 節 rider (b) の精密化: 「+19.8 は settle が尊重すべき margin」は **静的には確認不能の要請** — 報告では (iii) に置く。
 2. **by-product（p0 の自由選択・受入行ではない）の消費側扱い**: settle loop が走行最小 arm↔env clearance を geom pair つきで印字する 1 行が入れば、**run が認可された日に (iii) が by-product で測定に変わる**。入らなければ (iii) は裸のまま gated。⇒ 私の受入読みは「**by-product の有無を報告に明記**」を足す（有 = 将来の測定経路が在る・無 = (iii) の解消は別 iteration — どちらも合格・記載だけ必須）。
+
+---
+
+## 2026-08-09 16:42 — fix の指名を受領（bc0bfe5b88）: 私の受入は「着地した commit」を content で pin する
+
+- p0 が fix を指名: `bc0bfe5b88`（m-p18-236・pZ leg と p11 確認へ回付済）。⚠ **私の受入報告が pin するのは指名 revision ではなく着地した commit** — 着地は re-author し得る（本 chain の実績: 26/4 diff・無祖先 re-author を受入条件が content-sha 等価で吸収した 06:29 の形）。⇒ 受入時: 着地 commit の content sha を読み戻し、指名 `bc0bfe5b88` との対応は**系譜でなく内容一致**で述べる。
+- p0 の 1 行を bank（p11 keeper の code 版）: **古い理由を code の comment ごと殺した**（「zero is arms crossed」→ 実測 CLEAR 値へ）— 正しく見える行の下の失効理由が書込を 13 日間正当化していた。register だけでなく **code の中で** 理由を現行化する形。
+- p11 の crossing（settle-span 評価は instrument 側の 1 行という読み）が確認されれば、計器は commanded zero→HOME span の along-path 行を得る — **commanded と followed は別の path で、mode A はその間に住む**（pZ 第 3 節は無傷のまま）。私の 3 節文型に変更なし。
