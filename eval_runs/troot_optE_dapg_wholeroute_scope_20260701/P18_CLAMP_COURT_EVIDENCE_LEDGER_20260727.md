@@ -46320,3 +46320,17 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **p6（`c15236711e` 当卓検証 2 files・19:06:03）**: row 48 = Edge B／row 66 = Edge A（`a2762d2bb5` を自卓で現物読み・「p0 一言 pending」は書いた瞬間の真 — p0 の (i) と同分交差・解決は cc 済 m-p0-257R が届ける）／C3-C5 node S4-B が**自分で**進められない列に記帳（理由 D1 未充足＋加速が届く唯一経路 = Edge A 経由）／MEMORY.md = PREPARE 維持 row 不要／snapshot 再生成 C3 OK・freshness 0。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1358 — ⛔⛔ **Edge B の L3 五体検証 DECIDE = FAIL（p11 が自分の草案を落とした・NHA = HOLD）— gate が設計どおり働いた** ＋ ⭐⭐ **中心発見（CC5 発・CC1 spec 直読確認・当卓も :69 逐語再現）: Build C の第 2 hinge（world-Z 曲げ DOF）= Rs1 (the human) が 2026-06-25 に却下した B1 の当の構造 — (b) はそれを中立の存在として書き、却下の記録を落としていた（同一草案内で (c) と不整合）** ＋ ⭐ **帰結: Rs1 へ上げるのは置換文言でなく問い（① どう記録するか ② B1 却下は今も有効か）— 文言は答えの後** ＋ ⭐ **等級の正直: CRITICAL 3 件は全て panel 発・p11 自己点検は 0 件**
+
+**契機** = p11（19:2x・cc p4/p6/p5/p0/pZ）。artifact = `P11_L3_FIVEWAY_VERDICT_CABLE_PREMISE_DRAFT_20260809.md` @ `0a13b2053a`（19:27:59「Convene the five-way and fail my own draft」）— 当卓検証: sha `7da96041e0…` ✓・82 行 ✓・草案 file 見出しに VERDICT marker（+2/−1）✓。⛔ **実行 0**。panel = CC2 premise/provenance・CC3 rule/SSOT・CC4 numerical/physics・CC5 side-effects/history・CC6 NHA。受領 23 challenge（CRITICAL 3 / HIGH 6 / MEDIUM 9 / LOW 3）。
+
+- ⭐⭐ **中心発見の当卓再現**: spec `:69` 逐語「B1 substrate-upgrade [add world-Z DOF, re-validates all cable results] + B3 VBD declined.」= **完全一致 ✓**。Build C の `cab{i}_z axis "0 0 1"`（p4 census banked）= まさに「add world-Z DOF」。⇒ (b) の中立記述 = **却下記録の脱落**・(c) は :31 側で処分を保存 = **同一草案の内部不整合**。
+- **CRITICAL 残 2（p11 再確認＋当卓 spot-check）**: ① 9 回引用の `bf0235cfd8` = banked note 1 行目「⛔ NON-AUTHORIZED PROVISIONAL SAMPLE」を**未開示のまま引用**（当卓: commit message 自体が「unauthorised … no artifact behind them」✓）。② F3/§8 根拠 `ur15_cell.py` = **dead code** — 当卓 closed query: sim dir 内 bare import **0**・対照 `ur15_cell_spec` import **22 file**（p11 の 31 とは単位/範囲差の可能性 — 方向は同一）・live emitter = wired。**同じ訂正は LEDGER row 48 に 3 日前 landed 済**（草案の DDR/row48 言及 0 = [DEFER-RECON] record 欠落と連動、と p11 自認）。
+- **HIGH 6（panel custody・artifact が正）**: [DEFER-RECON] record 無し／**prior-art guard 未実行 — CC5 が走らせ blockers=3・首位 = B1 DECLINED（走らせていれば中心発見を panel 前に捕獲）**／`add_cable_rod` の DOF 記述不正確（bend/twist 単一非軸分解）／`cable_joint_k()` = 0.3333 = cell 比 **16.67x** ＋ 総長 1200/960/600・z-hinge 39/31 ⇒ **「定数違い」でなく別の物理対象**／currency 過剰（"is at present executed"）／選択段 Rs1 承認未引用。
+- ✅ **(c) 修理のみ性質が別**（測定解消・§1348-1349）— ただし M8（新引用先 untracked）と :69 同型残存を付して cycle 2 に乗る。
+- **次**: p11 修正 → **cycle 2**（C1 開示・C2 live emitter 再 pin・C3 B1-declined 保存・H1/H2 gate 記録・H3/H4 事実訂正 ほか）。⚠ skill Step 8（verification-log 永続化）未実施 — 本 artifact は代替でない、と自己標識。
+- **法 2 本**: ① §運用4 V7 prior-art guard は「panel の最重要発見を panel 前に返す」ことが実測された（CC5 の事後実行で blockers=3・首位が当の却下）— gate の直列は冗長でなく網。② **自己点検と panel の等級差（0 vs 3 CRITICAL）を数えて公表する形** —「私の点検は代わりにならなかった」は敗北宣言でなく計測。
+- **Edge B 状態**: 着地候補なし・04-Specs read-only 不変・**Rs1 へ向かうのは問い（① Build C の却下構造をどう記録するか ② B1 却下は今も有効か）** — 文言は答えの後。Edge A（shakedown）は独立に進行中。
+
+**Banked — 時刻は本節 commit の author date が正。**
