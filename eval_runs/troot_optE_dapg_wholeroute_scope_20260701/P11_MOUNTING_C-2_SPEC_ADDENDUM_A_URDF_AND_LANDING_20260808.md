@@ -540,3 +540,40 @@ pZ の法「**隣の token への対照は、述語への対照ではない**」
 ⇒ ✅ **規則（本節が正）**: **数には測定 rev を同じ行に書く。landing 後は再導出せよ・過去の数と比較するな**（行番号は版で動き、同値でも位置が違う）。
 
 ⚠ **等級**: ⭐ **本節は Rs 直接指示による**（自己起票でも他卓誘発でもない）。⛔ 残り = **無し**（(a)-(h) 全 8 件のうち (d)(f)(i)(j)(k)(l) は既 discharge、(c) は前節、本節で (a)(b)(e)(g)(h)）。⚠ **(e) だけ「規則確定・検査未実行」で閉じた**ので、**完全に閉じたのは 7 件、部分は 1 件**。
+
+## (w) 追記 2026-08-09 14:5x — **(e) の再現性検査を「認可が来たら走る」形に用意する**（Rs 指示 2026-08-09「(e) の再現性検査も、run 認可が取れたら実行して」）
+
+⛔ **本節では走らせない**（run 認可なし）。⛔ **認可を要求もしない**。⇒ **発火条件つきの standing item として durable に置き、届いた瞬間に走る形にする**。
+
+### (w)-1 ✅ 以前の blocker は消えている（実測・read-only）
+私が以前「描画側は `meshpool/` 不在で走らない・`mkdir` 呼び出し 0」と報告した点は、**他卓が直した**:
+- `render_cell_overview.py:71 AS_BUILT.parent.mkdir(parents=True, exist_ok=True)` / `:103 out.parent.mkdir(parents=True, exist_ok=True)` ⇒ **`mkdir` 呼び出し = 2**（対照: 合成行に 1 で当たる）。`meshpool/` は今も不在だが **renderer が作る**。
+- ⭐ 同 file `:38` に **その欠陥自体がコメントとして残っている**（「meshpool level … had already been reclaimed, so :53 could not run at all」）。
+
+### (w)-2 ✅ 走らせる前に要る 3 本、全て満たしている（実測）
+| leg | 実測 | 対照 |
+|---|---|---|
+| 出力先が **untracked**（走っても tracked を汚さない） | `:102 out = _GEN / "UR15_CELL_OVERVIEW_20260729.png"`・`git ls-files -- _gen` = **0** | 同 dir の `render_cell_overview.py` は tracked = **1** |
+| mesh 供給元 | `MESH_SRC` = `thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/assets` = **在る（10 file）** | — |
+| interpreter | `/home/rlrk/env_isaaclab7/bin/python` = **在る** | — |
+⚠ **現在の checkout は共有 tree（branch `rlrk/optE-s2-substrate-swap`）** ⇒ ⛔ **(f) の自己規則により、共有 tree では走らせない**。
+
+### (w)-3 ✅ 手順（認可到着後、そのまま実行できる形）
+1. `git worktree add --detach <tmp> <指定 rev>` で **隔離**（(f)）。⚠ **隔離は tracked content についてのみ**。
+2. 同一 command ＋ 同一 env で **2 回**描く。
+3. 生成物 **両方**（`_gen/UR15_CELL_OVERVIEW_20260729.png` と `_gen/meshpool/_as_built_t42.xml`）の **content sha256** を取る。
+4. **判定述語**: `sha(1) == sha(2)` ⇒ **byte 再現する** ⇒ **command + env pin + machine + sha で足り、file 保存は不要**。`!=` ⇒ **再現しない** ⇒ **file 保存が要り、「再現可能」という既存の主張は偽**。
+5. **対照（3 本・どれも欠かせない）**:
+   - **positive control**: 入力を 1 つだけ変えて（別 rev か env override 1 個）**sha が変わること**。⛔ これが無いと、道具が定数を書いていても・同じ様に失敗していても「一致」する。
+   - **liveness control**: 2 回目が**新しく書かれた**こと（mtime/size）。⛔ でないと 1 つの file を 2 回読んだだけで自明に一致する。
+   - **negative control**: 生成物が 2 つあるので **両方**を比べる（片方だけ再現しても結論にならない）。
+6. **記録**: rev / env 4 package 版 / machine / command / 両 sha を artifact に書く（(h) の規則どおり **数に測定 rev を同じ行に**）。
+
+### (w)-4 ⚠ この検査が示さないこと（先に書く）
+- ⛔ **この machine での一致は、別 machine での一致ではない**（(g) と同じ軸・別 leg）。
+- ⛔ **sha 一致は中身の正しさを示さない** — 再現することしか示さない。
+- ⛔ **1 回の一致は「常に再現する」ではない**（2 回は最小の反証機会であって保証ではない）。
+
+### (w)-5 発火条件
+**run 認可が私に対して出た時点**（現在存在する認可は他卓の bundled instrument 1 件のみで、本件を覆わない）。⇒ 認可が覆う必要があるのは **「隔離 worktree での `render_cell_overview.py` の 2 回実行（描画のみ・driver family 不実行・`mj_step` 不要）」** だけ。⛔ **私は要求しない**。
+⚠ **等級**: Rs 直接指示。⛔ 実行 0・認可要求 0。
