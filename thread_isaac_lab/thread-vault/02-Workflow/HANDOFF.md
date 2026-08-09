@@ -1,80 +1,28 @@
-## 前セッション完了: 2026-08-08 23:4x JST (p4 / C-2 実装 chain = 設計 2 本受入・射程は 5 clip 中 2・実行は HOLD のまま)
+# HANDOFF (p4 = Rs2)
 
-⛔ 全 sha・全経緯の正本（**数は写さない — ポインタを持つ**）:
-- `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md`（**§0-§13 = p4 の一次テキスト**。主要 = §6 受入判定 / §7 dead-scratchpad micro-chunk / §8 **working method 裁定**（非 lane branch → pZ 検証 → lane へ着地・worktree 手順つき）/ §9 射程 = 5 clip 中 2 / §10 統治集合 pin / §11 検証計器の版 = 実行時点 HEAD ＋ 受入自動延長の機械判定条件 / §12 chunk scope = 2 file 維持 / §13 p0・p6 への回答。⚠ **節は追記され続ける — 数え上げでなく本文を読む**。各所に自己訂正が**挿入形**で入る）
-- 設計 = `P11_MOUNTING_C-2_IMPL_DESIGN_SPEC_20260808.md` @ `3315631007`（**受入対象はこの版**・273 行）＋ 別紙 A `P11_MOUNTING_C-2_SPEC_ADDENDUM_A_URDF_AND_LANDING_20260808.md` = ⚠**追記型ゆえ版を pin しない — HEAD を読む**（旧記載 `88130a537e` は**作成時の版**で、23:5x 時点で既に 3 世代先まで進んでいた）。⭐**別紙は設計 4 編集の値を変えない限り再受入不要**（p4 実測: 追記分は計器・射程・解釈のみ・設計値 hit 0）
-- p18 台帳 `P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md` の当日 bank 帯（§1179-1214 系）
+## 前セッション完了: 2026-08-09 20:2x JST (p4=Rs2 / mounting C-2 chain — dep-3 CLOSED・dep-1 表待ち・Edge B 五体検証 FAIL cycle 1)
 
-### 何が起きたか（1 行ずつ）
-- Rs 逐語「**中間目標を達成せよ**」→ C-2 実装 chain を**設計 phase から**起動（referent = T-ROOT・解決者 = p4・kickoff §0）。
-- **p4 が設計 2 本を受入**（spec + 別紙 A）。**§6-6 run-path fence 発効** = C-2 の run は `ur15_steps_wired.py` + `ur15_cell_spec.py` の SSOT 直結経路のみ。
-- **working method 裁定（p4 court）** = 実装は**非 lane branch へ commit → pZ が clean な worktree で content pin 検証 → verdict の後に lane へ着地**（受入条件 = landed sha == verified sha）。根拠 = 共有 tree は tracked deletion を含み**どの checkout でも再現しない**／対象 4 file は HEAD と blob 一致・asset は全 tracked ゆえ clean worktree で走る。
-- ⛔ **射程の訂正（本 chain の DoD）= canonical 1-18 = clip C1/C2（5 中 2）**。43 段の材料は**捨てた基盤（Newton VBD）の上**に在る（`thread_isaac_lab/scripts/wet_run_full_sequence.py`）⇒ 残りは「設計」でなく**移植**・**起票可否は Rs**。
-- ⛔ **幾何 witness は別配置のもの**: L-geom witness（2026-07-14・6/6・`shared/GEOM_WITNESS_5CLIP_p5_20260714.py`・⚠ repo tree 内だが **untracked**）は **task_config 配置**で計算（artifact `:36` が `CLIP_X_ODD/EVEN` と記号で明示）。cell とは**軸転置の双子だが完全転置ではない**（C1 は完全転置・**C2 は違う**）— 両者が共に定義する唯一の hop **C1→C2 = 90.14 mm → 120.83 mm = 1.340 倍**。⇒ **幾何が C-2 cell へ持ち越せるとは言えない**（1.34 倍の帰結は**未測** = 設計 court）。⛔ **C1 だけの値照合は通る**。
-- 地図（`docs/logical_decomposition.html`）に「実行可能経路の到達 = 5 中 2」の 1 行が着地（p6・**3 項形**＝①L-geom witness は task_config 配置について ②実行到達 = C1/C2 ③L-phys/L-exec 未確立・char 単位で挿入のみ・既存記述は保全）。
-- ⭐ 地図 `:174`「FK で検算した witness は無い」と `LEDGER:78`「WITNESS FOUND（L-geom のみ）」は**矛盾でない**（現物に FK 呼び出し 0・述語の広さの差）⇒ ⛔ **地図を stale として直さない**。
+### 一次テキスト（本 file は pointer・narrative を ground truth にしない）
+- **卓 SSOT** = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md`（**2,006 行**・時刻鍵見出し・cite-by-heading・GOVERNING INDEX。§0-§13 ＝ 08-08 分・以降は時刻鍵節。⚠ 節は追記され続ける — 数え上げでなく本文を読む）。
+- memory 側全詳細 = `~/.claude/projects/-home-rlrk-IsaacLab/memory/handoff_cc_p4_rstechlead_control_method_20260719.md` の「**追記: 2026-08-09 20:1x**」節。
+- 設計 = `P11_MOUNTING_C-2_IMPL_DESIGN_SPEC_20260808.md` @ `3315631007`（受入対象版）・成否 = `00-DESIGN-STATUS-LEDGER.md` row 48（**D-8**）/ row 66（**:2388 RULED→FIX ACCEPTED**）。
 
-> ⚠ **語の対象を固定（2026-08-09 00:20 追記）**: 本節で言う **dead-scratchpad / 旧 session = `b952db35`**（p4 の sim session・**完全形は `ur15_steps_wired.py:32` の `S = Path(...)` から取る**）。⛔ **完全形をここに転記しない** — 完全形の query が「code だけを拾う clean な query」でいられるのは**記録が完全形を写さないから**で、写した瞬間にその性質が壊れる（実測 00:22: 完全形を含む tracked `*.md` = 2 件。うち 1 件は本 file だった）。⭐ **prefix は 2 session（`b952db35` / `2dbed74a`）を先頭 8 字で判別できるので、対象の固定には prefix で足りる。**⛔ **死んだ session はもう 1 つある** — p6 の `2dbed74a…` は**別物**で、同じ「dead-session token」という言い方で 2 卓が 4 分すれ違った。⇒ **不在・存在いずれの主張も 5 欄を書く: ①どの対象 ②token 文字列 ③pattern 構文 ④path 母集団 ⑤数え方。**
+### 本日の主要着地（09:30 再開〜・routing = 全て p18 経由・m-p4-184〜214）
+1. **:2388 修正 chain = dep-3 CLOSED**: Rs1 裁定「腕を姿勢へ書き込むことは不可 すべてコントローラの司令で実現できるはず。」（16:0x）→ zero-pose 診断 CLEAR（+491.3/+19.8 — 両値に rider: cell-as-reassembled・+19.8 は settle が尊重する margin）→ **servo fix 6 commits**（`bc0bfe5b88`〜`2a3b5825b7`）→ pZ verdict object 191 行（6 行 × 6 commits PASS・**各 commit を自分の親に対して判定**）→ **p4 受入報告（kickoff 17:15 節・3 節文 = structurally clean／settle 存在・順序正／traverse 未測 GATED）**。wired pin = **content sha256 `8fae5334e85e6af5…` / git blob SHA-1 `ae8aa42d49dd…`**（⭐ hash は関数名を添えて初めて pin）。keep/revert = **KEEP**（決め手 = pZ の no-write-path AST 測定）。⛔ **CLOSED でも run は走らない** — wired 一切（DoD 動画含む）= Rs1 認可要。
+2. **#48 前提変更 arc**: Rs1「前提を変えて良い」→ (a) build census 納品（3 build・as-of/over-what・「mujoco」は build 名でない・Build C は前提 bank の 32 日後生まれ）→ **(c) は測定で解消**（隔離の cause-of-record = **機構**・LEDGER git 初日 `e05efab04a` から不変・1-DOF 説は 07-15 の pin 正当化 gloss `4de2c9fd42`）→ p11 統合 draft `35d7ef4d0d` → **五体検証 = FAIL (cycle 1)**（verdict `P11_L3_FIVEWAY_VERDICT_CABLE_PREMISE_DRAFT_20260809.md` @ `0a13b2053a`・CRITICAL 3/HIGH 6/MED 9/LOW 3・NHA=HOLD。⭐ CRITICAL の芯 = **Build C の第 2 hinge は Rs1 が 06-25 に却下した B1 そのもの** — spec `:69` 同行に逐語）→ p11 が escalation の形を Rs1 へ確認 → cycle 2。**dep-2 cap 不変**（新文言の spec 着地まで・DoD 引用に同行）。
+3. **D-8 登録**（clip C2 across 35mm・design↔cell 面・計器は both-values 行で両候補を測る）／witness 引用 v3 =「240 draws・L 5/240 (2.1%)・5 の相異性未記録」。
+4. **命名裁定**: **Rs1 = 人間／Rs2 = p4/CC・代理 clause**（「君はRs1の代理であることに代わりはない」）— hub 採用・ledger §1350・非遡及・artifact 初出で両者展開。
+5. 「すすめて」= **加速・解錠なし** → Edge A（p0: prefilter の一語 → 指名 → pZ leg → 表）/ Edge B（p11 cycle 2）routed。push ×4 実行（各 Rs1 一語・最終 17:36）。
 
-### 生きた状態
-> ✅ **2026-08-09 06:29 更新 — micro-chunk は *着地済*（wired + render）**: p0 実装 → pZ 検証 → **p4 が lane へ着地**（受入条件「**verified content sha == landed content sha**」を実行し両 file MATCH = 機械証明）。⇒ **生成物は死んだ scratchpad を離れ、視覚レグ script は再び走る**。⛔ **残るのは C-2 の 4 編集のみ**（`ur15_cell_spec.py` / `sweep_mounting.py`）で、**その発進条件が下行の p5 レグ**。carry（着地を妨げない・所有者つき）= `_gen` が un-ignored（cleanup 第 1 項）／凍結 PNG の archive 化（marker 設置済）／検査述語 2 件（p11）。
+### 次セッションの待ち受け（2 本・p4 court は現在空）
+- **(A) dep-1 導出**: 表の指名 → pZ leg PASS → **消費読み 9 節**（kickoff **10:30/10:41/10:50/10:56/11:01/11:08/16:26/17:21/19:04** — 解決 3 数＋WORK_ROW_DY・D-8 両候補対・audit 陽性対照・i/n 刻印・mode-A note 逐語・STEP1 三つ組・saturation caveat＋解除条件・sentinel scope = recorder のみ・引用は blob＋関数名）→「在る/無い＋STEP 番号」導出 → **mounting C-2 の 4 編集 unlock**（`ur15_cell_spec.py` @ `2fba2dfd67` / `sweep_mounting.py` @ `2bb1aad4e7` — 現在も不触）。
+- **(B) dep-2**: p11 の B1-declined escalation が Rs1 に届いた時、応答表（kickoff 10:47 節の 3 分岐 = 前提の内側／supersede／cell 修正）で 1 turn 消費。
+- 据置（owner つき）: C3-C5 chunk（PENDING・D1 未充足）／MEMORY.md pass（PREPARE・22,0xx/22,487 chars・⛔ 単独圧縮禁止・行追加は自行編集で）／DoD run（4 編集後・Rs1 認可）／7-site 残り分類（video 3 本の replay 例外等）／gap_mm 統合 design note（p0・later）。
 
-- **p0 の発進条件 = p5 の工程表整合レグの返答**（当日 1 時間以上待ち）→ p0 実装（**2 commit**: spec の 4 編集 / `ur15_steps_wired.py:32` の dead-scratchpad 解消）→ pZ 検証 → p4 まとめ
-  - ⛔ **実装時に落としてはならない 1 点（pointer でなく本文に置く）**: 移設先で **`AS_BUILT.parent.mkdir(parents=True, exist_ok=True)`**（`_gen/meshpool/` は 2 階層ゆえ `parents=True` 必須）。⇒ 落とすと**現に起きている失敗**（視覚レグ script が親 dir 不在で FileNotFoundError）が**新しい path で再現**する。根拠と全条件 = kickoff **§7 末尾**。
-- ⛔ **execution HOLD 不変・self-start 禁止**。**DoD の evidence-grade cap**: #48/#18 が open の間は DoD 動画に無印 PASS を出さない・#49 は整定ゲート状態を併記・#61 の env7 pin 下でのみ・existence 主張は **cell 条件 3 つ**（stereo head 不在／#54 部材不在／抽選領域 = URDF 関節範囲）を明記
-- **Rs 判断待ち** = ①**C3-C5 へ延ばす別 chunk の起票可否** ②**push**（当日分は未 push）
-  - ✅ **両方 解決済（2026-08-09 05:2x-05:3x・Rs 逐語「2: 可　３：push」）**: ②**push 実行済**（fork へ 2 回・以後 ahead は他卓分のみ）／①**起票 = 可** ⇒ DEFINE 起票済 = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_DEFINE_C3C5_PORT_TO_CURRENT_SUBSTRATE_20260809.md`（見出しで引く・53 行）。⛔ **「可」は *起票* の授権のみ** — 実装・実行・GPU は含まない（同 file 「## 0. 授権と、その射程（over-read しない）」）。
-  - ⇒ **現在の待ち（差し替え）**: **node 化** = p6 の court（親 = `T-ROOT`・上記 file が DEFINE）／**#48（cable 第 2 DOF）** = **Rs**（未 disposition ⇒ DoD 動画は射程注記つき・無印 PASS 不可）／**C-2 の 4 編集** = p5 の工程表整合レグ／**micro-chunk（wired+render）** = p0 実装可（clear 済）。
+### State Snapshot（20:09 実測）
+- HEAD `c2b9f7159d`・**ahead=14 / behind=0**（p11 セッション分含む・push = Rs1 の一語）。稼働 process 0・run 認可 = KINONLY 計器 bundle 1 件のみ。
+- 読みの規律（現行）: **承認語・加速語に解錠を読み込まない**（先例 = kickoff 10:25/18:57 節）／hash は関数名つき pin／date と heredoc 同一 call 禁止／sha は command 置換／pin は blob 読み（worktree は mid-edit snapshot になり得る）。
 
 ### 次にやること
-1. preflight（auto）→ 本 file → memory の p4 per-pane file（`handoff_cc_p4_rstechlead_control_method_20260719.md` の末尾数節 = 当日確立した手順の SSOT）
-2. ⛔⛔ **上の 19:1x 節の「次 message ID = m-p4-59」は SUPERSEDED。番号を記憶・注記から採らない**（当日 `m-p4-64`×2・`65`×3・`66`×2 の重複が全てこれで起きた）。**採番 = scratchpad で排他生成**（`( set -C; : > m-p4-$N.txt )` を昇順に試し、最初に作れた N が自分の番号）。⚠ 当日の helper `…/scratchpad/send_p18.sh` は **session 限りの場所に在る**ので次 session には無い — **手順を再実装する**（default-deny で直近 5 件の件名を見せてから送る／送信時に footer 時刻を shell 付加／配送 probe は **footer 時刻**で引き **miss は不明**・⛔ blind re-send しない）。
-3. ⛔ self-start しない。pane 宛は全て **w2:p18 経由**。
-
-### 重要な文脈（当日の型・詳細は memory）
-- **面どうしが食い違って見えたら、面を比べる前に *現物* を読む**（W-1 の「矛盾」は現物 1 読で消えた）。
-- **自分が課した条件を、自分の主張にも 1 回通す**（「clip 名に基盤を連れよ」と書いた当人が項 (1) に連れていなかった）。
-- **規則は在っても機構が無いと守られない**（重複検査は「印字」では止まらず、既定拒否にして初めて止まった）。
-- **共有された状態を、共有されない場所（記憶・context の写し）から決めない** — 番号・送信済みか・次の担当。
-
----
-
-## 前セッション完了: 2026-08-08 19:1x JST (p4 / Rs open 一覧 1-9 全決着・委任裁定・L3 root 行修正)
-
-⛔ 全 sha・全経緯の正本 = repo の 2 artifact ＋ p18 台帳:
-- `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_DELEGATED_DECISIONS_ITEMS7_9_DOD_20260808.md`（委任決定＋item 9 裁定・§0-§7）
-- `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/ITEM5_RS_RULING_WORKING_ASSET_AUTHORITATIVE_20260808.md`（item 5 の裁定〜着地 custody）
-- p18 court ledger の当日 bank 群（`P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md` 末尾帯・enumeration は台帳が正）
-以下は次セッションが最初の 5 分で要る分だけ。**数は写さない — ポインタを持つ**（本 surface の 08-03 自訓）。
-
-### 何が起きたか（1 行ずつ）
-- **Rs open 一覧（1-9）が全 CLOSED**（p18 宣言「THE QUEUE IS EMPTY」・当日 18:15 便）。
-- **item 5**: §0#4 の記録正 = 作業 asset 16.00 mm（Rs「4」）→ RS71 4 site へ supersession 着地（Rs「a」= labelled A/B/C・:26 最小節＋§0-A 詳細形）。LOCK asset は不触（Rs 07-21 凍結形式）。
-- **item 7**: p5 が menu 組成（Rs 指示を私が回付）→ Rs 委任「君が判断していい」下で **p4 が C-2 を settle**（mounting 0.280/20°・crown 0.110 不変・根拠 = witness/最測定 cell/頭許容の相互作用）。
-- **item 8**: Rs 直裁定 (a)（委任より先行 ⇒ 裁定 > 委任の precedence が実例化）。列挙 3 面を verbatim bank。
-- **item 9**: p6 照合 → **p4 裁定** = tree が構造の正（実 root = `T-PRODUCTION-LINE`・T-ROOT = THREAD subtree root）＋ goal は SOMA の 100% 定性（Rs 06-23）が現行 → **Rs「直して push」で L3 2 面着地** = `CLAUDE.md:131` 置換＋NEST 仕様 `operational-rule-LTM-1.md` §7.1 supersession 挿入（§8.1 再評価は未起動 = Rs 判断のまま）。
-- **#18 DoD**: 5 体 debate 2 cycle（FAIL→REVIEW・設計段階で hold-rate 上限 0.518 を走行 0 のまま捕捉）→ **(b) 設計側 accept**（残余 = chain の OPEN 局 /reward-design 全再走 + /pre-check が carry）。
-- **#54（支柱-腕 298mm 部材）**: carrier = item 7 単独・**choose-then-re-measure** で settle（部材入力の設計は p5/p11 court のまま）。
-  - ⛔ **訂正 2026-08-08 22:10**: 上行の「298mm」は**退役 0.40-spread cell の zone 値**（0.400 − COLUMN_R 0.102 = 0.298 m）。built = **0.118 m**・C-2 = **0.178 m** = **+0.060 m 拡大**方向（p11 spec MAJOR・p18 独立再導出 m-p18-96・DDR row 54 は p6 注記済 `51a3913591`）。C-2 設計 spec は **p4 受入済**（kickoff doc §6 @ `e39526fe58`・fence 発効）— chain 現況 = p5 整合返答待ち → p0（spec 4 編集 + wired:32 repo-path 化の同乗 commit）→ pZ → p4。
-
-### 生きた状態（item ではない・設計どおりの場所に住む）
-- **C-2 実装** = 下流 chain（p11/p5 設計 → p0 → pZ → p4）・⛔ **execution HOLD 不変・self-start 禁止**
-- **#54 再測** = 部材入力確定後に C-2 列を再測（settle した timing そのもの・閉じない）
-- **#18 chain** = p5 で継続（DoD v0.3 基準）
-- **4 node の state.md 不在** = node-lifecycle（node owner court・生成器は仕様どおりと確定）
-
-### 本日の機構（詳細 = p18 bank 帯・memory 統合は未実施 → 次セッション optional）
-- 計器の reach を対象の性質として報告する形が 5 卓で発火 → 午後には**計器内部**でも 3 回（fabrication 検出器・transcript sweep・編集 anchor）
-- **「問いの言い回しが計器を選ぶ」**（p6 命名・4 卓が自己適用）／**pin は書いた瞬間に開く**（壊れた pin 3 本とも drift 0）／状態文≠所有物文／他卓の tally (n-of-m) は自分で数えるまで書かない（p18 規則・初入力で発火済）
-- 時刻 arc: 3 卓 3 変種 3 修正 = 推定の slot を消す（送信時 shell 付加）・未測定時の記入義務を消す・値と証人の binding 検査
-
-### 次にやること
-1. preflight（auto）→ Rs「引き継ぎ確認」→ 本 file ＋ memory `handoff.md` 冒頭節 ＋ 上記 2 artifact を read
-2. ⛔ **self-start しない**（実行系は HOLD・C-2 実装は設計が先）。pane 宛は全て **w2:p18 経由**・次 message ID = **m-p4-59**
-3. dispatch 規律（当日確立分）: footer は**送信時に shell が付加**（本文に手打ち時刻を書かない）・本文の count/sha/行番号は**送信 call 内で測った物のみ**・backtick 不可・quoted heredoc 不可（Write で file → `"$(cat $M)"` 送信）・pin は送る前に同 turn で解決（cat-file / sha256sum）
-4. memory dir: HALT は 08-07 15:02:53 に p6 解除済（凍結ではない）・規則 SSOT = CLAUDE.md §運用31・MEMORY.md は 21.9K chars（90% trigger まで残 ~0.6K — 追記は測ってから）
-
-### 重要な文脈
-- **委任の precedence**: 後の Rs 裁定 > 先の委任（item 8 が worked example）。「君が判断していい」(当日 13:09) の残効は item 9 裁定で消化済 — 新規案件への流用は不可（列挙が対象を固定していた）。
-- **裁定の一意性は enumeration が作る**: 1 字裁定（「4」「a」「(a)」等）は labelled set の卓でのみ一意 — その enumeration を**同 turn で durable 面に bank する**（transcript は剪定される）。
-- CLAUDE.md:131 は SSOT pin（SOMA:16）を持った — 前面 surface の断言には pointer を付ける（無 pointer の断言は 6 週間誰にも検証されなかった）。
+1. `引き継ぎ確認` → preflight（auto）→ **LEDGER row 48/66 → kickoff GOVERNING INDEX＋末尾 10 節 → memory per-pane 追記節** の順で接地。
+2. 待ち受け (A)(B) のどちらかが動いたら該当手順へ。動かないうちは self-start しない。
