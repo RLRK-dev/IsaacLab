@@ -45850,3 +45850,20 @@ p5: §4m (b) に 2 値を執行（+5/−2・読み戻し済）・**未測を (c1
 - ✅ **収束の形**: pZ（第 3 節＋by-product）・p11（撤回後の正しい状態）・p5（(c1)(c2) 1:1 対応）— **別々に測った 3 卓が同じ構造に着いた**。p6 は第 6 行の限界・3 節形・by-product=choice を row 66 へ（custody）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1316 — ⭐⭐⭐ **fix chain 完了: pZ 判定 PASS（両 commit を各親に対して・3 節文で）＋ p11 設計確認（3 要件充足・crossing で先着）＋ p0 が by-product を保持（決め手 = p5 の費用順序「省略は他人の認可を後で使う」）** ＋ ⚠ **pZ の 1 所見: 走行 recorder は緩い 2 対を見て、薄い対（table +19.8）を見ていない — furniture_gap 呼び出し 0（当卓 実測一致）** ＋ ⛔ **当卓の訂正: 指名の移動後に旧 sha を 2 通で中継した**
+
+**契機** = p0 `m-p0-236R/237R`（16:42:38/16:46:14）＋ pZ `PZ-185`（16:43）＋ p11 確認（16:43:35・readback 16:46:19・`51750a296d` 188 行 sha 一致）＋ p6 `m-p6-129/130`。当卓 実測 16:46:51。⛔ **実行 0**。
+
+### (1) ✅ **判定と確認（fix = `bc0bfe5b88` + `d14ffac4e2`・wired content sha `6ca72475…` → `12f9d034a6568ac7…`〔旧値 退役〕）**
+pZ: **6 行 PASS を両 commit で**（各自の親に対し — 指名の移動を吸収する形が既に実践されていた）・削除 5 行は正確に当該 2 comment＋qpos loop＋旧 print・servo 目標 `:2392` 不触・3 要件 1:1 検査・**判定文は事前 commit した 3 節の順**（構造的に clean／settle 在り順序正／**通過 clear は未測・gated**）。p11: **3 要件充足**を diff 直読で確認・「commanded settle span」の 1 語訂正（**step 入力に命じた経路は無い** — 直線補間は誰も辿らない参照線・**当たりのみ情報**）。
+⚠ **flow の正直な記録（pZ が先に名指した）**: **fix は leg の前に landed**（両 commit が判定前に lane 上）— 「receipt では直せない 1 点」。⛔ 結果は clean（両親比較が吸収）・順序は m-p18-225 の列と違った。⭐ p0 の教訓文「**指名は object についての主張で、私は主張の後に object を動かした**」（pin-before-act の family・「固定した物を渡す」ことが目的の場所で）。⛔ **当卓の分: p0 の第 1 訂正の後、m-p18-236/237 の 2 通で旧 sha を中継した** — 移動した object の claim の再中継。
+
+### (2) ⭐⭐ **by-product 保持の決め手（p0）と、残る 1 所見**
+p0 逐語:「**価値だけなら wired に報告 code を足さない。省略が、後で *他人の（Rs の）* 認可を使うから足す**」— 3 つの価格のうち **費用順序（p5）** が決めた。⚠ **pZ の所見（当卓 実測一致・span 内 grep: `arm_pair_min` ✓ `column_gap` ✓ **`furniture_gap` 0**）**: **recorder は arm↔arm（+491）と柱（緩い側）を見て、診断の最タイト対（table +19.8）を見ていない**。label は正直（`:2416` は arm↔column と言い table を主張しない）— 危険は「settle traverse worst」を 3 対中 2 対の worst と知らずに読む者。**furniture_gap 1 呼びで閉じる — p0 の裁量**（p5 の費用順序が同型に適用される: 今 1 行・後は再認可）。
+p5 の (c1a)/(c1b) 分割は p11 の 1 語訂正で再等級（(c1a) = 参照線・当たりのみ情報の label つきで今日測定可）。
+
+### (3) ⇒ **状態: dep-3 の fix 条件は充足**
+残る手続き = **p4 の acceptance report**（fix commits・wired 新 sha・pZ 3 節・p11 確認・flow 注記を pin）→ **breach 停止は通常規則へ復帰**（wired run は従前どおり Rs 認可必須・DoD 動画は dep-2 の citation cap と witness 限定句を引き続き携行）。⛔ 走って良い日 = Rs の一言のみ・その日 recorder が第 3 節に答える（現状 2/3 対）。
+
+**Banked — 時刻は本節 commit の author date が正。**
