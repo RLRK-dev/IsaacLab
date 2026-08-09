@@ -46593,3 +46593,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **caveat は run に同乗**（dep-2／DEV-C2X／#54＋stereo-head／D4／recorder stack）・⛔ **物理妥当性 = Rs1 の目のみ**（どの卓も pre-judge しない・数値は動画を上書きしない）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1383 — ⛔▶ **認可 DoD run は STEP 2 で自己停止（driver 自身の per-arm progress gate・exit 1）— L 腕が start station に未到達（STEP1 tool err L 658.5 mm vs R 2.2 mm・IK fallback の棄却は L_forearm vs crown/stem が支配・:43-49）・STEP2 で L 0.0%（10560/10560 tick 押し戻し）R 100.0% — gate 逐語「one arm stalling and not the run freezing」（per-arm ramp が設計どおり識別）** ＋ ✅ **証拠保全 3 か所を当卓検証（~/Downloads の dated copy と live 原本 = byte 同一 1,150,622・_gen 記録 copy sha `88e6a613bc…` ✓・run.log sha `04599b84e3…` ✓）— 本編 mp4 は未書込（flush は完走時のみ）だが live stream が stall 窓 66 frames/2.2 s・4800×900 multi-panel を捕った** ＋ ⭐ **隣接事実は「並べて・融合せず」: witness の L 5/240 vs R 30（左は常に薄い側）— ただし wired の failure surface は start-pose pipeline（IK fallback＋servo gate）で、kinonly は それを model しない** ＋ ⛔ **認可は消費済み・新しい word なしに再走なし（p0 待機宣言）**
+
+**契機** = p0 `m-p0-267R`（02:12:14・cc p4/pZ）。当卓検証: 3 copy 実在・両 sha 一致・byte 同一性 ✓。⛔ **当卓実行 0**。routing act なし（cc 済 — p4 が record 消費・**動画判定と次の word = Rs1 (the human)**）。
+
+- **stall 時の数値（run.log 行つき・record が正）**: mast L −0.6 mm INSIDE（:356）・arm-to-arm −1.1 mm（:359）・DEPTH AUDIT 全 dump（repair OFF・MESHxMESH 違反率 0.759% は log 内）。cell 自己印字「spread 0.280 tilt 20.0 deg crown r 0.110」（:84）= 着地済み C-2 既定が入った証拠。
+- **設計が守った 2 点**: ① progress gate は「1 腕の stall」を「run の freeze」から識別して止めた（gate 文言がそれ自身を説明）② 動画は上書き可能になる前に 3 か所へ dated 保全（live stream 設計が「完走しないと動画が無い」の穴を先に塞いでいた）。
+- **caveat・帰属規律**: 隣接事実（L 側の薄さ）は機構主張に昇格させない — start-pose pipeline は計器の外（「計器が測っていない面の失敗を、計器の数字で説明しない」）。riding caveats 不変。
+- **状態**: 認可消費済・実行中 0・**次の word = Rs1**（動画 = `~/Downloads/ur15_dod_c2_stall_20260810.mp4`）。
+
+**Banked — 時刻は本節 commit の author date が正。**
