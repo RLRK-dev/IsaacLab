@@ -2048,3 +2048,43 @@ reassembly, and my datum consumption — all mine, none the design's.  The disci
 the direction it was built for: probe before nominate.  Free iteration continues: guard v2
 (witness-consistency + analytic lower bound), cell completion (mast trio, saddles, CLIP_PARTS), and
 SD8 at verbatim z so the fix effects are isolated against SD7 while Rs2's z word is out.
+
+## 8.44 ⭐ NOMINATED: 120746a49b — the criterion cleared because every remaining negative now names an owner that is not my solver
+
+*(2026-08-10 00:14 JST.  Rs1 = the human; Rs2 = p4/CC.)*
+
+Shakedowns 8→10, one committed revision per run, each fix its own commit:
+
+| run | revision | what it measured -> what it fixed |
+|---|---|---|
+| 8 | `bbc500b636` | completed cell + witness-consistency guard -> env column floored at a CONSTANT -79.2 (crown<->bolted base, q-independent; pZ measured the same number independently) |
+| 8 fix | `d8badd92d3` | fork word (b): weld partition + one-joint ancestor exclusion (117 pairs; the next constant was shoulder<->own base at +0.1, same class one level up) |
+| 8c | `f531b019b2` | AABB point-to-OBB joins the provable-bound set: suspect readings resolved 63% -> 91.5%; CLEAR 17 / TOUCHING 8 |
+| 9 | `4f3385968f` | Rs2's (ii) z word operative: term-map by the canonical §1.1 dictionary, 1.025 family both-values, every row stamped value+name, both banked-constant routes cross-checked at runtime |
+| 10 | `120746a49b` | two of mine measured wrong by SD9 and fixed: grasp x=0.0 grazed saddle S1 (-20.9) -> widest-window midpoint +0.095 (all spec constants); single chain swept a 213 mm datum climb into v1 paths -> per-family chains |
+
+**The SD10 table (36 instances + STEP 1; log sha256
+`2d82e0af1b10342b64bb0b8bec9a6387514841f2ab8aff9200414f91285eb866`, bank
+`58af7ebe0f60e557d466d906d3ba2bad87ffd98038d2a289c7712e674a9bdb1c`, both `_gen/` untracked =
+content-pinned at read):**
+
+- **v1 (verbatim canonical) endpoints: ALL CLEAR** (arms +5.7..+23.9, env +20.3..+50.8).
+- **v2 (design heights) work rows: the commission's own findings** — grasp 0.812: arms -0.9 /
+  env -0.6; C1 seat 0.809: arms -2.3..+4.2, pads at the table -0.3..-3.0; C2 seat: arms
+  -0.2..+0.6, env -2.9..-3.5.  ⭐ EVERY one of these rows prints `clear-pairs 0, sel=maxmin`
+  with env-clear pool counts of L1-4/R0-3 out of ~65: the design's own attitude menu, full-pool
+  ranked, is EXHAUSTED at design heights within the published budget.  The negatives are the
+  design point's, not my selection's — and the cable-absent caveat is load-bearing here (an
+  8 mm-radius cable in the jaw changes the standoff these sub-3-mm readings measure).
+- **Path negatives = the declared straight-joint-path model sweeping real geometry** (row 2:
+  -115.2 through the stem region on the home->rest transit) **+ a kept-contact residue of 6.1%**
+  of suspect readings (28,640 of 466,830), pre-registered on pZ's side as attribution-unknown
+  (their R1-R5).
+- TOUCHING 33 / 36 by the verdict's endpoint-AND-path conjunction; the decomposition above is
+  what the verdict column cannot carry alone and the row cells do.
+
+⇒ **Criterion met and the nomination stands on it:** negatives attribute to (1) design geometry
+at design heights with the menu exhausted — published per row, (2) declared scope (cable absent,
+row 48 open), (3) the declared path model, (4) published measurement residue.  None to my
+solver.  ⛔ The instrument does not move again until pZ's leg returns — the object is nominated,
+and moving a nominated object was this desk's own recorded failure.
