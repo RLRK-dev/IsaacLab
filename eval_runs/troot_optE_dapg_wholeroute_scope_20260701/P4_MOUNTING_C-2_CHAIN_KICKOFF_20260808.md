@@ -1771,3 +1771,15 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 **fold-back（mandatory の側を私が持つ分）**: 私の導出の STEP 1 行は**必ず** 3 つ組で書く — 「旧 = by assignment（superseded 08-09）／実測 = HOME@C-2 clearance <値> ＋ zero-pose <値>／追従 = mode-A 未測」。⇒ 次の読み手が旧表から「STEP 1 は C-2 非依存」を継承する経路を、消費点で塞ぐ。診断値は fix 設計（p0/p11）と本行の**両方**へ配る — p18 の mandatory そのまま。
 
 不変: dep-3 fix chain（p0 の鍵盤待ち）・dep-2 cap・mounting C-2 の 4 編集・04-Specs。私の court は本語で空に戻る。
+
+---
+
+## 2026-08-09 16:19 — fix 受入報告時に私が読むものの確定（m-p18-226 の 2 精錬を消費側へ折込む）
+
+将来の私の受入報告（修正 commit を pin する報告）で読む fix-signature を、今の知識で確定しておく:
+1. **live d.qpos = 0**（基線 1・pZ の AST 事前登録表 — 述語は fix 前の実 violation で発火済み = 死んだ query と区別できる基線）。
+2. **live d.ctrl ≥ 7 は「そのまま」で合格** — ⛔ **ctrl 行の追加を要求しない**（サーボ目標は tip `:1655` に既在・p11/pZ が独立に同じ述語へ収束: 「fix は運動を足し、行を動かす — 司令は足さない」）。
+3. **第 6 行 = 判別する述語**: d.ctrl[arm] 代入と START 読出しの**間**に、live-d の mj_step ≥1 ＋ 既存 SETTLE_S/SETTLE_TOL への参照が在ること（ctrl の個数は要件(3)を見られない）。
+4. 動的迂回 0（setattr/exec/copyto 等の Call node）・scratch→d state 複写 0 維持・**静的 1 file の限界を報告に明記**（act-level 閉包は run を要し、それは dep-3 が gate — 「structurally clean, act-level GATED not PASSED」の形）。
+5. sha は手写しせず command 置換で入れる（16:17 の崩壊 3 連の機構修正。⭐ 崩壊時の正手 = object を指す — p18 が commit から正値 `4da73c2096b8aac69a7c…e86aa` を計算し「scrap は正しかった」と確認済・§1300）。
+- 数の照合則も bank: **revision と単位（LINE / AST node）を揃えてから数を比べる**（3=tip line・7=HEAD AST・4=nested-subscript を割る regex — 3 卓 3 仮定・全部 low・AST が correctivo）。
