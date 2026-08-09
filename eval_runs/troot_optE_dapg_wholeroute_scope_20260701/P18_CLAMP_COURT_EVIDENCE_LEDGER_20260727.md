@@ -44503,3 +44503,64 @@ row 48 の 2 hinge = ur15_cell.py     実測 cab_z 1 / cab 20
 ⭐ **p0 の理由が正しい**: 「**『ケーブル前提が開いている』は静かに範囲を得る種類の文**であり、係属中の全編集が Rs 待ちになったと読まれ得る。私のはそうでない。」⇒ ⭐ **範囲を得る文は、得る前に切っておく。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+
+## §1261 — ⭐⭐⭐ **#48 は「偽の文を差し替える」問題ではなかった — 前提は *自分が引く build については真* で、反例は *別の build*（pZ・p11 が独立に到達）** ＋ ⭐⭐⭐ **quarantine の *言明された原因* が 2 面で別（当卓が測って初めて pZ と p11 の対立が解けた）** ＋ ⛔ **(a)(c) は現在 所管者不在** ＋ ⛔ **stale pointer が 90 分で 3 面 8 本、うち 2 本は統治 spec の §0 内**
+
+**契機** = Rs 裁定「前提を変えて良い」（p6 受領 09:39）→ p6 `m-p6-106`/`107`/`108`・pZ `PZ-163`（09:50）・p11（09:50:54）・p4 `m-p4-187`。当卓 実測 09:47-09:56。⛔ **実行 0**。
+
+### (1) ⭐⭐⭐ **草案の *形* が変わった — pZ と p11 が独立に同じ所へ**
+```
+前提が自分で引く object   test_newton_clip_routing.py  add_revolute_cable :936-1022（87 行）
+                          関節 axis は 全体で 1 か所 = :1009 axis=wp.vec3(1,0,0)「local-X bend axis ⟂ cable → vertical sag plane」
+                          （他の axis hit は quaternion 演算 = z_axis/cross/seg_q・関節軸でない）  ← 当卓 独立確認
+いま建っている cell        ur15_cell.py :102 cab_y (0 1 0) / :103 cab_z (0 0 1) = hinge 2 本      ← 当卓 独立確認
+```
+⇒ ⭐⭐⭐ **矛盾は実在するが「spec が自分の記述対象について偽」ではない。**⇒ **前提が *覆っていない第 2 の build* が在り、それが「必要になるはず」と前提が言う DOF を持っている。**
+⇒ ⭐⭐⭐ **草案は「どの文がどの build を支配するか」を書かねばならない**（or 一方を substrate と名指す）。⛔ **偽の文の差し替えとは別物。**
+⚠ **pZ の scope 限定（当卓も同じ位置）**: **routing env が runtime にどちらの constructor を選ぶかは未確定** — `:1386-1391` が `add_revolute_cable` / `add_cable_rod` に分岐し、**後者は誰も読んでいない。**⇒ **草案はここを仮定しない。**
+⭐ **p11 も同一結論に独立到達**（control `add_joint_` 全種 = 2 で 1 と識別）⇒ ⭐ **「次の build で同じ衝突が再発する」= 支配範囲を書かない限り構造的。**
+
+### (2) ⭐⭐⭐ **本節の keeper — quarantine の「言明された原因」は 2 面で別。両卓とも正しい**
+pZ（09:50）と p11（09:50:54）が **4 分以内に反対の結論**。当卓が両面を測って解けた:
+```
+LEDGER :63 逐語   「AR reached 92.2%（Gate G3 PASS）but its **mechanism (spring-follow + kinematic hold)** is fidelity-QUARANTINED」
+spec  :31 逐語   「This is the same banked sim2real fidelity limitation that already **explains the AR-routing QUARANTINE**（§4 :62…）」
+出現数            LEDGER 7 ・ spec 2 ・ RL-Routing-Design 0（対照 cable=178 ⇒ file には届いている）
+```
+⇒ ⭐⭐⭐ **LEDGER は原因を *機構* に置き、spec は *1-DOF fidelity boundary* に置く。**⇒ **どちらも誤読していない — 別の文書を読んだ。**
+⇒ ⭐⭐ **帰結**: 前提を書き直すと **spec 側の言明原因は落ちる**が **LEDGER 側は落ちない** ⇒ **p11 の「文言問題に縮む」は LEDGER について真・pZ の「まだ真の原因が矛盾させられる」は spec について真。**⛔ **(c) は文ではなく *2 面の和解*。**
+⚠ ⛔ **そして §0 の 2 つの sub-entry（`:29` と `:31`）が *どちらも* 前提を「§4 `:62`」と引いており、`:62` は `TABLE_HEIGHT` の surface bullet。**⇒ **§0 がこの前提に依存していることを述べる 2 行が、2 行とも誤った行を指している。**
+
+### (3) ⛔ **(d) は「影響あるかも」でなく §0 内で荷重を持つ（pZ・当卓 逐語確認）**
+spec `:29` 逐語（§0 不変前提 5 = clip-retention pin の sub-entry）:
+> **Why it had to be decided**（the engineering half, already banked）: §4 `:62`（Rs DECISION B2, 2026-06-25）— the cable is a **1-DOF-per-joint planar bender with a VERTICAL bend plane**, so it represents sag but **not horizontal routing curvature**; **routing through the staggered clips is therefore KINEMATIC**（grasp-drag + this pin）. ⇒ **A pin-less RL env cannot represent the task.** This is the whole of the engineering justification,
+
+⇒ ⭐⭐⭐ **唯一の認可 kinematic 例外（pin）の *全ての* 工学的正当化がこの文。**⇒ **§4 だけを書き換えても変更は §0 の territory に着地する。**⛔ **§0 変更は L3・Rs 専権 ⇒ 草案は書けるが編集は不可**（当卓が hub で執行）。
+
+### (4) ⛔ **所管 — p11 が brief に基づいて分割受任し、(a)(c) が空いた**
+```
+p11 受任   (b) horizontal routing = KINEMATIC   （grasp-drag + 認可 pin = 駆動方法の記述・brief :5）
+           (d) pin 例外                          （brief :48 唯一の認可例外・§14.27 は p11 の standing）
+p11 辞退   (a) ケーブルの実 DOF                  （cell build の court）
+           (c) AR quarantine                     （LEDGER 上の fidelity 判定）
+```
+⚠ **p11 は p6 の提案理由を訂正**:「cell geometry / physics は p11 の court」は **brief と一致しない** — C-2 で触れたのは **mounting 幾何であってケーブルでない** ⇒ ⭐ **提案は brief でなく *隣接* から組まれていた。**
+⇒ ⛔ **(a)(c) は現時点で所管者不在。**p11 は指名しない・p6 は提案するが割当てない・当卓は routing であって割当てない ⇒ ⭐ **置き場所が無ければ Rs の court。当卓は surface するのみ。**
+✅ **p11 が統合文言を書かないのは正しい**（所管者が立つまで (b)(d) の 2 節に限定）。
+
+### (5) ⛔ **pointer 腐敗は 1 卓の癖でなく、この問いが触る *全ての面* に在る**
+```
+p6 の message      2 本（spec :67・cell :97-98）                          ← 当卓が捕捉
+row 48（banked）   4 本 stale ＋ 1 本 欠落（p6 が自ら +5 と訂正・4 driver 一様）＋ 第 5 file は行番号なし
+統治 spec §0       2 本（:29・:31 が「§4 :62」）                          ← pZ が 1 本・当卓が 2 本目
+```
+⇒ ⭐⭐⭐ **p6 の keeper**: **pointer が *揃って* 腐ったので、どれも単独では誤って見えなかった。**正しい citation の中で 1 本ずれれば見えるが、**4 本が同じ量ずれると *規約* に見える。**⇒ **捕らえたのは、実際にその行に着地して freejoint を見た者だけ。**
+⛔ **p6 の自己訂正の *中身* も同型**（+6 → +5）: **引用された第 1 行と実測の第 2 行を比べていた** ⇒ ⭐ **要約の数が、それが要約する測定と同じ息で作られ、出力の側に反証手段が無かった。**（当卓 §1248 と同一形。）
+⭐ **p11 の自己捕捉（5 卓目）**: cell 側の最初の対照が `type="hinge"` 全件（=2）＝ **測定と同じ集合＝「同一」の箱** — **自分がその箱を第 3 の形として名指した 40 分後。**
+
+### (6) ✅ **p4 — cap の閉じる事象を *landing* に束ねた（裁定の到着でなく）**
+dep-2 の response map を同一 turn で消費（`db210fea9e`）。⭐ **cap は Rs が RS71 に新文言を *landing* したとき解ける**（裁定が届いた時ではない）⇒ **当卓の hub 制約と一致。**⚠ **p4 は Rs へ送った緩い一文（「disposition だけで cap が解ける」）を自ら訂正。**
+✅ **p4 の増分**: 当卓は p6 の *message* を測ったが、p4 は **banked row 48 そのもの**を測った ⇒ **同じ法・もう 1 面**（届かない pointer が、毎 session 開始に配られる register head の中に在る）。
+
+**Banked — 時刻は本節 commit の author date が正。**
