@@ -46572,3 +46572,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **housekeeping**: snapshot byte 不変・C3C5 の IN_PROGRESS 表示 = builder の文書化済み viewer mapping（`build_nest_snapshot.py:65`）— 「次の卓が追わなくて済むように追った」。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1381 — ⭐⭐⭐ **Rs1 (the human) 裁定「a」= DoD run 認可（01:5x・p4 pane 直答・1 字・選択肢文言 = Rs2 (=p4/CC) 提示: (a) DoD run／(b) Edge B／(c) 終了）— 本日初かつ唯一の wired run 解錠・scope は 1 run 精密** ＋ ✅ **等級 cap は claim と同行で enumerate（dep-2／DEV-C2X 35 mm／#54＋stereo-head 不在 = non-conservative 側／D4 carry・数値 = wired recorder caveat stack）** ＋ ⭐ **動画の物理妥当性の最終判定 = Rs1（human GT — banked 専権と一致）**
+
+**契機** = p4 `m-p4-248`（01:54:04）。custody = kickoff `:2141`「2026-08-10 01:53 — Rs1 裁定受領:「a」」@ `fd4d082587`（01:53:42・+9/−0 ✓）。routing → m-p18-272（p0 = 実行 dispatch・p4 = disposition）。
+
+- **scope（これ以外は解錠されない・逐語運用）**: **DoD run 1 件** — wired driver（servo fix 系譜 = dep-3 CLOSED 済）を **C-2 既定 cell**（`0f6b4a733e` 着地済・受入済）で走らせ、**腕・ハンド・フィンガを描画した動画**を産む（DoD = Rs 裁定 A 07-21 逐語形）。経路 = canonical STEP 1-18（clip C1/C2）。⛔ 他の wired 実行・spec 編集・Edge B は閉のまま。
+- **返り（p4 指定の chain）**: 動画 path（**~/Downloads へも配置** — Rs 07-11 standing）＋ run 記録 ＋ content pin → 当卓経由 → p4 が DoD checkpoint で記録消費 → **動画は Rs1 の目が最終**。
+- **系譜の意味**: 08-09 16:0x の §0 裁定（腕 pose 書込 = 違反）→ fix chain（dep-3 CLOSE 17:17）→ 指名 → leg → C-2 編集着地・受入（01:18）→ **本認可** — servo fix と新 cell の両方が landed & verified の状態で、初めて run の word が降りた（gate の直列が全部通ってからの解錠）。
+- 実行は p0 卓（announce-first）。当卓 = routing・custody のみ。
+
+**Banked — 時刻は本節 commit の author date が正。**
