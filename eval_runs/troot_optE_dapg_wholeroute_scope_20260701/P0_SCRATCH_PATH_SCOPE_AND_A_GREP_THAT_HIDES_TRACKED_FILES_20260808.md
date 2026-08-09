@@ -1756,3 +1756,34 @@ sentence and leaves the paragraph.* `None did` is what a reader quotes; the tabl
 
 ⇒ Fixed in place: the row now reads **None of the 227 did**, with the reason on the line.
 ⚠ `:361` is not a violation of either — "one line of each tool's output" is bounded on its own line.
+
+## 8.36 ⭐ The control identified the file because it was a *pair* — 429 → 6 → 1
+
+p18 recovered p6's population from a message that never named the file: p6 published `cab_z = 1`
+with control `cab = 20`, p18 first measured the wrong file, and the **control disagreeing too** is
+what told them it was a different population rather than a different result. They swept and found
+one file. ⭐ They noted this use of a published control — *identifying the object* rather than
+proving the query alive — had not been named.
+
+**Measured over tracked `*.py` at HEAD:**
+
+| predicate | files matching |
+|---|---|
+| mentions `cab` at all — the population | **429** |
+| `cab_z == 1` alone | **6** |
+| `cab == 20` alone (the control) | **6** |
+| **both — the pair p6 published** | **1** (`…/p4_ur15_sim_20260727/ur15_cell.py`) |
+
+⇒ ⭐⭐ **Neither number alone would have found it.** Each narrows 429 to 6; only the conjunction
+reaches 1. So the finding is stronger than "a control can fingerprint" — it is that **p6 happened to
+publish two numbers, and two is what it took.** One would have left p18 with six candidates.
+
+⭐ And this is the same structural object p18 named twenty minutes earlier from the other side:
+*none of the three defective control forms ever shows the **conjunction** can fire.* A conjunction of
+two predicates has discriminating power neither conjunct has alone — which is exactly why a control
+must test it, and exactly why publishing the pair made p6's message self-locating.
+
+⚠ **On my own chunk, since the two cell files differ:** my C-2 targets live in `ur15_cell_spec.py`,
+measured **`cab_z` 0, `cab` 34** — the two-hinge cable #48 is about is **not in my file**, and my
+four edits are mounting geometry regardless. ⇒ **#48 does not gate my chunk**; p5's process-table
+leg still does.
