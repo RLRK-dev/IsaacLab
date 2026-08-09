@@ -46277,3 +46277,15 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - 本節自身は push 後 bank ゆえ次回 push に乗る（従前どおり）。session 内 push 通算 5 回（p4 卓 12:48・当卓 14:52・16:02・p4 卓 17:36・当卓 18:53）— すべて Rs1 の一言指示。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1354 — ⭐⭐ **Rs1 (the human)「すすめて」（18:5x・p4 卓直答）— p4 の読み「既存 gate の内側で進められる辺を加速・⛔ run 認可でも spec 編集認可でも gate bypass でもない」（すべて承認と同じ規律: 加速語に解錠を読み込まない）** ＋ ✅ **2 edge を routing（A = dep-1 critical path → p0・B = spec 着地前段の L3 5 体検証 → p11）** ＋ ⭐ **当卓実測: Edge A の名指し先 :291-295 は landed 済 fix の現場（rbound prefilter は不在）— 「announced prefilter」の残作業有無は p0 の言葉で確認する形で回付**
+
+**契機** = p4 `m-p4-214`（18:58）。custody = kickoff `:1991-1998` @ `f4820b1410`（18:58:03「Proceed accelerates the two live edges; it unlocks nothing」）— 当卓 collate 済。⛔ **実行 0**。routing → m-p18-257（p0/p11 operative・pZ/p6/p4 cc）。
+
+- **Edge A（→ p0・priority 回付）**: chain = fix → 表の指名 → pZ leg → 表 → p4 導出 → **4 編集 unlock**。認可は全区間で新規不要（instrument bundle が立っている）。⭐ **当卓実測（kinonly `:291-303` 現物）**: :291-294 = 飽和 failure を名指す comment・:299-300 = `dist >= cutoff` skip・absent = `(None,"-")` — **`a2762d2bb5` の fix が現場に在る**。rbound 型 prefilter（wired `arm_pair_min :1838` の形）は**不在**。⇒ p4 の「announced prefilter（次の指名表の前）」が (i) landed 済 fix を指す（→ 次 act = 指名）か (ii) 追加 rbound prefilter の announce を指す（→ 適用後に指名）かは **p0 の言葉が正** — 両分岐とも次 act は p0 のもの、と観測つきで回付。
+- **Edge B（→ p11・priority 回付）**: 統合 draft `35d7ef4d0d`（(a)(b)(c)(d) 全折込）→ **§0 前提変更 = L3 ⇒ §運用2 [VERIFY] 5 体検証**（convener = draft owner p11・CC1 形）→ 完了後 **Rs1 へ着地承認 1 回**の形で提示。04-Specs は着地まで read-only 不変・Rs1 の語なしに何も land しない。
+- **進められない辺（p4 列挙・催促しない）**: C3-C5（D1 未充足）／MEMORY.md pass（trigger 未達・早発 1 回 RETURN 済）／DoD run（4 編集後・Rs1 認可の領分）。
+- ⭐ p4 の自己記録も bank: 18:02 節の見出し時刻を date と同一 heredoc 内で書いた（第 4 発・値は偶然一致 —「幸運は手続きではない」）・本節から分離再徹底（18:57:23 を読んでから書いた）。
+- **法**: 加速語は priority を運び解錠を運ばない —「すべて承認」（対象 = 提示済 3 項のみ）と同じ読み規律の 2 例目。
+
+**Banked — 時刻は本節 commit の author date が正。**
