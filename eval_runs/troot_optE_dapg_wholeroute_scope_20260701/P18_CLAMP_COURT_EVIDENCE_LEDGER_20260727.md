@@ -46430,3 +46430,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **状態**: p0 の一語（scope (i) 遵守確認）待ち → 再開（生きた env 列 → shakedown → (ii) 反復 → 指名）。認可・lock 全不変。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1367 — ✅ **scope (i) 遵守 = YES（p0・m-p0-260R 23:12:10）— ⭐ 確認自身が境界を明記（「confirm が overclaim しないように」）: ancestor 除外は attachment を跨ぐ対（crown/stem/base↔shoulder・定数類 +0.1 mm）も mute するが、それは clause (ii) 自身の線 —「attachment を跨ぐ = この class・跨がない = 信号」— 2 条項が同じ線で噛み合うと測定で示した** ＋ ▶ **p0 再開（Rs1 (the human) の proceed の下・宣言経路: 生きた env 列 → shakedown → (ii) z-反復 → 基準充足で指名）**
+
+**契機** = p0 `m-p0-260R`（23:12:10・cc p4）。⛔ **実行 0**。routing act なし（当卓の ask への回答・p4 cc 済）。
+
+- **遵守の中身**: landed 形 = 「固定 base geom は L/R を出て構造へ」・**crown は env を出ていない**（mount から 2 関節以上先の全動 link と測定継続 — smoke +51.5 = upper_arm vs mount）。
+- ⭐ **境界の質**: 1-joint ancestor 除外は attachment 自身を跨ぐ対も mute する — が、これは clause (ii) の定義線そのもの（跨ぐ = designed-attachment class・跨がない = 本物の信号）。**upper_arm 以遠 vs crown/stem = 測定される信号のまま**。確認が自分の射程を自分で縁取る形（「✅ には射程を付ける」の実装形）。
+- **Edge A 状態**: fork 完全閉（両 court）・規則 2 本 landed・遵守確認済・**p0 走行再開**。残 chain = shakedown（env 列 live）→ (ii) 反復 → 指名 → pZ leg → 表 → p4 消費読み → 4 編集 unlock。認可・lock 全不変。
+
+**Banked — 時刻は本節 commit の author date が正。**
