@@ -1284,3 +1284,60 @@ desk: p4 RS-TECH-LEAD (w2:p4) / 記録 **2026-08-08 21:01:06 JST**（`date` 実�
 > ⭐ **採用トリガ 6 度目（2026-08-09 07:30・pZ の逆向き defect「結論を推論に委ねた verdict は verdict でない」）— 自分の 3 行形式で測った**: **母集団** = 本 file・rev は本 commit の親／**述語（期待被覆を行に載せる）** = 「本文冒頭に明示の決定語（裁定/答え/確定/判定/回答）を持つ節・**期待 ≥20**」／**肯定対照** = `^**実測` が別の数を返すこと（述語が死んでいない）。⇒ **結果は本節の直前の測定に印字**（数はそこにある・ここでは繰り返さない）。⭐ **結論を持つ節が期待を満たすなら、私の面は pZ の逆向き defect を免れている**が、⚠ **それは「各節の結論が正しい」ではなく「結論が *書かれている*」だけ**を意味する。⛔ **覆っていないもの**: 結論の *正しさ*・過去に送った message 本文・他卓の面。⇒ **本監査を「clean」と読まない**。
 
 > ⛔ **直前の監査の対照が誤っていた（2026-08-09 07:32・採用トリガ 7 度目・pZ の 5 段目を自分に当てた）**: 私が肯定対照に使った `^**実測`（11 件）は **私の述語とは別の pattern** で、⭐ **示したのは「file に届いている」ことだけ — 「決定語の regex が働くこと」は示していない**。⇒ **pZ が自分の control で見つけたのと同じ形**（**対照は、それが対照する当の述語を試さねばならない**）。⇒ **正しい対照を実行した**: 決定語を含むよう作った合成 2 行に対し、**同じ述語が 2 を返した** ⇒ **述語は働く** ⇒ **本文で得た 24 は死んだ query の 0 ではない**。⚠ **射程はそのまま**: 「結論が *書かれている*」だけで、**正しさ・過去 message・他卓の面は覆っていない**。
+
+---
+
+## 2026-08-09 09:37 — p5 レグに受入条件を書いていなかった（私の欠陥）＋ 工程表と C-2 の結合を実測
+
+⭐ 本節は Rs 「再開」（2026-08-09 09:30 JST）後の最初の実作業。⛔ **run は 1 つも起こしていない**（HOLD 不変・実行認可は Rs）。
+
+### (0) 私の欠陥 — gate を張った側が「合格の形」を書いていない
+
+- 私は `:80` で **「p0 発進条件 = p5 の工程表整合レグの返答（矛盾なし）」** と書いた。⇒ **critical path 上の gate は私が張った。**
+- ところが commission の本文は **話題だけ**である。逐語（p18 ledger `:40852`・bank `0594852630` = 2026-08-08 21:59:02）: 「**p5** = 工程表整合レグ ＋ spec §4 の依頼（…）」。⛔ **受入条件なし・期限なし・母集団なし。**
+- p18 自身が OPEN 表にそう書いていた（`:42212` 逐語「OPEN p0 は p5 の工程表整合レグ待ち（1.5 時間以上・**期限なし**）」）。
+- **経過 = 11h38m**（21:59:02 → 本節 09:37:21・両端とも `date`/`git log` 実測）。**この間 p5 の納品は 0 件**（母集団 = `eval_runs/troot_…_20260701/` ＋ `02-Workflow/`、述語 = `P5_*`/`*p5*`、窓 = 08-08 20:00 以降、`find -newermt` 実測 = **0 file**）。
+- ⇒ ⭐ **昨日 PNG 再配置で名指した欠陥と同型**: 「owner を書いても、**同じ行為の中で受入条件を書かなければ、誰も何も負っていない**」。今回は owner だけ在って条件が無い ⇒ **p5 には「終わった」と言える形が無い。** 待っていたのは私の書き落としである。
+
+### (1) 実測 A — 工程表が import する幾何は 9 個（§166 を引用でなく HEAD で再測）
+
+- 母集団 = `thread_isaac_lab/skills/step_table.py`。**255 行**（§166 が 07-27 に測った 255 と一致 ⇒ 構造は stale でない）。
+- import 面 = `:24 from task_config import (…)` ＋ `:32 from .scripted_skills import HOME_Z, PUSH_Z, REST_RISE_Z, ROUTING_RISE_Z`。
+- 9 名の HEAD 実在（期待 = 9/9、実測 = 9/9・出現数）: `CLIP_POSITIONS` 2 / `GRIP_HALF_SPAN` 2 / `REST_CLIP_X` 3 / `WIDE_LEFT_Y` 2 / `WIDE_RIGHT_Y` 2 / `HOME_Z` 2 / `PUSH_Z` 2 / `REST_RISE_Z` 3 / `ROUTING_RISE_Z` 2。
+- 出所 = p5 §166（`P5_UR15_CLIP_DETAIL_DESIGN_20260727.md` @ `c1173161e2` `:7477`、逐語「**表は幾何を 1 つも持っていません — 9 個すべて import です**」）。⚠ p5 handoff `:262` が「narrative を ground truth にするな」と書いているので **pin 版の blob を直読**した（working copy でない）。
+
+### (2) 実測 B — C-2 の 4 編集 × その 9 名 = 交わり ∅
+
+- 4 編集（p11 spec §1 `:19-22`）: ① `YOKE_SPREAD` 既定 0.22→**0.28** ② tilt 既定 45.0→**20.0** ③ `CROWN_R` 既定則→**literal 0.110** ④ 計器 label 2 文字列（`sweep_mounting.py:169-170`・挙動不変）。**`task_config.py` 不触**（同 §1）。
+- 母集団 = 編集対象 2 file。**陽性対照**（grep が当該 file で当たることの証明）= `YOKE_SPREAD`: `ur15_cell_spec.py` **4** / `sweep_mounting.py` **3**（両方 >0 ⇒ 述語は届く）。
+- 9 名の出現（期待 = 面が別なら 0、実測）: `ur15_cell_spec.py` = **1 名のみ HIT**（`GRIP_HALF_SPAN` 3 回）／`sweep_mounting.py` = **0/9**。
+- その 1 名も **読むだけ**: `:60 GRIP_HALF_SPAN = _tc.GRIP_HALF_SPAN` / `:645 ARM_PAIR_CUTOFF = 4.0 * GRIP_HALF_SPAN` / `:1223` は print。**`_tc.X = …`（task_config への書込）= 両 file とも 0 件**（実測）。
+- ⇒ ⭐ **4 編集が変える 9 名は 0 個。** 共有 SSOT 経由でも届かない（書く側が居ない）。
+
+### (3) 実測 C — そもそも同じ code path に乗っていない
+
+- live driver `ur15_steps_wired.py` の `step_table` 出現 = **0**。**陽性対照** `ur15_cell_spec` = **3**（⇒ 述語は同 file で当たる。0 は届かなかったのでなく無い）。
+- `step_table` を読む tracked `.py` = **9 file**（`git grep -ln` 実測）: `orchestrator/routing_orchestrator.py` / `scripts/ar_phase4_3_h1_analysis.py` / `scripts/cascade_c_a3_latency_smoke.py` / `scripts/cascade_c_a3_merge.py` / `scripts/cluster_g_audit/cluster_g_floor_audit.py` / `scripts/test_step_table_dryrun.py` / `skills/__init__.py` / `skills/step_table.py` / `wmso/d1/identity.py`。⛔ **UR15 driver はこの 9 に入っていない。**
+- ⇒ 2 本の経路: **C-2 → `ur15_cell_spec.py` → `ur15_steps_wired.py`** ／ **工程表 → `step_table.py` → orchestrator・WMSO・test**。両者が触れ合うのは `task_config.py` だけで、**どちらもそこへ書かない**。
+
+### (4) この 3 つが決めること／決めないこと
+
+- ✅ **決める**: **本レグは code 結合では落ちない。** import 無し・共有 writer 無し・共有 consumer 無し（(1)(2)(3) 実測）。
+- ⛔ **決めない（ここが本レグの中身）**: ⭐ **到達可能性は import ではない。** tilt 45°→20° と spread 0.22→0.28 は**腕の居場所を動かす**ので、9 名が 1 byte も変わらないまま **前提が満たせなくなる STEP は在り得る**。これは幾何・設計の問い ＝ **p5 の court**。⛔ 私は答えない（自分の chair から他卓のレグを裁定しない）。
+
+### (5) 提案（⛔ 解除ではない）
+
+- 提案 = gate の射程を **「p0 の 4 編集を止める」から「受入 claim を止める」へ**改める。根拠 = (2)(3) ＋ 私自身の `:349` 逐語「**HOLD は run の権限についての語であって、実装を止める語ではない**」。
+- ⛔ **私はこの提案を自分で実行しない。** `:80` の gate は **p5 の返答または Rs の裁定まで、書かれたまま**。⭐ 昨日私は「自分が張った hold を、その hold が守ろうとしていた種類の伝聞で解除した」。同じことを、今度は自分の測定を根拠にして繰り返さない。**測定が自分に都合が良い時ほど、解除は他人の署名で行う。**
+
+### (6) commission 再発行 — 欠けていた 2 つを書く
+
+| 欄 | 内容 |
+|---|---|
+| owner | **p5**（SKILL 詳細設計） |
+| 受入条件（**成果の形**で書く・⛔ 実装名・手法名で書かない） | 「**STEP 1–18 のうち、mounting が C-2（spread 0.280 / tilt 20° / crown 0.110）になったとき前提が満たせなくなる STEP が在るか無いか**が、**STEP 番号つき**で述べられている」。合格 = 「無い」 or 「在る＋番号」。⛔ 「整合を確認した」だけは不合格（番号空間が閉じない） |
+| 母集団 | **STEP 1–18**（live driver が実装する範囲 = clip C1/C2 = 5 個中 2 個）。⛔ 19–43 は本 chunk 外 |
+| 添付（レグを導出でなく確認/反証にするため） | 本節 (1)(2)(3)。⇒ **code 面は測ってある**。p5 が判断するのは (4) の「到達可能性」だけでよい |
+| 期限 | **2026-08-09 18:00 JST**。未達なら p18 経由で再督促 ＋ Rs へ escalate。⛔ **期限切れを gate を開ける理由にしない**（期限は督促の trigger であって解除条件ではない） |
+
+⚠ **本節が動かさないもの**: C-2 の 4 編集（`ur15_cell_spec.py` @ `2fba2dfd67` / `sweep_mounting.py` @ `2bb1aad4e7`・**未着手のまま**）／HOLD ／ run と DoD 動画は Rs の権限 ／ DoD の evidence-grade cap（#48/#18 open の間 無印 PASS なし）／ §6-6 fence。
