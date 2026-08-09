@@ -30,16 +30,32 @@ _AUDITED_EVENTS = ("import", "exec", "compile", "subprocess.Popen", "os.system")
 
 
 def _audit(event: str, args) -> None:
+    """Record the event so it IDENTIFIES ITSELF.
+
+    ⛔ The first version stored only args[0] for a spawn -- the executable -- so the record said
+    WHAT ran and never WHO ran it, and I filled the gap by attributing the two spawns to a version
+    read from memory.  That attribution was false (the version read uses importlib.metadata and
+    spawns nothing) and a benign-sounding attribution RETIRES an unexplained subprocess, which is
+    the exact failure this hook exists to catch.  Every record below now carries its own source:
+    full argv for a spawn, and the caller's frame for exec/compile, so a count is never all a
+    reader gets.
+    """
     if event == "import":
         _AUDIT["import"].append(str(args[0]))
-    elif event == "exec":
-        _AUDIT["exec"].append(str(args)[:120])
+        return
+    try:
+        f = sys._getframe(1)
+        where = f"{f.f_code.co_filename.split('/')[-1]}:{f.f_lineno}"
+    except Exception:
+        where = "<frame unavailable>"
+    if event == "exec":
+        _AUDIT["exec"].append(where)
     elif event == "compile":
-        _AUDIT["compile"].append(str(args[1])[:120])
+        _AUDIT["compile"].append(where)
     elif event == "subprocess.Popen":
-        _AUDIT["Popen"].append(str(args[0])[:160])
+        _AUDIT["Popen"].append(f"argv={str(args[1])[:200]} from {where}")
     elif event == "os.system":
-        _AUDIT["system"].append(str(args[0])[:160])
+        _AUDIT["system"].append(f"{str(args[0])[:160]} from {where}")
 
 
 sys.addaudithook(_audit)
@@ -171,7 +187,7 @@ def build_cell() -> tuple[mujoco.MjModel, dict]:
   <worldbody>
     <geom name="floor" type="plane" size="6 6 0.1" pos="0 0 0" contype="0" conaffinity="0"/>
     <body name="column" pos="0 0 0">
-      <geom name="stem" type="cylinder" size="0.102 {spec.SHOULDER_HEIGHT / 2:.4f}"
+      <geom name="stem" type="cylinder" size="{float(spec.COLUMN_R):.4f} {spec.SHOULDER_HEIGHT / 2:.4f}"
             pos="0 0 {spec.SHOULDER_HEIGHT / 2:.4f}"/>
     </body>
     <body name="table" pos="0 {spec.TABLE_Y} 0">
@@ -351,8 +367,18 @@ def main() -> int:
             # ⛔ Keep THIS restart's own converged pose.  Appending the running best gave KEEP
             # copies of one pose, so the pair scoring below had nothing to choose between --
             # a diversity of zero dressed as a search.
+            # ⭐ CLEARANCE AT GENERATION, not only at ranking.  The driver rejects candidates below
+            # ARM_CLEARANCE while building its pool (tip :1496, over 20 candidates); mine stopped at
+            # the first KEEP that merely REACHED.  Ranking 36 combinations cannot recover what the
+            # pool never contained -- that is the selection difference, confirmed by reading this
+            # loop rather than by another pattern.
             if e < TOL:
-                cands.append(q.copy())
+                for _k2, _a2 in enumerate(qadr[t]):
+                    d.qpos[_a2] = q[_k2]
+                mujoco.mj_kinematics(m, d)
+                _gap, _ = closest(m, d, grp[t], grp["env"])
+                if _gap > float(spec.ARM_CLEARANCE):
+                    cands.append(q.copy())
                 if len(cands) >= KEEP:
                     break
         return best_q, best_e, used, cands
@@ -435,8 +461,15 @@ def main() -> int:
     print(f"[budget] restarts {RESTARTS} x iters {ITERS}, seed {SEED}, tol {TOL * 1000:.1f} mm; "
           f"along-path samples 19 interior, endpoints excluded; KEEP={KEEP} poses/arm scored pairwise")
     print(f"[audit] mj_step calls: {_MJ_STEP_CALLS}")
+    import collections as _c
     for k, v in _AUDIT.items():
-        print(f"[audit] {k}: {len(v)}" + (f"  e.g. {v[:3]}" if v and k != "import" else ""))
+        print(f"[audit] {k}: {len(v)}")
+        if v and k == "Popen":
+            for one in v:
+                print(f"[audit]   SPAWN {one}")
+        elif v and k in ("exec", "compile"):
+            for src, n in _c.Counter(v).most_common(4):
+                print(f"[audit]   {n:>4} from {src}")
     print(f"[audit] sys.modules at exit: {len(sys.modules)} (published because the hook cannot see "
           f"what preceded its installation)")
     fam = [n for n in sorted(sys.modules) if n in ("ur15_steps_wired", "ur15_route", "ur15_steps",
