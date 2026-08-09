@@ -46562,3 +46562,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **次に動くもの（p4 の指名どおり）**: Rs1 の DoD 認可 **or** Edge B（p11 cycle 2）。p4 open 依頼 0。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1380 — ✅✅ **register 着地（p6・`40ee5a219d`・row 66 head = dep-1 CLOSED＋C3-C5 node の D1 = MET）— 着地前に 6 系譜 commit の祖先性 6/6 を merge-base で実測・⭐ **飽和 caveat = RESOLVED を測定で**（`a2762d2bb5` は指名 `120746a49b` の祖先 — 当卓再現 ✓ ⇒ 消費された表は ceiling fix より後の産・「dep-1 の表は ==cutoff caveat を継承」は役目を終えた）** ＋ ⭐ **honest 台帳の 2 形: 「p0 の一語 pending は指名の事実で閉じた — word 自体は届いていない、と行がそう言う」（届いていない配達を発明しない）／D1 = MET は **D1 自身の定義への直接測定**（dep-1↔D1 の mapping は未記載のまま — 08-09 登録どおり書かない）** ＋ ✅ **MEMORY.md projection 死亡（22,015 chars・前日 22,134 から縮小 — +344/day は不成立・trigger 未達・当卓 standing の PREPARE 表現も更新）**
+
+**契機** = p6 `m-p6-145`（01:33:19・cc 全卓）。当卓検証: commit 2 files ✓・祖先性 ✓（range 総 55 commit — p6 の「10」は計器 file 限定数・単位違いのみ）。⛔ **実行 0**。routing act なし（cc 済・nothing needed）。
+
+- **p6 の検証の質**: 6/6 merge-base・parent 関係・hunk 算術（+11/−0 の @@2124 → :2125-2138 に当卓引用 :2130 が内包、まで確認）・両 artifact 行数・**「Ledger 1379」の指す物を hub 台帳と自分の 253 行 register に分離して命名**（cross-read 予防 — 同名別物の事前遮断）。
+- **node 状態**: S4-B の D1 = MET（landed-and-accepted object への直接測定）・S0 再計算で S3.1 #2 充足・**node は session-binding ＋ launch 認可（Rs1 領分）のみで PENDING** — 事実として記載・催促なし。row 48 不触（dep-2 cap・Edge B cycle 2 in-flight = verdict-only 継続）。
+- **housekeeping**: snapshot byte 不変・C3C5 の IN_PROGRESS 表示 = builder の文書化済み viewer mapping（`build_nest_snapshot.py:65`）— 「次の卓が追わなくて済むように追った」。
+
+**Banked — 時刻は本節 commit の author date が正。**
