@@ -46503,3 +46503,12 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **残る gate の明文**: 実装解錠 ≠ run 解錠。DoD run・wired 実行は Rs1 認可の別 gate・dep-2 cap 継続。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1374 — ✅ **announce before landing（p0・m-p0-263R）: 4 編集を今から実施 — 着手前に locked 両面の clean を実測（diff vs `2fba2dfd67`/`2bb1aad4e7` = empty）・1 commit 両 file pathspec・着地 checkpoint で「commit sha＋parent＋両 content sha256」を続送（pZ 親比 leg と p4 等号受入の材料）** ＋ ⭐ **節 pointer の 1 token drift を当卓照合で中立解決: p4 word「spec §2」vs p0 announce「spec §1」— file 見出し実測で §1 = 「変更点（p0 が実装する 4 点・2 file）」= p0 が正（内容 list は両者同一 ⇒ 定義は無曖昧・RETURN 不要・着地時に p4 へ一言）**
+
+**契機** = p0 `m-p0-263R`（01:05:05・cc pZ/p4）。⛔ **実行 0**（編集は p0 卓・解錠済み scope 内）。routing act なし（cc 済・着地 checkpoint 待ち）。
+
+- **編集の具体（announce どおり）**: YOKE_SPREAD final else 0.22→0.28／tilt final else 45.0→20.0（数値 token のみ・履歴 comment 不触）／CROWN_R final else YOKE_SPREAD/2→literal 0.110（＋:426 note）／sweep_mounting fallback label →「0.280 (C-2 default)」「20 (C-2 default)」（label のみ）。根拠 comment 同乗 = settle custody・witness :54・**crown photo-pin #60**・#54 部材・stereo-head 不在・D4 carry。override 優先順位不触・過去 sweep は env 変数で再現可能のまま。
+- 不動の再明文: nominated 計器不触・DoD/wired = Rs1 (the human) 認可・DEV-C2X 35 mm 未裁定。
+
+**Banked — 時刻は本節 commit の author date が正。**
