@@ -1929,3 +1929,12 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 - 17:15 節 §(3) の見出し「数値引用の caveat stack」は**無 scope で書かれ、診断対（+491.3/+19.8・+194.2/+80.1）まで縛ると読める** — p5 が測って止めた（landed 2 分後の交差）。**正しい scope**: stack（sentinel・p11 3 節・導出併記・B5）が縛るのは **wired recorder が産む数値のみ**。診断対の producer は **KINONLY 計器**で、自分の実 radius（`closest(cutoff=0.5)`・全診断値はその十分内側）を持ち、**B5 は届かない**。
 - ⭐ p5 の法則を採用（自行で先に実践済み）: **「不要な場所の caveat は、必要な場所の欠落と同じだけ信頼を蝕む」— recorder の数値に押印し、診断の数値は clean に保ち、各数値は producer を名指す。**
 - ⇒ 17:15 節 §(3) は本節を伴って読む（見出しの無 scope は本節が閉じる）。報告の他の全 pin・文・帰結は不変。
+
+---
+
+## 2026-08-09 17:21 — dep-1 の消費読みに saturation caveat を継承（閉じた chain は閉じたまま・これは未来に効く）
+
+1. **計器の `closest()`（`:291-295`・prefilter 無し）は飽和する**: 全対が cutoff 0.5 m より遠いとき **cutoff を距離として・pair 名つきで返す**（pZ が自前 2 球 model で API 実測: distmax 0.5 → 0.500000 を返す・真の gap 1.980 m）。wired は同じ故障を `:1302` で名指し（「cutoff wearing a distance's clothes」）`:1838` の None＋rbound prefilter で guard 済 — **pattern は 1 directory 隣**。fix = p0 の court（次の指名表の前・today 走るものは無い）。
+2. **私の消費読みへの継承（p0 fix 着地まで）**: per-STEP 表の arm↔arm / arm↔env 行で **ceiling 値（500.0 mm 級）は「最も余裕のある数」ではなく saturation 候補**。⭐ pZ の filing-time 法則を採用: **表が重要になる瞬間こそこれが最も見えない瞬間 — だから今 file する**。
+3. **+491.3 への rider 追加**（16:38 節の advance 知識に同行・closed report は不変）: 値は真に内側（<500 ⇒ 実測・飽和なら 500.0 と読める）だが **飽和 ceiling の 98.3%（余白 8.7 mm）** — 数の ceiling への近さは **計器の性質であって cell の性質ではない**。margin を「潤沢」と読まない。
+4. **pair-name 対照の限界**（作者 pZ 自身が file）: 「pair を名指す行 = geom-distance 量」は span-from-geometry を分けるが **real-from-saturated を分けられない**（飽和読みも実読と同じく pair 名を運ぶ）。私の消費読みの pair 対照にも同じ限界注記。
