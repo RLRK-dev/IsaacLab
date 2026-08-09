@@ -2381,15 +2381,26 @@ print(f"[steps] attitude menu: {len(_nz)} of {len(_mL)} entries have a non-zero 
       f"the ones the sign can be seen on; on the other {len(_mL)-len(_nz)} it is invisible either "
       f"way, which is why a single trace line could not settle this")
 
-# Rs: start from home.  The cell ships one, so the arms begin in the pose its own drawings show
-# instead of at the zero configuration, which for this mounting is arms crossed.
+# Rs 2026-08-09: 「腕を姿勢へ書き込むことは不可 すべてコントローラの司令で実現できるはず。」
+# The arms reach home by the PD's own motion.  Nothing writes a pose: the servo is given the target
+# and the sim is stepped until it arrives, judged by the SETTLE_S / SETTLE_TOL this file already
+# uses.  The zero configuration is a valid state to start from at this mounting -- measured on the
+# reassembled cell with mj_forward only: arm<->arm +491.3 mm, arm<->table +19.8 mm, both clear --
+# so the old comment's reason ("zero is arms crossed") does not hold and no pose needs writing.
 for _t4 in SIDES:
-    for _k4, _a4 in enumerate(QADR[_t4]):
-        d.qpos[_a4] = HOME_POSE[_k4]
     for _k4, _i4 in enumerate(AIDX[_t4]):
         d.ctrl[_i4] = HOME_POSE[_k4]
 mujoco.mj_forward(m, d)
-print(f"[steps] start pose = the cell's home, both arms: {np.round(HOME_POSE, 4)}")
+for _s4 in range(int(SETTLE_S / m.opt.timestep)):
+    mujoco.mj_step(m, d)
+    if max(abs(d.qpos[_a5] - HOME_POSE[_k5])
+           for _t5 in SIDES for _k5, _a5 in enumerate(QADR[_t5])) < SETTLE_TOL:
+        break
+print(f"[steps] start pose = the cell's home, both arms, reached by servo in "
+      f"{(_s4 + 1) * m.opt.timestep:.2f}s: {np.round(HOME_POSE, 4)}")
+# ⭐ Read AFTER the settle.  START must be the pose the arms REALIZED, never the one commanded --
+# every IK seed below inherits it, so a commanded value here would seed the solves with a pose the
+# arms were never in.
 START = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
 # ⭐ p5 -303 via p18 20260803-1306: round 0 seeds `near` from HOME, and the L-vs-FINAL-R solve
 # below seeds it from the post-round-2 pose.  Comparing those two counts therefore varies TWO
