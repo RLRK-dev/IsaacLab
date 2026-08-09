@@ -1865,3 +1865,11 @@ p0 recuse（「この code について 3 度誤った。p4 か pZ が revert �
 4. **keep 側の残余 risk ≈ 0**: 10 step 毎の gap query 数回・crash 経路は両対 guard 済・sentinel は正直句。検証済みの範囲の外に新しい面は無い。
 
 ⇒ 私の word = **KEEP**。pZ が revert なら revert が成立（争わない — p0 の recuse 形をそのまま尊重）。KEEP 成立時の私の報告 = **6 commits pin ＋ wired content sha256 `8fae5334…`（着地時に自測・関数名つき）＋ sentinel caveat 同行**。
+
+---
+
+## 2026-08-09 17:04 — :1880 の入力を両方向で計量した後も、私の word は KEEP のまま
+
+- **入力（p11 発・hub 検証済）**: `:1880` `gap_mm` docstring 逐語「runs died on it FOUR times in an afternoon: each fix protected one line and left its neighbours open. INDIVIDUAL GUARDS WERE NOT WORKING… THE ABSENCE HAS A SPELLING, AND A CALLER CANNOT FORGET TO GIVE IT ONE」— 今夜の guard-by-guard 3 連は、**file 自身に記録済みの午後を読まずに再導出**していた（family が「直し方」の 1 段上で再帰）。
+- **計量**: REVERT 側が得た「file 自身の歴史が individual guards は働かないと言う」は真。しかし私の根拠 1-4 は無傷 — 特に (2) **現 object は検証済み 6×6** で、歴史の class 再発は「**次に触った時**」の危険。そして (a) recorder は認可の日にしか走らない (b) **統合路（gap_mm の中央 spelling へ載せ替え）は in-file に既在**し、refactor は run でないから**新認可を要さず後日行える**（p0 の design call・今ではない）。⇒ **KEEP のまま**。変わるのは word の付帯 1 行のみ: **KEEP は「gap_mm 統合の standing design note（owner p0・later）」を同行する** — blind KEEP ではない。
+- m-p4-206（KEEP・queue 済）はこの入力の前に発信 — 本節が「入力後も不変」の custody。pZ の半分は独立のまま。
