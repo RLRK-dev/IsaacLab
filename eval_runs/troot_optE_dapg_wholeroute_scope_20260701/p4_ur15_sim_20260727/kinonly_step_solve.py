@@ -324,11 +324,46 @@ def closest(m, d, A: list[int], B: list[int], cutoff: float = 0.5) -> tuple[floa
     for a in A:
         for b in B:
             dist = mujoco.mj_geomDistance(m, d, a, b, cutoff, None)
+            if dist == 0.0:
+                dist = _requery_exact_zero(m, d, a, b, cutoff)
             if dist >= cutoff:
                 continue
             if best is None or dist < best:
                 best, who = dist, f"{nm(a)} <-> {nm(b)}"
     return best, who
+
+
+_ZERO_REQUERIES = [0, 0]   # [re-queried, stayed at 0.0 after jitter]
+
+
+def _requery_exact_zero(m, d, a: int, b: int, cutoff: float) -> float:
+    """Re-measure a reading of EXACTLY 0.0 at a jittered pose.
+
+    ⛔ MEASURED FAILURE (probe _gen/probe_path_zero.py, this cell, mujoco 3.10.0): a mesh pair
+    61.590 mm apart returned EXACTLY 0.0 at every cutoff when the pose was perturbed by ONE ULP
+    (max qpos delta 8.9e-16 rad, geom_xpos delta < 1e-12), and returned +61.590 again at the
+    original bits -- deterministic and reversible, so 0.0 there is a narrowphase failure
+    sentinel, not a distance.  Shakedowns 4-6 printed that sentinel as "+0.0" clearance in 23 of
+    25 rows.  A real graze survives a 1e-12 rad jitter unchanged; the sentinel does not -- so
+    the jittered re-reading is the honest measurement in both cases.  If the re-reading is 0.0
+    again at both epsilons the 0.0 is kept: for a clearance instrument the touching reading is
+    the conservative direction.  Every qpos entry here is a hinge or slide (no quaternions), so
+    a scalar jitter is a pose perturbation, not a corruption.
+    """
+    _ZERO_REQUERIES[0] += 1
+    q0 = d.qpos.copy()
+    try:
+        for eps in (1e-12, 1e-11):
+            d.qpos[:] = q0 + eps
+            mujoco.mj_kinematics(m, d)
+            r = float(mujoco.mj_geomDistance(m, d, a, b, cutoff, None))
+            if r != 0.0:
+                return r
+        _ZERO_REQUERIES[1] += 1
+        return 0.0
+    finally:
+        d.qpos[:] = q0
+        mujoco.mj_kinematics(m, d)
 
 
 def gap_say(v: float | None, who: str, cutoff: float = 0.5) -> str:
@@ -751,6 +786,8 @@ def main() -> int:
     }, indent=1))
     print(f"[bank] winner joint vectors -> {sol} ({len(bank)} row-instances)")
     print(f"[audit] mj_step calls: {_MJ_STEP_CALLS}")
+    print(f"[audit] exact-zero distance readings re-queried at jittered pose: {_ZERO_REQUERIES[0]} "
+          f"(stayed 0.0 -- treated as real contact: {_ZERO_REQUERIES[1]})")
     import collections as _c
     for k, v in _AUDIT.items():
         print(f"[audit] {k}: {len(v)}")
