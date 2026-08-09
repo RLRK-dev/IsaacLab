@@ -1692,3 +1692,12 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 **受領（consumer として頭に置く 2 件）**: p11 の自己申告 — 受入 #6「task 幾何不変 ✅」は**この発散に対し非判別**（不変条件は定数が誤っていても通る）⇒「clip 位置が正しい」とは決して読まない／D-4 は初回発火で稼いだ（audit の期待事象・液性対照とも設計どおり機能）。
 
 不変: dep-2 cap／dep-3 open／7 site 不触／mounting C-2 の 4 編集未着手／run 認可 = 計器 bundle 1 件（p0 の卓で iteration 中）。
+
+---
+
+## 2026-08-09 11:14 — 私の echo の第 3 修理（Popen 帰属は死んだ）＋ DEV-C2X → D-8 ＋ 35/30.69 の精密化
+
+1. **⛔ Popen 帰属の echo を修理**（11:08 節 item ①根拠 2 と m-p4-198 に在る）: 「`spec.stack_line()` が shell を呼んだ」は **死んだ帰属** — pZ 実測: stack_line() は importlib.metadata のみ・hook 下で Popen=0（対照 /bin/true=1）／p18 blob 検索: instrument 内の subprocess 一致は audit 機構自身のみ・呼出し 0。**正直な状態 = 「2 spawn・invoker 未特定」**（`:40` が args[0] を保存 ⇒ 実行体は見え、呼出し元は見えなかった）。⭐ **生き残るもの**: catch 自体（2 spawn は実在し捕まった）と「audit は run でしか出ない情報を出す」— **死んだのは帰属だけ**。採用する法則（pZ）: **良性に聞こえる帰属は、未説明の subprocess を退役させる — (4) が捕るべき故障そのもの**。修正 = args[1]（full argv）保存で**事象が自己同定**する（exec 742 / compile 341 も同形 — source 無き count）。⇒ 私の echo 修理は本節が annotation（11:08 節は書き換えない・cite-by-heading の同 file 内で本節が supersede）。
+2. **DEV-C2X → D-8**: p5 が登録（`d8c9356fbf`・新 ID・⛔ D-5 配下でない — 実質基準「D-5 = doc↔json 面／D-8 = design↔cell 面・隣接 link であって同一 link でない・D-5 を解いても cell 定数は決まらない」）。⭐ **register 所見が keeper**: 表の列は doc|json 面しか持たず、**cell 面の逸脱は register の形の上で登録不能だった** — 見落としでなく**面の形**（「面が何を運ぶかが、読まれるかを決める」の register 版）。⇒ 私の 7 読の tag 参照は **D-8** に読み替える。残 = p6 の #46 containment。
+3. **35 と 30.69 の精密化**（p11 の chord 照合が検証済み: 直交成分 50.002/49.999・**30.69 ≠ 35**）: 私の 11:01「chord 差の駆動項 = 35 mm」は**入力側の言明として**生きる（動いた入力は across 間隔 75→110 の 1 個だけ・along は両側 ≈50）が、⛔ **chord の差そのものは 30.69 mm であって 35 ではない**（chord は線形に引けない）。読み手が「chord 差 = 35」と取らないよう、ここに数を並べて封じる: across Δ=+35.0 → chord 90.14→120.83（Δ=+30.69）。
+4. 計器の現況（consumer として）: 第 2 iteration で 2 欠陥修理・出力で検証（pinch-site tool point・候補多様性 — ⭐「多様性 0 が探索の装いをしていた」）。**表は依然 無し・正しい理由で**（R_forearm が全 18 STEP×両候補で柱内 80-130 mm・home は +80.1 clear ⇒ mounting C-2 の事実より file の腕取付方法の性質である蓋然性 — ⛔ p0 は pattern から機構を名指さない。次報 = 表 か 名指された機構）。私の 7 読は武装のまま・revision 未指名・pZ leg 保持。
