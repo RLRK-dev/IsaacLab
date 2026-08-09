@@ -195,3 +195,28 @@
 
 ⚠ **限界**: 私が読んだのは **選択段が在ること**まで。⛔ **その選択段が 43 step すべてで効いているか・どの step で候補を落としたか**は読んでいない（trace は他卓が引いた `T25_RUN_TRACE_20260728.txt` に在るが、私は引用せず自分で走らせもしていない）。
 ⚠ **等級**: 契機は他卓の separation（誘発）。それが **(b) の Practice 文を不完全にしている**という接続は私。
+
+## 9. 追記 2026-08-09 17:5x — **(c) 由来の 1 行 citation 修理を草案へ折り込む**（設計文を書かない・spec は未編集）
+
+**依頼** = 「spec `:31` の citation を LEDGER の mechanism 行へ**内容で**指し直す 1 行を、(b)(d) 統合草案へ折り込む」。⛔ **設計文を足さない・fidelity の主張をしない・新しい Rs 決定を作らない・04-Specs は着地承認まで read-only**。
+
+### 9-1 入力を自分で読んだ（relay していない）
+| # | 実測 |
+|---|---|
+| spec `:31` 現行 | 「…that already explains the AR-routing QUARANTINE (**§4 `:62`**, B1 substrate-upgrade DECLINED)」 ⇒ ⛔ **`:62` は TABLE_HEIGHT の項目**（既測）・前提文は `:69` ⇒ **stale pointer** |
+| LEDGER の cause 行 | `:63` に「AR reached 92.2% (Gate G3 PASS) but **its mechanism (spring-follow + kinematic hold)** is **fidelity-QUARANTINED**」 |
+| **内容 pin の一意性** | `mechanism (spring-follow + kinematic hold)` の出現 = **1** ⇒ ⭐ **内容で指せば一意**（行番号は不要） |
+| 順序（自分で確認） | 導入 commit `e05efab04a` **2026-07-02 07:14:23**（LEDGER 115/0）で **その blob の `:42` に当該 clause が在る**／spec 側の gloss `4de2c9fd42` **2026-07-15 02:09:46** ⇒ **13 日後**。⚠ **git 以前の vault 履歴は未探索**（相対順序のみ主張） |
+
+### 9-2 ✅ 修理案（1 行・spec `:31` の括弧内のみを置換）
+**現行**: `(§4 `:62`, B1 substrate-upgrade DECLINED)`
+**置換案**:
+> (decision-of-record: `07-Design/00-DESIGN-STATUS-LEDGER.md`, the `RL-Routing-Design.md` **MIXED** row — the sentence **“its mechanism (spring-follow + kinematic hold) is fidelity-QUARANTINED”**; B1 substrate-upgrade DECLINED)
+
+⭐ **この形が満たすもの**: ①**内容で指す**（行番号は `:42`→`:63` と動いたので pin にしない）②**どの file の中か**を曖昧にしない（旧「(LEDGER `RL-Routing-Design.md` MIXED)」は「その file の中」と読めたが、実体は **LEDGER にある同名の行**。同 file 内に `quarantine` は **0** 件＝既測）③**記録された理由**とだけ述べる。
+⛔ **この修理が主張しないこと**: 隔離の**物理的な理由**（誰も主張していない）／隔離の解除（**触らない**）／どちらの理由が正しいか。⇒ **「記録上の cause はここに在る」までで止める**。
+
+### 9-3 ⚠ 同型がもう 1 か所ある（黙って 2 つ直さない）
+spec `:69`（前提文の中）にも「EXPLAINS the AR routing fidelity-QUARANTINE (LEDGER `RL-Routing-Design.md` MIXED)」が在り、**同じ複合 pointer の形**。⇒ ⚠ **そこは本草案 §5-4 / §8 が書き直す対象の文の中**なので、**(b) の置換文の中で同じ内容 pin 形を使う**（別々に 2 回直さない）。⛔ **依頼は `:31` の 1 行**なので、`:69` 側は **(b) の文言に内包**として扱い、勝手に別の修理を足さない。
+
+⚠ **等級**: 依頼は他卓経由（誘発）。⛔ **内容 pin の一意性（出現 1）・行番号が `:42`→`:63` と動いた事実・`:62` が TABLE_HEIGHT である事実**は、私が読んで確かめた。⇒ **修理は草案であって適用ではない**。
