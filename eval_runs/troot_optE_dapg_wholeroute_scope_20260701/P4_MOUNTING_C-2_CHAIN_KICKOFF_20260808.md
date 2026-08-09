@@ -1921,3 +1921,11 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 
 - **dep-3: RULED（違反）→ FIX LANDED & ACCEPTED = CLOSED**。breach stop は**通常規則へ復帰** — wired を走らせる一切（**DoD 動画含む**）は従前どおり **Rs の run 認可**が要る。**本受入だけでは何も走らない。**
 - 不変: dep-2 cap（spec 着地まで）／witness qualifier v3／dep-1 gate（計器の表 → 私の導出・**mounting C-2 の 4 編集は未 unlock**）／04-Specs 不触／残る 7-site 類（retired route・video 3 本・影 rollout — 走らせるなら修正が先・分類 open）／design note（gap_mm 統合・owner p0・later・run 不要）。
+
+---
+
+## 2026-08-09 17:17 — 受入報告への scope addendum: caveat stack は **wired recorder の数値のみ**を縛る
+
+- 17:15 節 §(3) の見出し「数値引用の caveat stack」は**無 scope で書かれ、診断対（+491.3/+19.8・+194.2/+80.1）まで縛ると読める** — p5 が測って止めた（landed 2 分後の交差）。**正しい scope**: stack（sentinel・p11 3 節・導出併記・B5）が縛るのは **wired recorder が産む数値のみ**。診断対の producer は **KINONLY 計器**で、自分の実 radius（`closest(cutoff=0.5)`・全診断値はその十分内側）を持ち、**B5 は届かない**。
+- ⭐ p5 の法則を採用（自行で先に実践済み）: **「不要な場所の caveat は、必要な場所の欠落と同じだけ信頼を蝕む」— recorder の数値に押印し、診断の数値は clean に保ち、各数値は producer を名指す。**
+- ⇒ 17:15 節 §(3) は本節を伴って読む（見出しの無 scope は本節が閉じる）。報告の他の全 pin・文・帰結は不変。
