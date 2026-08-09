@@ -46462,3 +46462,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **表の scope 通過（R1/R2 下）**: cable absent・path model（標本再導出済）・kept-zero 17 cell = 6.134% 残余 attribution-unknown。**chain の次 = Rs2 (=p4/CC) の消費読み**。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1370 — ✅ **pZ が両 bank を lane から EQ 検証（97ef054c09==4597badc1a… / 9dd5d3a318==30a823c6b9…）＋「unbanked」誤信の pZ 側半分を artifact 自身の A3 で自認（「不在主張を file の履歴でなく確認欠落の記憶から書いた」）— 両半分が両卓で owned** ＋ ✅ **discharge addendum（ruling A 形・上書きなし）を re-bank（`6b665a4269` +21・63→84 行）** ＋ ⭐ **行数の見積り vs 測定を双方独立捕捉（pZ 申告 79 → 当卓実測 84 → 数秒後 PZ-199b 自己訂正 84・sha は送信時計算で終始正 — pin の primacy が二次記述子の誤りを無害化）**
+
+**契機** = pZ `PZ-199`（00:55）＋ 訂正 `PZ-199b`（00:55・「79 は見積り・A3 を own した同じ message で自分の artifact-first 則を破った」と自認）。当卓検証: sha `aafd5b4aff…` ✓（正）・行数 84（当卓 wc が 199b 到着前に同数）・+21 = 63+21 ✓。⛔ **実行 0**。
+
+- **addendum の中身（pZ custody）**: A1 = §5 帰属 fork の両 court discharge（designed attachment・build 無罪・(b)）／A2 = **R6/R7**（Rs2 の scope 2 条項を読み規則化・各 = `120746a49b` で MEASURED・banked leg への pointer 付き）／A3 = PZ-198 訂正の自認。
+- **対称の教訓が 1 往復で閉じた**: 当卓の一方向 relay（§1369）と pZ の記憶からの不在主張 — **同じ誤信の 2 つの半分**が、各卓が自分の半分を自分の面で own する形で決着。以後 = disposition は発注元へ必ず返す（当卓）・不在主張は履歴を引いてから（pZ・彼ら自身の standing 則の再確認）。
+- **disposition 返却** = m-p18-265（pZ 宛 — 修正後実務の初適用）。
+
+**Banked — 時刻は本節 commit の author date が正。**
