@@ -60,6 +60,34 @@ commission の問い = **「C-2 取付設計は canonical 工程表と矛盾す�
 2. **STEP 19-42** — 表は「同型」と宣言しているだけで、C3/C4/C5 の実値・実装は現基盤に**存在しない**（`P4_DEFINE_C3C5_PORT_TO_CURRENT_SUBSTRATE_20260809.md` §2）。本レグは 1-18 と 43 の値に対して行った。
 3. **設計の是非** — 0.280 / 20° / crown 0.110 が良い設計かは **p11 の court**。本レグは矛盾の有無のみ。
 
+## 4b. 追記 2026-08-09 10:06 JST — **STEP 1 の前提は「制御で到達」でなく「代入」で満たされている**（受入条件つき再発注 m-p18-209 への中間所見・⛔ 挿入のみ・上を編集しない）
+
+p18 が §0 抵触の疑いとして Rs へ上げた 1 行を、**私の卓の問い（STEP 1-18 の前提）として**実読した（`ur15_steps_wired.py`・逐語）:
+
+```
+# Rs: start from home.  The cell ships one, so the arms begin in the pose its own drawings show
+# instead of at the zero configuration, which for this mounting is arms crossed.
+for _t4 in SIDES:
+    for _k4, _a4 in enumerate(QADR[_t4]):
+        d.qpos[_a4] = HOME_POSE[_k4]
+    for _k4, _i4 in enumerate(AIDX[_t4]):
+        d.ctrl[_i4] = HOME_POSE[_k4]
+mujoco.mj_forward(m, d)
+print(f"[steps] start pose = the cell's home, both arms: …")
+START = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
+```
+
+**私が実測した事実（⛔ §0 の裁定はしない = Rs の court）**:
+1. 腕の関節角への**書込は 1 箇所**、route 冒頭。同じ姿勢が `d.ctrl` にも入り、`mj_forward` が続く。
+2. ⭐ **直後の `START` は `d.qpos` から読み戻される** ⇒ **下流が「開始姿勢」として測る対象は、書き込まれた姿勢そのもの**。
+3. ⭐ コメントが理由を書いている: 「**at the zero configuration, which for this mounting is arms crossed**」＝ **零姿勢はこの取付では腕が交差する**（⚠ この文が書かれた時の取付は built 0.22/45°。C-2 でどうなるかは**未測**）。
+
+**私の leg にとっての帰結（2 点）**:
+- ⭐⭐ **canonical STEP 1「初期位置(上昇点・原点)」は、この driver では制御で到達していない — 代入されている。** ⇒ 「STEP 1 の前提が C-2 で満たせるか」を**開始姿勢の存在で答えることはできない**（存在は書込で常に真になる）。
+- ⭐⭐⭐ **もし Rs が §0 に従って書込を外すと判断した場合**、開始姿勢は**零姿勢（＝この取付では腕が交差）から PD の実移動で**到達せねばならない。**その移動が C-2 で成立するかを測った artifact を、私はまだ 1 つも見ていない。** ⇒ **STEP 1 が「番号つきで在る」側の第 1 候補**。⛔ ただし**確定はしない** — C-2 関連 artifact への閉じた検索が未了（不在主張は読んでから書く）。
+
+⚠ **併せて、私の §4 の判定に条件が付く**: 「直接の矛盾なし」は**記号の交差について**の結論であり、**STEP 1 の前提充足の様式（代入か移動か）には触れていない**。受入条件つき再発注（per-STEP 形）に答えるのは §4 ではなく本節以降。
+
 ## 5. 権限の明示（形式の受理 ≠ 行為許可）
 
 - 本 file は **測定と回答**であり、**p0 の gate を私が反転させるものではない**。gate の運用は p18 の routing / chain の順序に従う。
