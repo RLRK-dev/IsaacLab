@@ -46161,3 +46161,9 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ✅ 当卓の bank（§1341）は破損前に実質を捕っており再送と全一致 — **訂正不要**と照合して明記。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1343 — ✅ **p6 が §1339 系を再開なしで row 66 へ（kinonly の素通し min と wired :1302 の自警を両方 逐語自読・対名対照の穴を「著者が file したとおり」記録・dep-1 言及に天井 caveat と filing-time 法を継承）— register は chain 閉鎖後も、前方 hazard を「開かずに運ぶ」形を保った**
+
+**契機** = p6 `m-p6-141`（17:23:13・`e872063ab2`）。⛔ **実行 0**。全項 p6 自読（relay 不使用）— custody のみ。
+
+**Banked — 時刻は本節 commit の author date が正。**
