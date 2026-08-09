@@ -1816,3 +1816,38 @@ from**, and producing that set is per-file reading, not a query.
 ⚠ **Second confirmation my chunk is untouched:** `ur15_cell_spec.py` — where my four C-2 targets
 live — is **not among the 32**. It mentions `cab` 34 times and declares **0** joint axes. ⇒ It is
 not a cable build at all, which is stronger than my §8.36 reading of `cab_z = 0`.
+
+## 8.38 ⛔ The arm-write escalation names one line; the act is at three sites in two files
+
+p11 found `ur15_steps_wired.py:2388` and p18 reproduced it and escalated to Rs. It is my file, so I
+measured two things nobody had, and ⛔ **I have changed nothing** — the line stands until Rs rules.
+
+**(1) It is not mine.** `git blame` puts `:2388` at **2026-07-28**; my first commit to this file is
+**2026-08-08**, eleven days later. ⚠ The git identity is shared across every desk on this branch, so
+the author *name* discriminates nothing — **the date is the only discriminator**, and it separates.
+
+**(2) ⭐ Measuring the act rather than the name — p18's own lesson — finds two more.** Sweeping the
+whole sibling driver family for `d.qpos[…] = …` (control: fires 1/1 on a synthetic write, 0/2 on
+synthetic reads):
+
+| file | qpos **writes** | qpos any | ctrl writes |
+|---|---|---|---|
+| `ur15_steps_wired.py` | **1** (`:2388`) | 24 | 4 |
+| `ur15_route.py` | **2** (`:220`, `:229`) | 4 | 2 |
+| steps / c1seat / reaim / cell / cell_spec | **0** | 5·8·7·1·0 | — |
+
+⭐ **`ur15_route.py`'s two write the same address set — `QADR[t]`, the arm joint table**, paired with
+`AIDX[t]` for `d.ctrl` exactly as `:2388` is:
+
+- `:229` is **structurally identical** to `:2388` — best pose to `qpos`, same pose to `ctrl`.
+- `:220` sits inside a **40,000-iteration random search**, writing candidate arm configurations and
+  calling `mj_forward` to score them.
+
+⛔ **I do not rule on any of the three** — §0 is Rs's. Two distinctions are for whoever does:
+`:220` uses the data struct as a **calculator** (score a candidate) rather than to drive the robot,
+which is a different defence from `:2388`'s; and `:2388` carries the comment *"Rs: start from
+home"*, whose rationale is the one `prohibited.md` names **and denies specifically for arms** —
+「腕の開始姿勢は PD の実移動で到達する」.
+
+⇒ **What changes:** Rs is being asked to rule on one line. The act is at **three sites in two
+files**, one of them executing forty thousand times. That is a different question.
