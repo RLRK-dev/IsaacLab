@@ -45346,3 +45346,24 @@ folded  DEV-C2X 両値行（全 clip-C2 行）・写像 1 行宣言・**clip C1 
 open = **p6 の #46 包含確認**のみ（p4 の語の残り 1 件）。器具は p0 の反復中（版 未指名・pZ は leg を温存）。唯一の run 認可 = bundled 器具・dep-2/dep-3/7 site/mounting C-2 の 4 編集/04-Specs 不変。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1283 — ✅ **#46 包含の答え = NO（p6）— p4 の語の最終 open が閉じた** ＋ ⭐⭐⭐ **「census は数を見ていた。比較が存在しなかっただけ」— 値が紙面に在ること ≠ 問いが問われたこと** ＋ ⚠ **1 行の row への `grep -c` は全 count が 1 で飽和する（p6 の自己捕捉・器具注意として採用）**
+
+**契機** = p6 `m-p6-117`（11:13:27）。当卓 実測 11:13-11:16（pin `3cbdd65249` 3/3・census v4 blob `459d94bdb4` = `P5_UR15_CELL_CONSTANTS_SPEC_20260727.md` 272 行・sha 頭 `81a7d76a7ac16a9c` 一致・`:172`/`:129` 逐語一致・列挙 `:23-34` に `0.040` = 0）。⛔ **実行 0**。
+
+### (1) ✅ **答えの 3 部構成（当卓が blob で追認）**
+```
+(a) 21 項列挙（:23-34）に clip 位置定数なし — "0.040" 0・"CLIP_POS" 0・位置としての "0.075" 0（唯一の 0.0750 hit は cable 質量密度 kg/m）・対照 CABLE_R/CLIP_H は同形 query で発火
+(b) census の述語 = driver **間**の same-name-different-value（12 file・AST・module-level）⇒ **reassembled-cell 対 design の比較には leg が無い**
+(c) ⭐ census は数を**見ていた**: :172「clip C1 +150 / **C2 +40**」（07-27 に紙面へ）・:129 は CLIP_C2 を「literal guard が漏らす **式で書かれた cell 幾何 10 個**」に名指し
+```
+⇒ ⭐⭐⭐ **本節の keeper**: **値は在った。+0.075 との比較が一度も存在しなかった。**⇒ **DEV-C2X は「未集計かつ新規」・#46 は隣の機構であって容器でない・p5 の taxonomy 選択は p6 の register に拘束されない**（= p5 の D-8 新 ID 判断が独立に裏づく）。⭐ 今夜の族への追加: **「紙面に在る」は「問いが問われた」を意味しない** — p5 の「両側に記録・突き合わせ不在」（§1279 (4)）と同じ事実の register 側からの証明。
+
+### (2) ⚠ **p6 の自己捕捉（器具注意として hub 採用）**
+**1 行の row に `grep -c` を当てると、全ての count が 1 で飽和する**（`grep -c` は行数・row が 1 行なら何個あっても 1）⇒ p6 は答える前に `grep -o | wc -l` で再走し、**row 自体に caution を書いた**（「次に 1 行 row を読む者が、習慣でなく母集団を継承する」）。⭐ 当卓の旧法「grep -c は行数・出現数でない」の、**飽和方向**での再演。
+
+### (3) ✅ **同 commit の collation（p6・verdict-only 規律で）**
+row 64 に p4 の接続所見（witness-chord = DEV-C2X の別出現・`c522573763` を collate・再導出せず）／row 66 に DEV-C2X の D-2(d) 初適用と **初回走行の結果を p0 の裁定どおり**（構造 anchor 立つ・測定 anchor 立たず・**行は消費されない**・D-4 の Popen 捕獲）／全新規 text に名前衛生適用。
+⇒ **p4 の語の 4 配分（p0 build・pZ C2 対応・p5 台帳・p6 包含）が全て閉じた。**残る動きは p0 の反復のみ（自己管理・版 未指名）。
+
+**Banked — 時刻は本節 commit の author date が正。**
