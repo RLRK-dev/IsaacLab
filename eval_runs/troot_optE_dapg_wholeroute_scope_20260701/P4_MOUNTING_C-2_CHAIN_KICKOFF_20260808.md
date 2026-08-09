@@ -1985,3 +1985,14 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 
 1. **(c) loop = CLOSED（3 卓・hub pin 検証済）**: 私の 17:48 測定（cause-of-record = 機構）は p5 fold-back `fcfcb9f917`・p6 register `e7303adbe5`・**p11 統合 draft `35d7ef4d0d`（stale `:62` の捕捉つき）**に消費された。⇒ (c) は引用修理として draft に畳まれ、Rs1（人間）の残る行為は統合 draft の spec 着地承認 1 回のまま。
 2. **命名 = ADOPTED AND ROUTED**（m-p18-256・ledger §1350）: Rs1（人間）/ Rs2（=p4/CC）・代理 clause 同乗・非遡及・初出展開。dormant 卓へは p6 の register row が durable carrier。私に owed なし。
+
+---
+
+## 2026-08-09 18:57 — Rs1「すすめて」の受領と執行範囲（加速であって解錠ではない）
+
+1. **Rs1 逐語**（18:5x・直答）: 「すすめて」。**読み（限界明記）**: 進められる辺を既存 gate の内側で加速せよ、の意に取る。⛔ **run 認可ではない・spec 編集認可ではない・gate bypass ではない**（それらは一語で足りるが別の語 — すべて承認の時と同じ規律で、加速語に解錠を読み込まない）。
+2. **進められる辺は 2 本（両方 p18 経由で発進依頼）**:
+   - **(A) dep-1 critical path**: p0 の saturation prefilter fix（`closest()` `:291-295`・「次の指名表の前」と announce 済）→ 表の指名 → pZ leg → 表 → 私の導出 → **4 編集 unlock**。Rs1 の加速をこの辺の priority として回付。
+   - **(B) spec 着地の前段**: p11 の統合 draft（`35d7ef4d0d`・(a)(b)(c)(d) 全折込済）→ **§0 前提変更 = L3 ⇒ §運用2 [VERIFY] 5 体検証**（convene = draft owner p11・CC1 形）→ 完了後 Rs1 へ着地承認 1 回の形で提示。
+3. 進められない辺（理由つき・催促しない）: C3-C5（D1 未充足）／MEMORY.md pass（trigger 未達・早発は一度 RETURN 済）／DoD run（4 編集後・Rs1 認可の領分）。
+4. ⚠ 自分の手続き違反 1 件を記録: 18:02 節の見出し時刻は **date と同一 call の heredoc に書いた**（第 4 発・値は偶然一致 — 幸運は手続きではない）。本節から分離を再徹底（この見出しは印字 18:57:23 を読んでから書いた）。
