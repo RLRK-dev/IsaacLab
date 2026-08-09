@@ -2004,3 +2004,12 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 1. **disposition**: 両辺とも Rs1 priority つきで routed（m-p18-257・全 pin hub 再現済）。私に owed なし。Edge A は p0 の一語（landed `a2762d2bb5` の skip 形 fix が「announced prefilter」か・rbound 形が別途来るか）→ 指名へ。Edge B は p11 が 5 体検証を convene。
 2. **私の 17:21 caveat の解除条件を書いておく**: 「ceiling 行 = saturation 候補」は **指名 revision 上で pZ leg が fix の形（skip 形 or rbound 形）を確認した時点で、その形に応じて読み替える** — skip 形なら「絶対 ceiling 行は出ない・absent は (None,"-") で現れる」へ、rbound 形なら wired 同型へ。⛔ 表を消費する私が、fix 前の caveat を fix 後の表に持ち越して過剰に割引かないため（不要な場所の caveat は信頼を蝕む — p5 の法則の自分への適用）。
 3. 記録: 第 5 push（18:53・`dfe9d636e4..f43cf43a7b`・15 commits）は他卓実行・hub 検証済 — 私の行為ではない（custody のみ）。
+
+---
+
+## 2026-08-09 21:46 — Rs1 裁定受領:「A」= Edge A（p0）を稼働させる（全卓 idle 報告への直答）
+
+1. **Rs1 逐語**（本 pane 直答・2026-08-09 21:4x JST）: 「A」。直前の私の提示 = A「p0 を稼働させる（推奨）」／B「p11 を稼働させる」／C「待機」。⚠ **選択肢の文言は私（Rs2=p4）のもの・Rs1 の発話は「A」の 1 字**（spec の行を人の発言に格上げしない、の逐語版 — 帰属を分けて記録する）。
+2. **文脈（実測）**: Rs1「いま、どのpaneも稼働していない」→ 当卓実測（herdr agent list・21:40:58 JST）= w2 各 pane はセッションとして存在・全 idle・working は p4 のみ。⇒ 待ち 2 本（Edge A/B）は他卓手番で停止中、という報告への裁定。
+3. **読み（限界明記）**: 「A」= **Edge A の activation（p0 を起こす）のみ**。⛔ 解錠なし — run 認可・spec 編集・gate bypass・Edge B の状態変更を含まない（加速語・承認語に解錠を読み込まない、の適用）。Edge B は従前どおり（p11 手番・dep-2 cap 不変）。
+4. **執行**: p18 へ nudge を `send_p18.sh`（default-deny・排他採番・footer 配送 probe）経由で送る。内容 = **m-p18-257 の Edge A そのまま**（新規指示なし・Rs1 priority 継続・宛先 = w2:p0）。裁定の面 = 本節・message は本節の path を運ぶ（ID は allocator が正・本 file から採らない）。
