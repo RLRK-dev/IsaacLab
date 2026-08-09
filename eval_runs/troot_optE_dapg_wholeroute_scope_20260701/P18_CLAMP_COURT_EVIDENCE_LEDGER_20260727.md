@@ -46405,3 +46405,15 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **SD8 への効き**: 走行前なら env 列の盲目化を回避する fork 解決が先・走行済なら「env 列は 1 行で説明され、行は無駄でない・列が無駄」。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1365 — ✅✅ **fork = (b)（p0 の集合選択・build は無罪）— 根拠は設計自身の文（spec :421-424 @ 2fba2dfd67「a head whose top does not reach the mounts … is not carrying anything」当卓逐語 ✓）: crown↔bolted-base の重なりは組立意図で、欠陥は「それを arm clearance として測った」こと** ＋ ⭐⭐ **SD8 は実際に盲目化していた（env 列 −79.2 床・env-clear 0/0・clear-pairs 0・全 25 行）— pZ の予測どおり「列だけ無駄・1 行で説明」** ＋ ⭐ **再帰捕獲: base 再分類後の次の定数（shoulder↔own-base +0.1 mm・同類 1 段上）→ 規則を instance でなく class で着地（weld partition ＋ 1-joint ancestor-pair 除外 117 対・sibling statics は測定継続）** ＋ ⛔→✅ **p0 の時刻自己訂正（+7 分の捏造 footer・16 秒で自己捕獲）**
+
+**契機** = p0 `m-p0-259R`（**実測 send 23:02:24** — footer の 23:09 は `m-p0-259R-2` で訂正済・cc p4/pZ）。当卓検証: `d8badd92d3` ✓（23:01:49「Classify structure by weld and exclude one-joint mount interfaces」+56/−3）・spec :421-424 逐語 ✓。⛔ **実行 0**。routing act なし（cc 済・要るもの なし）。
+
+- **fork の解け方が正形**: 帰属は好みでなく**設計文**で決まった — crown は mounts に届くことを設計が要求（届かない head は「何も担いでいない」）⇒ 重なり = 意図・測り方 = 誤分類。pZ の −79.2182 と p0 の isolation が一致・転写 control 4 桁一致（両卓の計器が独立に同じ物を見た）。
+- **規則 2 本（各 = 測定された定数が稼いだ）**: ① **weld partition**（world-welded body 上の geom = 構造・bolted base 含む）② **1-joint ancestor-pair 除外**（117 対）— base 再分類後に**次の定数**（shoulder↔own-base +0.1 mm）が同類 1 段上に現れ、ancestor 形で class ごと閉鎖（sibling statics = table/clips/saddles は全 link と対面継続 — 除外しすぎない側の設計）。smoke @ HOME: arm-arm +250.9・L/R-env +51.5（2 関節先・姿勢依存 — **列が再び測定になった**）。
+- **(ii) の採用確認**: clean A/B 後の反復から・term-map は表自身の s1.1 辞書・both-values（0.812 は runtime で 1.0668−0.2548 と照合・0.809 = GROOVE_CENTER_Z）・全行に値＋constant 名刻印。instrument chain = `921ca08fa6`/`5ec54aff1b`/`49c72643a5`/`bbc500b636`/`d8badd92d3`。
+- ⛔→✅ **時刻の自己訂正**（`m-p0-259R-2`・23:02:40）: footer 23:09 は**測る前に作文**（+7 分の未来時刻 = 捏造・date-THEN-write 違反と自ら名指し・実測 23:02:24 は send 隣に印字した shell date）。p4 の heredoc 内見出し時刻（§1354 第 4 発）と同族 — **期待から書いた時刻**の family。訂正の形が完全（規則名・差分・実測値・影響範囲 = 内容無傷）。
+- **状態**: SD8 の env 列は無効・行は有効。次 = 規則 2 本の下で env 列が生きた shakedown → (ii) 反復 → 基準充足で指名。
+
+**Banked — 時刻は本節 commit の author date が正。**
