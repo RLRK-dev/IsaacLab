@@ -46223,3 +46223,15 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **custody**: p4 kickoff `:1944-1963` @ `a1ddda3334`（17:49:16「The reason was in the records, not in the human」）— Rs 逐語 = `:1948`。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1349 — ✅✅✅ **m-p18-255 の routing loop が 7 分で全 3 卓 CLOSED（p5 fold-back・p6 register・p11 修理 draft）— p11 は「配達済・受信側 model flag で未処理・pane 側回復」を経てから閉じた** ＋ ⭐ **p11 の新規捕獲: spec :31 の現行括弧「§4 :62」は stale（:62 = 現 TABLE_HEIGHT 項・前提文は :69 へ移動済）— 引用修理は死番地の修理でもあった** ＋ **同型 2 か所目（:69）は黙って直さず (b) の置換文へ委譲**
+
+**契機** = p5 `m-p4-241`（17:56:45）／p6 `m-p6-142`（17:57:10）／p11（17:57:38）。⛔ **実行 0**。
+
+- **p11 の配達 3 態（当卓実測の時系列）**: 17:54 送信 → content readback NO-HIT → viewport 実読で **message 末尾行が画面上に在り**（配達成立）**が受信側 Fable 5 が request を flag**（API Error `req_011CdrtnKPMQxzj3Jimwi9Zx`・「safe, normal conversations でも起きる」型）・入力欄に「再開」打鍵済（当卓の打鍵ではない）→ ⛔ **他卓の打鍵済入力を当卓が submit しない**と決めて不触 → pane 側で回復し p11 は full ingestion・17:57:38 に leg を閉じた。⭐ **法**: 配達証拠 ≠ ingestion／最強の readback = **受信者が内容を実行していること**（p6・p5 は viewport に pin 再導出 command の実行中が映った — phrase hit より強い）／flag された request の本文は transcript に残り再開時に ingestion され得る（実測どおり）。
+- **p5 の leg（`fcfcb9f917` 当卓検証 +13/−0 挿入のみ・17:56:16）**: 自分の §3(c)「面ごとに別の原因」が**「原因は 2 説ある」とだけ lift できる形で banked されていた**と自己捕獲 — custody 順序を同じ面へ載せた。pin 2 本は**書く前に自卓再現**・cite は文で。
+- **p6 の leg（`e7303adbe5` 当卓検証 LEDGER 1/1・17:57:10）**: row 48 S(4) に解散を搭載（拒否逐語＋custody pin・機構先行を自卓再測・gloss +4/1-file 照合）・owner cell 連鎖 = 「4 decline → Rs → 測定で解散」・dep-2 cap 不変・隔離不触・物理真因無主張・git 前史 limit 継承。
+- **p11 の leg（`35d7ef4d0d` 当卓検証 +25/−0・sha `d7e3193f18…` ✓・222 行 ✓・17:57:38）**: (c) 修理を (b)(d) 統合 draft へ折込・spec 未編集・fidelity 無主張・入力自読。⭐ **:31 現行括弧の「§4 :62」は stale**（当卓 sed 再現: :62 = TABLE_HEIGHT・:69 = FIDELITY BOUNDARY B2 ✓）。置換案 = decision-of-record を **file 名＋row 名＋文そのもの**で指す（RL-Routing-Design.md 内の同 clause 出現 0 も当卓 `grep -o` 再現 ✓ — 「どの file の中か」の曖昧を測定で殺す）。:69 の同型 pointer は **(b) の置換文の中で同じ内容 pin 形**（依頼は :31 の 1 行 — 黙って 2 件直さない）。
+- ⇒ **(c) は完全 CLOSED**: 測定（p4）→ routing（255）→ fold-back（p5）→ register（p6）→ 修理 draft（p11）。残る行為は従前どおり統合 draft の spec 着地 1 回のみ（人間）。
+
+**Banked — 時刻は本節 commit の author date が正。**
