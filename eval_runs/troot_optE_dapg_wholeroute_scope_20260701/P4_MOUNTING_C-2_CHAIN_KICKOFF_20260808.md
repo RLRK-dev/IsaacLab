@@ -1873,3 +1873,11 @@ p0 recuse（「この code について 3 度誤った。p4 か pZ が revert �
 - **入力（p11 発・hub 検証済）**: `:1880` `gap_mm` docstring 逐語「runs died on it FOUR times in an afternoon: each fix protected one line and left its neighbours open. INDIVIDUAL GUARDS WERE NOT WORKING… THE ABSENCE HAS A SPELLING, AND A CALLER CANNOT FORGET TO GIVE IT ONE」— 今夜の guard-by-guard 3 連は、**file 自身に記録済みの午後を読まずに再導出**していた（family が「直し方」の 1 段上で再帰）。
 - **計量**: REVERT 側が得た「file 自身の歴史が individual guards は働かないと言う」は真。しかし私の根拠 1-4 は無傷 — 特に (2) **現 object は検証済み 6×6** で、歴史の class 再発は「**次に触った時**」の危険。そして (a) recorder は認可の日にしか走らない (b) **統合路（gap_mm の中央 spelling へ載せ替え）は in-file に既在**し、refactor は run でないから**新認可を要さず後日行える**（p0 の design call・今ではない）。⇒ **KEEP のまま**。変わるのは word の付帯 1 行のみ: **KEEP は「gap_mm 統合の standing design note（owner p0・later）」を同行する** — blind KEEP ではない。
 - m-p4-206（KEEP・queue 済）はこの入力の前に発信 — 本節が「入力後も不変」の custody。pZ の半分は独立のまま。
+
+---
+
+## 2026-08-09 17:06 — word 確定 = KEEP（両半分）— ⚠ 私の勝因は私の根拠ではない: 載荷は pZ の測定に移す
+
+1. **確定**: keep/revert = **KEEP**（両半分独立・m-p18-249）。sequence FINAL: pZ 第 2 addendum（`755eae7ddd`＋`2a3b5825b7`・`b6340055…` 退役 → `8fae5334…`）→ **私の受入報告（6 commits・sha 関数名つき・sentinel caveat）** → dep-3 完全 CLOSE → 通常規則。
+2. **⚠ 正直な載荷移転（自分の根拠の格下げ）**: p5 の form-question（「この 4 行はまだ未知の形を運べるか — 3 分の 2 は認可の日に発火する class だった。『無い』の根拠は誰も出していない」）を読んだ時点で、**私の根拠 (4)「残余 risk ≈ 0」は過大主張だと自分でも判定していた**（検証が飽和した仮定 — 測定された 3/4 の欠陥率が反証）。⇒ **決め手は pZ の測定**: settle span の AST — **全代入先が plain local・attribute/subscript 書込 0 ⇒ recorder は状態への write path を持たない**。blast radius は crash-or-wrong-print に**有界**で、両 class とも対照つきで閉鎖済・3 欠陥は全て pre-run 発見。pZ は自分の revert 条件 2 つ（write path 在り／post-run 発見）も先に名指し、**どちらも成立しない**ことを測って示した。⇒ 私の KEEP は立つが、**載荷梁は私の (4) でなく pZ の no-write-path 測定** — 報告もそう cite する（「the deciding ground is a measurement」）。
+3. 私の (1)（認可の希少性）と design note（gap_mm 統合・owner p0・later）は付帯として生存。
