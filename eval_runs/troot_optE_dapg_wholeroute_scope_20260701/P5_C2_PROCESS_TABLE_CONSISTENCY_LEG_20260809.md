@@ -273,7 +273,7 @@ pZ が driver と instrument の取付式を直接比較し、**文字レベル�
 | # | 内容 | 状態 |
 |---|---|---|
 | (a) | 旧「**代入で満たされる ⇒ 合否が C-2 に依存しない**」 | ⛔ **SUPERSEDED**（2026-08-09 Rs 裁定「腕を姿勢へ書き込むことは不可 すべてコントローラの司令で実現できるはず。」） |
-| (b) | **測られる 2 値（後継・owner つき）** = ①計器の **STEP-1 行**（**HOME@C-2 の実リンク間 clearance**）／②**zero-pose 診断**（`qpos = 0` 両腕） | ✅ **測定済 2026-08-09 16:39**（p0 の承認済み計器・`mj_forward` のみ・`mj_step` 0・各行が geom 対を名指す）: **② qpos=0 → arm↔arm +491.3 mm（L_base#2 ↔ R_base#41）／arm↔table +19.8 mm（R_forearm#44 ↔ table_top）= CLEAR**／**① HOME 対照 → +194.2 / +80.1 = CLEAR**。⇒ **零姿勢は干渉していない ⇒ 分岐は純サーボ・Rs への初期条件差し戻しは無し** |
+| (b) | **測られる 2 値（後継・owner つき）** = ①計器の **STEP-1 行**（**HOME@C-2 の実リンク間 clearance**）／②**zero-pose 診断**（`qpos = 0` 両腕） | ✅ **測定済 2026-08-09 16:39**（p0 の承認済み計器・`mj_forward` のみ・`mj_step` 0・各行が geom 対を名指す。⭐ **producer と半径 2026-08-09 17:17 追記**: `kinonly_step_solve.py:272 def closest(m, d, A, B, cutoff: float = 0.5)` で、:338-340 の 3 呼出はすべて**既定の 0.5 m** を使う ＝ **本行の値はどれも半径のはるか内側**（最小 19.8 mm ≪ 500 mm）⇒ **不在・sentinel の境界から遠い**。⛔ **B5（wired の settle recorder が 16 mm を宣言しつつ 2 つの query に跨る件）は本行に届かない — producer が別**）: **② qpos=0 → arm↔arm +491.3 mm（L_base#2 ↔ R_base#41）／arm↔table +19.8 mm（R_forearm#44 ↔ table_top）= CLEAR**／**① HOME 対照 → +194.2 / +80.1 = CLEAR**。⇒ **零姿勢は干渉していない ⇒ 分岐は純サーボ・Rs への初期条件差し戻しは無し** |
 | (c1) | **零姿勢 → HOME の *経路* が空いているか** | ⛔ **未測** — 上の 2 値は**両端**であって**間ではない**（§4e/§4f の along-path の論点がそのまま当たる）。⚠ **HOME で台まで +19.8 mm しか無い** ⇒ **整定運動はこの余裕を割ってはならない**（p0 が pre-stated した限界を、本行の制約として引き継ぐ） |
 | (c2) | **PD が実際に到達するか（mode A）** | ⛔ **未測・非 stepping の計器では原理的に見えない** ⇒ 導出文が射程注記を逐語で運ぶ（§4e） |
 
