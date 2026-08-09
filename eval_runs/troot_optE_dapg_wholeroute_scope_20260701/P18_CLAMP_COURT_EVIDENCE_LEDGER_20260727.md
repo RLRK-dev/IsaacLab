@@ -46483,3 +46483,23 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ball = p4 消費読みのまま。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1372 — ✅ **F1 閉鎖を pZ が hunk 単位で検証（93adb43eb7 = driver 自身の最終 commit・worktree clean・:1644/:1819 exact・当卓の f-string nuance も banked log の [budget] 行 :753-756 で確認）** ＋ ⭐⭐ **4 件目 = pZ 自身の leg の盲点と自認・artifact で own: sec-7 棚卸しは「@rev / .md が同一行にある citation」だけを照合 — block 継承の citation が逃げ、「15 標的」は無言の scope を帯び、drift 数 3 は真値 4 に 1 足りなかった** ＋ ✅ **addendum A1/A2 re-bank（`5396fa0cf8` +12・101→113 行 —「両数とも今回は測った」= PZ-199b の教訓の即適用）**
+
+**契機** = pZ `PZ-200`（01:01）。当卓検証: sha `a605259721…` ✓・113 行 ✓ → re-bank `5396fa0cf8`。⛔ **実行 0**。disposition は m-p18-267 に同乗（発注元へ返す — 修正後実務）。
+
+- ⭐ **same-line scope = 折返し family の新肢**: 行に @rev が無く**上の行から継承**される citation は、same-line 照合の分母から静かに落ちる — wrapped phrase が行指向 grep を破るのと同型（**行を単位とする全ての照合は、行を跨ぐ意味構造に盲目**）。pZ は scope を artifact に明記して分母を修理。
+- 検証の中身: 4 site とも corrected token を標的で再測（warm-start の旧 cite は 3 行下の pinned-menu comment を指していた、まで特定）。nominated object 不動・edge A は pZ 卓で closed 継続。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1373 — ⭐⭐⭐ **UNLOCK（Rs2 (=p4/CC)・m-p4-246）: 消費読み 7 読全 PASS → 導出「在る = STEP 1＋v1 の 4/8/9（CLEAR 3/36・pZ 数え と一致）／運動学的成立 = STEP 2-18 全行／mounting 起因の負 = 0 行」→ **mounting C-2 の 4 編集 = 実施解錠*** ＋ ✅ **表 pin は 3 卓一致のまま（p4 読み時 00:54:58 自測）・DEV-C2X は verdict を割らず（margin のみ・35 mm 未裁定のまま）** ＋ ⛔ **解錠されたのは編集の実施のみ — DoD run・wired 一切は別 gate（Rs1 (the human) 認可）・dep-2 は等級 cap として継続**
+
+**契機** = p4 `m-p4-246`（01:01:40）。custody = kickoff `:2084`「2026-08-10 00:58」@ `9003ac2fe9`（01:00:54・+28/−0 ✓）。⛔ **実行 0**。routing → m-p18-267（p0 実装 dispatch・pZ FYI 次 leg・p4 disposition）。
+
+- **導出の要旨（p4 custody・kickoff 節が正）**: 設計高 work 行の負は **cable-absent 帯**に住む（pad-table / wrist-wrist・≤3.5 mm・row 48 open）／crown 負 0・mast 系 env 全正・base mounts は設計どおり除外（= §1365-1367 の規則がそのまま消費面に効いた）／mode-A note 逐語継承／kept-zero 17 = R1 attribution-unknown。
+- **4 編集の定義（受入済 design spec §2 のとおり）**: **3 token**（YOKE_SPREAD 0.28／TILT 20.0／CROWN_R literal 0.110）＋根拠 comment（witness `SPREAD_TILT_SWEEP_TRIES240_KINONLY.txt:54`・#54 部材条件・stereo-head 不在条件・**D4 は carry で同乗**）。解錠面 = `ur15_cell_spec.py` @ `2fba2dfd67`・`sweep_mounting.py` @ `2bb1aad4e7`（dep-1 の lock がこの word で開く — **本日 08-09 朝からの chain の終端**）。
+- **体制**: p0 実装（scope = 4 編集のみ・挙動/出力形式変更なし・過去 sweep は env 変数で再現可能のまま）→ pZ 検証（**4 編集 commit を親に対して** — parent-relative）→ p4 着地（**等号受入: verified == landed の content-sha 対**）。F1 は p0 convenience のまま。
+- **残る gate の明文**: 実装解錠 ≠ run 解錠。DoD run・wired 実行は Rs1 認可の別 gate・dep-2 cap 継続。
+
+**Banked — 時刻は本節 commit の author date が正。**
