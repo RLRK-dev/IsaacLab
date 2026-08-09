@@ -373,12 +373,25 @@ def main() -> int:
     lims = np.asarray(spec.LIMS, dtype=float)
     solved_q = {1: {t: home.copy() for t in ("L", "R")}}
 
-    def solve_arm(t: str, target: np.ndarray) -> tuple[np.ndarray | None, float, int]:
+    def solve_arm(t: str, target: np.ndarray, seed_q: np.ndarray | None = None):
+        """DLS position IK.  Restart seeding mirrors the driver's own near/warm practice (tip
+        :730 / :2313 seed every solve from the previous pose): r0 = home, r1 = the previous STEP's
+        pose, r2-r7 = that pose + N(0, 0.35 rad), the rest uniform random.  In the budget line,
+        because the seeding is part of what a row's "not solved" means.
+        """
         tool = TOOL[t]
         best_q, best_e, used = None, 1e9, 0
         cands: list[np.ndarray] = []
         for r in range(RESTARTS):
-            q = home.copy() if r == 0 else rng.uniform(lims[:, 0].clip(-np.pi), lims[:, 1].clip(None, np.pi))
+            if r == 0:
+                q = home.copy()
+            elif seed_q is not None and r == 1:
+                q = np.asarray(seed_q, dtype=float).copy()
+            elif seed_q is not None and r <= 7:
+                q = np.clip(np.asarray(seed_q, dtype=float) + rng.normal(0.0, 0.35, 6),
+                            lims[:, 0], lims[:, 1])
+            else:
+                q = rng.uniform(lims[:, 0].clip(-np.pi), lims[:, 1].clip(None, np.pi))
             for _ in range(ITERS):
                 used += 1
                 for k, a in enumerate(qadr[t]):
@@ -398,20 +411,15 @@ def main() -> int:
             # ⛔ Keep THIS restart's own converged pose.  Appending the running best gave KEEP
             # copies of one pose, so the pair scoring below had nothing to choose between --
             # a diversity of zero dressed as a search.
-            # ⭐ CLEARANCE AT GENERATION, not only at ranking.  The driver rejects candidates below
-            # ARM_CLEARANCE while building its pool (tip :1496, over 20 candidates); mine stopped at
-            # the first KEEP that merely REACHED.  Ranking 36 combinations cannot recover what the
-            # pool never contained -- that is the selection difference, confirmed by reading this
-            # loop rather than by another pattern.
+            # Pool = every restart's own converged pose, up to KEEP.  ⛔ The env-wide clearance
+            # filter that stood here starved the pool to ZERO at every STEP of shakedown 2.  Read
+            # at the tip as text, the driver's own selection stage rejects on THE OTHER ARM ONLY --
+            # "The mast was never in this filter.  It was MEASURED every step and printed"
+            # (:1501-1502 @ 2fba2dfd67) -- and clip/table proximity is task-inherent at insertion
+            # steps, so filtering on it rejects every correct pose.  Selection on clearance
+            # happens at the pairwise ranking below; every clearance is still REPORTED per row.
             if e < TOL:
-                for _k2, _a2 in enumerate(qadr[t]):
-                    d.qpos[_a2] = q[_k2]
-                mujoco.mj_kinematics(m, d)
-                _gap, _ = closest(m, d, grp[t], grp["env"])
-                # Absent = nothing within half a metre of the environment -- clear by more than
-                # the clearance constant ever asks.
-                if _gap is None or _gap > float(spec.ARM_CLEARANCE):
-                    cands.append(q.copy())
+                cands.append(q.copy())
                 if len(cands) >= KEEP:
                     break
         return best_q, best_e, used, cands
@@ -442,8 +450,8 @@ def main() -> int:
     def row_at(row, ref, cx, cy, label, prev):
         tl = np.array([cx - spec.GRIP_HALF_SPAN, cy, row["zL"]])
         tr = np.array([cx + spec.GRIP_HALF_SPAN, cy, row["zR"]])
-        qL, eL, uL, cL = solve_arm("L", tl)
-        qR, eR, uR, cR = solve_arm("R", tr)
+        qL, eL, uL, cL = solve_arm("L", tl, prev["L"])
+        qR, eR, uR, cR = solve_arm("R", tr, prev["R"])
         if qL is None or qR is None or eL >= TOL or eR >= TOL:
             print(f"| {row['step']} | {ref} | {label} | - | - | - | L{eL * 1000:.1f}/R{eR * 1000:.1f} | "
                   f"{uL + uR} it, pool L{len(cL)}/R{len(cR)} | NOT SOLVED (budget) |")
@@ -480,7 +488,7 @@ def main() -> int:
         fallback = (not cL) or (not cR)
         clear = all(x is None or x > 0 for x in (aa, ae, worst))
         verdict = ("CLEAR" if clear else "TOUCHING OR THROUGH") + (
-            " ⛔ pool empty: reach-only fallback measured -- read as NO CLEARANCE-PASSING POSE"
+            " ⛔ pool empty: reach-only fallback measured -- read as NO CONVERGED CANDIDATE"
             " WITHIN BUDGET" if fallback else "")
         along = gap_say(worst, wp) if worst is None else f"{worst * 1000:+.1f} at {at} ({wp})"
         print(f"| {row['step']} | {ref} | {label} | {gap_say(aa, pair)} | {gap_say(ae, pe)} | "
@@ -503,7 +511,8 @@ def main() -> int:
 
     print()
     print(f"[budget] restarts {RESTARTS} x iters {ITERS}, seed {SEED}, tol {TOL * 1000:.1f} mm; "
-          f"along-path samples 19 interior, endpoints excluded; KEEP={KEEP} poses/arm scored pairwise")
+          f"along-path samples 19 interior, endpoints excluded; KEEP={KEEP} poses/arm scored pairwise; "
+          f"seeding: home, prev, prev+N(0,0.35)x6, then uniform")
     print(f"[audit] mj_step calls: {_MJ_STEP_CALLS}")
     import collections as _c
     for k, v in _AUDIT.items():
