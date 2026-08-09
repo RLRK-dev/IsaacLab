@@ -1926,3 +1926,33 @@ confirmed to reach arm joints.
 question. Earlier tonight I shipped a defect using column-0 on a **reachability** question (§8.14).
 ⇒ **The same syntactic feature is sound for one question and worthless for another**, so a
 predicate's validity is never readable from its shape — only against the question it is asked.
+
+## 8.41 COMMISSION readback — measured per acceptance item, at the pinned tip `2fba2dfd67`
+
+| item | verdict | measured |
+|---|---|---|
+| (3) env overrides | ✅ **can meet** | `:355 :356 :357` reproduce; built defaults `:358` 0.22, `:374` 45.0. Footgun `:352` confirmed: `CROWN_R_OVERRIDE` accepts literal `"none"` → removes crown geometry. Value is `0.110`, nothing else |
+| (5) `mj_step` = 0 | ✅ can meet | under my control |
+| (6) publish own limits | ✅ can meet | |
+| (7) env7 + versions | ✅ can meet | newton 1.4.0 · mujoco 3.10.0 · mujoco-warp 3.10.0.3 · warp-lang 1.15.0 |
+| **(4) execution closure** | ⚠ **off by one file** | `ur15_cell_spec.py:45` does `from thread_isaac_lab.configs import task_config`. Closure is **mine + spec + task_config = 3**, not the 2 named. `task_config` is 387 lines, 109 constants, **0 imports** (control: constants > 0, so the file is real and the pattern space is non-empty) ⇒ closure terminates there. ✅ Driver-family executions **0** is meetable — that is the condition's evident intent |
+| **(1)(2) the STEP table** | ⛔ **cannot meet as written** | see below |
+
+⛔ **The blocker, and it is structural rather than a matter of effort.** The canonical STEP table is
+at `ur15_steps_wired.py:1731` — ⚠ **not `:2639`, which is what I published earlier tonight from a
+different revision; my own stale pointer.** And it is **not data**:
+
+```
+# ---- STEP table 2-18.  (step, name, L target, R target, Lfinger, Rfinger, seconds, gate) ----
+LX1, RX1 = C1[0] - GRIP_HALF_SPAN, C1[0] + GRIP_HALF_SPAN
+def mouth_clear(t="L", dd=None):
+    """Clear opening between the two claw inner faces [m], read off the model."""
+```
+
+⇒ The waypoints are **derived at runtime from the built cell** — they read geometry off the model.
+So there is no table to copy: a copy would be a different object. Reproducing them needs either
+importing `ur15_steps_wired` (⛔ forbidden by (4)) or **reimplementing the derivation** (⛔ the thing
+p5's C-2 artifacts explicitly avoided — *"No route run, no reimplementation"*).
+
+⇒ **(1)(2) and (4) are in tension and only p4 can say which gives.** Three resolutions exist and
+each changes what the instrument measures; I am not choosing among them.
