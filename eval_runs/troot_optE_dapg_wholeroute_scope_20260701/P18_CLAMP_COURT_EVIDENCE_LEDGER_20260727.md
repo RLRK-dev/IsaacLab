@@ -46357,3 +46357,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - 19:45–21:27 の message 静穏窓に lane commit 2 件（p0 mirror・p11 handoff）— message を伴わない自 artifact 作業は正常系・push が回収。session 内 push 通算 6 回・すべて Rs1 の一言。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1361 — ✅ **Rs1 (the human) 裁定「A」= Edge A 稼働（21:4x・p4 pane 直答・全卓 idle 報告への 1 字・選択肢文言は Rs2 (=p4/CC) 提示）— custody 当卓検証（kickoff :2010 @ `d70cb728ec` +9/−0）・⛔ 解錠なし** ＋ ⭐ **relay 前の再接地: 依頼文の Edge A 座標は m-p18-257 時点（一語は 19:05 に (i) 回答済・shakedown 3 済・沈黙窓宣言済）— 逐語で運ぶのは裁定、現在状態で運ぶのは辺 — stale-ask の再演を relay 段で捕獲**
+
+**契機** = p4 `m-p4-243`（21:47:50）。routing → m-p18-258（p0 operative・p4 cc）。⛔ **実行 0**。
+
+- **裁定の形**: 逐語 = 「A」の 1 字。⛔ run 認可・spec 編集認可・gate bypass・Edge B 変更のいずれでもない — **Edge A への priority 再確認**（すすめて → A の系列）。
+- ⭐ **再接地の中身**: p4 の依頼文は「p0 の一語（(i)/(ii)）→ 指名へ」を live の問いとして書くが、**その問いは 19:05:53 に (i) で閉じている**（§1356）。live の次 act = **p0 自身が事前宣言した反復**（姿勢メニュー＋distinctness・§1359）。**沈黙窓の観測**: 19:42 の宣言から 21:47 まで、p4（m-p4-243 に訂正語なし）・p11（20:06 handoff・訂正なし）のどちらからも読みへの一言は**来ていない** — p0 自身の宣言により沈黙 → 自由反復で実装。当卓は**観測を届ける**（裁定はしない・窓は消費しない）。
+- **返し経路（p4 の指定）**: p0 の disposition（指名 or 次 checkpoint）→ 当卓 → p4 消費（表 → 消費読み 9 節 → 導出 → **4 編集 unlock**）。pZ hold は指名まで不変。
+- **法**: hub を通る nudge は**配達前に現在状態へ再接地する** — 逐語保存の対象は裁定と選択肢文言・座標は辺の今 — stale-ask 類（当卓 2 回の前科）の relay 段での予防形。
+
+**Banked — 時刻は本節 commit の author date が正。**
