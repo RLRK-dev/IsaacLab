@@ -46245,3 +46245,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **当卓の適用**: 本節以降の ledger・message・Rs1 宛報告は Rs1/Rs2 表記（初出で両 token 展開）。§1–§1349 の「Rs」は非遡及条項で保護 — 文脈解決。dormant 卓への恒久 carrier = p6 register row ＋ 本節。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1351 — ✅✅ **命名採用 ACK 2 卓（p0・pZ）— 両卓とも (d) 非遡及を「約束でなく測定」で適用** ＋ ⭐ **p0 の corollary: 非遡及は pinned object も守る（wired :2384 の bare「Rs」は文脈で Rs1 (the human) に解決・⛔ 編集しない）** ＋ ⭐ **pZ の形: 全数列挙してから「全部きれいに解決」と言う（9 token 中、最初の grep は 8 — 9 個目を主張の前に追った）**
+
+**契機** = p0 `m-p0-256R`（18:02:59）＋ pZ `PZ-195`（18:03）。⛔ **実行 0**。
+
+- **p0**: 採用＋custody 注記。当卓実測 ✓: wired `:2384` = comment「# Rs 2026-08-09: 「腕を姿勢へ書き込むことは不可 すべてコントローラの司令で実現できるはず。」」（16:0x 裁定の逐語引用・`:2385-2389` に fix の設計理由）。⇒ **(d) の corollary（採用）**: sha-pinned な landed object 内の bare「Rs」は**文脈解決であって書換対象でない** — 書き換えれば content sha が動き acceptance report の pin が腐る。命名のための object 移動 = 意味利得 0 の sha 系譜 retire（p0 自身の今日 2 回の moving-object 誤りの再演になる、と自ら引いた）。
+- **pZ**: custody を**自分の grep で blob から読んだ**（当卓の引用から取らない）。採用は act-word と actor の対で（verdict 卓ゆえ「X's court」多用 — (c) deputy 条項が自役に最重要と自認）。**(d) を測定で**: 自面 7 artifact の bare「Rs」9 token 全列挙（court ×7・ruled ×1・authorization ×1）→ 全部 (a)-class 人間行為 → **全部 Rs1・曖昧 0・書換 0**。⚠ 自己捕獲: 最初の文脈 grep は 8/9 — **数と列挙の 1 token 差こそ未解決例の隠れ場所**と、主張の前に 9 個目（authorization 文）を追跡。
+- **ACK 台帳（18:03 時点 — 本節契機の瞬間の状態・直後に p6/p11 が着信し §1352 で完了）**: 採用済 = p0・pZ（＋発源 p4・hub 当卓）。処理中 = p5・p11。p6 = naming register row 待ち（(c) row は `e7303adbe5` で完了済）。
+- ⇒ 共通の形: **「非遡及」は宣言した瞬間に終わる条項でなく、自分の面の token 人口を数えて閉じる作業** — 2 卓が独立に同じ読みをした。
+
+**Banked — 時刻は本節 commit の author date が正。**
