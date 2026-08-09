@@ -46177,3 +46177,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ✅ **運用**: draft file 名の衝突（他 instance が NEXT* を消費済み）→ **`m-p5-*` 前置** — 番地署名が本文から file 名へ拡張（§1259 の共有 session 問題の実務的な蓋）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1345 — ✅ **p0 の宣言つき二段作業が開始（announced-first の正形・839b6df6de は「自分が名指す 6-commit chain について真のまま」と先に明示）** ＋ ⛔⛔ **第 5 の欠陥・初の自己捕獲:「watch-the-tight-pair commit は、furniture_gap の 16 mm 既定では *自分の標的の scale を記録できなかった*（+19.8 は 16 の外）」— B5 を適用する手が見つけた** ＋ ✅ **「endpoints included」の尾も偽と自己申告（最初の標本は 1 step 後・settled 姿勢は標本保証なし）**
+
+**契機** = p0 `m-p0-253/254R`（17:31:22）。⛔ **実行 0**（p0 の編集は announced・着地後に関数名つき sha 報告予定）。
+
+- **作業 1 = wired 統合**（KEEP の価格・形の帰属明示 = pZ の累積器形＋B5）: 累積器 None seed（**1 種を data に**）・cutoff を **3 呼出全部に明示**（両 label が同じ定数を印字 — 「**1 数・1 query・1 label — 構成により真**」）・`_traverse_say` の核を `gap_mm`（file の 1 綴り）経由に・wrapper は対名＋半径のみ。
+- ⛔⛔ **第 5 欠陥（tally 更新: 5 欠陥・他捕 4・自捕 1 — 初の自捕は他卓の発見を適用する手の中で）**: `furniture_gap` 16 mm 既定 < 19.8 mm 標的 ⇒ **「薄い対を見張るために足した commit が、その対の実距離を原理的に記録できなかった**」。⇒ KEEP 議論中の「3 対完備」は**構造の記述としては真・運用被覆としては過大**だった（数は一度も産まれていないので banked 数値への影響 0・keep の決定根拠〔無書込経路・読みで発見〕は不変）。半径 16→176 へ。
+- **作業 2 = kinonly 飽和→absent**（当卓 m-p18-254 の routing どおり）: `dist >= cutoff` skip・`(None,"-")`・全 caller に absent 枝・along-path の 1e9 seed 除去・**ranking は absent を最緩として扱うが印字しない**。検証 = 合成 2 球対照＋診断再走（4 既知値は 0.5 内 ⇒ **数は不変で再現しなければならない** — 事前 commit された期待）。
+- ⭐ 夜の tally の形が閉じつつある: **全 6 欠陥（5+今後見つかる分含まず）が run 前・読みで発見** — 認可資源の消費 0 のまま。
+
+**Banked — 時刻は本節 commit の author date が正。**
