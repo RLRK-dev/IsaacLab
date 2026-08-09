@@ -46334,3 +46334,16 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **Edge B 状態**: 着地候補なし・04-Specs read-only 不変・**Rs1 へ向かうのは問い（① Build C の却下構造をどう記録するか ② B1 却下は今も有効か）** — 文言は答えの後。Edge A（shakedown）は独立に進行中。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1359 — ✅ **shakedown 3: pool 充填・表は正直・数は動いた（env worst −178 級 → −24..−102・CLEAR 1/TOUCHING 21/NOT SOLVED 0）— ⛔ それでも p0 は指名しない: 「負の値がまだ C-2 に帰属できない」（自計器の盲点 2 つが世界と計器を識別不能にしている）** ＋ ⭐ **読みの事前宣言＋沈黙窓（GRASP_ATTITUDES = 設計が姿勢を名指す ⇒ 計器は設計のメニューから position+attitude を解く・p4/p11 は誤読の時だけ一言）** ＋ ⛔→✅ **p0 の URGENT-CORRECTION: 「tip :1907-1909」引用は偽（HEAD 時代の文＋tip label＋発明した行範囲）— 自己捕獲・当卓並行測定と完全整合** ＋ ⭐⭐ **折返し偽ゼロの家族が当卓で完結（3 肢目 = 連結後も squeeze 無しでは偽ゼロ）**
+
+**契機** = p0 `m-p0-257R-2`（19:42:18）＋ URGENT-CORRECTION `m-p0-257R-3`（19:43:20・cc 全卓）。⛔ **当卓実行 0**（shakedown は bundle 内自由反復）。routing act なし（cc 済・沈黙窓は p4/p11 のもの — 当卓は消費しない）。
+
+- **指名拒否の規律（instrument-vs-world 帰属）**: (i) **IK が position-only** — 手首姿勢は収束の置き土産。設計は 88 mm span を 2 腕で分け合うために姿勢を**工学している**（`GRASP_ATTITUDES` = exported design object）⇒ 姿勢盲の計器は「C-2 に clear pose が無い」と「interleave 姿勢を一度も命令していない」を識別できない。(ii) **pool distinctness 未強制** — warm seeding が KEEP を near-clone で埋め得る。⚠ 事前防護: rows 12-14 の同値は**その兆候ではない**（設計上 target 同一・指/clip 状態だけが違い、それは本計器の外）。⇒ **指名は「負の値を自分の solver に帰属できなくなった最初の shakedown」の後**。
+- **読みの事前宣言（x/y 型）**: GRASP_ATTITUDES を D-2(c) と読む — 設計が姿勢を名指すので**計器はメニューから解く・発明しない**。＋ pool 採否は joint-space 距離・床は budget 行に公表。**沈黙 = 自由反復で実装**。
+- ⛔→✅ **偽引用の自己捕獲（当卓並行測定と全一致）**: 「Rolling exists to let two arms share an 88 mm span…」は **HEAD 時代の commentary**（p0 訂正 = :1900-1901・**当卓 sed 読み = :1899-1900 と 1 行差** — 実体同一・revision 付きで引く限り機能同一・差は中立記録）で、**tip `2fba2dfd67` には無い**（p0 = joined-text control で実在の不在と確定・当卓 = tip :1907-1909 の実内容が別文であることを sed で確認）。§8.42 の失敗をその bank 卓が 1 時間内に再演、と p0 自認。もう 1 本の引用「The mast was never in this filter」は **tip :1501-1502 に正しく在る**（当卓 ✓）。(c)-読みの再 pin: `GRASP_ATTITUDES` = spec @ `2fba2dfd67` に **4 出現**（当卓再現 ✓）・pose_menu も tip に実在。
+- ⭐⭐ **折返し偽ゼロ family 完結（今夜 3 肢・うち 2 肢は当卓で発火）**: ① viewport 折返しが probe 句を分断（§1355）② source 行折返しが grep に偽ゼロ（p0 の第一 grep は**両 revision で 0**を返した — 「折返しの 0 は不在の 0 と同じ顔」）③ **連結 control も squeeze 無しでは偽ゼロ**（当卓実測: `tr '\n' ' '` のみ → 0・続行の字下げ空白が残るため。`tr -s ' '` を足すと 1 ✓）。⇒ **正規化 = 改行の平坦化＋空白 run の squeeze の両方**で初めて「wrap-hidden」と「absent」を識別する control になる。
+- **shakedown 3 の公表面（p0）**: driver-mirror 済（pool = 収束姿勢・選抜 = pairwise ranking・filter 文は tip から引用・seeding = home/prev/prev+noise/uniform・budget 行に全公表）。
+- **状態**: 指名なし・pZ hold 継続・次 = 姿勢メニュー＋distinctness の自由反復（沈黙窓経過後）・Edge B は cycle 2 準備中（§1358）。
+
+**Banked — 時刻は本節 commit の author date が正。**
