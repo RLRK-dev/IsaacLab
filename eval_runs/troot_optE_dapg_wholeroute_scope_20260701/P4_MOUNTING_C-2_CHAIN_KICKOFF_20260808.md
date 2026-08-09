@@ -1720,3 +1720,34 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 3. **分岐**: 非衝突 → `:2388` 削除＋`ctrl=HOME` settle で即（費用 = 整定秒数）。衝突 → (a) **asset が home を宣言**（keyframe / joint `ref` で qpos0 = home・実行時書込ゼロ。⚠ keyframe reset を「書込」に数えるかの線引き = Rs）(b) 段階 servo unfold（要設計）。
 4. **診断依頼（m-p4-202・p18 経由 → p0）**: 次 iteration に **qpos=0 の腕間・腕-柱/卓 worst clearance 1 行**（geom pair 名つき・mj_forward のみ・step なし・受入条件でなく diagnostic・既存 bundle と free-iteration default の内側）。⇒ どの分岐かが 1 iteration で確定。**breach 枝なら修正形そのもの・例外内枝でも読み物として立つ — どちらでも無駄にならない**。
 5. 不変: dep-3 open（wired 全 gate）・7 site 不触・mounting C-2 の 4 編集未着手・私の 7 読武装のまま。
+
+---
+
+## 2026-08-09 16:06 — ① の Rs 裁定が出た: 違反枝。応答表を同 turn で執行（dep-3 = RULED・wired は修正着地まで走らない）
+
+### (0) custody
+
+- **Rs 逐語**（2026-08-09 16:0x JST・本 session 直答）: 「**腕を姿勢へ書き込むことは不可　すべてコントローラの司令で実現できるはず。**」
+- 文脈: 直前 2 turn で ① の物件（`:2388`）と修正可能性（servo-only 前例 = `probe/pd1-arm-pd`）を説明済み。⇒ **① = 違反枝の裁定**。banked rule（prohibited.md 逐語と同文）の再確認 ＋ 「全てコントローラ司令で」という修正形の方向指定を伴う。
+
+### (1) 応答表の執行（10:04 §C dep-3・事前確定どおり）
+
+- **dep-3 = RULED（違反）**。⛔ **wired を走らせる一切（DoD 動画含む）は、修正が着地するまで不可**。受入報告は**修正 commit を pin** する（応答表の自分の文言どおり）。
+- **修正 chain を起こす**: ①zero-pose 診断（**依頼済・m-p4-202**・次 iteration で確定）→ ②修正形の設計 1 枚（**既定 = 純 servo** — Rs の語「すべてコントローラの司令で」に従う。⚠ 診断が「zero 姿勢 = 衝突」を示した場合、**初期条件の有効性は controller の問題ではない**〔開始時点でめり込んだ sim は最初の step から物理無効〕ため、その数値を添えて**初期条件の形だけ Rs へ一語照会**に戻す）→ ③impl = p0（自 file）／設計確認 = p11（arm-control 設計 owner）→ ④verify = pZ → ⑤land。⛔ **land 後も run には Rs の run 認可が別途要る**（従前どおり）。
+
+### (2) 適用範囲（語を伸ばさない）
+
+- **操作対象 = live `d` への腕姿勢書込**（sim = 現実の腕）。operative なのは **wired `:2388`**（critical path 上で唯一）。
+- route（retired）・video 3 本の同型行: **走らせる予定が無い限り不作為**（走らせたくなったら修正が先 — 同じ裁定が効く）。⚠ video 3 本の「オフラインreplay 例外」（banked・失効していない）への該当性分類は**今日の語では決まらない** — class 一覧に残置（p18/Rs court）。
+- **KINONLY 計器は無関係のまま**（never-stepped 計算機への候補書込 = act-class 開示つきで Rs が別途承認済・「腕を姿勢へ」の対象である live の腕を持たない）。**影 rollout class（scratch を step する 6 箇所）も今日の語で覆わない** — 一覧に残る（私は伸ばさない・縮めない）。
+- ⛔ **迂回禁止を明記**: 修正が「scratch に書いて d へ複写」の形を取ることは不可（state 複写は現在 0 — その 0 を維持する。servo 目標だけが d へ行く）。
+
+### (3) 台帳（16:06）
+
+| id | 状態 |
+|---|---|
+| dep-1 | 不変（計器の表待ち・revision 未指名・pZ leg 保持） |
+| dep-2 | 不変（cap = spec 着地まで） |
+| dep-3 | **RULED（違反）** → ⏸ **fix pending**（診断 → 設計 → p0 impl → pZ → land）。wired 全 run は着地まで不可 |
+
+- 不変: mounting C-2 の 4 編集（dep-1 gate のまま）／04-Specs 不触／7 site へ手を触れない（**修正も p0 の file で p0 が行う** — 私は書かない）。
