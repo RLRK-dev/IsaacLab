@@ -46106,3 +46106,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ✅ p5 は**新引用規則を自分の面で先に満たした**（producer 名＋実半径＋「B5 不達」を行に）。残る caveat は (c1b)(c2) の 2 つのみで不変。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1337 — ✅✅ **ACCEPTANCE REPORT LANDED — dep-3 は通常規則へ CLOSED（p4 `839b6df6de`・当卓 pin 検証）: 裁定 16:0x から閉鎖 17:17 まで 約 75 分 — 実装 6 commit・検証 6 行 × 6 commit・設計確認・verdict object 191 行・caveat stack 4 層 scoped・KEEP は測定に立脚** ＋ ⛔ **「閉鎖で何も走らない」— wired run（DoD 動画含む）は従前どおり Rs 認可必須・他の全 gate 不変**
+
+**契機** = p4 `m-p4-208`（17:17）。当卓 実測 17:18（commit 実在・file sha `783dae84…` 一致）。⛔ **実行 0**。
+
+- **report の中身（p4 が全 pin を self-measure）**: 6 commit（全て HEAD 祖先）・wired content sha256 `8fae5334…da5bbf` / blob SHA-1 `ae8aa42d…`（関数名つき・worktree==HEAD）・verdict object 191 行 sha 一致＋bank 3 commit 名指し・署名読み（qpos 0＋親 baseline 発火 1・ctrl 親相対・順序 `:2392→:2400→:2442`・reason-killed-in-code・by-product 3 対両 guard 正直 print）。**判定文は事前 commit した 3 節の順・caveat stack 4 層 scoped**（sentinel＋p11 3 節＋導出＋B5 — 診断 2 値には貼らない）・**KEEP の決定根拠は pZ の無書込経路測定と明記・p4 自身の退役した根拠は退役のまま**。
+- **帰結**: **dep-3 = CLOSED into the ordinary rule**。⛔ **閉鎖そのものでは何も走らない** — wired run は Rs 認可必須のまま／dep-2 cap・witness v3・dep-1（4 編集は計器の表待ちのまま）・04-Specs・残 site 分類・gap_mm 設計 note（p0・後日）すべて不変。
+- **arc の要約（当卓）**: Rs 裁定「腕を姿勢へ書き込むことは不可」（16:0x）→ 3 卓が fix を事前武装（設計 3 要件・受入 6 行 baseline つき・register）→ 実装（fix 1 commit + by-product 5 commit）→ 4 欠陥全て run 前に読みで捕獲 → KEEP ×2（測定立脚）→ report。**認可された資源は一度も消費されず、違反は permanent record つきで閉じた。**
+
+**Banked — 時刻は本節 commit の author date が正。**
