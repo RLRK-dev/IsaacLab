@@ -6,7 +6,11 @@
 
 ⛔ What this is NOT: it never steps.  No mj_step, no dynamics, no route run.  It answers one
 question per STEP -- *is there a joint configuration that puts both tools where the design says,
-without the arms touching* -- and nothing about whether a controller could follow the path there.
+AT AN ATTITUDE THE DESIGN'S OWN MENU NAMES (spec §6.4d GRASP_ATTITUDES), without the arms
+touching* -- and nothing about whether a controller could follow the path there.  Position-only
+was shakedowns 1-3, and its negatives were unattributable: the design engineers its attitudes so
+two arms share an 88 mm span, and an instrument that never commands an attitude cannot tell "C-2
+has no clear attitude" from "I never asked for the composed one".
 
 ⚠ Honesty clause (acceptance (6), widened at 2026-08-09 10:56).  This measures **the design as
 restated and the cell as reassembled**.  `ur15_cell_spec.py` exports constants, not a model, so the
@@ -80,6 +84,7 @@ C2_ENV = {"YOKE_SPREAD_OVERRIDE": "0.28", "TILT_DEG_OVERRIDE": "20", "CROWN_R_OV
 for _k, _v in C2_ENV.items():
     os.environ[_k] = _v
 
+import json  # noqa: E402
 import math  # noqa: E402
 import pathlib  # noqa: E402
 import re  # noqa: E402
@@ -157,21 +162,44 @@ def read_canonical() -> tuple[list[dict], dict]:
 
 
 # ---------------------------------------------------------------------------------------------
-# Horizontal targets -- acceptance D-2(c).  ⛔ NEVER INVENTED.  The design names the clip by
-# identity ("C1上空へ", "C2へ押し込み"); the referent is resolved off THIS model's clip constants,
-# and the resolution rule is published per row.  ⚠ The C2 x divergence (cell 0.040 vs design and
-# task_config +0.075, 35.0 mm) is p4's open deviation word; both values are printed where it bites.
+# Horizontal targets -- acceptance D-2(c).  ⛔ NEVER INVENTED.  The referent comes from the
+# design's own columns (action word, clip-state, z-continuity), resolved off THIS model's
+# constants, and the resolution is PRINTED per row before the table.  ⚠ The C2 x divergence
+# (cell 0.040 vs design and task_config +0.075, 35.0 mm) is p4's open deviation word; both
+# values are measured where it bites.
 # ---------------------------------------------------------------------------------------------
 CLIP_XY = {"C1": tuple(spec.C1), "C2": tuple(spec.C2)}
+REST_XY = (0.0, float(spec.REST_Y))
 
 
-def referent_for(row: dict) -> tuple[str, tuple[float, float], str]:
-    """Return (referent, (x, y), rule).  The rule string goes into the row."""
+def referent_for(row: dict, carry: tuple | None) -> tuple[str, tuple[float, float], str]:
+    """Return (referent, (x, y), rule) from the design's own columns -- three rules, D-2(c):
+
+    1. the action names a clip -> that clip.
+    2. the action names the cable while NO clip is seated (clip column '-') -> the resting
+       cable: y = spec.REST_Y (the saddle row); x = 0.0 is an INSTRUMENT CHOICE inside the free
+       window between the middle and right saddles (REST_X) -- the design bounds that x, it
+       does not name it, and the label says so.
+    3. otherwise -> the previous row's referent, carried: the design moves the hands only when
+       its action word says so.  The table's own z-columns witness this -- rows 8, 12-14 and 17
+       keep the previous row's z exactly; only fingers and clip state change.
+
+    ⛔ v1 (shakedowns 1-4) resolved EVERY clipless row to (0.0, TABLE_Y) and called it "cable
+    row" -- TABLE_Y is the TABLE'S CENTRELINE (spec :670 @ 2fba2dfd67), not a cable row, so rows
+    8/12-14/17 were measured at a point the design never names, and rows 2-5 sat 60 mm off the
+    saddle row.  Found preparing shakedown 5; v1-v4 rows carry that referent.  A second v1-v4
+    defect fixed here: the rule string was RETURNED but never printed, while the section header
+    claimed "published per row".
+    """
     n = row["name"]
     for c in ("C1", "C2"):
         if c in n:
-            return c, CLIP_XY[c], f"design names {c}; xy = spec.{c} on this model"
-    return "cable", (0.0, float(spec.TABLE_Y)), "design names the cable; xy = cable row on this model"
+            return c, CLIP_XY[c], f"rule 1: action names {c}; xy = spec.{c}"
+    if "ケーブル" in n and row["clip"] in ("-", ""):
+        return "cable-at-rest", REST_XY, "rule 2: cable named, no clip seated; y = spec.REST_Y, x = 0.0 (instrument choice in the free saddle window)"
+    if carry is None:
+        raise RuntimeError(f"row {row['step']} names no referent and there is nothing to carry")
+    return carry[0], carry[1], f"rule 3: no referent named, z unchanged; carried from the previous row ({carry[0]})"
 
 
 # ---------------------------------------------------------------------------------------------
@@ -316,6 +344,45 @@ def gap_worst(*vs: float | None) -> float | None:
     return min(present) if present else None
 
 
+# ---------------------------------------------------------------------------------------------
+# ATTITUDE, FROM THE DESIGN'S OWN MENU -- D-2(c): the design names the attitudes, the instrument
+# never invents one.  Both functions below are ports of the driver's canonical form, cited line
+# by line, because the attitude a row certifies must be the attitude the design's own machinery
+# would produce for that menu entry -- a home-grown parametrisation would certify something else.
+# ---------------------------------------------------------------------------------------------
+def rdes(yaw: float, roll: float = 0.0) -> np.ndarray:
+    """Desired tool orientation for a menu entry.  Port of `_rdes` (driver :1174-1181 @
+    2fba2dfd67): closing axis across the cable, approach down; yaw spins about the vertical,
+    roll tips about the closing axis -- 'Rolling is what lets two arms share an 88 mm span
+    without their wrists meeting'."""
+    base = Rotation.from_euler("z", yaw) * Rotation.from_euler("z", math.pi / 2.0)
+    return (base * Rotation.from_euler("y", roll)).as_matrix()
+
+
+def measure_axfix(m: mujoco.MjModel, qadr: dict, pad: dict, toolb: dict) -> dict:
+    """Where the closing and approach axes sit in each tool body's own frame.  Port of
+    `_measure_axfix` (driver :426-448 @ 2fba2dfd67), measured on a throwaway MjData at the
+    driver's own reference pose -- the relation is rigid, so any non-singular pose gives the
+    same local matrix; using the driver's keeps the numerics identical."""
+    sc = mujoco.MjData(m)
+    for t in ("L", "R"):
+        for k, a in enumerate(qadr[t]):
+            sc.qpos[a] = [0.0, -1.2, 1.0, -1.4, -1.57, 0.0][k]
+    mujoco.mj_forward(m, sc)
+    out = {}
+    for t in ("L", "R"):
+        pl, pr = np.array(sc.xpos[pad[t][0]]), np.array(sc.xpos[pad[t][1]])
+        c_w = (pr - pl) / max(np.linalg.norm(pr - pl), 1e-9)
+        pinch_w = 0.5 * (pl + pr)
+        a_w = np.array(sc.xpos[toolb[t]]) - pinch_w
+        a_w = a_w / max(np.linalg.norm(a_w), 1e-9)
+        Rt = np.array(sc.xmat[toolb[t]]).reshape(3, 3)
+        c_l, a_l = Rt.T @ c_w, Rt.T @ a_w
+        s_l = np.cross(a_l, c_l)
+        out[t] = np.column_stack([c_l, s_l, a_l]).T
+    return out
+
+
 def main() -> int:
     rows, meta = read_canonical()
     print(f"[table] {TABLE.name} anchors matched: {meta['anchors_matched']}, rows from {meta['rows_from']}")
@@ -346,6 +413,15 @@ def main() -> int:
     if min(TOOL.values()) < 0:
         raise RuntimeError("pinch sites absent -- refusing to substitute a different tool point silently")
     print(f"[cell] tool point per arm = SITE {[mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_SITE, s) for s in TOOL.values()]}")
+    # Attitude datum bodies -- same loud-failure rule as the sites: substituting a different body
+    # would silently change WHAT ATTITUDE MEANS on this instrument.
+    PADB = {t: [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, f"{t}g_{s}_pad") for s in ("left", "right")]
+            for t in ("L", "R")}
+    TOOLB = {t: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, f"{t}g_base") for t in ("L", "R")}
+    if min(min(v) for v in PADB.values()) < 0 or min(TOOLB.values()) < 0:
+        raise RuntimeError("pad or tool-base bodies absent -- the attitude datum cannot be measured")
+    DOF = {t: [m.jnt_dofadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"{t}_{j}")] for j in J6]
+           for t in ("L", "R")}
     home = np.asarray(spec.HOME_POSE, dtype=float)
     for t in ("L", "R"):
         for k, a in enumerate(qadr[t]):
@@ -368,28 +444,67 @@ def main() -> int:
     # ---- STEP 2-18 -----------------------------------------------------------------------
     # Damped-least-squares IK on the tool point, kinematics only.  SEARCH BUDGET IS PART OF THE
     # CONCLUSION (acceptance (6)): a "not solved" row means not solved WITHIN THIS BUDGET.
-    RESTARTS, ITERS, SEED, TOL, KEEP = 40, 160, 20260809, 2e-3, 6
+    ITERS, SEED, TOL = 260, 20260809, 2e-3
+    # Attitude acceptance: 0.02 rad is the driver's own seat-solve tolerance (re_max=0.02,
+    # :733 @ 2fba2dfd67) AND it sits under half the menu's finest roll spacing (0.05 between
+    # 0.50 and 0.55), so a converged attitude names ONE menu entry rather than a blur of
+    # neighbours -- the same identifiability rule the spec applies to the vertical check.
+    RE_TOL = 0.02
+    MENU = list(spec.GRASP_ATTITUDES)      # the design's menu, verbatim (spec §6.4d)
+    TRIES = 2 * len(MENU)                  # p11 -147 (driver :1424-1429): never LESS than one
+    #                                        full pass over the menu; two, so each entry gets a
+    #                                        second seed.  The menu's own length, not a round number.
+    POOL_MIN_DQ = 0.10                     # pool admission floor, L2 rad over 6 joints: under
+    #                                        branch separation (~1 rad), over solver jitter
+    #                                        (TOL-scale).  Two poses closer than this are one
+    #                                        branch refined twice, not two candidates.
     rng = np.random.default_rng(SEED)
     lims = np.asarray(spec.LIMS, dtype=float)
     solved_q = {1: {t: home.copy() for t in ("L", "R")}}
+    AXFIX = measure_axfix(m, qadr, PADB, TOOLB)
+    print(f"[att] menu = spec.GRASP_ATTITUDES: {len(MENU)} entries (spec §6.4d @ 2fba2dfd67); "
+          f"sign per arm on BOTH yaw and roll (spec.SIDES; p5 -167, driver :1414); "
+          f"AXFIX datum measured per arm at the driver's reference pose (driver :426-448 port)")
 
     def solve_arm(t: str, target: np.ndarray, seed_q: np.ndarray | None = None):
-        """DLS position IK.  Restart seeding mirrors the driver's own near/warm practice (tip
-        :730 / :2313 seed every solve from the previous pose): r0 = home, r1 = the previous STEP's
-        pose, r2-r7 = that pose + N(0, 0.35 rad), the rest uniform random.  In the budget line,
-        because the seeding is part of what a row's "not solved" means.
+        """DLS position+attitude IK against the design's own menu.
+
+        Each try commands ONE menu entry (yaw, roll), signed for this arm on both components
+        (p5 -167, driver :1414 @ 2fba2dfd67); the try order is the menu's own order, twice
+        (p11 -147: never less than one full pass).  Solver numerics are the driver's 6D form
+        verbatim (:1448-1462): error = [ep, 0.6*er], damping 0.05^2, half-step relaxation,
+        step-norm cap 0.15.  Seeding: pass 1 = the previous STEP's pose (driver :1434-1436
+        warm-starts every tool pose from the previous waypoint), pass 2 = prev + N(0, 0.35);
+        home / uniform when no prev exists.
+
+        ⛔ DEFECT FIXED IN THIS REVISION, found while porting the 6D form: shakedowns 1-3 called
+        mj_kinematics then mj_jacSite, and mj_jac* reads cdof, WHICH mj_kinematics DOES NOT
+        UPDATE -- mj_comPos does.  cdof stayed where the one mj_forward at the home pose left
+        it, so every earlier iterate descended a home-pose Jacobian.  Measurements (geom_xpos)
+        were unaffected; convergence was slowed, not falsified -- and "not solved within budget"
+        rows from those shakedowns carried that solver in their budget.
+
+        Pool = every distinct converged candidate (position TOL AND attitude RE_TOL), where
+        distinct = L2 joint distance >= POOL_MIN_DQ to every member; first arrival in menu
+        order is kept.  ⛔ No early break during collection: the menu is roll-ascending, so
+        stopping at the first few converged entries would bias the pool to near-upright and
+        starve exactly the high-roll attitudes the design engineered for clearance.
         """
-        tool = TOOL[t]
-        best_q, best_e, used = None, 1e9, 0
-        cands: list[np.ndarray] = []
-        for r in range(RESTARTS):
-            if r == 0:
-                q = home.copy()
-            elif seed_q is not None and r == 1:
+        tool, toolb, dof = TOOL[t], TOOLB[t], DOF[t]
+        sgn = float(spec.SIDES[t])
+        best_pe, best_re, used = 1e9, 1e9, 0
+        cands: list[tuple] = []      # (q, (yaw, roll) as commanded, pe, re)
+        for ri in range(TRIES):
+            yaw, roll = MENU[ri % len(MENU)]
+            yaw, roll = sgn * yaw, sgn * roll
+            RDA = rdes(yaw, roll) @ AXFIX[t]
+            if seed_q is not None and ri < len(MENU):
                 q = np.asarray(seed_q, dtype=float).copy()
-            elif seed_q is not None and r <= 7:
+            elif seed_q is not None:
                 q = np.clip(np.asarray(seed_q, dtype=float) + rng.normal(0.0, 0.35, 6),
                             lims[:, 0], lims[:, 1])
+            elif ri == 0:
+                q = home.copy()
             else:
                 q = rng.uniform(lims[:, 0].clip(-np.pi), lims[:, 1].clip(None, np.pi))
             for _ in range(ITERS):
@@ -397,38 +512,58 @@ def main() -> int:
                 for k, a in enumerate(qadr[t]):
                     d.qpos[a] = q[k]
                 mujoco.mj_kinematics(m, d)
-                err = target - d.site_xpos[tool]
-                e = float(np.linalg.norm(err))
-                if e < best_e:
-                    best_e, best_q = e, q.copy()
-                if e < TOL:
+                mujoco.mj_comPos(m, d)
+                ep = target - d.site_xpos[tool]
+                Rt = np.array(d.xmat[toolb]).reshape(3, 3)
+                er = Rotation.from_matrix(RDA @ Rt.T).as_rotvec()
+                if float(np.linalg.norm(ep)) < TOL and float(np.linalg.norm(er)) < RE_TOL:
                     break
                 jacp = np.zeros((3, m.nv))
+                jacr = np.zeros((3, m.nv))
                 mujoco.mj_jacSite(m, d, jacp, None, tool)
-                J = jacp[:, [m.jnt_dofadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"{t}_{j}")] for j in J6]]
-                dq = J.T @ np.linalg.solve(J @ J.T + 1e-4 * np.eye(3), err)
+                mujoco.mj_jacBody(m, d, None, jacr, toolb)
+                J = np.vstack([jacp[:, dof], 0.6 * jacr[:, dof]])
+                e6 = np.concatenate([ep, 0.6 * er])
+                dq = 0.5 * (J.T @ np.linalg.solve(J @ J.T + 0.05**2 * np.eye(6), e6))
+                n = float(np.linalg.norm(dq))
+                if n > 0.15:
+                    dq *= 0.15 / n
                 q = np.clip(q + dq, lims[:, 0], lims[:, 1])
-            # ⛔ Keep THIS restart's own converged pose.  Appending the running best gave KEEP
-            # copies of one pose, so the pair scoring below had nothing to choose between --
-            # a diversity of zero dressed as a search.
-            # Pool = every restart's own converged pose, up to KEEP.  ⛔ The env-wide clearance
-            # filter that stood here starved the pool to ZERO at every STEP of shakedown 2.  Read
-            # at the tip as text, the driver's own selection stage rejects on THE OTHER ARM ONLY --
-            # "The mast was never in this filter.  It was MEASURED every step and printed"
-            # (:1501-1502 @ 2fba2dfd67) -- and clip/table proximity is task-inherent at insertion
-            # steps, so filtering on it rejects every correct pose.  Selection on clearance
-            # happens at the pairwise ranking below; every clearance is still REPORTED per row.
-            if e < TOL:
-                cands.append(q.copy())
-                if len(cands) >= KEEP:
-                    break
-        return best_q, best_e, used, cands
+            # Final measure at the pose the loop actually left, driver-style (:1466-1469).
+            for k, a in enumerate(qadr[t]):
+                d.qpos[a] = q[k]
+            mujoco.mj_kinematics(m, d)
+            pe = float(np.linalg.norm(target - d.site_xpos[tool]))
+            Rt = np.array(d.xmat[toolb]).reshape(3, 3)
+            re_ = float(np.linalg.norm(Rotation.from_matrix(RDA @ Rt.T).as_rotvec()))
+            best_pe = min(best_pe, pe)
+            if pe < TOL:
+                best_re = min(best_re, re_)
+            if pe < TOL and re_ < RE_TOL:
+                if all(float(np.linalg.norm(q - c[0])) >= POOL_MIN_DQ for c in cands):
+                    cands.append((q.copy(), (yaw, roll), pe, re_))
+        return cands, best_pe, best_re, used
 
     def place(qs: dict) -> None:
         for t in ("L", "R"):
             for k, a in enumerate(qadr[t]):
                 d.qpos[a] = qs[t][k]
         mujoco.mj_kinematics(m, d)
+
+    def env_scan(t: str, cands: list, other_q: np.ndarray) -> list:
+        """Per-candidate env clearance, measured ONCE per candidate: env is a property of ONE
+        arm and the static world, so it does not belong inside the pair loop.  ⚠ Ranking, not
+        rejection -- the spec's own recorded lesson (SIGMA_FLOOR: 'the 0.12 floor starved the
+        solver ... ranking, not rejection, is the way to do this'): an env-touching candidate
+        stays scoreable, and the row REPORTS how many candidates were env-clear, which is what
+        makes a TOUCHING verdict attributable to the design point rather than to my selection."""
+        other = "R" if t == "L" else "L"
+        out = []
+        for c in cands:
+            place({t: c[0], other: other_q})
+            v, p = closest(m, d, grp[t], grp["env"])
+            out.append((c, v, p))
+        return out
 
     # ⭐ DEV-C2X (p4, 2026-08-09 11:09, provisional, D-5-adjacent).  clip C2's x disagrees between
     # the reassembled cell (0.040) and both the design table and task_config (+0.075) -- 35.0 mm.
@@ -442,63 +577,116 @@ def main() -> int:
     print(f"[dev-c2x] mapping: design (across,along) -> cell (x,y) by transposition; "
           f"clip C1 control = {abs(CLIP_XY['C1'][0] - 0.150) * 1000:.1f} mm (expect 0.0), "
           f"clip C2 = {abs(CLIP_XY['C2'][0] - 0.075) * 1000:.1f} mm (expect 35.0)")
+    # Resolve every referent FIRST and print the resolution block, so the rule each row used is
+    # on the record before any solving starts (and mid-table prints cannot break the markdown).
+    resolved, carry = [], None
+    for row in rows[1:]:
+        ref, xy, rule = referent_for(row, carry)
+        carry = (ref, xy)
+        resolved.append((row, ref, xy, rule))
     print()
-    print("| STEP | referent | candidate | arms-closest mm (pair) | arm-env mm (pair) | "
-          "along-path worst mm (i/n, pair) | reach err mm | budget | verdict |")
-    print("|---|---|---|---|---|---|---|---|---|")
+    for row, ref, xy, rule in resolved:
+        print(f"[referent] STEP {row['step']:>2} -> {ref} ({xy[0]:+.3f}, {xy[1]:+.3f})  {rule}")
+
+    bank: list[dict] = []
+    print()
+    print("| STEP | referent | candidate | attitude L(yaw,roll)/R [rad] | arms-closest mm (pair) | "
+          "arm-env mm (pair) | along-path worst mm (i/n, pair) | winner pe mm / re rad (L, R) | "
+          "budget | verdict |")
+    print("|---|---|---|---|---|---|---|---|---|---|")
 
     def row_at(row, ref, cx, cy, label, prev):
         tl = np.array([cx - spec.GRIP_HALF_SPAN, cy, row["zL"]])
         tr = np.array([cx + spec.GRIP_HALF_SPAN, cy, row["zR"]])
-        qL, eL, uL, cL = solve_arm("L", tl, prev["L"])
-        qR, eR, uR, cR = solve_arm("R", tr, prev["R"])
-        if qL is None or qR is None or eL >= TOL or eR >= TOL:
-            print(f"| {row['step']} | {ref} | {label} | - | - | - | L{eL * 1000:.1f}/R{eR * 1000:.1f} | "
-                  f"{uL + uR} it, pool L{len(cL)}/R{len(cR)} | NOT SOLVED (budget) |")
+        cL, peL, reL, uL = solve_arm("L", tl, prev["L"])
+        cR, peR, reR, uR = solve_arm("R", tr, prev["R"])
+        # ⛔ The reach-only fallback of shakedowns 1-3 is GONE, by construction: a position-only
+        # pose has no menu name, so measuring it would reintroduce exactly the ambiguity the
+        # attitude iteration removes.  An empty pool is a NOT SOLVED row, with the best position
+        # and attitude residuals printed so the blocker is legible (attitude blocked if pe
+        # converged and re never did).
+        if not cL or not cR:
+            def _diag(bpe, bre):
+                return f"{bpe * 1000:.1f}mm/" + (f"{bre:.3f}rad" if bre < 1e9 else "no att-conv try")
+            print(f"| {row['step']} | {ref} | {label} | - | - | - | - | "
+                  f"best L {_diag(peL, reL)}, R {_diag(peR, reR)} | "
+                  f"{uL + uR} it, pool L{len(cL)}/R{len(cR)} | NOT SOLVED (within this budget) |")
+            bank.append({
+                "step": row["step"], "referent": ref, "candidate": label,
+                "target_L": [float(x) for x in tl], "target_R": [float(x) for x in tr],
+                "best_pe_mm": [peL * 1000.0, peR * 1000.0],
+                "best_re_rad": [None if reL >= 1e9 else reL, None if reR >= 1e9 else reR],
+                "pool": [len(cL), len(cR)], "iters": uL + uR,
+                "verdict": "NOT SOLVED (within this budget)",
+            })
             return None
         # ⭐ Fix (a): choose AMONG reaching solutions by clearance.  Without this the row answers
         # "does the first reaching solution collide", never "does a clear one exist".
+        # ⛔ FULL-POOL pair ranking.  Shakedown 4 ranked 6x6 finalists out of pools of 50-82, so
+        # a clear pair could sit in the pool and never be scored -- that truncation was MY
+        # selection, not the design's, and a TOUCHING it produced was unattributable.  Env is
+        # precomputed per candidate (env_scan), so each pair costs one arm-arm query.
+        sL = env_scan("L", cL, prev["R"])
+        sR = env_scan("R", cR, prev["L"])
+        ncL = sum(1 for _c, v, _p in sL if v is None or v > 0)
+        ncR = sum(1 for _c, v, _p in sR if v is None or v > 0)
         best = None
-        for a in (cL or [qL]):
-            for b in (cR or [qR]):
-                place({"L": a, "R": b})
+        for a, vL, pL in sL:
+            for b, vR, pR in sR:
+                place({"L": a[0], "R": b[0]})
                 v, pr_ = closest(m, d, grp["L"], grp["R"])
-                w1, p1 = closest(m, d, grp["L"], grp["env"])
-                w2, p2 = closest(m, d, grp["R"], grp["env"])
-                we, pe_ = (w1, p1) if (w2 is None or (w1 is not None and w1 <= w2)) else (w2, p2)
+                we, pe_ = (vL, pL) if (vR is None or (vL is not None and vL <= vR)) else (vR, pR)
                 # Ranking key only, never printed: absent ranks as the cutoff -- the roomiest a
                 # reading could be.  The printed cell keeps the absence sentence.
-                score = min(0.5 if v is None else v, 0.5 if we is None else we)
+                score = min(0.5 if v is None else v,
+                            0.5 if vL is None else vL,
+                            0.5 if vR is None else vR)
                 if best is None or score > best[0]:
-                    best = (score, {"L": a, "R": b}, v, pr_, we, pe_)
-        _, qs, aa, pair, ae, pe = best
+                    best = (score, a, b, v, pr_, we, pe_)
+        _, wa, wb, aa, pair, ae, pe = best
+        qs = {"L": wa[0], "R": wb[0]}
         N = 20
         worst, at, wp = None, "-", "-"
         for i in range(1, N):
             f = i / N
             place({t2: (1 - f) * prev[t2] + f * qs[t2] for t2 in ("L", "R")})
-            v, pp = closest(m, d, grp["L"], grp["R"])
-            if v is not None and (worst is None or v < worst):
-                worst, at, wp = v, f"{i}/{N}", pp
+            # ⛔ v1-v4 sampled ARM-ARM only along the path, so a path diving through the TABLE
+            # was unreported.  All three readings now.
+            for v, pp in (closest(m, d, grp["L"], grp["R"]),
+                          closest(m, d, grp["L"], grp["env"]),
+                          closest(m, d, grp["R"], grp["env"])):
+                if v is not None and (worst is None or v < worst):
+                    worst, at, wp = v, f"{i}/{N}", pp
         place(qs)
-        # ⛔ Row provenance must be visible.  When the clearance filter admits nobody, the
-        # (cL or [qL]) fallback measures the best-REACH pose -- a DIFFERENT OBJECT from a
-        # clearance-selected pair, and the shakedown showed the two are indistinguishable on the
-        # printed row.  The pool counts go in the budget cell; a fallback row carries its reading.
-        fallback = (not cL) or (not cR)
         clear = all(x is None or x > 0 for x in (aa, ae, worst))
-        verdict = ("CLEAR" if clear else "TOUCHING OR THROUGH") + (
-            " ⛔ pool empty: reach-only fallback measured -- read as NO CONVERGED CANDIDATE"
-            " WITHIN BUDGET" if fallback else "")
+        capped = [t2 for t2, n in (("L", ncL), ("R", ncR)) if n == 0]
+        cap = ""
+        if not clear and capped and ae is not None and ae <= 0:
+            cap = (f" (env-capped {'&'.join(capped)}: 0 env-clear candidates in the pool -- "
+                   f"within this budget the touching is the design point's, not the selection's)")
+        verdict = ("CLEAR" if clear else "TOUCHING OR THROUGH") + cap
         along = gap_say(worst, wp) if worst is None else f"{worst * 1000:+.1f} at {at} ({wp})"
-        print(f"| {row['step']} | {ref} | {label} | {gap_say(aa, pair)} | {gap_say(ae, pe)} | "
-              f"{along} | L{eL * 1000:.1f}/R{eR * 1000:.1f} | "
-              f"{uL + uR} it, pool L{len(cL)}/R{len(cR)} | {verdict} |")
+        att_s = (f"L({wa[1][0]:+.2f},{wa[1][1]:+.2f}) R({wb[1][0]:+.2f},{wb[1][1]:+.2f})")
+        print(f"| {row['step']} | {ref} | {label} | {att_s} | {gap_say(aa, pair)} | {gap_say(ae, pe)} | "
+              f"{along} | L {wa[2] * 1000:.1f}/{wa[3]:.3f}, R {wb[2] * 1000:.1f}/{wb[3]:.3f} | "
+              f"{uL + uR} it, pool L{len(cL)}/R{len(cR)}, env-clear L{ncL}/R{ncR} | {verdict} |")
+        bank.append({
+            "step": row["step"], "referent": ref, "candidate": label,
+            "target_L": [float(x) for x in tl], "target_R": [float(x) for x in tr],
+            "q_L": [float(x) for x in wa[0]], "q_R": [float(x) for x in wb[0]],
+            "att_L": list(wa[1]), "att_R": list(wb[1]),
+            "pe_re_L": [wa[2], wa[3]], "pe_re_R": [wb[2], wb[3]],
+            "arms_mm": None if aa is None else aa * 1000.0, "arms_pair": pair,
+            "env_mm": None if ae is None else ae * 1000.0, "env_pair": pe,
+            "along_worst_mm": None if worst is None else worst * 1000.0,
+            "along_at": at, "along_pair": wp,
+            "pool": [len(cL), len(cR)], "env_clear": [ncL, ncR], "iters": uL + uR,
+            "verdict": verdict,
+        })
         return qs
 
     prev = solved_q[1]
-    for row in rows[1:]:
-        ref, (cx, cy), rule = referent_for(row)
+    for row, ref, (cx, cy), rule in resolved:
         if ref == "C2":
             got = None
             for label, (ax, ay) in C2_CAND.items():
@@ -506,13 +694,33 @@ def main() -> int:
                 got = got or r
             prev = got or prev
         else:
-            r = row_at(row, ref if ref != "C1" else "clip C1", cx, cy, "single", prev)
+            shown = {"C1": "clip C1", "C2": "clip C2"}.get(ref, ref)
+            r = row_at(row, shown, cx, cy, "single", prev)
             prev = r or prev
 
     print()
-    print(f"[budget] restarts {RESTARTS} x iters {ITERS}, seed {SEED}, tol {TOL * 1000:.1f} mm; "
-          f"along-path samples 19 interior, endpoints excluded; KEEP={KEEP} poses/arm scored pairwise; "
-          f"seeding: home, prev, prev+N(0,0.35)x6, then uniform")
+    print(f"[budget] tries {TRIES} = 2 full passes over the design menu ({len(MENU)} attitudes, "
+          f"spec §6.4d; p11 -147: never fewer than one pass) x iters {ITERS}, seed {SEED}; "
+          f"acceptance = {TOL * 1000:.1f} mm position AND {RE_TOL} rad attitude (driver's "
+          f"seat-solve re_max :733, and under half the menu's finest roll spacing 0.05 so a "
+          f"converged attitude names ONE entry); solver numerics = driver's 6D DLS verbatim "
+          f"(:1448-1462: 0.6 rot weight, 0.05^2 damping, half-step, 0.15 cap); pool = every "
+          f"distinct converged candidate, floor {POOL_MIN_DQ} rad L2/6 joints; pairs ranked over "
+          f"the FULL pool (LxR), env precomputed per candidate, ranking never rejection; seeding "
+          f"pass 1 = prev pose, pass 2 = prev+N(0,0.35), home/uniform without prev; along-path "
+          f"samples 19 interior (arm-arm AND arm-env), endpoints excluded")
+    sol = _GEN / "kinonly_solutions.json"
+    sol.write_text(json.dumps({
+        "meta": {
+            "tries": TRIES, "iters": ITERS, "seed": SEED, "tol_m": TOL, "re_tol_rad": RE_TOL,
+            "pool_min_dq_rad": POOL_MIN_DQ, "menu_len": len(MENU), "c2_env": C2_ENV,
+            "stack": spec.stack_line(), "cell_provenance": {k: str(v) for k, v in prov.items()},
+            "purpose": "winner joint vectors per row so a verifier can PLACE and re-measure "
+                       "every reading without re-running the search",
+        },
+        "rows": bank,
+    }, indent=1))
+    print(f"[bank] winner joint vectors -> {sol} ({len(bank)} row-instances)")
     print(f"[audit] mj_step calls: {_MJ_STEP_CALLS}")
     import collections as _c
     for k, v in _AUDIT.items():
