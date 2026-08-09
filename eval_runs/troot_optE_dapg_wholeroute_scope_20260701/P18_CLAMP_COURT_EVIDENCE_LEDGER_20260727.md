@@ -45733,3 +45733,14 @@ p5 の −1.0 の取り方 = `grep | head -1`（当卓の head -4 と同形）�
 - ✅ **p0 の fold が完全**（削除≠fix／3 要件／冗長 ctrl 行なし／parent-相対 guard／第 6 行が実体／向きの分離／text 引用自由）— **briefing の伝達が 1 往復で閉じた**。⚠ 家族への態度も正確: 「census に居ないが免疫は主張しない — 数えなかっただけ。**not-having-fired is not not-having-existed**」。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1307 — ⛔⛔ **族の法を publish した 20 分後に、publisher 自身が同じ壊れたクラスで 45 本を取りこぼした（p11・自己申告・census 2 例目 = 最大）—「法を知っていることと、次に手を動かすとき使うことは別物」** ＋ ✅ **Layer 8 の tracked 述語は族に該当しない（`[^=]*` は入れ子を跨ぐ）— ただし逆性質と別母集団** ＋ ⭐ **§14.27 第 1 パス: 裁定①が向きを決めたが、dead/live 未測のまま bank しない（wire-then-validate の自己適用）**
+
+**契機** = p11（16:27:23・pin `db673d5dfa` 135 行 sha 一致 当卓検証）＋ p6 `m-p6-124`（16:27:07・`03159efcaf`+`cc30dcf602`）。⛔ **実行 0**。
+
+- ⛔⛔ **census 追加（発火 6 例目・p11 の 2 件目・最大）**: §7 で法を書いた**直後**に `phys_jq\[[^]]*\] *=` で §14.27 対象を数え、**AST 59 対 regex 14 = 45 本欠落**（route_executor 18対4 ほか）。⭐ 逐語「**法を知っていることと、次に手を動かすとき使わないことは別物**」。⚠ **自卓内に 3 つの数**（行一致 30 / 添字形 14 / AST 59）— 単位を書かねば 3 つとも「対象数」を名乗れる。⛔ DDR#35 の「19」は未読ゆえ裁定せず。
+- ✅ **Layer 8**（`check_control_method.sh` — **tracked**・当卓確認 = Layer 6 の untracked delegate とは**同じ形でない**）: 述語 `:48` の class は **`[^=]*`** ⇒ **入れ子添字を跨ぐ＝族non該当**。⚠ ただし**逆性質**（行後方の `=` まで過剰一致）と**別母集団**（`:30` envs/ maxdepth 1 のみ・p11 の 59 は scripts/ 含む 6 file）⇒ ⭐ **比べる前に母集団を揃える**（§1300 の法の machine-guard 版）。
+- ⭐ **§14.27 第 1 パス（self-scheduled・bank せず）**: 裁定①が両論（delete / actuator 化）の**向きを確定**（servo 既定・かつ delete 単独は不十分〔§1298 (1)〕）。⛔ **bank しない理由が当卓の banked 法そのもの**: spec 自身が `:78` で「live と主張しない」— **dead/live 未確定のまま bank すると「効いていない機構への裁定」を効いている物として置く**（ABSENT-IN-CODE / wire-then-validate）。bank に要る 3 つを提示のみ（①単一機械の対象一覧 ②dead/live 判定 ③裁定①との per-site 突合 — p11 の court は ③のみ）。
+- ✅ **p6 の 2 修復**（自分の文・2 分内）: 「dep-1 loop closed end to end」→ **どの loop か**を名指す形へ（①-annotate 交換）・ctrl 行を parent-相対へ（false-fail 機構を行内に）。⭐ **「私の文はあなたが自白した lift に耐えない」— 他卓の confession を自分の行の検査述語に使う** のが今夜の定型になった。
+
+**Banked — 時刻は本節 commit の author date が正。**
