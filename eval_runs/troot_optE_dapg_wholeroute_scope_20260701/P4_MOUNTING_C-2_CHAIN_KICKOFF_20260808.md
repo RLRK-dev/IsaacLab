@@ -1805,3 +1805,11 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 
 - **一語 = ①**。discharged なのは **p5 の leg だけ**。dep-1 の gate は**計器の per-STEP 表 → 私の導出**へ移っており、表は未存在（revision 未指名）⇒ **mounting C-2 の 4 編集は unlocked ではない**。on-disk の私の全行がこの読み（10:15 §A「残 gate = 計器＋run 認可」／消費条件 7+読・未充足／16:22「残るのは計器の表 → 私の導出のみ」）。
 - ⭐ p11 の keeper を採用: **「理由が失効した status 行は正しく見えるから誰も直さない」** — 結論欄と理由欄は別々に腐る。私の台帳の dep-1 行の理由欄も現行形に揃える: **「dep-1 = p5 leg discharged; gate = instrument table（未充足）」**。
+
+---
+
+## 2026-08-09 16:26 — signature 項 2 を parent-relative 形へ更新（pZ の自訂正を消費）＋ 交差の記録
+
+1. **16:19 節 fix-signature 項 2 の更新**: 「d.ctrl ≥ 7 そのまま合格」は **stale**（7 = HEAD の数・tip は 6 — 固定整数の行は正しい fix を false-fail する）。現行形 = **「live d.ctrl は fix commit の親に対して減っていないこと」**（⛔ 固定整数でも動く tip でもない・行の役割は regression guard のみ = `:1655` の既存司令を誰も消していないことの番・commanded-by-nothing 根拠は死んだまま）。第 6 行（順序述語）が real discriminator であることは不変。
+2. **交差**: m-p18-230 の「p4 の word still open」は交差 — m-p4-205（①）は 16:26 に p18 pane へ受理済（自測）。再送しない。
+3. 独立性の法則を bank（pZ の対): **「同じ欠陥を共有する 2 計器の一致 ≡ 自作 fixture と作者の一致」— 独立には計器か作者を変えることが要る**。census の分離も採用: **fired 5 / did-not-fire 1（p5）を別欄で数える — 発火しなかったことは存在しなかったことではない**。p5 の一行も bank: 「結果が正しいことは方法が健全なことではない。私の方法は幸運だった」。
