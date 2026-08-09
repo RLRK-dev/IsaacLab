@@ -1465,3 +1465,47 @@ m-p18-211 が「(a)(c) は無主」と surface した。**cell build を保持�
 
 - dep-2 の内訳更新: draft 相 = **(b)(d) p11 保有／(a) census 納品済・placement 待ち／(c) 無主のまま**。**cap は spec 着地まで**（不変・p18 が「正しい閉止事象」と追認）。
 - 動かさないもの: HOLD／run 0（本節は全て静的 read）／C-2 4 編集（`2fba2dfd67`/`2bb1aad4e7` 未着手）／dep-1（p5・18:00・別件）／04-Specs（1 byte も触れない）。
+
+---
+
+## 2026-08-09 10:04 — (a) 納品 v1（build 毎の「何が built か」文）＋ :2388 を私の卓で実測 ＋ arc 全体の act-level 掃引（40 file）＋ dep-3
+
+m-p18-212 で **(a) placement = p4 確定**（scope = 「build 毎に何が built かを述べる文」・§4/§0 統合文言は含まない）。本節 §A がその納品。§B は escalated item（wired `:2388`）の**自卓事実確認と、私の arc 全体の同型掃引** — ⛔ **裁定はしない**（§0 = Rs）・⛔ **file には触れない**（p18: NOBODY TOUCHES IT UNTIL Rs RULES）。
+
+### §A — (a) 納品 v1（draft 入力・spec 文言ではない）
+
+> **A1（Build A・前提の参照先）**: 2026-06-25 bank の前提文（spec `:69`）が記述する build = `add_revolute_cable`（`test_newton_clip_routing.py:936-1022`）。**関節 = link 間 1 DOF**（revolute・軸 local-X `:1009`）・曲げ面は縦 sag のみ・**水平 routing curvature を表現しない**。**この build について前提文は真**（bank 当時も今も・HEAD 実測）。選択条件 = `build_scene(solver_backend="mujoco")`（`:1385`）。
+> **A2（Build B・同 file の既定枝）**: `add_cable_rod`（`:868-916`・`builder.add_rod` `:897-905`）。**関節 = CABLE joint・docstring `:871` 逐語 "2 DOF: stretch + bend"** = 伸び＋曲げ。⛔ 曲げ 2 面ではない。曲げが平面か 3D かは newton lib 内部・**未測**。既定連鎖 = `task_config.py:107 SOLVER_BACKEND="vbd"` → CLI 既定 `:8118-8120` → `:8127` → else 枝 `:1391`。
+> **A3（Build C・working cell 一族）**: Option-E S-series の 5 file（MJCF 直接生成）。**関節 = link 間 hinge 2 本**（bend-Y `axis="0 1 0"` ＋ bend-Z `axis="0 0 1"`・`ur15_cell.py:102-103`）＋ cab0 に freejoint（`:97`）。**水平 routing curvature を現に持つ。** 初 commit `bf0235cfd8` 2026-07-27 04:19 = 前提 bank の 32 日後。**前提文はこの build を記述していない（後生まれ・p18 が「outlived spec」と再定式化・私の年表と一致）。** topology は 5 file 一様・**定数は非一様**（cell damping 0.004/stiffness 0.02 ↔ reaim 0.010/0.12）。
+> **A4（統治宣言の形・draft への注意 3 件）**: ① 各文は **as-of（いつ時点）と over-what（どの build）** を運ぶこと — 前提は「偽になった文」でなく「bank 時点の全 build に真で、後の build を覆っていない文」。② **「mujoco」を build 名に使わない**（前提の file 内では mujoco 指定が 1-DOF planar を選び、working mujoco cell は 2-bend — 逆を指す）。③ 「the built cable」が単一 parameter 組を含意しないこと（A3 の定数非一様）。
+
+### §B — :2388 の自卓確認 ＋ arc 全 40 file の act-level 掃引（⛔ 事実のみ・裁定なし）
+
+**B1 (:2388 再現)**: `ur15_steps_wired.py:2386-2392` 直読 — `for _t4 in SIDES: for _k4,_a4 in enumerate(QADR[_t4]): d.qpos[_a4] = HOME_POSE[_k4]` ＋ 同 pose を `d.ctrl` へ ＋ `mj_forward`。直前 comment 逐語「Rs: start from home.」。**live `d`（`:334` で 1 回生成）への arm qpos 書込は本 file 中この 1 箇所**（他の `.qpos[...] =` は全て scratch MjData — `sc`/`_sci`/`_ap`/`_sc2`/`_sv` の生成行を全数確認: `:482 :680 :701 :725 :1925 :2474 :2490 :2685 :2859 :3188 :3268` すべて `mujoco.MjData(m)` = IK solver 作業域・実行中 scene ではない）。p11/p18 の測定と一致。
+
+**B2 (⛔ 私が走らせたことの無かった検査)**: 本 file を私は何度も読んだ（`:1033-1035` settle・`:2509` STEP 1・`:3806` 動画書出）が、**qpos 書込の掃引は一度もしていなかった**。p11 の教訓（**禁止は行為に付く・名前で測ると substrate が変わった瞬間 0 になる**）を自分の arc に適用し、本 turn で走らせた: 母集団 = `p4_ur15_sim_20260727/*.py` **40 file**・述語 = `.qpos/.qvel/.mocap_*[…] =` 代入（act-level）・陽性対照 = wired `:2388`（出た）。
+
+**B3 (掃引結果の分類・live `d` への書込のみ・class は「宣言された種別」であって私の裁定ではない)**:
+
+| file | 行 | 何を書くか | class（宣言・状態） |
+|---|---|---|---|
+| `ur15_steps_wired.py` | `:2388` | **arm qpos**（HOME seed・route 開始時 1 回・ctrl 併記・mj_forward） | **live driver — escalated 済（Rs 裁定待ち）** |
+| `ur15_route.py` | `:220 :229`（＋`:233` qvel=0） | **arm qpos**（40,000 回 random 探索を live `d` で実施＋best を seed） | **retired driver**（p11 spec §1「不触」）— :2388 と同 act-class・先行世代 |
+| `ur15_final_video.py` | `:74` | 全 qpos（WAY[0] seed → 以後 servo） | video script。⚠ **自 docstring `:4` 逐語 "No kinematic writes" と自 `:74` の緊張** — label と act の乖離そのもの |
+| `ur15_grip_video.py` | `:102` | arm qpos（WAY seed → servo） | video script（同型） |
+| `ur15_yoke_video.py` | `:120 :129`（＋`:134`） | arm qpos（探索＋seed） | video script（route 同型） |
+| `r6_negcontrol.py` / `r6_settle_control.py` | `:49` / `:74` | **cable freejoint** を +0.5/+0.6 m 平行移動 | **cable reseed class**（banked 例外の対象: 「ケーブルの reset 再 seed は対象外・現行のまま」）＋ 負対照 script |
+| `probe_geomdistance_sign.py` | `:17 :22` | **玩具 model**（自前 XML の box/capsule slide）qpos | 計測 probe — routing scene でも arm でもない |
+| `probe_crown_band_occupancy.py` | 5 箇所 | mocap_pos（占有測定の掃引体） | 計測 probe |
+
+**B4 (⛔ 私が言わないこと)**: どの行が例外に**入るか**（offline replay 例外・reset seed 例外の当否）は **Rs/design court** — 私は class 候補と pin を並べるだけ。⭐ 事実として増えたのは 2 点: **(i) :2388 は孤立でなく系譜**（retired `ur15_route.py` に同 act の先行世代がある — 「1 箇所直せば終わり」ではなく「系譜が運んだ形」）／**(ii) video script 群も同じ act を持つ**（うち 1 つは「No kinematic writes」と自称しながら）。
+
+### §C — dep-3 追加 ＋ 台帳更新
+
+| id | 内容 | owner | 受入条件 | 状態（10:04） |
+|---|---|---|---|---|
+| **dep-3** | wired `:2388`（＋B3 の同類）への §0 裁定 | **Rs**（裁定）→ 裁定次第で p0（修正・L3 gate 経由） | ⛔ 書かない（Rs を採点しない）— 応答表: **breach 裁定** → DoD run は修正後まで不可・受入報告に修正 commit を pin ／ **例外内 裁定** → 現状維持・裁定 custody を receipt に pin | ⏸ escalated（p18・10:02） |
+
+- **dep-3 が gate するもの**: `ur15_steps_wired.py` を走らせる一切（**DoD 動画を含む**）。**gate しないもの**: C-2 の 4 編集（別 file: `ur15_cell_spec.py`/`sweep_mounting.py`）・(a) 納品（本節 §A・静的文）・dep-1（p5 レグ）。
+- dep-1 追記: p5 は「**43-step は前提に *成功条件経由で* 依存する**」と別途回答済（m-p18-212 末尾）— 工程表整合レグ（C-2 幾何）とは別答・期限 18:00 不変。
+- 動かさないもの: HOLD／run 0（本節も全て静的 read）／04-Specs・07-Design 不触／C-2 4 編集未着手（`2fba2dfd67`/`2bb1aad4e7`）。
