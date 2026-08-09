@@ -45996,3 +45996,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⇒ **p4+pZ の前に在る packet**: 両側の最強論・p5 の訂正済み価格・判定の問い・p11 の不変性・p0 の recusal・file 自身の歴史（§1324 gap_mm）。**1 語で決まる状態。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1326 — ✅ **KEEP・両票（p4「稀少資源は認可であって commit ではない」＋ pZ「recorder には状態への書込経路が *測って* 無い — blast radius は crash か誤印字で、両方閉じた。revert が外すのは、私の第 3 節を discharge できる唯一の計器」）— p0 の revert 申し出は感謝つきで却下・決定は測定に立った** ＋ ✅ **p6: hash 系譜に「final と呼ばれる物なし」（3 移動）・両分岐の pin 形を row に保持**
+
+**契機** = p4 `m-p4-206`（17:05・`2bc478760a`）＋ pZ `PZ-191`（17:04）＋ p6 `m-p6-134`（17:04:15・`50da83b8af`）。⛔ **実行 0**。
+
+- **p4 の 4 根拠**: (i) 前方費用の非対称（3 欠陥の費用は支払済・revert は返金しない） (ii) **欠陥はもう object に無い** — 3 件とも **run の前に** verify 連鎖が捕った ⇒ 「revert は歴史を罰するために現在を壊す」 (iii) 価値が認可日に集中するからこそ**装備は先に載っていなければならない** (iv) 残存リスクは検証が覆った範囲の内側。**fail-toward-revert を尊重**（pZ が revert なら revert・p0 の recusal 形を honored）。
+- **pZ の測定つき票**: settle span の AST（:2398-2441・44 行）— **代入 target は全部 plain local・attribute/subscript target 0 ⇒ 状態への書込経路なし = 腕を動かせない**。⇒ blast radius = crash / 誤印字のみ・両方 control つきで閉じた・**3 件とも読みで発見**（gated 資源を一度も使っていない）。⭐ 一行の why:「**revert は fix を安全にしない — fix は最初から不動。revert が外すのは、私自身の verdict の第 3 節を discharge できる唯一の計器**」。⚖ **反対側の最強論への公正な回答**: 「書込経路の無い部品の欠陥率は、残存リスクでなく *集まった注意の量* を測る — 3 卓が読んだから見つかった」＋ **revert と言う条件を 2 つ明示**（(a) 書込経路が在れば — 測って無い／(b) 欠陥が run の *後* に出ていれば — 3 件とも前）。scope も正確: 票は 6-commit object 上・第 3 節は立ったまま・**第 7 commit は無 prompt 再走**（forward 条件不変）・第 2 addendum で **自分の A1 の 1 hop stale（b6340055→8fae5334）も自分の規則どおり退役させる**。
+- **p6 の 2 実測**: 第 5 commit の親 `2e11b6651f` = **p11 の doc bank**（wired blob は 4981b37a のまま — 当卓 m-p18-245 の文法曖昧を **rev-parse で**解消・読みでなく）／第 6 commit は当卓の 245 の依頼の **50 秒前**に着地（object が relay を再び追い越し）。⭐ row の実践:「**hash 系譜に final と呼ばれる物は無い**」（3 移動を系譜として保持・両分岐の pin 形を事前併記）。
+- ⇒ **sequence 確定**: pZ 第 2 addendum（755eae7ddd + 2a3b5825b7・b6340055 退役）→ **p4 acceptance report**（6 commit・`8fae5334e85e6af5…` 関数名つき・sentinel caveat）→ dep-3 の fix 条件 完全閉鎖 → 通常規則（wired run = Rs 認可必須）へ復帰。
+
+**Banked — 時刻は本節 commit の author date が正。**
