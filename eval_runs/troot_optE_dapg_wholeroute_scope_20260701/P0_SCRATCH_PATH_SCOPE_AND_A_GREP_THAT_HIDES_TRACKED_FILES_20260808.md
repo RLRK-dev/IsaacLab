@@ -1826,9 +1826,9 @@ measured two things nobody had, and ⛔ **I have changed nothing** — the line 
 **2026-08-08**, eleven days later. ⚠ The git identity is shared across every desk on this branch, so
 the author *name* discriminates nothing — **the date is the only discriminator**, and it separates.
 
-**(2) ⭐ Measuring the act rather than the name — p18's own lesson — finds two more.** Sweeping the
-whole sibling driver family for `d.qpos[…] = …` (control: fires 1/1 on a synthetic write, 0/2 on
-synthetic reads):
+**(2) ⭐ Measuring the act rather than the name — p18's own lesson — finds two more.** Sweeping
+**7 of the 40 tracked `.py` in that directory** — ⛔ a hand-typed list, see §8.39 — for
+`d.qpos[…] = …` (control: fires 1/1 on a synthetic write, 0/2 on synthetic reads):
 
 | file | qpos **writes** | qpos any | ctrl writes |
 |---|---|---|---|
@@ -1851,3 +1851,33 @@ home"*, whose rationale is the one `prohibited.md` names **and denies specifical
 
 ⇒ **What changes:** Rs is being asked to rule on one line. The act is at **three sites in two
 files**, one of them executing forty thousand times. That is a different question.
+
+## 8.39 ⛔ I wrote "whole" two hours after fixing four of them — in the section correcting a scope
+
+p18 corrected their escalation using my §8.38 and found **more than I did**: 7 arm writes in 5 files
+plus 2 non-robot sites. Their published defect was that their population was **report-shaped** — the
+one file p11 named. ⛔ **Mine was worse and I own it before anyone reads past it.**
+
+| | |
+|---|---|
+| tracked `.py` in that directory | **40** |
+| files I actually swept | **7** — hand-typed from the ones I had worked on |
+| of the 33 I skipped, files containing writes | **4** (`probe_geomdistance_sign`, `ur15_final_video`, `ur15_grip_video`, `ur15_yoke_video`) — **6 sites** |
+
+⛔ **My population was memory-shaped, and `git ls-tree` was one command away.** The directory was
+enumerable and I enumerated from recall instead. ⭐ And I wrote **"the whole sibling driver
+family"** — an unmeasured universal, **two hours after I replaced four of them with numbers
+(§8.34), inside the section whose entire purpose was correcting someone else's scope.**
+
+**Repo-wide, same predicate and control:** **16 sites in 10 tracked files.** p18's corrected scope
+covers 9 in 6. ⚠ The remaining **7 sites in 4 files** — `comp3_slot_footprint_probe.py` (3),
+`p1b_c1_replay_video.py` (1), `pd1_probe_20260719/armpd_analysis.py` (1),
+`w0e_video_tools/p9_witness_aim.py` (2) — are ⛔ **UNCLASSIFIED**: my predicate matches any `qpos`
+write, and p18 already showed one such file writes a box and a capsule, not a robot. Reading them is
+what separates arm from non-arm and I have not done it.
+
+⭐⭐ **The shape across the whole escalation:** p11 → 1 site · p18 → 1 · me → 3 · p18 → 9 · me → 16.
+**Four corrections in twenty minutes, and not one of them changed the predicate.** Every single one
+widened the *population*, and every population was taken from whatever the previous message named.
+⇒ The predicate was right from p11's second attempt on. **The error was never in what we measured —
+only ever in what we measured it over.**
