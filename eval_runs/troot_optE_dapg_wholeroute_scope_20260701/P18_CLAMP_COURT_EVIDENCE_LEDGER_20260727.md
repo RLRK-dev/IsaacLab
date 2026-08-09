@@ -44745,3 +44745,41 @@ pZ 逐語「**私の 4 verdict と本朝の再走は全て `ur15_steps_wired.py`
 ✅ **pZ の line 不一致も解決**: **両 file とも dirty**・当卓の `:168`/`:463` = **HEAD**・pZ の `:175`/`:497` = **worktree**。⛔ pZ 逐語「**rev 無しの `git grep` は黙って working tree を意味し、私は何も label しなかった**」⇒ **共有 dirty tree では、それは行番号ではなく *誰も持たない object の中の行番号*。**⚠ **単純な shift でもない**（HEAD では kwarg が 1 行に同居・worktree では独立行）⇒ **7 を足して和解した者は、何が変わったかを取り違える。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1266 — ⛔⛔⛔ **当卓の掃引には *3 つの独立した狭さ* があり、3 つとも別の経路で見つかった（母集団・述語・演算子）** ＋ ⭐⭐⭐ **p4 の識別軸「live `d` か scratch `MjData` か」が全体を整理する** ＋ ✅ **(a) delivered ＋ dep-3 が DoD 動画を含む全 wired run を gate**
+
+**契機** = p4 `m-p4-189`（10:07）。当卓 実測 10:08-10:11。⛔ **実行 0**。
+
+### (1) ⛔⛔⛔ **当卓の掃引の狭さ 3 つ — それぞれ別の見つかり方をした**
+```
+① 母集団   p11 が名指した 1 file だけ            → p0 が指摘（他 file を掃いて）
+② 述語     `.qpos` のみ・`.qvel`/`.mocap_*` 欠落  → p4 の広い述語（40 file・3 種）で露見
+③ 演算子   `=` のみ・`+=` を弾いていた            → p4 の pin を辿って **当卓が自分で発見**
+                                                    `d.qpos[free + 1] += 0.5` は書込・当卓の regex `\s*=[^=]` は一致しない
+```
+⇒ ⭐⭐⭐ **1 回の掃引に、独立した狭さが 3 つ。**⛔ **どれも「対照が発火した」ことでは検出できない** — 対照は当卓の述語の中でだけ生きていた。⇒ ⭐⭐ **対照は述語が *死んでいない* ことしか示さず、述語が *狭い* ことは示さない。**（本日の三分類に対する、当卓の面からの補題。）
+
+### (2) ⭐⭐⭐ **p4 の識別軸が全体を整理する — live `d` か scratch `MjData` か**
+✅ **当卓 再測**: `ur15_steps_wired.py` の `mujoco.MjData(` = **12 か所**。うち **`:334 d = mujoco.MjData(m)` が live scene** ⇒ **残り 11 が scratch**（`sc`/`_sc`/`_sci`/`_ap`/`_sc2`/`_sv`）⇒ ⭐ **p4 の「11」は正確**（12 − live 1）。
+⇒ ⭐⭐ **この軸を当てると ②の新規分が全部片付く**:
+```
+live d への書込     ur15_route.py:233 `d.qvel[:] = 0` ・ ur15_yoke_video.py:134 `d.qvel[:] = 0`   ← seed 書込と対になる速度零化
+scratch への書込    steps_wired :682 :703 :3270 ・ c1seat :521 ・ reaim :454（すべて `sc.`/`_sv.`）  ← IK の作業場・走行 scene でない
+routing scene でない probe_crown_band_occupancy.py の `mocap_pos` 5 件（mocap 掃引体）
+```
+### (3) ✅ **p4 の第 3 の class — cable freejoint（banked carve-out）**
+```
+r6_negcontrol.py    :48 free = jnt_qposadr(… "cable_free")   :49 d.qpos[free + 1] += 0.5   # ケーブル全体を y に 0.5 m
+r6_settle_control.py :68 同上                                 :74 d.qpos[free + 1] += 0.60
+```
+⇒ ✅ **腕でなく `cable_free`** ⇒ **「ケーブルの reset 再 seed は対象外」の banked carve-out が名指す class の候補。**⛔ **当卓も p4 も、どの行がどの例外に入るかは言わない（Rs / design court）。**
+
+### (4) ⭐ **p4 が (ii) を独立に発見 — 同じ分単位で当卓と同着**
+p4 は `final_video` の docstring `:4` 逐語「No kinematic writes」と `:74` の qpos 書込の矛盾を、**当卓が §1265 (3) で 3 file について測ったのと同じ数分内に**、自分の custody として報告。⇒ ⭐ **2 卓が独立に同じ label/act 分裂に到達。**
+
+### (5) ✅ **(a) delivered ＋ dep-3 の gate 範囲**
+- **(a) v1** = build ごとの文に **「いつ時点で・何を対象に」を各文が携える**形・2 つの罠を drafting caution として本文に・⛔ §4/§0 統合文言なし（placement どおり）。`d72858d726`・44/0・sha256 `24a2b433a91cd864…`。
+- **dep-3**（owner Rs・受入条件なし＝ **Rs を採点しない**・代わりに response map）: ⛔ **breach 裁定なら DoD 動画を含む全 wired run が停止**（fix は p0・L3 gate 経由）／within-exception 裁定なら現状維持。
+- ⛔ **dep-3 が gate しない物**（p4 明記）: C-2 の 4 編集（別 file）・(a) の文（静的）・dep-1（p5 のレグ・18:00 JST・不変）。
+
+**Banked — 時刻は本節 commit の author date が正。**
