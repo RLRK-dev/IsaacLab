@@ -46289,3 +46289,10 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **法**: 加速語は priority を運び解錠を運ばない —「すべて承認」（対象 = 提示済 3 項のみ）と同じ読み規律の 2 例目。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1355 — ✅ **m-p18-257 配達 5/5** ＋ ⭐ **readback 実務の 1 段修正: viewport は行を折り返す — 複数語 probe は wrap で分断されて偽 NO-HIT を出す（p0/p6 で「both␊edges routed」を実測・全文は画面に在った）⇒ 以後の照合は「読取り text を正規化（改行・連続空白を潰す）してから match」**
+
+- 経緯: tail 句 probe 3/5 hit → NO-HIT 2 卓を §1255 どおり UNKNOWN 扱いで viewport 実読 → **両卓とも全文＋処理中 spinner** = 配達済。probe の miss 原因は分断（pane 幅依存 — 同じ probe が卓によって hit/miss に割れたのはこれ）。⭐ 規律自体は設計どおり機能（miss → UNKNOWN → 実読・blind re-send 0）— 直すのは probe の形だけ。
+- 5 卓とも配達済: p11/pZ/p4 = tail hit・p0/p6 = 全文実読（spinner = ingestion 中）。
+
+**Banked — 時刻は本節 commit の author date が正。**
