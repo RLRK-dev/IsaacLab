@@ -1630,3 +1630,18 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 導出前に読む: 解決 3 数（0.280/20°/0.110）／**逸脱 ID 行の両値**／**audit 節の陽性対照**。導出文は **mode-A scope note を逐語で**含む。
 
 不変: dep-2 cap／dep-3 open（wired 全 gate）／7 site 不触／C-2 4 編集未着手／04-Specs 不触。run 認可は束ねた計器 1 件のみ。
+
+---
+
+## 2026-08-09 10:50 — (i)(ii)(iii) の 3 回答（どれも build 非阻害）＋ 私の (iii) は自分が名指した class の再演
+
+**(i) = 採用（i/n・t\* は撤回）**: along-path 列の刻印は **「at i/n」（path 分率）**。commanded-path sampler に時計は無い — 私の D-1 の「t\*」は **log の証拠（stepping loop 内の t=刻印）を、時間軸を持たない計器へ持ち込んだ誤り**。fold は不変・消費側検査は i/n を期待する。⭐ 併せて PZ-169 の帰結を導出文の型に固定: 文は **「commanded path を sample した（followed trajectory は mode-A = 未測）・端点は sampler 設計上 除外（precedent `:1342` = 「両端は呼び手の endpoint 読みが担う」）」を自分で言う**。⭐ 2 列（端点／along-path）は**互いに包含しない**ことが precedent の code に接地された。
+
+**(ii) = (5) を一語だけ拡張する**: (5) v2 = 「**mj_step 0。FK 評価のみ — `mj_forward` または `mj_kinematics` — ＋ `mj_geomDistance` 読み**」。理由 = 拡張しないままだと、**precedent（`:1346` = `mj_kinematics`）を鏡写しにした自然な実装が (5) の字面と衝突**し、D-3 が名指した「受入時の静かな再解釈」を自分で仕込むことになる。速度のためではない（CPU で余る）— **字面と自然な実装の衝突を先に消すため**。
+
+**(iii) = 採用（cite は tip blob へ）＋ 自分の欠陥の記録**: D-2(c) の text 引用先を **`2fba2dfd67:ur15_steps_wired.py` の `:1731`（blob `2c62b3860050…`）**へ差し替える。自測で確認済: tip の `:1731` に「STEP table 2-18」1 出現・`:1732-1734` に LX1/RX1・LX2/RX2・RX_MID の式。⛔ **私の D-2(c) は HEAD の行（`:2644-2660`）を、tip を pin する build の照合先として書いた — 「revision を連れない行番号」class（p18 item 0 の retraction・p0 の法則）の再演を、その法則が回付された同じ夜にやった。** 採用する形 = p0 の両建て（各数値に revision と blob を添える）＋ p18 item 5 の一行「**値は、名指す object から act の後に読み戻して初めて pin になる**」。
+- p5 の labeled inference（STEP 2 が 在る＋番号 の有力候補・4 crown 全てで closest −1.0 mm < 0.110）は **inference のまま**受領 — 計器の static 列が確認/反証する。
+
+**消費側検査（最終形・導出前に読む 5 つ）**: 解決 3 数（0.280/20°/0.110）／逸脱 ID 行の両値／audit 節の陽性対照（期待事象 非空）／along-path 刻印が i/n 形式／導出文に mode-A note 逐語＋「どの path を sample したか」。
+
+不変: dep-2 cap／dep-3 open／7 site 不触／C-2 4 編集未着手／run 認可 = 計器 1 件のみ。
