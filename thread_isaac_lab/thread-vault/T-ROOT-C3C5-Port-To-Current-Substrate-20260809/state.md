@@ -24,12 +24,12 @@ dependencies:
   #   ⛔ D3/D4/D2/D5/D6 は本欄の 2 語に収まらないので下に載せていない — 全 6 件は本文 §4 の表が正。
   #   ⛔「依存がある」を「止まっている」と読まない（p4 逐語）。
   precedent:
-    - "D1: C-2 取付の着地（この cell の上に建てる。着地前に幾何を作り直せない）— court = p4 chain（進行中）"
+    - "D1: C-2 取付の着地（この cell の上に建てる。着地前に幾何を作り直せない）— court = p4 chain（✅充足 2026-08-10: 着地 0f6b4a733e・受理 d8142fed89。§4-B 08-10 bullet が正）"
   blocker: []
 session_history: []
 define_artifact: "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_DEFINE_C3C5_PORT_TO_CURRENT_SUBSTRATE_20260809.md @ 9ab375026a"
 created: 2026-08-09T05:46:32+09:00
-last_updated: 2026-08-09T05:46:32+09:00
+last_updated: 2026-08-10T01:29:56+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -40,7 +40,7 @@ spec_version: LTM-1 v1.2
 **PENDING = 起票済・未起動。** 理由は 2 つとも NEST 仕様の手続そのもの:
 
 1. **§3.1 起動手順 3→5**: `status を IN_PROGRESS に更新` は **CC session 1 の起動（session ID = `{node_id}#s1`）の後**に来る。本 node に **binding された session は無い**（`session_history: []`）⇒ IN_PROGRESS は事実に反する。
-2. **§3.1 起動条件 2**: `precedent dependency 全件 COMPLETE`。**D1 は進行中・D3 は未決** ⇒ 起動条件を満たさない。
+2. **§3.1 起動条件 2**: `precedent dependency 全件 COMPLETE`。**D1 は進行中・D3 は未決** ⇒ 起動条件を満たさない。〔⚠08-09 時点の文 — **08-10: D1 充足**（§4-B bullet）。precedent 欄は D1 のみ（§4 注記どおり）⇒ **本条件は成立**。本 node を PENDING に保つのは 1. のみ〕
 
 ⇒ **PENDING は判断ではなく測定**。IN_PROGRESS への遷移は上の 2 つが解けた時（＋下記 §1 の授権）。
 
@@ -81,14 +81,15 @@ spec_version: LTM-1 v1.2
 
 **⚠ p6 の執行上の注記（機構の限界・隠さない）**: NEST の `dependencies` 欄は **precedent / blocker の 2 語しか持てない**（NEST §2.1 = 2-edge へ縮小済）。p4 の 4 class のうち **front matter に載るのは D1 のみ**。⛔ **D3/D4 を `precedent` 欄に書けない** — 同欄は §3.1 #2 で**起動条件**として消費され、「起動を止める」意味になるが、p4 は 3 件とも**着手を止めない**と裁定しているため。⇒ **欄に載らない 5 件は本表が正**、front matter からは YAML コメントで本表を指している。
 
-**⇒ status への影響 = 無し（再確認）**: 本 node が PENDING である理由 2 つのうち、§3.1 #2（precedent 全件 COMPLETE）は **D1 のみが該当**するようになったが、**D1 は進行中**ゆえ条件は依然 不成立。もう 1 つの理由（session 未 binding）も不変。⇒ **PENDING のまま**。
+**⇒ status への影響 = 無し（再確認）**: 本 node が PENDING である理由 2 つのうち、§3.1 #2（precedent 全件 COMPLETE）は **D1 のみが該当**するようになったが、**D1 は進行中**ゆえ条件は依然 不成立。もう 1 つの理由（session 未 binding）も不変。⇒ **PENDING のまま**。〔**08-10 再計算**: D1 充足（§4-B）⇒ §3.1 #2 は成立へ転じた。**それでも PENDING** — 残る理由 = session 未 binding＋起動授権（NEST §3.1 #4 = [DEFINE] Rs 承認 = Rs1（人間）の領域）。面は事実のみ・催促はしない〕
 
 ### 4-B. GATE 追加 — DDR #66（§0 疑義・Rs 裁定待ち）2026-08-09 10:1x p6 追記
 
 - **事実**: 本 node の port 対象 driver family に**駆動状態 `d.qpos` への直接書込**がある。腕関節と確証済 = **5 site**（`ur15_route.py:220`/`:229`・`ur15_steps_wired.py:2388`・`ur15_yoke_video.py:120`/`:129`）。全 scope（repo 全体 75 site / 16 file・駆動 `d` 16 site / 10 file）・型の区別・分類の限界は **DDR #66 が正**。**Rs へ escalate 済**（m-p18-212→214）・⛔**全 site 誰も触らない**。
 - **効き方**: **Rs 裁定まで、本 file 群に依存する work は [DEFER-RECON] で #66 を照合**してから進む。⛔**起動条件は変えない** — §4 表の p4 裁定・front matter とも不変（`blocker` 欄への昇格は p4 の court）。
 - ⚠ **判定様式への効き**（p5 の帰結・#66 に記録）: 開始姿勢は `ur15_steps_wired.py:2388` の書込で作られ、下流の `START` はそれを読む（`:2393`→`:2399`→`:2423-2425`）⇒ **goal_verification の判定で「開始姿勢は測定済」型の述語は使えない**（書けば構築により常に真）。
-- ⭐ **2026-08-09 19:00 追記（m-p18-257・custody `f4820b1410` p6 照合）**: **Rs1（人間）の「すすめて」= 既存 gate 内の加速であって解錠でない** — 本 node は **not-advanceable list に明記されたまま**（理由 = D1 未充足）。加速が本 node に届く経路は **EDGE A 経由のみ**（KINONLY 計器の nomination → pZ leg → 表 → p4 導出 → mounting C-2 四編集 解錠 → D1 前進）。**DoD run は四編集の後・Rs1（人間）の認可領域**（不変）。
+- ✅✅ **2026-08-10 01:2x 追記（m-p18-271・p6 が chain 6 commit の実在・親子・HEAD 祖先 6/6 を自測）**: **dep-1 = CLOSED**（Rs2（=p4/CC）equality acceptance MATCH・受理 custody `d8142fed89` +11/−0）・**mounting C-2 四編集 = LANDED & ACCEPTED `0f6b4a733e`**（親 = pZ 事前 banked 受入表 `79b53c797a`・edit-leg verdict **7/7 HOLD** `beb4bcb5fe`）。⇒ **D1「C-2 取付の着地」= 充足** — ⚠dep-1↔D1 の写像は依然写さない（p4 未言明のまま）。本判定は **D1 自身の定義への直接測定**: cell の mounting 既定が C-2 として着地し（`ur15_cell_spec.py` +22/−4）、D1 の court（p4 chain）が受理済。**GATE LINE（p18 指定）**: DoD run / anything wired = **Rs1（人間）の authorization**・dep-2 grade cap 不変・DEV-C2X 35mm 未裁定・D4／#54 部材／stereo-head-absent = carry・F1/F2 = p0 文書 bucket（no unlock implied）。**next movers（p4 命名）= Rs1 の DoD authorization OR EDGE B（p11 cycle 2）**。本 node への効き = §0 の 2. が成立へ（詳細は §0 注記）・**status は PENDING のまま**（session binding＋起動授権のみが残る）。
+- ⭐ **2026-08-09 19:00 追記（m-p18-257・custody `f4820b1410` p6 照合）**: **Rs1（人間）の「すすめて」= 既存 gate 内の加速であって解錠でない** — 本 node は **not-advanceable list に明記されたまま**（理由 = D1 未充足）。加速が本 node に届く経路は **EDGE A 経由のみ**（KINONLY 計器の nomination → pZ leg → 表 → p4 導出 → mounting C-2 四編集 解錠 → D1 前進）。**DoD run は四編集の後・Rs1（人間）の認可領域**（不変）。〔**08-10**: EDGE A 完走・**D1 充足** — 「D1 未充足」を理由とする not-advanceable 記載は本日で消化。四編集は着地済ゆえ DoD run に残るのは **Rs1（人間）の認可のみ**。上の 08-10 bullet が正〕
 - ✅✅ **2026-08-09 17:19 閉鎖（m-p18-253・受入報告 `839b6df6de` = p6 照合・fix 6 commit は HEAD 祖先 6/6 を p6 が merge-base 自測）**: fix 着地・pZ 6 行 × 6 commit PASS・p11 設計確認・p4 受入 ⇒ **dep-3 は通常規則へ閉鎖 — 本 gate は解除**。⛔ただし**この閉鎖で DoD 動画（goal_verification ③）が走れるようにはならない**: wired run は常設規則どおり **Rs run 認可**が要り、DoD は dep-2 引用 cap＋witness 修飾連鎖を携行。#66 の残 site 分類（video 兄弟・shadow-rollout）は OPEN・非 gating。
 - ⭐⭐ **2026-08-09 16:1x 追記（m-p18-224・custody `20a4d2620d:1730` = p6 が blob を実測・sha 一致）**: **Rs 裁定 = 違反（breach）**。Rs 逐語「腕を姿勢へ書き込むことは不可　すべてコントローラの司令で実現できるはず。」⇒ **本 gate の根拠は「疑義」から「裁定済違反」へ確定** — ⛔**fix 着地（chain: zero-pose 診断 → p0 実装・p11 設計確認・pZ 検証）まで wired run 一切なし・DoD 動画（goal_verification ③）閉扉継続**・着地後も wired は別途 Rs run 認可。KINONLY 計器は無関係（別認可）。no-detour 節ほか詳細 = **DDR #66 が正**。
 - ⭐ **2026-08-09 10:3x 追記（m-p18-215・custody `ccc718d5ee:1556`/`:1563` = p6 が blob を実測・sha256 一致）**: Rs 逐語「すべて承認」は **#66 の裁定を含まない**（承認語は裁定の枝を選べない — p4 読解・fail-closed）⇒ **本 gate は不変。wired run は DoD 動画（goal_verification ③）を含めて閉じたまま**。〔⚠本項は 16:1x 裁定の前史〕現存する唯一の run 認可 = **KINONLY 計器**（実装 p0・検証 pZ・driver family 実行 0 条件 = 本 gate の file 群に触れない設計）。その flow 終端（p4 呼称 dep-1 CLOSE）後に **C-2 四編集が開始可** = D1（C-2 着地）の経路上の動き（⚠ dep-1↔D1 の写像は p4 未言明・写さない）。
