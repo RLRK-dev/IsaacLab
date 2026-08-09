@@ -45467,3 +45467,33 @@ p4 の delta 札（35 = 入力差分 / 30.69 = 弦差分）を row 64 の和解�
 **契機** = p4 `m-p4-201`（12:48）。当卓 実測 12:48:54。⛔ **実行 0**。56 commit・fast-forward・全卓分（当卓の push 提案 11:23 → Rs の一語 12:47 → p4 実行 → 当卓確認 — 権限の所在どおりの 3 回目）。他は全て不変（器具は p0 反復中・版 未指名・pZ leg 温存・dep-2/dep-3/7 site/mounting C-2 4 編集/04-Specs）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1290 — ✅ **Rs の「GPU ゾンビ」質問に測定で回答: 3 方向とも 0（compute apps = Chrome のみ／Z-state 0／THREAD interpreter 0・13:01:21）— §20 の kill 対象なし** ＋ ⭐⭐⭐ **p0 が survivor を *自分の loop を読んで* 確認 —「ranking は、pool が一度も含まなかった物を回収できない」（症状の 1 層前を直し忘れる形の 3 例目・自己申告）** ＋ ⭐⭐ **pkill 括弧 guard の修正: guard は pattern でなく *command line 全体* の性質** ＋ ✅ **Rs の servo 質問 → p4 の zero-pose 診断を p0 へ回付**
+
+**契機** = Rs 断片「gpuを使用したゾンビプロセスは」＋ p0 `m-p0-222/223R`（13:00:20・pin `2c2b00c3da` 当卓確認）＋ p4 `m-p4-202`（12:53）。当卓 実測 13:01:21。⛔ **実行 0**（測定のみ）。
+
+### (1) ✅ **GPU ゾンビ = 現時点で不在（3 方向・当卓 実測 13:01:21）**
+```
+nvidia-smi compute apps   Chrome gpu-process 130 MiB のみ（両 GPU に THREAD/訓練プロセス 0）
+ps Z-state（defunct）      0
+THREAD interpreter         0（構造述語: /proc/PID/exe → env_isaaclab*）
+```
+⇒ **§20 の自律 kill 対象なし・稼働中プロセスも無し。**⚠ p0 の「0-byte log の background run 2 件」は**生存プロセスを残していない** — 診断項目は p0 のまま・検視対象の実体は既に無い。
+
+### (2) ⭐⭐⭐ **survivor 確認（p0・run 無し・自分の loop の読解で）**
+```
+p0 の solve_arm   `len(cands) >= KEEP` で break ⇒ **pool 構築中に clearance は一度も参照されない**（届いた 6 姿勢が入るだけ）
+driver（tip :1496） 生成段で `< ARM_CLEARANCE` を棄却（20 候補に対し）
+```
+⇒ ⭐⭐⭐ **p0 逐語「my fix (a) は 36 組合せを rank した — ranking は、pool が一度も含まなかった物を回収できない」** ⇒ 選択差が確定（幾何主張なしに −80..−130 対 −0.6 を説明）。⭐ **自己申告の形が正確**: 「今夜 3 度、自分の fix が 1 層内側の欠陥だった（running-best 追加 → rank-only）— **測った症状を直し、その前の段を触らずにいた**」。
+✅ **owed 3 件 適用**: (a) **生成段 clearance**（`spec.ARM_CLEARANCE` 未満は pool に入らない）(b) 0.102 literal → `float(spec.COLUMN_R)` (c) **argv-per-spawn ＋ exec/compile に呼出 frame**（「source 無しの数は同じ形」）。⛔ p0 自認「stack_line 帰属は記憶からで偽 — pZ の法の実例は私」。
+
+### (3) ⭐⭐ **運用事実 2 件（p0 が「隠さず負う」形で提出）**
+- **(a) 0-byte log**: background run 2 件が exit 0 / still-running を報告しつつ log 0 byte — **未診断・「説明できない log から表を読んで報告はしない」**。
+- **(b) ⭐ pkill 括弧 guard の修正（hub 採用・memory 化）**: 括弧形（`F[o]o`）でも**自分の shell を殺した** — **同じ command line の別の場所（grep 引数・heredoc）に裸の文字列が在れば一致する**。⇒ **guard は pattern の性質でなく command line *全体* の性質**（operational-know-how の pkill 節への実測修正）。
+
+### (4) ✅ **Rs の servo 質問 → p4 の zero-pose 診断（p0 へ回付・optional・受入条件でない）**
+Rs が直接「開始姿勢を書込でなく controller で到達できるか」を質問（banked 規則の要求そのもの・PhysX 側 precedent = `probe/pd1-arm-pd` 実装済）。**未測の 1 事実 = zero 姿勢（arms crossed）の接触状態**。⇒ p4 の依頼: **次反復に 1 行 — qpos=0（両腕）・mj_forward のみ・arm↔arm / arm↔column/table の worst clearance・geom 対名つき**。
+決定木: **clear → `:2388` fix は自明**（書込削除・ctrl=HOME・settle）／**colliding → asset 宣言 home 経由**（keyframe reset が「書込」に当たるかの境界は **Rs が引く**）or 段階 unfold。**どちらでも測定は無駄にならない**（breach 枝の fix 形・within-exception なら読み物）。act-class は既存と同じ・自由反復の内側。
+
+**Banked — 時刻は本節 commit の author date が正。**
