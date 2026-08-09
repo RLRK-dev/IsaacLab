@@ -102,3 +102,39 @@
 - ⛔ **build / probe / training**。§0 前提変更は L3 ⇒ 5 体検証が先。
 
 ⚠ **等級**: (d) の撤回は**他卓の指摘に誘発された**（私は `:29` を読んでいなかった）。§1 の F2b・F5 と §3 の認可/正当化の分離は、回付文には無く、私が読んで出した。
+
+## 5. 訂正 2026-08-09 10:0x — **F2b の「jointless」は主語の取り違え** ＋ 草案に **AS-OF-WHEN** を足す
+
+### 5-1 ⛔ 撤回: 「`add_cable_rod` = jointless」は誤り（主語を取り違えた）
+`:1045` 逐語:「``"vbd"`` (default) = **the jointless ``add_kinematic_arm`` build** EXACTLY as before」 ⇒ ⭐ **「jointless」が掛かるのは `add_kinematic_arm`（腕の build）であって、ケーブルではない。** 私は腕についての語をケーブルに付け替えた。
+✅ **正しい記述**（`:869-871` 逐語）:「Add cable as **Cosserat Rod** via ``builder.add_rod()`` (VBD-native).」「Creates capsule bodies connected by **CABLE joints (2 DOF: stretch + bend)**」
+⇒ ⭐ **2 DOF は「stretch + bend」であって「2 つの曲げ平面」ではない**。⛔ 私は Cosserat rod 内部の bend が平面か 3D かを読んでいない ⇒ **主張しない**。
+⇒ ⭐⭐ **結論は強まる**: 前提が名指した **水平曲率の第 2 曲げ DOF を持つのは Build C（2 hinge cell）だけ**。Build A = 1 曲げ平面、Build B = stretch+bend（曲げ平面数は未確認）。
+⚠ 同 `:1046-1047` は `"mujoco"` 側を「the articulated **UR5e**+Robotiq」と書く — **退役した機種名**（Rs 訂正 2026-07-27「UR15だぞ」）。分岐を説明する docstring 自体が古い。
+
+### 5-2 ⚠ Build C は **定数でも記法でも一様でない**（自分の census が黙って 1 件落とした）
+| file | cable joint の damping / stiffness |
+|---|---|
+| `ur15_cell.py` / `ur15_route.py` | **0.004 / 0.02**（literal） |
+| `ur15_steps.py` / `ur15_steps_reaim.py` / `ur15_steps_c1seat.py` | **0.010 / 0.12**（literal） |
+| `ur15_steps_wired.py`（route を走らせる file） | ⭐ **literal でない** — `:238-239` は `_spec.CABLE_BEND_DAMPING` / `_spec.cable_joint_k()` |
+⛔ **私の最初の抽出は literal 前提だったので wired が空欄で返った** — 「定数が無い」とも「対象外」とも読めた。**対照（`cab` 出現 188）を見て初めて、建てているのに拾えていないと判った。**
+⇒ ⭐ **「the built cable」は 1 つのパラメータ集合を含意してはならない**。⇒ **トポロジは同一（2 hinge）／定数は 2 群に分かれ／1 file は記号参照**。
+
+### 5-3 ⭐ 年代を測った ⇒ 草案は **OVER-WHAT だけでなく AS-OF-WHEN を運ぶ**
+- 前提の日付 = **2026-06-25**（`:69` 内の `Rs DECISION B2, 2026-06-25`）
+- Build C の初出 = `ur15_cell.py` が `bf0235cfd8` **2026-07-27 04:19:45** で追加（`--diff-filter=A` で直読）⇒ **32 日後**
+⇒ ⭐⭐ **前提は、banked された日に存在した全ての build について真だった。矛盾する build は 1 か月後に現れた。**
+⇒ ⛔ **これは「誤った spec」でも「見落とされた spec」でもない — 真であったまま追い越された spec**。⇒ **草案は訂正文ではなく、「いつの時点で・何を対象に」の文**。
+
+### 5-4 ✅ §2 の草案を改訂（as-of-when を追加・build を backend 名で呼ばない）
+> **(i) Representation, as of the builds that exist in this repository.** The premise recorded on **2026-06-25** describes the cable **as built by `add_revolute_cable`**: one revolute per inter-segment joint, vertical bend plane — sag, not horizontal routing curvature. **That statement remains true of that build.** Two further constructions exist and are **not governed by it**: `add_cable_rod` (Cosserat rod; CABLE joints, 2 DOF = stretch + bend), and the UR15 cell added **2026-07-27** (two hinges per link, `0 1 0` and `0 0 1`), **whose second hinge is the horizontal bend DOF the premise named as absent**. The cell is uniform in topology but **not** in constants.
+> **(ii) Practice.** Horizontal routing through the staggered clips **is at present executed** by grasp-drag plus the authorized clip-retention pin (§0 #5) — **a chosen execution method, not a consequence of (i)**. Whether a second bend DOF can carry routing curvature dynamically under drag is **not measured** and is not asserted here.
+
+⛔ **build を backend 名で呼ばない**（罠）: 前提の file の中では `solver_backend=="mujoco"` が **1-DOF 平面 build** を選び、file の外では **働いている MuJoCo cell が 2 曲げ**。**同じ語が境界の両側で逆を指す** ⇒ 草案は **constructor 名と追加日**で build を識別する。
+
+### 5-5 ⚠ 前提が寄りかかる機械 guard は repo から再現できない（自分で確認）
+`validate.sh` Layer 6 → `validations/check_cable_model.sh` → `scripts/check_cable_model_mislabel.sh`: **on disk = yes / tracked = 0 / HEAD = absent / ignored = rc 1（無視ではない）**（positive control: `scripts/validate.sh` は tracked = 1）。
+⇒ ⛔ **この機械での PASS は「この機械に file が在る」ことに依存する**。⚠ fail-closed なので clean clone は FAIL する（黙って通りはしない）。⇒ **草案は「guard が前提を機械検証している」と書けない**。
+
+⚠ **等級**: 5-1 と 5-2 の起点は他卓の指摘（誘発）。5-2 の記法の非一様・自分の census の取りこぼし・5-3 の直読・5-5 の確認は私が測った。
