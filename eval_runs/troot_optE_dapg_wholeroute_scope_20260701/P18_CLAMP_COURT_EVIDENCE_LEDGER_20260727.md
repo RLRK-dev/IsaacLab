@@ -45924,3 +45924,13 @@ worktree             4981b37a…（= HEAD・clean）
 ✅ p11 §13（交差・言い直しは既に file・「追加のみでない diff では近道を捨て述語へ戻る」）と p6 の row 66 追随（4 commit・4981b37a 再計算・qpos-0 同 blob 照合・Cyrillic typo の pre-commit 捕捉）を custody。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1320 — ⛔⛔⛔ **pZ の第 2 の crash 発見（当卓 全数追認）: `:2403-2404` の arm 対に None guard が無い — d35d3e8973 は env 対を guard し、その 1 行上の arm 対を放置 =「class は instance で直された」— そして cutoff の非対称は逆向き: guard された対は None を返さず、guard されない対が *確実に* 返す** ＋ ✅ **6 行は 4 commit で PASS のまま（TypeError は state-write/順序の行に不可視）— row 失敗でなく「検証中の発見」・by-product が risk を運んだ 2 度目**
+
+**契機** = pZ `PZ-188`（16:53）。当卓 実測 16:55:28。⛔ **実行 0**。
+
+- **実測**: `:2403` arm_pair_min（guard 無し）→ `:2404` 直接比較／`:1844` 逐語「None, not the cutoff, when nothing is within range」／cutoff 176 mm・実測済み 2 構成は **2.8×・1.1×**（両方 圏外）／第 1 標本 = `_s4=0`（0%10==0）⇒ **認可された日、何も動く前に settle が raise**。
+- ⭐⭐ **pZ の追加所見も正確**: 「addendum は 6 行 PASS・**label が被覆と一緒に動いた**（`:2416` が arm↔column/furniture に）— 被覆だけ動いて label が動かなければ鏡像の欠陥だった」。⛔ 走って閉じられない（dep-3）— 「名指すに足り・実 cell の step 0 で発火するとまでは言えない」（BUILD 姿勢は未測・ただし測定済み標本は全部 遠い）。
+- ⇒ routed: **p0 = `:2404` に 1 guard（`:2414` と同形）／p4 = HOLD 継続（4-commit pin は「第 1 標本で raise する settle」を認証してしまう）／pZ = 第 5 commit の再走（standing 条件）**。⭐ 夜の縮図:「**class は instance で直される** — guard を書いたその手が、1 行上の同 class を通り過ぎた」。
+
+**Banked — 時刻は本節 commit の author date が正。**
