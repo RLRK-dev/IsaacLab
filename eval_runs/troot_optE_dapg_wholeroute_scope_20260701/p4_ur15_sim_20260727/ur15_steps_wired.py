@@ -2410,7 +2410,8 @@ for _s4 in range(int(SETTLE_S / m.opt.timestep)):
             # the worst and is not.
             for _v6, _w6 in (column_gap(_t6, d, want_who=True),
                              furniture_gap(_t6, d, want_who=True)):
-                if _v6 < _traverse_env:
+                # `None` means nothing was inside the cutoff, which is not a small number.
+                if _v6 is not None and _v6 < _traverse_env:
                     _traverse_env, _traverse_env_who = _v6, f"{_t6}: {_w6}"
     if max(abs(d.qpos[_a5] - HOME_POSE[_k5])
            for _t5 in SIDES for _k5, _a5 in enumerate(QADR[_t5])) < SETTLE_TOL:
