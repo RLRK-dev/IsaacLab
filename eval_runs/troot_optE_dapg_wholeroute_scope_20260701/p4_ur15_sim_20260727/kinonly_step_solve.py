@@ -293,10 +293,13 @@ def main() -> int:
 
     qadr = {t: [m.jnt_qposadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"{t}_{j}")] for j in J6]
             for t in ("L", "R")}
-    TOOL = {t: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, f"{t}g_base_mount") for t in ("L", "R")}
+    # ⭐ The tool point is the PINCH SITE, not the coupler base.  The design's z is the height of
+    # the grasp, so a coupler-base target sits a gripper length away from where the design puts it
+    # -- that was defect (b) of the first run.
+    TOOL = {t: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_SITE, f"{t}g_pinch") for t in ("L", "R")}
     if min(TOOL.values()) < 0:
-        TOOL = {t: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, f"{t}_wrist_3_link") for t in ("L", "R")}
-    print(f"[cell] tool point per arm = body {[mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, b) for b in TOOL.values()]}")
+        raise RuntimeError("pinch sites absent -- refusing to substitute a different tool point silently")
+    print(f"[cell] tool point per arm = SITE {[mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_SITE, s) for s in TOOL.values()]}")
     home = np.asarray(spec.HOME_POSE, dtype=float)
     for t in ("L", "R"):
         for k, a in enumerate(qadr[t]):
@@ -318,7 +321,7 @@ def main() -> int:
     # ---- STEP 2-18 -----------------------------------------------------------------------
     # Damped-least-squares IK on the tool point, kinematics only.  SEARCH BUDGET IS PART OF THE
     # CONCLUSION (acceptance (6)): a "not solved" row means not solved WITHIN THIS BUDGET.
-    RESTARTS, ITERS, SEED, TOL = 24, 160, 20260809, 2e-3
+    RESTARTS, ITERS, SEED, TOL, KEEP = 40, 160, 20260809, 2e-3, 6
     rng = np.random.default_rng(SEED)
     lims = np.asarray(spec.LIMS, dtype=float)
     solved_q = {1: {t: home.copy() for t in ("L", "R")}}
@@ -326,6 +329,7 @@ def main() -> int:
     def solve_arm(t: str, target: np.ndarray) -> tuple[np.ndarray | None, float, int]:
         tool = TOOL[t]
         best_q, best_e, used = None, 1e9, 0
+        cands: list[np.ndarray] = []
         for r in range(RESTARTS):
             q = home.copy() if r == 0 else rng.uniform(lims[:, 0].clip(-np.pi), lims[:, 1].clip(None, np.pi))
             for _ in range(ITERS):
@@ -333,20 +337,25 @@ def main() -> int:
                 for k, a in enumerate(qadr[t]):
                     d.qpos[a] = q[k]
                 mujoco.mj_kinematics(m, d)
-                err = target - d.xpos[tool]
+                err = target - d.site_xpos[tool]
                 e = float(np.linalg.norm(err))
                 if e < best_e:
                     best_e, best_q = e, q.copy()
                 if e < TOL:
                     break
                 jacp = np.zeros((3, m.nv))
-                mujoco.mj_jacBody(m, d, jacp, None, tool)
+                mujoco.mj_jacSite(m, d, jacp, None, tool)
                 J = jacp[:, [m.jnt_dofadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"{t}_{j}")] for j in J6]]
                 dq = J.T @ np.linalg.solve(J @ J.T + 1e-4 * np.eye(3), err)
                 q = np.clip(q + dq, lims[:, 0], lims[:, 1])
-            if best_e < TOL:
-                break
-        return best_q, best_e, used
+            # ⛔ Keep THIS restart's own converged pose.  Appending the running best gave KEEP
+            # copies of one pose, so the pair scoring below had nothing to choose between --
+            # a diversity of zero dressed as a search.
+            if e < TOL:
+                cands.append(q.copy())
+                if len(cands) >= KEEP:
+                    break
+        return best_q, best_e, used, cands
 
     def place(qs: dict) -> None:
         for t in ("L", "R"):
@@ -354,44 +363,77 @@ def main() -> int:
                 d.qpos[a] = qs[t][k]
         mujoco.mj_kinematics(m, d)
 
-    for row in rows[1:]:
-        ref, (cx, cy), rule = referent_for(row)
+    # ⭐ DEV-C2X (p4, 2026-08-09 11:09, provisional, D-5-adjacent).  clip C2's x disagrees between
+    # the reassembled cell (0.040) and both the design table and task_config (+0.075) -- 35.0 mm.
+    # The (c) resolution chain names no single source where the sources fight, so clip-C2-consuming
+    # rows fall to form (d) and are measured at BOTH candidates.
+    # MAPPING, DECLARED IN ONE LINE: design (across, along) -> cell (x, y) by transposition, i.e.
+    # design C1 (30/+0.150) -> cell (0.150, 0.350) and design clip C2 (25/+0.075) -> cell (0.075, 0.400).
+    # ⚠ clip C1 is the POSITIVE CONTROL that fixes this mapping: expect 0.0 mm.  A clip-C2-only
+    # report leaves the mapping unstated and 35.0 mm reads as an x-error.
+    C2_CAND = {"cell(0.040)": CLIP_XY["C2"], "design(+0.075)": (0.075, CLIP_XY["C2"][1])}
+    print(f"[dev-c2x] mapping: design (across,along) -> cell (x,y) by transposition; "
+          f"clip C1 control = {abs(CLIP_XY['C1'][0] - 0.150) * 1000:.1f} mm (expect 0.0), "
+          f"clip C2 = {abs(CLIP_XY['C2'][0] - 0.075) * 1000:.1f} mm (expect 35.0)")
+    print()
+    print("| STEP | referent | candidate | arms-closest mm (pair) | arm-env mm (pair) | "
+          "along-path worst mm (i/n, pair) | reach err mm | budget | verdict |")
+    print("|---|---|---|---|---|---|---|---|---|")
+
+    def row_at(row, ref, cx, cy, label, prev):
         tl = np.array([cx - spec.GRIP_HALF_SPAN, cy, row["zL"]])
         tr = np.array([cx + spec.GRIP_HALF_SPAN, cy, row["zR"]])
-        qL, eL, uL = solve_arm("L", tl)
-        qR, eR, uR = solve_arm("R", tr)
-        ok = (eL < TOL) and (eR < TOL)
-        if qL is None or qR is None:
-            print(f"| {row['step']} | {ref} | {rule} | not solved | - | NOT SOLVED (budget) |")
-            continue
-        qs = {"L": qL, "R": qR}
-        place(qs)
-        aa, pair = closest(m, d, grp["L"], grp["R"])
-        ae_l, pl = closest(m, d, grp["L"], grp["env"])
-        ae_r, pr = closest(m, d, grp["R"], grp["env"])
-        ae, pe = (ae_l, pl) if ae_l <= ae_r else (ae_r, pr)
-
-        # along-path: linear interpolation from the previous solved pose.  ⛔ stamped i/n, a PATH
-        # FRACTION -- this sampler has no clock; only a stepping loop does.
-        prev = solved_q[row["step"] - 1] if (row["step"] - 1) in solved_q else qs
+        qL, eL, uL, cL = solve_arm("L", tl)
+        qR, eR, uR, cR = solve_arm("R", tr)
+        if qL is None or qR is None or eL >= TOL or eR >= TOL:
+            print(f"| {row['step']} | {ref} | {label} | - | - | - | L{eL * 1000:.1f}/R{eR * 1000:.1f} | "
+                  f"{uL + uR} it | NOT SOLVED (budget) |")
+            return None
+        # ⭐ Fix (a): choose AMONG reaching solutions by clearance.  Without this the row answers
+        # "does the first reaching solution collide", never "does a clear one exist".
+        best = None
+        for a in (cL or [qL]):
+            for b in (cR or [qR]):
+                place({"L": a, "R": b})
+                v, pr_ = closest(m, d, grp["L"], grp["R"])
+                w1, p1 = closest(m, d, grp["L"], grp["env"])
+                w2, p2 = closest(m, d, grp["R"], grp["env"])
+                we, pe_ = (w1, p1) if w1 <= w2 else (w2, p2)
+                score = min(v, we)
+                if best is None or score > best[0]:
+                    best = (score, {"L": a, "R": b}, v, pr_, we, pe_)
+        _, qs, aa, pair, ae, pe = best
         N = 20
-        worst, worst_at, worst_pair = 1e9, "-", "-"
+        worst, at, wp = 1e9, "-", "-"
         for i in range(1, N):
             f = i / N
-            place({t: (1 - f) * prev[t] + f * qs[t] for t in ("L", "R")})
+            place({t2: (1 - f) * prev[t2] + f * qs[t2] for t2 in ("L", "R")})
             v, pp = closest(m, d, grp["L"], grp["R"])
             if v < worst:
-                worst, worst_at, worst_pair = v, f"at {i}/{N}", pp
+                worst, at, wp = v, f"{i}/{N}", pp
         place(qs)
-        solved_q[row["step"]] = qs
-        verdict = "CLEAR" if (ok and min(aa, ae, worst) > 0) else ("TOUCHING OR THROUGH" if ok else "NOT SOLVED")
-        print(f"| {row['step']} | {ref} | {rule} | {aa * 1000:+.1f} ({pair}) | {ae * 1000:+.1f} ({pe}) | "
-              f"{worst * 1000:+.1f} {worst_at} ({worst_pair}) | err L{eL * 1000:.1f}/R{eR * 1000:.1f} mm, "
-              f"iters {uL + uR} | {verdict} |")
+        verdict = "CLEAR" if min(aa, ae, worst) > 0 else "TOUCHING OR THROUGH"
+        print(f"| {row['step']} | {ref} | {label} | {aa * 1000:+.1f} ({pair}) | {ae * 1000:+.1f} ({pe}) | "
+              f"{worst * 1000:+.1f} at {at} ({wp}) | L{eL * 1000:.1f}/R{eR * 1000:.1f} | "
+              f"{uL + uR} it | {verdict} |")
+        return qs
+
+    prev = solved_q[1]
+    for row in rows[1:]:
+        ref, (cx, cy), rule = referent_for(row)
+        if ref == "C2":
+            got = None
+            for label, (ax, ay) in C2_CAND.items():
+                r = row_at(row, "clip C2", ax, ay, label, prev)
+                got = got or r
+            prev = got or prev
+        else:
+            r = row_at(row, ref if ref != "C1" else "clip C1", cx, cy, "single", prev)
+            prev = r or prev
 
     print()
     print(f"[budget] restarts {RESTARTS} x iters {ITERS}, seed {SEED}, tol {TOL * 1000:.1f} mm; "
-          f"along-path samples N={N - 1} interior, endpoints excluded")
+          f"along-path samples 19 interior, endpoints excluded; KEEP={KEEP} poses/arm scored pairwise")
     print(f"[audit] mj_step calls: {_MJ_STEP_CALLS}")
     for k, v in _AUDIT.items():
         print(f"[audit] {k}: {len(v)}" + (f"  e.g. {v[:3]}" if v and k != "import" else ""))
