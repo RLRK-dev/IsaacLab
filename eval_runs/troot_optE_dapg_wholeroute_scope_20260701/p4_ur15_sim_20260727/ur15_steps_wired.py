@@ -2404,16 +2404,21 @@ for _s4 in range(int(SETTLE_S / m.opt.timestep)):
         if _v < _traverse_arm:
             _traverse_arm, _traverse_arm_who = _v, _w
         for _t6 in SIDES:
-            _v6, _w6 = column_gap(_t6, d, want_who=True)
-            if _v6 < _traverse_env:
-                _traverse_env, _traverse_env_who = _v6, f"{_t6}: {_w6}"
+            # ⛔ Both furniture and column.  Watching only the column would report the traverse's
+            # worst over the two ROOMY pairs while the tightest margin at this mounting is the
+            # TABLE (+19.8 mm at the endpoints) -- a "worst" that excludes the tight pair reads as
+            # the worst and is not.
+            for _v6, _w6 in (column_gap(_t6, d, want_who=True),
+                             furniture_gap(_t6, d, want_who=True)):
+                if _v6 < _traverse_env:
+                    _traverse_env, _traverse_env_who = _v6, f"{_t6}: {_w6}"
     if max(abs(d.qpos[_a5] - HOME_POSE[_k5])
            for _t5 in SIDES for _k5, _a5 in enumerate(QADR[_t5])) < SETTLE_TOL:
         break
 print(f"[steps] start pose = the cell's home, both arms, reached by servo in "
       f"{(_s4 + 1) * m.opt.timestep:.2f}s: {np.round(HOME_POSE, 4)}")
 print(f"[steps] settle traverse worst: arm<->arm {_traverse_arm * 1000:+.1f} mm "
-      f"({_traverse_arm_who}) | arm<->column {_traverse_env * 1000:+.1f} mm ({_traverse_env_who}) "
+      f"({_traverse_arm_who}) | arm<->column/furniture {_traverse_env * 1000:+.1f} mm ({_traverse_env_who}) "
       f"-- sampled every 10 steps over the traverse, endpoints included")
 # ⭐ Read AFTER the settle.  START must be the pose the arms REALIZED, never the one commanded --
 # every IK seed below inherits it, so a commanded value here would seed the solves with a pose the
