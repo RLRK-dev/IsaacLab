@@ -1881,3 +1881,43 @@ p0 recuse（「この code について 3 度誤った。p4 か pZ が revert �
 1. **確定**: keep/revert = **KEEP**（両半分独立・m-p18-249）。sequence FINAL: pZ 第 2 addendum（`755eae7ddd`＋`2a3b5825b7`・`b6340055…` 退役 → `8fae5334…`）→ **私の受入報告（6 commits・sha 関数名つき・sentinel caveat）** → dep-3 完全 CLOSE → 通常規則。
 2. **⚠ 正直な載荷移転（自分の根拠の格下げ）**: p5 の form-question（「この 4 行はまだ未知の形を運べるか — 3 分の 2 は認可の日に発火する class だった。『無い』の根拠は誰も出していない」）を読んだ時点で、**私の根拠 (4)「残余 risk ≈ 0」は過大主張だと自分でも判定していた**（検証が飽和した仮定 — 測定された 3/4 の欠陥率が反証）。⇒ **決め手は pZ の測定**: settle span の AST — **全代入先が plain local・attribute/subscript 書込 0 ⇒ recorder は状態への write path を持たない**。blast radius は crash-or-wrong-print に**有界**で、両 class とも対照つきで閉鎖済・3 欠陥は全て pre-run 発見。pZ は自分の revert 条件 2 つ（write path 在り／post-run 発見）も先に名指し、**どちらも成立しない**ことを測って示した。⇒ 私の KEEP は立つが、**載荷梁は私の (4) でなく pZ の no-write-path 測定** — 報告もそう cite する（「the deciding ground is a measurement」）。
 3. 私の (1)（認可の希少性）と design note（gap_mm 統合・owner p0・later）は付帯として生存。
+
+---
+
+## 2026-08-09 17:15 — 受入報告: `:2388` 修正 chain **CLOSE**（6 commits・関数名つき pin・3 節文・全読み自卓実測）
+
+### (0) 何を受け入れるか
+
+Rs 裁定（16:0x「腕を姿勢へ書き込むことは不可 すべてコントローラの司令で実現できるはず。」）に対する修正の受入。応答表（10:04 §C）の自分の文言「受入報告は修正 commit を pin する」の履行。**run は 1 つも起きていない**（本報告も全読み静的）。
+
+### (1) pin（全て本 turn 自卓読み戻し・hash は関数名つき・sha は command 置換）
+
+- **6 commits（全て HEAD 祖先を自測）**: `bc0bfe5b88`（**修正本体** — servo で start pose へ・3 要件）／`d14ffac4e2`（traverse recorder = by-product）／`01b2149ad3`（tight pair 監視）／`d35d3e8973`（env 対 None guard）／`755eae7ddd`（**arm 対 guard** — 確実 TypeError の閉鎖）／`2a3b5825b7`（sentinel でなく「range 内に無し」を言う print）。
+- **wired content**: **sha256 = `8fae5334e85e6af5cf1efffdd8dcdca76c3b999006a8e5374012d93466da5bbf`**／**git blob SHA-1 = `ae8aa42d49dd2bb817f927dfe84a148f8e269a6a`**（worktree==HEAD 確認済）。退役系譜（pZ A1 の artifact 記載・`b6340055` は artifact 典拠）: `6ca72475`→`12f9d034`→`4981b37a`→`b6340055`→`8fae5334`。
+- **pZ verdict object**: `PZ_VERDICT_bc0bfe5b88_FIX_20260809.md` **191 行**・content sha256 `4da22a2ea8948cf314ebf5556f5a4d65d6276be906b83b58f080ebaad4781894`・bank 3 commits（`3d2fc4031b`/`c2423f7735`/`a24b2d0d75`）— **6 行 × 6 commits PASS・各 commit は自分の親に対して判定**。
+- **p11 設計確認**: 3 要件充足（by-product 5 commits は要件 anchor 行に 0 接触 — 確認は word に依らず生存）。
+- **keep/revert custody**: **KEEP（両半分・m-p18-249）**。決め手 = **pZ の AST 測定（settle span 全代入先 plain local・状態への write path 0 ⇒ blast radius 有界）**。⚠ 私の旧根拠 (4) は過大主張として退役済（17:06 節）— 本報告の cite 先は pZ の測定。
+
+### (2) 私の signature 読み（最終 HEAD 実測）
+
+1. live `d.qpos` 書込 = **0**（基線対: 同 act 述語が親 `fcac16f1e3` で **1** 発火 — 0 は死んだ query でない）。
+2. `d.ctrl` **parent-relative**（7 vs 7・追加も削除も無し — pZ 表 row 4）。
+3. **順序**: `:2392` ctrl → `:2400` settle（SETTLE_S/SETTLE_TOL）→ **`:2442` START = settle 後の realized pose 読出し**。
+4. 動的迂回 0・scratch→d state 複写 0 維持。
+5. **理由の現行化が code 内**: 「zero is arms crossed」は実測値（+491.3/+19.8）ごと置換 — 13 日の失効理由の code 内死。
+6. **by-product = PRESENT**（必須明記行）: 3 対（arm↔arm・arm↔column・arm↔furniture）走行最小・両対 guard・正直 print。
+
+### (3) 数値引用の caveat stack（報告・下流とも）
+
+sentinel caveat（1e12 級 = 「範囲内に一度も来なかった」）＋ p11 3 節（対の名指し／recorder ≠ 測定／absent-is-default — 既知 2 構成は共に 176 の外）＋ **導出併記**（N = `ARM_PAIR_CUTOFF = 4.0 × GRIP_HALF_SPAN` spec `:645` 自測）＋ **B5**（env 数値: 宣言 radius は 2 query の片方のみ — `furniture_gap` は 16mm を使い、`column_gap` は cutoff 無しで 1.0 m まで探し **None を返さない** ⇒ +80.1 が「16 mm search radius」の隣に印字され得る。**radius は産んだ query が実際に使った値であること**。arm 数値は無関係）。
+
+### (4) 受入の文（pZ 3 節・事前 commit 順・(i) は (iii) を運ばない）
+
+> **修正は検査した commit で structurally clean である ・ settle は存在し順序が正しい ・ 腕が途中で clear を通るかは未測であり GATED である。**
+
+flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt では修理できない事」）— 両親判定＋2 addenda の再走で吸収。3 欠陥＋B5 は**全て run 前に・読みで**発見（gated 資源の消費 0）。
+
+### (5) 帰結
+
+- **dep-3: RULED（違反）→ FIX LANDED & ACCEPTED = CLOSED**。breach stop は**通常規則へ復帰** — wired を走らせる一切（**DoD 動画含む**）は従前どおり **Rs の run 認可**が要る。**本受入だけでは何も走らない。**
+- 不変: dep-2 cap（spec 着地まで）／witness qualifier v3／dep-1 gate（計器の表 → 私の導出・**mounting C-2 の 4 編集は未 unlock**）／04-Specs 不触／残る 7-site 類（retired route・video 3 本・影 rollout — 走らせるなら修正が先・分類 open）／design note（gap_mm 統合・owner p0・later・run 不要）。
