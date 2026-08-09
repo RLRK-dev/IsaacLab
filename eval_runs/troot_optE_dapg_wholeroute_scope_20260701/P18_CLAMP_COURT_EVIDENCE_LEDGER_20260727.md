@@ -45603,3 +45603,26 @@ baseline（AST・構造）  HEAD: live d.qpos 1 [:2388]・d.ctrl 7 ／ scratch 3
 row 66 = **RULED = BREACH**（頭部の「疑義」を in-place 修復・旧頭部は括弧で保存 — 「裁定済み違反を疑義として配る頭部は誤りを配る」）・fix chain (i)-(iv) と owner・衝突枝の Rs 返送・keyframe 境界 = Rs 専権・no-detour 逐語・**当卓の written≠delivered 自己訂正も row に**（「回付済みと再報告する者が出ないように」）。node gate は裁定に接地し直し・snapshot 再生成 C3 OK。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1299 — ⭐⭐⭐ **pZ が自分の受入表の穴を p11 の所見で発見し、第 6 行を対照つきで pre-register —「私の受入は *書く物* を測って *順序* を測っていなかった。p11 の欠陥は順序に住む」** ＋ ⭐ **鋭くなった 1 点: servo 司令 `:1655` は *既に在る* — fix は司令を足すのでなく、運動を足して 1 行を動かす**
+
+**契機** = pZ `PZ-178`（16:16・repo 不触 ⇒ **本節が第 6 行の durable custody**）。当卓 = `:1653/:1655/:1656/:1658` と HEAD `:2390/:2393` は §1298 までの自読と一致（再測不要・既知事実）。⛔ **実行 0**。
+
+### (1) ⛔ **穴（pZ 自己申告）**
+5 行は **何が書かれるか**（qpos 0・ctrl ≥7・dynamic 0・非-ctrl 0）を検査し、**読み戻しがいつ起きるか**を検査しない。⇒ **`:1653` を消し `:1655` を残し `:1658` をそのままにする fix は 5 行全部を通過し、全 IK を build 姿勢から静かに種付けする**（= p11 の欠陥そのもの）。⭐ **受入が測る物と、欠陥が住む場所が別の軸だった。**
+
+### (2) ✅ **第 6 行（pre-registered・対照は今 取得済み — これも fix が消す対照）**
+```
+述語     d.ctrl = HOME_POSE block と START 読み出しの間に **mj_step ≥ 1** かつ **既存 SETTLE_S / SETTLE_TOL への参照**（新閾値の発明は不可 — p11 要件 2）
+今日実測  tip: ctrl :1655 → START :1658・span 2 行・mj_step 0・SETTLE 0 ⇒ **述語は pre-fix file に発火する = 欠陥は在り、検査はそれを見られる**
+         HEAD: ctrl :2390 → START :2393・同形（span 2・0・0）
+対照     合成の正しい fix 断片（ctrl → while err > SETTLE_TOL → mj_step → START）⇒ **述語 沈黙 = 正しい fix を受理する**
+事後     沈黙が要件・かつ **測った span と step 数を報告する**（verdict 単独ではなく）
+```
+⭐ **理由の一般形（採用）**: 「**一度も発火する所を見られていない述語は検査ではない**」— 発火の見える最後の機会 = fix 前の file。baseline と同じ満了構造。
+
+### (3) ⭐ **鋭くなった fix の形 + 向きの扱い**
+`:1655` の servo 目標は**既に存在** ⇒ **fix = ①`:1653` の書込を消す ②settle（mj_step + 既存閾値）を入れる ③`START` 読み出しを settle の後ろへ動かす** — 司令は足さない。
+✅ 向きの分離の実装形: pZ の AST は**代入 target の受け手**で分類 ⇒ `d.qpos ← scratch` は d への書込として数え、`scratch.qpos ← d` は scratch への書込 — **評価用読み出しは判断でなく構成で制約外**。
+
+**Banked — 時刻は本節 commit の author date が正。**
