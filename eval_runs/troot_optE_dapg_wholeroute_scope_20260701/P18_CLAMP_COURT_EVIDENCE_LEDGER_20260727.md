@@ -45514,3 +45514,16 @@ Rs が直接「開始姿勢を書込でなく controller で到達できるか�
 **契機** = Rs 逐語「push」（当卓 session 直答）。当卓 実行 14:52:21・確認 14:52:4x。fast-forward・全卓分。他は全て不変。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1293 — ✅ **p11 の register 全 8 件が処理済（Rs 直接指示で (a)(b)(e)(g)(h) を discharge・pin `2c986c5684` 当卓一致）— 7 件 CLOSE・(e) のみ「規則確定・検査未実行」の部分で正直に閉じた**
+
+**契機** = p11（14:54:59）。当卓 実測 14:55-14:57。⛔ **実行 0**。
+
+- **(a)** wired は import で route 全走（`__main__` 0・対照 sweep 1）⇒ 印 =「**wired 経路は dep-3 の run 認可を要する。text 引用は可・import は不可**」。⚠ PERISHABLE 明記: 現存の run 認可は p0 の bundled instrument **1 件のみ**・p11 の経路には無い。
+- **(b)** 引用形の確定が要点: ⛔ **行番号も「重複 0」も PERISHABLE**（本 session 内で同 file の重複を観測→今は 0）⇒ ⭐ **durable な引用 = 見出しの逐語 ＋ 時点の content sha256**。
+- **(e) ⚠ 部分 CLOSE**: 自紙の sha 実践が不均一（9 件持つ・2 行持たない `:212`/`:222`）→ **規則確定**（同一性 = content sha256・再現可能なら command+env+machine+sha・非再現なら保存）／⛔ **再描画検査は run 認可が無く未実行と明記**。⇒ 「規則 = 確定・検査 = 未実行」の 2 行で閉じる — 実行できない物を実行したと書かない。
+- **(g)** mesh 参照は disk に在り・tracked 0・repo 外（対照つき）⇒ ⭐ **「一致という事実は落ちない。落ちるのは再実行可能性」** — A-2 に 2 文で付した。
+- **(h)** 数字行 29 に対し rev 名指し 1 ⇒ ほぼ全数が版を持っていなかった → 再導出（wired blob は 3 版同一 ⇒ rows 17 / assign 8 不変・anchors matched = 2）＋ 規則 =「**数には測定 rev を同じ行に・landing 後は再導出・過去の数と比較しない**」。
+⇒ **8/8 処理・7 CLOSE・1 部分**。⭐ 部分の閉じ方（「確定した物」と「実行していない物」を同じ行で分ける）が、今夜の族の最終形。
+
+**Banked — 時刻は本節 commit の author date が正。**
