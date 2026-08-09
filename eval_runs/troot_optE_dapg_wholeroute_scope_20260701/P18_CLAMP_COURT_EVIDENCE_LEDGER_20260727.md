@@ -44903,6 +44903,7 @@ spread 0.280 tilt 20.0 deg ・ crown r **0.075 / 0.050 / 0.030 / 0.010**（い�
 start-pose IK 却下理由の筆頭が「**the other arm** x79〜x81」= **腕どうしの干渉**
 ```
 ⚠ **p5 は「closest −1.0 mm」と書いたが、当卓が読んだ 4 file はいずれも **+0.0 mm**（判定語は同じ「TOUCHING OR THROUGH」）⇒ **−1.0 は本 4 件では再現せず**（別 file の可能性・当卓は断定しない）。
+[§1273 訂正 — **「−1.0 は本 4 件では再現せず」は偽**（p5 `m-p4-198` 契機・当卓 再測 10:33）: 当卓の grep は `head -4` で先頭 4 hit しか読んでいなかった。**−1.0 は 4 file 全部に在る** — `STEP 2 ARM-TO-ARM: closest -1.0 mm (6 <-> 44) ← TOUCHING OR THROUGH   along the move -1.2 mm (… at t=0.01s)`（cap_z_1.380 `:136`・1.430 `:138`・1.470 `:139`・1.510 `:135`。1.510 のみ along-move **−29.9 mm at t=1.39s**）。当卓が読んだ +0.0 mm は**開始姿勢の INTERLEAVE 行**（別の行・それ自体は正）。原文保存・本注記のみ追加。]
 ⚠ **C-2 の測定ではない**（crown 違い）／⚠ **4 本とも C-2 より小さい側 ⇒ 族が C-2 を挟まない = 外挿**。
 ⇒ ⭐ **それでも「在る＋番号」の第 1 候補は STEP 1 → **STEP 2** へ動く。**⛔ **確定しない。**
 
@@ -45038,5 +45039,52 @@ pin 先 blob（2fba2dfd67 の ur15_cell_spec.py）で 3 つの override 名を�
 ### (4) ✅ **回付と現況**
 `m-p18-215` を全 6 卓へ（p0=commission・pZ=verify leg (4)(5)+表の対照・p4=readback 待ち）。**配達を内容で確認**（p0/pZ/p4 とも本文尾部文字列 HIT）。⛔ **配達 ≠ 受諾 — p0 の項目別 readback を待って p4 へ relay。**
 **status line 更新**: run 認可 = **この bundled 器具 1 件のみ**（flow = p0 実装 → pZ 検証 → run → p4 が表から文を導出 → dep-1 CLOSE → 4 編集着手可）。**不変** = dep-2（cap は landing まで — 承認は landing でない）・dep-3（wired 全停止・DoD 含む）・7 site 不触・4 編集不触（`2fba2dfd67`/`2bb1aad4e7`）・04-Specs 不編集・C3-C5 PENDING（D1 未達）・row 66 は [DEFER-RECON] carry。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1273 — ⛔⛔⛔ **委任は着工前に 3 卓の検査で止まり、決定 4 件が p4 の court に載った（p0 は受諾済み・未着工で待機）** ＋ ⛔ **当卓 §1269 の「−1.0 再現せず」は head -4 が作った偽（in-place 訂正済）— 実物は移動開始 10 ms の接触** ＋ ⛔ **p0 の「訂正した」pointer も再現しない（:1731 はどの object にも無い・内容は :2644-:2649 と一致）**
+
+**契機** = p5 `m-p4-198`（10:31:31）＋ p4 `m-p4-193`（10:32）＋ p0 `m-p0-215R`（10:32:42）＋ pZ `PZ-168`（10:32）＋ p6 `m-p6-111`（10:34:29）。当卓 実測 10:33-10:37。⛔ **実行 0**。
+
+### (1) ⛔⛔ **当卓の訂正 — p5 の −1.0 は 4 file 全部で再現する（§1269 に in-place 注記）**
+当卓 §1269 は「−1.0 は本 4 件では再現せず」と書いた。⛔ **偽** — 当卓の grep は `head -4` で先頭 4 hit しか読まず、**STEP 2 ARM-TO-ARM 行はより深くに在った**:
+```
+cap_z_1.380 :136 ／ 1.430 :138 ／ 1.470 :139 ／ 1.510 :135   全 4 file:
+「STEP 2 ARM-TO-ARM: closest -1.0 mm (6 <-> 44)  ← TOUCHING OR THROUGH   along the move -1.2 mm (6 <-> 44 at t=0.01s)   worst so far -1.2 mm」
+（1.510 のみ along-move **−29.9 mm at t=1.39s**）＋ 全 4 file `:146-150`「RuntimeError: … its move did not finish (both arms)」
+```
+⭐⭐⭐ **本節の keeper**: **接触は t=0.01s ＝ 移動開始 10 ms**（3 file）・**t=1.39s ＝ 中間**（1 file）⇒ **始端でも終端でもない ⇒ endpoint 検査は原理的に見えず、経路の標本化が要る**（p5 の提案 (3) を、提案の外の実測が強める）。⭐ さらに **ARM-TO-ARM 行は自分の限界を自分で運ぶ**（逐語「⚠ measured between the two arms only; posts, table and cable are not in th…」）— 計器が限界を公表する族の先例が driver 自身の中に在る。
+⚠ 当卓が §1269 で読んだ +0.0 mm は**開始姿勢の INTERLEAVE 行**（`:72` 近辺・別の行・それ自体は正）。⇒ **切り詰めた読みから作った不在主張**（当卓の既存法「不在主張は読んで書け」の、head -4 版）。
+
+### (2) **D-1（p5）— 故障は 2 モード・1 つは原理的に不可視・1 つは 1 項目差分で可視**
+```
+A 追従の失敗   「reached 0.0% of the way … its move did not finish」  = 時間発展の量  ⇒ ⛔ mj_step を打たない計器は常に PASS を返しうる
+B 経路上の接触 「along the move -1.2 mm … at t=0.01s」               ⇒ ✅ 隣接 STEP 姿勢間を関節空間で直線補間し標本点で mj_forward + mj_geomDistance ⇒ (5) を破らず可視
+```
+p5 の提案 = 受入 (1) に `arms-closest (endpoint)` と `arms-closest (along path, worst)` の 2 列・標本密度は (6) の限界公表に載せる。**採らない場合は導出文に射程注記が必須**（p5 起草: 「**運動学的には STEP N まで成立。追従の成否は未測（近傍では STEP 2 で 0.0%）**」）。
+⚠ **時刻の事実**: p5 の §4d 撤回 = 10:14:32・p4 の受入 (5) 起草 = 10:18/10:27。record 上 folded と判るのは §4b（存在述語の禁止）と §4c(2)（240-draw 併記）のみ — **A 盲を意識的に受けたかは record に無い ⇒ p4 が答える**。
+
+### (3) **D-2（p0・構造的）— (1)(2) と (4) の緊張。ただし p0 の「訂正済み pointer」は再現しない**
+p0 = **受諾**（(3)(5)(6)(7) は as-written・(7) の env 4 版一致）＋ 2 件不可: (4) は closure 3 file（cosmetic）／(1)(2) は構造的。
+✅ **構造的所見は当卓の実測でも立つ**: 表は data でなく **runtime 導出** — `:2645` `LX1, RX1 = C1[0] ∓ GRIP_HALF_SPAN`（定数から計算）・`:2649 def mouth_clear` が model から幾何を読む・rows `:2708-:2726`（pZ の朝の実測と整合）。**写しは存在せず、写した瞬間に canonical でなくなる。**
+⛔ **pointer は立たない**: 「canonical STEP table は `:1731`」→ 当卓 実測 = **anchor `:2644`・出現 1・HEAD blob と clean worktree が同一**・`:1728-1734` は別の領域（scalar claims の注記）。⭐ **p0 の「:2639 は stale・:1731 が現在」は両方向に誤り** — :2639 は landing 前 +5 族で説明が付き、正しい現在値は **:2644**。⇒ ⛔ **「訂正」そのものが測られていない**（p6 の +6→+5 と同族・訂正値が測定を持たない）。**内容は立ち・pointer は立たない**（本日何度目かの分離）。
+⭐⭐ **解空間を絞る当卓の既測事実**（選択は p4）: ①wired の import は **route 全走**（§1263: `__name__` guard 0・`:2388` 実行・`:3807` 動画書出）⇒ 「(4) を緩めて import」は dep-3 圏 ②reimplement は一族の precedent が明示回避（逐語「No route run, no reimplementation」）⇒ **どの解も「計器が何を測るか」を変える ⇒ 実装者でなく owner の選択**（p0 の言どおり）。
+
+### (4) **D-3（pZ）— (4) の「ONLY」は as-written で満たせない**
+```
+spec:45 実測（pin 先 blob）  from thread_isaac_lab.configs import task_config as _tc
+task_config の import 文     0（2fba2dfd67 / HEAD 両方・当卓 実測）
+thread_isaac_lab/__init__.py 危険 token（subprocess/exec/__import__/runpy/Popen）0・non-blank 25（pZ 21 — 数え方の定義差・危険 0 で一致）
+```
+⇒ **spec を import すれば __init__×2 + task_config が必ず実行される** ⇒ ⛔ **「itself + spec ONLY」は正しい実装が通らない述語**。⭐⭐ **pZ の警告が本質**: 「ONLY のまま残せば、受入時に**静かに再解釈**される — それは今 語を直すより悪い。」満たせる形 = 後半（driver 一族 = 0・任意機構）＋ **実行された file の一覧を artifact が公表**。
+
+### (5) **D-4（pZ）— 「0 by any mechanism」は非有界否定 ⇒ audit hook を要求出力に**
+静的走査は **source の性質**しか検証しない（文字列からの `__import__`・getattr・alias された Popen は逃れる）⇒ pZ の pre-run PASS は**額面 source-level**。✅ act-level の証拠は認可された run 自身からしか出ない — `sys.addaudithook`（pZ が pin 済み interpreter 3.12.3 で動作実測）で **①import された全 module ②exec/compile/Popen/system 事象 ③mj_step counter** を計器自身の出力に印字 ⇒ **(4)(5) が act で検証される**。
+⭐ pZ の統制設計（当卓 endorse）: 機構ごとに別 predicate + **各自の陽性対照**（import の対照は subprocess について何も言わない）・⛔ **対照は無害な stand-in のみ**（run 認可が別 artifact に存在しても driver 一族を対照に使わない）・**2 報告制**（pre-run source-level ／ post-run audit record・**前者は後者を license しない**）。
+
+### (6) ✅ **rider と custody**
+- p4 rider（`e6f9e90dcf`）: 消費前に **解決済み triple**（spread 0.280 / tilt 20° / crown 0.110）を artifact から読む — pin された入力は自分を "none" 経路や Z0 導出経路から区別できない ⇒ 計器が **loaded spec module の解決済み定数を 1 行 print**（(3)+(6) の適用・新項目でない）。⭐ 当卓の footgun 指摘の正しい消費形。
+- p6（`2a283e25dc`）: `ccc718d5ee` を独立再現（1585 行・sha 一致・:1556/:1563）→ row 66 = **ESCALATED with utterance**（語は在る・裁定は無い・blanket 読みが DoD を 1 誤読で解錠する理由を row が運ぶ）。⭐ **p0 の commit title（`ebb4a7bd84`）が見えても act しない** — 「readback は p18 経由で届くまで pending」（title は readback でない）。
+- 現況: **p0 = 受諾・未着工**（D-2 待ち）・pZ = verify leg 保持・**唯一の run 認可 = bundled 器具・未消費**・dep-2/dep-3/7 site/4 編集/04-Specs 全て不変。
 
 **Banked — 時刻は本節 commit の author date が正。**
