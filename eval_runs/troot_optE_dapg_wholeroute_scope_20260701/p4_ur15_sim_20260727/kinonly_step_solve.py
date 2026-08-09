@@ -440,8 +440,8 @@ def _adjacent_body_pairs(m: mujoco.MjModel) -> frozenset:
     return _ADJ_CACHE[key]
 
 
-def _point_to_geom(m, d, g: int, p: np.ndarray) -> float | None:
-    """Exact signed distance from world point `p` to geom `g`'s surface, primitives only."""
+def _point_to_geom(m, d, g: int, p: np.ndarray) -> float:
+    """Signed distance from world point `p` to geom `g`: exact for primitives, AABB bound else."""
     t = m.geom_type[g]
     size = m.geom_size[g]
     q = d.geom_xmat[g].reshape(3, 3).T @ (np.asarray(p) - d.geom_xpos[g])
@@ -459,7 +459,14 @@ def _point_to_geom(m, d, g: int, p: np.ndarray) -> float | None:
     if t == mujoco.mjtGeom.mjGEOM_CAPSULE:
         qz = float(np.clip(q[2], -size[1], size[1]))
         return float(np.linalg.norm(q - np.array([0.0, 0.0, qz]))) - float(size[0])
-    return None
+    # Any other type (meshes): the geom's own model-computed AABB, an OBB in the geom frame that
+    # CONTAINS the shape -- distance to the containing box lower-bounds distance to the contained
+    # mesh.  Much tighter than the bounding sphere for elongated links and couplers: shakedown 8b
+    # left 144,933 suspect readings unprovable (37%) on the sphere bound alone, flooring the
+    # along-path column with kept-as-contact zeros at pairs tens of mm apart.
+    c, h = m.geom_aabb[g, :3], m.geom_aabb[g, 3:]
+    e = np.abs(q - c) - h
+    return float(np.linalg.norm(np.maximum(e, 0.0)) + min(0.0, float(np.max(e))))
 
 
 def _provable_lower_bound(m, d, a: int, b: int) -> float:
@@ -473,9 +480,7 @@ def _provable_lower_bound(m, d, a: int, b: int) -> float:
     pa, pb = d.geom_xpos[a], d.geom_xpos[b]
     lbs = [float(np.linalg.norm(pa - pb)) - float(m.geom_rbound[a]) - float(m.geom_rbound[b])]
     for g, p, other in ((b, pa, a), (a, pb, b)):
-        pd = _point_to_geom(m, d, g, p)
-        if pd is not None:
-            lbs.append(pd - float(m.geom_rbound[other]))
+        lbs.append(_point_to_geom(m, d, g, p) - float(m.geom_rbound[other]))
     return max(lbs)
 
 
