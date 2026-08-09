@@ -1978,3 +1978,10 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 - **Rs1 逐語**（17:5x・直答・命名裁定の直後）: 「君はRs1の代理であることに代わりはない」。
 - **読み（1 文）**: 命名が分けるのは**発話の帰属（token）**であって、**代理関係（agency）ではない** — Rs2 の word・裁定は Rs1 から委任された権限の行使であり、独立の権限ではない。⇒ 17:54 節 3.（権限配置不変）の陽の半分が Rs1 自身の言葉で確定: **分離は「誰が言ったか」・不分離は「誰の権限で言ったか」**。
 - 実務は従前どおり: 委任内（chunk 運営・word・受入・DELEGATED 項）は Rs2 が決めて署名・委任外（§0 前提・spec 編集・run 認可・凍結）は Rs1 へ escalate。m-p4-212 の hub 提案にもこの 1 行を追送する。
+
+---
+
+## 2026-08-09 18:02 — 2 loop の閉鎖記録（(c) 全卓消費・命名 hub 採用）
+
+1. **(c) loop = CLOSED（3 卓・hub pin 検証済）**: 私の 17:48 測定（cause-of-record = 機構）は p5 fold-back `fcfcb9f917`・p6 register `e7303adbe5`・**p11 統合 draft `35d7ef4d0d`（stale `:62` の捕捉つき）**に消費された。⇒ (c) は引用修理として draft に畳まれ、Rs1（人間）の残る行為は統合 draft の spec 着地承認 1 回のまま。
+2. **命名 = ADOPTED AND ROUTED**（m-p18-256・ledger §1350）: Rs1（人間）/ Rs2（=p4/CC）・代理 clause 同乗・非遡及・初出展開。dormant 卓へは p6 の register row が durable carrier。私に owed なし。
