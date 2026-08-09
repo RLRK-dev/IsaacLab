@@ -44919,3 +44919,47 @@ step されない                                            24        計 75 �
 ⭐⭐ **p0 の keeper**: **col-0 は *構築 scope* の問いには正しい識別子で、同じ夜に *到達可能性* の問いでは無価値だった（自 §8.14）。⇒ 述語の妥当性は形からは決して読めず、問いに対してしか読めない。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1270 — ⛔⛔⛔ **§0 の項目は仮定の話ではない — banked された mounting 掃引は、その escalate された行を *実際に実行して* 生成された（p4 発見・当卓が log で直接測定）** ＋ ⭐ **p4 の行順推論は結論が正しく経路が逆（log が決める）** ＋ ✅ **dep-3 が banked 経路に届く ⇒ 「KINONLY 掃引と同じ経路」は wired 実行**
+
+**契機** = p4 `m-p4-190`（10:18）。当卓 実測 10:19-10:22。⛔ **実行 0**。
+
+### (1) ⛔⛔⛔ **banked 掃引は wired driver を subprocess で走らせている（当卓 逐語確認）**
+```
+sweep_mounting.py :100-101   subprocess.Popen([PY, "-u", "ur15_steps_wired.py"], cwd=HERE, env=env, …, start_new_session=True)
+        :103-107             log に "88mm-SPAN INTERLEAVE" が出るまで 2 秒 poll → break
+        :113-115             _rc is None なら os.killpg(…, SIGKILL)
+```
+⇒ ⭐⭐⭐ **「KINONLY 掃引」は KINONLY ではなく *wired 実行* ⇒ dep-3 が届く。**⇒ **p5 が提案した「banked 掃引と同じ経路」も wired 実行。**（当卓が `m-p18-214 §4` で「*not a wired run* は静かに範囲を得る文だ」と注意した当の物が、実際に範囲を得ていた。）
+
+### (2) ⭐⭐ **p4 の結論は正しいが、根拠にした行順は逆 — 当卓は log で測った**
+p4 は「行順 `:2359`（interleave print）→ `:2386-2393`（書込）ゆえ **全 banked 点が `:2388` を実行した**」と推論。
+⛔ **log の実測は順序が逆**:
+```
+allpairs_logs/cap_z_1.380.txt   log 行 31  「[steps] start pose = the cell's home, both arms: […]」   ← 書込 :2388 の *直後* の print
+                                log 行 72  「[steps] 88mm-SPAN INTERLEAVE: …」                        ← 掃引が待っている行
+```
+⇒ ⭐ **書込は interleave 行より *ずっと前* に実行されている**（source の行番号は text の位置であって実行順ではない — 当卓の既存法「行番号は *どの物の中の位置か* を連れて初めて意味を持つ」の実行順版）。
+✅ **そして結論はむしろ強くなる（当卓の直接測定）**: **banked 掃引 log 37 本中 22 本が、書込の直後の print を含む。**⇒ ⛔ **推論でなく証拠として、banked 掃引は `:2388` を実行した。**⚠ **残り 15 本は raw driver log でない形式**（grid 集計等）⇒ **「全て」とは言わない・22/37 と言う。**
+⇒ ⭐⭐⭐ **帰結（Rs へ）**: **C-2 の開始姿勢 PASS を含む banked mounting 証拠は、escalate された行を通って生成されている。**⇒ **§0 の裁定は将来の run だけでなく *既存証拠の provenance* に触れる。**⛔ **当卓は裁定しない。**
+
+### (3) ⭐⭐⭐ **p4 の near-miss — `Popen` は import 解析に *見えない***
+p4 は dep-3 の到達述語を最初「**import closure が driver 一族を含むか**」と書いた ⇒ ⛔ **`Popen` の行は import 解析から不可視。**
+✅ **act 形に書き直し**: 「**いかなる機構であれ driver 一族の file を実行させるか — import / subprocess / exec / runpy**」。
+⇒ ⭐⭐⭐ **p4 逐語「そちらの *one layer in* は 1 層足りなかった。同じ教訓がその 1 層下で待っていた。」**（本日 name→act の教訓が **3 層**で発火: ①API 名 vs 行為 ②受け手名 vs step ③import vs 任意の実行機構。）
+
+### (4) ✅ **p4 の §B1 自己訂正 — 第 3 の形「shadow rollout」（当卓 全数確認）**
+```
+wired の mj_step 受け手   d 4 ・ sc 4 ・ _sc 1 ・ _sv 1  = 10   ⇒ **6 つが scratch を step**（p4 の数と一致）
+scratch → live への状態複写                    **0**（当卓 実測）
+live → scratch への複写（対照）                 12   ⇒ 述語は動いており、流れは **一方向**
+```
+⇒ ⭐⭐ **第 3 の形 = *影の力学*（PREDICT_S/SETTLE_S を側の複製で回し、seat 予測・jaw 軸・release 開度・gap 解を得る）。live への流れ戻りは *決定値のみ*（返り値）で状態複写は 0。**⇒ **Rs へ出す class list は 3 つ**（①開始姿勢 seed ②非 step の計算機 ③影の力学）。
+
+### (5) ✅ **p4 の 2 決定（当卓 受領・Rs へ回付する物）**
+- **決定 1 = p5 の第 3 の答えを *合格* として受領**（「どちらも言えないことを per-STEP の測定で示す方が、どちらかを捏造するより良い」）。器具の受入条件（outcome 形）= **per-STEP 表に solved / collision-free(mm) / arms-closest(mm) / *探索予算* を各行に**・**STEP 1 は述語を張り替え**（「代入された姿勢は C-2 で干渉なしか」＝ **存在は述語になり得ない**）・C-2 は **pin `2fba2dfd67` に対する env override**（4 編集の landing は不要）・**器具は自分の限界を公表する**。
+- **決定 2 = dep-3 は banked 経路に届く**。⇒ **適合器具の条件**: 自己完結（自身 + `ur15_cell_spec.py` のみ実行）・**driver 一族の実行 0**（act 形述語 + positive control）・**`mj_step` 0**（`mj_forward` + `mj_geomDistance` のみ）・自分の `MjData` を step しない。
+  ⚠ **p4 が自ら開示（裁定でなく）**: **その方法（候補 qpos を never-stepped な `MjData` に置く）は、いま Rs の前に在る *形 2 と同じ act-class***。⇒ **run 要求は act-class を明示して運び、Rs は行為が見える状態で認可する。**⭐ **実装と run を 1 つの Rs 認可に束ねる**（script は走らせる以外の目的を持たないから）。
+- ✅ **p4 が採用**: 以後 C-2 の開始姿勢 witness PASS を引くときは「**240 draws・L 5/240（2.1%・裾）**」を同行に置く。
+
+**Banked — 時刻は本節 commit の author date が正。**
