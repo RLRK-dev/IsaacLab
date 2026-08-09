@@ -1645,3 +1645,15 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 **消費側検査（最終形・導出前に読む 5 つ）**: 解決 3 数（0.280/20°/0.110）／逸脱 ID 行の両値／audit 節の陽性対照（期待事象 非空）／along-path 刻印が i/n 形式／導出文に mode-A note 逐語＋「どの path を sample したか」。
 
 不変: dep-2 cap／dep-3 open／7 site 不触／C-2 4 編集未着手／run 認可 = 計器 1 件のみ。
+
+---
+
+## 2026-08-09 10:56 — 2 語の回答（4(a) = (c) 確定・4(b) = blob 名を受入文言へ）＋ (2) の硬化を受入条件として批准
+
+**4(a) = (c) 確定（境界を言葉にする）**: canonical 表に数値 x/y は無い（x/y token 0・対照 z 3 — p0/p18 両測）が、これは **gap ではなく参照**である。設計行は水平目標を **clip の同一性**で名指し、解決規則（`CLIP_POSITIONS ± GRIP_HALF_SPAN`・`RX_MID = mean`）は design/SSOT に在り、tip `:1732-1734` がその実装形。⇒ **(c) = 「行が referent（clip 名）を持ち、解決規則が design/SSOT に在る量」**。artifact は per-row に解決連鎖（設計行 → referent → SSOT 定数 → 数値）を示す。**(e) は「数値も、解決可能な referent＋規則も無い行」に留保** — もし水平目標が規則で解決できない行が出たら、その行だけ (e)→p5。p0 は (c) で続行してよい。
+
+**4(b) = 採用（blob 名は cosmetic でない）**: D-2(c) の受入文言を差し替える — 照合対象 = **blob `2c62b3860050…`（`2fba2dfd67:…/ur15_steps_wired.py`）・anchor `:1731`・表本体 `:1789 STEPS = [` 〜 `:1809 ]`・行数 17**（すべて本節で読み戻し済み。anchor 出現 2 = `:1789/:2058`、2 つ目は RELEASE 置換の comprehension — p18 2(d) のとおり「anchors matched: 2, rows from the first」を artifact が印字する）。根拠 = tip↔HEAD で anchor block 23 行中 12 行が異なる（p18 が正しい grain で検証）— file 単位の同一性では嘘になる。
+
+**(2) の硬化を受入条件として批准**（p18 item 3 を hub gloss でなく私の受入文にする）: **(2) v2 = STEP-1 行は「実際の link 間幾何」（link geom への `mj_geomDistance`）を測る。commanded-span 量は行から禁止。** 根拠 = 同一構成で +0.0（span 表示・`:2365`「commanded span, not the links actually held」）と −1.0 mm（link 接触）が同時に印字される — span 形は接触を見逃す +0.0 を再生産する。⇒ 消費側検査の 5 読のうち「解決 3 数」に続けて **STEP-1 行の値が link-幾何由来であること**を読む（6 読目）。
+
+不変: dep-2 cap／dep-3 open／7 site 不触／C-2 4 編集未着手／run 認可 = 計器 1 件のみ。audit 節の 2(a)-(c)（sys.modules 併記・対照は per-event-type かつ計器の外・mj_step counter は wrapper）と 2(d)・item 3 の pZ 対照は build/verify 側の形として受領 — 私の受入条件と衝突しない。
