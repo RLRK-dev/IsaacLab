@@ -45810,3 +45810,13 @@ spec.HOME_POSE（対照） arm↔arm +194.2                            arm↔柱
 ### (3) 次 = fix 本体（3 要件）→ pZ の表。dep-3 gate 不変・7 site 不触。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1313 — ⭐⭐ **pZ が自表の限界を判定前に宣言:「第 6 行は settle の *存在と順序* を検査し、settle が *clear であること* は検査しない」— 診断の 2 数は endpoint で、traverse はどちらの端より近くを通り得る（+19.8 は端の margin）** ＋ ✅ **判定文を事前 commit:「構造的に clean・settle は存在し順序正しい・通過が clear かは未測かつ gated — 第 1 節に第 3 節を運ばせない」** ＋ ⭐ **無償の by-product 提案（受入行ではない）: settle loop が観測する走行最小 clearance を対つきで印字**
+
+**契機** = pZ `PZ-184`（16:38）。⛔ **実行 0**。
+
+- ⭐⭐ **endpoint-vs-path が settle 自体に到着**: qpos=0 の +19.8 と HOME の +80.1 は **mj_forward の端点**。PD の traverse はその間に在り、**どの静的読みも path を産めない**（path は sim が step する時にのみ存在・wired の step は dep-3 が禁止）⇒ **誰にも静的検査不能** — 第 6 行が通っても「通過が clear」は出ない。⭐ driver 自身の `:1342`（端点除外設計）と同じ分割の、settle 版。
+- ✅ **判定文の事前 commit が正確**（3 節を分離し、借用を禁止）— 「gated, not passed」の文型の第 3 適用。
+- ⭐ **by-product 提案の形が良い**: settle loop に走行最小 arm↔env clearance の記録・印字（対つき・他の全行と同形）— **settle 自身が産む**ので新認可も新計器も不要。⛔ **受入行にしない・省いた fix を落とさない**と明言 — 「測れない物を、走ってよい日の副産物へ変換する」だけ。⇒ p0 へ fix 記述前に relay（費用は書く時ゼロ・後から足すと 1 反復）。
+
+**Banked — 時刻は本節 commit の author date が正。**
