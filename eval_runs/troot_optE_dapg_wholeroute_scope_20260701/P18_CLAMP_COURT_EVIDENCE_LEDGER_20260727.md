@@ -46065,3 +46065,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - 状態不変: 待ち = pZ addendum → p4 report。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1333 — ✅ **pZ 第 2 addendum banked（`a24b2d0d75`・+66/0・全文読了・6 行 × 6 commit PASS・退役系譜 完備 — 自分の A1 も規則どおり退役）** ＋ ⛔⛔ **B5（第 4 の発見・当卓が全 5 点 spot 検証）: env 行は 2 つの query から引いた値に 1 つの半径を宣言 — column 半分は cutoff 無しで呼ばれ prefilter が丸ごと skip・実効レンジ 1000 mm ⇒ +80.1 が「16 mm 半径」の隣に印字され、absence 文はこの対に到達不能** ＋ ⭐ **引用規則の 3 段目:「半径は、その数を産んだ query が実際に使った物でなければならない」— 導出が正しくても違う query に付けば腐る**
+
+**契機** = pZ `PZ-193`（17:12）。当卓 実測 17:13:13（sha/191 行/prefix 125 一致・`:2436`/`:1277`/`:1295`/`:1299`/`:1307`/settle 呼びの cutoff 0 — 全点一致）。⛔ **実行 0**。
+
+- **B3 の対句が clause 4 の履歴を 1 行に**: 「crash → data の顔をした sentinel → 閉鎖 — **第 2 hop は第 1 が直されたから存在した**」。B7 の 4 節 verdict は第 4 節を B5 形に更新（「env 対の宣言半径は 2 query の片方しか使っていない」）。
+- **B5 の構造**: `furniture_gap :402` は `ARM_DECIDE_CUTOFF`（16 mm）を実際に使う（宣言は正）／`column_gap :1295` は `if cutoff is not None and …` の prefilter を **settle が cutoff 無しで呼ぶため skip**・`:1299` `distmax=1.0` ⇒ `:1307` `best > 1e8` は永遠に発火せず None も返らない。⇒ **数が自分の宣言半径より大きく印字され得る = 額面で自己矛盾**・「nothing within the 16 mm」はこの対に**到達不能**。⚠ **arm 数は無影響**（`arm_pair_min :1838` は `ARM_PAIR_CUTOFF` を実際に使う — 当卓 `:2436` で確認）。
+- ⭐ **引用規則の完成 3 段**: ①値と導出（p11）②absent ≠ clear・既定出力（p11）③**半径は産んだ query の実物**（pZ・B5）。⇒ p4 の report: env 数を引くなら ③が sentinel caveat の上に乗る。
+- **第 4 の発見も KEEP の枠内で整合**（reporting 欠陥・crash なし・fix 外・row 無傷・読みで発見）— pZ が vote 時に述べた bounded-range の中。
+
+**Banked — 時刻は本節 commit の author date が正。**
