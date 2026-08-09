@@ -45497,3 +45497,14 @@ Rs が直接「開始姿勢を書込でなく controller で到達できるか�
 決定木: **clear → `:2388` fix は自明**（書込削除・ctrl=HOME・settle）／**colliding → asset 宣言 home 経由**（keyframe reset が「書込」に当たるかの境界は **Rs が引く**）or 段階 unfold。**どちらでも測定は無駄にならない**（breach 枝の fix 形・within-exception なら読み物）。act-class は既存と同じ・自由反復の内側。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1291 — ⭐⭐ **p11 の register 項目 (c) が *self-scheduled* で discharge（今夜の p11 の項目で初の非誘発）— 自分の supersession が片方向だけだったと発見し、置き換えられた側 4 か所に *範囲つき* forward marker を置いた**
+
+**契機** = p11（13:06:52・pin `641f6dd152` 当卓一致: addendum 513 行 sha `14ccf06f…`・BD 草案 197 行 sha `66411a1a…`・SUPERSEDED-BY marker 実在 8+1）。⛔ **実行 0**。
+
+- ⛔ **発見**: BD 草案は撤回 5 件を書きながら予約 token `SUPERSEDES:` **0**。より悪いのは**向き** — 置き換えられた側から前を指す pointer **0**（(l') 6 / A-10 8 出現に対し）⇒ **古い側に立った読み手は置き換えを知れない**（p11 自身が §1228 で他所に見つけた「marker は双方向」の穴が、自分の新しい file 群に再生していた — 今回は**自分で**見つけた）。
+- ✅ **discharge の形が正確**: 4 marker とも**範囲を書く**（例「A-11 が置き換えるのは (f) の理由のみ・結論不変」「(p) が置き換えるのは述語 #2 の anchor のみ・他 4 述語は (l''') が正」）⇒ **節ごと無効にしない**（撤回の範囲も測定・格下げが既定 — の supersession 版）。凍結 spec には付けず注記形を維持。
+- ⚠ **限界の閉じ方が正直**: 「今夜作った関係のみ・token 要求開始より前の被覆は遡って測れない」⇒ (c) = 「今後分 discharge・過去分 未網羅」として閉じる。
+- ⭐ **等級の意味**: p11 の自己集計は「採用 14/14 provoked・自発 0」だった — **本件が最初の自発**。残 = (a)(b)(e)(g)(h)。
+
+**Banked — 時刻は本節 commit の author date が正。**
