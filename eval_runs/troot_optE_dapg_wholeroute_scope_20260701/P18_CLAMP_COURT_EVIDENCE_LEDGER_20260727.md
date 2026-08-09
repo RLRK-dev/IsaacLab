@@ -45007,3 +45007,36 @@ p5 の 240-draw 義務（「裸の C-2 PASS は探索コストを落とす」）
 ✅ **p6 の撤回が row の中に置かれた**: (a) に p11 を提案した理由「cell geometry / physics は p11 の court」は **brief と不一致**（p11 が指摘）⇒ **隣接から組んだ提案だった** ⇒ **row 48 の owner cell に撤回を併記し、死んだ理由が今も立っているかのように引用されないようにした。**
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1272 — ⭐⭐⭐ **「すべて承認」の執行範囲を p4 が語の *形* で切った — 承認語は「要求」を執行でき、「裁定の枝」と「owner 名」は運べない（③のみ執行・①②は未執行のまま）** ＋ ✅ **当卓は commission を回付する前に env override 名を pin 先 blob で実測（3 名とも実在・footgun 1 件併記）** ＋ ⭐ **run 認可が「0 件」から「1 件・scope 付き」へ**
+
+**契機** = p4 `m-p4-192`（10:27）。当卓 実測 10:29-10:31。⛔ **実行 0**（回付のみ）。
+
+### (1) ✅ **custody（当卓 検証済み）**
+Rs 逐語 **「すべて承認」**（2026-08-09 10:2x JST・p4 session 直答・p4 の 3 項目リスト ①`:2388`+class 裁定 ②(c) placement ③器具の実装+run への回答）。⚠ **当卓は発話を目撃していない。**検証したのは bank: `ccc718d5ee` "An approval executes requests; it cannot pick a ruling's branch"・37/0・sha256 `42a26e8d3940d2de…` 全一致・**blob `:1556` に逐語・`:1563` に ①未執行の宣言**。
+
+### (2) ⭐⭐⭐ **本節の keeper — p4 の 3 分割（当卓も同じ読みで endorse・fail-closed）**
+```
+③ 器具の実装+run   ✅ **執行**   — authorization-form。承認は act-class 開示（形 2 と同 class・逐語）を *載せた* 報告に着地 ⇒ **開示条件は満たされた・免除されたのではない**
+① :2388+class 裁定  ⛔ **未執行** — 承認語は裁定の **枝**（breach／例外内）を選べない。「7 site は問題ない」と読めば **DoD 動画を含む wired run が *推論* で解錠**される。費用は非対称 ⇒ dep-3 は開いたまま
+② (c) placement     ⛔ **未執行** — placement には **owner の名前**が要り、語は名前を運ばない ⇒ (c) は Rs のまま
+```
+⇒ ⭐⭐⭐ **一般形（採用）**: **承認語が執行できるのは「承認可能な形をした要求」だけ。裁定の枝選択と owner 指名は、語の中に *内容* が要る。**⭐ これは当卓の banked 法 2 本の合流点 — 「形式の受理 ≠ 行為権限」（受理側）と「hold を relay で開けた」（解錠側）。**p4 は曖昧な grant で gate を開けなかった** — 昨日自分が誤った当の形の、正しい側。
+⭐ **p4 が Rs に訂正経路を明示**: ① を例外内の意なら一言（例「:2388 は例外内」）で dep-3 が開く／② は owner 名一語。**読みを 1 語で反証可能な形で提出した。**
+
+### (3) ✅ **当卓の回付前検証 — commission は書かれたとおり実行可能**
+```
+pin 先 blob（2fba2dfd67 の ur15_cell_spec.py）で 3 つの override 名を実測:
+  :355 YOKE_SPREAD_OVERRIDE ・ :356 TILT_DEG_OVERRIDE ・ :357 CROWN_R_OVERRIDE
+  既定値 :358 else 0.22 ・ :374 else 45.0 = C-2 が override で外す当の値
+⚠ footgun（同 blob :352/:429）: CROWN_R_OVERRIDE は文字列 "none" を受理し **crown 幾何を丸ごと除去**する ⇒ 値は "0.110" 以外にしない（p0 へ明記済み）
+:425 明示の CROWN_R_OVERRIDE は CROWN_Z0_OVERRIDE に勝つ ⇒ 相互作用なし
+```
+⇒ ⭐ **名前が pin 先に無い commission を回すと、受けた卓が build 時に発見する** — 当卓は m-p6-106 の行番号と同じ検査を *前向きに* 掛けた。
+✅ (4) の禁止（banked sweep 経路は使用不可）は **当卓自身の測定に接地**（§1270: `sweep_mounting.py:100-101` Popen・37 log 中 22 に書込直後 print）。
+
+### (4) ✅ **回付と現況**
+`m-p18-215` を全 6 卓へ（p0=commission・pZ=verify leg (4)(5)+表の対照・p4=readback 待ち）。**配達を内容で確認**（p0/pZ/p4 とも本文尾部文字列 HIT）。⛔ **配達 ≠ 受諾 — p0 の項目別 readback を待って p4 へ relay。**
+**status line 更新**: run 認可 = **この bundled 器具 1 件のみ**（flow = p0 実装 → pZ 検証 → run → p4 が表から文を導出 → dep-1 CLOSE → 4 編集着手可）。**不変** = dep-2（cap は landing まで — 承認は landing でない）・dep-3（wired 全停止・DoD 含む）・7 site 不触・4 編集不触（`2fba2dfd67`/`2bb1aad4e7`）・04-Specs 不編集・C3-C5 PENDING（D1 未達）・row 66 は [DEFER-RECON] carry。
+
+**Banked — 時刻は本節 commit の author date が正。**
