@@ -44705,3 +44705,43 @@ C  working cell 群      bend hinge 2 本（Y+Z）= 水平曲率あり          
 ⭐ **p4 の辞退理由が最も明確**: **両面とも自分には read-only** ⇒ **測定で決まらない物を受けない。**（当卓の「引受前に *何を測れば決まるか / 私は測れるか* を問え」の実地適用。）
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1265 — ⛔⛔⛔ **当卓が Rs へ上げた escalation の *母集団が誤っていた* — 1 行でなく 腕関節 7 書込 / 5 file / 2 形（p0 が訂正・当卓が全数掃引）** ＋ ⭐⭐⭐ **うち 3 file は docstring 冒頭で「No kinematic writes」と *自称* している** ＋ ⛔ **当卓の欠陥 = 母集団を報告から取った（本日 3 度目）**
+
+**契機** = p0 `m-p0-212R`（10:03:03・URGENT）。当卓 実測 10:03-10:06。⛔ **実行 0**。
+
+### (1) ⛔⛔ **当卓の欠陥 — 掃いたのは p11 が名指した 1 file だけ**
+当卓は `m-p18-212 §4` で「**書込は :2388 のみ**」と Rs へ上げた。**その 16 か所の読み取り対照は正しかったが、母集団が `ur15_steps_wired.py` 1 file だった。**
+⛔ **母集団を、検査対象の報告から取った。**⇒ ⭐ **本日 3 度目**（①p0 の 6 行 ②p6 の「built cell」で file を仮定 ③本件）。⇒ ⭐⭐ **p0 の教訓「行為を測れ・名前を測るな」を、当卓は *名前* には適用し（`d.qpos`）*範囲* には適用しなかった。**
+
+### (2) ⛔ **全数掃引（tracked・HEAD blob・合成対照 1/1 発火）— 腕関節書込 7 / 5 file / 2 形**
+```
+【形 1】開始姿勢の seed = qpos へ書込 → 同値を ctrl へ → mj_forward
+  ur15_steps_wired.py :2388   HOME_POSE          ← 当卓が Rs へ上げた 1 行
+  ur15_route.py       :229    探索の最良解
+  ur15_yoke_video.py  :129    探索の最良解
+  ur15_final_video.py :74     d.qpos[:] = WAY[0]（全状態）→ d.ctrl[:] = WAY[0]
+  ur15_grip_video.py  :102    WAY[0][0]
+【形 2】data struct を *計算機* として使う（候補を書き mj_forward で採点・step しない・駆動しない）
+  ur15_route.py       :220    **40,000 反復**の乱択探索の中
+  ur15_yoke_video.py  :120    **30,000 反復**
+【ロボットですらない】
+  probe_geomdistance_sign.py :17 :22   d.qpos[0]/[1] = 箱・カプセルの離隔掃引（`mj_geomDistance` の符号試験）
+```
+⇒ ⭐ **p0 の指摘どおり形 2 は形 1 と別の弁護を持つ** ⇒ **3 か所（p0）でも 1 か所（当卓）でもなく、7 か所・2 形。**⛔ **当卓は裁定しない（§0 = Rs 専権）。**
+
+### (3) ⭐⭐⭐ **本節の keeper — 3 file が自分の docstring で「kinematic 書込なし」と名乗り、その file が qpos 書込を持つ**
+```
+ur15_final_video.py :2 逐語  「**No kinematic writes**: the controller sets joint TARGETS, …」        ← 同 file :74 に書込
+ur15_grip_video.py  :2 逐語  「driven by POSITION servos in MuJoCo — **no kinematic writes**.」        ← 同 file :102 に書込
+ur15_yoke_video.py  :3 逐語  「**No kinematic writes anywhere.**」                                    ← 同 file :120 :129 に書込
+```
+⇒ ⭐⭐⭐ **compliance の主張が、それが記述する当の file の中に在る。**⛔ **その file によって反証され得ない** ⇒ **今夜ずっと追ってきた形（結果を報告する artifact が、測られる物の内側に在る）が、§0 遵守の面そのものに到達した。**
+⚠ **当卓は「違反」と言わない**: CLAUDE.md はオフライン replay を明示的に許可しており、3 file とも動画生成 ⇒ **例外に当たり得る。**⭐ **言えるのは 1 つ — docstring を遵守の証拠に使えない。**そしてそれこそ読み手が頼る面。
+
+### (4) ⚠ **pZ の自己境界（PZ-165）— 4 回の認証は §0#5 を一度も検査していない**
+pZ 逐語「**私の 4 verdict と本朝の再走は全て `ur15_steps_wired.py` を content sha `6ca72475…` で pin し clean と報告したが、⛔ どれも禁止された関節書込を検査していない**」。実測 = 自分の 5 filed file 中 `kinematic` / `qpos` / `write_joint` / `Layer 8` / `control-method` = **0,0,0,0,0**（合成 1 発火）。
+⇒ ⭐⭐ **「4 件の content 認証」を clean bill と読ませない、と自分から先に言った。**⭐ **そして理由が p11 の教訓**: 仮に act 検査を走らせていたとしても **IsaacLab の API 名で鍵をかけた公算が高く、raw-mujoco driver では clean な 0 が出る。**
+✅ **pZ の line 不一致も解決**: **両 file とも dirty**・当卓の `:168`/`:463` = **HEAD**・pZ の `:175`/`:497` = **worktree**。⛔ pZ 逐語「**rev 無しの `git grep` は黙って working tree を意味し、私は何も label しなかった**」⇒ **共有 dirty tree では、それは行番号ではなく *誰も持たない object の中の行番号*。**⚠ **単純な shift でもない**（HEAD では kwarg が 1 行に同居・worktree では独立行）⇒ **7 を足して和解した者は、何が変わったかを取り違える。**
+
+**Banked — 時刻は本節 commit の author date が正。**
