@@ -2395,47 +2395,46 @@ mujoco.mj_forward(m, d)
 # static check can say whether the arms pass clear on the way -- and a swinging traverse can pass
 # closer than either end.  The settle itself is the only thing that visits those configurations, so
 # it records its own running minimum.  ⛔ This is a by-product, not a gate: it reports, never blocks.
-_traverse_arm, _traverse_arm_who = 1e9, "-"
-_traverse_env, _traverse_env_who = 1e9, "-"
+# One absence, in the data (the accumulator change is pZ's design, not mine): the accumulators
+# seed as None, so "no reading landed yet" IS the same absence the gap helpers already return --
+# one kind, which is what lets one spelling be correct.  One radius per query (B5): every call
+# below passes cutoff=ARM_PAIR_CUTOFF explicitly and both labels print that same constant, so the
+# radius a label declares is the one its producing query used, by construction.
+# ⚠ For furniture_gap this WIDENS the radius from its 16 mm default: at 16 mm the +19.8 mm table
+# margin -- the pair this recorder exists to watch -- could never have produced a reading.
+_traverse_arm, _traverse_arm_who = None, "-"
+_traverse_env, _traverse_env_who = None, "-"
 for _s4 in range(int(SETTLE_S / m.opt.timestep)):
     mujoco.mj_step(m, d)
     if _s4 % 10 == 0:
-        _v, _w = arm_pair_min(d, want_who=True)
-        # Same guard as the env pair below, and this is the pair that NEEDS it: the cutoff is
-        # 176 mm and both measured configurations sit outside it (491.3 at zero, 194.2 at home),
-        # so None is what the first sample returns.  ⛔ I guarded the env pair and left this one
-        # unguarded one line above it -- the class fixed at the instance.
-        if _v is not None and _v < _traverse_arm:
+        _v, _w = arm_pair_min(d, want_who=True, cutoff=ARM_PAIR_CUTOFF)
+        if _v is not None and (_traverse_arm is None or _v < _traverse_arm):
             _traverse_arm, _traverse_arm_who = _v, _w
         for _t6 in SIDES:
-            # ⛔ Both furniture and column.  Watching only the column would report the traverse's
-            # worst over the two ROOMY pairs while the tightest margin at this mounting is the
-            # TABLE (+19.8 mm at the endpoints) -- a "worst" that excludes the tight pair reads as
+            # Both furniture and column: the tightest margin at this mounting is the TABLE
+            # (+19.8 mm at the endpoints), and a "worst" that excludes the tight pair reads as
             # the worst and is not.
-            for _v6, _w6 in (column_gap(_t6, d, want_who=True),
-                             furniture_gap(_t6, d, want_who=True)):
-                # `None` means nothing was inside the cutoff, which is not a small number.
-                if _v6 is not None and _v6 < _traverse_env:
+            for _v6, _w6 in (column_gap(_t6, d, want_who=True, cutoff=ARM_PAIR_CUTOFF),
+                             furniture_gap(_t6, d, want_who=True, cutoff=ARM_PAIR_CUTOFF)):
+                if _v6 is not None and (_traverse_env is None or _v6 < _traverse_env):
                     _traverse_env, _traverse_env_who = _v6, f"{_t6}: {_w6}"
     if max(abs(d.qpos[_a5] - HOME_POSE[_k5])
            for _t5 in SIDES for _k5, _a5 in enumerate(QADR[_t5])) < SETTLE_TOL:
         break
 print(f"[steps] start pose = the cell's home, both arms, reached by servo in "
       f"{(_s4 + 1) * m.opt.timestep:.2f}s: {np.round(HOME_POSE, 4)}")
-# ⛔ A sentinel must not print in a millimetre slot.  Both measured configurations sit outside the
-# arm-pair cutoff (491.3 and 194.2 against 176), so "nothing was ever within range" is the EXPECTED
-# outcome here -- and 1e9 formatted as %.1f reads as a very clear arm pair instead of as no reading
-# at all.  The file already says this properly at :2361 and :3777; this is that form, not a new one.
+# The value/absence spelling is gap_mm's -- :1880 centralizes it for exactly this reason, and a
+# second private spelling is what p11 flagged.  This wrapper adds only the pair name and the
+# radius; the radius it prints is the constant every producing call above passed.
 def _traverse_say(v, who, what, radius_mm):
-    if v > 1e8:
-        return f"{what}: nothing within the {radius_mm:.0f} mm search radius"
-    return f"{what}: {v * 1000:+.1f} mm ({who})"
+    body = gap_mm(v, absent=f"nothing within the {radius_mm:.0f} mm search radius")
+    return f"{what}: {body}" if v is None else f"{what}: {body} ({who})"
 
 
 print(f"[steps] settle traverse worst -- "
       f"{_traverse_say(_traverse_arm, _traverse_arm_who, 'arm<->arm', ARM_PAIR_CUTOFF * 1000)} | "
-      f"{_traverse_say(_traverse_env, _traverse_env_who, 'arm<->column/furniture', ARM_DECIDE_CUTOFF * 1000)} "
-      f"-- sampled every 10 steps over the traverse, endpoints included")
+      f"{_traverse_say(_traverse_env, _traverse_env_who, 'arm<->column/furniture', ARM_PAIR_CUTOFF * 1000)} "
+      f"-- sampled every 10th step during the settle; endpoints not guaranteed a sample")
 # ⭐ Read AFTER the settle.  START must be the pose the arms REALIZED, never the one commanded --
 # every IK seed below inherits it, so a commanded value here would seed the solves with a pose the
 # arms were never in.
