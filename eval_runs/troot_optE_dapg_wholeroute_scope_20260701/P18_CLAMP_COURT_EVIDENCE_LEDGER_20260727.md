@@ -45723,3 +45723,13 @@ p5 の −1.0 の取り方 = `grep | head -1`（当卓の head -4 と同形）�
 - ⛔ **未再測の 1 行を年齢つきで申告**（pZ）: 「memory dir へ書いてよいか」の Rs への質問 = **07-27 から未回答・その間 書込 0**。⇒ ⭐ **当卓の routing**: **CLAUDE.md §31（Rs 裁定 2026-08-05）が既に一般解を持つ** — topic file（feedback-*/reference-*/project-*/per-pane handoff_cc_*）= **解放**・MEMORY.md = 成長条件つき・handoff.md = SHARED last-writer。**裁定は質問の 9 日後に着地しており、auto-load 面に在る** — pZ の quiet default は「未回答」でなく「**回答が後から一般形で landed**」の可能性が高い。⛔ pZ 固有の適用可否は pZ が §31 を読んで判断（当卓は裁定しない）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1306 — ⭐⭐ **0-byte log の機構が判明（p0）: buffering でなく *4 つの診断 process の同時生存* — 「still running と報告したとき、何個かを問わなかった」** ＋ ⭐ **p5 が同じ圧縮を自分の行に発見し、状態行だけ *在位置* で直す例外を理由つきで立てた** ＋ ✅ **fix chain の全 briefing が p0 で完全に fold（誤りなく復唱）**
+
+**契機** = p5 `m-p4-221`（16:26:54・pin `915ee8bff8` 1/1 在位置）＋ p0 `m-p0-224..230R`（16:27:07）。⛔ **実行 0**。
+
+- ⭐⭐ **p0 の機構**: 各 retry が先行 process を残し **4 つが同時生存** → 競合で **どれも最初の print（build_cell() の後）に到達せず** ⇒ **「遅くて buffer されていた」でなく「model compile を一度も越えていなかった」**。⭐ 自己申告「**harness の exit 0 / still-running を、何個かを問わずに報告した**」（cardinality の教訓・process 版）。全て 0 へ清掃・以後 **pgrep の pid で kill**（括弧 guard は command line 全体の性質 — 自分で再確認）。⇒ **次報 = 1 run・1 process の診断数値**。
+- ⭐ **p5 の在位置例外**: 「dep-1 は discharged のまま」を自分の §4m に発見（当卓が撤回した圧縮と同一）→ **在位置 1/1 で修正**・理由を書き残す:「**状態を述べる行は、古い読みが最上位に在る間ずっと正しく見える — 下への訂正は、そこへ到達しない読み手を救えない**」（原文は同行の注記に保存）。⇒ p11 の keeper の、対処法つき実例。
+- ✅ **p0 の fold が完全**（削除≠fix／3 要件／冗長 ctrl 行なし／parent-相対 guard／第 6 行が実体／向きの分離／text 引用自由）— **briefing の伝達が 1 往復で閉じた**。⚠ 家族への態度も正確: 「census に居ないが免疫は主張しない — 数えなかっただけ。**not-having-fired is not not-having-existed**」。
+
+**Banked — 時刻は本節 commit の author date が正。**
