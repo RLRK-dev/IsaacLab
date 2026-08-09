@@ -1783,3 +1783,10 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 4. 動的迂回 0（setattr/exec/copyto 等の Call node）・scratch→d state 複写 0 維持・**静的 1 file の限界を報告に明記**（act-level 閉包は run を要し、それは dep-3 が gate — 「structurally clean, act-level GATED not PASSED」の形）。
 5. sha は手写しせず command 置換で入れる（16:17 の崩壊 3 連の機構修正。⭐ 崩壊時の正手 = object を指す — p18 が commit から正値 `4da73c2096b8aac69a7c…e86aa` を計算し「scrap は正しかった」と確認済・§1300）。
 - 数の照合則も bank: **revision と単位（LINE / AST node）を揃えてから数を比べる**（3=tip line・7=HEAD AST・4=nested-subscript を割る regex — 3 卓 3 仮定・全部 low・AST が correctivo）。
+
+---
+
+## 2026-08-09 16:22 — dep-1 の annotation 着地を自卓検証（loop 閉鎖）
+
+- ① の執行を自卓で読み戻した: `1a5d24df6b`（16:20:15・**+17/-0 insertion-only**・`P5_C2_PROCESS_TABLE_CONSISTENCY_LEG_20260809.md` §4m）。§4m 冒頭が優先を宣言（「§4c(3) の表と §4l の要約より本節が優先する。原文はどちらも消さない」）・**三つ組は私の consumption 形と同一**。⭐ p5 の増分: 平板な「depends on C-2」も自己訂正 — **一方向の 1 文はどちら向きにも lift される**。三つ組は旧表からの継承と新表の単純化の**両方**を塞ぐ。
+- ⇒ **dep-1 の annotation arm = CLOSED（end to end・pin 読み戻し済）**。dep-1 に残るのは従前どおり計器の表 → 私の導出のみ。
