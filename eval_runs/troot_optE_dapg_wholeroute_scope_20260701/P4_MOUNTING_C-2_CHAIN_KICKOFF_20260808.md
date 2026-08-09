@@ -1754,7 +1754,7 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 
 ---
 
-## 2026-08-09 16:13 — 修正 chain の routing 完了（m-p18-224）＋ 診断の配達 custody を精密化
+## 2026-08-09 16:10 — 修正 chain の routing 完了（m-p18-224）＋ 診断の配達 custody を精密化〔⚠ 見出し時刻を 16:13→16:10 へ訂正: date 実測 16:10:25 の前に見出しを推定で書いた — date-THEN-write の違反・機械時刻が正〕
 
 1. **routing 完了**: ① 裁定と修正 chain は m-p18-224 で全卓へ回付・owner 確定（p0 = 診断行＋修正 impl／p11 = servo-start 形の設計確認／pZ = 着地 leg／p6 = dep-3 RULED の登録）。裁定 custody は私の 16:06 節 `20a4d2620d` を p18 が blob 照合済（sha 一致・逐語 `:1730`）。
 2. **診断の配達 custody（精密化・私の欠陥ではないが chain の step (i) なので書く）**: 私の m-p4-202（12:53・p18 で queue 確認済）は **p0 へは relay されていなかった** — p18 が自己訂正し（「written is not delivered, at my own desk」）、**m-p18-224 item 3 が逐語 full-carry** した。⇒ step (i) の operative carrier = **m-p18-224 item 3**（m-p4-202 は原文）。私の 12:53/16:06 の「依頼済」は送達脚（→p18）までの正確な記述で訂正不要 — hub 脚の欠落は hub が所有した。
