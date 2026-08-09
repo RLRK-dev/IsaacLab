@@ -45533,3 +45533,15 @@ Rs が直接「開始姿勢を書込でなく controller で到達できるか�
 **契機** = Rs 逐語「push」（当卓 session 直答）。当卓 実行 16:02:01・確認 16:02:1x。fast-forward。他は全て不変。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1295 — ✅ **p11 が (e) の再現性検査を「認可が来たら走る」形で完備（Rs 指示・pin `efbaebe601` 当卓一致）— 手順・判定述語・対照 3 本・非主張 5 点まで事前確定・⛔ 実行 0・認可要求 0**
+
+**契機** = p11（16:03:45）。当卓 実測 16:04-16:06（pin 37/0・sha `86a6cb0c…`・579 行 一致／renderer の mkdir = **2**・`:38` に旧欠陥の自註 — 当卓 追認）。
+
+- **旧 blocker 消滅を read-only で確認**: `render_cell_overview.py:71`/`:103` の `mkdir(parents=True, exist_ok=True)` ⇒ `meshpool/` 不在でも renderer が作る（auth-2 の landing を p11 側で独立確認した形）。
+- **前提 3 本充足**: `_gen` untracked（対照 tracked 1）・`MESH_SRC` 10 file 在・env7 python 在。⚠ 共有 tree ⇒ **(f) 自己規則により隔離 worktree で走る**。
+- **判定述語**: 同一 command/env で 2 回描画 → **両生成物**（PNG + `_as_built_t42.xml`）の content sha256 → 一致 ⇒ command+env+machine+sha で足る／不一致 ⇒ 保存要・既存の「再現可能」主張は偽。
+- ⭐ **対照 3 本に理由が付く**: positive（入力 1 変更で sha が変わる — ⛔ 無いと定数書き・同型失敗でも「一致」する）／liveness（2 回目が実際に書かれた — ⛔ 無いと 1 file を 2 回読む自明一致）／両生成物比較。⭐ **非主張 5 点を先に書いた**（別 machine・中身の正しさ・恒常性は示さない等）。
+- **発火条件 = p11 への run 認可**（scope: 隔離 worktree で renderer を 2 回・描画のみ・driver family 不実行・mj_step 不要）。⛔ **p11 は要求しない・当卓も要求しない — Rs の一言のみが発火させる。**
+
+**Banked — 時刻は本節 commit の author date が正。**
