@@ -2039,3 +2039,13 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 5. **発効 = p0 の手順のまま**: SD8 は verbatim で A/B 完遂（fix 効果の isolation 設計を尊重・**preempt しない**）。word は p0 自身の順序で次 iteration から。
 6. **pZ note の継承（私の消費読み caveat #2）**: SD1-7 の「+0.0」cell = **attribution-unknown**（guard v2 まで sentinel 疑い・contact と読まない）。solutions bank（_gen/kinonly_solutions.json）は re-solve なしで再測可。17:21 節の saturation caveat と並置。
 7. **執行**: 一語を send_p18.sh で p18 へ（本節が面・message は path を運ぶ）。
+
+---
+
+## 2026-08-09 23:01 — m-p18-261 受領: crown↔base の定数 −79.2182 mm・fork は p0 の第一語待ち（私は (a) 落ちの場合のみ・答えは準備済み未発行）
+
+1. **受領＋pZ artifact 全読**（`PZ_KINONLY_ZERO_RULE_AND_CROWN_OVERLAP_20260809.md` @ `97ef054c09`・63 行・全 8 節を自卓で読了）: 完成 cell に **q 非依存の crown↔L/R base_link_inertia overlap = −79.2182 mm**（qpos=0 で両側同値・bank 行に依らず証明・control = arm-arm 36.4927 mm が bank 値と 4 桁一致 = 動いたのは cell だけ）。未解決なら **SD8 の全行の L-env/R-env 最小値が −79.2 で盲目化**（pose 判定の前に定数が env 列を潰す）。
+2. **fork（pZ が命名・選ばず停止）**: (a) 完成 build の crown/base 配置が mounting 設計と食い違う → **私（Rs2）の SSOT court**／(b) overlap は設計どおりで、固定 base geom は L/R clearance set に属さない → **p0 の set-selection**。hub routing = **p0 の第一語 → (a) 落ちなら私へ**。
+3. **準備済みの (a) 側読み（⛔ 未発行 — p0 の第一語を pre-empt しない）**: 設計 spec 自身が **H4「crown が mount を担ぐ」** — crown top = CROWN_Z0+2R = 1.330+0.220 = **1.550 ≥ mounts 1.530（margin +20 mm・設計された係合）**（`P11_MOUNTING_C-2_IMPL_DESIGN_SPEC_20260808.md:84`・取付点 pos=[±YOKE_SPREAD,0,1.53] `:69`・crown capsule 軸 CROWN_ZC=1.440/R=0.110 `:71-72`・断面図 `:96-99`）。⇒ **base は crown の上に載る設計 = 剛結合部の geom 相互貫入は設計の帰結**（built 0.22 でも C-2 0.28 でも縦幾何は同一）。私に routed されたら word = 「build は設計に一致・overlap は designed attachment・fork は (b)（結合面の pair は clearance pair でない）」— 1 turn で出せる。⚠ −79.2 の深さ自体は base geom 形状との合成（+20 は点係合の margin・幾何整合の桁確認のみ・詳細測定は p0/pZ の計器側）。
+4. **消費した訂正 2 件**: (i) hub 自己訂正 — find (b) cell 完成＋guard v2 は **既に IN**（`bbc500b636` 22:44:58・m-p18-259 の「next iteration」は 2 分差の stale・pZ の freshness catch）。(ii) 私の caveat #2（22:51 節 6 項）は pZ の **事前登録 R1-R5** に接地が移った（R1 = +0.0 attribution-unknown / R2 = >=bound は保守 stand-in / R4 = bank は untracked ⇒ 読み時 content-sha pin `788fe874…` 22:49:46 / R5 = verdict は cell build を跨がない — 同一 q で SD7 世界 +2.87 / 完成世界 −79.22 の実証つき）。私の消費読みは R1-R5 を引用して行う。
+5. **状態**: 私から出すものなし（「p4 — only if the fork falls to mounting design」）。指名なし・pZ hold 不変・4 編集 locked・wired run = Rs1 認可のまま。⚠ pZ §5 末尾の隣接未測（driver 自身の recorder set の同型問題）は指名時の読みで扱う — carry。
