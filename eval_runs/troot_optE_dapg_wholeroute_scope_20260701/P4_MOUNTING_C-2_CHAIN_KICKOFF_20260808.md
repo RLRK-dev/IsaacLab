@@ -2124,3 +2124,14 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 3. ⚠ **pointer 訂正（私の erratum・挿入で supersede）**: 00:58 節 (3) と m-p4-246 の「design spec **§2**」は誤指し — 4 編集の定義は **§1「変更点（p0 が実装する 4 点・2 file）」**（hub が見出しを実測）。**内容 list は両所で同一・pointer のみの誤り**・p0 は正しい節から実装済。⇒ 以後の引用は §1。
 4. 附記（pZ の row-6 系・私の court でない）: m-p18-268 の「別 pair」は hub 自身が撤回（同一 site の 2 時点読み）／real stale 1 件 = `compare_24_vs_240.py:78`（locked 面・display-only・stale-history class・pZ disposition へ）。
 5. 状態: 実行中なし・DoD/wired = Rs1 認可のまま。私 = pZ leg 帰還待ち → 等号受入で着地 → chunk の残り（DoD run は Rs1 の領分）。
+
+---
+
+## 2026-08-10 01:17 — 等号受入 = **MATCH**（dep-1 の最終 act 完了 ⇒ **dep-1 = CLOSED**）
+
+1. **受入の等式（全て本 turn 自測・01:17:17）**: worktree 自読 sha256 **==** 着地 blob 自読（`git show 0f6b4a733e:…`）**==** hub 対（m-p18-269/270）**==** p0 関数名つき pin —
+   `ur15_cell_spec.py` = `d4f79856bd6391d08efd326f905e369fe8742c04417cc75449d619d144abbd25`／`sweep_mounting.py` = `51697f63600cee29cf1dd638cc3d1fa1e73625205d62abc1b90be8841036eb3f`。**両 file MATCH（4-way）**。
+2. **pZ verdict 消費**: 7/7 HOLD @ 親 `79b53c797a`（= 表そのもの — 判定が被判定に git 史で先行する形）・row 7 は runtime 両方向（no-override → 0.28/20.0/0.110・old-cell override → 0.22/45.0/0.110）。bank = `PZ_VERDICT_0f6b4a733e_C2_EDITS_20260810.md` @ `beb4bcb5fe`（自卓照合 01:16:04・+35）。
+3. **word = ACCEPTED** — 検証した物と着地した物は同一。**mounting C-2 の 4 編集 = LANDED & ACCEPTED ⇒ dep-1 chain 全 act 完了 = CLOSED**。
+4. ride する finding（block しない）: F1（counter cite の 1 token rev 訂正）／F2（`compare_24_vs_240.py:77-78` — 測定史として真・機構記述として偽）— 両方 p0 の documentation bucket・locked 面への unlock 含意なし。
+5. **gate line（受入は何も走らせない・不変）**: DoD run・wired 一切 = **Rs1 認可**／dep-2 = 等級 cap（#48 spec 着地まで）／DEV-C2X 35mm 未裁定／D4・#54 部材・stereo-head 不在 = carry。**次に動く時 = Rs1 の DoD 認可 or Edge B（p11 cycle 2）の再開**。
