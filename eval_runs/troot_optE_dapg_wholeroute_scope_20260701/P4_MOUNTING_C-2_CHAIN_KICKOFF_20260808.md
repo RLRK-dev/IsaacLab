@@ -1657,3 +1657,20 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 **(2) の硬化を受入条件として批准**（p18 item 3 を hub gloss でなく私の受入文にする）: **(2) v2 = STEP-1 行は「実際の link 間幾何」（link geom への `mj_geomDistance`）を測る。commanded-span 量は行から禁止。** 根拠 = 同一構成で +0.0（span 表示・`:2365`「commanded span, not the links actually held」）と −1.0 mm（link 接触）が同時に印字される — span 形は接触を見逃す +0.0 を再生産する。⇒ 消費側検査の 5 読のうち「解決 3 数」に続けて **STEP-1 行の値が link-幾何由来であること**を読む（6 読目）。
 
 不変: dep-2 cap／dep-3 open／7 site 不触／C-2 4 編集未着手／run 認可 = 計器 1 件のみ。audit 節の 2(a)-(c)（sys.modules 併記・対照は per-event-type かつ計器の外・mj_step counter は wrapper）と 2(d)・item 3 の pZ 対照は build/verify 側の形として受領 — 私の受入条件と衝突しない。
+
+---
+
+## 2026-08-09 11:01 — deviation の一語: 逸脱扱い（both-values）で建てる・登録は所有者へ依頼・(c) 連鎖は不一致点で単一 source を名指さない
+
+**自測（他卓の数値で裁定しない — 3 source を読み戻した）**: task_config `:213` C2 = (0.40, **+0.075**)／canonical §2.1 `:109` 逐語「C2=25/**+0.075**」＋成功条件 `:134`「C2(Y+0.075)上空へ」`:139`「seated(Y+0.075)」／cell tip `:486` C2 = (**0.040**, CLIP_Y_EVEN)。|0.075−0.040| = **35.0 mm**（自算）。⭐ 行座標は両側一致（0.35/0.40）・C1 across は 0.150↔+0.150 で**厳密一致** ⇒ frame 写像（cell.x ↔ config.y）は整合しており、**発散は C2 の across 座標 1 個**。⭐ **これは私の witness 所見と同一事実**: chord 90.14 vs 120.83 mm の差の駆動項が、まさにこの 35 mm（自算で確認: config across 間隔 0.075 / cell 0.110）。
+
+**一語 = 逸脱扱い**:
+1. **計器側（私の受入条件の適用・即日有効）**: C2 を消費する行（C2 block 11-18・C1→C2 transit）は **D-2(d) の both-values 行**になる — **C2@cell(0.040)** と **C2@design(+0.075 を row-整合写像で cell frame へ)** の両方で端点＋along-path を測る。artifact は写像を 1 行で宣言し（cell.x↔config.y・C1 厳密一致と行座標一致が根拠・⚠ C1 一致は WORK_ROW_DY=0 条件付き — p0 の print がその条件を可視化）、**候補間で成立性が割れたらそれ自体を逸脱の運用コストとして報告**する。仮 tag = **DEV-C2X（登録待ち・D-5 隣接）**。
+2. **(c) 連鎖の追補**: 連鎖の design 値と消費される cell 定数が**不一致の点では、連鎖は単一 source を名指さない** — その行は 1 の形へ落ちる（D-2(d) の連鎖レベル再記述）。
+3. **登録（私は書かない — 依頼する）**: 設計 §2 台帳への entry は **doc 所有者 = p5** へ依頼（新 ID か D-5 配下かは**先方の taxonomy**・私は D-5 の scope を裁定しない）。**DDR #46 への cross-reference を提案**（#46 の実射程 = cell 定数 21 件の齟齬 — 本件はその族の 1 個である蓋然性が高い。containment 確認 = p6）。
+4. ⛔ **裁定しないこと**: +0.075 と 0.040 の**どちらが正か**（未裁定・%12/Rs 族）。
+
+**消費側検査の更新（7 読目）**: C2-block 行が **対で**在り DEV tag を運ぶこと・導出文が**候補毎に** 在る/無い を言うこと。
+**operative 2 点（p18 発・衝突なし・endorse）**: pZ の text↔text／値照合は **C2 で走る**（C1 は厳密一致ゆえ何も判別しない — 判別しない述語）／p0 は解決 3 数の隣に **WORK_ROW_DY の実効値**を印字。
+
+不変: dep-2 cap／dep-3 open／7 site 不触／C-2 4 編集未着手／run 認可 = 計器 1 件のみ。⚠ ur15_cell.py の dead-scratchpad path `:44`（p18 報告）は既登録 class（dead-session bind・owner p6 起票済の族）— 本 commission 外・不触で受領。
