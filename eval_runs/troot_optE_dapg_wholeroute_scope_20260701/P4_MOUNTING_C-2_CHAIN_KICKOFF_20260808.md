@@ -2068,3 +2068,13 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 2. **relay lag の整理（矛盾なし）**: Rs1 発話時点の実測（23:08:43 idle）は正・word commit 時点では p0 は既に動いていた — hub が §1 で reconcile。⚠ 教訓 rider: **idle の実測は発話時点の事実で、着地時点の事実ではない**（実測にも鮮度がある — 15 節鮮度規律の pane-status 版）。
 3. **私の scope 縁取り 2 つは operative になった**（m-p18-262 §3）: (i) 除外 = 「固定 base geom が L/R set を出る」形・⛔ crown は env に残る — hub 観測では p0 の landed rules は準拠に見える（smoke: L/R-env +51.5 = upper-arm↔mount = crown は動く link に対し測られ続けている）→ **p0 の一語 confirm 待ち（p0 の課題・私のでない）**。(ii) 残余 overlap（attachment を跨がない）= 本物の clearance 信号。
 4. **状態**: 私に owed なし。chain 不変（指名 checkpoint disposition → pZ leg → 表 → 消費読み 9 節 → 導出 → 4 編集 unlock）。動くものは p0 の自由 iteration のみ（live env column → shakedown → (ii) z-iteration → 基準 clear で指名）。台帳 1366 が本 dispatch に続く。
+
+---
+
+## 2026-08-10 00:18 — m-p18-263 受領: **指名が名指された** — `kinonly_step_solve.py` @ `120746a49b`・pZ leg が先・私は次
+
+1. **指名**（p0 m-p0-261R 00:15:49・bank §8.44 @ `912820d0e1`）: 計器 = `kinonly_step_solve.py` **@ `120746a49b`**（自卓照合: 23:54:47「Move the rest-row grasp off saddle S1 and split the chains by family」+34/-8）。**FROZEN**（pZ leg 帰還まで・hub 検証 = 指名後 0 commit・worktree clean）。p0 の freeze 姿勢は正。
+2. **消費時に私が read 時 content-sha で再 pin する 2 object**（untracked ゆえ読み時 pin が規則 — hub 00:16 の独立 pin と p0 の read-time pin が一致済・私が読む時で 3 卓目になる）: 表 = `_gen/shakedown10.log` sha256 `2d82e0af1b10342b64bb0b8bec9a6387514841f2ab8aff9200414f91285eb866`／winner q = `_gen/kinonly_solutions.json` sha256 `58af7ebe0f60e557d466d906d3ba2bad87ffd98038d2a289c7712e674a9bdb1c`。決定論的再生成 @ `120746a49b`・SEED 20260809。再測は banked q の placement のみ（re-solve なし）。
+3. **表に乗る宣言済み scope（私の消費読みが明示継承する 4 つ・p0 自身の言葉）**: (i) **cable-absent scope**（jaw 内 8mm 半径 cable は sub-3mm work-row standoff を正確に変える）(ii) **straight-joint-path model**（row 2 の −115.2 は path model の値・pose 主張でない）(iii) kept-contact 残余 **6.1%**（28,640/466,830）= R1-R5 下で attribution-unknown 事前登録 (iv) v1 endpoint 全 clear（+5.7..+23.9 / +20.3..+50.8）・**TOUCHING 33/36 = endpoint∧path の連言**（cell に分解が載る）。
+4. **chain（1 run = 1 commit・hub 全検証）**: `bbc500b636`（cell+witness guard）→ `d8badd92d3`（fork (b) rules）→ `f531b019b2`（AABB bound・suspects 63%→91.5%）→ **`4f3385968f`（私の (ii) z word 消費 — 自卓照合 23:34:02「Consume z by Rs2's (ii) word: term-map, both-values, stamped」+62/-21 = 刻印要求 (d) まで実装）**→ `120746a49b`（S1 graze fix・family 別 chain）。
+5. **私の位置 = NO ACT YET**: pZ の formal leg（pZ の form・pZ の pace）→ 表が私の消費読みへ → 導出 → **4 編集 unlock**。消費読みの装備 = 9 節（10:30/10:41/10:50/10:56/11:01/11:08/16:26/17:21/19:04）＋ caveat stack（saturation は 19:04 の解除条件で fix 形を確認して読み替え・R1-R5・本節 3 項の 4 scope）。wired run = その後も Rs1 認可。台帳 1368 @ `18d74ca6e6`（自卓照合 00:17:22 +11）。
