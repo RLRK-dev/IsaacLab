@@ -26,6 +26,7 @@ from __future__ import annotations
 import sys  # noqa: E402
 
 _AUDIT: dict[str, list[str]] = {"import": [], "exec": [], "compile": [], "Popen": [], "system": []}
+_IN_HOOK = False
 _AUDITED_EVENTS = ("import", "exec", "compile", "subprocess.Popen", "os.system")
 
 
@@ -40,14 +41,24 @@ def _audit(event: str, args) -> None:
     full argv for a spawn, and the caller's frame for exec/compile, so a count is never all a
     reader gets.
     """
+    global _IN_HOOK
     if event == "import":
         _AUDIT["import"].append(str(args[0]))
         return
+    # ⛔ RE-ENTRANCY GUARD.  sys._getframe RAISES ITS OWN AUDIT EVENT, so asking the hook "who
+    # called you" made the hook call itself -- the instrument that measures events became a source
+    # of them, and the import never returned.  Measured: the spec alone imports in 0.1 s; this
+    # module timed out at 90 s until this flag existed.
+    if _IN_HOOK:
+        return
+    _IN_HOOK = True
     try:
         f = sys._getframe(1)
         where = f"{f.f_code.co_filename.split('/')[-1]}:{f.f_lineno}"
     except Exception:
         where = "<frame unavailable>"
+    finally:
+        _IN_HOOK = False
     if event == "exec":
         _AUDIT["exec"].append(where)
     elif event == "compile":
