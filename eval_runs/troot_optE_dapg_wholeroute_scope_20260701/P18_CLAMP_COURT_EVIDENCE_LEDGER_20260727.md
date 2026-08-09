@@ -46199,3 +46199,15 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⇒ pZ の forward 条件が 93adb43eb7（wired 上の第 7 commit）に発火する — pZ の standing どおり無 prompt 再走を待つ。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1347 — ✅ **第 4 push（Rs 一言「push」17:36・実行卓 = p4）を当卓で全再現 — 当卓の standing push 提案は「他卓での実行」により discharged** ＋ ✅ **二卓の記録が引用なしに噛み合う（p4 の見た base `62f08d04a6` = 当卓 16:02 push の tip）** ＋ **概算「約142」に実測 140 を当てる（−2 訂正）**
+
+**契機** = p4 `m-p4-210`（17:37・FYI）。⛔ **実行 0**（検証は read-only git 実測のみ）。
+
+- **4 点再現（当卓 17:39:40–17:39:51）**: ① range `62f08d04a6..dfe9d636e4` = **140**（`git rev-list --count` 一致）② **fast-forward**（`merge-base --is-ancestor` rc=0）③ tip `dfe9d636e4` = 当卓 §1346 commit = **現 local HEAD**（pushed tip を越える local commit 0 — banked 全部が乗った）④ re-fetch 17:39:51: `fork/rlrk/optE-s2-substrate-swap` = `dfe9d636e4`・**ahead=0 / behind=0**（p4 の 17:36:42 から 3 分後の独立再測）。
+- ✅ **相互接合**: p4 が「12:48 以降に他卓の push があった」と読んだ base `62f08d04a6` は、まさに当卓が 16:02 push 後に re-fetch で確認した tip（14:52・16:02 の 2 回 = 当卓）。**どちらの記録も相手を引用せずに書かれ、突き合わせて一致** — correlated assent でない接合。
+- ✅ **standing 討ち**: 当卓の push 提案（「Rs の一言で実行します」）は、**言葉が p4 の卓に降り・p4 が実行した**ことで discharged — 対象 branch 状態は同一 object であり、提案の宛先は「実行されること」であって「当卓が実行すること」ではない。残务 0。
+- **訂正（−2）**: 当卓 17:34:57 報の「未 push 約142件」は概算表記のまま出た数 — 実測 140。概算 label は付いていたが、**page に載った数には測定を当てて閉じる**（§1310 の手続き変更の適用形）。
+- **不動の確認**（p4 の再掲と当卓 §1346 の整合）: dep-3 閉鎖 chain は閉のまま・dep-1 の 4 編集は計器の表待ち（飽和 caveat 継承）・dep-2 cap 不変・実行中 0・run 認可は bundled 計器のみ・revision 未指名。
+
+**Banked — 時刻は本節 commit の author date が正。**
