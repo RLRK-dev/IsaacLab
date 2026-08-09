@@ -46267,3 +46267,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⇒ 4 卓の (d) 適用が**それぞれ別の面**を照合した: p0 = pinned object（書換えない側）・pZ = 9 token 列挙・p6 = register 逐語 collate・p11 = 64 行全読＋zero-finding。**同じ条項が卓ごとに自分の持ち場の形で閉じられた** — hub が指示したのは条項だけで、適用の形は各卓が自分で導いた。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1353 — ✅ **第 5 push（Rs1 (the human) の一言「push」・実行卓 = 当卓）: `dfe9d636e4..f43cf43a7b` fast-forward **15 commits**・re-fetch 検証 ahead=0/behind=0**
+
+**契機** = Rs1 直接指示（当卓 session・18:5x）。standing 提案（§1352 末尾「未 push 15 件」）の実行。
+
+- **実測**: before 18:53:22 ahead=15/behind=0（§1352 報の 15 と一致 — 46 分間 他卓 commit 0）→ push `dfe9d636e4..f43cf43a7b` → after 18:53:43 re-fetch: **ahead=0/behind=0**・remote tip = `f43cf43a7b` = local HEAD = 当卓 §1352 commit。
+- **積載**: (c) 解散系（p4 測定 `a1ddda3334`・p5 fold-back `fcfcb9f917`・p6 register `e7303adbe5`・p11 draft `35d7ef4d0d`）＋ 命名系（p4 `cbc4950987`/`533801616b`・p6 row 67 `51dab26bd4`・p11 census `05f1ed692c`）＋ 当卓台帳 §1347–1352（6 commits）。
+- 本節自身は push 後 bank ゆえ次回 push に乗る（従前どおり）。session 内 push 通算 5 回（p4 卓 12:48・当卓 14:52・16:02・p4 卓 17:36・当卓 18:53）— すべて Rs1 の一言指示。
+
+**Banked — 時刻は本節 commit の author date が正。**
