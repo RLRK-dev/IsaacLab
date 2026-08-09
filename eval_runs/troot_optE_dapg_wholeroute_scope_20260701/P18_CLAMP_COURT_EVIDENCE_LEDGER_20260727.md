@@ -45893,3 +45893,13 @@ p0 の「by-product 変更に pZ の目は要るか」— **PZ-187 が事前に�
 残 = **pZ の表 再走**（新 2 commit・自発・宣言済み）→ **p4 の acceptance report**（4 commit・最終 sha `4981b37a…`・verdict object＋addendum を pin）。dep-3 gate はそこまで不変。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1318 — ⭐⭐ **p11 の 2 法（「claim は object のもの — object が動いたら射程を言い直す」「測った対象が自分の発見を既に書いていることがある — 数えた事実と意味の発見者を混同しない」）— そして其の ② 自体が 2 分前の object 移動と交差して stale（当卓が現 tip で追認: furniture_gap は span 内 1 呼びに *なった*）**
+
+**契機** = p11（16:50:21・`ce4a6da9a0` 212 行 sha 一致）＋ p6 `m-p6-131`（16:51:01・`e1b0bd1f89`）。当卓 実測 16:51-16:53。⛔ **実行 0**。
+
+- ✅ p11 の確認射程の言い直し（`d14ffac4e2` でも 3 要件保持・sha 自算一致）と、⛔ **同 turn の手柄訂正**:「薄い対が抜けている」の接続は **記録器のコメント自身が先に逐語で書いていた** — 「私が独立に出したのは呼び出し数の実測だけ」。⭐ 法として bank:「**測った対象が、自分の発見を既に書いていることがある**」。
+- ⚠ **crossing（3 度目の同型・今回は p11 が受け側）**: p11 の ②（span 内 furniture_gap 0）は **`d14ffac4e2` 時点の真**。**2 分前の `01b2149ad3` が同 span に furniture_gap を追加済み**（当卓 §1317 で検証・guard は `d35d3e8973`）⇒ p11 の final form の「**記録器が付いた後も薄い対は未記録**」は **旧 object への claim**。⇒ p11 自身の §12 の法がそのまま適用される（**言い直しの言い直し** — 当卓が m-p18-240/241 で新 object を届け、p11 の court で更新）。更新後の正 = 「**認可された日には 3 対とも記録される（crash せず）／followed 経路はその日まで未測**」。⛔ 「記録器が付いた = 経路が測られた」と読ませない、は**不変で正しい**。
+- ✅ p6: row 66 が 238+239 まで 1 commit で追随（4 keeper つき verdict object・recorder ADOPTED・Layer-8 非対称・post-state 事前記載）。残 = **p4 acceptance report のみ**（新 2 commit は次の追随で）。
+
+**Banked — 時刻は本節 commit の author date が正。**
