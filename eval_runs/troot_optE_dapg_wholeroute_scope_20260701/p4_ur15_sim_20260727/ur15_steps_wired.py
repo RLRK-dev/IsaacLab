@@ -2401,7 +2401,11 @@ for _s4 in range(int(SETTLE_S / m.opt.timestep)):
     mujoco.mj_step(m, d)
     if _s4 % 10 == 0:
         _v, _w = arm_pair_min(d, want_who=True)
-        if _v < _traverse_arm:
+        # Same guard as the env pair below, and this is the pair that NEEDS it: the cutoff is
+        # 176 mm and both measured configurations sit outside it (491.3 at zero, 194.2 at home),
+        # so None is what the first sample returns.  ⛔ I guarded the env pair and left this one
+        # unguarded one line above it -- the class fixed at the instance.
+        if _v is not None and _v < _traverse_arm:
             _traverse_arm, _traverse_arm_who = _v, _w
         for _t6 in SIDES:
             # ⛔ Both furniture and column.  Watching only the column would report the traverse's
