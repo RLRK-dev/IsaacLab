@@ -45407,3 +45407,27 @@ driver の適用   tip :274  q = Rotation.from_euler("xyz", [0.0, sign * TILT, 0
 変更表（spec `:19` 形式）に **設計文書の値の列が無い** ⇒ design 対 cell の面はこの表に登録不能（p5 の register 発見と同型）／トレード表（`:114`）に **探索量の列が無い** ⇒ **(n) は散文規則で、表だけ写せば探索量は落ちる**（(l') の prose→表 方向の再発）。⇒ 次版の表に `draws / survivors` 列（凍結 spec は不編集・(s) が正）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1286 — ⭐⭐⭐ **pZ が p0 の 3 候補を run 無しで分離 — (i)(ii) は反証・(iii) が code 差の証拠つきで生存:「同じ幾何・同じ mount・同じ link で −0.6 mm 対 −80〜−130 mm。この差は *選択* の差であって幾何の差ではない」** ＋ ⚠ **p5 の分離述語は pZ の直接比較で消費された（式が文字単位で同一 ⇒ (ii) は「間の差」たり得ない）** ＋ ✅ **p6 が crossing を閉じ、自分の増幅も row の中で殺した**
+
+**契機** = p6 `m-p6-118`（11:17:03）＋ pZ `PZ-175`（11:17）。当卓 実測 11:17-11:21（tip 事実を全数追認）。⛔ **実行 0**。
+
+### (1) ⭐⭐⭐ **pZ の静的分離（当卓 追認済み）**
+```
+(i) 柱 geom     反証 — 腕の作業帯 (z≈0.8↑) で両者は同じ solid（r 0.102・範囲重なり）。器具は下部を埋め foot/crown を **省く** = 上に geom が *少ない* ⇒ 欠けた solid は 80-130 mm の侵入を製造できない
+    ⚠ 実収穫: 器具は `0.102` を **literal で** hardcode（:174 当卓確認）・driver は `{COLUMN_R}` **記号**（tip :245 当卓確認）⇒ 定数が動いた日に黙って乖離する literal — 1 編集の価値
+(ii) tilt 符号   反証（**間の差として**）— mount 式が **文字単位で同一**（driver :274-275 ＝ 器具 :195-198・spec. 接頭辞のみ）⇒ 規約が誤りなら **両方で誤り** ⇒ 両者の *差* を説明できない
+(iii) 生存      driver は **clearance 選択つき候補探索**を持ち（tip :1209 CLEARANCE_REPORT・:1496 `< ARM_CLEARANCE` で棄却 — 当卓確認）器具は持たない（p0 自認の欠陥 (a) の片割れ）
+    証拠 = T25_RUN_TRACE_20260728.txt（tracked・285 行・当卓確認）: STEP 2 mast L +97.8 / R +180.2・STEP 3 R **−0.6 mm**・「clearance removed 1 of 20 candidates」
+    ⇒ ⭐⭐⭐ 逐語「**SAME GEOMETRY, SAME MOUNT, SAME LINK, AND −0.6 mm VERSUS −80 TO −130 mm. THAT GAP IS A SELECTION DIFFERENCE, NOT A GEOMETRY ONE.**」
+```
+⚠ **pZ の残差所見（mode A の再来）**: driver 自身が :1271/:1528 に「**commanded は全て clear・それでも腕は 0.6 mm stem 内で終わった**」を記録 ⇒ **clearance 選択済み姿勢を評価する運動学的計器は 0 以上を読むはず**で、深い負は読まないはず。
+⛔ **pZ は機構を p0 の代わりに命名していない** — 「2 つの反証と、pattern でなく code 差に立つ 1 つの生存者を手渡す」。⭐ **p0 の要求水準（表 or 命名された機構・pattern は不可）に、他卓が run 無しで達した。**
+
+### (2) ⚠ **p5 の分離述語の処置（正確に）**
+p5 `m-p4-210` の述語（±70° か ±20° か）は **pZ が式を直接読んで消費** — 答 = **同一式** ⇒ (ii) 死亡。✅ **p5 の補角規約の文書化と組込み対照（tilt_deg=45 → 左基部 Ry(−45°)）は artifact の print 較正として有効なまま**（§1284 の tip 確認も立つ）。⇒ **述語は誤りでなく、より直接な測定に追い越された**（当卓は §1284 を撤回しない — 用途が狭まっただけ）。
+
+### (3) ✅ **p6 `m-p6-118`（`8d91e277bb` 実在確認）**
+crossing 閉鎖（#46 は 11:13:27 に回答済み）・**自分の row 66 の帰属増幅を in-place で殺し「死んだ主張と、誰が繰り返したか」を row が両方運ぶ**・全 bank を自卓で collate してから fold（D-8 改名・register-shape・50.002/49.999 relay 含む）。
+
+**Banked — 時刻は本節 commit の author date が正。**
