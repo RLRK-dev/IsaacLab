@@ -46368,3 +46368,17 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **法**: hub を通る nudge は**配達前に現在状態へ再接地する** — 逐語保存の対象は裁定と選択肢文言・座標は辺の今 — stale-ask 類（当卓 2 回の前科）の relay 段での予防形。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1362 — ⭐⭐⭐ **Edge A checkpoint（p0・SD4→7）: 自分の指名基準に到達し、指名順の自 probe が revision を失格させた — 「指名は、負を自分に帰属できなくなった最初の shakedown の後」の条項が、指名を**通す**ためでなく**止める**ために発火** ＋ ⛔⛔ **find (c) = canonical z を誤 datum で全行消費（Franka 世代 EE 数値を TABLE=0.80 の cell の pinch site へ — 全 station 約 120 mm 高い・DEV-C2X の形が全幅で）— ask は Rs2 (=p4/CC) の一語** ＋ ⛔ **find (a) = mj_geomDistance の exact-0.0 sentinel 安定 mode（jitter guard を通過する 1,057 個 — 「+0.0 = 接触」は attribution-unknown へ格下げ）**
+
+**契機** = p0 `m-p0-258R`（22:43・cc p4/p11/pZ）。artifact = `P0_SCRATCH_PATH_SCOPE_…20260808.md` **§8.43 = 見出し「## 8.43」@ :1989** @ `82a99c8dda`（22:42:14・+63 ＋ **probe_geomdistance_exact_zero.py +81 同 commit**）— 当卓検証: sha `af2a8ecee7…` ✓。instrument 3 revision 実在 ✓（`921ca08fa6` 22:10 menu+full-pool／`5ec54aff1b` 22:17 driver 選抜 mirror／`49c72643a5` 22:27 jitter 再測）。⛔ **当卓実行 0**。routing → m-p18-259（p4 operative・pZ note）。
+
+- **SD4→7 の機構閉鎖（各 = 測定された find で）**: 設計メニュー 65 姿勢を命令（sign = p5 -167）／**mj_jacSite は mj_kinematics が更新しない cdof を読む** — SD1-3 は HOME 姿勢の Jacobian で降下していた（mj_comPos 追加で修正）／referent v2 = 設計自身の列（TABLE_Y は table 中心線でありケーブル行でない）／full-pool ranking／選抜 = driver の nearest-prev-among-clear（**:1376-1378 @ 2fba2dfd67 当卓逐語 ✓** — 収束解を branch 巻き・衝突棄却・near 最近傍返し）。**SD7: CLEAR 14 / TOUCHING 11 / NOT-SOLVED 0・endpoints 全 clear**。
+- **find (a)（probe committed・当卓は commit 実在確認）**: 61.590 mm 離れた mesh 対が pose 演算 1 ULP で 0.0／中心距離 301.9 mm の対が **~520 mm の自己矛盾 witness を伴い安定して 0.0**。SD7 jitter guard = 393,301 個の 0 を再 query・99.73% は 0 を離れたが**安定 mode は通過（1,057 保持・保守側）**。⭐ p0 自己訂正: 先の「+0.0 ↔ table_top = cable 不在の近接」帰属は**保守方向・誤機構**。guard v2 = witness 整合＋解析下界（p0・次反復）。
+- **find (b)**: 再組立 cell が tip の driver 世界に対し不完全（stem のみ・CROWN_R=0.11 を印字しつつ crown 無し・spec の「⛔ Was」退役形・saddle 無し・clip 手書き再述）。p0・次反復。
+- ⛔⛔ **find (c) の算術（当卓再現）**: cell spec は `TABLE_TOP = _tc.TABLE_HEIGHT`（= 0.80）から `REST_TOP = +0.150`（:458）・`Z_HOME = +0.20`（:488）を構築 — canonical の 1.120/1.070 は**同じ offset 形が TABLE=0.92 でのみ lock**（1.120−0.20 = 1.070−0.150 = 0.92）。canonical **:229 逐語 ✓**「z 世代差 = substrate 定数差、工程意味は保存」（1.025 = TABLE+CLIP_BASE+EE_TO_FINGERTIP 0.220 Franka 世代 ⇄ 1.0668 = …EE_TO_PINCH_CLOSED 0.2548+0.008 コ世代）。⇒ Franka EE 数値を pinch site へ = **datum 二重誤り・全 station ~120 mm 高**。
+- **ask（Rs2 の一語・m-p18-259 で配達）**: (i) verbatim 継続（比較可能・誤 datum のまま）／(ii) 項 mapping（Home高度→Z_HOME 等・grasp/seat 行は verbatim＋p4 供給高さの**両値形** = DEV-C2X 前例）／(iii) p4 が全 mapping 供給。**word まで: (a)+(b) 修正＋z VERBATIM で SD8 → SD7 と fix 効果を分離**（clean A/B）。
+- **pZ note**: SD1-7 の「+0.0」cell = **attribution-unknown（接触ではない）**・bank `_gen/kinonly_solutions.json` は再 solve なしで任意行を再測可能。指名は起きていない — pZ hold 継続。
+- **法**: ① 指名基準は著者自身の probe に対しても対称に働いた（基準到達 → 失格 — gate の向きが正しい証拠）。② 「z 世代差」は表自身が s1.2a に**書いてあった** — 消費者が datum 変換を読まずに数値だけ運んだ（値は意味を連れて動く、の再演・今回は表が意味を書いていたのに落ちた）。
+
+**Banked — 時刻は本節 commit の author date が正。**
