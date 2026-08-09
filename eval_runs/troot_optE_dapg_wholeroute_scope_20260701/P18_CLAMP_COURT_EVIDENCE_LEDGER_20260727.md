@@ -45289,8 +45289,36 @@ cell 再組立 @ C-2（nq 28・ngeom 89・L39/R39/env10）・canonical 18 行読
 
 ### (3) ⭐⭐⭐ **audit の実収穫 — hook が初回で働いた**
 **Popen = 2**（両方 `env_isaaclab7/bin/python`）— ⛔ driver-family でない（その数は 0）— **`spec.stack_line()` が package 版数のために shell へ出ていた**。⭐ **「知らずに spawn していた subprocess」を捕まえることこそ D-4 の要求理由で、初回走行でそれが起きた。**imports 621 / exec 742 / compile 341 / system 0 / sys.modules 589。
+[§1281 訂正 — **この帰属は pZ の測定で否定された**（`PZ-174`・当卓 blob 検索で補強 11:11）: `stack_line()` は `importlib.metadata.version()` のみ（subprocess token 0・pZ が pin 済み 3.12.3 で 4 版読取 → **Popen 0**・対照 /bin/true → 1）。当卓の器具 blob 検索（`db5509a884`）= **subprocess の呼び出し site 0 — 一致は audit 機構自身のみ**（:40 が Popen event の args[0] を保存 ⇒ 「両方 env_isaaclab7/bin/python」は *executable* の捕獲であって *起動者* ではない）。⇒ **正直な状態 = 「spawn 2・起動者 未同定・candidate 受入前に同定要」**。⛔ 良性に聞こえる帰属が未説明の subprocess を退役させる — それこそ (4) が捕まえるべき失敗形。fix = args[1]（完全 argv）も保存（pZ 検証済・event が自分を同定する）。原文保存・本注記のみ追加。]
 
 ### (4) ⚠ **flow の 1 点（当卓は裁定しない・p4 の 1 語）**
 委任 FLOW は「p0 実装 → **pZ が (4)(5) を検証** → run → p4 導出」。**初回走行は pZ の pre-run 報告が record に無いまま起きた。**⚠ ただし: 走行認可は Rs の束（実装+run・単発とは書かれていない）・器具は自己完結・**表は消費されず p0 が自分で却下した**・そして (3) の捕獲は走行だけが産めた。⇒ **問い = fix 反復中の再走行は自由か、都度 pZ の pre-run を待つか。**当卓の既定案 = **反復は自由・pZ の正式 leg は p0 が指名した candidate 版に付く**（p4 が違えば 1 語）。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1281 — ⛔⛔ **Popen 2 件の帰属が否定された（pZ）— 「良性に聞こえる帰属が、未説明の subprocess を退役させる」＋ 当卓の blob 検索: 器具に呼び出し site 0・起動者 未同定・p0 の hook は executable を捕獲済みで argv が次の 1 行** ＋ ✅ **p4 が flow 語を能動採用（rider = 失敗反復の audit も disk に残し系列を連続に）・撤回句 2 つの echo を自 file で修復** ＋ ⭐⭐ **p11 の弦の和解（直交成分 50.002 / 49.999 — 2 つの witness 食い違いは 1 つの divergence で尽きる）**
+
+**契機** = p11（11:09:30）＋ pZ `PZ-174`（11:09）＋ p4 `m-p4-198`（11:10）。当卓 実測 11:09-11:12。⛔ **実行 0**。
+
+### (1) ⛔⛔ **Popen 帰属の否定（§1280 (3) に in-place 注記済み）**
+```
+pZ 実測    stack_line() :214-223 = importlib.metadata.version() のみ・subprocess token 0
+           pin 済み 3.12.3 で 4 版読取 + audit hook → **Popen 0**・対照 /bin/true → **1**（識別的）
+当卓 実測  器具 blob（db5509a884）の subprocess 一致 = **audit 機構自身のみ**（:28-:41）— **呼び出し site 0**
+           :40 `_AUDIT["Popen"].append(str(args[0])[:160])` ⇒ p0 の「両方 env_isaaclab7/bin/python」は **executable の捕獲**・起動者は捕れていない
+```
+⇒ ⭐⭐⭐ **pZ の法（採用）**:「**良性に聞こえる帰属は、未説明の subprocess を退役させる。**正直な状態 = **spawn 2・起動者 未同定・candidate 受入前に同定**」。⛔ 不正の示唆ではない（driver-family 0 は p0 の測定・疑う理由なし）— **数が未説明である**ことの命名。
+✅ **fix = 1 行**（pZ が同 interpreter で検証）: audit event は **argv を運んでいる** ⇒ `args[1]`（完全 argv 列）も保存 ⇒ **event が自分を同定し、記憶からの帰属が不要になる**。⭐ **geom 対と同じ移動**:「産んだ物を名乗れない数は物語を招き、名乗る数は再帰属できない」。⚠ exec 742 / compile 341 も同形（source 無しの数）— 同時に source を付す。
+
+### (2) ✅ **p4 `m-p4-198`（`6c38a1fe09`・18/0・sha 一致）— flow 語を能動採用**
+「**gate の修正は gate の author が書く・沈黙に任せない**」⇒ **反復は自由・pZ の正式 leg は p0 が指名する candidate 版に付く**（当卓の既定案どおり）＋ **rider = 全反復の audit 節を disk に残す**（失敗反復を跨いで audit 系列を連続に）。core 不変: 行は消費されない・7 読と導出は pZ の leg 通過まで武装のまま。
+✅ **撤回句 2 つの echo を自 file で修復**: (a)「C1 discriminates nothing」→ 2 leg 形へ（C1 = 陽性対照 expect 0.0/0.0・clip C2 = 測定 expect 35.0/0.0・宣言なしの費用 = 200 mm 製造/360 誤軸）(b)「dead-session bind」→ p6 の粒度（LATENT・2 観測 2 時刻・生死は断定しない）。＋ 名前衛生（mounting C-2 / clip C2）を自記録に採用。
+
+### (3) ⭐⭐ **p11 の弦の和解（`40044bc9ff`・20/0・sha/466 行 一致・当卓 算術再導出）**
+```
+design/config: across 75.0 ・弦 90.14  ⇒ 直交 50.002 ／ cell: across 110.0 ・弦 120.83 ⇒ 直交 49.999   （当卓 hypot 再計算一致）
+```
+⇒ ⭐⭐ **直交成分は両者 50.000 mm で一致・違いは across のみ（75 対 110 = 35 mm）** ⇒ **p11 の `:141` が「別 witness の食い違い」として未説明で置いた 2 数は、同じ幾何を clip C2 の 2 候補で見た姿 — 項目は解消**。⇒ **DEV-C2X の operational cost の読者に「同一原因」の独立な裏づけ**。
+⚠ **精度の守り（p11 自身）**: **弦の差は 30.69 mm であって 35 mm ではない** — 同一視しない。⭐ **(q)-2 の測り直し**: 「消費していない」を token `C2` でなく**量**（90.14 / 120.83 / 弦）で再測 → banked spec に 0 ⇒ **結論は量でも保つ**（⇒ 「名前で測って量を測っていない」の自己捕捉・本日の name→act 族）。
 
 **Banked — 時刻は本節 commit の author date が正。**
