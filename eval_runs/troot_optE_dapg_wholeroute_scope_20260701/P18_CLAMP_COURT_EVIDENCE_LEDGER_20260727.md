@@ -45903,3 +45903,24 @@ p0 の「by-product 変更に pZ の目は要るか」— **PZ-187 が事前に�
 - ✅ p6: row 66 が 238+239 まで 1 commit で追随（4 keeper つき verdict object・recorder ADOPTED・Layer-8 非対称・post-state 事前記載）。残 = **p4 acceptance report のみ**（新 2 commit は次の追随で）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1319 — ⭐⭐⭐ **STOP は 3 分で和解: p0 の 5 図は git blob OID（SHA-1）・当卓の 4981b37a は content sha256 — 同じ bytes・2 つの hash 関数（当卓が両 namespace を並測して確定）— 族の第 3 肢（単位）の hash 版が、最後の pin の上に着た** ＋ ✅ **「hash は関数名を連れて初めて pin になる」を hub 標準へ（「行番号は revision を連れて」の hash 版）**
+
+**契機** = p0 `m-p0-240R`（16:52:35・URGENT）＋ p11 §13 readback（16:53:04）＋ p6 `m-p6-132`（16:53:32）。当卓 実測 16:53:40。⛔ **実行 0**。
+
+### (1) ✅ **和解（当卓の並測・全数）**
+```
+                     content sha256（sha256sum）              git blob OID（SHA-1・rev-parse）
+d14ffac4e2           12f9d034a6568ac7…                        9f7f7bd751fec4f9…   ← p0 の図
+01b2149ad3           e40e7c629792d3e0…                        f22b816f9c278dec…   ← p0 の図
+d35d3e8973 = HEAD    **4981b37a8cc65d41ff6db8c97ed80254…**    **7830f79dd59f069c…** ← p0 の図
+worktree             4981b37a…（= HEAD・clean）
+```
+⇒ **p0 の「4981b37a はどの revision にも一致しない」は OID namespace で真・sha256 namespace で偽** — そして **p0 自身の m-p0-234R は sha256 namespace**（`6ca72475→12f9d034`）だった ⇒ **同卓が夜の途中で器具を替え、自分の前の数と別 namespace の数を比べた**。⭐ 3 卓（当卓・p11・p6）は sha256 で独立一致 — 今回は相関でなく、**両 namespace の並測**が独立性を作った。
+⛔ **警報の実践は正しかった**（pin の前に他人の数を検証・「copied より contradicted が良い」）— 中身が namespace だっただけ。**scoped alarm の形も正確**（「fix は無事・悪いのは pointer」）。
+
+### (2) ⭐⭐⭐ **法（hub 標準・p0 の行番号法の hash 版）**
+「**hash は関数名を連れて初めて pin になる** — 関数の無い hash は、値が違うだけの同じ欠陥」。⇒ 以後の pin 形 = **`content sha256 = <full>`（関数を明記）**・OID を添えるなら **`git blob SHA-1 = <oid>`** と別名で。⇒ p4 の acceptance report へ届ける確定図: **fix 4 commit（bc0bfe5b88 / d14ffac4e2 / 01b2149ad3 / d35d3e8973）・wired content sha256 = `4981b37a8cc65d41ff6db8c97ed80254…`（全 64 は §同行の実測出力が正）・blob SHA-1 = `7830f79dd59f069c…`**。
+✅ p11 §13（交差・言い直しは既に file・「追加のみでない diff では近道を捨て述語へ戻る」）と p6 の row 66 追随（4 commit・4981b37a 再計算・qpos-0 同 blob 照合・Cyrillic typo の pre-commit 捕捉）を custody。
+
+**Banked — 時刻は本節 commit の author date が正。**
