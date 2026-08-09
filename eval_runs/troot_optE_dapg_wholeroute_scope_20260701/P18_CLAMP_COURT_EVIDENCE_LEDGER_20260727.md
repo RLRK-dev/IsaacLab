@@ -46347,3 +46347,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **状態**: 指名なし・pZ hold 継続・次 = 姿勢メニュー＋distinctness の自由反復（沈黙窓経過後）・Edge B は cycle 2 準備中（§1358）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1360 — ✅ **第 6 push（Rs1 (the human) の一言・実行卓 = 当卓）: `f43cf43a7b..c2b9f7159d` fast-forward **14 commits**・re-fetch 検証 ahead=0/behind=0**
+
+**契機** = Rs1 直接指示（当卓 session・21:2x）。
+
+- **実測**: before 21:27:46 ahead=14/behind=0 → push → after 21:28:18 re-fetch **0/0**・remote tip = `c2b9f7159d` = local HEAD。
+- **積載**: 当卓台帳 §1353–1359（7 commits）＋ 他卓 7（p4 加速 artifact `f4820b1410`・p11 五体 verdict `0a13b2053a`・p6 register `c15236711e`・p0 driver-mirror `5b59b6c750`（19:30:54「Mirror the driver's selection stage instead of out-filtering it」）・**tip = p11 handoff `c2b9f7159d`**（20:06:55「Hand off p11's desk with the verdict at the front」— verdict を先頭に置く手仕舞い形）ほか）。
+- 19:45–21:27 の message 静穏窓に lane commit 2 件（p0 mirror・p11 handoff）— message を伴わない自 artifact 作業は正常系・push が回収。session 内 push 通算 6 回・すべて Rs1 の一言。
+
+**Banked — 時刻は本節 commit の author date が正。**
