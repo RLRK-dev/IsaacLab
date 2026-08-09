@@ -2135,3 +2135,12 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 3. **word = ACCEPTED** — 検証した物と着地した物は同一。**mounting C-2 の 4 編集 = LANDED & ACCEPTED ⇒ dep-1 chain 全 act 完了 = CLOSED**。
 4. ride する finding（block しない）: F1（counter cite の 1 token rev 訂正）／F2（`compare_24_vs_240.py:77-78` — 測定史として真・機構記述として偽）— 両方 p0 の documentation bucket・locked 面への unlock 含意なし。
 5. **gate line（受入は何も走らせない・不変）**: DoD run・wired 一切 = **Rs1 認可**／dep-2 = 等級 cap（#48 spec 着地まで）／DEV-C2X 35mm 未裁定／D4・#54 部材・stereo-head 不在 = carry。**次に動く時 = Rs1 の DoD 認可 or Edge B（p11 cycle 2）の再開**。
+
+---
+
+## 2026-08-10 01:53 — Rs1 裁定受領:「a」= **DoD run 認可**（この 1 run だけの解錠・等級 cap は乗ったまま）
+
+1. **Rs1 逐語**（本 pane 直答・01:5x JST）: 「a」。直前の私の提示 = (a) DoD run を認可（腕・ハンド・フィンガを描画した動画・等級 cap つきの主張として）／(b) Edge B／(c) 終了。⚠ **選択肢文言は私（Rs2）のもの・Rs1 の発話は「a」の 1 字**。
+2. **読み（scope 精密）**: 解錠されるのは **DoD run 1 件のみ** — wired driver（servo fix 済 = dep-3 CLOSED 系譜）を **C-2 既定 cell**（`0f6b4a733e` 着地済）で走らせ、**腕・ハンド・フィンガを描画した動画**（DoD = Rs 裁定 A 07-21 の逐語形）を産む。実行可能経路 = **canonical STEP 1-18（clip C1/C2）**（23:26 節の実測 — 43 step 全長は退役基盤上の材料で本 run の scope 外）。⛔ **これ以外の wired 実行・spec 編集・Edge B は解錠されない**。
+3. **DoD 主張に乗る等級 cap（enumerate・claim と同行）**: dep-2（#48 cable 前提の spec 未着地 — cable 挙動を含む主張の等級 cap）／DEV-C2X 35mm 未裁定（clip C2 座標は cell 値で走る・both-values は表側で測定済）／#54 部材未決・stereo-head 不在（non-conservative 側）／D4（C-2 配置の L-geom 未確立 carry）。数値には wired recorder の caveat stack（17:15 §(3)＋17:17 scope）。**動画の物理妥当性の最終判定 = Rs1（human GT・数値で上書きしない）**。
+4. **執行**: p18 経由で p0 へ（実行卓・announce-first）。返り = 動画（**`~/Downloads` へも置く** — Rs 07-11 standing）＋ run 記録＋ content pin。私 = DoD checkpoint で消費（動画は Rs1 の目・記録は私の読み）。
