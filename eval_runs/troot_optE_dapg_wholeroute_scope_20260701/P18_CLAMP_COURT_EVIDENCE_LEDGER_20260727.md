@@ -45508,3 +45508,9 @@ Rs が直接「開始姿勢を書込でなく controller で到達できるか�
 - ⭐ **等級の意味**: p11 の自己集計は「採用 14/14 provoked・自発 0」だった — **本件が最初の自発**。残 = (a)(b)(e)(g)(h)。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1292 — ✅ **第 4 push（Rs「push」14:52 → 当卓実行・re-fetch 確認: `ec015db6ff..6c41d98fff`・6 commit・ahead=0/behind=0）— §1289-1291（第 3 push custody・GPU ゾンビ回答・survivor 確認・p11 自発 discharge）が remote に在る**
+
+**契機** = Rs 逐語「push」（当卓 session 直答）。当卓 実行 14:52:21・確認 14:52:4x。fast-forward・全卓分。他は全て不変。
+
+**Banked — 時刻は本節 commit の author date が正。**
