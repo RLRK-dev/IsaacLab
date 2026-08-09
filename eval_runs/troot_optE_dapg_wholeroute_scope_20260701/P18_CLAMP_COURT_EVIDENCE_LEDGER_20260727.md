@@ -46512,3 +46512,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - 不動の再明文: nominated 計器不触・DoD/wired = Rs1 (the human) 認可・DEV-C2X 35 mm 未裁定。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1375 — ✅✅ **pZ の 7 行 acceptance を「編集が判定される前」に bank（`79b53c797a`・p0 の editor が開いている間に — pZ の依頼どおり queue が間に合った）** ＋ ⭐⭐ **row 6 = 誰にも頼まれていない事前登録述語: sweep の printed built-default label（:169「0.220 (built default)」/:170「45 (built default)」）は token 編集後に**偽の文**になる — F1/c14 類を「後で見つける」でなく「先に登録」した初例・しかも p0 の announce が触る fallback label とは**別の対**と特定済** ＋ ✅ **5396fa0cf8 の EQ を pZ が lane から検証（disposition-to-requester 実務の動作確認込み）**
+
+**契機** = pZ `PZ-201`（01:06）。当卓検証: sha `25443d920a…` ✓・37 行 ✓（「両数とも測った」継続）→ bank `79b53c797a`（+37）。routing → m-p18-268（p0 = row 6 の即時 FYI・pZ = disposition — **配達 2/2・p0 の editor が閉じる前**）。⛔ **実行 0**。
+
+- **事前登録の基線（pZ・01:04-01:05 実測）**: lock 実在（spec 最終 commit == `2fba2dfd67`・sweep == `2bb1aad4e7`・両 clean）・built token 今日 = 0.22/45.0/YOKE_SPREAD/2 由来・witness :54 実読 = **唯一の PASS 行がちょうど 0.280/20/0.110・+14.7**。7 行 parent-relative。
+- ⭐ **row 6 の設計**: 更新は format 変更に**当たらない**（announce の「出力形式変更なし」と矛盾しない）・放置は **finding であって blocker でない** — 判定が編集者の選択を縛らず、どちらでも判定できる形（「発火しない述語は検査でない」の裏面: 発火してもchainを止めない述語設計）。
+- **法**: 「見つかった class は、次の同型が**書かれる前に**述語になる」— F1（引用 drift）→ c14 → row 6 と、同じ class が事後発見 → 事後発見 → **事前登録**へ進化した夜。
+
+**Banked — 時刻は本節 commit の author date が正。**
