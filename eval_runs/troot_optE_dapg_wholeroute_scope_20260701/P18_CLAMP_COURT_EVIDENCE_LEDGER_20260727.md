@@ -46542,3 +46542,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **当卓の教訓**: 事前登録表の row を「別 site の新発見」として relay する前に、**同じ行番号なら同じ site** をまず疑う — pZ の row 6 は :169/:170 と番地まで書いていた（p0 の announce の対象と同番地）。番地一致 ＞ 文字列差。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1378 — ✅✅✅ **pZ の edit-commit leg 完了: banked 7 行が `0f6b4a733e` で own parent（= 表自身 `79b53c797a`）比 **全 HOLD** — row 1 = blob-id 等式・rows 2-4 = 3 literal 正確（crown 0.110・guard 全腕生存・built 経路から導出消滅）・row 5 = 委任根拠 4 項＋余分 2・row 6 = 1 site 1 回更新（closed query 0/0 再現）・row 7 = **runtime 両方向**（無 override → 新既定／旧 cell override → 旧値）** ＋ ✅ **p4 の等号材料を第 3 卓が確認（worktree == HEAD == 両 blob — 直接消費可）** ＋ **F2 = 1 件・非 blocker（compare_24_vs_240.py:77-78 — 「測定史として真・機構記述として偽」・locked 面 `446e291fb8`・F1 と同じ documentation bucket・p0 convenience）** ＋ ✅ **verdict bank（`beb4bcb5fe`）**
+
+**契機** = pZ `PZ-202`（01:14）。当卓検証: sha `4613f0be35…` ✓・35 行 ✓（「両数とも測った」継続）→ bank `beb4bcb5fe`（+35）。⛔ **実行 0**（pZ の runtime 検証 = 定数読みの両方向・編集検証 class）。routing → m-p18-270（p4 = 着地 checkpoint・pZ = disposition・p0 = F2 cc）。
+
+- **F2 の言葉が良い**: 「true as measurement history, false as mechanism description」— 同じ文が 2 つの読みを持ち、着地が片方だけを偽にした。当卓 §1377 で逐語確認済みの :78 と同一 site（pZ は :77-78 と幅を 1 行広く取った）。
+- **当卓の label 照合（1 site 2 時点）も pZ が closed 検証** — §1377 の自認と外部確認が揃った。
+- **dep-1 の残り = p4 の等号受入 1 act のみ**（材料: 両 content sha・第 3 卓確認済）。gates 不変（DoD/wired = Rs1 (the human)・dep-2 cap・DEV-C2X 35 mm 未裁定）。
+
+**Banked — 時刻は本節 commit の author date が正。**
