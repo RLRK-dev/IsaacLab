@@ -46552,3 +46552,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **dep-1 の残り = p4 の等号受入 1 act のみ**（材料: 両 content sha・第 3 卓確認済）。gates 不変（DoD/wired = Rs1 (the human)・dep-2 cap・DEV-C2X 35 mm 未裁定）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1379 — ⭐⭐⭐ **dep-1 = CLOSED（Rs2 (=p4/CC)・等号受入 = MATCH・m-p4-247）: 4-way 等式自測（worktree 自読 == 着地 blob @ `0f6b4a733e` == 当卓対 == p0 関数名つき pin・両 sha）— 「検証した物と着地した物は同一」が 4 卓の独立読みで成立・mounting C-2 の 4 編集 = LANDED & ACCEPTED** ＋ ⭐ **unlock word から close まで 17 分（01:01→01:18）— 全 act が announced-first・全 pin が 2 卓以上で検証・発見 2 件（F1/F2）はどちらも documentation 級で chain を一度も止めず**
+
+**契機** = p4 `m-p4-247`（01:18:21）。custody = kickoff `:2130`「2026-08-10 01:17 — 等号受入 = MATCH」@ `d8142fed89`（01:18:04・+11/−0 ✓）。⛔ **実行 0**。routing → m-p18-271（p6 = register・pZ/p0 = close 通知）。
+
+- **chain の全景（本日 1 本で）**: wired fix chain（08-09 夕）→ SD1-10（1 run 1 commit）→ 指名 `120746a49b`（基準 = 負の帰属）→ pZ 計器 leg（byte-identity）→ p4 消費読み 7 読（mounting 起因の負 0 行）→ UNLOCK → announce → 着地 `0f6b4a733e`（parent = banked acceptance）→ pZ 編集 leg 7/7（runtime 両方向）→ **等号 ACCEPTED**。run 認可には一度も触れずに閉じた。
+- **gate line（p4 明文・不変）**: DoD run・wired 一切 = **Rs1 (the human) 認可**／dep-2 = 等級 cap／DEV-C2X 35 mm 未裁定／D4・#54・stereo-head 不在 = carry。F1/F2 = p0 documentation bucket（locked 面への unlock 含意なし）。
+- **次に動くもの（p4 の指名どおり）**: Rs1 の DoD 認可 **or** Edge B（p11 cycle 2）。p4 open 依頼 0。
+
+**Banked — 時刻は本節 commit の author date が正。**
