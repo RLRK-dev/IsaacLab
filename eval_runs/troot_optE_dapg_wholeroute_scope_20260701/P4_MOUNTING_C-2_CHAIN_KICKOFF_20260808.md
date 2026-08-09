@@ -2145,3 +2145,12 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 3. **DoD 主張に乗る等級 cap（enumerate・claim と同行）**: dep-2（#48 cable 前提の spec 未着地 — cable 挙動を含む主張の等級 cap）／DEV-C2X 35mm 未裁定（clip C2 座標は cell 値で走る・both-values は表側で測定済）／#54 部材未決・stereo-head 不在（non-conservative 側）／D4（C-2 配置の L-geom 未確立 carry）。数値には wired recorder の caveat stack（17:15 §(3)＋17:17 scope）。**動画の物理妥当性の最終判定 = Rs1（human GT・数値で上書きしない）**。
 4. **執行**: p18 経由で p0 へ（実行卓・announce-first）。返り = 動画（**`~/Downloads` へも置く** — Rs 07-11 standing）＋ run 記録＋ content pin。私 = DoD checkpoint で消費（動画は Rs1 の目・記録は私の読み）。
 5. **m-p18-272 受領（01:55）**: 認可は scope 逐語で p0 へ dispatch 済（hub custody 検証 = kickoff `:2141` @ `fd4d082587`・台帳 1381 @ `679afac5b1`）。等級 cap は「run の後ろでなく run と一緒に travel する」形で enumerate 済。**本認可が現存する唯一の run 認可**。私 = record 到着まで何もしない。
+
+---
+
+## 2026-08-10 08:44 — Rs1 動画所見:「両アームが鏡像の関係になっていない（グリッパ・指）」→ 実測で機構特定: **右手 gripper は鏡像でなく同一 asset の回転取付**
+
+1. **Rs1 逐語 3 件**（本 pane・08:2x-08:4x・DoD 動画 `ur15_dod_c2_stall_20260810.mp4` を phone で視聴後）: ①「ロボットの構成が最新のものではない」②（narrowing 回答）「グリッパ・指」③「両アームが鏡像の関係になっていない」。= DoD 動画への human-GT 所見（物理妥当性 court の入力・数値で上書きしない）。⇒ **本動画は DoD として立たない**。
+2. **run 世界の機械監査（全て自卓・run 記録 = `_gen/dod_c2_20260810/run.log`＋世界 = `_gen/_steps_cell_full.xml` 自読）— 最新である軸**: mounting = **C-2 ✓**（shoulder pos ±0.485417/1.60477 = mount ±0.28 + tilt 20°(水平から)/Ry70° 幾何・自算一致／crown capsule r0.11 半長 0.28 `:131`／stem 0.37→1.53 `:129`）／腕 = **UR15 mesh ✓**（L = ur15-line-render assets・R = `ur15_mirror_meshes/`）／gripper asset = **`_ur15_2f85_koshape_actuated.xml` ✓ = §0#4 の 08-08 Rs 裁定が名指す authoritative asset**（RS71 `:26` 逐語「the authoritative committed asset = _ur15_2f85_koshape_actuated.xml (16.00 mm opening)」・driver `GRIP_XML` `:38`）。⚠ 未検証 1 点（主張しない）: 私の粗 grep は asset 内に `0.0140974` を見た — 16.00 との関係（測り方の違いか乖離か）は §0-A custody 未読・別測。
+3. **⭐ Rs1 の目が捕らえた機構（driver 自読）**: driver `:129-132` 逐語「**Rs: the two arms in his reference are mirror images of each other** … right side loads the mirrored build rather than a second copy of the left」— **腕は鏡像実装済**（`ur15_base_mirrored.xml`）。⛔ **gripper は両側とも同一 asset を load**（`:306` `MjSpec.from_file(GRIP_XML)`・鏡像 gripper asset は assets dir に不在 — ls 実測）⇒ **右手は「左手の鏡像」でなく「同一物の回転コピー」**。コ形 claw の chirality は回転では鏡像にならない — Rs1 所見と機構が一致。
+4. **待ち = Rs1 の一言（§0#4 asset 裁定は Rs1 専権）**: 「右手用に authoritative asset の**鏡像版を新設して使う**」か。word が出たら impl chain（p0 実装 → pZ 検証 → p4 着地）へ p18 経由で流す。**修正後の再 run は新しい認可の一語**（01:53 の認可は消費済 — run は走って STEP2 L stall で正しく停止・record 別掲）。
