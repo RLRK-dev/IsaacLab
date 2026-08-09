@@ -102,7 +102,9 @@ _GEN.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------------------------
 # mj_step COUNTER -- a wrapper, because mj_step is a C call and never raises an audit event.
-# The form is the in-file precedent (ur15_steps_wired.py:1644 raw save / :1819 rebind @ 2fba2dfd67).
+# The form is the in-file precedent (ur15_steps_wired.py:1644 raw save / :1819 rebind @ 93adb43eb7
+# -- the CURRENT driver; the first token here said 2fba2dfd67, where closed queries return 0.
+# p18's F1 catch, the mirror of this desk's own §8.42/§8.43 failure in the opposite direction).
 # ⛔ Proving the counter counts requires one mj_step, which acceptance (5) forbids in here; that
 # control lives in pZ's leg, on a stand-in.
 # ---------------------------------------------------------------------------------------------
@@ -611,7 +613,7 @@ def main() -> int:
     # CONCLUSION (acceptance (6)): a "not solved" row means not solved WITHIN THIS BUDGET.
     ITERS, SEED, TOL = 260, 20260809, 2e-3
     # Attitude acceptance: 0.02 rad is the driver's own seat-solve tolerance (re_max=0.02,
-    # :733 @ 2fba2dfd67) AND it sits under half the menu's finest roll spacing (0.05 between
+    # :732 @ 2fba2dfd67) AND it sits under half the menu's finest roll spacing (0.05 between
     # 0.50 and 0.55), so a converged attitude names ONE menu entry rather than a blur of
     # neighbours -- the same identifiability rule the spec applies to the vertical check.
     RE_TOL = 0.02
@@ -638,7 +640,7 @@ def main() -> int:
         (p5 -167, driver :1414 @ 2fba2dfd67); the try order is the menu's own order, twice
         (p11 -147: never less than one full pass).  Solver numerics are the driver's 6D form
         verbatim (:1448-1462): error = [ep, 0.6*er], damping 0.05^2, half-step relaxation,
-        step-norm cap 0.15.  Seeding: pass 1 = the previous STEP's pose (driver :1434-1436
+        step-norm cap 0.15.  Seeding: pass 1 = the previous STEP's pose (driver :1431-1432
         warm-starts every tool pose from the previous waypoint), pass 2 = prev + N(0, 0.35);
         home / uniform when no prev exists.
 
@@ -836,7 +838,7 @@ def main() -> int:
         # ⛔ SELECTION = THE DRIVER'S OWN RULE, learned from shakedown 5: among CLEAR pairs, take
         # the one NEAREST prev in joint space -- solve_ik "returns the one closest to `near` (so
         # the servo move stays short)" (:1376-1378 @ 2fba2dfd67), and the aim loop pins entries
-        # because that "holds each arm on one IK branch across the correction rounds" (:753-756).
+        # because that "holds each arm on one IK branch across the correction rounds" (:751-752).
         # Shakedown 5 ranked by clearance ALONE: every endpoint came out clear, and 23 of 25
         # along-path columns read +0.0 at 1/20, because consecutive winners sat on different IK
         # branches and the straight joint path between branches sweeps through the scene.  Those
@@ -950,7 +952,7 @@ def main() -> int:
           f"distinct converged candidate, floor {POOL_MIN_DQ} rad L2/6 joints; pairs scored over "
           f"the FULL pool (LxR), env precomputed per candidate, ranking never rejection; "
           f"SELECTION = nearest-prev among clear pairs (driver :1376-1378 'closest to near so "
-          f"the servo move stays short'; branch-pinning :753-756), max-min clearance only as the "
+          f"the servo move stays short'; branch-pinning :751-752), max-min clearance only as the "
           f"no-clear-pair fallback, and the row says which; seeding pass 1 = prev pose, pass 2 = "
           f"prev+N(0,0.35), home/uniform without prev; along-path samples 19 interior (arm-arm "
           f"AND arm-env), endpoints excluded, path start = the previous row's SELECTED pose "
