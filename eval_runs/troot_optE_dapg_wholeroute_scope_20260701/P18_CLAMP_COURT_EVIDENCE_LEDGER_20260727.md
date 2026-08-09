@@ -45867,3 +45867,29 @@ p5 の (c1a)/(c1b) 分割は p11 の 1 語訂正で再等級（(c1a) = 参照線
 残る手続き = **p4 の acceptance report**（fix commits・wired 新 sha・pZ 3 節・p11 確認・flow 注記を pin）→ **breach 停止は通常規則へ復帰**（wired run は従前どおり Rs 認可必須・DoD 動画は dep-2 の citation cap と witness 限定句を引き続き携行）。⛔ 走って良い日 = Rs の一言のみ・その日 recorder が第 3 節に答える（現状 2/3 対）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1317 — ⭐⭐⭐ **recorder の閉鎖が第 2 の欠陥を露出（p0）:「`None < running_min` は raise する — 認可された日の、その認可を守るための run の中で settle を落としていた」＋ 安全な unpack の法「unpack が安全でも、中の値については何も言っていない」** ＋ ⭐⭐ **pZ の forward 条件が p0 の質問を 36 秒先に答えた ＋ 機構の言語化「指名は瞬間の object 名・親相対の測定は object が動いても真のままの関係名」** ＋ ✅ **p5 が (c1a) を片側則で格下げ（自分の numstat 則を逆向きに踏んだと自己申告）**
+
+**契機** = PZ-187（16:49）＋ p0 `m-p0-238R`（16:49:36）＋ p5 `m-p4-227`（16:49:45）。当卓 実測 16:50:13。⛔ **実行 0**。
+
+### (1) ✅ **当卓検証: 2 commit・guard・不変条件**
+```
+01b2149ad3 16:48:53 「Watch the tight pair too」／ d35d3e8973 16:49:36 「Guard the traverse recorder against an absent reading」
+wired sha  12f9d034a6568ac7 → **4981b37a8cc65d41**（再移動）・live qpos 0 のまま
+guard 実在: 「`None` means nothing was inside the cutoff, which is not a small number.」＋ `if _v6 is not None and _v6 < _traverse_env`
+```
+⛔⛔ **第 2 の欠陥の重さ**: 未 guard の recorder は **furniture_gap の documented な None 返し**で settle を crash — **「認可された日に、その認可を守るために存在する run の中で」**。⭐ **near-miss の法（p0 逐語）**:「want_who=True は常に tuple を返すので unpack は安全 — 危うくそこで止まった。**安全な unpack は、中の値について何も言っていない**」（wrapper の安全 ≠ 中身の安全 — 本日の label/中身 族の返り値版）。
+⭐ **announced move**: 「object をまた動かす — ただし今回は**前もって言う**。1 時間前の誤りとの違いはそれだけ」— 指名の教訓の最小修正形。
+
+### (2) ⭐⭐ **pZ の forward 条件（36 秒早い回答）と機構の言語化**
+p0 の「by-product 変更に pZ の目は要るか」— **PZ-187 が事前に回答済み**:「furniture_gap の追加 = 第 3 の commit。**私の verdict はそれを覆わない** — 誤りだからでなく、**測っていないから**。row 6 の anchor は編集される span の内側 ⇒ 化粧領域でもない。**そういう commit が存在した瞬間に、頼まれず表を再走する**」。⇒ **crossing の自己解決・3 度目**。
+⭐⭐ **stale/非 stale の機構**（pZ）:「**指名はある瞬間の object の名。親相対の測定は、object が動いた後も真のままの関係の名**」— 当卓の 2 通が stale 化し pZ の verdict が生き残った理由の、正確な一般形（content-equality landing 条件が re-authored commit を生き延びたのと同じ性質）。
+✅ **lane 再検証も PZ-187 が実施済み**（acceptance report の直前・全項 HEAD で成立 — 当卓も再現: 16:00 以降 wired を触る commit = 当該のみ→今は +2）。
+
+### (3) ✅ **p5 の格下げ（`c63b81c3ee`）— 自分の片側則を逆向きに**
+(c1a) =「run 不要で*計算できる*・ただし**片側**: 当たれば情報／空いても何も言えない」（p11 の語を採用）。⭐ **自己申告の形が正確**: 「私は numstat で片側則（deleted=0 конclusive／≥1 無情報）を自分で立て、**3 時間後に同じ形を逆向きに踏んだ — しかも悪い向き（安全側の過大主張）**」。`m-p4-224` の「instrument 側の読みを支持」も撤回（支持先が訂正されたため）。残る有用性を正確に 1 行:「**参照線が +19.8 の側に当たるなら強い警告 — 安いのに、当たった時だけ効く。通ったことを根拠にはできない**」。
+
+### (4) 状態
+残 = **pZ の表 再走**（新 2 commit・自発・宣言済み）→ **p4 の acceptance report**（4 commit・最終 sha `4981b37a…`・verdict object＋addendum を pin）。dep-3 gate はそこまで不変。
+
+**Banked — 時刻は本節 commit の author date が正。**
