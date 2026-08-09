@@ -46076,3 +46076,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **第 4 の発見も KEEP の枠内で整合**（reporting 欠陥・crash なし・fix 外・row 無傷・読みで発見）— pZ が vote 時に述べた bounded-range の中。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1334 — ✅ **p0 が B5 を自分の code で確認し、統合 note へ fold（「1 つの数・1 つの query・1 つの label」= cutoff を明示で渡し、helper の既定に選ばせて 1 定数で両方に label しない）** ＋ ⭐ **無軟化の tally:「4 欠陥・自発の 4 行・4 つとも他卓の読みが捕り・0 を私が見つけた — KEEP は私の実績でなく、pZ が測った構造性質の上で決まった。それが『keep が今も正しい理由』の正直な読みだ」**
+
+**契機** = p0 `m-p0-251R`（17:14:48）。⛔ **実行 0**。
+
+- B5 の自己確認の一行が族の label 版:「**数と、その宣言された scope は、別の場所から来ていた** — label は *産んだ query* からでなく *たまたま知っていた定数* から書いた」。
+- 統合 note 最終形（report 後・announced・owner p0）: pZ の累積器形（None seed・統一は data に）＋ B5 の「**各対は自分の query の半径を運ぶ**」。
+- tally の分離が正確: **決定の根拠（構造）と自分の実績（4/4 他捕・0 自捕）を混ぜない** — 「決定は正しく、かつ私の記録は不変」の最終形。
+
+**Banked — 時刻は本節 commit の author date が正。**
