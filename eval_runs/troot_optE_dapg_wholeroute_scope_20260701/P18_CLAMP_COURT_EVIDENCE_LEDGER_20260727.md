@@ -45820,3 +45820,23 @@ spec.HOME_POSE（対照） arm↔arm +194.2                            arm↔柱
 - ⭐ **by-product 提案の形が良い**: settle loop に走行最小 arm↔env clearance の記録・印字（対つき・他の全行と同形）— **settle 自身が産む**ので新認可も新計器も不要。⛔ **受入行にしない・省いた fix を落とさない**と明言 — 「測れない物を、走ってよい日の副産物へ変換する」だけ。⇒ p0 へ fix 記述前に relay（費用は書く時ゼロ・後から足すと 1 反復）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1314 — ⭐⭐⭐ **fix が書かれ、初めての「指名」が出た（`bc0bfe5b88`・当卓が revision で全数追認: live d.qpos = 0・servo 単独・既存閾値の settle・START は settle の後）** ＋ ⭐ **p0 が code だけでなく *comment の理由* を差し替えた（「zero は腕が交差」→ 実測 CLEAR — 「正しく見える行の下の古い理由」を code 内で殺した）** ＋ ⚠ **20 秒の crossing: p11 の完成形 (2) は settle 区間の経路評価を足すが、fix はその前に書かれた — 評価は器具側で足りるかの確認を p11 へ** ＋ ✅ **p5 が未測を 1 行から 2 行に割った（(c1) 経路 / (c2) mode A）**
+
+**契機** = p11（16:39:22・`283c7595f0` 151 行 sha 一致）＋ p5 `m-p4-224`（16:39:33・`fcac16f1e3` sha 一致・fold-back 執行）＋ p6 `m-p6-127`（16:39:16・step (i) FIRED 記帳）＋ p0 `m-p0-234R`（16:39:43・`bc0bfe5b88` 16/5）。当卓 実測 16:40:43。⛔ **実行 0**。
+
+### (1) ✅ **fix の実測（当卓・revision 直読）**
+```
+live d.qpos 書込 = 0（AST 相当 grep・fix の署名）／ ctrl block 単独（冗長行なし）／ mj_step settle（SETTLE_S/SETTLE_TOL 既存参照・break 条件つき）
+START = settle の後（comment に理由:「commanded 値はここで、腕が一度も居なかった姿勢を全 IK に種付けする」）
+⭐ 旧 comment の理由も差し替え:「zero は腕が交差」→ 実測 +491.3/+19.8 CLEAR を comment 内に —「stale な理由が正しく見える行を正当化し続ける」を code の中で殺した（p11 の keeper の実装版）
+```
+p0 の自制が正確: 「**fix が verified とは主張しない — pZ の leg が判定する。6 行がこう読めると主張する**」。**初の指名** = `bc0bfe5b88`（器具の revision は今も未指名のまま — 区別が保たれた）。
+
+### (2) ⚠ **crossing（20 秒差・当卓が正確に切る）**
+p11 の完成形 (2) = 「PD の実移動 ＋ **settle の経路上でも clearance を評価**」（薄い側 = table +19.8・端点だけでは見えない）— **fix はこの 20 秒前に書かれた**。⭐ p11 自身の言「**新しい機構は要らない — 受入表の along-path 列を settle 区間（現在→HOME）に当てるだけ**」⇒ **評価は wired の code でなく器具側の 1 行で足りる読みが自然**（kinematic 補間 = commanded 経路・pZ の第 3 節〔followed 経路は run の日まで未測〕とは別物のまま）。⇒ **p11 へ**: この読みで完成形 (2) が満たるか、fix code 内に要るか — design confirmation の中で 1 語。
+
+### (3) ✅ **p5 の分割と p6 の記帳**
+p5: §4m (b) に 2 値を執行（+5/−2・読み戻し済）・**未測を (c1) 経路 / (c2) mode A に分割** — 「**2 値は両端であって間ではない。1 行に畳むと、測れた対が両方を覆ったように読める**」＋ +19.8 を「整定運動が割ってはならない余裕」として行に継承。p6: step (i) FIRED を数値・分岐・限界 2 点つきで row 66 に（audit 注記に第 3 機構訂正も）。
+
+**Banked — 時刻は本節 commit の author date が正。**
