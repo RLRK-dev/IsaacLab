@@ -209,35 +209,65 @@ def referent_for(row: dict, carry: tuple | None) -> tuple[str, tuple[float, floa
 # It says NOTHING about the cable, and a row must not be read as if it did.
 # ---------------------------------------------------------------------------------------------
 def build_cell() -> tuple[mujoco.MjModel, dict]:
+    """Reassemble the cell from spec constants, mirroring the driver's own world part list at the
+    tip (mast trio :244-247, saddles :186-194, clips from spec.CLIP_PARTS :148-161, crown capsule
+    :182-183, all @ 2fba2dfd67).  ⛔ Shakedowns 1-7 ran on a cell missing foot, crown and saddles,
+    with the stem at the spec's own retired "⛔ Was SHOULDER_HEIGHT/2" form and clips hand-restated
+    -- the exact drift spec.CLIP_PARTS exists to prevent.  §8.43 find 2."""
     prov = {}
-    zc, half = float(spec.TABLE_TOP), 0.016 / 2.0
+    zc = float(spec.TABLE_TOP)
 
     def clip_xml(name, cx, cy):
+        parts = "".join(
+            f'\n        <geom name="{name}_{i}" type="box" size="{hx:.4f} {hy:.4f} {hz:.4f}" '
+            f'pos="{dx:.4f} {dy:.4f} {dz + spec.FLOAT_Z:.4f}"/>'
+            for i, (dx, dy, dz, hx, hy, hz) in enumerate(spec.CLIP_PARTS)
+        )
         return f"""
-      <body name="{name}" pos="{cx} {cy} {zc}">
-        <geom name="{name}_base" type="box" size="0.030 0.022 0.006" pos="0 0 0.006"/>
-        <geom name="{name}_wl" type="box" size="0.006 0.022 0.035" pos="{-(half + 0.006):.4f} 0 0.047"/>
-        <geom name="{name}_wr" type="box" size="0.006 0.022 0.035" pos="{(half + 0.006):.4f} 0 0.047"/>
-        <geom name="{name}_floor" type="box" size="{half:.4f} 0.022 0.006" pos="0 0 0.018"/>
+      <body name="{name}" pos="{cx} {cy} {zc}">{parts}
       </body>"""
 
+    def rest_xml(i, cx):
+        h = float(spec.REST_TOP) - zc
+        return f"""
+      <body name="S{i}" pos="{cx} {spec.REST_Y} {zc}">
+        <geom name="S{i}_post" type="box" size="{spec.REST_POST_HALF} {spec.REST_POST_HALF} {h / 2:.4f}" pos="0 0 {h / 2:.4f}"/>
+        <geom name="S{i}_la" type="box" size="{spec.REST_POST_HALF} {spec.REST_LIP_HY} {spec.REST_LIP_HZ}" pos="0 {-spec.REST_LIP_DY} {h + spec.REST_LIP_HZ:.4f}"/>
+        <geom name="S{i}_lb" type="box" size="{spec.REST_POST_HALF} {spec.REST_LIP_HY} {spec.REST_LIP_HZ}" pos="0 {spec.REST_LIP_DY} {h + spec.REST_LIP_HZ:.4f}"/>
+      </body>"""
+
+    crown = (f'<geom name="crown" type="capsule" size="{spec.CROWN_R}" '
+             f'fromto="{-spec.YOKE_SPREAD} 0 {spec.CROWN_ZC} {spec.YOKE_SPREAD} 0 {spec.CROWN_ZC}"/>'
+             if spec.CROWN_R > 0.0 else "")
+    if not crown:
+        print("[cell] ⚠ CROWN REMOVED (CROWN_R=0): announced, not absorbed -- an instrument that "
+              "silently stops measuring a part reads exactly like a part that is clear")
+    saddles = "".join(rest_xml(i, cx) for i, cx in enumerate(spec.REST_X))
     world = f"""<mujoco model="c2_kinonly">
   <compiler angle="radian" autolimits="true"/>
   <worldbody>
     <geom name="floor" type="plane" size="6 6 0.1" pos="0 0 0" contype="0" conaffinity="0"/>
     <body name="column" pos="0 0 0">
-      <geom name="stem" type="cylinder" size="{float(spec.COLUMN_R):.4f} {spec.SHOULDER_HEIGHT / 2:.4f}"
-            pos="0 0 {spec.SHOULDER_HEIGHT / 2:.4f}"/>
+      <geom name="stem" type="cylinder" size="{float(spec.COLUMN_R):.4f} {spec.COLUMN_HZ:.4f}"
+            pos="0 0 {spec.COLUMN_STEM_BOTTOM + spec.COLUMN_HZ:.4f}"/>
+      <geom name="foot" type="cylinder" size="{spec.PEDESTAL_R} {spec.PEDESTAL_HZ}"
+            pos="0 0 {spec.PEDESTAL_HZ}"/>
+      {crown}
     </body>
     <body name="table" pos="0 {spec.TABLE_Y} 0">
-      <geom name="table_top" type="box" size="{spec.TABLE_HX} {spec.TABLE_HY} 0.02"
-            pos="0 0 {zc - 0.02:.4f}"/>
+      <geom name="table_top" type="box" size="{spec.TABLE_HX} {spec.TABLE_HY} {spec.TABLE_HZ}"
+            pos="0 0 {zc - spec.TABLE_HZ:.4f}"/>
     </body>
     {clip_xml("C1", *CLIP_XY["C1"])}
     {clip_xml("C2", *CLIP_XY["C2"])}
+    {saddles}
   </worldbody>
 </mujoco>
 """
+    prov["mast"] = f"stem(0.37->1.53) + foot(r{spec.PEDESTAL_R}) + " + (
+        f"crown(capsule r{spec.CROWN_R} @ z{spec.CROWN_ZC:.3f})" if crown else "crown ABSENT")
+    prov["saddles"] = f"{len(spec.REST_X)} @ REST_X on y={spec.REST_Y}"
+    prov["clips"] = f"spec.CLIP_PARTS x{len(spec.CLIP_PARTS)} boxes, FLOAT_Z={spec.FLOAT_Z}"
     wp = _GEN / "_kinonly_world.xml"
     wp.write_text(world)
     cell = mujoco.MjSpec.from_file(str(wp))
@@ -321,49 +351,79 @@ def closest(m, d, A: list[int], B: list[int], cutoff: float = 0.5) -> tuple[floa
     # The wired driver names this failure in its own arm query and returns None instead; same rule
     # here -- a reading at or past the cutoff is ABSENT, (None, "-"), never a number.
     best, who = None, "-"
+    ft = np.zeros(6)
     for a in A:
         for b in B:
-            dist = mujoco.mj_geomDistance(m, d, a, b, cutoff, None)
-            if dist == 0.0:
-                dist = _requery_exact_zero(m, d, a, b, cutoff)
+            dist = mujoco.mj_geomDistance(m, d, a, b, cutoff, ft)
             if dist >= cutoff:
                 continue
+            tag = ""
+            seg = float(np.linalg.norm(ft[3:] - ft[:3]))
+            if dist == 0.0 or abs(seg - abs(dist)) > 1e-6 + 0.01 * abs(dist):
+                # ⛔ SUSPECT READING -- two measured failure modes on this cell (mujoco 3.10.0,
+                # reproduction = probe_geomdistance_exact_zero.py): a mesh pair 61.590 mm apart
+                # returns EXACTLY 0.0 under one ulp of pose arithmetic; a pad<->table pair at
+                # 301.9 mm centre distance returns 0.0 STABLY, with a witness segment ~520 mm
+                # long for a claimed zero -- self-contradiction the reading carries with it.
+                # Resolution: a PROVABLE lower bound (bounding radii, and exact point-to-
+                # primitive where a primitive is involved).  Positive bound -> the pair is
+                # provably clear and the bound stands in as a CONSERVATIVE reading (it
+                # understates the distance; the pair name says ">=bound").  No positive bound
+                # -> the raw reading is kept as contact, the conservative direction.
+                _GUARD[0] += 1
+                lb = _provable_lower_bound(m, d, a, b)
+                if lb > 0.0:
+                    _GUARD[1] += 1
+                    dist, tag = lb, " >=bound"
+                else:
+                    _GUARD[2] += 1
+                if dist >= cutoff:
+                    continue
             if best is None or dist < best:
-                best, who = dist, f"{nm(a)} <-> {nm(b)}"
+                best, who = dist, f"{nm(a)} <-> {nm(b)}{tag}"
     return best, who
 
 
-_ZERO_REQUERIES = [0, 0]   # [re-queried, stayed at 0.0 after jitter]
+_GUARD = [0, 0, 0]   # [suspect readings, bound-substituted (provably clear), kept as contact]
 
 
-def _requery_exact_zero(m, d, a: int, b: int, cutoff: float) -> float:
-    """Re-measure a reading of EXACTLY 0.0 at a jittered pose.
+def _point_to_geom(m, d, g: int, p: np.ndarray) -> float | None:
+    """Exact signed distance from world point `p` to geom `g`'s surface, primitives only."""
+    t = m.geom_type[g]
+    size = m.geom_size[g]
+    q = d.geom_xmat[g].reshape(3, 3).T @ (np.asarray(p) - d.geom_xpos[g])
+    if t == mujoco.mjtGeom.mjGEOM_SPHERE:
+        return float(np.linalg.norm(q)) - float(size[0])
+    if t == mujoco.mjtGeom.mjGEOM_BOX:
+        e = np.abs(q) - size
+        return float(np.linalg.norm(np.maximum(e, 0.0)) + min(0.0, float(np.max(e))))
+    if t == mujoco.mjtGeom.mjGEOM_CYLINDER:
+        dr = math.hypot(q[0], q[1]) - float(size[0])
+        dz = abs(float(q[2])) - float(size[1])
+        if dr <= 0.0 and dz <= 0.0:
+            return max(dr, dz)
+        return math.hypot(max(dr, 0.0), max(dz, 0.0))
+    if t == mujoco.mjtGeom.mjGEOM_CAPSULE:
+        qz = float(np.clip(q[2], -size[1], size[1]))
+        return float(np.linalg.norm(q - np.array([0.0, 0.0, qz]))) - float(size[0])
+    return None
 
-    ⛔ MEASURED FAILURE (probe _gen/probe_path_zero.py, this cell, mujoco 3.10.0): a mesh pair
-    61.590 mm apart returned EXACTLY 0.0 at every cutoff when the pose was perturbed by ONE ULP
-    (max qpos delta 8.9e-16 rad, geom_xpos delta < 1e-12), and returned +61.590 again at the
-    original bits -- deterministic and reversible, so 0.0 there is a narrowphase failure
-    sentinel, not a distance.  Shakedowns 4-6 printed that sentinel as "+0.0" clearance in 23 of
-    25 rows.  A real graze survives a 1e-12 rad jitter unchanged; the sentinel does not -- so
-    the jittered re-reading is the honest measurement in both cases.  If the re-reading is 0.0
-    again at both epsilons the 0.0 is kept: for a clearance instrument the touching reading is
-    the conservative direction.  Every qpos entry here is a hinge or slide (no quaternions), so
-    a scalar jitter is a pose perturbation, not a corruption.
+
+def _provable_lower_bound(m, d, a: int, b: int) -> float:
+    """Best available lower bound on the surface-surface distance of a suspect pair.
+
+    Three valid bounds, take the max: centre distance minus both bounding radii; and, where
+    either geom is a primitive, the exact point-to-primitive distance from the OTHER geom's
+    centre minus that other geom's bounding radius.  Every one understates the true distance,
+    so substituting one for a garbage reading can only make a row read TIGHTER than reality.
     """
-    _ZERO_REQUERIES[0] += 1
-    q0 = d.qpos.copy()
-    try:
-        for eps in (1e-12, 1e-11):
-            d.qpos[:] = q0 + eps
-            mujoco.mj_kinematics(m, d)
-            r = float(mujoco.mj_geomDistance(m, d, a, b, cutoff, None))
-            if r != 0.0:
-                return r
-        _ZERO_REQUERIES[1] += 1
-        return 0.0
-    finally:
-        d.qpos[:] = q0
-        mujoco.mj_kinematics(m, d)
+    pa, pb = d.geom_xpos[a], d.geom_xpos[b]
+    lbs = [float(np.linalg.norm(pa - pb)) - float(m.geom_rbound[a]) - float(m.geom_rbound[b])]
+    for g, p, other in ((b, pa, a), (a, pb, b)):
+        pd = _point_to_geom(m, d, g, p)
+        if pd is not None:
+            lbs.append(pd - float(m.geom_rbound[other]))
+    return max(lbs)
 
 
 def gap_say(v: float | None, who: str, cutoff: float = 0.5) -> str:
@@ -786,8 +846,8 @@ def main() -> int:
     }, indent=1))
     print(f"[bank] winner joint vectors -> {sol} ({len(bank)} row-instances)")
     print(f"[audit] mj_step calls: {_MJ_STEP_CALLS}")
-    print(f"[audit] exact-zero distance readings re-queried at jittered pose: {_ZERO_REQUERIES[0]} "
-          f"(stayed 0.0 -- treated as real contact: {_ZERO_REQUERIES[1]})")
+    print(f"[audit] suspect distance readings (exact-0.0 or witness-inconsistent): {_GUARD[0]}; "
+          f"provably clear, bound substituted: {_GUARD[1]}; kept as contact: {_GUARD[2]}")
     import collections as _c
     for k, v in _AUDIT.items():
         print(f"[audit] {k}: {len(v)}")
