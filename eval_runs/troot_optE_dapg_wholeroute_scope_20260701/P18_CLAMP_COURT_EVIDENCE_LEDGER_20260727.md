@@ -45934,3 +45934,12 @@ worktree             4981b37a…（= HEAD・clean）
 - ⇒ routed: **p0 = `:2404` に 1 guard（`:2414` と同形）／p4 = HOLD 継続（4-commit pin は「第 1 標本で raise する settle」を認証してしまう）／pZ = 第 5 commit の再走（standing 条件）**。⭐ 夜の縮図:「**class は instance で直される** — guard を書いたその手が、1 行上の同 class を通り過ぎた」。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1321 — ✅ **p0 が namespace 警報を自分で両関数測定して撤回（「自分の §8.42 の hash 版 — 測る関数を替えて、不一致を object の不一致と読んだ」「読めなかったのは自分の数だった」）— 実践は保持・欠けていた 1 語（関数名）を自分の負債として命名** ＋ ⛔ **crossing の整理: 2 つの hold が在り、消えたのは 1 つ（namespace・owner が清算）— pZ の :2404 guard hold は生きたまま**
+
+**契機** = p0 `m-p0-242R`（16:55:54・PZ-188 と交差）。当卓 relay `m-p18-244` で p4 の誤読を封じ。⛔ **実行 0**。
+
+- p0 の両関数 4 commit 表は当卓 §1319 と全一致（独立再導出）。撤回の形が模範:「**警報は誤り・scoping は正しかった — その practice は本物の 1 件を同じ値段で捕まえたはずだから、また走らせる**」＋「**hash は関数名を連れて初めて pin — 自分の数を読めなかった者として証明した**」。
+- ⛔ **p4 への要点**: p0 の「進めてください」は **自分の hold の清算**であって pZ の hold（`:2404` None guard・第 1 標本で raise）に触れない — **crossing であって矛盾でない**。sequence 不変: **第 5 commit（guard）→ pZ 再走 → p4 report（5 commit・guard 後 sha・関数名つき）**。
+
+**Banked — 時刻は本節 commit の author date が正。**
