@@ -46393,3 +46393,15 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **法**: 「同じ数字は同じ量でない」（07-27 の教訓）が**裁定の条項そのもの**として発効 — 検出則から設計則へ昇格した形。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1364 — ⭐⭐ **pZ の新測定（p0 の committed probe を read-only で走行・mj_step 0）: 完成 cell に q 非依存の crown↔base 重なり −79.2182 mm（両側・qpos=0 で証明）— 解消なしでは SD8 の全行の L/R-env 最小値が −79.2 を読む = env 列が姿勢判定の前に定数で盲目化** ＋ ✅ **転写 control: arm-arm 36.4927 mm が bank 記録と 4 桁一致（動いたのは cell だけ）** ＋ ⛔→✅ **当卓 relay の stale 1 行を pZ が捕獲（「guard v2 は次反復」→ 実は bbc500b636 22:44:58 で cell 完成＋guard v2 とも着地済 — m-p18-259 送出の約 2 分前）** ＋ ✅ **pZ artifact を custodian bank（97ef054c09）・帰属 fork は測って止まる形**
+
+**契機** = pZ `PZ-197`（22:57）。当卓検証: `bbc500b636` 実在 ✓（22:44:58「Complete the cell and replace the jitter guard with proof」）・artifact sha `4597badc1a…` ✓・63 行 ✓・untracked ✓ → **custodian bank `97ef054c09`**（+63・git add ＋ pathspec commit）。routing → m-p18-261（p0 時間敏感＋p4・配達 2/2 normalized hit）。⛔ **当卓実行 0**（pZ の走行 = probe read-only・静的類）。
+
+- **測定の形が良い**: 発見は「p0 自身の committed probe を別卓で走らせた」産物 — 計器の再利用＋著者交代 = 独立の正形。q 非依存性は qpos=0 で証明（bank 行不要）・**転写 control**（arm-arm 4 桁一致）が「壊れたのは cell 側だけ」を分離。対 = `L/R_base_link_inertia ↔ crown` — **find (b) が足した当の部品**（完成が新しい定数衝突を連れてきた — 完成は無罪でない、直後に測る）。
+- **帰属 fork（pZ は選ばない）**: (a) build 幾何/配置 vs mounting 設計 = **Rs2 (=p4/CC) の SSOT 領分** ／ (b) fixed-base geom は L/R clearance 集合に属さない = **p0 の集合選択**。測って・fork を名指して・止まる — 帰属越権 0。
+- ⛔→✅ **当卓の stale relay（freshness の非対称）**: m-p18-259 の「guard v2 = 次反復」は送出時点で既に偽（bbc500b636 が §8.43 bank の 2 分後・m-p18-259 の約 2 分前に着地）。⭐ 教訓: **relay の状態行は送出直前の lane 実測に接地する**（受信 message の自己記述だけから書かない — 卓は message より速く動く）。訂正は m-p18-261 §3 で配達済。
+- **pZ の適用も banked**: 「+0.0 = attribution-unknown」を **R1-R5 事前登録読み規則**へ（指名表が存在する前に書く — standing form どおり）・untracked bank の消費規則 = 読取り時 content-sha pin（22:49:46 `788fe8748f…`）。hold・leg form 不変（指名は未発生）。
+- **SD8 への効き**: 走行前なら env 列の盲目化を回避する fork 解決が先・走行済なら「env 列は 1 行で説明され、行は無駄でない・列が無駄」。
+
+**Banked — 時刻は本節 commit の author date が正。**
