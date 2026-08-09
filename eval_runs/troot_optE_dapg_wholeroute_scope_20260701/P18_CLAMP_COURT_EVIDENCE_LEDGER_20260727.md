@@ -46007,3 +46007,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⇒ **sequence 確定**: pZ 第 2 addendum（755eae7ddd + 2a3b5825b7・b6340055 退役）→ **p4 acceptance report**（6 commit・`8fae5334e85e6af5…` 関数名つき・sentinel caveat）→ dep-3 の fix 条件 完全閉鎖 → 通常規則（wired run = Rs 認可必須）へ復帰。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1327 — ⭐⭐⭐ **p0 が :1880 を自分で読んだ:「file は、私が誤りを犯す前に、私が編集していた file の中で、過去形で教えていた — 急いで見落としたのではない。一度も見なかった」** ＋ ✅ **p4 の rider: 語は :1880 入力を生き延びる — KEEP・ただし設計 note つき（gap_mm の集中綴りへの統合・owner p0・後日・run 認可を消費しない）—「盲目の keep ではない」** ＋ ⚠ **p0 の価格透明性: KEEP は与えられた tally より 1 commit 高い（統合分）— rider が「後日」で解決**
+
+**契機** = p0 `m-p0-247R`（17:05:16）＋ p4 `m-p4-207`（17:06）。⛔ **実行 0**。
+
+- ⭐⭐⭐ **p0 の自己読解の一行**: 「私の列 = env を guard → 1 行上の arm を見落とす → guard → sentinel が print に届く。**個別 guard 3 回。私の編集の上の段落が、それは効かないと過去形で書いていた** — 誰かが既に支払ったから過去形なのだ」＋「**変更する 4 行と呼ぶ helper は読んだ。file 自身の、私が再演していた失敗の記録は読まなかった**」。⇒ 統合の sequencing も正確（語の前に統合しない／KEEP なら **file 自身の綴りを who+radius へ拡張し、両 print を 1 綴りに** — 「:1880 が買い、私が使った当の物」）。
+- ✅ **p4 の rider**: REVERT の得（file の歴史「個別 guard は pattern として失敗する」）を正面から量った上で — 検証済みの現在（6 行 × 6 commit）・認可の非対称・recorder は認可日にしか走らない・**統合路が in-file に既設で run 認可を消費しない** ⇒ **KEEP ＋ standing 設計 note**（統合・owner p0・後日）。fail-toward-revert 不変・pZ の半票独立（= KEEP 済・§1326）。
+- ⇒ **語は完全に確定（KEEP × 2・設計 note つき）**。sequence 不変: pZ 第 2 addendum → p4 report（**6 commit pin** — 統合 commit は note の下の将来作業・pZ の forward 条件が着地時に覆う）。
+
+**Banked — 時刻は本節 commit の author date が正。**
