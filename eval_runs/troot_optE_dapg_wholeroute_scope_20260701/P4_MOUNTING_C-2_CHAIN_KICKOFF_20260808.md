@@ -1820,3 +1820,12 @@ m-p18-216 の 4 決定に答える。判断材料は自測 2 件を足した: ca
 
 - 自測 16:32:02: **22,134 chars**（`wc -m`・§31 の単位は chars）/ 30,912 bytes。90% trigger = 22,487 ⇒ **残り 353 chars ≈ 実測成長 +344/day で約 1 日**。p5 の filing は単位（bytes/chars 混在）で RETURN されたが「内容は 1 日早いだけ・種類は正しい」（hub 判定）。
 - **precedent の記録（自薦ではない）**: 過去の coordinated pass の実績 = **pass14 = p4 実施（07-20・Rs 承認・全 slug 保全を機械照合）**／07-26 圧縮 = p5。⇒ trigger が切れて owner が置かれる時のために手順を 1 行で備える: **coordinated（⛔ 単独不可・他 pane 行を含む）・summary+pointer 化・slug 0 lost を機械照合・Rs 承認が先**。⛔ 私は placement を seize しない — trigger 切れ時に p5 再提出 → hub/Rs が置く。
+
+---
+
+## 2026-08-09 16:38 — 診断値 IN: zero 姿勢 CLEAR・枝 = 純 servo・Rs への初期条件照会は不発。TRIPLE の 2 値を消費線へ
+
+1. **枝の確定**: qpos=0 → arm↔arm **+491.3 mm**（L_base#2↔R_base#41）・arm↔table **+19.8 mm**（R_forearm#44↔table_top）= **CLEAR**。対照 HOME → **+194.2 / +80.1** = CLEAR。⇒ **純 servo 枝**（16:06 節 (1)② の「衝突なら Rs へ一語」は**不発** — 発火条件が否定された）。keyframe 境界問題は生まれない。
+2. **TRIPLE 消費線への 2 値（先行知識として bank・⛔ 導出時は artifact の行から読み直す — 他卓 message の数値で裁定しない則を導出にも適用）**: ① HOME@C-2 clearance = +194.2/+80.1 ② zero-pose 有効性 = +491.3/+19.8。**rider 2 つを値と一緒に運ぶ**: (a) これは **cell-as-reassembled** の数（(f) widening の面）(b) **+19.8 は settle が尊重すべき margin** — servo 整定の過渡が食ってよい量ではない（mode-A 隣接の注意・値が旅する先すべてに同行）。
+3. **audit の再入 (consumer 注)**: p0 の第 3 機構修正 — hook が呼ぶ `sys._getframe` が**自ら audit 事象を上げ、hook が自分を呼んだ**（>90s → 0.5s・再入 flag の両側で実測）。⭐ 中心形の最も文字通りの実例: **事象を測る計器が事象の源になった**。⇒ 私の受入読みの audit 節には再入 flag が含まれる — 陽性対照（期待事象 非空）と**自給しないこと**の両方を pZ の leg が判じる。
+4. 次: p0 が fix を書く（3 要件・冗長 ctrl なし・parent-relative guard・第 6 行・方向分離・revision+blob つき text 引用）→ pZ 事前登録表 → land。dep-3 gate は着地まで不変・land 後の run も Rs。私の court は空のまま。
