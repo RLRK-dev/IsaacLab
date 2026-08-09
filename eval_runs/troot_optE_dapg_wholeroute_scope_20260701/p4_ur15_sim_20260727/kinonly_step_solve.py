@@ -169,7 +169,17 @@ def read_canonical() -> tuple[list[dict], dict]:
 # values are measured where it bites.
 # ---------------------------------------------------------------------------------------------
 CLIP_XY = {"C1": tuple(spec.C1), "C2": tuple(spec.C2)}
-REST_XY = (0.0, float(spec.REST_Y))
+# The grasp x on the rest row -- an INSTRUMENT CHOICE the design bounds but does not name, and the
+# first choice was wrong in a way shakedown 9 measured: x=0.0 put the jaw envelope onto saddle
+# S1's post (-20.9 mm, Rg_right_spring_link <-> S1_post at the 0.812 grasp height; S1 sits at
+# x=-0.055 with half-width 0.014, and a jaw at -GRIP_HALF_SPAN=-0.044 leaves 3 mm nominal for a
+# spring link wider than the pad).  Now the midpoint of the WIDEST saddle-free window: posts at
+# REST_X=(-0.300, -0.055, +0.245) make windows of 245 and 300 mm; the wider one's midpoint is
+# +0.095, and jaws at +-GRIP_HALF_SPAN around it clear both neighbouring post edges by 92 mm.
+# Every number in that derivation is a spec constant.
+_REST_EDGES = sorted(spec.REST_X)
+_W = max(range(len(_REST_EDGES) - 1), key=lambda i: _REST_EDGES[i + 1] - _REST_EDGES[i])
+REST_XY = ((_REST_EDGES[_W] + _REST_EDGES[_W + 1]) / 2.0, float(spec.REST_Y))
 
 
 def referent_for(row: dict, carry: tuple | None) -> tuple[str, tuple[float, float], str]:
@@ -196,7 +206,9 @@ def referent_for(row: dict, carry: tuple | None) -> tuple[str, tuple[float, floa
         if c in n:
             return c, CLIP_XY[c], f"rule 1: action names {c}; xy = spec.{c}"
     if "ケーブル" in n and row["clip"] in ("-", ""):
-        return "cable-at-rest", REST_XY, "rule 2: cable named, no clip seated; y = spec.REST_Y, x = 0.0 (instrument choice in the free saddle window)"
+        return "cable-at-rest", REST_XY, (f"rule 2: cable named, no clip seated; y = spec.REST_Y, "
+                                          f"x = {REST_XY[0]:+.3f} (instrument choice: widest "
+                                          f"saddle-free window's midpoint; v1's x=0.0 grazed S1)")
     if carry is None:
         raise RuntimeError(f"row {row['step']} names no referent and there is nothing to carry")
     return carry[0], carry[1], f"rule 3: no referent named, z unchanged; carried from the previous row ({carry[0]})"
@@ -903,16 +915,30 @@ def main() -> int:
         })
         return qs
 
-    prev = solved_q[1]
+    # ⛔ PER-FAMILY CHAINS.  Shakedown 9 chained every instance off the first solved one (v2
+    # first), so a verbatim row's path started from a design-height prev 213 mm below its own
+    # datum, and the along-path column swept the climb between the two z generations instead of
+    # the row's own motion.  Each family now walks its own chain -- v1 from v1, v2 from v2 --
+    # and a single-z station (hover/home terms, shared by both generations) advances both.
+    prev = {"v1": solved_q[1], "v2": solved_q[1]}
     for row, ref, (cx, cy), rule in resolved:
         shown = {"C1": "clip C1", "C2": "clip C2"}.get(ref, ref)
         xcands = list(C2_CAND.items()) if ref == "C2" else [("single", (cx, cy))]
-        got = None
-        for zname, zval in z_for(row, ref):
+        zcands = z_for(row, ref)
+        gots: dict = {}
+        for zname, zval in zcands:
+            fam = "v1" if zname == "verbatim" else "v2"
             for xlabel, (ax, ay) in xcands:
-                r = row_at(row, shown, ax, ay, xlabel, prev, zname, zval)
-                got = got or r
-        prev = got or prev
+                r = row_at(row, shown, ax, ay, xlabel, prev[fam], zname, zval)
+                if r is not None and fam not in gots:
+                    gots[fam] = r
+        if len(zcands) == 1:
+            g = gots.get("v2") or gots.get("v1")
+            if g is not None:
+                prev = {"v1": g, "v2": g}
+        else:
+            for fam, g in gots.items():
+                prev[fam] = g
 
     print()
     print(f"[budget] tries {TRIES} = 2 full passes over the design menu ({len(MENU)} attitudes, "
