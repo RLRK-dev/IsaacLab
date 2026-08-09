@@ -301,19 +301,38 @@ def build_cell() -> tuple[mujoco.MjModel, dict]:
 
 
 def geom_groups(m: mujoco.MjModel) -> dict[str, list[int]]:
-    """Partition geoms by the BODY they hang off.
+    """Partition geoms into moving arms vs static structure, by WELD then by body prefix.
 
     ⛔ Not by geom name: the URDF import leaves every arm geom UNNAMED, so a name-prefix predicate
     returns two empty arm groups and the clearance check then compares empty sets and reports
     CLEAR.  That happened here on the first run.  Bodies carry the `L_`/`R_` prefix; geoms do not.
-    """
+
+    ⛔ And not by prefix ALONE: the arms' base links are BOLTED to the yoke -- `L_base_link_inertia`
+    is welded to the world with zero joints on its path -- and the crown intersects it by 79.2 mm
+    BY CONSTRUCTION (shakedown 8; the spec's own crown text REQUIRES the head to reach the mounts,
+    :421-424 @ 2fba2dfd67).  A pair with zero relative freedom has a constant distance, and a
+    constant -79.2 floor under every row is not a reading -- it drowned every real one (env-clear
+    0/0, clear-pairs 0, all 25 rows).  So: a geom whose body is welded to the world is STRUCTURE
+    (column, table, clips, saddles, and the bolted arm bases alike); only bodies with a joint
+    between them and the world are an arm.  A moving body with neither prefix would be
+    unclassifiable and raises."""
     out = {"L": [], "R": [], "env": []}
+    static_weld = int(m.body_weldid[0])
     for g in range(m.ngeom):
         if (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or "") == "floor":
             continue
         b = int(m.geom_bodyid[g])
+        if int(m.body_weldid[b]) == static_weld:
+            out["env"].append(g)
+            continue
         bn = mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, b) or ""
-        out["L" if bn.startswith("L") else "R" if bn.startswith("R") else "env"].append(g)
+        if bn.startswith("L"):
+            out["L"].append(g)
+        elif bn.startswith("R"):
+            out["R"].append(g)
+        else:
+            raise RuntimeError(f"moving body {bn!r} (geom {g}) has neither arm prefix -- refusing "
+                               f"to classify it silently")
     return out
 
 
@@ -352,8 +371,12 @@ def closest(m, d, A: list[int], B: list[int], cutoff: float = 0.5) -> tuple[floa
     # here -- a reading at or past the cutoff is ABSENT, (None, "-"), never a number.
     best, who = None, "-"
     ft = np.zeros(6)
+    skip = _adjacent_body_pairs(m)
     for a in A:
         for b in B:
+            ba, bb = int(m.geom_bodyid[a]), int(m.geom_bodyid[b])
+            if (min(ba, bb), max(ba, bb)) in skip:
+                continue
             dist = mujoco.mj_geomDistance(m, d, a, b, cutoff, ft)
             if dist >= cutoff:
                 continue
@@ -385,6 +408,36 @@ def closest(m, d, A: list[int], B: list[int], cutoff: float = 0.5) -> tuple[floa
 
 
 _GUARD = [0, 0, 0]   # [suspect readings, bound-substituted (provably clear), kept as contact]
+_ADJ_CACHE: dict[int, frozenset] = {}
+
+
+def _adjacent_body_pairs(m: mujoco.MjModel) -> frozenset:
+    """Body pairs joined by at most ONE joint along the ancestor chain -- mount interfaces.
+
+    Their separation is a property of the ASSEMBLY, not of a pose: after the weld partition
+    removed the crown<->bolted-base constant (-79.2 mm, every row of shakedown 8), the very next
+    reading was the shoulder against ITS OWN base at a constant +0.1 mm -- the pan joint's
+    designed interface, one level up, same class.  A pair whose bodies are rigidly connected or
+    separated by one joint sits at a designed clearance in every pose, so measuring it floors
+    every row with a constant and drowns the pose-dependent readings the table exists for.
+    Ancestor-chain form, NOT mj_collision's weld-parent filter: that filter would also blind the
+    first moving link against ALL static geometry (table included), which is a real collision
+    question.  Sibling statics (table, clips, saddles) are never ancestors, so they stay
+    measured against every link."""
+    key = id(m)
+    if key not in _ADJ_CACHE:
+        pairs = set()
+        for b in range(m.nbody):
+            x, cnt = b, 0
+            while x != 0:
+                cnt += int(m.body_jntnum[x])
+                x = int(m.body_parentid[x])
+                if cnt <= 1:
+                    pairs.add((min(b, x), max(b, x)))
+                else:
+                    break
+        _ADJ_CACHE[key] = frozenset(pairs)
+    return _ADJ_CACHE[key]
 
 
 def _point_to_geom(m, d, g: int, p: np.ndarray) -> float | None:
