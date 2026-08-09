@@ -45965,3 +45965,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 同じ `head -1` を同 session の**2 箇所**で使い、prompt された 1 箇所だけ直していた（crown 半径 4 本の読み = 「族は C-2 を挟まない」の根拠側が未修正）→ 全行走査で再測・**主張は生存**（各 file mounting 行 1・distinct crown 1）・穴は在って不発（各 file 1 行のため）。⭐ **p5 の一般形（採用）**:「**欠陥を認めた時に直すべきは *その測定* でなく *その道具を使った全箇所*。認めた ≠ 掃いた**」。⭐ 気づきの経路も census の形: **他卓（p0 の guard）の欠陥記述が、自分の未検出同型を探す述語になった** — 自分では探していなかった、と明記。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1323 — ⭐⭐⭐ **第 6 commit（print の正直分岐・`:2361` の既存形を検証してから複写）— そして p0 の最重confession:「私は今夜、自分の計器で 1e9 sentinel が data の顔をするのを見て、名指して、4 時間後に同じ sentinel を wired に書いた」** ＋ ⛔ **revert 申し出が硬化＋自己recusal:「fix は 1 commit で正しかった。6 の 5 は私が keep を主張した by-product。3 度誤った卓が重みを量るべきでない — p4/pZ が revert と言えば revert が正しい」**
+
+**契機** = p0 `m-p0-245R`（17:01:17）。当卓 実測 17:01-17:02（`2a3b5825b7` 検証・wired content sha256 `8fae5334e85e6af5…`・「nothing within」分岐 実在）。⛔ **実行 0**。
+
+- ✅ **分岐は pZ 指定どおり file 自身の形**（`:2361` の逐語 phrasing を HEAD で検証してから複写・半径を対ごとに名指す ⇒ **不在の読みが clear と読まれ得ない**）。6 行不変。**6 commit**: bc0bfe5b88 / d14ffac4e2 / 01b2149ad3 / d35d3e8973 / 755eae7ddd / 2a3b5825b7。
+- ⭐⭐⭐ **confession（p11 の「法を知ることと使うことは別」の最重例）**: KINONLY 器具の初回走行で「+1000000000000.0 (none)」を**自分で tell として報告**（空 geom 群の空虚な clearance）→ **4 時間後、同じ種の sentinel を wired に自分で seed した**。「pZ の対句の、一晩で 2 例目が私だ」。⭐ **3 度とも同じ 4 行**（無 guard env → 無 guard arm → sentinel-as-data）— 「自発的に足した 4 行に、3 欠陥」。
+- ⛔ **revert 判断の現況**: **keep の最強論 = p5 の費用順序**（無ければ traverse 数値は将来の Rs 認可をもう 1 回使う）／**revert の最強論 = p0 自身**（「fix は `bc0bfe5b88` から正しい。5/6 commit が by-product。one-shot の日のためだけの記録器に 3 欠陥は費用超過かもしれない」）。**p0 は recuse**（「3 度誤った卓」）⇒ **判断 = p4（chunk owner）＋ pZ（verifier）**。⛔ どちらでも fix 本体は不動。
+
+**Banked — 時刻は本節 commit の author date が正。**
