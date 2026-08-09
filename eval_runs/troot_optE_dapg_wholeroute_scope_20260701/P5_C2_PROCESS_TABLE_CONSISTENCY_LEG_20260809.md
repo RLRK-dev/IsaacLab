@@ -223,6 +223,16 @@ Rs 承認下で p0 へ委任された計器は **受入 (5)「mj_step = 0」**�
 - ⚠ **不在の等級（断定しない）**: 突き合わせの不在を閉じた検索で裏づけようとして **述語が汚染された** — **`0.040` は canonical の *指の開度* でもある**（`fing 0.040`）ため hit の大半が clip と無関係。⇒ **言えるのは「読んだ範囲（上記 2 件＋`task_config`＋canonical §1.2/§2.1）に突き合わせは無い」まで。⛔「repo のどこにも無い」は言わない。**
 - ⇒ ⭐ **記録された supersession が見つからない以上、既定は「deviation ID を与える」側**（p4 の D-2(d) 両値行が受け皿）。⛔ 裁定は p4。
 
+## 4j. 追記 2026-08-09 11:17 JST — **取付角は補角。mounting C-2 の 20° は Ry(70°)**（p0 の候補 (ii) を分離する材料・`m-p4-210`・挿入のみ）
+
+rev = **worktree**（dirty ゆえ明記。pinned tip は行が違う・引用は内容で引ける）。
+
+- **`ur15_cell_spec.py` は `TILT` を定義するだけで自分では使わない** — 出現は env 読み `:356` / 定義 `:374` / **別名** `:812 TILT_CAL_DEG` / **表示用の逆算 print** `:1232` のみ ⇒ **組み立てる側が自分で適用する**。
+- **参照実装（live driver）逐語**: `q = Rotation.from_euler("xyz", [0.0, **sign * TILT**, 0.0]).as_quat()` ／ 直前コメント逐語「**Back to `sign * TILT`, which the supplied cell confirms: its left base is Ry(-45 deg)**」。
+- **規約 = 補角**: `TILT = π/2 − radians(tilt_deg)` ⇒ **built 45° → 45°** ／ **mounting C-2 20° → 70°**。⚠ **tilt_deg が小さいほど回転は大きい。**
+- ⭐ **分離テスト**: 組み立てが `Ry(sign * TILT)`（C-2 で **±70°**）か `Ry(sign * radians(tilt_deg))`（**±20°**）か。後者なら **50° ずれ** ⇒ 「全 STEP・両候補で一様に前腕が柱の中、home だけ +80.1 mm 空く」という観測と形が合う。⛔ **機構の断定はしない** — 分離のための述語。
+- ⭐⭐ **positive control は既に在る**: **tilt_deg = 45 で左基部が `Ry(−45°)` に一致するか**（供給 cell 自身の値・driver のコメントが出所を名指す）。表示は `math.degrees(math.pi/2 - TILT)` の形が既にある ⇒ **artifact の print をこれに合わせれば読み手が補角を取り違えない**。
+
 ## 5. 権限の明示（形式の受理 ≠ 行為許可）
 
 - 本 file は **測定と回答**であり、**p0 の gate を私が反転させるものではない**。gate の運用は p18 の routing / chain の順序に従う。
