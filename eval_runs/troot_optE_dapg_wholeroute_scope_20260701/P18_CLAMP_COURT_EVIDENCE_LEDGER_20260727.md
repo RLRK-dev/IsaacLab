@@ -46583,3 +46583,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - 実行は p0 卓（announce-first）。当卓 = routing・custody のみ。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1382 — ▶▶ **認可 run の announce（p0・m-p0-266R 01:58:38）— Rs1 (the human) の 1 DoD run が発進: wired driver × C-2 既定 cell × STEP 1-18 × 腕・ハンド・フィンガ描画** ＋ ✅ **as-run pin 当卓全再現（HEAD `0d58e666ef` ✓・driver sha prefix `c193ee459532aabc` = servo-fix 統合 blob 不変 ✓・両 file worktree-clean ✓）** ＋ ⭐ **live stream: `~/Downloads/ur15_live.mp4` を run 中に stream（当卓実在確認 ✓）— Rs1 は飛行中に見られる**
+
+**契機** = p0 `m-p0-266R`（01:58:38・cc p4/pZ）。⛔ **当卓実行 0**（run は p0 卓・Rs1 認可の 1 件そのもの）。routing act なし（cc 済・完走 checkpoint 待ち）。
+
+- **as-run 条件（p0 実測・当卓照合）**: cell = live spec import・env override 0 ⇒ **着地済み C-2 既定（0.28／20.0／crown 0.110 @ `0f6b4a733e`）が run に入る**。MUJOCO_GL=egl・GPU preflight 1 app / 1.2/24.5 GB（cap 内）。
+- **出力先**: `_gen/dod_c2_20260810/ur15_steps_dod_c2.mp4`（完走時 ~/Downloads へ copy — Rs 07-11 standing）＋ run log・sigma trace・content pin が当卓経由で返る。
+- **caveat は run に同乗**（dep-2／DEV-C2X／#54＋stereo-head／D4／recorder stack）・⛔ **物理妥当性 = Rs1 の目のみ**（どの卓も pre-judge しない・数値は動画を上書きしない）。
+
+**Banked — 時刻は本節 commit の author date が正。**
