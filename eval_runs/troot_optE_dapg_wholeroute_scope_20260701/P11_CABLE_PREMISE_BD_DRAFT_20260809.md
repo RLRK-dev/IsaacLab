@@ -180,3 +180,18 @@
 
 ⚠ **ただし逆にも振らない**: 「`sc` という名の object が corpus のどこかで step される」≠「**行 X で書かれたその `sc`** が step される object と同一」。同名でも再代入されうる。⇒ ⭐ **裁定に使える粒度は file でも受け手名でもなく、他卓が route.py で示した「その block を読む」形**（40,000 回の探索 loop に `mj_step` が無い／wired では `:2388` の前に 4 回・後に 6 回 step が走る）。
 ⇒ ⛔ **私の側の帰結は 1 つだけ**: 「**46 件は scratch だから安全**」という読みは**支持されない**。⛔ 私は裁定しない・1 か所も触らない。
+
+## 8. 追記 2026-08-09 11:2x — **(b) の「Practice」文が、実際の駆動方法を言い切れていない**（clearance で候補を選んでいる）
+
+他卓が別件（instrument の乖離）で名指した機構を、**自分の court（control-method）として直読した**（tip `2fba2dfd67`・`ur15_steps_wired.py`）:
+- `:1209` `CLEARANCE_REPORT = {}   # per arm: (candidates the clearance removed, candidates kept, …`
+- `:1494` `near_far_arm = arm_pair_min(sc, t, "R" if t=="L" else "L", cutoff=ARM_DECIDE_CUTOFF)` ← **scratch model `sc` 上で評価**
+- `:1496-1499` `if near_far_arm is not None and near_far_arm < ARM_CLEARANCE: hit = True; _clear_dropped += 1; _by_clearance = True`
+⇒ ⭐ **現に採っている駆動方法は「grasp-drag ＋ 認可 pin」だけではない**: **IK 候補を生成 → scratch model 上で腕間クリアランスにより候補を却下 → 生き残った候補を駆動**、という**選択段**を含む。
+⇒ ⛔ **私の §5-4 (ii) の Practice 文は不完全**（「grasp-drag plus the authorized clip-retention pin」で止まっている）。**その文から実装すると、選択段の無い別の機械が出来る**。
+
+✅ **(ii) を差し替える（本節が正）**:
+> **(ii) Practice.** Horizontal routing through the staggered clips **is at present executed** by grasp-drag plus the authorized clip-retention pin (§0 #5), **with the arm poses chosen by a clearance-filtered candidate search** — IK candidates are evaluated on a scratch model and rejected when the inter-arm clearance falls below `ARM_CLEARANCE` (`ur15_steps_wired.py` @ `2fba2dfd67` `:1209`, `:1494`, `:1496`). **This is a chosen execution method, not a consequence of (i).** Whether a second bend DOF can carry routing curvature dynamically under drag is **not measured** and is not asserted here.
+
+⚠ **限界**: 私が読んだのは **選択段が在ること**まで。⛔ **その選択段が 43 step すべてで効いているか・どの step で候補を落としたか**は読んでいない（trace は他卓が引いた `T25_RUN_TRACE_20260728.txt` に在るが、私は引用せず自分で走らせもしていない）。
+⚠ **等級**: 契機は他卓の separation（誘発）。それが **(b) の Practice 文を不完全にしている**という接続は私。
