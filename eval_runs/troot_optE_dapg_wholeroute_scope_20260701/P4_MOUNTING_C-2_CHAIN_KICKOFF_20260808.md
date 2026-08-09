@@ -2023,3 +2023,19 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 3. ⚠ **私の 21:46 節と m-p4-243 の「p0 の一語 → 指名へ」は m-p18-257 時点の座標で stale だった** — hub が relay 段で修理（§1361 逐語「逐語で運ぶのは裁定、現在状態で運ぶのは辺 — stale-ask の再演を relay 段で捕獲」）。⭐ 教訓の受領: **nudge を書く時も、辺の座標は routing 済 message でなく hub の現在台帳から採る**（私は 19:04 節の自卓記録だけで座標を書いた）。
 4. **一語窓**: 21:47 まで両卓無語（hub 実測・私の nudge にも訂正語なし・p11 は 20:06 handoff で無語）→ p0 の pre-declaration により **沈黙 = 自由 iteration で実装**。私は今も訂正根拠を持たない。
 5. **私の待ち形（更新後）**: (A) = **指名（revision 名指し）**→ pZ leg → 表 → 消費読み 9 節 → 導出 → 4 編集 unlock。pZ hold = 指名まで不変・wired run = Rs1 認可のまま・Edge B 不変。動くものは p0 の自由 iteration のみ。
+
+---
+
+## 2026-08-09 22:51 — 一語 = **(ii)**（m-p18-259 の ask への Rs2 word: z は term-map・1.025 族は both-values — 第 2 値も banked 値の frame 換算・新設計なし）
+
+1. **受領**（m-p18-259・p18 → p4 + pZ）: Edge A checkpoint = p0 が自分の指名基準に到達し、自分の probe で revision を自ら不適格化（gate は止まる向きに発火 — 基準の言葉どおり）。finds (a) sentinel guard / (b) cell 再組立 = p0 所管。**(c) z datum = 私の word**。全 pin 自卓再現: p0 §8.43 @ `82a99c8dda`（+63/-0・probe `probe_geomdistance_exact_zero.py` 同 commit）・hub 台帳 1362 @ `0d2b91c496`（22:45:37・+14）。
+2. **照合（全て自卓 on-disk・file:line）**: `task_config.py:20` TABLE_HEIGHT=0.80／`:137` CABLE_RADIUS=0.004／`:226` GROOVE_CENTER_Z=TABLE+0.009（spec `:62` export・spec 自己検査 `:1175` が seat==GROOVE_CENTER_Z を assert）／`ur15_cell_spec.py:488-490` Z_HOME=+0.20・Z_RISE_ROUTE=+0.180・Z_RISE_REST=+0.230／`:458` REST_TOP=+0.150／`CANONICAL_MOTION_TABLE_V1.md:229` §3.2 M-6 doctrine「**z 世代差 = substrate 定数差、工程意味は保存**」＋ runner 註「route 降下 target = GROOVE_CENTER_Z+ee_off（動的）」／`:272` VN-2 = z_grasp **1.0668** = TABLE+CABLE_R+EE_TO_PINCH_CLOSED 0.2548+0.008（**Rs 02:26 informative CLOSE — 1.0668 で立つ**）／z 行群 `:43-58`（1.120 / 1.070 / 1.025 族）。hub 主張と全一致。
+3. **word = (ii)**。理由 = ①canonical 自身の doctrine（正体は工程意味・数字は世代定数 — verbatim 消費は表自身の意味論に反する）②spec export への anchoring（hand-restate は p0 find 2 が名指した drift 型そのもの）③1.025 族の both-values は **D-8 と同型**（DEV-C2X 同一乖離の z 射影に同じ remedy）。(i) は SD8 A/B としては生きる（下記 5）が消費表の datum にならない。(iii) は spec export の再導出 = 重複＋設計自導出（⛔ 自分の banked 規律「設計は自分で導出しない」）。
+4. **word の中身（4 点）**:
+   - (a) **hover/home 行 = term-map（意味で）**: 1.120 → Z_HOME／1.070 系 → Z_RISE_ROUTE（clip 間搬送）／saddle 帯越え行 → Z_RISE_REST。⛔ **offset 数字一致で map しない** — canonical の +0.150 は REST_TOP（`:458`）と数字が同じだが別量（同じ数字は同じ量でない）。term 帰属は design menu の語で決め、真に曖昧な行は both-values に落とす。
+   - (b) **1.025 族（把持/座り）= both-values**: v1 = verbatim 1.025（SD1-8 比較性）／v2 = **banked 値の pinch-site 換算** — 把持行 **0.812** = TABLE+CABLE_R+0.008（= VN-2 closed の 1.0668 − EE_TO_PINCH_CLOSED 0.2548・式の own terms での frame 換算・**新数字なし**）／座り行 **0.809** = GROOVE_CENTER_Z（runner の実 target・spec `:1175` assert と同値）。
+   - (c) **前提の明示**: v2 は **pinch-site world z**。計器の commanded site が pinch 点と別なら spec 自身の offset で換算（re-fit しない）。**深さの新設計はここに無い** — VN-2 は closed のまま（把持 v2 は closed 値そのもの）・深さ変更は設計 court（p5）＋Rs1。
+   - (d) **各行は使った z と constant 名を刻印**（both-values 行は両値とも）— 消費読みの provenance（i/n 刻印と同型）。
+5. **発効 = p0 の手順のまま**: SD8 は verbatim で A/B 完遂（fix 効果の isolation 設計を尊重・**preempt しない**）。word は p0 自身の順序で次 iteration から。
+6. **pZ note の継承（私の消費読み caveat #2）**: SD1-7 の「+0.0」cell = **attribution-unknown**（guard v2 まで sentinel 疑い・contact と読まない）。solutions bank（_gen/kinonly_solutions.json）は re-solve なしで再測可。17:21 節の saturation caveat と並置。
+7. **執行**: 一語を send_p18.sh で p18 へ（本節が面・message は path を運ぶ）。
