@@ -446,7 +446,7 @@ def main() -> int:
         qR, eR, uR, cR = solve_arm("R", tr)
         if qL is None or qR is None or eL >= TOL or eR >= TOL:
             print(f"| {row['step']} | {ref} | {label} | - | - | - | L{eL * 1000:.1f}/R{eR * 1000:.1f} | "
-                  f"{uL + uR} it | NOT SOLVED (budget) |")
+                  f"{uL + uR} it, pool L{len(cL)}/R{len(cR)} | NOT SOLVED (budget) |")
             return None
         # ⭐ Fix (a): choose AMONG reaching solutions by clearance.  Without this the row answers
         # "does the first reaching solution collide", never "does a clear one exist".
@@ -473,11 +473,19 @@ def main() -> int:
             if v is not None and (worst is None or v < worst):
                 worst, at, wp = v, f"{i}/{N}", pp
         place(qs)
-        verdict = "CLEAR" if all(x is None or x > 0 for x in (aa, ae, worst)) else "TOUCHING OR THROUGH"
+        # ⛔ Row provenance must be visible.  When the clearance filter admits nobody, the
+        # (cL or [qL]) fallback measures the best-REACH pose -- a DIFFERENT OBJECT from a
+        # clearance-selected pair, and the shakedown showed the two are indistinguishable on the
+        # printed row.  The pool counts go in the budget cell; a fallback row carries its reading.
+        fallback = (not cL) or (not cR)
+        clear = all(x is None or x > 0 for x in (aa, ae, worst))
+        verdict = ("CLEAR" if clear else "TOUCHING OR THROUGH") + (
+            " ⛔ pool empty: reach-only fallback measured -- read as NO CLEARANCE-PASSING POSE"
+            " WITHIN BUDGET" if fallback else "")
         along = gap_say(worst, wp) if worst is None else f"{worst * 1000:+.1f} at {at} ({wp})"
         print(f"| {row['step']} | {ref} | {label} | {gap_say(aa, pair)} | {gap_say(ae, pe)} | "
               f"{along} | L{eL * 1000:.1f}/R{eR * 1000:.1f} | "
-              f"{uL + uR} it | {verdict} |")
+              f"{uL + uR} it, pool L{len(cL)}/R{len(cR)} | {verdict} |")
         return qs
 
     prev = solved_q[1]
