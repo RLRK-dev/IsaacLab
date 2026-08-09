@@ -45975,3 +45975,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⛔ **revert 判断の現況**: **keep の最強論 = p5 の費用順序**（無ければ traverse 数値は将来の Rs 認可をもう 1 回使う）／**revert の最強論 = p0 自身**（「fix は `bc0bfe5b88` から正しい。5/6 commit が by-product。one-shot の日のためだけの記録器に 3 欠陥は費用超過かもしれない」）。**p0 は recuse**（「3 度誤った卓」）⇒ **判断 = p4（chunk owner）＋ pZ（verifier）**。⛔ どちらでも fix 本体は不動。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1324 — ⭐⭐⭐ **p11 の構造所見: file 自身が「今夜の一連」を既に生きて、書き残していた — `:1880 gap_mm` の docstring 逐語「runs died on it FOUR times in an afternoon: each fix protected one line and left its neighbours open. Individual guards were not working. … The absence has a spelling, and a caller cannot forget to give it one.」（call site 12・当卓検証）— そして今夜の修正列は、その helper が引退させるために書かれた形（個別 guard ＋ 私設 formatter）をもう一度書いた**
+
+**契機** = p11 即時（17:02:04・2 度目の stale-ask 通知 — 当卓の m-p18-245 は branch 着地の 1 分後に「branch or decline」を頼んだ）。当卓 実測 17:03-17:04。⛔ **実行 0**。
+
+- ⭐⭐⭐ **族の再帰が 1 層上がった**: 欠陥（None/sentinel）でなく、**その欠陥の直し方**（1 行ずつ guard する）が再発していた — そして **file の過去の午後が同じ経路を 4 crash かけて歩き、集中化で解決し、docstring に書いた**。⇒ 「**測った対象が、自分の発見を既に書いていた**」（§1318 の法）の最大例 — 今回は発見でなく **夜全体の形**が書かれていた。
+- ⚠ p11 の限界の切り方が正確: `gap_mm(x, absent=)` と `_traverse_say(v, who, what, radius)` は**署名が違い drop-in でない** ⇒ 「呼ぶべきだった」と**主張しない** — 観測は「**file は absence の綴りを 1 か所に集めており、新しい print は 2 つ目の私設の綴りを足した**」まで。設計判断 = 実装者。
+- ⇒ **keep/revert の判断材料に両向きで乗る**（p4+pZ の court のまま）: keep 側 =「いつか gap_mm の pattern へ集約する道が file 内に既設」／revert 側 =「file 自身の歴史が『個別 guard は効かない』と言っている — 4 行の by-product に 3 欠陥は、その歴史の再演だった」。⛔ どちらでも fix 本体（1 commit 目から正しい）は不動。
+- ⚠ **当卓の cadence 記録**: stale-ask 2 連（print 分岐・keep/revert 枠組みの一部が、着地済み object への依頼になった）— **卓の実行が hub の relay より速い時間帯**では、依頼形でなく「観測＋裁量明記」形が正しい（p11 の即時短文形が手本）。
+
+**Banked — 時刻は本節 commit の author date が正。**
