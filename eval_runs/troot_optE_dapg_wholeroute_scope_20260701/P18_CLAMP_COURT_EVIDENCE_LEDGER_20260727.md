@@ -46451,3 +46451,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **状態**: p0 = 凍結待機。次 = **pZ formal leg**（form は pZ の手元のまま — 事前登録 acceptance・R1-R5・PZ-197 規則）→ p4 消費読み（caveat 6 項）→ **4 編集 unlock**。wired run は着地後も Rs1 (the human) 認可のまま。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1369 — ✅✅✅ **pZ formal leg 完了（対象 = 指名 `120746a49b`・基準は own parent `4f3385968f` 比 — parent-relative の standing form どおり）: 4 clause 全 PASS 相当＋F1 = 1 token（数に触れない）＋ ⭐ 決定論 = 隔離 copy での full main() 再走が bank を **byte 同一** 再生成（差 = header interleave・copy path 2 個・pycache cold の compile 342 vs 341 — 差分まで名指しで説明）** ＋ ⛔→✅ **当卓の routing loop 欠陥を pZ の再依頼が露出: 先の artifact は 22:58 に bank 済（97ef054c09）だが、その disposition を書いた m-p18-261 の宛先に**発注元 pZ を含めなかった** — 一方向 relay が「still unbanked」の誤信を製造** ＋ ✅ **leg 報告を custodian bank（9dd5d3a318）**
+
+**契機** = pZ `PZ-198`（00:51）。当卓検証: 報告 sha `30a823c6b9…` ✓・101 行 ✓ → bank `9dd5d3a318`（+101）。canonical blob `5515bbafcd` ✓（当卓 hash-object 一致）・`task_config.py:93` 式 逐語 ✓。⛔ **実行 0**（pZ の走行 = 隔離 copy の再生成 = 計器の決定論検証・bundle 外の物理実行なし）。routing → m-p18-264（p4 operative・p0 F1・pZ 訂正込み disposition）。
+
+- **leg の中身（pZ custody・報告 file が正）**: freeze 確認（0 commit・worktree==blob）／(4)v2 driver-family-0（import 12 公表・family 名 0・実行能力 call 1 = cell.compile・Popen 2 は argv で library probe と同定）／(5)v2 **step-0 を 3 計器**（AST 0・run 自身の counter 0・**stand-in で wrapper が生きて数えることを証明** — 2/2 実 step 計数・qpos 動く = 「発火しない述語は検査でない」の control 付き）／m-p18-262 両 clause 実測（(i) base 除外 = L/R に NONE・crown は env 残存 +51.5 ／ (ii) 残余負は witness 整合 −0.647 mm = |fromto| 0.647）／再測 4/4 cell 一致（>=bound tag round-trip 含む）・最深 path cell −115.2 を**自前補間で再導出**・DEV-C2X 35.0 一致。
+- **F1（p0 の 1 token・非 blocking）**: counter の先例引用「:1644/:1819 @ 2fba2dfd67」は **revision が誤り** — 閉じた query で 2fba2dfd67 に 0・内容は**現 driver の :1644/:1819 に正確に在る**（行は正・revision token だけ違う — 今夜の p0 の逆向き同型: あちらは HEAD 内容に tip label・こちらは current 内容に tip label）。＋ cite drift 2 件（re_max :732・branch-pin :751-752）。
+- ⛔→✅ **当卓の教訓（routing loop の双方向則violated）**: 発注（PZ-197「banking を」）→ 執行（97ef054c09）→ **disposition は p0/p4 宛 message 内にのみ書かれ、発注元へ返らず** ⇒ pZ は 2 時間「unbanked」と信じ再依頼。protocol 明文「return the destination's disposition to the source pane — a one-way relay is incomplete」の違反実例が自卓で発生。**修正 = 執行 disposition は発注元を必ず宛先に含める**（m-p18-264 で訂正配達）。
+- **表の scope 通過（R1/R2 下）**: cable absent・path model（標本再導出済）・kept-zero 17 cell = 6.134% 残余 attribution-unknown。**chain の次 = Rs2 (=p4/CC) の消費読み**。
+
+**Banked — 時刻は本節 commit の author date が正。**
