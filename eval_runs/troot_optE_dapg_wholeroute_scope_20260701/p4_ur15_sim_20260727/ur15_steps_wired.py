@@ -2391,13 +2391,30 @@ for _t4 in SIDES:
     for _k4, _i4 in enumerate(AIDX[_t4]):
         d.ctrl[_i4] = HOME_POSE[_k4]
 mujoco.mj_forward(m, d)
+# ⚠ The diagnostic's clearances are ENDPOINTS.  The PD traverse between them is dynamic, so no
+# static check can say whether the arms pass clear on the way -- and a swinging traverse can pass
+# closer than either end.  The settle itself is the only thing that visits those configurations, so
+# it records its own running minimum.  ⛔ This is a by-product, not a gate: it reports, never blocks.
+_traverse_arm, _traverse_arm_who = 1e9, "-"
+_traverse_env, _traverse_env_who = 1e9, "-"
 for _s4 in range(int(SETTLE_S / m.opt.timestep)):
     mujoco.mj_step(m, d)
+    if _s4 % 10 == 0:
+        _v, _w = arm_pair_min(d, want_who=True)
+        if _v < _traverse_arm:
+            _traverse_arm, _traverse_arm_who = _v, _w
+        for _t6 in SIDES:
+            _v6, _w6 = column_gap(_t6, d, want_who=True)
+            if _v6 < _traverse_env:
+                _traverse_env, _traverse_env_who = _v6, f"{_t6}: {_w6}"
     if max(abs(d.qpos[_a5] - HOME_POSE[_k5])
            for _t5 in SIDES for _k5, _a5 in enumerate(QADR[_t5])) < SETTLE_TOL:
         break
 print(f"[steps] start pose = the cell's home, both arms, reached by servo in "
       f"{(_s4 + 1) * m.opt.timestep:.2f}s: {np.round(HOME_POSE, 4)}")
+print(f"[steps] settle traverse worst: arm<->arm {_traverse_arm * 1000:+.1f} mm "
+      f"({_traverse_arm_who}) | arm<->column {_traverse_env * 1000:+.1f} mm ({_traverse_env_who}) "
+      f"-- sampled every 10 steps over the traverse, endpoints included")
 # ⭐ Read AFTER the settle.  START must be the pose the arms REALIZED, never the one commanded --
 # every IK seed below inherits it, so a commanded value here would seed the solves with a pose the
 # arms were never in.
