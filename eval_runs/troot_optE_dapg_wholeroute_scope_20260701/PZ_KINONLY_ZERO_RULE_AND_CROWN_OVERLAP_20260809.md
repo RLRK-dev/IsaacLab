@@ -61,3 +61,24 @@ Command: `/home/rlrk/env_isaaclab7/bin/python probe_geomdistance_exact_zero.py` 
 ## 8. Provenance
 
 All measurements by pZ at this desk from `git show`, `sha256sum`, and `/home/rlrk/env_isaaclab7/bin/python` (stack pinned in the bank meta: newton 1.4.0 / mujoco 3.10.0 / mujoco-warp 3.10.0.3 / warp-lang 1.15.0). Zero modifications to tracked content by pZ; this file is a new untracked path. ⛔ pZ has no measured grant to commit (re-measured 2026-08-09 earlier this session: `Vault Write Permissions.md` @ `55dae1a15a`, `pZ|IMPL-VERIFIER` → 0 with non-discriminating control) — **written, not banked; banking requested of a custodian.**
+
+---
+
+## ADDENDUM 2026-08-10 00:54 JST (ruling A: appended, nothing above rewritten)
+
+Naming per m-p18-256: **Rs1 = the human; Rs2 = p4/CC.**
+
+### A1. The §5 attribution fork is DISCHARGED — both courts, one answer (m-p18-262, 23:11 JST)
+
+- p0's court, on the cell spec's own text (`:421-424` @ `2fba2dfd67`): rules landed as `d8badd92d3` — weld partition + one-joint ancestor-pair exclusion (ledger §1365).
+- Rs2 (=p4)'s design court, on the mounting SSOT's numbers (design spec `:84` crown top 1.550 ≥ mounts 1.530 = **+20 mm designed engagement**; mounts `[±YOKE_SPREAD, 0, 1.53]` `:69`; crown axis 1.440 / R 0.110 `:71-72`).
+- ⇒ The overlap is **designed attachment**; the build is innocent; the fork resolves to §5's option (b) — set selection. The −79.2182 depth is base-geom shape × capsule composition, **not a design parameter**.
+
+### A2. New reading rules R6/R7, from Rs2's scope clauses — pre-registered in m-p18-262's wake and since MEASURED
+
+- **R6**: the exclusion must take the form *fixed-base geoms leave the L/R clearance sets* — never *crown leaves env* (the crown is a real obstacle to moving links; head-borne mounting stands, spec `:56` family B rejected). **Measured at the nominated revision `120746a49b`** (my formal leg, `PZ_LEG_120746a49b_20260810.md` @ `9dd5d3a318`): `base_link_inertia` in L/R = NONE; crown ∈ env; groups 38/38/25; STEP 1 reads moving-link-vs-mount at +51.5.
+- **R7**: post-fix residual negatives that do not cross the attachment are **real signal**, never this discharged class. Measured: −0.647 mm pad↔table with a byte-consistent witness (|fromto| = 0.647 mm).
+
+### A3. Correction of my own false absence claim (PZ-198)
+
+PZ-198 said this artifact was *"still unbanked"*. **False**: it was banked at `97ef054c09` (2026-08-09 22:57:56, +63, single file; landed blob sha256 == §the-banking-request's `4597badc1a…` — verified EQ by me after m-p18-264). Two halves, named separately: the disposition was routed to p0/p4 and never to the requesting desk (p18's half, owned in m-p18-264); and I wrote an **absence claim from the memory of a missing confirmation instead of from the file's own history** (my half) — `git log -- <this file>` answers in one line, I had run that exact query four times that night on other desks' files and zero times on mine. The standing lesson (*an absence claim must be read, not relayed*) hit again in its smallest form, on my own artifact.
