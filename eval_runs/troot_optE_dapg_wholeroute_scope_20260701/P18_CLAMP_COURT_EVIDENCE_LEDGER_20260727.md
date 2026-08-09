@@ -46307,3 +46307,16 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - 5 機構（p0 の claim・同卓 run 史 = p0 custody）: pinch-site／real candidate diversity／clearance-at-generation／guarded hook／saturation→absent — 従前の full run はどれか 1 つ以上より古い。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1357 — ✅✅ **pZ が PZ-194 を全消費点で自ら閉じた（「限界を file した時と同じ可視性で discharge を言う」）— しかも p0 の (i) と in-flight 交差で独立合流（correlated assent の健全形: 2 卓・2 計器・同一結論・互いを読む前）** ＋ ⭐ **境界選択は style でなく強制と証明（真の 0.500 gap は saturation と byte 同一 ⇒ >= cutoff は absent しかない — 保守方向は under-claim）** ＋ ⚠ **latent 1 件 file: closest と gap_say の 0.5 は別々の literal（片方だけ動くと B5 が無音で再来）— 共有定数 1 個で閉じる・p0 裁量** ＋ ✅ **p6 register 完了（row 48/66・C3-C5 自己記録・c15236711e）**
+
+**契機** = pZ `PZ-196`（19:06）＋ p6 `m-p6-144`（19:06:22）。⛔ **当卓実行 0**（pZ の走行は自前 2 球 model のみ・p0 shakedown は bundle 内）。routing act なし（両者 cc 済・要るもの なし）。
+
+- **pZ の閉鎖（lane 自読）**: `a2762d2bb5` の comment は PZ-194 を pZ 自身の言葉で名指し。**8 caller 全数が None guard**（:363 gap_worst / :413 is-None-or / :460 both-sides / :463 ranking-key「never printed」/ :473 is-not-None / :476 all(x is None or x > 0)）— 「関数が None を返し始めて、比較したまま残った caller は 0」。B5 類も新 helper に不在（非既定 cutoff 呼出 = 0 ⇒ 印字半径 = 生成 query の半径、全所）。当卓 spot-check: `gap_say :306`・`gap_worst :313` 実在 ✓・両 signature が各自の `0.5` を持つ ✓（= latent 注記の構造根拠）。
+- ⭐ **強制境界の証明（pZ 自前 2 球再測）**: distmax 0.5 下で**真の gap 0.500 は 0.500000 を返し saturation と byte 同一** ⇒ API が実測と飽和を識別不能にする以上、`>= cutoff` は absent 側に落とすしかない — under-claim 方向の保守（実在の at-cutoff 読みを 1 つ捨てる代わりに、偽の読みを 1 つも通さない）。
+- ⭐ **PZ-194 の discharge を、限界を出した時と同じ可視性で宣言** — 「acceptance-(2) の対名 control が識別力を回復した」。（限界の file と discharge の宣言が同じ音量 — 札の非対称を作らない形。）
+- ⭐ **in-flight 交差 = 独立合流**: PZ-196 は「p0 の一言のため」に書かれ p0 の (i)（19:05:53）と交差。**両卓とも「landed fix = 正しさ充足・rbound = 速度のみ」** — pZ は lane 自読＋2 球 control＋8 caller walk、p0 は自分の announce 履歴。計器も著者も別で同一結論。
+- ⚠ **latent（finding でない・p0 裁量・期限なし）**: closest の `cutoff=0.5` と gap_say `:306` の `= 0.5` は**別 literal** — 片方だけ動くと B5（半径と label の乖離）が無音再来。共有定数 1 個で閉じる。0.102-vs-COLUMN_R と同類、と pZ 自身が分類。
+- **p6（`c15236711e` 当卓検証 2 files・19:06:03）**: row 48 = Edge B／row 66 = Edge A（`a2762d2bb5` を自卓で現物読み・「p0 一言 pending」は書いた瞬間の真 — p0 の (i) と同分交差・解決は cc 済 m-p0-257R が届ける）／C3-C5 node S4-B が**自分で**進められない列に記帳（理由 D1 未充足＋加速が届く唯一経路 = Edge A 経由）／MEMORY.md = PREPARE 維持 row 不要／snapshot 再生成 C3 OK・freshness 0。
+
+**Banked — 時刻は本節 commit の author date が正。**
