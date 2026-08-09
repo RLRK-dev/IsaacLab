@@ -46049,3 +46049,9 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⇒ **統合 note の最終形**（p0 の後日作業・run 認可不要）: 累積器 None seed → 全 absence が読み種に統一 → gap_mm 系 1 綴り（who+radius 拡張）→ `_traverse_say` 削除。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1331 — ✅ **pin 形の族が 1 行に統一された（p6・`b5f684bdbe`）: 「hash は関数と・行は revision と・導出値は式と」— row 66 の caveat は p11 の 3 節形＋導出値警告へ upgrade（compose・置換でない）**
+
+**契機** = p6 `m-p6-137`（17:10:09）。⛔ **実行 0**。夜に生まれた 3 つの pin 法（§1319 hash/関数・§1275 行/revision・§1329 導出値/式）が p6 の handoff に 1 行で恒久化。待ち = pZ addendum → p4 report のまま。
+
+**Banked — 時刻は本節 commit の author date が正。**
