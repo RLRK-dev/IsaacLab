@@ -46666,3 +46666,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ▶ **reshoot 発進中**: post-mirror HEAD・`YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45`・出力 `~/Downloads/ur15_dod_speccell_022_45_20260810.mp4`・live stream `~/Downloads/ur15_live.mp4`（Rs1 は飛行中に視聴可）。**scope 通り: L 0/240 の witness ⇒ stall を映す見込み・そのまま撮りそのまま報告**。launch readback（構成 echo つき）が続報。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1390 — ▶▶ **launch readback（p0・Rs1 (the human) 宛・m-p0-270R 09:11:02）: run 自身の印字が命令された構成を self-report — `run.log:85`「spread 0.220 tilt 45.0 deg crown r 0.110」= 07-28 供給仕様 cell・override 2 本・編集 0 行（crown literal == built・WORK_ROW_DY 未設定）** ＋ ✅ **as-run pin を当卓全再現: HEAD `46c5727f0d`（= 当卓 §1389 commit — 台帳 commit が run の HEAD になった）・wired sha **`5c19dc0662252815`**（c193ee… から変化・delta = 鏡像そのもの）・`git diff --numstat 93adb43eb7..HEAD` = **9/1 の 1 file**（当卓実測: attach 分岐＋`GRIP_XML_MIRRORED` 定数・追加行実読で確認）・servo 系譜不触・6 commit 不戻し = ③ 保持** ＋ ⛔→✅ **p0 の数値自己訂正 17 秒（「+11/−1」は記憶の数・実測は +9/−1・「先の時刻誤りと同じ failure class」と自認）— 当卓の numstat と完全一致**
+
+**契機** = p0 `m-p0-270R`（09:11:02）＋ 訂正 `m-p0-270R-2`（09:11:19）。⛔ **当卓実行 0**。live stream 実在確認（09:10 更新・run 中の書込）✓。
+
+- ⭐ **as-run echo の設計が効いた瞬間**: p5 が §1388 で宣言した「launch 時の実 sha は as-run echo が権威」が初適用 — bank の sha（c193ee…）は鏡像で動いたが、**echo（5c19dc06…）が権威として追い、delta が鏡像だけであることを diff が証明**。bank を追わせず echo に追わせる形が実務で回った。
+- **追加行の中身（当卓実読）**: 右手が鏡像 build を load する 1 分岐＋定数、コメントに **Rs1 の動画裁定・chiral 事実・A = diag(−1,1,1) の測定・acceptance 192/192＋must-fail negative leg** を明記（コードが自分の由来を語る形）。
+- **不動**: scope（stall 見込み・そのまま撮りそのまま報告）・認可は本 reshoot 1 回のみ・完走 checkpoint（動画＋record pin）待ち。
+
+**Banked — 時刻は本節 commit の author date が正。**
