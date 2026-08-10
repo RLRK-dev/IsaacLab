@@ -46676,3 +46676,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **不動**: scope（stall 見込み・そのまま撮りそのまま報告）・認可は本 reshoot 1 回のみ・完走 checkpoint（動画＋record pin）待ち。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1391 — ✅✅✅ **pZ 鏡像 leg 完了（`b7a5e39ecf`・own parent `453829041d` 比・banked 7 行 全 HOLD）— ⭐⭐ **事前に名指した唯一の transform 級判別子が、名指したとおりの値に変わった**: base body quat rot_z(−90) 両側 → 鏡像 asset は `0.70710678 0 0 0.70710678`（= +90）／left は `1 0 0 -1`（= −90）— 「鏡像が存在する前に書いた判別子」が実物で発火** ＋ ✅ **row 3（決定的・pZ 自前の file 級測定・p0 のでない）: 8 STL 全対で対称 Hausdorff = **0.000e+00**（191,118 verts / 63,706 triangles）・identity control 5.86 m で識別性あり・winding 保存。A も built mounts から独立導出 = diag(−1,1,1)・det −1・tilt 不変・**誤平面 control（y,z）は再現しない**。row 4 は隔離 copy で再現（TEST 192/192 worst 4.1e-5 mm・NEGATIVE 0/192 @ 135.4 mm）** ＋ ⛔ **finding (a) が最重要: 自分の登録した instrument が **vacuous** だった — 供給 URDF の gripper subtree は**それ自体が鏡像でない**（11 joint origin 全て x=0・0/11 が識別・左右 link が**同じ mesh file** を参照・唯一の rpy 差は腕の base mount）⇒ それに寄る leg は **11/11 PASS しながら何も測らない**。真の鏡像源 = built mounts（= p0 が使った物）** ＋ ⭐ **pin の法が完成形で言語化（pZ 自認）:「hash は function **と** commit の両方が要る — 両方あれば履歴に老いる、function だけなら**誤った指示に老いる**」（自分の `8fae5334` を名指しで撤回・当卓 m-p18-276 の pin 形を反例として引用）** ＋ ✅ **2 artifact bank（`717eb6aa2f`: 鏡像 verdict 56 行 sha `60ccffe726…`／旧 verdict へ第 3 addendum +8 行 → 199 行 sha `b1bf7aa39b…`）**
+
+**契機** = pZ `PZ-204`（09:19）。当卓検証: 両 sha ✓・両行数 ✓・bank 1 commit 2 file（64 insertions・**旧 verdict は上書きでなく追記** ✓ = ruling A 形）。⛔ **当卓実行 0**（pZ の走行 = 隔離 copy・p0 の `_gen` を上書きしない設計）。
+
+- **correlated assent の回避が明示的**: row 4 は p0 の instrument を**監査してから**採用（分母 192 を自分で再導出 = 32 geom を自分で数え 24 mesh + 8 box・degenerate 分岐が 0/32・stand-in 定数が driver と一致（SIDE_SIGN == spec:485）)。**境界も名指し**: acceptance は **stand-in** を建てるので **全 cell 合成は両卓とも未測**（driver import 禁止ゆえここでは測れない）。
+- **honest scope**: 8 mesh 中 3 つは x 対称ゆえ row 3 はそこでは自明に真 — **識別しているのは 5 つ**（全称を最弱の元で示す、の実践）。
+- **(b)**: 自分の prereg の comparator が **p0 が誤測した当のもの**（辞書順 sorted-set）— 測る前に対称 Hausdorff へ差し替え済（同じ罠に 2 卓が別々に入り、片方は事前に出た）。
+- **系列の実測**: `8fae5334`（pZ・"current" と label）→ `c193ee4595` @ `93adb43eb7` → 現 `5c19dc0662` @ `b7a5e39ecf`。⚠ **順序 note**: p0 の announce 未着時に測定（object は不変ゆえ測定は有効・別 object を名指すなら再走、と pZ が自ら条件化）。
+
+**Banked — 時刻は本節 commit の author date が正。**
