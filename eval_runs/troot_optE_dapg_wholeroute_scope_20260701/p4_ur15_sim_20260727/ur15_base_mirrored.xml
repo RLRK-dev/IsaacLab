@@ -13,7 +13,7 @@
        ⚠ Scope: that evidence is anchored to the 0.22/45 mounting the reference publishes
        positions for; no position-vs-reference evidence exists or can exist at the C-2 mounting
        (the reference publishes none there).  The local mirror A = diag(-1,1,1) is mounting-
-       independent (measured tilt-invariant).  A first header of this file said "eight poses" --
+       independent (measured tilt-invariant).  A first header of this file said "eight poses" —
        a relayed number adopted unmeasured; the corrected count above was read from the record
        itself.
        The mirrored ko hand asset (_ur15_2f85_koshape_actuated_mirrored.xml) rides on the B side;
