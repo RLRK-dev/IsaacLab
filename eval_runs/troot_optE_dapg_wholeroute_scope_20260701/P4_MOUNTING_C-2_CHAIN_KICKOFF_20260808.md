@@ -2191,3 +2191,13 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
    - **run 前半は成立**: servo 到達 home（1.07s・qpos 書込なし系譜）→ cable settle（ncon=25・drop 2.3mm）→ 把持測定（L=cab27/R=cab32）まで record にあり。depth-audit の guard 群（floor 1/2・ghost 2/miss 0・channels 被覆表）も全て「測った射程」を自己申告する形で出力されている。
    - **disposition**: stall の解消は本 record の消費では扱わない（設計 court の将来 work — mast 帯を跨ぐ経路設計。C-2 既定は不変・reshoot 命令は built cell 側・couple しない）。DoD としては Rs1 の目の verdict（構成 stale）が先行して立っており、**本 record は「C-2 cell での試行 #1 = STEP2 L stall・gate 正常」として bank**。
 4. 契約の注記: m-p18-274 級の record relay は当卓に未着（record は on-disk artifact から直接消費 — artifact-first の形・hub 台帳 `79e854645c`/`7aca4f9f8d` が custody を持つ）。
+
+---
+
+## 2026-08-10 09:21 — mirror の等号受入 = **MATCH**（鏡像 impl chain CLOSE・reshoot は post-mirror HEAD で走行中 = 私の call 採用形）
+
+1. **等号（自測 09:21:43）**: 着地 blob（`git show b7a5e39ecf:…/ur15_steps_wired.py`）sha256 = **`5c19dc0662252815b02fc8b784eb8e25e5725e3a9243077f490f2169f0869d48`** == worktree 自読 == hub 実測（m-p18-277）== pZ leg。**MATCH**。
+2. **着地物の全形（commit 自読で解消した 1 点込み）**: `b7a5e39ecf`「Mirror the right hand: baked ko asset, measured local mirror」= **新 asset `_ur15_2f85_koshape_actuated_mirrored.xml`（205 行）＋ baked STL 8 本（`ko_mirror_meshes/`・winding 反転）＋ driver +9/-1（attach 分岐 + `GRIP_XML_MIRRORED` 定数）**。⚠ hub の「1 file +9/-1」は driver 分の delta — commit 全体は asset+mesh を含む（自読で確定・矛盾ではなく粒度）。方法 = **built mounts から鏡映 A = diag(-1,1,1) を実測**（pose 独立性・det −1・signed permutation 検査つき）→ pos→Ap／quat→ARA／axis→−Aa・**ctrl 意味論 byte 同一（1 指令で両手が閉じる）**。受入 probe = 192/192（2 arm pose × 3 finger 状態）＋ **must-fail 負脚 135mm = 撮られた欠陥そのもの**＋ Hausdorff 0（5,088 verts）。
+3. **pZ 独立 leg 消費**（verdict @ `717eb6aa2f`・56 行・sha `60ccffe726…`）: 変換級判別子（base quat rot_z(−90)/+90）を **mirror 実装前に登録**し、着地 asset が正確に一致／8 STL 対の対称 Hausdorff 0.000e+00（191,118 verts・identity control 5.86m）／⭐ **finding: 提示 URDF の gripper subtree は鏡像計器として VACUOUS**（全 origin x=0・両手同一 mesh 参照）— 実の鏡像源 = built mounts = p0 の方法選択が load-bearing。**carried scope**: 全 cell 合成は両卓とも未測（stand-in 受入）・8 mesh 中 3 は x 対称（判別は 5 本上）。
+4. **word = ACCEPTED — mirror impl chain = CLOSED**。pin 法則を採用（pZ の言・自分の stale pin を名指しで退役させた形）: 「**hash は FUNCTION と COMMIT を連れて初めて歴史に老いる — function だけなら誤指示に老いる**」。系譜 = `8fae5334`（"current" 表記のまま stale 化）→ `c193ee4595` @ `93adb43eb7` → **`5c19dc0662` @ `b7a5e39ecf`**。
+5. 状態: **reshoot（Rs1 ② 認可・built 0.22/45 override・出力 `ur15_dod_speccell_022_45_20260810.mp4`）が post-mirror HEAD で唯一走行中**。他は不動。私 = reshoot の returns 待ち（動画 → Rs1 の目・record → 当卓消費）。
