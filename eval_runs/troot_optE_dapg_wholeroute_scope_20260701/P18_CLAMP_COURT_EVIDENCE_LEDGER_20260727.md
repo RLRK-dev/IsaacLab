@@ -46778,5 +46778,16 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⭐ **今日 2 度目の「認可の条件化」**: 07-21 系の「認可 = 行為の解錠であって話題の解錠でない」に加え、**「認可 = 存在するが条件未達」**という第 3 の状態を明示的に運んだ（発火日でなく**発火条件**で書く — 日付で書くと条件が消える）。
 - **standing order の継続**: 「先祖返りはするな」・stall なら**そのまま撮りそのまま報告**。
 - **typo の扱い**: 「よう」→「用」は p4 が**解釈と明記**して運んだ（黙って正規化しない・§Pane Message Routing Protocol の逐語 relay と解釈の区別）。
+- ⚠ **訂正（§1401・in-place）**: 本節 §1398 由来で当卓が p6 へ送った「8 poses」は**当卓の誤り** — 実測 **24 poses / 48 pairs per leg × 4 legs**。原因 = `head -20` の部分読みから分母を取った。詳細・moved scope は §1401。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1401 — ⛔⛔ **当卓の分母誤り（pZ が着地前に捕獲）: p6 へ送った「8 poses」は **`head -20` の部分読みで見えた 8 行を分母として報告**したもの — 実測 **24 poses × 2 量 = 48 pairs / leg・4 legs**（record 自身が `:37`/`:65`/`:93` で「48/48 position pairs land within 1.0 mm (worst 0.0076 mm at main_route_high)」と言い・negative leg は 628–1018 mm で外す・当卓再測 ✓）。⭐ **今夜ずっと他卓に対して bank してきた失敗形（部分読みの分母）を、当卓が register に載せる寸前でやった**** ＋ ⭐⭐⭐ **pZ の finding が scope 自体を動かした（誤りより重い）: **07-29 の証拠は cell がもう持っていない mounting に錨づけられている** — 計器は mounting を `ur15_cell_spec:47` から **live import** する一方、Rs1 (the human) の reference は**建った mounting** の位置を publish。pZ の隔離再走: **今日の C-2 既定（0.28/20）では 4 leg 全部が 0/48 — control も 241 mm で落ちる ⇒ FAIL と読める**／C-2 row-7 の override（0.22/45）では **banked record を byte 同一再現**（48/48・negative は 0/48 のまま）。⇒ ⛔ **この FAIL は鏡像の欠陥でない — 「私の mounting は reference を再現するか」を問う **control が落ちた**のであって、落ちるべき所が落ちた*** ＋ ⭐ **副産物 2: (i) その control が**初めて落ちるところを見られた** ⇒ 宣言された判別子でなく**実証された判別子**になった (ii) 今朝当卓が検証した **C-2 row 7（override 優先順位）が、07-29 証拠を今日なお再現可能にしている***
+
+**契機** = pZ `PZ-206`（09:55）。当卓検証: pose 数実測 ✓・prereg sha `ef1d78465f…`／56 行 ✓ → bank `388f9892a9`。routing → m-p18-281（p6 = 訂正 row・p4・p0/pZ cc・**p6 の row 着地前に発射**）。⛔ **実行 0**。
+
+- **register が運ぶべき正形（当卓が p6 へ送った文）**: 「腕 mirror は **0.22/45 mounting で測ってある**（24 poses / 48 pairs per leg・4 legs・誤差 0.0023–0.0076 mm / bar 1.0 mm・negative 0/48・Rs1 供給 reference 対）／**C-2 mounting では position-vs-reference 証拠は存在せず、存在し得ない**（Rs1 の reference がそこの位置を publish していない）／別途欠けるのは**独立レグ**（pZ が事前登録済）」。
+- ⭐ **controller leg の述語を pZ が命令空間で切り分け（当卓が p4 へ差し戻し）**: 「同一 command 系列で L/R 鏡像軌道」は **joint 空間なら真**（07-29 test leg の形そのもの）・**task 空間では偽**（鏡像運動には鏡像目標が要る ⇒ **同一 task 目標は正しい controller を落とす**）。⇒ 述語は空間ごとに書く（pZ の court）。
+- **sizing の根拠も測定**: 07-29 acceptance（`38678f5946`）から HEAD まで対象 object 群は **0 commit** ⇒ from-scratch は動いていない物を測り直すだけ・**audit＋独立再導出**が正しい大きさ。
 
 **Banked — 時刻は本節 commit の author date が正。**
