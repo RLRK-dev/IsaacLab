@@ -36,6 +36,7 @@ from scipy.spatial.transform import Rotation  # noqa: E402
 S = Path(__file__).resolve().parent / "_gen"
 S.mkdir(parents=True, exist_ok=True)
 GRIP_XML = "/home/rlrk/IsaacLab/thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml"
+GRIP_XML_MIRRORED = str(Path(__file__).resolve().parent / "_ur15_2f85_koshape_actuated_mirrored.xml")
 OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "/home/rlrk/Downloads/ur15_steps.mp4")
 
 # --- every cell constant comes from one module (p5 spec §0 / §6) ---
@@ -303,7 +304,14 @@ for tag, sign in SIDES.items():
     f = column.add_frame(pos=[sign * YOKE_SPREAD, 0.0, SHOULDER_HEIGHT], quat=[float(q[3]), float(q[0]), float(q[1]), float(q[2])])
     _a = arm_spec(tag)
     f.attach_body(_a.bodies[1], f"{tag}_", "")
-    g = mujoco.MjSpec.from_file(GRIP_XML)
+    # ⭐ The RIGHT hand loads the mirrored build, exactly as the arm does two lines up.  Rs1 (the
+    # human)'s video verdict 2026-08-10 named it: one left-hand MJCF on both wrists makes the
+    # right hand a rotated copy, and a chiral ko claw carried by any rotation stays one -- the
+    # arm ruling's own fact (a sign flip does not make a mirror).  The mirrored asset is baked by
+    # make_ko_mirror.py from the authoritative left asset (local mirror A = diag(-1,1,1),
+    # MEASURED on the built mounts, pose-independence checked); acceptance =
+    # ur15_gripper_mirror_acceptance.py, 192/192 geom-instances with a must-fail negative leg.
+    g = mujoco.MjSpec.from_file(GRIP_XML if tag == "L" else GRIP_XML_MIRRORED)
     Rt = Rotation.from_euler("xyz", [0, -np.pi / 2, -np.pi / 2]) * Rotation.from_euler("xyz", [np.pi / 2, 0, np.pi / 2])
     qt_ = Rt.as_quat()
     wf = cell.body(f"{tag}_wrist_3_link").add_frame(pos=[0, 0, 0], quat=[float(qt_[3]), float(qt_[0]), float(qt_[1]), float(qt_[2])])
