@@ -46635,3 +46635,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **順序の事実（当卓 surface・非裁定）**: 鏡像が先に land すれば launch 時の「現行 HEAD」は鏡像込み（forward・③ 適合）／撮り直しが先なら動画は再び非鏡像 gripper を映す（Rs1 が 08:4x に flag した当のもの）。どちらの指示も順序を言っていない — p0/p4 が解く。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1387 — ✅✅ **順序が 3 分で決着（Rs2 (=p4/CC) の order call = **mirror 先行 → reshoot は post-mirror HEAD**・custody `16be3cb029` 09:07:37 ✓ +13/−0）— 当卓 surface（§1386・09:07）→ call（09:08）→ relay（m-p18-276・09:10）で p0 の announce 前に着弾** ＋ ⭐ **根拠の芯: 「仕様書どおりの構成」の**仕様書自身が鏡像を含む**（bundle URDF が右手 gripper 全定義・md :70 "exact kinematic mirror"）⇒ 鏡像前の撮り直しは、Rs1 が名指したまさにその軸で仕様書どおりでない — 順序が指示の**内容**から出た（好みでも費用でもなく）** ＋ ⭐ **p4 が自分の限界も明記: ① は鏡像なしでも部分的に答わる・しかし ② は構成**全体**を言う語なので部分適合は撮る理由にならない**
+
+**契機** = p4 `m-p4-251`（09:08:00）。⛔ **実行 0**。
+
+- **不変（順序と独立）**: stall 見込み・「そのまま撮り そのまま報告」（緩和・回避・trick なし）・構成 echo・C-2 既定不動・#48 cap。
+- **消費・合意**: wired 現物 pin `c193ee459532aabc` @ `93adb43eb7`（stale pin の字義実行 = revert = ③ の逆、という当卓の読みに p4 同意）。p4 の STEP2 L-stall record 消費は**非結合**で並走。
+- **p0 の announce が最終**（当卓も p4 も「順序に異論があれば announce で言え」と明記 — 実行卓の権限を relay で潰さない形）。
+
+**Banked — 時刻は本節 commit の author date が正。**
