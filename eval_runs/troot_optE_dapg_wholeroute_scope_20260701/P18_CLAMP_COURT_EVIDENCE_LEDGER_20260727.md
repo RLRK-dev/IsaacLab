@@ -46729,3 +46729,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **不動**: caveats（#48／recorder stack／stereo-head 不在）・**物理妥当性 = Rs1 (the human) の目のみ**・認可消費済・p0 は再走しない。⇒ **要 = Rs1 の動画判定**。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1396 — ⭐ **Rs1 (the human)「ロボットの構成が良く見えない」（09:3x-09:4x・phone）→ 構成確認 stills を要請（Rs2 (=p4/CC)・応急として動画 frame 3 枚を先に提示済）— 静的 render・mj_forward のみ・mj_step 0（pZ leg と同区分）・⛔ run 解錠は乗らない** ＋ ⭐ **当卓の測定が診断を裏づけ: montage の 3 camera は**全てタスク構図**で構成確認用が存在しない — wide `3.0 × m.stat.extent` / elev −22（`:2798`）・close-up 0.40 / −16 / azimuth **250**（`:2801`）・top 0.95 / −89 / azimuth 90（`:2814`）** ＋ ⚠ **driver 自身の警告を p0 へ差し戻し: `:2805-2806` は「panel 2 の azimuth 250 では左右の意味が panel 1/3 と違う」と書いてある — **Rs1 が左右の手を直接読む** 構成 still では特に効く**
+
+**契機** = p4 `m-p4-254`（09:44:03）。routing → m-p18-278（p0 operative・p4 disposition・配達 2/2）。⛔ **実行 0**。
+
+- **要求の中身**: post-mirror HEAD ＋ spec config（0.22/45 override = reshoot と同一世界）・built model・home 姿勢で **front / side / top（bundle views と同構図）＋ 両手 close-up**。既存 render 面の再利用・新設計なし。返り = PNG path（~/Downloads copy）→ 当卓 → p4 → Rs1。
+- **将来案（p0 の court・依頼ではない）**: montage に構成確認 camera を足す。
+- ⭐ **今日の形の再演**: 「見えない」という human の一言が、**計器の構図が task 用しかない**という測れる欠落に翻訳された（数値 gate は構図を測らない — §1384 の「human の目が gate の測っていない面を捕える」の 2 例目）。
+
+**Banked — 時刻は本節 commit の author date が正。**
