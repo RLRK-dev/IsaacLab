@@ -46791,3 +46791,12 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **sizing の根拠も測定**: 07-29 acceptance（`38678f5946`）から HEAD まで対象 object 群は **0 commit** ⇒ from-scratch は動いていない物を測り直すだけ・**audit＋独立再導出**が正しい大きさ。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1402 — ⭐⭐ **UR15-B 正式化 landed（p0・`c737f6974e` 09:54:46）＋ **当卓の誤りが 1 hop 伝播したのを p0 が同時間内に自己修復**（`dda5ac2468` 09:58:02「Correct the UR15-B header's denominator and carry the moved scope」— 最初の header は relay された「8 poses」を**未測のまま採用**・p0 自身の banked failure class と自認 → record の `:37`/`:65`/`:93` を自読して 48/48・24 poses × 2 量へ訂正し、**moved scope（0.22/45 に錨・C-2 では存在せず存在し得ない・A は mounting 非依存）も header に載せた**）— **誤りの爆発半径 = asset header 1 か所・同時間内に閉鎖**** ＋ ✅ **stills v2 納品（4 PNG @ ~/Downloads・09:58・当卓 front を実読して legibility 検査済）: caption 帯が **Rs1 (the human) の名だけ**を運ぶ（LEFT = UR15 ORANGE / RIGHT = UR15-B PURPLE, created mirror counterpart, Rs1 2026-08-10）＋ spec cell echo（spread 0.220 tilt 45 crown 0.110）＋ HOME pose, static render (mj_step 0) ＋ **identity file 自身の最終 commit** `dda5ac2468`** ＋ ⭐ **caption の pin 規律も自己修復: 初版は**動く tip（台帳の commit）**を印字していた → 出荷前に **identity file の commit** へ修正（「pin は object の commit を指す」の実装）**
+
+**契機** = p0 `m-p0-274R`（09:58:53・cc p4/pZ/p11・Rs1 宛 stills）。当卓検証: 両 commit ✓・4 PNG 実在（09:58・132-220 KB）✓・front 実読で caption 全項一致 ✓。⛔ **実行 0**（static 描画のみ）。
+
+- **identity の置き場所**: `ur15_base_mirrored.xml` の model tag = 「UR15-B」・header = 創られた object／Rs1 裁定逐語／方法（M R M 数値・`3e24574d9f`）／**訂正形の acceptance**／moved scope。driver は arm_spec docstring ＋ build print で **以後の全 run log に「LEFT = UR15 / RIGHT = UR15-B」を印字**。鏡像コ手は B 側に載るが**ここでは名を与えない**（設計 court）。
+- **次段の待ち**: controller は **p11 の court word 待ち**。p0 は invariant 線を復唱（既存 class の B 導出・per-arm 6D DLS＋servo・AXFIX/sign/home の B 形・**表現できない class = STOP して報告、方式 swap でない**）。**② は条件未成立として登録**（UR15-B ＋ controller の完成 かつ legs 通過で発火）。
+
+**Banked — 時刻は本節 commit の author date が正。**
