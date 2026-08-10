@@ -46614,3 +46614,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⛔ **再 run は解錠しない**（Rs1 の一語が別途要る — 認可は 1 run 型で消費済）。STEP2 L stall record の消費は鏡像修正と**併走**（独立面）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1385 — ✅ **鏡像実装の announce（p0・m-p0-268R）— 方法 = 腕鏡像の landed 法そのもの・「平面は測って導出、推論しない」** ＋ ✅ **機構を source で確認・当卓逐語再現: ko asset は vendor の z-π 回転 trick で両指が mesh を共有（`left_driver quat="0 0 0 1"` @ asset `:110` — 実 path = driver `:38` の GRIP_XML が指す `thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/`）— chiral な コ爪は回転では鏡像にならない（腕の banked 裁定と同一事実）** ＋ ⭐ **前例 = `3e24574d9f`（07-28「Put the mirrored arm on the right side」当卓確認 ✓）— 腕は治療済・gripper だけ未治療、が今夜の実装の全て**
+
+**契機** = p0 `m-p0-268R`（09:00:11・cc p4/pZ）。⛔ **実行 0**（acceptance probe も mj_forward のみ・mj_step 0 と宣言）。routing act なし（cc 済・着地 checkpoint 待ち）。
+
+- **計画（前例形・5 段）**: (a) gripper-local 鏡像 **A = Rt⁻¹ T_R⁻¹ M T_L Rt を built cell 上で数値導出**（M = world x-反射・T_L/T_R = 鏡像化済み腕が等関節値で届ける wrist frame）＋ **A の姿勢非依存性を第 2 腕姿勢で測る control** (b) 鏡像 mesh を bake（v → Av・winding 反転）→ `ko_mirror_meshes/`（`ur15_mirror_meshes/` の隣・同じ置き方）(c) `_..._mirrored.xml` を emit — pos → Ap・quat → ARA・joint 軸 → −Aa で **range/springref/tendon 係数は byte 同一**（値意味論保存: 1 つの ctrl が両手を閉じる）・tendon/equality/actuator/contact 構造不変 (d) driver の attach に 1 分岐（arm_spec 自身の形を鏡映）(e) **p0 自前 acceptance probe を pZ leg の前に**: open/half/close × 2 腕姿勢で全 Rg geom の world pose == M∘(Lg geom world pose)・分母つき file 出力（ur15_mirror_acceptance.py の形）。
+- **面の限定**: 新 file 群＋ wired への **attach 1 分岐のみ**。authoritative ko asset は**読むだけ・編集しない**・servo 系譜不触・⛔ run なし。
+- ⭐ 方法の質: 鏡像平面を「x=0 のはず」と**推論せず**、built cell の実 frame から**数値導出**し、姿勢非依存性まで control で測る — 「同じ定数は同じ measurement surface でない」系の予防が設計に内蔵されている。
+
+**Banked — 時刻は本節 commit の author date が正。**
