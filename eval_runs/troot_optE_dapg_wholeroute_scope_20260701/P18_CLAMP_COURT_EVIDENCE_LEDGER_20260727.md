@@ -46750,3 +46750,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - PNG sha 4 件・renderer sha は p0 message が正（当卓は 2 件 spot 照合）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1398 — ⭐⭐⭐ **Rs1 (the human) の premise＋命名裁定（09:4x・p4 pane 直答・逐語）「UR15とは鏡像関係にあるものを新たに作成しUR15-Bとせよ」— cell 構成 = 左 UR15 ／ 右 **UR15-B**。Rs2 (=p4/CC) の「同一 hardware へ戻すか」の疑義は**第 3 の道**で解決（鏡像対応物を**創られた名前つき設計 object** にする）・09:47 節の復元方向は SUPERSEDED** ＋ ⛔→✅ **当卓の測定訂正（relay を平らに運ばない）: p4 の「腕 mirror の同 grade 検証は未実施」は**不在主張として偽** — `UR15_MIRROR_ACCEPTANCE_20260729.txt` が実在し、**Rs1 自身が供給した reference cell**（`~/Downloads/ur15-dual-arm-cell/ur15-dual-arm-cell.json`）に対し 8 姿勢・tool0/grip 誤差 **0.0023–0.0076 mm**（bar 1.0 mm）・**LEG control（stock 腕を左 mount で）**・grip offset は再入力でなく求解、で測ってある。⇒ 欠けているのは**測定でなく独立性**（p0 自前計器・pZ 未監査・pin/parent-relative 規律より前）— **audit ＋ 独立再導出**という別（かつ小さい）仕事として pZ に size を求めた** ＋ ⭐ **命名規律の明文: UR15-B は Rs1 の名・鏡像コ手 asset の名は設計 court の管轄 — **当卓も p0 も名を作らない*** ＋ ⭐ **stills の順序を中立化: p0 の 4 PNG は本裁定の 1 分前に着地 — 破棄でなく「09:49 時点の build の真正な記録」・p4 が望むのは正式化後の**再** render**
+
+**契機** = p4 `m-p4-255`（09:50:41）。custody = kickoff `:09:49` 節 @ `e00a990c45`（09:50:06「Record the UR15-B ruling: the mirror becomes a named creation」+9/−0 ✓）。routing → m-p18-279（p0 実装・pZ 腕級 leg・p6 register・p4 訂正・配達 4 卓）。⛔ **実行 0**。
+
+- **chain（p4 設計）**: ① p0 = UR15-B 正式化（既存 mirrored 腕 build を identity へ・naming/provenance/asset 面・announce-first）② pZ = 腕級 mirror 検証 leg（parent-relative）→ p4 等号着地 ③ 構成 stills は正式化後の build で再 render ④ spec 面 = premise 級ゆえ p6 起票＋04-Specs は ITEM5 形（Rs1 認可 landing）。
+- ⛔ **run 解錠は乗らない** — 再撮は Rs1 の新しい一語。
+- **法（当卓の自戒として）**: 他卓の「未実施」を relay する前に**その面を開く** — 今回は開いて偽と分かり、**正しい形（独立性の欠如）に翻訳**して届けた。不在主張は relay しても自分の主張になる。
+
+**Banked — 時刻は本節 commit の author date が正。**
