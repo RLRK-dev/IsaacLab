@@ -46718,3 +46718,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - session 内 push 通算 7 回・すべて Rs1 の一言。⚠ 走行中の reshoot の成果物（動画・run.log）は untracked ゆえ本 push に含まれない（`_gen` は git 管理外の consumption 面 — 完走 checkpoint の content-pin が権威）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1395 — ⛔▶ **撮り直しは予告どおり stall を撮った（同じ gate・STEP 2・左腕）— 命令された仕様 cell（`spread 0.220 tilt 45.0 crown r 0.110`・run.log `:85` 当卓逐語 ✓）で、鏡像化された両手が画面に入った状態で。緩和なし・as-is** ＋ ✅ **証拠 pin 当卓全再現（film sha `ae84c0f486…`・run.log sha `a1ad9a2a8b…`・~/Downloads の保全 copy 2,474,934 bytes @ 09:25 ✓・STEP1 L 270.2 mm / R 2.1 mm を :95/:100 で逐語 ✓）** ＋ ⭐ **名前の正直さ: 命令された file 名は完走時にしか書かれない（stall が阻んだ）⇒ **`ur15_dod_speccell_022_45_stall_20260810.mp4`** と stall を名に入れて保存 — 命令された名を、産まれていない object に貼らなかった** ＋ ⭐ **並置（判定でなく事実）: C-2 run = L 658.5 mm 外し／spec cell run = L 270.2 mm 外し — **両方とも左腕が start station に届かず servo gate が発火**・witness 表は撮影前に「この cell の L clear = 0/240」と言っていた**
+
+**契機** = p0 `m-p0-271R`（09:26:24・cc p4/p5・Rs1 宛）。⛔ **実行 0**。記録 dir = `_gen/reshoot_speccell_20260810/`（当卓 find で特定・両 sha 一致）。
+
+- ⭐ **`:85` の行が自分で caveat を運んでいた**（当卓実読）: 「88mm-SPAN INTERLEAVE: arms closest +0.0 mm … ⚠ **commanded span, not the links actually held**」— 構成 echo と「命令された span ≠ 実際に保持された link」の但し書きが同じ行に同居。**測っていない量を測ったふりにしない**設計が、まさに stall の run で効いている。
+- **stall 時の数値（record が正）**: STEP2 L 10560/10560 tick 押し戻し 0.0%・R 38.0%（:358-359）・mast L −0.8 mm INSIDE（forearm vs crown）・arm-to-arm **+72.7 mm**（:360/:363 — C-2 run の −1.1 mm から符号が変わった: 腕間は開いたが**柱との干渉**が残る）・gate 逐語 :374。
+- **as-run pins**: HEAD `46c5727f0d`・wired `5c19dc0662252815` @ `b7a5e39ecf` 系譜（launch readback と同一）。
+- **不動**: caveats（#48／recorder stack／stereo-head 不在）・**物理妥当性 = Rs1 (the human) の目のみ**・認可消費済・p0 は再走しない。⇒ **要 = Rs1 の動画判定**。
+
+**Banked — 時刻は本節 commit の author date が正。**
