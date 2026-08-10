@@ -46624,3 +46624,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⭐ 方法の質: 鏡像平面を「x=0 のはず」と**推論せず**、built cell の実 frame から**数値導出**し、姿勢非依存性まで control で測る — 「同じ定数は同じ measurement surface でない」系の予防が設計に内蔵されている。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1386 — ⭐⭐⭐ **Rs1 (the human) 直接指示（p5 卓・3 turn・custody `c253b406f3` ✓）: ①「それだ。今回の動画はそれを前提にしているのか」（それ = 07-28 供給仕様書一式）②「仕様書どおりの構成で撮り直せ」③「先祖返りはするな」— run 認可 = ② そのもの（この撮り直し 1 回に scoped）** ＋ ⛔→✅ **p5 の実行 spec の pin 齟齬を当卓測定で訂正: 「現行 HEAD wired sha `8fae5334…`」は統合 `93adb43eb7` の 1 revision 前（当卓実測: 現 = `c193ee459532aabc` ✓ clean）— 字義強制は統合 revert = ③ の逆・意図（現行 HEAD・6 commit 不戻し）は無曖昧ゆえ**測定値で運び、齟齬は名指しで返す**（黙って正規化しない）** ＋ ⚠ **2 本の live 指示が p0 卓に並んだ（鏡像実装 = run 解錠なし／撮り直し = run 認可あり）— 合成順序はどちらの指示文にも無い ⇒ 当卓は決めずに surface（executor p0 ＋ Rs2 (=p4/CC) の court）**
+
+**契機** = p5 `m-p4-250`（09:03:27・cc p4/p0/pZ/p11/p6）。directive bank sha `d061e3ad5f…` ✓（09:02:50「Bank Rs1's re-shoot order: spec configuration, no ancestral regression」）。⛔ **実行 0**。routing → m-p18-275（p0 relay・p5 訂正・p4 順序可視化）。
+
+- **実行 spec（p5 bank §4-5 が正・当卓 relay 分）**: 現行 HEAD ＋ **`YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45`**（crown = literal 0.110 = built 値と既に一致・`0f6b4a733e` 自身が「この override で built 再現」を fresh interpreter 検証済 ⇒ **編集 0 行**）。出力 = `~/Downloads/ur15_dod_speccell_022_45_20260810.mp4`・**構成 echo（spread/tilt/crown/WORK_ROW_DY/wired sha）を log と報告に併記**。
+- ⭐ **p5 の URDF 一次読みが仕事を縮めた**: 柱回転 joint 無し・ヨーク部材形状無し（fixed 2 本・cell_base = stem 同一円柱）・**stereo_head = 自閉 link = 形状ゼロ frame** ⇒ 機械可読仕様との実逸脱 = **取付 3 値のみ**（頭の見た目の建立は Rs1 要求時のみの別件・p11・⚠ 頭 = 両腕の間 = interleave の場所）。
+- ⚠ **射程を撮る前に固定（p5 bank §5）**: built 構成の 240-draw witness = **L 無干渉開始解 0/240・両腕 +0.0 mm** ⇒ **stall を映す可能性が高い — この測定は Rs1 に 2 度提示済みで、その上の「撮り直せ」** ⇒ そのまま撮り・そのまま報告（緩和・回避・trick なし）。検証 = 動画→ログ→照合（pB/pC ＋ Rs1 GT）。C-2 既定は動かさない（差戻しは別決定・p4 court）・#48 cap 不変。
+- **順序の事実（当卓 surface・非裁定）**: 鏡像が先に land すれば launch 時の「現行 HEAD」は鏡像込み（forward・③ 適合）／撮り直しが先なら動画は再び非鏡像 gripper を映す（Rs1 が 08:4x に flag した当のもの）。どちらの指示も順序を言っていない — p0/p4 が解く。
+
+**Banked — 時刻は本節 commit の author date が正。**
