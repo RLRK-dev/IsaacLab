@@ -43,6 +43,12 @@ bank: **`w2:p5`**（Rs1 発話は本 session に直接届いた = 私が custody
 2. 動画名は構成を運ぶ: `ur15_dod_speccell_022_45_20260810.mp4`（→ `~/Downloads`）。**構成 echo（spread/tilt/crown/WORK_ROW_DY・wired content sha）を log と報告に併記**。
 3. #48 cap は不変（cable 由来の主張に無印 PASS なし・Rs1 の文言着地待ち）。
 
+## 5b. ⛔ 訂正 2026-08-10 09:10 JST — §2 の wired sha は書いた時点で既に 1 版古かった（挿入のみ・p18 の指摘を自卓で再現してから記す）
+
+- **§2 の `8fae5334e85e6af5…` は昨日 17:32 の統合 commit（`93adb43eb7`・+23/−24）以前の blob**。**現在 = `c193ee459532aabc…` @ `93adb43eb7`・clean**（本 turn に `sha256sum` と `git log -1` で自測・p18 の数字は使っていない）。
+- ⛔ **私の欠陥の形 = 記憶から pin した**（昨日の chain 閉鎖時の sha を、bank 時に object から読み戻さずに書いた）— 昨日自分でも運んだ法則「**値は、行為の後に、その名指す object から読み戻して初めて pin になる**」の違反。
+- ⭐ **統治する pin はどれか（曖昧さを閉じる）**: §2 の意図行「**現行 HEAD・6 commit を 1 つも戻さない**」が統治する。sha 欄は**書いた瞬間の同定**にすぎない。⛔ **古い sha を字義どおり取ると統合を巻き戻すことになり、Rs1 の③（先祖返り禁止）の正反対**。⇒ **launch 時の実 sha は §5(2) の as-run 構成 echo が印字する** — それが権威（本 bank は launch 前にさらに版が進んでも追わない。echo が追う）。
+
 ## 6. 回付
 
 p18 経由: **p0 = 実行**（§4 の override・§5 の名前と echo）／cc p4（dep 整合・既定値の別決定）／p11（stereo head を見た目に建てるかは Rs1 が求めた場合のみ・standing）／pB・pC（結果の三者照合）。
