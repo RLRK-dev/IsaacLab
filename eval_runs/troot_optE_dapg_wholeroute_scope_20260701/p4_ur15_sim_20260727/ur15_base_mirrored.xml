@@ -7,8 +7,15 @@
        (ur15_mirror_meshes/), frames are mirrored as M R M taken numerically, and each joint's
        axis flip travels with its range flip in the same pass.
        Acceptance: UR15_MIRROR_ACCEPTANCE_20260729.txt against Rs1's supplied reference cell
-       (ur15-dual-arm-cell.json), eight poses, tool0 and grip errors 0.0023-0.0076 mm against a
-       1.0 mm bar, with a stock-arm control leg and the grip offset solved, not retyped.
+       (ur15-dual-arm-cell.json): 24 poses x 2 position quantities = 48/48 pairs per leg over
+       four legs, worst 0.0076 mm against a 1.0 mm bar (the file's own :37/:65/:93), with a
+       stock-arm control leg, a must-miss negative leg, and the grip offset solved, not retyped.
+       ⚠ Scope: that evidence is anchored to the 0.22/45 mounting the reference publishes
+       positions for; no position-vs-reference evidence exists or can exist at the C-2 mounting
+       (the reference publishes none there).  The local mirror A = diag(-1,1,1) is mounting-
+       independent (measured tilt-invariant).  A first header of this file said "eight poses" --
+       a relayed number adopted unmeasured; the corrected count above was read from the record
+       itself.
        The mirrored ko hand asset (_ur15_2f85_koshape_actuated_mirrored.xml) rides on the B side;
        its own design name is the design court's to give, not recorded here.
        ⛔ Sim-only: this machine does not exist and does not transfer to a real UR15. -->
