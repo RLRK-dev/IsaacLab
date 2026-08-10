@@ -46708,3 +46708,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **残る唯一の走行 = reshoot**（post-mirror HEAD）。動画 = Rs1 の目・record = p4 消費。p4 open 0。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1394 — ✅ **第 7 push（Rs1 (the human) の一言・実行卓 = 当卓）: `c2b9f7159d..f7d8a0d005` fast-forward **77 commits**・re-fetch 検証 ahead=0/behind=0**
+
+**契機** = Rs1 直接指示（当卓 session・09:24）。
+
+- **実測**: before 09:24:04 ahead=77/behind=0 → push → after 09:24:24 re-fetch **0/0**・remote tip = `f7d8a0d005` = local HEAD（= 当卓 §1393 commit）。
+- **積載（本日の全 chain）**: 指名 `912820d0e1` → 計器 leg → 消費読み/unlock `9003ac2fe9` → C-2 着地 `0f6b4a733e` → 編集 leg verdict `beb4bcb5fe` → dep-1 受入 `d8142fed89` → register `40ee5a219d` → DoD 認可 `fd4d082587` → run（STEP2 stall）→ Rs1 動画所見 → 鏡像 `b7a5e39ecf` → 鏡像 verdict `717eb6aa2f` → 鏡像受入 `26f3e3c2e9` ＋ 当卓台帳 §1354–1393。
+- session 内 push 通算 7 回・すべて Rs1 の一言。⚠ 走行中の reshoot の成果物（動画・run.log）は untracked ゆえ本 push に含まれない（`_gen` は git 管理外の consumption 面 — 完走 checkpoint の content-pin が権威）。
+
+**Banked — 時刻は本節 commit の author date が正。**
