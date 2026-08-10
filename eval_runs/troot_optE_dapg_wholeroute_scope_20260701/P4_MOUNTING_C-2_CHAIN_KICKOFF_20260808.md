@@ -2178,3 +2178,16 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
    - **費用** — mirror chain は 09:00 に announce 済で既に走行中。reshoot は 1 本きり・正しい構成で 1 回撮るのが最安。
    - ⚠ 限界明記: ①の問いの芯（動画は供給 spec を前提にしているか）は mounting 0.22/45 の軸で、gripper 鏡像なしでも部分的には答わる — しかし②は構成全体を言う語ゆえ、部分適合で撮る理由にならない（stall 見込みは両順で不変・「そのまま撮る」scope は sequencing と独立）。
 4. 並走継続: STEP2 L-stall record 消費（C-2 cell run の record・reshoot と couple しない）。pZ の mirror prereg（`9d118cbf93`）は順序に依らず立つ。
+
+---
+
+## 2026-08-10 09:09 — m-p18-276 受領（call 即時 relay・私に owed なし）＋ **STEP2 L-stall record の消費（並走分・couple しない）**
+
+1. **m-p18-276**: 私の order call は逐語で p0 へ relay 済（p0 の announce が最終のまま）。「p4 — nothing」。
+2. **record pin（読み時自測 09:09:06）**: `_gen/dod_c2_20260810/run.log` sha256 = `04599b84e34be51ec906662f0d92aa8349eae833034c3a7e8d070d6c808b8868`（89,798 B）／動画 = `88e6a613bce3bd0c…`（`~/Downloads` の 2 copy と同一内容・pin 済 08:2x）。
+3. **消費（record 自読・数値は wired recorder caveat stack の内側で読む）**:
+   - **停止機構**: STEP2 で **左腕の command が 1 step 分の ticks 進まず gate が停止**（RuntimeError 逐語「one arm stalling and not the run freezing — the ramps are per arm now」・右腕は 100% 進行中）。**gate は設計どおり止まる向きに働いた**（per-arm 分割の成果 — 旧形は stalled 構成を残り全 step 再測し続けた、と record 自身が言う）。
+   - **棄却の主因（depth-audit decider・sole-cause 上位）**: `L_forearm_link vs crown ×87`／`vs stem ×63`／`R_forearm_link vs crown ×24` — **mast 帯が候補棄却の支配項**。⭐ **kinonly 表との収束（over-claim しない形で）**: 表の STEP2 行は path 列 **−115.2（coupler↔stem・6/20）** = mast 帯の横断を予告していた — wired の実運動は直線 joint-path model と別物だが、**塞ぐ物は同じ mast 帯**。表の「path model ≠ pose 主張」caveat は保ったまま、方向の一致のみ記録。
+   - **run 前半は成立**: servo 到達 home（1.07s・qpos 書込なし系譜）→ cable settle（ncon=25・drop 2.3mm）→ 把持測定（L=cab27/R=cab32）まで record にあり。depth-audit の guard 群（floor 1/2・ghost 2/miss 0・channels 被覆表）も全て「測った射程」を自己申告する形で出力されている。
+   - **disposition**: stall の解消は本 record の消費では扱わない（設計 court の将来 work — mast 帯を跨ぐ経路設計。C-2 既定は不変・reshoot 命令は built cell 側・couple しない）。DoD としては Rs1 の目の verdict（構成 stale）が先行して立っており、**本 record は「C-2 cell での試行 #1 = STEP2 L stall・gate 正常」として bank**。
+4. 契約の注記: m-p18-274 級の record relay は当卓に未着（record は on-disk artifact から直接消費 — artifact-first の形・hub 台帳 `79e854645c`/`7aca4f9f8d` が custody を持つ）。
