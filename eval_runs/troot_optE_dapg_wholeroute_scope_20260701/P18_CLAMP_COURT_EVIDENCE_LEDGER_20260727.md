@@ -46739,3 +46739,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⭐ **今日の形の再演**: 「見えない」という human の一言が、**計器の構図が task 用しかない**という測れる欠落に翻訳された（数値 gate は構図を測らない — §1384 の「human の目が gate の測っていない面を捕える」の 2 例目）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1397 — ✅ **構成 stills 納品（p0・4 PNG @ ~/Downloads ＋ `_gen/config_stills_20260810/`・1600×900・**reshoot 自身が dump した world**（`_steps_cell_full.xml` mtime 09:10 = 撮影時のもの・spread 0.220 tilt 45 crown 0.110）・HOME 姿勢・mj_forward のみ）— 当卓検証: 4 file 実在（09:49・116-204 KB）・front PNG sha `8dbbabc770…` ✓・renderer sha `8121e64bf13e…` ✓** ＋ ⛔ **render 中に機構 2 件を発見・修正（記録つき）: cell dump が gripper mesh を **bare 名**で持つため directory 順の解決が **鏡像腕の base mesh を左 gripper に掛けていた**（腕鏡像 dir にも base.stl がある）→ **asset 名 prefix 解決**（Lg_ → authoritative／Rg_ → ko_mirror_meshes）・miss は loud。＋ dump XML は腕 tint を持たない（tint は compile 後に driver が塗る）ので stills script が同じ色鍵を塗り直す** ＋ ⚠⚠ **当卓の legibility 検査（custody 検査であり物理妥当性判定ではない）: `config_hands` は判読可能に render されている — ただし **p0 の色鍵（LEFT=橙 / RIGHT=紫）を当てると、この frame では**橙（= 左腕）が画面の右**に映る** ⇒ **Rs1 (the human) は色で読む必要がある**（driver `:2805-2806` の警告が納品物で現実化）**
+
+**契機** = p0 `m-p0-272R`（09:49:22・cc p4・Rs1 宛）。⛔ **実行 0**（static 描画のみ）。routing → m-p18-279（p4 = Rs1 へ渡す際の読み方注意・p0 cc）。
+
+- **色鍵**: LEFT 腕 = 橙／RIGHT 腕 = 紫・爪は青 = 上／赤 = 下（driver 自身の則「画面の側でなく色で読め」）。hands still は両 ko 手が mast から離れて写り、**鏡像関係が直接検分できる**（判定は Rs1）。
+- **発見 (2) の重み**: 「bare 名 × directory 順」は**静かに間違った mesh を掛ける** class — 鏡像 dir を足したことが引き金（新資産が既存の解決規則を破る）。prefix 解決＋loud miss で class ごと閉鎖。
+- **将来の montage 構成 camera（p4 提案）**: p0 は原理的に受諾・ただし **wired driver の出力形式変更**ゆえ**次の認可された編集窓**まで待つ（今の窓に乗せない — scope 規律）。
+- PNG sha 4 件・renderer sha は p0 message が正（当卓は 2 件 spot 照合）。
+
+**Banked — 時刻は本節 commit の author date が正。**
