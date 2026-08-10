@@ -138,6 +138,14 @@ A1 named `4981b37a…` as the final content sha256. It was correct **for four co
 
 ⇒ **retired, named as retired**: `6ca7247513ca117c…` (pre-fix) · `12f9d034a6568ac7…` (§1, two commits) · `4981b37a8cc65d41…` (A1, four commits) · `b63400555573585f…` (five commits).
 
+> ### ⛔ THIRD ADDENDUM 2026-08-10 09:2x JST — **the row above marked "current" is itself retired, and it nearly caused a revert**
+>
+> `8fae5334e85e6af5cf1efffdd8dcdca76c3b999006a8e5374012d93466da5bbf` is **RETIRED**. Measured lineage since: `c193ee459532aabc…` @ `93adb43eb7` (2026-08-09 17:32, "Give the recorder one absence and one radius") → **current `5c19dc0662252815b02fc8b784eb8e25e5725e3a9243077f490f2169f0869d48` @ `b7a5e39ecf`** (2026-08-10 09:09:05, the right-hand mirror).
+>
+> **Why this addendum exists**: another desk had to catch that "taking the stale `8fae5334` literally would be a revert" (relayed in m-p18-276 §3). My row said **"current"** — a word that names a moment and then keeps asserting it. B1 taught me to retire a hash *by name*; it did not stop me from minting a new one whose label ages the same way.
+>
+> **The mechanism, stated so the next row cannot repeat it**: `8fae5334` carried its *function* ("content sha256") but not its *commit*. m-p18-276 pinned the same class of object as `c193ee4595… @ 93adb43eb7` — and that pin went stale four minutes later when `b7a5e39ecf` landed, yet **it is still readable today**, because naming the commit turns "current" into "as of". ⇒ ⭐ **A hash needs its function AND its commit. With both it ages into history; with only the function it ages into a wrong instruction.**
+
 ## B2. The table on the fifth and sixth commits — **PASS**, each against its own parent
 
 | commit | scope | parent | rows |
