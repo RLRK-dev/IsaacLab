@@ -2165,3 +2165,16 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 4. **執行**: p18 経由で p0 へ — 「右手 gripper を提示済み仕様（bundle URDF の右手定義 × authoritative コ asset）どおり**鏡像実装**」の impl 依頼（p0 実装 → pZ 検証〔鏡像述語 = 右手が左手の x=0 鏡映に一致〕→ p4 等号着地）。⛔ 再 run は別 gate のまま（Rs1 の一語）。
 5. **m-p18-273 受領（08:54）**: 依頼は spec source 名指しで p0 へ dispatch 済（ledger 1384 @ `2e723c2c9c`・custody 検証 = `308ea06ab1`＋`8b9d288c17`）。「p4 — nothing; disposition returned」。⛔ 再 run 非解錠の再掲・**STEP2 L-stall record の消費は当卓で並走（fix と couple しない）** = 私の次の自卓作業。
 6. **図の提示（Rs1「そのロボット構成を図で確認したい」・08:54）**: 提示済み仕様の図 = bundle 同梱 `views/front|side|top.png`（1400×1400・Rs1 供給の正）＋ 比較用に DoD 動画 t=0.5s frame（現状 build・4800×900）を本 session へ送付（SendUserFile ×4）。新規描画は走らせていない（既存 artifact のみ・frame 抽出は ffmpeg の画像処理）。
+
+---
+
+## 2026-08-10 09:06 — m-p18-275 受領: Rs1 の撮り直し命令（run 認可 = ② そのもの）＋ 私の order call = **mirror 先行**
+
+1. **Rs1 逐語 3 件**（p5 custody 経由・hub 検証 `c253b406f3`）: ①「それだ。今回の動画はそれを前提にしているのか」（それ = 07-28 供給 spec 一式）②「**仕様書どおりの構成で撮り直せ**」③「**先祖返りはするな**」。**run 認可 = ② そのもの**（この 1 reshoot に限る・一般解錠でない）。実行形 = p5 bank §4-5: **現 HEAD ＋ override YOKE_SPREAD=0.22／TILT=45**（crown 0.110 は built と同値・`0f6b4a733e` 自身が override 下の built 再現を検証済 ⇒ **編集ゼロ**）。出力 = `~/Downloads/ur15_dod_speccell_022_45_20260810.mp4`＋config echo。**scope 固定**: built 構成の witness = L 0/240 ⇒ stall を撮る見込みのまま「そのまま撮り・そのまま報告」（緩和・回避・trick 禁止）。C-2 既定は動かない・#48 cap 不変。
+2. **測定訂正の消費**: p5 の wired pin `8fae5334…` は 1 revision stale — 現物 = **`c193ee459532aabc` @ `93adb43eb7`**（hub 実測・worktree clean）。stale pin を字義どおり取ると consolidation の revert = ③ の逆 ⇒ **実 HEAD で走る**。
+3. **⭐ 私の order call（hub の問いへの回答・決めるのは p0 の announce）= mirror 先行**。導出:
+   - **②の「仕様書」自体が鏡像を含む** — 供給 bundle の URDF は右手 gripper まで全定義・md `:70`「exact kinematic mirror」。⇒ **mirror 未着地での reshoot は、Rs1 が 08:4x に名指した軸でまさに「仕様書どおりでない」**。
+   - **③との整合** — 非鏡像 gripper は既知の後退。それを再び撮るのは③の向きに反する。mirror-lands-first なら launch の「現 HEAD」が forward motion を含む（hub §3 の事実そのまま）。
+   - **費用** — mirror chain は 09:00 に announce 済で既に走行中。reshoot は 1 本きり・正しい構成で 1 回撮るのが最安。
+   - ⚠ 限界明記: ①の問いの芯（動画は供給 spec を前提にしているか）は mounting 0.22/45 の軸で、gripper 鏡像なしでも部分的には答わる — しかし②は構成全体を言う語ゆえ、部分適合で撮る理由にならない（stall 見込みは両順で不変・「そのまま撮る」scope は sequencing と独立）。
+4. 並走継続: STEP2 L-stall record 消費（C-2 cell run の record・reshoot と couple しない）。pZ の mirror prereg（`9d118cbf93`）は順序に依らず立つ。
