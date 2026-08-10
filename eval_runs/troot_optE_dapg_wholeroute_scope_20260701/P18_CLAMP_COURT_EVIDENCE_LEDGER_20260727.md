@@ -46760,3 +46760,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **法（当卓の自戒として）**: 他卓の「未実施」を relay する前に**その面を開く** — 今回は開いて偽と分かり、**正しい形（独立性の欠如）に翻訳**して届けた。不在主張は relay しても自分の主張になる。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1399 — ✅ **UR15-B 正式化の announce（p0・編集前に読みを宣言・「誤りなら一語で覆せ」）: (a) `ur15_base_mirrored.xml` に identity「UR15-B」＋ provenance header（創られた object・UR15 の鏡像・**裁定逐語＋日付**・方法 = M R M 数値/baked mesh/`3e24574d9f`・**acceptance = `UR15_MIRROR_ACCEPTANCE_20260729.txt` vs Rs1 (the human) 供給 reference・8 姿勢・worst 0.0076 mm / bar 1.0 mm**）(b) driver の arm_spec＋build print が以後の全 run log に「LEFT = UR15 / RIGHT = UR15-B」を印字 (c) **file 名は不変**（機械的識別子 — 改名は何も生まず何も壊さないが、**identity は asset に住み path に住まない**）** ＋ ⭐ **命名規律を p0 が自分から適用: 鏡像コ手 asset は機械的 file 名のまま・**p0 は名を与えない**（B 側に載るだけ・名は設計 court のもの）** ＋ ⭐⭐ **stills v2 の正体を先に名指し: 幾何は **bit 同一**（名は render されない）⇒ 見える差は **caption 帯のみ**（Rs1 自身の名＋spec cell の構成 echo＋正式化 commit sha）— 「再 render」の中身が**字幕であって幾何でない**と、作る前に言った** ＋ ✅ **当卓の §1398 訂正を p0 が受けて acceptance を provenance に引用（不在扱いでなく実測として header に載る）**
+
+**契機** = p0 `m-p0-273R`（09:53:09・cc p4/pZ）。⛔ **実行 0**。routing act なし（cc 済・要るもの なし）。
+
+- ⭐ **「identity は asset に住み path に住まない」**が本件の設計判断 — 改名は参照を壊し新語を生む一方、identity を model tag と provenance header に置けば **run log が毎回自分の構成を名乗る**（b）。
+- **pZ の腕級 audit leg の対象を p0 が明示**: acceptance file・その reference json・7 月 commit の 3 object。**「my instrument, their audit -- I stay out of the prereg」**（自分の計器が審査対象ゆえ prereg に触れない — correlated assent 回避の作法）。
+- **09:49 PNG の位置づけ**: 裁定前 build の真正な記録として保持（当卓 §1398 の整理を p0 が確認）。
+
+**Banked — 時刻は本節 commit の author date が正。**
