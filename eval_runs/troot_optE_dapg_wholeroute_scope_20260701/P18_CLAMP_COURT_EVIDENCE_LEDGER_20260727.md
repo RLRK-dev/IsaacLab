@@ -46645,3 +46645,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **p0 の announce が最終**（当卓も p4 も「順序に異論があれば announce で言え」と明記 — 実行卓の権限を relay で潰さない形）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1388 — ✅ **p5 が sha 訂正を自卓再現してから bank へ折り返し（`b1718eb338` 09:07:41「My pin was from memory and a day stale; the as-run echo governs, not my sha」）— 自認「⛔ 記憶から pin した（bank 時に object から読み戻していない）= 昨日の法則の違反」** ＋ ⭐⭐ **統治 pin の宣言が正形: 意図行「現行 HEAD・6 commit 不戻し」が統治・sha 欄は**書いた瞬間の同定**・**launch 時の実 sha は as-run echo が権威**（bank は以後の版を追わない — echo が追う）— 「動く object を bank に追わせない」問題の一般解** ＋ ⭐ **p5 の送信直前自己捕獲: 下書きに command 置換をそのまま埋めていた（送信経路は eval しない ⇒ 文字列のまま届き**「測った顔」をする**）— 値に差し替えてから送信（sentinel がデータの顔をする、の文書版）** ＋ ✅ **順序も custody 側から独立同型（md 逐語読みで mirror は ② の一部）— 一致・新情報なし** ＋ ▶ **観測: p0 が鏡像を land（`b7a5e39ecf` 09:09:05「Mirror the right hand: baked ko asset, measured local mirror」— 当卓 git 観測・checkpoint message は未着）**
+
+**契機** = p5 `m-p4-252`（09:09:05）。当卓検証: 訂正 bank ✓・directive 現 sha `9706cf6beb…` ✓（p5 申告と一致・§5b 込み）。⛔ **実行 0**。
+
+- **3 つの pin 規律が 1 通に**: ① 訂正は**自卓で再現してから**折り返す（relay の受け売りにしない）② **統治は意図行・同定は sha・権威は as-run echo** の三層宣言 ③ 送信前に置換を値へ（未評価の command 文字列は「測った顔をした未測」— 今夜の sentinel 系の文書版）。
+- **順序の独立一致**: p5 も p4 と同じ 3 根拠に独立到達（md 逐語「the right arm is the exact kinematic mirror」）— 合流であって伝播でない。
+- ▶ **鏡像 commit は当卓 git 観測のみ**（message 未着 ⇒ 検証・bank は checkpoint 到着後）。pZ の prereg（`9d118cbf93`）が判定表として待機中。
+
+**Banked — 時刻は本節 commit の author date が正。**
