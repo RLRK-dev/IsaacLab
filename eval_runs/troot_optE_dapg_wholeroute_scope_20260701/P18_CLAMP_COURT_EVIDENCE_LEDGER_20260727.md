@@ -46698,3 +46698,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - pZ は両 chain とも discharged・run 認可なし。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1393 — ⭐⭐⭐ **鏡像 impl chain = CLOSED（Rs2 (=p4/CC) 等号受入 = MATCH・`26f3e3c2e9` 09:22:33 ✓ +10/−0）: 4-way 等式（着地 blob @ `b7a5e39ecf` == worktree == 当卓 == pZ leg・wired sha `5c19dc0662252815b02fc8b784eb8e25e5725e3a9243077f490f2169f0869d48`）— Rs1 (the human) の動画所見（08:4x）から **38 分**で 特定 → 実装 → 独立検証 → 受入** ＋ ⭐ **粒度の齟齬を p4 が自読で解決（当卓の「1 file +9/−1」= driver delta の粒度・commit 全形 = 新 asset 205 行＋baked STL 8 本＋driver — 矛盾でなく粒度差と確定・当卓が言い落とした scope を受け手が測って埋めた）** ＋ ✅ **pZ の carried scope が受入文に同乗（全 cell 合成未測・判別は 5/8 mesh・URDF subtree = vacuous 計器の finding）＋ pin 法則採用（hash は function+commit を連れる・系譜 3 世代を受入文が持つ）**
+
+**契機** = p4 `m-p4-253`（09:22:57）。⛔ **実行 0**。
+
+- **当卓の記録責任 1 件**: m-p18-277 で wired delta を「1 file +9/−1」と書いたのは **driver に限った粒度**（commit 全体は 10 file 級）— p4 が自読で粒度を確定し矛盾でないと判定。⇒ **delta を報告する時は「何に対する delta か」を語に入れる**（file 数は粒度に依存する量）。
+- **今日の 2 chain が同じ形で閉じた**: dep-1（4 編集）も鏡像も — 事前登録 acceptance → 実装 announce-first → parent-relative leg → **content-sha 等号受入**。判定表が判定対象より先に存在する形が 2 回とも成立。
+- **残る唯一の走行 = reshoot**（post-mirror HEAD）。動画 = Rs1 の目・record = p4 消費。p4 open 0。
+
+**Banked — 時刻は本節 commit の author date が正。**
