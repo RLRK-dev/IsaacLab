@@ -1,5 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mujoco model="ur15_mirrored">
+<mujoco model="UR15-B">
+  <!-- UR15-B: a CREATED design object, the exact mirror counterpart of UR15.
+       Named by Rs1 (the human), 2026-08-10: 「UR15とは鏡像関係にあるものを新たに作成しUR15-Bとせよ」.
+       The cell composition is LEFT = UR15, RIGHT = UR15-B.
+       Method (landed 2026-07-28, commit 3e24574d9f): meshes are baked mirrored vertex sets
+       (ur15_mirror_meshes/), frames are mirrored as M R M taken numerically, and each joint's
+       axis flip travels with its range flip in the same pass.
+       Acceptance: UR15_MIRROR_ACCEPTANCE_20260729.txt against Rs1's supplied reference cell
+       (ur15-dual-arm-cell.json), eight poses, tool0 and grip errors 0.0023-0.0076 mm against a
+       1.0 mm bar, with a stock-arm control leg and the grip offset solved, not retyped.
+       The mirrored ko hand asset (_ur15_2f85_koshape_actuated_mirrored.xml) rides on the B side;
+       its own design name is the design court's to give, not recorded here.
+       ⛔ Sim-only: this machine does not exist and does not transfer to a real UR15. -->
   <compiler angle="radian" />
 
   <asset>

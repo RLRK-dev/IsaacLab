@@ -127,9 +127,14 @@ Z_SEAT = GROOVE_Z
 
 
 def arm_spec(tag="L"):
-    """The arm for one side.  ⭐ Rs: the two arms in his reference are mirror images of each other,
-    and p5 confirmed two identical right-handed arms cannot generally take that pose -- so the
-    right side loads the mirrored build rather than a second copy of the left."""
+    """The arm for one side: LEFT = UR15, RIGHT = UR15-B.
+
+    ⭐ Rs: the two arms in his reference are mirror images of each other, and p5 confirmed two
+    identical right-handed arms cannot generally take that pose -- so the right side loads the
+    mirrored build rather than a second copy of the left.  ⭐ Rs1 (the human), 2026-08-10, made
+    that build a CREATED design object with its own name: 「UR15とは鏡像関係にあるものを新たに作成し
+    UR15-Bとせよ」.  ur15_base_mirrored.xml carries the UR15-B identity and provenance; the
+    mirrored ko hand rides on the B side (its design name is the design court's to give)."""
     src = "ur15_base.xml" if tag == "L" else "ur15_base_mirrored.xml"
     x = (Path(__file__).parent / src).read_text()
     for j in J6:
@@ -459,6 +464,8 @@ print(f"[steps] tracking bound: L reach {ARM_REACH['L']*1000:.0f} mm -> lag allo
       f"{TRACK_TOL['L']*1000:.2f} mrad | R reach {ARM_REACH['R']*1000:.0f} mm -> "
       f"{TRACK_TOL['R']*1000:.2f} mrad  (clearance {ARM_CLEARANCE*1000:.1f} mm / reach; "
       f"re-measured each step as the arm extends)")
+print("[steps] cell identity: LEFT arm = UR15, RIGHT arm = UR15-B (created mirror counterpart, "
+      "Rs1 2026-08-10; identity and provenance = ur15_base_mirrored.xml header)")
 print("[steps] arm colours: LEFT arm = ORANGE, RIGHT arm = PURPLE "
       "(claws keep blue = upper, red = lower).  Use the colour, not the side of the screen: the "
       "close-up panel is mirrored.")
