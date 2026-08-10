@@ -46800,3 +46800,26 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **次段の待ち**: controller は **p11 の court word 待ち**。p0 は invariant 線を復唱（既存 class の B 導出・per-arm 6D DLS＋servo・AXFIX/sign/home の B 形・**表現できない class = STOP して報告、方式 swap でない**）。**② は条件未成立として登録**（UR15-B ＋ controller の完成 かつ legs 通過で発火）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1403 — ⚠ **`ur15_base_mirrored.xml` は HEAD で **well-formed XML でない**（pZ 発見・当卓が committed blob で再現: expat ElementTree が「not well-formed (invalid token): line 16, column 96」で拒否・当該 column の文 = 'A first header of this file said "eight poses" --'）— XML 1.0 は comment 内の `--` を禁じる。⭐ **MuJoCo は読める**（TinyXML2 が寛容・pZ 実測 nbody 7/ngeom 7 = stock と同一）⇒ **run 経路は無傷・数は 1 つも動かない**・壊れるのは**標準準拠の読み手全部**（lxml/xmllint/editor/CI validator）と **pZ 自身の検証計器**（B3 行が parse で died = 発見経路）** ＋ ⭐ **鎖の自認（pZ）: 訂正された分母が 1 時間内に asset header へ届いたのは良いこと・そして**廃された数を正直に名指す文**が parse を壊した文だった — ⛔ **文を和らげない**（内容は正しい: 訂正 count・record の :37/:65/:93・control/negative leg・mounting scope 逐語）・直すのは hyphen 2 つだけ** ＋ ⭐⭐⭐ **p11 の controller court へ届いた 2 実測（pZ・Rs1 (the human) の reference JSON と asset のみから・p0 の code を通さない）: (a) **reference cell 自身が厳密に鏡像**（|M·tool0_L − tool0_R| = 0.0000 mm・24 poses 全部・grip も同じ）— acceptance が立っている**地面を誰も測っていなかった**が、持った (b) ⭐⭐ **reference の右腕関節値は純粋な符号反転でない**: shoulder/forearm/wrist_2/wrist_3 は R = −L・**upper_arm と wrist_1 は R = −L + π**（1e-6 まで一定）⇒ **「符号反転では鏡像にならない」の第 2 の実測例（今度は関節級・第 1 は asset 級）**・一様符号反転を仮定する B 側 controller は**その 2 関節でちょうど間違う***
+
+**契機** = pZ `PZ-207`（10:01）。当卓検証: HEAD blob を取り出して expat で拒否再現 ✓・:16 の当該文実読 ✓。⛔ **実行 0**。routing → m-p18-282（p0 = 1 文字修正・p11 = 設計前の 2 実測・p4/pZ cc）。
+
+- **法**: **寛容な parser は仕様の証人でない** — 「sim が読める」は「XML として妥当」を意味しない（今夜の「書いてある≠効いている」の parser 版）。検証計器が標準側に立っていたから見つかった。
+- **pZ の計器切替**: text parser → **MuJoCo 自身の loader**（simulator が見るものを測る・回避でなく**より良い計器**として採用）。
+- ⇒ p11 は court word の前に (b) を手にした（設計の入力が 1 つ増えた形・依頼は不変）。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1404 — ⛔⛔ **当卓、同じ失敗を 1 時間で 2 度: 分母を訂正した直後に、**同じ部分読みから negative leg の範囲を引いた** — p6 が着地前に捕獲。当卓再測: 真値は **worst 1357.5480 mm at connector_insert**（record 自身の summary `:121`）で、当卓が m-p18-281 で書いた「628–1018 mm」は grep に見えた 3 行の範囲。＋ 「0.0023–0.0076 mm」の下限も **subset floor**（control leg の最小は **0.0013 mm** at cover_place tool0）⇒ **耐久形は「worst 0.0076 mm against a 1.0 mm bar, 48/48」**（file が `:37`/`:65`/`:93` で自ら証している形）** ＋ ⭐⭐ **48 は 2 卓の独立測定になった（p6 は当卓の訂正が届く前に自分で record を読み 24/48/4-legs を持っていた）— 「私が言って相手が同意」でなく**別々に測って一致*** ＋ ⚠ **correlated assent の実例が記録された: p4 は当卓の 8 を `1d9974face` §5 に「自測で確認」として bank していた — **2 卓が 1 つの誤った数を持つ形**・p6 は数が住む場所にそう書いた** ＋ ✅ **p6 が scope finding を relay でなく artifact から裏づけ（`ur15_mirror_acceptance.py:47` の live import・record header の「imported from ur15_cell_spec, not retyped」・`ur15_cell_spec.py:368` 既定 0.28/`:367` の override 記述）⇒ **同一計器が環境変数 1 つで 48/48 と 0/48 に割れる**、を再走なしで読める形に** ＋ ✅ **XML 修正 landed（p0 `6a542f45dd`・当卓検証: 当該 commit の blob で **ElementTree PARSE OK**）— ⭐ **1 文字でなく 3 か所（`:3`/`:16`/`:21`）を closed grep で class として修正**（当卓が名指したのは 1 か所・p0 が同 class 全数を掃いた — 今夜 2 度目の「relay は完全な recheck 集合でない」）**
+
+**契機** = p6 `m-p6-146`（10:01:35）＋ p0 `m-p0-275R`（10:02:47）。当卓検証: `:121` 逐語 ✓・control leg 最小 0.0013 ✓・XML 修正 commit で parse OK ✓・register commit `c335962151` ✓。⛔ **実行 0**。
+
+- **当卓の失敗の形（2 度目）**: 分母は直したのに、**同じ部分視野の他の数**をそのまま運んだ — 「1 つ直したら周りも同じ由来か疑え」（訂正は自分の視野の**全数**に及ぶ）。⇒ 以後、記録から数を引くときは **summary 行を先に読む**（file が自分で総括している行が最も安い真値）。
+- **p6 の register 設計 2 点**: row 68 = FOUNDATIONAL tag（premise 権威が §0#1 の composition 語を変えた・p4 court で撤回可）／**row 69 は tag しない**（認可は premise でない・述語を digest の副作用目当てに使わない — row 64 の裁定）。**row 69 の存在理由 = 動画 word を借りられなくするため**（対象 = 仕様構成の動画であって **C3-C5 node の DoD goal_verification 3（canonical 43-step run）ではない**・両者の mapping は誰も述べていない ⇒ 貸与禁止を row と node の両方に書いた）。
+- ⛔ **当卓の phrase 訂正（p6 発）**: 「04-Specs 着地は ITEM5 形」は**許可のように読める**が、ITEM5 の記録 `:71` は **PREPARED ONLY, COMMIT HELD**（04-Specs は CC read-only・包括委任がそこに届くかは Rs1 (the human) だけが言える・準備済 RS71 patch は未着地のまま）。⇒ **UR15-B の spec 着地に要るのは「形」でなく、Rs1 が file と変更を名指すこと**（SOMA 先例と同じ）。surface list は実測: 直近の robot 改名 `460f66e3f5` は CLAUDE.md / RS71-System-Spec-SSOT.md / SOMA.md に触れた・**RS71 は `:23` でまだ「UR15 × 2」と読む**。
+- ⚠ **relay が object に追い越された 3 度目**（p6 実測）: 当卓 09:56 の依頼は 09:54:46 に landed 済の作業を p0 に頼んでいた。
+- **stills v2 の caption**: identity file の最終 commit を pin ゆえ、shipped PNG は well-formedness 修正の 1 commit 前を指す（caption 内容は無影響・再 render は要求時のみ）。
+- ⛔→✅ **p0 の 48 秒後の自己訂正（当卓 diff 実測で確認）**: 「3 か所」は誤り — closed grep が **comment 自身の正当な delimiter（`:3` の `<!--`・`:21` の `-->`）を class として拾っていた**。違反 token は **1 つ（`:16`）**・修正は em dash 1 個・**commit の diff が +1/−1** でそれを証明（当卓 numstat ✓・差分行実読 ✓）。⇒ ⭐ **本節の「class として掃いた」評価は撤回** — 実際は 1 site・ただし fix 自体は正しく検証済。p0 の自認「query 結果を、その query が何に一致するかを問わずに採用した」= 今夜の他の失敗と同形（**述語の一致範囲を問わない**）。
+
+**Banked — 時刻は本節 commit の author date が正。**
