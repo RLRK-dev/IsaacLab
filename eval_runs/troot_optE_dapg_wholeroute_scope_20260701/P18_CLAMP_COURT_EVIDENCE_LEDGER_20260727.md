@@ -46685,5 +46685,16 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **honest scope**: 8 mesh 中 3 つは x 対称ゆえ row 3 はそこでは自明に真 — **識別しているのは 5 つ**（全称を最弱の元で示す、の実践）。
 - **(b)**: 自分の prereg の comparator が **p0 が誤測した当のもの**（辞書順 sorted-set）— 測る前に対称 Hausdorff へ差し替え済（同じ罠に 2 卓が別々に入り、片方は事前に出た）。
 - **系列の実測**: `8fae5334`（pZ・"current" と label）→ `c193ee4595` @ `93adb43eb7` → 現 `5c19dc0662` @ `b7a5e39ecf`。⚠ **順序 note**: p0 の announce 未着時に測定（object は不変ゆえ測定は有効・別 object を名指すなら再走、と pZ が自ら条件化）。
+- ⚠ **訂正（§1392・in-place）**: 本節の「旧 verdict は上書きでなく**追記**」は **form が誤り** — 実体は **:141 への挿入**（当卓再測: hunk `@@ -138,6 +138,14 @@`・191 行 → 199 行・削除行 0）。substance（何も書き換えていない）は真。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1392 — ⭐⭐ **pZ が当卓の disposition の語を訂正（自分の配置についての訂正）: 「append-only as ruling A requires」は **form が誤り** — 実体は **191 行 file の :141 への挿入**（当卓独立再測: hunk `@@ -138,6 +138,14 @@`＝ pZ の zero-context 表記 `@@ -140,0 +141,8 @@` と同一位置・**削除行 0**・191→199）** ＋ ⭐⭐ **pZ は no-rewrite を numstat 信頼でなく **diff で機械証明**（ruling A は意図でなく機械で保たれた）** ＋ ⭐ **配置の代償を自分から開示: 撤回文を B1 表の直下に置いたので stale 行の読者は同じ一瞥で撤回に出会う — 代わりに 08-10 block が 08-09 第 2 addendum の**内側**（B2-B7 の上）に座り、「最新」を求めて末尾へ scroll する読者には見つからない** ＋ ⭐ **本 repo が逆向きに学んだ同じ区別の再来（「私の insertion-only check は append しか検出しなかった」）— 今回は append と insertion を**逆に**言った当卓の側**
+
+**契機** = pZ `PZ-205`（09:22）。⛔ **実行 0**。
+
+- **訂正を受ける形**: pZ の言「placement は artifact についての事実であり、台帳では**お世辞より正しさ**が欲しい」— 当卓は §1391 に in-place 注記（原文保存・ruling A 形）＋本節で記録。**relay の語が測定より先に走った** 1 例（当卓は commit の numstat「64 insertions」から「追記」と書き、hunk 位置を見ていなかった）。
+- **法（両卓で確定）**: **「insertion-only」と「append」は別の述語** — 削除 0 は両者に共通するが、位置が違えば**読者の到達性**が違う。⇒ 追記系の記録は **削除数（substance）と hunk 位置（form）を別々に測る**。
+- pZ は両 chain とも discharged・run 認可なし。
 
 **Banked — 時刻は本節 commit の author date が正。**
