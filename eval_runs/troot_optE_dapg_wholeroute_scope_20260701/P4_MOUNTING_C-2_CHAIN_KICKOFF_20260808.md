@@ -2219,3 +2219,13 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 2. **読み（scope 精密）**: (a) 名指しされた創作物 = **腕**（UR15 の鏡像対応物）。(b) 実装の種 = 既存の mirrored 腕 build（`ur15_base_mirrored.xml`＋`ur15_mirror_meshes/`・7 月着地）— これを **UR15-B の identity へ正式化**（naming・provenance 出力・asset 面）。(c) ⚠ **検証 gap を名指す**: 今朝の手 mirror は世界点集合 192/192 で検証済だが、**腕 mirror の同 grade 検証（UR15-B == UR15 の厳密鏡像・kinematics＋geometry）は未実施** — UR15-B 正式化の受入 leg として pZ の mirror 述語を腕級へ。(d) 手（鏡像コ asset `b7a5e39ecf`）は B 側に載る — **その命名は設計 court へ（私は名を作らない・造語禁止）**。(e) spec 面反映（premise 級の命名）= p6 register ＋ 04-Specs 着地は ITEM5 形（Rs1 認可の landing）。
 3. **昨夜来の arc の整合**: 撮り直し済み世界（post-mirror HEAD）は実質 **UR15(L)＋UR15-B(R) の cell を先取りで撮っていた形** — 欠けていたのは「名」と「腕級の検証」。09:21 の等号受入は UR15-B 正式化の下で **substance として生きる**。
 4. **執行**: p18 経由で p0 へ — ①UR15-B 正式化（naming/provenance）②腕級 mirror 検証（pZ 述語・parent-relative）③構成 stills（m-p4-254 の分）は **UR15-B 正式化後の build** で描く。⛔ run 解錠なし（再撮は Rs1 の新しい一語）。
+
+---
+
+## 2026-08-10 09:51 — Rs1 追裁定 2 件: 「UR15-Bようのコントローラも作成」＋「それらで再度動画を作成」（後者 = run 認可・「それら」完成後に発火）
+
+1. **Rs1 逐語 2 件**（本 pane 直答・09:5x）: ①「**UR15-Bようのコントローラも作成**」（よう = 用 の typo と読む）②「**それらで再度動画を作成**」。読み: ① = UR15-B 側の制御路を正式に創る — per-arm IK（6D DLS）＋ servo の既存 class を B の鏡像 kinematics に対して正しく導出（AXFIX datum・sign 規約・home pose の B 側形を含む）。**制御方式の不変前提はそのまま**（IK ベースのみ・kinematic trick なし・§0#3 — 新方式の発明ではない）。② = **run 認可の一語** — scope = 「それら」= **UR15-B ＋ その controller が完成し legs を通った後の動画 run 1 本**（仕様書構成の standing order ＋「先祖返りはするな」継続・stall 見込みなら従前どおりそのまま撮りそのまま報告）。
+2. **court 割**: controller の**設計**判断が要る箇所 = p11（ARM-CONTROL-DESIGN・体制どおり p11 設計 → p0 実装 → pZ 検証 → p4 まとめ）。実装 = p0。検証 = pZ（B controller の leg = 鏡像対称性: 同一 command 系列で L/R が鏡像軌道を描く、級の述語は pZ の court で確定）。
+3. **順序（更新後の chain）**: UR15-B 正式化（走行中）→ **UR15-B controller 作成** → pZ legs（腕級 mirror ＋ controller）→ p4 等号着地 → **認可済み動画 run**（発火条件 = 上記完了）→ 動画 → Rs1 の目。構成 stills（m-p4-254）は正式化後 build で並走可。
+4. 執行: p18 経由で p0（実装）＋ p11（設計 touch の judgement）へ回付。
+5. **m-p18-279 の gap 訂正を受入（自測で確認済）**: 私の 09:49 節 2(c)「腕 mirror の同 grade 検証は未実施」は**誤り** — `UR15_MIRROR_ACCEPTANCE_20260729.txt`（07-29・自読）が実在し、Rs1 供給 reference JSON に対し 8 pose・tool0/grip 誤差 0.0023-0.0076mm（bar 1.0mm）・LEG control つきで測定済。**正しい gap = 独立レグの不在**（p0 自前計器・pZ 未監査・pin/parent-relative 規律以前）⇒ pZ の仕事は「ゼロから測る」でなく **AUDIT ＋ 独立再導出**（hub 提案に同意）。⚠ 教訓 rider: 「不在」を言う前に、その名の file を探す（今日 2 度目 — 鏡像仕様の時と同型）。stills 4 枚（09:49 直前着地）= 09:49 時点 build の真の記録として保持・正式化後に re-render。
