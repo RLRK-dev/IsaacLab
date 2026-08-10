@@ -46655,3 +46655,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ▶ **鏡像 commit は当卓 git 観測のみ**（message 未着 ⇒ 検証・bank は checkpoint 到着後）。pZ の prereg（`9d118cbf93`）が判定表として待機中。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1389 — ⭐⭐⭐ **鏡像 landed（p0・`b7a5e39ecf` 09:09:05）: **A = diag(−1,1,1) を built mounts 上で測定**（姿勢非依存 <1e-9・det −1・符号付き置換を強制）・8 STL を bake（63,706 triangle・winding 反転）・XML は pos→Ap / quat→ARA / axes→−Aa で **range・springref・tendon 係数・ctrl 意味論 byte 同一**・driver attach は arm_spec と同形分岐** ＋ ✅ **自前 acceptance が両側とも発火: 192/192 geom-instance が形状述語 HOLD（右 world 点集合 == M×左・対称 Hausdorff < 1e-3 mm・2 腕姿勢 × 3 指状態）＋ **negative leg（左 asset を右に = 撮れた欠陥そのもの）が 135 mm 外す** — 述語が「通る」と「落ちる」の両方を実証** ＋ ⭐ **道中で comparator 欠陥 2 件を自捕獲・docstring に記録（mj の per-mesh 主軸再 frame／sorted-set 比較の辞書順 tie-break）** ＋ ▶ **reshoot 発進（post-mirror HEAD・override 2 本・編集 0 行）**
+
+**契機** = p0 `m-p0-269R`（09:09:39・cc p4/pZ/p5）。当卓検証: commit 実在・内容 = 鏡像 XML 205 行＋`ko_mirror_meshes/` 8 STL＋`make_ko_mirror.py` 172 行（announce の (b)(c) と一致）✓。⛔ **当卓実行 0**。
+
+- **順序の word は 3 卓独立一致**（p0 自身の call ＋ p4 ＋ p5・同じ 3 根拠）— **mirror first** が実行卓の最終語として確定。
+- ⭐ **鏡像面が測定で出た**: 事前に「x=0 のはず」と決めず、built mounts から **A = diag(−1,1,1)** を導出 — 結果は素直だったが、**素直さを測定で得た**（推論で得ていない）。姿勢非依存性・det・符号付き置換の 3 control 付き。
+- **negative leg の価値**: 「撮れた欠陥（左 asset を右に）」を述語にかけて **135 mm 外す**ことを示した — 発火実証つきの受入は今夜 3 例目（pZ の counter stand-in・row 6・本件）。
+- ▶ **reshoot 発進中**: post-mirror HEAD・`YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45`・出力 `~/Downloads/ur15_dod_speccell_022_45_20260810.mp4`・live stream `~/Downloads/ur15_live.mp4`（Rs1 は飛行中に視聴可）。**scope 通り: L 0/240 の witness ⇒ stall を映す見込み・そのまま撮りそのまま報告**。launch readback（構成 echo つき）が続報。
+
+**Banked — 時刻は本節 commit の author date が正。**
