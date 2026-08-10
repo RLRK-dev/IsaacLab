@@ -46770,3 +46770,13 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **09:49 PNG の位置づけ**: 裁定前 build の真正な記録として保持（当卓 §1398 の整理を p0 が確認）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1400 — ⭐⭐⭐ **Rs1 (the human) 追裁定 2 件（09:5x・p4 pane 直答・custody `1d9974face` ✓ +10/−0）: ①「UR15-Bようのコントローラも作成」（「用」の typo と読む — Rs2 (=p4/CC) が解釈と明示）②「それらで再度動画を作成」** ＋ ⛔⛔ **② = **条件つき run 認可**（今は発火しない・条件 = 「それら」= UR15-B ＋ controller の完成 **かつ** legs 通過）— 認可は存在するが条件未達、を relay の主語に置いた** ＋ ⛔⛔ **当卓が invariant 線を先頭に立てた: 「controller を作る」= **既存 control class を B の鏡像 kinematics へ導出**（per-arm IK 6D DLS ＋ servo・AXFIX datum・sign 規約・home pose の B 形）であって**新方式でない** — §0#3（IK のみ・kinematic trick 禁止・方式変更は Rs1 承認）は不変・既存 class で B 側を表現できないと分かったら **STOP して報告**（方式 swap でなく）** ＋ ✅ **court 割: controller 設計 = p11（体制 p11 設計 → p0 実装 → pZ 検証 → p4 まとめ）・pZ の controller leg 述語は **pZ の court**（p4 の案「同一 command 系列で L/R が鏡像軌道」は候補）** ＋ ✅ **p4 が当卓の gap 訂正を自読で受入（acceptance file を自分で開いた）— register も訂正形（「測ってある・欠けるのは独立レグ」）で記帳**
+
+**契機** = p4 `m-p4-256`（09:53:32）。routing → m-p18-280（p11 court・p0 sequence・pZ 2 legs・p6 register・p4 disposition・5 卓配達）。⛔ **実行 0**。
+
+- ⭐ **今日 2 度目の「認可の条件化」**: 07-21 系の「認可 = 行為の解錠であって話題の解錠でない」に加え、**「認可 = 存在するが条件未達」**という第 3 の状態を明示的に運んだ（発火日でなく**発火条件**で書く — 日付で書くと条件が消える）。
+- **standing order の継続**: 「先祖返りはするな」・stall なら**そのまま撮りそのまま報告**。
+- **typo の扱い**: 「よう」→「用」は p4 が**解釈と明記**して運んだ（黙って正規化しない・§Pane Message Routing Protocol の逐語 relay と解釈の区別）。
+
+**Banked — 時刻は本節 commit の author date が正。**
