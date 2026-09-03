@@ -9,6 +9,8 @@ Checks (fail-closed; exit 1 on any FAIL):
   F2  NO_CHAIN never listed inside a ProducerOutcome enum block
   C1  every `<frozen-file>:<line>` citation points to an existing file and line
   C2  (heuristic, WARN not FAIL) a backticked identifier from the citing sentence appears within ±3 lines of the cited line
+  O1  (runtime spec only, --runtime) ordering: first mention of ReadinessAck < CommitPermit < AuthorityCas/CAS < HealthConfirmation in §3
+  O2  (runtime spec only) replay/stale rules present: handoff_offer_id, authority_epoch_snapshot, E_HANDOFF_EPOCH_STALE, R_OFFER_REUSED, R_EPOCH_STALE_COMMAND
 """
 import os, re, sys
 
@@ -75,12 +77,20 @@ def check(path, root):
                 window = "\n".join(src[max(0, a-4):min(len(src), last+3)])
                 if not any(t.split("(")[0].split(".")[-1] in window for t in idents):
                     warns.append(f"C2 line {i}: none of {idents[:3]} found near {rel}:{a}")
+    if "--runtime" in sys.argv:
+        sec3 = re.search(r"^## 3\..*?(?=^## 4\.)", text, re.S | re.M)
+        body = sec3.group(0) if sec3 else text
+        order = [body.find(k) for k in ("ReadinessAck", "CommitPermit", "AuthorityCas", "HealthConfirmation")]
+        if any(o < 0 for o in order): fails.append(f"O1 §3 lacks one of ReadinessAck/CommitPermit/AuthorityCas/HealthConfirmation: {order}")
+        elif order != sorted(order): fails.append(f"O1 §3 ordering violated (first-mention offsets {order}); required ACK → permit → CAS → health")
+        for k in ("handoff_offer_id", "authority_epoch_snapshot", "E_HANDOFF_EPOCH_STALE", "R_OFFER_REUSED", "R_EPOCH_STALE_COMMAND"):
+            if k not in text: fails.append(f"O2 required replay/stale rule token missing: {k}")
     return fails, warns, n_cit
 
 def main():
     root = repo_root()
     rc = 0
-    for p in sys.argv[1:]:
+    for p in [a for a in sys.argv[1:] if not a.startswith("--")]:
         fails, warns, n_cit = check(p, root)
         print(f"== {p}: citations={n_cit} FAIL={len(fails)} WARN={len(warns)}")
         for f in fails: print("  FAIL", f)
