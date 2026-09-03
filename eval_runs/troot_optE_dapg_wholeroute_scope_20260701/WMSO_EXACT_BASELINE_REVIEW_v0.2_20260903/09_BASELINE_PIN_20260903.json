@@ -1,0 +1,94 @@
+{
+  "artifact": "WMSO_EXACT_BASELINE_PIN",
+  "pin_version": "v0.2-reconstructed-20260903",
+  "generated_by": "Claude Code web session (design/review only; no authority)",
+  "generated_at_utc": "2026-09-03",
+  "repository": "RLRK-dev/IsaacLab",
+  "wmso_working_branch": "rlrk/optE-s2-substrate-swap",
+  "wmso_working_branch_tip_at_generation": "f7d8a0d0050e885e5a0b22674b315408be78d562",
+  "session_work_branch": "claude/v0-2-design-candidates-snqbmy",
+  "document_dir": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701",
+  "frozen": {
+    "D1_1_A_contracts_v2": {
+      "design_file": "WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md",
+      "design_version": "v2.11.2",
+      "design_sha256": "00192d20ca00b654cf6cfdb9d04b03ca14adfd0b93f2105c0fea28c295ff8aff",
+      "design_git_blob": "1353430228a90ad36dd190a9359cd81da52e8242",
+      "bank_commit": "54f90a7de1e02fb14eaf793bf3c60d9503d0d82e",
+      "bank_commit_date": "2026-07-19T22:23:28+09:00",
+      "evidence_policy_md_file": "WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md",
+      "evidence_policy_version": "v1.9",
+      "evidence_policy_md_sha256": "c474acea7c58acc22050c2ad9944fd45a18f5c76967964b42d11922e28fa27e7",
+      "evidence_policy_json_file": "WMSO_EvidencePolicy_v1.9.json",
+      "evidence_policy_json_sha256": "e63176af9bc3a246b1c32db369ec59f8d09a4c96c381bb03a3a6024bd9811c6e",
+      "evidence_policy_json_git_blob": "98313574ffe282d14d75aeeab7bc5131a035ac76",
+      "evidence_policy_semver": "1.9.0",
+      "evidence_policy_definition_hash": "e7ca43093084c167a209b008533a66d26a1fd3223d2a3c11274d28306c3ff803",
+      "evidence_policy_bank_commit": "37ddb72284",
+      "freeze_record_file": "WMSO_D11A_FREEZE_RECORD_20260720.md",
+      "freeze_record_sha256": "593880be6ef92059db03ef5079889c605705d20c1c9953bb412ed41a20344af9",
+      "freeze_record_bank_commit": "9a13035626",
+      "rs_ruling": "freeze + push (2026-07-20)",
+      "pN_verdict": "EXACT-PIN PASS-CLOSE (transcript sha256 c086122a13f4e65c9a884ab3f079b475d56344de35a9fb10d49810700f62556f @ d2777b7c2d)",
+      "design_header_status_note": "header still reads DESIGN DRAFT v2.11.2 by convention; freeze record + manifest are the authoritative pin surface"
+    },
+    "D1_1_B_tensor_binding": {
+      "design_file": "WMSO_D11B_TENSOR_BINDING_DESIGN_RSTECHLEAD2_20260720.md",
+      "design_version": "v13",
+      "design_sha256": "5a1874d3be8b98b8aeaace73890d8021cbc7f9814e048741f7f58d6746f349a6",
+      "design_git_blob": "ebe8154abf2461a6b24db05728b20e5cee949fb2",
+      "bank_commit": "07250f4a0208b3bbd27eae6fef7d980743c4b538",
+      "bank_commit_date": "2026-07-20T23:11:22+09:00",
+      "freeze_record_file": "WMSO_D11B_FREEZE_RECORD_20260721.md",
+      "freeze_record_sha256": "ef4db7aee2f700a08b81333cb50f1bbc6c6efd16532eabcb87bf8b713152642f",
+      "freeze_record_bank_commit": "465a59ed40",
+      "rs_ruling": "freeze (2026-07-21 11:2x, via pY); push authorized 11:5x",
+      "declared_open_at_freeze": [
+        "stats_key uniqueness (same-length sharing silent-pass)",
+        "§7 reachability negatives (impl leg)",
+        "§5 thresholds (slice prereg + Rs)",
+        "U-2/U-5/U-6 (D1.1-C)"
+      ],
+      "correction_note_file": "WMSO_D11B_COCITATION_CORRECTION_NOTE_20260721.md",
+      "correction_note_sha256": "dffab3667b77d292459979fefa790231de6d6134900da1f6685dd4dc02bf1bb7"
+    }
+  },
+  "non_frozen_context": {
+    "D1_1_C_artifact_manifest": {
+      "design_file": "WMSO_D11C_ARTIFACT_MANIFEST_DESIGN_RSTECHLEAD2_20260721.md",
+      "design_version": "v2.5.1",
+      "sha256": "97bfda4355b4fc3d287c1ea47f06f690d2d11fa1ad4023e63c636fa376604246",
+      "status": "NOT frozen; open-11 pending Rs; U-2/U-6 not designed"
+    },
+    "rs_c3_ruling_slice_ep_profile": {
+      "file": "WMSO_RS_C3_RULING_SLICE_PROFILE_20260720.md",
+      "sha256": "9ab6be4c9f302566511a22ab85ebca3fdaddea7789c682762041c8cc00aa9246",
+      "ruling": "SHADOW (rank 2, non-authority); execution profile is a separate undecided axis"
+    },
+    "d1_impl_static_findings": {
+      "file": "WMSO_D1_IMPL_STATIC_FINDINGS_IMPLVERIFIER2_20260727.md",
+      "sha256": "4068ac94af668d78618017ff4795df3ff32db84906b77c80b36af9c331dc84ba"
+    },
+    "latest_wmso_state_date_in_repo": "2026-07-27"
+  },
+  "verification_this_session": {
+    "method": "bash verify_exact_baseline_pins.sh (sha256sum on worktree files, git cat-file on blobs, git show at frozen commits fetched by sha, embedded EP derivation command)",
+    "result": "11/11 PASS, rc=0",
+    "frozen_commits_are_ancestors_of_branch_tip": "yes — GitHub commit history of rlrk/optE-s2-substrate-swap filtered by each design path lists 54f90a7d (D1.1-A) and 07250f4a (D1.1-B) as the LATEST commits touching those files; no later commit modified either frozen design on that branch",
+    "local_clone_note": "shallow clone (depth 200) cannot prove ancestry by git merge-base; the GitHub-side path-filtered history is the ancestry evidence"
+  },
+  "gate_state": {
+    "implementation": "CLOSED",
+    "training": "CLOSED",
+    "closed_loop_authority": "CLOSED",
+    "production_deployment": "CLOSED",
+    "freeze_of_new_documents": "CLOSED (Rs-exclusive)",
+    "editing_frozen_files": "PROHIBITED (Rs-exclusive)",
+    "this_session_scope": "design-document authoring + independent design review (no authority claims)"
+  },
+  "previous_package": {
+    "name": "WMSO_EXACT_BASELINE_REVIEW_PACKAGE_v0.2_20260903.zip",
+    "sha256_claimed": "f02f4f83ca16c572e479a9ff9d907c88ae5874de2e044e3f599b36e0432fe54b",
+    "availability": "NOT available in this environment (other sandbox); documents reconstructed from the handoff decisions + frozen baseline; the claimed zip sha256 could not be verified here"
+  }
+}
