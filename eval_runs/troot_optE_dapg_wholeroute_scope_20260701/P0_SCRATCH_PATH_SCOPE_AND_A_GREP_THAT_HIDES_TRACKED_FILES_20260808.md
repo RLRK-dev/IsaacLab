@@ -2088,3 +2088,139 @@ at design heights with the menu exhausted — published per row, (2) declared sc
 row 48 open), (3) the declared path model, (4) published measurement residue.  None to my
 solver.  ⛔ The instrument does not move again until pZ's leg returns — the object is nominated,
 and moving a nominated object was this desk's own recorded failure.
+
+## 8.45 E1 (m-p18-286): ACCEPT with two modifications and two additions — RUN_METRICS.json written by the driver at exit, measured against the file and the existing contract
+
+*(2026-09-05 07:42 JST.  Rs1 = the human; Rs2 = p4/CC.  Disposition on p18's request m-p18-286, which
+carries E1 of `P18_AGENTIC_SYSTEM_IMPROVEMENT_20260904.md` @ `f5c681edb3` §3-E1 / §1.6.)*
+
+**Disposition: ACCEPT.**  Modified on 2 of the requested items (the log hash; "exit"), plus 2 additions
+(where the file lands; the contract's shape).  ⛔ **No edit now** — the edit waits for the next authorized
+edit window (the §1397 practice p18 cites).  This section is the announce-first plan, so the window's edit
+is agreed before it opens and pZ's leg can be pre-registered against it.
+
+### 1. What is true today (measured 07:34–07:41 JST; driver blob `45b1e7f5ea93`, working tree == HEAD for the file)
+
+- `json.dump|RUN_METRICS` in `ur15_steps_wired.py`: **0** hits (p18's count reproduced).  `_gen/**/RUN_METRICS.json`: **0**.
+- The driver already owns an exit-time channel: `import atexit` :19 and `atexit.register(_depth_audit_report)`
+  :1656, whose docstring says "printed even when the run ends by raising".  Measured true on the reshoot log
+  `_gen/reshoot_speccell_20260810/run.log`: traceback at :371–374, then the DEPTH AUDIT block through :397 —
+  the file's last line.  **Python's atexit was the last writer of that log.**
+- The gate's text is recoverable at atexit with no wrapper: under env7 Python **3.12.3** an uncaught
+  `RuntimeError` leaves `sys.last_value` / `sys.last_type` set while atexit handlers run, and handlers run
+  **LIFO** (scratchpad probe `_atexit_probe.py`: the first-registered handler ran last and printed
+  `RuntimeError('STEP2 L: the gate text')`).
+- Every requested item already exists as a variable at a named site: STEP1 tool err :2701 and touching :2682;
+  per-step tool err `le`/`re_` :3677–3678; COMMAND reach `prog[t2]`, `held_ticks[t2]`, `s_`, `_stalled`
+  :3695–3703; sigma/mast `_cgl,_cwl,_cgr,_cwr` :3704–3706; ARM-TO-ARM `_pairmin,_pairwho,step_gap_path,
+  step_gap_who,_worst` :3798–3807; gates `_legs,_touch,_fail` :3817–3825; penetration :3826–3829; the prose
+  row :3830–3831; the stall raise :3845–3846; run-level worst `sig_min/col_min/sig_where/col_where/claw_min/
+  arm_gap_min/arm_gap_path` :2824–2830, `gates` :2842, `_DEPTH_AUDIT` :1446.  Config echo = the very
+  expressions the interleave line prints at :2374–2379 (`YOKE_SPREAD`, `math.degrees(math.pi/2 - TILT)`,
+  `CROWN_R`).
+- The existing contract's shape (newest on disk: `data/test_newton_1ep_zcheck_cycle7_20260329/RUN_METRICS.json`):
+  `schema_version "run_metrics.v1"`, `generated_at`, `final`, `run{run_id,out_dir,pid,start_ts,end_ts,
+  elapsed_s,exit_code,end_reason,log_path,…}`, `artifacts{video{path,exists,size_bytes},logs{…}}`,
+  `progress`, `judgement{verdict:"PENDING",decided_by,…}`.  `/log-analyzer` locates the log through
+  `artifacts.logs.path` / `run.log_path` (`.claude/skills/log-analyzer/SKILL.md:52-63`) and falls back to
+  `$RUN_DIR/run.log` (:66-68).
+- **The driver does not know the run dir.**  The two launches (transcript, tool calls of 08-09 17:00 and
+  08-10 00:10 UTC): the DoD run's OUT was `_gen/dod_c2_20260810/ur15_steps_dod_c2.mp4` (inside the run dir);
+  the reshoot's OUT was `~/Downloads/ur15_dod_speccell_022_45_20260810.mp4` (outside).  run.log was
+  `_gen/<run>/run.log` both times, by shell redirect.  A "write beside OUT" rule would have missed the run
+  dir once out of two.
+
+### 2. Modifications (2) and additions (2)
+
+- **M1 — the log hash.**  A file that outlives its writer cannot certify its own final hash: the JSON writer
+  runs inside the process whose stdout *is* run.log.  So the driver records `run.log_path` (measured, A1),
+  `run.log_bytes_at_write`, `run.log_sha256_at_write` — the prefix at the moment of writing, taken after
+  flushing stdout/stderr and after printing its own announce line (nothing the driver prints follows the
+  hashed prefix).  The **launcher** records the exact final in a sidecar `run.log.sha256`
+  (`sha256sum run.log > run.log.sha256` — one line in the launch command, standard format).  pB's check:
+  sidecar == at-write ⇒ nothing followed the JSON write (the case in both existing runs); otherwise the
+  bytes beyond `log_bytes_at_write` are the tail.  If p18 prefers a single file, the launcher can instead
+  merge the sidecar's two numbers into the JSON after exit — two writers of one file; I recommend the sidecar.
+- **M2 — "exit".**  A process cannot observe its own exit status.  The JSON carries
+  `run.end_reason ∈ {"completed","raised","exited_early"}`; `run.exit_code` = 0 for completed, 1 for raised
+  (an uncaught exception exits 1), null for exited_early (a SystemExit code is not visible at atexit; the
+  only such path is `P4_CLIP_DUMP` :1103); `run.exception{type,message}` = `sys.last_type.__name__`,
+  `str(sys.last_value)` — the gate's RuntimeError text byte-for-byte.  The real `$?` stays where it is
+  today, in the launch line's `echo "exit=$?"`.
+- **A1 — where the file lands, with no new switch.**  run dir := the directory of the file stdout is
+  redirected to, read from `os.readlink("/proc/self/fd/1")` when it resolves to a regular file (Linux —
+  this cell runs nowhere else); fallback `OUT.parent` when stdout is a tty or pipe.  `run.log_path` becomes a
+  measurement rather than a convention, the JSON lands beside run.log for **both** launch shapes in §1, and
+  the analyzer's `$RUN_DIR/RUN_METRICS.json` lookup finds it.  No new CLI argument, no new env var.
+- **A2 — the shape.**  Top level = the existing `run_metrics.v1` keys (schema_version, generated_at, final,
+  run, artifacts, progress, judgement) so the analyzer's own code path reads it; driver-specific content
+  under one section `ur15_steps`.  `judgement.verdict = "PENDING"`, `decided_by = null`: **the driver never
+  grades** — PASS is pB + pC + Rs1's (CLAUDE.md:275, 三者一致).
+
+### 3. Field spec (what the window's edit writes)
+
+```
+schema_version "run_metrics.v1"; generated_at (JST ISO, date-THEN-write at exit); final true
+run: run_id (= run dir name), out_dir, pid, start_ts, end_ts, elapsed_s, exit_code, end_reason,
+     exception{type,message} | null, log_path, log_bytes_at_write, log_sha256_at_write
+artifacts: video{final{path,exists_at_write}, live{path,exists_at_write}}, logs{path,exists}
+           (sizes are the launcher's after exit: an mp4 is still being finalised by the ffmpeg
+           child while atexit runs)
+progress: phase_max_reached = the last STEP number that printed its summary row
+judgement: {verdict:"PENDING", decided_by:null}
+ur15_steps:
+  identity: LEFT{arm_xml, sha256; grip_xml, sha256} / RIGHT{...}          (UR15 / UR15-B)
+  driver:   {path, sha256 of the running file};  cell_dump: {_gen/_steps_cell_full.xml, sha256}
+  config:   {yoke_spread_m, tilt_deg, crown_r_m, shoulder_height_m, table_top_m, grasp_centre_x_m,
+             env_switches_set: {name: value} over the names the driver and spec read through
+             environ.get (23 by this session's query; the edit uses the literal list at edit time)}
+  step1_approach: {L,R}: {tool_err_mm, touching[]}
+  steps[]: {step, name, t_s, tool_err_mm{L,R},
+            command{L,R}: {reached_frac, held_ticks, ticks, stalled},
+            sigma_min{L,R}, mast{L,R}: {gap_mm | null, who},
+            arm_to_arm{closest_mm, closest_who, along_move_mm, along_who, worst_so_far_mm},
+            seat_C1_miss_mm[dx,dy,dz], gates{C1,C2}: {pass, fails_on[], link, pos},
+            penetration{inside_mm, part, link, contacts}, pin{C1,C2}, grip{L,R},
+            summary_row (the prose row, verbatim)}
+  worst: {sigma_min{L,R} + where, mast{L,R} + where, claw_min{L,R}, arm_gap_min_mm, arm_gap_path_mm}
+  gates: (the `gates` dict)
+  depth_audit: the `_DEPTH_AUDIT` counters (channel keys as "name:firstlineno")
+```
+Every number is the **same variable at the same moment** as the `[steps]` line that prints it.  Nothing is
+parsed from prose.
+
+### 4. Mechanism — instrument only; no branch of control changes
+
+- One handler `_write_run_metrics()` registered with `atexit` right after `OUT` (:40): registered **first**
+  so it runs **last** (LIFO, measured), after the depth-audit print, and already armed on the :1103 early
+  exit.  It reads module globals defensively (`globals().get`), so it writes on every exit path with
+  whatever exists at that moment.
+- Capture sites: STEP1 (:2682, :2701) 2 lines; one per-step dict appended just before :3830
+  (`print("[steps] " + row)`), built from the variables already in scope there; the gate rows collected
+  into a dict inside the :3817 loop (2 lines); a completion marker after :3902 (1 line).  Estimate
+  ≤ 120 added lines, 1 file, **0 control lines removed or re-ordered**.  numpy scalars → float through a
+  `default=` converter.
+- Failure is loud, never silent: if anything raises inside the handler it prints
+  `[steps] RUN_METRICS.json NOT written: <exc>`; an atexit exception does not change the exit code.
+
+### 5. Acceptance — pZ's leg, pre-registerable now; two legs run before any route run
+
+- **L1 (static, no run):** `P4_CLIP_DUMP=1 … > run.log` exits at :1103 before any physics step or video —
+  the stills' class (§1397 "実行 0") — and must yield `RUN_METRICS.json` beside run.log with
+  end_reason "exited_early", config + identity filled, `steps: []`.  Plus the writer's own unit probe
+  (raise → end_reason "raised", message byte-equal).
+- **L2 (on the next Rs1-authorized route run, whatever its outcome):** (a) file present beside run.log;
+  (b) `run.exception.message` == the log's last traceback line after `RuntimeError: ` (byte-equal) when it
+  raises; (c) for every step, the JSON numbers re-format to the digits in the matching `[steps] STEP n …`
+  lines — a **transport** check: it detects a lost value, not a wrong one; (d) sidecar `run.log.sha256` vs
+  `log_sha256_at_write`; (e) pB runs `/log-analyzer <run_dir>` and the skill's 0.2/0.3 blocks pick up the
+  file and the log path — m-p18-286's accept condition.
+- ⛔ **Not an authorization.**  This acceptance implies no route run; ② stays conditional and unmet; L1 is
+  static.
+
+### 6. Scope line
+
+- Measurement on p0's own file under the precedent the file records at :3672–3675 ("measurement … no
+  control changes here, only instruments").  Touches neither the nominated kinonly object (`120746a49b`),
+  nor `compare_24_vs_240.py` (locked), nor any spec file.
+- Done now: this plan, committed, and one message to p18.  Not done now: the edit.
