@@ -2413,3 +2413,80 @@ j4 = json.load(open(R / "r4/RUN_METRICS.json"))
 check("r4 pipe: fallback to OUT.parent, log_path null, logs.exists false", j4["run"]["out_dir"] == str(R / "r4") and j4["run"]["log_path"] is None and j4["artifacts"]["logs"]["exists"] is False)
 print("ALL PASS" if ok else "SOME FAIL")
 ```
+
+## 8.47 ⛔ pZ F-d was real and my fixture could not have caught it — fix landed at `0a2b600959`; F-c (23 ≠ 24) taken in the same window
+
+*(2026-09-05 08:14 JST.  Rs1 = the human; Rs2 = p4/CC.  Answers m-p18-293 / pZ PZ-209.)*
+
+### 1. F-d reproduced, by me, two ways
+
+- Ten-line script under env7 (Python 3.12.3): an atexit handler that reads `__file__` → **NameError after a normal
+  end and after an uncaught raise; readable after SystemExit** (scratchpad `_file_at_exit.py`).  Exactly pZ's finding.
+- The b19c4c5f5d block itself, **executed in a real `__main__`** (`probe_rm_main.py`, verbatim in §4: `exec(block,
+  globals())` in the probe's own module, so `__file__` is a real `__main__.__file__` and subject to the interpreter's
+  cleanup): normal → `RUN_METRICS.json NOT written: NameError`, JSON **absent**; raise → same, **absent**; sysexit →
+  present.  So the writer at b19c4c5f5d wrote on the one path a route run never ends by, and nothing on the two it does.
+- Why §8.46's 19/19 passed on a broken writer: that fixture injected `__file__` into a plain dict namespace.  The
+  interpreter cleans `__main__.__dict__`, not my dict, so the fixture protected the very name the real run loses —
+  **a test that could not come out differently** on this defect.  Same class as the 07-14 lesson; the discriminating
+  instrument is the one whose `globals()` IS `__main__`.
+
+### 2. What landed — `0a2b600959` (08:13:24 JST), one file, all inside the E1 block
+
+- blob `278144ddd94cecffeecec385d56bf098898f8788`; content sha256 `307868a9721d2896e3f4849fe18a6297d2034fefe2c276b9f3bd4d7325fb90a5`;
+  `git show --numstat` = **+10/−9** (F-d: one new line :48 `_RM_FILE = Path(__file__).resolve()` captured at import, and
+  two uses rewritten, :81 `here = _RM_FILE.parent` and :107 `xml(_RM_FILE)`; F-c: the `_RM_ENV` tuple re-wrapped 4 → 5
+  lines to hold 24 names; the block header compressed 3 → 2 lines so the block stays inside the window's bound).
+  Cumulative E1 footprint vs the pre-E1 file: `git diff --numstat 5930ebf411 HEAD` = **120 / 0**.  No control line
+  touched; no line over 120 chars; `py_compile` OK.
+- **F-c**: the read population is **24**, not 23.  My §8.45 query grepped `environ.get(` and `environ[`; the spec reads
+  `CABLE_BEND_STIFFNESS_OVERRIDE` through its alias `from os import environ as _os_env` (`ur15_cell_spec.py:35`,
+  reads at :202 and :1205) — the alias evaded a grep on the source name (the 07-19 lesson: verify at the sink).  Closed,
+  alias-aware query (`(environ|_os_env|env)(\.get\(|\[)` over both files) → 24 distinct; `_RM_ENV` now holds exactly
+  those 24, sorted; no other receiver in either file reads an upper-case literal.  Taken in the same window because it is
+  the E1 block's own data and the same defect class as F-d (an echo that cannot show a switch that was set).
+
+### 3. Verified on the committed text, without running the driver
+
+| leg | instrument | result |
+|---|---|---|
+| negative control (OLD block, real `__main__`) | `probe_rm_main.py` on `git show b19c4c5f5d:…` | normal ABSENT / raise ABSENT (NameError line) / sysexit present |
+| fix (NEW block, real `__main__`) | same probe on the committed file, `CABLE_BEND_STIFFNESS_OVERRIDE=0.005 YOKE_SPREAD_OVERRIDE=0.22` | **3/3 present**; end_reason completed / raised / exited_early; driver sha set; `env_switches_set` = both names; exception text carried |
+| content predicates (NEW block, fixture) | `probe_rm_block.py` + `check_rm_probe.py` (§8.46 §2.1) | **19/19 PASS** (identity/config/depth-audit/M1 equality/A1/LIFO unchanged) |
+
+Pins for pZ: block :41–:140; `_RM_FILE` :48; `_RM_ENV` :49–:53 (24 names); `_write_run_metrics` :79; :81; :107;
+`atexit.register(_write_run_metrics)` :139 (before `_depth_audit_report`'s registration, so it still runs after it).
+Capture sites and the completion marker shift by +1 from §8.46's numbers (:2783, :2803, :3921, :3925–3926, :3936–3948, :4022).
+
+### 4. The discriminating probe, verbatim (`probe_rm_main.py`)
+
+```python
+"""Faithful probe: exec the RUN_METRICS block IN THIS SCRIPT'S OWN __main__ GLOBALS, so __file__ is a real
+__main__.__file__ and subject to CPython's shutdown cleanup (pZ F-d).  argv: driver_file mode outdir"""
+import atexit, math, os, sys
+from pathlib import Path
+import numpy as np
+
+_drv, MODE, _out = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3])
+src = _drv.read_text()
+block = src[src.index("# --- RUN_METRICS.json begin"): src.index("# --- RUN_METRICS.json end")]
+OUT = _out / "final.mp4"
+S = _out / "gen"; S.mkdir(parents=True, exist_ok=True)
+GRIP_XML = "/nonexistent/left.xml"; GRIP_XML_MIRRORED = "/nonexistent/right.xml"
+YOKE_SPREAD, TILT, CROWN_R = 0.22, math.pi / 2 - math.radians(45.0), 0.110
+sig_min = {"L": 0.1, "R": 1e9}; col_min = {"L": 1e9, "R": 1e9}; gates = {}
+exec(compile(block, str(_drv), "exec"), globals())      # the real thing: block globals == __main__ globals
+_RM["steps"].append({"step": 2, "name": "probe", "t_s": 1.0})
+print("[probe] mode", MODE)
+if MODE == "raise":
+    raise RuntimeError("STEP2 L: probe stall text")
+if MODE == "sysexit":
+    raise SystemExit(0)
+_RM["completed"] = True
+```
+
+Run as `python -u probe_rm_main.py <driver file> {normal|raise|sysexit} <outdir> > <outdir>/run.log 2>&1`; the JSON must appear in `<outdir>` on all three.
+
+### 5. Standing
+
+- L1 (`P4_CLIP_DUMP=1`, the 0.417 s cable settle) still waits for Rs1's word via p18 (§1413 question); ⛔ until now its PASS would not have meant "the writer works" — it would have exercised the one path that did work.  Route run ② conditional and unmet.
