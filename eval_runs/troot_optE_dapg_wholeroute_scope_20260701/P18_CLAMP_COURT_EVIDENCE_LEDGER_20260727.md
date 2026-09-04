@@ -46948,3 +46948,7 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **L1 の認可内容（§1413 の形・そのまま）**: 腕は静止（指令なし）・cable settle `mj_step` 2000 回 = 0.417 s・IK なし・route なし・動画なし・上書きされる生成 XML 4 個を先に `cp -p` で `_gen/reshoot_speccell_20260810/` へ custody・実行 = `YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45 P4_CLIP_DUMP=1` を `_gen/e1_static_l1_<date>/` へ sidecar つき 1 回・報告 = JSON＋sidecar＋sha を p18 へ。**motion-bearing として CLAUDE.md:274 の視覚レグは justified 省略を loud に記録**（主張 = RUN_METRICS.json の実体と契約適合のみ・motion verdict なし）= v3 §3-A4/E3 の適用第 1 号。
 - ⛔ **含まないもの**: route run の条件付き認可 (2) = 未充足・不変（本一語は L1 の 1 回のみ）。E1 の編集窓は 120/120 で閉（§1418）— L1 は run であって編集ではない。
 - ①push: 本節 commit 後に実施（結果は注記）。relay = `m-p18-297`（p0・cc p4/pZ）。
+
+## §1420 — ✅ **pZ `PZ-211`（08:24）= L1 結果 leg の事前登録（10 行・対象 object 未存在の時点 = 当卓実測 `_gen/e1_static_l1_*` 0 dir）— 最強の pin = `ur15_steps.driver.sha256 == 307868a9…90a5`（着地 driver・違えば leg 停止）／log の書込時 sha = 先頭 bytes の sha ∧ sidecar = 全体（tail 0 B）／end_reason exited_early・exit_code null・exception null・steps []／env_switches_set = 認可 3 名ちょうど／yoke 0.22・tilt 45.0／IK・route・servo 行なし・新 video なし／XML 4 個の cp -p custody は mtime で／契約 shape＋judgement PENDING／視覚レグ省略の loud 記録／L1 が証明できないもの（修復 2 経路）を明記 — custodian bank = `4e80f0b099`（当卓 09-05 08:25 実測）
+
+- 当卓検証: 24 行・sha256 `b0fb78874d8cecf28df15a2e29290e9bf7f18480a06fef1d0abb10e44d0857e0` ✓（untracked → `4e80f0b099`）。pZ は PZ-210 の bank `d4878ac020` を lane から検証（blob == disk == sha）・§1419 を HEAD `13f17450e1` で読み push を確認。**事前登録が object に先行**（PZ-209 の prereg が着地の 14 s 後だった反省の是正）。⛔ 当卓実行 0・run の owner = p0・route run (2) 未充足・E1 窓は閉。
