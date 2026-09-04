@@ -1,7 +1,7 @@
-# WMSO `IndustrialDeploymentProfile` — DEPLOYMENT PROFILE SPEC (v0.2 REVIEW CANDIDATE)
+# WMSO `IndustrialDeploymentProfile` — DEPLOYMENT PROFILE SPEC (v0.2.1 REVIEW CANDIDATE)
 
-- node: `T-WMSO`; 起草 = Claude Code web session（review candidate 起草・**authority 無し**・凍結物へ非接触）; 作成 = 2026-09-03 16:5x UTC（`date -u` 実測）
-- status: **REVIEW CANDIDATE v0.2（未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない）**
+- node: `T-WMSO`; 起草 = Claude Code web session（review candidate 起草・**authority 無し**・凍結物へ非接触）; 作成 = 2026-09-03 16:36 UTC（`date -u` 実測）／ v0.2.1 = 2026-09-04 01:5x UTC
+- status: **REVIEW CANDIDATE v0.2.1（未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない）** — v0.2 → v0.2.1 = 陽性対照レビューの注入外 finding の fold（§11）
 - 土台（凍結・編集しない・4 file）: contracts_v2 DESIGN v2.11.2 `00192d20ca00b654cf6cfdb9d04b03ca14adfd0b93f2105c0fea28c295ff8aff` @ `54f90a7de1e02fb14eaf793bf3c60d9503d0d82e` ／ EP v1.9 md `c474acea7c58acc22050c2ad9944fd45a18f5c76967964b42d11922e28fa27e7` ／ EP JSON v1.9 `e63176af9bc3a246b1c32db369ec59f8d09a4c96c381bb03a3a6024bd9811c6e`（definition hash `e7ca43093084c167a209b008533a66d26a1fd3223d2a3c11274d28306c3ff803`）／ tensor_binding DESIGN v13 `5a1874d3be8b98b8aeaace73890d8021cbc7f9814e048741f7f58d6746f349a6` @ `07250f4a0208b3bbd27eae6fef7d980743c4b538`
 - 前提文書: D0 architecture（EXIT GRANTED — `thread_isaac_lab/thread-vault/T-WMSO/state.md:91`）／ Rs C3 裁定（slice EP evidence profile = SHADOW rank 2・非 authority；execution profile は別軸・未裁定）／ handoff 決定（2026-09-03）／ 対の runtime spec = `05_WMSO_RUNTIME_SPEC_v0.2_REVIEW_CANDIDATE_20260903.md`（本 doc の型は 05 §4 `ActiveAuthorityLease.profile_hash` / `TimingBinding` / `AcceptedEnvelope` / `HealthConfirmation.profile_health_checks` に結線）
 - ⛔ impl / training / closed-loop authority / production / push / freeze / slice = CLOSED 継続。本 doc は設計書面のみ。
@@ -37,7 +37,7 @@ IndustrialDeploymentProfile = 「cell・controller・tool・payload・workspace�
 | 反循環規則（自身の hash・SkillActionId・ExecutionBundleHash を preimage に置かない） | `$D/WMSO_D11B_TENSOR_BINDING_DESIGN_RSTECHLEAD2_20260720.md:23` | `profile_hash` に同型適用（§2.3） |
 | `SkillDefinition.required_control_resources: ControlResourceSpec` / `freshness_policy: FreshnessPolicy` / `fail_closed_action: FailClosedAction` | `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:142` / `:146` / `:147` | 変更不可。profile は **追加の連言**と **有限値への強化**しか持たない |
 | `InitiationSpec` / `ExprKind` / `FreshnessPolicy` / `Ownership` / `ControlResourceSpec` = {ee_left, ee_right, gripper_left, gripper_right} | `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:151` | `InitiationStrengthening` の述語語彙は frozen `ExprKind` を再利用（member 追加なし）。`ResourceAvailability.control` は frozen `ControlResourceSpec` そのもの |
-| `validate_invocation_start(…, now)` = initiation predicate / freshness_policy 評価 / required ⊆ offered | `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:372-373`、`:380` | frozen 検査は不変。profile の強化は **runtime が別 conjunct として評価**（05 §6.2 B4） |
+| `validate_invocation_start(…, now)` = initiation predicate / freshness_policy 評価 / required ⊆ offered | `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:372-373`、`:380` | frozen 検査は不変。profile の強化は **runtime が別 conjunct として評価**（05 v0.2.1 §6.2 B4 に明示・偽 = `R_PROFILE_INITIATION_FAILED`） |
 | WCJ 規則（UTF-16 code unit key sort 等） / `SkillDefinitionHash` = H_WCJ(SkillDefinition 全体) / `BehaviorSignature` 13 面 | `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:168` / `:159` / `:218` | profile は `SkillDefinition` に触れない ⇒ いずれの hash も不変（03 matrix） |
 | §5C strict codec（unknown field 拒否） | `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:385` | profile 自身の codec も strict（`P_UNKNOWN_FIELD`） |
 | EP §4 usage profiles（CLOSED_LOOP / SHADOW（非 authority）/ OFFLINE_REPLAY）・profile 充足の意味論・usage matrix = ceiling | `$D/WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md:154`、`:156`、`INITIATION_SPEC` 行 `:148` | **evidence profile**。本 doc の deployment profile とは別物（§1.1） |
@@ -72,7 +72,8 @@ class EscalationTarget(Enum):     HOLD | SAFE_STOP                              
 class CellIdentity:
     cell_id: str
     site_id: str
-    robot_model_ref: str                   # RS71 §0 の型式（UR15）と一致必須 — DDR#41 の曝露点（§10 OPP-7）
+    robot_model_ref: str                   # RS71 §0 の型式（UR15）と一致必須（不一致 = P_ROBOT_MODEL_MISMATCH・v0.2.1）— DDR#41 の曝露点（§10 OPP-7）
+    base_frame_ref: str                    # v0.2.1（C-11）: 空間項（workspace / tool CoM / envelope）の基準 frame。全 spatial field はこの frame か tool_flange で表す
     robot_serial_ref: str
     controller_firmware_ref: str
     layout_revision_ref: str               # cell layout の版（keep-out の前提）
@@ -92,7 +93,7 @@ class ControllerEnvelope:                  # 運動学・力学の上限（SI）
 class ToolPayloadSpec:
     tool_id: str
     tool_mass_kg: CanonicalDecimal
-    tool_com_m: tuple[CanonicalDecimal, CanonicalDecimal, CanonicalDecimal]
+    tool_com_m: tuple[CanonicalDecimal, CanonicalDecimal, CanonicalDecimal]   # frame = tool_flange（v0.2.1・C-11）
     payload_mass_max_kg: CanonicalDecimal
     tcp_offset_ref: str                    # calibration 側で attest される TCP offset の参照
 
@@ -101,11 +102,13 @@ class ZoneRef:
     zone_id: str
     geometry_sha256: str                   # zone 幾何（外部 artifact）の content hash
     kind: str                              # "keep_out" | "reach_limit" | "height_band"
+    frame_ref: str                         # v0.2.1（C-11）: == CellIdentity.base_frame_ref（不一致 = P_FRAME_MISMATCH）
 
 @dataclass(frozen=True)
 class WorkspaceRestriction:
     zones: tuple[ZoneRef, ...]             # 追加の制約のみ（許可領域の拡張は表現不能 — §3）
     representation: str = "workspace"
+    frame_ref: str = ""                    # v0.2.1（C-11）: == CellIdentity.base_frame_ref（gateway の FK 変換の目標 frame）
 
 @dataclass(frozen=True)
 class SafetyRestrictionSet:               # 静的 restriction（gateway predicate）。live 決定は IndependentSafetyLayer
@@ -135,10 +138,12 @@ class ResourceAvailability:               # SAFEHOLD からの初回起動で of
     control: ControlResourceSpec           # frozen 型（{ee_left, ee_right, gripper_left, gripper_right: bool}）
     contact: bool
     resource: dict                         # frozen Ownership.resource と同じ opaque dict（値語彙は凍結に無い）
-    attested_by: tuple[str, ...]           # DeploymentEvidenceRecord.record_id（CELL_COMMISSIONING）— 空 = P_RESOURCE_UNATTESTED
+    # v0.2.1（C-08）: 旧 attested_by（record_id を profile preimage に置く）は 削除 — evidence → profile の一方向束縛のみ（record が profile_hash を持つ）。
+    #   P_RESOURCE_UNATTESTED は登録時に evidence store（kind = CELL_COMMISSIONING ∧ record.profile_hash == 本 profile の hash）を照会して判定する
 
 @dataclass(frozen=True)
 class RuntimeTimeouts:                    # 05 TimingBinding へ写される（05 INV-22: 数値は profile 由来）
+    ack_validity_s: CanonicalDecimal       # v0.2.1（C-12 / B-11）: ReadinessAck.valid_until の窓（05 TimingBinding.ack_validity_s）
     ack_timeout_s: CanonicalDecimal
     permit_ttl_s: CanonicalDecimal
     health_confirm_timeout_s: CanonicalDecimal
@@ -171,10 +176,10 @@ class EscalationPolicy:                   # 05 の既定 disposition を SAFE_ST
     on_health_fail: EscalationTarget       # 05 既定 = HOLD
     retract_invalidates_lease: bool        # 05 §4.5 既定 = False（override のみ）。True = 強化
     force_limit_invalidates_lease: bool    # 同上
-    clearance_roles: tuple[tuple[str, str], ...]   # (safehold_reason, role) — SAFETY / SAFE_STOP / CHECKPOINT_DISABLED / MANAGER_RESTART の解除に要する role（05 §5.4）
+    clearance_roles: tuple[tuple[str, str], ...]   # (safehold_reason, role) — SAFETY / SAFE_STOP / CHECKPOINT_DISABLED / MANAGER_RESTART / GATEWAY_RESTART の解除に要する **追加の** role（05 §5.4）。v0.2.1（C-13）: IndependentSafetyLayer の clearance record・durable 整合検査の**代替ではない**（常に AND）
 
 @dataclass(frozen=True)
-class BindingExpectation:                 # 「この cell でこの skill を走らせる前提の binding 事実」— 等値検査の対象
+class BindingExpectation:                 # 「この cell でこの skill を走らせる前提の binding 事実」— 等値検査の対象。v0.2.1（C-19）: LEARNED では値は tensor_binding_hash から導出される readback（第 2 の source ではない）・SCRIPTED / WAIT では唯一の source
     skill_action_id: str                   # certified のみ
     tensor_binding_hash: str | None        # LEARNED ⇔ 非 null
     control_mode: ControlMode              # frozen enum
@@ -248,6 +253,9 @@ profile_hash = H_WCJ(IndustrialDeploymentProfile)   # 05 ActiveAuthorityLease.pr
 | AcceptedEnvelope 静的充足可能性（§4） | `P_ENVELOPE_EMPTY` |
 | `binding_expectations` の `skill_action_id` が certified（certificate 存在） | `P_EXPECTATION_UNCERTIFIED` |
 | 反循環 / 未知 field / 版 | `P_SELF_HASH` / `P_UNKNOWN_FIELD` / `P_SCHEMA_VERSION_UNKNOWN` |
+| `robot_model_ref` が RS71 §0 の型式と一致（v0.2.1） | `P_ROBOT_MODEL_MISMATCH` |
+| 全 spatial field の `frame_ref` == `base_frame_ref` or `tool_flange`（v0.2.1） | `P_FRAME_MISMATCH` |
+| `DeploymentEvidencePolicy` が MIN_SHADOW / MIN_CLOSED_LOOP / MIN_FAULT_INJECTION を含む（v0.2.1） | `P_EVIDENCE_POLICY_TOO_WEAK` |
 
 **「広げる」試みの網羅（反証の型）**: profile が frozen より緩い挙動を引き起こす経路は (i) action-space bounds を緩める — field が無い、(ii) 周波数・hold・control_mode を変える — 等値検査、(iii) initiation を緩める — AND のみ、(iv) 鮮度を緩める — `p ≤ f`、(v) 資源を偽って offered にする — attestation 必須（事実の検査は evidence 側）、(vi) 安全層を不要にする — True 必須、(vii) disposition を緩める — enum に緩和値が無い、(viii) boundary を checkpoint 化する — field が無い、(ix) unknown field で抜け道を作る — strict codec。**(v) だけは契約層では真偽を判定できない**（cell の物理事実）ため、`DeploymentEvidencePolicy` の CELL_COMMISSIONING に委ねる（honest scope・§10 OPP-5）。
 
@@ -302,17 +310,24 @@ class FaultInjectionRequirement:
 @dataclass(frozen=True)
 class DeploymentEvidencePolicy:
     policy_schema_version: str             # "1.0"
-    required_before_shadow_lease: tuple[DeploymentEvidenceKind, ...]      # 最低 = CELL_COMMISSIONING, GATEWAY_CONFIG_ATTESTATION, SAFETY_LAYER_ACCEPTANCE
+    required_before_shadow_lease: tuple[DeploymentEvidenceKind, ...]      # ⊇ MIN_SHADOW（下記・規範）でなければ P_EVIDENCE_POLICY_TOO_WEAK（v0.2.1・C-09）
     required_before_closed_loop_lease: tuple[DeploymentEvidenceKind, ...] # 上記 + CONTROLLER_ENVELOPE_MEASUREMENT, TOOL_PAYLOAD_IDENTIFICATION, CALIBRATION_RECORD, HEALTH_CHECK_RUN, FAULT_INJECTION_RESULT
     fault_injection: tuple[FaultInjectionRequirement, ...]               # 最低 = R_EPOCH_STALE_COMMAND / R_OFFER_REUSED / R_PERMIT_REUSED / R_SAFETY_OVERRIDE / R_HEALTH_CONFIRM_FAILED / R_EXECUTOR_LOST を CLOSED_LOOP_AUTHORITY 前に
-    validity_rule: str                     # "all required records valid at permit issue time"
+    validity_rule: ValidityRule            # v0.2.1（C-09）: enum。v1.0 の唯一の member = ALL_REQUIRED_VALID_AT_PERMIT_ISSUE
+
+class ValidityRule(Enum): ALL_REQUIRED_VALID_AT_PERMIT_ISSUE
+
+# 規範最小集合（v0.2.1・C-09 — comment ではなく本文の規則。policy がこれを含まなければ P_EVIDENCE_POLICY_TOO_WEAK）
+MIN_SHADOW       = {CELL_COMMISSIONING, GATEWAY_CONFIG_ATTESTATION, SAFETY_LAYER_ACCEPTANCE}
+MIN_CLOSED_LOOP  = MIN_SHADOW ∪ {CONTROLLER_ENVELOPE_MEASUREMENT, TOOL_PAYLOAD_IDENTIFICATION, CALIBRATION_RECORD, HEALTH_CHECK_RUN, FAULT_INJECTION_RESULT}
+MIN_FAULT_INJECTION（CLOSED_LOOP_AUTHORITY 前）= {R_EPOCH_STALE_COMMAND, R_OFFER_REUSED, R_PERMIT_REUSED, R_SAFETY_OVERRIDE, R_HEALTH_CONFIRM_FAILED, R_EXECUTOR_LOST, R_POST_OUTCOME_COMMAND, R_GATEWAY_RESTART}
 deployment_evidence_policy_hash = H_WCJ(DeploymentEvidencePolicy)
 ```
 
 ### 6.2 EP v1.9 との関係（= 無関係であることの明示）
 
 - 本 policy は EP の `claim_targets`（13）/ `ProofKind`（15）/ grade（5）/ `profiles` のいずれにも項目を足さず、`evidence_policy_definition_hash`（`$D/WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md:163`）は不変（04 参照）。
-- EP md / JSON に `controller` / `calibrat` / `deploy` / `inject` / `cell` の語彙は無い（critic 報告 §3.7 の grep 結果）ため、deployment evidence は**構造的に EP の外**である。
+- EP md / JSON に `controller` / `calibrat` / `deploy` / `inject` / `epoch` / `lease` の語彙は無い（critic 報告 §3.7 の grep 結果。⚠ v0.2.1（C-14）: 旧記述の `cell` は EP が usage matrix の表 cell の意味で使うため除外）ため、deployment evidence は**構造的に EP の外**である。
 - grade 語（EXACT_TRAIN_TIME 等）を deployment evidence に使わない。deployment evidence は「存在・有効期限・束縛」だけを持ち、skill の certification に影響しない（certificate は runtime / deployment の事象で無効化されない — `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:39`）。
 - `SAFETY_LAYER_ACCEPTANCE` の**内容**（機能安全の受入基準）は本 doc の外（§10 OPP-6）。本 doc は record の存在と束縛だけを要求する。
 
@@ -324,16 +339,16 @@ deployment_evidence_policy_hash = H_WCJ(DeploymentEvidencePolicy)
 
 - 旧 v0.1 の並行実行 profile は**削除**し、本 doc は合成（`SkillCompositionDefinition` / barrier / region postcondition / `ParallelRegion` の枝数 / DUAL-ARM 適合）を一切含まない。
 - 根拠: 合成 schema delta = pX SKILL-DESIGN の court、`ParallelRegion` 枝数下限の supersede と DUAL-ARM 適合 = Rs 専権 OPEN（`$D/WMSO_RS_D11C_SCOPE_APPROVAL_CUSTODY_20260721.md:36-38`）；arity SUSPENDED は D1.1-B freeze と独立（`$D/WMSO_D11B_FREEZE_RECORD_20260721.md:39`）；SKILL の決定権 = pX（`$D/WMSO_RS_SKILL_OWNERSHIP_RULING_20260720.md:9`）。
-- 機械検査: profile の直列化本文に合成語彙（`ParallelRegion` / `SkillCompositionDefinition` / `branch_count` / `barrier` / `region_postcondition` / `arity`）が現れたら `P_COMPOSITION_CONTENT`。
+- 機械検査: profile の**構造**（field 名・型名・enum member・`predicate_refs` / `restriction_ids` の識別子）に合成語彙（`ParallelRegion` / `SkillCompositionDefinition` / `branch_count` / `barrier` / `region_postcondition` / `arity`）が識別子単位（word boundary）で現れたら `P_COMPOSITION_CONTENT`。v0.2.1（C-17）: 自由文（`profile_label` 等）は対象外・部分文字列一致（例: `similarity` 内の `arity`）は検出しない。
 - 本 doc の `ResourceAvailability.control` が両腕の資源を True にすることは「cell に両腕がある」事実の宣言であり、2 executor の同時保持（合成）を許す意味ではない（05 §11 項 5: lease は常に 1 executor）。
 
 ## 8. Validation 規則・code 一覧・Test plan（設計時宣言 — impl CLOSED）
 
 ### 8.1 code 一覧（接頭辞 `P_`・frozen `E_*` / runtime `R_*` と衝突しない）
 
-`P_INTRINSIC_OVERRIDE` / `P_RATE_MISMATCH` / `P_HOLD_MISMATCH` / `P_CONTROL_MODE_MISMATCH` / `P_BINDING_HASH_MISMATCH` / `P_INITIATION_RELAXED` / `P_FRESHNESS_RELAXED` / `P_RESOURCE_UNATTESTED` / `P_SAFETY_LAYER_NOT_REQUIRED` / `P_COMPOSITION_CONTENT` / `P_TIMEOUT_NONPOSITIVE` / `P_DEADLINE_BELOW_PERIOD` / `P_HEALTHCHECK_MISSING` / `P_HEALTHCHECK_FAIL_OPEN` / `P_CALIBRATION_MISSING` / `P_CALIBRATION_EXPIRED` / `P_EVIDENCE_UNBOUND` / `P_ENVELOPE_SHAPE` / `P_ENVELOPE_EMPTY` / `P_EXPECTATION_UNCERTIFIED` / `P_SELF_HASH` / `P_UNKNOWN_FIELD` / `P_SCHEMA_VERSION_UNKNOWN`
+`P_INTRINSIC_OVERRIDE` / `P_RATE_MISMATCH` / `P_HOLD_MISMATCH` / `P_CONTROL_MODE_MISMATCH` / `P_BINDING_HASH_MISMATCH` / `P_INITIATION_RELAXED` / `P_FRESHNESS_RELAXED` / `P_RESOURCE_UNATTESTED` / `P_SAFETY_LAYER_NOT_REQUIRED` / `P_COMPOSITION_CONTENT` / `P_TIMEOUT_NONPOSITIVE` / `P_DEADLINE_BELOW_PERIOD` / `P_HEALTHCHECK_MISSING` / `P_HEALTHCHECK_FAIL_OPEN` / `P_CALIBRATION_MISSING` / `P_CALIBRATION_EXPIRED` / `P_EVIDENCE_UNBOUND` / `P_ENVELOPE_SHAPE` / `P_ENVELOPE_EMPTY` / `P_EXPECTATION_UNCERTIFIED` / `P_SELF_HASH` / `P_UNKNOWN_FIELD` / `P_SCHEMA_VERSION_UNKNOWN` / `P_ROBOT_MODEL_MISMATCH` / `P_FRAME_MISMATCH` / `P_EVIDENCE_POLICY_TOO_WEAK`（v0.2.1）
 
-規則: (1) 全検査は fail-closed（評価不能 = 違反）。(2) profile の受理（`profile_hash` の登録）は全 `P_*` = 0 が前提。(3) 受理後の事実変化（期限切れ・evidence 失効）は profile を変えず lease を無効化する（§5）。(4) `P_*` は certificate・EP grade・`SkillDefinitionHash` のいずれにも影響しない。
+規則: (1) 全検査は fail-closed（評価不能 = 違反）。(2) profile の受理（`profile_hash` の登録）は全 `P_*` = 0 が前提。**評価点は 2 つ（v0.2.1・C-10）**: 第 1 評価点 = 登録時（構造・単調性・反循環・codec・`P_RESOURCE_UNATTESTED` / `P_EVIDENCE_POLICY_TOO_WEAK` / `P_ROBOT_MODEL_MISMATCH` / `P_FRAME_MISMATCH`）／ 第 2 評価点 = **permit 発行時**（時刻・lease 文脈依存の `P_CALIBRATION_EXPIRED` / `P_EVIDENCE_UNBOUND` / `P_EXPECTATION_UNCERTIFIED` を再評価 — 05 §3.4 が `R_PROFILE_MISBOUND` として扱う）。(3) 受理後の事実変化（期限切れ・evidence 失効）は profile を変えず lease を無効化する（§5）。(4) `P_*` は certificate・EP grade・`SkillDefinitionHash` のいずれにも影響しない。
 
 ### 8.2 Test plan
 
@@ -347,7 +362,9 @@ deployment_evidence_policy_hash = H_WCJ(DeploymentEvidencePolicy)
 | PT-06 | `requires_safety_layer_health = False` | `P_SAFETY_LAYER_NOT_REQUIRED` |
 | PT-07 | `EscalationPolicy.on_no_chain` に HOLD より緩い値を与えようとする | 型上 表現不能（enum に無い）— negative control は codec 拒否 |
 | PT-08 | keep-out が全到達域を覆う profile | `P_ENVELOPE_EMPTY` |
-| PT-09 | `attested_by` 空の `ResourceAvailability` | `P_RESOURCE_UNATTESTED` |
+| PT-09 | CELL_COMMISSIONING evidence（profile_hash 束縛）が evidence store に無い profile を登録 | `P_RESOURCE_UNATTESTED`（v0.2.1: 一方向束縛） |
+| PT-16 | 空の `DeploymentEvidencePolicy`（required 集合 = ∅） | `P_EVIDENCE_POLICY_TOO_WEAK`（v0.2.1） |
+| PT-17 | zone の `frame_ref` を base_frame_ref 以外にする（v0.2.1） | `P_FRAME_MISMATCH` |
 | PT-10 | `deployment_evidence_policy_hash` 未解決 / required kind 欠落 | `P_EVIDENCE_UNBOUND` |
 | PT-11 | profile 本文に `ParallelRegion` を含める | `P_COMPOSITION_CONTENT` |
 | PT-12 | profile が自身の hash を field に持つ | `P_SELF_HASH` |
@@ -399,6 +416,25 @@ deployment_evidence_policy_hash = H_WCJ(DeploymentEvidencePolicy)
 
 - **BRIEF 修正の反映（R1-R4）**: 制御周波数・hold・control_mode は**等値のみ**（brief 骨子の「rate ≤ / hold stricter-or-equal」は起草前に R1 で supersede — critic X3）／ 狭めてよい「rate limit」= `ControllerEnvelope` の運動学上限／ `AcceptedEnvelope` = 空間別評価の連言（R3）／ 語彙 = VOCABULARY.md（R4）。
 - 旧 v0.1 の識別子: `ParallelExecutionProfile` 削除、`IntrinsicExecutionLimits` 不採用、`continuation_overlay_hash` / `recovery_overlay_hash` 削除（05 と同じ根拠）。
+- **v0.2.1 fold（2026-09-04 01:5x UTC）— 陽性対照レビュー（盲検 reviewer PC_C / PC_B）の**注入外** finding を verify して fold**:
+
+| finding | 内容 | 変更節 |
+|---|---|---|
+| C-06 (HIGH) | initiation 強化の runtime 評価点が無い | 05 §6.2 B4 に明示（本 doc §1 表を更新） |
+| C-07 (MEDIUM) | BEFORE_PERMIT health check の結線点が無い | 05 §3.4 permit 発行前提条件（本 doc は stage 定義のみ） |
+| C-08 (MEDIUM) | `attested_by` と record.profile_hash の循環参照 | §2.1 `attested_by` 削除・一方向束縛・PT-09 |
+| C-09 (MEDIUM) | 最小 required 集合が comment・validity_rule が自由文 | §6.1 MIN_SHADOW / MIN_CLOSED_LOOP / MIN_FAULT_INJECTION（規範）・`ValidityRule` enum・`P_EVIDENCE_POLICY_TOO_WEAK`・PT-16 |
+| C-10 (MEDIUM) | 時刻依存 P_* の評価点が未定義 | §8.1 規則 (2) 2 評価点 |
+| C-11 (MEDIUM) | 空間項に frame が無い | `base_frame_ref` / `frame_ref`・`P_FRAME_MISMATCH`・PT-17 |
+| C-12 / B-11 (MEDIUM) | `ack_validity_s` の出所 | `RuntimeTimeouts.ack_validity_s` |
+| C-13 (MEDIUM) | clearance_roles が ISL clearance の代替と読める | §2.1 注記（常に AND） |
+| C-14 (LOW) | `cell` 語彙の誤主張 | §6.2 訂正 |
+| C-15 (LOW) | robot_model_ref の不一致 code 無し | `P_ROBOT_MODEL_MISMATCH` |
+| C-16 (LOW) | 作成時刻が非厳密 | header |
+| C-17 (LOW) | 合成語彙検査の部分文字列誤検出 | §7 識別子単位 |
+| C-19 (LOW) | BindingExpectation の値 copy の位置づけ | §2.1 注記（LEARNED = readback） |
+
+- 陽性対照で**注入した** 4 欠陥（PC-06-E/F/G/H）は本 doc の実体には存在しない（盲検 reviewer の C-01〜C-04 は注入欠陥の検出）。
 
 ## 12. Review anchors
 

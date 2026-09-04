@@ -11,6 +11,8 @@ Checks (fail-closed; exit 1 on any FAIL):
   C2  (heuristic, WARN not FAIL) a backticked identifier from the citing sentence appears within ±3 lines of the cited line
   O1  (runtime spec only, --runtime) ordering: first mention of ReadinessAck < CommitPermit < AuthorityCas/CAS < HealthConfirmation in §3
   O2  (runtime spec only) replay/stale rules present: handoff_offer_id, authority_epoch_snapshot, E_HANDOFF_EPOCH_STALE, R_OFFER_REUSED, R_EPOCH_STALE_COMMAND
+  O3  (runtime spec only) §3 CAS postcondition records the consumed offer: 'consumed_offer_ids ∪ {consume_offer_id}' (positive-control blind spot PC-05-C)
+  O4  (runtime spec only) post-outcome rejection token R_POST_OUTCOME_COMMAND and one-shot permit consumption sentence present
 """
 import os, re, sys
 
@@ -85,6 +87,11 @@ def check(path, root):
         elif order != sorted(order): fails.append(f"O1 §3 ordering violated (first-mention offsets {order}); required ACK → permit → CAS → health")
         for k in ("handoff_offer_id", "authority_epoch_snapshot", "E_HANDOFF_EPOCH_STALE", "R_OFFER_REUSED", "R_EPOCH_STALE_COMMAND"):
             if k not in text: fails.append(f"O2 required replay/stale rule token missing: {k}")
+        # O3 (positive-control blind spot PC-05-C): the CAS postcondition must record the consumed offer in the tuple
+        if "consumed_offer_ids ∪ {consume_offer_id}" not in body: fails.append("O3 §3 CAS postcondition lacks 'consumed_offer_ids ∪ {consume_offer_id}'")
+        # O4 (v0.2.1): post-outcome admission rejection and one-shot permit consumption at the CAS point must be stated
+        for k in ("R_POST_OUTCOME_COMMAND", "CONSUMED` は CAS 成功の同一線形化点でのみ設定"):
+            if k not in text: fails.append(f"O4 required v0.2.1 rule token missing: {k}")
     return fails, warns, n_cit
 
 def main():
