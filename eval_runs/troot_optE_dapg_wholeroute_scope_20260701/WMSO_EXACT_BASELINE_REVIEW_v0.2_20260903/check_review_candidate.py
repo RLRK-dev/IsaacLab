@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Mechanical checks for WMSO v0.2 review-candidate documents (records-only helper; stdlib only).
 
-Usage: python3 check_review_candidate.py <doc.md|matrix.csv> [...] [--runtime]
+Usage: python3 check_review_candidate.py <doc.md|matrix.csv> [...] [--runtime | --profile]
 Checks (fail-closed; exit 1 on any FAIL):
   H1  header block present (status REVIEW CANDIDATE, 4 frozen pins full 64-hex, CLOSED line)         [md only]
   S1  mandatory sections present (中心構造 / 主張しないこと / Open points / 版歴 / Review anchors)      [md only]
@@ -15,6 +15,11 @@ Checks (fail-closed; exit 1 on any FAIL):
   O3  (runtime spec only) §3 CAS postcondition records the consumed offer: 'consumed_offer_ids ∪ {consume_offer_id}' (positive-control blind spot PC-05-C)
   O4  (runtime spec only) post-outcome rejection token R_POST_OUTCOME_COMMAND and one-shot permit consumption sentence present
   K1  (CSV mode, v0.2.2 / A-08) header equals the declared column list and data-row count equals the declared count (02 = 40, 03 = 14)
+  O5  (runtime spec only, v0.2.3) every RuntimeFaultCode enum member has a row in the §3.7 failure table (INV-27 totality)
+  O6  (runtime spec only, v0.2.3) INV-/T-/OP- ids are contiguous from 1 with no duplicates
+  O7  (runtime spec only, v0.2.3) CAS condition 10 reason set == the §5.4 "追加前提" set (A2-01 / B2-07)
+  O8  (runtime spec only, v0.2.3) every RuntimeTimeouts field of the sibling 06 profile spec exists in TimingBinding (INV-22 / CD-13)
+  Q1  (profile spec only, --profile, v0.2.3) every P_* code used in 06 body appears in the §8.1 code list; PT-/OPP- ids contiguous, no duplicates
 CSV mode is selected by the `.csv` extension (02 / 03 matrices); H1 / S1 / F2 / O* do not apply there.
 """
 import csv, io, os, re, sys
@@ -132,6 +137,48 @@ def check(path, root):
         # O4 (v0.2.1): post-outcome admission rejection and one-shot permit consumption at the CAS point must be stated
         for k in ("R_POST_OUTCOME_COMMAND", "CONSUMED` は CAS 成功の同一線形化点でのみ設定"):
             if k not in text: fails.append(f"O4 required v0.2.1 rule token missing: {k}")
+        # O5 (v0.2.3): every RuntimeFaultCode member has a failure-table row
+        i = text.find("class RuntimeFaultCode"); enum = text[i:text.find("```", i)] if i >= 0 else ""
+        r_enum = set(re.findall(r"R_[A-Z_]+", enum))
+        sec37 = text[text.find("## 3.7"):text.find("## 4.")]
+        ftbl = sec37[sec37.find("| 失敗 | 検出者 | fault |"):]
+        r_fail = set(re.findall(r"`(R_[A-Z_]+)`", ftbl))
+        if not r_enum: fails.append("O5 RuntimeFaultCode enum block not found")
+        for r in sorted(r_enum - r_fail): fails.append(f"O5 fault code {r} has no §3.7 failure-table row (INV-27)")
+        # O6: contiguous ids
+        for name, pat in (("INV", r"^\| (INV-\d+) \|"), ("T", r"^\| (T-\d+) \|"), ("OP", r"^\| (OP-\d+) \|")):
+            ids = re.findall(pat, text, re.M); nums = sorted(int(x.split("-")[1]) for x in ids)
+            if not nums: fails.append(f"O6 no {name}- rows found"); continue
+            dup = sorted({x for x in ids if ids.count(x) > 1}); gaps = [n for n in range(1, max(nums) + 1) if n not in nums]
+            if dup or gaps: fails.append(f"O6 {name}- ids not contiguous/unique: dup={dup} gaps={gaps}")
+        # O7: cond 10 set == §5.4 set
+        c10 = [l for l in lines if l.startswith("10. `safehold_reason ∈")]
+        s54 = [l for l in lines if "CAS 条件 10 の集合" in l]
+        if not c10 or not s54: fails.append("O7 condition 10 line or §5.4 set line not found")
+        else:
+            a = set(re.findall(r"[A-Z_]{4,}", re.search(r"\{[^}]+\}", c10[0]).group(0)))
+            b = set(re.findall(r"[A-Z_]{4,}", re.search(r"\{[^}]+\}", s54[0]).group(0)))
+            if a != b: fails.append(f"O7 condition 10 set {sorted(a)} != §5.4 set {sorted(b)}")
+        # O8: sibling 06 RuntimeTimeouts ⊆ TimingBinding
+        sib = os.path.join(os.path.dirname(os.path.abspath(path)), "06_WMSO_INDUSTRIAL_PROFILE_v0.2_REVIEW_CANDIDATE_20260903.md")
+        if os.path.isfile(sib):
+            g = open(sib, encoding="utf-8").read(); j = g.find("class RuntimeTimeouts:"); rt = g[j:g.find("\n\n", j)] if j >= 0 else ""
+            k = text.find("class TimingBinding:"); tb = text[k:text.find("\n\n", k)] if k >= 0 else ""
+            rtf = set(re.findall(r"^\s{4}(\w+):", rt, re.M)); tbf = set(re.findall(r"^\s{4}(\w+):", tb, re.M))
+            for fld in sorted(rtf - tbf): fails.append(f"O8 RuntimeTimeouts.{fld} (06) has no TimingBinding field (05)")
+        else:
+            warns.append("O8 sibling 06 not found; RuntimeTimeouts ⊆ TimingBinding not checked")
+    if "--profile" in sys.argv:
+        pl = [l for l in lines if l.startswith("`P_INTRINSIC_OVERRIDE` / ")]
+        if not pl: fails.append("Q1 §8.1 code list line not found")
+        else:
+            listed = set(re.findall(r"`(P_[A-Z_]+)`", pl[0])); used = set(re.findall(r"`(P_[A-Z_]+)`", text))
+            for c in sorted(used - listed): fails.append(f"Q1 code {c} used in body but absent from §8.1 code list")
+        for name, pat in (("PT", r"^\| (PT-\d+) \|"), ("OPP", r"^\| (OPP-\d+) \|")):
+            ids = re.findall(pat, text, re.M); nums = sorted(int(x.split("-")[1]) for x in ids)
+            if not nums: fails.append(f"Q1 no {name}- rows found"); continue
+            dup = sorted({x for x in ids if ids.count(x) > 1}); gaps = [n for n in range(1, max(nums) + 1) if n not in nums]
+            if dup or gaps: fails.append(f"Q1 {name}- ids not contiguous/unique: dup={dup} gaps={gaps}")
     return fails, warns, n_cit
 
 def main():

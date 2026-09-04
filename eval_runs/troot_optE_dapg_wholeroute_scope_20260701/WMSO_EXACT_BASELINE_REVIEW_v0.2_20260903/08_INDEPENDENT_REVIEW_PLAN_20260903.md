@@ -20,7 +20,7 @@
 
 1. **pin 再測**: repo root で `bash $D/WMSO_EXACT_BASELINE_REVIEW_v0.2_20260903/verify_exact_baseline_pins.sh` を素の bash / python3 で実行し 11/11 PASS を自分の記録に残す（`./isaaclab.sh -p` 経由は不可 — D1.1-B H2 の exit-code mask hazard）。
 2. **content sha で引く**: 版 label（v0.2 等）は照合用の注記。候補文書の sha256 は `SHA256SUMS.txt` を自分で再計算する。
-3. **機械検査を先に走らせる**: `python3 $D/WMSO_EXACT_BASELINE_REVIEW_v0.2_20260903/check_review_candidate.py <doc> [--runtime]` で FAIL = 0 を確認してから読む（FAIL があれば読む前に HOLD）。CSV（02 / 03）は同 script が拡張子 `.csv` で CSV mode に入る（H1 / S1 非適用・header と行数 40 / 14 の assert・`disposition_v0_2` / `verdict` が removed / not_adopted の行は F1 免除・C1 は同じ）— v0.2.2（A-08）。
+3. **機械検査を先に走らせる**: `python3 $D/WMSO_EXACT_BASELINE_REVIEW_v0.2_20260903/check_review_candidate.py <doc> [--runtime | --profile]` で FAIL = 0 を確認してから読む（v0.2.3: `--runtime` は O5 fault code の失敗表 total・O6 id 連番・O7 条件 10 と §5.4 の集合等値・O8 06 `RuntimeTimeouts` ⊆ 05 `TimingBinding` を、`--profile` は Q1 `P_*` の §8.1 列挙と PT / OPP 連番を機械検査する）（FAIL があれば読む前に HOLD）。CSV（02 / 03）は同 script が拡張子 `.csv` で CSV mode に入る（H1 / S1 非適用・header と行数 40 / 14 の assert・`disposition_v0_2` / `verdict` が removed / not_adopted の行は F1 免除・C1 は同じ）— v0.2.2（A-08）。
 4. **finding の型**: `{id, 軸, severity ∈ {CRITICAL, HIGH, MEDIUM, LOW}, 候補 doc:line, 凍結 file:line（矛盾 or 欠落の根拠）, 再現手順 or 反例, 最小修正案}`。根拠の無い finding は受理しない。
 5. **陽性対照（positive control）**: 各 reviewer の計器は、欠陥を注入した候補文書の複製（例: 旧 epoch 拒否を post-transfer ACK まで遅延させる／permit を再使用可にする／削除済みの v0.1 belief 参照型（05 版歴の 削除 項目）を再導入する／profile に action bounds field を足す）を**盲検**で読み、注入欠陥を検出できたことを先に示す。検出できない計器の verdict は採用しない（「存在 ≠ 十分」「弁別できない述語は証拠でない」）。
 6. **手続の独立**: 各軸の reviewer は他軸の finding を読む前に自分の finding を確定する。同意は独立確認ではない。
