@@ -38,18 +38,19 @@ S.mkdir(parents=True, exist_ok=True)
 GRIP_XML = "/home/rlrk/IsaacLab/thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml"
 GRIP_XML_MIRRORED = str(Path(__file__).resolve().parent / "_ur15_2f85_koshape_actuated_mirrored.xml")
 OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "/home/rlrk/Downloads/ur15_steps.mp4")
-# --- RUN_METRICS.json begin (E1, m-p18-286; plan = P0_SCRATCH_... §8.45 @ 5930ebf411): the existing
-# run_metrics.v1 contract, written at exit.  Registered FIRST so it runs LAST (atexit is LIFO) -- after the
-# depth-audit print, and armed on the P4_CLIP_DUMP early exit.  Reads globals defensively; instrument only.
+# --- RUN_METRICS.json begin (E1, m-p18-286; plan = §8.45 @ 5930ebf411): the run_metrics.v1 contract, written at
+# exit.  Registered FIRST so it runs LAST (atexit is LIFO); armed on the P4_CLIP_DUMP exit.  Instrument only.
 import hashlib  # noqa: E402
 import json  # noqa: E402
 import time  # noqa: E402
 
 _RM = {"t0": time.time(), "completed": False, "step1": {}, "steps": []}
-_RM_ENV = ("ALL_PAIRS", "ARM_PATH", "CROWN_R_OVERRIDE", "CROWN_Z0_OVERRIDE", "EXTRA_L_ROUND", "FURNITURE",
-           "GEOMDIST_REPAIR", "GRASP_CENTRE_X", "LOUD_ROUNDS", "P4_CLIP_DUMP", "P4_NO_STANDOFF_REAIM",
-           "P4_OLD_SEAT_AIM", "P4_RELEASE_ONLY", "P4_ROLL_CAP", "SEQUENTIAL_START", "SOLVE_ORDER", "START_TRIES",
-           "STEREO_HEAD", "TILT_DEG_OVERRIDE", "UNWRAP_SOLVE", "UNWRAP_START", "WORK_ROW_DY", "YOKE_SPREAD_OVERRIDE")
+_RM_FILE = Path(__file__).resolve()   # pZ F-d: __main__.__file__ is dropped before atexit on a normal end or a raise
+_RM_ENV = ("ALL_PAIRS", "ARM_PATH", "CABLE_BEND_STIFFNESS_OVERRIDE", "CROWN_R_OVERRIDE", "CROWN_Z0_OVERRIDE",
+           "EXTRA_L_ROUND", "FURNITURE", "GEOMDIST_REPAIR", "GRASP_CENTRE_X", "LOUD_ROUNDS", "P4_CLIP_DUMP",
+           "P4_NO_STANDOFF_REAIM", "P4_OLD_SEAT_AIM", "P4_RELEASE_ONLY", "P4_ROLL_CAP", "SEQUENTIAL_START",
+           "SOLVE_ORDER", "START_TRIES", "STEREO_HEAD", "TILT_DEG_OVERRIDE", "UNWRAP_SOLVE", "UNWRAP_START",
+           "WORK_ROW_DY", "YOKE_SPREAD_OVERRIDE")
 
 
 def _rm_stdout_file():
@@ -77,7 +78,7 @@ def _rm_keys(o):   # json accepts only str keys; the depth audit keys channels b
 
 def _write_run_metrics():
     try:
-        g, here = globals(), Path(__file__).resolve().parent
+        g, here = globals(), _RM_FILE.parent
         log_file = _rm_stdout_file()
         run_dir = log_file.parent if log_file else OUT.resolve().parent
         exc = getattr(sys, "last_value", None)   # set for an uncaught exception, absent otherwise (measured)
@@ -103,7 +104,7 @@ def _write_run_metrics():
                 "identity": {"LEFT": {"arm": "UR15", "arm_xml": xml(here / "ur15_base.xml"), "grip_xml": xml(GRIP_XML)},
                              "RIGHT": {"arm": "UR15-B", "arm_xml": xml(here / "ur15_base_mirrored.xml"),
                                        "grip_xml": xml(GRIP_XML_MIRRORED)}},
-                "driver": xml(Path(__file__).resolve()), "cell_dump": xml(S / "_steps_cell_full.xml"),
+                "driver": xml(_RM_FILE), "cell_dump": xml(S / "_steps_cell_full.xml"),
                 "config": {"yoke_spread_m": g.get("YOKE_SPREAD"),
                            "tilt_deg": math.degrees(math.pi / 2 - g["TILT"]) if "TILT" in g else None,
                            "crown_r_m": g.get("CROWN_R"), "shoulder_height_m": g.get("SHOULDER_HEIGHT"),
