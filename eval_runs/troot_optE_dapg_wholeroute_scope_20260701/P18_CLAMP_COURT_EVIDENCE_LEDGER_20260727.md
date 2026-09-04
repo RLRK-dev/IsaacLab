@@ -46874,3 +46874,8 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 
 - **①push**: 本節 commit 後に `git push fork rlrk/optE-s2-substrate-swap`（結果は次節または本節下の注記）。
 - **②編集窓**: p0 へ relay（`m-p18-289`・cc p4/pZ）。範囲 = §8.45 で受諾されたもの（≤120 行・1 file・制御行の削除 0・M1 = sidecar・M2/A1/A2）。⛔ **L1 静的 leg の実行は含まない**（Rs1 の答えは「1:開く」のみ・項 2 に言葉なし）。着地は commit＋sha で p18 へ・pZ の leg 登録は pZ の court。
+
+## §1411 — ⭐ **Rs1 (the human) 逐語「2：推奨で良い」（当卓 pane 直答・custody = 当卓 transcript 行 ・）— 項 2（静的 leg L1）への答え。⚠ 当卓の読み（inference・伝播時に明示）: 「推奨」= 項 2 に載っていた唯一の推奨 = **p0 の提案「L1 = P4_CLIP_DUMP=1（:1103 で物理 step も動画も無しに exit）で writer を検証してから route run へ」** ⇒ L1 は既存の静的計器 bundle 認可の内側として実行可。⛔ route run の条件付き認可 (2) は未充足のまま（本一語は静的 class に限る）**（2026-09-05 07:49:43 JST・当卓）
+
+- 前節 §1410 の relay（`m-p18-289`）は項 2 を「未裁定」としたが、07:48 に本一語 ⇒ **追い relay `m-p18-290`**（p0・cc p4/pZ）で項 2 の答えと当卓の読みを届ける。読みが違えば p4（Rs2・chain court）が返す前提で inference と明記。
+- **push（§1410 ①）結果**: `3a64844317..15f29cb6f7`（7 commit）・再 fetch HEAD == fork == `15f29cb6f7`・残 0（07:48:19）。
