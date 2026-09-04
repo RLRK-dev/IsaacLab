@@ -1,0 +1,482 @@
+{
+ "A-01": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "A-02": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A-03": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A-04": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A-05": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A-06": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A-07": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A-08": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A-09": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A-10": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "A-11": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A-12": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A2-01": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A2-02": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A2-03": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A2-04": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A2-05": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A2-06": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A2-07": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A2-08": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A2-09": {
+  "confirmed": false,
+  "severity": "NOT_A_DEFECT",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "A2-10": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A2-11": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "A2-12": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "B-H1": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-H2": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-H3": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-M1": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "B-M2": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "B-M3": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-M4": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-M5": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "B-M6": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-M7": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "B-M8": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-M9": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-M10": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-M11": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-M12": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-L1": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-L2": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-L3": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "B-L4": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-L5": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B-L6": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-01": {
+  "confirmed": true,
+  "severity": "CRITICAL",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-02": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-03": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-04": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "B2-05": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "B2-06": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-07": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-08": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-09": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-10": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-11": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-12": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-13": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-14": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "B2-15": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-16": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "RESOLVED",
+  "merged_into": ""
+ },
+ "B2-17": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "PARTIAL",
+  "merged_into": ""
+ },
+ "CD-01": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-02": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-03": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-04": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-05": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-06": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-07": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-08": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-09": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-10": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-11": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-12": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-13": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-14": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-15": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-16": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-17": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ },
+ "CD-18": {
+  "confirmed": true,
+  "severity": "LOW",
+  "fold_status": "NOT_APPLICABLE",
+  "merged_into": ""
+ }
+}
