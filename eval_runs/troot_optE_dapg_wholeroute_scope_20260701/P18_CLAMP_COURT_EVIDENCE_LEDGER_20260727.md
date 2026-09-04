@@ -46906,3 +46906,20 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **pZ の rider（受理）**: F-c = `_RM_ENV`（23）は run が読む母集団（24）と違う（`CABLE_BEND_STIFFNESS_OVERRIDE` を欠き `P4_OLD_SEAT_AIM` を含む — 後者は pZ の double-quote query が見落とし edit が正しかった）／F-a = 2 つ目の `SystemExit(0)` が :2928（`P4_RELEASE_ONLY` block）・pZ も §8.45 の「:1103 = 物理なし」を測らずに継いだ（settle :1044-1049 — ⚠ pZ の行番号は parent 基準・当卓の :1147-1148 は landed 基準）— 両 artifact で日付つき in-place 訂正／F-b = goal_context 不在・analyzer 中立／**正直申告**: prereg は着地の 14 s 後に書かれ、git 史で被判定物に先行しない。
 - **効き方**: (a) F-d を p0 へ回付（`m-p18-293`）— 修正は E1 block 自身の 1 行で、Rs1 が「1:開く」で開いた E1 の編集窓の内側と当卓は読む（p4 = chain court が異議あれば返す）。(b) **修正が着地するまで L1 の PASS を「writer が働く」と読まない**（Rs1 の run 可否とは独立）。(c) 修正後の L2 経路は pZ の抽出 script 検査で証明済・L1（小さな run 1 回・Rs1 の一語待ち）は SystemExit 経路の in-driver 証拠を足す。
 - 08-10 の arm-leg bank `cf0a14cea3` = pZ が 26 日遅れで EQ を検証（9eb8ed7233… / 47）。route run (2) = 不変。
+
+## §1415 — 📎 **配達の帳簿（m-p18-289〜293・宛先 transcript の record で判定・当卓 09-05 08:09 実測）— ⚠ Tab-queue の消費は一様でない・**1 回の融合を実測**（292＋293 が p4/pZ で 1 record に）**
+
+| id | 宛先 | 送信時の状態・手段 | transcript record |
+|---|---|---|---|
+| 289 | p0／p4／pZ | idle・Enter | 3 卓 DELIVERED（22:48:35〜37Z）|
+| 290 | p0 | working・Tab | DELIVERED 22:59:23Z（turn 終了時に消費）|
+| 290 | p4 | idle・Enter | DELIVERED 22:49:45Z |
+| 290 | pZ | working・Tab | **UNKNOWN**（queue-operation は在るが `type=user` 未出現・後続 291/292/293 は届いた）|
+| 291 | p0／p4 | done/idle・Enter | DELIVERED 23:00:52/54Z |
+| 291 | pZ | working・Tab | DELIVERED 23:04:24Z |
+| 292 | p0 | done・Enter | DELIVERED 23:04:58Z |
+| 292 | p4／pZ | working・Tab | **293 と融合して 1 record**（23:09:30/31Z = 293 の Enter で一緒に submit）|
+| 293 | p0／p4／pZ | done・Enter | DELIVERED 23:09:29〜31Z |
+
+- **読み**: Tab-queue は turn 終了時に消費されることも（p0:290・pZ:291）、composer に残って次の Enter で**後続と融合**することもある（p4/pZ:292）。head token が各本文の先頭に在るので受信側は分離できる（D1 の head token の理由がここでも立つ）。pZ:290 は内容が 291〜293 で上書きされており再送しない（blind 再送禁止）。⇒ D1 仕様（v3 §3-D 点 3/4）の HELD/Tab 規則に「Tab 後は次の自分の送信前に消費を確認し、未消費なら融合を前提に送るか待つ」を足す（build 時）。
+- 当卓の background 検証 job は `--status idle` を待ったが、turn 後の状態は `done` で `idle` に戻らないことがある ⇒ 消費確認は状態でなく transcript で（本表の方法）。
