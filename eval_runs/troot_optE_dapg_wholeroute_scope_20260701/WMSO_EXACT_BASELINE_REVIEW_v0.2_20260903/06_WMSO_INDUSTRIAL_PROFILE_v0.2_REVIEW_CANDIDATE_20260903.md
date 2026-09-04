@@ -1,7 +1,7 @@
-# WMSO `IndustrialDeploymentProfile` — DEPLOYMENT PROFILE SPEC (v0.2.1 REVIEW CANDIDATE)
+# WMSO `IndustrialDeploymentProfile` — DEPLOYMENT PROFILE SPEC (v0.2.2 REVIEW CANDIDATE)
 
-- node: `T-WMSO`; 起草 = Claude Code web session（review candidate 起草・**authority 無し**・凍結物へ非接触）; 作成 = 2026-09-03 16:36 UTC（`date -u` 実測）／ v0.2.1 = 2026-09-04 01:5x UTC
-- status: **REVIEW CANDIDATE v0.2.1（未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない）** — v0.2 → v0.2.1 = 陽性対照レビューの注入外 finding の fold（§11）
+- node: `T-WMSO`; 起草 = Claude Code web session（review candidate 起草・**authority 無し**・凍結物へ非接触）; 作成 = 2026-09-03 16:36 UTC（`date -u` 実測）／ v0.2.1 = 2026-09-04 01:51 UTC（file mtime 実測 01:51:18）／ v0.2.2 = 2026-09-04 15:41 UTC（`date -u` 実測）
+- status: **REVIEW CANDIDATE v0.2.2（未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない）** — v0.2 → v0.2.1 = 陽性対照レビューの注入外 finding の fold ／ v0.2.1 → v0.2.2 = 3 軸独立レビューの確定 finding の fold（§11・verdict と処置の全体 = `11_THREE_AXIS_REVIEW_RECORD_20260903.md`）
 - 土台（凍結・編集しない・4 file）: contracts_v2 DESIGN v2.11.2 `00192d20ca00b654cf6cfdb9d04b03ca14adfd0b93f2105c0fea28c295ff8aff` @ `54f90a7de1e02fb14eaf793bf3c60d9503d0d82e` ／ EP v1.9 md `c474acea7c58acc22050c2ad9944fd45a18f5c76967964b42d11922e28fa27e7` ／ EP JSON v1.9 `e63176af9bc3a246b1c32db369ec59f8d09a4c96c381bb03a3a6024bd9811c6e`（definition hash `e7ca43093084c167a209b008533a66d26a1fd3223d2a3c11274d28306c3ff803`）／ tensor_binding DESIGN v13 `5a1874d3be8b98b8aeaace73890d8021cbc7f9814e048741f7f58d6746f349a6` @ `07250f4a0208b3bbd27eae6fef7d980743c4b538`
 - 前提文書: D0 architecture（EXIT GRANTED — `thread_isaac_lab/thread-vault/T-WMSO/state.md:91`）／ Rs C3 裁定（slice EP evidence profile = SHADOW rank 2・非 authority；execution profile は別軸・未裁定）／ handoff 決定（2026-09-03）／ 対の runtime spec = `05_WMSO_RUNTIME_SPEC_v0.2_REVIEW_CANDIDATE_20260903.md`（本 doc の型は 05 §4 `ActiveAuthorityLease.profile_hash` / `TimingBinding` / `AcceptedEnvelope` / `HealthConfirmation.profile_health_checks` に結線）
 - ⛔ impl / training / closed-loop authority / production / push / freeze / slice = CLOSED 継続。本 doc は設計書面のみ。
@@ -149,6 +149,12 @@ class RuntimeTimeouts:                    # 05 TimingBinding へ写される（0
     health_confirm_timeout_s: CanonicalDecimal
     command_deadline_s: CanonicalDecimal   # LEARNED では ≥ 1 / action_rate_hz（05 §4.1）
     manager_liveness_s: CanonicalDecimal
+    safety_heartbeat_timeout_s: CanonicalDecimal   # v0.2.2（B2-01 / B-H3）: IndependentSafetyLayer heartbeat 欠落の上限（05 TimingBinding 同名 field・超過 = 05 §5.2 (i′) SafeStop + R_SAFETY_LAYER_LOST）
+    decision_max_age_s: CanonicalDecimal           # v0.2.2（A-01 / B2-14）: permit 発行時に AuthorityDecision に許す最大 age（05 §3.4 (e)）
+    boundary_dwell_s: CanonicalDecimal             # v0.2.2（B-M9）: S_BOUNDARY_WAIT 滞留の上限（超過 = 05 R_BOUNDARY_DWELL_EXCEEDED → NO_CHAIN 経路）
+    max_reselect_attempts: int                     # v0.2.2（B-M9）: 1 boundary あたりの候補試行上限（≥ 1）
+    command_kind_mismatch_max: int                 # v0.2.2（B2-15）: 連続 R_COMMAND_KIND_MISMATCH の許容回数（≥ 1・超過 = TRANSFER_TO_SAFEHOLD(ENVELOPE_VIOLATION)）
+    inter_command_jitter_s: CanonicalDecimal       # v0.2.2（B-L2 / B2-13）: 連続 command 間隔の許容偏差（超過 = 05 R_TIMING_VIOLATION）
 
 @dataclass(frozen=True)
 class HealthCheckSpec:
@@ -217,7 +223,7 @@ profile_hash = H_WCJ(IndustrialDeploymentProfile)   # 05 ActiveAuthorityLease.pr
 ### 2.3 直列化と反循環
 
 - 直列化 = frozen §2 WCJ（`$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:168` 以下）を適用し、D1.1-B が宣言した追加規約（`Optional None` は明示 `null`・`bool` を `int` として受理しない・tuple → array）を継承する（`$D/WMSO_D11B_TENSOR_BINDING_DESIGN_RSTECHLEAD2_20260720.md:24` 参照）。新 canonicalization 規則は足さない。
-- **反循環**: profile は自身の `profile_hash`・lease id・`control_epoch`・`SkillActionId`・`ExecutionBundleHash` を内包しない（`$D/WMSO_D11B_TENSOR_BINDING_DESIGN_RSTECHLEAD2_20260720.md:23` と同型）。`binding_expectations[].skill_action_id` は**他者の** id であり自己参照ではない。`P_SELF_HASH`。
+- **反循環（v0.2.2・A-06 / A2-09 で構造 pattern に揃えた）**: profile は **自身から導かれる hash**（`profile_hash`・その部分 hash）と、「自身と同一である」ことを主張する任意の hash、および `profile_hash` を preimage に持つ runtime 値（lease id・`control_epoch`・permit id）を preimage に置かない（`$D/WMSO_D11B_TENSOR_BINDING_DESIGN_RSTECHLEAD2_20260720.md:23` の構造 pattern「自己参照 hash を preimage に置かない」と同型）。`profile_hash` は `SkillActionId` / `ExecutionBundleHash` / `tensor_binding_hash` の preimage に入らない（03 matrix C03）ため、`binding_expectations[].skill_action_id` / `tensor_binding_hash` のような**他 artifact の静的 id の参照**は自己参照ではなく許される。検出 = `P_SELF_HASH`（前者の列挙に対する検査）。
 - codec は strict（`$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:385` と同じ 5 拒否）。`P_UNKNOWN_FIELD`。
 
 ## 3. 単調性規則（monotone strengthening）と機械検査
@@ -233,7 +239,7 @@ profile_hash = H_WCJ(IndustrialDeploymentProfile)   # 05 ActiveAuthorityLease.pr
 | `tensor_binding_hash`（`:185` bump = identity） | `BindingExpectation.tensor_binding_hash` | **等値**（ExecutionBundle.tensor_binding.artifact_hash と） | `P_BINDING_HASH_MISMATCH` |
 | `InitiationSpec`（`:151`）・claim target `INITIATION_SPEC`（EP `:101`） | `InitiationStrengthening.conjuncts` | **AND 追加のみ**（frozen predicate は不変・評価は runtime 側 conjunct） | conjunct が frozen `ExprKind` 外・置換/OR/NOT を含む ⇒ `P_INITIATION_RELAXED`（型上 表現不能 + codec 拒否） |
 | `FreshnessPolicy.max_staleness_s`（`:151`, `:146`） | `FreshnessStrengthening.max_staleness_s` | **stricter-or-equal**: frozen 有限 `f` に対し `p ≤ f`；frozen `None` に対し `p` 有限 = 強化・`None` = 強化なし | `p > f` ⇒ `P_FRESHNESS_RELAXED`。順序の `None` 扱いは本 doc の宣言（frozen は規定せず — 05 OP-16） |
-| `required_control_resources`（`:142`）/ required ⊆ offered（`:380`） | `ResourceAvailability.control` | offered 集合の**宣言**（frozen 検査は不変）。cell が持たない資源を offered と宣言する = 事実誤り | `attested_by` 空 ⇒ `P_RESOURCE_UNATTESTED`（CELL_COMMISSIONING evidence 必須） |
+| `required_control_resources`（`:142`）/ required ⊆ offered（`:380`） | `ResourceAvailability.control` | offered 集合の**宣言**（frozen 検査は不変）。cell が持たない資源を offered と宣言する = 事実誤り | evidence store に `kind = CELL_COMMISSIONING` ∧ `record.profile_hash == H_WCJ(profile)` の `DeploymentEvidenceRecord` が無い ⇒ `P_RESOURCE_UNATTESTED`（登録時・第 1 評価点・§2.1 注記と同一規則。v0.2.2 A2-03: 旧 cell は削除済 field `attested_by` を参照していた） |
 | `fail_closed_action`（`:147`）/ 05 既定 disposition | `EscalationPolicy` | **SAFE_STOP 側へのみ**（HOLD → SAFE_STOP 可・逆不可）。invalidation は False → True のみ | HOLD への緩和は型上 表現不能（EscalationTarget に「NONE」「CONTINUE」が無い） |
 | D0 §F safety 優先（`:319`） | `SafetyRestrictionSet.requires_safety_layer_health` | **True 必須** | `P_SAFETY_LAYER_NOT_REQUIRED` |
 | boundary = TERMINAL のみ（BCS `:59`） | 無し | 触れない | checkpoint 切替を有効化する field は無い（05 §6.1） |
@@ -243,7 +249,7 @@ profile_hash = H_WCJ(IndustrialDeploymentProfile)   # 05 ActiveAuthorityLease.pr
 
 | 検査 | 違反 code |
 |---|---|
-| 全 `RuntimeTimeouts` > 0・有限 | `P_TIMEOUT_NONPOSITIVE` |
+| 全 `RuntimeTimeouts` field > 0・有限（`int` field は ≥ 1・v0.2.2） | `P_TIMEOUT_NONPOSITIVE` |
 | `command_deadline_s ≥ 1 / action_rate_hz`（LEARNED の各 expectation） | `P_DEADLINE_BELOW_PERIOD` |
 | `health_checks` に `SAFETY_LAYER_HEARTBEAT`・`CONTROLLER_LIVENESS`・`ENVELOPE_READBACK` の 3 kind が各 ≥ 1（stage は BOTH 推奨・BEFORE_PERMIT 必須） | `P_HEALTHCHECK_MISSING` |
 | 全 `HealthCheckSpec.fail_closed == True` | `P_HEALTHCHECK_FAIL_OPEN` |
@@ -277,8 +283,8 @@ AcceptedEnvelope(lease) = ⋀ { INTRINSIC_D11B(tensor_binding_hash)   … policy
 
 - `ActiveAuthorityLease.profile_hash`（05 §4.1）= 本 doc の `profile_hash`。`CommitPermit.profile_hash` と等値（05 §3.5 前提 6 の inputs 束縛）。
 - **profile 変更 = 新 lease**: profile を「更新」する操作は存在しない。新 profile（新 hash）は 05 の完全経路（ReadinessAck → CommitPermit → AuthorityCas）で新 lease に束縛される。活性 lease の profile を in-place で差し替える経路は無い（05 §4.1 束縛規則）。
-- lease へ写される profile 由来の値: `TimingBinding.{ack_timeout_s, permit_ttl_s, health_confirm_timeout_s, command_deadline_s, manager_liveness_s}` ← `RuntimeTimeouts`；`TimingBinding.runtime_max_staleness_s` ← `min(frozen FreshnessPolicy.max_staleness_s, FreshnessStrengthening.max_staleness_s)`（None 規則は §3）；`AcceptedEnvelope.terms` の 3 項 ← §4；`HealthConfirmation.profile_health_checks` ← `health_checks`（stage ∈ {AT_HEALTH_CONFIRMATION, BOTH}）；`lease.ownership`（SAFEHOLD 起動時）← `ResourceAvailability`。
-- lease 活性中に profile の前提が崩れた場合（calibration 期限切れ・health check 失敗・evidence 失効）は profile 側の「更新」ではなく **lease 無効化**（05 §4.5 → `R_LEASE_INVALIDATED` / `R_HEALTH_CONFIRM_FAILED`）→ SAFEHOLD → 新 profile での新 lease。
+- lease へ写される profile 由来の値: `TimingBinding.{ack_validity_s, ack_timeout_s, permit_ttl_s, health_confirm_timeout_s, command_deadline_s, manager_liveness_s, safety_heartbeat_timeout_s, decision_max_age_s, boundary_dwell_s, max_reselect_attempts, command_kind_mismatch_max, inter_command_jitter_s}` ← `RuntimeTimeouts`（同名 field の等値写像・v0.2.2 で 6 field 追加）；`TimingBinding.runtime_max_staleness_s` ← `min(frozen FreshnessPolicy.max_staleness_s, FreshnessStrengthening.max_staleness_s)`（None 規則は §3）；`AcceptedEnvelope.terms` の 3 項 ← §4；`HealthConfirmation.profile_health_checks` ← `health_checks`（stage ∈ {AT_HEALTH_CONFIRMATION, BOTH}）；`lease.ownership`（SAFEHOLD 起動時）← `ResourceAvailability`。
+- lease 活性中に profile の前提が崩れた場合（v0.2.2・B-M7 で 05 と同期）: (a) health check 失敗（stage AT_HEALTH_CONFIRMATION / BOTH）は 05 §4.5 `R_HEALTH_CONFIRM_FAILED` → SAFEHOLD。(b) calibration 期限切れ・deployment evidence 失効は **活性 lease 中には検出されない**（05 は lease 中の周期再評価を持たない — 05 OP-19・保守既定）。検出点 = **次の permit 発行時**（05 §3.4 (b) の第 2 評価点 → `R_PROFILE_MISBOUND`・permit 不発行）。曝露 = 最大 1 skill（TERMINAL boundary まで）。周期再評価を manager に持たせるかは 05 OP-19（未裁定）。いずれの場合も profile 側の「更新」ではなく新 profile（新 hash）での新 lease。
 - SHADOW_NON_AUTHORITY lease でも profile は同じ規則で束縛される（05 §4.4「他段は同一」）。deployment evidence の required kinds は mode 別（§6）。
 
 ## 6. Deployment evidence（`DeploymentEvidencePolicy` — EP v1.9 の外）
@@ -327,7 +333,7 @@ deployment_evidence_policy_hash = H_WCJ(DeploymentEvidencePolicy)
 ### 6.2 EP v1.9 との関係（= 無関係であることの明示）
 
 - 本 policy は EP の `claim_targets`（13）/ `ProofKind`（15）/ grade（5）/ `profiles` のいずれにも項目を足さず、`evidence_policy_definition_hash`（`$D/WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md:163`）は不変（04 参照）。
-- EP md / JSON に `controller` / `calibrat` / `deploy` / `inject` / `epoch` / `lease` の語彙は無い（critic 報告 §3.7 の grep 結果。⚠ v0.2.1（C-14）: 旧記述の `cell` は EP が usage matrix の表 cell の意味で使うため除外）ため、deployment evidence は**構造的に EP の外**である。
+- **不在主張の範囲と再現（v0.2.2・A-03 / A2-10）**: 対象は **EP md / JSON の 2 file のみ**。再現 command（本 package 内で解決可能）: `for p in controller calibrat deploy inject epoch lease; do grep -ic "$p" $D/WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md $D/WMSO_EvidencePolicy_v1.9.json; done` = 全 pattern で 0 / 0（2026-09-04 実測）。`cell` は EP が usage matrix の表 cell の語として使う（md 10 行 / json 3 行）ため対象外（v0.2.1 C-14）。⚠ DESIGN 2 file には散文語の hit がある（`$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:570`・`$D/WMSO_D11B_TENSOR_BINDING_DESIGN_RSTECHLEAD2_20260720.md:337`「calibrated uncertainty」／ `$D/WMSO_D11B_TENSOR_BINDING_DESIGN_RSTECHLEAD2_20260720.md:255`・`$D/WMSO_D11B_TENSOR_BINDING_DESIGN_RSTECHLEAD2_20260720.md:313`「全 deployment の resolver」）— いずれも型・field・enum ではない。ゆえに deployment evidence は EP の claim_target / ProofKind の**外**にある（型レベルの根拠 = 07 §1 根拠 4）。
 - grade 語（EXACT_TRAIN_TIME 等）を deployment evidence に使わない。deployment evidence は「存在・有効期限・束縛」だけを持ち、skill の certification に影響しない（certificate は runtime / deployment の事象で無効化されない — `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:39`）。
 - `SAFETY_LAYER_ACCEPTANCE` の**内容**（機能安全の受入基準）は本 doc の外（§10 OPP-6）。本 doc は record の存在と束縛だけを要求する。
 
@@ -368,7 +374,7 @@ deployment_evidence_policy_hash = H_WCJ(DeploymentEvidencePolicy)
 | PT-10 | `deployment_evidence_policy_hash` 未解決 / required kind 欠落 | `P_EVIDENCE_UNBOUND` |
 | PT-11 | profile 本文に `ParallelRegion` を含める | `P_COMPOSITION_CONTENT` |
 | PT-12 | profile が自身の hash を field に持つ | `P_SELF_HASH` |
-| PT-13 | 受理済 profile の calibration が失効 | profile 不変・活性 lease は無効化（05 `R_LEASE_INVALIDATED`）・新 lease は `P_CALIBRATION_EXPIRED` で不成立 |
+| PT-13 | 受理済 profile の calibration が失効 | profile 不変。活性 lease は TERMINAL boundary まで継続（lease 中の検出点なし・曝露 ≤ 1 skill・v0.2.2 B-M7・05 OP-19）。次の permit 発行は `P_CALIBRATION_EXPIRED` → 05 `R_PROFILE_MISBOUND` で不成立 |
 | PT-14 | 同一 cell で profile A → B へ切替 | in-place 更新経路なし。B の lease は 05 完全経路（新 epoch）でのみ成立 |
 | PT-15 | golden profile 2 本の `profile_hash` 再現（WCJ + B-declared 規約） | byte 同一・hash 一致（fixture は impl 解錠後に bank） |
 
@@ -416,7 +422,7 @@ deployment_evidence_policy_hash = H_WCJ(DeploymentEvidencePolicy)
 
 - **BRIEF 修正の反映（R1-R4）**: 制御周波数・hold・control_mode は**等値のみ**（brief 骨子の「rate ≤ / hold stricter-or-equal」は起草前に R1 で supersede — critic X3）／ 狭めてよい「rate limit」= `ControllerEnvelope` の運動学上限／ `AcceptedEnvelope` = 空間別評価の連言（R3）／ 語彙 = VOCABULARY.md（R4）。
 - 旧 v0.1 の識別子: `ParallelExecutionProfile` 削除、`IntrinsicExecutionLimits` 不採用、`continuation_overlay_hash` / `recovery_overlay_hash` 削除（05 と同じ根拠）。
-- **v0.2.1 fold（2026-09-04 01:5x UTC）— 陽性対照レビュー（盲検 reviewer PC_C / PC_B）の**注入外** finding を verify して fold**:
+- **v0.2.1 fold（2026-09-04 01:51 UTC・file mtime 実測）— 陽性対照レビュー（盲検 reviewer PC_C / PC_B）の**注入外** finding を verify して fold**:
 
 | finding | 内容 | 変更節 |
 |---|---|---|
@@ -436,6 +442,18 @@ deployment_evidence_policy_hash = H_WCJ(DeploymentEvidencePolicy)
 
 - 陽性対照で**注入した** 4 欠陥（PC-06-E/F/G/H）は本 doc の実体には存在しない（盲検 reviewer の C-01〜C-04 は注入欠陥の検出）。
 
+- **v0.2.2 fold（2026-09-04 15:41 UTC）— 3 軸独立レビュー（reviewer A / A2〔Opus〕/ B / B2〔Opus〕・別 context・v0.2.1 対象）の finding のうち本 doc に帰属するものを fold**。verdict 列 = 独立 verifier の判定（未了なら明記）と起草者の再検証（各 finding の前提文が本 doc に実在することは本 fold script の anchor assert で機械確認）。全 finding の一覧・処置 = `11_THREE_AXIS_REVIEW_RECORD_20260903.md`。⚠ 軸 C（deployment・reviewer C）は session 上限で未了 — 完了後に追補する:
+
+| finding | 内容 | 変更節 | verdict |
+|---|---|---|---|
+| A-06 / A2-09 (LOW) | §2.3 反循環文が字義的に自己矛盾（`SkillActionId` を内包しない ↔ `binding_expectations[].skill_action_id`） | §2.3 を構造 pattern（自身から導かれる hash を preimage に置かない）で言い換え | A-06=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4）; A2-09=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4） |
+| A2-03 (MEDIUM) | §3 表の `P_RESOURCE_UNATTESTED` trigger が削除済 field `attested_by` を参照 | §3 表 cell を §2.1 注記（evidence store 照会）へ同期 | A2-03=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4） |
+| B-M7 (MEDIUM) | §5 / PT-13「活性 lease 中の失効 ⇒ lease 無効化」に 05 側の検出点・遷移が無い | §5・PT-13 を保守既定（検出 = 次 permit 発行時・曝露 ≤ 1 skill・05 OP-19）へ同期 | B-M7=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4） |
+| B2-01 / B-H3 / A-01 / B2-14 / B-M9 / B2-15 / B-L2 / B2-13 (05 由来) | 05 v0.2.2 が `TimingBinding` に足した 6 field の出所 | §2.1 `RuntimeTimeouts` += `safety_heartbeat_timeout_s` / `decision_max_age_s` / `boundary_dwell_s` / `max_reselect_attempts` / `command_kind_mismatch_max` / `inter_command_jitter_s`・§3 `P_TIMEOUT_NONPOSITIVE`・§5 写像文 | B2-01=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4）; B-H3=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4）; A-01=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4）; B2-14=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4）; B-M9=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4）; B2-15=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4）; B-L2=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4）; B2-13=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4） |
+| A-03 / A2-10 (MEDIUM / LOW) | 不在主張の範囲が広すぎ・package 外 scratch（critic 報告）を根拠に引用 | §6.2 を再現 command + 範囲限定（EP md / JSON）へ | A-03=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4）; A2-10=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4） |
+| A-09 / A2-11 (LOW) | x-mask 時刻（01:5x） | header・§11 を file mtime 実測へ | A-09=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4）; A2-11=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4） |
+| A2-12 / B-L5（05 側で fold） | `validate_outcome` 失敗経路 | 本 doc 変更なし（05 §3.7） | A2-12=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4）; B-L5=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4） |
+
 ## 12. Review anchors
 
 1. profile に policy action space の bounds を表す field が無く、INTRINSIC 項は `tensor_binding_hash` 参照のみ — §2.1・§3 第 1 行 ↔ `$D/WMSO_D11B_TENSOR_BINDING_DESIGN_RSTECHLEAD2_20260720.md:138`。
@@ -453,4 +471,4 @@ deployment_evidence_policy_hash = H_WCJ(DeploymentEvidencePolicy)
 13. 反循環・strict codec — §2.3 ↔ `$D/WMSO_D11B_TENSOR_BINDING_DESIGN_RSTECHLEAD2_20260720.md:23`・`$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:385`。
 14. boundary 種別・checkpoint 切替に触れる field が無い — §3 ↔ `$D/WMSO_D11BC_SLICE_SCOPE_PREREG_RSTECHLEAD2_20260720.md:59`。
 15. 全 `P_*` は certificate / EP grade / `SkillDefinitionHash` に影響しない — §8.1 規則 (4) ↔ `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:39`。
-16. 機械検査（`check_review_candidate.py`）= FAIL 0。C2 WARN（19 件）は heuristic で、いずれも「1 行に複数 locus を並べた表の行」か「frozen 行を型根拠として引き、同じ行で本 doc の新語（`P_*` / `profile_hash` 等）を導入した行」— 引用先の内容は起草時に sed で確認済み（§1 表・§3 表・§12）。
+16. 機械検査（`check_review_candidate.py`）= FAIL 0（v0.2.2 の実測出力は `11_THREE_AXIS_REVIEW_RECORD_20260903.md`）。C2 WARN は heuristic で、いずれも「1 行に複数 locus を並べた表の行」か「frozen 行を型根拠として引き、同じ行で本 doc の新語（`P_*` / `profile_hash` 等）を導入した行」— 引用先の内容は起草時に sed で確認済み（§1 表・§3 表・§12）。

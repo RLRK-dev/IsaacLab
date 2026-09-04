@@ -1,7 +1,7 @@
-# WMSO EvidencePolicy v1.9 — 影響評価（v0.2 runtime / profile に対して）(v0.2 REVIEW CANDIDATE)
+# WMSO EvidencePolicy v1.9 — 影響評価（v0.2 runtime / profile に対して）(v0.2.2 REVIEW CANDIDATE)
 
 - node: `T-WMSO`; 起草 = Claude Code web session（review candidate 起草・**authority 無し**・凍結物へ非接触）; 作成 = 2026-09-03（UTC・`date -u` 実測）
-- status: **REVIEW CANDIDATE v0.2（未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない）**
+- status: **REVIEW CANDIDATE v0.2.2（未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない）** — v0.2 → v0.2.2 = 3 軸独立レビュー finding A2-10 の fold（§8）
 - 土台（凍結・編集しない・4 file）: contracts_v2 DESIGN v2.11.2 `00192d20ca00b654cf6cfdb9d04b03ca14adfd0b93f2105c0fea28c295ff8aff` @ `54f90a7de1e02fb14eaf793bf3c60d9503d0d82e` ／ EP v1.9 md `c474acea7c58acc22050c2ad9944fd45a18f5c76967964b42d11922e28fa27e7` ／ EP JSON v1.9 `e63176af9bc3a246b1c32db369ec59f8d09a4c96c381bb03a3a6024bd9811c6e`（definition hash `e7ca43093084c167a209b008533a66d26a1fd3223d2a3c11274d28306c3ff803`）／ tensor_binding DESIGN v13 `5a1874d3be8b98b8aeaace73890d8021cbc7f9814e048741f7f58d6746f349a6` @ `07250f4a0208b3bbd27eae6fef7d980743c4b538`
 - 前提文書: D0 architecture（EXIT GRANTED）／ Rs C3 裁定（slice EP evidence profile = SHADOW rank 2・非 authority；execution profile は別軸・未裁定）／ handoff 決定（2026-09-03）／ 05 runtime spec v0.2 ／ 06 industrial profile v0.2
 - ⛔ impl / training / closed-loop authority / production / push / freeze / slice = CLOSED 継続。本 doc は設計書面のみ。`$D` = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701`。
@@ -23,7 +23,7 @@
 
 ## 2. runtime audit evidence は EP の外
 
-- EP の `claim_targets`（13 component・`$D/WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md:101` 付近の表）は skill 定義の**静的** component（POLICY_ARTIFACT … HANDOFF_SCHEMA）を対象とし、epoch / lease / permit / fault という **runtime 事象**の語彙を持たない（EP md / JSON で `epoch` / `lease` = 0 hit — critic 報告 §3.7）。
+- EP の `claim_targets`（13 component・`$D/WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md:101` 付近の表）は skill 定義の**静的** component（POLICY_ARTIFACT … HANDOFF_SCHEMA）を対象とし、epoch / lease / permit / fault という **runtime 事象**の語彙を持たない（EP md / JSON で `epoch` / `lease` = 0 hit — 再現 command は 06 §6.2・v0.2.2 A2-10 で package 外の scratch 参照を除去）。
 - `usage_ceiling`（`$D/WMSO_EvidencePolicy_v1.9.json:213`）と `closed_loop_authority` の conjoin 規則（`$D/WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md:156`）は不変。05 の `CLOSED_LOOP_AUTHORITY` lease は frozen `granted == True`（`$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:354`）を**必要条件として読むだけ**で、ceiling を動かさない。
 - runtime 記録の content-hash 化は frozen U14 で defer（`$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:537`）。05 §8 はこれに従い方式を定めない。
 
@@ -65,6 +65,7 @@
 ## 8. 版歴 / fold-map
 
 - v0.1（前 package・参照不能）→ v0.2（本 doc）。handoff 決定 F を根拠に再構成。旧 v0.1 の識別子（`BeliefSnapshotRef` 等）は本 doc に無い（05/06 で 削除）。
+- v0.2 → **v0.2.2**（2026-09-04 15:41 UTC）: A2-10（package 外 scratch 参照）を fold。判断内容は不変。verdict = `11_THREE_AXIS_REVIEW_RECORD_20260903.md`（A2-10=起草者再検証=CONFIRMED（独立 verifier 未了・11_ §4））。
 
 ## 9. Review anchors
 

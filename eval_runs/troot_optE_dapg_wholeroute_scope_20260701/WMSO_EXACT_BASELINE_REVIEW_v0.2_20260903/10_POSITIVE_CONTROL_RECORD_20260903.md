@@ -1,6 +1,6 @@
 # WMSO v0.2 — 陽性対照（positive control）記録: レビュー計器の弁別力 (records-only)
 
-- node: `T-WMSO`; 記録者 = Claude Code web session（authority 無し・凍結物へ非接触）; 実施 = 2026-09-03 16:47–17:05 UTC（注入 → 盲検レビュー）／ 記録 = 2026-09-04 01:5x UTC
+- node: `T-WMSO`; 記録者 = Claude Code web session（authority 無し・凍結物へ非接触）; 実施 = 2026-09-03 16:47–17:05 UTC（注入 → 盲検レビュー）／ 記録 = 2026-09-04 01:49 UTC（file mtime 実測 01:49:59・v0.2.2 A-09 / A2-11 で x-mask を除去）
 - 目的: 08 計画 §1 項 5「欠陥を検出できない計器の verdict は採用しない」の実測。**注入は別 context の agent（planter）が行い、盲検 reviewer（別 context・注入内容を知らない）が読む**。実 package の file は無改変（sha256 = SHA256SUMS の値）。
 - 原本: `review_records/PC_KEY_20260903.md`（注入 8 欠陥の answer key・行番号・「正しい finding が言うべきこと」）／ `review_records/PC_B_blind_20260903.md`（runtime 軸 盲検・14 finding）／ `review_records/PC_C_blind_20260903.md`（deployment 軸 盲検・19 finding）。
 

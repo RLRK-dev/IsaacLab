@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
 """Mechanical checks for WMSO v0.2 review-candidate documents (records-only helper; stdlib only).
 
-Usage: python3 check_review_candidate.py <doc.md> [<doc.md> ...]
+Usage: python3 check_review_candidate.py <doc.md|matrix.csv> [...] [--runtime]
 Checks (fail-closed; exit 1 on any FAIL):
-  H1  header block present (status REVIEW CANDIDATE, 4 frozen pins full 64-hex, CLOSED line)
-  S1  mandatory sections present (中心構造 / 主張しないこと / Open points / 版歴 / Review anchors)
-  F1  forbidden identifiers absent from normative text (allowed only on 版歴/fold-map lines carrying 削除 or 不採用)
-  F2  NO_CHAIN never listed inside a ProducerOutcome enum block
+  H1  header block present (status REVIEW CANDIDATE, 4 frozen pins full 64-hex, CLOSED line)         [md only]
+  S1  mandatory sections present (中心構造 / 主張しないこと / Open points / 版歴 / Review anchors)      [md only]
+  F1  forbidden identifiers absent from normative text (allowed only on 版歴/fold-map lines carrying 削除 or 不採用;
+      in CSV mode allowed only on rows whose disposition/verdict column is removed / not_adopted)
+  F2  NO_CHAIN never listed inside a ProducerOutcome enum block                                          [md only]
   C1  every `<frozen-file>:<line>` citation points to an existing file and line
   C2  (heuristic, WARN not FAIL) a backticked identifier from the citing sentence appears within ±3 lines of the cited line
   O1  (runtime spec only, --runtime) ordering: first mention of ReadinessAck < CommitPermit < AuthorityCas/CAS < HealthConfirmation in §3
   O2  (runtime spec only) replay/stale rules present: handoff_offer_id, authority_epoch_snapshot, E_HANDOFF_EPOCH_STALE, R_OFFER_REUSED, R_EPOCH_STALE_COMMAND
   O3  (runtime spec only) §3 CAS postcondition records the consumed offer: 'consumed_offer_ids ∪ {consume_offer_id}' (positive-control blind spot PC-05-C)
   O4  (runtime spec only) post-outcome rejection token R_POST_OUTCOME_COMMAND and one-shot permit consumption sentence present
+  K1  (CSV mode, v0.2.2 / A-08) header equals the declared column list and data-row count equals the declared count (02 = 40, 03 = 14)
+CSV mode is selected by the `.csv` extension (02 / 03 matrices); H1 / S1 / F2 / O* do not apply there.
 """
-import os, re, sys
+import csv, io, os, re, sys
 
 D = "eval_runs/troot_optE_dapg_wholeroute_scope_20260701"
 FROZEN_PINS = [
@@ -26,6 +29,10 @@ FROZEN_PINS = [
 FORBIDDEN = ["BeliefSnapshotRef", "continuation_overlay_hash", "recovery_overlay_hash", "ParallelExecutionProfile", "IntrinsicExecutionLimits"]
 MANDATORY = ["中心構造", "主張しないこと", "Open points", "版歴", "Review anchors"]
 CITE_RE = re.compile(r"(?:\$D/)?((?:WMSO_[A-Za-z0-9_.]+|thread_isaac_lab/[A-Za-z0-9_./-]+)\.(?:md|json|py)):(\d+)(?:-(\d+))?")
+CSV_SPECS = {  # basename prefix -> (header, data rows, F1-exempt column, exempt values)
+    "02_": ("id,item,layer_of_origin,overlaps_frozen,frozen_locus,home_v0_2,disposition_v0_2,rationale,citation", 40, "disposition_v0_2", {"removed", "not_adopted"}),
+    "03_": ("class_id,change_class,example,affects_SkillDefinitionHash,affects_SkillActionId_or_ExecutionBundleHash,affects_BehaviorSignature_or_behavior_revision,affects_certificate,affects_EP_definition_hash,affects_tensor_binding_hash,runtime_records_only,verdict,citation", 14, "verdict", {"removed", "not_adopted"}),
+}
 
 def repo_root():
     here = os.path.abspath(os.getcwd())
@@ -35,7 +42,56 @@ def repo_root():
         here = os.path.dirname(here)
     return os.getcwd()
 
+def cite_check(lines, root, fails, warns):
+    n_cit = 0
+    for i, ln in enumerate(lines, 1):
+        for m in CITE_RE.finditer(ln):
+            n_cit += 1
+            rel, a, b = m.group(1), int(m.group(2)), m.group(3)
+            fpath = os.path.join(root, D, rel) if rel.startswith("WMSO_") else os.path.join(root, rel)
+            if not os.path.isfile(fpath):
+                fails.append(f"C1 line {i}: cited file not found: {rel}"); continue
+            src = open(fpath, encoding="utf-8", errors="replace").read().splitlines()
+            last = int(b) if b else a
+            if a < 1 or last > len(src):
+                fails.append(f"C1 line {i}: cited line {a}{'-'+b if b else ''} out of range (file has {len(src)} lines): {rel}"); continue
+            idents = [t for t in re.findall(r"`([^`]{3,})`", ln) if not re.search(r"\.(md|json|py)", t)]
+            if idents:
+                window = "\n".join(src[max(0, a-4):min(len(src), last+3)])
+                if not any(t.split("(")[0].split(".")[-1] in window for t in idents):
+                    warns.append(f"C2 line {i}: none of {idents[:3]} found near {rel}:{a}")
+    return n_cit
+
+def check_csv(path, root):
+    fails, warns = [], []
+    base = os.path.basename(path)
+    spec = next((v for k, v in CSV_SPECS.items() if base.startswith(k)), None)
+    raw = open(path, encoding="utf-8").read()
+    lines = raw.splitlines()
+    rows = list(csv.reader(io.StringIO(raw)))
+    if spec is None:
+        fails.append("K1 no CSV spec registered for this file (expected 02_ / 03_ prefix)")
+        exempt_col, exempt_vals = None, set()
+    else:
+        header, n_rows, exempt_col, exempt_vals = spec
+        if ",".join(rows[0]) != header: fails.append("K1 header mismatch: " + ",".join(rows[0]))
+        if len(rows) - 1 != n_rows: fails.append(f"K1 data-row count {len(rows)-1} != declared {n_rows}")
+        width = len(header.split(","))
+        for i, r in enumerate(rows[1:], 2):
+            if len(r) != width: fails.append(f"K1 row {i} has {len(r)} columns (expected {width})")
+    hdr = rows[0] if rows else []
+    for i, r in enumerate(rows[1:], 2):
+        disp = r[hdr.index(exempt_col)].strip() if (exempt_col in hdr and len(r) == len(hdr)) else ""
+        joined = ",".join(r)
+        for ident in FORBIDDEN:
+            if ident in joined and disp not in exempt_vals:
+                fails.append(f"F1 forbidden identifier '{ident}' at row {i} (disposition/verdict = '{disp}' is not removed/not_adopted)")
+    n_cit = cite_check(lines, root, fails, warns)
+    return fails, warns, n_cit
+
 def check(path, root):
+    if path.lower().endswith(".csv"):
+        return check_csv(path, root)
     fails, warns = [], []
     text = open(path, encoding="utf-8").read()
     lines = text.splitlines()
@@ -62,23 +118,7 @@ def check(path, root):
     for m in re.finditer(r"class\s+ProducerOutcome[^\n]*\n((?:[ \t]+[^\n]*\n)+)", text):
         if "NO_CHAIN" in m.group(1): fails.append("F2 NO_CHAIN appears inside a ProducerOutcome enum block")
     # C1 / C2
-    n_cit = 0
-    for i, ln in enumerate(lines, 1):
-        for m in CITE_RE.finditer(ln):
-            n_cit += 1
-            rel, a, b = m.group(1), int(m.group(2)), m.group(3)
-            fpath = os.path.join(root, D, rel) if rel.startswith("WMSO_") else os.path.join(root, rel)
-            if not os.path.isfile(fpath):
-                fails.append(f"C1 line {i}: cited file not found: {rel}"); continue
-            src = open(fpath, encoding="utf-8", errors="replace").read().splitlines()
-            last = int(b) if b else a
-            if a < 1 or last > len(src):
-                fails.append(f"C1 line {i}: cited line {a}{'-'+b if b else ''} out of range (file has {len(src)} lines): {rel}"); continue
-            idents = [t for t in re.findall(r"`([^`]{3,})`", ln) if not re.search(r"\.(md|json|py)", t)]
-            if idents:
-                window = "\n".join(src[max(0, a-4):min(len(src), last+3)])
-                if not any(t.split("(")[0].split(".")[-1] in window for t in idents):
-                    warns.append(f"C2 line {i}: none of {idents[:3]} found near {rel}:{a}")
+    n_cit = cite_check(lines, root, fails, warns)
     if "--runtime" in sys.argv:
         sec3 = re.search(r"^## 3\..*?(?=^## 4\.)", text, re.S | re.M)
         body = sec3.group(0) if sec3 else text
