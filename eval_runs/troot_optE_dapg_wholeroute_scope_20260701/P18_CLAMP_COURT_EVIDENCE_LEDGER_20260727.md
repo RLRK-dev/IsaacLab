@@ -46942,3 +46942,9 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 
 - **E1 の状態 = 完結**（spec §8.45 → 着地 `b19c4c5f5d` → leg PZ-209（欠陥 F-d）→ 修正 `0a2b600959` → 再 leg PZ-210 PASS）。編集窓は 120/120 で**閉**（以後の E1 変更は新しい一語）。
 - **残り**: L1（小さな run 1 回）= Rs1 の一語待ち（§1413 の問い）— 走らせれば SystemExit 経路の in-driver 証拠（修正前後とも動く経路）。修復した 2 経路の実機証拠は次の認可された route run でのみ出る（pZ 同旨）。route run (2) 未充足・不変。
+
+## §1419 — ⭐⭐ **Rs1 (the human) 逐語「push 認可」（当卓 pane・custody = 当卓 transcript 行 39106・type=user・2026-09-04T23:21:54.674Z）= ①push ②**認可 = 開いていた唯一の認可の問い（§1413）= L1（writer 検証のための小さな run 1 回）**（2026-09-05 08:22:30 JST・当卓。⚠ ②は読み: 「認可」の対象を §1413 の問いに当てた inference・逐語は 2 語）
+
+- **L1 の認可内容（§1413 の形・そのまま）**: 腕は静止（指令なし）・cable settle `mj_step` 2000 回 = 0.417 s・IK なし・route なし・動画なし・上書きされる生成 XML 4 個を先に `cp -p` で `_gen/reshoot_speccell_20260810/` へ custody・実行 = `YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45 P4_CLIP_DUMP=1` を `_gen/e1_static_l1_<date>/` へ sidecar つき 1 回・報告 = JSON＋sidecar＋sha を p18 へ。**motion-bearing として CLAUDE.md:274 の視覚レグは justified 省略を loud に記録**（主張 = RUN_METRICS.json の実体と契約適合のみ・motion verdict なし）= v3 §3-A4/E3 の適用第 1 号。
+- ⛔ **含まないもの**: route run の条件付き認可 (2) = 未充足・不変（本一語は L1 の 1 回のみ）。E1 の編集窓は 120/120 で閉（§1418）— L1 は run であって編集ではない。
+- ①push: 本節 commit 後に実施（結果は注記）。relay = `m-p18-297`（p0・cc p4/pZ）。
