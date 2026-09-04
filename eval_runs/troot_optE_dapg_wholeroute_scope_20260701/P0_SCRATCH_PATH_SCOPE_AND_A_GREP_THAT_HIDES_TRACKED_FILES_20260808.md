@@ -2224,3 +2224,192 @@ parsed from prose.
   control changes here, only instruments").  Touches neither the nominated kinonly object (`120746a49b`),
   nor `compare_24_vs_240.py` (locked), nor any spec file.
 - Done now: this plan, committed, and one message to p18.  Not done now: the edit.
+
+## 8.46 E1 LANDED: `b19c4c5f5d` (+119/−0, one file) — verified without running the driver; and ⛔ one clause of §8.45 retracted before L1 is run on it
+
+*(2026-09-05 07:58 JST.  Rs1 = the human; Rs2 = p4/CC.  Window = Rs1「push 1:開く」via m-p18-289; static leg word = Rs1「2：推奨で良い」via m-p18-290.)*
+
+### 1. What landed
+
+- Commit **`b19c4c5f5d`** (07:55:21 JST), pathspec-limited to `p4_ur15_sim_20260727/ur15_steps_wired.py`; blob
+  `fda7189e8240a8a9ccdaee590c044bf662bb296f`; content sha256
+  `18355d408aed06839a81b79987eb5557dbd6c9e4bd83fff583703dc0ccc37e1a`; `git show --numstat` = **119 added, 0 deleted**
+  (the window's bound was ≤ 120); no line longer than the repo's 120 (`pyproject.toml:7`); `py_compile` OK under env7.
+- Pins (line numbers in the committed file): block markers :41 / :139; `_rm_stdout_file` :55 (A1), `_rm_json` :64,
+  `_rm_keys` :72, `_write_run_metrics` :78, `atexit.register(_write_run_metrics)` :138 — registered before
+  `atexit.register(_depth_audit_report)` :1755, so it runs after it (LIFO).  Capture sites: STEP1 touching :2782 and
+  tool err :2802; gate rows `_grow` :3920 / :3924-3925; the per-step row `_RM["steps"].append` :3935-3947 (the same
+  variables the `[steps] STEP n` lines print, one line above them); completion marker :4021 (the file's last line).
+- Not touched: any control line, the nominated kinonly object, `compare_24_vs_240.py`, any spec file.  The edit is
+  reproducible from the scratchpad script `apply_e1.py` (insert-only; it refuses unless every anchor line matches
+  its expected text exactly — it refused once, on two anchors I had numbered one line early, and wrote nothing).
+
+### 2. Verification, static (no driver execution)
+
+The RUN_METRICS block was **extracted from the committed file between its markers** and executed in a fake module
+namespace by `probe_rm_block.py` (40 lines, sha256 `fbc863fcc8f986a4…`), four exit paths, stdout redirected to a
+`run.log` per leg exactly as a launch does; `check_rm_probe.py` (46 lines, sha256 `141d8d1d09859213…`) then read the
+outputs.  Both scripts are reproduced verbatim in §2.1 below (no new repo file: the window is one file).  Output:
+
+```
+PASS r1 end_reason raised / exit_code 1
+PASS r1 exception.message == traceback last line (byte-equal)  [STEP2 L: THIS arm's command stopped adva]
+PASS r1 M1: log_sha256_at_write == launcher sidecar (nothing followed the write)
+PASS r1 M1: log_bytes_at_write == final size
+PASS r1 A1: JSON beside run.log although OUT was elsewhere
+PASS r1 LIFO: later-registered handler printed BEFORE the RUN_METRICS line
+PASS r1 identity sha256 == files (arm L/R, grip L/R)
+PASS r1 driver sha256 == file
+PASS r1 config echo (0.22 / 45.0 / 0.110) + env switch captured
+PASS r1 numpy scalars/arrays serialized as numbers
+PASS r1 phase_max_reached == 2 / judgement PENDING
+PASS r1 depth_audit: code-object keys -> 'name:lineno', tuple keys -> str, rows dropped, np.bool_ ok
+PASS r1 worst: 1e9 sentinel -> null, real value kept
+PASS r1 step1_approach carried
+PASS r1 log-analyzer key path artifacts.logs.path present
+PASS r2 exited_early: end_reason / exit_code null / exception null
+PASS r3 completed (block-buffered stdout, no -u): end_reason completed / exit_code 0
+PASS r3 M1 equality holds with buffered stdout too
+PASS r4 pipe: fallback to OUT.parent, log_path null, logs.exists false
+ALL PASS
+```
+
+Legs: r1 = uncaught RuntimeError with OUT in a *different* directory (A1 exercised; process exit 1); r2 =
+`SystemExit(0)` (the P4_CLIP_DUMP shape); r3 = normal completion **without `-u`** (block-buffered stdout — the flush
+before the hash is what makes M1 hold there); r4 = stdout through a pipe (fallback).  In r1 the sidecar
+`sha256sum run.log` equals `log_sha256_at_write`: nothing followed the write, including the traceback and the
+later-registered handler's line, both of which sit inside the hashed prefix.  What the probe does **not** cover: the
+real module namespace (the real `_DEPTH_AUDIT` contents, the real `S`, the real path through :1202) — that is what a
+driver leg adds.
+
+Launch line from now on (the sidecar is the launcher's one line; `echo "exit=$?"` stays as before):
+
+```
+mkdir -p _gen/<run> && <env overrides> /home/rlrk/env_isaaclab7/bin/python -u ur15_steps_wired.py \
+    _gen/<run>/<name>.mp4 > _gen/<run>/run.log 2>&1; echo "exit=$?"; sha256sum _gen/<run>/run.log > _gen/<run>/run.log.sha256
+```
+
+### 3. ⛔ Retraction, before acting on the word that rests on it
+
+§8.45 §5 wrote that L1 (`P4_CLIP_DUMP=1`) "exits at :1103 **before any physics step** or video", and m-p18-289/290
+relayed that clause to Rs1, whose word「2：推奨で良い」came back on it.  I read the path only now.  Measured on the
+committed file: the clip-dump block :1149 is preceded by
+
+```
+for t in SIDES:
+    d.ctrl[GIDX[t]] = OPEN                     # :1144-1145
+mujoco.mj_forward(m, d)                        # :1146
+for _ in range(2000):
+    mujoco.mj_step(m, d)                       # :1147-1148  <- physics, 2000 steps
+```
+
+= **2000 physics steps × CELL_TIMESTEP 0.000208 s = 0.417 s of simulated time**: the cable settling onto its saddles
+under gravity, fingers commanded OPEN, **no arm command written** (the servos hold the compile pose), no IK, no
+route step, no renderer, no video.  So "or video" stands and "before any physics step" is **false**.  A word given on a
+wrong description is not a word for the thing itself: **L1 is not run.**  Whether a 0.417 s cable settle with the
+arms holding still is inside the static class Rs1 cleared is Rs2's (chain court) and Rs1's reading, not mine.
+
+If it is cleared: before the run I `cp -p` the four generated XMLs the build overwrites —
+`_gen/_steps_cell_full.xml` (sha `4158e4e638e9b0fc…`, mtime 2026-08-10 09:10:11, the world §1397's stills were rendered
+from), `_steps_world.xml` (`d4f884272e30550a…`), `_arm_only_L.xml` (`4e97b6f0dbb89919…`), `_arm_only_R.xml`
+(`93d22c9606043fcc…`) — into `_gen/reshoot_speccell_20260810/`, their run's own directory, so the reshoot's custody
+survives the overwrite.  Then `YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45 P4_CLIP_DUMP=1` with the launch line
+above into `_gen/e1_static_l1_<date>/`, and the report is the JSON, the sidecar, and the shas.
+
+### 2.1 The two probe scripts, verbatim
+
+`probe_rm_block.py`:
+
+```python
+"""Exercise the RUN_METRICS block AS WRITTEN IN THE DRIVER FILE (extracted between its markers), in a fake
+module state, without importing or running the driver.  argv: driver_path mode OUT"""
+import atexit, math, os, sys
+from pathlib import Path
+import numpy as np
+
+DRV, MODE, OUT = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3])
+src = DRV.read_text()
+block = src[src.index("# --- RUN_METRICS.json begin"): src.index("# --- RUN_METRICS.json end")]
+
+def some_channel():   # stands in for a code object key in _DEPTH_AUDIT["chan"]
+    pass
+co = some_channel.__code__
+ns = {"__file__": str(DRV), "OUT": OUT, "S": DRV / "_gen" if False else DRV.parent / "_gen",
+      "GRIP_XML": "/home/rlrk/IsaacLab/thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml",
+      "GRIP_XML_MIRRORED": str(DRV.parent / "_ur15_2f85_koshape_actuated_mirrored.xml"),
+      "np": np, "math": math, "os": os, "sys": sys, "Path": Path, "atexit": atexit,
+      "YOKE_SPREAD": 0.22, "TILT": math.pi / 2 - math.radians(45.0), "CROWN_R": 0.110,
+      "SHOULDER_HEIGHT": 1.53, "TABLE_TOP": 0.8, "GRASP_CENTRE_X": 0.0,
+      "sig_min": {"L": np.float64(0.0481), "R": 1e9}, "sig_where": {"L": "STEP2 t=1.0s", "R": ""},
+      "col_min": {"L": -0.0008, "R": 1e9}, "col_where": {"L": "g6 vs crown", "R": ""},
+      "claw_min": {"L": 1e9, "R": 1e9}, "arm_gap_min": 0.0, "arm_gap_path": 1e9,
+      "gates": {"grasp": False, "pinC1": "t=1.00s cab29 seat=[0.1 0.2 0.3]"},
+      "_DEPTH_AUDIT": {"calls": 5, "checked": 4, "chan": {co: 3}, "chan_viol": {co: 1}, "pairs": {(1, 2): 3},
+                       "rows": ["illustrative"], "last_flagged": np.bool_(False)},
+      "LIVE_OUT": Path.home() / "Downloads" / "ur15_live.mp4"}
+exec(compile(block, str(DRV), "exec"), ns)      # registers the real atexit handler, first
+ns["_RM"]["step1"] = {"L": {"touching": ["column (via g6)"], "tool_err_mm": 270.2}, "R": {"touching": [], "tool_err_mm": 2.1}}
+ns["_RM"]["steps"].append({"step": 2, "name": "cable上空へ", "t_s": 2.2, "tool_err_mm": {"L": np.float64(511.9), "R": np.float64(11.1)},
+                           "command": {"L": {"reached_frac": np.float64(0.0), "held_ticks": np.int64(10560), "ticks": 10560, "stalled": True},
+                                       "R": {"reached_frac": 0.38, "held_ticks": 0, "ticks": 10560, "stalled": False}},
+                           "seat_C1_miss_mm": np.array([-3.7, -70.0, 140.3]), "summary_row": "STEP 2 cable上空へ t=  2.2s"})
+atexit.register(lambda: print("[probe] LATER-registered handler (stands in for _depth_audit_report) runs FIRST"))
+print("[probe] mode", MODE)
+if MODE == "raised":
+    raise RuntimeError("STEP2 L: THIS arm's command stopped advancing (probe text)")
+if MODE == "exited_early":
+    raise SystemExit(0)
+if MODE == "completed":
+    ns["_RM"]["completed"] = True
+```
+
+`check_rm_probe.py`:
+
+```python
+"""Check the four probe outputs against the section-8.45 predicates.  argv: probe_root driver_dir"""
+import hashlib, json, sys
+from pathlib import Path
+R, D = Path(sys.argv[1]), Path(sys.argv[2])
+ok = True
+def check(name, cond, detail=""):
+    global ok
+    ok &= bool(cond); print(("PASS " if cond else "FAIL ") + name + (f"  [{detail}]" if detail else ""))
+sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
+
+j1 = json.load(open(R / "r1/RUN_METRICS.json")); log1 = (R / "r1/run.log").read_text()
+check("r1 end_reason raised / exit_code 1", j1["run"]["end_reason"] == "raised" and j1["run"]["exit_code"] == 1)
+tb_last = [l for l in log1.splitlines() if l.startswith("RuntimeError: ")][-1][len("RuntimeError: "):]
+check("r1 exception.message == traceback last line (byte-equal)", j1["run"]["exception"]["message"] == tb_last, tb_last[:40])
+side = (R / "r1/run.log.sha256").read_text().split()[0]
+check("r1 M1: log_sha256_at_write == launcher sidecar (nothing followed the write)", j1["run"]["log_sha256_at_write"] == side)
+check("r1 M1: log_bytes_at_write == final size", j1["run"]["log_bytes_at_write"] == (R / "r1/run.log").stat().st_size)
+check("r1 A1: JSON beside run.log although OUT was elsewhere", j1["run"]["out_dir"] == str(R / "r1") and j1["run"]["log_path"] == str(R / "r1/run.log"))
+check("r1 LIFO: later-registered handler printed BEFORE the RUN_METRICS line", log1.index("LATER-registered") < log1.index("[steps] RUN_METRICS.json ->"))
+idL = j1["ur15_steps"]["identity"]["LEFT"]; idR = j1["ur15_steps"]["identity"]["RIGHT"]
+check("r1 identity sha256 == files (arm L/R, grip L/R)",
+      idL["arm_xml"]["sha256"] == sha(D / "ur15_base.xml") and idR["arm_xml"]["sha256"] == sha(D / "ur15_base_mirrored.xml")
+      and idL["grip_xml"]["sha256"] == sha(idL["grip_xml"]["path"]) and idR["grip_xml"]["sha256"] == sha(D / "_ur15_2f85_koshape_actuated_mirrored.xml"))
+check("r1 driver sha256 == file", j1["ur15_steps"]["driver"]["sha256"] == sha(D / "ur15_steps_wired.py"))
+check("r1 config echo (0.22 / 45.0 / 0.110) + env switch captured",
+      j1["ur15_steps"]["config"]["yoke_spread_m"] == 0.22 and abs(j1["ur15_steps"]["config"]["tilt_deg"] - 45.0) < 1e-9
+      and j1["ur15_steps"]["config"]["crown_r_m"] == 0.11 and j1["ur15_steps"]["config"]["env_switches_set"] == {"YOKE_SPREAD_OVERRIDE": "0.22"})
+st = j1["ur15_steps"]["steps"][0]
+check("r1 numpy scalars/arrays serialized as numbers", st["tool_err_mm"]["L"] == 511.9 and st["command"]["L"]["held_ticks"] == 10560 and st["seat_C1_miss_mm"] == [-3.7, -70.0, 140.3])
+check("r1 phase_max_reached == 2 / judgement PENDING", j1["progress"]["phase_max_reached"] == 2 and j1["judgement"]["verdict"] == "PENDING" and j1["judgement"]["decided_by"] is None)
+da = j1["ur15_steps"]["depth_audit"]
+check("r1 depth_audit: code-object keys -> 'name:lineno', tuple keys -> str, rows dropped, np.bool_ ok",
+      list(da["chan"].keys()) == ["some_channel:11"] and list(da["pairs"].keys()) == ["(1, 2)"] and "rows" not in da and da["last_flagged"] is False)
+w = j1["ur15_steps"]["worst"]
+check("r1 worst: 1e9 sentinel -> null, real value kept", w["sigma_min"]["R"] is None and w["sigma_min"]["L"] == 0.0481 and w["arm_gap_path_m"] is None and w["arm_gap_min_m"] == 0.0)
+check("r1 step1_approach carried", j1["ur15_steps"]["step1_approach"]["L"]["tool_err_mm"] == 270.2)
+check("r1 log-analyzer key path artifacts.logs.path present", j1["artifacts"]["logs"]["path"] == str(R / "r1/run.log"))
+
+j2 = json.load(open(R / "r2/RUN_METRICS.json"))
+check("r2 exited_early: end_reason / exit_code null / exception null", j2["run"]["end_reason"] == "exited_early" and j2["run"]["exit_code"] is None and j2["run"]["exception"] is None)
+j3 = json.load(open(R / "r3/RUN_METRICS.json")); side3 = (R / "r3/run.log.sha256").read_text().split()[0]
+check("r3 completed (block-buffered stdout, no -u): end_reason completed / exit_code 0", j3["run"]["end_reason"] == "completed" and j3["run"]["exit_code"] == 0)
+check("r3 M1 equality holds with buffered stdout too", j3["run"]["log_sha256_at_write"] == side3)
+j4 = json.load(open(R / "r4/RUN_METRICS.json"))
+check("r4 pipe: fallback to OUT.parent, log_path null, logs.exists false", j4["run"]["out_dir"] == str(R / "r4") and j4["run"]["log_path"] is None and j4["artifacts"]["logs"]["exists"] is False)
+print("ALL PASS" if ok else "SOME FAIL")
+```
