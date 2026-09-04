@@ -29,7 +29,7 @@ dependencies:
 session_history: []
 define_artifact: "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_DEFINE_C3C5_PORT_TO_CURRENT_SUBSTRATE_20260809.md @ 9ab375026a"
 created: 2026-08-09T05:46:32+09:00
-last_updated: 2026-08-10T01:29:56+09:00
+last_updated: 2026-09-05T07:40:52+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -43,6 +43,8 @@ spec_version: LTM-1 v1.2
 2. **§3.1 起動条件 2**: `precedent dependency 全件 COMPLETE`。**D1 は進行中・D3 は未決** ⇒ 起動条件を満たさない。〔⚠08-09 時点の文 — **08-10: D1 充足**（§4-B bullet）。precedent 欄は D1 のみ（§4 注記どおり）⇒ **本条件は成立**。本 node を PENDING に保つのは 1. のみ〕
 
 ⇒ **PENDING は判断ではなく測定**。IN_PROGRESS への遷移は上の 2 つが解けた時（＋下記 §1 の授権）。
+
+- ⭐ **2026-09-05 追記（m-p18-284・p6 が `f5c681edb3` §5 を実読）**: 上の残り 2 条件のうち **起動授権の要求が Rs1（人間）の面に載った** — p18 の提案 §5 #2「本 node を起動し **新規 session** `{node_id}#s1` を bind するか（p4 の現 session は別 node に bind 済ゆえ bind するなら handoff が先）」。⛔**提出は授権ではない** — Rs1 の一語が来るまで本 node は PENDING のまま・p6 は起動しない。⚠ 同 §6 の判定（p6 の register を pin `77f8d472a3` で読了）= **DDR #68/#69 は本 node の DoD/run を gate するが *起動* は gate しない** ⇒ 起動を止めているのは §3.1 の手続（session binding ＋ 授権）だけ。
 
 ## 1. 授権の等級（⛔ over-read しない・起票と起動は別物）
 
