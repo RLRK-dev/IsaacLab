@@ -46849,3 +46849,5 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⛔ **build 0・他卓への配付は v3 の query 付き数値のみ・push は Rs1 の一語**。
 
 > ⛔→✅ **§1407 訂正注記（同日・当卓）**: 上の「実測」行は unquoted heredoc で書いたため、行内の backtick に挟んだ 3 つの字（codex の `›`・`»` と Claude の `❯`）が shell の command substitution で**空文字に置換されて落ちた**（memory「backtick-hazard: 空文字に置換され消えたこと自体が見えない」の当卓再発・本節で 6 回目の自己捕獲）。意図した文 = 「Claude pane では `›`/`»` は出ず、送信済の行も composer も `❯`」。他の行は `\`` で escape 済で無傷（v3 §1.4・cycle-2 記録 Part 4 が正）。本注記は quoted heredoc で書いた。
+
+> ✅ **push（Rs1 逐語「push」・当卓 pane・2026-09-05 07:34:19 JST 実測）**: `git push fork rlrk/optE-s2-substrate-swap` → `f7d8a0d005..3a64844317`（**33 commit** = 前 session の 08-10 09:24 以降 24 件＋本 session 9 件）。再 fetch で HEAD == fork == `3a64844317`・残 0。origin へは push しない（不変）。
