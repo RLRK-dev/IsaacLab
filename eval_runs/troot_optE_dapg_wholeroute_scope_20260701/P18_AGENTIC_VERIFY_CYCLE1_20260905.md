@@ -1094,3 +1094,8 @@ RATIONALE: HOLD the proposal as a whole: (i) the build precedes Rs1's sight of t
 4. Everything else stays a proposal addressed to its court (p4/p6/p0/pZ/Rs1); apply the existing gates that were skipped (CLAUDE.md:274-275 visual leg; :269 /pre-check) before proposing new ones.
 
 2026-09-05 00:45 JST (`date` measured)
+
+---
+# Annotation (2026-09-05 07:22:41 JST, p18) — U30 row corrected by cycle 2
+
+Part 1 row U30 rebutted PARTIAL with "custody exists: transcript line 38094 (type=user, 2026-09-04T07:24:04.305Z)". Cycle 2 (all five bodies) showed line 38094 is the compaction summary (`isCompactSummary: true`); the human's turn is line **37937** (`type=user`, `userType=external`, `origin.kind=human`, `promptSource=typed`, 2026-09-04T07:08:50.946Z = 16:08:50 JST). The custody claim stands only for line 37937; the rebuttal named the wrong object. This annotation does not rewrite Part 1 (ruling A: corrections as in-place annotations). The cycle-2 record is P18_AGENTIC_VERIFY_CYCLE2_20260905.md.
