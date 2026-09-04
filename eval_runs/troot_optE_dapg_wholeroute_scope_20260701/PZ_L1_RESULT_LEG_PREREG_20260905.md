@@ -1,0 +1,24 @@
+# pZ — pre-registered result leg for L1 (the one authorized writer run), written before the run's object exists
+
+**Author** pZ / IMPL-VERIFIER (`w2:pZ`) · **Written** 2026-09-05 08:24 JST on m-p18-297 (relay of Rs1's two words, custody ledger §1419). Naming per m-p18-256: **Rs1 = the human; Rs2 = p4/CC**.
+**Object (when it exists)**: p0's L1 outputs under `_gen/e1_static_l1_<date>/` — `RUN_METRICS.json`, `run.log`, the sidecar `run.log.sha256` — untracked, so **pinned by content sha at read**. At writing: **0** such directories exist (measured: `ls _gen/e1_static_l1_*`). Owner of the run = p0; ⛔ this desk runs nothing.
+**Rows carried**: `PZ_E1_RUN_METRICS_LEG_PREREG_20260905.md` @ `70719f9182` row 13 (written before the F-d fix) — sharpened here with the fixed writer's fields, read from the landed blob `0a2b600959` (E1 block `:41-140`).
+
+## Rows
+
+| # | row | requirement (all measured by me from the on-disk objects, none from p0's message) |
+|---|---|---|
+| 1 | object identity | `RUN_METRICS.json` **beside** `run.log` in one `_gen/e1_static_l1_<date>/`; both content-sha pinned at read; `run.out_dir` == that directory; `run.log_path` == the redirect target (a regular file, i.e. the launcher redirected stdout; `pipe:` fallback would make row 3 vacuous) |
+| 2 | driver identity — **the strongest pin** | `ur15_steps.driver.sha256` == **`307868a9721d2896e3f4849fe18a6297d2034fefe2c276b9f3bd4d7325fb90a5`** (the driver blob at `0a2b600959`; a different value means the run used a different driver and the leg stops); `identity.LEFT.arm_xml.sha256` == `1e182d10e35153ad…`, `RIGHT.arm_xml` == `9d8700e3db45b490…` (`UR15-B`), `LEFT.grip_xml` == `01861b95e9c8413c…`, `RIGHT.grip_xml` == `…` (mirrored ko) — each re-hashed by me |
+| 3 | log integrity (M1/A1) | `run.log_sha256_at_write` == sha256 of the first `run.log_bytes_at_write` bytes of `run.log`, recomputed by me; sidecar `run.log.sha256` (`sha256sum` format) == sha256 of the whole file; the two equal ⇒ **tail 0 B**, nothing followed the write |
+| 4 | exit semantics (M2) | `run.end_reason` == `"exited_early"` (the `P4_CLIP_DUMP` path `:1103`), `exit_code` == null, `exception` == null, `final` == true; `progress.phase_max_reached` == null and `ur15_steps.steps` == [] (no route step ran) |
+| 5 | the run's shape == §1419's authorization | `config.env_switches_set` == exactly {`YOKE_SPREAD_OVERRIDE`: "0.22", `TILT_DEG_OVERRIDE`: "45", `P4_CLIP_DUMP`: "1"} (the 24-name filter admits nothing else set); `config.yoke_spread_m` == 0.22, `tilt_deg` == 45.0 (the C-2 override precedence I verified on `0f6b4a733e`); the log shows the 2000-step cable settle and the clip dump then the exit, **no** IK / route / servo-target lines for the arms, **no** new video file (`artifacts.video.final.exists_at_write` == false); process wall time consistent with ≈0.4 s of physics plus build |
+| 6 | custody of the overwritten XMLs | the 4 generated XMLs were `cp -p`'d into `_gen/reshoot_speccell_20260810/` **before** the run: backup mtimes older than the run's start and equal to the pre-run originals' (preserved by `-p`), and the post-run `_steps_cell_full.xml` sha == `ur15_steps.cell_dump.sha256` |
+| 7 | contract (A2) | top-level ⊇ {`schema_version`="run_metrics.v1", `generated_at`, `final`, `run`, `artifacts`, `progress`, `judgement`}; `judgement.verdict` == "PENDING", `decided_by` == null (the driver never grades); JSON parses; every key a string; pickup by `/log-analyzer` through these keys is pB's court (E1 prereg row 10), not mine |
+| 8 | the loud omission | the visual leg (CLAUDE.md `:274`) is omitted with the reason **recorded loud** in p0's report: the claim is the writer's object and its contract, **no motion verdict** — physical validity stays Rs1's court and nothing here is motion evidence |
+| 9 | what L1 proves and what it cannot | proves: the writer fires in-driver on the `SystemExit` path with real globals (`identity`, `config`, `cell_dump` filled from a real build). Cannot prove: the two repaired paths (`completed`, `raised`) — proven only by my stand-in (PZ-210 row 5) until the next **authorized** route run; ⛔ the conditional route-run authorization (2) remains unmet; ⛔ the E1 window is closed at 120/120 and L1 is a run, not an edit |
+| 10 | pins and no run | run dir, JSON sha, log sha, sidecar sha, driver sha named; ⛔ nothing executes from this desk; a re-run, if any row fails, is p0's under a new word |
+
+## Provenance
+
+Fields read from `git show 0a2b600959:…/ur15_steps_wired.py` `:41-140` (never imported); asset shas by `git show`/`sha256sum` at this desk; §1419's authorized form quoted from the ledger at HEAD `13f17450e1`. Zero tracked-content modifications by pZ. **Written, not banked; banking requested of a custodian — ideally before the object lands, so the rows are the object's elder.**
