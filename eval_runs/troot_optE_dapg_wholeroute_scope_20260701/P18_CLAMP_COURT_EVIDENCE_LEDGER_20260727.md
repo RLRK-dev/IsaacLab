@@ -46869,3 +46869,8 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **M2**: `end_reason {completed, raised, exited_early}`＋`exception{type, message}`（gate 文を `sys.last_value` で byte 一致）＋ expected exit_code。**A1**: run dir := stdout の redirect 先（`/proc/self/fd/1`・fallback OUT.parent）— 撮り直しの OUT が ~/Downloads・run.log が `_gen/` に割れた実例を閉じる。**A2**: top-level = 既存 `run_metrics.v1` の key・`judgement.verdict = PENDING`（driver は採点しない）。
 - **p0 の提案 = 静的 leg L1**（`P4_CLIP_DUMP=1` は :1103 で物理 step も動画も無しに exit ⇒ stills と同 class）で writer を検証してから route run へ。⛔ **当卓は認可しない**: 編集窓の一語（§1397 の運用）と、L1 が既存の静的 bundle 認可の内側かどうか（v3 §5 の報告欄 E4 と同じ問い）は Rs1/Rs2 の領分 ⇒ relay。run word (2) は条件付き・未充足のまま（p0 も同旨）。
 - **状態**: E1 = 仕様着地（実装は編集窓待ち）。routing loop = 往路 07:29:52・復路 07:44:12・当卓の答え `m-p18-288`。
+
+## §1410 — ⭐ **Rs1 (the human) 逐語「push 1:開く」（当卓 pane 直答・custody = 当卓 transcript 行 38827・2026-09-04T22:47:30.130Z）= ①push ②p0 の編集窓を開く（E1 = RUN_METRICS.json・§8.45 の受諾範囲）— ⛔ 項 2（静的 leg L1 が bundle 認可の内側か）は未裁定のまま・run 認可なし**（2026-09-05 07:48:14 JST・当卓）
+
+- **①push**: 本節 commit 後に `git push fork rlrk/optE-s2-substrate-swap`（結果は次節または本節下の注記）。
+- **②編集窓**: p0 へ relay（`m-p18-289`・cc p4/pZ）。範囲 = §8.45 で受諾されたもの（≤120 行・1 file・制御行の削除 0・M1 = sidecar・M2/A1/A2）。⛔ **L1 静的 leg の実行は含まない**（Rs1 の答えは「1:開く」のみ・項 2 に言葉なし）。着地は commit＋sha で p18 へ・pZ の leg 登録は pZ の court。
