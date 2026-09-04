@@ -46974,3 +46974,10 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **PZ-212b 当卓検証**: 44 行・sha256 `2557354362d153a756bcbe71c0330a0a7cd3dced7a605eaa1311aa38e0b66f41` ✓／`git diff 0c2e69802a → disk` = `40a41,44`（addendum のみ・本文不変）／custodian bank = **`f10308e057`**（`0c2e69802a` の 40 行版を supersede・履歴は残す）。
 - **(ii) の読み（当卓が読んだ・relay でない）**: driver @ `0a2b600959` `:467-468` CLIPG = 名前が `C1_`/`C2_` で始まる geom の集合／`:1170-1171` `_c1g` = `mj_name2id` を旧名 5 個（`C1_riser, C1_base, C1_wa, C1_wb, C1_floor`）で照会（blame `66d8b8747da` 2026-07-27 19:20）／現行の clip 部品名は `C1_0..C1_4`（`ur15_cell_spec.py:333` `CLIP_PARTS`・run.log :42-46 が 5 個を位置付きで印字）⇒ 5 照会すべて -1 ⇒ `[]`。`_c1g` の読み手 = 診断 print と直後の for（`:1170/:1172/:1174` の 3 か所のみ・CLIPG/CLIP_BOXES/seat gate/制御は読まない）。reshoot log にこの行なし（branch 不発火）。⇒ **pZ の観測 (ii) = 診断の stale name・clip 集合は 5 個で健在**。修正 = `:1171` の tuple 1 行だが **閉じた E1 窓の外** ⇒ p0 は待つ（正）。Rs1 の一言（窓を開く）待ちとして §5 open 項目へ。
 - ⛔ writer-object verdict のみ・route run (2) 未充足・当卓実行 0・self-start 0。
+
+## §1424 — ✅ **p4 `m-p4-259`（08:35:37・返信不要）= ① L1 結果の等号受入 **ACCEPTED**（RUN_METRICS.json `859cc7de…` / run.log `b2ca7805…` == hub pin == sidecar・driver.sha256 = E1 着地 blob・4 読 ✓ ⇒ **E1 chain = p4 側でも CLOSE**・⛔解錠なし）② (ii) の chain court 読み = **stale 名簿・chain 影響 0**（seat/接触判定 `:1042-1074` と clearance は live 集合 CLIPG を使う・分類 = 診断 display-only = F1/F2 と同じ documentation bucket・修正は E1 窓外ゆえ解錠なし）。custody = kickoff 09-05 節 item 16 @ **`e4a1484ea1`**（当卓が commit の実在と item 行を確認）**（当卓 09-05 08:3x 実測）
+
+- 3 卓（p0 `m-p0-301R`・当卓 §1423・p4 ②）が同じ結論 — ただし **当卓の根拠は自分の disk 読み（§1423）であって 3 者の一致ではない**（同意は再導出でない）。
+- ⚠ p4 ① は PZ-212 を `0c2e69802a`（40 行版）で引く — `m-p18-304`（PZ-212b `f10308e057` が supersede）は p4 稼働中で Tab queue のため未読の時点の文。行 1-7・9-10 は不変・行 8 は実測へ格上げのみ ⇒ p4 の ACCEPTED は変わらない（p4 が読めば自分で寄せる・当卓は追送しない）。
+- p4 ② の「runtime id との差 8 = XML の default-class geom template 8 個」は **p4 の主張・当卓未検証**（結論に不要のため測らない・relay しない）。
+- Rs1 へは受領として短く報告（裁定不要・open 項目 5 = `:1171` の 1 行修正は変わらず Rs1 の一言待ち）。
