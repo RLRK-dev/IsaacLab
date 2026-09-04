@@ -2490,3 +2490,80 @@ Run as `python -u probe_rm_main.py <driver file> {normal|raise|sysexit} <outdir>
 ### 5. Standing
 
 - L1 (`P4_CLIP_DUMP=1`, the 0.417 s cable settle) still waits for Rs1's word via p18 (§1413 question); ⛔ until now its PASS would not have meant "the writer works" — it would have exercised the one path that did work.  Route run ② conditional and unmet.
+
+## 8.48 L1 run on Rs1's word「push 認可」— RUN_METRICS.json produced by the real driver, 14/14 against the contract; the video leg omitted with the reason written here (CLAUDE.md:274)
+
+*(2026-09-05 08:26 JST.  Rs1 = the human; Rs2 = p4/CC.  Authorization = m-p18-297 relaying Rs1's verbatim「push 認可」(§1419) for
+exactly the §1413 shape: one run, arms uncommanded, cable settle of 2000 steps = 0.417 s, no IK, no route, no video.)*
+
+### 1. Custody before the overwrite
+
+`cp -p` of the four generated XMLs into `_gen/reshoot_speccell_20260810/` at 08:23:27 JST, shas equal to the originals
+(`4158e4e638e9b…` / `d4f884272e30d…` / `4e97b6f0dbb83…` / `93d22c960604d…`), mtime preserved (2026-08-10 09:10:11.19).
+After the run, `_gen/_steps_cell_full.xml` came back **byte-identical** (`4158e4e638e9b0fc0eddad324f2a0fdd8b80a77d51b9526d63d1be3cf4e2204b`):
+the same 0.22/45/0.110 cell compiles to the same XML.  The copy was still the right order of operations.
+
+### 2. The run
+
+```
+cd p4_ur15_sim_20260727 && mkdir -p _gen/e1_static_l1_20260905 && \
+YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45 P4_CLIP_DUMP=1 /home/rlrk/env_isaaclab7/bin/python -u ur15_steps_wired.py \
+    _gen/e1_static_l1_20260905/unused.mp4 > _gen/e1_static_l1_20260905/run.log 2>&1; echo "exit=$?"; \
+sha256sum _gen/e1_static_l1_20260905/run.log > _gen/e1_static_l1_20260905/run.log.sha256
+```
+
+08:23:53 → 08:23:55 JST, `exit=0`, driver = the committed `0a2b600959` text (the JSON's own `driver.sha256` =
+`307868a972…5fb90a5`, equal to the file).  Other processes matching the driver's name before launch: four long-lived bash
+wrappers of other panes (7 h / 7 h old), no Python instance.  Run dir contents:
+
+| file | bytes | sha256 |
+|---|---|---|
+| `run.log` (61 lines) | 6406 | `b2ca78057cd0928f1a4094386a805c0f7cb10892ab852a3201cce5282eb4cb14` |
+| `run.log.sha256` (launcher sidecar) | 101 | — (its content is the row above) |
+| `RUN_METRICS.json` | 3378 | `859cc7dea8a5d2e3dba36027bceb4128f19dc2e987cf40d0bf723a289aea4000` |
+
+`_gen/` is untracked, as for every earlier run; custody = these shas.
+
+### 3. Contract check, 14/14 (scratch checker, run 08:24 JST)
+
+```
+PASS schema/final/judgement
+PASS end_reason exited_early / exit_code null / exception null
+PASS run_id / out_dir = the run dir (A1 via /proc/self/fd/1)
+PASS log_path == run.log (absolute)
+PASS M1: log_sha256_at_write == sidecar  [b2ca78057cd0928f]
+PASS M1: log_bytes_at_write == final size  [6406]
+PASS config echo 0.22 / 45.0 / 0.110  [0.22 45.000000 0.11]
+PASS env_switches_set = the three set
+PASS identity LEFT=UR15 RIGHT=UR15-B, shas == files
+PASS driver sha256 == committed 0a2b600959 content (307868a9...)
+PASS cell_dump sha == _gen/_steps_cell_full.xml as rewritten by this run  [4158e4e638e9b0fc]
+PASS steps [] / step1 {} / phase_max null (the path exits before STEP1)
+PASS worst all null / gates null / depth_audit {} (defined only after the exit point)
+PASS video final exists_at_write False / live null
+ALL PASS
+elapsed_s 1.138 generated_at 2026-09-05T08:23:55+0900 pid 3554131
+```
+
+The log-analyzer skill's own lookup (`SKILL.md:52-63`, run verbatim on this file) resolves
+`artifacts.logs.path -> …/_gen/e1_static_l1_20260905/run.log` — m-p18-286's accept condition, exercised.  `run.log`
+carries the RUN_METRICS announce line as its last line (:61), the cell identity line (:38) and the clip dump (:41–60); it
+contains **no** `STEP`, `start-pose IK`, `COMMAND`, `watch along` or `wrote` line (grep count 0) — the path ended where
+§8.46 §3 said it ends.
+
+### 4. ⚠ Visual leg: omitted, and why (CLAUDE.md:274 mandatory-or-justified — this is the justification, written loud)
+
+This run is motion-bearing in the letter (2000 physics steps: the cable settling onto its saddles; the arm servos
+holding their compile pose with nothing commanded) and produces no video: the renderer and both writers are created
+after the exit point.  There is no task-related motion — no approach, grasp, close, lift, route or drag — and **no motion
+verdict is claimed**.  The claim of this run is exactly two things: `RUN_METRICS.json` exists beside `run.log`, and its
+content conforms to the contract (§3).  `/verify-run` and `/video-analyzer` have nothing to read here, and a video of a
+cable settling for 0.4 s would attest nothing this claim rests on.  Recorded here so the omission is loud, per A4/E3
+(the first application, as p18 named it in m-p18-292).
+
+### 5. What this run does not establish
+
+- The `raised` and `completed` paths of the writer under the real module namespace (the real `_DEPTH_AUDIT`, real
+  `gates`, real per-step rows) — those need a route run, which stays under the conditional authorization ②, unmet.
+  Their logic is verified only at the block level (§8.47 §3: real `__main__`, 3/3; fixture, 19/19).
+- Anything about the cell, the arms or the cable: this run measured the writer, not the machine.
