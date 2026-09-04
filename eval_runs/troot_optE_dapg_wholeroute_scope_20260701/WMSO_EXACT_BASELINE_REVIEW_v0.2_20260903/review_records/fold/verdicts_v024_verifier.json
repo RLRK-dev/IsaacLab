@@ -1,0 +1,177 @@
+{
+ "R1-01": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R1-02": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R1-03": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R1-04": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R1-05": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "merged_into": ""
+ },
+ "R1-06": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R1-07": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R1-08": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R1-09": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R1-10": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R1-11": {
+  "confirmed": false,
+  "severity": "NOT_A_DEFECT",
+  "merged_into": ""
+ },
+ "R1-12": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R1-13": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R1-14": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R1-15": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R1-16": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R2-01": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R2-02": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R2-03": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "merged_into": ""
+ },
+ "R2-04": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "merged_into": ""
+ },
+ "R2-05": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R2-06": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R2-07": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R2-08": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R2-09": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R2-10": {
+  "confirmed": false,
+  "severity": "NOT_A_DEFECT",
+  "merged_into": ""
+ },
+ "R2-11": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R2-12": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R2-13": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R2-14": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R2-15": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R2-16": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R2-17": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R2-18": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R2-19": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ }
+}

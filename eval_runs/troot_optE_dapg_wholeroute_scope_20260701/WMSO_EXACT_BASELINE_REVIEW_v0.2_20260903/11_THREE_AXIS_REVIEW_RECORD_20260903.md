@@ -158,9 +158,62 @@ $ python3 check_review_candidate.py 03_IDENTITY_HASH_EVIDENCE_IMPACT_MATRIX_2026
 # WARN は全て heuristic C2（表の行に複数 locus / frozen 行を型根拠に引きつつ新語を導入した行）— FAIL = 0 が要件
 ```
 
-## 7. Review anchors
+## 7. v0.2.3 再レビュー round（R1 / R2 → V1 / V2）— 記録 2026-09-04 23:00 UTC
+
+- 対象 = v0.2.3（commit `ddb37db1`・checker O5–O8 / Q1 追加後 = `ab52137f`）。reviewer R1（05 primary・contract + runtime lens）/ R2（06 primary・deployment lens）は別 context。各 reviewer は v0.2.3 fold 表の全行の回帰確認（旧 finding の反例を新本文に当て直す）と新規反証の 2 pass を実施。verifier V1 / V2（3 lens・別 context）が全 finding を判定。
+- 手続の独立: reviewer は互いの報告を読まない。verifier は reviewer と別 context。起草者は fold のみ。AI レビューであり human two-key ではない（§4 と同じ）。
+
+| reviewer | 対象 | verdict | finding | verifier | confirmed | refuted | 重複 |
+|---|---|---|---|---|---|---|---|
+| R1 | 05（+06 §2.1/§3/§5） | HOLD | 16 | V1（16） | 15 | 1 | 0 |
+| R2 | 06（+05 §3.4/§4/§5.4・04） | HOLD | 19 | V2（19） | 18 | 1 | 0 |
+| **計** | | | 35 | | 33 | 2 | 0 |
+
+| id | sev（reviewer） | 対象 doc:line | 内容（要約） | verifier | sev（verifier） | 処置（v0.2.4） |
+|---|---|---|---|---|---|---|
+| R1-01 | MEDIUM | 05:423, 05:425, 05:277, 05:363, 05:503, 05:535; 06:258 | command_deadline_s has no start/stop condition: it fires in S_BOUNDARY_WAIT (executor must stop commanding per… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-02 | MEDIUM | 05:184 (§3.4 (e) age basis) | The v0.2.3 residual defines age relative to the manager's FIRST RESOLUTION of the decision ref, so at first us… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-03 | MEDIUM | 05:241 (priority + 'strengthen only'), 05:301 vs 05:282 (res | SafeHoldReason priority is a partial order; same-tier and same-reason TRANSFER_TO_SAFEHOLD semantics are undef… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-04 | MEDIUM | 05:516-518 (§5.4 clearance definition, condition-10 set incl | 05 requires record.role ∈ clearance_roles[reason] for every condition-10 reason including SAFETY, but 06 makes… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-05 | HIGH | 05:184 (§3.4 (j) lists predicate_refs/evaluator_ref/tcp_offs | CD-04 fold re-verifies resolved content only for predicate_refs / evaluator_ref / tcp_offset_ref; ZoneRef.geom… | CONFIRMED | HIGH | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-06 | MEDIUM | 05:435 (ZOH => point evaluation), 06:295 | CD-18's rule evaluates only a point under ZERO_ORDER_HOLD, but a DiffIK controller moves the EE continuously f… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-07 | LOW | 05:224 (cond 3 ack expiry), 05:230 (cond 9), 05:231 (cond 10 | CAS REJECTED on condition 9 (ISL health/pending decision) and condition 10 (clearance absent) and on ACK expir… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-08 | LOW | 05:638 (§7 INVALID_STATE unresolved -> SAFE_STOP) vs 05:265  | The §7 table prescribes an unconditional TRANSFER_TO_SAFEHOLD(SAFE_STOP) for unresolved INVALID_STATE, but §3.… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-09 | LOW | 05:278 (ISL STOP/HOLD row: no DISPOSITION) vs 05:302, 05:493 | The ISL STOP/HOLD transition row does not require a DISPOSITION record although the failure row assigns HOLD/S… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-10 | LOW | 05:269 (row record set), 05:673 (記録義務), 05:698 (INV-17 scope | Row :269 requires LEASE_INVALIDATED(旧) even from S_SAFEHOLD (no old lease -> 'exactly one' unsatisfiable) and … | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-11 | LOW | 05:263 (S_TRANSFER_PENDING), 05:82 (§2 gateway state) vs 05: | S_TRANSFER_PENDING is defined over '上記いずれか' but permits cannot exist in S_LEASE_ACTIVE / S_HEALTH_PENDING sinc… | refuted | NOT_A_DEFECT | 適用せず |
+| R1-12 | LOW | 05:479 (GatewayCommand.executor_id), 05:82 (admission predic | Admission binds (lease_id, control_epoch, cmd_seq) but never checks cmd.executor_id == lease.executor_id altho… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-13 | LOW | 05:534 (B0 snapshot), 05:243 (MARK_BOUNDARY_WAIT by manager) | The Orchestrator's B0 snapshot can precede the manager's MARK_BOUNDARY_WAIT; the permit request then fails (d)… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-14 | LOW | 05:274, 05:527 (SAFETY_STABILIZED -> SAFETY), 05:510 (SAFETY | An executor may emit SAFETY_STABILIZED without any ISL SafetyDecision; the resulting SAFEHOLD(SAFETY) requires… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-15 | LOW | 06:373 (rule (3) 'のみ') vs 05:458 (§4.5 12 triggers); 05:714  | 06 §8.1 (3) states health-check failure and lease_max_duration_s are the ONLY lease invalidators (contradictin… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R1-16 | LOW | 05:492 (pending_invalidate cleared only on observing the ret | pending_invalidate is a gateway-local flag cleared only when the retried TRANSFER_TO_SAFEHOLD succeeds; if tha… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-01 | HIGH | 06:258 (P_TIMEOUT_ORDER), 06:280 (x), 06:344-345 (MIN_FAULT_ | The CD-01 fold's bounding mechanism ('timeout-driven faults must actually fire in commissioning under the same… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-02 | MEDIUM | 06:264 (P_EVIDENCE_UNBOUND = existence per kind x subject),  | FAULT_INJECTION_RESULT and HEALTH_CHECK_RUN records are bound to an audit range but nothing checks that the ra… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-03 | HIGH | 06:106 (ZoneRef.geometry_sha256), 06:176 (CalibrationRef.art | The CD-04 fold added verify-on-resolve only for the three refs it named. Every other declared content hash in … | CONFIRMED | HIGH | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-04 | HIGH | 06:76-83 (CellIdentity: single robot_serial_ref / controller | The profile schema can identify, envelope, tool-bind and calibrate exactly one robot, yet explicitly allows de… | CONFIRMED | HIGH | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-05 | MEDIUM | 05:516 (該当 = record.role ∈ profile.escalation.clearance_role | 05 makes a profile role mandatory for releasing SAFEHOLD(SAFETY); 06 makes declaring a SAFETY role optional. A… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-06 | MEDIUM | 06:164-170 (HealthCheckSpec: kind is a label, semantics live | P_HEALTHCHECK_MISSING is satisfied by the presence of kind labels; a constant-True evaluator (content-hash pin… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-07 | MEDIUM | 06:320 (artifact_ref for HEALTH_CHECK_RUN / FAULT_INJECTION_ | A mandatory health check declared with stage = BEFORE_PERMIT is only ever executed while no lease exists, so i… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-08 | MEDIUM | 06:373 rules (2)/(3) (acceptance = add to accepted_profiles; | There is no path to remove or revoke an accepted profile. After the cell changes (layout, tooling, incident), … | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-09 | MEDIUM | 06:76-83 (CellIdentity has robot/controller/layout refs but  | A firmware/software update of the IndependentSafetyLayer after SAFETY_LAYER_ACCEPTANCE was recorded is invisib… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-10 | LOW | 06:280 (xi) claims 'predicate を空虚にする' is caught by P_PREDICA | The enumeration lists a check that is vacuous on the case it names: P_PREDICATE_HASH_MISMATCH has nothing to c… | refuted | NOT_A_DEFECT | 適用せず |
+| R2-11 | LOW | 06:270 (P_ENVELOPE_EXCEEDS_MEASURED evaluated 登録時 against a  | Registration of a SHADOW-only profile requires a CLOSED_LOOP-level measurement record, contradicting the state… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-12 | LOW | 05:714 (INV-33: 全 lease の活性時間 ≤ lease_max_duration_s), 05:28 | INV-33 is stated for all leases but the transition that enforces it excludes S_BOUNDARY_WAIT, where the lease … | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-13 | LOW | 06:113 (WorkspaceRestriction.frame_ref: str = "" — a default | One field in the profile has a serialization default, contradicting the strict-codec / no-default discipline t… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-14 | LOW | 06:329 (must_be_exercised_before: LeaseMode may be SHADOW_NO | The policy type admits two circular / non-monotone configurations: (a) a fault or health-run requirement gated… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-15 | LOW | 05:141 (genesis record is written 'profile の clearance 手続（do | Genesis has no safehold_reason key in clearance_roles (INITIAL is not among the keyed reasons), so the role th… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-16 | LOW | 06:264 (subject rule defined only for CALIBRATION_RECORD / H | For the five singleton kinds (CELL_COMMISSIONING, CONTROLLER_ENVELOPE_MEASUREMENT, TOOL_PAYLOAD_IDENTIFICATION… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-17 | LOW | 06:168 (evaluator_sha256 compared at the 2nd evaluation poin | Evaluators for AT_HEALTH_CONFIRMATION / BOTH checks run after the permit was issued; their content is verified… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-18 | LOW | 06:177 (CalibrationRef.valid_until_iso8601: str ／ None), 06: | Calibrations and safety acceptance can be declared without expiry; the expiry checks introduced by CD-03 are t… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+| R2-19 | LOW | 06:295 / 05:435 (ZERO_ORDER_HOLD => point evaluation; LINEAR | The physical arm traverses the path from the last setpoint to the new one regardless of hold kind; ZOH only me… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.4 表） |
+
+- verifier が refuted とした finding は適用しない（理由 = `review_records/VERIFY_V1_v023_20260903.md` / `VERIFY_V2_v023_20260903.md`）。
+- v0.2.4 本文への再レビュー・再 verify は未実施（次 round）。open = 0 は宣言しない。
+- 特記: R2-04（DUAL-ARM cell の表現）は RS71 §0 不変前提に関わるため、案 A（単一 robot 限定）を採らず案 B（arm 単位 `ArmSpec`）で fold し、06 OPP-15 に Rs 確認事項として登録した。不変前提そのものは変更していない。
+
+## 8. Review anchors
 
 1. 各 reviewer の pin 再測と checker 実行は各報告 §0 に自記 — `review_records/AXIS_*_review_*.md`。
 2. verifier の lens 別理由と sed 引用 — `review_records/VERIFY_*_*.md`。
-3. fold の再現 — `review_records/fold/fold_v022_05.py` / `fold_v022_others.py`（v0.2.1 = commit `297c850b` の本文に適用すると v0.2.2 本文を再生成。verdict 列は JSON 引数）。
+3. fold の再現 — `review_records/fold/fold_v022_05.py` / `fold_v022_others.py`（v0.2.1 = commit `297c850b` → v0.2.2）、`fold_v023.py`（v0.2.2 = `f3c6ca35` → v0.2.3）、`fold_v024.py`（v0.2.3 = `ab52137f` → v0.2.4）。verdict 列は JSON 引数（`verdicts_v023_verifier.json` / `verdicts_v024_verifier.json`）。
 4. 版の同一性は content sha（`SHA256SUMS.txt`）で引く。label は照合用。
