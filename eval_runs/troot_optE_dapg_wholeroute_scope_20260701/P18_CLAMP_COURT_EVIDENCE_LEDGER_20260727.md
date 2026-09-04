@@ -46836,3 +46836,14 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **不変**: run 認可なし・**whole-cell composition は全卓とも未測**（driver import なしでは測れない）・条件つき word ② は未発火。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1407 — ⭐⭐⭐ **Rs1 直接 task「エージェント型 AI 化の改善点を挙げて実行せよ」（09-04 16:08:50 JST・transcript 行 37937）= 提案 v3 @ `f5c681edb3` ＋ 5 体検証 2 cycle（FAIL → REVIEW）＋ Claude pane の配達述語を実測 ＋ file を作らない実行 3 通 — ⛔ build 0・push 0・Rs1 の決定 4 項待ち**（2026-09-05 07:31:23 JST・当卓）
+
+**契機** = Rs1 (the human) の当卓 pane 直接発話（custody = `~/.claude/projects/-home-rlrk-IsaacLab/1c3d805c-2a9a-4b6d-bba2-ae7d479862e7.jsonl:37937`・`type=user`・`userType=external`・2026-09-04T07:08:50.946Z）。⚠ 当卓は v2 で行 38094（compaction summary）を custody に書き、cycle 2 の 5 体全員が捕らえた（memory `feedback_records_must_match_fact_2026-06-11` 09-05 追記）。
+
+- **成果物（全部 record・pathspec・--no-verify・未 push）**: v1 `acb4ff2c2a` → cycle 1 FAIL 記録 `P18_AGENTIC_VERIFY_CYCLE1_20260905.md` @ `dc10ba462d`（union 40 項・CRITICAL/HIGH 全受入・U30 注記 @ `16a8bdc1d0`）→ v2 `ce50abc3d9` → cycle 2 REVIEW 記録 `P18_AGENTIC_VERIFY_CYCLE2_20260905.md` @ `e4842380b3`（cycle 上限・HIGH 受入 = custody 行／配達判別子の字／C1 の p4 二重 binding／viewport 窓／HELD と STOP／本文未保存）→ **v3 `f5c681edb3`**（sha256 `4d1e7ac099f8825924367bcd57b0a8ba099d6ab38bfe2d4488e9ada3ed77b86f`・178 行）。verification-log 登録 2 件（01:12・07:22 JST）。
+- **実測（07:19:40 JST・m-p18-283 → idle の w2:pB）**: Claude pane では / は出ず送信済行も composer も 。Enter の 286 ms 後に agent_status idle→working。**宛先 transcript jsonl に head token 付き `type=user` record**（07:19:40.599）= 配達述語として決定的（viewport 67 行の窓に依らない）。⚠ herdr 送信も `origin.kind=human`・`promptSource=typed` を持つ ⇒ 人間の custody は field でなく内容で（memory 2 file に 09-05 追記）。
+- **実行（file を作らず権限を動かさない項・v3 §4-3）**: `m-p18-284` → w2:p6（C2 = manifest frontmatter root_node_id の意味を問う・:4 注記削除は p6 court・DDR 起票依頼 = codex pane の配達表未計測）／`m-p18-285` → w2:p4（遵守所見: CLAUDE.md:274-276 視覚レグが 08-10 DoD 2 run で省略理由なく未適用／E2 は既存 gate :269/:170／C1 は新規 session 推奨）／`m-p18-286` → w2:p0（RUN_METRICS.json = 既存契約の履行依頼・次の認可編集窓で）。**配達証拠 = 各宛先 transcript の record**（07:29:50〜52・working 遷移 ~390 ms・scratchpad `desk_msgs/sent.jsonl`）。F3 行動則 = 当卓 handoff へ記載。
+- **Rs1 待ち（v3 §5）**: ①tooling file の作成可否（D1 = p18 の送信 tooling: script＋bodies dir＋JSONL・code check 路 A/B）②C3C5 node の起動＋**新規 session** の binding（p4 は `T-ROOT-Kinematic-Pin-Complete-Removal-20260719#s1 active`）③退役役名 pane pV/pW ④卓単位 task の node 化（CLAUDE.md:128 との不整合）＋報告 = commit trailer（harness 指示）が AGENTS.md と衝突。
+- **当卓の自己捕獲 5 回**（部分読み 2・引用先不在 2・未測の数 1）= 5 体検証が全て捕らえた ⇒ 「法は散文では効かない」の実証が本 task の一番の測定値。
+- ⛔ **build 0・他卓への配付は v3 の query 付き数値のみ・push は Rs1 の一語**。
