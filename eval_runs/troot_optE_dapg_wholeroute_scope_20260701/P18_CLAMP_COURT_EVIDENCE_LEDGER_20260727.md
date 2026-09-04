@@ -46823,3 +46823,16 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⛔→✅ **p0 の 48 秒後の自己訂正（当卓 diff 実測で確認）**: 「3 か所」は誤り — closed grep が **comment 自身の正当な delimiter（`:3` の `<!--`・`:21` の `-->`）を class として拾っていた**。違反 token は **1 つ（`:16`）**・修正は em dash 1 個・**commit の diff が +1/−1** でそれを証明（当卓 numstat ✓・差分行実読 ✓）。⇒ ⭐ **本節の「class として掃いた」評価は撤回** — 実際は 1 site・ただし fix 自体は正しく検証済。p0 の自認「query 結果を、その query が何に一致するかを問わずに採用した」= 今夜の他の失敗と同形（**述語の一致範囲を問わない**）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1405 — ⭐⭐ **壊れた revision を p6 が名指して pin を守った（当卓 3 blob 実測で確認）: `c737f6974e`（正式化）**PARSE OK** → `dda5ac2468`（分母訂正）**PARSE FAIL** → `6a542f45dd`（修正）**PARSE OK** — 不正 header の窓 = **4 分 45 秒**。当卓 §1403/m-p18-282 は「HEAD で」「fix で parse OK」としか書かず、**row 68 が pin する正式化 commit が壊れていたと読まれ得た** — 実際は clean（⚠ p6 は strict XML のみ測定・MuJoCo load leg は p0 のもの、と自ら限定）** ＋ ⭐⭐⭐ **形の名指し（p6）: 壊した text は逐語「A first header of this file said 'eight poses' --」＝ **誤りを記録する文が object を壊した** — 自分のイベントを上げた audit hook・欠陥を運んだ fix 副産物と同族。**訂正はそれが訂正する系の外に立たない**** ＋ ✅ **当卓の lesson を p6 が逐語採用（「1 つの数が誤りなら同じ視野の全数を疑う・最も安い真値は file 自身の summary 行」— p6 の 2 訂正が安かったのは行を数えず :37/:65/:93/:121 を読んでいたから）**
+
+**契機** = p6 `m-p6-147`（10:06:10）。当卓検証: 3 commit の parse 状態を独立再現 ✓。⛔ **実行 0**。
+
+## §1406 — ⭐⭐⭐ **pZ 腕級 leg 完了（A audit ＋ B 独立再導出 ＋ C 正式化・banked `cf0a14cea3`・sha `9eb8ed7233…`／47 行 ✓）— 鏡像は**独立 2 経路**で保持: pZ が Rs1 (the human) の reference JSON **自身が publish する chain**（joint origin/axis・base 回転・flange/tool0 frame・腕 base pose）から **自前 FK** を建て（MJCF なし・MuJoCo なし・p0 code なし）両腕の published tool0 を再現 — **worst 0.0079 mm 左 / 0.0074 mm 右・24/24 が 1.0 mm bar 内・control（base を 10 mm 上げる）は 0/24 で発火**。⇒ **2 経路が約 8 マイクロメートル差**** ＋ ⭐⭐ **誰も測っていなかった地面を測った: **reference cell 自身が厳密に鏡像**（|M·tool0_L − tool0_R| = 0.0000 mm・24 poses 全部・grip も）— acceptance が立つ地面が exact** ＋ ✅ **C-rows = **改名が naming only であることを機械証明***（`c737f6974e` を own parent `3ad43a3914` と compile 前後で比較: body_pos/body_quat/jnt_axis/jnt_range/jnt_pos/geom_pos/geom_quat/geom_size/body_mass/body_inertia **および mesh_vert が全 bit 同一** ⇒ A/B を再開しない・07-29 証拠は UR15-B identity へ移る）** ＋ ⭐ **relay 価値のある罠: **loader 級では腕 mesh 2 本が 42.4 mm / 18.0 mm 離れて読める** — MuJoCo の per-mesh 主軸再 frame（p0 の gripper acceptance が記録した同一効果）で、**file 級の 0 だけがそれを解釈できる**。loader で止まった leg は**存在しない欠陥を報告していた**** ＋ ⭐ **pZ が pin 前に自分の artifact を訂正（当卓 §1 を受けて全行 parse: 通過 3 leg は **0.0013–0.0076 mm**（144 値）・negative は **357.68–1357.55 mm**）— 「耐久形は file 自身の summary 行であって row 引用でない、**自分の引用も含めて**」と規則化**
+
+**契機** = pZ `PZ-208`（10:06）。⛔ **当卓実行 0**。
+
+- **audit の完成度**: 分母 24 を **2 経路で独立確認**（JSON の poses map が len 24・record の control leg が 24 行）／control leg が **初めて識別を証明**（C-2 で 0/48・0.22/45 で 48/48）／negative 発火／**limit leg は宣言どおり盲**（stock range 6 本が全対称ゆえ落ちようがない・鏡像 range は [lo,hi] == [−hi,−lo] を満たす — 盲であることを loader で verify）／grip offset の剛性を**自前の frame 非依存検査**（|grip − tool0| ∈ [0.189990, 0.190005] m・48 腕姿勢）＋ ⚠ **自分の 0.0099 mm は record の 0.0052 mm と別量であって不一致でない**と artifact に明記（**同じ数字が同じ量でない**の逆向き = 違う数字が矛盾でない）。
+- **不変**: run 認可なし・**whole-cell composition は全卓とも未測**（driver import なしでは測れない）・条件つき word ② は未発火。
+
+**Banked — 時刻は本節 commit の author date が正。**
