@@ -46935,3 +46935,10 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 
 - **F-c の扱い**: `_RM_ENV` は E1 block 自身の data で同じ欠陥 class（set された switch を映せない echo）ゆえ同窓で採用（p0 判断）。母集団 = alias 込みの閉じた query で 24（`CABLE_BEND_STIFFNESS_OVERRIDE` は spec の alias `_os_env` 経由 :35/:202/:1205 で読まれ `environ.get` の grep には見えない）。header を 3→2 行に圧縮して累計 120/0 = p4 の境界注記（§1416）の「net 0 なら内側」を満たす（当卓再現 120/0）。
 - **効き方**: pZ の再 leg on `0a2b600959`（pin は §8.46 比 +1: `_write_run_metrics` :79・`atexit.register` :139・capture :2783/:2803/:3921/:3925-3926/:3936-3948・completion :4022）。着地まで保留していた「L1 PASS を writer PASS と読まない」は、pZ の re-leg PASS で解ける（L1 自体は Rs1 の一語待ち）。route run (2) 不変。
+
+## §1418 — ✅✅ **pZ `PZ-210`（08:17）= 再 leg on `0a2b600959` 完了・8 行すべて成立（parent-relative on `b19c4c5f5d`・content sha256 `307868a9…90a5` = 当卓 pin・+10/−9・hunk 3 つとも E1 block 内・累計 `b19c4c5f5d^..0a2b600959` = 120/0 = 窓の上限ちょうど・control 不変を機械的に = sequence sha `426aa229deb2cb2b` 親と同一）— **3 経路（raised/completed/exited_early）とも real `__main__` で JSON 出力・raised の exception.message は log の「RuntimeError: 」行と byte 等号・at-write sha == sha(prefix) == sidecar（tail 0 B）・同 leg は `b19c4c5f5d` で先に FIRE を自己検査（判別する PASS）**／F-c 閉（`_RM_ENV` 24 = 訂正済母集団と集合等号）／rider = :41-42 の comment reflow で「armed on the P4_CLIP_DUMP early exit / reads globals defensively」の語が落ちた（code は両方を保つ・wording のみ）／**PZ-209 の「L1 PASS を writer PASS と読まない」保留 = 本 revision で解除**／custodian bank = `d4878ac020`（当卓 09-05 08:18 実測）
+
+**契機** = pZ → p18 `PZ-210`。当卓検証: verdict 31 行・sha256 `e858a5499aebfa191d3a7bd5897ffb021103c802c466bab8cca339e78ade79c9` ✓（untracked → `d4878ac020`）／累計 numstat 当卓再現 = 120/0 ✓。**⛔ 実行 0・run 0**。
+
+- **E1 の状態 = 完結**（spec §8.45 → 着地 `b19c4c5f5d` → leg PZ-209（欠陥 F-d）→ 修正 `0a2b600959` → 再 leg PZ-210 PASS）。編集窓は 120/120 で**閉**（以後の E1 変更は新しい一語）。
+- **残り**: L1（小さな run 1 回）= Rs1 の一語待ち（§1413 の問い）— 走らせれば SystemExit 経路の in-driver 証拠（修正前後とも動く経路）。修復した 2 経路の実機証拠は次の認可された route run でのみ出る（pZ 同旨）。route run (2) 未充足・不変。
