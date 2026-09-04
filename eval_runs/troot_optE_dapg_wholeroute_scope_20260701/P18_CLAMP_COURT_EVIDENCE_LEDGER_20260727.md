@@ -46847,3 +46847,5 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **Rs1 待ち（v3 §5）**: ①tooling file の作成可否（D1 = p18 の送信 tooling: script＋bodies dir＋JSONL・code check 路 A/B）②C3C5 node の起動＋**新規 session** の binding（p4 は `T-ROOT-Kinematic-Pin-Complete-Removal-20260719#s1 active`）③退役役名 pane pV/pW ④卓単位 task の node 化（CLAUDE.md:128 との不整合）＋報告 = commit trailer（harness 指示）が AGENTS.md と衝突。
 - **当卓の自己捕獲 5 回**（部分読み 2・引用先不在 2・未測の数 1）= 5 体検証が全て捕らえた ⇒ 「法は散文では効かない」の実証が本 task の一番の測定値。
 - ⛔ **build 0・他卓への配付は v3 の query 付き数値のみ・push は Rs1 の一語**。
+
+> ⛔→✅ **§1407 訂正注記（同日・当卓）**: 上の「実測」行は unquoted heredoc で書いたため、行内の backtick に挟んだ 3 つの字（codex の `›`・`»` と Claude の `❯`）が shell の command substitution で**空文字に置換されて落ちた**（memory「backtick-hazard: 空文字に置換され消えたこと自体が見えない」の当卓再発・本節で 6 回目の自己捕獲）。意図した文 = 「Claude pane では `›`/`»` は出ず、送信済の行も composer も `❯`」。他の行は `\`` で escape 済で無傷（v3 §1.4・cycle-2 記録 Part 4 が正）。本注記は quoted heredoc で書いた。
