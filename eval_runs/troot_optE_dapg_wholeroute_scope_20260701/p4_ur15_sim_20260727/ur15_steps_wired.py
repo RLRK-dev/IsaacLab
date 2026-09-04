@@ -38,6 +38,105 @@ S.mkdir(parents=True, exist_ok=True)
 GRIP_XML = "/home/rlrk/IsaacLab/thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml"
 GRIP_XML_MIRRORED = str(Path(__file__).resolve().parent / "_ur15_2f85_koshape_actuated_mirrored.xml")
 OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "/home/rlrk/Downloads/ur15_steps.mp4")
+# --- RUN_METRICS.json begin (E1, m-p18-286; plan = P0_SCRATCH_... §8.45 @ 5930ebf411): the existing
+# run_metrics.v1 contract, written at exit.  Registered FIRST so it runs LAST (atexit is LIFO) -- after the
+# depth-audit print, and armed on the P4_CLIP_DUMP early exit.  Reads globals defensively; instrument only.
+import hashlib  # noqa: E402
+import json  # noqa: E402
+import time  # noqa: E402
+
+_RM = {"t0": time.time(), "completed": False, "step1": {}, "steps": []}
+_RM_ENV = ("ALL_PAIRS", "ARM_PATH", "CROWN_R_OVERRIDE", "CROWN_Z0_OVERRIDE", "EXTRA_L_ROUND", "FURNITURE",
+           "GEOMDIST_REPAIR", "GRASP_CENTRE_X", "LOUD_ROUNDS", "P4_CLIP_DUMP", "P4_NO_STANDOFF_REAIM",
+           "P4_OLD_SEAT_AIM", "P4_RELEASE_ONLY", "P4_ROLL_CAP", "SEQUENTIAL_START", "SOLVE_ORDER", "START_TRIES",
+           "STEREO_HEAD", "TILT_DEG_OVERRIDE", "UNWRAP_SOLVE", "UNWRAP_START", "WORK_ROW_DY", "YOKE_SPREAD_OVERRIDE")
+
+
+def _rm_stdout_file():
+    """The regular file stdout is redirected to, else None (tty/pipe/unlinked).  A1: the run dir is where the log is."""
+    try:
+        q = Path(os.readlink("/proc/self/fd/1"))
+        return q if q.is_file() else None
+    except OSError:
+        return None
+
+
+def _rm_json(o):
+    if isinstance(o, (np.floating, np.integer, np.bool_)):
+        return o.item()
+    if isinstance(o, np.ndarray):
+        return o.tolist()
+    return f"{o.co_name}:{o.co_firstlineno}" if hasattr(o, "co_firstlineno") else str(o)
+
+
+def _rm_keys(o):   # json accepts only str keys; the depth audit keys channels by code object
+    if isinstance(o, dict):
+        return {(k if isinstance(k, str) else _rm_json(k)): _rm_keys(v) for k, v in o.items()}
+    return [_rm_keys(v) for v in o] if isinstance(o, (list, tuple)) else o
+
+
+def _write_run_metrics():
+    try:
+        g, here = globals(), Path(__file__).resolve().parent
+        log_file = _rm_stdout_file()
+        run_dir = log_file.parent if log_file else OUT.resolve().parent
+        exc = getattr(sys, "last_value", None)   # set for an uncaught exception, absent otherwise (measured)
+        end = "completed" if _RM["completed"] else ("raised" if exc is not None else "exited_early")
+        ts = lambda t: time.strftime("%Y-%m-%dT%H:%M:%S%z", time.localtime(t))  # noqa: E731
+        big = lambda v: None if v is None or v >= 1e8 else v   # noqa: E731  (1e8/1e9 = the file's "never" sentinel)
+        chk = lambda q: {"path": str(q), "exists_at_write": Path(q).exists()}  # noqa: E731
+        xml = lambda q: {"path": str(q), "sha256": hashlib.sha256(Path(q).read_bytes()).hexdigest()  # noqa: E731
+                         if Path(q).exists() else None}
+        rec = {
+            "schema_version": "run_metrics.v1", "generated_at": None, "final": True,
+            "run": {"run_id": run_dir.name, "out_dir": str(run_dir), "pid": os.getpid(),
+                    "start_ts": ts(_RM["t0"]), "end_ts": None, "elapsed_s": None,
+                    "exit_code": {"completed": 0, "raised": 1}.get(end), "end_reason": end,
+                    "exception": None if exc is None else {"type": type(exc).__name__, "message": str(exc)},
+                    "log_path": str(log_file) if log_file else None,
+                    "log_bytes_at_write": None, "log_sha256_at_write": None},
+            "artifacts": {"video": {"final": chk(OUT), "live": chk(g["LIVE_OUT"]) if "LIVE_OUT" in g else None},
+                          "logs": {"path": str(log_file) if log_file else None, "exists": log_file is not None}},
+            "progress": {"phase_max_reached": _RM["steps"][-1]["step"] if _RM["steps"] else None},
+            "judgement": {"verdict": "PENDING", "decided_by": None},
+            "ur15_steps": {
+                "identity": {"LEFT": {"arm": "UR15", "arm_xml": xml(here / "ur15_base.xml"), "grip_xml": xml(GRIP_XML)},
+                             "RIGHT": {"arm": "UR15-B", "arm_xml": xml(here / "ur15_base_mirrored.xml"),
+                                       "grip_xml": xml(GRIP_XML_MIRRORED)}},
+                "driver": xml(Path(__file__).resolve()), "cell_dump": xml(S / "_steps_cell_full.xml"),
+                "config": {"yoke_spread_m": g.get("YOKE_SPREAD"),
+                           "tilt_deg": math.degrees(math.pi / 2 - g["TILT"]) if "TILT" in g else None,
+                           "crown_r_m": g.get("CROWN_R"), "shoulder_height_m": g.get("SHOULDER_HEIGHT"),
+                           "table_top_m": g.get("TABLE_TOP"), "grasp_centre_x_m": g.get("GRASP_CENTRE_X"),
+                           "env_switches_set": {k: os.environ[k] for k in _RM_ENV if k in os.environ}},
+                "step1_approach": _RM["step1"], "steps": _RM["steps"],
+                "worst": {"sigma_min": {t: big(g.get("sig_min", {}).get(t)) for t in ("L", "R")},
+                          "sigma_where": g.get("sig_where"),
+                          "mast_m": {t: big(g.get("col_min", {}).get(t)) for t in ("L", "R")},
+                          "mast_where": g.get("col_where"),
+                          "claw_min_m": {t: big(g.get("claw_min", {}).get(t)) for t in ("L", "R")},
+                          "arm_gap_min_m": big(g.get("arm_gap_min")), "arm_gap_path_m": big(g.get("arm_gap_path"))},
+                "gates": g.get("gates"),
+                "depth_audit": {k: v for k, v in g.get("_DEPTH_AUDIT", {}).items() if k != "rows"}}}
+        # M1: announce, flush, THEN hash -- nothing this driver prints follows the hashed prefix.  The
+        # launcher's sidecar (sha256sum run.log > run.log.sha256) is the exact final; equal == nothing followed.
+        out = run_dir / "RUN_METRICS.json"
+        print(f"[steps] RUN_METRICS.json -> {out}  (end_reason={end})")
+        sys.stdout.flush()
+        sys.stderr.flush()
+        if log_file:
+            b = log_file.read_bytes()   # one read: the byte count and the hash describe the same bytes
+            rec["run"]["log_bytes_at_write"], rec["run"]["log_sha256_at_write"] = len(b), hashlib.sha256(b).hexdigest()
+        t1 = time.time()   # date-THEN-write
+        rec["generated_at"] = rec["run"]["end_ts"] = ts(t1)
+        rec["run"]["elapsed_s"] = round(t1 - _RM["t0"], 3)
+        out.write_text(json.dumps(_rm_keys(rec), indent=1, default=_rm_json, ensure_ascii=False) + "\n")
+    except Exception as e:   # loud, never silent; an atexit exception does not change the exit code
+        print(f"[steps] RUN_METRICS.json NOT written: {type(e).__name__}: {e}")
+
+
+atexit.register(_write_run_metrics)
+# --- RUN_METRICS.json end
 
 # --- every cell constant comes from one module (p5 spec §0 / §6) ---
 # SOURCED: importing these from ur15_cell_spec is the one form the contract allows.  They used to
@@ -2680,6 +2779,7 @@ print(f"[steps] Tier A cross-check: {len(_spec.cross_check_measurable({}))} meas
 
 for t in SIDES:
     print(f"[steps] STEP1 {t} arm touching: {sorted(touching(t, d)) or 'clear'}")
+    _RM["step1"][t] = {"touching": sorted(touching(t, d))}
 qt = {t: np.array([d.qpos[a] for a in QADR[t]]) for t in SIDES}
 # ⛔ THE SECOND COPY.  This re-measures the pair after the approach, because the cable settles --
 # and it read C1[0] while the first copy read GRASP_CENTRE_X, so the later one silently won and
@@ -2699,6 +2799,7 @@ for t in SIDES:
     af = np.array([d.actuator_force[i] for i in AIDX[t]])
     bias = np.array([d.qfrc_bias[v] for v in VADR[t]])
     print(f"[steps] STEP1 {t}: tool err={np.linalg.norm(pinch(t)-GRASP1[t])*1000:6.1f}mm")
+    _RM["step1"][t]["tool_err_mm"] = float(np.linalg.norm(pinch(t) - GRASP1[t]) * 1000)
     print(f"          joint err   = {np.round((qa-START[t])*1000,1)} mrad")
     print(f"          act force   = {np.round(af,1)} N.m   (limits {EFFORT})")
     print(f"          gravity load= {np.round(bias,1)} N.m")
@@ -3816,9 +3917,12 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
           f"({miss1[0]:+6.1f},{miss1[1]:+6.1f},{miss1[2]:+6.1f}) mm "
           f"(gate wants |dx|<{_stx*1000:.0f} |dy|<{_sty*1000:.1f} |dz|<{_stz*1000:.0f} mm, "
           f"read from the gate itself, AND clip-cable contact)")
+    _grow = {}   # E1: the gate rows, collected for RUN_METRICS.json
     for _clip, _c, _lk in (("C1", C1, SEAT1), ("C2", C2, SEAT2)):
         _legs, _touch, _pp, _oth = seat_legs(_clip, _c[0], _c[1], _lk)
         _fail = [k for k, v in _legs.items() if not v] + ([] if _touch else ["contact"])
+        _grow[_clip] = {"pass": not _fail, "fails_on": _fail, "link": f"cab{_lk}",
+                        "pos": [float(_pp[0]), float(_pp[1]), float(_pp[2] - TABLE_TOP)]}
         print(f"[steps] STEP{num:2d} {_clip} GATE: cab{_lk} at "
               f"[{_pp[0]:+.3f} {_pp[1]:+.3f} {_pp[2]-TABLE_TOP:+.3f}] -> "
               f"{'PASS' if not _fail else 'fails on ' + ','.join(_fail)}"
@@ -3827,6 +3931,20 @@ for num, name, lt, rt, lf, rf, secs, gate in STEPS:
     print(f"[steps] STEP{num:2d} PENETRATION: "
           f"{'clear' if _pen <= 0 else f'cab{_pk} is {_pen:.1f} mm INSIDE {_pc} {_pg}'}"
           f"   (clip-cable contacts now: {_ptouch})")
+    _mm = lambda v: None if v is None or v >= 1e8 else v * 1000.0  # noqa: E731
+    _RM["steps"].append({   # E1: the same variables at the same moment as the lines above; parsed from nothing
+        "step": num, "name": name, "t_s": n * m.opt.timestep, "tool_err_mm": {"L": le, "R": re_},
+        "command": {t2: {"reached_frac": prog[t2], "held_ticks": held_ticks[t2], "ticks": s_,
+                         "stalled": bool(_stalled and t2 in _stalled)} for t2 in SIDES},
+        "sigma_min": {"L": sigma_min("L"), "R": sigma_min("R")},
+        "mast": {"L": {"gap_mm": _mm(_cgl), "who": _cwl}, "R": {"gap_mm": _mm(_cgr), "who": _cwr}},
+        "arm_to_arm": {"closest_mm": _mm(_pairmin), "closest_who": _pairwho,
+                       "along_move_mm": _mm(step_gap_path) if step_gap_who else None, "along_who": step_gap_who,
+                       "worst_so_far_mm": _mm(_worst)},
+        "seat_C1_miss_mm": miss1, "gates": _grow,
+        "penetration": {"inside_mm": _pen, "part": _pc, "geom": _pg, "link": _pk, "contacts": _ptouch},
+        "pin": {c: bool(d.eq_active[EQ[c]]) for c in ("C1", "C2")}, "grip": {t2: bool(held(t2)) for t2 in SIDES},
+        "summary_row": row})
     print("[steps] " + row)
     log.append(row)
     # ⭐ A stalled step ends the run, after everything above has been printed.
@@ -3900,3 +4018,4 @@ for _a in SIDES:
               f"{_w2[int(len(_w2)*0.95)]:8.1f}  max {max(_w):8.1f} rad/m")
 
 print(f"[steps] wrote {OUT} frames={len(frames)} {OUT.stat().st_size} bytes")
+_RM["completed"] = True   # E1: the only line after the final write; end_reason "completed" needs it
