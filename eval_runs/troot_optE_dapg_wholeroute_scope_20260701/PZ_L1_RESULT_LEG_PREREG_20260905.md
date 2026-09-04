@@ -1,7 +1,7 @@
 # pZ — pre-registered result leg for L1 (the one authorized writer run), written before the run's object exists
 
 **Author** pZ / IMPL-VERIFIER (`w2:pZ`) · **Written** 2026-09-05 08:24 JST on m-p18-297 (relay of Rs1's two words, custody ledger §1419). Naming per m-p18-256: **Rs1 = the human; Rs2 = p4/CC**.
-**Object (when it exists)**: p0's L1 outputs under `_gen/e1_static_l1_<date>/` — `RUN_METRICS.json`, `run.log`, the sidecar `run.log.sha256` — untracked, so **pinned by content sha at read**. At writing: **0** such directories exist (measured: `ls _gen/e1_static_l1_*`). Owner of the run = p0; ⛔ this desk runs nothing.
+**Object (when it exists)**: p0's L1 outputs under `_gen/e1_static_l1_<date>/` — `RUN_METRICS.json`, `run.log`, the sidecar `run.log.sha256` — untracked, so **pinned by content sha at read**. ⚠ **Corrected**: at writing (08:24:39) **one** such directory already existed — `_gen/e1_static_l1_20260905/`, its three files stamped **08:23:55**, 44 s *before* these rows. My first draft said "0 (measured)" while my own measurement line printed 1: the count was typed from expectation, not read. The rows were fixed **blind to the files' content** (none opened before the correction below), but they are **not the object's elder**. Owner of the run = p0; ⛔ this desk runs nothing.
 **Rows carried**: `PZ_E1_RUN_METRICS_LEG_PREREG_20260905.md` @ `70719f9182` row 13 (written before the F-d fix) — sharpened here with the fixed writer's fields, read from the landed blob `0a2b600959` (E1 block `:41-140`).
 
 ## Rows
@@ -9,7 +9,7 @@
 | # | row | requirement (all measured by me from the on-disk objects, none from p0's message) |
 |---|---|---|
 | 1 | object identity | `RUN_METRICS.json` **beside** `run.log` in one `_gen/e1_static_l1_<date>/`; both content-sha pinned at read; `run.out_dir` == that directory; `run.log_path` == the redirect target (a regular file, i.e. the launcher redirected stdout; `pipe:` fallback would make row 3 vacuous) |
-| 2 | driver identity — **the strongest pin** | `ur15_steps.driver.sha256` == **`307868a9721d2896e3f4849fe18a6297d2034fefe2c276b9f3bd4d7325fb90a5`** (the driver blob at `0a2b600959`; a different value means the run used a different driver and the leg stops); `identity.LEFT.arm_xml.sha256` == `1e182d10e35153ad…`, `RIGHT.arm_xml` == `9d8700e3db45b490…` (`UR15-B`), `LEFT.grip_xml` == `01861b95e9c8413c…`, `RIGHT.grip_xml` == `…` (mirrored ko) — each re-hashed by me |
+| 2 | driver identity — **the strongest pin** | `ur15_steps.driver.sha256` == **`307868a9721d2896e3f4849fe18a6297d2034fefe2c276b9f3bd4d7325fb90a5`** (the driver blob at `0a2b600959`; a different value means the run used a different driver and the leg stops); `identity.LEFT.arm_xml.sha256` == `1e182d10e35153ad…`, `RIGHT.arm_xml` == `9d8700e3db45b490…` (`UR15-B`), `LEFT.grip_xml` == `01861b95e9c8413c…`, `RIGHT.grip_xml` == `6bf0949b5ea43c5d…` (mirrored ko, `p4_ur15_sim_20260727/_ur15_2f85_koshape_actuated_mirrored.xml` — the driver builds this path from its own parent, `:39`) — each re-hashed by me |
 | 3 | log integrity (M1/A1) | `run.log_sha256_at_write` == sha256 of the first `run.log_bytes_at_write` bytes of `run.log`, recomputed by me; sidecar `run.log.sha256` (`sha256sum` format) == sha256 of the whole file; the two equal ⇒ **tail 0 B**, nothing followed the write |
 | 4 | exit semantics (M2) | `run.end_reason` == `"exited_early"` (the `P4_CLIP_DUMP` path `:1103`), `exit_code` == null, `exception` == null, `final` == true; `progress.phase_max_reached` == null and `ur15_steps.steps` == [] (no route step ran) |
 | 5 | the run's shape == §1419's authorization | `config.env_switches_set` == exactly {`YOKE_SPREAD_OVERRIDE`: "0.22", `TILT_DEG_OVERRIDE`: "45", `P4_CLIP_DUMP`: "1"} (the 24-name filter admits nothing else set); `config.yoke_spread_m` == 0.22, `tilt_deg` == 45.0 (the C-2 override precedence I verified on `0f6b4a733e`); the log shows the 2000-step cable settle and the clip dump then the exit, **no** IK / route / servo-target lines for the arms, **no** new video file (`artifacts.video.final.exists_at_write` == false); process wall time consistent with ≈0.4 s of physics plus build |
@@ -21,4 +21,10 @@
 
 ## Provenance
 
-Fields read from `git show 0a2b600959:…/ur15_steps_wired.py` `:41-140` (never imported); asset shas by `git show`/`sha256sum` at this desk; §1419's authorized form quoted from the ledger at HEAD `13f17450e1`. Zero tracked-content modifications by pZ. **Written, not banked; banking requested of a custodian — ideally before the object lands, so the rows are the object's elder.**
+Fields read from `git show 0a2b600959:…/ur15_steps_wired.py` `:41-140` (never imported); asset shas by `git show`/`sha256sum` at this desk; §1419's authorized form quoted from the ledger at HEAD `13f17450e1`. Zero tracked-content modifications by pZ. **Written, not banked; banking requested of a custodian. The rows are 44 s younger than the object; what they keep is blindness to its content, not precedence.**
+
+## Correction (08:27 JST) — supersedes PZ-211's sha `b0fb78874d8cecf2…` on three points
+
+1. Row 2's `RIGHT.grip_xml` pin was **empty** in the first draft: I hashed a path of my own guess (the left asset's directory) instead of the driver's `:39` (`Path(__file__).resolve().parent / …`), the command failed, and the empty string went into the row reading like a pin. Now `6bf0949b5ea43c5d…` from the blob at `0a2b600959`.
+2. "0 directories (measured)" was **false**: 1 directory, 3 files, 08:23:55 — my `ls | head -n 3` showed only the `.`/`..` header lines and I read that as empty, then hard-coded 0 into a heredoc written before the count was read.
+3. "the object's elder" was therefore false; replaced by the true order. Rows unchanged otherwise.
