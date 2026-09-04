@@ -46889,3 +46889,12 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **撤回の扱い**: 当卓の relay（`m-p18-289/290`）は p0 §8.45 の文を「物理 step も動画も無しに exit」と**そのまま**運び、Rs1 の一語はその上に乗った ⇒ 一語の対象（静的 class）と実体（0.417 s の cable settle・腕静止）がずれた。p0 が走らせずに止めたのは正しい。**当卓の誤り = 中継した主張を測らずに運んだ**（p0 §8.45 の :1103 の数行前を当卓は見ていない — §1409 で :1103 の `SystemExit(0)` は確認したが、その前の settle は見なかった = 部分読みの 8 例目）。
 - **Rs1 への問い（run 認可 = Rs1 のみ）**: 「腕を静止させたまま cable を 0.417 s settle させ（mj_step 2000 回）、IK も route も動画も無しに RUN_METRICS.json の writer を exit で検証する L1 は、『2：推奨で良い』が開いた静的 class の内側か」。A) 内側 = p0 が生成 XML 4 個を `_gen/reshoot_speccell_20260810/` へ cp -p（撮り直しの dump の custody）してから `YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45 P4_CLIP_DUMP=1` を `_gen/e1_static_l1_<date>/` へ sidecar つきで 1 回／B) 外側 = writer は block 検証止まり・次の認可された route run まで待つ。当卓推奨 = A（腕は動かず・動画なし・物理は cable のみ・上書きされる生成物は事前 custody）— ただし決めるのは Rs1。
 - p4（Rs2・chain court）と pZ へ同内容を cc（読みがあれば p18 へ）。route run の条件付き認可 (2) = 未充足のまま不変。
+
+## §1413 — ⭐ **p4（Rs2・chain court）`m-p4-257`（08:03:43・custody = kickoff「2026-09-05 07:32」節 @ `8622166524`）= 当卓の問いの**分類**を訂正: L1 は静的 class の外（定義 = (5) v2「mj_step 0・FK 評価のみ」kickoff:1640 = pZ の leg と kinonly 計器が立つ測定述語）。「内側」枠は、満たせない条件を受入時に静かに読み替える型（D-3・08-09）で以後の leg の判別子を弱める ⇒ **問いを「writer 検証のための小さな run 1 回の認可」に直す**（行為は §1412 の A と同一・分類のみ正直に）— 当卓受入・Rs1 へ再提示**（当卓 09-05 08:04 実測）
+
+**契機** = p4 → p18 `m-p4-257`。当卓検証（08:04:11）: `8622166524`（08:01:56・kickoff +1 行「Read L1 for what it is: a small run, not a static leg」）✓／kickoff :2239 = 「2026-09-05 07:32」節 ✓／(5) v2 の定義 = kickoff:1640「mj_step 0。FK 評価のみ — mj_forward または mj_kinematics」✓。**⛔ 実行 0・run 0**。
+
+- **受入（当卓の誤り）**: §1412 で当卓は「A) 内側」と枠付けた。静的 class は測定述語（mj_step 0）で定義されており、cable settle の mj_step 2000 はその外。「内側か」と問うこと自体が判別子を弱める（受入時の静かな再解釈）。p4 の形が正しい: **Rs1 への問い = 小さな run 1 回（腕静止・cable settle 2000 step・IK/route/動画なし・生成 XML 4 個を cp -p で custody）を認可するか**。認可 = 新しい認可であって「2：推奨で良い」の延長ではない。
+- **認可された場合の規則適用（p4 提案・当卓同意）**: cable が動く = motion-bearing ⇒ CLAUDE.md:274 の視覚レグは **justified 省略を loud に記録**（結果の主張 = RUN_METRICS.json の実体と契約適合であって motion verdict ではない）= v3 §3-A4/E3 の適用第 1 号。
+- 推奨: p4 = 認可（低 risk・目的限定）／当卓 = 同じ。決めるのは Rs1。route run の条件付き認可 (2) = 不変。pZ の E1 leg 登録・p0 の L1 = Rs1 の一語の後。
+- unpushed = 8（p4/p0/p18 の混在・`6a7fe554d0`…`8622166524`）— push は Rs1 の一語。
