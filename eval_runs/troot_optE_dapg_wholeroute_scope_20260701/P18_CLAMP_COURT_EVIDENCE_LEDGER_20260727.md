@@ -47074,3 +47074,8 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 
 - cycle 1 の log = `harness-vault/verification-log/verification-log.jsonl` 2 record（02:37:47Z = 最初の consolidator が HIGH 8 行を grep pattern で落としていた／02:39:03Z = 訂正版 CONFIRMED 11・LIKELY 10・POSSIBLE 12。parser の overall は REVIEW 表示・当卓 DECIDE は FAIL）。
 - 4 時間の空白の間に desk からの message なし（当卓 transcript）。未 push = 8（Rs1 の一言で push）。
+
+## §1439 — ⚠ **cycle 2 途中経過（CC6 到着 15:47）＋ 当卓の再測 2 件: (i) Q3「turn end」の形 = p4 :1693 `enqueue` → :1700 `type=user promptSource=queued`（文字列 content）→ :1709 assistant 応答。`dequeue` record 自体は MSG head を持たない（本日の全 transcript で dequeue ∧ "MSG m-p18-" = 0 件）⇒ CC4「1 件」と CC6「0 件」は query の違いで両立・v3 の Q3 は user record（promptSource=queued）で判定。(ii) **custody :39600（「3項すべて推奨で良い、pV/pW は B」）の `promptSource` = `suggestion_accepted`**（:39366 は `typed`）= 人間が UI の提案文を受け入れて送信した record。人間の送信であることは変わらないが、field を custody 行に併記する（p6 へ依頼・Rs1 へ報告）**（当卓 09-05 15:52 実測）
+
+- CC6 cycle 2 = CHANGE_JUSTIFIED（種類）／HOLD（v2 のまま）: **Q2 `DELIVERED(absorbed)` を否定** — absorbed 9/9 は宛先の text にも thinking にも id の痕跡なし（pZ 79・p0 70 の thinking record があるのに）・hub 自身の `m-p6-149` も absorbed で text に痕跡なし（thinking :39549 には在る）⇒ absorbed = **非終端 `ABSORBED(unacked)`**、後続の assistant record（text/thinking）に id が現れて初めて DELIVERED(absorbed)。増分順序の逆転（HELD 後の再送 = node DoD ③(d) を deferred）→ `--resend` を increment 1 へ。落とすもの = nonce・月次 shard・ROSTER（labels − RETIRED で足りる）・`control import`（by-hand 行は verbatim copy）・TOPIC_LISTS。file 数 ≥5 で L3 は file 数でも成立。docstring vs 別 .md の二重記述を 1 つに。composer 変更（WARN+proceed）を §9 逸脱表へ。
+- 残り CC2–CC5（cycle 2）到着後に union → DECIDE。CC6 の Q2 却下は HIGH 相当 ⇒ 受入なら cycle 2 = FAIL・上限到達 ⇒ **REVIEW（v3 を添えて Rs1 へ）**。
