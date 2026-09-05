@@ -276,7 +276,76 @@ $ python3 check_review_candidate.py 03_IDENTITY_HASH_EVIDENCE_IMPACT_MATRIX_2026
 
 - refuted は適用しない（理由 = `review_records/VERIFY_V3_v025_20260903.md` / `VERIFY_V4_v025_20260903.md`）。checker に Q2（06 §2.1 の hash field ⊆ 05 §3.4 (j) 列挙）を追加。v0.2.6 本文への再レビュー・再 verify は未実施（次 round）。open = 0 は宣言しない。
 
-## 10. Review anchors
+## 10. v0.2.6 再レビュー round 4（R5 / R6 → V5 / V6）— 記録 2026-09-05 23:32 UTC
+
+- 対象 = v0.2.6（commit `f9fe9757`）。reviewer R5（05 primary）/ R6（06 primary）は前 round の fold 表の全行の回帰 + 新規反証の 2 pass。verifier V5 / V6（3 lens・別 context）が全 finding を判定。AI レビューであり human two-key ではない。裁定済みの設計方針そのものは finding にしない。
+
+| reviewer | 対象 | finding | verifier | confirmed | refuted | 重複 |
+|---|---|---|---|---|---|---|
+| R5 | 05 | 14 | 14 | 13 | 1 | 0 |
+| R6 | 06 | 21 | 21 | 21 | 0 | 0 |
+| **計** | | 35 | | 34 | 1 | 0 |
+
+| id | sev（reviewer） | 対象 doc:line | 内容（要約） | verifier | sev（verifier） | 処置（v0.2.7） |
+|---|---|---|---|---|---|---|
+| R5-01 | MEDIUM | 05:290; 05:427; 05:742 (INV-34) vs 05:822 (OP-19); 05:341; 0 | Validity-deadline handling for a SHADOW_NON_AUTHORITY lease is stated three ways: 05 §3.7 row / §4.1 / INV-34 … | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-02 | MEDIUM | 05:292 (head-check row); 05:342 (R_REGISTRY_UNAVAILABLE → HO | The manager-side head-check row is not total: of its four trigger sub-cases (head record mismatch / registry u… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-03 | MEDIUM | 05:191 (permit preconditions (a)-(l): no monitor-liveness /  | After SAFEHOLD(VALIDITY_EXPIRED) caused by DeploymentValidityMonitor heartbeat loss (or a baseline diagnostic … | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-04 | MEDIUM | 06:296 (P_VALIDITY_UNBOUNDED rule); 06:422 (§8.1 (2) first-p | P_VALIDITY_UNBOUNDED for required evidence records (CALIBRATION_RECORD / SAFETY_LAYER_ACCEPTANCE with valid_un… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-05 | MEDIUM | 05:243 (TRANSFER_TO_EXECUTOR postcondition tuple, 7 elements | The TRANSFER_TO_EXECUTOR postcondition does not reset safehold_disposition to None, although §3.2 declares it … | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-06 | MEDIUM | 05:140 (audit is written after the durable commit); 05:700 ( | AuditRecorder unavailability (append failure / process down) has no fault code, no failure-table row and no fa… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-07 | LOW | 05:230 (cond 2 'now < effective_expires_at', strict); 05:231 | Condition 2's expiry boundary is strict while conditions 3 and 6 and the R_ACK_MISBOUND failure row are non-st… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-08 | LOW | 05:184 (kind ∈ {CALIBRATION, EVIDENCE, ACCEPTANCE}); 06:342  | Reaching the ACCEPTANCE term of validity_deadline_source has no fault code in the §3.7 transition row or the f… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-09 | LOW | 06:340 ('AcceptedEnvelope.terms の 3 項 ← §4') vs 06:323-327 / | The 06 §5 lease-mapping sentence still says three profile terms are copied into AcceptedEnvelope.terms althoug… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-10 | LOW | 05:700 (trigger sub-cause payloads required only for R_SAFET | 06 MIN_FAULT_INJECTION requires '#DEADLINE' / '#EVENT' sub-cause subjects for the three v0.2.5 codes and says … | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-11 | LOW | 05:517 (pending_invalidate '（VALIDITY_EXPIRED の deadline / e | For the deadline sub-case the gateway cannot 'detect the trigger' — the lease's validity_deadline_mono is not … | refuted | NOT_A_DEFECT | 適用せず |
+| R5-12 | LOW | 05:191 (i) ('原因未解消の SUSPENDED' sibling clause); 05:240 (cond | Cell-level suspension is enforced only at permit issuance (i); condition 12 and the head-check consider only t… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-13 | LOW | 06:507 (state transitions: no ACCEPTED → ACCEPTED(gen+1)); 0 | The registry state machine lists no ACCEPTED → ACCEPTED(gen+1) transition although 05 §3.4 (i) and 06:514 pres… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R5-14 | LOW | 06:342 (EVIDENCE(SAFETY_LAYER_ACCEPTANCE ／ CONTROLLER_ENVELO | The v0.2.6 disposition table classes CONTROLLER_ENVELOPE_MEASUREMENT expiry as SAFE_STOP-class, yet P_VALIDITY… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-01 | HIGH | 123-128; 67-68; 359; 13; 547 | Gripper finger geometry (RS71 §0 #4 human-LOCKED) is bound nowhere in the profile: ToolPayloadSpec carries onl… | CONFIRMED | HIGH | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-02 | HIGH | 291; 297; 378; 390-393; 359; 422 rule (1) | P_FAULT_EVIDENCE_UNVERIFIED (06:297) does not discriminate expected outcome: its health branch accepts HEALTH_… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-03 | MEDIUM | 385-389; 367-369; 298; 294; 316 | MIN_FAULT_INJECTION members 'R_CALIBRATION_EXPIRED_ACTIVE#DEADLINE', 'R_EVIDENCE_EXPIRED_ACTIVE#DEADLINE', 'R_… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-04 | HIGH | 513; 514; 481; 507; 509; 422 rule (1) | The one-key SUSPENDED / REVOKED record fails P_ACCEPTANCE_RECORD_INVALID as written: the two-key condition 'CL… | CONFIRMED | HIGH | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-05 | MEDIUM | 489; 513; 508; 511 | role_registry_hash is chosen by the record author (self-attested), there is no authoritative registry head, an… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-06 | MEDIUM | 541; 534-539 (and 06:218 clearance_roles: tuple[tuple[str,st | Clearance records are validated by string membership record.role ∈ clearance_roles[reason] with no qualificati… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-07 | MEDIUM | 68; 311; 495-505; 422 rule (2); 83 | BASE_POSE_VERIFY and P_BASE_LAYOUT_MISMATCH reference a 'baseline 許容' that CellSafetyTimingBaseline does not h… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-08 | MEDIUM | 504; 68; 341; 284-316 (no rule) | No minimum set of baseline diagnostic_items is enforced; with an empty list the periodic layer (monitor livene… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-09 | MEDIUM | 285; 422 rule (2); 286 | P_TIMEOUT_ORDER is placed at the 1st evaluation point but its term max_reselect_attempts × worst_case_attempt_… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-10 | LOW | 88; 292; 191 (i) (and 06:509, 06:549) | Baseline supersession is detected only via the DeploymentValidityMonitor reading an undefined 'baseline regist… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-11 | MEDIUM | 296; 364; 499; 422 rule (2) | Validity has no upper bound: P_VALIDITY_UNBOUNDED rejects only None; only acceptance has max_acceptance_validi… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-12 | LOW | 340 (vs 333, 323-327) | 06:340 still says 'AcceptedEnvelope.terms の 3 項 ← §4' while §4 supplies 4 profile terms (R3-02 fold incomplete… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-13 | LOW | 178-187 | Checker Q2 is weaker than claimed: it substring-matches each §2.1 hash field against the entire 05 §3.4 bullet… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-14 | LOW | 294 (vs 359) | The P_EVIDENCE_UNBOUND row enumerates ∀ only for CALIBRATION_RECORD / HEALTH_CHECK_RUN / FAULT_INJECTION_RESUL… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-15 | LOW | 287 (vs 359) | P_SAFETY_BUDGET_EXCEEDED refers to 'the FI record of the arm in question' but FAULT_INJECTION_RESULT is keyed … | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-16 | LOW | 341; 442 (PT-13); 654 | 06 still states SHADOW leases handle validity expiry at the next permit, contradicting 05 which applies validi… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-17 | LOW | 342 (vs 287) | Expiry of the stop-performance evidence (FAULT_INJECTION_RESULT feeding P_SAFETY_BUDGET_EXCEEDED) maps to HOLD… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-18 | LOW | 488 (vs 513); 513 | 06:488 says operator_ref must differ per role while 06:513 requires distinctness only among SAFETY/CUSTODY/OPE… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-19 | LOW | 68-70; 128; 359; 525 | Identity checks trust controller/tool self-reports; a physical arm swap with re-flashed serials passes CONTROL… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-20 | LOW | 287; 297; 318 | The FI artifact's worst-case numbers consumed by P_SAFETY_BUDGET_EXCEEDED are never cross-checked against the … | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+| R6-21 | LOW | 290 (vs 742 INV-34, 184) | The deadline row's record column lists FAULT(R_CALIBRATION_EXPIRED_ACTIVE ／ R_EVIDENCE_EXPIRED_ACTIVE) but INV… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.7 表） |
+
+- refuted は適用しない（理由 = `review_records/VERIFY_V5_*.md` / `VERIFY_V6_*.md`）。v0.2.7 本文への再レビュー・再 verify は未実施（次 round）。open = 0 は宣言しない。
+
+### 10.1 手続・機械検査（2026-09-05 23:33 UTC・`date -u` 実測）
+
+- reviewer R5 / R6 は 2026-09-05 06:35–06:54 UTC に v0.2.6（commit `f9fe9757`）を対象に実施（session 上限で agent は終了したが findings JSON / 報告は完成していた）。verifier V5 / V6 は 23:04–23:31 UTC。pin 再測 = 11/11 PASS（reviewer・verifier とも自己実測、`review_records/AXIS_R5_*` §0 / `VERIFY_V5_*` §0 等）。
+- verifier による severity 変更: R6-02 HIGH → MEDIUM（06:291 の字義で fail-open 読みは閉じ、残差は dead path + 文法欠落）。R5-11 refuted（NOT_A_DEFECT: gateway は不変 lease の `validity_deadline_mono` を単調 clock で比較できる）。verifier が reviewer の fix を置換したもの: R5-03 part 2（manager の registry 書込 = OPP-13 read-only 裁定と矛盾 → 前提条件 (m) のみ）、R5-06（`audit_liveness_s` timeout field → baseline diagnostic item `AUDIT_RECORDER_LIVENESS`・ceiling / order の cascade を避ける）、R5-02（`SuspensionReason.MONITOR_LOST` 不要）、R6-01（TOOL_IDENTITY の finger id 等値・開口実測は落とす）、R6-02（BASE_POSE_VERIFY の negative-control 手順は RT0 / cell court）、R6-05（role registry = ProfileRegistry と同 custody の 1 head・baseline に置かない）、R6-08（閉じた語彙 REQUIRED_DIAGNOSTIC_ITEMS）、R6-09（登録 = PROPOSED record の文脈で第 1 評価点）、R6-19（§9 の 1 文のみ）。fold script はこれら verifier 版の minimal_fix に従う（`review_records/fold/fold_v027.py`・gate = `verdicts_v027_verifier.json`）。
+- 残 HIGH（reviewer 付値・verifier 確認）= R6-01（gripper finger geometry の束縛・RS71 §0 #4）/ R6-04（one-key SUSPENDED record の拒否）— 両方 v0.2.7 で fold（06 §11 表）。round 1→2→3→4 の HIGH = 5 → 3 → 5 → 2。
+- fold 後の機械検査（`check_review_candidate.py`・v0.2.7 で Q2 を R6-13 に従い強化: 06 §2.1–2.2 の hash field が 05 §3.4 (j) 区間内に宣言 class ごとに 1 回以上現れることを検査）:
+
+```text
+== 05_WMSO_RUNTIME_SPEC_v0.2_REVIEW_CANDIDATE_20260903.md: citations=153 FAIL=0 WARN=11
+== 06_WMSO_INDUSTRIAL_PROFILE_v0.2_REVIEW_CANDIDATE_20260903.md: citations=65 FAIL=0 WARN=26
+== 02_FIELD_OVERLAP_AND_HOME_MATRIX_20260903.csv: citations=83 FAIL=0 WARN=0
+== 03_IDENTITY_HASH_EVIDENCE_IMPACT_MATRIX_20260903.csv: citations=35 FAIL=0 WARN=0
+== 04_EVIDENCE_POLICY_IMPACT_ASSESSMENT_20260903.md: citations=18 FAIL=0 WARN=7
+== 07_SUCCESSOR_CONTRACT_DECISION_20260903.md: citations=24 FAIL=0 WARN=11
+== 08_INDEPENDENT_REVIEW_PLAN_20260903.md: citations=6 FAIL=0 WARN=0
+```
+
+- 起草既定として fold し Rs の確認を要する値・選択（06 OPP-16 / 05 OP-19 に記載）: head-check 副場合 (c) monitor 喪失 / (d) 診断失敗の disposition = HOLD；`P_VALIDITY_UNBOUNDED` の kind 集合（CEM・停止性能 FI を含む）；`base_pose_tolerance_*` / `max_validity_s` の値；identity 系 diagnostic item の必須化；role registry head の発行者 / ACL（OPP-13）；gateway の `COMMAND_ADMITTED` append 不能時の同期 block（05 OP-5 note）。
+
+## 11. Review anchors
 
 1. 各 reviewer の pin 再測と checker 実行は各報告 §0 に自記 — `review_records/AXIS_*_review_*.md`。
 2. verifier の lens 別理由と sed 引用 — `review_records/VERIFY_*_*.md`。

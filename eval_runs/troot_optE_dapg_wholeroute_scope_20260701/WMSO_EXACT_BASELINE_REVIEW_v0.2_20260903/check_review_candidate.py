@@ -20,7 +20,7 @@ Checks (fail-closed; exit 1 on any FAIL):
   O7  (runtime spec only, v0.2.3) CAS condition 10 reason set == the §5.4 "追加前提" set (A2-01 / B2-07)
   O8  (runtime spec only, v0.2.3) every RuntimeTimeouts field of the sibling 06 profile spec exists in TimingBinding (INV-22 / CD-13)
   Q1  (profile spec only, --profile, v0.2.3) every P_* code used in 06 body appears in the §8.1 code list; PT-/OPP- ids contiguous, no duplicates
-  Q2  (profile spec only, v0.2.6 / R3-17 R4-02) every *_sha256 / *_hash field declared in 06 §2.1 is named in the sibling 05 §3.4 (j) content-hash enumeration
+  Q2  (profile spec only, v0.2.6 / R3-17 R4-02 / v0.2.7 R6-13) every *_sha256 / *_hash field declared in 06 §2.1-2.2 is named inside the sibling 05 §3.4 (j) segment, at least once per declaring class
 CSV mode is selected by the `.csv` extension (02 / 03 matrices); H1 / S1 / F2 / O* do not apply there.
 """
 import csv, io, os, re, sys
@@ -176,15 +176,23 @@ def check(path, root):
             listed = set(re.findall(r"`(P_[A-Z_]+)`", pl[0])); used = set(re.findall(r"`(P_[A-Z_]+)`", text))
             for c in sorted(used - listed): fails.append(f"Q1 code {c} used in body but absent from §8.1 code list")
         # Q2 (v0.2.6): declared hash fields in §2.1 ⊆ 05 §3.4 (j) enumeration
-        s21 = text[text.find("### 2.1"):text.find("### 2.2")]
-        hf = sorted({m for m in re.findall(r"^\s{4}(\w+(?:_sha256|_hash)):", s21, re.M)})
+        # v0.2.7 (R6-13): scan §2.1 AND §2.2, match only inside the (j) segment, and require one mention per declaring class
+        s2 = text[text.find("### 2.1"):text.find("### 2.3")]
+        decl = {}
+        for cls, body in re.findall(r"^class (\w+)[^\n]*\n((?:^    [^\n]*\n?)+)", s2, re.M):
+            for h in re.findall(r"^\s{4}(\w+(?:_sha256|_hash)):", body, re.M): decl.setdefault(h, set()).add(cls)
         sib05 = os.path.join(os.path.dirname(os.path.abspath(path)), "05_WMSO_RUNTIME_SPEC_v0.2_REVIEW_CANDIDATE_20260903.md")
         if os.path.isfile(sib05):
             t05 = open(sib05, encoding="utf-8").read(); jl = [l for l in t05.splitlines() if "(j) profile が宣言する" in l]
             if not jl: fails.append("Q2 05 §3.4 (j) enumeration line not found")
             else:
-                for h in hf:
-                    if h not in jl[0]: fails.append(f"Q2 06 §2.1 hash field '{h}' is not named in 05 §3.4 (j)")
+                a = jl[0].find("(j) profile が宣言する"); b = jl[0].find("が解決先の内容と一致", a)
+                seg = jl[0][a:b] if b > a else jl[0][a:]
+                if b <= a: warns.append("Q2 (j) segment end marker not found; matching against the whole (j) tail")
+                for h, cls in sorted(decl.items()):
+                    n = len(re.findall(r"(?<![\w.])" + re.escape(h) + r"(?!\w)", seg.replace("`", " "))) + len(re.findall(r"\." + re.escape(h) + r"(?!\w)", seg))
+                    if n == 0: fails.append(f"Q2 06 §2.1/2.2 hash field '{h}' ({'/'.join(sorted(cls))}) is not named in 05 §3.4 (j)")
+                    elif n < len(cls): fails.append(f"Q2 06 hash field '{h}' is declared by {len(cls)} classes ({'/'.join(sorted(cls))}) but named {n} time(s) in 05 §3.4 (j)")
         else:
             warns.append("Q2 sibling 05 not found; hash enumeration not checked")
         for name, pat in (("PT", r"^\| (PT-\d+) \|"), ("OPP", r"^\| (OPP-\d+) \|")):
