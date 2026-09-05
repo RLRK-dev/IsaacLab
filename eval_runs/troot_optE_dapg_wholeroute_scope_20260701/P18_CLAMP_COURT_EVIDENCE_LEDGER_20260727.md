@@ -46987,3 +46987,8 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - 当卓照合: `grep -n CLIPG` @ `0a2b600959` の行集合が pZ の列挙を含むことを確認（本節冒頭の command 出力）。
 - **E1 chain の CLOSE が 4 卓（p0 §8.48・当卓 §1422-§1423・p4 §1424・pZ 本節）で揃った** — 各卓が自分の disk/blob 読みで閉じており、一致は根拠でなく結果。
 - 要るもの: なし。route run (2) 未充足・self-start 0。当卓からの配信なし（返信不要）。
+
+## §1426 — ⭐⭐ **Rs1 の一言「Rs1 待ち（前回 4 件 + 新 1 件）はすべて推奨で良い」（custody = 当卓 transcript 行 **39366**・`type=user`・`isCompactSummary` なし・2026-09-04T23:42:57.439Z = **09-05 08:42:57 JST**・内容は pane message でない）→ 執行開始**（当卓 09-05 08:4x 実測）
+
+- **一言が指す 5 件**（当卓 08:36 報告の列挙・推奨の有無は v3 §5 @ `f5c681edb3` を file で再読）: (1) v3 §5 の 4 件 = #1 tooling file **A（作る）**／#2 C3C5 起動 **A（新規 session を bind）**／#3 pV/pW **A（閉じる・不可逆）**／#4 卓単位 task の node = **推奨なし** ⇒ 一言は適用できず Rs1 へ差し戻す（推奨を書いて問う）。(2) trailer 衝突 = **「Rs1 の裁定」で推奨なし** ⇒ 同上。(3) manifest frontmatter YAML = 推奨の有無を §1408 で再確認中。(4) push = 推奨どおり **実行済**（`13f17450e1..1b225fba83`・19 commits・fork == HEAD 再 fetch 確認・08:44:35）。(5) driver `:1170-1171` の診断名簿 1 行修正 = 当卓の推奨は「直すなら編集窓を開く」の形で暗黙 ⇒ **一言 = 窓を開く**と読む（🔶inference・逐語には無い）— 窓の範囲は診断 block 内の名簿と print/loop のみ。
+- 執行順: push（済）→ (5) 窓開放を p0 へ（cc pZ/p4）→ (2)#2 を p6 へ（起動承認の記録・binding は新規 session）→ (3)#3 pV/pW = 実体（label・viewport・transcript 最終時刻）を読んでから close → (1)#1 D1 = 別 [TASK]（L2・pre-mortem・5 体 debate・否定制御 4）。#4・trailer は推奨を添えて Rs1 へ問う。
