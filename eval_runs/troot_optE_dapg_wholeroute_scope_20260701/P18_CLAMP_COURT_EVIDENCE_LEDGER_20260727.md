@@ -47039,3 +47039,10 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⚠ **当卓の誤り（p6 が捕捉・本日 3 度目の部分読み数）**: §1427/§1432 と Rs1 報告で「`T-ROOT-COORD` 配下 IN_PROGRESS 子 = 4 件（:68-71）」と書いたが、閉じた query（parent 列 == `T-ROOT-COORD`）では **5 件（:68-72）**。原因 = `sed -n '66,71p'` の範囲で切った数を集合の数として書いた（範囲は述語の空間でない）。訂正 = 5 件。p6 の記録: 親 `T-ROOT-COORD` は ARCHIVED（Rs 07-20）なのに IN_PROGRESS 子 5 件（last_updated 05-04/05・#s1 あり）= §3.3/§3.5 の cascade 前提と合わない状態が 07-20 から在る ⇒ 処置は役の再付与後の owner court（DDR 71 に記載）。
 - p6 の言い分け（受入）: 「= §3.1 の子 node 作成承認」は当卓の読みで Rs1 の提示文（:39597）と矛盾しないが逐語ではない — node §0 にそう書き分け済。id は当卓案から pane 番号を外した（07-26 の ID 入替え実績）— 妥当。
 - 要るもの: p6 へ `07162b1776` を返送（snapshot/manifest §2 の再生成は p6）。
+
+## §1434 — ✅ **D1 否定/陽性制御 (a) を手で実測（CC6 NHA の条件「build 前に (a)」に従う・11:19:43–47・宛先 w2:pB LOG-ANALYST idle・token m-p18-314）**（当卓 09-05 11:19 実測）
+
+- **PHASE A（`agent send` のみ・Enter 無し・3 s 観測）**: status idle→idle（`wait --status working` timeout rc=1）／viewport: token は**最後の `❯` 行（composer）に在る**・token 行 1／transcript 新規 0 行・token record 0 ⇒ **NOT delivered**（述語 P1 は発火しない・composer 検出 S は発火する）。
+- **PHASE B（Enter 11:19:47.344）**: transcript record = `type=user`・summary なし・**ts 02:19:47.362Z（Enter の 18 ms 後）**・content は文字列で **token で始まる**／status working は 11:19:47.755（約 410 ms 後）／viewport: token は composer より上の `❯` 行に移り composer は空 ⇒ **DELIVERED**（P1 主述語 ✓・P2 従述語 ✓・P3 第 3 述語 ✓）。
+- 帰結: (i) P1 の「starts with the head token」は本 case で成立（文字列 content）。(ii) record は status 遷移より先に書かれる（18 ms vs 410 ms）⇒ P1 を主にする設計は測定と整合。(iii) 制御 (a) の出力 = scratchpad `d1_build/CONTROL_A_20260905.md`（build 時に tooling dir へ bank）。
+- CC6 NHA（11:18:06）= **CHANGE_JUSTIFIED（種類）・HOLD（規模）**: core ≈150 行・3 file から／`--compose-only` と `topic_lists.json` は落とす／PROPOSE §10 の「301–304 を誤採番」は再現されず（allocator は正しく拒否・弱点は手打ちの start 番号）／node は起票済（§1433・当卓の建て前に解消）。⚠ bundle PART B（v3 §1.4 逐語）が awk 不一致で空 — CC6 は v3 file から直接接地。REBUT は 4 体到着後に union で。
