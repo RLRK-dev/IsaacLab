@@ -47024,3 +47024,11 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - 5 体 = CC2 premise/provenance・CC3 rule/SSOT・CC4 numerical/measurement・CC5 side-effects/history・CC6 NHA（read-only・pane 送信禁止・repo 書込禁止を prompt に明記）。結果 = `d1_build/CC{2..6}_*.md`。REBUT_OR_ACCEPT → DECIDE → log は skill の 2 script 経由。
 - prior-art guard（11:0x・keywords dispatch/delivery/herdr/send-keys/pane）= BLOCKER_CONTEXT_FOUND（内容 = pane ID drift・routing directive・p14/p15 の self-start 禁止 = 本 build の失敗路ではない）。**delta**（v3 §1.6 と同じ）: 旧 `dispatch_to_pane.sh` は spinner/ack marker の 1 面を配達と読んだ／D1 は宛先 transcript の record（P1）＋ head token ＋ live 完全一致解決。
 - 触らないもの: §0 不変前提・設計面・run 認可・NEST spec・CLAUDE.md・skills・hooks。build は debate の DECIDE 後（FAIL なら v2 を作って cycle 2・max 2）。
+
+## §1432 — ⭐⭐ **Rs1 の一言「3項すべて推奨で良い、pV/pW は B」（custody = 当卓 transcript 行 39600・`type=user`・summary なし・2026-09-05T02:07:48.791Z）→ 裁定 4 件確定**（当卓 09-05 11:1x 実測）
+
+- **#4 卓単位 task の node 化 = A'（折衷）**: file を作る・共有面を変える卓 task だけ node 化（親 T-ROOT・p6 が起票・Rs1 の本一言 = §3.1 の子 node 作成承認）／custody・relay の日常 = role-bound のまま（DDR に例外行）。**適用第 1 号 = 本 agentic 改善 task（v3 → D1 build）** — 1 node にまとめ、session_history = 当 session を §6.2 で遡及 bind（id は p6 の採番・当卓案 `T-ROOT-Agentic-Improvement-P18-20260904`）。
+- **trailer 衝突 = A（harness の trailer を認める）**: 以後 report 不要・p6 DDR 行 70 を「解決 A」へ。
+- **manifest frontmatter YAML = 触らない**（consumer 0・YAGNI）: 閉。consumer が現れた時に再起票。
+- **pV/pW = B（役を再付与）**: close しない。新しい役名は Rs1 の割当（当卓は付けない）。役名 file（COORD/COORD2）と manifest の `T-ROOT-COORD` 配下 IN_PROGRESS 子 4 件は、割当が来るまで現状（p6 管轄・観測のみ）。
+- 配信: p6 へ 1 通（node 起票依頼・DDR 行 70・YAML 閉・pV/pW B の記録）。Rs1 へは短報。D1 debate は走行中（§1431）。
