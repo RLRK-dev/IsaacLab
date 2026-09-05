@@ -1168,9 +1168,9 @@ if _os.environ.get("P4_CLIP_DUMP") == "1":
           f"conaffinity={int(m.geom_conaffinity[sorted(CABG)[0]])} "
           f"condim={int(m.geom_condim[sorted(CABG)[0]])} radius={m.geom_size[sorted(CABG)[0]][0]*1000:.1f} mm")
     _c1g = [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n) for n in
-            ("C1_riser", "C1_base", "C1_wa", "C1_wb", "C1_floor")]
+            (f"C1_{i}" for i in range(len(CLIP_PARTS)))]   # the builder's own rule (:265/:270), not a retyped roster
     print(f"[clip] C1 geoms in the driver's CLIPG set: {sorted(CLIPG['C1'])} "
-          f"vs every C1 geom in the model: {sorted(x for x in _c1g if x >= 0)}")
+          f"vs the {len(CLIP_PARTS)} CLIP_PARTS names resolved in the model: {sorted(x for x in _c1g if x >= 0)}")
     for _g in _c1g:
         if _g >= 0:
             print(f"[clip] {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, _g):12s} "
