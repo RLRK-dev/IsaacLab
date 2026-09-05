@@ -47069,3 +47069,8 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **HIGH**: U4 幽霊引用「v3 W18/W26」（当卓 scratchpad の label）→ v3 §3-D からの逸脱表を v2 に明記／U5 採番 seed（最大 314・cutover で floor と by-hand 58 行の import・手作業関数の退役）／U6 composer の文字 = busy でない（ghost 提案・human が 06-15/06-21/06-26 に訂正済・pZ の「312 → pZ」行は当卓 transcript 以外に送信記録なし = UI の提案と読む）・head token に nonce／U7 `HERDR_PANE_ID` は自己申告 → `CLAUDE_CODE_SESSION_ID == agent list の w2:p18 session` を第 2 因子に・subagent は env で除外できない（実測同一）ので prompt/docstring で禁止／U8 fan-out は同一 byte・cc は head 行／U9 当卓の verify 2 件は tool_result 由来の偽 DELIVERED → P1 は文字列 content ∧ toolUseResult 無し／U10 QUEUED は観測から（keypress からでない）／U11 退役役名は live pane に解決（pV/pW）→ 明示 roster ＋ RETIRED 集合。
 - **v2 = increment 1（CC6）**: file 3（`hub_send.py`・`bodies/YYYY-MM/`・`sent_records_YYYY-MM.jsonl`）・send/verify/control のみ・`--stop` 無し（`--queue` = on-topic・working 時のみ）・HELD は理由と viewport 末尾 12 行を印字・code gate = worktree で script のみ file 限定 pre-commit ＋ `validate.sh --staged-only`。increment 2（HELD 再送・retry・status・disposition・parts・長文 control）は測定された必要が出てから。
 - 制御: (a) 済（§1434・以後 live desk へ制御は送らない）・(b) = 自 pane への queue（control queue_self）・(c)(d) = increment 2。
+
+## §1438 — ▶ **D1 事前 debate cycle 2 起動（PROPOSE v2 = increment 1・bundle v2 sha `fc003df0edaae607…`・419 行・PART B/D を行番号で復元・PART G = 層4 guard 出力 31 blocker ＋ delta）— 11:39 の初回起動は 5 体とも session 上限（HTTP 429・15:30 解除）で落ち、Rs1「再開」を受け **15:34 に同一 bundle で再起動**（当卓 09-05 15:3x 実測）
+
+- cycle 1 の log = `harness-vault/verification-log/verification-log.jsonl` 2 record（02:37:47Z = 最初の consolidator が HIGH 8 行を grep pattern で落としていた／02:39:03Z = 訂正版 CONFIRMED 11・LIKELY 10・POSSIBLE 12。parser の overall は REVIEW 表示・当卓 DECIDE は FAIL）。
+- 4 時間の空白の間に desk からの message なし（当卓 transcript）。未 push = 8（Rs1 の一言で push）。
