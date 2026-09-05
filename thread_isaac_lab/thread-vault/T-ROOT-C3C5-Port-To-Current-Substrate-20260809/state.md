@@ -29,7 +29,7 @@ dependencies:
 session_history: []
 define_artifact: "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_DEFINE_C3C5_PORT_TO_CURRENT_SUBSTRATE_20260809.md @ 9ab375026a"
 created: 2026-08-09T05:46:32+09:00
-last_updated: 2026-09-05T07:40:52+09:00
+last_updated: 2026-09-05T10:57:59+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -39,12 +39,13 @@ spec_version: LTM-1 v1.2
 
 **PENDING = 起票済・未起動。** 理由は 2 つとも NEST 仕様の手続そのもの:
 
-1. **§3.1 起動手順 3→5**: `status を IN_PROGRESS に更新` は **CC session 1 の起動（session ID = `{node_id}#s1`）の後**に来る。本 node に **binding された session は無い**（`session_history: []`）⇒ IN_PROGRESS は事実に反する。
+1. **§3.1 起動手順 3→5**: `status を IN_PROGRESS に更新` は **CC session 1 の起動（session ID = `{node_id}#s1`）の後**に来る。本 node に **binding された session は無い**（`session_history: []`）⇒ IN_PROGRESS は事実に反する。〔**09-05 08:42:57 追記**: 起動条件 4（rs 承認）は本日充足（下 bullet）。**残るのは手順 3→4→5 だけ** = 新規 session の起動 → その session 冒頭の preflight → **その session が status を IN_PROGRESS に更新**（p6 は flip しない）〕
 2. **§3.1 起動条件 2**: `precedent dependency 全件 COMPLETE`。**D1 は進行中・D3 は未決** ⇒ 起動条件を満たさない。〔⚠08-09 時点の文 — **08-10: D1 充足**（§4-B bullet）。precedent 欄は D1 のみ（§4 注記どおり）⇒ **本条件は成立**。本 node を PENDING に保つのは 1. のみ〕
 
 ⇒ **PENDING は判断ではなく測定**。IN_PROGRESS への遷移は上の 2 つが解けた時（＋下記 §1 の授権）。
 
-- ⭐ **2026-09-05 追記（m-p18-284・p6 が `f5c681edb3` §5 を実読）**: 上の残り 2 条件のうち **起動授権の要求が Rs1（人間）の面に載った** — p18 の提案 §5 #2「本 node を起動し **新規 session** `{node_id}#s1` を bind するか（p4 の現 session は別 node に bind 済ゆえ bind するなら handoff が先）」。⛔**提出は授権ではない** — Rs1 の一語が来るまで本 node は PENDING のまま・p6 は起動しない。⚠ 同 §6 の判定（p6 の register を pin `77f8d472a3` で読了）= **DDR #68/#69 は本 node の DoD/run を gate するが *起動* は gate しない** ⇒ 起動を止めているのは §3.1 の手続（session binding ＋ 授権）だけ。
+- ⭐ **2026-09-05 追記（m-p18-284・p6 が `f5c681edb3` §5 を実読）**: 上の残り 2 条件のうち **起動授権の要求が Rs1（人間）の面に載った** — p18 の提案 §5 #2「本 node を起動し **新規 session** `{node_id}#s1` を bind するか（p4 の現 session は別 node に bind 済ゆえ bind するなら handoff が先）」。⛔**提出は授権ではない** — Rs1 の一語が来るまで本 node は PENDING のまま・p6 は起動しない。〔→ **一語は 08:42:57 に来た**（次 bullet）〕⚠ 同 §6 の判定（p6 の register を pin `77f8d472a3` で読了）= **DDR #68/#69 は本 node の DoD/run を gate するが *起動* は gate しない** ⇒ 起動を止めているのは §3.1 の手続（session binding ＋ 授権）だけ。
+- ✅✅ **起動承認 2026-09-05 08:42:57 JST（Rs1（人間）逐語・custody = p18 transcript 行 39366）・binding = 新規 session 待ち**〔m-p18-306・台帳 §1426 @ `f0f9b61f45`〕。**Rs1 逐語**「**Rs1 待ち（前回 4 件 + 新 1 件）はすべて推奨で良い**」— p6 が custody を自席で実読: `1c3d805c-2a9a-4b6d-bba2-ae7d479862e7.jsonl:39366` = `type=user`・`origin.kind=human`・`isCompactSummary` 無し・pane message の head token 無し・ts `2026-09-04T23:42:57.439Z`（= 08:42:57 JST）・本文一致。⚠**等級 = labelled inference（検査可能）**: 一語は「推奨」を指し、本 node に効く推奨 = v3 §5 #2 の **A「起動し新規 session `{node_id}#s1` を bind」**（`f5c681edb3` §5・p6 実読）。⇒ **NEST §3.1 起動条件 4（rs 承認）= 充足**。**flip の読み（p6 判定・§3.1 逐語で接地）**: status の PENDING→IN_PROGRESS は **手順 5** であり、**手順 3（`{node_id}#s1` 起動）→ 手順 4（その session 冒頭の preflight）の後**に **bind された session 自身が**更新する。⇒ ⛔**承認では flip しない・bind の瞬間でもなく、bind した session の preflight 通過後**。本 file は今 **`status: PENDING`／`session_history: []` のまま**。**不変（本承認が動かさないもの）**: 実装・run・GPU・training の授権（§2）／DoD 動画の Rs1 run 認可（#66 閉鎖文・#69 は別 object）／#68 の spec 未反映／§5.1 の 1 node : 1 session（p4 の現 session は別 node に bind 済 ⇒ 新規 session 必須・二重 binding 不可）。**新 pane の起動と役名 = Rs1 の行為**（p18 も p6 も起動しない）。
 
 ## 1. 授権の等級（⛔ over-read しない・起票と起動は別物）
 
@@ -53,9 +54,9 @@ spec_version: LTM-1 v1.2
 | 本 chunk の **起票** | Rs 逐語「2: 可」（3 択照会の項② =「C3–C5 を現基盤へ持ってくる chunk の**起票可否**」） | **Rs 直接**。ただし ⚠ **numeral のみの返答** — 指示対象は返答の外の labelled set から来る |
 | 「可」= 起票してよい | **p4 の解決**（解決者を自ら名乗り、labelled set の所在を開示） | **labelled inference**（隠れ推論ではない・ゆえに検査可能） |
 | 実装 / 実行 / GPU | — | ⛔ **無い**（p4 DEFINE 見出し『## 0. 授権と、その射程（over-read しない）』逐語） |
-| **node 作成 + 起動** | — | ⛔ **記録が無い** |
+| **node 作成 + 起動** | — | ⛔ **記録が無い**〔**09-05 訂正**: **起動**の記録は生じた — Rs1 逐語「すべて推奨で良い」→ v3 §5 #2 推奨 A（custody transcript 39366・§0 の 09-05 bullet）= **labelled inference**。**作成**は 08-09 の起票（上 2 行）で済〕 |
 
-⭐ **最後の行の根拠（前例との対比・p6 実測）**: 直近の T-ROOT 子 node `T-ROOT-Kinematic-Pin-Complete-Removal-20260719` の `session_history` note は逐語で **「Rs 承認 (node 作成 + 起動、2026-07-20) により起票」** — **2 つを名指しで**承認された記録を持つ。本 node が持つのは **1 語（「可」）を 1 事（起票）へ解決したもの**。⇒ **前例と同じ強さの授権ではない**。この差を消さないために status を PENDING に置き、起動を別 gate として残す。
+⭐ **最後の行の根拠（前例との対比・p6 実測）**: 直近の T-ROOT 子 node `T-ROOT-Kinematic-Pin-Complete-Removal-20260719` の `session_history` note は逐語で **「Rs 承認 (node 作成 + 起動、2026-07-20) により起票」** — **2 つを名指しで**承認された記録を持つ。本 node が持つのは **1 語（「可」）を 1 事（起票）へ解決したもの**。⇒ **前例と同じ強さの授権ではない**。この差を消さないために status を PENDING に置き、起動を別 gate として残す。〔**09-05**: その別 gate（起動承認）が **08:42:57 に通った**。残る差 = 前例は「作成＋起動」を名指しで、本 node は「起票（可）」と「起動（推奨で良い）」の 2 語 — どちらも labelled set 経由。status が PENDING なのは今や **授権の弱さではなく手順 3-5 の未実行**〕
 
 ## 2. 本 node が **authorize しないもの**（明記）
 
