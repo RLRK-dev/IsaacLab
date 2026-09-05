@@ -124,7 +124,7 @@ _254 nodes — `build_nest_snapshot.py --emit-manifest-section` 生成 (SSOT = p
 | `T-PRODUCTION-LINE` | IN_PROGRESS | `—` |
 | `T-Predicate-Redefinition` | IN_PROGRESS | `T-ROOT` |
 | `T-ROOT` | IN_PROGRESS | `T-PRODUCTION-LINE` |
-| `T-ROOT-Agentic-Improvement-OpsSup-20260904` | PENDING | `T-ROOT` |
+| `T-ROOT-Agentic-Improvement-OpsSup-20260904` | IN_PROGRESS | `T-ROOT` |
 | `T-ROOT-C3C5-Port-To-Current-Substrate-20260809` | PENDING | `T-ROOT` |
 | `T-ROOT-COORD` | ARCHIVED | `T-ROOT` |
 | `T-ROOT-COORD2-AC-IC-GC-Audit-2026-05-13` | ARCHIVED | `T-ROOT-Pivot-Chain-Architecture-Review` |
