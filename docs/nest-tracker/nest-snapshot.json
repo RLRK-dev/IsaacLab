@@ -951,6 +951,7 @@
         "T-L1X-Substrate-Realism",
         "T-Meta",
         "T-Predicate-Redefinition",
+        "T-ROOT-Agentic-Improvement-OpsSup-20260904",
         "T-ROOT-C3C5-Port-To-Current-Substrate-20260809",
         "T-ROOT-COORD",
         "T-ROOT-DesignDoc-Renewal-20260711",
@@ -971,6 +972,16 @@
         "T-Vision",
         "T-WM"
       ],
+      "session_history": []
+    },
+    {
+      "id": "T-ROOT-Agentic-Improvement-OpsSup-20260904",
+      "goal": "\"hub 送信計器 D1（script 1・bodies dir・JSONL 1〔＋任意の話題別一覧 file 1〕）を `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/` に着地させ、Claude pane への配達述語 P1（宛先 transcript の `type=user` record に head token）を実測し、否定制御 4 件（v3 §3-D1",
+      "means": "|",
+      "status": "IN_PROGRESS",
+      "dependencies": [],
+      "parent": "T-ROOT",
+      "children": [],
       "session_history": []
     },
     {

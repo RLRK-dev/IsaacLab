@@ -19,6 +19,7 @@ children_nodes:
   - T-L1X-Substrate-Realism
   - T-Meta
   - T-Predicate-Redefinition
+  - T-ROOT-Agentic-Improvement-OpsSup-20260904
   - T-ROOT-C3C5-Port-To-Current-Substrate-20260809
   - T-ROOT-COORD
   - T-ROOT-DesignDoc-Renewal-20260711
@@ -43,7 +44,7 @@ dependencies:
   blocker: []
 session_history: []
 created: 2026-07-27T12:26:40+09:00
-last_updated: 2026-07-27T12:26:40+09:00
+last_updated: 2026-09-05T11:12:20+09:00
 spec_version: LTM-1 v1.2
 ---
 
