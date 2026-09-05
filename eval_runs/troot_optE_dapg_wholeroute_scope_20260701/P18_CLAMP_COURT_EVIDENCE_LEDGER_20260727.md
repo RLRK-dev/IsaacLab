@@ -47017,3 +47017,10 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **窓の chain = 完結**: Rs1 の一言（§1426）→ `m-p18-305` 窓開放 → p0 着地 `22feba17a6`（§1428）→ pZ prereg（訂正版 `7202a16a88`）＋ verdict 8/8 `b4cb6528f2`（§1429）→ p4 ACCEPTED（本節）。E1 窓・本窓とも閉。解錠なし（route run (2) 未充足）。
 - p4 の記録のみ 2 点（受入に非依存）: ① 接頭辞 pattern は driver 内 2 か所（:270/:1171）— 将来 :270 が変われば再び外れ得るが、print が `len(CLIP_PARTS)` を明示するので「5 個中 0 個」と読める = **判別できる述語になった**（本修正の実効）。② pZ prereg は post-object の機械読み（rows は blob 実測として成立・「事前登録」の語は当たらない）。
 - 配信: p0/pZ/p4 へ「窓 CLOSE」1 通（cc）。以降 = D1 build [TASK]（§1427）。
+
+## §1431 — ▶ **D1 build [TASK] 開始（Rs1 一言 #1 A・§1426）— [TASK] L=L3（定量: script >200 行）| hub 送信計器 `hub_send.py` の build → [L-TRIAGE] 済 → [DEFER-RECON] = v3 §6（69 行 @ `77f8d472a3`）＋ DDR 行 70（trailer・p6 `2773ba6e21`）非依存 → [CHECK] = PROPOSE v1 → [VERIFY] 事前 5 体 debate 起動 11:05**（当卓 09-05 11:0x 実測）
+
+- PROPOSE v1 = scratchpad `d1_build/D1_BUILD_PROPOSE_v1.md`（sha `6235ec596090e820…`）: file 4（script・bodies dir = O_EXCL 採番兼用・JSONL・話題別一覧）・hub-only binding・A6 完全一致解決・述語表 P1/P2/P3/Q/S/U/C・record schema・否定制御 4・code gate A（detached worktree で file 限定 pre-commit）・pre-mortem 12 行・KNOWN_ALTERNATIVES 3。bundle = `d1_build/BUNDLE_D1.md`（168 行・sha `bc146ce16201b8aa…` = PROPOSE ＋ v3 §1.4/§1.5・§3-D・§5/§6 逐語 ＋ 本 session の実測 ＋ SSOT 抜粋）。
+- 5 体 = CC2 premise/provenance・CC3 rule/SSOT・CC4 numerical/measurement・CC5 side-effects/history・CC6 NHA（read-only・pane 送信禁止・repo 書込禁止を prompt に明記）。結果 = `d1_build/CC{2..6}_*.md`。REBUT_OR_ACCEPT → DECIDE → log は skill の 2 script 経由。
+- prior-art guard（11:0x・keywords dispatch/delivery/herdr/send-keys/pane）= BLOCKER_CONTEXT_FOUND（内容 = pane ID drift・routing directive・p14/p15 の self-start 禁止 = 本 build の失敗路ではない）。**delta**（v3 §1.6 と同じ）: 旧 `dispatch_to_pane.sh` は spinner/ack marker の 1 面を配達と読んだ／D1 は宛先 transcript の record（P1）＋ head token ＋ live 完全一致解決。
+- 触らないもの: §0 不変前提・設計面・run 認可・NEST spec・CLAUDE.md・skills・hooks。build は debate の DECIDE 後（FAIL なら v2 を作って cycle 2・max 2）。
