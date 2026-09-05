@@ -1,11 +1,11 @@
-# WMSO boundary-only runtime（TERMINAL boundary・checkpoint 切替なし）— RUNTIME SPEC (v0.2.4 REVIEW CANDIDATE)
+# WMSO boundary-only runtime（TERMINAL boundary・checkpoint 切替なし）— RUNTIME SPEC (v0.2.5 REVIEW CANDIDATE)
 
 - node: `T-WMSO`; 起草 = Claude Code web session（review candidate 起草・**authority 無し**・凍結物へ非接触）; 作成 = 2026-09-03（UTC）
-- status: **REVIEW CANDIDATE v0.2.4（未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない）** — v0.2.3 → v0.2.4 = v0.2.3 本文への再レビュー round（reviewer R1 / R2 + verifier V1 / V2・別 context）の確定 finding の fold（§13）。旧版の系譜: — v0.2 → v0.2.1 = 陽性対照レビューの注入外 finding の fold／ v0.2.1 → v0.2.2 = 3 軸独立レビュー（A / A2 / B / B2）の finding の fold／ v0.2.2 → v0.2.3 = 独立 verifier（3 lens）の verdict 反映 + PARTIAL 残差の処置 + 軸 C（v0.2.2 対象）finding の fold（§13・全体記録 = `11_THREE_AXIS_REVIEW_RECORD_20260903.md`）
+- status: **REVIEW CANDIDATE v0.2.5（未 bank・two-key 未・gate PASS を主張しない）** — v0.2.4 → v0.2.5 = Rs 裁定 2026-09-04（GPT5.6sol 推奨を採用・`review_records/rs_consult/`） の反映（OPP-15 B+ / OPP-11 / OPP-13 / OP-19・§13）。旧版の系譜: — v0.2.3 → v0.2.4 = v0.2.3 本文への再レビュー round（reviewer R1 / R2 + verifier V1 / V2・別 context）の確定 finding の fold（§13）。旧版の系譜: — v0.2 → v0.2.1 = 陽性対照レビューの注入外 finding の fold／ v0.2.1 → v0.2.2 = 3 軸独立レビュー（A / A2 / B / B2）の finding の fold／ v0.2.2 → v0.2.3 = 独立 verifier（3 lens）の verdict 反映 + PARTIAL 残差の処置 + 軸 C（v0.2.2 対象）finding の fold（§13・全体記録 = `11_THREE_AXIS_REVIEW_RECORD_20260903.md`）
 - 土台（凍結・編集しない・4 file）: contracts_v2 DESIGN v2.11.2 `00192d20ca00b654cf6cfdb9d04b03ca14adfd0b93f2105c0fea28c295ff8aff` @ `54f90a7de1e02fb14eaf793bf3c60d9503d0d82e` ／ EP v1.9 md `c474acea7c58acc22050c2ad9944fd45a18f5c76967964b42d11922e28fa27e7` ／ EP JSON v1.9 `e63176af9bc3a246b1c32db369ec59f8d09a4c96c381bb03a3a6024bd9811c6e`（definition hash `e7ca43093084c167a209b008533a66d26a1fd3223d2a3c11274d28306c3ff803`）／ tensor_binding DESIGN v13 `5a1874d3be8b98b8aeaace73890d8021cbc7f9814e048741f7f58d6746f349a6` @ `07250f4a0208b3bbd27eae6fef7d980743c4b538`
 - 前提文書: D0 architecture（EXIT GRANTED）／ Rs C3 裁定（slice EP evidence profile = SHADOW rank 2・非 authority；execution profile は別軸・未裁定）／ handoff 決定（2026-09-03）
 - ⛔ impl / training / closed-loop authority / production / push / freeze / slice = CLOSED 継続。本 doc は設計書面のみ。
-- 系譜: 起草 draft A（角度 = AUTHORITY-SAFETY-FIRST・2026-09-03 11:20 UTC 実測）→ critic 報告（起草時 scratch・本 package の SHA256SUMS 外。X1 / X2 / §3.3 の内容は §13 synthesis record に inline 済 — v0.2.2 A2-10）の fold = v0.2（16:44 UTC）→ 陽性対照の注入外 finding の fold = v0.2.1（2026-09-04 01:47 UTC）→ 3 軸独立レビュー（A / A2 / B / B2）finding の fold = v0.2.2（2026-09-04 15:41 UTC）→ verifier verdict + 残差 + 軸 C の fold = v0.2.3（2026-09-04 20:47 UTC）→ **v0.2.3 再レビュー round（R1 / R2 → V1 / V2）の fold = 本版 v0.2.4（§13）**。⚠ judge panel（3 draft × 2 judge）は session 上限で未実施 — §13 に honest に記録。
+- 系譜: 起草 draft A（角度 = AUTHORITY-SAFETY-FIRST・2026-09-03 11:20 UTC 実測）→ critic 報告（起草時 scratch・本 package の SHA256SUMS 外。X1 / X2 / §3.3 の内容は §13 synthesis record に inline 済 — v0.2.2 A2-10）の fold = v0.2（16:44 UTC）→ 陽性対照の注入外 finding の fold = v0.2.1（2026-09-04 01:47 UTC）→ 3 軸独立レビュー（A / A2 / B / B2）finding の fold = v0.2.2（2026-09-04 15:41 UTC）→ verifier verdict + 残差 + 軸 C の fold = v0.2.3（2026-09-04 20:47 UTC）→ v0.2.3 再レビュー round（R1 / R2 → V1 / V2）の fold = v0.2.4（2026-09-04 23:00 UTC）→ **Rs 裁定（外部推奨採用）の fold = 本版 v0.2.5（§13）**。⚠ judge panel（3 draft × 2 judge）は session 上限で未実施 — §13 に honest に記録。
 
 ## 0. 中心構造
 
@@ -85,6 +85,7 @@ Runtime 層（本 doc・新語・凍結 schema 外）:
 | **IndependentSafetyLayer** | D0 §F。gateway 出力への優先介入（STOP/HOLD/RETRACT/FORCE_LIMIT）、heartbeat、`stabilized_post_action_state`。ack を待たない | 独立（本 doc は interface のみ） | `$D/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md:317-320` |
 | **RecoveryRoutingPolicy**（外部） | `RecoveryRoutingQuery` → 候補 `skill_action_id` 列 + rationale ref。選択論理は本 doc の外 | 外部 | D0 §E 4 option の 3（Recovery Skill; option 1 = compatible `SkillHandoffState` での direct handoff）`$D/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md:243-247`; Recovery skill は同じ `SkillLifecycleContract` を持つ ordinary skill `$D/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md:280-281` |
 | **AuditRecorder** | `RuntimeAuditRecord` の append-only 記録。`SchemaVersionStamp` を再利用 | 記録列（seq 単調） | `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:524-529`（`SchemaVersionStamp`） |
+| **DeploymentValidityMonitor**（v0.2.5・OP-19） | deployment 側の失効 event（incident・tool 交換・firmware 更新・layout revision・ISL build 変更・profile の SUSPENDED / REVOKED）を検出し AuthorityManager へ通知する。**自らは AuthorityState を書かない**（manager が唯一 writer として TRANSFER_TO_SAFEHOLD を CAS）。周期診断は timing baseline が定める drift / proof-test 項目のみ | 監視対象の直近観測（durable 不要） | D0 §F fail-closed `$D/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md:318`・doc 06 §8.3 |
 
 Home matrix（handoff 決定 D を凍結根拠付きで固定。本 doc は各 home を再決定しない）:
 
@@ -119,7 +120,7 @@ Home matrix（handoff 決定 D を凍結根拠付きで固定。本 doc は各 h
 ```python
 # 新語（runtime 層のみ・凍結 schema 外）
 class OwnerKind(Enum): SAFEHOLD | EXECUTOR          # SAFEHOLD = CommandGateway 自身が SafeHold を保持（executor 不在の「定義された owner」）
-class SafeHoldReason(Enum): INITIAL | HEALTH_FAIL | NO_CHAIN | EXECUTOR_LOST | MANAGER_RESTART | GATEWAY_RESTART | DEADLINE_MISS | TIMING_VIOLATION | ENVELOPE_VIOLATION | SAFETY | SAFE_STOP | CHECKPOINT_DISABLED   # v0.2.2: BOUNDARY_WAIT（flag に置換）/ TRANSFER（lease 無効化理由であって hold 理由でない）を 削除（B2-16）
+class SafeHoldReason(Enum): INITIAL | HEALTH_FAIL | NO_CHAIN | EXECUTOR_LOST | MANAGER_RESTART | GATEWAY_RESTART | DEADLINE_MISS | TIMING_VIOLATION | ENVELOPE_VIOLATION | SAFETY | SAFE_STOP | CHECKPOINT_DISABLED | VALIDITY_EXPIRED   # v0.2.5（OP-19）: VALIDITY_EXPIRED = lease の validity_deadline_mono 到達 / profile の SUSPENDED・REVOKED / calibration・evidence の失効 event。v0.2.2: BOUNDARY_WAIT（flag に置換）/ TRANSFER（lease 無効化理由であって hold 理由でない）を 削除（B2-16）
 
 @dataclass(frozen=True)
 class OwnerRef:                                       # 新語
@@ -177,12 +178,16 @@ class CommitPermit:                                   # 新語 — pre-commit。
     invocation_validation_report_ref: str             # frozen LifecycleValidationReport（issues 空）— now を明示
     authority_decision_ref: str | None                # proposed_lease.mode == CLOSED_LOOP_AUTHORITY ⇔ 非 null ∧ granted == True
     profile_hash: str                                 # IndustrialDeploymentProfile（doc 06）
+    acceptance_record_hash: str                       # v0.2.5（OPP-13）: doc 06 §8.3 ProfileAcceptanceRecord（state == ACCEPTED・generation を束縛）
+    acceptance_generation: int
+    validity_deadline_mono: float                     # v0.2.5（OP-19）: min(calibration 期限, evidence 期限, acceptance 期限, issued_at + lease_max_duration_s) を manager clock へ変換した値（wall→mono は発行時に確定・doc 06 OPP-3）
     proposed_lease: ActiveAuthorityLease              # 未活性。proposed_lease.control_epoch == expected.control_epoch + 1
     issued_at: float
     expires_at: float                                 # = issued_at + profile.permit_ttl_s
+    effective_expires_at: float                       # v0.2.5（OPP-11）: = min(expires_at, ack.valid_until, decision.t_mono + decision_max_age_s, validity_deadline_mono)。条件 2 はこちらを使う
 ```
 
-- **permit 発行の前提条件（v0.2.1・C-07 / C-10）**: (a) `profile.health_checks` のうち stage ∈ {BEFORE_PERMIT, BOTH} の全 check が pass（失敗 = `R_HEALTHCHECK_FAILED`・permit 不発行）。全 stage の check は**各実行の直前**に evaluator の content sha256 を `evaluator_sha256` と再検証し、不一致 = check FAILED（fail_closed・v0.2.4 R2-17）; (b) profile の時刻・lease 文脈依存検査（doc 06 §8.1 の第 2 評価点 = `P_CALIBRATION_EXPIRED` / `P_EVIDENCE_UNBOUND` / `P_EVIDENCE_EXPIRED`（required record の valid_until 超過・v0.2.3 CD-03）/ `P_EXPECTATION_UNCERTIFIED`）が発行時刻で全て pass（失敗 = `R_PROFILE_MISBOUND`）; (c) `TimingBinding` の等値（INV-12）; (d) **boundary guard**（v0.2.2・B-H2 / B2-02）: `expected.owner.kind == SAFEHOLD ∨ expected.boundary_wait == True`（違反 = `R_MIDSKILL_TRANSFER_BLOCKED`・permit 不発行）; (e) CLOSED_LOOP_AUTHORITY: `authority_decision_ref` を発行時に再解決し `granted == True ∧ age ≤ decision_max_age_s`（違反 = `R_AUTHORITY_DECISION_ABSENT`・v0.2.2・B2-14）。**age の基準（v0.2.3・B2-14 残差 → v0.2.4・R1-02 で起点を評価時刻へ）**: `age = now(manager) − t_mono`、`t_mono` = `evaluate_authority_grant` が呼ばれた時（O0 層が decision を評価時刻の audit record と共に引き渡す）に記録した `RuntimeAuditRecord`（kind = ASSESSMENT・payload = decision ref + 4 入力 record の ref `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:346-352`）の `t_mono`。manager の「最初の解決」時刻ではない（それでは初回 age = 0 で常に通る）。その record が無い decision は不在として扱う（`R_AUTHORITY_DECISION_ABSENT`）。age 超過 = 再評価（新 ref）を要求し permit 不発行; (f) `permit.profile_hash == proposed_lease.profile_hash`; (g) `∃ e ∈ profile.binding_expectations: e.skill_action_id == proposed_lease.skill_action_id ∧ e.tensor_binding_hash == proposed_lease.timing.tensor_binding_hash ∧ e.control_mode == proposed_lease.control_mode`（未 commissioning の skill は lease 不可・違反 = `R_PROFILE_MISBOUND`・v0.2.3 CD-05）; (h) `proposed_lease.ownership.control ⊆ profile.resource_availability.control ∧ (ownership.contact ⇒ resource_availability.contact)`（chained handoff の offer が cell に無い資源を主張する経路を閉じる・違反 = `R_PROFILE_MISBOUND`・v0.2.3 CD-06）; (i) `permit.profile_hash ∈ accepted_profiles ∧ permit.profile_hash ∉ revoked_profiles`（登録・受理済かつ未失効の profile。registry の所在・受理権限・失効権限 = doc 06 §8.1 / OPP-13・違反 = `R_PROFILE_MISBOUND`・v0.2.3 CD-17・v0.2.4 R2-08）; (j) profile が宣言する**全ての** content hash（`predicate_sha256` / `evaluator_sha256` / `zones[].geometry_sha256` / `calibration_refs[].artifact_sha256` / `gateway_config.artifact_sha256` / `deployment_evidence_policy_hash` = H_WCJ(解決した policy) / required `DeploymentEvidenceRecord.artifact_sha256`）が解決先の内容と一致（doc 06 §3・違反 = `R_PROFILE_MISBOUND`・v0.2.3 CD-04・v0.2.4 R1-05 / R2-03 で全 hash へ一般化）。permit は発行時にこれらの結果 ref を束縛する。permit が CONFLICT / VOID になった場合、manager は ACK 元 executor へ `PERMIT_VOIDED` を通知し executor は提案を破棄する（v0.2.2・B-L6）。
+- **permit 発行の前提条件（v0.2.1・C-07 / C-10）**: (a) `profile.health_checks` のうち stage ∈ {BEFORE_PERMIT, BOTH} の全 check が pass（失敗 = `R_HEALTHCHECK_FAILED`・permit 不発行）。全 stage の check は**各実行の直前**に evaluator の content sha256 を `evaluator_sha256` と再検証し、不一致 = check FAILED（fail_closed・v0.2.4 R2-17）; (b) profile の時刻・lease 文脈依存検査（doc 06 §8.1 の第 2 評価点 = `P_CALIBRATION_EXPIRED` / `P_EVIDENCE_UNBOUND` / `P_EVIDENCE_EXPIRED`（required record の valid_until 超過・v0.2.3 CD-03）/ `P_EXPECTATION_UNCERTIFIED`）が発行時刻で全て pass（失敗 = `R_PROFILE_MISBOUND`）; (c) `TimingBinding` の等値（INV-12）; (d) **boundary guard**（v0.2.2・B-H2 / B2-02）: `expected.owner.kind == SAFEHOLD ∨ expected.boundary_wait == True`（違反 = `R_MIDSKILL_TRANSFER_BLOCKED`・permit 不発行）; (e) CLOSED_LOOP_AUTHORITY: `authority_decision_ref` を発行時に再解決し `granted == True ∧ age ≤ decision_max_age_s`（違反 = `R_AUTHORITY_DECISION_ABSENT`・v0.2.2・B2-14）。**age の基準（v0.2.3・B2-14 残差 → v0.2.4・R1-02 で起点を評価時刻へ）**: `age = now(manager) − t_mono`、`t_mono` = `evaluate_authority_grant` が呼ばれた時（O0 層が decision を評価時刻の audit record と共に引き渡す）に記録した `RuntimeAuditRecord`（kind = ASSESSMENT・payload = decision ref + 4 入力 record の ref `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:346-352`）の `t_mono`。manager の「最初の解決」時刻ではない（それでは初回 age = 0 で常に通る）。その record が無い decision は不在として扱う（`R_AUTHORITY_DECISION_ABSENT`）。age 超過 = 再評価（新 ref）を要求し permit 不発行; (f) `permit.profile_hash == proposed_lease.profile_hash`; (g) `∃ e ∈ profile.binding_expectations: e.skill_action_id == proposed_lease.skill_action_id ∧ e.tensor_binding_hash == proposed_lease.timing.tensor_binding_hash ∧ e.control_mode == proposed_lease.control_mode`（未 commissioning の skill は lease 不可・違反 = `R_PROFILE_MISBOUND`・v0.2.3 CD-05）; (h) `proposed_lease.ownership.control ⊆ profile.resource_availability.control ∧ (ownership.contact ⇒ resource_availability.contact)`（chained handoff の offer が cell に無い資源を主張する経路を閉じる・違反 = `R_PROFILE_MISBOUND`・v0.2.3 CD-06）; (i) doc 06 §8.3 の `ProfileRegistry` で `permit.profile_hash` の最新 `ProfileAcceptanceRecord` が `state == ACCEPTED ∧ proposed_lease.mode ∈ allowed_lease_modes ∧ 有効期限内` であり、permit はその `acceptance_record_hash` / `generation` を束縛する（registry 不読 = `R_REGISTRY_UNAVAILABLE`・permit 不発行；SUSPENDED / REVOKED / 世代不一致 = `R_PROFILE_SUSPENDED`・v0.2.5 OPP-13。旧 v0.2.4 の `accepted_profiles` / `revoked_profiles` 2 集合は本 record に置換）; (k) `validity_deadline_mono` と `effective_expires_at` を発行時に導出して permit に固定（v0.2.5・OPP-11 / OP-19）; (j) profile が宣言する**全ての** content hash（`predicate_sha256` / `evaluator_sha256` / `zones[].geometry_sha256` / `calibration_refs[].artifact_sha256` / `gateway_config.artifact_sha256` / `deployment_evidence_policy_hash` = H_WCJ(解決した policy) / required `DeploymentEvidenceRecord.artifact_sha256`）が解決先の内容と一致（doc 06 §3・違反 = `R_PROFILE_MISBOUND`・v0.2.3 CD-04・v0.2.4 R1-05 / R2-03 で全 hash へ一般化）。permit は発行時にこれらの結果 ref を束縛する。permit が CONFLICT / VOID になった場合、manager は ACK 元 executor へ `PERMIT_VOIDED` を通知し executor は提案を破棄する（v0.2.2・B-L6）。
 - AuthorityManager は permit を `UNUSED | CONSUMED | VOID` の 3 状態で保持する。`CONSUMED` は CAS 成功の同一線形化点でのみ設定される。`VOID` = 失効 / 安全介入 / CAS 失敗。
 - 同一 `expected` に対し複数の permit が並存してもよい（候補競合）。しかし CAS 成功は高々 1 つ（§3.8 証明 D）。
 
@@ -221,16 +226,17 @@ class HealthConfirmation:                             # 新語 — post-commit
 
 前提条件（全て AND・不能判定 = FALSE）:
 1. `read_current() == cas.expected`（tuple 全体等値: owner / control_epoch / active_lease_id / consumed_offer_ids / safehold_reason / boundary_wait / seq）。
-2. `permit.state == UNUSED ∧ now < permit.expires_at ∧ permit.expected == cas.expected ∧ cas.new_owner == EXECUTOR(permit.proposed_lease.executor_id) ∧ cas.new_lease_id == permit.proposed_lease.lease_id ∧ cas.consume_offer_id == permit.handoff_offer_id ∧ permit.profile_hash == permit.proposed_lease.profile_hash`（v0.2.2・B2-03: CAS 引数は permit に束縛される）。
+2. `permit.state == UNUSED ∧ now < permit.effective_expires_at`（v0.2.5・OPP-11: permit_ttl だけでなく ACK・decision age・validity deadline の最小値）` ∧ permit.expected == cas.expected ∧ cas.new_owner == EXECUTOR(permit.proposed_lease.executor_id) ∧ cas.new_lease_id == permit.proposed_lease.lease_id ∧ cas.consume_offer_id == permit.handoff_offer_id ∧ permit.profile_hash == permit.proposed_lease.profile_hash`（v0.2.2・B2-03: CAS 引数は permit に束縛される）。
 3. `ack = resolve(permit.ack_id)`: `ack.expected_control_epoch == expected.control_epoch + 1 ∧ now ≤ ack.valid_until ∧ ack.invocation_id == permit.proposed_lease.invocation_id ∧ ack.handoff_offer_id == permit.handoff_offer_id ∧ ack.envelope_readback_ok ∧ ack.executor_id == permit.proposed_lease.executor_id ∧ ack.skill_action_id == permit.proposed_lease.skill_action_id ∧ ack.lease_proposal_id == permit.proposed_lease.lease_id`（v0.2.2・B-M4 / B2-03: ACK は executor・skill・lease 提案にも束縛）。
 4. `cas.consume_offer_id ∉ expected.consumed_offer_ids`（offer がある場合）。
 5. `permit.handoff_validation_report_ref`（offer がある場合）と `permit.invocation_validation_report_ref` が issues 空であり、前者の評価に用いた `authority_epoch_snapshot == expected.control_epoch`。
-6. `proposed_lease.mode == CLOSED_LOOP_AUTHORITY ⇒ resolve(authority_decision_ref).granted == True`（frozen の `granted == True` 必要条件 `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:354`）かつ、decision の入力 `eligibility_report` が依拠する certificate（certificate-first `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:323`・`certificate.skill_action_id` `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:306`）の `skill_action_id == proposed_lease.skill_action_id`。⚠ frozen `AuthorityDecision` は profile を知らない（入力は 4 record のみ `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:346-350`）ため、`profile_hash` の束縛は permit 側（条件 2）で行う（v0.2.2・A-01 / B-M5）。cell 固有の gate を `acceptance_state` / `safety_gate_state` に載せるかは O0/S0/V0 層の事項（§12 OP-18）。
+6. `proposed_lease.mode == CLOSED_LOOP_AUTHORITY ⇒ resolve(authority_decision_ref).granted == True ∧ now − decision.t_mono ≤ decision_max_age_s`（age の CAS 時再検査・v0.2.5 OPP-11: permit 発行時に有効でも消費時に失効し得る）（frozen の `granted == True` 必要条件 `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:354`）かつ、decision の入力 `eligibility_report` が依拠する certificate（certificate-first `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:323`・`certificate.skill_action_id` `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:306`）の `skill_action_id == proposed_lease.skill_action_id`。⚠ frozen `AuthorityDecision` は profile を知らない（入力は 4 record のみ `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:346-350`）ため、`profile_hash` の束縛は permit 側（条件 2）で行う（v0.2.2・A-01 / B-M5）。cell 固有の gate を `acceptance_state` / `safety_gate_state` に載せるかは O0/S0/V0 層の事項（§12 OP-18）。
 7. `proposed_lease.accepted_envelope.satisfiable == True`。
 8. `proposed_lease.skill_action_id` が certified（certificate 存在）。
 9. IndependentSafetyLayer の直近 health ∈ {ok, degraded} かつ未処理の STOP/HOLD 決定が無い（D0 `$D/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md:318` heartbeat 欠落 ⇒ alive を仮定しない）。
 10. `safehold_reason ∈ {SAFETY, SAFE_STOP, MANAGER_RESTART, GATEWAY_RESTART, CHECKPOINT_DISABLED}` の SAFEHOLD からの転送では、該当する clearance record（§5.4 — 集合は §5.4 と同一定義・v0.2.2・A2-01 / B2-07）が存在する。CHECKPOINT_DISABLED からの転送では新 lease の `InitializationRecord.previous_lease_id` に当該 lease を記録する。
 11. **boundary guard（v0.2.2・B-H2 / B2-02）**: `expected.owner.kind == SAFEHOLD ∨ expected.boundary_wait == True`。違反 = REJECTED・`R_MIDSKILL_TRANSFER_BLOCKED`（mid-skill switching 経路は authority 層でも存在しない — INV-28）。
+12. **registry 再検査（v0.2.5・OPP-13）**: doc 06 §8.3 registry の線形化読みで `permit.profile_hash` の最新 record が `state == ACCEPTED ∧ generation == permit.acceptance_generation ∧ proposed_lease.mode ∈ allowed_lease_modes`。違反 = REJECTED・`R_PROFILE_SUSPENDED`（permit 発行後・CAS 前の SUSPENDED / REVOKED 競合を閉じる）。registry 不読 = REJECTED・`R_REGISTRY_UNAVAILABLE`。
 
 事後条件（同一線形化点）:
 - `AuthorityState := (EXECUTOR(executor_id), expected.control_epoch + 1, new_lease_id, expected.consumed_offer_ids ∪ {consume_offer_id}, None, False, expected.seq + 1)`。
@@ -280,6 +286,9 @@ frozen `validate_handoff` は `offer.control_epoch == authority_epoch_snapshot` 
 | any (EXECUTOR) | IndependentSafetyLayer の heartbeat が `safety_heartbeat_timeout_s` を超えて欠落 / health == failed（v0.2.2・B2-01 / B-H3） | TRANSFER_TO_SAFEHOLD(SAFETY) | `S_SAFEHOLD(SAFETY)` | FAULT(R_SAFETY_LAYER_LOST), DISPOSITION(SAFE_STOP) — gateway は欠落を観測した時点で (ii) を評価せず (i′) SafeStop |
 | any (EXECUTOR) | `R_COMMAND_KIND_MISMATCH` が連続 `command_kind_mismatch_max` 回（v0.2.2・B2-15） | TRANSFER_TO_SAFEHOLD(ENVELOPE_VIOLATION) | `S_SAFEHOLD(ENVELOPE_VIOLATION)` | FAULT(R_ENVELOPE_VIOLATION), DISPOSITION(HOLD) |
 | `S_LEASE_ACTIVE` / `S_HEALTH_PENDING` | lease 活性時間（LEASE_ACTIVATED からの経過）が `lease_max_duration_s` を超過（v0.2.3・CD-10 — WAIT / TIMEOUT 非宣言 skill でも lease は有限） | TRANSFER_TO_SAFEHOLD(TIMING_VIOLATION) | `S_SAFEHOLD(TIMING_VIOLATION)` | FAULT(R_LEASE_DURATION_EXCEEDED), DISPOSITION(HOLD) |
+| `S_LEASE_ACTIVE` / `S_HEALTH_PENDING` / `S_BOUNDARY_WAIT`（CLOSED_LOOP_AUTHORITY） | `now ≥ lease.validity_deadline_mono`（calibration / evidence / acceptance の期限到達・manager clock・v0.2.5 OP-19） | TRANSFER_TO_SAFEHOLD(VALIDITY_EXPIRED \| SAFE_STOP if 失効項目が安全機能・TCP・停止性能に関わる) | `S_SAFEHOLD(VALIDITY_EXPIRED \| SAFE_STOP)` | FAULT(R_CALIBRATION_EXPIRED_ACTIVE \| R_EVIDENCE_EXPIRED_ACTIVE), DISPOSITION(HOLD \| SAFE_STOP) |
+| any (EXECUTOR・CLOSED_LOOP_AUTHORITY) | DeploymentValidityMonitor の失効 event（incident / tool 交換 / firmware 更新 / layout revision / ISL build 変更 / profile SUSPENDED・REVOKED）（v0.2.5・OP-19 / OPP-13） | TRANSFER_TO_SAFEHOLD(VALIDITY_EXPIRED \| SAFE_STOP if 安全起因) | `S_SAFEHOLD(…)` | FAULT(R_PROFILE_SUSPENDED \| R_EVIDENCE_EXPIRED_ACTIVE), DISPOSITION(HOLD \| SAFE_STOP)・全 UNUSED permit VOID |
+| any (EXECUTOR) | INTER_ARM 項の違反（両 arm の提案状態が pairwise keep-out / min separation / swept-volume predicate に反する）（v0.2.5・OPP-15 B+） | TRANSFER_TO_SAFEHOLD(ENVELOPE_VIOLATION) | `S_SAFEHOLD(ENVELOPE_VIOLATION)` | FAULT(R_INTER_ARM_VIOLATION), DISPOSITION(HOLD) |
 | any | AuthorityManager 再起動 | TRANSFER_TO_SAFEHOLD(MANAGER_RESTART)（durable state からの復帰 CAS） | `S_SAFEHOLD(max(persisted reason, MANAGER_RESTART))`（persisted が同 tier 以上なら reason・epoch 保持 — 失敗表 R_MANAGER_RESTART 行と同一・v0.2.4 R1-03） | MANAGER_RESTART, FAULT(R_MANAGER_RESTART) |
 | any | CommandGateway 再起動（v0.2.1・B-09） | TRANSFER_TO_SAFEHOLD(GATEWAY_RESTART)（gateway は SafeHold 出力で起動し manager へ再起動を報告。manager が CAS） | `S_SAFEHOLD(GATEWAY_RESTART)` | GATEWAY_RESTART, FAULT(R_GATEWAY_RESTART), DISPOSITION(HOLD) — 再起動前の lease は再 admit されない（新 lease のみ） |
 | any (permit 発行後) | Orchestrator 喪失（v0.2.1・B-14） | なし（permit は失効で VOID） | 不変（SAFEHOLD なら SafeHold 継続、BOUNDARY_WAIT なら SafeHold 継続） | FAULT(R_PERMIT_EXPIRED), DISPOSITION(HOLD) — Orchestrator は無状態ゆえ新 instance が B0 から再開する |
@@ -326,6 +335,10 @@ frozen `validate_handoff` は `offer.control_epoch == authority_epoch_snapshot` 
 | boundary 外からの転送要求（v0.2.2・B-H2 / B2-02） | AuthorityManager | `R_MIDSKILL_TRANSFER_BLOCKED` | permit 不発行 / CAS REJECTED・状態不変 | 変化なし（audit・lease 継続）。Orchestrator は `boundary_dwell_s` 内に snapshot を再読して再要求（v0.2.4・R1-13） |
 | IndependentSafetyLayer の heartbeat 欠落 / health failed（v0.2.2・B2-01） | CommandGateway / AuthorityManager | `R_SAFETY_LAYER_LOST` | 出力 = SafeStop（(i′)）+ TRANSFER_TO_SAFEHOLD(SAFETY) | `SAFE_STOP`（解除 = §5.4 SAFETY 行） |
 | lease 活性時間が `lease_max_duration_s` 超過（v0.2.3・CD-10） | AuthorityManager | `R_LEASE_DURATION_EXCEEDED` | TRANSFER_TO_SAFEHOLD(TIMING_VIOLATION)・lease 無効 | `HOLD`（解除 = §5.4 TIMING_VIOLATION 行 = 完全経路） |
+| lease の `validity_deadline_mono` 到達（calibration / evidence / acceptance 期限・v0.2.5 OP-19） | AuthorityManager | `R_CALIBRATION_EXPIRED_ACTIVE` / `R_EVIDENCE_EXPIRED_ACTIVE` | TRANSFER_TO_SAFEHOLD(VALIDITY_EXPIRED \| SAFE_STOP)・lease 無効・UNUSED permit VOID | `HOLD` / `SAFE_STOP`（安全機能・TCP・停止性能に関わる失効） |
+| profile の SUSPENDED / REVOKED / 世代不一致（permit 発行時・CAS 条件 12・活性 lease 中の event）（v0.2.5・OPP-13） | AuthorityManager / DeploymentValidityMonitor | `R_PROFILE_SUSPENDED` | permit 不発行 / CAS REJECTED / 活性 CLOSED_LOOP lease は TRANSFER_TO_SAFEHOLD(VALIDITY_EXPIRED \| SAFE_STOP if 安全起因) | `HOLD` / `SAFE_STOP` |
+| registry（doc 06 §8.3）が読めない（v0.2.5・OPP-13） | AuthorityManager | `R_REGISTRY_UNAVAILABLE` | permit 不発行・CAS REJECTED・actuation 全面拒否（診断用 SAFEHOLD での起動は可） | `HOLD` |
+| INTER_ARM 項の違反（v0.2.5・OPP-15） | CommandGateway | `R_INTER_ARM_VIOLATION` | command 拒否 + TRANSFER_TO_SAFEHOLD(ENVELOPE_VIOLATION) | `HOLD` |
 | validate_outcome の issues 非空（v0.2.2・B2-06 / A2-12） | Orchestrator（B1） | `R_OUTCOME_INVALID` | 状態 = S_BOUNDARY_WAIT（MARK_BOUNDARY_WAIT は受領の事実で実行済） | 候補評価を行わず `NO_CHAIN` → HOLD \| SAFE_STOP |
 | boundary 滞留 / 再選択回数の超過（v0.2.2・B-M9） | Orchestrator / AuthorityManager | `R_BOUNDARY_DWELL_EXCEEDED` | TRANSFER_TO_SAFEHOLD(NO_CHAIN \| SAFE_STOP) | `NO_CHAIN` → HOLD \| SAFE_STOP |
 | permit の CONFLICT / VOID の通知（v0.2.2・B-L6） | AuthorityManager → Executor | （fault なし・`PERMIT_VOIDED` 記録） | executor は提案を破棄 | 変化なし |
@@ -407,6 +420,8 @@ class ActiveAuthorityLease:                           # 新語 — 不変記録�
     control_epoch: int                                # == 活性中の AuthorityState.control_epoch
     ownership: Ownership                              # frozen 型 — offered 集合。required_control_resources ⊆ ownership.control
     profile_hash: str                                 # IndustrialDeploymentProfile（doc 06）— 変更 = 新 lease（in-place 変更禁止）
+    acceptance_record_hash: str                       # v0.2.5（OPP-13）: permit から複写（generation を含む record の hash）
+    validity_deadline_mono: float                     # v0.2.5（OP-19）: permit から複写。CLOSED_LOOP では到達 = TRANSFER_TO_SAFEHOLD(VALIDITY_EXPIRED)。SHADOW では記録のみ（次 permit 評価で扱う）
     authority_decision_ref: str | None                # CLOSED_LOOP_AUTHORITY ⇔ 非 null ∧ granted == True
     initialization: InitializationRecord
     accepted_envelope: AcceptedEnvelope
@@ -439,8 +454,9 @@ class ActiveAuthorityLease:                           # 新語 — 不変記録�
 | DEPLOYMENT_WORKSPACE | profile `WorkspaceRestriction`（keep-out / reach / height） | workspace | CommandGateway（FK 後） | doc 06。評価対象 = `DIFF_IK_EE_TARGET` では hold 種別にかかわらず**線分**（直前 admitted setpoint → 新 setpoint；初回は実測 TCP → setpoint・FK 後の TCP 点）— 物理的な腕は setpoint 間を連続に動くため ZOH でも点評価では keep-out を跨げる（v0.2.4・R1-06 / R2-19）。hold は時間 parameterization のみを変える。tool 形状は評価しない（doc 06 §4・OPP-14・v0.2.3 CD-18）。gateway は評価前に zone geometry の解決内容 sha256 を `geometry_sha256` と再検証し、不一致 = 評価不能 = FALSE（v0.2.4・R1-05） |
 | CONTROLLER | profile `ControllerEnvelope`（velocity / acceleration / jerk / ee_speed — admission 可能な運動学項のみ） | joint space | CommandGateway | 制御周波数は含まない（R5）。`ee_force_max` / `joint_torque_max` は command から評価不能なため admission 項ではなく**監視上限**（IndependentSafetyLayer / controller が測定値で監視・v0.2.3 CD-07） |
 | SAFETY_RESTRICTION | profile `SafetyRestrictionSet`（静的） | gateway predicate | CommandGateway | IndependentSafetyLayer の live 決定は本 term ではなく §5.2 (i) の優先出力。gateway は評価前に predicate の解決内容 sha256 を `predicate_sha256` と再検証し、不一致 = 評価不能 = FALSE（v0.2.3・CD-04） |
+| INTER_ARM（v0.2.5・OPP-15 B+） | profile `InterArmRestrictionSet`（min separation / pairwise keep-out / swept-volume predicate・content hash 付き）+ `CellKinematicLayoutRef`（両 arm の base transform） | workspace（両 arm） | CommandGateway | 評価対象 = 提案 command の arm の線分 × 他 arm の**同一線形化 snapshot**での状態（直近 admitted setpoint または実測）。評価不能 = FALSE。動的干渉の独立監視は IndependentSafetyLayer（本 term の代替ではない・AND） |
 
-- 意味論: command `c` は admissible ⇔ 全 term `T` について `T.admit(c) == True`。term の評価不能（表現変換不可・profile 未解決） = FALSE（fail-closed）。
+- 意味論: command `c` は admissible ⇔ 全 term `T` について `T.admit(c) == True`（INTER_ARM は両 arm の状態を同一 snapshot で連言評価・v0.2.5）。term の評価不能（表現変換不可・profile 未解決） = FALSE（fail-closed）。
 - 空/充足不能: CAS 前に `satisfiable` を評価し False なら `R_ENVELOPE_EMPTY` で lease 不成立。静的側の同型検査は doc 06 `P_ENVELOPE_EMPTY`。
 - 「∩」表記（handoff 決定 B）は各 term を **自分の空間で** 評価した連言と読む。異なる空間の literal 集合交差を作らない。
 
@@ -459,7 +475,7 @@ class ActiveAuthorityLease:                           # 新語 — 不変記録�
 
 ### 4.5 Lease 無効化 trigger（全て `LEASE_INVALIDATED` 記録 + `R_LEASE_INVALIDATED` または個別 fault）
 
-TRANSFER_TO_EXECUTOR 成功（reason TRANSFER）／ HealthConfirmation 失敗・timeout ／ executor heartbeat 喪失 ／ command deadline miss ／ envelope 違反 ／ timing 違反（TIMING_VIOLATION）／ IndependentSafetyLayer STOP・HOLD ／ AuthorityManager 再起動 ／ CommandGateway 再起動（v0.2.1）／ profile_hash の更新要求（新 lease 経路へ）／ `NO_CHAIN` 後の SAFEHOLD 転送。RETRACT / FORCE_LIMIT は既定では lease を無効化せず出力を override する（profile が無効化へ強化可 — §12 OP-8）。
+TRANSFER_TO_EXECUTOR 成功（reason TRANSFER）／ HealthConfirmation 失敗・timeout ／ executor heartbeat 喪失 ／ command deadline miss ／ envelope 違反 ／ timing 違反（TIMING_VIOLATION）／ IndependentSafetyLayer STOP・HOLD ／ AuthorityManager 再起動 ／ CommandGateway 再起動（v0.2.1）／ profile_hash の更新要求（新 lease 経路へ）／ `NO_CHAIN` 後の SAFEHOLD 転送 ／ **validity deadline 到達・deployment 失効 event・profile の SUSPENDED / REVOKED（VALIDITY_EXPIRED・v0.2.5 OP-19 / OPP-13）** ／ INTER_ARM 項の違反（v0.2.5）。RETRACT / FORCE_LIMIT は既定では lease を無効化せず出力を override する（profile が無効化へ強化可 — §12 OP-8）。
 
 ## 5. 出力ヌル準備・HOLD・safe stop
 
@@ -510,7 +526,7 @@ D0 §E の fail-closed 規則（`reject` / `abort` / `timeout` ⇒ producer reta
 
 | `safehold_reason` | 解除経路 | 追加前提（CAS 条件 10） |
 |---|---|---|
-| INITIAL / NO_CHAIN / EXECUTOR_LOST / DEADLINE_MISS / TIMING_VIOLATION / ENVELOPE_VIOLATION / HEALTH_FAIL | 完全経路（ACK → permit → CAS）による TRANSFER_TO_EXECUTOR のみ | なし |
+| INITIAL / NO_CHAIN / EXECUTOR_LOST / DEADLINE_MISS / TIMING_VIOLATION / ENVELOPE_VIOLATION / HEALTH_FAIL / VALIDITY_EXPIRED（v0.2.5） | 完全経路（ACK → permit → CAS）による TRANSFER_TO_EXECUTOR のみ（VALIDITY_EXPIRED では新 permit が §3.4 (b)(i) で失効原因の解消を要求する） | なし |
 | SAFETY | 同上 | IndependentSafetyLayer の clearance record（`stabilized_post_action_state` `$D/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md:320` の参照を含む）。executor 発の SAFETY_STABILIZED（ISL 決定が先行しない場合）では、ISL の clearance record が executor の報告した stabilized state を確認したものであること（確認不能なら CHECKPOINT_DISABLED 行と同じ operator clearance + 再観測）（v0.2.4・R1-14）。runtime は自ら解除しない |
 | SAFE_STOP | 同上 | profile が定義する operator / health-check clearance（doc 06）。runtime は自ら解除しない |
 | CHECKPOINT_DISABLED | 同上 | profile が定義する operator clearance + 再観測（doc 06）。解除後の転送は SAFEHOLD からの新規起動（§6.2 B0 から）であり、producer の resume ではない |
@@ -621,7 +637,8 @@ class RuntimeFaultCode(Enum):                         # 新語 — 接頭辞 R_�
     R_NO_CANDIDATE | R_SHADOW_OUTPUT_ATTEMPT | R_CHECKPOINT_SWITCH_DISABLED |
     R_POST_OUTCOME_COMMAND | R_GATEWAY_RESTART | R_HEALTHCHECK_FAILED | R_PROFILE_INITIATION_FAILED |   # v0.2.1
     R_MIDSKILL_TRANSFER_BLOCKED | R_SAFETY_LAYER_LOST | R_OUTCOME_INVALID | R_BOUNDARY_DWELL_EXCEEDED |   # v0.2.2
-    R_LEASE_DURATION_EXCEEDED   # v0.2.3（CD-10）
+    R_LEASE_DURATION_EXCEEDED |   # v0.2.3（CD-10）
+    R_PROFILE_SUSPENDED | R_REGISTRY_UNAVAILABLE | R_CALIBRATION_EXPIRED_ACTIVE | R_EVIDENCE_EXPIRED_ACTIVE | R_INTER_ARM_VIOLATION   # v0.2.5（Rs 裁定: OPP-13 / OP-19 / OPP-15）— ProducerOutcome には足さない（§7 規則 1）
 ```
 
 規則:
@@ -716,6 +733,9 @@ class RuntimeAuditRecord:                             # 新語 — append-only
 | INV-31 | 再起動した gateway は `safehold_reason == GATEWAY_RESTART` を観測するか、自分の再起動報告以後に `seq` が進んだ（= manager が復帰 CAS を線形化した）ことを観測するまで (ii) を評価しない（v0.2.2・B-M10・v0.2.4 R1-03） | R_GATEWAY_RESTART |
 | INV-32 | CAS SUCCESS の線形化点 = durable commit 完了。`invalidated_lease_ids` は同一 durable store・同一 commit（v0.2.2・B-M12） | 設計違反（test） |
 | INV-33 | `S_LEASE_ACTIVE` / `S_HEALTH_PENDING` における lease の活性時間（LEASE_ACTIVATED からの経過）は `lease_max_duration_s` 以下（超過 = TRANSFER_TO_SAFEHOLD(TIMING_VIOLATION) + `R_LEASE_DURATION_EXCEEDED`）— WAIT を含む。`S_BOUNDARY_WAIT` の滞留は `boundary_dwell_s` が上限（NO_CHAIN 経路・§3.7）ゆえ lease の総活性時間 ≤ `lease_max_duration_s + boundary_dwell_s`（v0.2.3・CD-10・v0.2.4 R1-15 / R2-12: boundary 滞留を TIMING_VIOLATION に写さない — R1-01 と同根） | R_LEASE_DURATION_EXCEEDED |
+| INV-34 | CLOSED_LOOP_AUTHORITY lease は `validity_deadline_mono` を超えて活性でない（到達 = TRANSFER_TO_SAFEHOLD(VALIDITY_EXPIRED)）。deadline は permit 発行時に wall-clock 期限を manager clock へ変換して固定（v0.2.5・OP-19） | R_CALIBRATION_EXPIRED_ACTIVE / R_EVIDENCE_EXPIRED_ACTIVE |
+| INV-35 | permit の消費（CAS SUCCESS）時点で acceptance record が ACCEPTED・同一 generation であり decision age ≤ decision_max_age_s（条件 6・12）。permit 発行時の検査だけで足りるとしない（v0.2.5・OPP-11 / OPP-13） | R_PROFILE_SUSPENDED / R_AUTHORITY_DECISION_ABSENT |
+| INV-36 | admitted command は INTER_ARM 項を同一線形化 snapshot で満たす（両 arm）（v0.2.5・OPP-15） | R_INTER_ARM_VIOLATION |
 
 ## 10. Test plan（設計時宣言 — impl は CLOSED）
 
@@ -753,6 +773,11 @@ class RuntimeAuditRecord:                             # 新語 — append-only
 | T-30 | in-memory CAS 成功直後・durable 書込み前に manager kill（v0.2.2） | restart 後に当該 CAS は無かったものとして扱われ epoch が二重に使われない（INV-32） |
 | T-31 | S_HEALTH_PENDING 中に TerminalOutcome 受領（v0.2.2） | MARK_BOUNDARY_WAIT・health 取消・未確認事実を ASSESSMENT に記録 |
 | T-32 | WAIT lease を `lease_max_duration_s` 超過まで放置（v0.2.3） | TRANSFER_TO_SAFEHOLD(TIMING_VIOLATION)・R_LEASE_DURATION_EXCEEDED・lease 無効（INV-33） |
+| T-33 | 活性 CLOSED_LOOP lease 中に calibration の valid_until を経過（v0.2.5） | deadline 到達で TRANSFER_TO_SAFEHOLD(VALIDITY_EXPIRED)・R_CALIBRATION_EXPIRED_ACTIVE（TCP なら SAFE_STOP） |
+| T-34 | permit 発行後・CAS 前に profile を SUSPENDED（v0.2.5） | CAS 条件 12 で REJECTED・R_PROFILE_SUSPENDED・permit VOID |
+| T-35 | permit 発行後・CAS 前に decision age が decision_max_age_s を超過（v0.2.5） | 条件 6 で REJECTED・再評価要求 |
+| T-36 | registry 不読で起動（v0.2.5） | 診断用 SAFEHOLD で起動可・permit / CAS / actuation 全面拒否・R_REGISTRY_UNAVAILABLE |
+| T-37 | 左右 arm の提案線分が pairwise keep-out を跨ぐ command（v0.2.5） | INTER_ARM 項 FALSE・R_INTER_ARM_VIOLATION・TRANSFER_TO_SAFEHOLD(ENVELOPE_VIOLATION) |
 
 ## 11. 主張しないこと（境界）
 
@@ -788,7 +813,9 @@ class RuntimeAuditRecord:                             # 新語 — append-only
 | OP-15 | 本 doc 自体の two-key・Rs 裁定 | — | 未 |
 | OP-17 | CommandGateway 停止中（再起動前）の物理側 failsafe（controller watchdog / IndependentSafetyLayer heartbeat）は本 doc の外（v0.2.1・B-09） | `$D/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md:318` | 要件のみ（gateway 不在 = safety 側が stop） |
 | OP-18 | cell 固有の gate（profile 依存条件）を frozen `AuthorityDecision` の入力 `acceptance_state` / `safety_gate_state` に載せるかは O0/S0/V0 層の事項（v0.2.2・A-01）。本 doc は permit 側で `profile_hash` を束縛するのみ | `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:346-350` | O0/S0/V0 へ carry |
-| OP-19 | 活性 lease 中の calibration / evidence 失効の検出（既定 = 次の permit 発行時・曝露 ≤ 1 skill かつ ≤ `lease_max_duration_s`・v0.2.3 CD-10）。周期検査を manager に持たせるかは未裁定（v0.2.2・B-M7） | doc 06 §5 | 既定を保守側に置く |
+| OP-19 | 活性 lease 中の calibration / evidence 失効の検出。**Rs 裁定 2026-09-04（GPT5.6sol 推奨を採用・`review_records/rs_consult/`）**: CLOSED_LOOP では「次 permit まで検出しない」を採らず、(1) 既知期限 = `validity_deadline_mono` の決定論的 deadline、(2) 変更 event の即時通知（DeploymentValidityMonitor → manager CAS）、(3) 周期診断は timing baseline（doc 06 §8.3）が定める drift / proof-test 項目のみ、の三層。SHADOW は次 permit 評価で可。**残 open** = 周期診断の対象項目と周期の出所（RT0 safety case） | doc 06 §5 / §8.3 | 三層で確定・周期の値は baseline |
+| OP-20 | `CellSafetyTimingBaseline`（doc 06 §8.3）の発行主体（RT0 / cell safety court）と改訂手続。本 doc は `timing_baseline_hash` を acceptance record 経由で束縛するだけで値を持たない（v0.2.5・OPP-11） | doc 06 OPP-16 | RT0 へ carry |
+| OP-21 | 「every motion で両腕が保持・操作する」（RS71 §0 DUAL-ARM）の実行適合性は本 doc の INTER_ARM 項では検査しない（両 arm の**能力**の存在と相互制約まで）。適合性検査は composition / runtime 検査の court（v0.2.5・OPP-15 B+） | RS71 §0・doc 06 OPP-17 | 本 doc は主張しない |
 | OP-16 | `FreshnessPolicy.max_staleness_s = None` の runtime 意味（上限なし）は runtime 層の読みであり frozen の規定ではない | `$D/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:151` | §4.2 に loud 記録。frozen 側の確定 = 後継契約 or Rs |
 
 ## 13. 版歴 / fold-map
@@ -929,6 +956,15 @@ class RuntimeAuditRecord:                             # 新語 — append-only
 | R2-15 | genesis の role / profile_hash | §3.2 | R2-15=CONFIRMED（LOW） |
 | R2-17 | evaluator の実行直前再検証 | §3.4 (a) | R2-17=CONFIRMED（LOW） |
 | （06 側の fold 行は doc 06 §11） | | | |
+
+- **v0.2.5 fold（2026-09-05 01:33 UTC）— Rs 裁定 2026-09-04（GPT5.6sol 推奨を採用・`review_records/rs_consult/`）**: Rs が外部 AI（GPT5.6sol）に問い合わせ、その推奨 4 件を全件採用と裁定（本 session で Rs = 利用者本人が選択）。推奨の前提訂正 5 点は本文で照合済（全て正・`review_records/rs_consult/A_GPT56sol_20260904.md` 末尾）。凍結 schema delta = 0（runtime / deployment 層の型追加のみ）:
+
+| 項目 | 内容 | 変更節 |
+|---|---|---|
+| 裁定 OPP-11 | permit の実効失効 `effective_expires_at` = min(ttl, ACK, decision age, validity deadline)・CAS で decision age 再検査・timing baseline は acceptance record 経由 | §3.4 CommitPermit・(k)・§3.5 条件 2 / 6・INV-35・T-35・OP-20 |
+| 裁定 OPP-13 | `ProfileAcceptanceRecord`（generation・state・allowed modes）を permit / lease に束縛・CAS 条件 12 で registry 再検査・SUSPENDED / REVOKED で lease 無効化・registry 不読 = actuation 拒否 | §3.4 (i)・§3.5 条件 12・§3.7・§4.1・`R_PROFILE_SUSPENDED` / `R_REGISTRY_UNAVAILABLE`・INV-35・T-34 / T-36 |
+| 裁定 OP-19 | CLOSED_LOOP lease の `validity_deadline_mono`（三層: deadline・event・根拠付き周期診断）・`DeploymentValidityMonitor`・`SafeHoldReason.VALIDITY_EXPIRED` | §2・§3.2・§3.4・§3.7・§4.1・§4.5・§5.4・`R_CALIBRATION_EXPIRED_ACTIVE` / `R_EVIDENCE_EXPIRED_ACTIVE`・INV-34・T-33・OP-19 |
+| 裁定 OPP-15 B+ | INTER_ARM 項（両 arm の同一 snapshot 連言評価）・`R_INTER_ARM_VIOLATION`・every-motion 適合性は court へ | §4.3・§3.7・INV-36・T-37・OP-21 |
 
 ## 14. Review anchors
 

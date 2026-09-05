@@ -211,9 +211,18 @@ $ python3 check_review_candidate.py 03_IDENTITY_HASH_EVIDENCE_IMPACT_MATRIX_2026
 - v0.2.4 本文への再レビュー・再 verify は未実施（次 round）。open = 0 は宣言しない。
 - 特記: R2-04（DUAL-ARM cell の表現）は RS71 §0 不変前提に関わるため、案 A（単一 robot 限定）を採らず案 B（arm 単位 `ArmSpec`）で fold し、06 OPP-15 に Rs 確認事項として登録した。不変前提そのものは変更していない。
 
-## 8. Review anchors
+## 8. Rs 裁定（2026-09-04）— 外部推奨の採用と v0.2.5 fold（記録 2026-09-05 01:33 UTC）
+
+- 経緯: v0.2.4 で verifier が「Rs 確認が要る」とした OPP-15（DUAL-ARM 表現）/ OPP-11（timeout の絶対上限）/ OPP-13（registry の受理・失効権限）/ OP-19（活性 lease 中の失効検出）について、Rs が外部 AI（GPT5.6sol）へ問い合わせ（`review_records/rs_consult/Q_GPT56sol_20260904.md`）、推奨（同 `A_GPT56sol_20260904.md`・verbatim）を受領。
+- 前提訂正 5 点は CC が v0.2.4 本文で照合し全て正（同 file 末尾の表）。
+- Rs 裁定（本 session で利用者 = Rs が選択）: **推奨 4 件を全件採用**し v0.2.5 として fold。凍結 schema delta = 0（deployment / runtime 層の型追加のみ）。不変前提（RS71 §0）への変更なし。
+- fold 内容 = 05 §13 / 06 §11 の v0.2.5 表。再現 = `review_records/fold/fold_v025.py`（v0.2.4 = commit `99125944` の本文へ適用）。
+- ⚠ 外部推奨が引く規格（ISO 12100 / ISO 10218-2:2025 / ISO 13849-1:2023 / IEC 62061 / ISO 13855:2024）の内容は CC 未検証。本文はそれらを根拠として引用していない（timing baseline の値は RT0 / cell safety court へ carry・OPP-16）。
+- v0.2.5 本文への再レビュー・再 verify は未実施（次 round）。open = 0 は宣言しない（OPP-16 / OPP-17 / OP-20 / OP-21 を新設）。
+
+## 9. Review anchors
 
 1. 各 reviewer の pin 再測と checker 実行は各報告 §0 に自記 — `review_records/AXIS_*_review_*.md`。
 2. verifier の lens 別理由と sed 引用 — `review_records/VERIFY_*_*.md`。
-3. fold の再現 — `review_records/fold/fold_v022_05.py` / `fold_v022_others.py`（v0.2.1 = commit `297c850b` → v0.2.2）、`fold_v023.py`（v0.2.2 = `f3c6ca35` → v0.2.3）、`fold_v024.py`（v0.2.3 = `ab52137f` → v0.2.4）。verdict 列は JSON 引数（`verdicts_v023_verifier.json` / `verdicts_v024_verifier.json`）。
+3. fold の再現 — `review_records/fold/fold_v022_05.py` / `fold_v022_others.py`（v0.2.1 = commit `297c850b` → v0.2.2）、`fold_v023.py`（v0.2.2 = `f3c6ca35` → v0.2.3）、`fold_v024.py`（v0.2.3 = `ab52137f` → v0.2.4）、`fold_v025.py`（v0.2.4 = `99125944` → v0.2.5・Rs 裁定）。verdict 列は JSON 引数（`verdicts_v023_verifier.json` / `verdicts_v024_verifier.json`）。
 4. 版の同一性は content sha（`SHA256SUMS.txt`）で引く。label は照合用。

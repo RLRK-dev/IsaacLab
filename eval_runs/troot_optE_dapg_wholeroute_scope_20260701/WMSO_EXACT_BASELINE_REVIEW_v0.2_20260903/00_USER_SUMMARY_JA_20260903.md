@@ -1,7 +1,7 @@
 # WMSO v0.2 レビュー package — 利用者向け要約（日本語）
 
-- 記録 = 2026-09-04 23:00 UTC（`date -u` 実測・v0.2.4 で更新）。本 file は package の読み方の案内であり、規範文書ではない。
-- 状態: **REVIEW CANDIDATE v0.2.4・未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない**。impl / training / closed-loop authority / production / freeze / slice = CLOSED のまま。
+- 記録 = 2026-09-05 01:33 UTC（`date -u` 実測・v0.2.5 で更新）。本 file は package の読み方の案内であり、規範文書ではない。
+- 状態: **REVIEW CANDIDATE v0.2.5・未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない**。impl / training / closed-loop authority / production / freeze / slice = CLOSED のまま。
 
 ## 1. 何が入っているか
 
@@ -10,13 +10,13 @@
 | `01_BASELINE_CUSTODY_VERIFICATION_20260903.md` + `verify_exact_baseline_pins.sh` + `09_BASELINE_PIN_20260903.json` | 凍結 4 file（contracts_v2 DESIGN v2.11.2・EP v1.9 md / JSON・tensor_binding DESIGN v13）の exact pin と再測手順（11/11 PASS） |
 | `02_…csv` / `03_…csv` | 旧 v0.1 の項目が凍結物と重なるか（home matrix）／ 変更 class が hash 面を動かすか（identity impact） |
 | `04_…md` | EP v1.9 は不変（definition hash 不変）という影響評価 |
-| `05_WMSO_RUNTIME_SPEC_…md` | **runtime spec v0.2.4**（boundary-only・TERMINAL boundary・checkpoint 切替なし。AuthorityManager / CommandGateway / CAS / lease / SafeHold / audit） |
-| `06_WMSO_INDUSTRIAL_PROFILE_…md` | **industrial deployment profile v0.2.4**（cell 固有条件を content-addressed にし、凍結意味論を狭める方向にしか使えない） |
+| `05_WMSO_RUNTIME_SPEC_…md` | **runtime spec v0.2.5**（boundary-only・TERMINAL boundary・checkpoint 切替なし。AuthorityManager / CommandGateway / CAS / lease / SafeHold / audit） |
+| `06_WMSO_INDUSTRIAL_PROFILE_…md` | **industrial deployment profile v0.2.5**（cell 固有条件を content-addressed にし、凍結意味論を狭める方向にしか使えない） |
 | `07_…md` | 後継静的契約は今は作らない（`contracts_v3` は静的意味論の認証時のみ）という判断 |
 | `08_…md` | 3 軸独立レビュー計画（contract / runtime / deployment） |
 | `10_…md` + `review_records/PC_*` | 陽性対照（欠陥を注入した複製で計器を検証。7/8 検出・盲点は checker O3 で機械化） |
 | `11_THREE_AXIS_REVIEW_RECORD_20260903.md` + `review_records/AXIS_*` / `VERIFY_*` | **3 軸レビューの実施記録**（round 1: reviewer 5 体・verifier 5 体・80 finding／ round 2（v0.2.3 再レビュー・§7）: reviewer 2 体・verifier 2 体・35 finding） |
-| `review_records/fold/*` | v0.2.1 → v0.2.2 → v0.2.3 → v0.2.4 の fold を再現する script と verifier verdict の JSON |
+| `review_records/fold/*` | v0.2.1 → … → v0.2.5 の fold を再現する script と verifier verdict の JSON |
 | `check_review_candidate.py` / `SHA256SUMS.txt` | 機械検査（FAIL = 0 が要件）／ content sha（版 label でなく sha で引く） |
 
 ## 2. レビューの結果（事実・数値は 11_ §2 から）
@@ -32,12 +32,13 @@
 ## 3. 何を主張していないか（読み手が誤解しやすい点）
 
 - reviewer / verifier は AI（別 context の subagent）。**human two-key（pS / pY / Rs）ではない**。08 §6 の位置づけ = 予備レビュー。
-- v0.2.3 への再レビュー round は実施済（§2 round 2）。**v0.2.4 本文への再レビュー・再 verify は未実施**（次 round）。「open = 0」は宣言しない（05 §12・06 §10 に open が残る）。
+- **Rs 裁定（2026-09-04・§11 §8）**: 残っていた Rs 確認事項 4 件（OPP-15 / OPP-11 / OPP-13 / OP-19）は外部 AI（GPT5.6sol）の推奨を Rs が全件採用し v0.2.5 に fold。主な追加: DUAL-ARM cell の base transform と arm 間制約（`CellKinematicLayoutRef` / `InterArmRestrictionSet`・INTER_ARM 項）、timeout の絶対上限を外部 `CellSafetyTimingBaseline` で検査（`P_TIMEOUT_CEILING`）、permit の実効失効（decision age を CAS で再検査）、append-only `ProfileRegistry`（CLOSED_LOOP 受理 = two-key・SUSPENDED = one-key）、活性 lease の `validity_deadline_mono` + event 無効化（`SafeHoldReason.VALIDITY_EXPIRED`）。
+- v0.2.3 への再レビュー round は実施済（§2 round 2）。**v0.2.5 本文への再レビュー・再 verify は未実施**（次 round）。「open = 0」は宣言しない（05 §12・06 §10 に open が残る）。
 - 前 package（v0.1）は本 sandbox に無く、handoff 決定から再構成した（01 §で honest に記録）。judge panel（3 draft × 2 judge）は session 上限で未実施。
 - 凍結 4 file には触れていない（pin 再測 11/11 PASS）。schema delta 0。
 
 ## 4. 次に人が判断すること（提案・Rs 専権）
 
-1. v0.2.4 を two-key review（pS / pY）に回すか、先に v0.2.4 対象の AI 再 round を 1 回挟むか（round 2 では 35 件中 33 件が確定 = まだ収束していない）。
-2. **OPP-15（DUAL-ARM cell の profile 表現 = arm 単位型 `ArmSpec` を採用。単一 robot 限定案は RS71 §0 不変前提と衝突するため不採用）は Rs 確認事項**。OPP-11（timeout の絶対上限・追加順序）・OPP-13（profile registry と受理 / 失効権限）・05 OP-19（lease 中の周期再評価）も設計判断が要る open。
+1. v0.2.5 を two-key review（pS / pY）に回すか、先に v0.2.5 対象の AI 再 round を 1 回挟むか（round 2 では 35 件中 33 件が確定 = まだ収束していない。v0.2.5 は型追加が大きいので再 round 推奨）。
+2. 裁定後に残る open: OPP-16（timing baseline の発行主体 = RT0 / cell safety court と値の根拠）・OPP-17 / 05 OP-21（「every motion で両腕」の実行適合性は composition court）・OPP-13 の role 実名（pS / pY 等の割当）・OP-19 の周期診断項目（baseline の diagnostic_items）。
 3. `contracts_v3` を起票しない判断（07）の追認。
