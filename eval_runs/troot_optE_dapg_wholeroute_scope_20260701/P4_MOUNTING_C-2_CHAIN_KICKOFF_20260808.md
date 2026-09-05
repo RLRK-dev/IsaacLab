@@ -2280,3 +2280,4 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
    - **(e) hash ✓**: blob `75eefef4e27e99e3569f6d85b7b19216bbf39812`・content sha256 `57de8c3ec7ed026299401a7f985655bb98669cbf528e4e9bf0bc104194464a98` @ `22feba17a6`・working tree == commit（`git diff --quiet`）・`py_compile` OK（env_isaaclab7）。cell xml 自読: 旧名 0・`C1_0..C1_4` = 5。
    - **(f) run 0 ✓**: `_gen/` 直下に 10:42 以降の新規 entry 0（find -newermt・11:02 実測）。
    - **word = ACCEPTED**。⛔ 解錠なし（route run (2) 未充足・E1 窓は閉のまま・本窓は p18 の bank で閉じる）。
+   - **送信記録（11:03:30）**: 上記受入を **m-p4-260** として p18 へ送信（deny pass → `--checked-subjects`・send rc=0・probe 1 回目で footer 到達）。本文 = scratchpad `p4_dispatch/m-p4-260.txt`（永続でない・内容は本 item 19 が正）。
