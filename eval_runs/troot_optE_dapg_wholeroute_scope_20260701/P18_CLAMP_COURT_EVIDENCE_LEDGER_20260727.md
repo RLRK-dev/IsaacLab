@@ -47046,3 +47046,9 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **PHASE B（Enter 11:19:47.344）**: transcript record = `type=user`・summary なし・**ts 02:19:47.362Z（Enter の 18 ms 後）**・content は文字列で **token で始まる**／status working は 11:19:47.755（約 410 ms 後）／viewport: token は composer より上の `❯` 行に移り composer は空 ⇒ **DELIVERED**（P1 主述語 ✓・P2 従述語 ✓・P3 第 3 述語 ✓）。
 - 帰結: (i) P1 の「starts with the head token」は本 case で成立（文字列 content）。(ii) record は status 遷移より先に書かれる（18 ms vs 410 ms）⇒ P1 を主にする設計は測定と整合。(iii) 制御 (a) の出力 = scratchpad `d1_build/CONTROL_A_20260905.md`（build 時に tooling dir へ bank）。
 - CC6 NHA（11:18:06）= **CHANGE_JUSTIFIED（種類）・HOLD（規模）**: core ≈150 行・3 file から／`--compose-only` と `topic_lists.json` は落とす／PROPOSE §10 の「301–304 を誤採番」は再現されず（allocator は正しく拒否・弱点は手打ちの start 番号）／node は起票済（§1433・当卓の建て前に解消）。⚠ bundle PART B（v3 §1.4 逐語）が awk 不一致で空 — CC6 は v3 file から直接接地。REBUT は 4 体到着後に union で。
+
+## §1435 — ✅ **p6 `m-p6-151`（11:19:34）= 再生成 `78cc940a80`（manifest 1 file・:127 = `T-ROOT-Agentic-Improvement-OpsSup-20260904 | IN_PROGRESS`・C3 OK 254・snapshot 257 で当該 IN_PROGRESS・P11 D1 = 0）＋ 当卓 pin の関数名訂正（受入）**（当卓 09-05 11:2x 実測）
+
+- ⚠ **当卓の pin 違反（p6 捕捉）**: §1433 に「disk == blob（`0501410b`）」と書いたが `0501410b…` は **sha256**（node state.md §6 には sha256 と明記）で、同 content の git blob SHA-1 は `839a666f…`。「blob」の語は SHA-1 名前空間を指すので、関数名なしの hex は §1319 の hub 基準（hash は関数語つき）に自分で反した。訂正 = 「f25a237fb9:state.md の sha256 = `0501410b…` == disk・git blob SHA-1 = `839a666f…`」。
+- p6 の自己申告（内容非影響・記録のみ）: 照合 assert が落ちても `set -e` が効かず再生成と commit が gate されずに走った → 事後に内容確認済・以後 `&&` 連鎖か明示 exit。
+- 要るもの: なし。node 面は揃った（state.md `07162b1776`・manifest `78cc940a80`）。
