@@ -20,6 +20,7 @@ Checks (fail-closed; exit 1 on any FAIL):
   O7  (runtime spec only, v0.2.3) CAS condition 10 reason set == the §5.4 "追加前提" set (A2-01 / B2-07)
   O8  (runtime spec only, v0.2.3) every RuntimeTimeouts field of the sibling 06 profile spec exists in TimingBinding (INV-22 / CD-13)
   Q1  (profile spec only, --profile, v0.2.3) every P_* code used in 06 body appears in the §8.1 code list; PT-/OPP- ids contiguous, no duplicates
+  Q2  (profile spec only, v0.2.6 / R3-17 R4-02) every *_sha256 / *_hash field declared in 06 §2.1 is named in the sibling 05 §3.4 (j) content-hash enumeration
 CSV mode is selected by the `.csv` extension (02 / 03 matrices); H1 / S1 / F2 / O* do not apply there.
 """
 import csv, io, os, re, sys
@@ -174,6 +175,18 @@ def check(path, root):
         else:
             listed = set(re.findall(r"`(P_[A-Z_]+)`", pl[0])); used = set(re.findall(r"`(P_[A-Z_]+)`", text))
             for c in sorted(used - listed): fails.append(f"Q1 code {c} used in body but absent from §8.1 code list")
+        # Q2 (v0.2.6): declared hash fields in §2.1 ⊆ 05 §3.4 (j) enumeration
+        s21 = text[text.find("### 2.1"):text.find("### 2.2")]
+        hf = sorted({m for m in re.findall(r"^\s{4}(\w+(?:_sha256|_hash)):", s21, re.M)})
+        sib05 = os.path.join(os.path.dirname(os.path.abspath(path)), "05_WMSO_RUNTIME_SPEC_v0.2_REVIEW_CANDIDATE_20260903.md")
+        if os.path.isfile(sib05):
+            t05 = open(sib05, encoding="utf-8").read(); jl = [l for l in t05.splitlines() if "(j) profile が宣言する" in l]
+            if not jl: fails.append("Q2 05 §3.4 (j) enumeration line not found")
+            else:
+                for h in hf:
+                    if h not in jl[0]: fails.append(f"Q2 06 §2.1 hash field '{h}' is not named in 05 §3.4 (j)")
+        else:
+            warns.append("Q2 sibling 05 not found; hash enumeration not checked")
         for name, pat in (("PT", r"^\| (PT-\d+) \|"), ("OPP", r"^\| (OPP-\d+) \|")):
             ids = re.findall(pat, text, re.M); nums = sorted(int(x.split("-")[1]) for x in ids)
             if not nums: fails.append(f"Q1 no {name}- rows found"); continue

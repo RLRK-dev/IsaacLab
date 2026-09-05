@@ -220,9 +220,65 @@ $ python3 check_review_candidate.py 03_IDENTITY_HASH_EVIDENCE_IMPACT_MATRIX_2026
 - ⚠ 外部推奨が引く規格（ISO 12100 / ISO 10218-2:2025 / ISO 13849-1:2023 / IEC 62061 / ISO 13855:2024）の内容は CC 未検証。本文はそれらを根拠として引用していない（timing baseline の値は RT0 / cell safety court へ carry・OPP-16）。
 - v0.2.5 本文への再レビュー・再 verify は未実施（次 round）。open = 0 は宣言しない（OPP-16 / OPP-17 / OP-20 / OP-21 を新設）。
 
-## 9. Review anchors
+## 9. v0.2.5 再レビュー round 3（R3 / R4 → V3 / V4）— 記録 2026-09-05 02:15 UTC
+
+- 対象 = v0.2.5（commit `50119dc3`・Rs 裁定 fold 後）。reviewer R3（05 primary）/ R4（06 primary）は裁定済みの設計方針そのものは finding にせず、本文が方針を正しく・整合的に・fail-closed に実現しているかを回帰（v0.2.4 / v0.2.5 fold 表の全行）+ 新規反証で審査。verifier V3 / V4（3 lens・別 context）が全 finding を判定。AI レビューであり human two-key ではない。
+
+| reviewer | 対象 | verdict | finding | verifier | confirmed | refuted | 重複 |
+|---|---|---|---|---|---|---|---|
+| R3 | 05（+06 §2.1/§3/§5/§8.3） | HOLD | 22 | V3（22） | 21 | 1 | 0 |
+| R4 | 06（+05 §2/§3.4/§3.5/§3.7/§4.3/§5.4・04） | HOLD | 19 | V4（19） | 18 | 1 | 0 |
+| **計** | | | 41 | | 39 | 2 | 0 |
+
+| id | sev（reviewer） | 対象 doc:line | 内容（要約） | verifier | sev（verifier） | 処置（v0.2.6） |
+|---|---|---|---|---|---|---|
+| R3-01 | HIGH | 457 (INTER_ARM row); 291; 780 (T-37); 738 (INV-36); 06:109;  | INTER_ARM term evaluates 'the proposing arm's segment x the OTHER arm's snapshot state (last admitted setpoint… | CONFIRMED | HIGH | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-02 | MEDIUM | 364 (EnvelopeTermKind lacks INTER_ARM); 391; 457; 738; 800 ( | EnvelopeTermKind has four members; the v0.2.5 INTER_ARM term cannot be instantiated as an EnvelopeTerm, so Acc… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-03 | MEDIUM | 187 (effective_expires_at formula); 179; 425; 469; 227 (不能判定 | effective_expires_at = min(..., decision.t_mono + decision_max_age_s, ...) is undefined for SHADOW leases whos… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-04 | MEDIUM | 183 (validity_deadline_mono includes issued_at + lease_max_d | The lease_max_duration term of validity_deadline_mono is measured from permit issued_at (not LEASE_ACTIVATED),… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-05 | MEDIUM | 183; 424; 289 ('SAFE_STOP if 失効項目が安全機能・TCP・停止性能に関わる'; fault  | validity_deadline_mono keeps only the min value; the argmin (which calibration / evidence / acceptance item ex… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-06 | MEDIUM | 248 (lease-scoped / non-lease-scoped lists and pending_inval | VALIDITY_EXPIRED is absent from the retry-scope classification and the pending_invalidate enumeration; under t… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-07 | MEDIUM | 340 ('actuation 全面拒否'); 274-294 (no transition row for regis | The failure-table row claims total actuation refusal when the registry is unreadable, but no transition, trigg… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-08 | MEDIUM | 88 (DeploymentValidityMonitor: no heartbeat/liveness; durabl | The OP-19 event layer has no liveness contract: if the monitor dies, SUSPENDED/REVOKED/evidence-revocation eve… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-09 | MEDIUM | 487 (SUSPENDED is per record); 462-473 (record keyed by prof | A cell-level trigger (incident, ISL anomaly, identity change) suspends one record, but a sibling ACCEPTED prof… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-10 | MEDIUM | 411 (§8.1 rule (3) '活性 lease は継続し、次の permit 発行が … のみ'; rule  | 06 §8.1 (3) still states the v0.2.4 behaviour (active lease continues until the next permit; only health-check… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-11 | MEDIUM | 443 (計時 only when mode == CLOSED_LOOP_AUTHORITY); 06:379-381 | Two v0.2.4 folds conflict: R2-01 requires timeout-path FAULT_INJECTION_RESULT for R_DEADLINE_MISS / R_TIMING_V… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-12 | MEDIUM | 285 (P_SAFETY_BUDGET_EXCEEDED: no evaluation point / mode);  | P_SAFETY_BUDGET_EXCEEDED consumes measured artifacts that only exist in MIN_CLOSED_LOOP evidence; evaluated at… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-13 | MEDIUM | 139; 143 (initial 7-tuple lacks safehold_disposition); 248 ( | safehold_disposition is not assigned by a successful TRANSFER_TO_SAFEHOLD nor in the initial state, and §3.5/§… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-14 | LOW | 229 (condition 2); 230; 233; 304; 301; 315; 778 (T-35); 354  | effective_expires_at subsumes ACK and decision-age expiry; conditions are AND with unspecified order, so the r… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-15 | LOW | 190 (e) (t_mono from the O0-written ASSESSMENT record); 233  | Decision age is computed from a timestamp written by another component without a stated clock-domain guarantee… | refuted | NOT_A_DEFECT | 適用せず |
+| R3-16 | LOW | 321 (cmd.resource); 05:496-503 (GatewayCommand has no arm/re | 06 §4 indexes the CONTROLLER term by cmd.resource, a field 05's GatewayCommand does not have; the INTER_ARM ro… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-17 | LOW | 190 (j) (7 enumerated hashes); 457 (INTER_ARM row lacks the  | The v0.2.5 hashes (kinematic_layout.artifact_sha256, pairwise_keepout_sha256, swept_volume_predicate_sha256) a… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-18 | LOW | 190 (b) (second-evaluation-point list = 4 codes); 06:411 (2) | Three checks that 06 §3 declares for the second evaluation point are not in the list that 05 §3.4 (b) / 06 §8.… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-19 | LOW | 82; 705 (INV-03 violation codes have no executor_id branch); | The R1-12 executor_id admission check has no fault-code mapping. | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-20 | LOW | 290 (event list lacks diagnostic failure); 816 (OP-19 layer  | A failed baseline diagnostic has no event/fault mapping, and event-notification latency has no bound. | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-21 | LOW | 190 (i) (trusts state == ACCEPTED only); 06:486; 06:491 (P_A | The manager does not re-verify the head record's approvals for the requested mode, and the append-only registr… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R3-22 | LOW | 469 (timing_baseline_hash); 476-483; 487 (suspension trigger | Revision of CellSafetyTimingBaseline does not reach records bound to the old baseline hash; old ceilings keep … | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-01 | HIGH | 06:109, 06:321, 05:457, 05:459, 05:738, 05:780, 05:496-504 | INTER_ARM term evaluates 'proposed segment of the command's arm x the OTHER arm's static state (last admitted … | CONFIRMED | HIGH | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-02 | HIGH | 06:306, 06:100, 06:302, 06:454, 05:190, 05:454, 05:456, 05:4 | The v0.2.5 hashes kinematic_layout.artifact_sha256, pairwise_keepout_sha256 and swept_volume_predicate_sha256 … | CONFIRMED | HIGH | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-03 | HIGH | 06:382-383, 06:313, 06:367-372, 06:363, 06:296, 06:354, 06:2 | MIN_NEGATIVE_CONTROLS is stated normatively but (a) no P_* enforces it (P_EVIDENCE_POLICY_TOO_WEAK covers only… | CONFIRMED | HIGH | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-04 | HIGH | 06:471, 06:486, 06:491, 06:453, 06:462 | The only machine check for CLOSED_LOOP acceptance is 'two-key 不足' = presence of two role labels. approvals are… | CONFIRMED | HIGH | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-05 | MEDIUM | 06:285, 06:305, 06:112-119, 06:355, 06:383, 06:411 rule (1) | The budget check sums 'detection + gateway switch + measured stop time' but no artifact schema carries these v… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-06 | MEDIUM | 05:183, 05:424, 05:289, 05:735, 05:288, 05:337 | validity_deadline_mono = min(..., issued_at + lease_max_duration_s) duplicates the lease-duration limit with a… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-07 | MEDIUM | 06:411, 06:337, 05:478, 06:459-491 | §8.1 (3) still says 'the active lease continues; profile-caused invalidation is ONLY (a) health-check failure … | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-08 | MEDIUM | 06:284, 06:295, 06:305, 06:289, 06:411, 05:190 | P_TIMEOUT_CEILING ('受理時 + 第 2 評価点'), P_ENVELOPE_EXCEEDS_MEASURED ('第 2 評価点・CLOSED_LOOP'), P_FAULT_EVIDENCE_UNV… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-09 | MEDIUM | 06:467-470, 05:190, 05:239, 06:292, 06:284 | evidence_set_hash, validator_hash, timing_baseline_hash and cell_identity_hash are recorded but never compared… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-10 | MEDIUM | 06:476-482, 06:487, 06:525, 05:88, 05:817 | The baseline carries no cell_id / layout_revision_ref, so P_TIMEOUT_CEILING cannot tie a baseline to the cell … | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-11 | MEDIUM | 05:529, 05:290, 05:289, 05:338, 06:462-473, 06:487, 06:210-2 | Event-driven VALIDITY_EXPIRED (incident, tool swap, firmware, layout, ISL build) has no clearance prerequisite… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-12 | MEDIUM | 06:354, 06:305, 06:292, 06:88-95 | Per-arm evidence kinds use controller_firmware_ref (CONTROLLER_ENVELOPE_MEASUREMENT) and tool_id (TOOL_PAYLOAD… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-13 | MEDIUM | 06:379-381, 05:641, 05:776-780 | The five v0.2.5 fault codes (R_CALIBRATION_EXPIRED_ACTIVE, R_EVIDENCE_EXPIRED_ACTIVE, R_PROFILE_SUSPENDED, R_R… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-14 | MEDIUM | 06:67-69, 06:98-100, 06:382, 05:88, 06:337, 06:437, 06:446 | Physical changes that leave every record and health check unchanged — base re-mount with unchanged layout arti… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-15 | MEDIUM | 05:183, 05:146, 05:627-641, 06:291, 06:293, 06:512, 06:382 | All expiry logic (P_*_EXPIRED, validity_deadline_mono) trusts the host wall-clock at permit issue with no sani… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-16 | LOW | 06:459, 06:485, 06:471-472, 06:491, 05:190, 05:239 | REVOKED is 'terminal' yet reusable via a new generation with no stated conditions (SUSPENDED->ACCEPTED require… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-17 | LOW | 06:104, 06:302, 06:308, 06:327, 06:82, 06:311 | min_separation_m does not define what is measured (TCP points vs links) and no static check relates it to the … | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-18 | LOW | 05:187, 05:179, 05:469, 05:229, 05:227, 05:424 | effective_expires_at = min(..., decision.t_mono + decision_max_age_s, validity_deadline_mono) has no 'if prese… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.6 表） |
+| R4-19 | LOW | 06:486, 06:495, 06:522, 05:784 | The deployment acceptance 'two-key' reuses the frozen term without stating that it neither satisfies nor subst… | refuted | NOT_A_DEFECT | 適用せず |
+
+- refuted は適用しない（理由 = `review_records/VERIFY_V3_v025_20260903.md` / `VERIFY_V4_v025_20260903.md`）。checker に Q2（06 §2.1 の hash field ⊆ 05 §3.4 (j) 列挙）を追加。v0.2.6 本文への再レビュー・再 verify は未実施（次 round）。open = 0 は宣言しない。
+
+## 10. Review anchors
 
 1. 各 reviewer の pin 再測と checker 実行は各報告 §0 に自記 — `review_records/AXIS_*_review_*.md`。
 2. verifier の lens 別理由と sed 引用 — `review_records/VERIFY_*_*.md`。
-3. fold の再現 — `review_records/fold/fold_v022_05.py` / `fold_v022_others.py`（v0.2.1 = commit `297c850b` → v0.2.2）、`fold_v023.py`（v0.2.2 = `f3c6ca35` → v0.2.3）、`fold_v024.py`（v0.2.3 = `ab52137f` → v0.2.4）、`fold_v025.py`（v0.2.4 = `99125944` → v0.2.5・Rs 裁定）。verdict 列は JSON 引数（`verdicts_v023_verifier.json` / `verdicts_v024_verifier.json`）。
+3. fold の再現 — `review_records/fold/fold_v022_05.py` / `fold_v022_others.py`（v0.2.1 = commit `297c850b` → v0.2.2）、`fold_v023.py`（v0.2.2 = `f3c6ca35` → v0.2.3）、`fold_v024.py`（v0.2.3 = `ab52137f` → v0.2.4）、`fold_v025.py`（v0.2.4 = `99125944` → v0.2.5・Rs 裁定）、`fold_v026.py`（v0.2.5 = `50119dc3` → v0.2.6）。verdict 列は JSON 引数（`verdicts_v023_verifier.json` / `verdicts_v024_verifier.json`）。
 4. 版の同一性は content sha（`SHA256SUMS.txt`）で引く。label は照合用。
