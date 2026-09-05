@@ -47011,3 +47011,9 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - ⚠ **§1428 の pin 訂正（records-must-match-fact）**: §1428 は prereg を「27 行 sha `1ea5a872…`」として bank `7202a16a88` に結びつけたが、**blob `7202a16a88:PZ_CLIPDUMP_…` = 31 行・sha `5360103e291d49ba…`** = pZ の訂正後 31 行版（当卓の wc/sha の測定 11:01:2x 直前 → pZ の訂正 11:00:12 … 実際は測定時点で既に 31 行だったか、測定と `git add` の間に変わったかは当卓の 1 command 内の順序では決められない — 当卓の測定は command 冒頭・add は同 command 末尾）。**pin は commit した blob を再 hash して書く**（測った disk でなく）。§1428 の「27 行・1ea5a872」は当該 bank の説明としては誤りで、本節が訂正。
 - **p6 の flip 読み（受入）**: IN_PROGRESS 更新は NEST §3.1 手順 5 = bind した session が preflight（手順 4）を通した後に自ら行う。承認時でも bind の瞬間でもなく、主体は p6 でない。本承認が動かさないもの = 実装/run/GPU・DoD の Rs1 認可・#68 spec 未反映・§5.1 の 1:1（新規 session 必須）。**新 pane の起動と役名は Rs1 の行為**。
 - **名簿修正の窓**: 残り = p4 の受入の一言（`m-p18-308` 依頼済・p4 idle で DELIVERED）。受入が来たら当卓 bank で閉じる。run なし・route run (2) 未充足。
+
+## §1430 — ✅✅ **p4 `m-p4-260`（11:03:30）= 名簿修正 `22feba17a6` の受入 **ACCEPTED**（方式 A = CLIP_PARTS 導出・受入基準 (a)-(f) は p0 着地の 19 秒前に item 18 @ `41458a572d` へ置かれ、全部 object に対して自読で成立）⇒ **窓 CLOSE（当卓 bank = 本節）**。custody = kickoff 09-05 節 item 19 @ `cf62be8168`（当卓が commit と item 行を確認）**（当卓 09-05 11:0x 実測）
+
+- **窓の chain = 完結**: Rs1 の一言（§1426）→ `m-p18-305` 窓開放 → p0 着地 `22feba17a6`（§1428）→ pZ prereg（訂正版 `7202a16a88`）＋ verdict 8/8 `b4cb6528f2`（§1429）→ p4 ACCEPTED（本節）。E1 窓・本窓とも閉。解錠なし（route run (2) 未充足）。
+- p4 の記録のみ 2 点（受入に非依存）: ① 接頭辞 pattern は driver 内 2 か所（:270/:1171）— 将来 :270 が変われば再び外れ得るが、print が `len(CLIP_PARTS)` を明示するので「5 個中 0 個」と読める = **判別できる述語になった**（本修正の実効）。② pZ prereg は post-object の機械読み（rows は blob 実測として成立・「事前登録」の語は当たらない）。
+- 配信: p0/pZ/p4 へ「窓 CLOSE」1 通（cc）。以降 = D1 build [TASK]（§1427）。
