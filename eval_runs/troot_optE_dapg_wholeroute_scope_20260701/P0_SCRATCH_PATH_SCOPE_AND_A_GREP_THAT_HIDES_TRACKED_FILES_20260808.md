@@ -2567,3 +2567,24 @@ cable settling for 0.4 s would attest nothing this claim rests on.  Recorded her
   `gates`, real per-step rows) — those need a route run, which stays under the conditional authorization ②, unmet.
   Their logic is verified only at the block level (§8.47 §3: real `__main__`, 3/3; fixture, 19/19).
 - Anything about the cell, the arms or the cable: this run measured the writer, not the machine.
+
+## 8.49 Clip-dump diagnostic roster: derived from CLIP_PARTS, not retired — landed `22feba17a6` (+2/−2, diagnostic branch only)
+
+*(2026-09-05 10:58 JST.  Rs1 = the human; Rs2 = p4/CC.  Window = Rs1「Rs1 待ち（前回 4 件 + 新 1 件）はすべて推奨で良い」relayed as
+m-p18-305 (§1426): the P4_CLIP_DUMP diagnostic block, roster :1170-1171 and its readers :1172-1176, nothing else; no run.)*
+
+- **Choice, in one line:** derived rather than retired, because the roster has two readers that are checks worth keeping
+  — the CLIPG-vs-model comparison (:1172-1173) and the per-geom contact-parameter rows (:1174-1179, silently empty since
+  the rename) — and the builder's own naming rule (`f"{name}_{i}"` over `enumerate(CLIP_PARTS)`, driver :265/:270) is
+  the one source a retyped roster cannot drift from again.
+- **Landed:** `22feba17a6` (10:57:42 JST), pathspec-limited; blob `75eefef4e27e99e3569f6d85b7b19216bbf39812`; content
+  sha256 `57de8c3ec7ed026299401a7f985655bb98669cbf528e4e9bf0bc104194464a98`; `--numstat` **2 / 2**: :1171 the roster
+  → `(f"C1_{i}" for i in range(len(CLIP_PARTS)))`; :1173 the label → "vs the {len(CLIP_PARTS)} CLIP_PARTS names resolved
+  in the model".  Untouched: CLIPG (:467-468), CLIP_BOXES, the seat gates, control, and the E1 RUN_METRICS path
+  (:41-140).  `py_compile` OK; both lines ≤ 120 chars.
+- **Static check (no run; the window has none):** the derived roster `['C1_0'..'C1_4']` equals the C1 geom names in the
+  compiled cell `_gen/_steps_cell_full.xml` (`4158e4e638e9b0fc…`, the same XML the reshoot and L1 produced) and the five
+  names the L1 dump printed at `run.log:42-46`; none of the five old names occurs in that XML.  Under the fix the :54
+  line would therefore read the same five ids on both sides, and the contact-parameter rows would print for all five —
+  stated as a prediction, not an observation: the branch runs only under `P4_CLIP_DUMP=1`, and executing it is pZ's
+  static call, not this window's.
