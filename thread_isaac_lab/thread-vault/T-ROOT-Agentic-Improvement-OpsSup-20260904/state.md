@@ -8,7 +8,7 @@ goal_verification: |
   ③ 否定制御 4 件が bank 済: (a) composer に置いただけ（Enter 無し）→ NOT delivered ／ (b) queued → QUEUED であって DELIVERED でない ／ (c) working 宛 → HELD ／ (d) HELD→retry→DELIVERED の遷移
   ④ 事前 5 体 debate の DECIDE と事後 debate の記録（台帳 §1431 の gate 列）
   ⛔ 本 node の閉じ条件に含めないもの（隠さない）: codex pane の配達判別表 — w2 に codex pane が 0 で母集団が無い（v3 §1.1 実測）⇒ 状態 `UNKNOWN(table-not-banked)`。解消条件 = w2 に codex pane が生じた時に測る、または別 workspace で測った表を bank する。⛔「未測」であって「不成立」ではない（DDR #70 から本 node へ移管）
-status: PENDING
+status: IN_PROGRESS
 parent_node: T-ROOT
 children_nodes: []
 dependencies:
@@ -23,7 +23,7 @@ session_history:
     note: "遡及 bind（NEST §6.2 既存 active task 段階適用）。実体 = w2:p18 T-ROOT-OPS-SUPERVISOR の claude session 1c3d805c-2a9a-4b6d-bba2-ae7d479862e7（herdr agent list 2026-09-05 11:12 実測・custody transcript と同一 file）。started_at = Rs1 直接指示の時刻（09-04 16:08・v3 doc 冒頭）。⚠ 手順 4（本 state.md の preflight）と手順 5（status → IN_PROGRESS）は bind された session = p18 が行う。p6 は起票のみ・flip しない。"
 define_artifact: "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P18_AGENTIC_SYSTEM_IMPROVEMENT_20260904.md @ f5c681edb3（sha256 4d1e7ac099f8825924367bcd57b0a8ba099d6ab38bfe2d4488e9ada3ed77b86f・p6 が worktree と blob の両方で自算一致）"
 created: 2026-09-05T11:12:20+09:00
-last_updated: 2026-09-05T11:12:20+09:00
+last_updated: 2026-09-05T11:18:57+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -62,3 +62,9 @@ front matter が正。要点: **D1 = 唯一の build 候補**（v3 §3-D）。fi
 - 本 file の作成 = p6 PLAN-KEEPER の執行 lane（Rs1 承認の下・§1432）。**内容の決定は p18（本 task の court）と各 gate**、p6 は記録のみ。
 - 進捗の反映は **verdict / 最終行為のみ**（DECIDE・着地 sha・否定制御 bank・事後 debate）。途中経過は台帳 §13xx 系が正で、本 file はそれを指す。
 - 閉じる時: goal_verification ①-④ を file:行 で引き、⛔ 行（codex 表）は「未測・母集団 0」のまま閉じてよいか **Rs1 の一語**で確定（本 node の閉じ条件から外すと宣言したのは p6 の起票時の読み — Rs1 が含めると言えば戻す）。
+
+## 6. 起動手順 4/5 の記録（bind された session = w2:p18 の行為・NEST §3.1）
+
+- **手順 4（preflight）** 2026-09-05T11:18:57+09:00: 本 file を disk で読み、起票 blob と一致（`git show f25a237fb9:state.md` sha256 先頭 `0501410b` == disk）。status = PENDING（HANDED_OFF でない）。本 node は新規起票で handoff artifact・pins sidecar を持たない ⇒ §4.4 の二段階 sidecar 検証は対象外（対象 file が無い）。session 冒頭の `preflight_check.sh` = 7/11 PASS・0 FAIL・4 WARN（既知: P5 共有 tree 残留・P7 stale lock・P9 env_isaaclab6 不在・P11 snapshot 鮮度 = 本更新で再発するので p6 の再生成待ち）。
+- **手順 5** 2026-09-05T11:18:57+09:00: `status: PENDING` → `IN_PROGRESS`（frontmatter :11）・`last_updated` 更新。flip の主体 = 本 session（p6 は flip しない・m-p6-150）。
+- 走行中の gate: 事前 5 体 debate（台帳 §1431・11:05 起動）。DECIDE 後に build。
