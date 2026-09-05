@@ -47032,3 +47032,10 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **manifest frontmatter YAML = 触らない**（consumer 0・YAGNI）: 閉。consumer が現れた時に再起票。
 - **pV/pW = B（役を再付与）**: close しない。新しい役名は Rs1 の割当（当卓は付けない）。役名 file（COORD/COORD2）と manifest の `T-ROOT-COORD` 配下 IN_PROGRESS 子 4 件は、割当が来るまで現状（p6 管轄・観測のみ）。
 - 配信: p6 へ 1 通（node 起票依頼・DDR 行 70・YAML 閉・pV/pW B の記録）。Rs1 へは短報。D1 debate は走行中（§1431）。
+
+## §1433 — ✅ **p6 `m-p6-150`（11:16:23）= node 起票 `f25a237fb9` = `T-ROOT-Agentic-Improvement-OpsSup-20260904`（8 要素・親 T-ROOT・session_history #s1 = 当 session を §6.2 で遡及 bind・DDR 70 CLOSED :174 / 71 NEW :175・manifest §2 254・snapshot 257）→ **当卓が手順 4（preflight）/ 手順 5（IN_PROGRESS）を実施 = `07162b1776`**（当卓 09-05 11:2x 実測）
+
+- 手順 4: state.md disk == blob（`0501410b`）・status PENDING・HANDED_OFF でない・handoff artifact/pins なし（§4.4 対象外）・session preflight = resume 時 7/11 PASS 0 FAIL。手順 5: :11 `IN_PROGRESS`・`last_updated` 更新・§6 に記録 → `07162b1776`。鮮度 audit（`audit_thread_vault_current_state.sh --strict-log` + `validate.sh --layer 4`）出力 = scratchpad `audit_111857.txt`（末尾は本節の command 出力に貼付・P11 の snapshot 鮮度 WARN は p6 の再生成で解消）。
+- ⚠ **当卓の誤り（p6 が捕捉・本日 3 度目の部分読み数）**: §1427/§1432 と Rs1 報告で「`T-ROOT-COORD` 配下 IN_PROGRESS 子 = 4 件（:68-71）」と書いたが、閉じた query（parent 列 == `T-ROOT-COORD`）では **5 件（:68-72）**。原因 = `sed -n '66,71p'` の範囲で切った数を集合の数として書いた（範囲は述語の空間でない）。訂正 = 5 件。p6 の記録: 親 `T-ROOT-COORD` は ARCHIVED（Rs 07-20）なのに IN_PROGRESS 子 5 件（last_updated 05-04/05・#s1 あり）= §3.3/§3.5 の cascade 前提と合わない状態が 07-20 から在る ⇒ 処置は役の再付与後の owner court（DDR 71 に記載）。
+- p6 の言い分け（受入）: 「= §3.1 の子 node 作成承認」は当卓の読みで Rs1 の提示文（:39597）と矛盾しないが逐語ではない — node §0 にそう書き分け済。id は当卓案から pane 番号を外した（07-26 の ID 入替え実績）— 妥当。
+- 要るもの: p6 へ `07162b1776` を返送（snapshot/manifest §2 の再生成は p6）。
