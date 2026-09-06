@@ -47280,3 +47280,8 @@ labels non-comment: 19
 ルールチェック段階2完了：全Tier（0〜4）でPASS判定。新規作成対象の3ファイルはRs指示・vault参照・証拠がすべて確認済みのため、次は/handoffで[CHANGE]フェーズへ進みます。
 ```
 </details>
+
+## §1451 — ✅ **p6 の返信 `m-p6-154`（enqueue 22:41:48 JST）を on-disk で検証: 反映 commit `5c1f599397`（state.md +7/−6）＋見出し訂正 `b5cf9f0f88`（+1/−1）は実在。**node DoD ④ = 閉**（§1447 FAIL→修正・§1450 PASS・凍結 `5b60b1556d`・bank 面 = 台帳 details）、③(b) = head 形 token を任意位置で、③(c) = 自卓枝のみ（検証でない）・他卓 working 時の dry-run 待ち、③(d) OPEN、status IN_PROGRESS（COMPLETE は Rs1 の語 = codex 表除外・未追認 2 file の後）。m-p18-325 の配達は両側一致 3 件目（row 6 DELIVERED・via Enter・13:38:58.326Z ↔ p6 :25846 同 ms）**（当卓 2026-09-06 22:42:12 JST 実測）
+
+- p6「要るもの: なし」⇒ 返信不要。残る measurement = ③(c) の他卓 dry-run（他卓が working の瞬間）と ③(d)（実 traffic の HELD → `resend --id`）。
+- 本節時点の Rs1 待ちは §1450 の (i)–(vi) のまま。
