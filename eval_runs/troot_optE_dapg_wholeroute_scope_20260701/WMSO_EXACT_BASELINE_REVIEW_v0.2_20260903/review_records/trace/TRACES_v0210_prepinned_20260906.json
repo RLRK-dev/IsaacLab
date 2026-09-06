@@ -1,0 +1,651 @@
+{
+ "kind": "EXPECTATION_PINNED_TRACES",
+ "label": "PRE_PINNED",
+ "pinned_before_fix": true,
+ "statement": "本 file の期待結果は v0.2.10 の本文編集（fold_v0210.py）と評価器（trace_eval.py）の作成より前に固定し、commit で順序を証明する。期待結果の根拠 = Rs 裁定の設計要求（norm_source）であり、修正後の本文から逆算していない。",
+ "target_docs": [
+  "05_WMSO_RUNTIME_SPEC_v0.2_REVIEW_CANDIDATE_20260903.md",
+  "06_WMSO_INDUSTRIAL_PROFILE_v0.2_REVIEW_CANDIDATE_20260903.md"
+ ],
+ "versions": {
+  "v028": "commit 0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d（review_records/baselines/v028_0c6f11c9/）",
+  "v029": "commit f0e4e62a471d0ef7100ae065d84303fb326c9231（review_records/baselines/v029_f0e4e62a/）",
+  "v0210": "本 pin の後に作る新版（fold_v0210.py）"
+ },
+ "result_vocabulary": {
+  "PASS": "規範を満たす",
+  "VIOLATION": "規範に反する（構造不在で表現不能な場合も VIOLATION と数える・note に明記）",
+  "N/A": "その版に該当構造が無く control が成立しない"
+ },
+ "evaluation_kind": "限定モデル（review_records/trace/trace_eval.py・本文の規則を version ごとに小さな状態機械へ写したもの）。WMSO 実装 / 実機 / 全文から自動生成した形式モデルではない。限定モデルの成功を実機の安全性へ読み替えない（Rs 裁定 §4）。",
+ "created_utc": "2026-09-06T13:13:12Z",
+ "traces": [
+  {
+   "id": "D1",
+   "title": "cell 単位参照の key = 正規 (site_id, cell_id)",
+   "norm": "baseline 等の cell 単位参照先は cell_id 単独ではなく正規 (site_id, cell_id) で識別する。別 site の同名 cell_id の supersession が本 cell の判定を変えず、本 cell の supersession は検出される。",
+   "norm_source": "review_records/rs_consult/RS_DECISION_20260906.md §1 末尾（『baselineなどセル単位の参照先も…(site_id, cell_id)で識別』）",
+   "initial_state": {
+    "cells": [
+     [
+      "S1",
+      "C1"
+     ],
+     [
+      "S2",
+      "C1"
+     ]
+    ],
+    "baseline_head": {
+     "S1/C1": "B1",
+     "S2/C1": "B2"
+    },
+    "record": {
+     "cell": [
+      "S1",
+      "C1"
+     ],
+     "timing_baseline_hash": "B1"
+    }
+   },
+   "events": [
+    {
+     "e": "BASELINE_SUPERSEDED",
+     "cell": [
+      "S2",
+      "C1"
+     ],
+     "new_head": "B2p"
+    },
+    {
+     "e": "HEAD_CHECK",
+     "for_record_cell": [
+      "S1",
+      "C1"
+     ]
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "VIOLATION",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "BASELINE_SUPERSEDED",
+      "cell": [
+       "S1",
+       "C1"
+      ],
+      "new_head": "B1p"
+     },
+     {
+      "e": "HEAD_CHECK",
+      "for_record_cell": [
+       "S1",
+       "C1"
+      ]
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "自 cell の supersession は検出される（BASELINE_SUPERSEDED 発火）"
+   }
+  },
+  {
+   "id": "D2",
+   "title": "profile 再受理は cell 停止を解除しない",
+   "norm": "未解消の cell 停止は、その cell の現在および将来の全 profile に効く。新 generation の ACCEPTED（two-key 再受理）だけでは permit を発行できない。",
+   "norm_source": "review_records/rs_consult/RS_DECISION_20260906.md §1 bullet 3（『profileの受理とセル停止の解除は別操作』）",
+   "initial_state": {
+    "cell": [
+     "S1",
+     "C1"
+    ],
+    "acceptance": "ACCEPTED(g)",
+    "cell_stop": null
+   },
+   "events": [
+    {
+     "e": "CELL_STOP_RECORDED",
+     "by_role": "SAFETY_OFFICER",
+     "cell": [
+      "S1",
+      "C1"
+     ]
+    },
+    {
+     "e": "REACCEPT",
+     "generation": "g+1",
+     "two_key": true
+    },
+    {
+     "e": "PERMIT_REQUEST"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "VIOLATION",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "CELL_STOP_RECORDED",
+      "by_role": "SAFETY_OFFICER"
+     },
+     {
+      "e": "CELL_CLEARANCE",
+      "approvals": [
+       [
+        "INDEPENDENT_SAFETY_APPROVER",
+        "opA"
+       ],
+       [
+        "FACILITY_OPERATIONS_OWNER",
+        "opB"
+       ]
+      ],
+      "cause_removed_evidence": true
+     },
+     {
+      "e": "REACCEPT",
+      "generation": "g+1",
+      "two_key": true
+     },
+     {
+      "e": "PERMIT_REQUEST"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "正規の二者解除 + 再受理なら permit 発行（全拒否ではない）"
+   }
+  },
+  {
+   "id": "D3",
+   "title": "別名は正規 id へ解決してから停止を照合する",
+   "norm": "別名（表示名）は 1 つの正規 id にだけ解決する。正規 id に未解消停止があれば、別名で宣言した profile にも停止が効く。未登録 / 曖昧 / 循環は拒否。",
+   "norm_source": "review_records/rs_consult/RS_DECISION_20260906.md §1 bullet 1（『別名は一つの正規IDにだけ解決し…』）",
+   "initial_state": {
+    "ledger": {
+     "canonical": [
+      [
+       "S1",
+       "C1"
+      ]
+     ],
+     "aliases": {
+      "S1/CELL-A": "S1/C1"
+     }
+    },
+    "cell_stop": {
+     "S1/C1": "unresolved"
+    },
+    "profile_cell": [
+     "S1",
+     "CELL-A"
+    ]
+   },
+   "events": [
+    {
+     "e": "REGISTER_PROFILE"
+    },
+    {
+     "e": "PERMIT_REQUEST"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "VIOLATION",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "REGISTER_PROFILE",
+      "profile_cell": [
+       "S1",
+       "CELL-B"
+      ],
+      "alias_to": "S1/C2",
+      "cell_stop": null
+     },
+     {
+      "e": "PERMIT_REQUEST"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "停止の無い正規 id に解決する別名は受理・permit 発行"
+   }
+  },
+  {
+   "id": "D4",
+   "title": "解除は独立した二者（同一人物の二役は不可）",
+   "norm": "cell 停止の解除は、原因除去の証拠を確認した独立安全承認者と設備運用責任者の異なる二人を要する。一人が二者分を承認した clearance は無効で、停止は未解消のまま。人選未登録なら拒否。",
+   "norm_source": "review_records/rs_consult/RS_DECISION_20260906.md §1 bullet 2 + 『一回の解除を一人で二者分承認することは禁止』",
+   "initial_state": {
+    "cell": [
+     "S1",
+     "C1"
+    ],
+    "cell_stop": "unresolved",
+    "role_registry": {
+     "opA": [
+      "INDEPENDENT_SAFETY_APPROVER",
+      "FACILITY_OPERATIONS_OWNER"
+     ],
+     "opB": [
+      "FACILITY_OPERATIONS_OWNER"
+     ]
+    }
+   },
+   "events": [
+    {
+     "e": "CELL_CLEARANCE",
+     "approvals": [
+      [
+       "INDEPENDENT_SAFETY_APPROVER",
+       "opA"
+      ],
+      [
+       "FACILITY_OPERATIONS_OWNER",
+       "opA"
+      ]
+     ]
+    },
+    {
+     "e": "PERMIT_REQUEST"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "VIOLATION",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "CELL_CLEARANCE",
+      "approvals": [
+       [
+        "INDEPENDENT_SAFETY_APPROVER",
+        "opA"
+       ],
+       [
+        "FACILITY_OPERATIONS_OWNER",
+        "opB"
+       ]
+      ]
+     },
+     {
+      "e": "PERMIT_REQUEST"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "異なる二人なら解除され permit 発行"
+   },
+   "note": "v028 / v029 には cell 停止の解除構造が無い（profile 再受理の two-key は profile の受理であり cell 停止の解除ではない）。構造不在 = 規範を表現できない = VIOLATION と数える。"
+  },
+  {
+   "id": "D5",
+   "title": "無関係な SAFEHOLD / seq 増加では latch を解除しない",
+   "norm": "gateway 自身が (i′) で出した Stop の latch は、心拍復帰・通信復旧・無関係な seq 増加だけでは解除されない。解除 / 引継ぎは、manager がその停止事象を引き受け、停止要求が途切れず保持されることを確認したときのみ。",
+   "norm_source": "review_records/rs_consult/RS_DECISION_20260906.md §2（『心拍復帰、通信復旧、無関係なseq増加だけでは、停止ラッチを解除しません』）",
+   "initial_state": {
+    "manager_link": "down",
+    "authority_state": {
+     "owner": "EXECUTOR",
+     "seq": 10,
+     "safehold_disposition": null
+    },
+    "isl_heartbeat": "lost"
+   },
+   "events": [
+    {
+     "e": "GATEWAY_I_PRIME_SAFESTOP",
+     "stop_report_id": "X",
+     "latch_seq_observed": 10
+    },
+    {
+     "e": "ISL_HEARTBEAT_RETURNS"
+    },
+    {
+     "e": "MANAGER_TRANSITION",
+     "to": "SAFEHOLD",
+     "reason": "DEADLINE_MISS",
+     "disposition": "HOLD",
+     "seq": 11,
+     "ack_of_stop_report": null
+    },
+    {
+     "e": "MANAGER_LINK_RESTORED"
+    },
+    {
+     "e": "GATEWAY_LINEARIZED_READ"
+    },
+    {
+     "e": "OUTPUT_QUERY"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "VIOLATION",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "GATEWAY_I_PRIME_SAFESTOP",
+      "stop_report_id": "X",
+      "latch_seq_observed": 10
+     },
+     {
+      "e": "ISL_HEARTBEAT_RETURNS"
+     },
+     {
+      "e": "MANAGER_TRANSITION",
+      "to": "SAFEHOLD",
+      "reason": "SAFETY",
+      "disposition": "SAFE_STOP",
+      "seq": 11,
+      "ack_of_stop_report": "X"
+     },
+     {
+      "e": "MANAGER_LINK_RESTORED"
+     },
+     {
+      "e": "GATEWAY_LINEARIZED_READ"
+     },
+     {
+      "e": "OUTPUT_QUERY"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "manager が同じ停止事象を SAFE_STOP で引き受けたら latch は解除され、出力は manager 側 disposition で SafeStop が続く（途切れない）",
+    "v028_note": "v028 は latch 構造が無い = N/A"
+   }
+  },
+  {
+   "id": "D6",
+   "title": "心拍復帰 + 通信復旧 + owner EXECUTOR のままでも (ii) を再開しない",
+   "norm": "ISL heartbeat が戻り、manager link も戻り、AuthorityState が EXECUTOR のまま（manager が停止事象を引き受けていない）なら、出力は SafeStop のまま・(ii) は再開しない。",
+   "norm_source": "review_records/rs_consult/RS_DECISION_20260906.md §2（同上・『既に発火した未解除Stopを、単なる心拍復帰で失わない』）",
+   "initial_state": {
+    "manager_link": "down",
+    "authority_state": {
+     "owner": "EXECUTOR",
+     "seq": 10
+    },
+    "isl_heartbeat": "lost"
+   },
+   "events": [
+    {
+     "e": "GATEWAY_I_PRIME_SAFESTOP",
+     "stop_report_id": "X",
+     "latch_seq_observed": 10
+    },
+    {
+     "e": "ISL_HEARTBEAT_RETURNS"
+    },
+    {
+     "e": "MANAGER_LINK_RESTORED"
+    },
+    {
+     "e": "GATEWAY_LINEARIZED_READ"
+    },
+    {
+     "e": "OUTPUT_QUERY"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "PASS",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "MANAGER_LINK_RESTORED"
+     },
+     {
+      "e": "GATEWAY_LINEARIZED_READ"
+     },
+     {
+      "e": "OUTPUT_QUERY"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "Stop が無ければ EXECUTOR の setpoint 経路（(ii)）は通る"
+   },
+   "note": "v029 で既に PASS（T-49 / T-50 の regression 確認）。本 trace は R7-04 裁定の regression control であり新規 finding ではない。"
+  },
+  {
+   "id": "D7",
+   "title": "誤差余裕の上限を評価できなければ permit を発行しない",
+   "norm": "暦時刻上の期限を単調時計へ変換するとき、承認された誤差余裕（基準時刻の誤差 + 時刻組の読取誤差 + 使用期間中のずれ）だけ早い側へ取る。余裕の上限を評価できない = permit 不発行。",
+   "norm_source": "review_records/rs_consult/RS_DECISION_20260906.md §3（『単調時計上の期限 = mono_ref + (暦時刻上の期限 − wall_ref) − 時計対応の誤差余裕』『その上限を評価できない場合は、permitを発行しません』）",
+   "initial_state": {
+    "ref_pair": {
+     "wall_ref": 1000.0,
+     "mono_ref": 50.0
+    },
+    "wall_deadline": 1600.0,
+    "baseline": {
+     "clock_drift_tolerance_s": "0.001",
+     "clock_correspondence_margin_s": null
+    }
+   },
+   "events": [
+    {
+     "e": "PERMIT_REQUEST"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "VIOLATION",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "SET_BASELINE_FIELD",
+      "clock_correspondence_margin_s": "0.5"
+     },
+     {
+      "e": "PERMIT_REQUEST"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "余裕が解決できれば発行され、validity_deadline_mono = 50 + 600 − 0.5 = 649.5（素朴変換 650 より早い）",
+    "expected_deadline_mono_v0210": 649.5
+   }
+  },
+  {
+   "id": "D8",
+   "title": "参照組の更新は既存 permit / lease の期限を延長しない",
+   "norm": "参照組 (wall_ref, mono_ref) の更新は明示的に記録され、既に発行した permit / lease の validity_deadline_mono を変えない。",
+   "norm_source": "review_records/rs_consult/RS_DECISION_20260906.md §3（『参照組の更新は明示的に記録し、既存permit／leaseの期限を延長しません』）",
+   "initial_state": {
+    "ref_pair": {
+     "wall_ref": 1000.0,
+     "mono_ref": 50.0
+    },
+    "wall_deadline": 1600.0,
+    "baseline": {
+     "clock_drift_tolerance_s": "0.001",
+     "clock_correspondence_margin_s": "0.5"
+    }
+   },
+   "events": [
+    {
+     "e": "PERMIT_REQUEST"
+    },
+    {
+     "e": "CLOCK_REF_UPDATED",
+     "wall_ref": 1300.0,
+     "mono_ref": 340.0,
+     "reason": "PERIODIC"
+    },
+    {
+     "e": "DEADLINE_QUERY"
+    }
+   ],
+   "expected": {
+    "v028": "PASS",
+    "v029": "PASS",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "PERMIT_REQUEST"
+     },
+     {
+      "e": "DEADLINE_QUERY"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "更新なしでも同じ期限"
+   },
+   "note": "v028 / v029 でも (k) が発行時に期限を固定するため PASS が期待される（regression control）。v0210 は余裕分だけ早い値になるが『延長しない』の規範は 3 版とも満たす。"
+  },
+  {
+   "id": "D9",
+   "title": "別 host / 別 boot の単調時刻を変換根拠なしに比較しない",
+   "norm": "再起動・サスペンド復帰・時刻不連続の後は、古い時計対応（参照組）をそのまま使わず再検証する。別 boot の参照組で drift 判定が偶然通っても permit を発行しない。",
+   "norm_source": "review_records/rs_consult/RS_DECISION_20260906.md §3（『異なるホストや再起動前後の単調時刻を、変換根拠なしに比較しません』『再起動、サスペンド復帰、時刻の不連続変更では、古い時計対応をそのまま使わず再検証します』）",
+   "initial_state": {
+    "ref_pair": {
+     "wall_ref": 1000.0,
+     "mono_ref": 50.0,
+     "host_id": "H1",
+     "boot_id": "b0"
+    },
+    "now": {
+     "wall": 1100.0,
+     "mono": 150.0,
+     "host_id": "H1",
+     "boot_id": "b1"
+    },
+    "baseline": {
+     "clock_drift_tolerance_s": "0.001",
+     "clock_correspondence_margin_s": "0.5"
+    }
+   },
+   "events": [
+    {
+     "e": "PERMIT_REQUEST"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "VIOLATION",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "SET_NOW_BOOT",
+      "boot_id": "b0"
+     },
+     {
+      "e": "PERMIT_REQUEST"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "同一 boot の参照組なら drift ≤ 許容で発行"
+   }
+  },
+  {
+   "id": "D10",
+   "title": "wall/mono 差の検査と UTC 同期精度の確認を分離する",
+   "norm": "wall/mono 差が許容内でも、時刻同期の状態・基準時刻の古さ・推定誤差が承認上限を満たさなければ permit を発行しない（wall/mono 差の小ささは UTC 正しさの証明ではない）。",
+   "norm_source": "review_records/rs_consult/RS_DECISION_20260906.md §3（『wall/mono差の検査と、UTCへの時刻同期精度を分離します』『同期状態・基準時刻の古さ・推定誤差も別に確認します』）",
+   "initial_state": {
+    "ref_pair": {
+     "wall_ref": 1000.0,
+     "mono_ref": 50.0,
+     "host_id": "H1",
+     "boot_id": "b0"
+    },
+    "now": {
+     "wall": 1100.0,
+     "mono": 150.0,
+     "host_id": "H1",
+     "boot_id": "b0"
+    },
+    "time_sync": {
+     "synchronized": false,
+     "ref_age_s": 90000,
+     "est_error_s": null
+    },
+    "baseline": {
+     "clock_drift_tolerance_s": "0.001",
+     "clock_correspondence_margin_s": "0.5",
+     "clock_sync_error_bound_s": "0.05",
+     "clock_sync_max_ref_age_s": "3600"
+    }
+   },
+   "events": [
+    {
+     "e": "PERMIT_REQUEST"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "VIOLATION",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "SET_TIME_SYNC",
+      "synchronized": true,
+      "ref_age_s": 60,
+      "est_error_s": 0.002
+     },
+     {
+      "e": "PERMIT_REQUEST"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "同期・新しい基準・誤差 ≤ 上限なら発行"
+   }
+  },
+  {
+   "id": "D11",
+   "title": "manager 不読で SafeHold の成立を確認できなければ検証済み停止経路に委ねる",
+   "norm": "manager 不読時、未解除 Stop が無く、設備側で検証済みの SafeHold が利用可能なら SafeHold。SafeHold の成立条件を確認できなければ、独立安全系 / controller の検証済み停止経路に委ね、通常指令を通さない。",
+   "norm_source": "review_records/rs_consult/RS_DECISION_20260906.md §2 の表（3 行）",
+   "initial_state": {
+    "manager_link": "down",
+    "last_disposition": null,
+    "stop_latch": false,
+    "safehold_path_verified": false
+   },
+   "events": [
+    {
+     "e": "OUTPUT_QUERY"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "VIOLATION",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "SET_SAFEHOLD_PATH_VERIFIED",
+      "value": true
+     },
+     {
+      "e": "OUTPUT_QUERY"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "SafeHold の成立が確認できれば SafeHold（常時 SafeStop ではない）"
+   }
+  }
+ ]
+}

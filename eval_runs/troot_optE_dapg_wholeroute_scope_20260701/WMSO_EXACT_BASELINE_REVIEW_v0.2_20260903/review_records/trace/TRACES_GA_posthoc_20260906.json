@@ -1,0 +1,314 @@
+{
+ "kind": "EXPECTATION_PINNED_TRACES",
+ "label": "POST_HOC",
+ "pinned_before_fix": false,
+ "statement": "v0.2.9 は既に修正済みのため『修正前に期待結果を固定した』とは主張しない（Rs 裁定 §4）。既存レビュー（GPT-astra GA-01..07・01_findings.json）の規範と反例を固定し、v0.2.8 / v0.2.9 / v0.2.10 を同じ期待結果で事後評価する。",
+ "target_docs": [
+  "05_WMSO_RUNTIME_SPEC_v0.2_REVIEW_CANDIDATE_20260903.md",
+  "06_WMSO_INDUSTRIAL_PROFILE_v0.2_REVIEW_CANDIDATE_20260903.md"
+ ],
+ "versions": {
+  "v028": "commit 0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d（review_records/baselines/v028_0c6f11c9/）",
+  "v029": "commit f0e4e62a471d0ef7100ae065d84303fb326c9231（review_records/baselines/v029_f0e4e62a/）",
+  "v0210": "本 pin の後に作る新版（fold_v0210.py）"
+ },
+ "result_vocabulary": {
+  "PASS": "規範を満たす",
+  "VIOLATION": "規範に反する（構造不在で表現不能な場合も VIOLATION と数える・note に明記）",
+  "N/A": "その版に該当構造が無く control が成立しない"
+ },
+ "evaluation_kind": "限定モデル（review_records/trace/trace_eval.py・本文の規則を version ごとに小さな状態機械へ写したもの）。WMSO 実装 / 実機 / 全文から自動生成した形式モデルではない。限定モデルの成功を実機の安全性へ読み替えない（Rs 裁定 §4）。",
+ "created_utc": "2026-09-06T13:13:12Z",
+ "traces": [
+  {
+   "id": "GA-01",
+   "title": "gateway 局所で発火した Stop が manager 不読中に失われない",
+   "norm": "gateway 自身が (i′) で出した SafeStop は、manager 不読が続く間、ISL heartbeat が戻っても SafeHold に緩まない。",
+   "norm_source": "review_records/rs_consult/A_GPTastra_20260906/01_findings.json GA-01",
+   "initial_state": {
+    "manager_link": "down",
+    "last_disposition": null,
+    "isl_heartbeat": "lost"
+   },
+   "events": [
+    {
+     "e": "GATEWAY_I_PRIME_SAFESTOP",
+     "stop_report_id": "X",
+     "latch_seq_observed": 10
+    },
+    {
+     "e": "ISL_HEARTBEAT_RETURNS"
+    },
+    {
+     "e": "OUTPUT_QUERY"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "PASS",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "OUTPUT_QUERY"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "Stop 未発火・last_disposition なし = SafeHold（3 版共通）",
+    "control_output": "SAFE_HOLD"
+   }
+  },
+  {
+   "id": "GA-02",
+   "title": "certificate は本文 hash（SkillDefinitionHash）へ束縛される",
+   "norm": "skill_action_id が一致しても SkillDefinitionHash が certificate と異なる definition の lease は拒否される（行動 id の一致は本文一致の代用にならない）。",
+   "norm_source": "review_records/rs_consult/A_GPTastra_20260906/01_findings.json GA-02",
+   "initial_state": {
+    "certificate": {
+     "skill_action_id": "A",
+     "skill_definition_hash": "H_A"
+    }
+   },
+   "events": [
+    {
+     "e": "PROPOSE_LEASE",
+     "skill_action_id": "A",
+     "skill_definition_hash": "H_B"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "PASS",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "PROPOSE_LEASE",
+      "skill_action_id": "A",
+      "skill_definition_hash": "H_A"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "同一本文 hash なら受理"
+   }
+  },
+  {
+   "id": "GA-03",
+   "title": "開始判断に使った belief が CAS 時点でも有効",
+   "norm": "validate_invocation_start を通した belief の有効期限が ACK 待ち中に到達した場合、CAS は受理されず再観測へ戻る。",
+   "norm_source": "review_records/rs_consult/A_GPTastra_20260906/01_findings.json GA-03",
+   "initial_state": {
+    "t_validate": 0.0,
+    "belief_valid_until": 5.0,
+    "effective_expires_at": 20.0
+   },
+   "events": [
+    {
+     "e": "ACK_WAIT"
+    },
+    {
+     "e": "CAS_AT",
+     "t": 7.0
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "PASS",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "ACK_WAIT"
+     },
+     {
+      "e": "CAS_AT",
+      "t": 3.0
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "belief 有効期限内の CAS は受理"
+   }
+  },
+  {
+   "id": "GA-04",
+   "title": "兄弟停止の key = 物理 cell の安定 id（構成 hash ではない）",
+   "norm": "同一 (site_id, cell_id) で cell_identity_hash だけが異なる兄弟 profile の SUSPENDED は本 profile の permit を拒否する。",
+   "norm_source": "review_records/rs_consult/A_GPTastra_20260906/01_findings.json GA-04",
+   "initial_state": {
+    "this_profile": {
+     "site_id": "S1",
+     "cell_id": "C1",
+     "cell_identity_hash": "K1"
+    },
+    "sibling": {
+     "site_id": "S1",
+     "cell_id": "C1",
+     "cell_identity_hash": "K2",
+     "head_state": "SUSPENDED",
+     "reason": "INCIDENT"
+    }
+   },
+   "events": [
+    {
+     "e": "PERMIT_REQUEST"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "PASS",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "SET_SIBLING_CELL",
+      "site_id": "S2",
+      "cell_id": "C9"
+     },
+     {
+      "e": "PERMIT_REQUEST"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "別 cell の SUSPENDED は影響しない = 発行"
+   }
+  },
+  {
+   "id": "GA-05",
+   "title": "停止 event の対象 = 現に効いている ACCEPTED（PROPOSED は透過）",
+   "norm": "ACCEPTED(g) の lease 活性中に PROPOSED(g+1) が append された後の SUSPENDED は、ACCEPTED(g) を対象とし活性 lease を停止する。",
+   "norm_source": "review_records/rs_consult/A_GPTastra_20260906/01_findings.json GA-05",
+   "initial_state": {
+    "records": [
+     {
+      "state": "ACCEPTED",
+      "generation": 1,
+      "hash": "R1"
+     },
+     {
+      "state": "PROPOSED",
+      "generation": 2,
+      "hash": "R2",
+      "supersedes": "R1"
+     }
+    ],
+    "active_lease_record_hash": "R1"
+   },
+   "events": [
+    {
+     "e": "SUSPENDED_APPENDED",
+     "reason": "INCIDENT",
+     "supersedes": "R2"
+    },
+    {
+     "e": "EVENT_DELIVERED_TO_MANAGER"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "PASS",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "SUSPENDED_APPENDED",
+      "reason": "INCIDENT",
+      "supersedes": "R1"
+     },
+     {
+      "e": "EVENT_DELIVERED_TO_MANAGER"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "PROPOSED を挟まない SUSPENDED は 3 版とも活性 lease を停止"
+   }
+  },
+  {
+   "id": "GA-06",
+   "title": "epoch 単調不変量は CasKind ごとに述べる",
+   "norm": "『全 CAS 成功で control_epoch はちょうど +1』は MARK_BOUNDARY_WAIT（epoch 不変）を含む本文と矛盾する。不変量は TRANSFER 系のみ +1・MARK は不変、として全称命題が正常遷移で崩れない。",
+   "norm_source": "review_records/rs_consult/A_GPTastra_20260906/01_findings.json GA-06",
+   "initial_state": {
+    "control_epoch": 3
+   },
+   "events": [
+    {
+     "e": "CAS",
+     "kind": "TRANSFER_TO_EXECUTOR"
+    },
+    {
+     "e": "CAS",
+     "kind": "MARK_BOUNDARY_WAIT"
+    },
+    {
+     "e": "CHECK_INVARIANT_AS_STATED"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "PASS",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "CAS",
+      "kind": "TRANSFER_TO_EXECUTOR"
+     },
+     {
+      "e": "CHECK_INVARIANT_AS_STATED"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "TRANSFER のみなら 3 版とも不変量成立"
+   }
+  },
+  {
+   "id": "GA-07",
+   "title": "drift 許容値は baseline の明示 slot から解決する",
+   "norm": "05 (l) の drift 判定は、周期 / worst-case detection ではなく baseline の許容値 slot を参照し、slot が解決できなければ判定は偽（permit 不発行）。",
+   "norm_source": "review_records/rs_consult/A_GPTastra_20260906/01_findings.json GA-07",
+   "initial_state": {
+    "baseline": {
+     "diagnostic_items": [
+      [
+       "CLOCK_DRIFT",
+       "1.0",
+       "2.0"
+      ]
+     ],
+     "clock_drift_tolerance_s": null
+    },
+    "drift_observed_s": 1.5
+   },
+   "events": [
+    {
+     "e": "PERMIT_REQUEST"
+    }
+   ],
+   "expected": {
+    "v028": "VIOLATION",
+    "v029": "PASS",
+    "v0210": "PASS"
+   },
+   "control": {
+    "events": [
+     {
+      "e": "SET_BASELINE_FIELD",
+      "clock_drift_tolerance_s": "2.0"
+     },
+     {
+      "e": "PERMIT_REQUEST"
+     }
+    ],
+    "expected_all": "PASS",
+    "meaning": "slot が解決でき drift ≤ 許容なら (l) は真",
+    "v028_note": "v028 は slot が存在しない = control は N/A"
+   }
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+{
+ "kind": "TEST_BASELINE_TEST_ONLY_NON_ACTUATING",
+ "label": "TEST_ONLY",
+ "statement": "設計試験（限定モデル trace 検証）専用の仮 baseline。非実機・出力なし。規格値でも UR15 cell で確認した値でもない。実運用 baseline registry への append・昇格は禁止（Rs 裁定 2026-09-06 §3）。05 / 06 本文には数値を書かない。",
+ "issuer_ref": "TEST_ONLY_NON_ACTUATING",
+ "site_id": "TEST_SITE",
+ "cell_id": "TEST_CELL",
+ "clock_drift_tolerance_s": "0.001",
+ "clock_correspondence_margin_s": null,
+ "clock_sync_error_bound_s": null,
+ "clock_sync_max_ref_age_s": null,
+ "note": "clock_drift_tolerance_s = 0.001 s（1 ms）のみ Rs が試験専用仮値として指定。他の slot は未確定（None = 解決不能 = fail-closed）。trace の control で値を与える場合は各 trace の events 内で明示する。",
+ "created_utc": "2026-09-06T13:13:12Z"
+}
