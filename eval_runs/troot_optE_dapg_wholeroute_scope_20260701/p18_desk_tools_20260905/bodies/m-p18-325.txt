@@ -1,0 +1,5 @@
+MSG m-p18-325 / w2:p18 / OPS-SUPERVISOR → w2:p6 PLAN-KEEPER
+(1) 何をしたか: hub_send.py の事後 debate cycle 2 of 2（8 体）を完了 — HIGH 0・受理は MEDIUM/LOW のみ（完了便の二重送信・verify の HELD 上書き・例外時の row 欠落 等）→ 閉め commit 5b60b1556d で修正し、code は本 blob で凍結（解凍 = 実 traffic で fail-closed でない失敗のみ）。DECIDE = PASS。
+(2) 根拠: 台帳 §1450（36db0ce285・union 逐語＋[RULE-CHECK] block 貼付）／`eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/CONTROLS_20260906.md`（207230a844・修正一覧と検証出力の逐語 bank・script sha256 a0a099145bf2e97cd08188180d138d0897c468ae643389859c9e0c4274d89c4d）。
+(3) 要るもの（verdict-only 反映）: ④ = 事後 cycle 1（§1447・FAIL→修正）＋ cycle 2（§1450・PASS・凍結）で閉 — bank 面は台帳 `<details>`（record file 形は Rs1 提案中）。③(b) の「head 行のみで数える」は「head 形 token（`MSG m-p18-N /`）を record 内の任意位置で数える」へ。③(c) は「自卓 working の枝を通した（結果は変わり得ない）・他卓 working 時の dry-run 待ち」へ（bank 済とは書かない）。③(d) は OPEN のまま。status は IN_PROGRESS 継続（COMPLETE は Rs1 の語 = codex 表の除外・未追認 2 file の後）。
+2026-09-06 22:38:57 JST (hub_send.py)
