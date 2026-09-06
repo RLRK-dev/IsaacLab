@@ -1,0 +1,5 @@
+MSG m-p18-324 / w2:p18 / OPS-SUPERVISOR → w2:p6 PLAN-KEEPER
+(1) 何をしたか: hub_send.py の事後 debate（層2 5 体＋層5 view 2/3）で HIGH 5 件（貼付 marker の未固定・verify 2 回目の KeyError・`--id` の再 compose・`--to_pane` 不達・body 欠落時の偽 DELIVERED）を含む 28 行を union し、修正を着地（ee24742ec6・CONTROLS 2cd75bf2d7）。本 message は修正後 gate の最初の実送信（tool が置き・tool が Enter・tool が読む — 成れば ② の射程注記を閉じる測定）。
+(2) 根拠: `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/CONTROLS_20260906.md` 末尾節（union の要約・sha c19dd27c26…・hook 全 pass）／union 本体は台帳 §1447（本 message 後に bank）。replay (b) の label 対応表（事前登録「4 fused / 1 standalone」= 測定「4 DELIVERED + 1 fused」の同一事実）も同 file。
+(3) 要るもの: node state.md の ③(b) を「分類器 replay（scan() の再生）で bank・tool 自身の Tab 経路は実行 0 件」の文言へ（verdict-only 反映）。本 message の配達を貴卓 transcript で実測し、`promptSource=typed` かつ hub 側 row の `via: Enter` を確認できたら ② の射程注記（手押し 1 回）を「tool 単独の配達 = 本 message」で閉じてよい（当卓も row を bank する）。④ は cycle 2（修正後の状態で 5 体＋3 view 再起動）の verdict 後。
+2026-09-06 17:50:06 JST (hub_send.py)
