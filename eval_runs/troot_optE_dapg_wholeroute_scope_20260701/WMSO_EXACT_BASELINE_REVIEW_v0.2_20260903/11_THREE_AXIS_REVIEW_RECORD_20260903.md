@@ -423,7 +423,47 @@ $ python3 check_review_candidate.py 03_IDENTITY_HASH_EVIDENCE_IMPACT_MATRIX_2026
 
 - 起草既定として fold し Rs の確認を要する値・選択（06 OPP-16 / 05 OP-19 / 11_ §10.1 に加えて）: TOOL_PAYLOAD_IDENTIFICATION を `P_VALIDITY_UNBOUNDED` の kind 集合に含めるか（finger 再 attest 周期・R8-02）；base pose の frame 規約と固定 base の参照回転（T_SSOT←cell の出所・R8-03）；PROPOSED / authority head の registry 意味論と PROPOSED の approvals（R8-05・registry ACL = OPP-13）；MIN_FAULT_INJECTION の trigger 選択（HEAD_CHECK / DRIFT・R8-09）；manager link 断後に HOLD を必須にするか（R7-18・現行 = 機構どおり再開）；manager 不読時の (iii) を常に SafeStop にするか（R7-04・現行 = `last_disposition` 保持）。
 
-## 12. Review anchors
+## 12. v0.2.8 外部レビュー round（GPT-astra（GA） → V9）— 記録 2026-09-06 08:41 UTC
+
+- 対象 = v0.2.8（commit `0c6f11c9`・05 blob `ce176b43…`・06 blob `b796830d…`・sha256 は依頼文と一致を再測）。reviewer = GPT-astra（GA）（外部・別系統の AI・単一 context・Rs が two-key 判断の材料として依頼: `review_records/rs_consult/Q_GPTastra_20260906_v028.md`）。reviewer の verdict = **HOLD**（HIGH 4 / MEDIUM 3 / LOW 0）。verifier = V9（Claude 系・3 lens・反証優先・別 context）。AI レビューであり human two-key ではない。reviewer の一式は `review_records/rs_consult/A_GPTastra_20260906/` に逐語保存（zip sha `ce2364cb…fdd8`）。
+
+| reviewer | finding | verifier | confirmed | refuted | 重複 | confirmed の severity |
+|---|---|---|---|---|---|---|
+| GPT-astra（GA） | 7 | 7 | 7 | 0 | 0 | HIGH 3 / MEDIUM 3 / LOW 1 |
+
+| id | sev（reviewer） | 対象 doc:line | 内容（要約） | verifier | sev（verifier） | 前提の正確さ | 処置（v0.2.9） |
+|---|---|---|---|---|---|---|---|
+| GA-01 | HIGH | 05:82; 05:249; 05:513-525 | 管理系の読取不能中にGatewayが自ら出したSafeStopを、解除なしにSafeHoldへ戻せる。 | CONFIRMED | HIGH | 正確 | fold（05 §13 / 06 §11 の v0.2.9 表） |
+| GA-02 | HIGH | 05:233-236; 05:414-442; 05:565-571 | consumerの証明書をSkillActionIdだけで照合し、実際に使用する契約本文のSkillDefinitionHashへ結び付けていない。 | CONFIRMED | HIGH | 正確 | fold（05 §13 / 06 §11 の v0.2.9 表） |
+| GA-03 | HIGH | 05:183-191; 05:230-234; 05:558-577 | 開始条件の検証からCASまでの待機中にBeliefRefが失効しても、過去の成功reportで制御移譲できる。 | CONFIRMED | HIGH | 正確 | fold（05 §13 / 06 §11 の v0.2.9 表） |
+| GA-04 | HIGH | 05:191,240,292; 06:75-100,255-260,507,531 | 物理セル単位であるべき停止が構成全体のcell_identity_hashに束縛され、同じ設備の別profileへ伝わらない。 | CONFIRMED | MEDIUM | 正確 | fold（05 §13 / 06 §11 の v0.2.9 表） |
+| GA-05 | MEDIUM | 05:249,292; 06:529,538,540 | log headがPROPOSEDの場合、停止イベントの対象hashが活性leaseのACCEPTED recordを指さない。 | CONFIRMED | MEDIUM | 正確 | fold（05 §13 / 06 §11 の v0.2.9 表） |
+| GA-06 | MEDIUM | 05:251,712; 05 §3.8 証明E / §10 T-16 | 合法なMARK_BOUNDARY_WAITの成功が、全CAS成功でepochを増やすINV-02と矛盾する。 | CONFIRMED | LOW | 正確 | fold（05 §13 / 06 §11 の v0.2.9 表） |
+| GA-07 | MEDIUM | 05:191 (l); 06:514-527,539 | CLOCK_DRIFTの許容を参照する判定に対し、baselineのdiagnostic_itemsには周期と検出時間しか定義されていない。 | CONFIRMED | MEDIUM | 正確 | fold（05 §13 / 06 §11 の v0.2.9 表） |
+
+- refuted は適用しない（理由 = `review_records/VERIFY_V9_GA_v028_20260906.md`）。前提の訂正表 = `review_records/rs_consult/A_GPTastra_20260906_premise_check.md`。v0.2.9 本文への再レビュー・再 verify は未実施。open = 0 は宣言しない。
+
+### 12.1 手続・機械検査（2026-09-06 08:43 UTC・`date -u` 実測）
+
+- 外部 reviewer（GPT-astra）の verdict = **HOLD**（HIGH 4 / MEDIUM 3・受理阻害 = GA-01〜04）。回答は 2026-09-06 08:10 UTC に Rs が貼付、一式（zip sha `ce2364cb…fdd8`・7 entry・内部 SHA256SUMS 全一致）を逐語保存（commit `72fb4a04`）。reviewer が宣言した pin（commit `0c6f11c9`・05 blob `ce176b43…` / 06 blob `b796830d…`・sha256 `2e508b4e…` / `45212f20…`）は CC が repo で再測し一致（`git rev-parse` / `git show | sha256sum`）。reviewer は原本の sha 再計算・pin script・checker を**実行していない**と自己申告（手続上の HOLD と内容上の HOLD を分ける、との指摘どおり扱う）。
+- Claude verifier V9（3 lens・反証優先・別 context）は 08:13–08:35 UTC に v0.2.8 本文で全 7 件を判定: **7/7 CONFIRMED・前提 7/7 正確**（行番号の 1 行ずれ 2 箇所 = 06:531→532・06:529→530、主張に影響なし）。severity: GA-01 / 02 / 03 = HIGH（維持）、GA-04 = HIGH → MEDIUM（SAFE_STOP clearance・identity check 等の緩和層あり）、GA-05 / 07 = MEDIUM（維持）、GA-06 = MEDIUM → LOW（本文は epoch 不変で一貫・不変量 / 証明 / test の文言矛盾）。V9 が加えた変種: GA-01 = manager が可読でも heartbeat 欠落が `command_deadline_s` 内に復帰すると (ii) が再開し得る（SAFETY CAS 未線形化）→ `stop_latch` の解除条件を SAFETY CAS の線形化観測に固定；GA-02 = 未登録 definition も同 ActionId で通る。
+- verifier が reviewer の fix を具体化 / 置換したもの（fold はこちらに従う）: GA-01 = 局所 `stop_latch`（(i′) 発火で True・解除 = seq > latch 時観測 seq の SAFEHOLD state を線形化読み）+ (ii) の再開禁止 + gateway の報告義務；GA-02 = 条件 8 / 6・permit 前提 (n)・§6.2 B4 の definition_c 解決規則・`InitializationRecord.definition_hash_used`・INV-14 / 15（frozen certificate / report に field を足さない・既存 code `R_INVOCATION_INVALID` / `R_AUTHORITY_DECISION_MISBOUND`）；GA-03 = `CommitPermit.start_belief_ref` / `belief_valid_until_mono` を `effective_expires_at` の min に含め、条件 2 / 5・INV-35 で CAS 時に再検査（06 P_TIMEOUT_ORDER への追加は不採用）；GA-04 = 兄弟停止の key を `(site_id, cell_id)` に（record に site_id / cell_id を追加・構成 hash は R4-09 の等値検査に残す）+ custody = OPP-18；GA-05 = 停止対象 = `supersedes_record_hash` を辿って最初に到達する ACCEPTED（PROPOSED 透過）・event は両 hash を運ぶ・再試行条件に profile_hash を戻す；GA-06 = INV-02 / P5 / 証明 E / T-16 を CasKind 別に（MARK は epoch 不変）；GA-07 = baseline に `clock_drift_tolerance_s` slot・(l) の比較量 / 基準対 / 判定を明示・`P_BASELINE_INCOMPLETE` で未解決を拒否。
+- fold 後の機械検査（checker は不変・v0.2.8 の Q2 / Q3 のまま）:
+
+```text
+== 05_WMSO_RUNTIME_SPEC_v0.2_REVIEW_CANDIDATE_20260903.md: citations=154 FAIL=0 WARN=11
+== 06_WMSO_INDUSTRIAL_PROFILE_v0.2_REVIEW_CANDIDATE_20260903.md: citations=65 FAIL=0 WARN=26
+== 02_FIELD_OVERLAP_AND_HOME_MATRIX_20260903.csv: citations=83 FAIL=0 WARN=0
+== 03_IDENTITY_HASH_EVIDENCE_IMPACT_MATRIX_20260903.csv: citations=35 FAIL=0 WARN=0
+== 04_EVIDENCE_POLICY_IMPACT_ASSESSMENT_20260903.md: citations=18 FAIL=0 WARN=7
+== 07_SUCCESSOR_CONTRACT_DECISION_20260903.md: citations=24 FAIL=0 WARN=11
+== 08_INDEPENDENT_REVIEW_PLAN_20260903.md: citations=6 FAIL=0 WARN=0
+```
+
+- Rs の確認を要する事項（外部 reviewer「Rs が決める事項」+ V9）: (1) 物理 cell の安定 id `(site_id, cell_id)` の発行主体・改名 / 別名の custody・cell 全体の停止と解除の管理主体（OPP-18・暫定 = baseline registry と同じ custody で一意）；(2) manager 不読時の (iii) 既定（R7-04 = `last_disposition` 保持 / 常時 SafeStop）は依然 Rs 項目 — ただし「既に発火した (i′) の Stop を失わない」は GA-01 で本文に置いた（裁定の別軸）；(3) `clock_drift_tolerance_s` の値と時計対応の前提（OPP-16）；(4) 外部 reviewer の指摘した検証上の盲点 3 点（記述の存在 ≠ 検証対象の一致・時系列をまたぐ結合・構成 hash ≠ 操作対象 id）は 08 §5 の手続に「反例の期待結果を修正前に固定する trace 検証」を足すか = Rs / two-key 設計の判断。
+- 主張しないこと: v0.2.9 本文への再レビュー（Claude round・外部）は未実施。外部 reviewer の HOLD は v0.2.8 に対する判定で、v0.2.9 で「解消した」とは本記録は主張しない（再検証は同じ commit / 原本 sha を対象に行う）。two-key・gate PASS・Rs 裁定ではない。
+
+## 13. Review anchors
 
 1. 各 reviewer の pin 再測と checker 実行は各報告 §0 に自記 — `review_records/AXIS_*_review_*.md`。
 2. verifier の lens 別理由と sed 引用 — `review_records/VERIFY_*_*.md`。

@@ -1,0 +1,37 @@
+{
+ "GA-01": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "merged_into": ""
+ },
+ "GA-02": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "merged_into": ""
+ },
+ "GA-03": {
+  "confirmed": true,
+  "severity": "HIGH",
+  "merged_into": ""
+ },
+ "GA-04": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "GA-05": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "GA-06": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "GA-07": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ }
+}
