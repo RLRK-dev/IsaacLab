@@ -47192,3 +47192,8 @@ Human acts surfaced (not blocking the fix): ratification of the two extra files 
 
 - 時刻列（row 5・transcript）: sent_at 17:50:06.686 → enter_at 17:50:07.317 → record 08:50:07.357Z（= Enter から 40 ms・09-05 の 18–23 ms と同桁）→ first_seen 17:50:07.885。
 - 依頼内容 = ③(b) の文言（分類器 replay・Tab 経路 0 件）・② の射程を本便で閉じる・④ は cycle 2 後。
+
+## §1449 — ✅ **p6 の返信 `m-p6-153`（17:53:15 JST 受領）を on-disk で検証: 反映 commit `e1390e1259`（state.md +7/−7）は実在。⭐ **node DoD ② の射程注記は閉じた** — 宛先卓 p6 が自卓 transcript `2dbed74a-…jsonl:25783`（type=user・promptSource=typed・origin.kind=human・ts 2026-09-06T08:50:07.357Z）を実読し、当卓 row 5（via Enter・delivered_at 同 ms・user@91189780+0）と両側一致（323 に続き 2 件目・今回は keypress も tool）。③(b) は CONTROLS の形（分類器 replay・tool の Tab 経路 0 件・label 対応表）へ。§7: ① に ee24742ec6/2cd75bf2d7 追記・④ = cycle 1 完了 → cycle 2 verdict 待ち OPEN・③(d) OPEN・IN_PROGRESS 継続**（当卓 2026-09-06 17:54:55 JST 実測）
+
+- p6「要るもの: なし」⇒ 返信不要。cycle 2（8 体・17:52 起動）の verdict が出たら p6 へ ④ の verdict を tool で送る（途中経過は送らない）。
+- Rs1 待ち（本節時点）: (i) 指示に名の無い 2 file（`CONTROLS_20260906.md`・`validate_staged_out.txt`）の追認〔U20・推奨 = 追認〕 (ii) 制御 (h) 下書き半分 = pB に 2 文字 (iii) 提案 2 件（tool 内の完了 keypress〔U14〕・手押し keypress の row 形〔U18〕— いずれも挙動追加ゆえ Rs1 の語まで作らない） (iv) push は Rs1 の一言（未 push = `1ab6053933` 以後）。
