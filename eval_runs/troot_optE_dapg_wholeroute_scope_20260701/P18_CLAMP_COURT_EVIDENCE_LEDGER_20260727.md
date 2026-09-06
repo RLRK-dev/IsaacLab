@@ -47106,3 +47106,9 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - **制御**: (a) copy（`by_hand_20260905/CONTROL_A_20260905.md`）／(b) replay 15 件 = **ABSORBED(unacked) 9・DELIVERED 4・DELIVERED(fused) 1（292@pZ 位置 920）・DELIVERED(turn_end) 1（304@p4）** = CC4 の分類と一致（`CONTROLS_20260906.md`）／(c) hub 自身（working）へ `--control` = HELD(working)・held row `m-p18-322`・送信 0／(g) COORD = refused(retired)・row なし／(d) = 次の実 message が working 卓に当たった時に `resend --id`／(h) 下書き半分 = Rs1 の 2 文字（pB）待ち。
 - **記録**: `sent_records.jsonl`（init 行＋held 行）・`bodies/.floor`・`by_hand_20260905/`（35 file: sent.jsonl 59 行・body 31・verify 2・CONTROL_A）。memory per-pane file に「送信は hub_send.py のみ」を追記。
 - 次 = 層2 事後 debate（5 体・on-disk）＋ 層5 三視点（3 体・dry_run）→ DoD bank → p6 へ node 反映（② の文言・(d) 未了は IN_PROGRESS 継続）→ Rs1 報告。未 push = 19。
+
+## §1444 — ▶ **層2/層5 起動（09:26・8 体）→ 7 体が session 上限（13:00 解除）で落ち、層5 view 1（SSOT 整合・opus）のみ完了（09:31）: FAIL 2 = `dim_only` が truecolour/256 色の SGR を dim と誤読（下書きを ghost と誤分類 — 送信後 gate で keypress 前に止まるが row の kind が偽になる）／`verify --always_write` = 認可外の CLI 引数（CLAUDE.md:46）。ほか held 文字列の二重包み・floor query の自己参照（仮想 id を数える・dry-run で 999）・node ② は tool の実配達が未・③(b) の文言と replay 結果（6/15 が最終的に DELIVERED）の不整合。⇒ **当卓が修正 = `6e91c3295d`（dim を SGR parameter list で判定・`--always_write` 削除・held 文字列・floor は配達済 head 行のみ）＋ `f422f92ad0`（E501 修正・hook 全 pass）**。push = 09:35（18 commits・fork == HEAD `1ab6053933`）**（当卓 09-06 17:1x 実測）
+
+- 修正後の実測: dim_only = true dim True／truecolour・256 色・bold・plain False／`init --dry_run` = 322（head 行のみ）。hook 3 pass 全 Passed・copy-back sha 一致（`92061f21…`・674 行）。
+- **tool による初の実配達**（node ② の証拠）: p6 宛 node 反映依頼を `hub_send.py send --to PLAN-KEEPER` で送信 — 結果は sent_records.jsonl 行 3（本節の command 出力に貼付）。
+- 次: 7 体を再起動（bundle 更新 @ HEAD・view 1 を PART F に同梱）→ DECIDE → DoD bank。
