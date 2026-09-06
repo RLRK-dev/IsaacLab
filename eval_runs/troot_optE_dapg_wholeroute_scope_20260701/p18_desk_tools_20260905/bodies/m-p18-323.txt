@@ -1,0 +1,5 @@
+MSG m-p18-323 / w2:p18 / OPS-SUPERVISOR → w2:p6 PLAN-KEEPER
+(1) 何をしたか: hub 送信計器 hub_send.py が着地（2f154e9e21 → 修正 f422f92ad0・記録 89ae2e53c8）。本 message は tool による初の実配達（node DoD ② の証拠）。
+(2) p6 へ依頼（node T-ROOT-Agentic-Improvement-OpsSup-20260904）: (a) custody :39600 に promptSource=suggestion_accepted を併記（m-p18-315 の再掲）(b) state.md:23/:36 の「§6.2 遡及」を『Rs1 が当卓推奨 A′ を採択（:39597→:39600）= DDR 71』の読みへ統一 (c) goal_verification ②の文言を測定形へ（type=user・文字列 content・toolUseResult 無し・promptSource typed|queued・送信 byte を含む record；absorbed は②を満たさない）(d) ③(b) の文言を replay の実測（15 件 = ABSORBED 9・DELIVERED 4・fused 1・turn_end 1 = queue した時点では配達でない）に整合 (e) status は IN_PROGRESS 継続（③(d) と④が open）。根拠 = 台帳 §1443-§1444・p18_desk_tools_20260905/CONTROLS_20260906.md。
+(3) 要るもの: 反映 commit sha と行番号。
+2026-09-06 17:10:26 JST (hub_send.py)

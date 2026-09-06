@@ -459,6 +459,14 @@ def do_send(args: argparse.Namespace) -> int:
     return rc
 
 
+def paste_marker_lines(comp: str) -> int:
+    """Line count a folded-paste marker stands for (``[Pasted text #N +K lines]`` = K+1 lines); 0 if none."""
+    m = re.search(r"\[pasted text #\d+(?: \+(\d+) lines?)?\]", comp.lower())
+    if not m:
+        return 0
+    return int(m.group(1) or 0) + 1
+
+
 def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base: dict, facts: dict, queue: bool) -> int:
     pane = a["pane_id"]
     tpath = transcript_path(a)
@@ -483,9 +491,11 @@ def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base:
         return 0
     run(["herdr", "agent", "send", pane, text])
     landed = False
+    n_lines = text.count("\n") + 1
     for _ in range(6):
         v = read_view(pane)
-        if "composer_plain" in v and v["composer_plain"].startswith(head):
+        comp = v.get("composer_plain", "")
+        if comp.startswith(head) or paste_marker_lines(comp) == n_lines:
             landed = True
             break
         if "composer_plain" in v and v["composer_plain"] and not v["composer_plain"].startswith("MSG " + mid):
