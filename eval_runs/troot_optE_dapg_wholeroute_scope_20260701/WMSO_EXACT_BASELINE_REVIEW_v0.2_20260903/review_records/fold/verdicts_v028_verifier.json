@@ -1,0 +1,222 @@
+{
+ "R7-01": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R7-02": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R7-03": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R7-04": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R7-05": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R7-06": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R7-07": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R7-08": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R7-09": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R7-10": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R7-11": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R7-12": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R7-13": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R7-14": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R7-15": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R7-16": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R7-17": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R7-18": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R7-19": {
+  "confirmed": false,
+  "severity": "NOT_A_DEFECT",
+  "merged_into": ""
+ },
+ "R8-01": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R8-02": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-03": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R8-04": {
+  "confirmed": false,
+  "severity": "NOT_A_DEFECT",
+  "merged_into": ""
+ },
+ "R8-05": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R8-06": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-07": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R8-08": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R8-09": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R8-10": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-11": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-12": {
+  "confirmed": true,
+  "severity": "MEDIUM",
+  "merged_into": ""
+ },
+ "R8-13": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-14": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-15": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-16": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-17": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-18": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-19": {
+  "confirmed": false,
+  "severity": "NOT_A_DEFECT",
+  "merged_into": ""
+ },
+ "R8-20": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-21": {
+  "confirmed": false,
+  "severity": "NOT_A_DEFECT",
+  "merged_into": ""
+ },
+ "R8-22": {
+  "confirmed": false,
+  "severity": "NOT_A_DEFECT",
+  "merged_into": ""
+ },
+ "R8-23": {
+  "confirmed": true,
+  "severity": "LOW",
+  "merged_into": ""
+ },
+ "R8-24": {
+  "confirmed": false,
+  "severity": "NOT_A_DEFECT",
+  "merged_into": ""
+ },
+ "R8-25": {
+  "confirmed": false,
+  "severity": "NOT_A_DEFECT",
+  "merged_into": ""
+ }
+}

@@ -1,7 +1,7 @@
 # WMSO v0.2 レビュー package — 利用者向け要約（日本語）
 
-- 記録 = 2026-09-05 23:33 UTC（`date -u` 実測・v0.2.7 で更新）。本 file は package の読み方の案内であり、規範文書ではない。
-- 状態: **REVIEW CANDIDATE v0.2.7・未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない**。impl / training / closed-loop authority / production / freeze / slice = CLOSED のまま。
+- 記録 = 2026-09-06 00:31 UTC（`date -u` 実測・v0.2.8 で更新）。本 file は package の読み方の案内であり、規範文書ではない。
+- 状態: **REVIEW CANDIDATE v0.2.8・未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない**。impl / training / closed-loop authority / production / freeze / slice = CLOSED のまま。
 
 ## 1. 何が入っているか
 
@@ -10,13 +10,13 @@
 | `01_BASELINE_CUSTODY_VERIFICATION_20260903.md` + `verify_exact_baseline_pins.sh` + `09_BASELINE_PIN_20260903.json` | 凍結 4 file（contracts_v2 DESIGN v2.11.2・EP v1.9 md / JSON・tensor_binding DESIGN v13）の exact pin と再測手順（11/11 PASS） |
 | `02_…csv` / `03_…csv` | 旧 v0.1 の項目が凍結物と重なるか（home matrix）／ 変更 class が hash 面を動かすか（identity impact） |
 | `04_…md` | EP v1.9 は不変（definition hash 不変）という影響評価 |
-| `05_WMSO_RUNTIME_SPEC_…md` | **runtime spec v0.2.7**（boundary-only・TERMINAL boundary・checkpoint 切替なし。AuthorityManager / CommandGateway / CAS / lease / SafeHold / audit） |
-| `06_WMSO_INDUSTRIAL_PROFILE_…md` | **industrial deployment profile v0.2.7**（cell 固有条件を content-addressed にし、凍結意味論を狭める方向にしか使えない） |
+| `05_WMSO_RUNTIME_SPEC_…md` | **runtime spec v0.2.8**（boundary-only・TERMINAL boundary・checkpoint 切替なし。AuthorityManager / CommandGateway / CAS / lease / SafeHold / audit） |
+| `06_WMSO_INDUSTRIAL_PROFILE_…md` | **industrial deployment profile v0.2.8**（cell 固有条件を content-addressed にし、凍結意味論を狭める方向にしか使えない） |
 | `07_…md` | 後継静的契約は今は作らない（`contracts_v3` は静的意味論の認証時のみ）という判断 |
 | `08_…md` | 3 軸独立レビュー計画（contract / runtime / deployment） |
 | `10_…md` + `review_records/PC_*` | 陽性対照（欠陥を注入した複製で計器を検証。7/8 検出・盲点は checker O3 で機械化） |
-| `11_THREE_AXIS_REVIEW_RECORD_20260903.md` + `review_records/AXIS_*` / `VERIFY_*` | **3 軸レビューの実施記録**（round 1: reviewer 5 体・verifier 5 体・80 finding／ round 2（v0.2.3 再レビュー・§7）: reviewer 2 体・verifier 2 体・35 finding／ round 3（v0.2.5 再レビュー・§9）: reviewer 2 体・verifier 2 体・41 finding／ round 4（v0.2.6 再レビュー・§10）: reviewer 2 体・verifier 2 体・35 finding） |
-| `review_records/fold/*` | v0.2.1 → … → v0.2.7 の fold を再現する script と verifier verdict の JSON |
+| `11_THREE_AXIS_REVIEW_RECORD_20260903.md` + `review_records/AXIS_*` / `VERIFY_*` | **3 軸レビューの実施記録**（round 1: reviewer 5 体・verifier 5 体・80 finding／ round 2（v0.2.3 再レビュー・§7）: reviewer 2 体・verifier 2 体・35 finding／ round 3（v0.2.5 再レビュー・§9）: reviewer 2 体・verifier 2 体・41 finding／ round 4（v0.2.6 再レビュー・§10）: reviewer 2 体・verifier 2 体・35 finding／ round 5（v0.2.7 再レビュー・§11）: reviewer 2 体・verifier 2 体・44 finding） |
+| `review_records/fold/*` | v0.2.1 → … → v0.2.8 の fold を再現する script と verifier verdict の JSON |
 | `check_review_candidate.py` / `SHA256SUMS.txt` | 機械検査（FAIL = 0 が要件）／ content sha（版 label でなく sha で引く） |
 
 ## 2. レビューの結果（事実・数値は 11_ §2 から）
@@ -35,13 +35,14 @@
 - **Rs 裁定（2026-09-04・§11 §8）**: 残っていた Rs 確認事項 4 件（OPP-15 / OPP-11 / OPP-13 / OP-19）は外部 AI（GPT5.6sol）の推奨を Rs が全件採用し v0.2.5 に fold。主な追加: DUAL-ARM cell の base transform と arm 間制約（`CellKinematicLayoutRef` / `InterArmRestrictionSet`・INTER_ARM 項）、timeout の絶対上限を外部 `CellSafetyTimingBaseline` で検査（`P_TIMEOUT_CEILING`）、permit の実効失効（decision age を CAS で再検査）、append-only `ProfileRegistry`（CLOSED_LOOP 受理 = two-key・SUSPENDED = one-key）、活性 lease の `validity_deadline_mono` + event 無効化（`SafeHoldReason.VALIDITY_EXPIRED`）。
 - **round 3（v0.2.5 → v0.2.6・§11 §9）**: reviewer R3（runtime spec）22 件 + R4（industrial profile）19 件 = 41 件。verifier V3 / V4 が 39 件 confirmed・2 件 refuted（R3-15・R4-19）。confirmed 分を v0.2.6 に fold。主な変更: INTER_ARM 項を「同一 command の両腕提案線分の対」で評価（`GatewayCommand.arm_targets`）、content hash 照合の列挙を 06 §2.1 の全 hash field に一致させ checker Q2 で機械検査、negative control を `DeploymentEvidencePolicy.negative_controls` で執行、two-key を閉じた role 語彙 + operator 相異 + role registry で機械検査、`validity_deadline_source` と VALIDITY_EXPIRED の disposition 表、manager 側 head-check（monitor 非依存）、clock 異常検査 `R_CLOCK_ANOMALY`、BASE_POSE_VERIFY、baseline の cell 束縛と supersession。
 - **round 4（v0.2.6 → v0.2.7・§11 §10）**: reviewer R5（runtime spec）14 件 + R6（industrial profile）21 件 = 35 件。verifier V5 / V6 が 34 件 confirmed・1 件 refuted（R5-11）。confirmed 分を v0.2.7 に fold。主な変更: SHADOW lease も deadline / event / head-check で無効化（mode を問わず・保守側に統一）、head-check 行を副場合ごとに fault / disposition まで total 化、permit 前提条件 (m)（監視系の生存）、`safehold_disposition` を lease 活性時に reset、`R_AUDIT_UNAVAILABLE`（記録が先）、CAS 条件の境界を厳密化、FAULT payload の trigger 語彙を SSOT 化（`FaultInjectionRequirement.trigger`）、gripper finger geometry（RS71 §0 #4）を `finger_geometry_sha256` で束縛（`P_TOOL_GEOMETRY_MISMATCH`）、`P_FAULT_EVIDENCE_UNVERIFIED` の subject 文法、one-key SUSPENDED record の検査分離、role registry（1 head）と clearance record の資格照合、`base_pose_tolerance_*` / `max_validity_s`、REQUIRED_DIAGNOSTIC_ITEMS（`P_BASELINE_INCOMPLETE`）、登録 = PROPOSED record の文脈、checker Q2 の強化。
-- **v0.2.7 本文への再レビュー・再 verify は未実施**（次 round）。round 1→2→3→4 で HIGH は 5 → 3 → 5 → 2（round 4 の HIGH 2 = R6-01 finger geometry・R6-04 one-key record、両方 fold 済）。「open = 0」は宣言しない（05 §12・06 §10 に open が残る）。
+- **round 5（v0.2.7 → v0.2.8・§11 §11）**: reviewer R7（runtime spec）19 件 + R8（industrial profile）25 件 = 44 件。**HIGH 0**（初めて）。verifier V7 / V8 が 37 件 confirmed・7 件 refuted（R7-19・R8-04 / 19 / 21 / 22 / 24 / 25 — Rs 専権の設計選択や既知 defer で本文欠陥ではないもの）。confirmed 分を v0.2.8 に fold。主な変更: head-check を owner を問わず周期実行（SAFEHOLD からの permit deadlock を閉じる）、authority head（PROPOSED を除く）の定義、role registry の supersession 検出（同一 batch の SUSPENDED 義務 + head-check (f)）、manager 不読時に SafeStop を保持する gateway 局所 `last_disposition`、`arm_targets ⊆ lease.ownership` の admission 節、`P_VALIDITY_UNBOUNDED` の 3 節化（CalibrationRef 側の評価不能を解消）、MIN_FAULT_INJECTION を (code, trigger) で列挙、baseline registry head の書込時 / permit / CAS 照合、`P_ACCEPTANCE_RECORD_INVALID` の PROPOSED / generation 規則の統一、SHADOW 受理の資格照合、role 語彙検査を `P_CLEARANCE_ROLE_MISSING` へ、第 1 評価点を閉じた list に（checker Q3）、期限境界の統一。
+- **v0.2.8 本文への再レビュー・再 verify は未実施**。round 1→5 で HIGH は 5 → 3 → 5 → 2 → 0。「open = 0」は宣言しない（05 §12・06 §10 に open が残る。round 5 の起草既定 = 11_ §11.1 末尾）。「open = 0」は宣言しない（05 §12・06 §10 に open が残る）。
 - 前 package（v0.1）は本 sandbox に無く、handoff 決定から再構成した（01 §で honest に記録）。judge panel（3 draft × 2 judge）は session 上限で未実施。
 - 凍結 4 file には触れていない（pin 再測 11/11 PASS）。schema delta 0。
 
 ## 4. 次に人が判断すること（提案・Rs 専権）
 
-1. v0.2.7 を two-key review（pS / pY）に回すか、先に v0.2.7 対象の AI 再 round を 1 回挟むか（round 4 は 35 件中 34 件が確定・HIGH 2 = 減ったが 0 ではない。再 round 1 回を推奨）。
-2. round 4 で起草既定として置いた値・選択の確認（11_ §10.1 末尾に一覧: head-check 副場合の disposition・`P_VALIDITY_UNBOUNDED` の kind 集合・base pose 許容 / validity 上限の値・identity 系 diagnostic item の必須化・role registry head の発行者・gateway の audit 同期 block）。
+1. v0.2.8 を two-key review に回す（Rs 決定 2026-09-05: 外部 AI（GPT-astra）の独立レビューを two-key 判断の材料にする — 依頼文 = `review_records/rs_consult/Q_GPTastra_*.md`・v0.2.8 に pin。round 5 で HIGH = 0 に到達したため AI 再 round は一旦止める）。
+2. round 4 / 5 で起草既定として置いた値・選択の確認（11_ §10.1 / §11.1 末尾に一覧: head-check 副場合の disposition・`P_VALIDITY_UNBOUNDED` の kind 集合・base pose 許容 / validity 上限の値・identity 系 diagnostic item の必須化・role registry head の発行者・gateway の audit 同期 block）。
 3. 裁定後に残る open: OPP-16（timing baseline の発行主体 = RT0 / cell safety court と値の根拠）・OPP-17 / 05 OP-21（「every motion で両腕」の実行適合性は composition court）・OPP-13 の role 実名（pS / pY 等の割当）・OP-19 の周期診断項目（baseline の diagnostic_items）。
 4. `contracts_v3` を起票しない判断（07）の追認。

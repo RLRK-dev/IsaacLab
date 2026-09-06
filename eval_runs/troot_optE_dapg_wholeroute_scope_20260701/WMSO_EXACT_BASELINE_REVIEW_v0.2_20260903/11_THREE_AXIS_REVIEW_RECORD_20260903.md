@@ -345,7 +345,85 @@ $ python3 check_review_candidate.py 03_IDENTITY_HASH_EVIDENCE_IMPACT_MATRIX_2026
 
 - 起草既定として fold し Rs の確認を要する値・選択（06 OPP-16 / 05 OP-19 に記載）: head-check 副場合 (c) monitor 喪失 / (d) 診断失敗の disposition = HOLD；`P_VALIDITY_UNBOUNDED` の kind 集合（CEM・停止性能 FI を含む）；`base_pose_tolerance_*` / `max_validity_s` の値；identity 系 diagnostic item の必須化；role registry head の発行者 / ACL（OPP-13）；gateway の `COMMAND_ADMITTED` append 不能時の同期 block（05 OP-5 note）。
 
-## 11. Review anchors
+## 11. v0.2.7 再レビュー round 5（R7 / R8 → V7 / V8）— 記録 2026-09-06 00:30 UTC
+
+- 対象 = v0.2.7（commit `f1393050`）。reviewer R7（05 primary）/ R8（06 primary）は前 round の fold 表の全行の回帰 + 新規反証の 2 pass。verifier V7 / V8（3 lens・別 context）が全 finding を判定。AI レビューであり human two-key ではない。裁定済みの設計方針そのものは finding にしない。
+
+| reviewer | 対象 | finding | verifier | confirmed | refuted | 重複 |
+|---|---|---|---|---|---|---|
+| R7 | 05 | 19 | 19 | 18 | 1 | 0 |
+| R8 | 06 | 25 | 25 | 19 | 6 | 0 |
+| **計** | | 44 | | 37 | 7 | 0 |
+
+| id | sev（reviewer） | 対象 doc:line | 内容（要約） | verifier | sev（verifier） | 処置（v0.2.8） |
+|---|---|---|---|---|---|---|
+| R7-01 | MEDIUM | 05:191 (m); 05:292 (head-check row from = 'any (EXECUTOR)'); | Permit precondition (m) (v0.2.7 R5-03) requires 'the most recent head-check succeeded within its period' and '… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-02 | MEDIUM | 05:292 (a) sub-cases and sub vocabulary; 05:191 (i) 'head re | The head-check row (a) enumerates only head.state ∈ {SUSPENDED, REVOKED} and 'new-generation ACCEPTED', but 06… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-03 | MEDIUM | 06:529 (role registry head change: '認可された一者または monitor が … a | The role registry introduced in v0.2.7 (R6-05/R6-06) is a hard gate at permit issuance, CAS and clearance, but… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-04 | MEDIUM | 05:520 ((iii) SafeStop branch requires linearized read of sa | Output priority (iii) emits SafeStop only when the linearized read shows state.safehold_disposition == SAFE_ST… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-05 | MEDIUM | 05:82 (admission conjuncts — no ownership term); 05:508 (Gat | The CommandGateway admission never checks that the resources a command proposes (arm_targets[].resource_id) ar… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-06 | MEDIUM | 06:298 (P_VALIDITY_UNBOUNDED upper-bound term 'valid_until − | The v0.2.7 upper-bound term added to P_VALIDITY_UNBOUNDED (R6-11) needs measured_at, but CalibrationRef carrie… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-07 | MEDIUM | 06:391 (bare R_SAFETY_LAYER_LOST, R_BOUNDARY_DWELL_EXCEEDED  | MIN_FAULT_INJECTION still lists R_SAFETY_LAYER_LOST and R_BOUNDARY_DWELL_EXCEEDED as bare codes while the same… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-08 | LOW | 05:745 INV-35 ('decision age ≤ decision_max_age_s'); 05:717  | The R5-07 strict-boundary fold did not reach INV-35 (still ≤ while cond 6 / (e) use <) or INV-07 (≥ admits a p… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-09 | LOW | 05:292 ('sub = SUSPENDED ／ REVOKED ／ GENERATION_SUPERSEDED ／ | The v0.2.7 head-check row introduces a FAULT payload element 'sub' with its own vocabulary and writes (e) as '… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-10 | LOW | 05:191 (b) (all 06 §8.1 (2) codes → R_PROFILE_MISBOUND) vs 0 | Two fault codes can be produced for one condition: role_registry_hash ≠ current head is both a P_ACCEPTANCE_RE… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-11 | LOW | 05:249 ('event は profile_hash + acceptance_record_hash を運び、再 | The profile-scoped retry predicate compares only profile_hash although the event carries acceptance_record_has… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-12 | LOW | 05:249 ('要求される clearance の和集合を CAS_ATTEMPT payload に記録する');  | For same-tier / same-reason no-op transitions the union of required clearances is recorded but never consumed:… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-13 | LOW | 05:191 (l) ('wall_now が直前の PERMIT_ISSUED の wall より単調'); 05:3 | Clock-sanity clause (l) reads the previous PERMIT_ISSUED record from the audit stream at permit time; while th… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-14 | LOW | 05:143 (genesis record binds profile_hash 'この genesis が権限づける | The genesis record's profile_hash (R2-15) and GENESIS role are bound but never checked: no permit/CAS conditio… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-15 | LOW | 05:191 (i) ('timing_baseline_hash の artifact を解決して再検証' — con | (i) and cond 12 compare the profile-registry head and the role-registry head but not the baseline-registry hea… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-16 | LOW | check_review_candidate.py:186-195 (Q2 counts matches in the  | Q2 (strengthened for R6-13) counts a hash field as 'named in (j)' even when its only mention is inside the exc… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-17 | LOW | 06:3 (header lists v0.2.1–v0.2.6 timestamps, no v0.2.7); 06: | Freshness residue: the 06 header omits the v0.2.7 timestamp although §11 records it, and 05 anchor 23 still cl… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-18 | LOW | 05:327 (R_MANAGER_UNAVAILABLE row disposition: 'manager 復帰時に | For a link-only outage (manager not restarted) nothing issues the TRANSFER_TO_SAFEHOLD(MANAGER_RESTART) CAS th… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R7-19 | LOW | 05:191 (i) / 05:240 / 05:292 (a) (sibling clause includes RE | Because the sibling clause covers REVOKED (terminal) and the registry has no non-safety 'retired' state, a pro… | refuted | NOT_A_DEFECT | 適用せず |
+| R8-01 | MEDIUM | 06:288; 06:428; 06:528; 06:530; 05:191 (i); 05:240; 05:292 ( | The baseline registry got a head (R6-10) but, unlike the role registry (R6-05), neither ProfileAcceptanceRecor… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-02 | MEDIUM | 06:68; 06:125-126; 06:298; 06:315; 06:345; 06:363; 06:368; 0 | RS71 §0 #4 (finger geometry LOCK) is now bound only as a declaration-vs-pin equality at registration (P_TOOL_G… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-03 | MEDIUM | 06:82-83; 06:99; 06:313; 06:513-514; 06:428 | P_BASE_LAYOUT_MISMATCH compares layout[base_transform_id] (expressed in the profile-chosen base_frame_ref) aga… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-04 | MEDIUM | 06:68; 06:531; 06:314; 05:191 (m); 05:292 (d); 05:112-113 | REQUIRED_DIAGNOSTIC_ITEMS makes the four identity checks (incl. BASE_POSE_VERIFY = measured base pose vs layou… | refuted | NOT_A_DEFECT | 適用せず |
+| R8-05 | MEDIUM | 06:428; 06:522; 06:530; 06:532; 05:191 (i); 05:292 (a); 06:3 | The registry state machine defines PROPOSED only as the initial state, yet 06:530 admits a PROPOSED record wit… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-06 | MEDIUM | 06:287; 06:428; 06:522; 06:532; 06:288 | R6-09 fold residual: the baseline-dependent P_TIMEOUT_ORDER term (max_reselect_attempts × worst_case_attempt_s… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-07 | MEDIUM | 06:298; 06:202-206; 06:428; 06:388; 06:512 | P_VALIDITY_UNBOUNDED's upper-bound clause `valid_until − measured_at > baseline.max_validity_s[kind]` is appli… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-08 | MEDIUM | 06:299; 06:289; 06:390-393; 06:400; 06:428 | R6-20 fold side-effect: the clause 'FI record は加えて detection_to_safehold_worst_case_s ≥ max(t_mono(DISPOSITION… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-09 | MEDIUM | 06:390-395; 06:300; 06:320; 06:296; 05:702; 05:339; 05:283 | R6-03 fold residual: MIN_FAULT_INJECTION still lists the timeout-driven codes bare (R_SAFETY_LAYER_LOST, R_BOU… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-10 | MEDIUM | 06:293; 06:296; 06:299; 06:363-364; 06:396-399 | Negative-control vacuity by audit-range reuse: the expected-content rows require only '≥ 1 件' of the expected … | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-11 | MEDIUM | 06:500; 06:523; 06:530 | Approval qualification is stated for all approvals (06:500 'role_registry で資格照合') but the P_ACCEPTANCE_RECORD_… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-12 | MEDIUM | 06:220; 06:292; 06:529; 06:261; 05:543 | The v0.2.7 rule 'clearance_roles の role 名は role registry が定義する語彙に限る（未知の role 名 = codec 拒否）' is placed in the c… | CONFIRMED | MEDIUM | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-13 | LOW | 06:428; 06:291-320 (checker: check_review_candidate.py:172-2 | The second evaluation point is a closed list, but the first is an umbrella ('構造・単調性・反循環・codec・' + 9 named code… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-14 | LOW | 06:295; 06:297; 05:230-231; 05:303 | Expiry boundaries are inconsistent after R5-07 made 05 strict: P_CALIBRATION_EXPIRED fires unless valid_until … | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-15 | LOW | 05:88; 05:292; 06:529; 06:346 | The role registry (new in v0.2.7) is not among the DeploymentValidityMonitor's minimum inputs and has no manag… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-16 | LOW | 06:289; 06:299; 06:363 | The v0.2.7 R6-15 text requires the stop-performance FI record's `load_condition_ref` to name both arms ('両 arm… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-17 | LOW | 06:89-96; 06:303; 06:305; 06:398-399 | ArmSpec uniqueness covers resource_id and gripper_resource_id only; robot_serial_ref, tool_id and tcp_offset_r… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-18 | LOW | 06:125-126; 06:315 | RS71 §0 #4 names two pinned assets (authoritative `_ur15_2f85_koshape_actuated.xml`, 16.00 mm; banked historic… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-19 | LOW | 06:293; 06:299; 06:68; 06:398-399; 06:310 | BASE_POSE_VERIFY is a mandatory kind, so a `<check_id>#NEGATIVE` HEALTH_CHECK_RUN (HEALTH_FAILED ∧ FAULT(R_HEA… | refuted | NOT_A_DEFECT | 適用せず |
+| R8-20 | LOW | 05:191 (m); 05:292; 05:343; 05:536 | Permit precondition (m) requires '直近の head-check が周期内に成功', but the head-check row is 'any (EXECUTOR)' and 05:3… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-21 | LOW | 06:346; 06:345; 06:73 | CALIBRATION(kind = FORCE_SENSOR) expiry maps to HOLD, yet the force sensor is the ISL's direct input for force… | refuted | NOT_A_DEFECT | 適用せず |
+| R8-22 | LOW | 06:367; 06:547; 05:543; 05:816 (OP-5) | Clearance records (05:543) and DeploymentEvidenceRecords (06:367) carry operator_ref as self-declared payload;… | refuted | NOT_A_DEFECT | 適用せず |
+| R8-23 | LOW | 06:133-142; 06:338; 05:460; 05:508 | WorkspaceRestriction / ZoneRef carry no arm scope, and the DEPLOYMENT_WORKSPACE evaluation text speaks of 'the… | CONFIRMED | LOW | fold（05 §13 / 06 §11 の v0.2.8 表） |
+| R8-24 | LOW | 06:523; 06:530 | Role requirements are non-monotone in privilege: a SHADOW-only acceptance needs COMMISSIONING + INDEPENDENT_RE… | refuted | NOT_A_DEFECT | 適用せず |
+| R8-25 | LOW | 06:130; 06:202-206; 06:249; 06:254; 06:289; 06:362; 06:449 | Cell-floor consequence: CalibrationRef.artifact_sha256 / valid_until sit inside the profile preimage, so every… | refuted | NOT_A_DEFECT | 適用せず |
+
+- refuted は適用しない（理由 = `review_records/VERIFY_V7_*.md` / `VERIFY_V8_*.md`）。v0.2.8 本文への再レビュー・再 verify は未実施（次 round）。open = 0 は宣言しない。
+
+### 11.1 手続・機械検査（2026-09-06 00:31 UTC・`date -u` 実測）
+
+- reviewer R7 / R8 は 2026-09-05 23:38–2026-09-06 00:03 UTC に v0.2.7（commit `f1393050`）を対象に実施（pin 11/11 PASS・checker FAIL=0 を読む前に自己実測）。verifier V7 / V8 は 00:04–00:26 UTC。
+- **round 5 の HIGH = 0**（reviewer 付値・verifier とも）。round 1→5 の HIGH = 5 → 3 → 5 → 2 → 0。verifier による severity 変更: R8-02 / R8-06 / R8-10 / R8-11 = MEDIUM → LOW。refuted 7 件 = R7-19（良性 REVOKED の兄弟停止 — acceptance 失効が良性の retirement 経路を既に与える・registry 意味論は Rs 専権）、R8-04（evaluator の観測専用性は 05 §2「actuation の唯一経路 = CommandGateway」から導出可能）、R8-19（negative control の誘発法 = evaluator registry の内容・impl 解錠後）、R8-21（FORCE_SENSOR 失効の class = 起草既定・Rs 項目）、R8-22（record 真正性は OP-5 / U14 の既知 defer）、R8-24 / R8-25（Rs 専権の設計選択 — 提案として記録可・本文欠陥ではない）。
+- verifier が reviewer の fix を置換したもの（fold script はこちらに従う）: R7-02 / R8-05 = **authority head**（state ≠ PROPOSED の seq 最大）を定義し fork 検出用の seq 最大 head と分離（PROPOSED = HOLD の副場合案は良性登録で lease を止めるため不採用）；R7-03 = role registry head の変更者に同一 batch の SUSPENDED append を義務化 + head-check (f)；R7-05 = 新 code でなく既存 `R_LEASE_UNKNOWN_COMMAND`（束縛不一致 class）；R7-06 / R8-07 = 新 field `measured_at` を足さず (a) None 検査 / (b) record 側上限 / (c) ref ≤ record の 3 節（profile preimage を広げない・V7 の代替案 = V8 の最小案）；R7-14 = genesis の profile_hash は provenance（permit 条件にしない — cell は複数 profile を走らせ得る）；R8-03 = 並進のみ・SSOT frame で比較（`_rad` は BASE_POSE_VERIFY に残す・相対変換案は値を doc に書くため不採用）；R8-08 = SafeHold 遷移を持つ timeout code に限定（R_PERMIT_EXPIRED / R_ACK_TIMEOUT / R_MANAGER_UNAVAILABLE は対象外）；R8-10 = 範囲の互いに素のみ（payload / 手順 ref は OPP-5 / RT0）；R8-12 = 新 code でなく `P_CLEARANCE_ROLE_MISSING` の拡張節；R8-23 = `arm_scope` field を足さず評価文 1 文；R8-02 = (c) の正直化と §9 #11 のみ（TPI の kind 集合は OPP-16・TOOL_IDENTITY の finger id 等値は不採用）。
+- fold 後の機械検査（`check_review_candidate.py`・v0.2.8 で Q2 を R7-16 に従い強化（除外節を除いて数え・allowlist = tensor_binding_hash）、Q3 を R8-13 に従い追加（§8.1 列挙の全 P_* が規則 (2) の評価点文に現れる））:
+
+```text
+== 05_WMSO_RUNTIME_SPEC_v0.2_REVIEW_CANDIDATE_20260903.md: citations=153 FAIL=0 WARN=11
+== 06_WMSO_INDUSTRIAL_PROFILE_v0.2_REVIEW_CANDIDATE_20260903.md: citations=65 FAIL=0 WARN=26
+== 02_FIELD_OVERLAP_AND_HOME_MATRIX_20260903.csv: citations=83 FAIL=0 WARN=0
+== 03_IDENTITY_HASH_EVIDENCE_IMPACT_MATRIX_20260903.csv: citations=35 FAIL=0 WARN=0
+== 04_EVIDENCE_POLICY_IMPACT_ASSESSMENT_20260903.md: citations=18 FAIL=0 WARN=7
+== 07_SUCCESSOR_CONTRACT_DECISION_20260903.md: citations=24 FAIL=0 WARN=11
+== 08_INDEPENDENT_REVIEW_PLAN_20260903.md: citations=6 FAIL=0 WARN=0
+```
+
+- 起草既定として fold し Rs の確認を要する値・選択（06 OPP-16 / 05 OP-19 / 11_ §10.1 に加えて）: TOOL_PAYLOAD_IDENTIFICATION を `P_VALIDITY_UNBOUNDED` の kind 集合に含めるか（finger 再 attest 周期・R8-02）；base pose の frame 規約と固定 base の参照回転（T_SSOT←cell の出所・R8-03）；PROPOSED / authority head の registry 意味論と PROPOSED の approvals（R8-05・registry ACL = OPP-13）；MIN_FAULT_INJECTION の trigger 選択（HEAD_CHECK / DRIFT・R8-09）；manager link 断後に HOLD を必須にするか（R7-18・現行 = 機構どおり再開）；manager 不読時の (iii) を常に SafeStop にするか（R7-04・現行 = `last_disposition` 保持）。
+
+## 12. Review anchors
 
 1. 各 reviewer の pin 再測と checker 実行は各報告 §0 に自記 — `review_records/AXIS_*_review_*.md`。
 2. verifier の lens 別理由と sed 引用 — `review_records/VERIFY_*_*.md`。

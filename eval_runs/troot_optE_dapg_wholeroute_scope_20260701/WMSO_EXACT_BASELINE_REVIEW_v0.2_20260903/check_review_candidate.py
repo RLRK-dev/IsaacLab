@@ -20,7 +20,8 @@ Checks (fail-closed; exit 1 on any FAIL):
   O7  (runtime spec only, v0.2.3) CAS condition 10 reason set == the §5.4 "追加前提" set (A2-01 / B2-07)
   O8  (runtime spec only, v0.2.3) every RuntimeTimeouts field of the sibling 06 profile spec exists in TimingBinding (INV-22 / CD-13)
   Q1  (profile spec only, --profile, v0.2.3) every P_* code used in 06 body appears in the §8.1 code list; PT-/OPP- ids contiguous, no duplicates
-  Q2  (profile spec only, v0.2.6 / R3-17 R4-02 / v0.2.7 R6-13) every *_sha256 / *_hash field declared in 06 §2.1-2.2 is named inside the sibling 05 §3.4 (j) segment, at least once per declaring class
+  Q3  (profile spec only, v0.2.8 R8-13) every P_* code in the §8.1 code list appears in the §8.1 rule (2) evaluation-point text (1st point / 1b record write / 2nd point)
+  Q2  (profile spec only, v0.2.6 / R3-17 R4-02 / v0.2.7 R6-13 / v0.2.8 R7-16) every *_sha256 / *_hash field declared in 06 §2.1-2.2 is named inside the sibling 05 §3.4 (j) segment (exclusion clause stripped; allowlist = tensor_binding_hash), at least once per declaring class
 CSV mode is selected by the `.csv` extension (02 / 03 matrices); H1 / S1 / F2 / O* do not apply there.
 """
 import csv, io, os, re, sys
@@ -189,12 +190,27 @@ def check(path, root):
                 a = jl[0].find("(j) profile が宣言する"); b = jl[0].find("が解決先の内容と一致", a)
                 seg = jl[0][a:b] if b > a else jl[0][a:]
                 if b <= a: warns.append("Q2 (j) segment end marker not found; matching against the whole (j) tail")
+                # v0.2.8 (R7-16): the exclusion clause '(j) の対象外 = …' is stripped before counting; excluded names pass only via the allowlist
+                ex = seg.find("(j) の対象外 =")
+                ex_end = seg.find("。", ex) + 1 if ex >= 0 and seg.find("。", ex) >= 0 else len(seg)
+                excl_txt = seg[ex:ex_end] if ex >= 0 else ""; seg = (seg[:ex] + seg[ex_end:]) if ex >= 0 else seg
+                excluded = set(re.findall(r"(\w+(?:_sha256|_hash))", excl_txt)); ALLOW_EXCLUDED = {"tensor_binding_hash"}
                 for h, cls in sorted(decl.items()):
+                    if h in excluded:
+                        if h in ALLOW_EXCLUDED: continue
+                        fails.append(f"Q2 06 hash field '{h}' is excluded in 05 §3.4 (j) but is not on the checker allowlist"); continue
                     n = len(re.findall(r"(?<![\w.])" + re.escape(h) + r"(?!\w)", seg.replace("`", " "))) + len(re.findall(r"\." + re.escape(h) + r"(?!\w)", seg))
                     if n == 0: fails.append(f"Q2 06 §2.1/2.2 hash field '{h}' ({'/'.join(sorted(cls))}) is not named in 05 §3.4 (j)")
                     elif n < len(cls): fails.append(f"Q2 06 hash field '{h}' is declared by {len(cls)} classes ({'/'.join(sorted(cls))}) but named {n} time(s) in 05 §3.4 (j)")
         else:
             warns.append("Q2 sibling 05 not found; hash enumeration not checked")
+        # Q3 (v0.2.8, R8-13): every P_* code in the §8.1 code list is placed in the §8.1 rule (2) evaluation-point text
+        if pl:
+            rl = [l for l in lines if l.startswith("規則: (1) 全検査は fail-closed")]
+            if not rl: fails.append("Q3 §8.1 rule (2) line not found")
+            else:
+                placed = set(re.findall(r"`(P_[A-Z_]+)`", rl[0]))
+                for cde in sorted(set(re.findall(r"`(P_[A-Z_]+)`", pl[0])) - placed): fails.append(f"Q3 code {cde} is listed in §8.1 but has no evaluation point in rule (2)")
         for name, pat in (("PT", r"^\| (PT-\d+) \|"), ("OPP", r"^\| (OPP-\d+) \|")):
             ids = re.findall(pat, text, re.M); nums = sorted(int(x.split("-")[1]) for x in ids)
             if not nums: fails.append(f"Q1 no {name}- rows found"); continue
