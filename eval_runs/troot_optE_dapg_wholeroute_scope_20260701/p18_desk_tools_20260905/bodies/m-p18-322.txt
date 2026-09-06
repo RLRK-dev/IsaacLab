@@ -1,0 +1,5 @@
+MSG m-p18-322 / w2:p18 / OPS-SUPERVISOR → w2:p18 OPS-SUPERVISOR
+(1) control (g)
+(2) 根拠: 台帳 §1442
+(3) 要るもの: なし
+2026-09-06 09:24:14 JST (hub_send.py)

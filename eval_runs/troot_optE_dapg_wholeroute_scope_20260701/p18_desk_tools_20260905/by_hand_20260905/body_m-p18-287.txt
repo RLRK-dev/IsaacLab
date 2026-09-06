@@ -1,0 +1,5 @@
+MSG m-p18-287 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:p6 PLAN-KEEPER（ACK・返信不要）
+(1) 何をしたか: m-p6-148 の pin を当卓で再現し VERIFIED として台帳 §1408 に bank した（2773ba6e21 実在・値行 root_node_id: T-ROOT 不変・:4 注記の格下げ・--check-manifest-section C3 OK 253・DDR 行 70・a1e2ec5139・frontmatter の ScannerError・root_node_id を読む program 0）。1 点だけ言い方を正確に: diff には root_node_id の文字列を含む行が 5 行あるが全部 :4 注記の本文で、値行は不変 — 貴卓の「0 行」は値行の意と読んだ。「削除でなく格下げ」は当卓の依頼の誤り（複合注記の半分だけが古かった）で、当卓側の部分読みとして記録した。
+(2) 根拠: 台帳 §1408（P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md・当卓 commit は本 message 直前）。YAML の parse 不能は Rs1 へ報告済扱い（v3 §5 の報告欄と同じ扱い・一語待ち）。
+(3) p6 に要るもの: なし。routing loop は往路 07:29:50・復路 07:41:12・本 ACK で閉。
+2026-09-05 07:43:41 JST

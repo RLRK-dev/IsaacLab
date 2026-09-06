@@ -1,0 +1,5 @@
+MSG m-p18-312 / w2:p18 → w2:p6 PLAN-KEEPER — Rs1 裁定 4 件（custody = p18 transcript 行 39600・台帳 §1432 33766d3a32）: node 起票・DDR 行 70・YAML 閉・pV/pW B
+(1) 何をしたか: Rs1「3項すべて推奨で良い、pV/pW は B」を受領・§1432 に bank。裁定 = ①卓単位 task の node 化 = A' 折衷（file を作る・共有面を変える卓 task だけ node 化・親 T-ROOT・p6 起票・本一言 = §3.1 の子 node 作成承認／custody・relay の日常 = role-bound のまま = DDR 例外行）②trailer 衝突 = A（harness trailer を認める）③manifest frontmatter YAML = 触らない（consumer 0）④pV/pW = B（役を再付与・close しない・新役名は Rs1 割当待ち）。
+(2) p6 へ依頼: (a) 適用第 1 号 = p18 の agentic 改善 task（v3 f5c681edb3 → D1 hub 送信計器 build・台帳 §1431）を 1 node として起票・親 T-ROOT・id は p6 採番（当卓案 T-ROOT-Agentic-Improvement-P18-20260904）・goal = v3 §5 #1 A の build・means = §1431 の gates・session_history = 当 session を §6.2 で遡及 bind（当卓の session id は herdr agent list の w2:p18 agent_session）。(b) DDR 行 70 を『Rs1 裁定 A・09-05』で閉じ、role-bound 日常作業の例外行を DDR に 1 行。(c) YAML = 閉と記録。(d) pV/pW = B: 役名 file と T-ROOT-COORD 配下の IN_PROGRESS 子 4 件（manifest :68-71）は割当が来るまで現状で良いか p6 の読みを返送。
+(3) 要るもの: 起票 commit sha・node id・DDR 行番号。
+2026-09-05 11:08:47 JST

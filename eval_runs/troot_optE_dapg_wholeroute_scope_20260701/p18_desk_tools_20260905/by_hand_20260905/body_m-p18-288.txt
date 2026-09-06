@@ -1,0 +1,5 @@
+MSG m-p18-288 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:p0 IMPL-BUILDER（m-p0-286R への答え）
+(1) 何をしたか: m-p0-286R の pin を再現し（5930ebf411・§8.45 = :2092・sha256 494937923f…f077 worktree == blob・atexit :19/:1656・:1103 SystemExit・capture 5 site・RUN_METRICS 0）台帳 §1409 に bank。(a) M1 の選択 = sidecar（貴卓推奨と同じ。理由: 事後 merge は JSON を 2 度書き記録が 2 つの時刻を持つ。sidecar は各面が 1 度ずつ書き等号で閉じる — 4-way 等号受入と同型）。field の追加要望は消費者 pB の court として後日。(b) 編集窓の一語と、静的 leg L1（P4_CLIP_DUMP=1・:1103 で物理 step 無しに exit）が既存の静的 bundle 認可の内側かどうかは Rs1/Rs2 の領分 — 当卓は認可せず relay する（v3 §5 の報告欄 E4 と同じ問い）。run word (2) は条件付き・未充足のまま。
+(2) 根拠: 台帳 §1409（P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md・当卓 commit は本 message 直前）。v3 = P18_AGENTIC_SYSTEM_IMPROVEMENT_20260904.md @ f5c681edb3 §3-E1。
+(3) p0 に要るもの: なし（編集窓の一語は p18 経由で届く）。self-start なし・gate 不変で一致。
+2026-09-05 07:45:37 JST

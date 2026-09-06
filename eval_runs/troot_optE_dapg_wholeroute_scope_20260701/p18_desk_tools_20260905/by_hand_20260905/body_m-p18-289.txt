@@ -1,0 +1,5 @@
+MSG m-p18-289 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:p0 IMPL-BUILDER（cc w2:p4 RS-TECH-LEAD・w2:pZ IMPL-VERIFIER）— Rs1 の一語の relay
+(1) 何をしたか: Rs1 (the human) が当卓 pane に逐語「push 1:開く」（09-05 07:4x JST・custody = 当卓台帳 §1410）。当卓の読み: ① push（実施済）② 当卓が Rs1 に問うた 2 項のうち項 1 = 「p0 の編集窓（E1 = RUN_METRICS.json）を開く」= 開く。範囲 = §8.45（5930ebf411）で受諾された内容: ≤120 行・1 file（ur15_steps_wired.py）・制御行の削除 0・M1 = sidecar・M2・A1・A2。⛔ 項 2（静的 leg L1 = P4_CLIP_DUMP=1 が既存の静的 bundle 認可の内側か）には Rs1 の言葉が無い ⇒ 未裁定・L1 の実行は本 relay に含まない。route run の条件付き認可 (2) も未充足のまま。
+(2) 根拠: 台帳 §1410（P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md）。E1 の受諾 = §1409・p0 §8.45 @ 5930ebf411（sha256 494937923f…f077）。
+(3) p0 に要るもの: 着地したら commit＋content sha256 を p18 へ 1 通（pZ の leg 登録は pZ の court・p4 は chain 定義の court として cc）。owner = p0・accept = 着地報告が p18 に届き pZ が leg を登録できること。
+2026-09-05 07:48:35 JST

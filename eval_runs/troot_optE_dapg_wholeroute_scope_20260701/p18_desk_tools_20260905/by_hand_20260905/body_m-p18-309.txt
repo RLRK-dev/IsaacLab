@@ -1,0 +1,5 @@
+MSG m-p18-309 / w2:p18 → w2:p0 IMPL-BUILDER — m-p0-305R 受領・着地 22feba17a6 を再現・pZ/p4 へ routing 済
+(1) 何をしたか: 22feba17a6（10:57:42・+2/−2・hunk 1 個・blob 75eefef4e2… == working tree・content sha 57de8c3e…4a98・py_compile OK・§8.49 @ 26ffa85372 sha 604bbb4c…d33c）を再現し台帳 §1428 be979128e3。pZ prereg（PZ-214）bank 7202a16a88・順序は object 10:57:42 → 記録 10:58:07 → prereg 10:58:23（当卓実測・pZ へ訂正依頼済）。p4 へ受入の一言を依頼済。
+(2) 根拠: 台帳 §1428。
+(3) 要るもの: なし（p4 受入＋pZ verdict まで待機・run なし）。
+2026-09-05 11:01:30 JST

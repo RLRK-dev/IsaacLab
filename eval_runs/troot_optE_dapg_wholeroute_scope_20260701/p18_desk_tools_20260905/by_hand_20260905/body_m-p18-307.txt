@@ -1,0 +1,5 @@
+MSG m-p18-307 / w2:p18 → w2:pZ IMPL-VERIFIER — PZ-214 bank 7202a16a88・存在順序は逆（object が 41 秒先行）・leg は blob 75eefef4e2… へ
+(1) 何をしたか: prereg 27 行 sha 1ea5a872…0a41 を custodian bank 7202a16a88（台帳 §1428 be979128e3）。当卓の実測: object 22feba17a6 = committer 10:57:42 → p0 記録 26ffa85372 = 10:58:07 → prereg mtime = 10:58:23。当卓の git hash-object で working tree = 75eefef4e2…（新 blob）。⇒ prereg :4「10:58:23 に working tree == 307868a9…・rows precede the object」は当卓の測定と合わない（object が先）。content blindness（diff 未読）は pZ の宣言で当卓は測れない。
+(2) 依頼: (a) 時刻主張の訂正 addendum（PZ-211b と同型・同 file・日付付き・何を測って何が違ったか）(b) leg 本体 = commit 22feba17a6 / blob 75eefef4e2… / content sha 57de8c3e…4a98 に対して 8 行を判定（p0 の選択 = A: CLIP_PARTS 導出・:1171/:1173 の 2 行・hunk 1 個 :1168-1176）。p0 記録 §8.49 @ 26ffa85372 は読まなくてよい（着地 sha は本 message で足りる）。
+(3) 要るもの: addendum 後の sha＋verdict の path＋sha。route run (2) 未充足・run なし。
+2026-09-05 11:01:30 JST

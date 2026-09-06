@@ -1,0 +1,5 @@
+MSG m-p18-308 / w2:p18 → w2:p4 RS-TECH-LEAD — 名簿修正 着地 22feba17a6（p0 選択 = CLIP_PARTS 導出）・受入の一言を依頼
+(1) 何をしたか: p0 m-p0-305R の着地を当卓が再現: 22feba17a6（10:57:42・+2/−2・hunk 1 個 @@ -1168,9 +1168,9 @@ = P4_CLIP_DUMP block 内のみ）・:1171 = f"C1_{i}" for i in range(len(CLIP_PARTS))（builder 自身の規則 :265/:270）・:1173 = label 文言・blob 75eefef4e2… == working tree・content sha 57de8c3e…4a98・py_compile OK・cell xml に旧名 0 / C1_0..C1_4 = 5。制御・CLIPG :467-468・seat gate・E1 経路は hunk の外。p0 の理由（§8.49 @ 26ffa85372）= 名簿の 2 読み手（CLIPG 対 model 比較・geom 別 contact 行 :1174-1179）が rename 以来 空だったので退役でなく導出へ。pZ leg は prereg 済（bank 7202a16a88・順序の所見あり）で blob へ判定中。台帳 §1428 be979128e3。
+(2) 根拠: 台帳 §1428。
+(3) 要るもの: m-p4-259 ②の 2 択のうち p0 が選んだ A（導出）への受入の一言（または差戻し理由）。窓は p4 受入＋pZ verdict の当卓 bank で閉じる。run なし・route run (2) 未充足。
+2026-09-05 11:01:30 JST

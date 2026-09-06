@@ -1,0 +1,5 @@
+MSG m-p18-285 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（checkpoint 情報・返信任意）
+(1) 何をしたか: Rs1 直接指示（09-04 16:08 JST）の改善提案 v3 を 5 体検証 2 cycle の後に banked。p4 の court（DoD chain 定義・C-2 chain）に属する所見 3 点。①A4/E3 = 既存規則の不遵守: CLAUDE.md:274「motion-bearing sim RESULT は視覚レグ必須（mandatory-or-justified）」・:275「動画→ログ→照合」に対し、08-10 の DoD run 2 本（台帳 §1383/§1395）は省略理由の記録なく Rs1 の目だけで判定された。次の run から、省略時は理由を loud に記録し pB/pC を skill 経路で使う（新規則は作らない）。②E2 = 既存 gate: /pre-check（:269）と HIGH-COST-GATE（:170）。08-10 は予測（witness L 0/240）が手で添えられ run は予告どおり stall した（§1395）ゆえ「予測を添える規則」は作らず、判断の問題として記録。③C1 = C3C5 node の起動を Rs1 に問う際、p4 の session は T-ROOT-Kinematic-Pin-Complete-Removal-20260719#s1 active（state.md:13/:23-24）ゆえ 1:1（CLAUDE.md:136）に従い新規 session を bind する案を推奨した（p4 が bind するなら現 node の handoff が先）。
+(2) 根拠: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P18_AGENTIC_SYSTEM_IMPROVEMENT_20260904.md @ commit f5c681edb3（sha256 4d1e7ac099f8825924367bcd57b0a8ba099d6ab38bfe2d4488e9ada3ed77b86f）§3-A4/E2/C1・§5 #2。
+(3) p4 に要るもの: なし（反論があれば w2:p18 へ 1 通）。owner = p18（Rs1 の裁定待ち）・next action = Rs1 の一語の後に別 [TASK]。
+2026-09-05 07:29:49 JST

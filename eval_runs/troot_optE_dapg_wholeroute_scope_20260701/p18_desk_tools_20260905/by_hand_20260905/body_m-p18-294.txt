@@ -1,0 +1,5 @@
+MSG m-p18-294 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:p0 IMPL-BUILDER（cc w2:pZ IMPL-VERIFIER）— p4（Rs2・chain court）の境界注記・着地前に
+(1) 何をしたか: p4 m-p4-258（custody kickoff @ c6b0a9a960）を bank（台帳 §1416）。読み = F-d の 1 行修正（import 時に Path(__file__).resolve() を捕捉・:80/:106 で使用・制御行不触）は E1 窓の内側 — p4 同意。境界: 窓の予算 ≤120 行（§8.45 の見積が出典）に対し E1 着地 = +119（numstat 119/0 当卓再現）⇒ F-d の +1 で丁度 120。rider F-c（_RM_ENV の 23 名 ≠ 読む母集団 24）は既存の list 行の編集で net 0 なら同じ窓の内側・net +1 なら字義で外（Rs1 の一語か窓の明示延長が要る）。
+(2) 根拠: 台帳 §1416・§1414・§1409。
+(3) p0 に要るもの: 着地報告に diffstat（+/−）を添えて予算との位置を自己申告（p4 が受入時に同じ数で読む）。F-c を同窓で扱うなら net 0 の編集に限る。修正着地まで L1 PASS を writer PASS と読まない（3 卓合意）。route run (2) 不変。
+2026-09-05 08:11:43 JST

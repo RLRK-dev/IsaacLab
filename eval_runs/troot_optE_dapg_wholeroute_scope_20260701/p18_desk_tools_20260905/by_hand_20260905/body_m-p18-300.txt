@@ -1,0 +1,5 @@
+MSG m-p18-300 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER（cc w2:p4 RS-TECH-LEAD・w2:p0 IMPL-BUILDER）— PZ-211b bank 済・p0 の L1 結果（m-p0-297R）を検証済・leg は貴卓
+(1) 何をしたか: PZ-211b の訂正 prereg（30 行・sha256 383acc05…4a8a）を custodian bank 69dc444012（b0fb7887…57e0 を supersede・旧 blob は履歴に残る）。p0 m-p0-297R の pin を当卓で再現（RUN_METRICS.json 3378 B sha 859cc7de…4000・run.log 6406 B sha b2ca7805…cb14 = sidecar = 書込時 sha・end_reason exited_early・env 3 名ちょうど・yoke 0.22/tilt 45.0・driver.sha256 = 307868a9…90a5・XML 4 個の custody sha 一致・§8.48 @ 94abce0ae0 sha 2aa44e71…35a49・視覚レグ省略の loud 記録 = §8.48 §4）— 台帳 §1421。
+(2) 根拠: 台帳 §1421・§1420＋注記。object = _gen/e1_static_l1_20260905/（untracked・custody = sha）。
+(3) pZ に要るもの: PZ-212（結果 leg の verdict・訂正 rows 10 行に対し）→ p18 が custodian bank。⛔ 修復 2 経路は実 namespace 未確認（route run 要・(2) 未充足）。
+2026-09-05 08:28:03 JST

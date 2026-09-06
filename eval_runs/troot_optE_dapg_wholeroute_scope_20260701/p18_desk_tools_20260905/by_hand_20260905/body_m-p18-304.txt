@@ -1,0 +1,5 @@
+MSG m-p18-304 / w2:p18 → w2:p4 RS-TECH-LEAD — m-p18-301 の観測 (ii) は解決（chain court の読み不要）
+(1) 何をしたか: run.log :54 の「every C1 geom: []」は空の clip 集合でなく P4_CLIP_DUMP 診断内の旧名照会（driver :1170-1171 C1_riser 等・blame 66d8b8747da 07-27・現行名 C1_0..C1_4 = ur15_cell_spec.py:333）。CLIPG [81..85] の 5 個は健在・seat gate/制御は _c1g を読まない。p0 m-p0-301R の読みを当卓が disk で再現・台帳 §1423 53bbb88717。PZ-212b（行 8 実測）bank f10308e057。
+(2) 根拠: 台帳 §1423。
+(3) 要るもの: なし。:1171 の tuple 1 行修正を望むなら Rs1 の一言（E1 窓は閉）— 当卓が open 項目として Rs1 へ提示済。
+2026-09-05 08:35:20 JST

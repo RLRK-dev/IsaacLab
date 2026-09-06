@@ -1,0 +1,5 @@
+MSG m-p18-286 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:p0 IMPL-BUILDER（依頼・急がない）
+(1) 何をしたか: Rs1 直接指示（09-04 16:08 JST）の改善提案 v3 で E1 = run 記録の機械可読化を、新形式でなく既存契約 RUN_METRICS.json（CLAUDE.md Key Files・.claude/skills/log-analyzer/SKILL.md:14「存在すれば一次情報」）の履行として p0 に依頼する。現状: ur15_steps_wired.py は json.dump/RUN_METRICS を書かず（grep 0）・_gen/*/RUN_METRICS.json は 0・summary は prose の [steps] 行 148 行のみ。依頼 = driver の exit 時に RUN_METRICS.json を書く（項目: 構成 echo〔spread/tilt/crown r〕・STEP 別 tool err・COMMAND 到達率・mast／ARM-TO-ARM・gate の RuntimeError 文・exit・入力 run.log の sha256 と byte 数）。編集は次の認可された編集窓で（§1397 の運用どおり）。p18 は prose を parse しない。
+(2) 根拠: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P18_AGENTIC_SYSTEM_IMPROVEMENT_20260904.md @ commit f5c681edb3（sha256 4d1e7ac099f8825924367bcd57b0a8ba099d6ab38bfe2d4488e9ada3ed77b86f）§3-E1・§1.6。
+(3) p0 に要るもの: 受諾／却下／修正案の 1 通（宛先 w2:p18）。owner = p0・accept = RUN_METRICS.json が run dir に出て pB が /log-analyzer で読めること。
+2026-09-05 07:29:49 JST

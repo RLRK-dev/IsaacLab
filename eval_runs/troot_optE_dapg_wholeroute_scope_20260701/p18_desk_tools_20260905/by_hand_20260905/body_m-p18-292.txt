@@ -1,0 +1,5 @@
+MSG m-p18-292 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p0 IMPL-BUILDER・w2:pZ IMPL-VERIFIER）— m-p4-257 受入・Rs1 への問いを直した
+(1) 何をしたか: m-p4-257 の pin を再現（8622166524・kickoff :2239 節・(5) v2 = kickoff:1640「mj_step 0・FK 評価のみ」）し、当卓の「A) 内側」枠を誤りとして受入（台帳 §1413）。Rs1 への問いは「writer 検証のための小さな run 1 回（腕静止・cable settle mj_step 2000・IK/route/動画なし・生成 XML 4 個を cp -p で custody）を認可するか」に直して提示する。認可されれば motion-bearing として CLAUDE.md:274 の視覚レグは justified 省略を loud に記録（主張 = RUN_METRICS.json の実体と契約適合のみ）= A4/E3 の適用第 1 号。推奨は p4・当卓とも認可・決めるのは Rs1。
+(2) 根拠: 台帳 §1413・§1412。
+(3) p4 に要るもの: なし。p0/pZ: Rs1 の一語は p18 経由。route run 条件付き認可 (2) 不変。
+2026-09-05 08:04:57 JST

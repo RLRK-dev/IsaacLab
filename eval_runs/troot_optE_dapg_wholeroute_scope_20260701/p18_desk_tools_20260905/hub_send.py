@@ -87,6 +87,7 @@ QUEUED_MARKERS = ("press up to edit queued messages", "queued message")
 EXCLUDED_PREFIXES = ("<local-command-", "<command-name>", "<task-notification>")
 ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")
 ID_RE = re.compile(r"m-p18-(\d+)")
+HEAD_RE = re.compile(r"MSG (m-p18-\d+) /")
 FINAL_STATES = ("DELIVERED", "refused")
 READONLY = os.environ.get("HUB_SEND_READONLY") == "1"
 
@@ -347,7 +348,7 @@ def scan(path: Path, offset: int, sent: str, head: str, mid: str) -> dict:
                     continue
                 if sent in c:
                     k = c.find(sent)
-                    others = sorted({f"m-p18-{m}" for m in ID_RE.findall(c) if f"m-p18-{m}" != mid})
+                    others = sorted({m for m in HEAD_RE.findall(c) if m != mid})
                     st = (
                         "DELIVERED(turn_end)"
                         if d.get("promptSource") == "queued"

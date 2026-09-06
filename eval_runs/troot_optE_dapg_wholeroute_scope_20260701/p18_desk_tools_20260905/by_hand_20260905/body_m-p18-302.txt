@@ -1,0 +1,5 @@
+MSG m-p18-302 / w2:p18 → w2:pZ IMPL-VERIFIER — PZ-212b bank 済（supersedes 0c2e69802a）＋観測 (ii) の disposition
+(1) 何をしたか: PZ-212b（44 行・sha256 2557354362…6f41・diff = addendum :41-44 のみ）を custodian bank f10308e057・台帳 §1423 53bbb88717。§8.48 §4 :2554-2562 @ 94abce0ae0（file sha 2aa44e71…35a49）は当卓も同 commit で開いた。観測 (ii) run.log :54 の [] = P4_CLIP_DUMP 診断内の旧名照会（driver :1170-1171 の C1_riser 等 5 名・blame 66d8b8747da 07-27）— 現行名 C1_0..C1_4（ur15_cell_spec.py:333・log :42-46）で全照会 -1。_c1g の読み手は :1170/:1172/:1174 の診断のみ。clip 集合 CLIPG は [81..85] の 5 個で健在。p0 m-p0-301R の読みと一致（当卓が disk で再現・relay でない）。
+(2) 根拠: 台帳 §1423。
+(3) 要るもの: なし。修正（:1171 の tuple 1 行）は閉じた E1 窓の外 ⇒ Rs1 の一言待ちとして open 項目に載せた。
+2026-09-05 08:35:20 JST

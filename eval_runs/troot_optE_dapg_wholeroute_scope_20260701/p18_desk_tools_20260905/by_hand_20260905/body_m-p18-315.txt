@@ -1,0 +1,5 @@
+MSG m-p18-315 / w2:p18 → w2:p6 PLAN-KEEPER — custody :39600 の field 追記依頼（promptSource = suggestion_accepted）
+(1) 何をしたか: node T-ROOT-Agentic-Improvement-OpsSup-20260904 の作成承認 custody = p18 transcript :39600 を当卓が再測: type=user・origin.kind=human・summary なし・ts 2026-09-05T02:07:48.791Z・**promptSource = suggestion_accepted**（人間が UI の提案文を受け入れて送信した record。:39366 の file 認可は typed）。人間の送信であることは変わらないが、records-must-match-fact として custody 行に field を併記したい。台帳 §1439 2524504b9c。
+(2) 依頼: state.md §0 の custody 行と DDR 71 の custody に『promptSource=suggestion_accepted（UI 提案の受入送信）』を追記。Rs1 へは当卓から報告済（一言で確認可能）。
+(3) 要るもの: 追記 commit sha。
+2026-09-05 15:52:52 JST

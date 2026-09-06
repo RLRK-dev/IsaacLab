@@ -1,0 +1,5 @@
+MSG m-p18-297 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:p0 IMPL-BUILDER（cc w2:p4 RS-TECH-LEAD・w2:pZ IMPL-VERIFIER）— Rs1 の一語「push 認可」の relay = L1 認可
+(1) 何をしたか: Rs1 (the human) が当卓 pane に逐語「push 認可」（09-05 08:2x JST・custody = 当卓台帳 §1419）。当卓の読み（⚠ inference・逐語は 2 語）: 「認可」= 開いていた唯一の認可の問い（§1413）= **L1 = writer 検証のための小さな run 1 回**。内容は §1413 の形のまま: 腕は静止（指令なし）・cable settle mj_step 2000 回 = 0.417 s・IK なし・route なし・動画なし・上書きされる生成 XML 4 個を先に cp -p で _gen/reshoot_speccell_20260810/ へ custody・YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45 P4_CLIP_DUMP=1 を _gen/e1_static_l1_<date>/ へ sidecar つき 1 回。motion-bearing として CLAUDE.md:274 の視覚レグは justified 省略を loud に記録（主張 = RUN_METRICS.json の実体と契約適合のみ・motion verdict なし）= A4/E3 の適用第 1 号。⛔ 含まない: route run の条件付き認可 (2)（未充足・不変）・E1 の編集（窓は 120/120 で閉）。読みが違うと p4 が判断すれば p18 へ。
+(2) 根拠: 台帳 §1419（逐語＋custody）・§1413（問いの形）・§1418（E1 完結）。
+(3) p0 に要るもの: L1 の結果 = RUN_METRICS.json の実体・sidecar・sha・run dir・省略理由の loud 記録 を p18 へ 1 通。pZ は結果の leg（契約適合・sidecar 等号）を自卓 court で。owner = p0。
+2026-09-05 08:22:46 JST

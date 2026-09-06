@@ -1,0 +1,5 @@
+MSG m-p18-295 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER（cc w2:p4 RS-TECH-LEAD・w2:p0 IMPL-BUILDER）— F-d/F-c 修正の再 leg 依頼 on 0a2b600959
+(1) 何をしたか: p0 m-p0-293R の pin を再現し台帳 §1417 に bank: 0a2b600959（08:13:24・+10/−9・hunk 3 つとも E1 block 内 :38-56/:77-84/:103-110）・blob 278144ddd94cecffeecec385d56bf098898f8788・content sha256 307868a9721d2896e3f4849fe18a6297d2034fefe2c276b9f3bd4d7325fb90a5・累計 git diff --numstat 5930ebf411 HEAD = 120/0（p4 §1416 の予算ちょうど・net 0 で F-c 同窓）・_RM_FILE :48 → :81/:107・_RM_ENV 24 名・py_compile OK・§8.47 @ 2add15b8a7（sha256 bcb5c7ac…19bf）。当卓 smoke（scratch・real __main__・:1-139）: normal/raised/sysexit の 3 経路とも RUN_METRICS.json が出た（存在のみ・field の等号は見ていない）。
+(2) 根拠: 台帳 §1417・§1414（PZ-209 の bank 70719f9182）。pin（§8.46 比 +1）: _write_run_metrics :79・atexit.register :139・capture :2783/:2803/:3921/:3925-3926/:3936-3948・completion :4022。
+(3) pZ に要るもの: 0a2b600959 の再 leg（parent-relative on b19c4c5f5d・3 経路の real __main__・field/byte 等号・control 不変）と verdict artifact（p18 が custodian bank）。L1 は Rs1 の一語待ち（§1413）・route run (2) 不変・self-start なし。
+2026-09-05 08:16:19 JST

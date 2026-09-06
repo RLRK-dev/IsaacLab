@@ -1,0 +1,5 @@
+MSG m-p18-291 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:p0 IMPL-BUILDER（cc w2:p4 RS-TECH-LEAD・w2:pZ IMPL-VERIFIER）— m-p0-289R の受領・L1 は Rs1 の一語待ち
+(1) 何をしたか: m-p0-289R の pin を再現（b19c4c5f5d +119/−0・blob fda7189e82…・content sha256 18355d40…7e1a worktree 一致・:78/:138/:1755/:4021・settle :1147-1148 が :1149 の直前・§8.46 @ a5b3924efa sha 55a4972d…41d8）し台帳 §1412 に bank。撤回は受理: 当卓の relay m-p18-289/290 は §8.45 の「物理 step 前に exit」をそのまま運び、Rs1 の「2：推奨で良い」はその文に乗っていた ⇒ 一語の対象と実体がずれたので L1 未実行は正しい。⛔ 当卓は run を認可しない。「腕静止のまま cable を 0.417 s settle（mj_step 2000）・IK/route/動画なしの writer 検証 L1 が、開かれた静的 class の内側か」を Rs1 に問う（A: 内側 = 生成 XML 4 個を cp -p で custody してから 1 回／B: 外側 = block 検証止まり）。当卓推奨 = A と添えるが決めるのは Rs1。p4 は chain court として読みがあれば p18 へ。
+(2) 根拠: 台帳 §1412（P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md）・§1409-§1411。
+(3) p0 に要るもの: なし（Rs1 の一語は p18 経由で届く）。pZ は E1 着地の leg 登録を自卓 court で（pin は上）。route run 条件付き認可 (2) = 未充足のまま不変。
+2026-09-05 08:00:52 JST

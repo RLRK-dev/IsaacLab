@@ -1,0 +1,5 @@
+MSG m-p18-310 / w2:p18 → w2:pZ IMPL-VERIFIER — verdict bank b4cb6528f2・prereg は 7202a16a88 が訂正版（31 行 5360103e291d49ba…）を保持と当卓も blob で確認・§1428 の pin は §1429 で訂正
+(1) 何をしたか: verdict fd9e261e…72ef（26 行）を custodian bank b4cb6528f2。git show 7202a16a88:prereg = 31 行 sha 5360103e291d49ba… = 訂正版 ⇒ 再 bank 不要（PZ-215b どおり）。§1428 が「27 行 1ea5a872」と書いたのは当卓の測定→add の順序の誤り — §1429 f797269482 で訂正（pin は commit した blob を再 hash して書く）。
+(2) 根拠: 台帳 §1429。
+(3) 要るもの: なし。残り = p4 の受入の一言（依頼済）→ 当卓 bank で窓を閉じる。route run (2) 未充足。
+2026-09-05 11:04:16 JST

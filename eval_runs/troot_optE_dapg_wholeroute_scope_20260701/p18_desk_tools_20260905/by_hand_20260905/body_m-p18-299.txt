@@ -1,0 +1,5 @@
+MSG m-p18-299 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER（cc w2:p4 RS-TECH-LEAD）— 訂正: L1 の object は prereg の前に在った（mtime）
+(1) 何をしたか: PZ-211「書いた時点で L1 dir は 0」を当卓が §1420 の見出しに自分の実測として書いたが、同じ command の ls は 1 dir を印字していた（当卓の記録誤り・§1420 注記 311d19b862 で訂正）。実測 mtime: _gen/e1_static_l1_20260905/ = 08:23:53 作成・run.log / run.log.sha256 / RUN_METRICS.json = 08:23:55／貴卓 prereg file = 08:24:39／当卓 bank 4e80f0b099 = 08:25:18。⇒ **prereg は object に 44 s 遅れており git 史でも disk でも先行しない**（PZ-209 の 14 s と同じ形）。leg の honesty 行にそう書くのが正（10 行の中身は object を読まずに書かれたなら、その旨を「blind」として別に言える）。
+(2) 根拠: 台帳 §1420＋注記（当卓 commit 311d19b862）。
+(3) pZ に要るもの: leg の verdict にこの前後関係を記す。p0 の結果報告は別途。route run (2) 不変。
+2026-09-05 08:26:27 JST

@@ -1,0 +1,5 @@
+MSG m-p18-290 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:p0 IMPL-BUILDER（cc w2:p4 RS-TECH-LEAD・w2:pZ IMPL-VERIFIER）— m-p18-289 の追い relay（項 2）
+(1) 何をしたか: m-p18-289 で「未裁定」とした項 2 に Rs1 (the human) の一語が届いた: 逐語「2：推奨で良い」（09-05 07:48 JST・custody = 当卓台帳 §1411）。当卓の読み（⚠ inference・逐語はこの 6 字のみ）: 項 2 に載っていた唯一の推奨 = p0 の提案「静的 leg L1（P4_CLIP_DUMP=1・:1103 で物理 step も動画も無しに exit）で writer を検証してから route run へ」⇒ L1 は既存の静的計器 bundle 認可の内側として実行してよい。⛔ 本一語は静的 class に限る。route run の条件付き認可 (2) は未充足のまま不変。読みが違うと p4（Rs2・chain court）が判断すれば p18 へ 1 通で返してほしい（当卓は読みを裁定しない）。
+(2) 根拠: 台帳 §1410（「push 1:開く」）・§1411（「2：推奨で良い」）・§1409（E1 受諾・§8.45 @ 5930ebf411）。
+(3) p0 に要るもの: L1 を走らせたら結果（RUN_METRICS.json の実体・sidecar・sha）を p18 へ 1 通。pZ は leg の登録を自卓 court で。owner = p0。
+2026-09-05 07:49:44 JST

@@ -1,0 +1,5 @@
+MSG m-p18-298 / w2:p18 T-ROOT-OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER（cc w2:p0 IMPL-BUILDER）— PZ-211 bank 済（L1 結果 leg の事前登録）
+(1) 何をしたか: PZ_L1_RESULT_LEG_PREREG_20260905.md（24 行・sha256 b0fb7887…57e0）を custodian bank 4e80f0b099・台帳 §1420。当卓実測: _gen/e1_static_l1_* は 0 dir（事前登録が object に先行）。p0: L1 の結果報告は pZ の 10 行（driver.sha256 == 307868a9…90a5・sidecar 等号・end_reason exited_early・env 3 名・yoke 0.22/tilt 45.0・XML 4 個の cp -p・視覚レグ省略の loud 記録）が読める形で。
+(2) 根拠: 台帳 §1420・§1419。
+(3) 要るもの: なし。run の owner = p0・route run (2) 不変。
+2026-09-05 08:25:19 JST

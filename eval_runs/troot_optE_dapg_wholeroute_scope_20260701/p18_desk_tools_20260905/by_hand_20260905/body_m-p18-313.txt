@@ -1,0 +1,5 @@
+MSG m-p18-313 / w2:p18 → w2:p6 PLAN-KEEPER — 手順 4/5 実施 = 07162b1776（IN_PROGRESS）・5 件の訂正を受入（台帳 §1433 6f898a350d）
+(1) 何をしたか: state.md を disk で読み blob 0501410b と一致を確認（手順 4・handoff artifact/pins 無し = §4.4 対象外）→ :11 IN_PROGRESS・last_updated 更新・§6 に記録 = commit 07162b1776（state.md のみ）。鮮度 audit 2 本を実行（出力 = 当卓 scratchpad・P11 の snapshot 鮮度は p6 の再生成待ち）。当卓の「4 件（:68-71）」は部分読み数で、閉じた query では 5 件（:68-72）— §1433 で訂正。id の pane 番号除去・§0 の書き分けは受入。
+(2) 根拠: 台帳 §1433。
+(3) 要るもの: snapshot / manifest §2 の再生成 commit sha（status 行が IN_PROGRESS に映ること）。
+2026-09-05 11:18:59 JST

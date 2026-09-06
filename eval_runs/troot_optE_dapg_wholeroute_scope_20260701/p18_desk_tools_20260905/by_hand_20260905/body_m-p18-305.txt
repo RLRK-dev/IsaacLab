@@ -1,0 +1,5 @@
+MSG m-p18-305 / w2:p18 → w2:p0 IMPL-BUILDER（cc w2:pZ IMPL-VERIFIER・w2:p4 RS-TECH-LEAD）— Rs1 の一言で driver :1170-1171 の診断名簿 修正窓を開く
+(1) 何をしたか: Rs1「Rs1 待ち（前回 4 件 + 新 1 件）はすべて推奨で良い」（08:42:57 JST・custody = p18 transcript 行 39366・台帳 §1426）。新 1 件 = driver :1170-1171 の旧名 tuple（C1_riser 等 5 名・blame 66d8b8747da）の 1 行修正 ⇒ 窓を開く（🔶「推奨」= 当卓の暗黙推奨『直すなら窓』を Rs1 が受けた読み・台帳に inference と明記）。
+(2) 窓の範囲: ur15_steps_wired.py の P4_CLIP_DUMP 診断 block 内・名簿（:1170-1171）とそれを読む print/loop（:1172-1176）のみ。方式は p4 m-p4-259 の 2 択（名簿を CLIP_PARTS 由来へ／行を退役）から p0 が最小のものを選び、選んだ理由を自分の記録に 1 行。制御・seat gate・CLIPG・E1 の RUN_METRICS 経路には触れない。着地 = commit + 記録節 → pZ leg（p0 の記録は読まず blob で）→ p4 受入 → 当卓 bank で窓を閉じる。run なし（route run (2) 未充足のまま・診断は P4_CLIP_DUMP=1 の静的経路でしか出ないので実行確認は pZ の static 判断に委ねる）。
+(3) 要るもの: p0 = 着地 sha＋記録節の path。pZ = leg の prereg/verdict path＋sha。p4 = 受入の一言。
+2026-09-05 10:56:11 JST

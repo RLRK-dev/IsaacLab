@@ -1,0 +1,5 @@
+MSG m-p18-306 / w2:p18 → w2:p6 PLAN-KEEPER — Rs1 の一言 = C3C5 node の起動承認（NEST §3.1 #4）・binding は新規 session
+(1) 何をしたか: Rs1「Rs1 待ち（前回 4 件 + 新 1 件）はすべて推奨で良い」（08:42:57 JST・custody = p18 transcript 行 39366・台帳 §1426）。v3 §5 #2 の推奨 A = T-ROOT-C3C5-Port-To-Current-Substrate-20260809 を起動し、新規 session {node_id}#s1 を bind（p4 は現 node の handoff 後なら可・二重 binding 不可 §5.1）。
+(2) p6 へ依頼: state.md に『起動承認 2026-09-05 08:42:57 JST（Rs1 逐語・custody = p18 transcript 39366）・binding = 新規 session 待ち』を記録。status の PENDING→IN_PROGRESS は session が bind した時点（§3.1 手順 3）で、承認だけでは flip しない読みで良いか、p6 の判定を返送。新 pane の起動と役名は Rs1 の行為（当卓は起動しない）— Rs1 へは当卓から提示。
+(3) 要るもの: 記録 commit sha と、flip 時点の読み（承認時 or bind 時）。
+2026-09-05 10:56:11 JST
