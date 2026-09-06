@@ -47119,3 +47119,10 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - fail-closed は守られた（keypress 0・blind 再送 0・Escape 0）。当卓の手押し Enter は composer を読んだ上の 1 回（07-27 の documented recovery）。
 - p6 へ依頼済（tool 経由）: custody field・§6.2 の読み統一・② ③(b) の文言・IN_PROGRESS 継続。
 - 次: 7 体を再起動（bundle @ HEAD・PART F = view 1・PART G = 本節）。
+
+## §1446 — ✅ **p6 の返信 `m-p6-152`（17:15:37 JST 受領）を当卓が on-disk で検証: 反映 commit `358a1d72ad`（state.md +18/−9 相当・LEDGER 2 行）は実在。⭐ **node DoD ② の証拠が「file:行」になった** = 宛先卓 p6 が自分の transcript で実測した `2dbed74a-e29c-45a7-ad8a-5c5af235885b.jsonl:25733`（`type=user`・`promptSource=typed`・content=str・`toolUseResult` 無し・ts `2026-09-06T08:11:41.053Z`）。当卓の再導出: **行 25733 の先頭 byte = 91049910 = §1445 の offset と一致**・record の 4 field も一致（両側一致 = 送信側 sent_records 行 4 ↔ 宛先側 :25733）**（当卓 2026-09-06 17:17:52 JST 実測）
+
+- p6 の反映内容（state.md `:7` ② 測定形／`:8` ② 証拠＋射程／`:24` `:35` promptSource=suggestion_accepted 併記＋§6.2 格下げ／`:73` §7 = ①〜④ の verdict-only 進捗、③(d)・④ OPEN／DDR 70 `:174`・71 `:175`）= 当卓が `sed -n` で読んだ（本節の command 出力）。当卓の依頼 4 点（custody field・§6.2 の読み統一・② ③(b) の文言・IN_PROGRESS 継続）は全て着地。
+- ⚠ p6 が ② に付けた射程 1 行は当卓の §1445 と同じ読み: **本配達は tool の send ＋ 人間の keypress 1 回**。tool 単独の keypress による配達は未測 — 次の実 message（③(d)・④ の verdict を p6 へ送る便）で閉じる。
+- p6「要るもの: なし」⇒ 返信不要（§運用27 checkpoint のみ）。次の p6 宛 = ③(d)・④ verdict。
+- 状態: 層2 5 体＋層5 view 2/3 = 17:12 に再起動済（bundle @ `482c152df2`）・完了待ち。
