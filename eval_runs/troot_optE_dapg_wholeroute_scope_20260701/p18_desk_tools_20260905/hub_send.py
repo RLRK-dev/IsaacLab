@@ -627,7 +627,11 @@ def do_init(_args: argparse.Namespace) -> int:
         {
             "row_type": "init",
             "floor": top,
-            "query": "max N over delivered heads (jsonl: content starting with MSG m-p18-N /; files: line-start MSG m-p18-N /) in ~/.claude/projects/-home-rlrk-IsaacLab/*.jsonl, git grep, "
+            "query": (
+                "max N over delivered heads (jsonl: content starting with MSG m-p18-N /"
+                "; files: line-start MSG m-p18-N /) in ~/.claude/projects/-home-rlrk-Is"
+                "aacLab/*.jsonl, git grep, "
+            )
             + SCRATCH_GLOB,
             "at": jst_now(),
             "transcripts": len(paths),
