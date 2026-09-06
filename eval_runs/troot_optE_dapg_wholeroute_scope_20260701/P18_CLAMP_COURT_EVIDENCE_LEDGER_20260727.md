@@ -47197,3 +47197,86 @@ Human acts surfaced (not blocking the fix): ratification of the two extra files 
 
 - p6「要るもの: なし」⇒ 返信不要。cycle 2（8 体・17:52 起動）の verdict が出たら p6 へ ④ の verdict を tool で送る（途中経過は送らない）。
 - Rs1 待ち（本節時点）: (i) 指示に名の無い 2 file（`CONTROLS_20260906.md`・`validate_staged_out.txt`）の追認〔U20・推奨 = 追認〕 (ii) 制御 (h) 下書き半分 = pB に 2 文字 (iii) 提案 2 件（tool 内の完了 keypress〔U14〕・手押し keypress の row 形〔U18〕— いずれも挙動追加ゆえ Rs1 の語まで作らない） (iv) push は Rs1 の一言（未 push = `1ab6053933` 以後）。
+
+## §1450 — ✅ **事後 debate cycle 2 of 2（8 体・17:52 起動 → 6 体が 22:00 上限で落ち再起動 → 22:29 全完了）= DECIDE **PASS（HIGH 0・受理は MEDIUM/LOW のみ）** → 閉め commit `5b60b1556d`（hub_send.py sha256 `a0a099145bf2e97cd08188180d138d0897c468ae643389859c9e0c4274d89c4d`・1016 行・hook 3 pass 各 14 Passed・validate.sh staged-only 再実行 = FAIL 2/WARN 13 = tree baseline）＋ CONTROLS `207230a844`（修正一覧・unit 45 PASS と CLI dry-run 13 件の出力を逐語 bank・凍結宣言）。⭐ **code は本 blob で凍結** — 解凍条件 = 実 traffic で fail-closed でない失敗（他人の文字への keypress・宛先 record の無い DELIVERED 行・id の重複）のみ**（当卓 2026-09-06 22:38:32 JST 実測）
+
+- cycle 1 の HIGH 5 件（U1–U5）は各 3 体以上が閉を実測。58/58 replay は差分 0（新 field `line` のみ増）。m-p18-324 は両側 byte 一致。
+- cycle 2 の受理 MEDIUM（コード）: V1 `--id` 完了便が queued/unknown member へ再送し得た（1 id 二重）→ 未送信 member のみ・他は `skipped(<state>)`／V2 `verify` が HELD 行を UNKNOWN に書き換えた → 観測が無ければ HELD 維持・`fanout_stopped` は scan しない・overdue は keypress 行のみ／V3 `agent send` 後・row 記録前の例外で row が消える → 例外でも row を書いて再送出／V4 agent 種別 leg は `agent` key で実装可（先の「不能」は key 違い）→ 非 claude は送信前拒否／V5 `--to_pane` の矛盾未拒否・roster 迂回・無 label → 3 種の拒否＋`to_requested`／V6 U16 の閉鎖主張が偽（fixture は当卓 scratchpad 内）→ 退役 dir のみ数える。
+- 受理 LOW（コード）: V10 status "None" の反転検査／V11 `init --dry_run` は floor 既存でも query を印字／V12 strip_body は resend 行 1・footer 1 だけ剥ぐ／V13 fold の行数不一致は別 reason／V14 `send_rc`・`keypress_rc`（拒否 keypress は HELD）／V15 `absorbed_at`／V16 docstring の数値と単位（`+k` は文字 index・`origin.kind` は判別に使えない・18–23 ms は n=3 で 40 ms を含む・2600/2634 は日付と比で・n=2 の片脚は未 bank・`HUB_SEND_REPO`・repo leg は head token・≈0.8 s の反転窓・fold は身元を隠す）。
+- 受理（記録）: V7 U22 は pointer だった → 本節末に逐語貼付／V9 検証出力を CONTROLS に逐語 bank・回帰 test file は Rs1 提案／V17 CONTROLS（43 Enter・:36 の完全 sha・init 費用の射程・validate leg・schema の余剰 field 宣言）／V18 **§1449 の訂正**: 「17:53:15 受領」は enqueue record の時刻（当卓 transcript :40922）— 吸収 = remove 17:54:24（:40960）・当卓が id を読んだ最初の assistant record = 17:54:50（:40964）。両側一致（:25783・07.357Z）の主張は不変／V19 memory の :102 に「着地版は内容で pin」を追記・印 3 つに書込時刻／V20 送信の row・body・.floor は同 turn で pathspec commit／V21 message は送信時点に在る artifact のみ・sha は完全形。
+- 部分受理: V24 size（1016 vs ≤250 = deviation 宣言・CC6 の「26/28 を存在で受理した」読みを記録）／V25 ④ の bank 面 = 台帳 `<details>`（record file は Rs1 提案）。却下: V22 同数の他人の貼付（fold に byte 同一性は無い・宣言済 residual）／V23 fail-closed で設計どおりの 6 件。
+- ③(c) = 「自卓 working の枝を通した（結果は変わり得ない）・他卓 working 時の dry-run 待ち」— 22:11/22:13 とも他卓は全 idle。③(d) = 実 traffic の HELD → resend まで OPEN。
+- Rs1 待ち: (i) 未追認 2 file の追認（＋④ の record file 形を望むなら同時に） (ii) 回帰 test file（新 file） (iii) tool 内完了 keypress・手押し keypress の row 形 (iv) module 分割 (v) 制御 (h) の 2 文字 (vi) push。
+- 次: p6 へ ④ verdict（本節・CONTROLS）と ③(b)/(c) の文言を tool で送る（送信 row は同 turn で commit）。
+
+<details><summary>cycle 2 union 逐語（scratchpad REBUT_DECIDE_post2.md・本節が bank）</summary>
+
+# D1 hub_send.py — POST-BUILD (層2 + 層5) cycle 2 of 2 — REBUT_OR_ACCEPT + DECIDE
+
+Object: `p18_desk_tools_20260905/` at HEAD 2b81ba8d08 (hub_send.py at ee24742ec6, sha256 c19dd27c264d2b44657f54e33cd35531193aa2ac290836922e8624e5ebc5dc34, 903 lines).
+Bodies: CC2 premise (9: H0 M5 L4) · CC3 rule (8: H0 M3 L5) · CC4 numeric (10: H0 M1 L9) · CC5 side-effects (7: H0 M2 L5) · CC6 NHA (CHANGE_JUSTIFIED for the landed state; freeze recommended) · 層5 view 1 SSOT (PARTIAL: FAIL only the unratified 2 files) · view 2 predicate (PARTIAL: docstring numbers) · view 3 side-effects (PARTIAL: S3 declared residual; new S22).
+Cycle-1 closure: every HIGH (U1–U5) verified closed by ≥3 bodies each; 58/58 replay rows unchanged (0 field diffs); m-p18-324 confirmed byte-for-byte on both sides.
+
+## Union (deduplicated)
+
+| V | claim | raised by | disposition | act |
+|---|---|---|---|---|
+| V1 | `send --id` completion re-sends to members already queued/absorbed/unknown (duplicate under one id); decides on delivered members before the filter (spurious held row / silent rc 0); held rows keyed (id,"") never close so `own` keeps them forever | CC2 M · CC4 M · CC5 M (3) | ACCEPT | completion set = members with no `agent send` yet (pre-send held, or `HELD(fanout_stopped)`); every other member is skipped with `skipped(<state>)` before `decide()`; `own` from (id,pane)-keyed non-final rows, plus a held row only while no send row exists for its id |
+| V2 | `verify` rewrites post-send HELD rows and never-sent `HELD(fanout_stopped)` rows into `UNKNOWN(no-record)` (+overdue); the HELD meaning leaves the latest state | CC2 M · CC5 M (2) | ACCEPT | verify keeps a HELD state unless the scan observes something (never HELD → UNKNOWN(no-record)); `overdue` only for rows with a keypress; `QUEUED(observed*)` counted as one state for the change test |
+| V3 | a `herdr agent list` failure inside `status_of()` (SystemExit) — or an OSError in scan/line_of — between `agent send` and `append_row` leaves a placed (or delivered) message with no row | v3 S22 M · CC4 L (2) | ACCEPT | the post-send section of `send_one` is wrapped: any exception still appends the row it has built (`HELD(error:…)` before the keypress, `UNKNOWN(error:…)` after) and then re-raises |
+| V4 | the agent-type leg is declared "not implementable" on a false reason: `herdr agent list` carries `agent: 'claude'` on all 16 | CC2 M (1) | ACCEPT | a live agent whose `agent` is not `claude` is refused pre-send (`refused(agent_type_not_banked: <kind>)`) — stricter than the spec's UNKNOWN(table-not-banked) and fail-closed; declared |
+| V5 | `--to_pane` with a `--to` that still resolves elsewhere is sent through (head/row carry the pane's label, the typed word survives nowhere); roster bypass; empty-label fallback to `--to` | CC2 M · CC3 (V1 note) (2) | ACCEPT | `--to` that resolves uniquely to another pane → `refused(contradiction)`; the live label must be in the roster unless `--control`; an unlabelled pane is refused; rows carry `to_requested` |
+| V6 | the U16 closure claim is false: the measured fixture lived in the hub's own scratchpad, which `id_files(SCRATCH_OWN)` still scans recursively (3 verifier fixtures found today, max 322) | CC2 M · CC4 L · v3 S24 (3) | ACCEPT | scratch leg = `bodies/`, `ids_retired_*/`, `desk_msgs_retired_*/` under the hub's own scratchpad only; CONTROLS reworded; the fixture rule stays in the challenger prompts |
+| V7 | U22 landed as a pointer into the hub transcript, not a paste (the extraction had crashed) | CC3 M · CC2 L (2) | ACCEPT | the :40242 evidence block and the :40249 sentence are pasted verbatim into the ledger (§1450) |
+| V8 | `state.md:77` says ③(c) is banked while CONTROLS:33 says the run could not fail and must be re-run on a foreign desk | CC3 M (1) | ACCEPT | next message to p6 asks §7 ③ to read "(c) branch exercised on the hub's own pane (cannot fail); foreign-desk dry-run pending"; the dry-run runs at the first moment a foreign desk is working |
+| V9 | the fix cycle's verification outputs are narrated in CONTROLS, not banked; no regression test exists or is proposed | CC3 M (1) | ACCEPT | the unit-test and dry-run outputs of this closing commit are banked as a block in CONTROLS; a regression-test file is proposed to Rs1 (new file) |
+| V10 | `status_of()` returns the string "None" for a vanished agent and passes the flip test | CC5 L (1) | ACCEPT | any status outside idle/done/working at the keypress → `HELD(status_changed:a->b)` |
+| V11 | `init --dry_run` refuses while `.floor` exists, so the query can no longer be replayed read-only; verify churns a row on `QUEUED(observed:viewport)` → `QUEUED(observed)` | CC5 L (1) | ACCEPT | in READONLY `init` prints `dry_run floor: N (live .floor = M)` and writes nothing; the QUEUED label change is not a state change |
+| V12 | `strip_body` pops by pattern in a loop: a body whose last line is footer-shaped is over-stripped | CC4 L · v2 obs (2) | ACCEPT | strip at most one resend line then one footer (the composed shape is fixed) |
+| V13 | a fold with the wrong count is banked as `HELD(foreign_text_in_composer)` — same reason string as a real foreign paste | CC2 L (1) | ACCEPT | `HELD(paste_count_mismatch:K+1!=n)` |
+| V14 | `run()` discards return codes: `via`/`enter_at` assert a keypress herdr may have refused | CC4 L (1) | ACCEPT | rows carry `send_rc` and `keypress_rc`; rc≠0 on the keypress → `via: none` |
+| V15 | an ABSORBED row stores no absorption instant (the attachment carries the enqueue time) | CC4 L (1) | ACCEPT | `absorbed_at` = the remove record's timestamp kept in the row |
+| V16 | docstring numbers: "2600 of 2634" not re-derivable (widest query today 2,561/2,603); the 18–23 ms band excludes the tool's own 40 ms; one leg of each n=2 claim has no banked keypress stamp; `+k` in evidence is a character index; `origin.kind` is "human" even for the tool's keypress; `HUB_SEND_REPO` undeclared; the repo leg counts head tokens not delivered heads; flip window ≈0.8 s; own-message state unreachable for folded pastes; "head lines" wording | v2 6.8/6.9/6.12 · CC4 L · CC2 L · CC3 L · CC5 L (5) | ACCEPT | docstring rewritten on each point; CONTROLS:3 / state.md ③(b) wording → "head-shaped tokens" (p6 asked) |
+| V17 | CONTROLS: the "43 Enter" correction has no on-disk home; :36 shas truncated; the init cost figure is the transcript leg only (whole init ≈8 s / 1.87 GB git-grep child); the validate.sh leg was not re-run for the fix commits; row schema extras (`head`, `role`) undeclared | CC4 L · CC3 L · v1 rows 5/7 · v3 S21 (4) | ACCEPT | CONTROLS lines added; validate.sh --staged-only re-run in the worktree on the closing blob and `validate_staged_out.txt` refreshed |
+| V18 | §1449 stamps p6's reply as "received 17:53:15" = its enqueue record (absorbed 17:54:24, acked 17:54:50) | CC2 L (1) | ACCEPT | corrected in §1450 |
+| V19 | memory `:102` still pins two shas five landings old; the SUPERSEDED marks carry the event time, not the write time | CC5 L (1) | ACCEPT | insertions only: "as landed = CONTROLS (content pin)" on :102; "(mark written 17:47)" on the three marks |
+| V20 | the tracked runtime files sit modified in the shared tree for 74–97 s per send | CC5 L (1) | ACCEPT as an operating rule | the send's row, body and `.floor` are committed (pathspec) in the same turn as the send |
+| V21 | the m-p18-324 body cited a future ledger section and a truncated sha | CC3 L (1) | ACCEPT (rule) | messages cite only artifacts that exist at send time, with full shas or none |
+| V22 | the same-count foreign folded paste inside the pre→post read window; window grew with `status_of` (330–377 ms per member) | v3 S3 · v2 3a · CC6 (3) | REBUT (declared residual) | no byte identity is visible in a fold; the pre-send paste rule holds pre-existing pastes; the window is stated in the docstring; a per-member `agent list` is the price of the status re-read |
+| V23 | dialog markers anywhere in the viewport; positional DELIVERED/fused; `init`'s one-shot 1.87 GB git-grep; tracked (not ignored) runtime files; held fan-out burns an id; subagents pass the guard | v3 S9/S17/S20/S21 · CC2/CC4 (2) | REBUT / declared | all fail-closed or by design and stated in the docstring/CONTROLS; the subagent guard stays declared-unmitigated (rows carry `child_session`) |
+| V24 | size: 903 lines vs ≤250; the fix cycle accepted 26/28 rows "by existence"; ≈110 net lines belong to rows the null would have served | CC6 (1) | PARTIAL | the size deviation is declared; CC6's proportionality reading is recorded; this closing commit is limited to V1–V15 (records integrity and fail-closed paths), after which the code is frozen at its blob — unfreeze only on a real-traffic failure that is not fail-closed |
+| V25 | ④ needs a durable bank (the bodies live in the boot-purged scratchpad); a record file would be a new file | CC6 · v1 row 19 (2) | ACCEPT | the two cycles' bodies and views are banked verbatim inside the ledger (`<details>`, the §1447 practice); the record-file form is proposed to Rs1 together with the two unratified files |
+
+## NO_ACTION_EVALUATION
+- No change: V1 (a duplicate under one id on the completion path) and V2/V3 (records that stop matching fact on the HELD/error paths) would meet real traffic unfixed; every other accepted row is fail-closed or records-only. Already solved by alternatives: NO. CC6: CHANGE_JUSTIFIED for the landed state, HOLD on further code — answered by limiting the closing commit to V1–V15 and freezing afterwards.
+
+## DECIDE
+**PASS with accepted MEDIUM/LOW** (no HIGH accepted in cycle 2; cycle 2 of 2 is the last debate cycle). Acts: one closing commit (V1–V15, ≤ the fix list above, hooks in a worktree, outputs banked), records (V7, V9, V16–V19), the p6 message (V8, V16 wording, ④ verdict), the validate.sh leg (V17), then **freeze** at the closing blob. Rs1: ratify the two files (+ the record-file form of ④ if preferred), the regression-test file proposal, the in-tool completion keypress and hand-keypress row proposals, the module split, control (h), push.
+2026-09-06 22:29:43 JST
+
+</details>
+
+<details><summary>[RULE-CHECK] stage 2（09-06 09:18・build 前）の証拠 block と判定文 — hub transcript から逐語（U22/V7）</summary>
+
+```
+--- transcript line 40242 (user, 2026-09-06T00:18:01.680Z)
+line 40230 user summary= None promptSource= typed human 2026-09-06T00:17:19.961Z 'すべて推奨'
+ledger commit bf1436ab6d
+=== rule-check stage 2 evidence
+prohibited.md lines: 41
+17:- **CLAUDE.md の変更はrs指示時のみ。自律的な更新禁止**
+18:- **指示された方針・手法を独自判断で変更しない。問題�
+19:- **⭐substrate 非依存の不変前提（RS71 §0#3/#5、PhysX も Newton 
+20:- **〔以下 4 点の *具体 API 名*（`DifferentialIKController` / `write
+22:- **`write_joint_position_to_sim` 全面禁止**（arm j0-j6 も finger j7/j8
+23:- **`write_joint_state_to_sim` — 制御ループ中は禁止（物理破壊
+target dir exists? NO
+L3 keyword grep on v3 (reward|physx|newton|solver|gravity|phase|episode|handoff): 0 (expect 0 physics; 'handoff' appears only as the §運用25 gate word)
+pre-commit: pre-commit 4.5.1
+python3: Python 3.12.3
+labels non-comment: 19
+09:18:01
+--- transcript line 40249 (assistant, 2026-09-06T00:18:55.705Z)
+ルールチェック段階2完了：全Tier（0〜4）でPASS判定。新規作成対象の3ファイルはRs指示・vault参照・証拠がすべて確認済みのため、次は/handoffで[CHANGE]フェーズへ進みます。
+```
+</details>
